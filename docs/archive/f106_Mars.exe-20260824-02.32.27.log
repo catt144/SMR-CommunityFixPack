@@ -1,0 +1,1477 @@
+					Render 0:00:00:005
+*** executable info
+					Render 0:00:00:006
+Timestamp:     	6a22b86d
+Date:          	Fri Jun  5 07:52:13 2026
+Command line:  	
+Compiler:      	194435214, 142 (VS 2019) or newer
+
+
+*** hardware info
+CPU name      	Intel(R) Core(TM) i7-14700K
+CPU MHz       	3418
+CPU cores     	20/28
+Phys. Memory   	65278 MBytes
+Memory In Use  	49%
+Disk Free      	749290 MBytes
+
+
+*** OS info
+OS:            	Windows 11
+Version:       	10.0.26100 
+
+
+*** Debug::Init()
+
+
+					Render 0:00:00:066
+Steam initialized (AppId 3215050, Beta branch ???)
+					Render 0:00:00:070
+Drive type for game installation: SSD, savegames: SSD
+Language: English
+					Render 0:00:01:622
+*** graphics info
+GPU                            	NVIDIA GeForce RTX 4080 Feature Level: 12.1 {  DoublePrecisionFloatShaderOps: 1 OutputMergerLogicOp: 1 MinPrecisionSupport: 2 TiledResourcesTier: 4 ResourceBindingTier: 3 PSSpecifiedStencilRefSupported: 0 TypedUAVLoadAdditionalFormats: 1 ROVsSupported: 1 ConservativeRasterizationTier: 3 MaxGPUVirtualAddressBitsPerResource: 40 StandardSwizzle64KBSupported: 0 CrossNodeSharingTier: 0 CrossAdapterRowMajorTextureSupported: 0 VPAndRTArrayIndexFromAnyShaderFeedingRasterizerSupportedWithoutGSEmulation: 1 ResourceHeapTier: 2 NotZeroedPools: 1 UMA: 0 UnalignedBlockTextures: 1}
+API                            	d3d12
+GPU Driver Version             	32.0.16.1074
+GPU Driver Package Version     	610.74
+GPU Dedicated Video Memory     	16048 MB
+					Render 0:00:01:793
+
+Libs: Network, Sequences, MouseTrackWin, DumbAI, MapGen, Paradox, TriggersAndEvents, Notifications, Research, Resources 
+
+					Render 0:00:02:001
+
+Platform: desktop, editor, goldmaster, paradox, pc, steam
+
+					Render 0:00:02:698
+*** audio info
+Audio Endpoint                 	Headphones (3- A50 Game)
+						Lua 0:00:02:726
+Lua revision: 396349
+Assets revision: 31031
+Steam AppID: 3215050
+Build version: 1.0.7.396349
+Build branch:  Release
+						Lua 0:00:17:728
+Account storage loaded successfully in 1 ms
+						Lua 0:00:17:731
+[mod] Loaded mod def Relaunched Fix Pack (id SMR_CommunityFixPack, v1.00-002) unpacked from appdata
+[mod] Loaded mod def Community Fix Pack — Test Kit (id SMR_CommunityFixPackTestKit, v0.00-001) unpacked from appdata
+[mod] Loaded mod def Passage Network (id iooW34Y, v0.00-014) packed from pops
+[mod] Loaded mod def Relaunched Fix Pack: Opt-In Modules (id SMR_CommunityOptInPack, v1.00-000) unpacked from appdata
+						Lua 0:00:18:063
+[mod] [CommunityFixPack] CaveInsNoDisasters: applied
+[mod] [CommunityFixPack] MeteorFrequency: applied
+[mod] [CommunityFixPack] UpgradeModifierLeak: applied
+[mod] [CommunityFixPack] NightShiftWork: applied
+[mod] [CommunityFixPack] MilestoneCrash: applied
+[mod] [CommunityFixPack] WispRewards: applied
+[mod] [CommunityFixPack] TouristApplicants: applied
+[mod] [CommunityFixPack] TrainsToVoid: applied
+[mod] [CommunityFixPack] LanderEmptyLaunch: applied
+						Lua 0:00:18:064
+[mod] [CommunityFixPack] LanderCargoRatchet: applied
+[mod] [CommunityFixPack] LanderReturnFuel: applied
+[mod] [CommunityFixPack] ShelterReflex: applied
+[mod] [CommunityFixPack] BrokenTrackSalvage: applied
+[mod] [CommunityFixPack] TrackSalvageWipe: applied
+[mod] [CommunityFixPack] LakeEntombment: applied
+[mod] [CommunityFixPack] GhostFarmOxygen: applied
+[mod] [CommunityFixPack] RocketDroneChurn: applied
+[mod] [CommunityFixPack] ShuttleTransportCache: applied
+[mod] [CommunityFixPack] VacuumWalks: applied
+[mod] [CommunityFixPack] ArrivalDeaths: applied
+						Lua 0:00:18:065
+[mod] [CommunityFixPack] DroneUnreachableForever: applied
+[mod] [CommunityFixPack] StaleReservations: applied
+[mod] [CommunityFixPack] CrystalMysteryHang: applied
+[mod] [CommunityFixPack] TouristSatisfaction: applied
+[mod] [CommunityFixPack] TrainPlatformWedge: applied
+[mod] [CommunityFixPack] LowStorageWarning: applied
+[mod] [CommunityFixPack] CommandCenterNumbers: applied
+[mod] [CommunityFixPack] DomeOverviewHighlight: applied
+[mod] [CommunityFixPack] TrainCargoDumping: applied
+						Lua 0:00:18:066
+[mod] [CommunityFixPack] UniversityOvertraining: applied
+[mod] [CommunityFixPack] DestroyedTunnels: applied
+[mod] [CommunityFixPack] DustSicknessBiorobots: applied
+[mod] [CommunityFixPack] DustSicknessDamage: applied
+[mod] [CommunityFixPack] GeneForging: applied
+[mod] [CommunityFixPack] MirrorSphereSite: applied
+[mod] [CommunityFixPack] PayloadTemplateRefill: applied
+[mod] [CommunityFixPack] AsteroidLanderAvailable: applied
+[mod] [CommunityFixPack] ShuttleHubOffAvailable: applied
+[mod] [CommunityFixPack] FreedHousingNotice: applied
+[mod] [CommunityFixPack] DomeFreeSpaceMismatch: applied						Lua 0:00:18:067
+
+[mod] [CommunityFixPack] SmallLandscapeSites: applied
+[mod] [CommunityFixPack] LandscapeUnitFilter: applied
+[mod] [CommunityFixPack] RocketInteractGuard: applied
+[mod] [CommunityFixPack] TrackConnectorPingPong: applied
+[mod] [CommunityFixPack] TrackTunnelPowerBridge: applied
+						Lua 0:00:18:068
+[mod] [CommunityFixPack] GridGlobalStorage: applied
+[mod] [CommunityFixPack] LastTransmissionStorage: applied
+[mod] [CommunityFixPack] GraphConsumedCaption: applied
+[mod] [CommunityFixPack] MoraleComfortTooltip: applied
+[mod] [CommunityFixPack] TrainWaitTime: applied
+[mod] [CommunityFixPack] FounderTraitNotification: applied
+[mod] [CommunityFixPack] StorageRateModifiers: applied
+[mod] [CommunityFixPack] SequenceLatents: applied
+[mod] [CommunityFixPack] IndependenceTerraforming: applied
+[mod] [CommunityFixPack] TrackSalvageRefund: applied						Lua 0:00:18:069
+
+[mod] [CommunityFixPack] LayoutTechLock: applied
+[mod] [CommunityFixPack] TrainMinors: applied
+[mod] [CommunityFixPack] DroneTransportMinors: applied
+[mod] [CommunityFixPack] AnomalyCaveInMap: applied
+[mod] [CommunityFixPack] TechDescriptionBuilding: applied
+[mod] [CommunityFixPack] BombardmentSpread: applied
+[mod] [CommunityFixPack] ExtenderFlapChurn: applied
+[mod] [CommunityFixPack] DisasterPredictionLeak: applied
+[mod] [CommunityFixPack] MeteorStormWedge: applied
+						Lua 0:00:18:070
+[mod] [CommunityFixPack] RainsDeadlock: applied
+[mod] [CommunityFixPack] FirstAsteroidPrefabs: applied
+[mod] [CommunityFixPack] SaintBlessing: applied
+[mod] [CommunityFixPack] DustDevilsDescrMap: applied
+[mod] [CommunityFixPack] AstrogeologistExtractors: applied
+[mod] [CommunityFixPack] SinkholeIndestructible: applied
+[mod] [CommunityFixPack] DustStormUndergroundBreaks: applied
+[mod] [CommunityFixPack] DustDevilSpawnGate: applied
+						Lua 0:00:18:071
+[mod] [CommunityFixPack] ExoticDepositSign: applied
+[mod] [CommunityFixPack] AutomationLawCompensation: applied
+[mod] [CommunityFixPack] LocalizedUIText: Back to Earth rollover wrapped on 1 rocket class(es): customUniversalRocket
+[mod] [CommunityFixPack] LocalizedUIText: applied
+[mod] [CommunityFixPack] SpaceYDroneCapBullet: applied
+[mod] [CommunityFixPack] LandscapeCostRefresh: applied
+[mod] [CommunityFixPack] SaveSanitizer: applied
+						Lua 0:00:18:072
+[mod] [SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+[mod] [SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[mod] [SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+[SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+						Lua 0:00:18:077
+[mod] [SMRTest][carry] fixture-carry dump available — run SMRTest.FixtureCarry()
+						Lua 0:00:18:602
+[mod] [CommunityFixPack] SaintBlessing: inactive (no dome-colonists trait presets)
+[mod] [CommunityFixPack] SinkholeIndestructible: the St. Elmo's Fire sinkhole is now indestructible, like every other mystery set-piece
+						Lua 0:00:18:673
+Reloading done in 934 ms
+						Lua 0:00:19:057
+[preset] Preset postprocess took 124 ms.
+						Lua 0:00:19:106
+479 / 479 particle streams loaded in 45 ms.
+						Lua 0:00:19:107
+[mod] [CommunityFixPack] LastTransmissionStorage: 6 storage condition(s) made effective, 1 retargeted
+[mod] [CommunityFixPack] IndependenceTerraforming: Independence_TerraformingProjects now discounts special projects by 20% as its param1 says
+[mod] [CommunityFixPack] AstrogeologistExtractors: added 2 missing extractor entr(y/ies) to the astrogeologist profile (10 already present)
+						Lua 0:00:19:296
+[mod] [CommunityFixPack] SaintBlessing: corrected 1 dome-colonists trait modifier label(s) of 2
+						Lua 0:00:19:348
+[mod] [SMRAUTO] armed (flag file Code/96_AutoRunFlag.lua)
+[SMRAUTO] armed (flag file Code/96_AutoRunFlag.lua)
+[mod] [SMRAUTO] ShowStartGamePopup neutered for the unattended run
+						Lua 0:00:19:349
+[SMRAUTO] ShowStartGamePopup neutered for the unattended run
+[PdxSDK] Started up. Took 1610
+						Lua 0:00:19:370
+[mod] Loaded mod items for: SMR_CommunityFixPack, SMR_CommunityFixPackTestKit, iooW34Y
+						Lua 0:00:19:788
+[Braze] SessionStart error The server name or address could not be resolved
+
+						Lua 0:00:19:789
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:19:918
+[Braze] SessionStart error The server name or address could not be resolved
+
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:20:083
+[PdxSDKMods] SyncUpdatePdxMod - uninstalled mod 124952 5
+						Lua 0:00:21:828
+Game Seed:  7oOiXFrK 558280462591630945 
+						Lua 0:00:21:860
+*** Reloading assets from folder 'BinAssets/'
+							IO Task 0:00:21:883
+[ResManager Error] Cannot find file with base path: Animations/LawOfficeDoor_idle.hgacl
+[ResManager Error] Cannot find file with base path: Animations/LawOfficeDoor_opening.hgacl
+						Lua 0:00:23:901
+*** Assets reloaded in 2.0 s, read 202.1 MB, read speed 99.0 MB/s, average read 4949 bytes.
+						Lua 0:00:25:584
+game_settings:
+    sponsor: IMM
+    profile: rocketscientist
+    founding_faction: MarsDemocraticParty
+    rival_colonies: paradox, ESA, Roscosmos
+    mystery_random: CrystalsMystery
+    game_rules: (none)
+more_game_settings: save_game_id: nil, mystery: random, coordinates: 21S143W, landing_spot: , logo: IMM
+map_conditions: altitude: 2071, temperature: -15, cold_wave: 36, dust_devils: 89, dust_storm: 0, meteors: 36
+map_resources: concrete: 109, metals: 73, precious_metals: 73, water: 146
+						Lua 0:00:25:594
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:25:602
+MapLoadRandom:  -7741308582177343816 
+						Lua 0:00:26:858
+Map (slot 1) changed to "BlankBigTerraceCMix_14" in 5005 ms.
+						Lua 0:00:30:060
+[LUA ERROR] Lua/Flight.lua:479: attempt to index a boolean value (field 'objects_to_unmark')
+  Lua/Flight.lua(479):  method Unmark
+  Lua/UniversalRocket.lua(268):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(244):   <>
+        --- end of stack
+Locals:
+	                self |   object Flight
+	                 obj |   object UniversalZeusRocket at invalid pos on map 1
+						Lua 0:00:30:605
+MapLoadRandom:  -3230157818496727214 
+						Lua 0:00:31:373
+Map (slot 2) changed to "BlankUnderground_03" in 1288 ms.
+						Lua 0:00:35:910
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object JumboCave at (298000, 301368) on map 2
+	   Flight_IsMarkable | function 0x0000025A7941EEC8
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object BottomlessPit at (358000, 424340) on map 2
+	   Flight_IsMarkable | function 0x0000025A7941EEC8
+						Lua 0:00:35:911
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object SurfacePassage at (180500, 298770) on map 2
+	   Flight_IsMarkable | function 0x0000025A7941EEC8
+						Lua 0:00:35:912
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object SurfacePassage at (411500, 241614) on map 2
+	   Flight_IsMarkable | function 0x0000025A7941EEC8
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object CaveInRubble at (233500, 113446) on map 2
+	   Flight_IsMarkable | function 0x0000025A7941EEC8
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object CaveInRubble at (244500, 113446) on map 2
+	   Flight_IsMarkable | function 0x0000025A7941EEC8
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object CaveInRubble at (234500, 115178) on map 2
+	   Flight_IsMarkable | function 0x0000025A7941EEC8
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object CaveInRubble at (243500, 116910) on map 2
+	   Flight_IsMarkable | function 0x0000025A7941EEC8
+						Lua 0:00:35:913
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object CaveInRubble at (229000, 147220) on map 2
+	   Flight_IsMarkable | function 0x0000025A7941EEC8
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object CaveInRubble at (234000, 148952) on map 2
+	   Flight_IsMarkable | function 0x0000025A7941EEC8
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object CaveInRubble at (138000, 181860) on map 2
+	   Flight_IsMarkable | function 0x0000025A7941EEC8
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object CaveInRubble at (140000, 185324) on map 2
+	   Flight_IsMarkable | function 0x0000025A7941EEC8
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object CaveInRubble at (140500, 189654) on map 2
+	   Flight_IsMarkable | function 0x0000025A7941EEC8
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object CaveInRubble at (457500, 191386) on map 2
+	   Flight_IsMarkable | function 0x0000025A7941EEC8
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object CaveInRubble at (462500, 196582) on map 2
+	   Flight_IsMarkable | function 0x0000025A7941EEC8
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object CaveInRubble at (459500, 198314) on map 2
+	   Flight_IsMarkable | function 0x0000025A7941EEC8
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object CaveInRubble at (466500, 201778) on map 2
+	   Flight_IsMarkable | function 0x0000025A7941EEC8
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object CaveInRubble at (199500, 203510) on map 2
+	   Flight_IsMarkable | function 0x0000025A7941EEC8
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object CaveInRubble at (196000, 209572) on map 2
+	   Flight_IsMarkable | function 0x0000025A7941EEC8
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object CaveInRubble at (195500, 208706) on map 2
+	   Flight_IsMarkable | function 0x0000025A7941EEC8
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object CaveInRubble at (387500, 231222) on map 2
+	   Flight_IsMarkable | function 0x0000025A7941EEC8
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object CaveInRubble at (384500, 232954) on map 2
+	   Flight_IsMarkable | function 0x0000025A7941EEC8
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object CaveInRubble at (381500, 234686) on map 2
+	   Flight_IsMarkable | function 0x0000025A7941EEC8
+						Lua 0:00:35:914
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object CaveInRubble at (211500, 297038) on map 2
+	   Flight_IsMarkable | function 0x0000025A7941EEC8
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object CaveInRubble at (207500, 298770) on map 2
+	   Flight_IsMarkable | function 0x0000025A7941EEC8
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object CaveInRubble at (213000, 304832) on map 2
+	   Flight_IsMarkable | function 0x0000025A7941EEC8
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object CaveInRubble at (362000, 308296) on map 2
+	   Flight_IsMarkable | function 0x0000025A7941EEC8
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object CaveInRubble at (357500, 309162) on map 2
+	   Flight_IsMarkable | function 0x0000025A7941EEC8
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object CaveInRubble at (447500, 355926) on map 2
+	   Flight_IsMarkable | function 0x0000025A7941EEC8
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object CaveInRubble at (453500, 355926) on map 2
+	   Flight_IsMarkable | function 0x0000025A7941EEC8
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object CaveInRubble at (456500, 361122) on map 2
+	   Flight_IsMarkable | function 0x0000025A7941EEC8
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object CaveInRubble at (222000, 370648) on map 2
+	   Flight_IsMarkable | function 0x0000025A7941EEC8
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object CaveInRubble at (227000, 370648) on map 2
+	   Flight_IsMarkable | function 0x0000025A7941EEC8
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object CaveInRubble at (467500, 373246) on map 2
+	   Flight_IsMarkable | function 0x0000025A7941EEC8
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object CaveInRubble at (233000, 377576) on map 2
+	   Flight_IsMarkable | function 0x0000025A7941EEC8
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object CaveInRubble at (464000, 377576) on map 2
+	   Flight_IsMarkable | function 0x0000025A7941EEC8
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object CaveInRubble at (466500, 383638) on map 2
+	   Flight_IsMarkable | function 0x0000025A7941EEC8
+						Lua 0:00:35:915
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object TunnelBlockerRubble at (180500, 160210) on map 2
+	   Flight_IsMarkable | function 0x0000025A7941EEC8
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object TunnelBlockerRubble at (242000, 169736) on map 2
+	   Flight_IsMarkable | function 0x0000025A7941EEC8
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object TunnelBlockerRubble at (282500, 194850) on map 2
+	   Flight_IsMarkable | function 0x0000025A7941EEC8
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object TunnelBlockerRubble at (401000, 197448) on map 2
+	   Flight_IsMarkable | function 0x0000025A7941EEC8
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object TunnelBlockerRubble at (357500, 215634) on map 2
+	   Flight_IsMarkable | function 0x0000025A7941EEC8
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object TunnelBlockerRubble at (415500, 227758) on map 2
+	   Flight_IsMarkable | function 0x0000025A7941EEC8
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object TunnelBlockerRubble at (136000, 230356) on map 2
+	   Flight_IsMarkable | function 0x0000025A7941EEC8
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object TunnelBlockerRubble at (357500, 232954) on map 2
+	   Flight_IsMarkable | function 0x0000025A7941EEC8
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object TunnelBlockerRubble at (144500, 234686) on map 2
+	   Flight_IsMarkable | function 0x0000025A7941EEC8
+						Lua 0:00:35:916
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object TunnelBlockerRubble at (206500, 243346) on map 2
+	   Flight_IsMarkable | function 0x0000025A7941EEC8
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object TunnelBlockerRubble at (269500, 276254) on map 2
+	   Flight_IsMarkable | function 0x0000025A7941EEC8
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object TunnelBlockerRubble at (253000, 280584) on map 2
+	   Flight_IsMarkable | function 0x0000025A7941EEC8
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object TunnelBlockerRubble at (344000, 299636) on map 2
+	   Flight_IsMarkable | function 0x0000025A7941EEC8
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object TunnelBlockerRubble at (170000, 320420) on map 2
+	   Flight_IsMarkable | function 0x0000025A7941EEC8
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object TunnelBlockerRubble at (434000, 334276) on map 2
+	   Flight_IsMarkable | function 0x0000025A7941EEC8
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object TunnelBlockerRubble at (488000, 348132) on map 2
+	   Flight_IsMarkable | function 0x0000025A7941EEC8
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object TunnelBlockerRubble at (322000, 349864) on map 2
+	   Flight_IsMarkable | function 0x0000025A7941EEC8
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object TunnelBlockerRubble at (398500, 383638) on map 2
+	   Flight_IsMarkable | function 0x0000025A7941EEC8
+						Lua 0:00:35:917
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object TunnelBlockerRubble at (232500, 392298) on map 2
+	   Flight_IsMarkable | function 0x0000025A7941EEC8
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object TunnelBlockerRubble at (170000, 394896) on map 2
+	   Flight_IsMarkable | function 0x0000025A7941EEC8
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object TunnelBlockerRubble at (417500, 414814) on map 2
+	   Flight_IsMarkable | function 0x0000025A7941EEC8
+[LUA ERROR] Lua/Flight.lua:465: attempt to index a boolean value (field 'objects_to_mark')
+  Lua/Flight.lua(465):  method Mark
+  Lua/Buildings/Building.lua(347):  method ApplyToGrids
+  Lua/GridObject.lua(78):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(227):  method GameInit
+  CommonLua/Classes/_object.lua(190):   <>
+        --- end of stack
+Locals:
+	                self |   object FlightUnderground
+	                 obj |   object TunnelBlockerRubble at (215000, 426072) on map 2
+	   Flight_IsMarkable | function 0x0000025A7941EEC8
+						Lua 0:00:35:923
+starting sector selected: B3
+						Lua 0:00:35:925
+starting sector selected: C3
+						Lua 0:00:37:214
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:38:214
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony						Lua 0:00:38:215
+
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:01:05:908
+[mod] [SMRAUTO] BEGIN
+[SMRAUTO] BEGIN
+[mod] [SMRTest] ---- RunAll (all probes) ----
+[SMRTest] ---- RunAll (all probes) ----
+[mod] [SMRTest] fix pack present: 78/78 fixes active
+[SMRTest] fix pack present: 78/78 fixes active
+[mod] [SMRTest] opt-in pack NOT loaded — its probes SKIP (a separate, optional mod)
+[SMRTest] opt-in pack NOT loaded — its probes SKIP (a separate, optional mod)
+[mod] [SMRTest] save-rescue NOT loaded — its probes SKIP (a separate cleanup mod, absent by design)
+[SMRTest] save-rescue NOT loaded — its probes SKIP (a separate cleanup mod, absent by design)
+[mod] [SMRTest] SKIP  CaveInsNoDisasters       [install] introspection unavailable (retail sandbox)
+[SMRTest] SKIP  CaveInsNoDisasters       [install] introspection unavailable (retail sandbox)
+[mod] [CommunityFixPack] MeteorFrequency: WATCHDOG — no meteor resolved for 99 game hours (thread ALIVE but stuck); restarting onto vanilla's body
+[mod] [SMRTest] PASS  MeteorFrequency          [behavior] wrapper stretches only the Meteors thread's roll; body copy gone; watchdog restarts a stalled thread and spares a fresh one
+[SMRTest] PASS  MeteorFrequency          [behavior] wrapper stretches only the Meteors thread's roll; body copy gone; watchdog restarts a stalled thread and spares a fresh one
+[mod] [SMRTest] PASS  UpgradeModifierLeak      [behavior] modifier turned off
+[SMRTest] PASS  UpgradeModifierLeak      [behavior] modifier turned off
+[mod] [SMRTest] PASS  NightShiftWork           [behavior] hours 0 and 1 send shift-3 colonists to work
+[SMRTest] PASS  NightShiftWork           [behavior] hours 0 and 1 send shift-3 colonists to work
+[mod] [SMRTest] SKIP  MilestoneCrash           [install] introspection unavailable (retail sandbox)
+[SMRTest] SKIP  MilestoneCrash           [install] introspection unavailable (retail sandbox)
+[mod] [SMRTest] PASS  WispPower                [behavior] 3 wisps -> 3000 power units
+[SMRTest] PASS  WispPower                [behavior] 3 wisps -> 3000 power units
+[mod] [SMRTest] PASS  WispResearch             [behavior] no double grant; notification says 300 for 3 wisps
+[SMRTest] PASS  WispResearch             [behavior] no double grant; notification says 300 for 3 wisps
+[mod] [SMRTest] PASS  TouristApplicants        [behavior] 1-star 171 < 2-star 308 over 400 rolls
+[SMRTest] PASS  TouristApplicants        [behavior] 1-star 171 < 2-star 308 over 400 rolls
+[mod] [SMRTest] PASS  FactionFundingCheck      [behavior] returned 0 (non-discriminating: engine tolerates pairs(nil) — not evidence)
+[SMRTest] PASS  FactionFundingCheck      [behavior] returned 0 (non-discriminating: engine tolerates pairs(nil) — not evidence)
+[mod] [SMRTest] SKIP  TrainsToVoid             [install] introspection unavailable (retail sandbox)
+[SMRTest] SKIP  TrainsToVoid             [install] introspection unavailable (retail sandbox)
+[mod] [SMRTest] PASS  LanderEmptyLaunch        [behavior] empty flight blocked, loaded flight still ready
+[SMRTest] PASS  LanderEmptyLaunch        [behavior] empty flight blocked, loaded flight still ready
+[mod] [SMRTest] PASS  LanderCargoRatchet       [behavior] request 300000 >= 300000 aboard
+[SMRTest] PASS  LanderCargoRatchet       [behavior] request 300000 >= 300000 aboard
+						Lua 0:01:05:909
+[mod] [SMRTest] PASS  LanderReturnFuel         [behavior] parked lander keeps 3500 fuel requested
+[SMRTest] PASS  LanderReturnFuel         [behavior] parked lander keeps 3500 fuel requested
+[mod] [SMRTest] PASS  ShelterReflex            [behavior] life-support blip tolerated; Idle wrapper unverified (introspection unavailable (retail sandbox))
+[SMRTest] PASS  ShelterReflex            [behavior] life-support blip tolerated; Idle wrapper unverified (introspection unavailable (retail sandbox))
+[mod] [SMRTest] F45: 0 track repair site(s); 0 with a non-numeric node_idx (track unsalvageable)
+[SMRTest] F45: 0 track repair site(s); 0 with a non-numeric node_idx (track unsalvageable)
+[mod] [SMRTest] SKIP  BrokenTrackSalvage       [install] introspection unavailable (retail sandbox)
+[SMRTest] SKIP  BrokenTrackSalvage       [install] introspection unavailable (retail sandbox)
+[mod] [SMRTest] SKIP  TrackSalvageWipe         [install] introspection unavailable (retail sandbox)
+[SMRTest] SKIP  TrackSalvageWipe         [install] introspection unavailable (retail sandbox)
+[mod] [SMRTest] SKIP  LakeEntombment           [install] introspection unavailable (retail sandbox)
+[SMRTest] SKIP  LakeEntombment           [install] introspection unavailable (retail sandbox)
+						Lua 0:01:05:910
+[mod] [SMRTest] SKIP  GhostFarmOxygen          [install] introspection unavailable (retail sandbox)
+[SMRTest] SKIP  GhostFarmOxygen          [install] introspection unavailable (retail sandbox)
+[mod] [SMRTest] PASS  RocketDroneChurn         [behavior] steady-state refresh keeps the drones; new requests still reconnect
+[SMRTest] PASS  RocketDroneChurn         [behavior] steady-state refresh keeps the drones; new requests still reconnect
+[mod] [SMRTest] PASS  ShuttleTransportCache    [behavior] verdict recomputed when shuttle availability flips, and still cached while it does not
+[SMRTest] PASS  ShuttleTransportCache    [behavior] verdict recomputed when shuttle availability flips, and still cached while it does not
+[mod] [SMRTest] PASS  VacuumWalks              [behavior] vacuum move uses the passage route; breathable maps unchanged
+[SMRTest] PASS  VacuumWalks              [behavior] vacuum move uses the passage route; breathable maps unchanged
+[mod] [SMRTest] PASS  ArrivalDeaths            [behavior] the impassable drop spot was snapped to a walkable one; could not read Arrive's source (SMRTest:no-introspection) (0 colonist(s) currently walking between domes)
+[SMRTest] PASS  ArrivalDeaths            [behavior] the impassable drop spot was snapped to a walkable one; could not read Arrive's source (SMRTest:no-introspection) (0 colonist(s) currently walking between domes)
+[mod] [SMRTest] PASS  DroneUnreachableForever  [behavior] failure normalised to now+0 ms; expires after 3600000 ms
+[SMRTest] PASS  DroneUnreachableForever  [behavior] failure normalised to now+0 ms; expires after 3600000 ms
+[mod] [SMRTest] F58: 0 residence(s) hold 0 reserved slot(s); 0 are clearly stale
+[SMRTest] F58: 0 residence(s) hold 0 reserved slot(s); 0 are clearly stale
+[mod] [SMRTest] PASS  StaleReservations        [behavior] reservation timestamped for the daily sweep (0 reserved slot(s) in this save, 0 clearly stale)
+[SMRTest] PASS  StaleReservations        [behavior] reservation timestamped for the daily sweep (0 reserved slot(s) in this save, 0 clearly stale)
+[mod] [SMRTest] PASS  CrystalMysteryHang       [install] CrystalFlyAway handler registered (current mystery: CrystalsMystery)
+[SMRTest] PASS  CrystalMysteryHang       [install] CrystalFlyAway handler registered (current mystery: CrystalsMystery)
+[mod] [SMRTest] PASS  TouristSatisfaction      [behavior] 0->100 pays 40000, 100->0 charges -40000
+[SMRTest] PASS  TouristSatisfaction      [behavior] 0->100 pays 40000, 100->0 charges -40000
+[mod] [SMRTest] PASS  TrainPlatformWedge       [behavior] stale passenger removed and ticket discarded
+[SMRTest] PASS  TrainPlatformWedge       [behavior] stale passenger removed and ticket discarded
+[mod] [SMRTest] SKIP  LowStorageWarning        [install] introspection unavailable (retail sandbox)
+[SMRTest] SKIP  LowStorageWarning        [install] introspection unavailable (retail sandbox)
+[mod] [SMRTest] PASS  CommandCenterNumbers     [behavior] all 11 getters present
+[SMRTest] PASS  CommandCenterNumbers     [behavior] all 11 getters present
+[mod] [SMRTest] PASS  DomeOverviewHighlight    [behavior] low stat rendered as <red>20</red>
+[SMRTest] PASS  DomeOverviewHighlight    [behavior] low stat rendered as <red>20</red>
+[mod] [SMRTest] PASS  PayloadTemplateRefill    [behavior] template prefills a fresh payload (20) but never overrides a configured one
+[SMRTest] PASS  PayloadTemplateRefill    [behavior] template prefills a fresh payload (20) but never overrides a configured one
+[mod] [SMRTest] SKIP  ClassicRockets           [behavior] opt-in mod not installed or module not present
+[SMRTest] SKIP  ClassicRockets           [behavior] opt-in mod not installed or module not present
+[mod] [CommunityFixPack] SaveSanitizer: restored the Frictionless Composites buff on the WindTurbine label (+100% electricity_production)
+[mod] [CommunityFixPack] SaveSanitizer: restored the Frictionless Composites buff on the WindTurbine_Large label (+100% electricity_production)
+[mod] [SMRTest] PASS  SaveSanitizerTurbineBuff [behavior] all three turbine labels at 100%, unchanged by a second run
+[SMRTest] PASS  SaveSanitizerTurbineBuff [behavior] all three turbine labels at 100%, unchanged by a second run
+[mod] [CommunityFixPack] SaveSanitizer: removed 1 leaked upgrade modifier(s) from salvaged buildings
+[mod] [SMRTest] PASS  SaveSanitizerUpgradeLeak [behavior] orphaned upgrade bonus removed; live building's and unrelated modifiers untouched
+[SMRTest] PASS  SaveSanitizerUpgradeLeak [behavior] orphaned upgrade bonus removed; live building's and unrelated modifiers untouched
+[mod] [SMRTest] PASS  LandscapeUnitFilter      [behavior] boarding unit skipped, ordinary unit reported exactly once
+[SMRTest] PASS  LandscapeUnitFilter      [behavior] boarding unit skipped, ordinary unit reported exactly once
+[mod] [SMRTest] SMRTEST-F33DISPATCH LandscapeConstructionSite: rawget=own-copy resolved==base=true
+[SMRTest] SMRTEST-F33DISPATCH LandscapeConstructionSite: rawget=own-copy resolved==base=true
+[mod] [SMRTest] SMRTEST-F33DISPATCH ClearWasteRockConstructionSite: rawget=own-copy resolved==base=true
+[SMRTest] SMRTEST-F33DISPATCH ClearWasteRockConstructionSite: rawget=own-copy resolved==base=true
+[mod] [SMRTest] SMRTEST-F33DISPATCH TerrainPaintConstructionSite: rawget=own-copy resolved==base=true
+[SMRTest] SMRTEST-F33DISPATCH TerrainPaintConstructionSite: rawget=own-copy resolved==base=true
+[mod] [SMRTest] PASS  SmallLandscapeSites      [behavior] clamp arithmetic correct off the base class, AND dispatched from every leaf a drone can meet (LandscapeConstructionSite, ClearWasteRockConstructionSite, TerrainPaintConstructionSite): two-hex site returns 2 destinations, nine-hex site still returns the closest 5
+[SMRTest] PASS  SmallLandscapeSites      [behavior] clamp arithmetic correct off the base class, AND dispatched from every leaf a drone can meet (LandscapeConstructionSite, ClearWasteRockConstructionSite, TerrainPaintConstructionSite): two-hex site returns 2 destinations, nine-hex site still returns the closest 5
+[mod] [SMRTest] PASS  DomeFreeSpaceMismatch    [behavior] tally follows the player's switch, matching ChooseResidence
+[SMRTest] PASS  DomeFreeSpaceMismatch    [behavior] tally follows the player's switch, matching ChooseResidence
+[mod] [SMRTest] PASS  FreedHousingNotice       [behavior] vacated home notifies the dome's homeless; a residence with no free slot does not
+[SMRTest] PASS  FreedHousingNotice       [behavior] vacated home notifies the dome's homeless; a residence with no free slot does not
+[mod] [SMRTest] PASS  ShuttleHubOffAvailable   [behavior] player-disabled hub not counted; working and self-lifting-suspended hubs still are
+[SMRTest] PASS  ShuttleHubOffAvailable   [behavior] player-disabled hub not counted; working and self-lifting-suspended hubs still are
+						Lua 0:01:05:911
+[mod] [SMRTest] PASS  AsteroidLanderAvailable  [behavior] busy-but-unassigned landers on the pad count; assigned and off-world ones do not
+[SMRTest] PASS  AsteroidLanderAvailable  [behavior] busy-but-unassigned landers on the pad count; assigned and off-world ones do not
+[mod] [SMRTest] PASS  AutoExportPriority       [behavior] the scarce hold goes to PreciousMinerals; with room to spare both are still requested
+[SMRTest] PASS  AutoExportPriority       [behavior] the scarce hold goes to PreciousMinerals; with room to spare both are still requested
+[mod] [SMRTest] PASS  MirrorSphereSite         [behavior] finished site locked out, unfinished site still workable
+[SMRTest] PASS  MirrorSphereSite         [behavior] finished site locked out, unfinished site still workable
+[mod] [SMRTest] PASS  GeneForging              [behavior] Gene Forging +50, Gene Selection +100, both +150
+[SMRTest] PASS  GeneForging              [behavior] Gene Forging +50, Gene Selection +100, both +150
+[mod] [SMRTest] PASS  DustSicknessDamage       [behavior] damage rolls 5..14 instead of a flat 10
+[SMRTest] PASS  DustSicknessDamage       [behavior] damage rolls 5..14 instead of a flat 10
+[mod] [SMRTest] PASS  DustSicknessBiorobots    [behavior] all 4 infection effects filter Biorobots out
+[SMRTest] PASS  DustSicknessBiorobots    [behavior] all 4 infection effects filter Biorobots out
+[mod] [SMRTest] PASS  DestroyedTunnels         [behavior] ruined tunnels skipped, intact tunnel still registered
+[SMRTest] PASS  DestroyedTunnels         [behavior] ruined tunnels skipped, intact tunnel still registered
+[mod] [SMRTest] PASS  UniversityOvertraining   [behavior] automated extractor needs 0, manned extractor still needs 12
+[SMRTest] PASS  UniversityOvertraining   [behavior] automated extractor needs 0, manned extractor still needs 12
+[mod] [SMRTest] PASS  TrainCargoDumping        [behavior] switched-off station refused, accepting station served, undeliverable cargo still dropped
+[SMRTest] PASS  TrainCargoDumping        [behavior] switched-off station refused, accepting station served, undeliverable cargo still dropped
+[mod] [SMRTest] PASS  RocketInteractGuard      [behavior] load orders on a UniversalTradeRocket are refused; ordinary depots still accept them
+[SMRTest] PASS  RocketInteractGuard      [behavior] load orders on a UniversalTradeRocket are refused; ordinary depots still accept them
+[mod] [SMRTest] PASS  TrackConnectorPingPong   [behavior] a live neighbour keeps its connector hex; an abandoned element is still cleared; a dying building schedules its neighbours' reclaim
+[SMRTest] PASS  TrackConnectorPingPong   [behavior] a live neighbour keeps its connector hex; an abandoned element is still cleared; a dying building schedules its neighbours' reclaim
+[mod] [SMRTest] PASS  TrackTunnelPowerBridge   [behavior] bridges only the short track whose stations really are on different grids
+[SMRTest] PASS  TrackTunnelPowerBridge   [behavior] bridges only the short track whose stations really are on different grids
+[mod] [SMRTest] PASS  GridGlobalStorage        [behavior] 1h reserve reads 180000, empty reads 0, 100h reads 3000000 (2-sol mark is 1440000)
+[SMRTest] PASS  GridGlobalStorage        [behavior] 1h reserve reads 180000, empty reads 0, 100h reads 3000000 (2-sol mark is 1440000)
+[mod] [SMRTest] PASS  LastTransmissionStorage  [behavior] all 6 storage conditions are on Condition and read their own grid
+[SMRTest] PASS  LastTransmissionStorage  [behavior] all 6 storage conditions are on Condition and read their own grid
+[mod] [SMRTest] PASS  TrainWaitTime            [behavior] station keeps the 90000 wait; the travel clock restarts at boarding (0)
+[SMRTest] PASS  TrainWaitTime            [behavior] station keeps the 90000 wait; the travel clock restarts at boarding (0)
+[mod] [SMRTest] PASS  GraphConsumedCaption     [behavior] MachineParts caption reports 10, matching the plotted consumption+maintenance
+[SMRTest] PASS  GraphConsumedCaption     [behavior] MachineParts caption reports 10, matching the plotted consumption+maintenance
+[mod] [SMRTest] PASS  MoraleComfortTooltip     [behavior] Comfort reads 69 (below the 70 mark); other stats untouched
+[SMRTest] PASS  MoraleComfortTooltip     [behavior] Comfort reads 69 (below the 70 mark); other stats untouched
+[mod] [SMRTest] PASS  StorageRateModifiers     [behavior] rates reached the element (7777/8888), UpdateStorage ran 2 time(s)
+[SMRTest] PASS  StorageRateModifiers     [behavior] rates reached the element (7777/8888), UpdateStorage ran 2 time(s)
+[mod] [SMRTest] PASS  SequenceLatents          [behavior] 2 of 2 latent sequence paths behave as written
+[SMRTest] PASS  SequenceLatents          [behavior] 2 of 2 latent sequence paths behave as written
+						Lua 0:01:05:912
+[mod] [SMRTest] PASS  FounderTraitNotification [behavior] Founder gaining Melancholic (Negative) raises the notification
+[SMRTest] PASS  FounderTraitNotification [behavior] Founder gaining Melancholic (Negative) raises the notification
+[mod] [CommunityFixPack] IndependenceTerraforming: corrected the already-researched tech's stored discount from 10% to 20% (savegame sweep)
+[mod] [SMRTest] PASS  IndependenceTerraforming [behavior] discount is 20%, matching param1; the savegame sweep replaces a stale stored modifier and leaves a correct one alone
+[SMRTest] PASS  IndependenceTerraforming [behavior] discount is 20%, matching param1; the savegame sweep replaces a stale stored modifier and leaves a correct one alone
+[mod] [SMRTest] PASS  TrackSalvageRefund       [behavior] three groups refund 300 Metals (was one group's 100); single-group and unstamped tracks unchanged; partial salvage returns the destroyed elements' share
+[SMRTest] PASS  TrackSalvageRefund       [behavior] three groups refund 300 Metals (was one group's 100); single-group and unstamped tracks unchanged; partial salvage returns the destroyed elements' share
+[mod] [SMRTest] PASS  LayoutTechLock           [behavior] locked entries drop; researched, prefab-package and owned-prefab entries and grid runs all survive
+[SMRTest] PASS  LayoutTechLock           [behavior] locked entries drop; researched, prefab-package and owned-prefab entries and grid runs all survive
+[mod] [SMRTest] PASS  TrainMinors              [behavior] train cap recomputed 4->1, 40->2, 0->0
+[SMRTest] PASS  TrainMinors              [behavior] train cap recomputed 4->1, 40->2, 0->0
+						Lua 0:01:05:913
+[mod] [SMRTest] PASS  DroneTransportMinors     [behavior] weak keys restored; count corrected 4 -> 2
+[SMRTest] PASS  DroneTransportMinors     [behavior] weak keys restored; count corrected 4 -> 2
+[mod] [SMRTest] set_global refused 'AddAreaRubble' — stub target undeclared on this build (nothing was stubbed; the shipped code ran unstubbed)
+[SMRTest] set_global refused 'AddAreaRubble' — stub target undeclared on this build (nothing was stubbed; the shipped code ran unstubbed)
+[mod] [SMRTest] set_global refused 'IsNearDome' — stub target undeclared on this build (nothing was stubbed; the shipped code ran unstubbed)
+[SMRTest] set_global refused 'IsNearDome' — stub target undeclared on this build (nothing was stubbed; the shipped code ran unstubbed)
+[mod] [SMRTest] SKIP  AnomalyCaveInMap         [behavior] stub target undeclared on this build: AddAreaRubble, IsNearDome — steps 1-3 held (the false map was declined, SMRFixPack.AnomalyCaveInMap.IsUsableMap is installed, and a usable map still reached the shipped body), but the cave-in ran against the shipped rubble/dome helpers rather than this probe's stand-ins, so the last step is not the controlled exercise it claims to be
+[SMRTest] SKIP  AnomalyCaveInMap         [behavior] stub target undeclared on this build: AddAreaRubble, IsNearDome — steps 1-3 held (the false map was declined, SMRFixPack.AnomalyCaveInMap.IsUsableMap is installed, and a usable map still reached the shipped body), but the cave-in ran against the shipped rubble/dome helpers rather than this probe's stand-ins, so the last step is not the controlled exercise it claims to be
+[mod] [SMRTest] SKIP  TechDescriptionBuilding  [behavior] the tech has no description T
+[SMRTest] SKIP  TechDescriptionBuilding  [behavior] the tech has no description T
+[mod] [SMRTest] PASS  BombardmentSpread        [behavior] 20 of 20 per-missile directions deviate from the volley direction
+[SMRTest] PASS  BombardmentSpread        [behavior] 20 of 20 per-missile directions deviate from the volley direction
+[mod] [CommunityFixPack] DisasterPredictionLeak: cleared stranded prediction flag 'DisasterMeteorStorm' (no live notification behind it)
+[mod] [SMRTest] PASS  DisasterPredictionLeak   [behavior] stranded flag cleared, notification-backed flag kept (1 cleared)
+[SMRTest] PASS  DisasterPredictionLeak   [behavior] stranded flag cleared, notification-backed flag kept (1 cleared)
+[mod] [SMRTest] PASS  MeteorStormWedge         [behavior] all four watchdog states correct: no-storm, live storm protected, signature arms, sustained heals
+[SMRTest] PASS  MeteorStormWedge         [behavior] all four watchdog states correct: no-storm, live storm protected, signature arms, sustained heals
+[mod] [CommunityFixPack] RainsDeadlock: stale-ACTIVE rain 'probe_legacy' (main_thread dead) — healing through vanilla FinishRainProcedure (C34)
+[mod] [CommunityFixPack] RainsDeadlock: 'probe_legacy' rain loop migrated onto vanilla's body (settings 'Toxic_VeryLow', version 1.0.2)
+[mod] [SMRTest] PASS  RainsDeadlock            [behavior] 1 loop(s) migrated and stamped, current-version entry untouched, stale-ACTIVE healed (no unique-type preset in the live group: id-less sub-check skipped)
+[SMRTest] PASS  RainsDeadlock            [behavior] 1 loop(s) migrated and stamped, current-version entry untouched, stale-ACTIVE healed (no unique-type preset in the live group: id-less sub-check skipped)
+[mod] [CommunityFixPack] FirstAsteroidPrefabs: First Asteroid prefabs recovered after a save/load (3 granted)
+[mod] [SMRTest] PASS  FirstAsteroidPrefabs     [behavior] stranded save granted 1/1/1 and latched; already-healed and non-FirstAsteroid states granted nothing
+[SMRTest] PASS  FirstAsteroidPrefabs     [behavior] stranded save granted 1/1/1 and latched; already-healed and non-FirstAsteroid states granted nothing
+[mod] [SMRTest] PASS  UpdateReport             [behavior] healthy registry clean; 4 rot shapes flagged, 4 healthy shapes ignored
+[SMRTest] PASS  UpdateReport             [behavior] healthy registry clean; 4 rot shapes flagged, 4 healthy shapes ignored
+[mod] [SMRTest] PASS  TrackShellLeak           [behavior] mass salvage deletes the emptied track, and zero shells survive in the loaded save
+[SMRTest] PASS  TrackShellLeak           [behavior] mass salvage deletes the emptied track, and zero shells survive in the loaded save
+[mod] [SMRTest] PASS  SaintBlessing            [behavior] Saint's modifier now names TraitReligious (no Saint in a dome in this save, so the live half had nothing to read)
+[SMRTest] PASS  SaintBlessing            [behavior] Saint's modifier now names TraitReligious (no Saint in a dome in this save, so the live half had nothing to read)
+[mod] [SMRTest] PASS  DustDevilsDescrMap       [behavior] the descriptor follows MainMap in both directions, and MainMap's own disabled setting still wins
+[SMRTest] PASS  DustDevilsDescrMap       [behavior] the descriptor follows MainMap in both directions, and MainMap's own disabled setting still wins
+[mod] [SMRTest] PASS  AsteroidVisitPrecedence  [behavior] supply rockets no longer open the picker; landers and F72's unloading case still do
+[SMRTest] PASS  AsteroidVisitPrecedence  [behavior] supply rockets no longer open the picker; landers and F72's unloading case still do
+						Lua 0:01:05:914
+[mod] [SMRTest] PASS  AstrogeologistExtractors [behavior] all 12 buildable extractors are paid (12 Effect_ModifyLabel entries on the profile)
+[SMRTest] PASS  AstrogeologistExtractors [behavior] all 12 buildable extractors are paid (12 Effect_ModifyLabel entries on the profile)
+[mod] [SMRTest] PASS  SinkholeIndestructible   [behavior] Sinkhole is indestructible on the class and the template; 0 instance(s) inspected, none overriding
+[SMRTest] PASS  SinkholeIndestructible   [behavior] Sinkhole is indestructible on the class and the template; 0 instance(s) inspected, none overriding
+[mod] [SMRTest] PASS  DustStormBreakMapFilter  [behavior] merged fragments are filtered to MainMap connectors, single-map fragments pass straight through, and the persisted array is restored by identity in both cases
+[SMRTest] PASS  DustStormBreakMapFilter  [behavior] merged fragments are filtered to MainMap connectors, single-map fragments pass straight through, and the persisted array is restored by identity in both cases
+[mod] [SMRTest] PASS  DustDevilSpawnGate       [behavior] the authored 6..8 range is reachable on a passed gate and the count is exactly 0 on a failed one, the shared preset is copied not mutated, class-default properties survive the copy, and full-chance presets, other disasters and nil all pass through untouched
+[SMRTest] PASS  DustDevilSpawnGate       [behavior] the authored 6..8 range is reachable on a passed gate and the count is exactly 0 on a failed one, the shared preset is copied not mutated, class-default properties survive the copy, and full-chance presets, other disasters and nil all pass through untouched
+[mod] [SMRTest] PASS  AutomationLawCompensation [behavior] the measured 12->6 subject gets exactly +100 (100 -> 200, the ~2x the Diner control was measured riding to), the remainder lands on the first worker only, the correction is blind to the overtime flag so post-loop additives cannot be scaled, the Max(performance,25) floor holds, and all nine negative controls read 0 — already-compensated classes, unlabelled buildings, foreign max_workers modifiers, no active law, automated/shrouded/zero-post/unstaffed workplaces, and the two-law shape the ruling does not cover. ⛔ NOT claimed: a live in-game reading — that is prompt 02's paused bracket
+[SMRTest] PASS  AutomationLawCompensation [behavior] the measured 12->6 subject gets exactly +100 (100 -> 200, the ~2x the Diner control was measured riding to), the remainder lands on the first worker only, the correction is blind to the overtime flag so post-loop additives cannot be scaled, the Max(performance,25) floor holds, and all nine negative controls read 0 — already-compensated classes, unlabelled buildings, foreign max_workers modifiers, no active law, automated/shrouded/zero-post/unstaffed workplaces, and the two-law shape the ruling does not cover. ⛔ NOT claimed: a live in-game reading — that is prompt 02's paused bracket
+						Lua 0:01:05:915
+[mod] [SMRTest] PASS  C47OpenFarmSeedBufferShape [behavior] OpenFarm INHERITS its seed buffer (5000 = 5 x const.ResourceScale, no own key in its BuildingTemplate preset) while ForestationPlant SETS 10000, and the override runs the other way round on cadence — OpenFarm sets vegetation_interval 3 against the class default 20, which ForestationPlant does not touch. Ratios re-derived live and cross-multiplied: storage 2:1, cadence 20:3 (6.67x), ticks 9000 ms vs 60000 ms from MulDivRound(interval, HourDuration=30000, scale=10). Drone carry: the shipped ConstDef still DECLARES 1 (⇒ a vanilla trip is 1000 Seeds, since the Seeds resource sets no carry_amount override), while this process's LIVE g_Consts reads 1 — ⚠️ if those differ, a label modifier is raising it, and on this project's own rig that modifier is our opt-in module Opt_DroneStatDials (D09), not a game change. All 5 Vegetable crop costs match, and the owner's two fixture selections still sum to 1100 and 700 seeds over three rotated hexes (means ~367 and 233). ⛔ WHAT THIS DOES NOT PROVE: these are TEMPLATE NUMBERS read out of the running game, nothing more. It is not evidence that any farm ever ran dry, not evidence of a popup, a banner or a voice line, and not evidence that this is a defect at all — no code comment ties the two fields, C47 remains a CANDIDATE, and this probe passes identically with the fix pack on or off.
+[SMRTest] PASS  C47OpenFarmSeedBufferShape [behavior] OpenFarm INHERITS its seed buffer (5000 = 5 x const.ResourceScale, no own key in its BuildingTemplate preset) while ForestationPlant SETS 10000, and the override runs the other way round on cadence — OpenFarm sets vegetation_interval 3 against the class default 20, which ForestationPlant does not touch. Ratios re-derived live and cross-multiplied: storage 2:1, cadence 20:3 (6.67x), ticks 9000 ms vs 60000 ms from MulDivRound(interval, HourDuration=30000, scale=10). Drone carry: the shipped ConstDef still DECLARES 1 (⇒ a vanilla trip is 1000 Seeds, since the Seeds resource sets no carry_amount override), while this process's LIVE g_Consts reads 1 — ⚠️ if those differ, a label modifier is raising it, and on this project's own rig that modifier is our opt-in module Opt_DroneStatDials (D09), not a game change. All 5 Vegetable crop costs match, and the owner's two fixture selections still sum to 1100 and 700 seeds over three rotated hexes (means ~367 and 233). ⛔ WHAT THIS DOES NOT PROVE: these are TEMPLATE NUMBERS read out of the running game, nothing more. It is not evidence that any farm ever ran dry, not evidence of a popup, a banner or a voice line, and not evidence that this is a defect at all — no code comment ties the two fields, C47 remains a CANDIDATE, and this probe passes identically with the fix pack on or off.
+[mod] [SMRTest] PASS  LocalizedUIText          [behavior] language English. Both Init wrappers are installed (a later mod has chained on top of ours on TerraformingOverall, customUniversalRocket — legitimate, and our wrapper is still in the chain). The three replacement ids are all in the loaded table and BOTH ids the rocket XDef uses are absent from it, so the defect and its remedy are both still real in this build. Mechanism driven live: T(914616772802) returns light userdata (retail branch) and renders 'OVERALL TERRAFORMING PROGRESS'; the two rollover ids render 'Back to Earth' / 'Send the rocket directly to Earth without any resources.'; and the XDef's own unenrolled id still falls back to its embedded English ('Back to Earth'), which is what a player sees today. neither panel has been opened yet in this session, so the wrapper has not run — ⛔ THIS PROBE HAS NOT SEEN THE FIX DO ANYTHING, only that it could ⚠️ The non-English discriminator did NOT run — this game is in English, where the repaired reading is correctly identical to the English literal and proves nothing about the bug. ⛔ WHAT THIS DOES NOT PROVE: nothing here was read off a screen. It does not prove the heading control or the Back to Earth button actually received these values in a live panel, it does not prove the layout survives a longer translated string, and a PASS on an English run cannot tell a working fix from a broken one at all — clause 5 is the only clause that discriminates, and it needs a non-English language.
+[SMRTest] PASS  LocalizedUIText          [behavior] language English. Both Init wrappers are installed (a later mod has chained on top of ours on TerraformingOverall, customUniversalRocket — legitimate, and our wrapper is still in the chain). The three replacement ids are all in the loaded table and BOTH ids the rocket XDef uses are absent from it, so the defect and its remedy are both still real in this build. Mechanism driven live: T(914616772802) returns light userdata (retail branch) and renders 'OVERALL TERRAFORMING PROGRESS'; the two rollover ids render 'Back to Earth' / 'Send the rocket directly to Earth without any resources.'; and the XDef's own unenrolled id still falls back to its embedded English ('Back to Earth'), which is what a player sees today. neither panel has been opened yet in this session, so the wrapper has not run — ⛔ THIS PROBE HAS NOT SEEN THE FIX DO ANYTHING, only that it could ⚠️ The non-English discriminator did NOT run — this game is in English, where the repaired reading is correctly identical to the English literal and proves nothing about the bug. ⛔ WHAT THIS DOES NOT PROVE: nothing here was read off a screen. It does not prove the heading control or the Back to Earth button actually received these values in a live panel, it does not prove the layout survives a longer translated string, and a PASS on an English run cannot tell a working fix from a broken one at all — clause 5 is the only clause that discriminates, and it needs a non-English language.
+[mod] [CommunityFixPack] SpaceYDroneCapBullet: a game is running, so the Drone Hub capacity already includes SpaceY's own bonus and this bullet would count it twice — nothing was added (this repair is for the pre-game sponsor screens)
+[mod] [CommunityFixPack] SpaceYDroneCapBullet: a game is running, so the Drone Hub capacity already includes SpaceY's own bonus and this bullet would count it twice — nothing was added (this repair is for the pre-game sponsor screens)
+[mod] [SMRTest] PASS  SpaceYDroneCapBullet     [behavior] language English. ⭐ A GAME IS RUNNING, so this is the STAND-DOWN reading, not the bullet reading. SpaceY still grants CommandCenterMaxDrones over the base and its description is still translation id 880574954148, so the defect is real in this build; all three install points hold a wrapper. Driven directly, the fix declined with 'a game is running, so the Drone Hub capacity already includes SpaceY's own bonus and this bullet would count it twice — nothing was added (this repair is for the pre-game sponsor screens)', and the assembled sponsor summary is byte-identical to the shipped one — the in-game Mission Profile dialog (MissionProfileDlgRemastered:342, the HUD Goals button) gets vanilla. ⛔ WHAT THIS DOES NOT PROVE: it does not read the pre-game bullet at all. The bullet clauses (5, 6) can only be taken with NO game loaded — at the main menu — and this run could not take them.
+[SMRTest] PASS  SpaceYDroneCapBullet     [behavior] language English. ⭐ A GAME IS RUNNING, so this is the STAND-DOWN reading, not the bullet reading. SpaceY still grants CommandCenterMaxDrones over the base and its description is still translation id 880574954148, so the defect is real in this build; all three install points hold a wrapper. Driven directly, the fix declined with 'a game is running, so the Drone Hub capacity already includes SpaceY's own bonus and this bullet would count it twice — nothing was added (this repair is for the pre-game sponsor screens)', and the assembled sponsor summary is byte-identical to the shipped one — the in-game Mission Profile dialog (MissionProfileDlgRemastered:342, the HUD Goals button) gets vanilla. ⛔ WHAT THIS DOES NOT PROVE: it does not read the pre-game bullet at all. The bullet clauses (5, 6) can only be taken with NO game loaded — at the main menu — and this run could not take them.
+[mod] [SMRTest] SMRTEST-DISPATCH ClassNonInheritableMembers = { UNREADABLE } — the copy-skip set could not be read
+[SMRTest] SMRTEST-DISPATCH ClassNonInheritableMembers = { UNREADABLE } — the copy-skip set could not be read
+[mod] [SMRTest] SMRTEST-DISPATCH the sweep reports which classes DO NOT REACH a wrap. It does NOT report which of them are ever instantiated — a hit is a reach gap, NOT a broken fix.
+[SMRTest] SMRTEST-DISPATCH the sweep reports which classes DO NOT REACH a wrap. It does NOT report which of them are ever instantiated — a hit is a reach gap, NOT a broken fix.
+						Lua 0:01:05:925
+[mod] [SMRTest] SMRTEST-DISPATCH 90_SaveSanitizer               LabelContainer.SetLabelModifier                            link=copy  desc=46    reach=1     UNREACHED=0    (own-copy 0)  MULTI=45 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH 90_SaveSanitizer               LabelContainer.SetLabelModifier                            link=copy  desc=46    reach=1     UNREACHED=0    (own-copy 0)  MULTI=45 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_ArrivalDeaths              Colonist.Idle                                              link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_ArrivalDeaths              Colonist.Idle                                              link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_ArrivalDeaths              Colonist.OnArrival                                         link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_ArrivalDeaths              Colonist.OnArrival                                         link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_ArrivalDeaths              Colonist.Arrive                                            link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_ArrivalDeaths              Colonist.Arrive                                            link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_AsteroidLanderAvailable    LandingSiteObject.GetRocketsForExpedition                  link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_AsteroidLanderAvailable    LandingSiteObject.GetRocketsForExpedition                  link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_AstrogeologistExtractors   Effect_ModifyLabel.OnApplyEffect                           link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_AstrogeologistExtractors   Effect_ModifyLabel.OnApplyEffect                           link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+						Lua 0:01:05:926
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_AutomationLawCompensation  Workplace.GetWorkshiftPerformance                          link=copy  desc=115   reach=3     UNREACHED=0    (own-copy 0)  MULTI=112 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_AutomationLawCompensation  Workplace.GetWorkshiftPerformance                          link=copy  desc=115   reach=3     UNREACHED=0    (own-copy 0)  MULTI=112 (unreached 0)
+						Lua 0:01:05:928
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_AutomationLawCompensation  Shroudable.IsShroudedInRubble                              link=?     desc=592   reach=0     UNREACHED=0    (own-copy 0)  MULTI=592 (unreached 3)
+[SMRTest] SMRTEST-DISPATCH Fix_AutomationLawCompensation  Shroudable.IsShroudedInRubble                              link=?     desc=592   reach=0     UNREACHED=0    (own-copy 0)  MULTI=592 (unreached 3)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_BombardmentSpread          BaseMeteor.HitsDome                                        link=copy  desc=5     reach=4     UNREACHED=0    (own-copy 0)  MULTI=1 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_BombardmentSpread          BaseMeteor.HitsDome                                        link=copy  desc=5     reach=4     UNREACHED=0    (own-copy 0)  MULTI=1 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_BombardmentSpread          BaseMeteor.GetTimeToImpact                                 link=copy  desc=5     reach=4     UNREACHED=0    (own-copy 0)  MULTI=1 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_BombardmentSpread          BaseMeteor.GetTimeToImpact                                 link=copy  desc=5     reach=4     UNREACHED=0    (own-copy 0)  MULTI=1 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_BrokenTrackSalvage         TrackBase.BreakTrackElement                                link=copy  desc=1     reach=1     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_BrokenTrackSalvage         TrackBase.BreakTrackElement                                link=copy  desc=1     reach=1     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_CommandCenterNumbers       ResourceOverview.GetAvailable                              link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_CommandCenterNumbers       ResourceOverview.GetAvailable                              link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_CrystalMysteryHang         Crystal.ComposeProc                                        link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_CrystalMysteryHang         Crystal.ComposeProc                                        link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_DestroyedTunnels           TunnelBase.AddPFTunnel                                     link=copy  desc=4     reach=1     UNREACHED=0    (own-copy 0)  MULTI=3 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_DestroyedTunnels           TunnelBase.AddPFTunnel                                     link=copy  desc=4     reach=1     UNREACHED=0    (own-copy 0)  MULTI=3 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_DestroyedTunnels           TunnelBase.RemovePFTunnel                                  link=copy  desc=4     reach=1     UNREACHED=0    (own-copy 0)  MULTI=3 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_DestroyedTunnels           TunnelBase.RemovePFTunnel                                  link=copy  desc=4     reach=1     UNREACHED=0    (own-copy 0)  MULTI=3 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_DomeFreeSpaceMismatch      Dome.RefreshFreeLivingSpaces                               link=copy  desc=30    reach=29    UNREACHED=0    (own-copy 0)  MULTI=1 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_DomeFreeSpaceMismatch      Dome.RefreshFreeLivingSpaces                               link=copy  desc=30    reach=29    UNREACHED=0    (own-copy 0)  MULTI=1 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_DomeOverviewHighlight      Community.UICommandCenterStatUpdate                        link=?     desc=35    reach=0     UNREACHED=0    (own-copy 0)  MULTI=35 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_DomeOverviewHighlight      Community.UICommandCenterStatUpdate                        link=?     desc=35    reach=0     UNREACHED=0    (own-copy 0)  MULTI=35 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_DroneTransportMinors       Drone.ApproachWrapper                                      link=?     desc=1     reach=0     UNREACHED=0    (own-copy 0)  MULTI=1 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_DroneTransportMinors       Drone.ApproachWrapper                                      link=?     desc=1     reach=0     UNREACHED=0    (own-copy 0)  MULTI=1 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_DroneTransportMinors       Drone.CleanUnreachables                                    link=?     desc=1     reach=0     UNREACHED=0    (own-copy 0)  MULTI=1 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_DroneTransportMinors       Drone.CleanUnreachables                                    link=?     desc=1     reach=0     UNREACHED=0    (own-copy 0)  MULTI=1 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_DroneUnreachableForever    Drone.CleanUnreachables                                    link=?     desc=1     reach=0     UNREACHED=0    (own-copy 0)  MULTI=1 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_DroneUnreachableForever    Drone.CleanUnreachables                                    link=?     desc=1     reach=0     UNREACHED=0    (own-copy 0)  MULTI=1 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_DroneUnreachableForever    Drone.ApproachWrapper                                      link=?     desc=1     reach=0     UNREACHED=0    (own-copy 0)  MULTI=1 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_DroneUnreachableForever    Drone.ApproachWrapper                                      link=?     desc=1     reach=0     UNREACHED=0    (own-copy 0)  MULTI=1 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_DustStormUndergroundBreaks SupplyGridFragment.RandomBreakConnection                   link=copy  desc=3     reach=3     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_DustStormUndergroundBreaks SupplyGridFragment.RandomBreakConnection                   link=copy  desc=3     reach=3     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_DustStormUndergroundBreaks SupplyGridFragment.IsBreakable                             link=copy  desc=3     reach=3     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_DustStormUndergroundBreaks SupplyGridFragment.IsBreakable                             link=copy  desc=3     reach=3     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_FreedHousingNotice         Colonist.SetResidence                                      link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_FreedHousingNotice         Colonist.SetResidence                                      link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_FreedHousingNotice         Residence.CheckHomeForHomeless                             link=?     desc=25    reach=0     UNREACHED=0    (own-copy 0)  MULTI=25 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_FreedHousingNotice         Residence.CheckHomeForHomeless                             link=?     desc=25    reach=0     UNREACHED=0    (own-copy 0)  MULTI=25 (unreached 0)
+						Lua 0:01:05:929
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_FreedHousingNotice         Residence.GetFreeSpace                                     link=?     desc=25    reach=0     UNREACHED=0    (own-copy 0)  MULTI=25 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_FreedHousingNotice         Residence.GetFreeSpace                                     link=?     desc=25    reach=0     UNREACHED=0    (own-copy 0)  MULTI=25 (unreached 0)
+						Lua 0:01:05:931
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_GhostFarmOxygen            Building.SetDome                                           link=chain desc=575   reach=97    UNREACHED=0    (own-copy 0)  MULTI=478 (unreached 40)
+[SMRTest] SMRTEST-DISPATCH Fix_GhostFarmOxygen            Building.SetDome                                           link=chain desc=575   reach=97    UNREACHED=0    (own-copy 0)  MULTI=478 (unreached 40)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_GhostFarmOxygen            FarmBase.ApplyOxygenProductionMod                          link=copy  desc=4     reach=4     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_GhostFarmOxygen            FarmBase.ApplyOxygenProductionMod                          link=copy  desc=4     reach=4     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_GraphConsumedCaption       City.GetColonyStatsButtons                                 link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_GraphConsumedCaption       City.GetColonyStatsButtons                                 link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_GraphConsumedCaption       ResourceOverview.GetConsumedByMaintenanceYesterday         link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_GraphConsumedCaption       ResourceOverview.GetConsumedByMaintenanceYesterday         link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_GraphConsumedCaption       ResourceOverview.GetConsumedByConsumptionYesterday         link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_GraphConsumedCaption       ResourceOverview.GetConsumedByConsumptionYesterday         link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_GraphConsumedCaption       ResourceOverview.GetProducedYesterday                      link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_GraphConsumedCaption       ResourceOverview.GetProducedYesterday                      link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_LakeEntombment             LandscapeLake.PlacePrefab                                  link=copy  desc=4     reach=4     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_LakeEntombment             LandscapeLake.PlacePrefab                                  link=copy  desc=4     reach=4     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_LakeEntombment             Unit.ExitImpassable                                        link=copy  desc=43    reach=0     UNREACHED=1    (own-copy 1) [Firefly]  MULTI=42 (unreached 13)
+[SMRTest] SMRTEST-DISPATCH Fix_LakeEntombment             Unit.ExitImpassable                                        link=copy  desc=43    reach=0     UNREACHED=1    (own-copy 1) [Firefly]  MULTI=42 (unreached 13)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_LanderCargoRatchet         UniversalRocketBase.CreateAutoCargoRequest                 link=copy  desc=10    reach=10    UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_LanderCargoRatchet         UniversalRocketBase.CreateAutoCargoRequest                 link=copy  desc=10    reach=10    UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_LanderCargoRatchet         UniversalRocketBase.ResolveAutoModeTarget                  link=copy  desc=10    reach=10    UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_LanderCargoRatchet         UniversalRocketBase.ResolveAutoModeTarget                  link=copy  desc=10    reach=10    UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+						Lua 0:01:05:932
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_LanderCargoRatchet         UniversalRocketBase.IsOnAutoModeTargetLocation             link=copy  desc=10    reach=10    UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_LanderCargoRatchet         UniversalRocketBase.IsOnAutoModeTargetLocation             link=copy  desc=10    reach=10    UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_LanderCargoRatchet         UniversalRocketBase.IsSpecialAutomode                      link=copy  desc=10    reach=10    UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_LanderCargoRatchet         UniversalRocketBase.IsSpecialAutomode                      link=copy  desc=10    reach=10    UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_LanderCargoRatchet         CargoTransporterNew.GetCargoWeightCapacity                 link=?     desc=11    reach=0     UNREACHED=0    (own-copy 0)  MULTI=11 (unreached 4)
+[SMRTest] SMRTEST-DISPATCH Fix_LanderCargoRatchet         CargoTransporterNew.GetCargoWeightCapacity                 link=?     desc=11    reach=0     UNREACHED=0    (own-copy 0)  MULTI=11 (unreached 4)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_LanderCargoRatchet         CargoTransporterNew.SetCargoRequest                        link=?     desc=11    reach=0     UNREACHED=0    (own-copy 0)  MULTI=11 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_LanderCargoRatchet         CargoTransporterNew.SetCargoRequest                        link=?     desc=11    reach=0     UNREACHED=0    (own-copy 0)  MULTI=11 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_LanderEmptyLaunch          UniversalRocketBase.IsCargoReady                           link=copy  desc=10    reach=10    UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_LanderEmptyLaunch          UniversalRocketBase.IsCargoReady                           link=copy  desc=10    reach=10    UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_LanderEmptyLaunch          UniversalRocketBase.CheckAutoDepart                        link=copy  desc=10    reach=10    UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_LanderEmptyLaunch          UniversalRocketBase.CheckAutoDepart                        link=copy  desc=10    reach=10    UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_LanderEmptyLaunch          UniversalRocketBase.IsSpecialAutomode                      link=copy  desc=10    reach=10    UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_LanderEmptyLaunch          UniversalRocketBase.IsSpecialAutomode                      link=copy  desc=10    reach=10    UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_LanderEmptyLaunch          UniversalRocketBase.IsPlayerControlled                     link=copy  desc=10    reach=10    UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_LanderEmptyLaunch          UniversalRocketBase.IsPlayerControlled                     link=copy  desc=10    reach=10    UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+						Lua 0:01:05:933
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_LanderEmptyLaunch          AutoMode.IsAutoModeEnabled                                 link=?     desc=19    reach=0     UNREACHED=0    (own-copy 0)  MULTI=19 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_LanderEmptyLaunch          AutoMode.IsAutoModeEnabled                                 link=?     desc=19    reach=0     UNREACHED=0    (own-copy 0)  MULTI=19 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_LanderReturnFuel           UniversalRocketBase.GetFuelResourceRequest                 link=copy  desc=10    reach=10    UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_LanderReturnFuel           UniversalRocketBase.GetFuelResourceRequest                 link=copy  desc=10    reach=10    UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_LanderReturnFuel           UniversalRocketBase.GetDepartureLocType                    link=copy  desc=10    reach=10    UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_LanderReturnFuel           UniversalRocketBase.GetDepartureLocType                    link=copy  desc=10    reach=10    UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_LandscapeCostRefresh       ConstructionSite.RefreshConstructionResources              link=copy  desc=13    reach=5     UNREACHED=3    (own-copy 3) [ClearWasteRockConstructionSite, LandscapeConstructionSite, TerrainPaintConstructionSite]  MULTI=5 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_LandscapeCostRefresh       ConstructionSite.RefreshConstructionResources              link=copy  desc=13    reach=5     UNREACHED=3    (own-copy 3) [ClearWasteRockConstructionSite, LandscapeConstructionSite, TerrainPaintConstructionSite]  MULTI=5 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_LandscapeCostRefresh       LandscapeConstructionSite.GatherConstructionResources      link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_LandscapeCostRefresh       LandscapeConstructionSite.GatherConstructionResources      link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_LandscapeCostRefresh       ClearWasteRockConstructionSite.GatherConstructionResources link=copy  desc=1     reach=0     UNREACHED=1    (own-copy 1) [LandscapeConstructionSite]  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_LandscapeCostRefresh       ClearWasteRockConstructionSite.GatherConstructionResources link=copy  desc=1     reach=0     UNREACHED=1    (own-copy 1) [LandscapeConstructionSite]  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_LandscapeCostRefresh       TerrainPaintConstructionSite.GatherConstructionResources   link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_LandscapeCostRefresh       TerrainPaintConstructionSite.GatherConstructionResources   link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_LayoutTechLock             LayoutConstructionController.Activate                      link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_LayoutTechLock             LayoutConstructionController.Activate                      link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_LocalizedUIText            TerraformingOverall.Init                                   link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_LocalizedUIText            TerraformingOverall.Init                                   link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_LocalizedUIText            customUniversalRocket.Init                                 link=copy  desc=5     reach=5     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_LocalizedUIText            customUniversalRocket.Init                                 link=copy  desc=5     reach=5     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_LowStorageWarning          ResourceTracking.GatheredResourcesOnHourlyUpdate           link=?     desc=1     reach=0     UNREACHED=0    (own-copy 0)  MULTI=1 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_LowStorageWarning          ResourceTracking.GatheredResourcesOnHourlyUpdate           link=?     desc=1     reach=0     UNREACHED=0    (own-copy 0)  MULTI=1 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_MirrorSphereSite           MirrorSphereBuildingBase.StartAction                       link=copy  desc=1     reach=1     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_MirrorSphereSite           MirrorSphereBuildingBase.StartAction                       link=copy  desc=1     reach=1     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_MoraleComfortTooltip       Colonist.UIStatUpdate                                      link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_MoraleComfortTooltip       Colonist.UIStatUpdate                                      link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+						Lua 0:01:05:946
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_MoraleComfortTooltip       PropertyObject.GetProperty                                 link=chain desc=7063  reach=1189  UNREACHED=52   (own-copy 52) [AutoAttachObjectClassAndPropValues, AutoAttachPresetWeight, DeveloperOptions, DynamicPropertiesObject, ModOptionsObject, PGMissionObject, PropertyDef, PropertyDefBool, PropertyDefBox, PropertyDefBrowse, +42 more]  MULTI=5822 (unreached 23)
+[SMRTest] SMRTEST-DISPATCH Fix_MoraleComfortTooltip       PropertyObject.GetProperty                                 link=chain desc=7063  reach=1189  UNREACHED=52   (own-copy 52) [AutoAttachObjectClassAndPropValues, AutoAttachPresetWeight, DeveloperOptions, DynamicPropertiesObject, ModOptionsObject, PGMissionObject, PropertyDef, PropertyDefBool, PropertyDefBox, PropertyDefBrowse, +42 more]  MULTI=5822 (unreached 23)
+						Lua 0:01:05:947
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_NightShiftWork             Colonist.ShouldLeaveForWork                                link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_NightShiftWork             Colonist.ShouldLeaveForWork                                link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_PayloadTemplateRefill      CargoRequestNew.RetrieveRequests                           link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_PayloadTemplateRefill      CargoRequestNew.RetrieveRequests                           link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_PayloadTemplateRefill      CargoRequestNew.Apply                                      link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_PayloadTemplateRefill      CargoRequestNew.Apply                                      link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_PayloadTemplateRefill      CargoRequestNew.SetRequest                                 link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_PayloadTemplateRefill      CargoRequestNew.SetRequest                                 link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_RocketDroneChurn           CargoTransporterNew.UpdateCargoResourceRequests            link=?     desc=11    reach=0     UNREACHED=0    (own-copy 0)  MULTI=11 (unreached 11)
+[SMRTest] SMRTEST-DISPATCH Fix_RocketDroneChurn           CargoTransporterNew.UpdateCargoResourceRequests            link=?     desc=11    reach=0     UNREACHED=0    (own-copy 0)  MULTI=11 (unreached 11)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_RocketDroneChurn           CargoTransporterNew.AddCargoDemandRequest                  link=?     desc=11    reach=0     UNREACHED=0    (own-copy 0)  MULTI=11 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_RocketDroneChurn           CargoTransporterNew.AddCargoDemandRequest                  link=?     desc=11    reach=0     UNREACHED=0    (own-copy 0)  MULTI=11 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_RocketDroneChurn           CargoTransporterNew.AddCargoSupplyRequest                  link=?     desc=11    reach=0     UNREACHED=0    (own-copy 0)  MULTI=11 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_RocketDroneChurn           CargoTransporterNew.AddCargoSupplyRequest                  link=?     desc=11    reach=0     UNREACHED=0    (own-copy 0)  MULTI=11 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_RocketInteractGuard        RCTransport.CanInteractWithObject                          link=copy  desc=4     reach=0     UNREACHED=2    (own-copy 2) [RCConstructor, RCConstructorBase]  MULTI=2 (unreached 2)
+[SMRTest] SMRTEST-DISPATCH Fix_RocketInteractGuard        RCTransport.CanInteractWithObject                          link=copy  desc=4     reach=0     UNREACHED=2    (own-copy 2) [RCConstructor, RCConstructorBase]  MULTI=2 (unreached 2)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_RocketInteractGuard        RCTransport.InteractWithObject                             link=copy  desc=4     reach=0     UNREACHED=2    (own-copy 2) [RCConstructor, RCConstructorBase]  MULTI=2 (unreached 2)
+[SMRTest] SMRTEST-DISPATCH Fix_RocketInteractGuard        RCTransport.InteractWithObject                             link=copy  desc=4     reach=0     UNREACHED=2    (own-copy 2) [RCConstructor, RCConstructorBase]  MULTI=2 (unreached 2)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_SaintBlessing              TraitPreset.AddDomeColonistsModifier                       link=?     desc=1     reach=0     UNREACHED=0    (own-copy 0)  MULTI=1 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_SaintBlessing              TraitPreset.AddDomeColonistsModifier                       link=?     desc=1     reach=0     UNREACHED=0    (own-copy 0)  MULTI=1 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_SaintBlessing              LabelContainer.SetLabelModifier                            link=copy  desc=46    reach=1     UNREACHED=0    (own-copy 0)  MULTI=45 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_SaintBlessing              LabelContainer.SetLabelModifier                            link=copy  desc=46    reach=1     UNREACHED=0    (own-copy 0)  MULTI=45 (unreached 0)
+						Lua 0:01:05:949
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_ShuttleHubOffAvailable     BaseBuilding.GetWorkNotPermittedReason                     link=copy  desc=633   reach=6     UNREACHED=0    (own-copy 0)  MULTI=627 (unreached 578)
+[SMRTest] SMRTEST-DISPATCH Fix_ShuttleHubOffAvailable     BaseBuilding.GetWorkNotPermittedReason                     link=copy  desc=633   reach=6     UNREACHED=0    (own-copy 0)  MULTI=627 (unreached 578)
+						Lua 0:01:05:950
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_ShuttleHubOffAvailable     BaseBuilding.GetWorkNotPossibleReason                      link=copy  desc=633   reach=5     UNREACHED=1    (own-copy 1) [UpgradeConsumption]  MULTI=627 (unreached 578)
+[SMRTest] SMRTEST-DISPATCH Fix_ShuttleHubOffAvailable     BaseBuilding.GetWorkNotPossibleReason                      link=copy  desc=633   reach=5     UNREACHED=1    (own-copy 1) [UpgradeConsumption]  MULTI=627 (unreached 578)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_SmallLandscapeSites        LandscapeConstructionSiteBase.GetClosestDests              link=copy  desc=3     reach=3     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_SmallLandscapeSites        LandscapeConstructionSiteBase.GetClosestDests              link=copy  desc=3     reach=3     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_SpaceYDroneCapBullet       LandingSiteObject.GetMissionSponsorEffect                  link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_SpaceYDroneCapBullet       LandingSiteObject.GetMissionSponsorEffect                  link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_StaleReservations          Residence.ReserveResidence                                 link=?     desc=25    reach=0     UNREACHED=0    (own-copy 0)  MULTI=25 (unreached 4)
+[SMRTest] SMRTEST-DISPATCH Fix_StaleReservations          Residence.ReserveResidence                                 link=?     desc=25    reach=0     UNREACHED=0    (own-copy 0)  MULTI=25 (unreached 4)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_StaleReservations          Residence.CancelResidenceReservation                       link=?     desc=25    reach=0     UNREACHED=0    (own-copy 0)  MULTI=25 (unreached 4)
+[SMRTest] SMRTEST-DISPATCH Fix_StaleReservations          Residence.CancelResidenceReservation                       link=?     desc=25    reach=0     UNREACHED=0    (own-copy 0)  MULTI=25 (unreached 4)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_TouristApplicants          HolidayRating.RewardApplicants                             link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_TouristApplicants          HolidayRating.RewardApplicants                             link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_TouristSatisfaction        Colonist.UpdateSatisfaction                                link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_TouristSatisfaction        Colonist.UpdateSatisfaction                                link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_TrackConnectorPingPong     TrackConnectedObjBase.CreateConnectorElements              link=?     desc=6     reach=0     UNREACHED=0    (own-copy 0)  MULTI=6 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_TrackConnectorPingPong     TrackConnectedObjBase.CreateConnectorElements              link=?     desc=6     reach=0     UNREACHED=0    (own-copy 0)  MULTI=6 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_TrackConnectorPingPong     TrackConnectedObjBase.Done                                 link=?     desc=6     reach=0     UNREACHED=0    (own-copy 0)  MULTI=6 (unreached 6)
+[SMRTest] SMRTEST-DISPATCH Fix_TrackConnectorPingPong     TrackConnectedObjBase.Done                                 link=?     desc=6     reach=0     UNREACHED=0    (own-copy 0)  MULTI=6 (unreached 6)
+						Lua 0:01:05:951
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_TrackSalvageRefund         TrackBase.GetRefundResources                               link=copy  desc=1     reach=1     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_TrackSalvageRefund         TrackBase.GetRefundResources                               link=copy  desc=1     reach=1     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_TrackSalvageRefund         TrackGridElement.Demolish                                  link=?     desc=1     reach=0     UNREACHED=0    (own-copy 0)  MULTI=1 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_TrackSalvageRefund         TrackGridElement.Demolish                                  link=?     desc=1     reach=0     UNREACHED=0    (own-copy 0)  MULTI=1 (unreached 0)
+						Lua 0:01:05:953
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_TrackSalvageRefund         Building.CalcRefundAmount                                  link=chain desc=575   reach=97    UNREACHED=0    (own-copy 0)  MULTI=478 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_TrackSalvageRefund         Building.CalcRefundAmount                                  link=chain desc=575   reach=97    UNREACHED=0    (own-copy 0)  MULTI=478 (unreached 0)
+						Lua 0:01:05:956
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_TrackSalvageRefund         Building.AddRefundResource                                 link=chain desc=575   reach=97    UNREACHED=0    (own-copy 0)  MULTI=478 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_TrackSalvageRefund         Building.AddRefundResource                                 link=chain desc=575   reach=97    UNREACHED=0    (own-copy 0)  MULTI=478 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_TrackSalvageRefund         ConstructionGroupLeader.Complete                           link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_TrackSalvageRefund         ConstructionGroupLeader.Complete                           link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_TrackSalvageRefund         ConstructionSite.MarkSpentResources                        link=copy  desc=13    reach=8     UNREACHED=0    (own-copy 0)  MULTI=5 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_TrackSalvageRefund         ConstructionSite.MarkSpentResources                        link=copy  desc=13    reach=8     UNREACHED=0    (own-copy 0)  MULTI=5 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_TrackSalvageWipe           TrackGridElement.DemolishAndSplitTrack                     link=?     desc=1     reach=0     UNREACHED=0    (own-copy 0)  MULTI=1 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_TrackSalvageWipe           TrackGridElement.DemolishAndSplitTrack                     link=?     desc=1     reach=0     UNREACHED=0    (own-copy 0)  MULTI=1 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_TrackTunnelPowerBridge     TrackBase.ConnectToGrids                                   link=copy  desc=1     reach=1     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_TrackTunnelPowerBridge     TrackBase.ConnectToGrids                                   link=copy  desc=1     reach=1     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_TrackTunnelPowerBridge     TrackBase.GetStartStation                                  link=copy  desc=1     reach=1     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_TrackTunnelPowerBridge     TrackBase.GetStartStation                                  link=copy  desc=1     reach=1     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_TrackTunnelPowerBridge     TrackBase.GetEndStation                                    link=copy  desc=1     reach=1     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_TrackTunnelPowerBridge     TrackBase.GetEndStation                                    link=copy  desc=1     reach=1     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_TrackTunnelPowerBridge     TrackBase.Done                                             link=copy  desc=1     reach=1     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_TrackTunnelPowerBridge     TrackBase.Done                                             link=copy  desc=1     reach=1     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_TrackTunnelPowerBridge     TrackBase.DisconnectFromGrids                              link=copy  desc=1     reach=1     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_TrackTunnelPowerBridge     TrackBase.DisconnectFromGrids                              link=copy  desc=1     reach=1     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_TrainCargoDumping          Train.UnloadAll                                            link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_TrainCargoDumping          Train.UnloadAll                                            link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_TrainCargoDumping          UniversalStorageDepotBase.IsResourceEnabled                link=copy  desc=55    reach=14    UNREACHED=0    (own-copy 0)  MULTI=41 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_TrainCargoDumping          UniversalStorageDepotBase.IsResourceEnabled                link=copy  desc=55    reach=14    UNREACHED=0    (own-copy 0)  MULTI=41 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_TrainMinors                TrackBase.GameInit                                         link=copy  desc=1     reach=1     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_TrainMinors                TrackBase.GameInit                                         link=copy  desc=1     reach=1     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_TrainMinors                TrackBase.UpdateEndElements                                link=copy  desc=1     reach=1     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_TrainMinors                TrackBase.UpdateEndElements                                link=copy  desc=1     reach=1     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_TrainPlatformWedge         Colonist.ExitVehicle                                       link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_TrainPlatformWedge         Colonist.ExitVehicle                                       link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_TrainWaitTime              TransportStatistics.AddSpentTime                           link=?     desc=7     reach=0     UNREACHED=0    (own-copy 0)  MULTI=7 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_TrainWaitTime              TransportStatistics.AddSpentTime                           link=?     desc=7     reach=0     UNREACHED=0    (own-copy 0)  MULTI=7 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_TrainWaitTime              Colonist.BoardVehicle                                      link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+						Lua 0:01:05:957
+[SMRTest] SMRTEST-DISPATCH Fix_TrainWaitTime              Colonist.BoardVehicle                                      link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_TrainWaitTime              Colonist.ExitVehicle                                       link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_TrainWaitTime              Colonist.ExitVehicle                                       link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+						Lua 0:01:05:959
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_TrainsToVoid               Building.OnDemolish                                        link=chain desc=575   reach=93    UNREACHED=4    (own-copy 4) [AsteroidCatcher, AsteroidCatcherBase, TradePad, TradePadBase]  MULTI=478 (unreached 60)
+[SMRTest] SMRTEST-DISPATCH Fix_TrainsToVoid               Building.OnDemolish                                        link=chain desc=575   reach=93    UNREACHED=4    (own-copy 4) [AsteroidCatcher, AsteroidCatcherBase, TradePad, TradePadBase]  MULTI=478 (unreached 60)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_TrainsToVoid               Train.DestroySilent                                        link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_TrainsToVoid               Train.DestroySilent                                        link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_UniversityOvertraining     City.GetNeededSpecialist                                   link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_UniversityOvertraining     City.GetNeededSpecialist                                   link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+						Lua 0:01:05:961
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_UpgradeModifierLeak        Building.StopUpgradeModifiers                              link=chain desc=575   reach=97    UNREACHED=0    (own-copy 0)  MULTI=478 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_UpgradeModifierLeak        Building.StopUpgradeModifiers                              link=chain desc=575   reach=97    UNREACHED=0    (own-copy 0)  MULTI=478 (unreached 0)
+						Lua 0:01:05:963
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_UpgradeModifierLeak        Building.ApplyUpgradeModifiers                             link=chain desc=575   reach=97    UNREACHED=0    (own-copy 0)  MULTI=478 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_UpgradeModifierLeak        Building.ApplyUpgradeModifiers                             link=chain desc=575   reach=97    UNREACHED=0    (own-copy 0)  MULTI=478 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_VacuumWalks                Colonist.TryToEmigrateToDome                               link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_VacuumWalks                Colonist.TryToEmigrateToDome                               link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH TOTAL targets=105 clean=97 with-unreached=8 missing=0 | descendants=13127 reach=1981 UNREACHED=66 | MULTI-PARENT=11080 (of which unreached=1328, reported separately, NOT folded into either verdict)
+[SMRTest] SMRTEST-DISPATCH TOTAL targets=105 clean=97 with-unreached=8 missing=0 | descendants=13127 reach=1981 UNREACHED=66 | MULTI-PARENT=11080 (of which unreached=1328, reported separately, NOT folded into either verdict)
+[mod] [SMRTest] SMRTEST-DISPATCH ⚠️ 2 class(es) carry an __index that is not the class itself — instance dispatch there does not follow the model this sweep measures: BrazeSession, ProtectedPropertyObject
+[SMRTest] SMRTEST-DISPATCH ⚠️ 2 class(es) carry an __index that is not the class itself — instance dispatch there does not follow the model this sweep measures: BrazeSession, ProtectedPropertyObject
+						Lua 0:01:05:964
+[mod] [SMRTest] PASS  DispatchReach            [behavior] swept 105 declared targets over 13127 descendants: 97 targets clean, 8 with unreached descendants (66 classes total, 1328 holding a build-time copy of their own). ⛔ UNREACHED is a reach gap, NOT a broken-fix count — instantiation is not measured. Detail: SMRTEST-DISPATCH lines.
+[SMRTest] PASS  DispatchReach            [behavior] swept 105 declared targets over 13127 descendants: 97 targets clean, 8 with unreached descendants (66 classes total, 1328 holding a build-time copy of their own). ⛔ UNREACHED is a reach gap, NOT a broken-fix count — instantiation is not measured. Detail: SMRTEST-DISPATCH lines.
+[mod] [SMRTest] SMRTEST-F105GUARD LandscapeConstructionSite: unguarded-state call ok=true
+[SMRTest] SMRTEST-F105GUARD LandscapeConstructionSite: unguarded-state call ok=true
+[mod] [SMRTest] SMRTEST-F105GUARD ClearWasteRockConstructionSite: unguarded-state call ok=true
+[SMRTest] SMRTEST-F105GUARD ClearWasteRockConstructionSite: unguarded-state call ok=true
+[mod] [SMRTest] SMRTEST-F105GUARD TerrainPaintConstructionSite: unguarded-state call ok=true
+[SMRTest] SMRTEST-F105GUARD TerrainPaintConstructionSite: unguarded-state call ok=true
+[mod] [SMRTest] FAIL  LandscapeCostGuard       [behavior] the guard no longer delegates on LandscapeConstructionSite (raised with a valid cost table: Mod/SMR_CommunityFixPack/Code/Fix_LandscapeCostRefresh.lua:81: attempt to call a nil value (upvalue 'prev')); ClearWasteRockConstructionSite (raised with a valid cost table: Mod/SMR_CommunityFixPack/Code/Fix_LandscapeCostRefresh.lua:81: attempt to call a nil value (upvalue 'prev')); TerrainPaintConstructionSite (raised with a valid cost table: Mod/SMR_CommunityFixPack/Code/Fix_LandscapeCostRefresh.lua:81: attempt to call a nil value (upvalue 'prev')) — a site WITH a start-cost record must still be refreshed
+[SMRTest] FAIL  LandscapeCostGuard       [behavior] the guard no longer delegates on LandscapeConstructionSite (raised with a valid cost table: Mod/SMR_CommunityFixPack/Code/Fix_LandscapeCostRefresh.lua:81: attempt to call a nil value (upvalue 'prev')); ClearWasteRockConstructionSite (raised with a valid cost table: Mod/SMR_CommunityFixPack/Code/Fix_LandscapeCostRefresh.lua:81: attempt to call a nil value (upvalue 'prev')); TerrainPaintConstructionSite (raised with a valid cost table: Mod/SMR_CommunityFixPack/Code/Fix_LandscapeCostRefresh.lua:81: attempt to call a nil value (upvalue 'prev')) — a site WITH a start-cost record must still be refreshed
+[mod] [SMRTest] SKIP  AcknowledgedWarnings     [behavior] opt-in mod not installed or module not present
+[SMRTest] SKIP  AcknowledgedWarnings     [behavior] opt-in mod not installed or module not present
+[mod] [SMRTest] SKIP  ResidencyControl         [behavior] opt-in mod not installed or module not present
+[SMRTest] SKIP  ResidencyControl         [behavior] opt-in mod not installed or module not present
+[mod] [SMRTest] SKIP  MultipleSuns             [behavior] opt-in mod not installed or module not present
+[SMRTest] SKIP  MultipleSuns             [behavior] opt-in mod not installed or module not present
+[mod] [SMRTest] SKIP  CohortHousing            [behavior] opt-in mod not installed or module not present
+[SMRTest] SKIP  CohortHousing            [behavior] opt-in mod not installed or module not present
+[mod] [SMRTest] SKIP  NoHomeless               [behavior] opt-in mod not installed or module not present
+[SMRTest] SKIP  NoHomeless               [behavior] opt-in mod not installed or module not present
+[mod] [SMRTest] SKIP  DroneStatDials           [behavior] opt-in mod not installed (separate mod — not a failure)
+[SMRTest] SKIP  DroneStatDials           [behavior] opt-in mod not installed (separate mod — not a failure)
+[mod] [SMRTest] SKIP  OptionsMenuOptIn         [behavior] opt-in mod not installed (separate mod — not a failure)
+[SMRTest] SKIP  OptionsMenuOptIn         [behavior] opt-in mod not installed (separate mod — not a failure)
+[mod] [SMRTest] PASS  OptionsMenuFixPack       [behavior] fix pack declares no default_options and no option items, and none of the 8 moved ids is in its registry
+[SMRTest] PASS  OptionsMenuFixPack       [behavior] fix pack declares no default_options and no option items, and none of the 8 moved ids is in its registry
+[mod] [SMRTest] SKIP  SaveRescueCleanPass      [behavior] save-rescue mod not installed (separate mod — not a failure)
+[SMRTest] SKIP  SaveRescueCleanPass      [behavior] save-rescue mod not installed (separate mod — not a failure)
+[mod] [SMRTest] SKIP  SaveRescueStandDown      [behavior] save-rescue mod not installed (separate mod — not a failure)
+[SMRTest] SKIP  SaveRescueStandDown      [behavior] save-rescue mod not installed (separate mod — not a failure)
+[mod] [SMRTest] SKIP  SaveRescueIdempotent     [behavior] save-rescue mod not installed (separate mod — not a failure)
+[SMRTest] SKIP  SaveRescueIdempotent     [behavior] save-rescue mod not installed (separate mod — not a failure)
+[mod] [SMRTest] SKIP  SaveRescueHealBounds     [behavior] save-rescue mod not installed (separate mod — not a failure)
+[SMRTest] SKIP  SaveRescueHealBounds     [behavior] save-rescue mod not installed (separate mod — not a failure)
+[mod] [SMRTest] SKIP  SaveRescueSelfClean      [behavior] save-rescue mod not installed (separate mod — not a failure)
+[SMRTest] SKIP  SaveRescueSelfClean      [behavior] save-rescue mod not installed (separate mod — not a failure)
+[mod] [SMRTest] SKIP  SaveRescueResidueTable   [behavior] save-rescue mod not installed (separate mod — not a failure)
+[SMRTest] SKIP  SaveRescueResidueTable   [behavior] save-rescue mod not installed (separate mod — not a failure)
+[mod] [SMRTest] ---- 75 PASS, 1 FAIL, 24 SKIP, 0 ERROR ----
+[SMRTest] ---- 75 PASS, 1 FAIL, 24 SKIP, 0 ERROR ----
+[mod] [SMRAUTO] END
+[SMRAUTO] END
+[mod] [SMRAUTO] done
+[SMRAUTO] done
+						Lua 0:01:08:909
+
+
+Stopping the game threads from the Lua side with exit code 0.
+
+					Render 0:01:08:910
+
+
+Stopping the game threads after receiving WM_QUIT.
+
+					Render 0:01:09:210
+
+
+*** Debug::Done()
+Time (ms)	69210
+
+
