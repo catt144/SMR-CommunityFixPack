@@ -209,6 +209,7 @@ return PlaceObj('ModDef', {
 		"Code/Fix_AutomationLawCompensation.lua",
 		"Code/Fix_LocalizedUIText.lua",
 		"Code/Fix_SpaceYDroneCapBullet.lua",
+		"Code/Fix_LandscapeCostRefresh.lua",
 		"Code/90_SaveSanitizer.lua",
 	},
 	-- ⭐⭐ WRITTEN BY THE UPLOADS, 2026-08-20 — THESE ARE HOW EVERY FUTURE UPDATE

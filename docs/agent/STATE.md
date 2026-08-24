@@ -6,6 +6,22 @@ History newest-first in `docs/archive/SESSION_LOG.md`; full pre-eviction STATE =
 Defect truth `agent/bugs/INDEX.md` · facts `agent/facts/INDEX.md` · doc map `docs/README.md`.
 Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/reports/CHAIN_METHOD.md`.
 
+## Post-launch issues — field reports against the LIVE listings (newest first; entries carry the derivation)
+- **F104 ⛔ NOT OURS, pending closure.** Passage Network's `CreateDomeNetworks` override returns nothing;
+  vanilla indexes the nil (`Passage.lua:1117`). ⭐ CONFIRMED live on the rig 08-23. Steam+Paradox builds
+  byte-identical, so no fixed build exists. We are NAMED only as a stack pass-through (`EF-065`(a)).
+  Owed: reporter reply + their confirmation, then close. ⚠️ PN is ENABLED on the rig (`H-08`) — untick
+  before any clean leg. Its unmaintained state is logged as an opt-in candidate in THAT repo's FUTURE_IDEAS.
+- **F105 ✅ FIXED 2026-08-24** (`Fix_LandscapeCostRefresh`; owner ruled in-session "number 1 fix priority",
+  checklist 72 receipted). Boot `applied` verified, 0 errors (`archive/f105_*.log`). ⛔ Entry corrected:
+  triggers are 3 techs ONLY (laws/story bits never sweep); `ClearWasteRockConstructionSite` shares the crash.
+  ⚠️ Live listings now ONE module behind the tree — a 1.0.x upload sitting is owed at the owner's convenience.
+- **F106 ⚠️ NEW, derived-unmeasured (checklist 74).** The class builder COPIES inherited methods into
+  subclass tables, so post-build parent-class wraps miss subclass instances; `Fix_SmallLandscapeSites`
+  (F33) is suspect no-op. One console read settles it (probe in the entry); rides the next sitting.
+- **Blame surface (checklist 73)** — `EF-065`(a) fires whenever ANY error throws under one of our ~60
+  wrapped targets. 2 field sightings in one day, neither ours. Options tiered on checklist 73.
+
 ## Now
 - ⭐⭐⭐ **PUBLISHED 2026-08-20 — ④ IS DONE, BOTH PORTALS, by the owner.** Paradox Mods `pdx_id` **156049**
   ships **1.0.0**; Steam `steam_id` **3787202810** ships **1.0.2** — same 78 modules, byte-identical code.
@@ -22,8 +38,9 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 - ⭐⭐ **`C50`+`C51` are `tested-attended` (08-20, EN+DE, owner at the keyboard): 77 applied, suite 74/0/24/0 of 98.**
   Report `reports/04_ATTENDED_SITTING.md`; logs `archive/link4{en,de,lang}_*`.
   ⛔ SKIPPED BY NAME: `C50`'s challenge landing-spot site, and the in-game Mission Profile on a SpaceY colony.
-- **This repo is CLOSED once the owner uploads** — no queued 1.0.1; next effort is the **opt-in pack**
-  (owner 08-20, checklist 68); its kickoff reads that repo's own STATE + `reports/PARKED_OPTIN_REFERENCES.md`.
+- **A 1.0.x update IS queued since 2026-08-24** (F105's module; supersedes 08-20's "no queued 1.0.1").
+  After that upload the next effort is the **opt-in pack** (owner 08-20, checklist 68); its kickoff reads
+  that repo's own STATE + `reports/PARKED_OPTIN_REFERENCES.md`.
 - ⛔ **Shipping artifact: NO PACKED `.fpk` MATCHES THIS TREE.** Expected shape **82 files = 78 `Code/*.lua` +
   `items.lua` + `metadata.lua` + `LICENSE` + `preview.png`** (`tools/pack_predict.py`, emitted).
   ⛔ **The md5/bytes exist only after the owner packs at the sitting — never quote one**; the blank row that
@@ -36,8 +53,8 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   53 (harden now or in 1.0.1; rec 1.0.1) · 51 (both-packs leg timing; rec after launch) · 50 (chain-vs-replace
   wording) · 47 (two modder-page wordings) · 43 (opt-in pack re-tick) · 41 (dialog wording + sweep cap 5→8) ·
   40 (`smr_shuttles` name) · 39 (dialog re-fire) · 37 Q2 (Steam, after Paradox).
-- Watches: `EF-066`'s unswept question — the pack wraps ~60 (class, method) targets and no audit has enumerated
-  which have shipped SUBCLASS overrides the wrap never reaches (under-coverage only, never new harm; opt-in-era) ·
+- Watches: `EF-066`'s unswept question is now **F106 + checklist 74** (sharpened 08-24: the copy branch
+  misses ALL subclass instances, not just overriders; F33 the first suspect) ·
   ⚠️ German is the ONLY localisation ever SEEN; the other 7 packs stay CSV-measured (`EF-039`) · TestKit wave-12
   clause 1 taxonomy (other repo, `EF-066`) · C47 speed thread (descending ladder, unrun) · C48 CANDIDATE (opt-in
   territory; no seed-family fix code here) · F02/F78/F81 organic · riders C42/F99/F80/F96-R2 post-release ·
@@ -89,9 +106,9 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 ## Build state — `python tools/doccheck.py --emit-counts`, never hand-typed
 ```
 BUILD STATE (emitted by tools/doccheck.py)
-- modules: 77 registered (77 default-active, 0 optional-gated files)
-- Code/*.lua files: 78
+- modules: 78 registered (78 default-active, 0 optional-gated files)
+- Code/*.lua files: 79
 - TestKit probes: 98
-- BUGS index rows: 103 F + 12 D + 53 C
+- BUGS index rows: 106 F + 12 D + 53 C
 ```
 Re-emit after any change; game pinned **1.0.7.396349** (`EF-014`).

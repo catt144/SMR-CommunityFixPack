@@ -29,6 +29,117 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### ⭐⭐ 2026-08-24 — F105 IS FIXED ON YOUR WORD, AND BUILDING IT EXPOSED A NEW QUESTION. One receipt, one call.
+
+**The receipt (item 72 — RULED by you, in-session: "This is a number 1 fix
+priority").** `Fix_LandscapeCostRefresh` is built, registered, and boot-verified
+the same session: `[CommunityFixPack] LandscapeCostRefresh: applied`, zero error
+lines, menu-only leg, no save touched (log
+`docs/archive/f105_Mars.exe-20260824-00.08.38.log`; PROBE SWEEP: clean). The
+investigation also **corrected two things the filed entry believed**: the
+Efficiency laws are NOT triggers (only three techs are — NeoConcrete,
+DomeStreamlining, MarsNoveau), and `ClearWasteRockConstructionSite` (plain
+rock-clearing jobs) crashes the same way, not just levelling.
+→ [agent/bugs/F105.md](agent/bugs/F105.md) · report `agent/reports/F105_INVESTIGATION.md`
+**Three things to know, none urgent:**
+* ⚠️ **The live listings are now one module behind this tree** (78 modules vs
+  the shipped 77). Whenever you want it live, it is the normal update sitting:
+  editor save (bumps the version), pack, upload — both portals. Nothing else is
+  queued behind it.
+* `metadata.lua` gained ONE hand-written `code` row (the new module), version
+  untouched — no editor save happened, so H-02 held.
+* ⛔ Still never reproduced on the rig. The 10-minute repro (place a levelling
+  site, research a dome-cost tech, watch `ConstructionSite.lua:673` stay
+  silent) rides your next sitting if you want the attended upgrade.
+
+74. **The new question — some of our fixes may not reach the objects they aim
+    at, and one shipped fix is now a named suspect.** Deriving F105's fix shape
+    forced a read of the engine's class builder: for most class chains it
+    COPIES inherited methods into each subclass at build time, so a wrap the
+    pack installs later on a parent class is invisible to subclass instances.
+    F105's own fix already dodges this (installed per leaf class). But
+    `Fix_SmallLandscapeSites` (F33, the small-site drone crash) wraps exactly
+    such a parent — **derived, not yet measured, its fix may never have run.**
+    → [agent/bugs/F106.md](agent/bugs/F106.md)
+    **What settles it:** ONE console read in any booted colony (the exact line
+    is in the entry). If confirmed, the follow-up is an audit of all ~60
+    class-method wrap targets and per-leaf re-installs where needed.
+    ❓ **Your call:** (a) probe-only at the next sitting, then decide; (b) if
+    confirmed, audit now; (c) if confirmed, audit at the opt-in-era maintenance
+    window (`EF-066`'s original schedule). My recommendation: **(a), then (b)**
+    — F33's crash is player-visible and its fix is currently claimed shipped.
+
+### ⭐⭐ 2026-08-23 — THE FIRST FIELD REPORTS ARRIVED. Two GitHub issues, one reporter, and the pack was named in both. Neither error was ours.
+
+72. ✅ **RULED 2026-08-24, in-session ("number 1 fix priority") — BUILT AND
+    BOOT-VERIFIED the same day; receipt in the 2026-08-24 section above.**
+    ⚠️ Kept as filed for the record; note the recommendation's mechanism was
+    corrected during the build — the single reader wrap could not have reached
+    the landscape classes (F106), so the fix installs per leaf class.
+    **F105 — do we fix the landscaping crash, or leave it?**
+    A real vanilla defect, no mod needed: a terrain-levelling site never
+    initialises `construction_costs_at_start`, so researching any tech that
+    carries a `*_Construction` cost modifier throws. Squarely in charter, and the
+    reporter hit it. ⛔ **We have never reproduced it** — everything we know comes
+    from reading the shipped Lua against their log.
+    → [agent/bugs/F105.md](agent/bugs/F105.md)
+    **Two shapes, both small.** (a) guard the reader — skip the refresh when
+    `construction_costs_at_start` is not a table; covers every subclass with the
+    same gap. (b) initialise the writer — narrower, only fixes what we enumerate.
+    **Recommendation: (a).**
+    ⛔ **Price it post-release, not with the gate** (your 08-20 ruling, item 57):
+    an `items.lua` entry, one boot `applied` line, doccheck counts. Nothing else.
+    **What I'd want before building it:** a rig repro. Place a levelling site,
+    research a dome-cost tech, watch for `ConstructionSite.lua:673`. ~10 minutes.
+    ❓ **Your call:** build it now, build it after a repro, or leave it filed.
+
+73. **The bigger one — we get blamed for other mods' crashes, and it will keep
+    happening.** The engine decides which mod to flag by asking "does this mod's
+    folder name appear anywhere in the crash text" (`Mod.lua:3001-3013`, its own
+    comment calls it a "rough estimation"). We wrap ~60 game functions, so any
+    error thrown *underneath* one of them names us. **Two sightings in one day,
+    neither our defect.** The mod that actually caused F104 can never be named,
+    because its function had already returned when the error happened.
+    → [agent/facts/EF-065.md](agent/facts/EF-065.md) · F104 · F105
+    **Four options, cheapest first — these are not exclusive:**
+    * **(0) Log breadcrumb.** One handler that logs "the throw site is not a pack
+      file". Costs nothing, accuses nobody, saves the next reader a whole session
+      of derivation. *I'd do this regardless.*
+    * **(1) Shrink the blame surface.** Patch leaves, not ancestors.
+      `Fix_MilestoneCrash` replaces `CompleteMilestone`, which sits above the
+      entire milestone→research→every-construction-site fan-out — that is exactly
+      why F105 named us. Patching `Milestone:GetScore` instead does the same
+      repair with almost nothing running underneath. **I checked every other
+      caller: zero ripple** (`Challenges.lua:58` guards `if cs then`, and `0` is
+      truthy). It also deletes a 40-line verbatim copy of vanilla that could drift
+      on a game patch. *Strictly better code; my first pick.*
+    * **(2) Trampoline.** Route call-throughs via a separately-loaded chunk so our
+      file genuinely isn't on the stack while vanilla runs. Needs two boot
+      measurements first (is `load` reachable from mod code; does a custom chunk
+      name reach the traceback). Only for hooks that don't rewrite arguments.
+    * **(3) Own the wording.** Wrap the global `ReportModLuaError`, pass every
+      other mod through untouched, and for our id alone show **our own** message
+      when the throw site isn't ours: "the pack appears in a crash raised in
+      `<file>`, which is not part of the pack — please send the log." **Not
+      suppression** — the player is still told, and told something true.
+    * ⛔ **Rejected, on the record:** `config.DisableErrorReporting` (silences
+      *every* mod, including other authors'), and pre-setting `ReportedMods`
+      (silences us wholesale, before any error exists). Both are the blanket
+      suppression you said to avoid.
+    ❓ **Your call:** which tiers, and whether (2)/(3) touching engine internals
+    for self-defence is inside `FIX_POLICY` at all. That last part is a policy
+    question, not an engineering one, which is why it is here.
+
+    ℹ️ **Ruling already taken and applied (2026-08-23, yours):** we DO name the
+    other mod when answering a reporter. Stating the cause plainly is not
+    slander, and shielding an unmaintained mod is not our job. `FIX_POLICY` §8
+    still binds for *store pages and load-order advice* — this ruling covers
+    issue replies. Worth folding into §8 explicitly on its next edit.
+
+    ⚠️ **doccheck, copied verbatim:** `STATE.md is 9505 bytes, warn threshold is
+    9216 — copy this line VERBATIM into the owner report; the owner fires
+    agent/prompts/STATE_EVICTION.md`
+
 ### ⭐⭐⭐ 2026-08-20 — IT IS PUBLISHED, ON BOTH PORTALS. The ids are committed. One number came out differently on each store, and that was mechanical, not a mistake.
 
 71. ⭐⭐⭐ **Live.** Paradox Mods **156049** · Steam Workshop **3787202810**. Both

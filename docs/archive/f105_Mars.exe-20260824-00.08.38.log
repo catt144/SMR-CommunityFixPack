@@ -1,0 +1,164 @@
+					Render 0:00:00:006
+*** executable info
+Timestamp:     	6a22b86d
+Date:          	Fri Jun  5 07:52:13 2026
+Command line:  	
+Compiler:      	194435214, 142 (VS 2019) or newer
+
+
+*** hardware info
+CPU name      	Intel(R) Core(TM) i7-14700K
+CPU MHz       	3418
+CPU cores     	20/28
+Phys. Memory   	65278 MBytes
+Memory In Use  	46%
+Disk Free      	749183 MBytes
+
+
+*** OS info
+OS:            	Windows 11
+Version:       	10.0.26100 
+
+
+*** Debug::Init()
+
+
+					Render 0:00:00:093
+Steam initialized (AppId 3215050, Beta branch ???)
+					Render 0:00:00:095
+Drive type for game installation: SSD, savegames: SSD
+					Render 0:00:00:096
+Language: English
+					Render 0:00:01:578
+*** graphics info
+GPU                            	NVIDIA GeForce RTX 4080 Feature Level: 12.1 {  DoublePrecisionFloatShaderOps: 1 OutputMergerLogicOp: 1 MinPrecisionSupport: 2 TiledResourcesTier: 4 ResourceBindingTier: 3 PSSpecifiedStencilRefSupported: 0 TypedUAVLoadAdditionalFormats: 1 ROVsSupported: 1 ConservativeRasterizationTier: 3 MaxGPUVirtualAddressBitsPerResource: 40 StandardSwizzle64KBSupported: 0 CrossNodeSharingTier: 0 CrossAdapterRowMajorTextureSupported: 0 VPAndRTArrayIndexFromAnyShaderFeedingRasterizerSupportedWithoutGSEmulation: 1 ResourceHeapTier: 2 NotZeroedPools: 1 UMA: 0 UnalignedBlockTextures: 1}
+API                            	d3d12
+GPU Driver Version             	32.0.16.1074
+GPU Driver Package Version     	610.74
+GPU Dedicated Video Memory     	16048 MB
+					Render 0:00:01:720
+
+Libs: Network, Sequences, MouseTrackWin, DumbAI, MapGen, Paradox, TriggersAndEvents, Notifications, Research, Resources 
+
+					Render 0:00:01:920
+
+Platform: desktop, editor, goldmaster, paradox, pc, steam
+
+					Render 0:00:02:555
+*** audio info
+Audio Endpoint                 	Headphones (3- A50 Game)
+						Lua 0:00:02:581
+Lua revision: 396349
+Assets revision: 31031
+Steam AppID: 3215050
+Build version: 1.0.7.396349
+Build branch:  Release
+						Lua 0:00:17:581
+Account storage loaded successfully in 2 ms
+						Lua 0:00:17:584
+[mod] Loaded mod def Passage Network (id iooW34Y, v0.00-014) packed from pops
+[mod] Loaded mod def Geyser Removal (id DLav7z7, v1.00-012) packed from steam
+[mod] Loaded mod def Flexible Passages (id FlexiblePassages, v0.00-011) packed from steam
+[mod] Loaded mod def Start with all Breakthroughs (id dwAWmXz, v0.00-127) packed from steam
+[mod] Loaded mod def Relaunched Fix Pack (id SMR_CommunityFixPack, v1.00-002) unpacked from appdata
+[mod] Loaded mod def Relaunched Fix Pack: Opt-In Modules (id SMR_CommunityOptInPack, v1.00-000) unpacked from appdata
+[mod] Loaded mod def No Passage Penalty (Game Rule) (id QfCw4mN, v0.00-006) packed from steam
+						Lua 0:00:17:585
+[mod] Loaded mod def Community Fix Pack — Test Kit (id SMR_CommunityFixPackTestKit, v0.00-001) unpacked from appdata
+						Lua 0:00:17:931
+[mod] [CommunityFixPack] CaveInsNoDisasters: applied
+[mod] [CommunityFixPack] MeteorFrequency: applied
+[mod] [CommunityFixPack] UpgradeModifierLeak: applied
+[mod] [CommunityFixPack] NightShiftWork: applied
+[mod] [CommunityFixPack] MilestoneCrash: applied
+						Lua 0:00:17:932
+[mod] [CommunityFixPack] WispRewards: applied
+[mod] [CommunityFixPack] TouristApplicants: applied
+[mod] [CommunityFixPack] TrainsToVoid: applied
+[mod] [CommunityFixPack] LanderEmptyLaunch: applied
+[mod] [CommunityFixPack] LanderCargoRatchet: applied
+[mod] [CommunityFixPack] LanderReturnFuel: applied
+[mod] [CommunityFixPack] ShelterReflex: applied
+[mod] [CommunityFixPack] BrokenTrackSalvage: applied
+						Lua 0:00:17:933
+[mod] [CommunityFixPack] TrackSalvageWipe: applied
+[mod] [CommunityFixPack] LakeEntombment: applied
+[mod] [CommunityFixPack] GhostFarmOxygen: applied
+[mod] [CommunityFixPack] RocketDroneChurn: applied
+[mod] [CommunityFixPack] ShuttleTransportCache: applied
+[mod] [CommunityFixPack] VacuumWalks: applied
+[mod] [CommunityFixPack] ArrivalDeaths: applied
+						Lua 0:00:17:934
+[mod] [CommunityFixPack] DroneUnreachableForever: applied
+[mod] [CommunityFixPack] StaleReservations: applied
+[mod] [CommunityFixPack] CrystalMysteryHang: applied
+[mod] [CommunityFixPack] TouristSatisfaction: applied
+[mod] [CommunityFixPack] TrainPlatformWedge: applied
+[mod] [CommunityFixPack] LowStorageWarning: applied
+[mod] [CommunityFixPack] CommandCenterNumbers: applied
+[mod] [CommunityFixPack] DomeOverviewHighlight: applied
+						Lua 0:00:17:935
+[mod] [CommunityFixPack] TrainCargoDumping: applied
+[mod] [CommunityFixPack] UniversityOvertraining: applied
+[mod] [CommunityFixPack] DestroyedTunnels: applied
+[mod] [CommunityFixPack] DustSicknessBiorobots: applied
+[mod] [CommunityFixPack] DustSicknessDamage: applied
+[mod] [CommunityFixPack] GeneForging: applied
+[mod] [CommunityFixPack] MirrorSphereSite: applied
+[mod] [CommunityFixPack] PayloadTemplateRefill: applied
+[mod] [CommunityFixPack] AsteroidLanderAvailable: applied						Lua 0:00:17:936
+
+[mod] [CommunityFixPack] ShuttleHubOffAvailable: applied
+[mod] [CommunityFixPack] FreedHousingNotice: applied
+[mod] [CommunityFixPack] DomeFreeSpaceMismatch: applied
+[mod] [CommunityFixPack] SmallLandscapeSites: applied
+[mod] [CommunityFixPack] LandscapeUnitFilter: applied
+						Lua 0:00:17:937
+[mod] [CommunityFixPack] RocketInteractGuard: applied
+[mod] [CommunityFixPack] TrackConnectorPingPong: applied
+[mod] [CommunityFixPack] TrackTunnelPowerBridge: applied
+[mod] [CommunityFixPack] GridGlobalStorage: applied
+[mod] [CommunityFixPack] LastTransmissionStorage: applied
+[mod] [CommunityFixPack] GraphConsumedCaption: applied
+[mod] [CommunityFixPack] MoraleComfortTooltip: applied
+[mod] [CommunityFixPack] TrainWaitTime: applied
+[mod] [CommunityFixPack] FounderTraitNotification: applied
+						Lua 0:00:17:938
+[mod] [CommunityFixPack] StorageRateModifiers: applied
+[mod] [CommunityFixPack] SequenceLatents: applied
+[mod] [CommunityFixPack] IndependenceTerraforming: applied
+[mod] [CommunityFixPack] TrackSalvageRefund: applied
+[mod] [CommunityFixPack] LayoutTechLock: applied
+[mod] [CommunityFixPack] TrainMinors: applied
+[mod] [CommunityFixPack] DroneTransportMinors: applied
+[mod] [CommunityFixPack] AnomalyCaveInMap: applied
+						Lua 0:00:17:939
+[mod] [CommunityFixPack] TechDescriptionBuilding: applied
+[mod] [CommunityFixPack] BombardmentSpread: applied
+[mod] [CommunityFixPack] ExtenderFlapChurn: applied
+[mod] [CommunityFixPack] DisasterPredictionLeak: applied
+[mod] [CommunityFixPack] MeteorStormWedge: applied
+[mod] [CommunityFixPack] RainsDeadlock: applied
+[mod] [CommunityFixPack] FirstAsteroidPrefabs: applied
+[mod] [CommunityFixPack] SaintBlessing: applied
+						Lua 0:00:17:940
+[mod] [CommunityFixPack] DustDevilsDescrMap: applied
+[mod] [CommunityFixPack] AstrogeologistExtractors: applied
+[mod] [CommunityFixPack] SinkholeIndestructible: applied
+[mod] [CommunityFixPack] DustStormUndergroundBreaks: applied
+[mod] [CommunityFixPack] DustDevilSpawnGate: applied
+[mod] [CommunityFixPack] ExoticDepositSign: applied
+[mod] [CommunityFixPack] AutomationLawCompensation: applied
+[mod] [CommunityFixPack] LocalizedUIText: Back to Earth rollover wrapped on 1 rocket class(es): customUniversalRocket
+						Lua 0:00:17:941
+[mod] [CommunityFixPack] LocalizedUIText: applied
+[mod] [CommunityFixPack] SpaceYDroneCapBullet: applied
+[mod] [CommunityFixPack] LandscapeCostRefresh: applied
+[mod] [CommunityFixPack] SaveSanitizer: applied
+						Lua 0:00:17:942
+[mod] [SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+[mod] [SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[mod] [SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+[SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()

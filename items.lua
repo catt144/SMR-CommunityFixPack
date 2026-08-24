@@ -346,6 +346,12 @@ return {
 		'name', "Fix_SpaceYDroneCapBullet",
 		'CodeFileName', "Code/Fix_SpaceYDroneCapBullet.lua",
 	}),
+	-- Added 2026-08-24 (F105, post-release maintenance — owner ruling, checklist
+	-- 72), same rule as above: hand-written, in metadata.lua's `code` position.
+	PlaceObj('ModItemCode', {
+		'name', "Fix_LandscapeCostRefresh",
+		'CodeFileName', "Code/Fix_LandscapeCostRefresh.lua",
+	}),
 	PlaceObj('ModItemCode', {
 		'name', "90_SaveSanitizer",
 		'CodeFileName', "Code/90_SaveSanitizer.lua",
