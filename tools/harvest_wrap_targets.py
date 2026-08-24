@@ -155,15 +155,9 @@ def harvest():
 # (module, class, method) -> reason. Every entry carries its own justification;
 # an entry without a Src citation (or a filed defect id) does not belong here.
 CHECK_ALLOWLIST = {
-    # The pack's ONE nil-prev defect, filed and measured — allowlisted so the
-    # tree stays committable while checklist 74 decides the repair. Remove
-    # these three rows in the commit that repairs F107.
-    ("Fix_LandscapeCostRefresh", "LandscapeConstructionSite", "RefreshConstructionResources"):
-        "F107 — filed defect, awaiting checklist 74; remove with the repair",
-    ("Fix_LandscapeCostRefresh", "ClearWasteRockConstructionSite", "RefreshConstructionResources"):
-        "F107 — filed defect, awaiting checklist 74; remove with the repair",
-    ("Fix_LandscapeCostRefresh", "TerrainPaintConstructionSite", "RefreshConstructionResources"):
-        "F107 — filed defect, awaiting checklist 74; remove with the repair",
+    # (F107's three leaf rows lived here while checklist 74 was open. The repair
+    # landed 2026-08-24 — one wrap on the DECLARING class, which the Require
+    # block names — so the rows are gone rather than allowlisted, as intended.)
     # Pre-rule wrap sites verified benign at Src 2026-08-24 (each class DECLARES
     # the method it wraps, so `prev` is real): audit of chain f106-dispatch.
     ("Fix_DroneTransportMinors", "DroneControl", "UpdateRocketsInternal"):

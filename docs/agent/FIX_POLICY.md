@@ -109,7 +109,11 @@ Every fix goes through `SMRFixPack.Register(id, {title, apply})` (Code/00_Core.l
   capture is outside the check and guards existence with the inline
   sanity-check this section already requires). Pre-rule sites verified benign
   at Src 2026-08-24 are allowlisted in the tool with their citations; F107's
-  three rows are allowlisted as a FILED DEFECT and leave with its repair.
+  three rows were allowlisted as a FILED DEFECT and LEFT with its repair the
+  same day (checklist 74(a), 2026-08-24) — the repaired module installs on the
+  pair its `Require` block already named, so it needs no exemption. That is the
+  intended lifecycle for an allowlist entry carrying a defect id: a receipt for
+  an open case, never a permanent waiver.
 - ⛔ **NO `apply()` MAY ASSUME A COLD BOOT (the F87 rule, 2026-07-31).** A mod is
   never auto-enabled: the player ticks it at the main menu of a process that is
   already running, the engine does an **in-place reload**

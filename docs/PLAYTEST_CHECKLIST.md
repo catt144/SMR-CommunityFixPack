@@ -77,6 +77,38 @@ rock-clearing jobs) crashes the same way, not just levelling.
   site, research a dome-cost tech, watch `ConstructionSite.lua:673` stay
   silent) rides your next sitting if you want the attended upgrade.
 
+### ⭐ 2026-08-24 — F107 IS REPAIRED. One module, one wrap, doccheck green — and one thing to check I read you right.
+
+76. ✅ **BUILT on your item-74 (a), same session — `Fix_LandscapeCostRefresh`
+    now installs ONE chained wrap on `ConstructionSite` instead of three on the
+    landscape leaves.** `prev` is the real function (`ConstructionSite` is the
+    only class in the tree that declares `RefreshConstructionResources`,
+    `ConstructionSite.lua:665`), so the delegation half is live code again.
+    → [agent/bugs/F107.md](agent/bugs/F107.md) (`built`) · `Code/Fix_LandscapeCostRefresh.lua`
+    * **The `Require` block already named the pair we now install on**, which is
+      what `FIX_POLICY` §2 asks for — so the three F107 rows are **deleted** from
+      `tools/harvest_wrap_targets.py`'s allowlist rather than kept. `WRAP CHECK:
+      0 wrap site(s) outside Require, 5 allowlisted`. doccheck **GREEN**.
+    * **The widening was re-verified at Src by this session, independently**, not
+      taken on the audit's word: `GatherConstructionResources` creates
+      `construction_resources` and `construction_costs_at_start` together
+      (`:639-640`), both class defaults are `false` (`:13`, `:32`), so the only
+      ordinary-site state where the widened guard fires is the ungathered one —
+      where vanilla's own body raises at `:670`. Same verdict: it can only ever
+      prevent an error. That derivation is now in the module header.
+    * **The header's refuted F106 premise and the banned `classes.lua:986-988`
+      citation are gone**, replaced by the measured file-load ordering; the
+      `Track.lua:651` "only writer" precision is in too.
+    ⚠️ **NOT boot-verified — that is why F107 says `built` and not `fixed`.**
+    Owed, and it is ~2 minutes of your next launch: one boot showing
+    `[CommunityFixPack] LandscapeCostRefresh: applied` with no error lines, and
+    TestKit's `LandscapeCostGuard` re-run — **clause 2 must flip to PASS and
+    clause 1 must STAY PASS.** A run where clause 1 broke would mean the repair
+    traded one defect for another, and nothing else checks that.
+    ❓ **The one thing to confirm: I read your "I'd take (a)" as the ruling and
+    built it.** If that was a leaning rather than a decision, say so — it is one
+    `git revert` and nothing outside this tree has moved.
+
 74. ✅ **MEASURED AND ANSWERED 2026-08-24 — and the answer is the opposite of
     the question. It cost you nothing: the run was unattended.**
     **The good news first: nothing was broken by the mechanism I was worried
@@ -124,9 +156,9 @@ rock-clearing jobs) crashes the same way, not just levelling.
       take the game's function from the class that actually declares it. Smallest
       diff, no behaviour-surface change, but it leaves the shape that caused the
       bug in place.
-    ⛔ I have **not** built any of these. The chain that found it was forbidden
-    from writing fix code, deliberately, so that the finding and the fix are
-    separate decisions.
+    ✅ **RULED (a) and BUILT 2026-08-24 — receipt is item 76 above.**
+    ⛔ (Historic:) the chain that found it was forbidden from writing fix code,
+    deliberately, so that the finding and the fix stayed separate decisions.
 
     ⚠️ **One thing this run canNOT tell you, and no run so far can.** The sweep
     lists which subclasses do not receive one of our patches; it does **not**
