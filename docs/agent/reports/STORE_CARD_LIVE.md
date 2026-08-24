@@ -1,5 +1,29 @@
 # Store card — the LIVE page body, reworked 2026-08-20 on the owner's brief
 
+## ⭐⭐ 2026-08-24 — THESE TWO BLOCKS ARE NOW OPTIONAL POLISH, NOT THE PAGE BODY
+
+**Owner ruling, after the 1.0.x upload wiped the hand-pasted Paradox page.** Both
+portals refill the page from `metadata.lua`'s `description` on *every* upload, so
+a pasted body can never survive one — and the paste was never the whole job
+either: **the headings and bold do NOT come across with the text** (owner,
+measured — they were applied by hand with the editor's H/B buttons). So the old
+arrangement cost a paste *plus* a full re-format, on both stores, every release.
+
+⇒ **`metadata.lua`'s `description` now carries the card body itself.** The
+automatic result is complete and correct rather than a 779-char summary. These
+two blocks remain as the *styled* versions — re-apply them when you want the
+formatting, never because the page is wrong.
+
+⛔ **The shipped string is PORTAL-NEUTRAL and must stay that way.** Two passages
+here are false on the other store and were rewritten out of it:
+* *"This page has no comment section"* — true on Paradox, false on Steam.
+* the trailing *"Also on the Steam Workshop"* cross-link — self-referential there.
+⇒ **Never paste either block into `metadata.lua` verbatim.** The shipped body is
+5,124 chars; ⚠️ that length is unverified against the upload API, and if an upload
+ever rejects it the field reverts and the report says so.
+
+---
+
 ⭐ **This supersedes `RELEASE_DESCRIPTION_FIXPACK.md` for the PAGE BODY only.**
 That card stays as the pre-launch record and as the source of the wording this
 one inherits. ⛔ It does **not** supersede `metadata.lua`'s `description` — that

@@ -159,9 +159,17 @@ default, so it must stand alone as a page body even though the card replaces it.
   3. ⛔ **It is HISTORICAL.** It describes the version it ships with, forever —
      never write it in the present tense of the pack as a whole.
   ⛔ And do not let it keep saying `"Initial release."` after the first patch.
-* **`description` / `short_description`** — only if the fix changes a *claim*
-  (e.g. the judgment-call count, or a promise about save safety). Most fixes do
-  not touch these.
+* **`description`** — ⭐⭐ **CHANGED 2026-08-24: this is the CARD BODY now, not a
+  summary.** Both portals refill their page from it on every upload, so shipping
+  the card here is what makes the automatic result correct. ⇒ **a fix that earns
+  a headliner on the card must be added HERE too**, not only to
+  `STORE_CARD_LIVE.md`, or the live pages will silently lag the record.
+  ⛔ It is PORTAL-NEUTRAL: never paste either portal block in verbatim — the
+  Paradox one claims "this page has no comment section" and cross-links to Steam,
+  both false on the other store.
+  ⚠️ The count word lives here too now. Re-derive it with §1's `grep -c`.
+* **`short_description`** — the PDX-only Summary. Only if the fix changes a
+  *claim* (the judgment-call count, a promise about save safety). Most do not.
 * **`code` list** — `H-10`: a module absent from `items.lua` **ships absent**.
   `python tools/upload_preflight.py` proves the two lists match, in order.
 
