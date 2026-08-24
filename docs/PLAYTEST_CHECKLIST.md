@@ -53,6 +53,28 @@ completed tests move whole to
     File → Pack Mod (⛔ the console is not a route).
     ⚠️ **Item 74 comes first** — it decides whether the module you are uploading
     is the repaired one.
+    ✅ **Item 74 is now done (ruled (a), built — item 76), so 75 is the only
+    thing between the tree and the upload.**
+
+    ℹ️ **Drafted so this is a yes/no, not a writing task.** If you take the
+    reword, `H-02` in [agent/STATE.md](agent/STATE.md) becomes, verbatim:
+    > **H-02** `metadata.lua` is **FROZEN between sittings** — no version bump,
+    > no Mod Editor save, ever, EXCEPT inside an owner-run upload sitting, where
+    > the bump is the point (every editor save runs `version = version + 1`,
+    > `Mod.lua:967`). ⛔ The accident this still prevents is a stray editor save
+    > silently bumping the version while no upload is happening, which desyncs
+    > the two portals further (checklist 71). An agent may never open the editor;
+    > only the owner, at a sitting, and the sitting ends the exemption.
+    ⛔ **An agent cannot apply this** — it is your ruling to make, which is the
+    whole reason this item exists. Say the word and it lands in one edit.
+
+    ⚠️ **Unrelated, and it needs your hands too — the reporter's GitHub issue
+    numbers were never captured.** F104 and F105 both cite "GitHub, Keelai" with
+    no issue number, so neither entry can be found from the issue or vice versa,
+    and F105's issue is titled something like *"Error when completing
+    milestone"* while our entry is titled after the cause — the two do not match
+    by search. Paste the two numbers/URLs and they go into the entries' front
+    matter.
 
 ### ⭐⭐ 2026-08-24 — F105 IS FIXED ON YOUR WORD, AND BUILDING IT EXPOSED A NEW QUESTION. One receipt, one call.
 
