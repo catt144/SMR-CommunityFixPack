@@ -108,7 +108,7 @@ return PlaceObj('ModDef', {
 	-- ⚠️ `version_minor` is absent below because `SaveDef` omits default-valued
 	-- properties — it was `0`, and `PackVersion` still renders
 	-- version_major.version_minor.version.
-	'version', 2,
+	'version', 3,
 	'version_major', 1,
 	'lua_revision', 350453,
 	-- saves made with the pack load fine without it (FIX_POLICY §3), so don't
@@ -250,10 +250,10 @@ return PlaceObj('ModDef', {
 	-- on every future upload, and restoring them is part of the writeback step
 	-- (`reports/RELEASE_PORTAL_PREP.md` §0.5(e)).
 	'saved_with_revision', 396349,
-	'saved', 1787277099,
-	'code_hash', 7654233260534035516,
+	'saved', 1787608530,
+	'code_hash', 8024321609979097845,
 	'pdx_id', 156049,
-	'pdx_version', "1",
+	'pdx_version', "2",
 	'steam_id', "3787202810",
 	'TagGameplay', true,
 })
