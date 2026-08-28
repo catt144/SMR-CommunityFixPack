@@ -8,6 +8,28 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-08-28 — F108 filed + verified attended (Steam field report); F106 line evicted here
+
+tags: F108 F106 field-report
+
+**F108 ✅ FIXED + VERIFIED-ATTENDED.** Steam Workshop field report (Russia playthrough): Extractor AI
+caps STAFFED Metals / Rare Metals Extractors at 50, so Russia's `ExtractorPerformance` sponsor goal
+(3 @ 160) is permanently unreachable once the breakthrough is researched. Mechanism was already on
+file as F36's supporting analysis — `automation=1` / `auto_performance=50` on the MetalsExtractor +
+PreciousMetalsExtractor labels, and `Workplace:GetWorkshiftPerformance` returns the flat 50 above the
+worker loop (`Workplace.lua:197`); the goal reads `extractor.performance >= 160` (`SponsorGoals.lua:467`,
+Roscosmos `goal_4` 3/160). Fix `Code/Fix_ExtractorStaffedPerformance.lua` (owner ruling: FLOOR not
+ceiling) — a §1.4 chained post-wrapper on `GetWorkshiftPerformance`, scoped `MetalExtractorWorkplace`,
+composing with C39's wrapper on the same method. Attended A/B, owner at the keyboard
+(`archive/f108_attended_Mars.exe-20260828-16.41.41.log`): a fully-staffed extractor read 119 →
+(research Extractor AI) → **122, not 50**, workers held 12; a neighbour with all work spots blocked read
+**50** (the floor). NOT on the live listings — ships with the queued 1.0.x alongside F105/F107. Entry: F108.md.
+
+**Evicted from STATE.md (now closed, kept here verbatim):**
+- **F106 ✅ CLOSED — REFUTED 08-24 by measurement**, filed and refuted same day. The pack applies at file-LOAD,
+  BEFORE the builder (`00_Core.lua:452` < raise `lib.lua:371`), so the builder copies OUR wrap down; F33 clean.
+  ⛔ `classes.lua:986-988` states the split INVERTED — never cite it. ⛔ Only `DataPatch` waits for ClassesBuilt.
+
 ## 2026-08-20 — the close-out chain ran end to end and the verdict is SHIP; STATE evicted to a kernel again
 
 tags: item-34 item-37 item-39 item-40 item-41 item-43 item-47 item-50 item-51

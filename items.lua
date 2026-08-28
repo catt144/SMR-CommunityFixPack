@@ -352,6 +352,12 @@ return {
 		'name', "Fix_LandscapeCostRefresh",
 		'CodeFileName', "Code/Fix_LandscapeCostRefresh.lua",
 	}),
+	-- Added 2026-08-28 (F108, post-release maintenance — owner ruling, Steam field
+	-- report), same rule as above: hand-written, in metadata.lua's `code` position.
+	PlaceObj('ModItemCode', {
+		'name', "Fix_ExtractorStaffedPerformance",
+		'CodeFileName', "Code/Fix_ExtractorStaffedPerformance.lua",
+	}),
 	PlaceObj('ModItemCode', {
 		'name', "90_SaveSanitizer",
 		'CodeFileName', "Code/90_SaveSanitizer.lua",

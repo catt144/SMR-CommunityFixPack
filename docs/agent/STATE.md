@@ -7,6 +7,13 @@ Defect truth `agent/bugs/INDEX.md` · facts `agent/facts/INDEX.md` · doc map `d
 Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/reports/CHAIN_METHOD.md`.
 
 ## Post-launch issues — field reports against the LIVE listings (newest first; entries carry the derivation)
+- **F108 ✅ FIXED + VERIFIED-ATTENDED 2026-08-28 — Steam field report; NOT ON LIVE LISTINGS (ships with queued 1.0.x).**
+  Extractor AI (`automation=1`/`auto_performance=50` on MetalsExtractor+PreciousMetalsExtractor labels) caps STAFFED
+  extractors at 50 via `Workplace.lua:197`, so Russia's `ExtractorPerformance` goal (3 @ 160, `SponsorGoals.lua:467`,
+  Roscosmos goal_4) is permanently unreachable once researched. Fix `Fix_ExtractorStaffedPerformance` (owner: FLOOR not
+  ceiling) — chained post-wrapper, scoped `MetalExtractorWorkplace`, composes with C39. ⭐⭐ Attended A/B
+  (`archive/f108_attended_Mars.exe-20260828-16.41.41.log`): staffed 119→(research)→**122 not 50**, workers held 12;
+  unmanned control **50** (floor). Mechanism was F36's supporting analysis. Entry F108.md.
 - **F104 ✅ CLOSED 08-24 — NOT OURS, and fully discharged.** Reply POSTED on GitHub issue **#1** 03:40Z,
   issue closed 06:01Z (`completed`), **reporter CONFIRMED 19:24Z** ("i had a hunch that mod might be the
   problem but thanks for checking"). Passage Network's `CreateDomeNetworks` override returns nothing;
@@ -37,9 +44,6 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   MEASURED unattended (`archive/f107_*.log`): suite **76/0/24/0** of 100, gate 78/78, clause 1 STILL PASS ×3,
   new clause 3 proves the widening (ungathered ok, gathered `set_to=90 start_cost=50`), sweep `UNREACHED=3 ⇒ 0`
   and TOTAL `clean=97 ⇒ 98`. Zero unexplained error lines. ⛔ Field route STILL untested (F105).
-- **F106 ✅ CLOSED — REFUTED 08-24 by measurement**, filed and refuted same day. The pack applies at file-LOAD,
-  BEFORE the builder (`00_Core.lua:452` < raise `lib.lua:371`), so the builder copies OUR wrap down; F33 clean.
-  ⛔ `classes.lua:986-988` states the split INVERTED — never cite it. ⛔ Only `DataPatch` waits for ClassesBuilt.
 - **Blame surface (checklist 73)** — `EF-065`(a) fires whenever ANY error throws under one of our
   wrapped targets (**105 measured**, not the ~60 estimated). 2 field sightings 08-23/24, neither ours. Checklist 73.
 
@@ -158,9 +162,9 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 ## Build state — `python tools/doccheck.py --emit-counts`, never hand-typed
 ```
 BUILD STATE (emitted by tools/doccheck.py)
-- modules: 78 registered (78 default-active, 0 optional-gated files)
-- Code/*.lua files: 79
+- modules: 79 registered (79 default-active, 0 optional-gated files)
+- Code/*.lua files: 80
 - TestKit probes: 100
-- BUGS index rows: 107 F + 12 D + 53 C
+- BUGS index rows: 108 F + 12 D + 53 C
 ```
 Re-emit after any change; game pinned **1.0.7.396349** (`EF-014`).

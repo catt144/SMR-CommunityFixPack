@@ -1,0 +1,1571 @@
+					Render 0:00:00:006
+*** executable info
+					Render 0:00:00:007
+Timestamp:     	6a22b86d
+Date:          	Fri Jun  5 07:52:13 2026
+Command line:  	
+Compiler:      	194435214, 142 (VS 2019) or newer
+
+
+*** hardware info
+CPU name      	Intel(R) Core(TM) i7-14700K
+CPU MHz       	3418
+CPU cores     	20/28
+Phys. Memory   	65278 MBytes
+Memory In Use  	50%
+Disk Free      	839039 MBytes
+
+
+*** OS info
+OS:            	Windows 11
+Version:       	10.0.26100 
+
+
+*** Debug::Init()
+
+
+					Render 0:00:00:131
+Steam initialized (AppId 3215050, Beta branch ???)
+					Render 0:00:00:134
+Drive type for game installation: SSD, savegames: SSD
+Language: English
+					Render 0:00:02:174
+*** graphics info
+GPU                            	NVIDIA GeForce RTX 4080 Feature Level: 12.1 {  DoublePrecisionFloatShaderOps: 1 OutputMergerLogicOp: 1 MinPrecisionSupport: 2 TiledResourcesTier: 4 ResourceBindingTier: 3 PSSpecifiedStencilRefSupported: 0 TypedUAVLoadAdditionalFormats: 1 ROVsSupported: 1 ConservativeRasterizationTier: 3 MaxGPUVirtualAddressBitsPerResource: 40 StandardSwizzle64KBSupported: 0 CrossNodeSharingTier: 0 CrossAdapterRowMajorTextureSupported: 0 VPAndRTArrayIndexFromAnyShaderFeedingRasterizerSupportedWithoutGSEmulation: 1 ResourceHeapTier: 2 NotZeroedPools: 1 UMA: 0 UnalignedBlockTextures: 1}
+API                            	d3d12
+GPU Driver Version             	32.0.16.1074
+GPU Driver Package Version     	610.74
+GPU Dedicated Video Memory     	16048 MB
+					Render 0:00:02:326
+
+Libs: Network, Sequences, MouseTrackWin, DumbAI, MapGen, Paradox, TriggersAndEvents, Notifications, Research, Resources 
+
+					Render 0:00:02:535
+
+Platform: desktop, editor, goldmaster, paradox, pc, steam
+
+					Render 0:00:03:285
+*** audio info
+Audio Endpoint                 	Headphones (3- A50 Game)
+						Lua 0:00:03:313
+Lua revision: 396349
+Assets revision: 31031
+Steam AppID: 3215050
+Build version: 1.0.7.396349
+Build branch:  Release
+						Lua 0:00:05:779
+Account storage loaded successfully in 3 ms
+						Lua 0:00:05:796
+[mod] Loaded mod def Relaunched Fix Pack (id SMR_CommunityFixPack, v1.00-003) unpacked from appdata
+[mod] Loaded mod def Community Fix Pack — Test Kit (id SMR_CommunityFixPackTestKit, v0.00-001) unpacked from appdata
+[mod] Loaded mod def Relaunched Fix Pack: Opt-In Modules (id SMR_CommunityOptInPack, v1.00-000) unpacked from appdata
+						Lua 0:00:06:178
+[mod] [SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+[mod] [SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[mod] [SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+[SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+						Lua 0:00:06:184
+[mod] [SMRTest][carry] fixture-carry dump available — run SMRTest.FixtureCarry()
+						Lua 0:00:06:185
+[mod] [CommunityFixPack] CaveInsNoDisasters: applied
+[mod] [CommunityFixPack] MeteorFrequency: applied
+[mod] [CommunityFixPack] UpgradeModifierLeak: applied
+[mod] [CommunityFixPack] NightShiftWork: applied
+[mod] [CommunityFixPack] MilestoneCrash: applied
+[mod] [CommunityFixPack] WispRewards: applied
+[mod] [CommunityFixPack] TouristApplicants: applied
+[mod] [CommunityFixPack] TrainsToVoid: applied
+[mod] [CommunityFixPack] LanderEmptyLaunch: applied
+						Lua 0:00:06:186
+[mod] [CommunityFixPack] LanderCargoRatchet: applied
+[mod] [CommunityFixPack] LanderReturnFuel: applied
+[mod] [CommunityFixPack] ShelterReflex: applied
+[mod] [CommunityFixPack] BrokenTrackSalvage: applied
+[mod] [CommunityFixPack] TrackSalvageWipe: applied
+[mod] [CommunityFixPack] LakeEntombment: applied
+[mod] [CommunityFixPack] GhostFarmOxygen: applied
+[mod] [CommunityFixPack] RocketDroneChurn: applied
+[mod] [CommunityFixPack] ShuttleTransportCache: applied
+						Lua 0:00:06:187
+[mod] [CommunityFixPack] VacuumWalks: applied
+[mod] [CommunityFixPack] ArrivalDeaths: applied
+[mod] [CommunityFixPack] DroneUnreachableForever: applied
+[mod] [CommunityFixPack] StaleReservations: applied
+[mod] [CommunityFixPack] CrystalMysteryHang: applied
+[mod] [CommunityFixPack] TouristSatisfaction: applied
+[mod] [CommunityFixPack] TrainPlatformWedge: applied
+[mod] [CommunityFixPack] LowStorageWarning: applied
+[mod] [CommunityFixPack] CommandCenterNumbers: applied
+[mod] [CommunityFixPack] DomeOverviewHighlight: applied
+						Lua 0:00:06:188
+[mod] [CommunityFixPack] TrainCargoDumping: applied
+[mod] [CommunityFixPack] UniversityOvertraining: applied
+[mod] [CommunityFixPack] DestroyedTunnels: applied
+[mod] [CommunityFixPack] DustSicknessBiorobots: applied
+[mod] [CommunityFixPack] DustSicknessDamage: applied
+[mod] [CommunityFixPack] GeneForging: applied
+[mod] [CommunityFixPack] MirrorSphereSite: applied
+[mod] [CommunityFixPack] PayloadTemplateRefill: applied
+[mod] [CommunityFixPack] AsteroidLanderAvailable: applied
+						Lua 0:00:06:189
+[mod] [CommunityFixPack] ShuttleHubOffAvailable: applied
+[mod] [CommunityFixPack] FreedHousingNotice: applied
+[mod] [CommunityFixPack] DomeFreeSpaceMismatch: applied
+[mod] [CommunityFixPack] SmallLandscapeSites: applied
+[mod] [CommunityFixPack] LandscapeUnitFilter: applied
+[mod] [CommunityFixPack] RocketInteractGuard: applied
+						Lua 0:00:06:190
+[mod] [CommunityFixPack] TrackConnectorPingPong: applied
+[mod] [CommunityFixPack] TrackTunnelPowerBridge: applied
+[mod] [CommunityFixPack] GridGlobalStorage: applied
+[mod] [CommunityFixPack] LastTransmissionStorage: applied
+[mod] [CommunityFixPack] GraphConsumedCaption: applied
+[mod] [CommunityFixPack] MoraleComfortTooltip: applied
+[mod] [CommunityFixPack] TrainWaitTime: applied
+[mod] [CommunityFixPack] FounderTraitNotification: applied
+[mod] [CommunityFixPack] StorageRateModifiers: applied
+						Lua 0:00:06:191
+[mod] [CommunityFixPack] SequenceLatents: applied
+[mod] [CommunityFixPack] IndependenceTerraforming: applied
+[mod] [CommunityFixPack] TrackSalvageRefund: applied
+[mod] [CommunityFixPack] LayoutTechLock: applied
+[mod] [CommunityFixPack] TrainMinors: applied
+[mod] [CommunityFixPack] DroneTransportMinors: applied
+[mod] [CommunityFixPack] AnomalyCaveInMap: applied
+[mod] [CommunityFixPack] TechDescriptionBuilding: applied
+						Lua 0:00:06:192
+[mod] [CommunityFixPack] BombardmentSpread: applied
+[mod] [CommunityFixPack] ExtenderFlapChurn: applied
+[mod] [CommunityFixPack] DisasterPredictionLeak: applied
+[mod] [CommunityFixPack] MeteorStormWedge: applied
+[mod] [CommunityFixPack] RainsDeadlock: applied
+[mod] [CommunityFixPack] FirstAsteroidPrefabs: applied
+[mod] [CommunityFixPack] SaintBlessing: applied
+						Lua 0:00:06:193
+[mod] [CommunityFixPack] DustDevilsDescrMap: applied
+[mod] [CommunityFixPack] AstrogeologistExtractors: applied
+[mod] [CommunityFixPack] SinkholeIndestructible: applied
+[mod] [CommunityFixPack] DustStormUndergroundBreaks: applied
+[mod] [CommunityFixPack] DustDevilSpawnGate: applied
+[mod] [CommunityFixPack] ExoticDepositSign: applied
+[mod] [CommunityFixPack] AutomationLawCompensation: applied
+						Lua 0:00:06:194
+[mod] [CommunityFixPack] LocalizedUIText: Back to Earth rollover wrapped on 1 rocket class(es): customUniversalRocket
+[mod] [CommunityFixPack] LocalizedUIText: applied
+[mod] [CommunityFixPack] SpaceYDroneCapBullet: applied
+[mod] [CommunityFixPack] LandscapeCostRefresh: applied
+[mod] [CommunityFixPack] ExtractorStaffedPerformance: applied
+[mod] [CommunityFixPack] SaveSanitizer: applied
+						Lua 0:00:06:760
+[mod] [CommunityFixPack] SaintBlessing: inactive (no dome-colonists trait presets)
+[mod] [CommunityFixPack] SinkholeIndestructible: the St. Elmo's Fire sinkhole is now indestructible, like every other mystery set-piece
+						Lua 0:00:06:838
+Reloading done in 998 ms
+						Lua 0:00:07:224
+[preset] Preset postprocess took 119 ms.
+						Lua 0:00:07:289
+479 / 479 particle streams loaded in 61 ms.
+						Lua 0:00:07:290
+[mod] [CommunityFixPack] LastTransmissionStorage: 6 storage condition(s) made effective, 1 retargeted
+[mod] [CommunityFixPack] IndependenceTerraforming: Independence_TerraformingProjects now discounts special projects by 20% as its param1 says
+[mod] [CommunityFixPack] AstrogeologistExtractors: added 2 missing extractor entr(y/ies) to the astrogeologist profile (10 already present)
+						Lua 0:00:07:490
+[mod] [CommunityFixPack] SaintBlessing: corrected 1 dome-colonists trait modifier label(s) of 2
+						Lua 0:00:07:567
+[mod] Loaded mod items for: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack
+						Lua 0:00:07:626
+[PdxSDK] Started up. Took 1787
+						Lua 0:00:07:862
+[Braze] SessionStart error The server name or address could not be resolved
+
+						Lua 0:00:07:864
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:07:986
+[Braze] SessionStart error The server name or address could not be resolved
+
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:19:411
+Game Seed:  0u304am3 3580578914385086844 
+						Lua 0:00:19:430
+*** Reloading assets from folder 'BinAssets/'
+							IO Task 0:00:19:459
+[ResManager Error] Cannot find file with base path: Animations/LawOfficeDoor_idle.hgacl
+[ResManager Error] Cannot find file with base path: Animations/LawOfficeDoor_opening.hgacl
+						Lua 0:00:22:444
+*** Assets reloaded in 3.0 s, read 202.1 MB, read speed 67.1 MB/s, average read 4948 bytes.
+						Lua 0:00:23:903
+MapLoadRandom:  7084516164859990823 
+						Lua 0:00:25:448
+Map (slot 1) changed to "PreGame" in 6025 ms.
+						Lua 0:00:25:491
+[mod] [CommunityFixPack] SpaceYDroneCapBullet: descr now carries the Drone Hub capacity bullet (translation id 4706)
+						Lua 0:00:26:860
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:01:42:871
+game_settings:
+    sponsor: Roscosmos
+    profile: rocketscientist
+    founding_faction: WorkersParty
+    rival_colonies: BlueSun, ISRO
+    mystery_random: 
+    game_rules: EasyResearch, MoreApplicants, UnlockedPolicies
+more_game_settings: save_game_id: vOuYLAtumyoPvfZc, mystery: none, coordinates: 8N40W, landing_spot: , logo: Russia
+map_conditions: altitude: -1391, temperature: -1, cold_wave: 0, dust_devils: 59, dust_storm: 119, meteors: 79
+map_resources: concrete: 73, metals: 147, precious_metals: 147, water: 182
+						Lua 0:01:42:890
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:01:42:896
+MapLoadRandom:  5867389991786266131 
+						Lua 0:01:44:045
+Map (slot 1) changed to "BlankBigTerraceCMix_18" in 1942 ms.
+						Lua 0:01:47:655
+MapLoadRandom:  6163674213579612843 
+						Lua 0:01:48:426
+Map (slot 2) changed to "BlankUnderground_04" in 1344 ms.
+						Lua 0:01:53:188
+starting sector selected: C8
+						Lua 0:01:54:603
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:01:55:602
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:04:22:184
+[mod] [CommunityFixPack] CaveInsNoDisasters [active] Cave-ins no longer occur when the "No Disasters" game rule is active
+[mod] [CommunityFixPack] MeteorFrequency [active] Meteors strike on their designed 35-115h schedule instead of ~every 6 hours
+[mod] [CommunityFixPack] UpgradeModifierLeak [active] Salvaging an upgraded building now removes its dome/colony-wide upgrade bonuses
+[mod] [CommunityFixPack] NightShiftWork [active] Night-shift colonists go to work after midnight instead of skipping their shift
+[mod] [CommunityFixPack] MilestoneCrash [active] Completing all milestones no longer errors in No Terraforming / No Politics games
+[mod] [CommunityFixPack] WispRewards [active] Mystery 11: "free the wisps" produces real power; destroyed-wisp rewards match the notification
+[mod] [CommunityFixPack] TouristApplicants [active] Higher tourist ratings now correctly give more bonus applicants (roll was inverted)
+[mod] [CommunityFixPack] TrainsToVoid [active] Demolishing a station stores its trains instead of permanently deleting them
+[mod] [CommunityFixPack] LanderEmptyLaunch [active] Automatic rockets and asteroid landers wait for cargo instead of launching empty
+[mod] [CommunityFixPack] LanderCargoRatchet [active] Automatic rockets stop unloading the cargo they just loaded, and fill up with the valuable resources first
+[mod] [CommunityFixPack] LanderReturnFuel [active] Asteroid landers keep their return fuel instead of unloading it on the asteroid
+[mod] [CommunityFixPack] ShelterReflex [active] Asteroid colonists take shelter before suffocating, and keep their habitat through power blips
+[mod] [CommunityFixPack] BrokenTrackSalvage [active] Meteor-damaged tracks can be salvaged again
+[mod] [CommunityFixPack] TrackSalvageWipe [active] Salvaging one track piece no longer deletes the whole track and its trains
+[mod] [CommunityFixPack] LakeEntombment [active] Building an artificial lake no longer entombs the RC Constructor and drones
+[mod] [CommunityFixPack] GhostFarmOxygen [active] Salvaging a farm removes the oxygen it was giving its dome
+[mod] [CommunityFixPack] RocketDroneChurn [active] Landed rockets stop sending their delivery drones back to Idle every hour
+[mod] [CommunityFixPack] ShuttleTransportCache [active] New Shuttle Hubs are noticed: colonists stop being stuck with a cached 'unreachable'
+[mod] [CommunityFixPack] VacuumWalks [active] Colonists use the passages instead of crossing vacuum on foot between nearby domes
+[mod] [CommunityFixPack] ArrivalDeaths [active] Arriving colonists no longer hike to unreachable domes or land in impassable ground
+[mod] [CommunityFixPack] DroneUnreachableForever [active] Drones re-try buildings they once failed to reach instead of writing them off forever
+[mod] [CommunityFixPack] StaleReservations [active] Housing reserved for colonists that never arrive is released again
+[mod] [CommunityFixPack] CrystalMysteryHang [active] The Philosopher's Stone mystery can no longer hang forever at the finale
+[mod] [CommunityFixPack] TouristSatisfaction [active] Tourist satisfaction stops drifting down (threshold awards are now symmetric)
+[mod] [CommunityFixPack] TrainPlatformWedge [active] A stale passenger no longer wedges a train at the platform forever
+[mod] [CommunityFixPack] LowStorageWarning [active] The "Insufficient Resources" warning works again for Food and maintenance resources
+[mod] [CommunityFixPack] CommandCenterNumbers [active] Command Center resource rows show their numbers again
+[mod] [CommunityFixPack] DomeOverviewHighlight [active] Domes Overview marks low colonist stats in red again
+[mod] [CommunityFixPack] TrainCargoDumping [active] Trains stop dumping cargo at stations where that resource is switched off
+[mod] [CommunityFixPack] UniversityOvertraining [active] Universities stop training specialists for workplaces that run themselves
+[mod] [CommunityFixPack] DestroyedTunnels [active] Destroyed tunnels stay closed after loading a save instead of rejoining pathfinding
+[mod] [CommunityFixPack] DustSicknessBiorobots [active] Dust Sickness no longer infects Biorobots
+[mod] [CommunityFixPack] DustSicknessDamage [active] Dust Sickness deals its intended random damage instead of the maximum every sol
+[mod] [CommunityFixPack] GeneForging [active] The Gene Forging tech actually increases the rare-trait chance
+[mod] [CommunityFixPack] MirrorSphereSite [active] A completed Mirror Sphere site no longer accepts more drone work
+[mod] [CommunityFixPack] PayloadTemplateRefill [active] Edit Payload keeps the amounts you set instead of refilling them from the flight-policy template
+[mod] [CommunityFixPack] AsteroidLanderAvailable [active] The asteroid-expedition gate counts landed landers, and stops counting supply rockets
+[mod] [CommunityFixPack] ShuttleHubOffAvailable [active] Shuttle Hubs switched off no longer count as available colonist transport
+[mod] [CommunityFixPack] FreedHousingNotice [active] A home falling vacant is offered to the dome's homeless straight away
+[mod] [CommunityFixPack] DomeFreeSpaceMismatch [active] A dome's free-housing total counts the same residences the game assigns colonists to
+[mod] [CommunityFixPack] SmallLandscapeSites [active] Drones no longer error out when sent to a small landscaping site
+[mod] [CommunityFixPack] LandscapeUnitFilter [active] Landscaping over a boarding point no longer drags boarding colonists out
+[mod] [CommunityFixPack] RocketInteractGuard [active] RC Transports stay off trade and refugee rockets again
+[mod] [CommunityFixPack] TrackConnectorPingPong [active] A station and a tunnel one hex apart stop stealing each other's track connector
+[mod] [CommunityFixPack] TrackTunnelPowerBridge [active] A station attached to a train tunnel bridges the power grid again
+[mod] [CommunityFixPack] GridGlobalStorage [active] Colony-wide power/water/oxygen reserve is measured as one ratio again
+[mod] [CommunityFixPack] LastTransmissionStorage [active] Last Transmission's power/water/oxygen storage opinions actually count
+[mod] [CommunityFixPack] GraphConsumedCaption [active] Command Center graph captions count maintenance, like the bars do
+[mod] [CommunityFixPack] MoraleComfortTooltip [active] Morale tooltip stops listing a Comfort bonus the game does not apply
+[mod] [CommunityFixPack] TrainWaitTime [active] Waiting on a train platform no longer counts as time spent riding
+[mod] [CommunityFixPack] FounderTraitNotification [active] The notification for a Founder gaining a trait fires again
+[mod] [CommunityFixPack] StorageRateModifiers [active] Charge and discharge rate modifiers on batteries and tanks take effect
+[mod] [CommunityFixPack] SequenceLatents [active] Sequence label sampling and the Digger timing swap behave as written
+[mod] [CommunityFixPack] IndependenceTerraforming [active] Independent Terraforming discounts special projects by the 20% it advertises
+[mod] [CommunityFixPack] TrackSalvageRefund [active] Salvaging a track refunds what the whole track cost, not one hex
+[mod] [CommunityFixPack] LayoutTechLock [active] Layout construction respects research locks
+[mod] [CommunityFixPack] TrainMinors [active] Train cap follows track length
+[mod] [CommunityFixPack] DroneTransportMinors [active] A passability change no longer corrupts each drone's unreachable-buildings table
+[mod] [CommunityFixPack] AnomalyCaveInMap [active] A cave-in on a map that does not exist is declined instead of crashing the sequence
+[mod] [CommunityFixPack] TechDescriptionBuilding [active] The Underground Medium Dome tech description names the building it actually unlocks
+[mod] [CommunityFixPack] BombardmentSpread [active] Bombardment missiles come in from spread directions instead of in parallel
+[mod] [CommunityFixPack] ExtenderFlapChurn [active] Extender power flickers no longer tear down and rebuild the whole hub (fleet-wide Idle churn)
+[mod] [CommunityFixPack] DisasterPredictionLeak [active] A finished meteor storm no longer disables rains, cold waves and dust storms forever
+[mod] [CommunityFixPack] MeteorStormWedge [active] A wedged meteor storm is detected and released instead of blocking storms forever
+[mod] [CommunityFixPack] RainsDeadlock [active] A rain that collides with another disaster retries instead of never raining again
+[mod] [CommunityFixPack] FirstAsteroidPrefabs [active] The First Asteroid prefabs still arrive if the popup was left unanswered across a save/load
+[mod] [CommunityFixPack] SaintBlessing [active] A Saint's blessing reaches the Religious colonists in their dome
+[mod] [CommunityFixPack] DustDevilsDescrMap [active] Dust devils on the surface use the surface's settings, not the map the camera is on
+[mod] [CommunityFixPack] AstrogeologistExtractors [active] The Astrogeologist bonus reaches every buildable extractor, as its own text promises
+[mod] [CommunityFixPack] SinkholeIndestructible [active] A meteor can no longer destroy the St. Elmo's Fire sinkhole
+[mod] [CommunityFixPack] DustStormUndergroundBreaks [active] A surface dust storm can no longer break cables and pipes underground
+[mod] [CommunityFixPack] DustDevilSpawnGate [active] Dust devil waves use their authored count range instead of being scaled down by the spawn chance
+[mod] [CommunityFixPack] ExoticDepositSign [active] Subsurface Exotic Minerals deposits use the remaster's own sign — believed to stop the asteroid-visit freeze reported on Linux/NVIDIA systems
+[mod] [CommunityFixPack] AutomationLawCompensation [active] Automation laws pay back the buildings they take workers from — Workshops, Security Stations, the Drone Assembler and the Bottomless Pit no longer lose half their output
+[mod] [CommunityFixPack] LocalizedUIText [active] Three UI strings render in English in every language — the terraforming heading and the rocket's Back to Earth rollover now use the translation ids the game already ships
+[mod] [CommunityFixPack] SpaceYDroneCapBullet [active] SpaceY grants +20 Drone Hub Drone capacity and never mentions it — its sponsor description now carries that bullet, in the game's own words and with the game's own number
+[mod] [CommunityFixPack] LandscapeCostRefresh [active] Researching a construction-cost tech no longer errors while a landscaping project is active
+[mod] [CommunityFixPack] ExtractorStaffedPerformance [active] Extractor AI no longer caps STAFFED Metals / Rare Metals Extractors at 50 — staffing them raises performance again, so Russia's 160-Performance sponsor goal is reachable
+[mod] [CommunityFixPack] SaveSanitizer [active] Savegame repair: lost Wind Turbine tech buff, leaked upgrade bonuses
+						Lua 0:06:15:637
+ObjCheat CheatFill
+						Lua 0:06:17:440
+ObjCheat CheatFill
+						Lua 0:06:19:676
+ObjCheat CheatFill
+						Lua 0:06:21:400
+ObjCheat CheatFill
+						Lua 0:06:24:271
+ObjCheat CheatFill
+						Lua 0:06:26:601
+ObjCheat CheatFill
+						Lua 0:06:45:599
+
+!!! Quick Build !!!
+						Lua 0:07:37:285
+
+!!! Quick Build !!!
+						Lua 0:08:54:645
+Story bits: Triggered story bit - Boost7_DiminishingReturns						Lua 0:09:07:676
+[mod] [CommunityFixPack] LocalizedUIText: Back to Earth rollover now renders translation ids 407456913268 / 316233855405 (2 of 2 strings)
+						Lua 0:09:46:479
+Story bits: Reply selected - Accept and request an advance						Lua 0:10:39:715
+ObjCheat CheatEmpty
+						Lua 0:11:43:918
+
+!!! Quick Build !!!
+						Lua 0:13:14:100
+ObjCheat CheatEmpty
+						Lua 0:17:00:848
+
+!!! Quick Build !!!
+						Lua 0:17:12:227
+Story bits: Triggered story bit - Boost7_DiminishingReturns_Success						Lua 0:19:46:632
+
+!!! Quick Build !!!
+						Lua 0:20:15:962
+
+!!! Quick Build !!!
+						Lua 0:20:22:141
+[mod] [CommunityFixPack] LocalizedUIText: terraforming heading now renders translation id 914616772802
+						Lua 0:20:53:730
+Stop sequence BuildingAnomalies - SurfaceUndergroundPassage : FinishedStop sequence list BuildingAnomalies						Lua 0:21:01:374
+Story bits: Reply selected - Direct payment						Lua 0:23:34:603
+
+!!! Quick Build !!!
+						Lua 0:24:25:475
+
+!!! Quick Build !!!
+						Lua 0:25:08:571
+
+!!! Quick Build !!!
+						Lua 0:25:34:171
+ObjCheat CheatEmpty
+						Lua 0:27:18:186
+ObjCheat CheatFill
+						Lua 0:27:21:478
+ObjCheat CheatFill
+						Lua 0:27:28:774
+ObjCheat CheatFill
+						Lua 0:27:31:076
+ObjCheat CheatFill
+						Lua 0:27:32:951
+ObjCheat CheatFill
+						Lua 0:27:35:767
+Missing spot 'Top' in 'ElectricityGridElement' state 'idle'
+						Lua 0:29:39:067
+
+!!! Quick Build !!!
+						Lua 0:29:41:591
+
+!!! Quick Build !!!
+						Lua 0:29:43:019
+
+!!! Quick Build !!!
+						Lua 0:34:36:511
+Story bits: Triggered story bit - TheBestInUs						Lua 0:34:44:601
+Story bits: Reply selected - We are ready to help						Lua 0:35:27:193
+
+!!! Quick Build !!!
+						Lua 0:37:56:150
+[LUA ERROR] [string "CreateRealTimeThread(function() local b=Selec..."]:1: attempt to index a boolean value (local 'b')
+  [string "CreateRealTimeThread(function() local b=Selec..."](1):   <>
+        --- end of stack
+Locals:
+						Lua 0:37:56:151
+	                   b |  boolean false
+	                   w |   number 0
+						Lua 0:40:17:603
+{
+    accumulated_maintenance_points = 67950
+    base_auto_performance = 0
+    base_automation = 0
+    base_construction_cost_BlackCube = 0
+    base_construction_cost_Concrete = 15000
+    base_construction_cost_Electronics = 0
+    base_construction_cost_MachineParts = 4000
+    base_construction_cost_Metals = 0
+    base_construction_cost_Polymers = 0
+    base_construction_cost_PreciousMetals = 0
+    base_construction_cost_PreciousMinerals = 0
+    base_construction_cost_WasteRock = 0
+    base_consumption_amount = 1000
+    base_disable_electricity_consumption = 0
+    base_disable_maintenance = 0
+    base_dome_comfort = 0
+    base_dome_morale = 0
+    base_electricity_consumption = 5000
+    base_in_dome_construction_modifier = 100
+    base_maintenance_build_up_per_hr = 600
+    base_maintenance_resource_amount = 2000
+    base_maintenance_threshold_base = 100000
+    base_max_workers = 4
+    base_performance = 119
+    base_production_per_day1 = 20000
+    base_production_per_day2 = 1000
+    base_production_per_day3 = 1000
+    base_salvage_modifier = 100
+    base_sight_satisfaction = 0
+    base_sight_visible_size = 0
+    base_upgrade1_consumption_amount = 800
+    base_upgrade2_consumption_amount = 1000
+    base_upgrade3_consumption_amount = 1000
+    city = {
+        DialogType = overview
+        ExplorationQueue = { {...}, {...}, {...}, {...}, {...}, {...}, {...}, {...} }
+        InitialSector = {
+            area = (389120, 430080)-(430080, 471040)
+            avg_heat = 255
+            city = {...}
+            col = 8
+            decal = {...}
+            deposits = {...}
+            display_name = C8
+            exp_resources = {...}
+            handle = 5668574766
+            id = C8
+            markers = {...}
+            notify_thread = thread: 000002DFD15C1878
+            play_ratio = 98
+            revealed_obj = {...}
+            row = 9
+            scan_progress = 0
+            status = scanned
+            true = userdata: 000002DF81714988
+        }
+        LastConstructedBuilding = {
+            GetMaxAmount_Metals = function: 000002DFDB66A310
+            GetStored_Metals = function: 000002DFD8693338
+            accumulated_maintenance_points = 600
+            base_construction_cost_BlackCube = 0
+            base_construction_cost_Concrete = 0
+            base_construction_cost_Electronics = 0
+            base_construction_cost_MachineParts = 3000
+            base_construction_cost_Metals = 12000
+            base_construction_cost_Polymers = 0
+            base_construction_cost_PreciousMetals = 0
+            base_construction_cost_PreciousMinerals = 0
+            base_construction_cost_WasteRock = 0
+            base_consumption_amount = 1000
+            base_disable_electricity_consumption = 0
+            base_disable_maintenance = 0
+            base_dome_comfort = 0
+            base_dome_morale = 0
+            base_electricity_consumption = 1000
+            base_in_dome_construction_modifier = 100
+            base_maintenance_build_up_per_hr = 600
+            base_maintenance_resource_amount = 1000
+            base_maintenance_threshold_base = 100000
+            base_salvage_modifier = 100
+            base_sight_satisfaction = 0
+            base_sight_visible_size = 0
+            base_upgrade1_consumption_amount = 1000
+            base_upgrade2_consumption_amount = 1000
+            base_upgrade3_consumption_amount = 1000
+            beam = {...}
+            beam_org_pos = (1039, 0, 1226)
+            box_height = 100
+            carried_cubes = {...}
+            city = {...}
+            command_centers = {...}
+            construction_cost_at_completion = {...}
+            crane = {...}
+            creation_time = 8918137
+            cube_attach_spot_idx = 3
+            desired_amount = 0
+            electricity = {...}
+            grids_applied = true
+            handle = 1443
+            hoist = {...}
+            hoist_curr_pos = (0, -1, 10)
+            hoist_org_pos = (1039, 0, 1226)
+            init_with_skin = false
+            initialized = true
+            last_maintenance_points_accumulation_ts = 8918137
+            maintenance_request_lookup = {...}
+            maintenance_resource_request = demand "MachineParts" from MechanizedDepotMetals actual:0 (target:0)
+            maintenance_threshold_base = 120000
+            maintenance_threshold_current = 87000
+            maintenance_work_request = work "repair" from MechanizedDepotMetals actual:0 (target:0)
+            max_colorization_materials_attaches = 3
+            modifications = {...}
+            name = 
+            parent = {...}
+            pillars = {...}
+            pillars_org_pos = (1022, 0, 0)
+            placed_cubes = {}
+            placement_offset = (-1878, 938, 36)
+            resource = Metals
+            resource_spots = {...}
+            stock_lanes = {...}
+            stock_max = 50000
+            stockpiled_resource = Metals
+            stockpiles = {...}
+            task_requests = {...}
+            update_thread = thread: 000002DFD2704FB0
+            upgrade_id_to_modifiers = {}
+            upgrade_modifiers = {}
+            upgrade_on_off_state = {}
+            upgrades_built = {}
+            working = true
+            true = userdata: 000002DF8122F388
+        }
+        MapArea = (102400, 102400)-(512000, 512000)
+        MapSectors = {
+            1 = {...}
+            2 = {...}
+            3 = {...}
+            4 = {...}
+            5 = {...}
+            6 = {...}
+            7 = {...}
+            8 = {...}
+            9 = {...}
+            10 = {...}
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+            {...} = true
+        }
+        air = { city = {...}, production_thread = thread: 000002DFD2F8FF30, 1 = {...} }
+        atmosphere_loss_today = 0
+        atmosphere_loss_yesterday = 0
+        available_prefabs = { MicroGAutoExtractorExoticMinerals = 1, MicroGAutoExtractorMetals = 1, MicroGAutoExtractorRareMetals = 1 }
+        cascade_cable_deletion_dsiable_reasons = {}
+        cascade_cable_deletion_enabled = true
+        city = {loop!}
+        colonist_heavy_update_time = 0
+        colony = {
+            OutsourceResearchOrders = {}
+            OutsourceResearchPoints = {}
+            TechBoostPerField = {}
+            TechBoostPerTech = {}
+            active_faction_quests = {}
+            active_faction_task = {...}
+            active_factions = {...}
+            agenda_completed = false
+            asteroid_count = 1
+            asteroids = {...}
+            city_labels = {...}
+            completed_faction_quests = {}
+            completed_faction_tasks = {...}
+            compound_effects = {}
+            construction_cost = {...}
+            cur_policy_laws_state = {...}
+            current_session = 4
+            day = 13
+            deposit_depth_exploitation_research_bonus = 1
+            discover_idx = 147
+            factions_approval = {...}
+            factions_disaster = {}
+            factions_tension = {...}
+            factions_tension_warnings = {}
+            factions_with_offered_agenda = {}
+            funds = {...}
+            global_tension = 401
+            hardened_support_factions = {}
+            hour = 17
+            in_session = false
+            independence_progress = 1
+            independence_progress_presets_completed = {...}
+            instant_law_preparation_used = false
+            label_effects = {}
+            label_modifiers = {...}
+            labels = {...}
+            legislature_largest_faction = WorkersParty
+            legislature_members = {...}
+            map_seed = 5589394580881220350
+            minute = 0
+            planetary_anomalies = {...}
+            policies_prepared = {...}
+            prev_policy_laws_state = {...}
+            progress_begin_time = 8640000
+            progress_end_time = 10080000
+            research_queue = {}
+            selected_action_param = false
+            selected_action_policy = false
+            selected_action_target = false
+            selected_faction_quests = {}
+            session_action = none
+            session_action_param = false
+            session_thread = thread: 000002DFCF354C70
+            tech_field = {...}
+            tech_status = {...}
+            tech_will_be_granted = false
+            timed_out_faction_tasks = {...}
+            underground_passage_shown = true
+            unlocked_upgrades = {...}
+        }
+        construction_controllers = { ConstructionController = {...}, GridConstructionController = {...}, LandscapeClearWasteRockController = {...}, LandscapeTerraceController = {...} }
+        constructions_completed_today = 2
+        consumption_resources_consumed_today = {
+            BlackCube = 0
+            Concrete = 0
+            Electronics = 0
+            Food = 6800
+            Fuel = 0
+            MachineParts = 0
+            Metals = 0
+            MysteryResource = 0
+            Polymers = 1000
+            PreciousMetals = 0
+            PreciousMinerals = 0
+            Seeds = 0
+            WasteRock = 0
+        }
+        consumption_resources_consumed_yesterday = {
+            BlackCube = 0
+            Concrete = 0
+            Electronics = 0
+            Food = 7200
+            Fuel = 0
+            MachineParts = 0
+            Metals = 0
+            MysteryResource = 0
+            Polymers = 1800
+            PreciousMetals = 0
+            PreciousMinerals = 0
+            Seeds = 0
+            WasteRock = 0
+        }
+        cur_sol_died = 0
+        day = 13
+        electricity = { city = {...}, production_thread = thread: 000002DFCD4ACEB0, 1 = {...} }
+        fuel_for_rocket_refuel_today = 0
+        fuel_for_rocket_refuel_yesterday = 0
+        gathered_resources_today = {
+            BlackCube = 0
+            Concrete = 0
+            Electronics = 0
+            Food = 0
+            Fuel = 0
+            MachineParts = 0
+            Metals = 0
+            MysteryResource = 0
+            Polymers = 0
+            PreciousMetals = 0
+            PreciousMinerals = 0
+            Seeds = 0
+            WasteRock = 0
+        }
+        gathered_resources_total = {
+            BlackCube = 0
+            Concrete = 0
+            Electronics = 0
+            Food = 0
+            Fuel = 0
+            MachineParts = 0
+            Metals = 153000
+            MysteryResource = 0
+            Polymers = 0
+            PreciousMetals = 0
+            PreciousMinerals = 0
+            Seeds = 0
+            WasteRock = 0
+        }
+        gathered_resources_yesterday = {
+            BlackCube = 0
+            Concrete = 0
+            Electronics = 0
+            Food = 0
+            Fuel = 0
+            MachineParts = 0
+            Metals = 0
+            MysteryResource = 0
+            Polymers = 0
+            PreciousMetals = 0
+            PreciousMinerals = 0
+            Seeds = 0
+            WasteRock = 0
+        }
+        handle = 1920563984
+        hour = 17
+        label_effects = {}
+        label_modifiers = { LandscapeLake = {...}, MOXIE = {}, MoistureVaporator = {}, SolarPanelBase = {}, WindTurbine = {}, WindTurbine_Diffuser = {}, WindTurbine_Large = {} }
+        labels = {
+            Accumulators = {...}
+            Accumulators_Construction = {}
+            Adult = {...}
+            AllRockets = {...}
+            Anomaly = {...}
+            ArtStores = {...}
+            ArtStores_Construction = {}
+            AtomicBattery = {...}
+            AtomicBattery_Construction = {}
+            BeautyEffectDeposit = {...}
+            BrokenDrones = {}
+            Building = {...}
+            BuildingNoDomes = {...}
+            CableConstructionSite = {}
+            Child = {...}
+            ClearWasteRockConstructionSite = {}
+            Colonist = {...}
+            ColonistFemale = {...}
+            ColonistHighComfort = {...}
+            ColonistMale = {...}
+            Community = {...}
+            ConstructionGroupLeader = {}
+            ConstructionSite = {}
+            ConstructionSiteWithHeightSurfaces = {}
+            Consts = {...}
+            DepositRevealer = {...}
+            Depots = {...}
+            Diner = {...}
+            DinerBase = {...}
+            Diner_Construction = {}
+            Dome = {...}
+            DomeMega = {...}
+            DomeMegaBase = {...}
+            DomeMega_Construction = {}
+            DomeServices = {...}
+            DomeServices_Construction = {}
+            Domes = {...}
+            Domes_Construction = {}
+            Drone = {...}
+            DroneControl = {...}
+            DroneHub = {...}
+            DroneHubBase = {...}
+            DroneHub_Construction = {}
+            DroneHubs = {...}
+            DroneHubs_Construction = {}
+            DumpingSites = {...}
+            DustGenerator = {...}
+            EffectDeposit = {...}
+            EffectDepositMarker = {...}
+            ElectricityGridElement_Construction = {}
+            ElectricityStorage = {...}
+            Employed = {...}
+            Extractors = {...}
+            Extractors_Construction = {}
+            FactionObject = {...}
+            Female = {...}
+            Founder = {...}
+            Genius = {...}
+            Glutton = {...}
+            Groceries = {...}
+            Groceries_Construction = {}
+            Grocery = {...}
+            Habitats = {...}
+            Habitats_Construction = {}
+            Hidden = {...}
+            Homeless = {}
+            Infirmary = {...}
+            InfirmaryBase = {...}
+            Infirmary_Construction = {}
+            Infrastructure = {...}
+            Infrastructure_Construction = {}
+            InsideBuildings = {...}
+            InsideBuildings_Construction = {}
+            LandingPad = {...}
+            LandingPadBase = {...}
+            LandingPad_Construction = {}
+            LandingPads = {...}
+            LandingPads_Construction = {}
+            LandscapeClearWasteRock_Construction = {}
+            LandscapeConstructionSite = {}
+            LandscapeTerrace_Construction = {}
+            Landscaping_Construction = {}
+            LargeResidence = {...}
+            LargeResidence_Construction = {}
+            LargeWaterTank = {...}
+            LargeWaterTank_Construction = {}
+            LifeSupport = {...}
+            LifeSupportGridElement_Construction = {}
+            LifeSupport_Construction = {}
+            MOXIE = {...}
+            MOXIEBase = {...}
+            MOXIE_Construction = {}
+            Male = {...}
+            Martianborn = {...}
+            MechanizedDepot = {...}
+            MechanizedDepotMetals = {...}
+            MechanizedDepotMetals_Construction = {}
+            MechanizedDepots = {...}
+            MechanizedDepots_Construction = {}
+            MedicalBuilding = {...}
+            MedicalBuilding_Construction = {}
+            MedicalStations = {...}
+            MedicalStations_Construction = {}
+            MediumLargeDomes = {...}
+            MediumLargeDomes_Construction = {}
+            MetalExtractors = {...}
+            MetalExtractors_Construction = {}
+            MetalsExtractor = {...}
+            MetalsExtractorBase = {...}
+            MetalsExtractor_Construction = {}
+            Middle Aged = {...}
+            MoistureVaporator = {...}
+            MoistureVaporatorBase = {...}
+            MoistureVaporator_Construction = {}
+            Nerd = {...}
+            NuclearBuildings = {...}
+            NuclearBuildings_Construction = {}
+            OpenAirBuilding = {...}
+            OpenAirGym = {...}
+            OpenAirGymBase = {...}
+            OpenAirGym_Construction = {}
+            OrbitalProbe = {}
+            OrphanDrone = {}
+            OutsideBuildings = {...}
+            OutsideBuildingsTargets = {...}
+            OutsideBuildingsTargets_Construction = {}
+            OutsideBuildings_Construction = {}
+            OxygenTankLarge = {...}
+            OxygenTank_Large = {...}
+            OxygenTank_Large_Construction = {}
+            OxygenTanks = {...}
+            OxygenTanks_Construction = {}
+            PipeConstructionSite = {}
+            Power = {...}
+            Power_Construction = {}
+            Production = {...}
+            Production_Construction = {}
+            RCDriller = {...}
+            RCTerraformer = {...}
+            RCTerraformerBuilding = {}
+            RCTerraformerBuildingBase = {}
+            RCTerraformerBuilding_Construction = {}
+            RCTransportAndChildren = {...}
+            Recharger = {...}
+            Residence = {...}
+            Residence_Construction = {}
+            ResourceExploiter = {...}
+            ResourceProducer = {...}
+            ResourceStockpile = {...}
+            RocketLandingSite = {...}
+            RocketLandingSiteBase = {...}
+            RoundDomes = {...}
+            RoundDomes_Construction = {}
+            Rover = {...}
+            Rovers = {}
+            Rovers_Construction = {}
+            SecurityBuildings = {...}
+            SecurityBuildings_Construction = {}
+            SecurityStation = {...}
+            SecurityStationBase = {...}
+            SecurityStation_Construction = {}
+            SecurityStations = {...}
+            SecurityStations_Construction = {}
+            SensorTower = {...}
+            SensorTowerBase = {...}
+            SensorTower_Construction = {}
+            Service = {...}
+            ServiceBuildings = {...}
+            ServiceBuildings_Construction = {}
+            ServiceWorkplace = {...}
+            ShiftsBuilding = {...}
+            ShopsFood = {...}
+            ShopsFood_Construction = {}
+            ShopsJewelry = {...}
+            ShopsJewelry_Construction = {}
+            SmartApartments = {...}
+            SmartApartmentsCCP1 = {...}
+            SmartApartmentsCCP1_Construction = {}
+            SmartHomes = {...}
+            SmartHomes_Construction = {}
+            SmartResidence = {...}
+            SmartResidence_Construction = {}
+            SoilRemove = {...}
+            Spacebar = {...}
+            SpacebarBase = {...}
+            Spacebar_Construction = {}
+            Spacebars = {...}
+            Spacebars_Construction = {}
+            StirlingGenerator = {...}
+            StirlingGeneratorBase = {...}
+            StirlingGenerator_Construction = {}
+            StirlingGenerators = {...}
+            StirlingGenerators_Construction = {}
+            StorageConcrete = {...}
+            StorageElectronics = {...}
+            StorageFood = {...}
+            StorageFuel = {...}
+            StorageMachineParts = {...}
+            StorageMetals = {...}
+            StoragePolymers = {...}
+            Storages = {...}
+            Storages_Construction = {}
+            SubsurfaceAnomalyMarker = {...}
+            SubsurfaceDeposit = {...}
+            SubsurfaceDepositMarker = {...}
+            SupplyPod = {...}
+            SupplyRocket = {...}
+            SurfaceDeposit = {...}
+            SurfaceDepositMarker = {...}
+            SurfaceDomes = {...}
+            SurfaceDomes_Construction = {}
+            Suspended = {}
+            TerrainDeposit = {...}
+            TerrainDepositMarker = {...}
+            TraitAlcoholic = {...}
+            TraitBulgarian = {...}
+            TraitComposed = {...}
+            TraitEnthusiast = {...}
+            TraitExtrovert = {...}
+            TraitFit = {...}
+            TraitGambler = {...}
+            TraitGamer = {...}
+            TraitHippie = {...}
+            TraitHypochondriac = {...}
+            TraitIntrovert = {...}
+            TraitMars = {...}
+            TraitMelancholic = {...}
+            TraitReligious = {...}
+            TraitRugged = {...}
+            TraitRussian = {...}
+            TraitSexy = {...}
+            TraitSurvivor = {...}
+            TraitVegan = {...}
+            TraitWorkaholic = {...}
+            TriboelectricScrubber = {...}
+            TriboelectricScrubberBase = {...}
+            TriboelectricScrubber_Construction = {}
+            UndergroundPassage = {...}
+            UndergroundPassageBase = {...}
+            UndergroundTunnelMarker = {...}
+            Unemployed = {...}
+            Unit = {...}
+            UniversalHomes = {...}
+            UniversalHomes_Construction = {}
+            UniversalRocket = {...}
+            UniversalRocketBase = {...}
+            UniversalStorageDepotBase = {...}
+            UniversalSupplyPod = {...}
+            UniversalSupplyPodBase = {...}
+            Vista = {...}
+            WasteRockDumpHuge = {...}
+            WasteRockDumpSite = {...}
+            WaterBuilding = {...}
+            WaterBuilding_Construction = {}
+            WaterTankLarge = {...}
+            WaterTanks = {...}
+            WaterTanks_Construction = {}
+            WindTurbineBase = {...}
+            WindTurbine_Diffuser = {...}
+            WindTurbine_Diffuser_Construction = {}
+            WindTurbines = {...}
+            WindTurbines_Construction = {}
+            Workforce = {...}
+            Workplace = {...}
+            Youth = {...}
+            engineer = {...}
+            geologist = {...}
+            interestDining = {...}
+            interestDrinking = {...}
+            interestExercise = {...}
+            interestLuxury = {...}
+            interestRelaxation = {...}
+            interestShopping = {...}
+            interestSocial = {...}
+            medic = {...}
+            needFood = {...}
+            needMedical = {...}
+            none = {...}
+            scientist = {...}
+            security = {...}
+        }
+        last_sol_died = 0
+        maintenance_resources_consumed_today = {
+            BlackCube = 0
+            Concrete = 0
+            Electronics = 2000
+            Food = 0
+            Fuel = 0
+            MachineParts = 0
+            Metals = 0
+            MysteryResource = 0
+            Polymers = 0
+            PreciousMetals = 0
+            PreciousMinerals = 0
+            Seeds = 0
+            WasteRock = 0
+        }
+        maintenance_resources_consumed_yesterday = {
+            BlackCube = 0
+            Concrete = 3000
+            Electronics = 3000
+            Food = 0
+            Fuel = 0
+            MachineParts = 0
+            Metals = 0
+            MysteryResource = 0
+            Polymers = 0
+            PreciousMetals = 0
+            PreciousMinerals = 0
+            Seeds = 0
+            WasteRock = 0
+        }
+        minute = 0
+        produced_terraforming_today = { Atmosphere = 0, Temperature = 0, Vegetation = 0, Water = 0 }
+        produced_terraforming_yesterday = { Atmosphere = 0, Temperature = 0, Vegetation = 0, Water = 0 }
+        queued_resupply = {}
+        selected_dome = {}
+        selected_dome_unit_tracking_thread = thread: 000002DFD2E8DD28
+        ts_buildings = { data = {...}, next_index = 11 }
+        ts_colonists = { data = {...}, next_index = 11 }
+        ts_colonists_homeless = { data = {...}, next_index = 11 }
+        ts_colonists_unemployed = { data = {...}, next_index = 11 }
+        ts_constructions_completed = { data = {...}, next_index = 11 }
+        ts_drones = { data = {...}, next_index = 11 }
+        ts_resources = {
+            Concrete = {...}
+            Electronics = {...}
+            Food = {...}
+            Fuel = {...}
+            MachineParts = {...}
+            Metals = {...}
+            Polymers = {...}
+            PreciousMetals = {...}
+            PreciousMinerals = {...}
+            Seeds = {...}
+            WasteRock = {...}
+        }
+        ts_resources_grid = { air = {...}, electricity = {...}, water = {...} }
+        ts_shuttles = { data = {...}, next_index = 11 }
+        ts_terraforming = { Atmosphere = {...}, Temperature = {...}, Vegetation = {...}, Water = {...} }
+        ts_trains = { data = {...}, next_index = 11 }
+        water = { city = {...}, production_thread = thread: 000002DFD090A3D8, 1 = {...} }
+        true = userdata: 000002DF80AA3430
+    }
+    closed_shifts = { 2 = false, 3 = false }
+    closed_workplaces = { 2 = 0, 3 = 0 }
+    command_centers = {
+        {
+            UIWorkRadius = 50
+            accumulated_maintenance_points = 800
+            are_requesters_connected = true
+            base_construction_cost_BlackCube = 0
+            base_construction_cost_Concrete = 0
+            base_construction_cost_Electronics = 8000
+            base_construction_cost_MachineParts = 0
+            base_construction_cost_Metals = 12000
+            base_construction_cost_Polymers = 0
+            base_construction_cost_PreciousMetals = 0
+            base_construction_cost_PreciousMinerals = 0
+            base_construction_cost_WasteRock = 0
+            base_consumption_amount = 1000
+            base_disable_electricity_consumption = 0
+            base_disable_maintenance = 0
+            base_dome_comfort = 0
+            base_dome_morale = 0
+            base_electricity_consumption = 3000
+            base_in_dome_construction_modifier = 100
+            base_maintenance_build_up_per_hr = 600
+            base_maintenance_resource_amount = 1000
+            base_maintenance_threshold_base = 100000
+            base_salvage_modifier = 100
+            base_service_area_max = 35
+            base_service_area_min = 5
+            base_show_service_area = true
+            base_sight_satisfaction = 0
+            base_sight_visible_size = 0
+            base_starting_drones = 4
+            base_upgrade1_consumption_amount = 1000
+            base_upgrade2_consumption_amount = 1000
+            base_upgrade3_consumption_amount = 1000
+            base_work_radius = 35
+            charging_stations = {...}
+            city = {...}
+            command_centers = {...}
+            connected_task_requesters = {...}
+            constructions = {}
+            creation_time = 209294
+            deficit_table = {...}
+            deficit_thread = thread: 000002DFDA6EE1A8
+            demand_queues = {...}
+            drones = {...}
+            electricity = {...}
+            force_fx_work_target = {...}
+            fx_working = true
+            grids_applied = true
+            handle = 1069
+            heavy_workload_time = false
+            init_with_skin = false
+            lap_start = 8969542
+            lap_time = 1155
+            last_enter_maintenance_mode_ts = 4712998
+            last_maintenance_points_accumulation_ts = 4756763
+            last_maintenance_points_full_ts = false
+            last_maintenance_serviced_ts = 4756763
+            maintenance_phase = false
+            maintenance_request_lookup = {...}
+            maintenance_resource_request = demand "Electronics" from DroneHub actual:0 (target:0)
+            maintenance_threshold_base = 120000
+            maintenance_threshold_current = 109200
+            maintenance_work_request = work "repair" from DroneHub actual:0 (target:0)
+            max_colorization_materials_attaches = 3
+            modifications = {...}
+            name = 
+            no_requests_time = 8969542
+            priority_queue = {...}
+            resource_spots = {...}
+            restrictor_tables = {...}
+            restrictor_update_mask = 0
+            restrictor_update_thread = thread: 000002DFDA700948
+            service_area_max = 50
+            serviced_rockets = {...}
+            serviced_wasterock_dumps = {...}
+            signs = {}
+            starting_drones = 6
+            supply_queues = {...}
+            task_requests = {...}
+            under_construction = {}
+            units = {}
+            update_constructions_thread = thread: 000002DFDA6FF7A0
+            update_thread = thread: 000002DFDA6EC248
+            upgrade_id_to_modifiers = {}
+            upgrade_modifiers = {}
+            upgrade_on_off_state = {}
+            upgrades_built = {}
+            waypoint_chains = {...}
+            work_radius = 50
+            working = true
+            true = userdata: 000002DF82350A20
+        }
+        {
+            AccumulateMaintenancePoints = function: 000002DFCD3F5EF0
+            FuelResourceAmount = 30000
+            GetPriorityForRequest = function: 000002DFCED8DFF0
+            UIWorkRadius = 35
+            accept_requester_connects = true
+            accumulate_maintenance_points = false
+            are_requesters_connected = true
+            arrival_loc = false
+            arrival_time = false
+            auto_connect = true
+            automode_start_time = false
+            base_FuelResourceAmount = 50000
+            base_PassengerOrbitLifetime = 3600000
+            base_cargo_capacity = false
+            base_construction_cost_BlackCube = 0
+            base_construction_cost_Concrete = 0
+            base_construction_cost_Electronics = 20000
+            base_construction_cost_MachineParts = 0
+            base_construction_cost_Metals = 60000
+            base_construction_cost_Polymers = 0
+            base_construction_cost_PreciousMetals = 0
+            base_construction_cost_PreciousMinerals = 0
+            base_construction_cost_WasteRock = 0
+            base_consumption_amount = 1000
+            base_disable_maintenance = 0
+            base_in_dome_construction_modifier = 100
+            base_maintenance_build_up_per_hr = 600
+            base_maintenance_resource_amount = 1000
+            base_maintenance_threshold_base = 100000
+            base_salvage_modifier = 100
+            base_show_service_area = true
+            base_sight_satisfaction = 0
+            base_sight_visible_size = 0
+            base_upgrade1_consumption_amount = 1000
+            base_upgrade2_consumption_amount = 1000
+            base_upgrade3_consumption_amount = 1000
+            base_work_radius = 35
+            boarded = {}
+            boarding = {}
+            bonus_sleep_time = false
+            box_height = 100
+            cargo = {...}
+            cargo_request_passengers = false
+            category = false
+            charging_progress = 0
+            charging_time_left = false
+            city = {...}
+            command = CmdWaitOrder
+            command_centers = {...}
+            command_destructors = {...}
+            command_thread = thread: 000002DFDCD3D0D0
+            connected_task_requesters = {...}
+            constructions = {}
+            copy_forbidden_resources = false
+            creation_time = 0
+            deficit_table = {...}
+            deficit_thread = thread: 000002DFDAA8A408
+            demand = {...}
+            demand_queues = {...}
+            departure_loc = {...}
+            departure_thread = thread: 000002DFDAA896A0
+            departures = {}
+            drone_charged = false
+            drones = {}
+            drones_entering = {...}
+            drones_exiting = {...}
+            drones_in_queue_to_charge = {}
+            flight_time = false
+            free_landing_slots = 0
+            fx_working = true
+            handle = 1062
+            has_free_landing_slots = false
+            heavy_workload_time = false
+            initialized = true
+            landed = true
+            landing_slots = {}
+            lap_start = 0
+            launch_time = false
+            modifications = {...}
+            name = Proton #1
+            pin_blink = false
+            pin_rollover = {...}
+            pin_rollover_hint = userdata: FF00000000001DB4
+            pin_rollover_hint_xbox = userdata: FF00000000000DD9
+            pin_travel_origin_map = false
+            pinned_on_map = {...}
+            placed_cubes = {}
+            placement = false
+            placement_offset = {}
+            priority_queue = {...}
+            queued_shuttles = {}
+            refuel_start_time = 8827264
+            rename_allowed = true
+            reserved_landing_sites = {...}
+            resource = {...}
+            resource_spots = {...}
+            restrictor_tables = {...}
+            restrictor_update_mask = 0
+            restrictor_update_thread = thread: 000002DFDAA8C010
+            serviced_rockets = {...}
+            serviced_wasterock_dumps = {...}
+            show_service_area = true
+            stockpiled_amount = {...}
+            storable_resources = {...}
+            supply = {...}
+            supply_queues = {...}
+            task_requests = {...}
+            thread_running_destructors = false
+            transported_passengers = {}
+            transported_rovers = {}
+            under_construction = {}
+            units = {...}
+            update_constructions_thread = thread: 000002DFDBBE6598
+            update_thread = thread: 000002DFD157BB60
+            upgrade_id_to_modifiers = {}
+            upgrade_modifiers = {}
+            upgrade_on_off_state = {}
+            upgrades_built = {}
+            visual_cubes = {}
+            waypoint_chains = {...}
+            working = true
+            true = userdata: 000002DF80E31B30
+        }
+    }
+    construction_cost_at_completion = { Concrete = 12000, MachineParts = 4000 }
+    creation_time = 5566226
+    current_accident_chance = 0
+    current_shift = 2
+    domes_query_res = true
+    domes_query_version = 1
+    electricity = {
+        building = {loop!}
+        consumption = 5000
+        consumption_lifetime = 30000
+        consumption_today = 10000
+        consumption_yesterday = 0
+        current_consumption = 5000
+        grid = {
+            all_consumers_supplied = true
+            charge = 0
+            cities = {...}
+            city = {...}
+            city_elements = {...}
+            connectors = {...}
+            consumers = {...}
+            consumption = 181600
+            consumption_for_overview = 181600
+            current_consumption = 181600
+            current_production = 246838
+            current_reserve = 665238
+            current_storage = 18000000
+            current_storage_change = 0
+            current_throttled_production = 0
+            current_waste = 65238
+            discharge = 600000
+            dust_thread = thread: 000002DFD8C96210
+            elements = {...}
+            handle = 5377909805
+            overlay_id = 2
+            producers = {...}
+            production = 246838
+            sort_consumers = false
+            storages = {...}
+            throttled_production = 0
+            update_consumer_state = false
+            update_thread = thread: 000002DFD8C96008
+            update_visuals = false
+            update_visuals_args = false
+            true = userdata: 000002DF8134F0C8
+        }
+        sort_index = 200023
+    }
+    fx_working = true
+    grids_applied = true
+    handle = 1388
+    init_with_skin = false
+    last_dust_throw_time = 8941226
+    last_maintenance_points_accumulation_ts = 5566226
+    maintenance_request_lookup = { (userdata) = true, (userdata) = true }
+    maintenance_resource_request = demand "MachineParts" from MetalsExtractor actual:0 (target:0)
+    maintenance_threshold_base = 120000
+    maintenance_threshold_current = 110000
+    maintenance_work_request = work "repair" from MetalsExtractor actual:0 (target:0)
+    max_colorization_materials_attaches = 4
+    max_storage = 20000
+    modifications = { maintenance_threshold_base = { amount = 0, percent = 120, 1 = {...} } }
+    name = 
+    nearby_deposits = {
+        1 = {
+            amount = 694640
+            city = {...}
+            depth_layer = 1
+            encyclopedia_id = Metals
+            grade = Average
+            handle = 2000000005
+            marker = {...}
+            max_amount = 699000
+            quality_mul = 100
+            revealed = true
+            vis_exp = false
+            true = userdata: 000002DF819A45D0
+        }
+        {...} = true
+    }
+    overtime = { false, false, false }
+    performance = 119
+    producers = {
+        Metals = {
+            GetPredictedDailyProduction = function: 000002DFCD6AC5C8
+            GetPredictedProduction = function: 000002DFCD6AA4A8
+            OnCalcProduction = function: 000002DFCD6AC3D0
+            OnProduce = function: 000002DFCD6ABFE8
+            additional_stockpile_params = {...}
+            base_production_per_day = 20000
+            current_stockpile_idx_stockpiled_amount = 83
+            handle = 5580070454
+            last_production_calc_t_delta = 7500
+            last_production_start_ts = 8963726
+            lifetime_production = 3083
+            max_storage = 20000
+            next_stockpile_idx = 1
+            parent = {...}
+            production_per_day = 20000
+            resource_produced = Metals
+            stock_max = 50000
+            stockpile_class = ResourceStockpile
+            stockpile_spots = {...}
+            stockpiled_resource = Metals
+            stockpiles = {...}
+            today_production = 793
+            total_stockpiled = 1083
+            yesterday_production = 0
+            true = userdata: 000002DF810A6948
+        }
+        1 = {loop!}
+    }
+    production_per_day = 20000
+    resource_spots = {
+        { Resourcepile1, 5400 }
+        { Resourcepile2, 5400 }
+        { Resourcepile3, 5400 }
+        { Resourcepile4, 5400 }
+        { Resourcepile5, 5400 }
+        { Resourcepile6, 5400 }
+        { Resourcepile7, 5400 }
+        { Resourcepile8, 5400 }
+        { Resourcepile9, 5400 }
+        { Resourcepile10, 5400 }
+        { Workdrone, 0 }
+        { Workrover, 0 }
+    }
+    signs = {}
+    task_requests = { work "repair" from MetalsExtractor actual:0 (target:0), demand "MachineParts" from MetalsExtractor actual:0 (target:0) }
+    ui_working = true
+    ui_working_changed = 8939767
+    units = {}
+    update_thread = thread: 000002DFDC257D58
+    upgrade_id_to_modifiers = {}
+    upgrade_modifiers = {}
+    upgrade_on_off_state = {}
+    upgrades_built = {}
+    wasterock_max_storage = 20000
+    wasterock_producer = {
+        additional_stockpile_params = { additional_supply_flags = 256, apply_to_grids = false, has_platform = true, priority = 2, snap_to_grid = false }
+        base_production_per_day = 1000
+        current_stockpile_idx_stockpiled_amount = 304
+        handle = 5557961172
+        last_production_calc_t_delta = 106085
+        last_production_start_ts = 8939767
+        lifetime_production = 2304
+        max_storage = 20000
+        next_stockpile_idx = 1
+        parent = {loop!}
+        production_per_day = 1000
+        resource_produced = WasteRock
+        stock_max = 10000
+        stockpile_class = WasteRockStockpile
+        stockpile_spots = { Resourcepile2 }
+        stockpiled_resource = WasteRock
+        stockpiles = { {...} }
+        today_production = 556
+        total_stockpiled = 1304
+        yesterday_production = 0
+        true = userdata: 000002DF810A67F8
+    }
+    waypoint_chains = {
+        {
+            name = Floordoor
+            openInside = 1
+            openOutside = 2
+            1 = (409439, 432110, 7972)
+            2 = (409632, 432222, 7972)
+            3 = (409642, 432228, 7966)
+            4 = (409977, 432421, 7967)
+            5 = (410097, 432490, 7925)
+        }
+        {
+            name = Queue
+            openInside = 1
+            openOutside = 2
+            1 = (410107, 432497, 7922)
+            2 = (410184, 432563, 7887)
+            3 = (410275, 432643, 7855)
+            4 = (410341, 432707, 7840)
+            5 = (410452, 432800, 7840)
+        }
+    }
+    workers = { { {...}, {...}, {...}, {...} }, { {...}, {...}, {...}, {...} }, { {...}, {...}, {...}, {...} } }
+    working = true
+    true = userdata: 000002DF80FF60F0
+}
+						Lua 0:40:25:729
+[mod] F108 BEFORE class=<1> auto=<2> autoperf=<3> maxw=<4> workers=<5> perf=<6> MetalsExtractor 0 0 4 12 119
+						Lua 0:41:21:493
+true
+						Lua 0:41:45:198
+[mod] F108 AFTER class=<1> auto=<2> autoperf=<3> maxw=<4> workers=<5> perf=<6> MetalsExtractor 1 50 4 12 122
