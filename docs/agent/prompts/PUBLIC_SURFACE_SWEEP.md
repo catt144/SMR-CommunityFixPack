@@ -91,6 +91,15 @@ Verified consistent 2026-08-24: five marked on the fix list, five on `faq.md`.
 
 ⛔ **This file has TWO blocks and they drift apart if you edit one.**
 
+⛔ **AND the card body now lives in THREE files that must move together** (learned
+2026-08-28, when a sweep updated this record + the change note but missed the
+description that actually auto-fills the page): this file, **`metadata.lua`'s
+`description`** (the auto-fill source that ships inside the mod — the plain block),
+and **`docs/UPLOAD_WORKFLOW.md`'s embedded backup copies** (owner-facing, so the
+owner never leaves the workflow to paste). Any count or headliner change touches
+all three. ⭐ Fast check: `grep -o 'Eighty[a-z-]* repairs' metadata.lua` and the
+same count word in `STORE_CARD_LIVE.md` and `UPLOAD_WORKFLOW.md` must all match.
+
 | block | line marker | format |
 |---|---|---|
 | Paradox Mods | `═══ PARADOX MODS — plain text` | plain |
