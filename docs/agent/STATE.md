@@ -13,7 +13,8 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   Roscosmos goal_4) is permanently unreachable once researched. Fix `Fix_ExtractorStaffedPerformance` (owner: FLOOR not
   ceiling) — chained post-wrapper, scoped `MetalExtractorWorkplace`, composes with C39. ⭐⭐ Attended A/B
   (`archive/f108_attended_Mars.exe-20260828-16.41.41.log`): staffed 119→(research)→**122 not 50**, workers held 12;
-  unmanned control **50** (floor). Mechanism was F36's supporting analysis. Entry F108.md.
+  unmanned control **50** (floor). ⭐ FULL FIELD ROUTE: Roscosmos goal ticked **3/3 COMPLETE** (workers Workaholic +
+  high comfort, no Genius). Mechanism was F36's supporting analysis. Entry F108.md.
 - **F104 ✅ CLOSED 08-24 — NOT OURS, and fully discharged.** Reply POSTED on GitHub issue **#1** 03:40Z,
   issue closed 06:01Z (`completed`), **reporter CONFIRMED 19:24Z** ("i had a hunch that mod might be the
   problem but thanks for checking"). Passage Network's `CreateDomeNetworks` override returns nothing;
