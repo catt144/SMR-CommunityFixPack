@@ -81,7 +81,7 @@ return PlaceObj('ModDef', {
 	-- to their accurate versions"); text-only, no behaviour, and `H-02` as
 	-- reworded 2026-08-24 puts hand edits to this string squarely in scope while
 	-- leaving the version bump to the owner's sitting.
-	'last_changes', "- Fixed a base-game error when a technology that reduces building costs finished researching while a terrain-levelling or rock-clearing job was active anywhere on the map.\n- Safe to install on a save where this is already happening; the levelling job can stay where it is.",
+	'last_changes', "- Fixed a base-game issue where the Extractor AI breakthrough held Metals and Rare Metals Extractors at 50 Performance even when they were fully staffed, which could make a sponsor goal that needs high-performance extractors impossible to finish. Staffed extractors now earn their full performance; unstaffed ones still run at 50.\n- Fixed a base-game error when a technology that reduces building costs finished researching while a terrain-levelling or rock-clearing job was active anywhere on the map.\n- Safe to install on a save where this is already happening; the levelling job can stay where it is.",
 	'id', "SMR_CommunityFixPack",
 	'author', "catt144",
 	-- ⭐ ADDED 2026-08-17 AT THE UPLOAD SITTING (④ step 1). Without it the

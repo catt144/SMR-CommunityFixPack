@@ -121,7 +121,7 @@ back at Paradox. ⛔ Do not paste the same block on both.
 ```
 Bug fixes for Surviving Mars: Relaunched.
 
-Eighty repairs, each one written up on the fix list with what you would
+Eighty-one repairs, each one written up on the fix list with what you would
 have seen and what was actually wrong. Every one targets something the game's
 own code gets wrong — the code says one thing, does another, and the fix makes
 it do what it says. It fixes bugs; it does not rebalance the game. Preferences
@@ -159,6 +159,7 @@ SOME OF WHAT IT FIXES
 · Building an artificial lake buried the rover that built it.
 · The Gene Forging research did nothing at all.
 · Salvaging an upgraded building left its bonuses behind forever.
+· The Extractor AI breakthrough capped your staffed extractors and could lock a sponsor's high-Performance extractor goal.
 · You were never warned about running out of Food or maintenance resources.
 · Independent Terraforming gave half the discount it advertises.
 · Researching a technology threw an error while a landscaping job was running.
@@ -235,7 +236,7 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=3787202810
 ```
 Bug fixes for [i]Surviving Mars: Relaunched[/i].
 
-[b]Eighty repairs[/b], each one written up on the fix list with what you would have seen and what was actually wrong. Every one targets something the game's own code gets wrong — the code says one thing, does another, and the fix makes it do what it says. It fixes bugs; it does not rebalance the game. Preferences and features are deliberately not in it.
+[b]Eighty-one repairs[/b], each one written up on the fix list with what you would have seen and what was actually wrong. Every one targets something the game's own code gets wrong — the code says one thing, does another, and the fix makes it do what it says. It fixes bugs; it does not rebalance the game. Preferences and features are deliberately not in it.
 
 Some of them you could hardly miss: an entire train line and every train on it deleted by salvaging a single hex, colonists suffocating on a walk between two domes, a lander that unloaded its own return fuel and could never come home.
 
@@ -259,6 +260,7 @@ And [b]four[/b] of them repair things you cannot see at all today: real defects 
 [*]Building an artificial lake buried the rover that built it.
 [*]The Gene Forging research did nothing at all.
 [*]Salvaging an upgraded building left its bonuses behind forever.
+[*]The Extractor AI breakthrough capped your staffed extractors and could lock a sponsor's high-Performance extractor goal.
 [*]You were never warned about running out of Food or maintenance resources.
 [*]Independent Terraforming gave half the discount it advertises.
 [*]Researching a technology threw an error while a landscaping job was running.
@@ -313,6 +315,22 @@ recognisable* — on three counts the others mostly manage one of:
 `grep -c '^??? ' content/fix-list.md` in `C:\Dev\SMR-CommunityMods`.
 ⛔ These blocks are our RECORD of what gets pasted — the live pages do not change
 until the owner pastes them at a sitting.
+
+## ⭐ 2026-08-28 — one more headliner added (F108), and why it qualifies
+
+**"The Extractor AI breakthrough held your staffed extractors at 50 Performance"**
+(F108). It clears the bar on the same three counts as F105:
+
+* **A player SAW it.** It came from a Steam Workshop comment on the live listing,
+  not from our own reading.
+* **It is reproduced.** Attended on 2026-08-28 — a staffed extractor held at ~120
+  after the breakthrough instead of collapsing to 50, an unstaffed one read 50,
+  and the sponsor's own "3 Extractors at 160 Performance" goal ticked to 3/3.
+* **It answers a concrete, checkable question** — whether a breakthrough can brick
+  a sponsor goal — and shows it no longer does.
+
+⛔ The count moved 80 → 81 with it. Re-derived, never typed:
+`grep -c '^??? ' content/fix-list.md` in `C:\Dev\SMR-CommunityMods`.
 
 ## Provenance of the headliners
 
