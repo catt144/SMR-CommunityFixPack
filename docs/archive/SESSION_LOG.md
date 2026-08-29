@@ -8,6 +8,46 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-08-29 (later) — CORRECTION: the leg below was wrong about Steam. The owner refuted it; measured off the subscribed copy
+
+tags: correction upload steam EF-068
+
+⛔ **The finding in the leg below — "Steam has had no upload since 2026-08-20 and carries neither F105 nor
+F108" — is FALSE.** Steam received both, at the sittings the owner actually ran. The owner refuted it with the
+Workshop change-notes page (three updates: **Aug 20 / Aug 24 / Aug 28**, the last two matching `saved` to the
+minute) and then **subscribed to the mod** so the delivered archive could be read directly. This leg is the
+correction; the leg below stays unedited, because this file is append-only.
+
+**Why it was wrong.** The argument was version arithmetic: one bump per sitting, and `RELEASE_PORTAL_PREP.md`
+§0.5(c) has Steam saving *before* packing, so a Steam upload should have shown a second bump. §0.5(c) describes
+a **first** upload and says so in the sentence that was quoted. Re-read at Src: the forced save in
+`Steam_PrepareForUpload` is inside `if mod.steam_id == 0 then` — the create-item branch
+(`CommonLua/Platforms/steam/SteamWorkshop.lua:17-22`). On an update `steam_id` is already set, the ownership
+probe finds the item `exists`, and the `else` branch runs (`params.publish = false`): no save, no bump.
+Paradox's `mod:SaveWholeMod()` (`ParadoxMods.lua:173`) is unconditional. ⇒ **one bump per sitting is exactly
+what a both-portals UPDATE sitting looks like.** This is the project's own recorded-facts-are-claims trap: the
+route was not re-derived, only the citation was — and the citation contained the word that refuted it.
+
+**The measurement that settles it**, off the subscribed copy (`workshop/content/3215050/3787202810/
+ModContent.fpk`, 396,408 B, md5 `af58c31e07e8586e2b2f31a913eeff7f`): **84 entries**, **82 byte-identical to our
+tree** — the 2 that differ are `items.lua` and `metadata.lua`, exactly the comment-stripping — with both
+`Fix_LandscapeCostRefresh.lua` (F105) and `Fix_ExtractorStaffedPerformance.lua` (F108) present, and a packed
+`metadata.lua` reading `version` 4, `pdx_version` "3". Steam packs the tree as Paradox's save left it.
+
+**A second error found on the way, in the fix for the first.** The `pdx_version` gloss rewritten that morning
+said it was our `version` before the bump. It is not ours at all: `mod.pdx_version = res.Version`
+(`ParadoxMods.lua:172`) is the number the *portal* returns — its own revision counter, hence 1, 2, 3 across
+three uploads. What the Paradox page shows as MOD VER is a different field,
+`VersionDisplayName = tostring(mod.version)` (`:156`), sent before `:173`'s save bumps it. Two successive
+glosses had it wrong; both corrected.
+
+**Filed:** fact **`EF-068`** (the update-upload mechanics, the trap, and the two controls that actually settle
+which portals ran: the store's change notes, and the subscribed archive). Checklist **80(a) WITHDRAWN**;
+`metadata.lua`'s comment blocks and STATE corrected. **80(b) stands and is now stronger** — the packed
+`description` reads "Eighty-one repairs", so both live pages carry a count the deployed fix list (79 entries)
+does not back. Checklist 79's publish button is the only thing still owed.
+
+
 ## 2026-08-29 — the dirty tree cleaned up: the 08-28 upload's editor round-trip committed; Steam gap found
 
 tags: upload paradox steam metadata round-trip housekeeping

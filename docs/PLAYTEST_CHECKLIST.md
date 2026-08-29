@@ -29,38 +29,43 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
-### ⛔ 2026-08-29 — YOUR 08-28 UPLOAD WENT TO PARADOX ONLY, AND IT PUT A COUNT ON THE LIVE PAGE THAT THE LINKED SITE DOES NOT YET BACK. Item 79 is no longer tidying — it is now a live discrepancy.
+### ⛔ 2026-08-29 — ITEM 80(a) IS WITHDRAWN: I told you Steam had missed both patches. It had not, and you caught it. 80(b) stands and is now confirmed on both stores.
 
-80. ⛔ **Two things came out of the 08-28 sitting, and neither was recorded until now.**
+80. ⛔ **(a) WITHDRAWN — the finding was false and the fault was mine.** I reported
+    that the Steam listing had received no upload since 2026-08-20 and carried
+    neither F105 nor F108, and asked you to decide whether to push it. **Steam had
+    both, from the sittings you actually ran.** You refuted it with the Workshop
+    change-notes page — three updates, Aug 20 / Aug 24 / Aug 28 — and by
+    subscribing so it could be read directly.
 
-    **(a) Steam did not get the update — on the version arithmetic, twice over.**
-    `metadata.lua` moved `version` 3 → 4 and `pdx_version` "2" → "3" at
-    2026-08-28 22:41:38Z: **one** bump. Paradox saves once, after the upload
-    returns; Steam saves *before* packing, so a Steam upload in the same sitting
-    adds a second bump (`RELEASE_PORTAL_PREP.md` §0.5(c)). The 08-24 F105 sitting
-    shows the same single bump. ⇒ **the Steam listing has had no upload since
-    2026-08-20 and carries neither F105 nor F108**, while Paradox carries both.
+    **What I got wrong.** I argued from the version number: one bump per sitting,
+    and `RELEASE_PORTAL_PREP.md` §0.5(c) says Steam saves *before* packing, so a
+    Steam upload should have added a second bump. §0.5(c) describes a **first**
+    upload and says so in the sentence I was quoting. Re-read at Src: the forced
+    save sits inside `if mod.steam_id == 0 then` — the create-item branch
+    (`SteamWorkshop.lua:17-22`). On an update `steam_id` is already set, so it
+    takes the `else`, saves nothing, and bumps nothing. One bump per sitting is
+    what a *both-portals* update sitting looks like. Recorded as `EF-068` so it
+    cannot be re-derived a third time.
 
-    ⚠️ **This is inferred from our own file, not read off the store.** Open the
-    Steam page and check what it says before acting. If it is behind: ⛔ Paradox
-    first is a *first-upload* rule and no longer binds — but a Steam upload will
-    bump the tree again (4 → 5) and widen the portal gap that item 71 says never
-    to chase, so it is your call whether the gap or the missing fixes matters more.
+    ⭐ **Settled by measurement, off your subscribed copy**, which is what a player
+    actually receives: 84 entries, **82 byte-identical to our tree** (the 2 that
+    differ are `items.lua`/`metadata.lua`, the comment-stripping), both
+    `Fix_LandscapeCostRefresh` and `Fix_ExtractorStaffedPerformance` present,
+    packed `metadata.lua` at `version` 4. **Nothing is owed on Steam.**
 
-    **(b) The live Paradox page now claims a number the site does not show.**
-    Every upload overwrites the page body from `metadata.lua`'s `description`,
-    and since the 08-24 ruling that field *is* the full store card — so the
-    08-28 upload published **"Eighty-one repairs"**, with a link to the fix list.
+    **(b) STANDS, and the shipped file confirms it.** The packed `description`
+    reads **"Eighty-one repairs"** — so both live pages now make that claim, not
+    just Paradox. The fix list they link to still shows **79**.
 
     | | commit | fix-list entries |
     |---|---|---|
     | **what a reader following that link sees now** | `a97b8b0` (deployed 08-21) | **79** |
     | what the site repo holds | `fcb2aa9` | **81** |
 
-    ⇒ **the falsifiable claim item 79 was written to prevent is already live**,
-    on Paradox, and has been since 08-28. Running item 79's publish button closes
-    it. Nothing else is needed — the site repo already has both F105 and F108.
-
+    ⇒ **the falsifiable claim item 79 was written to prevent is live on both
+    stores**, and has been since 08-28. Item 79's publish button closes it; the
+    site repo already has F105 and F108. That is the only thing here still owed.
 
 ### ⚠️ 2026-08-24 — ONE BUTTON, AND IT HAS TO HAPPEN BEFORE YOU PASTE THE STORE CARDS. The live site is one commit behind, and that commit is F105's.
 

@@ -153,17 +153,20 @@ return PlaceObj('ModDef', {
 	-- ⚠️ `version_minor` is absent below because `SaveDef` omits default-valued
 	-- properties — it was `0`, and `PackVersion` still renders
 	-- version_major.version_minor.version.
-	-- ⭐ UPDATED 2026-08-29 — THE TREE NOW SITS AT 4, in two further steps, and the
-	-- arithmetic identifies which portal took each one. 2026-08-24 (F105): version
-	-- 2 → 3, `pdx_version` "1" → "2". 2026-08-28 (F108): version 3 → 4,
-	-- `pdx_version` "2" → "3".
-	-- ⛔ ONE bump per upload is the TELL THAT ONLY PARADOX RAN. Paradox saves once,
-	-- after the upload returns; a Steam upload in the same sitting saves BEFORE
-	-- packing and would have added a SECOND bump (see the table in (c)). Neither
-	-- sitting shows one. ⇒ on this arithmetic the Steam listing has had no upload
-	-- since 2026-08-20 and carries NEITHER F105 NOR F108, while Paradox carries
-	-- both. ⚠️ INFERRED FROM THIS FILE, not read off the store — confirm on the
-	-- live Steam page before acting on it (owner's hands; checklist).
+	-- ⭐ UPDATED 2026-08-29 — THE TREE NOW SITS AT 4, in two further steps, and
+	-- ⛔⛔ THE VERSION ARITHMETIC CANNOT TELL YOU WHICH PORTALS RAN. 2026-08-24
+	-- (F105): version 2 → 3. 2026-08-28 (F108): version 3 → 4. **ONE** bump per
+	-- sitting — and BOTH portals were uploaded at BOTH sittings.
+	-- The reason, re-read at Src 2026-08-29: the forced pre-pack save in
+	-- `Steam_PrepareForUpload` sits INSIDE `if mod.steam_id == 0 then`
+	-- (`SteamWorkshop.lua:17-22`) — the CREATE-ITEM branch. On an UPDATE
+	-- `steam_id` is already set, so it takes the `else` (`params.publish = false`)
+	-- and NEVER saves. Paradox's `mod:SaveWholeMod()` (`:173`) is unconditional.
+	-- ⇒ one save per sitting, Paradox's, and Steam packs the tree AFTER it.
+	-- ⛔ The table in `PORTAL_PREP` §0.5(c) describes a **first** upload and says
+	-- so; a session read it as a general rule on 2026-08-29 and concluded Steam
+	-- had never been updated. It had. ⇒ the ONLY controls are the store's own
+	-- change notes and the SUBSCRIBED archive — never this file. `EF-068`.
 	'version_major', 1,
 	'version', 4,
 	'lua_revision', 350453,
@@ -269,10 +272,15 @@ return PlaceObj('ModDef', {
 	--   bookkeeping; `code_hash` is what the dirty check compares against
 	--   (`GedEditedObject:IsDirty`), so it is kept exactly as written.
 	--   `pdx_id` 156049 — the Paradox Mods listing.
-	--   `pdx_version` — ⚠️ the REVISION ALONE at save time (the value `version`
-	--   held BEFORE that upload's bump), not the pack's version; the portal page
-	--   shows it bare (`ParadoxMods.lua:156`), while the in-game browser renders
-	--   the real PackVersion from the archive.
+	--   `pdx_version` — ⛔ NOT ours at all: `mod.pdx_version = res.Version`
+	--   (`ParadoxMods.lua:172`), the number the PORTAL returns from the upload —
+	--   its own revision counter, which is why it reads 1, 2, 3 across our three
+	--   uploads. ⚠️ It is NOT what the page shows as MOD VER: that is
+	--   `VersionDisplayName = tostring(mod.version)` sent at `:156`, i.e. the
+	--   version BEFORE `:173`'s save bumps it. The in-game browser renders the
+	--   real PackVersion from the archive. (Gloss corrected 2026-08-29 — the
+	--   previous two wordings, including one written that morning, both had it
+	--   as our own `version`.)
 	--   `steam_id` "3787202810" — the Steam Workshop item.
 	-- ⚠️ Every comment in this file and in `items.lua` is STRIPPED by the forced
 	-- saves and restored here from git in the same commit. ⭐ IT HAS NOW HAPPENED

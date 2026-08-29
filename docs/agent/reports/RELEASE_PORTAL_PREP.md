@@ -130,6 +130,15 @@ about to move.
 
 ### (c) ⛔⛔ THE TWO PORTALS SAVE AT DIFFERENT MOMENTS ⇒ PARADOX GOES FIRST
 
+> ⛔⛔ **THIS SECTION IS ABOUT A *FIRST* UPLOAD ONLY, AND IT HAS ALREADY MISLED ONE
+> SESSION (2026-08-29).** Steam's forced pre-pack save is inside
+> `if mod.steam_id == 0 then` — the create-item branch. On an **update** the
+> `else` runs, nothing is saved and nothing is bumped, so an update sitting bumps
+> **once** (Paradox's, unconditional at `:173`) **even when both portals upload**.
+> ⇒ ⛔ **never read the version number as evidence of which portals ran.** The
+> controls are the store's own change notes and the subscribed archive. `EF-068`.
+
+
 Both portals call `SaveWholeMod()` unavoidably on a *first* upload (`steam_id`
 defaults to 0, `SteamMods.lua:50-61`; `pdx_id` unset). **But not at the same
 point in the sequence, and that decides what is inside the package:**
