@@ -71,6 +71,15 @@ return PlaceObj('ModDef', {
 	-- list; the removed module is preserved verbatim with a re-arm trigger in
 	-- docs/agent/reports/SHELVED_F85_DISTRESS_PAUSE.md, and re-applying it puts
 	-- this number BACK to six. Reasoning: STORE_FIXPACK.md notes, F85.md.
+	-- ⛔ SUPERSEDED 2026-08-28 — THE COUNT IS **SIX** AGAIN, for a different
+	-- reason: F108 (Extractor AI staffed-performance) shipped as a judgment
+	-- call. F85 is still `wontfix` and still out; the two movements are
+	-- unrelated and the "settled as FIVE" sentence above is now FALSE. Measured
+	-- 2026-08-29 off the DEPLOYED site: fix-list marks six entries
+	-- `judgment call`, FAQ names the same six, and this string states no number
+	-- at all ("A few of the fixes"), which is why the store never drifted.
+	-- ⇒ recount from the fix list, never from this block. Audit:
+	-- docs/agent/reports/SITE_AUDIT_0829.md.
 	-- ⛔ CORRECTED 2026-08-14 (release-3 prompt 1): this field STILL carried the
 	-- dead working title "Community Opt-In Pack" that the comment ten lines above
 	-- says was corrected — the 08-13 pass fixed `description` and missed this
