@@ -7,7 +7,7 @@ Defect truth `agent/bugs/INDEX.md` · facts `agent/facts/INDEX.md` · doc map `d
 Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/reports/CHAIN_METHOD.md`.
 
 ## Post-launch issues — field reports against the LIVE listings (newest first; entries carry the derivation)
-- **F108 ✅ FIXED + VERIFIED-ATTENDED 2026-08-28 — Steam field report; NOT ON LIVE LISTINGS (ships with queued 1.0.x).**
+- **F108 ✅ FIXED + VERIFIED-ATTENDED 08-28; ⭐ LIVE ON PARADOX 08-28 (v4/pdx3), ⛔ NOT on Steam — Steam field report.**
   Extractor AI (`automation=1`/`auto_performance=50` on MetalsExtractor+PreciousMetalsExtractor labels) caps STAFFED
   extractors at 50 via `Workplace.lua:197`, so Russia's `ExtractorPerformance` goal (3 @ 160, `SponsorGoals.lua:467`,
   Roscosmos goal_4) is permanently unreachable once researched. Fix `Fix_ExtractorStaffedPerformance` (owner: FLOOR not
@@ -39,12 +39,8 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   ⛔ NOT a repair — the site stays broken, the guard makes it harmless. ⚠️ "EXACTLY 3 techs" is the LABEL-SWEEP
   set only; `OnMsg.ConstructionCostChanged` (`ConstructionSite.lua:2832`) is a 2nd, class-filtered reader route,
   not ruled out by measurement — same guard covers it.
-  ⚠️ Live listings ONE module behind; that module's **F107** is REPAIRED and RIG-VERIFIED (see F107 above).
-- **F107 ✅ FIXED + RIG-VERIFIED 08-24 (checklist 74(a), receipt 76).** Was: `prev` **nil** on all 3 leaf
-  classdefs ⇒ delegation dead code. Now ONE wrap on `ConstructionSite`, which declares it (`:665`).
-  MEASURED unattended (`archive/f107_*.log`): suite **76/0/24/0** of 100, gate 78/78, clause 1 STILL PASS ×3,
-  new clause 3 proves the widening (ungathered ok, gathered `set_to=90 start_cost=50`), sweep `UNREACHED=3 ⇒ 0`
-  and TOTAL `clean=97 ⇒ 98`. Zero unexplained error lines. ⛔ Field route STILL untested (F105).
+- **F107 ✅ FIXED + RIG-VERIFIED 08-24, SHIPPED on Paradox 08-28** (checklist 74(a), receipt 76). Was a defect in
+  our own F105 fix, found before any player had it. ⛔ Field route STILL untested. Detail evicted 08-29; entry F107.md.
 - **Blame surface (checklist 73)** — `EF-065`(a) fires whenever ANY error throws under one of our
   wrapped targets (**105 measured**, not the ~60 estimated). 2 field sightings 08-23/24, neither ours. Checklist 73.
 
@@ -61,25 +57,25 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   ⛔⛔ **RE-PASTE BOTH CARD BODIES — EVERY upload OVERWRITES the page text** from `metadata.lua`
   (`LongDescription`/`ShortDescription`/`DisplayName`/`Tags`; Steam sends the same). MEASURED 08-24: the
   1.0.x upload wiped the pasted Paradox body back to the short description. **PER-UPLOAD, forever.**
-  ⚠️ Both store bodies are currently the short `metadata.lua` description ⇒ **no count claim is live**,
-  which is the only reason the undeployed site is not already falsifying a card.
+  ⛔⛔ **A COUNT CLAIM IS NOW LIVE AND UNBACKED**: since the 08-24 ruling `description` IS the full card, so the
+  08-28 upload published **"Eighty-one repairs"** on Paradox while the deployed site shows **79** — checklist 80(b).
   ✅ §1 steps 2–4 DONE (store links in the site, Pages ON, card carries site links, 0 FILL-IN markers left).
-- ⚠️ **SITE IS ONE COMMIT BEHIND AND IT IS F105's — checklist 79.** `publish-site.yml` is `workflow_dispatch`
-  ONLY by design, so committing the site never publishes it. Deployed `a97b8b0` = **79** fix-list entries,
-  repo `abe46c9` = **80**; the cards say "Eighty repairs". ⛔ **DEPLOY BEFORE PASTING THE CARDS** or the count
-  is falsifiable on the page the card links to. Derive the live count from the deployed commit, never off the page.
+- ⛔ **SITE IS THREE COMMITS BEHIND (F105 + F108) — checklist 79, now URGENT.** `publish-site.yml` is
+  `workflow_dispatch` ONLY by design, so committing the site never publishes it. Deployed `a97b8b0` = **79**
+  fix-list entries, repo `fcb2aa9` = **81**, and the LIVE Paradox body says "Eighty-one". ⇒ the falsifiable
+  count is no longer a risk, it is live. Derive the live count from the deployed commit, never off the page.
 - ⭐⭐ **Close-out chain (5 links) CONSUMED 08-20 — VERDICT SHIP, 0 launch blockers; all 5 challenges held.**
   `C50`+`C51` IN 1.0.0 (checklist 58), `C52` `parked`/FROZEN. Ruling receipt checklist 66.
   ⚠️ Link 5 left NO report: its record is commit `2326bd3`'s message + fact `EF-066`.
 - ⭐⭐ **`C50`+`C51` are `tested-attended` (08-20, EN+DE, owner at the keyboard): 77 applied, suite 74/0/24/0 of 98.**
   Report `reports/04_ATTENDED_SITTING.md`; logs `archive/link4{en,de,lang}_*`.
   ⛔ SKIPPED BY NAME: `C50`'s challenge landing-spot site, and the in-game Mission Profile on a SpaceY colony.
-- **A 1.0.x update IS queued since 2026-08-24** (F105's module; supersedes 08-20's "no queued 1.0.1").
-  ✅ **UNBLOCKED 08-24: `H-02` reworded by owner ruling (checklist 75), F107 built + rig-verified.
-  Nothing is owed but the OWNER'S SITTING** — ✅ `last_changes` REWRITTEN for F105 08-24 (no longer
-  "Initial release."); public-surface sweep re-run 08-24, every surface consistent (`prompts/PUBLIC_SURFACE_SWEEP.md`).
-  After that upload the next effort is the **opt-in pack** (owner 08-20, checklist 68); its kickoff reads
-  that repo's own STATE + `reports/PARKED_OPTIN_REFERENCES.md`.
+- ⭐⭐ **THE SITTING HAPPENED — PARADOX UPLOADED 2026-08-28** (F105+F108). Tree `version` **4**, `pdx_version` **"3"**,
+  `saved` 08-28T22:41:38Z; the editor round-trip was committed 08-29 with the §0.5(e) comment restore.
+  ⛔ **STEAM DID NOT RUN, on the version arithmetic** — ONE bump per sitting = Paradox only (Steam saves BEFORE
+  packing and adds a second). Same tell at 08-24. ⇒ Steam still ships the 08-20 build: **no F105, no F108**.
+  ⚠️ INFERRED from `metadata.lua`, never read off the store — **checklist 80**. Next effort: the **opt-in pack**
+  (owner 08-20, checklist 68); kickoff reads that repo's STATE + `reports/PARKED_OPTIN_REFERENCES.md`.
 - ⛔ **Shipping artifact: NO PACKED `.fpk` MATCHES THIS TREE.** Expected shape **83 files = 79 `Code/*.lua` +
   `items.lua` + `metadata.lua` + `LICENSE` + `preview.png`** (`tools/pack_predict.py .`, re-emitted 08-24 — F105's
   module made it 79; the old "82 = 78" was one module stale).
@@ -97,6 +93,7 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 - ✅ **Rig at the 08-20 sitting: all 3 junctions present, fix pack + TestKit ticked, opt-in pack OFF** (checklist 43).
   The rig runs cheats — the normal config.
 - **Owner decisions open** (bodies in `docs/PLAYTEST_CHECKLIST.md` → "Decisions waiting on you"):
+  **80 (Steam has no F105/F108 — confirm + decide; and the live count) · 79 (one button: publish the site)** ·
   76 (confirm (a) was a ruling not a leaning; the boot is done) ·
   53 (harden now or in 1.0.1; rec 1.0.1) · 51 (both-packs leg timing; rec after launch) · 50 (chain-vs-replace
   wording) · 47 (two modder-page wordings) · 43 (opt-in pack re-tick) · 41 (dialog wording + sweep cap 5→8) ·

@@ -8,6 +8,53 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-08-29 — the dirty tree cleaned up: the 08-28 upload's editor round-trip committed; Steam gap found
+
+tags: upload paradox steam metadata round-trip housekeeping
+
+**The tree was dirty and nobody had left it that way by mistake.** `items.lua` and `metadata.lua` were
+modified and uncommitted since 2026-08-28 18:41 local. They are the Mod Editor's own output: the owner
+packed and uploaded F108, and `ModDef:SaveDef` regenerates both files from the item list on every save,
+stripping every hand-written comment (`Mod.lua:967`; `RELEASE_PORTAL_PREP.md` §0.5(b)). The last commit
+(`1561dad`, 08-29) only added DISPATCH.md and never touched them. ⇒ **a dirty tree after a sitting is the
+EXPECTED state**, and clearing it is §0.5(e)'s writeback step, not a repair.
+
+**What changed and what was preserved.** `version` 3 → 4, `pdx_version` "2" → "3", `saved` → 1787956898
+(08-28T22:41:38Z), `code_hash` rewritten, field order reshuffled. Verified before committing: both files
+parse (`luaparser`); the `code` list is 80 lines and `items.lua` 80 `ModItemCode` entries on both sides in
+the same order, so **H-10 is satisfied and no module was lost**; `last_changes` and the `description` card
+body survived verbatim. `items.lua` was byte-identical to HEAD once comments are stripped, so it was
+restored wholesale from git. `metadata.lua` was rebuilt: the editor's values and field order kept exactly,
+all 160 HEAD comment lines re-attached, of which 8 were rewritten for accuracy (the "tree now sits at 2"
+claim, the `pdx_version` gloss that pinned a number that has since moved twice, and the strip-and-restore
+note, which now records that this has happened three times and is routine).
+
+**⛔ THE FINDING: Steam did not get either patch.** The version arithmetic is the control. Paradox saves
+ONCE, after the upload returns; Steam saves BEFORE packing, so a Steam upload in the same sitting adds a
+SECOND bump (`RELEASE_PORTAL_PREP.md` §0.5(c)). The 08-24 F105 sitting shows one bump (2 → 3, pdx "1" → "2")
+and the 08-28 F108 sitting shows one bump (3 → 4, pdx "2" → "3"). ⇒ **the Steam listing has had no upload
+since 2026-08-20 and carries neither F105 nor F108.** ⚠️ Inferred from our own file, NOT read off the store —
+filed as checklist 80(a) for the owner to confirm on the live page, since a Steam upload bumps the tree again
+and widens the portal gap checklist 71 says never to chase.
+
+**⛔ AND A LIVE COUNT CLAIM WENT UNBACKED.** Since the 08-24 ruling, `description` IS the full store card, and
+every upload overwrites the page body from it — so the 08-28 upload published **"Eighty-one repairs"** onto the
+Paradox page. The deployed site is still `a97b8b0` with **79** fix-list entries (site repo `fcb2aa9` has 81,
+committed but never published, because `publish-site.yml` is `workflow_dispatch`-only by design). Counted
+locally off the deployed commit, never off the web page. ⇒ the falsifiable count that checklist 79 was written
+to prevent has been live on Paradox since 08-28; item 79's one button closes it. Filed as checklist 80(b).
+
+**Evicted from STATE.md (fixed, rig-verified and now shipped; kept here verbatim):**
+- **F107 ✅ FIXED + RIG-VERIFIED 08-24 (checklist 74(a), receipt 76).** Was: `prev` **nil** on all 3 leaf
+  classdefs ⇒ delegation dead code. Now ONE wrap on `ConstructionSite`, which declares it (`:665`).
+  MEASURED unattended (`archive/f107_*.log`): suite **76/0/24/0** of 100, gate 78/78, clause 1 STILL PASS ×3,
+  new clause 3 proves the widening (ungathered ok, gathered `set_to=90 start_cost=50`), sweep `UNREACHED=3 ⇒ 0`
+  and TOTAL `clean=97 ⇒ 98`. Zero unexplained error lines. ⛔ Field route STILL untested (F105).
+
+Also committed: `reports/F105_BRIEF_RECONSTRUCTION.md`, finished 08-25 and left untracked — the same way the
+brief it reconstructs was lost.
+
+
 ## 2026-08-28 — F108 filed + verified attended (Steam field report); F106 line evicted here
 
 tags: F108 F106 field-report

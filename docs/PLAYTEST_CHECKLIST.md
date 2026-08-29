@@ -29,6 +29,39 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### ⛔ 2026-08-29 — YOUR 08-28 UPLOAD WENT TO PARADOX ONLY, AND IT PUT A COUNT ON THE LIVE PAGE THAT THE LINKED SITE DOES NOT YET BACK. Item 79 is no longer tidying — it is now a live discrepancy.
+
+80. ⛔ **Two things came out of the 08-28 sitting, and neither was recorded until now.**
+
+    **(a) Steam did not get the update — on the version arithmetic, twice over.**
+    `metadata.lua` moved `version` 3 → 4 and `pdx_version` "2" → "3" at
+    2026-08-28 22:41:38Z: **one** bump. Paradox saves once, after the upload
+    returns; Steam saves *before* packing, so a Steam upload in the same sitting
+    adds a second bump (`RELEASE_PORTAL_PREP.md` §0.5(c)). The 08-24 F105 sitting
+    shows the same single bump. ⇒ **the Steam listing has had no upload since
+    2026-08-20 and carries neither F105 nor F108**, while Paradox carries both.
+
+    ⚠️ **This is inferred from our own file, not read off the store.** Open the
+    Steam page and check what it says before acting. If it is behind: ⛔ Paradox
+    first is a *first-upload* rule and no longer binds — but a Steam upload will
+    bump the tree again (4 → 5) and widen the portal gap that item 71 says never
+    to chase, so it is your call whether the gap or the missing fixes matters more.
+
+    **(b) The live Paradox page now claims a number the site does not show.**
+    Every upload overwrites the page body from `metadata.lua`'s `description`,
+    and since the 08-24 ruling that field *is* the full store card — so the
+    08-28 upload published **"Eighty-one repairs"**, with a link to the fix list.
+
+    | | commit | fix-list entries |
+    |---|---|---|
+    | **what a reader following that link sees now** | `a97b8b0` (deployed 08-21) | **79** |
+    | what the site repo holds | `fcb2aa9` | **81** |
+
+    ⇒ **the falsifiable claim item 79 was written to prevent is already live**,
+    on Paradox, and has been since 08-28. Running item 79's publish button closes
+    it. Nothing else is needed — the site repo already has both F105 and F108.
+
+
 ### ⚠️ 2026-08-24 — ONE BUTTON, AND IT HAS TO HAPPEN BEFORE YOU PASTE THE STORE CARDS. The live site is one commit behind, and that commit is F105's.
 
 79. ⚠️ **Run *Actions → Publish docs site → Run workflow* on `SMR-CommunityMods`.**
