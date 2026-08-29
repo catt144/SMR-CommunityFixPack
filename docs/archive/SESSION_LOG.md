@@ -8,6 +8,44 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-08-29 (third) — the site was already published, twice; SITE_AUDIT.md written; STATE's "deployed" line was the trap
+
+tags: correction site pages deploy prompts SITE_AUDIT
+
+⛔ **Second false claim to the owner in one session, same root cause.** I reported the Pages site as three
+commits behind, with the store's "Eighty-one repairs" unbacked against a 79-entry fix list, and said checklist
+79's publish button was "the only thing owed". **The owner had already published it, on 08-24 and again on
+08-28.** The claim came from STATE's `deployed a97b8b0 = 79 entries` line — true when written 08-21 — which I
+repeated twice as current without taking a reading. Same failure as the Steam error earlier in the session:
+**a record read as a measurement.**
+
+**The control, found while route-checking the audit prompt rather than while making the claim.** `gh` is not
+installed on this box; the public deployments API answers it unauthenticated in one call:
+`api.github.com/repos/catt144/SMR-CommunityMods/deployments?environment=github-pages` → newest rows `7f4bb78`
+(08-28T22:25:06Z) and `abe46c9` (08-24). ⚠️ A deployment row is not a success — `deployments/<id>/statuses`
+reads `success` at 08-28T22:25:18Z. ⇒ **deployed = `7f4bb78`, carrying 81 fix-list entries.** Independent
+witness: the live page renders **81** `<details>` elements. Two controls agree, so the store claim is BACKED.
+
+**What is actually left, and it is small.** Exactly one commit is undeployed, `fcb2aa9`, and it changes one
+word: live `index.md` says *"**five** fixes are judgment calls"* while the live FAQ says **six**, twice. The two
+edits landed in different commits (`7f4bb78` did the FAQ, `fcb2aa9` did index.md), so a partial deploy left the
+public site disagreeing with itself while the repo looked perfectly consistent. Filed as checklist **81**; one
+more run of the workflow clears it. Checklist **79 marked DONE** with its evidence, **80 WITHDRAWN IN FULL**.
+
+**Written: `prompts/SITE_AUDIT.md`** (owner's ask — a prompt they can hand to a fresh session to audit the
+deployed site). `PUBLIC_SURFACE_SWEEP.md` does not cover it: that sheet AUTHORS the words when a fix ships and
+measures consistency against the repo, so a session running it would report "consistent" while the public page
+lagged. The new sheet opens with §1 "which commit is actually live", because that is the step whose absence
+produced this leg — every command in it was route-checked before it was written in, per the house rule that
+"you can X" needs a route check. It also carries the partial-deploy trap above as a named check in §3.
+
+**Evicted from STATE.md (superseded; kept here verbatim):**
+- ⛔ **Owed on the live listings** (owner's hands). ✅ **§0.5(d) DISCHARGED 08-24 — it was never a task:**
+  the page reads **350453** automatically (`RecommendedGameVersion = lua_revision`, `ParadoxMods.lua:153`);
+  the 08-19 audit grepped `RequiredGameVersion`, the wrong parameter name, and invented the obligation.
+  §0.5(f) Paradox 1.0.x captured: **MOD VER 2 · 382.57 KB · changelog v2 posted 21:55**.
+
+
 ## 2026-08-29 (later) — CORRECTION: the leg below was wrong about Steam. The owner refuted it; measured off the subscribed copy
 
 tags: correction upload steam EF-068

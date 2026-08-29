@@ -109,6 +109,7 @@ patched at runtime; no game files are modified). The map is `docs/README.md`.
 | putting an update live (pack/upload/store/site) | `UPLOAD_WORKFLOW.md` (+ `reports/RELEASE_PORTAL_PREP.md`) |
 | closing out after a listing exists | `prompts/POST_UPLOAD_CLOSE.md` |
 | updating public-facing docs / cards / site | `prompts/PUBLIC_SURFACE_SWEEP.md` |
+| auditing what the LIVE Pages site says (vs what is committed) | `prompts/SITE_AUDIT.md` |
 | the drone system | `prompts/DRONE_PROJECT_PROMPT.md` |
 | an effort larger than ~2 sessions | `reports/CHAIN_METHOD.md` (propose a chain) |
 | STATE is over its byte cap | `prompts/STATE_EVICTION.md` |

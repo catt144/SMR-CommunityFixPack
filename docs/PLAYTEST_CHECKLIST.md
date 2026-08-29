@@ -29,47 +29,53 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
-### ⛔ 2026-08-29 — ITEM 80(a) IS WITHDRAWN: I told you Steam had missed both patches. It had not, and you caught it. 80(b) stands and is now confirmed on both stores.
+### ⛔ 2026-08-29 — ITEM 80 IS WITHDRAWN IN FULL, BOTH HALVES. You had already done everything I said was owed. One real thing is left and it is one word on one page.
 
-80. ⛔ **(a) WITHDRAWN — the finding was false and the fault was mine.** I reported
-    that the Steam listing had received no upload since 2026-08-20 and carried
-    neither F105 nor F108, and asked you to decide whether to push it. **Steam had
-    both, from the sittings you actually ran.** You refuted it with the Workshop
-    change-notes page — three updates, Aug 20 / Aug 24 / Aug 28 — and by
-    subscribing so it could be read directly.
+81. ⚠️ **The live site contradicts itself on one number — a deploy fixes it.**
+    `content/index.md` says *"**five** fixes are judgment calls"*; the FAQ says
+    **six**, twice. Read off both live pages 2026-08-29, not off the repo.
 
-    **What I got wrong.** I argued from the version number: one bump per sitting,
-    and `RELEASE_PORTAL_PREP.md` §0.5(c) says Steam saves *before* packing, so a
-    Steam upload should have added a second bump. §0.5(c) describes a **first**
-    upload and says so in the sentence I was quoting. Re-read at Src: the forced
-    save sits inside `if mod.steam_id == 0 then` — the create-item branch
-    (`SteamWorkshop.lua:17-22`). On an update `steam_id` is already set, so it
-    takes the `else`, saves nothing, and bumps nothing. One bump per sitting is
-    what a *both-portals* update sitting looks like. Recorded as `EF-068` so it
-    cannot be re-derived a third time.
+    The repo is already right: `fcb2aa9` corrects index.md, and it is the **only**
+    commit not deployed. The two edits landed in *different* commits (`7f4bb78`
+    did the FAQ, `fcb2aa9` did index.md), so deploying one and not the other left
+    the public site disagreeing with itself while the repo looked consistent.
 
-    ⭐ **Settled by measurement, off your subscribed copy**, which is what a player
-    actually receives: 84 entries, **82 byte-identical to our tree** (the 2 that
-    differ are `items.lua`/`metadata.lua`, the comment-stripping), both
-    `Fix_LandscapeCostRefresh` and `Fix_ExtractorStaffedPerformance` present,
-    packed `metadata.lua` at `version` 4. **Nothing is owed on Steam.**
+    ⇒ **one run of *Actions → Publish docs site*** on `SMR-CommunityMods` clears
+    it. Low severity — nobody is misled about what the pack does — but it is the
+    kind of thing a reader notices and it costs a minute.
 
-    **(b) STANDS, and the shipped file confirms it.** The packed `description`
-    reads **"Eighty-one repairs"** — so both live pages now make that claim, not
-    just Paradox. The fix list they link to still shows **79**.
+80. ⛔ **WITHDRAWN IN FULL — both halves were wrong, and the fault was mine.**
 
-    | | commit | fix-list entries |
-    |---|---|---|
-    | **what a reader following that link sees now** | `a97b8b0` (deployed 08-21) | **79** |
-    | what the site repo holds | `fcb2aa9` | **81** |
+    **(a) Steam.** I said the Steam listing had neither F105 nor F108. It had
+    both. You refuted it with the Workshop change-notes page and by subscribing;
+    the delivered archive settles it — 84 entries, 82 byte-identical to our tree,
+    both fix modules present, packed `version` 4. I had argued from the version
+    number, and `RELEASE_PORTAL_PREP.md` §0.5(c) describes a **first** upload in
+    the sentence I was quoting. Recorded as `EF-068`.
 
-    ⇒ **the falsifiable claim item 79 was written to prevent is live on both
-    stores**, and has been since 08-28. Item 79's publish button closes it; the
-    site repo already has F105 and F108. That is the only thing here still owed.
+    **(b) The count.** I said both stores claimed "Eighty-one repairs" while the
+    site backed only 79, and called it a live falsifiable claim. **It is backed.**
+    You deployed the site on 08-24 *and* 08-28; the live deployment is `7f4bb78`,
+    status `success`, and it carries **81** fix-list entries. The live page itself
+    renders 81. Two independent controls agree.
 
-### ⚠️ 2026-08-24 — ONE BUTTON, AND IT HAS TO HAPPEN BEFORE YOU PASTE THE STORE CARDS. The live site is one commit behind, and that commit is F105's.
+    **What I did wrong, both times: I read a record instead of taking a reading.**
+    STATE said "deployed `a97b8b0` = 79 entries", true when written on 08-21, and
+    I repeated it twice as current without checking. The deployments API answers
+    it in one call and I only ran it while writing the audit prompt — which is
+    precisely why that prompt now opens with it as §1.
 
-79. ⚠️ **Run *Actions → Publish docs site → Run workflow* on `SMR-CommunityMods`.**
+    ⇒ **item 79 is DONE** (see below), and nothing is owed on either store.
+
+### ✅ 2026-08-24 — ITEM 79 IS DONE. You ran it on 08-24 and again on 08-28; verified 2026-08-29 against the deployments API. The original text is kept below as the record.
+
+79. ✅ **DONE — deployed `7f4bb78`, status `success`, 2026-08-28T22:25:18Z, carrying
+    81 fix-list entries.** The gap this item was written against is closed. ⚠️ One
+    later commit (`fcb2aa9`) is still undeployed — that is item 81, not this.
+
+    <details><summary>The original item, kept for the record</summary>
+
+    ⚠️ **Run *Actions → Publish docs site → Run workflow* on `SMR-CommunityMods`.**
     Everything is committed and pushed; **none of it is public.** The publish
     workflow is `workflow_dispatch`-only **on purpose** — publishing is your act,
     public-docs chain rule 5 — so the F105 entry has been sitting live-invisible
@@ -90,6 +96,8 @@ completed tests move whole to
     ✅ Nothing else about the site is owed — Pages is on, the store links are in
     the pages, the card carries the site links, and no FILL-IN markers remain.
     This is one button, and it costs you about a minute.
+
+    </details>
 
 ### ⛔ 2026-08-24 — ITEM 78 IS WITHDRAWN. I asked you to decide something you had already done, on a tool reading that was wrong. Both reporters are answered. Nothing is owed.
 

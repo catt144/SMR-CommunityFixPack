@@ -50,20 +50,17 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   ⚠️ The split is mechanical, not a mistake: Paradox saves AFTER upload, Steam saves BEFORE packing, so running
   both in one sitting put the bump inside Steam's archive (checklist 71; `PORTAL_PREP` §0.5(c)). ⛔ Do NOT
   re-upload to "fix" the number — a further upload bumps again. This retires 37 Q2, decided by circumstance.
-- ⛔ **Owed on the live listings** (owner's hands). ✅ **§0.5(d) DISCHARGED 08-24 — it was never a task:**
-  the page reads **350453** automatically (`RecommendedGameVersion = lua_revision`, `ParadoxMods.lua:153`);
-  the 08-19 audit grepped `RequiredGameVersion`, the wrong parameter name, and invented the obligation.
-  §0.5(f) Paradox 1.0.x captured: **MOD VER 2 · 382.57 KB · changelog v2 posted 21:55**.
-  ⛔⛔ **RE-PASTE BOTH CARD BODIES — EVERY upload OVERWRITES the page text** from `metadata.lua`
-  (`LongDescription`/`ShortDescription`/`DisplayName`/`Tags`; Steam sends the same). MEASURED 08-24: the
-  1.0.x upload wiped the pasted Paradox body back to the short description. **PER-UPLOAD, forever.**
-  ⛔⛔ **A COUNT CLAIM IS LIVE AND UNBACKED ON BOTH STORES**: `description` IS the full card since the 08-24
-  ruling, and the PACKED file reads **"Eighty-one repairs"** while the deployed site shows **79** — checklist 80(b).
-  ✅ §1 steps 2–4 DONE (store links in the site, Pages ON, card carries site links, 0 FILL-IN markers left).
-- ⛔ **SITE IS THREE COMMITS BEHIND (F105 + F108) — checklist 79, now URGENT and the ONLY thing owed.**
-  `publish-site.yml` is `workflow_dispatch` ONLY by design, so committing the site never publishes it. Deployed
-  `a97b8b0` = **79** fix-list entries, repo `fcb2aa9` = **81**, and BOTH live bodies say "Eighty-one". ⇒ the
-  falsifiable count is no longer a risk, it is live. Derive it from the deployed commit, never off the page.
+- ✅ **NOTHING OWED ON EITHER LISTING** (08-29; §0.5(d)+(f) discharged, §1 steps 2–4 done).
+  ⛔⛔ **EVERY upload OVERWRITES both page bodies** from `metadata.lua` (`LongDescription`/`ShortDescription`/
+  `DisplayName`/`Tags`; Steam sends the same) — PER-UPLOAD, forever. Since the 08-24 ruling `description` IS the
+  full card, so that auto-fill is now the CORRECT result and a hand paste is optional polish only.
+  ✅ **The count claim is BACKED**: packed `description` says **"Eighty-one repairs"**, deployed site carries **81**.
+- ✅ **SITE PUBLISHED 08-24 AND 08-28 — checklist 79 DONE.** Deployed **`7f4bb78`**, status `success`
+  08-28T22:25:18Z, **81** fix-list entries (live page renders 81; two controls agree). ⛔ **`publish-site.yml` is
+  `workflow_dispatch` ONLY by design**, so committing the site never publishes it. ⚠️ ONE commit undeployed,
+  `fcb2aa9`: live `index.md` says **five** judgment calls, live FAQ says **six** — checklist 81, one more run.
+  ⛔ **NEVER quote a "deployed = <sha>" line as current** — this one was 4 days and 2 deploys stale and was
+  repeated twice on 08-29. The reading is the deployments API; route + audit sheet in `prompts/SITE_AUDIT.md`.
 - ⭐⭐ **Close-out chain (5 links) CONSUMED 08-20 — VERDICT SHIP, 0 launch blockers; all 5 challenges held.**
   `C50`+`C51` IN 1.0.0 (checklist 58), `C52` `parked`/FROZEN. Ruling receipt checklist 66.
   ⚠️ Link 5 left NO report: its record is commit `2326bd3`'s message + fact `EF-066`.
@@ -95,7 +92,7 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 - ✅ **Rig at the 08-20 sitting: all 3 junctions present, fix pack + TestKit ticked, opt-in pack OFF** (checklist 43).
   The rig runs cheats — the normal config.
 - **Owner decisions open** (bodies in `docs/PLAYTEST_CHECKLIST.md` → "Decisions waiting on you"):
-  **79 (one button: publish the site — the live count depends on it) · 80(b)** · [80(a) WITHDRAWN 08-29] ·
+  **81 (one deploy: live index says five judgment calls, FAQ says six)** · [79 DONE · 80 WITHDRAWN IN FULL 08-29] ·
   76 (confirm (a) was a ruling not a leaning; the boot is done) ·
   53 (harden now or in 1.0.1; rec 1.0.1) · 51 (both-packs leg timing; rec after launch) · 50 (chain-vs-replace
   wording) · 47 (two modder-page wordings) · 43 (opt-in pack re-tick) · 41 (dialog wording + sweep cap 5→8) ·
