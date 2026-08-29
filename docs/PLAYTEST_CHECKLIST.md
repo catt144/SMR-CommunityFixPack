@@ -1760,7 +1760,17 @@ rock-clearing jobs) crashes the same way, not just levelling.
     (`2cedf7d`), nothing in this repo touched — the receipt, including what is
     measured there versus pre-emptive, is **item 55**.
 
+    ✅ **Q2 — Steam's version number: CLOSED, no decision needed.** Retired by
+    circumstance at the 08-20 dual upload, and doubly moot since: from the 08-24
+    sitting on, an UPDATE bumps once and Steam packs after Paradox's save, so
+    **both listings now ship the same `version` 4** — measured in the delivered
+    Steam archive 2026-08-29 (`EF-068`). ⇒ item 37 is closed in full.
+
+    <details><summary>The original question</summary>
+
     ❓ **Q2 — Steam's version number.** ⛔ Decide **after** Paradox, not now.
+
+    </details>
     Paradox Mods saves *after* it uploads, so it receives a clean **1.0.0**.
     Steam saves *before* it packs, so a straight second upload would ship
     **1.0.1**. Getting Steam to 1.0.0 as well costs one extra restart and a

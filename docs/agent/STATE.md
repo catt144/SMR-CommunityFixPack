@@ -96,7 +96,8 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   76 (confirm (a) was a ruling not a leaning; the boot is done) ·
   53 (harden now or in 1.0.1; rec 1.0.1) · 51 (both-packs leg timing; rec after launch) · 50 (chain-vs-replace
   wording) · 47 (two modder-page wordings) · 43 (opt-in pack re-tick) · 41 (dialog wording + sweep cap 5→8) ·
-  40 (`smr_shuttles` name) · 39 (dialog re-fire) · 37 Q2 (Steam, after Paradox).
+  40 (`smr_shuttles` name) · 39 (dialog re-fire). [37 CLOSED IN FULL 08-29: Q1 ruled 08-20, Q2 moot —
+  both listings ship version 4.]
 - Watches: `EF-066` SWEPT 08-24 — **105** declared targets (not ~60), 97 reach every subclass; the 8 leftovers
   are re-declaring subclasses (biggest: `Fix_ShuttleHubOffAvailable` misses ~578 under `Building`). ⛔ Which of
   them are ever INSTANTIATED is NOT measured and checklist 74 stays half open on it ·
