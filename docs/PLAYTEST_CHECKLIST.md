@@ -29,11 +29,13 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
-### ⛔ 2026-08-29 — ITEM 80 IS WITHDRAWN IN FULL, BOTH HALVES. You had already done everything I said was owed. One real thing is left and it is one word on one page.
+### ✅ 2026-08-29 — ITEM 81 DONE, you ran it 18:44Z and the site is fully deployed. ITEM 80 WITHDRAWN IN FULL, both halves. Nothing is owed on the site or either store.
 
-81. ⚠️ **The live site contradicts itself on one number — a deploy fixes it.**
-    `content/index.md` says *"**five** fixes are judgment calls"*; the FAQ says
-    **six**, twice. Read off both live pages 2026-08-29, not off the repo.
+81. ✅ **DONE — deployed `fcb2aa9`, status `success`, 2026-08-29T18:44:14Z.**
+    Verified on three controls: the deployments API, the live index page (now
+    reads *"six fixes are judgment calls"*), and `git log fcb2aa9..HEAD` in the
+    site repo, which is **empty — every commit is now public.** Live fix list
+    still 81 entries. Was: index.md said **five**, the FAQ said **six**, twice.
 
     The repo is already right: `fcb2aa9` corrects index.md, and it is the **only**
     commit not deployed. The two edits landed in *different* commits (`7f4bb78`

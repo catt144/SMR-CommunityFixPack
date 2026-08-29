@@ -55,12 +55,12 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   `DisplayName`/`Tags`; Steam sends the same) — PER-UPLOAD, forever. Since the 08-24 ruling `description` IS the
   full card, so that auto-fill is now the CORRECT result and a hand paste is optional polish only.
   ✅ **The count claim is BACKED**: packed `description` says **"Eighty-one repairs"**, deployed site carries **81**.
-- ✅ **SITE PUBLISHED 08-24 AND 08-28 — checklist 79 DONE.** Deployed **`7f4bb78`**, status `success`
-  08-28T22:25:18Z, **81** fix-list entries (live page renders 81; two controls agree). ⛔ **`publish-site.yml` is
-  `workflow_dispatch` ONLY by design**, so committing the site never publishes it. ⚠️ ONE commit undeployed,
-  `fcb2aa9`: live `index.md` says **five** judgment calls, live FAQ says **six** — checklist 81, one more run.
-  ⛔ **NEVER quote a "deployed = <sha>" line as current** — this one was 4 days and 2 deploys stale and was
-  repeated twice on 08-29. The reading is the deployments API; route + audit sheet in `prompts/SITE_AUDIT.md`.
+- ✅✅ **SITE FULLY DEPLOYED 2026-08-29 18:44Z — `fcb2aa9`, status `success`, NOTHING undeployed** (`git log
+  fcb2aa9..HEAD` empty). **81** live fix-list entries; the five/six judgment-call contradiction is gone
+  (checklists 79 + 81 both DONE). Audited clean the same day: `reports/SITE_AUDIT_0829.md`.
+  ⛔ **`publish-site.yml` is `workflow_dispatch` ONLY by design** — committing the site never publishes it.
+  ⛔ **NEVER quote a "deployed = <sha>" line as current**: one was 4 days + 2 deploys stale and was repeated
+  twice on 08-29. The reading is the deployments API; route + audit sheet in `prompts/SITE_AUDIT.md`.
 - ⭐⭐ **Close-out chain (5 links) CONSUMED 08-20 — VERDICT SHIP, 0 launch blockers; all 5 challenges held.**
   `C50`+`C51` IN 1.0.0 (checklist 58), `C52` `parked`/FROZEN. Ruling receipt checklist 66.
   ⚠️ Link 5 left NO report: its record is commit `2326bd3`'s message + fact `EF-066`.
@@ -92,7 +92,7 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 - ✅ **Rig at the 08-20 sitting: all 3 junctions present, fix pack + TestKit ticked, opt-in pack OFF** (checklist 43).
   The rig runs cheats — the normal config.
 - **Owner decisions open** (bodies in `docs/PLAYTEST_CHECKLIST.md` → "Decisions waiting on you"):
-  **81 (one deploy: live index says five judgment calls, FAQ says six)** · [79 DONE · 80 WITHDRAWN IN FULL 08-29] ·
+  [79 · 81 DONE · 80 WITHDRAWN IN FULL, all 08-29 — nothing owed on the site or either store] ·
   76 (confirm (a) was a ruling not a leaning; the boot is done) ·
   53 (harden now or in 1.0.1; rec 1.0.1) · 51 (both-packs leg timing; rec after launch) · 50 (chain-vs-replace
   wording) · 47 (two modder-page wordings) · 43 (opt-in pack re-tick) · 41 (dialog wording + sweep cap 5→8) ·
