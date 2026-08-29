@@ -8,6 +8,79 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-08-29 (fourth) — STATE eviction: 15,682 B → kernel; the launch, the post-launch fixes, portal + site work all moved here
+
+tags: eviction STATE F104 F105 F107 F108 C39 C50 C51 C52 EF-065 EF-066 EF-068 item-37 item-68 item-73 item-79 item-80 item-81
+
+STATE.md hit **15,682 bytes** (doccheck warn 9,216, hard 18,432) — the owner fired `agent/prompts/STATE_EVICTION.md`.
+Grave: `git show 3ef6fcb:docs/agent/STATE.md` is the full pre-eviction file, forever. What moved out, each with a home:
+
+**Post-launch fixes — all shipped; the entries carry the derivation.** F108 (Extractor AI's `automation=1`/
+`auto_performance=50` on the Metals/PreciousMetals labels caps a STAFFED extractor at 50 via `Workplace.lua:197`,
+so Russia's Roscosmos `ExtractorPerformance` 3×160 goal, `SponsorGoals.lua:467`, dies once the tech is researched):
+FIXED `Fix_ExtractorStaffedPerformance` (owner ruling FLOOR not ceiling), a §1.4 chained post-wrapper scoped to
+`MetalExtractorWorkplace`, composes with C39. Attended A/B 08-28 (`f108_attended_*.log`): staffed 119→(research)→
+**122 not 50**, workers held 12; unmanned control **50** (the floor). FULL FIELD ROUTE: Roscosmos goal ticked
+**3/3 COMPLETE**. LIVE on both listings 08-28 (v4). Mechanism was F36's supporting analysis. Entry F108.md.
+— F105 (`Fix_LandscapeCostRefresh`, owner "number 1 fix priority", ck72): field route reproduced + fix verified,
+attended A/B 08-24 (`f105_leg{A,B,C}_*.log`) — pack OFF **14×`:673`** raises, pack ON **zero**, leg C a 2nd
+pack-OFF control (12 raises, 0 `[CommunityFixPack]`). Leg D = INSTALL-AFTER-THE-FACT, clean → a player needs NO
+clean save (empirical case for ck72(a) over (b)). ⛔ NOT a repair — the site stays broken, the guard makes it
+harmless. ⚠️ "EXACTLY 3 techs" is the label-sweep set only; `OnMsg.ConstructionCostChanged`
+(`ConstructionSite.lua:2832`) is a 2nd class-filtered reader route, same guard covers it. Entry F105.md,
+report F105_INVESTIGATION.md. — F107 (a defect in our OWN F105 fix, caught before any player had it):
+FIXED + rig-verified 08-24, shipped Paradox 08-28; ⛔ field route still untested. Entry F107.md.
+— F104 CLOSED, NOT OURS: GitHub issue **#1**, reply posted 03:40Z, issue closed 06:01Z, **reporter CONFIRMED
+19:24Z**. Passage Network's `CreateDomeNetworks` override returns nil; vanilla indexes it (`Passage.lua:1117`);
+we are a stack pass-through only (`EF-065`(a)). F105 = issue **#2**, OPEN, already carries a posted explanation
+(08-24T06:04:29Z, itemised in FIELD_REPORT_REPLIES.md — ⛔ never copy those to a player surface). Entry F104.md.
+⛔ Read the tracker via `api.github.com/.../issues/<n>/comments`, NEVER the issue's HTML page (3 fetches read
+"zero comments" of 3, and a whole owner-facing finding was built on it). ⚠️ PN is ENABLED on the rig — untick
+before any clean leg. — Blame surface `EF-065`(a) fires on ANY throw under a wrapped target (**105 measured**,
+not the ~60 estimated); 2 field sightings 08-23/24, neither ours; checklist **73** stays open.
+
+**Launch + pre-launch close-out — consumed, verdict SHIP, published.** The 5-link close-out chain was consumed
+08-20 (0 launch blockers, all 5 challenges held) — link verdicts live in the chain's own findings ledger and
+reports, NOT restated here (H-05). `C50`+`C51` are `tested-attended` (08-20, EN+DE, owner at the keyboard,
+77 applied, suite 74/0/24/0 of 98), report 04_ATTENDED_SITTING.md; `C52` parked/FROZEN. Ruling receipt ck66;
+link-5 left no report — its record is commit `2326bd3`'s message + fact `EF-066`. PUBLISHED both portals 08-20.
+
+**Portal state — both at version 4, measured.** Paradox `pdx_id` **156049**, Steam `steam_id` **3787202810**,
+both carrying tree `version` **4** after the 08-24 (F105) and 08-28 (F108) sittings. Measured 08-29 off the
+SUBSCRIBED Steam copy: **84 entries, 82 byte-identical to the tree** (the 2 diffs are `items.lua` + `metadata.lua`
+comment stripping), both fix modules present, packed `version` 4. The launch 1.0.0/1.0.2 split was mechanical
+(Paradox saves AFTER upload, Steam BEFORE packing) — ⛔ never re-upload to "fix" the number. `EF-068`: on an
+UPDATE the version arithmetic CANNOT say which portals ran (Steam's forced save is inside the create-item branch);
+a session concluded the opposite 08-29 and the owner refuted it (ck80(a) withdrawn). Controls that DO settle it:
+the store change-notes page + the subscribed archive.
+
+**Site deployed.** 08-29 18:44Z `fcb2aa9`, status `success`, nothing undeployed — **81** live fix-list entries,
+the five/six judgment-call contradiction gone (ck79 + 81 DONE, 80 withdrawn). Audited clean SITE_AUDIT_0829.md.
+⛔ `publish-site.yml` is `workflow_dispatch` ONLY — committing the site never publishes it. ⛔ Never quote a
+stored "deployed = <sha>" line as current (one was 4 days + 2 deploys stale, repeated twice 08-29); read the
+deployments API, route in `prompts/SITE_AUDIT.md`.
+
+**The corrected pack route — preserved HERE because PORTAL_PREP §0.5 still shows the old one.** The console is NOT
+a route to pack/reload (`DbgPackMod`/`ReloadLua` both nil in retail `_G`). ⛔ It is NOT "Mods Manager → Edit
+(`Ctrl-E`)": `Ctrl-E` is the MAP editor's Selection editor (`EditorShortcuts.generated.lua:727`). ✅ Real route:
+main menu → **MOD EDITOR** (own bottom-toolbar button, `idModEditor`, `PGMenuRemastered.generated.lua:134`) →
+prompts "requires a restart" → Yes → `ModsRestartApp("debug_mode")` restarts INTO the editor → File → Pack Mod.
+That restart re-reads `metadata.lua` from disk, so a hand edit lands without a separate relaunch. The "debugging
+mode for mod creators" launch option skips the restart next time. ⚠️ RELEASE_PORTAL_PREP.md §0.5 + its step-3
+still cite the stale Mods-Manager/Ctrl-E route — flagged to the owner; fix it when packing next matters.
+
+**Pack shape (dormant — no upload pending in THIS repo).** Expected packed `.fpk` = **83 files** = 79 `Code/*.lua`
++ `items.lua` + `metadata.lua` + `LICENSE` + `preview.png` (`tools/pack_predict.py`). ⛔ md5/bytes exist only
+after the owner packs at the sitting — never quote one; the blank row that receives them is PORTAL_PREP §0.5(f).
+
+**Owner decisions closed/withdrawn (all 08-29):** 37 CLOSED IN FULL (Q1 ruled 08-20, Q2 moot — both listings v4);
+79 + 81 DONE; 80 WITHDRAWN IN FULL. Next effort = the **opt-in pack** (owner 08-20, ck68) — kickoff reads that
+repo's STATE + `reports/PARKED_OPTIN_REFERENCES.md`.
+
+Clean STATE measured **8,425 bytes** (1.86× reduction from 15,682, back under the 9,216 warn); doccheck GREEN,
+all hazards pass the admission test, no supersession chains remain. Owner report carries the before/after numbers.
+
+
 ## 2026-08-29 (third) — the site was already published, twice; SITE_AUDIT.md written; STATE's "deployed" line was the trap
 
 tags: correction site pages deploy prompts SITE_AUDIT
