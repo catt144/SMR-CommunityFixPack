@@ -162,10 +162,11 @@ return PlaceObj('ModDef', {
 	-- ⚠️ `version_minor` is absent below because `SaveDef` omits default-valued
 	-- properties — it was `0`, and `PackVersion` still renders
 	-- version_major.version_minor.version.
-	-- ⭐ UPDATED 2026-08-29 — THE TREE NOW SITS AT 4, in two further steps, and
+	-- ⭐ UPDATED 2026-08-30 — THE TREE NOW SITS AT 5, and
 	-- ⛔⛔ THE VERSION ARITHMETIC CANNOT TELL YOU WHICH PORTALS RAN. 2026-08-24
-	-- (F105): version 2 → 3. 2026-08-28 (F108): version 3 → 4. **ONE** bump per
-	-- sitting — and BOTH portals were uploaded at BOTH sittings.
+	-- (F105): version 2 → 3. 2026-08-28 (F108): version 3 → 4. 2026-08-30
+	-- (F110): version 4 → 5. **ONE** bump per sitting — and both portals were
+	-- uploaded at every sitting.
 	-- The reason, re-read at Src 2026-08-29: the forced pre-pack save in
 	-- `Steam_PrepareForUpload` sits INSIDE `if mod.steam_id == 0 then`
 	-- (`SteamWorkshop.lua:17-22`) — the CREATE-ITEM branch. On an UPDATE
@@ -177,7 +178,7 @@ return PlaceObj('ModDef', {
 	-- had never been updated. It had. ⇒ the ONLY controls are the store's own
 	-- change notes and the SUBSCRIBED archive — never this file. `EF-068`.
 	'version_major', 1,
-	'version', 4,
+	'version', 5,
 	'lua_revision', 350453,
 	'saved_with_revision', 396349,
 	-- saves made with the pack load fine without it (FIX_POLICY §3), so don't
@@ -284,8 +285,8 @@ return PlaceObj('ModDef', {
 	--   `pdx_id` 156049 — the Paradox Mods listing.
 	--   `pdx_version` — ⛔ NOT ours at all: `mod.pdx_version = res.Version`
 	--   (`ParadoxMods.lua:172`), the number the PORTAL returns from the upload —
-	--   its own revision counter, which is why it reads 1, 2, 3 across our three
-	--   uploads. ⚠️ It is NOT what the page shows as MOD VER: that is
+	--   its own revision counter, which is why it reads 1, 2, 3, 4 across our
+	--   four uploads. ⚠️ It is NOT what the page shows as MOD VER: that is
 	--   `VersionDisplayName = tostring(mod.version)` sent at `:156`, i.e. the
 	--   version BEFORE `:173`'s save bumps it. The in-game browser renders the
 	--   real PackVersion from the archive. (Gloss corrected 2026-08-29 — the
@@ -299,10 +300,10 @@ return PlaceObj('ModDef', {
 	-- after a sitting is the EXPECTED state, not a mistake by whoever worked last.
 	-- ⚠️ `saved_with_revision` now sits further up, beside `lua_revision`, because
 	-- `SaveDef` writes the fields in its own order; it is the same editor bookkeeping.
-	'saved', 1787956898,
-	'code_hash', -8832669276512138863,
+	'saved', 1788125135,
+	'code_hash', -2562592361575327516,
 	'pdx_id', 156049,
-	'pdx_version', "3",
+	'pdx_version', "4",
 	'steam_id', "3787202810",
 	'TagGameplay', true,
 })

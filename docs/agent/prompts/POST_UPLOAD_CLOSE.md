@@ -1,6 +1,9 @@
 # Post-upload close — fire this AFTER the listing exists, never before
 
-♻️ **SELF-CONSUMING.** `git rm` this file in your closing commit, naming its grave.
+♻️ **REUSABLE SUB-PROMPT of `RELEASE.md` — do NOT `git rm` this file** (reconciled
+2026-08-30). It was authored self-consuming, but `RELEASE.md` §4 now invokes it as
+the standing close-out on EVERY release, so it must persist. The old "`git rm` this
+file, naming its grave" instruction is retired; §6's `git rm` step below is void.
 
 ⛔⛔ **PRECONDITION: the owner has already uploaded.** If nothing is published,
 **STOP** — there is nothing here to do and `H-03` still binds: the first portal

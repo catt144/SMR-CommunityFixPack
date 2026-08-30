@@ -28,29 +28,17 @@ player surface bumps it by one on release.
 
 ## Pending — goes out with the next upload
 
-### Pending · F110 · `Fix_JumboCaveReinforcementWedge`
-- **Symptom sentence (player words, drives the fix-list row + change note):** A
-  Jumbo Cave mystery could get stuck forever "clearing the site of waste rock" —
-  a waste rock the drones could not reach blocked the Reinforcement, so it never
-  built and the mystery never completed.
-- **Change-note line (`last_changes` style):** `- Fixed a base-game issue where a
-  Jumbo Cave's Reinforcements could stay stuck clearing waste rock forever — a rock
-  the drones could not reach blocked the site and the mystery never completed.
-  Safe to install on a save where this is already happening; the stuck rock is
-  cleared automatically.`
-- **Fix-list section:** mysteries / storylines (a player meets it as a stuck
-  underground mystery, not as a drone or construction bug).
-- **Headliner?** Candidate yes — a permanent, unrecoverable mystery soft-lock is
-  the kind of thing that hardly-miss headliners are for; the sweep decides.
-- **Judgment call?** No — a mechanical repair (no rebalance).
-- **Count impact:** +1 (bumps the card's count word by one).
-- **Module:** added to `items.lua` + `metadata.lua` `code` list already (H-10).
-- **Entry / evidence:** `agent/bugs/F110.md`; verified attended
-  (`archive/f110_attended_…16.41.16.log`).
+*(empty — cleared by RELEASE.md on the v5 upload, 2026-08-30.)*
 
 ---
 
 ## Released — history, newest first (cleared here by RELEASE.md)
 
-*(none yet — the v4 release predates this ledger. The first entry to land here
-will be whatever ships in the version after v4.)*
+### Released in v5 (2026-08-30)
+- **F110 · `Fix_JumboCaveReinforcementWedge`** — a Jumbo Cave mystery could get
+  stuck forever clearing waste rock the drones could not reach, so the
+  Reinforcement never built and the mystery never completed. Fix-list row in
+  *Story & mysteries*; headliner bullet added; count word Eighty-one → Eighty-two;
+  `last_changes` rewritten as v5's change note. Not a judgment call.
+
+*(The v4 release and earlier predate this ledger.)*

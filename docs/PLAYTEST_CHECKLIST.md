@@ -29,11 +29,38 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
-### ✅ 2026-08-30 — ITEM 82 DONE: Jumbo Cave wedge (F110) fixed + verified attended. Nothing owed; ships next patch.
+### ⭐ 2026-08-30 — ITEM 82 SHIPPED: F110 is LIVE on both stores in v5. One thing owed from you: publish the site so the fix list catches up.
 
-82. ✅ **DONE.** You decided to fix it, the module was written, and the attended A/B
-    passed: on the re-loaded still-stuck `International Mars Mission Sol 84` the
-    module's own control line fired —
+82. ✅ **SHIPPED — v5, both portals, 2026-08-30.** You packed and uploaded Paradox
+    then Steam; you told me the store pages look good. The tree now reads `version 5`
+    (up one from 4); `pdx_id`/`steam_id` unchanged and written back (Paradox rev
+    `pdx_version` "4"). The release words are live: the card count moved
+    **Eighty-one → Eighty-two repairs** on both store bodies, F110's change note is
+    the version's changelog entry, and a headliner bullet ("A Jumbo Cave mystery
+    could get stuck clearing waste rock and never complete") is on the card.
+
+    ⚠️ **ONE THING OWED — publish the site.** The fix-list row for F110 is committed
+    + pushed (`SMR-CommunityMods` `ce3a377`, list now 82) but **not deployed** — the
+    newest live deploy is still `fcb2aa9` (81 entries). Until you run *Actions →
+    Publish docs site → Run workflow*, the store cards say "Eighty-two" while the
+    page they link to shows 81. Low-severity, same-sitting fix; it slips into a real
+    mismatch only if it waits to another day.
+
+    ⚠️ **Two things I still need from you** (batched, no rush): **(1)** did the store
+    descriptions **auto-fill**, or did you paste from `UPLOAD_WORKFLOW.md` §3? This is
+    the one open question we've been tracking since 08-24 — the auto-fill path had
+    never actually run. **(2)** did either page offer a **required-game-version**
+    field (350453)? If so, did you set it? I'll record both.
+
+    ℹ️ Confirmation pass on the actual Steam pack is queued — you subscribed, but the
+    workshop item hasn't downloaded to disk yet. When it lands I'll md5 it and
+    compare file count against `tools/pack_predict.py`.
+
+<details><summary>the attended-fix receipt (08-30, for the record)</summary>
+
+    ✅ You decided to fix it, the module was written, and the attended A/B passed: on
+    the re-loaded still-stuck `International Mars Mission Sol 84` the module's own
+    control line fired —
     `[CommunityFixPack] JumboCaveReinforcementWedge: force-cleared 1 unreachable waste rock(s) …`
     — and the mystery auto-completed. Confound ruled out: your material cheat only
     supplied build resources (needed to *build*, not to *clear*) and you didn't
@@ -42,12 +69,7 @@ completed tests move whole to
     hiccup handled: the first build required `Cities` at menu time and self-disabled
     (the dialog you saw) — Require trimmed, applied clean on the next boot.
 
-    ⛔ **NOT yet on the live listings** — `Code/Fix_JumboCaveReinforcementWedge.lua`
-    is committed and rides the **next patch upload** (bundle it with F105/F107/F108's
-    cycle or the next). No gate re-run for one added fix (your post-launch ruling).
-
-    *(Superseded 08-30: the earlier "fix or hold / shape / timing" text — you
-    answered all three: fix, proactive+self-heal, future patch.)*
+</details>
 
 <details><summary>original decision text (for the record)</summary>
 

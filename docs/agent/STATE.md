@@ -7,29 +7,28 @@ Defect truth `agent/bugs/INDEX.md` · facts `agent/facts/INDEX.md` · doc map `d
 Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/reports/CHAIN_METHOD.md`.
 
 ## Now
-- ⭐ PUBLISHED on both portals — Paradox `pdx_id` **156049**, Steam `steam_id` **3787202810**; both carry tree
-  `version` **4** (measured 08-29 off Steam: 84 entries, 82 byte-identical).
-  ✅ Nothing owed on either listing. ⛔ Never re-upload to "fix" a version number — each upload bumps again (H-02).
-  ⛔ Every upload OVERWRITES both page bodies from `metadata.lua`; since the 08-24 ruling `description` IS the full
-  card, so auto-fill is CORRECT but UNTESTED — `UPLOAD_WORKFLOW` §3 paste backups (synced every sweep) are the
-  FALLBACK, not polish.
-- ⭐ SITE deployed 08-29 18:44Z `fcb2aa9`, status `success`, nothing undeployed — **81** live fix-list entries;
-  audited clean `reports/SITE_AUDIT_0829.md`. ⛔ `publish-site.yml` is `workflow_dispatch` only — committing the
-  site never publishes it. ⛔ Never quote a stored "deployed = <sha>" line as current (one was 4 days + 2 deploys
-  stale, repeated twice 08-29); read the deployments API, route in `prompts/SITE_AUDIT.md`.
-- Post-launch fixes shipped + LIVE on both listings (v4): F105 (`Fix_LandscapeCostRefresh`), F107 (a defect in
-  our own F105 fix, caught pre-player; ⛔ field route still untested), F108 (`Fix_ExtractorStaffedPerformance`,
-  full field route 3/3). F104 CLOSED, NOT OURS (GitHub issue #1, reporter confirmed). Derivation in entries
-  F104/F105/F107/F108.md; digest in the newest SESSION_LOG. ⛔ Read the GitHub tracker via
-  `api.github.com/.../issues/<n>/comments`, never the HTML page. ⚠️ Passage Network is ENABLED on the rig —
-  untick before any clean leg.
+- ⭐ PUBLISHED on both portals — Paradox `pdx_id` **156049**, Steam `steam_id` **3787202810**; tree `version` **5**
+  (F110 shipped 08-30). ⛔ Never re-upload to "fix" a version number — each upload bumps again (H-02).
+  ⛔ Every upload OVERWRITES both page bodies from `metadata.lua`; `description` IS the full card (08-24 ruling), so
+  auto-fill is CORRECT but STILL UNTESTED — `UPLOAD_WORKFLOW` §3 paste backups are the FALLBACK, not polish.
+  ⚠️ v5 auto-fill outcome UNCONFIRMED — owner asked 08-30 (checklist 82).
+- ⚠️ SITE deploy OWED for F110 — row committed `SMR-CommunityMods` `ce3a377` (list 82) but live deploy still
+  `fcb2aa9` (**81**); store cards say "Eighty-two" until the owner runs Publish. ⛔ `publish-site.yml` is
+  `workflow_dispatch` only — committing never publishes. ⛔ Never quote a stored "deployed = <sha>" as current;
+  read the deployments API (route `prompts/SITE_AUDIT.md`).
+- Post-launch fixes shipped + LIVE on both listings: F105 (`Fix_LandscapeCostRefresh`), F107 (defect in our own
+  F105 fix, caught pre-player; ⛔ field route still untested), F108 (`Fix_ExtractorStaffedPerformance`, full field
+  route 3/3) — all v4; **F110** (`Fix_JumboCaveReinforcementWedge`, attended A/B) — v5. F104 CLOSED, NOT OURS
+  (GitHub issue #1, reporter confirmed). Derivation in the entries; digest in newest SESSION_LOG. ⛔ Read the
+  GitHub tracker via `api.github.com/.../issues/<n>/comments`, never the HTML page. ⚠️ Passage Network is ENABLED
+  on the rig — untick before any clean leg.
 - Blame surface (checklist 73, OPEN): `EF-065`(a) fires on ANY throw under a wrapped target (105 measured);
   2 field sightings 08-23/24, neither ours. Owner decision: harden or not.
 - Next effort: the **opt-in pack** (owner 08-20, checklist 68) — kickoff reads that repo's STATE +
   `reports/PARKED_OPTIN_REFERENCES.md`.
 - Rig (08-20 sitting): 3 junctions present, fix pack + TestKit ticked, opt-in pack OFF (checklist 43); runs
   cheats (the normal config).
-- Shipping artifact: expected packed `.fpk` = 84 files (80 `Code/*.lua` + `items.lua` + `metadata.lua` +
+- Shipping artifact: expected packed `.fpk` = 85 files (81 `Code/*.lua` + `items.lua` + `metadata.lua` +
   `LICENSE` + `preview.png`, `tools/pack_predict.py`). ⛔ md5/bytes exist only after the owner packs — never quote
   one (blank row = `PORTAL_PREP` §0.5(f)). ⛔ Pack route is main menu → MOD EDITOR → File → Pack Mod, NOT Mods
   Manager → Ctrl-E; full corrected route in the newest SESSION_LOG (⚠️ PORTAL_PREP §0.5 still cites the old one).
@@ -90,9 +89,8 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 - 73 blame surface — harden or not · 76 confirm (a) was a ruling not a leaning · 53 harden now or in 1.0.1
   (rec 1.0.1) · 51 both-packs leg timing (rec after launch) · 50 chain-vs-replace wording · 47 two modder-page
   wordings · 43 opt-in pack re-tick · 41 dialog wording + sweep cap 5→8 · 40 `smr_shuttles` name · 39 dialog re-fire.
-- ⭐ 08-30 — **F110 (was C25) FIXED + VERIFIED ATTENDED**: Jumbo Cave reinforcement wedged on an unreachable waste
-  rock; `Fix_JumboCaveReinforcementWedge.lua` (proactive NewHour + LoadGame self-heal), attended A/B control line,
-  mystery auto-completed. ⛔ NOT yet on listings — ships next patch. `bugs/F110.md`.
+- ✅ 08-30 — **F110 SHIPPED v5** (both stores): Jumbo Cave reinforcement wedge, `Fix_JumboCaveReinforcementWedge.lua`
+  (proactive NewHour + LoadGame self-heal), attended A/B, mystery auto-completed. `bugs/F110.md`; receipt ck82.
 - Closed 08-29: 37 (both listings v4); 79 + 81 DONE; 80 WITHDRAWN IN FULL.
 
 ## Build state — `python tools/doccheck.py --emit-counts`, never hand-typed

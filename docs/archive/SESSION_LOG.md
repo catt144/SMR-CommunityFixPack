@@ -8,6 +8,40 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-08-30 (fifth) — v5 SHIPPED: F110 Jumbo Cave wedge live on both stores via the reusable RELEASE.md flow; site deploy owed
+
+tags: F110 release v5 RELEASE.md RELEASE_OUTBOX PUBLIC_SURFACE_SWEEP POST_UPLOAD_CLOSE item-82 EF-068
+
+First end-to-end run of the reusable `RELEASE.md`. One Pending outbox entry (F110,
+`Fix_JumboCaveReinforcementWedge`) applied to every player surface per `PUBLIC_SURFACE_SWEEP.md`:
+- Site fix-list row in *Story & mysteries* (`SMR-CommunityMods` `ce3a377`); total **81 → 82**, section
+  tally sums; player voice, says it repairs a save already stuck.
+- Store card ×3 in lockstep: count word **Eighty-one → Eighty-two repairs** + one headliner bullet
+  ("A Jumbo Cave mystery could get stuck clearing waste rock and never complete") across `metadata.lua`
+  `description`, `STORE_CARD_LIVE.md`, and `UPLOAD_WORKFLOW.md` §3 (both Paradox-plain and Steam-BBCode).
+- `last_changes` rewritten as v5's change note (F110 only; the v4 F108/F105 note retired).
+- Commit `60184f4` (fix pack) + `ce3a377` (site), both pushed. doccheck GREEN, upload_preflight 0 FAIL.
+
+Owner packed + uploaded Paradox then Steam ("store pages good"). Post-upload close (`POST_UPLOAD_CLOSE.md`):
+the forced save bumped `version` **4 → 5**, stripped every comment from `metadata.lua` + `items.lua`, and
+moved `pdx_version` "3" → "4" (`pdx_id` 156049 / `steam_id` 3787202810 unchanged). Writeback commit restored
+all comments from HEAD and kept the four portal fields (version 5, saved, code_hash, pdx_version "4").
+Predicted v5 pack = **85 files** (81 `Code/*.lua`), `tools/pack_predict.py`. Tag `fixpack-v1.0.0` NOT moved.
+
+⚠️ STILL OPEN after this leg: (1) **site deploy owed** — `ce3a377` pushed but live deploy still `fcb2aa9`
+(81); store cards say 82 until the owner runs *Actions → Publish docs site*. Same-sitting count constraint,
+low severity (owner ruling `PUBLIC_SURFACE_SWEEP` §5). (2) **auto-fill outcome UNCONFIRMED** — asked the owner
+whether store descriptions auto-filled or were pasted (the tracked question since 08-24, first upload on the
+new path). (3) §0.5(d) required-game-version field outcome. (4) §0.5(f) delivered-bytes confirmation queued —
+owner subscribed on Steam but the workshop item (`3787202810`) hasn't downloaded to disk yet; md5 + file
+count against pack_predict when it lands (v4 precedent: 84 entries, 82 byte-identical, checklist 80).
+
+Doc reconciliation: `POST_UPLOAD_CLOSE.md` was authored self-consuming (git rm itself), but `RELEASE.md` §4
+now invokes it as the standing close-out every release, so it must persist — retired the git-rm banner, kept
+the file, flagged to owner. Outbox cleared: F110 moved Pending → Released in v5.
+
+---
+
 ## 2026-08-29 (fourth) — STATE eviction: 15,682 B → kernel; the launch, the post-launch fixes, portal + site work all moved here
 
 tags: eviction STATE F104 F105 F107 F108 C39 C50 C51 C52 EF-065 EF-066 EF-068 item-37 item-68 item-73 item-79 item-80 item-81
