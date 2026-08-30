@@ -12,10 +12,9 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   ⛔ Every upload OVERWRITES both page bodies from `metadata.lua`; `description` IS the full card (08-24 ruling), so
   ⚠️ AUTO-FILL TESTED v5 (08-30): did NOT deliver a clean page — owner PASTED the §3 backup. Two cycles, never
   auto-filled cleanly ⇒ `UPLOAD_WORKFLOW` §3 paste backups are REQUIRED, keep current. No game-version field offered.
-- ⚠️ SITE deploy OWED for F110 — row committed `SMR-CommunityMods` `ce3a377` (list 82) but live deploy still
-  `fcb2aa9` (**81**); store cards say "Eighty-two" until the owner runs Publish. ⛔ `publish-site.yml` is
-  `workflow_dispatch` only — committing never publishes. ⛔ Never quote a stored "deployed = <sha>" as current;
-  read the deployments API (route `prompts/SITE_AUDIT.md`).
+- ⭐ SITE deployed 08-30 `ce3a3779` (== repo HEAD), status success — **82** live fix-list entries (F110 row live).
+  ⛔ `publish-site.yml` is `workflow_dispatch` only — committing never publishes. ⛔ Never quote a stored
+  "deployed = <sha>" as current; read the deployments API (route `prompts/SITE_AUDIT.md`).
 - Post-launch fixes shipped + LIVE on both listings: F105 (`Fix_LandscapeCostRefresh`), F107 (defect in our own
   F105 fix, caught pre-player; ⛔ field route still untested), F108 (`Fix_ExtractorStaffedPerformance`, full field
   route 3/3) — all v4; **F110** (`Fix_JumboCaveReinforcementWedge`, attended A/B) — v5. F104 CLOSED, NOT OURS
@@ -28,10 +27,11 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   `reports/PARKED_OPTIN_REFERENCES.md`.
 - Rig (08-20 sitting): 3 junctions present, fix pack + TestKit ticked, opt-in pack OFF (checklist 43); runs
   cheats (the normal config).
-- Shipping artifact: expected packed `.fpk` = 85 files (81 `Code/*.lua` + `items.lua` + `metadata.lua` +
-  `LICENSE` + `preview.png`, `tools/pack_predict.py`). ⛔ md5/bytes exist only after the owner packs — never quote
-  one (blank row = `PORTAL_PREP` §0.5(f)). ⛔ Pack route is main menu → MOD EDITOR → File → Pack Mod, NOT Mods
-  Manager → Ctrl-E; full corrected route in the newest SESSION_LOG (⚠️ PORTAL_PREP §0.5 still cites the old one).
+- Shipping artifact: packed `.fpk` = 85 files (81 `Code/*.lua` + `items.lua` + `metadata.lua` + `LICENSE` +
+  `preview.png`, `tools/pack_predict.py`). ⭐ v5 DELIVERED pack VERIFIED 08-30 off Steam (Relaunched = app
+  **3215050**, not 464920): `tools/pack_list.py` → 85 entries, 83 byte-identical (only metadata/items differ =
+  comment strip), version 5, F110 module + "Eighty-two" present; md5 `a1cbaad6294382068250ef390037f239`, 401,188 B.
+  ⛔ Pack route is main menu → MOD EDITOR → File → Pack Mod, NOT Mods Manager → Ctrl-E (⚠️ PORTAL_PREP §0.5 old).
 - Watches: `EF-066` swept 08-24 — 105 declared targets, 97 reach every subclass; the 8 leftovers re-declare
   subclasses (biggest: `Fix_ShuttleHubOffAvailable` misses ~578 under `Building`); which are ever INSTANTIATED is
   unmeasured, checklist 74 stays half-open on it · German is the only localisation ever SEEN, the other 7 stay

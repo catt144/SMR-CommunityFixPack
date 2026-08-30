@@ -36,6 +36,15 @@ new path). (3) §0.5(d) required-game-version field outcome. (4) §0.5(f) delive
 owner subscribed on Steam but the workshop item (`3787202810`) hasn't downloaded to disk yet; md5 + file
 count against pack_predict when it lands (v4 precedent: 84 entries, 82 byte-identical, checklist 80).
 
+⇒ **ALL FOUR CLOSED the same day.** (1) Site deployed `ce3a3779` (== repo HEAD), 82 live entries. (2) Auto-fill
+did NOT come out clean — owner pasted the §3 backup (⇒ paste backups are the real delivery path, not a fallback;
+memory `store-card-backups-required-not-polish` updated). (3) No required-game-version field offered. (4)
+Delivered Steam pack VERIFIED (⚠️ Relaunched = Steam app **3215050**, not 464920): `tools/pack_list.py` → 85
+entries, 83 byte-identical (only metadata/items differ = comment strip), extracted `metadata.lua` confirms
+version 5 + `Fix_JumboCaveReinforcementWedge` + "Eighty-two repairs" + the F110 change note; **md5
+`a1cbaad6294382068250ef390037f239`, 401,188 B** — the first delivered md5 this project has computed from a real
+portal artifact. v5 fully closed.
+
 Doc reconciliation: `POST_UPLOAD_CLOSE.md` was authored self-consuming (git rm itself), but `RELEASE.md` §4
 now invokes it as the standing close-out every release, so it must persist — retired the git-rm banner, kept
 the file, flagged to owner. Outbox cleared: F110 moved Pending → Released in v5.

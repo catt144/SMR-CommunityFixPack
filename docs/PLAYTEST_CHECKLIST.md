@@ -29,7 +29,7 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
-### ⭐ 2026-08-30 — ITEM 82 SHIPPED: F110 is LIVE on both stores in v5. One thing owed from you: publish the site so the fix list catches up.
+### ✅ 2026-08-30 — ITEM 82 CLOSED: F110 live on both stores in v5, site deployed, delivered Steam pack verified. Nothing owed.
 
 82. ✅ **SHIPPED — v5, both portals, 2026-08-30.** You packed and uploaded Paradox
     then Steam; you told me the store pages look good. The tree now reads `version 5`
@@ -39,12 +39,9 @@ completed tests move whole to
     the version's changelog entry, and a headliner bullet ("A Jumbo Cave mystery
     could get stuck clearing waste rock and never complete") is on the card.
 
-    ⚠️ **ONE THING OWED — publish the site.** The fix-list row for F110 is committed
-    + pushed (`SMR-CommunityMods` `ce3a377`, list now 82) but **not deployed** — the
-    newest live deploy is still `fcb2aa9` (81 entries). Until you run *Actions →
-    Publish docs site → Run workflow*, the store cards say "Eighty-two" while the
-    page they link to shows 81. Low-severity, same-sitting fix; it slips into a real
-    mismatch only if it waits to another day.
+    ✅ **SITE DEPLOYED** — you ran Publish; newest run `ce3a3779` (== site HEAD),
+    status success, **82** live fix-list entries. The store "Eighty-two" now matches
+    the page it links to; count constraint closed.
 
     ✅ **Both questions answered 08-30.** **(1) Auto-fill did NOT deliver a clean
     page** — you pasted the `UPLOAD_WORKFLOW.md` §3 backup by hand. So after two
@@ -55,9 +52,15 @@ completed tests move whole to
     **(2) No required-game-version field** was offered on either page — nothing to
     set, nothing owed.
 
-    ℹ️ Confirmation pass on the actual Steam pack is queued — you subscribed, but the
-    workshop item hasn't downloaded to disk yet. When it lands I'll md5 it and
-    compare file count against `tools/pack_predict.py`.
+    ✅ **DELIVERED PACK VERIFIED** (§0.5(f)) — your subscribed Steam copy downloaded
+    to `steamapps/workshop/content/**3215050**/3787202810/ModContent.fpk` (Relaunched
+    is app 3215050, not 464920). Read with `tools/pack_list.py`: **85 entries**
+    (== `pack_predict`), **83 byte-identical** to the tree; the only 2 that differ are
+    `metadata.lua` + `items.lua` (the forced-save comment strip, same as v4's 84/82).
+    Extracted `metadata.lua` confirms `version 5`, count word **"Eighty-two repairs"**,
+    the F110 change note, and `Fix_JumboCaveReinforcementWedge` in the code list.
+    **md5 `a1cbaad6294382068250ef390037f239`, 401,188 B.** First delivered md5 this
+    project has ever computed from a real portal artifact.
 
 <details><summary>the attended-fix receipt (08-30, for the record)</summary>
 
