@@ -158,6 +158,16 @@ Every fix goes through `SMRFixPack.Register(id, {title, apply})` (Code/00_Core.l
   that flag can only come from the engine's own `DataLoaded` global**
   (`Dlc.lua:51/:663`, declared under `FirstLoad` so it survives a Lua reload) —
   the message never arrives. Both shared runners do this for you.
+- ⛔ **NEVER `Require` A PER-GAME RUNTIME GLOBAL AT APPLY TIME (the F110 rule,
+  2026-08-30).** `apply()`/`Require` run at the MENU, before any game is loaded,
+  so a game-scoped global — `Cities`, `UIColony`, `UICity`, `MainCity`, a map
+  object — is legitimately nil there. Putting one in the `Require` block makes
+  the self-check read it as "game code changed" and SAFE-DISABLE the fix on every
+  boot (`JumboCaveReinforcementWedge: inactive (Cities not found …)`, seen live
+  before the fix). `Require` is only for what a game UPDATE could remove and that
+  is present at apply time: engine globals, built classes, `(class, method)`
+  pairs. A per-game global is a RUNTIME condition — `rawget(_G, "Cities")` +
+  a `type(...) == "table"` guard inside the OnMsg handler, never a Require entry.
 
 ## 3. Savegame discipline
 
