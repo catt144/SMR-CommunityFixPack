@@ -106,7 +106,8 @@ patched at runtime; no game files are modified). The map is `docs/README.md`.
 | the task is really… | switch to |
 |---|---|
 | a LIVE playtest at the keyboard | `prompts/GENERAL_USE_PROMPT.md` |
-| putting an update live (pack/upload/store/site) | `UPLOAD_WORKFLOW.md` (+ `reports/RELEASE_PORTAL_PREP.md`) |
+| doing an update / shipping a patch — THE WHOLE THING | `prompts/RELEASE.md` (orchestrates the three below; reads+clears `prompts/RELEASE_OUTBOX.md`) |
+| the owner's mechanical pack+upload only | `UPLOAD_WORKFLOW.md` (+ `reports/RELEASE_PORTAL_PREP.md`) |
 | closing out after a listing exists | `prompts/POST_UPLOAD_CLOSE.md` |
 | updating public-facing docs / cards / site | `prompts/PUBLIC_SURFACE_SWEEP.md` |
 | auditing what the LIVE Pages site says (vs what is committed) | `prompts/SITE_AUDIT.md` |

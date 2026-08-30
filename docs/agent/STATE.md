@@ -8,10 +8,11 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 
 ## Now
 - ⭐ PUBLISHED on both portals — Paradox `pdx_id` **156049**, Steam `steam_id` **3787202810**; both carry tree
-  `version` **4** (measured 08-29 off the subscribed Steam copy: 84 entries, 82 byte-identical to the tree).
+  `version` **4** (measured 08-29 off Steam: 84 entries, 82 byte-identical).
   ✅ Nothing owed on either listing. ⛔ Never re-upload to "fix" a version number — each upload bumps again (H-02).
   ⛔ Every upload OVERWRITES both page bodies from `metadata.lua`; since the 08-24 ruling `description` IS the full
-  card, so that auto-fill is the CORRECT result — a hand paste is optional polish only.
+  card, so auto-fill is CORRECT but UNTESTED — the `UPLOAD_WORKFLOW` §3 paste backups (synced every sweep) are the
+  FALLBACK, not "optional polish" (only the styling is).
 - ⭐ SITE deployed 08-29 18:44Z `fcb2aa9`, status `success`, nothing undeployed — **81** live fix-list entries;
   audited clean `reports/SITE_AUDIT_0829.md`. ⛔ `publish-site.yml` is `workflow_dispatch` only — committing the
   site never publishes it. ⛔ Never quote a stored "deployed = <sha>" line as current (one was 4 days + 2 deploys
