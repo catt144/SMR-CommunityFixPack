@@ -145,10 +145,14 @@ OnMsg.NewHour = SMRFixPack.WhenActive(FIX_ID, RunHeal)
 SMRFixPack.Register(FIX_ID, {
 	title = "Jumbo Cave reinforcements no longer soft-lock on a Waste Rock the drones cannot reach",
 	apply = function()
+		-- Require only what is present at apply time (main menu, classes built).
+		-- `Cities` is a per-GAME global that does not exist until a game loads, so
+		-- it is NOT required here (that would disable the fix at the menu); the
+		-- healing pass guards it with rawget instead. IsValid/IsKindOf/DoneObject
+		-- are core engine globals, always present. What CAN change with a game
+		-- update — and so is worth a fail-safe check — is the two classes/methods
+		-- this fix drives.
 		local err = SMRFixPack.Require(FIX_ID, {
-			{ global = "Cities" },
-			{ global = "IsValid" },
-			{ global = "IsKindOf" },
 			{ global = "DoneObject" },
 			{ class = "WasteRockObstructor" },
 			{ class = "ConstructionSite", method = "TestBlockerClearenceProgress" },
