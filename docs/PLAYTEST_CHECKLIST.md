@@ -29,24 +29,22 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
-### 🟠 2026-08-30 — ITEM 82: Jumbo Cave wedge (F110) — DECIDED (fix it), FIX WRITTEN, one A/B run owed by you
+### ✅ 2026-08-30 — ITEM 82 DONE: Jumbo Cave wedge (F110) fixed + verified attended. Nothing owed; ships next patch.
 
-82. 🟠 **You decided: fix it ("effects a lot of people, we just never had a way to
-    test"). Fix is written — one in-game A/B run is what's left before it flips to
-    `fixed`.** `Code/Fix_JumboCaveReinforcementWedge.lua` (proactive `NewHour` +
-    reactive `LoadGame` self-heal, scoped to `JumboCaveReinforcementStructure`
-    sites, force-clears a waste rock the drones have flagged unreachable). The
-    *end state* (clear the rock → site builds → mystery completes) was validated
-    live on your loaded save — it paid out "Reinforcements Completed" in front of
-    us. What's unverified is the **module's own detection + wiring**.
+82. ✅ **DONE.** You decided to fix it, the module was written, and the attended A/B
+    passed: on the re-loaded still-stuck `International Mars Mission Sol 84` the
+    module's own control line fired —
+    `[CommunityFixPack] JumboCaveReinforcementWedge: force-cleared 1 unreachable waste rock(s) …`
+    — and the mystery auto-completed. Confound ruled out: your material cheat only
+    supplied build resources (needed to *build*, not to *clear*) and you didn't
+    finish-construct; the clearing is the fix's, by its own log line. `F110` flipped
+    to `fixed`; log archived (`archive/f110_attended_…16.41.16.log`). One same-day
+    hiccup handled: the first build required `Cities` at menu time and self-disabled
+    (the dialog you saw) — Require trimmed, applied clean on the next boot.
 
-    **The A/B run (≈2 min):** (1) fully restart the game so the new module loads —
-    confirm `[CommunityFixPack] JumboCaveReinforcementWedge: applied` at boot;
-    (2) load the STILL-STUCK `International Mars Mission Sol 84` (the original save
-    file — do NOT overwrite it; the in-memory copy we completed doesn't count);
-    (3) unpause and wait up to one in-game hour. Expect the mystery to auto-complete
-    and a log line `force-cleared N unreachable waste rock(s)…`. If it does, say so
-    and I flip F110 to `fixed`. Then it rides a future patch (no gate re-run).
+    ⛔ **NOT yet on the live listings** — `Code/Fix_JumboCaveReinforcementWedge.lua`
+    is committed and rides the **next patch upload** (bundle it with F105/F107/F108's
+    cycle or the next). No gate re-run for one added fix (your post-launch ruling).
 
     *(Superseded 08-30: the earlier "fix or hold / shape / timing" text — you
     answered all three: fix, proactive+self-heal, future patch.)*

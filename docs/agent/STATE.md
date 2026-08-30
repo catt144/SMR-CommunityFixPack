@@ -89,9 +89,9 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 - 73 blame surface — harden or not · 76 confirm (a) was a ruling not a leaning · 53 harden now or in 1.0.1
   (rec 1.0.1) · 51 both-packs leg timing (rec after launch) · 50 chain-vs-replace wording · 47 two modder-page
   wordings · 43 opt-in pack re-tick · 41 dialog wording + sweep cap 5→8 · 40 `smr_shuttles` name · 39 dialog re-fire.
-- ⭐ NEW 08-30 — **F110 (was C25) CONFIRMED LIVE + FIX WRITTEN**: Jumbo Cave reinforcement wedged on an unreachable
-  waste rock. `Fix_JumboCaveReinforcementWedge.lua` (proactive NewHour + LoadGame heal); end-state A/B-validated
-  live, in-module A/B pending (re-load the stuck save with the module). ck82. `bugs/F110.md`.
+- ⭐ 08-30 — **F110 (was C25) FIXED + VERIFIED ATTENDED**: Jumbo Cave reinforcement wedged on an unreachable waste
+  rock; `Fix_JumboCaveReinforcementWedge.lua` (proactive NewHour + LoadGame self-heal), attended A/B control line,
+  mystery auto-completed. ⛔ NOT yet on listings — ships next patch. `bugs/F110.md`.
 - Closed 08-29: 37 (both listings v4); 79 + 81 DONE; 80 WITHDRAWN IN FULL.
 
 ## Build state — `python tools/doccheck.py --emit-counts`, never hand-typed

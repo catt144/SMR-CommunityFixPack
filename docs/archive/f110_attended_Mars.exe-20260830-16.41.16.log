@@ -1,0 +1,456 @@
+					Render 0:00:00:006
+*** executable info
+Timestamp:     	6a22b86d
+Date:          	Fri Jun  5 07:52:13 2026
+Command line:  	
+Compiler:      	194435214, 142 (VS 2019) or newer
+
+
+*** hardware info
+CPU name      	Intel(R) Core(TM) i7-14700K
+CPU MHz       	3418
+CPU cores     	20/28
+Phys. Memory   	65278 MBytes
+Memory In Use  	52%
+Disk Free      	833221 MBytes
+
+
+*** OS info
+OS:            	Windows 11
+Version:       	10.0.26100 
+
+
+*** Debug::Init()
+
+
+					Render 0:00:00:095
+Steam initialized (AppId 3215050, Beta branch ???)
+					Render 0:00:00:099
+Drive type for game installation: SSD, savegames: SSD
+Language: English
+					Render 0:00:01:471
+*** graphics info
+GPU                            	NVIDIA GeForce RTX 4080 Feature Level: 12.1 {  DoublePrecisionFloatShaderOps: 1 OutputMergerLogicOp: 1 MinPrecisionSupport: 2 TiledResourcesTier: 4 ResourceBindingTier: 3 PSSpecifiedStencilRefSupported: 0 TypedUAVLoadAdditionalFormats: 1 ROVsSupported: 1 ConservativeRasterizationTier: 3 MaxGPUVirtualAddressBitsPerResource: 40 StandardSwizzle64KBSupported: 0 CrossNodeSharingTier: 0 CrossAdapterRowMajorTextureSupported: 0 VPAndRTArrayIndexFromAnyShaderFeedingRasterizerSupportedWithoutGSEmulation: 1 ResourceHeapTier: 2 NotZeroedPools: 1 UMA: 0 UnalignedBlockTextures: 1}
+API                            	d3d12
+GPU Driver Version             	32.0.16.1074
+GPU Driver Package Version     	610.74
+GPU Dedicated Video Memory     	16048 MB
+					Render 0:00:01:601
+
+Libs: Network, Sequences, MouseTrackWin, DumbAI, MapGen, Paradox, TriggersAndEvents, Notifications, Research, Resources 
+
+					Render 0:00:01:802
+
+Platform: desktop, editor, goldmaster, paradox, pc, steam
+
+					Render 0:00:02:450
+*** audio info
+Audio Endpoint                 	Speakers (Razer Leviathan V2)
+						Lua 0:00:02:513
+Lua revision: 396349
+Assets revision: 31031
+Steam AppID: 3215050
+Build version: 1.0.7.396349
+Build branch:  Release
+						Lua 0:00:17:533
+Account storage loaded successfully in 3 ms
+DLC thomas loaded, lua revision 396349, assets revision 31031
+						Lua 0:00:17:536
+[mod] Loaded mod def Relaunched Fix Pack (id SMR_CommunityFixPack, v1.00-004) unpacked from appdata
+[mod] Loaded mod def No Passage Penalty (Game Rule) (id QfCw4mN, v0.00-006) packed from pops
+[mod] Loaded mod def Start with all Breakthroughs (id dwAWmXz, v0.00-127) packed from pops
+[mod] Loaded mod def Community Fix Pack — Test Kit (id SMR_CommunityFixPackTestKit, v0.00-001) unpacked from appdata
+[mod] Loaded mod def Geyser Removal (id DLav7z7, v1.00-009) packed from pops
+[mod] Loaded mod def Passage Network (id iooW34Y, v0.00-032) packed from pops
+[mod] Loaded mod def Relaunched Fix Pack: Opt-In Modules (id SMR_CommunityOptInPack, v1.00-000) unpacked from appdata
+						Lua 0:00:17:885
+[mod] [SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:17:886
+[SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+[mod] [SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[mod] [SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+[SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+						Lua 0:00:17:892
+[mod] [SMRTest][carry] fixture-carry dump available — run SMRTest.FixtureCarry()
+[mod] [CommunityFixPack] CaveInsNoDisasters: applied
+						Lua 0:00:17:893
+[mod] [CommunityFixPack] MeteorFrequency: applied
+[mod] [CommunityFixPack] UpgradeModifierLeak: applied
+[mod] [CommunityFixPack] NightShiftWork: applied
+[mod] [CommunityFixPack] MilestoneCrash: applied
+[mod] [CommunityFixPack] WispRewards: applied
+[mod] [CommunityFixPack] TouristApplicants: applied
+[mod] [CommunityFixPack] TrainsToVoid: applied
+[mod] [CommunityFixPack] LanderEmptyLaunch: applied
+						Lua 0:00:17:894
+[mod] [CommunityFixPack] LanderCargoRatchet: applied
+[mod] [CommunityFixPack] LanderReturnFuel: applied
+[mod] [CommunityFixPack] ShelterReflex: applied
+[mod] [CommunityFixPack] BrokenTrackSalvage: applied
+[mod] [CommunityFixPack] TrackSalvageWipe: applied
+[mod] [CommunityFixPack] LakeEntombment: applied
+[mod] [CommunityFixPack] GhostFarmOxygen: applied
+[mod] [CommunityFixPack] RocketDroneChurn: applied
+						Lua 0:00:17:895
+[mod] [CommunityFixPack] ShuttleTransportCache: applied
+[mod] [CommunityFixPack] VacuumWalks: applied
+[mod] [CommunityFixPack] ArrivalDeaths: applied
+[mod] [CommunityFixPack] DroneUnreachableForever: applied
+[mod] [CommunityFixPack] StaleReservations: applied
+[mod] [CommunityFixPack] CrystalMysteryHang: applied
+[mod] [CommunityFixPack] TouristSatisfaction: applied
+[mod] [CommunityFixPack] TrainPlatformWedge: applied
+[mod] [CommunityFixPack] LowStorageWarning: applied
+[mod] [CommunityFixPack] CommandCenterNumbers: applied
+						Lua 0:00:17:896
+[mod] [CommunityFixPack] DomeOverviewHighlight: applied
+[mod] [CommunityFixPack] TrainCargoDumping: applied
+[mod] [CommunityFixPack] UniversityOvertraining: applied
+[mod] [CommunityFixPack] DestroyedTunnels: applied
+[mod] [CommunityFixPack] DustSicknessBiorobots: applied
+[mod] [CommunityFixPack] DustSicknessDamage: applied
+[mod] [CommunityFixPack] GeneForging: applied
+[mod] [CommunityFixPack] MirrorSphereSite: applied
+[mod] [CommunityFixPack] PayloadTemplateRefill: applied
+[mod] [CommunityFixPack] AsteroidLanderAvailable: applied
+[mod] [CommunityFixPack] ShuttleHubOffAvailable: applied
+						Lua 0:00:17:897
+[mod] [CommunityFixPack] FreedHousingNotice: applied
+[mod] [CommunityFixPack] DomeFreeSpaceMismatch: applied
+[mod] [CommunityFixPack] SmallLandscapeSites: applied
+[mod] [CommunityFixPack] LandscapeUnitFilter: applied
+[mod] [CommunityFixPack] RocketInteractGuard: applied
+						Lua 0:00:17:898
+[mod] [CommunityFixPack] TrackConnectorPingPong: applied
+[mod] [CommunityFixPack] TrackTunnelPowerBridge: applied
+[mod] [CommunityFixPack] GridGlobalStorage: applied
+[mod] [CommunityFixPack] LastTransmissionStorage: applied
+[mod] [CommunityFixPack] GraphConsumedCaption: applied
+[mod] [CommunityFixPack] MoraleComfortTooltip: applied
+						Lua 0:00:17:899
+[mod] [CommunityFixPack] TrainWaitTime: applied
+[mod] [CommunityFixPack] FounderTraitNotification: applied
+[mod] [CommunityFixPack] StorageRateModifiers: applied
+[mod] [CommunityFixPack] SequenceLatents: applied
+[mod] [CommunityFixPack] IndependenceTerraforming: applied
+[mod] [CommunityFixPack] TrackSalvageRefund: applied
+[mod] [CommunityFixPack] LayoutTechLock: applied
+[mod] [CommunityFixPack] TrainMinors: applied
+						Lua 0:00:17:900
+[mod] [CommunityFixPack] DroneTransportMinors: applied
+[mod] [CommunityFixPack] AnomalyCaveInMap: applied
+[mod] [CommunityFixPack] TechDescriptionBuilding: applied
+[mod] [CommunityFixPack] BombardmentSpread: applied
+[mod] [CommunityFixPack] ExtenderFlapChurn: applied
+[mod] [CommunityFixPack] DisasterPredictionLeak: applied
+[mod] [CommunityFixPack] MeteorStormWedge: applied
+[mod] [CommunityFixPack] RainsDeadlock: applied
+						Lua 0:00:17:901
+[mod] [CommunityFixPack] FirstAsteroidPrefabs: applied
+[mod] [CommunityFixPack] SaintBlessing: applied
+[mod] [CommunityFixPack] DustDevilsDescrMap: applied
+[mod] [CommunityFixPack] AstrogeologistExtractors: applied
+[mod] [CommunityFixPack] SinkholeIndestructible: applied
+[mod] [CommunityFixPack] DustStormUndergroundBreaks: applied
+[mod] [CommunityFixPack] DustDevilSpawnGate: applied
+[mod] [CommunityFixPack] ExoticDepositSign: applied
+						Lua 0:00:17:902
+[mod] [CommunityFixPack] AutomationLawCompensation: applied
+[mod] [CommunityFixPack] LocalizedUIText: Back to Earth rollover wrapped on 1 rocket class(es): customUniversalRocket
+[mod] [CommunityFixPack] LocalizedUIText: applied
+[mod] [CommunityFixPack] SpaceYDroneCapBullet: applied
+[mod] [CommunityFixPack] LandscapeCostRefresh: applied
+[mod] [CommunityFixPack] ExtractorStaffedPerformance: applied
+[mod] [CommunityFixPack] JumboCaveReinforcementWedge: applied
+						Lua 0:00:17:903
+[mod] [CommunityFixPack] SaveSanitizer: applied
+						Lua 0:00:18:449
+[mod] [CommunityFixPack] SaintBlessing: inactive (no dome-colonists trait presets)
+[mod] [CommunityFixPack] SinkholeIndestructible: the St. Elmo's Fire sinkhole is now indestructible, like every other mystery set-piece
+						Lua 0:00:18:523
+Reloading done in 977 ms
+Available DLCs: thomas(Interplanetary Codex) 
+						Lua 0:00:18:861
+[preset] Preset postprocess took 61 ms.
+						Lua 0:00:18:909
+479 / 479 particle streams loaded in 44 ms.
+						Lua 0:00:18:910
+[mod] [CommunityFixPack] LastTransmissionStorage: 6 storage condition(s) made effective, 1 retargeted
+[mod] [CommunityFixPack] IndependenceTerraforming: Independence_TerraformingProjects now discounts special projects by 20% as its param1 says
+[mod] [CommunityFixPack] AstrogeologistExtractors: added 2 missing extractor entr(y/ies) to the astrogeologist profile (10 already present)
+						Lua 0:00:18:963
+[PdxSDK] Started up. Took 1418
+						Lua 0:00:19:102
+[mod] [CommunityFixPack] SaintBlessing: corrected 1 dome-colonists trait modifier label(s) of 2
+						Lua 0:00:19:186
+[mod] Loaded mod items for: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack, QfCw4mN, DLav7z7, dwAWmXz, iooW34Y
+						Lua 0:00:19:644
+[Braze] SessionStart error The server name or address could not be resolved
+
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:19:774
+[Braze] SessionStart error The server name or address could not be resolved
+
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:20:022
+[PdxSDKMods] Mod 124817 v 2 is up to date. Nothing to download.
+[PdxSDKMods] Mod 148452 v 2 is up to date. Nothing to download.
+[PdxSDKMods] Mod 124921 v 4 is up to date. Nothing to download.
+[PdxSDKMods] Mod 124952 v 6 is up to date. Nothing to download.
+						Lua 0:00:29:967
+[PdxSDKMods] Starting install of mod: No Passage Penalty (Game Rule), version: 0, ModID: 124817
+						Lua 0:00:31:002
+[PdxSDKMods] Mod 124817 v 2 is up to date. Nothing to download.
+[PdxSDKMods] Installation of mod: No Passage Penalty (Game Rule), version: 0, ModID: 124817 completed with status: installed
+						Lua 0:00:31:079
+[PdxSDKMods] Starting install of mod: Geyser Removal, version: 0, ModID: 148452
+						Lua 0:00:31:561
+[PdxSDKMods] Mod 148452 v 2 is up to date. Nothing to download.
+[PdxSDKMods] Installation of mod: Geyser Removal, version: 0, ModID: 148452 completed with status: installed
+						Lua 0:00:31:631
+[PdxSDKMods] Starting install of mod: Start with all Breakthroughs, version: 0, ModID: 124921
+						Lua 0:00:32:087
+[PdxSDKMods] Mod 124921 v 4 is up to date. Nothing to download.
+[PdxSDKMods] Installation of mod: Start with all Breakthroughs, version: 0, ModID: 124921 completed with status: installed
+						Lua 0:00:32:157
+[PdxSDKMods] Starting install of mod: Passage Network, version: 0, ModID: 124952
+						Lua 0:00:32:762
+[PdxSDKMods] Mod 124952 v 6 is up to date. Nothing to download.
+[PdxSDKMods] Installation of mod: Passage Network, version: 0, ModID: 124952 completed with status: installed
+						Lua 0:00:35:706
+Load Game: 
+	lua_revision: 396349 
+	assets_revision: 31031 
+
+	dlcs: thomas 
+
+	mods: SMR_CommunityFixPack, dwAWmXz, QfCw4mN, DLav7z7, iooW34Y 
+						Lua 0:00:35:714
+*** Reloading assets from folder 'BinAssets/'
+						Lua 0:00:38:556
+*** Assets reloaded in 2.8 s, read 205.5 MB, read speed 72.3 MB/s, average read 5023 bytes.
+						Lua 0:00:40:655
+
+Load anyway : The following mods are missing or outdated:
+
+<color em>Geyser Removal</color>
+
+Some features may not work. 
+
+						Lua 0:00:43:958
+[mod] This savegame tries to load Mod Geyser Removal (id DLav7z7, v1.00-012), which is loaded with a different version 1.00-009
+						Lua 0:00:46:162
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:46:165
+[mod] [CommunityFixPack] ExoticDepositSign: 1 Exotic Minerals deposit(s) re-signed onto the clean entity
+						Lua 0:00:46:231
+[mod] [CommunityFixPack] JumboCaveReinforcementWedge: force-cleared 1 unreachable waste rock(s) blocking a Jumbo Cave reinforcement
+						Lua 0:00:46:246
+game_settings:
+    sponsor: IMM
+    profile: inventor
+    founding_faction: MarsDemocraticParty
+    rival_colonies: CNSA
+    mystery_random: WorldWar3
+    game_rules: ColonyPrefab, NoPassagePenalty, DiscoverBreakthroughs, UnlockedPolicies
+more_game_settings: save_game_id: iXTdaeZOKzdphkyk, mystery: random, coordinates: 20N121W, landing_spot: , logo: IMM
+map_conditions: altitude: 917, temperature: -15, cold_wave: 36, dust_devils: 79, dust_storm: 123, meteors: 36
+map_resources: concrete: 108, metals: 109, precious_metals: 109, water: 146
+						Lua 0:00:46:273
+Game Loaded in 10567 ms
+						Lua 0:00:46:314
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:46:996
+Game loaded on map BlankUnderground_04 in 11371 ms
+						Lua 0:00:48:304
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:49:304
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:02:36:084
+
+!!! Quick Build !!!
+						Lua 0:02:39:838
+ObjCheat CheatSpawnDrone
+						Lua 0:02:40:003
+ObjCheat CheatSpawnDrone
+						Lua 0:02:40:153
+ObjCheat CheatSpawnDrone
+						Lua 0:02:40:289
+ObjCheat CheatSpawnDrone
+						Lua 0:02:40:417
+ObjCheat CheatSpawnDrone
+						Lua 0:02:40:552
+ObjCheat CheatSpawnDrone
+						Lua 0:02:40:707
+ObjCheat CheatSpawnDrone
+						Lua 0:02:40:835
+ObjCheat CheatSpawnDrone
+						Lua 0:02:40:972
+ObjCheat CheatSpawnDrone
+						Lua 0:02:41:117
+ObjCheat CheatSpawnDrone
+						Lua 0:02:41:272
+ObjCheat CheatSpawnDrone
+						Lua 0:02:41:408
+ObjCheat CheatSpawnDrone
+						Lua 0:02:41:554
+ObjCheat CheatSpawnDrone
+						Lua 0:02:41:702
+ObjCheat CheatSpawnDrone
+						Lua 0:02:41:849
+ObjCheat CheatSpawnDrone
+						Lua 0:02:42:005
+ObjCheat CheatSpawnDrone
+						Lua 0:02:42:149
+ObjCheat CheatSpawnDrone
+						Lua 0:02:42:293
+ObjCheat CheatSpawnDrone
+						Lua 0:02:42:460
+ObjCheat CheatSpawnDrone
+						Lua 0:02:42:586
+ObjCheat CheatSpawnDrone
+						Lua 0:02:42:747
+ObjCheat CheatSpawnDrone
+						Lua 0:02:42:877
+ObjCheat CheatSpawnDrone
+						Lua 0:02:45:381
+ObjCheat CheatSpawnDrone
+						Lua 0:02:45:530
+ObjCheat CheatSpawnDrone
+						Lua 0:03:04:121
+
+!!! Quick Build !!!
+						Lua 0:03:08:260
+ObjCheat CheatSpawnDrone
+						Lua 0:03:08:423
+ObjCheat CheatSpawnDrone
+						Lua 0:03:08:580
+ObjCheat CheatSpawnDrone
+						Lua 0:03:08:743
+ObjCheat CheatSpawnDrone
+						Lua 0:03:08:911
+ObjCheat CheatSpawnDrone
+						Lua 0:03:09:066
+ObjCheat CheatSpawnDrone
+						Lua 0:03:09:227
+ObjCheat CheatSpawnDrone
+						Lua 0:03:09:395
+ObjCheat CheatSpawnDrone
+						Lua 0:03:09:545
+ObjCheat CheatSpawnDrone
+						Lua 0:03:09:697
+ObjCheat CheatSpawnDrone
+						Lua 0:03:09:858
+ObjCheat CheatSpawnDrone
+						Lua 0:03:10:004
+ObjCheat CheatSpawnDrone
+						Lua 0:03:10:158
+ObjCheat CheatSpawnDrone
+						Lua 0:03:10:306
+ObjCheat CheatSpawnDrone
+						Lua 0:03:10:449
+ObjCheat CheatSpawnDrone
+						Lua 0:03:10:596
+ObjCheat CheatSpawnDrone
+						Lua 0:03:10:757
+ObjCheat CheatSpawnDrone
+						Lua 0:03:10:913
+ObjCheat CheatSpawnDrone
+						Lua 0:03:11:067
+ObjCheat CheatSpawnDrone
+						Lua 0:03:11:229
+ObjCheat CheatSpawnDrone
+						Lua 0:03:11:391
+ObjCheat CheatSpawnDrone
+						Lua 0:03:11:542
+ObjCheat CheatSpawnDrone
+						Lua 0:03:11:697
+ObjCheat CheatSpawnDrone
+						Lua 0:03:11:868
+ObjCheat CheatSpawnDrone
+						Lua 0:03:12:037
+ObjCheat CheatSpawnDrone
+						Lua 0:03:12:163
+ObjCheat CheatSpawnDrone
+						Lua 0:03:49:824
+ObjCheat CheatDestroy
+						Lua 0:03:51:802
+ObjCheat CheatDestroy
+						Lua 0:03:53:683
+ObjCheat CheatDestroy
+						Lua 0:04:00:315
+ObjCheat CheatDestroy
+						Lua 0:04:09:722
+
+!!! Quick Build !!!
+						Lua 0:04:14:119
+ObjCheat CheatSpawnDrone
+						Lua 0:04:14:271
+ObjCheat CheatSpawnDrone
+						Lua 0:04:14:437
+ObjCheat CheatSpawnDrone
+						Lua 0:04:14:568
+ObjCheat CheatSpawnDrone
+						Lua 0:04:14:713
+ObjCheat CheatSpawnDrone
+						Lua 0:04:14:857
+ObjCheat CheatSpawnDrone
+						Lua 0:04:15:014
+ObjCheat CheatSpawnDrone
+						Lua 0:04:15:156
+ObjCheat CheatSpawnDrone
+						Lua 0:04:15:302
+ObjCheat CheatSpawnDrone
+						Lua 0:04:15:455
+ObjCheat CheatSpawnDrone
+						Lua 0:04:15:605
+ObjCheat CheatSpawnDrone
+						Lua 0:04:15:757
+ObjCheat CheatSpawnDrone
+						Lua 0:04:15:903
+ObjCheat CheatSpawnDrone
+						Lua 0:04:16:044
+ObjCheat CheatSpawnDrone
+						Lua 0:04:16:186
+ObjCheat CheatSpawnDrone
+						Lua 0:04:16:338
+ObjCheat CheatSpawnDrone
+						Lua 0:04:16:498
+ObjCheat CheatSpawnDrone
+						Lua 0:04:16:655
+ObjCheat CheatSpawnDrone
+						Lua 0:04:16:809
+ObjCheat CheatSpawnDrone
+						Lua 0:04:16:970
+ObjCheat CheatSpawnDrone
+						Lua 0:04:17:121
+ObjCheat CheatSpawnDrone
+						Lua 0:04:17:239
+ObjCheat CheatSpawnDrone
+						Lua 0:04:18:117
+ObjCheat CheatSpawnDrone
+						Lua 0:04:18:285
+ObjCheat CheatSpawnDrone
+						Lua 0:04:18:394
+ObjCheat CheatSpawnDrone
+						Lua 0:04:27:488
+ObjCheat CheatEmpty
+						Lua 0:04:33:441
+ObjCheat CheatEmpty
+						Lua 0:04:54:482
+ObjCheat CheatFill
+						Lua 0:04:56:305
+ObjCheat CheatFill
+						Lua 0:04:58:177
+ObjCheat CheatFill
+						Lua 0:06:31:704
+Stop sequence BuriedWonder_Jumbo_Cave_106 - Update Mystery Log : Finished
