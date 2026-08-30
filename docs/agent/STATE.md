@@ -89,6 +89,8 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 - 73 blame surface — harden or not · 76 confirm (a) was a ruling not a leaning · 53 harden now or in 1.0.1
   (rec 1.0.1) · 51 both-packs leg timing (rec after launch) · 50 chain-vs-replace wording · 47 two modder-page
   wordings · 43 opt-in pack re-tick · 41 dialog wording + sweep cap 5→8 · 40 `smr_shuttles` name · 39 dialog re-fire.
+- ⭐ NEW 08-30 — **F110 (was C25) CONFIRMED LIVE** off a Reddit field save: Jumbo Cave reinforcement wedged on an
+  unreachable waste rock, site never clears (first live repro). NO fix — owner decision ck82. Evidence `bugs/F110.md`.
 - Closed 08-29: 37 (both listings v4); 79 + 81 DONE; 80 WITHDRAWN IN FULL.
 
 ## Build state — `python tools/doccheck.py --emit-counts`, never hand-typed
@@ -97,6 +99,6 @@ BUILD STATE (emitted by tools/doccheck.py)
 - modules: 79 registered (79 default-active, 0 optional-gated files)
 - Code/*.lua files: 80
 - TestKit probes: 100
-- BUGS index rows: 108 F + 12 D + 53 C
+- BUGS index rows: 110 F + 12 D + 53 C
 ```
 Re-emit after any change; game pinned **1.0.7.396349** (`EF-014`).

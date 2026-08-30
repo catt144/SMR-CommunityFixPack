@@ -29,6 +29,32 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### 🔵 2026-08-30 — NEW ITEM 82: the Jumbo Cave wedge (F110, was C25) is CONFIRMED LIVE. Fix it, and if so how/when?
+
+82. 🔵 **Confirmed, first time ever.** A Reddit reporter's save (you bought the
+    Interplanetary Codex pass to load it) reproduced the month-old Jumbo Cave
+    wedge on our exact build. Console read while stuck: a `JumboCaveReinforcementStructure`
+    site down to its last waste rock, that rock a `WasteRockObstructor` the drones
+    can't path to (in 2 drones' `unreachable_buildings`), site never clears, mystery
+    soft-locks. Permanence witnessed (the unreachable flag reset on load, then
+    rebuilt after ~1-2 min of run). Filed as **`F110`**; C25 is closed-promoted.
+
+    **The decision is yours — three parts, and none is urgent:**
+    - **Fix or leave?** It's a genuine soft-lock with no player recourse, which
+      `FIX_POLICY` normally favours fixing — but it's niche (needs a Jumbo Cave
+      *and* the geometry to strand a rock). **Rec: fix, in a future patch, not a
+      hotfix.**
+    - **Shape?** fredware's known repair is *reactive* (wrap the vanilla approach,
+      act after a failure). A *proactive* shape would need the finer root cause
+      first — WHY `Rocks_04` is unreachable (terrain vs a cleared pile vs an
+      adjacent obstacle), which I did **not** measure. **Rec: characterise the
+      geometry on the loaded save before choosing a shape.**
+    - **Timing?** Post-launch = patch-note maintenance (your ruling); this rides a
+      future patch, not its own cycle. No gate re-run for one added fix.
+
+    ⇒ **Say the word and I'll (a) take the geometry read off the still-loaded save,
+    then (b) bring you an A/B fix proposal.** Nothing is owed until you decide.
+
 ### ✅ 2026-08-29 — ITEM 81 DONE, you ran it 18:44Z and the site is fully deployed. ITEM 80 WITHDRAWN IN FULL, both halves. Nothing is owed on the site or either store.
 
 81. ✅ **DONE — deployed `fcb2aa9`, status `success`, 2026-08-29T18:44:14Z.**
@@ -4545,16 +4571,14 @@ is a new engine-data finding. → [F55](agent/bugs/F55.md)
    save/load.
 **Good to have:** screenshots — the clustering picture is half the evidence.
 
-### Rider — C25: Jumbo Cave waste-rock wedge · Status: unrun — take it the moment a Reinforcement site sticks
-**Bug:** the wedge chain is Src-verified; only the trigger is unproven — does
-cave geometry actually strand a waste rock? Non-zero-while-stuck earns C25 its
-F-row; **zero while stuck is the more useful result** (the wedge is something
-else). → [C25](agent/bugs/C12-C38.md)
-**Requirements:** the situation — a Jumbo Cave Reinforcement site stuck on
-"construction site is being cleared" / read taken while looking at the
-underground map / save vintage recorded (colony begun pre- or post-1.0.6).
-**Setup:** while the site is stuck, the agent hands the one console dump
-(entry); the reading decides C25 either way.
+### Rider — C25: Jumbo Cave waste-rock wedge · Status: ✅ DONE 2026-08-30 — CONFIRMED, promoted to F110
+**Result:** ran on a Reddit field save (build 1.0.7.396349, `VINTAGE true`). A
+`JumboCaveReinforcementStructure` site with `waste_rocks_underneath = 1`, the last
+rock a `WasteRockObstructor` (`Rocks_04`) in 2 drones' `unreachable_buildings`,
+`JCRS completed = 0`; permanence witnessed (flag reset on load, rebuilt after
+~1-2 min run). **Non-zero-while-stuck → C25 earned its F-row.** → [F110](agent/bugs/F110.md).
+Fix decision is item 82 above. (This rider is closed; kept as the record of how
+the read was taken.)
 
 ### Rider — F77: extender-flap Idle-kick · Status: blocked (frozen with PT-52)
 **Bug:** the fix ships default-on and is NOT invalidated — how big is the
