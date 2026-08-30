@@ -29,9 +29,31 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
-### 🔵 2026-08-30 — NEW ITEM 82: the Jumbo Cave wedge (F110, was C25) is CONFIRMED LIVE. Fix it, and if so how/when?
+### 🟠 2026-08-30 — ITEM 82: Jumbo Cave wedge (F110) — DECIDED (fix it), FIX WRITTEN, one A/B run owed by you
 
-82. 🔵 **Confirmed, first time ever.** A Reddit reporter's save (you bought the
+82. 🟠 **You decided: fix it ("effects a lot of people, we just never had a way to
+    test"). Fix is written — one in-game A/B run is what's left before it flips to
+    `fixed`.** `Code/Fix_JumboCaveReinforcementWedge.lua` (proactive `NewHour` +
+    reactive `LoadGame` self-heal, scoped to `JumboCaveReinforcementStructure`
+    sites, force-clears a waste rock the drones have flagged unreachable). The
+    *end state* (clear the rock → site builds → mystery completes) was validated
+    live on your loaded save — it paid out "Reinforcements Completed" in front of
+    us. What's unverified is the **module's own detection + wiring**.
+
+    **The A/B run (≈2 min):** (1) fully restart the game so the new module loads —
+    confirm `[CommunityFixPack] JumboCaveReinforcementWedge: applied` at boot;
+    (2) load the STILL-STUCK `International Mars Mission Sol 84` (the original save
+    file — do NOT overwrite it; the in-memory copy we completed doesn't count);
+    (3) unpause and wait up to one in-game hour. Expect the mystery to auto-complete
+    and a log line `force-cleared N unreachable waste rock(s)…`. If it does, say so
+    and I flip F110 to `fixed`. Then it rides a future patch (no gate re-run).
+
+    *(Superseded 08-30: the earlier "fix or hold / shape / timing" text — you
+    answered all three: fix, proactive+self-heal, future patch.)*
+
+<details><summary>original decision text (for the record)</summary>
+
+**Confirmed, first time ever.** A Reddit reporter's save (you bought the
     Interplanetary Codex pass to load it) reproduced the month-old Jumbo Cave
     wedge on our exact build. Console read while stuck: a `JumboCaveReinforcementStructure`
     site down to its last waste rock, that rock a `WasteRockObstructor` the drones
@@ -54,6 +76,8 @@ completed tests move whole to
 
     ⇒ **Say the word and I'll (a) take the geometry read off the still-loaded save,
     then (b) bring you an A/B fix proposal.** Nothing is owed until you decide.
+
+</details>
 
 ### ✅ 2026-08-29 — ITEM 81 DONE, you ran it 18:44Z and the site is fully deployed. ITEM 80 WITHDRAWN IN FULL, both halves. Nothing is owed on the site or either store.
 

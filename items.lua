@@ -359,6 +359,10 @@ return {
 		'CodeFileName', "Code/Fix_ExtractorStaffedPerformance.lua",
 	}),
 	PlaceObj('ModItemCode', {
+		'name', "Fix_JumboCaveReinforcementWedge",
+		'CodeFileName', "Code/Fix_JumboCaveReinforcementWedge.lua",
+	}),
+	PlaceObj('ModItemCode', {
 		'name', "90_SaveSanitizer",
 		'CodeFileName', "Code/90_SaveSanitizer.lua",
 	}),

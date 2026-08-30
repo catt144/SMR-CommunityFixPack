@@ -272,6 +272,7 @@ return PlaceObj('ModDef', {
 		"Code/Fix_SpaceYDroneCapBullet.lua",
 		"Code/Fix_LandscapeCostRefresh.lua",
 		"Code/Fix_ExtractorStaffedPerformance.lua",
+		"Code/Fix_JumboCaveReinforcementWedge.lua",
 		"Code/90_SaveSanitizer.lua",
 	},
 	-- ⭐⭐ WRITTEN BY THE UPLOADS, 2026-08-20 — THESE ARE HOW EVERY FUTURE UPDATE
