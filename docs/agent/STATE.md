@@ -36,7 +36,11 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   subclasses (biggest: `Fix_ShuttleHubOffAvailable` misses ~578 under `Building`); which are ever INSTANTIATED is
   unmeasured, checklist 74 stays half-open on it · German is the only localisation ever SEEN, the other 7 stay
   CSV-measured (`EF-039`) · C47 speed thread (unrun) · C48 opt-in candidate · F02/F78/F81 organic · riders
-  C42/F99/F80/F96-R2 post-release · `EF-051` falsifier = any stray save.
+  C42/F99/F80/F96-R2 post-release · `EF-051` falsifier = any stray save ·
+  **F109 PARKED/unconfirmed** (Reddit, not our tracker; meteor-destroyed Atomic Accumulator REBUILT ⇒ ~50 stacked
+  objects on one hex). ⛔ No cause claimed, no save, mod load unknown; the ~50 malfunction messages are the only
+  derivation (`SetMalfunction` latches ⇒ ~50 OBJECTS). ⛔ Do NOT harden `DestroyedRebuild`'s `efVisible` guard on
+  it. Reopen ONLY with the Command Center buildings list at that hex + mod list + a save.
 
 ## Hazards — each names an action an agent could take unattended; never do it
 - **H-01** Tag `fixpack-v1.0.0` marks what actually gets packed (moved onto the close-out audit's commit 08-20).
