@@ -46,11 +46,14 @@ completed tests move whole to
     page they link to shows 81. Low-severity, same-sitting fix; it slips into a real
     mismatch only if it waits to another day.
 
-    ⚠️ **Two things I still need from you** (batched, no rush): **(1)** did the store
-    descriptions **auto-fill**, or did you paste from `UPLOAD_WORKFLOW.md` §3? This is
-    the one open question we've been tracking since 08-24 — the auto-fill path had
-    never actually run. **(2)** did either page offer a **required-game-version**
-    field (350453)? If so, did you set it? I'll record both.
+    ✅ **Both questions answered 08-30.** **(1) Auto-fill did NOT deliver a clean
+    page** — you pasted the `UPLOAD_WORKFLOW.md` §3 backup by hand. So after two
+    upload cycles the auto-fill path has never once stood on its own: the §3 paste
+    backups are the real delivery mechanism, **required and kept current**, not an
+    optional fallback. You're treating the pasted plain text as a placeholder and
+    will apply the headings/bold formatting later — cosmetic, no rush.
+    **(2) No required-game-version field** was offered on either page — nothing to
+    set, nothing owed.
 
     ℹ️ Confirmation pass on the actual Steam pack is queued — you subscribed, but the
     workshop item hasn't downloaded to disk yet. When it lands I'll md5 it and

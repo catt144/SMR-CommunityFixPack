@@ -10,8 +10,8 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 - ⭐ PUBLISHED on both portals — Paradox `pdx_id` **156049**, Steam `steam_id` **3787202810**; tree `version` **5**
   (F110 shipped 08-30). ⛔ Never re-upload to "fix" a version number — each upload bumps again (H-02).
   ⛔ Every upload OVERWRITES both page bodies from `metadata.lua`; `description` IS the full card (08-24 ruling), so
-  auto-fill is CORRECT but STILL UNTESTED — `UPLOAD_WORKFLOW` §3 paste backups are the FALLBACK, not polish.
-  ⚠️ v5 auto-fill outcome UNCONFIRMED — owner asked 08-30 (checklist 82).
+  ⚠️ AUTO-FILL TESTED v5 (08-30): did NOT deliver a clean page — owner PASTED the §3 backup. Two cycles, never
+  auto-filled cleanly ⇒ `UPLOAD_WORKFLOW` §3 paste backups are REQUIRED, keep current. No game-version field offered.
 - ⚠️ SITE deploy OWED for F110 — row committed `SMR-CommunityMods` `ce3a377` (list 82) but live deploy still
   `fcb2aa9` (**81**); store cards say "Eighty-two" until the owner runs Publish. ⛔ `publish-site.yml` is
   `workflow_dispatch` only — committing never publishes. ⛔ Never quote a stored "deployed = <sha>" as current;
