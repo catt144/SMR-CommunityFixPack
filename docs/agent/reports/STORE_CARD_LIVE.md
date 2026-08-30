@@ -121,7 +121,7 @@ back at Paradox. ⛔ Do not paste the same block on both.
 ```
 Bug fixes for Surviving Mars: Relaunched.
 
-Eighty-one repairs, each one written up on the fix list with what you would
+Eighty-two repairs, each one written up on the fix list with what you would
 have seen and what was actually wrong. Every one targets something the game's
 own code gets wrong — the code says one thing, does another, and the fix makes
 it do what it says. It fixes bugs; it does not rebalance the game. Preferences
@@ -157,6 +157,7 @@ SOME OF WHAT IT FIXES
 · Meteors struck every few hours instead of every day or two.
 · A meteor storm ended and the weather stopped, permanently.
 · Building an artificial lake buried the rover that built it.
+· A Jumbo Cave mystery could get stuck clearing waste rock and never complete.
 · The Gene Forging research did nothing at all.
 · Salvaging an upgraded building left its bonuses behind forever.
 · The Extractor AI breakthrough capped your staffed extractors and could lock a sponsor's high-Performance extractor goal.
@@ -236,7 +237,7 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=3787202810
 ```
 Bug fixes for [i]Surviving Mars: Relaunched[/i].
 
-[b]Eighty-one repairs[/b], each one written up on the fix list with what you would have seen and what was actually wrong. Every one targets something the game's own code gets wrong — the code says one thing, does another, and the fix makes it do what it says. It fixes bugs; it does not rebalance the game. Preferences and features are deliberately not in it.
+[b]Eighty-two repairs[/b], each one written up on the fix list with what you would have seen and what was actually wrong. Every one targets something the game's own code gets wrong — the code says one thing, does another, and the fix makes it do what it says. It fixes bugs; it does not rebalance the game. Preferences and features are deliberately not in it.
 
 Some of them you could hardly miss: an entire train line and every train on it deleted by salvaging a single hex, colonists suffocating on a walk between two domes, a lander that unloaded its own return fuel and could never come home.
 
@@ -258,6 +259,7 @@ And [b]four[/b] of them repair things you cannot see at all today: real defects 
 [*]Meteors struck every few hours instead of every day or two.
 [*]A meteor storm ended and the weather stopped, permanently.
 [*]Building an artificial lake buried the rover that built it.
+[*]A Jumbo Cave mystery could get stuck clearing waste rock and never complete.
 [*]The Gene Forging research did nothing at all.
 [*]Salvaging an upgraded building left its bonuses behind forever.
 [*]The Extractor AI breakthrough capped your staffed extractors and could lock a sponsor's high-Performance extractor goal.

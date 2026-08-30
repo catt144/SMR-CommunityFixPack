@@ -83,7 +83,7 @@ render.
 ```
 Bug fixes for Surviving Mars: Relaunched.
 
-Eighty-one repairs, each one written up on the fix list with what you would
+Eighty-two repairs, each one written up on the fix list with what you would
 have seen and what was actually wrong. Every one targets something the game's
 own code gets wrong — the code says one thing, does another, and the fix makes
 it do what it says. It fixes bugs; it does not rebalance the game. Preferences
@@ -119,6 +119,7 @@ SOME OF WHAT IT FIXES
 · Meteors struck every few hours instead of every day or two.
 · A meteor storm ended and the weather stopped, permanently.
 · Building an artificial lake buried the rover that built it.
+· A Jumbo Cave mystery could get stuck clearing waste rock and never complete.
 · The Gene Forging research did nothing at all.
 · Salvaging an upgraded building left its bonuses behind forever.
 · The Extractor AI breakthrough capped your staffed extractors and could lock a sponsor's high-Performance extractor goal.
@@ -192,7 +193,7 @@ https://github.com/catt144/SMR-CommunityFixPack
 ```
 Bug fixes for [i]Surviving Mars: Relaunched[/i].
 
-[b]Eighty-one repairs[/b], each one written up on the fix list with what you would have seen and what was actually wrong. Every one targets something the game's own code gets wrong — the code says one thing, does another, and the fix makes it do what it says. It fixes bugs; it does not rebalance the game. Preferences and features are deliberately not in it.
+[b]Eighty-two repairs[/b], each one written up on the fix list with what you would have seen and what was actually wrong. Every one targets something the game's own code gets wrong — the code says one thing, does another, and the fix makes it do what it says. It fixes bugs; it does not rebalance the game. Preferences and features are deliberately not in it.
 
 Some of them you could hardly miss: an entire train line and every train on it deleted by salvaging a single hex, colonists suffocating on a walk between two domes, a lander that unloaded its own return fuel and could never come home.
 
@@ -214,6 +215,7 @@ And [b]four[/b] of them repair things you cannot see at all today: real defects 
 [*]Meteors struck every few hours instead of every day or two.
 [*]A meteor storm ended and the weather stopped, permanently.
 [*]Building an artificial lake buried the rover that built it.
+[*]A Jumbo Cave mystery could get stuck clearing waste rock and never complete.
 [*]The Gene Forging research did nothing at all.
 [*]Salvaging an upgraded building left its bonuses behind forever.
 [*]The Extractor AI breakthrough capped your staffed extractors and could lock a sponsor's high-Performance extractor goal.
@@ -260,9 +262,8 @@ Usually auto-fills. If it is missing under **CHANGELOG** (Paradox) or **Change
 Notes** (Steam), paste this:
 
 ```
-- Fixed a base-game issue where the Extractor AI breakthrough held Metals and Rare Metals Extractors at 50 Performance even when they were fully staffed, which could make a sponsor goal that needs high-performance extractors impossible to finish. Staffed extractors now earn their full performance; unstaffed ones still run at 50.
-- Fixed a base-game error when a technology that reduces building costs finished researching while a terrain-levelling or rock-clearing job was active anywhere on the map.
-- Safe to install on a save where this is already happening; the levelling job can stay where it is.
+- Fixed a base-game issue where a Jumbo Cave's Reinforcements could stay stuck clearing waste rock forever — a rock the drones could not reach blocked the site, so the Reinforcement never built and the mystery never completed.
+- Safe to install on a save where this is already happening; the stuck rock is cleared automatically.
 ```
 
 #### 📋 Short summary (only if it also came out blank)
