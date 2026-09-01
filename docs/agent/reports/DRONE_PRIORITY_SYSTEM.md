@@ -280,6 +280,33 @@ the difference is the one FIX_POLICY §4 cares about.
    readable; the matching pass that consumes them is not. Ordering claims beyond
    "higher is served first" (evidenced by the shipped comment at
    `SupplyGridBreakable.lua:52`) should be **measured, not asserted.**
+8. ⚠️ **A DELIVERY IN FLIGHT IS RE-OPENED AGAINST THE REAL BANDS — any urgency
+   scheme that elevates a demand OUTSIDE the real queues must guard
+   `Drone:ImproveDemandRequest` (added 2026-09-01, `EF-074`).** `Drone:Deliver`
+   (`Lua/Units/Drone.lua:1164-1175`) improves every PickUp-chained delivery unless
+   `do_not_improve_req` is passed, and the shipped `PickUp` tail chains
+   `SetCommand("Deliver", d_request)` **without** it (`:1013-1014`).
+   `ImproveDemandRequest` (`:760-813`) asks for a strictly better destination at
+   `min_priority = d_building:GetPriorityForRequest(d_request) + 1` (`:766`) **in
+   the REAL demand queues**. So a demand that is urgent only in a mod-side view
+   still carries its real band here, and the parts flown for a tier-5 repair can
+   be traded up mid-flight to routine player-High traffic — the exact inversion
+   such a scheme exists to prevent. Vanilla baseline for scale: band-2 deliveries
+   are ALREADY hijackable by band-3 demands today; the trap is only that a tier
+   design thinks it outranks 3 and this seam does not know it.
+   ⚠️ **And the guard needs a carve-out or it hangs the drone** (added 2026-09-01,
+   opt-in `reports/DRONE_REBUILD_DESIGN_20260901.md` §2b rule 5): `Deliver`'s
+   retry loop sets `must_change` when the destination is unreachable, when a
+   fulfill retry failed, or when the request was suspended (`:1246-1250`), and a
+   guard that declined unconditionally would loop the drone on an unreachable
+   building at `Sleep(1000)` per pass forever. Decline only while `must_change` is
+   false; hand `must_change` calls straight to the original.
+
+> ⚠️ **RECORD CORRECTION, 2026-09-01.** This landmine was announced in commit
+> `3e224a7`'s subject line ("DRONE_PRIORITY_SYSTEM gains landmine 8") and in the
+> opt-in bands report's §8 addendum, but the commit touched only
+> `docs/agent/facts/` (`git show --stat 3e224a7`) — **the landmine was never
+> written.** Written for real here by the opt-in mod's rebuild-design session.
 
 ---
 
