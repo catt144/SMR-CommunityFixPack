@@ -29,6 +29,47 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### 2026-08-31 — ITEMS 83–86 OPEN: raised by the OPT-IN mod's readiness pass (its repo, `docs/agent/reports/READINESS_REVIEW_0831.md`)
+
+86. **Ratify or reverse: `EF-###` ids are allocated by THIS repo.** After the split
+    both repos minted their own numbers and collided (the opt-in repo's `EF-057`/`058`
+    of 08-16 were different facts from ours). Resolved 08-31 by re-syncing its facts
+    folder from ours @ `bec2e06`; the rule written into its `WORKFLOW.md`: a fact
+    learned there is filed HERE first (or its next id reserved here), then mirrored
+    there at the same id. Costs you nothing; say "reverse" if you want independent
+    numbering with a prefix instead.
+
+85. **Preview art for the opt-in mod (owner task).** `tools/upload_preflight.py`
+    run against `C:\Dev\SMR-OptInPack` FAILS on exactly one clause: no `image` /
+    `preview.png` — Paradox rejects before packing (`ParadoxMods.lua:39`). Same
+    limits as ours (≤1 MB Steam / ≤2 MB PDX). Not urgent — that mod is not launching —
+    but it is the only mechanical FAIL between it and an upload sitting.
+
+84. **Opt-in: name three wrap pairs in `Require` blocks?** The F107 check (now run by
+    its doccheck) found three capture+install sites with no Require pair:
+    `Opt_DroneOverhaul` → `Drone.CleanUnreachables` + `TaskRequestHub.FindTask` (that
+    module uses inline guards, no `Require` at all) and `Opt_MultipleSuns` →
+    `SolarPanelBase.GameInit`. Each captured class DECLARES the method at Src
+    (Drone.lua:879, _TaskRequest.lua:72, SolarPanel.lua:8), so `prev` is real and
+    nothing is broken — they are allowlisted with those citations. The tidy fix is a
+    code edit to frozen modules (`DroneOverhaul` carries PT-52's freeze) and needs an
+    A/B. **Options:** (a) leave allowlisted until the next planned edit of each file;
+    (b) do it at the opt-in launch session with its boot check. Recommend (a).
+
+83. **TestKit edits for the opt-in mod's coverage (needs your go — it is the SHARED
+    kit).** Survey findings (`READINESS_REVIEW_0831.md` §5): the kit has **no opt-in-only
+    run mode** (a standalone leg prints ~85 fix-pack FAILs around 8 real verdicts);
+    **D06 `DroneOverhaul` has no `RunAll` probe** (only the manual stress harness);
+    `98_EnablePathLeg.lua:54` hardcodes `SMR_CommunityFixPack`, so the opt-in mod's
+    normal first-run path has never been measured by that leg; `99_FixtureCarry.lua`
+    channel 5 hardcodes `SMRFixPack_F35_` and cannot see D09's dial modifiers; only
+    D12 has a vanilla-control clause (the 08-24 probe rule). **Proposed, in order of
+    value:** (1) `RunAll` owner filter + a `fix pack absent = expected` mode;
+    (2) `PACK_ID` parameter on the enable-path leg; (3) FixtureCarry D09 channel;
+    (4) a D06 `RunAll` probe; (5) control clauses for D01–D04/D07/D09. Each needs a
+    real launch to verify; none was made. Say which, or "all, next sitting".
+
+
 ### ✅ 2026-08-30 — ITEM 82 CLOSED: F110 live on both stores in v5, site deployed, delivered Steam pack verified. Nothing owed.
 
 82. ✅ **SHIPPED — v5, both portals, 2026-08-30.** You packed and uploaded Paradox
