@@ -29,6 +29,17 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### ✅ 2026-08-31 — ITEM 87 RULED THE SAME DAY: drones UNFROZEN
+
+87. ✅ **RULED 2026-08-31 — "Un freeze drones" (verbatim).** Lifts the PT-52
+    freeze and the module freeze on the opt-in mod's `Opt_DroneOverhaul` (D06)
+    and `Opt_DroneStatDials` (D09): design and playtest work may resume under
+    FIX_POLICY with an A/B per change. Recorded in the opt-in repo's `STATE.md`
+    and `D06.md`; PT-52's status below updated. Still yours: the D06 design
+    decision itself (`prompts/DRONE_PROJECT_PROMPT.md` §3 — three options), and
+    whether `FUTURE_IDEAS.md` #7 (gleaner / pairing policy) is un-parked too — this
+    ruling was read as NOT touching that post-launch parking.
+
 ### 2026-08-31 — ITEMS 83–86 OPEN: raised by the OPT-IN mod's readiness pass (its repo, `docs/agent/reports/READINESS_REVIEW_0831.md`)
 
 86. **Ratify or reverse: `EF-###` ids are allocated by THIS repo.** After the split
@@ -4619,7 +4630,7 @@ colonists.
 > (dome-entrance data, untouched by any dispatch redesign) and F77's own fix
 > (shipped, default-on; only its test's packaging was frozen).
 
-### PT-52 — Drone dispatch overhaul · Status: blocked (frozen, pending invalidation and rewrite)
+### PT-52 — Drone dispatch overhaul · Status: ⚖️ UNFROZEN 2026-08-31 (item 87) — still blocked on the design decision; the test needs its rewrite from the approved plan
 **Bug:** tests D06 `Opt_DroneOverhaul`'s v1 design, and that design is being
 rebuilt — every result it could produce would be evidence about code that will
 not exist. → [D06](agent/bugs/D06.md), [F77](agent/bugs/F77.md),
