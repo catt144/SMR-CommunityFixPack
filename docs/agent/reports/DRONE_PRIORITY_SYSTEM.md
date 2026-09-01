@@ -159,6 +159,15 @@ queue**.
 A whole-tree sweep for `GetPriorityForRequest` found exactly four definitions
 (one base + three overrides) and two aliases.
 
+> ⚠️ **CORRECTION 2026-09-01 (BANDS_CLEAN_REVERT, Src re-read): there is a FOURTH
+> override — `RCTransport:GetPriorityForRequest` (`Lua/Units/RCTransport.lua:217-223`)
+> returns `-1` for the transport's own `resource_requests` supplies and `self.priority`
+> otherwise.** It is a unit, not a building, and grants no urgency, so nothing in §5–§7
+> changes; the count "three overrides" in this heading is wrong as a count. The two
+> `ConstructionSite` aliases (`:2082`, `:2199`) read `RequiresMaintenance.GetPriorityForRequest`
+> off a bare classdef, and `RequiresMaintenance` defines no such method — they evaluate
+> to `nil` and add nothing.
+
 ### 4a. Broken pipes and cables → **3** — *your O2 leak*
 
 `Lua/SupplyGridBreakable.lua:48-56`:
@@ -247,6 +256,17 @@ the difference is the one FIX_POLICY §4 cares about.
    buildings that took that branch hold a direct function reference and would
    **not** see a later class patch. Not a hazard for maintenance work; record it
    before touching anything else through this method.
+   > ⛔ **AMENDED 2026-09-01 — this IS the hazard, and it is a save-safety one, not a
+   > reach one (EF-069).** Class-table functions are not persist permanents
+   > (`CommonLua/Core/persist.lua:157-165`), so the value `:94` writes onto every
+   > no-maintenance building at construction is serialised BY VALUE. With a class-level
+   > override installed at file scope, that value is the MOD's closure: vanilla itself
+   > copies it into the save of every no-maintenance building built while the mod is
+   > installed (the EF-022 route, executed by shipped code). Any "urgent while broken"
+   > design must therefore re-file requests in the hub's own tables (or substitute at
+   > `FindTask`), never override this method on a class a no-maintenance building
+   > inherits. Full route and the falsifier: opt-in mod
+   > `reports/DRONE_BANDS_CLEAN_REVERT_20260901.md` §4.1, E-6.
 5. **Overriding the player.** `self.priority` is the arrows the player set. Any
    automatic bump overrides an explicit player choice. Deciding whether a bump
    is *absolute* (always 3) or *relative* (preserves the player's ordering among
@@ -494,6 +514,14 @@ Rover inherits.
   `DroneControl:RemoveBuilding` outright** — a FIX_POLICY §1.5 full replacement
   in the most shared queue code in the game, and one of the highest patch-rot
   exposures available. Nothing smaller reaches the constant.
+  > ⚠️ **CORRECTED 2026-09-01 (BANDS_CLEAN_REVERT §4.1.1): the constant is unreachable,
+  > the TABLES are not.** `DroneControl:RemoveBuilding` (`:731-757`) is `OnRemoveBuilding` +
+  > `remove_entry` calls over the hub's own plain Lua arrays + `UpdateDeficits`; a chained
+  > PRE-wrapper that runs the same three `remove_entry`s for `4..const.TaskRequest.
+  > MaxBuildingPriority` before `orig` closes the leak with no replacement — every removal
+  > path (`DisconnectTaskRequesters`, `SetPriority`) reaches it, and `_InternalRemoveRequest`
+  > already loops the widened locals. The mechanism above and the `4 → 6` reading stand;
+  > the "requires replacing outright" conclusion does not. Re-measure = E-3 there.
 - **Working inside `-1..3` avoids this entirely.** Vanilla's own removal loop
   already covers the whole range, so no entry can ever be stranded and no
   duplicate can accumulate. (This is now a *second* independent argument for the

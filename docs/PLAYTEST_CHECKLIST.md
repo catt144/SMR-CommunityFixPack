@@ -29,6 +29,37 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### 2026-09-01 — ITEMS 91–93 OPEN: the drone bands-and-clean-revert report (opt-in repo, `docs/agent/reports/DRONE_BANDS_CLEAN_REVERT_20260901.md`)
+
+93. **Should the urgency tiers apply to rockets and RC Rovers, or to Drone Hubs only?**
+    Every `DroneControl` carrier shares `FindTask`, so a wrapper there serves tiers on
+    rockets/rovers too unless gated on `DroneHubBase` the way v1's claim gate is
+    (`Opt_DroneOverhaul.lua:185`). Rovers are player-zoned; rockets refuel/unload. Say
+    "hubs only", "all carriers", or "decide at the build brief" (report §4.2 V, R11).
+
+92. **Run the two matcher experiments (E-4, E-8; ≈ 70 attended minutes, one sitting, NEW
+    game, TEMPORARY TestKit module)?** They are the only cells the desk could not fill:
+    does `Request_FindTask` honour a mod-built table set, and is a wrapper-substituted
+    pairing claimed and executed like a matcher-chosen one. E-9 (tier precedence, n≥3)
+    follows if both pass; E-3/E-5 only if option 1 is chosen; E-6 turns EF-069 from
+    source-read to measured; E-2 is refused by EF-023. Cards with predictions: report §5.
+    Say which to run, or "none yet".
+
+91. **The D06 design decision, restated with the new inputs (supersedes the three-option
+    framing in `prompts/DRONE_PROJECT_PROMPT.md` §3 as the thing to decide).** The report's
+    ranked shortlist: (1) **V** view tiers — bands 4–5 as tier ORDER handed to the matcher
+    in transient tables, full 5/4/3 distinction, zero residue by construction, pending E-4
+    and E-8; (2) **P** finder pre-emption, same result, pending E-8 only; (3) **2-S** table
+    surgery at band 3 — clean revert from citations alone, no experiment, but ONE band
+    (the pipes/dome tier); (4) **D** the devs' own tier on the five producers only.
+    Bands 4–5 as PERSISTED data (option 1) fail uninstall by the §9 measurements and the
+    Rescue would have to learn a queue shape; tear-down-on-save is layer 1, which you
+    declined 2026-07-31, and Src shows it cannot hold its invariant on autosaves. **Two
+    questions decide it:** (a) is *5 vs 4 vs player-3* a requirement (V/P) or a preference
+    (2-S/D suffice)? — the devs' own tier is one band and they withdrew a one-band urgency
+    in 2018; (b) if a requirement, do you authorise item 92 first? The recommendation is V
+    with 2-S as the documented fallback; the pick is yours. Nothing is built until you say.
+
 ### 2026-09-01 — ITEMS 88–90 OPEN: raised by the OPT-IN mod's contamination audit (its repo, `docs/agent/reports/CONTAMINATION_AUDIT_20260901.md`)
 
 90. **Does your 2026-08-02 loc-table ruling extend to the opt-in mod?** You ruled

@@ -204,6 +204,18 @@ without bound.
    (every idle drone, constantly), so it needs caching and invalidation, and
    every other queue path must agree with the overlay.
 
+⭐ **2026-09-01 — the inputs changed, the options did not: read the opt-in mod's
+`docs/agent/reports/DRONE_BANDS_CLEAN_REVERT_20260901.md` before presenting these.**
+Verdict there: *YES IF* — option 3 made concrete as "view tiers" (transient mod-built
+tables handed to the matcher in tier order; no real table widened, no top-up, nothing
+persisted) passes every clean-revert row from citations pending two matcher experiments
+(E-4, E-8); option 1 fails uninstall by the §9 measurements and its tear-down remedy is
+owner-declined layer 1 that Src shows cannot hold on the autosave path; option 2 reverts
+clean only if implemented by table surgery — a class-level `GetPriorityForRequest`
+override is copied into saves by vanilla's own `RequiresMaintenance.lua:94` (EF-069).
+§10's "requires a full replacement of `RemoveBuilding`" is corrected there (a pre-wrapper
+closes the leak). The asks are checklist items 91–93.
+
 **Your job:** present these accurately, answer questions from source, and — if
 the owner asks — run a **time-boxed feasibility pass on option 3**, because it is
 the only one that could deliver the bands *and* clean uninstall. **Report what
