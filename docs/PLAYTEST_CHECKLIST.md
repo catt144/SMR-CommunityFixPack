@@ -29,6 +29,31 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### 2026-09-01 — ITEMS 88–90 OPEN: raised by the OPT-IN mod's contamination audit (its repo, `docs/agent/reports/CONTAMINATION_AUDIT_20260901.md`)
+
+90. **Does your 2026-08-02 loc-table ruling extend to the opt-in mod?** You ruled
+    (this repo's `FIX_POLICY` §6) that *the pack* WILL ship its own `ModItemLocTable`
+    translations post-release — twelve days before the split, about THIS mod. The
+    opt-in mod has 17 `Untranslated(` sites (rollover titles, policy rows, the
+    stand-down dialog) and its `FUTURE_IDEAS.md` #4(b) hangs on the answer. Say
+    "both", "fix pack only", or "decide at its launch".
+
+89. **Opt-in `Code/`: allow a comment-only wording sweep?** Five comments still speak
+    the donor's terms — "the pack" meaning the opt-in mod itself
+    (`00_Core.lua:497`, `:536`, `:558`, `Opt_ResidencyControl.lua:63`) and one that
+    points players' FAQ guidance at THIS repo's frozen `MOD_DESCRIPTION.md`
+    (`Opt_NoHomeless.lua:319`). Zero behaviour change, parse sweep after; but it is a
+    module-file edit, so it is yours. Say "sweep" or "leave as history".
+
+88. **`FUTURE_IDEAS.md` #9 ("Per-fix player toggles for the FIX PACK") is parked in
+    the OPT-IN repo with no ruling of its own.** Your 2026-08-14 move order covered
+    "anything that's possible opt ins"; #9 is a fix-pack feature (a Mod Options page
+    for THIS mod's fixes), routed there by analogy to #5. It also carries a stale
+    release rider ("confirm `MOD_DESCRIPTION.md` no longer says 'in the console'")
+    and cites a prompt that no longer exists (`COVERAGE_SWEEP_SMRCF.md`). Say "keep
+    there", "move to this repo's `FUTURE_IDEAS.md`", or "delete".
+
+
 ### ✅ 2026-08-31 — ITEM 87 RULED THE SAME DAY: drones UNFROZEN
 
 87. ✅ **RULED 2026-08-31 — "Un freeze drones" (verbatim).** Lifts the PT-52
