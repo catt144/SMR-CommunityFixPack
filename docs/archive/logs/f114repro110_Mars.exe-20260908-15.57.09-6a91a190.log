@@ -1,0 +1,3297 @@
+					Render 0:00:00:005
+*** executable info
+Timestamp:     	6a91a190
+Date:          	Fri Aug 28 10:56:16 2026
+Command line:  	
+Compiler:      	195136247, 142 (VS 2019) or newer
+
+
+					Render 0:00:00:006
+*** hardware info
+CPU name      	Intel(R) Core(TM) i7-14700K
+CPU MHz       	3418
+CPU cores     	20/28
+Phys. Memory   	65278 MBytes
+Memory In Use  	54%
+Disk Free      	829226 MBytes
+
+
+*** OS info
+OS:            	Windows 11
+Version:       	10.0.26100 
+
+
+*** Debug::Init()
+
+
+					Render 0:00:00:068
+Steam initialized (AppId 3215050)
+					Render 0:00:00:072
+Drive type for game installation: SSD, savegames: SSD
+Language: English
+					Render 0:00:01:431
+*** graphics info
+GPU                            	NVIDIA GeForce RTX 4080 Feature Level: 12.1 {  DoublePrecisionFloatShaderOps: 1 OutputMergerLogicOp: 1 MinPrecisionSupport: 2 TiledResourcesTier: 4 ResourceBindingTier: 3 PSSpecifiedStencilRefSupported: 0 TypedUAVLoadAdditionalFormats: 1 ROVsSupported: 1 ConservativeRasterizationTier: 3 MaxGPUVirtualAddressBitsPerResource: 40 StandardSwizzle64KBSupported: 0 CrossNodeSharingTier: 0 CrossAdapterRowMajorTextureSupported: 0 VPAndRTArrayIndexFromAnyShaderFeedingRasterizerSupportedWithoutGSEmulation: 1 ResourceHeapTier: 2 NotZeroedPools: 1 UMA: 0 UnalignedBlockTextures: 1}
+API                            	d3d12
+GPU Driver Version             	32.0.16.1074
+GPU Driver Package Version     	610.74
+GPU Dedicated Video Memory     	16048 MB
+					Render 0:00:01:580
+
+Libs: Network, Sequences, MouseTrackWin, DumbAI, MapGen, Paradox, TriggersAndEvents, Notifications, Research, Resources, Tutorial, Objectives 
+
+					Render 0:00:01:826
+
+Platform: desktop, editor, goldmaster, paradox, pc, steam
+
+					Render 0:00:02:786
+*** audio info
+Audio Endpoint                 	Speakers (Razer Leviathan V2)
+						Lua 0:00:02:787
+Lua revision: 403908
+Assets revision: 33006
+Steam AppID: 3215050
+Build version: 1.1.0.403908
+Build branch:  Release
+						Lua 0:00:05:065
+Account storage loaded successfully in 1 ms
+						Lua 0:00:05:066
+DLC norman loaded, lua revision 403908, assets revision 33006
+DLC thomas loaded, lua revision 403908, assets revision 33006
+						Lua 0:00:05:069
+[mod] Loaded mod def Community Fix Pack — Test Kit (id SMR_CommunityFixPackTestKit, v0.00-001) unpacked from appdata
+[mod] Loaded mod def Relaunched Fix Pack (id SMR_CommunityFixPack, v1.00-005) unpacked from appdata
+[mod] Loaded mod def Relaunched Fix Pack: Opt-In Modules (id SMR_CommunityOptInPack, v1.00-000) unpacked from appdata
+						Lua 0:00:05:476
+[mod] [SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+[mod] [SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[mod] [SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+[SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+						Lua 0:00:05:482
+[mod] [SMRTest][carry] fixture-carry dump available — run SMRTest.FixtureCarry()
+						Lua 0:00:05:483
+[mod] [CommunityFixPack] CaveInsNoDisasters: applied
+[mod] [CommunityFixPack] MeteorFrequency: inactive (Meteors thread function not found (game update changed it?))
+[mod] [CommunityFixPack] UpgradeModifierLeak: applied
+[mod] [CommunityFixPack] NightShiftWork: applied
+[mod] [CommunityFixPack] MilestoneCrash: applied
+[mod] [CommunityFixPack] WispRewards: applied
+[mod] [CommunityFixPack] TouristApplicants: applied
+[mod] [CommunityFixPack] TrainsToVoid: applied
+[mod] [CommunityFixPack] LanderEmptyLaunch: applied
+						Lua 0:00:05:484
+[mod] [CommunityFixPack] LanderCargoRatchet: inactive (the Earth export-reward query is gone (game update changed it?))
+[mod] [CommunityFixPack] LanderReturnFuel: applied
+[mod] [CommunityFixPack] ShelterReflex: applied
+[mod] [CommunityFixPack] BrokenTrackSalvage: applied
+[mod] [CommunityFixPack] TrackSalvageWipe: applied
+[mod] [CommunityFixPack] LakeEntombment: applied
+[mod] [CommunityFixPack] GhostFarmOxygen: applied
+						Lua 0:00:05:485
+[mod] [CommunityFixPack] RocketDroneChurn: applied
+[mod] [CommunityFixPack] ShuttleTransportCache: applied
+[mod] [CommunityFixPack] VacuumWalks: inactive (walk-distance constants not found (game update changed them?))
+[mod] [CommunityFixPack] ArrivalDeaths: applied
+[mod] [CommunityFixPack] DroneUnreachableForever: inactive (the unreachables expiry mechanism is gone (game update changed it?))
+[mod] [CommunityFixPack] StaleReservations: applied
+[mod] [CommunityFixPack] CrystalMysteryHang: applied
+[mod] [CommunityFixPack] TouristSatisfaction: inactive (Colonist.UpdateSatisfaction not found (game update changed it?))
+[mod] [CommunityFixPack] TrainPlatformWedge: applied
+						Lua 0:00:05:486
+[mod] [CommunityFixPack] LowStorageWarning: inactive (GetCommandCenterLifeSupportGrids not found (game update changed it?))
+[mod] [CommunityFixPack] CommandCenterNumbers: applied
+[mod] [CommunityFixPack] DomeOverviewHighlight: applied
+[mod] [CommunityFixPack] TrainCargoDumping: applied
+[mod] [CommunityFixPack] UniversityOvertraining: applied
+[mod] [CommunityFixPack] DestroyedTunnels: applied
+[mod] [CommunityFixPack] DustSicknessBiorobots: applied
+[mod] [CommunityFixPack] DustSicknessDamage: applied
+[mod] [CommunityFixPack] GeneForging: applied
+[mod] [CommunityFixPack] MirrorSphereSite: applied
+						Lua 0:00:05:487
+[mod] [CommunityFixPack] PayloadTemplateRefill: applied
+[mod] [CommunityFixPack] AsteroidLanderAvailable: inactive (PlanetaryAsteroidVisitPossible not found (game update changed it?))
+[mod] [CommunityFixPack] ShuttleHubOffAvailable: applied
+[mod] [CommunityFixPack] FreedHousingNotice: applied
+[mod] [CommunityFixPack] DomeFreeSpaceMismatch: applied
+[mod] [CommunityFixPack] SmallLandscapeSites: applied
+[mod] [CommunityFixPack] LandscapeUnitFilter: applied
+						Lua 0:00:05:488
+[mod] [CommunityFixPack] RocketInteractGuard: applied
+[mod] [CommunityFixPack] TrackConnectorPingPong: applied
+[mod] [CommunityFixPack] TrackTunnelPowerBridge: applied
+[mod] [CommunityFixPack] GridGlobalStorage: inactive (GetGridGlobalStorage not found (game update changed it?))
+						Lua 0:00:05:489
+[mod] [CommunityFixPack] LastTransmissionStorage: applied
+[mod] [CommunityFixPack] GraphConsumedCaption: applied
+[mod] [CommunityFixPack] MoraleComfortTooltip: applied
+[mod] [CommunityFixPack] TrainWaitTime: applied
+[mod] [CommunityFixPack] FounderTraitNotification: applied
+[mod] [CommunityFixPack] StorageRateModifiers: applied
+[mod] [CommunityFixPack] SequenceLatents: applied
+[mod] [CommunityFixPack] IndependenceTerraforming: applied
+						Lua 0:00:05:490
+[mod] [CommunityFixPack] TrackSalvageRefund: applied
+[mod] [CommunityFixPack] LayoutTechLock: applied
+[mod] [CommunityFixPack] TrainMinors: applied
+[mod] [CommunityFixPack] DroneTransportMinors: applied
+[mod] [CommunityFixPack] AnomalyCaveInMap: applied
+[mod] [CommunityFixPack] TechDescriptionBuilding: applied
+[mod] [CommunityFixPack] BombardmentSpread: applied
+[mod] [CommunityFixPack] ExtenderFlapChurn: applied
+[mod] [CommunityFixPack] DisasterPredictionLeak: applied
+						Lua 0:00:05:491
+[mod] [CommunityFixPack] MeteorStormWedge: inactive (MeteorStorm thread function not found (game update changed it?))
+[mod] [CommunityFixPack] RainsDeadlock: inactive (RainsDisasterLoop not found (game update changed it?))
+[mod] [CommunityFixPack] FirstAsteroidPrefabs: applied
+[mod] [CommunityFixPack] SaintBlessing: applied
+[mod] [CommunityFixPack] DustDevilsDescrMap: applied
+[mod] [CommunityFixPack] AstrogeologistExtractors: applied
+[mod] [CommunityFixPack] SinkholeIndestructible: applied
+[mod] [CommunityFixPack] DustStormUndergroundBreaks: applied						Lua 0:00:05:492
+
+[mod] [CommunityFixPack] DustDevilSpawnGate: applied
+[mod] [CommunityFixPack] ExoticDepositSign: applied
+[mod] [CommunityFixPack] AutomationLawCompensation: inactive (vanilla no longer compensates the automation-law worker cut for anyone (1.1.0) — nothing to correct)
+[mod] [CommunityFixPack] LocalizedUIText: Back to Earth rollover wrapped on 1 rocket class(es): customUniversalRocket
+[mod] [CommunityFixPack] LocalizedUIText: applied
+[mod] [CommunityFixPack] SpaceYDroneCapBullet: applied
+[mod] [CommunityFixPack] LandscapeCostRefresh: applied
+						Lua 0:00:05:493
+[mod] [CommunityFixPack] ExtractorStaffedPerformance: applied
+[mod] [CommunityFixPack] JumboCaveReinforcementWedge: applied
+[mod] [CommunityFixPack] SaveSanitizer: applied
+						Lua 0:00:06:292
+[mod] [CommunityFixPack] SaintBlessing: inactive (no dome-colonists trait presets)
+[mod] [CommunityFixPack] SinkholeIndestructible: the St. Elmo's Fire sinkhole is now indestructible, like every other mystery set-piece
+						Lua 0:00:06:385
+Reloading done in 1316 ms
+						Lua 0:00:06:386
+Available DLCs: norman(Feeding the Future),thomas(Interplanetary Codex) 
+						Lua 0:00:06:816
+[preset] Preset postprocess took 160 ms.
+						Lua 0:00:06:865
+482 / 482 particle streams loaded in 42 ms.
+						Lua 0:00:06:866
+5 / 5 particle streams loaded in 1 ms.
+						Lua 0:00:06:867
+[mod] [CommunityFixPack] DustSicknessDamage: inactive (TraitPresets.DustSickness has no param/daily_update_func)
+[mod] [CommunityFixPack] LastTransmissionStorage: inactive (the shipped presets are already correct)
+[mod] [CommunityFixPack] IndependenceTerraforming: inactive (Independence_TerraformingProjects no longer modifies SpecialProjectResourcesModifier)
+[mod] [CommunityFixPack] AstrogeologistExtractors: added 2 missing extractor entr(y/ies) to the astrogeologist profile (2 already present)
+						Lua 0:00:07:084
+[mod] [CommunityFixPack] DustSicknessDamage: inactive (TraitPresets.DustSickness has no param/daily_update_func)
+[mod] [CommunityFixPack] LastTransmissionStorage: inactive (the shipped presets are already correct)
+[mod] [CommunityFixPack] IndependenceTerraforming: inactive (Independence_TerraformingProjects no longer modifies SpecialProjectResourcesModifier)
+[mod] [CommunityFixPack] SaintBlessing: corrected 1 dome-colonists trait modifier label(s) of 2
+						Lua 0:00:07:198
+[mod] Loaded mod items for: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack
+						Lua 0:00:07:676
+[mod] [CommunityFixPack] update report: 12 fix(es) deactivated over a game-code change: MeteorFrequency, LanderCargoRatchet, VacuumWalks, DroneUnreachableForever, TouristSatisfaction, LowStorageWarning, DustSicknessDamage, AsteroidLanderAvailable, GridGlobalStorage, IndependenceTerraforming, MeteorStormWedge, RainsDeadlock
+						Lua 0:00:07:948
+[PdxSDK] Started up. Took 1011
+						Lua 0:00:08:351
+[Braze] SessionStart error The server name or address could not be resolved
+
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+						Lua 0:00:08:352
+[Braze] Failed to init
+						Lua 0:00:08:450
+[Braze] SessionStart error The server name or address could not be resolved
+
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:17:058
+Load Game: 
+	lua_revision: 403908 (last saved with) 
+	orig_lua_revision: 403908 (created with) 
+	assets_revision: 33006 
+
+	dlcs: norman, thomas 
+
+	mods: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack 
+						Lua 0:00:17:061
+*** Reloading assets from folder 'BinAssets/'
+						Lua 0:00:19:021
+*** Assets reloaded in 2.0 s, read 359.3 MB, read speed 183.3 MB/s, average read 8139 bytes.
+						Lua 0:00:21:973
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:21:983
+game_settings:
+    sponsor: NASA
+    profile: rocketscientist
+    founding_faction: AssemblyOfPlanets
+    rival_colonies: IMM, CNSA, ESA
+    mystery_random: 
+    game_rules: (none)
+more_game_settings: save_game_id: lD1jaGcMJOxaiFcU, mystery: none, coordinates: 16N120E, landing_spot: , logo: USA
+map_conditions: altitude: -3122, temperature: -25, cold_wave: 61, dust_devils: 44, dust_storm: 123, meteors: 109
+map_resources: concrete: 109, metals: 176, precious_metals: 176, water: 212
+						Lua 0:00:22:011
+[mod] [CommunityFixPack] SaveSanitizer: F48 station-connector pass repaired 0 of 0 track(s) walked (0 raised)
+Game Loaded in 4953 ms
+						Lua 0:00:22:037
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:22:829
+Game loaded on map BlankBig_02 in 5893 ms
+						Lua 0:00:25:136
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:01:03:871
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_LandscapeUnitFilter.lua:63: attempt to index a nil value (global 'Landscapes')
+  Mod/SMR_CommunityFixPack/Code/Fix_LandscapeUnitFilter.lua(63):  global LandscapeForEachUnit
+  Lua/Landscape/ClearWasteRockConstructionSite.lua(81):  method GetUnitsUnderneath
+  Lua/Buildings/ConstructionSite.lua(1915):  method ScatterUnitsUnderneath
+  Lua/Landscape/ClearWasteRockConstructionSite.lua(75):  method InitBlockPass
+  Lua/Landscape/ClearWasteRockConstructionSite.lua(65):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(243):  method GameInit
+  CommonLua/Classes/_object.lua(192):   <>
+        --- end of stack
+Locals:
+	                mark |   object Map
+	            callback |   number 51
+	 foreach_params_unit |    table 0x000001A85AF61910 #0
+						Lua 0:01:03:873
+[LUA ERROR] attempt to index a nil value (global 'Landscapes')
+  Mod/SMR_CommunityFixPack/Code/Fix_LandscapeUnitFilter.lua(63):  global LandscapeForEachUnit
+  Lua/Landscape/ClearWasteRockConstructionSite.lua(81):  method GetUnitsUnderneath
+  Lua/Buildings/ConstructionSite.lua(1915):  method ScatterUnitsUnderneath
+  Lua/Buildings/ConstructionSite.lua(1146):  method Initialize
+  Lua/Buildings/ConstructionSite.lua(801):   <>
+        --- end of stack
+Locals:
+	                mark |   object Map
+	            callback |   number 51
+	 foreach_params_unit |    table 0x000001A85AF61910 #0
+						Lua 0:01:03:874
+[mod] Error in mod Relaunched Fix Pack (id SMR_CommunityFixPack, v1.00-005) from appdata
+						Lua 0:04:32:061
+Story bits: Triggered story bit - Boost5_LeapForward						Lua 0:05:25:151
+Story bits: Reply selected - Micro Fusion						Lua 0:06:09:332
+
+!!! Quick Build !!!
+						Lua 0:06:10:794
+
+!!! Quick Build !!!
+						Lua 0:08:02:125
+
+!!! Quick Build !!!
+						Lua 0:08:03:491
+
+!!! Quick Build !!!
+						Lua 0:08:05:387
+
+!!! Quick Build !!!
+						Lua 0:08:06:964
+
+!!! Quick Build !!!
+						Lua 0:08:08:768
+
+!!! Quick Build !!!
+						Lua 0:08:10:495
+
+!!! Quick Build !!!
+						Lua 0:08:12:501
+
+!!! Quick Build !!!
+						Lua 0:08:14:124
+
+!!! Quick Build !!!
+						Lua 0:08:43:313
+ObjCheat CheatFill
+						Lua 0:08:47:699
+ObjCheat CheatFill
+						Lua 0:08:49:219
+ObjCheat CheatFill
+						Lua 0:08:50:964
+ObjCheat CheatFill
+						Lua 0:08:52:685
+ObjCheat CheatFill
+						Lua 0:08:54:381
+ObjCheat CheatFill
+						Lua 0:08:55:145
+[mod] [CommunityFixPack] LocalizedUIText: the Back to Earth button (Id idBackToEarth) could not be resolved from this panel — nothing changed (a game update renamed or removed it, or another mod rebuilt the panel)
+						Lua 0:09:33:649
+ObjCheat CheatFill
+						Lua 0:09:36:144
+ObjCheat CheatFill
+						Lua 0:09:38:617
+ObjCheat CheatFill
+						Lua 0:09:40:115
+ObjCheat CheatFill
+						Lua 0:09:41:742
+ObjCheat CheatFill
+						Lua 0:09:43:605
+ObjCheat CheatFill
+						Lua 0:09:45:326
+ObjCheat CheatFill
+						Lua 0:09:47:535
+ObjCheat CheatFill
+						Lua 0:09:49:741
+ObjCheat CheatFill
+						Lua 0:09:52:040
+ObjCheat CheatFill
+						Lua 0:09:54:032
+ObjCheat CheatFill
+						Lua 0:09:55:842
+ObjCheat CheatFill
+						Lua 0:09:57:596
+ObjCheat CheatFill
+						Lua 0:10:11:959
+ObjCheat CheatFill
+						Lua 0:10:24:149
+
+!!! Quick Build !!!
+						Lua 0:11:22:313
+
+!!! Quick Build !!!
+						Lua 0:12:11:784
+
+!!! Quick Build !!!
+						Lua 0:12:15:540
+
+!!! Quick Build !!!
+						Lua 0:12:21:677
+
+!!! Quick Build !!!
+						Lua 0:12:23:139
+
+!!! Quick Build !!!
+						Lua 0:13:45:865
+
+!!! Quick Build !!!
+						Lua 0:14:30:032
+
+!!! Quick Build !!!
+						Lua 0:15:01:812
+
+!!! Quick Build !!!
+						Lua 0:15:25:280
+ObjCheat CheatAddMaintenancePnts
+						Lua 0:15:25:764
+
+!!! Quick Build !!!
+						Lua 0:15:27:888
+
+!!! Quick Build !!!
+						Lua 0:15:29:491
+
+!!! Quick Build !!!
+						Lua 0:16:49:280
+
+!!! Quick Build !!!
+						Lua 0:16:50:791
+
+!!! Quick Build !!!
+						Lua 0:16:52:432
+
+!!! Quick Build !!!
+						Lua 0:16:53:669
+
+!!! Quick Build !!!
+						Lua 0:16:55:084
+
+!!! Quick Build !!!
+						Lua 0:16:56:451
+
+!!! Quick Build !!!
+						Lua 0:16:58:016
+
+!!! Quick Build !!!
+						Lua 0:17:18:451
+ObjCheat CheatFill
+						Lua 0:20:05:572
+
+!!! Quick Build !!!
+						Lua 0:20:08:632
+
+!!! Quick Build !!!
+						Lua 0:20:10:519
+
+!!! Quick Build !!!
+						Lua 0:20:12:429
+
+!!! Quick Build !!!
+						Lua 0:20:14:347
+
+!!! Quick Build !!!
+						Lua 0:20:17:462
+
+!!! Quick Build !!!
+						Lua 0:20:19:797
+
+!!! Quick Build !!!
+						Lua 0:20:21:323
+
+!!! Quick Build !!!
+						Lua 0:22:30:154
+
+!!! Quick Build !!!
+						Lua 0:25:42:788
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:25:45:878
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:25:51:878
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:25:57:878
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:26:03:879
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:26:09:879
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:26:15:878
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:26:21:879
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:26:27:878
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:26:33:879
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:26:39:880
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:26:45:878
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:26:51:879
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:26:57:878
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:27:03:879
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:27:09:879
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:27:15:879
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:27:20:321
+ObjCheat CheatFill
+						Lua 0:27:21:879
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:27:27:878
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:27:33:878
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:27:41:191
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:27:47:191
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:27:53:191
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:27:59:191
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:28:05:192
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+						Lua 0:28:05:193
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:28:11:190
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:28:17:191
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:28:23:190
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+						Lua 0:28:23:191
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:28:29:191
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:28:35:192
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:28:41:190
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:28:47:191
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:28:53:191
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:28:59:191
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:29:05:194
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:29:11:192
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+						Lua 0:29:11:193
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:29:17:192
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:29:23:191
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+						Lua 0:29:23:192
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:29:29:191
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:29:35:192
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:29:41:193
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:29:47:190
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:29:53:191
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:29:59:193
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:30:05:191
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:30:20:161
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:30:23:562
+[mod] [CommunityFixPack] DisasterPredictionLeak: meteor storm ended — its notification and prediction flag are cleared
+						Lua 0:30:26:163
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:30:32:160
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:30:38:161
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+						Lua 0:30:38:162
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:30:44:160
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:30:50:160
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:30:56:162
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+Story bits: Triggered story bit - TheRock						Lua 0:31:02:160
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:31:08:231
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:31:14:160
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:31:22:119
+Story bits: Reply selected - We'll place it in orbit so people can admire it forever. Because it's cool!						Lua 0:31:26:497
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:31:32:497
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:31:38:498
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:31:44:498
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:31:50:497
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:31:56:497
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:32:02:495
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+						Lua 0:32:02:496
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:32:08:496
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:32:14:497
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:32:20:497
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:32:26:496
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:32:32:497
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:32:38:497
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:32:44:497
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:32:50:496
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:32:56:497
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:33:02:498
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:33:08:505
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+						Lua 0:33:08:506
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:33:14:503
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:33:20:497
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:33:26:496
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:33:32:497
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+						Lua 0:33:32:498
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:33:38:497
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:33:44:499
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:33:50:497
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:33:56:497
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:34:02:496
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:34:08:500
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:34:14:498
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:34:20:498
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+						Lua 0:34:20:499
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:34:26:496
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:34:32:496
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:34:38:497
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:34:44:497
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:34:50:496
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:34:56:495
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+						Lua 0:34:56:496
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:35:02:496
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:35:08:497
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:35:14:496
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:35:20:497
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:35:26:496
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:35:32:497
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:35:38:496
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:35:44:496
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:35:50:497
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:35:56:497
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:36:02:497
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:36:08:496
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:36:14:496
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:36:20:497
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:36:26:496
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:36:32:498
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:36:38:497
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:36:44:496
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:36:50:496
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:36:56:496
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:37:02:496
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:37:08:498
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:37:15:107
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:37:21:106
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:37:27:106
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:37:33:106
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:37:39:106
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:37:45:106
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:37:51:106
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:37:57:106
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:38:03:106
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:38:09:106
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:38:15:107
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:38:21:106
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:38:27:106
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:38:33:106
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:38:39:106
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:38:45:107
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:38:51:106
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:38:57:108
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:39:03:106
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:39:09:106
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:39:15:106
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:39:21:105
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:39:27:106
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:39:33:106
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:39:39:106
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:39:45:106
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:39:51:106
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:39:57:106
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:40:03:106
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+						Lua 0:40:03:107
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:40:09:106
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:40:15:106
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:40:21:106
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:40:27:106
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+						Lua 0:40:27:107
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:40:33:106
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:40:39:106
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:40:45:106
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:40:51:105
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:40:57:105
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:41:03:106
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:41:09:107
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:41:15:106
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:41:21:108
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+						Lua 0:41:21:109
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:41:27:107
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:41:33:106
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua:89: attempt to index a nil value (field '?')
+  Mod/SMR_CommunityFixPack/Code/Fix_TrainCargoDumping.lua(89):  method UnloadAll
+  Lua/Units/Train.lua(846):  method TransferCargo
+  Lua/Units/Train.lua(260):   <>
+  [C](-1):  global sprocall
+  CommonLua/Classes/CommandObject.lua(250):   <>
+        --- end of stack
+Locals:
+	                self |   object Train at (127507, 171748, 9997) on map 1
+	             station |   object StationSmall at (128500, 170602, 9997) on map 1
+	     (for generator) | function 0x00007FF63BA886E0
+	         (for state) |    table 0x000001A85BC25580 #21
+	       (for control) |   number 1
+	                   _ |   number 1
+	                 res |   string BlackCube
+	             carried |   number 0
+	route_accepts_elsewhere | function 0x000001A85AC5DD30
+						Lua 0:41:46:362
+
+
+Stopping the game threads from the Lua side with exit code 0.
+
+					Render 0:41:46:364
+
+
+Stopping the game threads after receiving WM_QUIT.
+
+					Render 0:41:46:732
+
+
+*** Debug::Done()
+Time (ms)	2506732
+
+
