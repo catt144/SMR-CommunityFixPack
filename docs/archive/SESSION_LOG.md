@@ -8,6 +8,68 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-08 (later still) — TRAINS_AND_LOGSCAN sitting: the owner's self-check OVERRIDE, and a second 1.1.0 log read
+
+tags: 1.1.0 EF-078 F114 F111 F112 F113 items-107-108 SMRFixPack_Force ForceApply 97_ForceInactive 00_Core TRAINS_AND_LOGSCAN
+
+Brief `prompts/TRAINS_AND_LOGSCAN_SITTING.md`, live at the keyboard, owner present. ⚠️ **The brief's two jobs
+were pre-empted by a direct owner instruction** ("very first thing on your list is exempting me from this" —
+the pregame "11 fixes switched themselves off" dialog — "we need these to enable, so I can pull logs to see
+what they do"). That overrode the brief's "⛔ Nothing else" fence; the trains A/B was NOT run and F114 is
+unchanged by this leg. Ran concurrently with the SAFETY_FIRST_FIXES session; ownership split by direct
+message — `00_Core.lua` mine, the three `Fix_*.lua` + `F114.md` + `STATE.md` theirs. No collision.
+
+**Gates.** Stale-probe sweep 0 hits. `Mars.exe` was RUNNING at open, so no loadable code was touched until
+the owner quit; verified closed before the first edit.
+
+**MEASURED — the second 1.1.0 log (`archive/logs/playtest110_*`, 15.21.42, ~11 min in-game, cheats +
+Quick Build).** ✅ **ZERO errors**: no `[LUA ERROR]`, no assert, no `attempt to`, no traceback, no `EF-065`
+blame line. Same **13 inactive / 11 named**, reason strings identical to `EF-078` ⇒ that baseline is
+independently reconfirmed on a second boot. ⭐ **The opt-in pack is OFF, settled at the log level**: its mod
+def is enumerated (`Loaded mod def … SMR_CommunityOptInPack`) but it emits **zero `applied` lines**, so its
+code never ran — `STATE`'s "ENABLED AND APPLYING" was true of the first boot only, and the owner unticked it
+plus Passage Network between the two. §2b's confound is therefore already removed. All 11 train/track modules
+`applied`, `TrainCargoDumping` among them. ⛔ **No train or station was built, so F114 has NO evidence either
+way from this session.** (Log archived by the sibling session; my duplicate `ingame110_*` copy was deleted.)
+
+**BUILT — the self-check override, three surfaces in `00_Core.lua` (`be4c99e`), all inert as shipped.**
+`SMRFixPack_Force` (a failed `Require` check becomes a pass, logging the reason it actually gave in full, so a
+forced module can never read like a clean one) · `SMRFixPack_NoUpdateDialog` (suppresses the popup ONLY — the
+`update report:` line is written first and unconditionally, so it can never suppress a finding) ·
+`SMRFixPack.ForceApply([id])` (re-drives an inactive entry through `run_apply`, override set for the duration
+of one apply). Armed from the Test Kit's new `Code/97_ForceInactive.lua` (`1d22835`; no remote, local-only by
+design), which covers both mod load orders.
+
+**Two deliberate refusals — the leg's real content, both to avoid printing a comfortable lie.**
+(1) **`DataPatch` latches are refused BY NAME.** `SaintBlessing`, `DustSicknessDamage`,
+`IndependenceTerraforming` and `LastTransmissionStorage` did not decline to run — their pass ALREADY RAN and
+found the preset data absent, so there is no withheld behaviour to reveal and forcing them would relabel a
+module with nothing to patch. `ctx.latch` now marks `entry.data_latched` purely for this discrimination
+(cleared by `ctx.heal`). ⇒ the tool reaches **9 of the 11** the dialog names, and says so.
+(2) **`test` CONTENT checks stay honoured under a force** unless opted into by name
+(`SMRFixPack_Force.include_content`). `Require` already refuses to set `update_suspect` on them and the dialog
+never names them, because they are HEALTHY declines rather than patch rot. ⭐ **This was my bug, caught by peer
+coordination, not by me**: my first cut forced both kinds. The concrete case is F112 — the new
+`AutomationLawCompensation` gate says 1.1.0 compensates the automation-law worker cut for nobody, so forcing it
+would pay the out-of-class families and **CREATE the asymmetry C39 exists to remove** — a gameplay corruption,
+not an informative throw.
+
+**⚠️ Two things future readings must not mistake for discoveries.** (a) Our own 1.1.0 gates are `Require`
+specs, so a force overrides them too: `LanderCargoRatchet` will call the deleted
+`GetEarthExportResPossibleReward` and throw **hourly** at an Earth-landed automode rocket. That is the tool
+working — ⛔ NOT an F113 repro. (b) **An unforced boot from `2efbcf6` on should read 15 inactive / 12 named**
+where `EF-078` measured 13 / 11 (F113's shape gate joins both counts; F112's content check joins the inactive
+count only). ⛔ That delta is OURS. The sibling session predicted the same 11 → 12 dialog move independently.
+⛔ **And the one that bites: a forced rig is INVALID for any A/B, F114 included** — disarm first; the disarm
+step is item 0 of `F114.md`'s run order (`ce77162`).
+
+⛔ **NOT VERIFIED AT RUNTIME.** No Lua binary on this rig. Structure was hand-reviewed and both files pass a
+block-balance check, but nothing here has been through a game boot — the owner launched with the leg armed at
+the close of this leg, and that boot log is the real syntax test. Decisions **107** (when to disarm) and
+**108** (keep the override in the shipped pack inert, or move it out) are in the checklist. doccheck GREEN.
+
+---
+
 ## 2026-09-08 (later) — SAFETY_FIRST_FIXES: three modules gated/guarded for 1.1.0 (source-read), and a source-pinned F114 candidate
 
 tags: 1.1.0 F111 F112 F113 F114 F46 EF-078 EF-079 items-102-106 Fix_LanderCargoRatchet Fix_ExtractorStaffedPerformance Fix_AutomationLawCompensation Fix_TrainCargoDumping SAFETY_FIRST_FIXES

@@ -96,6 +96,42 @@ completed tests move whole to
 > Reply draft for the reporter (item 102) is now in `bugs/F114.md`, asking for the log (which would carry
 > that exact line) and the save.
 
+> ⭐ **THE SELF-CHECK OVERRIDE IS BUILT AND ARMED, 2026-09-08 (your ask, live sitting). ITEMS 107–108.**
+> You asked to be exempted from the "11 fixes switched themselves off for safety" dialog and to have
+> those modules enable anyway so their behaviour reaches a log. Both are in: `SMRFixPack_Force`,
+> `SMRFixPack_NoUpdateDialog` and `SMRFixPack.ForceApply([id])` in the pack's `00_Core.lua` (commit
+> `be4c99e`, pushed), armed from the Test Kit's new `Code/97_ForceInactive.lua` (`1d22835`, local-only —
+> the Test Kit has no remote by design). ⛔ **All three ship INERT**: nothing in the pack ever writes the
+> override, and with it unset every path is byte-for-byte the shipped behaviour. Console any time:
+> `SMRFixPack.ForceApply()`, or `SMRFixPack.ForceApply("GridGlobalStorage")` for one.
+> **It reaches 9 of the 11, and says so rather than pretending.** The four `DataPatch` modules
+> (`SaintBlessing`, `DustSicknessDamage`, `IndependenceTerraforming`, `LastTransmissionStorage`) did not
+> decline to run — their pass ALREADY RAN and found the preset data absent, so there is no withheld
+> behaviour to reveal. Forcing them would relabel a module with nothing to patch, so `ForceApply`
+> **refuses them by name**.
+> ⚠️ **Two things that will otherwise look like discoveries and are not.**
+> **(a)** Our own new 1.1.0 gates are `Require` specs, so forcing overrides them too: `LanderCargoRatchet`
+> will call the deleted `GetEarthExportResPossibleReward` and **throw hourly at an Earth-landed automode
+> rocket**. That is F113, already diagnosed — the tool working, ⛔ not an F113 repro, do not file it.
+> **(b)** An **unforced** 1.1.0 boot from now on should read **15 inactive / 12 named**, where `EF-078`
+> measured 13 / 11 — the F113 shape gate adds `LanderCargoRatchet` to both counts, the F112 content check
+> adds `AutomationLawCompensation` to the inactive count only. ⛔ **That delta is OURS**; reconcile against
+> it before calling a count change a game change.
+> ⛔ **AND THE ONE THAT BITES: a forced rig is INVALID for any A/B, F114 included.** Forcing changes what
+> the pack does, so a forced boot cannot answer "does the shipped pack cause this?" Disarm first — comment
+> `"Code/97_ForceInactive.lua"` out of the Test Kit's `metadata.lua`. The peer session put that disarm
+> step ahead of both F114 controls (`ce77162`).
+> **107. When does the leg get disarmed?** I recommend: harvest one forced boot now, then disarm before
+> anything train-related. Leaving it armed silently poisons every later reading, and the banner in the
+> boot log is the only thing that would remind us.
+> **108. Should the override stay in the shipped pack at all, inert, or be moved out to the Test Kit?**
+> I recommend keeping it in `00_Core` inert: the Test Kit cannot reach `Require`'s failure branch from
+> outside, so moving it out would mean losing the boot-time route and keeping only the weaker
+> post-registration one. But it is three surfaces of dead code in a shipped mod, and that is your call.
+> ⚠️ **NOT VERIFIED AT RUNTIME.** There is no Lua binary on this rig; structure was hand-reviewed and both
+> files pass a block-balance check, but **your next boot log is the real syntax test**. If no
+> `[CommunityFixPack]` lines appear at all, that is my error — revert to `ce77162` and tell me.
+
 > ⭐ **FIELD REPORT 2026-09-08 — ITEM 102, and it jumps the queue.** A player
 > (*Ranger Dimitri*, Steam) reports: **"Using this mod cause them to not move between stations. When
 > I turn it off they work as normal."** — trains, on 1.1.0, with their own A/B. `bugs/F114.md` has
