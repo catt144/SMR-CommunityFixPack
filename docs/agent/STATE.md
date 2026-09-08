@@ -7,30 +7,31 @@ Defect truth `agent/bugs/INDEX.md` · facts `agent/facts/INDEX.md` · doc map `d
 Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/reports/CHAIN_METHOD.md`.
 
 ## Now
+- ⛔ GAME **1.1.0** ("Services & Science", build 24995074) + first paid DLC *Feeding the Future* shipped 2026-09-08;
+  the rig **auto-updated** and `ModTools\Src` was overwritten ⇒ the 1.0.7 line-number base of every citation is GONE
+  from disk (`EF-075`). Steam still offers a **1.0.7 branch** — dev claim, NOT route-checked; decision **98** gates
+  all 1.1.0 work. Sweep (`EF-076`): 106/107 class-method targets live; **6 modules self-disable** (F09 F12 F22 F81
+  F94 F55/F57), F75 latches benign, no crash path. Not flagged incompatible, by ONE integer (`EF-077`). ⚖️ Owner rule
+  09-08: a patch note saying "Fixed" is a **CLAIM, false until we confirm it** — no fix retires on a changelog.
+  Reading `reports/GAME_1_1_0_IMPACT.md`; re-verification is a CHAIN (decision 101), not a session.
 - ⭐ PUBLISHED on both portals — Paradox `pdx_id` **156049**, Steam `steam_id` **3787202810**; tree `version` **5**
   (F110 shipped 08-30). ⛔ Never re-upload to "fix" a version number — each upload bumps again (H-02).
-  ⛔ Every upload OVERWRITES both page bodies from `metadata.lua`; `description` IS the full card (08-24 ruling), so
-  ⚠️ AUTO-FILL TESTED v5 (08-30): did NOT deliver a clean page — owner PASTED the §3 backup. Two cycles, never
-  auto-filled cleanly ⇒ `UPLOAD_WORKFLOW` §3 paste backups are REQUIRED, keep current. No game-version field offered.
-- ⭐ SITE deployed 08-30 `ce3a3779` (== repo HEAD), status success — **82** live fix-list entries (F110 row live).
-  ⛔ `publish-site.yml` is `workflow_dispatch` only — committing never publishes. ⛔ Never quote a stored
-  "deployed = <sha>" as current; read the deployments API (route `prompts/SITE_AUDIT.md`).
-- Post-launch fixes shipped + LIVE on both listings: F105 (`Fix_LandscapeCostRefresh`), F107 (defect in our own
-  F105 fix, caught pre-player; ⛔ field route still untested), F108 (`Fix_ExtractorStaffedPerformance`, full field
-  route 3/3) — all v4; **F110** (`Fix_JumboCaveReinforcementWedge`, attended A/B) — v5. F104 CLOSED, NOT OURS
-  (GitHub issue #1, reporter confirmed). Derivation in the entries; digest in newest SESSION_LOG. ⛔ Read the
-  GitHub tracker via `api.github.com/.../issues/<n>/comments`, never the HTML page. ⚠️ Passage Network is ENABLED
-  on the rig — untick before any clean leg.
-- Blame surface (checklist 73, OPEN): `EF-065`(a) fires on ANY throw under a wrapped target (105 measured);
-  2 field sightings 08-23/24, neither ours. Owner decision: harden or not.
+  ⛔ Every upload OVERWRITES both page bodies from `metadata.lua`; `description` IS the full card (08-24 ruling).
+  ⛔ Auto-fill has NEVER delivered a clean page in 2 cycles ⇒ `UPLOAD_WORKFLOW` §3 paste backups are REQUIRED.
+- ⭐ SITE deployed 08-30, status success — **82** live fix-list entries. ⛔ `publish-site.yml` is
+  `workflow_dispatch` only — committing never publishes. ⛔ Never quote a stored "deployed = <sha>" as current;
+  read the deployments API (route `prompts/SITE_AUDIT.md`).
+- Post-launch fixes shipped + LIVE on both listings: F105, F107, F108 (v4), F110 (v5); F104 CLOSED, NOT OURS.
+  Derivation in the entries; digest in SESSION_LOG. ⛔ F107's field route still untested. ⛔ Read the GitHub
+  tracker via `api.github.com/.../issues/<n>/comments`, never the HTML page. ⚠️ Passage Network is ENABLED on
+  the rig — untick before any clean leg.
+- Blame surface: `EF-065`(a) fires on ANY throw under a wrapped target; 2 field sightings 08-23/24, neither ours.
 - Next effort: the **opt-in pack** (owner 08-20, checklist 68) — kickoff reads that repo's STATE +
   `reports/PARKED_OPTIN_REFERENCES.md`.
 - Rig (08-20 sitting): 3 junctions present, fix pack + TestKit ticked, opt-in pack OFF (checklist 43); runs
   cheats (the normal config).
 - Shipping artifact: packed `.fpk` = 85 files (81 `Code/*.lua` + `items.lua` + `metadata.lua` + `LICENSE` +
-  `preview.png`, `tools/pack_predict.py`). ⭐ v5 DELIVERED pack VERIFIED 08-30 off Steam (Relaunched = app
-  **3215050**, not 464920): `tools/pack_list.py` → 85 entries, 83 byte-identical (only metadata/items differ =
-  comment strip), version 5, F110 module + "Eighty-two" present; md5 `a1cbaad6294382068250ef390037f239`, 401,188 B.
+  `preview.png`, `tools/pack_predict.py`); v5 delivered pack verified 08-30 (Relaunched = app **3215050**).
   ⛔ Pack route is main menu → MOD EDITOR → File → Pack Mod, NOT Mods Manager → Ctrl-E (⚠️ PORTAL_PREP §0.5 old).
 - Watches: `EF-066` swept 08-24 — 105 declared targets, 97 reach every subclass; the 8 leftovers re-declare
   subclasses (biggest: `Fix_ShuttleHubOffAvailable` misses ~578 under `Building`); which are ever INSTANTIATED is
@@ -86,12 +87,11 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 - STATE.md format: most efficient and safest — one fact per line, byte caps do the read job (08-18, item 42).
 
 ## Open owner decisions (bodies in `docs/PLAYTEST_CHECKLIST.md` → "Decisions waiting on you")
+- ⛔ 98 1.0.7 branch: pin back or rebaseline (GATES 99-101) · 99 disposition of the 6 self-disabled modules ·
+  100 say anything to players yet (rec no) · 101 accept the re-verification chain shape.
 - 73 blame surface — harden or not · 76 confirm (a) was a ruling not a leaning · 53 harden now or in 1.0.1
   (rec 1.0.1) · 51 both-packs leg timing (rec after launch) · 50 chain-vs-replace wording · 47 two modder-page
   wordings · 43 opt-in pack re-tick · 41 dialog wording + sweep cap 5→8 · 40 `smr_shuttles` name · 39 dialog re-fire.
-- ✅ 08-30 — **F110 SHIPPED v5** (both stores): Jumbo Cave reinforcement wedge, `Fix_JumboCaveReinforcementWedge.lua`
-  (proactive NewHour + LoadGame self-heal), attended A/B, mystery auto-completed. `bugs/F110.md`; receipt ck82.
-- Closed 08-29: 37 (both listings v4); 79 + 81 DONE; 80 WITHDRAWN IN FULL.
 
 ## Build state — `python tools/doccheck.py --emit-counts`, never hand-typed
 ```
@@ -101,4 +101,4 @@ BUILD STATE (emitted by tools/doccheck.py)
 - TestKit probes: 100
 - BUGS index rows: 110 F + 12 D + 53 C
 ```
-Re-emit after any change; game pinned **1.0.7.396349** (`EF-014`).
+Re-emit after any change. Game: records describe **1.0.7.396349** (`EF-014`); INSTALLED is now **1.1.0** (`EF-075`).

@@ -8,6 +8,44 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-08 — GAME 1.1.0 + first DLC landed; the rig auto-updated; full source-read impact sweep of the pack
+
+tags: 1.1.0 Services-and-Science Feeding-the-Future EF-075 EF-076 EF-077 GAME_1_1_0_IMPACT items-98-101 DISPATCH
+
+Owner brought in the two SteamDB build links. SteamDB itself 403s to automated fetches; the notes were read
+from the Steam news API (`ISteamNews/GetNewsForApp`, appid **3215050**) — *Services & Science* **1.1.0**
+(build 24995074) plus the paid DLC *Feeding the Future*, both dated 2026-09-08.
+
+**Owner rule set this session, and it shaped every artifact:** a patch note that says "Fixed" is a **CLAIM,
+false until we confirm it ourselves.** The report keeps FACT (what we read in the shipped 1.1.0 Lua) and
+CLAIM (what Haemimont asserts) in separate registers and retires nothing on a changelog.
+
+The finding nobody chose: `appmanifest_3215050.acf` shows `buildid 24995074`, `LastUpdated` 09:38 UTC — the
+rig **auto-updated**, overwriting `ModTools\Src` (2747 of 4715 `.lua` files carry today's mtime). The 1.0.7
+line-number base under every citation in `bugs/` and `facts/` is gone from disk (`EF-075`). Steam still lists
+a 1.0.7 branch; that is a dev claim about a store surface and is NOT route-checked — decision 98.
+
+Sweep method (`EF-076`): `harvest_wrap_targets.py --list` for the 107 `{class, method}` targets, plus a
+separate grep harvest of the `{global}` / `{path}` / bare-`{class}` specs the tool deliberately excludes —
+which is where the damage turned out to be. Result: **106/107** class-method targets survive; only
+`Colonist.UpdateSatisfaction` (F09) is gone. But 5 globals and 3 consts were deleted, and all of them sit
+inside `Require` gates, so **6 modules self-disable cleanly** (F09, F12, F22, F81, F94, F55/F57) and 73 of 80
+keep every gate. `EF-077`: we clear 1.1.0's `ModMinLuaRevision = 350453` by **exactly zero** — the test is a
+strict `<` — so no incompatibility prompt fires, with one integer of margin.
+
+Three suspicions were raised and **refuted by control**, which is the part worth keeping: `PropertyObject.
+GetProperty` and `HolidayRating.RewardApplicants` were static-analysis artefacts (assignment-style definition;
+plain table, not `DefineClass`); and `Fix_LastTransmissionStorage` (F75) looked like a genuine crash path —
+it installs a closure calling the now-dead `GetGridGlobalStorage` at evaluation time — until the check showed
+`ScriptCheckGridGlobalStorage` no longer exists at all, so the closure is never installed and the pass takes
+its benign-latch branch. No crash path was found anywhere in the pack.
+
+Filed: `reports/GAME_1_1_0_IMPACT.md` (with the §2 claim table as a to-TEST list and a proposed 5-stage
+chain), facts `EF-075`/`EF-076`/`EF-077`, checklist items **98–101**. Nothing shipped, no code touched.
+STATE evicted to fit: the v5 pack md5/byte receipt (**85 entries, 83 byte-identical, md5
+`a1cbaad6294382068250ef390037f239`, 401,188 B**, version 5, F110 module + "Eighty-two" present — verified
+08-30 off Steam), the site deploy sha `ce3a3779`, and the F110/ck82 + "Closed 08-29" decision receipts.
+
 ## 2026-08-30 (fifth) — v5 SHIPPED: F110 Jumbo Cave wedge live on both stores via the reusable RELEASE.md flow; site deploy owed
 
 tags: F110 release v5 RELEASE.md RELEASE_OUTBOX PUBLIC_SURFACE_SWEEP POST_UPLOAD_CLOSE item-82 EF-068

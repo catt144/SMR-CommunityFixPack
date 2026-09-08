@@ -29,6 +29,67 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### 2026-09-08 — ITEMS 98–101 OPEN: the game shipped **1.1.0 + the first DLC**, and the rig auto-updated
+
+> *Services & Science* (1.1.0, Steam build 24995074) and the paid DLC *Feeding the Future* both
+> landed 2026-09-08. Full reading: `docs/agent/reports/GAME_1_1_0_IMPACT.md`; facts `EF-075`
+> (what the update did to our source base), `EF-076` (the target sweep), `EF-077` (the
+> compatibility floor).
+>
+> **The headline, so you can triage in one line:** the pack is **not** broken and **not** flagged
+> incompatible. 73 of 80 modules keep every self-check they declare; 6 switch themselves off
+> cleanly and say so in the boot log; 1 latches benign. No crash path was found. **Nothing here
+> needs shipping in a hurry** — the expensive mistake available is a rushed re-upload.
+>
+> ⚖️ **Your standing rule from today is written into the report and binds the whole effort:** a
+> patch note that says "Fixed" is a **CLAIM, false until we confirm it ourselves.** No fix of ours
+> is retired and no entry moves status on the strength of Haemimont's changelog.
+
+98. **The 1.0.7 branch — pin back, or move the baseline to 1.1.0?** ⚠️ **This one gates
+    everything else and it is the only time-shaped item.** The rig updated itself at 09:38 UTC
+    and overwrote `ModTools\Src`, so the 1.0.7 line-number base every one of our citations was
+    written against **is gone from this machine**. Steam still offers 1.0.7 (Properties → Game
+    Versions & Betas → 1.0.7), but that is a *dev claim about a store surface* and nobody has
+    walked it here. Options: **(a)** re-download 1.0.7 onto a branch install so A/B against the
+    version our records describe stays possible — recommended, it is the only way to tell "1.1.0
+    changed this" from "we were wrong"; **(b)** move the baseline to 1.1.0 and treat 1.0.7 as
+    history, which is cheaper but makes every re-verification a fresh derivation; **(c)** both,
+    if the branch route turns out to be per-install. Say which, and whether you want the branch
+    route route-checked before anything else runs.
+
+99. **The six modules that now switch themselves off — what do you want them to be?** They are
+    `Fix_TouristSatisfaction` (F09), `Fix_LowStorageWarning` (F12), `Fix_GridGlobalStorage` (F22),
+    `Fix_RainsDeadlock` (F81), `Fix_AsteroidLanderAvailable` (F94), `Fix_DroneUnreachableForever`
+    (F55/F57). Each declares a symbol 1.1.0 deleted, so `Require` declines and the fix does not
+    apply — the designed safe failure, not a defect. ⛔ **"Its target is gone" is NOT "the defect
+    is gone"** — only **F09** is settled, and settled by a *fact* (the Satisfaction stat itself
+    was removed), not by the note that says so. For the other five the underlying defect may well
+    still be live and simply need a different seam. The decision is the **disposition rule**:
+    **(a)** leave them shipped and inert until each is re-derived on 1.1.0 — recommended, costs
+    nothing and a self-disabled module is harmless; **(b)** actively retire the ones we can prove
+    obsolete; **(c)** re-seam them as they are re-derived. This is a "defect or not" call, so it
+    is yours under `FIX_POLICY` §4a, not an agent's.
+
+100. **Do we say anything to players yet?** The pack is live at v5 on both portals and every
+     player who auto-updated is now running it on 1.1.0. `EF-077`: we clear 1.1.0's mod floor by
+     **exactly zero** (`ModMinLuaRevision = 350453`, our `lua_revision = 350453`, the test is a
+     strict `<`), so no incompatibility prompt fires and saves do not mark us obsolete. So there
+     is no forced action. Options: **(a)** say nothing until the re-verification has something
+     true to report — recommended, and it keeps `H-04` clean; **(b)** a short "known-good on
+     1.1.0, six fixes stand down pending re-check" note on the listings, which costs an upload
+     cycle (`H-02`: the version bumps again) and would be publishing a claim we have not measured
+     yet. ⛔ Note that **any** listing edit overwrites both page bodies from `metadata.lua` and
+     needs the §3 paste backups.
+
+101. **The re-verification chain — accept the shape or reshape it.** Re-checking 82 shipped fixes
+     across two wholesale system rewrites (research and services) is far past the ~2-session line,
+     so `CHAIN_METHOD.md` says it should be a self-consuming prompt chain with a terminal backward
+     QA. Proposed in the report §5: **C1** baseline + the live `ListFixes()` read → **C2** the six
+     dead modules → **C3** the redesigned systems (services, research, landscaping, supply grids,
+     rockets, food decay) → **C4** the patch-note claim table, one control per row → **C5** fresh
+     -context adversarial QA. Accept, reorder, or cut scope — and tell us where it sits against
+     the opt-in pack (item 68), which was the named next effort before today.
+
 ### 2026-09-01 — ITEMS 94–97 OPEN: the D06 rebuild DESIGN SPEC (opt-in repo, `docs/agent/reports/DRONE_REBUILD_DESIGN_20260901.md`)
 
 > The spec is the build-out of the tiers **under your directive that it must not need the Save
