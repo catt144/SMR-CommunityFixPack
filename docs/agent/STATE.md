@@ -20,7 +20,8 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   `station.demand[res]` unguarded; 1.1.0 stations list lock-hidden BlackCube/Seeds with NO demand. 10 s console
   control + gate shape in the entry; ck106. Other 2 train body copies (SalvageWipe/SalvageRefund) NOT diffed.
   ⚠️ OPT-IN PACK IS ENABLED AND APPLYING — ck43's "OFF" is STALE, and it confounds any train leg.
-  ⚠️ Our own 1.1.0 defects, none yet seen live: F111, F112, F113 (`reports/GAME_1_1_0_AUDIT.md` §3).
+  ✅ F113/F112 GATES + F111 guard landed (2efbcf6) and MEASURED on the unforced boot 15:57: 15 inactive / 12 named,
+  0 errors (`archive/logs/unforced110_*`). Defects themselves still unseen live; statuses `filed` (ck99).
   ⚖️ Owner rule 09-08: a patch note saying "Fixed" is a **CLAIM, false until we confirm it**.
 - ⭐ PUBLISHED both portals — `pdx_id` **156049**, `steam_id` **3787202810**, tree `version` **5** (F110, 08-30).
   ⛔ Never re-upload to "fix" a version number — each upload bumps again (H-02). ⛔ Every upload OVERWRITES both
