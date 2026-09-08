@@ -19,8 +19,9 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   ✅ **F116 REPAIRED in-body** (`add94b3`), NOT gated: our 1.0.7 copy lacked 1.1.0's PRE-SORT `node_idx`
   revalidation. P1→P2, source-derived, NEVER reproduced. ⛔ The ONLY new code.
   ⭐ **1.1.0 RE-VERIFICATION DONE 09-08, all 80 modules read: 10 FIX / 35 REMOVE / 35 KEEP** (`reports/
-  PACK_1_1_0_REVERIFICATION.md`, ck114-116). ⛔ 5 APPLIED modules are WRONG today (SaintBlessing, StaleReservations,
-  ShelterReflex(a), FirstAsteroidPrefabs, Astrogeologist); 32 defects were FIXED by vanilla and no self-check saw it.
+  PACK_1_1_0_REVERIFICATION.md`, ck114-117; QA'd by 3 fresh readers, `reports/VANILLA_FIX_QA.md`, 0 flips). ⛔ 6 APPLIED
+  modules are WRONG today (SaintBlessing, StaleReservations, ShelterReflex(a), FirstAsteroidPrefabs, Astrogeologist,
+  DisasterPredictionLeak); 32 defects were FIXED by vanilla and no self-check saw it. Two removals owe save cleanups.
   ✅✅ BOTH GATES MEASURED 09-08 (`archive/logs/gated110_*`): 63 applied / 17 inactive / 14 named as predicted,
   0 errors; both `update_suspect` routes CONFIRMED. ⛔ MENU-ONLY ⇒ trains/landscaping NOT exercised in play.
   ✅ **HOTFIX_1_AUDIT DONE 09-08: SHIP WITH CHANGES — text-only (ck112/113), code clean**

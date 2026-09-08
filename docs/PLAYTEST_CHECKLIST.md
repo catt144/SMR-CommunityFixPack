@@ -29,7 +29,7 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
-### 2026-09-08 — ITEMS 114–116 OPEN: the pack-wide 1.1.0 re-verification — 10 FIX, 35 REMOVE, 35 KEEP
+### 2026-09-08 — ITEMS 114–117 OPEN: the pack-wide 1.1.0 re-verification — 10 FIX, 35 REMOVE, 35 KEEP (QA'd)
 
 > **The verdict, one line.** Every one of the 80 modules was opened against the shipped 1.1.0 body it wraps,
 > replaces or patches (`docs/agent/reports/PACK_1_1_0_REVERIFICATION.md`). **35 modules do nothing useful on
@@ -63,6 +63,18 @@ completed tests move whole to
 > still shipped?"), a behavioural `probe` form in `Require`, `sigcheck.py` over `SetGlobal` sites, and
 > `logscan.py` counting heals (the "17 inactive" headline is really 16). ⭐ **Recommend yes**; no runtime
 > behaviour changes, one script and header lines.
+>
+> ✅ **QA DONE (your ask, same day): three fresh-context readers re-derived all 46 REMOVE/FIX claims from the
+> 1.1.0 code (`docs/agent/reports/VANILLA_FIX_QA.md`). No verdict flipped; no vanilla fix is a rebreak. Four
+> things changed in the plan, all folded into 114/115 above:** (1) `DisasterPredictionLeak` is a SIXTH
+> applies-today harm — its sweep clears the game's own normal-rain prediction flag, which has no notification,
+> so a dust storm or cold wave can start during a rain warning; remove it. (2) Removing `Astrogeologist
+> Extractors` needs a one-shot save cleanup of our two persisted label modifiers, or every 1.1.0 save keeps
+> the +10%. (3) Repairing `SaintBlessing` needs a save re-base: vanilla's one-shot fixup already ran on saves
+> loaded under the broken pack and will not run again. (4) `90_SaveSanitizer` is NOT in the REMOVE block: the
+> 1.0.7-save block is Steam-only (`config.lua:174-175`) — **117. do non-Steam players matter?** If yes, keep the
+> sanitizer's F35/F48 passes; if the pack is Steam-only in practice, remove. Also from the QA: `University
+> Overtraining` should be a plain REMOVE, not a judgement.
 >
 > ⚠️ **What this does NOT cover:** nothing was played; the report §3 names every module whose verdict rests
 > on a sub-reader's quoted lines rather than my own re-read. The two gated re-derivations you already know

@@ -41,6 +41,14 @@ first draft read it as "function gone". R-2's suspected double count traced clea
 `UniversalRocket.lua:2522-2546`). Two residuals added (R-8 unreachables only reset on a bump; R-14/R-20
 `DisasterNormalRains` has no notification so vanilla's expiry clear cannot reach a strand). R-31's water/air
 legs are unreachable, not fixed.
+**Fresh-context QA (owner ask: "double check the devs' work"):** `prompts/VANILLA_FIX_QA.md`, three readers
+over all 46 REMOVE/FIX rows → `reports/VANILLA_FIX_QA.md`. 41 CONFIRMED, 4 PARTIAL, 1 DISPUTED on consequence;
+no verdict flipped, no vanilla rebreak. Corrections to MY rebreak pass: the R-14/R-20 "residual belt" was
+INVERTED — `DisasterPredictionLeak`'s applied sweep clears the legitimate notification-less
+`DisasterNormalRains` flag (`TerraformingDisasters.lua:349`) and opens the disaster gate during a rain
+warning ⇒ 6th applies-today harm; R-36's F35 reason was false and the sanitizer verdict is platform-conditional
+(`config.lua:174-175`, Steam-only block) ⇒ item 117. Two removals owe save cleanups (F-5 persisted label
+modifiers; F-1 vanilla's one-shot re-base already spent). `tools/luafn.py` promoted.
 
 ## 2026-09-08 (later still, 5th) — HOTFIX_1_AUDIT: SHIP WITH CHANGES, text only; six code changes clean; F116 repair kept
 

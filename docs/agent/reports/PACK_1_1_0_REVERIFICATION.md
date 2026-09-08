@@ -37,6 +37,7 @@ was written.** Every line number below is the 1.1.0 tree unless it names a
 | 2 | the 17 modules that self-disable on 1.1.0 | ✅ DONE — every one opened |
 | 3 | wrappers, `SetGlobal`, `DataPatch`, `F111` second look — the remaining 47 modules | ✅ DONE — 10 read by me, 37 by sub-readers, action rows re-verified |
 | 4 | the self-check design | ✅ DONE — §4 |
+| QA | fresh-context check of every "the devs fixed it" claim (46 rows, three readers) | ✅ DONE — `reports/VANILLA_FIX_QA.md`; its §0 amends R-20 (applies-today harm), R-36 (platform-conditional), R-17 (REMOVE), and adds two save cleanups to the patch |
 
 ## 1 · The four buckets
 
@@ -86,7 +87,7 @@ marked ◇ were read by a sub-reader and their evidence was not re-opened by me.
 | R-17 | `UniversityOvertraining` (F36) | Defect line unchanged, premise false: automation is a FLOOR now (`Max(workers, auto_performance)`; vanilla's comments say so), so specialists at an automated extractor DO raise output. Keeping F36 is a balance opinion; our copy also reverts a perf rewrite. ⚖️ A judgement, marked as one. | `Lua/Buildings/Workplace.lua:283-287`, `:249`, `:433-434`; `Lua/City.lua:636-661` | applied | owner call. |
 | R-18 | `CaveInsNoDisasters` (F01) | The repeat's condition now ends `and not IsGameRuleActive("NoDisasters")`. Our slot-3 wrapper is redundant. | `Lua/Marsquake.lua` (`MapGameTimeRepeat("UndergroundMarsquake", …)` condition); `CommonLua/Core/lib.lua:1559-1575` | applied | nothing. |
 | R-19 | `CommandCenterNumbers` (F13) | Rows render `<resource(GetAvailable('Metals'), 'Metals')>`; `AvailableMetals` and siblings have zero consumers. Our eleven shims are read by nothing. | `Data/XDef/CommandCenterCategories.lua:226-244` | applied | nothing. |
-| R-20 | `DisasterPredictionLeak` (F81a) | `EndMeteorStorm` removes the notification first, and `OnMsg.RemoveNotification` clears the flag on EXPIRY — the exact stranded state the module existed for. | `Lua/Meteors.lua:1204-1212`; `Lua/MapSettings.lua:223-228` | applied | the load/NewDay sweep polices an invariant vanilla keeps. |
+| R-20 | `DisasterPredictionLeak` (F81a) | `EndMeteorStorm` removes the notification first, and `OnMsg.RemoveNotification` clears the flag on EXPIRY — the exact stranded state the module existed for. ⚠️ **QA (`VANILLA_FIX_QA.md` §0.1) moved this to the applies-today HARM list:** 1.1.0 sets `g_DisastersPredicted.DisasterNormalRains` during a normal-rain warning with NO notification behind it, and our `NewDay` sweep clears every flag without a notification — so on the day it lands in that window it cancels the game's prediction gate and a dust storm or cold wave can start on top of the incoming rain. The first draft's §1h had this inverted. | `Lua/Meteors.lua:1204-1212`; `Lua/MapSettings.lua:223-236`; `Lua/TerraformingDisasters.lua:349`, `:256`; `DustStorm.lua:559`; `ColdWave.lua:198`; `Code/Fix_DisasterPredictionLeak.lua:97-103` | applied (harmful) | removal = the fix. P3. |
 | R-21 ◇ | `DustDevilSpawnGate` | The scheduler gates then counts itself; our wrapper re-rolls the same gate and burns extra `SessionRandom` draws per tick. | `Lua/DustDevils.lua:256`, `:235-237` | applied | nothing. |
 | R-22 ◇ | `DustDevilsDescrMap` | Vanilla `GetDustDevilsDescr` already reads `MainMap`; our copy is byte-identical. | `Lua/DustDevils.lua:59`, `:64` | applied | nothing. |
 | R-23 ◇ | `DustStormUndergroundBreaks` | `RandomBreakConnection(map)` filters connectors AND elements by the city's map; our swap is redundant and makes `IsBreakable` stricter. | `Lua/SupplyGrid.lua:1097`, `:1108-1114`, `:1134-1138`, `:1520` | applied | removal restores vanilla's filter. |
@@ -102,7 +103,7 @@ marked ◇ were read by a sub-reader and their evidence was not re-opened by me.
 | R-33 ◇ | `TouristApplicants` (F08) | Roll fixed upstream as `Random(0,99) < chance`; our `Random(0,100)` copy is marginally WORSE. | `Lua/HolidayRating.lua:87-106` (`:92`) | applied | removal restores vanilla's roll. |
 | R-34 ◇ | `TrainMinors` (F49d) | The train cap is now the route's station count (`GetTrainsOnRoute`); `max_vehicles` is display-only. I re-read `Track.lua:424` (`local trains, cap = GetTrainsOnRoute(self)`). | `Lua/Buildings/Track.lua:423-426`, `:62-67`, `:596`; `Lua/TrainTransport.lua:492-537` (`:519-521`) | applied | the x/max display number stops refreshing after salvage (cosmetic). |
 | R-35 ◇ | `TrainPlatformWedge` (F11) | The `table.remove_entry` guard shipped upstream; our wrapper duplicates it. I re-read `ColonistTransport.lua:660-667`. | `Lua/Units/ColonistTransport.lua:660-667`; `Lua/Units/Train.lua:424-451` | applied | nothing. |
-| R-36 ◇ | `90_SaveSanitizer` (F35, F03, F48) | Every pass repairs state a 1.0.7 defect left behind, and no 1.0.7 save can load on 1.1.0 (`EF-079`): F35 reads an empty `TechDef` stub; F03's source is fixed (R-5) and vanilla ships its own leak fixup; F48's paren is fixed and new games are pre-marked. | `Lua/Buildings/WindTurbine.lua:95-105`; `Building.lua:1303-1311`, `:1313-1345`; `Station.lua:1497-1513`; `CommonLua/SavegameFixup.lua:10-37`; `Tracks.lua:520`, `:615-622` | applied | nothing on 1.1.0. |
+| R-36 ◇ | `90_SaveSanitizer` (F35, F03, F48) | ⚠️ **QA (`VANILLA_FIX_QA.md` §0.6): PLATFORM-CONDITIONAL, pulled out of the REMOVE block.** F03's source is fixed (R-5) and F48's paren is fixed; but the F35 reason was wrong (`WindTurbine.lua:98` re-applies the Diffuser only), and the whole verdict rests on 1.0.7 saves being unloadable — which is `Platform.steam and "block" or "warn"`. A non-Steam player loads a 1.0.7 save with a warning and gets F35/F48 residue back; F48's fixup name is already marked applied on such saves, so only our pass would repair it. | `Lua/Config/config.lua:174-175`; `Lua/Buildings/WindTurbine.lua:98`; `Building.lua:1303-1311`, `:1313-1345`; `Station.lua:1504`; `CommonLua/SavegameFixup.lua:10-16` | applied | ⚖️ owner decision on platforms: REMOVE if the pack is Steam-only in practice; KEEP (F35 + F48 passes) if console/other players load 1.0.7 saves. |
 
 ### 1c · AUGMENT — the fix works, but its self-check cannot see the failure that bites
 
@@ -180,12 +181,12 @@ replacement was traced; column 4 names any way it could still be wrong.
 | R-11 `AsteroidLanderAvailable` | one predicate for gate and list | ✅ `IsRocketLanded` includes `CmdUnload` (`UniversalRocket.lua:1574-1577`) — the F72 case is accepted; `working` and landed-ness apply to both surfaces equally | none |
 | R-12 `GridGlobalStorage` | per-dome `ScriptFunc_DomesGridStorage` | ✅ body read; `judged == 0 ⇒ false`, no sentinel, no sum of ratios | none |
 | R-13 `LastTransmissionStorage` | `Condition` + correct `Resource` | ✅ data read for all six | none |
-| R-14 `RainsDeadlock` | repeat cycle; activation now WAITS for the current disaster instead of returning | ⚠️ partial: `RainsDisasterActivation` (`:318-353`) blocks in `WaitCurrentDisaster()` rather than bailing, and the cycle re-creates a dead thread; no untimed `WaitMsg` remains | residual: `g_DisastersPredicted.DisasterNormalRains` is set at `:349` and cleared only by `RemoveRainDisasterNotification` (`:254-256`, via the warning wait or the finish). A `DeleteThread(activation_thread)` mid-warning (`:485-487`, a load fixup) strands it, and normal rains have NO notification, so vanilla's expiry clear (R-20) cannot reach it — only our removed sweep could. Not measured. |
+| R-14 `RainsDeadlock` | repeat cycle; activation now WAITS for the current disaster instead of returning | ✅ `RainsDisasterActivation` (`:318-353`) blocks in `WaitCurrentDisaster()` rather than bailing, and the cycle re-creates a dead thread; no untimed `WaitMsg` remains | ⚠️ the first draft named a strand residual here and it was WRONG both ways (QA §0.8): the cited load fixup clears the flag itself (`:503-507` → `:256`), and the "belt" our sweep offered is in fact the R-20 harm — it clears the LEGITIMATE `DisasterNormalRains` flag. Nothing to keep. |
 | R-16 `IndependenceTerraforming` | `param1 = -10`, bound | ✅ data read; the contradiction was resolved DOWN to 10%, not up to 20% — a design choice, not a fix in our direction | none; the owner may dislike the direction |
 | R-17 `UniversityOvertraining` | automation floor | ✅ `:283-287` read | judgement, unchanged |
 | R-18 `CaveInsNoDisasters` | repeat condition | ✅ condition read | none (rule is fixed at game start) |
 | R-19 `CommandCenterNumbers` | parameterised getter in the XDef | ✅ data read | none |
-| R-20 `DisasterPredictionLeak` | remove-on-end + clear-on-expiry | ✅ `EndMeteorStorm` read; `notification.expired` is set before removal (`Notifications.lua:229`) | see R-14: our sweep was also the only belt for flags WITHOUT a notification |
+| R-20 `DisasterPredictionLeak` | remove-on-end + clear-on-expiry | ✅ `EndMeteorStorm` read; `notification.expired` is set before removal (`Notifications.lua:229`) | ⚠️ inverted by the QA and re-verified: our sweep is not a belt, it is a HARM — it clears the legitimate notification-less `DisasterNormalRains` flag (`TerraformingDisasters.lua:349`) and opens the disaster gate during a rain warning. Row updated. |
 | R-21 `DustDevilSpawnGate` | gate-then-count | ✅ `DustDevils.lua:256` re-read: `Random(100) < spawn_chance and Random(count_min, count_max) or 0` | none |
 | R-22 `DustDevilsDescrMap` | byte-identical | ✅ trivially | none |
 | R-23 `DustStormUndergroundBreaks` | per-map filter of connectors AND elements | ✅ `SupplyGrid.lua:1108-1114` re-read | none |
@@ -205,9 +206,13 @@ replacement was traced; column 4 names any way it could still be wrong.
 
 **What the pass changed:** one row's reasoning (R-15 — the verdict survives on
 different evidence, and the module's latch is a rename false negative, which is
-the trap the brief named and I walked into anyway); two residuals added (R-8,
-R-14/R-20); one leg named as "unreachable, not fixed" (R-31). No REMOVE verdict
-flipped. **Method lesson, for §4:** a REMOVE needs the same body read as a FIX,
+the trap the brief named and I walked into anyway); one residual added (R-8);
+one leg named as "unreachable, not fixed" (R-31). No REMOVE verdict flipped.
+⚠️ **Then the fresh-context QA (`VANILLA_FIX_QA.md`) corrected THIS pass in
+turn:** the R-14/R-20 "residual" I added was inverted (the sweep is a harm, not
+a belt), R-36's F35 reason was false and the verdict is platform-conditional,
+and two removals owe save cleanups (F-1 re-base, F-5 label modifiers). Read
+that file's §0 before acting on any row here. **Method lesson, for §4:** a REMOVE needs the same body read as a FIX,
 and "the name is gone" must be followed by "where did it go" before "the
 defect went with it".
 
