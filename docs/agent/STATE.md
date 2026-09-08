@@ -16,9 +16,9 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   needs a NEW colony provisioned from scratch (hours). Override exists but is triage-only (`EF-080`). Decision 98.
   ⭐ **F114 P1: trains do not move between stations with the pack ON (reporter A/B); all 11 train/track modules
   report `applied`.** ⛔ NO CAUSE. Narrow, do NOT ship a repair — sitting brief `prompts/TRAINS_AND_LOGSCAN_SITTING.md`.
-  ⭐ F114 CANDIDATE (source-pinned, runtime-UNCONFIRMED): `Fix_TrainCargoDumping`'s `UnloadAll` body copy indexes
-  `station.demand[res]` unguarded; 1.1.0 stations list lock-hidden BlackCube/Seeds with NO demand. 10 s console
-  control + gate shape in the entry; ck106. Other 2 train body copies (SalvageWipe/SalvageRefund) NOT diffed.
+  ✅ F114 CAUSE CONFIRMED LIVE 16:25 (owner, fresh 1.1.0 colony, shipped config): `Fix_TrainCargoDumping.lua:89`
+  indexes `station.demand["BlackCube"]` = nil (1.1.0 registers no demand for lock-hidden resources) ⇒ throws every
+  6 s in LoadTrain, train never moves, "Track busy". Repair NOT shipped — gate shape in entry, ruling = ck106.
   ⚠️ OPT-IN PACK IS ENABLED AND APPLYING — ck43's "OFF" is STALE, and it confounds any train leg.
   ✅ F113/F112 gates + F111 guard landed (2efbcf6), MEASURED 15:57 boot: 15 inactive / 12 named, 0 errors; still `filed`.
   ⛔ **F115 P1 LIVE on the SHIPPED pack** (owner repro, flatten landscaping): `Fix_LandscapeUnitFilter` body-replaces
