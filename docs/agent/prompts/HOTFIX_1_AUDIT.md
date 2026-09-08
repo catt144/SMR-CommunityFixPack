@@ -50,9 +50,31 @@ discriminator actually separate 1.1.0 from 1.0.7, and does the module decline on
 the tree the owner is running?"**
 
 Specific traps already known:
-- **F115's discriminator** may be a `MapVars` membership test. ⚠️ Is `MapVars`
-  populated at MOD LOAD time? If not the module declines always — safe, but dead
-  on 1.0.7 forever, and the apply link was told to verify it and may not have.
+- **F115's discriminator is NOT the `MapVars` membership test this brief
+  suggested — it was replaced, and here is what to attack instead.** What
+  shipped is `{ global = "Landscapes", kind = "any" }` (decline when the global
+  is absent), with `MapVarValues["Landscapes"] ~= nil ⇒ decline` as a secondary
+  `test`. Rationale: `GameVar` rawsets its global at registration
+  (`lib.lua:1069-1071`), `MapVar` never touches `_G` (`:984-1000`), so the check
+  is the literal read that raised `attempt to index a nil value (global
+  'Landscapes')` — the defect's own expression, not a correlate. The load-order
+  question the brief raised IS answered: `autorun.lua:432-434` runs
+  `dofolder("Lua")` → `DlcsLoadCode()` → `ModsLoadCode()`. Verify that yourself.
+  ⚠️ **The four things actually worth attacking:**
+  * ⛔ **The 1.0.7 half rests on OUR RECORDS, not a re-read** — the 1.0.7 tree is
+    gone (`EF-075`). If `GameVar` did not rawset on 1.0.7, the module declines
+    there too. Claimed SAFE-and-inert (no players on that branch). Is it?
+  * It detects the STORAGE move, not the ARITY change. They shipped together in
+    1.1.0; a future patch touching only one would fool it. Is that acceptable,
+    and is it stated where a future agent will see it?
+  * A stray global named `Landscapes` from another mod defeats the `_G` side.
+    Does the secondary `test` actually catch that, in that order?
+  * ⭐ **`update_suspect` reaches the dialog by a DIFFERENT ROUTE than F114's.**
+    F115 rides on `Require`'s native marking for shape specs
+    (`00_Core.lua:157-163`); F114 uses a hand-written mark. Confirm both, and
+    note that a boot reading 17/13 isolates F114's, not F115's. ⛔ `EF-081`
+    already MEASURED that a `test`-only decline is inactive-but-unnamed
+    (`AutomationLawCompensation`) — that is the control for this mechanism.
 - **F112 is a `test` content check and is inactive but NOT named in the dialog.**
   That is correct by design (`00_Core` exempts content checks from
   `update_suspect`). ⛔ Do not "fix" it into the dialog.
