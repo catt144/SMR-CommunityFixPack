@@ -134,21 +134,24 @@ handed over:
 ⛔ **Your job is to VERIFY that, not to redo it.** Confirm the pack's diff
 against live v5 contains only the five gate/guard files and nothing else.
 
-### B2 · Does F116 belong in this patch?
+### B2 · F116 — ⛔ **NOT YOURS ANY MORE. Hands off `bugs/F116.md`.**
 
-`F116` (`bugs/F116.md`) is **source-read, NOT reproduced, and silent by
-construction** — `Fix_TrackSalvageWipe`'s 1.0.7 `DemolishAndSplitTrack` copy
-lacks 1.1.0's `ProcessAllElements()` node_idx revalidation AND its
-orphan-reassign safeguard. The owner's bar for this patch is **"failing hard and
-visually right now."** F116 has never been seen fail.
+⚠️ **This section changed after this brief was written.** A dedicated parallel
+leg now owns F116 end to end: **`prompts/F116_FIX_LEG.md`**, running in another
+session right now. It re-derives the defect, repairs/gates/clears it, and
+augments the audit itself.
 
-⇒ **Default: NOT in patch 1.** But its branch (a) is player-visible ("click
-demolish on a mid-track element, nothing happens"), so:
-⭐ **Run its control during the audit playtest** (`bugs/F116.md` names it):
-salvage a MIDDLE element of a multi-element track, pack on. Nothing happens, no
-log line ⇒ branch (a) confirmed ⇒ it IS failing visibly and should be gated into
-this patch. Splits correctly ⇒ leave it filed for patch 2.
-⛔ Run it only AFTER the F114/F115 gates are in, or the train throw confounds it.
+⛔ **Do NOT edit `docs/agent/bugs/F116.md`.** It carries an UNDER CORRECTION
+banner — two of its four claims were withdrawn by its own author — so it is
+actively being rewritten by that leg. Editing it will collide.
+⛔ **Do NOT edit `Code/Fix_TrackSalvageWipe.lua`.** Also theirs.
+
+✅ **What you SHOULD still do:** if the owner's playtest happens to exercise
+track salvage, note what you saw and **message the F116 leg** (`ListAgents`,
+then `SendMessage`) rather than writing it into their entry. Their control is:
+salvage a MIDDLE element of a multi-element track, pack on — nothing happens /
+no log line is one branch, a wrong split is the other. ⛔ Run it only after the
+F114/F115 gates are in, or the train throw confounds it.
 
 ## 4 · Verification — the boot log IS the test
 
