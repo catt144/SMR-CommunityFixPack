@@ -72,6 +72,22 @@ completed tests move whole to
 > automation law. Both are in the "body-copy of vanilla logic" class (`FIX_POLICY` §1.5) — 10
 > modules carry one and they are the highest-yield place to look next. Items 98–101 stand; **99 now
 > has two concrete cases in front of it.**
+>
+> ⛔ **SECOND UPDATE — a P1 crash, and the danger is bigger than either fix.** A full call-site sweep
+> (every global, const, method and table-index in `Code/` against the 1.1.0 tree) found **F113**:
+> `Fix_LanderCargoRatchet` calls `GetEarthExportResPossibleReward`, which 1.1.0 **deleted** (0 hits
+> tree-wide; replaced by `GetEarthAutomodeFundingState`). Every gate it declares survives, so the module
+> **applies**, and the function is re-run **hourly** while a rocket is landed ⇒ it throws every hour, after
+> the cargo request is already written, so the low-funding auto-stop never fires. **Bounded good news:**
+> outside the already-self-disabling modules that is the ONLY dead call in the pack, and `self.overtime`
+> is the ONLY field whose table-ness 1.1.0 abandoned — so F111/F113 are the complete list of that kind.
+> **Unbounded bad news, and the real danger:** **31 modules FULLY REPLACE a vanilla method** (no `orig`
+> captured), so on 1.1.0 each substitutes a 1.0.7-era body for whatever the devs now ship — *anything the
+> patch improved inside a replaced function, we silently undo.* F113 was caught only because one of its
+> calls happened to vanish; **a replacement whose calls all still resolve is invisible to every sweep we
+> have.** Those 31 are now the top audit target. F113 also carries a cheap immediate mitigation if you
+> want one before the audit: add the dead method to its `Require` list so it self-disables instead of
+> installing a body that throws.
 
 99. **The six modules that now switch themselves off — what do you want them to be?** They are
     `Fix_TouristSatisfaction` (F09), `Fix_LowStorageWarning` (F12), `Fix_GridGlobalStorage` (F22),

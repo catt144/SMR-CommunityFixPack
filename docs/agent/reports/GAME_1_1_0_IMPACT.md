@@ -124,7 +124,8 @@ The pass therefore reaches `stats.seen > 0, moved = 0, retargeted = 0` and takes
 the **benign latch** branch. No closure, no throw.
 
 **Net: 73 of 80 modules keep every gate they declare; 6 self-disable; 1 latches
-benign.** ⛔ This is a source-read prediction. The only valid read of what is
+benign.** ⚠️ **"No crash path" held only until the sweep was widened from `Require`
+specs to CALL SITES — see §6b and [[F113]]. Read that before trusting this §.** ⛔ This is a source-read prediction. The only valid read of what is
 actually active is the live `fix pack present: N/N` line and
 `SMRFixPack.ListFixes()` — §4.
 
@@ -270,6 +271,42 @@ group (F33/F34/F30/F105/F107/F110) against Drones losing landscaping entirely,
 `Fix_DustStormUndergroundBreaks` (F90) against the new all-consumers grid
 shutdown, and `Fix_TouristApplicants` (F08) against tourists now being rated on
 Comfort/Morale.
+
+### 6b · The crash/error sweep — enumerated, not sampled (2026-09-08)
+
+§1c claimed "no crash path was found". **That claim was wrong, and it was wrong
+because it was scoped to `Require` specs rather than to call sites.** A proper
+sweep of every call our `Code/` makes, checked against the 1.1.0 tree:
+
+| what was swept | checked | dead in 1.1.0 | reachable? |
+|---|---|---|---|
+| bare global calls | 106 names | 3 (`GatherTransportableResources`, `GetCommandCenterLifeSupportGrids`, `GetGridGlobalStorage`) | **No** — all in modules that self-disable, or in F75's never-installed closure |
+| `const` / `g_Consts` reads | 28 names | 3 (`MinDaysFoodSupplyBeforeNotification`, `MinDaysMaintenanceSupplyBeforeNotification`, `SatisfactionLowStatPenalty`) | **No** — same modules |
+| method calls `obj:M(...)` | 174 names | 2 absent entirely (`UpdateSatisfaction`, `ChangeSatisfaction`) + 1 **(`GetEarthExportResPossibleReward`)** | ⛔ **YES for the third** → [[F113]] |
+| fields we index as tables | 30 sites | 1 (`self.overtime`) | ⛔ **YES** → [[F111]] |
+
+Six further method names (`GetMapSlot`, `GetPassablePointNearby`, `GetPosXYZ`,
+`GetSpotPosHex`, `SetAmount`, `SetRolloverTitle`) have no Lua definition but are
+used throughout 1.1.0 — engine-side, present, not a risk.
+
+✅ **The bounded good news.** `self.overtime` is the **only** field in the pack
+whose table-ness 1.1.0 abandoned: every other field we index (`self.workers`,
+`self.demand`, `self.supply`, `self.labels`, `grid.elements`, …) 1.1.0 still
+indexes itself 11–194 times. F111 is the sole instance of its class, not the
+first of many. And outside the self-disabling modules there is exactly **one**
+dead call in the whole pack — F113.
+
+⛔ **THE UNBOUNDED BAD NEWS, and the real answer to "what is dangerous now".**
+**31 modules define a vanilla method with no `orig` captured — full body
+replacements.** On 1.1.0 each one substitutes a 1.0.7-derived body for whatever
+the developers now ship, so *anything the patch improved inside a replaced
+function, we silently undo*. F113 is the proof: it replaces
+`CreateAutoCargoRequest`, a function 1.1.0 visibly rewrote, and was caught only
+because one of its calls happened to be a name that vanished. **A replacement
+whose every call still resolves is completely invisible to every sweep in this
+report** — it just quietly reverts the patch. The 31 are the highest-yield audit
+target in the project, above the §1.5 reconstruction list and far above §2's
+claim table.
 
 ### 6a · Correction to §0 — the rollback path IS dev-authorized
 

@@ -63,9 +63,28 @@ Also corrected an owner premise on the record: Steam *does* offer the way back h
 in the DLC announcement ("Patch 1.0.7 will remain available through the 1.0.7 Branch"). Local
 `appcache/appinfo.vdf` carries no branch block, so the Steam UI dropdown is the only control; still item 98.
 
-Filed: `reports/GAME_1_1_0_IMPACT.md` (§2 claim table as a to-TEST list, §5 chain, §6 the semantic audit),
-facts `EF-075`/`EF-076`/`EF-077`, entries **F111** + **F112**, checklist items **98–101**. Counts 110 F → 112 F.
-Nothing shipped, no code touched.
+Third leg, owner asked directly for crash/error risks — which exposed that §1c's "no crash path was found"
+had been scoped to `Require` specs, not call sites. A full sweep of `Code/` against the 1.1.0 tree (106 global
+call-names, 28 const reads, 174 method names, 30 table-index sites):
+
+- **F113 (P1)** — `Fix_LanderCargoRatchet` calls `self:GetEarthExportResPossibleReward()`
+  (`Code/Fix_LanderCargoRatchet.lua:186`), a method 1.1.0 DELETED outright (0 hits tree-wide; the funding gate
+  became `if self:GetEarthAutomodeFundingState() == "blocked"`, `Lua/UniversalRocket.lua:2028+`). Every gate the
+  module declares survives ⇒ it APPLIES; the function is re-run hourly while landed ⇒ throws hourly; and the
+  throw is AFTER `SetCargoRequest`, so the low-funding auto-stop is lost. It is a FULL BODY REPLACEMENT of a
+  function 1.1.0 rewrote, so it also silently reverts the devs' work.
+- Bounded good news, both enumerated not sampled: outside the already-self-disabling modules F113 is the ONLY
+  dead call in the pack, and `self.overtime` is the ONLY field whose table-ness 1.1.0 abandoned (every other
+  field we index, 1.1.0 still indexes 11-194 x). So F111 + F113 are the complete list of their classes.
+- ⛔ The real danger, and it is unbounded: **31 modules define a vanilla method with no `orig`** — full body
+  replacements that substitute a 1.0.7-era body for whatever 1.1.0 ships. F113 was caught only because one of
+  its calls vanished; a replacement whose calls all still resolve is invisible to every sweep in the report.
+  Those 31 are now the top audit target, above the §1.5 reconstruction list and far above the claim table.
+
+Filed: `reports/GAME_1_1_0_IMPACT.md` (§2 claim table as a to-TEST list, §5 chain, §6 semantic audit, §6b the
+crash sweep, §6a the branch correction), facts `EF-075`/`EF-076`/`EF-077`, entries **F111** + **F112** + **F113**,
+checklist items **98–101** plus two updates. Counts 110 F → 113 F. §1c's superseded "no crash path" sentence was
+corrected in place with a pointer to §6b rather than deleted. Nothing shipped, no code touched.
 STATE evicted to fit: the v5 pack md5/byte receipt (**85 entries, 83 byte-identical, md5
 `a1cbaad6294382068250ef390037f239`, 401,188 B**, version 5, F110 module + "Eighty-two" present — verified
 08-30 off Steam), the site deploy sha `ce3a3779`, and the F110/ck82 + "Closed 08-29" decision receipts.
