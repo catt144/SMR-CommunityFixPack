@@ -108,7 +108,26 @@ return PlaceObj('ModDef', {
 	-- to their accurate versions"); text-only, no behaviour, and `H-02` as
 	-- reworded 2026-08-24 puts hand edits to this string squarely in scope while
 	-- leaving the version bump to the owner's sitting.
-	'last_changes', "- Fixed a base-game issue where a Jumbo Cave's Reinforcements could stay stuck clearing waste rock forever — a rock the drones could not reach blocked the site, so the Reinforcement never built and the mystery never completed.\n- Safe to install on a save where this is already happening; the stuck rock is cleared automatically.",
+	-- ⭐ REWRITTEN 2026-09-08 for the 1.1.0 hotfix (HOTFIX_1_APPLY). The v5 text
+	-- above described the F110 Jumbo Cave fix and would post a duplicate CHANGELOG
+	-- entry if left alone. This version's change is a COMPATIBILITY pass, so the
+	-- note leads with the two things a player actually saw break.
+	-- ⛔ WRITTEN AHEAD OF THE PROOF. At the time of writing the F114/F115 gates
+	-- were desk-verified only — no boot log yet. The owner's rule of 2026-09-08 is
+	-- that a "Fixed" line is a CLAIM until confirmed, and that binds OUR notes too:
+	-- do not upload this string until a 1.1.0 boot reads the predicted 17 inactive /
+	-- 14 named with ZERO Fix_TrainCargoDumping.lua:89 and ZERO
+	-- Fix_LandscapeUnitFilter.lua:63 lines (checklist, the 109/110 block).
+	-- ⚠️ The third line is not hedging for its own sake: 17 of the pack's 22
+	-- full-body replacements have never been diffed against 1.1.0, and no instrument
+	-- we own bounds body divergence — the name sweep sees names, sigcheck sees
+	-- arity, the runtime self-checks see existence, and F114 was invisible to all
+	-- three. Claiming 1.1.0 compatibility outright would be the exact "Fixed is a
+	-- claim" error, aimed at our own players.
+	-- ⛔ No fix ids, no counts, no load-order advice, no other mod named (EF-054,
+	-- FIX_POLICY §8). Licence: the owner's standing 22b word; text-only, no
+	-- behaviour, and H-02 leaves the version bump to the upload sitting.
+	'last_changes', "- Fixed for game 1.1.0: trains that would not leave their station, and an error popup when landscaping. Both were caused by this pack on the new game version, not by the base game.\n- Some fixes now switch themselves off on 1.1.0 and say so, because the game code they corrected has changed. That is deliberate — an inactive fix is safer than one working from an old assumption.\n- This is a safety pass, not a full re-check of every fix against 1.1.0. Please keep reporting anything that looks wrong.",
 	-- the packer includes EVERYTHING recursively minus this list (Mod.lua:250-256,
 	-- GedModEditor.lua:716-732) — without the extra patterns docs/, README.md,
 	-- .gitignore and .claude/ all ship inside the .hpk. LICENSE ships on purpose.

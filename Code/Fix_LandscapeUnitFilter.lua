@@ -46,13 +46,72 @@
 SMRFixPack.Register("LandscapeUnitFilter", {
 	title = "Landscaping over a boarding point no longer drags boarding colonists out",
 	apply = function()
+		-- F115 (2026-09-08, CONFIRMED LIVE on 1.1.0, owner repro): the body below
+		-- is a 1.0.7 copy of the global LandscapeForEachUnit, and game 1.1.0 changed
+		-- that global's SIGNATURE -- `(mark, callback, ...)` became
+		-- `(map, mark, callback, ...)` (Landscaping.lua:509) -- so every argument
+		-- arrives one slot late, and it moved the landscape store from a GameVar to
+		-- `MapVar("Landscapes", {})` (:21), read as `map.Landscapes[mark]`. Our body
+		-- indexes the bare global and raises "attempt to index a nil value (global
+		-- 'Landscapes')" on every landscaping site, aborting ConstructionSite:
+		-- Initialize mid-body. Owner ruled GATE, not repair (decision 109): a repair
+		-- would pin us to 1.1.0's signature and re-break on the next change.
+		--
+		-- THE DISCRIMINATOR, and why it is this one. The name still exists, so
+		-- `{ global = "LandscapeForEachUnit" }` cannot see this, and arity is
+		-- unreadable (`debug.getinfo` is absent in the mod sandbox). What IS
+		-- readable is the exact expression that throws:
+		--   * GameVar(name, ...) rawsets the global to `false` when it registers
+		--     (lib.lua:1069-1071), so on 1.0.7 `Landscapes` was a real global key;
+		--   * MapVar(name, ...) registers into MapVars/MapVarValues and NEVER
+		--     touches _G (lib.lua:984-1000), so on 1.1.0 the global is nil.
+		-- Both run at the top level of Lua/Landscape/Landscaping.lua:21, and
+		-- autorun.lua:432-434 runs `dofolder("Lua")` -> `DlcsLoadCode()` ->
+		-- `ModsLoadCode()`, so the whole game tree has registered before any line of
+		-- ours loads. The registry is therefore populated when this runs -- that is
+		-- the load-order check this gate depends on, and it is static, not assumed.
+		-- ⛔ 1.0.7 SIDE UNVERIFIABLE: the 1.0.7 tree is gone from disk (EF-075), so
+		-- "Landscapes was a GameVar" rests on this module's own header and F115, not
+		-- on a re-read. If that is wrong the module also declines on 1.0.7 -- SAFE
+		-- (vanilla's working-but-F34(d)-buggy body is restored) and inert, since the
+		-- 1.0.7 branch has no players. The 1.1.0 side is read from the shipped tree.
+		local function landscapes_is_per_map()
+			-- MapVarValues is the engine's own "already registered" test (lib.lua:991).
+			local mvv = rawget(_G, "MapVarValues")
+			return type(mvv) == "table" and mvv["Landscapes"] ~= nil
+		end
+
 		local err = SMRFixPack.Require("LandscapeUnitFilter", {
 			{ global = "LandscapeForEachUnit" },
 			{ global = "Landscape_ForEachObject" },
+			-- THE GATE. A `{ global }` check on purpose rather than a `test`: it is
+			-- the literal expression the shipped body raises on, and Require marks
+			-- `update_suspect` natively for shape specs while deliberately exempting
+			-- `test` ones (00_Core.lua:157-163), so this route needs no hand-written
+			-- mark and cannot be lost if that hand-written mark is ever wrong.
+			{ global = "Landscapes", kind = "any",
+			  reason = "the global Landscapes table is gone (game update changed it?)" },
+			-- Belt to the above's braces: if some other mod defines a global named
+			-- `Landscapes`, the check above passes on 1.1.0 and we would install the
+			-- very P1 this gate exists to stop. Registration is the fact that cannot
+			-- be faked by a stray global.
+			{ test = function() return not landscapes_is_per_map() end,
+			  reason = "the landscape data is per-map now (game update changed it?)" },
 		})
-		if err then return err end
-		-- Landscapes is a GameVar (Landscaping.lua:21) and does not exist yet, so
-		-- it is read inside the function, never here.
+		if err then
+			-- This is patch ROT (a pinned body over a rewritten function), not an
+			-- "already handled?" verdict, so it must be named in the update report.
+			-- Require covers the `{ global }` route; the `test` route it exempts, so
+			-- mark that one here. `run_apply` clears `update_suspect` only on the
+			-- ACTIVE branch (00_Core.lua:411), so a write before returning survives.
+			if landscapes_is_per_map() then
+				local entry = SMRFixPack.fixes["LandscapeUnitFilter"]
+				if entry then entry.update_suspect = true end
+			end
+			return err
+		end
+		-- On the 1.0.7 shape Landscapes is a GameVar holding `false` until a game
+		-- starts, so its VALUE is still read inside the function, never here.
 
 		-- Reproduced from the file-local at Landscaping.lua:452-454.
 		local foreach_params_unit = {

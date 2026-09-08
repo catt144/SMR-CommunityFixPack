@@ -262,8 +262,9 @@ Usually auto-fills. If it is missing under **CHANGELOG** (Paradox) or **Change
 Notes** (Steam), paste this:
 
 ```
-- Fixed a base-game issue where a Jumbo Cave's Reinforcements could stay stuck clearing waste rock forever — a rock the drones could not reach blocked the site, so the Reinforcement never built and the mystery never completed.
-- Safe to install on a save where this is already happening; the stuck rock is cleared automatically.
+- Fixed for game 1.1.0: trains that would not leave their station, and an error popup when landscaping. Both were caused by this pack on the new game version, not by the base game.
+- Some fixes now switch themselves off on 1.1.0 and say so, because the game code they corrected has changed. That is deliberate — an inactive fix is safer than one working from an old assumption.
+- This is a safety pass, not a full re-check of every fix against 1.1.0. Please keep reporting anything that looks wrong.
 ```
 
 #### 📋 Short summary (only if it also came out blank)
