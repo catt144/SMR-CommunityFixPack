@@ -48,14 +48,30 @@ completed tests move whole to
 98. **The 1.0.7 branch — pin back, or move the baseline to 1.1.0?** ⚠️ **This one gates
     everything else and it is the only time-shaped item.** The rig updated itself at 09:38 UTC
     and overwrote `ModTools\Src`, so the 1.0.7 line-number base every one of our citations was
-    written against **is gone from this machine**. Steam still offers 1.0.7 (Properties → Game
-    Versions & Betas → 1.0.7), but that is a *dev claim about a store surface* and nobody has
-    walked it here. Options: **(a)** re-download 1.0.7 onto a branch install so A/B against the
+    written against **is gone from this machine**. ⚠️ Your read was that Steam offers no way back
+    unless the dev specifically authorizes multiple builds — **that authorization is exactly what
+    happened**: the DLC announcement says verbatim that "Patch 1.0.7 will remain available through
+    the 1.0.7 Branch" (Properties → Game Versions & Betas → 1.0.7). It is still a *dev claim about
+    a store surface* and nobody has walked it here — Steam's local `appinfo.vdf` carries no branch
+    block to check it against, so the dropdown is the only control, ~60 seconds. Options: **(a)** re-download 1.0.7 onto a branch install so A/B against the
     version our records describe stays possible — recommended, it is the only way to tell "1.1.0
     changed this" from "we were wrong"; **(b)** move the baseline to 1.1.0 and treat 1.0.7 as
     history, which is cheaper but makes every re-verification a fresh derivation; **(c)** both,
     if the branch route turns out to be per-install. Say which, and whether you want the branch
     route route-checked before anything else runs.
+
+> ⚠️ **UPDATE, same day — the semantic audit started and is 2 for 2.** Two fixes whose targets all
+> survived (so the sweep called them fine) turned out to be broken by 1.1.0's *meaning* changes:
+> **F111** — `Fix_ExtractorStaffedPerformance` (F108) now **throws** when overtime is on, because
+> 1.1.0's new `IsOvertime()` collapses `self.overtime` from a table to a boolean under it; and the
+> defect F108 fixed is **gone from the shipped Lua** (vanilla now takes the same `Max` we do — read
+> by us, not claimed by a note). **F112** — `Fix_AutomationLawCompensation` (C39) now **over-pays**:
+> 1.1.0 deleted vanilla's automation compensation entirely while the laws still cut workers, so the
+> 8 buildings C39 was written to bring up to parity are now the only ones in the game getting
+> compensation at all. That one is a **player-visible balance divergence** in any colony running an
+> automation law. Both are in the "body-copy of vanilla logic" class (`FIX_POLICY` §1.5) — 10
+> modules carry one and they are the highest-yield place to look next. Items 98–101 stand; **99 now
+> has two concrete cases in front of it.**
 
 99. **The six modules that now switch themselves off — what do you want them to be?** They are
     `Fix_TouristSatisfaction` (F09), `Fix_LowStorageWarning` (F12), `Fix_GridGlobalStorage` (F22),

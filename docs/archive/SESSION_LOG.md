@@ -40,8 +40,32 @@ it installs a closure calling the now-dead `GetGridGlobalStorage` at evaluation 
 `ScriptCheckGridGlobalStorage` no longer exists at all, so the closure is never installed and the pass takes
 its benign-latch branch. No crash path was found anywhere in the pack.
 
-Filed: `reports/GAME_1_1_0_IMPACT.md` (with the §2 claim table as a to-TEST list and a proposed 5-stage
-chain), facts `EF-075`/`EF-076`/`EF-077`, checklist items **98–101**. Nothing shipped, no code touched.
+Owner then asked the four bottom-line questions, and the second leg answered them by starting the semantic
+audit §3 had only scoped. **Two probes, two of our own defects** — both in `FIX_POLICY` §1.5 body-copies of
+vanilla logic, both invisible to the existence sweep because every target survived:
+
+- **F111** — `Fix_ExtractorStaffedPerformance` (F108) throws on 1.1.0. The new `Workplace:IsOvertime()`
+  (`Workplace.lua:718-729`) *collapses* `self.overtime` from a per-shift table to a boolean, `orig` calls it
+  before our wrapper does, and our reconstruction still writes `self.overtime[shift]`. Trigger: automated +
+  `MetalExtractorWorkplace` + overtime anywhere. Separately, **F108's defect is gone upstream** — 1.1.0 does
+  `Max(GetWorkersPerformance(shift), auto_performance)`, the owner's own floor-not-ceiling rule, and the patch
+  notes never mention it. Our `staffed_performance` matches 1.1.0's per-worker math exactly
+  (`Colonist:GetWorkPerformance` = `Max(self.performance, 25)`), so the wrapper can never change an outcome —
+  it can only raise.
+- **F112** — `Fix_AutomationLawCompensation` (C39) over-pays. 1.1.0 deleted vanilla's automation compensation
+  wholesale (`law_scale`: 0 hits tree-wide, dev comment gone, `automation_workforce_reduction` only in
+  `LawDef/` data) while the laws still cut `max_workers`. C39 still pays the 8 out-of-class families and still
+  returns 0 for Factory/ResearchBuilding/Service as "already paid by the shipped gate" — so those 8 are now
+  the only buildings in the game receiving compensation. Player-visible balance divergence, inverse of the
+  asymmetry C39 was written to remove.
+
+Also corrected an owner premise on the record: Steam *does* offer the way back here — Haemimont authorized it
+in the DLC announcement ("Patch 1.0.7 will remain available through the 1.0.7 Branch"). Local
+`appcache/appinfo.vdf` carries no branch block, so the Steam UI dropdown is the only control; still item 98.
+
+Filed: `reports/GAME_1_1_0_IMPACT.md` (§2 claim table as a to-TEST list, §5 chain, §6 the semantic audit),
+facts `EF-075`/`EF-076`/`EF-077`, entries **F111** + **F112**, checklist items **98–101**. Counts 110 F → 112 F.
+Nothing shipped, no code touched.
 STATE evicted to fit: the v5 pack md5/byte receipt (**85 entries, 83 byte-identical, md5
 `a1cbaad6294382068250ef390037f239`, 401,188 B**, version 5, F110 module + "Eighty-two" present — verified
 08-30 off Steam), the site deploy sha `ce3a3779`, and the F110/ck82 + "Closed 08-29" decision receipts.

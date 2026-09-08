@@ -222,6 +222,67 @@ the owner to accept or reshape (decision **101**):
 - **C4 — the claim table.** §2, one control per row.
 - **C5 — terminal backward QA**, fresh context, adversarial.
 
+## 6 · The semantic audit has started, and it is finding things (2026-09-08, same day)
+
+§3 predicted that the real damage would be in fixes whose targets survived but
+whose systems were rewritten. **Two checks were run against that list. Both
+found a defect in our own code.** That is the calibration that matters more than
+either finding: the existence sweep's reassuring "73 of 80 keep every gate" says
+nothing about correctness, and the hit rate on the first two semantic probes was
+2 for 2.
+
+- **[[F111]]** — `Fix_ExtractorStaffedPerformance` (F108) **throws** on 1.1.0.
+  The new `Workplace:IsOvertime()` (`Workplace.lua:718-729`) *collapses*
+  `self.overtime` from a per-shift table to a boolean, `orig` calls it before we
+  do, and our reconstruction still writes `self.overtime[shift]` — indexing a
+  boolean. Trigger: automated + `MetalExtractorWorkplace` + overtime on any
+  shift. **And the defect F108 repaired is gone**: 1.1.0's
+  `GetWorkshiftPerformance` now does `Max(GetWorkersPerformance(shift),
+  auto_performance)` — the exact floor-not-ceiling rule the owner ruled on
+  08-28. The patch notes never mention it; we read it in the shipped Lua.
+- **[[F112]]** — `Fix_AutomationLawCompensation` (C39) now **over-pays**.
+  1.1.0 deleted vanilla's automation-law compensation outright (`law_scale`: 0
+  hits tree-wide; `automation_workforce_reduction` survives only in `LawDef/`
+  data), while the laws still cut `max_workers`. C39 still pays its uplift to
+  the 8 out-of-class families and still returns 0 for Factory / ResearchBuilding
+  / Service as "already paid by the shipped gate" — a gate that no longer
+  exists. So the eight are now the only buildings in the game receiving
+  automation compensation: C39 has become the inverse of itself, player-visible,
+  in any colony running an automation law.
+
+⚠️ **The shape of the risk this exposes, for the rest of the audit.** Both
+defects live in **body-copies of vanilla logic** — the `FIX_POLICY` §1.5
+reconstruction disclosures. Those are the fixes a patch can silently invalidate,
+because they freeze a snapshot of code the devs are free to change. Ten modules
+carry one: `Fix_AsteroidLanderAvailable`, `Fix_AutomationLawCompensation`,
+`Fix_DisasterPredictionLeak`, `Fix_DroneTransportMinors`,
+`Fix_DroneUnreachableForever`, `Fix_ExtractorStaffedPerformance`,
+`Fix_MeteorFrequency`, `Fix_MeteorStormWedge`, `Fix_SmallLandscapeSites`,
+`Fix_TrainWaitTime`. Three of those ten are already accounted for (two filed
+here, and `Fix_AsteroidLanderAvailable` + `Fix_DroneUnreachableForever`
+self-disable). **The remaining ones are the highest-yield place to look next**,
+ahead of the §2 claim table. F108's own header says it: *"Re-check this loop
+against that block on every game update."*
+
+⛔ Still unaudited, and not safe to assume clean: `Fix_NightShiftWork` (F04),
+`Fix_MoraleComfortTooltip` (F20), `Fix_SaintBlessing` (F92), the landscaping
+group (F33/F34/F30/F105/F107/F110) against Drones losing landscaping entirely,
+`Fix_DustStormUndergroundBreaks` (F90) against the new all-consumers grid
+shutdown, and `Fix_TouristApplicants` (F08) against tourists now being rated on
+Comfort/Morale.
+
+### 6a · Correction to §0 — the rollback path IS dev-authorized
+
+The owner's read was that Steam gives no way back unless the developer
+specifically authorizes multiple builds. **That authorization is exactly what
+happened here**, in the *Feeding the Future* announcement, verbatim: "if you are
+playing on Steam and would prefer to continue your current playthrough, **Patch
+1.0.7 will remain available through the 1.0.7 Branch**", via Properties → Game
+Versions & Betas → 1.0.7. ⚠️ It stays a **claim about a store surface** until
+someone opens that dropdown — an attempt to confirm it from Steam's local
+`appcache/appinfo.vdf` found no branch block to read, so the only control is the
+UI itself. Decision **98**.
+
 ⛔ The pack is **published and live on both portals at version 5**, and every
 player who auto-updated is on 1.1.0 now. Nothing in this document is a reason to
 ship in a hurry: 73 of 80 modules keep their gates, the other 7 fail safe, and
