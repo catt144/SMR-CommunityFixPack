@@ -14,6 +14,28 @@ SMRFixPack_Disabled = rawget(_G, "SMRFixPack_Disabled") or {}
 -- power users; regular players use Options → Mod Options — see OptionEnabled).
 SMRFixPack_Optional = rawget(_G, "SMRFixPack_Optional") or {}
 
+-- DIAGNOSTIC ONLY (2026-09-08, owner ask) -- the self-check OVERRIDE surface.
+-- `SMRFixPack_Force[id] = true`, or `SMRFixPack_Force.all = true`, makes
+-- `Require` treat a FAILED self-check as a pass, so the module installs its
+-- pinned body against game code it has already reported as changed. That is
+-- precisely the outcome the self-checks exist to prevent, and that is the
+-- point: it makes a module's real behaviour reach the LOG instead of being
+-- skipped silently.
+--   * Ships EMPTY. Nothing in this pack ever writes it; with the table empty
+--     every code path below is byte-for-byte the shipped behaviour.
+--   * The rig sets it from the console, or from the TestKit (local-only by
+--     design). See SMRFixPack.ForceApply at the end of this file.
+--   * NEVER set it in shipped code, and never read a forced module's
+--     behaviour as evidence about the shipped pack: a forced module runs a
+--     body pinned to a DIFFERENT game build.
+SMRFixPack_Force = rawget(_G, "SMRFixPack_Force") or {}
+
+-- DIAGNOSTIC ONLY -- suppress the pregame "switched themselves off" dialog on
+-- a rig that already knows (the owner's). This hides the POPUP only: the
+-- `update report:` log line is emitted first and unconditionally, so
+-- suppressing the dialog can never suppress a finding.
+SMRFixPack_NoUpdateDialog = rawget(_G, "SMRFixPack_NoUpdateDialog") or false
+
 SMRFixPack = rawget(_G, "SMRFixPack") or {
 	fixes = {},        -- id -> { title, status, detail, installed, update_suspect }
 	order = {},        -- registration order, for ListFixes()
@@ -35,6 +57,27 @@ function SMRFixPack.Log(fmt, ...)
 	if rawget(_G, "ModLog") then ModLog((msg:gsub("%%", "%%%%"))) else print(msg) end
 end
 local log = SMRFixPack.Log
+
+-- Is a DIAGNOSTIC self-check override in force for `id`? Read through rawget
+-- every time (never cached): the rig may set the table from the console
+-- mid-session, and an empty/absent table must answer false for everyone.
+-- `is_content` is true for a `test` spec entry. Those are CONTENT verdicts
+-- ("already fixed", "nothing left to correct") and are HEALTHY declines, not
+-- patch rot -- which is exactly why `Require` refuses to set `update_suspect`
+-- on them and why the pregame dialog never names them. Overriding one does not
+-- reveal withheld behaviour; it makes a fix act on a tree that does not want
+-- it. MEASURED CASE (F112, 2026-09-08): `AutomationLawCompensation`'s content
+-- check says game 1.1.0 compensates the automation-law worker cut for NOBODY,
+-- so forcing it would pay the out-of-class families and CREATE the very
+-- asymmetry that fix exists to remove -- a gameplay corruption, not a throw.
+-- So content checks stay honoured unless the rig opts in by name.
+local function force_requested(id, is_content)
+	local t = rawget(_G, "SMRFixPack_Force")
+	if type(t) ~= "table" then return false end
+	if is_content and not t.include_content then return false end
+	if t.all then return true end
+	return id ~= nil and t[id] == true
+end
 
 -- Is a fix currently active? Optional modules' wrappers consult this at CALL
 -- time, so a Mod Options toggle takes effect live in both directions — the
@@ -155,12 +198,20 @@ function SMRFixPack.Require(id, spec)
 			name = table.concat(c.path, ".")
 		end
 		if not ok then
-			-- Target-SHAPE failures mark the fix for the C1 update report;
-			-- `test` entries do not — a content check owns its own meaning
-			-- (e.g. "already fixed?" verdicts are healthy, not patch rot).
-			local entry = id and not c.test and SMRFixPack.fixes[id]
-			if entry then entry.update_suspect = true end
-			return c.reason or (name .. " not found (game update changed it?)")
+			if force_requested(id, c.test ~= nil) then
+				-- DIAGNOSTIC OVERRIDE. Log the reason the check actually gave,
+				-- in full, so a forced module can never read like a clean one,
+				-- then fall through to the next check and let `apply` install.
+				log("%s: SELF-CHECK OVERRIDDEN by SMRFixPack_Force (%s) -- installing anyway; DIAGNOSTIC rig state, NOT a supported configuration",
+					tostring(id), c.reason or (name .. " not found"))
+			else
+				-- Target-SHAPE failures mark the fix for the C1 update report;
+				-- `test` entries do not — a content check owns its own meaning
+				-- (e.g. "already fixed?" verdicts are healthy, not patch rot).
+				local entry = id and not c.test and SMRFixPack.fixes[id]
+				if entry then entry.update_suspect = true end
+				return c.reason or (name .. " not found (game update changed it?)")
+			end
 		end
 	end
 end
@@ -271,6 +322,11 @@ function SMRFixPack.DataPatch(id, opts)
 		if entry then
 			entry.status = "inactive"
 			entry.detail = detail
+			-- Provenance, read ONLY by SMRFixPack.ForceApply: this entry went
+			-- inactive from a DataPatch pass that already ran and found no
+			-- target, not from a Require preflight. Re-running `apply` cannot
+			-- reach it, so ForceApply refuses it instead of relabelling it.
+			entry.data_latched = true
 			-- a latch means the shipped data no longer matches this pack's
 			-- pinned build — C1-suspect unless the site says the data is
 			-- verifiably already-correct (benign)
@@ -283,6 +339,7 @@ function SMRFixPack.DataPatch(id, opts)
 		if entry and (entry.status == "active" or entry.status == "inactive") then
 			entry.status = "active"
 			entry.detail = ""
+			entry.data_latched = nil
 			-- same leak as run_apply's success branch, same day, same reason:
 			-- healing undoes the latch, so it must undo the latch's mark too.
 			-- MEASURED on SaintBlessing, whose two latch sites differ — the
@@ -568,6 +625,12 @@ CreateRealTimeThread(function()
 	if #suspects == 0 then return end
 	local list = table.concat(suspects, ", ")
 	log("update report: %d fix(es) deactivated over a game-code change: %s", #suspects, list)
+	-- DIAGNOSTIC ONLY: the line above is already written, so the finding
+	-- survives; only the player-facing popup is skipped.
+	if rawget(_G, "SMRFixPack_NoUpdateDialog") then
+		log("update dialog suppressed on this rig (SMRFixPack_NoUpdateDialog)")
+		return
+	end
 	local wait_message = rawget(_G, "WaitMessage")
 	if type(wait_message) == "function" then
 		wait_message(nil,
@@ -576,6 +639,82 @@ CreateRealTimeThread(function()
 				"%d of this pack's fixes found that the game code they patch has changed — usually after a game update — and switched themselves off for safety.\n\nFixes that cannot detect such changes may still need attention: if the game was recently updated, check for a new version of the Relaunched Fix Pack.\n\nSwitched off: %s", #suspects, list)))
 	end
 end)
+
+-- ===== DIAGNOSTIC ONLY — the self-check override runner ======================
+--
+-- Re-run a self-disabled module's `apply` with its self-checks OVERRIDDEN, so
+-- what the module actually DOES reaches the log instead of being skipped.
+--   SMRFixPack.ForceApply("GridGlobalStorage")   -- one module
+--   SMRFixPack.ForceApply()                      -- every forceable module
+--
+-- WHAT IT CAN REACH, AND WHAT IT CANNOT. It re-runs `def.apply`, which is the
+-- `Require` preflight route -- the modules whose reason reads "<target> not
+-- found". It does NOT re-drive a `DataPatch` pass. Those modules went inactive
+-- from a pass that ALREADY RAN and found the preset data it edits absent
+-- (`entry.data_latched`); there is no withheld behaviour to reveal, so forcing
+-- them would relabel a module that has nothing to patch. This refuses them by
+-- name rather than printing a comfortable lie.
+--
+-- WHAT A FORCED MODULE IS. A body pinned to an OLDER game build, installed
+-- over game code the module itself has just reported as changed. Expect
+-- throws -- that IS the measurement, and `run_apply`'s pcall turns each into a
+-- status "error" line naming the failing site. Consequences:
+--   * NEVER play a colony you care about in this state.
+--   * NEVER read a forced result as evidence about the shipped pack.
+--   * The override is not sticky: it is set for the duration of one apply and
+--     cleared in the same call, so nothing here leaks into a later boot.
+function SMRFixPack.ForceApply(id)
+	local targets = {}
+	if id ~= nil then
+		targets[1] = id
+	else
+		for _, fid in ipairs(SMRFixPack.order) do
+			local f = SMRFixPack.fixes[fid]
+			if f and (f.status == "inactive" or f.status == "error") then
+				targets[#targets + 1] = fid
+			end
+		end
+	end
+
+	local t = rawget(_G, "SMRFixPack_Force")
+	if type(t) ~= "table" then
+		t = {}
+		_G.SMRFixPack_Force = t
+	end
+
+	local forced, refused, skipped = {}, {}, {}
+	for _, fid in ipairs(targets) do
+		local entry, def = SMRFixPack.fixes[fid], SMRFixPack.defs[fid]
+		if not (entry and def and type(def.apply) == "function") then
+			log("ForceApply: %s is not a registered module", tostring(fid))
+		elseif entry.status == "active" then
+			log("ForceApply: %s is already active -- nothing to force", tostring(fid))
+			skipped[#skipped + 1] = fid
+		elseif entry.status == "disabled" then
+			log("ForceApply: %s is vetoed via SMRFixPack_Disabled -- not forcing", tostring(fid))
+			skipped[#skipped + 1] = fid
+		elseif entry.data_latched then
+			-- The honest refusal. See the header: its pass ran and found no target.
+			log("ForceApply: %s REFUSED -- it latched from a DataPatch pass (%s), not a preflight; re-running apply cannot reach that pass and would only mislabel it",
+				tostring(fid), entry.detail or "")
+			refused[#refused + 1] = fid
+		else
+			local prev = t[fid]
+			t[fid] = true
+			log("ForceApply: forcing %s (was inactive: %s)", tostring(fid), entry.detail or "")
+			run_apply(fid, def, entry)
+			t[fid] = prev
+			forced[#forced + 1] = string.format("%s=%s", fid, entry.status)
+		end
+	end
+
+	log("ForceApply: %d forced [%s]; %d refused as DataPatch latches [%s]; %d skipped [%s]",
+		#forced, table.concat(forced, ", "),
+		#refused, table.concat(refused, ", "),
+		#skipped, table.concat(skipped, ", "))
+	log("ForceApply: this rig is now in a DIAGNOSTIC state -- forced modules run bodies pinned to an older build. Restart the game to return to the shipped configuration.")
+	return forced, refused
+end
 
 -- Console helper: print what the pack did this session.
 function SMRFixPack.ListFixes()
