@@ -18,8 +18,8 @@ Paste into a fresh Claude Code session. Written **2026-09-08**, the day game
 ## 0 · What is ALREADY DONE — do NOT redo, do NOT re-derive
 
 The live published pack is **tree `version` 5** (`pdx_id` 156049, `steam_id`
-3787202810). **Five code changes are already committed since it**, and they ARE
-the patch. Read them, do not rebuild them:
+3787202810). **Four code changes are already committed since it**, and with the F115 gate
+you add they ARE the patch — `00_Core.lua` is NOT among them. Read them, do not rebuild them:
 
 | commit | file | what |
 |---|---|---|
@@ -27,7 +27,7 @@ the patch. Read them, do not rebuild them:
 | `2efbcf6` | `Fix_ExtractorStaffedPerformance.lua` | **F111** guard — `type(self.overtime) == "table"` (1.1.0 collapses it to a boolean) |
 | `2efbcf6` | `Fix_AutomationLawCompensation.lua` | **F112** gate — `test` content check; quiet where `Workplace.GetWorkersPerformance` exists |
 | `8bc6821` | `Fix_TrainCargoDumping.lua` | **F114** gate — declines where `MultiResourceDepotBase` exists |
-| `be4c99e` | `00_Core.lua` | the self-check **override surface** (`SMRFixPack_Force`, `SMRFixPack_NoUpdateDialog`, `SMRFixPack.ForceApply`) — **+151 lines, ships INERT** |
+| — | `00_Core.lua` | ⛔ **NOTHING. `be4c99e`'s override surface was REVERTED** per owner ruling 110 — see §3 B1. `00_Core.lua` is the shipped v5 file, unchanged. |
 
 ⛔ **`items.lua` needs NO change** — no module was added, renamed or dropped, so
 `H-10` is already satisfied. Verify, do not assume.
@@ -116,23 +116,23 @@ not an obsolete one. It gets re-armed properly in a later patch, not this one.
 
 ## 3 · TASK B — two open questions you must ANSWER, not assume
 
-### B1 · Does `00_Core`'s override surface ship? (**decision 110 — NEW, put it in the checklist**)
+### B1 · `00_Core`'s override surface — **RULED, ALREADY DONE, just verify**
 
-`be4c99e` adds **+151 lines** to `00_Core.lua`: `SMRFixPack_Force`,
-`SMRFixPack_NoUpdateDialog`, `SMRFixPack.ForceApply`, plus an `entry.data_latched`
-marker. It **ships inert** — nothing in the pack writes the override, and with
-the table unset every path is byte-for-byte the shipped behaviour. It has booted
-cleanly 4+ times including a 42-minute session.
+⚖️ **Owner ruling 2026-09-08 (decision 110): "110 should not go out to all
+players, that's a diagnostic tool only."** Actioned before this brief was
+handed over:
+- `Code/00_Core.lua` is **reverted to `ce77162`**, which IS the shipped v5 file —
+  so this is a return to a long-lived known-good state, not a new untested tree.
+  `grep -c "SMRFixPack_Force\|SMRFixPack_NoUpdateDialog\|ForceApply\|data_latched" Code/00_Core.lua`
+  must return **0**.
+- The whole mechanism moved to the Test Kit's `Code/97_ForceInactive.lua`, which
+  is local-only and never uploaded. ⭐ It needed nothing in the pack after all:
+  `SMRFixPack` is a plain global and `Require`/`fixes`/`defs`/`order` are public,
+  so the override installs from outside by swapping `SMRFixPack.Require` for the
+  duration of a re-apply. **The pack now ships ZERO diagnostic code.**
 
-⚠️ **But this patch's whole premise is "our fail-safe did not work."** Shipping
-151 lines of unrelated diagnostic scaffolding in that patch is a real risk-hygiene
-question, and the agent who wrote it (this session's predecessor) flagged it
-rather than waving it through. **Two routes, and the AUDIT link rules:**
-- **(a) ship it inert** — no new untested state; it is already exercised.
-- **(b) revert `00_Core.lua` to `ce77162` for the hotfix**, re-apply after — but
-  that CREATES a new untested tree, which is its own risk.
-⛔ Do not decide this alone. Put it in `PLAYTEST_CHECKLIST.md` as **110** with a
-recommendation, and let the audit link and the owner settle it.
+⛔ **Your job is to VERIFY that, not to redo it.** Confirm the pack's diff
+against live v5 contains only the five gate/guard files and nothing else.
 
 ### B2 · Does F116 belong in this patch?
 

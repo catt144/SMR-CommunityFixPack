@@ -24,7 +24,7 @@ source read (`F111`, `F112`, `F113`). ⛔ **The pack's self-checks did not catch
 any of it**, because they ask whether the target still EXISTS. That is the
 defect behind the defects, and it is the thing you are auditing.
 
-## 1 · The five-plus-one changes under audit
+## 1 · The five changes under audit
 
 Everything since live tree `version` **5**:
 
@@ -35,7 +35,7 @@ Everything since live tree `version` **5**:
 | `Fix_AutomationLawCompensation.lua` | F112 | gate (`test` content check, deliberately NOT named in the dialog) |
 | `Fix_TrainCargoDumping.lua` | F114 | gate (`MultiResourceDepotBase` exists ⇒ decline) |
 | `Fix_LandscapeUnitFilter.lua` | F115 | gate (added by the apply link) |
-| `00_Core.lua` | — | **+151 lines of diagnostic override surface, ships inert** |
+| `00_Core.lua` | — | ⛔ **UNCHANGED from shipped v5.** The +151-line override surface was reverted per owner ruling 110; verify that in §2c. |
 
 ## 2 · What you must actually do (not a checklist to tick — findings to produce)
 
@@ -71,16 +71,23 @@ errors verbatim. ⚠️ Confirm the log you are reading was copied **after
 `Mars.exe` exited** — mid-session copies produced a wrong count twice on
 2026-09-08 (a "1" that was 6; a "30" that was 157).
 
-### 2c · Rule on decision 110 — does the `00_Core` override surface ship?
+### 2c · Verify decision 110 was actioned cleanly
 
-+151 lines of diagnostic scaffolding (`SMRFixPack_Force`,
-`SMRFixPack_NoUpdateDialog`, `SMRFixPack.ForceApply`, `entry.data_latched`) in a
-patch whose premise is "our fail-safe did not work." It ships inert and is
-exercised; reverting creates a new untested tree. **You rule, with a reason.**
-⛔ Whichever way you rule, verify the claim "ships inert" YOURSELF — read
-`Require`'s failure branch, `ctx.latch`, `ctx.heal`, and the dialog thread, and
-confirm that with `SMRFixPack_Force` unset every path is byte-identical in
-BEHAVIOUR to `ce77162`. That claim is the entire basis for shipping it.
+⚖️ **Owner ruled 2026-09-08: the override surface does NOT ship — "that's a
+diagnostic tool only."** `Code/00_Core.lua` was reverted to `ce77162` (the
+shipped v5 file) and the mechanism moved wholly into the Test Kit's
+`Code/97_ForceInactive.lua`.
+
+⛔ **Verify, do not assume:**
+- `Code/00_Core.lua` is byte-identical to the shipped v5 file. `git diff` it
+  against the last commit that touched it before 2026-08-30.
+- The pack's diff vs live v5 contains **only** the five gate/guard files.
+- The Test Kit replacement actually works from outside — it swaps
+  `SMRFixPack.Require` around a re-apply and replicates `run_apply`'s verdict
+  handling **by hand**. ⚠️ That hand-copy can drift from `00_Core`. Check it
+  matches, and say so if it does not.
+- ⚠️ The Test Kit is NOT in the shipped artifact, so a bug there cannot reach a
+  player — weigh your effort accordingly and do not spend the patch's time on it.
 
 ### 2d · Audit the PATCH NOTES as hard as the code
 
