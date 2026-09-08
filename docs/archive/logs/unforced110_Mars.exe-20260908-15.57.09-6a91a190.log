@@ -243,3 +243,32 @@ Game loaded on map BlankBig_02 in 5893 ms
 						Lua 0:00:25:136
 [mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
 [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:01:03:871
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_LandscapeUnitFilter.lua:63: attempt to index a nil value (global 'Landscapes')
+  Mod/SMR_CommunityFixPack/Code/Fix_LandscapeUnitFilter.lua(63):  global LandscapeForEachUnit
+  Lua/Landscape/ClearWasteRockConstructionSite.lua(81):  method GetUnitsUnderneath
+  Lua/Buildings/ConstructionSite.lua(1915):  method ScatterUnitsUnderneath
+  Lua/Landscape/ClearWasteRockConstructionSite.lua(75):  method InitBlockPass
+  Lua/Landscape/ClearWasteRockConstructionSite.lua(65):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(243):  method GameInit
+  CommonLua/Classes/_object.lua(192):   <>
+        --- end of stack
+Locals:
+	                mark |   object Map
+	            callback |   number 51
+	 foreach_params_unit |    table 0x000001A85AF61910 #0
+						Lua 0:01:03:873
+[LUA ERROR] attempt to index a nil value (global 'Landscapes')
+  Mod/SMR_CommunityFixPack/Code/Fix_LandscapeUnitFilter.lua(63):  global LandscapeForEachUnit
+  Lua/Landscape/ClearWasteRockConstructionSite.lua(81):  method GetUnitsUnderneath
+  Lua/Buildings/ConstructionSite.lua(1915):  method ScatterUnitsUnderneath
+  Lua/Buildings/ConstructionSite.lua(1146):  method Initialize
+  Lua/Buildings/ConstructionSite.lua(801):   <>
+        --- end of stack
+Locals:
+	                mark |   object Map
+	            callback |   number 51
+	 foreach_params_unit |    table 0x000001A85AF61910 #0
+						Lua 0:01:03:874
+[mod] Error in mod Relaunched Fix Pack (id SMR_CommunityFixPack, v1.00-005) from appdata

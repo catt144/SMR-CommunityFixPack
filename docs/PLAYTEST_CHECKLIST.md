@@ -132,6 +132,33 @@ completed tests move whole to
 > files pass a block-balance check, but **your next boot log is the real syntax test**. If no
 > `[CommunityFixPack]` lines appear at all, that is my error — revert to `ce77162` and tell me.
 
+> ⛔ **F115 — A CONFIRMED, LIVE, SHIPPED P1, REPRODUCED ON DEMAND 2026-09-08. ITEM 109.**
+> You hit "flatten landscaping" on a fresh 1.1.0 colony in the SHIPPED configuration and the engine's own
+> mod-error dialog named **Relaunched Fix Pack**. Cause is pinned, not guessed: 1.1.0 changed the SIGNATURE of
+> the global `Fix_LandscapeUnitFilter` replaces — `LandscapeForEachUnit(mark, callback, ...)` became
+> `(map, mark, callback, ...)` (`Landscaping.lua:509`) — so every argument arrives one slot late. The log's own
+> `Locals` block proves it (`mark | object Map`, `callback | number 51`). ⛔ **Every instrument we own missed
+> it**: the self-check asks only whether the NAME exists (it does), and the F113 call-site sweep checked 106
+> global names and 174 method names — **names**, which is exactly what survived a signature change. Same
+> failure shape as `EF-078`'s path-checked-by-last-segment finding. **Check the thing, not its label.**
+> ⚠️ **Worse than the popup**: the throw aborts `ConstructionSite:Initialize` mid-body, so
+> `CreateResourceStockpile()` never runs. ⛔ How far that goes in play is UNMEASURED.
+> ⚠️ **Separate from the RC Dozer rule.** 1.1.0 needs an RC Dozer (or `LandscapingNanites`) to service a
+> landscaping job (`LandscapeConstructionSiteBase.lua:159`; status "You need an RC Dozer for Landscaping").
+> **Drones ignoring landscaping without a dozer is vanilla, not us.** ⛔ Whether that rule is NEW is
+> unverifiable — the 1.0.7 tree is gone (`EF-075`). Separating control: put a dozer on the job.
+> ⭐ **The fix is still WANTED — 1.1.0 did not repair F34(d)** (`Landscaping.lua:520` still passes `callback`
+> instead of its own `filter_embark`). So this is a live fix with a broken body, not an obsolete one.
+> **109. Gate it, or repair it?** **(a) GATE** — self-disable on 1.1.0, the F113 shape; smallest change, stops
+> the throw, costs players the F34(d) correction. **(b) REPAIR** — rewrite the body to 1.1.0's shape and get
+> F34(d) back too. ⛔ A repair pins us to 1.1.0's signature and re-breaks on the next one unless a gate goes in
+> as well. **I recommend (a) now and (b) considered separately with a control** — a safety-first patch should
+> not carry an unverified new body. ⛔ Nothing shipped either way without your word.
+> ✅ **Bounded by measurement, not hope**: `tools/sigcheck.py` (new) compared every replacement's parameter list
+> against the shipped tree — **54 sites, 1 MISMATCH (this), 1 ABSENT (`TouristSatisfaction`, already off), 52
+> OK.** ⛔ It does NOT cover the 15 `SetGlobal` sites or 5 anonymous function literals, and an `OK` never clears
+> a same-arity BODY change. **Bounded, not cleared.**
+
 > ⭐ **FIELD REPORT 2026-09-08 — ITEM 102, and it jumps the queue.** A player
 > (*Ranger Dimitri*, Steam) reports: **"Using this mod cause them to not move between stations. When
 > I turn it off they work as normal."** — trains, on 1.1.0, with their own A/B. `bugs/F114.md` has
