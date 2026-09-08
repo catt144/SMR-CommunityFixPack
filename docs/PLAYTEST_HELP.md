@@ -110,9 +110,33 @@ Cheat the **setup**, never the **mechanism under observation**. The fixes patch
 decision logic; cheats inject state (money, goods, people, buildings) — state
 injection is exactly what the scenarios need. Each PT's Setup line names its
 cheats; when one must stay OFF, the PT says so. Standing accelerators — use
-freely: `CheatAddFunding`, `CheatCompleteAllConstructions`, `CheatFillAllStorages`,
-`CheatResearchAll`, `CheatSpawnNColonists`, `CheatUpdateAllWorkplaces`,
-`dbg_ToggleRocketInstantTravel`, `CheatToggleInfopanelCheats`, `MultiCheat`.
+freely: `CheatAddFunding`, `CheatCompleteAllConstructions`,
+`CheatSpawnNColonists`, `CheatUpdateAllWorkplaces`,
+`dbg_ToggleRocketInstantTravel`, `CheatToggleInfopanelCheats`, `MultiCheat`,
+`CheatUnlockAllBuildings`.
+
+⛔ **TWO OF THESE DIED IN GAME 1.1.0 (verified against the shipped source
+2026-09-08, after the owner hit it live).** 1.1.0 converted them from global
+functions into `CheatDef` presets, so the old names raise "attempt to call a
+nil value" — or, worse, are simply not there:
+
+| dead on 1.1.0 | use instead | why |
+|---|---|---|
+| `CheatResearchAll` | `CheatDefs.ResearchAll:run()` | now `CheatDef` `id = "ResearchAll"` (`Data/CheatDef.lua:848-864`). This is the exact call the game itself makes at `Lua/Cheats.lua:231`. |
+| `CheatFillAllStorages` | `CheatDefs.FillAllStorages:run()` | now `CheatDef` `id = "FillAllStorages"` (`Data/CheatDef.lua:388-395`). |
+
+⚠️ `ResearchAll`'s body opens `if not UIPlayer then return end`, so on 1.1.0 it
+can **silently do nothing** rather than error. If it no-ops, use
+`CheatDefs.UnlockAllTech:run()`, which goes through `UIColony` instead
+(`Data/CheatDef.lua:914-931`).
+⭐ For provisioning, `MultiCheat()` is still a global and still the best single
+line: all buildings + all sponsor buildings + deep-scanned map + research
+everything (`Lua/Cheats.lua:227-232`).
+⛔ The general rule this exposed: **a cheat name is a claim too.** After any
+game update, check it against `ModTools\Src` before writing a provisioning
+plan around it — every other name in the list above was re-verified on
+2026-09-08 and still resolves.
+
 Two standing cautions:
 
 - **Notification/warning windows run on GAME time**, not wall-clock (measured

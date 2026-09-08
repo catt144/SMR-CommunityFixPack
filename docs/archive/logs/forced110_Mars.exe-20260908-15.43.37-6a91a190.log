@@ -1,0 +1,300 @@
+					Render 0:00:00:005
+*** executable info
+					Render 0:00:00:006
+Timestamp:     	6a91a190
+Date:          	Fri Aug 28 10:56:16 2026
+Command line:  	
+Compiler:      	195136247, 142 (VS 2019) or newer
+
+
+*** hardware info
+CPU name      	Intel(R) Core(TM) i7-14700K
+CPU MHz       	3418
+CPU cores     	20/28
+Phys. Memory   	65278 MBytes
+Memory In Use  	53%
+Disk Free      	829767 MBytes
+
+
+*** OS info
+OS:            	Windows 11
+Version:       	10.0.26100 
+
+
+*** Debug::Init()
+
+
+					Render 0:00:00:069
+Steam initialized (AppId 3215050)
+					Render 0:00:00:090
+Drive type for game installation: SSD, savegames: SSD
+Language: English
+					Render 0:00:01:490
+*** graphics info
+GPU                            	NVIDIA GeForce RTX 4080 Feature Level: 12.1 {  DoublePrecisionFloatShaderOps: 1 OutputMergerLogicOp: 1 MinPrecisionSupport: 2 TiledResourcesTier: 4 ResourceBindingTier: 3 PSSpecifiedStencilRefSupported: 0 TypedUAVLoadAdditionalFormats: 1 ROVsSupported: 1 ConservativeRasterizationTier: 3 MaxGPUVirtualAddressBitsPerResource: 40 StandardSwizzle64KBSupported: 0 CrossNodeSharingTier: 0 CrossAdapterRowMajorTextureSupported: 0 VPAndRTArrayIndexFromAnyShaderFeedingRasterizerSupportedWithoutGSEmulation: 1 ResourceHeapTier: 2 NotZeroedPools: 1 UMA: 0 UnalignedBlockTextures: 1}
+API                            	d3d12
+GPU Driver Version             	32.0.16.1074
+GPU Driver Package Version     	610.74
+GPU Dedicated Video Memory     	16048 MB
+					Render 0:00:01:640
+
+Libs: Network, Sequences, MouseTrackWin, DumbAI, MapGen, Paradox, TriggersAndEvents, Notifications, Research, Resources, Tutorial, Objectives 
+
+					Render 0:00:01:882
+
+Platform: desktop, editor, goldmaster, paradox, pc, steam
+
+					Render 0:00:02:841
+*** audio info
+Audio Endpoint                 	Speakers (Razer Leviathan V2)
+						Lua 0:00:02:842
+Lua revision: 403908
+Assets revision: 33006
+Steam AppID: 3215050
+Build version: 1.1.0.403908
+Build branch:  Release
+						Lua 0:00:04:831
+Account storage loaded successfully in 1 ms
+DLC norman loaded, lua revision 403908, assets revision 33006
+DLC thomas loaded, lua revision 403908, assets revision 33006
+						Lua 0:00:04:834
+[mod] Loaded mod def Relaunched Fix Pack: Opt-In Modules (id SMR_CommunityOptInPack, v1.00-000) unpacked from appdata
+[mod] Loaded mod def Community Fix Pack — Test Kit (id SMR_CommunityFixPackTestKit, v0.00-001) unpacked from appdata
+[mod] Loaded mod def Relaunched Fix Pack (id SMR_CommunityFixPack, v1.00-005) unpacked from appdata
+						Lua 0:00:05:215
+[mod] [SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+[mod] [SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[mod] [SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+[SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+						Lua 0:00:05:221
+[mod] [CommunityFixPack] =====================================================================
+[mod] [CommunityFixPack] SELF-CHECK OVERRIDE LEG ARMED (Test Kit 97_ForceInactive.lua).
+[mod] [CommunityFixPack] Self-disabled modules will install their PINNED bodies over changed
+[mod] [CommunityFixPack] game code. Throws are EXPECTED and are the measurement.
+[mod] [CommunityFixPack] DIAGNOSTIC RIG STATE -- not a supported configuration, and NOT valid
+[mod] [CommunityFixPack] for any A/B: disarm before measuring what the shipped pack does.
+[mod] [CommunityFixPack] =====================================================================
+[mod] [CommunityFixPack] 97_ForceInactive: pack not loaded yet -- the override table will be read by Require at Register time
+[mod] [SMRTest][carry] fixture-carry dump available — run SMRTest.FixtureCarry()
+[mod] [CommunityFixPack] CaveInsNoDisasters: applied
+[mod] [CommunityFixPack] MeteorFrequency: SELF-CHECK OVERRIDDEN by SMRFixPack_Force (Meteors thread function not found (game update changed it?)) -- installing anyway; DIAGNOSTIC rig state, NOT a supported configuration
+[mod] [CommunityFixPack] MeteorFrequency: applied
+[mod] [CommunityFixPack] UpgradeModifierLeak: applied
+[mod] [CommunityFixPack] NightShiftWork: applied
+[mod] [CommunityFixPack] MilestoneCrash: applied
+						Lua 0:00:05:222
+[mod] [CommunityFixPack] WispRewards: applied
+[mod] [CommunityFixPack] TouristApplicants: applied
+[mod] [CommunityFixPack] TrainsToVoid: applied
+[mod] [CommunityFixPack] LanderEmptyLaunch: applied
+[mod] [CommunityFixPack] LanderCargoRatchet: SELF-CHECK OVERRIDDEN by SMRFixPack_Force (the Earth export-reward query is gone (game update changed it?)) -- installing anyway; DIAGNOSTIC rig state, NOT a supported configuration
+[mod] [CommunityFixPack] LanderCargoRatchet: applied
+[mod] [CommunityFixPack] LanderReturnFuel: applied
+[mod] [CommunityFixPack] ShelterReflex: applied
+[mod] [CommunityFixPack] BrokenTrackSalvage: applied
+[mod] [CommunityFixPack] TrackSalvageWipe: applied
+						Lua 0:00:05:223
+[mod] [CommunityFixPack] LakeEntombment: applied
+[mod] [CommunityFixPack] GhostFarmOxygen: applied
+[mod] [CommunityFixPack] RocketDroneChurn: applied
+[mod] [CommunityFixPack] ShuttleTransportCache: applied
+[mod] [CommunityFixPack] VacuumWalks: SELF-CHECK OVERRIDDEN by SMRFixPack_Force (walk-distance constants not found (game update changed them?)) -- installing anyway; DIAGNOSTIC rig state, NOT a supported configuration
+[mod] [CommunityFixPack] VacuumWalks: SELF-CHECK OVERRIDDEN by SMRFixPack_Force (walk-distance constants not found (game update changed them?)) -- installing anyway; DIAGNOSTIC rig state, NOT a supported configuration
+[mod] [CommunityFixPack] VacuumWalks: applied
+[mod] [CommunityFixPack] ArrivalDeaths: applied
+[mod] [CommunityFixPack] DroneUnreachableForever: SELF-CHECK OVERRIDDEN by SMRFixPack_Force (the unreachables expiry mechanism is gone (game update changed it?)) -- installing anyway; DIAGNOSTIC rig state, NOT a supported configuration
+[mod] [CommunityFixPack] DroneUnreachableForever: applied
+[mod] [CommunityFixPack] StaleReservations: applied
+[mod] [CommunityFixPack] CrystalMysteryHang: applied
+						Lua 0:00:05:224
+[mod] [CommunityFixPack] TouristSatisfaction: SELF-CHECK OVERRIDDEN by SMRFixPack_Force (Colonist.UpdateSatisfaction not found) -- installing anyway; DIAGNOSTIC rig state, NOT a supported configuration
+[mod] [CommunityFixPack] TouristSatisfaction: applied
+[mod] [CommunityFixPack] TrainPlatformWedge: applied
+[mod] [CommunityFixPack] LowStorageWarning: SELF-CHECK OVERRIDDEN by SMRFixPack_Force (GetCommandCenterLifeSupportGrids not found) -- installing anyway; DIAGNOSTIC rig state, NOT a supported configuration
+[mod] [CommunityFixPack] LowStorageWarning: SELF-CHECK OVERRIDDEN by SMRFixPack_Force (supply-warning constants not found (game update changed them?)) -- installing anyway; DIAGNOSTIC rig state, NOT a supported configuration
+[mod] [CommunityFixPack] LowStorageWarning: SELF-CHECK OVERRIDDEN by SMRFixPack_Force (supply-warning constants not found (game update changed them?)) -- installing anyway; DIAGNOSTIC rig state, NOT a supported configuration
+[mod] [CommunityFixPack] LowStorageWarning: applied
+[mod] [CommunityFixPack] CommandCenterNumbers: applied
+[mod] [CommunityFixPack] DomeOverviewHighlight: applied
+[mod] [CommunityFixPack] TrainCargoDumping: applied
+[mod] [CommunityFixPack] UniversityOvertraining: applied
+[mod] [CommunityFixPack] DestroyedTunnels: applied
+[mod] [CommunityFixPack] DustSicknessBiorobots: applied
+[mod] [CommunityFixPack] DustSicknessDamage: applied
+						Lua 0:00:05:225
+[mod] [CommunityFixPack] GeneForging: applied
+[mod] [CommunityFixPack] MirrorSphereSite: applied
+[mod] [CommunityFixPack] PayloadTemplateRefill: applied
+[mod] [CommunityFixPack] AsteroidLanderAvailable: SELF-CHECK OVERRIDDEN by SMRFixPack_Force (PlanetaryAsteroidVisitPossible not found) -- installing anyway; DIAGNOSTIC rig state, NOT a supported configuration
+[mod] [CommunityFixPack] AsteroidLanderAvailable: applied
+[mod] [CommunityFixPack] ShuttleHubOffAvailable: applied
+[mod] [CommunityFixPack] FreedHousingNotice: applied
+[mod] [CommunityFixPack] DomeFreeSpaceMismatch: applied
+[mod] [CommunityFixPack] SmallLandscapeSites: applied
+[mod] [CommunityFixPack] LandscapeUnitFilter: applied
+						Lua 0:00:05:226
+[mod] [CommunityFixPack] RocketInteractGuard: applied
+[mod] [CommunityFixPack] TrackConnectorPingPong: applied
+[mod] [CommunityFixPack] TrackTunnelPowerBridge: applied
+						Lua 0:00:05:227
+[mod] [CommunityFixPack] GridGlobalStorage: SELF-CHECK OVERRIDDEN by SMRFixPack_Force (GetGridGlobalStorage not found) -- installing anyway; DIAGNOSTIC rig state, NOT a supported configuration
+[mod] [CommunityFixPack] GridGlobalStorage: applied
+[mod] [CommunityFixPack] LastTransmissionStorage: applied
+[mod] [CommunityFixPack] GraphConsumedCaption: applied
+[mod] [CommunityFixPack] MoraleComfortTooltip: applied
+[mod] [CommunityFixPack] TrainWaitTime: applied
+[mod] [CommunityFixPack] FounderTraitNotification: applied
+[mod] [CommunityFixPack] StorageRateModifiers: applied
+[mod] [CommunityFixPack] SequenceLatents: applied
+[mod] [CommunityFixPack] IndependenceTerraforming: applied
+						Lua 0:00:05:228
+[mod] [CommunityFixPack] TrackSalvageRefund: applied
+[mod] [CommunityFixPack] LayoutTechLock: applied
+[mod] [CommunityFixPack] TrainMinors: applied
+[mod] [CommunityFixPack] DroneTransportMinors: applied
+[mod] [CommunityFixPack] AnomalyCaveInMap: applied
+[mod] [CommunityFixPack] TechDescriptionBuilding: applied
+[mod] [CommunityFixPack] BombardmentSpread: applied
+[mod] [CommunityFixPack] ExtenderFlapChurn: applied
+[mod] [CommunityFixPack] DisasterPredictionLeak: applied
+[mod] [CommunityFixPack] MeteorStormWedge: SELF-CHECK OVERRIDDEN by SMRFixPack_Force (MeteorStorm thread function not found (game update changed it?)) -- installing anyway; DIAGNOSTIC rig state, NOT a supported configuration
+[mod] [CommunityFixPack] MeteorStormWedge: applied
+						Lua 0:00:05:229
+[mod] [CommunityFixPack] RainsDeadlock: SELF-CHECK OVERRIDDEN by SMRFixPack_Force (RainsDisasterLoop not found) -- installing anyway; DIAGNOSTIC rig state, NOT a supported configuration
+[mod] [CommunityFixPack] RainsDeadlock: applied
+[mod] [CommunityFixPack] FirstAsteroidPrefabs: applied
+[mod] [CommunityFixPack] SaintBlessing: applied
+[mod] [CommunityFixPack] DustDevilsDescrMap: applied
+[mod] [CommunityFixPack] AstrogeologistExtractors: applied
+[mod] [CommunityFixPack] SinkholeIndestructible: applied
+[mod] [CommunityFixPack] DustStormUndergroundBreaks: applied
+[mod] [CommunityFixPack] DustDevilSpawnGate: applied
+[mod] [CommunityFixPack] ExoticDepositSign: applied
+						Lua 0:00:05:230
+[mod] [CommunityFixPack] AutomationLawCompensation: inactive (vanilla no longer compensates the automation-law worker cut for anyone (1.1.0) — nothing to correct)
+[mod] [CommunityFixPack] LocalizedUIText: Back to Earth rollover wrapped on 1 rocket class(es): customUniversalRocket
+[mod] [CommunityFixPack] LocalizedUIText: applied
+[mod] [CommunityFixPack] SpaceYDroneCapBullet: applied
+[mod] [CommunityFixPack] LandscapeCostRefresh: applied
+[mod] [CommunityFixPack] ExtractorStaffedPerformance: applied
+[mod] [CommunityFixPack] JumboCaveReinforcementWedge: applied
+[mod] [CommunityFixPack] SaveSanitizer: applied
+						Lua 0:00:06:002
+[mod] [CommunityFixPack] SaintBlessing: inactive (no dome-colonists trait presets)
+[mod] [CommunityFixPack] SinkholeIndestructible: the St. Elmo's Fire sinkhole is now indestructible, like every other mystery set-piece
+						Lua 0:00:06:093
+Reloading done in 1259 ms
+						Lua 0:00:06:094
+Available DLCs: norman(Feeding the Future),thomas(Interplanetary Codex) 
+						Lua 0:00:06:516
+[preset] Preset postprocess took 152 ms.
+						Lua 0:00:06:562
+482 / 482 particle streams loaded in 39 ms.
+5 / 5 particle streams loaded in 0 ms.
+						Lua 0:00:06:564
+[mod] [CommunityFixPack] DustSicknessDamage: inactive (TraitPresets.DustSickness has no param/daily_update_func)
+[mod] [CommunityFixPack] LastTransmissionStorage: inactive (the shipped presets are already correct)
+[mod] [CommunityFixPack] IndependenceTerraforming: inactive (Independence_TerraformingProjects no longer modifies SpecialProjectResourcesModifier)
+[mod] [CommunityFixPack] AstrogeologistExtractors: added 2 missing extractor entr(y/ies) to the astrogeologist profile (2 already present)
+						Lua 0:00:06:768
+[mod] [CommunityFixPack] DustSicknessDamage: inactive (TraitPresets.DustSickness has no param/daily_update_func)
+						Lua 0:00:06:769
+[mod] [CommunityFixPack] LastTransmissionStorage: inactive (the shipped presets are already correct)
+[mod] [CommunityFixPack] IndependenceTerraforming: inactive (Independence_TerraformingProjects no longer modifies SpecialProjectResourcesModifier)
+[mod] [CommunityFixPack] SaintBlessing: corrected 1 dome-colonists trait modifier label(s) of 2
+						Lua 0:00:06:878
+[mod] Loaded mod items for: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack
+						Lua 0:00:07:356
+[mod] [CommunityFixPack] update report: 2 fix(es) deactivated over a game-code change: DustSicknessDamage, IndependenceTerraforming
+[mod] [CommunityFixPack] update dialog suppressed on this rig (SMRFixPack_NoUpdateDialog)
+						Lua 0:00:07:787
+[PdxSDK] Started up. Took 1157
+						Lua 0:00:08:188
+[Braze] SessionStart error The server name or address could not be resolved
+
+						Lua 0:00:08:189
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:08:294
+[Braze] SessionStart error The server name or address could not be resolved
+
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:24:691
+Load Game: 
+	lua_revision: 396349 (last saved with) 
+	orig_lua_revision: <395401 (created with) 
+	assets_revision: 31031 
+
+	mods: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack, SMR_CommunityOptInPack 
+						Lua 0:00:24:698
+*** Reloading assets from folder 'BinAssets/'
+						Lua 0:00:27:217
+*** Assets reloaded in 2.5 s, read 359.3 MB, read speed 142.6 MB/s, average read 8137 bytes.
+						Lua 0:00:27:707
+Map 'BlankUnderground_04' remapped to 'BlankUnderground_ImpassableHighGround_04'
+						Lua 0:00:31:408
+LoadGame error: old version
+						Lua 0:00:33:966
+Load Game: 
+	lua_revision: 403908 (last saved with) 
+	orig_lua_revision: 403908 (created with) 
+	assets_revision: 33006 
+
+	dlcs: norman, thomas 
+
+	mods: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack 
+						Lua 0:00:36:642
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:36:652
+game_settings:
+    sponsor: NASA
+    profile: rocketscientist
+    founding_faction: AssemblyOfPlanets
+    rival_colonies: IMM, CNSA, ESA
+    mystery_random: 
+    game_rules: (none)
+more_game_settings: save_game_id: lD1jaGcMJOxaiFcU, mystery: none, coordinates: 16N120E, landing_spot: , logo: USA
+map_conditions: altitude: -3122, temperature: -25, cold_wave: 61, dust_devils: 44, dust_storm: 123, meteors: 109
+map_resources: concrete: 109, metals: 176, precious_metals: 176, water: 212
+						Lua 0:00:36:679
+[mod] [CommunityFixPack] MeteorFrequency: one-shot heal — persisted Meteors thread was not created; restarting onto vanilla's body (latch false -> 1.0.5)
+[mod] [CommunityFixPack] SaveSanitizer: F48 station-connector pass repaired 0 of 0 track(s) walked (0 raised)
+Game Loaded in 2714 ms
+						Lua 0:00:36:705
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:37:263
+Game loaded on map BlankBig_02 in 3397 ms
+						Lua 0:00:39:564
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:56:892
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_LowStorageWarning.lua:125: attempt to call a nil value (global 'GetCommandCenterLifeSupportGrids')
+  Mod/SMR_CommunityFixPack/Code/Fix_LowStorageWarning.lua(125):  method GatheredResourcesOnHourlyUpdate
+  Lua/City.lua(150):  method HourlyUpdate
+  Lua/City.lua(542):   <>
+  [C](-1):  global procall
+  CommonLua/Core/cthreads.lua(20):  global Msg
+  Lua/DayTime.lua(72):   <>
+        --- end of stack
+Locals:
+	                self |   object City at invalid pos on map 1
+	                 map |   object Map
+	        notification |      nil
+	maintenance_resources |    table 0x000002D277A73678 #0
+	transportable_resources |    table 0x000002D27DEF6120 #0
+	   resource_overview |   object ResourceOverview at invalid pos on map 1
+	       food_consumed |   number 0
+	          food_total |   number 30000
+	           num_hours |   number 0
+	             objects |      nil
+	   electricity_grids |    table 0x000002D27DE01738 #1
+	           to_remove |    table 0x000002D27E89B9D0 #0
+	          GetGridObj | function 0x000002D27E899AF8
+[mod] Error in mod Relaunched Fix Pack (id SMR_CommunityFixPack, v1.00-005) from appdata
