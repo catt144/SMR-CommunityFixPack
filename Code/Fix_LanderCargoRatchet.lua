@@ -80,6 +80,16 @@ SMRFixPack.Register("LanderCargoRatchet", {
 			{ class = "UniversalRocketBase", method = "ResolveAutoModeTarget" },
 			{ class = "UniversalRocketBase", method = "IsOnAutoModeTargetLocation" },
 			{ class = "UniversalRocketBase", method = "IsSpecialAutomode" },
+			-- F113 (2026-09-08): the replacement body below calls this at its tail
+			-- (the low-funding auto-stop). Game 1.1.0 DELETED it (0 hits tree-wide;
+			-- the tail became `GetEarthAutomodeFundingState() == "blocked"`,
+			-- Lua/UniversalRocket.lua:2095) and rewrote CreateAutoCargoRequest
+			-- wholesale. Requiring it makes the module DECLINE on such a tree
+			-- instead of installing a 1.0.7 body that throws hourly while landed at
+			-- Earth AND silently reverts the rewritten function. `{class, method}`
+			-- form on purpose: this is patch rot and must set `update_suspect`.
+			{ class = "UniversalRocketBase", method = "GetEarthExportResPossibleReward",
+			  reason = "the Earth export-reward query is gone (game update changed it?)" },
 			{ class = "CargoTransporterNew", method = "GetCargoWeightCapacity",
 			  reason = "CargoTransporterNew cargo-request methods not found (game update changed them?)" },
 			{ class = "CargoTransporterNew", method = "SetCargoRequest",

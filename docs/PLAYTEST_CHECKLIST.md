@@ -74,6 +74,28 @@ completed tests move whole to
 > OFF, so that record is stale. It is also a confound for any train leg. Leave it on (the 08-12
 > both-mods-loaded normal config) or untick for a clean F114 A/B? I recommend untick for the first run.
 
+> ⭐ **F114 — A SOURCE-PINNED CANDIDATE, 2026-09-08 (later), from the SAFETY_FIRST_FIXES session. ITEM 106.**
+> `Fix_TrainCargoDumping` fully replaces `Train:UnloadAll` with a 1.0.7 body. 1.1.0 rewrote that function
+> with two nil-guards ours lacks (`Train.lua:785-787`, `:794-795`) — and on 1.1.0 they are needed: the
+> Station's depot base is now `MultiResourceDepotBase`, which creates **no demand request** for a resource
+> whose lock state is not "enabled" (`MultiResourceCubeVisuals.lua:378`) while `Station:Init` still lists
+> **every** transportable resource as storable (`Station.lua:110-111`). `BlackCube` and `Seeds` ship
+> `LockState = "hidden"`. ⇒ on an ordinary 1.1.0 colony our copy indexes `station.demand["BlackCube"]`,
+> nil, at `Fix_TrainCargoDumping.lua:89` on the first unload at any station; the command dies, the train
+> idles, `NewHour` restarts it, it throws again. Pack off ⇒ vanilla's guarded body ⇒ trains move. That is
+> the reporter's A/B — **as a prediction.** Full chain with every line in `bugs/F114.md`.
+> ⭐ **The control costs 10 seconds and needs no provisioning**: in a 1.1.0 colony, select any station,
+> console: `local st = SelectedObj; for _, r in ipairs(st.storable_resources) do if not st.demand[r] then print("no demand:", r) end end`
+> — it should print `BlackCube` (and `Seeds`). Nothing printed ⇒ the candidate is dead. With the pack on
+> and a train at a station, the log should carry `attempt to index a nil value` citing
+> `Fix_TrainCargoDumping.lua:89`. **106. If the control confirms it: gate the module so it self-disables on
+> 1.1.0 (the F113 shape — `Require` test on `MultiResourceDepotBase` existing; body in the entry), which
+> restores vanilla's rewritten `UnloadAll` for every 1.1.0 player — or wait for the reporter's log first?**
+> I recommend gate-on-confirmation: it is a self-disable, not a new behaviour, and the harm is a P1 field
+> report. ⛔ Not done in this session — the brief forbids a train repair without a control, correctly.
+> Reply draft for the reporter (item 102) is now in `bugs/F114.md`, asking for the log (which would carry
+> that exact line) and the save.
+
 > ⭐ **FIELD REPORT 2026-09-08 — ITEM 102, and it jumps the queue.** A player
 > (*Ranger Dimitri*, Steam) reports: **"Using this mod cause them to not move between stations. When
 > I turn it off they work as normal."** — trains, on 1.1.0, with their own A/B. `bugs/F114.md` has

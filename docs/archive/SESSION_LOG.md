@@ -8,6 +8,45 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-08 (later) — SAFETY_FIRST_FIXES: three modules gated/guarded for 1.1.0 (source-read), and a source-pinned F114 candidate
+
+tags: 1.1.0 F111 F112 F113 F114 F46 EF-078 EF-079 items-102-106 Fix_LanderCargoRatchet Fix_ExtractorStaffedPerformance Fix_AutomationLawCompensation Fix_TrainCargoDumping SAFETY_FIRST_FIXES
+
+Brief `prompts/SAFETY_FIRST_FIXES.md`, all four §2 items. Every claim re-derived against the 1.1.0 tree before
+acting; all held, with one cosmetic correction (the law data uses `'Prop', "max_workers"` positional form, not
+`Prop =`). ⚠️ Ran concurrently with the owner's first 1.1.0 launch and with a sibling session that landed
+`EF-078`–`EF-080`, items 103–105 and the trains sitting brief mid-leg (`c81e6f6`) — this leg pulled and built
+on that rather than duplicating it.
+
+**B/C/D landed in `Code/`, parse-swept, NOT measured** (no 1.1.0 boot has run with this tree): F113 —
+`Fix_LanderCargoRatchet` now `Require`s the deleted `GetEarthExportResPossibleReward` (`{class, method}`,
+sets `update_suspect`) so it declines on 1.1.0 instead of installing a body that throws hourly and reverts the
+rewritten function; F111 — `Fix_ExtractorStaffedPerformance`'s guard is `type(self.overtime) == "table"`,
+correct on both shapes; F112 — `Fix_AutomationLawCompensation` gains a `test` gate (quiet where
+`Workplace.GetWorkersPerformance` exists), its one assumption written into the module comment. Statuses stay
+`filed`. Predicted next boot: the dialog count moves 11 → 12 (F113 joins; F112 is a `test` entry and does not
+count). ⛔ Counts are READ — if the live number disagrees, that is a finding.
+
+**A (F114) — narrowed to a source-pinned, runtime-UNCONFIRMED candidate, no repair shipped.**
+`Fix_TrainCargoDumping` fully replaces `Train:UnloadAll` with a 1.0.7 body; 1.1.0's own body gained nil-guards
+(`Train.lua:785-787`, `:794-795`) that are now load-bearing: Station's depot base is `MultiResourceDepotBase`,
+which registers NO demand request for a lock-state-hidden resource (`MultiResourceCubeVisuals.lua:378`) while
+`Station:Init` lists every transportable resource as storable (`Station.lua:110-111`); `BlackCube`/`Seeds` ship
+`LockState = "hidden"`. ⇒ our copy indexes nil at `Fix_TrainCargoDumping.lua:89` on the first unload; the
+command dies, `NewHour` restarts it, hourly. Reproduce-on-1.1.0 was NOT possible this leg: no 1.1.0 colony
+exists (`EF-079`, the whole fixture library is branch-locked) and the game was in the owner's hands. The
+10-second console control, the log signature, the gate shape and the reporter reply draft are in `F114.md`;
+the gate-or-wait ruling is checklist **106**. Handed to the trains sitting session by cross-session message.
+Not diffed: `Fix_TrackSalvageWipe` / `Fix_TrackSalvageRefund` body copies (demolish path).
+
+**Owner-visible this leg:** the 11-module dialog and the old-save block were both explained live as vanilla
+behaviour (the sibling session's `EF-078`/`EF-079`/`EF-080` carry the record). **Second 1.1.0 log read**
+(owner's 15:21 playtest session, archived `archive/logs/playtest110_Mars.exe-20260908-15.21.42-6a91a190.log`):
+same 13 inactive / 11 named, **zero errors**, one `LoadGame error: old version` (the blocked 1.0.7 save), no
+colony ever loaded ⇒ no train activity to read; the opt-in pack's mod def loaded but only one
+`[CommunityOptInPack]` line this time — its enable state is for the trains sitting to read, not infer.
+doccheck counts unchanged (80 / 81 / 100). No upload, no version, no `items.lua`, no retirement.
+
 ## 2026-09-08 — GAME 1.1.0 + first DLC landed; the rig auto-updated; full source-read impact sweep of the pack
 
 tags: 1.1.0 Services-and-Science Feeding-the-Future EF-075 EF-076 EF-077 GAME_1_1_0_IMPACT items-98-101 DISPATCH

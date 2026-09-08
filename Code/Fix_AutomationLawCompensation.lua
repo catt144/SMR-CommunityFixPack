@@ -228,6 +228,32 @@ SMRFixPack.Register("AutomationLawCompensation", {
 					return meta and meta.modifiable and true or false
 				end,
 			  reason = "Workplace 'max_workers' is no longer a modifiable property (game update changed it?)" },
+			-- F112 (2026-09-08): "already handled?" content check — `test` form on
+			-- purpose, so it does NOT raise `update_suspect` (the module going quiet
+			-- here is healthy, not patch rot).
+			-- C39 corrects an asymmetry in vanilla's `law_scale` compensation: the
+			-- automation laws cut `max_workers` by LABEL, vanilla 1.0.7 paid it back
+			-- by CLASS, and eight Workplace families fell in the gap. Game 1.1.0
+			-- DELETED that compensation outright (`law_scale`: 0 hits tree-wide;
+			-- `automation_workforce_reduction` survives only in Data/LawDef/) while
+			-- the three laws still cut `max_workers` (LawDef-Technology.lua:14, :107,
+			-- :194). Nobody is compensated any more, so paying the out-of-class
+			-- families would CREATE the asymmetry this fix exists to remove.
+			-- ⚠️ THE ONE ASSUMPTION, carried forward from the 1.1.0 audit: the
+			-- discriminator is "1.1.0 EXTRACTED the per-worker loop into
+			-- Workplace:GetWorkersPerformance (Workplace.lua:250-267) and 1.0.7 had
+			-- it INLINE in GetWorkshiftPerformance" — inferred from our own F108/C39
+			-- headers, which cite the loop inline at 1.0.7's Workplace.lua:219-228,
+			-- and NOT verifiable because the 1.0.7 source is gone from disk (EF-075).
+			-- Bounded downside if wrong (1.0.7 also had the method): C39 also
+			-- self-disables on 1.0.7, returning those players to vanilla's known
+			-- asymmetry — the pre-fix state, not a new harm. Re-check the moment a
+			-- 1.0.7 branch install exists (checklist decision 98).
+			{ test = function()
+					local W = rawget(_G, "Workplace")
+					return not (type(W) == "table" and type(W.GetWorkersPerformance) == "function")
+				end,
+			  reason = "vanilla no longer compensates the automation-law worker cut for anyone (1.1.0) — nothing to correct" },
 		})
 		if err then return err end
 

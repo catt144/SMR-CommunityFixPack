@@ -65,7 +65,15 @@ local function staffed_performance(self, shift)
 		performance = performance + MulDivRound(Max(worker.performance, 25), part_per_worker + part_rem_add, 100)
 		part_rem_add = 0
 	end
-	if self.overtime and self.overtime[shift] then
+	-- F111 (2026-09-08): `self.overtime` is a per-shift TABLE on 1.0.7 but game
+	-- 1.1.0's new Workplace:IsOvertime() (Lua/Buildings/Workplace.lua:718-729)
+	-- COLLAPSES it to a boolean the first time GetWorkersPerformance runs — and
+	-- `orig` above runs first, so by the time we get here `true[shift]` would
+	-- raise "attempt to index a boolean value". The type check is correct on
+	-- both shapes and changes no outcome: on a table it is the shipped test; on
+	-- a boolean the additive is already inside orig's answer (1.1.0 adds it in
+	-- GetWorkersPerformance, :263-265), so this reconstruction must not add it.
+	if type(self.overtime) == "table" and self.overtime[shift] then
 		performance = performance + g_Consts.OvertimedShiftPerformance
 	end
 	return performance

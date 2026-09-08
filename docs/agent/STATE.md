@@ -16,6 +16,9 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   needs a NEW colony provisioned from scratch (hours). Override exists but is triage-only (`EF-080`). Decision 98.
   ⭐ **F114 P1: trains do not move between stations with the pack ON (reporter A/B); all 11 train/track modules
   report `applied`.** ⛔ NO CAUSE. Narrow, do NOT ship a repair — sitting brief `prompts/TRAINS_AND_LOGSCAN_SITTING.md`.
+  ⭐ F114 CANDIDATE (source-pinned, runtime-UNCONFIRMED): `Fix_TrainCargoDumping`'s `UnloadAll` body copy indexes
+  `station.demand[res]` unguarded; 1.1.0 stations list lock-hidden BlackCube/Seeds with NO demand. 10 s console
+  control + gate shape in the entry; ck106. Other 2 train body copies (SalvageWipe/SalvageRefund) NOT diffed.
   ⚠️ OPT-IN PACK IS ENABLED AND APPLYING — ck43's "OFF" is STALE, and it confounds any train leg.
   ⚠️ Our own 1.1.0 defects, none yet seen live: F111, F112, F113 (`reports/GAME_1_1_0_AUDIT.md` §3).
   ⚖️ Owner rule 09-08: a patch note saying "Fixed" is a **CLAIM, false until we confirm it**.
@@ -30,7 +33,6 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   GitHub tracker via `api.github.com/.../issues/<n>/comments`, never the HTML page. ⚠️ Passage Network ENABLED
   on the rig — untick before any clean leg.
 - Blame surface: `EF-065`(a) fires on ANY throw under a wrapped target (F111/F113 land here).
-- Opt-in pack (ck68) was next; 1.1.0 may reorder it (ck101).
 - Rig (08-20): 3 junctions, fix pack + TestKit ticked, opt-in OFF (ck43); runs cheats (normal config).
 - Shipping artifact: packed `.fpk` = 85 files (`tools/pack_predict.py`); v5 pack verified 08-30 (app **3215050**).
   ⛔ Pack route is main menu → MOD EDITOR → File → Pack Mod, NOT Mods Manager → Ctrl-E (⚠️ PORTAL_PREP §0.5 old).
