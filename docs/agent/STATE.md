@@ -20,8 +20,10 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   `station.demand[res]` unguarded; 1.1.0 stations list lock-hidden BlackCube/Seeds with NO demand. 10 s console
   control + gate shape in the entry; ck106. Other 2 train body copies (SalvageWipe/SalvageRefund) NOT diffed.
   ⚠️ OPT-IN PACK IS ENABLED AND APPLYING — ck43's "OFF" is STALE, and it confounds any train leg.
-  ✅ F113/F112 GATES + F111 guard landed (2efbcf6) and MEASURED on the unforced boot 15:57: 15 inactive / 12 named,
-  0 errors (`archive/logs/unforced110_*`). Defects themselves still unseen live; statuses `filed` (ck99).
+  ✅ F113/F112 gates + F111 guard landed (2efbcf6), MEASURED 15:57 boot: 15 inactive / 12 named, 0 errors; still `filed`.
+  ⛔ **F115 P1 LIVE on the SHIPPED pack** (owner repro, flatten landscaping): `Fix_LandscapeUnitFilter` body-replaces
+  `LandscapeForEachUnit`; 1.1.0 added a leading `map` param (`Landscaping.lua:509`) ⇒ throws. NAME sweeps are BLIND
+  to arity/body changes; `tools/sigcheck.py` bounds arity to this one. Gate = ck109.
   ⚖️ Owner rule 09-08: a patch note saying "Fixed" is a **CLAIM, false until we confirm it**.
 - ⭐ PUBLISHED both portals — `pdx_id` **156049**, `steam_id` **3787202810**, tree `version` **5** (F110, 08-30).
   ⛔ Never re-upload to "fix" a version number — each upload bumps again (H-02). ⛔ Every upload OVERWRITES both
@@ -33,8 +35,6 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 - Post-launch LIVE: F105, F107, F108 (v4), F110 (v5); F104 NOT OURS. ⛔ F107 field route untested. ⛔ Read the
   GitHub tracker via `api.github.com/.../issues/<n>/comments`, never the HTML page. ⚠️ Passage Network ENABLED
   on the rig — untick before any clean leg.
-- Blame surface: `EF-065`(a) fires on ANY throw under a wrapped target (F111/F113 land here).
-- Rig (08-20): 3 junctions, fix pack + TestKit ticked, opt-in OFF (ck43); runs cheats (normal config).
 - Shipping artifact: packed `.fpk` = 85 files (`tools/pack_predict.py`); v5 pack verified 08-30 (app **3215050**).
   ⛔ Pack route is main menu → MOD EDITOR → File → Pack Mod, NOT Mods Manager → Ctrl-E (⚠️ PORTAL_PREP §0.5 old).
 - Watches: `EF-066` subclass reach unmeasured, ck74 half-open · localisation: German only one SEEN (`EF-039`) ·
