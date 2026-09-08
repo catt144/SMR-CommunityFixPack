@@ -41,6 +41,32 @@
 --   B. the OnMsg.LoadGame sweep below gained a shell heal for saves that already
 --      carry them — vanilla produces one per Ctrl+click salvage, unbounded and
 --      permanent, so an existing save can hold any number.
+-- AMENDED 2026-09-08 for F116 (game 1.1.0.403908). This body is a 1.0.7 copy and
+-- 1.1.0 changed the shipped one; two of those changes are repaired here, marked
+-- -- FIX (F116). Both are IN-BODY additions, not a re-copy: the ~13 interleaved
+-- F44/F45/F91 sites (several of which REMOVE shipped early-returns) make a
+-- re-copy a rewrite, and the actual gap turned out to be one call and one
+-- argument.
+--   1. the PRE-SORT node_idx revalidation 1.1.0 added (TrackElement.lua:473-476);
+--   2. skip_track_process forwarded to self.broken:Demolish (:471).
+-- ⛔ TWO KNOWN, DELIBERATE DIVERGENCES REMAIN — documented, not accidental, and
+-- both are owner-facing questions in bugs/F116.md, NOT things a later reader
+-- should quietly "fix":
+--   A. ORPHAN POLICY. 1.1.0 (:580-595) REHOMES any element left with
+--      track_obj == false into a fresh track; we DELETE it (the F44 block near
+--      the tail). Ours is playtest-derived (PT-03) and was correct on 1.0.7,
+--      where nothing rehomed the orphan and it really was immune debris. On
+--      1.1.0 it means we can destroy a fragment vanilla would have saved. Left
+--      as-is because (1) above removes the mechanism that MANUFACTURES orphans,
+--      and changing destructive logic with no reproduction is worse than the
+--      long tail it leaves.
+--   B. POST-SPLIT PROCESSING. 1.1.0 processes each resulting track's COMBINED
+--      element list (:609-613); our 1.0.7 tail processes one array only, and
+--      only when the other is empty (:277-290 equivalent), so a track with both
+--      completed AND under-construction elements gets no post-split processing.
+-- ⛔ NEITHER the repair nor this note is TESTED. F116 is source-derived and has
+-- never been reproduced in a log.
+--
 -- ⚠️ WHAT DOES NOT CHANGE, stated because this module is `tested` and an A/B
 -- reader must not misread it: mass salvage still removes exactly the same track
 -- and still destroys the same assigned trains. The only difference is that the
@@ -76,8 +102,41 @@ SMRFixPack.Register("TrackSalvageWipe", {
 				return
 			end
 			-- Repair construction sites (with a broken real element) delegate to demolishing the real element
+			-- FIX (F116): forward skip_track_process. Ours dropped it, so the
+			-- delegated call re-entered with it nil and ran the element
+			-- processing its one caller (Construction.lua:1692, station build)
+			-- explicitly asked to skip — that caller does the processing itself
+			-- afterwards (:1696-1704).
 			if self.is_construction_site and IsValid(self.broken) and table.find(track_obj.elements, self.broken) then
-				return self.broken:Demolish(mass_delete)
+				return self.broken:Demolish(mass_delete, skip_track_process)
+			end
+
+			-- FIX (F116, 2026-09-08): revalidate node_idx BEFORE the sort, which is
+			-- what 1.1.0 does at TrackElement.lua:473-476 with the comment "make sure
+			-- elements' node_idx is actually valid, since we're assuming it represents
+			-- the distance from the start for the given element."
+			-- This body is a 1.0.7 copy and had no counterpart: the four
+			-- ProcessTrackElements calls at the tail are the POST-split step (1.1.0's
+			-- own :609-613), they run after the sort and only in the split branch, so
+			-- they never validated the sort's input.
+			-- Why it matters: node_idx is NOT maintained as distance-from-start.
+			-- It is stamped as a monotonic per-track counter at build time
+			-- (Tracks.lua:370-371, :393-401) and, on a track merge, from TWO separate
+			-- array positions (TrackElement.lua:415-425) — completed elements from
+			-- #elements, under-construction ones from #elements_under_construction —
+			-- which COLLIDE, and the merge only repairs them when nothing is under
+			-- construction (:430-432). all_elements is exactly those two arrays
+			-- concatenated, so after such a merge the sort below is ordered by a
+			-- stale, colliding key while the zone math (first/last walk, and the
+			-- last+1..first-1 deletion range) assumes array order == physical order.
+			-- The result is a physically scattered deletion — the corrupted-track
+			-- outcome PT-03 reported on 1.0.7, which vanilla 1.1.0 no longer has.
+			-- Guarded, not assumed: if the method is absent (older tree) we fall
+			-- through to the F44/F45 guard below exactly as before, rather than
+			-- declining and costing players F44 and F91.
+			if not skip_track_process and IsValid(track_obj)
+					and type(track_obj.ProcessAllElements) == "function" then
+				track_obj:ProcessAllElements()
 			end
 
 			-- Build a combined list of all elements sorted by node_idx to reflect their physical order along
@@ -98,6 +157,12 @@ SMRFixPack.Register("TrackSalvageWipe", {
 			-- element still has no numeric node_idx, decline the partial salvage
 			-- entirely — the shipped code's abort point, minus its raise. Nothing
 			-- is deleted on the decline path.
+			-- ⚠️ F116 NOTE (2026-09-08): the F116 revalidation above now handles the
+			-- COMMON case (stale/colliding indices on a contiguous track), so this
+			-- guard rarely fires on 1.1.0. It is NOT retirable: ProcessTrackElements
+			-- bails without restamping when OrderTrackElements cannot walk the track
+			-- (Tracks.lua:615-620, :818-819) — i.e. exactly when the track is
+			-- physically disconnected — so this stays as the backstop for that case.
 			for _, el in ipairs(all_elements) do
 				if type(el.node_idx) ~= "number" and el.is_construction_site
 						and IsValid(el.broken) and type(el.broken.node_idx) == "number" then

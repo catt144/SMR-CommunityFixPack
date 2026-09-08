@@ -24,7 +24,7 @@ source read (`F111`, `F112`, `F113`). ⛔ **The pack's self-checks did not catch
 any of it**, because they ask whether the target still EXISTS. That is the
 defect behind the defects, and it is the thing you are auditing.
 
-## 1 · The five changes under audit
+## 1 · The six changes under audit
 
 Everything since live tree `version` **5**:
 
@@ -35,6 +35,7 @@ Everything since live tree `version` **5**:
 | `Fix_AutomationLawCompensation.lua` | F112 | gate (`test` content check, deliberately NOT named in the dialog) |
 | `Fix_TrainCargoDumping.lua` | F114 | gate (`MultiResourceDepotBase` exists ⇒ decline) |
 | `Fix_LandscapeUnitFilter.lua` | F115 | gate (added by the apply link) |
+| `Fix_TrackSalvageWipe.lua` | F116 | ⛔ **REPAIR, not a gate** — two in-body additions; the ONLY change here that puts NEW code on a player's machine. §2f. |
 | `00_Core.lua` | — | ⛔ **UNCHANGED from shipped v5.** The +151-line override surface was reverted per owner ruling 110; verify that in §2c. |
 
 ## 2 · What you must actually do (not a checklist to tick — findings to produce)
@@ -56,10 +57,14 @@ Specific traps already known:
   That is correct by design (`00_Core` exempts content checks from
   `update_suspect`). ⛔ Do not "fix" it into the dialog.
 - **F111 is a GUARD, not a gate** — the module still applies and runs a patched
-  body on 1.1.0. It is the only change here that leaves our code live. Give it
+  body on 1.1.0. ⚠️ It is no longer the only change that leaves our code live —
+  **F116 is a REPAIR** and adds new code (§2f). Give it
   the hardest look: `type(self.overtime) == "table"` must be correct on BOTH
   shapes, and the module's own header admits an assumption it could not verify
   because the 1.0.7 tree is gone (`EF-075`).
+- **F116 is the only REPAIR in the patch** and the only change that ships code a
+  player has never run. It gets its own item — **§2f — and it is the one you
+  should be slowest to pass.**
 
 ### 2b · Reconcile the boot log against the prediction
 
@@ -109,9 +114,13 @@ overclaim would do real damage.
 
 **17 of the 22 full-body replacements have never been diffed against 1.1.0.**
 Five were: `TrainCargoDumping` (F114, broken), `LandscapeUnitFilter` (F115,
-broken), `TrackSalvageWipe` (F116, source-read finding), `TrackSalvageRefund`
-(clean), `TrackConnectorPingPong` (clean). **That is a 3-in-5 hit rate on the
-only subset anyone has checked.**
+broken), `TrackSalvageWipe` (F116 — now diffed in FULL, structurally: a real
+divergence, REPAIRED, §2f), `TrackSalvageRefund` (clean),
+`TrackConnectorPingPong` (clean). **That is a 3-in-5 hit rate on the
+only subset anyone has checked.** ⚠️ And the F116 diff found a divergence the
+first pass had MISSED entirely (post-split processing) while overturning two it
+had asserted — so "diffed" is only as good as the diff: a keyword comparison of
+two bodies is not a diff of them.
 
 ⇒ **Ask yourself plainly: is it responsible to ship a "safety" hotfix while 17
 untested copies of that same shape remain?** There is a real answer either way —
@@ -120,6 +129,80 @@ today; against that, the next player report may already be in the queue.
 **State your position and your reasoning.** The remaining 17 are a bounded,
 mechanical job (one body diff each against `ModTools\Src`). If you judge the
 patch should ship first, say what the follow-up commitment is.
+
+### 2f · `Fix_TrackSalvageWipe` (F116) — the patch's only REPAIR
+
+⚖️ **Rule on this one separately, and be willing to say "gate it or drop it".**
+Every other change in this patch makes our code do LESS. This one makes it do
+something NEW, in the salvage path — where the original defect's cost was *an
+entire track and every train on it*.
+
+**What landed** (two in-body additions, both marked `-- FIX (F116)`; the ~13
+interleaved `F44`/`F45`/`F91` sites were NOT re-copied):
+
+1. the PRE-SORT `node_idx` revalidation 1.1.0 runs at `TrackElement.lua:473-476`,
+   guarded by `IsValid(track_obj)` + `type(track_obj.ProcessAllElements) == "function"`;
+2. `skip_track_process` forwarded to `self.broken:Demolish` (1.1.0 `:471`).
+
+⛔ **Re-derive the ROUTE, not the citations.** The claim to break is:
+*our tail `ProcessTrackElements` calls did not already do this job.* Settle it
+yourself by reading the two bodies. The specific trap that made the FIRST
+version of `bugs/F116.md` wrong, and that will catch you the same way:
+
+> ⚠️ **Our body DOES call `ProcessTrackElements` — four times, at its tail. It
+> looks like the same work and it is not.** Those calls are the **POST-split**
+> step (1.1.0's own `:609-613`); they run AFTER the sort, on the RESULTING
+> tracks, and ONLY inside the split branch. The 1.1.0 call under audit runs
+> BEFORE the sort, on the PRE-split track, on EVERY path. The entry was
+> originally filed off `grep -c ProcessAllElements` = 0 — a right grep with a
+> wrong inference — and its own author reversed it. **Do not settle this with a
+> keyword count in either direction.**
+
+**Questions you must answer:**
+- Is the pre-sort call genuinely absent from our body, and does its absence
+  actually change the deletion set? The asserted mechanism is that `node_idx` is
+  a monotonic build counter (`Tracks.lua:370-371`) that a track MERGE restamps
+  from **two separate array positions** (`TrackElement.lua:415-425`) whose values
+  collide, repaired only when nothing is under construction (`:430-432`).
+  ⛔ **Check that merge path yourself** — the whole repair rests on it.
+- Is the capability guard right? ⛔ It is deliberately NOT a `Require` spec,
+  because a Require spec would make the module DECLINE where the method is
+  absent and cost players `F44` and `F91`. Rule on whether that trade is
+  correct — it is a judgement call, not a fact.
+- ⛔ **Does the repair PIN US TO 1.1.0's BODY?** It does, and no gate went in
+  beside it. Our copy now tracks 1.1.0 at two points and 1.0.7 everywhere else —
+  a hybrid matching NEITHER shipped version. **The next game patch re-breaks it
+  silently, exactly as this one did, and nothing in the pack will notice.**
+  ⚖️ **The auditor must rule on whether that is acceptable for a live patch, or
+  whether this module should be GATED like `F113`/`F114`/`F115` instead.**
+  The cost of gating is real and was verified, not assumed: `F44` is still live
+  on 1.1.0 (an orphaned element with `track_obj == false` reaches
+  `track_obj:ProcessAllElements()` at `:475` and `ipairs(track_obj.elements)` at
+  `:481`, both of which index a boolean), and `F91` is still live
+  (`TrackBase:OnDemolish`, `Track.lua:248-284`, still never calls `DoneObject`;
+  1.1.0's new empty-track sweep at `:597-604` is in the SPLIT branch only and
+  does not cover the `mass_delete` path). ⚠️ Gating also kills the module's
+  `OnMsg.LoadGame` debris/shell sweep, because `SMRFixPack.WhenActive` tests
+  `status == "active"` (`00_Core.lua:183-191`).
+- ⚖️ **Two divergences from 1.1.0 were left IN DELIBERATELY** and are owner-facing
+  in `bugs/F116.md`. Rule on whether leaving them was right:
+  * **orphan policy** — 1.1.0 (`:580-595`) REHOMES an element left with
+    `track_obj == false`; we DELETE it. ⛔ **On 1.1.0 our "safety" fix can
+    destroy a track fragment vanilla would have saved.** Left because the
+    repair above removes what manufactures orphans, and because changing
+    destructive playtest-derived logic with no reproduction is its own risk.
+  * **post-split processing** — 1.1.0 processes each track's COMBINED element
+    list (`:609-613`); our 1.0.7 tail processes one array and only when the
+    other is empty, so a track with both completed AND under-construction
+    elements gets none.
+- ⛔ **Nothing here is tested.** F116 was never reproduced, produces no throw and
+  no log line, and the repair has never run in a game. A boot log showing
+  `TrackSalvageWipe: applied` proves the module loaded, **not** that the repair
+  is correct. ⚠️ Do not let `applied` read as verified.
+- ⚠️ **`tools/sigcheck.py` rates this module `OK`** — same name, same arity,
+  changed body. It rated it OK before the defect was found and it rates it OK
+  now. That is §2e's point in one line, and it is why an `OK` from that tool
+  must never appear in a patch note as evidence of anything.
 
 ## 3 · Bindings
 
