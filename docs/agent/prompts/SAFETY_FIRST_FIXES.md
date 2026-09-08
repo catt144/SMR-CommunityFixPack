@@ -59,10 +59,43 @@ the tree before trusting it.
 
 ### A · F114 — the live field report. **DO THIS FIRST.**
 
-⭐ A player reports on 1.1.0 that **trains do not move between stations with the
-pack loaded, and work normally with it off** — their own A/B. It is the only
-item here a real player has actually hit. Read `bugs/F114.md` first; the verbatim
-report is there.
+⭐ The only item here a **real player has actually hit.** Steam comment,
+2026-09-08, reporter *Ranger Dimitri*, verbatim:
+
+> "Think something broke in the update when it came to the Train's with this mod.
+> Using this mod cause them to not move between stations. When I turn it off they
+> work as normal."
+
+That is a **player-run A/B naming our mod as the difference** — the strongest
+evidence class short of our own repro. Read `bugs/F114.md` for the full entry.
+
+⚠️ **Three constraints, so you do not waste the session:**
+1. **The reporter cannot narrow it and must not be asked to.** All 80 modules are
+   **default-active**; `SMRFixPack.OptionEnabled` gates only *optional* ones
+   (`Code/00_Core.lua:54-58`, `doccheck`: "0 optional-gated files"). There is no
+   player toggle to bisect with.
+2. **Game version is 1.1.0 by the reporter's framing only** ("broke in the
+   update") — not confirmed. No save, no log, no mod list yet.
+3. ⛔ **DO NOT RE-DERIVE WHAT IS ALREADY CLEARED.** Two suspects were chased on
+   2026-09-08 and eliminated; re-doing them is the obvious time sink:
+   - `Fix_TrainMinors`' `recompute_max_vehicles` — **cleared**, its formula is
+     byte-identical to 1.1.0's own (`Lua/Buildings/Track.lua:65`).
+   - `Fix_TrackConnectorPingPong`'s `CreateConnectorElements` — **cleared as a
+     copy**, it matches 1.1.0's `TrackConnectedObjBase:CreateConnectorElements`
+     (`Lua/TrainTransport.lua`) line for line apart from its own F66 guard.
+   ⚠️ One thread left explicitly OPEN there, and it is where to start
+   instrumenting rather than the answer: our F66 guard declines to take a hex
+   owned by a live other station, and in that branch `el` stays valid so the
+   creation block is skipped — meaning **that station gets no connector element
+   at that spot**, where vanilla always destroys and recreates. Whether 1.1.0
+   reaches that branch more often (it changed station–dome connection, and
+   `TrackBase:GameInit` ends with `self:Notify("TryConnectStations")`,
+   `Track.lua:62-67`) is **unmeasured**.
+
+⛔ Every sweep this project owns — `EF-076` existence, the call-site sweep — is
+**CLEAN on all 11 train/track modules.** A player found a breakage our
+instruments cannot see. Treat "the sweeps are clean" as saying nothing about
+behaviour.
 
 ⛔ **DO NOT SHIP A REPAIR FOR THIS IN THIS SESSION.** No cause is known, every
 desk sweep passed clean on the train/track modules, and a speculative fix would
