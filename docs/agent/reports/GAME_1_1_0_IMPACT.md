@@ -297,8 +297,10 @@ first of many. And outside the self-disabling modules there is exactly **one**
 dead call in the whole pack — F113.
 
 ⛔ **THE UNBOUNDED BAD NEWS, and the real answer to "what is dangerous now".**
-**31 modules define a vanilla method with no `orig` captured — full body
-replacements.** On 1.1.0 each one substitutes a 1.0.7-derived body for whatever
+**~11 modules define a vanilla method with no `orig` captured — full body
+replacements.** (⚠️ First stated as 31; that detector missed `orig_<name>`
+upvalues. It errs both ways — see `GAME_1_1_0_AUDIT.md` §2c. The population
+cannot be settled by a regex.) On 1.1.0 each one substitutes a 1.0.7-derived body for whatever
 the developers now ship, so *anything the patch improved inside a replaced
 function, we silently undo*. F113 is the proof: it replaces
 `CreateAutoCargoRequest`, a function 1.1.0 visibly rewrote, and was caught only

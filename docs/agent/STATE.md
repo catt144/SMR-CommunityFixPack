@@ -8,41 +8,40 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 
 ## Now
 - ⛔ GAME **1.1.0** ("Services & Science", build 24995074) + first paid DLC *Feeding the Future* shipped 2026-09-08;
-  the rig **auto-updated** and `ModTools\Src` was overwritten ⇒ the 1.0.7 line-number base of every citation is GONE
-  from disk (`EF-075`). Steam still offers a **1.0.7 branch** — dev claim, NOT route-checked; decision **98** gates
-  all 1.1.0 work. Sweep (`EF-076`): 106/107 class-method targets live; **6 modules self-disable** (F09 F12 F22 F81
-  F94 F55/F57), F75 benign. Not flagged incompatible, by ONE integer (`EF-077`). ⚖️ Owner rule 09-08: a patch note
-  saying "Fixed" is a **CLAIM, false until we confirm it** — no fix retires on a changelog.
+  the rig **auto-updated**, `ModTools\Src` overwritten ⇒ the 1.0.7 line-number base of every citation is GONE from
+  disk (`EF-075`). Steam offers a **1.0.7 branch** — dev claim, NOT route-checked; decision **98** gates 1.1.0 work.
+  Sweep (`EF-076`): 106/107 targets live; **6 self-disable** (F09 F12 F22 F81 F94 F55/F57), F75 benign. Not flagged
+  incompatible, by ONE integer (`EF-077`). ⚖️ Owner rule 09-08: a patch note saying "Fixed" is a **CLAIM, false
+  until we confirm it** — no fix retires on a changelog.
   ⛔ Existence ≠ semantics — 3 OF OUR OWN defects so far: **F113 P1** (`Fix_LanderCargoRatchet` calls DELETED
   `GetEarthExportResPossibleReward` on the hourly path ⇒ THROWS, and fully replaces a function 1.1.0 rewrote),
   **F111** (F108 throws, `IsOvertime()` collapses `self.overtime`; F108's defect ALSO gone upstream), **F112**
   (C39 over-pays). ⛔ **31 modules FULLY REPLACE a vanilla method** with a 1.0.7 body — top audit target,
-  invisible to `EF-076`. Call-site sweep: no other dead call in an applying module.
+  invisible to `EF-076` (⚠️ the "31" was a bad regex — ~11 vanilla, uncountable by regex, AUDIT §2c).
+  ⭐ **F114 P1 FIELD REPORT (09-08): trains do not move between stations with the pack ON, reporter A/B.**
+  ⛔ NO CAUSE — every sweep is CLEAN on all 11 train/track modules; a player found what our instruments
+  cannot see. No player toggle to bisect (80 default-active). Narrow, do NOT ship a repair; ck102.
+  Audit `reports/GAME_1_1_0_AUDIT.md` 32/32 PASS; first fixes brief `prompts/SAFETY_FIRST_FIXES.md`.
   Reading `reports/GAME_1_1_0_IMPACT.md`; re-verification is a CHAIN (decision 101), not a session.
-- ⭐ PUBLISHED on both portals — Paradox `pdx_id` **156049**, Steam `steam_id` **3787202810**; tree `version` **5**
-  (F110 shipped 08-30). ⛔ Never re-upload to "fix" a version number — each upload bumps again (H-02).
-  ⛔ Every upload OVERWRITES both page bodies from `metadata.lua`; `description` IS the full card (08-24 ruling).
-  ⛔ Auto-fill has NEVER delivered a clean page in 2 cycles ⇒ `UPLOAD_WORKFLOW` §3 paste backups are REQUIRED.
-- ⭐ SITE deployed 08-30, status success — **82** live fix-list entries. ⛔ `publish-site.yml` is
-  `workflow_dispatch` only — committing never publishes. ⛔ Never quote a stored "deployed = <sha>" as current;
-  read the deployments API (route `prompts/SITE_AUDIT.md`).
-- Post-launch fixes LIVE: F105, F107, F108 (v4), F110 (v5); F104 CLOSED, NOT OURS. ⛔ F107's field route
-  untested. ⛔ Read the GitHub tracker via `api.github.com/.../issues/<n>/comments`, never the HTML page.
-  ⚠️ Passage Network is ENABLED on the rig — untick before any clean leg.
+- ⭐ PUBLISHED both portals — `pdx_id` **156049**, `steam_id` **3787202810**, tree `version` **5** (F110, 08-30).
+  ⛔ Never re-upload to "fix" a version number — each upload bumps again (H-02). ⛔ Every upload OVERWRITES both
+  page bodies from `metadata.lua`; `description` IS the full card (08-24). ⛔ Auto-fill has NEVER delivered a
+  clean page in 2 cycles ⇒ `UPLOAD_WORKFLOW` §3 paste backups REQUIRED.
+- ⭐ SITE deployed 08-30, **82** live fix-list entries. ⛔ `publish-site.yml` is `workflow_dispatch` only —
+  committing never publishes. ⛔ Never quote a stored "deployed = <sha>"; read the deployments API
+  (`prompts/SITE_AUDIT.md`).
+- Post-launch LIVE: F105, F107, F108 (v4), F110 (v5); F104 NOT OURS. ⛔ F107 field route untested. ⛔ Read the
+  GitHub tracker via `api.github.com/.../issues/<n>/comments`, never the HTML page. ⚠️ Passage Network ENABLED
+  on the rig — untick before any clean leg.
 - Blame surface: `EF-065`(a) fires on ANY throw under a wrapped target (F111/F113 land here).
-- Next effort WAS the **opt-in pack** (ck68, kickoff reads that repo's STATE + `reports/PARKED_OPTIN_REFERENCES.md`); 1.1.0 may reorder it (ck101).
-- Rig (08-20 sitting): 3 junctions present, fix pack + TestKit ticked, opt-in pack OFF (checklist 43); runs
-  cheats (the normal config).
-- Shipping artifact: packed `.fpk` = 85 files (composition: `tools/pack_predict.py`); v5 delivered pack
-  verified 08-30 (Relaunched = app **3215050**).
+- Opt-in pack (ck68) was next; 1.1.0 may reorder it (ck101).
+- Rig (08-20): 3 junctions, fix pack + TestKit ticked, opt-in OFF (ck43); runs cheats (normal config).
+- Shipping artifact: packed `.fpk` = 85 files (`tools/pack_predict.py`); v5 pack verified 08-30 (app **3215050**).
   ⛔ Pack route is main menu → MOD EDITOR → File → Pack Mod, NOT Mods Manager → Ctrl-E (⚠️ PORTAL_PREP §0.5 old).
-- Watches: `EF-066` subclass reach — which targets are ever INSTANTIATED is unmeasured, ck74 half-open ·
-  localisation: German the only one ever SEEN, other 7 CSV-measured (`EF-039`) · C47 speed thread (unrun) ·
-  C48 opt-in candidate · F02/F78/F81 organic · riders
-  C42/F99/F80/F96-R2 post-release · `EF-051` falsifier = any stray save ·
-  **F109 PARKED/unconfirmed** (Reddit; ~50 stacked objects on one hex; derivation in the entry). ⛔ No cause
-  claimed, no save. ⛔ Do NOT harden `DestroyedRebuild`'s `efVisible` guard. Reopen ONLY with that hex's
-  buildings list + mod list + a save.
+- Watches: `EF-066` subclass reach unmeasured, ck74 half-open · localisation: German only one SEEN (`EF-039`) ·
+  C47 (unrun) · C48 opt-in · F02/F78/F81 organic · riders C42/F99/F80/F96-R2 · `EF-051` falsifier = stray save ·
+  **F109 PARKED** (entry has it). ⛔ Do NOT harden `DestroyedRebuild`'s `efVisible` guard; reopen ONLY with the
+  hex's buildings list + mod list + a save.
 
 ## Hazards — each names an action an agent could take unattended; never do it
 - **H-01** Tag `fixpack-v1.0.0` marks what actually gets packed (moved onto the close-out audit's commit 08-20).
@@ -100,6 +99,6 @@ BUILD STATE (emitted by tools/doccheck.py)
 - modules: 80 registered (80 default-active, 0 optional-gated files)
 - Code/*.lua files: 81
 - TestKit probes: 100
-- BUGS index rows: 113 F + 12 D + 53 C
+- BUGS index rows: 114 F + 12 D + 53 C
 ```
 Re-emit after any change. Game: records describe **1.0.7.396349** (`EF-014`); INSTALLED is now **1.1.0** (`EF-075`).

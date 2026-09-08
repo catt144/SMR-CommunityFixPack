@@ -45,6 +45,19 @@ completed tests move whole to
 > patch note that says "Fixed" is a **CLAIM, false until we confirm it ourselves.** No fix of ours
 > is retired and no entry moves status on the strength of Haemimont's changelog.
 
+⭐ **FIELD REPORT 2026-09-08 — ITEM 102, and it jumps the queue.** A player
+> (*Ranger Dimitri*, Steam) reports: **"Using this mod cause them to not move between stations. When
+> I turn it off they work as normal."** — trains, on 1.1.0, with their own A/B. `bugs/F114.md` has
+> the verbatim text. ⛔ **No cause is claimed and none should be**: every sweep this session built
+> passes CLEAN on all 11 train/track modules, `recompute_max_vehicles` is byte-identical to 1.1.0's
+> own formula, and `CreateConnectorElements` matches 1.1.0 line for line bar our F66 guard. **A
+> player found a breakage our instruments cannot see** — which is the honest measure of what those
+> sweeps are worth. ⚠️ The reporter CANNOT narrow it for us: all 80 modules are default-active with
+> no player toggle. The audit ranks this **FF-0, above all three desk findings**, and the brief
+> (`prompts/SAFETY_FIRST_FIXES.md` §2A) deliberately forbids shipping a train repair — it narrows
+> only. **102. Do you want the reply to the reporter sent, and the log + save requested?** A draft
+> is prepared; asking costs you one message and is the fastest route to a cause.
+
 98. **The 1.0.7 branch — pin back, or move the baseline to 1.1.0?** ⚠️ **This one gates
     everything else and it is the only time-shaped item.** The rig updated itself at 09:38 UTC
     and overwrote `ModTools\Src`, so the 1.0.7 line-number base every one of our citations was

@@ -81,6 +81,32 @@ call-names, 28 const reads, 174 method names, 30 table-index sites):
   its calls vanished; a replacement whose calls all still resolve is invisible to every sweep in the report.
   Those 31 are now the top audit target, above the §1.5 reconstruction list and far above the claim table.
 
+Fourth leg: owner asked for a full audit reconfirmation + a first-fix/fix-later split + an implementation
+prompt. `scratchpad/audit.py` re-derives every claim from scratch (re-harvest, re-walk the 4715-file tree,
+negative controls): **32/32 PASS**. The audit also CHANGED three things and was overtaken by a fourth:
+
+- **F113's blast radius was overstated** and is corrected: 1.1.0 defines `CreateAutoCargoRequest` in THREE
+  places, and `LanderRocketBase` (`LanderRocket.lua:639`) + `SpaceElevatorBase` (`SpaceElevator.lua:206`) are
+  full overrides that never call the base. Landers and the Space Elevator are NOT affected; the seven
+  `__parents = { "UniversalRocketBase" }` classes are.
+- **An inherited claim was caught**: "re-run every hour while landed" came from our OWN 1.0.7 header. Re-derived
+  against 1.1.0 and it holds (`UniversalRocketBase:HourlyUpdate`, `UniversalRocket.lua:1556`).
+- **The "31 full replacements" figure was WRONG** — the detector tested `orig`, which misses
+  `orig_update_end`. Corrected to ~11 vanilla replacements, but the detector errs BOTH ways
+  (`Fix_TrackConnectorPingPong` carries a body copy and still reads as chained), so the real population cannot
+  be settled by a regex and needs a per-module read. Recorded as a caution, not as a better number.
+- ⭐ **F114 arrived mid-audit and outranks everything**: a Steam reporter's A/B says trains do not move between
+  stations with the pack loaded on 1.1.0. Every instrument built this session is CLEAN on all 11 train/track
+  modules — `recompute_max_vehicles` byte-identical to 1.1.0's `Track.lua:65`, `CreateConnectorElements` a
+  line-for-line match bar our F66 guard. A player found a breakage the sweeps cannot see; that is now the
+  stated limit of those sweeps. No cause claimed. No player toggle exists to bisect with (80 default-active).
+
+Written: `reports/GAME_1_1_0_AUDIT.md` (verdict table, §2 corrections, §3 FIRST FIXES FF-0..FF-3 with the
+recommended change for each, §4 fix-later) and the build brief `prompts/SAFETY_FIRST_FIXES.md` — scope-fenced
+to four items, forbidding a speculative train repair, any retirement, and any upload. The one assumption in the
+tier (that 1.1.0 extracted `GetWorkersPerformance`, unverifiable with 1.0.7 source gone) is stated in the brief
+with its bounded downside. Entry **F114** filed with the report verbatim; checklist gains item **102**.
+
 Filed: `reports/GAME_1_1_0_IMPACT.md` (§2 claim table as a to-TEST list, §5 chain, §6 semantic audit, §6b the
 crash sweep, §6a the branch correction), facts `EF-075`/`EF-076`/`EF-077`, entries **F111** + **F112** + **F113**,
 checklist items **98–101** plus two updates. Counts 110 F → 113 F. §1c's superseded "no crash path" sentence was
