@@ -69,6 +69,20 @@ Specific traps already known:
     and is it stated where a future agent will see it?
   * A stray global named `Landscapes` from another mod defeats the `_G` side.
     Does the secondary `test` actually catch that, in that order?
+  * ⛔ **The secondary may not be a belt at all, and this is the mechanism to
+    check.** `Require` treats a `test` as truthy-passes / falsy-declines
+    (`ok = c.test()`, `00_Core.lua:120-121`), and F115's reads
+    `not landscapes_is_per_map()` (`Fix_LandscapeUnitFilter.lua:98`, over the
+    `MapVarValues["Landscapes"]` read at `:79-81`). ⇒ if `MapVarValues` is **not
+    yet populated when mod code applies**, `landscapes_is_per_map()` is false,
+    `not false` is true, **the test PASSES and the module installs.** The whole
+    1.1.0 decline would then rest on the primary `{ global = "Landscapes" }`
+    check alone, and the redundancy is nominal rather than real. ⚠️ **Whether
+    `MapVarValues` is populated at apply time is NOT established — establish
+    it.** It is also the answer to the stray-global bullet above: a belt that is
+    inert at apply time cannot catch that case either. ⛔ This does not make the
+    gate wrong — the primary may well carry it — but "two independent checks"
+    must not go into the audit report unless the second one actually fires.
   * ⭐ **`update_suspect` reaches the dialog by a DIFFERENT ROUTE than F114's.**
     F115 rides on `Require`'s native marking for shape specs
     (`00_Core.lua:157-163`); F114 uses a hand-written mark. Confirm both, and
