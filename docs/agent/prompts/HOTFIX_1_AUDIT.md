@@ -60,7 +60,7 @@ Specific traps already known:
   'Landscapes')` — the defect's own expression, not a correlate. The load-order
   question the brief raised IS answered: `autorun.lua:432-434` runs
   `dofolder("Lua")` → `DlcsLoadCode()` → `ModsLoadCode()`. Verify that yourself.
-  ⚠️ **The four things actually worth attacking:**
+  ⚠️ **The five things actually worth attacking:**
   * ⛔ **The 1.0.7 half rests on OUR RECORDS, not a re-read** — the 1.0.7 tree is
     gone (`EF-075`). If `GameVar` did not rawset on 1.0.7, the module declines
     there too. Claimed SAFE-and-inert (no players on that branch). Is it?
@@ -84,6 +84,11 @@ Specific traps already known:
     genuinely cannot see: another mod defining a global named `Landscapes`. In
     that scenario the game tree has necessarily already run, so `MapVarValues`
     is populated and the belt does work.
+    ⭐ **The missing link in that chain, so you can check it rather than assume** — `apply` is NOT deferred: `Register` calls `run_apply` inline and `run_apply`
+    calls `pcall(def.apply)` immediately (`00_Core.lua`), so the test runs at
+    MOD-CODE-LOAD time, which `autorun.lua:432-434` places after `dofolder("Lua")`
+    has executed every top-level `MapVar(...)`. ⛔ Re-derive it; it is the one
+    fact the secondary rests on.
     ⚠️ **The consequence worth carrying into your verdict:** the load-order
     proof (`autorun.lua:432-434`) is **NOT load-bearing for the primary** — its
     failure mode on an unloaded tree is "decline", the safe direction — so the
