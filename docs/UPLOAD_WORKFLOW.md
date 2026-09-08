@@ -264,7 +264,7 @@ Notes** (Steam), paste this:
 ```
 - Fixed for game 1.1.0: trains that would not leave their station, and an error popup when landscaping. Both were caused by this pack on the new game version, not by the base game.
 - Some fixes now switch themselves off on 1.1.0 and say so, because the game code they corrected has changed. That is deliberate — an inactive fix is safer than one working from an old assumption.
-- This is a safety pass, not a full re-check of every fix against 1.1.0. Please keep reporting anything that looks wrong.
+- This is a safety pass, not a full re-check of every fix against 1.1.0. One track-salvage fix was also brought in line with the new game code. Please keep reporting anything that looks wrong.
 ```
 
 #### 📋 Short summary (only if it also came out blank)

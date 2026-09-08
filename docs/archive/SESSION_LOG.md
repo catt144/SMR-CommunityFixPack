@@ -8,6 +8,90 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-08 (later still, 4th) — HOTFIX_1_APPLY: the F115 gate, 110 verified rather than accepted, and an EF-003 correction
+
+tags: 1.1.0 F114 F115 F116 EF-003 EF-078 EF-081 EF-082 items-109-110 LandscapeUnitFilter MapVar GameVar autorun HOTFIX_1_APPLY
+
+Brief `prompts/HOTFIX_1_APPLY.md` (link 1 of 2; terminal audit is `HOTFIX_1_AUDIT.md`). Ran alongside three
+sibling sessions; ownership settled by direct message before any write. `smr-bugfixpack-cd` corrected §3 B2 of
+my own brief mid-leg (`a2a711a`) to hand F116 to a dedicated parallel leg — **F116 and
+`Fix_TrackSalvageWipe.lua` were therefore NOT touched by me**, and `bugs/INDEX.md` was left alone because that
+leg held it uncommitted. No collision.
+
+**Gates.** `tasklist | grep -i Mars` clean before any loadable-code edit; the game was never launched from
+this session. `doccheck` GREEN before each commit.
+
+**BUILT — the F115 gate (`628ea4d`), owner decision 109 route (a).** `Fix_LandscapeUnitFilter` declines on
+1.1.0; the replacement body is untouched, so nothing pins us to 1.1.0's signature.
+
+⭐ **The leg's real content is the DISCRIMINATOR, and the fact that it is not a proxy.** The brief suggested a
+`MapVars` membership test and explicitly required it be justified or replaced, flagging that it could not
+verify `MapVars` is populated at mod-load time. I replaced it with something stronger and proved the ordering:
+* `GameVar(name, ...)` **rawsets its global to `false` when it registers** (`CommonLua/Core/lib.lua:1069-1071`).
+  `MapVar(name, ...)` registers into `MapVars`/`MapVarValues` and **never touches `_G`** (`:984-1000`).
+* So `rawget(_G, "Landscapes")` IS the read that raised `attempt to index a nil value (global 'Landscapes')`
+  in the owner's repro — the gate tests the defect's own expression, not a correlate of it.
+* Shipped as `{ global = "Landscapes", kind = "any" }`, a SHAPE spec **on purpose**: `Require` marks
+  `update_suspect` natively for shape specs and deliberately exempts `test` ones (`00_Core.lua:157-163`), so
+  the player dialog names the module without depending on a hand-written mark. A second `test` spec
+  (`MapVarValues["Landscapes"] ~= nil` ⇒ decline) is belt to that brace, covering the one case the `_G` check
+  cannot — another mod defining a global called `Landscapes`, which would install the very P1 being gated.
+* **Ordering proven, not assumed:** `autorun.lua:432-434` runs `dofolder("Lua")` → `DlcsLoadCode()` →
+  `ModsLoadCode()`, so every top-level `GameVar`/`MapVar` call in the game tree has run before our first line.
+  ⛔ A DIFFERENT claim from `EF-001` — the files have RUN, the classes are not yet flattened.
+
+⭐ **A recorded fact was wrong in a way that would have refuted this gate — `EF-003` corrected.** It said a
+GameVar "does not exist while mods load". True of the VALUE, false of the KEY: the game's own guard is the
+truthiness test `g_Consts and g_Consts[id]` (`Modifiers.lua:432`), and `rawget(_G, "g_Consts") ~= nil` is TRUE
+at apply time. A future agent reading EF-003 literally would have concluded this gate declines on both
+branches. Sharpened in place with a pointer; mechanism in the new `EF-082`. ⚠️ Third instance this fortnight
+of an inherited record being a claim rather than a measurement.
+
+**ANSWERED, not assumed — B1 / decision 110.** `Code/00_Core.lua` is byte-identical to `ce77162` (`git diff`
+empty), `0` hits for the four override symbols, and the pack's whole diff against the shipped v5 tree
+(`7863f3d`) was, when measured, exactly the five gate/guard files — `00_Core.lua`, `items.lua` and
+`metadata.lua`'s module list all absent, so `H-10` is satisfied by measurement rather than assertion. The pack
+ships zero diagnostic code. ⚠️ **That count moved before this leg closed**: the parallel F116 leg landed a
+REPAIR, not a gate (`add94b3`), so the shipping diff is now SIX files and `Fix_TrackSalvageWipe.lua` is the only
+one carrying new behaviour. My boot prediction is unaffected — a repair still reports `applied`.
+
+⛔ **WHAT IS NOT DONE, AND IT IS THE THING THAT MATTERS.** No boot. There is no Lua binary on this rig, so the
+desk half (structure review, `sigcheck`, block balance, v5 diff) is all that exists and it **cannot** show a
+gate firing. Prediction recorded ahead of the reading so a difference is a finding: **17 inactive / 14 named**,
+zero `Fix_TrainCargoDumping.lua:89`, zero `Fix_LandscapeUnitFilter.lua:63`. ⭐ The two gates flag the dialog by
+different routes on purpose, so **17/13 isolates F114's hand-written `update_suspect`** rather than leaving the
+failure ambiguous. Owner ask is at the top of `PLAYTEST_CHECKLIST.md`.
+
+⭐ **LOG RECONCILIATION — 159 error-shaped lines, every one attributed, none discounted.**
+`archive/logs/f114repro110_*` (session 15.57.09, 3297 lines) = **157** `Fix_TrainCargoDumping.lua:89` + **2**
+`global 'Landscapes'`. ⚠️ Only ONE of those 2 carries a file path; the other is the pathless `[LUA ERROR]`
+header form, so a hand-grep for the path undercounts by half. ⚠️ `archive/logs/unforced110_*` (274 lines) is a
+PARTIAL copy of that SAME session: its **15 inactive / 12 named** header is sound (it sits at `:192`), its "2
+error lines" is not a session total. Both true; neither cancels the other.
+
+**Patch notes.** `metadata.lua` `last_changes` rewritten for this version and the `UPLOAD_WORKFLOW` §3
+change-note paste backup synced with it (it still carried the v5 Jumbo Cave text). ⛔ Deliberately does NOT
+claim 1.1.0 compatibility: 17 of 22 full-body replacements remain undiffed and no instrument we own bounds body
+divergence. `version` untouched (`H-02`). ⛔ The notes are written but must not ship until the boot passes —
+the owner's "a Fixed line is a CLAIM" rule binds ours.
+
+**STATE eviction (this commit).** Two claims evicted to make room, both superseded halves, both with homes:
+(1) F114's "⛔ NO CAUSE. Narrow, do NOT ship a repair — sitting brief `prompts/TRAINS_AND_LOGSCAN_SITTING.md`"
+— the cause was confirmed live at 16:25 and the gate shipped in `8bc6821`; home `bugs/F114.md` and that brief.
+(2) `EF-078`'s first-launch **13 inactive / 11 named** baseline and the "source-read predicted 6, WRONG BY 5"
+note — superseded by the measured 15/12 boot; home `facts/EF-078.md`, with the standing rail ("source-reads
+undercount; trust runtime over source reads") kept in STATE in one line.
+(3) The 08-17 rule "a green suite does NOT authorise an upload — config B is the gate", which the owner
+CORRECTED on 08-20 (item 57: the gate was one-time, not a per-change tax). It sat two lines above its own
+correction and would have told a future agent to run config B for a single gated module; home is item 57.
+⭐ **One STATE line was not evicted but CORRECTED, and it is a finding.** "OPT-IN PACK IS ENABLED AND APPLYING
+— ck43's 'OFF' is STALE, and it confounds any train leg" is itself stale: the opt-in pack emits its
+`Loaded mod def` line but **ZERO `applied` lines** on BOTH later boots (`playtest110_*`, `unforced110_*`),
+against 8 `applied` on `first110_*`. It is unticked and is not a confound. Grave:
+`git show 628ea4d:docs/agent/STATE.md`.
+
+---
+
 ## 2026-09-08 (later still) — TRAINS_AND_LOGSCAN sitting: the owner's self-check OVERRIDE, and a second 1.1.0 log read
 
 tags: 1.1.0 EF-078 F114 F111 F112 F113 items-107-108 SMRFixPack_Force ForceApply 97_ForceInactive 00_Core TRAINS_AND_LOGSCAN

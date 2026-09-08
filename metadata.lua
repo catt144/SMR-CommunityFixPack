@@ -127,7 +127,7 @@ return PlaceObj('ModDef', {
 	-- ⛔ No fix ids, no counts, no load-order advice, no other mod named (EF-054,
 	-- FIX_POLICY §8). Licence: the owner's standing 22b word; text-only, no
 	-- behaviour, and H-02 leaves the version bump to the upload sitting.
-	'last_changes', "- Fixed for game 1.1.0: trains that would not leave their station, and an error popup when landscaping. Both were caused by this pack on the new game version, not by the base game.\n- Some fixes now switch themselves off on 1.1.0 and say so, because the game code they corrected has changed. That is deliberate — an inactive fix is safer than one working from an old assumption.\n- This is a safety pass, not a full re-check of every fix against 1.1.0. Please keep reporting anything that looks wrong.",
+	'last_changes', "- Fixed for game 1.1.0: trains that would not leave their station, and an error popup when landscaping. Both were caused by this pack on the new game version, not by the base game.\n- Some fixes now switch themselves off on 1.1.0 and say so, because the game code they corrected has changed. That is deliberate — an inactive fix is safer than one working from an old assumption.\n- This is a safety pass, not a full re-check of every fix against 1.1.0. One track-salvage fix was also brought in line with the new game code. Please keep reporting anything that looks wrong.",
 	-- the packer includes EVERYTHING recursively minus this list (Mod.lua:250-256,
 	-- GedModEditor.lua:716-732) — without the extra patterns docs/, README.md,
 	-- .gitignore and .claude/ all ship inside the .hpk. LICENSE ships on purpose.

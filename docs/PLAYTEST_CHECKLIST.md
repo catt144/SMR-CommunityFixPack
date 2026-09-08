@@ -36,8 +36,8 @@ completed tests move whole to
 > create a global — so the check is the literal read that raised `attempt to index a nil value (global
 > 'Landscapes')` in your repro. Your rule this week was "check the thing, not its label"; this is the thing.
 > **110 = diagnostic only, VERIFIED not just accepted.** `Code/00_Core.lua` is byte-identical to the shipped v5
-> file, `0` hits for the override symbols, and the pack's entire diff against live v5 is exactly five
-> gate/guard files and nothing else. **The pack ships ZERO diagnostic code.**
+> file, `0` hits for the override symbols, and the pack's entire diff against live v5 is six files and
+> nothing else — the five gate/guard changes plus F116's repair. **The pack ships ZERO diagnostic code.**
 >
 > ⛔ **NONE OF IT IS MEASURED YET, AND I WILL NOT CALL IT FIXED.** There is no Lua binary on this rig, so a boot
 > log is the only test that counts, and no boot has happened since either gate landed.

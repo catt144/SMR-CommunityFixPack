@@ -8,22 +8,24 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 
 ## Now
 - ⛔ GAME **1.1.0.403908** + DLC shipped 2026-09-08; rig auto-updated, `ModTools\Src` overwritten ⇒ the 1.0.7
-  citation base is GONE from disk (`EF-075`). ⭐ **MEASURED first launch (`EF-078`, log `archive/logs/first110_*`):
-  13 of 80 modules INACTIVE (11 named in the player dialog), 67 active; pack loads UNFLAGGED; ZERO errors.**
-  ⛔ The source-read predicted 6 — WRONG BY 5 (path specs checked by name not path; preset/DATA checks invisible
-  to any symbol sweep). Trust runtime over source reads.
+  citation base is GONE from disk (`EF-075`). ⛔ Source-reads UNDERCOUNT: the desk audit predicted 6 self-disabled modules, the game
+  measured 13 (`EF-078`; the live figure is the 15/12 boot below). Trust runtime over source reads.
   ⛔ **1.0.7 SAVES CANNOT LOAD ON 1.1.0** (`EF-079`) ⇒ the ENTIRE fixture library is branch-locked; a 1.1.0 leg
   needs a NEW colony provisioned from scratch (hours). Override exists but is triage-only (`EF-080`). Decision 98.
-  ⭐ **F114 P1: trains do not move between stations with the pack ON (reporter A/B); all 11 train/track modules
-  report `applied`.** ⛔ NO CAUSE. Narrow, do NOT ship a repair — sitting brief `prompts/TRAINS_AND_LOGSCAN_SITTING.md`.
-  ✅ F114 CAUSE CONFIRMED LIVE 16:25 (owner, fresh 1.1.0 colony, shipped config): `Fix_TrainCargoDumping.lua:89`
-  indexes `station.demand["BlackCube"]` = nil (1.1.0 registers no demand for lock-hidden resources) ⇒ throws every
-  6 s in LoadTrain, train never moves. ✅ GATED on owner's go (ck106), NOT yet booted: expect 16 inactive / 13 named.
-  ⚠️ OPT-IN PACK IS ENABLED AND APPLYING — ck43's "OFF" is STALE, and it confounds any train leg.
+  ✅ F114 CAUSE CONFIRMED LIVE 16:25 + GATED (ck106, `8bc6821`), NOT booted: `Fix_TrainCargoDumping.lua:89`
+  indexed nil demand for a lock-hidden resource on 1.1.0 ⇒ train never moved (`bugs/F114.md`).
+  ✅ Opt-in pack UNTICKED (ck43): enumerated but ZERO `applied` lines on the 15.21 + 15.57 boots — no confound.
   ✅ F113/F112 gates + F111 guard landed (2efbcf6), MEASURED 15:57 boot: 15 inactive / 12 named, 0 errors; still `filed`.
-  ⛔ **F115 P1 LIVE on the SHIPPED pack** (owner repro, flatten landscaping): `Fix_LandscapeUnitFilter` body-replaces
-  `LandscapeForEachUnit`; 1.1.0 added a leading `map` param (`Landscaping.lua:509`) ⇒ throws. NAME sweeps are BLIND
-  to arity/body changes; `tools/sigcheck.py` bounds arity to this one. Gate = ck109.
+  ✅ **F115 GATED** (ck109, `628ea4d`): 1.1.0 prepended `map` to `LandscapeForEachUnit` (`Landscaping.lua:509`)
+  AND moved `Landscapes` to a MapVar ⇒ gate = the global is gone (`EF-082`). Body untouched, so `sigcheck` still
+  reads MISMATCH here and that is CORRECT (`bugs/F115.md`).
+  ✅ **F116 REPAIRED in-body** (`add94b3`), NOT gated: our 1.0.7 copy lacked 1.1.0's PRE-SORT `node_idx`
+  revalidation (`TrackElement.lua:473-476`). P1→P2, source-derived, NEVER reproduced. ⛔ The ONLY new code.
+  ⛔ NAME sweeps are BLIND to arity and body changes; **17 of 22 full-body replacements are still UNDIFFED** on
+  1.1.0 and nothing we own bounds body divergence (F114 was invisible to all three).
+  ⛔ 1.1.0 GATES ARE DESK-ONLY — next unforced boot MUST read **17 inactive / 14 named**, 0
+  `TrainCargoDumping.lua:89`, 0 `LandscapeUnitFilter.lua:63`. 17/13 ⇒ F114's hand-written `update_suspect` is
+  the fault (F115's rides on `Require`). Investigate, do not adjust.
   ⚖️ Owner rule 09-08: a patch note saying "Fixed" is a **CLAIM, false until we confirm it**.
 - ⭐ PUBLISHED both portals — `pdx_id` **156049**, `steam_id` **3787202810**, tree `version` **5** (F110, 08-30).
   ⛔ Never re-upload to "fix" a version number — each upload bumps again (H-02). ⛔ Every upload OVERWRITES both
@@ -73,7 +75,6 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 
 ## Rules in force (owner rulings; bodies in checklist/SESSION_LOG)
 - Ship line FROZEN (08-12): `fixed` + suite + self-checks + verified save-safety IS the bar.
-- A green suite does NOT authorise an upload — config B is the gate (08-17).
 - ⛔ The gate was ONE-TIME, not a per-change tax (08-20, item 57). Post-release = patch-note-driven maintenance:
   `items.lua` entry (H-10) + one boot `applied` log + doccheck counts. ⛔ Never quote `FIX_POLICY` §3a's per-module
   cost for a single added fix — run B / lens sweep / audit return only for a **major overhaul**.
@@ -98,6 +99,6 @@ BUILD STATE (emitted by tools/doccheck.py)
 - modules: 80 registered (80 default-active, 0 optional-gated files)
 - Code/*.lua files: 81
 - TestKit probes: 100
-- BUGS index rows: 114 F + 12 D + 53 C
+- BUGS index rows: 116 F + 12 D + 53 C
 ```
 Re-emit after any change. Game: records describe **1.0.7.396349** (`EF-014`); INSTALLED is now **1.1.0** (`EF-075`).
