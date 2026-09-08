@@ -45,7 +45,36 @@ completed tests move whole to
 > patch note that says "Fixed" is a **CLAIM, false until we confirm it ourselves.** No fix of ours
 > is retired and no entry moves status on the strength of Haemimont's changelog.
 
-⭐ **FIELD REPORT 2026-09-08 — ITEM 102, and it jumps the queue.** A player
+⭐ **MEASURED 2026-09-08 — ITEMS 103–105, and they change the plan.** You launched, and one launch
+> beat the whole desk audit. `EF-078`: **13 of 80 modules inactive (the dialog names 11), 67 active,
+> pack loads unflagged, ZERO errors in the log.** ⛔ My source-read predicted **6** — wrong by 5, for
+> two reasons now on the record (path specs checked by name not path; preset/DATA checks invisible to
+> any symbol sweep). **Trust the game over my reading.**
+>
+> ⛔ **The big one: 1.0.7 saves CANNOT be loaded on 1.1.0** (`EF-079`). `USA Sol 302`, the F95/F59/F90
+> fixtures, the T1/T2 uninstall pair — the whole library is **branch-locked to 1.0.7**. The game's own
+> refusal dialog names the 1.0.7 branch route, which route-checks item 98's dev claim far better than
+> the store announcement did.
+>
+> **103. How do we get a 1.1.0 train test?** ⚠️ No old save can be used, and trains are not early-game,
+> so this is **hours of provisioning, not a 20-30 min warm-up** — the plan must not pretend otherwise.
+> **(a)** cheat-provision a minimal 1.1.0 colony to a train (fastest, recommended); **(b)** switch the
+> install to the 1.0.7 branch, which re-establishes the whole fixture library but tests the version
+> players are leaving; **(c)** ask the reporter for their save first and provision nothing.
+>
+> **104. Force-loading old saves — you asked whether we can override it.** Yes: it is two config values
+> and **the devs ship an unblocked mode** (`config.OldSavegameBehavior` is `"block"` only because we are
+> on Steam; elsewhere the same build offers "Load anyway"). `EF-080` has both routes. ⛔ My
+> recommendation is **triage only, never a verdict** — the supported floor sits deliberately *after* the
+> research and services rewrites, so anything measured on a force-loaded colony cannot be attributed
+> (mod, or half-migrated save?). And ⛔ **never in the shipped pack** — that would let players load saves
+> the developers refused, and we would own the corruption. TestKit only, if at all. Do you want it built?
+>
+> **105. The opt-in pack is ENABLED and applying** (9 modules incl. `DroneOverhaul`) — ck43 records it
+> OFF, so that record is stale. It is also a confound for any train leg. Leave it on (the 08-12
+> both-mods-loaded normal config) or untick for a clean F114 A/B? I recommend untick for the first run.
+
+> ⭐ **FIELD REPORT 2026-09-08 — ITEM 102, and it jumps the queue.** A player
 > (*Ranger Dimitri*, Steam) reports: **"Using this mod cause them to not move between stations. When
 > I turn it off they work as normal."** — trains, on 1.1.0, with their own A/B. `bugs/F114.md` has
 > the verbatim text. ⛔ **No cause is claimed and none should be**: every sweep this session built

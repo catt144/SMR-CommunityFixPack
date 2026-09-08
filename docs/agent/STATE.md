@@ -7,22 +7,18 @@ Defect truth `agent/bugs/INDEX.md` · facts `agent/facts/INDEX.md` · doc map `d
 Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/reports/CHAIN_METHOD.md`.
 
 ## Now
-- ⛔ GAME **1.1.0** ("Services & Science", build 24995074) + first paid DLC *Feeding the Future* shipped 2026-09-08;
-  the rig **auto-updated**, `ModTools\Src` overwritten ⇒ the 1.0.7 line-number base of every citation is GONE from
-  disk (`EF-075`). Steam offers a **1.0.7 branch** — dev claim, NOT route-checked; decision **98** gates 1.1.0 work.
-  Sweep (`EF-076`): 106/107 targets live; **6 self-disable** (F09 F12 F22 F81 F94 F55/F57), F75 benign. Not flagged
-  incompatible, by ONE integer (`EF-077`). ⚖️ Owner rule 09-08: a patch note saying "Fixed" is a **CLAIM, false
-  until we confirm it** — no fix retires on a changelog.
-  ⛔ Existence ≠ semantics — 3 OF OUR OWN defects so far: **F113 P1** (`Fix_LanderCargoRatchet` calls DELETED
-  `GetEarthExportResPossibleReward` on the hourly path ⇒ THROWS, and fully replaces a function 1.1.0 rewrote),
-  **F111** (F108 throws, `IsOvertime()` collapses `self.overtime`; F108's defect ALSO gone upstream), **F112**
-  (C39 over-pays). ⛔ **31 modules FULLY REPLACE a vanilla method** with a 1.0.7 body — top audit target,
-  invisible to `EF-076` (⚠️ the "31" was a bad regex — ~11 vanilla, uncountable by regex, AUDIT §2c).
-  ⭐ **F114 P1 FIELD REPORT (09-08): trains do not move between stations with the pack ON, reporter A/B.**
-  ⛔ NO CAUSE — every sweep is CLEAN on all 11 train/track modules; a player found what our instruments
-  cannot see. No player toggle to bisect (80 default-active). Narrow, do NOT ship a repair; ck102.
-  Audit `reports/GAME_1_1_0_AUDIT.md` 32/32 PASS; first fixes brief `prompts/SAFETY_FIRST_FIXES.md`.
-  Reading `reports/GAME_1_1_0_IMPACT.md`; re-verification is a CHAIN (decision 101), not a session.
+- ⛔ GAME **1.1.0.403908** + DLC shipped 2026-09-08; rig auto-updated, `ModTools\Src` overwritten ⇒ the 1.0.7
+  citation base is GONE from disk (`EF-075`). ⭐ **MEASURED first launch (`EF-078`, log `archive/logs/first110_*`):
+  13 of 80 modules INACTIVE (11 named in the player dialog), 67 active; pack loads UNFLAGGED; ZERO errors.**
+  ⛔ The source-read predicted 6 — WRONG BY 5 (path specs checked by name not path; preset/DATA checks invisible
+  to any symbol sweep). Trust runtime over source reads.
+  ⛔ **1.0.7 SAVES CANNOT LOAD ON 1.1.0** (`EF-079`) ⇒ the ENTIRE fixture library is branch-locked; a 1.1.0 leg
+  needs a NEW colony provisioned from scratch (hours). Override exists but is triage-only (`EF-080`). Decision 98.
+  ⭐ **F114 P1: trains do not move between stations with the pack ON (reporter A/B); all 11 train/track modules
+  report `applied`.** ⛔ NO CAUSE. Narrow, do NOT ship a repair — sitting brief `prompts/TRAINS_AND_LOGSCAN_SITTING.md`.
+  ⚠️ OPT-IN PACK IS ENABLED AND APPLYING — ck43's "OFF" is STALE, and it confounds any train leg.
+  ⚠️ Our own 1.1.0 defects, none yet seen live: F111, F112, F113 (`reports/GAME_1_1_0_AUDIT.md` §3).
+  ⚖️ Owner rule 09-08: a patch note saying "Fixed" is a **CLAIM, false until we confirm it**.
 - ⭐ PUBLISHED both portals — `pdx_id` **156049**, `steam_id` **3787202810**, tree `version` **5** (F110, 08-30).
   ⛔ Never re-upload to "fix" a version number — each upload bumps again (H-02). ⛔ Every upload OVERWRITES both
   page bodies from `metadata.lua`; `description` IS the full card (08-24). ⛔ Auto-fill has NEVER delivered a

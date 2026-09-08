@@ -81,6 +81,39 @@ call-names, 28 const reads, 174 method names, 30 table-index sites):
   its calls vanished; a replacement whose calls all still resolve is invisible to every sweep in the report.
   Those 31 are now the top audit target, above the §1.5 reconstruction list and far above the claim table.
 
+Fifth leg — the owner launched 1.1.0, and one launch beat the entire desk audit. Ground truth is archived at
+`docs/archive/logs/first110_Mars.exe-20260908-15.20.28-6a91a190.log` (`git add -f`; `.gitignore` line 2 is `*.log`).
+
+`EF-078` — game **1.1.0.403908**, `LuaRevision` 403908, both DLCs load, pack loads UNFLAGGED (confirming `EF-077`
+on measured numbers). **13 of 80 modules inactive, 67 active**; the player dialog names 11 as "switched themselves
+off for safety" — the 13 minus `SaintBlessing` and `LastTransmissionStorage`, which latch benignly and do not set
+`update_suspect`. **ZERO `[LUA ERROR]`, zero asserts, zero blame lines.** All 11 train/track modules report
+`applied`. The opt-in pack is ENABLED and applying 9 modules — ck43's "OFF" is stale.
+
+⛔ **The desk prediction was 6. The measurement is 13/11. Wrong by 5**, and the two reasons are method failures
+worth more than the number: (1) **path specs were checked by their last segment's NAME, not as a path** —
+`{path={"GlobalGameTimeThreadFuncs","Meteors"}}` was "verified" by grepping `Meteors`, a ubiquitous word, so it
+passed spuriously; same for `MeteorStorm` and for `VacuumWalks`' walk-distance consts, where finding
+`DefineConstInt("Colonist","ColonistMaxDomeWalkDist",...)` was wrongly read as proof that
+`const.ColonistMaxDomeWalkDist` resolves. (2) **Preset/DATA content checks are invisible to any symbol sweep** —
+`SaintBlessing`, `DustSicknessDamage`, `IndependenceTerraforming`. ✅ One prediction landed exactly:
+`LastTransmissionStorage`'s benign latch. `EF-076` amended as SUPERSEDED rather than rewritten.
+
+⛔ `EF-079` — **1.0.7 saves cannot be loaded on 1.1.0 at all**: "Deprecated save file format!" in the list, and a
+refusal dialog naming the 1.0.7 branch. The entire fixture library (`USA Sol 302`, F95/F59/F90, T1/T2 uninstall)
+is **branch-locked**. Any 1.1.0 leg needs a new colony provisioned from scratch — hours, not a warm-up. ✅ Side
+effect: the game's own dialog route-checks item 98's dev claim far better than the store announcement.
+
+`EF-080` — owner asked whether the block can be overridden. It can: `config.SupportedSavegameLuaRevision = 402200`
+plus `config.OldSavegameBehavior = Platform.steam and "block" or "warn"` — **the devs ship an unblocked mode and we
+are excluded only by being on Steam**. Either is a one-line runtime override, no game file touched. ⛔ But the floor
+sits deliberately AFTER the research and services rewrites, so a force-loaded colony is an unattributable
+substrate: triage only, never a verdict, never in the shipped pack, never save over a fixture.
+
+Written: `prompts/TRAINS_AND_LOGSCAN_SITTING.md` — the handoff the owner asked for, carrying the measured baseline
+so the next session re-derives none of it. Checklist **103–105** filed (provisioning route, the override question,
+the stale opt-in state). Counts unchanged; STATE's 1.1.0 bullet rewritten around measurement and now 8712 bytes.
+
 Fourth leg: owner asked for a full audit reconfirmation + a first-fix/fix-later split + an implementation
 prompt. `scratchpad/audit.py` re-derives every claim from scratch (re-harvest, re-walk the 4715-file tree,
 negative controls): **32/32 PASS**. The audit also CHANGED three things and was overtaken by a fourth:
