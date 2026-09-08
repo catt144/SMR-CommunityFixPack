@@ -1,5 +1,13 @@
 # HOTFIX 1 — APPLY (link 1 of 2; the audit is `HOTFIX_1_AUDIT.md`)
 
+> ✅ **CLOSED 2026-09-08 — this link is DONE and two of its statements have since
+> moved. Read it as history, not as instructions.** (1) §3 B1 says the diff
+> against live v5 is "only the five gate/guard files" — it is **six**, because
+> `F116` landed as a REPAIR from a parallel leg. (2) §4's prediction is no longer
+> pending: the owner's boot `17.51.09` read **17 inactive / 14 named, 0 errors**,
+> exactly as predicted (`archive/logs/gated110_*`). ⛔ That boot was **menu-only**,
+> so trains and landscaping were never exercised in play.
+
 Paste into a fresh Claude Code session. Written **2026-09-08**, the day game
 **1.1.0 + the first DLC** shipped and the pack's first field breakages landed.
 **Start with `git log --oneline -10` + `git pull`.** Read `docs/agent/STATE.md`
