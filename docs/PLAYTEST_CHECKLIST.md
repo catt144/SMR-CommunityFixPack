@@ -29,6 +29,83 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+> ✅⛔ **109 AND 110 ARE RULED AND ACTIONED — 2026-09-08, the hotfix-1 apply leg. ONE THING IS OWED BY YOU: A BOOT.**
+> **109 = GATE, route (a), done** (`628ea4d`). `Fix_LandscapeUnitFilter` now declines on 1.1.0. The replacement
+> body is UNTOUCHED, so nothing pins us to 1.1.0's signature and the fix re-arms cleanly in a later patch.
+> ⭐ The gate does not test a label. 1.1.0 moved `Landscapes` from a GameVar to a MapVar, and MapVars never
+> create a global — so the check is the literal read that raised `attempt to index a nil value (global
+> 'Landscapes')` in your repro. Your rule this week was "check the thing, not its label"; this is the thing.
+> **110 = diagnostic only, VERIFIED not just accepted.** `Code/00_Core.lua` is byte-identical to the shipped v5
+> file, `0` hits for the override symbols, and the pack's entire diff against live v5 is exactly five
+> gate/guard files and nothing else. **The pack ships ZERO diagnostic code.**
+>
+> ⛔ **NONE OF IT IS MEASURED YET, AND I WILL NOT CALL IT FIXED.** There is no Lua binary on this rig, so a boot
+> log is the only test that counts, and no boot has happened since either gate landed.
+>
+> **WHAT I NEED FROM YOU — one unforced boot, shipped configuration, a couple of minutes:**
+> 1. Launch, reach the main menu, **quit**, and copy the log **after the process exits**. A log copied while the
+>    game is running is a PARTIAL log — that cost us two wrong counts today (a "1 throw" that was really 6, a
+>    "30 throws" that was really 157).
+> 2. If a colony is handy: run a train between two stations, and hit flatten landscaping once.
+>
+> **What it must read.** I am writing the prediction down FIRST so that a difference is a finding rather than
+> something I quietly adjust afterwards:
+> * **17 inactive / 14 named** in the player dialog (the last measured boot was 15 / 12).
+> * **ZERO** `Fix_TrainCargoDumping.lua:89` lines and **ZERO** `Fix_LandscapeUnitFilter.lua:63` lines.
+> * the train **leaves its platform**; landscaping raises **no mod-error dialog**.
+>
+> ⛔ **16/13 or 17/13 is a FINDING, not a bookkeeping slip.** The two gates raise the dialog flag by different
+> routes on purpose — F115's runs through `Require`, F114's through a hand-written mark — so a 17/13 reading
+> points at F114's mark specifically. Give me the numbers and I will investigate, not adjust.
+>
+> ⚠️ **THE PATCH NOTES ARE WRITTEN AND MUST NOT BE UPLOADED UNTIL THAT BOOT PASSES.** They open "Fixed for game
+> 1.1.0", and your own ruling today is that a "Fixed" line is a CLAIM until confirmed — that binds ours too.
+> `metadata.lua` `last_changes` and the `UPLOAD_WORKFLOW` §3 paste backup are in sync and ready to go.
+> ⛔ No upload, no `version` edit, no Mod Editor from me (`H-02`) — the bump belongs to your sitting.
+>
+> ⚠️ **WHAT THIS PATCH DELIBERATELY DOES NOT CLAIM.** 17 of the pack's 22 full-body replacements have never been
+> diffed against 1.1.0, and no instrument we own bounds body divergence — the name sweep sees names, `sigcheck`
+> sees arity, the runtime self-checks see existence, and F114 was invisible to all three. That is why the notes
+> say "a safety pass, not a full re-check of every fix against 1.1.0" rather than claiming 1.1.0 compatibility.
+> ⭐ Not mine, so you know where it sits: **F116** (track salvage) was re-derived end to end by a parallel
+> session under `prompts/F116_FIX_LEG.md`. ✅ **That is now DONE (`add94b3`) and `bugs/F116.md` is safe to
+> read** — the entry was rewritten, its correction banner removed. It found a real defect and REPAIRED it in
+> place, so this patch now carries **six** changes, not five. **Item 111 below is the one question it left
+> you.**
+
+### 2026-09-08 — ITEM 111 OPEN: F116 track salvage was repaired, and it left one judgement call
+
+> **What happened, in three lines.** `Fix_TrackSalvageWipe` full-body-replaces the salvage/split function with
+> a 1.0.7 copy. 1.1.0 added a step our copy does not have: it revalidates each track element's `node_idx`
+> **before** sorting by it, because that number is a build-order counter and a track *merge* can leave two
+> elements sharing one value. Without it our sort can be in the wrong order, and the deletion zone is then a
+> **physically scattered** set of hexes instead of a contiguous run. That is the same corrupted-track outcome
+> your PT-03 playtest reported back on 1.0.7 — we patched the *symptom* then; 1.1.0 fixed the *cause*, and our
+> copy was throwing that fix away. ✅ **Repaired**: two additions, one call and one argument, no re-copy.
+>
+> ⛔ **NOT MEASURED, and unlike F114/F115 it never was.** No throw, no log line, no player report — this one
+> came from reading the two bodies side by side. The repair has never run in a game either. ⚠️ A boot log
+> saying `TrackSalvageWipe: applied` proves the module loaded, **not** that the repair works.
+>
+> **111. Adopt vanilla's non-destructive orphan policy, or keep ours?** ⚖️ This is the one thing I found and
+> deliberately did **not** change, because it is your call and not a hotfix decision.
+> When a split leaves a track fragment attached to nothing, **1.1.0 gives it a new track and keeps it. Ours
+> deletes it** — a rule your PT-03 playtest asked for, and it was right *then*, because 1.0.7 had nothing to
+> rescue such a fragment and it really was unreachable debris. On 1.1.0 that is no longer true, so as it
+> stands **our "don't destroy the player's track" fix can destroy track the unmodded game would have saved.**
+> * **(a) Leave it (what is shipping now).** The repair above removes the thing that *creates* stray
+>   fragments, so this should now be a rare corner. Zero further risk to a patch that is already written.
+> * **(b) Match vanilla — rehome the fragment instead of deleting it.** Strictly kinder to the player and
+>   removes a divergence. ⛔ But it is a behaviour change to destructive code, with no reproduction to test
+>   it against, in a patch that is otherwise all safety.
+> ⭐ **My recommendation: (a) now, (b) as its own small job once there is a 1.1.0 colony to test on.** ⚠️ Note
+> the same delete-not-rehome rule also runs in the module's load-time debris sweep, so (b) would want both.
+>
+> ⚠️ **One more thing worth your attention, no decision needed.** `tools/sigcheck.py` rated this module **OK**
+> before the defect was found and rates it **OK** now — same name, same argument count, different body. It is
+> the instrument we lean on most, and this is exactly the class of problem it cannot see. That is the honest
+> reason the patch notes do not claim 1.1.0 compatibility.
+
 ### 2026-09-08 — ITEMS 98–101 OPEN: the game shipped **1.1.0 + the first DLC**, and the rig auto-updated
 
 > *Services & Science* (1.1.0, Steam build 24995074) and the paid DLC *Feeding the Future* both
