@@ -47,8 +47,40 @@ SMRFixPack.Register("TrainCargoDumping", {
 			-- for it on Station would find nil and deactivate this fix for nothing.
 			{ class = "UniversalStorageDepotBase", method = "IsResourceEnabled" },
 			{ global = "RequestUnassignUnit" },
+			-- F114 (2026-09-08, CONFIRMED LIVE on 1.1.0, owner repro): the body
+			-- below is a 1.0.7 copy of Train:UnloadAll. Game 1.1.0 re-parented
+			-- Station onto the new MultiResourceDepotBase (Station.lua:48-56),
+			-- which registers NO demand request for a lock-hidden resource
+			-- (MultiResourceCubeVisuals.lua:372-392) while Station:Init still lists
+			-- every transportable resource as storable (Station.lua:110-111) —
+			-- BlackCube and Seeds ship LockState = "hidden". So on 1.1.0
+			-- `station.demand[res]` is nil inside our loop and :89 below raises
+			-- "attempt to index a nil value" on every unload; the train's command
+			-- dies before GotoStation and it never moves (measured: 30+ throws at a
+			-- 6 s cadence, res = BlackCube). 1.1.0's own UnloadAll guards this
+			-- (Train.lua:785-787, :794-795) and we were overwriting it. The class
+			-- did not exist on 1.0.7 (this header cites UniversalStorageDepotBase
+			-- as the station's depot parent), so its presence is the discriminator:
+			-- decline, and 1.1.0 players get vanilla's guarded body back. F46's
+			-- repair is therefore ABSENT on 1.1.0 until re-derived against the new
+			-- SetAcceptResource semantics (rfSuspended flags, MultiResourceDepot.lua
+			-- :251-290) — decision 99/106.
+			{ test = function()
+					return rawget(_G, "MultiResourceDepotBase") == nil
+				end,
+			  reason = "the Station's depot base changed to MultiResourceDepotBase (game update) — the 1.0.7 UnloadAll copy no longer matches" },
 		})
-		if err then return err end
+		if err then
+			-- The depot-base test above is patch ROT (a pinned body over a
+			-- rewritten function), not an "already handled?" verdict, so it must
+			-- be named in the update report exactly like a target-shape failure.
+			-- Require marks only shape specs (00_Core.lua, Require), so mark here.
+			if rawget(_G, "MultiResourceDepotBase") ~= nil then
+				local entry = SMRFixPack.fixes["TrainCargoDumping"]
+				if entry then entry.update_suspect = true end
+			end
+			return err
+		end
 		local T = Train
 
 		-- Does any OTHER station this train can reach on its current route still

@@ -99,6 +99,10 @@ completed tests move whole to
 > train holds the spawn platform, `Station.lua:852-854`). The control is met. **106 is now live: say "gate it" and
 > the `Require` test lands (with `Mars.exe` closed), restoring vanilla's guarded `UnloadAll` on 1.1.0 while 1.0.7
 > keeps F46.** The pack-off half of the A/B is still worth 60 seconds of your time for a `tested-attended` word.
+> ✅ **GATED on your go ("Game is closed", ~16:45).** Next boot should read **16 inactive / 13 named** with
+> `TrainCargoDumping: inactive (the Station's depot base changed …)`, no `:89` throw, and the train leaving its
+> platform. If any of those three is not what you see, that is a finding — say so. Cost: F46's own repair is absent
+> on 1.1.0 until re-derived (decision 99); 1.0.7 untouched.
 > Reply draft for the reporter (item 102) is now in `bugs/F114.md`, asking for the log (which would carry
 > that exact line) and the save.
 
