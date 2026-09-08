@@ -81,7 +81,7 @@ marked ◇ were read by a sub-reader and their evidence was not re-opened by me.
 | R-12 | `GridGlobalStorage` (F22) | Replaced by per-dome `ScriptFunc_DomesGridStorage`; no sum of ratios, no sentinel. | `Lua/ScriptBlocks.lua:387-419` | inactive | nothing. |
 | R-13 | `LastTransmissionStorage` (F75) | ⭐ The brief's seed, confirmed: every storage like sets `'Condition'` with a `ScriptCheckDomesGridStorage` whose `Resource` is right. The "already correct" latch IS the vanilla fix. | `Data/FactionDef/LastTransmission.lua:104-260` (`:245`) | inactive (benign) | nothing. |
 | R-14 | `RainsDeadlock` (F81b + C34) | Rains run as a repeat cycle; no untimed `WaitMsg`. Re-arming would be HARMFUL: our wrapper's `Msg("RainDisasterEnd")` now drives a lightmodel handler, and the migration calls the absent `RainsDisasterLoop`. | `Lua/TerraformingDisasters.lua:363-395`, `:142`, `:191-194` | inactive | the C34 heal goes with it. |
-| R-15 | `DustSicknessDamage` (F17) | `daily_update_func` has zero hits in Lua and Data — the function went with its defect. | tree-wide grep | inactive | nothing. |
+| R-15 | `DustSicknessDamage` (F17) | ⚠️ **CORRECTED by the rebreak pass (§1h).** The first draft said "the function went with its defect" — wrong: the hook was RENAMED (`daily_update_func` → `DailyUpdate`, called via `TraitMethod("DailyUpdate")`), the function still exists, and our module's latch is a FALSE NEGATIVE on a rename. What actually happened: 1.1.0 DELETED the dead `local change = 5 + colonist:Random(trait.param)` line and kept the flat `-trait.param` damage — the same flat pattern the `Infected` trait uses. F17's only intent tell was that dead line; with it gone the flat damage is the stated design (the R-16 shape: the contradiction resolved the other way), so REMOVE stands — but on this evidence, and had the dead line survived the rename, retiring the module would have been a mistake. | `Data/TraitPreset.lua:80-84` (DustSickness), `:143-147` (Infected); `Lua/TraitPreset.lua:36` (`DailyUpdate`); `Lua/Units/Colonist.lua:711` | inactive (false-negative latch) | nothing on 1.1.0; on a 1.0.7 line the module is dead for the wrong reason and would need re-targeting to `DailyUpdate`. |
 | R-16 | `IndependenceTerraforming` (F18) | `param1 = -10` and `Amount` is BOUND to `param1`; self-consistent. | `Data/Tech.lua:3557-3562`, `:3571-3577` | inactive | nothing. |
 | R-17 | `UniversityOvertraining` (F36) | Defect line unchanged, premise false: automation is a FLOOR now (`Max(workers, auto_performance)`; vanilla's comments say so), so specialists at an automated extractor DO raise output. Keeping F36 is a balance opinion; our copy also reverts a perf rewrite. ⚖️ A judgement, marked as one. | `Lua/Buildings/Workplace.lua:283-287`, `:249`, `:433-434`; `Lua/City.lua:636-661` | applied | owner call. |
 | R-18 | `CaveInsNoDisasters` (F01) | The repeat's condition now ends `and not IsGameRuleActive("NoDisasters")`. Our slot-3 wrapper is redundant. | `Lua/Marsquake.lua` (`MapGameTimeRepeat("UndergroundMarsquake", …)` condition); `CommonLua/Core/lib.lua:1559-1575` | applied | nothing. |
@@ -155,6 +155,62 @@ marked ◇ were read by a sub-reader and their evidence was not re-opened by me.
 | K-35 ◇ | `LayoutTechLock` (F19) | See A-5: correct, redundant with a new build-menu gate. | `LayoutConstruction.lua:335-339`, `:206-235`; `BuildMenu.lua:743`, `:784-786` |
 | — | `TrainCargoDumping`, `LandscapeUnitFilter`, `LanderCargoRatchet` (gates) | The gates are correct and measured (`gated110_*`); their fixes are F-10, F-8 and R-2. | `archive/logs/gated110_Mars.exe-20260908-17.51.09-6a91a190.log:84`, `:105`, `:119` |
 
+### 1h · The rebreak pass — is the vanilla replacement actually correct?
+
+Asked by the owner after the first draft: were the REMOVE verdicts taken on
+the game's word, and could a vanilla "fix" itself be a rebreak? The verdicts
+were never taken from a patch note — every row cites the 1.1.0 body — but
+"the defective expression is gone" is weaker than "the replacement is
+correct", and the first draft did not always trace the second. This pass
+re-opened every REMOVE row for that question. Column 3 says how far the
+replacement was traced; column 4 names any way it could still be wrong.
+
+| row | vanilla replacement | traced for correctness? | rebreak / residual |
+|---|---|---|---|
+| R-1 `LowStorageWarning` | branches deleted | ✅ — nothing to be correct; the warning no longer exists | none (a design removal, not a fix) |
+| R-2 `LanderCargoRatchet` | loaded hold added back + fair-share budget | ✅ **traced end to end this pass.** The double-count our own v1 had (PT-17) is NOT present: transporters are kept out of the C++ stockpile sum (`ResourceOverview.lua:141-143`), the overview counts only a landed rocket's `GetCargoSurplus` (amount above the request, `UniversalRocket.lua:2522-2535`, `CargoTransporterNew.lua:1676`), and `:2046` adds back exactly the complement, `Min(amount, requested)` (`:2537-2546`). Ground + surplus + kept = the true total. Fair share (`:2069-2086`) hands every demand its share of the remaining hold then distributes the leftover; never alphabetical. | none found. Not measured in play. |
+| R-3 `TouristSatisfaction` | stat deleted | ✅ rename check: the only "satisfaction" left in `Lua/` is `sight_satisfaction` (a dome sight value) | none |
+| R-4 `AutomationLawCompensation` | compensation deleted | ✅ (F112, two sessions) | none — laws now cut with no compensation, uniformly |
+| R-5 `UpgradeModifierLeak` | `pairs` over `upgrade_modifiers` | ✅ table is id → array, populated at `:1203-1206`; `TurnOff` idempotent | none |
+| R-6 `SmallLandscapeSites` | `GetTopClosestDests` bounds check | ✅ `if count <= top_count then return table.icopy(dests)` | none |
+| R-7 `DroneTransportMinors` (b) | version bump instead of table swap | ✅ handler read | none |
+| R-8 `DroneUnreachableForever` | `GameTime()` stamp + version reset | ⚠️ partial: the reset fires on passability change, building demolition (`Building.lua:546`) and landscaping (`Landscaping.lua:328`) | residual: a building that becomes reachable with NO passability change stays written off until the next bump or the 64-entry eviction. Not the max_int "forever"; not measured. |
+| R-9 `MeteorFrequency` | `MapGameTimeRepeat` with `g_NextMeteorsTime` | ✅ body read: roll → store → sleep the remainder → fire → re-roll | none found |
+| R-10 `MeteorStormWedge` | validate on `IsValid(descr.meteor)` + load fixup | ⚠️ the measured cause is covered; loop still unbounded on a valid meteor that never posts `MeteorDone` | residual, named in the row |
+| R-11 `AsteroidLanderAvailable` | one predicate for gate and list | ✅ `IsRocketLanded` includes `CmdUnload` (`UniversalRocket.lua:1574-1577`) — the F72 case is accepted; `working` and landed-ness apply to both surfaces equally | none |
+| R-12 `GridGlobalStorage` | per-dome `ScriptFunc_DomesGridStorage` | ✅ body read; `judged == 0 ⇒ false`, no sentinel, no sum of ratios | none |
+| R-13 `LastTransmissionStorage` | `Condition` + correct `Resource` | ✅ data read for all six | none |
+| R-14 `RainsDeadlock` | repeat cycle; activation now WAITS for the current disaster instead of returning | ⚠️ partial: `RainsDisasterActivation` (`:318-353`) blocks in `WaitCurrentDisaster()` rather than bailing, and the cycle re-creates a dead thread; no untimed `WaitMsg` remains | residual: `g_DisastersPredicted.DisasterNormalRains` is set at `:349` and cleared only by `RemoveRainDisasterNotification` (`:254-256`, via the warning wait or the finish). A `DeleteThread(activation_thread)` mid-warning (`:485-487`, a load fixup) strands it, and normal rains have NO notification, so vanilla's expiry clear (R-20) cannot reach it — only our removed sweep could. Not measured. |
+| R-16 `IndependenceTerraforming` | `param1 = -10`, bound | ✅ data read; the contradiction was resolved DOWN to 10%, not up to 20% — a design choice, not a fix in our direction | none; the owner may dislike the direction |
+| R-17 `UniversityOvertraining` | automation floor | ✅ `:283-287` read | judgement, unchanged |
+| R-18 `CaveInsNoDisasters` | repeat condition | ✅ condition read | none (rule is fixed at game start) |
+| R-19 `CommandCenterNumbers` | parameterised getter in the XDef | ✅ data read | none |
+| R-20 `DisasterPredictionLeak` | remove-on-end + clear-on-expiry | ✅ `EndMeteorStorm` read; `notification.expired` is set before removal (`Notifications.lua:229`) | see R-14: our sweep was also the only belt for flags WITHOUT a notification |
+| R-21 `DustDevilSpawnGate` | gate-then-count | ✅ `DustDevils.lua:256` re-read: `Random(100) < spawn_chance and Random(count_min, count_max) or 0` | none |
+| R-22 `DustDevilsDescrMap` | byte-identical | ✅ trivially | none |
+| R-23 `DustStormUndergroundBreaks` | per-map filter of connectors AND elements | ✅ `SupplyGrid.lua:1108-1114` re-read | none |
+| R-24 `ExtractorStaffedPerformance` | `Max(workers, auto)` | ✅ (F111, three sessions) | none |
+| R-25 `LanderReturnFuel` | one ration with no destination | ✅ re-read `:1891-1895` and the `CmdLand` order (`ConsumeFuel` at `:436` runs BEFORE the destination is cleared at `:441`, so the return ration is burned correctly and the post-landing request keeps one ration aboard) | none found |
+| R-26 `LandscapeCostRefresh` | `construction_costs_at_start` guard | ✅ `ConstructionSite.lua:721` re-read | none |
+| R-27 `LocalizedUIText` | XDef carries the T id; button gone | ◇ sub-reader's quotes | none for our module; a possibly NEW untranslated string is outside its claim |
+| R-28 `MilestoneCrash` | `(GetScore() or 0)` | ✅ `Milestones.lua:116` re-read | none |
+| R-29 `MoraleComfortTooltip` | Outlook breakdown rewrite | ◇ sub-reader's quotes | a rewrite, not a fix; nothing of the old row exists to be wrong |
+| R-30 `SpaceYDroneCapBullet` | text reworded | ◇ sub-reader's quotes (the id and wording) | none; ours prints a duplicate |
+| R-31 `StorageRateModifiers` | electricity copies the rates; water/air rates not `modifiable` | ✅ `ElectricityStorage.lua:52-57` and `LifeSupportStorage.lua:9-10`, `:107-110` re-read — water/air rate props carry no `modifiable = true`, so the change handler can never fire for them | the water/air legs of F27 are unreachable, not fixed; a future patch that makes them modifiable re-arms the defect there. Named for the manifest (§4). |
+| R-32 `TechDescriptionBuilding` | text corrected under the same T id | ✅ `Data/Tech.lua:6738` re-read: "Underground Medium Dome" | none |
+| R-33 `TouristApplicants` | `Random(0, 99) < chance` | ✅ `HolidayRating.lua:92` re-read | none |
+| R-34 `TrainMinors` | route-based cap | ✅ `Track.lua:424` re-read; `GetTrainsOnRoute` body ◇ | none for the cap; the x/max display goes stale (cosmetic) |
+| R-35 `TrainPlatformWedge` | `table.remove_entry` guard | ✅ `ColonistTransport.lua:660-667` re-read | none |
+| R-36 `90_SaveSanitizer` | F48 paren fixed (`Station.lua:1504`), F35 buff re-applied by a vanilla fixup (`WindTurbine.lua:95-105`), F03 = R-5 | ✅ all three re-read | none on 1.1.0 |
+
+**What the pass changed:** one row's reasoning (R-15 — the verdict survives on
+different evidence, and the module's latch is a rename false negative, which is
+the trap the brief named and I walked into anyway); two residuals added (R-8,
+R-14/R-20); one leg named as "unreachable, not fixed" (R-31). No REMOVE verdict
+flipped. **Method lesson, for §4:** a REMOVE needs the same body read as a FIX,
+and "the name is gone" must be followed by "where did it go" before "the
+defect went with it".
+
 ### 1e · Census
 
 `grep -rln 'full replacement\|fully replaces\|a copy of' Code/Fix_*.lua`
@@ -211,8 +267,11 @@ wrappers were not the safe half: of the 47 pass-3 modules, **19 do nothing on
   record (F114 entry), not re-diffed.
 - `TrainCargoDumping` (F-10): whether a `rfSuspended` request still reports a
   positive `GetTargetAmount` is C-side and unread — "plausibly persists".
-- `DustSicknessDamage` (R-15): where 1.1.0 computes the damage now was not
-  located; the REMOVE verdict does not depend on it.
+- `DustSicknessDamage` (R-15): located in the rebreak pass (§1h); the first
+  draft's reasoning was wrong and is corrected in the row.
+- The rebreak pass (§1h) re-read the vanilla replacement for every REMOVE row
+  except R-27, R-29, R-30 and the body of `GetTrainsOnRoute` (R-34), which
+  stand on the sub-readers' quotes.
 - `MeteorStormWedge` (R-10): the residual (a valid meteor that never posts
   `MeteorDone`) was not chased.
 - `VacuumWalks` (F-9): the semantics of a wrapper that passes a modified
@@ -243,6 +302,7 @@ wrappers were not the safe half: of the 47 pass-3 modules, **19 do nothing on
 | (c) semantics under a wrapper or data patch | the target's meaning or its data shape moved | F111, F112, F-1, F-2, F-3, F-5 | nothing |
 | (d) vanilla fixed it | our correction is now redundant or double-applied | **32 modules** (R-5…R-36 less the target-gone rows) + F-1, F-5 | nothing — and the pack has no bucket for it |
 | (e) target gone | the name no longer exists | 13 of the 17 inactive | `Require` (correctly) |
+| (f) target RENAMED | the name is gone but the thing is not (`daily_update_func` → `DailyUpdate`, `const.X` → `g_Consts.X`, `GlobalGameTimeThread` → `MapGameTimeRepeat`) | R-15, F-9, R-9, R-10 | `Require` declines and the pack reads that as "gone"; a defect that survived the rename would be retired by mistake (R-15 nearly was) |
 
 The existence checks cover (e) and nothing else. Class (d) is the largest by
 an order of magnitude and was invisible by design: a module whose check

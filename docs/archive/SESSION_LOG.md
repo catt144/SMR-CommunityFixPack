@@ -32,7 +32,15 @@ benign latch was exactly that), 4 of them marginally worse than vanilla. The exi
 every one: no instrument sees "vanilla fixed it". Pass 4 design: `SRC:`/`DEFECT:` header manifest +
 `tools/bodycheck.py`, a behavioural `probe` `Require` form, `sigcheck` over `SetGlobal`, heal-aware `logscan`
 (the "17 inactive" headline is really 16 — `SaintBlessing` heals at `gated110_*.log:186`).
-Owner items 114–116 filed. Checkpoints `c3ecd26` (passes 1–2) and this commit.
+Owner items 114–116 filed. Checkpoints `c3ecd26` (passes 1–2) and `fbbf43c`.
+**Rebreak pass (owner ask, same day):** every REMOVE row re-read for "is the vanilla replacement actually
+correct?" (report §1h). No verdict flipped. One reasoning corrected: `DustSicknessDamage`'s hook was RENAMED
+(`daily_update_func` → `DailyUpdate`, `Data/TraitPreset.lua:80-84`), the function still exists, and 1.1.0
+deleted the dead random line rather than using it — the module's latch is a rename FALSE NEGATIVE and the
+first draft read it as "function gone". R-2's suspected double count traced clean (`ResourceOverview.lua:141-143`,
+`UniversalRocket.lua:2522-2546`). Two residuals added (R-8 unreachables only reset on a bump; R-14/R-20
+`DisasterNormalRains` has no notification so vanilla's expiry clear cannot reach a strand). R-31's water/air
+legs are unreachable, not fixed.
 
 ## 2026-09-08 (later still, 5th) — HOTFIX_1_AUDIT: SHIP WITH CHANGES, text only; six code changes clean; F116 repair kept
 
