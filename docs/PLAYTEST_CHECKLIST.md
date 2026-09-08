@@ -94,8 +94,8 @@ completed tests move whole to
 > I recommend gate-on-confirmation: it is a self-disable, not a new behaviour, and the harm is a P1 field
 > report. ⛔ Not done in this session — the brief forbids a train repair without a control, correctly.
 > ✅ **CONFIRMED 16:25, YOUR OWN COLONY, SHIPPED CONFIG:** the log shows `Fix_TrainCargoDumping.lua:89: attempt to
-> index a nil value`, locals `res = BlackCube`, stack `LoadTrain → TransferCargo → UnloadAll`, **30 throws at a
-> 6-second cadence**, and your "first train not moving at all" + "Track busy" are its two visible faces (the stalled
+> index a nil value`, locals `res = BlackCube`, stack `LoadTrain → TransferCargo → UnloadAll`, **at least 30 throws at a
+> 6-second cadence, still accumulating when read**, and your "first train not moving at all" + "Track busy" are its two visible faces (the stalled
 > train holds the spawn platform, `Station.lua:852-854`). The control is met. **106 is now live: say "gate it" and
 > the `Require` test lands (with `Mars.exe` closed), restoring vanilla's guarded `UnloadAll` on 1.1.0 while 1.0.7
 > keeps F46.** The pack-off half of the A/B is still worth 60 seconds of your time for a `tested-attended` word.
