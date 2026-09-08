@@ -298,3 +298,136 @@ Locals:
 	           to_remove |    table 0x000002D27E89B9D0 #0
 	          GetGridObj | function 0x000002D27E899AF8
 [mod] Error in mod Relaunched Fix Pack (id SMR_CommunityFixPack, v1.00-005) from appdata
+						Lua 0:01:26:894
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_LowStorageWarning.lua:125: attempt to call a nil value (global 'GetCommandCenterLifeSupportGrids')
+  Mod/SMR_CommunityFixPack/Code/Fix_LowStorageWarning.lua(125):  method GatheredResourcesOnHourlyUpdate
+  Lua/City.lua(150):  method HourlyUpdate
+  Lua/City.lua(542):   <>
+  [C](-1):  global procall
+  CommonLua/Core/cthreads.lua(20):  global Msg
+  Lua/DayTime.lua(72):   <>
+        --- end of stack
+Locals:
+	                self |   object City at invalid pos on map 1
+	                 map |   object Map
+	        notification |      nil
+	maintenance_resources |    table 0x000002D277A73678 #0
+	transportable_resources |    table 0x000002D281BABDC8 #0
+	   resource_overview |   object ResourceOverview at invalid pos on map 1
+	       food_consumed |   number 0
+	          food_total |   number 30000
+	           num_hours |   number 0
+	             objects |      nil
+	   electricity_grids |    table 0x000002D281BABE08 #1
+	           to_remove |    table 0x000002D27E89B9D0 #0
+	          GetGridObj | function 0x000002D27E899AF8
+						Lua 0:01:56:891
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_LowStorageWarning.lua:125: attempt to call a nil value (global 'GetCommandCenterLifeSupportGrids')
+  Mod/SMR_CommunityFixPack/Code/Fix_LowStorageWarning.lua(125):  method GatheredResourcesOnHourlyUpdate
+  Lua/City.lua(150):  method HourlyUpdate
+  Lua/City.lua(542):   <>
+  [C](-1):  global procall
+  CommonLua/Core/cthreads.lua(20):  global Msg
+  Lua/DayTime.lua(72):   <>
+        --- end of stack
+Locals:
+	                self |   object City at invalid pos on map 1
+	                 map |   object Map
+	        notification |      nil
+	maintenance_resources |    table 0x000002D277A73678 #0
+	transportable_resources |    table 0x000002D282EEF388 #0
+	   resource_overview |   object ResourceOverview at invalid pos on map 1
+	       food_consumed |   number 0
+	          food_total |   number 30000
+	           num_hours |   number 0
+	             objects |      nil
+	   electricity_grids |    table 0x000002D282EEF3C8 #1
+						Lua 0:01:56:892
+	           to_remove |    table 0x000002D27E89B9D0 #0
+	          GetGridObj | function 0x000002D27E899AF8
+						Lua 0:02:26:892
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_LowStorageWarning.lua:125: attempt to call a nil value (global 'GetCommandCenterLifeSupportGrids')
+  Mod/SMR_CommunityFixPack/Code/Fix_LowStorageWarning.lua(125):  method GatheredResourcesOnHourlyUpdate
+  Lua/City.lua(150):  method HourlyUpdate
+  Lua/City.lua(542):   <>
+  [C](-1):  global procall
+  CommonLua/Core/cthreads.lua(20):  global Msg
+  Lua/DayTime.lua(72):   <>
+        --- end of stack
+Locals:
+	                self |   object City at invalid pos on map 1
+	                 map |   object Map
+	        notification |      nil
+	maintenance_resources |    table 0x000002D277A73678 #0
+	transportable_resources |    table 0x000002D2813C20B0 #0
+	   resource_overview |   object ResourceOverview at invalid pos on map 1
+	       food_consumed |   number 0
+	          food_total |   number 30000
+	           num_hours |   number 0
+	             objects |      nil
+	   electricity_grids |    table 0x000002D2813C20F0 #1
+	           to_remove |    table 0x000002D27E89B9D0 #0
+	          GetGridObj | function 0x000002D27E899AF8
+						Lua 0:02:56:892
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_LowStorageWarning.lua:125: attempt to call a nil value (global 'GetCommandCenterLifeSupportGrids')
+  Mod/SMR_CommunityFixPack/Code/Fix_LowStorageWarning.lua(125):  method GatheredResourcesOnHourlyUpdate
+  Lua/City.lua(150):  method HourlyUpdate
+  Lua/City.lua(542):   <>
+  [C](-1):  global procall
+  CommonLua/Core/cthreads.lua(20):  global Msg
+  Lua/DayTime.lua(72):   <>
+        --- end of stack
+Locals:
+	                self |   object City at invalid pos on map 1
+	                 map |   object Map
+	        notification |      nil
+	maintenance_resources |    table 0x000002D277A73678 #0
+	transportable_resources |    table 0x000002D27A8C27C8 #0
+	   resource_overview |   object ResourceOverview at invalid pos on map 1
+	       food_consumed |   number 0
+	          food_total |   number 30000
+	           num_hours |   number 0
+	             objects |      nil
+	   electricity_grids |    table 0x000002D27A8C2808 #1
+	           to_remove |    table 0x000002D27E89B9D0 #0
+	          GetGridObj | function 0x000002D27E899AF8
+						Lua 0:03:26:892
+[LUA ERROR] Mod/SMR_CommunityFixPack/Code/Fix_LowStorageWarning.lua:125: attempt to call a nil value (global 'GetCommandCenterLifeSupportGrids')
+  Mod/SMR_CommunityFixPack/Code/Fix_LowStorageWarning.lua(125):  method GatheredResourcesOnHourlyUpdate
+  Lua/City.lua(150):  method HourlyUpdate
+  Lua/City.lua(542):   <>
+  [C](-1):  global procall
+  CommonLua/Core/cthreads.lua(20):  global Msg
+  Lua/DayTime.lua(72):   <>
+        --- end of stack
+Locals:
+	                self |   object City at invalid pos on map 1
+	                 map |   object Map
+	        notification |      nil
+	maintenance_resources |    table 0x000002D277A73678 #0
+	transportable_resources |    table 0x000002D277D57710 #0
+	   resource_overview |   object ResourceOverview at invalid pos on map 1
+	       food_consumed |   number 0
+	          food_total |   number 30000
+	           num_hours |   number 0
+	             objects |      nil
+	   electricity_grids |    table 0x000002D278429BA0 #1
+	           to_remove |    table 0x000002D27E89B9D0 #0
+	          GetGridObj | function 0x000002D27E899AF8
+						Lua 0:05:11:467
+
+
+Stopping the game threads from the Lua side with exit code 0.
+
+					Render 0:05:11:468
+
+
+Stopping the game threads after receiving WM_QUIT.
+
+					Render 0:05:11:756
+
+
+*** Debug::Done()
+Time (ms)	311756
+
+
