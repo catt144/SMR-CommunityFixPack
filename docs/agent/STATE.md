@@ -14,17 +14,17 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   needs a NEW colony provisioned from scratch (hours). Override exists but is triage-only (`EF-080`). Decision 98.
   ✅ F114 CAUSE CONFIRMED + GATED (ck106, `8bc6821`): the 1.0.7 `UnloadAll` copy indexed nil demand on 1.1.0.
   ✅ Opt-in pack UNTICKED (ck43): enumerated, ZERO `applied` lines on every boot since 15.21 — no confound.
-  ✅ F113/F112 gates + F111 guard landed (2efbcf6); all three still `filed`.
   ✅ **F115 GATED** (ck109, `628ea4d`): 1.1.0 prepended `map` to `LandscapeForEachUnit` AND moved `Landscapes` to
   a MapVar ⇒ gate = the global is gone (`EF-082`). Body untouched ⇒ `sigcheck` MISMATCH there is CORRECT.
   ✅ **F116 REPAIRED in-body** (`add94b3`), NOT gated: our 1.0.7 copy lacked 1.1.0's PRE-SORT `node_idx`
   revalidation. P1→P2, source-derived, NEVER reproduced. ⛔ The ONLY new code.
-  ⛔ NAME sweeps are BLIND to arity and body changes; **~17 of ~22 full-body replacements are still UNDIFFED** on
-  1.1.0 (count approximate — census owed) and nothing we own bounds body divergence.
+  ⭐ **1.1.0 RE-VERIFICATION DONE 09-08, all 80 modules read: 10 FIX / 35 REMOVE / 35 KEEP** (`reports/
+  PACK_1_1_0_REVERIFICATION.md`, ck114-116). ⛔ 5 APPLIED modules are WRONG today (SaintBlessing, StaleReservations,
+  ShelterReflex(a), FirstAsteroidPrefabs, Astrogeologist); 32 defects were FIXED by vanilla and no self-check saw it.
   ✅✅ BOTH GATES MEASURED 09-08 (`archive/logs/gated110_*`): 63 applied / 17 inactive / 14 named as predicted,
   0 errors; both `update_suspect` routes CONFIRMED. ⛔ MENU-ONLY ⇒ trains/landscaping NOT exercised in play.
   ✅ **HOTFIX_1_AUDIT DONE 09-08: SHIP WITH CHANGES — text-only (ck112/113), code clean**
-  (`reports/HOTFIX_1_AUDIT.md`). Next: owner upload sitting; then `prompts/PACK_1_1_0_REVERIFICATION.md`.
+  (`reports/HOTFIX_1_AUDIT.md`). Next: owner upload sitting.
   ⚖️ Owner rule 09-08: a patch note saying "Fixed" is a **CLAIM, false until we confirm it**.
 - ⭐ PUBLISHED both portals — `pdx_id` **156049**, `steam_id` **3787202810**, tree `version` **5** (F110, 08-30).
   ⛔ Never re-upload to "fix" a version number — each upload bumps again (H-02). ⛔ Every upload OVERWRITES both

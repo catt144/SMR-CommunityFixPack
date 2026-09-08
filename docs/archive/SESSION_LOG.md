@@ -8,6 +8,32 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-08 (6th) — PACK_1_1_0_REVERIFICATION: all 80 modules opened against 1.1.0 — 10 FIX / 35 REMOVE / 35 KEEP
+
+tags: 1.1.0 F92 F58 F73 F83 F95 F70 F50 F34 F52 F46 F111 F112 REMOVE-bucket bodycheck probe sigcheck logscan items-114-116 EF-075
+
+Brief `prompts/PACK_1_1_0_REVERIFICATION.md`. Report `reports/PACK_1_1_0_REVERIFICATION.md`. Tree `cc6f740`.
+No code written, no game launched. Pass 1 (17 real full-body replacements + 5 converted wrappers) and pass 2
+(the 17 self-disabled) read by me; pass 3's 37 wrappers/data modules read by four parallel sub-readers under a
+written eight-question brief, every action verdict re-opened by me against the shipped line.
+
+**Five modules that APPLY today are wrong on 1.1.0**: `SaintBlessing` (1.1.0 fixed the label itself; our
+double transform ⇒ `GetTraitLabel("TraitReligious")` = false ⇒ no Saint blesses anyone — `TraitPreset.lua:85-86`);
+`StaleReservations` (sweep cancels the new expedition residence hold after 5 sols — `Colonist.lua:5003-5008`);
+`ShelterReflex` (a) (`GetScoreFor` takes the colonist now; we pass traits ⇒ throw on filtered habitats —
+`Community.lua:442-453`); `FirstAsteroidPrefabs` (grant deleted upstream; we still hand out 3 prefabs and orphan
+a persisted waiter — `Asteroids.lua:418-423`); `AstrogeologistExtractors` (profile redesigned to a label-wide
++20; we append +10% on two buildings — `CommanderProfilePreset.lua:335-352`). Two re-copies owed
+(`RocketDroneChurn` lacks `not self.refuel_disabled`, `CargoTransporterNew.lua:1442`; `PayloadTemplateRefill`
+lacks the tutorial/destination-pick branches, `CargoRequestNew.lua:169-217`). Three gated re-derivations stand.
+
+**35 modules do nothing useful on 1.1.0** — 32 because the developers fixed the defect (`LastTransmissionStorage`'s
+benign latch was exactly that), 4 of them marginally worse than vanilla. The existence self-checks passed on
+every one: no instrument sees "vanilla fixed it". Pass 4 design: `SRC:`/`DEFECT:` header manifest +
+`tools/bodycheck.py`, a behavioural `probe` `Require` form, `sigcheck` over `SetGlobal`, heal-aware `logscan`
+(the "17 inactive" headline is really 16 — `SaintBlessing` heals at `gated110_*.log:186`).
+Owner items 114–116 filed. Checkpoints `c3ecd26` (passes 1–2) and this commit.
+
 ## 2026-09-08 (later still, 5th) — HOTFIX_1_AUDIT: SHIP WITH CHANGES, text only; six code changes clean; F116 repair kept
 
 tags: 1.1.0 F111 F112 F113 F114 F115 F116 F34 F44 F91 EF-075 EF-081 EF-082 items-110-113 HOTFIX_1_AUDIT decision-110 sigcheck logscan TestKit 97_ForceInactive

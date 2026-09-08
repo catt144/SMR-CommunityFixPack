@@ -29,6 +29,46 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### 2026-09-08 — ITEMS 114–116 OPEN: the pack-wide 1.1.0 re-verification — 10 FIX, 35 REMOVE, 35 KEEP
+
+> **The verdict, one line.** Every one of the 80 modules was opened against the shipped 1.1.0 body it wraps,
+> replaces or patches (`docs/agent/reports/PACK_1_1_0_REVERIFICATION.md`). **35 modules do nothing useful on
+> 1.1.0 because the developers fixed the defect themselves, and 5 modules that APPLY today do something
+> wrong.** No code was written; nothing was run in a game.
+>
+> **114. Five modules are wrong on 1.1.0 right now — repair or remove each.** All five pass their self-check
+> and apply. (a) `SaintBlessing`: 1.1.0 fixed the Saint label itself, so our patch now double-transforms it and
+> **no Saint blesses anyone with the pack on** (`Lua/TraitPreset.lua:85-86`). (b) `StaleReservations`: our
+> 5-sol sweep cancels 1.1.0's new "will return to this residence" expedition hold, so crew back from a long
+> expedition lose their home (`Colonist.lua:5003-5008`, `Residence.lua:392-394`). (c) `ShelterReflex` half (a):
+> `GetScoreFor` now takes the colonist, we pass its traits — a throw on any asteroid habitat with a trait
+> filter (`Community.lua:442-453`). (d) `FirstAsteroidPrefabs`: the vanilla grant is gone; our sweep still
+> hands out three free Micro-G prefabs and orphans a persisted thread (`Asteroids.lua:418-423`).
+> (e) `AstrogeologistExtractors`: the profile was redesigned to a label-wide +20; we append +10% on two
+> buildings on top of it (`CommanderProfilePreset.lua:335-352`). ⭐ **Recommend: (a) probe-gate, (b) one
+> exemption clause, (c) delete half (a), (d) and (e) remove.** Each is a small change plus one boot log; (a)
+> and (b) each want a 5-minute attended control, named in the report §2.
+>
+> **115. Retire the 35 REMOVE modules on 1.1.0 — as a block, delete vs gate per decision 98.** Report §1b,
+> R-1…R-36, each with the shipped line that fixed it. Four are marginally WORSE than vanilla today
+> (`SmallLandscapeSites` narrows drones 10→5, `TouristApplicants` rolls 0..100 vs vanilla's 0..99,
+> `SpaceYDroneCapBullet` prints a duplicate bullet, `DustStormUndergroundBreaks` over-filters). One is a
+> judgement, marked as such: `UniversityOvertraining` (automation is a FLOOR now, so specialists at automated
+> extractors do matter). ⭐ **Recommend: retire all 35 on 1.1.0; if you keep a 1.0.7 line, they become gates,
+> not deletions.** Two small re-copies (`RocketDroneChurn` ignores the new "stop refuelling" toggle;
+> `PayloadTemplateRefill` breaks the new tutorial's pre-fill) ride the same prompt.
+>
+> **116. Accept the tooling design so the next game update is a tool run, not a week.** Report §4: a
+> per-module `SRC:`/`DEFECT:` header pair plus `tools/bodycheck.py` (body hash + "is the defective expression
+> still shipped?"), a behavioural `probe` form in `Require`, `sigcheck.py` over `SetGlobal` sites, and
+> `logscan.py` counting heals (the "17 inactive" headline is really 16). ⭐ **Recommend yes**; no runtime
+> behaviour changes, one script and header lines.
+>
+> ⚠️ **What this does NOT cover:** nothing was played; the report §3 names every module whose verdict rests
+> on a sub-reader's quoted lines rather than my own re-read. The two gated re-derivations you already know
+> (`LandscapeUnitFilter` route (b), `TrainCargoDumping` F46 on the new depot base) plus `VacuumWalks` stay
+> owed under decision 99.
+
 ### 2026-09-08 — ITEMS 112–113 OPEN: the hotfix-1 audit says SHIP WITH CHANGES, and both changes are wording
 
 > **The verdict, one line.** A fresh session audited every one of the six changes against the shipped 1.1.0
