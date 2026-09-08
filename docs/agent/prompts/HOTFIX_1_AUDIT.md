@@ -136,7 +136,10 @@ shipped v5 file) and the mechanism moved wholly into the Test Kit's
 ⛔ **Verify, do not assume:**
 - `Code/00_Core.lua` is byte-identical to the shipped v5 file. `git diff` it
   against the last commit that touched it before 2026-08-30.
-- The pack's diff vs live v5 contains **only** the five gate/guard files.
+- The pack's diff vs live v5 contains **only** the six expected files — the five
+  gate/guard changes plus `Fix_TrackSalvageWipe.lua` (F116's repair, §2f).
+  ⚠️ This line said "five" until F116 landed as a REPAIR; do not read the
+  sixth as an unexplained extra.
 - The Test Kit replacement actually works from outside — it swaps
   `SMRFixPack.Require` around a re-apply and replicates `run_apply`'s verdict
   handling **by hand**. ⚠️ That hand-copy can drift from `00_Core`. Check it

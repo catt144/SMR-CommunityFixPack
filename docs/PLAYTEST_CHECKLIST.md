@@ -29,7 +29,7 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
-> ✅⛔ **109 AND 110 ARE RULED AND ACTIONED — 2026-09-08, the hotfix-1 apply leg. ONE THING IS OWED BY YOU: A BOOT.**
+> ✅ **109 AND 110 ARE RULED, ACTIONED AND NOW MEASURED — 2026-09-08, the hotfix-1 apply leg. NOTHING IS OWED BY YOU.**
 > **109 = GATE, route (a), done** (`628ea4d`). `Fix_LandscapeUnitFilter` now declines on 1.1.0. The replacement
 > body is UNTOUCHED, so nothing pins us to 1.1.0's signature and the fix re-arms cleanly in a later patch.
 > ⭐ The gate does not test a label. 1.1.0 moved `Landscapes` from a GameVar to a MapVar, and MapVars never
@@ -39,30 +39,26 @@ completed tests move whole to
 > file, `0` hits for the override symbols, and the pack's entire diff against live v5 is six files and
 > nothing else — the five gate/guard changes plus F116's repair. **The pack ships ZERO diagnostic code.**
 >
-> ⛔ **NONE OF IT IS MEASURED YET, AND I WILL NOT CALL IT FIXED.** There is no Lua binary on this rig, so a boot
-> log is the only test that counts, and no boot has happened since either gate landed.
->
-> **WHAT I NEED FROM YOU — one unforced boot, shipped configuration, a couple of minutes:**
-> 1. Launch, reach the main menu, **quit**, and copy the log **after the process exits**. A log copied while the
->    game is running is a PARTIAL log — that cost us two wrong counts today (a "1 throw" that was really 6, a
->    "30 throws" that was really 157).
-> 2. If a colony is handy: run a train between two stations, and hit flatten landscaping once.
->
-> **What it must read.** I am writing the prediction down FIRST so that a difference is a finding rather than
-> something I quietly adjust afterwards:
-> * **17 inactive / 14 named** in the player dialog (the last measured boot was 15 / 12).
-> * **ZERO** `Fix_TrainCargoDumping.lua:89` lines and **ZERO** `Fix_LandscapeUnitFilter.lua:63` lines.
-> * the train **leaves its platform**; landscaping raises **no mod-error dialog**.
->
-> ⛔ **16/13 or 17/13 is a FINDING, not a bookkeeping slip.** The two gates raise the dialog flag by different
-> routes on purpose — F115's runs through `Require`, F114's through a hand-written mark — so a 17/13 reading
-> points at F114's mark specifically. Give me the numbers and I will investigate, not adjust.
->
-> ⚠️ **THE PATCH NOTES ARE WRITTEN AND MUST NOT BE UPLOADED UNTIL THAT BOOT PASSES.** They open "Fixed for game
-> 1.1.0", and your own ruling today is that a "Fixed" line is a CLAIM until confirmed — that binds ours too.
-> `metadata.lua` `last_changes` and the `UPLOAD_WORKFLOW` §3 paste backup are in sync and ready to go.
-> ⛔ No upload, no `version` edit, no Mod Editor from me (`H-02`) — the bump belongs to your sitting.
->
+> ✅✅ **BOOT DONE, PREDICTION HIT EXACTLY — 2026-09-08 17:51. Nothing is owed from you on 109/110.**
+> `63 applied / 17 inactive / 14 named`, **zero error-shaped lines**, and your dialog screenshot names both
+> `TrainCargoDumping` and `LandscapeUnitFilter`. Predicted 17/14 before the reading; it came back 17/14.
+> Canonical log archived as `archive/logs/gated110_Mars.exe-20260908-17.51.09-6a91a190.log`.
+> ⭐ **Both P1s are dead, and by the strongest available route:** each module reports `inactive` with its
+> gate's own reason string, so it never installed — the throws are impossible BY CONSTRUCTION, not merely
+> absent from a sample. The open question about F114's hand-written `update_suspect` is answered: it works.
+> ⛔ **WHAT IS STILL NOT TESTED, so the win is not overread.** That was a **menu-only** session (~2 minutes,
+> no game loaded). **Trains and landscaping were never exercised.** "Zero throws" is therefore not a
+> play-test result. The in-play controls — a train leaving its platform, landscaping raising no dialog, and
+> the RC-Dozer separating control — remain unrun, and F116's track-salvage control (item 111) with them.
+> ⚠️ Nothing about those needs to block the upload: the gates remove our code from the path entirely.
+> ⚠️ **What 1.1.0 players lose, stated plainly, because it is the cost of the gates:** F34(d) is live again
+> (landscaping can drag boarding colonists out) and F46 is live again (trains can dump cargo at a station
+> where you switched that resource off). Both are vanilla bugs we were correcting and now are not, until the
+> modules are re-derived against 1.1.0. That is decision 99's territory.
+> ✅ **The patch notes are now cleared to upload** — the "Fixed for game 1.1.0" claim is confirmed, which is
+> what your own "a Fixed line is a CLAIM" rule required. `metadata.lua` and the `UPLOAD_WORKFLOW` §3 paste
+> backup are in sync. ⛔ Still no upload, no `version` edit, no Mod Editor from me (`H-02`).
+
 > ⚠️ **WHAT THIS PATCH DELIBERATELY DOES NOT CLAIM.** 17 of the pack's 22 full-body replacements have never been
 > diffed against 1.1.0, and no instrument we own bounds body divergence — the name sweep sees names, `sigcheck`
 > sees arity, the runtime self-checks see existence, and F114 was invisible to all three. That is why the notes

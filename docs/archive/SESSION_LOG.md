@@ -75,6 +75,17 @@ claim 1.1.0 compatibility: 17 of 22 full-body replacements remain undiffed and n
 divergence. `version` untouched (`H-02`). ⛔ The notes are written but must not ship until the boot passes —
 the owner's "a Fixed line is a CLAIM" rule binds ours.
 
+**✅ MEASURED AFTER THE LEG WAS WRITTEN — the boot happened and the prediction hit exactly.** Owner's unforced
+menu-only boot `17.51.09`, game exited before the copy, archived `archive/logs/gated110_*`: **63 applied / 17
+inactive / 14 named, ZERO error-shaped lines**. Predicted 17/14 ahead of the reading; it read 17/14. ⭐ The open
+question resolves in F114's favour — its HAND-WRITTEN `update_suspect` works, as does F115's `Require`-native
+route, so the two mechanisms are both confirmed rather than one masking the other. ⭐ Each module reports
+`inactive` with its own gate reason, so the throws are impossible BY CONSTRUCTION, not absent from a sample.
+⛔ **MENU-ONLY (~2 min, no game loaded): trains and landscaping were NEVER exercised.** "Zero throws" is not a
+play-test result and no `tested-*` word was claimed for in-play behaviour — the `EF-081` untested-is-not-clean
+rule applied to our own good news. `F115` moved `filed` → `fixed` (heading tag + front matter + INDEX
+regenerated); `F114.md` was updated by the sibling session (`29e06a3`); audit §2c corrected five → six files.
+
 **STATE eviction (this commit).** Two claims evicted to make room, both superseded halves, both with homes:
 (1) F114's "⛔ NO CAUSE. Narrow, do NOT ship a repair — sitting brief `prompts/TRAINS_AND_LOGSCAN_SITTING.md`"
 — the cause was confirmed live at 16:25 and the gate shipped in `8bc6821`; home `bugs/F114.md` and that brief.
