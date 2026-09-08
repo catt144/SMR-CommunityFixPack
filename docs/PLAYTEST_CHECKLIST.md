@@ -29,6 +29,42 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### 2026-09-08 — ITEMS 112–113 OPEN: the hotfix-1 audit says SHIP WITH CHANGES, and both changes are wording
+
+> **The verdict, one line.** A fresh session audited every one of the six changes against the shipped 1.1.0
+> source and the boot log (`docs/agent/reports/HOTFIX_1_AUDIT.md`). **The code is clean: nothing to fix, nothing
+> to gate, F116's repair should stay.** Decision 110 was actioned exactly as ruled (`00_Core.lua` byte-identical
+> to v5; six files plus `metadata.lua` in the diff; nothing else). The boot log is complete and post-exit, and it
+> reads what was predicted. ⛔ Still not exercised in play: trains, landscaping, track salvage.
+>
+> **112. The store description promises something the pack cannot do.** HOW IT WORKS, bullet 3, your own
+> wording from 22d(1): *"Every fix checks the game's code before it touches anything, and stands down by itself
+> if an official patch changes what it was written for."* The self-checks see whether a thing still EXISTS;
+> they cannot see a same-name change of body or signature, and 1.1.0 just proved it twice (trains, landscaping —
+> neither fix stood down). Every upload re-posts the description as the page body, so this upload would post that
+> sentence beside a changelog that admits two fixes broke on the new version.
+> * **(a) Reword it now, in this upload** — proposed: *"…and stands down by itself if the code it was written
+>   for has been renamed or removed. That check cannot see every kind of change, which is why each game update
+>   gets a compatibility pass. A fix that stands down does nothing at all — it never guesses."* Text only; the
+>   §3 paste backups and `STORE_CARD_LIVE.md` are synced in the same commit.
+> * **(b) Leave it for the next cycle.** The hotfix is a safety pass and this is a credibility line, not a
+>   gameplay one.
+> ⭐ **My recommendation: (a).** It is your sentence, so it is your call; the cost is one commit.
+>
+> **113. `last_changes` bullet 3 overstates the track-salvage change.** *"One track-salvage fix was also brought
+> in line with the new game code"* reads as parity. Two deliberate differences from 1.1.0 remain (item 111 is one
+> of them) and the repair has never run in a game. Proposed: *"One track-salvage fix was also updated for the new
+> game code."* Same length. **Recommend yes**; text only, synced to `UPLOAD_WORKFLOW` §3.
+>
+> **Not a decision — a five-minute check worth your time before uploading.** Bullet 1 says "Fixed" for the
+> trains. That is confirmed BY CONSTRUCTION (the module never installs on 1.1.0, so its throw cannot happen), but
+> no colony has been played with the gated pack. On your existing BlankBig_02 colony: load, watch the first train
+> leave its platform, assign the second. If it does, the note is confirmed the way you can see; if it does not,
+> that is a finding and the note is wrong. ⚠️ Untick the Test Kit's force leg first if it is armed (it is not,
+> per the 17:51 log).
+>
+> ⚠️ **Nothing here blocks the upload.** If you decline 112 and 113, the code still ships safely as it stands.
+
 > ✅ **109 AND 110 ARE RULED, ACTIONED AND NOW MEASURED — 2026-09-08, the hotfix-1 apply leg. NOTHING IS OWED BY YOU.**
 > **109 = GATE, route (a), done** (`628ea4d`). `Fix_LandscapeUnitFilter` now declines on 1.1.0. The replacement
 > body is UNTOUCHED, so nothing pins us to 1.1.0's signature and the fix re-arms cleanly in a later patch.

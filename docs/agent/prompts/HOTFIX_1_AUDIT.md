@@ -1,5 +1,10 @@
 # HOTFIX 1 — AUDIT (link 2 of 2, TERMINAL; link 1 was `HOTFIX_1_APPLY.md`)
 
+> ✅ **CLOSED 2026-09-08 — run, verdict delivered. Read as history.** Report:
+> `reports/HOTFIX_1_AUDIT.md`. **SHIP WITH CHANGES, text only** (checklist 112,
+> 113); the six code changes are clean; F116's repair stays. The §2f pointer
+> "`00_Core.lua:118`, `:157-163`" and the §1 table are as verified.
+
 Paste into a **fresh** Claude Code session that did NOT do the implementation.
 **Start with `git log --oneline -15` + `git pull`.** Read `docs/agent/STATE.md`
 (mandatory), `docs/agent/FIX_POLICY.md`, and `bugs/F111`–`F116`.

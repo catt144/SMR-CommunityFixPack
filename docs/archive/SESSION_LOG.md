@@ -8,6 +8,48 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-08 (later still, 5th) — HOTFIX_1_AUDIT: SHIP WITH CHANGES, text only; six code changes clean; F116 repair kept
+
+tags: 1.1.0 F111 F112 F113 F114 F115 F116 F34 F44 F91 EF-075 EF-081 EF-082 items-110-113 HOTFIX_1_AUDIT decision-110 sigcheck logscan TestKit 97_ForceInactive
+
+Brief `prompts/HOTFIX_1_AUDIT.md` (link 2 of 2, terminal). Fresh session, none of the implementation was mine.
+Report: `reports/HOTFIX_1_AUDIT.md`. Tree `09f11cc`; a sibling landed `PACK_1_1_0_REVERIFICATION.md` mid-leg,
+no overlap. No code edited, no game launched.
+
+**Verdict: SHIP WITH CHANGES, both changes wording.** Nothing found in the six code diffs. Every gate's ROUTE was
+re-derived from the shipped 1.1.0 tree, not inherited: F115 (`Landscaping.lua:21/:509/:510/:522`, `lib.lua`
+GameVar `:1069-1071` vs MapVar `:984-1000`, `autorun.lua:431-434`, `Require`'s evaluation order and the
+directional composition of primary + belt); F114 (`MultiResourceDepot.lua:8`, `Station.lua:51`); F113 (0 hits,
+`UniversalRocket.lua:2028`); F112 (`law_scale` 0 files, `Workplace.lua:250`); F111 (`:718-729`, `:263-265`,
+`:285-287`, `Colonist.lua:794-796` ⇒ the wrapper is inert on 1.1.0, guard correct on both shapes).
+
+⭐ **The 1.0.7 half of F115 got a better footing than "the record says GameVar".** Two verbatim copies of 1.0.7
+vanilla code read `Landscapes` as a bare global (our replacement body; F34's `:60-63` citation), and F34(d) is
+`fixed*` with an attended witness on 1.0.7 ⇒ the key existed in `_G` on 1.0.7 whatever registered it. A route,
+not a re-read (`EF-075` still binds).
+
+**Decision 110 clean:** `00_Core.lua` byte-identical to v5 (diff empty vs `ce77162` and absent from the diff vs
+`7863f3d`); pack diff vs v5 = six Code files + `metadata.lua`; `items.lua` untouched. Test Kit hand-copy of
+`run_apply` matches today. ⚠️ Test Kit header (`97_ForceInactive.lua:37-43`) is WRONG that forcing re-arms
+F114/F115: both gates are `test` specs and the forcing `Require` honours those, so only F113 is re-armed. Safe
+direction, local-only, fix when next touched.
+
+**Boot reconciliation:** live `17.51.09` log byte-identical to `archive/logs/gated110_*`, `Debug::Done()`,
+0 game loads ⇒ complete, post-exit, menu-only. 63/17/14, 0 error-shaped lines; the `17.49.54` boot two minutes
+earlier reads identically. Every error line in the other six 1.1.0 logs is attributed (EF-081, F114, F115).
+
+**F116 ruled: keep the repair, do not gate, leave both divergences.** Merge route walked
+(`AutoConnectTracks` `:328-441`, collision at `:419`/`:424`, conditional repair `:430-432`, restamp
+`Tracks.lua:579/:633`, bail `:615-620`/`:818-819`). Gating would hand F44 back to 1.1.0 players — verified
+still live in vanilla 1.1.0 (`TrackElement.lua:504-509`, `:528-531`, `:542-545`) — and F91 too
+(`Track.lua:248-284`). Item 111 (a) endorsed.
+
+**Findings → checklist 112 (description's "stands down if an official patch changes what it was written for"
+is falsified by 1.1.0 and every upload re-posts it) and 113 (`last_changes` "brought in line" overstates F116).
+Plus a recommended five-minute in-play train check before upload (non-blocking). §2e position: ship first; the
+~17 undiffed bodies are v5's exposure already, and the count itself needs a mechanical census before
+`PACK_1_1_0_REVERIFICATION.md` pass 1 runs.**
+
 ## 2026-09-08 (later still, 4th) — HOTFIX_1_APPLY: the F115 gate, 110 verified rather than accepted, and an EF-003 correction
 
 tags: 1.1.0 F114 F115 F116 EF-003 EF-078 EF-081 EF-082 items-109-110 LandscapeUnitFilter MapVar GameVar autorun HOTFIX_1_APPLY

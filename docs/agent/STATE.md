@@ -12,21 +12,19 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   modules, the game measured 13 (`EF-078`).
   ⛔ **1.0.7 SAVES CANNOT LOAD ON 1.1.0** (`EF-079`) ⇒ the ENTIRE fixture library is branch-locked; a 1.1.0 leg
   needs a NEW colony provisioned from scratch (hours). Override exists but is triage-only (`EF-080`). Decision 98.
-  ✅ F114 CAUSE CONFIRMED + GATED (ck106, `8bc6821`): the 1.0.7 `UnloadAll` copy indexed nil demand on 1.1.0
-  ⇒ train never moved (`bugs/F114.md`).
+  ✅ F114 CAUSE CONFIRMED + GATED (ck106, `8bc6821`): the 1.0.7 `UnloadAll` copy indexed nil demand on 1.1.0.
   ✅ Opt-in pack UNTICKED (ck43): enumerated, ZERO `applied` lines on every boot since 15.21 — no confound.
   ✅ F113/F112 gates + F111 guard landed (2efbcf6); all three still `filed`.
-  ✅ **F115 GATED** (ck109, `628ea4d`): 1.1.0 prepended `map` to `LandscapeForEachUnit` (`Landscaping.lua:509`)
-  AND moved `Landscapes` to a MapVar ⇒ gate = the global is gone (`EF-082`). Body untouched, so `sigcheck` still
-  reads MISMATCH here and that is CORRECT (`bugs/F115.md`).
+  ✅ **F115 GATED** (ck109, `628ea4d`): 1.1.0 prepended `map` to `LandscapeForEachUnit` AND moved `Landscapes` to
+  a MapVar ⇒ gate = the global is gone (`EF-082`). Body untouched ⇒ `sigcheck` MISMATCH there is CORRECT.
   ✅ **F116 REPAIRED in-body** (`add94b3`), NOT gated: our 1.0.7 copy lacked 1.1.0's PRE-SORT `node_idx`
-  revalidation (`TrackElement.lua:473-476`). P1→P2, source-derived, NEVER reproduced. ⛔ The ONLY new code.
-  ⛔ NAME sweeps are BLIND to arity and body changes; **17 of 22 full-body replacements are still UNDIFFED** on
-  1.1.0 and nothing we own bounds body divergence (F114 was invisible to all three).
-  ✅✅ **BOTH GATES MEASURED 2026-09-08** (owner boot `17.51.09`, `archive/logs/gated110_*`): **63 applied /
-  17 inactive / 14 named**, exactly as predicted, **0 error-shaped lines**. Both hand-written (F114) and
-  `Require`-native (F115) `update_suspect` routes CONFIRMED. ⛔ MENU-ONLY (~2 min, no game loaded) ⇒ trains and
-  landscaping were NOT exercised; the throws are impossible by construction, not observed-absent. Untested ≠ clean.
+  revalidation. P1→P2, source-derived, NEVER reproduced. ⛔ The ONLY new code.
+  ⛔ NAME sweeps are BLIND to arity and body changes; **~17 of ~22 full-body replacements are still UNDIFFED** on
+  1.1.0 (count approximate — census owed) and nothing we own bounds body divergence.
+  ✅✅ BOTH GATES MEASURED 09-08 (`archive/logs/gated110_*`): 63 applied / 17 inactive / 14 named as predicted,
+  0 errors; both `update_suspect` routes CONFIRMED. ⛔ MENU-ONLY ⇒ trains/landscaping NOT exercised in play.
+  ✅ **HOTFIX_1_AUDIT DONE 09-08: SHIP WITH CHANGES — text-only (ck112/113), code clean**
+  (`reports/HOTFIX_1_AUDIT.md`). Next: owner upload sitting; then `prompts/PACK_1_1_0_REVERIFICATION.md`.
   ⚖️ Owner rule 09-08: a patch note saying "Fixed" is a **CLAIM, false until we confirm it**.
 - ⭐ PUBLISHED both portals — `pdx_id` **156049**, `steam_id` **3787202810**, tree `version` **5** (F110, 08-30).
   ⛔ Never re-upload to "fix" a version number — each upload bumps again (H-02). ⛔ Every upload OVERWRITES both
@@ -88,8 +86,9 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 - STATE.md format: most efficient and safest — one fact per line, byte caps do the read job (08-18, item 42).
 
 ## Open owner decisions (bodies in `docs/PLAYTEST_CHECKLIST.md` → "Decisions waiting on you")
-- ⛔ 98 1.0.7 branch: pin back or rebaseline (GATES 99-101) · 99 disposition of the 6 self-disabled modules ·
+- ⛔ 98 1.0.7 branch: pin back or rebaseline (GATES 99-101) · 99 disposition of the self-disabled modules ·
   100 say anything to players yet (rec no) · 101 accept the re-verification chain shape.
+- 111 F116 orphan policy (rec keep) · 112 card self-check sentence · 113 F116 patch-note wording (audit F-1/F-2).
 - 73 blame surface — harden or not · 76 confirm (a) was a ruling not a leaning · 53 harden now or in 1.0.1
   (rec 1.0.1) · 51 both-packs leg timing (rec after launch) · 50 chain-vs-replace wording · 47 two modder-page
   wordings · 43 opt-in pack re-tick · 41 dialog wording + sweep cap 5→8 · 40 `smr_shuttles` name · 39 dialog re-fire.
