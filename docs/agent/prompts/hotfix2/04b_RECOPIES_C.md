@@ -571,3 +571,70 @@ probe should now observe on 1.1.0 and whether your gate DECLINES on the rig (a
 probe for a gated-off module must SKIP with the reason, not FAIL). ⛔ Do not
 edit the kit yourself — 07 owns it, and two links editing one local-only repo
 is how a verified record got stranded once already (`doccheck.py:583`).
+
+### From link 04 (`smr-bugfixpack-ba`, closed `55b1d5e`) — what changed under the 01 notes above, and what worked
+
+*(Commits `3f8394b` F-7 · `177c7b2` F-6 · `fc318c7` F116. Nothing ran in a game.)*
+
+1. ⭐ **THE 1.0.7 TREE IS BACK — link 01's item 4 above ("GONE from disk, no true
+   1.0.7-vs-1.1.0 game body pair") is OUT OF DATE.** `ad5f93d` archived it at
+   `C:\Dev\SMR-SrcArchive\1.0.7.396349\Src` (4448 files, base game sound; ⚠️ its
+   `DLC/` subtree is a Steam artefact, 12 files vs 151 — do not cite DLC paths
+   from it). `python tools/bodycheck.py --src <that path> --module X` works;
+   on `TrackSalvageWipe` it reports BODY-CHANGED, a real game-side branch pair.
+   ⇒ **Diff every body THREE ways before you copy: 1.0.7 vs 1.1.0 vs ours.**
+   For F-7 that turned "our copy was faithful" from an assumption into a fact
+   (the non-FIX lines matched 1.0.7 byte for byte; 1.1.0 changed one line). For
+   F-9, the ~98-line rewrite, it is the only way to know which lines are
+   1.1.0's and which were ours. ⚠️ File mtimes across the LIVE tree are new (it
+   was re-downloaded twice on 09-08); content hashes are the only signal.
+2. ⭐ **There is a Lua 5.4 parser on the rig** — `python -c "import lupa"`
+   (lupa 2.8, `from lupa import lua54`). 01 and 03 said "no Lua binary"; true,
+   but this is a parser. I used it two ways, and both are worth copying:
+   * a parse sweep — `load(src)` on every `Code/*.lua`, falsified on a chunk
+     missing an `end` (went RED), 45/45 GREEN — replaces the hand-rolled block
+     balancer that went wrong twice upstream;
+   * **desk controls** — extract a body with `luafn.find_bodies` (0-based
+     INCLUSIVE indices: slice `lines[s:e+1]`), run the SHIPPED 1.1.0 body, the
+     SHIPPED 1.0.7 body and OUR copy in a fresh `LuaRuntime` with a small
+     prelude (`table.find`/`find_value`/`get`/`copy`, `Max`/`Min`, `const`,
+     `g_Consts`, `empty_table`) on the SAME stub, and compare. That is how F-6's
+     probe was shown to file 0 on 1.1.0 and 5 on 1.0.7 before it shipped, and
+     how §7's rehome loop was shown to terminate. The scripts are in my session
+     scratchpad, not `tools/` — rebuild in ~60 lines. ⛔ A stubbed harness says
+     the Lua does what you asked on synthetic input; it says NOTHING about a map.
+3. **The `probe` form worked as 01 specced it (F-6), and here is the case where
+   it CANNOT be used (F-7), because you will hit the same class.** A stub probe
+   of `UpdateCargoResourceRequests` would read UNKNOWN on every cold boot: the
+   body loops over `TransportableResourceIds`, which `PreProcessResources` fills
+   on `DataChanged` (`Resources.lua:404-449`, `:492-500`) and which is EMPTY at
+   `ClassesBuilt`. ⇒ **before writing any probe, ask what DATA the target reads
+   and whether it exists at apply time**; if it does not, `FIX_POLICY` §2a's
+   fallback is a shape `test` on a discriminating declaration (F-7 tests the
+   `refuel_disabled` property + `ToggleRefuel`, 0 hits on 1.0.7), with the reason
+   in the file and no `update_suspect`. Your F-9 target reads `g_Consts` (data)
+   — check when `g_Consts` is populated relative to your apply trigger before
+   you rely on a probe there.
+4. **Stub contract discipline that paid off:** `table.find` returns on a nil
+   array (`CommonLua/LuaExportedDocs/Global/table.lua:9-11`), so a template path
+   with a nil template is the shipped body's own everyday case — I cited that
+   line in the probe's contract rather than asserting it. Cite the shipped
+   line for every "safe on a stub" claim; 99's Pass E will ask.
+5. ⛔ **Do NOT re-stamp a `SRC:` pin after editing OUR module.** The pin hashes
+   the SHIPPED body; a module-side edit cannot move it, and `--pin` re-emits the
+   identical hash. My prompt's §7 and 99's Pass D both said "re-stamp" — false,
+   corrected in 99 (`fc318c7`). Re-pin ONLY when the shipped target you copy
+   from changes, and never to silence a BODY-CHANGED (`FIX_POLICY` §2b).
+6. **Manifest shapes 99 will accept without argument:** several `SRC:` lines per
+   module, and a `SRC:` with NO `DEFECT:` is fine when the file says why (F-6 pins
+   `resolve_loc_cargo_template`, a `local function`, for class (b) only — the
+   bare-name selector works for locals). `bodycheck.py`'s summary does NOT list a
+   deliberate no-defect row as `NO-DEFECT` (filed to 05) — do not go looking for
+   a row that is not printed.
+7. **Line-ending hygiene:** the Write tool emits LF; the tree is CRLF. Convert
+   a rewritten `Code/*.lua` to CRLF before committing (git stores LF either way,
+   but the working tree otherwise shows EOL churn, which is where 01's 39-file
+   scare came from).
+8. **Test Kit:** do not touch it (07 owns it, note above). But DO say in your
+   99 outbox, per module, what its probe should now observe and whether the gate
+   declines on the rig — 07 reads that.
