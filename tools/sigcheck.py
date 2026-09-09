@@ -17,7 +17,8 @@ by 5. Check the THING, not its label.
     python tools/sigcheck.py                    # compare against the live source
     python tools/sigcheck.py --src <path>       # point at another ModTools/Src
     python tools/sigcheck.py --all              # include matches, not just problems
-    python tools/sigcheck.py --selftest         # the falsifier for the SetGlobal leg
+    python tools/sigcheck.py --coverage         # sites carrying no SRC: pin of their own
+    python tools/sigcheck.py --selftest         # the falsifier
 
 WHAT IT REPORTS
   MISMATCH   our parameter list differs from the shipped one -- read every one
@@ -221,6 +222,8 @@ def main():
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--src", default=DEFAULT_SRC)
     ap.add_argument("--all", action="store_true", help="also print OK rows")
+    ap.add_argument("--coverage", action="store_true",
+                    help="list replacement sites carrying no SRC: pin of their own function")
     ap.add_argument("--selftest", action="store_true",
                     help="falsify the A-4 SetGlobal resolution, both directions")
     a = ap.parse_args()
@@ -300,6 +303,14 @@ def main():
         if note:
             print("            %s" % note)
 
+    gaps = coverage()
+    if a.coverage:
+        print("=" * 78)
+        print("MANIFEST COVERAGE -- replacement sites with no SRC: pin of their")
+        print("own function. NOT a defect list: a site nothing watches.")
+        for fn, ln, target, how in gaps:
+            print("  %-40s %s:%d  (%s)" % (target, fn, ln, how))
+
     setglobal = sum(1 for s in sites if s[5].startswith("SetGlobal"))
     print("=" * 78)
     print("%d replacement site(s) (%d of them SetGlobal): "
@@ -308,7 +319,63 @@ def main():
               counts["MULTI"], counts["UNRESOLVED"], counts["OK"]))
     print("An OK is NOT a clearance: a same-name, same-arity function whose BODY")
     print("changed is invisible here, exactly as it is to the runtime self-checks.")
+    print("%d site(s) carry no SRC: pin of their own function%s -- nothing watches"
+          % (len(gaps), "" if a.coverage else " (--coverage lists them)"))
+    print("those bodies for a change. A count, not a failure (link 01: the FIX and")
+    print("REMOVE sets are unstamped until the pack is whole), and a LOWER bound.")
     return 0
+
+
+# --- manifest coverage: which replacement sites nothing watches ---------------
+#
+# Filed by the 2026-09-09 cross-branch runs (hotfix2 link 04b) and built here
+# because this file already enumerates every replacement site. The gap it names
+# is real and was MEASURED: 11 sites carry no `SRC:` pin of THEIR OWN function
+# -- the module pins a neighbour instead -- and 8 of those wrapped bodies DID
+# change between 1.0.7 and 1.1.0. `bodycheck` cannot see that at all; it checks
+# the pins that exist, and a site with no pin is simply not a row.
+#
+# ⚠️ IT IS A LOWER BOUND, DELIBERATELY. It sees the sites this file sees, which
+# is `function X:Y(` declarations plus `SetGlobal("Y", ...)`. A function literal
+# handed to something else is invisible to both -- the same blind spot the A-4
+# work narrowed rather than closed.
+#
+# ⚠️ AND AN UNPINNED SITE IS NOT A DEFECT. It is a site whose body nothing is
+# watching, which is a thing to decide about, not a thing to fix. The FIX and
+# REMOVE sets are deliberately unstamped until the pack is whole (link 01), so
+# this count is expected to be non-zero and is reported, never gated.
+
+RE_SRC_SELECTOR = re.compile(r"^\s*--\s*SRC:\s*(?:none\b|(\S+)\s+(\S+))")
+
+
+def manifest_selectors(path):
+    """Every bare name a module's `SRC:` lines pin, from `Class:Method`,
+    `Class.Method` or a plain `Name`. A `L<a>-<b>` span pins no name and an
+    `SRC: none` pins nothing at all -- both correctly contribute none."""
+    names = set()
+    with open(path, "r", encoding="utf-8", errors="replace") as fh:
+        for line in fh:
+            m = RE_SRC_SELECTOR.match(line)
+            if not m or not m.group(2):
+                continue
+            sel = m.group(2)
+            if re.match(r"^L\d+-\d+$", sel):
+                continue
+            names.add(re.split(r"[:.]", sel)[-1])
+    return names
+
+
+def coverage(code=None):
+    """-> [(file, line, target, how)] for every replacement site whose own
+    module carries no `SRC:` pin naming that function."""
+    code = code or CODE
+    cache, gaps = {}, []
+    for fn, ln, cls, name, ours, how in scan_pack(code):
+        if fn not in cache:
+            cache[fn] = manifest_selectors(os.path.join(code, fn))
+        if name not in cache[fn]:
+            gaps.append((fn, ln, ("%s:%s" % (cls, name)) if cls else name, how))
+    return gaps
 
 
 # --- the falsifier -----------------------------------------------------------
@@ -354,6 +421,21 @@ SELFTEST_MODULE = '''\
 	SMRFixPack.SetGlobal("GetTable", SomeTable.field, "not a function literal")
 '''
 
+# coverage fixtures: one site pinned by its own SRC:, three that are not, for
+# each of the three ways a manifest can fail to name a function.
+SELFTEST_PINNED = '''\
+-- SRC: Lua/Fixture.lua Vanilla:Watched sha256=0000000000000000000000000000000000000000000000000000000000000000
+-- SRC: none a data patch, pins no name at all
+-- SRC: Lua/Fixture.lua L4-25 sha256=0000000000000000000000000000000000000000000000000000000000000000
+-- SRC: Lua/Fixture.lua Neighbour:Pinned sha256=0000000000000000000000000000000000000000000000000000000000000000
+function Vanilla:Watched(a)
+end
+function Vanilla:Unwatched(a)
+end
+function SpanOnly(a)
+end
+'''
+
 
 def selftest():
     import tempfile
@@ -374,6 +456,8 @@ def selftest():
         fh.write(SELFTEST_SHIPPED)
     with open(os.path.join(code, "Fix_Selftest.lua"), "w", encoding="utf-8") as fh:
         fh.write(SELFTEST_MODULE)
+    with open(os.path.join(code, "Fix_SelftestPinned.lua"), "w", encoding="utf-8") as fh:
+        fh.write(SELFTEST_PINNED)
 
     sites = {s[3]: s for s in scan_pack(code)}
 
@@ -427,11 +511,26 @@ def selftest():
                                 "IsLRTransportAvailable")] == ["OK"] * 3,
           repr(got))
 
+    print("manifest coverage (link 04b's filed gap)")
+    gaps = {t for _f, _l, t, _h in coverage(code)}
+    # 7. a site its own module pins by name is NOT a gap...
+    check("a site pinned by its own SRC: selector is not a gap",
+          "Vanilla:Watched" not in gaps, repr(sorted(gaps)))
+    # 8. ...and the three ways a manifest can fail to name it all ARE. This is
+    #    the leg that matters: a module pinning a NEIGHBOUR looks stamped, and
+    #    04b measured 8 such bodies that DID change between branches.
+    check("unpinned, span-only and SRC-none sites are all gaps",
+          {"Vanilla:Unwatched", "SpanOnly"} <= gaps
+          and "Neighbour:Pinned" not in gaps, repr(sorted(gaps)))
+    # 9. a SetGlobal site is covered by the same check, not exempt from it
+    check("SetGlobal sites are covered by the gap check too",
+          "TriggerCaveIn" in gaps and "GetTable" in gaps, repr(sorted(gaps)))
+
     print("=" * 78)
     if fails:
         print("SELFTEST FAILED: %s" % ", ".join(fails))
         return 1
-    print("selftest: 6 leg(s) pass. This falsifies the A-4 RESOLUTION only --")
+    print("selftest: 9 leg(s) pass. This falsifies the A-4 RESOLUTION only --")
     print("it says nothing about whether an OK row's BODY is still correct.")
     return 0
 
