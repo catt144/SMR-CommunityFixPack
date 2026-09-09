@@ -1625,6 +1625,42 @@ was chosen to avoid, arriving through the back door.
 
 ## Notes from upstream (continued — SELFCHECK_PROMISE_AUDIT, appended after link 06's close-out per the read path at line 19)
 
+#### 9 · CORRECTION from the same session, after the Codex cross-check (2026-09-09, `397bf15`)
+
+The owner ran a cross-vendor check (`reports/SELFCHECK_PROMISE_CROSSCHECK_CODEX.md`).
+Four claims in my block above were refuted and I re-verified each against the
+trees and the logs; the audit report now carries a §10 with all corrections.
+Two touch this inbox directly:
+
+- **§1 above, "StaleReservations … class (c) proper, measured, one module of
+  44" — WRONG.** The two `SRC:` pins are identical on both branches, but
+  `Residence:CancelResidenceReservation`, which the module DECLARES at
+  `Fix_StaleReservations.lua:100` and CALLS at `:159`, gained
+  `unit.expedition_residence = false` on 1.1.0 (`Residence.lua:393`). A pin
+  over a module's declared dependencies would have declined F-2. The scope
+  is "the code it patches and declares", and the known class-(c) residue on
+  this patch is zero, not one.
+- **§5 above, "all 4 `Error in mod` lines name the mod whose code threw" —
+  WRONG for the act1 line.** `act1_…-6a22b86d.log:397` and `:416` are throws
+  in VANILLA `Data/LawDef/LawDef-Welfare.lua:1892`/`:2026` (`ActiveLaws`
+  false at the menu), provoked by the Test Kit's wave-4 probe
+  (`40_Probes_Wave4.lua(921)`); the box named the kit as a CALLER of the throw
+  site. My "shutdown artefact at quit()" came from a SESSION_LOG line about
+  the 07-25 legs, not this log. The pack itself is still never misattributed
+  in the archive; the kit line is a caller-named case.
+
+Also corrected there, for your Pass D: bytecode pins flip on edits OUTSIDE the
+pinned function (a file-local `ipairs` added at `Colonist.lua:13` changes
+`FindTransportationModeToCommunity`'s compiled form with its text unchanged),
+so "at most 17 false stand-downs" was wrong in direction; `run_apply` has no
+rollback, so a multi-site module can decline on its second site with its first
+already installed (`Fix_AnomalyCaveInMap.lua:99` then `:120`) — the sentence's
+"does nothing at all" clause is not honoured by the runner today; and
+`CommonLua/Core/ToLuaCode.lua:390` `LuaCodeToTuple` is an unblacklisted
+indirect `load` in the engine environment behind a C-side checksum gate whose
+behaviour on arbitrary text is unmeasured. ⛔ None of these is a hotfix-2 code
+item; the last one is a sandbox fact to know, not to use.
+
 ### From SELFCHECK_PROMISE_AUDIT (`smr-bugfixpack-db`, closed 2026-09-09) — a parallel READ-ONLY audit; what it hands you, and what you must not read into it
 
 Written into this inbox on the owner's explicit instruction (2026-09-09: *"You

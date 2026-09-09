@@ -16,6 +16,15 @@ the code it patches", built on a universal fingerprint, not on 44 probes. The
 cost is real and is stated in §5: on a patch the size of 1.1.0 a body
 fingerprint would have stood down 24 modules on day one, 17 of them working.
 
+> ⚠️ **CROSS-CHECKED 2026-09-09 by Codex** (`reports/SELFCHECK_PROMISE_CROSSCHECK_CODEX.md`,
+> commit `397bf15`): verdict shape upheld (PARTLY AGREE), **four supporting
+> claims REFUTED and verified refuted by this session** — the F-2 ceiling, the
+> F114 probe impossibility, the ≤17 false-stand-down bound, and the act1 blame
+> line's explanation — plus one under-costing and one gap in the sentence's
+> third clause. **§10 at the end records every correction; read it before
+> citing anything above.** The body is left as written so the record shows
+> what was claimed and why.
+
 Audited 2026-09-09 by `smr-bugfixpack-db` under `prompts/SELFCHECK_PROMISE_AUDIT.md`.
 Tree read at HEAD `3fdde36`, clean, `git pull` up to date. Game trees: 1.1.0 at
 `A:\SteamLibrary\steamapps\common\Project Spark\ModTools\Src` (mtime 2026-09-08),
@@ -816,3 +825,138 @@ on you"; not written by me):
 STATE is at 9211 of 9216 bytes):
 
 > ⭐ SELFCHECK_PROMISE_AUDIT 09-09: YES BUT SCOPED — `string.dump` reachable (desk, not boot); arity check = 0 authoring; body pin = 24/44 dark on a 1.1.0-size patch; ck1xx.
+
+---
+
+## 10 · CORRECTIONS after the Codex cross-check (2026-09-09, same session, each re-verified against the primary evidence)
+
+Codex's report is `reports/SELFCHECK_PROMISE_CROSSCHECK_CODEX.md` (`397bf15`).
+It was written against a brief that asked it to refute this audit; it did, in
+four places, and I confirmed each refutation myself before recording it. The
+verdict's SHAPE — the sentence can be made true for the code a fix patches and
+depends on, never for "what it was written for" in the broad reading — stands.
+Its supporting claims change as follows.
+
+**X1 · §4 item 8 and the verdict paragraph: F-2 is NOT the ceiling.** [MEASURED,
+both trees] `Residence:CancelResidenceReservation` gained
+`unit.expedition_residence = false` on 1.1.0 (`Residence.lua:393`; archive
+`:353` lacks it). `Fix_StaleReservations.lua:100` already DECLARES that method
+in its `Require` block and `:159` CALLS it. A pin over the functions a module
+declares — not only the `SRC:` targets — would have declined F-2. I had checked
+only the two `SRC:` pins. Consequence: the honest scope is "the code it patches
+**and the code it declares it depends on**", and the strict class-(c) residue
+on this patch is zero modules that we know of, not one.
+
+**X2 · §2b: "no 1.0.7-era probe would have caught F114" is too strong.**
+[READ, both bodies] 1.1.0's `local demand = station.demand and
+station.demand[res]` (`Train.lua:794`) indexes `station.demand` twice where
+1.0.7 (`:796`) indexed it once. A probe that records the whole ACCESS TRACE of
+the shipped body on an ordinary input (a present demand request, zero carried)
+and compares it to a recorded trace distinguishes the two bodies without
+anticipating the failing input. What stands is the narrower claim: an
+OUTPUT-only probe, which is what the pack's five probes are, would not. Trace
+probes are brittle by design (any extra read declines) and still need a
+per-target safe stub; they are a third option between hand probes and body
+pins, not a universal one.
+
+**X3 · §4 items 7 and 9, §5 Option 3b: source hashes do NOT upper-bound
+bytecode mismatches, and "source same + bytecode different ⇒ recompiled" is not
+a valid diagnosis.** [MEASURED, both trees] `Colonist.lua:13` gained `local
+ipairs = ipairs` on 1.1.0, so `FindTransportationModeToCommunity` — whose own
+text is unchanged — now compiles `ipairs` as an upvalue instead of a global;
+`DroneControl.lua` gained four top-level locals above `UpdateRocketsInternal`
+(18 vs 14), so its captured `rfRestrictorRocket` sits in a different upvalue
+slot. Both are KEEP modules whose bytecode would flip. Codex's whole-chunk
+compile puts the affected set at 25 modules (7 FIX / 18 KEEP), and any edit to
+a file's top-level locals can flip every function below it. Also [Codex,
+stock Lua]: closures capturing different VALUES dump identically — a body pin
+does not see a changed captured value. The false-stand-down cost of Option 3b
+is therefore HIGHER than §5 says and not reliably separable from a compiler
+change by desk `bodycheck`. A better discriminator is Codex's calibration
+witnesses: pack-local functions with known dumps, compared first.
+
+**X4 · §7b line #1: the act1 blame line was mis-explained.** [MEASURED,
+`act1_…-6a22b86d.log:397`, `:416`] two `[LUA ERROR]`s were raised in VANILLA
+code, `Data/LawDef/LawDef-Welfare.lua:1892` and `:2026` (`ActiveLaws` is a
+GameVar, `false` at the menu), called from the Test Kit's wave-4 probe
+(`40_Probes_Wave4.lua(921)` via `with_globals`); the box named the kit. My
+"shutdown artefact at `quit()`" came from `SESSION_LOG.md:7891`, which
+describes the 2026-07-25 legs, not this 2026-08-19 log. Corrected verdict for
+that line: the throw SITE was vanilla and the CAUSE was the kit's synthetic
+call — the named mod did cause it, so still not a misattribution, but it is an
+archived example of a box naming a mod whose frame is a caller, not the throw
+site. The "zero misattributions of the pack" count is unchanged.
+
+**X5 · §5 Option 3a under-costed.** [READ] Method replacements are direct
+assignments (`function C:M()`), which core cannot intercept; `SetGlobal` covers
+5 sites; three modules bypass `Require`; a `-- BYTECODE:` comment is not runtime
+data (a Lua literal is needed). So the arity check needs an install API or a
+per-site edit across the pack, not "~40 lines in core". Zero authoring holds
+only for the EXPECTED VALUE (our own function's dump).
+
+**X6 · A gap in the sentence's THIRD clause that neither the brief nor this
+audit examined: "A fix that stands down does nothing at all."** [MEASURED,
+`00_Core.lua:447-462`, `Fix_AnomalyCaveInMap.lua:99-121`] `run_apply`'s `pcall`
+is not a rollback. A multi-site module installs its first site and can decline
+on its second; `AnomalyCaveInMap` installs `TriggerCaveIn` at `:99` before it
+attempts `FindCaveInLocation` at `:120`; a decline there returns a reason,
+status reads `inactive`, and the first wrapper stays installed. Today that
+path is near-unreachable (`SetGlobal` fails only if the write does not land);
+under any fingerprint regime, where a second site's check can legitimately
+decline, it becomes an ordinary path. "Before it touches anything" therefore
+requires an ALL-CHECKS-BEFORE-ANY-WRITE install transaction in core (Codex's
+I10a), and deferred handlers and data passes need their own phase checks. This
+is a precondition of the sentence, not an optimisation.
+
+**X7 · "Abstain" contradicts an unconditional sentence.** [READ] §4 item 9 and
+§5 let the fingerprint abstain on a missing dumper, a format surprise, or a
+mass mismatch. Under the wording "stands down by itself if …", UNKNOWN must
+DECLINE, or the wording must name the exception. Owner policy (§9 already
+poses it); the default consistent with the sentence is decline.
+
+**X8 · The sandbox analysis was incomplete.** [READ, `CommonLua/Core/ToLuaCode.lua:390`]
+`LuaCodeToTuple(code, env)` is not blacklisted and calls
+`load("return " .. code, nil, nil, env or _ENV)` in the ENGINE's environment;
+the C-side `ChecksumRemove` in front of it is the unmeasured gate. If that
+gate passes arbitrary text, mod code has an indirect `load` and, through it,
+`debug`. §4 item 5's "no loading route exists" was deduced from the blacklist
+alone. ⛔ Not a foundation to build on (withheld authority, closable by any
+patch), but it must be known: Codex's R2 probe measures it in one boot.
+
+**X9 · Smaller corrections.** `SaintBlessing`'s probe runs in its deferred data
+pass, not at apply (§1's "5 probe" count stands; "at apply" does not). The
+box's order is `GetLoadingQueue`'s dependency order (`Mod.lua:1907`), which
+need not equal enable order (§7a). `os_paths` substitutes the OS path only when
+it exists; it does not test both forms (§7a). Our `OnMsg.OnLuaError` handler
+runs AFTER the engine's and cannot alter the box (§7d). Exact bytes, not
+FNV-1a, if literal identity is the claim. Codex followed the exe's registration
+POINTER table: `char`, `lower`, `match`, `upper` ARE registered; my "missing
+neighbours" note in the Codex brief was string placement.
+
+**What did NOT change.** `string.dump` reachability by desk replica and binary
+(Codex went further and agrees; the boot read is still owed). The arity read
+flags exactly F115 across the branches (Codex re-derived it at all 15
+replacement sites). The four archived blame lines, the prefix-duplicate log,
+the F114 dedupe measurement, the two field cases, the tail-call property
+(unmeasured in-engine on both sides), the 44/5/7/35 census, and the
+"every pre-wrapper already tail-calls" count (Codex: PRE-NOTAIL 0).
+
+**Revised recommendation, superseding §5's list.**
+1. **Capability pilot first, one owner boot**, using Codex's R1–R5 Test Kit
+   chunks (they subsume my 5-line probe and add the header, the arity
+   controls, the indirect-load gate, `GetStack` on a tail call, and
+   `find_lower` semantics).
+2. **Then a bounded prototype, three modules**: `LandscapeUnitFilter` (F115),
+   `TrainCargoDumping` (F114), `StaleReservations` (F-2's callee) — a
+   declarative install in core that checks arity AND dependency pins over the
+   module's declared `Require` set, ALL before ANY write, with UNKNOWN
+   declining; calibration witnesses instead of a revision or quorum rule;
+   receipts of checked-vs-installed identity. Measure its false stand-downs on
+   the 1.0.7→1.1.0 delta with real engine dumps before scaling.
+3. **No wording change until that ships.** Arity alone earns none of §6's
+   drafts; §6's "after 3a" draft is withdrawn.
+4. Job two unchanged in substance: breadcrumb (throw site + pack-frame
+   presence, never cause), tail-call rule, no engine-box changes; Codex's
+   caution stands that a throw site narrows triage and cannot acquit.
+5. `LuaRevision` only ever as an observation label, if at all; the owner
+   should clarify §2a's heading before any prose says so.
