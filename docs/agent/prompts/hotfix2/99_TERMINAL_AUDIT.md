@@ -201,6 +201,16 @@ append below as they close.)*
   stated goal for this patch is "everything we know about, fixed in this patch".
   **Ask what else is in that category:** a known divergence recorded only in a bug
   entry or a code comment is, operationally, not known at all.
+  ⭐ **Answer it with a MECHANISM, not a list** (sharpened by the chain's author
+  after review). The root cause is structural: the defect record (`bugs/`, module
+  headers) and the surfaces anyone plans work from (the checklist, `STATE`, a
+  chain folder) **are connected by nothing but a person remembering**. A list of
+  what leaked this time decays the moment it is written; something that makes the
+  next leak impossible — or at least noisy — does not. ⚠️ A count is the weaker
+  deliverable here, so if you can only produce one, produce the mechanism and say
+  the count is unknown. ⛔ And do not assume the answer is a new tool: "every
+  deliberate divergence gets a checklist number at the moment it is recorded"
+  would have caught ck119 with no tooling at all.
 - ck118 is ruled: 1.0.7 players are served by a frozen v5 GitHub release plus a
   site page, both live. The store-card line pointing at it is link 06's.
 
