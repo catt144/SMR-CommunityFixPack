@@ -275,3 +275,47 @@ directly**, because a regex matches what is present:
 class (c), semantics moving under a wrapper, is still seen by **nothing**. Not
 "the KEEP set is verified". Not "probes are safe" in general. No status moved: a
 tool run is not a test.
+
+### From link 02 — a doccheck gap that `H-10` says matters
+
+*(Link 02, `smr-bugfixpack-11`, 2026-09-08, CLOSED. Routed here rather than left
+in 99's inbox: 05 owns the tools tail, and this is a tools defect, not an audit
+observation.)*
+
+**`doccheck` reported GREEN while `items.lua` held 45 entries and
+`metadata.lua`'s `code` list still held 81.** I deleted 36 modules, updated
+`Code/` and `items.lua`, and doccheck passed. The only reason I caught the
+`metadata.lua` half was that its own output line prints the number —
+`LOAD ORDER: … 81 file(s) in the code list` — and I happened to read it against
+the 45 I expected.
+
+⛔ **Why this is worth a gate rather than a note.** `H-10` is the hazard about
+exactly this inconsistency, and it is the one whose failure mode is silent: both
+portals force a `SaveDef` on upload that rebuilds `metadata.lua`'s `code` list
+**solely from `items.lua`** (`Mod.lua:816-840`, `:973`). So a mismatch does not
+lint — it decides what ships. doccheck already computes both numbers and simply
+never compares them to each other.
+
+**Suggested shape, not a specification** — 05 owns the call:
+* Assert `set(Code/*.lua) == set(items.lua entries) == set(metadata.lua 'code')`,
+  and report the SYMMETRIC DIFFERENCE by filename rather than a count mismatch. A
+  count check would have passed a same-size swap.
+* Make it RED, not a warn. There is no legitimate state in which the three
+  disagree.
+
+⚠️ **A second one, smaller and adjacent** (link 01 filed the first half of this;
+this is the confirming instance): `bodycheck.py --selftest` is still a MANUAL
+gate. During this link, `bodycheck`'s NO-MANIFEST count going 46 → 10 was the
+single most valuable cross-check I had — it confirmed the right 36 modules left
+without re-reading a row — and nothing in `doccheck` would have noticed if the
+number had come out wrong.
+
+**One drift datum from my own work, for whoever wires the desk gates.** There is
+no Lua binary on this rig, so block balance IS the syntax check. My first
+balance checker flagged **16 byte-identical files** — the same trap link 01 hit,
+reached by a different route: regex comment/string stripping merged lines. The
+replacement lexes properly and carries a 12-leg falsifier (keywords inside
+strings and long comments, `for`/`do` double-counting, `repeat`/`until`,
+`elseif`). ⇒ If a balance check ever becomes a committed tool, **it needs its
+falsifier committed with it** — a checker that cannot go red is indistinguishable
+from a broken one, and this one silently accused clean files twice in two links.
