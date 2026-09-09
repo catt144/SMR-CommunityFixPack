@@ -49,7 +49,17 @@ CODE = os.path.join(REPO, "Code")
 # agent/prompts/STATE_EVICTION.md. The hard cap is the backstop if flags go
 # unread. The per-line cap keeps lines atomic (grep/diff/Edit-safe) so walls
 # cannot return inside the budget; never widen lines to satisfy anything.
-STATE_WARN_BYTES = 9 * 1024
+#
+# 2026-09-09 owner ruling: WARN RAISED 9 KiB -> 10 KiB (+11%, the owner asked
+# for "about 10%"). Reason, in the owner's terms: "I don't want things missing
+# from state.md that we need to know." The file had sat within ~15 bytes of the
+# 9 KiB warn across 36 commits over two days of the 1.1.0 chain, so sessions
+# were evicting kernel content on every edit to stay under it and open item 126
+# went unrecorded. ⛔ This is HEADROOM, not a new budget: at this file's density
+# (~88 B/line) it buys ~11 lines, days not weeks, and the eviction procedure is
+# unchanged. Revisit after the 1.1.0 fallout is closed. The HARD cap is
+# deliberately NOT moved — it is the backstop for unread flags, not a budget.
+STATE_WARN_BYTES = 10 * 1024
 STATE_MAX_BYTES = 18 * 1024
 STATE_MAX_LINE_BYTES = 200
 

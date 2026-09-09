@@ -29,6 +29,34 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### ✅ 2026-09-09 — RULED AND DONE: you raised the `STATE.md` byte cap ~10%, and item 126 is now IN it. Nothing owed; this is the receipt.
+
+> **Your words:** *"I don't want things missing from state.md that we need to
+> know. increase state.md cap by 10%."* Done — the warn moved **9216 → 10240**
+> (+11%, the nearest clean value; the file counts in 1 KiB units). This amends
+> your 2026-08-18 ruling (item 42) on the number only — the byte-budget design,
+> the per-line cap and the eviction procedure are untouched. The **hard** cap
+> stays at 18432: it is the backstop for flags that go unread, not a budget.
+>
+> **Why the file was starving, which is the part worth knowing.** It had sat
+> within ~15 bytes of the old warn across **36 commits over two days** of the
+> 1.1.0 chain. It was not growing — sessions were evicting kernel content on
+> every edit just to stay under, and item 126 was about to go unrecorded for
+> exactly that reason. That is the failure you spotted.
+>
+> **⚠️ Honest answer on "decent headroom": it buys days, not weeks.** STATE is
+> now **9461 bytes with 779 to spare — about 9 lines** at this file's density.
+> That is enough to stop the churn and land the 1.1.0 items as they close, and
+> it is roughly a normal chain link's worth of additions. It is **not** enough
+> to stop thinking about it. If you would rather not see this warn again until
+> the 1.1.0 fallout is fully closed, say so and I will take it to 12 KiB
+> (~35 lines) — I did not do that on my own because every byte in STATE is paid
+> by **every session at boot**, which is the whole reason the cap exists.
+>
+> ⛔ The line-ending phantom that made this look worse than it was is already
+> fixed and is **not** part of this change: `.gitattributes` pins STATE to LF
+> (09-09), so the count measures content, not the checkout. Verified 0 CR.
+
 ### ⚖️ 2026-09-09 — ITEM 126 OPEN: link 08 wrote a pass that cleans up after **us**, and it changes what "remove the save sanitizer" means
 
 > **What we left behind.** One of the 36 modules link 02 deleted,

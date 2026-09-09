@@ -89,6 +89,8 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 - 98 rig half only (⛔ Steam = ONE branch at a time, owner 09-08) · 99 disposition of the self-disabled ·
   100 say anything to players yet (rec no) · 101 accept the re-verification chain shape.
 - 112 DEFERRED 09-09 · **125** RULED+LANDED 09-09: F66 guard yields to `force` (desk-controlled, untested); wrapper re-read → 99.
+- **126 OPEN** 09-09 (link 08): F95 residue pass LANDED in `90_SaveSanitizer`, UNRUN. Two asks — ⛔ ruled
+  OFF 09-08 (ck120) then asked for 09-09; and it makes the sanitizer non-removable on EVERY platform ⇒ `R-36` is not just a 1.0.7 question.
 - ⛔ BLOCKS the chain: nothing. 118 RULED ⇒ re-copies MUST decline on 1.0.7 (`FIX_POLICY` §2a).
 - 73 blame surface — harden or not · 76 confirm (a) was a ruling not a leaning · 53 harden now or in 1.0.1
   (rec 1.0.1) · 51 both-packs leg timing (rec after launch) · 50 chain-vs-replace wording · 47 two modder-page

@@ -104,8 +104,12 @@ splits that consistency check across two sessions. One prompt owns it.
     Owner decisions go to `docs/PLAYTEST_CHECKLIST.md` → "Decisions waiting on
     you", never only into an agent doc.
 13. **A doccheck WARN goes verbatim into your summary.** `STATE.md` is
-    byte-capped (warn 9216) — any line you add needs an eviction in the same
-    commit (`prompts/STATE_EVICTION.md`).
+    byte-capped (warn **10240**, raised from 9216 by owner ruling 2026-09-09
+    because items were going unrecorded). ⚠️ There is now real headroom —
+    **~1 KB, about 11 lines** — so a line you add no longer forces an eviction
+    in the same commit. It is still a kernel: add the fact, not the story, and
+    when the warn does fire it goes verbatim to the owner
+    (`prompts/STATE_EVICTION.md`).
 
 ## ⛔ The constraint that binds every code prompt (ck118)
 

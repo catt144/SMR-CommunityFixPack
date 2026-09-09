@@ -196,9 +196,14 @@ be left exactly as it stands. **Link 99 owns all of it.**
   `docs/agent/STATE.md text eol=lf` (2026-09-09), so the cap measures content.
   ⚠️ If you still see a size warn, it is **real** — do not go looking for the
   artefact. Confirm with a CR count (`b.count(b'\r')` must be 0), then trim.
-  ⛔ **What DOES still bite: the margin. 9211 B against a 9216 warn = 5 BYTES.**
-  Any STATE addition needs an eviction in the same commit, and link 99 is
-  required to add a pointer line, so 99 trips it. ⚠️ A size warn is GREEN and
+  ✅ **The margin is FIXED TOO, as of 2026-09-09 — this bullet used to say the
+  headroom was 5 BYTES.** The owner raised the warn 9216 → **10240** on the
+  ground that things we need to know were going unrecorded (item 126 was the
+  case in point). At ~88 B/line that is **~11 lines** of headroom, so a STATE
+  addition no longer needs an eviction in the same commit and link 99's pointer
+  line no longer trips it. ⛔ It is headroom, not a licence: STATE is still the
+  mandatory read every session pays for at boot, still one fact per line, and
+  the eviction procedure is unchanged. ⚠️ A size warn is GREEN and
   **never blocks a commit** (`doccheck`'s `ok` is set by RED only) — its designed
   consequence is that the owner fires `STATE_EVICTION.md`, i.e. it costs a
   session, not a build. ⛔ Never quote a stored byte number: the CRLF delta is
