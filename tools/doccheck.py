@@ -579,6 +579,44 @@ def temporary_sweep(out):
     return not hits
 
 
+def alias_gate(out):
+    """Kit probes calling a bare SMRTest helper their file never bound.
+
+    REPORT-ONLY, same standing as testkit_tree() and the TestKit PARSE: row by
+    the owner's 2026-08-04 decision that the kit never blocks a pack commit.
+
+    The class: `parsecheck` proves a file PARSES. A probe that calls
+    `FixMissing(...)` in a file that never aliased it parses perfectly and reads
+    a nil global at run time. Link 07 found one already committed and live in
+    history (kit `00bd198`, `55_Probes_Wave6.lua`), so this is a measured class,
+    not a hypothetical one. tools/aliascheck.py ships a 15-leg falsifier and was
+    additionally verified against a seeded break in a copy of the real kit.
+    """
+    tool = os.path.join(os.path.dirname(os.path.abspath(__file__)), "aliascheck.py")
+    if not os.path.isfile(tool):
+        out.append("ALIASCHECK: not checked (tools/aliascheck.py absent)")
+        return True
+    kit_code = os.path.join(TESTKIT, "Code")
+    if not os.path.isdir(kit_code):
+        out.append("ALIASCHECK: not checked (no TestKit Code/ at %s)" % kit_code)
+        return True
+    try:
+        p = subprocess.run([sys.executable, tool, "--dir", kit_code],
+                           capture_output=True, text=True, encoding="utf-8",
+                           errors="replace", timeout=300)
+    except Exception as exc:              # a tool bug must report, not crash
+        out.append("ALIASCHECK: not checked (%s)" % exc)
+        return True
+    lines = (p.stdout or "").strip().splitlines()
+    if not lines:
+        out.append("ALIASCHECK: no output  (report-only)")
+        return True
+    out.append("%s  (report-only)" % lines[-1])
+    for line in lines[:-1]:
+        out.append("  WARN %s" % line.strip())
+    return True
+
+
 def testkit_tree(out):
     """REPORT-ONLY (owner GO, 2026-08-04): a dirty TestKit working tree is how
     a true, verified record sat stranded unseen for a day — no gate checked
@@ -949,6 +987,7 @@ def main():
     ok = module_set_agreement(out) and ok
     ok = bodycheck_selftest(out) and ok
     testkit_tree(out)  # report-only by owner decision (2026-08-04) — never gates
+    alias_gate(out)    # report-only, same standing as testkit_tree
 
     if args.verify_split:
         try:
