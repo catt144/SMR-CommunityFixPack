@@ -91,7 +91,7 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   100 say anything to players yet (rec no) · 101 accept the re-verification chain shape.
 - 112 card self-check. ⛔ 111+113 RULED 09-08; 111=adopt rehome, +119 filed — both in `hotfix2/04` §7.
 - ⛔ BLOCKS the chain: C repair F-8/9/10; F-2 fix-or-remove. ✅ 98=DELETE · 117=KEEP Sanitizer · 120=no F-5
-  cleanup, all RULED 09-08. 118: 1.0.7 gets frozen v5 ⇒ re-copies MUST decline on 1.0.7. 121 low-Food = feature?
+  cleanup, all RULED 09-08. 118: 1.0.7 gets frozen v5 ⇒ re-copies MUST decline on 1.0.7. 121 WITHDRAWN (1.1.0 REPLACED it).
 - 73 blame surface — harden or not · 76 confirm (a) was a ruling not a leaning · 53 harden now or in 1.0.1
   (rec 1.0.1) · 51 both-packs leg timing (rec after launch) · 50 chain-vs-replace wording · 47 two modder-page
   wordings · 43 opt-in pack re-tick · 41 dialog wording + sweep cap 5→8 · 40 `smr_shuttles` name · 39 dialog re-fire.
