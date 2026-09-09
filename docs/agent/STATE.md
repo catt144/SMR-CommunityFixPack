@@ -37,6 +37,8 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   ⛔ NEITHER REPRODUCED, no probe for F118, NO status word moved. ⚠️ Desk falsifiers are SCRATCHPAD-only (`F117.md` has the
   transcript + the ask to promote them). Next and last: `100_DOCSWEEP`.
   ⛔ ALL in-play controls DEFERRED to ONE sitting AFTER 99 (owner 09-08). 99 SHIP ≠ clearance (H-04).
+  🎮 **SITTING BRIEF: `prompts/HOTFIX2_SITTING.md`** — every owed control, one boot, T1 census+suite / T2 12 rows
+  by value. Unrun = `NOT RUN`, filed back to the checklist; brief does NOT self-delete while any row is unrun.
   ⚖️ Owner rule 09-08: a patch note saying "Fixed" is a **CLAIM, false until we confirm it**.
 - ⭐ PUBLISHED both portals — `pdx_id` **156049**, `steam_id` **3787202810**, tree `version` **5** (F110, 08-30).
   ⛔ Never re-upload to "fix" a version number — each upload bumps again (H-02). ⛔ Every upload OVERWRITES both

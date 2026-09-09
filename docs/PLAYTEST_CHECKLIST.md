@@ -29,6 +29,40 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### 🎮 2026-09-09 — YOUR SITTING IS WRITTEN AND READY: `agent/prompts/HOTFIX2_SITTING.md`. Two tiers, and the second is designed to be stopped partway.
+
+> **Every in-play control the chain owes you is in one file**, one boot, on
+> `BlankBig_02` — links 03, 04, 04b, 07, 08 and 99a, plus the F95 line you just
+> ruled in and 131's two new rows. Paste it into a fresh session with you at the
+> keyboard.
+>
+> * **Tier 1 (~25 min, no colony setup)** — boot, the census, `SMRTest.RunAll()`.
+>   ⛔ **This is the one I would not upload without.** It catches a module that
+>   silently switched itself off, and it is the **first machine check the project
+>   has ever had on "vanilla fixed it"** for the 36 removals: a `retired` probe
+>   that FAILs means a removal was **wrong and players lost a fix**.
+>   ⛔ **No boot of this 44-module pack exists.** Predicted 44 applied / 0
+>   inactive — computed, never measured, and **any `inactive` line is a finding**.
+> * **Tier 2 (~60–75 min)** — twelve controls, **ordered by value, not by link
+>   number**. Rows 1 and 2 are the two bugs that actually reached players (F114
+>   trains, F115 landscaping). If you only get through three, do 1, 2 and 3 —
+>   row 3 is a **one-minute console read** that decides whether F46 can be
+>   retired.
+>
+> ✅ **Stopping partway is planned for, not a failure.** §5 makes every row
+> `PASS` / `FAIL` / **`NOT RUN`** with no fourth option, and the session files the
+> unrun rows back into this page as one "what the sitting still owes" block. The
+> brief does **not** delete itself while anything is unrun.
+>
+> ✅ **All four preconditions verified 2026-09-09:** stale-probe sweep CLEAN
+> (zero hits), the force-inactive leg DISARMED, the enable-path leg DISARMED, the
+> autorun harness inert. Nothing to untick except **Passage Network**.
+>
+> ⛔ **Row 12 (Saint's blessing) is shelved by your own ruling 130 — do not
+> attempt it**, and the suite's PASS for it is vacuous, not coverage.
+> ⛔ A clean sitting is still not clearance (`H-04`), and `100_DOCSWEEP` must run
+> before the upload either way.
+
 ### 2026-09-09 — 131: the F117 fix has LANDED. It is the last code in hotfix 2. One small question for you, and one thing the sitting now owes.
 
 > **What landed** (three commits, all pushed): `777249d` the F117 repair,
