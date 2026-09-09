@@ -1042,3 +1042,217 @@ a game; no status moved.)*
 * **For your Pass D/E:** this is the only KEEP-module code edit in the patch besides F116.
   It has no in-play control on the rig (Steam blocks the saves that trigger the fixup);
   the desk control is the evidence. 07 is asked to add a forced case to the kit probe.
+
+### From link 05 — the tools tail, and a published count that was wrong
+
+*(Link 05, `smr-bugfixpack-2b`, 2026-09-09. Commits `f25e530` A-4 sigcheck over
+SetGlobal · `c9811e1` A-3/A-2 logscan heal-aware + retire list + the `00_Core`
+string · `7ae0fc9` A-1 GeneForging · `29b7a68` two doccheck gates · `8754e00`
+`tools/parsecheck.py` · `39e4ffe` `sigcheck --coverage`.
+⛔ **Nothing was run in a game. No status moved. A tool run is not a test.**)*
+
+## 1 · ⛔ THE PUBLISHED COUNT WAS WRONG, STATED RATHER THAN CORRECTED
+
+My §6 stop condition fired. **The canonical 1.1.0 boot log reads 64 applied /
+16 inactive, not 63 / 17.** `SaintBlessing` latches `inactive` at
+`gated110_*.log:166` and heals at `:186`, ending the boot ACTIVE.
+
+⭐ **AND THE LOG PROVED IT INDEPENDENTLY OF MY SOURCE READ — nobody had
+reconciled it.** `UpdateSuspects` only considers entries whose status is
+`inactive`, and SaintBlessing's `:166` latch is the NON-benign two-argument form,
+which sets `update_suspect = true`. So had it ended `inactive`, it would
+necessarily have appeared in the `:190` update report. It does not. The 16
+inactive reconcile exactly as **14 named + 2 unnamed**, and both unnamed ones are
+content/benign latches that correctly carry no suspicion
+(`AutomationLawCompensation`, `LastTransmissionStorage`). Under 17 you would need
+a THIRD unnamed inactive whose detail came from a non-benign latch — a
+contradiction. **The old census was internally inconsistent with a line in the
+same log, and the inconsistency sat unread through the audit that cited it.**
+
+⇒ **What I changed and what I deliberately did not.** `STATE.md`'s live line now
+reads 64/16 with the as-read 63/17 beside it. I did **NOT** rewrite the
+historical records: `F115.md`'s "prediction 17/14, measured 17/14" is a true
+record of a prediction matching a reading AS READ AT THE TIME, and rewriting it
+would destroy the evidence that the prediction method worked. The same for
+`HOTFIX_1_APPLY.md`, `HOTFIX_1_AUDIT.md`, `PACK_1_1_0_REVERIFICATION.md` and
+`SESSION_LOG.md`. **"14 named" is unaffected and still correct.** For your Pass
+D: the surfaces still carrying 63/17 are those five plus
+`reports/HOTFIX_1_AUDIT.md:209`, and each is a historical reading, not a live
+claim.
+
+## 2 · What landed
+
+**A-4 · `sigcheck` sees the `SetGlobal` sites.** 38 → **43** replacement sites,
+5 of them SetGlobal, **0 MISMATCH / 0 UNRESOLVED**. Both live forms resolve: an
+anonymous literal, and a named local followed backwards — including the
+FORWARD-DECLARED `local X` / `X = function(...)` shape `Fix_BombardmentSpread`
+uses, which a naive resolver would have dropped silently. An unfollowable value
+is a new **UNRESOLVED** row, never a skip. 9-leg falsifier; F115's actual shape
+driven through a SetGlobal site is one of the red legs.
+⚠️ Your prompt and the report say **15** SetGlobal sites; that was true when
+written, and link 02's deletions took it to **5** (verified against `2dc1dbe^`).
+
+**A-3 · `logscan` is heal-aware.** Both counts always print — heal-aware
+headline, first-pass beneath it — so a delta is stated, never quietly corrected.
+⛔ **The report's suggested implementation is wrong and I did not use it.** It
+proposed matching `corrected` / `made effective` / `re-based` / `added … missing`.
+That list (a) MISSES two of the three live `ctx.heal()` sites — Sinkhole's and
+SaintBlessing's 1.1.0 branch both print prose with no edit verb, and the 1.1.0
+branch is the one that fires on the branch we ship against, so the keyword rule
+reports a healthy module DEAD; and (b) CATCHES `re-based`/`restored`, which are
+SaintBlessing's SAVE re-base lines and never run through `ctx.heal()` at all
+(`F92` records a measured near-miss from exactly that). The shapes are instead
+DERIVED FROM THE PACK SOURCE: `pack_signals()` finds each `ctx.heal()` and takes
+the `log()` template that follows it. A post-`inactive` line matching no known
+heal is printed as **UNRESOLVED**, never silently kept inactive.
+
+**A-2 · the benign latch is a RETIRE signal.** `00_Core.lua`'s `ctx.latch` logs
+`inactive (<detail> — already correct, RETIRE candidate)` when the site passes
+`benign`. **THE LOG STRING ONLY** — `entry.status` still goes `inactive` (which
+still gates that module's `WhenActive` handlers), `entry.detail` is untouched,
+and the expression selects a format string and does nothing else; verified by
+executing it under a Lua interpreter for all three argument shapes.
+`logscan --retire` merges the latch list with `bodycheck`'s DEFECT-GONE rows —
+one list from two instruments. ⚠️ Benign-ness is read from `ctx.latch`'s THIRD
+ARGUMENT, never from prose: `Fix_SaintBlessing:289` latches NON-benign on
+purpose, and a list keyed on "latched" would retire a module that failed closed.
+
+**A-1 · `GeneForging`** — see §3; it is the only code change.
+
+**Beyond the four augments,** all routed here by 01/02/03/04b as my fence:
+`doccheck` gained the **H-10 three-way module-set gate** (RED, symmetric
+difference by NAME) and now runs **`bodycheck --selftest`** as a gate;
+`tools/parsecheck.py` replaces the block-balance checker three links kept
+rewriting; `sigcheck --coverage` names the manifest gaps 04b filed.
+
+## 3 · A-1 is a real latent player LOSS, and it was measured
+
+`Fix_GeneForging` read `TechDef.GeneForging.param1`. **MEASURED: `TechDef` has
+exactly ONE mention left in the entire shipped tree — the `GlobalMap = "TechDef"`
+declaration itself (`ClassDef-PresetDefs.generated.lua:1730`). Zero readers.**
+This module was the last consumer of a map the game abandoned, and R-32 shows one
+stub already emptied. Desk red control, both techs researched, stubs emptied:
+the **old module returns 100** — the whole Gene Forging bonus gone, silently,
+while it still logs `applied` and every self-check stays green — and the new one
+returns 150. It now reads `Techs.GeneForging:ResolveValue("param1")` (what the
+shipped body does for GeneSelection one line above ours) with `TechDef` as
+fallback, and asks the global `IsTechResearched` instead of hand-rolling
+`(unit.city or MainCity).colony:IsTechResearched`.
+
+⛔ **No branch guard, and that is ck118 applied rather than skipped.** The guard
+is owed by a module that CARRIES a 1.1.0 body; this one carries none — it
+delegates to `orig` and its value read is dual-branch by construction. Verified
+against the archived 1.0.7 tree: **nothing places class `Tech` anywhere there**,
+so `Techs` is empty, the first read is nil, and the fallback returns the same 50.
+Full ladder (nil → 100 → 50 → 150) reproduces on BOTH branches on a desk harness
+running the pack's real `Require`/`SetGlobal`/`Register` over each branch's
+verbatim shipped body.
+
+## 4 · Drift, per chain rule 5 — evidence, not shame
+
+* **My own prompt §4 carries a false instruction**: "re-stamp it after the edit".
+  The `SRC:` pin hashes the SHIPPED body, which a module-side edit does not
+  touch. This is the same false instruction link 04's Pass D already corrected in
+  §7 — it survived into a second prompt. `bodycheck` OK on both rows before and
+  after, no re-stamp made.
+* **04b's note to drop `GeneForging`'s `unit` plumbing as "harmless, 1.1.0
+  ignores it" would have broken 1.0.7.** 1.1.0 ignores it and all three of its
+  call sites pass nothing — but 1.0.7's signature is `GetRareTraitChance(unit)`
+  and **two of its call sites DO pass a colonist** (`TraitPreset.lua:748`,
+  `Colonist.lua:3559`), which `orig` uses to pick the city. The wrapper keeps a
+  vararg; a red control confirms the 1.0.7 leg returns nil without it. The note
+  reasoned only from the 1.1.0 body, and ck118 says a 1.0.7 player can install
+  this build.
+* **04b's manifest-coverage filing is half wrong.** It reported "11 sites, plus
+  one copied-but-unpinned function (`Dome:RefreshFreeLivingSpaces` in
+  `DomeFreeSpaceMismatch`)". My measured total is 12, which AGREES — and the sets
+  do not. `Dome:RefreshFreeLivingSpaces` **is** pinned, at
+  `Fix_DomeFreeSpaceMismatch.lua:42`, and `bodycheck` reports four OK rows for
+  that module. Matching totals over different sets is exactly what the MODULE
+  SETS gate I landed exists to catch, so the tool lists names. The 12:
+  `FindCaveInLocation` (AnomalyCaveInMap:120), `Colonist:OnArrival` and
+  `Colonist:Idle` (ArrivalDeaths:161,:180),
+  `DroneHubExtenderBase:UpdateUplinkRequesters` (ExtenderFlapChurn:81),
+  `Colonist:SetResidence` (FreedHousingNotice:67), `Building:SetDome`
+  (GhostFarmOxygen:45), `RCTransport:InteractWithObject` (RocketInteractGuard:138),
+  `TrackConnectedObjBase:Done` (TrackConnectorPingPong:223),
+  `TrackGridElement:Demolish` (TrackSalvageRefund:195), `TrackBase:Done`
+  (TrackTunnelPowerBridge:153), `TransportStatistics:AddSpentTime`
+  (TrainWaitTime:108), `Building:OnDemolish` (TrainsToVoid:51).
+* **My own logscan `--selftest` leg 10 asserted the wrong thing** and I corrected
+  the assertion, not the tool: with no `Code/` to derive from, the LOG MARKER
+  still stands on its own, so retire-detection degrades to marker-only rather
+  than to nothing. The tool was right.
+* **The `00_Core.lua` log-string rename did not touch control flow**, so §6's
+  STOP-AND-ASK did not fire.
+
+## 5 · Filed, not fixed — out of my fence
+
+1. ⭐ **`ctx.heal()` logs nothing machine-readable**, which is why `logscan` has
+   to infer heals from source-derived prose at all. **One line inside
+   `ctx.heal()` would delete the entire inference.** §5 fenced my `00_Core` diff
+   to the rename's string, so I did not take it. This is the single highest-value
+   follow-up in this list.
+2. ⚠️ **`STATE.md`'s byte cap is line-ending sensitive by 104 bytes.** The
+   committed blob is LF; `core.autocrlf=true`, so a `git checkout` or a fresh
+   clone writes CRLF and doccheck then measures **9297** where the same content
+   read **9193**. The warn threshold is 9216 ⇒ **on a fresh clone the file WARNS
+   with no content change**, and the owner would be told to run an eviction for
+   nothing. My edit leaves it at **9212 (LF), under the warn**, but the
+   sensitivity is real. doccheck should measure the file as git stores it.
+3. `bodycheck.py --help` and `upload_preflight.py --help` still raise
+   `UnicodeEncodeError` on this rig's cp1252 console. I fixed `sigcheck`,
+   `logscan` and `parsecheck` (three lines each); both of those are outside my
+   fence. `doccheck` already had the guard.
+4. `sigcheck`'s comparator does not flag a site declaring MORE fixed parameters
+   than the shipped function takes. `GeneForging` was `(unit)` against a
+   parameterless shipped body and read OK. Harmless there and moot after A-1, but
+   it is a blind spot; I left the comparator alone rather than widen it and
+   create noise I could not evaluate.
+5. `Fix_GeneForging` now depends on `Preset:ResolveValue`'s fall-through from
+   `GetProperty` to `GetParameterValue` (`CommonLua/Preset.lua:554`), and **no
+   instrument watches that**. A `SRC:` pin on it would produce a `NO-DEFECT` row
+   andneed a `FIX_POLICY §2b` exception entry — FIX_POLICY is not mine.
+6. `logscan`'s source-derivation is anchored to the CURRENT pack, so a DELETED
+   module's benign-latch prose is no longer recognised in an old log —
+   `LastTransmissionStorage`'s "the shipped presets are already correct" at
+   `gated110_*.log:184` is not flagged as a retire candidate, although R-13 is the
+   canonical example of one. Correct behaviour (the module is already gone) but
+   worth knowing before reading an old log's retire list as complete.
+7. A peer session (`smr-bugfixpack-e9`) suggested a **control-character scan over
+   `docs/`** as a doccheck gate, after a quoted bash heredoc ate a backslash and
+   left a literal `0x01` byte inside a path that rendered as almost-right. Four
+   lines, real failure behind it. I did not build it — it is a third unrequested
+   gate and rule 3 says file, do not fix.
+8. The same peer notes a planned two-tree function differ (`VANILLA_DIFF_HUNT.md`)
+   is scoped to import `luafn.find_bodies`. ✅ **I did not touch `luafn.py` or the
+   `find_bodies` contract**; `bodycheck` still imports it unchanged.
+
+## 6 · ⛔ What may NOT be claimed from this link
+
+* **Not** "the tooling now catches game updates". It catches classes a, b, d, e.
+  **Class c — semantics moving under a wrapper — is still seen by nothing**, and
+  6 of the 10 FIX rows this audit were class c.
+* **Not** "the log census is verified" beyond the ONE archived boot log I ran
+  against. And that log predates several of this chain's commits: it describes an
+  80-module pack, not today's 45.
+* **Not** "sigcheck now clears the SetGlobal sites". It bounds their ARITY. The
+  bodies behind them are exactly as unread as before. Widening what an instrument
+  sees does not strengthen what it says — that implication is how F114 shipped.
+* **Not** "A-1 is verified". It has desk controls on both branches and **zero
+  in-game execution**; F41 stays `tested` on its pre-existing 2026-08-12 evidence.
+* **Not** "the 12 unpinned sites are a defect list". They are bodies nothing
+  watches, and the FIX/REMOVE sets are deliberately unstamped until the pack is
+  whole.
+* No status moved.
+
+## 7 · Gates at close-out
+
+`doccheck` **GREEN** — ⚠️ **verbatim, the 18 warns it prints are all
+pre-existing frozen-index-row drift, unrelated to this link**: `F85`, `C12`,
+`C13`, `C14`, `C15`, `C16`, `C17`, `C37`, `C35`, `C34`, `C38` (`the frozen
+index-row cell says 'filed', entry says 'cand'/'wontfix'`), `C39`, `F100`, `C43`,
+`C49`, `C50`, `C51`, `C52`. No STATE warn (9212 B, warn 9216).
+`bodycheck` exit 0, 93 OK, `--selftest` PASS · `sigcheck` 43 sites, 0 MISMATCH,
+`--selftest` PASS (9 legs) · `logscan --selftest` PASS (13 legs) ·
+`parsecheck --selftest` PASS (7 legs) · Lua parse sweep 45/45 and TestKit 24/24.

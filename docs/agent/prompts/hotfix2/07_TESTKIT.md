@@ -358,3 +358,86 @@ other's element destroyed, a new one created with `station == self`), while the 
 call still leaves it. That is the shape 1.1.0's `SavegameFixups.ForceTrackReconnection2`
 (`TrackElement.lua:987-997`) drives. Desk-harness stub that produced exactly that is
 described in `bugs/F66.md`'s 2026-09-09 section.
+
+### From link 05 — the F41 probe was ALREADY a false FAIL, and you can have a parse gate
+
+*(Link 05, `smr-bugfixpack-2b`, 2026-09-09. Commits `f25e530` sigcheck SetGlobal ·
+`c9811e1` logscan heal-aware + benign latch · `7ae0fc9` A-1 GeneForging ·
+`29b7a68` doccheck gates · `8754e00` parsecheck.py · `39e4ffe` sigcheck
+--coverage. ⛔ Nothing was run in a game; no status moved.)*
+
+**1 · Your F41 `GeneForging` probe (`30_Probes_Wave3.lua:828`) needs a rewrite,
+and the reason is bigger than my edit.** My prompt told me to warn you that A-1
+changes what the probe should observe. It does — but while reading it I found
+the probe was **already reporting a false FAIL on 1.1.0 before I touched
+anything**, which makes it a FOURTH pre-existing false-FAIL on top of the three
+you already own.
+
+The probe injects a stand-in colonist and steers the answer through
+`unit.city.colony.IsTechResearched`:
+
+```lua
+local unit = { class = "SMRTestColonist",
+    city = { colony = { IsTechResearched = function(_, id) return researched[id] or false end } } }
+return GetRareTraitChance(unit) or 0
+```
+
+⛔ **That injection stopped reaching vanilla's half on 1.1.0.** The shipped
+`GetRareTraitChance` is now parameterless (`Colonist.lua:4398-4402`) and asks the
+GLOBAL `IsTechResearched("GeneSelection")`, so `orig(unit)` ignores the stub
+entirely and reads the REAL colony. Before my edit the probe's
+`selection_only ~= selection.param1` leg therefore compared the real colony's
+state against 100 and FAILED unless the save happened to have GeneSelection
+researched — and if it DID have it researched, the `neither ~= 0` leg failed
+instead. **There is no research state in which that probe passes on 1.1.0.** It
+is a false FAIL either way, and it is not caused by A-1.
+
+⚠️ After A-1 it is uniformly injection-proof rather than half: our GeneForging
+term now also asks the global. That actually makes the rewrite SIMPLER, because
+both halves now come from one place — steer the real research state, or stub
+the global `IsTechResearched` for the duration of the probe and restore it.
+
+The ladder to assert is unchanged and still correct: **neither → nil,
+GeneSelection only → 100, GeneForging only → 50, both → 150** (PT-29's ladder).
+I reproduced all four on a desk harness driving the pack's real
+`Require`/`SetGlobal`/`Register` over each branch's verbatim shipped body — on
+1.1.0 AND on the archived 1.0.7 tree. `bugs/F41.md`'s 2026-09-09 section has the
+detail; the harness itself was scratchpad, per rule 3.
+
+⚠️ Two more things the probe reads that changed underneath it. It SKIPs on
+`TechDef.GeneForging/GeneSelection not loaded` and then compares against
+`forging.param1`. `TechDef` is now a legacy map with **zero readers left in the
+shipped tree** — still populated, so the SKIP will not fire and the numbers are
+still 50/100, but the value the GAME uses now comes from
+`Techs.<id>:ResolveValue("param1")`. If you want the probe to assert what the
+game actually does, read it there and keep `TechDef` only as the 1.0.7 fallback,
+the way the module now does.
+
+**2 · Your parse-gate question: yes, and it already runs on your tree.**
+`tools/parsecheck.py` landed this link (`8754e00`). It uses the real Lua parser
+that is on this rig (`lupa`) rather than another hand-rolled block-balance
+counter — three chain links wrote one of those and two silently accused
+byte-identical files. It ships with a 7-leg falsifier.
+
+```
+python tools/parsecheck.py --dir C:\Dev\SMR-BugFixPack-TestKit\Code
+```
+
+**MEASURED 2026-09-09: 24 file(s), 0 errors.** `doccheck` now runs it over the
+kit automatically and prints the row as **report-only** — it gates `Code/` and
+never the kit, which is the standing your `testkit_tree` row already has under
+the owner's 2026-08-04 decision. ⇒ **You do not need to rebuild one in your
+scratchpad.**
+
+⚠️ Two limits, both stated in the file: it is a SYNTAX gate and clears nothing,
+and the dialect is not pinned (the embedded interpreter reports Lua 5.5; nothing
+in the shipped tree or in our facts records which Lua the engine runs, and
+`lua_revision` 350453 is a content revision, not a language version). A GREEN
+means "not obviously broken", never "the engine will accept this".
+
+**3 · One number you will want for Unit C's expected census.** The canonical
+1.1.0 boot log's module census is **64 applied / 16 inactive**, not the 63/17
+this project has been citing — `SaintBlessing` latches at `:166` and heals at
+`:186`, ending the boot ACTIVE. Details in 99's inbox; the point for you is that
+any kit expectation written against "17 inactive" is written against a
+first-pass reading.

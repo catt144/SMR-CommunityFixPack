@@ -371,3 +371,40 @@ same, for your `last_changes` and the notes):
    (all landscaping site kinds), so an old "flatten" wording is still true, not stale.
 
 **Nothing for `metadata.lua`'s `code` list** — no module was added, renamed or dropped.
+
+### From link 05 — one log string changed; nothing player-facing, and one thing to check
+
+*(Link 05, `smr-bugfixpack-2b`, 2026-09-09. ⛔ Nothing was run in a game; no
+status moved.)*
+
+**1 · The only wording I changed, and it is log-only.** `00_Core.lua`'s
+`ctx.latch` now prints, for a latch the site marks `benign`:
+
+```
+<id>: inactive (<detail> — already correct, RETIRE candidate)
+```
+
+instead of `<id>: inactive (<detail>)`. Augment A-2: a `DataPatch` pass finding
+the shipped data "already correct" was filed as HEALTHY, and it is the opposite
+— it is vanilla having fixed the defect.
+
+⛔ **Nothing player-facing moved.** `entry.detail` — the string ListFixes shows
+— is untouched, the entry still reads `inactive`, and only two live sites can
+print the new suffix (`Fix_SinkholeIndestructible`,
+`Fix_SaintBlessing`). If any wording you own quotes a boot-log line verbatim,
+this is the one that changed; I checked `PLAYTEST_CHECKLIST.md:703`,
+`FIX_POLICY.md:166` and `PLAYTEST_CHECKLIST.md:649`, and none of them quotes a
+benign latch, so I believe you have nothing to do here.
+
+**2 · A number in your territory that I did not touch.** `metadata.lua`'s
+`description` opens **"Eighty-two repairs"** and the site is down to **46** live
+fix-list entries after link 02's 36 deletions. Out of my fence and squarely in
+yours; flagging it only in case it is not already on your list.
+
+**3 · A count you may be about to quote, now corrected.** The canonical 1.1.0
+boot log reads **64 applied / 16 inactive**, not the 63/17 this project has
+cited in several places — `SaintBlessing` latches at `:166` and heals at `:186`,
+ending the boot ACTIVE. If any `last_changes` or card wording says how many
+fixes switched themselves off, use 16, and note that the number of modules the
+in-game dialog NAMES is unchanged at 14 (the two unnamed ones are content
+latches, not patch rot). Derivation is in 99's inbox.
