@@ -1798,3 +1798,155 @@ warn F85/F100/C12/C13/C14/C15/C16/C17/C34/C35/C37/C38/C39/C43/C49/C50/C51/C52:
      tested-attended|tested-unattended|parked>'
 STATE + STUBS: STATE.md 9211 bytes (warn 9216, hard 18432, line 200)
 ```
+## Notes from upstream (continued — link 07, the Test Kit)
+
+*(Link 07, `smr-bugfixpack-ee`, 2026-09-09. Kit commits `cd2be43` `92325fe` `c20515e`
+`90844bd` `7194c9c` `70f2482` `00bd198` `6f895bc` `320904e` `10ad343` `91e465c`
+`4f48c7b` in `C:\Dev\SMR-BugFixPack-TestKit` — local-only, no remote, settled.
+⛔ **NOTHING RAN IN A GAME.** No status word moved; no bug entry gained "tested".)*
+
+### 1 · The census, re-derived — and my own brief was wrong in a load-bearing way
+
+**Probe count 100 → 94** (six deleted, each named below). Kinds now: **55
+`behavior`, 32 `retired`, 7 `install`.**
+
+⛔ **The brief's model of the problem was wrong, and Pass A should not inherit
+it.** It said the 37 orphans would each hit `FixMissing` and print "fix pack not
+loaded", projecting "~45 FAILs". Measured against the files instead:
+
+* only **12 of the 38 orphan probes called `FixMissing` at all**;
+* the other **26 had no pack guard whatsoever** and had been running their bodies
+  against vanilla for weeks — silently, with nobody reading the answers.
+
+That matters beyond arithmetic: the brief's ⭐ premise ("every probe was built to
+run on an UNPATCHED game, so the 37 already know how to observe the defect on
+vanilla") is true for a probe covering a **repair to a shipped function** — waves
+1–5 are full of them, and several retired with the body untouched — and **FALSE
+for a module that ADDED a new mechanism**. Six probes drove a sweep or watchdog we
+wrote (`ReconcileDisasterPredictions`, `StormWedgeCheck`, `MigrateRainsState`,
+`compensation_delta`, `HealFirstAsteroidPrefabs`, `gate_descriptor`) and never
+touched a shipped function, so they had **no vanilla half to fall back on**.
+
+### 2 · ⛔ SEVEN probes would have reported a confident FAIL on a HEALTHY game
+
+This is the finding I would put first. Only three were known going in. **Not one
+was a module defect**, and none was findable by relabelling — each needed the
+shipped 1.1.0 body read against it:
+
+| probe | what it asserted | why that is wrong on 1.1.0 |
+|---|---|---|
+| `SmallLandscapeSites` | a nine-hex cache returns exactly **5** destinations | 5 was OUR clamp; vanilla's default is **10**, so it returns 9. R-6's whole reason for removal is that it RESTORES vanilla's 10 — the probe would have inverted the verdict |
+| `IndependenceTerraforming` | `-amount == param1` | 1.1.0 has BOTH at `-10`; the sign convention flipped, so `-(-10) = 10 ~= -10`. It also required OUR savegame sweep, absent by definition |
+| `CommandCenterNumbers` | eleven `GetAvailable<Res>` shims exist | those were OUR shims — **zero hits** in the 1.1.0 tree. Would have printed "11 getter(s) missing — those rows render empty" |
+| `AstrogeologistExtractors` | every extractor TEMPLATE ID is paid | 1.1.0 pays **label-wide**, so it would have read **"pays 0 of 12"** against a profile that is strictly better than the enumeration it replaced |
+| `TrainMinors` | `max_vehicles` is recomputed | that recompute was OURS; the cap is now the route's (`GetTrainsOnRoute`), and `max_vehicles` is display-only |
+| `SaintBlessing` (03) | `saint.modify_trait == GetTraitLabel(...)` | asserts we rewrote the game's data, which `3db4984` deliberately stopped doing |
+| `PayloadTemplateRefill` (04) | `Apply` stamps synchronously | the stamp moved inside the thread's confirmed branch |
+
+Two more raised rather than failed (`LandscapeUnitFilter`, `VacuumWalks` — 04b's,
+as predicted), and an eighth, `GeneForging`, **could not pass in ANY research
+state** (link 05 found it; the injection stopped reaching 1.1.0's parameterless
+body). ⇒ **the real count of stale probes was 8, not the 5 the checklist warned
+about.** STATE's line now says so.
+
+### 3 · What the sitting should read — the expected census (§3)
+
+The full owner-facing version is the **LINK 07 block** in `PLAYTEST_CHECKLIST.md`.
+⛔ **Every number is a PREDICTION until `RunAll()` runs.** Pack ON, 1.1.0 colony:
+
+* 94 probes: 55 `behavior`, 32 `retired`, 7 `install`.
+* **Expected non-regressions, BY NAME** (the standing SKIPs-by-name rule): ERROR —
+  `LanderCargoRatchet`, `AutoExportPriority` (1.1.0 replaced ordering with
+  fair-share allocation; re-arming means new probes, and a blind stub patch that
+  happened to PASS would be a false "vanilla fixed it"). SKIP —
+  `MoraleComfortTooltip` (confirming it means confirming a UI row is ABSENT, a
+  screen observation), `LocalizedUIText` (needs a translation table; English rig
+  has none — `EF-039`).
+* SKIP by configuration: the six `SaveRescue*`, the eight opt-in probes.
+* Pack OFF: the 13 pack-guarded probes report `fix pack not loaded`.
+* ⭐ **The 32 `retired` probes must give the SAME verdict on BOTH legs.** They
+  measure the game, not us. **A retired probe that disagrees across the legs is
+  itself the finding** — that invariance is the kind's whole point.
+
+### 4 · Routed out of fence — please pick these up
+
+1. ⚠️ **`AstrogeologistExtractors` residue is an OWED SANITIZER, and it is a live
+   wrong number.** `VANILLA_FIX_QA.md` §254 already says so; I turned it into a
+   probe clause that FAILs if the loaded save carries it. Our two
+   `Effect_ModifyLabel`s were keyed into `UIColony.label_modifiers`, which is
+   PERSISTED, so deleting the module does not undo them: every 1.1.0 save that ran
+   under the pack keeps **+10% on top of vanilla's +20**, and
+   `MicroGAutoWaterExtractor` also carries the `Extractors` label, so it gets +30%
+   water where 1.1.0 intends +20%. Signature taken from the deleted module's own
+   `MISSING` table at `2dc1dbe^`, not guessed. **Contrast F-4**, where I checked
+   and there IS no cleanup owed (QA §123) — which is why that one gets no probe.
+2. ⚠️ **`WORKFLOW.md:407`'s measured suite baseline is VOID** and nothing says so
+   there: `78/0/16/0 of 94`, measured 2026-08-13 on a **74-module pack on 1.0.7**.
+   The pack is 44 modules and the suite is 94 probes on 1.1.0. `WORKFLOW.md` is
+   outside my fence. It needs re-stamping after the sitting, not before.
+3. ⚠️ **A stale citation:** the `FactionFundingCheck` probe's queued repair cited
+   "D13", but `bugs/D13.md` is the save-exit deliverables entry. The repair itself
+   was well specified and is APPLIED (its PASS could not fail against the defect —
+   the engine tolerates `pairs(nil)` — so it is now a SKIP).
+4. ⚠️ **The chain README's read-path says "The 1.0.7 tree is GONE (`EF-075`)".**
+   It is ARCHIVED and on disk (`C:\Dev\SMR-SrcArchive\...`, STATE says so, link 04b
+   used it for three-way diffs). Harmless to me, misleading to a fresh reader.
+5. ⚠️ **A fence judgement I made, so you can overturn it.** My fence gave me
+   "STATE's emitted block". I also edited the adjacent line, which said
+   "⛔ 5 TestKit probes STALE (3 FALSE-FAIL + 2 ERROR; 07 owns)" — after 07 closed
+   that is false in the mandatory read, and the true figure is 8. STATE is 9210
+   bytes (warn 9216), LF-clean, 0 CR.
+6. ⭐ **From peer `smr-bugfixpack-db`:** `Fix_PayloadTemplateRefill` indexes
+   `FlightPolicies`, a `ClassesBuilt` global, at apply time, and has never run in a
+   boot (`177c7b2` postdates the newest log). That is a MODULE question, not a
+   probe one — not mine, and not covered by the probe I repaired.
+
+### 5 · Drift caught in my own work (chain rule 5)
+
+* ⛔ **I deleted four probes by accident**, three on LIVE modules
+  (`DomeFreeSpaceMismatch`, `FreedHousingNotice`, `ShuttleHubOffAvailable`), by
+  bounding a replacement with a hand-picked section header. Caught on the probe
+  count, restored from HEAD (my own uncommitted error, not a peer's work), and the
+  edit rebuilt as a helper that bounds a block as `[comment_start,
+  next_comment_start)` — **non-overlapping by construction** — with an
+  `expect_next` assertion on every call. All twelve live probes in that file were
+  then verified byte-identical to HEAD.
+* ⭐ **`parsecheck` cannot see a whole class of fatal bug, and I shipped one.**
+  The kit binds `SMRTest` helpers to file-local aliases; a probe calling
+  `FixMissing(...)` in a file that never aliased it indexes a **nil** and ERRORs at
+  run time, while parsing perfectly. My F70 repair added such a guard to
+  `30_Probes_Wave3.lua`; worse, the new `aliascheck` gate immediately caught one I
+  had **already committed** (`55_Probes_Wave6.lua` calling `FixRetired` unbound),
+  and later caught a third in `64_Probes_Wave14.lua`, which binds no aliases at all.
+  Falsified in both directions before being trusted. It lives in my scratchpad, not
+  in `tools/` (rule 3 — `tools/` is 05's). **⇒ Worth promoting to `tools/` and
+  wiring into doccheck beside `parsecheck`; it is ~30 lines.**
+* ⚠️ **A house rule contradicted the README, in five files.** "A probe must assert
+  on the MECHANISM … not on something that can read the same in both halves of an
+  A/B pair" reads as the opposite of the README's new fourth known defect, "assert
+  the OUTCOME, not the mechanism" — and obeying the house rule alone rebuilds the
+  trap that produced the seven false verdicts above. Both stand and govern
+  different failures; reconciled in full at the top of `50_Probes_Wave5.lua`, with
+  pointers from the other four.
+* ⚠️ **Two brief claims that were simply wrong, checked and left alone.**
+  `ClassicRockets` is NOT a broken orphan — it already reads `OptStatus` and SKIPs
+  correctly; what misleads is its `fix` field naming an opt-in module. And
+  `DustSicknessBiorobots` is not an orphan at all: `Code/Fix_DustSicknessBiorobots.lua`
+  is live and registered. The brief listed three pre-chain orphans; there are two.
+
+### 6 · What may NOT be claimed from this link
+
+* ⛔ **Not "the REMOVE verdicts are confirmed."** Every `retired` probe is UNRUN.
+  This link makes the suite *able* to confirm them and nothing more.
+* ⛔ **Not "the false-FAILs are fixed"** — "rewritten against the new bodies,
+  unrun" until the sitting's pack-on leg prints PASS for them.
+* ⛔ **Not "the kit is verified" / "the suite is green."** `parsecheck` (24 files,
+  0 errors) and `aliascheck` (24 files, 0 unbound) are SYNTAX and BINDING gates.
+  Neither runs a probe.
+* ⚠️ Four `retired` probes are **premise checks, not outcome checks**, and each
+  says so in its own header: `MeteorFrequency`, `MeteorStormWedge`, `RainsDeadlock`,
+  `DustDevilSpawnGate`. They confirm the mechanism a removal RESTS ON, not the
+  player-visible outcome. ⭐ For three of them the strongest evidence found is that
+  **vanilla shipped our own repair as a savegame fixup** —
+  `MeteorsThreadToRepeat2`, `RainsDisasterLoopToRepeat2`,
+  `UpdateDroneUnreachableTimestamps` — the developers doing what our modules did.

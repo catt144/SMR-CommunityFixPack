@@ -18,8 +18,8 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   ✅ **F116 REPAIRED in-body** (`add94b3`), NOT gated. Source-derived, NEVER reproduced.
   ⭐ **1.1.0 RE-VERIFICATION 09-08: 10 FIX / 35 REMOVE / 35 KEEP** (`reports/PACK_1_1_0_REVERIFICATION.md`,
   ck114-117; QA'd by 3 fresh readers, `reports/VANILLA_FIX_QA.md` §0, 0 flips).
-  ⭐ **LINKS 02–06 DONE 09-08/09** (commits in `prompts/hotfix2/README.md`): 36 modules DELETED; F-1/F-2/F-3
-  repaired; F-6…F-10 RE-COPIED; F116 ck111/119 landed. ⛔ 5 TestKit probes STALE (3 FALSE-FAIL + 2 ERROR; 07 owns).
+  ⭐ **LINKS 02–07 DONE 09-08/09** (commits in `prompts/hotfix2/README.md`): 36 modules DELETED; F-1/F-2/F-3
+  repaired; F-6…F-10 RE-COPIED; F116 ck111/119 landed. Kit 94 probes, 32 `retired`; 7 false-FAILs were stale, not 5.
   ✅✅ BOTH GATES MEASURED 09-08 (`archive/logs/gated110_*`): **64 applied / 16 inactive** / 14 named, 0
   errors; both `update_suspect` routes CONFIRMED; as-read 63/17, 05 heal-aware. ⛔ MENU-ONLY ⇒ trains/
   landscaping NOT exercised in play.
@@ -99,7 +99,7 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 BUILD STATE (emitted by tools/doccheck.py)
 - modules: 44 registered (44 default-active, 0 optional-gated files)
 - Code/*.lua files: 45
-- TestKit probes: 100
+- TestKit probes: 94
 - BUGS index rows: 116 F + 12 D + 54 C
 ```
 Re-emit after any change. Game: records describe **1.0.7.396349** (`EF-014`); INSTALLED is now **1.1.0** (`EF-075`).

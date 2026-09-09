@@ -29,6 +29,55 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### ⭐ 2026-09-09 — LINK 07 IS DONE: the Test Kit now tells the truth about this build, and it can CHECK the 36 removals. ✅ **Nothing is owed from you now. One thing to read before you run the suite: the expected census below.**
+
+> **What was wrong, in one line.** About 40 of the kit's 100 probes described a pack that no longer exists, so a
+> suite run would have printed a wall of FAILs with **zero regressions in it** — the exact thing that trains a
+> reader to ignore FAIL.
+>
+> **What changed.** 94 probes now (six were deleted, each named in its commit). **32 are a new kind, `retired`.**
+> Those cover the modules link 02 removed, and they read **backwards** on purpose:
+>
+> | verdict | what it means for a `retired` probe |
+> |---|---|
+> | **PASS** | vanilla really did fix that bug ⇒ the removal is **confirmed in the game**, not just on paper |
+> | **FAIL** | the bug is still there ⇒ **a removal was WRONG and players lost a fix** — a finding, not a probe bug |
+> | **ERROR** | the probe's scaffolding is older than 1.1.0 ⇒ evidence of **nothing**, in either direction |
+>
+> ⭐ **This is the first time the pack has had a machine check on "vanilla fixed it".** Those 36 removals were
+> decided by reading the game's source; until now nothing tested them in a running game.
+>
+> ⛔⛔ **EVERY NUMBER BELOW IS A PREDICTION UNTIL YOU RUN `SMRTest.RunAll()`. Nothing in this link was run in a
+> game.** The point of writing them down is that the sitting can falsify them: **any FAIL not on this page is
+> either a real regression or a probe I got wrong**, and either way it wants looking at.
+>
+> **What to expect from `SMRTest.RunAll()` on a 1.1.0 colony, with the pack ON:**
+>
+> * **94 probes: 55 `behavior`, 32 `retired`, 7 `install`.**
+> * **4 named results that are NOT regressions** — please do not read these as breakage:
+>   * `LanderCargoRatchet` and `AutoExportPriority` — expected **ERROR**. 1.1.0 rewrote the rocket cargo
+>     allocator into a different shape; re-arming them means writing new probes, not patching stubs, and a
+>     blind patch that happened to PASS would be a false "vanilla fixed it".
+>   * `MoraleComfortTooltip` — expected **SKIP**. Confirming it means confirming a UI row is *absent*, which is
+>     something you see on screen, not something a probe can read.
+>   * `LocalizedUIText` — expected **SKIP** on an English rig (it needs a translation table to read).
+> * The six `SaveRescue*` probes SKIP unless the save-rescue mod is loaded — that is by design and is normal.
+> * The two `OptionsMenu*` and six opt-in probes SKIP unless the opt-in pack is ticked.
+>
+> **With the pack OFF** (the baseline half of the A/B): the 13 probes that guard on the pack report
+> `fix pack not loaded`, which is correct and is what a baseline leg is for. ⭐ **The 32 `retired` probes should
+> give the SAME verdict on both legs** — they measure the game, not us, and no module of ours is involved either
+> way. **A retired probe that disagrees between the two legs is itself a finding.**
+>
+> ⚠️ **One row can report something real and is worth reading if it fires:** `AstrogeologistExtractors` FAILs if
+> this save still carries a +10% bonus an older version of *our own pack* wrote into it. That bonus survives the
+> module being deleted (it lives in the save, not the code), and repairing it needs a one-shot cleaner nobody has
+> written yet. It is routed to the terminal audit as an owed item.
+>
+> ⛔ **Nothing here moves a status word**, and no bug entry gained "tested". The three probes links 03/04 warned
+> you would false-FAIL, and the two links 04b warned would ERROR, are **rewritten and unrun** — they only become
+> evidence when this sitting prints PASS for them.
+
 ### ⭐ 2026-09-09 — LINK 06 IS DONE: the store card and the site now describe the pack that actually ships. ✅ **Nothing is owed from you — but ONE thing must happen at the sitting, and it is easy to miss.**
 
 > **What changed, in one line.** Link 02 deleted 36 of the 80 fixes because game 1.1.0 repairs those bugs itself.
@@ -122,17 +171,7 @@ completed tests move whole to
 > none of the three reads a quantity a cheat changes, so no clean run is needed.
 > ⚠️ **Untick the Test Kit's force leg first if it is armed** (it was not, as of the 17:51 boot log).
 >
-> ⛔⛔ **IF YOU RUN THE TEST KIT SUITE, TWO PROBES WILL REPORT `FAIL` AND BOTH ARE THE PROBE BEING STALE, NOT THE
-> FIX BEING BROKEN.** Please do not read them as regressions:
-> * **`SaintBlessing`** — its static half asserts that we rewrote the game's data. On 1.1.0 we deliberately no
->   longer do (the game now resolves the label itself), so the assertion is wrong while the fix is right. Its
->   *live* half — do the dome Saints carry the modifier — is still the correct check and should pass.
-> * **`ShelterReflex`** — it tests the habitat half we **deleted on purpose** (see below), so it is testing
->   behaviour the pack no longer claims.
->
-> The Test Kit is a separate repo and outside link 03's fence, so both were **filed, not fixed** (⭐ since 09-08
-> owned by chain link `07_TESTKIT.md` — see the LINK 04 block), and routed to
-> the terminal audit. `StaleReservations`' probe is unaffected and should still pass.
+> ✅ **RESOLVED 2026-09-09 by chain link `07_TESTKIT.md`** — the probes named here were REWRITTEN against the new module bodies, so they no longer report a stale verdict. ⛔ Rewritten, **UNRUN**: nothing was run in a game, and none of it is evidence until the post-99 sitting's pack-on leg prints PASS. The suite's expected reading for that sitting is the LINK 07 line below.
 >
 > ⚠️ **ONE THING WE GAVE UP, and you should know before the patch notes are written.** `ShelterReflex` had two
 > halves; **half (a) is deleted**, not repaired. It made an asteroid habitat keep its residents through a brief
@@ -183,14 +222,7 @@ completed tests move whole to
 > ⚠️ Row 6 needs a provisioned 1.1.0 colony with trains — the 1.0.7 fixtures cannot load (`EF-079`) — so it shares
 > the colony with hotfix 1's "first train leaves its platform" control. ✅ Cheats are not a confound for rows 4–6.
 >
-> ⛔ **A THIRD TEST KIT PROBE NOW REPORTS A FALSE `FAIL`** (with link 03's `SaintBlessing` and `ShelterReflex`):
-> `PayloadTemplateRefill` (`30_Probes_Wave3.lua:11-70`) stubs the real-time thread to a no-op and expects `Apply`
-> to stamp the flag synchronously; the stamp now lives inside the confirmed branch of that thread, so the probe's
-> second step sees the template refill and says FAIL. **If you run the suite, expect it** — three named FAILs, not a
-> regression. ⭐ **Now owned: on your call ("Agreed, make the 07") chain link `hotfix2/07_TESTKIT.md` repairs
-> the kit BEFORE 99** — all three false-FAILs, plus the 37 probes that still describe the modules link 02 deleted
-> (they become "vanilla fixed it" checks the sitting can read). Until 07 closes, this warning stands.
-> `RocketDroneChurn`'s probe and both `TrackSalvageWipe` probes were checked and are unaffected.
+> ✅ **RESOLVED 2026-09-09 by chain link `07_TESTKIT.md`** — the probes named here were REWRITTEN against the new module bodies, so they no longer report a stale verdict. ⛔ Rewritten, **UNRUN**: nothing was run in a game, and none of it is evidence until the post-99 sitting's pack-on leg prints PASS. The suite's expected reading for that sitting is the LINK 07 line below.
 >
 > ✅ **Items 111 and 119 below are LANDED** (`fc318c7`); their entries now say so. ⛔ Nothing here moves a status
 > word, and a SHIP from 99 is still not clearance for the upload sitting (`H-04`).
@@ -242,11 +274,7 @@ completed tests move whole to
 > 1–6 and hotfix 1's "first train leaves its platform". ✅ Cheats are not a confound for rows 7–10. Row 8 doubles as
 > the F114 control: the train must leave its platform at all.
 >
-> ⛔⛔ **IF YOU RUN THE TEST KIT SUITE, TWO MORE PROBES WILL REPORT `ERROR`, AND BOTH ARE THE PROBE BEING STALE**
-> (on top of the three FALSE-FAILs from links 03 and 04): `LandscapeUnitFilter` still calls the function with the
-> OLD two-argument shape, and `VacuumWalks` hands our body a dummy colonist that lacks the 1.1.0 methods. Both are
-> owned by chain link `07_TESTKIT.md`, which now has the exact rewrite in its inbox. `TrainCargoDumping`'s probe
-> should pass as written. Until 07 closes: **five named stale results, not regressions.**
+> ✅ **RESOLVED 2026-09-09 by chain link `07_TESTKIT.md`** — the probes named here were REWRITTEN against the new module bodies, so they no longer report a stale verdict. ⛔ Rewritten, **UNRUN**: nothing was run in a game, and none of it is evidence until the post-99 sitting's pack-on leg prints PASS. The suite's expected reading for that sitting is the LINK 07 line below.
 >
 > **Drafted patch-note lines** (link 06 owns the final wording; honest versions, none says "Fixed"):
 > * *Landscaping placed over colonists boarding a vehicle no longer pulls them out of it — re-enabled for 1.1.0.*
