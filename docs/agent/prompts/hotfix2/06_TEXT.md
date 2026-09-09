@@ -42,12 +42,18 @@ wording promises. ⛔ But do not upgrade the claim back — the manifest is a
 **repo-side** instrument the player's game never runs, and class c (semantics
 moving under a wrapper) is still seen by nothing.
 
-## 2 · ck113 — `last_changes` bullet 3 overstates F116
+## 2 · ck113 — RULED: `last_changes` bullet 3 says "updated for"
 
-*"One track-salvage fix was also brought in line with the new game code"* reads
-as parity. Two deliberate divergences from 1.1.0 remain (ck111 is one) and the
-repair has never run in a game. **Proposed:** *"One track-salvage fix was also
-updated for the new game code."*
+✅ **The owner ruled this 2026-09-08: take the proposed wording.**
+*"One track-salvage fix was also brought in line with the new game code"* read as
+parity, which it was not. Write: *"One track-salvage fix was also **updated for**
+the new game code."*
+
+⚠️ This bullet describes the **hotfix-1** change and this prompt rewrites
+`last_changes` wholesale for hotfix 2 (§3) — so unless the F116 line survives into
+the new note, the ruling is satisfied by not reintroducing the old phrasing.
+Check which applies before you edit; do not paste a hotfix-1 bullet into a
+hotfix-2 changelog.
 
 ## 3 · `last_changes` for hotfix 2 — rewrite it, do not append
 
@@ -111,8 +117,9 @@ Found something out of fence? **File it, do not fix it.**
 
 ## 8 · Stop conditions
 
-- ck112 or ck113 unruled ⇒ do everything else, leave those two strings alone,
-  say so. They are the owner's sentences.
+- **ck112 unruled** ⇒ do everything else and leave that one string alone, say so.
+  It is the owner's sentence. ✅ ck113 IS ruled (2026-09-08) — §2 is settled, not
+  pending.
 - A count you need is only available from a source you were told not to trust
   ⇒ stop and ask rather than typing a number from memory.
 - The description exceeds a portal limit on upload ⇒ that is the sitting's
