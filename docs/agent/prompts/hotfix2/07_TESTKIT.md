@@ -47,7 +47,10 @@ restored — the rule itself at `:583-587`, the dirty branch at `:624-626`)
 the pack) · `reports/PACK_1_1_0_REVERIFICATION.md` §1b (why each REMOVE left —
 you need the reason to know what a retired probe should now observe) ·
 `99_TERMINAL_AUDIT.md` §4 Pass C and its Notes from upstream at `:643-660`
-(link 03's two false-FAILs, with line numbers) and `:835` (link 04's) · your
+(link 03's two false-FAILs, with line numbers) and `:849-852` (link 04's —
+⚠️ re-verified 2026-09-09, this was cited as `:835` and that line now holds 04's
+desk-controls section instead; the `PayloadTemplateRefill` probe finding is at
+`:849`) · your
 inbox below · `agent/bugs/INDEX.md` for any status you cite.
 
 ## 1 · The census — what is wrong with the kit today (measured 2026-09-08)
@@ -286,7 +289,7 @@ FAIL — the README's three-mod rule. `DustSicknessBiorobots`
 log; find where it went before deciding (grep the pack's `git log -S`).
 
 **4 · The three false-FAIL causes are already diagnosed** — 99 `:643-660` (03's
-two) and `:835` (04's). Do not re-derive them; read the new module bodies and
+two) and `:849-852` (04's; was `:835`, corrected 09-09). Do not re-derive them; read the new module bodies and
 write the probe to the outcome.
 
 **5 · There IS a Lua parser on this rig.** `python -c "import lupa"` — Lua 5.4
