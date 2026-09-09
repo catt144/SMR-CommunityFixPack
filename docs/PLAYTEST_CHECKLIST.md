@@ -29,6 +29,57 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### ⚖️ 2026-09-09 — ITEM 126 OPEN: link 08 wrote a pass that cleans up after **us**, and it changes what "remove the save sanitizer" means
+
+> **What we left behind.** One of the 36 modules link 02 deleted,
+> `Fix_AstrogeologistExtractors`, did its job by adding two +10% extractor
+> bonuses to the Astrogeologist commander profile. Those bonuses were written
+> **into the savegame**, not just into memory — so deleting the module did not
+> take them back. On 1.1.0 the game pays that bonus differently, and one of the
+> two buildings (the Micro-G Auto Water Extractor) is now collecting **+30%
+> water where the game intends +20%**. It is a bonus in the player's favour, so
+> nothing is broken and nothing is lost — but it is a number we put there and
+> the game did not.
+>
+> **What I did.** Added a pass to `90_SaveSanitizer` that finds those two
+> entries and removes them on load. No new file, nothing about the shipped file
+> list changes. ⛔ **It has never run in a game** — this is a written pass, not
+> a repaired save, and I am not claiming otherwise.
+>
+> **⚖️ THE DECISION (this is the part that needs you).** On 2026-09-08 you were
+> asked (item 117) whether to keep `90_SaveSanitizer` at all. That question was
+> **entirely about players loading old 1.0.7 saves**, which only happens off
+> Steam — so "Steam-only in practice ⇒ remove it" was a reasonable answer.
+> **That is no longer the whole question.** This new pass has nothing to do with
+> 1.0.7 saves: it cleans **1.1.0 saves that were played with our pack**, and
+> those exist on every platform, Steam included. ⇒ removing the sanitizer now
+> means *"leave a number we put in players' saves in there permanently"*.
+> **I am not resolving this for you.** If you already leaned "remove it" on the
+> platform question, this is the reason to look again.
+>
+> **What you will see, at the post-99 sitting (no action now).** Load a save and
+> read the log for `SaveSanitizer: F95`:
+>
+> | the line says | it means |
+> |---|---|
+> | `removed 0 modifier(s), left 0 unidentified` | this save was already clean — most saves, and every save that was not an **Astrogeologist** colony |
+> | `removed 2 …` plus a per-label line naming the label | this save carried our leftovers and they are now gone |
+> | `LEFT n modifier(s) … ALONE` | ⚠️ something on that label looks like ours but I could not positively identify it, so I did not touch it. **Tell me if you see this line** — it most likely means another mod owns that entry, and removing someone else's is the one mistake here with no undo. |
+>
+> **Cross-check:** the Test Kit's `AstrogeologistExtractors` probe answers the
+> same question independently — it FAILs if the loaded save still carries the
+> leftovers. Probe PASS + a `removed 0` line = the save was genuinely clean.
+> Probe FAIL + a `LEFT … ALONE` line = the near-miss case in the table above.
+>
+> **One thing I could not settle, recorded so it is not lost.** The game's own
+> migration for this profile (`RefreshAstrogeologistExtractorBonus`) only
+> matches old bonuses worth **20%**, and the 1.0.7 profile we have archived on
+> disk pays **10%**. If those are the only two versions, that migration cleans
+> nothing on a 1.0.7 save and vanilla leaves ten stale entries of its own. I
+> cannot prove it — there were probably game versions between the two we hold,
+> and the 20% may belong to one of those. It is **vanilla's residue, not ours**,
+> and I did not touch it. Handed to the terminal audit (99) as a finding.
+
 ### ⭐ 2026-09-09 — LINK 07 IS DONE: the Test Kit now tells the truth about this build, and it can CHECK the 36 removals. ✅ **Nothing is owed from you now. One thing to read before you run the suite: the expected census below.**
 
 > **What was wrong, in one line.** About 40 of the kit's 100 probes described a pack that no longer exists, so a
