@@ -1256,3 +1256,83 @@ index-row cell says 'filed', entry says 'cand'/'wontfix'`), `C39`, `F100`, `C43`
 `bodycheck` exit 0, 93 OK, `--selftest` PASS · `sigcheck` 43 sites, 0 MISMATCH,
 `--selftest` PASS (9 legs) · `logscan --selftest` PASS (13 legs) ·
 `parsecheck --selftest` PASS (7 legs) · Lua parse sweep 45/45 and TestKit 24/24.
+
+### From link 05 — addendum, 2026-09-09: one correction to my own §1, and two items peers added
+
+*(Same session, `smr-bugfixpack-2b`, after two sibling sessions read the close-out.
+⛔ Still nothing run in a game; no status moved.)*
+
+**1 · ⚠️ CORRECTING MY OWN FRAMING ABOVE. §1 overstates this link's part in the
+census.** `smr-bugfixpack-91` (link 03) pushed back, and it is right: **the
+re-verification report ALREADY called it.** `reports/PACK_1_1_0_REVERIFICATION.md:114`,
+augment row A-3, says in as many words — *"the '17 inactive' headline is really
+**16**"*. I quoted that row in my own tool docstring and still wrote the section
+header as though the number were a discovery.
+
+⇒ **Read §1 as: 05 IMPLEMENTED a known correction and added a second,
+independent route to it.** There are now THREE routes to 16, which is worth more
+than one discovery:
+* the report's own A-3 row (the heal at `:186`, reasoned from the source);
+* my `UpdateSuspects` argument (a non-benign latch is ALWAYS named, and
+  SaintBlessing is absent from the `:190` report naming 14 — so it was not
+  `inactive` at report time);
+* link 03's independent line count (17 distinct modules log an `inactive` line;
+  14 are in the named report; minus SaintBlessing = 16).
+⛔ **99 must not count this as a fresh finding** — that would double-count one
+insight three times over. What was genuinely unreconciled is narrower: nothing
+had checked the census against the `:190` report in the same log.
+
+**2 · SKIPs BY NAME (STATE's standing rule), applied here.** The two `inactive`
+modules that are correctly absent from the named 14 are
+**`AutomationLawCompensation`** and **`LastTransmissionStorage`** — both content
+or benign latches, neither patch rot. Never write the reconciliation as
+"14 named + 2".
+
+**3 · ⚠️ A LIVE SURFACE MY "LEAVE THE HISTORY ALONE" CALL DOES NOT COVER — filed,
+not fixed, because F115 is not my entry.** I argued above that the historical
+records should keep their as-read numbers, and I stand by that for narrative
+bodies and for `archive/`. But `bugs/F115.md` carries the old count in two places
+that are **live claims, not history**:
+* `row_status:` front matter (`:10`) — *"✅ BOOT CONFIRMS the prediction exactly
+  — 17 inactive / 14 named"*;
+* the heading tag (`:14`) — *"[fixed 2026-09-08: … 17 inactive / 14 named, 0
+  errors]"*, which is the surface `doccheck` compares.
+Under the corrected census that **"exactly" is false in one of its two numbers**.
+The prediction and the reading agreed because BOTH were computed
+last-verdict-wins — a consistent pair built on one miscount, not a confirmation.
+⭐ **The half that mattered for F115 is untouched and its verdict is unaffected:**
+`LandscapeUnitFilter` is in the named 14 independently of any of this. So this is
+a wording problem on a live claim, not a defect in F115.
+⚠️ Accuracy note on the routing: the string is in live front matter but does NOT
+reach the rendered `bugs/INDEX.md` row, so the exposure is the entry file itself
+rather than the index. Reconciliation is yours.
+
+**4 · ⭐ THE LINE-ENDING FINDING (§5 item 2) IS NOT HYPOTHETICAL — IT HAS ALREADY
+PRODUCED A WRONG DIAGNOSIS.** `smr-bugfixpack-e9` reports that yesterday it read
+`STATE.md` at **9310 bytes** mid-turn and **9203** immediately before and after,
+diagnosed it as a transient caused by a sibling session's write, **reported that
+conclusion to the owner**, and used it to argue that byte readings are unreliable
+while siblings are live.
+
+**I verified the pair against git rather than taking it on trust:** commits
+`e96a1ff` and `5daaeb5` both hold `STATE.md` at **9203 bytes LF over 107 lines**,
+whose CRLF form is **9203 + 107 = 9310**. Exactly the two numbers seen. So the
+likelier cause was the file being momentarily CRLF on disk during a git
+operation — a systematic, reproducible artefact attributed to random concurrency,
+in the direction that stops anyone looking further.
+
+⛔ **And the failure mode is worse than the phantom warn I filed.** A
+CRLF-shaped reading taken mid-git-operation looks like NOISE, which invites
+"ignore it" rather than "investigate it". A phantom warn at least gets attention.
+
+⭐ **The framing to put to the owner, which is stronger than "it is off by 104"**
+(e9's, and I agree): **an un-normalised byte count is itself a PROXY** — it
+measures content plus one checkout artefact per line. Checklist 42's own ruling
+is *cap the real resource, never a proxy*. **The cap as implemented defeats the
+rule it was created to enforce.** The fix is to measure the file as git stores
+it (normalise line endings before counting), not to raise the threshold.
+
+**5 · Attribution, so nobody re-derives it.** Items 3 and 4 came from sibling
+sessions reading this close-out — link 03's session (`smr-bugfixpack-91`) and
+`smr-bugfixpack-e9`. Item 1 is link 03's correction of me. I verified each
+against the tree or against git before recording it; none is taken on trust.
