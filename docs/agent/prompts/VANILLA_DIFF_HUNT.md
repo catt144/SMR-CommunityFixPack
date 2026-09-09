@@ -33,7 +33,7 @@ adding a fix is `FIX_POLICY`, and it is a separate decision the owner makes.
 `README.md`.
 
 **✅ DONE 2026-09-08: the 1.0.7 tree is archived too — THIS EFFORT IS UNBLOCKED.**
-`C:\Dev\SMR-SrcArchive.0.7.396349\Src` — 4448 files, tree digest
+`C:\Dev\SMR-SrcArchive\1.0.7.396349\Src` — 4448 files, tree digest
 `09d95e3448573dc378fa0bed5fc987fead3aafb70bf2ecf6a2cddef3f1ff9921`, Steam build
 `23584660`. Captured by branch-switch, copy, switch back; the game was never
 launched on the old branch. ⭐ **`EF-075`'s loss is reversed** — but do NOT
