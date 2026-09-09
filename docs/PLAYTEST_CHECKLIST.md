@@ -82,8 +82,17 @@ completed tests move whole to
 >
 > #### 🚫 What the sitting still owes — eight rows, recipes intact
 >
-> **The brief is NOT deleted** and stays the recipe for a second sitting.
-> Everything below is `NOT RUN`, never "probably fine".
+> ⭐ **`agent/prompts/HOTFIX2_SITTING.md` has been REWRITTEN for exactly this
+> remainder** — paste it into a fresh session and it picks up here. Tier 1 is
+> not repeated, the ten known false FAILs are listed so nobody re-files them,
+> and the rows are **re-ordered**: the two-minute one first, the rockets started
+> early so their flight time is not dead time, and ⛔ **the destructive track-split
+> row moved to LAST** (it was fourth, which would have contaminated the colony
+> for every row after it). Serially these are ~50 min; overlapped, ~30.
+>
+> The table below is the same work in the order it was originally listed — the
+> brief is the authority on sequence. Everything here is `NOT RUN`, never
+> "probably fine".
 >
 > | # | control | fix | ~time | why it did not run |
 > |---|---|---|---|---|

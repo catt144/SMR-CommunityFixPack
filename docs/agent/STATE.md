@@ -41,7 +41,7 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   `Building.lua:1313`; entry still reads `tested`. Status word NOT moved; owner decision filed (checklist).
   ⛔ **4 STALE INSTRUMENTS**, one printing a REAL `[LUA ERROR]` header every run (kit `CaveInRubble`/`IsNearDome` stub gap);
   `LanderEmptyLaunch` + `FreedHousingNotice` now have NO working probe. ⚠️ F20 unresolved — its probe cannot pass once retired.
-  🚫 8 T2 rows + T1.6 `NOT RUN`, filed to checklist "what the sitting still owes"; **brief NOT deleted** while any row is unrun.
+  🚫 8 T2 rows + T1.6 `NOT RUN`, filed to checklist; **`HOTFIX2_SITTING.md` REWRITTEN for the remainder** (A1–A10, destructive row LAST).
   ⚖️ Owner rule 09-08: a patch note saying "Fixed" is a **CLAIM, false until we confirm it**.
 - ⭐ PUBLISHED both portals — `pdx_id` **156049**, `steam_id` **3787202810**, tree `version` **5** (F110, 08-30).
   ⛔ Never re-upload to "fix" a version number — each upload bumps again (H-02). ⛔ Every upload OVERWRITES both

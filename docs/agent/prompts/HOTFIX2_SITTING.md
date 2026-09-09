@@ -1,262 +1,258 @@
-# The hotfix-2 sitting — one boot, two tiers, and an honest shelf
+# The hotfix-2 sitting, part 2 — what the first evening did not reach
 
 Paste into a fresh Claude Code session **with the owner at the keyboard**. This
-is the consolidated in-play sitting the owner ruled on 2026-09-08 (*"Can the
-sitting be done after the chain. I want to insure everything is green on this
-side and then we can check the live side?"*) — every control from links 03, 04,
-04b, 07, 08 and 99a, in one session, on one colony.
+supersedes the original brief, which ran on 2026-09-09 (`1480953`). **Tier 1 is
+complete and green and is NOT repeated here.** What remains is nine in-play
+controls, one optional leg, and three decisions.
 
-**Staleness anchor: `7ccfe93`.** `git log --oneline -15` · `git pull` ·
+**Staleness anchor: `1480953`.** `git log --oneline -15` · `git pull` ·
 `ListAgents` before you touch anything.
 
-> ⚖️ **WHY THIS EXISTS, in one sentence.** **Nothing in this patch has ever run
-> in a game.** No boot of the 44-module pack exists; every census in the chain
-> describes the old 80-module pack; no status word has been moved on anything,
-> deliberately. Six days ago F114 and F115 both reported `applied` and both broke
-> visibly in players' games, with every instrument green.
+> ⚖️ **WHAT CHANGED, and why this is a much smaller evening than the last one.**
+> The pack has now **run in a game**. 44 modules install on two independent
+> boots, the 95-probe suite reports no regression and no wrong removal, and the
+> two bugs that reached players — F114 trains, F115 landscaping — were watched
+> working. The catastrophic class is ruled out. **Everything below is a repair
+> that is believed-correct-by-source and has never been observed**, which is a
+> different and lesser risk. Nothing here blocks the upload on its own.
 
 > ⛔ **`H-04` BINDS THIS WHOLE FILE.** A clean sitting is not clearance and this
 > session never calls the release ready. It produces **readings**; the owner
 > decides what they mean.
 
-## 0 · The shape — read this before planning your evening
+## 0 · Read this before planning the evening
 
-**Tier 1 (~25 min, no colony setup)** is the boot, the census and the suite. It
-catches the catastrophic class: a module silently off, or a removal that was
-wrong. ⛔ **The owner should not upload without it.**
+⭐ **The single biggest saving available: rockets fly while you do other things.**
+Rows **A2 (F117)**, **A4 (refuel toggle)** and **A5 (Edit Payload)** all need a
+rocket. Their travel time is dead time. **Start A2's passenger rocket and A5's
+trip FIRST, then work the cheap ground rows while they fly.** Done serially
+these nine rows are ~50 minutes; overlapped they are closer to 30.
 
-**Tier 2 (~60–75 min + research/setup)** is twelve in-play controls. Each one
-turns a source-derived claim into an observation. **These can be shelved.**
+⇒ **Run §5 in the order given.** It is sorted by value, then by what can be put
+in flight early. ⛔ **`A9` (track split) is LAST and that is deliberate** — it is
+destructive and save-persistent, and running it earlier contaminates the colony
+for every other row. The original brief had it fourth; that was a mistake.
 
-⇒ **Run Tier 1 first, complete. Then work Tier 2 in the order given** — it is
-sorted by value, not by link number. Whatever is left when the owner stops gets
-**filed, not faked** (§5).
+Whatever is left when the owner stops gets **filed, not faked** (§7).
 
 ## 1 · Live todo list — REQUIRED, and the owner reads it to decide when to stop
 
-Build it **before the boot**, one item per control, in the order below. Mark each
+Build it **before the first row**, one item per control, in §5's order. Mark each
 the moment it completes; keep exactly one in progress. Put the **reading** in the
-item text as you go (`T1.2 suite: 88 PASS / 2 FAIL / 4 SKIP — FAIL list …`), so
-the list answers "where are we" without anyone re-reading the transcript.
+item text as you go, so the list answers "where are we" without re-reading the
+transcript.
 
 ⚠️ **If a control turns out to be two things, split it in the list at that
-moment.** A checkbox coarser than the work is a wrong answer to "how much is
-left".
+moment.** Row 1 did exactly this last time — it was three clauses and only two
+ran, and a single checkbox would have hidden that.
 
-## 2 · Preconditions — ✅ ALL FOUR VERIFIED 2026-09-09 at `7ccfe93`, re-verify anyway
+⚠️ There may be **no `TodoWrite` tool** in the session. If not, keep the list as
+a visible block in each message. Same function, different surface — do not skip
+it.
 
-| gate | reading when this was written | how to re-check |
+## 2 · Preconditions
+
+| gate | how to check | last reading (`1480953`) |
 |---|---|---|
-| **Stale-probe gate** (mandatory, `WORKFLOW` element 7) | ✅ **CLEAN — zero hits** | `grep -rln "TEMPORARY" Code/ ../SMR-BugFixPack-TestKit/Code/` — CLEAN is zero lines. ⛔ **Refuse to record any result without it.** Put it in the todo list. |
-| **Force-inactive leg** (`97_ForceInactive.lua`) | ✅ **DISARMED** (commented out of the kit's `metadata.lua` code list) | ⛔ It must stay disarmed. A forced module is a body pinned to an older build installed over changed code — throws are EXPECTED and it **changes what the pack does**. It would make the census and every A/B meaningless (`EF-081`). |
-| **Enable-path leg** (`98_EnablePathLeg.lua`) | ✅ **DISARMED** | same list |
-| **Autorun harness** (`95_AutoRun.lua`) | ✅ armed but **INERT** — `96_AutoRunFlag.lua` is not in the code list and no `-smrautorun` switch | An attended launch behaves normally. Leave it. |
+| **Stale-probe gate** (mandatory, `WORKFLOW` element 7) | `grep -rln "TEMPORARY" Code/ ../SMR-BugFixPack-TestKit/Code/` — CLEAN is zero lines | ✅ CLEAN. ⛔ **Refuse to record any result without re-running it.** Put it in the todo list |
+| **Force-inactive leg** `97_ForceInactive.lua` | commented out of the kit's `metadata.lua` code list | ✅ DISARMED — it must stay so. A forced module is a body pinned to an older build; it changes what the pack does (`EF-081`) |
+| **Enable-path leg** `98_EnablePathLeg.lua` | same list | ✅ DISARMED |
+| **Autorun harness** `95_AutoRun.lua` | `96_AutoRunFlag.lua` absent from the code list, no `-smrautorun` | ✅ armed but INERT. An attended launch behaves normally. Leave it |
+| **`Mars.exe` not running** | `tasklist` — its own step | ⛔ before anyone edits loadable code |
+| **`H-09` no packed folder beside the junction** | `ls "$APPDATA/Surviving Mars Relaunched/Mods"` | ✅ three junctions only. At equal version the unpacked one wins silently and the leg measures nothing |
+| **Passage Network** | mod manager | ✅ unticked 09-09 — confirm it stayed that way |
+| **Opt-in pack** | boot log line `Loaded mod items for:` | ✅ not enabled. ⚠️ **That line is the discriminator, not `Loaded mod def`** — the def line appears for any folder present |
 
-**Also before the boot:**
-- ⛔ **`Mars.exe` not running** when anyone edits loadable code. `tasklist`, its
-  own step.
-- ⚠️ **Passage Network is ENABLED on the rig — untick it** before any clean leg.
-- ⛔ **`H-06`: pre-copy every autosave** before loading anything. Loading a COPY
-  of a campaign still runs that campaign's autosave rotation and **deletes the
-  owner's autosaves** (`EF-056`).
-- ⛔ **`H-09`: no packed folder beside the live junction** — at equal version the
-  unpacked one wins silently and the leg measures nothing.
-- ✅ **Cheats are NOT a confound** for any control here — this was checked per
-  row by links 03/04/04b. The colony is oversized and cheat-provisioned by
-  design; that is normal, not a defect.
+**`H-06` — autosaves.** ✅ Already pre-copied 09-09 to
+`C:\Dev\SMR-SaveBackup\20260909-hotfix2-sitting\` (five saves, including the
+colony). ⛔ **Re-copy anything created since**, and note that loading a campaign
+runs its autosave rotation and deletes the owner's autosaves (`EF-056`).
 
-**The colony:** `BlankBig_02` (the owner's fresh 1.1.0 NASA colony, `F114.md:201`).
+**The colony: `USA Sol 18`** — `BlankBig_02` / NASA / Sol 18 / `lua_revision
+403908`, cheat-provisioned by design (not a confound). **All research is done on
+this map**, so no row below is gated behind a tech.
+
+> ⭐ **Verify the save rather than asking.** A `.savegame.sav` carries plain-text
+> metadata in its first ~2 KB — `displayname`, `map`, `mission_sponsor_id`,
+> `commander_profile_id`, `elapsed_sols`, `orig_lua_revision`, `active_mods`.
+> Read it with a short Python ASCII-run scan. ⚠️ Match **`orig_lua_revision`** —
+> a bare `lua_revision` match hits the *mods'* revisions first and reads wrong.
+
 ⛔ **1.0.7 saves cannot load on 1.1.0** (`EF-079`) — the whole fixture library is
-branch-locked, so every in-play row shares this one colony.
+branch-locked, so every row shares this one colony.
 
-⛔ **DO NOT load a save that ran under the BROKEN pack** unless a row below says
-to. The `SaintBlessing: restored …` line prints on a poisoned save's **FIRST**
-load and never again — any boot spends that evidence. (Per ck130 no row needs it;
-this is here so nobody spends it by accident.)
+## 3 · ⛔ THE LOG DISCIPLINE — read this or you will record a false negative
 
-## 3 · TIER 1 — the boot, the census, the suite
+This bit is not boilerplate. **Both traps below fired during the last sitting.**
 
-⚠️ **A log copied while the game is RUNNING is a PARTIAL log.** This produced two
-wrong counts on 09-08 (a "1" that was 6; a "30" that was 157). **Re-copy after
-`Mars.exe` exits before quoting any count or rate.**
+1. ⚠️ **A log copied while the game is RUNNING is a PARTIAL log.** It produced
+   two wrong counts on 09-08 (a "1" that was 6; a "30" that was 157). Re-read
+   after `Mars.exe` exits before quoting any count or rate.
+2. ⛔ **`FlushLogFile()` DID NOT WORK on 09-09.** After the landscaping rows the
+   file was **byte-identical** — same size, same mtime, and no `>` console echo,
+   while every other console command *had* echoed. A "0 errors" read at that
+   moment would have covered nothing after the console work and would have been
+   recorded as a pass. ⇒ **Treat only an exited-process log as authoritative.**
+   The pack's `[CommunityFixPack]` lines are buffered; only `[SMRTest]` lines
+   flush per line.
+3. **Quit to desktop between phases** if a row's result depends on the log. Exit
+   always flushes and writes `*** Debug::Done()` — that string is the proof the
+   file is complete.
+4. Use `tools/logscan.py` — ⛔ **never a hand-rolled grep.** The engine writes
+   the `[LUA ERROR]` header two ways and only one carries a file path.
 
-### T1.1 · Boot with the pack ON, and read the census
+## 4 · ⛔ Known instrument noise — do NOT re-file any of this
 
-Use `tools/logscan.py` — ⛔ **never a hand-rolled grep**. The engine writes the
-`[LUA ERROR]` header two ways and only one carries a file path; a hand grep
-undercounted 30 against 157.
+The last sitting triaged all ten suite failures to the instrument. **If you
+re-run `SMRTest.RunAll()`, you will see them again. They are not findings.**
 
-- **PREDICTION: 44 applied / 0 inactive.** ⛔ Computed, never measured — this is
-  the first boot of this pack.
-- ⚠️ A **first-pass read may say 43/1** and that is normal: `SaintBlessing`
-  latches and then heals. `logscan` is heal-aware; a raw read is not.
-- ⭐ **ANY `inactive` line is a finding.** **Eight modules changed their
-  self-check since the last boot.** A module that declines silently ships as a
-  no-op and nobody hears about it.
-- **0 `[LUA ERROR]` expected.** ⛔ **Never silently discount a log line** — "not
-  caused by our leg" is an attribution verdict, not a dismissal. Report every
-  unexplained line with its timestamp.
-
-### T1.2 · `SMRTest.RunAll()`, pack ON
-
-**Expect 94 probes: 55 `behavior`, 32 `retired`, 7 `install`.**
-
-⭐ **The 32 `retired` probes are the point of this run** — the first machine
-check the project has ever had on *"vanilla fixed it"*. Those 36 removals were
-decided by reading source. They read **backwards**:
-
-| verdict | meaning |
+| you will see | it is |
 |---|---|
-| **PASS** | vanilla really did fix it ⇒ the removal is confirmed in a running game |
-| **FAIL** | ⛔ **the bug is still there — a removal was WRONG and players lost a fix.** A finding, not a probe bug |
-| **ERROR** | the probe's scaffolding predates 1.1.0 ⇒ evidence of nothing, either way |
+| `FAIL LandscapeCostGuard` `[retired]` | stub lacks `GetTargetAmount`, which 1.1.0's `InterruptExcessDeliveries` now calls (`ConstructionSite.lua:1385`). **Reaching that line proves the body delegated** — the message is backwards, the F105/F107 removal is confirmed |
+| `FAIL LanderReturnFuel` `[retired]` | asserts a two-value return the no-destination branch never makes (`UniversalRocket.lua:1891-94`). Its meaningful clause passed at 3500 |
+| `FAIL MoraleComfortTooltip` `[retired]` | structurally unpassable once retired — its PASS condition is the masking we removed. Its own title says *"expected SKIP … needs a screen check"* |
+| `FAIL SaveSanitizerUpgradeLeak` `[behavior]` | outlived the pass it tested (deleted `f707903` under ck117) |
+| `FAIL C47OpenFarmSeedBufferShape` `[behavior]` | 1.1.0 halved Herbs to 50 seeds/hex |
+| 5 × `ERROR` | probe scaffolding on 1.1.0 methods that were removed. **No shipped `Code/` line calls any of them** |
+| 7 × `SKIP [install]` | no `debug.getinfo` in a retail mod sandbox — by design |
+| `[LUA ERROR] HGE::GetDomeAtHex` | the kit's `CaveInRubble`/`IsNearDome` stub gap, caught in a `pcall`. **A real header from a fake problem** |
 
-**Four named results that are NOT regressions** — do not file them:
-`LanderCargoRatchet` and `AutoExportPriority` → expected **ERROR** (1.1.0 rewrote
-the rocket cargo allocator; a blind patch that happened to PASS would be a false
-"vanilla fixed it"). `MoraleComfortTooltip` → **SKIP**. `LocalizedUIText` →
-**SKIP** on an English rig. The six `SaveRescue*` SKIP unless that mod is loaded;
-the two `OptionsMenu*` and six opt-in probes SKIP unless the opt-in pack is
-ticked — all by design.
+⛔ **Any FAIL or ERROR *not* in this table is new and wants looking at.**
 
-⛔ **Any FAIL not named above is either a real regression or a probe someone got
-wrong, and either way it wants looking at.**
+**Baselines to compare against:** `44 applied / 0 inactive / 0 errors`;
+`58 PASS / 5 FAIL / 27 SKIP / 5 ERROR` = 95 probes. A different census is a
+finding.
 
-### T1.3 · The `SaveSanitizer: F95` line (ck126 — the owner ruled the pass IN)
+## 5 · The rows
 
-Load the colony and read the log:
-
-| the line says | it means |
-|---|---|
-| `removed 0 modifier(s), left 0 unidentified` | already clean — most saves, and **every save that was not an Astrogeologist colony** |
-| `removed 2 …` plus a per-label line | this save carried our leftovers and they are gone |
-| `LEFT n modifier(s) … ALONE` | ⚠️ **REPORT THIS ONE.** Something looked like ours but could not be positively identified, so it was left. It most likely belongs to another mod, and removing someone else's is the one mistake here with **no undo** |
-
-⚠️ **If the colony's commander profile is not Astrogeologist this reads `removed
-0` and proves nothing.** That is a vacuous pass, not coverage — record it as
-such. Cross-check: the kit's `AstrogeologistExtractors` probe answers the same
-question independently.
-
-### T1.4 · `PayloadTemplateRefill: applied` must appear in the log
-
-That module's probe has **never executed in any boot** and it indexes
-`FlightPolicies`, a global created on `ClassesBuilt`. Safe on both real boot
-paths today, but that is a boot-order dependency, not a contract. 99a added a
-named `Require` guard so a failure is now **named** rather than silent — if the
-module stood down, the log says why. Its absence from the log is a finding.
-
-### T1.5 · `SaintBlessing` — expect a PASS that proves nothing
-
-Per **ck130** the owner ruled this heal ships unexercised. The probe will return
-`PASS — … (no Saint in a dome in this save, so the re-base half had nothing to
-read)`. ⛔ **Record it as vacuous. Do NOT read it as confirmation**, and do not
-go hunting a poisoned save to make it fire.
-
-### T1.6 · (optional, ~10 min) The pack-OFF baseline leg
-
-Worth it if the retired probes produced anything surprising. 13 probes report
-`fix pack not loaded`, which is correct. ⭐ **The 32 `retired` probes should give
-the SAME verdict on both legs** — they measure the game, not us. **A retired
-probe that disagrees between the two legs is itself a finding.**
-
-## 4 · TIER 2 — the in-play controls, ordered by value
-
-⚠️ **Rows 1–2 are the two bugs that actually reached players.** If the owner has
-time for three things, do **1, 2 and 3**.
+⭐ **Start A2 and A5 in flight first**, then work downward while they travel.
 
 | # | control | fix | ~time | what to do | PASS looks like |
 |---|---|---|---|---|---|
-| **1** | **Train unloading** ⭐ doubles as the **F114** control | F-10 / F46 | 5 min | Line with two stations: switch a resource OFF at station A while B accepts it; send a train carrying it into A | The train **keeps** that resource at A and unloads at B; a train with nowhere to deliver still unloads; no `Fix_TrainCargoDumping` error. ⭐ **And the train leaves its platform at all** — that is F114 |
-| **2** | **Landscaping over boarding** ⭐ the **F115** control | F-8 / F34d | 3 min + research | ⚠️ **Research "Dozer Rover" first** (or the Landscaping Nanites breakthrough) — 1.1.0 locks terrace/ramp/clear-waste-rock behind it, new since 1.0.7 (`EF-083`). Park an RC Commander, order drones to board it, drop a **flatten** over them | Drones finish boarding; **no** `ExitImpassable`, **no error line**; the site gets its stockpile and progresses |
-| **3** | **F-10 premise** (console, cheapest real answer here) | F46 | 1 min | Select station A from row 1 (resource still OFF), console: `local st = SelectedObj print(st:IsResourceEnabled("WasteRock"), st.demand.WasteRock:GetTargetAmount())` (substitute your resource) | Expect `false <number>`. **Positive** ⇒ the 1.1.0 bug is real and our guard works. **0** ⇒ 1.1.0 fixed it itself, our guard is inert, and **F46 becomes a REMOVE candidate** |
-| **4** | **Track split** ⚠️ destructive + save-persistent, never run | F116 | 5 min | EXTEND a train line while pieces are still under construction, then salvage ONE middle piece (plain click, **not** Ctrl+click) | The line splits; **every remaining piece is still on a track** (nothing vanishes or becomes unselectable); assigned trains survive; both halves accept a train; no `TrackSalvageWipe` error |
-| **5** | **F117 arrival re-choose** — repaired today, never observed | F117 | ~8 min | Colony needs a nursery, retirement home, hotel **or** a dome with a trait filter. Land a **passenger rocket beyond walking distance of every dome**, no elevator route | Arrivals just walk to a re-chosen dome. **Before the fix this raised the mod-error dialog naming the pack.** Full recipe in `bugs/F117.md` |
-| **6** | **Vacuum walks** | F-9 / F52 | 5 min | Two domes under 400 m apart joined by a passage, non-breathable map; move a colonist between them (home in the other dome) | Walks **through the passage**, not across the surface. Destroy the passage, repeat: the surface walk resumes (the designed fallback) |
-| **7** | **Edit Payload** | F-6 / F70 | 10 min incl. trip | Landed rocket: open Edit Payload, set ONE row to 0, confirm; fly the trip and return; reopen. Then open again and **cancel** the launch prompt. Then **pick a new destination** | After the trip the emptied row is **still 0**. After the cancel, the next open shows what it showed before. After the destination pick the dialog **re-fills from the template** — that is 1.1.0's own behaviour and is exempt on purpose |
-| **8** | **Rocket refuel toggle** | F-7 / F50 | 3 min | Landed rocket with a trip set: click **Accept fuel** OFF; wait two game hours; back ON | While OFF: **no Fuel requested or delivered**, and drones already heading there are **not** sent back on the hour. Back ON: Fuel requested again |
-| **9** | **Expedition housing** | F-2 | 5 min | Send an expedition, wait past 5 sols, bring the crew home | The returning crew **keep their own residence** — not a random one, not homeless |
-| **10** | **Asteroid habitat trait filter** | F-3 | 2 min | Open an asteroid habitat and **set a trait filter** | **No error** in the log. Before this build that threw |
-| **11** | **F118 layout leak** ⚠️ unpredictable by design | F118 | 5 min | Open a layout containing a building you have **not researched**; save with the dialog open; load | ⛔ **Nobody has ever measured what this leak looks like**, so **"nothing visible" is a legitimate result and worth writing down.** Record what you see either way |
-| **12** | **Saint's blessing** | F-1 / F92 | — | ⛔ **SHELVED BY RULING (ck130).** The condition is historical and unforgeable; a cheat would test vanilla, not us. **Do not attempt.** See T1.5 | — |
+| **A1** | **Asteroid habitat trait filter** ⭐ cheapest real result left | F-3 | 2 min | Open an asteroid habitat and **set a trait filter** | **No error line.** Before this build this threw. Bank it first |
+| **A2** | **F117 arrival re-choose** ⭐ highest value | F117 | 8 min, mostly flight | Colony needs a nursery, retirement home, hotel **or** a dome with a trait filter (free space). Land a **passenger rocket beyond walking distance of every dome**, no elevator route | Arrivals just walk to a re-chosen dome. **Unfixed** = mod-error dialog + `attempt to index a nil value` at `Filter.lua:116` or `Stats.lua:193-196` with `Fix_ArrivalDeaths.lua:201` in the stack. Recipe: `bugs/F117.md` §Control |
+| **A3** | **F118 layout leak** ⚠️ unpredictable by design | F118 | 5 min | Needs a layout containing a building you have **NOT researched**. ⛔ **All research is done on `USA Sol 18`, so this row cannot run there.** ⭐ **Try `SMRFIX 1.1 testing`** — the same colony at **Sol 1**, in the same save folder. ⚠️ **Unverified**: its research state was never read, and this colony is cheat-provisioned, so confirm something IS still locked there before relying on it; if not, this row is `NOT RUN — no unresearched building available`. Open the layout, **save with the dialog open**, then load that save | ⛔ **Nobody has ever measured what this leak looks like**, so **"nothing visible" is a legitimate result and worth writing down.** No probe exists. Record what you see either way. ⛔ Do **not** open the Mod Editor to manufacture a locked entry — every save there bumps `version` (`H-02`) |
+| **A4** | **Rocket refuel toggle** | F-7 / F50 | 3 min | Landed rocket with a trip set: click **Accept fuel** OFF; wait two game hours; back ON | While OFF: **no Fuel requested or delivered**, and drones already heading there are **not** sent back on the hour. Back ON: Fuel requested again |
+| **A5** | **Edit Payload** | F-6 / F70 | 10 min incl. trip | Landed rocket: open Edit Payload, set ONE row to 0, confirm; fly the trip and return; reopen. Then open again and **cancel** the launch prompt. Then **pick a new destination** | After the trip the emptied row is **still 0**. After the cancel, the next open shows what it showed before. After the destination pick the dialog **re-fills from the template** — that is 1.1.0's own behaviour and is exempt on purpose |
+| **A6** | **Vacuum walks** | F-9 / F52 | 5 min | Two domes under 400 m apart joined by a passage, non-breathable map; move a colonist between them (home in the other dome) | Walks **through the passage**, not across the surface. Destroy the passage, repeat: the surface walk resumes (the designed fallback) |
+| **A7** | **Expedition housing** | F-2 | 5 min | Send an expedition, wait past 5 sols, bring the crew home | The returning crew **keep their own residence** — not a random one, not homeless |
+| **A8** | **Train with nowhere to deliver** — row 1's unrun third clause | F-10 / F46 | 2 min | Switch the resource OFF at **both** stations, send a train carrying it | The train **still unloads** rather than hanging. *(The other two clauses PASSED 09-09 — the train runs, and it carries past a station that refuses the resource.)* |
+| **A9** | **Track split** ⛔ **DESTRUCTIVE, SAVE-PERSISTENT — DO THIS LAST** | F116 | 5 min | EXTEND a train line while pieces are still under construction, then salvage ONE middle piece (plain click, **not** Ctrl+click) | The line splits; **every remaining piece is still on a track** (nothing vanishes or becomes unselectable); assigned trains survive; both halves accept a train; no `TrackSalvageWipe` error. ⚠️ Silent by construction — there is no throw, so **look, do not wait for a log line**. Restore from the backup afterwards if the colony is wanted intact |
+| **A10** | *(optional, ~10 min)* pack-OFF baseline leg | — | 10 min | Boot with the fix pack off | 13 probes report `fix pack not loaded`, which is correct. ⭐ The 32 `retired` probes should give the **same** verdict on both legs — they measure the game, not us. A retired probe that disagrees between legs is itself a finding |
 
-## 5 · ⛔ The shelf — how to stop without lying
+**Not runnable, and not deferrable:**
+
+- ⛔ **T1.3 (the F95 sanitizer pass, non-vacuously) is BLOCKED.** It needs an
+  Astrogeologist colony; this one is `rocketscientist` and 1.0.7 saves cannot
+  load. It reads `removed 0` and proves nothing. It cannot be run without
+  provisioning a new colony from scratch (hours). The kit's
+  `AstrogeologistExtractors` probe already answers the question independently
+  and PASSed.
+- ⛔ **Saint's blessing — SHELVED BY RULING (ck130).** The condition is
+  historical and unforgeable; a cheat would test vanilla, not us. **Do not
+  attempt.** Its probe PASSes vacuously and that is not coverage.
+
+## 6 · ⛔ Three decisions the owner owes, and they are cheap
+
+These are already written up in `PLAYTEST_CHECKLIST.md` → "Decisions waiting on
+you". **Ask them at the keyboard while the rockets fly** — none needs research.
+
+1. **`F03` claims a fix that no longer ships.** Its entry and the public fix list
+   read `tested` / `high`, but link 02 (`f707903`) deleted its repair pass on
+   09-08 — correctly, under ruling 117, because 1.1.0 ships
+   `SavegameFixups.RemoveLeakedUpgradeModifiers` (verified at
+   `Building.lua:1313`). The removal is right; the **claim** was never withdrawn.
+   ⛔ **No agent moves this status word.** → *Flip `F03` to retired before the
+   upload, or does it stay?*
+2. **Four stale instruments**, one of which prints a genuine `[LUA ERROR]` header
+   every single run and will trip every future scan. → *Repair now, or file for
+   hotfix 3?*
+3. **Two shipped modules have no working probe** (`LanderEmptyLaunch`,
+   `FreedHousingNotice`). Blind spots, not defects. → *Accept for this release?*
+
+## 7 · ⛔ The shelf — how to stop without lying
 
 The owner will stop when they stop. **That is planned for, not a failure.**
 
 1. **Nothing half-observed is recorded as observed.** A row is `PASS`, `FAIL`, or
    **`NOT RUN`**. There is no fourth option, and "looked fine while I was doing
-   something else" is `NOT RUN`.
+   something else" is `NOT RUN`. ⚠️ **"Done" from the owner is not an
+   observation** — ask what they saw, by clause. This came up twice on 09-09.
 2. ⛔ **Never move a status word you did not witness.** A source read is never
    `tested`; `tested-attended` needs an attended witness at the screen. A row
    that ran and passed earns `tested-attended` on **that entry only**.
-3. ⛔ **SKIPs BY NAME, never a total.** "9 of 12 done" is not a report; the three
+3. ⛔ **SKIPs BY NAME, never a total.** "6 of 9 done" is not a report; the three
    names are the report.
-4. **At close-out, write the unrun rows into `PLAYTEST_CHECKLIST.md`** as ONE
-   block under "Decisions waiting on you" titled *what the sitting still owes* —
-   each row with its fix id, its recipe, and why it did not run (no time / no
-   setup / blocked / shelved by ruling). ⛔ That block is the successor; do not
-   invent a new prompt for it.
-5. **Update `STATE.md`** with what was measured, in the kernel's one-fact-per-line
-   style. ⚠️ Byte-capped (warn **12288**; it was 10746 at `ab7e0f5`) — if you
-   cross it, evict in the same commit per `prompts/STATE_EVICTION.md`. ⛔ Evict,
-   never compress.
+4. **At close-out, update the existing block** in `PLAYTEST_CHECKLIST.md` →
+   "Decisions waiting on you" → *what the sitting still owes*. ⛔ Do not create a
+   second block; edit the one that is there.
+5. **Update `STATE.md`** in the kernel's one-fact-per-line style. ⚠️ Byte-capped
+   (warn **12288**; it was **12262** at `1480953`, so there is almost no
+   headroom) — if you cross it, evict in the same commit per
+   `prompts/STATE_EVICTION.md`. ⛔ **Evict, never compress**, and remember the
+   rule that does the work: *if a sentence needs "superseded by", the superseded
+   half is history.*
 6. ⭐ **A measured reading that contradicts a prediction in this file is the most
    valuable thing the sitting can produce.** Record it loudly, do not reconcile
-   it away. The predictions exist to be falsified.
+   it away. Last time three predictions fell — the probe count was 94 and is 95,
+   two rows were vacuous by construction, and a `retired` FAIL meant the exact
+   opposite of what it said.
 
-## 6 · Stop conditions — permission, not failure
+## 8 · Stop conditions — permission, not failure
 
-- **A `[LUA ERROR]` naming the pack** ⇒ stop the leg, copy the FULL log after the
-  process exits, record which control was running. That is a finding, and it
-  outranks finishing the list.
-- **A `retired` probe FAILs** ⇒ a removal may have been wrong and players may
-  have lost a fix. Record it and keep going; do not attempt a repair in the
-  sitting.
-- **`LEFT n modifier(s) … ALONE`** ⇒ report it; do not touch the save.
-- **The owner is out of time** ⇒ §5. Stop cleanly, file honestly.
+- **A `[LUA ERROR]` naming the pack, not in §4's table** ⇒ stop the leg, copy the
+  FULL log after the process exits, record which control was running. That is a
+  finding, and it outranks finishing the list.
+- **`LEFT n modifier(s) … ALONE`** from the sanitizer ⇒ report it; do not touch
+  the save. It means something looked like ours but could not be identified, and
+  removing another mod's modifier is the one mistake here with **no undo**.
+- **The owner is out of time** ⇒ §7. Stop cleanly, file honestly.
 - **A row needs setup the colony cannot provide** ⇒ `NOT RUN`, with the missing
   precondition named. ⛔ Do not cheat a substitute into place and call it the
-  control.
+  control. (A3 is the likely one — all research is done here.)
 
-## 7 · What may NOT be claimed
+## 9 · What may NOT be claimed
 
 - ⛔ **Not "hotfix 2 is ready."** `H-04`. A green sitting is evidence, not
   clearance, and the upload is the owner's.
-- ⛔ **Not "the pack works on 1.1.0"** from a clean Tier 1. Tier 1 says the pack
-  **loads and installs**; the controls say whether the repairs are right.
-- ⛔ **Not "F117/F118 are fixed."** Both were found by source read and both
-  repairs were checked the same way. Row 5 and row 11 are the first observation.
-- ⛔ **Not "vanilla fixed it" from an ERROR** on a retired probe — that is
-  evidence of nothing in either direction.
+- ⛔ **Not "F117/F118 are fixed"** from a source read. Both repairs were checked
+  the same way the defects were found. A2 and A3 are the first observation, and
+  **F118 has no probe at all**.
 - ⛔ **Not a `tested` grant on any row that did not run.**
-- ⛔ **Never re-quote a count from a partially-copied log.**
+- ⛔ **Never re-quote a count from a partially-copied log**, and ⛔ never treat a
+  `FlushLogFile()` as having worked without checking the file actually grew.
+- ⛔ **Not "the suite is clean"** — it has five standing false FAILs (§4). Say
+  *"no new failures beyond the four stale instruments"*.
 
-## 8 · Read path — files, not folders
+## 10 · Read path — files, not folders
 
-`agent/STATE.md` (mandatory) · `docs/PLAYTEST_CHECKLIST.md` — the link 03/04/04b
-control blocks and items **126–131** · `agent/reports/HOTFIX_2_AUDIT.md` **§4
-(what would make this half-baked) and §6 (what the sitting owes)** ·
-`agent/bugs/F117.md`, `F118.md`, `F95.md`, `F116.md`, `F46.md` ·
-`docs/PLAYTEST_HELP.md` (console facts, the verified command table, kit helpers) ·
-`agent/facts/EF-079.md` (why the fixtures are branch-locked), `EF-081.md` (why
-forcing is never evidence), `EF-083.md` (the Dozer Rover gate) ·
-`agent/bugs/INDEX.md` / `agent/facts/INDEX.md` to find more. ⛔ Check
-`facts/INDEX.md` before deriving any engine claim.
+`agent/STATE.md` (mandatory) · `docs/PLAYTEST_CHECKLIST.md` — "what the sitting
+still owes" · `agent/reports/HOTFIX_2_AUDIT.md` §4, §6 ·
+`agent/bugs/F117.md` **§Control**, `F118.md`, `F116.md`, `F46.md`, `F03.md` ·
+`docs/PLAYTEST_HELP.md` (console facts, verified command table, kit helpers) ·
+`agent/facts/EF-079.md` (branch-locked fixtures), `EF-081.md` (why forcing is
+never evidence), `EF-056.md` (autosave rotation) ·
+`archive/logs/sitting{boot,suite,play}110_*` — the 09-09 evidence ·
+`agent/bugs/INDEX.md` / `agent/facts/INDEX.md`. ⛔ Check `facts/INDEX.md` before
+deriving any engine claim.
 
-## 9 · Close-out
+## 11 · Close-out
 
 Green `python tools/doccheck.py` before any doc commit; **WARNs verbatim** in the
 summary (18 standing `frozen index-row cell` warns are expected — report, do not
-"fix"). Commit by **explicit individual file paths** on `add` AND `commit`
+"fix"). Archive every log to `docs/archive/logs/` with a `sitting2*` prefix and
+⚠️ **`git add -f`** — `*.log` is gitignored and the tracked archive is all
+force-added. Commit by **explicit individual file paths** on `add` AND `commit`
 (peers share this worktree and a directory pathspec has swept a stranger's work
 into a commit twice), `git commit -F <file>`, then push.
 
-⚠️ **This brief does NOT delete itself while any row is `NOT RUN`** — the
-remainder is a real second sitting and this is its recipe. **`git rm` it only
-when every row in §3 and §4 is PASS, FAIL, or shelved by an owner ruling**, and
-say so in the close-out with the deleting commit named.
+⚠️ **This brief does NOT delete itself while any row is `NOT RUN`.** **`git rm`
+it only when every row in §5 is PASS, FAIL, or shelved by an owner ruling** —
+and say so in the close-out with the deleting commit named. If rows remain,
+rewrite this file for what is left rather than adding a third brief.
 
 ⛔ **The upload is NOT part of this sitting** unless the owner says so at the
 keyboard. If they do: `UPLOAD_WORKFLOW.md`, Paradox before Steam (`H-03`), §3
 paste backups are the real delivery path, and **§4 publish the site immediately
-AFTER the upload** — ck129, ruled. ⛔ `100_DOCSWEEP.md` must have run first.
+AFTER the upload** — ck129, ruled. ⛔ `100_DOCSWEEP.md` must have run first, and
+it is now the **only** thing blocking the upload.
