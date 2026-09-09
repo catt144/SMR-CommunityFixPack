@@ -29,7 +29,81 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
-### 🎮 2026-09-09 — YOUR SITTING IS WRITTEN AND READY: `agent/prompts/HOTFIX2_SITTING.md`. Two tiers, and the second is designed to be stopped partway.
+### 🎮 2026-09-09 — THE SITTING RAN. Tier 1 is complete and green; what it still owes is below.
+
+> **You were at the keyboard 16:55–18:10. Tier 1 finished, four of twelve Tier 2
+> rows ran, and the two bugs that actually reached players were both observed
+> working in play.** Logs archived: `archive/logs/sittingboot110_*`,
+> `sittingsuite110_*`, `sittingplay110_*` — all three complete, all three read
+> after `Mars.exe` exited.
+>
+> ⛔ **This is not clearance.** `H-04` stands: a green sitting is evidence, the
+> upload is yours, and `100_DOCSWEEP` still has to run first.
+>
+> #### What ran
+>
+> | | reading |
+> |---|---|
+> | **T1.1 census** | ✅ **44 applied / 0 inactive / 0 errors — the prediction exactly**, and reproduced across **two independent boots**. First-pass 43/1 with `SaintBlessing` latching and healing, as documented |
+> | **T1.2 suite** | ✅ `58 PASS / 5 FAIL / 27 SKIP / 5 ERROR`, run **twice, byte-identical**. ⭐ **Zero regressions and zero wrong removals** — all 5 FAILs and all 5 ERRORs traced to the instrument, each against shipped 1.1.0 source |
+> | **T1.3 F95 line** | ⚠️ `removed 0 … left 0` — **vacuous**, and no `LEFT n … ALONE`. But `AstrogeologistExtractors` PASSed independently, so the question *is* answered |
+> | **T1.4 payload** | ✅ `PayloadTemplateRefill: applied` — the module whose probe had never executed in any boot |
+> | **T1.5 Saint** | ⚠️ vacuous PASS, exactly as ruling 130 predicted. Recorded as vacuous, **not** as confirmation |
+> | **T2.1 trains** | ✅ ⭐ **F114 observed fixed.** The train leaves its platform, carries Waste Rock past the station that refuses it, unloads at B. No error line. *(clause 1c unrun — see below)* |
+> | **T2.2 landscaping** | ✅ ⭐ **F115 observed fixed**, both halves: a flatten raised **no mod-error dialog**, and drones boarded in and out through one (F34d, never before observed). Complete log, **zero error lines** |
+> | **T2.3 F-10 premise** | ✅ **READ AT LAST**: enabled `true 38000`, disabled **`false 60000`**. Positive ⇒ the 1.1.0 bug is real, our guard does work, and **F46 is NOT a REMOVE candidate** |
+>
+> #### ⛔ Three things that want your decision
+>
+> 1. **`F03` claims a fix that no longer ships.** Its entry and the public fix
+>    list still read `tested` / severity `high`, but link 02 (`f707903`) deleted
+>    its repair pass on 09-08 — correctly, under your ruling 117, because 1.1.0
+>    ships `SavegameFixups.RemoveLeakedUpgradeModifiers` (verified at
+>    `Building.lua:1313`). **The removal is right; the claim was never
+>    withdrawn.** Your own rule — *a patch note saying "Fixed" is a claim, false
+>    until we confirm it* — points straight at it. I have not moved the status
+>    word. **Flip `F03` to retired before the upload, or decide it stays?**
+> 2. **Four stale instruments, one of which lies loudly.** The kit's
+>    `CaveInRubble`/`IsNearDome` stub gap prints a genuine **`[LUA ERROR]`
+>    header** into every log (caught in a `pcall`, harmless to play, but it will
+>    trip every future scan — including yours). The other three are
+>    `LandscapeCostGuard` (stub missing `GetTargetAmount`), `LanderReturnFuel`
+>    (asserts a two-value return 1.1.0's branch never makes) and
+>    `SaveSanitizerUpgradeLeak` (probe outlived the pass it tested).
+>    **Repair the four now, or file them for hotfix 3?**
+> 3. **Two shipped modules now have no working coverage at all** —
+>    `LanderEmptyLaunch` and `FreedHousingNotice`, whose `[behavior]` probes
+>    ERROR on 1.1.0 methods that were removed. Not defects; blind spots.
+>
+> Also noted, no decision needed: **`F20` is genuinely unresolved** — its probe
+> is structurally unable to pass once retired (its own title says it needs a
+> screen check), so tonight's FAIL is not evidence either way. And **C47's entry
+> cites Herbs at 100 seeds/hex; 1.1.0 halved it to 50.**
+>
+> #### 🚫 What the sitting still owes — eight rows, recipes intact
+>
+> **The brief is NOT deleted** and stays the recipe for a second sitting.
+> Everything below is `NOT RUN`, never "probably fine".
+>
+> | # | control | fix | ~time | why it did not run |
+> |---|---|---|---|---|
+> | 1c | a train with **nowhere** to deliver still unloads | F-10/F46 | 2 min | needs the resource OFF at **both** stations; that setup was never built |
+> | 4 | **Track split** ⚠️ destructive, save-persistent | F116 | 5 min | never reproduced, never run. Your `USA Sol 18` is backed up at `C:\Dev\SMR-SaveBackup\20260909-hotfix2-sitting\` — this row will damage the colony |
+> | 5 | **F117 arrival re-choose** | F117 | 8 min | repaired 09-09, **never observed**. Needs a passenger rocket landed beyond walking distance of every dome, no elevator route |
+> | 6 | **Vacuum walks** | F-9/F52 | 5 min | out of time |
+> | 7 | **Edit Payload** | F-6/F70 | 10 min | out of time (includes a round trip) |
+> | 8 | **Rocket refuel toggle** | F-7/F50 | 3 min | out of time |
+> | 9 | **Expedition housing** | F-2 | 5 min | out of time |
+> | 10 | **Asteroid habitat trait filter** | F-3 | 2 min | out of time — **cheapest row left**, and it threw before this build |
+> | 11 | **F118 layout leak** | F118 | 5 min | out of time. ⛔ Nobody has ever measured this one, so **"nothing visible" is a legitimate result** |
+> | T1.3 | the F95 sanitizer pass, non-vacuously | F95 | — | ⛔ **BLOCKED, not deferred.** No Astrogeologist save exists on 1.1.0 and 1.0.7 saves cannot load (`EF-079`). It cannot be run without provisioning a new colony |
+> | T1.6 | pack-OFF baseline leg | — | 10 min | optional; the retired probes produced nothing surprising, which was its trigger |
+> | 12 | Saint's blessing | F-1/F92 | — | ⛔ **shelved by your ruling 130** — the condition is historical and unforgeable |
+>
+> ⭐ **If you do only one more row, do 10** — two minutes, and it is a fix that
+> demonstrably threw before this build.
+
+### ✅ CLOSED 2026-09-09 — the brief that produced the block above, kept for its recipes: `agent/prompts/HOTFIX2_SITTING.md`. Two tiers, and the second is designed to be stopped partway.
 
 > **Every in-play control the chain owes you is in one file**, one boot, on
 > `BlankBig_02` — links 03, 04, 04b, 07, 08 and 99a, plus the F95 line you just

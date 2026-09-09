@@ -8,6 +8,68 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-09 — the hotfix-2 sitting: the pack finally ran in a game, and every failure it reported was the instrument
+
+tags: sitting hotfix2 T1-census T1-suite F114 F115 F46 F-10 F03 F20 C47 F95 ck117 ck130 EF-079 EF-083 logscan stale-probes
+
+Brief `prompts/HOTFIX2_SITTING.md` (NOT deleted — 8 T2 rows + T1.6 remain `NOT RUN`). Owner at the keyboard
+16:55–18:10. Tree `8aeb2e6`. Logs `archive/logs/sitting{boot,suite,play}110_*`, all three complete
+(`Debug::Done()`) and all three read AFTER `Mars.exe` exited. Preconditions re-verified: stale-probe sweep CLEAN,
+97/98 DISARMED, 95 inert, H-09 clean (3 junctions), Passage Network unticked, H-06 pre-copy of 5 saves to
+`C:\Dev\SMR-SaveBackup\20260909-hotfix2-sitting\`.
+
+**Colony identified mechanically, not guessed.** No save is named `BlankBig_02` — that is the MAP. All five 1.1.0
+saves carry plain-text metadata in the BPUL container; all five are one colony (`BlankBig_02`/NASA/
+`commander_profile_id = "rocketscientist"`/`lua_revision 403908`), the "backup"-named pair being its Sol 1 start.
+`USA Sol 18` chosen as the furthest along and the F114 repro colony. ⭐ That read also PRE-DETERMINED two vacuous
+rows: rocketscientist ⇒ T1.3's F95 pass and T1.5's Saint probe could only read vacuously, and no Astrogeologist
+save can exist on this branch (`EF-079`).
+
+**TIER 1 COMPLETE. T1.1 44 applied / 0 inactive / 0 errors on TWO independent boots** — the prediction met exactly
+on the first boot this pack has ever had; first-pass 43/1 with `SaintBlessing` latching and healing as documented.
+**T1.2 `58 PASS / 5 FAIL / 27 SKIP / 5 ERROR` = 95 probes, run twice byte-identical.** ⛔ The brief predicted 94;
+the kit's F117 probe (`c1114ed`) landed after that census was computed — found at the desk BEFORE the boot.
+7 `install` probes SKIP by design (no `debug.getinfo` in a retail mod sandbox), so usable coverage was 88.
+
+⭐⭐ **ZERO REGRESSIONS AND ZERO WRONG REMOVALS — all 5 FAIL and all 5 ERROR traced to the INSTRUMENT against
+shipped 1.1.0 source.** No shipped `Code/` line calls any of the five nil methods the ERRORs name; every
+`GetTargetAmount` hit in our tree is a comment. `LandscapeCostGuard` FAILed BACKWARDS: its stub `request` lacks
+`GetTargetAmount`, which 1.1.0's `InterruptExcessDeliveries` now calls (`ConstructionSite.lua:1385`) — reaching
+that line PROVES the refresh delegated, and the guard is alive at `:721`, so the F105/F107 removal is confirmed.
+`LanderReturnFuel` asserts a two-value return the no-destination branch never makes (`UniversalRocket.lua:1891-94`);
+its meaningful clause passed at 3500. `MoraleComfortTooltip` cannot pass once retired — its PASS condition is the
+presence of our own removed masking, and its title already said "expected SKIP … needs a screen check".
+`SaveSanitizerUpgradeLeak` outlived the pass it tested. `C47OpenFarmSeedBufferShape`: 1.1.0 halved Herbs to 50
+seeds/hex (C47's entry cites 100).
+
+⭐ **F114 AND F115 OBSERVED FIXED IN PLAY, attended** — the two bugs that actually reached players, six days after
+both reported `applied` and broke visibly with every instrument green. Train leaves its platform, carries Waste
+Rock past the station that refuses it, unloads at B, no error line. A flatten raises NO mod-error dialog and drones
+board through one (F34d, never before observed) — the first live run of link 04b's repaired 1.1.0 body, which had
+been gated OFF until ck123. ⭐ **F-10 premise READ at last**: enabled `true 38000`, disabled **`false 60000`** ⇒ the
+1.1.0 bug is real, the guard works, **F46 is NOT a REMOVE candidate**. (The 38000→60000→109000 rise spans both
+states, so it is not caused by disabling; not filed as a story.)
+
+**Findings owed to the owner.** ⛔ **F03 claims a fix that no longer ships** — link 02 (`f707903`) deleted its pass
+under ck117, correctly (vanilla's `SavegameFixups.RemoveLeakedUpgradeModifiers` verified at `Building.lua:1313`),
+but the entry still reads `tested`/`high`. Status word NOT moved. ⛔ **4 stale instruments**, one of which prints a
+genuine `[LUA ERROR]` header every run (kit `CaveInRubble`/`IsNearDome` stub gap, caught in a `pcall`) and will
+trip every future scan. **2 shipped modules now have no working probe** (`LanderEmptyLaunch`, `FreedHousingNotice`).
+F20 unresolved either way.
+
+⚠️ Two partial-log traps avoided, both live: a `0 LUA ERROR` read while `Mars.exe` ran covered nothing after the
+console work, and a `FlushLogFile()` that did not land (file byte-identical, no `>` echo) — the landscaping result
+was held as PENDING until exit rather than recorded off a buffered file.
+
+**Evicted from STATE in this commit** (superseded by the above, per STATE_EVICTION's no-supersession-chains rule):
+the 09-08 gated-boot measurement — BOTH GATES MEASURED (`archive/logs/gated110_*`): **64 applied / 16 inactive** /
+14 named, 0 errors; both `update_suspect` routes CONFIRMED; as-read 63/17, 05 heal-aware; MENU-ONLY, trains and
+landscaping not exercised in play. Also evicted: "NO boot of the 44-module pack exists / PREDICTION 44 applied /
+0 inactive"; `EF-078`'s "predicted 6 self-disabled, measured 13" parenthetical; F117's desk-falsifier derivation
+(now `bugs/F117.md`); "Passage Network ENABLED on the rig" (unticked 09-09).
+
+---
+
 ## 2026-09-09 — hotfix2 link 99, the terminal audit: SHIP WITH CHANGES — the findings were in the code the patch did not touch
 
 tags: hotfix2 link-99 F117 F118 C55 F60 F77 F45 F53 F46 F116 F95 items-126-129 EF-065 EF-008 class-c bodycheck logscan sigcheck ck118 ck123

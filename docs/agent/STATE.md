@@ -8,37 +8,40 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 
 ## Now
 - ⛔ GAME **1.1.0.403908** + DLC shipped 2026-09-08; rig auto-updated, `ModTools\Src` overwritten; 1.0.7 tree
-  ARCHIVED `C:\Dev\SMR-SrcArchive\1.0.7.396349\Src` (`ad5f93d`, `EF-075`). ⛔ Trust runtime over source reads (`EF-078`: predicted 6
-  self-disabled, measured 13).
+  ARCHIVED `C:\Dev\SMR-SrcArchive\1.0.7.396349\Src` (`ad5f93d`, `EF-075`). ⛔ Trust runtime over source reads (`EF-078`).
   ⛔ **1.0.7 SAVES CANNOT LOAD ON 1.1.0** (`EF-079`) ⇒ the ENTIRE fixture library is branch-locked; a 1.1.0 leg
   needs a NEW colony provisioned from scratch (hours). Override exists but is triage-only (`EF-080`).
   ✅ F114+F115 GATED 09-08 (ck106/ck109), then **REPAIRED ON TOP 09-09 (ck123, link 04b)**: F-8/F-9/F-10 carry
-  1.1.0 bodies + behaviour probes, gates KEPT (sense inverted) ⇒ `sigcheck` 0 MISMATCH now. ⛔ F-10 premise UNREAD.
+  1.1.0 bodies + behaviour probes, gates KEPT (sense inverted) ⇒ `sigcheck` 0 MISMATCH now.
   ✅ Opt-in pack UNTICKED (ck43): ZERO `applied` lines since 15.21 — no confound.
   ✅ **F116 REPAIRED in-body** (`add94b3`), NOT gated. Source-derived, NEVER reproduced.
   ⭐ **1.1.0 RE-VERIFICATION 09-08: 10 FIX / 35 REMOVE / 35 KEEP** (`reports/PACK_1_1_0_REVERIFICATION.md`,
   ck114-117; QA'd by 3 fresh readers, `reports/VANILLA_FIX_QA.md` §0, 0 flips).
   ⭐ **LINKS 02–07 DONE 09-08/09** (commits in `prompts/hotfix2/README.md`): 36 modules DELETED; F-1/F-2/F-3
-  repaired; F-6…F-10 RE-COPIED; F116 ck111/119 landed. Kit 94 probes, 32 `retired`; 7 false-FAILs were stale, not 5.
-  ✅✅ BOTH GATES MEASURED 09-08 (`archive/logs/gated110_*`): **64 applied / 16 inactive** / 14 named, 0
-  errors; both `update_suspect` routes CONFIRMED; as-read 63/17, 05 heal-aware. ⛔ MENU-ONLY ⇒ trains/
-  landscaping NOT exercised in play.
+  repaired; F-6…F-10 RE-COPIED; F116 ck111/119 landed. Kit **95** probes (measured 09-09), 32 `retired`.
   ✅ HOTFIX_1_AUDIT 09-08 SHIP WITH CHANGES, text-only; never uploaded (`version` still 5) — folded into hotfix 2.
-  ⭐ **99 TERMINAL AUDIT 09-09: SHIP WITH CHANGES** (`reports/HOTFIX_2_AUDIT.md`). **F117** P1 source-read: `ArrivalDeaths`
-  THROWS on 1.1.0 (`ChooseDome` takes the colonist now; a KEEP module, live in v5 today) ⇒ ck127. Change-note bullet 2
-  contradicts link 08's F95 pass ⇒ ck128 rides ck126. Site publish WITH the upload ⇒ ck129. F118/C55 filed, F60 REMOVE
-  candidate for hotfix 3. Pass D: 3 of 35 KEEP wrappers moved under class (c), seen by NO instrument. ⛔ NO boot of the
-  44-module pack exists; PREDICTION 44 applied / 0 inactive (first-pass read 43/1). `100_DOCSWEEP.md` AUTHORED — fires
-  after 126+127 are ruled and BEFORE the upload sitting (bullet 2 ships in `metadata.lua`).
+  ⭐ **99 TERMINAL AUDIT 09-09: SHIP WITH CHANGES** (`reports/HOTFIX_2_AUDIT.md`). F117 found + ruled ⇒ ck127 (repaired, below).
+  Change-note bullet 2 contradicts link 08's F95 pass ⇒ ck128 rides ck126. Site publish WITH the upload ⇒ ck129. F118/C55 filed, F60 REMOVE
+  candidate for hotfix 3. Pass D: 3 of 35 KEEP wrappers moved under class (c), seen by NO instrument.
+  `100_DOCSWEEP.md` AUTHORED — fires after 126+127 are ruled and BEFORE the upload sitting (bullet 2 ships in `metadata.lua`).
   ⭐ **LINK 99a LANDED 09-09** (`777249d` F117, `0136af1` riders, `cb6415f` publish; kit `c1114ed`) — LAST CODE in hotfix 2.
-  F117: `ChooseDome`'s argument is now picked by a BEHAVIOUR probe on `Community:GetScoreFor` (ck118's branch guard applied
-  to a wrapper), FALSIFIED on BOTH shipped bodies at a desk — incl. the silent 1.0.7 mis-score 110→100 that "pass `self`
-  everywhere" would have caused. UNKNOWN ⇒ the re-choose stands down. F118 re-assert + `FlightPolicies` named decline landed.
-  ⛔ NEITHER REPRODUCED, no probe for F118, NO status word moved. ⚠️ Desk falsifiers are SCRATCHPAD-only (`F117.md` has the
-  transcript + the ask to promote them). Next and last: `100_DOCSWEEP`.
-  ⛔ ALL in-play controls DEFERRED to ONE sitting AFTER 99 (owner 09-08). 99 SHIP ≠ clearance (H-04).
-  🎮 **SITTING BRIEF: `prompts/HOTFIX2_SITTING.md`** — every owed control, one boot, T1 census+suite / T2 12 rows
-  by value. Unrun = `NOT RUN`, filed back to the checklist; brief does NOT self-delete while any row is unrun.
+  F117: `ChooseDome`'s argument picked by a BEHAVIOUR probe on `Community:GetScoreFor`; UNKNOWN ⇒ the re-choose stands down.
+  Derivation + desk transcript: `bugs/F117.md`. F118 re-assert + `FlightPolicies` named decline landed.
+  ⛔ NEITHER REPRODUCED, no probe for F118, NO status word moved. ⚠️ Desk falsifiers SCRATCHPAD-only (`F117.md` has the ask
+  to promote them). Next and last: `100_DOCSWEEP`.
+  🎮 **SITTING RAN 09-09 ATTENDED** (`archive/logs/sitting{boot,suite,play}110_*`, all read AFTER exit). 99 SHIP ≠ clearance (H-04).
+  ✅ TIER 1 COMPLETE: **44 applied / 0 inactive / 0 errors on TWO independent boots** — the prediction met, first ever boot of this pack.
+  ✅ Suite `58 PASS/5 FAIL/27 SKIP/5 ERROR` = **95**, run twice identical: **0 regressions, 0 wrong removals**; all 5 FAIL + 5 ERROR
+  traced to the INSTRUMENT against 1.1.0 source. ⛔ 7 `install` probes SKIP by design (no `debug.getinfo` in the mod sandbox).
+  ⭐ **F114 + F115 OBSERVED FIXED IN PLAY**: train leaves platform, carries past the station that refuses it, unloads at B;
+  flatten raises NO mod-error dialog and drones board through one (F34d, never before observed).
+  ⭐ **F-10 PREMISE READ**: disabled reads `false 60000` ⇒ the 1.1.0 bug is REAL, the guard works, **F46 is NOT a REMOVE candidate**.
+  ⚠️ T1.3 + T1.5 VACUOUS — no Astrogeologist and no Saint save exists on 1.1.0; recorded as vacuous, NOT as coverage.
+  ⛔ **F03 CLAIMS A FIX THAT NO LONGER SHIPS** — pass deleted `f707903` under ck117, vanilla's replacement verified at
+  `Building.lua:1313`; entry still reads `tested`. Status word NOT moved; owner decision filed (checklist).
+  ⛔ **4 STALE INSTRUMENTS**, one printing a REAL `[LUA ERROR]` header every run (kit `CaveInRubble`/`IsNearDome` stub gap);
+  `LanderEmptyLaunch` + `FreedHousingNotice` now have NO working probe. ⚠️ F20 unresolved — its probe cannot pass once retired.
+  🚫 8 T2 rows + T1.6 `NOT RUN`, filed to checklist "what the sitting still owes"; **brief NOT deleted** while any row is unrun.
   ⚖️ Owner rule 09-08: a patch note saying "Fixed" is a **CLAIM, false until we confirm it**.
 - ⭐ PUBLISHED both portals — `pdx_id` **156049**, `steam_id` **3787202810**, tree `version` **5** (F110, 08-30).
   ⛔ Never re-upload to "fix" a version number — each upload bumps again (H-02). ⛔ Every upload OVERWRITES both
@@ -48,8 +51,7 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   committing never publishes. ⛔ Never quote a stored "deployed = <sha>"; read the deployments API
   (`prompts/SITE_AUDIT.md`).
 - Post-launch LIVE: F105, F107, F108 (v4), F110 (v5); F104 NOT OURS. ⛔ F107 field route untested. ⛔ Read the
-  GitHub tracker via `api.github.com/.../issues/<n>/comments`, never the HTML page. ⚠️ Passage Network ENABLED
-  on the rig — untick before any clean leg.
+  GitHub tracker via `api.github.com/.../issues/<n>/comments`, never the HTML page. ✅ Passage Network UNTICKED 09-09.
 - Shipping artifact: packed `.fpk` = 85 files (`tools/pack_predict.py`); v5 pack verified 08-30 (app **3215050**).
   ⛔ Pack route is main menu → MOD EDITOR → File → Pack Mod, NOT Mods Manager → Ctrl-E (⚠️ PORTAL_PREP §0.5 old).
 - Watches: `EF-066` subclass reach unmeasured, ck74 half-open · localisation: German only one SEEN (`EF-039`) ·
