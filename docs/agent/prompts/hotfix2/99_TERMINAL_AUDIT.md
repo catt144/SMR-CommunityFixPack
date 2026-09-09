@@ -1870,8 +1870,20 @@ The full owner-facing version is the **LINK 07 block** in `PLAYTEST_CHECKLIST.md
 
 ### 4 · Routed out of fence — please pick these up
 
-1. ⚠️ **`AstrogeologistExtractors` residue is an OWED SANITIZER, and it is a live
-   wrong number.** `VANILLA_FIX_QA.md` §254 already says so; I turned it into a
+1. ✅ **`AstrogeologistExtractors` residue — NOW OWNED BY `08_SAVE_RESIDUE.md`**
+   (authored 2026-09-09 on the owner's instruction, *"Can you author a quick 08
+   to fix the AstrogeologistExtractors residue so it can be folded into the
+   99?"*). ⚠️ **Two things 08 will hand you that change your Pass G, and one that
+   may reach the owner:** (a) 08's §1 orders that session to try to DISPROVE the
+   residue first — if it does not exist, 08 closes with that finding and there is
+   no fix to audit, so do not assume a repair landed; (b) 08 hosts its pass in
+   `90_SaveSanitizer.lua` and adds NO new file, so `H-10` never fires and the
+   shipped file set is unchanged; (c) ⛔ **08 raises an owner decision** — the
+   pass gives `90_SaveSanitizer` a job that has nothing to do with 1.0.7 saves,
+   which makes it non-removable and answers on other grounds the platform
+   question `R-36` left open. Left below is the finding as link 07 filed it, so
+   you can audit 08 against it rather than against 08's own summary:
+   ⚠️ **it is a live wrong number.** `VANILLA_FIX_QA.md` §254 already says so; I turned it into a
    probe clause that FAILs if the loaded save carries it. Our two
    `Effect_ModifyLabel`s were keyed into `UIColony.label_modifiers`, which is
    PERSISTED, so deleting the module does not undo them: every 1.1.0 save that ran
