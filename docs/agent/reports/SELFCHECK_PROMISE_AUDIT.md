@@ -422,165 +422,6 @@ archived boot log; **[desk]** the engine's own sandbox lines executed on Lua
 
 ---
 
-## 7 · JOB TWO — stop the pack being blamed for other mods' faults
-
-### 7a · The mechanism, re-verified on the 1.1.0 tree
-
-`CommonLua/Modding/Mod.lua`, all [tree]: the block is live in retail because it
-is gated `if not Platform.asserts` (`:2968`). `OnMsg.OnLuaError(err, stack,
-os_paths)` (`:3019-3031`, its own comment at `:3018`: *"rough estimation based
-on call stack"*) walks `ModsLoaded` and calls `ReportModLuaError` for every mod
-whose `content_path` is a case-insensitive substring of **either** the error
-text **or** the stack. `ReportModLuaError` (`:2975-3012`): returns if
-`config.DisableErrorReporting`; returns if `ReportedMods[mod.id]` is already
-set (**once per mod id per process**, `:2980-2983`); otherwise appends the mod
-to `ModsToReport` and, on the first append, starts a real-time thread that
-drains the list, `ModPrint`s one `Error in mod <title> (id …, v…) from <source>`
-per mod and shows ONE `CreateMessageBox` whose body joins the titles with
-newlines (`:3001-3010`). The `OnLuaError` message itself is raised from C —
-no Lua file in the tree raises it (`Gossip.lua:54` only forwards it).
-
-Consequences that follow directly:
-- **Any mod with a frame anywhere in the stack is named**, whether it threw or
-  was passed through. Our paths read `Mod/SMR_CommunityFixPack/Code/<file>` in
-  every archived stack, packed or unpacked (`EF-065`).
-- **Order in the box = enable order.** `ModsLoaded` is filled from
-  `GetModsToLoad()` → `GetModsEnabledByUser()` → `AccountStorage.LoadMods`
-  (`:2137-2143`, `:2003-2009`), which `TurnModOn` appends to with
-  `table.insert_unique` (`CommonLua/UI/ModManager.lua:35-36`). So "who is named
-  first" is whichever matching mod the player ticked earliest; alphabetical
-  sorting exists only for the UI list (`SortModsList`, `:1687`).
-- **The dedupe cuts both ways.** After one report, nothing later in the session
-  can un-name us — and nothing later can name us again either, so a genuine
-  fault of ours after a benign pass-through goes unreported in the box.
-  [log] Measured: in the 2026-09-08 15:57 session F115 threw at `0:01:03` and
-  drew the session's one `Error in mod` line (`f114repro110_…log:274`); F114
-  then threw **157 times** from `0:25:42` and drew none.
-
-### 7b · How often is this real? Every blame line in the archive, per line
-
-`grep "Error in mod"` over `docs/archive/` (95 root logs + 10 in `logs/`): **4
-lines in 4 files, 3 distinct sessions** — `unforced110_…15.57.09` is a 274-line
-prefix of `f114repro110_…15.57.09` (same session, archived twice; `cmp` ends at
-byte 14539 = line 274).
-
-| # | log | line | throw site | verdict, with the reasoning |
-|---|---|---|---|---|
-| 1 | `act1_Mars.exe-20260819-15.18.19` (1.0.7) | `:522` | Test Kit's own `quit()` at suite end | **Test Kit's, not the pack's** — the named id is `SMR_CommunityFixPackTestKit`; `SESSION_LOG.md:7891` recorded it as a shutdown artefact at the time. Not a misattribution: the kit's frame IS the throw site. |
-| 2 | `forced110_Mars.exe-20260908-15.43.37` (1.1.0) | `:300` | `Fix_LowStorageWarning.lua:125`, nil global `GetCommandCenterLifeSupportGrids` | **Ours by construction** — the Test Kit's FORCE leg applies modules past their own decline; the throw is in our body. Not a misattribution. |
-| 3 | `f114repro110_…15.57.09` (1.1.0) | `:274` | `Fix_LandscapeUnitFilter.lua:63` (F115) | **Ours** — our replacement body is the throw site. Not a misattribution. |
-| 4 | `unforced110_…15.57.09` | `:274` | same session as #3 | duplicate archive of #3. |
-
-⇒ **Zero misattributions in the archive.** Every archived blame line names the
-mod whose code threw. The two misattributions the owner remembers are the two
-**field** reports (`bugs/F104.md`, `bugs/F105.md`, 2026-08-23/24, one
-reporter), whose reporter logs are not in the repo but whose stacks the entries
-quote and which the owner's rig reproduced for F104:
-- **F104** — `Lua/Passage.lua:1117` nil `networks`; our frame
-  `Fix_ShuttleTransportCache.lua(86)` is a pass-through (`FindEmigrationDome →
-  our FindTransportationModeToCommunity → GetTransportationModeToCommunity →
-  … → AreDomesConnectedWithPassage`); the culprit (Passage Network's
-  `CreateDomeNetworks` returning nil) had **already returned** and has no frame.
-  Named: **us, alone.**
-- **F105** — `ConstructionSite.lua:673` on a vanilla landscape site; our frame
-  `Fix_MilestoneCrash.lua(73)` (module since deleted, link 02) is the
-  `Msg("MilestoneCompleted")` in a copied body. Vanilla has no `content_path`.
-  Named: **us, alone.**
-
-So the measured harm is **2 player-visible boxes and 2 GitHub issues in the 17
-days the pack has been live**, both from one reporter, both naming us alone
-because the real cause was structurally unnameable (a returned frame, or
-vanilla). The owner's "a few times" is those two plus the standing risk that
-any of our 43 replacement sites sits above a throw. It is a real cost in owner
-time per incident (each needed a session to derive), not a frequent one.
-
-### 7c · Can our frame leave the stack? The tail-call hypothesis
-
-**The mechanism holds, by the language definition and by measurement, and it
-is narrower than the brief hoped.** Lua 5.3 §3.3.7: a call of the exact form
-`return f(args)` is a proper tail call and *"erases any debug information about
-the calling function"* — the caller's activation record is reused, so no stack
-walker can recover it afterwards. [desk] `debug.traceback` through a
-`return thrower(...)` wrapper shows the thrower, then `(...tail calls...)`, and
-**no line of the wrapper**; through `thrower(...)` followed by `end`, or
-`local r = thrower(...) return r`, the wrapper's line is present. [exe]
-`Mars.exe` carries the literal `(...tail calls...)` (so `luaL_traceback` is
-compiled in) and `istailcall`. ⛔ [not measured] the engine's own `GetStack`
-(C, custom `file(line):  method Name` format) has never been seen printing a
-tail-called frame in any archived log — because none of the archived throws
-went through one. Any walker sits on `lua_getstack`, which cannot return a
-frame the VM has discarded, so the property does not depend on the printer.
-
-**Where it can apply — the install-site split** (44 modules, sites read by
-the four classification passes in §3; my own spot checks in §3d):
-
-| site shape | count | our frame present when a callee throws? |
-|---|---|---|
-| PRE-TAIL — wrapper ends `return orig(...)` | 15 | **no** — the tail call removed it |
-| PRE-NOTAIL — calls the original last but not as `return orig(...)` | **0** | yes; a one-line rewrite to PRE-TAIL removes it |
-| POST — work after the original returns | 13 | yes, unavoidably: there is no tail position |
-| REPLACE — a copied or rewritten body | 15 | yes, and correctly so — the throw is in our copy |
-| HANDLER / DATA | 17 / 4 | our own handler frame only |
-
-Two limits the numbers do not show. (1) A PRE-TAIL wrapper's frame is gone only
-for throws **below** the original; a throw in the wrapper's own prologue (its
-`IsKindOf` test, its field read) is ours and names us correctly. (2) **F104
-would not have been prevented**: the throwing call in
-`Fix_ShuttleTransportCache.lua` is mid-body (`:86`, the result is stored into
-a cache entry), so no tail-call rewrite applies to it. A cache wrapper is a
-POST shape by nature.
-
-### 7d · What else is available, and what is not
-
-- **A breadcrumb we can write ourselves, without touching an engine function.**
-  `OnLuaError` is not in `ModMsgBlacklist` (`Mod.lua:1443-1452`), so a mod may
-  register `OnMsg.OnLuaError(err, stack)` and receive the same arguments the
-  engine's handler gets. One handler that finds the FIRST stack frame and logs
-  `[CommunityFixPack] named in an error raised at <file:line>; that file is not
-  part of this pack` (or `…is part of this pack: <module>`) costs ~15 lines,
-  runs only on an error, and would have made F104 and F105 a one-line triage
-  instead of a session each. ⚠️ Route-check: the log is read by the owner and
-  by PC reporters who attach it (the tracker already asks for the log); console
-  players have no log to read, so this is an OWNER surface, not a player one.
-- **Owning the box's wording** (ck73 option 3): `ReportModLuaError` is a plain
-  global, not blacklisted, so `SetGlobal` could wrap it and, for our id only,
-  substitute a message that says where the throw was — while still calling the
-  original for every other mod. This is the only route that changes what a
-  **console** player sees. It replaces an engine function for self-defence,
-  which ck73 already flagged as a `FIX_POLICY` question, not an engineering one.
-- **The trampoline (ck73 option 2) is dead**: `load`/`loadstring` are
-  blacklisted (§4 item 5), so no separately-named chunk can be made.
-- **Renaming out of the substring is dead**: the substring is `content_path`,
-  derived from the mod id (`Mod.lua:1755-1758`); changing the id costs every
-  player's enable (`H-08`).
-- **Load order buys nothing**: the box names every matching mod; order only
-  changes the line order in one dialog.
-- ⛔ **Reachable and REJECTED, restated so nobody reads this section as
-  permission:** `config` is not blacklisted, so `config.DisableErrorReporting =
-  true` works from mod code and silences the box for **every mod on the
-  machine**; pre-seeding `ReportedMods[our_id]` silences us before any error
-  exists. Both hide real faults — ours included — from the player. ⛔ **And
-  under no option may a wrapper catch another mod's or vanilla's error to keep
-  our name out of the stack.** Every mitigation above leaves the error raised,
-  logged and reported; the tail call merely stops adding an innocent frame.
-
-### 7e · Recommendation for job two
-
-1. **Do now (cheap, no policy question):** the `OnMsg.OnLuaError` breadcrumb.
-2. **Do with the next code cycle:** write the rule down. §3 found ZERO
-   PRE-NOTAIL sites — all 15 pre-wrappers already end in `return orig(...)` —
-   so there is nothing to rewrite, only a `FIX_POLICY` §2 line to keep it so
-   for new wrappers (the sibling of the "inert for a foreign object" rule:
-   *end a pre-wrapper with `return orig(...)`*). The 13 POST and 15 REPLACE
-   sites stay named, correctly.
-3. **Owner decision:** whether to own the box wording via `ReportModLuaError`
-   (the only console-visible remedy). My recommendation is **no for now**: two
-   incidents in 17 days, both triaged, do not justify replacing an engine
-   diagnostic; revisit if the breadcrumb shows a real rate.
-4. **Re-state the fact:** `EF-065` should gain the dedupe measurement (7a) and
-   the enable-order finding; the checklist's ck73 should gain "option 2 is
-   dead — `load` is blacklisted" so it is not re-proposed.
-
 ---
 
 ## 5 · The options, costed, and a recommendation
@@ -739,6 +580,167 @@ because "renamed or removed" already is:**
 item 7 no runtime check reaches it, and one module of 44 on this patch (F-2)
 sits outside every route. That phrase is the part of the sentence that cannot
 be made true, and it is the only part.
+
+---
+
+## 7 · JOB TWO — stop the pack being blamed for other mods' faults
+
+### 7a · The mechanism, re-verified on the 1.1.0 tree
+
+`CommonLua/Modding/Mod.lua`, all [tree]: the block is live in retail because it
+is gated `if not Platform.asserts` (`:2968`). `OnMsg.OnLuaError(err, stack,
+os_paths)` (`:3019-3031`, its own comment at `:3018`: *"rough estimation based
+on call stack"*) walks `ModsLoaded` and calls `ReportModLuaError` for every mod
+whose `content_path` is a case-insensitive substring of **either** the error
+text **or** the stack. `ReportModLuaError` (`:2975-3012`): returns if
+`config.DisableErrorReporting`; returns if `ReportedMods[mod.id]` is already
+set (**once per mod id per process**, `:2980-2983`); otherwise appends the mod
+to `ModsToReport` and, on the first append, starts a real-time thread that
+drains the list, `ModPrint`s one `Error in mod <title> (id …, v…) from <source>`
+per mod and shows ONE `CreateMessageBox` whose body joins the titles with
+newlines (`:3001-3010`). The `OnLuaError` message itself is raised from C —
+no Lua file in the tree raises it (`Gossip.lua:54` only forwards it).
+
+Consequences that follow directly:
+- **Any mod with a frame anywhere in the stack is named**, whether it threw or
+  was passed through. Our paths read `Mod/SMR_CommunityFixPack/Code/<file>` in
+  every archived stack, packed or unpacked (`EF-065`).
+- **Order in the box = enable order.** `ModsLoaded` is filled from
+  `GetModsToLoad()` → `GetModsEnabledByUser()` → `AccountStorage.LoadMods`
+  (`:2137-2143`, `:2003-2009`), which `TurnModOn` appends to with
+  `table.insert_unique` (`CommonLua/UI/ModManager.lua:35-36`). So "who is named
+  first" is whichever matching mod the player ticked earliest; alphabetical
+  sorting exists only for the UI list (`SortModsList`, `:1687`).
+- **The dedupe cuts both ways.** After one report, nothing later in the session
+  can un-name us — and nothing later can name us again either, so a genuine
+  fault of ours after a benign pass-through goes unreported in the box.
+  [log] Measured: in the 2026-09-08 15:57 session F115 threw at `0:01:03` and
+  drew the session's one `Error in mod` line (`f114repro110_…log:274`); F114
+  then threw **157 times** from `0:25:42` and drew none.
+
+### 7b · How often is this real? Every blame line in the archive, per line
+
+`grep "Error in mod"` over `docs/archive/` (95 root logs + 10 in `logs/`): **4
+lines in 4 files, 3 distinct sessions** — `unforced110_…15.57.09` is a 274-line
+prefix of `f114repro110_…15.57.09` (same session, archived twice; `cmp` ends at
+byte 14539 = line 274).
+
+| # | log | line | throw site | verdict, with the reasoning |
+|---|---|---|---|---|
+| 1 | `act1_Mars.exe-20260819-15.18.19` (1.0.7) | `:522` | Test Kit's own `quit()` at suite end | **Test Kit's, not the pack's** — the named id is `SMR_CommunityFixPackTestKit`; `SESSION_LOG.md:7891` recorded it as a shutdown artefact at the time. Not a misattribution: the kit's frame IS the throw site. |
+| 2 | `forced110_Mars.exe-20260908-15.43.37` (1.1.0) | `:300` | `Fix_LowStorageWarning.lua:125`, nil global `GetCommandCenterLifeSupportGrids` | **Ours by construction** — the Test Kit's FORCE leg applies modules past their own decline; the throw is in our body. Not a misattribution. |
+| 3 | `f114repro110_…15.57.09` (1.1.0) | `:274` | `Fix_LandscapeUnitFilter.lua:63` (F115) | **Ours** — our replacement body is the throw site. Not a misattribution. |
+| 4 | `unforced110_…15.57.09` | `:274` | same session as #3 | duplicate archive of #3. |
+
+⇒ **Zero misattributions in the archive.** Every archived blame line names the
+mod whose code threw. The two misattributions the owner remembers are the two
+**field** reports (`bugs/F104.md`, `bugs/F105.md`, 2026-08-23/24, one
+reporter), whose reporter logs are not in the repo but whose stacks the entries
+quote and which the owner's rig reproduced for F104:
+- **F104** — `Lua/Passage.lua:1117` nil `networks`; our frame
+  `Fix_ShuttleTransportCache.lua(86)` is a pass-through (`FindEmigrationDome →
+  our FindTransportationModeToCommunity → GetTransportationModeToCommunity →
+  … → AreDomesConnectedWithPassage`); the culprit (Passage Network's
+  `CreateDomeNetworks` returning nil) had **already returned** and has no frame.
+  Named: **us, alone.**
+- **F105** — `ConstructionSite.lua:673` on a vanilla landscape site; our frame
+  `Fix_MilestoneCrash.lua(73)` (module since deleted, link 02) is the
+  `Msg("MilestoneCompleted")` in a copied body. Vanilla has no `content_path`.
+  Named: **us, alone.**
+
+So the measured harm is **2 player-visible boxes and 2 GitHub issues in the 17
+days the pack has been live**, both from one reporter, both naming us alone
+because the real cause was structurally unnameable (a returned frame, or
+vanilla). The owner's "a few times" is those two plus the standing risk that
+any of our 43 replacement sites sits above a throw. It is a real cost in owner
+time per incident (each needed a session to derive), not a frequent one.
+
+### 7c · Can our frame leave the stack? The tail-call hypothesis
+
+**The mechanism holds, by the language definition and by measurement, and it
+is narrower than the brief hoped.** Lua 5.3 §3.3.7: a call of the exact form
+`return f(args)` is a proper tail call and *"erases any debug information about
+the calling function"* — the caller's activation record is reused, so no stack
+walker can recover it afterwards. [desk] `debug.traceback` through a
+`return thrower(...)` wrapper shows the thrower, then `(...tail calls...)`, and
+**no line of the wrapper**; through `thrower(...)` followed by `end`, or
+`local r = thrower(...) return r`, the wrapper's line is present. [exe]
+`Mars.exe` carries the literal `(...tail calls...)` (so `luaL_traceback` is
+compiled in) and `istailcall`. ⛔ [not measured] the engine's own `GetStack`
+(C, custom `file(line):  method Name` format) has never been seen printing a
+tail-called frame in any archived log — because none of the archived throws
+went through one. Any walker sits on `lua_getstack`, which cannot return a
+frame the VM has discarded, so the property does not depend on the printer.
+
+**Where it can apply — the install-site split** (44 modules, sites read by
+the four classification passes in §3; my own spot checks in §3d):
+
+| site shape | count | our frame present when a callee throws? |
+|---|---|---|
+| PRE-TAIL — wrapper ends `return orig(...)` | 15 | **no** — the tail call removed it |
+| PRE-NOTAIL — calls the original last but not as `return orig(...)` | **0** | yes; a one-line rewrite to PRE-TAIL removes it |
+| POST — work after the original returns | 13 | yes, unavoidably: there is no tail position |
+| REPLACE — a copied or rewritten body | 15 | yes, and correctly so — the throw is in our copy |
+| HANDLER / DATA | 17 / 4 | our own handler frame only |
+
+Two limits the numbers do not show. (1) A PRE-TAIL wrapper's frame is gone only
+for throws **below** the original; a throw in the wrapper's own prologue (its
+`IsKindOf` test, its field read) is ours and names us correctly. (2) **F104
+would not have been prevented**: the throwing call in
+`Fix_ShuttleTransportCache.lua` is mid-body (`:86`, the result is stored into
+a cache entry), so no tail-call rewrite applies to it. A cache wrapper is a
+POST shape by nature.
+
+### 7d · What else is available, and what is not
+
+- **A breadcrumb we can write ourselves, without touching an engine function.**
+  `OnLuaError` is not in `ModMsgBlacklist` (`Mod.lua:1443-1452`), so a mod may
+  register `OnMsg.OnLuaError(err, stack)` and receive the same arguments the
+  engine's handler gets. One handler that finds the FIRST stack frame and logs
+  `[CommunityFixPack] named in an error raised at <file:line>; that file is not
+  part of this pack` (or `…is part of this pack: <module>`) costs ~15 lines,
+  runs only on an error, and would have made F104 and F105 a one-line triage
+  instead of a session each. ⚠️ Route-check: the log is read by the owner and
+  by PC reporters who attach it (the tracker already asks for the log); console
+  players have no log to read, so this is an OWNER surface, not a player one.
+- **Owning the box's wording** (ck73 option 3): `ReportModLuaError` is a plain
+  global, not blacklisted, so `SetGlobal` could wrap it and, for our id only,
+  substitute a message that says where the throw was — while still calling the
+  original for every other mod. This is the only route that changes what a
+  **console** player sees. It replaces an engine function for self-defence,
+  which ck73 already flagged as a `FIX_POLICY` question, not an engineering one.
+- **The trampoline (ck73 option 2) is dead**: `load`/`loadstring` are
+  blacklisted (§4 item 5), so no separately-named chunk can be made.
+- **Renaming out of the substring is dead**: the substring is `content_path`,
+  derived from the mod id (`Mod.lua:1755-1758`); changing the id costs every
+  player's enable (`H-08`).
+- **Load order buys nothing**: the box names every matching mod; order only
+  changes the line order in one dialog.
+- ⛔ **Reachable and REJECTED, restated so nobody reads this section as
+  permission:** `config` is not blacklisted, so `config.DisableErrorReporting =
+  true` works from mod code and silences the box for **every mod on the
+  machine**; pre-seeding `ReportedMods[our_id]` silences us before any error
+  exists. Both hide real faults — ours included — from the player. ⛔ **And
+  under no option may a wrapper catch another mod's or vanilla's error to keep
+  our name out of the stack.** Every mitigation above leaves the error raised,
+  logged and reported; the tail call merely stops adding an innocent frame.
+
+### 7e · Recommendation for job two
+
+1. **Do now (cheap, no policy question):** the `OnMsg.OnLuaError` breadcrumb.
+2. **Do with the next code cycle:** write the rule down. §3 found ZERO
+   PRE-NOTAIL sites — all 15 pre-wrappers already end in `return orig(...)` —
+   so there is nothing to rewrite, only a `FIX_POLICY` §2 line to keep it so
+   for new wrappers (the sibling of the "inert for a foreign object" rule:
+   *end a pre-wrapper with `return orig(...)`*). The 13 POST and 15 REPLACE
+   sites stay named, correctly.
+3. **Owner decision:** whether to own the box wording via `ReportModLuaError`
+   (the only console-visible remedy). My recommendation is **no for now**: two
+   incidents in 17 days, both triaged, do not justify replacing an engine
+   diagnostic; revisit if the breadcrumb shows a real rate.
+4. **Re-state the fact:** `EF-065` should gain the dedupe measurement (7a) and
+   the enable-order finding; the checklist's ck73 should gain "option 2 is
+   dead — `load` is blacklisted" so it is not re-proposed.
 
 ---
 
