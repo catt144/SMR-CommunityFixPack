@@ -34,11 +34,15 @@ adding a fix is `FIX_POLICY`, and it is a separate decision the owner makes.
 
 **⏳ OWED: the 1.0.7 tree.** ⛔ **Without it there is no diff and this whole
 effort collapses to a cold read of 1.1.x**, which is a far weaker exercise — say
-so plainly rather than quietly doing the weaker thing. The owner has said they
-can download 1.0.7; the safe order, the round-trip verification and the
-`EF-075` caveat (the branch is a store-surface claim, not route-checked) are all
-in `SMR-SrcArchive\README.md` §"Recovering 1.0.7". ⚠️ **Confirm the archive
-exists and its round trip verified BEFORE you author a chain that assumes it.**
+so plainly rather than quietly doing the weaker thing. The owner can download
+1.0.7 — it is a branch switch, a copy and a switch back, and **nothing in the
+mod setup notices because nothing launches** (`EF-055`: the enable is lost only
+when a launch runs with the id unresolvable, and the junction lives outside the
+Steam directory anyway). Procedure and the `EF-075` caveat — the 1.0.7 branch is
+a store-surface claim, not route-checked — are in `SMR-SrcArchive\README.md`
+§"Recovering 1.0.7". ⚠️ **Confirm the 1.0.7 archive actually exists before you
+author a chain that assumes it**, and check which build the flip-back landed on:
+if a newer one shipped meanwhile, archive it and re-pin the diff base.
 
 ⚠️ **Version drift.** The owner refers to "1.1.1"; what is installed and
 archived is **1.1.0.403908**. Do not assume a version — read the appmanifest,
