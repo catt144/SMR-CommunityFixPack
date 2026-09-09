@@ -29,6 +29,37 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### ✅ 2026-09-08 — ITEM 124 RULED: `StaleReservations` is FIXED, not removed. This was the last thing blocking chain link 03.
+
+> ⚖️ **124 — RULED: FIX.** Owner, verbatim: *"fix is the ruling."* ⇒ `Fix_StaleReservations` **stays** and gains
+> the exemption clause; it does not go to a deletion sweep. **Link 03 is now unblocked in full** — all three of
+> its modules are actionable and it can run as a single pass instead of stopping halfway.
+>
+> **What was wrong, and it is a real player loss — which is why FIX rather than REMOVE fits the 120 rule.**
+> 1.1.0 added a legitimate long hold: boarding an expedition rocket saves `expedition_residence` before
+> `SetDome(false)` clears the residence (`Colonist:EnterTransporter`, `Colonist.lua:5025-5031`) and reserves it
+> back through `CanReserveResidence`/`ReserveResidence` (`:5003-5008`). Our 5-sol `NewDay` sweep cancels that
+> real hold ⇒ **crew returning from a long expedition lose their home.** The lock is 3,600,000 ms while a one-way
+> expedition is 1,440,000–3,000,000, so the window is ordinary, not exotic.
+> ✅ Re-checked against the shipped 1.1.0 tree before recommending it, rather than taken from the brief:
+> `expedition_residence` is live with 20 hits tree-wide, and both cited bodies read as described.
+>
+> **The repair is one clause** — skip colonists whose `expedition_residence` is truthy.
+>
+> ⚠️ **One honesty requirement that rides with it, and link 03 is told to put it in the module header.** 1.1.0
+> bounds the ordinary shuttle-wait case this module was written for (F58) at one sol, so what the sweep still
+> covers is **committed-shuttle limbo and the walk path** — NOT "F58 is still shipped". The re-verification
+> report overstates this; the QA (§0.4) corrects it. The narrowed premise gets stated plainly rather than the
+> module keeping its old claim.
+>
+> **Control this owes you (~5 min, batch it with 03's Saint control):** send an expedition, wait past 5 sols,
+> and confirm the returning crew keep their residence with the pack on.
+>
+> ✅ **Nothing else in 03 needs a ruling from you.** Its other save-cleanup half — the `SaintBlessing` re-base —
+> looks like the F-5 cleanup you ruled OFF under 120, but it is the opposite case and rule 120 already answers
+> it: F-5's residue was an unearned **bonus**, whereas here vanilla's one-shot fixup already ran with our wrong
+> value and will not re-run, so the Saint blesses **nobody** — a **loss**, so it gets repaired.
+
 ### ✅✅ 2026-09-08 — ITEMS 98, 117 AND 120 RULED IN-SESSION AND ACTIONED THE SAME HOUR. Nothing here is owed from you; one 3-minute control is offered at the bottom and it is optional.
 
 > ⚖️⚖️ **98 — RULED: DELETE, not gate. There is no 1.0.7 line in the live pack.** Your words:

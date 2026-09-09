@@ -57,10 +57,12 @@ label entry.
 **Control (owner, ~5 min):** a Saint in a dome with Religious colonists shows
 "Blessed by a Saint", on a save that was loaded under the broken pack.
 
-## 2 · F-2 `StaleReservations` — ⛔ BLOCKED on the owner
+## 2 · F-2 `StaleReservations` — ✅ RULED **FIX** (owner, 2026-09-08, checklist 124)
 
-**Do not start this module until the owner has ruled FIX or REMOVE.** If it is
-REMOVE, it belongs to a deletion sweep, not here — route it and say so.
+✅ **UNBLOCKED — this section is now ordinary work.** The owner ruled **FIX**,
+verbatim: *"fix is the ruling."* The module **stays** and gains the exemption
+clause below; it does NOT go to a deletion sweep. ⇒ All three modules in this
+prompt are actionable and 03 runs as one pass.
 
 **What is wrong if it stays.** 1.1.0 added a legitimate long hold: boarding an
 expedition rocket saves `expedition_residence` (`Colonist.lua:5027-5031`) and
@@ -125,7 +127,9 @@ Found something out of fence? **File it, do not fix it.**
 
 ## 6 · Stop conditions
 
-- F-2 unruled ⇒ skip it, do the other two, say so.
+- ~~F-2 unruled ⇒ skip it, do the other two, say so.~~ ✅ **DISCHARGED — F-2 is
+  RULED FIX** (owner, 2026-09-08, checklist 124). Nothing in this prompt is
+  blocked; do all three.
 - The F-1 probe cannot be made to fail closed on a stub, or
   `AddDomeColonistsModifier` turns out not to be side-effect-free on one ⇒
   **STOP AND ASK.** Do not ship a probe you cannot bound.
