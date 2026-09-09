@@ -221,10 +221,24 @@ inverts. The questions your prompt must ask instead:
 - which surfaces named a fix that **no longer exists**;
 - which counts were derived from the fix list and are now wrong.
 
-### ⛔ Known-false surfaces to seed it with — already found, do not re-derive
+### ⚠️ Known-false surfaces to seed it with — but RE-CHECK THEM FIRST
 
+⛔ **This section used to say "already found, do not re-derive". That was wrong
+by the time link 06 ran, and the correction is the point.** `06`'s fence is
+`metadata.lua`, `STORE_CARD_LIVE.md`, `UPLOAD_WORKFLOW` §3 and the site's
+`fix-list.md` / `faq.md` / `index.md` — **exactly the surfaces named below.**
+⇒ **Read `06`'s outbox and the current files before seeding anything.** A seed
+that was true when written and is false when used is worse than no seed: it
+sends `100` hunting surfaces someone already fixed, and "do not re-derive" would
+have stopped it noticing.
+
+⭐ **The general form, worth carrying into your verdict:** a hand-off note is a
+claim with a timestamp. When the thing it describes is inside a LATER link's
+fence, the note's shelf life ends when that link runs.
+
+**As found on 2026-09-08** (state at that date, not necessarily now):
 `F108` (`ExtractorStaffedPerformance`) and `F107`/`F105` (`LandscapeCostRefresh`)
-are **named on the store cards and the site while both modules are gone.**
+were **named on the store cards and the site while both modules are gone.**
 Link 02 removed the fix-list entries and filed the exact lines and wording for
 the rest rather than editing across a fence. ⚠️ **Two different clocks, and the
 sweep must not conflate them:**
