@@ -1962,3 +1962,130 @@ The full owner-facing version is the **LINK 07 block** in `PLAYTEST_CHECKLIST.md
   **vanilla shipped our own repair as a savegame fixup** —
   `MeteorsThreadToRepeat2`, `RainsDisasterLoopToRepeat2`,
   `UpdateDroneUnreachableTimestamps` — the developers doing what our modules did.
+
+---
+
+## Notes from upstream — link 08 (`smr-bugfixpack-54`, 2026-09-09)
+
+⛔ **Nothing below ran in a game.** Every citation was read in the shipped 1.1.0
+tree, the archived 1.0.7 tree, or in git on 2026-09-09. They are CLAIMS.
+Commit: `dcb4ef4` (pass + record), plus this close-out.
+
+### 1 · §1's kill attempt failed, and the premise came out stronger than the brief had it
+
+The brief said the evidence for the residue was "all source-derived and none of
+it has been run". That understates it. Two things it did not have:
+
+* **Vanilla states the premise in its own words, twice** — *"stored keys are
+  deserialized copies, so match by Label+Prop"* (`Lua/MarsGameEffects.lua:312`,
+  `:443`) — and ships **four** one-shot `SavegameFixups` whose only purpose is
+  stripping stale label modifiers (`:309`, `:396`, `:419`, `:442`). Every one of
+  them would be pointless if a load rebuilt `label_modifiers` from the presets.
+* **We measured it ourselves at the keyboard on 1.0.7, 2026-08-02**, and the
+  measurement DISCRIMINATES the two hypotheses rather than merely agreeing with
+  one. The F95 entry's "THE HEAL WAS NOT IDEMPOTENT" section: an identity-keyed
+  presence test read 1, then **2** after one save+reload. A rebuild-on-load would
+  have re-keyed on the LIVE effect object, which that test *would* have matched,
+  leaving 1. It read 2 ⇒ the key present was a deserialised copy.
+
+⚠️ What is still unobserved is only **how many saves carry it** — not whether it
+would persist. The honest form stays "a pass is written and unrun".
+
+### 2 · ⛔ The one that would have shipped a silently inert pass
+
+`VANILLA_FIX_QA` offered `display_text == nil` as a second tell, correctly flagged
+as an untested hypothesis. **It is `false`, not `nil`.** `Modifier` declares
+`display_text = false` as a class default (`Lua/Modifiers.lua:228-235`); the
+shadowed `CommonLua/Classes/Modifiers.lua:346-348` says `""` — the same
+shadowed-file trap `R-31` hit. A `== nil` test matches nothing, removes nothing,
+raises nothing, and is invisible to `parsecheck` and to a source read. The pass
+accepts all three spellings via a named helper.
+
+⇒ **Audit note for Pass A:** this is the second time in this chain that the
+`Lua/` vs `CommonLua/` shadow pair produced a wrong claim about `Modifiers.lua`.
+Worth a line in whatever 99 leaves behind.
+
+### 3 · Two corrections that made the pass narrower, not wider
+
+* **The key can be READ though it cannot be reconstructed.** The brief reasoned
+  from "`GetLabelModifierId` returns `self`" to "you must match on the VALUE".
+  The first half is right; the conclusion is weaker than necessary. Vanilla's
+  `SavegameFixups.RefreshAstrogeologistExtractorBonus`
+  (`Lua/MarsGameEffects.lua:309-344`) does this exact job for the profile's *old*
+  per-class entries by matching the stored key's `Label`/`Prop`/`Percent`/`Amount`
+  after an `IsKindOf` test. The pass requires **both** halves, so it is strictly
+  narrower than the specced value-only match — which is what closes the brief's
+  stop condition 3 without needing to ask.
+* **The population is Astrogeologist colonies ONLY.** Both write routes require
+  `profile.id == "astrogeologist"` — start-of-game `EffectsApply`, and the deleted
+  module's own load heal, which returned otherwise. Neither the brief nor the QA
+  report says this. Most saves are clean by construction.
+
+### 4 · ⚠️ Deliberate deviation from the brief: NO one-shot flag
+
+Unit A specced the `F48_FLAG` model. The pass carries no flag. Reasons, in the
+order that decided it: (1) it is a **comparison** pass, the same shape as F35 in
+the same file, which carries no flag for exactly that stated reason; (2) the
+premise is **unrun**, and a flag would permanently lock every already-flagged save
+out of a corrected pass if the sitting finds the match too narrow; (3) `FIX_POLICY`
+§3a tier 1 — a flag is a new persisted field of ours and this pass does not need
+one. **Overturnable**: the reasons are in the module header, not just here.
+
+Two smaller deviations, both stated where they land: the pass prints its total
+**even at zero** (Unit A said log nothing when there was nothing; F48's own ⛔
+comment in the same file says an absence of lines cannot be told from an absence
+of the pass — printing the total serves Unit A's stated goal *and* removes that
+ambiguity, since the per-label lines are what separate "clean" from "cleaned");
+and the module's registry `title` was updated, since it still named the removed
+F03 pass. The title is log-only — `Code/00_Core.lua:647` is its sole consumer, no
+tooling and no store surface reads it.
+
+### 5 · ⚖️ The owner ruled this cleanup OFF before asking for it — 99 should know
+
+`README.md` row 02 records it and so does the F95 entry: on **2026-09-08** the
+owner ruled the F-5 cleanup off (checklist **120**) on the standing rule *"we fix
+anything negatives, a small positive I am not as concerned about"*. On
+**2026-09-09** the owner asked link 07 to author this prompt. The later, explicit
+instruction governs and the pass is built — but the earlier ruling was
+*considered*, and the 09-09 ask may have been made without recalling it. Raised to
+the owner as **checklist 126**, together with Unit C. ⛔ Not resolved here.
+
+### 6 · Unit C, as raised
+
+`R-36` pulled `90_SaveSanitizer` out of the REMOVE block as PLATFORM-CONDITIONAL,
+and that reasoning rests entirely on **1.0.7 saves**. This pass is in a different
+population — **1.1.0 saves that ran under the pack**, which exist on every
+platform. ⇒ "remove the sanitizer" is no longer a platform question. Checklist
+**126**, next to the platform item. Not resolved here.
+
+### 7 · One vanilla finding, filed not fixed
+
+`RefreshAstrogeologistExtractorBonus` narrows its stale-match with
+`stored_id.Percent == 20` (`:330`), but the archived **1.0.7.396349** profile pays
+`Percent = 10` on all ten entries (`C:\Dev\SMR-SrcArchive\1.0.7.396349\Src\Data\CommanderProfilePreset.lua:336-385`).
+If those are the only two branches, that fixup cleans nothing on a migrated 1.0.7
+save and vanilla leaves ten stale +10% entries of its own, then adds the new
+label-wide bonus on top. ⛔ **NOT established** — `SupportedSavegameLuaRevision =
+402200` (`Lua/Config/config.lua`) sits between the two builds we hold, so an
+intermediate branch paying 20 is likely and would make the fixup correct. It is
+**vanilla's residue, not ours**; untouched, out of fence, filed here.
+
+### 8 · Owed elsewhere, deliberately not done by me
+
+`STATE.md`'s "Open owner decisions" line does not list **126**. `STATE.md` is out
+of this link's fence and sits at **9210 bytes against a 9216-byte warn** — adding
+the item would trip it. Whoever runs the next eviction should fold 126 in.
+
+### 9 · What may NOT be claimed from this link
+
+* ⛔ **Not "the residue is repaired."** A pass is written and unrun.
+* ⛔ **Not "saves are clean."** The pass fires on the next load of each affected
+  save, one save at a time, and no save has been loaded with it.
+* ⛔ **Not "the platform decision is settled"** — 126 *raises* it.
+* ⛔ **No status word moved**; F95 keeps its legacy `tested` from 2026-08-02,
+  which covers the 1.0.7 fix and not this pass.
+* ⚠️ The Test Kit was not touched (link 07 closed it). Its `AstrogeologistExtractors`
+  probe matches residue on `mod.prop` + `mod.percent == 10` only, which is
+  **looser** than this pass. That asymmetry is intended: probe FAIL together with
+  a `LEFT … ALONE` log line is the near-miss case, and it is a report, not a bug
+  in either.
