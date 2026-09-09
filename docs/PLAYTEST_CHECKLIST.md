@@ -29,7 +29,88 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
-### ⚖️ 2026-09-09 — LINK 99 IS DONE. VERDICT: **SHIP WITH CHANGES.** Three calls (127–129); the first is the reason for the verdict, and it is a real bug the pack already ships.
+### ✅ 2026-09-09 — RULED: all three of link 99's calls, plus one new one (130). Every gate on the doc sweep is now satisfied. ✅ **Nothing is owed from you until the sitting.**
+
+> **126 — the F95 residue pass STAYS IN.** Your words: *"Leave ck126 in."*
+> ⚖️ This **supersedes the 09-08 ruling (ck120)** that had the cleanup OFF; the
+> two-directions tension link 08 raised is settled in favour of cleaning up
+> after ourselves.
+>
+> Two reasons you gave, both recorded because they settle more than this item:
+> * *"as far as people who stay on 1.0.7 we are offering them a frozen version
+>   on github release that handles 1.0.7 so I am not concerned about that. If
+>   they are subbed to our store page they get the current version its the
+>   source of truth."* ⇒ `90_SaveSanitizer` becoming **non-removable on every
+>   platform** is accepted, and item 117's platform question is answered by
+>   ck118's frozen-build route rather than by dropping the pass.
+> * *"if it fails it fails with no harm, because worst case if it fails they
+>   just get a small bonus."*
+>
+> ⚠️ **One precision on "no harm", kept because it is the only direction that is
+> not free.** Failing to FIND our entries is harmless — the player keeps a small
+> bonus. Removing an entry that is **not ours** has no undo. That is exactly what
+> link 08's narrowed match and the `LEFT n modifier(s) … ALONE` log line exist
+> for. ⇒ if that line appears at the sitting, it is the one to report.
+>
+> ⇒ **ck128 resolves with it:** the change note's bullet 2 takes the wording that
+> says the bonus IS removed on next load. Both drafts are in `100_DOCSWEEP.md`
+> §3.1; it writes the one that matches this ruling.
+>
+> **127 — (a): FIX F117 BEFORE THE UPLOAD.** Your word: *"ck127 fix."* ⇒ a code
+> link is owed that passes the colonist on the 1.1.0 body behind a per-module
+> runtime discriminator (ck118 binds — read from a callee body at call time,
+> never a version label), with two one-line riders: F118, and the
+> `FlightPolicies` named guard. `reports/HOTFIX_2_AUDIT.md` §5 is its inbox and
+> `bugs/F117.md` carries the repair sketch and the control. ⛔ Still not
+> reproduced — the fix is source-derived like the defect, and the status word
+> does not move on either.
+>
+> **129 — (after): UPLOAD FIRST, THEN PUBLISH THE SITE**, in the same sitting.
+> Your word: *"ck129 after."* The live page today lists 82, which is correct for
+> the v5 players actually have; the committed page lists 46, which is correct
+> only once v6 is up. Publishing first would describe a pack nobody can install
+> yet. ⇒ `UPLOAD_WORKFLOW` §4 runs immediately after the upload, not before it.
+>
+> **130 (NEW — ruled in the same conversation, recorded because it is a real
+> call and lived nowhere) — the Saint's-blessing save heal SHIPS UNEXERCISED,
+> and field reports are its detector.** Your words: *"we do our best to make sure
+> we are right and wait for bug reports."*
+>
+> **Why it cannot be tested here, established rather than assumed.** On 1.1.0
+> `Fix_SaintBlessing` declines the data rewrite entirely and its only remaining
+> job is healing saves an EARLIER build of this pack damaged. That condition is
+> **historical and unforgeable**: adding a Saint to a dome today goes through the
+> live path, which 1.1.0 does correctly on its own, so a cheat tests vanilla and
+> not us. You have no 1.1.0 save with a domed Saint, and the `EF-080` override
+> would not help — a 1.0.7 save opened on 1.1.0 has vanilla's own
+> `MigrateDomeTraitLabelModifiers` run on it and files the Saint correctly, so it
+> reads `restored 0`. Manufacturing the case would mean reinstalling the broken
+> v5, loading a save with a domed Saint, then swapping back.
+>
+> **Why shipping it unexercised is bounded, checked at the desk 2026-09-09:**
+> * `SMRFixPack.WhenActive` is a **gate, not a trap** (`00_Core.lua:228`) — it
+>   checks status and calls the handler directly, so a throw in that `LoadGame`
+>   pass would reach the engine as a mod-error dialog, the F115 shape. It cannot:
+>   the pass's one uncontrolled call is vanilla's own `AddDomeColonistsModifier`,
+>   and the shipped 1.1.0 body (`Lua/TraitPreset.lua:77-95`) has **no throwing
+>   path** — `if dome then`, `if not prop_meta then return`, `if not label then
+>   return`; every exit is a return. ⚠️ `SetLabelModifier`'s own body was NOT
+>   read; it is the same call vanilla makes on every dome join.
+> * The pass only ever **ADDS**, through vanilla's own function, to colonists
+>   missing the modifier, and skips any that already carry it. Worst realistic
+>   failure is a silent no-op.
+> ⇒ residual accepted: some players who ran v5 keep a missing +10 morale on
+> Religious colonists in a Saint's dome until that Saint changes dome.
+>
+> ⚠️ **At the sitting this will report a PASS that proves nothing, and that is
+> correct behaviour, not coverage.** The kit's `SaintBlessing` probe returns
+> `PASS — … (no Saint in a dome in this save, so the re-base half had nothing to
+> read)`. ⛔ Do not read it as confirmation. ⛔ And do not load the poisoned save
+> to chase it: the `restored` line prints on a save's FIRST load and never again.
+> ⭐ Wanted for hotfix 3, not now: a kit probe that drives the re-base against a
+> **stub** colonist and dome, which exercises the path with no save at all.
+
+### ⚖️ 2026-09-09 — LINK 99 IS DONE. VERDICT: **SHIP WITH CHANGES.** Three calls (127–129) — ✅ **ALL THREE RULED**, see the block above; the first is the reason for the verdict, and it is a real bug the pack already ships.
 
 > **The audit in one line.** Every code change in this patch re-derived against the shipped 1.1.0 code holds up;
 > the instruments were made to fail on purpose and did; the store text matches its backups to the byte. **The
@@ -107,7 +188,7 @@ completed tests move whole to
 > fixed and is **not** part of this change: `.gitattributes` pins STATE to LF
 > (09-09), so the count measures content, not the checkout. Verified 0 CR.
 
-### ⚖️ 2026-09-09 — ITEM 126 OPEN: link 08 wrote a pass that cleans up after **us**, and it changes what "remove the save sanitizer" means
+### ✅ 2026-09-09 — ITEM 126 RULED: **KEEP THE PASS IN** (see the ruling block at the top of this section). Left below as the reasoning you ruled on; link 08 wrote a pass that cleans up after **us**, and it changes what "remove the save sanitizer" means
 
 > **What we left behind.** One of the 36 modules link 02 deleted,
 > `Fix_AstrogeologistExtractors`, did its job by adding two +10% extractor

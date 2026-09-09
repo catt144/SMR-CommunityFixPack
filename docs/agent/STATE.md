@@ -95,11 +95,14 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 - 98 rig half only (⛔ Steam = ONE branch at a time, owner 09-08) · 99 disposition of the self-disabled ·
   100 say anything to players yet (rec no) · 101 accept the re-verification chain shape.
 - 112 DEFERRED 09-09 · **125** RULED+LANDED 09-09: F66 guard yields to `force` (desk-controlled, untested); wrapper re-read → 99.
-- **126 OPEN** 09-09 (link 08): F95 residue pass LANDED in `90_SaveSanitizer`, UNRUN. Two asks — ⛔ ruled
-  OFF 09-08 (ck120) then asked for 09-09; and it makes the sanitizer non-removable on EVERY platform ⇒ `R-36` is not just a 1.0.7 question.
-- **127** F117 fix-first (rec) vs hotfix 3 · **128** bullet 2 ↔ 126, `100_DOCSWEEP` carries both wordings · **129** site
-  publish WITH the upload, after it (rec). ⛔ BLOCKS the upload: 126/128 and 127. 118 RULED ⇒ re-copies MUST decline on
-  1.0.7 (`FIX_POLICY` §2a).
+- ✅ **126/127/129 RULED 09-09**: **126** F95 pass STAYS (supersedes ck120; sanitizer non-removable on EVERY platform,
+  ACCEPTED — 1.0.7 players served by ck118's frozen GitHub build) ⇒ **128** takes the "removed on next load" wording ·
+  **127(a)** FIX F117 BEFORE the upload ⇒ a code link is OWED (`reports/HOTFIX_2_AUDIT.md` §5 rows 1-3 = its inbox; it
+  `git rm`s 99) · **129** publish the site AFTER the upload, same sitting.
+- **130 RULED 09-09**: Saint heal SHIPS UNEXERCISED — condition is historical, unforgeable (`EF-080` override yields
+  `restored 0`); additive-only and cannot throw (`Lua/TraitPreset.lua:77-95` no throwing path, `WhenActive` is a gate not
+  a trap). ⛔ Its kit probe PASSes vacuously with no domed Saint — NOT coverage. Field reports are the detector.
+- ⛔ BLOCKS the upload: the F117 link, then `100_DOCSWEEP`. 118 RULED ⇒ re-copies MUST decline on 1.0.7 (`FIX_POLICY` §2a).
 - 73 blame surface — harden or not · 76 confirm (a) was a ruling not a leaning · 53 harden now or in 1.0.1
   (rec 1.0.1) · 51 both-packs leg timing (rec after launch) · 50 chain-vs-replace wording · 47 two modder-page
   wordings · 43 opt-in pack re-tick · 41 dialog wording + sweep cap 5→8 · 40 `smr_shuttles` name · 39 dialog re-fire.
