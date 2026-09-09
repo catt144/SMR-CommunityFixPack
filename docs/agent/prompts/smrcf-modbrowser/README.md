@@ -8,13 +8,21 @@
 > **source findings below still hold and are the most reusable material in the
 > whole `SMRCF_CHAIN_SET` backlog.**
 >
-> ⭐ **Defect 3 is live for US, not just for players.** The thumbnail cache keys on
-> `ModID` + `PreferredVersion` and skips the fetch when the file already exists ⇒
-> **replacing our `preview.png` without a version bump leaves existing players
-> looking at the old image forever.** That intersects the store-card work
-> (`UPLOAD_WORKFLOW` §3) and every future upload, so it is worth knowing whoever
-> refreshes the preview art. ⚠️ Its own text already flags it "release-relevant to
-> us either way".
+> ⛔ **CORRECTION 2026-09-09 — I claimed defect 3 was "live for US" and it is
+> NOT. Recorded rather than quietly deleted.** The claim was that replacing our
+> `preview.png` without a version bump would leave existing players on the old
+> image. Re-read on 1.1.0
+> (`CommonLua/Libs/Paradox/ParadoxMods.lua:221-225`): the cache path is
+> `PdxModsScreenshotsPath .. mod.Pdx.ModID .. "_" .. mod.Pdx.PreferredVersion .. ext`
+> and the fetch is skipped only `if not io.exists(file_path)`. The key therefore
+> contains the PORTAL VERSION — and `H-02` is that **every** upload bumps our
+> version (the Mod Editor save runs `version = version + 1`, and both portals force
+> that save), so the path changes on every upload and the image always refetches.
+> ⇒ **The stale-preview risk is foreclosed for us by H-02**, and nothing needs
+> adding to `UPLOAD_WORKFLOW`. ⚠️ It remains a real vanilla defect for the
+> browsing case — a thumbnail replaced without any version change is cached
+> forever — which is why `C52` defect 3 still stands as filed. What was wrong was
+> only my "it applies to our own upload route" inference.
 >
 > ⚠️ Staleness: written 2026-08-16 against 1.0.7 and a 74–77 module tree (now 44).
 > The `ParadoxMods.lua` / `HTMLParser` / `ModManager.lua` line numbers below are
