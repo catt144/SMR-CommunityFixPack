@@ -1,124 +1,143 @@
-# 04 · The re-copies — group B (F-6, F-7), plus the F116 scoped edit (§7)
-
-⚠️ **Group C (F-8, F-9, F-10) is NOT here — it is `04b_RECOPIES_C.md`.** See §3.
+# 04b · Group C — the three re-armed fixes (F-8, F-9, F-10)
 
 Chain: `prompts/hotfix2/README.md` (its binding rules are yours). Runs after 02.
-Independent of 03 — either order.
+Independent of 03 and of 04 — any order. ⚠️ **04 may still be in flight; it owns
+group B and the F116 edit. Check `ListAgents` and `git log` before you write.**
 
-⛔ **This is the highest-risk prompt in the chain, and the risk has a name.**
-Every module here replaces a game function with a copied body. F114 shipped
+⛔ **THIS IS THE HIGHEST-RISK WORK IN THE PATCH, and the risk has a name.**
+All three modules replace a game function with a copied body. F114 shipped
 exactly this way: a 1.0.7 body copied into the pack, the game rewrote the
 function under it, and every instrument the project owned said OK — the name
-sweep saw a name, `sigcheck` saw arity, the runtime check saw existence. You now
-have `bodycheck.py` (link 01), which is the first instrument that can see this
-class. **Use it, and do not treat any other GREEN as a clearance.**
+sweep saw a name, `sigcheck` saw arity, the runtime check saw existence. You have
+`bodycheck.py` (link 01), the first instrument that can see this class. **Use it,
+and do not treat any other GREEN as a clearance.**
+
+> ⭐ **Why this link exists.** `04` was split on 2026-09-08 under chain rule 4,
+> **before it ran**, because six modules at this discipline do not fit one
+> context. The owner pre-authorised the split and asked for the judgement to be
+> made up front rather than discovered mid-link: *"A chain cannot tell what its
+> current context is. If you think it should be split, split it now."*
+> ⛔ **So do not treat a further split as failure** — see §6.
 
 ## 0 · Start
 
-`git log --oneline -10` · `git pull` · `ListAgents`. Todo list first, one item
-per module — each is its own commit-and-verify unit.
+`git log --oneline -10` · `git pull` · `ListAgents`. Todo list first, **one item
+per module** — each is its own commit-and-verify unit.
 
 **Read path:** `agent/STATE.md` · `VANILLA_FIX_QA.md` §0.5 and Reader A's rows
-F-6 and F-7 (**the shapes are pinned there; a departure must say why**) ·
-`PACK_1_1_0_REVERIFICATION.md` §1a · `agent/FIX_POLICY.md` §1.4b · `bugs/F114.md`
-and `bugs/F115.md` (how this goes wrong) · `docs/PLAYTEST_CHECKLIST.md` items
-109, 115, 118 — **and 111 + 119, the two rulings behind §7** · `bugs/F116.md`
-(§7's record; its claim 5 and "What did NOT land" are the two divergences) ·
-your inbox — **01's Job D answer is your branch-guard design,
-read it verbatim before writing any gate.**
+F-8, F-9, F-10 (**the shapes are pinned there; a departure must say why**) ·
+`PACK_1_1_0_REVERIFICATION.md` §1a · `agent/FIX_POLICY.md` §1.4b and §2a/§2b ·
+`bugs/F114.md` and `bugs/F115.md` (**how this exact work goes wrong**) ·
+`docs/PLAYTEST_CHECKLIST.md` items **123** (your ruling), 109, 115, 118 ·
+your inbox below — **01's Job D answer is your branch-guard design, read it
+verbatim before writing any gate.**
 
-## ✅ 1 · Nothing here is blocked — and group C moved to `04b`
+## ✅ 1 · Your mandate — ck123, and what it does and does not settle
 
 ⚖️ **Owner ruled ck123 on 2026-09-08: REPAIR ALL THREE.** Verbatim: *"All get
 fixed, If the work is really that heavy we should have a 04 and and 04b."*
-**Nothing in this prompt is blocked any more.** ⚠️ But group C is no longer
-yours — it moved to `04b` in the same edit (§3). **Your scope is group B (§2)
-and the F116 edit (§7).**
 
-⛔ **ck123 partly and DELIBERATELY reverts ck109** ("gate, not repair" for F-8).
-That matters to `04b`, which owns those modules — noted here only so you do not
-read the split as the ruling being softened. ⚠️ **The gates STAY** in every case,
-here and there: they are correct, measured, and they are what makes a module
-decline on 1.0.7 (ck118).
+⛔ **This partly and DELIBERATELY reverts ck109** ("gate, not repair" for F-8).
+Not drift, and not yours to re-litigate: ck109 was ruled mid-emergency with a
+live P1 in players' games; ck123 was ruled in a considered patch cycle.
 
-⭐ **This link was ALREADY SPLIT for you, before it ran.** Six modules at this
-discipline do not fit one context, so group C left. ⛔ **That does not exempt you
-from rule 4** — if group B plus §7 still will not finish comfortably, split again
-(`04c`) rather than rushing. The failure this prompt guards against (F114) was a
-body copy written without enough room to think.
+⚠️ **KEEP EVERY GATE.** You are re-arming a fix **on top of** its gate, not
+removing it. The gates are correct, measured (`archive/logs/gated110_*`), and
+they are what makes each module decline on 1.0.7 (ck118). ⛔ **A gate quietly
+removed to make a repair work is a finding**, and 99 is told to look for it.
 
-## 2 · Group B — unblocked
+⛔ **A ruling settles what we DO, never what is TRUE.** ck123 did not confirm any
+of these defects. In particular F-10's premise is unread — see §4.
 
-### F-7 `RocketDroneChurn` — one clause
-`UpdateCargoResourceRequests` still brackets with unconditional
-`Disconnect`/`Connect` (`CargoTransporterNew.lua:1431-1433`, `:1460-1462`), so
-F50 persists. One line changed inside the loop:
-`additional_amount = is_refuel_resource and not self.refuel_disabled and
-self:GetFuelResourceRequest()` (`:1442`). `refuel_disabled` is a new player
-toggle (`UniversalRocket.lua:70`, `:3320`); our copy lacks the clause.
-⇒ **re-copy the 1.1.0 body carrying `not self.refuel_disabled`.**
+**Order — hardest last, and this order is deliberate:**
 
-### F-6 `PayloadTemplateRefill` — three reverts to avoid
-The refill is unchanged (`CargoRequestNew.lua:221-234`), so F70 persists. Our
-copy would revert three 1.1.0 changes:
-1. `resolve_loc_cargo_template` gained a **tutorial branch** (`:183-189`,
-   `AsteroidTutorialExpectedCargo`) and a `CmdLoad` exemption for destination
-   picks (`:174`);
-2. `RetrieveRequests` reads `prev_flight_data` and ignores stored cargo on a
-   destination pick (`:215-217`);
-3. the automode branch nil-guards `cargo_items[id]` (`:199-213`).
+| # | module | why here |
+|---|---|---|
+| 1 | **F-8** `LandscapeUnitFilter` | most player value, cleanest repair |
+| 2 | **F-10** `TrainCargoDumping` | contained (`Train.lua:779-805`) |
+| 3 | **F-9** `VacuumWalks` | ⛔ largest surface in the patch — do it with room, or split it out (§6) |
 
-**Shape, pinned by the QA:** gate as `not from_destination_pick and
-transporter.SMRFixPack_payload_set`; ⛔ **the tutorial return (`:183-189`) must
-precede the gate** so rocket 2 is still pre-filled; ⛔ **stamp the flag on the
-CONFIRMED path** (`:376-379`, `SetCommand("CmdLoad")`), **not** on `Apply` entry
-— `Apply` is now an async prompt (`:368-385`) and our pre-wrapper would suppress
-the template even when the player cancels (`CancelFlight`, `:382`).
+## 2 · F-8 · `LandscapeUnitFilter`
 
-## 3 · Group C has MOVED to `04b_RECOPIES_C.md`
+Body still passes `callback` at `Landscaping.lua:522` while `filter_embark`
+(`:516-521`) is unused — the sibling `LandscapeForEachStockpile` passes its
+filter (`:503`). Signature is now `(map, mark, callback, ...)` reading
+`map.Landscapes[mark]` (`:509-510`; `MapVar("Landscapes", {})` `:21`).
+⇒ **repair the body on the new signature, passing `filter_embark`.**
 
-⭐ **Split 2026-09-08, BEFORE this link ran**, under chain rule 4 and the owner's
-pre-authorisation. F-8, F-9 and F-10 are ruled IN (ck123) and are **not
-cancelled** — they are `04b`'s, a first-class chain member with its own full
-inbox and README row. ⛔ **Do not do them here**, and do not treat their absence
-as a descoping: the ruling stands, the work moved.
+⚠️ **Reach is now Clear-Waste-Rock sites only** (`ClearWasteRockConstructionSite
+.lua:79-85`); `LandscapeConstructionSite` no longer defines `GetUnitsUnderneath`.
+⭐ The underlying defect (F34(d)) reproduced **20/20 on PT-60** — ⛔ but that was
+under 1.1.0's *wider* pre-narrowing reach, so do not restate 20/20 as this
+patch's expected hit rate.
 
-**Why the cut fell here.** Six modules at this discipline — a body diff, a
-re-copy, a manifest stamp, a `probe` gate, `bodycheck.py` either side and its own
-commit each — do not fit one context, and F-9 alone is a ~98-line rewritten
-function. ⚠️ The judgement was made up front rather than left to a session to
-discover mid-link, because **a link cannot see its own context budget** (owner,
-2026-09-08). Your half is group B plus §7.
+⛔ Half-baked if the repair re-pins the old signature or the bare `Landscapes`
+global. **Keep the F115 gate** — it is correct and measured, and the `sigcheck`
+MISMATCH there is CORRECT because the body is deliberately untouched... ⚠️ **and
+that stops being true the moment you edit the body.** Re-read what `sigcheck`
+reports afterwards and say in your outbox whether the MISMATCH is now expected to
+clear; a silent change in that signal is exactly what nobody notices.
 
-## 4 · Non-negotiable for every module here
+## 3 · F-10 · `TrainCargoDumping`
 
-1. **`SRC:` / `DEFECT:` manifest lines** per 01's spec, so the next game update
-   is a tool run and not a week. Stamp after the edit.
-2. **`bodycheck.py` GREEN** on the module, and you saw it go RED on a
-   deliberately wrong pin at least once. An instrument you never watched fail is
-   not an instrument.
-3. ⛔ **Declines on 1.0.7.** These modules carry a 1.1.0 body; applied over a
-   1.0.7 function that is the F114 failure in reverse, and nothing stops this
-   build reaching a 1.0.7 player (ck118). Use 01's Job D design — the
-   per-module probe, **never a game-version detector**.
-4. **A parse sweep** of every touched `.lua`, with `Mars.exe` closed.
+`UnloadAll` (`Train.lua:779-805`) gained nil-guards (`:785`, `:794-795`) and a
+**BlackCube hook (`:800-802`)**, but still has no enabled check. `Station` is now
+a `MultiResourceDepotBase` (`Station.lua:48-56`); `IsResourceEnabled` =
+`IsStoring` = demand exists and not `rfSuspended` (`MultiResourceDepot.lua
+:242-247`).
+⇒ **re-copy `:779-805` with `station:IsResourceEnabled(res)`; carry the BlackCube
+hook.** ⛔ Half-baked if the copy drops `:800-802`. **Keep the F114 gate** for the
+next change.
 
-## 5 · Scope fence
+## ⛔ 4 · F-10's premise is UNREAD — the one thing ck123 did not fix
 
-**In:** group B's two modules (F-6, F-7), their headers/manifests/gates, their bug
-entries, their drafted patch-note lines — **plus `Fix_TrackSalvageWipe` (F116) in
-§7, scoped to two ruled divergences only.** ⛔ **Out: group C — `04b` owns it.** **Out:** `items.lua`,
-`metadata.lua`, store text, `00_Core.lua`, the rest of the KEEP set, the harms (03).
-⚠️ **F116 moved from Out to In on 2026-09-08** when the owner ruled ck111 and
-ck119. ⛔ The rest of F116 is still Out: **do not re-derive it** — its `K-11`
-KEEP verdict stands and only the two named divergences are yours.
-Found something out of fence? **File it, do not fix it.**
+Whether a `rfSuspended` request still reports a positive `GetTargetAmount` is
+**C-side and nobody has opened it**. The re-verification's own words are
+"plausibly persists", not established.
 
-## 6 · Stop conditions
+⇒ You will repair it anyway, because that is the ruling. **But:**
+- ⛔ your close-out must say the premise was never established;
+- ⛔ **no patch-note line may imply the defect was confirmed**, and 06 must not be
+  handed wording that does;
+- ⭐ if you can cheaply establish it (a control on a station with a disabled
+  resource, or a read that settles `GetTargetAmount`), that is worth more than
+  the repair itself — **route it to the checklist either way.**
 
-- ⛔ Nothing here is blocked on a ruling any more. If group B plus §7 will not
-  fit comfortably, **split again rather than rushing or dropping one** — the
-  owner pre-authorised splitting and group C already left for `04b`.
+## 5 · F-9 · `VacuumWalks` — the largest surface, do it last
+
+The defect line is byte-for-byte the same (`Colonist.lua:1903`), but everything
+around it was rewritten: slot reservation (`:1894-1896`, `:1920-1926`,
+`:1943-1949`, `:1972-1978`), `DiscardTransportTicket` (`:1918`), the `-1`
+passage-only convention → `max_int` (`:1904-1907`), a `transport_task.shuttle`
+guard (`:1898`), `HasShuttleLandingSlots`/`IsSameMap` (`:1932-1957`), a new
+`src_dome` search (`:1959-1968`). **Our copy has none of it** — re-arming as-is
+would revert all of that.
+
+⇒ **re-copy the 1.1.0 body with `min_dist = 0` in vacuum; read `g_Consts` at call
+time** (both walk constants moved from `const.`, which is why the module is
+inactive today).
+
+⛔ **NEVER a distance pre-wrapper.** `transport_mode_dist` also drives `:1914`
+(walk-vs-shuttle) and the `-1` branch at `:1904` — inflating it changes both.
+⚠️ The QA explicitly **did not derive** the semantics of a wrapper passing a
+modified distance. If you find yourself reaching for one, that is the signal to
+stop and ask, not to improvise.
+
+⛔ **ITS GATE IS CURRENTLY ACCIDENTAL AND MUST END UP DELIBERATE.** The module is
+inactive today only because a `const.` → `g_Consts` rename broke its path spec.
+⚠️ **"Still inactive" is NOT an acceptable end state** — an accidental gate is one
+rename away from silently re-arming a stale 1.0.7 body into a rewritten function,
+which is the F114 mechanism precisely. Give it a real probe (§7 item 2).
+
+## 6 · Stop conditions — and a further split is PRE-AUTHORISED
+
+⭐ **If F-9 will not fit comfortably after F-8 and F-10, split it to `04c` and
+hand off.** The owner authorised the split principle for exactly this, and rule 4
+is the mechanism: commit what is done, write `04c_RECOPIES_F9.md` as a
+first-class chain member **with a full inbox** (⛔ not a pointer — this file is
+`git rm`'d on close-out), add its README row, hand off. **A single-module link is
+a legitimate shape**, and F-9 is the one module in the patch that earns it.
+
 - A 1.1.0 body cannot be copied without also importing a change you cannot
   justify ⇒ **STOP AND ASK.** A re-copy you do not fully understand is the F114
   shape with a new date on it.
@@ -126,77 +145,57 @@ Found something out of fence? **File it, do not fix it.**
   Do not build the detector; report it.
 - `bodycheck.py` disagrees with your read of the body ⇒ believe the tool until
   you have proven it wrong, and record which of you was right for 99.
+- You are reaching for a pre-wrapper on F-9 ⇒ **STOP AND ASK** (§5).
 
-## 7 · The sixth module — `Fix_TrackSalvageWipe` (F116), two ruled divergences
+## 7 · Non-negotiable for every module here
 
-⚖️ **Owner ruled ck111 + ck119 on 2026-09-08 and folded them here** ("fold them
-into whatever chain makes the most sense and update the audit"). This module is a
-`KEEP` (`K-11`) and its 1.1.0 re-derivation is DONE — ⛔ **do not redo it.** You
-are landing two specific, already-decided changes and nothing else.
+1. **`SRC:` / `DEFECT:` manifest lines** per 01's spec, so the next game update is
+   a tool run and not a week. **Stamp after the edit.**
+2. ⛔ **Declines on 1.0.7.** These modules carry a 1.1.0 body; applied over a
+   1.0.7 function that is the F114 failure in reverse, and nothing stops this
+   build reaching a 1.0.7 player (ck118). Use 01's Job D design — the per-module
+   **probe**, ⛔ **never a game-version detector.**
+3. **`bodycheck.py` GREEN** on the module, and **you saw it go RED on a
+   deliberately wrong pin at least once.** An instrument you never watched fail
+   is not an instrument.
+4. **A parse sweep** of every touched `.lua`, with `Mars.exe` closed.
+5. ⛔ **A body diff, never a grep.** F116 was filed off a keyword grep; two of its
+   four claims did not survive a real structural diff and a fifth divergence
+   appeared only when the bodies were diffed properly.
 
-**Both are in `TrackGridElement:DemolishAndSplitTrack`, in the split branch, in
-the region our F44 fixes already occupy.**
+## 8 · Scope fence
 
-### ck111 — rehome the orphan instead of deleting it
-Ours DELETES any element still carrying `track_obj == false` after both
-expansions (`Fix_TrackSalvageWipe.lua:335-339`); 1.1.0 REHOMES it into a fresh
-track (`TrackElement.lua:580-595`). ⇒ as it stands **our "don't destroy the
-player's track" fix can destroy a fragment the unmodded game would have saved.**
-Take vanilla's loop. ⚠️ Our body has no `tracks` array (1.1.0 introduced one), so
-collect the new tracks in a local and extend the three tail blocks at `:344-365`
-— `UpdateEndElements`/`UpdatePos`, and the four `ProcessTrackElements` calls — to
-cover them. ⭐ Termination is not in doubt: each pass assigns at least the orphan
-itself a track, so the `track_obj == false` count strictly decreases.
+**In:** these three modules, their headers/manifests/gates/probes, their bug
+entries, their drafted patch-note lines. **Out:** `items.lua`, `metadata.lua`,
+store text, `00_Core.lua`, the KEEP set, the harms (03), group B and the F116
+edit (both `04`'s). Found something out of fence? **File it, do not fix it.**
 
-### ck119 — post-split processing for mixed tracks
-1.1.0 processes each resulting track's **combined** element list (`:609-613`);
-our 1.0.7 tail processes one array and only when the other is empty, so a track
-holding **both** completed and under-construction elements gets none. Inherited
-1.0.7 behaviour, no observed harm — it rides with ck111 because it is nearly free
-in the same edit, not because it is urgent.
+## 9 · What may NOT be claimed
 
-### ⛔ Ruled, so do not reopen
-- **The `OnMsg.LoadGame` sweep KEEPS deleting orphans.** Owner ruled it: at load
-  there is no split context to rehome into, and it only fires on genuinely
-  stranded legacy debris. It is NOT an oversight and NOT yours to change.
-- The `K-11` KEEP verdict stands. Everything in F116 except these two is Out.
-
-### ⚠️ Two traps specific to this module
-1. ⛔ **It is ALREADY STAMPED.** Link 01 stamped the `SRC:`/`DEFECT:` manifest
-   across all 35 KEEP modules at `e2490f3`, and this module is in that set — so
-   its pinned `SRC:` hash was taken BEFORE your edit and your edit makes it a
-   lie. **Run `bodycheck.py` before AND after, and re-stamp the `SRC:` hash**, so
-   the change is visible to the instrument rather than surfacing as an
-   unattributable `BODY-CHANGED` in 99's Pass A.
-2. ⛔ **99's Pass D treats any unexplained change to a KEEP module as a finding.**
-   This module is named there as an expected exception — confirm that note is
-   present and accurate when you close out, and if you touch anything beyond the
-   two divergences, say so explicitly or the audit will correctly flag it.
-
-⭐ **What you may NOT claim here, beyond §8's list:** F116 has never been
-reproduced in a log and produces no throw — it is silent by construction. Neither
-the existing repair nor these two changes has ever run in a game. ⛔ A boot log
-reading `TrackSalvageWipe: applied` proves the module loaded, nothing more.
-
-## 8 · What may NOT be claimed
-
-- ⛔ **Not "tested".** Nothing here has run in a game. Trains and landscaping
-  have never been exercised on 1.1.0 at all — the 09-08 boot was menu-only.
+- ⛔ **Not "tested".** Nothing here has run in a game. Trains, landscaping and
+  vacuum walking have never been exercised on 1.1.0 at all — the 09-08 boot was
+  menu-only, and a `applied` log line proves the module loaded, nothing more.
 - ⛔ Not "matches vanilla" unless `bodycheck.py` says the pin matches; your
   reading of a diff is not the control.
+- ⛔ Not "F-10 is fixed" — its premise rests on an unread C-side function (§4).
 - ⛔ Not "the gates are unnecessary now". They are measured and correct; you are
   adding repairs beside them, not replacing them.
+- ⛔ Not "20/20" for F-8 on 1.1.0 — that figure predates the reach narrowing.
 
-## 9 · Close-out
+## 10 · Close-out
 
-Green gates. Your outbox to `06` and `99` must name, per module: the 1.1.0 lines
-you copied, what you deliberately did NOT carry over, the gate's decline
-condition, and **what has not been exercised in play** — which for these three is
-everything. Route the in-play controls (first train leaves its platform, a
-landscaping site progresses) to the checklist; they have been owed since
-hotfix 1. Strike your README row, `git rm` this file, commit together, push.
+Green gates. Your outbox to `06` and `99` must name, **per module**: the 1.1.0
+lines you copied, what you deliberately did NOT carry over, the gate's decline
+condition, whether its probe is deliberate, and **what has not been exercised in
+play** — which here is everything. Route the in-play controls (first train leaves
+its platform, a landscaping site progresses, a colonist does not cross vacuum) to
+the checklist; they have been owed since hotfix 1. Strike your README row,
+`git rm` this file, commit together, push.
 
 ## Notes from upstream
+*(⚠️ This inbox is CARRIED VERBATIM from `04_RECOPIES.md`, which is `git rm`'d
+on its own close-out. It is a full copy, not a pointer — chain rule 4. Link 01's
+probe spec below is the one you cannot work without.)*
 
 *(From the authoring session, `smr-bugfixpack-91`, 2026-09-08.)*
 

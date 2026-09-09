@@ -73,10 +73,13 @@ nobody has established it. The module ships repaired either way — but if the
 close-out or any patch-note line implies the defect was *confirmed*, that is a
 finding. A ruling settles what we do, never what is true.
 
-⭐ **If the link split to `04b`, that was PRE-AUTHORISED by the owner** (rule 4),
-not a failure to finish — audit the two halves as one body of work and check
-nothing fell down the gap between them: every module in `04`'s §1 order actually
-landed somewhere, and `04b` carried a real inbox rather than a pointer.
+⭐ **04 WAS SPLIT into `04` (group B + the F116 edit) and `04b` (group C), before
+either half ran** — pre-authorised by the owner under rule 4, not a failure to
+finish. ⚠️ **Audit the two halves as ONE body of work** and check nothing fell
+down the gap: all six modules landed somewhere, `04b` carried a real inbox rather
+than a pointer, and neither half quietly dropped a module it assumed the other
+had. ⛔ If a third link (`04c`) appeared for F-9, the same applies — that too was
+pre-authorised, and a single-module link is a legitimate shape here.
 
 ⛔ **A body diff, never a grep.** F116 was filed off a keyword grep; two of its
 four claims did not survive a real structural diff and a fifth divergence

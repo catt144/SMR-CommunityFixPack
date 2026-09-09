@@ -16,7 +16,8 @@ Authored 2026-09-08 by `smr-bugfixpack-91` under `prompts/HOTFIX_2_HANDOFF.md`
 | ~~01~~ | ~~`01_CORE_AND_TOOLING.md`~~ | Fable | no | ✅ **DONE 2026-09-08** (`smr-bugfixpack-25`): `probe` form `6d452a3` · `tools/bodycheck.py` + falsifier `401f8a0` · `FIX_POLICY` §2a branch guard + §2b manifest grammar `6db7457` · all 35 KEEP modules stamped `e2490f3`. Outbox is in 02–05 and 99 |
 | ~~02~~ | ~~`02_REMOVE_BLOCK.md`~~ | Opus | no | ✅ **DONE 2026-09-08** (`smr-bugfixpack-11`): ck98 ruled DELETE + ck117 ruled KEEP, both in-session. 36 modules deleted with `items.lua` **and** `metadata.lua`'s `code` list, 81→45 in all three `2dc1dbe` · R-7 half-edit + the sanitizer's dead F03 pass `f707903` · 43 bug entries stamped `9b0b82c` · 36 site fix-list entries removed (`SMR-CommunityMods` `7cef4f3`) · `C54` filed. ⛔ No F-5 cleanup — owner ruled it off (ck120). Outbox is in 03, 04, 06 and 99 |
 | 03 | `03_HARMS.md` | Opus | ⛔ blocked on ck-F-2 | the applies-today repairs on modules that SURVIVE: F-1 probe-gate + save re-base, F-2 exemption (if kept), F-3 delete half (a) |
-| 04 | `04_RECOPIES.md` | Opus | ✅ **no — fully unblocked** (ck123) | the re-copies: F-6, F-7 (B) and F-8, F-9, F-10 (C — **all three RULED IN by ck123**, partly reverting ck109; keep every gate), each with its `SRC:`/`DEFECT:` manifest and a 1.0.7 decline · **plus §7: `Fix_TrackSalvageWipe` (F116), the two divergences ruled as ck111 + ck119 — a scoped edit to a KEEP module, needs a re-stamp**. ⭐ **A `04b` split is OWNER-PRE-AUTHORISED** (rule 4) — suggested cut: B + §7 here, group C in `04b`. Six modules is too much for one context and the owner said so first |
+| 04 | `04_RECOPIES.md` | Opus | ✅ no | group **B** only: F-6, F-7, each with its `SRC:`/`DEFECT:` manifest and a 1.0.7 decline · **plus §7: `Fix_TrackSalvageWipe` (F116), the two divergences ruled as ck111 + ck119 — a scoped edit to a KEEP module, needs a re-stamp** |
+| 04b | `04b_RECOPIES_C.md` | Opus | ✅ no | group **C**: F-8, F-9, F-10 — **all three RULED IN by ck123**, partly reverting ck109; every gate STAYS. ⛔ Highest-risk work in the patch; F-9 is a ~98-line rewritten function and may split again to `04c` |
 | 05 | `05_TOOLS_TAIL.md` | Opus | no | `sigcheck.py` over `SetGlobal` sites (A-4), `logscan.py` heal-aware + benign-latch retire list (A-2/A-3), A-1 `GeneForging` |
 | 06 | `06_TEXT.md` | Opus | no | ck112/113 store wording, `metadata.lua` `last_changes`, `UPLOAD_WORKFLOW` §3 paste backups, the site fix list |
 | 99 | `99_TERMINAL_AUDIT.md` | Fable | reports to owner | adversarial backward QA over the whole result; SHIP / SHIP WITH CHANGES / DO NOT SHIP |
@@ -24,8 +25,21 @@ Authored 2026-09-08 by `smr-bugfixpack-91` under `prompts/HOTFIX_2_HANDOFF.md`
 **Ordering.** 01 is strictly first — 02, 03 and 04 all use `bodycheck.py` and the
 `probe` form. **02 before 03 and 04**, because 02 owns `items.lua` and the
 `metadata.lua` `code` list and no other prompt may touch them. 03 and 04 are
-independent of each other and may run in either order. 05 and 06 are independent
-of everything except 01. 99 is last and runs only on an empty folder.
+independent of each other and may run in either order. **04 and 04b are also
+independent of each other** — either order, or in parallel by two sessions, since
+they share no module and no file. 05 and 06 are independent of everything except
+01. 99 is last and runs only on an empty folder.
+
+⭐ **Why 04 split into 04 + 04b, recorded per `CHAIN_METHOD` §3.** Split
+2026-09-08 **before either half ran**, under rule 4 and the owner's explicit
+pre-authorisation (ck123: *"If the work is really that heavy we should have a 04
+and and 04b"*). Six modules at this discipline — a body diff, a re-copy, a
+manifest stamp, a `probe` gate, `bodycheck.py` either side and its own commit
+each — do not fit one context, and F-9 alone is a ~98-line rewritten function.
+⚠️ The judgement was made up front rather than left to a session to discover
+mid-link, because **a link cannot see its own context budget** (owner,
+2026-09-08). ⛔ Both halves carry a FULL inbox; neither points at the other for
+link 01's probe spec, because each `git rm`s itself on close-out.
 
 ⚠️ **Deviation from the handoff's suggested split, stated per `CHAIN_METHOD` §3.**
 The handoff put F-4/F-5/R-20 in the "harms" prompt and the rest of the removals
