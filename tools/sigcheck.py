@@ -17,12 +17,42 @@ by 5. Check the THING, not its label.
     python tools/sigcheck.py                    # compare against the live source
     python tools/sigcheck.py --src <path>       # point at another ModTools/Src
     python tools/sigcheck.py --all              # include matches, not just problems
+    python tools/sigcheck.py --selftest         # the falsifier for the SetGlobal leg
 
 WHAT IT REPORTS
   MISMATCH   our parameter list differs from the shipped one -- read every one
   ABSENT     we define a name the shipped tree no longer declares anywhere
   MULTI      several shipped declarations share the name; shown for a human
+  UNRESOLVED a `SetGlobal("Name", <expr>)` whose <expr> this tool cannot follow
+             to a parameter list. NOT a pass: it is a site with no arity bound
+             at all, printed so it cannot hide inside the OK count
   OK         parameter lists agree
+
+TWO KINDS OF SITE ARE READ (2026-09-09, hotfix2 link 05, augment A-4). The
+original tool read `function Name(...)` declarations only, so every global the
+pack installs through `SMRFixPack.SetGlobal("Name", <expr>)` -- the pack's ONLY
+sanctioned route to a global replacement (FIX_POLICY §1.4b) -- was outside it
+entirely, along with the anonymous function literals those sites pass. Both
+forms are now resolved to a parameter list and checked like any other site:
+
+    SMRFixPack.SetGlobal("WaitBombard", replacement, ...)   -- a named local:
+        resolved to the LAST `local replacement = function(...)`,
+        `replacement = function(...)` or `local function replacement(...)`
+        at or above the SetGlobal line in the same file (the forward-declared
+        form `local replacement` / `replacement = function(...)` is the shape
+        Fix_BombardmentSpread uses, so it is not optional)
+    SMRFixPack.SetGlobal("GetRareTraitChance", function() ... )  -- a literal:
+        read straight off the SetGlobal line
+
+Anything else -- a value on a later line, a call, a table index -- is reported
+UNRESOLVED rather than skipped. A site this tool cannot follow is a site with
+no arity bound, and F115 is what an unbounded site costs.
+
+⚠️ EXTENDING THE SIGHT DOES NOT EXTEND THE VERDICT. This tool is an ARITY bound
+and stays one. A `SetGlobal` site that now reads OK has had its parameter list
+compared and NOTHING ELSE: the body behind it is exactly as unread as it was
+before. F114 shipped because "the instrument was green" was allowed to mean
+"the code was checked"; do not let a wider green mean a stronger one.
 
 ⚠️ WHAT IT CANNOT DECIDE, AND MUST NOT BE READ AS DECIDING. A matching arity is
 NOT proof a replacement is still correct: a same-named, same-arity function
@@ -47,6 +77,36 @@ DEF_METHOD = re.compile(r"^\s*function\s+([A-Za-z_][\w.]*)\s*([:.])\s*([A-Za-z_]
 DEF_GLOBAL = re.compile(r"^\s*function\s+([A-Za-z_]\w*)\s*\(([^)]*)\)")
 # `local C = Colonist` / `local C = rawget(_G, "Colonist")`
 ALIAS = re.compile(r"^\s*local\s+([A-Za-z_]\w*)\s*=\s*(?:rawget\s*\(\s*_G\s*,\s*[\"']([\w]+)[\"']\s*\)|([A-Z][\w]*))\s*$")
+
+# `SMRFixPack.SetGlobal("Name", <expr>` -- the pack's only sanctioned route to a
+# global replacement (FIX_POLICY §1.4b), and invisible to DEF_GLOBAL above.
+SETGLOBAL = re.compile(r"""SMRFixPack\.SetGlobal\s*\(\s*["'](?P<name>\w+)["']\s*,\s*(?P<val>.+)$""")
+# the value is an anonymous literal, right there on the line
+VAL_LITERAL = re.compile(r"^function\s*\(([^)]*)\)")
+# ...or an identifier we then have to resolve backwards in the file
+VAL_IDENT = re.compile(r"^([A-Za-z_]\w*)\s*(?:,|\)|$)")
+
+
+def resolve_local_fn(lines, ident, before):
+    """Parameter list of `ident` as a function, declared at or above line `before`.
+
+    Three declaration shapes, all present in the pack:
+        local ident = function(a, b)
+        ident = function(a, b)          -- after a forward `local ident`
+        local function ident(a, b)
+    The LAST one at or above the use wins, which is Lua's own binding order for
+    the straight-line module bodies these sites live in. Returns None when the
+    name resolves to nothing this tool can read -- reported UNRESOLVED, never
+    silently dropped.
+    """
+    assign = re.compile(r"^\s*(?:local\s+)?%s\s*=\s*function\s*\(([^)]*)\)" % re.escape(ident))
+    declfn = re.compile(r"^\s*local\s+function\s+%s\s*\(([^)]*)\)" % re.escape(ident))
+    found = None
+    for i, line in enumerate(lines[:before], 1):
+        m = assign.match(line) or declfn.match(line)
+        if m:
+            found = params(m.group(1))
+    return found
 
 # names that are ours, not the game's
 OURS = ("SMRFixPack", "OnMsg", "SMRTest", "ctx")
@@ -85,13 +145,21 @@ def scan_source(src):
     return table
 
 
-def scan_pack():
-    """Our replacement sites: (file, line, cls_or_None, name, params)."""
+def scan_pack(code=None):
+    """Our replacement sites: (file, line, cls_or_None, name, params, how).
+
+    `how` records HOW the parameter list was reached -- "declaration" for a
+    `function Name(...)` line, "SetGlobal literal" / "SetGlobal local <ident>"
+    for the two SetGlobal forms. It is printed, because a reader of an OK row
+    is entitled to know which of them the tool actually resolved. `params` is
+    None for an UNRESOLVED SetGlobal.
+    """
+    code = code or CODE
     sites = []
-    for fn in sorted(os.listdir(CODE)):
+    for fn in sorted(os.listdir(code)):
         if not fn.endswith(".lua"):
             continue
-        path = os.path.join(CODE, fn)
+        path = os.path.join(code, fn)
         aliases = {}
         with open(path, "r", encoding="utf-8", errors="replace") as fh:
             lines = fh.readlines()
@@ -105,14 +173,33 @@ def scan_pack():
                 cls, _sep, meth, ps = m.groups()
                 if cls.split(".")[0] in OURS:
                     continue
-                sites.append((fn, n, aliases.get(cls, cls), meth, params(ps)))
+                sites.append((fn, n, aliases.get(cls, cls), meth, params(ps), "declaration"))
                 continue
             m = DEF_GLOBAL.match(line)
             if m:
                 name, ps = m.groups()
                 if name in OURS or name.startswith("OnMsg"):
                     continue
-                sites.append((fn, n, None, name, params(ps)))
+                sites.append((fn, n, None, name, params(ps), "declaration"))
+                continue
+            m = SETGLOBAL.search(line)
+            if m:
+                name, val = m.group("name"), m.group("val").strip()
+                lit = VAL_LITERAL.match(val)
+                if lit:
+                    sites.append((fn, n, None, name, params(lit.group(1)),
+                                  "SetGlobal literal"))
+                    continue
+                ident = VAL_IDENT.match(val)
+                if ident:
+                    ps = resolve_local_fn(lines, ident.group(1), n)
+                    if ps is not None:
+                        sites.append((fn, n, None, name, ps,
+                                      "SetGlobal local %s" % ident.group(1)))
+                        continue
+                # a value on a later line, a call, a table index: NOT a pass.
+                sites.append((fn, n, None, name, None,
+                              "SetGlobal %s" % val.rstrip(",")[:40]))
     return sites
 
 
@@ -121,7 +208,12 @@ def main():
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--src", default=DEFAULT_SRC)
     ap.add_argument("--all", action="store_true", help="also print OK rows")
+    ap.add_argument("--selftest", action="store_true",
+                    help="falsify the A-4 SetGlobal resolution, both directions")
     a = ap.parse_args()
+
+    if a.selftest:
+        return selftest()
 
     if not os.path.isdir(a.src):
         print("source tree not found: %s" % a.src)
@@ -130,13 +222,19 @@ def main():
     shipped = scan_source(a.src)
     sites = scan_pack()
 
-    counts = {"MISMATCH": 0, "ABSENT": 0, "MULTI": 0, "OK": 0}
+    counts = {"MISMATCH": 0, "ABSENT": 0, "MULTI": 0, "UNRESOLVED": 0, "OK": 0}
     rows = []
-    for fn, ln, cls, name, ours in sites:
+    for fn, ln, cls, name, ours, how in sites:
+        if ours is None:
+            # a SetGlobal whose value this tool could not follow. It has no
+            # arity bound at all -- the one thing it must not do is pass.
+            counts["UNRESOLVED"] += 1
+            rows.append(("UNRESOLVED", fn, ln, cls, name, [], None, how))
+            continue
         cands = shipped.get(name, [])
         if not cands:
             counts["ABSENT"] += 1
-            rows.append(("ABSENT", fn, ln, cls, name, ours, None, ""))
+            rows.append(("ABSENT", fn, ln, cls, name, ours, None, how))
             continue
         # prefer a declaration on the same class
         same = [c for c in cands if cls and c[0] == cls]
@@ -165,32 +263,163 @@ def main():
             counts["OK"] += 1
             if a.all:
                 rows.append(("OK", fn, ln, cls, name, ours, ok[1],
-                             "%s:%d" % (ok[2], ok[3])))
+                             "%s:%d  via %s" % (ok[2], ok[3], how)))
             continue
         best = pool[0]
         kind = "MISMATCH" if len(pool) == 1 or same else "MULTI"
         counts[kind] += 1
         alts = "; ".join("%s(%s) @%s:%d" % (c[0] or "<global>", ", ".join(c[1]), c[2], c[3])
                          for c in pool[:4])
-        rows.append((kind, fn, ln, cls, name, ours, best[1], alts))
+        rows.append((kind, fn, ln, cls, name, ours, best[1], alts + "  via " + how))
 
-    order = {"MISMATCH": 0, "ABSENT": 1, "MULTI": 2, "OK": 3}
+    order = {"MISMATCH": 0, "ABSENT": 1, "UNRESOLVED": 2, "MULTI": 3, "OK": 4}
     rows.sort(key=lambda r: (order[r[0]], r[1], r[2]))
 
     for kind, fn, ln, cls, name, ours, theirs, note in rows:
         target = ("%s:%s" % (cls, name)) if cls else name
-        print("%-9s %s:%d" % (kind, fn, ln))
-        print("            ours    %s(%s)" % (target, ", ".join(ours)))
+        print("%-10s %s:%d" % (kind, fn, ln))
+        if kind == "UNRESOLVED":
+            print("            ours    %s(?)  -- value not followable" % target)
+        else:
+            print("            ours    %s(%s)" % (target, ", ".join(ours)))
         if theirs is not None:
             print("            shipped %s(%s)" % (name, ", ".join(theirs)))
         if note:
             print("            %s" % note)
 
+    setglobal = sum(1 for s in sites if s[5].startswith("SetGlobal"))
     print("=" * 78)
-    print("%d replacement site(s): %d MISMATCH, %d ABSENT, %d MULTI, %d OK" % (
-        len(sites), counts["MISMATCH"], counts["ABSENT"], counts["MULTI"], counts["OK"]))
+    print("%d replacement site(s) (%d of them SetGlobal): "
+          "%d MISMATCH, %d ABSENT, %d MULTI, %d UNRESOLVED, %d OK" % (
+              len(sites), setglobal, counts["MISMATCH"], counts["ABSENT"],
+              counts["MULTI"], counts["UNRESOLVED"], counts["OK"]))
     print("An OK is NOT a clearance: a same-name, same-arity function whose BODY")
     print("changed is invisible here, exactly as it is to the runtime self-checks.")
+    return 0
+
+
+# --- the falsifier -----------------------------------------------------------
+#
+# A tool that returns GREEN on everything is indistinguishable from a broken
+# one (hotfix2 link 01's rule, and this project has now shipped two checkers
+# that silently accused clean files). The A-4 extension adds INFERENCE -- it
+# follows an identifier backwards through a file to a parameter list -- so it
+# needs legs that pin both directions: the resolution must find the right list,
+# and it must FAIL LOUDLY rather than pass when it cannot.
+
+SELFTEST_SHIPPED = '''\
+function TriggerCaveIn(map, pos)
+end
+function WaitBombard(obj, radius, count, delay_min, delay_max)
+end
+function IsLRTransportAvailable(city)
+end
+function LandscapeForEachUnit(map, mark, callback)
+end
+'''
+
+SELFTEST_MODULE = '''\
+-- fixture
+	local wrapped = function(map, pos, ...)
+		return orig(map, pos, ...)
+	end
+	local err = SMRFixPack.SetGlobal("TriggerCaveIn", wrapped,
+		"could not install the TriggerCaveIn wrapper")
+
+	local replacement
+	replacement = function(obj, radius, count, delay_min, delay_max)
+	end
+	return SMRFixPack.SetGlobal("WaitBombard", replacement, "nope")
+
+	return SMRFixPack.SetGlobal("IsLRTransportAvailable", function(city)
+	end)
+
+	local shifted = function(mark, callback, ...)
+	end
+	SMRFixPack.SetGlobal("LandscapeForEachUnit", shifted, "F115's shape")
+
+	SMRFixPack.SetGlobal("GetTable", SomeTable.field, "not a function literal")
+'''
+
+
+def selftest():
+    import tempfile
+    fails = []
+
+    def check(label, cond, detail=""):
+        print("  %-4s %s%s" % ("ok" if cond else "FAIL", label,
+                               ("   " + detail) if detail and not cond else ""))
+        if not cond:
+            fails.append(label)
+
+    tmp = tempfile.mkdtemp(prefix="sigcheck_selftest_")
+    src = os.path.join(tmp, "Src")
+    code = os.path.join(tmp, "Code")
+    os.makedirs(os.path.join(src, "Lua"))
+    os.makedirs(code)
+    with open(os.path.join(src, "Lua", "Fixture.lua"), "w", encoding="utf-8") as fh:
+        fh.write(SELFTEST_SHIPPED)
+    with open(os.path.join(code, "Fix_Selftest.lua"), "w", encoding="utf-8") as fh:
+        fh.write(SELFTEST_MODULE)
+
+    sites = {s[3]: s for s in scan_pack(code)}
+
+    print("A-4 SetGlobal resolution")
+    # 1. the named-local form, declared `local X = function(...)`
+    check("local X = function(...) resolves",
+          sites.get("TriggerCaveIn", (None,) * 6)[4] == ["map", "pos", "..."],
+          repr(sites.get("TriggerCaveIn")))
+    # 2. the FORWARD-DECLARED form. Fix_BombardmentSpread uses it, and a
+    #    resolver that only knew `local X = function` would silently miss it --
+    #    silently, because the site would simply not be reported at all.
+    check("forward-declared `local X` / `X = function(...)` resolves",
+          sites.get("WaitBombard", (None,) * 6)[4]
+          == ["obj", "radius", "count", "delay_min", "delay_max"],
+          repr(sites.get("WaitBombard")))
+    # 3. the anonymous literal, read off the SetGlobal line
+    check("inline `function(...)` literal resolves",
+          sites.get("IsLRTransportAvailable", (None,) * 6)[4] == ["city"],
+          repr(sites.get("IsLRTransportAvailable")))
+    # 4. THE CONVERSE LEG. A value that is not a function this tool can follow
+    #    must land as UNRESOLVED, never be dropped and never be counted OK.
+    check("unfollowable value is reported, not skipped",
+          "GetTable" in sites and sites["GetTable"][4] is None,
+          repr(sites.get("GetTable")))
+
+    print("A-4 comparison against a shipped tree")
+    shipped = scan_source(src)
+    got = {}
+    for fn, ln, cls, name, ours, how in scan_pack(code):
+        if ours is None:
+            got[name] = "UNRESOLVED"
+            continue
+        cands = shipped.get(name, [])
+        if not cands:
+            got[name] = "ABSENT"
+            continue
+        ours_f = [p for p in ours if p != "..."]
+        theirs_f = [p for p in cands[0][1] if p != "..."]
+        n = min(len(ours_f), len(theirs_f))
+        shifted_ = any(ours_f[i] != theirs_f[i] for i in range(n))
+        short = len(ours_f) < len(theirs_f) and "..." not in ours
+        got[name] = "OK" if not shifted_ and not short else "MISMATCH"
+    # 5. THE RED LEG, and it is F115's actual shape: a SetGlobal site whose
+    #    parameters are one slot late. Before A-4 this site was invisible; the
+    #    point of the extension is that it now goes RED.
+    check("F115's shape goes MISMATCH through a SetGlobal site",
+          got.get("LandscapeForEachUnit") == "MISMATCH", repr(got))
+    # 6. ...and the negative control, so leg 5 cannot pass by being always red.
+    check("the three correct SetGlobal sites stay OK",
+          [got.get(k) for k in ("TriggerCaveIn", "WaitBombard",
+                                "IsLRTransportAvailable")] == ["OK"] * 3,
+          repr(got))
+
+    print("=" * 78)
+    if fails:
+        print("SELFTEST FAILED: %s" % ", ".join(fails))
+        return 1
+    print("selftest: 6 leg(s) pass. This falsifies the A-4 RESOLUTION only --")
+    print("it says nothing about whether an OK row's BODY is still correct.")
     return 0
 
 
