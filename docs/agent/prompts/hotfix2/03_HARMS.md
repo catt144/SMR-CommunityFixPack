@@ -338,3 +338,55 @@ directly**, because a regex matches what is present:
 class (c), semantics moving under a wrapper, is still seen by **nothing**. Not
 "the KEEP set is verified". Not "probes are safe" in general. No status moved: a
 tool run is not a test.
+
+### From link 02 — the REMOVE block (36 deleted, 1 half-edited, 1 kept)
+
+*(Link 02, `smr-bugfixpack-11`, 2026-09-08. Commits `2dc1dbe` the 36 deletions ·
+`f707903` R-7 + the F03 pass · `9b0b82c` 43 bug entries · site `7cef4f3`.
+⛔ Nothing was run in a game; no status moved.)*
+
+**The three rulings that unblocked this link, because they bind you too.**
+
+* ⚖️ **ck98 = DELETE, not gate.** Owner, verbatim: *"I am fine with the 1.0.7
+  issue, we are giving a path which we don't have to do. The main mod serves the
+  current patch period."* There is no 1.0.7 line in the live pack.
+  ⛔ **This does NOT relax ck118's constraint on the re-copies.** Our
+  `lua_revision` and 1.1.0's minimums are all 350453 (`EF-077`), so hotfix 2
+  installs on a 1.0.7 rig with no warning of any kind. Delete-not-gate is a
+  ruling about the REMOVE set only; a re-copied 1.1.0 body applied on a 1.0.7
+  function is still the F114 failure mode in reverse.
+* ⚖️ **ck117 = KEEP `90_SaveSanitizer`** (F35 + F48). It is NOT in the deletion
+  set and its `items.lua` entry stays. Only the dead F03 pass was removed.
+* ⚖️ **ck120 = the owner's general principle, and it is worth applying to your
+  own calls:** *"we fix anything negatives, a small positive I am not as
+  concerned about."* That is what killed the F-5 save cleanup — the stranded
+  Astrogeologist +10% is an unearned bonus, so it is not chased. A **loss** is a
+  different matter and gets fixed.
+
+**What is now true of the tree.** `Code/*.lua` 81 → **45**; `items.lua` 81 → 45;
+`metadata.lua`'s `code` list 81 → 45 (all three, per `H-10`); modules 80 → **44**
+registered. `bodycheck.py` NO-MANIFEST **46 → 10**, which is link 01's predicted
+landing point and is your free cross-check that the right set left.
+
+**For you specifically — three of the six applies-today harms are GONE, so check
+your list before you start.** `FirstAsteroidPrefabs` (F-4),
+`AstrogeologistExtractors` (F-5) and `DisasterPredictionLeak` (R-20) were
+deleted by this link, because their disposition was REMOVE rather than repair.
+If your brief still lists them as things to fix, they are already handled — do
+not re-derive them and do not re-add them.
+
+* **F-5 owes you nothing.** The save cleanup the brief calls for was ruled OFF
+  (ck120 above). ⛔ Do not build it. What I verified before accepting that: the
+  persisted residue is the save's own deserialised copy of a vanilla
+  `Effect_ModifyLabel`, holding a vanilla `prop`, in a vanilla container
+  (`Fix_AstrogeologistExtractors.lua:183-199` described the key shape) — nothing
+  references our code, so the save loads clean with the module gone.
+* **The ~3-minute Astrogeologist control** the brief told me to batch with yours
+  is now on the checklist as OPTIONAL, and its expected result is INVERTED: the
+  two extractors should still carry the +10%, because nothing cleans it. It
+  confirms we understood the residue, it does not verify a repair.
+* **R-20's harm was confirmed, not inherited.** 1.1.0 sets
+  `g_DisastersPredicted.DisasterNormalRains = true` at
+  `TerraformingDisasters.lua:349` with no notification behind it, and our `NewDay`
+  sweep cleared every flag lacking a live notification
+  (`Fix_DisasterPredictionLeak.lua:97-103`). Removal is the fix.

@@ -11,17 +11,17 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   citation base is GONE from disk (`EF-075`). ⛔ Trust runtime over source reads (`EF-078`: predicted 6
   self-disabled, measured 13).
   ⛔ **1.0.7 SAVES CANNOT LOAD ON 1.1.0** (`EF-079`) ⇒ the ENTIRE fixture library is branch-locked; a 1.1.0 leg
-  needs a NEW colony provisioned from scratch (hours). Override exists but is triage-only (`EF-080`). Decision 98.
+  needs a NEW colony provisioned from scratch (hours). Override exists but is triage-only (`EF-080`).
   ✅ F114 CAUSE CONFIRMED + GATED (ck106, `8bc6821`).
   ✅ Opt-in pack UNTICKED (ck43): ZERO `applied` lines since 15.21 — no confound.
   ✅ **F115 GATED** (ck109, `628ea4d`): gate = the `Landscapes` global is gone (`EF-082`); body untouched ⇒
   `sigcheck` MISMATCH there is CORRECT.
   ✅ **F116 REPAIRED in-body** (`add94b3`), NOT gated ⇒ it still applies and is the ONLY new code shipped.
   Source-derived, NEVER reproduced.
-  ⭐ **1.1.0 RE-VERIFICATION DONE 09-08, all 80 modules read: 10 FIX / 35 REMOVE / 35 KEEP** (`reports/
-  PACK_1_1_0_REVERIFICATION.md`, ck114-117; QA'd by 3 fresh readers, `reports/VANILLA_FIX_QA.md` §0, 0 flips).
-  ⛔ 6 APPLIED modules are WRONG today (named in ck114); 32 defects were FIXED by vanilla and no self-check saw
-  it. Two removals owe save cleanups (QA §0.2-0.3).
+  ⭐ **1.1.0 RE-VERIFICATION 09-08: 10 FIX / 35 REMOVE / 35 KEEP** (`reports/PACK_1_1_0_REVERIFICATION.md`,
+  ck114-117; QA'd by 3 fresh readers, `reports/VANILLA_FIX_QA.md` §0, 0 flips).
+  ⭐ **LINK 02 DONE 09-08 `2dc1dbe`: 36 modules DELETED** — ck98=delete · ck117=KEEP Sanitizer · ck120=no
+  F-5 cleanup. 81→45 in Code+items+`code` (H-10). 0 flips in 37 re-derived rows.
   ✅✅ BOTH GATES MEASURED 09-08 (`archive/logs/gated110_*`): 63 applied / 17 inactive / 14 named as predicted,
   0 errors; both `update_suspect` routes CONFIRMED. ⛔ MENU-ONLY ⇒ trains/landscaping NOT exercised in play.
   ✅ **HOTFIX_1_AUDIT DONE 09-08: SHIP WITH CHANGES — text-only (ck112/113), code clean**
@@ -31,7 +31,7 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   ⛔ Never re-upload to "fix" a version number — each upload bumps again (H-02). ⛔ Every upload OVERWRITES both
   page bodies from `metadata.lua`; `description` IS the full card (08-24). ⛔ Auto-fill has NEVER delivered a
   clean page in 2 cycles ⇒ `UPLOAD_WORKFLOW` §3 paste backups REQUIRED.
-- ⭐ SITE deployed 08-30, **82** live fix-list entries. ⛔ `publish-site.yml` is `workflow_dispatch` only —
+- ⭐ SITE deployed 08-30, **46** live fix-list entries (was 82). ⛔ `publish-site.yml` is `workflow_dispatch` only —
   committing never publishes. ⛔ Never quote a stored "deployed = <sha>"; read the deployments API
   (`prompts/SITE_AUDIT.md`).
 - Post-launch LIVE: F105, F107, F108 (v4), F110 (v5); F104 NOT OURS. ⛔ F107 field route untested. ⛔ Read the
@@ -87,11 +87,11 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 - STATE.md format: most efficient and safest — one fact per line, byte caps do the read job (08-18, item 42).
 
 ## Open owner decisions (bodies in `docs/PLAYTEST_CHECKLIST.md` → "Decisions waiting on you")
-- ⛔ 98 1.0.7 branch: pin back or rebaseline (GATES 99-101) · 99 disposition of the self-disabled modules ·
+- 98 rig half only (⛔ Steam = ONE branch at a time, owner 09-08) · 99 disposition of the self-disabled ·
   100 say anything to players yet (rec no) · 101 accept the re-verification chain shape.
 - 112 card self-check. ⛔ 111+113 RULED 09-08; 111=adopt rehome, +119 filed — both in `hotfix2/04` §7.
-- ⛔ BLOCKS the chain: 98 delete-vs-gate the 34 · 117 non-Steam ⇒ keep SaveSanitizer · C repair F-8/9/10;
-  F-2 fix-or-remove. 118 RULED: 1.0.7 gets a frozen v5 release + site page ⇒ re-copies MUST decline on 1.0.7.
+- ⛔ BLOCKS the chain: C repair F-8/9/10; F-2 fix-or-remove. ✅ 98=DELETE · 117=KEEP Sanitizer · 120=no F-5
+  cleanup, all RULED 09-08. 118: 1.0.7 gets frozen v5 ⇒ re-copies MUST decline on 1.0.7. 121 low-Food = feature?
 - 73 blame surface — harden or not · 76 confirm (a) was a ruling not a leaning · 53 harden now or in 1.0.1
   (rec 1.0.1) · 51 both-packs leg timing (rec after launch) · 50 chain-vs-replace wording · 47 two modder-page
   wordings · 43 opt-in pack re-tick · 41 dialog wording + sweep cap 5→8 · 40 `smr_shuttles` name · 39 dialog re-fire.
@@ -99,9 +99,9 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 ## Build state — `python tools/doccheck.py --emit-counts`, never hand-typed
 ```
 BUILD STATE (emitted by tools/doccheck.py)
-- modules: 80 registered (80 default-active, 0 optional-gated files)
-- Code/*.lua files: 81
+- modules: 44 registered (44 default-active, 0 optional-gated files)
+- Code/*.lua files: 45
 - TestKit probes: 100
-- BUGS index rows: 116 F + 12 D + 53 C
+- BUGS index rows: 116 F + 12 D + 54 C
 ```
 Re-emit after any change. Game: records describe **1.0.7.396349** (`EF-014`); INSTALLED is now **1.1.0** (`EF-075`).

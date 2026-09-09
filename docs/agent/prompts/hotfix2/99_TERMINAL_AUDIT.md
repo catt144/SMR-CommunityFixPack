@@ -50,8 +50,33 @@ the change against it. **The QA's pinned shapes are your checklist** —
 - F-6: does the tutorial return precede the gate? Is the flag stamped on the
   confirmed path, not on `Apply` entry?
 - F-7: is `not self.refuel_disabled` carried?
-- F-9: is it a re-copy and **not** a distance pre-wrapper?
+- F-8: repaired on `(map, mark, callback, ...)` reading `map.Landscapes[mark]` —
+  ⛔ not the old signature, not the bare `Landscapes` global? Is the F115 gate
+  still there?
+- F-9: is it a re-copy and **not** a distance pre-wrapper? ⛔ And is its gate now
+  **DELIBERATE**? It was inactive BY ACCIDENT (a `const.` → `g_Consts` rename
+  broke the path spec); an accidental gate is one rename from silently re-arming
+  a stale body, so "still inactive" is NOT a pass here.
 - F-10: is the BlackCube hook (`Train.lua:800-802`) carried?
+
+⚖️ **Group C (F-8, F-9, F-10) was RULED IN by the owner as ck123** — "all get
+fixed" — which **partly and deliberately reverts ck109** ("gate, not repair" for
+F-8). ⛔ Do not report that reversal as drift; ck109 was ruled mid-emergency with
+a live P1, ck123 in a considered cycle. ⚠️ **What you SHOULD check is that the
+gates survived it.** Re-arming a fix on top of a gate is the design; a gate
+quietly removed to make a repair work is a finding, and it would also break the
+1.0.7 decline (ck118).
+
+⛔ **F-10 has an UNREAD PREMISE and the ruling did not change that.** Whether a
+`rfSuspended` request still reports a positive `GetTargetAmount` is C-side and
+nobody has established it. The module ships repaired either way — but if the
+close-out or any patch-note line implies the defect was *confirmed*, that is a
+finding. A ruling settles what we do, never what is true.
+
+⭐ **If the link split to `04b`, that was PRE-AUTHORISED by the owner** (rule 4),
+not a failure to finish — audit the two halves as one body of work and check
+nothing fell down the gap between them: every module in `04`'s §1 order actually
+landed somewhere, and `04b` carried a real inbox rather than a pointer.
 
 ⛔ **A body diff, never a grep.** F116 was filed off a keyword grep; two of its
 four claims did not survive a real structural diff and a fifth divergence
@@ -388,3 +413,92 @@ directly**, because a regex matches what is present:
 class (c), semantics moving under a wrapper, is still seen by **nothing**. Not
 "the KEEP set is verified". Not "probes are safe" in general. No status moved: a
 tool run is not a test.
+
+### From link 02 — the REMOVE block (36 deleted, 1 half-edited, 1 kept)
+
+*(Link 02, `smr-bugfixpack-11`, 2026-09-08. Commits `2dc1dbe` the 36 deletions ·
+`f707903` R-7 + the F03 pass · `9b0b82c` 43 bug entries · site `7cef4f3`.
+⛔ Nothing was run in a game; no status moved.)*
+
+**The three rulings that unblocked this link, because they bind you too.**
+
+* ⚖️ **ck98 = DELETE, not gate.** Owner, verbatim: *"I am fine with the 1.0.7
+  issue, we are giving a path which we don't have to do. The main mod serves the
+  current patch period."* There is no 1.0.7 line in the live pack.
+  ⛔ **This does NOT relax ck118's constraint on the re-copies.** Our
+  `lua_revision` and 1.1.0's minimums are all 350453 (`EF-077`), so hotfix 2
+  installs on a 1.0.7 rig with no warning of any kind. Delete-not-gate is a
+  ruling about the REMOVE set only; a re-copied 1.1.0 body applied on a 1.0.7
+  function is still the F114 failure mode in reverse.
+* ⚖️ **ck117 = KEEP `90_SaveSanitizer`** (F35 + F48). It is NOT in the deletion
+  set and its `items.lua` entry stays. Only the dead F03 pass was removed.
+* ⚖️ **ck120 = the owner's general principle, and it is worth applying to your
+  own calls:** *"we fix anything negatives, a small positive I am not as
+  concerned about."* That is what killed the F-5 save cleanup — the stranded
+  Astrogeologist +10% is an unearned bonus, so it is not chased. A **loss** is a
+  different matter and gets fixed.
+
+**What is now true of the tree.** `Code/*.lua` 81 → **45**; `items.lua` 81 → 45;
+`metadata.lua`'s `code` list 81 → 45 (all three, per `H-10`); modules 80 → **44**
+registered. `bodycheck.py` NO-MANIFEST **46 → 10**, which is link 01's predicted
+landing point and is your free cross-check that the right set left.
+
+**Expected boot-log consequence, for you to check.** Every one of the 36 removed
+modules should be **absent** from the `[CommunityFixPack]` block — not `inactive`,
+absent. `90_SaveSanitizer` and `Fix_DroneTransportMinors` must still be PRESENT.
+Use `tools/logscan.py --build <id>`; a hand-rolled grep undercounted throws 30 vs
+157 on 2026-09-08. ⛔ A log copied while `Mars.exe` is running is a PARTIAL log.
+
+**Drift evidence, per the brief's instruction to capture it either way: ZERO
+flips in 37 re-derived rows.** The QA flipped none in 46 and I flipped none in 37,
+which is now two independent passes agreeing. One row LOOKED like a flip and was
+not: R-14's citation failed to reproduce under my first grep because rains use
+`GameTimeRepeat`, not `MapGameTimeRepeat` — my pattern was wrong and the record
+was right. Worth keeping as evidence that a "flip" needs a second look before it
+is reported as one.
+
+**Drift caught in my own work (chain rule 5 — evidence, not shame).**
+* ⛔ **I committed another session's in-progress files.** `git add -A` in a tree
+  with concurrent sessions swept four of `smr-bugfixpack-a5`'s unstaged docs into
+  my deletion commit. Caught immediately from the CRLF warnings, undone with a
+  soft reset before any push, and re-committed by explicit pathspec. **The shared
+  git INDEX is shared state in this tree, not just the working files** — a5 hit
+  the mirror image of this from the other side. ⇒ In this repo, `git add -A` is
+  unsafe; name paths. Worth a standing line in the chain method.
+* **My first block-balance checker flagged 16 byte-identical files.** Same trap
+  link 01 recorded, reached by a different route: regex comment/string stripping
+  merged lines. I replaced it with a real lexer and gave it a 12-leg falsifier
+  (keywords inside strings and long comments, `for`/`do` double-counting,
+  `repeat`/`until`, `elseif`). All 45 files balance 0. ⚠️ There is no Lua binary
+  on this rig, so this IS the whole desk syntax check — the checker is the gate,
+  and a wrong checker is a wrong gate.
+
+**Filed, not fixed — please confirm these were routed rather than dropped.**
+* **`C54`** (new entry, filed by me): 1.1.0's own
+  `SavegameFixups.RemoveLeakedUpgradeModifiers` (`Building.lua:1313-1345`) ends on
+  an unguarded `ipairs(leaked)` where `leaked` is `nil` for a container with no
+  leaks. ⛔ **UNPROVEN** — whether `ipairs(nil)` raises in this engine was NOT
+  established, only inferred from vanilla guarding `ipairs(x or empty_table)` in
+  36 other places under `Lua/`. It needs a run, not a read.
+* **Dangling citations in files outside my fence**, all comments, none live code:
+  `00_Core.lua:239` (cites `Fix_LastTransmissionStorage` as a donor) and
+  `:304-305` (cites `Fix_AstrogeologistExtractors:174` and
+  `Fix_IndependenceTerraforming:128`); `Fix_CrystalMysteryHang.lua:39,76`,
+  `Fix_ExtenderFlapChurn.lua:48,93` and `Fix_TrackConnectorPingPong.lua:91,185`
+  (all cite `Fix_MeteorStormWedge:154/:165` as a precedent);
+  `Fix_SaintBlessing.lua:146`.
+* **A gap in `doccheck`:** it reported GREEN while `metadata.lua`'s `code` list
+  still held 81 entries and `items.lua` held 45. It counts them but does not
+  cross-check them against each other — and `H-10` is the hazard about exactly
+  that inconsistency. Link 05 owns the tools tail.
+* **A fact worth recording that is not yet one:** Steam allows only ONE branch
+  selected per install at a time (owner, 2026-09-08), so the rig cannot hold 1.0.7
+  and 1.1.0 simultaneously. That is a standing constraint on every future
+  re-verification, and it means `EF-075` stays true unless 1.1.0 access is given up.
+
+⛔ **What may NOT be claimed from this link.** Not that the removed fixes were
+never needed — they were correct on 1.0.7. Not that removal is verified safe — it
+is verified in SOURCE; nothing ran. Not that no player is affected — a 1.0.7
+player who updates loses 36 fixes. No status word was moved on any of the 43 bug
+entries, including the three that deletion resolves (F111/F112/F113), because no
+boot log has been taken since.

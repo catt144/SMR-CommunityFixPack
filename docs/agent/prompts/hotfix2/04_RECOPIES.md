@@ -25,13 +25,38 @@ and `bugs/F115.md` (how this goes wrong) · `docs/PLAYTEST_CHECKLIST.md` items
 your inbox — **01's Job D answer is your branch-guard design,
 read it verbatim before writing any gate.**
 
-## ⛔ 1 · Group C is BLOCKED on the owner
+## ✅ 1 · Group C is RULED — all three are IN
 
-**B (F-6, F-7) is unblocked — start there.**
+⚖️ **Owner ruled ck123 on 2026-09-08: REPAIR ALL THREE.** Verbatim: *"All get
+fixed, If the work is really that heavy we should have a 04 and and 04b."*
+**Nothing in this prompt is blocked any more** — B, C and §7 are all yours.
 
-**C (F-8, F-9, F-10) needs a ruling** because taking them up partly reverts ck109
-("gate, not repair" for F-8). All three defects ARE still shipped in 1.1.0; the
-gates only remove our code from the path. If unruled, do B, route C, and say so.
+⛔ **This partly and DELIBERATELY reverts ck109** ("gate, not repair" for F-8).
+That is not drift and it is not yours to re-litigate: ck109 was ruled mid-
+emergency with a live P1 in players' games, and the owner has now re-ruled it in
+a considered patch cycle. ⚠️ **KEEP the gates** in every case — they are correct
+and measured, and they are what makes the module decline on 1.0.7 (ck118). You
+are re-arming the fix ON TOP of a gate, not removing it.
+
+⭐ **A 04b SPLIT IS PRE-AUTHORISED — use it rather than rushing.** The owner
+offered it unprompted, so taking it is a success, not an admission. Chain rule 4
+is the mechanism: commit what is done, write `04b_RECOPIES_C.md` as a first-class
+chain member with a full inbox, add its row to `README.md`, and hand off. ⛔ **Do
+NOT push all six modules to the edge of one context** — this is the highest-risk
+prompt in the chain and the failure it guards against (F114) was a body copy
+written without enough room to think. **Suggested cut if you need one: B + §7
+here, group C in 04b** — B is two small edits and §7 is scoped, while C is three
+1.1.0 body copies of which F-9 is the largest surface in the patch.
+
+⚠️ **Do them in this order, hardest last:** F-8 (most player value, confirmed
+20/20 on PT-60 — ⛔ though under 1.1.0's NARROWED reach, Clear-Waste-Rock sites
+only), then F-10, then F-9. ⛔ **F-10 carries an unread premise** — whether a
+`rfSuspended` request still reports a positive `GetTargetAmount` is C-side and
+nobody has established it. Say so in your close-out; do not let the re-copy imply
+the defect was confirmed. ⛔ **F-9's gate is currently ACCIDENTAL** (a
+`const.` → `g_Consts` rename broke its path spec). Whatever else you do with
+F-9, that gate must end up DELIBERATE — an accidental gate is one rename away
+from silently re-arming a 1.0.7 body.
 
 ## 2 · Group B — unblocked
 
@@ -61,7 +86,7 @@ CONFIRMED path** (`:376-379`, `SetCommand("CmdLoad")`), **not** on `Apply` entry
 — `Apply` is now an async prompt (`:368-385`) and our pre-wrapper would suppress
 the template even when the player cancels (`CancelFlight`, `:382`).
 
-## 3 · Group C — only once ruled
+## 3 · Group C — RULED IN (ck123); keep every gate
 
 ### F-8 `LandscapeUnitFilter`
 Body still passes `callback` at `Landscaping.lua:522` while `filter_embark`
@@ -127,7 +152,9 @@ Found something out of fence? **File it, do not fix it.**
 
 ## 6 · Stop conditions
 
-- Group C unruled ⇒ do B, route C, stop cleanly.
+- ⛔ Group C is RULED IN (ck123) — there is no "unruled" stop here any more.
+  If the six modules will not fit comfortably, **split to `04b` (pre-authorised by
+  the owner) rather than rushing or dropping one.**
 - A 1.1.0 body cannot be copied without also importing a change you cannot
   justify ⇒ **STOP AND ASK.** A re-copy you do not fully understand is the F114
   shape with a new date on it.
@@ -394,3 +421,53 @@ directly**, because a regex matches what is present:
 class (c), semantics moving under a wrapper, is still seen by **nothing**. Not
 "the KEEP set is verified". Not "probes are safe" in general. No status moved: a
 tool run is not a test.
+
+### From link 02 — the REMOVE block (36 deleted, 1 half-edited, 1 kept)
+
+*(Link 02, `smr-bugfixpack-11`, 2026-09-08. Commits `2dc1dbe` the 36 deletions ·
+`f707903` R-7 + the F03 pass · `9b0b82c` 43 bug entries · site `7cef4f3`.
+⛔ Nothing was run in a game; no status moved.)*
+
+**The three rulings that unblocked this link, because they bind you too.**
+
+* ⚖️ **ck98 = DELETE, not gate.** Owner, verbatim: *"I am fine with the 1.0.7
+  issue, we are giving a path which we don't have to do. The main mod serves the
+  current patch period."* There is no 1.0.7 line in the live pack.
+  ⛔ **This does NOT relax ck118's constraint on the re-copies.** Our
+  `lua_revision` and 1.1.0's minimums are all 350453 (`EF-077`), so hotfix 2
+  installs on a 1.0.7 rig with no warning of any kind. Delete-not-gate is a
+  ruling about the REMOVE set only; a re-copied 1.1.0 body applied on a 1.0.7
+  function is still the F114 failure mode in reverse.
+* ⚖️ **ck117 = KEEP `90_SaveSanitizer`** (F35 + F48). It is NOT in the deletion
+  set and its `items.lua` entry stays. Only the dead F03 pass was removed.
+* ⚖️ **ck120 = the owner's general principle, and it is worth applying to your
+  own calls:** *"we fix anything negatives, a small positive I am not as
+  concerned about."* That is what killed the F-5 save cleanup — the stranded
+  Astrogeologist +10% is an unearned bonus, so it is not chased. A **loss** is a
+  different matter and gets fixed.
+
+**What is now true of the tree.** `Code/*.lua` 81 → **45**; `items.lua` 81 → 45;
+`metadata.lua`'s `code` list 81 → 45 (all three, per `H-10`); modules 80 → **44**
+registered. `bodycheck.py` NO-MANIFEST **46 → 10**, which is link 01's predicted
+landing point and is your free cross-check that the right set left.
+
+**For you specifically.** ck98 = delete settles the delete-vs-gate question you
+inherit, but ⛔ **your declining self-check requirement is untouched** — see the
+ck98 note above. It comes from ck118 and it is independent of ck98.
+
+* **The `probe` form is the right instrument and link 01 built it**, but note the
+  direction. For a re-copy you probe FOR the 1.1.0 body shape, so a 1.0.7 body
+  declines. That is the easy direction. (The REMOVE set would have needed the
+  opposite — a probe that detects the OLD body — which is part of why gating 36
+  modules was the expensive road and delete was the cheap one.)
+* **A precedent you may want**, from the R-7 half-edit: when you delete half a
+  module, its `Require` entries go with it, and you must re-check what the
+  surviving half's failure path does. `Fix_DroneTransportMinors`' half (a) had a
+  miss-path that returned quietly on the stated grounds that "(b) is installed
+  and useful on its own" — with (b) gone that would have made the module silently
+  no-op instead of declining. I converted (a)'s two targets into the module's
+  `Require`. Retitle too: the old title described (b), and the title is a log
+  surface.
+* `Fix_SaintBlessing.lua:146` carries a comment citing
+  `Fix_AstrogeologistExtractors`' heal, which no longer exists. `SaintBlessing`
+  is your module, so the dangling citation is yours to correct or leave.

@@ -153,3 +153,86 @@ make. Strike your README row, `git rm` this file, commit together, push.
 - ck118 is ruled and its artifacts are live: GitHub release `v5-game-1.0.7`
   (asset verified byte-identical to Steam's v5 delivery) and the site page. Only
   the store-card line is left, and it is yours.
+
+### From link 02 — the REMOVE block (36 deleted, 1 half-edited, 1 kept)
+
+*(Link 02, `smr-bugfixpack-11`, 2026-09-08. Commits `2dc1dbe` the 36 deletions ·
+`f707903` R-7 + the F03 pass · `9b0b82c` 43 bug entries · site `7cef4f3`.
+⛔ Nothing was run in a game; no status moved.)*
+
+**The three rulings that unblocked this link, because they bind you too.**
+
+* ⚖️ **ck98 = DELETE, not gate.** Owner, verbatim: *"I am fine with the 1.0.7
+  issue, we are giving a path which we don't have to do. The main mod serves the
+  current patch period."* There is no 1.0.7 line in the live pack.
+  ⛔ **This does NOT relax ck118's constraint on the re-copies.** Our
+  `lua_revision` and 1.1.0's minimums are all 350453 (`EF-077`), so hotfix 2
+  installs on a 1.0.7 rig with no warning of any kind. Delete-not-gate is a
+  ruling about the REMOVE set only; a re-copied 1.1.0 body applied on a 1.0.7
+  function is still the F114 failure mode in reverse.
+* ⚖️ **ck117 = KEEP `90_SaveSanitizer`** (F35 + F48). It is NOT in the deletion
+  set and its `items.lua` entry stays. Only the dead F03 pass was removed.
+* ⚖️ **ck120 = the owner's general principle, and it is worth applying to your
+  own calls:** *"we fix anything negatives, a small positive I am not as
+  concerned about."* That is what killed the F-5 save cleanup — the stranded
+  Astrogeologist +10% is an unearned bonus, so it is not chased. A **loss** is a
+  different matter and gets fixed.
+
+**What is now true of the tree.** `Code/*.lua` 81 → **45**; `items.lua` 81 → 45;
+`metadata.lua`'s `code` list 81 → 45 (all three, per `H-10`); modules 80 → **44**
+registered. `bodycheck.py` NO-MANIFEST **46 → 10**, which is link 01's predicted
+landing point and is your free cross-check that the right set left.
+
+**⛔ THREE PATCH-NOTE ITEMS THAT ARE CONSEQUENCES, NOT LINE ITEMS — they must not
+be dropped quietly, and two of them contradict text that is live right now.**
+
+1. **`ExtractorStaffedPerformance` (F108) and `LandscapeCostRefresh` (F107/F105)
+   are NAMED ON LIVE STORE SURFACES AND ON THE SITE.** Both modules are deleted,
+   so those claims are now false. This is the highest-priority text item I hand
+   you.
+2. **`TrainMinors` (F49) removal leaves two displays stale** — the x/max train
+   number stops refreshing after a salvage. Cosmetic, but it is a real change a
+   player can see, so it is a patch-note line rather than a silent drop.
+3. **`LowStorageWarning` (F12): say what actually happened.** 1.1.0 **deleted**
+   the Food and maintenance warning branches rather than fixing them
+   (`ResourceTracking.lua:222-310` covers Power/Water/Air only), so a 1.1.0
+   player gets **no low-Food warning at all**. Reinstating one is a FEATURE the
+   developers removed — it is on the checklist as item 121 for the owner and was
+   deliberately not built.
+
+**Four removals are a small IMPROVEMENT, not a neutral drop**, because our module
+had become marginally worse than vanilla. Worth one honest sentence rather than
+burying them in a list: `SmallLandscapeSites` (narrowed drones to 5 destinations
+against vanilla's default of 10), `TouristApplicants` (rolled 0..100 against
+vanilla's 0..99), `SpaceYDroneCapBullet` (printed a duplicate bullet),
+`DustStormUndergroundBreaks` (over-filtered).
+
+**`FirstAsteroidPrefabs` needs a note, not an apology:** prefabs already granted
+on a 1.1.0 save cannot be taken back, and the `SMRFixPack_FirstAsteroidPrefabs`
+GameVar is absent-tolerant, so nothing breaks.
+
+**`AstrogeologistExtractors` needs one careful sentence.** The stranded +10% on
+two extractor types stays in an existing save **permanently** — not "until the
+next load". A new game is clean. Do not write it as self-clearing.
+
+**⚠️ SITE TEXT I REMOVED, AND SITE TEXT I DELIBERATELY DID NOT.** I removed 36
+`content/fix-list.md` entries (82 → **46**, commit `7cef4f3` in
+`SMR-CommunityMods`). My fence was that file only, so these are yours and every
+one of them is now factually wrong:
+* `content/index.md:35` — "**six fixes are judgment calls**" is now **three**
+  (Biorobots · colonists sheltering in vacuum · Edit Payload). The same sentence's
+  "one of those changes how the game feels — dust devil waves" describes a fix
+  that is GONE; the whole clause should go.
+* `content/faq.md:24-32` — the "More dust devils" bullet and the "Five other
+  judgment calls" bullet both name removed fixes.
+* `content/faq.md:33-38` — the "Some buildings produce more under an Automation
+  policy" bullet describes C39, removed.
+* `content/faq.md:152-163` — "Six fixes are judgment calls", plus the dust-devil
+  and Automation notes.
+* `content/faq.md:165-171` — "Which fixes are judgment calls?" names six; three
+  are gone.
+⚠️ Committing in that repo does NOT publish — `publish-site.yml` is
+`workflow_dispatch` only.
+
+⚖️ **The owner's rule that should shape your wording** (ck120): *"we fix anything
+negatives, a small positive I am not as concerned about."*

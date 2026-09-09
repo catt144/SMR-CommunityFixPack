@@ -29,6 +29,69 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### ✅✅ 2026-09-08 — ITEMS 98, 117 AND 120 RULED IN-SESSION AND ACTIONED THE SAME HOUR. Nothing here is owed from you; one 3-minute control is offered at the bottom and it is optional.
+
+> ⚖️⚖️ **98 — RULED: DELETE, not gate. There is no 1.0.7 line in the live pack.** Your words:
+> *"I am fine with the 1.0.7 issue, we are giving a path which we don't have to do. The main mod serves the
+> current patch period."* ⇒ the 36 modules 1.1.0 made redundant are **deleted outright**, not carried behind
+> per-module gates. This was the chain's blocking decision and it is now discharged.
+> * **Done the same session** (`2dc1dbe`): 36 `Code/*.lua` files deleted, with `items.lua` and `metadata.lua`'s
+>   `code` list brought to the same state — 81 → **45** in all three, which is what `H-10` exists to protect.
+>   `doccheck --emit-counts` GREEN, modules 80 → **44** registered.
+> * **Every row was re-derived against the shipped 1.1.0 body before its file was deleted**, rather than
+>   inherited from the report. **37 rows, ZERO flips.** One needed a second look and the record was right, not
+>   wrong: R-14's citation failed to reproduce only because rains use `GameTimeRepeat`, not `MapGameTimeRepeat`.
+> * **Independent cross-check:** `bodycheck.py`'s NO-MANIFEST count went **46 → 10**, the exact landing point
+>   link 01 predicted, which confirms the deleted set was the right set without re-reading a single row.
+> * ⛔ **What this costs a 1.0.7 player, stated plainly.** They still receive hotfix 2 automatically — our
+>   `lua_revision` and 1.1.0's minimums are all 350453 (`EF-077`), so nothing warns them — and 36 fixes stop
+>   working for them. Their road back is the frozen v5 (item 118), and they have to notice it and walk it.
+>   ⚠️ This does NOT relax item 118's binding constraint on the re-copies (F-6…F-10): those must still carry a
+>   self-check that declines on 1.0.7. Delete-not-gate applies to the REMOVE set only.
+>
+> ⚖️ **117 — RULED: KEEP `90_SaveSanitizer`** (its F35 and F48 passes). You have ~200 Paradox users, and the
+> deciding principle you gave is below. Only the **dead F03 pass** was removed (`f707903`).
+> * The narrow truth about who this protects, since it is narrower than first described: `config.OldSavegameBehavior`
+>   is `Platform.steam and "block" or "warn"` (`config.lua:175`). On Steam a pre-1.1.0 save **cannot load at all**;
+>   off Steam the player gets a "Load anyway" prompt and brings 1.0.7 residue in with the save. And a colony
+>   **started** on 1.1.0 can never carry this damage — `AppliedSavegameFixups` pre-marks every fixup as applied on
+>   a new game (`SavegameFixup.lua:10-16`). So the population is: non-Steam build + an old save + Load anyway.
+> * ⛔ **A record we had was WRONG and this is the correction:** F35 was retired on the grounds that a vanilla
+>   fixup re-applies the buff. It does not — `WindTurbine.lua:95-105` re-applies `WindTurbine_Diffuser` only,
+>   leaving the tech's `WindTurbine` and `WindTurbine_Large` labels unbuffed. 1.1.0 still ships that defect.
+> * F03 went because vanilla genuinely does clean it now, on exactly the migrated saves that matter:
+>   `SavegameFixups.RemoveLeakedUpgradeModifiers` (`Building.lua:1313-1345`).
+>
+> ⚖️ **120 — RULED: no save cleanup is built for the stranded Astrogeologist bonus.** Your principle, verbatim,
+> and it is recorded because it generalises well beyond this one case:
+> **_"we fix anything negatives, a small positive I am not as concerned about."_**
+> * The residue: `+10% production_per_day1` on AutomaticMetalsExtractors and `+10% water_production` on
+>   MicroGAutoWaterExtractors, sitting in the persisted `UIColony.label_modifiers` of any 1.1.0 save that ran an
+>   Astrogeologist playthrough under the pack. It is an unearned **bonus**, so it is not chased.
+> * ⚠️ One correction to the reasoning that does not change the answer: the residue does **not** clear itself on
+>   the next load. A **new game** is clean, because `label_modifiers` lives on `UIColony`; the existing save keeps
+>   the +10% permanently. The patch note says that rather than implying it expires.
+> * ✅ **Checked before accepting, because "leave it" would have been wrong if the residue were live:** the
+>   persisted key is the save's own deserialised copy of a vanilla `Effect_ModifyLabel`, holding a vanilla `prop`,
+>   in a vanilla container — nothing in it references our code, so the save still loads clean with the module
+>   gone. The whole consequence is the bonus continuing to apply.
+>
+> **⚖️ 121 — ONE THING GENUINELY LEFT FOR YOU, and it is a feature question, not a bug.** `LowStorageWarning`
+> (F12) is removed because 1.1.0 **deleted** the Food and maintenance warning branches rather than fixing them
+> (`ResourceTracking.lua:222-310` now covers Power/Water/Air only). ⇒ **A 1.1.0 player gets no low-Food warning
+> at all.** Reinstating one would be adding back a feature the developers removed, which is outside what this
+> pack does, so it was deliberately **not built**. Say if you want it as an opt-in item; otherwise it stays out
+> and this is just a record.
+>
+> **Optional control, ~3 minutes, only if you want it** (batch it with link 03's): load an Astrogeologist save
+> that ran under the pack and confirm the two extractors still carry the +10%. That is the *expected* state under
+> 120 — it is a confirmation that we understood the residue correctly, not a repair to verify. Skipping it costs
+> nothing.
+>
+> ⛔ **What none of this claims.** The removed fixes were correct on 1.0.7; what is true is that 1.1.0 fixes them
+> itself. Removal is verified **in source** — nothing has been run in a game, and no status word was moved on any
+> of the 43 bug entries for exactly that reason.
+
 ### 2026-09-08 — ITEM 118: how 1.0.7 players get served — Steam's branch feature is OFF, so it is one manual route
 
 > ⚖️ **YOUR PLAN (2026-09-08):** serve 1.0.7 players a frozen build rather than carrying them in the live
@@ -221,6 +284,35 @@ completed tests move whole to
 > came from reading the two bodies side by side. The repair has never run in a game either. ⚠️ A boot log
 > saying `TrackSalvageWipe: applied` proves the module loaded, **not** that the repair works.
 >
+123. ✅ **RULED 2026-09-08, in-session — "group C": REPAIR ALL THREE.** Your words: *"All get fixed, If the work
+> is really that heavy we should have a 04 and and 04b."*
+> ⛔ **Filed and ruled together, because it had NO NUMBER — it existed only as "ck-C" inside a prompt and the
+> chain README.** Same failure as item 119, hours apart: a real decision, blocking a live link, invisible to
+> every surface you actually read. Numbered now so it has a receipt.
+>
+> **What it was.** Three modules are switched OFF on 1.1.0 and their game bugs are still in the game — the
+> gates only take *our* code out of the path. Repairing means re-copying the 1.1.0 body with our fix
+> re-applied on top:
+> * **F-8 `LandscapeUnitFilter`** — landscape crash paths, reproduced 20/20 on PT-60. ⚠️ that was under the
+>   OLD reach; 1.1.0 narrows it to Clear-Waste-Rock sites.
+> * **F-9 `VacuumWalks`** — colonists walk ≤400m in vacuum past passages. Biggest surface in the patch;
+>   1.1.0 rewrote the whole surrounding function. ⛔ Its gate is currently ACCIDENTAL (a rename broke the
+>   self-check), which must become deliberate either way.
+> * **F-10 `TrainCargoDumping`** — trains dump cargo at disabled stations. ⚠️ Nuisance class, and the premise
+>   is UNREAD: nobody has established that a suspended request still reports a positive amount.
+>
+> ⚖️ **This deliberately and partly reverts ck109** ("gate, not repair" for F-8). Recorded loudly so nobody
+> later reads it as drift: ck109 was ruled mid-emergency with a live P1 in players' games; this was ruled in
+> a considered patch cycle. ⛔ The gates all STAY — they are what makes each module decline on 1.0.7 (118).
+>
+> ⭐ **Your 04/04b offer is now written into the prompt as pre-authorised**, with the chain's own rule 4 as
+> the mechanism and a suggested cut (B + the F116 work in 04, group C in 04b). ⭐ **That was the right
+> instinct:** 04 is the highest-risk prompt in the chain, and the failure it exists to prevent (F114) was a
+> body copy written without enough room to think. My recommendation had been to repair only F-8 — you took
+> the more expensive and more complete route, and splitting the link is what makes it affordable.
+> ⚠️ **One thing your ruling does not make true:** F-10's defect is still unconfirmed. It will be repaired,
+> but the close-out must say the premise was never established rather than implying the bug was verified.
+
 119. ✅ **RULED ON FILING 2026-09-08 — the SECOND F116 divergence, which had no ticket and which nobody would
 > have raised until after the patch shipped.** ⛔ Filed and ruled in the same breath because you ruled it
 > before it had a number; given one now so `99_TERMINAL_AUDIT.md` has something to cite when it sees the code
