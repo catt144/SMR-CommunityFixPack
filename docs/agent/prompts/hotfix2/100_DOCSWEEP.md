@@ -2,13 +2,12 @@
 
 Chain: `prompts/hotfix2/README.md`. Authored 2026-09-09 by link 99
 (`smr-bugfixpack-a8`) as the audit's last act, on the owner's instruction that
-the sweep fires AFTER the audit's results exist. ⚠️ **A folder holding `99` + `100` +
-`README.md` is a chain that finished its audit correctly, not a DO NOT SHIP.**
-`99` stays per its own §13 (SHIP WITH CHANGES ⇒ the changes are somebody's
-prompt): its §5 table is the inbox of the code link decision 127(a) creates, and
-that link's author consumes and `git rm`s it. ⛔ If 127(b) is ruled instead, YOU
-`git rm` `99_TERMINAL_AUDIT.md` on your close-out (its report survives in
-`reports/HOTFIX_2_AUDIT.md`), and the folder ends holding `README.md` alone.
+the sweep fires AFTER the audit's results exist. ⚠️ **You run AFTER `99a_F117_FIX.md`** (authored `b30d116` under decision
+127(a)); its §10 `git rm`s both itself and `99_TERMINAL_AUDIT.md`, so when you
+start the folder holds `100` + `README.md` — the chain's designed state, not a
+DO NOT SHIP. If `99a` is still present, its link has not closed: STOP, its
+commit is what §3.2 keys off. The audit report survives at
+`reports/HOTFIX_2_AUDIT.md` and is the authority for everything below.
 
 ⚖️ **The bar, in the owner's words:** *"The last thing I want is to release a
 half-baked patch and then have to immediately repatch it."*
@@ -224,10 +223,9 @@ a name grep is the wrong instrument. Every "Eighty-two" in a dated record
 
 `python tools/doccheck.py` GREEN (warns verbatim in the summary) · the sync
 script's output · `python tools/upload_preflight.py` 0 FAIL · strike row 100 in
-`README.md` with the commit list · `git rm` this file (and `99_TERMINAL_AUDIT.md`
-if 127(b) was ruled — see the header) · commit with `git commit -F <file>` ·
-push. Say in the row what the folder holds and why that is the designed end
-state.
+`README.md` with the commit list · `git rm` this file · commit with
+`git commit -F <file>` · push. The folder then holds `README.md` alone; say so
+in the row.
 
 ## Notes from upstream
 
