@@ -5,7 +5,22 @@
 -- withdrawn by the QA audit of 2026-07-25 and corrected under (c), but the
 -- summary above it kept repeating it until 2026-08-02.)
 --
----- (b) a passability change corrupts every drone's unreachables table -------
+---- (b) RETIRED 2026-09-08 on game 1.1.0 — the defect is gone ----------------
+-- ⛔ The description below is the 1.0.7 record and is left as written; what
+-- follows is what 1.1.0 changed. The implementation was deleted with it.
+--
+-- 1.1.0 rewrote the handler: `OnMsg.OnPassabilityChanged` now only calls
+-- `BumpDroneUnreachablesVersion(map)` (`Lua/Units/Drone.lua:935-937`, `:943-945`),
+-- which increments a per-map `DroneUnreachablesVersion` counter. No table is
+-- rebuilt and no table is swapped in, so neither loss below can happen: the
+-- weak-keys metatable is never dropped, and the count is never left stale.
+-- The count field itself is now inert — vanilla declares it
+-- `unreachable_buildings_count = 0, -- kept for savegame compatibility`
+-- (`Drone.lua:73`) and nothing in the shipped tree reads it. Our handler was
+-- therefore rewriting a dead field on every drone on every passability change.
+-- Re-verification row R-7; half (a) below is unaffected and still applies (K-8).
+--
+-- ---- (b), as it stood on 1.0.7 ----------------------------------------------
 -- `OnMsg.OnPassabilityChanged` (Lua\Units\Drone.lua:851-864) drops the entries
 -- belonging to the changed map by building a fresh table and swapping it in:
 --     local unreachable = {}
@@ -130,64 +145,32 @@
 --   r_t[r.FuelResource] key is the one written
 
 SMRFixPack.Register("DroneTransportMinors", {
-	title = "A passability change no longer corrupts each drone's unreachable-buildings table",
+	-- Retitled 2026-09-08: the old title described half (b), which 1.1.0 fixed
+	-- itself and which was deleted with it (R-7). Half (a) is the whole module.
+	title = "A rocket that burns anything but Fuel no longer leaves a stale drone-request restrictor",
 	apply = function()
-		local err = SMRFixPack.Require("DroneTransportMinors", {
-			{ class = "Drone", method = "ApproachWrapper",
-			  reason = "Drone.ApproachWrapper/CleanUnreachables not found (game update changed it?)" },
-			{ class = "Drone", method = "CleanUnreachables",
-			  reason = "Drone.ApproachWrapper/CleanUnreachables not found (game update changed it?)" },
-			{ global = "weak_keys_meta", kind = "table" },
-			{ path = { "table", "count" }, kind = "function" },
-		})
-		if err then return err end
-		local D = Drone
-		local meta = weak_keys_meta
-
-		---- (b) ---------------------------------------------------------------
-		-- Runs after the shipped handler has swapped in its plain table.
-		local function repair_unreachables()
-			local colony = rawget(_G, "UIColony")
-			local labels = colony and colony.labels
-			local repaired = 0
-			for _, drone in ipairs((labels and labels.Drone) or empty_table) do
-				local t = drone and drone.unreachable_buildings
-				if type(t) == "table" then
-					-- idempotent: re-applying the same metatable costs nothing
-					setmetatable(t, meta)
-					-- same recount ApproachWrapper does after it edits the table
-					drone.unreachable_buildings_count = table.count(t)
-					repaired = repaired + 1
-				end
-			end
-			return repaired
-		end
-
-		SMRFixPack.DroneTransportMinors = { RepairUnreachables = repair_unreachables }
-
-		OnMsg.OnPassabilityChanged = function()
-			pcall(repair_unreachables)
-		end
-
-		---- (a) ---------------------------------------------------------------
-		local DC = rawget(_G, "DroneControl")
-		if type(DC) ~= "table" or type(DC.UpdateRocketsInternal) ~= "function" then
-			-- (b) is installed and useful on its own; say so rather than
-			-- deactivating the whole fix.
-			SMRFixPack.DroneTransportMinors.rockets = "DroneControl.UpdateRocketsInternal not found"
-			return
-		end
-
+		-- ⛔ The Drone.ApproachWrapper / CleanUnreachables / weak_keys_meta /
+		-- table.count requirements were half (b)'s and went with it (R-7,
+		-- 2026-09-08). Half (a) is now the whole module, so its two targets
+		-- become the module's self-check: a miss must DECLINE with a reason,
+		-- where before it could fall through to (b).
 		-- rfRestrictorRocket is a FILE-LOCAL in the shipped file
 		-- (DroneControl.lua:12, `local rfRestrictorRocket = const.rfRestrictorRocket`),
-		-- so the wrapper cannot read it as a global either. Capture the constant
-		-- here; `const` is populated at mod-load time.
-		local rfRestrictorRocket = const.rfRestrictorRocket
-		if type(rfRestrictorRocket) ~= "number" then
-			SMRFixPack.DroneTransportMinors.rockets = "const.rfRestrictorRocket not found"
-			return
-		end
+		-- so the wrapper cannot read it as a global either; `const` is populated
+		-- at mod-load time, which is why it is reachable by path.
+		local err = SMRFixPack.Require("DroneTransportMinors", {
+			{ class = "DroneControl", method = "UpdateRocketsInternal",
+			  reason = "DroneControl.UpdateRocketsInternal not found (game update changed it?)" },
+			{ path = { "const", "rfRestrictorRocket" }, kind = "number",
+			  reason = "const.rfRestrictorRocket not found (game update changed it?)" },
+		})
+		if err then return err end
 
+		SMRFixPack.DroneTransportMinors = {}
+
+		---- (a) ---------------------------------------------------------------
+		local DC = DroneControl
+		local rfRestrictorRocket = const.rfRestrictorRocket
 		local orig_rockets = DC.UpdateRocketsInternal
 
 		function DC:UpdateRocketsInternal()

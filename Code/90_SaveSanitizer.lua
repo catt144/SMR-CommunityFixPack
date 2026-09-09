@@ -8,13 +8,36 @@
 --
 -- Contents:
 --   F35  Large Wind Turbine buff lost by a broken migration fixup
---   F03  upgrade modifiers leaked onto domes and the colony by salvaged buildings
 --   F48  station-connector track elements never re-ordered (paren misplaced)
 --
--- All three passes are read-only until they find something they can positively
+-- 2026-09-08, game 1.1.0 — WHY THIS MODULE SURVIVED THE REMOVE BLOCK, and why
+-- one of its three passes did not (re-verification R-36, owner decision 117).
+-- Both remaining passes repair damage that only a PRE-1.1.0 save can carry, and
+-- 1.1.0 refuses such a save with `config.OldSavegameBehavior`, which is
+-- `Platform.steam and "block" or "warn"` (`Lua/Config/config.lua:175`). On Steam
+-- that is a hard block, so these passes are unreachable. OFF Steam it is only a
+-- warning and the player may "Load anyway" (`CommonLua/SavegameMetadata.lua:164-175`),
+-- which lets a 1.0.7 save and its residue through. The owner has non-Steam
+-- players, so the passes stay. ⛔ A colony STARTED on 1.1.0 can never carry this
+-- damage: `AppliedSavegameFixups` pre-marks every fixup as applied on a new game
+-- (`CommonLua/SavegameFixup.lua:10-16`), so the broken migrations never run for it.
+--   * F35 STAYS. 1.1.0 still ships the defect — `WindTurbine.lua:95-105` re-applies
+--     `WindTurbine_Diffuser` only, leaving the tech's `WindTurbine` and
+--     `WindTurbine_Large` labels unbuffed. The old record claiming vanilla
+--     re-applies it was WRONG (corrected by `VANILLA_FIX_QA.md` §0.6).
+--   * F48 STAYS. The paren is still misplaced upstream.
+--   * F03 REMOVED. Unlike the other two, vanilla now cleans this itself, on
+--     exactly the migrated saves that matter: `SavegameFixups.RemoveLeakedUpgradeModifiers`
+--     (`Lua/Buildings/Building.lua:1313-1345`) strips leaked `<handle>_upgrade<t>_mod_<i>`
+--     entries, keyed on live ownership rather than our handle-resolution test.
+--     The leak source is fixed too (`StopUpgradeModifiers` now iterates with
+--     `pairs`, `:1303-1311`) — re-verification row R-5, which retired
+--     `Fix_UpgradeModifierLeak` in the same pass.
+--
+-- Both remaining passes are read-only until they find something they can positively
 -- identify as wrong, run on every PostLoadGame (after the shipped savegame
 -- fixups — see the note on the handler below), and are idempotent — a second
--- run finds nothing. F35 and F03 re-derive their answer every load; F48 also
+-- run finds nothing. F35 re-derives its answer every load; F48 also
 -- carries a one-shot flag, because its work is a re-ordering rather than a
 -- comparison and there is no reason to redo it on a save it has already fixed.
 
@@ -97,76 +120,6 @@ local function repair_turbine_buff()
 end
 
 --------------------------------------------------------------------------------
--- F03 — upgrade modifiers left behind by salvaged buildings
---
--- Defect: Building:StopUpgradeModifiers iterated a string-keyed table with
--- ipairs, so it turned nothing off (Building.lua:1268-1274). Fix_UpgradeModifierLeak
--- stops new leaks; this pass clears the ones already in the save.
---
--- A leaked entry is a LabelModifier sitting in some container's
--- `label_modifiers[label]` under the id ApplyUpgrade minted for it,
--- `string.format("%s_upgrade%d_mod_%d", self.handle, tier, i)`
--- (Building.lua:1155). The handle in that id is the OWNING building's. So an
--- entry whose handle no longer resolves to a live object is, by construction,
--- one whose building is gone — the leak — and nothing else in the game writes
--- ids of that shape.
---
--- Conservative: if the handle still resolves to anything valid, the entry is
--- left alone, even though handles can in principle be recycled. A missed leak is
--- cheap; wrongly stripping a live building's upgrade bonus is not.
-local UPGRADE_MOD_ID = "^(%d+)_upgrade%d+_mod_%d+$"
-
-local function sweep_leaked_upgrade_modifiers(container)
-	local by_label = type(container) == "table" and container.label_modifiers
-	if type(by_label) ~= "table" or type(container.SetLabelModifier) ~= "function" then
-		return 0
-	end
-	local handles = rawget(_G, "HandleToObject")
-	if type(handles) ~= "table" then return 0 end
-
-	local removed = 0
-	for label, modifiers in pairs(by_label) do
-		-- collect first: SetLabelModifier writes into this very table
-		local stale
-		for id in pairs(modifiers) do
-			if type(id) == "string" then
-				local handle = string.match(id, UPGRADE_MOD_ID)
-				local owner = handle and handles[tonumber(handle)]
-				if handle and not (owner and IsValid(owner)) then
-					stale = stale or {}
-					stale[#stale + 1] = id
-				end
-			end
-		end
-		for _, id in ipairs(stale or empty_table) do
-			container:SetLabelModifier(label, id, nil)
-			removed = removed + 1
-		end
-	end
-	return removed
-end
-
-local function repair_leaked_upgrade_modifiers()
-	local removed = 0
-
-	local colony = rawget(_G, "UIColony")
-	if colony then removed = removed + sweep_leaked_upgrade_modifiers(colony) end
-
-	for _, city in ipairs(rawget(_G, "Cities") or empty_table) do
-		removed = removed + sweep_leaked_upgrade_modifiers(city)
-		local labels = city.labels
-		for _, dome in ipairs(labels and labels.Dome or empty_table) do
-			removed = removed + sweep_leaked_upgrade_modifiers(dome)
-		end
-	end
-
-	if removed > 0 then
-		log("%s: removed %d leaked upgrade modifier(s) from salvaged buildings", FIX_ID, removed)
-	end
-	return removed
-end
-
---------------------------------------------------------------------------------
 -- F48 — the station-connector migration fixup re-ordered nothing
 --
 -- Defect (Src-verified 2026-08-11 against 1.0.7.396349):
@@ -211,7 +164,7 @@ end
 --      the count is 0, which is what makes PT-35's do-no-harm read meaningful.
 --   2. It is one-shot per save (a plain SMRFixPack_* boolean on UIColony, absent
 --      on saves we have never touched and harmless if the mod is later removed),
---      so it cannot re-run on every load the way F35's and F03's comparisons do.
+--      so it cannot re-run on every load the way F35's comparison does.
 --   3. Every call is pcall'd per track, so a track that raises costs that track
 --      and not the rest of the network — and the raise is logged by name.
 --   4. It does NOT hand-assign track.start_el / track.end_el. The shipped fixup
@@ -222,7 +175,7 @@ end
 --
 -- ⚠️ ProcessTrackElements / ResolveMap are NOT in this module's apply() Require
 -- list, deliberately: if a game update moves them, this pass should decline and
--- say so, not deactivate the F35 and F03 repairs alongside it.
+-- say so, not deactivate the F35 repair alongside it.
 local F48_FLAG = "SMRFixPack_F48_StationConnectors"
 
 -- The signature PT-37 compared. `connections` is rebuilt wholesale by
@@ -247,7 +200,7 @@ local function repair_station_connectors()
 	local process = rawget(_G, "ProcessTrackElements")
 	local resolve = rawget(_G, "ResolveMap")
 	if type(process) ~= "function" or type(resolve) ~= "function" then
-		log("%s: F48 station-connector pass declined — ProcessTrackElements/ResolveMap not found as globals (a game update moved them); F35 and F03 are unaffected", FIX_ID)
+		log("%s: F48 station-connector pass declined — ProcessTrackElements/ResolveMap not found as globals (a game update moved them); F35 is unaffected", FIX_ID)
 		return 0
 	end
 
@@ -295,7 +248,6 @@ end
 -- early-returns before its own body).
 SMRFixPack.Sanitizer = {
 	RepairTurbineBuff = repair_turbine_buff,
-	RepairLeakedUpgradeModifiers = repair_leaked_upgrade_modifiers,
 	RepairStationConnectors = repair_station_connectors,
 }
 
@@ -326,8 +278,6 @@ OnMsg.PostLoadGame = SMRFixPack.WhenActive(FIX_ID, function()
 	local ok, err = pcall(repair_turbine_buff)
 	if not ok then log("%s: turbine-buff pass failed: %s", FIX_ID, tostring(err)) end
 
-	ok, err = pcall(repair_leaked_upgrade_modifiers)
-	if not ok then log("%s: upgrade-modifier pass failed: %s", FIX_ID, tostring(err)) end
 
 	-- F48 is one-shot per save: the flag lives on UIColony, so it travels with
 	-- the savegame and a save this pass has already re-ordered is never
