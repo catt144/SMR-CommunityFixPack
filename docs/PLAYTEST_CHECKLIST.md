@@ -76,12 +76,26 @@ completed tests move whole to
 >   in a vanilla container — nothing in it references our code, so the save still loads clean with the module
 >   gone. The whole consequence is the bonus continuing to apply.
 >
-> **⚖️ 121 — ONE THING GENUINELY LEFT FOR YOU, and it is a feature question, not a bug.** `LowStorageWarning`
-> (F12) is removed because 1.1.0 **deleted** the Food and maintenance warning branches rather than fixing them
-> (`ResourceTracking.lua:222-310` now covers Power/Water/Air only). ⇒ **A 1.1.0 player gets no low-Food warning
-> at all.** Reinstating one would be adding back a feature the developers removed, which is outside what this
-> pack does, so it was deliberately **not built**. Say if you want it as an opt-in item; otherwise it stays out
-> and this is just a record.
+> **✅ 121 — WITHDRAWN THE SAME DAY. You were right to be suspicious, and nothing is owed from you.**
+> I raised this as a decision on the claim that *"a 1.1.0 player gets no low-Food warning at all"*. **That claim
+> was wrong.** You challenged it on the ground that the DLC's focus is literally food, so a silent deletion of
+> food warnings made no sense — and the challenge held. My check had been **one file deep**: I grepped
+> `ResourceTracking.lua`, saw only Power/Water/Air, and concluded tree-wide deletion without searching the tree.
+> * **Both warnings were REPLACED, not deleted.** Food is now `StarvingColonists` — "Missed Meals", voiced
+>   *"Warning! Food shortage"* — raised per dome with a reason breakdown and a severity, re-firing after
+>   dismissal only when it gets worse, and driven off six colonist status-effect transitions. It is **new in this
+>   branch**: there is a savegame fixup whose only job is to light it up on migrated saves. Maintenance is now
+>   `MaintenanceStuckBuildings` — "Maintenance Problem", voiced *"A building is about to malfunction"* — covering
+>   buildings *"about to or already"* stopped.
+> * ⚠️ **The evidence was in a line I had already read.** `ResourceTracking.lua:316` is the migration off the old
+>   maintenance notification — a signpost to where it went — and I logged it as "not a live warning" and drew the
+>   opposite conclusion from it.
+> * **The honest difference**, now derived instead of assumed: the retired warning was a *projection* ("N sols of
+>   supply left"); the replacements fire on *state*. So there is no days-of-supply forecast any more, but the
+>   player is warned, by dome and by building, with severity. ⇒ **Not a gap, and nothing for this pack to build.**
+> * ⛔ **The removal itself is unaffected** — our module repaired arithmetic in branches that no longer exist, so
+>   deleting it was right for the reason originally given. Only my description of the consequence was wrong, and
+>   it is corrected on `F12` and in the patch-note brief so no store or site text repeats it.
 >
 > **Optional control, ~3 minutes, only if you want it** (batch it with link 03's): load an Astrogeologist save
 > that ran under the pack and confirm the two extractors still carry the +10%. That is the *expected* state under

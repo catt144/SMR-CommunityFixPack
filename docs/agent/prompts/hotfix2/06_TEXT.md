@@ -193,12 +193,22 @@ be dropped quietly, and two of them contradict text that is live right now.**
 2. **`TrainMinors` (F49) removal leaves two displays stale** — the x/max train
    number stops refreshing after a salvage. Cosmetic, but it is a real change a
    player can see, so it is a patch-note line rather than a silent drop.
-3. **`LowStorageWarning` (F12): say what actually happened.** 1.1.0 **deleted**
-   the Food and maintenance warning branches rather than fixing them
-   (`ResourceTracking.lua:222-310` covers Power/Water/Air only), so a 1.1.0
-   player gets **no low-Food warning at all**. Reinstating one is a FEATURE the
-   developers removed — it is on the checklist as item 121 for the owner and was
-   deliberately not built.
+3. **`LowStorageWarning` (F12) — ⛔ READ THE CORRECTION BEFORE YOU WRITE A WORD
+   ABOUT THIS ONE.** An earlier version of this outbox told you to write that a
+   1.1.0 player gets **no low-Food warning at all**. **That is FALSE. Do not
+   print it anywhere.** The owner challenged it (the DLC's focus is food, so
+   silent deletion made no sense) and the re-derivation reversed it: 1.1.0
+   **replaced** both warnings rather than deleting them — Food is now
+   `StarvingColonists` ("Missed Meals", voiced *"Warning! Food shortage"*), new
+   in this branch, and maintenance is now `MaintenanceStuckBuildings`
+   ("Maintenance Problem"). Full evidence on the `F12` entry and checklist 121,
+   which is WITHDRAWN.
+   ⇒ **What to actually say, if anything:** nothing more than that the fix is
+   retired because the game now handles it. ⛔ Do NOT claim a player-facing loss
+   here, and do not offer a restored warning as a future feature — there is no
+   gap. The only real difference is that the old warning was a days-of-supply
+   *projection* and the new ones fire on *state*, which is not worth a
+   patch-note line and is certainly not worth a store line.
 
 **Four removals are a small IMPROVEMENT, not a neutral drop**, because our module
 had become marginally worse than vanilla. Worth one honest sentence rather than
