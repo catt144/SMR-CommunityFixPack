@@ -123,6 +123,18 @@ SMRFixPack.Register("PayloadTemplateRefill", {
 			{ class = "CargoRequestNew", method = "PromptRocketCargoIssue", reason = REQ_METHODS },
 			{ class = "CargoRequestNew", method = "GetCargoList", reason = REQ_METHODS },
 			{ global = "GetFlightPolicy" },
+			-- FIX (99a §4, 2026-09-09) — the probe below reaches this map through
+			-- GetFlightPolicy, whose whole body is `return FlightPolicies[...]`
+			-- (`ClassDef-Default.generated.lua:99-101`), so a nil map THROWS inside
+			-- the probe. A throw there is a legitimate but SILENT decline: F70 goes
+			-- off and nothing names why. `FlightPolicies` is a preset GlobalMap
+			-- (`ClassDef-Default.generated.lua:76`) built during the class/data pass,
+			-- and it is present on both real boot paths today because our apply runs
+			-- inside a `ReloadLua` after a full first pass — but that is a boot-ORDER
+			-- dependency, not a contract. This line does not change when the module
+			-- declines; it changes a silent decline into a NAMED one.
+			{ global = "FlightPolicies", kind = "table",
+			  reason = "FlightPolicies map not built yet (mod applied before the class/data pass, or a game update moved it)" },
 			{ global = "CreateRealTimeThread" },
 			{ global = "CargoType", kind = "table" },
 			-- FIX (F-6, 2026-09-08) — the branch guard (FIX_POLICY §2a), as a

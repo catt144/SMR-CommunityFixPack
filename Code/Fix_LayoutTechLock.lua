@@ -95,6 +95,28 @@ SMRFixPack.Register("LayoutTechLock", {
 			if type(controllers) ~= "table" or type(self.skip_items) ~= "table" then
 				return res
 			end
+
+			-- FIX (F118, 2026-09-09): 1.1.0's LayoutConstructionController:Activate
+			-- ENDS by registering itself for delete-on-load
+			-- (`Construction/LayoutConstruction.lua:385`;
+			-- `s_ConstructionControllerDeleteOnLoad = self`, 0 hits in the 1.0.7
+			-- file). Our teardown below reaches `ConstructionController:Deactivate`,
+			-- which opens with `s_ConstructionControllerDeleteOnLoad = false`
+			-- (`Construction/Construction.lua:1226-1227`, both branches) — so after
+			-- the loop the LAYOUT controller is unregistered while its dialog is
+			-- still open, and a save taken there is no longer cleaned by
+			-- `OnMsg.PersistPostLoad` (`:1052-1056`). Read the registration before
+			-- the loop and re-assert it after, only if it was OURS.
+			-- ⚠️ Dual-branch by construction, no version test needed: on 1.0.7 the
+			-- var holds a sub-controller (or false) and never `self`, so nothing is
+			-- re-asserted there. ⛔ No `Require` line guards this — the var is a
+			-- GameVar (`Construction.lua:1018`), nil until a game exists and so
+			-- later than apply time; the read below is nil-safe instead, and the
+			-- `== self` guard means the write can only happen where the name is
+			-- already present in the real `_G` (so `ModEnvMeta.__newindex`'s
+			-- new-global assert is unreachable — `EF-017`, `EF-009`).
+			local registered = rawget(_G, "s_ConstructionControllerDeleteOnLoad")
+
 			for entry, controller in pairs(controllers) do
 				local ok, locked = pcall(is_locked_out, self, entry)
 				if ok and locked then
@@ -116,6 +138,11 @@ SMRFixPack.Register("LayoutTechLock", {
 						DoneObject(controller)
 					end
 				end
+			end
+
+			-- F118, the other half: put back exactly what was there, and only that.
+			if registered == self then
+				_G.s_ConstructionControllerDeleteOnLoad = self
 			end
 			return res
 		end
