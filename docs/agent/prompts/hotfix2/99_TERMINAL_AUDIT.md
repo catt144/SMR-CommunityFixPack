@@ -855,3 +855,19 @@ NOTHING about a real map.
 two-sided diffs say about our copies. Not "the gates are unnecessary". Not "F116 is
 fixed" — never reproduced, and a desk harness is not a map. Not "F-7's decline is
 proven on 1.0.7" — argued from 0 grep hits in the archived file, not from a boot.
+
+**7 · ⭐ A link was ADDED to the chain after 04 closed: `07_TESTKIT.md`** (owner,
+2026-09-08: *"Agreed, make the 07"*; authored by this session). The chain had no
+owner for the Test Kit — every fence excluded it, 05's "In" list does not name
+it, and you can only report — while ~40 of its 100 probes describe a pack that
+no longer exists (37 target modules 02 deleted; 3 FALSE-FAIL on live modules; 3
+pre-chain orphans; 2 sweep tables). ⚠️ **For your passes:** (a) the folder-empty
+gate now waits on 07 as well; (b) Pass A's "re-run the instruments" should
+include the kit's parse sweep 07 is told to build; (c) Pass C gains a runtime
+half — 07's `retired` probes PASS on vanilla only if the REMOVE verdict was
+right, so a FAIL there at the sitting is an R-15-shaped finding, not a probe
+bug; (d) Pass G must hold the sitting to 07's PREDICTED suite census. ⚠️ **Audit
+the addition itself** (CHAIN_METHOD §3): a chain that grew a row mid-run because
+the owner asked a question is a decomposition miss worth naming, and 07's shape
+(three units, self-split to `07b` at Unit A) was set by the session that found
+the gap, not by a fresh reader.

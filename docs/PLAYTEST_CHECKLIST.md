@@ -78,7 +78,8 @@ completed tests move whole to
 > * **`ShelterReflex`** — it tests the habitat half we **deleted on purpose** (see below), so it is testing
 >   behaviour the pack no longer claims.
 >
-> The Test Kit is a separate repo and outside link 03's fence, so both were **filed, not fixed**, and routed to
+> The Test Kit is a separate repo and outside link 03's fence, so both were **filed, not fixed** (⭐ since 09-08
+> owned by chain link `07_TESTKIT.md` — see the LINK 04 block), and routed to
 > the terminal audit. `StaleReservations`' probe is unaffected and should still pass.
 >
 > ⚠️ **ONE THING WE GAVE UP, and you should know before the patch notes are written.** `ShelterReflex` had two
@@ -134,7 +135,9 @@ completed tests move whole to
 > `PayloadTemplateRefill` (`30_Probes_Wave3.lua:11-70`) stubs the real-time thread to a no-op and expects `Apply`
 > to stamp the flag synchronously; the stamp now lives inside the confirmed branch of that thread, so the probe's
 > second step sees the template refill and says FAIL. **If you run the suite, expect it** — three named FAILs, not a
-> regression. The Test Kit is a separate repo and outside the chain's fence; filed to 05 and 99, not fixed.
+> regression. ⭐ **Now owned: on your call ("Agreed, make the 07") chain link `hotfix2/07_TESTKIT.md` repairs
+> the kit BEFORE 99** — all three false-FAILs, plus the 37 probes that still describe the modules link 02 deleted
+> (they become "vanilla fixed it" checks the sitting can read). Until 07 closes, this warning stands.
 > `RocketDroneChurn`'s probe and both `TrackSalvageWipe` probes were checked and are unaffected.
 >
 > ✅ **Items 111 and 119 below are LANDED** (`fc318c7`); their entries now say so. ⛔ Nothing here moves a status

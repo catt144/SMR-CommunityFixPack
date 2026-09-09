@@ -20,6 +20,7 @@ Authored 2026-09-08 by `smr-bugfixpack-91` under `prompts/HOTFIX_2_HANDOFF.md`
 | 04b | `04b_RECOPIES_C.md` | Opus | ✅ no | group **C**: F-8, F-9, F-10 — **all three RULED IN by ck123**, partly reverting ck109; every gate STAYS. ⛔ Highest-risk work in the patch; F-9 is a ~98-line rewritten function and may split again to `04c` |
 | 05 | `05_TOOLS_TAIL.md` | Opus | no | `sigcheck.py` over `SetGlobal` sites (A-4), `logscan.py` heal-aware + benign-latch retire list (A-2/A-3), A-1 `GeneForging` |
 | 06 | `06_TEXT.md` | Opus | no | ck112/113 store wording, `metadata.lua` `last_changes`, `UPLOAD_WORKFLOW` §3 paste backups, the site fix list |
+| 07 | `07_TESTKIT.md` | Opus | no | ⭐ **ADDED 2026-09-08** (owner: *"Agreed, make the 07"*), authored by link 04's session after the chain was found to have NO owner for the Test Kit. The kit (`C:\Dev\SMR-BugFixPack-TestKit`, local-only, no remote) has ~40 of 100 probes describing a pack that no longer exists: 37 target modules 02 deleted, 3 FALSE-FAIL on live modules (03's two + 04's one), 3 pre-chain orphans, 2 sweep tables listing deleted modules. Unit A converts the 37 into a `retired` kind (PASS = vanilla fixed it in-game, FAIL = a REMOVE was wrong, ERROR = stale stub) · Unit B rewrites the false-FAILs and re-reads 04b's three and 05's `GeneForging` probes · Unit C fixes the sweep tables, re-emits STATE's probe count, and states the EXPECTED suite census the post-99 sitting is measured against. ⛔ Runs after 02/03/04/04b, before 99; independent of 05/06 |
 | 99 | `99_TERMINAL_AUDIT.md` | Fable | reports to owner | adversarial backward QA over the whole result; SHIP / SHIP WITH CHANGES / DO NOT SHIP · **and as its LAST act, authors `100_DOCSWEEP.md`** (owner instruction: the sweep needs the audit's results, so it is written after, not before) |
 | 100 | `100_DOCSWEEP.md` | — | — | ⏳ **DOES NOT EXIST YET — `99` writes it.** The public-surface sweep for this patch, templated on `prompts/PUBLIC_SURFACE_SWEEP.md` but INVERTED (that sweep adds one fix; this one retires ~36). ⚠️ Seeded with the known-false surfaces: `F108` and `F107`/`F105` are named on the store cards and the site while both modules are gone |
 
@@ -29,7 +30,9 @@ Authored 2026-09-08 by `smr-bugfixpack-91` under `prompts/HOTFIX_2_HANDOFF.md`
 independent of each other and may run in either order. **04 and 04b are also
 independent of each other** — either order, or in parallel by two sessions, since
 they share no module and no file. 05 and 06 are independent of everything except
-01. 99 is last and runs only on an empty folder — ⚠️ **and `100_DOCSWEEP.md`
+01. **07 runs after 02, 03, 04 AND 04b** (it needs the final module set) and
+before 99; it is independent of 05 and 06, except that it re-reads the
+`GeneForging` probe if 05 has closed. 99 is last and runs only on an empty folder — ⚠️ **and `100_DOCSWEEP.md`
 comes AFTER 99, authored BY 99.** A folder holding `99` + `100` + this file at
 the end is the designed end state, not an unfinished chain.
 

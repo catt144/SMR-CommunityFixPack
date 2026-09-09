@@ -367,3 +367,13 @@ cross-check that the right thing left.
 unchanged and still correct — ShelterReflex must stay the INNER wrapper — but the
 line number moved with the header edit. Comment-only, in `tools/`, so nothing
 ships either way.
+
+### From link 04's session — `07_TESTKIT.md` now owns the Test Kit (added 2026-09-08)
+
+The three false-FAIL probes 03 and 04 filed to you are **no longer yours to
+consider** — link 07 rewrites them. Two things 07 needs from you: (1) your A-1
+`GeneForging` edit changes what its probe (`30_Probes_Wave3.lua:828`) should
+observe — say so in your outbox, one line; (2) your `bodycheck --selftest` /
+`doccheck` wiring decision does not need to cover the kit, but if you add a
+parse gate to `tools/`, say whether it can be pointed at the kit's `Code/`
+(07 is told to rebuild one in its scratchpad otherwise).

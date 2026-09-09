@@ -560,3 +560,14 @@ Two things ride with it and both bind you:
    the full log** and say which save it was. ⛔ Do NOT copy a save as insurance
    (`H-06`: loading a copy runs that campaign's autosave rotation and deletes the
    owner's autosaves).
+
+### From link 04's session — a new link `07_TESTKIT.md` runs AFTER you (added 2026-09-08)
+
+The chain had no owner for the Test Kit; the owner added one. **07 needs your
+outbox for three probes:** `VacuumWalks` (`20_Probes_Wave2.lua:472`),
+`LandscapeUnitFilter` (`30_Probes_Wave3.lua:276`), `TrainCargoDumping`
+(`30_Probes_Wave3.lua:1099`). In your outbox to 99, say per module what the
+probe should now observe on 1.1.0 and whether your gate DECLINES on the rig (a
+probe for a gated-off module must SKIP with the reason, not FAIL). ⛔ Do not
+edit the kit yourself — 07 owns it, and two links editing one local-only repo
+is how a verified record got stranded once already (`doccheck.py:583`).
