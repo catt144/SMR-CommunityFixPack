@@ -23,7 +23,13 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   ✅✅ BOTH GATES MEASURED 09-08 (`archive/logs/gated110_*`): **64 applied / 16 inactive** / 14 named, 0
   errors; both `update_suspect` routes CONFIRMED; as-read 63/17, 05 heal-aware. ⛔ MENU-ONLY ⇒ trains/
   landscaping NOT exercised in play.
-  ✅ HOTFIX_1_AUDIT 09-08 SHIP WITH CHANGES, text-only (`reports/HOTFIX_1_AUDIT.md`). NEXT `prompts/hotfix2/`.
+  ✅ HOTFIX_1_AUDIT 09-08 SHIP WITH CHANGES, text-only; never uploaded (`version` still 5) — folded into hotfix 2.
+  ⭐ **99 TERMINAL AUDIT 09-09: SHIP WITH CHANGES** (`reports/HOTFIX_2_AUDIT.md`). **F117** P1 source-read: `ArrivalDeaths`
+  THROWS on 1.1.0 (`ChooseDome` takes the colonist now; a KEEP module, live in v5 today) ⇒ ck127. Change-note bullet 2
+  contradicts link 08's F95 pass ⇒ ck128 rides ck126. Site publish WITH the upload ⇒ ck129. F118/C55 filed, F60 REMOVE
+  candidate for hotfix 3. Pass D: 3 of 35 KEEP wrappers moved under class (c), seen by NO instrument. ⛔ NO boot of the
+  44-module pack exists; PREDICTION 44 applied / 0 inactive (first-pass read 43/1). `100_DOCSWEEP.md` AUTHORED — fires
+  after 126+127 are ruled and BEFORE the upload sitting (bullet 2 ships in `metadata.lua`).
   ⛔ ALL in-play controls DEFERRED to ONE sitting AFTER 99 (owner 09-08). 99 SHIP ≠ clearance (H-04).
   ⚖️ Owner rule 09-08: a patch note saying "Fixed" is a **CLAIM, false until we confirm it**.
 - ⭐ PUBLISHED both portals — `pdx_id` **156049**, `steam_id` **3787202810**, tree `version` **5** (F110, 08-30).
@@ -91,7 +97,9 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 - 112 DEFERRED 09-09 · **125** RULED+LANDED 09-09: F66 guard yields to `force` (desk-controlled, untested); wrapper re-read → 99.
 - **126 OPEN** 09-09 (link 08): F95 residue pass LANDED in `90_SaveSanitizer`, UNRUN. Two asks — ⛔ ruled
   OFF 09-08 (ck120) then asked for 09-09; and it makes the sanitizer non-removable on EVERY platform ⇒ `R-36` is not just a 1.0.7 question.
-- ⛔ BLOCKS the chain: nothing. 118 RULED ⇒ re-copies MUST decline on 1.0.7 (`FIX_POLICY` §2a).
+- **127** F117 fix-first (rec) vs hotfix 3 · **128** bullet 2 ↔ 126, `100_DOCSWEEP` carries both wordings · **129** site
+  publish WITH the upload, after it (rec). ⛔ BLOCKS the upload: 126/128 and 127. 118 RULED ⇒ re-copies MUST decline on
+  1.0.7 (`FIX_POLICY` §2a).
 - 73 blame surface — harden or not · 76 confirm (a) was a ruling not a leaning · 53 harden now or in 1.0.1
   (rec 1.0.1) · 51 both-packs leg timing (rec after launch) · 50 chain-vs-replace wording · 47 two modder-page
   wordings · 43 opt-in pack re-tick · 41 dialog wording + sweep cap 5→8 · 40 `smr_shuttles` name · 39 dialog re-fire.
@@ -102,6 +110,6 @@ BUILD STATE (emitted by tools/doccheck.py)
 - modules: 44 registered (44 default-active, 0 optional-gated files)
 - Code/*.lua files: 45
 - TestKit probes: 94
-- BUGS index rows: 116 F + 12 D + 54 C
+- BUGS index rows: 118 F + 12 D + 55 C
 ```
 Re-emit after any change. Game: records describe **1.0.7.396349** (`EF-014`); INSTALLED is now **1.1.0** (`EF-075`).

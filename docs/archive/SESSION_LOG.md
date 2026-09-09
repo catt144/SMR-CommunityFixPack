@@ -8,6 +8,27 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-09 — hotfix2 link 99, the terminal audit: SHIP WITH CHANGES — the findings were in the code the patch did not touch
+
+tags: hotfix2 link-99 F117 F118 C55 F60 F77 F45 F53 F46 F116 F95 items-126-129 EF-065 EF-008 class-c bodycheck logscan sigcheck ck118 ck123
+
+Brief `prompts/hotfix2/99_TERMINAL_AUDIT.md` (deleted on close-out). Report `reports/HOTFIX_2_AUDIT.md`. Tree `24eaea0`.
+Folder gate clean at start (01–08 struck). Nothing ran in a game; no status moved. Instruments re-run AND falsified
+by hand (zeroed hash → BODY-CHANGED, foreign DEFECT → DEFECT-GONE, the real F46 expression OK). Every FIX-set body
+three-way diffed (ours / 1.1.0 / 1.0.7): F-1…F-10, F116, A-1, ck125 and the F95 pass all hold as pinned; F116's
+"4 residual 1.0.7 lines" question answered mechanically (0 remain). Pass D: 58 branch diffs generated, every KEEP
+wrapper on a changed target re-read by four fresh readers, every FINDING re-opened on the shipped lines by me:
+**F117** (`ArrivalDeaths` passes `self.traits` to a `ChooseDome` that takes the colonist on 1.1.0 → throws on any
+filtered dome/residence; P1, live in v5), **F118** (`LayoutTechLock` clears 1.1.0's delete-on-load registration),
+**F60** (the gate no longer reads the tally; REMOVE candidate), **C55** (vanilla's pre-sort pass asserts on a
+repair-site track; F45 KEEP confirmed). Pass F: strings vs both backups byte-identical by script; the change note's
+bullet 2 contradicts link 08's pass (06 ran before 08 — a chain-shape fault). Pass G: no boot of the 44-module pack
+exists; prediction 44/0. Pass H pattern: all eight links corrected their own brief, six corrections were typed
+counts. ck119 mechanism proposed (`-- DIVERGENCE: ck<NN>` + a doccheck gate). Owner items 127–129 filed;
+`100_DOCSWEEP.md` authored as the last act (fires after 126+127, before the upload).
+
+---
+
 ## 2026-09-08 (6th) — PACK_1_1_0_REVERIFICATION: all 80 modules opened against 1.1.0 — 10 FIX / 35 REMOVE / 35 KEEP
 
 tags: 1.1.0 F92 F58 F73 F83 F95 F70 F50 F34 F52 F46 F111 F112 REMOVE-bucket bodycheck probe sigcheck logscan items-114-116 EF-075

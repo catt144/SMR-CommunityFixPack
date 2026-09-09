@@ -2089,3 +2089,12 @@ the item would trip it. Whoever runs the next eviction should fold 126 in.
   **looser** than this pass. That asymmetry is intended: probe FAIL together with
   a `LEFT … ALONE` log line is the near-miss case, and it is a report, not a bug
   in either.
+
+## Close-out (link 99, `smr-bugfixpack-a8`, 2026-09-09)
+
+**VERDICT: SHIP WITH CHANGES** — `agent/reports/HOTFIX_2_AUDIT.md`. Per §13 this
+file is NOT deleted: the changes are somebody's prompt. Text (§5 row 4) →
+`100_DOCSWEEP.md`, authored. Code (§5 rows 1–3: F117 + the F118 and `FlightPolicies`
+riders) → the link decision **127(a)** creates; §5 of the report is that link's
+inbox, and its author `git rm`s this file. If 127(b) is ruled, `100` deletes it.
+Owner items 127–129 are in the checklist. Nothing ran in a game; no status moved.

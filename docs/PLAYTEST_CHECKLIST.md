@@ -29,6 +29,50 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### ⚖️ 2026-09-09 — LINK 99 IS DONE. VERDICT: **SHIP WITH CHANGES.** Three calls (127–129); the first is the reason for the verdict, and it is a real bug the pack already ships.
+
+> **The audit in one line.** Every code change in this patch re-derived against the shipped 1.1.0 code holds up;
+> the instruments were made to fail on purpose and did; the store text matches its backups to the byte. **The
+> findings are in the code the patch did NOT touch:** three of the 35 modules we kept turned out to have the game
+> move underneath them in a way no tool can see, and one of the three is a bug that shows a player an error.
+> Full report: `docs/agent/reports/HOTFIX_2_AUDIT.md`. ⛔ Nothing here is an upload, and nothing ran in a game.
+>
+> **127. `Fix_ArrivalDeaths` can throw an error on 1.1.0, and it is in the pack you are about to upload — and in
+> the v5 players have today.** Game 1.1.0 changed what one of its dome-picking functions expects (the colonist
+> instead of the colonist's trait list); our arrival fix still hands it the old thing. The moment a new arrival's
+> dome is out of walking range AND the colony has any nursery, retirement home, hotel or dome trait filter, the
+> game hits a nil and raises the "error in mod" dialog naming this pack — the same shape as the landscaping error
+> you reproduced on 09-08. **Source-read on both game trees, never reproduced**; entry `F117` has the control.
+> * **(a) Fix it before the upload — RECOMMENDED.** One small session in `Code/` (game closed): pass the colonist
+>   on 1.1.0 behind a per-module check that reads the game's behaviour, never a version number (the ck118 rule).
+>   Two one-line riders ride the same session because someone is in `Code/` anyway: `F118` (a layout-dialog
+>   leftover after a save/load, harmless as far as anyone can tell) and a one-line guard that makes the Edit
+>   Payload fix say *why* if it ever stands down instead of going quiet. Cost: ~one session plus the usual gates.
+>   This is exactly the "release a half-baked patch and immediately repatch" case you named as the bar.
+> * **(b) Ship as is, fix in hotfix 3.** Players are no worse off than today; the error is live in v5 already.
+>
+> **128. Item 126 now also decides a sentence that ships INSIDE the mod.** The change note's second bullet tells
+> players the small Astrogeologist bonus *"removing the fix cannot take back"* — written under your 09-08 ruling
+> (leave it). Link 08 then built the pass that takes it back. If the pass stays, that sentence is false on
+> upload; if you rule the pass out, the code comes out instead. **Rule 126 either way and the doc sweep
+> (`100_DOCSWEEP.md`, written and waiting) carries both wordings** — plus the FAQ line that goes with it. It
+> must run BEFORE the upload sitting, because the sentence ships in `metadata.lua`.
+>
+> **129. Publish the site in the SAME sitting as the upload, right after it — not before.** Link 06 asked for
+> "same sitting"; the audit adds the order. The live page today still lists 82 fixes, which is correct for the
+> v5 players actually have; the committed page lists 46, which is correct only once v6 is up. Publishing first
+> would describe a pack nobody can install yet. **Recommendation: upload, then `UPLOAD_WORKFLOW` §4.**
+>
+> **What the sitting should expect from the boot log, computed rather than guessed: 44 applied / 0 inactive**
+> (a first-pass read may say 43/1 — the Saint's-blessing module latches and then heals, that is normal). No boot
+> of this 44-module pack has ever happened; every number in the chain so far is from the old 80-module one. Any
+> `inactive` line at all is a finding, and eight modules changed their self-check since the last boot.
+>
+> ✅ **Nothing else is owed from you now.** The in-play controls stay batched in the one post-99 sitting as you
+> ruled. Three smaller things were filed for hotfix 3 with no decision needed: a module (F60) whose target moved
+> so it may be worth retiring, a vanilla track quirk (C55) to read at the sitting, and the F46 "is it even
+> needed?" console read you already have on the list.
+
 ### ✅ 2026-09-09 — RULED AND DONE: you raised the `STATE.md` byte cap to 12 KiB, and item 126 is now IN it. Nothing owed; this is the receipt.
 
 > **Your words:** *"I don't want things missing from state.md that we need to
