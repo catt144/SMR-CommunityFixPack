@@ -29,6 +29,48 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### 2026-09-09 — 131: the F117 fix has LANDED. It is the last code in hotfix 2. One small question for you, and one thing the sitting now owes.
+
+> **What landed** (three commits, all pushed): `777249d` the F117 repair,
+> `0136af1` the two riders, `cb6415f` a hook the Test Kit reads. Plus one probe
+> in the Test Kit (`c1114ed`, local as always). Only `100_DOCSWEEP` is left
+> between here and the upload.
+>
+> **F117 turned out not to be a one-token fix, and I think that is good news.**
+> The obvious repair — just always pass the colonist — would have been *worse*
+> than the bug on the older game: no crash, but every dome silently scored
+> wrong, which nothing would ever have caught. So the fix asks the game itself,
+> at the moment it needs the answer, which of the two shapes it has, and if it
+> cannot tell it does nothing at all and leaves the game's own choice alone.
+> I drove that question against **both** installed game versions on the bench
+> and it answered correctly on each, and refused to answer on two deliberately
+> broken ones. F118 and the third rider went in as designed.
+>
+> ⛔ **I am not claiming either bug is fixed, and I moved no status word.** Both
+> were found by reading the game's code, and both repairs were checked the same
+> way. Neither has been seen happening, or seen not happening, in an actual game.
+>
+> **What the sitting now owes** — the same one consolidated session you already
+> planned, with two things added to it:
+> * **F117:** land a passenger rocket far from every dome on a colony that has a
+>   nursery, retirement home, hotel, or a dome with a trait filter. Before: a
+>   mod-error dialog naming us. After: arrivals just walk. (`bugs/F117.md` has
+>   the full recipe.)
+> * **F118:** open a layout containing a building you have not researched, save
+>   with the dialog open, load. This one I genuinely cannot predict — nobody has
+>   ever measured what the leak looks like, so "nothing visible" is a legitimate
+>   result and worth writing down.
+>
+> ❓ **The one question — do you want the bench test kept?** I built a small
+> harness that reads the real game code out of both your installed versions and
+> re-checks the F117 fix against them. It is the evidence this fix rests on, and
+> right now it lives in a temp folder that disappears with this session; the
+> results are written down in `bugs/F117.md` either way. Keeping it means one
+> new file in `tools/`, and it would re-check itself on every future game patch.
+> I did not add it because this link's scope was fixed at four items and a new
+> tool was not one of them. **Say "keep the F117 bench" and I or the next
+> session will add it — otherwise it goes away and only the transcript remains.**
+
 ### ✅ 2026-09-09 — RULED: all three of link 99's calls, plus one new one (130). Every gate on the doc sweep is now satisfied. ✅ **Nothing is owed from you until the sitting.**
 
 > **126 — the F95 residue pass STAYS IN.** Your words: *"Leave ck126 in."*

@@ -30,6 +30,12 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   candidate for hotfix 3. Pass D: 3 of 35 KEEP wrappers moved under class (c), seen by NO instrument. ⛔ NO boot of the
   44-module pack exists; PREDICTION 44 applied / 0 inactive (first-pass read 43/1). `100_DOCSWEEP.md` AUTHORED — fires
   after 126+127 are ruled and BEFORE the upload sitting (bullet 2 ships in `metadata.lua`).
+  ⭐ **LINK 99a LANDED 09-09** (`777249d` F117, `0136af1` riders, `cb6415f` publish; kit `c1114ed`) — LAST CODE in hotfix 2.
+  F117: `ChooseDome`'s argument is now picked by a BEHAVIOUR probe on `Community:GetScoreFor` (ck118's branch guard applied
+  to a wrapper), FALSIFIED on BOTH shipped bodies at a desk — incl. the silent 1.0.7 mis-score 110→100 that "pass `self`
+  everywhere" would have caused. UNKNOWN ⇒ the re-choose stands down. F118 re-assert + `FlightPolicies` named decline landed.
+  ⛔ NEITHER REPRODUCED, no probe for F118, NO status word moved. ⚠️ Desk falsifiers are SCRATCHPAD-only (`F117.md` has the
+  transcript + the ask to promote them). Next and last: `100_DOCSWEEP`.
   ⛔ ALL in-play controls DEFERRED to ONE sitting AFTER 99 (owner 09-08). 99 SHIP ≠ clearance (H-04).
   ⚖️ Owner rule 09-08: a patch note saying "Fixed" is a **CLAIM, false until we confirm it**.
 - ⭐ PUBLISHED both portals — `pdx_id` **156049**, `steam_id` **3787202810**, tree `version` **5** (F110, 08-30).
@@ -102,7 +108,7 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 - **130 RULED 09-09**: Saint heal SHIPS UNEXERCISED — condition is historical, unforgeable (`EF-080` override yields
   `restored 0`); additive-only and cannot throw (`Lua/TraitPreset.lua:77-95` no throwing path, `WhenActive` is a gate not
   a trap). ⛔ Its kit probe PASSes vacuously with no domed Saint — NOT coverage. Field reports are the detector.
-- ⛔ BLOCKS the upload: the F117 link, then `100_DOCSWEEP`. 118 RULED ⇒ re-copies MUST decline on 1.0.7 (`FIX_POLICY` §2a).
+- ⛔ BLOCKS the upload: `100_DOCSWEEP` ALONE — the F117 link LANDED 09-09. 118 RULED ⇒ re-copies MUST decline on 1.0.7 (§2a).
 - 73 blame surface — harden or not · 76 confirm (a) was a ruling not a leaning · 53 harden now or in 1.0.1
   (rec 1.0.1) · 51 both-packs leg timing (rec after launch) · 50 chain-vs-replace wording · 47 two modder-page
   wordings · 43 opt-in pack re-tick · 41 dialog wording + sweep cap 5→8 · 40 `smr_shuttles` name · 39 dialog re-fire.
@@ -112,7 +118,7 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 BUILD STATE (emitted by tools/doccheck.py)
 - modules: 44 registered (44 default-active, 0 optional-gated files)
 - Code/*.lua files: 45
-- TestKit probes: 94
+- TestKit probes: 95
 - BUGS index rows: 118 F + 12 D + 55 C
 ```
 Re-emit after any change. Game: records describe **1.0.7.396349** (`EF-014`); INSTALLED is now **1.1.0** (`EF-075`).
