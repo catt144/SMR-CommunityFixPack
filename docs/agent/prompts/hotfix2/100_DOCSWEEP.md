@@ -26,6 +26,14 @@ its commit before §3.
 completes, keep exactly one in progress. The owner reads it to decide when to
 step in.
 
+✅ **BOTH GATES RULED 2026-09-09** (relayed by `smr-bugfixpack-77`, who is
+writing the receipts into the checklist — read them there, not here): ck126 =
+KEEP the F95 pass (§3.1 first wording); ck127 = (a), F117 fixed BEFORE the
+upload (§3.2 line applies once that link's commit is on `main` — check
+`git log -- Code/Fix_ArrivalDeaths.lua`); ck129 = publish the site AFTER the
+upload. ⛔ Still wait for the F117 commit before firing, and confirm the
+rulings in the checklist yourself.
+
 ⛔ **GATES BEFORE YOU START — do not run this until both are ruled:**
 - **ck126** (keep or remove the F95 residue pass in `90_SaveSanitizer`) — §3.1 has
   two wordings and you write the one that matches the ruling;
@@ -39,7 +47,7 @@ pack is the thing this chain exists to prevent.
 `prompts/PUBLIC_SURFACE_SWEEP.md` (the template — §0 rule, §1 site, §2 store,
 §3 metadata, §5 close the loop) · `docs/UPLOAD_WORKFLOW.md` §3–§4 ·
 `agent/reports/STORE_CARD_LIVE.md` ·
-`C:\Dev\SMR-CommunityMods\content\{fix-list,faq,index}.md` ·
+`C:\Dev\SMR-CommunityMods\content\{fix-list,faq,index,for-modders}.md` ·
 `docs/PLAYTEST_CHECKLIST.md` items 126–129 · `agent/bugs/F95.md`, `F117.md`
 · `agent/bugs/INDEX.md` / `agent/facts/INDEX.md` to find more.
 
@@ -50,8 +58,9 @@ pack is the thing this chain exists to prevent.
 `STORE_CARD_LIVE.md`) — **changed together, in ONE commit, proven byte-identical
 by a script, never eyeballed** (link 06's `verify_sync` shape: un-escape the Lua
 literal, diff against the §3 plain block, compare the BBCode blocks, compare the
-change note); the site's `content/fix-list.md`, `faq.md`, `index.md`; the
-agent-doc drift list in §4; `bugs/F115.md`'s three live-claim lines.
+change note); the site's `content/fix-list.md`, `faq.md`, `index.md`,
+`for-modders.md`; the agent-doc drift list in §4; `bugs/F115.md`'s three
+live-claim lines.
 
 **Out:** `Code/*.lua` (every comment fix the audit found in code is routed to
 decision 127's link — see §4 "handed on"); `items.lua`; `version` and every
@@ -126,6 +135,19 @@ into bullet 4's "Updated for 1.1.0:" sentence: *"…and an error that could
 appear when a new arrival's dome was out of walking range is gone."* ⛔ If 127(b)
 was chosen, write nothing — a note about a known live error is the reporter's
 surface (`FIELD_REPORT_REPLIES.md`), not the store's, and it is hotfix 3's line.
+
+### 3.2b The site's two "built against game version" lines (routed by `smr-bugfixpack-77`, 2026-09-09; verified by 99)
+
+`content/faq.md:176` and `content/for-modders.md:15` both read *"built against
+game version **1.0.7.396349**"*. Correct for the v5 players have today, false
+on upload — the two-clocks structure of the store card, on the site. Rewrite
+both to the 1.1.0 build (`1.1.0.403908`, `EF-075`; re-read the number from
+`docs/agent/facts/EF-075.md`, do not type it from here), and say the frozen v5
+is the 1.0.7 build (the `legacy-1-0-7.md` page already exists; its download
+button was route-checked by the same peer: the `v5-game-1.0.7` release exists,
+`api.github.com` 200). Grep the whole `content/` tree for `1.0.7.396349` after —
+the sweep that found these two was a full-tree grep, and a third copy would
+survive a two-file edit.
 
 ### 3.3 Sync, then prove it
 
