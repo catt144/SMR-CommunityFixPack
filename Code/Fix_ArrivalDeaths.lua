@@ -123,6 +123,43 @@
 -- SAVE FOOTPRINT (FIX_POLICY §3): none. The two fields written — `emigration_dome`
 -- and `emigration_elevator` — are vanilla's own (Colonist.lua:92, :264) and carry
 -- vanilla values.
+--
+-- ── F117: WHICH ARGUMENT DOES `ChooseDome` TAKE? A behaviour probe, not a label ─
+-- 1.1.0 changed `ChooseDome`'s first argument from the traits table to the
+-- COLONIST (`_GameUtils.lua:486-500`; 1.0.7 `:426-441`), and both callees it
+-- reaches now index `.traits` off that argument
+-- (`Community:GetScoreFor` 1.1.0 `Buildings/Community.lua:445` vs 1.0.7 `:374`;
+-- `Community:HasFreeLivingSpaceFor` 1.1.0 `:402-418` vs 1.0.7 `:335-352`).
+-- Passing the wrong one is a defect in BOTH directions, and they are not the
+-- same defect:
+--   * a traits table on the 1.1.0 body → `colonist.traits` is nil →
+--     `FilterObjectAttributes(filter, nil)` indexes nil and THROWS, inside the
+--     arriving colonist's `Idle` command thread (F117, the P1);
+--   * a colonist on the 1.0.7 body → `traits[attrib]` is nil for every trait →
+--     no throw, every dome silently MIS-SCORED. Decision 118 (FIX_POLICY §2a)
+--     exists to forbid exactly that, and it is the worse of the two.
+-- ⛔ So the argument may not be chosen by a version label. `EF-077`: our
+-- `lua_revision` and both of 1.1.0's minimums are all 350453 — there is no field
+-- to read, which is also why nothing warns a 1.0.7 player who installs this.
+--
+-- The shape change is visible only at CALL time — `ChooseDome`'s own body barely
+-- moved, its CALLERS are what changed — so the probe drives one of the two
+-- callees `ChooseDome` invokes with that argument and asks which table it looks
+-- the trait up in. It cannot run at apply time: the 1.1.0 body opens on
+-- `g_Consts.CommunityEval*`, a per-game GameVar, so it runs once on first use.
+-- Fail-closed: neither shape, or a throw, means the re-choose stands down and
+-- vanilla's own destination survives (FIX_POLICY §2a, probe property 2 —
+-- UNKNOWN is not permission).
+--
+-- Why `Community.GetScoreFor` is the right body to read: `ChooseDome` walks the
+-- `domes` list from `GetDomesReachableByColonists`, which inserts only `Dome`s
+-- (`_GameUtils.lua:449-478` — the `Station` sweep contributes their `.labels.Dome`,
+-- never a station), and no `Dome` declares `GetScoreFor` on either tree, so
+-- `dome:GetScoreFor` resolves to the `Community` body the probe reads. The
+-- sibling callee `HasFreeLivingSpaceFor` moved in the same commit and takes the
+-- identical value from the identical call site, so it cannot want a different
+-- argument without vanilla being broken — that is the one step of this leg not
+-- separately measured, and it is recorded as such in `bugs/F117.md`.
 
 -- MANIFEST (FIX_POLICY §2b) -- machine-read by `python tools/bodycheck.py`.
 -- Pinned 2026-09-08 against shipped game 1.1.0.403908. ⛔ These are CLAIMS about
@@ -146,6 +183,11 @@ SMRFixPack.Register("ArrivalDeaths", {
 			{ global = "IsInWalkingDist" },
 			{ global = "GetDomesReachableByColonists" },
 			{ global = "ChooseDome" },
+			-- F117: the body the argument-shape probe drives, and the one
+			-- constant its two branches share. Existence only — WHICH argument
+			-- it wants is a behaviour question and is asked at first use.
+			{ class = "Community", method = "GetScoreFor" },
+			{ path = { "const", "Scale", "Stat" }, kind = "number" },
 			{ global = "ValidateBuilding" },
 			{ global = "IsSameMap" },
 			-- GetMapSlot is an engine method; CObject's copy is only flattened
@@ -175,6 +217,95 @@ SMRFixPack.Register("ArrivalDeaths", {
 			return orig_onarrival(self, ...)
 		end
 
+		-- ── F117-PROBE-BEGIN (extracted verbatim by the desk falsifier) ──────
+		-- A key no trait preset can carry. `FilterObjectAttributes` walks
+		-- `pairs(filter)` (`Lua/Filter.lua:113-121`, byte-identical on both
+		-- trees), so the stub filter's single key is the ONLY attribute either
+		-- body looks up, and it is ours: no real trait, preset or save value is
+		-- involved in the answer.
+		local PROBE_TRAIT = "SMRFixPack_F117_Probe"
+
+		-- nil until probed; then "colonist" (the 1.1.0 contract), "traits" (the
+		-- 1.0.7 contract) or false (UNKNOWN — stand down).
+		local arg_shape
+
+		-- ⛔ STUB CONTRACT (FIX_POLICY §2a, the probe form's property 3). Every
+		-- field below is read straight off the two shipped bodies; nothing is
+		-- here to make the call "work":
+		--     self:HasLifeSupport()    1.1.0 `Community.lua:443` · 1.0.7 `:363`
+		--     self.traits_filter       1.1.0 `:445`              · 1.0.7 `:374`
+		--     self.labels.Residence    1.1.0 `:448`              · 1.0.7 `:386`
+		--     self.free_spaces.traits  1.0.7 `:377` only — that body does
+		--                              `pairs(self.free_spaces and ...traits)`,
+		--                              which throws on nil, so the stub must
+		--                              carry an empty one to reach 1.0.7's verdict
+		-- WHY THE TARGET IS SAFE TO CALL ON ONE. Each body is: a read of those
+		-- fields; `TraitFilterColonist` → `FilterObjectAttributes`, which is a
+		-- `pairs` walk and integer adds and nothing else; a `Max`; and one
+		-- division by `const.Scale.Stat`. Both accumulate into a LOCAL and assign
+		-- NOTHING — not to `self`, not to the argument, not to a global (unlike
+		-- the sibling `HasFreeLivingSpaceFor`, which may call
+		-- `RefreshFreeLivingSpaces`; that is why the probe drives this body and
+		-- not that one). With an EMPTY residence list neither body enters its
+		-- residence loop, so `IsSuitable`, `GetResidenceComfort` and
+		-- `GetFreeSpace` are never reached and no real object is touched at all.
+		-- Nothing sleeps, waits, posts a message or starts a thread: synchronous
+		-- and side-effect-free, shown from the shipped bodies as §2a requires.
+		--
+		-- The two calls differ ONLY in where the probe trait is hung, so the
+		-- life-support term — the one value that genuinely differs between the
+		-- branches (`g_Consts.CommunityEvalNoLifeSupport` vs a literal 0) —
+		-- cancels in the DIFFERENCE, and the surviving 1 names which table the
+		-- shipped body indexed. No branch of this reads a constant's value.
+		local function discriminate()
+			local stub = {
+				HasLifeSupport = function() return false end,
+				traits_filter = { [PROBE_TRAIT] = 1 },
+				labels = { Residence = {} },
+				free_spaces = { traits = {} },
+			}
+			-- trait hung on the ARGUMENT: +1 on the 1.0.7 body, +0 on 1.1.0
+			local as_traits = Community.GetScoreFor(stub, { [PROBE_TRAIT] = true, traits = {} })
+			-- trait hung on the argument's `.traits`: +1 on 1.1.0, +0 on 1.0.7
+			local as_colonist = Community.GetScoreFor(stub, { traits = { [PROBE_TRAIT] = true } })
+			if type(as_traits) ~= "number" or type(as_colonist) ~= "number" then
+				return false
+			end
+			if as_colonist - as_traits == 1 then
+				arg_shape = "colonist"
+			elseif as_traits - as_colonist == 1 then
+				arg_shape = "traits"
+			else
+				-- neither table was looked up, or both were: not a shape we
+				-- know, and a guess here is the F114 failure mode.
+				return false
+			end
+			return true
+		end
+
+		-- One shot. `false` is a decided verdict (UNKNOWN), not "not yet asked",
+		-- so the decline is logged exactly once and never re-tried. Routed
+		-- through `Require`'s `probe` form so the pcall trap, the strict-`true`
+		-- rule and the decline logging are the shared ones, not re-implemented.
+		local probed = false
+		local function choose_dome_arg(colonist)
+			if not probed then
+				probed = true
+				local err = SMRFixPack.Require("ArrivalDeaths", {
+					{ probe = discriminate,
+					  reason = "ChooseDome's argument contract could not be read from Community:GetScoreFor" },
+				})
+				if err then
+					arg_shape = false
+					SMRFixPack.Log("ArrivalDeaths: %s -- the F53(b) arrival re-choose stands down for this session (F117)", err)
+				end
+			end
+			if arg_shape == "colonist" then return colonist end
+			if arg_shape == "traits" then return colonist.traits end
+			return nil
+		end
+		-- ── F117-PROBE-END ───────────────────────────────────────────────────
+
 		-- (b) do not send an arrival to a dome it cannot reach
 		local orig_idle = C.Idle
 		function C:Idle(...)
@@ -195,15 +326,23 @@ SMRFixPack.Register("ArrivalDeaths", {
 					or (elevator and IsSameMap(rocket, elevator) and elevator.other
 						and elevator.other:GetMapSlot() == dome:GetMapSlot())
 				if not reachable then
-					local domes, _, _, dome_elevators = GetDomesReachableByColonists(self.city, pos)
-					-- safety_dome deliberately withheld: the walkable candidates are
-					-- the only acceptable answers here
-					local new_dome, new_elevator = ChooseDome(self.traits, domes, false, dome_elevators)
-					-- TransportByFoot rides self.emigration_elevator (:2725); keep it
-					-- paired with the destination we just picked. `false` is the class
-					-- default for both (Colonist.lua:92, :264).
-					self.emigration_dome = new_dome or false
-					self.emigration_elevator = new_elevator or false
+					-- F117: what ChooseDome wants is asked of the shipped body,
+					-- once, and only on the branch that is about to call it.
+					-- `nil` is UNKNOWN and means STAND DOWN — vanilla's own
+					-- destination survives untouched, which is exactly what a
+					-- player got before this module existed.
+					local dome_arg = choose_dome_arg(self)
+					if dome_arg ~= nil then
+						local domes, _, _, dome_elevators = GetDomesReachableByColonists(self.city, pos)
+						-- safety_dome deliberately withheld: the walkable candidates
+						-- are the only acceptable answers here
+						local new_dome, new_elevator = ChooseDome(dome_arg, domes, false, dome_elevators)
+						-- TransportByFoot rides self.emigration_elevator (:2725); keep
+						-- it paired with the destination we just picked. `false` is the
+						-- class default for both (Colonist.lua:92, :264).
+						self.emigration_dome = new_dome or false
+						self.emigration_elevator = new_elevator or false
+					end
 				end
 			end
 			return orig_idle(self, ...)
