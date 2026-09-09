@@ -310,7 +310,10 @@ local patch = SMRFixPack.DataPatch(FIX_ID, {
 --         but it is NOT one-shot, and it would print its line in every future
 --         session's log. ⚠️ That is exactly what this pass did when first built
 --         2026-08-02; caught before the batch leg ran, and the check is the same shape
---         Fix_AstrogeologistExtractors already used for its own heal.
+--         Fix_AstrogeologistExtractors used for its own heal. ⚠️ That module was
+--         DELETED in hotfix 2 (re-verification row F-5, 1.1.0 rewrote the profile),
+--         so the citation is history now, not a live cross-reference — recorded
+--         rather than dropped, because it is where this check's shape came from.
 --
 -- (B) the 1.1.0 branch (rebase_resolved). No stale registration exists to remove —
 --     the broken value made the shipped function return before it filed anything —

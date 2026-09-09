@@ -577,3 +577,136 @@ is verified in SOURCE; nothing ran. Not that no player is affected — a 1.0.7
 player who updates loses 36 fixes. No status word was moved on any of the 43 bug
 entries, including the three that deletion resolves (F111/F112/F113), because no
 boot log has been taken since.
+### From link 03 — the applies-today repairs: what changed, what the probe decides, and what has NOT been exercised in play
+
+*(Link 03, `smr-bugfixpack-91`, 2026-09-08. Commits `3db4984` F-1 · `f38d6d2` F-2 ·
+`19b5aaa` F-3. ⛔ **Nothing was run in a game. No status word moved on any of the
+three bug entries.** `Code/*.lua` is still 45 files / 44 registered modules — this
+link added and removed none, so `H-10` is untouched and `items.lua` /
+`metadata.lua` were not opened.)*
+
+#### Per module: what changed, what the self-check decides, what is unexercised
+
+**F-1 `Fix_SaintBlessing`** (entry F92, `3db4984`)
+* **Changed.** A behaviour probe now decides the branch, and a **second** one-shot
+  save re-base was added for the 1.1.0 branch. The data rewrite is unchanged on the
+  1.0.7 branch.
+* **What the probe decides.** It calls the shipped
+  `TraitPreset:AddDomeColonistsModifier` on stubs and reads back the label it filed
+  under. Raw value ⇒ 1.0.7 ⇒ apply. Resolved label ⇒ 1.1.0 ⇒ decline the rewrite and
+  arm the re-base. **Anything else, including nothing ⇒ UNKNOWN ⇒ do nothing at all
+  and latch.** Two `Require` probes, not one inverted probe, precisely so UNKNOWN
+  cannot fold into a branch. On 1.1.0 the expected verdict is DECLINE-and-arm.
+* **⛔ NOT EXERCISED IN PLAY.** Nothing here has been run. Specifically unexercised:
+  (i) the probe has never been evaluated in a live game — the stub contract is
+  argued from the shipped body, not measured; (ii) the re-base has never touched a
+  real save; (iii) the UNKNOWN branch has never fired, by construction. The owner
+  control is checklist-batched and unrun.
+* ⚠️ **The module stays `active` on 1.1.0 while patching nothing.** That is
+  deliberate — the healing job is real and `WhenActive` requires `active` — but it
+  means the boot log's active count is not evidence that a data patch happened.
+  Read the module's own line instead: on 1.1.0 it says *"the shipped code resolves
+  the trait label itself — data left untouched; save re-base armed for N preset(s)
+  of M"*, which is a different string from the 1.0.7 *"corrected N … of M"* line.
+  ⭐ Once the installed base has loaded once with this build the module is a REMOVE
+  candidate. Recorded on the entry, deliberately not decided.
+
+**F-2 `Fix_StaleReservations`** (entry F58, `f38d6d2`)
+* **Changed.** One clause: a colonist whose `expedition_residence` is truthy is
+  exempt from the **age** branch of the `NewDay` sweep. The invalid / desynced /
+  dying branches deliberately still fire. Plus an honest header correction (below).
+* **Self-check.** Unchanged — the existing `Require` existence pair. No probe: the
+  module gains no 1.1.0 body shape, it is a post-wrapper reading fields present on
+  both branches. ck118 does not bite it.
+* **⛔ NOT EXERCISED IN PLAY.** No expedition has been run with this build. The
+  residual we accepted is also unmeasured: a colonist lost permanently on an
+  expedition while still a valid object now holds their home forever.
+
+**F-3 `Fix_ShelterReflex`** (entry F73, `19b5aaa`)
+* **Changed.** Half (a) — the `MicroGHabitatAutoResolve:IsSuitable` replacement —
+  **deleted**. Half (b) kept byte-identical. One reason string reworded, because it
+  named a target the module no longer touches; flagged in the file, since reason
+  strings are otherwise preserved byte-for-byte.
+* **Self-check.** No probe, and the file says why explicitly rather than leaving it
+  implicit (§4 of the brief): half (b) carries no 1.1.0 body, so there is nothing
+  for a branch guard to decline.
+* **⛔ NOT EXERCISED IN PLAY.** The throw this removes has never been reproduced —
+  it is source-derived, and its trigger (a trait filter set on an asteroid habitat)
+  is why our own playtesting never hit it. The owner control is the first attempt to
+  see it.
+
+#### ⛔⛔ TWO TEST KIT PROBES WILL NOW REPORT A FALSE `FAIL` — filed, not fixed
+
+The Test Kit is a separate repo and outside link 03's fence, so both were left
+alone. **This matters to your verdict**, because a suite run is one of the
+instruments a ship decision would lean on and two of its rows are now lying:
+
+* **`SaintBlessing`** (`TestKit/Code/57_Probes_Wave8.lua:139-143`). Its static half
+  asserts `saint.modify_trait == GetTraitLabel("Religious")` — i.e. that we
+  rewrote the game's data. On 1.1.0 we deliberately no longer do. ⇒ **FAIL while
+  the fix is correct.** Its *live* half (do the dome Saints carry the modifier
+  under the resolved label) is exactly the right check and is the half that should
+  be kept.
+* **`ShelterReflex`** (`TestKit/Code/20_Probes_Wave2.lua:182-196`). It stubs a
+  habitat with `GetScoreFor = function() return 0 end` and asserts
+  `AR.IsSuitable(blipped, colonist)` is true — the behaviour we **deleted on
+  purpose**. ⇒ **FAIL for a half the pack no longer claims.** The file's own F61
+  precedent says a probe that tests removed behaviour goes with the fix.
+* `StaleReservations` (`:679-708`) was checked and is **unaffected** — its stub path
+  through 1.1.0's `ReserveResidence` still works and it should still pass.
+
+⚠️ The owner has been warned about both on the checklist, in the same block as the
+three controls, so a suite run cannot be misread as a regression.
+
+#### Drift caught in my own work (chain rule 5)
+
+* **The QA and the re-verification both named only ONE vanilla fixup.** There are
+  **two**: `OrphanedDomeColonistsTraitModifiers` (`_fixup.lua:2138-2170`, the one
+  cited) and `MigrateDomeTraitLabelModifiers` (`:2097-2136`, the 1.0.7→1.1.0
+  migration, which also rehomes dome labels from `trait.id` to `GetTraitLabel`).
+  **Both** call `AddDomeColonistsModifier` and **both** broke the same way under our
+  wrong value. The re-base covers both because it keys on the missing entry rather
+  than on which fixup ran, but the record was incomplete and now says so.
+* **`colonist.traits` is a HYBRID set + array** (`Colonist.lua:493-495`:
+  `traits[trait_id] = true` *and* `traits[#traits+1] = trait_id`). The existing
+  1.0.7 heal walks it with `pairs`, so it also visits integer keys — inert, because
+  `rebased_from[1]` is nil, but it is luck rather than design. The new 1.1.0 re-base
+  uses `ipairs`, matching the shipped filing site (`Colonist.lua:441`) and both
+  fixups.
+* **A balance checker was needed for a third time and written for a third time.**
+  Falsified in both directions before use (red on a truncated function; green on a
+  file containing a multi-line `for … ipairs({ }) do`, the word `end` inside a
+  string and inside a `--[[ ]]` block, and a `repeat … until`). 45/45 balance 0.
+  Routed to 05 with the counting rule that survives falsification, since committing
+  it is 05's fence.
+
+#### Filed, not fixed — out of fence
+
+* **→ 06 (and the doc sweep):** the site fix list's F73 card promises *"a habitat
+  with a momentary life-support gap keeps its residents"*
+  (`content/fix-list.md:182-184`, rendered `site/fix-list/index.html:996`) and calls
+  the defect *"two things"* (`:178-180`). Only one survives. Same shape as F108 /
+  F107 / F105.
+* **→ 05:** `tools/harvest_wrap_targets.py:173-175`'s parenthetical describes the
+  deleted `MicroGHabitatAutoResolve.IsSuitable` replacement.
+  `tools/doccheck.py`'s `LOAD_ORDER_RULES` cites a `Fix_ShelterReflex.lua:70` that
+  has moved (the rule itself is unchanged and still correct).
+* **→ nobody yet:** `00_Core.lua:304` cites `Fix_AstrogeologistExtractors:174`
+  (deleted by link 02) and `Fix_SaintBlessing:151` (moved by `3db4984`). Historical
+  explanatory text, harmless, stale. 01 is consumed, so this has no owner — your
+  call whether the doc sweep takes it.
+
+#### ⛔ What may NOT be claimed from this link
+
+* **Not "F-1 is fixed", "F-2 is fixed" or "F-3 is fixed".** Three source-derived
+  repairs, zero game runs. The owner's 2026-09-08 rule binds our own notes too.
+* **Not "saves are healed."** The F-1 re-base is untested until a save that loaded
+  under the broken pack has been loaded again with this build.
+* **Not "F-3 is now correct."** It is now **absent**, and 1.1.0 players get the
+  vanilla behaviour, which still evicts a habitat's residents on a blip. That is a
+  patch-note line and a stale site card, both routed.
+* **Not "the probe form is proven."** F-1 is its first real use and it has never
+  executed in a game. What is shown is that the target is synchronous and
+  side-effect-free **on the shipped body as read**, and that the stub contract is
+  written beside it. A tool run and a source read are not a test.
+* **No status word moved**, on any of the three entries.

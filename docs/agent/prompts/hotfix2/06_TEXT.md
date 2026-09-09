@@ -246,3 +246,53 @@ one of them is now factually wrong:
 
 ⚖️ **The owner's rule that should shape your wording** (ck120): *"we fix anything
 negatives, a small positive I am not as concerned about."*
+### From link 03 — one live public claim is now FALSE, and four drafted patch-note lines
+
+*(Link 03, `smr-bugfixpack-91`, 2026-09-08. Commits `3db4984` F-1 SaintBlessing ·
+`f38d6d2` F-2 StaleReservations · `19b5aaa` F-3 ShelterReflex. ⛔ Nothing was run
+in a game; no status moved.)*
+
+**1 · ⛔ THE SITE FIX LIST NOW PROMISES SOMETHING THE PACK NO LONGER DOES.** This is
+the F108 / F107 shape link 02 already routed to you, on a fourth entry. The F73
+card (`SMR-CommunityMods/content/fix-list.md:172-187`, rendered at
+`site/fix-list/index.html:988-1000`) reads:
+
+* *"What you saw: … and a brief power or air interruption turning every resident of
+  a habitat out of their home for as long as it lasted."*
+* *"What was wrong: **two things.** A habitat counts as unsuitable housing the
+  instant its life support dips, so its residents are un-homed; and the game has no
+  reflex for a colonist with nowhere to be…"*
+* *"After the fix: **a habitat with a momentary life-support gap keeps its
+  residents**, and a colonist idling in vacuum heads home before their oxygen runs
+  out."*
+
+**Only the second half survives.** Half (a) was deleted in `19b5aaa`: on 1.1.0 it
+had become an outright throw on any asteroid habitat with a trait filter, and
+1.1.0 made "no life support" a deliberate scoring **tier** with the intent written
+into the shipped help text — so repairing it would mean fighting a stated design
+(`FIX_POLICY` §4). ⇒ the card needs to become **one thing, not two**, and the
+"keeps its residents" promise has to go. The entry keeps its *judgment call* flag
+for the surviving half, which is still a behaviour the game does not have.
+
+**2 · Drafted patch-note lines.** Yours to word finally; these are the honest
+versions and ⛔ **none of them may say "Fixed" yet** — all three repairs are
+source-derived and none has been seen in play (owner rule, 2026-09-08). The three
+owner controls are batched on the checklist and unrun.
+
+* *A Saint's blessing works again with the pack installed. The game's own 1.1.0 fix
+  and ours were cancelling each other out; saves played in between are repaired on
+  load.*
+* *Colonists returning from a long expedition keep the home that was held for them.*
+* *Setting a trait filter on an asteroid habitat no longer causes an error.*
+* *Removed: the pack no longer holds an asteroid habitat's residents through a power
+  or air cut — the game now handles that case deliberately, and colonists are
+  re-homed by themselves once life support is back.*
+
+⚠️ The fourth is a **removal**, not a repair, and it is the one a player could
+notice as a loss. It reads better next to the third (same module, same sitting)
+than buried in a removals list.
+
+⚖️ Note for the Saint line specifically: the honest framing is **"our fix and the
+game's fix were cancelling each other out"**, not "we fixed a bug". 1.1.0 fixed F92
+itself; what hotfix 2 does is stop our data patch from breaking their fix, and heal
+the saves that were played in between.

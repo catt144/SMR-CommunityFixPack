@@ -20,8 +20,8 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   Source-derived, NEVER reproduced.
   ⭐ **1.1.0 RE-VERIFICATION 09-08: 10 FIX / 35 REMOVE / 35 KEEP** (`reports/PACK_1_1_0_REVERIFICATION.md`,
   ck114-117; QA'd by 3 fresh readers, `reports/VANILLA_FIX_QA.md` §0, 0 flips).
-  ⭐ **LINK 02 DONE 09-08 `2dc1dbe`: 36 modules DELETED** — ck98=delete · ck117=KEEP Sanitizer · ck120=no
-  F-5 cleanup. 81→45 in Code+items+`code` (H-10). 0 flips in 37 re-derived rows.
+  ⭐ **LINKS 02+03 DONE 09-08**: 36 modules DELETED `2dc1dbe` (81→45 in Code+items+`code`, H-10); F-1/F-2/F-3
+  repaired `3db4984` `f38d6d2` `19b5aaa`. ⛔ 2 TestKit probes now FALSE-FAIL (SaintBlessing, ShelterReflex).
   ✅✅ BOTH GATES MEASURED 09-08 (`archive/logs/gated110_*`): 63 applied / 17 inactive / 14 named as predicted,
   0 errors; both `update_suspect` routes CONFIRMED. ⛔ MENU-ONLY ⇒ trains/landscaping NOT exercised in play.
   ✅ **HOTFIX_1_AUDIT DONE 09-08: SHIP WITH CHANGES — text-only (ck112/113), code clean**
@@ -90,8 +90,8 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 - 98 rig half only (⛔ Steam = ONE branch at a time, owner 09-08) · 99 disposition of the self-disabled ·
   100 say anything to players yet (rec no) · 101 accept the re-verification chain shape.
 - 112 card self-check. ⛔ 111+113 RULED 09-08; 111=adopt rehome, +119 filed — both in `hotfix2/04` §7.
-- ⛔ BLOCKS the chain: nothing for 03. ✅ 98=DELETE · 117=KEEP Sanitizer · 124=F-2 FIX · 120=no F-5
-  cleanup, all RULED 09-08. 118: 1.0.7 gets frozen v5 ⇒ re-copies MUST decline on 1.0.7. 121 WITHDRAWN (1.1.0 REPLACED it).
+- ⛔ BLOCKS the chain: nothing. 98/117/120/124 all RULED 09-08 (checklist). 118: 1.0.7 gets frozen v5 ⇒ re-copies
+  MUST decline on 1.0.7. 121 WITHDRAWN.
 - 73 blame surface — harden or not · 76 confirm (a) was a ruling not a leaning · 53 harden now or in 1.0.1
   (rec 1.0.1) · 51 both-packs leg timing (rec after launch) · 50 chain-vs-replace wording · 47 two modder-page
   wordings · 43 opt-in pack re-tick · 41 dialog wording + sweep cap 5→8 · 40 `smr_shuttles` name · 39 dialog re-fire.

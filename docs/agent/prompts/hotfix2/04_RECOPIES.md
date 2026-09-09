@@ -434,3 +434,76 @@ ck98 note above. It comes from ck118 and it is independent of ck98.
 * `Fix_SaintBlessing.lua:146` carries a comment citing
   `Fix_AstrogeologistExtractors`' heal, which no longer exists. `SaintBlessing`
   is your module, so the dangling citation is yours to correct or leave.
+### From link 03 — the applies-today repairs (F-1, F-2, F-3)
+
+*(Link 03, `smr-bugfixpack-91`, 2026-09-08. Commits `3db4984` F-1 SaintBlessing ·
+`f38d6d2` F-2 StaleReservations · `19b5aaa` F-3 ShelterReflex. ⛔ Nothing was run
+in a game; no status moved. `Code/*.lua` is still 45 files / 44 modules — this
+link added and removed none.)*
+
+**1 · ⛔ THE TRAP THAT WILL BITE YOU IF YOUR MODULE HAS A SAVE-REPAIR PATH.**
+`ctx.latch()` sets `entry.status = "inactive"` (`00_Core.lua`, `DataPatch`), and
+`SMRFixPack.WhenActive` returns early unless the status is exactly `"active"`.
+⇒ **a latching pass silently kills that module's own `OnMsg.LoadGame` heal.** F-1
+needed the module to DECLINE its data patch on 1.1.0 and STILL run a save re-base,
+so the probe lives *inside the pass* (link 01 said `Require` is a plain function
+and may be called from a pass — it is, and this is the case that needs it) and the
+1.1.0 branch does **not** latch. Latching is reserved for the UNKNOWN verdict,
+where failing both halves closed is the point. If you gate a module off and it
+owns a heal, check what you just switched off.
+
+**2 · The `probe` form works exactly as 01 specced it, and here is the shape that
+came out.** Two probes rather than one, because a boolean verdict cannot carry
+three outcomes:
+
+* probe A: "does the shipped body file under the RAW value?" → true ⇒ 1.0.7 ⇒ apply
+* probe B: "does it file under the RESOLVED label?" → true ⇒ 1.1.0 ⇒ decline, and
+  arm the save re-base
+* neither ⇒ **UNKNOWN**, which is not permission ⇒ do nothing at all and latch.
+
+Both go through `SMRFixPack.Require` so the `pcall` trap, the strict-`true` rule
+and the decline logging are the shared ones and not re-implemented. ⚠️ If your
+module's branches are also three-valued, do this rather than inverting one probe —
+`not A` silently folds UNKNOWN into the wrong branch, which is the F-1 bug itself.
+
+**3 · Two authoring details worth copying.**
+* **Collect first, mutate later.** A probe that reads the shipped value back out
+  of the shipped function must run against UNTOUCHED data. F-1's pass now builds
+  its candidate set, probes, and only then writes.
+* **Pick the probe subject deterministically.** `pairs` order is not stable, so
+  the boot log would otherwise vary run to run. F-1 takes the lowest trait id.
+
+**4 · The manifest, on three modules that are not plain body copies.**
+* **DataPatch shape** (F-1): `-- SRC: none <reason>` + `-- DEFECT@Data/TraitPreset.lua: modify_trait\s*=\s*"Religious"`.
+  Works exactly as `bodycheck.py`'s docstring advertises (it names this very
+  example) and reports `SRC-NONE` + `OK`.
+* **A second `SRC:` with NO `DEFECT:` is a legitimate, deliberate row** (F-1 pins
+  `TraitPreset:AddDomeColonistsModifier` for class (b) because the probe and the
+  re-base both call it — but on 1.1.0 that body is CORRECT, so there is no defect
+  to state). Say so in the file; do not invent a defect to fill the line.
+* **Absence defects** (F-2, F-3): §2b's rule held up. F-2 pins `#self\.reserved`
+  in `Residence:GetFreeSpace` (a reservation costing a real slot is what is wrong
+  *because* nothing expires it); F-3 pins `self:SetCommand\("Roam"\)`, `Idle`'s
+  unconditional outdoor exit. **Both carry their limit in the file**: if vanilla
+  adds the missing guard elsewhere, `DEFECT-GONE` will not fire and the module is
+  watched for class (b) only.
+
+**5 · Discharged, from 02's note to you.** `Fix_SaintBlessing.lua`'s comment citing
+`Fix_AstrogeologistExtractors`' heal is corrected in `3db4984` — kept as history
+with the deletion named, rather than deleted, because it is where that check's
+shape came from.
+
+**6 · Filed, not fixed (out of my fence — yours only if you touch these).**
+* `00_Core.lua:304` cites `Fix_AstrogeologistExtractors:174` (deleted by 02) and
+  `Fix_SaintBlessing:151` (moved by `3db4984`). Historical, explanatory, harmless —
+  but stale. Routed to 99.
+* `tools/harvest_wrap_targets.py:173-175`'s parenthetical explains why
+  `Fix_ShelterReflex`'s `MicroGHabitatAutoResolve.IsSuitable` replacement is
+  outside the wrap check. That replacement no longer exists. Routed to 05 and 99.
+
+⛔ **What may NOT be claimed from this link.** Not "F-1/F-2/F-3 are fixed" — all
+three are source-derived and **none has been seen in play**; three owner controls
+are on the checklist, unrun. Not "saves are healed" — the F-1 re-base is untested
+until a save that loaded under the broken pack is loaded again with this build.
+Not "F-3 is now correct" — half (a) is now **absent**, and 1.1.0 players get the
+vanilla blip-eviction back.

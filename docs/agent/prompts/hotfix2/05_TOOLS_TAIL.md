@@ -319,3 +319,51 @@ strings and long comments, `for`/`do` double-counting, `repeat`/`until`,
 `elseif`). ⇒ If a balance check ever becomes a committed tool, **it needs its
 falsifier committed with it** — a checker that cannot go red is indistinguishable
 from a broken one, and this one silently accused clean files twice in two links.
+### From link 03 — two tools-tail items, and a second data point on the balance checker
+
+*(Link 03, `smr-bugfixpack-91`, 2026-09-08. Commits `3db4984`, `f38d6d2`,
+`19b5aaa`. ⛔ Nothing was run in a game; no status moved.)*
+
+**1 · The balance checker, third time now — this is the case for committing it.**
+Your inbox already carries link 01's finding (a checker that silently accused
+clean files twice in two links). Link 03 needed one again, wrote a third
+independent one, and the counting rule that survives falsification is worth
+recording so a fourth session does not re-derive it:
+
+> every `end` closes exactly one of `function`, `do`, `if`. ⛔ Never count `for`
+> or `while` — their `do` is the opener, which is precisely how 01's version
+> double-counted a `for … ipairs({` whose `do` sat on a later line. `elseif` does
+> not match `\bif\b`, so it needs no special case. `repeat`/`until` balance
+> separately. Comments and string literals are stripped first, long brackets
+> included.
+
+Falsified **both directions** before use: red on a truncated function, green on a
+deliberately nasty-but-valid file (a multi-line `for … ipairs({ }) do`, the word
+`end` inside a string and inside a `--[[ ]]` block, a `[[ ]]` long string, an
+inline `while true do break end`, and a `repeat … until`). Then 45/45 `Code/*.lua`
+balance 0. ⚠️ Still a scratchpad script, per rule 3 — **committing it is your
+fence, not mine**, and 01's condition stands: it ships with its falsifier or not
+at all.
+
+**2 · Filed, not fixed: a stale parenthetical in `tools/harvest_wrap_targets.py`.**
+Lines 173-175 read:
+
+```
+# (Fix_ShelterReflex's MicroGHabitatAutoResolve.IsSuitable is a full
+#  replacement with NO capture — outside this check's shape by design; its
+#  existence guard is the inline type check at Fix_ShelterReflex.lua:41.)
+```
+
+That replacement was **deleted** in `19b5aaa` (re-verification row F-3: it had
+become a throw on any asteroid habitat with a trait filter, and repairing it would
+have meant fighting a stated 1.1.0 design). The allowlist ENTRY above it —
+`("Fix_ShelterReflex", "Colonist", "Idle")` — is still correct and still needed;
+only the parenthetical describes something that no longer exists. `sigcheck.py`'s
+replacement-site count moved 39 → 38 for the same reason, which is your free
+cross-check that the right thing left.
+
+⚠️ While you are in that file: `doccheck.py`'s `LOAD_ORDER_RULES` cites
+`Fix_ShelterReflex.lua:70` for the `SetCommand("Rest")` line. The rule itself is
+unchanged and still correct — ShelterReflex must stay the INNER wrapper — but the
+line number moved with the header edit. Comment-only, in `tools/`, so nothing
+ships either way.

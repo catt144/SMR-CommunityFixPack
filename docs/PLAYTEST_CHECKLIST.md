@@ -29,6 +29,55 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### ⭐ 2026-09-08 — LINK 03 IS DONE: three repairs, and they owe you **one sitting of about 12 minutes**. No decision is needed — this is a batched control ask.
+
+> **What was built** (`3db4984`, `f38d6d2`, `19b5aaa`). All three modules survive a 1.1.0 boot and all three were
+> doing something wrong on 1.1.0. Nothing here has been run in a game: every repair is **derived from source**,
+> and by your own 09-08 rule a "Fixed" is a claim until we confirm it. These three controls are the confirmation.
+>
+> | # | fix | what to do | time | what you should see |
+> |---|---|---|---|---|
+> | 1 | **Saint's blessing** (F-1) | On a save that was **loaded while the broken pack was on**, find a Saint in a dome with Religious colonists | ~5 min | those colonists show **"Blessed by a Saint"**. ⛔ It must be a *previously loaded* save — that is the half being tested |
+> | 2 | **Expedition housing** (F-2) | Send an expedition, wait past 5 sols, bring the crew home | ~5 min of waiting | the returning crew **keep their own residence**, not a random one and not homeless |
+> | 3 | **Asteroid habitat** (F-3) | Open an asteroid habitat and **set a trait filter** on it | ~2 min | **no error** in the log. (Before this build that threw) |
+>
+> They fit one sitting on the existing `BlankBig_02` colony. ✅ **Cheats are not a confound for any of these** —
+> none of the three reads a quantity a cheat changes, so no clean run is needed.
+> ⚠️ **Untick the Test Kit's force leg first if it is armed** (it was not, as of the 17:51 boot log).
+>
+> ⛔⛔ **IF YOU RUN THE TEST KIT SUITE, TWO PROBES WILL REPORT `FAIL` AND BOTH ARE THE PROBE BEING STALE, NOT THE
+> FIX BEING BROKEN.** Please do not read them as regressions:
+> * **`SaintBlessing`** — its static half asserts that we rewrote the game's data. On 1.1.0 we deliberately no
+>   longer do (the game now resolves the label itself), so the assertion is wrong while the fix is right. Its
+>   *live* half — do the dome Saints carry the modifier — is still the correct check and should pass.
+> * **`ShelterReflex`** — it tests the habitat half we **deleted on purpose** (see below), so it is testing
+>   behaviour the pack no longer claims.
+>
+> The Test Kit is a separate repo and outside link 03's fence, so both were **filed, not fixed**, and routed to
+> the terminal audit. `StaleReservations`' probe is unaffected and should still pass.
+>
+> ⚠️ **ONE THING WE GAVE UP, and you should know before the patch notes are written.** `ShelterReflex` had two
+> halves; **half (a) is deleted**, not repaired. It made an asteroid habitat keep its residents through a brief
+> power or air cut. On 1.1.0 it had become an outright **error** on any habitat with a trait filter, and the
+> developers have since made "no life support" a deliberate design tier with the intent written into the shipped
+> help text — so repairing it would mean fighting a stated design, which `FIX_POLICY` §4 bars. ⇒ **1.1.0 players
+> get the vanilla behaviour back: a power blip still turns a habitat's residents out**, and they are re-homed
+> automatically once life support returns. The shelter-reflex half (colonists head indoors before suffocating) is
+> untouched and stays.
+>
+> ⛔ **This also makes a live public claim false.** The site fix list currently promises *"a habitat with a
+> momentary life-support gap keeps its residents"*. That half is gone. Routed to link 06 with the exact lines —
+> nothing for you to do, but it is the same shape as the F108/F107 wording link 02 already flagged.
+>
+> **Drafted patch-note lines** (link 06 owns the final wording; these are the honest versions and none of them
+> says "Fixed" yet):
+> * *A Saint's blessing works again with the pack installed. The game's own 1.1.0 fix and ours were cancelling
+>   each other out; saves played in between are repaired on load.*
+> * *Colonists returning from a long expedition keep the home that was held for them.*
+> * *Setting a trait filter on an asteroid habitat no longer causes an error.*
+> * *Removed: the pack no longer holds an asteroid habitat's residents through a power or air cut — the game now
+>   handles that case deliberately, and colonists are re-homed by themselves once life support is back.*
+
 ### ✅ 2026-09-08 — ITEM 124 RULED: `StaleReservations` is FIXED, not removed. This was the last thing blocking chain link 03.
 
 > ⚖️ **124 — RULED: FIX.** Owner, verbatim: *"fix is the ruling."* ⇒ `Fix_StaleReservations` **stays** and gains
