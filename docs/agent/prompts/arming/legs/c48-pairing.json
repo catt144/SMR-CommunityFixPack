@@ -1,0 +1,39 @@
+{
+  "leg": "c48-pairing",
+  "_what": "C48 decision-log leg: wrap the drone matchmaker's FindTask and LOG what it pairs, changing nothing. One declared log-only wrapper, ZERO mutations - the opposite standing to c48-brake.",
+  "_status": "UNRUN. C48 is `filed`; STATE's Watches line carries it as opt-in. 1.0.7-era fixtures: read this folder's README on EF-079 first.",
+  "_grave": "git show 49e32bf:docs/agent/prompts/c48-pairing/C48P_ARM.ps1.txt",
+  "_note": "Its 97_C47Common.lua.txt was byte-identical (sha256 a9ffc646...) to c48-brake's copy and is now shared from payloads/ rather than duplicated.",
+
+  "kit": "C:\\Dev\\SMR-BugFixPack-TestKit",
+  "park": "C:\\Dev\\SMR-BugFixPack\\docs\\agent\\prompts\\arming\\payloads",
+
+  "stripPattern": "Code/9[78]_C4[78]",
+  "anchorAfter": "99_FixtureCarry.lua",
+  "bootSymbol": "C47.Boot",
+  "symbolNamespace": "C47",
+
+  "permanent": ["Code/61_Probes_Wave11.lua"],
+
+  "mustNotBeListed": ["Code/96_AutoRunFlag.lua"],
+  "mustNotBeListedWhy": "it would start a NEW COLONY and race this payload's LoadGame",
+
+  "bannedPatterns": [
+    "GetCurrentHarvestType\\s*\\(",
+    "SaveGame\\s*\\(",
+    "CheatFill\\s*\\(",
+    "SetHarvestType\\s*\\(",
+    "PlaceVegetation\\s*\\(",
+    "Consume_Internal\\s*\\(",
+    "DoneObject\\s*\\(",
+    "SetAmount\\s*\\(",
+    "AddAmount\\s*\\("
+  ],
+
+  "requiredPresent": ["orig_findtask", "InstallWrapper", "RestoreWrapper"],
+
+  "payloads": [
+    { "src": "97_C47Common.lua.txt", "dst": "97_C47Common.lua", "selfDrives": false },
+    { "src": "98_C48Pair.lua.txt",   "dst": "98_C48Pair.lua",   "selfDrives": true }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "leg": "c48-brake",
+  "_what": "C48 intervention leg: force the storage-depot supply brake and compare a baseline window against a braked one. Owner-attended launch; the payload self-drives and quits.",
+  "_status": "UNRUN. C48 is `filed` and STATE's Watches line carries it as opt-in. 1.0.7-era fixtures: see this folder's README on EF-079 before assuming it can run.",
+  "_grave": "the hand-written ancestor this manifest replaces is git show 49e32bf:docs/agent/prompts/c48-brake/C48B_ARM.ps1.txt",
+
+  "kit": "C:\\Dev\\SMR-BugFixPack-TestKit",
+  "park": "C:\\Dev\\SMR-BugFixPack\\docs\\agent\\prompts\\arming\\payloads",
+
+  "stripPattern": "Code/9[78]_C4[78]",
+  "anchorAfter": "99_FixtureCarry.lua",
+  "bootSymbol": "C47.Boot",
+  "symbolNamespace": "C47",
+
+  "permanent": ["Code/61_Probes_Wave11.lua"],
+
+  "mustNotBeListed": ["Code/96_AutoRunFlag.lua"],
+  "mustNotBeListedWhy": "it would start a NEW COLONY and race this payload's LoadGame",
+
+  "bannedPatterns": [
+    "GetCurrentHarvestType\\s*\\(",
+    "SaveGame\\s*\\(",
+    "CheatFill\\s*\\(",
+    "SetHarvestType\\s*\\(",
+    "PlaceVegetation\\s*\\(",
+    "Consume_Internal\\s*\\(",
+    "DoneObject\\s*\\(",
+    "SetAmount\\s*\\(",
+    "AddAmount\\s*\\("
+  ],
+
+  "requiredPresent": [
+    "supply_dist_modifier",
+    "RemoveBuilding",
+    "AddBuilding",
+    "CreateResourceRequests",
+    "RestoreBrake",
+    "\"FORCED\"",
+    "150",
+    "\"baseline\"",
+    "\"braked\""
+  ],
+
+  "payloads": [
+    { "src": "97_C47Common.lua.txt", "dst": "97_C47Common.lua", "selfDrives": false },
+    { "src": "98_C48Brake.lua.txt",  "dst": "98_C48Brake.lua",  "selfDrives": true }
+  ]
+}
