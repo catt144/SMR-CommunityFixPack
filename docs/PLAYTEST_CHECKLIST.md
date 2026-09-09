@@ -29,11 +29,36 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
-### ⭐ 2026-09-08 — LINK 03 IS DONE: three repairs, and they owe you **one sitting of about 12 minutes**. No decision is needed — this is a batched control ask.
+### ⭐ 2026-09-08 — LINK 03 IS DONE: three repairs. ✅ **THEIR CONTROLS ARE DEFERRED TO ONE SITTING AFTER THE CHAIN, ON YOUR CALL. Nothing is owed from you now.**
 
+> ⚖️ **RULED 2026-09-08 (owner): the sitting happens AFTER the chain, not now.** Your words: *"Can the sitting be
+> done after the chain. I want to insure everything is green on this side and then we can check the live side?"*
+> ⇒ these three controls are **not owed now**; they merge into ONE consolidated sitting after link 99, together
+> with the in-play controls 04 and 04b owe (a first train leaving its platform, landscaping, vacuum walking).
+> ⛔ **Do not re-raise them as outstanding before then** — a later session reading this block must treat the
+> table below as *scheduled*, not *waiting*.
+>
+> **Why this is the cheaper order, not merely an acceptable one.** All of these are boot-and-play checks on the
+> same colony, so running link 03's three now would buy a second sitting later for 04/04b's — which are the
+> bigger half, and cover systems that have **never been exercised on 1.1.0 at all** (the 09-08 boot was
+> menu-only). One sitting, one boot log, everything the chain built. The chain already has the slot for it:
+> `99_TERMINAL_AUDIT` Pass G exists to list what has not been run in a game.
+>
+> ⛔ **TWO THINGS THAT RIDE WITH THE DEFERRAL.**
+> 1. **A SHIP verdict from 99 is NOT clearance for the upload sitting.** It means the desk side is green. These
+>    controls sit BETWEEN 99 and your sitting, and `H-04` binds: never treat a future release as ready.
+> 2. ⚠️ **ONE PIECE OF EVIDENCE IS PERISHABLE, and it is the only one.** The `SaintBlessing` save re-base is
+>    one-shot per save: the log line `SaintBlessing: restored N dome blessing(s) …` prints on the FIRST load of a
+>    poisoned save and never again. If that save is loaded with a build carrying the fix during any intervening
+>    work, the direct evidence is spent — you would still see the end state, but not the proof the re-base
+>    produced it. ⇒ **do not load that save until the sitting.** 04/04b run nothing in a game, so this should not
+>    come up on its own. ⛔ Do NOT copy the save as insurance — `H-06`: loading a copy of a campaign runs that
+>    campaign's autosave rotation and deletes your autosaves.
+>
 > **What was built** (`3db4984`, `f38d6d2`, `19b5aaa`). All three modules survive a 1.1.0 boot and all three were
 > doing something wrong on 1.1.0. Nothing here has been run in a game: every repair is **derived from source**,
-> and by your own 09-08 rule a "Fixed" is a claim until we confirm it. These three controls are the confirmation.
+> and by your own 09-08 rule a "Fixed" is a claim until we confirm it. These three controls are the confirmation,
+> and they are now scheduled rather than owed.
 >
 > | # | fix | what to do | time | what you should see |
 > |---|---|---|---|---|

@@ -710,3 +710,30 @@ three controls, so a suite run cannot be misread as a regression.
   side-effect-free **on the shipped body as read**, and that the stub contract is
   written beside it. A tool run and a source read are not a test.
 * **No status word moved**, on any of the three entries.
+#### ⚖️ ADDENDUM from link 03 — the owner RULED the controls deferred (2026-09-08)
+
+Ruled after 03 closed, so it postdates the block above and changes how you route
+your own in-play controls. Owner, verbatim: *"Can the sitting be done after the
+chain. I want to insure everything is green on this side and then we can check
+the live side?"*
+
+⇒ **ALL in-play controls merge into ONE consolidated sitting after link 99.**
+Link 03's three (Saint blessing, expedition housing, asteroid habitat trait
+filter) are on the checklist as **scheduled, not owed**. Route yours the same
+way: file them in the checklist as usual, but present them as **joining the
+post-99 sitting**, not as something owed now. ⛔ Do not open a second sitting.
+
+Two things ride with it and both bind you:
+
+1. ⛔ **A SHIP verdict from 99 is NOT clearance for the upload sitting.** It means
+   the desk side is green; the controls sit BETWEEN 99 and the owner's sitting.
+   `H-04` binds — never treat a future release as ready.
+2. ⚠️ **⛔ DO NOT LOAD A SAVE THAT RAN UNDER THE BROKEN PACK.** The
+   `SaintBlessing` save re-base is one-shot per save: the log line
+   `SaintBlessing: restored N dome blessing(s) …` prints on the FIRST load of a
+   poisoned save and never again. Any boot you take with a build carrying
+   `3db4984` spends that evidence. 04/04b run nothing in a game, so this should
+   not come up on its own — but if a leg of yours ever does load a save, **capture
+   the full log** and say which save it was. ⛔ Do NOT copy a save as insurance
+   (`H-06`: loading a copy runs that campaign's autosave rotation and deletes the
+   owner's autosaves).

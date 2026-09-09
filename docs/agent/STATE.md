@@ -24,8 +24,8 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   repaired `3db4984` `f38d6d2` `19b5aaa`. ⛔ 2 TestKit probes now FALSE-FAIL (SaintBlessing, ShelterReflex).
   ✅✅ BOTH GATES MEASURED 09-08 (`archive/logs/gated110_*`): 63 applied / 17 inactive / 14 named as predicted,
   0 errors; both `update_suspect` routes CONFIRMED. ⛔ MENU-ONLY ⇒ trains/landscaping NOT exercised in play.
-  ✅ **HOTFIX_1_AUDIT DONE 09-08: SHIP WITH CHANGES — text-only (ck112/113), code clean**
-  (`reports/HOTFIX_1_AUDIT.md`). NEXT `prompts/hotfix2/` (8-link chain)
+  ✅ HOTFIX_1_AUDIT 09-08 SHIP WITH CHANGES, text-only (`reports/HOTFIX_1_AUDIT.md`). NEXT `prompts/hotfix2/`.
+  ⛔ ALL in-play controls DEFERRED to ONE sitting AFTER 99 (owner 09-08). 99 SHIP ≠ clearance (H-04).
   ⚖️ Owner rule 09-08: a patch note saying "Fixed" is a **CLAIM, false until we confirm it**.
 - ⭐ PUBLISHED both portals — `pdx_id` **156049**, `steam_id` **3787202810**, tree `version` **5** (F110, 08-30).
   ⛔ Never re-upload to "fix" a version number — each upload bumps again (H-02). ⛔ Every upload OVERWRITES both
