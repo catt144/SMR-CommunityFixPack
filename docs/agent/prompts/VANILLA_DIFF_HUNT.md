@@ -32,17 +32,41 @@ adding a fix is `FIX_POLICY`, and it is a separate decision the owner makes.
 `24995074`. Manifest and the standing archive rule are in that folder's
 `README.md`.
 
-**⏳ OWED: the 1.0.7 tree.** ⛔ **Without it there is no diff and this whole
-effort collapses to a cold read of 1.1.x**, which is a far weaker exercise — say
-so plainly rather than quietly doing the weaker thing. The owner can download
-1.0.7 — it is a branch switch, a copy and a switch back, and **nothing in the
-mod setup notices because nothing launches** (`EF-055`: the enable is lost only
-when a launch runs with the id unresolvable, and the junction lives outside the
-Steam directory anyway). Procedure and the `EF-075` caveat — the 1.0.7 branch is
-a store-surface claim, not route-checked — are in `SMR-SrcArchive\README.md`
-§"Recovering 1.0.7". ⚠️ **Confirm the 1.0.7 archive actually exists before you
-author a chain that assumes it**, and check which build the flip-back landed on:
-if a newer one shipped meanwhile, archive it and re-pin the diff base.
+**✅ DONE 2026-09-08: the 1.0.7 tree is archived too — THIS EFFORT IS UNBLOCKED.**
+`C:\Dev\SMR-SrcArchive.0.7.396349\Src` — 4448 files, tree digest
+`09d95e3448573dc378fa0bed5fc987fead3aafb70bf2ecf6a2cddef3f1ff9921`, Steam build
+`23584660`. Captured by branch-switch, copy, switch back; the game was never
+launched on the old branch. ⭐ **`EF-075`'s loss is reversed** — but do NOT
+renumber any existing citation; an entry records a defect in a STATED version.
+
+⚠️ **The 1.0.7 archive's `DLC/` subtree is NOT trustworthy for diffing.** It has
+12 files against 1.1.0's 151, 5 of them byte-identical — a Steam artefact of the
+branch switch, not a clean 1.0.7 fact. Exclude `DLC/` from the base-game diff
+and get DLC-vs-DLC facts from `DLC_DEEP_CHECK.md` instead.
+
+**⭐ THE DIFF IS ALREADY MEASURED — start from these numbers, do not re-derive
+them.** From the two manifests: **2444 files changed**, 1968 identical, **305
+added**, 36 removed.
+
+⛔ **2444 changed files is the whole argument of §1.** At ~10 seconds a file
+that is a week of reading with no triage, and most of it is generated data and
+churn. **The inventory is not optional.**
+
+⭐ **THREE CLAIMS THE PROJECT COULD NEVER VERIFY ARE NOW CONFIRMED**, checked
+against the archive the hour it landed. They are worth knowing because each was
+load-bearing for a shipped gate or repair, and each was explicitly marked
+unverifiable while the tree was gone:
+- `ProcessAllElements` appears **0 times** in 1.0.7's `TrackElement.lua` and is
+  called at `:475` in 1.1.0 ⇒ **`F116`'s pre-sort revalidation really is NEW**,
+  which its own entry said could not be established (`EF-075`).
+- 1.0.7 declares `function LandscapeForEachUnit(mark, callback, ...)` — **no
+  leading `map`** ⇒ **`F115` confirmed**.
+- `MultiResourceDepotBase` appears **0 times** in 1.0.7's `Station.lua` ⇒
+  **`F114`'s gate discriminator is sound** on the branch it discriminates.
+
+⇒ ⭐ **The archive paid for itself in three checks.** Treat that as the standard
+for this effort: a 1.0.7-vs-1.1.x claim is now CHEAP to settle, so **never ship
+one as an inference again.**
 
 ⚠️ **Version drift.** The owner refers to "1.1.1"; what is installed and
 archived is **1.1.0.403908**. Do not assume a version — read the appmanifest,
