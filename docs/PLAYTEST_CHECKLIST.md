@@ -468,6 +468,38 @@ completed tests move whole to
 >   gameplay one.
 > ⭐ **My recommendation: (a).** It is your sentence, so it is your call; the cost is one commit.
 >
+112. ⏸️ **DEFERRED 2026-09-09 by the owner — 06 MUST SKIP IT, and this is a ruling, not an omission.**
+> Neither (a) nor (b). The owner is firing a separate high-tier session on the option this item never offered:
+> **(c) make the sentence TRUE again** — repair the capability rather than reword the promise down to match it.
+> ⛔ **`06_TEXT.md` leaves `description` HOW-IT-WORKS bullet 3 exactly as it stands** and says so in its outbox;
+> its §8 fallback already covers this, so no edit to that prompt is needed. ⛔ 99 must NOT flag this as an open
+> loop or an unresolved audit finding — it is parked deliberately, with an owner-commissioned effort behind it.
+> ⚠️ The sentence stays PUBLISHED AND OVER-PROMISING until that effort lands or the owner returns to (a).
+> That is the accepted cost of the deferral, stated so nobody rediscovers it as a finding.
+>
+> ⭐ **One verified input for that session, so it does not spend its opening hours here** (link 05,
+> `smr-bugfixpack-2b`, 2026-09-09, **source-read on the shipped 1.1.0 tree, NEVER executed in a game**):
+> the sandbox blocks the obvious route and leaves a non-obvious one open.
+> * `debug` IS blacklisted on 1.1.0, re-verified on this branch, not inherited from `EF-006`'s 1.0.7 reading
+>   (`CommonLua/Modding/Mod.lua:1436`, inside `ModEnvBlacklist` which closes at `:1441`). So
+>   `debug.getinfo`'s `nparams`/`isvararg` — which would have caught F115's arity change at runtime — is
+>   NOT available to mod code.
+> * ⭐ **`string` is NOT blacklisted, and the blacklist is checked on the TOP-LEVEL GLOBAL NAME ONLY**
+>   (`ModEnvMeta.__index`, `:1558-1567`: `if env_blacklist[key] then return end` then `rawget(original_G, key)`
+>   returns the real table whole). ⇒ **`string.dump` reaches mod code**, and it is the one runtime primitive
+>   that can see a body change — the thing `Require` structurally cannot do and the reason bullet 3 is false.
+> * ⛔ **The design question that decides whether this is usable, and it is not a detail.** A pinned dump-hash
+>   makes a fix stand down when its target's body changes — but a Lua compiler or engine-build change would
+>   flip EVERY hash at once and stand the WHOLE PACK down on a patch that broke nothing. That failure is worse
+>   than the gap it closes. Any design must answer it before anything is built.
+> * ⛔ **Even a perfect version of this does not make the sentence fully true.** Class (c) — semantics moving
+>   under a wrapper whose target body is UNTOUCHED (F111, F112, F-1, F-2, F-3) — is invisible to body hashing
+>   BY DEFINITION, and 6 of the 10 FIX rows in the 1.1.0 re-verification were class c. Whatever wording comes
+>   out of that effort still cannot promise "any change".
+> * ⚠️ `string.dump` raises on a C function, and much of the engine's global surface is C. Guard with
+>   `pcall`. ⛔ And NONE of this is executed evidence: it is a source read of the sandbox, and this project's
+>   standing rule is to trust runtime over source reads (`EF-078`: predicted 6, measured 13).
+>
 113. ✅ **RULED 2026-09-08, in-session — YES, take the proposed wording.** *"One track-salvage fix was also
 > **updated for** the new game code."* Settled into `hotfix2/06_TEXT.md`; ⚠️ **ck112 is still UNRULED**, so that
 > link's "leave those two strings alone" fallback now narrows to ck112 alone.

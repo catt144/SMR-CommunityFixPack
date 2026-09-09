@@ -18,7 +18,15 @@ delivery path**, not polish) · `agent/reports/STORE_CARD_LIVE.md` ·
 comment blocks above each; they carry rulings) · `docs/PLAYTEST_CHECKLIST.md`
 items 112, 113, 118 · `agent/FIX_POLICY.md` §8 · your inbox from 02/03/04/05.
 
-## 1 · ck112 — the store description promises something the pack cannot do
+## 1 · ck112 — ⏸️ DEFERRED 2026-09-09, THIS SECTION IS OFF
+
+⛔ **Do not action any of what follows.** The owner declined both (a) and (b)
+on 2026-09-09 and commissioned a separate session on a third option this item
+never offered — making the sentence true rather than rewording it down. Leave
+the string exactly as it stands and say so in your outbox; see §8 and
+`PLAYTEST_CHECKLIST.md` item 112. Kept below for that session's benefit only.
+
+### (parked) the store description promises something the pack cannot do
 
 HOW IT WORKS, bullet 3, currently: *"Every fix checks the game's code before it
 touches anything, and stands down by itself if an official patch changes what it
@@ -117,9 +125,15 @@ Found something out of fence? **File it, do not fix it.**
 
 ## 8 · Stop conditions
 
-- **ck112 unruled** ⇒ do everything else and leave that one string alone, say so.
-  It is the owner's sentence. ✅ ck113 IS ruled (2026-09-08) — §2 is settled, not
-  pending.
+- ⏸️ **ck112 is DEFERRED, ruled 2026-09-09 — §1 IS OFF. Do not reword that
+  string, do not draft a replacement, do not raise it as a finding.** The owner
+  declined BOTH (a) and (b) and commissioned a separate session on the option the
+  item never offered: make the sentence TRUE rather than reword the promise down.
+  Leave `description` HOW-IT-WORKS bullet 3 EXACTLY as it stands, and say so in
+  your outbox. ⚠️ It stays published and over-promising meanwhile; that is the
+  owner's accepted cost, recorded in `PLAYTEST_CHECKLIST.md` item 112 with the
+  sandbox evidence — not a loose end for you or 99 to re-open.
+  ✅ ck113 IS ruled (2026-09-08) — §2 is settled, not pending.
 - A count you need is only available from a source you were told not to trust
   ⇒ stop and ask rather than typing a number from memory.
 - The description exceeds a portal limit on upload ⇒ that is the sitting's
