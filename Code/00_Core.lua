@@ -321,7 +321,22 @@ function SMRFixPack.DataPatch(id, opts)
 			-- verifiably already-correct (benign)
 			if not benign then entry.update_suspect = true end
 		end
-		log("%s: inactive (%s)", id, log_suffix or detail)
+		-- ⚠️ THE LOG STRING ONLY — augment A-2 (1.1.0 re-verification §1c),
+		-- landed 2026-09-09. A benign latch used to read as HEALTHY, and that
+		-- is exactly backwards: "the shipped data is already what we would
+		-- write" IS vanilla having fixed it, which is the RETIRE signal.
+		-- R-13 (LastTransmissionStorage) sat in this branch logging "the
+		-- shipped presets are already correct" and reading as fine, while
+		-- being a module the pack no longer needs — and 32 modules survived
+		-- an audit on that reading. Marked here so `tools/logscan.py` can
+		-- list retire candidates without having to guess at site prose.
+		-- ⛔ BEHAVIOUR IS UNCHANGED, deliberately: the entry still goes
+		-- `inactive`, which still switches off that module's own WhenActive
+		-- handlers, and `entry.detail` — the player-visible ListFixes string —
+		-- is untouched. This expression selects a format string and does
+		-- nothing else.
+		log(benign and "%s: inactive (%s — already correct, RETIRE candidate)"
+			or "%s: inactive (%s)", id, log_suffix or detail)
 	end
 	function ctx.heal()
 		local entry = SMRFixPack.fixes[id]

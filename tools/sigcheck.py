@@ -67,6 +67,19 @@ import os
 import re
 import sys
 
+# The console on this rig is cp1252 and these tools print em-dashes, arrows and
+# warning marks. Without this, `--help` alone raises UnicodeEncodeError -- which
+# it already did for sigcheck.py, bodycheck.py and upload_preflight.py before
+# 2026-09-09. `errors="replace"` so a redirected or piped run still cannot die
+# on a character: a census tool that crashes instead of reporting is worse than
+# one that prints a question mark.
+for _stream in (sys.stdout, sys.stderr):
+    try:
+        _stream.reconfigure(encoding="utf-8", errors="replace")
+    except (AttributeError, ValueError):        # not a reconfigurable stream
+        pass
+
+
 DEFAULT_SRC = r"A:\SteamLibrary\steamapps\common\Project Spark\ModTools\Src"
 
 HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
