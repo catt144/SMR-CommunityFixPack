@@ -1,6 +1,18 @@
 -- F58: Residences hold housing slots for colonists that are never coming, and
 -- nothing ever releases them.
 --
+-- SRC: Lua/Buildings/Residence.lua Residence:GetFreeSpace sha256=d7b7f54cb357379f029f5004b7b77e6141c5da184c43401c5c09db92e28ea67f
+-- DEFECT: #self\.reserved
+-- SRC: Lua/Buildings/Residence.lua Residence:ReserveResidence sha256=88018693261f64a17dbb085803ae0436558443ea2e20f0ea0559db5ce5b8e388
+--
+-- ⚠️ NAMED-ABSENCE LIMIT, per FIX_POLICY §2b. This module's defect is a MISSING
+-- timeout, and a regex matches what is present, not what is absent. The DEFECT:
+-- above therefore states the expression that is wrong BECAUSE the timeout is
+-- missing — a reservation costs a real housing slot — and the wrap target below
+-- it carries no DEFECT: at all. ⇒ if the developers ever add an expiry
+-- elsewhere, `DEFECT-GONE` will NOT fire and this module will not be flagged.
+-- It is watched for class (b), a changed body, and for nothing else.
+--
 -- Defect: Residence:GetFreeSpace (Lua\Buildings\Residence.lua:198-200) subtracts
 -- `#self.reserved` from the capacity, so a reserved slot is unavailable to anyone
 -- else. Reservations are taken during emigration (Colonist:TryToEmigrateToDome,
@@ -31,6 +43,53 @@
 --
 -- Deliberately NOT done: showing the reservation count in the residence infopanel.
 -- That is a UI addition rather than a defect repair (FIX_POLICY §4).
+--
+-- ======================================================================
+-- 1.1.0 (2026-09-08, hotfix2 link 03; re-verification F-2, VANILLA_FIX_QA §0.4)
+-- Owner ruling: KEEP AND FIX (checklist 124, 2026-09-08 — "fix is the ruling").
+-- ======================================================================
+--
+-- ⛔ WHAT THIS MODULE WAS DOING WRONG. 1.1.0 added a LEGITIMATE long-lived
+-- reservation that our sweep could not tell from a stale one. A colonist
+-- boarding an expedition rocket saves their home
+-- (Colonist:EnterTransporter -> self.expedition_residence = self.residence,
+-- Lua/Units/Colonist.lua:5027-5031) and Colonist:OnDisappear re-takes it through
+-- Residence:ReserveResidence (:5003-5005) — which is OUR wrap target, so the
+-- post-hook below stamps it like any other reservation. The colonist stays a
+-- VALID object while away (Unit.OnDisappear detaches, it does not delete), and
+-- ReturnFromExpedition keeps the slot only if it is still reserved (:5081-5087).
+-- The lock our sweep reuses is g_Consts.ForcedByUserLockTimeout = 3,600,000 ms
+-- (Lua/__const.lua:171-176) while one-way expedition time is 1,440,000–3,000,000
+-- (Data/POI.lua) plus pad wait plus the return leg ⇒ the age branch routinely
+-- fired on a real hold. Worse, 1.1.0's CancelResidenceReservation now ALSO wipes
+-- expedition_residence (Lua/Buildings/Residence.lua:385-399, the comment there
+-- says so), so cancelling did not merely release the slot — it destroyed the
+-- record that the colonist was owed one. ⇒ crew back from a long expedition were
+-- re-homed at random or left homeless. THE FIX IS ONE CLAUSE, in the sweep.
+--
+-- ⚠️ THE PREMISE THIS MODULE RESTS ON HAS NARROWED, AND THE HEADER ABOVE NOW
+-- OVERSTATES IT. On 1.1.0 the ORDINARY shuttle-wait case F58 was written for is
+-- bounded by the game itself: const.ColonistTransportTaskExpirationTime =
+-- DayDuration (Lua/_GameConst.lua:144), ColonistTransportTask:IsObsolete fires on
+-- it (Lua/LRTransport.lua:43-49), LRManager:ExpireColonistTransportTasks runs on a
+-- repeat and calls ClearTransportRequest, whose first act releases the
+-- reservation (Lua/LRManager.lua:50-62), and there is a one-sol pickup-wait cap
+-- besides (const.ColonistMaxWaitShuttlePickupTimeMs, _GameConst.lua:143).
+-- ⇒ WHAT THIS SWEEP STILL BUYS IS NARROWER THAN "F58 IS STILL SHIPPED":
+--   * committed-shuttle limbo — IsObsolete returns false the moment a shuttle
+--     commits (LRTransport.lua:44-46), and ExpireColonistTransportTasks also
+--     skips a colonist whose command is "Transport" (LRManager.lua:55), so a ride
+--     that never completes is expired by nothing;
+--   * the walk path — TransportByFootDtor (Colonist.lua:3529-3539) clears
+--     emigration_dome and the outside flags and does NOT cancel the reservation.
+-- Said plainly so nobody re-derives a wider claim from this file: on 1.1.0 the
+-- module is a belt for two residual paths, not the whole defect.
+--
+-- ⚠️ RESIDUAL WE ACCEPT, named rather than hidden. A colonist lost permanently on
+-- an expedition while still a valid object would now hold their home forever,
+-- because we no longer age out that hold. That is vanilla's own hold and vanilla
+-- owns its lifetime; cancelling it is the harm this edit repairs. If it ever
+-- shows up in play it is a NEW entry, not a reason to put the age branch back.
 
 SMRFixPack.Register("StaleReservations", {
 	title = "Housing reserved for colonists that never arrive is released again",
@@ -76,6 +135,17 @@ OnMsg.NewDay = SMRFixPack.WhenActive("StaleReservations", function()
 				stale = true -- the two sides disagree; the slot is orphaned
 			elseif colonist:IsDying() then
 				stale = true
+			elseif colonist.expedition_residence then
+				-- FIX (1.1.0, F-2): a colonist away on an expedition holds their
+				-- home DELIBERATELY (Colonist.lua:5003-5005 re-takes it through the
+				-- very method we wrap), the residence panel promises they will
+				-- return to it, and a round trip routinely outlasts the lock this
+				-- sweep reuses. Never let the age branch below cancel that — and
+				-- cancelling would not just free the slot, it would wipe
+				-- expedition_residence itself (Residence.lua:394-396). The three
+				-- branches ABOVE are deliberately left to fire: an invalid,
+				-- desynced or dying colonist is not coming back, and releasing the
+				-- slot is right for them whether they were on an expedition or not.
 			else
 				local since = colonist.SMRFixPack_reserved_at
 				if not since then
