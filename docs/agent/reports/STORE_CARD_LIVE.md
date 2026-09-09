@@ -19,8 +19,12 @@ here are false on the other store and were rewritten out of it:
 * *"This page has no comment section"* — true on Paradox, false on Steam.
 * the trailing *"Also on the Steam Workshop"* cross-link — self-referential there.
 ⇒ **Never paste either block into `metadata.lua` verbatim.** The shipped body is
-5,124 chars; ⚠️ that length is unverified against the upload API, and if an upload
-ever rejects it the field reverts and the report says so.
+**5,342** chars as of 2026-09-09; ⚠️ that length is unverified against the upload
+API, and if an upload ever rejects it the field reverts and the report says so.
+⛔ **The "5,124" this line carried until today was stale** — it predated the
+F105/F108/F110 additions, and the body that actually shipped as v5 measured
+**5,228**. So the upload path is known to accept at least 5,228; this rewrite is
++114 on that, not a leap past the 5,165 the web editor took.
 
 ---
 
@@ -44,13 +48,22 @@ modder info and it being mod friendly."*
   how many are invisible. ⇒ Two numbers are used and **both are checkable by the
   reader on the page the card links to**, which is the only thing that makes a
   count safe here:
-  - **80** — entries on the fix list (was 79; **+1 on 2026-08-24, F105's
-    landscaping error**). Emitted, not typed: `grep -c '^??? '`, and the section
-    tally sums to the same (18+11+9+9+8+7+7+7+4). ⚠️ It is worded as
-    *"eighty repairs"*, not *"80 bugs"* — one entry covers two defects
-    ("Two story-scripting defects…"), so entries is the honest unit.
-  - **4** — the fix list's own audited section *"Under the hood: these four repair
+  - **46** — entries on the fix list. ⭐ **RECOUNTED 2026-09-09 (hotfix 2, link 06):
+    82 → 46**, after link 02 removed 36 entries whose fixes game 1.1.0 repairs
+    itself (`SMR-CommunityMods` `7cef4f3`). Emitted, not typed:
+    `grep -c '^??? ' content/fix-list.md`, and the section tally sums to the same
+    (1+13+4+3+9+4+7+2+3). ⚠️ It is worded as *"forty-six repairs"*, not
+    *"46 bugs"* — one entry covers two defects ("Two story-scripting defects…"),
+    so entries is the honest unit. ⛔ The history: 79 → 80 (F105, 08-24) → 82
+    (F108, F110) → 46. Never type it from this line either — recount.
+  - **3** — the fix list's own audited section *"Under the hood: these three repair
     things you cannot see today."* ⛔ Not a classification invented for the card.
+    ⭐ **WAS 4**; the battery/tank rate-modifier entry went with the 36, and the
+    section's own prose still said "four" until link 06 corrected it.
+  - **3** — judgment calls, down from six (Biorobots · colonists sheltering in
+    vacuum · Edit Payload). The card states no number for these, which is why it
+    never drifted; the site's `index.md` and `faq.md` did, in four places, and
+    link 06 corrected all four.
   - ⛔ **MAINTENANCE DEBT ACCEPTED KNOWINGLY:** adding a fix now means editing two
     store pages as well as the site, or the number is a lie. That is the cost the
     no-counts draft was avoiding; the owner priced it and chose findability.
@@ -121,7 +134,7 @@ back at Paradox. ⛔ Do not paste the same block on both.
 ```
 Bug fixes for Surviving Mars: Relaunched.
 
-Eighty-two repairs, each one written up on the fix list with what you would
+Forty-six repairs, each one written up on the fix list with what you would
 have seen and what was actually wrong. Every one targets something the game's
 own code gets wrong — the code says one thing, does another, and the fix makes
 it do what it says. It fixes bugs; it does not rebalance the game. Preferences
@@ -129,49 +142,57 @@ and features are deliberately not in it.
 
 Some of them you could hardly miss: an entire train line and every train on it
 deleted by salvaging a single hex, colonists suffocating on a walk between two
-domes, a lander that unloaded its own return fuel and could never come home.
+domes, an artificial lake burying the rover that was building it.
 
 More of them you would never have blamed on a bug, because the game looked
-perfectly normal while the arithmetic underneath it was wrong — a trait's
-colony-wide bonus that never reached a single colonist, upgrade bonuses left
-behind by demolished buildings and stacking every time you rebuilt, a technology
-providing a 10% discount where its own text promises 20%, a Comfort penalty
-billed for longer than the journey actually took.
+perfectly normal while the arithmetic underneath it was wrong — a reward for
+freeing the wisps that paid about a thousandth of what its own message promised,
+a researched breakthrough the game restored to only one of the three wind
+turbine types it covers, a track refund that paid a stub's worth of Metals
+however long the line was, a Comfort penalty billed for longer than the journey
+actually took.
 
-And four of them repair things you cannot see at all today: real defects that
+And three of them repair things you cannot see at all today: real defects that
 the shipped numbers happen to hide, which another mod, a game patch or a DLC
 could walk straight into.
 
 
 SOME OF WHAT IT FIXES
 
-· The end-of-game popup never arrived in games with No Terraforming or No Politics.
-· Eleven rows of the Command Center's resource panel rendered as blank space.
 · Colonists walked across the surface between domes and suffocated.
 · Rocket loads of new arrivals died on their way to a dome.
 · A dome sat half empty and still refused to house anyone.
+· A bed that fell vacant sat empty while colonists were homeless.
+· Colonists stayed homeless after you built a Shuttle Hub.
+· Night-shift colonists never came back to work after midnight.
+· A salvaged farm kept supplying its dome with oxygen forever.
+· Building an artificial lake buried the rover that built it.
+· Drone Hubs paralysed themselves every time an Extender flickered.
 · Salvaging one piece of track deleted the whole line, and its trains with it.
 · Demolishing a station permanently deleted the trains parked there.
-· A train parked at a platform and blocked the line forever.
-· An asteroid lander unloaded its own return fuel and stranded itself.
-· Meteors struck every few hours instead of every day or two.
-· A meteor storm ended and the weather stopped, permanently.
-· Building an artificial lake buried the rover that built it.
+· Meteor-damaged track could not be salvaged at all.
+· Two train buildings fought over the same connector hex forever.
+· A destroyed tunnel still worked as a shortcut.
+· Automatic rockets and landers took off with nothing aboard.
 · A Jumbo Cave mystery could get stuck clearing waste rock and never complete.
+· The Philosopher's Stone mystery hung one step from the end.
+· A story step asked for a cave-in on a map that does not exist, and the story stopped.
 · The Gene Forging research did nothing at all.
-· Salvaging an upgraded building left its bonuses behind forever.
-· The Extractor AI breakthrough capped your staffed extractors and could lock a sponsor's high-Performance extractor goal.
-· You were never warned about running out of Food or maintenance resources.
-· Independent Terraforming gave half the discount it advertises.
-· Researching a technology threw an error while a landscaping job was running.
-· Three pieces of interface text stayed in English in every other language.
+· The Domes Overview stopped marking domes in trouble.
 
 … and a good deal more, including quieter repairs to drones, shuttles, domes,
-tourism, research, storylines and the interface.
+rockets, research, storylines and the interface.
 
 The full list — every fix, what you would have seen, and what was actually
 wrong — is here:
 https://catt144.github.io/SMR-CommunityMods/fix-list/
+
+
+STILL PLAYING ON GAME VERSION 1.0.7?
+
+This pack tracks the current version of the game. If you stayed on 1.0.7, there
+is a separate frozen build for it, with instructions:
+https://catt144.github.io/SMR-CommunityMods/legacy-1-0-7/
 
 
 HOW IT WORKS
@@ -218,7 +239,7 @@ Any single fix can be switched off from another mod, without touching this one.
 Set the fix's id as a key on the veto table before the pack loads:
 
     SMRFixPack_Disabled = rawget(_G, "SMRFixPack_Disabled") or {}
-    SMRFixPack_Disabled["DustDevilSpawnGate"] = true
+    SMRFixPack_Disabled["LakeEntombment"] = true
 
 The id is the key, not a list entry — a plain list looks valid and switches off
 nothing. "Before the pack loads" means your mod has to load first.
@@ -237,41 +258,44 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=3787202810
 ```
 Bug fixes for [i]Surviving Mars: Relaunched[/i].
 
-[b]Eighty-two repairs[/b], each one written up on the fix list with what you would have seen and what was actually wrong. Every one targets something the game's own code gets wrong — the code says one thing, does another, and the fix makes it do what it says. It fixes bugs; it does not rebalance the game. Preferences and features are deliberately not in it.
+[b]Forty-six repairs[/b], each one written up on the fix list with what you would have seen and what was actually wrong. Every one targets something the game's own code gets wrong — the code says one thing, does another, and the fix makes it do what it says. It fixes bugs; it does not rebalance the game. Preferences and features are deliberately not in it.
 
-Some of them you could hardly miss: an entire train line and every train on it deleted by salvaging a single hex, colonists suffocating on a walk between two domes, a lander that unloaded its own return fuel and could never come home.
+Some of them you could hardly miss: an entire train line and every train on it deleted by salvaging a single hex, colonists suffocating on a walk between two domes, an artificial lake burying the rover that was building it.
 
-More of them you would never have blamed on a bug, because the game looked perfectly normal while the arithmetic underneath it was wrong — a trait's colony-wide bonus that never reached a single colonist, upgrade bonuses left behind by demolished buildings and stacking every time you rebuilt, a technology providing a 10% discount where its own text promises 20%, a Comfort penalty billed for longer than the journey actually took.
+More of them you would never have blamed on a bug, because the game looked perfectly normal while the arithmetic underneath it was wrong — a reward for freeing the wisps that paid about a thousandth of what its own message promised, a researched breakthrough the game restored to only one of the three wind turbine types it covers, a track refund that paid a stub's worth of Metals however long the line was, a Comfort penalty billed for longer than the journey actually took.
 
-And [b]four[/b] of them repair things you cannot see at all today: real defects that the shipped numbers happen to hide, which another mod, a game patch or a DLC could walk straight into.
+And [b]three[/b] of them repair things you cannot see at all today: real defects that the shipped numbers happen to hide, which another mod, a game patch or a DLC could walk straight into.
 
 [h2]Some of what it fixes[/h2]
 [list]
-[*]The end-of-game popup never arrived in games with No Terraforming or No Politics.
-[*]Eleven rows of the Command Center's resource panel rendered as blank space.
 [*]Colonists walked across the surface between domes and suffocated.
 [*]Rocket loads of new arrivals died on their way to a dome.
 [*]A dome sat half empty and still refused to house anyone.
+[*]A bed that fell vacant sat empty while colonists were homeless.
+[*]Colonists stayed homeless after you built a Shuttle Hub.
+[*]Night-shift colonists never came back to work after midnight.
+[*]A salvaged farm kept supplying its dome with oxygen forever.
+[*]Building an artificial lake buried the rover that built it.
+[*]Drone Hubs paralysed themselves every time an Extender flickered.
 [*]Salvaging one piece of track deleted the whole line, and its trains with it.
 [*]Demolishing a station permanently deleted the trains parked there.
-[*]A train parked at a platform and blocked the line forever.
-[*]An asteroid lander unloaded its own return fuel and stranded itself.
-[*]Meteors struck every few hours instead of every day or two.
-[*]A meteor storm ended and the weather stopped, permanently.
-[*]Building an artificial lake buried the rover that built it.
+[*]Meteor-damaged track could not be salvaged at all.
+[*]Two train buildings fought over the same connector hex forever.
+[*]A destroyed tunnel still worked as a shortcut.
+[*]Automatic rockets and landers took off with nothing aboard.
 [*]A Jumbo Cave mystery could get stuck clearing waste rock and never complete.
+[*]The Philosopher's Stone mystery hung one step from the end.
+[*]A story step asked for a cave-in on a map that does not exist, and the story stopped.
 [*]The Gene Forging research did nothing at all.
-[*]Salvaging an upgraded building left its bonuses behind forever.
-[*]The Extractor AI breakthrough capped your staffed extractors and could lock a sponsor's high-Performance extractor goal.
-[*]You were never warned about running out of Food or maintenance resources.
-[*]Independent Terraforming gave half the discount it advertises.
-[*]Researching a technology threw an error while a landscaping job was running.
-[*]Three pieces of interface text stayed in English in every other language.
+[*]The Domes Overview stopped marking domes in trouble.
 [/list]
-… and a good deal more, including quieter repairs to drones, shuttles, domes, tourism, research, storylines and the interface.
+… and a good deal more, including quieter repairs to drones, shuttles, domes, rockets, research, storylines and the interface.
 
 [b]The full list[/b] — every fix, what you would have seen, and what was actually wrong:
 [url=https://catt144.github.io/SMR-CommunityMods/fix-list/]the complete fix list[/url]
+
+[h2]Still playing on game version 1.0.7?[/h2]
+This pack tracks the current version of the game. If you stayed on 1.0.7, there is a separate frozen build for it, with instructions: [url=https://catt144.github.io/SMR-CommunityMods/legacy-1-0-7/]Playing on 1.0.7[/url]
 
 [h2]How it works[/h2]
 [list]
@@ -293,7 +317,7 @@ The pack is built to share the game with your mod rather than take it over. It h
 
 Any single fix can be switched off from another mod, without touching this one. Set the fix's id as a key on the veto table before the pack loads:
 [code]SMRFixPack_Disabled = rawget(_G, "SMRFixPack_Disabled") or {}
-SMRFixPack_Disabled["DustDevilSpawnGate"] = true[/code]
+SMRFixPack_Disabled["LakeEntombment"] = true[/code]
 The id is the key, not a list entry — a plain list looks valid and switches off nothing. "Before the pack loads" means your mod has to load first.
 
 [b]Source, and the reasoning behind every fix:[/b] [url=https://github.com/catt144/SMR-CommunityFixPack]github.com/catt144/SMR-CommunityFixPack[/url]

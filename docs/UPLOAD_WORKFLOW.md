@@ -83,7 +83,7 @@ render.
 ```
 Bug fixes for Surviving Mars: Relaunched.
 
-Eighty-two repairs, each one written up on the fix list with what you would
+Forty-six repairs, each one written up on the fix list with what you would
 have seen and what was actually wrong. Every one targets something the game's
 own code gets wrong — the code says one thing, does another, and the fix makes
 it do what it says. It fixes bugs; it does not rebalance the game. Preferences
@@ -91,49 +91,57 @@ and features are deliberately not in it.
 
 Some of them you could hardly miss: an entire train line and every train on it
 deleted by salvaging a single hex, colonists suffocating on a walk between two
-domes, a lander that unloaded its own return fuel and could never come home.
+domes, an artificial lake burying the rover that was building it.
 
 More of them you would never have blamed on a bug, because the game looked
-perfectly normal while the arithmetic underneath it was wrong — a trait's
-colony-wide bonus that never reached a single colonist, upgrade bonuses left
-behind by demolished buildings and stacking every time you rebuilt, a technology
-providing a 10% discount where its own text promises 20%, a Comfort penalty
-billed for longer than the journey actually took.
+perfectly normal while the arithmetic underneath it was wrong — a reward for
+freeing the wisps that paid about a thousandth of what its own message promised,
+a researched breakthrough the game restored to only one of the three wind
+turbine types it covers, a track refund that paid a stub's worth of Metals
+however long the line was, a Comfort penalty billed for longer than the journey
+actually took.
 
-And four of them repair things you cannot see at all today: real defects that
+And three of them repair things you cannot see at all today: real defects that
 the shipped numbers happen to hide, which another mod, a game patch or a DLC
 could walk straight into.
 
 
 SOME OF WHAT IT FIXES
 
-· The end-of-game popup never arrived in games with No Terraforming or No Politics.
-· Eleven rows of the Command Center's resource panel rendered as blank space.
 · Colonists walked across the surface between domes and suffocated.
 · Rocket loads of new arrivals died on their way to a dome.
 · A dome sat half empty and still refused to house anyone.
+· A bed that fell vacant sat empty while colonists were homeless.
+· Colonists stayed homeless after you built a Shuttle Hub.
+· Night-shift colonists never came back to work after midnight.
+· A salvaged farm kept supplying its dome with oxygen forever.
+· Building an artificial lake buried the rover that built it.
+· Drone Hubs paralysed themselves every time an Extender flickered.
 · Salvaging one piece of track deleted the whole line, and its trains with it.
 · Demolishing a station permanently deleted the trains parked there.
-· A train parked at a platform and blocked the line forever.
-· An asteroid lander unloaded its own return fuel and stranded itself.
-· Meteors struck every few hours instead of every day or two.
-· A meteor storm ended and the weather stopped, permanently.
-· Building an artificial lake buried the rover that built it.
+· Meteor-damaged track could not be salvaged at all.
+· Two train buildings fought over the same connector hex forever.
+· A destroyed tunnel still worked as a shortcut.
+· Automatic rockets and landers took off with nothing aboard.
 · A Jumbo Cave mystery could get stuck clearing waste rock and never complete.
+· The Philosopher's Stone mystery hung one step from the end.
+· A story step asked for a cave-in on a map that does not exist, and the story stopped.
 · The Gene Forging research did nothing at all.
-· Salvaging an upgraded building left its bonuses behind forever.
-· The Extractor AI breakthrough capped your staffed extractors and could lock a sponsor's high-Performance extractor goal.
-· You were never warned about running out of Food or maintenance resources.
-· Independent Terraforming gave half the discount it advertises.
-· Researching a technology threw an error while a landscaping job was running.
-· Three pieces of interface text stayed in English in every other language.
+· The Domes Overview stopped marking domes in trouble.
 
 … and a good deal more, including quieter repairs to drones, shuttles, domes,
-tourism, research, storylines and the interface.
+rockets, research, storylines and the interface.
 
 The full list — every fix, what you would have seen, and what was actually
 wrong — is here:
 https://catt144.github.io/SMR-CommunityMods/fix-list/
+
+
+STILL PLAYING ON GAME VERSION 1.0.7?
+
+This pack tracks the current version of the game. If you stayed on 1.0.7, there
+is a separate frozen build for it, with instructions:
+https://catt144.github.io/SMR-CommunityMods/legacy-1-0-7/
 
 
 HOW IT WORKS
@@ -179,7 +187,7 @@ Any single fix can be switched off from another mod, without touching this one.
 Set the fix's id as a key on the veto table before the pack loads:
 
     SMRFixPack_Disabled = rawget(_G, "SMRFixPack_Disabled") or {}
-    SMRFixPack_Disabled["DustDevilSpawnGate"] = true
+    SMRFixPack_Disabled["LakeEntombment"] = true
 
 The id is the key, not a list entry — a plain list looks valid and switches off
 nothing. "Before the pack loads" means your mod has to load first.
@@ -193,41 +201,44 @@ https://github.com/catt144/SMR-CommunityFixPack
 ```
 Bug fixes for [i]Surviving Mars: Relaunched[/i].
 
-[b]Eighty-two repairs[/b], each one written up on the fix list with what you would have seen and what was actually wrong. Every one targets something the game's own code gets wrong — the code says one thing, does another, and the fix makes it do what it says. It fixes bugs; it does not rebalance the game. Preferences and features are deliberately not in it.
+[b]Forty-six repairs[/b], each one written up on the fix list with what you would have seen and what was actually wrong. Every one targets something the game's own code gets wrong — the code says one thing, does another, and the fix makes it do what it says. It fixes bugs; it does not rebalance the game. Preferences and features are deliberately not in it.
 
-Some of them you could hardly miss: an entire train line and every train on it deleted by salvaging a single hex, colonists suffocating on a walk between two domes, a lander that unloaded its own return fuel and could never come home.
+Some of them you could hardly miss: an entire train line and every train on it deleted by salvaging a single hex, colonists suffocating on a walk between two domes, an artificial lake burying the rover that was building it.
 
-More of them you would never have blamed on a bug, because the game looked perfectly normal while the arithmetic underneath it was wrong — a trait's colony-wide bonus that never reached a single colonist, upgrade bonuses left behind by demolished buildings and stacking every time you rebuilt, a technology providing a 10% discount where its own text promises 20%, a Comfort penalty billed for longer than the journey actually took.
+More of them you would never have blamed on a bug, because the game looked perfectly normal while the arithmetic underneath it was wrong — a reward for freeing the wisps that paid about a thousandth of what its own message promised, a researched breakthrough the game restored to only one of the three wind turbine types it covers, a track refund that paid a stub's worth of Metals however long the line was, a Comfort penalty billed for longer than the journey actually took.
 
-And [b]four[/b] of them repair things you cannot see at all today: real defects that the shipped numbers happen to hide, which another mod, a game patch or a DLC could walk straight into.
+And [b]three[/b] of them repair things you cannot see at all today: real defects that the shipped numbers happen to hide, which another mod, a game patch or a DLC could walk straight into.
 
 [h2]Some of what it fixes[/h2]
 [list]
-[*]The end-of-game popup never arrived in games with No Terraforming or No Politics.
-[*]Eleven rows of the Command Center's resource panel rendered as blank space.
 [*]Colonists walked across the surface between domes and suffocated.
 [*]Rocket loads of new arrivals died on their way to a dome.
 [*]A dome sat half empty and still refused to house anyone.
+[*]A bed that fell vacant sat empty while colonists were homeless.
+[*]Colonists stayed homeless after you built a Shuttle Hub.
+[*]Night-shift colonists never came back to work after midnight.
+[*]A salvaged farm kept supplying its dome with oxygen forever.
+[*]Building an artificial lake buried the rover that built it.
+[*]Drone Hubs paralysed themselves every time an Extender flickered.
 [*]Salvaging one piece of track deleted the whole line, and its trains with it.
 [*]Demolishing a station permanently deleted the trains parked there.
-[*]A train parked at a platform and blocked the line forever.
-[*]An asteroid lander unloaded its own return fuel and stranded itself.
-[*]Meteors struck every few hours instead of every day or two.
-[*]A meteor storm ended and the weather stopped, permanently.
-[*]Building an artificial lake buried the rover that built it.
+[*]Meteor-damaged track could not be salvaged at all.
+[*]Two train buildings fought over the same connector hex forever.
+[*]A destroyed tunnel still worked as a shortcut.
+[*]Automatic rockets and landers took off with nothing aboard.
 [*]A Jumbo Cave mystery could get stuck clearing waste rock and never complete.
+[*]The Philosopher's Stone mystery hung one step from the end.
+[*]A story step asked for a cave-in on a map that does not exist, and the story stopped.
 [*]The Gene Forging research did nothing at all.
-[*]Salvaging an upgraded building left its bonuses behind forever.
-[*]The Extractor AI breakthrough capped your staffed extractors and could lock a sponsor's high-Performance extractor goal.
-[*]You were never warned about running out of Food or maintenance resources.
-[*]Independent Terraforming gave half the discount it advertises.
-[*]Researching a technology threw an error while a landscaping job was running.
-[*]Three pieces of interface text stayed in English in every other language.
+[*]The Domes Overview stopped marking domes in trouble.
 [/list]
-… and a good deal more, including quieter repairs to drones, shuttles, domes, tourism, research, storylines and the interface.
+… and a good deal more, including quieter repairs to drones, shuttles, domes, rockets, research, storylines and the interface.
 
 [b]The full list[/b] — every fix, what you would have seen, and what was actually wrong:
 [url=https://catt144.github.io/SMR-CommunityMods/fix-list/]the complete fix list[/url]
+
+[h2]Still playing on game version 1.0.7?[/h2]
+This pack tracks the current version of the game. If you stayed on 1.0.7, there is a separate frozen build for it, with instructions: [url=https://catt144.github.io/SMR-CommunityMods/legacy-1-0-7/]Playing on 1.0.7[/url]
 
 [h2]How it works[/h2]
 [list]
@@ -249,7 +260,7 @@ The pack is built to share the game with your mod rather than take it over. It h
 
 Any single fix can be switched off from another mod, without touching this one. Set the fix's id as a key on the veto table before the pack loads:
 [code]SMRFixPack_Disabled = rawget(_G, "SMRFixPack_Disabled") or {}
-SMRFixPack_Disabled["DustDevilSpawnGate"] = true[/code]
+SMRFixPack_Disabled["LakeEntombment"] = true[/code]
 The id is the key, not a list entry — a plain list looks valid and switches off nothing. "Before the pack loads" means your mod has to load first.
 
 [b]Source, and the reasoning behind every fix:[/b] [url=https://github.com/catt144/SMR-CommunityFixPack]github.com/catt144/SMR-CommunityFixPack[/url]
@@ -262,9 +273,11 @@ Usually auto-fills. If it is missing under **CHANGELOG** (Paradox) or **Change
 Notes** (Steam), paste this:
 
 ```
-- Fixed for game 1.1.0: trains that would not leave their station, and an error popup when landscaping. Both were caused by this pack on the new game version, not by the base game.
-- Some fixes now switch themselves off on 1.1.0 and say so, because the game code they corrected has changed. That is deliberate — an inactive fix is safer than one working from an old assumption.
-- This is a safety pass, not a full re-check of every fix against 1.1.0. One track-salvage fix was also brought in line with the new game code. Please keep reporting anything that looks wrong.
+- Game 1.1.0 repairs a large number of these bugs itself, so those fixes have been removed from the pack. A fix that duplicates the game's own is a risk with no benefit, and a few of ours had quietly become slightly worse than what the game now does on its own.
+- Three things you may notice from that. The pack no longer holds an asteroid habitat's residents through a power or air cut — the game handles that case deliberately now, and colonists re-home themselves once life support is back. A line's train count no longer refreshes after a salvage until you reopen the display. And in a save you have already played, two extractor types keep a small Astrogeologist bonus the pack gave them, which removing the fix cannot take back; a new game is clean.
+- A Saint's blessing works again with the pack installed — the game's own 1.1.0 fix and ours were cancelling each other out, and saves played in between are repaired on load. Colonists returning from a long expedition keep the home that was held for them, and setting a trait filter on an asteroid habitat no longer causes an error.
+- Updated for 1.1.0: the landed-rocket drone fix now respects the game's new "Accept fuel" toggle, and the Edit Payload fix works with the new tutorial and with destination picks. Three fixes that had switched themselves off are re-enabled — landscaping over colonists boarding a vehicle, dome-to-dome passages, and trains unloading a resource at a station where you had switched it off. Track salvage was also updated for the new game code: a leftover piece from a split line is kept on its own track instead of being removed, matching the base game.
+- None of this has been watched in a running colony on 1.1.0 yet — it is derived from the new game code. Please keep reporting anything that looks wrong.
 ```
 
 #### 📋 Short summary (only if it also came out blank)
