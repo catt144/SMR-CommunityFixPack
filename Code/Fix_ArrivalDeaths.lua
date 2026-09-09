@@ -225,10 +225,6 @@ SMRFixPack.Register("ArrivalDeaths", {
 		-- involved in the answer.
 		local PROBE_TRAIT = "SMRFixPack_F117_Probe"
 
-		-- nil until probed; then "colonist" (the 1.1.0 contract), "traits" (the
-		-- 1.0.7 contract) or false (UNKNOWN — stand down).
-		local arg_shape
-
 		-- ⛔ STUB CONTRACT (FIX_POLICY §2a, the probe form's property 3). Every
 		-- field below is read straight off the two shipped bodies; nothing is
 		-- here to make the call "work":
@@ -257,7 +253,12 @@ SMRFixPack.Register("ArrivalDeaths", {
 		-- branches (`g_Consts.CommunityEvalNoLifeSupport` vs a literal 0) —
 		-- cancels in the DIFFERENCE, and the surviving 1 names which table the
 		-- shipped body indexed. No branch of this reads a constant's value.
-		local function discriminate()
+		--
+		-- ⚠️ PURE, deliberately: it writes nothing, caches nothing and reaches no
+		-- state, so it is safe to call at any time. That is what lets the Test Kit
+		-- read the SHIPPED verdict without a diagnostic call latching an UNKNOWN
+		-- into the live wrapper.
+		local function read_arg_shape()
 			local stub = {
 				HasLifeSupport = function() return false end,
 				traits_filter = { [PROBE_TRAIT] = 1 },
@@ -269,18 +270,22 @@ SMRFixPack.Register("ArrivalDeaths", {
 			-- trait hung on the argument's `.traits`: +1 on 1.1.0, +0 on 1.0.7
 			local as_colonist = Community.GetScoreFor(stub, { traits = { [PROBE_TRAIT] = true } })
 			if type(as_traits) ~= "number" or type(as_colonist) ~= "number" then
-				return false
+				return nil
 			end
-			if as_colonist - as_traits == 1 then
-				arg_shape = "colonist"
-			elseif as_traits - as_colonist == 1 then
-				arg_shape = "traits"
-			else
-				-- neither table was looked up, or both were: not a shape we
-				-- know, and a guess here is the F114 failure mode.
-				return false
-			end
-			return true
+			if as_colonist - as_traits == 1 then return "colonist" end
+			if as_traits - as_colonist == 1 then return "traits" end
+			-- neither table was looked up, or both were: not a shape we know, and
+			-- a guess here is the F114 failure mode.
+			return nil
+		end
+
+		-- nil until probed; then "colonist" (the 1.1.0 contract), "traits" (the
+		-- 1.0.7 contract) or false (UNKNOWN — stand down).
+		local arg_shape
+
+		local function discriminate()
+			arg_shape = read_arg_shape()
+			return arg_shape ~= nil
 		end
 
 		-- One shot. `false` is a decided verdict (UNKNOWN), not "not yet asked",
@@ -304,6 +309,18 @@ SMRFixPack.Register("ArrivalDeaths", {
 			if arg_shape == "traits" then return colonist.traits end
 			return nil
 		end
+
+		-- Published for the Test Kit's F117 probe, the way this pack already
+		-- publishes `SMRFixPack.LayoutTechLock.IsLockedOut`. The point is that the
+		-- kit asserts THIS module's verdict against the shipped `ChooseDome`, not
+		-- a second copy of the rule that could drift from it.
+		--   ReadArgShape()    -- pure: re-reads the shipped body, caches nothing
+		--   CachedArgShape()  -- what the live wrapper latched, or nil if it has
+		--                        not needed to ask yet (`false` = UNKNOWN)
+		SMRFixPack.ArrivalDeaths = {
+			ReadArgShape = read_arg_shape,
+			CachedArgShape = function() return arg_shape end,
+		}
 		-- ── F117-PROBE-END ───────────────────────────────────────────────────
 
 		-- (b) do not send an arrival to a dome it cannot reach
