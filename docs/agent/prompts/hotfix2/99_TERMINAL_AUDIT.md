@@ -543,12 +543,18 @@ is reported as one.
   and a wrong checker is a wrong gate.
 
 **Filed, not fixed — please confirm these were routed rather than dropped.**
-* **`C54`** (new entry, filed by me): 1.1.0's own
-  `SavegameFixups.RemoveLeakedUpgradeModifiers` (`Building.lua:1313-1345`) ends on
-  an unguarded `ipairs(leaked)` where `leaked` is `nil` for a container with no
-  leaks. ⛔ **UNPROVEN** — whether `ipairs(nil)` raises in this engine was NOT
-  established, only inferred from vanilla guarding `ipairs(x or empty_table)` in
-  36 other places under `Lua/`. It needs a run, not a read.
+* **`C54` — I FILED THIS AND THEN REFUTED IT THE SAME DAY. Do not re-open it, and do not count it as an
+  owed run.** I read 1.1.0's `SavegameFixups.RemoveLeakedUpgradeModifiers` ending on an unguarded
+  `ipairs(leaked)` and called it a candidate defect because vanilla guards `ipairs(x or empty_table)` in 36
+  other places. ⛔ **That was a ONE-SIDED COUNT** — I never counted the unguarded sites, of which there are
+  18 of the identical shape in shipped `Lua/`+`CommonLua/` (`Cooldown.lua:239-252` and
+  `Notifications.lua:430-437` read in full; both leave the local `nil` in the ORDINARY case), plus 28+
+  `ipairs(self.<field>)` sites where the class default is `false`, including the grid code. And `EF-005`
+  already said so: *"Engine Lua tolerates `#nil`/`next(nil)`/`ipairs(false)` … don't report/fix
+  nil-iteration as crashes."* I had not consulted the facts index before filing.
+  ⇒ **Two process findings for you, both mine, both cheap to check for elsewhere in this chain:**
+  (1) an asymmetry argument needs BOTH sides counted before it is evidence;
+  (2) `agent/facts/INDEX.md` must be consulted before any engine-semantics claim is filed.
 * **Dangling citations in files outside my fence**, all comments, none live code:
   `00_Core.lua:239` (cites `Fix_LastTransmissionStorage` as a donor) and
   `:304-305` (cites `Fix_AstrogeologistExtractors:174` and
