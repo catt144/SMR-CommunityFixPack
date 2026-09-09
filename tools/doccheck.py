@@ -631,11 +631,14 @@ LOAD_ORDER_RULES = [
         "before": "Code/Fix_ShelterReflex.lua",
         "after": "Code/Fix_ArrivalDeaths.lua",
         "symbol": "Colonist:Idle",
+        # ⚠️ 2026-09-09: the RULE is unchanged and still correct; only the two
+        # line citations had drifted (:70 -> :109 with link 03's header edit,
+        # :200 -> :209). Re-read against HEAD, not re-derived from the old text.
         "why": "both wrap Colonist:Idle. ShelterReflex's wrapper can call "
                "self:SetCommand(\"Rest\"), which kills the thread and NEVER "
-               "returns (Fix_ShelterReflex.lua:70) — so it must be the INNER "
+               "returns (Fix_ShelterReflex.lua:109) — so it must be the INNER "
                "wrapper. ArrivalDeaths only assigns emigration_dome/elevator "
-               "and always delegates (Fix_ArrivalDeaths.lua:200), so it is safe "
+               "and always delegates (Fix_ArrivalDeaths.lua:209), so it is safe "
                "OUTER. Reversed, a colonist meeting the shelter precondition "
                "would skip F53b's dome re-choice entirely.",
     },
@@ -696,6 +699,137 @@ def wrap_targets_check(out):
     return not violations
 
 
+# --- H-10: the three lists that decide what ships -----------------------------
+#
+# ⛔ WHY THIS IS RED AND NOT A WARN. `Code/*.lua` is what exists, `items.lua` is
+# the Mod Editor's item list, and `metadata.lua`'s `code` list is the load
+# order. Both portals FORCE a `SaveDef` on upload, and `SaveDef` rebuilds the
+# `code` list SOLELY from `items.lua` (`Mod.lua:816-840`, `:973`) -- Steam's
+# before packing. So these three disagreeing does not merely lint badly: it
+# DECIDES WHAT SHIPS. A module present in Code/ but absent from items.lua ships
+# absent, and the player gets a pack quietly missing a fix.
+#
+# This gate exists because doccheck reported GREEN through exactly that state
+# (hotfix2 link 02, 2026-09-08): 36 modules had been deleted, `items.lua` held
+# 45 entries and `metadata.lua`'s `code` list still held 81. The only reason it
+# was caught is that a human happened to read the LOAD ORDER line's file count
+# against the number they expected. doccheck already computed both numbers and
+# simply never compared them to each other.
+#
+# ⚠️ The comparison is by NAME and reports the SYMMETRIC DIFFERENCE. A count
+# check would have passed a same-size swap, and a count is also what nearly let
+# the 2026-09-08 state through.
+
+CODE_IN_ITEMS = re.compile(r"'CodeFileName',\s*\"(Code/[^\"]+\.lua)\"")
+
+
+def _metadata_code_list(text):
+    """The `code` list, read as a list rather than as every Code/ string in the
+    file -- a description or a comment could mention one."""
+    m = re.search(r"'code',\s*\{", text)
+    if not m:
+        return None
+    depth, i = 1, m.end()
+    while i < len(text) and depth:
+        if text[i] == "{":
+            depth += 1
+        elif text[i] == "}":
+            depth -= 1
+        i += 1
+    return re.findall(r"\"(Code/[^\"]+\.lua)\"", text[m.end():i])
+
+
+def module_set_agreement(out):
+    """Code/*.lua == items.lua == metadata.lua's `code` list, by name (H-10)."""
+    names = lua_files(CODE)
+    if names is None:
+        out.append("MODULE SETS: not checked (Code/ not readable)")
+        return True
+    on_disk = {"Code/" + n for n in names}
+
+    sets = {"Code/": on_disk}
+    for label, rel, extract in (
+            ("items.lua", "items.lua", lambda t: CODE_IN_ITEMS.findall(t)),
+            ("metadata.lua 'code'", "metadata.lua", _metadata_code_list)):
+        try:
+            with open(os.path.join(REPO, rel), encoding="utf-8-sig",
+                      errors="replace") as fh:
+                found = extract(fh.read())
+        except OSError as exc:
+            out.append("MODULE SETS: not checked (%s)" % exc)
+            return True
+        if found is None:
+            out.append("  RED  module sets: no `code` list found in %s -- a "
+                       "SaveDef would rebuild it from items.lua and this gate "
+                       "cannot see what would ship" % rel)
+            return False
+        sets[label] = set(found)
+
+    ok = True
+    labels = list(sets)
+    for i, a in enumerate(labels):
+        for b in labels[i + 1:]:
+            only_a = sorted(sets[a] - sets[b])
+            only_b = sorted(sets[b] - sets[a])
+            if not only_a and not only_b:
+                continue
+            ok = False
+            out.append("  RED  module sets DISAGREE: %s vs %s (H-10 -- a "
+                       "SaveDef rebuilds metadata.lua's code list from "
+                       "items.lua on upload, so this decides what ships)"
+                       % (a, b))
+            for n in only_a:
+                out.append("         only in %-20s %s" % (a, n))
+            for n in only_b:
+                out.append("         only in %-20s %s" % (b, n))
+    out.append("MODULE SETS: %d file(s) in Code/, items.lua and metadata.lua's "
+               "code list %s" % (len(on_disk), "agree by name" if ok
+                                 else "DISAGREE -- see above"))
+    return ok
+
+
+def bodycheck_selftest(out):
+    """Run bodycheck.py's falsifier as a gate, not as a habit.
+
+    It was a MANUAL gate from the day it was written, and its own docstring
+    says to run it before trusting a GREEN. Two links in a row then reported
+    that its counts were the most valuable cross-check they had -- and nothing
+    would have noticed if the numbers had come out wrong. A falsifier nobody is
+    obliged to run is a falsifier that eventually is not run.
+
+    ⚠️ A MISSING GAME TREE IS NOT A FAILURE. The selftest needs the shipped
+    source (two of its legs are real game-side events), and doccheck has to
+    stay runnable on a rig without the game installed. No tree => reported, not
+    red. Only an actual failing leg is red.
+    """
+    tool = os.path.join(os.path.dirname(os.path.abspath(__file__)), "bodycheck.py")
+    if not os.path.isfile(tool):
+        out.append("BODYCHECK SELFTEST: not checked (tools/bodycheck.py absent)")
+        return True
+    try:
+        p = subprocess.run([sys.executable, tool, "--selftest"],
+                           capture_output=True, text=True, encoding="utf-8",
+                           errors="replace", timeout=300)
+    except Exception as exc:                  # a tool bug must report, not crash
+        out.append("BODYCHECK SELFTEST: not checked (%s)" % exc)
+        return True
+    if p.returncode == 2:
+        # its own "cannot run" code -- no shipped tree to hash against
+        out.append("BODYCHECK SELFTEST: not run (%s)"
+                   % ((p.stdout or "").strip().splitlines() or ["no source tree"])[-1])
+        return True
+    if p.returncode == 0:
+        out.append("BODYCHECK SELFTEST: PASS (the falsifier; every verdict "
+                   "fired on a known case)")
+        return True
+    out.append("  RED  bodycheck --selftest FAILED -- the instrument that "
+               "watches the shipped bodies cannot be trusted until this is "
+               "green. Full output:")
+    for line in (p.stdout or "").splitlines() + (p.stderr or "").splitlines():
+        out.append("         %s" % line)
+    return False
+
+
 def counts_block(counts):
     """A STATE-ready block; commit bodies may paste it verbatim."""
     lines = [
@@ -751,6 +885,8 @@ def main():
     ok = temporary_sweep(out) and ok
     ok = load_order(out) and ok
     ok = wrap_targets_check(out) and ok
+    ok = module_set_agreement(out) and ok
+    ok = bodycheck_selftest(out) and ok
     testkit_tree(out)  # report-only by owner decision (2026-08-04) — never gates
 
     if args.verify_split:

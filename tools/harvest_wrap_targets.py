@@ -170,9 +170,14 @@ CHECK_ALLOWLIST = {
         "declares it — Diggers.lua:87 (audit 2026-08-24)",
     ("Fix_ShelterReflex", "Colonist", "Idle"):
         "declares it — Colonist.lua:1770 (audit 2026-08-24)",
-    # (Fix_ShelterReflex's MicroGHabitatAutoResolve.IsSuitable is a full
-    # replacement with NO capture — outside this check's shape by design; its
-    # existence guard is the inline type check at Fix_ShelterReflex.lua:41.)
+    # ⛔ 2026-09-09: the parenthetical that stood here described
+    # Fix_ShelterReflex's MicroGHabitatAutoResolve.IsSuitable replacement, which
+    # link 03 DELETED in `19b5aaa` (re-verification row F-3: on 1.1.0 it had
+    # become a throw on any asteroid habitat with a trait filter, and repairing
+    # it would have meant fighting a stated 1.1.0 design). The allowlist ENTRY
+    # above is unaffected and still needed; only the note described something
+    # that no longer exists. The free cross-check that the right thing left:
+    # sigcheck's replacement-site count moved 39 -> 38 on the same commit.
 }
 
 _NOT_CLASSES = {"SMRFixPack", "SMRTest", "_G"}
