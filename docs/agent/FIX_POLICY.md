@@ -169,6 +169,111 @@ Every fix goes through `SMRFixPack.Register(id, {title, apply})` (Code/00_Core.l
   pairs. A per-game global is a RUNTIME condition — `rawget(_G, "Cities")` +
   a `type(...) == "table"` guard inside the OnMsg handler, never a Require entry.
 
+## 2a. Branch guards — the `probe` IS the guard, and there is no version check
+
+Adopted 2026-09-08 (hotfix2 link 01, decision 118). Binding on every module that
+carries a body, expression or data shape taken from one game branch.
+
+**The problem.** Nothing stops a build reaching a player on the *other* branch.
+Our `lua_revision` is 350453 and 1.1.0's `ModMinLuaRevision` and
+`ModRequiredLuaRevision` are BOTH 350453 (`EF-077`), so `ModDef:IsObsolete()` is
+false on 1.0.7 and on 1.1.0 alike: the pack installs and loads on either, with no
+warning of any kind. A module carrying a 1.1.0 function body that lands on a
+1.0.7 function is **F114 in reverse** — our copy applied over a body that does
+not match it.
+
+⛔ **DO NOT BUILD A GAME-VERSION DETECTOR.** Two independent reasons, and each is
+sufficient:
+1. It would be a **label check**, and this project's rule is *check the thing,
+   not its label* — the rule that made the F115 gate correct, and whose violation
+   made the desk audit wrong by 5 (`EF-078`).
+2. It is **unbuildable from the mod's own fields anyway**: `lua_revision`,
+   `ModMinLuaRevision` and `ModRequiredLuaRevision` are all 350453 on both
+   branches (`EF-077`) — which is precisely why nothing warns a 1.0.7 player.
+   There is no field to read.
+
+✅ **THE PER-MODULE `probe` IS THE BRANCH GUARD** (`00_Core.lua`, `Require`'s
+`{ probe = fn, reason = ... }` form). A probe that confirms the body shape its
+module was written for **necessarily declines on the branch that has the other
+shape** — per module, at apply time, with no version arithmetic anywhere and
+nothing global to keep in sync. The `MultiResourceDepotBase` test in
+`Fix_TrainCargoDumping` and the `Landscapes`-global test in
+`Fix_LandscapeUnitFilter` are the same idea reached by hand; the probe form is
+that idea made callable, error-trapped and fail-closed.
+
+⚠️ A probe is only for a target shown **synchronous and side-effect-free on a
+stub** from its shipped body. Where that cannot be shown, the module keeps a
+`test` naming a discriminating *shape* (a class that exists on one branch only,
+a global that moved) — still the thing, never the label. ⛔ A future session that
+finds this section and wants to "improve" it into a version check is reverting a
+ruling, not tidying.
+
+## 2b. The pinned-defect manifest — a module states what it corrects, or it does not ship
+
+Adopted 2026-09-08 (hotfix2 link 01, report `PACK_1_1_0_REVERIFICATION` §4 items
+2–3; owner acceptance, checklist 116). Checked by `python tools/bodycheck.py`.
+
+⚖️ **THE RULE.** *A module that cannot state the shipped expression it corrects
+cannot be re-verified, and should not ship.* The 1.1.0 audit found 32 modules
+whose defect the developers had fixed themselves **while every self-check
+passed** — `Require` sees existence, `sigcheck.py` sees arity, a name sweep sees
+names, and a function that still exists, still takes the same arguments and no
+longer has the bug is invisible to all three. The manifest is the discriminator
+that makes "vanilla fixed it" a five-second question.
+
+Two machine-readable lines in the module's header block:
+
+```lua
+-- SRC: Lua/Units/Train.lua Train:UnloadAll sha256=<hash of the shipped body at pin time>
+-- DEFECT: <the literal shipped expression this module corrects, as a regex>
+```
+
+* `<path>` is slash-separated, relative to `ModTools/Src`.
+* `<selector>` carries no spaces: `Class:Method` (the separator is a hint — both
+  declaration forms and `Class.Method = function(` are matched), a bare
+  `Name` for a global or `local function`, or `L<first>-<last>` for a literal
+  line span where there is no function to name (data tables, generated files).
+* The body runs from the declaration line to the first bare `end` at the same
+  indentation — `tools/luafn.py:find_bodies`, which `bodycheck.py` **imports**,
+  so there is never a second extractor to disagree with. Before hashing, line
+  endings are normalised and trailing whitespace is stripped per line; leading
+  indentation and comments are kept.
+* `-- SRC: none <reason>` declares a module with no hashable target (a data
+  patch, an additive handler). It is a *declaration*, not an omission, and the
+  tool counts it separately from `NO-MANIFEST`.
+* `-- DEFECT:` is searched in the body of the `SRC:` line **above it** — that
+  precision is the point; a tree-wide grep could match anywhere. A **`DataPatch`
+  module** has no body to search, so it declares `SRC: none` and states its
+  defect against the shipped DATA with the scoped form:
+  `-- DEFECT@Data/TraitPreset.lua: modify_trait\s*=\s*"Religious"`.
+* A module may carry several `SRC:` lines; each `DEFECT:` binds to the nearest
+  one above it.
+* Regexes are Python `re`, one line (they live in a Lua comment). Shipped Lua
+  indents with **tabs** — write `\s+`, never a literal space.
+
+⛔ **STATE THE DEFECT, NEVER THE PHRASING.** A regex pinned to incidental syntax
+reports `DEFECT-GONE` on a pure refactor — a FALSE "vanilla fixed it", which is
+the direction that **retires a live fix** (R-15 nearly went that way on a
+rename). Worked example, and it is why this paragraph exists: F46's 1.0.7
+phrasing was `station.demand[res]:GetTargetAmount()`; 1.1.0 hoisted it to
+`local demand = station.demand and station.demand[res]` /
+`demand:GetTargetAmount()` (`Train.lua:794-795`) with the defect untouched. The
+right expression is the one that states the fault —
+`Min\(carried,\s*station_cap\)`, the unload computed from the cap alone. Both
+cases are locked into `bodycheck.py --selftest` as fixtures.
+
+⚠️ **A DEFECT THAT IS AN ABSENCE CANNOT BE STATED DIRECTLY.** A regex matches
+what is present; a missing guard is not. State instead the expression that is
+*wrong because* the guard is missing, and accept the known limit: if vanilla
+adds the guard elsewhere, `DEFECT-GONE` will not fire. That module is watched for
+class (b) only, and its row should say so.
+
+⚠️ **`bodycheck.py` GREEN IS NOT A CLEARANCE.** It sees a changed body (class b),
+a vanished defect (class d) and a vanished target (class e). It does **not** see
+semantics moving under a wrapper (class c — F111, F112, F-1, F-2, F-3, F-5), and
+nothing this project owns does. A `DEFECT-GONE` is a REMOVE **candidate**, never
+a verdict: read the replacement body before retiring anything.
+
 ## 3. Savegame discipline
 
 - No new persisted classes or GameVars unless unavoidable; if needed, name them
