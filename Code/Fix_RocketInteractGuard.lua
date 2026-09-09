@@ -55,6 +55,16 @@
 -- RCConstructorBase (:353), which call RCTransport.CanInteractWithObject /
 -- .InteractWithObject statically through the class table.
 
+-- MANIFEST (FIX_POLICY §2b) -- machine-read by `python tools/bodycheck.py`.
+-- Pinned 2026-09-08 against shipped game 1.1.0.403908. ⛔ These are CLAIMS about
+-- the shipped tree, not a clearance: re-pin them deliberately when a target moves,
+-- never to silence a BODY-CHANGED.
+-- SRC: Lua/Units/RCTransport.lua RCTransport:CanInteractWithObject sha256=ecb8f390089bf1a44b04e15a521e8541e17f6ea9b77e28f534c2323b9631493b
+--   (Lua/Units/RCTransport.lua:409-456 at pin time)
+-- DEFECT: IsKindOfClasses\(obj, "TradeRocketBase", "RefugeeRocketBase"\)
+--   the guard names only the legacy classes; Relaunched's rockets descend
+--   UniversalRocketBase
+
 SMRFixPack.Register("RocketInteractGuard", {
 	title = "RC Transports stay off trade and refugee rockets again",
 	apply = function()

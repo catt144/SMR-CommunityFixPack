@@ -14,6 +14,15 @@
 -- Lua\X\ColonyControlCenter.lua:1308-1320 (shipped Src, game 1.0.7.396349) with the display
 -- value actually used. Change marked -- FIX.
 
+-- MANIFEST (FIX_POLICY §2b) -- machine-read by `python tools/bodycheck.py`.
+-- Pinned 2026-09-08 against shipped game 1.1.0.403908. ⛔ These are CLAIMS about
+-- the shipped tree, not a clearance: re-pin them deliberately when a target moves,
+-- never to silence a BODY-CHANGED.
+-- SRC: Lua/X/ColonyControlCenter.lua Community:UICommandCenterStatUpdate sha256=bc009d01c3fb15d65127ee5bb143be217db4dd12726a2615b32103914e715845
+--   (Lua/X/ColonyControlCenter.lua:1290-1301 at pin time)
+-- DEFECT: idLabel:SetText\(v\)
+--   the red-tagged `tv` is built and then `v` is displayed
+
 SMRFixPack.Register("DomeOverviewHighlight", {
 	title = "Domes Overview marks low colonist stats in red again",
 	apply = function()

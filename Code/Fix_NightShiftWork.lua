@@ -36,6 +36,16 @@
 -- So `orig(...) or <modular window>` and `<modular window>` alone select the
 -- same hours; the union adds nothing and removes nothing.
 
+-- MANIFEST (FIX_POLICY §2b) -- machine-read by `python tools/bodycheck.py`.
+-- Pinned 2026-09-08 against shipped game 1.1.0.403908. ⛔ These are CLAIMS about
+-- the shipped tree, not a clearance: re-pin them deliberately when a target moves,
+-- never to silence a BODY-CHANGED.
+-- SRC: Lua/Units/Colonist.lua Colonist:ShouldLeaveForWork sha256=e5c4dafad6adc916ee75a77b6e2a8250b53befbb663deedc718bfcf4851f0b67
+--   (Lua/Units/Colonist.lua:2194-2204 at pin time)
+-- DEFECT: hour >= workshift_start - 1 and hour <= workshift_start \+ 3
+--   no wrap-around: shift 3 gives hour >= 21 and hour <= 25, and 24/25 are
+--   unreachable
+
 SMRFixPack.Register("NightShiftWork", {
 	title = "Night-shift colonists go to work after midnight instead of skipping their shift",
 	apply = function()

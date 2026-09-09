@@ -22,6 +22,21 @@
 --    It only ever fills in a missing number, so it is safe to re-run and safe to
 --    leave behind if the mod is removed.
 
+-- MANIFEST (FIX_POLICY §2b) -- machine-read by `python tools/bodycheck.py`.
+-- Pinned 2026-09-08 against shipped game 1.1.0.403908. ⛔ These are CLAIMS about
+-- the shipped tree, not a clearance: re-pin them deliberately when a target moves,
+-- never to silence a BODY-CHANGED.
+-- SRC: Lua/Buildings/Track.lua TrackBase:BreakTrackElement sha256=22aa2dbf058fb8f0b340d46dcddb73bf57fa46cd3c5518f59271215d23e4cac7
+--   (Lua/Buildings/Track.lua:623-658 at pin time)
+--   ⚠️ NO DEFECT LINE FOR THIS TARGET, deliberately: the defect is the ABSENCE
+--   of node_idx among the parameters copied onto the repair site, and a regex
+--   matches what is present (FIX_POLICY §2b). The body hash is the watch here;
+--   the consequence is stated against the sort below
+-- SRC: Lua/Buildings/TrackElement.lua TrackGridElement:DemolishAndSplitTrack sha256=7466b9403e6a3b27d12702a8825a61bfcdd2674c9bb6b0289c255cbc0b987c0e
+--   (Lua/Buildings/TrackElement.lua:467-618 at pin time)
+-- DEFECT: a\.node_idx < b\.node_idx
+--   `false < number` raises once the un-stamped repair site is in the list
+
 SMRFixPack.Register("BrokenTrackSalvage", {
 	title = "Meteor-damaged tracks can be salvaged again",
 	apply = function()

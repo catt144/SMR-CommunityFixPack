@@ -155,6 +155,14 @@ local patch = SMRFixPack.DataPatch(FIX_ID, {
 	end,
 })
 
+-- MANIFEST (FIX_POLICY §2b) -- machine-read by `python tools/bodycheck.py`.
+-- Pinned 2026-09-08 against shipped game 1.1.0.403908. ⛔ These are CLAIMS about
+-- the shipped tree, not a clearance: re-pin them deliberately when a target moves,
+-- never to silence a BODY-CHANGED.
+-- SRC: none -- a StoryBit preset patch -- no function body to hash
+-- DEFECT@Data/StoryBit/DustSickness.lua: PlaceObj\('HasTrait',\s*\{\s*'Negate',\s*true,\s*'Trait',\s*"Child",\s*\}\)
+--   the infection filter excludes Child and nobody else, so Biorobots qualify
+
 SMRFixPack.Register(FIX_ID, {
 	title = "Dust Sickness no longer infects Biorobots",
 	apply = function()

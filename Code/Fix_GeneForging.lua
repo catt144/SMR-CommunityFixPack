@@ -43,6 +43,18 @@
 -- Src has no producer for a live city without a colony, and vanilla raises in
 -- that state anyway.
 
+-- MANIFEST (FIX_POLICY §2b) -- machine-read by `python tools/bodycheck.py`.
+-- Pinned 2026-09-08 against shipped game 1.1.0.403908. ⛔ These are CLAIMS about
+-- the shipped tree, not a clearance: re-pin them deliberately when a target moves,
+-- never to silence a BODY-CHANGED.
+-- SRC: Lua/Units/Colonist.lua GetRareTraitChance sha256=ad46cc5455e72581125e01fce4a3ae3969113cb0c04561e9b9ce1d57ae7511a1
+--   (Lua/Units/Colonist.lua:4398-4402 at pin time)
+-- DEFECT: IsTechResearched\("GeneSelection"\)
+--   GeneSelection is the ONLY tech consulted. ⚠️ The defect is an ABSENCE
+--   (GeneForging is unknown here), so this expression states the half that IS
+--   present: DEFECT-GONE will not fire if vanilla adds GeneForging alongside
+--   it -- the body hash is what watches for that (FIX_POLICY §2b)
+
 SMRFixPack.Register("GeneForging", {
 	title = "The Gene Forging tech actually increases the rare-trait chance",
 	apply = function()

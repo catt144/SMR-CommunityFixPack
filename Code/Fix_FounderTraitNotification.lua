@@ -22,6 +22,15 @@
 -- `init` check (traits granted while the colonist is being created must not
 -- notify) and the single-notification guard.
 
+-- MANIFEST (FIX_POLICY §2b) -- machine-read by `python tools/bodycheck.py`.
+-- Pinned 2026-09-08 against shipped game 1.1.0.403908. ⛔ These are CLAIMS about
+-- the shipped tree, not a clearance: re-pin them deliberately when a target moves,
+-- never to silence a BODY-CHANGED.
+-- SRC: Lua/ColonyViability.lua OnMsg.ColonistAddTrait sha256=db74c8146783b134cff430294d95762413a7087d2ea670dd776d540b31114530
+--   (Lua/ColonyViability.lua:306-314 at pin time)
+-- DEFECT: FounderGainsTraitCategories\[TraitPresets\[trait_id\]\.group\]
+--   an array indexed by a group NAME is always nil
+
 SMRFixPack.Register("FounderTraitNotification", {
 	title = "The notification for a Founder gaining a trait fires again",
 	apply = function()

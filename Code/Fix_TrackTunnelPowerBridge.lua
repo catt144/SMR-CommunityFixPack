@@ -81,6 +81,15 @@
 -- (Station.lua:1395-1420) tears down and rebuilds exactly these links; a
 -- LoadGame-time pass would race it. Same lesson as F35.
 
+-- MANIFEST (FIX_POLICY §2b) -- machine-read by `python tools/bodycheck.py`.
+-- Pinned 2026-09-08 against shipped game 1.1.0.403908. ⛔ These are CLAIMS about
+-- the shipped tree, not a clearance: re-pin them deliberately when a target moves,
+-- never to silence a BODY-CHANGED.
+-- SRC: Lua/Buildings/Track.lua OnMsg.StationsConnected sha256=e6e1e78b4f984c57524170bbd41ab84f5371af92f2931f1d90b442f6c3b3dad7
+--   (Lua/Buildings/Track.lua:667-679 at pin time)
+-- DEFECT: if #track\.elements > 2 then
+--   a 2-element track skips ConnectToGrids and is stamped connected anyway
+
 SMRFixPack.Register("TrackTunnelPowerBridge", {
 	title = "A station attached to a train tunnel bridges the power grid again",
 	apply = function()

@@ -80,6 +80,20 @@
 -- for a path with no shipped user and no runtime effect. Recorded on the F29
 -- entry instead.
 
+-- MANIFEST (FIX_POLICY §2b) -- machine-read by `python tools/bodycheck.py`.
+-- Pinned 2026-09-08 against shipped game 1.1.0.403908. ⛔ These are CLAIMS about
+-- the shipped tree, not a clearance: re-pin them deliberately when a target moves,
+-- never to silence a BODY-CHANGED.
+-- SRC: Lua/Sequences/SA_Filters.lua SA_GetLabelToRegister:SAExec sha256=d0f254c8b59609a018e81ee79aa7277b7a586ce9cc7fe7a47d200d82ba8573bd
+--   (Lua/Sequences/SA_Filters.lua:30-40 at pin time)
+-- DEFECT: local count = Min\(#objs, MulDivRound\(#objs, self\.random_percent, 100\)\)
+--   (a) `count` is computed, the list is shuffled, and every object is
+--   returned
+-- SRC: Lua/Mysteries/Diggers.lua AlienDigger:GameInit sha256=b1ecb8ec15cf9053b483912427a0a0d3d773cb6cea2bb084f2530ab4b1fd035a
+--   (Lua/Mysteries/Diggers.lua:87-96 at pin time)
+-- DEFECT: local t = self\.pre_hit_ground_t\s+self\.pre_hit_ground_t = self\.pre_hit_ground_t_2\s+self\.pre_hit_ground_t_2 = self\.pre_hit_ground_t\s+end
+--   (b) the swap reads the field it has already overwritten; `t` is never read
+
 SMRFixPack.Register("SequenceLatents", {
 	title = "Sequence label sampling and the Digger timing swap behave as written",
 	apply = function()

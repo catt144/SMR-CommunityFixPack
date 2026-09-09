@@ -19,6 +19,15 @@
 -- wisps caught later) is kept as the single source of RP; the batch branch keeps
 -- its notification so the player still sees the total.
 
+-- MANIFEST (FIX_POLICY §2b) -- machine-read by `python tools/bodycheck.py`.
+-- Pinned 2026-09-08 against shipped game 1.1.0.403908. ⛔ These are CLAIMS about
+-- the shipped tree, not a clearance: re-pin them deliberately when a target moves,
+-- never to silence a BODY-CHANGED.
+-- SRC: Lua/Mysteries/Fireflies.lua SetLightTrapMode sha256=d5af84dc14558efadc8da0c2119bd850e34a3f00b9299294ca52ee2d97230a88
+--   (Lua/Mysteries/Fireflies.lua:677-704 at pin time)
+-- DEFECT: el_prod_modifier:Change\(#trap\.fireflies\)
+--   F07: the * 1000 both sibling call sites use is missing
+
 SMRFixPack.Register("WispRewards", {
 	title = 'Mystery 11: "free the wisps" produces real power; destroyed-wisp rewards match the notification',
 	apply = function()

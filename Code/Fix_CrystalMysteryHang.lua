@@ -85,6 +85,16 @@ local function start_repeater()
 	end)
 end
 
+-- MANIFEST (FIX_POLICY §2b) -- machine-read by `python tools/bodycheck.py`.
+-- Pinned 2026-09-08 against shipped game 1.1.0.403908. ⛔ These are CLAIMS about
+-- the shipped tree, not a clearance: re-pin them deliberately when a target moves,
+-- never to silence a BODY-CHANGED.
+-- SRC: Lua/Mysteries/Crystals.lua Crystal:ComposeProc sha256=7513be1e04a3a0e279a87e4cd8454eea62b67efabd6491c7e6626b68e5289009
+--   (Lua/Mysteries/Crystals.lua:45-84 at pin time)
+-- DEFECT: WaitMsg\("CrystalForceFlyAway", const\.DayDuration\)
+--   nothing anywhere emits CrystalForceFlyAway, so the timeout always wins and
+--   the one-shot CrystalFlyAway races the player-gated popup
+
 SMRFixPack.Register("CrystalMysteryHang", {
 	title = "The Philosopher's Stone mystery can no longer hang forever at the finale",
 	apply = function()

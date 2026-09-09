@@ -34,6 +34,15 @@
 -- which is what the plotted series does (it hands raw values to the graph with
 -- `scale = const.ResourceScale`), instead of scaling one of them alone.
 
+-- MANIFEST (FIX_POLICY §2b) -- machine-read by `python tools/bodycheck.py`.
+-- Pinned 2026-09-08 against shipped game 1.1.0.403908. ⛔ These are CLAIMS about
+-- the shipped tree, not a clearance: re-pin them deliberately when a target moves,
+-- never to silence a BODY-CHANGED.
+-- SRC: Lua/X/ColonyControlCenter.lua City:GetColonyStatsButtons sha256=6b179b3015cb3da03480db9c35a3cb2ff812178ee7a0130c08ef2c50063a589a
+--   (Lua/X/ColonyControlCenter.lua:8-233 at pin time)
+-- DEFECT: consumed = resource_overview_obj:GetConsumedByConsumptionYesterday\(id\) / const\.ResourceScale
+--   the caption omits the maintenance term the plotted series adds
+
 SMRFixPack.Register("GraphConsumedCaption", {
 	title = "Command Center graph captions count maintenance, like the bars do",
 	apply = function()

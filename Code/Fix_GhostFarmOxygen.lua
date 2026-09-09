@@ -22,6 +22,15 @@
 -- oxygen keep it. The sweep only removes modifiers whose id matches the farm id
 -- pattern and has no live owner, so it cannot touch another mod's modifiers.
 
+-- MANIFEST (FIX_POLICY §2b) -- machine-read by `python tools/bodycheck.py`.
+-- Pinned 2026-09-08 against shipped game 1.1.0.403908. ⛔ These are CLAIMS about
+-- the shipped tree, not a clearance: re-pin them deliberately when a target moves,
+-- never to silence a BODY-CHANGED.
+-- SRC: Lua/Buildings/Farm.lua FarmBase:ApplyOxygenProductionMod sha256=fd45e8c4c6972cb40a18ae7221cad940a7a4a53736505eedde4259e2702d38ff
+--   (Lua/Buildings/Farm.lua:634-644 at pin time)
+-- DEFECT: SetModifier\("air_consumption", self\.farm_id
+--   registered on the parent dome under the farm's own id and never cleared
+
 SMRFixPack.Register("GhostFarmOxygen", {
 	title = "Salvaging a farm removes the oxygen it was giving its dome",
 	apply = function()

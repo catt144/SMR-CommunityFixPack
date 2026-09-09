@@ -52,6 +52,15 @@
 -- defect is below Lua's reach and F102 records the community swap as the only
 -- remaining lever.
 
+-- MANIFEST (FIX_POLICY §2b) -- machine-read by `python tools/bodycheck.py`.
+-- Pinned 2026-09-08 against shipped game 1.1.0.403908. ⛔ These are CLAIMS about
+-- the shipped tree, not a clearance: re-pin them deliberately when a target moves,
+-- never to silence a BODY-CHANGED.
+-- SRC: none -- a class-default patch on a classdef table -- no function body to hash
+-- DEFECT@Lua/Buildings/SubsurfaceDeposit.lua: entity = "SignPreciousMineralsDeposit"
+--   the class still points at the hand-edited VertexNoise sign; the clean
+--   SignRareMineralsDeposit ships and is referenced nowhere
+
 SMRFixPack.Register("ExoticDepositSign", {
 	title = "Subsurface Exotic Minerals deposits use the remaster's own sign — believed to stop the asteroid-visit freeze reported on Linux/NVIDIA systems",
 	apply = function()

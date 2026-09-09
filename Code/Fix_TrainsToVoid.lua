@@ -26,6 +26,16 @@
 -- Demolishable:OnDemolish (Demolishable.lua:157) is empty and OnDemolish is not
 -- an auto-resolved method, so Building's is the only implementation in the chain.
 
+-- MANIFEST (FIX_POLICY §2b) -- machine-read by `python tools/bodycheck.py`.
+-- Pinned 2026-09-08 against shipped game 1.1.0.403908. ⛔ These are CLAIMS about
+-- the shipped tree, not a clearance: re-pin them deliberately when a target moves,
+-- never to silence a BODY-CHANGED.
+-- SRC: Lua/Buildings/Station.lua OnMsg.BuildingDemolished sha256=77d6a439755dd83af1e7ab928766edba1c3155cd7af56d88445f60f1f8c270ad
+--   (Lua/Buildings/Station.lua:289-299 at pin time)
+-- DEFECT: if train\.current_station == bld then\s+DoneObject\(train\)
+--   a bare DoneObject: no prefab refund, no notification, and current_station
+--   still names the DEPARTURE station for a whole trip
+
 SMRFixPack.Register("TrainsToVoid", {
 	title = "Demolishing a station stores its trains instead of permanently deleting them",
 	apply = function()

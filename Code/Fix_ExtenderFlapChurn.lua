@@ -103,6 +103,16 @@ if not install_error then
 	end
 end
 
+-- MANIFEST (FIX_POLICY §2b) -- machine-read by `python tools/bodycheck.py`.
+-- Pinned 2026-09-08 against shipped game 1.1.0.403908. ⛔ These are CLAIMS about
+-- the shipped tree, not a clearance: re-pin them deliberately when a target moves,
+-- never to silence a BODY-CHANGED.
+-- SRC: Lua/Buildings/DroneHubExtender.lua DroneHubExtenderBase:OnSetWorking sha256=341429fac8ea9f4587e86623644cfa94ea98879ac9f11f2a1e236ab901f047d1
+--   (Lua/Buildings/DroneHubExtender.lua:181-190 at pin time)
+-- DEFECT: UpdateUplinkRequesters
+--   called on EVERY working transition, in both directions, and the helper is
+--   a full disconnect/reconnect
+
 SMRFixPack.Register("ExtenderFlapChurn", {
 	title = "Extender power flickers no longer tear down and rebuild the whole hub (fleet-wide Idle churn)",
 	apply = function()

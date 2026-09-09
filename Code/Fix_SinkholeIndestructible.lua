@@ -123,6 +123,19 @@ local patch = SMRFixPack.DataPatch(FIX_ID, {
 	end,
 })
 
+-- MANIFEST (FIX_POLICY §2b) -- machine-read by `python tools/bodycheck.py`.
+-- Pinned 2026-09-08 against shipped game 1.1.0.403908. ⛔ These are CLAIMS about
+-- the shipped tree, not a clearance: re-pin them deliberately when a target moves,
+-- never to silence a BODY-CHANGED.
+-- SRC: Lua/BuildingTemplate/Sinkhole.generated.lua L4-25 sha256=0560a8a4f4b623c8a57661f5a3124bc35128312bbaeedf696792a49be387c1e0
+--   (Lua/BuildingTemplate/Sinkhole.generated.lua:4-25 at pin time)
+--   ⚠️ NO DEFECT LINE, deliberately: the defect is the ABSENCE of
+--   `indestructible` / `disasters_strike_immunity` from this class table, and
+--   a regex matches what is present (FIX_POLICY §2b). The pin is the whole
+--   classdef, so vanilla ADDING the flag shows up as BODY-CHANGED -- which is
+--   exactly the signal wanted. ⚠️ A line span moves if anything above it does;
+--   that also reads as BODY-CHANGED, which fails safe
+
 SMRFixPack.Register(FIX_ID, {
 	title = "A meteor can no longer destroy the St. Elmo's Fire sinkhole",
 	apply = function()

@@ -36,6 +36,14 @@
 -- log line and change nothing; the `return false` beside it is what actually
 -- handles the case and is kept.
 
+-- MANIFEST (FIX_POLICY §2b) -- machine-read by `python tools/bodycheck.py`.
+-- Pinned 2026-09-08 against shipped game 1.1.0.403908. ⛔ These are CLAIMS about
+-- the shipped tree, not a clearance: re-pin them deliberately when a target moves,
+-- never to silence a BODY-CHANGED.
+-- SRC: Lua/Bombardment.lua WaitBombard sha256=9003e12935d12d42405c5a17aa5c0d24d22ef40bdd34c8a47a1144c4ce105d43
+--   (Lua/Bombardment.lua:55-154 at pin time)
+-- DEFECT: spawn_dir\s*=\s*GenerateDir\(dir,\s*angle\)\s+local\s+spawn_pos\s*=\s*dest_pos\s*\+\s*SetLen\(dir,
+
 SMRFixPack.Register("BombardmentSpread", {
 	title = "Bombardment missiles come in from spread directions instead of in parallel",
 	apply = function()

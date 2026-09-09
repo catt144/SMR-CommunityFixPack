@@ -93,6 +93,15 @@
 -- question moot rather than load-bearing. No vanilla state is set before it,
 -- so a bare `return` satisfies §3a's reset clause.
 
+-- MANIFEST (FIX_POLICY §2b) -- machine-read by `python tools/bodycheck.py`.
+-- Pinned 2026-09-08 against shipped game 1.1.0.403908. ⛔ These are CLAIMS about
+-- the shipped tree, not a clearance: re-pin them deliberately when a target moves,
+-- never to silence a BODY-CHANGED.
+-- SRC: Lua/TrainTransport.lua TrackConnectedObjBase:CreateConnectorElements sha256=69ba336a5e5513ee6c7be2dc06ff6f6f32c32aa1a06cae5d653e044e5bd02d49
+--   (Lua/TrainTransport.lua:116-156 at pin time)
+-- DEFECT: if IsValid\(el\) and \(force or el\.station ~= self\) then
+--   the hex is claimed from a live owner, not left alone
+
 SMRFixPack.Register("TrackConnectorPingPong", {
 	title = "A station and a tunnel one hex apart stop stealing each other's track connector",
 	apply = function()

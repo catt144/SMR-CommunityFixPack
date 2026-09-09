@@ -76,6 +76,16 @@
 -- colony's daily "trains on tracks" walk, which stops enumerating dead tracks
 -- (ResourceTracking.lua:197-201).
 
+-- MANIFEST (FIX_POLICY §2b) -- machine-read by `python tools/bodycheck.py`.
+-- Pinned 2026-09-08 against shipped game 1.1.0.403908. ⛔ These are CLAIMS about
+-- the shipped tree, not a clearance: re-pin them deliberately when a target moves,
+-- never to silence a BODY-CHANGED.
+-- SRC: Lua/Buildings/TrackElement.lua TrackGridElement:DemolishAndSplitTrack sha256=7466b9403e6a3b27d12702a8825a61bfcdd2674c9bb6b0289c255cbc0b987c0e
+--   (Lua/Buildings/TrackElement.lua:467-618 at pin time)
+-- DEFECT: until not all_elements\[first\] or \(all_elements\[first\]\.pillared and IsTrackElementStraight
+--   the outward search needs pillared AND straight; a curve is pillared and
+--   never straight, so it walks off the array
+
 SMRFixPack.Register("TrackSalvageWipe", {
 	title = "Salvaging one track piece no longer deletes the whole track and its trains",
 	apply = function()

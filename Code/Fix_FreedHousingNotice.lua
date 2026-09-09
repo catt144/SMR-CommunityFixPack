@@ -36,6 +36,18 @@
 -- the race described above. The reservation case is already bounded instead by
 -- F58's daily stale-reservation sweep plus the normal heavy update.
 
+-- MANIFEST (FIX_POLICY §2b) -- machine-read by `python tools/bodycheck.py`.
+-- Pinned 2026-09-08 against shipped game 1.1.0.403908. ⛔ These are CLAIMS about
+-- the shipped tree, not a clearance: re-pin them deliberately when a target moves,
+-- never to silence a BODY-CHANGED.
+-- SRC: Lua/Buildings/Residence.lua Residence:RemoveResident sha256=a549068bfad65163f3513b1c70b8d895cb7c5dc3b2e51ce49745f77ea9679de9
+--   (Lua/Buildings/Residence.lua:119-126 at pin time)
+-- DEFECT: self\.parent_dome:ResetFreeSpace\(\)\s+end\s+end
+--   ResetFreeSpace is the LAST act: the slot opens and CheckHomeForHomeless is
+--   never called. ⚠️ States an absence by pinning the tail (FIX_POLICY §2b) --
+--   if vanilla adds the wake call here, this stops matching, which is the
+--   intended signal
+
 SMRFixPack.Register("FreedHousingNotice", {
 	title = "A home falling vacant is offered to the dome's homeless straight away",
 	apply = function()

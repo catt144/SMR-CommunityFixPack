@@ -124,6 +124,15 @@
 -- and `emigration_elevator` — are vanilla's own (Colonist.lua:92, :264) and carry
 -- vanilla values.
 
+-- MANIFEST (FIX_POLICY §2b) -- machine-read by `python tools/bodycheck.py`.
+-- Pinned 2026-09-08 against shipped game 1.1.0.403908. ⛔ These are CLAIMS about
+-- the shipped tree, not a clearance: re-pin them deliberately when a target moves,
+-- never to silence a BODY-CHANGED.
+-- SRC: Lua/Units/Colonist.lua Colonist:Arrive sha256=0e52eeb274cecb7b51f33cd06bfd4a640241155e9cfcdadadce986490ed644b1
+--   (Lua/Units/Colonist.lua:1586-1632 at pin time)
+-- DEFECT: self:SetPos\(pos\)
+--   the raw spot is used with no passability search
+
 SMRFixPack.Register("ArrivalDeaths", {
 	title = "Arriving colonists no longer hike to unreachable domes or land in impassable ground",
 	apply = function()

@@ -70,6 +70,16 @@
 -- construction, route (b)), and stores no function value (route (c)).
 -- SAVE FOOTPRINT (FIX_POLICY §3): none.
 
+-- MANIFEST (FIX_POLICY §2b) -- machine-read by `python tools/bodycheck.py`.
+-- Pinned 2026-09-08 against shipped game 1.1.0.403908. ⛔ These are CLAIMS about
+-- the shipped tree, not a clearance: re-pin them deliberately when a target moves,
+-- never to silence a BODY-CHANGED.
+-- SRC: Lua/Units/ColonistTransport.lua Colonist:BoardVehicle sha256=eb88a4974948520c89853da74539d64a98935927e93e14c148b5b5584611032b
+--   (Lua/Units/ColonistTransport.lua:614-639 at pin time)
+-- DEFECT: AddSpentTime\(GameTime\(\) - self\.transport_ticket\.start_wait\)
+--   the wait is charged to the station and start_wait is never restamped, so
+--   ExitVehicle charges wait+ride again
+
 SMRFixPack.Register("TrainWaitTime", {
 	title = "Waiting on a train platform no longer counts as time spent riding",
 	apply = function()

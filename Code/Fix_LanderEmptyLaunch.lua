@@ -25,6 +25,15 @@
 -- designed, so the rocket can never wedge. Every hour spent waiting is another
 -- CreateAutoCargoRequest tick that can find cargo to load.
 
+-- MANIFEST (FIX_POLICY §2b) -- machine-read by `python tools/bodycheck.py`.
+-- Pinned 2026-09-08 against shipped game 1.1.0.403908. ⛔ These are CLAIMS about
+-- the shipped tree, not a clearance: re-pin them deliberately when a target moves,
+-- never to silence a BODY-CHANGED.
+-- SRC: Lua/UniversalRocket.lua UniversalRocketBase:IsCargoReady sha256=4fd9a73ae5742edc23a26b65a42cda5053da4dd6f6c717b21ad7222af72a6f83
+--   (Lua/UniversalRocket.lua:535-559 at pin time)
+-- DEFECT: return cargo_status == "ready"
+--   an EMPTY auto-request is trivially "ready"
+
 SMRFixPack.Register("LanderEmptyLaunch", {
 	title = "Automatic rockets and asteroid landers wait for cargo instead of launching empty",
 	apply = function()

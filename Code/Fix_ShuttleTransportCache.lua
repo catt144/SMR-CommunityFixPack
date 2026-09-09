@@ -24,6 +24,15 @@
 -- mod and then loaded without it reads the cache exactly as vanilla would.
 -- The file-local is_identical helper is recreated verbatim. Changes marked -- FIX.
 
+-- MANIFEST (FIX_POLICY §2b) -- machine-read by `python tools/bodycheck.py`.
+-- Pinned 2026-09-08 against shipped game 1.1.0.403908. ⛔ These are CLAIMS about
+-- the shipped tree, not a clearance: re-pin them deliberately when a target moves,
+-- never to silence a BODY-CHANGED.
+-- SRC: Lua/Units/Colonist.lua FindTransportationModeToCommunity sha256=13c7b6bc82e2ee5aad48a276e2e9d24969533e14868063442ab0907ae4b486b4
+--   (Lua/Units/Colonist.lua:3170-3204 at pin time)
+-- DEFECT: if not t\[pos\] then\s+local mode, dist, elevator = GetTransportationModeToCommunity\(community, pos, shuttles_available
+--   the presence test ignores shuttles_available while the computation uses it
+
 SMRFixPack.Register("ShuttleTransportCache", {
 	title = "New Shuttle Hubs are noticed: colonists stop being stuck with a cached 'unreachable'",
 	apply = function()

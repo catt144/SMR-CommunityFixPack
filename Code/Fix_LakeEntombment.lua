@@ -24,6 +24,20 @@
 -- but covers every Unit, not just rovers. ExitImpassable self-checks
 -- map:IsPassable, so a unit that turns out to be fine is left alone.
 
+-- MANIFEST (FIX_POLICY §2b) -- machine-read by `python tools/bodycheck.py`.
+-- Pinned 2026-09-08 against shipped game 1.1.0.403908. ⛔ These are CLAIMS about
+-- the shipped tree, not a clearance: re-pin them deliberately when a target moves,
+-- never to silence a BODY-CHANGED.
+-- SRC: Lua/Buildings/LandscapeLake.lua LandscapeLake:PlacePrefab sha256=e68c80e20d6bd932d543bca8ae97b424ed218f2d062bc6ccd8790007dce17e46
+--   (Lua/Buildings/LandscapeLake.lua:270-345 at pin time)
+--   our wrap target -- the seam after RebuildPassability. The defect itself is
+--   stated against the scatter below
+-- SRC: Lua/Buildings/ConstructionSite.lua ConstructionSite:ScatterUnitsUnderneath sha256=24e0275a6b553d4eb858b3cce00fd1fba8da3dc636d5e6395122845cfc7a8313
+--   (Lua/Buildings/ConstructionSite.lua:1914-1933 at pin time)
+-- DEFECT: if not u:IsKindOf\("RCConstructorBase"\) or u\.command ~= "Construct" or u\.construction_clearing ~= self then
+--   the RC Constructor that built the site -- the one rover guaranteed to be
+--   standing there -- is exempted from the scatter
+
 SMRFixPack.Register("LakeEntombment", {
 	title = "Building an artificial lake no longer entombs the RC Constructor and drones",
 	apply = function()

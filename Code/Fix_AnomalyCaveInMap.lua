@@ -55,6 +55,15 @@
 -- be a worse failure than dropping none, and FIX_POLICY §4 does not license
 -- guessing.
 
+-- MANIFEST (FIX_POLICY §2b) -- machine-read by `python tools/bodycheck.py`.
+-- Pinned 2026-09-08 against shipped game 1.1.0.403908. ⛔ These are CLAIMS about
+-- the shipped tree, not a clearance: re-pin them deliberately when a target moves,
+-- never to silence a BODY-CHANGED.
+-- SRC: Lua/Buildings/CaveInRubble.lua TriggerCaveIn sha256=e25d81a995f1b8dbbf29c367ccba495cd9e6ed04949814dc4cb80be6f87e5f0e
+--   (Lua/Buildings/CaveInRubble.lua:103-126 at pin time)
+-- DEFECT: pos = SnapWorldToHex\(pos\)\s+local strut = map:MapFindNearest
+--   `pos` is guarded above and `map` is then indexed unguarded
+
 SMRFixPack.Register("AnomalyCaveInMap", {
 	title = "A cave-in on a map that does not exist is declined instead of crashing the sequence",
 	apply = function()

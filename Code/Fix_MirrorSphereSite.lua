@@ -26,6 +26,15 @@
 -- is the only handle Lua has on it. If it ever stops being published the fix
 -- deactivates rather than guessing.
 
+-- MANIFEST (FIX_POLICY §2b) -- machine-read by `python tools/bodycheck.py`.
+-- Pinned 2026-09-08 against shipped game 1.1.0.403908. ⛔ These are CLAIMS about
+-- the shipped tree, not a clearance: re-pin them deliberately when a target moves,
+-- never to silence a BODY-CHANGED.
+-- SRC: Lua/Mysteries/MirrorSphere.lua MirrorSphereBuildingBase:StartAction sha256=013d1c4202300ddea4670edd7b0b16f758ed2e2a8ad8518e16ce2a9363fa450c
+--   (Lua/Mysteries/MirrorSphere.lua:826-883 at pin time)
+-- DEFECT: self\.progress == 100
+--   progress runs 0..max_progress (2^22), so 100 is not the finished value
+
 SMRFixPack.Register("MirrorSphereSite", {
 	title = "A completed Mirror Sphere site no longer accepts more drone work",
 	apply = function()

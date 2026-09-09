@@ -88,6 +88,15 @@
 --     site's OWN spend is returned by the construction machinery and never
 --     carries a completion stamp, so accounting the zone cannot double-refund.
 
+-- MANIFEST (FIX_POLICY §2b) -- machine-read by `python tools/bodycheck.py`.
+-- Pinned 2026-09-08 against shipped game 1.1.0.403908. ⛔ These are CLAIMS about
+-- the shipped tree, not a clearance: re-pin them deliberately when a target moves,
+-- never to silence a BODY-CHANGED.
+-- SRC: Lua/Buildings/Track.lua TrackBase:GetRefundResources sha256=4f21c31e14d64a7023768a221d729bea22f56d37b5631e2aec2db67d5b81e576
+--   (Lua/Buildings/Track.lua:286-307 at pin time)
+-- DEFECT: local element = self\.elements\[#self\.elements\]
+--   one element's stamp is refunded for a track of any length
+
 SMRFixPack.Register("TrackSalvageRefund", {
 	title = "Salvaging a track refunds what the whole track cost, not one hex",
 	apply = function()

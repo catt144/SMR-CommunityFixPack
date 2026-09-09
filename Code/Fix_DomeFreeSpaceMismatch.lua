@@ -35,6 +35,19 @@
 -- habitat's `working` state is its life support, which is F73's subject matter
 -- and not this tracked defect.
 
+-- MANIFEST (FIX_POLICY §2b) -- machine-read by `python tools/bodycheck.py`.
+-- Pinned 2026-09-08 against shipped game 1.1.0.403908. ⛔ These are CLAIMS about
+-- the shipped tree, not a clearance: re-pin them deliberately when a target moves,
+-- never to silence a BODY-CHANGED.
+-- SRC: Lua/Buildings/Dome.lua Dome:RefreshFreeLivingSpaces sha256=b9132513b9a650566e8a9dd4b3d2441a3629c76148a9ab8049e76fc8b7a237b3
+--   (Lua/Buildings/Dome.lua:3353-3355 at pin time)
+-- DEFECT: GatherFreeLivingSpaces\([^,)]*\)
+--   the one-argument call: player_enabled is left nil, so the tally uses
+--   `working`
+-- SRC: Lua/_GameUtils.lua GatherFreeLivingSpaces sha256=22f2103b711082ff4f0003731a20b459a3c1b49f506d80e817215afcef91aa14
+--   (Lua/_GameUtils.lua:535-558 at pin time)
+-- DEFECT: working_member\s*=\s*player_enabled\s+and\s+"ui_working"\s+or\s+"working"
+
 SMRFixPack.Register("DomeFreeSpaceMismatch", {
 	title = "A dome's free-housing total counts the same residences the game assigns colonists to",
 	apply = function()

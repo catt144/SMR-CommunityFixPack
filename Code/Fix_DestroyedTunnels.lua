@@ -29,6 +29,15 @@
 -- The LoadGame sweep below is belt-and-braces for saves where something else has
 -- already registered a ruin's tunnel.
 
+-- MANIFEST (FIX_POLICY §2b) -- machine-read by `python tools/bodycheck.py`.
+-- Pinned 2026-09-08 against shipped game 1.1.0.403908. ⛔ These are CLAIMS about
+-- the shipped tree, not a clearance: re-pin them deliberately when a target moves,
+-- never to silence a BODY-CHANGED.
+-- SRC: Lua/Buildings/Tunnel.lua TunnelBase:AddPFTunnel sha256=2d8accd312b9bb154be8d30fabb09facf12792b741d08a0e87e134e755e45345
+--   (Lua/Buildings/Tunnel.lua:193-205 at pin time)
+-- DEFECT: if not IsValid\(self\.linked_obj\) then\s+return\s+end
+--   validity is the only guard
+
 SMRFixPack.Register("DestroyedTunnels", {
 	title = "Destroyed tunnels stay closed after loading a save instead of rejoining pathfinding",
 	apply = function()

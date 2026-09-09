@@ -142,6 +142,16 @@ OnMsg.LoadGame = SMRFixPack.WhenActive(FIX_ID, RunHeal)
 -- Proactive: catch a wedge as soon as it forms during play.
 OnMsg.NewHour = SMRFixPack.WhenActive(FIX_ID, RunHeal)
 
+-- MANIFEST (FIX_POLICY §2b) -- machine-read by `python tools/bodycheck.py`.
+-- Pinned 2026-09-08 against shipped game 1.1.0.403908. ⛔ These are CLAIMS about
+-- the shipped tree, not a clearance: re-pin them deliberately when a target moves,
+-- never to silence a BODY-CHANGED.
+-- SRC: Lua/WasteRock.lua GetDroneApproachPos sha256=4560839cc54e3c210a6349b04bb502ceb8989b0affaaddd42d38ecdb618ed42d
+--   (Lua/WasteRock.lua:328-331 at pin time)
+-- DEFECT: InteractionRand
+--   the approach point is drawn at random from the ring, so an unreachable
+--   draw is retried rather than avoided
+
 SMRFixPack.Register(FIX_ID, {
 	title = "Jumbo Cave reinforcements no longer soft-lock on a Waste Rock the drones cannot reach",
 	apply = function()

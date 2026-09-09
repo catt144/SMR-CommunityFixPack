@@ -49,6 +49,16 @@
 -- The rot exposure is therefore reduced (we can never be LOOSER than a patched
 -- vanilla), not removed.
 
+-- MANIFEST (FIX_POLICY §2b) -- machine-read by `python tools/bodycheck.py`.
+-- Pinned 2026-09-08 against shipped game 1.1.0.403908. ⛔ These are CLAIMS about
+-- the shipped tree, not a clearance: re-pin them deliberately when a target moves,
+-- never to silence a BODY-CHANGED.
+-- SRC: Lua/Buildings/ShuttleHub.lua IsLRTransportAvailable sha256=c524aad70367b6d0a099771bbec6f9a219aa0038aa7e5e5c3cbf853d3371d14c
+--   (Lua/Buildings/ShuttleHub.lua:410-419 at pin time)
+-- DEFECT: GetWorkNotPermittedReason\(\)\s+and\s+not\s+\w+:GetWorkNotPossibleReason\(\)
+--   the lax clause: "TurnedOff" is a permission reason, so a switched-off hub
+--   still counts
+
 SMRFixPack.Register("ShuttleHubOffAvailable", {
 	title = "Shuttle Hubs switched off no longer count as available colonist transport",
 	apply = function()

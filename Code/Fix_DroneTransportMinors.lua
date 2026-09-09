@@ -119,6 +119,16 @@
 -- §1.5 full replacement of `GetCommutableWorkplaces` recreating the file-local
 -- `recursive_enum_dome_workplaces`. Recorded on the BUGS entry; not fixed.
 
+-- MANIFEST (FIX_POLICY §2b) -- machine-read by `python tools/bodycheck.py`.
+-- Pinned 2026-09-08 against shipped game 1.1.0.403908. ⛔ These are CLAIMS about
+-- the shipped tree, not a clearance: re-pin them deliberately when a target moves,
+-- never to silence a BODY-CHANGED.
+-- SRC: Lua/Buildings/DroneControl.lua DroneControl:UpdateRocketsInternal sha256=c2d384d5fc74883998518479d407548f4bc4a20fd598ee563e95740b368cfe86
+--   (Lua/Buildings/DroneControl.lua:672-698 at pin time)
+-- DEFECT: r_t\.Fuel = nil
+--   half (a): the literal "Fuel" key is cleared while the per-rocket
+--   r_t[r.FuelResource] key is the one written
+
 SMRFixPack.Register("DroneTransportMinors", {
 	title = "A passability change no longer corrupts each drone's unreachable-buildings table",
 	apply = function()

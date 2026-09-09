@@ -52,6 +52,15 @@
 -- `skip_items` for the shipped prefab skip too. Matching that pre-existing
 -- behaviour keeps this fix to the placement rule alone (FIX_POLICY §4).
 
+-- MANIFEST (FIX_POLICY §2b) -- machine-read by `python tools/bodycheck.py`.
+-- Pinned 2026-09-08 against shipped game 1.1.0.403908. ⛔ These are CLAIMS about
+-- the shipped tree, not a clearance: re-pin them deliberately when a target moves,
+-- never to silence a BODY-CHANGED.
+-- SRC: Lua/Construction/LayoutConstruction.lua LayoutConstructionController:Activate sha256=9d8d8bdd682d7af8b65cd416c4cbe720d0c1ff8692b985b6b4172f27a5344809
+--   (Lua/Construction/LayoutConstruction.lua:313-388 at pin time)
+-- DEFECT: local require_prefab = not tech_enabled and prefab_item and not prefab_item\.locked
+--   `tech_enabled` reaches the decision only through this one narrow case
+
 SMRFixPack.Register("LayoutTechLock", {
 	title = "Layout construction respects research locks",
 	apply = function()
