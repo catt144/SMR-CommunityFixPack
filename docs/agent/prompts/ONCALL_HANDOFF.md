@@ -59,7 +59,39 @@ it's there", you are repeating the failure that cost this project its week.
 - ⭐ **Both game trees are on disk now**: 1.1.0 live at
   `A:\SteamLibrary\steamapps\common\Project Spark\ModTools\Src`, and 1.0.7
   **archived** at `C:\Dev\SMR-SrcArchive\1.0.7.396349\Src`. You can diff the
-  branches — earlier sessions could not.
+  branches — earlier sessions could not. Both carry a per-file `MANIFEST.sha256`;
+  `bodycheck.py --src <path>` and `sigcheck.py --src <path>` aim at either.
+
+### ⛔ 3a · THE ONE STANDING ACTION THAT IS NOBODY ELSE'S — archive `Src`
+
+**If a game update lands, archive `ModTools\Src` BEFORE anything else.**
+`C:\Dev\SMR-SrcArchive\<version>\Src` + a manifest; the folder's `README.md` has
+the four-line hashing snippet and the procedure.
+
+⛔ **This is the week's worst loss and it was one copy away from never
+happening.** On 2026-09-08 Steam auto-updated **unasked** and overwrote `Src`
+**in place**, destroying the 1.0.7 base every `bugs/` and `facts/` citation was
+written against (`EF-075`). It cost days and left claims unverifiable. **~48 MB
+per version against 800 GB free.**
+
+⚠️ **You are the session most likely to be present when it happens** — an
+on-call session is who notices a Steam update. ⛔ **Archive first, ask second.**
+The 09-08 update was noticed only because someone went looking.
+
+⭐ **Recovering an old branch is SAFE and now route-checked, not theoretical** —
+it was run end to end on 09-09: Steam → Properties → Game Versions & Betas →
+pick the branch → copy `Src` out → flip back. **Nothing in the mod setup
+notices, because nothing LAUNCHES** (`EF-055`: the enable is lost only when a
+launch runs with the id unresolvable, and the junction lives in `%AppData%`,
+outside the Steam directory). The restored tree re-hashed **byte-for-byte
+identical**. ⇒ do not let `H-08` scare you off this; `H-08` is about pulling a
+*mod* junction, which this is not.
+⚠️ Do re-hash after flipping back — not to detect damage, but to answer *"which
+build did I land on?"*. A mismatch most likely means a newer build shipped while
+you were away, which means archive that one too.
+⚠️ The 1.0.7 archive's `DLC/` subtree is **not** clean 1.0.7 (12 files vs
+1.1.0's 151, a Steam artefact). Base-game paths are sound; exclude `DLC/` from a
+base-game diff.
 - ⛔ **Nothing has been uploaded.** Hotfix 1 audited SHIP WITH CHANGES; hotfix 2
   is mid-chain. The owner uploads, never an agent.
 - ⛔ **All in-play controls are DEFERRED to one sitting after the chain**
@@ -80,6 +112,35 @@ Several sessions run at once on one repo and one game rig. ⛔ **`ListAgents` +
 **Owned by those efforts, not by you:** `Code/*.lua`, `items.lua`,
 `metadata.lua`, `bugs/*.md`, `prompts/hotfix2/*`, `STATE.md`,
 `PLAYTEST_CHECKLIST.md`, both generated `INDEX.md` files.
+
+### ⭐ 4a · QUEUED AND COMMISSIONED — two hunts nobody is running yet
+
+⚠️ **The owner asked for these on 09-08 to fire "immediately after we are fixed,
+patched and pushed". Both are WRITTEN and READY. ⛔ Neither is named in `STATE`,
+the checklist or `docs/README.md`** — so if the owner asks *"what's next after
+the patch?"*, this is the answer and you may be the only one holding it.
+
+| prompt | scope | ready? |
+|---|---|---|
+| `prompts/VANILLA_DIFF_HUNT.md` | new bugs the 1.1.x update introduced in the GAME — **2444 changed files**, measured | ✅ fully unblocked (both trees archived) |
+| `prompts/DLC_DEEP_CHECK.md` | new bugs in the DLCs — ⭐ **two of them**, `norman` (*Feeding the Future*, 15,794 lines) and `thomas` (sponsor pack, 1,273) | ✅ no preconditions; source already extracted |
+
+Both are **handoff briefs that author a chain**, not chains — the decomposition
+happens at fire time so it cannot go stale. Both carry an owner-instructed
+section on **using subagents** to fan out the reading (and, more usefully, where
+NOT to), and both require a **seeded-known-positive control**, because *"twelve
+agents found nothing"* is otherwise indistinguishable from *"twelve agents read
+badly"*.
+
+⛔ **The owner's thesis drives both, and it is worth quoting to yourself before
+either fires:** *"when they patch things they usually create 2 new bugs for
+every one they fix … they are famous for not correctly judging how old features
+will interact with new ones,"* and DLC QC is worse. ⇒ the target is the
+**unannounced change and the interaction seam**, never the changelog.
+
+⚠️ **These are hunts for VANILLA defects.** A finding is a **candidate defect,
+filed** — never automatically a new module. The pack just shed 36; the bar for
+adding one is `FIX_POLICY` plus an owner decision.
 
 ⚠️ **Known outstanding, already assigned — do not fix it yourself:** `F115.md`
 carries the old census in three places (`:10`, `:14`, `:168`) and a stale "NO
@@ -116,6 +177,24 @@ be left exactly as it stands. **Link 99 owns all of it.**
   into your summary. `STATE.md` is byte-capped — an addition needs an eviction in
   the same commit. Commits `git commit -F <file>` (PowerShell splits `-m` on
   embedded quotes), then **push** — pushing is standing-allowed.
+- ⛔ **THE GIT INDEX IS SHARED, AND THIS IS THE SHARP ONE.** A sibling's staged
+  work sits in the same index as yours, so a bare `git commit`, a `git add -A`,
+  **or even a directory pathspec** sweeps their work into your unrelated commit.
+  Both happened on 09-08: one link had **36 module deletions staged** while two
+  other sessions were committing, and a *scoped* `git add -A docs/agent/` caught
+  a peer's brand-new untracked file created between their `git status` and their
+  `git add`. ⇒ **Always an explicit list of individual FILE paths**, on `add`
+  and on `commit`. ⚠️ A `git status` pre-check **cannot close that race**. Treat
+  an unexpected `LF will be replaced by CRLF` warning naming a file you never
+  touched as a collision alarm, not noise — that is how both were caught.
+- ⚠️ **`STATE.md`'s byte cap is line-ending sensitive, so a WARN can be a
+  phantom.** The blob is LF and `core.autocrlf` is true: the same content
+  measures **9203 B as LF and 9310 as CRLF** against a 9216 warn — verified at
+  commits `e96a1ff` / `5daaeb5` (9203 + 107 lines = 9310 exactly). ⛔ **A fresh
+  clone WARNS with no content change**, and evicting for that costs the owner
+  content for nothing. Check line endings before you trim, and take two readings
+  — a CRLF-shaped number read mid-`git` operation already fooled one session
+  (mine) into calling it a random "transient".
 - Generated `INDEX.md` files: regenerate via `load_from_dir` + `render_index`
   (it returns a LIST — join it). ⛔ Never hand-edit one.
 
@@ -129,6 +208,17 @@ between branches) · `parsecheck.py` (real Lua parser on this rig) ·
 
 ⛔ **An instrument being green never means the code was checked.** That
 conflation is what F114 shipped under.
+
+⚠️ **Writing docs and prompts: do NOT compose content with backslashes or
+regexes inside a bash heredoc.** A *quoted* `<<'PY'` still eats one backslash
+level here, so a Windows path written as `…\1.0.7…` reaches Python as `\1` and
+lands in the file as a literal **`0x01` control byte**. It renders as an
+almost-right path rather than failing loudly, and an `Edit` cannot match it
+because the bytes are not what the text appears to be. It shipped a broken
+archive path into a prompt on 09-09, and the *first repair re-introduced it* the
+same way. ⇒ **use the `Write`/`Edit` tools for such content**, or explicit byte
+values. A four-line control-character scan over `docs/` is filed for `99` as a
+candidate `doccheck` gate.
 
 ## 7 · How to work with the owner
 
