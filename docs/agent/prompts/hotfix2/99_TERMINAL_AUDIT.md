@@ -1293,10 +1293,18 @@ not fixed, because F115 is not my entry.** I argued above that the historical
 records should keep their as-read numbers, and I stand by that for narrative
 bodies and for `archive/`. But `bugs/F115.md` carries the old count in two places
 that are **live claims, not history**:
-* `row_status:` front matter (`:10`) — *"✅ BOOT CONFIRMS the prediction exactly
-  — 17 inactive / 14 named"*;
-* the heading tag (`:14`) — *"[fixed 2026-09-08: … 17 inactive / 14 named, 0
-  errors]"*, which is the surface `doccheck` compares.
+**All FOUR occurrences, verified by grep as the complete set in that file, and
+they do NOT all need the same treatment:**
+
+| line | what it says | disposition |
+|---|---|---|
+| `:10` | `row_status:` front matter — *"✅ BOOT CONFIRMS the prediction exactly — 17 inactive / 14 named"* | asserts the boot MEASURED 17 |
+| `:14` | the heading tag — *"[fixed 2026-09-08: … 17 inactive / 14 named, 0 errors]"*, the surface `doccheck` compares | asserts the boot MEASURED 17 |
+| `:135` | *"PREDICTION as recorded ahead of the reading: 17 inactive / 14 named"* | ⭐ **LEAVE EXACTLY AS IT STANDS.** It records what was predicted BEFORE the reading. That is a true statement about a prediction, and it is the evidence that the pair was consistent |
+| `:168` | *"17 inactive / 14 named, exactly as predicted before the reading"* | asserts the boot MEASURED 17 |
+
+So three of the four assert a measurement, one records a prediction. Rewriting
+`:135` would destroy the very evidence that makes the other three explicable.
 Under the corrected census that **"exactly" is false in one of its two numbers**.
 The prediction and the reading agreed because BOTH were computed
 last-verdict-wins — a consistent pair built on one miscount, not a confirmation.
