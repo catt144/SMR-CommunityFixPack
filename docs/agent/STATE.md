@@ -8,16 +8,16 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 
 ## Now
 - ⛔ GAME **1.1.0.403908** + DLC shipped 2026-09-08; rig auto-updated, `ModTools\Src` overwritten ⇒ the 1.0.7
-  citation base is GONE from disk (`EF-075`). ⛔ Trust runtime over source reads: the desk audit predicted 6 self-disabled
-  modules, the game measured 13 (`EF-078`).
+  citation base is GONE from disk (`EF-075`). ⛔ Trust runtime over source reads (`EF-078`: predicted 6
+  self-disabled, measured 13).
   ⛔ **1.0.7 SAVES CANNOT LOAD ON 1.1.0** (`EF-079`) ⇒ the ENTIRE fixture library is branch-locked; a 1.1.0 leg
   needs a NEW colony provisioned from scratch (hours). Override exists but is triage-only (`EF-080`). Decision 98.
-  ✅ F114 CAUSE CONFIRMED + GATED (ck106, `8bc6821`): the 1.0.7 `UnloadAll` copy indexed nil demand on 1.1.0.
-  ✅ Opt-in pack UNTICKED (ck43): enumerated, ZERO `applied` lines on every boot since 15.21 — no confound.
-  ✅ **F115 GATED** (ck109, `628ea4d`): 1.1.0 prepended `map` to `LandscapeForEachUnit` AND moved `Landscapes` to
-  a MapVar ⇒ gate = the global is gone (`EF-082`). Body untouched ⇒ `sigcheck` MISMATCH there is CORRECT.
-  ✅ **F116 REPAIRED in-body** (`add94b3`), NOT gated: our 1.0.7 copy lacked 1.1.0's PRE-SORT `node_idx`
-  revalidation. P1→P2, source-derived, NEVER reproduced. ⛔ The ONLY new code.
+  ✅ F114 CAUSE CONFIRMED + GATED (ck106, `8bc6821`).
+  ✅ Opt-in pack UNTICKED (ck43): ZERO `applied` lines since 15.21 — no confound.
+  ✅ **F115 GATED** (ck109, `628ea4d`): gate = the `Landscapes` global is gone (`EF-082`); body untouched ⇒
+  `sigcheck` MISMATCH there is CORRECT.
+  ✅ **F116 REPAIRED in-body** (`add94b3`), NOT gated ⇒ it still applies and is the ONLY new code shipped.
+  Source-derived, NEVER reproduced.
   ⭐ **1.1.0 RE-VERIFICATION DONE 09-08, all 80 modules read: 10 FIX / 35 REMOVE / 35 KEEP** (`reports/
   PACK_1_1_0_REVERIFICATION.md`, ck114-117; QA'd by 3 fresh readers, `reports/VANILLA_FIX_QA.md` §0, 0 flips).
   ⛔ 6 APPLIED modules are WRONG today (named in ck114); 32 defects were FIXED by vanilla and no self-check saw
@@ -25,7 +25,7 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   ✅✅ BOTH GATES MEASURED 09-08 (`archive/logs/gated110_*`): 63 applied / 17 inactive / 14 named as predicted,
   0 errors; both `update_suspect` routes CONFIRMED. ⛔ MENU-ONLY ⇒ trains/landscaping NOT exercised in play.
   ✅ **HOTFIX_1_AUDIT DONE 09-08: SHIP WITH CHANGES — text-only (ck112/113), code clean**
-  (`reports/HOTFIX_1_AUDIT.md`). NEXT `prompts/HOTFIX_2_HANDOFF.md`
+  (`reports/HOTFIX_1_AUDIT.md`). NEXT `prompts/hotfix2/` (7-link chain)
   ⚖️ Owner rule 09-08: a patch note saying "Fixed" is a **CLAIM, false until we confirm it**.
 - ⭐ PUBLISHED both portals — `pdx_id` **156049**, `steam_id` **3787202810**, tree `version` **5** (F110, 08-30).
   ⛔ Never re-upload to "fix" a version number — each upload bumps again (H-02). ⛔ Every upload OVERWRITES both
@@ -90,6 +90,8 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 - ⛔ 98 1.0.7 branch: pin back or rebaseline (GATES 99-101) · 99 disposition of the self-disabled modules ·
   100 say anything to players yet (rec no) · 101 accept the re-verification chain shape.
 - 111 F116 orphan policy (rec keep) · 112 card self-check sentence · 113 F116 patch-note wording (audit F-1/F-2).
+- ⛔ BLOCKS the chain: 98 delete-vs-gate the 34 · 117 non-Steam ⇒ keep SaveSanitizer · C repair F-8/9/10;
+  F-2 fix-or-remove. 118 RULED: 1.0.7 gets a frozen v5 release + site page ⇒ re-copies MUST decline on 1.0.7.
 - 73 blame surface — harden or not · 76 confirm (a) was a ruling not a leaning · 53 harden now or in 1.0.1
   (rec 1.0.1) · 51 both-packs leg timing (rec after launch) · 50 chain-vs-replace wording · 47 two modder-page
   wordings · 43 opt-in pack re-tick · 41 dialog wording + sweep cap 5→8 · 40 `smr_shuttles` name · 39 dialog re-fire.
