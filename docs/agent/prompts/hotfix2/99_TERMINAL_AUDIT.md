@@ -1012,8 +1012,9 @@ copied-but-unpinned `Dome:RefreshFreeLivingSpaces`. Lower bound — sigcheck doe
 **5 · For your KEEP pass (Pass on the wrappers):** the 1.0.7 tree turns "re-read the
 wrapper's assumptions against 1.1.0" into "re-read them against exactly these lines". The
 table in §1 plus §4 is the steer; `ArrivalDeaths` over `Colonist:Idle` (100 changed lines)
-is the one I would open first. Checklist 125 asks the owner whether this is yours or a
-link's.
+is the one I would open first. ⚖️ RULED 2026-09-09: this is YOURS — the owner took the
+recommendation; decide per module which wrappers to re-read against their branch diff,
+and say in your report which you did not open.
 
 **6 · Landscaping (owner questions, same day):** rover-only AND research-gated on 1.1.0,
 both verified NEW against 1.0.7 — `EF-083`. No code touched; checklist row 7 gained the

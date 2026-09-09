@@ -231,7 +231,7 @@ completed tests move whole to
 >   `BrokenTrackSalvage`, 53). Wrappers carry the change, but the re-verification read those bodies without a
 >   branch diff to steer it. The 1.0.7 tree turns "re-read the wrapper's assumptions" into "re-read them against
 >   exactly these N lines" — a few hours of reading, best done by 99's Pass on the KEEP set or a dedicated link.
->   **Worth scheduling, or leave to 99?** (rec: give 99 the table, let it decide per module.)
+>   **Worth scheduling, or leave to 99?** (rec: give 99 the table, let it decide per module.) ⚖️ **RULED 2026-09-09 (owner: "go with your recommendation"): 99 decides per module.** The table is in 99's inbox; no separate link.
 >
 > **2 · `sigcheck --src 1.0.7`**: 1 MISMATCH, `LandscapeUnitFilter` — expected and correct, its body is the 1.1.0
 > signature and it declines on 1.0.7. Every other replacement site has the same arity on both branches.
