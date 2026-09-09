@@ -1622,3 +1622,143 @@ the live site still shows 82 entries. ⇒ **`UPLOAD_WORKFLOW` §4 (publish the s
 must happen in the same sitting as the upload**, or the card's own checkable
 number disagrees with the page it points at. This is the failure mode the count
 was chosen to avoid, arriving through the back door.
+
+## Notes from upstream (continued — SELFCHECK_PROMISE_AUDIT, appended after link 06's close-out per the read path at line 19)
+
+### From SELFCHECK_PROMISE_AUDIT (`smr-bugfixpack-db`, closed 2026-09-09) — a parallel READ-ONLY audit; what it hands you, and what you must not read into it
+
+Written into this inbox on the owner's explicit instruction (2026-09-09: *"You
+can provide 99s outbox with anything you need to tell it"*); the audit's own
+brief fenced this file off. Report: `agent/reports/SELFCHECK_PROMISE_AUDIT.md`,
+commits `5f595bc` → `b9a994d` → `e460817` → `1d04bc7`. `Code/`, `items.lua`,
+`metadata.lua`, `bugs/`, `STATE.md` and the checklist were NOT touched.
+
+#### 1 · The verdict, so you do not re-derive it
+
+**YES BUT SCOPED.** The store's bullet 3 can be made literally true for *the
+code the fix patches*, not for *what the fix was written for*. Measured, not
+argued: the engine's own `ModEnvBlacklist` + `LuaModEnv` lines (Mod.lua
+1.1.0 `:1280-1441`, `:1551-1627`) executed verbatim on a desk Lua 5.3 resolve
+`string.dump` for a mod chunk while `debug`/`io`/`load` are nil; `Mars.exe`
+carries the `str_dump` error text and `Lua 5.3`. A signature read from the dump
+needs no pin and, against the archived 1.0.7 tree, flags exactly F115 and
+nothing else; a compiled-body pin would have caught F114 and six more FIX rows
+but also stood down 17 working modules on 1.1.0 (`bodycheck --src <archive>`:
+27 BODY-CHANGED rows over 24 modules). `StaleReservations`' two pinned bodies
+are byte-identical on both branches — class (c) proper, measured, one module
+of 44. ⛔ **Nothing ran in a game**; `string.dump` inside `Mars.exe` is the one
+runtime read still owed (a 5-line Test Kit probe, report §4 item 3).
+
+The owner's own summary of it, confirmed: today no runtime check switches a
+full-body fix off when a patch fixes the defect (32 double-applied modules on
+1.1.0 with every self-check passing); with a body pin the 15 REPLACE sites CAN
+be guaranteed (the defect line is inside the copied function, so a fix must
+edit it); wrappers/handlers/data patches whose fix lands elsewhere never can.
+
+#### 2 · ⛔ What this audit is NOT, for your verdict
+
+- **Not an open loop for hotfix 2.** ck112 bullet 3 stays exactly as 06 left
+  it, on the owner's ruling; the audit recommends changing it ONLY in the
+  release that carries the arity check, which is a post-99 code cycle
+  (report §9 names implementer and cycle per item). Do not flag the unchanged
+  bullet as a finding.
+- **Not a clearance of anything.** Every "measured" in it is a tool run on both
+  trees, a binary string read, an archived log or a desk Lua — never a boot.
+- **Nothing from it lands in hotfix 2's code.** The only hotfix-2-shaped items
+  are the five relays in §4 below, and each is a filing or a header-comment
+  question, not a code change for this patch.
+
+#### 3 · Corrections to recorded numbers (chain rule 5 — evidence, not shame)
+
+- The audit prompt's seed table said **43 modules / 39 existence / 5 probe / 7
+  test**. Re-derived by script and hand: **44 modules** (`90_SaveSanitizer`
+  registers; doccheck's module-set gate agrees), **35 existence-only** (39
+  double-counted the three probe+test modules), 5 probe, 7 test. Its author
+  asked for the delta to be recorded.
+- The prompt's *"6 of the 10 FIX rows were class (c)"* is **4 of 10** — the
+  re-verification's table lists six class-(c) instances in total, of which
+  F111/F112 were never FIX rows.
+- A peer's *"probes ship in exactly two modules"* predates 04b; it is five.
+- `archive/logs/unforced110_…15.57.09` is a 274-line prefix of
+  `f114repro110_…15.57.09` — one session archived twice (`cmp` ends at byte
+  14539). Not a defect; do not count it as two legs.
+
+#### 4 · Five findings routed to you (all module-level, none this audit's to land)
+
+1. **`90_SaveSanitizer.lua:28` states a reason that is FALSE on 1.1.0.** *"F48
+   STAYS. The paren is still misplaced upstream."* — 1.1.0 `Station.lua:1504`
+   reads `ProcessTrackElements(ResolveMap(track), track.elements)`, correct;
+   the misplaced form survives only in the 1.0.7 archive (`:1346`). I confirmed
+   both lines myself. ⛔ REMOVE-shaped, so it needs the replacement traced,
+   not a verdict from here: a migrated 1.0.7 save may already list the fixup in
+   `AppliedSavegameFixups` (that route, `CommonLua/SavegameFixup.lua`, was NOT
+   OPENED by anyone), and QA §0.6 (R-36) already makes the sanitizer
+   platform-conditional. Minimum: the header reason must change; whether the
+   pass stays is a traced question.
+2. **Two modules replace a global by plain assignment**, skipping
+   `SMRFixPack.SetGlobal`'s §1.4b read-back: `Fix_WispRewards.lua:39`,
+   `Fix_ShuttleTransportCache.lua:61`. `sigcheck.py` bounds their arity (both
+   are `function Name(` declarations); the read-back is what is missing.
+3. **Three `OnMsg` handlers are registered without `WhenActive`:**
+   `Fix_CrystalMysteryHang.lua:115` (`MysteryEnd`),
+   `Fix_TrackTunnelPowerBridge.lua:160` (`StationsConnected`) and `:166`
+   (`PostLoadGame`). `FIX_POLICY` §2's A1 rule; benign-by-construction was NOT
+   assessed.
+4. **`Fix_PayloadTemplateRefill`'s probe has never run in a boot** (`177c7b2`
+   at 23:48 postdates the newest archived log, 17:51) **and indexes
+   `FlightPolicies` at apply time**, a global created only on `ClassesBuilt`
+   (`Preset.lua:1404-1412`). It is safe today because the engine's mod-less
+   first Lua pass built it before the reload that loads mod code; that is a
+   boot-order dependency, not a contract. → 07's Unit B re-read should include
+   it, and the post-99 sitting's log must show `PayloadTemplateRefill: applied`.
+5. **Three modules carry no `Require` block** (`ExtenderFlapChurn`,
+   `SequenceLatents`, `ShelterReflex`; `DustSicknessBiorobots` is a `DataPatch`
+   whose checks live in its pass). Their inline checks are existence checks.
+   Any future pack-wide mechanism in `Require` does not reach them until they
+   are routed through it. A count for your Pass D, not a defect.
+
+#### 5 · Job two (mod-blame), for the facts/checklist lane — route, do not drop
+
+- **Zero misattributions in the archive**: all 4 `Error in mod` lines (3
+  sessions) name the mod whose code threw. The two real cases are F104/F105
+  (field, both pass-through frames, both named us ALONE).
+- **The once-per-session dedupe is measured**: in the 15:57 session F115 drew
+  the one line at `0:01:03`; F114's 157 throws from `0:25:42` drew none.
+- **Box order = enable order** (`TurnModOn` → `AccountStorage.LoadMods`,
+  `ModManager.lua:35-36`; `ModsReloadItems` `:2137-2143`).
+- **ck73 option 2 (trampoline) is dead**: `load`/`loadstring` are blacklisted
+  (`Mod.lua:1424-1432`). Option 0 (a breadcrumb via our own
+  `OnMsg.OnLuaError`, not message-blacklisted) is buildable in ~15 lines.
+- **Every pre-wrapper in the pack already tail-calls** (64 sites: PRE-TAIL 15,
+  PRE-NOTAIL 0, POST 13, REPLACE 15, HANDLER 17, DATA 4) — the tail-call
+  remedy is a `FIX_POLICY` §2 line, not an edit.
+- Proposed `EF-065` addendum and ck73 addendum text: report §7a/§7d.
+
+#### 6 · Owner-facing text I could not land (report §9)
+
+A proposed checklist item (three calls: build the arity check post-99;
+decline-all vs abstain-all on a pin quorum; bullet 3 interim) and a one-line
+STATE entry. ⚠️ STATE is at 9211 of a 9216 warn — any addition needs an
+eviction in the same commit (`prompts/STATE_EVICTION.md`). Either you land
+them in your close-out or `100_DOCSWEEP` does; they are not landed now.
+
+#### 7 · What the audit did NOT check, so you do not treat it as covered
+
+Report §8, in full. Headline: no game boot; the engine's dump FORMAT assumed
+stock 5.3; the 44-module classification is four subagent reads of which I
+re-derived four shipped bodies myself (`DroneControl.lua:672-677`,
+`Fix_GhostFarmOxygen.lua:44-58`, `Fix_WispRewards.lua:33-45`, the sanitizer
+paren on both trees); `GetTargetAmount` still unread by anyone.
+
+#### 8 · Gates at close-out
+
+`python tools/doccheck.py` GREEN on every commit. ⚠️ **doccheck WARNs,
+verbatim, per chain rule 13** — the same 18 pre-existing bug-index tag rows 06
+reported, none touched by me:
+
+```
+warn F85/F100/C12/C13/C14/C15/C16/C17/C34/C35/C37/C38/C39/C43/C49/C50/C51/C52:
+     the frozen index-row cell says 'filed', entry says '<wontfix|cand|fixed|
+     tested-attended|tested-unattended|parked>'
+STATE + STUBS: STATE.md 9211 bytes (warn 9216, hard 18432, line 200)
+```
