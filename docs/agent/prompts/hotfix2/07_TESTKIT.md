@@ -297,3 +297,52 @@ chain until the owner asked "what fixes the test kit?". The fence was right; the
 chain's decomposition was missing this row. If you find another repo or surface
 the chain assumes someone else owns, name it in 99's inbox rather than filing it
 sideways.
+
+### From link 04b — what the three group-C probes should now observe (2026-09-09)
+
+*(Link 04b, `smr-bugfixpack-94`, 2026-09-09. Commits `799f145` F-8 · `3d4c933` F-10 ·
+`7a401f1` F-9. ⛔ Nothing ran in a game. I did NOT touch the kit — this is read from its
+source against the new module bodies.)*
+
+⛔ **All three modules now APPLY on the rig** (their gates pass on 1.1.0 and decline on
+1.0.7), so none of these probes may SKIP on "gated off" — they must run. Two will `ERROR`
+as written, one should PASS:
+
+* **`LandscapeUnitFilter`** (`30_Probes_Wave3.lua:276`) — **will ERROR.** It calls
+  `LandscapeForEachUnit(MARK, cb)` (the 1.0.7 two-argument shape) with a stub `Landscapes`
+  GLOBAL. Our body is now `(map, mark, callback, ...)` reading `map.Landscapes[mark]`
+  (`Landscaping.lua:509-510`), so `map` binds to the number 4242 and `map.Landscapes`
+  throws. Rewrite: build `local map = { Landscapes = { [MARK] = { mark = MARK, grid = ... } } }`
+  and call `LandscapeForEachUnit(map, MARK, cb)`; drop the `Landscapes` entry from
+  `WithGlobals`. Everything else (the `Landscape_ForEachObject` stand-in, `IsValid`, the
+  {walker, boarder, walker} list) still fits: expect **1 unit reported, the boarder
+  skipped** — the same PASS text as before. The desk harness got exactly that from the
+  installed body.
+* **`VacuumWalks`** (`20_Probes_Wave2.lua:472`) — **will ERROR.** The 1.1.0 body computes
+  `need_work = self:CanWork() and not IsValid(self.workplace) and not self.user_forced_workplace`
+  first (`Colonist.lua:1896`), and on the walk branch calls `self:DiscardTransportTicket()`
+  (`:1918`) and, when `need_work`, `dest_dome:ReserveWorkplace(self)` or
+  `self:CancelWorkReservation()`. The stub colonist has none of these ⇒ `attempt to call a
+  nil value (method 'CanWork')`. Rewrite: add `CanWork = function() return false end`,
+  `DiscardTransportTicket = function() end`, `CancelWorkReservation = function() end`,
+  `workplace = false` to the colonist; keep `transport_task = false`. Note the walk branch
+  is now also conditional on `not (self.transport_task and self.transport_task.shuttle)`
+  (`:1898`) — `transport_task = false` satisfies it. The constants are read from
+  `g_Consts` at call time; the suite runs in-game so that is fine, but a `WithGlobals`
+  override of `const.ColonistMaxDomeWalkDist` would no longer reach the body. Expected on
+  the fixed body: vacuum 300 m ⇒ `SetCommand("TransportByFoot", dest, fake_path)`, 1
+  lookup; breathable ⇒ path `nil`, 0 lookups — the probe's existing PASS shape.
+* **`TrainCargoDumping`** (`30_Probes_Wave3.lua:1099`) — **should PASS as written.** The
+  fake stations carry `demand[res]` with `GetTargetAmount` and their own
+  `IsResourceEnabled`, and `storable_resources = { res }` so the carried BlackCube hook
+  (`res == "BlackCube"`) is never reached. `task_requests = {}` is now unread by our helper
+  (harmless). All three cases (dump refused when elsewhere accepts; accepted when enabled;
+  allowed when nowhere accepts) matched on the desk harness against the installed body.
+  ⚠️ Its PASS is a statement about OUR guard on a stub that ASSERTS a positive target
+  amount — it does not settle whether a suspended 1.1.0 request reports one (checklist row
+  10). If you add a case, the F114 input is the valuable one: a storable resource with
+  `demand[res] == nil` must NOT throw on the installed body.
+
+**Census effect:** 2 more stale results (both `ERROR`, not `FAIL`) on top of the three
+FALSE-FAILs from 03/04 — five named, until you rewrite. After the rewrite the predicted
+suite reading for these three is 3 PASS. ⛔ None of that is evidence about a map.

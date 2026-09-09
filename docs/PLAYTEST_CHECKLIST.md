@@ -143,6 +143,66 @@ completed tests move whole to
 > ✅ **Items 111 and 119 below are LANDED** (`fc318c7`); their entries now say so. ⛔ Nothing here moves a status
 > word, and a SHIP from 99 is still not clearance for the upload sitting (`H-04`).
 
+### ⭐ 2026-09-09 — LINK 04b IS DONE: the three fixes you ruled back in (123) are RE-ARMED on their 1.1.0 bodies, gates kept. ✅ **Nothing is owed from you now; three in-play checks and one 1-minute console read JOIN the post-99 sitting above.**
+
+> **What was built** (`799f145` landscaping · `3d4c933` train unloading · `7a401f1` vacuum walks). Nothing here has
+> run in a game. Each module now carries the game's **1.1.0** function body with our one-line correction re-applied,
+> checked three ways against both shipped trees (1.0.7 archived, 1.1.0 live) and exercised only in a desk harness
+> that loads our module against the pack's own self-check code with the shipped bodies standing in for the game. By
+> your 09-08 rule each is a **claim until the sitting confirms it**. ✅ **Every gate you approved on 09-08 is still
+> there** — each is now the switch that makes the module apply on 1.1.0 and stand down on 1.0.7 (your item 118),
+> with a second, behaviour-level check beside it that runs the game's own function on a dummy and applies only if
+> it behaves the 1.1.0 way. ✅ F-9 did **not** need the `04c` split you pre-authorised.
+>
+> * **Landscaping over a boarding point** (F-8 / F34d) — back on. The game's 1.1.0 change was two lines (a new
+>   `map` argument and where the landscape list lives); the bug itself is untouched in 1.1.0. ⚠️ One thing I was
+>   told and found to be wrong: the fix's reach on 1.1.0 is **wider** than before, not narrower — flatten, raise,
+>   lower AND clear-waste-rock sites all go through the repaired function now (the class that owns the call is the
+>   parent of the flatten site; your 09-08 flatten crash proved the route). Your 2026-08-12 staging (a flatten over
+>   drones boarding an RC Commander) is still the right test.
+> * **Train unloading at a switched-off resource** (F-10 / F46) — back on, carrying all three of the game's 1.1.0
+>   additions (the two nil-guards that caused F114, and a Black Cube bookkeeping call). ⛔ **One honest gap:**
+>   whether 1.1.0 still HAS this bug is not established. The game now *suspends* a switched-off resource's request
+>   instead of deleting it, and whether a suspended request still reports room is decided in C++ nobody can read.
+>   If it reports 0, our guard is inert and harmless. Row 10 below settles it in one console line.
+> * **Vacuum walks** (F-9 / F52) — back on. This was the big one: the game rewrote the whole function (47 → 98
+>   lines: work-slot reservations, a "passages only" distance code, shuttle landing-slot checks, a train-ticket
+>   discard). All of it is carried; our change is still the single line that makes a colonist in vacuum look for a
+>   passage at any distance. ⚠️ Narrower on 1.1.0 by the game's own doing: a dome pair with NO outside route already
+>   gets the passage lookup in vanilla, so what we repair is "an outside route exists, under 400 m, in vacuum".
+>
+> | # | fix | what to do | time | what you should see |
+> |---|---|---|---|---|
+> | 7 | **Landscaping over boarding** (F-8) | Park an RC Commander, order drones to board it, and while they are boarding drop a **flatten** over them | ~3 min | drones finish boarding; **no** `ExitImpassable` and **no error line** in the log; the site gets its stockpile and progresses (an RC Dozer on the job) |
+> | 8 | **Train unloading** (F-10) | On a line with two stations: switch a resource OFF at station A while B accepts it; send a train carrying it into A | ~5 min | the train **keeps** that resource aboard at A and unloads it at B; a train with nowhere to deliver still unloads; no `Fix_TrainCargoDumping` error line |
+> | 9 | **Vacuum walks** (F-9) | Two domes under 400 m apart joined by a passage, on a non-breathable map; move a colonist between them (a home in the other dome) | ~5 min | the colonist walks **through the passage**, not across the surface. Destroy the passage and repeat: the surface walk resumes (the designed fallback) |
+> | 10 | **F-10 premise** (console) | Select station A from row 8 (resource OFF), open the console, run the line below | ~1 min | a number. **Positive** ⇒ the 1.1.0 bug is real and our guard is doing work. **0** ⇒ 1.1.0 fixed it itself; our guard is inert, and F46 becomes a REMOVE candidate for the next patch |
+>
+> Row 10's console line, with `WasteRock` replaced by the resource you switched off:
+>
+> ```
+> local st = SelectedObj print(st:IsResourceEnabled("WasteRock"), st.demand.WasteRock:GetTargetAmount())
+> ```
+>
+> (expected `false <number>`; the first value confirms the switch is really off).
+>
+> ⚠️ Rows 7–9 need a provisioned 1.1.0 colony (the 1.0.7 fixtures cannot load, `EF-079`) — they share it with rows
+> 1–6 and hotfix 1's "first train leaves its platform". ✅ Cheats are not a confound for rows 7–10. Row 8 doubles as
+> the F114 control: the train must leave its platform at all.
+>
+> ⛔⛔ **IF YOU RUN THE TEST KIT SUITE, TWO MORE PROBES WILL REPORT `ERROR`, AND BOTH ARE THE PROBE BEING STALE**
+> (on top of the three FALSE-FAILs from links 03 and 04): `LandscapeUnitFilter` still calls the function with the
+> OLD two-argument shape, and `VacuumWalks` hands our body a dummy colonist that lacks the 1.1.0 methods. Both are
+> owned by chain link `07_TESTKIT.md`, which now has the exact rewrite in its inbox. `TrainCargoDumping`'s probe
+> should pass as written. Until 07 closes: **five named stale results, not regressions.**
+>
+> **Drafted patch-note lines** (link 06 owns the final wording; honest versions, none says "Fixed"):
+> * *Landscaping placed over colonists boarding a vehicle no longer pulls them out of it — re-enabled for 1.1.0.*
+> * *Colonists moving between two nearby domes joined by a passage take the passage instead of crossing the
+>   surface — re-enabled for 1.1.0.*
+> * *Trains no longer unload a resource at a station where you have switched it off while another station on the
+>   line accepts it — re-enabled for 1.1.0.* ⛔ This one may not be worded as a confirmed 1.1.0 bug (row 10).
+
 ### ✅ 2026-09-08 — ITEM 124 RULED: `StaleReservations` is FIXED, not removed. This was the last thing blocking chain link 03.
 
 > ⚖️ **124 — RULED: FIX.** Owner, verbatim: *"fix is the ruling."* ⇒ `Fix_StaleReservations` **stays** and gains

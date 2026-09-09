@@ -12,16 +12,14 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   self-disabled, measured 13).
   ⛔ **1.0.7 SAVES CANNOT LOAD ON 1.1.0** (`EF-079`) ⇒ the ENTIRE fixture library is branch-locked; a 1.1.0 leg
   needs a NEW colony provisioned from scratch (hours). Override exists but is triage-only (`EF-080`).
-  ✅ F114 CAUSE CONFIRMED + GATED (ck106, `8bc6821`).
+  ✅ F114+F115 GATED 09-08 (ck106/ck109), then **REPAIRED ON TOP 09-09 (ck123, link 04b)**: F-8/F-9/F-10 carry
+  1.1.0 bodies + behaviour probes, gates KEPT (sense inverted) ⇒ `sigcheck` 0 MISMATCH now. ⛔ F-10 premise UNREAD.
   ✅ Opt-in pack UNTICKED (ck43): ZERO `applied` lines since 15.21 — no confound.
-  ✅ **F115 GATED** (ck109, `628ea4d`): gate = the `Landscapes` global is gone (`EF-082`); body untouched ⇒
-  `sigcheck` MISMATCH there is CORRECT.
-  ✅ **F116 REPAIRED in-body** (`add94b3`), NOT gated ⇒ it still applies and is the ONLY new code shipped.
-  Source-derived, NEVER reproduced.
+  ✅ **F116 REPAIRED in-body** (`add94b3`), NOT gated. Source-derived, NEVER reproduced.
   ⭐ **1.1.0 RE-VERIFICATION 09-08: 10 FIX / 35 REMOVE / 35 KEEP** (`reports/PACK_1_1_0_REVERIFICATION.md`,
   ck114-117; QA'd by 3 fresh readers, `reports/VANILLA_FIX_QA.md` §0, 0 flips).
-  ⭐ **LINKS 02+03+04 DONE 09-08** (commits in `prompts/hotfix2/README.md`): 36 modules DELETED; F-1/F-2/F-3
-  repaired; F-6/F-7 RE-COPIED; F116 ck111/119 landed. ⛔ 3 TestKit probes FALSE-FAIL (Saint, Shelter, Payload).
+  ⭐ **LINKS 02+03+04+04b DONE 09-08/09** (commits in `prompts/hotfix2/README.md`): 36 modules DELETED; F-1/F-2/F-3
+  repaired; F-6…F-10 RE-COPIED; F116 ck111/119 landed. ⛔ 5 TestKit probes STALE (3 FALSE-FAIL + 2 ERROR; 07 owns).
   ✅✅ BOTH GATES MEASURED 09-08 (`archive/logs/gated110_*`): 63 applied / 17 inactive / 14 named as predicted,
   0 errors; both `update_suspect` routes CONFIRMED. ⛔ MENU-ONLY ⇒ trains/landscaping NOT exercised in play.
   ✅ HOTFIX_1_AUDIT 09-08 SHIP WITH CHANGES, text-only (`reports/HOTFIX_1_AUDIT.md`). NEXT `prompts/hotfix2/`.

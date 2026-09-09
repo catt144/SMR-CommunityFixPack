@@ -336,3 +336,38 @@ reproduced.
   persist); F44/F91's entry is still true. **No public claim became false in this
   link.** The store card's HOW IT WORKS bullet 3 (ck112) is the only surface these
   touch, and only as supporting evidence.
+
+### From link 04b — group C: F-8, F-9, F-10 re-armed on their 1.1.0 bodies (2026-09-09)
+
+*(Link 04b, `smr-bugfixpack-94`, 2026-09-09. Commits `799f145` F-8 `LandscapeUnitFilter`
+· `3d4c933` F-10 `TrainCargoDumping` · `7a401f1` F-9 `VacuumWalks`. ⛔ Nothing ran in a
+game; no status moved. `Code/` still 45 files / 44 modules — nothing added or removed, so
+`items.lua` and `metadata.lua`'s `code` list were not opened.)*
+
+**What changed on the player surface.** Three fixes that were switched OFF on 1.1.0 since
+2026-09-08 (F115's gate, F114's gate, and an accidental decline) are back on, each carrying
+the game's 1.1.0 function body with our one-line correction. Their store/site fix-list
+entries were TRUE on 1.0.7, FALSE between 09-08 and now, and are true again as *what the
+code does* — never as something seen in play on 1.1.0.
+
+**Drafted lines** (owner-reviewed wording in the checklist, LINK 04b block; these are the
+same, for your `last_changes` and the notes):
+* *Landscaping placed over colonists boarding a vehicle no longer pulls them out of it —
+  re-enabled for 1.1.0.*
+* *Colonists moving between two nearby domes joined by a passage take the passage instead
+  of crossing the surface — re-enabled for 1.1.0.*
+* *Trains no longer unload a resource at a station where you have switched it off while
+  another station on the line accepts it — re-enabled for 1.1.0.*
+
+⛔ **Wording constraints that bind you:**
+1. **"Re-enabled", never "Fixed"** (owner rule 09-08: a "Fixed" is a claim, false until
+   confirmed). None of the three has run in a game on 1.1.0.
+2. ⛔ **F-10 may NOT be worded as a confirmed 1.1.0 defect.** Whether 1.1.0 still has the
+   train-dumping bug is UNESTABLISHED (C-side `GetTargetAmount` on a suspended request,
+   unread; checklist row 10 is the control). "Re-enabled" is exactly right: it says what
+   we did, not what the game does.
+3. If you touch the F34/F46/F52 site entries, "re-enabled for 1.1.0" is the only new
+   fact; do not add reach claims. ⚠️ For F34 specifically the reach on 1.1.0 is WIDER
+   (all landscaping site kinds), so an old "flatten" wording is still true, not stale.
+
+**Nothing for `metadata.lua`'s `code` list** — no module was added, renamed or dropped.

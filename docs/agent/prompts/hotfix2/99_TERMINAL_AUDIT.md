@@ -871,3 +871,88 @@ the addition itself** (CHAIN_METHOD §3): a chain that grew a row mid-run becaus
 the owner asked a question is a decomposition miss worth naming, and 07's shape
 (three units, self-split to `07b` at Unit A) was set by the session that found
 the gap, not by a fresh reader.
+
+### From link 04b (`smr-bugfixpack-94`, closed 2026-09-09) — group C: F-8, F-9, F-10, all three RE-ARMED on top of their gates
+
+*(Commits `799f145` F-8 `LandscapeUnitFilter` · `3d4c933` F-10 `TrainCargoDumping` ·
+`7a401f1` F-9 `VacuumWalks`. ⛔ Nothing ran in a game; no status moved. `Code/` still
+45/44; `items.lua` and `metadata.lua` not opened. F-9 did NOT split to `04c`.)*
+
+**1 · Per module — what was copied, what was not carried, the decline condition, whether
+the probe is deliberate, what is unexercised** (§10 of my prompt, verbatim requirements):
+
+| | F-8 `LandscapeUnitFilter` | F-10 `TrainCargoDumping` | F-9 `VacuumWalks` |
+|---|---|---|---|
+| 1.1.0 lines copied | `Landscaping.lua:509-523` + file-local `:505-507` | `Train.lua:779-805` | `Colonist.lua:1886-1983` (98 lines) |
+| 1.1.0 changes carried | the ONLY two: `(map, mark, callback, ...)`, `map.Landscapes[mark]` | both nil-guards `:785-787`, `:794-795`; BlackCube hook `:800-802` | all seven: `need_work` slots on every committing branch; shuttle-owned skip `:1898`; `g_Consts` at call time; `-1`→`max_int`; `DiscardTransportTicket`; the five-rung task ladder; landing-slot `src_dome` search |
+| deliberately NOT carried | nothing | nothing from 1.1.0. OUR helper dropped its `st.task_requests` read (its reason was 1.0.7's depot implementation; 1.1.0's `IsStoring` reads `demand[res]` + `rfSuspended`) — stated in the file | nothing |
+| our diff vs shipped 1.1.0 | one line (`filter_embark` for `callback`) | one guard block after the cap read | one line (`or 0`) — mechanical diff confirms |
+| APPLIES when | `MapVarValues.Landscapes` registered AND no `Landscapes` global AND the shipped fn asks a stub map's `Landscapes` for the probe mark | `MultiResourceDepotBase` declares `IsResourceEnabled` AND `BlackCubeMystery_AdjustStored` exists AND the shipped `UnloadAll` survives a storable resource with no demand entry (the F114 input) | `HasShuttleLandingSlots` + `Dome.ReserveWorkplace` + `Colonist.CancelWorkReservation` exist AND `const.Colonist.<walk consts>` are numbers AND the shipped fn calls `CanWork()` first |
+| declines WITHOUT suspect (= 1.0.7) | `Landscapes` global present, no MapVar | no `MultiResourceDepotBase`, `UniversalStorageDepotBase` present | `const.ColonistMaxDomeWalkDist` a number, no `HasShuttleLandingSlots` |
+| declines WITH suspect | every other decline | every other decline | every other decline |
+| probe deliberate? | YES (new; the F115 shape test kept, sense inverted) | YES (new; the F114 shape test kept, sense inverted) | YES (new); the accidental path-spec gate is GONE |
+| gate kept? | yes — same discriminator, inverted | yes — same discriminator, inverted | n/a (it was an accident); replaced by a deliberate one |
+| desk harness | 5 branches: applies / 107 pre-game / 107 in-game / neither / 110-oldbody — all as designed | 4 branches + 6 functional cases (guard, not over-broad, no stranding, refab hatch, BlackCube hook, F114 input) | 4 branches + 5 functional cases vs the shipped body side by side |
+| bodycheck | 3 OK; RED seen: BODY-CHANGED + DEFECT-GONE | 2 OK; RED seen both | 2 OK; RED seen both |
+| unexercised in play | EVERYTHING — no landscaping site placed on 1.1.0 with this body | EVERYTHING — no train unloaded; none seen leaving its platform since F114 | EVERYTHING — vacuum walking never exercised on 1.1.0 |
+
+**2 · F-10's premise (§4) is UNESTABLISHED and every surface says so** — the file header,
+`bugs/F46.md`, `bugs/F114.md`, the checklist (row 10 = the console read), and 06's inbox
+(no "fixed", no "confirmed"). Not cheaply establishable from Lua: `GetTargetAmount` has no
+Lua definition outside `ResourcePile.lua:99`. Circumstantial only: 1.1.0's load side treats
+stock at a disabled station as forbidden excess (`Train.lua:873`, `:897`, `:912`). If the
+control reads 0, our guard is inert and F46 is a REMOVE candidate for the next patch.
+
+**3 · Drift caught (chain rule 5 — evidence, not shame).**
+* ⛔ **My prompt §2's 2026-09-08 "RE-CHECKED" note is wrong in the WIDER direction.** It
+  says reach "really is Clear-Waste-Rock only — exactly one caller". The one call site
+  (`ClearWasteRockConstructionSite.lua:81`) is a METHOD, and `LandscapeConstructionSite`
+  is that class's SUBCLASS on both branches (`LandscapeConstructionSite.lua:4`), so
+  flatten/raise/lower inherit it — the F115 stack trace in `bugs/F115.md` is itself a
+  flatten site reaching `:81`. 1.1.0 moved the override UP a class; on 1.0.7 only flatten
+  sites called this and clear-waste-rock used the hex sweep. **A caller count of a method
+  must count its inheritors** — the F64 lesson applied to the other side. The note's own
+  warning ("class X no longer defines Y is a statement about SELF-DECLARATION") was right
+  and its conclusion still fell into the trap. §2/§9's "do not restate 20/20 because reach
+  narrowed" rests on that; 20/20 is still not restated, but because it is a 1.0.7
+  measurement, not because of reach. Recorded in `bugs/F34.md` and the checklist.
+* ⚠️ My prompt §1: *"the gates … are what makes each module decline on 1.0.7"* —
+  imprecise: as shipped they declined on **1.1.0**. I kept each gate by keeping its
+  DISCRIMINATOR and inverting the sense (§2 anticipated it: *"that stops being true the
+  moment you edit the body"*). ⚠️ **For your "a gate quietly removed" pass: an inverted
+  gate is the kept gate.** Each file says so at the gate.
+* ⚠️ My prompt §1 says "⚠️ 04 may still be in flight" — it had closed (`55b1d5e`) before
+  I started; `ListAgents` showed no 04 session. No collision.
+* `00_Core.lua:120-124` (the probe-form comment) illustrates a probe with
+  `LandscapeForEachUnit(stub, cb)` whose THROW on 1.1.0 "IS the decline" — that is the
+  probe-for-1.0.7 direction. The shipped probe probes FOR the 1.1.0 read (the direction
+  §2a and 02's note require for a re-copy). Comment only, not wrong, but a reader could
+  copy the wrong direction. One sentence for 05's core pass.
+* Procedural: one Bash call (the F52 append + F-9 commit) failed at shell parse time and
+  ran NOTHING — caught by `git status`, redone via files. The three earlier heredoc
+  appends were checked afterwards and kept their backslash paths. Nothing lost.
+* `sigcheck.py`: the F115 MISMATCH CLEARED with the F-8 edit (38 OK / 0 MISMATCH). STATE
+  line "sigcheck MISMATCH there is CORRECT" evicted in my close-out commit. A
+  re-appearance is a finding.
+
+**4 · Method notes** (for CHAIN_METHOD / FIX_POLICY via 05 if you agree). The desk
+harness (scratchpad, ~100 lines) loaded our module against the pack's REAL `Require`
+(extracted from `00_Core.lua` with `luafn.find_bodies`) with the shipped 1.1.0 / 1.0.7
+bodies standing in for the game — so one run per branch exercised the gate, the
+three-valued marking AND the installed body. That is one step past link 04's
+body-only harness and is what let me watch a probe throw and read as a decline before
+any boot. Worth promoting to `tools/` as a fixture harness — out of my fence, routed to 05.
+
+**5 · Test Kit (07's inbox has the detail).** All three modules now APPLY on the rig, so
+their probes must run. `LandscapeUnitFilter` and `VacuumWalks` will `ERROR` as written
+(old call shape; missing stub methods); `TrainCargoDumping` should PASS. Five named stale
+results across the kit until 07 closes.
+
+**6 · What may NOT be claimed.** Not "tested" — nothing ran in a game, and trains,
+landscaping and vacuum walking have never been exercised on 1.1.0 at all. Not "matches
+vanilla" beyond `bodycheck.py`'s pins and the mechanical diffs. Not "F-10 is fixed". Not
+"the gates are unnecessary". Not "20/20". Not "the 1.0.7 declines are proven on 1.0.7" —
+argued from the archived tree and the desk harness, never from a 1.0.7 boot.
+
+**7 · Filed, not fixed.** `00_Core.lua:304` stale citations (from 03, still open). The
+five stale kit probes (07). Nothing else out of fence was found.
