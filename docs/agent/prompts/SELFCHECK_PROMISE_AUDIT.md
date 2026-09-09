@@ -1,4 +1,5 @@
 # CAN WE MAKE THE PROMISE TRUE? — the self-check honesty audit
+#### (and: stop being blamed for other mods' faults)
 
 Paste into a fresh Claude Code session. **Runs in PARALLEL with the hotfix-2
 chain** — read §5 before writing anything.
@@ -6,12 +7,19 @@ chain** — read §5 before writing anything.
 (mandatory), `docs/agent/FIX_POLICY.md` §2/§2a/§2b, and `Code/00_Core.lua`'s
 `Require`.
 
-> 🎯 **ONE JOB.** The store description promises:
+> 🎯 **TWO JOBS, both about whether the pack's claims about itself are true.**
+>
+> **JOB ONE.** The store description promises:
 >
 > > *"Every fix checks the game's code before it touches anything, and stands
 > > down by itself if an official patch changes what it was written for."*
 >
 > **Audit whether that can be made LITERALLY TRUE, and recommend how.**
+>
+> **JOB TWO (§1B).** Find a way for this pack to stop being blamed for OTHER
+> mods' faults. Owner ask, and related: both jobs are about the gap between what
+> the pack says about itself and what is so.
+>
 > ⛔ **You write NO code and NO store text.** You produce a report with costed
 > options and a recommendation. The owner decides.
 
@@ -102,6 +110,47 @@ be read at runtime. Check, from the shipped engine source and from
   — and it reframes the promise: the honest claim becomes about what the project
   does every patch, not what the code does at boot. Cost that route too.
 
+### 1c-bis · ⚠️ A PEER AGENT'S SPOT CHECK — be aware of it, do NOT trust it
+
+Another session ran a quick source read of this exact question and reached a
+provisional position. ⛔ **It is a SOURCE READ, never executed in a game**, and
+this project's standing rule is to trust runtime over source reads. Treat it as
+a starting point and a set of claims to falsify — **not** as a finding, and not
+as a reason to skip §1c. The owner passed it on precisely so you are not
+surprised by it. Its claims, verbatim in substance:
+
+- **The obvious route is closed.** `debug` is blacklisted on 1.1.0
+  (`Mod.lua:1436`), re-verified on THIS branch rather than trusting `EF-006`'s
+  1.0.7 reading. So `debug.getinfo`'s `nparams`/`isvararg` — which would have
+  caught `F115`'s arity change automatically, at runtime, in the player's game —
+  is unavailable.
+- **But a non-obvious one may be open.** The blacklist is checked on the
+  TOP-LEVEL GLOBAL NAME only: `ModEnvMeta.__index` does
+  `if env_blacklist[key] then return end` and otherwise returns
+  `rawget(original_G, key)` — the real table, whole. `string` is not on that
+  list. ⇒ **`string.dump` may reach mod code**, and it is the one runtime
+  primitive that can see a BODY change, which `Require` structurally cannot.
+- **Two things it says you must confront up front or you will build the wrong
+  thing:**
+  1. ⛔ **A pinned dump-hash could stand the WHOLE PACK down at once.** If a Lua
+     compiler or engine-build change flips every hash simultaneously, the pack
+     self-disables on a patch that broke nothing. **That failure is worse than
+     the gap it closes.**
+  2. ⛔ **Even a perfect version does not make the sentence fully true.** Class
+     (c) — semantics moving under a wrapper whose target BODY is untouched — is
+     invisible to body hashing **by definition**, and **6 of the 10 FIX rows in
+     the 1.1.0 re-verification were class (c)**.
+
+⭐ **What THIS session adds, and it is existence-only:** the citations were
+spot-checked and are real — the blacklist table does contain `debug = true`,
+`env_blacklist[key]` gating exists (`Mod.lua:1560`, `:1571`), and `string` does
+not appear in that table. ⛔ **That verifies the citations EXIST. It verifies
+NOTHING about the conclusion** — whether `string.dump` actually resolves inside
+a loaded mod's environment, and what it returns for an engine C function versus a
+Lua function, is exactly the kind of thing this project has been wrong about
+from source reads twice this week. **Measure it in a running game or say you
+could not.**
+
 ### 1d · What can the sentence honestly say under each route?
 
 Draft the wording that would be TRUE under each option — full probe coverage,
@@ -110,6 +159,67 @@ owns store wording and `metadata.lua`. ⚠️ Route-check every claim: "every fi
 checks" must be true of EVERY fix, or the word "every" goes. The project
 overturned a player-facing line three reviews had passed because nobody walked
 the steps.
+
+## 1B · JOB TWO — stop OUR mod being blamed for OTHER mods' problems
+
+⚖️ **Owner ask, 2026-09-09: "find a way for our mod to not be blamed for other
+mods' problems. We have seen that a few times."** The owner judges this related
+to job one, and it is: both are about whether the pack's claims about itself are
+true. ⛔ Treat it as a first-class job, not an appendix.
+
+⭐ **A STARTING POINT, source-read by the session that wrote this brief — verify
+it, do not inherit it.** The engine's attribution is a SUBSTRING MATCH over the
+call stack (`CommonLua/Modding/Mod.lua:3018-3028`), and its own comment calls it
+a *"rough estimation based on call stack"*:
+
+```lua
+function OnMsg.OnLuaError(err, stack, os_paths)
+    for _, mod in ipairs(ModsLoaded) do
+        local path = mod.content_path
+        ...
+        if string.find_lower(err, path) or string.find_lower(stack, path) then
+            ReportModLuaError(mod, err, stack)
+```
+
+⇒ **ANY mod whose content path appears ANYWHERE in the error or the stack is
+flagged.** We wrap ~39 game functions, so a throw originating in another mod
+that passes through one of our wrappers puts our path in the stack and names us.
+That is `EF-065`(a) with a mechanism attached. Two aggravating details to check:
+- `ReportedMods[mod.id]` (`:2980-2983`) means a mod is reported **once per
+  session** — so the FIRST such error names us for the whole session, and
+  nothing later can un-name us.
+- `ModsToReport` is a LIST and `mods_str` joins titles with newlines, so the
+  dialog can name several mods at once. ⇒ Is being named ALONE actually common,
+  or do we usually appear beside the real culprit? **That changes how bad this
+  is, and it is measurable from the archived logs.**
+
+**What to establish:**
+1. **How often is this real?** Search the archived logs for `Error in mod` lines
+   naming us, and for each decide from the stack whether the fault was ours.
+   ⛔ "Not caused by our leg" is an attribution verdict, not a dismissal — show
+   the reasoning per line. ⚠️ If every historical instance WAS ours (`F114`,
+   `F115` both were), say so: the owner's "we have seen that a few times" would
+   then be about a risk rather than a measured harm, and that changes the
+   priority. Do not tell them what they expect to hear.
+2. **Can our frame leave the stack?** ⭐ A hypothesis from this brief's author,
+   UNVERIFIED and possibly wrong: Lua's proper tail call (`return orig(...)`)
+   REPLACES the caller's frame, so a wrapper that tail-calls the original may
+   not appear in a downstream stack at all. If that holds it is a cheap,
+   mechanical mitigation for every PRE-wrapper. ⛔ It cannot help a POST-wrapper
+   (one that does work after the original returns), and most of the pack's
+   wrappers are post-wrappers — establish the split before recommending it.
+3. **What else is available?** Does the engine expose anything that scopes
+   attribution? Does load order change who is named first? Does the dedupe make
+   an early benign appearance costly?
+4. ⛔ **What must NOT be done.** Swallowing another mod's error to keep our name
+   out of the stack would hide a real fault from the player and is off the
+   table. Any mitigation must leave the error reported and the real culprit
+   nameable. Say so in your report so nobody later reads your recommendation as
+   permission to catch-and-drop.
+5. **Is there a player-facing half?** If we cannot stop being named, can we make
+   it cheap to tell — a log line the owner or a player can point at that says
+   what our wrapper saw? ⚠️ Route-check it: who would actually read it, on which
+   platform, and how would they be told to.
 
 ## 2 · The options to cost, and you may propose others
 
@@ -138,9 +248,22 @@ what it costs per future module, and how it fails.
 5. §1c's sandbox findings, with the evidence for each.
 6. Costed options and **a recommendation**.
 7. Draft wordings, one per route.
-8. ⛔ **What you did NOT check, named.** A module you did not open is not a
+8. **JOB TWO, as its own section:** how often we have actually been misblamed
+   (from the archived logs, per line, with the reasoning shown), whether a
+   tail-call or anything else can keep our frame out of a downstream stack, what
+   is available beyond that, and a recommendation. ⛔ Include the "what must NOT
+   be done" line so nobody later reads it as permission to swallow errors.
+9. ⛔ **What you did NOT check, named.** A module you did not open is not a
    module that passed — treating silence as a pass is precisely how `F114`
    shipped.
+
+⚠️ **ON SIZE — decide this after §1a/§1b and say what you decided.** A peer
+suggested `CHAIN_METHOD` rather than one session, and two jobs over 43 modules
+plus a sandbox measurement may well exceed one. **Checkpoint (commit + push)
+after each of: §1a, §1b, §1c, §1B.** If you run low, ⛔ do NOT rush a thin
+verdict — stop, and author the continuation prompt naming exactly what is done
+and what is not (`reports/CHAIN_METHOD.md`). A partial audit that says so is
+worth more than a complete-looking one that guessed the rest.
 
 ## 4 · Bindings
 
@@ -183,7 +306,8 @@ classification predates a change.
 
 A verdict the owner can act on, coverage re-derived rather than inherited, both
 real failures tested against the current mechanism, a per-module classification,
-sandbox limits established by measurement, costed options with a recommendation,
-and an explicit list of what you did not check. ⛔ No code, no store text, no
+sandbox limits established by measurement, **job two answered with its own
+evidence**, costed options with a recommendation, and an explicit list of what
+you did not check. ⛔ No code, no store text, no
 status moved. ⭐ **"It cannot be made fully true, and here is the strongest thing
 that is" is a valid and useful verdict** — provided it is evidenced, not assumed.
