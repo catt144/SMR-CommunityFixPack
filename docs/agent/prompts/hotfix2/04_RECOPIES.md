@@ -493,6 +493,14 @@ module's branches are also three-valued, do this rather than inverting one probe
 with the deletion named, rather than deleted, because it is where that check's
 shape came from.
 
+⛔ **AND IT IS LIVE IN YOUR §7, CONCRETELY.** `Fix_TrackSalvageWipe.lua:379` is
+`OnMsg.LoadGame = SMRFixPack.WhenActive("TrackSalvageWipe", …)` — the orphan sweep
+the owner RULED stays (§7, "do not reopen"). It runs only while that module's
+status is exactly `active`. ⇒ **if your ck111/ck119 edit gains any gate that can
+latch or decline, you switch off a ruled behaviour at the same time, silently.**
+Checked for you: F-6 `PayloadTemplateRefill` and F-7 `RocketDroneChurn` have no
+`OnMsg` handler at all, so this bites §7 and only §7. (04b's three are clear too.)
+
 **6 · Filed, not fixed (out of my fence — yours only if you touch these).**
 * `00_Core.lua:304` cites `Fix_AstrogeologistExtractors:174` (deleted by 02) and
   `Fix_SaintBlessing:151` (moved by `3db4984`). Historical, explanatory, harmless —
