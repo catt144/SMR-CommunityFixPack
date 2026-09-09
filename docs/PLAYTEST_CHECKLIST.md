@@ -29,6 +29,49 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### 2026-09-08 — ITEM 118: how 1.0.7 players get served — Steam's branch feature is OFF, so it is one manual route
+
+> ⚖️ **YOUR PLAN (2026-09-08):** serve 1.0.7 players a frozen build rather than carrying them in the live
+> pack — Steam's own per-branch delivery if it existed, a GitHub Releases download for Paradox, and a line on
+> both store cards pointing at written instructions on the site.
+>
+> ⛔ **STEAM'S PER-BRANCH DELIVERY DOES NOT EXIST FOR THIS GAME — REFUTED, BOTH PLACES SAMPLED.** Steam ships
+> a Workshop Item Versioning feature that does exactly what you wanted (one listing; a player on an old branch is
+> automatically served the matching mod version), and requirement 1 is met — the app has ordered branches,
+> `Default Public Version` and `1.0.7 / Rollback version` (your screenshot). But it also needs the developer to
+> tick **"Enable Game Branch Versions"**, and the author-side control that would prove it is on is absent in
+> BOTH places Valve's documentation names: the item's **Change Notes** list shows only Edit / Download /
+> Revert-to-this-version, and **Edit Change Note** holds only Language, Description and Save. ⇒ the feature is
+> OFF for Surviving Mars: Relaunched. ⛔ **"Revert to this version" is NOT a substitute** — its own tooltip says
+> it makes that version live for *subscribers*, i.e. ALL of them, 1.1.0 players included. Exactly backwards.
+>
+> ✅ **WHAT THIS SIMPLIFIES.** One route for everybody, Steam and Paradox alike: a GitHub Release holding the
+> frozen v5, and a new **"Playing on 1.0.7"** tab on the site (`SMR-CommunityMods`, one `nav:` line + one
+> `content/*.md` — a clean deletable unit when 1.0.7 dies), linked from both store cards and pointed at by a
+> line in `install.md`. ✅ It also RETIRES the sequencing hazard: there is nothing to pin before the hotfix-2
+> upload.
+> * ⭐ **Best artifact: Steam's own `Download` button** on the v5 change note — byte-identical to what players
+>   actually received, verifiable against the md5 already on record (`a1cbaad6294382068250ef390037f239`,
+>   401,188 B, v5 = `bec2e06`). Better provenance than a rebuild from the tree.
+> * ⛔ The instructions MUST say **unsubscribe first**. Workshop, Paradox and `AppData/Mods` all feed one dedup
+>   keyed on mod `id`, higher `version` wins (`Mod.lua:1779-1783`) — a manual v5 beside a live subscription is
+>   silently overridden, and the player would think they had done it right.
+> * ⛔ **No console route exists**: the `AppData/Mods` scan is behind `Platform.desktop` (`Mod.lua:1706`).
+>   ⚠️ Probably moot (console players cannot opt into a Steam branch, so Paradox presumably ships them 1.1.0) —
+>   named because it is unverified, not because it is known to bite.
+>
+> ⛔ **THE FINDING THAT BEARS ON PLAYER SAFETY, AND IT IS INDEPENDENT OF YOUR ANSWER TO 98.** Nothing stops the
+> hotfix-2 build reaching a 1.0.7 player: our `lua_revision` is 350453 and 1.1.0's `ModMinLuaRevision` and
+> `ModRequiredLuaRevision` are BOTH 350453 (`EF-077`), so `IsTooOld()` is false on both branches and the update
+> installs and loads on 1.0.7 with no warning of any kind. For the 34 deletions that is a REGRESSION (vanilla
+> 1.0.7 bugs come back) — bad, not dangerous. ⛔ **For the re-copies (F-6…F-10) it is the F114 failure mode in
+> reverse**: a module carrying a 1.1.0 function body, applied on top of a 1.0.7 function. ⇒ **every re-copied
+> module must carry a self-check that DECLINES on 1.0.7**, whatever you rule on 98. That is now a binding
+> constraint on the hotfix-2 fix prompts, not a preference.
+>
+> **Still yours:** decision 98 itself (delete vs gate the 34). This plan does not decide it — it only means a
+> 1.0.7 player who is deleted-and-updated under has a manual road back, one they must notice and walk.
+
 ### 2026-09-08 — ITEMS 114–117 OPEN: the pack-wide 1.1.0 re-verification — 10 FIX, 35 REMOVE, 35 KEEP (QA'd)
 
 > **The verdict, one line.** Every one of the 80 modules was opened against the shipped 1.1.0 body it wraps,
