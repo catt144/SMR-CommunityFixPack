@@ -1,5 +1,40 @@
 # Chain B — `smrcf-text` · the simple combined chain
 
+> ⛔⛔ **2026-09-09 — NOTHING IN THIS CHAIN IS OWED ANY MORE. The last live item,
+> the dust-devil marker gate rider, is REFUTED on 1.1.0: vanilla fixed it.**
+> Measured two-sided against both trees on disk (`smr-bugfixpack-0e`, on-call, at
+> the owner's question *"for that rider are we sure that is still a problem in
+> 1.1?"*).
+>
+> The rider's claim was: *"the marker thread checks `HasDustStorm` and omits
+> `DustStormsDisabled`; the natural scheduler checks both, twice, in the same
+> file."*
+>
+> * ✅ **The claim was TRUE on 1.0.7** — the control, and worth stating so nobody
+>   reads this as the finding having been wrong. `1.0.7.396349/Src/Lua/DustDevils.lua:169`:
+>   `if not HasDustStorm(map) and SessionRandom:Random(100) < descr.marker_spawn_chance then`
+>   — `HasDustStorm` only. The natural scheduler at `:209` and `:220` both read
+>   `HasDustStorm(map) or DustStormsDisabled`. Sibling inconsistency, exactly as filed.
+> * ⛔ **It is FIXED on 1.1.0.** `Lua/DustDevils.lua:170`, inside
+>   `WaitSpawnDustDevil(descr, marker)` — the marker path — now reads
+>   `if HasDustStorm(map) or DustStormsDisabled then return end`. **Both terms.**
+>   The natural scheduler still checks both (`:248`, `:267`). All three gates agree.
+> * The function was RESTRUCTURED, not incidentally edited: 1.0.7's single compound
+>   `if` became an early-return guard plus a separate chance check at `:174`, and
+>   the file grew 18306 → 21074 bytes.
+>
+> ⇒ **Chain A's job 1 is moot too.** It existed to decide whether this was worth
+> building by censusing `PrefabFeatureMarker`s; the defect it gated no longer
+> exists, so reachability no longer matters either way.
+>
+> ⛔ **IF THIS FOLDER IS CONSUMED, MOVE THE FINDING ABOVE TO A `facts/` ENTRY
+> FIRST.** It is a 1.1.0 vanilla-fix observation with a 1.0.7 control, and it is
+> recorded nowhere else — it would die with the folder. Our own related module
+> `Fix_DustDevilSpawnGate` was already deleted as **R-21** of the 1.1.0 REMOVE
+> pass (`2dc1dbe`), but for a DIFFERENT reason (our wrapper re-rolled the
+> scheduler's own gate and burned extra `SessionRandom` draws per tick), so R-21
+> does not cover this.
+
 > ⛔⛔ **2026-08-20 — DO NOT RUN THIS CHAIN. `C50` AND `C51` ARE ALREADY BUILT
 > AND SHIP IN 1.0.0.** The owner reversed the post-launch premise (checklist 58)
 > and `closeout-1.0.0/` links 1–2 built both on 08-20 —

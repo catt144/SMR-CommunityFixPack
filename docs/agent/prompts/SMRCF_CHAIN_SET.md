@@ -1,5 +1,35 @@
 # The `smr-community-fixes` follow-up — four chains, and the order they run in
 
+> ⚠️ **2026-09-09 — WHAT THIS FILE IS, because it reads like something it is not.**
+> The owner asked, verbatim: *"I am still confused by this. It sounds more like
+> documentation on how chains are created."* **It is not that.** Two different
+> documents, and the confusion is understandable because this one opens with
+> chain vocabulary:
+>
+> | | |
+> |---|---|
+> | **How to build ANY chain** (the reusable method, the template, parallel-vs-sequential, failure modes) | `agent/reports/CHAIN_METHOD.md` — the playbook, written 2026-08-03 by the chain-12 QA session |
+> | **THIS file** | a **work order** for four SPECIFIC chains against four SPECIFIC defects (`C50`/`C51`, `C52`, `C25`), plus the order they must run in and what was deliberately given no chain at all |
+>
+> So this is a **map of a particular backlog**, not a method. Its only reusable
+> content is the *shape* of the decision it records — which candidates earned a
+> chain, which were combined, which were refused — and that shape is already
+> generalised in `CHAIN_METHOD.md` §5.
+>
+> ⛔ **THREE OF ITS FOUR ROWS ARE NOW DEAD. As a map it is down to one live row.**
+>
+> | chain | folder | state 2026-09-09 |
+> |---|---|---|
+> | **A** | `smrcf-verify/` | ⚖️ **rewrite** (owner, 09-09) — collapsed to ONE item, the `C35` detector; see its README banner |
+> | **B** | `smrcf-text/` | ⛔ **dead, nothing owed.** `C50`+`C51` were built 08-20 then DELETED in the 1.1.0 REMOVE pass; the dust-devil rider is REFUTED on 1.1.0 |
+> | **C** | `smrcf-modbrowser/` | ⏸ **kept** (owner, 09-09) — `C52` is `parked`, but its three source findings still hold and defect 3 touches our own store preview |
+> | **D** | `jumbo-cave/` | ⛔ **CONSUMED 2026-09-09** (`49e32bf`, grave `33b3ad0`) — `C25` was confirmed from a field save and shipped as `F110` |
+>
+> ⇒ **This file's own disposition rule still binds and has NOT been met:** it says
+> below that it is deleted by the LAST chain of the set to close. A and C still
+> exist, so it stays — but a reader should treat it as a historical work order
+> with one live row, not as current planning.
+
 Written 2026-08-16 by the coverage sweep's own session (top tier), at the
 owner's instruction: *"I want to write up chains for everything we found we can
 fix, if the others are simple they can be combined chains. Complex can be stand

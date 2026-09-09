@@ -1,5 +1,26 @@
 # Chain C — `smrcf-modbrowser` · `C52`, standalone because it is complex
 
+> ⚖️ **OWNER RULING 2026-09-09: KEEP FOR NOW.** Reviewed in the prompt-pruning
+> pass and deliberately retained while chains B and D were retired. ⛔ **Not a
+> licence to run it** — `C52` is still `parked`/frozen by the owner's 2026-08-20
+> ruling, and its gate on chain A job 2 (`AsyncPopsDownloadFile` has zero
+> definitions in all of Src) is unresolved. What earned the keep is that the three
+> **source findings below still hold and are the most reusable material in the
+> whole `SMRCF_CHAIN_SET` backlog.**
+>
+> ⭐ **Defect 3 is live for US, not just for players.** The thumbnail cache keys on
+> `ModID` + `PreferredVersion` and skips the fetch when the file already exists ⇒
+> **replacing our `preview.png` without a version bump leaves existing players
+> looking at the old image forever.** That intersects the store-card work
+> (`UPLOAD_WORKFLOW` §3) and every future upload, so it is worth knowing whoever
+> refreshes the preview art. ⚠️ Its own text already flags it "release-relevant to
+> us either way".
+>
+> ⚠️ Staleness: written 2026-08-16 against 1.0.7 and a 74–77 module tree (now 44).
+> The `ParadoxMods.lua` / `HTMLParser` / `ModManager.lua` line numbers below are
+> **1.0.7** and MUST be re-derived against 1.1.0 before any build — both trees are
+> on disk (`ONCALL_HANDOFF` §3), so that is a cheap two-sided check now.
+
 Three defects on one path, one of them needing a **§1.5 full replacement** and
 one of them a **re-enable that may reinstate the fault it was working around**.
 Map: `agent/prompts/SMRCF_CHAIN_SET.md`. ⛔ **Gated on chain A.**

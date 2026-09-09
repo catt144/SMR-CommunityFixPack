@@ -1,5 +1,26 @@
 # One-off brief — the capture sitting (screenshots + preview-art backdrops)
 
+> ⚖️ **OWNER RULING 2026-09-09: KEEP — *"we may get to it."*** Reviewed in the
+> prompt-pruning pass and retained. ✅ **It is UNFIRED**, not spent: the only image
+> in the repo is `preview.png`, there is no screenshot set anywhere, and
+> `PLAYTEST_CHECKLIST` item 24 still lists it as "exists and is fireable", folded
+> into the one combined sitting.
+>
+> ✅ **Its own blocking gate is now SATISFIED.** The header below says "DO NOT RUN
+> WHILE THE D13 CHAIN IS LIVE … fire this when `agent/prompts/d13-rescue/` is
+> empty" — that folder no longer exists at all, so the D13 constraint is
+> discharged. What gates it now instead: STATE defers ALL in-play controls to ONE
+> sitting AFTER hotfix-2 link 99 (owner, 2026-09-08).
+>
+> ⚠️ **It needs an era pass before it is fired, and the reason is not cosmetic.**
+> This was written 2026-08-13 for game 1.0.7. `EF-079`: **1.0.7 saves cannot load
+> on 1.1.0**, so every fixture and colony this brief's shot list assumes is
+> unreachable — a 1.1.0 capture sitting needs a colony provisioned from scratch
+> (hours), which is exactly the cost `EF-080`'s triage-only override does not buy
+> back. ⭐ Against that, the *reason* to fire it is stronger than when it was
+> written: the store card now describes a 1.1.0 + DLC build, so the shots would
+> want retaking regardless of this brief's age.
+
 **Authored 2026-08-13. ⛔ DO NOT RUN WHILE THE D13 CHAIN IS LIVE** — it needs the
 game, and so does D13's verification leg. Fire this when
 `agent/prompts/d13-rescue/` is empty (or its remaining prompts need no game).

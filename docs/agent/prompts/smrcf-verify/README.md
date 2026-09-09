@@ -1,5 +1,27 @@
 # Chain A — `smrcf-verify` · the gate for the whole follow-up set
 
+> ⚖️ **OWNER RULING 2026-09-09: REWRITE, do not run and do not delete.** ⛔ **The
+> manifest and the four jobs below are NOT the current scope — 3 of the 4
+> questions and 1 of the 2 detectors are now MOOT.** Do not fire this chain as
+> written; it would spend an unattended launch answering dead questions.
+>
+> **What is actually left, and it is one thing:**
+>
+> | job as written | status 2026-09-09 |
+> |---|---|
+> | 1 · is the dust-devil marker path reachable? | ⛔ **MOOT** — the defect it gated is fixed in 1.1.0 vanilla (`DustDevils.lua:170` now reads `HasDustStorm(map) or DustStormsDisabled`; evidence and the 1.0.7 control are in `smrcf-text/README.md`'s banner) |
+> | 2 · does `AsyncPopsDownloadFile` exist at runtime? | ⏸ only if `C52` is unparked — it is `parked` by owner ruling 2026-08-20 |
+> | 3 · is map generation drivable from Lua? | ⛔ **MOOT** — existed to plan chain D, which was consumed 2026-09-09 (`49e32bf`) |
+> | 4 · does any save contain a Jumbo Cave? + `UndergroundRework106` | ⛔ **MOOT** — `C25` was confirmed from a field save and shipped as `F110` |
+> | 5 · arm the `C25` detector (`WasteRockObstructor:DroneApproach`) | ⛔ **MOOT** — same reason |
+> | 5 · arm the **`C35` detector** (`TaskRequester:InterruptDrones`) | ⭐ **THE ONLY LIVE ITEM.** `C35` is still `cand` and still has no evidence; the detector is log-only and costs nothing |
+>
+> ⇒ **The rewrite is small**: one log-only detector wrap for `C35`, plus job 2 if
+> and only if the owner unparks `C52`. ⚠️ It must also be re-based on 1.1.0 —
+> everything below was written for 1.0.7, and `EF-079` means no 1.0.7 fixture can
+> be loaded to run it, so a 1.1.0 leg needs a colony provisioned from scratch.
+> ⛔ The module counts below are era-stale (they read 74–77; the tree is at 44).
+
 **One unattended launch answers four open questions and arms two standing
 detectors. Owner cost: ZERO.** Map: `agent/prompts/SMRCF_CHAIN_SET.md`.
 
