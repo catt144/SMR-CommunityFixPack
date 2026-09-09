@@ -50,16 +50,22 @@ CODE = os.path.join(REPO, "Code")
 # unread. The per-line cap keeps lines atomic (grep/diff/Edit-safe) so walls
 # cannot return inside the budget; never widen lines to satisfy anything.
 #
-# 2026-09-09 owner ruling: WARN RAISED 9 KiB -> 10 KiB (+11%, the owner asked
-# for "about 10%"). Reason, in the owner's terms: "I don't want things missing
-# from state.md that we need to know." The file had sat within ~15 bytes of the
-# 9 KiB warn across 36 commits over two days of the 1.1.0 chain, so sessions
-# were evicting kernel content on every edit to stay under it and open item 126
-# went unrecorded. ⛔ This is HEADROOM, not a new budget: at this file's density
-# (~88 B/line) it buys ~11 lines, days not weeks, and the eviction procedure is
-# unchanged. Revisit after the 1.1.0 fallout is closed. The HARD cap is
-# deliberately NOT moved — it is the backstop for unread flags, not a budget.
-STATE_WARN_BYTES = 10 * 1024
+# 2026-09-09 owner ruling: WARN RAISED 9 KiB -> 12 KiB. Reason, in the owner's
+# terms: "I don't want things missing from state.md that we need to know."
+# The file had sat within ~15 bytes of the 9 KiB warn across 36 commits over two
+# days of the 1.1.0 chain — NOT growing, but being continuously evicted to stay
+# under, and open item 126 went unrecorded because of it. A cap a file sits
+# AGAINST is not holding a budget, it is silently dropping content.
+# Ruled in two steps the same day: 10 KiB first ("increase by 10%"), then 12 KiB
+# once measured — +10% bought only ~9 lines at this file's density, days not
+# weeks, and the owner chose the number that lasts until the 1.1.0 fallout is
+# closed ("lets go with decent for now, I can revisit it again later").
+# ⛔ Still HEADROOM, not a new budget — one fact per line, evict rather than
+# compress, procedure unchanged; ~32 lines spare is a runway, not a licence.
+# ⚠️ REVISIT once the 1.1.0 fallout is closed: every byte here is paid by EVERY
+# session at boot, which is the whole reason the cap exists.
+# The HARD cap is deliberately NOT moved — it is the backstop for unread flags.
+STATE_WARN_BYTES = 12 * 1024
 STATE_MAX_BYTES = 18 * 1024
 STATE_MAX_LINE_BYTES = 200
 

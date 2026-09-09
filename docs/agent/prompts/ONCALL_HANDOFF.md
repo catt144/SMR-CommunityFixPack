@@ -197,9 +197,9 @@ be left exactly as it stands. **Link 99 owns all of it.**
   ⚠️ If you still see a size warn, it is **real** — do not go looking for the
   artefact. Confirm with a CR count (`b.count(b'\r')` must be 0), then trim.
   ✅ **The margin is FIXED TOO, as of 2026-09-09 — this bullet used to say the
-  headroom was 5 BYTES.** The owner raised the warn 9216 → **10240** on the
+  headroom was 5 BYTES.** The owner raised the warn 9216 → **12288** on the
   ground that things we need to know were going unrecorded (item 126 was the
-  case in point). At ~88 B/line that is **~11 lines** of headroom, so a STATE
+  case in point). At ~88 B/line that is **~32 lines** of headroom, so a STATE
   addition no longer needs an eviction in the same commit and link 99's pointer
   line no longer trips it. ⛔ It is headroom, not a licence: STATE is still the
   mandatory read every session pays for at boot, still one fact per line, and
