@@ -7,8 +7,8 @@ Defect truth `agent/bugs/INDEX.md` · facts `agent/facts/INDEX.md` · doc map `d
 Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/reports/CHAIN_METHOD.md`.
 
 ## Now
-- ⛔ GAME **1.1.0.403908** + DLC shipped 2026-09-08; rig auto-updated, `ModTools\Src` overwritten ⇒ the 1.0.7
-  citation base is GONE from disk (`EF-075`). ⛔ Trust runtime over source reads (`EF-078`: predicted 6
+- ⛔ GAME **1.1.0.403908** + DLC shipped 2026-09-08; rig auto-updated, `ModTools\Src` overwritten; 1.0.7 tree
+  ARCHIVED `C:\Dev\SMR-SrcArchive\1.0.7.396349\Src` (`ad5f93d`, `EF-075`). ⛔ Trust runtime over source reads (`EF-078`: predicted 6
   self-disabled, measured 13).
   ⛔ **1.0.7 SAVES CANNOT LOAD ON 1.1.0** (`EF-079`) ⇒ the ENTIRE fixture library is branch-locked; a 1.1.0 leg
   needs a NEW colony provisioned from scratch (hours). Override exists but is triage-only (`EF-080`).
@@ -20,8 +20,8 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   Source-derived, NEVER reproduced.
   ⭐ **1.1.0 RE-VERIFICATION 09-08: 10 FIX / 35 REMOVE / 35 KEEP** (`reports/PACK_1_1_0_REVERIFICATION.md`,
   ck114-117; QA'd by 3 fresh readers, `reports/VANILLA_FIX_QA.md` §0, 0 flips).
-  ⭐ **LINKS 02+03 DONE 09-08**: 36 modules DELETED `2dc1dbe` (81→45 in Code+items+`code`, H-10); F-1/F-2/F-3
-  repaired `3db4984` `f38d6d2` `19b5aaa`. ⛔ 2 TestKit probes now FALSE-FAIL (SaintBlessing, ShelterReflex).
+  ⭐ **LINKS 02+03+04 DONE 09-08** (commits in `prompts/hotfix2/README.md`): 36 modules DELETED; F-1/F-2/F-3
+  repaired; F-6/F-7 RE-COPIED; F116 ck111/119 landed. ⛔ 3 TestKit probes FALSE-FAIL (Saint, Shelter, Payload).
   ✅✅ BOTH GATES MEASURED 09-08 (`archive/logs/gated110_*`): 63 applied / 17 inactive / 14 named as predicted,
   0 errors; both `update_suspect` routes CONFIRMED. ⛔ MENU-ONLY ⇒ trains/landscaping NOT exercised in play.
   ✅ HOTFIX_1_AUDIT 09-08 SHIP WITH CHANGES, text-only (`reports/HOTFIX_1_AUDIT.md`). NEXT `prompts/hotfix2/`.
@@ -89,7 +89,7 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 ## Open owner decisions (bodies in `docs/PLAYTEST_CHECKLIST.md` → "Decisions waiting on you")
 - 98 rig half only (⛔ Steam = ONE branch at a time, owner 09-08) · 99 disposition of the self-disabled ·
   100 say anything to players yet (rec no) · 101 accept the re-verification chain shape.
-- 112 card self-check. ⛔ 111+113 RULED 09-08; 111=adopt rehome, +119 filed — both in `hotfix2/04` §7.
+- 112 card self-check. 111+119 LANDED `fc318c7`; 113 RULED 09-08.
 - ⛔ BLOCKS the chain: nothing. 98/117/120/124 all RULED 09-08 (checklist). 118: 1.0.7 gets frozen v5 ⇒ re-copies
   MUST decline on 1.0.7. 121 WITHDRAWN.
 - 73 blame surface — harden or not · 76 confirm (a) was a ruling not a leaning · 53 harden now or in 1.0.1

@@ -296,3 +296,43 @@ than buried in a removals list.
 game's fix were cancelling each other out"**, not "we fixed a bug". 1.1.0 fixed F92
 itself; what hotfix 2 does is stop our data patch from breaking their fix, and heal
 the saves that were played in between.
+
+### From link 04 — the re-copies (F-6, F-7) and the F116 edit (§7)
+
+*(Link 04, `smr-bugfixpack-ba`, 2026-09-08. Commits `3f8394b` F-7 RocketDroneChurn ·
+`177c7b2` F-6 PayloadTemplateRefill · `fc318c7` F116 ck111+ck119. ⛔ Nothing was run
+in a game; no status moved. `Code/*.lua` is still 45 files / 44 modules — nothing
+added or removed, so `items.lua` and `metadata.lua` were not opened.)*
+
+**Drafted patch-note lines — CLAIMS until the post-99 sitting confirms them (owner
+rule 09-08). Word them as "updated for 1.1.0", never "fixed", and never mention the
+branch mechanics (probes, gates) on a player surface.**
+
+* *Updated for 1.1.0: the landed-rocket drone fix now respects the game's new
+  "Accept fuel" toggle. A rocket you have told not to refuel no longer keeps asking
+  for Fuel.*
+* *Updated for 1.1.0: the Edit Payload fix now works with the new tutorial and with
+  destination picks. Emptying a row still sticks; cancelling the launch prompt no
+  longer counts as confirming it; the tutorial's second rocket is still pre-filled;
+  picking a new destination suggests the template again, as the game intends.*
+* *Track salvage: a piece left over when a line is split is now kept on its own
+  track instead of being removed, matching the base game; a line holding both
+  finished and under-construction pieces is now processed correctly after a split.*
+
+⚠️ The first two are "our fix no longer undoes a 1.1.0 improvement", not new
+repairs — the honest frame is **compatibility**, and they are evidence FOR the
+store card's "compatibility pass" sentence (ck112), not for a new bug fixed. The
+third (F116) is a behaviour change to destructive code that has never run in a
+game: if it is listed at all, say "matches the base game's behaviour", nothing
+stronger, and do not say "fixed a bug that deleted track" — F116 was never
+reproduced.
+
+* **On 1.0.7 the two re-copied modules stand down** (F-6 by a behaviour probe, F-7
+  by a shape test); the F116 edits behave the same on either branch and carry no
+  gate. If 06 writes any 1.0.7 line, it is "1.0.7 players: stay on v5" (ck118),
+  never "works on both".
+* Public surfaces checked for these three: the site fix-list entries for F50 and
+  F70 describe the 1.0.7 behaviour and are still true on 1.1.0 (the defects
+  persist); F44/F91's entry is still true. **No public claim became false in this
+  link.** The store card's HOW IT WORKS bullet 3 (ck112) is the only surface these
+  touch, and only as supporting evidence.

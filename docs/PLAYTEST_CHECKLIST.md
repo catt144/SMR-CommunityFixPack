@@ -103,6 +103,43 @@ completed tests move whole to
 > * *Removed: the pack no longer holds an asteroid habitat's residents through a power or air cut — the game now
 >   handles that case deliberately, and colonists are re-homed by themselves once life support is back.*
 
+### ⭐ 2026-09-08 — LINK 04 IS DONE: two re-copies (F-6, F-7) and the F116 edit you ruled (111 + 119). ✅ **Nothing is owed from you now; three in-play checks JOIN the post-99 sitting above.**
+
+> **What was built** (`3f8394b` rocket refuel · `177c7b2` Edit Payload · `fc318c7` track salvage). Nothing here has
+> run in a game. Every change is derived from source, cross-checked against BOTH shipped trees now that the 1.0.7
+> source is back on disk, and exercised only in a desk harness (a real Lua parser on this rig, running the game's
+> own bodies and ours on stubbed objects). By your 09-08 rule each of these is a **claim until the sitting confirms
+> it** — that is what rows 4–6 below are for.
+>
+> * **Rocket refuel toggle** (F-7 / F50) — our copy of the drone fix ignored 1.1.0's new "Accept fuel" toggle, so a
+>   rocket you had switched off kept asking for Fuel every hour. Re-copied with the clause. Stands down on 1.0.7.
+> * **Edit Payload** (F-6 / F70) — our copy would have undone three 1.1.0 changes (the new tutorial's rocket-2
+>   pre-fill, the re-template on a destination pick, a nil guard), and a **cancelled** payload prompt still counted
+>   as "the player has spoken". Re-copied; the flag now lands only when you confirm. Stands down on 1.0.7.
+> * **Track salvage** (F116, your rulings 111 + 119) — a piece left over by a split is now **kept on its own track**
+>   instead of deleted, and a track holding both finished and under-construction pieces gets its post-split
+>   processing. The load-time sweep stays as you ruled. ⚠️ This one is a behaviour change to destructive,
+>   save-persistent code that has never run in a game — row 6 is the one that matters most.
+>
+> | # | fix | what to do | time | what you should see |
+> |---|---|---|---|---|
+> | 4 | **Rocket refuel toggle** (F-7) | On a landed rocket with a trip set, click **Accept fuel** to turn it OFF; wait two game hours; turn it back ON | ~3 min | while OFF: **no Fuel is requested or delivered**, and drones already heading to the rocket are **not** sent back on the hour (the old F50 fix still holds). Back ON: Fuel is requested again |
+> | 5 | **Edit Payload** (F-6) | On a landed rocket: open Edit Payload, set ONE row to 0, confirm; fly the trip and return; open Edit Payload again. Then open it once more and **cancel** the launch prompt. Then **pick a new destination** for the rocket | ~10 min incl. the trip | after the trip the row you emptied is **still 0**. After the cancel, the next open shows what it showed before. After the destination pick the dialog **re-fills from the template** — that is 1.1.0's own behaviour and is exempt from our fix on purpose |
+> | 6 | **Track split** (F116) | On a 1.1.0 colony with a train line: EXTEND the line while pieces are still under construction, then salvage ONE middle piece (a plain click, not Ctrl+click) | ~5 min | the line splits in two; **every remaining piece is still on a track** (nothing vanishes, nothing becomes unselectable); assigned trains survive; both halves accept a train. The log has no `TrackSalvageWipe` error |
+>
+> ⚠️ Row 6 needs a provisioned 1.1.0 colony with trains — the 1.0.7 fixtures cannot load (`EF-079`) — so it shares
+> the colony with hotfix 1's "first train leaves its platform" control. ✅ Cheats are not a confound for rows 4–6.
+>
+> ⛔ **A THIRD TEST KIT PROBE NOW REPORTS A FALSE `FAIL`** (with link 03's `SaintBlessing` and `ShelterReflex`):
+> `PayloadTemplateRefill` (`30_Probes_Wave3.lua:11-70`) stubs the real-time thread to a no-op and expects `Apply`
+> to stamp the flag synchronously; the stamp now lives inside the confirmed branch of that thread, so the probe's
+> second step sees the template refill and says FAIL. **If you run the suite, expect it** — three named FAILs, not a
+> regression. The Test Kit is a separate repo and outside the chain's fence; filed to 05 and 99, not fixed.
+> `RocketDroneChurn`'s probe and both `TrackSalvageWipe` probes were checked and are unaffected.
+>
+> ✅ **Items 111 and 119 below are LANDED** (`fc318c7`); their entries now say so. ⛔ Nothing here moves a status
+> word, and a SHIP from 99 is still not clearance for the upload sitting (`H-04`).
+
 ### ✅ 2026-09-08 — ITEM 124 RULED: `StaleReservations` is FIXED, not removed. This was the last thing blocking chain link 03.
 
 > ⚖️ **124 — RULED: FIX.** Owner, verbatim: *"fix is the ruling."* ⇒ `Fix_StaleReservations` **stays** and gains
@@ -432,7 +469,7 @@ completed tests move whole to
 > ⚠️ **One thing your ruling does not make true:** F-10's defect is still unconfirmed. It will be repaired,
 > but the close-out must say the premise was never established rather than implying the bug was verified.
 
-119. ✅ **RULED ON FILING 2026-09-08 — the SECOND F116 divergence, which had no ticket and which nobody would
+119. ✅ **RULED ON FILING 2026-09-08** · ⭐ **LANDED the same day by hotfix2 link 04, commit `fc318c7`, in the same edit as 111** — **the SECOND F116 divergence, which had no ticket and which nobody would
 > have raised until after the patch shipped.** ⛔ Filed and ruled in the same breath because you ruled it
 > before it had a number; given one now so `99_TERMINAL_AUDIT.md` has something to cite when it sees the code
 > change (an untracketed body edit to save-persistent code is exactly what that audit is built to catch).
@@ -449,7 +486,7 @@ completed tests move whole to
 > documented and still invisible, because it lived only in a bug entry and a code comment — neither of which
 > is a surface anyone plans work from.
 
-111. ✅ **RULED 2026-09-08, in-session — (b) ADOPT vanilla's policy. Your words: "fold them into whatever
+111. ✅ **RULED 2026-09-08, in-session — (b) ADOPT vanilla's policy** · ⭐ **LANDED the same day by hotfix2 link 04, commit `fc318c7` (the LINK 04 block at the top has the control, row 6).** **Your words: "fold them into whatever
 > chain makes the most sense and update the audit."** Folded into **`hotfix2/04_RECOPIES.md`** (the body-copy
 > link — same class of work, and it already carries `bodycheck.py` and the terminal audit), with a matching
 > item in `99_TERMINAL_AUDIT.md`. ⛔ **THREE things were ruled together, not one:**

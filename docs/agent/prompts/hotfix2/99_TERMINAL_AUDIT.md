@@ -114,11 +114,16 @@ finding.
    covers a track holding both completed and under-construction elements.
    ⛔ **Anything else changed in that module IS a finding**, including a
    re-derivation of the parts the `K-11` KEEP verdict already settled.
-   ⚠️ **It was stamped by 01 at `e2490f3` BEFORE this edit existed**, so its
-   `SRC:` hash had to be re-taken. Confirm the re-stamp happened and that
-   `bodycheck.py` was run either side — a stale pin here would read as GREEN
-   while describing a body that no longer exists, which is the exact failure
-   `bodycheck.py` was built to catch.
+   ⚠️ **CORRECTED by link 04 (2026-09-08): the `SRC:` hash did NOT need
+   re-taking and MUST NOT be.** It pins the SHIPPED body
+   (`TrackElement.lua:467-618`), not ours, so a module-side edit cannot move it;
+   `--pin` re-run after the edit emitted the identical `7466b940…` and the module
+   reads OK either side (link 04's `fc318c7` records both runs). The check that
+   actually catches a wrong edit here is a diff of OUR module against `e2490f3`:
+   expect exactly the two ruled changes in the split branch plus the rewritten
+   header block, and treat anything else as a finding. ⛔ A "re-stamp" on a
+   module-side edit is the one move `FIX_POLICY` §2b forbids by name — re-pinning
+   to make a BODY-CHANGED go away — so do not reintroduce the instruction.
    ⛔ **Do not treat the owner's ruling as making the change correct.** The
    ruling settled *whether* to do it; whether the code is right is yours. It has
    never run in a game, F116 has never been reproduced, and the module is
@@ -737,3 +742,116 @@ Two things ride with it and both bind you:
    the full log** and say which save it was. ⛔ Do NOT copy a save as insurance
    (`H-06`: loading a copy runs that campaign's autosave rotation and deletes the
    owner's autosaves).
+
+### From link 04 — the re-copies (F-6, F-7) and the F116 edit (§7)
+
+*(Link 04, `smr-bugfixpack-ba`, 2026-09-08. Commits `3f8394b` F-7 · `177c7b2` F-6
+· `fc318c7` F116 · the close-out commit carries this note. ⛔ Nothing was run in a
+game; no status moved. 45 files / 44 modules unchanged; `items.lua` and
+`metadata.lua` not opened.)*
+
+**1 · Per module — what was copied, what was NOT carried, the decline condition,
+and what has not been exercised (which, for all three, is everything).**
+
+* **F-7 `Fix_RocketDroneChurn`** — the 1.1.0
+  `CargoTransporterNew:UpdateCargoResourceRequests` (`CargoTransporterNew.lua:
+  1430-1463`) with the F50 changes re-applied. Two-sided diff against the archived
+  1.0.7 body: ONE line differs (the `not self.refuel_disabled` clause, `:1442`);
+  our old copy's non-FIX lines matched 1.0.7 exactly. NOT carried: nothing.
+  Decline: a `test` on `UniversalRocketBase.ToggleRefuel` + the `refuel_disabled`
+  property (0 hits on 1.0.7). ⚠️ **Deviation from §4.3's "the per-module probe",
+  stated:** a `test`, not a `probe`, because `TransportableResourceIds` is EMPTY
+  at `ClassesBuilt` on a cold boot (`PreProcessResources` fills it on
+  `DataChanged`, `Resources.lua:404-449`, `:492-500`) and a stub probe there reads
+  UNKNOWN and kills the module every cold start. `FIX_POLICY` §2a admits the shape
+  `test` where a probe cannot be shown reliable; the reason is in the file. If 99
+  disagrees, the alternative is a probe run from a `DataLoaded` pass (the F-1
+  shape), never a version check. Not exercised: the toggle, the hourly path, the
+  drones.
+* **F-6 `Fix_PayloadTemplateRefill`** — three bodies: `RetrieveRequests`
+  (`:194-243`), the file-local `resolve_loc_cargo_template` (`:169-192`,
+  reproduced), and `Apply` (`:368-385`, now a body copy instead of a pre-wrapper so
+  the stamp can sit on the CONFIRMED path). All three 1.1.0 changes carried
+  (destination-pick exemption, tutorial branch, automode nil-guard). ⚠️
+  **Departure from the QA's pinned shape, stated:** the gate lives INSIDE the
+  resolve, AFTER the `g_Tutorial` block, rather than around the resolve call in
+  `RetrieveRequests` — same predicate, and the only placement where the tutorial
+  return precedes it. Both confirmed branches stamp (mid-flight and `CmdLoad`);
+  the cancel branch does not. NOT carried: the 1.0.7 `Apply`'s
+  `target_spot`/`requested_spot` lines (gone from 1.1.0). Decline: a behaviour
+  `probe` — the shipped `RetrieveRequests` on a stub with `prev_flight_data` and a
+  stored request of 5; applies only if it files 0. Executed on BOTH shipped bodies
+  under Lua 5.4: 1.1.0 files 0, 1.0.7 files 5. The stub contract is in the file
+  (`table.find` returns on a nil array, `LuaExportedDocs/Global/table.lua:9-11`,
+  so the nil-template path the probe takes is the shipped body's own everyday
+  case). Not exercised: the dialog, a pick, the tutorial, the cancel path.
+* **F116 `Fix_TrackSalvageWipe` §7** — ck111: vanilla's rehome loop (`:580-595`)
+  replaces the F44 delete loop; a `tracks` list built from the sides that actually
+  seeded. ck119: vanilla's tail (`:597-613`) with combined-list processing inlined
+  through the already-Required `ProcessTrackElements` (= `TrackBase:
+  ProcessAllElements`, `Track.lua:466-469`); counted loop instead of `ripairs`.
+  NOT changed: anything else; the `OnMsg.LoadGame` sweep (ruled). No gate added —
+  the latch/WhenActive trap from 03 is exactly why. Not exercised: everything;
+  F116 has never been reproduced.
+
+**2 · ⚠️ DRIFT IN MY OWN PROMPT AND IN YOUR PASS D, corrected (chain rule 5).**
+`04` §7 trap 1 and your Pass D item 2 both said the `Fix_TrackSalvageWipe` `SRC:`
+hash "had to be re-taken" after the edit. It cannot be: the pin hashes the SHIPPED
+body (`TrackElement.lua:467-618`), not ours. `--pin` re-run after the edit emits
+the identical `7466b940…`; the module reads OK before and after. Link 01's session
+(`smr-bugfixpack-25`) reached the same reading unprompted. **I rewrote Pass D item
+2's paragraph** so the audit diffs OUR module against `e2490f3` and expects exactly
+the two ruled changes plus the header block. A false "re-stamp" instruction would
+have a future session re-pinning to silence a BODY-CHANGED — the move §2b forbids.
+
+**3 · ⭐ The 1.0.7 tree is back (`ad5f93d`,
+`C:\Dev\SMR-SrcArchive\1.0.7.396349\Src`) and it changed what this link could
+claim.** Link 01's outbox item 4 ("no true 1.0.7-vs-1.1.0 game body pair exists")
+is out of date. `bodycheck.py --src <that tree> --module TrackSalvageWipe` →
+BODY-CHANGED (pinned `7466b940…`, 1.0.7 body `fab72089…`, `:448-578`) — a real
+game-side branch pair, RED as it should be. Both re-copies were diffed two-sided,
+and `ProcessAllElements` = 0 hits on 1.0.7 (F116's premise, now verified). Link 25
+offered to fold the 1.0.7 leg into `--selftest`; I left the tool alone (05's
+fence) — 05/99 decide. ⚠️ The archive's `DLC/` subtree is NOT clean 1.0.7 (12
+files vs 151; a Steam artefact of the branch switch); base-game paths are sound.
+
+**4 · Desk controls, under a REAL Lua 5.4 — `lupa` is installed on this rig.**
+There IS a Lua parser here, contrary to 01's and 03's "no Lua binary" notes (no
+binary, but a Python-embedded Lua 5.4). The parse sweep is `load()` on every
+`Code/*.lua`, falsified on a chunk missing an `end`; 45/45. Controls (scripts in
+the session scratchpad, NOT committed — 05's call whether any becomes a tool):
+the shipped 1.1.0 + 1.0.7 `RetrieveRequests` on the F-6 probe's stub (0 vs 5);
+our F-6 copies through six cases (fresh 0 · stamped 5 · stamped+pick 0 · tutorial
+rocket 2 stamped 7 · template-first-use 9 · template-stamped 0); the shipped 1.1.0
++ 1.0.7 + our `UpdateCargoResourceRequests` on a refuel-disabled stub (fuel demand
+0/100/0; our disconnects 0 steady, 1 on a missing request); our
+`DemolishAndSplitTrack` on a synthetic 6-element track with a broken expansion
+link and a mixed track (orphan rehomed into a third track; three combined lists
+processed; none under `skip_track_process`; one new track on a clean split). ⛔
+Stubbed harnesses on synthetic input: they say the Lua does what was asked and
+NOTHING about a real map.
+
+**5 · Filed, not fixed.**
+* Test Kit `PayloadTemplateRefill` probe (`30_Probes_Wave3.lua:11-70`) now
+  FALSE-FAILs: it stubs `CreateRealTimeThread` to a no-op and expects `Apply` to
+  stamp synchronously; the stamp is inside the thread's confirmed branch now. The
+  owner is warned in the checklist (LINK 04 block). Third such probe after 03's two.
+* `bodycheck.py`'s summary reports **no row** for a `SRC:` line that deliberately
+  carries no `DEFECT:` (F-6 has two, F-1 one): the pack-wide `NO-DEFECT` count was
+  1 before this link and is 1 after. Either the count keys on the module rather than
+  the row, or those rows are silently OK — either way a deliberate no-defect pin is
+  invisible in the summary. Cosmetic; 05.
+* Link 01's outbox items 2 and 4 in `04` (and §4.3) read "the per-module probe" as
+  the only admissible guard; §2a's own text admits the shape `test`. F-7 is the
+  first module to need it, with the reason recorded. Worth one sentence in 05's
+  `FIX_POLICY` pass if 99 agrees.
+* My prompt's §9 says the in-play controls "for these three is everything" and
+  routes them to the checklist as owed — the addendum's ruling (deferred to one
+  post-99 sitting) supersedes that and was followed: rows 4–6 join link 03's rows
+  1–3, no second sitting opened.
+
+**6 · What may NOT be claimed.** Not "tested" — nothing ran in a game. Not
+"matches vanilla" beyond what `bodycheck.py` says about the SHIPPED bodies and the
+two-sided diffs say about our copies. Not "the gates are unnecessary". Not "F116 is
+fixed" — never reproduced, and a desk harness is not a map. Not "F-7's decline is
+proven on 1.0.7" — argued from 0 grep hits in the archived file, not from a boot.
