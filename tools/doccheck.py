@@ -830,6 +830,46 @@ def bodycheck_selftest(out):
     return False
 
 
+def parse_gate(out):
+    """Every Code/*.lua must parse (tools/parsecheck.py).
+
+    Three consecutive chain links hand-rolled a Lua block-balance checker to
+    stand in for a syntax check, and two of them silently accused
+    byte-identical files -- 01's flagged one, 02's flagged sixteen. There is a
+    real parser on this rig; parsecheck.py uses it, ships with its own
+    falsifier (01's condition), and this is the gate that stops a fourth
+    session writing a fourth counter.
+
+    ⚠️ Syntax ONLY, and weaker than every other gate here. The Test Kit is
+    reported, never gated -- same standing as testkit_tree, by the owner's
+    2026-08-04 decision that the kit does not block the pack.
+    """
+    tool = os.path.join(os.path.dirname(os.path.abspath(__file__)), "parsecheck.py")
+    if not os.path.isfile(tool):
+        out.append("PARSE: not checked (tools/parsecheck.py absent)")
+        return True
+    ok = True
+    for label, path, gates in (("Code/", CODE, True),
+                               ("TestKit", os.path.join(TESTKIT, "Code"), False)):
+        if not os.path.isdir(path):
+            continue
+        try:
+            p = subprocess.run([sys.executable, tool, "--dir", path],
+                               capture_output=True, text=True, encoding="utf-8",
+                               errors="replace", timeout=300)
+        except Exception as exc:              # a tool bug must report, not crash
+            out.append("PARSE (%s): not checked (%s)" % (label, exc))
+            continue
+        lines = (p.stdout or "").strip().splitlines()
+        summary = lines[-1] if lines else "no output"
+        out.append("%s%s" % (summary, "" if gates else "  (report-only)"))
+        if p.returncode and gates:
+            for line in lines[:-1]:
+                out.append("  RED  %s" % line)
+            ok = False
+    return ok
+
+
 def counts_block(counts):
     """A STATE-ready block; commit bodies may paste it verbatim."""
     lines = [
@@ -885,6 +925,7 @@ def main():
     ok = temporary_sweep(out) and ok
     ok = load_order(out) and ok
     ok = wrap_targets_check(out) and ok
+    ok = parse_gate(out) and ok
     ok = module_set_agreement(out) and ok
     ok = bodycheck_selftest(out) and ok
     testkit_tree(out)  # report-only by owner decision (2026-08-04) — never gates
