@@ -9,7 +9,7 @@
 >
 > | job as written | status 2026-09-09 |
 > |---|---|
-> | 1 · is the dust-devil marker path reachable? | ⛔ **MOOT** — the defect it gated is fixed in 1.1.0 vanilla (`DustDevils.lua:170` now reads `HasDustStorm(map) or DustStormsDisabled`; evidence and the 1.0.7 control are in `smrcf-text/README.md`'s banner) |
+> | 1 · is the dust-devil marker path reachable? | ⛔ **MOOT** — the defect it gated is fixed in 1.1.0 vanilla. Evidence and the 1.0.7 control are **`facts/EF-084.md`** (moved there when `smrcf-text/` was consumed, so the finding outlived the folder) |
 > | 2 · does `AsyncPopsDownloadFile` exist at runtime? | ⏸ only if `C52` is unparked — it is `parked` by owner ruling 2026-08-20 |
 > | 3 · is map generation drivable from Lua? | ⛔ **MOOT** — existed to plan chain D, which was consumed 2026-09-09 (`49e32bf`) |
 > | 4 · does any save contain a Jumbo Cave? + `UndergroundRework106` | ⛔ **MOOT** — `C25` was confirmed from a field save and shipped as `F110` |

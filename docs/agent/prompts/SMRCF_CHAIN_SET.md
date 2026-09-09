@@ -21,7 +21,7 @@
 > | chain | folder | state 2026-09-09 |
 > |---|---|---|
 > | **A** | `smrcf-verify/` | ⚖️ **rewrite** (owner, 09-09) — collapsed to ONE item, the `C35` detector; see its README banner |
-> | **B** | `smrcf-text/` | ⛔ **dead, nothing owed.** `C50`+`C51` were built 08-20 then DELETED in the 1.1.0 REMOVE pass; the dust-devil rider is REFUTED on 1.1.0 |
+> | **B** | ~~`smrcf-text/`~~ | ⛔ **CONSUMED 2026-09-09.** `C50`+`C51` were built 08-20 then DELETED in the 1.1.0 REMOVE pass; the dust-devil rider is REFUTED on 1.1.0 and its evidence moved to `facts/EF-084.md` |
 > | **C** | `smrcf-modbrowser/` | ⏸ **kept** (owner, 09-09) — `C52` is `parked`, but its three source findings still hold and defect 3 touches our own store preview |
 > | **D** | `jumbo-cave/` | ⛔ **CONSUMED 2026-09-09** (`49e32bf`, grave `33b3ad0`) — `C25` was confirmed from a field save and shipped as `F110` |
 >
@@ -128,7 +128,7 @@ that is wrong on two surfaces for the second time.
 Start any chain by opening a fresh session at the named file and saying so:
 
 - **A** → `docs/agent/prompts/smrcf-verify/01_PROBE_opus.md` — *"run the smrcf verify probe"*
-- **B** → `docs/agent/prompts/smrcf-text/01_BUILD_opus.md` — *"run the smrcf text chain"*
+- ~~**B**~~ — CONSUMED 2026-09-09; nothing to run. Refutation: `facts/EF-084.md`.
 - **C** → `docs/agent/prompts/smrcf-modbrowser/01_SPEC_fable.md` — *"run the mod browser chain"*
 - **D** → `docs/agent/prompts/jumbo-cave/01_FEASIBILITY_opus.md` — *"run the jumbo cave chain"*
 - **docs checkup** → `docs/agent/prompts/PUBLIC_DOCS_CHECKUP_fable.md` — *"run the public docs checkup"*
