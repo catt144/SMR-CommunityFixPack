@@ -88,7 +88,7 @@ present (`LawDef-Technology.lua:14`, `:107`, `:194`; `ActiveLaws` in 76 files,
 `modifications` in 25). So F112 is live, not theoretical.
 
 **⚠️ 2c · THE "31 FULL REPLACEMENTS" FIGURE WAS WRONG, AND THE CORRECTION IS NOT
-A BETTER NUMBER.** The detector tested `orig`, which does not match
+A BETTER NUMBER.** The detector tested `\borig\b`, which does not match
 `orig_update_end` — so chained wrappers using an `orig_<something>` upvalue were
 misfiled as replacements. Re-run with `\w*(orig|prev|base_fn|inner)\w*`: **12
 flagged (~11 vanilla, `00_Core.lua` being the pack's own core)**, not 31.
