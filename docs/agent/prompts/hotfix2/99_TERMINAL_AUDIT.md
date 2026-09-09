@@ -1214,6 +1214,25 @@ verbatim shipped body.
    with no content change**, and the owner would be told to run an eviction for
    nothing. My edit leaves it at **9212 (LF), under the warn**, but the
    sensitivity is real. doccheck should measure the file as git stores it.
+
+   ✅ **DISCHARGED 2026-09-09 (`smr-bugfixpack-0e`, on-call, owner-authorised) —
+   fixed from the git side, so doccheck needs no change.** `.gitattributes` now
+   pins `docs/agent/STATE.md text eol=lf` (same shape as the existing
+   `tools/hooks/*` pin), so every checkout materialises LF and the cap measures
+   content instead of a checkout artefact. ⛔ **The phantom was real, not
+   projected**: a fresh `git clone` of the pre-pin HEAD measured STATE.md at
+   **9316 B / 105 CR** and doccheck printed the size warn verbatim, exit **0**
+   (a size warn never blocks — `ok` is set by RED only). ⚠️ `core.autocrlf=true`
+   is **system-level** here, the Git-for-Windows default, so this was every
+   Windows clone's behaviour and not a quirk of one checkout. ⚠️ The `104`/`9297`
+   /`9193` numbers above were correct for that day's line count; the delta is
+   exactly **one byte per line**, so re-derive it, never quote it.
+   ⛔ **The margin is the part that still bites: 9211 B against a 9216 warn = 5
+   BYTES of real headroom.** §4's own requirement that this link point `STATE.md`
+   at the audit report is a ~60–120 B addition ⇒ **99 trips the warn with
+   certainty** and must budget an eviction in the same commit (link 06 got away
+   with it only because `02–05` → `02–06` is byte-neutral). Link 07's re-emitted
+   probe count is ~0 B while it stays three digits, so 07 probably does not.
 3. `bodycheck.py --help` and `upload_preflight.py --help` still raise
    `UnicodeEncodeError` on this rig's cp1252 console. I fixed `sigcheck`,
    `logscan` and `parsecheck` (three lines each); both of those are outside my
@@ -1238,6 +1257,47 @@ verbatim shipped body.
    left a literal `0x01` byte inside a path that rendered as almost-right. Four
    lines, real failure behind it. I did not build it — it is a third unrequested
    gate and rule 3 says file, do not fix.
+
+   ⭐ **ADDENDUM 2026-09-09 (`smr-bugfixpack-0e`, on-call, owner-authorised): the
+   scan was RUN, and it changes the gate's spec in two ways.** Scanned all **573
+   tracked files** plus the 26 relevant TestKit files. Result: **3 files, 6
+   bytes** — and ⛔ **the population is not what item 7 describes.**
+   * ⚠️ **Build it over `docs/` as filed and it is RED on day one and RED
+     FOREVER.** 4 of the 6 bytes are in `docs/archive/PLAYTEST_ARCHIVE.md`
+     (2× `0x07`, from `\agent` → renders `gent/bugs/F46.md`) and
+     `docs/archive/SESSION_LOG.md` (2× `0x08`). `docs/archive/` is append-only
+     and never edited, so **those 4 bytes can never be repaired** — the gate
+     MUST exclude `docs/archive/` or carry a 4-byte baseline.
+   * ⚠️ **The mechanism is wider than "`0x01` in a path", and a path-shaped
+     check misses the worst case.** Three escapes have been eaten so far —
+     `\1`→`0x01`, `\b`→`0x08`, `\a`→`0x07` — i.e. exactly the **recognised** C
+     escapes. In the same sentence as an eaten `\b`, a `\w*(...)\w*` regex
+     **survived intact**, because `\w` is not a recognised escape. ⇒ the
+     corruption is selective and silent: it eats precisely the escapes that
+     leave plausible-reading text behind.
+   * ⛔ **The `reports/GAME_1_1_0_AUDIT.md` §2c instance did not mangle a path —
+     it INVERTED A TECHNICAL CLAIM, and I repaired it** (2 bytes, `\borig\b`
+     restored). As shipped it read *"The detector tested `orig`, which does not
+     match `orig_update_end`"*, **false as rendered** — a bare substring `orig`
+     does match `orig_update_end`; the eaten `\b` was the whole reason the
+     sentence was true. §2c's conclusion (population ~11–31, unsettleable by
+     regex) was never affected, only its evidence line — but a reader checking
+     the reasoning finds it does not hold, and the available inference is that
+     the caution was unfounded, i.e. **re-trust a regex classifier.** That risk
+     was live and pointed at: `reports/GAME_1_1_0_IMPACT.md:302` routes readers
+     to §2c for exactly this, and §5 row 103 of THIS file refutes the sibling
+     24/66 census from the *same* failure mode. ⚠️ The two `docs/archive/`
+     copies of that same sentence still carry the inversion and MUST NOT be
+     edited — cite §2c, never the archive copy.
+   * ⇒ **Scope the gate to the repo, not `docs/`.** The highest-consequence case
+     is currently clean and is the reason the four lines earn their place: the
+     same trap inside a `tools/*.py` regex. A `\b` silently becoming `0x08` in
+     `sigcheck`/`doccheck`/`logscan` makes the instrument quietly wrong **while
+     reporting green** — the exact F114 class ("an instrument being green never
+     means the code was checked"). `tools/`, `Code/`, `items.lua`,
+     `metadata.lua` and the TestKit are **0 of 6** today.
+   * ⛔ **Still not built.** Rule 3 holds for the gate itself; the owner
+     authorised the scan and the two repairs, not a third gate.
 8. The same peer notes a planned two-tree function differ (`VANILLA_DIFF_HUNT.md`)
    is scoped to import `luafn.find_bodies`. ✅ **I did not touch `luafn.py` or the
    `find_bodies` contract**; `bodycheck` still imports it unchanged.

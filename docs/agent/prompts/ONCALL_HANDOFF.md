@@ -187,14 +187,22 @@ be left exactly as it stands. **Link 99 owns all of it.**
   and on `commit`. ⚠️ A `git status` pre-check **cannot close that race**. Treat
   an unexpected `LF will be replaced by CRLF` warning naming a file you never
   touched as a collision alarm, not noise — that is how both were caught.
-- ⚠️ **`STATE.md`'s byte cap is line-ending sensitive, so a WARN can be a
-  phantom.** The blob is LF and `core.autocrlf` is true: the same content
-  measures **9203 B as LF and 9310 as CRLF** against a 9216 warn — verified at
-  commits `e96a1ff` / `5daaeb5` (9203 + 107 lines = 9310 exactly). ⛔ **A fresh
-  clone WARNS with no content change**, and evicting for that costs the owner
-  content for nothing. Check line endings before you trim, and take two readings
-  — a CRLF-shaped number read mid-`git` operation already fooled one session
-  (mine) into calling it a random "transient".
+- ✅ **`STATE.md`'s line-ending phantom is FIXED — do not re-diagnose it.**
+  It WAS line-ending sensitive: blob LF, `core.autocrlf=true` **system-wide**
+  (the Git-for-Windows default), so a fresh clone materialised CRLF, added one
+  byte per line, and doccheck warned on content that never changed — costing the
+  owner an eviction for nothing. Measured on a real clone of the pre-pin HEAD:
+  **9316 B / 105 CR** against a 9216 warn. `.gitattributes` now pins
+  `docs/agent/STATE.md text eol=lf` (2026-09-09), so the cap measures content.
+  ⚠️ If you still see a size warn, it is **real** — do not go looking for the
+  artefact. Confirm with a CR count (`b.count(b'\r')` must be 0), then trim.
+  ⛔ **What DOES still bite: the margin. 9211 B against a 9216 warn = 5 BYTES.**
+  Any STATE addition needs an eviction in the same commit, and link 99 is
+  required to add a pointer line, so 99 trips it. ⚠️ A size warn is GREEN and
+  **never blocks a commit** (`doccheck`'s `ok` is set by RED only) — its designed
+  consequence is that the owner fires `STATE_EVICTION.md`, i.e. it costs a
+  session, not a build. ⛔ Never quote a stored byte number: the CRLF delta is
+  exactly one byte per line, so it moves with the line count. Re-derive.
 - Generated `INDEX.md` files: regenerate via `load_from_dir` + `render_index`
   (it returns a LIST — join it). ⛔ Never hand-edit one.
 
@@ -217,8 +225,26 @@ almost-right path rather than failing loudly, and an `Edit` cannot match it
 because the bytes are not what the text appears to be. It shipped a broken
 archive path into a prompt on 09-09, and the *first repair re-introduced it* the
 same way. ⇒ **use the `Write`/`Edit` tools for such content**, or explicit byte
-values. A four-line control-character scan over `docs/` is filed for `99` as a
-candidate `doccheck` gate.
+values.
+
+⭐ **The scan has now been RUN (09-09), so do not re-derive its population — but
+know that it eats MORE than `\1`.** All **573 tracked files** plus the TestKit:
+**3 files, 6 bytes**, and three different escapes — `\1`→`0x01`, `\b`→`0x08`,
+`\a`→`0x07`. ⚖️ **Only the RECOGNISED C escapes are eaten**: a `\w*(...)\w*`
+regex in the very same sentence as an eaten `\b` **survived intact**. That is
+what makes the trap silent — it destroys exactly the escapes that leave
+plausible-reading text behind, and leaves the ones that would look obviously
+wrong. ⛔ **It is not only a mangled-path problem: in `reports/GAME_1_1_0_AUDIT.md`
+§2c it INVERTED a technical claim** (`\borig\b` → a bare `orig`, making a true
+sentence false). ✅ That one is REPAIRED. ⛔ **The 4 bytes in
+`docs/archive/SESSION_LOG.md` + `PLAYTEST_ARCHIVE.md` can NEVER be repaired** —
+append-only — so cite §2c, never the archive copy of that sentence.
+⇒ ⚠️ **The `doccheck` gate is still filed for `99`, and its spec changed**: over
+`docs/` as originally filed it goes RED on day one and RED forever on those 4
+archive bytes. It must exclude `docs/archive/` and should cover the **repo**, not
+just `docs/` — the case worth catching is a `\b` rotting a regex inside
+`tools/*.py`, which would make an instrument quietly wrong while reporting green.
+`tools/`, `Code/`, `items.lua`, `metadata.lua` and the TestKit are clean today.
 
 ## 7 · How to work with the owner
 
