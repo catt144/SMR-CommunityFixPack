@@ -150,6 +150,144 @@ what it was written for" and is not what a player reads.
 
 ---
 
+## 3 · §1b — the 44-module classification
+
+### 3a · Method and provenance
+
+Four read-only subagents, one written brief (the probe contract from
+`00_Core.lua:117-141` and `FIX_POLICY` §2a, the two shipping probes as models,
+a fixed output format, `NOT OPENED` mandatory where a body was not read).
+`Code/` read at `3fdde36`; unchanged through `641613e` (link 06 touched only
+`metadata.lua` and docs). Shipped tree: 1.1.0. Each row below is that reader's
+verdict; §3d says which I re-derived myself. Check counts: E = existence forms,
+T = `test`, P = `probe`; "inline" = a hand-rolled `rawget`/`type` check outside
+any `Require` block.
+
+Four engine facts every reader hit and cited, stated once: (1) `apply` runs
+inside `ModsLoadCode()` before class flattening and before presets load, so a
+probe may call only what a class DECLARES and any target that walks preset
+tables at body level throws on every stub; (2) every `GameVar` is `false` at
+apply time (`lib.lua:1069-1083`) — `g_Consts`, `UIColony`, `MainCity`,
+`SessionRandom`, `MainMap` all index-throw at the menu; (3) `IsValid`,
+`IsKindOf`, `IsKindOfClasses` are C and a plain-table stub never passes them;
+(4) `OnMsg` is write-only (`cthreads.lua:64-73`), so a shipped handler has no
+callable handle and `Msg(...)` fires every listener.
+
+### 3b · The table
+
+| # | module | checks | install site(s) | verdict | why, in one line |
+|---|---|---|---|---|---|
+| 1 | `90_SaveSanitizer` | E2 | HANDLER | UNPROBEABLE | both compensated fixups mutate live state from their first statement (`WindTurbine.lua:96`, `Station.lua:1500 DoneObject`) |
+| 2 | `Fix_AnomalyCaveInMap` | E2, SetGlobal×2 | PRE-TAIL ×2 | UNPROBEABLE | the unguarded map read (`CaveInRubble.lua:109`) is observable but no stub path returns cleanly: `SessionRandom` is `false` at the menu, else rubble is placed |
+| 3 | `Fix_ArrivalDeaths` | E9 | PRE-TAIL ×2 | PARTIAL | the `Idle` seam (`Colonist.lua:2233-2236`) is stub-safe; the pinned `Arrive` body fires `Msg`, `Attach` and a `Sleep` destructor |
+| 4 | `Fix_BombardmentSpread` | E8, SetGlobal | REPLACE | UNPROBEABLE | the defect line sits inside the spawn loop after `PlayFX`; the body yields and spawns threads; `SessionRandom` throws at the menu |
+| 5 | `Fix_BrokenTrackSalvage` | E1 T1 | POST + HANDLER | UNPROBEABLE | the params copy (`Track.lua:631-640`) is observable only past `PlaceConstructionSite` (`:641`); the existing `test` on `node_idx == false` is the right proxy |
+| 6 | `Fix_CrystalMysteryHang` | E2 | HANDLER ×3 | UNPROBEABLE | a thread proc (`Crystals.lua:46` spawns at its first statement); nothing is wrapped |
+| 7 | `Fix_DestroyedTunnels` | E2 | PRE-TAIL + HANDLER | UNPROBEABLE | the only guard is `IsValid` (`Tunnel.lua:194`), false on any stub and indistinguishable from a body that gained a `destroyed` test; past it is `pf.AddTunnel` |
+| 8 | `Fix_DomeFreeSpaceMismatch` | E2 | REPLACE | PARTIAL | call/result shape observable; the second-argument axis (`_GameUtils.lua:541/:544`) sits behind `ValidateBuilding` on a real object |
+| 9 | `Fix_DomeOverviewHighlight` | E2 | REPLACE | PARTIAL | the exact defect line (`ColonyControlCenter.lua:1300`, `v` vs `tv`) is observable, but `:1294` indexes `g_Consts`, `false` at apply ⇒ always declines at the menu |
+| 10 | `Fix_DroneTransportMinors` | E2 | PRE-TAIL | **PROBEABLE** | stub restrictor table with two keys; `true` iff only `Fuel` was cleared (`DroneControl.lua:673-674`); an empty serviced list stops the loop |
+| 11 | `Fix_DustSicknessBiorobots` | DataPatch, no `Require` | DATA + HANDLER | UNPROBEABLE | no function; the pass's own walk is the content check |
+| 12 | `Fix_ExoticDepositSign` | E2 T2 | DATA + HANDLER | UNPROBEABLE | a class-default write; the `test` on `entity` is the content verdict |
+| 13 | `Fix_ExtenderFlapChurn` | inline E1, no `Require` | REPLACE (PRE-TAIL bypass when inactive) | **PROBEABLE** | stub records Disconnect→Connect on the CAPTURED `orig` (`DroneHubExtender.lua:109-112`); installs at file scope, so a probe must hook that path |
+| 14 | `Fix_FounderTraitNotification` | E2 | HANDLER | UNPROBEABLE | an `OnMsg` handler; the defective table is file-local (`ColonyViability.lua:300`); `Msg`-based probing posts a real notification |
+| 15 | `Fix_FreedHousingNotice` | E3 | POST | **PROBEABLE** | `Residence.RemoveResident` on a stub: `true` iff `ResetFreeSpace` ran and no homeless wake (`Residence.lua:119-126`); positive capture required (`Colonist.lua:2901` early return does nothing) |
+| 16 | `Fix_GeneForging` | E2, SetGlobal | POST | UNPROBEABLE | a parameterless global over live research state (`Colonist.lua:4398`); its header forbids a branch guard anyway |
+| 17 | `Fix_GhostFarmOxygen` | E2 | PRE-TAIL + HANDLER | **PROBEABLE** | `FarmBase.ApplyOxygenProductionMod` on a stub dome: `true` iff `SetModifier("air_consumption", farm_id, 0, 0)` (`Farm.lua:634-644`); never probe `SetDome` (C `IsKindOf` on self) |
+| 18 | `Fix_GraphConsumedCaption` | E5 | POST | UNPROBEABLE | body iterates `GroupResourceIds`/`Presets.TerraformingParam`, empty until presets load (after `ModsLoadCode`); `GetCityResourceOverview` leaks an object on a bare stub |
+| 19 | `Fix_JumboCaveReinforcementWedge` | E3 | HANDLER ×2 | UNPROBEABLE | pinned target is a file-local consuming `InteractionRand` (`WasteRock.lua:328-331`); handler inputs are live-game only |
+| 20 | `Fix_LakeEntombment` | E2 | POST | PARTIAL | the timing premise needs the engine `PlacePrefab` (`LandscapeLake.lua:290`); a stub-safe proxy exists for the RC exemption in `ScatterUnitsUnderneath` (`ConstructionSite.lua:1918`) |
+| 21 | `Fix_LanderEmptyLaunch` | E5 | POST | **PROBEABLE** | seven-method stub; `true` iff the shipped `IsCargoReady` says ready for an auto-mode rocket in its wait window with an empty request (`UniversalRocket.lua:535-559`); keep `instant` nil |
+| 22 | `Fix_LandscapeUnitFilter` | E2 T1 P1 | REPLACE | **PROBEABLE (probed)** | sees the 1.1.0 signature/storage (`Landscaping.lua:510`), not the defect line (`:522`) — §2a |
+| 23 | `Fix_LayoutTechLock` | E3 | POST | UNPROBEABLE | **HIGH**: a naive probe leaks the stub into the `s_ConstructionControllerDeleteOnLoad` GameVar (`LayoutConstruction.lua:385`) |
+| 24 | `Fix_MirrorSphereSite` | E1 T1 | PRE-TAIL | PARTIAL | guard-order proxy only; past `:838` the body writes `InteractionSeeds`, calls `NetUpdateHash` and leaks a thread |
+| 25 | `Fix_NightShiftWork` | E1 | POST | UNPROBEABLE | reads live colony state; nothing discriminating on a stub |
+| 26 | `Fix_PayloadTemplateRefill` | E8 P1 | REPLACE ×2 | **PROBEABLE (probed)** | ⚠️ the probe indexes `FlightPolicies`, a `ClassesBuilt` global; safe by boot order (the mod-less first pass built it), fragile; this probe has NEVER run in a real boot (`177c7b2` postdates the newest log) |
+| 27 | `Fix_RocketDroneChurn` | E3 T1 | REPLACE | PARTIAL | the defect axis is observable on an empty list; the `refuel_disabled` branch is not; the header explains its `test` |
+| 28 | `Fix_RocketInteractGuard` | E3 + inline ×2 | PRE-TAIL ×2 | UNPROBEABLE | a plain-table stub meets C `IsValid`/`IsKindOfClasses` before anything discriminating |
+| 29 | `Fix_SaintBlessing` | E3 P1, DataPatch | DATA + HANDLER | **PROBEABLE (probed)** | the F-1 probe; positive capture of the filed label |
+| 30 | `Fix_SequenceLatents` | inline E2, no `Require` | POST + PRE-TAIL | UNPROBEABLE | (a) writes `InteractionSeeds`/`NetUpdateHash` past the guard; (b) `GameInit` on a stub reaches `AddToLabel` in-game |
+| 31 | `Fix_ShelterReflex` | inline E2, no `Require` | PRE-TAIL | UNPROBEABLE | re-enters a command thread in-game; at the menu a stub throws at C `IsValid`/`GetMap` |
+| 32 | `Fix_ShuttleHubOffAvailable` | E3, SetGlobal | POST | **PROBEABLE** | stub city with a hub label: `true` iff the shipped `IsLRTransportAvailable` answers on the hub's mere presence |
+| 33 | `Fix_ShuttleTransportCache` | E3 | REPLACE | UNPROBEABLE | assigns the live routing cache past `:3179` (`Colonist.lua:3182`); ⚠️ plain-assignment global replacement, no `SetGlobal` read-back |
+| 34 | `Fix_SinkholeIndestructible` | E2, DataPatch | DATA | UNPROBEABLE | a class-table write by design |
+| 35 | `Fix_StaleReservations` | E2 | POST + HANDLER | **PROBEABLE** | stub residence: `true` iff `ReserveResidence` records the unit and returns truthy; do not inherit from `Residence` (`IsSuitable` reads a global filter) |
+| 36 | `Fix_TrackConnectorPingPong` | E11 | REPLACE + POST (tail exit) | UNPROBEABLE | **HIGH**: places real `TrackBase`/`TrackGridElement` objects (`TrainTransport.lua:133-152`) |
+| 37 | `Fix_TrackSalvageRefund` | E7 | REPLACE + POST (PRE-TAIL early exit) | **PROBEABLE (half A)** | `GetRefundResources` on a stamped stub element; half B shares row 38's dangerous body |
+| 38 | `Fix_TrackSalvageWipe` | E7 | REPLACE + HANDLER | PARTIAL | branch-shape proxy only; **HIGH** past `:493` (`Msg("StationsDisconnected")`, `SuspendPassEdits`, `DoneObject`/`PlaceObjectIn`) |
+| 39 | `Fix_TrackTunnelPowerBridge` | E6 | PRE-TAIL + HANDLER ×2 (⚠️ neither `WhenActive`) | UNPROBEABLE | a static handler is the target; `ConnectToGrids` merges real grids |
+| 40 | `Fix_TrainCargoDumping` | E3 T1 P1 | REPLACE | **PROBEABLE (probed)** | contract verified line for line against `Train.lua:779-805`; misses its own DEFECT line — §2b |
+| 41 | `Fix_TrainWaitTime` | E8 | PRE-TAIL | PARTIAL | call-order proxy; the `PlayPrg` loop (`ColonistTransport.lua:636`) runs on the apply thread if the stub's `SetHolder` is not a no-op |
+| 42 | `Fix_TrainsToVoid` | E3 | PRE-TAIL | UNPROBEABLE | **HIGH**: `Msg("BuildingDemolished")` fan-out (`Building.lua:908`) and a possible thread (`:906`); never probe |
+| 43 | `Fix_VacuumWalks` | E14 T1 P1 | REPLACE | **PROBEABLE (probed)** | contract verified against `Colonist.lua:1886-1983`; a task without `shuttle = true` reaches `CreateColonistTransportTask` |
+| 44 | `Fix_WispRewards` | E1 | REPLACE (⚠️ bare global, no read-back) | UNPROBEABLE | **HIGH** in-game (kills wisps, grants RP); throws at the menu on `false.mystery` |
+
+### 3c · Tallies
+
+| | count |
+|---|---|
+| PROBEABLE | **13** (5 already probed + 8 candidates: rows 10, 13, 15, 17, 21, 32, 35, 37) |
+| PARTIAL — a proxy of the assumption, not the assumption | **8** |
+| UNPROBEABLE | **23** |
+| modules whose reader recorded a side-effect hazard for a naive probe | **30 of 44** (6 marked HIGH; group A's seven describe object placement, thread leaks or engine writes without the word) |
+| targets that are "observable only through a throw" (the contract reads a throw as decline) | 3 (rows 2, 5, 3's `Arrive`) |
+
+Install sites, 64 over 44 modules: **PRE-TAIL 15 · PRE-NOTAIL 0 · POST 13 ·
+REPLACE 15 · HANDLER 17 · DATA 4.** ⭐ Every pre-wrapper in the pack already
+ends in `return orig(...)`; there is nothing to rewrite for §7e-2, only a rule
+to write down.
+
+**What the tally means for the sentence.** Even if all 8 candidates were built
+and every PARTIAL were accepted as a proxy, 23 modules can never carry a probe,
+and the 8 that can would test one known axis each. "Every fix checks" cannot
+be made true by probes; "checks the code it patches" can be made true only by
+something that sees the whole body (§4).
+
+### 3d · What I re-derived myself (control)
+
+One shipped body per group, chosen where the verdict rested on a specific
+line: `DroneControl.lua:672-677` (row 10 — the literal `r_t.Fuel = nil` is
+there, the loop bound is `#self.serviced_rockets`), `Fix_GhostFarmOxygen.lua:44-58`
+(row 17 — the wrapper's last statement is `return orig(self, dome, ...)`),
+`Fix_WispRewards.lua:33-45` (row 44 — a bare `function SetLightTrapMode(mode)`
+with no `SetGlobal`), and the sanitizer paren on both trees (§3e). All four
+held. The Lua 5.3 facts the readers leaned on — `IsValid` on a plain table,
+`GameVar` = `false` before a game — are the same facts the pack's own headers
+and `FIX_POLICY` §2 (the F110 rule) already record.
+
+### 3e · Findings the classification surfaced that are NOT this audit's to land (for 99's inbox, via the owner)
+
+1. **`90_SaveSanitizer.lua:28` states a false reason.** "F48 STAYS. The paren
+   is still misplaced upstream." On 1.1.0 `Station.lua:1504` reads
+   `ProcessTrackElements(ResolveMap(track), track.elements)` — correct; the
+   misplaced form survives only in the 1.0.7 archive (`:1346`). I confirmed
+   both lines myself. The pass may still be warranted for a migrated save whose
+   `AppliedSavegameFixups` already lists the fixup (that bookkeeping route,
+   `CommonLua/SavegameFixup.lua`, was NOT OPENED by anyone), but the header's
+   stated reason is wrong on the shipped tree. A REMOVE-shaped question, so it
+   needs the replacement traced, not a verdict from this report.
+2. **Two modules replace a global by plain assignment**, skipping
+   `SMRFixPack.SetGlobal`'s §1.4b read-back: `Fix_WispRewards.lua:39`,
+   `Fix_ShuttleTransportCache.lua:61`. `sigcheck.py` resolves both (they are
+   `function Name(` declarations), so arity is bounded; the read-back is not.
+3. **Three `OnMsg` handlers are registered without `WhenActive`:**
+   `Fix_CrystalMysteryHang.lua:115` (`MysteryEnd`),
+   `Fix_TrackTunnelPowerBridge.lua:160` and `:166` (`StationsConnected`,
+   `PostLoadGame`). `FIX_POLICY` §2's A1 rule asks every handler to re-check
+   status and veto; whether these three are benign by construction was not
+   assessed here.
+4. **`Fix_PayloadTemplateRefill`'s probe has never run in a boot** and indexes
+   a `ClassesBuilt` global (`FlightPolicies`) at apply time; correct today by
+   the boot order, fragile by construction. 07's re-read of 04b's probes should
+   include it.
+5. **Three modules carry no `Require` block** (`ExtenderFlapChurn`,
+   `SequenceLatents`, `ShelterReflex`; a fourth, `DustSicknessBiorobots`, is a
+   `DataPatch` whose checks live in the pass). Their inline checks are
+   existence checks; any pack-wide mechanism in `Require` (§5, Option 3) does
+   not reach them until they are routed through it.
+
+---
+
 ## 4 · §1c — what the mod sandbox actually permits
 
 Evidence classes: **[tree]** a read of the shipped 1.1.0 Lua; **[exe]** a
@@ -378,11 +516,11 @@ the four classification passes in §3; my own spot checks in §3d):
 
 | site shape | count | our frame present when a callee throws? |
 |---|---|---|
-| PRE-TAIL — wrapper ends `return orig(...)` | *see §3* | **no** — the tail call removed it |
-| PRE-NOTAIL — calls the original last but not as `return orig(...)` | *see §3* | yes; a one-line rewrite to PRE-TAIL removes it |
-| POST — work after the original returns | *see §3* | yes, unavoidably: there is no tail position |
-| REPLACE — a copied or rewritten body | *see §3* | yes, and correctly so — the throw is in our copy |
-| HANDLER / DATA | *see §3* | our own handler frame only |
+| PRE-TAIL — wrapper ends `return orig(...)` | 15 | **no** — the tail call removed it |
+| PRE-NOTAIL — calls the original last but not as `return orig(...)` | **0** | yes; a one-line rewrite to PRE-TAIL removes it |
+| POST — work after the original returns | 13 | yes, unavoidably: there is no tail position |
+| REPLACE — a copied or rewritten body | 15 | yes, and correctly so — the throw is in our copy |
+| HANDLER / DATA | 17 / 4 | our own handler frame only |
 
 Two limits the numbers do not show. (1) A PRE-TAIL wrapper's frame is gone only
 for throws **below** the original; a throw in the wrapper's own prologue (its
@@ -429,10 +567,11 @@ POST shape by nature.
 ### 7e · Recommendation for job two
 
 1. **Do now (cheap, no policy question):** the `OnMsg.OnLuaError` breadcrumb.
-2. **Do with the next code cycle:** convert every PRE-NOTAIL site to PRE-TAIL
-   (§3's list), which is a mechanical edit and a coding rule for new wrappers
-   (`FIX_POLICY` §2 already has the "inert for a foreign object" rule; this is
-   its sibling: *end a pre-wrapper with `return orig(...)`*). POST and REPLACE
+2. **Do with the next code cycle:** write the rule down. §3 found ZERO
+   PRE-NOTAIL sites — all 15 pre-wrappers already end in `return orig(...)` —
+   so there is nothing to rewrite, only a `FIX_POLICY` §2 line to keep it so
+   for new wrappers (the sibling of the "inert for a foreign object" rule:
+   *end a pre-wrapper with `return orig(...)`*). The 13 POST and 15 REPLACE
    sites stay named, correctly.
 3. **Owner decision:** whether to own the box wording via `ReportModLuaError`
    (the only console-visible remedy). My recommendation is **no for now**: two
@@ -441,3 +580,237 @@ POST shape by nature.
 4. **Re-state the fact:** `EF-065` should gain the dedupe measurement (7a) and
    the enable-order finding; the checklist's ck73 should gain "option 2 is
    dead — `load` is blacklisted" so it is not re-proposed.
+
+---
+
+## 5 · The options, costed, and a recommendation
+
+Costed against four questions: what it makes TRUE, build cost, runtime cost,
+cost per future module, and how it fails. "Sentence" means HOW IT WORKS bullet
+3 as it stands (`metadata.lua`, unchanged by link 06 on the owner's ruling).
+
+### Option 1 — probe everything probeable, scope the sentence to that
+
+- **Makes true:** "stands down if the shipped code stops behaving the way the
+  fix assumes, on the axis the author thought of" — for 13 of 44
+  modules (§3). It cannot make "every fix" true: 23 modules are UNPROBEABLE —
+  handlers, data patches, thread-spawning targets, and three whose only
+  observable outcome on a stub is a *throw*, which the contract reads as a
+  decline (§3c).
+- **Build:** one probe per module at the `Fix_TrainCargoDumping` discipline —
+  a stub contract written from the shipped body, the F-1 positive-capture rule,
+  a desk harness run — is 30–60 lines and roughly an hour each with the
+  reading; the 8 unwritten candidates ≈ two sessions, plus a review pass
+  because **a probe is shipped code that runs on every player's boot**.
+- **Runtime:** negligible per probe; the risk is not time but side effects.
+  §3's danger column lists 30 targets where a naive stub reaches
+  object placement, a broadcast `Msg`, a thread, or the interaction RNG. Every
+  one of those is a shipped bug if the stub contract is wrong.
+- **Per future module:** the same hour, forever.
+- **Fails:** silently, in the direction that matters. F114's axis was unknown to
+  its author, so a 1.0.7-era probe would have passed (§2b). Option 1 converts
+  "we do not check" into "we checked" without closing that gap — the exact
+  shape F114 shipped under, which is why the brief calls Option 2 worse than
+  nothing. Option 1 is Option 2 with better intentions.
+
+### Option 2 — probe everything, weak probes accepted
+
+Rejected on the brief's own reasoning and on §2b: a weak probe that passes is a
+false clearance. Not costed further.
+
+### Option 3 — a universal runtime fingerprint (two tiers, separable)
+
+**3a · Signature (arity) — self-describing, zero authoring.** In `00_Core.lua`,
+at every install of a *replacement* (a `SetGlobal` and each `function C:M`
+copy), read `numparams`/`is_vararg` from `string.dump(shipped, true)` and from
+`string.dump(ours, true)` and decline on mismatch. Abstain, with a log line,
+when `string.dump` is nil, throws, or the header signature/version/format bytes
+are not the ones the reader was written for.
+- **Makes true:** "stands down if a patch changes the signature of the function
+  it replaces" — for every replacement site, present and future. [tool] On the
+  1.1.0 patch this stands down exactly F115 and nothing else (§4 item 7).
+- **Build:** ~40 lines in core + a `--selftest` fixture; one TestKit probe first
+  to confirm `string.dump` at runtime (§4 item 3). One session including the
+  desk harness.
+- **Runtime:** microseconds per site. **Per future module:** zero.
+- **Fails:** abstains (never declines) on any format surprise; a wrapper that
+  forwards `...` is not a replacement and is not checked — correctly.
+
+**3b · Body — pinned, normalised bytecode hash.** A ~80-line walker of the 5.3
+dump format zeroes `linedefined`/`lastlinedefined` in every proto and must
+consume the dump exactly; FNV-1a over the result; compared at apply against a
+`-- BYTECODE: <selector> <hash>` header line beside the existing `SRC:` pin.
+Pins are read from the game itself: a pack "pin mode" (or a TestKit probe) that
+prints every target's hash at boot, and a `tools/` script that writes them into
+the headers — one boot per patch, which the patch-day workflow already spends.
+- **Makes true:** "stands down if a patch changes the code it patches" — for
+  every pinned function, including callees a module chooses to pin (which is
+  how F-1 and F-3 become visible, §4 item 8). With a 20-line data-hash in the
+  `DataPatch` runner, also "or the data it patches" (F-5's class).
+- **Build:** core walker + hasher + selftest (one session); pin tooling (half a
+  session); first pin cycle on 1.1.0 (one owner boot + one script run).
+- **Runtime:** [desk] ~1 ms for 43 × 200 B; real bodies are larger, so tens of
+  milliseconds per boot. **Per future module:** one header line from the boot
+  log; zero reading.
+- **Fails, in the safe direction, and loudly:** [tool, §4 item 7] on 1.1.0 it
+  would have stood down 24 of 44 modules at first boot, 17 of them working. The
+  C1 dialog already reports the count; the recovery is the desk
+  `bodycheck.py` run the patch day already performs, a re-pin boot, and the
+  upload the patch already needs. The whole-pack case (a compiler change) is
+  discriminable in five minutes and recoverable the same way; the decline-all
+  versus abstain-all policy on a quorum of simultaneous mismatches is an owner
+  call (§9). ⛔ It does NOT see class (c) in its strict sense — F-2 — and never
+  will.
+
+### Option 4 — move the guarantee to process
+
+`bodycheck.py`, `sigcheck.py`, `parsecheck.py`, `logscan.py` and the
+re-verification chain already exist and were built this week. Making the
+sentence a promise about the project — "every game update gets a compatibility
+pass" — costs nothing to build and one desk run per patch.
+- **Makes true:** a project claim, which the store card can carry honestly.
+- **Fails:** on patch day, for every player, until the pass ships. F114 reached
+  a reporter within hours of 1.1.0; the pass took two days. Only a runtime
+  route protects the window the process cannot.
+
+### Option 5 — reword smaller (ck112's rejected (a))
+
+Fallback only. The evidence that it is NOT needed: Options 3a and 4 are
+buildable now and Option 3b is buildable in one cycle, and together they make
+a scoped sentence literally true. The evidence that it IS needed *for now*: the
+sentence is false today and stays false until 3a/3b ship (§9 puts that choice
+to the owner).
+
+### Recommendation
+
+**Build Option 3 in two steps, keep Option 4 as its desk half, and scope the
+sentence to "the code it patches".**
+
+1. **First** (one session, no policy question): the `string.dump` TestKit probe
+   — a 5-line runtime read that decides everything below. If it reads `nil`,
+   Option 3 is dead and the honest answer is Option 4 + Option 5's wording.
+2. **3a immediately after** (one session): self-describing arity at every
+   replacement site. Zero authoring, zero false positives on the largest patch
+   this title has had, and it closes the F115 class for good.
+3. **3b in the following cycle** (two sessions + one owner boot): the body
+   fingerprint with pins, the quorum policy the owner chooses, and the
+   `DataPatch` data-hash.
+4. **Probes stay what §2a of `FIX_POLICY` says they are** — the branch guard
+   for a module carrying a branch-specific body, written where a stub is shown
+   safe — not a coverage target. Do not chase 44.
+5. **The sentence changes once, when 3a ships**, to the 3a/3b wording in §6.
+
+---
+
+## 6 · §1d — draft wordings, one per route (drafts; `06_TEXT`'s successor owns the string)
+
+Each is route-checked against what EVERY fix would actually do at boot on a
+player's machine. "Every" survives only where the mechanism is pack-wide.
+
+**Today (no build) — what is literally true now:**
+> Every fix checks that the game code it patches is still there before it
+> touches anything, and stands down by itself if an official patch has renamed
+> or removed it. A fix that stands down does nothing at all — it never guesses.
+
+**After 3a (arity) — true for every replacement, and still true for wrappers
+because "renamed or removed" already is:**
+> Every fix checks the game code it patches before it touches anything, and
+> stands down by itself if an official patch has renamed, removed or reshaped
+> it. A fix that stands down does nothing at all — it never guesses.
+
+**After 3a + 3b (body fingerprint) — the strongest defensible sentence:**
+> Every fix checks the game code it patches before it touches anything, and
+> stands down by itself if an official patch changes that code. A fix that
+> stands down does nothing at all — it never guesses. Each game update also
+> gets a compatibility pass, because a change *around* a fix can matter too.
+
+**Option 1 (probe coverage, scoped) — "every" cannot survive:**
+> Most fixes check how the game's code behaves before they touch anything, and
+> stand down by themselves if it no longer behaves the way the fix expects.
+> A fix that stands down does nothing at all — it never guesses.
+
+**Option 4 only (process) — a project claim, not a code claim:**
+> Every fix checks that the game code it patches is still there before it
+> touches anything, and stands down if it has been renamed or removed. That
+> check cannot see every kind of change, so each game update gets a
+> compatibility pass before the pack is called good on it.
+
+⛔ In every draft, "what it was written for" is gone: on the evidence of §4
+item 7 no runtime check reaches it, and one module of 44 on this patch (F-2)
+sits outside every route. That phrase is the part of the sentence that cannot
+be made true, and it is the only part.
+
+---
+
+## 8 · What I did NOT check — named
+
+- **Nothing ran in a game.** `string.dump`'s presence under `string` in
+  `Mars.exe`'s Lua state is inferred from the binary's strings and from the
+  engine's sandbox code executed on a desk Lua 5.3, never from a boot. The
+  engine's dump FORMAT (assumed stock 5.3; the `Lua 5.3` string and shipped
+  `math.type` use are the evidence) is unmeasured. The engine's `GetStack`
+  rendering of a tail-called frame is unmeasured.
+- **The per-module classification is four subagent reads.** I read every
+  verdict line, every `sites` line and every danger flag, and opened the shipped
+  body myself for one module per group (`DroneControl.lua:672-677`,
+  `Fix_GhostFarmOxygen.lua:44-58`, `Fix_WispRewards.lua:33-45`) plus the
+  sanitizer paren on both trees. Any module's shipped body I did not open
+  myself is a module whose classification I relay, not one I verified.
+- **`GetTargetAmount` on a suspended request** (the F-10 premise) is C-side and
+  still unread by anyone; nothing here changes that.
+- **The reporter logs for F104/F105** are not in the repo; I used the stacks
+  the bug entries quote and the owner's F104 repro as recorded.
+- **F111 / F112** (deleted modules) were not re-read; their class-(c) status is
+  taken from the re-verification table.
+- **The opt-in pack and the Test Kit** have their own blame surfaces and their
+  own self-checks; neither was examined.
+- **Console rendering** of the engine's box and of our C1 dialog: unobserved,
+  as `EF-065` already records.
+- **`bodycheck --src <archive>` rows are source-hash proxies** for what a
+  bytecode hash would flag; the two can differ on cosmetic edits in the
+  bytecode-insensitive direction only.
+
+---
+
+## 9 · Landing sites — who implements what, in which cycle, and the text the chain's owners should land
+
+⚠️ **The coordination gap, stated by the prompt's author and confirmed by link
+06's outbox:** 06 left bullet 3 untouched because "a separate session owns
+making that sentence TRUE", and this audit is read-only on `metadata.lua`. So
+as of this report **nobody writes bullet 3.** The table below is the fix.
+
+| item | implementer | cycle | fence |
+|---|---|---|---|
+| `string.dump` runtime probe (5 lines, prints type + dump length + 16 header bytes for one shipped Lua function and one C function, from inside the mod env) | Test Kit (07's lane if open; else a one-off local-kit edit) | before 3a; one owner boot | TestKit only |
+| 3a arity check in `Require`/`SetGlobal`/install path | a new code prompt, `prompts/SELFCHECK_3A.md`, Fable | **after 99 closes** (a `00_Core.lua` edit mid-chain collides with 99's audit) | `Code/00_Core.lua`, `items.lua` untouched (no new module) |
+| `OnMsg.OnLuaError` breadcrumb (7e-1) | same prompt | same | `Code/00_Core.lua` |
+| tail-call rule for pre-wrappers (7e-2) — a `FIX_POLICY` §2 line, no code (0 sites to rewrite) | same prompt | same | `FIX_POLICY.md` |
+| 3b body fingerprint + pin tooling + `DataPatch` data-hash | `prompts/SELFCHECK_3B.md`, chain of 2 (`CHAIN_METHOD`) | the cycle after 3a ships | `Code/00_Core.lua`, every module header, `tools/` |
+| bullet 3 wording | the text lane of the release that carries 3a (06's successor) | with 3a's upload | `metadata.lua`, `UPLOAD_WORKFLOW` §3, `STORE_CARD_LIVE` |
+| `EF-065` dedupe + enable-order addendum; ck73 "option 2 dead" | any session, facts lane | now | `facts/EF-065.md`, checklist item 73 |
+| `90_SaveSanitizer.lua:28` header reason is false on 1.1.0 (§3, relayed) | 99's inbox | hotfix-2 | `Code/90_SaveSanitizer.lua` header only |
+
+**Proposed checklist text** (`docs/PLAYTEST_CHECKLIST.md` → "Decisions waiting
+on you"; not written by me):
+
+> **1xx. The self-check promise — verdict YES BUT SCOPED, and three calls.**
+> `reports/SELFCHECK_PROMISE_AUDIT.md`. The sandbox leaves `string.dump`
+> reachable (measured on the engine's own sandbox code, not yet in a boot), so
+> every fix can check the compiled signature and body of the code it patches
+> at boot. What no runtime check can see is a change *around* an untouched
+> target (F-2 on this patch). (a) **Build it?** Recommend yes: arity first
+> (zero authoring, catches exactly F115 on 1.1.0), body hash next. (b) **On a
+> patch that flips many pins at once, decline all or abstain all?** Recommend
+> decline all with the dialog — it is what the sentence promises and the
+> recovery is one boot plus one upload; the cost is that on a 1.1.0-sized
+> patch 17 working fixes would go dark until re-pinned. (c) **Bullet 3 until
+> then?** It stays false through hotfix-2's upload (you accepted that on
+> ck112). Recommend leaving it if 3a is scheduled as the next cycle; otherwise
+> take ck112(a) as an interim and re-strengthen with 3a. Job two: two field
+> misattributions in 17 days, zero in the archive; a log breadcrumb and a
+> tail-call rule are recommended, owning the engine's box wording is not.
+
+**Proposed STATE line** (one line, under "Now"; an eviction must accompany it,
+STATE is at 9211 of 9216 bytes):
+
+> ⭐ SELFCHECK_PROMISE_AUDIT 09-09: YES BUT SCOPED — `string.dump` reachable (desk, not boot); arity check = 0 authoring; body pin = 24/44 dark on a 1.1.0-size patch; ck1xx.
