@@ -1358,3 +1358,207 @@ it (normalise line endings before counting), not to raise the threshold.
 sessions reading this close-out — link 03's session (`smr-bugfixpack-91`) and
 `smr-bugfixpack-e9`. Item 1 is link 03's correction of me. I verified each
 against the tree or against git before recording it; none is taken on trust.
+
+### From link 06 — the text: every surface I made true, and every claim I refused to make
+
+*(Link 06, `smr-bugfixpack-05`, 2026-09-09. Commits `5abbfaa` site text in
+`SMR-CommunityMods` · `641613e` the store card + change note + both synced backups.
+⛔ Nothing was run in a game; no status moved; no `Code/`, `items.lua` or version
+field was opened.)*
+
+**⭐ READ THIS SECTION BEFORE YOU RE-SEED `100_DOCSWEEP` (§12).** Link 04b's
+session asked me to be explicit about which seed surfaces are now CLEAN, because
+your §12 seed named F108 / F107 / F105 as "already found, do not re-derive" and
+those are exactly the surfaces I own. The seed is spent. What follows is the
+replacement input.
+
+#### 1 · The surfaces I FIXED — do not re-hunt these
+
+| surface | what was false | now |
+|---|---|---|
+| `metadata.lua` `description` | "Eighty-two repairs" | **Forty-six**, recounted from the deployed fix list (`grep -c '^??? '` = 46; section tally 1+13+4+3+9+4+7+2+3 agrees) |
+| same | "four of them repair things you cannot see" | **three** — "Under the hood" lost the battery/tank rate-modifier entry |
+| same | **11 of the 20** "SOME OF WHAT IT FIXES" bullets named deleted fixes | all 20 redrawn from the surviving 46 |
+| same | 3 of the 4 headline clauses (return-fuel lander, leaked upgrade bonuses, the 10%/20% terraforming discount) | replaced; the fourth (Comfort billed for the wait) survives |
+| same | the modder veto example named `DustDevilSpawnGate`, deleted in `2dc1dbe` | `LakeEntombment`, live at `Code/Fix_LakeEntombment.lua:41` |
+| same | no 1.0.7 route on the card (ck118) | a portal-neutral block pointing at the site's frozen-v5 page, in plain AND BBCode |
+| `metadata.lua` `last_changes` | described hotfix **1** | rewritten wholesale (appending would post a duplicate changelog entry) |
+| `UPLOAD_WORKFLOW` §3 (both blocks + change note) | matched the old card | synced in the SAME commit; proven byte-identical, see §5 |
+| `STORE_CARD_LIVE.md` (both blocks) | matched the old card | synced in the same commit; its counts block and its stale "5,124 chars" corrected |
+| site `fix-list.md` | "Under the hood: **these four**" with three entries | three |
+| site `fix-list.md` | F73 promised **two** things; link 03 deleted half (a) | one thing; the "a habitat keeps its residents" promise is gone, judgment-call flag kept for the surviving half |
+| site `faq.md` | "More dust devils" and "Automation policy" bullets | gone with the fixes they described |
+| site `faq.md` ×3, `index.md` ×1 | "six judgment calls" | **three** (Biorobots · vacuum · Edit Payload) in all four places |
+| site `faq.md` | the save-repair list named "leaked upgrade bonuses" and "a stuck weather flag" | removed — verified against `Code/*.lua`: no module carries either heal now |
+
+#### 2 · ⛔ A FOURTH STALE PUBLIC CLAIM THAT NO UPSTREAM LINK ROUTED — F92, the Saint's blessing
+
+This is the F108 / F107 / F73 shape on a fifth entry, and it reached me only
+because I traced the store card's "a trait's colony-wide bonus that never reached
+a single colonist" clause back to its fix-list entry instead of assuming the
+upstream routing lists were complete.
+
+`Fix_SaintBlessing.lua`'s own 1.1.0 header says it plainly:
+
+> ⚠️ WHAT THIS MODULE IS ON 1.1.0, said plainly: a save healer for damage a
+> previous version of THIS PACK did, and nothing else.
+
+⇒ the site entry's *"After the fix: the blessing lands on the dome's colonists"*
+and the card's clause were both describing a repair the pack **no longer
+provides on the current game** — 1.1.0 repairs F92 itself. The clause is out of
+the card; the entry keeps its history and gains a *Worth knowing* note saying so.
+
+⚠️ **The general point is worth more than the instance, and it belongs in your
+Pass H corpus:** link 02 routed the surfaces of the modules it DELETED, and link
+03 routed the surface of the half it deleted. Neither was wrong. But a module
+that was **KEPT** can strand a public claim just as dead as a deleted one, and
+nothing in the chain was looking there. If you want one structural finding out of
+Pass F, that is my candidate.
+
+#### 3 · What I deliberately did NOT claim, and why
+
+* ⛔ **No "Fixed", anywhere, for anything.** Every in-play control from 03, 04 and
+  04b was still owed when I wrote. The change note's last bullet says so in the
+  player's own words rather than hedging each line: *"None of this has been
+  watched in a running colony on 1.1.0 yet — it is derived from the new game
+  code."*
+* ⛔ **No outright "1.1.0 compatible."** Nothing in either string says it.
+* ⛔ **No count I did not recount from the fix list.** The 46 and the 3 both come
+  from `grep -c` over `content/fix-list.md`, cross-checked against the section
+  tally, and both stay checkable by a reader on the page the card links to.
+* ⛔ **Nothing about another mod, and no load-order advice** (`EF-054`).
+* ⛔ **Nothing about F12 `LowStorageWarning` beyond the blanket removal
+  sentence.** The retracted "no low-Food warning at all" claim is not printed
+  anywhere and I did not offer a restored warning as a future feature.
+* ⛔ **F116 is capped at link 04's ceiling** — "matching the base game", never
+  "fixed a bug that deleted track". It was never reproduced.
+* ⛔ **F-10 is worded "re-enabled", never as a confirmed 1.1.0 defect** (04b's
+  constraint 2; the C-side premise is still unread).
+* ⚠️ **`FirstAsteroidPrefabs` got no line.** Link 02 said it "needs a note, not an
+  apology": prefabs already granted cannot be taken back and the GameVar is
+  absent-tolerant, so nothing breaks and nothing is visible to a player. I judged
+  it below the bar for a store changelog. **Overrule me if you disagree** — it is
+  the one routed item I consciously dropped rather than carried.
+
+#### 4 · ⛔ ck112 — and a correction to how this chain has been WORDING it
+
+Bullet 3 of HOW IT WORKS is **byte-identical to what shipped in v5**, asserted
+mechanically (see §5). But my own prompt, checklist item 112 and commit `e1095d5`
+all label this **"DEFERRED"**, and `smr-bugfixpack-d7` — the session that authored
+`prompts/SELFCHECK_PROMISE_AUDIT.md` — flagged that the label misreports the
+ruling. I checked their claim against checklist 112's own body and they are right:
+that body already says "Neither (a) nor (b)".
+
+> ⚖️ The owner did not defer the item. They **rejected both recorded options** and
+> commissioned a third the item never offered: make the sentence TRUE rather than
+> reword the promise down to match the code.
+
+The difference matters for you specifically: **"deferred" reads as "we reword it
+next cycle", which is option (b), which the owner explicitly turned down.** A
+future reader trusting the label lands back on a rejected option believing it is
+the standing decision. ⛔ Do not flag bullet 3 as an open loop or an unresolved
+audit finding (checklist 112 forbids it), and do not describe it as deferred
+either. It ships over-promising this cycle by the owner's accepted, recorded
+choice, with `prompts/SELFCHECK_PROMISE_AUDIT.md` running against it.
+
+#### 5 · Pass F is mechanically pre-answered — reuse the check rather than eyeballing it
+
+Your §7 asks "do the backups match `metadata.lua` **exactly**?" I did not eyeball
+it. `scratchpad/verify_sync.py` un-escapes the Lua literal and compares:
+
+```
+shipped description : 5342 chars
+upload plain block  : 5342 chars
+shipped vs upload-plain, 0 differing lines
+BBCode blocks identical in both docs : True
+change-note block == last_changes    : True
+retired-claim sweep (18 phrases x 7 copies): 0 hits
+ck112 bullet 3 UNCHANGED in shipped description: True
+```
+
+⚠️ The `STORE_CARD_LIVE` plain block is 5,485 — 143 chars longer — and that is
+**by design, not drift**: it carries the two portal-specific passages the shipped
+string must not (the "no comment section" line and the cross-link). Do not
+"repair" that difference.
+
+#### 6 · ⚠️ Length, which is the sitting's finding and not mine (my §8)
+
+The shipped `description` is **5,342** chars, up from **5,228**. ⛔ While
+measuring it I found `STORE_CARD_LIVE` had been carrying **"5,124"** — stale since
+before the F105/F108/F110 additions, and the only number this project had on
+record. Corrected in place, in both directions: the web editor took 5,165, but the
+body that actually went through the **upload path** as v5 was 5,228, so the API is
+known to accept at least that. This is +114 on a proven length, not a leap.
+⛔ Still UNVERIFIED against the upload API. If an upload rejects it, that is the
+sitting's finding and the field reverts.
+
+#### 7 · Filed, not fixed — out of my §7 fence, and they are `100_DOCSWEEP` seeds
+
+* `prompts/POST_UPLOAD_CLOSE.md:59` — *"expect **82 entries**"* in the packed
+  artefact check. Becomes 46 after this upload. A **live instruction**, not a
+  record, so it will mislead the next post-upload session.
+* `prompts/PUBLIC_SURFACE_SWEEP.md:110` and `:272` — *"Eighty repairs"* as the
+  card's count word. Already stale before I arrived (the card said Eighty-two),
+  and it is the very template §12 tells you to build `100` from. ⇒ **fix the
+  template's number, or `100` inherits it.**
+* ⛔ `metadata.lua`'s `PackVersion` comment at `:165` / `:182` / `:275`. Link 01's
+  session (`smr-bugfixpack-26`) messaged me mid-run to correct their own earlier
+  relay of this: the honest status is **UNVERIFIABLE FROM SOURCE**, not false —
+  `PackVersion` has zero hits in readable Lua on **either** branch, and absence
+  from `Src` is not absence from the game (`GetTargetAmount`,
+  `DisconnectFromCommandCenters`). Its gloss was already rewritten once on
+  2026-08-29 after two wordings got it wrong. **Do not let `100` "fix" it on a
+  name grep** — that would be the same error a third time.
+* Everything else that greps for "Eighty-two" is a dated historical record
+  (`PLAYTEST_CHECKLIST` 1054-1076, `RELEASE_OUTBOX`, `RELEASE_PORTAL_PREP`) and
+  must NOT be edited.
+
+#### 8 · Drift in my own work, per chain rule 5
+
+* I twice wrote a patch script whose search strings used `\n` against
+  `metadata.lua`, which is **CRLF** on disk while every `.md` in the tree is LF.
+  The first pass silently succeeded anyway — because those passages live inside a
+  single-line Lua literal where the newlines are escaped `\n` text, not real ones
+  — and only the multi-line comment blocks failed. A checkout artefact that
+  produces a *passing* result on one class of edit and a failure on another is
+  exactly the shape that already caused a wrong diagnosis on `STATE.md` this week.
+  The scripts now match the file's own ending.
+* My first store pass asserted "exactly one occurrence" for the veto snippet and
+  failed: it appears **twice** per doc, once in the plain block and once inside
+  the BBCode `[code]` tag. The assertion caught it, which is the point — but a
+  looser `replace()` would have shipped a half-updated Steam block.
+
+#### 9 · Gates at close-out
+
+`python tools/doccheck.py` **GREEN** · `sigcheck` unchanged (12 sites carry no
+`SRC:` pin, a lower bound, unchanged by me) · `bodycheck` 93 OK / 2 NO-MANIFEST /
+1 NO-DEFECT / 3 SRC-NONE · `parsecheck --dir .` 0 errors, CRLF preserved
+(291 → 352 lines, all CRLF).
+
+⚠️ **doccheck WARNs, verbatim, per chain rule 13** — all pre-existing bug-index
+tag rows, none touched by me and none caused by this link:
+
+```
+warn F85/F100/C12/C13/C14/C15/C16/C17/C34/C35/C37/C38/C39/C43/C49/C50/C51/C52:
+     the frozen index-row cell says 'filed', entry says '<wontfix|cand|fixed|
+     tested-attended|tested-unattended|parked>'
+STATE + STUBS: STATE.md 9211 bytes (warn 9216, hard 18432, line 200)
+```
+
+⚠️ **`bodycheck` NO-MANIFEST reads 2, where my prompt's §4 predicted 10 as the
+cross-check that "the right set left".** It is not a discrepancy: links 03/04/04b
+stamped the FIX and re-copy sets after link 01 wrote that prediction, and the
+remaining 2 are `00_Core.lua` and `90_SaveSanitizer.lua`, which patch no game
+function. The cross-check that actually bears is doccheck's **45 files / 44
+registered / three-way module-set agreement**, and that reads exactly what link 02
+said it would.
+
+#### 10 · ⛔ THE SEQUENCING ITEM THE SITTING MUST NOT MISS
+
+The card now says **"Forty-six repairs"** and tells the reader to go and count
+them on the fix list. That page is **committed but NOT published** —
+`publish-site.yml` is `workflow_dispatch` only, so committing never deploys, and
+the live site still shows 82 entries. ⇒ **`UPLOAD_WORKFLOW` §4 (publish the site)
+must happen in the same sitting as the upload**, or the card's own checkable
+number disagrees with the page it points at. This is the failure mode the count
+was chosen to avoid, arriving through the back door.

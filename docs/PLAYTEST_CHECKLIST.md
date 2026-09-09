@@ -29,6 +29,58 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### ⭐ 2026-09-09 — LINK 06 IS DONE: the store card and the site now describe the pack that actually ships. ✅ **Nothing is owed from you — but ONE thing must happen at the sitting, and it is easy to miss.**
+
+> **What changed, in one line.** Link 02 deleted 36 of the 80 fixes because game 1.1.0 repairs those bugs itself.
+> That made a lot of live public text false: **11 of the 20 bullets on your store card**, three of its four
+> headline examples, its "Eighty-two repairs", and eight sentences across the site. All of it is now true.
+>
+> ⛔ **THE ONE THING AT THE SITTING: publish the site in the SAME sitting as the upload.** `UPLOAD_WORKFLOW` §4.
+> The card now says *"Forty-six repairs"* and invites the reader to go and count them on the fix list — and the
+> fix list is **committed but not published** (`publish-site.yml` is `workflow_dispatch` only, so committing
+> never deploys). Until you run it, the live page still shows 82 and the card contradicts the page it points at.
+>
+> **Your paste backups are current.** `UPLOAD_WORKFLOW` §3 is synced with `metadata.lua` in the same commit and
+> proven byte-identical, not eyeballed — the shipped string and the §3 plain block differ by zero lines, both
+> BBCode blocks match, and the change-note block matches `last_changes`. If auto-fill fails again, paste and go.
+>
+> ⚠️ **The change note is five dashed lines rather than the usual two or three, on purpose.** This version
+> retires ~36 fixes, and three of those are things a player can actually notice: the pack no longer holds an
+> asteroid habitat's residents through a power cut, a line's train count stops refreshing after a salvage until
+> you reopen it, and two extractor types keep a small Astrogeologist bonus **permanently in an existing save**
+> (a new game is clean). Compressing to three lines meant dropping one of those, and a removal a player notices
+> is not something to bury. Say the word and it gets cut back.
+>
+> ⛔ **No line anywhere says "Fixed".** Your rule of 2026-09-08 binds our own notes, and every in-play control
+> from links 03, 04 and 04b is still owed — so the note tells players plainly that none of it has been watched in
+> a running colony on 1.1.0 yet. Nothing claims 1.1.0 compatibility outright either.
+>
+> ✅ **112 needed no action and got none.** HOW IT WORKS bullet 3 is byte-identical to what shipped in v5,
+> asserted mechanically rather than by eye. ⚠️ One wording correction, raised by the session that authored
+> `prompts/SELFCHECK_PROMISE_AUDIT.md` and checked against this checklist's own item 112 before I recorded it:
+> the item, its commit and my prompt all label this **"DEFERRED"**, and that label misreports what you decided.
+> You did not defer it — you **rejected both options** and commissioned a third. "Deferred" reads as "we reword
+> it next cycle", which is option (b), the one you turned down. The outcome for this upload is identical either
+> way; only the recorded reason needed to be right, and it now is.
+>
+> ✅ **113 is honoured directly**, not by omission: *"updated for the new game code"*, never *"brought in line
+> with"* — and it now describes this version's track-salvage work, capped at "matching the base game" because
+> that repair has never been reproduced in a game.
+>
+> ✅ **118's store line landed.** Both cards now carry a portal-neutral pointer to the *Playing on 1.0.7* page.
+>
+> ⛔ **ONE THING I DECIDED THAT YOU MIGHT WANT TO OVERRULE, so it is here rather than only in an agent doc.**
+> I found a **fourth** piece of live text that had gone false, and no upstream link had routed it: the Saint's
+> blessing. Game 1.1.0 fixed that bug itself, and our module's own header now describes it as *"a save healer for
+> damage a previous version of THIS PACK did, and nothing else"* — so the fix list's *"after the fix, the
+> blessing lands"* was promising a repair the pack no longer provides. I took the clause off the store card and
+> added a plain note to the fix-list entry rather than deleting the entry. The general lesson is the part worth
+> keeping: the chain was watching the surfaces of the fixes it **deleted**, and a fix that was **kept** stranded
+> a claim just as dead.
+>
+> **Not yet published anywhere.** Both commits are on `main` in their repos and pushed. No upload, no portal
+> call, no site publish, and `version` is untouched — all four are yours.
+
 ### ⭐ 2026-09-08 — LINK 03 IS DONE: three repairs. ✅ **THEIR CONTROLS ARE DEFERRED TO ONE SITTING AFTER THE CHAIN, ON YOUR CALL. Nothing is owed from you now.**
 
 > ⚖️ **RULED 2026-09-08 (owner): the sitting happens AFTER the chain, not now.** Your words: *"Can the sitting be
