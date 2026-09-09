@@ -125,15 +125,17 @@ it back on load. One of the two is wrong on upload.
   do NOT ship this sweep against a tree that still carries the pass; wait for
   that commit.
 
-### 3.2 `last_changes` line for F117 — only if ck127(a) landed
+### 3.2 `last_changes` line for F117 (ck127(a) ruled `ab7e0f5`; applies once `99a`'s commit is on `main`)
 
-If `Fix_ArrivalDeaths` was repaired before the upload, players who ran v5 on
-1.1.0 ran the broken version, so §0.4 of the template says it gets a line
-(precedent: hotfix 1's "an error popup when landscaping"). Draft, to be fitted
-into bullet 4's "Updated for 1.1.0:" sentence: *"…and an error that could
-appear when a new arrival's dome was out of walking range is gone."* ⛔ If 127(b)
-was chosen, write nothing — a note about a known live error is the reporter's
-surface (`FIELD_REPORT_REPLIES.md`), not the store's, and it is hotfix 3's line.
+Players who ran v5 on 1.1.0 ran the broken version, so §0.4 of the template says
+the repair gets a line (precedent: hotfix 1's "an error popup when landscaping").
+Draft, to be fitted into bullet 4's "Updated for 1.1.0:" sentence: *"…and an
+error that could appear when a new arrival's dome was out of walking range is
+gone."* ⛔ Write it only against the tree that carries `99a`'s commit
+(`git log -- Code/Fix_ArrivalDeaths.lua`); a line about a repair that has not
+landed is the claim this chain exists to prevent. "Is gone" is itself a claim
+until the sitting's control (`bugs/F117.md`) runs — bullet 5's disclaimer covers
+it, the way it covers the rest.
 
 ### 3.2b The site's two "built against game version" lines (routed by `smr-bugfixpack-77`, 2026-09-09; verified by 99)
 
