@@ -27,32 +27,12 @@ return {
 		'CodeFileName', "Code/00_Core.lua",
 	}),
 	PlaceObj('ModItemCode', {
-		'name', "Fix_CaveInsNoDisasters",
-		'CodeFileName', "Code/Fix_CaveInsNoDisasters.lua",
-	}),
-	PlaceObj('ModItemCode', {
-		'name', "Fix_MeteorFrequency",
-		'CodeFileName', "Code/Fix_MeteorFrequency.lua",
-	}),
-	PlaceObj('ModItemCode', {
-		'name', "Fix_UpgradeModifierLeak",
-		'CodeFileName', "Code/Fix_UpgradeModifierLeak.lua",
-	}),
-	PlaceObj('ModItemCode', {
 		'name', "Fix_NightShiftWork",
 		'CodeFileName', "Code/Fix_NightShiftWork.lua",
 	}),
 	PlaceObj('ModItemCode', {
-		'name', "Fix_MilestoneCrash",
-		'CodeFileName', "Code/Fix_MilestoneCrash.lua",
-	}),
-	PlaceObj('ModItemCode', {
 		'name', "Fix_WispRewards",
 		'CodeFileName', "Code/Fix_WispRewards.lua",
-	}),
-	PlaceObj('ModItemCode', {
-		'name', "Fix_TouristApplicants",
-		'CodeFileName', "Code/Fix_TouristApplicants.lua",
 	}),
 	PlaceObj('ModItemCode', {
 		'name', "Fix_TrainsToVoid",
@@ -61,14 +41,6 @@ return {
 	PlaceObj('ModItemCode', {
 		'name', "Fix_LanderEmptyLaunch",
 		'CodeFileName', "Code/Fix_LanderEmptyLaunch.lua",
-	}),
-	PlaceObj('ModItemCode', {
-		'name', "Fix_LanderCargoRatchet",
-		'CodeFileName', "Code/Fix_LanderCargoRatchet.lua",
-	}),
-	PlaceObj('ModItemCode', {
-		'name', "Fix_LanderReturnFuel",
-		'CodeFileName', "Code/Fix_LanderReturnFuel.lua",
 	}),
 	PlaceObj('ModItemCode', {
 		'name', "Fix_ShelterReflex",
@@ -107,32 +79,12 @@ return {
 		'CodeFileName', "Code/Fix_ArrivalDeaths.lua",
 	}),
 	PlaceObj('ModItemCode', {
-		'name', "Fix_DroneUnreachableForever",
-		'CodeFileName', "Code/Fix_DroneUnreachableForever.lua",
-	}),
-	PlaceObj('ModItemCode', {
 		'name', "Fix_StaleReservations",
 		'CodeFileName', "Code/Fix_StaleReservations.lua",
 	}),
 	PlaceObj('ModItemCode', {
 		'name', "Fix_CrystalMysteryHang",
 		'CodeFileName', "Code/Fix_CrystalMysteryHang.lua",
-	}),
-	PlaceObj('ModItemCode', {
-		'name', "Fix_TouristSatisfaction",
-		'CodeFileName', "Code/Fix_TouristSatisfaction.lua",
-	}),
-	PlaceObj('ModItemCode', {
-		'name', "Fix_TrainPlatformWedge",
-		'CodeFileName', "Code/Fix_TrainPlatformWedge.lua",
-	}),
-	PlaceObj('ModItemCode', {
-		'name', "Fix_LowStorageWarning",
-		'CodeFileName', "Code/Fix_LowStorageWarning.lua",
-	}),
-	PlaceObj('ModItemCode', {
-		'name', "Fix_CommandCenterNumbers",
-		'CodeFileName', "Code/Fix_CommandCenterNumbers.lua",
 	}),
 	PlaceObj('ModItemCode', {
 		'name', "Fix_DomeOverviewHighlight",
@@ -143,20 +95,12 @@ return {
 		'CodeFileName', "Code/Fix_TrainCargoDumping.lua",
 	}),
 	PlaceObj('ModItemCode', {
-		'name', "Fix_UniversityOvertraining",
-		'CodeFileName', "Code/Fix_UniversityOvertraining.lua",
-	}),
-	PlaceObj('ModItemCode', {
 		'name', "Fix_DestroyedTunnels",
 		'CodeFileName', "Code/Fix_DestroyedTunnels.lua",
 	}),
 	PlaceObj('ModItemCode', {
 		'name', "Fix_DustSicknessBiorobots",
 		'CodeFileName', "Code/Fix_DustSicknessBiorobots.lua",
-	}),
-	PlaceObj('ModItemCode', {
-		'name', "Fix_DustSicknessDamage",
-		'CodeFileName', "Code/Fix_DustSicknessDamage.lua",
 	}),
 	PlaceObj('ModItemCode', {
 		'name', "Fix_GeneForging",
@@ -171,10 +115,6 @@ return {
 		'CodeFileName', "Code/Fix_PayloadTemplateRefill.lua",
 	}),
 	PlaceObj('ModItemCode', {
-		'name', "Fix_AsteroidLanderAvailable",
-		'CodeFileName', "Code/Fix_AsteroidLanderAvailable.lua",
-	}),
-	PlaceObj('ModItemCode', {
 		'name', "Fix_ShuttleHubOffAvailable",
 		'CodeFileName', "Code/Fix_ShuttleHubOffAvailable.lua",
 	}),
@@ -185,10 +125,6 @@ return {
 	PlaceObj('ModItemCode', {
 		'name', "Fix_DomeFreeSpaceMismatch",
 		'CodeFileName', "Code/Fix_DomeFreeSpaceMismatch.lua",
-	}),
-	PlaceObj('ModItemCode', {
-		'name', "Fix_SmallLandscapeSites",
-		'CodeFileName', "Code/Fix_SmallLandscapeSites.lua",
 	}),
 	PlaceObj('ModItemCode', {
 		'name', "Fix_LandscapeUnitFilter",
@@ -207,20 +143,8 @@ return {
 		'CodeFileName', "Code/Fix_TrackTunnelPowerBridge.lua",
 	}),
 	PlaceObj('ModItemCode', {
-		'name', "Fix_GridGlobalStorage",
-		'CodeFileName', "Code/Fix_GridGlobalStorage.lua",
-	}),
-	PlaceObj('ModItemCode', {
-		'name', "Fix_LastTransmissionStorage",
-		'CodeFileName', "Code/Fix_LastTransmissionStorage.lua",
-	}),
-	PlaceObj('ModItemCode', {
 		'name', "Fix_GraphConsumedCaption",
 		'CodeFileName', "Code/Fix_GraphConsumedCaption.lua",
-	}),
-	PlaceObj('ModItemCode', {
-		'name', "Fix_MoraleComfortTooltip",
-		'CodeFileName', "Code/Fix_MoraleComfortTooltip.lua",
 	}),
 	PlaceObj('ModItemCode', {
 		'name', "Fix_TrainWaitTime",
@@ -231,16 +155,8 @@ return {
 		'CodeFileName', "Code/Fix_FounderTraitNotification.lua",
 	}),
 	PlaceObj('ModItemCode', {
-		'name', "Fix_StorageRateModifiers",
-		'CodeFileName', "Code/Fix_StorageRateModifiers.lua",
-	}),
-	PlaceObj('ModItemCode', {
 		'name', "Fix_SequenceLatents",
 		'CodeFileName', "Code/Fix_SequenceLatents.lua",
-	}),
-	PlaceObj('ModItemCode', {
-		'name', "Fix_IndependenceTerraforming",
-		'CodeFileName', "Code/Fix_IndependenceTerraforming.lua",
 	}),
 	PlaceObj('ModItemCode', {
 		'name', "Fix_TrackSalvageRefund",
@@ -251,20 +167,12 @@ return {
 		'CodeFileName', "Code/Fix_LayoutTechLock.lua",
 	}),
 	PlaceObj('ModItemCode', {
-		'name', "Fix_TrainMinors",
-		'CodeFileName', "Code/Fix_TrainMinors.lua",
-	}),
-	PlaceObj('ModItemCode', {
 		'name', "Fix_DroneTransportMinors",
 		'CodeFileName', "Code/Fix_DroneTransportMinors.lua",
 	}),
 	PlaceObj('ModItemCode', {
 		'name', "Fix_AnomalyCaveInMap",
 		'CodeFileName', "Code/Fix_AnomalyCaveInMap.lua",
-	}),
-	PlaceObj('ModItemCode', {
-		'name', "Fix_TechDescriptionBuilding",
-		'CodeFileName', "Code/Fix_TechDescriptionBuilding.lua",
 	}),
 	PlaceObj('ModItemCode', {
 		'name', "Fix_BombardmentSpread",
@@ -275,44 +183,12 @@ return {
 		'CodeFileName', "Code/Fix_ExtenderFlapChurn.lua",
 	}),
 	PlaceObj('ModItemCode', {
-		'name', "Fix_DisasterPredictionLeak",
-		'CodeFileName', "Code/Fix_DisasterPredictionLeak.lua",
-	}),
-	PlaceObj('ModItemCode', {
-		'name', "Fix_MeteorStormWedge",
-		'CodeFileName', "Code/Fix_MeteorStormWedge.lua",
-	}),
-	PlaceObj('ModItemCode', {
-		'name', "Fix_RainsDeadlock",
-		'CodeFileName', "Code/Fix_RainsDeadlock.lua",
-	}),
-	PlaceObj('ModItemCode', {
-		'name', "Fix_FirstAsteroidPrefabs",
-		'CodeFileName', "Code/Fix_FirstAsteroidPrefabs.lua",
-	}),
-	PlaceObj('ModItemCode', {
 		'name', "Fix_SaintBlessing",
 		'CodeFileName', "Code/Fix_SaintBlessing.lua",
 	}),
 	PlaceObj('ModItemCode', {
-		'name', "Fix_DustDevilsDescrMap",
-		'CodeFileName', "Code/Fix_DustDevilsDescrMap.lua",
-	}),
-	PlaceObj('ModItemCode', {
-		'name', "Fix_AstrogeologistExtractors",
-		'CodeFileName', "Code/Fix_AstrogeologistExtractors.lua",
-	}),
-	PlaceObj('ModItemCode', {
 		'name', "Fix_SinkholeIndestructible",
 		'CodeFileName', "Code/Fix_SinkholeIndestructible.lua",
-	}),
-	PlaceObj('ModItemCode', {
-		'name', "Fix_DustStormUndergroundBreaks",
-		'CodeFileName', "Code/Fix_DustStormUndergroundBreaks.lua",
-	}),
-	PlaceObj('ModItemCode', {
-		'name', "Fix_DustDevilSpawnGate",
-		'CodeFileName', "Code/Fix_DustDevilSpawnGate.lua",
 	}),
 	PlaceObj('ModItemCode', {
 		'name', "Fix_ExoticDepositSign",
@@ -330,34 +206,14 @@ return {
 	-- SteamWorkshop.lua:17-22; GedModEditor.lua:786-793). Steam would therefore
 	-- have shipped a `code` list with this file missing, and the automation-law
 	-- compensation fix would never have loaded for a single player.
-	PlaceObj('ModItemCode', {
-		'name', "Fix_AutomationLawCompensation",
-		'CodeFileName', "Code/Fix_AutomationLawCompensation.lua",
-	}),
 	-- Added 2026-08-20 (close-out chain, link 1 — C51). Written by hand, in the
 	-- same position it takes in `metadata.lua`'s `code` list, per the header
 	-- above and H-10: a module absent from this file SHIPS ABSENT.
-	PlaceObj('ModItemCode', {
-		'name', "Fix_LocalizedUIText",
-		'CodeFileName', "Code/Fix_LocalizedUIText.lua",
-	}),
 	-- Added 2026-08-20 (close-out chain, link 2 — C50), same rule as above.
-	PlaceObj('ModItemCode', {
-		'name', "Fix_SpaceYDroneCapBullet",
-		'CodeFileName', "Code/Fix_SpaceYDroneCapBullet.lua",
-	}),
 	-- Added 2026-08-24 (F105, post-release maintenance — owner ruling, checklist
 	-- 72), same rule as above: hand-written, in metadata.lua's `code` position.
-	PlaceObj('ModItemCode', {
-		'name', "Fix_LandscapeCostRefresh",
-		'CodeFileName', "Code/Fix_LandscapeCostRefresh.lua",
-	}),
 	-- Added 2026-08-28 (F108, post-release maintenance — owner ruling, Steam field
 	-- report), same rule as above: hand-written, in metadata.lua's `code` position.
-	PlaceObj('ModItemCode', {
-		'name', "Fix_ExtractorStaffedPerformance",
-		'CodeFileName', "Code/Fix_ExtractorStaffedPerformance.lua",
-	}),
 	PlaceObj('ModItemCode', {
 		'name', "Fix_JumboCaveReinforcementWedge",
 		'CodeFileName', "Code/Fix_JumboCaveReinforcementWedge.lua",
