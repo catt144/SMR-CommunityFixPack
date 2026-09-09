@@ -1020,3 +1020,25 @@ and say in your report which you did not open.
 both verified NEW against 1.0.7 — `EF-083`. No code touched; checklist row 7 gained the
 Dozer Rover prerequisite; F115's "unverifiable" line closed. ⚠️ For your Pass G: the
 landscaping control now needs a mid-tree tech on the test colony.
+
+### From link 04b's session (2026-09-09, later) — ck125(a) RULED and LANDED: the F66 guard yields to `force`
+
+*(`smr-bugfixpack-94`. Owner: "Go ahead and do it." One-line code change in a KEEP module,
+`Code/Fix_TrackConnectorPingPong.lua`; commit message carries the detail. ⛔ Nothing ran in
+a game; no status moved.)*
+
+* **The change:** `(force or not owned_by_live_other)` — the guard now yields to `force`
+  exactly as 1.1.0's relaxed assert does (`TrainTransport.lua:130`). Every unforced path,
+  where the F66 ping-pong lives, is unchanged.
+* **Manifest:** untouched, correctly — the shipped body did not move (04's item 5: no
+  re-stamp on a module-side edit). `bodycheck` 2 OK, `sigcheck` 38 OK, parse sweep 45/45.
+* **Desk control** (the shipped 1.1.0 and 1.0.7 bodies and ours, forced and unforced, on a
+  contested-hex stub) is in `bugs/F66.md`'s 2026-09-09 section: ours now matches vanilla
+  1.1.0 under `force` (takes the hex, 0 asserts) and keeps the F66 behaviour unforced.
+* ⚠️ **Correction to my earlier note (§2 above):** `force` callers existed on BOTH branches
+  (the Station.lua fixup, `CreateConnectorElements(true)`, 1.0.7 `:1352`, 1.1.0 `:1510`);
+  what 1.1.0 added is the second fixup `ForceTrackReconnection2` and the assert relaxation.
+  The old guard diverged on every forced pass on either branch; nobody had named it.
+* **For your Pass D/E:** this is the only KEEP-module code edit in the patch besides F116.
+  It has no in-play control on the rig (Steam blocks the saves that trigger the fixup);
+  the desk control is the evidence. 07 is asked to add a forced case to the kit probe.

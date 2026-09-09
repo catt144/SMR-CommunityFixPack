@@ -346,3 +346,15 @@ as written, one should PASS:
 **Census effect:** 2 more stale results (both `ERROR`, not `FAIL`) on top of the three
 FALSE-FAILs from 03/04 — five named, until you rewrite. After the rewrite the predicted
 suite reading for these three is 3 PASS. ⛔ None of that is evidence about a map.
+
+### From link 04b's session (2026-09-09, later) — one more probe input: `TrackConnectorPingPong` gained a `force` case
+
+`Code/Fix_TrackConnectorPingPong.lua`'s guard now yields to `force` (checklist 125(a), owner
+ruled). The existing probe (`40_Probes_Wave4.lua`) exercises the unforced ping-pong and the
+reclaim helper and should still PASS unchanged. **Worth adding, your call:** a forced case
+on the same synthetic map — call `CreateConnectorElements(station, "force")` with the
+contested hex owned by a live other building and expect the station to TAKE it (the
+other's element destroyed, a new one created with `station == self`), while the unforced
+call still leaves it. That is the shape 1.1.0's `SavegameFixups.ForceTrackReconnection2`
+(`TrackElement.lua:987-997`) drives. Desk-harness stub that produced exactly that is
+described in `bugs/F66.md`'s 2026-09-09 section.

@@ -225,7 +225,7 @@ completed tests move whole to
 >   space, now with a call site. It fires once per save that predates the fixup, and only where such a save can
 >   load — Steam blocks 1.0.7 saves, Paradox/console load them with a warning. ⛔ Not measured. **The repair is one
 >   line** (honour `force` in the guard) and is written out in `bugs/F66.md`; it is code in a KEEP module, so it
->   needs your word and a vehicle (fold into 05's fence, or a small `04c`). **Do you want it made, and where?**
+>   needed your word. ⚖️ **RULED + LANDED 2026-09-09** (owner: "Go ahead and do it"): the guard now yields to `force`, done in this session, desk-controlled against both shipped bodies (`bugs/F66.md`). ⛔ Not tested in play and no rig control exists for it (Steam blocks the saves that trigger the fixup); 07 is asked to add a forced case to the kit probe.
 > * ⚠️ **A bounded reading pass you may want, not a finding.** Eighteen wrapped targets differ between branches
 >   (biggest: `Colonist:Idle` under `ArrivalDeaths`, 100 changed lines; `DemolishAndSplitTrack` under
 >   `BrokenTrackSalvage`, 53). Wrappers carry the change, but the re-verification read those bodies without a

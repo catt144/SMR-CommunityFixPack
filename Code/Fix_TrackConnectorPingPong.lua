@@ -46,6 +46,25 @@
 -- a single hex genuinely serve two owners is a redesign of the connector model,
 -- not a defect repair (FIX_POLICY §4).
 --
+-- `force` OVERRIDES THE GUARD (2026-09-09, checklist 125, read against BOTH shipped
+-- trees). The paragraph above said "`force` still rebuilds this building's own
+-- element" and was silent about a forced take of ANOTHER live building's hex,
+-- which the guard refused. Game 1.1.0 made that take a sanctioned path: the assert
+-- became `assert(force or not IsValid(el.station) or IsBeingDestructed(el.station))`
+-- (TrainTransport.lua:130) and a new one-shot save-load fixup,
+-- `SavegameFixups.ForceTrackReconnection2` (TrackElement.lua:987-997, 0 hits on
+-- 1.0.7), rebuilds EVERY station's connectors with `force` and then reconnects
+-- stations. Under vanilla a contested hex goes to the station during that pass;
+-- under the old guard it stayed with the tunnel and the station got no connector
+-- there — F114's "asymmetry" thread, now with a call site. The guard therefore
+-- yields to `force` (the FIX line below). The ordinary unforced paths, where the
+-- ping-pong lives, are unchanged, and after a forced pass the guard keeps the
+-- station's ownership stable instead of letting the tunnel steal it back. The
+-- older forced caller, the Station.lua fixup (`CreateConnectorElements(true)`,
+-- :1352 on 1.0.7, :1510 on 1.1.0), takes the same path. ⛔ NOT tested: a forced
+-- pass has never run with the pack on; it fires once per save that predates the
+-- fixup, on platforms that load such saves (Steam blocks 1.0.7 saves, EF-079).
+--
 -- The shipped `assert` line is dropped from the copy: it cannot unwind, and its
 -- other-owner condition is now enforced by the guard above it. (CORRECTED by the
 -- QA audit 2026-07-25: an earlier version claimed keeping it "would print on
@@ -139,7 +158,12 @@ SMRFixPack.Register("TrackConnectorPingPong", {
 					-- rebuild and take it back (TrackElement.lua:193-199), forever.
 					local owned_by_live_other = IsValid(el) and el.station ~= self
 						and IsValid(el.station) and not IsBeingDestructed(el.station)
-					if IsValid(el) and (force or el.station ~= self) and not owned_by_live_other then
+					-- FIX (F66, 2026-09-09): `force` overrides the guard, as it overrides the
+					-- shipped assert on 1.1.0 (`assert(force or ...)`, TrainTransport.lua:130).
+					-- A forced rebuild is the game's own save-load reconnection, which
+					-- deliberately hands every connector hex to the station; only the
+					-- UNFORCED paths — where the ping-pong lives — keep the guard.
+					if IsValid(el) and (force or el.station ~= self) and (force or not owned_by_live_other) then
 						DoneObject(el)
 						el = nil
 					end
