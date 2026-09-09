@@ -49,23 +49,30 @@
 -- argument.
 --   1. the PRE-SORT node_idx revalidation 1.1.0 added (TrackElement.lua:473-476);
 --   2. skip_track_process forwarded to self.broken:Demolish (:471).
--- ⛔ TWO KNOWN, DELIBERATE DIVERGENCES REMAIN — documented, not accidental, and
--- both are owner-facing questions in bugs/F116.md, NOT things a later reader
--- should quietly "fix":
---   A. ORPHAN POLICY. 1.1.0 (:580-595) REHOMES any element left with
---      track_obj == false into a fresh track; we DELETE it (the F44 block near
---      the tail). Ours is playtest-derived (PT-03) and was correct on 1.0.7,
---      where nothing rehomed the orphan and it really was immune debris. On
---      1.1.0 it means we can destroy a fragment vanilla would have saved. Left
---      as-is because (1) above removes the mechanism that MANUFACTURES orphans,
---      and changing destructive logic with no reproduction is worse than the
---      long tail it leaves.
---   B. POST-SPLIT PROCESSING. 1.1.0 processes each resulting track's COMBINED
---      element list (:609-613); our 1.0.7 tail processes one array only, and
---      only when the other is empty (:277-290 equivalent), so a track with both
---      completed AND under-construction elements gets no post-split processing.
--- ⛔ NEITHER the repair nor this note is TESTED. F116 is source-derived and has
--- never been reproduced in a log.
+-- AMENDED AGAIN 2026-09-08 (hotfix2 link 04 §7): the two divergences the first
+-- amendment left in place were RULED by the owner the same day and both landed,
+-- marked -- FIX (F116 / ck111) and -- FIX (F116 / ck119) in the split branch:
+--   A. ORPHAN POLICY (ck111). 1.1.0 (:580-595) REHOMES any element left with
+--      track_obj == false into a fresh track; our F44 loop DELETED it. That
+--      loop was playtest-derived (PT-03) and correct on 1.0.7, where nothing
+--      rehomed the orphan and it really was immune debris; on 1.1.0 it could
+--      destroy a fragment vanilla would have saved. Vanilla's loop is carried
+--      now, with a `tracks` list built from the sides that actually seeded.
+--   B. POST-SPLIT PROCESSING (ck119). 1.1.0 processes each resulting track's
+--      COMBINED element list (:609-613); the 1.0.7 tail processed one array,
+--      and only when the other was empty, so a track holding both completed
+--      and under-construction elements got none. The combined list is carried
+--      now, inlined through ProcessTrackElements.
+--   Ruled to STAY: the OnMsg.LoadGame sweep below keeps DELETING orphans — at
+--   load there is no split context to rehome into, and it only fires on
+--   genuinely stranded legacy debris. ⛔ Not an oversight; do not "align" it.
+--   No gate was added for these edits, on purpose: the rehome loop and the
+--   combined processing use only names this module already Requires and behave
+--   the same on either branch, and any gate that could latch or decline would
+--   also switch off that ruled LoadGame sweep (SMRFixPack.WhenActive runs it
+--   only while the module is exactly `active`).
+-- ⛔ NEITHER repair nor either ruled change is TESTED. F116 is source-derived,
+-- has never been reproduced in a log, and none of this has run in a game.
 --
 -- ⚠️ WHAT DOES NOT CHANGE, stated because this module is `tested` and an A/B
 -- reader must not misread it: mass salvage still removes exactly the same track
@@ -328,39 +335,79 @@ SMRFixPack.Register("TrackSalvageWipe", {
 					new_track = false
 				end
 
-				-- FIX (F44, playtest PT-03 2026-07-25): every survivor must have
-				-- been reclaimed by one of the two expansions; anything still
-				-- carrying track_obj == false is debris no track can reach —
-				-- delete it now instead of leaving immune, half-rendered pieces.
-				for _, el in ipairs(all_elements) do
-					if IsValid(el) and not el.track_obj then
-						DoneObject(el)
+				-- FIX (F116 / ck111, owner-ruled 2026-09-08): any survivor still
+				-- carrying track_obj == false after both expansions is REHOMED into
+				-- a fresh track, exactly as 1.1.0 does (TrackElement.lua:580-595).
+				-- This REPLACES the F44 loop (playtest PT-03 2026-07-25) that DELETED
+				-- such elements: on 1.0.7 nothing rehomed them and they really were
+				-- immune debris, but 1.1.0 saves the fragment, so deleting it
+				-- destroyed track the unmodded game would have kept. The F116
+				-- pre-sort revalidation above removes the mechanism that
+				-- manufactures these orphans; this loop covers what is left.
+				-- Termination: every pass gives at least the orphan itself a track,
+				-- so the count of elements with track_obj == false strictly falls.
+				-- `tracks` collects every resulting track (1.1.0 introduced the
+				-- array). Our seeding above tolerates a side with no survivor, so
+				-- the list is built from what exists rather than assumed to be two.
+				local tracks = { track_obj }
+				if new_track then tracks[#tracks + 1] = new_track end
+				while true do
+					local orphan
+					for _, el in ipairs(all_elements) do
+						if IsValid(el) and not el.track_obj then
+							orphan = el
+							break
+						end
+					end
+					if not orphan then break end
+					local extra = PlaceObjectIn("TrackBase", map)
+					orphan.track_obj = extra
+					table.insert(orphan.is_construction_site and extra.elements_under_construction or extra.elements, orphan)
+					ExpandTrackFromElement(extra, orphan)
+					tracks[#tracks + 1] = extra
+				end
+
+				-- 1.1.0's tail (TrackElement.lua:597-608) over every track in
+				-- `tracks`: delete any left empty, drop any that is dead, then
+				-- update ends and positions. The F44 "guard the tail" (an expansion
+				-- that came up empty auto-deletes its track, TrackElement.lua:
+				-- 203-205, and the shipped 1.0.7 calls then raised on the dead
+				-- object — Track.lua:556 in the PT-03 log) is the IsValid /
+				-- IsBeingDestructed filter here, the same guard vanilla now carries
+				-- itself. Written as a counted loop so no new global (ripairs) is
+				-- required.
+				for i = #tracks, 1, -1 do
+					local track = tracks[i]
+					if IsValid(track) and #track.elements == 0 and #track.elements_under_construction == 0 then
+						DoneObject(track)
+					end
+					if not IsValid(track) or IsBeingDestructed(track) then
+						table.remove(tracks, i)
 					end
 				end
-				-- FIX (F44, same playtest): guard the tail — an expansion that
-				-- came up empty auto-deletes its track (TrackElement.lua:203-205),
-				-- and the shipped calls then raised on the dead object
-				-- (Track.lua:556 in the playtest log).
-				if IsValid(track_obj) then
-					track_obj:UpdateEndElements()
-					track_obj:UpdatePos()
+				for _, track in ipairs(tracks) do
+					track:UpdateEndElements()
+					track:UpdatePos()
 				end
-				if IsValid(new_track) then
-					new_track:UpdateEndElements()
-					new_track:UpdatePos()
-				end
+				-- FIX (F116 / ck119, owner-ruled 2026-09-08): post-split processing
+				-- runs on each resulting track's COMBINED element list, as 1.1.0's
+				-- track:ProcessAllElements() does (TrackElement.lua:609-613;
+				-- Track.lua:466-469 is exactly ProcessTrackElements(map, elements ..
+				-- elements_under_construction)). The 1.0.7 tail processed ONE array,
+				-- and only when the other was empty, so a track holding both
+				-- completed and under-construction elements got no processing at
+				-- all. Inlined through the already-Required ProcessTrackElements
+				-- rather than calling the 1.1.0 method, so the tail has one path.
 				if not skip_track_process then
-					if IsValid(new_track) and #new_track.elements_under_construction == 0 then
-						ProcessTrackElements(map, new_track.elements)
-					end
-					if IsValid(track_obj) and #track_obj.elements_under_construction == 0 then
-						ProcessTrackElements(map, track_obj.elements)
-					end
-					if IsValid(new_track) and #new_track.elements == 0 then
-						ProcessTrackElements(map, new_track.elements_under_construction)
-					end
-					if IsValid(track_obj) and #track_obj.elements == 0 then
-						ProcessTrackElements(map, track_obj.elements_under_construction)
+					for _, track in ipairs(tracks) do
+						local elements = {}
+						for _, el in ipairs(track.elements) do
+							elements[#elements + 1] = el
+						end
+						for _, el in ipairs(track.elements_under_construction) do
+							elements[#elements + 1] = el
+						end
+						ProcessTrackElements(map, elements)
 					end
 				end
 			end
