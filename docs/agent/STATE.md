@@ -89,7 +89,7 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 ## Open owner decisions (bodies in `docs/PLAYTEST_CHECKLIST.md` → "Decisions waiting on you")
 - ⛔ 98 1.0.7 branch: pin back or rebaseline (GATES 99-101) · 99 disposition of the self-disabled modules ·
   100 say anything to players yet (rec no) · 101 accept the re-verification chain shape.
-- 111 F116 orphan policy (rec keep) · 112 card self-check sentence · 113 F116 patch-note wording (audit F-1/F-2).
+- 112 card self-check. ⛔ 111+113 RULED 09-08; 111=adopt rehome, +119 filed — both in `hotfix2/04` §7.
 - ⛔ BLOCKS the chain: 98 delete-vs-gate the 34 · 117 non-Steam ⇒ keep SaveSanitizer · C repair F-8/9/10;
   F-2 fix-or-remove. 118 RULED: 1.0.7 gets a frozen v5 release + site page ⇒ re-copies MUST decline on 1.0.7.
 - 73 blame surface — harden or not · 76 confirm (a) was a ruling not a leaning · 53 harden now or in 1.0.1
