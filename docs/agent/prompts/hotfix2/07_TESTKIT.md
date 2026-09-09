@@ -28,9 +28,22 @@ kit `Code/00_TestCore.lua` (`Register` `:375`, `FixMissing` `:315-327`, `RunAll`
 `:417`, `FromFixPack` `:123`, `HasGame` `:172`, `WithGlobals` `:257-309`) ·
 `agent/WORKFLOW.md` "Probe hygiene — HARD GATE" (`:138-175`) and element 7 of
 "Authoring a prompt" (`:1067`) · `tools/doccheck.py:538-548` (the probe count
-that feeds STATE's build-state block) and `:583-600` (the kit-tree rule: a dirty
+that feeds STATE's build-state block) and `:582-667` (the kit-tree rule: a dirty
 kit tree is REPORTED on every pack run and is routed or committed, never
-restored) · `prompts/hotfix2/README.md` rows 02, 03, 04, 04b (what changed in
+restored — the rule itself at `:583-587`, the dirty branch at `:624-626`)
+  * ⚠️ **`testkit_tree()` was edited 2026-09-09, AFTER this prompt was authored**
+    (`smr-bugfixpack-0e`, on-call, owner-authorised), which is why the citation
+    above is a different range from the `:583-600` you may see quoted elsewhere.
+    Behaviour you rely on is UNCHANGED — still report-only, still returns True on
+    every path, the owner's 2026-08-04 GO untouched. What changed: when the kit
+    repo EXISTS but the `git status` call fails, the line now also emits
+    `WARN kit-tree state is UNKNOWN on this run`. ⛔ **If you see that WARN, your
+    run learned NOTHING about the kit tree — re-run before trusting it clean.**
+    This is live, not theoretical: a transient git lock in the kit's tree printed
+    `TESTKIT TREE: not checked (git exited 128)` inside an otherwise GREEN pack
+    run on 2026-09-09, one day before this link, and `not checked` was one word
+    away from `clean`. Falsified on four legs (clean / no-repo / git-fails /
+    dirty) before landing. · `prompts/hotfix2/README.md` rows 02, 03, 04, 04b (what changed in
 the pack) · `reports/PACK_1_1_0_REVERIFICATION.md` §1b (why each REMOVE left —
 you need the reason to know what a retired probe should now observe) ·
 `99_TERMINAL_AUDIT.md` §4 Pass C and its Notes from upstream at `:643-660`
@@ -197,7 +210,7 @@ with the same commit that answers it.
   PT-46 incident left orphan objects blocking grid hexes on a live colony; the
   kit's rule is plain tables with a class metatable, never `PlaceObject`.
 - The kit's working tree is dirty with a STRANGER's changes ⇒ never restore
-  (`doccheck.py:583` — uncommitted work has no reflog); message the peer.
+  (`doccheck.py:587` — uncommitted work has no reflog); message the peer.
 - Unit A will not fit with B and C ⇒ split at a clean commit (`07b`), README
   row, full inbox. 37 body reads is the likely place.
 - `RunAll`'s gate line or `FixMissing` semantics turn out to be load-bearing for

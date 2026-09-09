@@ -584,19 +584,39 @@ def testkit_tree(out):
     a true, verified record sat stranded unseen for a day — no gate checked
     that repo. This says so on every run; it deliberately does NOT block, so
     TestKit work-in-progress never jams a pack commit. A reported line is
-    routed or committed, never `git restore`d (uncommitted work has no reflog)."""
+    routed or committed, never `git restore`d (uncommitted work has no reflog).
+
+    ⚠️ Two kinds of "not checked", and they are NOT the same (2026-09-09).
+    No repo at all is *not applicable* — the kit is local-only by design, so a
+    fresh clone has none, and that line is quiet on purpose. But once `.git`
+    exists, a failure to run means the check produced **no information**, and
+    the docstring's own promise ("says so on every run") went unmet. That path
+    now also emits a WARN line, because a run that says NOTHING about the kit
+    tree must not read like a run that found it clean — `not checked` is one
+    word away from `clean` in a 17-line report whose summary still says GREEN.
+    Seen live 2026-09-09: a transient git lock in the kit's tree printed
+    `not checked (git exited 128)` inside an otherwise green run, on the eve of
+    link 07, whose entire subject is that repo. Still report-only, still never
+    a block — the owner's 2026-08-04 GO is untouched."""
     if not os.path.isdir(os.path.join(TESTKIT, ".git")):
         out.append("TESTKIT TREE: not checked (no repo at %s)" % TESTKIT)
         return True
+
+    def did_not_run(why):
+        out.append("TESTKIT TREE: not checked (%s) — the repo EXISTS and the "
+                   "check did not run, so this run says nothing about the kit "
+                   "tree" % why)
+        out.append("  WARN kit-tree state is UNKNOWN on this run — re-run "
+                   "doccheck before trusting a clean kit tree")
+        return True
+
     try:
         res = subprocess.run(["git", "-C", TESTKIT, "status", "--porcelain"],
                              capture_output=True, text=True, timeout=30)
     except OSError as exc:
-        out.append("TESTKIT TREE: not checked (%s)" % exc)
-        return True
+        return did_not_run(exc)
     if res.returncode != 0:
-        out.append("TESTKIT TREE: not checked (git exited %d)" % res.returncode)
-        return True
+        return did_not_run("git exited %d" % res.returncode)
     lines = [ln for ln in res.stdout.splitlines() if ln.strip()]
     if not lines:
         out.append("TESTKIT TREE: clean")
