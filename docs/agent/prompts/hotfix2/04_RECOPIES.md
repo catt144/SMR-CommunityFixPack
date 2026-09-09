@@ -1,4 +1,4 @@
-# 04 · The re-copies — five modules that take a 1.1.0 body
+# 04 · The re-copies — five modules that take a 1.1.0 body, plus one scoped edit (§7)
 
 Chain: `prompts/hotfix2/README.md` (its binding rules are yours). Runs after 02.
 Independent of 03 — either order.
@@ -20,7 +20,9 @@ per module — each is its own commit-and-verify unit.
 F-6…F-10 (**the shapes are pinned there; a departure must say why**) ·
 `PACK_1_1_0_REVERIFICATION.md` §1a · `agent/FIX_POLICY.md` §1.4b · `bugs/F114.md`
 and `bugs/F115.md` (how this goes wrong) · `docs/PLAYTEST_CHECKLIST.md` items
-109, 115, 118 · your inbox — **01's Job D answer is your branch-guard design,
+109, 115, 118 — **and 111 + 119, the two rulings behind §7** · `bugs/F116.md`
+(§7's record; its claim 5 and "What did NOT land" are the two divergences) ·
+your inbox — **01's Job D answer is your branch-guard design,
 read it verbatim before writing any gate.**
 
 ## ⛔ 1 · Group C is BLOCKED on the owner
@@ -115,9 +117,12 @@ C-side and unread — "plausibly persists", not established. Say so.
 ## 5 · Scope fence
 
 **In:** the five modules, their headers/manifests/gates, their bug entries, their
-drafted patch-note lines. **Out:** `items.lua`, `metadata.lua`, store text,
-`00_Core.lua`, the KEEP set, the harms (03), F116 (K-11 — **do not re-derive it**;
-its two open divergences are ck111 and are the owner's).
+drafted patch-note lines — **plus the SIXTH module in §7 (`Fix_TrackSalvageWipe`,
+F116), scoped to two ruled divergences only.** **Out:** `items.lua`,
+`metadata.lua`, store text, `00_Core.lua`, the rest of the KEEP set, the harms (03).
+⚠️ **F116 moved from Out to In on 2026-09-08** when the owner ruled ck111 and
+ck119. ⛔ The rest of F116 is still Out: **do not re-derive it** — its `K-11`
+KEEP verdict stands and only the two named divergences are yours.
 Found something out of fence? **File it, do not fix it.**
 
 ## 6 · Stop conditions
@@ -131,7 +136,58 @@ Found something out of fence? **File it, do not fix it.**
 - `bodycheck.py` disagrees with your read of the body ⇒ believe the tool until
   you have proven it wrong, and record which of you was right for 99.
 
-## 7 · What may NOT be claimed
+## 7 · The sixth module — `Fix_TrackSalvageWipe` (F116), two ruled divergences
+
+⚖️ **Owner ruled ck111 + ck119 on 2026-09-08 and folded them here** ("fold them
+into whatever chain makes the most sense and update the audit"). This module is a
+`KEEP` (`K-11`) and its 1.1.0 re-derivation is DONE — ⛔ **do not redo it.** You
+are landing two specific, already-decided changes and nothing else.
+
+**Both are in `TrackGridElement:DemolishAndSplitTrack`, in the split branch, in
+the region our F44 fixes already occupy.**
+
+### ck111 — rehome the orphan instead of deleting it
+Ours DELETES any element still carrying `track_obj == false` after both
+expansions (`Fix_TrackSalvageWipe.lua:335-339`); 1.1.0 REHOMES it into a fresh
+track (`TrackElement.lua:580-595`). ⇒ as it stands **our "don't destroy the
+player's track" fix can destroy a fragment the unmodded game would have saved.**
+Take vanilla's loop. ⚠️ Our body has no `tracks` array (1.1.0 introduced one), so
+collect the new tracks in a local and extend the three tail blocks at `:344-365`
+— `UpdateEndElements`/`UpdatePos`, and the four `ProcessTrackElements` calls — to
+cover them. ⭐ Termination is not in doubt: each pass assigns at least the orphan
+itself a track, so the `track_obj == false` count strictly decreases.
+
+### ck119 — post-split processing for mixed tracks
+1.1.0 processes each resulting track's **combined** element list (`:609-613`);
+our 1.0.7 tail processes one array and only when the other is empty, so a track
+holding **both** completed and under-construction elements gets none. Inherited
+1.0.7 behaviour, no observed harm — it rides with ck111 because it is nearly free
+in the same edit, not because it is urgent.
+
+### ⛔ Ruled, so do not reopen
+- **The `OnMsg.LoadGame` sweep KEEPS deleting orphans.** Owner ruled it: at load
+  there is no split context to rehome into, and it only fires on genuinely
+  stranded legacy debris. It is NOT an oversight and NOT yours to change.
+- The `K-11` KEEP verdict stands. Everything in F116 except these two is Out.
+
+### ⚠️ Two traps specific to this module
+1. ⛔ **It is ALREADY STAMPED.** Link 01 stamped the `SRC:`/`DEFECT:` manifest
+   across all 35 KEEP modules at `e2490f3`, and this module is in that set — so
+   its pinned `SRC:` hash was taken BEFORE your edit and your edit makes it a
+   lie. **Run `bodycheck.py` before AND after, and re-stamp the `SRC:` hash**, so
+   the change is visible to the instrument rather than surfacing as an
+   unattributable `BODY-CHANGED` in 99's Pass A.
+2. ⛔ **99's Pass D treats any unexplained change to a KEEP module as a finding.**
+   This module is named there as an expected exception — confirm that note is
+   present and accurate when you close out, and if you touch anything beyond the
+   two divergences, say so explicitly or the audit will correctly flag it.
+
+⭐ **What you may NOT claim here, beyond §8's list:** F116 has never been
+reproduced in a log and produces no throw — it is silent by construction. Neither
+the existing repair nor these two changes has ever run in a game. ⛔ A boot log
+reading `TrackSalvageWipe: applied` proves the module loaded, nothing more.
+
+## 8 · What may NOT be claimed
 
 - ⛔ **Not "tested".** Nothing here has run in a game. Trains and landscaping
   have never been exercised on 1.1.0 at all — the 09-08 boot was menu-only.
@@ -141,7 +197,7 @@ Found something out of fence? **File it, do not fix it.**
 - ⛔ Not "the gates are unnecessary now". They are measured and correct; you are
   adding repairs beside them, not replacing them.
 
-## 8 · Close-out
+## 9 · Close-out
 
 Green gates. Your outbox to `06` and `99` must name, per module: the 1.1.0 lines
 you copied, what you deliberately did NOT carry over, the gate's decline

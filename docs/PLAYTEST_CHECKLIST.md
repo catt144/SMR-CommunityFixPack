@@ -146,6 +146,13 @@ completed tests move whole to
 >   gameplay one.
 > ⭐ **My recommendation: (a).** It is your sentence, so it is your call; the cost is one commit.
 >
+113. ✅ **RULED 2026-09-08, in-session — YES, take the proposed wording.** *"One track-salvage fix was also
+> **updated for** the new game code."* Settled into `hotfix2/06_TEXT.md`; ⚠️ **ck112 is still UNRULED**, so that
+> link's "leave those two strings alone" fallback now narrows to ck112 alone.
+> ⚠️ Note for whoever writes the final string: items **111 and 119** now REPAIR both of the differences this
+> item was hedging against, so by upload the sentence is conservative rather than merely honest. ⛔ Do not
+> upgrade it to "brought in line with" on that basis — the repairs are still un-run in a game.
+>
 > **113. `last_changes` bullet 3 overstates the track-salvage change.** *"One track-salvage fix was also brought
 > in line with the new game code"* reads as parity. Two deliberate differences from 1.1.0 remain (item 111 is one
 > of them) and the repair has never run in a game. Proposed: *"One track-salvage fix was also updated for the new
@@ -213,6 +220,44 @@ completed tests move whole to
 > ⛔ **NOT MEASURED, and unlike F114/F115 it never was.** No throw, no log line, no player report — this one
 > came from reading the two bodies side by side. The repair has never run in a game either. ⚠️ A boot log
 > saying `TrackSalvageWipe: applied` proves the module loaded, **not** that the repair works.
+>
+119. ✅ **RULED ON FILING 2026-09-08 — the SECOND F116 divergence, which had no ticket and which nobody would
+> have raised until after the patch shipped.** ⛔ Filed and ruled in the same breath because you ruled it
+> before it had a number; given one now so `99_TERMINAL_AUDIT.md` has something to cite when it sees the code
+> change (an untracketed body edit to save-persistent code is exactly what that audit is built to catch).
+> **What it is.** 1.1.0 post-processes each resulting track's **combined** element list; our 1.0.7 tail
+> processes one array, and only when the other is empty — so a track holding **both** completed and
+> under-construction elements gets **no post-split processing at all**. Recorded since 2026-09-08 in
+> `bugs/F116.md` (claim 5, found by the structural diff) and in the module header as divergence B, but it
+> never reached this checklist, STATE or the chain. ⇒ **Fixed in the same commit as item 111**, same function,
+> same region, same audit. ⚠️ It is *inherited 1.0.7 behaviour*, not something we broke, and no harm has been
+> observed — it ships with 111 because it is nearly free there, not because it is urgent.
+>
+> ⭐ **Worth noting as a process result, not just a defect:** this is the one that would have produced the
+> "as soon as I patch, an agent tells me there is more to do" outcome you were trying to avoid. It was fully
+> documented and still invisible, because it lived only in a bug entry and a code comment — neither of which
+> is a surface anyone plans work from.
+
+111. ✅ **RULED 2026-09-08, in-session — (b) ADOPT vanilla's policy. Your words: "fold them into whatever
+> chain makes the most sense and update the audit."** Folded into **`hotfix2/04_RECOPIES.md`** (the body-copy
+> link — same class of work, and it already carries `bodycheck.py` and the terminal audit), with a matching
+> item in `99_TERMINAL_AUDIT.md`. ⛔ **THREE things were ruled together, not one:**
+> * **(1) the orphan policy** below — rehome instead of delete;
+> * **(2) a SECOND F116 divergence that had no ticket at all** — `bugs/F116.md` recorded two deliberate
+>   divergences and only this one became a checklist item. The other: 1.1.0 processes each resulting track's
+>   **combined** element list, our 1.0.7 tail processes one array and only when the other is empty, so a
+>   track holding **both** completed and under-construction elements gets **no post-split processing**.
+>   Ruled to be fixed in the SAME commit — same function, same region, same audit;
+> * **(3) the load-time sweep STAYS as it is** (your "that is fine i agree"). It keeps deleting orphans,
+>   because at load there is no split context to rehome into and it only fires on genuinely stranded legacy
+>   debris. ⛔ Recorded as a RULING so a later reader cannot reopen it as an oversight.
+>
+> ⚖️ **The recommendation below was REVERSED, and the reason is not new information about the bug — the bug
+> is unchanged.** It was written when this was a lone session with no reproduction, proposing untested
+> changes to destructive, save-persistent code in a hotfix with nothing downstream to catch an error. The
+> hotfix-2 chain removed that constraint: `bodycheck.py` now exists, link 04 is the dedicated body-copy link,
+> and link 99 is an adversarial terminal audit. **The machinery changed, so the answer changed.** Left
+> visible rather than rewritten, because the original reasoning is the receipt for why (a) was ever right.
 >
 > **111. Adopt vanilla's non-destructive orphan policy, or keep ours?** ⚖️ This is the one thing I found and
 > deliberately did **not** change, because it is your call and not a hotfix decision.

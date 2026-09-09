@@ -16,7 +16,7 @@ Authored 2026-09-08 by `smr-bugfixpack-91` under `prompts/HOTFIX_2_HANDOFF.md`
 | ~~01~~ | ~~`01_CORE_AND_TOOLING.md`~~ | Fable | no | ✅ **DONE 2026-09-08** (`smr-bugfixpack-25`): `probe` form `6d452a3` · `tools/bodycheck.py` + falsifier `401f8a0` · `FIX_POLICY` §2a branch guard + §2b manifest grammar `6db7457` · all 35 KEEP modules stamped `e2490f3`. Outbox is in 02–05 and 99 |
 | 02 | `02_REMOVE_BLOCK.md` | Opus | ⛔ blocked on ck98 + ck117 | EVERY module deletion in one sweep (the 34 REMOVE rows + F-4 + F-5 + R-20), `items.lua`, the F-5 save cleanup, bug entries, patch-note lines |
 | 03 | `03_HARMS.md` | Opus | ⛔ blocked on ck-F-2 | the applies-today repairs on modules that SURVIVE: F-1 probe-gate + save re-base, F-2 exemption (if kept), F-3 delete half (a) |
-| 04 | `04_RECOPIES.md` | Opus | ⛔ blocked on ck-C | the re-copies: F-6, F-7 (B) and F-8, F-9, F-10 (C), each with its `SRC:`/`DEFECT:` manifest and a 1.0.7 decline |
+| 04 | `04_RECOPIES.md` | Opus | ⛔ blocked on ck-C (⚠️ **B and §7 are unblocked**) | the re-copies: F-6, F-7 (B) and F-8, F-9, F-10 (C), each with its `SRC:`/`DEFECT:` manifest and a 1.0.7 decline · **plus §7: `Fix_TrackSalvageWipe` (F116), the two divergences the owner ruled as ck111 + ck119 — a scoped edit to a KEEP module, needs a re-stamp** |
 | 05 | `05_TOOLS_TAIL.md` | Opus | no | `sigcheck.py` over `SetGlobal` sites (A-4), `logscan.py` heal-aware + benign-latch retire list (A-2/A-3), A-1 `GeneForging` |
 | 06 | `06_TEXT.md` | Opus | no | ck112/113 store wording, `metadata.lua` `last_changes`, `UPLOAD_WORKFLOW` §3 paste backups, the site fix list |
 | 99 | `99_TERMINAL_AUDIT.md` | Fable | reports to owner | adversarial backward QA over the whole result; SHIP / SHIP WITH CHANGES / DO NOT SHIP |

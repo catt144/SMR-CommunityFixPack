@@ -70,9 +70,28 @@ label (QA §0.2), and F-1's re-base (§0.3).
 
 ## 5 · Pass D — nothing on the KEEP list was touched
 
-35 modules should be untouched except for their `SRC:`/`DEFECT:` stamps (and
-`GeneForging`'s A-1 edit). Diff them. An unexplained change to a KEEP module is a
+35 modules should be untouched except for their `SRC:`/`DEFECT:` stamps and
+**two named exceptions**. Diff them. An unexplained change to a KEEP module is a
 finding.
+
+**The two expected exceptions — anything else is a finding:**
+1. `GeneForging`'s A-1 edit.
+2. ⚖️ **`Fix_TrackSalvageWipe` (F116, `K-11`) — a REAL body edit, added to
+   `04`'s fence on 2026-09-08 after the owner ruled ck111 + ck119.** Two changes
+   only: the orphan loop rehomes instead of deleting, and post-split processing
+   covers a track holding both completed and under-construction elements.
+   ⛔ **Anything else changed in that module IS a finding**, including a
+   re-derivation of the parts the `K-11` KEEP verdict already settled.
+   ⚠️ **It was stamped by 01 at `e2490f3` BEFORE this edit existed**, so its
+   `SRC:` hash had to be re-taken. Confirm the re-stamp happened and that
+   `bodycheck.py` was run either side — a stale pin here would read as GREEN
+   while describing a body that no longer exists, which is the exact failure
+   `bodycheck.py` was built to catch.
+   ⛔ **Do not treat the owner's ruling as making the change correct.** The
+   ruling settled *whether* to do it; whether the code is right is yours. It has
+   never run in a game, F116 has never been reproduced, and the module is
+   destructive and save-persistent — it creates `TrackBase` objects that persist
+   in saves, so a botched rehome loop re-creates F91's invisible-shell harm.
 
 ## 6 · Pass E — the 1.0.7 constraint (ck118)
 
@@ -157,10 +176,31 @@ append below as they close.)*
   anywhere, including in an upstream link's summary.
 - ⚠️ `metadata.lua`'s "`PackVersion` renders version_major.version_minor.version"
   comment has zero hits in the 1.1.0 tree. Recorded facts are claims too.
-- ck111 (F116's orphan policy — vanilla REHOMES an orphaned track fragment, our
-  fix DELETES it) is **open and unruled**, and it is a player-harm question, not
-  bookkeeping. It is not this chain's to close, but note whether the patch makes
-  it more urgent.
+- ⚖️ **ck111 is now RULED and IS this chain's to close — this note has changed.**
+  It previously read "open and unruled … not this chain's to close". On
+  2026-09-08 the owner ruled it (b): ADOPT vanilla's policy — rehome the orphaned
+  track fragment instead of deleting it — and folded the work into `04` §7, with
+  **ck119**, a SECOND F116 divergence that had no ticket at all until the same
+  ruling (post-split processing skips a track holding both completed and
+  under-construction elements). ⛔ A third part was ruled too: the module's
+  `OnMsg.LoadGame` sweep **KEEPS deleting** orphans (no split context at load;
+  legacy debris only) — that is a RULING, not an oversight, and reopening it is
+  a finding, not diligence.
+  ⚠️ **The session that filed ck111 recommended the OPPOSITE (keep-and-defer) and
+  reversed itself.** Stated plainly because you are told to treat the chain's own
+  shape as auditable: the bug did not change, the machinery did — `bodycheck.py`
+  did not exist, there was no body-copy link, and there was no terminal audit
+  when the original recommendation was written. ⭐ **If you think that reversal
+  was wrong, say so** — a ruled decision is still a decision someone can have
+  talked the owner into, and the harm on the other side (untested changes to
+  destructive save-persistent code) is real and has not gone away.
+- ⛔ **ck119 is the process finding worth a line in your report, separate from the
+  code.** It was fully documented in `bugs/F116.md` and in the module header, and
+  still invisible to every surface anyone plans work from — no checklist item, no
+  STATE line, no chain link — until it was looked for deliberately. The owner's
+  stated goal for this patch is "everything we know about, fixed in this patch".
+  **Ask what else is in that category:** a known divergence recorded only in a bug
+  entry or a code comment is, operationally, not known at all.
 - ck118 is ruled: 1.0.7 players are served by a frozen v5 GitHub release plus a
   site page, both live. The store-card line pointing at it is link 06's.
 
