@@ -956,3 +956,66 @@ argued from the archived tree and the desk harness, never from a 1.0.7 boot.
 
 **7 · Filed, not fixed.** `00_Core.lua:304` stale citations (from 03, still open). The
 five stale kit probes (07). Nothing else out of fence was found.
+
+### From link 04b's session, after close-out (2026-09-09) — the first cross-branch runs, now that the 1.0.7 tree is back
+
+*(`smr-bugfixpack-94`, owner-requested: "any other checks now that 1.0.7 is on disk before I
+fire 05". Commits: `42b9a17` (EF-083 + landscaping) and the one carrying this note. ⛔
+Nothing ran in a game; no module changed.)*
+
+**1 · `python tools/bodycheck.py --src C:\Dev\SMR-SrcArchive\1.0.7.396349\Src`** — every
+pin hashes the 1.1.0 body, so BODY-CHANGED here = "target differs between branches".
+28 rows: the 5 re-copies + `ShelterReflex` + `SaintBlessing` (TARGET-ABSENT) expected;
+the rest KEEP. Classified by whether the module COPIES the target or WRAPS it, with a
+mechanical diff of our body against both shipped bodies for every copy:
+
+| KEEP module | target (branch diff lines) | technique | verdict |
+|---|---|---|---|
+| `TrackConnectorPingPong` | `CreateConnectorElements` (4) | body copy | on the 1.1.0 body; differs from 1.1.0 ONLY in the F66 guard block. ⚠️ see §2 |
+| `TrackSalvageWipe` | `DemolishAndSplitTrack` (53) | body copy | F116, repaired in-body by 04; 4 of the 16 1.0.7-only lines still present verbatim in our file — your Pass D should say whether those are the deliberate FIX lines or residue |
+| `DomeFreeSpaceMismatch` | pins `GatherFreeLivingSpaces` (13); COPIES `Dome:RefreshFreeLivingSpaces` (0) | body copy of an UNPINNED 3-line function | copied function identical across branches; the pinned helper changed but is called live. Coverage gap: the copied function is not the pinned one |
+| `SinkholeIndestructible` | `L4-25` span (4) | data | formatting only (`}` placement) |
+| `LayoutTechLock` | `Activate` (5: water markers) | WRAPPER (`orig_activate`) | carried |
+| `RocketInteractGuard` | `CanInteractWithObject` (2: `MixedPoolStockpile`) | WRAPPER (`orig_can`) | carried |
+| `GeneForging` | `GetRareTraitChance` (13: rewritten to 5 lines via `Techs.GeneSelection:ResolveValue`) | WRAPPER (`orig`, `SetGlobal`) | carried; our wrapper still passes `unit`, which the 1.1.0 body ignores — harmless. 05's A-1 stands |
+| `AnomalyCaveInMap`, `BrokenTrackSalvage` (×2), `DestroyedTunnels`, `ExtenderFlapChurn`, `GhostFarmOxygen`, `JumboCaveReinforcementWedge`, `LakeEntombment`, `LanderEmptyLaunch`, `MirrorSphereSite`, `TrainsToVoid` | 12 / 8+53 / 4 / 4 / 6 / 8 / 16 / 9 / 4 / 2 | wrappers | change carried; class (c) exposure only |
+
+⇒ **No new F116 shape in the KEEP set.** ⚠️ My first proxy (does the module define the
+target's name) mis-flagged the two `orig_*` wrappers as copies; the real diff corrected it.
+Recorded so nobody repeats the proxy without the diff.
+
+**2 · THE ONE FINDING — `TrackConnectorPingPong` vs `SavegameFixups.ForceTrackReconnection2`
+(NEW in 1.1.0, `TrackElement.lua:987-997`, 0 hits on 1.0.7).** The fixup rebuilds every
+station's connectors with `"force"`; 1.1.0 relaxed the assert (`force or …`) for it.
+Vanilla under force takes a contested hex from a live other building; our guard tests
+`owned_by_live_other` BEFORE honouring `force`, leaves the hex, and that station gets no
+connector there — F114's demoted "asymmetry" line, now with a call site. Once per
+pre-fixup save; Steam blocks 1.0.7 saves, non-Steam loads them with a warning. Filed:
+`bugs/F66.md` (with the one-line repair), `bugs/F114.md` addendum, checklist 125 (owner
+picks the vehicle). ⛔ Unmeasured. ⛔ Not a second F114 cause.
+
+**3 · `python tools/sigcheck.py --src <1.0.7>`**: 1 MISMATCH (`LandscapeUnitFilter`,
+correct — 1.1.0 signature, declines on 1.0.7), 37 OK. Every other replacement site has
+the same arity on both branches.
+
+**4 · Manifest coverage gap (→ 05, tooling):** 11 sigcheck-known replacement sites carry
+no `SRC:` pin of their own name (the module pins a neighbour): `ArrivalDeaths`
+(`Colonist:OnArrival` 6 lines changed, `Colonist:Idle` 100), `FreedHousingNotice`
+(`Colonist:SetResidence` 11), `RocketInteractGuard` (`RCTransport:InteractWithObject` 12),
+`GhostFarmOxygen` (`Building:SetDome` 4), `TrackConnectorPingPong` (`Done` 4),
+`TrackSalvageRefund` (`TrackGridElement:Demolish` 4), `TrainsToVoid` (`Building:OnDemolish`
+2); identical across branches: `ExtenderFlapChurn` (`UpdateUplinkRequesters`),
+`TrackTunnelPowerBridge` (`TrackBase:Done`), `TrainWaitTime` (`AddSpentTime`). Plus the
+copied-but-unpinned `Dome:RefreshFreeLivingSpaces`. Lower bound — sigcheck does not see
+`SetGlobal` sites or function literals.
+
+**5 · For your KEEP pass (Pass on the wrappers):** the 1.0.7 tree turns "re-read the
+wrapper's assumptions against 1.1.0" into "re-read them against exactly these lines". The
+table in §1 plus §4 is the steer; `ArrivalDeaths` over `Colonist:Idle` (100 changed lines)
+is the one I would open first. Checklist 125 asks the owner whether this is yours or a
+link's.
+
+**6 · Landscaping (owner questions, same day):** rover-only AND research-gated on 1.1.0,
+both verified NEW against 1.0.7 — `EF-083`. No code touched; checklist row 7 gained the
+Dozer Rover prerequisite; F115's "unverifiable" line closed. ⚠️ For your Pass G: the
+landscaping control now needs a mid-tree tech on the test colony.

@@ -203,6 +203,46 @@ completed tests move whole to
 > * *Trains no longer unload a resource at a station where you have switched it off while another station on the
 >   line accepts it — re-enabled for 1.1.0.* ⛔ This one may not be worded as a confirmed 1.1.0 bug (row 10).
 
+### 2026-09-09 — ITEM 125 OPEN: the first checks the 1.0.7 tree makes possible were run — one real finding, one bounded reading pass to decide on, before 05 fires
+
+> You asked what else the archived 1.0.7 tree lets us check before link 05. I ran three things nobody could run
+> while the tree was gone. ⛔ Nothing here changes a module; everything is filed, not fixed.
+>
+> **1 · `bodycheck --src 1.0.7` over the whole stamped pack** — every pin was taken from the live 1.1.0 tree, so a
+> BODY-CHANGED against 1.0.7 means "this target differs between branches". 28 rows differ. Of those, the five
+> re-copies and 03's two repairs are expected. The rest are KEEP modules, and the question for each was: is our
+> module a **copy** of the old body (the F116 shape, where we would silently undo a 1.1.0 change) or a **wrapper**
+> that calls the live body (which carries the change)?
+> * ✅ **No new F116 shape.** Every KEEP copy of a changed target is already on the 1.1.0 body (`TrackConnectorPingPong`,
+>   `TrackSalvageWipe` after 111/119), unchanged across branches (`DomeFreeSpaceMismatch`'s copied function), or a
+>   formatting-only span (`SinkholeIndestructible`). Two the proxy flagged as copies (`LayoutTechLock`,
+>   `RocketInteractGuard`) are wrappers on a real diff — the 1.1.0 additions (water markers, mixed-pool stockpiles)
+>   are carried.
+> * ⚠️ **One real finding — `TrackConnectorPingPong` (F66) versus a NEW 1.1.0 forced path.** 1.1.0 added a one-shot
+>   save-load fixup that rebuilds every station's track connectors with `force` and relaxed its assert to allow it.
+>   Vanilla under force hands a contested hex to the station; our F66 guard leaves it with its current owner, so
+>   that station gets **no connector on that hex**. This is the exact "asymmetry, unmeasured" line in F114's search
+>   space, now with a call site. It fires once per save that predates the fixup, and only where such a save can
+>   load — Steam blocks 1.0.7 saves, Paradox/console load them with a warning. ⛔ Not measured. **The repair is one
+>   line** (honour `force` in the guard) and is written out in `bugs/F66.md`; it is code in a KEEP module, so it
+>   needs your word and a vehicle (fold into 05's fence, or a small `04c`). **Do you want it made, and where?**
+> * ⚠️ **A bounded reading pass you may want, not a finding.** Eighteen wrapped targets differ between branches
+>   (biggest: `Colonist:Idle` under `ArrivalDeaths`, 100 changed lines; `DemolishAndSplitTrack` under
+>   `BrokenTrackSalvage`, 53). Wrappers carry the change, but the re-verification read those bodies without a
+>   branch diff to steer it. The 1.0.7 tree turns "re-read the wrapper's assumptions" into "re-read them against
+>   exactly these N lines" — a few hours of reading, best done by 99's Pass on the KEEP set or a dedicated link.
+>   **Worth scheduling, or leave to 99?** (rec: give 99 the table, let it decide per module.)
+>
+> **2 · `sigcheck --src 1.0.7`**: 1 MISMATCH, `LandscapeUnitFilter` — expected and correct, its body is the 1.1.0
+> signature and it declines on 1.0.7. Every other replacement site has the same arity on both branches.
+>
+> **3 · Manifest coverage**: 11 functions the pack replaces or wraps carry no `SRC:` pin of their own (their module
+> pins a neighbour instead), so `bodycheck` cannot see them move — 8 of the 11 DID change between branches. A
+> tooling item; routed to 05 with the list. Nothing for you to rule.
+>
+> Landscaping (your two questions, same day): both new-in-1.1.0 facts are recorded (`EF-083`), row 7 above now
+> says to research Dozer Rover first, and F115's "unverifiable" line is closed as verified.
+
 ### ✅ 2026-09-08 — ITEM 124 RULED: `StaleReservations` is FIXED, not removed. This was the last thing blocking chain link 03.
 
 > ⚖️ **124 — RULED: FIX.** Owner, verbatim: *"fix is the ruling."* ⇒ `Fix_StaleReservations` **stays** and gains

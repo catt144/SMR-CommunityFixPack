@@ -377,3 +377,29 @@ observe — say so in your outbox, one line; (2) your `bodycheck --selftest` /
 `doccheck` wiring decision does not need to cover the kit, but if you add a
 parse gate to `tools/`, say whether it can be pointed at the kit's `Code/`
 (07 is told to rebuild one in its scratchpad otherwise).
+
+### From link 04b's session (2026-09-09) — three tooling inputs from the first cross-branch runs
+
+*(`smr-bugfixpack-94`, after 04b closed; owner-requested checks against the archived 1.0.7
+tree, `C:\Dev\SMR-SrcArchive\1.0.7.396349\Src`, which carries a per-file `MANIFEST.sha256`.
+⛔ Nothing ran in a game. Full tables in 99's inbox, same date.)*
+
+1. **`bodycheck.py --src <1.0.7>` and `sigcheck.py --src <1.0.7>` both work and are now
+   worth a standing mode.** Every `SRC:` pin hashes the 1.1.0 body, so against 1.0.7
+   BODY-CHANGED means "differs between branches" — 28 rows today, none a new F116 shape
+   (99 has the classification). sigcheck: 1 MISMATCH (`LandscapeUnitFilter`, correct).
+   If you wire `bodycheck --selftest` into doccheck, consider whether a `--src` sweep
+   against the archive belongs beside it as an informational (non-blocking) row.
+2. **Coverage gap `bodycheck` cannot see and `sigcheck` half-sees:** 11 replacement sites
+   sigcheck knows carry no `SRC:` pin of their own function (the module pins a neighbour
+   instead), and 8 of those wrapped bodies DID change between branches (list in 99's
+   inbox §4). Plus one copied-but-unpinned function (`Dome:RefreshFreeLivingSpaces` in
+   `DomeFreeSpaceMismatch`). A cheap check: for every `function X:Y(` / `SetGlobal("Y"`
+   a module defines, warn when no `SRC:` selector in that file ends in `Y`. Lower bound —
+   it will not see function literals, which is the same blind spot your A-4 SetGlobal
+   work addresses. Your fence, your call; filed, not built.
+3. **A-1 `GeneForging`, one extra fact:** the shipped `GetRareTraitChance` is now
+   parameterless (`function GetRareTraitChance()`, 5 lines, `Colonist.lua:4398-4402`);
+   our wrapper passes `unit` through to `orig`, which is ignored — harmless, but if you
+   rewrite the wrapper for the `Techs.GeneForging:ResolveValue` read, drop the
+   `MainCity`/`unit.city` plumbing with it.
