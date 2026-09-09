@@ -201,6 +201,84 @@ A defensible first cut, to argue with rather than accept:
 99. terminal audit: **re-derive a sample of findings from scratch**, and rule on
     whether the inventory itself was sound.
 
+⭐ **Build the subagent fan-out of §7 into the links themselves** — the triage
+link especially is a parent orchestrating agents, not a session reading rows.
+
 ⛔ **State up front what this hunt CANNOT see** — data/preset changes outside
 Lua, C-side behaviour, engine changes, and anything only a running game would
 show. Naming that is part of the deliverable, not a caveat to bury.
+
+## 7 · ⭐ USE SUBAGENTS — this effort is big enough to warrant it (owner instruction)
+
+⚖️ **Owner, 2026-09-08: where the work is large enough to warrant it, the hunts
+should split it across subagents.** This one qualifies: **2444 changed files**,
+and a function-level inventory over them will run to thousands of rows.
+
+### The principle: fan out the READING, keep the JUDGEMENT central
+
+⭐ Each agent burns a large context reading source and returns a small
+structured result. That is the whole economic argument — one session cannot hold
+2444 files, but it can hold 2444 *verdicts*. Design every fan-out so the parent
+never has to re-read what an agent read.
+
+### ✅ WHERE IT WORKS HERE — genuinely independent, fan out freely
+
+- **Inventory triage.** Each changed function is independent: read the 1.0.7
+  body and the 1.1.x body, classify into §2's classes, return the row. This is
+  the big one and it is embarrassingly parallel.
+- **A named subsystem sweep** — trains, landscaping, colonists, construction —
+  one agent per subsystem, working from the inventory rows for its files.
+- **Chasing one candidate to ground**: who calls this, is it reachable, what is
+  the falsifier. Bounded, independent, returns a paragraph.
+
+### ⛔ WHERE IT DOES NOT — do these yourself, in the parent
+
+- **Building the two-tree differ and its falsifier.** One tool, one author. Two
+  agents writing extractors is how you get two disagreeing body delimiters,
+  which `luafn.py`'s header exists to prevent.
+- **Setting or amending the taxonomy.** A classification scheme decided in
+  parallel is not a scheme.
+- **Synthesis, prioritisation and the verdict.** The value is in seeing the
+  whole; that cannot be delegated in pieces.
+- ⛔ **ANY WRITE TO A SHARED FILE.** Subagents READ and REPORT; **the parent
+  writes.** Several sessions edit this tree at once and the git index is shared
+  — on 2026-09-08 a directory pathspec swept a peer's untracked file. Do not add
+  concurrent writers to that.
+
+### ⛔ WHAT A SUBAGENT MUST RETURN — evidence, never a verdict alone
+
+A row is worthless unless the parent can act on it without re-reading. Require:
+**file:function · class from §2 · the 1.0.7 and 1.1.x line numbers · what
+actually changed, in one sentence · who reaches it · the falsifier.**
+
+⛔ **"Looks fine" is a rejected result.** So is "no issues found" with nothing
+behind it. This project's whole method is *re-derive the route, not the
+citation* — an agent that returns a conclusion without its route has produced
+exactly the shallow-instrument failure the hunt exists to catch.
+
+### ⛔ THE CONTROL — a fan-out that cannot be falsified is not evidence
+
+**"Twelve agents found nothing" is indistinguishable from "twelve agents read
+badly."** You must be able to tell those apart:
+
+- ⭐ **Seed known positives.** `F114`, `F115` and `F116` are documented changes
+  in this exact diff, with known classes. Put their functions into the fan-out
+  **without telling the agent they are seeded**, and check they come back
+  correctly classified. An agent pool that misses `F115`'s added `map` parameter
+  is not reporting on the other 2000 rows either.
+- Re-run a sample of rows in the parent and compare.
+- ⚠️ **Report the control's result in the chain's output.** A hit rate on seeded
+  positives is the only number that makes a "nothing found" pass meaningful.
+
+### Practical notes
+
+- ⛔ **`Explore` is the WRONG agent type for classification.** It reads excerpts
+  to LOCATE code; it does not review it. Use it to find call sites, never to
+  judge whether a body changed meaningfully. Using the wrong instrument is this
+  project's recurring failure — do not commit it in the tooling itself.
+- Batch sensibly: one agent per file or per subsystem, not one per function —
+  spawn overhead will dominate and the parent drowns in results.
+- ⚠️ **Subagents are parallelism WITHIN a link. They are not a substitute for
+  splitting the chain** (`CHAIN_METHOD` rule 4) and ⛔ **not a substitute for the
+  terminal audit** — a fan-out is many shallow reads, an audit is one
+  adversarial fresh context. You need both.

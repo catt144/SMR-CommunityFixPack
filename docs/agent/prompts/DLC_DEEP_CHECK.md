@@ -150,8 +150,83 @@ A defensible first cut, to argue with:
     "mostly additive" premise actually held, since the whole chain shape rests
     on it.
 
+⭐ **Build the subagent fan-out of §7 into links 3 and 4** — the preset pass and
+the seam pass are parent-orchestrates-agents work, not one session reading
+15,794 lines.
+
 ⛔ **That premise is the thing most worth attacking.** It came from a function-
 name sweep and an `OnMsg` count on 2026-09-08 — a shallow instrument, of exactly
 the kind this project keeps getting caught by. **Re-derive it before building on
 it**, and if the DLC turns out to patch base behaviour more than it appears to,
 say so loudly: the chain is then shaped wrong and should be rebuilt.
+
+## 7 · ⭐ USE SUBAGENTS — this effort is big enough to warrant it (owner instruction)
+
+⚖️ **Owner, 2026-09-08: where the work is large enough to warrant it, the hunts
+should split it across subagents.** `norman` qualifies at **138 files / 15,794
+lines** across genuinely separable subsystems. ⚠️ **`thomas` does not** — 13
+files / 1,273 lines is one agent, or just read it. Fanning out work that fits in
+one head costs more than it saves.
+
+### The principle: fan out the READING, keep the JUDGEMENT central
+
+⭐ Each agent burns a large context reading source and returns a small
+structured result. One session cannot hold 15,794 lines of new content plus the
+base-game systems it touches — but it can hold the verdicts.
+
+### ✅ WHERE IT WORKS HERE
+
+- **One agent per SEAM from §2** — food resource, colonist needs and services,
+  domes and life support, storage and drones, cargo and trade, tech/laws/
+  policies, save-load, achievements. The seams are the natural unit because each
+  is "this new thing meets that old system", which is one question.
+- **One agent per PRESET GROUP** (`CropPreset`, `Meal`, `Resource`, `LawDef`,
+  `PolicyDef`, `Tech`, `Cargo`) — each injects into a different shared registry,
+  and §1.3 says this is where DLC QC is worst and our instruments blindest.
+- **The non-owner enumeration (§1.2)** — 12 base files referencing DLC content,
+  each independently answerable: *is this a genuine DLC dependency or a name
+  collision?* ⛔ Both directions, per §1.2's warning.
+
+### ⛔ WHERE IT DOES NOT
+
+- **Ruling on §1's "mostly additive" premise.** The whole chain shape rests on
+  it, 99 is told to attack it, and it is a judgement about the DLC as a whole —
+  ⛔ not something to assemble from fragments that each saw one file.
+- **Designing the play leg.** It is one scarce sitting of owner time; it needs
+  one author who knows everything the chain found.
+- **Synthesis and the verdict.**
+- ⛔ **ANY WRITE TO A SHARED FILE.** Subagents READ and REPORT; **the parent
+  writes.** Several sessions edit this tree at once and the git index is shared.
+
+### ⛔ WHAT A SUBAGENT MUST RETURN — evidence, never a verdict alone
+
+**file:line · what the new content does · which existing system it touches · the
+route, re-derived · who reaches it · the falsifier · ⭐ and does it affect
+players who do NOT own the DLC** (§4's question — it sorts severity and the
+developers are least likely to have tested it).
+
+⛔ **"Looks fine" is a rejected result.** An agent returning a conclusion without
+its route has produced the shallow-instrument failure this hunt exists to catch.
+
+### ⛔ THE CONTROL — a fan-out that cannot be falsified is not evidence
+
+**"Nine agents found nothing" is indistinguishable from "nine agents read
+badly."** Seed known positives into the pool without flagging them and check
+they come back — and here the seeds must be REAL, because unlike the vanilla
+diff this content has no catalogue of known defects yet. ⇒ ⭐ **derive two or
+three yourself, by hand, before fanning out**, and use those as the calibration.
+⚠️ **Report the control's hit rate in the chain's output**; a "nothing found"
+pass means nothing without it.
+
+### Practical notes
+
+- ⛔ **`Explore` is the WRONG agent type for this.** It reads excerpts to LOCATE
+  code; it does not review it. Use it to find where a preset is consumed, never
+  to judge whether the interaction is broken.
+- ⚠️ **Presets are DATA, and an agent skimming Lua will skim past them.** If you
+  fan out preset work, say explicitly that the deliverable is field-level — which
+  key, what value, which base-game consumer reads it.
+- ⚠️ **Subagents are parallelism WITHIN a link** — not a substitute for splitting
+  the chain (`CHAIN_METHOD` rule 4), and ⛔ **not a substitute for the terminal
+  audit**. A fan-out is many shallow reads; an audit is one adversarial fresh
+  context. You need both.
