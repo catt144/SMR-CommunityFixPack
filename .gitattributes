@@ -1,6 +1,18 @@
 # core.autocrlf is true in this clone, so anything git checks out gets CRLF
 # unless told otherwise. A shell script with CRLF endings dies on its own
 # shebang (`/bin/sh^M: bad interpreter`), silently, on a fresh clone — so the
-# hooks are pinned to LF. Nothing else in the repo needs pinning: the Lua and
-# the docs are read by tools that do not care.
+# hooks are pinned to LF.
 tools/hooks/* text eol=lf
+
+# ⛔ The line above used to be followed by "Nothing else in the repo needs
+# pinning: the Lua and the docs are read by tools that do not care." That was
+# FALSE, and it is why this pin took three weeks to arrive: doccheck.py counts
+# STATE.md's bytes RAW off the disk against a 9216-byte warn, so a CRLF
+# checkout adds one byte per line and warns on content that never changed.
+# Measured 2026-09-09: 9211 B LF over 105 lines = 9316 B as CRLF, i.e. 100
+# bytes over the warn on a fresh clone, with 5 bytes of real headroom. A
+# session that does not check the CR count evicts real kernel content to chase
+# a checkout artefact — that already produced one wrong diagnosis (a session
+# calling it a "transient"). Pinned so the cap measures the resource and not
+# the checkout. ⇒ Any file a tool measures in BYTES belongs here.
+docs/agent/STATE.md text eol=lf
