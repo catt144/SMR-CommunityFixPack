@@ -114,12 +114,55 @@ end
 --        -- logged so a wrong-class check can never masquerade as patch rot.
 --   { path = {"const","Scale","Stat"}, kind = "number"|"function"|"table"|"any" }
 --   { test = function() return truthy end, reason = "..." }  -- content checks
+--   { probe = function() return <true iff the shipped body behaves the way this
+--        -- module was written for> end, reason = "..." }  -- BEHAVIOUR check.
+--        -- A specialisation of `test` with three properties `test` lacks:
+--        --  (1) ERROR-TRAPPED. The call runs under pcall. A probe's job is to
+--        --      call a real game function on a stub, and a throw is a
+--        --      legitimate answer, never a propagated error — on 1.1.0
+--        --      LandscapeForEachUnit(stub, cb) indexes map.Landscapes on a
+--        --      non-map and raises, and that throw IS the decline.
+--        --  (2) FAILS CLOSED. ONLY the literal boolean `true` applies. A throw,
+--        --      nil, false, or any OTHER value (a captured table included)
+--        --      declines. "Captured nothing" is UNKNOWN, and UNKNOWN is not
+--        --      permission: AddDomeColonistsModifier returns silently when the
+--        --      stub's GetPropertyMetadata is nil, and reading that silence as
+--        --      "the old shape" is exactly the F-1 bug (VANILLA_FIX_QA §0.3).
+--        --  (3) Its STUB CONTRACT is written beside it — every probe carries a
+--        --      comment naming what the stub must provide and why the target is
+--        --      safe to call on one. ⛔ ONLY for targets verified SYNCHRONOUS
+--        --      and SIDE-EFFECT-FREE on a stub, shown from the shipped body; a
+--        --      target that cannot be shown to be both gets no probe and keeps
+--        --      its existing check.
+--        -- Like `test`, a probe failure does NOT set update_suspect — it is a
+--        -- verdict about behaviour, not patch rot. A probe is also this pack's
+--        -- BRANCH GUARD (FIX_POLICY §2a): confirming the body shape a module was
+--        -- written for necessarily declines on the branch that has the other
+--        -- shape, per module, with no version arithmetic anywhere.
 function SMRFixPack.Require(id, spec)
 	for _, c in ipairs(spec) do
-		local ok, name
+		-- `why` is the probe form's default reason. It is nil on every other
+		-- branch, so the return below is byte-identical for every existing
+		-- check form; no shipped reason string changes.
+		local ok, name, why
 		if c.test then
 			ok = c.test()
 			name = "(custom check)"
+		elseif c.probe then
+			-- Property (1): a throw is a DECLINE, never a propagated error.
+			local pok, res = pcall(c.probe)
+			-- Property (2): strict `true`. A probe that returns what it
+			-- captured rather than a verdict declines instead of reading as
+			-- permission.
+			ok = pok and res == true
+			name = "(behaviour probe)"
+			if not pok then
+				-- Logged, not raised: a throw is an answer, and the answer is
+				-- "decline". Named so an authoring error in the probe itself
+				-- cannot hide inside a silent decline.
+				log("%s: behaviour probe declined (threw: %s)", tostring(id), tostring(res))
+			end
+			why = "the shipped body does not behave the way this fix expects (behaviour probe declined)"
 		elseif c.global then
 			local v = rawget(_G, c.global)
 			local kind = c.kind or "function"
@@ -158,9 +201,11 @@ function SMRFixPack.Require(id, spec)
 			-- Target-SHAPE failures mark the fix for the C1 update report;
 			-- `test` entries do not — a content check owns its own meaning
 			-- (e.g. "already fixed?" verdicts are healthy, not patch rot).
-			local entry = id and not c.test and SMRFixPack.fixes[id]
+			-- `probe` entries are the same kind of thing: a behaviour verdict,
+			-- and on the wrong branch a DECLINE is the correct outcome, not rot.
+			local entry = id and not (c.test or c.probe) and SMRFixPack.fixes[id]
 			if entry then entry.update_suspect = true end
-			return c.reason or (name .. " not found (game update changed it?)")
+			return c.reason or why or (name .. " not found (game update changed it?)")
 		end
 	end
 end
