@@ -49,10 +49,11 @@ routes it.
 
 **Concurrent sessions.** Several Claude sessions commit to this tree at the same
 time and you cannot message them. Therefore: `git pull --ff-only` before you
-start and again before every commit; run `git status` before every commit and
-**never touch a file that shows modified and is not yours**; `git add` and
-`git commit` only your own file by explicit path (never `-A`, never a
-directory); push immediately after committing. Commit messages via
+start; run `git status` before every commit and **never touch a file that
+shows modified and is not yours**; `git add` and `git commit` only your own
+file by explicit path (never `-A`, never a directory); push immediately after
+committing. If the push is rejected because the remote moved, run
+`git pull --rebase` and push again — never `--force`. Commit messages via
 `git commit -F <file>` (embedded quotes break under PowerShell 5.1). Put
 "Codex" in the commit subject so the owner can tell vendors apart.
 
@@ -426,8 +427,9 @@ Required shape, in this order:
    paragraph each, with your recommendation first.
 8. **Gates** — the `doccheck` last line, and any `STATE.md` byte line verbatim.
 
-Then `git pull --ff-only`, `python tools/doccheck.py` (GREEN), `git add` your
-file by path, `git commit -F <msgfile>` with "Codex" in the subject, `git push`.
+Then `python tools/doccheck.py` (GREEN), `git add` your file by path,
+`git commit -F <msgfile>` with "Codex" in the subject, `git push`; if the push
+is rejected, `git pull --rebase` then push again.
 
 Bindings, restated: read-only everywhere except your one file; no game launch;
 no game-directory write; no store text; no status moved; a source read is never
