@@ -25,6 +25,10 @@ appended below.**
 every README row must be struck. **A non-empty folder is a DO NOT SHIP**, full
 stop — it means a link did not finish and nobody owns what it dropped.
 
+⚠️ **This is a reading you take when you START.** §12 has you AUTHOR
+`100_DOCSWEEP.md` as your final act, so the folder is deliberately non-empty when
+you finish. That is the designed end state, not a failed gate.
+
 ## 2 · Pass A — the instruments, re-run by you
 
 Re-run `doccheck.py` (+ `--emit-counts`), `sigcheck.py`, `bodycheck.py` and
@@ -182,7 +186,69 @@ Write it to `agent/reports/HOTFIX_2_AUDIT.md`. File owner decisions in
   context should look at it — the executor is the wrong person to certify its own
   rewrites, and this project has that on the record.
 
-## 12 · Close-out
+## 12 · YOUR LAST JOB — author `100_DOCSWEEP.md`
+
+⚖️ **Owner instruction, 2026-09-08:** the doc sweep for this patch is a
+**self-consuming prompt that YOU write, as the final act of this audit, and that
+fires AFTER you.** ⛔ Not before — *"we need the audits results."* Your findings
+are half its input; a sweep authored earlier would be sweeping against a
+description of the patch rather than the audited fact of it.
+
+⛔ **This does not change §1.** The folder-empty gate is a reading you take when
+you START — every upstream link consumed. `100_DOCSWEEP.md` is created at the
+END, by you, and is the one file permitted to outlive this audit. A later reader
+finding `99` + `100` + `README` has found a chain that finished correctly, **not
+a DO NOT SHIP.** Say so in the README row so nobody trips on it.
+
+**Template: `prompts/PUBLIC_SURFACE_SWEEP.md`** — the standing sweep, run
+"whenever a fix is added, retired, or materially re-scoped". Use its structure
+(site → store cards → `metadata.lua` → reporter → close the loop → condensed
+checklist) and its rule that **the bug entry is authority and every public
+surface is derived from it, never the reverse.**
+
+⛔ **But it is a TEMPLATE, not a form to fill in, and the reason is structural:
+that sweep is written for ADDING one fix. This patch REMOVES ~36 and re-arms
+several.** Its whole §0 logic — "does this fix have a player surface at all?" —
+inverts. The questions your prompt must ask instead:
+- what did a player SEE that they will no longer see, and how is that said
+  without reading as a capability loss? (`02`'s framing: the game fixed these
+  itself, and a fix duplicating the game's own is a risk with no benefit);
+- which surfaces named a fix that **no longer exists**;
+- which counts were derived from the fix list and are now wrong.
+
+### ⛔ Known-false surfaces to seed it with — already found, do not re-derive
+
+`F108` (`ExtractorStaffedPerformance`) and `F107`/`F105` (`LandscapeCostRefresh`)
+are **named on the store cards and the site while both modules are gone.**
+Link 02 removed the fix-list entries and filed the exact lines and wording for
+the rest rather than editing across a fence. ⚠️ **Two different clocks, and the
+sweep must not conflate them:**
+- **the site is LIVE and WRONG NOW** — its FAQ and index pages still name removed
+  fixes, and the deployed page is public today;
+- **the store cards and `metadata.lua` become wrong ON UPLOAD** — they still
+  describe v5, which really does contain those modules.
+
+⇒ ⭐ **Say plainly in your verdict whether the live-site half should be fixed
+BEFORE the upload or with it.** That is a real sequencing question and it is the
+owner's to answer, not the sweep author's to assume.
+
+### What the prompt you write must be
+
+1. A **first-class chain member** — full inbox (⛔ a real copy, not a pointer:
+   `99` is deleted on its own close-out), a README row, and rule 2's close-out
+   (`git rm` itself, strike its row).
+2. Carrying **your audit's findings**, especially Pass F's, verbatim enough that
+   its session does not have to re-derive them.
+3. ⛔ Naming the **count** discipline: `python tools/doccheck.py --emit-counts`
+   and a recount from the deployed fix list. Never a hand-typed number, and
+   never a count carried forward from before the deletions.
+4. ⛔ Bound by `H-02` — no upload, no `version` edit, no Mod Editor. `EF-054` /
+   `FIX_POLICY` §8 — never name fredware's mod, no load-order advice.
+5. Explicit about the `UPLOAD_WORKFLOW` §3 **paste backups**: they are the real
+   delivery path, auto-fill has never produced a clean page in two cycles, and
+   they must be re-synced with `metadata.lua` in the same commit.
+
+## 13 · Close-out
 
 Green gates. `STATE.md` updated to point at the audit report (⚠️ byte-capped —
 evict in the same commit). ⛔ **You do not delete this file** unless the chain is

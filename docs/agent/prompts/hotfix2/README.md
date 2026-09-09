@@ -20,7 +20,8 @@ Authored 2026-09-08 by `smr-bugfixpack-91` under `prompts/HOTFIX_2_HANDOFF.md`
 | 04b | `04b_RECOPIES_C.md` | Opus | ✅ no | group **C**: F-8, F-9, F-10 — **all three RULED IN by ck123**, partly reverting ck109; every gate STAYS. ⛔ Highest-risk work in the patch; F-9 is a ~98-line rewritten function and may split again to `04c` |
 | 05 | `05_TOOLS_TAIL.md` | Opus | no | `sigcheck.py` over `SetGlobal` sites (A-4), `logscan.py` heal-aware + benign-latch retire list (A-2/A-3), A-1 `GeneForging` |
 | 06 | `06_TEXT.md` | Opus | no | ck112/113 store wording, `metadata.lua` `last_changes`, `UPLOAD_WORKFLOW` §3 paste backups, the site fix list |
-| 99 | `99_TERMINAL_AUDIT.md` | Fable | reports to owner | adversarial backward QA over the whole result; SHIP / SHIP WITH CHANGES / DO NOT SHIP |
+| 99 | `99_TERMINAL_AUDIT.md` | Fable | reports to owner | adversarial backward QA over the whole result; SHIP / SHIP WITH CHANGES / DO NOT SHIP · **and as its LAST act, authors `100_DOCSWEEP.md`** (owner instruction: the sweep needs the audit's results, so it is written after, not before) |
+| 100 | `100_DOCSWEEP.md` | — | — | ⏳ **DOES NOT EXIST YET — `99` writes it.** The public-surface sweep for this patch, templated on `prompts/PUBLIC_SURFACE_SWEEP.md` but INVERTED (that sweep adds one fix; this one retires ~36). ⚠️ Seeded with the known-false surfaces: `F108` and `F107`/`F105` are named on the store cards and the site while both modules are gone |
 
 **Ordering.** 01 is strictly first — 02, 03 and 04 all use `bodycheck.py` and the
 `probe` form. **02 before 03 and 04**, because 02 owns `items.lua` and the
@@ -28,7 +29,9 @@ Authored 2026-09-08 by `smr-bugfixpack-91` under `prompts/HOTFIX_2_HANDOFF.md`
 independent of each other and may run in either order. **04 and 04b are also
 independent of each other** — either order, or in parallel by two sessions, since
 they share no module and no file. 05 and 06 are independent of everything except
-01. 99 is last and runs only on an empty folder.
+01. 99 is last and runs only on an empty folder — ⚠️ **and `100_DOCSWEEP.md`
+comes AFTER 99, authored BY 99.** A folder holding `99` + `100` + this file at
+the end is the designed end state, not an unfinished chain.
 
 ⭐ **Why 04 split into 04 + 04b, recorded per `CHAIN_METHOD` §3.** Split
 2026-09-08 **before either half ran**, under rule 4 and the owner's explicit

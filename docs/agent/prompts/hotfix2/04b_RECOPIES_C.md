@@ -67,6 +67,33 @@ filter (`:503`). Signature is now `(map, mark, callback, ...)` reading
 
 ⚠️ **Reach is now Clear-Waste-Rock sites only** (`ClearWasteRockConstructionSite
 .lua:79-85`); `LandscapeConstructionSite` no longer defines `GetUnitsUnderneath`.
+
+> ⭐ **RE-CHECKED 2026-09-08 against the shipped tree, and the CONCLUSION HOLDS
+> but the EVIDENCE ABOVE IS THE WRONG KIND.** Read this before you rely on it.
+> * ✅ **Reach really is Clear-Waste-Rock only** — but the sound evidence is a
+>   CALLER grep, not a class-declaration claim: `LandscapeForEachUnit` has
+>   **exactly one caller in the whole tree**,
+>   `ClearWasteRockConstructionSite.lua:81`.
+> * ⛔ **`GetUnitsUnderneath` HAS NOT GONE ANYWHERE.** It is declared on the base
+>   `ConstructionSite` (`ConstructionSite.lua:1909`) and overridden on
+>   `ClearWasteRockConstructionSite` (`:79`). `LandscapeConstructionSite` still
+>   exists (`LandscapeConstructionSite.lua:3`) and **inherits it.** "Class X no
+>   longer defines Y" is a statement about SELF-DECLARATION (the F64 lesson), and
+>   a reader who takes it as "the capability is gone" is wrong.
+> * ✅ **The defect is REAL and present**, read directly rather than inferred:
+>   `filter_embark` is built at `Landscaping.lua:516-521` and **never used** —
+>   `callback` is passed at `:522`, and `filter_embark` has exactly ONE hit in
+>   the entire tree, its own definition. ⇒ **the repair is passing
+>   `filter_embark` instead of `callback` at `:522`.**
+>
+> ⚠️ **Why this note exists rather than a silent correction** (link 02's rule,
+> proven in this chain the same day): *"grep found 0 hits" can only prove the old
+> NAME is gone, never that the FEATURE was removed.* A `Landscapes`-style
+> name-absence claim already produced one false conclusion in this chain (the
+> withdrawn "1.1.0 deleted the low-Food warning" — it was RENAMED to
+> `StarvingColonists`). ⛔ **If any other disposition you meet here rests on
+> "vanilla deleted X" backed by a name grep, search for the CAPABILITY — the
+> preset, the UI string, the overriding subclass — not the old identifier.**
 ⭐ The underlying defect (F34(d)) reproduced **20/20 on PT-60** — ⛔ but that was
 under 1.1.0's *wider* pre-narrowing reach, so do not restate 20/20 as this
 patch's expected hit rate.
