@@ -25,7 +25,7 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   ✅✅ BOTH GATES MEASURED 09-08 (`archive/logs/gated110_*`): 63 applied / 17 inactive / 14 named as predicted,
   0 errors; both `update_suspect` routes CONFIRMED. ⛔ MENU-ONLY ⇒ trains/landscaping NOT exercised in play.
   ✅ **HOTFIX_1_AUDIT DONE 09-08: SHIP WITH CHANGES — text-only (ck112/113), code clean**
-  (`reports/HOTFIX_1_AUDIT.md`). NEXT `prompts/hotfix2/` (7-link chain)
+  (`reports/HOTFIX_1_AUDIT.md`). NEXT `prompts/hotfix2/` (8-link chain)
   ⚖️ Owner rule 09-08: a patch note saying "Fixed" is a **CLAIM, false until we confirm it**.
 - ⭐ PUBLISHED both portals — `pdx_id` **156049**, `steam_id` **3787202810**, tree `version` **5** (F110, 08-30).
   ⛔ Never re-upload to "fix" a version number — each upload bumps again (H-02). ⛔ Every upload OVERWRITES both
