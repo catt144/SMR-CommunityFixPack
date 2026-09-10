@@ -8,6 +8,42 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-09 (last) — 100, the doc sweep: the change note says what the tree does, the site says which build is which, and the hotfix-2 chain is closed
+
+tags: 100 hotfix2 F95 F115 F117 ck47 ck126 ck127 ck128 ck129 ck133 EF-075 EF-078 EF-083 STORE_CARD_LIVE UPLOAD_WORKFLOW site
+
+Brief `prompts/hotfix2/100_DOCSWEEP.md` (CONSUMED by this commit). Tree `dffa062` at start; folder `100` + `README.md` (the
+designed state); `777249d` on `main` for `Code/Fix_ArrivalDeaths.lua`; both gates read in the checklist (126 KEEP, 127(a)) and
+the owner's "fire 100: yes" beside them. Four peers messaged, none in the lane. Nothing ran in a game, no status word moved,
+`Code/` and `version` untouched. Retired-phrase sweep (the brief's 13 phrases): 0 hits on the shipped strings, both backups
+and the whole site — none to name.
+* **Unit A (`7830134`)** — `last_changes` bullet 2 → "removed the next time that save loads" (ck126/128, `F95`); bullet 4
+  gains the F117 line in the RE-DERIVED recipe's words (ck127(a), `F117` §Control: no walkable dome, the only route a
+  passenger train) — "is gone" is a claim, bullet 5 disclaims. `metadata.lua` + `UPLOAD_WORKFLOW` §3 + `STORE_CARD_LIVE`
+  in ONE commit, proven by `verify_sync.py` (06's shape): description 5342 == §3 plain (0 differing lines), BBCode == BBCode,
+  note 1957 == note, summary 184 == summary, SCL plain +143 = the two portal passages only, count word *Forty-six* ×5.
+  parsecheck OK (352 CRLF kept), preflight 0 FAIL.
+* **Unit B (site `dc892d1`)** — `faq.md:176` + `for-modders.md:15` "built against 1.0.7.396349" → **1.1.0.403908** (re-read
+  from `EF-078`, NOT `EF-075` as the brief said — EF-075 never carried the number) with the frozen build named as the 1.0.7
+  one; the FAQ save-repair list gains the F95 pass. ⭐ `for-modders.md:33/:43` named `DustDevilSpawnGate` (deleted by 02) →
+  `LakeEntombment` — a retired-ID hit the retired-PHRASE sweep cannot see (all 36 deleted ids grepped: nothing else).
+  ⭐ `index.md` carried "Nothing here is published yet" LIVE since 08-20 — removed (no sweep had it: it names no fix).
+  `mkdocs build --strict` clean, rendered lines read. ck47's two wordings untouched. Published AFTER the upload (ck129).
+* **Unit C (`5d6af93`)** — §4 drift list: README "tree is GONE" → ARCHIVED (`EF-083`; 99a's "second instance" was the same
+  paragraph, :137 had become :164); `PUBLIC_SURFACE_SWEEP` count-agnostic ×4; `POST_UPLOAD_CLOSE:59` "82 entries" was the
+  v1.0.0 PACK's entry count, not the fix count the brief read it as → `pack_predict.py`; `WORKFLOW:407` baseline VOID;
+  `F115` :10/:14/:168 "17 as read (16 heal-aware)", :135 kept. ⚠️ FILED, out of fence: `EF-075`'s summary still says the
+  1.0.7 base "no longer exists on disk" (`ad5f93d` touched only `VANILLA_DIFF_HUNT.md`); dated "tree is gone" records left
+  in F115:73, F116:116, EF-082:60, REVERIFICATION:294.
+* **Unit D (this commit)** — checklist: receipts 126/127/128 + the 129 sitting order + the three in-fence fixes; **133** =
+  the six `SELFCHECK_PROMISE_COMBINED.md` §7 decisions routed by `smr-bugfixpack-db`; README row 100 struck, folder =
+  `README.md` alone; STATE measured by doccheck, never quoted.
+* **Drift (chain rule 5):** three seeds were stale on arrival (EF-075 for the build number; "82 entries" as a fix count;
+  README:137 as a line number) and the phrase list is blind to module IDs — the next sweep greps the deleted-id list too.
+  The brief's model column said Opus; the owner fired it on Fable.
+
+---
+
 ## 2026-09-09 (late) — 99b, the bench link: four instruments repaired, two probes rebuilt, F117's recipe re-derived — nothing ran in a game
 
 tags: 99b hotfix2 F03 F20 F31 F59 F67 F69 F105 F117 C43 C47 ck131 ck132 EF-065 testkit lupa

@@ -20,10 +20,10 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   repaired; F-6…F-10 RE-COPIED; F116 ck111/119 landed. Kit **94** probes (99b, 09-09 late), 32 `retired`.
   ⭐ **99 TERMINAL AUDIT 09-09: SHIP WITH CHANGES** (`reports/HOTFIX_2_AUDIT.md`): F117 ⇒ ck127 (repaired, below); ck128 rides
   ck126; ck129; F118/C55 filed; F60 REMOVE candidate (hotfix 3); Pass D: 3 KEEP wrappers under class (c), seen by NO instrument.
-  `100_DOCSWEEP.md` AUTHORED — fires BEFORE the upload sitting (bullet 2 ships in `metadata.lua`).
   ⭐ **LINK 99a LANDED 09-09** — LAST CODE in hotfix 2; **99b BENCH LANDED 09-09 late** (commits: `prompts/hotfix2/README.md`).
   ⛔ NEITHER REPRODUCED, no probe for F118, NO status word moved. ✅ Desk falsifiers PROMOTED: `tools/deskbench.py` + 4 `desk_*.py`.
-  Next and last: `100_DOCSWEEP` — owner CLEARED it 09-09 late; the ONLY thing between the tree and the upload.
+  ✅ **100_DOCSWEEP LANDED 09-09** (`7830134` note · site `dc892d1` · `5d6af93` drift · close-out = the commit striking README row 100):
+  CHAIN CLOSED, folder = `README.md` alone. NEXT = the UPLOAD SITTING, ck129 order: upload → store pages → publish site.
   🎮 **SITTING RAN 09-09 ATTENDED** (`archive/logs/sitting{boot,suite,play}110_*`, all read AFTER exit). 99 SHIP ≠ clearance (H-04).
   🎮 **SITTING 2 RAN 09-09 EVENING ATTENDED** (`archive/logs/sitting2play110_*`, read AFTER exit — §3 earned again, SESSION_LOG).
   Census `44 applied / 0 inactive`, **0 error-shaped lines** (THIRD independent boot). Opt-in OFF by `Loaded mod items for:`.
@@ -102,17 +102,15 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 - 98 rig half only (⛔ Steam = ONE branch at a time, owner 09-08) · 99 disposition of the self-disabled ·
   100 say anything to players yet (rec no) · 101 accept the re-verification chain shape.
 - 112 DEFERRED 09-09 · **125** RULED+LANDED 09-09: F66 guard yields to `force` (desk-controlled, untested); wrapper re-read → 99.
-- ✅ **126/127/129 RULED 09-09**: **126** F95 pass STAYS (supersedes ck120; sanitizer non-removable on EVERY platform,
-  ACCEPTED — 1.0.7 players served by ck118's frozen GitHub build) ⇒ **128** takes the "removed on next load" wording ·
-  **127(a)** FIX F117 BEFORE the upload ⇒ a code link is OWED (`reports/HOTFIX_2_AUDIT.md` §5 rows 1-3 = its inbox; it
-  `git rm`s 99) · **129** publish the site AFTER the upload, same sitting.
+- ✅ **126/127/128/129 RULED 09-09 and CARRIED OUT by 100** (receipts in the checklist): F95 pass STAYS, note bullet 2 says
+  "removed on next load" · F117 FIXED BEFORE the upload (`777249d`) · **129 = the sitting's order: upload → store pages → site**.
 - **130 RULED 09-09**: Saint heal SHIPS UNEXERCISED — condition is historical, unforgeable (`EF-080` override yields
   `restored 0`); additive-only and cannot throw (`Lua/TraitPreset.lua:77-95` no throwing path, `WhenActive` is a gate not
   a trap). ⛔ Its kit probe PASSes vacuously with no domed Saint — NOT coverage. Field reports are the detector.
-- ⛔ BLOCKS the upload: `100_DOCSWEEP` ALONE again (the 2 kit items landed 09-09 late, 99b). 118 RULED ⇒ re-copies MUST
-  decline on 1.0.7 (§2a).
+- ⛔ BLOCKS the upload: nothing but the sitting itself (H-04; chain closed 09-09). 118 RULED ⇒ re-copies MUST decline on 1.0.7 (§2a).
 - ✅ **131** RULED promote + LANDED 09-09 late (`tools/desk_*.py`) · **132** STATE.md warn:
-  raise 12288 again or accept per-session eviction until the 1.1.0 fallout closes (99b found 73 B headroom on arrival; GROWING).
+  raise 12288 again or accept per-session eviction until the 1.1.0 fallout closes (GROWING) · **133** six self-check-promise
+  decisions (`reports/SELFCHECK_PROMISE_COMBINED.md` §7), routed 09-09.
 - 73 blame surface — harden or not · 76 confirm (a) was a ruling not a leaning · 53 harden now or in 1.0.1
   (rec 1.0.1) · 51 both-packs leg timing (rec after launch) · 50 chain-vs-replace wording · 47 two modder-page
   wordings · 43 opt-in pack re-tick · 41 dialog wording + sweep cap 5→8 · 40 `smr_shuttles` name · 39 dialog re-fire.

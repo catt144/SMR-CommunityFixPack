@@ -29,6 +29,62 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### ✅ 2026-09-09 — `100_DOCSWEEP` IS DONE: the words now match the pack that ships. The hotfix-2 chain is closed; the only thing left is your upload sitting.
+
+> **Receipts for 126, 127 and 128 — carried out, not just ruled.**
+> * **126 (F95 pass STAYS) ⇒ 128.** The change note's second bullet now says the
+>   leftover Astrogeologist bonus *"is removed the next time that save loads"*
+>   instead of *"cannot take back"*, and the site FAQ's save-repair list names
+>   the pass. Moved together in `metadata.lua`, the paste backups in
+>   `UPLOAD_WORKFLOW` §3, and the site (`7830134`; site `dc892d1`), proven
+>   identical by script. ⚠️ Still a claim: the pass has never met a save that
+>   carried the residue (your sitting read `removed 0 … left 0`). If a
+>   `LEFT n … ALONE` line ever appears, that is the one to report — unchanged
+>   from your 126 block.
+> * **127(a) (F117 fixed first).** The fourth bullet gains *"an error popup that
+>   could appear when new arrivals had no dome within walking distance and their
+>   only route to one was a passenger train is gone"*. Written against `777249d`,
+>   the repair on `main`, in the words of the re-derived recipe (the
+>   passenger-station layout), not the withdrawn "ordinary mid-game" one.
+>   ⛔ "Is gone" is a claim until the F117 control runs; the note's last bullet
+>   says so in your words, as it does for everything else in it.
+> * **The one sitting instruction that survives — 129:** upload → check or paste
+>   both store pages (`UPLOAD_WORKFLOW` §3) → **then** publish the site (§4), in
+>   the same sitting. The committed site now says the store pack is built
+>   against game 1.1.0.403908 and points 1.0.7 players at the frozen build; the
+>   live site keeps saying 1.0.7 until you publish, which is right for the v5
+>   people have today.
+>
+> **Three things fixed on the way, nothing to decide:** the site's front page had
+> carried a *"Nothing here is published yet"* note since 2026-08-20 — removed;
+> the modder page's example named a fix hotfix 2 deleted (`DustDevilSpawnGate`)
+> — now `LakeEntombment`, the example the store card already uses (your item
+> **47**'s two wordings on that page are untouched and still yours); and the
+> retired-phrase sweep over the store strings, both backups and the whole site
+> came back with zero hits.
+>
+> ⛔ Not clearance (`H-04`). Nothing ran in a game, no status word moved,
+> `version` untouched. `tools/upload_preflight.py` reads 0 FAIL; the store
+> strings and both backups are byte-identical by script.
+
+### 2026-09-09 — 133: six decisions from the self-check promise audit that lived only in an agent report. None blocks the upload.
+
+> Raised by `smr-bugfixpack-db` and routed here so they are not lost; the
+> bodies and the reasoning are in `agent/reports/SELFCHECK_PROMISE_COMBINED.md`
+> §7, one line each here:
+> 1. Commission the self-check **pilot**, then the bounded prototype (three
+>    modules), after the upload — recommend yes.
+> 2. What a fix does when its probe answers **UNKNOWN**: decline (recommended),
+>    or name the exception in the wording.
+> 3. HOW IT WORKS **bullet 3** stays over-promising through this upload (your
+>    112 ruling); change it only when the transaction + pins ship.
+> 4. Whether `LuaRevision` may serve as an **observation label** — clarify
+>    `FIX_POLICY` §2a's heading, or leave it forbidden.
+> 5. "Job two": a **breadcrumb** yes/no; the engine box untouched (recommended).
+> 6. If the pilot confirms an indirect `load` in the engine environment
+>    (`LuaCodeToTuple`), whether to **report it to the developers**. Not ours to
+>    use either way.
+
 ### 🎮 2026-09-09 — THE SITTING RAN. Tier 1 is complete and green; what it still owes is below.
 
 > **You were at the keyboard 16:55–18:10. Tier 1 finished, four of twelve Tier 2
