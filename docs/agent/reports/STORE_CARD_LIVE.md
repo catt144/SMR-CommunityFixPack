@@ -358,6 +358,20 @@ until the owner pastes them at a sitting.
 ⛔ The count moved 80 → 81 with it. Re-derived, never typed:
 `grep -c '^??? ' content/fix-list.md` in `C:\Dev\SMR-CommunityMods`.
 
+## ⭐ 2026-09-09 — hotfix 2's doc sweep (`100_DOCSWEEP`): the description did NOT move, the change note did
+
+Re-verified by script (`verify_sync.py`, link 06's shape), not by eye:
+`metadata.lua` `description` == `UPLOAD_WORKFLOW` §3 plain block, 0 differing
+lines; the two BBCode blocks identical; this file's plain block +143 chars = the
+two portal passages only; count word *Forty-six* in all five copies. Recounted:
+`grep -c '^??? '` = **46**, "Under the hood" = **3**, judgment calls = **3**.
+
+What moved, and it lives in `metadata.lua` `last_changes` + `UPLOAD_WORKFLOW` §3
+only (this file carries no change note): bullet 2's Astrogeologist sentence now
+says the leftover bonus **is removed on the next load** (ck126 KEEP, `bugs/F95.md`)
+instead of "cannot take back"; bullet 4 gains the F117 line (ck127(a), `777249d`,
+`bugs/F117.md`). ⛔ Both are CLAIMS until the sitting; bullet 5 says so.
+
 ## Provenance of the headliners
 
 ⛔ **Not invented for the card.** Every bullet is a compressed form of an entry
