@@ -7,10 +7,10 @@ parent owns every repository write, sample, verdict, filing and handoff.
 
 - [x] Pin HEAD/build/manifests, size the exact 03b queue, and commit this plan;
   PROBE SWEEP: clean; chain gates GREEN.
-- [>] Read the 560-row food/resource/UI preset batch; parent re-derives its
+- [x] Read the 560-row food/resource/UI preset batch; parent re-derives its
   surviving leads and sample, records exact coverage, then runs chain gates and
   commits the durable report.
-- [ ] Read the 548-row progression/politics preset batch; parent re-derives its
+- [>] Read the 548-row progression/politics preset batch; parent re-derives its
   surviving leads and sample, records exact coverage, then runs chain gates and
   commits the durable report.
 - [ ] Read the 510-row support/story preset batch; parent re-derives its
@@ -88,4 +88,3 @@ as 03b coverage. Runtime proof becomes a checklist rider, never an unattended
 launch. If context cannot hold the remaining work, the parent first commits all
 authorized filing and creates a first-class child with exact remaining keys,
 README ownership and a 99 gate.
-
