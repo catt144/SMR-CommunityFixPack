@@ -1,9 +1,9 @@
 <!-- GENERATED — never hand-edit; regenerate with: python tools/doccheck.py --regen -->
 <!-- split_bugs.py --write is the one-time MIGRATION from the retired pre-split doc, never a regeneration; verify: python tools/doccheck.py -->
 
-# Bug index — 206 rows, 171 entry files
+# Bug index — 207 rows, 172 entry files
 
-118 F + 12 D + 76 C. `seq` is the entry's position in the old BUGS.md file order;
+118 F + 12 D + 77 C. `seq` is the entry's position in the old BUGS.md file order;
 the row order below is the old index table's own. Generated from the front matter of
 `docs/agent/bugs/*.md` — edit an entry, not this file.
 
@@ -219,4 +219,5 @@ the row order below is the old index table's own. Generated from the front matte
 | 169 | C74 | Rare Metals Extractor hammer and MOXIE pump play no strike FX: the moment tracker looks presets up by animation INDEX while they are keyed by NAME, and the hammer/pump have no AnimMetadata presets at all — fix PROVEN LIVE (attended) | filed | P3 | MEASURED (owner console, attended) + LIVE FIX PROVEN attended + source-read | [C74.md](C74.md) |
 | 170 | C75 | The Incident's no-explosion branch never suspends new Fusion Reactor construction | cand | P2 | source-read | [C75.md](C75.md) |
 | 171 | C76 | DiscoverTech ignores all 26 authored custom costs for ordinary researchable techs | cand | P2 | source-read | [C76.md](C76.md) |
+| 172 | C77 | Five units' animation-moment FX never play — The Excavator dust, Shuttle Hub landing/take-off, Water Extractor pump, RC Terraformer, RC Driller: TrackAllMoments finds zero moments because no AnimMetadata preset exists for their entities (C74's second half, on a correct tracker) | cand | P3 | source-read (desk, both trees) + sample search; runtime unobserved | [C77.md](C77.md) |
 

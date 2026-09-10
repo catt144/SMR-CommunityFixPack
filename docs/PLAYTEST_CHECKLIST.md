@@ -73,6 +73,23 @@ completed tests move whole to
 > players will report the fix as broken. Your three screenshots are saved for
 > that (`agent/reports/c74_skins/`: drill default → Change Skin button →
 > hammer).
+>
+> ⭐ **Update 2026-09-10 (desk sweep): the same silence reaches five more units**
+> ([C77](agent/bugs/C77.md)). Each has sounds and effects that are written and
+> packed with the game but never play: **The Excavator's** 24 dust puffs, the
+> **shuttle's** landing and take-off sounds at a Shuttle Hub, the **Water
+> Extractor** pump, the **RC Terraformer** and the **RC Driller**. It is the same
+> missing strike-marker data, but their code already asks for markers the right
+> way, so each unit needs only its markers, not the code correction. Nothing is
+> proven on these yet. So the decision grows: **build the hammer + MOXIE only,
+> or all of them?** Each extra unit costs one "find the times by ear" step with
+> you. Recommendation: keep 139 as the hammer + MOXIE, and decide C77 after one
+> check in the MOXIE sitting below.
+>
+> **In the same MOXIE sitting (about 1 extra minute):** one console line prints
+> which of these units your colony has and how many strike markers each one
+> sees. The agent hands it over; a zero on a unit that is visibly moving proves
+> it. Report: `agent/reports/C74_SOUND_SWEEP.md`.
 
 ### 2026-09-10 — 138 rider: eight caller-seam candidates need fresh 1.1 fixtures; none is a release gate. **Decision: take only the naturally available fixture(s), or leave the candidates source-only. Recommendation: prioritize C66 and fold C67/C68 together if a food-service fixture is already available.**
 
