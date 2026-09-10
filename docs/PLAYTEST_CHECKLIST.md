@@ -92,7 +92,9 @@ completed tests move whole to
 > any boosts. Apply each entry's vacuity/falsifier; skip the fixture if it does
 > not arise naturally.
 
-### 2026-09-10 — 139: C74, the Rare Metals Extractor's hammer (and the MOXIE pump) play no strike sounds. You proved the fix live: the game's own code plays them once two small things are added. **Decision: build it for hotfix 3, or file and watch. Recommendation: build it — small, save-clean, and the game does the work, not a timer of ours.**
+### ✅ 2026-09-10 — 139 RULED: **BUILD** — all seven silent units (C74 hammer + MOXIE, C77's five), Metatron left out. Build prompt: `agent/prompts/C74_BUILD.md`; fire it with *task docs/agent/prompts/C74_BUILD.md*. It also covers your two follow-ups: old saves need no power cycle (a one-time pass on load), and a later game fix makes ours step aside (worst case a doubled sound). Owed from you: one short in-person check at the end of the build.
+
+Original question, kept as asked: C74, the Rare Metals Extractor's hammer (and the MOXIE pump) play no strike sounds. You proved the fix live: the game's own code plays them once two small things are added. **Decision: build it for hotfix 3, or file and watch. Recommendation: build it — small, save-clean, and the game does the work, not a timer of ours.**
 
 > **What you measured and proved (2026-09-10, thank you):** the sounds, the
 > steam puffs and their wiring all work when fired by hand. Two game bugs stop
@@ -156,10 +158,10 @@ completed tests move whole to
 > shuttle, the RC Driller, the RC Dozer and The Excavator. Every one is heard or
 > seen working by you; it's one module, cosmetic only, and nothing goes into saves. Still worth a
 > glance when convenient, not required: whether the shuttle's touchdown/lift-off
-> and the Dozer's shovel land exactly on the motion (first-guess timings). So the decision grows: **build the hammer + MOXIE only,
+> and the Dozer's shovel land exactly on the motion (first-guess timings). ~~So the decision grows: **build the hammer + MOXIE only,
 > or all of them?** Each extra unit costs one "find the times by ear" step with
 > you. Recommendation: keep 139 as the hammer + MOXIE, and decide C77 after one
-> check in the MOXIE sitting below.
+> check in the MOXIE sitting below.~~ *(Earlier wording, superseded the same day by the recommendation above; you ruled: all seven.)*
 >
 > **In the same MOXIE sitting (about 1 extra minute):** one console line prints
 > which of these units your colony has and how many strike markers each one

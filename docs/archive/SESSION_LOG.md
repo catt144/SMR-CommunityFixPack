@@ -8,6 +8,22 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-10 — ck139 RULED BUILD; the build prompt made takeable (`smr-bugfixpack-04`, owner in conversation)
+
+tags: ck139 C74 C77 C74_BUILD old-save patch-safety
+
+Owner asked (1) whether players must power-cycle, (2) patch safety if the devs fix it, then ruled "write a prompt to
+do the build" = **139 BUILD, all seven units, Metatron out** (scope = the recommendation; assumption stated to the
+owner). Desk findings, NOT run — `C74_BUILD.md` step 0 re-derives them: both trackers give up for good when started with
+no markers (`BaseBuilding.lua:1047-1049`; `Building.lua:3369`, `:3379`), so pre-module saves hold dead trackers; Shuttle /
+RC Driller / RC Dozer restart per flight/job/task and heal alone; hammer, MOXIE, Water Extractor, Excavator need a
+one-time load pass (Excavator: `dig_fx_thread` only, restart gated on the live `dig_anim_thread`, `TheExcavator.lua:116`).
+Dev-fix rules: guard timing vs game/DLC preset load (unmeasured), replace-never-add trackers, load pass gated on no live
+tracker; the one undetectable route (code-driven sound) degrades to a doubled sound — a post-update listen is the backstop.
+Build NOT started (owner: save this session's context).
+
+---
+
 ## 2026-09-10 — the silent-FX handoff consumed (`smr-bugfixpack-04`)
 
 tags: handoff C75 C74_BUILD C77 ck139 STATE-counts
