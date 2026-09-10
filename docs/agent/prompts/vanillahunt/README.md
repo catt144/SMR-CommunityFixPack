@@ -429,6 +429,14 @@ settings; the menu loads, starting a new game crashes.)
     (surface (a)); crashes too ⇒ the shared map-entry / render path. ⛔ The
     Proton save-folder location is unverified — route-check it before any
     player is told where to put the file (checklist 136).
+  - **The OP's machine (their `inxi`, relayed 2026-09-10):** MSI Katana GF76
+    11UE laptop, i7-11800H, **hybrid Intel UHD (TigerLake) + NVIDIA RTX 3060
+    Mobile (GA106, Ampere), driver `580.173.02`**, Linux Mint 22.2 Cinnamon on
+    X11 (LightDM), kernel `7.0.0-31-generic`; Proton 9.0 → 11.02 + hotfix and
+    experimental all crash. ⭐ **"Previous versions ran fine on my Linux
+    machine"** — same machine, 1.0.7 worked ⇒ a 1.1.0 REGRESSION on that
+    hardware, which makes the 1.0.7 branch a same-machine control. The owner's
+    RTX 3070 laptop is being set up to mirror this (checklist 136 item 5).
 
 **FR-2 · "Deep scanning with probes reveals no deep resources."** (Steam,
 2026-09-08, two players; intermittent; one says a clean reinstall fixed it,

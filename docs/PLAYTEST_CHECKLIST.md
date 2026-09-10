@@ -154,6 +154,13 @@ completed tests move whole to
 >    startup banner (about 20 lines), before even the graphics card is listed. The game got as far as New
 >    Game, so everything after those lines was lost in the crash. Only
 >    Proton's log can show where it dies.
+> 5. **Your Linux test rig (your plan, 2026-09-10):** the rarely used RTX 3070
+>    laptop, set up to mirror the thread's original poster (Linux Mint 22.2
+>    Cinnamon, NVIDIA 580 driver, Steam Cloud off for the game, mods left
+>    disabled). Snapshot it with Timeshift once it works. **When it boots Mint,
+>    tell an agent: the FR-1 sitting script is owed then** (crash moment,
+>    `PROTON_LOG=1`, the built-in graphics chip as a non-NVIDIA control, the
+>    1.0.7 branch as a "did it work before" control, a no-mod 1.1.0 save).
 >
 > **The two controls are both in, so no test is needed from you.** ✅ A new
 > game on 1.1.0 WORKS on your Windows/NVIDIA rig **with DLSS 4 on**: every save

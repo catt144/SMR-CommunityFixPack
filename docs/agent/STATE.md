@@ -103,7 +103,8 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 - ✅ **131** RULED promote + LANDED 09-09 late (`tools/desk_*.py`) · **132** STATE.md warn: raise 12288 again or accept
   per-session eviction (this close-out evicted the pre-release material; measure, never quote) · **133** six
   self-check-promise decisions (`reports/SELFCHECK_PROMISE_COMBINED.md` §7), routed 09-09 · **134** assign the vanillahunt
-  chain's models (5 links; rec 03 + 99 Fable), routed 09-10.
+  chain's models (5 links; rec 03 + 99 Fable), routed 09-10 · **139** `C74` hit-moment FX (Rare Metals hammer + MOXIE pump):
+  build or file — fix PROVEN LIVE (`EF-086`), rec build; brief `prompts/C74_BUILD.md`.
 - 73 blame surface — harden or not · 76 confirm (a) was a ruling not a leaning · 53 harden now or in 1.0.1
   (rec 1.0.1) · 51 both-packs leg timing (rec after launch) · 50 chain-vs-replace wording · 47 two modder-page
   wordings · 43 opt-in pack re-tick · 41 dialog wording + sweep cap 5→8 · 40 `smr_shuttles` name · 39 dialog re-fire.
@@ -114,6 +115,6 @@ BUILD STATE (emitted by tools/doccheck.py)
 - modules: 44 registered (44 default-active, 0 optional-gated files)
 - Code/*.lua files: 45
 - TestKit probes: 94
-- BUGS index rows: 118 F + 12 D + 62 C
+- BUGS index rows: 118 F + 12 D + 74 C
 ```
 Re-emit after any change. Game: records describe **1.0.7.396349** (`EF-014`); INSTALLED is now **1.1.0** (`EF-075`).

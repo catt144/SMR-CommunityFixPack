@@ -8,6 +8,20 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-10 — dispatch session handoff (`smr-bugfixpack-ae`): what was open when the context was retired
+
+tags: handoff dispatch C74 FR-1 EF-015 EF-086 ck136 ck139
+
+Owner asked for a stopping point before compaction. Lookback moved everything that lived only in the conversation
+into the tree: the C74 build brief (`prompts/C74_BUILD.md`, TAKEABLE WHEN ck139 = build: caller enumeration first,
+MOXIE timing sitting owed, proven console lines); the owner's Linux rig plan (checklist 136 item 5; FR-1 sitting
+script owed when the laptop boots Mint); the FR-1 OP's hardware and "previous versions ran fine" (vanillahunt README
+§2b); `EF-015` scoped (console `print` DOES reach the log after a flush); STATE counts re-emitted (74 C) and ck139
+added. Still open, not recorded as rules: README rule 15 covers only `bugs/INDEX.md` merges — four parallel links
+closing together will also conflict on STATE's NEXT line, the README queue and the 99 inbox (offered, owner silent).
+
+---
+
 ## 2026-09-10 — C74 root cause is two vanilla defects, and the fix is PROVEN LIVE; EF-086 filed
 
 tags: C74 EF-086 AnimMetadata GetAnim GetStateName TrackMultipleHitMoments MOXIE Metatron ck139 dispatch
