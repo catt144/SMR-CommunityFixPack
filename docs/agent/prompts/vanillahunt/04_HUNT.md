@@ -75,6 +75,16 @@ One item per agent wave, one per verification pass, one per filing batch.
    hash, wave, rows given, date). ⛔ Not optional — 99 audits verdict-by-verdict
    against these, and evidence living only in a session transcript is the
    failure `CHAIN_METHOD` §3 records twice.
+6. **⭐ Field-report rows FIRST (README §2b, owner 2026-09-10).** Every row 02
+   tagged `FR-1` / `FR-2` / `FR-3` goes to the agent that owns its system, at
+   the TOP of that agent's list, and the agent's brief carries README §2b's
+   paragraph for that report VERBATIM, plus the `PERF` tell for its `SMELL`
+   field. Record in the agent plan which agent took which FR rows. From the
+   verified returns, write subsections **FR-1** (surfaces a, c, d), **FR-2**
+   (the route answer) and **FR-3** into your `TRIAGE.md` section — each with
+   rows read, candidates and a NOT-reached list. ⛔ An agent's "nothing" on an
+   FR row is re-read by you from the trees before it is written; FR-1 is the
+   report players say leaves the game unplayable.
 
 ## 3 · Per-system reading orders — go into the briefs, binding
 

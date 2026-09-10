@@ -44,6 +44,14 @@ inbox. Pin check.
    unguarded is a finding for every player WITHOUT the DLC; that is the class
    the developers are least likely to have tested and the severity sorter
    every finding here must answer.
+3. **⭐ FR-1(b) — the Linux/Proton new-game crash (README §2b), read FIRST.**
+   Players report every new game crashing since the update, in a thread titled
+   with the DLC's name. Every base-game row 02 tagged `FR-1` that branches on
+   the DLC on the new-game path is yours: what it does with the DLC, what it
+   does without it, and whether a non-owner reaches it. Write it as subsection
+   **FR-1(b)** in your coverage section. ⛔ You cannot confirm a native crash;
+   you can name the DLC-dependent code that runs at new game, and you say which
+   rows you read.
 
 ## 3 · Method
 

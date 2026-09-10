@@ -82,6 +82,14 @@ and README's blind-spot list re-read in the light of the run — did the chain
 learn a new one? State it. ⛔ A "nothing found" in a system is reported with
 its row count and its agent count, never alone.
 
+⭐ **The three field reports (README §2b)** each get one plain-language paragraph
+in `HUNT_AUDIT.md` for the owner: what the chain read for it (rows and
+surfaces), what it found, what it could not see, and what would settle it —
+for FR-1, a log from an affected player (checklist 136). Check that 02's FR
+tagging was by function, that 03 wrote FR-1(b), and that 04 wrote FR-1, FR-2
+and FR-3; a missing subsection is a chain defect. ⛔ A report the chain found
+nothing for is written up with its surfaces read, never as cleared.
+
 ### E · Consistency
 
 Ledger counts vs TSV counts; README rows struck vs prompts consumed (`git

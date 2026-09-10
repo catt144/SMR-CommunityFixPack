@@ -84,6 +84,13 @@ them rather than around a file-by-file read of `norman/`:
 The DLC adds a food economy on top of a game that already had food. Every place
 the new economy touches an existing system is a seam:
 
+- ⭐ **new-game start under Linux/Proton (added 2026-09-10, owner).** Players
+  report every new game crashing since the update, in a thread titled with the
+  DLC's name (`prompts/vanillahunt/README.md` §2b, FR-1). Read that chain's
+  **FR-1** and **FR-1(b)** results in `reports/vanillahunt/TRIAGE.md` before
+  starting: the DLC code that runs at new game (map setup, starting resources,
+  `thomas`'s sponsor, preset injection) is the DLC half of that surface, and
+  the one the base-game chain was fenced out of;
 - **the existing `Food` resource** — production, storage, consumption, trade,
   the `Meal` layer on top of it;
 - **colonist needs and services** — `FoodServiceBuilding` is already patched in

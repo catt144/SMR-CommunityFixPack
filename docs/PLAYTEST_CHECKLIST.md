@@ -29,6 +29,47 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### 2026-09-10 — 136: three player reports are now priority surfaces in the vanilla diff hunt. Two asks; neither needs the keyboard.
+
+> **What changed:** the vanillahunt chain README §2b now makes three Steam
+> reports the first rows every reader reads: **FR-1** every new game crashing
+> under Linux/Proton since the update, **FR-2** probes / deep scan revealing no
+> deep resources, **FR-3** frame skip and stutter that does not change with
+> graphics settings. Links 02, 03, 04 and 99 are pointed at it, and the final
+> audit answers each report for you in one paragraph. `DLC_DEEP_CHECK.md` got
+> FR-1's DLC half.
+>
+> **Ask 1 — get one log from one affected Linux player (FR-1). Recommended:
+> yes.** The chain can only name Lua candidates, and the crash is most likely
+> native (the last Proton-only failure, `F102`, was a shader/asset problem
+> below Lua). The log must be from **`Mars.exe`, from a new game that
+> crashed**. A Lua error prints in it; a native crash prints none but cuts the
+> log short, so its last lines name the phase that died. **Ask each reporter
+> for their GPU vendor too** — `F102` hit NVIDIA only, and the one log posted
+> so far is NVIDIA as well.
+>
+> ⭐ **The log a player already posted (2026-09-08) is useful, but it is not
+> the crash.** It is `MarsDebug.exe` running the mod editor's Preset Editor,
+> which ran for 8 seconds and quit normally. What it does prove: logs ARE
+> written under Proton, with the same naming as ours; the engine detects
+> Proton (`Proton/Wine: 11.0`) while the game's Lua still believes it is plain
+> Windows (no `linux` platform flag); the GPU is NVIDIA; and D3D12's crash
+> diagnostics are unavailable under Proton (`Failed activating D3D12 Dred`).
+> ⛔ Before anyone tells a player where the log is, an agent checks the
+> location under Proton by walking the route. The thread's author asked where
+> logs live and nobody has answered, so that answer has to be right.
+>
+> **Ask 2 — commission a code-side performance pass over the WHOLE tree for
+> FR-3? Recommended: decide after the chain's audit (99).** The diff can only
+> see 1.1.0 changes that add or shorten periodic work, which can make a stutter
+> worse. The stutter was reported ten months before 1.1.0, so if it has a code
+> cause, that cause is in code both versions share, and no diff lists it. The
+> pass would inventory every game-time and real-time thread with its interval,
+> every per-tick loop over all objects, and the high-frequency message
+> handlers, and it would be a chain of its own. ⛔ A source read never measures
+> frame time, so anything it found would still need a profiling check. FR-3's
+> result will show whether the pass is needed and where to aim it.
+
 ### 2026-09-10 — 135: `luafn.py`'s body delimiter over-spans one-line functions (441 declarations, 133 inventory rows). ⭐ The measurement says the fix would change **0** shipped hashes — cheaper than the chain brief assumed. **TAKEABLE WHEN you rule; recommendation: take it in hotfix 3, as a small standalone change.** Nothing here needs the keyboard.
 
 > **What was measured** (vanillahunt link 01, 2026-09-10, `TRIAGE.md` §0.6).

@@ -190,6 +190,115 @@ row you triage:**
 ⚠️ **Check `docs/agent/facts/INDEX.md` BEFORE filing any engine-semantics claim.**
 `EF-005` already answered one of the above and two sessions derived past it.
 
+## 2b · ⭐ Field-report surfaces — read these rows FIRST (owner, 2026-09-10)
+
+Three player reports the owner put in front of the chain (Steam discussions,
+posted as screenshots in the owner's session of 2026-09-10; the Linux one is
+*"widely reported by users on Steam and Reddit and leaving them completely
+unplayable"*). ⛔ A field report is a CLAIM about a SYMPTOM, not a cause. The
+chain's job is to enumerate every diff-visible surface that could produce the
+symptom, read those rows before any other, and say plainly which surfaces it
+read and which it could not. **A report is never closed by a chain that found
+nothing — only by a witness.**
+
+**Tagging (link 02).** Tag rows `FR-1` / `FR-2` / `FR-3` (a row may carry
+several) **by FUNCTION, not by file**: measured by link 01's session, a
+file-level match over-tags 800–1,400 inventory rows per report and would bury
+the signal. Tag the entry functions named below, then one hop of their changed
+callees (`CALLERS.tsv` style). State the tagging rule and the counts in the
+ledger. FR rows go to the TOP of every row list handed to 03 and 04; an FR tag
+does not move a row out of its system — the owning reader reads it, first.
+
+**FR-1 · ⚖️ HIGHEST — "Feeding the Future — doesn't work on Linux": every new
+game crashes under Proton since the update.** (Steam, 2026-09-08; Linux Mint
+22.2; every Proton from 9.0 to 11.02 plus experimental; the same regardless of
+settings; the menu loads, starting a new game crashes.)
+- ⛔ **What the chain cannot see:** the crash itself is almost certainly NATIVE
+  — `Mars.exe`, D3D12 → vkd3d, the shader cache, a DLL (blind spots 1, 2, 4).
+  Precedent **`F102`**: the last Proton-only failure was a hand-hacked material
+  hanging the NVIDIA-under-Proton shader path, below Lua; the only Lua-visible
+  part was WHICH entity got spawned. ⭐ **OBSERVED in one player's log**
+  (posted in the Linux thread 2026-09-08; it is `MarsDebug.exe` running the
+  mod editor's Preset Editor for 8 s and quitting normally, so it is NOT a
+  crash log): the ENGINE detects Proton (`Proton/Wine: 11.0`), yet Lua's
+  platform flags read `asserts, cheats, debug, desktop, editor, ged,
+  goldmaster, paradox, pc, steam` — no `linux`. ⇒ a `Platform.linux` branch
+  does not fire under Proton; a Lua-side cause must be code that runs on every
+  Windows machine and hits a Wine/vkd3d gap, OR engine code that branches on
+  the Wine detection Lua cannot see. Same log: NVIDIA GPU (as in `F102`, whose
+  AMD Steam Deck control was negative) and `Failed activating D3D12 Dred` —
+  D3D12's crash diagnostics are unavailable under vkd3d, so a device-removal
+  crash would leave no reason behind.
+- **What it CAN see — read in this order:** (a) every changed or new row on
+  the path from "New Game" to the first sol — the `OnMsg.NewGame`,
+  `NewMapLoaded`, `NewMapGenerated`, `PostNewMapLoaded` handlers, map
+  generation (`MapGen`, `GenerateMap*`), `PreGameMission`, colony/city init,
+  and the multi-map setup the `map` parameter and the `Landscapes` MapVar move
+  point at; ⭐ any NEW call from those bodies into an engine/native function
+  1.0.7 never made there is the prime Lua-visible suspect. (b) base-game code
+  on that path that branches on the DLC (`IsDlcAvailable`, `norman`) — the
+  thread title names the DLC; ⭐ does a NON-owner crash too? **03 owns (b).**
+  (c) assets first spawned at new game that are new or changed in 1.1.0:
+  `PRESETS.tsv` `none` / `added-preset` rows in `ParticleSystemPreset`,
+  `ActionFX*`, lightmodel and entity registries, plus the render-setup Lua
+  (`CommonLua/Classes/Lightmodel.lua`, `RenderFeaturesParams.lua`, option
+  DEFAULTS such as the upscaler / DLSS / XeSS choice) — `F102`'s mechanism
+  class. (d) `hr.*` engine settings applied at new game or on option apply.
+- **Deliverable:** subsection **FR-1** in 04's `TRIAGE.md` section (a, c, d)
+  and **FR-1(b)** in 03's — every FR-1 row read, its verdict, candidates
+  ranked, a NOT-reached list. ⛔ "No Lua cause found" is written as the
+  surfaces read, never as "not a Lua bug". ⭐ The falsifier that beats every
+  source read is **one `Mars.exe` log from an affected player's crashed
+  new-game attempt** — a Lua error prints there; a native crash prints none but
+  cuts the log short, so its LAST lines name the phase that died (video mode,
+  shader compile, map load, first sol). The owner's to obtain, routed as
+  checklist 136.
+
+**FR-2 · "Deep scanning with probes reveals no deep resources."** (Steam,
+2026-09-08, two players; intermittent; one says a clean reinstall fixed it,
+the other that it worked after more scanning.) Fully diff-visible — Lua and
+presets.
+- ⭐ **The route question, answered from BOTH trees:** on 1.1.0, does an
+  orbital probe, and does sector scanning after the deep-scan tech, reveal
+  deep deposits the way it did on 1.0.7? Name the tech, its effect, the reveal
+  function and the state it writes, in both trees.
+- **Read in this order:** the deep-scan tech preset — ⚠️ link 01 found the tech
+  registry exists TWICE in 1.1.0 (274 `TechPreset` + 441 `Tech`, 258 ids under
+  both classes, `TRIAGE.md` §0.10): is the deep-scan tech one of them, and whose
+  effect is live? A tech defined twice is exactly how a feature silently stops;
+  then the probe / exploration / sector-scan / deposit-reveal hand code; then
+  class (c) — reveal state that became per-MAP (the `map` parameter, `Landscapes`
+  GameVar → MapVar): "intermittent" and "a reinstall fixed it" read like state
+  or ordering, not a deleted feature; then the `UndergroundDeepScanning*`
+  storybits and the `DeepScan*` rows in `PRESETS.tsv`.
+- **Deliverable:** subsection **FR-2** in 04's section: the route answer (yes /
+  no / conditional, both-tree citations) and any candidate filed per §3.
+
+**FR-3 · "Frame skip and stuttering", the same at lowest and highest graphics
+settings.** (Steam, posted **2025-11-10 — before 1.1.0**; 16 comments.) ⚖️
+**Owner, 2026-09-10: code-side causes are in scope.** A stutter that does not
+move with graphics settings points at the CPU side — simulation, Lua threads,
+garbage collection — which is code, not only engine.
+- **What the diff can see:** 1.1.0 changes that ADD or SHORTEN periodic work —
+  a new `CreateGameTimeThread` / `CreateRealTimeThread`, a shorter `Sleep` /
+  `WaitMsg` interval, a new per-tick or per-frame loop over all units /
+  buildings / grids, a new high-frequency `OnMsg` handler, a new UI rollover /
+  infopanel update loop, new table allocation on a hot path. Any of those can
+  WORSEN a stutter that already existed.
+- ⛔ **What it cannot:** the ORIGINAL cause of a stutter reported ten months
+  before 1.1.0 lives in code both trees share, or in the engine; no diff lists
+  it and the surface sweep reaches only bodies someone opened. The whole-tree
+  pass is routed to the owner as checklist 136; the chain must not report FR-3
+  "not found" as "no code cause".
+- Every agent that opens a body adds a **`PERF`** tell to its `SMELL` field when
+  it sees one of the shapes above, changed or not. ⛔ A source read never
+  measures frame time (`FIX_POLICY` §4, runtime-only): every FR-3 candidate is
+  filed with a profiling falsifier and stays `cand`.
+- **Deliverable:** subsection **FR-3** in 04's section: the added / shortened
+  periodic work, with both-tree citations, and the `PERF` tells reached.
+
+**99** answers each report in one plain-language paragraph in `HUNT_AUDIT.md`.
+
 ## 3 · What a finding must contain — the filing contract
 
 A candidate defect entry `docs/agent/bugs/C##.md` (C-series; F-series only when
