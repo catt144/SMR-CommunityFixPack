@@ -8,6 +8,24 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-10 — vanillahunt 01's largest hole measured and closed: `treediff` v1.1 covers the indented orphans, INVENTORY 9,832 → 11,742
+
+tags: vanillahunt treediff ck135 INDENTED ONE-LINE luafn find_bodies
+
+Same session (`smr-bugfixpack-c3`), after link 01 closed (`7f7d87a`, `smr-bugfixpack-04`). Owner asked whether the "4,883
+indented declarations covered by neither instrument" could be repaired or only passed on. Measured first: in changed hand
+files 2,033 of 4,142 were INSIDE an enumerated function (always covered by its hash — the hole was over-stated by half) and
+2,109 were outside every span: table-field methods, `Run = function(seq_state)` sequence steps in the scenario scripts,
+file-level nested locals. Repaired in the instrument rather than briefed around: `tools/treediff.py` v1.1 enumerates the
+orphans, keys them `name@<anchor>`, hash-matches inside a group so an inserted sibling cannot cascade, flags `INDENTED`,
+and hashes a self-closing orphan's own line only (`ONE-LINE`, a stated deviation; the indent-0 pass keeps the delimiter's
+over-span — ck135 stays the owner's). Selftest +6 assertions on a new fixture, 22 PASS, broken on purpose in memory and
+seen RED; seeds 4/4. TSVs re-emitted: INVENTORY +1,910 rows (295 hand / 1,615 generated), the other three banner-only.
+`TRIAGE.md` §0.13 holds the numbers; 02 and 99 inboxes carry it, 99 as DRIFT (a second author on a closed link's tool).
+Nothing read for meaning; nothing ran; no status moved.
+
+---
+
 ## 2026-09-10 — vanillahunt reshaped on the owner's two questions: 8 links → 5, and a surface sweep for tells
 
 tags: vanillahunt ck134 FIX_POLICY-§4 PASSING presetdiff CHAIN_METHOD-§4.0

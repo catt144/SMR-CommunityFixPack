@@ -282,3 +282,33 @@ INSTRUMENT and not any agent.** F114 `body`; F115 `body+sig` with exactly
 `(mark, callback, ...)` → `(map, mark, callback, ...)`; F116 `body`; F117
 `body+sig` `traits` → `colonist`. ⛔ **You still owe the AGENT-POOL score** —
 the seeds must go into your batches without the agents being told.
+
+---
+
+*(from the authoring session `smr-bugfixpack-c3`, 2026-09-10, AFTER link 01
+closed — the inventory was RE-EMITTED, read `TRIAGE.md` §0.13 before §0.4.)*
+
+**`INVENTORY.tsv` is now 11,742 rows, not 9,832.** The owner asked whether
+01's largest stated hole (indented declarations covered by neither
+instrument) could be repaired rather than passed to you; it was measured
+(half of it was never a hole — those declarations sit inside an enumerated
+function and were covered by its hash) and the real half is now in the
+inventory as **1,910 rows flagged `INDENTED`**: table-field methods, sequence
+`Run = function(seq_state)` steps, file-level nested locals. What that means
+for your units:
+
+- **Keys.** An `INDENTED` row's key is `name@<6-hex anchor>` (`Run@1a2b3c#3`
+  when the name repeats under one anchor). `bare_name()` in `treediff.py`
+  strips it; your agents get file + line ranges as before.
+- **`ONE-LINE` rows** hash their own declaration line only (stated deviation,
+  §0.13) — a `body` verdict on one is a change to that single line; read it as
+  such.
+- **Bucket split:** 295 `hand` rows (177 added · 52 removed · 66 body) go into
+  the system tags like any other row. 1,615 `generated` rows overlap
+  `PRESETS.tsv` at field level — tag them `preset:<registry>` exactly as you
+  tag the preset rows, so 04's registry agent sees both views of one change and
+  does not read it twice.
+- **Your `hand` `body` count is now 3,487** (was 3,421); still far under the
+  ~6,000 split threshold.
+- **Seeds unchanged**, 4/4 by the tool on v1.1. Nothing else in the TSVs
+  moved: `CALLERS` 4,096, `STORAGE` 1,155, `FILES` 202, `PRESETS` 37,512.

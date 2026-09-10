@@ -51,6 +51,20 @@ worth reading -- not an unrelated add plus an unrelated remove. The separator
 that was actually written is carried in the `sig` columns as a leading `:` or
 `.`, and a flip is flagged `SEP-CHANGED`.
 
+v1.1 (2026-09-10, the chain's authoring session, AFTER link 01 closed): the
+"4,883 indented declarations covered by neither instrument" hole was MEASURED
+first -- 2,033 of the 4,142 in changed hand files sit INSIDE an enumerated
+function and were already covered by its hash; 2,109 sat outside every span:
+table-field methods in `DefineClass{}`/metatables, the `Run = function(seq_state)`
+steps of `Lua/Scenario/*.generated.lua` (player-facing mystery code), and
+file-level nested locals. Those "orphans" are now enumerated too (`_orphans`),
+keyed `name@<anchor>`, flagged INDENTED, matched by hash inside their group so
+an inserted sibling cannot cascade (`_diff_orphans`), and a self-closing
+orphan hashes its own line only (flag ONE-LINE -- deliberate, stated in the
+banner; the indent-0 pass keeps the delimiter's over-span, checklist 135).
+Falsified in `--selftest` (`Lua/T.lua`). The `hash` column of an orphan row is
+NOT comparable to a `SRC:` pin, because no pin ever targeted one.
+
 WHAT THE REGEX RECOGNISES -- the completeness contract, stated so it can be
 checked rather than assumed. Five declaration forms, **at indentation 0 only**:
 
@@ -109,7 +123,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from luafn import find_bodies, read_lines          # THE delimiter -- see above
 from sigcheck import params                        # THE parameter reader
 
-VERSION = "treediff.py v1 (2026-09-10)"
+VERSION = "treediff.py v1.1 (2026-09-10, indented orphans covered)"
 
 ARCHIVE = r"C:\Dev\SMR-SrcArchive"
 DEFAULT_OLD = os.path.join(ARCHIVE, "1.0.7.396349", "Src")
@@ -167,11 +181,20 @@ def canon(name):
     return name.replace(":", ".")
 
 
-def declarations(lines):
+def declarations(lines, indented=False):
     """-> list of dicts, one per recognised indent-0 declaration, in file order.
 
     Each carries the span from `find_bodies` (never our own delimiter), the
     normalised body hash, the parameter list, and the flags this row earned.
+
+    v1.1: with `indented=True` the list ALSO carries every INDENTED declaration
+    that lies OUTSIDE every span enumerated so far (an "orphan": a table-field
+    method `X = function(self)` inside `DefineClass{}` or a metatable, a
+    sequence step `Run = function(seq_state)` in `Lua/Scenario/*.generated.lua`,
+    a `local function` under a file-level `if`). An indented declaration INSIDE
+    an enumerated span is NOT listed: the outer body's hash already covers it.
+    Orphans carry `orphan=True`, `oneline=True` when the declaration line
+    closes itself, and a key of the form `name@<anchor>` (see `_anchor`).
     """
     raw = []
     for i, line in enumerate(lines):
@@ -206,7 +229,10 @@ def declarations(lines):
             ihash=body_hash(lines, start + 1, end),
             body=[l.strip() for l in lines[start + 1:end + 1] if l.strip()],
             self_closing=bool(SELF_CLOSING.search(strip_comment(line))),
+            orphan=False, oneline=False,
         ))
+    if indented:
+        out.extend(_orphans(lines, [d["span"] for d in out]))
     # ordinal-key the duplicates, and flag them
     counts = {}
     for d in out:
@@ -221,6 +247,79 @@ def declarations(lines):
         else:
             d["multi"] = False
     return out
+
+
+def _anchor(lines, i):
+    """The nearest preceding indent-0 non-blank line, hashed to 6 hex chars.
+
+    An orphan's NAME repeats (`Run` appears dozens of times in one scenario
+    file), so the key needs a locality: the top-level construct it sits in.
+    Two orphans with the same name under the same anchor still collide and get
+    the MULTI ordinal; `_diff_orphans` then matches them by HASH first so an
+    inserted sibling does not cascade into a column of false `body` rows.
+    """
+    j = i - 1
+    while j >= 0:
+        l = lines[j]
+        if l and l[0] not in " \t" and l.strip():
+            return hashlib.sha256(l.rstrip().encode("utf-8")).hexdigest()[:6]
+        j -= 1
+    return "top"
+
+
+def _orphans(lines, spans):
+    """Indented declarations outside every span in `spans` (which grows as
+    orphans are found, so a declaration nested inside an orphan is skipped)."""
+    spans = list(spans)
+    cache, seen, out = {}, {}, []
+    for i, line in enumerate(lines):
+        if not INDENTED.match(line):
+            continue
+        if any(s <= i <= e for s, e in spans):
+            continue
+        stripped = line.lstrip(" \t")
+        hit = None
+        for form, rx in DECLS:
+            m = rx.match(stripped)
+            if m:
+                hit = (form, m.group(1), m.group(2))
+                break
+        if hit is None:
+            continue
+        form, name, sig = hit
+        oneline = bool(SELF_CLOSING.search(strip_comment(line)))
+        if oneline:
+            # ⚠️ DELIBERATE, AND ONLY HERE: a self-closing declaration is its own
+            # span. `find_bodies` would run it to the next same-indent `end`,
+            # which inside a table constructor is the NEXT field's `end,` —
+            # every neighbour's edit would then re-hash this row. The indent-0
+            # pass keeps the delimiter's behaviour untouched (checklist 135 is
+            # the owner's); this pass never had a pin to protect.
+            start, end = i, i
+        else:
+            if line not in cache:
+                cache[line] = find_bodies(lines, "^" + re.escape(line) + "$")
+            k = seen.get(line, 0)
+            seen[line] = k + 1
+            got = cache[line]
+            start, end = got[k] if k < len(got) else (i, i)
+        spans.append((start, end))
+        out.append(dict(
+            line=i + 1, form=form, raw_name=name,
+            key="%s@%s" % (canon(name), _anchor(lines, i)),
+            sep=":" if ":" in name else ".",
+            sig=",".join(params(sig)),
+            span=(start, end), hash=body_hash(lines, start, end),
+            ihash=body_hash(lines, start + 1, end) if end > start else "",
+            body=[l.strip() for l in lines[start + 1:end + 1] if l.strip()],
+            self_closing=oneline, orphan=True, oneline=oneline,
+        ))
+    return out
+
+
+def bare_name(key):
+    """`Class.Method#2` -> `Method`; `Run@1a2b3c#3` -> `Run`."""
+    return key.split("@")[0].split("#")[0].split(".")[-1]
 
 
 def count_indented(lines):
@@ -265,7 +364,9 @@ def diff(old_root, new_root, progress=False):
 
     stats = dict(changed=0, identical=0, added=0, removed=0, dlc_skipped=0,
                  fn_identical=0, fn_old=0, fn_new=0, indented_hand=0,
-                 indented_generated=0, span_suspect=0, multi=0, span_eof=0)
+                 indented_generated=0, span_suspect=0, multi=0, span_eof=0,
+                 orphan_hand=0, orphan_generated=0, orphan_oneline=0,
+                 orphan_identical=0, orphan_rows=0)
     rows, spanlist, multilist = [], [], []
     file_class = {}
 
@@ -308,10 +409,19 @@ def diff(old_root, new_root, progress=False):
                 += count_indented(new_lines)
             continue
 
-        od = declarations(old_lines) if old_lines is not None else []
-        nd = declarations(new_lines) if new_lines is not None else []
+        od_all = declarations(old_lines, indented=True) if old_lines is not None else []
+        nd_all = declarations(new_lines, indented=True) if new_lines is not None else []
+        od = [d for d in od_all if not d["orphan"]]
+        nd = [d for d in nd_all if not d["orphan"]]
+        oo = [d for d in od_all if d["orphan"]]
+        no = [d for d in nd_all if d["orphan"]]
         stats["fn_old"] += len(od)
         stats["fn_new"] += len(nd)
+        # orphans are counted on the same side as `indented_*` (1.1.0, or 1.0.7
+        # for a removed file) so the two numbers in the banner are comparable
+        side_orph = no if new_lines is not None else oo
+        stats["orphan_generated" if b == "generated" else "orphan_hand"] += len(side_orph)
+        stats["orphan_oneline"] += sum(1 for d in side_orph if d["oneline"])
         # ⚠️ counted on the 1.1.0 side ONLY (the 1.0.7 side for a REMOVED file),
         # so the banner's "not covered" number is one tree's worth and can be
         # compared against a hand count. Summing both sides double-counts.
@@ -382,6 +492,9 @@ def diff(old_root, new_root, progress=False):
                 ihash107=a["ihash"] if a else "", ihash110=z["ihash"] if z else "",
                 body107=a["body"] if a else [], body110=z["body"] if z else [],
             ))
+        orows = _diff_orphans(oo, no, rel, b, cls, stats)
+        stats["orphan_rows"] += len(orows)
+        rows.extend(orows)
         if progress and idx % 300 == 0:
             print("    ... %d/%d files, %d rows" % (idx, len(lua), len(rows)),
                   file=sys.stderr)
@@ -390,6 +503,83 @@ def diff(old_root, new_root, progress=False):
     stats.setdefault("rename_ambiguous", 0)
     annotate_renames(rows, stats)
     return rows, stats, file_class
+
+
+def _diff_orphans(oo, no, rel, b, cls, stats):
+    """Rows for the INDENTED orphans of one file (v1.1).
+
+    Grouped by base key (`name@anchor`, ordinals dropped). Inside a group the
+    two sides are matched by HASH first — an unchanged sibling never becomes a
+    row just because a neighbour was inserted above it — and the leftovers are
+    paired in file order as body/sig rows, with the excess as added/removed.
+    """
+    def base(k):
+        return k.split("#")[0]
+    og, ng = {}, {}
+    for d in oo:
+        og.setdefault(base(d["key"]), []).append(d)
+    for d in no:
+        ng.setdefault(base(d["key"]), []).append(d)
+    rows = []
+    for g in sorted(set(og) | set(ng)):
+        A, Z = list(og.get(g, [])), list(ng.get(g, []))
+        # 1. cancel identical hashes (same declaration line + same body)
+        zh = {}
+        for z in Z:
+            zh.setdefault(z["hash"], []).append(z)
+        A2 = []
+        for a in A:
+            if zh.get(a["hash"]):
+                zh[a["hash"]].pop(0)
+                stats["fn_identical"] += 1
+                stats["orphan_identical"] += 1
+            else:
+                A2.append(a)
+        Z2 = [z for zs in zh.values() for z in zs]
+        Z2.sort(key=lambda d: d["line"])
+        # 2. leftovers pair in file order
+        for k in range(max(len(A2), len(Z2))):
+            a = A2[k] if k < len(A2) else None
+            z = Z2[k] if k < len(Z2) else None
+            flags = ["INDENTED"]
+            if a and z:
+                body_ch = a["ihash"] != z["ihash"] or (a["oneline"] != z["oneline"])
+                sig_ch = a["sig"] != z["sig"]
+                if a["sep"] != z["sep"]:
+                    flags.append("SEP-CHANGED")
+                    sig_ch = True
+                if not body_ch and not sig_ch:
+                    flags.append("DECL-ONLY")
+                    body_ch = True
+                kind = ("body+sig" if body_ch and sig_ch else
+                        "sig" if sig_ch else "body")
+            elif z:
+                kind = "added"
+                if cls == "added":
+                    flags.append("NEWFILE")
+            else:
+                kind = "removed"
+                if cls == "removed":
+                    flags.append("GONEFILE")
+            for d in (a, z):
+                if d is None:
+                    continue
+                if d["oneline"]:
+                    flags.append("ONE-LINE")
+                if len(og.get(g, [])) > 1 or len(ng.get(g, [])) > 1:
+                    flags.append("MULTI")
+            key = (z or a)["key"]
+            rows.append(dict(
+                file=rel, key=key, kind=kind, bucket=b,
+                line107=a["line"] if a else "", line110=z["line"] if z else "",
+                sig107=(a["sep"] + a["sig"]) if a else "",
+                sig110=(z["sep"] + z["sig"]) if z else "",
+                flags=sorted(set(flags)),
+                hash107=a["hash"] if a else "", hash110=z["hash"] if z else "",
+                ihash107=a["ihash"] if a else "", ihash110=z["ihash"] if z else "",
+                body107=a["body"] if a else [], body110=z["body"] if z else [],
+            ))
+    return rows
 
 
 MIN_RENAME_BODY = 4      # distinct non-blank body lines
@@ -620,7 +810,7 @@ def caller_rows(old_root, new_root, rows):
     targets = {}
     for r in rows:
         if r["kind"] in ("sig", "body+sig") and r["bucket"] == "hand":
-            bare = r["key"].split("#")[0].split(".")[-1]
+            bare = bare_name(r["key"])
             targets.setdefault(bare, []).append(r)
     if not targets:
         return [], {}
@@ -660,14 +850,27 @@ def banner(old_root, new_root, stats, extra=()):
     out.append("# DELIMITER: luafn.find_bodies, imported not re-implemented. "
                "Keys collapse `Class:Method` and `Class.Method`; the separator "
                "actually written is the first character of the sig columns.")
-    out.append("# COVERAGE: indent-0 declarations only, five forms "
+    out.append("# COVERAGE (v1.1): indent-0 declarations, five forms "
                "(function C:M / function C.M / function G / local function f / "
-               "[local] x = function). NOT COVERED: %d indented declarations "
-               "(%d in `hand` files, %d in `generated` — presetdiff.py reads the "
-               "generated side at field level) and every anonymous `function(` "
-               "literal. ⛔ A function never emitted is not a function that did "
-               "not change."
-               % (stats["indented_hand"] + stats["indented_generated"],
+               "[local] x = function), PLUS every INDENTED declaration of those "
+               "forms that lies OUTSIDE every enumerated span — table-field "
+               "methods, sequence `Run = function(seq_state)` steps, file-level "
+               "nested locals — keyed `name@<anchor>` and flagged INDENTED "
+               "(ONE-LINE when the declaration closes itself: that row hashes "
+               "its own line only, deliberately, so a neighbour's edit cannot "
+               "re-hash it; the indent-0 pass keeps the delimiter's over-span "
+               "untouched, checklist 135). Indented declarations INSIDE an "
+               "enumerated span are covered by the outer body's hash and not "
+               "listed. Orphans on the 1.1.0 side: %d in `hand` files, %d in "
+               "`generated` (%d one-line); %d identical across the trees, %d "
+               "rows. Total indented declarations for comparison: %d (%d hand, "
+               "%d generated). STILL NOT COVERED: every anonymous `function(` "
+               "literal passed as an argument. ⛔ A function never emitted is "
+               "not a function that did not change."
+               % (stats["orphan_hand"], stats["orphan_generated"],
+                  stats["orphan_oneline"], stats["orphan_identical"],
+                  stats["orphan_rows"],
+                  stats["indented_hand"] + stats["indented_generated"],
                   stats["indented_hand"], stats["indented_generated"]))
     out.append("# FILES: changed=%d identical=%d added=%d removed=%d "
                "(DLC/ excluded: %d paths). ⭐ MANIFEST RE-DERIVATION CONTROL vs "
@@ -765,6 +968,36 @@ OLD_FIX = {
     "end",
     "",
 ],
+# v1.1 — the indented orphans (table-field methods and sequence steps)
+"Lua/T.lua": [
+    "DefineClass.Thing = {",
+    "\tGetA = function(self) return self.a end,",
+    "\tSetB = function(self, b)",
+    "\t\tself.b = b",
+    "\tend,",
+    "\tNested = function(self)",
+    "\t\tlocal function inner(x)",
+    "\t\t\treturn x",
+    "\t\tend",
+    "\t\treturn inner(1)",
+    "\tend,",
+    "}",
+    "function Outer(y)",
+    "\tlocal function innerOuter(z)",
+    "\t\treturn z + 1",
+    "\tend",
+    "\treturn innerOuter(y)",
+    "end",
+    "PlaceObj('Sequence', {",
+    "\tRun = function(seq_state)",
+    "\t\treturn 1",
+    "\tend,",
+    "\tRun = function(seq_state)",
+    "\t\treturn 2",
+    "\tend,",
+    "})",
+    "",
+],
 }
 NEW_FIX = {
 "Lua/A.lua": [
@@ -810,6 +1043,39 @@ NEW_FIX = {
     "function WhitespaceOnly(a)",
     "\treturn a",
     "end",
+    "",
+],
+"Lua/T.lua": [
+    "DefineClass.Thing = {",
+    "\tGetA = function(self) return self.a2 end,",
+    "\tNewField = function(self) return 0 end,",
+    "\tSetB = function(self, b)",
+    "\t\tself.b = b",
+    "\tend,",
+    "\tNested = function(self)",
+    "\t\tlocal function inner(x)",
+    "\t\t\treturn x",
+    "\t\tend",
+    "\t\treturn inner(1)",
+    "\tend,",
+    "}",
+    "function Outer(y)",
+    "\tlocal function innerOuter(z)",
+    "\t\treturn z + 2",
+    "\tend",
+    "\treturn innerOuter(y)",
+    "end",
+    "PlaceObj('Sequence', {",
+    "\tRun = function(seq_state)",
+    "\t\treturn 0",
+    "\tend,",
+    "\tRun = function(seq_state)",
+    "\t\treturn 1",
+    "\tend,",
+    "\tRun = function(seq_state)",
+    "\t\treturn 2",
+    "\tend,",
+    "})",
     "",
 ],
 }
@@ -892,6 +1158,36 @@ def selftest(old_root, new_root, break_one=None):
           sorted(x["key"] for x in alld) == ["Dup#1", "Dup#2"]
           and all(x["multi"] for x in alld),
           repr([x["key"] for x in alld]))
+    print("  ---- v1.1: indented orphans (table-field methods, sequence steps) ----")
+    trows = {k: r for (f, k), r in got.items() if f == "Lua/T.lua"}
+    by_bare = {}
+    for k, r in trows.items():
+        by_bare.setdefault(bare_name(k), []).append(r)
+    r = by_bare.get("GetA", [None])[0]
+    check("planted change in a ONE-LINE table-field method -> kind=body, "
+          "flags INDENTED+ONE-LINE",
+          r is not None and r["kind"] == "body"
+          and "INDENTED" in r["flags"] and "ONE-LINE" in r["flags"],
+          repr(r and (r["kind"], r["flags"])))
+    r = by_bare.get("NewField", [None])[0]
+    check("planted NEW table-field method -> kind=added, INDENTED",
+          r is not None and r["kind"] == "added" and "INDENTED" in r["flags"],
+          repr(r and (r["kind"], r["flags"])))
+    check("⛔ the UNCHANGED sibling below the insertion (SetB) is NOT a row",
+          "SetB" not in by_bare, repr(by_bare.get("SetB")))
+    check("⛔ an indented declaration INSIDE an orphan (inner) is NOT a row",
+          "inner" not in by_bare, repr(by_bare.get("inner")))
+    r = by_bare.get("Outer", [None])[0]
+    check("a change inside a NESTED local surfaces as the OUTER function's "
+          "body row, and the nested local is not its own row",
+          r is not None and r["kind"] == "body" and "innerOuter" not in by_bare,
+          repr((r and r["kind"], by_bare.get("innerOuter"))))
+    runs = by_bare.get("Run", [])
+    check("an inserted sequence step among same-named `Run` steps -> exactly "
+          "ONE added row (hash-matching cancels the shifted siblings)",
+          len(runs) == 1 and runs[0]["kind"] == "added"
+          and "MULTI" in runs[0]["flags"],
+          repr([(x["kind"], x["flags"]) for x in runs]))
     shutil.rmtree(tmp, ignore_errors=True)
 
     print()

@@ -282,3 +282,29 @@ fixture builders `OLD_FIX`/`NEW_FIX` in each tool show the shape), and
 class for reading. The four seeded positives are re-scored by
 `treediff --selftest` PART 2 on every run, so a regression in the real trees
 shows up there and not only in a ledger.
+
+---
+
+*(from the authoring session `smr-bugfixpack-c3`, 2026-09-10 — DRIFT TO
+AUDIT, filed under rule 5 by the session that caused it.)* **`treediff.py`
+gained a second author after link 01 closed.** The owner asked whether 01's
+stated hole (indented declarations) could be repaired; I measured it (2,033 of
+4,142 were always covered by an outer span; 2,109 were not), extended the tool
+to v1.1 (`_orphans`, `_diff_orphans`, `bare_name`; `INDENTED`/`ONE-LINE`
+flags), extended `--selftest` by six assertions on a new fixture, broke one on
+purpose in memory and watched it go RED, and re-emitted the TSVs (INVENTORY
+9,832 → 11,742; the other three banner-only). `TRIAGE.md` §0.13 records all of
+it. Three things for you specifically:
+1. **The "one tool, one author" rule (README §4) was bent** — with a falsifier,
+   but bent. Re-run Pass A.2 with a planted INDENTED change (a table-field
+   method inside a `DefineClass{}` block, and a `Run` step inserted among
+   same-named steps) and confirm one row each, no cascade.
+2. **The `ONE-LINE` deviation is a design choice, not a measurement**: a
+   self-closing orphan hashes its own line only. Rule on whether it hid
+   anything — sample 10 `ONE-LINE` rows against a raw diff of their files.
+3. **The `@anchor` key is a locality heuristic.** A declaration whose nearest
+   indent-0 line changed between trees gets a NEW anchor and therefore shows as
+   removed + added (hash-matching only cancels within one anchor group), not as
+   `body`. MEASURED by me: `INDENTED` added/removed pairs sharing a file and an
+   `ihash` = **11, all `generated`, 0 `hand`** (`TRIAGE.md` §0.13). Re-derive
+   that count; it is a labelling error, not a coverage one.

@@ -27,7 +27,8 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   `C47OpenFarmSeedBufferShape` (Herbs 100→50), retired `LanderCargoRatchet`/`DroneUnreachableForever`/`AutoExportPriority`.
 - ⏭ NEXT: fire `prompts/vanillahunt/02_TRIAGE.md`. ✅ 01 DONE 09-10 (`7f7d87a`): `tools/treediff.py` + `tools/presetdiff.py`
   (both `--selftest` 16 PASS), five TSVs + `TRIAGE.md` §0 in `reports/vanillahunt/`, seeds 4/4, fpk parity PERFECT (`EF-085`,
-  0 divergent). Delimiter over-span routed as **ck135** (0 shipped hashes affected). (chain authored 09-10; 5 links,
+  0 divergent). Delimiter over-span routed as **ck135** (0 shipped hashes affected). ⭐ `treediff` **v1.1** same day: indented
+  orphans covered, INVENTORY 9,832 → 11,742 (`TRIAGE.md` §0.13; 99 audits it as drift — a second author on a closed link's tool). (chain authored 09-10; 5 links,
   04 = Codex Sol Ultra + NO split (owner 09-10); rest ck134, rec 03 + 99 Fable). `DLC_DEEP_CHECK.md` fires AFTER its 99.
   Both trees archived with manifests; no re-archive needed while the build is 24995074. 132 still unruled (not a gate).
 - ⭐ PUBLISHED both portals — `pdx_id` **156049**, `steam_id` **3787202810**, tree `version` **6** (hotfix 2, 09-09).

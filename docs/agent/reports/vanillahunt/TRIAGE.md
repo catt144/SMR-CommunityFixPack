@@ -289,3 +289,73 @@ exit code, so the green gate is a real gate. ⛔ Neither is wired into
 
 **4 / 4.** ⛔ This scores the INSTRUMENT, not any agent — 02 still owes the
 agent-pool score.
+
+### 0.13 · ⭐ v1.1 re-emission (2026-09-10, the authoring session `smr-bugfixpack-c3`, AFTER 01 closed) — hole 0.11.1 MEASURED, then CLOSED for the orphans
+
+The owner asked whether the "4,883 indented declarations covered by neither
+instrument" could be repaired rather than only passed on. Measured first, on
+the 1.1.0 side of the changed + added `hand` files:
+
+| indented declarations | count | status |
+|---|---|---|
+| total (`INDENTED` regex, as 0.11.1 counted) | 4,142 | — |
+| INSIDE an enumerated indent-0 span | 2,033 | were ALWAYS covered — the outer body's hash includes them; 0.11.1 over-stated the hole by this much |
+| OUTSIDE every indent-0 span | 2,109 | the real hole: table-field methods in `DefineClass{}`/metatables, `Run = function(seq_state)` steps in `Lua/Scenario/*.generated.lua` (player-facing mystery code), file-level nested locals |
+| of those, nested inside ANOTHER orphan | ~1,059 | covered once the enclosing orphan is enumerated |
+| ⇒ orphans enumerated by v1.1, `hand`, 1.1.0 side | **1,050** | plus 1,885 in `generated` (613 one-line); 1,377 identical across the trees |
+
+`tools/treediff.py` **v1.1** enumerates the orphans (`_orphans`), keys them
+`name@<anchor>` (anchor = the nearest preceding indent-0 line, hashed — a
+locality, because `Run` repeats dozens of times per scenario file), matches
+them by HASH inside their group before pairing leftovers in file order
+(`_diff_orphans` — an inserted sibling therefore cannot cascade into a column
+of false `body` rows), and flags every such row **`INDENTED`**. ⚠️ **One
+deliberate deviation, stated:** a self-closing orphan (`X = function(self)
+return … end,`) hashes ITS OWN LINE ONLY, flag **`ONE-LINE`** — `find_bodies`
+would run it to the next same-indent `end`, which inside a table constructor
+is the next field's `end,`, so every neighbour's edit would re-hash it. The
+indent-0 pass keeps the delimiter's over-span untouched (checklist **135** is
+the owner's); this pass never had a `SRC:` pin to protect, and an orphan row's
+`hash` is NOT comparable to a pin.
+
+**Re-emitted, same command, same digests.** `INVENTORY.tsv` 9,832 → **11,742**
+rows (+1,910, all `INDENTED`). `STORAGE.tsv`, `FILES.tsv`, `CALLERS.tsv`:
+banner lines only, row counts unchanged (4,096 callers — no orphan produced a
+`hand` signature change, so class (b′) gained nothing here). The 0.4 table and
+0.5 counts above are 01's v1 numbers and stand as its record; the v1.1 delta:
+
+| INDENTED rows | added | removed | body | body+sig | sig | total |
+|---|---|---|---|---|---|---|
+| `hand` | 177 | 52 | 66 | 0 | 0 | **295** |
+| `generated` | 965 | 342 | 208 | 97 | 3 | **1,615** — overlaps `PRESETS.tsv` at field level; 04's registry agents own both views |
+
+`hand` INDENTED rows by file, top: `Lua/GameOverlays.lua` 15 ·
+`CommonLua/PresetTemplate.lua` 14 · `CommonLua/VolumetricLighting.lua` 14 ·
+`Lua/TechTree.lua` 12 · `CommonLua/Ged/GedPropEditors.lua` 10 ·
+`Lua/TutorialsNew.lua` 9 · `ModItem.lua` 8+8 (old and new modding paths) ·
+`Lua/_StoryBits.lua` 7. ⭐ The scenario `Run` steps came out overwhelmingly
+IDENTICAL across the trees (the files changed elsewhere), which is itself a
+result the v1 inventory could not state.
+
+**Falsifier extended** (`--selftest`, fixture `Lua/T.lua`, 6 new assertions,
+22 PASS / 0 FAIL): a changed one-line field → `body` + `INDENTED` + `ONE-LINE`;
+a new field → `added`; ⛔ the unchanged sibling below the insertion is NOT a
+row; a declaration nested inside an orphan is NOT a row; a change inside a
+nested local surfaces as the OUTER function's row and the local is not its own
+row; an inserted `Run` step among same-named steps → exactly ONE `added` row.
+**Broken on purpose:** the sibling was given a third parameter in memory and
+the "NOT a row" assertion went RED naming it as `sig .self,b → .self,b,c`;
+restored, GREEN. Seeds still 4/4.
+
+**A known labelling limit, MEASURED:** the `@anchor` key is a locality
+heuristic — when the nearest indent-0 line above an orphan changed between the
+trees, the orphan lands in a new group and appears as `removed` + `added`
+rather than `body`. Counting `INDENTED` added/removed pairs that share a file
+and an `ihash`: **11, all in `generated`, 0 in `hand`.** A labelling error of
+that size, not a coverage one.
+
+**What is STILL not covered after v1.1:** every anonymous `function(` literal
+passed as an argument (0.11.2, ~12,200 lines); everything in 0.11.3–5. ⛔ And
+the drift this section records for 99: the instrument gained a second author
+after its link closed — with a measurement, a falsifier and a stated
+deviation, but a second author nonetheless.
