@@ -146,14 +146,15 @@ completed tests move whole to
 > rover for normal players; your colony can build it because of a cheat. ✅ **And
 > the RC Dozer** (the game's name for the RC Terraformer): with the markers, its
 > shovel sound plays on every scoop while it loads rock (the blue-arrow phase);
-> you heard it, and the log shows 5 of 5. The only unit still unproven is The
-> Excavator, which your colony doesn't have.
+> you heard it, and the log shows 5 of 5. ✅ **And The Excavator** (you built one
+> for the test): no dust at its buckets before; with the markers, every bucket
+> bites and throws dirt, "exactly as predicted", and the log shows all 24 effects.
+> Nothing is left unproven.
 >
-> **Recommendation now (2026-09-10): build all six proven units together for
+> **Recommendation now (2026-09-10): build all seven proven units together for
 > hotfix 3** — hammer, classic MOXIE, both Water Extractor skins, the Shuttle Hub
-> shuttle, the RC Driller and the RC Dozer. Every time is found and heard in
-> sync or in rhythm by you; it's one module, cosmetic only, and nothing goes into
-> saves. Leave The Excavator filed until someone can hear it. Still worth a
+> shuttle, the RC Driller, the RC Dozer and The Excavator. Every one is heard or
+> seen working by you; it's one module, cosmetic only, and nothing goes into saves. Still worth a
 > glance when convenient, not required: whether the shuttle's touchdown/lift-off
 > and the Dozer's shovel land exactly on the motion (first-guess timings). So the decision grows: **build the hammer + MOXIE only,
 > or all of them?** Each extra unit costs one "find the times by ear" step with

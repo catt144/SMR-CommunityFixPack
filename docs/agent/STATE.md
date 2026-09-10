@@ -102,8 +102,8 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   per-session eviction (this close-out evicted the pre-release material; measure, never quote) · **133** six
   self-check-promise decisions (`reports/SELFCHECK_PROMISE_COMBINED.md` §7), routed 09-09 · **134** assign the vanillahunt
   chain's models (5 links; rec 03 + 99 Fable), routed 09-10 · **139** `C74` hit-moment FX (Rare Metals hammer + MOXIE pump):
-  build or file — fix PROVEN LIVE (`EF-086`, MOXIE times found 09-10); rec build all six; brief `prompts/C74_BUILD.md`.
-  `C77` filed: Water Extractor/Shuttle/RC Driller/RC Dozer fixes PROVEN live 09-10 (Excavator source-read).
+  build or file — fix PROVEN LIVE (`EF-086`, MOXIE times found 09-10); rec build all seven; brief `prompts/C74_BUILD.md`.
+  `C77` filed: all five units' fixes PROVEN live 09-10 (Water Extractor, Shuttle, RC Driller, RC Dozer, Excavator).
 - 73 blame surface — harden or not · 76 confirm (a) was a ruling not a leaning · 53 harden now or in 1.0.1
   (rec 1.0.1) · 51 both-packs leg timing (rec after launch) · 50 chain-vs-replace wording · 47 two modder-page
   wordings · 43 opt-in pack re-tick · 41 dialog wording + sweep cap 5→8 · 40 `smr_shuttles` name · 39 dialog re-fire.

@@ -8,6 +8,19 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-10 — The Excavator proven too: C77 is complete (`smr-bugfixpack-08`, owner attended)
+
+tags: C77 ck139 attended Excavator visual-FX
+
+The owner built an Excavator for the test. Before markers: no dust at the buckets. With 24
+sorted markers on `ExcavatorShovel`/`working` (40,000 ms loop) and a power cycle, the log
+shows all 24 `ExcavatorDigging` types firing in bucket order (`:672`-`:729`), and the owner
+saw bites and throws "exactly as predicted". `DigAnimTick` only swings angles — the
+earlier "code-driven arm" doubt is resolved. All seven C74/C77 units are now proven;
+checklist 139 recommends building all seven for hotfix 3.
+
+---
+
 ## 2026-09-10 — ⭐ the silent-FX sitting (`smr-bugfixpack-08`, owner attended): six units proven, a third defect found
 
 tags: C74 C77 ck139 attended sound PlayFX-hook SetAllVolumesReason Water-Extractor Shuttle RC-Driller RC-Dozer
