@@ -929,3 +929,32 @@ programs/building `prg_class`, cross-map WorkFarmSmall, InsectFarming task
 completion, Sugar/Spices flight-list registration, and DLC Techs' data shape.
 Base routes do not clear DLC overrides. No field report was closed; 99 now
 waits only for 04 and any child 04 declares.
+
+## §04 · File-level skim and ranked drill-downs (plan, 2026-09-10)
+
+SOURCE plan: link 04 is the owner-rescoped file/registry/list skim in
+`prompts/vanillahunt/04_HUNT.md`; it does not split and does not create a
+per-row coverage ledger. The installed-build pin was re-read before work:
+`appmanifest_3215050.acf` still says build `24995074`. `git pull --ff-only`
+reported current, the worktree was clean, and no peer agent was active.
+
+The durable units are five reports under `reports/vanillahunt/agents/`: A turf
+(112 inventory-bearing files plus the 9 named NOROWS files), B colony (231 plus
+6 NOROWS), C engine/UI (364 plus 90 NOROWS, with loader-route notes), D the
+storage and removed/added lists, and E 123 preset registries. Each report gives
+one line per unit, ranked flags, required SMELL keep/drop lines where applicable,
+and a named NOT-skimmed list. Leads are drilled first; remaining flags are ranked
+by likely player harm and the combined drill budget is about 25. Every surviving
+FILE verdict is re-derived centrally before filing.
+
+Live todo (exactly one item is in progress):
+
+- **IN PROGRESS:** leads pass — FR-1 MapGen/render, eight F117-shape callers,
+  R08311, and the carried F95/research/C62/R11004/F118/EF-083 questions.
+- pending: skim A — turf, retired-fix neighbourhoods, and 64 SMELL decisions.
+- pending: skim B — colony, fixup/load bodies first, and 90 SMELL decisions.
+- pending: skim C — loader routing, engine/UI, NOROWS, and 191 SMELL decisions.
+- pending: skim D — moved storage plus removed/added files.
+- pending: skim E — 123 registries, high-risk registries first.
+- pending: ranked drill-down batch and central FILE verification/filing.
+- pending: controls, FR-1/FR-2/FR-3 synthesis, 99 outbox, gates, close-out.
