@@ -39,9 +39,9 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 - Post-launch LIVE: F105, F107, F108 (v4), F110 (v5), hotfix 2 (v6); F104 NOT OURS. ⛔ F107 field route untested. ⛔ Read the
   GitHub tracker via `api.github.com/.../issues/<n>/comments`, never the HTML page. ✅ Passage Network UNTICKED 09-09.
 - ✅ C74+C77 `SilentHitMomentFX` BUILT + TESTED-ATTENDED 09-10: all seven intended units function across two
-  no-power-cycle loads; 0 Lua errors. Metatron excluded; drill Rare Metals skin + white CP3 MOXIE silent by design. Pending next release.
+  no-power-cycle loads; 0 Lua errors. Metatron excluded; drill Rare Metals skin + white CP3 MOXIE silent by design. v7 words applied 09-10; awaiting upload.
 - ✅ **C83 `ArrivalDeaths` BUILT + TESTED-ATTENDED 09-10:** ordinary safe landing stayed silent; forced overflow all
-  entered the working dome, logged one reroute, and stayed out of the dead/quarantined dome for one sol; 0 errors. Pending next release.
+  entered the working dome, logged one reroute, and stayed out of the dead/quarantined dome for one sol; 0 errors. v7 words applied 09-10; awaiting upload.
 - Shipping artifact: v6 pack = **49** files (`tools/pack_predict.py`); Steam-delivered `ModContent.fpk` **315,457 B**
   md5 `57e01a71f08788be9c79393d6194690f` (workshop folder, 09-09 23:38); PDX page shows 318.92 KB — the two portals'
   sizes differed on v5 too (documented, `RELEASE_PORTAL_PREP` §0.5(f)). Tag `fixpack-v1.0.0` NOT moved (H-01).

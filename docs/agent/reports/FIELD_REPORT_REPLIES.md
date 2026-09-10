@@ -225,6 +225,26 @@ have no reporter goodwill to spend and no thread to correct them in.
    (`ConstructionSite.lua:673` is vanilla), and every pack-OFF leg still ran with
    the rig's other junctions present. Never witnessed on a clean install.
 
+## Steam comments answered by the v7 update (C74, C83) — drafts, 2026-09-10
+
+Both reports came from Steam comments the owner relayed, not GitHub issues, so
+there is no API record to read — **check the Steam thread first; if it is already
+answered, skip the draft.** ⛔ Post only AFTER the upload is live (these say
+"today's update"); before that, say "the next update". No version number. Every
+sentence below is witnessed attended (`bugs/C74.md`, `C77.md`, `C83.md`).
+
+**C74 — "The Rare Metal Extractor's hammer doesn't make a sound…"**
+> Thanks — you were right, and it wasn't only the hammer. The game had the sounds and effects for it, but nothing ever set them off; the same was true of six other machines. Today's update restores them. One thing to know: the drill-style Rare Metals Extractor has no strike sounds by design, so if yours has the drill, use Change Skin to switch it to the hammer.
+
+⛔ Do not add "like the original game": whether the 2018 release played it is the
+reporter's memory, never checked (`C77` §What is NOT established).
+
+**C83 — "Rocket lands and colonists go to nearest dome with no life support…"**
+> You were right that no listed fix covered this — it was a separate bug in the game. When the working domes nearby have no free homes left, the game falls back to the nearest dome the arrivals can walk to without checking that it is switched on, open or has life support. Today's update makes that fallback the nearest working, open, supplied dome instead. We reproduced your layout and watched every arrival go to the working dome.
+
+⛔ Do not say the colonists in the bad dome died — the owner's run saw the
+**Suffocation!** warning but did not wait it out (`C83` §OBSERVED).
+
 ## Owed, and where it is tracked
 
 | Item | Where |

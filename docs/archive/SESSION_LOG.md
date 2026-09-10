@@ -8,6 +8,25 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-10 — RELEASE.md steps 0–2 for v7: words applied, handed off as "ready to upload" (`smr-bugfixpack-5f`, unattended)
+
+tags: RELEASE v7 C74 C77 C83 outbox store-card last_changes fix-list
+
+Applied both outbox entries to every surface. Site fix list +2 rows (C83 under
+*Colonists & domes*, C74+C77 under *Buildings & economy*), 46 → **48**, tally sums,
+judgment calls 3 (faq.md unchanged, true). Count word Forty-six → **Forty-eight** in
+all five card copies (hits 1/2/2 before and after); one headliner added (C83; why not
+C74: STORE_CARD_LIVE 09-10 note). `last_changes` rewritten wholesale as v7's
+three-bullet note, skin sentence included; §3 backup identical. UPLOAD_WORKFLOW §2's
+"untested" paragraph replaced (v6 auto-filled clean). Steam reply drafts for both
+reporters in FIELD_REPORT_REPLIES. Description 5,428 chars. Preflight 0 FAIL,
+doccheck GREEN. ⛔ Not uploaded; outbox NOT cleared (step 5 waits on the owner).
+Instrument note: the first scripted `last_changes` swap hung on a `(?:.*\n)*?` regex
+under `re.S` (catastrophic backtracking) after writing metadata.lua; killed, the
+backup written by hand, and a fence scanner with no regex did the sync check.
+
+---
+
 ## 2026-09-10 — C83 built and tested-attended; arrivals stayed out of the dead dome (`smr-bugfixpack-04`, owner attended)
 
 tags: C83 C84 F53 ArrivalDeaths arrivals quarantine D03 attended H-06

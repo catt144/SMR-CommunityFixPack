@@ -28,6 +28,11 @@ player surface bumps it by one on release.
 
 ## Pending — goes out with the next upload
 
+> ✅ **Words applied 2026-09-10** (RELEASE.md step 1, commit "release words for
+> vNEXT"): fix-list rows (46 → 48), count word Forty-six → **Forty-eight** in all
+> five card copies, C83 headliner, `last_changes` rewritten as v7's note. ⛔ NOT
+> uploaded — these entries stay Pending until the owner confirms the listing (step 5).
+
 ### Pending — C74 + C77: restore seven units' missing animation-moment FX
 
 - **Count impact:** +1 player-facing repair / fix-list row (46 → 47 when

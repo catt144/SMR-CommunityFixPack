@@ -39,9 +39,9 @@ These are **meant** to upload by themselves, with nothing pasted:
 - the title and tags
 - the change note
 
-⚠️ **This is untested.** It was changed on 2026-08-24, after the last upload, so
-no upload has ever actually used it. Step 3 tells you how to check and what to
-paste if it did not work. Assume you may need to paste until it has worked once.
+✅ **It has worked once** — at the v6 upload (2026-09-09) both pages filled
+themselves in full with nothing pasted. Once is not a habit yet, so still do
+step 3's check; the paste copies there stay current in case it does not.
 
 **Two things that look wrong and are not:**
 
@@ -83,7 +83,7 @@ render.
 ```
 Bug fixes for Surviving Mars: Relaunched.
 
-Forty-six repairs, each one written up on the fix list with what you would
+Forty-eight repairs, each one written up on the fix list with what you would
 have seen and what was actually wrong. Every one targets something the game's
 own code gets wrong — the code says one thing, does another, and the fix makes
 it do what it says. It fixes bugs; it does not rebalance the game. Preferences
@@ -110,6 +110,7 @@ SOME OF WHAT IT FIXES
 
 · Colonists walked across the surface between domes and suffocated.
 · Rocket loads of new arrivals died on their way to a dome.
+· New arrivals moved into a dome that was switched off, quarantined or without air.
 · A dome sat half empty and still refused to house anyone.
 · A bed that fell vacant sat empty while colonists were homeless.
 · Colonists stayed homeless after you built a Shuttle Hub.
@@ -201,7 +202,7 @@ https://github.com/catt144/SMR-CommunityFixPack
 ```
 Bug fixes for [i]Surviving Mars: Relaunched[/i].
 
-[b]Forty-six repairs[/b], each one written up on the fix list with what you would have seen and what was actually wrong. Every one targets something the game's own code gets wrong — the code says one thing, does another, and the fix makes it do what it says. It fixes bugs; it does not rebalance the game. Preferences and features are deliberately not in it.
+[b]Forty-eight repairs[/b], each one written up on the fix list with what you would have seen and what was actually wrong. Every one targets something the game's own code gets wrong — the code says one thing, does another, and the fix makes it do what it says. It fixes bugs; it does not rebalance the game. Preferences and features are deliberately not in it.
 
 Some of them you could hardly miss: an entire train line and every train on it deleted by salvaging a single hex, colonists suffocating on a walk between two domes, an artificial lake burying the rover that was building it.
 
@@ -213,6 +214,7 @@ And [b]three[/b] of them repair things you cannot see at all today: real defects
 [list]
 [*]Colonists walked across the surface between domes and suffocated.
 [*]Rocket loads of new arrivals died on their way to a dome.
+[*]New arrivals moved into a dome that was switched off, quarantined or without air.
 [*]A dome sat half empty and still refused to house anyone.
 [*]A bed that fell vacant sat empty while colonists were homeless.
 [*]Colonists stayed homeless after you built a Shuttle Hub.
@@ -273,11 +275,9 @@ Usually auto-fills. If it is missing under **CHANGELOG** (Paradox) or **Change
 Notes** (Steam), paste this:
 
 ```
-- Game 1.1.0 repairs a large number of these bugs itself, so those fixes have been removed from the pack. A fix that duplicates the game's own is a risk with no benefit, and a few of ours had quietly become slightly worse than what the game now does on its own.
-- Three things you may notice from that. The pack no longer holds an asteroid habitat's residents through a power or air cut — the game handles that case deliberately now, and colonists re-home themselves once life support is back. A line's train count no longer refreshes after a salvage until you reopen the display. And in a save you have already played, a small Astrogeologist bonus an earlier version of this pack gave two extractor types is removed the next time that save loads; a new game never had it.
-- A Saint's blessing works again with the pack installed — the game's own 1.1.0 fix and ours were cancelling each other out, and saves played in between are repaired on load. Colonists returning from a long expedition keep the home that was held for them, and setting a trait filter on an asteroid habitat no longer causes an error.
-- Updated for 1.1.0: the landed-rocket drone fix now respects the game's new "Accept fuel" toggle, the Edit Payload fix works with the new tutorial and with destination picks, and an error popup that could appear when new arrivals had no dome within walking distance and their only route to one was a passenger train is gone. Three fixes that had switched themselves off are re-enabled — landscaping over colonists boarding a vehicle, dome-to-dome passages, and trains unloading a resource at a station where you had switched it off. Track salvage was also updated for the new game code: a leftover piece from a split line is kept on its own track instead of being removed, matching the base game.
-- None of this has been watched in a running colony on 1.1.0 yet — it is derived from the new game code. Please keep reporting anything that looks wrong.
+- New arrivals are no longer sent into a nearby dome that is switched off, quarantined or without life support when the working domes they can reach have no free homes. They go to the nearest working dome instead, even if some of them have to wait there for a home.
+- The missing strike, pump, landing, drilling, shovel and bucket effects are back on seven machines and vehicles: the Rare Metals Extractor's hammer, the classic MOXIE, the Water Extractor, Shuttle Hub shuttles, the RC Driller, the RC Dozer and The Excavator. Sound and visuals only. The drill-style Rare Metals Extractor and the white MOXIE are silent by design; use Change Skin to switch the extractor to its hammer.
+- Both were watched working in a running colony on game 1.1.0.
 ```
 
 #### 📋 Short summary (only if it also came out blank)

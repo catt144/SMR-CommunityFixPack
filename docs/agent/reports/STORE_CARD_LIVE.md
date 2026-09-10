@@ -135,7 +135,7 @@ back at Paradox. ⛔ Do not paste the same block on both.
 ```
 Bug fixes for Surviving Mars: Relaunched.
 
-Forty-six repairs, each one written up on the fix list with what you would
+Forty-eight repairs, each one written up on the fix list with what you would
 have seen and what was actually wrong. Every one targets something the game's
 own code gets wrong — the code says one thing, does another, and the fix makes
 it do what it says. It fixes bugs; it does not rebalance the game. Preferences
@@ -162,6 +162,7 @@ SOME OF WHAT IT FIXES
 
 · Colonists walked across the surface between domes and suffocated.
 · Rocket loads of new arrivals died on their way to a dome.
+· New arrivals moved into a dome that was switched off, quarantined or without air.
 · A dome sat half empty and still refused to house anyone.
 · A bed that fell vacant sat empty while colonists were homeless.
 · Colonists stayed homeless after you built a Shuttle Hub.
@@ -259,7 +260,7 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=3787202810
 ```
 Bug fixes for [i]Surviving Mars: Relaunched[/i].
 
-[b]Forty-six repairs[/b], each one written up on the fix list with what you would have seen and what was actually wrong. Every one targets something the game's own code gets wrong — the code says one thing, does another, and the fix makes it do what it says. It fixes bugs; it does not rebalance the game. Preferences and features are deliberately not in it.
+[b]Forty-eight repairs[/b], each one written up on the fix list with what you would have seen and what was actually wrong. Every one targets something the game's own code gets wrong — the code says one thing, does another, and the fix makes it do what it says. It fixes bugs; it does not rebalance the game. Preferences and features are deliberately not in it.
 
 Some of them you could hardly miss: an entire train line and every train on it deleted by salvaging a single hex, colonists suffocating on a walk between two domes, an artificial lake burying the rover that was building it.
 
@@ -271,6 +272,7 @@ And [b]three[/b] of them repair things you cannot see at all today: real defects
 [list]
 [*]Colonists walked across the surface between domes and suffocated.
 [*]Rocket loads of new arrivals died on their way to a dome.
+[*]New arrivals moved into a dome that was switched off, quarantined or without air.
 [*]A dome sat half empty and still refused to house anyone.
 [*]A bed that fell vacant sat empty while colonists were homeless.
 [*]Colonists stayed homeless after you built a Shuttle Hub.
@@ -372,6 +374,28 @@ only (this file carries no change note): bullet 2's Astrogeologist sentence now
 says the leftover bonus **is removed on the next load** (ck126 KEEP, `bugs/F95.md`)
 instead of "cannot take back"; bullet 4 gains the F117 line (ck127(a), `777249d`,
 `bugs/F117.md`). ⛔ Both are CLAIMS until the sitting; bullet 5 says so.
+
+## ⭐ 2026-09-10 — v7 words (`RELEASE.md` step 1): count 46 → 48, one headliner (C83)
+
+Recounted, not typed: `grep -c '^??? '` = **48** in `SMR-CommunityMods`, tally
+1+14+4+4+9+4+7+2+3; "Under the hood" still **3**, judgment calls still **3**.
+Checked by script (the `verify_sync` shape, rewritten in the session scratchpad
+because the original was never committed): `description` == UPLOAD_WORKFLOW
+plain block; the two BBCode blocks identical; this file's plain block differs only
+in the two portal passages; `last_changes` == the §3 change-note backup; count word
+*Forty-eight* in all five copies. Description now **5,428** chars (+86 on the
+5,342 both portals accepted at v6).
+
+**New headliner — "New arrivals moved into a dome that was switched off,
+quarantined or without air"** (C83), placed under the F53 arrivals bullet it is
+easily confused with. It clears the F105/F108 bar: **a player saw it** (a Steam
+discussion comment, 2026-09-10), **it is reproduced** (the owner's attended
+layout, the arrivals split into the dead dome), and the fix was **watched** keeping
+every arrival out of it for a sol. ⛔ It says "without air", not "suffocated":
+the run saw the warning, not a death.
+**C74+C77 stays in the "… and a good deal more" tail** — cosmetic, and the skin
+caveat it needs (drill extractor and white MOXIE silent by design) does not fit
+a one-line headliner. It carries that caveat on the fix list and in `last_changes`.
 
 ## Provenance of the headliners
 
