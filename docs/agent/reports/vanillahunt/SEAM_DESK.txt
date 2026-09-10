@@ -1,0 +1,16 @@
+SEAM DESK: Lua 5.5 | lupa 2.8 (archived bodies; no runtime claim)
+pasture 1.0.7 performance=0: actual=0, expected=0, ui=None
+pasture 1.0.7 performance=48: actual=2400, expected=2400, ui=None
+pasture 1.0.7 performance=100: actual=5000, expected=5000, ui=None
+pasture 1.1.0 performance=0: actual=0, expected=0, ui=0
+pasture 1.1.0 performance=48: actual=2500.0, expected=1200.0, ui=1200
+pasture 1.1.0 performance=100: actual=2500.0, expected=2500.0, ui=2500
+counterfactual identity round helper: mismatch demand would FAIL (control discriminates)
+ingredient enabled=True registry=True vegan=False: advertised, consumed, remaining=(1, 1, 200)
+ingredient enabled=False registry=True vegan=False: advertised, consumed, remaining=(0, 1, 200)
+ingredient enabled=False registry=False vegan=False: advertised, consumed, remaining=(0, 0, 300)
+ingredient enabled=True registry=True vegan=True: advertised, consumed, remaining=(1, 0, 300)
+1.0.7: ingredient consumer absent; no equivalent ingredient behavior control claimed
+GetNextCrop 1.0.7: adjacent=B, gap-before-B=None (bounded loop; player caller not found)
+GetNextCrop 1.1.0: adjacent=B, gap-before-B=None (bounded loop; player caller not found)
+PASS: pasture branch difference and ingredient-toggle contradiction discriminate

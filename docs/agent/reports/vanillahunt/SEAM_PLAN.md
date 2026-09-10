@@ -6,8 +6,9 @@ The parent owns all writes, candidate verdicts, filing, and handoffs.
 ## Live todo (one commit-and-verify unit per item)
 
 - [x] Record the measured split and source pins; chain gates GREEN, both instrument selftests PASS.
-- [ ] IN PROGRESS: Read and adjudicate the 396-row core-food slice, execute suitable falsifiers,
-  file surviving candidates, record explicit read coverage and continuation ownership; gates and commit.
+- [x] Read the 396-row core-food slice and adjudicate candidate leads; execute suitable
+  falsifiers and file C56-C62 with checklist riders; chain gates GREEN.
+- [ ] IN PROGRESS: record explicit read coverage and continuation ownership; gates and commit.
 - [ ] Write full continuation inboxes and 04/99 outboxes, update manifest and state,
   consume 03, run chain gates, commit and push.
 

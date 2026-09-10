@@ -6952,3 +6952,28 @@ Load click that misfires.
 multi-display geometry alongside.
 **Good to have:** the known-good workaround while capturing (verified command):
 `rc:SetCommand("TransferResources", depot, "load", "<Resource>", <amount*1000>, true)`.
+
+
+### Rider ? vanillahunt 03 food seams ? Status: unrun ? fresh 1.1.0 fixtures only
+
+- **C56 ranch forecast:** TAKEABLE WHEN a supplied Chicken ranch can complete
+  a herd at reduced positive performance. Record active forecast before harvest
+  and all producing despawns; [C56](agent/bugs/C56.md) has controls and vacuity.
+- **C57 disabled ingredient:** TAKEABLE WHEN a DLC food service holds a delicacy
+  that can remain stocked after its use is switched off. Observe a completed
+  eligible meal before hauling/spoilage changes the amount; [C57](agent/bugs/C57.md).
+- **C58 reserved food / spoilage:** TAKEABLE WHEN a raw-pile or Food-Depot meal
+  reservation can remain outstanding through its actual decay tick. The agent
+  reads physical, request and colonist counters; native outcome is unknown.
+  The two paths have different tick timing; [C58](agent/bugs/C58.md).
+- **C60 ranch UI allocation:** TAKEABLE WHEN item 136's FR-3 profiling is accepted
+  or the ranch fixture already exists. Callback counts and attributed cost only;
+  no source-only stutter verdict; [C60](agent/bugs/C60.md).
+- **C61 death-popup wording:** TAKEABLE WHEN an isolated fresh colony has more
+  than five colonists and a nonempty applicant pool, or a field report supplies
+  the event. Preserve survivors and account for other pool mutations. Do not
+  sacrifice the campaign; [C61](agent/bugs/C61.md).
+
+These are candidate observations, not release gates or approvals to add fixes.
+The terminal hunt audit owns any hotfix recommendation. C59/C62 have no
+independently established player recipe and do not get artificial play legs.

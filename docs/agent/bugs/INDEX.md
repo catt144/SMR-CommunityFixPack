@@ -1,9 +1,9 @@
 <!-- GENERATED — never hand-edit; regenerate with: python tools/doccheck.py --regen -->
 <!-- split_bugs.py --write is the one-time MIGRATION from the retired pre-split doc, never a regeneration; verify: python tools/doccheck.py -->
 
-# Bug index — 185 rows, 150 entry files
+# Bug index — 192 rows, 157 entry files
 
-118 F + 12 D + 55 C. `seq` is the entry's position in the old BUGS.md file order;
+118 F + 12 D + 62 C. `seq` is the entry's position in the old BUGS.md file order;
 the row order below is the old index table's own. Generated from the front matter of
 `docs/agent/bugs/*.md` — edit an entry, not this file.
 
@@ -198,4 +198,11 @@ the row order below is the old index table's own. Generated from the front matte
 | 148 | F117 | **OUR OWN DEFECT, 1.1.0-INDUCED, in a KEEP module** — `Fix_ArrivalDeaths` half (b) calls `ChooseDome(self.traits, …)`, the 1.0.7 signature; 1.1.0 changed it to `ChooseDome(colonist, …)` (`_GameUtils.lua:486`) and both callees index the argument's `.traits` (`Community:GetScoreFor` `Community.lua:445`, `Residence:IsSuitable` `Residence.lua:200`), so our traits table hands them `nil` and the first dome with a trait filter or the first filtered residence with free space THROWS inside the arriving colonist's `Idle` command thread. Class (c), invisible to `Require`/`sigcheck`/`bodycheck`; shipped in v5 today | filed | P1 | source-read | [F117.md](F117.md) |
 | 149 | F118 | **OUR OWN DEFECT, 1.1.0-INDUCED, in a KEEP module** — `Fix_LayoutTechLock`'s teardown of each tech-locked sub-controller calls `ConstructionController:Deactivate`, which resets `s_ConstructionControllerDeleteOnLoad = false` (`Construction/Construction.lua:1226-1227`); 1.1.0's `LayoutConstructionController:Activate` now registers the LAYOUT controller there (`LayoutConstruction.lua:385`, absent on 1.0.7), so after our loop a save taken with the layout dialog open and a locked entry present is no longer cleaned by `OnMsg.PersistPostLoad` (`:1052-1056`) | filed | P3 | source-read | [F118.md](F118.md) |
 | 150 | C55 | VANILLA 1.1.0 residue, not ours — `DemolishAndSplitTrack`'s new pre-sort `ProcessAllElements()` (`TrackElement.lua:473-476`) cannot order a track that holds a repair site: `OrderTrackElements` walks by hex (`Tracks.lua:586-596`) and a repair site shares its hex with the hidden broken element (`Track.lua:641-644`), so the walk comes up short, logs `assert(false, "unable to find the expected number of track elements")` (`:616`) after rewriting `connections` on the visited elements, and returns without stamping `node_idx` (`:633` unreached). F45 is therefore still live on 1.1.0 and `Fix_BrokenTrackSalvage`'s stamp is still what makes the salvage sort possible | cand | P3 | source-read | [C55.md](C55.md) |
+| 151 | C56 | Ranch harvest rounds each animal while the forecast rounds the herd, producing inconsistent Food totals | cand | P3 | source-read | [C56.md](C56.md) |
+| 152 | C57 | Food ingredient switched off disappears from the menu but is still consumed from existing stock | cand | P3 | source-read | [C57.md](C57.md) |
+| 153 | C58 | Pile and depot spoilage includes food reserved for traveling colonists although consumption hosts protect reservations | cand | P2 | source-read | [C58.md](C58.md) |
+| 154 | C59 | Unused GetNextCrop helper checks the same empty crop slot three times and misses the next planted slot | cand | P3 | source-read | [C59.md](C59.md) |
+| 155 | C60 | Ranch infopanel updater allocates and fills a resource-id list that it never reads | cand | P3 | source-read | [C60.md](C60.md) |
+| 156 | C61 | Non-natural death popup still promises two lost applicants after the base death code removed that penalty | cand | P3 | source-read | [C61.md](C61.md) |
+| 157 | C62 | Building explosion body collects a local list of destroyed buildings that is never consumed | cand | P3 | source-read | [C62.md](C62.md) |
 
