@@ -40,6 +40,28 @@ welcoming dome, as `:437` does). Reply drafts for the reporter in ck143 and in c
 
 ---
 
+## 2026-09-10 — C74+C77 built and tested-attended; the old-save gate failed live and was corrected (`smr-bugfixpack-04`, owner attended)
+
+tags: C74 C77 ck139 SilentHitMomentFX attended old-save no-power-cycle hotfix3
+
+Built `Fix_SilentHitMomentFX.lua`: guarded `AnimMetadata` for all seven ruled units, the hammer/MOXIE numeric-index
+conversion, Water's replace-after-speed restart, and an old-save pass using only vanilla tracker bodies. Metatron stayed
+out. The first attended run was a useful REFUTATION: markers registered and the ordinary-action units fired (including four
+fresh RC Dozer `Load/Hit1` calls), but the hammer and Excavator read dead. Cause: during `OnMsg.LoadGame`, a persisted thread
+handle can still report valid before its resumed dead tracker exits, so the specified "no live tracker" guard skipped it.
+The owner correctly challenged the proposed power-cycle workaround: the promise was no player action. Reworked the pass to
+REPLACE eligible trackers — vanilla `TrackMultipleHitMoments` deletes its old thread; Water/Excavator do so explicitly — so
+one tracker remains and later vanilla restarts cannot double it. The reusable load-time finding is `EF-087`. Desk harness 10/10, all 8 deskbenches HELD, parse 46/0,
+bodycheck 10 OK + one declared SRC-NONE, doccheck GREEN.
+
+Final attended log `c74build_final_Mars.exe-20260910-16.47.24.log`: module applied `:124`, 11 presets `:140`, four tracker
+replacements on BOTH loads `:178/:294`, 0 `[LUA ERROR]`, 0 `[ERROR]`. Owner listened to every intended effect: **"they are
+all functioning, no power cycling"**. Initial falsifier preserved as
+`c74build_initial_Mars.exe-20260910-16.20.36.log`. C74/C77 → `tested-attended`; checklist 139 closed; one +1 repair entry
+staged in `RELEASE_OUTBOX`; current tree 45 default-active modules / 46 Code files / 94 probes. One-shot build prompt removed.
+
+---
+
 ## 2026-09-10 — ck139 RULED BUILD; the build prompt made takeable (`smr-bugfixpack-04`, owner in conversation)
 
 tags: ck139 C74 C77 C74_BUILD old-save patch-safety

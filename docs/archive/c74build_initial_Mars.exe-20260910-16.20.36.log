@@ -1,0 +1,1945 @@
+					Render 0:00:00:012
+*** executable info
+Timestamp:     	6a91a190
+Date:          	Fri Aug 28 10:56:16 2026
+Command line:  	
+Compiler:      	195136247, 142 (VS 2019) or newer
+
+
+*** hardware info
+CPU name      	Intel(R) Core(TM) i7-14700K
+CPU MHz       	3418
+CPU cores     	20/28
+Phys. Memory   	65278 MBytes
+Memory In Use  	59%
+					Render 0:00:00:013
+Disk Free      	826136 MBytes
+
+
+*** OS info
+OS:            	Windows 11
+Version:       	10.0.26100 
+
+
+*** Debug::Init()
+
+
+					Render 0:00:00:082
+Steam initialized (AppId 3215050)
+					Render 0:00:00:085
+Drive type for game installation: SSD, savegames: SSD
+Language: English
+					Render 0:00:01:543
+*** graphics info
+GPU                            	NVIDIA GeForce RTX 4080 Feature Level: 12.1 {  DoublePrecisionFloatShaderOps: 1 OutputMergerLogicOp: 1 MinPrecisionSupport: 2 TiledResourcesTier: 4 ResourceBindingTier: 3 PSSpecifiedStencilRefSupported: 0 TypedUAVLoadAdditionalFormats: 1 ROVsSupported: 1 ConservativeRasterizationTier: 3 MaxGPUVirtualAddressBitsPerResource: 40 StandardSwizzle64KBSupported: 0 CrossNodeSharingTier: 0 CrossAdapterRowMajorTextureSupported: 0 VPAndRTArrayIndexFromAnyShaderFeedingRasterizerSupportedWithoutGSEmulation: 1 ResourceHeapTier: 2 NotZeroedPools: 1 UMA: 0 UnalignedBlockTextures: 1}
+API                            	d3d12
+GPU Driver Version             	32.0.16.1074
+GPU Driver Package Version     	610.74
+GPU Dedicated Video Memory     	16048 MB
+					Render 0:00:01:690
+
+Libs: 					Render 0:00:01:691
+Network, Sequences, MouseTrackWin, DumbAI, MapGen, Paradox, TriggersAndEvents, Notifications, Research, Resources, Tutorial, Objectives 
+
+					Render 0:00:01:924
+
+Platform: desktop, editor, goldmaster, paradox, pc, steam
+
+					Render 0:00:02:894
+*** audio info
+Audio Endpoint                 	Speakers (Razer Leviathan V2)
+						Lua 0:00:02:895
+Lua revision: 403908
+Assets revision: 33006
+Steam AppID: 3215050
+Build version: 1.1.0.403908
+Build branch:  Release
+						Lua 0:00:16:396
+Account storage loaded successfully in 2 ms
+						Lua 0:00:16:397
+DLC norman loaded, lua revision 403908, assets revision 33006
+						Lua 0:00:16:398
+DLC thomas loaded, lua revision 403908, assets revision 33006
+						Lua 0:00:16:401
+[mod] Loaded mod def Relaunched Fix Pack (id SMR_CommunityFixPack, v1.00-006) unpacked from appdata
+[mod] Loaded mod def Relaunched Fix Pack: Opt-In Modules (id SMR_CommunityOptInPack, v1.00-000) unpacked from appdata
+[mod] Loaded mod def Community Fix Pack — Test Kit (id SMR_CommunityFixPackTestKit, v0.00-001) unpacked from appdata
+						Lua 0:00:16:791
+[mod] [SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+[mod] [SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[mod] [SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+[SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+						Lua 0:00:16:796
+[mod] [SMRTest][carry] fixture-carry dump available — run SMRTest.FixtureCarry()
+						Lua 0:00:16:797
+[mod] [CommunityFixPack] NightShiftWork: applied
+[mod] [CommunityFixPack] WispRewards: applied
+[mod] [CommunityFixPack] TrainsToVoid: applied
+[mod] [CommunityFixPack] LanderEmptyLaunch: applied
+[mod] [CommunityFixPack] ShelterReflex: applied
+[mod] [CommunityFixPack] BrokenTrackSalvage: applied
+[mod] [CommunityFixPack] TrackSalvageWipe: applied
+[mod] [CommunityFixPack] LakeEntombment: applied
+[mod] [CommunityFixPack] GhostFarmOxygen: applied
+[mod] [CommunityFixPack] RocketDroneChurn: applied
+						Lua 0:00:16:798
+[mod] [CommunityFixPack] ShuttleTransportCache: applied
+[mod] [CommunityFixPack] VacuumWalks: applied
+[mod] [CommunityFixPack] ArrivalDeaths: applied
+[mod] [CommunityFixPack] StaleReservations: applied
+[mod] [CommunityFixPack] CrystalMysteryHang: applied
+[mod] [CommunityFixPack] DomeOverviewHighlight: applied
+[mod] [CommunityFixPack] TrainCargoDumping: applied
+[mod] [CommunityFixPack] DestroyedTunnels: applied
+						Lua 0:00:16:799
+[mod] [CommunityFixPack] DustSicknessBiorobots: applied
+[mod] [CommunityFixPack] GeneForging: applied
+[mod] [CommunityFixPack] MirrorSphereSite: applied
+[mod] [CommunityFixPack] PayloadTemplateRefill: applied
+[mod] [CommunityFixPack] ShuttleHubOffAvailable: applied
+[mod] [CommunityFixPack] FreedHousingNotice: applied
+[mod] [CommunityFixPack] DomeFreeSpaceMismatch: applied
+[mod] [CommunityFixPack] LandscapeUnitFilter: applied
+						Lua 0:00:16:800
+[mod] [CommunityFixPack] RocketInteractGuard: applied
+[mod] [CommunityFixPack] TrackConnectorPingPong: applied
+[mod] [CommunityFixPack] TrackTunnelPowerBridge: applied
+						Lua 0:00:16:801
+[mod] [CommunityFixPack] GraphConsumedCaption: applied
+[mod] [CommunityFixPack] TrainWaitTime: applied
+[mod] [CommunityFixPack] FounderTraitNotification: applied
+[mod] [CommunityFixPack] SequenceLatents: applied
+[mod] [CommunityFixPack] TrackSalvageRefund: applied
+[mod] [CommunityFixPack] LayoutTechLock: applied
+[mod] [CommunityFixPack] DroneTransportMinors: applied
+[mod] [CommunityFixPack] AnomalyCaveInMap: applied
+[mod] [CommunityFixPack] BombardmentSpread: applied
+						Lua 0:00:16:802
+[mod] [CommunityFixPack] ExtenderFlapChurn: applied
+[mod] [CommunityFixPack] SaintBlessing: applied
+[mod] [CommunityFixPack] SinkholeIndestructible: applied
+[mod] [CommunityFixPack] ExoticDepositSign: applied
+[mod] [CommunityFixPack] JumboCaveReinforcementWedge: applied
+						Lua 0:00:16:803
+[mod] [CommunityFixPack] SilentHitMomentFX: applied
+[mod] [CommunityFixPack] SaveSanitizer: applied
+						Lua 0:00:17:547
+[mod] [CommunityFixPack] SaintBlessing: inactive (no dome-colonists trait presets)
+[mod] [CommunityFixPack] SinkholeIndestructible: the St. Elmo's Fire sinkhole is now indestructible, like every other mystery set-piece
+						Lua 0:00:17:638
+Reloading done in 1237 ms
+						Lua 0:00:17:640
+Available DLCs: norman(Feeding the Future),thomas(Interplanetary Codex) 
+						Lua 0:00:18:101
+[preset] Preset postprocess took 195 ms.
+						Lua 0:00:18:195
+482 / 482 particle streams loaded in 87 ms.
+						Lua 0:00:18:196
+5 / 5 particle streams loaded in 1 ms.
+						Lua 0:00:18:197
+[mod] [CommunityFixPack] SilentHitMomentFX: registered 11 missing animation-moment preset(s)
+						Lua 0:00:18:403
+[mod] [CommunityFixPack] SaintBlessing: the shipped code resolves the trait label itself — data left untouched; save re-base armed for 1 preset(s) of 2
+						Lua 0:00:18:510
+[mod] Loaded mod items for: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack
+						Lua 0:00:19:575
+[PdxSDK] Started up. Took 1308
+						Lua 0:00:19:977
+[Braze] SessionStart error The server name or address could not be resolved
+
+						Lua 0:00:19:978
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:20:082
+[Braze] SessionStart error The server name or address could not be resolved
+
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:41:057
+Load Game: 
+	lua_revision: 403908 (last saved with) 
+	orig_lua_revision: 403908 (created with) 
+	assets_revision: 33006 
+
+	dlcs: norman, thomas 
+
+	mods: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack 
+						Lua 0:00:41:063
+*** Reloading assets from folder 'BinAssets/'
+						Lua 0:00:44:223
+*** Assets reloaded in 3.2 s, read 359.3 MB, read speed 113.7 MB/s, average read 8137 bytes.
+						Lua 0:00:47:214
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:47:233
+game_settings:
+    sponsor: NASA
+    profile: rocketscientist
+    founding_faction: AssemblyOfPlanets
+    rival_colonies: IMM, CNSA, ESA
+    mystery_random: 
+    game_rules: (none)
+more_game_settings: save_game_id: lD1jaGcMJOxaiFcU, mystery: none, coordinates: 16N120E, landing_spot: , logo: USA
+map_conditions: altitude: -3122, temperature: -25, cold_wave: 61, dust_devils: 44, dust_storm: 123, meteors: 109
+map_resources: concrete: 109, metals: 176, precious_metals: 176, water: 212
+						Lua 0:00:47:249
+[mod] [CommunityFixPack] SaveSanitizer: F95 astrogeologist-residue pass removed 0 modifier(s), left 0 unidentified
+Game Loaded in 6192 ms
+						Lua 0:00:47:273
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:48:127
+Game loaded on map BlankBig_02 in 7189 ms
+						Lua 0:00:50:434
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:56:527
+C74BUILD hook installed
+						Lua 0:00:56:615
+C74BUILD FX 22088722 working Hit WaterExtractor nil
+						Lua 0:00:56:832
+C74BUILD FX 22089801 working Hit WaterExtractor nil
+						Lua 0:00:57:283
+C74BUILD FX 22092056 working Hit WaterExtractor nil
+						Lua 0:00:57:494
+C74BUILD FX 22093118 working Hit WaterExtractor nil
+						Lua 0:00:57:735
+C74BUILD FX 22094317 Working hit-moment2 MOXIE MoxiePump
+						Lua 0:00:57:949
+C74BUILD FX 22095389 working Hit WaterExtractor nil
+						Lua 0:00:58:159
+C74BUILD FX 22096434 working Hit WaterExtractor nil
+						Lua 0:00:58:615
+C74BUILD FX 22098723 working Hit WaterExtractor nil
+						Lua 0:00:58:821
+C74BUILD FX 22099751 working Hit WaterExtractor nil
+						Lua 0:00:59:064
+C74BUILD FX 22100967 Working hit-moment1 MOXIE MoxiePump
+						Lua 0:00:59:282
+C74BUILD FX 22102056 working Hit WaterExtractor nil
+						Lua 0:00:59:486
+C74BUILD FX 22103067 working Hit WaterExtractor nil
+						Lua 0:00:59:949
+C74BUILD FX 22105390 working Hit WaterExtractor nil
+						Lua 0:01:00:149
+C74BUILD FX 22106384 working Hit WaterExtractor nil
+						Lua 0:01:00:394
+C74BUILD FX 22107617 Working hit-moment2 MOXIE MoxiePump
+						Lua 0:01:00:616
+C74BUILD FX 22108723 working Hit WaterExtractor nil
+						Lua 0:01:00:811
+C74BUILD FX 22109700 working Hit WaterExtractor nil
+						Lua 0:01:01:282
+C74BUILD FX 22112057 working Hit WaterExtractor nil
+						Lua 0:01:01:474
+C74BUILD FX 22113017 working Hit WaterExtractor nil
+						Lua 0:01:01:724
+C74BUILD FX 22114267 Working hit-moment1 MOXIE MoxiePump
+						Lua 0:01:01:950
+C74BUILD FX 22115390 working Hit WaterExtractor nil
+						Lua 0:01:02:137
+C74BUILD FX 22116333 working Hit WaterExtractor nil
+						Lua 0:01:02:616
+C74BUILD FX 22118724 working Hit WaterExtractor nil
+						Lua 0:01:02:801
+C74BUILD FX 22119650 working Hit WaterExtractor nil
+						Lua 0:01:03:054
+C74BUILD FX 22120917 Working hit-moment2 MOXIE MoxiePump
+						Lua 0:01:03:282
+C74BUILD FX 22122057 working Hit WaterExtractor nil
+						Lua 0:01:03:464
+C74BUILD FX 22122966 working Hit WaterExtractor nil
+						Lua 0:01:03:949
+C74BUILD FX 22125391 working Hit WaterExtractor nil
+						Lua 0:01:04:127
+C74BUILD FX 22126283 working Hit WaterExtractor nil
+						Lua 0:01:04:384
+C74BUILD FX 22127567 Working hit-moment1 MOXIE MoxiePump
+						Lua 0:01:04:617
+C74BUILD FX 22128724 working Hit WaterExtractor nil
+						Lua 0:01:04:791
+C74BUILD FX 22129599 working Hit WaterExtractor nil
+						Lua 0:01:05:282
+C74BUILD FX 22132058 working Hit WaterExtractor nil
+						Lua 0:01:05:308
+C74BUILD READ rare1=UniversalExtractorHammer/working/2/dead moxie1=MoxieCP3Pump/working/0/dead moxie2=MoxiePump/working/2/live water1=WaterExtractorPump/working/2/live water2=WaterExtractorCP3Pump/working/2/live excavator=ExcavatorShovel/working/24/dead shuttle=absent driller=RCDriller/workIdle/2/dead dozer=RCTerraformer/workIdle/2/dead
+						Lua 0:01:05:456
+C74BUILD FX 22132916 working Hit WaterExtractor nil
+						Lua 0:01:05:714
+C74BUILD FX 22134217 Working hit-moment2 MOXIE MoxiePump
+						Lua 0:01:05:949
+C74BUILD FX 22135391 working Hit WaterExtractor nil
+						Lua 0:01:06:119
+C74BUILD FX 22136232 working Hit WaterExtractor nil
+						Lua 0:01:06:616
+C74BUILD FX 22138725 working Hit WaterExtractor nil
+						Lua 0:01:06:781
+C74BUILD FX 22139549 working Hit WaterExtractor nil
+						Lua 0:01:07:044
+C74BUILD FX 22140867 Working hit-moment1 MOXIE MoxiePump
+						Lua 0:01:07:283
+C74BUILD FX 22142058 working Hit WaterExtractor nil
+						Lua 0:01:07:444
+C74BUILD FX 22142865 working Hit WaterExtractor nil
+						Lua 0:01:07:949
+C74BUILD FX 22145392 working Hit WaterExtractor nil
+						Lua 0:01:08:107
+C74BUILD FX 22146182 working Hit WaterExtractor nil
+						Lua 0:01:08:375
+C74BUILD FX 22147517 Working hit-moment2 MOXIE MoxiePump
+						Lua 0:01:08:616
+C74BUILD FX 22148725 working Hit WaterExtractor nil
+						Lua 0:01:08:771
+C74BUILD FX 22149498 working Hit WaterExtractor nil
+						Lua 0:01:09:283
+C74BUILD FX 22152059 working Hit WaterExtractor nil
+						Lua 0:01:09:434
+C74BUILD FX 22152815 working Hit WaterExtractor nil
+						Lua 0:01:09:704
+C74BUILD FX 22154167 Working hit-moment1 MOXIE MoxiePump
+						Lua 0:01:09:806
+C74BUILD FX 22154669 ShuttleHubExit Hit CargoShuttle ShuttleHub
+						Lua 0:01:09:949
+C74BUILD FX 22155392 working Hit WaterExtractor nil
+						Lua 0:01:10:097
+C74BUILD FX 22156131 working Hit WaterExtractor nil
+						Lua 0:01:10:616
+C74BUILD FX 22158726 working Hit WaterExtractor nil
+						Lua 0:01:10:760
+C74BUILD FX 22159448 working Hit WaterExtractor nil
+						Lua 0:01:11:034
+C74BUILD FX 22160817 Working hit-moment2 MOXIE MoxiePump
+						Lua 0:01:11:284
+C74BUILD FX 22162059 working Hit WaterExtractor nil
+						Lua 0:01:11:424
+C74BUILD FX 22162764 working Hit WaterExtractor nil
+						Lua 0:01:11:949
+C74BUILD FX 22165393 working Hit WaterExtractor nil
+						Lua 0:01:12:087
+C74BUILD FX 22166081 working Hit WaterExtractor nil
+						Lua 0:01:12:364
+C74BUILD FX 22167467 Working hit-moment1 MOXIE MoxiePump
+						Lua 0:01:12:616
+C74BUILD FX 22168726 working Hit WaterExtractor nil
+						Lua 0:01:12:750
+C74BUILD FX 22169397 working Hit WaterExtractor nil
+						Lua 0:01:13:283
+C74BUILD FX 22172060 working Hit WaterExtractor nil
+						Lua 0:01:13:414
+C74BUILD FX 22172714 working Hit WaterExtractor nil
+						Lua 0:01:13:695
+C74BUILD FX 22174117 Working hit-moment2 MOXIE MoxiePump
+						Lua 0:02:17:652
+C74BUILD FX 22175393 working Hit WaterExtractor nil
+						Lua 0:02:18:290
+C74BUILD FX 22176030 working Hit WaterExtractor nil
+						Lua 0:02:20:986
+C74BUILD FX 22178727 working Hit WaterExtractor nil
+						Lua 0:02:21:607
+C74BUILD FX 22179347 working Hit WaterExtractor nil
+						Lua 0:02:23:026
+C74BUILD FX 22180767 Working hit-moment1 MOXIE MoxiePump
+						Lua 0:02:24:127
+C74BUILD FX 22181868 Drill Hit RCDriller nil
+						Lua 0:02:24:319
+C74BUILD FX 22182060 working Hit WaterExtractor nil
+						Lua 0:02:24:922
+C74BUILD FX 22182663 working Hit WaterExtractor nil
+						Lua 0:02:27:653
+C74BUILD FX 22185394 working Hit WaterExtractor nil
+						Lua 0:02:28:240
+C74BUILD FX 22185980 working Hit WaterExtractor nil
+						Lua 0:02:29:544
+C74BUILD FX 22187285 Drill Hit RCDriller nil
+						Lua 0:02:29:676
+C74BUILD FX 22187417 Working hit-moment2 MOXIE MoxiePump
+						Lua 0:02:30:986
+C74BUILD FX 22188727 working Hit WaterExtractor nil
+						Lua 0:02:31:555
+C74BUILD FX 22189296 working Hit WaterExtractor nil
+						Lua 0:02:33:839
+C74BUILD FX 22191579 ExcavatorDigging Out7 ExcavatorShovel nil
+C74BUILD FX 22191579 ExcavatorDigging Hit1 ExcavatorShovel nil
+						Lua 0:02:34:320
+C74BUILD FX 22192061 working Hit WaterExtractor nil
+						Lua 0:02:34:873
+C74BUILD FX 22192613 working Hit WaterExtractor nil
+						Lua 0:02:34:960
+C74BUILD FX 22192701 Drill Hit RCDriller nil
+						Lua 0:02:36:326
+C74BUILD FX 22194067 Working hit-moment1 MOXIE MoxiePump
+						Lua 0:02:37:172
+C74BUILD FX 22194912 ExcavatorDigging Hit2 ExcavatorShovel nil
+C74BUILD FX 22194912 ExcavatorDigging Out8 ExcavatorShovel nil
+						Lua 0:02:37:653
+C74BUILD FX 22195394 working Hit WaterExtractor nil
+						Lua 0:02:38:189
+C74BUILD FX 22195929 working Hit WaterExtractor nil
+						Lua 0:02:40:377
+C74BUILD FX 22198118 Drill Hit RCDriller nil
+						Lua 0:02:40:505
+C74BUILD FX 22198246 ExcavatorDigging Hit3 ExcavatorShovel nil
+C74BUILD FX 22198246 ExcavatorDigging Out9 ExcavatorShovel nil
+						Lua 0:02:40:988
+C74BUILD FX 22198728 working Hit WaterExtractor nil
+						Lua 0:02:41:505
+C74BUILD FX 22199246 working Hit WaterExtractor nil
+						Lua 0:02:42:976
+C74BUILD FX 22200717 Working hit-moment2 MOXIE MoxiePump
+						Lua 0:02:43:839
+C74BUILD FX 22201579 ExcavatorDigging Hit4 ExcavatorShovel nil
+C74BUILD FX 22201579 ExcavatorDigging Out10 ExcavatorShovel nil
+						Lua 0:02:44:320
+C74BUILD FX 22202061 working Hit WaterExtractor nil
+						Lua 0:02:44:821
+C74BUILD FX 22202562 working Hit WaterExtractor nil
+						Lua 0:02:45:793
+C74BUILD FX 22203534 Drill Hit RCDriller nil
+						Lua 0:02:47:173
+C74BUILD FX 22204912 ExcavatorDigging Hit5 ExcavatorShovel nil
+C74BUILD FX 22204912 ExcavatorDigging Out11 ExcavatorShovel nil
+						Lua 0:02:47:655
+C74BUILD FX 22205395 working Hit WaterExtractor nil
+						Lua 0:02:48:138
+C74BUILD FX 22205879 working Hit WaterExtractor nil
+						Lua 0:02:49:626
+C74BUILD FX 22207367 Working hit-moment1 MOXIE MoxiePump
+						Lua 0:02:50:505
+C74BUILD FX 22208246 ExcavatorDigging Hit6 ExcavatorShovel nil
+						Lua 0:02:50:506
+C74BUILD FX 22208246 ExcavatorDigging Out12 ExcavatorShovel nil
+						Lua 0:02:50:988
+C74BUILD FX 22208728 working Hit WaterExtractor nil
+						Lua 0:02:51:211
+C74BUILD FX 22208951 Drill Hit RCDriller nil
+						Lua 0:02:51:455
+C74BUILD FX 22209195 working Hit WaterExtractor nil
+						Lua 0:02:53:838
+C74BUILD FX 22211579 ExcavatorDigging Out1 ExcavatorShovel nil
+C74BUILD FX 22211579 ExcavatorDigging Hit7 ExcavatorShovel nil
+						Lua 0:02:54:322
+C74BUILD FX 22212062 working Hit WaterExtractor nil
+						Lua 0:02:54:771
+C74BUILD FX 22212512 working Hit WaterExtractor nil
+						Lua 0:02:56:276
+C74BUILD FX 22214017 Working hit-moment2 MOXIE MoxiePump
+						Lua 0:02:56:626
+C74BUILD FX 22214367 Drill Hit RCDriller nil
+						Lua 0:02:57:171
+C74BUILD FX 22214912 ExcavatorDigging Out2 ExcavatorShovel nil
+C74BUILD FX 22214912 ExcavatorDigging Hit8 ExcavatorShovel nil
+						Lua 0:02:57:655
+C74BUILD FX 22215395 working Hit WaterExtractor nil
+						Lua 0:02:58:087
+C74BUILD FX 22215828 working Hit WaterExtractor nil
+						Lua 0:03:00:505
+C74BUILD FX 22218246 ExcavatorDigging Hit9 ExcavatorShovel nil
+C74BUILD FX 22218246 ExcavatorDigging Out3 ExcavatorShovel nil
+						Lua 0:03:00:989
+C74BUILD FX 22218729 working Hit WaterExtractor nil
+						Lua 0:03:01:404
+C74BUILD FX 22219145 working Hit WaterExtractor nil
+						Lua 0:03:02:044
+C74BUILD FX 22219784 Drill Hit RCDriller nil
+						Lua 0:03:02:926
+C74BUILD FX 22220667 Working hit-moment1 MOXIE MoxiePump
+						Lua 0:03:03:838
+C74BUILD FX 22221579 ExcavatorDigging Hit10 ExcavatorShovel nil
+C74BUILD FX 22221579 ExcavatorDigging Out4 ExcavatorShovel nil
+						Lua 0:03:04:321
+C74BUILD FX 22222062 working Hit WaterExtractor nil
+						Lua 0:03:04:721
+C74BUILD FX 22222461 working Hit WaterExtractor nil
+						Lua 0:03:07:171
+C74BUILD FX 22224912 ExcavatorDigging Hit11 ExcavatorShovel nil
+C74BUILD FX 22224912 ExcavatorDigging Out5 ExcavatorShovel nil
+						Lua 0:03:07:459
+C74BUILD FX 22225200 Drill Hit RCDriller nil
+						Lua 0:03:07:655
+C74BUILD FX 22225396 working Hit WaterExtractor nil
+						Lua 0:03:08:037
+C74BUILD FX 22225778 working Hit WaterExtractor nil
+						Lua 0:03:09:576
+C74BUILD FX 22227317 Working hit-moment2 MOXIE MoxiePump
+						Lua 0:03:10:505
+C74BUILD FX 22228246 ExcavatorDigging Hit12 ExcavatorShovel nil
+C74BUILD FX 22228246 ExcavatorDigging Out6 ExcavatorShovel nil
+						Lua 0:03:10:988
+C74BUILD FX 22228729 working Hit WaterExtractor nil
+						Lua 0:03:11:354
+C74BUILD FX 22229094 working Hit WaterExtractor nil
+						Lua 0:03:12:876
+C74BUILD FX 22230617 Drill Hit RCDriller nil
+						Lua 0:03:13:839
+C74BUILD FX 22231579 ExcavatorDigging Out7 ExcavatorShovel nil
+C74BUILD FX 22231579 ExcavatorDigging Hit1 ExcavatorShovel nil
+						Lua 0:03:14:323
+C74BUILD FX 22232063 working Hit WaterExtractor nil
+						Lua 0:03:14:670
+C74BUILD FX 22232411 working Hit WaterExtractor nil
+						Lua 0:03:15:140
+C74BUILD FX 22232880 ShuttleHubEnter Hit CargoShuttle ShuttleHub
+						Lua 0:03:16:226
+C74BUILD FX 22233967 Working hit-moment1 MOXIE MoxiePump
+						Lua 0:03:17:171
+C74BUILD FX 22234912 ExcavatorDigging Hit2 ExcavatorShovel nil
+C74BUILD FX 22234912 ExcavatorDigging Out8 ExcavatorShovel nil
+						Lua 0:03:17:655
+C74BUILD FX 22235396 working Hit WaterExtractor nil
+						Lua 0:03:17:986
+C74BUILD FX 22235727 working Hit WaterExtractor nil
+						Lua 0:03:18:292
+C74BUILD FX 22236033 Drill Hit RCDriller nil
+						Lua 0:03:20:505
+C74BUILD FX 22238246 ExcavatorDigging Hit3 ExcavatorShovel nil
+C74BUILD FX 22238246 ExcavatorDigging Out9 ExcavatorShovel nil
+						Lua 0:03:20:990
+C74BUILD FX 22238730 working Hit WaterExtractor nil
+						Lua 0:03:21:304
+C74BUILD FX 22239044 working Hit WaterExtractor nil
+						Lua 0:03:22:876
+C74BUILD FX 22240617 Working hit-moment2 MOXIE MoxiePump
+						Lua 0:03:23:709
+C74BUILD FX 22241450 Drill Hit RCDriller nil
+						Lua 0:03:23:838
+C74BUILD FX 22241579 ExcavatorDigging Hit4 ExcavatorShovel nil
+C74BUILD FX 22241579 ExcavatorDigging Out10 ExcavatorShovel nil
+						Lua 0:03:24:322
+C74BUILD FX 22242063 working Hit WaterExtractor nil
+						Lua 0:03:24:619
+C74BUILD FX 22242360 working Hit WaterExtractor nil
+						Lua 0:03:27:172
+C74BUILD FX 22244912 ExcavatorDigging Hit5 ExcavatorShovel nil
+C74BUILD FX 22244912 ExcavatorDigging Out11 ExcavatorShovel nil
+						Lua 0:03:27:656
+C74BUILD FX 22245397 working Hit WaterExtractor nil
+						Lua 0:03:27:936
+C74BUILD FX 22245677 working Hit WaterExtractor nil
+						Lua 0:03:29:126
+C74BUILD FX 22246866 Drill Hit RCDriller nil
+						Lua 0:03:29:526
+C74BUILD FX 22247267 Working hit-moment1 MOXIE MoxiePump
+						Lua 0:03:30:505
+C74BUILD FX 22248246 ExcavatorDigging Hit6 ExcavatorShovel nil
+C74BUILD FX 22248246 ExcavatorDigging Out12 ExcavatorShovel nil
+						Lua 0:03:30:989
+C74BUILD FX 22248730 working Hit WaterExtractor nil
+						Lua 0:03:31:253
+C74BUILD FX 22248993 working Hit WaterExtractor nil
+						Lua 0:03:33:838
+C74BUILD FX 22251579 ExcavatorDigging Out1 ExcavatorShovel nil
+						Lua 0:03:33:839
+C74BUILD FX 22251579 ExcavatorDigging Hit7 ExcavatorShovel nil
+						Lua 0:03:34:323
+C74BUILD FX 22252064 working Hit WaterExtractor nil
+						Lua 0:03:34:542
+C74BUILD FX 22252283 Drill Hit RCDriller nil
+						Lua 0:03:34:570
+C74BUILD FX 22252310 working Hit WaterExtractor nil
+						Lua 0:03:36:176
+C74BUILD FX 22253917 Working hit-moment2 MOXIE MoxiePump
+						Lua 0:03:37:171
+C74BUILD FX 22254912 ExcavatorDigging Out2 ExcavatorShovel nil
+C74BUILD FX 22254912 ExcavatorDigging Hit8 ExcavatorShovel nil
+						Lua 0:03:37:658
+C74BUILD FX 22255397 working Hit WaterExtractor nil
+						Lua 0:03:37:885
+C74BUILD FX 22255626 working Hit WaterExtractor nil
+						Lua 0:03:39:958
+C74BUILD FX 22257699 Drill Hit RCDriller nil
+						Lua 0:03:40:505
+C74BUILD FX 22258246 ExcavatorDigging Hit9 ExcavatorShovel nil
+C74BUILD FX 22258246 ExcavatorDigging Out3 ExcavatorShovel nil
+						Lua 0:03:40:990
+C74BUILD FX 22258731 working Hit WaterExtractor nil
+						Lua 0:03:41:202
+C74BUILD FX 22258943 working Hit WaterExtractor nil
+						Lua 0:03:42:826
+C74BUILD FX 22260567 Working hit-moment1 MOXIE MoxiePump
+						Lua 0:03:43:838
+C74BUILD FX 22261579 ExcavatorDigging Hit10 ExcavatorShovel nil
+C74BUILD FX 22261579 ExcavatorDigging Out4 ExcavatorShovel nil
+						Lua 0:03:44:323
+C74BUILD FX 22262064 working Hit WaterExtractor nil
+						Lua 0:03:44:518
+C74BUILD FX 22262259 working Hit WaterExtractor nil
+						Lua 0:03:45:375
+C74BUILD FX 22263116 Drill Hit RCDriller nil
+						Lua 0:03:47:171
+C74BUILD FX 22264912 ExcavatorDigging Hit11 ExcavatorShovel nil
+C74BUILD FX 22264912 ExcavatorDigging Out5 ExcavatorShovel nil
+						Lua 0:03:47:658
+C74BUILD FX 22265398 working Hit WaterExtractor nil
+						Lua 0:03:47:836
+C74BUILD FX 22265576 working Hit WaterExtractor nil
+						Lua 0:03:49:476
+C74BUILD FX 22267217 Working hit-moment2 MOXIE MoxiePump
+						Lua 0:03:50:505
+C74BUILD FX 22268246 ExcavatorDigging Hit12 ExcavatorShovel nil
+C74BUILD FX 22268246 ExcavatorDigging Out6 ExcavatorShovel nil
+						Lua 0:03:50:791
+C74BUILD FX 22268532 Drill Hit RCDriller nil
+						Lua 0:03:50:990
+C74BUILD FX 22268731 working Hit WaterExtractor nil
+						Lua 0:03:51:151
+C74BUILD FX 22268892 working Hit WaterExtractor nil
+						Lua 0:03:53:839
+C74BUILD FX 22271579 ExcavatorDigging Out7 ExcavatorShovel nil
+C74BUILD FX 22271579 ExcavatorDigging Hit1 ExcavatorShovel nil
+						Lua 0:03:54:324
+C74BUILD FX 22272065 working Hit WaterExtractor nil
+						Lua 0:03:54:468
+C74BUILD FX 22272209 working Hit WaterExtractor nil
+						Lua 0:03:56:126
+C74BUILD FX 22273867 Working hit-moment1 MOXIE MoxiePump
+						Lua 0:03:56:209
+C74BUILD FX 22273949 Drill Hit RCDriller nil
+						Lua 0:03:57:171
+C74BUILD FX 22274912 ExcavatorDigging Hit2 ExcavatorShovel nil
+						Lua 0:03:57:172
+C74BUILD FX 22274912 ExcavatorDigging Out8 ExcavatorShovel nil
+						Lua 0:03:57:657
+C74BUILD FX 22275398 working Hit WaterExtractor nil
+						Lua 0:03:57:786
+C74BUILD FX 22275525 working Hit WaterExtractor nil
+						Lua 0:04:00:506
+C74BUILD FX 22278246 ExcavatorDigging Hit3 ExcavatorShovel nil
+C74BUILD FX 22278246 ExcavatorDigging Out9 ExcavatorShovel nil
+						Lua 0:04:00:992
+C74BUILD FX 22278732 working Hit WaterExtractor nil
+						Lua 0:04:01:101
+C74BUILD FX 22278842 working Hit WaterExtractor nil
+						Lua 0:04:01:625
+C74BUILD FX 22279365 Drill Hit RCDriller nil
+						Lua 0:04:02:776
+C74BUILD FX 22280517 Working hit-moment2 MOXIE MoxiePump
+						Lua 0:04:03:840
+C74BUILD FX 22281579 ExcavatorDigging Hit4 ExcavatorShovel nil
+C74BUILD FX 22281579 ExcavatorDigging Out10 ExcavatorShovel nil
+						Lua 0:04:04:325
+C74BUILD FX 22282065 working Hit WaterExtractor nil
+						Lua 0:04:04:418
+C74BUILD FX 22282158 working Hit WaterExtractor nil
+						Lua 0:04:07:041
+C74BUILD FX 22284782 Drill Hit RCDriller nil
+						Lua 0:04:07:171
+C74BUILD FX 22284912 ExcavatorDigging Hit5 ExcavatorShovel nil
+C74BUILD FX 22284912 ExcavatorDigging Out11 ExcavatorShovel nil
+						Lua 0:04:07:658
+C74BUILD FX 22285399 working Hit WaterExtractor nil
+						Lua 0:04:07:734
+C74BUILD FX 22285475 working Hit WaterExtractor nil
+						Lua 0:04:09:426
+C74BUILD FX 22287167 Working hit-moment1 MOXIE MoxiePump
+						Lua 0:04:10:505
+C74BUILD FX 22288246 ExcavatorDigging Hit6 ExcavatorShovel nil
+C74BUILD FX 22288246 ExcavatorDigging Out12 ExcavatorShovel nil
+						Lua 0:04:10:992
+C74BUILD FX 22288732 working Hit WaterExtractor nil
+						Lua 0:04:11:050
+C74BUILD FX 22288791 working Hit WaterExtractor nil
+						Lua 0:04:12:457
+C74BUILD FX 22290198 Drill Hit RCDriller nil
+						Lua 0:04:13:839
+C74BUILD FX 22291579 ExcavatorDigging Out1 ExcavatorShovel nil
+C74BUILD FX 22291579 ExcavatorDigging Hit7 ExcavatorShovel nil
+						Lua 0:04:14:325
+C74BUILD FX 22292066 working Hit WaterExtractor nil
+						Lua 0:04:14:368
+C74BUILD FX 22292108 working Hit WaterExtractor nil
+						Lua 0:04:16:076
+C74BUILD FX 22293817 Working hit-moment2 MOXIE MoxiePump
+						Lua 0:04:17:171
+C74BUILD FX 22294912 ExcavatorDigging Out2 ExcavatorShovel nil
+C74BUILD FX 22294912 ExcavatorDigging Hit8 ExcavatorShovel nil
+						Lua 0:04:17:658
+C74BUILD FX 22295399 working Hit WaterExtractor nil
+						Lua 0:04:17:683
+C74BUILD FX 22295424 working Hit WaterExtractor nil
+						Lua 0:04:17:875
+C74BUILD FX 22295615 Drill Hit RCDriller nil
+						Lua 0:04:20:505
+C74BUILD FX 22298246 ExcavatorDigging Hit9 ExcavatorShovel nil
+C74BUILD FX 22298246 ExcavatorDigging Out3 ExcavatorShovel nil
+						Lua 0:04:20:993
+C74BUILD FX 22298733 working Hit WaterExtractor nil
+						Lua 0:04:21:001
+C74BUILD FX 22298741 working Hit WaterExtractor nil
+						Lua 0:04:22:726
+C74BUILD FX 22300467 Working hit-moment1 MOXIE MoxiePump
+						Lua 0:04:23:342
+C74BUILD FX 22301031 Drill Hit RCDriller nil
+						Lua 0:04:23:839
+C74BUILD FX 22301579 ExcavatorDigging Hit10 ExcavatorShovel nil
+C74BUILD FX 22301579 ExcavatorDigging Out4 ExcavatorShovel nil
+						Lua 0:04:24:316
+C74BUILD FX 22302057 working Hit WaterExtractor nil
+						Lua 0:04:24:325
+C74BUILD FX 22302066 working Hit WaterExtractor nil
+						Lua 0:04:27:172
+C74BUILD FX 22304912 ExcavatorDigging Hit11 ExcavatorShovel nil
+C74BUILD FX 22304912 ExcavatorDigging Out5 ExcavatorShovel nil
+						Lua 0:04:27:634
+C74BUILD FX 22305374 working Hit WaterExtractor nil
+						Lua 0:04:27:659
+C74BUILD FX 22305400 working Hit WaterExtractor nil
+						Lua 0:04:28:707
+C74BUILD FX 22306448 Drill Hit RCDriller nil
+						Lua 0:04:29:376
+C74BUILD FX 22307117 Working hit-moment2 MOXIE MoxiePump
+						Lua 0:04:30:505
+C74BUILD FX 22308246 ExcavatorDigging Hit12 ExcavatorShovel nil
+						Lua 0:04:30:506
+C74BUILD FX 22308246 ExcavatorDigging Out6 ExcavatorShovel nil
+						Lua 0:04:30:949
+C74BUILD FX 22308690 working Hit WaterExtractor nil
+						Lua 0:04:30:992
+C74BUILD FX 22308733 working Hit WaterExtractor nil
+						Lua 0:04:33:838
+C74BUILD FX 22311579 ExcavatorDigging Out7 ExcavatorShovel nil
+C74BUILD FX 22311579 ExcavatorDigging Hit1 ExcavatorShovel nil
+						Lua 0:04:34:123
+C74BUILD FX 22311864 Drill Hit RCDriller nil
+						Lua 0:04:34:266
+C74BUILD FX 22312007 working Hit WaterExtractor nil
+						Lua 0:04:34:326
+C74BUILD FX 22312067 working Hit WaterExtractor nil
+						Lua 0:04:36:026
+C74BUILD FX 22313767 Working hit-moment1 MOXIE MoxiePump
+						Lua 0:04:37:172
+C74BUILD FX 22314912 ExcavatorDigging Hit2 ExcavatorShovel nil
+C74BUILD FX 22314912 ExcavatorDigging Out8 ExcavatorShovel nil
+						Lua 0:04:37:583
+C74BUILD FX 22315323 working Hit WaterExtractor nil
+						Lua 0:04:37:659
+C74BUILD FX 22315400 working Hit WaterExtractor nil
+						Lua 0:04:39:540
+C74BUILD FX 22317281 Drill Hit RCDriller nil
+						Lua 0:04:40:505
+C74BUILD FX 22318246 ExcavatorDigging Hit3 ExcavatorShovel nil
+C74BUILD FX 22318246 ExcavatorDigging Out9 ExcavatorShovel nil
+						Lua 0:04:40:899
+C74BUILD FX 22318640 working Hit WaterExtractor nil
+						Lua 0:04:40:993
+C74BUILD FX 22318734 working Hit WaterExtractor nil
+						Lua 0:04:41:928
+C74BUILD FX 22319669 ShuttleHubExit Hit CargoShuttle ShuttleHub
+						Lua 0:04:42:676
+C74BUILD FX 22320417 Working hit-moment2 MOXIE MoxiePump
+						Lua 0:04:43:839
+C74BUILD FX 22321579 ExcavatorDigging Hit4 ExcavatorShovel nil
+C74BUILD FX 22321579 ExcavatorDigging Out10 ExcavatorShovel nil
+						Lua 0:04:44:215
+C74BUILD FX 22321956 working Hit WaterExtractor nil
+						Lua 0:04:44:326
+C74BUILD FX 22322067 working Hit WaterExtractor nil
+						Lua 0:04:44:956
+C74BUILD FX 22322697 Drill Hit RCDriller nil
+						Lua 0:04:46:927
+C74BUILD FX 22324668 ShuttleHubExit Hit CargoShuttle ShuttleHub
+						Lua 0:04:47:172
+C74BUILD FX 22324912 ExcavatorDigging Hit5 ExcavatorShovel nil
+C74BUILD FX 22324912 ExcavatorDigging Out11 ExcavatorShovel nil
+						Lua 0:04:47:532
+C74BUILD FX 22325273 working Hit WaterExtractor nil
+						Lua 0:04:47:660
+C74BUILD FX 22325401 working Hit WaterExtractor nil
+						Lua 0:04:49:326
+C74BUILD FX 22327067 Working hit-moment1 MOXIE MoxiePump
+						Lua 0:04:50:374
+C74BUILD FX 22328114 Drill Hit RCDriller nil
+						Lua 0:04:50:505
+C74BUILD FX 22328246 ExcavatorDigging Hit6 ExcavatorShovel nil
+C74BUILD FX 22328246 ExcavatorDigging Out12 ExcavatorShovel nil
+						Lua 0:04:50:848
+C74BUILD FX 22328589 working Hit WaterExtractor nil
+						Lua 0:04:50:993
+C74BUILD FX 22328734 working Hit WaterExtractor nil
+						Lua 0:04:53:839
+C74BUILD FX 22331579 ExcavatorDigging Out1 ExcavatorShovel nil
+C74BUILD FX 22331579 ExcavatorDigging Hit7 ExcavatorShovel nil
+						Lua 0:04:54:165
+C74BUILD FX 22331906 working Hit WaterExtractor nil
+						Lua 0:04:54:327
+C74BUILD FX 22332068 working Hit WaterExtractor nil
+						Lua 0:04:55:789
+C74BUILD FX 22333530 Drill Hit RCDriller nil
+						Lua 0:04:55:976
+C74BUILD FX 22333717 Working hit-moment2 MOXIE MoxiePump
+						Lua 0:04:57:171
+C74BUILD FX 22334912 ExcavatorDigging Out2 ExcavatorShovel nil
+C74BUILD FX 22334912 ExcavatorDigging Hit8 ExcavatorShovel nil
+						Lua 0:04:57:481
+C74BUILD FX 22335222 working Hit WaterExtractor nil
+						Lua 0:04:57:661
+C74BUILD FX 22335401 working Hit WaterExtractor nil
+						Lua 0:05:00:505
+C74BUILD FX 22338246 ExcavatorDigging Hit9 ExcavatorShovel nil
+C74BUILD FX 22338246 ExcavatorDigging Out3 ExcavatorShovel nil
+						Lua 0:05:00:798
+C74BUILD FX 22338539 working Hit WaterExtractor nil
+						Lua 0:05:00:994
+C74BUILD FX 22338735 working Hit WaterExtractor nil
+						Lua 0:05:01:206
+C74BUILD FX 22338947 Drill Hit RCDriller nil
+						Lua 0:05:02:626
+C74BUILD FX 22340367 Working hit-moment1 MOXIE MoxiePump
+						Lua 0:05:03:838
+C74BUILD FX 22341579 ExcavatorDigging Hit10 ExcavatorShovel nil
+C74BUILD FX 22341579 ExcavatorDigging Out4 ExcavatorShovel nil
+						Lua 0:05:04:114
+C74BUILD FX 22341855 working Hit WaterExtractor nil
+						Lua 0:05:04:327
+C74BUILD FX 22342068 working Hit WaterExtractor nil
+						Lua 0:05:06:624
+C74BUILD FX 22344363 Drill Hit RCDriller nil
+						Lua 0:05:07:171
+C74BUILD FX 22344912 ExcavatorDigging Hit11 ExcavatorShovel nil
+C74BUILD FX 22344912 ExcavatorDigging Out5 ExcavatorShovel nil
+						Lua 0:05:07:432
+C74BUILD FX 22345172 working Hit WaterExtractor nil
+						Lua 0:05:07:661
+C74BUILD FX 22345402 working Hit WaterExtractor nil
+						Lua 0:05:09:276
+C74BUILD FX 22347017 Working hit-moment2 MOXIE MoxiePump
+						Lua 0:05:10:505
+C74BUILD FX 22348246 ExcavatorDigging Hit12 ExcavatorShovel nil
+						Lua 0:05:10:506
+C74BUILD FX 22348246 ExcavatorDigging Out6 ExcavatorShovel nil
+						Lua 0:05:10:747
+C74BUILD FX 22348488 working Hit WaterExtractor nil
+						Lua 0:05:10:995
+C74BUILD FX 22348735 working Hit WaterExtractor nil
+						Lua 0:05:12:040
+C74BUILD FX 22349780 Drill Hit RCDriller nil
+						Lua 0:05:13:838
+C74BUILD FX 22351579 ExcavatorDigging Out7 ExcavatorShovel nil
+C74BUILD FX 22351579 ExcavatorDigging Hit1 ExcavatorShovel nil
+						Lua 0:05:14:065
+C74BUILD FX 22351805 working Hit WaterExtractor nil
+						Lua 0:05:14:328
+C74BUILD FX 22352069 working Hit WaterExtractor nil
+						Lua 0:05:15:926
+C74BUILD FX 22353667 Working hit-moment1 MOXIE MoxiePump
+						Lua 0:05:17:171
+C74BUILD FX 22354912 ExcavatorDigging Hit2 ExcavatorShovel nil
+C74BUILD FX 22354912 ExcavatorDigging Out8 ExcavatorShovel nil
+						Lua 0:05:17:380
+C74BUILD FX 22355121 working Hit WaterExtractor nil
+						Lua 0:05:17:456
+C74BUILD FX 22355196 Drill Hit RCDriller nil
+						Lua 0:05:17:662
+C74BUILD FX 22355402 working Hit WaterExtractor nil
+						Lua 0:05:20:505
+C74BUILD FX 22358246 ExcavatorDigging Hit3 ExcavatorShovel nil
+C74BUILD FX 22358246 ExcavatorDigging Out9 ExcavatorShovel nil
+						Lua 0:05:20:697
+C74BUILD FX 22358438 working Hit WaterExtractor nil
+						Lua 0:05:20:996
+C74BUILD FX 22358736 working Hit WaterExtractor nil
+						Lua 0:05:22:576
+C74BUILD FX 22360317 Working hit-moment2 MOXIE MoxiePump
+						Lua 0:05:22:872
+C74BUILD FX 22360613 Drill Hit RCDriller nil
+						Lua 0:05:23:838
+C74BUILD FX 22361579 ExcavatorDigging Hit4 ExcavatorShovel nil
+C74BUILD FX 22361579 ExcavatorDigging Out10 ExcavatorShovel nil
+						Lua 0:05:24:013
+C74BUILD FX 22361754 working Hit WaterExtractor nil
+						Lua 0:05:24:329
+C74BUILD FX 22362069 working Hit WaterExtractor nil
+						Lua 0:05:27:171
+C74BUILD FX 22364912 ExcavatorDigging Hit5 ExcavatorShovel nil
+C74BUILD FX 22364912 ExcavatorDigging Out11 ExcavatorShovel nil
+						Lua 0:05:27:330
+C74BUILD FX 22365071 working Hit WaterExtractor nil
+						Lua 0:05:27:662
+C74BUILD FX 22365403 working Hit WaterExtractor nil
+						Lua 0:05:28:288
+C74BUILD FX 22366029 Drill Hit RCDriller nil
+						Lua 0:05:29:226
+C74BUILD FX 22366967 Working hit-moment1 MOXIE MoxiePump
+						Lua 0:05:30:505
+C74BUILD FX 22368246 ExcavatorDigging Hit6 ExcavatorShovel nil
+C74BUILD FX 22368246 ExcavatorDigging Out12 ExcavatorShovel nil
+						Lua 0:05:30:646
+C74BUILD FX 22368387 working Hit WaterExtractor nil
+						Lua 0:05:30:995
+C74BUILD FX 22368736 working Hit WaterExtractor nil
+						Lua 0:05:33:706
+C74BUILD FX 22371446 Drill Hit RCDriller nil
+						Lua 0:05:33:839
+C74BUILD FX 22371579 ExcavatorDigging Out1 ExcavatorShovel nil
+C74BUILD FX 22371579 ExcavatorDigging Hit7 ExcavatorShovel nil
+						Lua 0:05:33:963
+C74BUILD FX 22371704 working Hit WaterExtractor nil
+						Lua 0:05:34:329
+C74BUILD FX 22372070 working Hit WaterExtractor nil
+						Lua 0:05:35:878
+C74BUILD FX 22373617 Working hit-moment2 MOXIE MoxiePump
+						Lua 0:05:36:523
+C74BUILD FX 22374912 ExcavatorDigging Out2 ExcavatorShovel nil
+C74BUILD FX 22374912 ExcavatorDigging Hit8 ExcavatorShovel nil
+						Lua 0:05:36:559
+C74BUILD FX 22375020 working Hit WaterExtractor nil
+						Lua 0:05:36:686
+C74BUILD FX 22375403 working Hit WaterExtractor nil
+						Lua 0:05:37:174
+C74BUILD FX 22376862 Drill Hit RCDriller nil
+						Lua 0:05:37:449
+C74BUILD FX 22378246 ExcavatorDigging Hit9 ExcavatorShovel nil
+C74BUILD FX 22378246 ExcavatorDigging Out3 ExcavatorShovel nil
+						Lua 0:05:37:469
+C74BUILD FX 22378337 working Hit WaterExtractor nil
+						Lua 0:05:37:548
+C74BUILD FX 22378737 working Hit WaterExtractor nil
+						Lua 0:05:37:855
+C74BUILD FX 22380267 Working hit-moment1 MOXIE MoxiePump
+						Lua 0:05:38:182
+C74BUILD FX 22381579 ExcavatorDigging Hit10 ExcavatorShovel nil
+C74BUILD FX 22381579 ExcavatorDigging Out4 ExcavatorShovel nil
+						Lua 0:05:38:207
+C74BUILD FX 22381653 working Hit WaterExtractor nil
+						Lua 0:05:38:345
+C74BUILD FX 22382070 working Hit WaterExtractor nil
+						Lua 0:05:38:415
+C74BUILD FX 22382279 Drill Hit RCDriller nil
+						Lua 0:05:39:293
+C74BUILD FX 22384912 ExcavatorDigging Hit11 ExcavatorShovel nil
+C74BUILD FX 22384912 ExcavatorDigging Out5 ExcavatorShovel nil
+						Lua 0:05:39:312
+C74BUILD FX 22384970 working Hit WaterExtractor nil
+						Lua 0:05:39:458
+C74BUILD FX 22385404 working Hit WaterExtractor nil
+						Lua 0:05:39:962
+C74BUILD FX 22386917 Working hit-moment2 MOXIE MoxiePump
+						Lua 0:05:40:294
+C74BUILD FX 22387695 Drill Hit RCDriller nil
+						Lua 0:05:40:845
+C74BUILD FX 22388246 ExcavatorDigging Hit12 ExcavatorShovel nil
+C74BUILD FX 22388246 ExcavatorDigging Out6 ExcavatorShovel nil
+						Lua 0:05:40:886
+C74BUILD FX 22388286 working Hit WaterExtractor nil
+						Lua 0:05:41:336
+C74BUILD FX 22388737 working Hit WaterExtractor nil
+						Lua 0:05:44:178
+C74BUILD FX 22391579 ExcavatorDigging Out7 ExcavatorShovel nil
+C74BUILD FX 22391579 ExcavatorDigging Hit1 ExcavatorShovel nil
+						Lua 0:05:44:203
+C74BUILD FX 22391603 working Hit WaterExtractor nil
+						Lua 0:05:44:671
+C74BUILD FX 22392071 working Hit WaterExtractor nil
+						Lua 0:05:45:712
+C74BUILD FX 22393112 Drill Hit RCDriller nil
+						Lua 0:05:46:166
+C74BUILD FX 22393567 Working hit-moment1 MOXIE MoxiePump
+						Lua 0:05:47:512
+C74BUILD FX 22394912 ExcavatorDigging Hit2 ExcavatorShovel nil
+C74BUILD FX 22394912 ExcavatorDigging Out8 ExcavatorShovel nil
+						Lua 0:05:47:518
+C74BUILD FX 22394919 working Hit WaterExtractor nil
+						Lua 0:05:48:003
+C74BUILD FX 22395404 working Hit WaterExtractor nil
+						Lua 0:05:50:835
+C74BUILD FX 22398236 working Hit WaterExtractor nil
+						Lua 0:05:50:845
+C74BUILD FX 22398246 ExcavatorDigging Hit3 ExcavatorShovel nil
+C74BUILD FX 22398246 ExcavatorDigging Out9 ExcavatorShovel nil
+						Lua 0:05:51:127
+C74BUILD FX 22398528 Drill Hit RCDriller nil
+						Lua 0:05:51:337
+C74BUILD FX 22398738 working Hit WaterExtractor nil
+						Lua 0:05:52:816
+C74BUILD FX 22400217 Working hit-moment2 MOXIE MoxiePump
+						Lua 0:05:53:689
+C74BUILD FX 22401090 ShuttleHubEnter Hit CargoShuttle ShuttleHub
+						Lua 0:05:54:151
+C74BUILD FX 22401552 working Hit WaterExtractor nil
+						Lua 0:05:54:179
+C74BUILD FX 22401579 ExcavatorDigging Hit4 ExcavatorShovel nil
+C74BUILD FX 22401579 ExcavatorDigging Out10 ExcavatorShovel nil
+						Lua 0:05:54:670
+C74BUILD FX 22402071 working Hit WaterExtractor nil
+						Lua 0:05:56:544
+C74BUILD FX 22403945 Drill Hit RCDriller nil
+						Lua 0:05:57:470
+C74BUILD FX 22404869 working Hit WaterExtractor nil
+						Lua 0:05:57:512
+C74BUILD FX 22404912 ExcavatorDigging Hit5 ExcavatorShovel nil
+C74BUILD FX 22404912 ExcavatorDigging Out11 ExcavatorShovel nil
+						Lua 0:05:58:005
+C74BUILD FX 22405405 working Hit WaterExtractor nil
+						Lua 0:05:58:234
+C74BUILD FX 22405635 ShuttleHubEnter Hit CargoShuttle ShuttleHub
+						Lua 0:05:59:466
+C74BUILD FX 22406867 Working hit-moment1 MOXIE MoxiePump
+						Lua 0:06:00:784
+C74BUILD FX 22408185 working Hit WaterExtractor nil
+						Lua 0:06:00:845
+C74BUILD FX 22408246 ExcavatorDigging Hit6 ExcavatorShovel nil
+C74BUILD FX 22408246 ExcavatorDigging Out12 ExcavatorShovel nil
+						Lua 0:06:01:338
+C74BUILD FX 22408738 working Hit WaterExtractor nil
+						Lua 0:06:01:960
+C74BUILD FX 22409361 Drill Hit RCDriller nil
+						Lua 0:06:04:101
+C74BUILD FX 22411502 working Hit WaterExtractor nil
+						Lua 0:06:04:179
+C74BUILD FX 22411579 ExcavatorDigging Out1 ExcavatorShovel nil
+C74BUILD FX 22411579 ExcavatorDigging Hit7 ExcavatorShovel nil
+						Lua 0:06:04:672
+C74BUILD FX 22412072 working Hit WaterExtractor nil
+						Lua 0:06:06:116
+C74BUILD FX 22413517 Working hit-moment2 MOXIE MoxiePump
+						Lua 0:06:07:378
+C74BUILD FX 22414778 Drill Hit RCDriller nil
+						Lua 0:06:07:417
+C74BUILD FX 22414818 working Hit WaterExtractor nil
+						Lua 0:06:07:511
+C74BUILD FX 22414912 ExcavatorDigging Out2 ExcavatorShovel nil
+C74BUILD FX 22414912 ExcavatorDigging Hit8 ExcavatorShovel nil
+						Lua 0:06:08:005
+C74BUILD FX 22415405 working Hit WaterExtractor nil
+						Lua 0:06:10:734
+C74BUILD FX 22418135 working Hit WaterExtractor nil
+						Lua 0:06:10:846
+C74BUILD FX 22418246 ExcavatorDigging Hit9 ExcavatorShovel nil
+C74BUILD FX 22418246 ExcavatorDigging Out3 ExcavatorShovel nil
+						Lua 0:06:11:338
+C74BUILD FX 22418739 working Hit WaterExtractor nil
+						Lua 0:06:12:766
+C74BUILD FX 22420167 Working hit-moment1 MOXIE MoxiePump
+						Lua 0:06:12:794
+C74BUILD FX 22420194 Drill Hit RCDriller nil
+						Lua 0:06:14:050
+C74BUILD FX 22421451 working Hit WaterExtractor nil
+						Lua 0:06:14:179
+C74BUILD FX 22421579 ExcavatorDigging Hit10 ExcavatorShovel nil
+C74BUILD FX 22421579 ExcavatorDigging Out4 ExcavatorShovel nil
+						Lua 0:06:14:671
+C74BUILD FX 22422072 working Hit WaterExtractor nil
+						Lua 0:06:17:367
+C74BUILD FX 22424768 working Hit WaterExtractor nil
+						Lua 0:06:17:511
+C74BUILD FX 22424912 ExcavatorDigging Hit11 ExcavatorShovel nil
+C74BUILD FX 22424912 ExcavatorDigging Out5 ExcavatorShovel nil
+						Lua 0:06:18:005
+C74BUILD FX 22425406 working Hit WaterExtractor nil
+						Lua 0:06:18:210
+C74BUILD FX 22425611 Drill Hit RCDriller nil
+						Lua 0:06:19:416
+C74BUILD FX 22426817 Working hit-moment2 MOXIE MoxiePump
+						Lua 0:06:20:683
+C74BUILD FX 22428084 working Hit WaterExtractor nil
+						Lua 0:06:20:845
+C74BUILD FX 22428246 ExcavatorDigging Hit12 ExcavatorShovel nil
+C74BUILD FX 22428246 ExcavatorDigging Out6 ExcavatorShovel nil
+						Lua 0:06:21:338
+C74BUILD FX 22428739 working Hit WaterExtractor nil
+						Lua 0:06:23:626
+C74BUILD FX 22431027 Drill Hit RCDriller nil
+						Lua 0:06:24:000
+C74BUILD FX 22431401 working Hit WaterExtractor nil
+						Lua 0:06:24:178
+C74BUILD FX 22431579 ExcavatorDigging Out7 ExcavatorShovel nil
+C74BUILD FX 22431579 ExcavatorDigging Hit1 ExcavatorShovel nil
+						Lua 0:06:24:673
+C74BUILD FX 22432073 working Hit WaterExtractor nil
+						Lua 0:06:26:066
+C74BUILD FX 22433467 Working hit-moment1 MOXIE MoxiePump
+						Lua 0:06:27:316
+C74BUILD FX 22434717 working Hit WaterExtractor nil
+						Lua 0:06:27:511
+C74BUILD FX 22434912 ExcavatorDigging Hit2 ExcavatorShovel nil
+C74BUILD FX 22434912 ExcavatorDigging Out8 ExcavatorShovel nil
+						Lua 0:06:28:005
+C74BUILD FX 22435406 working Hit WaterExtractor nil
+						Lua 0:06:29:043
+C74BUILD FX 22436444 Drill Hit RCDriller nil
+						Lua 0:06:30:633
+C74BUILD FX 22438034 working Hit WaterExtractor nil
+						Lua 0:06:30:846
+C74BUILD FX 22438246 ExcavatorDigging Hit3 ExcavatorShovel nil
+C74BUILD FX 22438246 ExcavatorDigging Out9 ExcavatorShovel nil
+						Lua 0:06:31:339
+C74BUILD FX 22438740 working Hit WaterExtractor nil
+						Lua 0:06:32:716
+C74BUILD FX 22440117 Working hit-moment2 MOXIE MoxiePump
+						Lua 0:06:33:949
+C74BUILD FX 22441350 working Hit WaterExtractor nil
+						Lua 0:06:34:178
+C74BUILD FX 22441579 ExcavatorDigging Hit4 ExcavatorShovel nil
+C74BUILD FX 22441579 ExcavatorDigging Out10 ExcavatorShovel nil
+						Lua 0:06:34:460
+C74BUILD FX 22441860 Drill Hit RCDriller nil
+						Lua 0:06:34:673
+C74BUILD FX 22442073 working Hit WaterExtractor nil
+						Lua 0:06:37:266
+C74BUILD FX 22444667 working Hit WaterExtractor nil
+						Lua 0:06:37:511
+C74BUILD FX 22444912 ExcavatorDigging Hit5 ExcavatorShovel nil
+C74BUILD FX 22444912 ExcavatorDigging Out11 ExcavatorShovel nil
+						Lua 0:06:38:007
+C74BUILD FX 22445407 working Hit WaterExtractor nil
+						Lua 0:06:39:366
+C74BUILD FX 22446767 Working hit-moment1 MOXIE MoxiePump
+						Lua 0:06:39:877
+C74BUILD FX 22447277 Drill Hit RCDriller nil
+						Lua 0:06:40:582
+C74BUILD FX 22447983 working Hit WaterExtractor nil
+						Lua 0:06:40:845
+C74BUILD FX 22448246 ExcavatorDigging Hit6 ExcavatorShovel nil
+C74BUILD FX 22448246 ExcavatorDigging Out12 ExcavatorShovel nil
+						Lua 0:06:41:339
+C74BUILD FX 22448740 working Hit WaterExtractor nil
+						Lua 0:06:43:900
+C74BUILD FX 22451300 working Hit WaterExtractor nil
+						Lua 0:06:44:178
+C74BUILD FX 22451579 ExcavatorDigging Out1 ExcavatorShovel nil
+C74BUILD FX 22451579 ExcavatorDigging Hit7 ExcavatorShovel nil
+						Lua 0:06:44:673
+C74BUILD FX 22452074 working Hit WaterExtractor nil
+						Lua 0:06:45:292
+C74BUILD FX 22452693 Drill Hit RCDriller nil
+						Lua 0:06:46:016
+C74BUILD FX 22453417 Working hit-moment2 MOXIE MoxiePump
+						Lua 0:06:47:215
+C74BUILD FX 22454616 working Hit WaterExtractor nil
+						Lua 0:06:47:511
+C74BUILD FX 22454912 ExcavatorDigging Out2 ExcavatorShovel nil
+C74BUILD FX 22454912 ExcavatorDigging Hit8 ExcavatorShovel nil
+						Lua 0:06:48:007
+C74BUILD FX 22455407 working Hit WaterExtractor nil
+						Lua 0:06:50:532
+C74BUILD FX 22457933 working Hit WaterExtractor nil
+						Lua 0:06:50:709
+C74BUILD FX 22458110 Drill Hit RCDriller nil
+						Lua 0:06:50:846
+C74BUILD FX 22458246 ExcavatorDigging Hit9 ExcavatorShovel nil
+C74BUILD FX 22458246 ExcavatorDigging Out3 ExcavatorShovel nil
+						Lua 0:06:51:340
+C74BUILD FX 22458741 working Hit WaterExtractor nil
+						Lua 0:06:52:666
+C74BUILD FX 22460067 Working hit-moment1 MOXIE MoxiePump
+						Lua 0:06:53:848
+C74BUILD FX 22461249 working Hit WaterExtractor nil
+						Lua 0:06:54:178
+C74BUILD FX 22461579 ExcavatorDigging Hit10 ExcavatorShovel nil
+C74BUILD FX 22461579 ExcavatorDigging Out4 ExcavatorShovel nil
+						Lua 0:06:54:673
+C74BUILD FX 22462074 working Hit WaterExtractor nil
+						Lua 0:06:56:127
+C74BUILD FX 22463526 Drill Hit RCDriller nil
+						Lua 0:06:57:166
+C74BUILD FX 22464566 working Hit WaterExtractor nil
+						Lua 0:06:57:512
+C74BUILD FX 22464912 ExcavatorDigging Hit11 ExcavatorShovel nil
+C74BUILD FX 22464912 ExcavatorDigging Out5 ExcavatorShovel nil
+						Lua 0:06:58:007
+C74BUILD FX 22465408 working Hit WaterExtractor nil
+						Lua 0:06:59:316
+C74BUILD FX 22466717 Working hit-moment2 MOXIE MoxiePump
+						Lua 0:07:00:482
+C74BUILD FX 22467882 working Hit WaterExtractor nil
+						Lua 0:07:00:846
+C74BUILD FX 22468246 ExcavatorDigging Hit12 ExcavatorShovel nil
+C74BUILD FX 22468246 ExcavatorDigging Out6 ExcavatorShovel nil
+						Lua 0:07:01:341
+C74BUILD FX 22468741 working Hit WaterExtractor nil
+						Lua 0:07:01:543
+C74BUILD FX 22468943 Drill Hit RCDriller nil
+						Lua 0:07:03:798
+C74BUILD FX 22471199 working Hit WaterExtractor nil
+						Lua 0:07:04:179
+C74BUILD FX 22471579 ExcavatorDigging Out7 ExcavatorShovel nil
+C74BUILD FX 22471579 ExcavatorDigging Hit1 ExcavatorShovel nil
+						Lua 0:07:04:676
+C74BUILD FX 22472075 working Hit WaterExtractor nil
+						Lua 0:07:05:966
+C74BUILD FX 22473367 Working hit-moment1 MOXIE MoxiePump
+						Lua 0:07:06:958
+C74BUILD FX 22474359 Drill Hit RCDriller nil
+						Lua 0:07:07:115
+C74BUILD FX 22474515 working Hit WaterExtractor nil
+						Lua 0:07:07:511
+C74BUILD FX 22474912 ExcavatorDigging Hit2 ExcavatorShovel nil
+C74BUILD FX 22474912 ExcavatorDigging Out8 ExcavatorShovel nil
+						Lua 0:07:08:007
+C74BUILD FX 22475408 working Hit WaterExtractor nil
+						Lua 0:07:10:431
+C74BUILD FX 22477832 working Hit WaterExtractor nil
+						Lua 0:07:10:845
+C74BUILD FX 22478246 ExcavatorDigging Hit3 ExcavatorShovel nil
+C74BUILD FX 22478246 ExcavatorDigging Out9 ExcavatorShovel nil
+						Lua 0:07:11:341
+C74BUILD FX 22478742 working Hit WaterExtractor nil
+						Lua 0:07:12:375
+C74BUILD FX 22479776 Drill Hit RCDriller nil
+						Lua 0:07:12:616
+C74BUILD FX 22480017 Working hit-moment2 MOXIE MoxiePump
+						Lua 0:07:13:748
+C74BUILD FX 22481148 working Hit WaterExtractor nil
+						Lua 0:07:14:180
+C74BUILD FX 22481579 ExcavatorDigging Hit4 ExcavatorShovel nil
+C74BUILD FX 22481579 ExcavatorDigging Out10 ExcavatorShovel nil
+						Lua 0:07:14:674
+C74BUILD FX 22482075 working Hit WaterExtractor nil
+						Lua 0:07:17:064
+C74BUILD FX 22484465 working Hit WaterExtractor nil
+						Lua 0:07:17:511
+C74BUILD FX 22484912 ExcavatorDigging Hit5 ExcavatorShovel nil
+C74BUILD FX 22484912 ExcavatorDigging Out11 ExcavatorShovel nil
+						Lua 0:07:17:791
+C74BUILD FX 22485192 Drill Hit RCDriller nil
+						Lua 0:07:18:008
+C74BUILD FX 22485409 working Hit WaterExtractor nil
+						Lua 0:07:19:266
+C74BUILD FX 22486667 Working hit-moment1 MOXIE MoxiePump
+						Lua 0:07:20:380
+C74BUILD FX 22487781 working Hit WaterExtractor nil
+						Lua 0:07:20:845
+C74BUILD FX 22488246 ExcavatorDigging Hit6 ExcavatorShovel nil
+						Lua 0:07:20:846
+C74BUILD FX 22488246 ExcavatorDigging Out12 ExcavatorShovel nil
+						Lua 0:07:21:341
+C74BUILD FX 22488742 working Hit WaterExtractor nil
+						Lua 0:07:23:208
+C74BUILD FX 22490609 Drill Hit RCDriller nil
+						Lua 0:07:23:699
+C74BUILD FX 22491098 working Hit WaterExtractor nil
+						Lua 0:07:24:178
+C74BUILD FX 22491579 ExcavatorDigging Out1 ExcavatorShovel nil
+C74BUILD FX 22491579 ExcavatorDigging Hit7 ExcavatorShovel nil
+						Lua 0:07:24:675
+C74BUILD FX 22492076 working Hit WaterExtractor nil
+						Lua 0:07:25:916
+C74BUILD FX 22493317 Working hit-moment2 MOXIE MoxiePump
+						Lua 0:07:27:013
+C74BUILD FX 22494414 working Hit WaterExtractor nil
+						Lua 0:07:27:512
+C74BUILD FX 22494912 ExcavatorDigging Out2 ExcavatorShovel nil
+						Lua 0:07:27:513
+C74BUILD FX 22494912 ExcavatorDigging Hit8 ExcavatorShovel nil
+						Lua 0:07:28:008
+C74BUILD FX 22495409 working Hit WaterExtractor nil
+						Lua 0:07:28:625
+C74BUILD FX 22496025 Drill Hit RCDriller nil
+						Lua 0:07:30:330
+C74BUILD FX 22497731 working Hit WaterExtractor nil
+						Lua 0:07:30:845
+C74BUILD FX 22498246 ExcavatorDigging Hit9 ExcavatorShovel nil
+C74BUILD FX 22498246 ExcavatorDigging Out3 ExcavatorShovel nil
+						Lua 0:07:31:344
+C74BUILD FX 22498743 working Hit WaterExtractor nil
+						Lua 0:07:32:566
+C74BUILD FX 22499967 Working hit-moment1 MOXIE MoxiePump
+						Lua 0:07:33:646
+C74BUILD FX 22501047 working Hit WaterExtractor nil
+						Lua 0:07:34:041
+C74BUILD FX 22501442 Drill Hit RCDriller nil
+						Lua 0:07:34:179
+C74BUILD FX 22501579 ExcavatorDigging Hit10 ExcavatorShovel nil
+C74BUILD FX 22501579 ExcavatorDigging Out4 ExcavatorShovel nil
+						Lua 0:07:34:675
+C74BUILD FX 22502076 working Hit WaterExtractor nil
+						Lua 0:07:36:964
+C74BUILD FX 22504364 working Hit WaterExtractor nil
+						Lua 0:07:37:511
+C74BUILD FX 22504912 ExcavatorDigging Hit11 ExcavatorShovel nil
+C74BUILD FX 22504912 ExcavatorDigging Out5 ExcavatorShovel nil
+						Lua 0:07:38:009
+C74BUILD FX 22505410 working Hit WaterExtractor nil
+						Lua 0:07:39:216
+C74BUILD FX 22506617 Working hit-moment2 MOXIE MoxiePump
+						Lua 0:07:39:458
+C74BUILD FX 22506858 Drill Hit RCDriller nil
+						Lua 0:07:40:280
+C74BUILD FX 22507680 working Hit WaterExtractor nil
+						Lua 0:07:40:845
+C74BUILD FX 22508246 ExcavatorDigging Hit12 ExcavatorShovel nil
+C74BUILD FX 22508246 ExcavatorDigging Out6 ExcavatorShovel nil
+						Lua 0:07:41:342
+C74BUILD FX 22508743 working Hit WaterExtractor nil
+						Lua 0:07:43:596
+C74BUILD FX 22510997 working Hit WaterExtractor nil
+						Lua 0:07:44:178
+C74BUILD FX 22511579 ExcavatorDigging Out7 ExcavatorShovel nil
+C74BUILD FX 22511579 ExcavatorDigging Hit1 ExcavatorShovel nil
+						Lua 0:07:44:676
+C74BUILD FX 22512077 working Hit WaterExtractor nil
+						Lua 0:07:44:874
+C74BUILD FX 22512275 Drill Hit RCDriller nil
+						Lua 0:07:45:866
+C74BUILD FX 22513267 Working hit-moment1 MOXIE MoxiePump
+						Lua 0:07:46:912
+C74BUILD FX 22514313 working Hit WaterExtractor nil
+						Lua 0:07:47:511
+C74BUILD FX 22514912 ExcavatorDigging Hit2 ExcavatorShovel nil
+C74BUILD FX 22514912 ExcavatorDigging Out8 ExcavatorShovel nil
+						Lua 0:07:48:010
+C74BUILD FX 22515410 working Hit WaterExtractor nil
+						Lua 0:07:50:229
+C74BUILD FX 22517630 working Hit WaterExtractor nil
+						Lua 0:07:50:290
+C74BUILD FX 22517691 Drill Hit RCDriller nil
+						Lua 0:07:50:845
+C74BUILD FX 22518246 ExcavatorDigging Hit3 ExcavatorShovel nil
+C74BUILD FX 22518246 ExcavatorDigging Out9 ExcavatorShovel nil
+						Lua 0:07:51:343
+C74BUILD FX 22518744 working Hit WaterExtractor nil
+						Lua 0:07:52:516
+C74BUILD FX 22519917 Working hit-moment2 MOXIE MoxiePump
+						Lua 0:07:53:545
+C74BUILD FX 22520946 working Hit WaterExtractor nil
+						Lua 0:07:54:178
+C74BUILD FX 22521579 ExcavatorDigging Hit4 ExcavatorShovel nil
+C74BUILD FX 22521579 ExcavatorDigging Out10 ExcavatorShovel nil
+						Lua 0:07:54:676
+C74BUILD FX 22522077 working Hit WaterExtractor nil
+						Lua 0:07:55:708
+C74BUILD FX 22523108 Drill Hit RCDriller nil
+						Lua 0:07:56:863
+C74BUILD FX 22524263 working Hit WaterExtractor nil
+						Lua 0:07:57:511
+C74BUILD FX 22524912 ExcavatorDigging Hit5 ExcavatorShovel nil
+C74BUILD FX 22524912 ExcavatorDigging Out11 ExcavatorShovel nil
+						Lua 0:07:58:011
+C74BUILD FX 22525411 working Hit WaterExtractor nil
+						Lua 0:07:59:166
+C74BUILD FX 22526567 Working hit-moment1 MOXIE MoxiePump
+						Lua 0:08:00:170
+C74BUILD FX 22527571 Load Hit1 RCTerraformer LandscapeConstructionSite
+						Lua 0:08:00:178
+C74BUILD FX 22527579 working Hit WaterExtractor nil
+						Lua 0:08:00:845
+C74BUILD FX 22528246 ExcavatorDigging Hit6 ExcavatorShovel nil
+C74BUILD FX 22528246 ExcavatorDigging Out12 ExcavatorShovel nil
+						Lua 0:08:01:124
+C74BUILD FX 22528524 Drill Hit RCDriller nil
+						Lua 0:08:01:343
+C74BUILD FX 22528744 working Hit WaterExtractor nil
+						Lua 0:08:03:495
+C74BUILD FX 22530896 working Hit WaterExtractor nil
+						Lua 0:08:04:179
+C74BUILD FX 22531579 ExcavatorDigging Out1 ExcavatorShovel nil
+C74BUILD FX 22531579 ExcavatorDigging Hit7 ExcavatorShovel nil
+						Lua 0:08:04:678
+C74BUILD FX 22532078 working Hit WaterExtractor nil
+						Lua 0:08:05:816
+C74BUILD FX 22533217 Working hit-moment2 MOXIE MoxiePump
+						Lua 0:08:06:540
+C74BUILD FX 22533941 Drill Hit RCDriller nil
+						Lua 0:08:06:811
+C74BUILD FX 22534212 working Hit WaterExtractor nil
+						Lua 0:08:07:511
+C74BUILD FX 22534912 ExcavatorDigging Out2 ExcavatorShovel nil
+C74BUILD FX 22534912 ExcavatorDigging Hit8 ExcavatorShovel nil
+						Lua 0:08:08:010
+C74BUILD FX 22535411 working Hit WaterExtractor nil
+						Lua 0:08:10:128
+C74BUILD FX 22537529 working Hit WaterExtractor nil
+						Lua 0:08:10:845
+C74BUILD FX 22538246 ExcavatorDigging Hit9 ExcavatorShovel nil
+C74BUILD FX 22538246 ExcavatorDigging Out3 ExcavatorShovel nil
+						Lua 0:08:11:345
+C74BUILD FX 22538745 working Hit WaterExtractor nil
+						Lua 0:08:11:956
+C74BUILD FX 22539357 Drill Hit RCDriller nil
+						Lua 0:08:12:466
+C74BUILD FX 22539867 Working hit-moment1 MOXIE MoxiePump
+						Lua 0:08:13:445
+C74BUILD FX 22540845 working Hit WaterExtractor nil
+						Lua 0:08:14:179
+C74BUILD FX 22541579 ExcavatorDigging Hit10 ExcavatorShovel nil
+C74BUILD FX 22541579 ExcavatorDigging Out4 ExcavatorShovel nil
+						Lua 0:08:14:677
+C74BUILD FX 22542078 working Hit WaterExtractor nil
+						Lua 0:08:16:761
+C74BUILD FX 22544162 working Hit WaterExtractor nil
+						Lua 0:08:17:373
+C74BUILD FX 22544774 Drill Hit RCDriller nil
+						Lua 0:08:17:512
+C74BUILD FX 22544912 ExcavatorDigging Hit11 ExcavatorShovel nil
+C74BUILD FX 22544912 ExcavatorDigging Out5 ExcavatorShovel nil
+						Lua 0:08:18:012
+C74BUILD FX 22545412 working Hit WaterExtractor nil
+						Lua 0:08:19:116
+C74BUILD FX 22546517 Working hit-moment2 MOXIE MoxiePump
+						Lua 0:08:20:077
+C74BUILD FX 22547478 working Hit WaterExtractor nil
+						Lua 0:08:20:845
+C74BUILD FX 22548246 ExcavatorDigging Hit12 ExcavatorShovel nil
+C74BUILD FX 22548246 ExcavatorDigging Out6 ExcavatorShovel nil
+						Lua 0:08:21:344
+C74BUILD FX 22548745 working Hit WaterExtractor nil
+						Lua 0:08:22:789
+C74BUILD FX 22550190 Drill Hit RCDriller nil
+						Lua 0:08:23:394
+C74BUILD FX 22550795 working Hit WaterExtractor nil
+						Lua 0:08:24:178
+C74BUILD FX 22551579 ExcavatorDigging Out7 ExcavatorShovel nil
+C74BUILD FX 22551579 ExcavatorDigging Hit1 ExcavatorShovel nil
+						Lua 0:08:24:679
+C74BUILD FX 22552079 working Hit WaterExtractor nil
+						Lua 0:08:25:766
+C74BUILD FX 22553167 Working hit-moment1 MOXIE MoxiePump
+						Lua 0:08:26:710
+C74BUILD FX 22554111 working Hit WaterExtractor nil
+						Lua 0:08:27:511
+C74BUILD FX 22554912 ExcavatorDigging Hit2 ExcavatorShovel nil
+C74BUILD FX 22554912 ExcavatorDigging Out8 ExcavatorShovel nil
+						Lua 0:08:28:012
+C74BUILD FX 22555412 working Hit WaterExtractor nil
+						Lua 0:08:28:206
+C74BUILD FX 22555607 Drill Hit RCDriller nil
+						Lua 0:08:30:027
+C74BUILD FX 22557428 working Hit WaterExtractor nil
+						Lua 0:08:30:845
+C74BUILD FX 22558246 ExcavatorDigging Hit3 ExcavatorShovel nil
+C74BUILD FX 22558246 ExcavatorDigging Out9 ExcavatorShovel nil
+						Lua 0:08:31:345
+C74BUILD FX 22558746 working Hit WaterExtractor nil
+						Lua 0:08:32:416
+C74BUILD FX 22559817 Working hit-moment2 MOXIE MoxiePump
+						Lua 0:08:33:344
+C74BUILD FX 22560744 working Hit WaterExtractor nil
+						Lua 0:08:33:623
+C74BUILD FX 22561023 Drill Hit RCDriller nil
+						Lua 0:08:34:179
+C74BUILD FX 22561579 ExcavatorDigging Hit4 ExcavatorShovel nil
+C74BUILD FX 22561579 ExcavatorDigging Out10 ExcavatorShovel nil
+						Lua 0:08:34:679
+C74BUILD FX 22562079 working Hit WaterExtractor nil
+						Lua 0:08:36:660
+C74BUILD FX 22564061 working Hit WaterExtractor nil
+						Lua 0:08:37:512
+C74BUILD FX 22564912 ExcavatorDigging Hit5 ExcavatorShovel nil
+C74BUILD FX 22564912 ExcavatorDigging Out11 ExcavatorShovel nil
+						Lua 0:08:38:012
+C74BUILD FX 22565413 working Hit WaterExtractor nil
+						Lua 0:08:39:039
+C74BUILD FX 22566440 Drill Hit RCDriller nil
+						Lua 0:08:39:066
+C74BUILD FX 22566467 Working hit-moment1 MOXIE MoxiePump
+						Lua 0:08:39:976
+C74BUILD FX 22567377 working Hit WaterExtractor nil
+						Lua 0:08:40:845
+C74BUILD FX 22568246 ExcavatorDigging Hit6 ExcavatorShovel nil
+C74BUILD FX 22568246 ExcavatorDigging Out12 ExcavatorShovel nil
+						Lua 0:08:41:345
+C74BUILD FX 22568746 working Hit WaterExtractor nil
+						Lua 0:08:43:293
+C74BUILD FX 22570694 working Hit WaterExtractor nil
+						Lua 0:08:44:178
+C74BUILD FX 22571579 ExcavatorDigging Out1 ExcavatorShovel nil
+C74BUILD FX 22571579 ExcavatorDigging Hit7 ExcavatorShovel nil
+						Lua 0:08:44:455
+C74BUILD FX 22571856 Drill Hit RCDriller nil
+						Lua 0:08:44:679
+C74BUILD FX 22572080 working Hit WaterExtractor nil
+						Lua 0:08:45:716
+C74BUILD FX 22573117 Working hit-moment2 MOXIE MoxiePump
+						Lua 0:08:46:609
+C74BUILD FX 22574010 working Hit WaterExtractor nil
+						Lua 0:08:47:511
+C74BUILD FX 22574912 ExcavatorDigging Out2 ExcavatorShovel nil
+C74BUILD FX 22574912 ExcavatorDigging Hit8 ExcavatorShovel nil
+						Lua 0:08:48:012
+C74BUILD FX 22575413 working Hit WaterExtractor nil
+						Lua 0:08:49:872
+C74BUILD FX 22577273 Drill Hit RCDriller nil
+						Lua 0:08:49:926
+C74BUILD FX 22577327 working Hit WaterExtractor nil
+						Lua 0:08:50:845
+C74BUILD FX 22578246 ExcavatorDigging Hit9 ExcavatorShovel nil
+C74BUILD FX 22578246 ExcavatorDigging Out3 ExcavatorShovel nil
+						Lua 0:08:51:346
+C74BUILD FX 22578747 working Hit WaterExtractor nil
+						Lua 0:08:52:367
+C74BUILD FX 22579767 Working hit-moment1 MOXIE MoxiePump
+						Lua 0:08:53:242
+C74BUILD FX 22580643 working Hit WaterExtractor nil
+						Lua 0:08:54:178
+C74BUILD FX 22581579 ExcavatorDigging Hit10 ExcavatorShovel nil
+C74BUILD FX 22581579 ExcavatorDigging Out4 ExcavatorShovel nil
+						Lua 0:08:54:679
+C74BUILD FX 22582080 working Hit WaterExtractor nil
+						Lua 0:08:56:559
+C74BUILD FX 22583960 working Hit WaterExtractor nil
+						Lua 0:08:57:512
+C74BUILD FX 22584912 ExcavatorDigging Hit11 ExcavatorShovel nil
+C74BUILD FX 22584912 ExcavatorDigging Out5 ExcavatorShovel nil
+						Lua 0:08:58:013
+C74BUILD FX 22585414 working Hit WaterExtractor nil
+						Lua 0:08:59:016
+C74BUILD FX 22586417 Working hit-moment2 MOXIE MoxiePump
+						Lua 0:08:59:875
+C74BUILD FX 22587276 working Hit WaterExtractor nil
+						Lua 0:09:00:846
+C74BUILD FX 22588246 ExcavatorDigging Hit12 ExcavatorShovel nil
+C74BUILD FX 22588246 ExcavatorDigging Out6 ExcavatorShovel nil
+						Lua 0:09:01:346
+C74BUILD FX 22588747 working Hit WaterExtractor nil
+						Lua 0:09:02:268
+C74BUILD FX 22589669 ShuttleHubExit Hit CargoShuttle ShuttleHub
+						Lua 0:09:03:192
+C74BUILD FX 22590593 working Hit WaterExtractor nil
+						Lua 0:09:04:178
+C74BUILD FX 22591579 ExcavatorDigging Out7 ExcavatorShovel nil
+C74BUILD FX 22591579 ExcavatorDigging Hit1 ExcavatorShovel nil
+						Lua 0:09:04:680
+C74BUILD FX 22592081 working Hit WaterExtractor nil
+						Lua 0:09:05:666
+C74BUILD FX 22593067 Working hit-moment1 MOXIE MoxiePump
+						Lua 0:09:06:508
+C74BUILD FX 22593909 working Hit WaterExtractor nil
+						Lua 0:09:07:511
+C74BUILD FX 22594912 ExcavatorDigging Hit2 ExcavatorShovel nil
+C74BUILD FX 22594912 ExcavatorDigging Out8 ExcavatorShovel nil
+						Lua 0:09:08:013
+C74BUILD FX 22595414 working Hit WaterExtractor nil
+						Lua 0:09:09:826
+C74BUILD FX 22597226 working Hit WaterExtractor nil
+						Lua 0:09:10:845
+C74BUILD FX 22598246 ExcavatorDigging Hit3 ExcavatorShovel nil
+C74BUILD FX 22598246 ExcavatorDigging Out9 ExcavatorShovel nil
+						Lua 0:09:11:347
+C74BUILD FX 22598748 working Hit WaterExtractor nil
+						Lua 0:09:12:316
+C74BUILD FX 22599717 Working hit-moment2 MOXIE MoxiePump
+						Lua 0:09:13:141
+C74BUILD FX 22600542 working Hit WaterExtractor nil
+						Lua 0:09:14:178
+C74BUILD FX 22601579 ExcavatorDigging Hit4 ExcavatorShovel nil
+C74BUILD FX 22601579 ExcavatorDigging Out10 ExcavatorShovel nil
+						Lua 0:09:14:680
+C74BUILD FX 22602081 working Hit WaterExtractor nil
+						Lua 0:09:16:458
+C74BUILD FX 22603859 working Hit WaterExtractor nil
+						Lua 0:09:17:511
+C74BUILD FX 22604912 ExcavatorDigging Hit5 ExcavatorShovel nil
+C74BUILD FX 22604912 ExcavatorDigging Out11 ExcavatorShovel nil
+						Lua 0:09:18:016
+C74BUILD FX 22605415 working Hit WaterExtractor nil
+						Lua 0:09:18:966
+C74BUILD FX 22606367 Working hit-moment1 MOXIE MoxiePump
+						Lua 0:09:19:775
+C74BUILD FX 22607175 working Hit WaterExtractor nil
+						Lua 0:09:20:845
+C74BUILD FX 22608246 ExcavatorDigging Hit6 ExcavatorShovel nil
+C74BUILD FX 22608246 ExcavatorDigging Out12 ExcavatorShovel nil
+						Lua 0:09:21:348
+C74BUILD FX 22608748 working Hit WaterExtractor nil
+						Lua 0:09:23:091
+C74BUILD FX 22610492 working Hit WaterExtractor nil
+						Lua 0:09:24:179
+C74BUILD FX 22611579 ExcavatorDigging Out1 ExcavatorShovel nil
+C74BUILD FX 22611579 ExcavatorDigging Hit7 ExcavatorShovel nil
+						Lua 0:09:24:681
+C74BUILD FX 22612082 working Hit WaterExtractor nil
+						Lua 0:09:25:616
+C74BUILD FX 22613017 Working hit-moment2 MOXIE MoxiePump
+						Lua 0:09:26:408
+C74BUILD FX 22613808 working Hit WaterExtractor nil
+						Lua 0:09:27:511
+C74BUILD FX 22614912 ExcavatorDigging Out2 ExcavatorShovel nil
+C74BUILD FX 22614912 ExcavatorDigging Hit8 ExcavatorShovel nil
+						Lua 0:09:28:015
+C74BUILD FX 22615415 working Hit WaterExtractor nil
+						Lua 0:09:29:725
+C74BUILD FX 22617125 working Hit WaterExtractor nil
+						Lua 0:09:30:846
+C74BUILD FX 22618246 ExcavatorDigging Hit9 ExcavatorShovel nil
+C74BUILD FX 22618246 ExcavatorDigging Out3 ExcavatorShovel nil
+						Lua 0:09:31:348
+C74BUILD FX 22618749 working Hit WaterExtractor nil
+						Lua 0:09:32:267
+C74BUILD FX 22619667 Working hit-moment1 MOXIE MoxiePump
+						Lua 0:09:33:041
+C74BUILD FX 22620441 working Hit WaterExtractor nil
+						Lua 0:09:34:178
+C74BUILD FX 22621579 ExcavatorDigging Hit10 ExcavatorShovel nil
+C74BUILD FX 22621579 ExcavatorDigging Out4 ExcavatorShovel nil
+						Lua 0:09:34:682
+C74BUILD FX 22622082 working Hit WaterExtractor nil
+						Lua 0:09:36:357
+C74BUILD FX 22623758 working Hit WaterExtractor nil
+						Lua 0:09:37:052
+C74BUILD FX 22624912 ExcavatorDigging Hit11 ExcavatorShovel nil
+C74BUILD FX 22624912 ExcavatorDigging Out5 ExcavatorShovel nil
+						Lua 0:09:37:152
+C74BUILD FX 22625416 working Hit WaterExtractor nil
+						Lua 0:09:37:332
+C74BUILD FX 22626317 Working hit-moment2 MOXIE MoxiePump
+						Lua 0:09:37:483
+C74BUILD FX 22627074 working Hit WaterExtractor nil
+						Lua 0:09:37:719
+C74BUILD FX 22628246 ExcavatorDigging Hit12 ExcavatorShovel nil
+C74BUILD FX 22628246 ExcavatorDigging Out6 ExcavatorShovel nil
+						Lua 0:09:37:818
+C74BUILD FX 22628749 working Hit WaterExtractor nil
+						Lua 0:09:38:146
+C74BUILD FX 22630391 working Hit WaterExtractor nil
+						Lua 0:09:38:384
+C74BUILD FX 22631579 ExcavatorDigging Out7 ExcavatorShovel nil
+C74BUILD FX 22631579 ExcavatorDigging Hit1 ExcavatorShovel nil
+						Lua 0:09:38:486
+C74BUILD FX 22632083 working Hit WaterExtractor nil
+						Lua 0:09:38:663
+C74BUILD FX 22632967 Working hit-moment1 MOXIE MoxiePump
+						Lua 0:09:38:810
+C74BUILD FX 22633707 working Hit WaterExtractor nil
+						Lua 0:09:39:052
+C74BUILD FX 22634912 ExcavatorDigging Hit2 ExcavatorShovel nil
+C74BUILD FX 22634912 ExcavatorDigging Out8 ExcavatorShovel nil
+						Lua 0:09:39:151
+C74BUILD FX 22635416 working Hit WaterExtractor nil
+						Lua 0:09:39:474
+C74BUILD FX 22637024 working Hit WaterExtractor nil
+						Lua 0:09:39:717
+C74BUILD FX 22638246 ExcavatorDigging Hit3 ExcavatorShovel nil
+C74BUILD FX 22638246 ExcavatorDigging Out9 ExcavatorShovel nil
+						Lua 0:09:39:818
+C74BUILD FX 22638750 working Hit WaterExtractor nil
+						Lua 0:09:39:992
+C74BUILD FX 22639617 Working hit-moment2 MOXIE MoxiePump
+						Lua 0:09:40:137
+C74BUILD FX 22640340 working Hit WaterExtractor nil
+						Lua 0:09:40:385
+C74BUILD FX 22641579 ExcavatorDigging Hit4 ExcavatorShovel nil
+C74BUILD FX 22641579 ExcavatorDigging Out10 ExcavatorShovel nil
+						Lua 0:09:40:485
+C74BUILD FX 22642083 working Hit WaterExtractor nil
+						Lua 0:09:40:800
+C74BUILD FX 22643657 working Hit WaterExtractor nil
+						Lua 0:09:41:052
+C74BUILD FX 22644912 ExcavatorDigging Hit5 ExcavatorShovel nil
+C74BUILD FX 22644912 ExcavatorDigging Out11 ExcavatorShovel nil
+						Lua 0:09:41:152
+C74BUILD FX 22645417 working Hit WaterExtractor nil
+						Lua 0:09:41:322
+C74BUILD FX 22646267 Working hit-moment1 MOXIE MoxiePump
+						Lua 0:09:41:463
+C74BUILD FX 22646973 working Hit WaterExtractor nil
+						Lua 0:09:41:718
+C74BUILD FX 22648246 ExcavatorDigging Hit6 ExcavatorShovel nil
+C74BUILD FX 22648246 ExcavatorDigging Out12 ExcavatorShovel nil
+						Lua 0:09:41:819
+C74BUILD FX 22648750 working Hit WaterExtractor nil
+						Lua 0:09:42:126
+C74BUILD FX 22650290 working Hit WaterExtractor nil
+						Lua 0:09:42:384
+C74BUILD FX 22651579 ExcavatorDigging Out1 ExcavatorShovel nil
+C74BUILD FX 22651579 ExcavatorDigging Hit7 ExcavatorShovel nil
+						Lua 0:09:42:485
+C74BUILD FX 22652084 working Hit WaterExtractor nil
+						Lua 0:09:42:652
+C74BUILD FX 22652917 Working hit-moment2 MOXIE MoxiePump
+						Lua 0:09:42:790
+C74BUILD FX 22653606 working Hit WaterExtractor nil
+						Lua 0:09:43:051
+C74BUILD FX 22654912 ExcavatorDigging Out2 ExcavatorShovel nil
+C74BUILD FX 22654912 ExcavatorDigging Hit8 ExcavatorShovel nil
+						Lua 0:09:43:152
+C74BUILD FX 22655417 working Hit WaterExtractor nil
+						Lua 0:09:43:454
+C74BUILD FX 22656923 working Hit WaterExtractor nil
+						Lua 0:09:43:718
+C74BUILD FX 22658246 ExcavatorDigging Hit9 ExcavatorShovel nil
+C74BUILD FX 22658246 ExcavatorDigging Out3 ExcavatorShovel nil
+						Lua 0:09:43:818
+C74BUILD FX 22658751 working Hit WaterExtractor nil
+						Lua 0:09:43:983
+C74BUILD FX 22659567 Working hit-moment1 MOXIE MoxiePump
+						Lua 0:09:44:116
+C74BUILD FX 22660239 working Hit WaterExtractor nil
+						Lua 0:09:44:384
+C74BUILD FX 22661579 ExcavatorDigging Hit10 ExcavatorShovel nil
+C74BUILD FX 22661579 ExcavatorDigging Out4 ExcavatorShovel nil
+						Lua 0:09:44:485
+C74BUILD FX 22662084 working Hit WaterExtractor nil
+						Lua 0:09:44:780
+C74BUILD FX 22663556 working Hit WaterExtractor nil
+						Lua 0:09:45:051
+C74BUILD FX 22664912 ExcavatorDigging Hit11 ExcavatorShovel nil
+C74BUILD FX 22664912 ExcavatorDigging Out5 ExcavatorShovel nil
+						Lua 0:09:45:152
+C74BUILD FX 22665418 working Hit WaterExtractor nil
+						Lua 0:09:45:312
+C74BUILD FX 22666217 Working hit-moment2 MOXIE MoxiePump
+						Lua 0:09:45:444
+C74BUILD FX 22666872 working Hit WaterExtractor nil
+						Lua 0:09:45:644
+C74BUILD FX 22667880 ShuttleHubEnter Hit CargoShuttle ShuttleHub
+						Lua 0:09:45:718
+C74BUILD FX 22668246 ExcavatorDigging Hit12 ExcavatorShovel nil
+C74BUILD FX 22668246 ExcavatorDigging Out6 ExcavatorShovel nil
+						Lua 0:09:45:818
+C74BUILD FX 22668751 working Hit WaterExtractor nil
+						Lua 0:09:46:106
+C74BUILD FX 22670189 working Hit WaterExtractor nil
+						Lua 0:09:46:384
+C74BUILD FX 22671579 ExcavatorDigging Out7 ExcavatorShovel nil
+C74BUILD FX 22671579 ExcavatorDigging Hit1 ExcavatorShovel nil
+						Lua 0:09:46:485
+C74BUILD FX 22672085 working Hit WaterExtractor nil
+						Lua 0:09:46:642
+C74BUILD FX 22672867 Working hit-moment1 MOXIE MoxiePump
+						Lua 0:09:46:769
+C74BUILD FX 22673505 working Hit WaterExtractor nil
+						Lua 0:09:47:052
+C74BUILD FX 22674912 ExcavatorDigging Hit2 ExcavatorShovel nil
+C74BUILD FX 22674912 ExcavatorDigging Out8 ExcavatorShovel nil
+						Lua 0:09:47:152
+C74BUILD FX 22675418 working Hit WaterExtractor nil
+						Lua 0:09:47:433
+C74BUILD FX 22676822 working Hit WaterExtractor nil
+						Lua 0:09:47:718
+C74BUILD FX 22678246 ExcavatorDigging Hit3 ExcavatorShovel nil
+C74BUILD FX 22678246 ExcavatorDigging Out9 ExcavatorShovel nil
+						Lua 0:09:47:819
+C74BUILD FX 22678752 working Hit WaterExtractor nil
+						Lua 0:09:47:973
+C74BUILD FX 22679517 Working hit-moment2 MOXIE MoxiePump
+						Lua 0:09:48:096
+C74BUILD FX 22680138 working Hit WaterExtractor nil
+						Lua 0:09:48:385
+C74BUILD FX 22681579 ExcavatorDigging Hit4 ExcavatorShovel nil
+C74BUILD FX 22681579 ExcavatorDigging Out10 ExcavatorShovel nil
+						Lua 0:09:48:485
+C74BUILD FX 22682085 working Hit WaterExtractor nil
+						Lua 0:09:48:760
+C74BUILD FX 22683455 working Hit WaterExtractor nil
+						Lua 0:09:49:051
+C74BUILD FX 22684912 ExcavatorDigging Hit5 ExcavatorShovel nil
+C74BUILD FX 22684912 ExcavatorDigging Out11 ExcavatorShovel nil
+						Lua 0:09:49:152
+C74BUILD FX 22685419 working Hit WaterExtractor nil
+						Lua 0:09:49:302
+C74BUILD FX 22686167 Working hit-moment1 MOXIE MoxiePump
+						Lua 0:09:49:422
+C74BUILD FX 22686771 working Hit WaterExtractor nil
+						Lua 0:09:49:717
+C74BUILD FX 22688246 ExcavatorDigging Hit6 ExcavatorShovel nil
+C74BUILD FX 22688246 ExcavatorDigging Out12 ExcavatorShovel nil
+						Lua 0:09:49:819
+C74BUILD FX 22688752 working Hit WaterExtractor nil
+						Lua 0:09:50:086
+C74BUILD FX 22690088 working Hit WaterExtractor nil
+						Lua 0:09:50:385
+C74BUILD FX 22691579 ExcavatorDigging Out1 ExcavatorShovel nil
+C74BUILD FX 22691579 ExcavatorDigging Hit7 ExcavatorShovel nil
+						Lua 0:09:50:485
+C74BUILD FX 22692086 working Hit WaterExtractor nil
+						Lua 0:09:50:632
+C74BUILD FX 22692817 Working hit-moment2 MOXIE MoxiePump
+						Lua 0:09:50:749
+C74BUILD FX 22693404 working Hit WaterExtractor nil
+						Lua 0:09:51:051
+C74BUILD FX 22694912 ExcavatorDigging Out2 ExcavatorShovel nil
+C74BUILD FX 22694912 ExcavatorDigging Hit8 ExcavatorShovel nil
+						Lua 0:09:51:152
+C74BUILD FX 22695419 working Hit WaterExtractor nil
+						Lua 0:09:51:412
+C74BUILD FX 22696721 working Hit WaterExtractor nil
+						Lua 0:09:51:717
+C74BUILD FX 22698246 ExcavatorDigging Hit9 ExcavatorShovel nil
+C74BUILD FX 22698246 ExcavatorDigging Out3 ExcavatorShovel nil
+						Lua 0:09:51:819
+C74BUILD FX 22698753 working Hit WaterExtractor nil
+						Lua 0:09:51:963
+C74BUILD FX 22699467 Working hit-moment1 MOXIE MoxiePump
+						Lua 0:09:52:076
+C74BUILD FX 22700037 working Hit WaterExtractor nil
+						Lua 0:09:52:385
+C74BUILD FX 22701579 ExcavatorDigging Hit10 ExcavatorShovel nil
+C74BUILD FX 22701579 ExcavatorDigging Out4 ExcavatorShovel nil
+						Lua 0:09:52:485
+C74BUILD FX 22702086 working Hit WaterExtractor nil
+						Lua 0:09:52:741
+C74BUILD FX 22703354 working Hit WaterExtractor nil
+						Lua 0:09:53:052
+C74BUILD FX 22704912 ExcavatorDigging Hit11 ExcavatorShovel nil
+C74BUILD FX 22704912 ExcavatorDigging Out5 ExcavatorShovel nil
+						Lua 0:09:53:152
+C74BUILD FX 22705420 working Hit WaterExtractor nil
+						Lua 0:09:53:292
+C74BUILD FX 22706117 Working hit-moment2 MOXIE MoxiePump
+						Lua 0:09:53:403
+C74BUILD FX 22706670 working Hit WaterExtractor nil
+						Lua 0:09:53:717
+C74BUILD FX 22708246 ExcavatorDigging Hit12 ExcavatorShovel nil
+C74BUILD FX 22708246 ExcavatorDigging Out6 ExcavatorShovel nil
+						Lua 0:09:53:819
+C74BUILD FX 22708753 working Hit WaterExtractor nil
+						Lua 0:09:54:066
+C74BUILD FX 22709987 working Hit WaterExtractor nil
+						Lua 0:09:54:385
+C74BUILD FX 22711579 ExcavatorDigging Out7 ExcavatorShovel nil
+C74BUILD FX 22711579 ExcavatorDigging Hit1 ExcavatorShovel nil
+						Lua 0:09:54:486
+C74BUILD FX 22712087 working Hit WaterExtractor nil
+						Lua 0:09:54:622
+C74BUILD FX 22712767 Working hit-moment1 MOXIE MoxiePump
+						Lua 0:09:54:730
+C74BUILD FX 22713303 working Hit WaterExtractor nil
+						Lua 0:09:55:051
+C74BUILD FX 22714912 ExcavatorDigging Hit2 ExcavatorShovel nil
+C74BUILD FX 22714912 ExcavatorDigging Out8 ExcavatorShovel nil
+						Lua 0:09:55:152
+C74BUILD FX 22715420 working Hit WaterExtractor nil
+						Lua 0:09:55:392
+C74BUILD FX 22716620 working Hit WaterExtractor nil
+						Lua 0:09:56:053
+C74BUILD FX 22718246 ExcavatorDigging Hit3 ExcavatorShovel nil
+C74BUILD FX 22718246 ExcavatorDigging Out9 ExcavatorShovel nil
+						Lua 0:09:56:561
+C74BUILD FX 22718754 working Hit WaterExtractor nil
+						Lua 0:09:57:224
+C74BUILD FX 22719417 Working hit-moment2 MOXIE MoxiePump
+						Lua 0:09:57:743
+C74BUILD FX 22719936 working Hit WaterExtractor nil
+						Lua 0:09:59:386
+C74BUILD FX 22721579 ExcavatorDigging Hit4 ExcavatorShovel nil
+C74BUILD FX 22721579 ExcavatorDigging Out10 ExcavatorShovel nil
+						Lua 0:09:59:894
+C74BUILD FX 22722087 working Hit WaterExtractor nil
+						Lua 0:10:01:060
+C74BUILD FX 22723253 working Hit WaterExtractor nil
+						Lua 0:10:02:062
+C74BUILD FX 22724255 Load Hit1 RCTerraformer LandscapeConstructionSite
+						Lua 0:10:02:719
+C74BUILD FX 22724912 ExcavatorDigging Hit5 ExcavatorShovel nil
+C74BUILD FX 22724912 ExcavatorDigging Out11 ExcavatorShovel nil
+						Lua 0:10:03:229
+C74BUILD FX 22725421 working Hit WaterExtractor nil
+						Lua 0:10:03:874
+C74BUILD FX 22726067 Working hit-moment1 MOXIE MoxiePump
+						Lua 0:10:04:230
+C74BUILD FX 22726422 Load Hit1 RCTerraformer LandscapeConstructionSite
+						Lua 0:10:04:376
+C74BUILD FX 22726569 working Hit WaterExtractor nil
+						Lua 0:10:06:053
+C74BUILD FX 22728246 ExcavatorDigging Hit6 ExcavatorShovel nil
+C74BUILD FX 22728246 ExcavatorDigging Out12 ExcavatorShovel nil
+						Lua 0:10:06:395
+C74BUILD FX 22728588 Load Hit1 RCTerraformer LandscapeConstructionSite
+						Lua 0:10:06:562
+C74BUILD FX 22728754 working Hit WaterExtractor nil
+						Lua 0:10:19:968
+C74BUILD FX 22729886 working Hit WaterExtractor nil
+						Lua 0:10:21:660
+C74BUILD FX 22731579 ExcavatorDigging Out1 ExcavatorShovel nil
+						Lua 0:10:21:661
+C74BUILD FX 22731579 ExcavatorDigging Hit7 ExcavatorShovel nil
+						Lua 0:10:22:170
+C74BUILD FX 22732088 working Hit WaterExtractor nil
+						Lua 0:10:22:799
+C74BUILD FX 22732717 Working hit-moment2 MOXIE MoxiePump
+						Lua 0:10:23:284
+C74BUILD FX 22733202 working Hit WaterExtractor nil
+						Lua 0:10:24:993
+C74BUILD FX 22734912 ExcavatorDigging Out2 ExcavatorShovel nil
+C74BUILD FX 22734912 ExcavatorDigging Hit8 ExcavatorShovel nil
+						Lua 0:10:25:502
+C74BUILD FX 22735421 working Hit WaterExtractor nil
+						Lua 0:10:26:600
+C74BUILD FX 22736519 working Hit WaterExtractor nil
+						Lua 0:10:28:327
+C74BUILD FX 22738246 ExcavatorDigging Hit9 ExcavatorShovel nil
+						Lua 0:10:28:328
+C74BUILD FX 22738246 ExcavatorDigging Out3 ExcavatorShovel nil
+						Lua 0:10:28:837
+C74BUILD FX 22738755 working Hit WaterExtractor nil
+						Lua 0:10:29:449
+C74BUILD FX 22739367 Working hit-moment1 MOXIE MoxiePump
+						Lua 0:10:29:917
+C74BUILD FX 22739835 working Hit WaterExtractor nil
+						Lua 0:10:31:660
+C74BUILD FX 22741579 ExcavatorDigging Hit10 ExcavatorShovel nil
+C74BUILD FX 22741579 ExcavatorDigging Out4 ExcavatorShovel nil
+						Lua 0:10:32:169
+C74BUILD FX 22742088 working Hit WaterExtractor nil
+						Lua 0:10:33:233
+C74BUILD FX 22743152 working Hit WaterExtractor nil
+						Lua 0:10:34:993
+C74BUILD FX 22744912 ExcavatorDigging Hit11 ExcavatorShovel nil
+C74BUILD FX 22744912 ExcavatorDigging Out5 ExcavatorShovel nil
+						Lua 0:10:35:503
+C74BUILD FX 22745422 working Hit WaterExtractor nil
+						Lua 0:10:36:098
+C74BUILD FX 22746017 Working hit-moment2 MOXIE MoxiePump
+						Lua 0:10:36:549
+C74BUILD FX 22746468 working Hit WaterExtractor nil
+						Lua 0:10:38:327
+C74BUILD FX 22748246 ExcavatorDigging Hit12 ExcavatorShovel nil
+C74BUILD FX 22748246 ExcavatorDigging Out6 ExcavatorShovel nil
+						Lua 0:10:38:836
+C74BUILD FX 22748755 working Hit WaterExtractor nil
+						Lua 0:10:39:867
+C74BUILD FX 22749785 working Hit WaterExtractor nil
+						Lua 0:10:41:660
+C74BUILD FX 22751579 ExcavatorDigging Out7 ExcavatorShovel nil
+C74BUILD FX 22751579 ExcavatorDigging Hit1 ExcavatorShovel nil
+						Lua 0:10:42:170
+C74BUILD FX 22752089 working Hit WaterExtractor nil
+						Lua 0:10:42:748
+C74BUILD FX 22752667 Working hit-moment1 MOXIE MoxiePump
+						Lua 0:10:43:182
+C74BUILD FX 22753101 working Hit WaterExtractor nil
+						Lua 0:10:44:993
+C74BUILD FX 22754912 ExcavatorDigging Hit2 ExcavatorShovel nil
+C74BUILD FX 22754912 ExcavatorDigging Out8 ExcavatorShovel nil
+						Lua 0:10:45:504
+C74BUILD FX 22755422 working Hit WaterExtractor nil
+						Lua 0:10:46:499
+C74BUILD FX 22756418 working Hit WaterExtractor nil
+						Lua 0:10:48:328
+C74BUILD FX 22758246 ExcavatorDigging Hit3 ExcavatorShovel nil
+						Lua 0:10:48:329
+C74BUILD FX 22758246 ExcavatorDigging Out9 ExcavatorShovel nil
+						Lua 0:10:48:837
+C74BUILD FX 22758756 working Hit WaterExtractor nil
+						Lua 0:10:49:398
+C74BUILD FX 22759317 Working hit-moment2 MOXIE MoxiePump
+						Lua 0:10:49:815
+C74BUILD FX 22759734 working Hit WaterExtractor nil
+						Lua 0:10:51:661
+C74BUILD FX 22761579 ExcavatorDigging Hit4 ExcavatorShovel nil
+C74BUILD FX 22761579 ExcavatorDigging Out10 ExcavatorShovel nil
+						Lua 0:10:52:170
+C74BUILD FX 22762089 working Hit WaterExtractor nil
+						Lua 0:10:53:133
+C74BUILD FX 22763051 working Hit WaterExtractor nil
+						Lua 0:10:54:993
+C74BUILD FX 22764912 ExcavatorDigging Hit5 ExcavatorShovel nil
+C74BUILD FX 22764912 ExcavatorDigging Out11 ExcavatorShovel nil
+						Lua 0:10:55:504
+C74BUILD FX 22765423 working Hit WaterExtractor nil
+						Lua 0:10:56:048
+C74BUILD FX 22765967 Working hit-moment1 MOXIE MoxiePump
+						Lua 0:10:56:448
+C74BUILD FX 22766367 working Hit WaterExtractor nil
+						Lua 0:10:58:212
+C74BUILD hook restored
+						Lua 0:11:10:382
+
+
+Stopping the game threads from the Lua side with exit code 0.
+
+					Render 0:11:10:386
+
+
+Stopping the game threads after receiving WM_QUIT.
+
+					Render 0:11:10:704
+
+
+*** Debug::Done()
+Time (ms)	670704
+
+

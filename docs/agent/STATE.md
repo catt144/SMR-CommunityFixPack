@@ -38,6 +38,8 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   ⛔ Never quote a stored "deployed = <sha>"; read the deployments API (`prompts/SITE_AUDIT.md`).
 - Post-launch LIVE: F105, F107, F108 (v4), F110 (v5), hotfix 2 (v6); F104 NOT OURS. ⛔ F107 field route untested. ⛔ Read the
   GitHub tracker via `api.github.com/.../issues/<n>/comments`, never the HTML page. ✅ Passage Network UNTICKED 09-09.
+- ✅ C74+C77 `SilentHitMomentFX` BUILT + TESTED-ATTENDED 09-10: all seven intended units function across two
+  no-power-cycle loads; 0 Lua errors. Metatron excluded; drill Rare Metals skin + white CP3 MOXIE silent by design. Pending next release.
 - Shipping artifact: v6 pack = **49** files (`tools/pack_predict.py`); Steam-delivered `ModContent.fpk` **315,457 B**
   md5 `57e01a71f08788be9c79393d6194690f` (workshop folder, 09-09 23:38); PDX page shows 318.92 KB — the two portals'
   sizes differed on v5 too (documented, `RELEASE_PORTAL_PREP` §0.5(f)). Tag `fixpack-v1.0.0` NOT moved (H-01).
@@ -101,9 +103,8 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 - ✅ **131** RULED promote + LANDED 09-09 late (`tools/desk_*.py`) · **132** STATE.md warn: raise 12288 again or accept
   per-session eviction (this close-out evicted the pre-release material; measure, never quote) · **133** six
   self-check-promise decisions (`reports/SELFCHECK_PROMISE_COMBINED.md` §7), routed 09-09 · **134** assign the vanillahunt
-  chain's models (5 links; rec 03 + 99 Fable), routed 09-10 · **139 RULED 09-10: BUILD** all seven `C74`+`C77`
-  hit-moment FX units (no Metatron) — `prompts/C74_BUILD.md` is TAKEABLE (adds the old-save load pass + dev-fix decline rules).
-  **143 RULED 09-10: FIX** `C83` (P1, OBSERVED: arrivals fall back into a dead quarantined dome) — `prompts/C83_FIX.md`, after the C74 build commits.
+  chain's models (5 links; rec 03 + 99 Fable), routed 09-10.
+- **143 RULED 09-10: FIX** `C83` (P1, OBSERVED: arrivals fall back into a dead quarantined dome) — `prompts/C83_FIX.md`, after the C74 build commits.
 - 73 blame surface — harden or not · 76 confirm (a) was a ruling not a leaning · 53 harden now or in 1.0.1
   (rec 1.0.1) · 51 both-packs leg timing (rec after launch) · 50 chain-vs-replace wording · 47 two modder-page
   wordings · 43 opt-in pack re-tick · 41 dialog wording + sweep cap 5→8 · 40 `smr_shuttles` name · 39 dialog re-fire.
@@ -111,8 +112,8 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 ## Build state — `python tools/doccheck.py --emit-counts`, never hand-typed
 ```
 BUILD STATE (emitted by tools/doccheck.py)
-- modules: 44 registered (44 default-active, 0 optional-gated files)
-- Code/*.lua files: 45
+- modules: 45 registered (45 default-active, 0 optional-gated files)
+- Code/*.lua files: 46
 - TestKit probes: 94
 - BUGS index rows: 118 F + 12 D + 83 C
 ```

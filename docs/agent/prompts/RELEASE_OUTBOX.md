@@ -28,7 +28,22 @@ player surface bumps it by one on release.
 
 ## Pending — goes out with the next upload
 
-*(empty — cleared by RELEASE.md on the v5 upload, 2026-08-30.)*
+### Pending — C74 + C77: restore seven units' missing animation-moment FX
+
+- **Count impact:** +1 player-facing repair / fix-list row (46 → 47 when
+  `RELEASE.md` applies the outbox).
+- **Fix-list scope:** buildings and vehicles — Rare Metals Extractor hammer,
+  classic MOXIE, both Water Extractor pumps, Shuttle Hub shuttles, RC Driller,
+  RC Dozer and The Excavator. Cosmetic only; no production or balance change.
+- **Change-note line:** Restored the missing strike, pump, landing, drilling,
+  shovel and bucket effects on seven machines and vehicles.
+- **Required skin note:** the drill Rare Metals Extractor skin and the white
+  (CP3) MOXIE are silent by design; changing the extractor to its hammer skin
+  exposes the repaired strikes. Screenshots:
+  `agent/reports/c74_skins/` (drill default → Change Skin → hammer).
+- **Evidence:** `C74` + `C77` are `tested-attended` on 1.1.0.403908; two loads,
+  no power cycle, owner heard/saw every intended effect, 0 Lua errors.
+- **Judgment-call count:** unchanged. Metatron is deliberately out of scope.
 
 ---
 

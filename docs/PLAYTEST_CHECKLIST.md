@@ -123,7 +123,18 @@ Original question, kept as asked: new arrivals with nowhere to live get sent int
 > any boosts. Apply each entry's vacuity/falsifier; skip the fixture if it does
 > not arise naturally.
 
-### ✅ 2026-09-10 — 139 RULED: **BUILD** — all seven silent units (C74 hammer + MOXIE, C77's five), Metatron left out. Build prompt: `agent/prompts/C74_BUILD.md`; fire it with *task docs/agent/prompts/C74_BUILD.md*. It also covers your two follow-ups: old saves need no power cycle (a one-time pass on load), and a later game fix makes ours step aside (worst case a doubled sound). Owed from you: one short in-person check at the end of the build.
+### ✅✅ 2026-09-10 — 139 BUILT + TESTED-ATTENDED: all seven silent units (C74 hammer + MOXIE, C77's five), Metatron left out. `Fix_SilentHitMomentFX.lua`; old saves heal without a power cycle; staged for the next release. Nothing is owed from you.
+
+> **Build receipt:** the first packed-module load caught a real flaw in the
+> proposed old-save gate: persisted tracker handles could still look live while
+> their resumed threads were about to exit. You were right to reject a
+> power-cycle workaround. The corrected load pass replaces those cosmetic
+> trackers exactly once, using the game's own tracker bodies. On the final run
+> it restored four trackers on each of two loads; you listened to every intended
+> effect and reported **"they are all functioning, no power cycling"**. The
+> module applied, all 11 guarded marker presets registered, the fresh RC Dozer
+> task fired four `Load`/`Hit1` calls, and both archived logs contain zero Lua
+> errors. The drill Rare Metals skin and white CP3 MOXIE remain silent by design.
 
 Original question, kept as asked: C74, the Rare Metals Extractor's hammer (and the MOXIE pump) play no strike sounds. You proved the fix live: the game's own code plays them once two small things are added. **Decision: build it for hotfix 3, or file and watch. Recommendation: build it — small, save-clean, and the game does the work, not a timer of ours.**
 
