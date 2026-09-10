@@ -59,8 +59,8 @@ completed tests move whole to
 >
 > **What the fix is:** one small code correction (look markers up by name) plus
 > strike markers for the hammer (times already proven), the classic MOXIE pump
-> (times still to find, about a minute with you at the MOXIE) and, if wanted,
-> the rare Metatron. Nothing goes into your saves; removing the mod removes it
+> (✅ **proven with you 2026-09-10: "works and in sync"** at the first try) and,
+> if wanted, the rare Metatron. Nothing goes into your saves; removing the mod removes it
 > cleanly. Cosmetic only; production is untouched.
 >
 > **For the reporter**, if you want to reply: *Confirmed. It's a bug in the

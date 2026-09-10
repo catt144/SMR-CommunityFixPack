@@ -29,12 +29,13 @@ index trap) · `EF-058` (classdef-time vs runtime patching) · `EF-019`/`EF-022`
    the tracker + Metatron; write the enumeration into C74.
 2. **Times.** Hammer (`UniversalExtractorHammer` / `working`): `Hit` at **3083**
    and **9250** (¼ and ¾ of the measured 12,333 ms loop) — heard "perfectly in
-   sync" by the owner. **MOXIE (`MoxiePump` / `working`) and Metatron: owed** — an
-   attended sitting with the owner at a classic MOXIE: run the console preset line
-   below with placeholder times, toggle power, adjust until the owner hears it in
-   sync. Metatron is a rare mystery unit — include only if the owner wants it.
-   Resolve `GetAnimEntity(entity, "working")` for each group before keying a
-   preset (`EF-086` ⚖️).
+   sync" by the owner. **MOXIE (`MoxiePump` / `working`): `Hit` at 3325 and 9975**
+   (¼ and ¾ of the measured 13,300 ms loop; `GetAnimEntity` → `MoxiePump`,
+   MEASURED) — "works and in sync", owner, attended 2026-09-10 (C74 "MOXIE LIVE FIX
+   PROVEN"). **Metatron: owed** — only if the owner wants it (rare mystery unit):
+   the same placeholder-then-ear sitting. Resolve `GetAnimEntity(entity, "working")`
+   for any further group before keying a preset (`EF-086` ⚖️). C77's five units
+   (presets only, no conversion) are a separate owner decision in checklist 139.
 3. **Build** one module (FIX_POLICY shape): `-- SRC:` + `-- DEFECT:` headers
    (`python tools/bodycheck.py --pin …`); `Require` gates; the conversion installed
    at classdef time (file-scope `Register`, safe per `EF-058` amended); presets
