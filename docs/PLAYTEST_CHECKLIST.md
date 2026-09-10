@@ -58,8 +58,7 @@ completed tests move whole to
 > **If we fix it, the patch note has to explain the two skins**, or drill-skin
 > players will report the fix as broken. Your three screenshots are saved for
 > that (`agent/reports/c74_skins/`: drill default → Change Skin button →
-> hammer). ⚠️ They show the Cheats panel, so crop or recapture them before
-> they go on a store page or the site.
+> hammer).
 
 ### 2026-09-10 — 138 rider: eight caller-seam candidates need fresh 1.1 fixtures; none is a release gate. **Decision: take only the naturally available fixture(s), or leave the candidates source-only. Recommendation: prioritize C66 and fold C67/C68 together if a food-service fixture is already available.**
 
