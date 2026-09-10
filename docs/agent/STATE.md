@@ -8,11 +8,11 @@ Defect truth `agent/bugs/INDEX.md` · facts `agent/facts/INDEX.md` · doc map `d
 Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/reports/CHAIN_METHOD.md`.
 
 ## Now
-- ⭐ **HOTFIX 2 IS LIVE AS v6** (2026-09-09, Steam 23:22 / PDX 23:27 local, owner-confirmed by screenshot): 44 modules,
-  36 DELETED (game 1.1.0 fixes them itself), 10 repaired or re-copied on 1.1.0 bodies. Every commit: `prompts/hotfix2/README.md`;
-  verdict `reports/HOTFIX_2_AUDIT.md` (SHIP WITH CHANGES, both changes landed); re-verification `reports/PACK_1_1_0_REVERIFICATION.md`.
-  Tree `version` **6**, `pdx_version` "5" — PDX shows MOD VER. **5** (the display lags the tree by one, ck71: never chase).
-  ⚖️ Owner rule 09-08: a patch note saying "Fixed" is a **CLAIM, false until we confirm it** — the v6 note says so in bullet 5.
+- ⭐ **v7 IS LIVE** (2026-09-10, owner's word; Steam page read: updated 3:59pm PT, 325.512 KB, "Forty-eight", 3 gallery images,
+  change notes carry v7): C74+C77 `SilentHitMomentFX` + C83 `ArrivalDeaths`. Tree `version` **7**, `pdx_version` "6" (PDX display
+  lags by one, ck71: never chase). ⚠️ Paradox page unread (JS-only): MOD VER., gallery, whole 6,206-char body OWED from the owner.
+- v6 = hotfix 2 (09-09): 36 modules DELETED (1.1.0 fixes them), 10 re-copied; `prompts/hotfix2/README.md`, `reports/HOTFIX_2_AUDIT.md`.
+  ⚖️ Owner rule 09-08: a patch note saying "Fixed" is a **CLAIM, false until we confirm it**.
 - ⛔ GAME **1.1.0.403908** + DLC shipped 2026-09-08 (`EF-075`); installed Steam build still **24995074** = the archived 1.1.0
   tree. 1.0.7 tree ARCHIVED `C:\Dev\SMR-SrcArchive\1.0.7.396349\Src` (`ad5f93d`, `EF-083`). ⛔ Trust runtime over source (`EF-078`).
   ⛔ **1.0.7 SAVES CANNOT LOAD ON 1.1.0** (`EF-079`) ⇒ the ENTIRE fixture library is branch-locked; a 1.1.0 leg
@@ -21,31 +21,31 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   behaviour probe picks `ChooseDome`'s argument; passenger-station recipe in `bugs/F117.md` §Control, desk 8/8, ⛔ untested in
   play — `CachedArgShape()` nil ⇒ vacuous), **F118** (rider `0136af1`, no probe). Saint heal SHIPS UNEXERCISED (ck130).
   ✅ **F114 + F115 OBSERVED FIXED IN PLAY** 09-09 (attended; SESSION_LOG 09-09 sitting entries).
-- 🚫 OWED — the post-upload sitting, ONE boot on v6 (recipes: checklist "THE SITTING RAN" block + `bugs/F117.md`):
+- 🚫 OWED — the post-upload sitting, ONE boot, now on v7 (ck144 a; recipes: checklist "THE SITTING RAN" block + `bugs/F117.md`):
   A3 (F118) · A10 · A5 c2 · A9 c4/c5 · F117's station recipe · the first `RunAll()` on the 94-probe kit (re-stamps
   `WORKFLOW.md:407`, VOID since 09-09). ⛔ Kit verdicts are PREDICTIONS until then; still FAIL/ERROR by name:
   `C47OpenFarmSeedBufferShape` (Herbs 100→50), retired `LanderCargoRatchet`/`DroneUnreachableForever`/`AutoExportPriority`.
 - ⏭ NEXT (owner 09-10): **FR-1 Linux** `prompts/FR1_LINUX_SITTING.md` once the 3070 laptop boots Mint (ck136); THEN
-  `prompts/DLC_DEEP_CHECK.md` (shape: `reports/vanillahunt/HUNT_AUDIT.md` §8). Owner: upload v7 → `RELEASE.md` §4–5; ck144.
+  `prompts/DLC_DEEP_CHECK.md` (shape: `reports/vanillahunt/HUNT_AUDIT.md` §8). Owner: ck144 (a) v6 checks on a v7 boot, (b) Steam sounds thread.
   vanillahunt CLOSED 09-10 (99): instruments SOUND WITH STATED GAPS — 1,281 table-level hunks in 368 rowed hand files listed by
   no instrument (§1.4); 12 P2s re-derived: 6 hold, 5 weakened, **C80 REFUTED**; **C82** filed by the audit (Incident reactors stay
   off); every P2 is a gain/cosmetic except C82/C66/C63; ck142 = hotfix-3 list (rec none). FR-1/2/3 OPEN; FR-1 needs the Linux sitting.
-- ⭐ PUBLISHED both portals — `pdx_id` **156049**, `steam_id` **3787202810**, tree `version` **6** (hotfix 2, 09-09).
+- ⭐ PUBLISHED both portals — `pdx_id` **156049**, `steam_id` **3787202810**, tree `version` **7** (v7, 09-10).
   ⛔ Never re-upload to "fix" a version number — each upload bumps again (H-02). ⛔ Every upload OVERWRITES both
   page bodies from `metadata.lua`; `description` IS the full card (08-24). ✅ v6 auto-fill delivered BOTH pages clean
   (owner-seen) — the first clean cycle of three; `UPLOAD_WORKFLOW` §3 paste backups stay REQUIRED.
-- ⭐ SITE deployed 2026-09-10 03:38Z (`dc892d1` per the deployments API), **46** live fix-list entries (was 82), the two
+- ⭐ SITE deployed 2026-09-10 23:08Z (`13e8b75` per the deployments API), **48** live fix-list entries (45 success + 3 ?), the two
   "built against" lines read 1.1.0.403908. ⛔ `publish-site.yml` is `workflow_dispatch` only — committing never publishes.
   ⛔ Never quote a stored "deployed = <sha>"; read the deployments API (`prompts/SITE_AUDIT.md`).
-- Post-launch LIVE: F105, F107, F108 (v4), F110 (v5), hotfix 2 (v6); F104 NOT OURS. ⛔ F107 field route untested. ⛔ Read the
+- Post-launch LIVE: F105, F107, F108 (v4), F110 (v5), hotfix 2 (v6), C74+C77+C83 (v7); F104 NOT OURS. ⛔ F107 field route untested. ⛔ Read the
   GitHub tracker via `api.github.com/.../issues/<n>/comments`, never the HTML page. ✅ Passage Network UNTICKED 09-09.
 - ✅ C74+C77 `SilentHitMomentFX` BUILT + TESTED-ATTENDED 09-10: all seven intended units function across two
-  no-power-cycle loads; 0 Lua errors. Metatron excluded; drill Rare Metals skin + white CP3 MOXIE silent by design. v7 words applied 09-10; awaiting upload.
+  no-power-cycle loads; 0 Lua errors. Metatron excluded; drill Rare Metals skin + white CP3 MOXIE silent by design. LIVE in v7 (09-10).
 - ✅ **C83 `ArrivalDeaths` BUILT + TESTED-ATTENDED 09-10:** ordinary safe landing stayed silent; forced overflow all
-  entered the working dome, logged one reroute, and stayed out of the dead/quarantined dome for one sol; 0 errors. v7 words applied 09-10; awaiting upload.
-- Shipping artifact: v6 pack = **49** files (`tools/pack_predict.py`); Steam-delivered `ModContent.fpk` **315,457 B**
-  md5 `57e01a71f08788be9c79393d6194690f` (workshop folder, 09-09 23:38); PDX page shows 318.92 KB — the two portals'
-  sizes differed on v5 too (documented, `RELEASE_PORTAL_PREP` §0.5(f)). Tag `fixpack-v1.0.0` NOT moved (H-01).
+  entered the working dome, logged one reroute, and stayed out of the dead/quarantined dome for one sol; 0 errors. LIVE in v7 (09-10).
+- Shipping artifact: v7 pack = **50** files (`tools/pack_predict.py`); Steam-delivered `ModContent.fpk` **325,512 B**
+  md5 `c58eea7e3b51de227adf1759e7bbc61e` (workshop folder, 09-10 19:09); PDX size unread — the two portals'
+  sizes differed on v5/v6 (documented, `RELEASE_PORTAL_PREP` §0.5(f)). Tag `fixpack-v1.0.0` NOT moved (H-01).
   ⛔ Pack route is main menu → MOD EDITOR → File → Pack Mod, NOT Mods Manager → Ctrl-E (⚠️ PORTAL_PREP §0.5 old).
 - Watches: `EF-066` subclass reach unmeasured, ck74 half-open · localisation: German only one SEEN (`EF-039`) ·
   C47 (unrun) · C48 opt-in · F02/F78/F81 organic · riders C42/F99/F80/F96-R2 · `EF-051` falsifier = stray save ·

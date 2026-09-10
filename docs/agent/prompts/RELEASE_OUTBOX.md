@@ -28,50 +28,27 @@ player surface bumps it by one on release.
 
 ## Pending — goes out with the next upload
 
-> ✅ **Words applied 2026-09-10** (RELEASE.md step 1, commit "release words for
-> vNEXT"): fix-list rows (46 → 48), count word Forty-six → **Forty-eight** in all
-> five card copies, C83 headliner, `last_changes` rewritten as v7's note. ⛔ NOT
-> uploaded — these entries stay Pending until the owner confirms the listing (step 5).
-> ⭐ **Owner addition, 2026-09-10 later:** the card gains a "SEVEN MACHINES THAT WORKED IN
-> SILENCE" section (the two extractors' skins explained) and the listing gains THREE
-> gallery screenshots via `metadata.lua` `screenshot1..3` (`tools/store_screenshots.py`;
-> kept out of the pack by `ignore_files`). Description 6,206 chars — Paradox untested
-> above 5,342 (STORE_CARD_LIVE, latest section).
-
-### Pending — C74 + C77: restore seven units' missing animation-moment FX
-
-- **Count impact:** +1 player-facing repair / fix-list row (46 → 47 when
-  `RELEASE.md` applies the outbox).
-- **Fix-list scope:** buildings and vehicles — Rare Metals Extractor hammer,
-  classic MOXIE, both Water Extractor pumps, Shuttle Hub shuttles, RC Driller,
-  RC Dozer and The Excavator. Cosmetic only; no production or balance change.
-- **Change-note line:** Restored the missing strike, pump, landing, drilling,
-  shovel and bucket effects on seven machines and vehicles.
-- **Required skin note:** the drill Rare Metals Extractor skin and the white
-  (CP3) MOXIE are silent by design; changing the extractor to its hammer skin
-  exposes the repaired strikes. Screenshots:
-  `agent/reports/c74_skins/` (drill default → Change Skin → hammer).
-- **Evidence:** `C74` + `C77` are `tested-attended` on 1.1.0.403908; two loads,
-  no power cycle, owner heard/saw every intended effect, 0 Lua errors.
-- **Judgment-call count:** unchanged. Metatron is deliberately out of scope.
-
-### Pending — C83: keep arriving colonists out of dead domes
-
-- **Count impact:** +1 player-facing repair / fix-list row (47 → 48 after the
-  earlier pending C74+C77 entry).
-- **Fix-list scope:** passenger-rocket and lander arrivals whose vanilla safety
-  fallback is reachable but switched off, quarantined or without life support.
-- **Change-note line:** Arriving colonists no longer overflow into a nearby dead
-  or quarantined dome when a working, open and supplied dome is reachable.
-- **Evidence:** `C83` is `tested-attended` on 1.1.0.403908; the ordinary safe
-  route stayed silent, the forced overflow rerouted into the working dome, and
-  nobody moved into the bad dome during the following sol; 0 Lua errors.
-- **Judgment-call count:** unchanged. C84's player-forced homeless move remains
-  intentional and out of scope.
+*(empty — cleared 2026-09-10 after the owner confirmed v7 live on both stores)*
 
 ---
 
 ## Released — history, newest first (cleared here by RELEASE.md)
+
+### Released in v7 (2026-09-10) — C74+C77 and C83
+- **C74 + C77 · `Fix_SilentHitMomentFX`** — the missing animation-moment FX
+  restored on seven units: Rare Metals Extractor hammer, classic MOXIE, both
+  Water Extractor pumps, Shuttle Hub shuttles, RC Driller, RC Dozer, The
+  Excavator. Cosmetic only; the drill Rare Metals skin and the white (CP3) MOXIE
+  are silent by design. Metatron deliberately out. Count 46 → 47.
+- **C83 · `ArrivalDeaths` extended** — arriving colonists no longer overflow into
+  a switched-off, quarantined or unsupplied dome when a working, open, supplied
+  dome is reachable. C84 (player-forced homeless move) stays intentional. Count
+  47 → 48.
+- Card: count word **Forty-eight**, C83 headliner, the owner's "SEVEN MACHINES
+  THAT WORKED IN SILENCE" section, three gallery screenshots via
+  `screenshot1..3` (description 6,206 chars). `last_changes` = v7's three-line
+  note. Judgment-call count unchanged. Both entries `tested-attended` on
+  1.1.0.403908.
 
 ### Released in v6 (2026-09-09) — hotfix 2, the game-1.1.0 patch
 - Nothing passed through *Pending*: the whole release was a chain

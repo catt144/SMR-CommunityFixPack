@@ -289,7 +289,7 @@ return PlaceObj('ModDef', {
 	-- had never been updated. It had. ⇒ the ONLY controls are the store's own
 	-- change notes and the SUBSCRIBED archive — never this file. `EF-068`.
 	'version_major', 1,
-	'version', 6,
+	'version', 7,
 	'lua_revision', 350453,
 	'saved_with_revision', 403908,
 	-- saves made with the pack load fine without it (FIX_POLICY §3), so don't
@@ -376,10 +376,10 @@ return PlaceObj('ModDef', {
 	-- after a sitting is the EXPECTED state, not a mistake by whoever worked last.
 	-- ⚠️ `saved_with_revision` now sits further up, beside `lua_revision`, because
 	-- `SaveDef` writes the fields in its own order; it is the same editor bookkeeping.
-	'saved', 1789010521,
-	'code_hash', 5223066420005163697,
+	'saved', 1789081139,
+	'code_hash', -3234475764633111646,
 	'pdx_id', 156049,
-	'pdx_version', "5",
+	'pdx_version', "6",
 	'steam_id', "3787202810",
 	'TagGameplay', true,
 })

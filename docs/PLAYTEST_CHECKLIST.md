@@ -29,6 +29,23 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### ✅ 2026-09-10 — v7 IS LIVE on both stores (your word). Nothing to decide; three things to tell me when convenient.
+
+> **Read from here:** the Steam page (updated Sep 10 @ 3:59pm, 325.512 KB, "Forty-eight
+> repairs", all three gallery images, the whole description down to its last link), and the
+> Change Notes carry all three v7 lines. Steam's delivered file: 325,512 bytes, md5
+> `c58eea7e3b51de227adf1759e7bbc61e`. The site's fix list shows 48 entries. `metadata.lua` has
+> its comments back; version 7 kept exactly as the upload left it.
+>
+> **Tell me (none blocks anything):** (1) the MOD VER. the Paradox page shows; (2) whether the
+> Paradox page shows all three screenshots and the full description down to "Source, and the
+> reasoning behind every fix" — Paradox had never taken a description this long; (3) whether
+> either description filled itself or you pasted — Steam's page has bold text, which the
+> automatic text does not have, so it looks pasted.
+>
+> **Now postable:** the two Steam replies for the C74 and C83 reporters
+> (`agent/reports/FIELD_REPORT_REPLIES.md`, "Steam comments answered by the v7 update").
+
 ### 2026-09-10 — 144: two small asks around the v7 upload; neither blocks it.
 
 > **(a) The v6 check you still owe** (one boot: a handful of hotfix-2 checks plus the first

@@ -443,6 +443,18 @@ this file's plain block differs only in the portal passages; count word Forty-ei
 its cap is not on record** — if the Paradox page comes out cut or the upload refuses the
 text, the §3 paste backup is the route and the owner reports it (UPLOAD_WORKFLOW §2).
 
+## ⭐ 2026-09-10 (night) — v7 LIVE: what arrived (the two first-time facts)
+
+Read from the live Steam page HTML after the owner said both stores were live:
+**Steam gallery: all three images arrived** (3 `highlight_strip_screenshot` items) — the
+first use of `screenshot1..3`. **Steam body: WHOLE** — every section through the final
+GitHub link, "Forty-eight repairs". ⚠️ It renders **bold**, which the plain `description`
+has none of ⇒ the §3 BBCode block was most likely pasted (owner to confirm; auto-fill
+unknown this cycle). **Paradox: UNREAD** — the page is JavaScript-only from here (3,444 B
+shell). Whether its gallery took the three images and whether the 6,206-char body arrived
+whole are OWED from the owner (checklist receipt 2026-09-10); until then **5,342** stays the
+largest Paradox-accepted length on record.
+
 ## Provenance of the headliners
 
 ⛔ **Not invented for the card.** Every bullet is a compressed form of an entry

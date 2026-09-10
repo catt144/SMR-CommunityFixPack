@@ -8,6 +8,24 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-10 night — POST_UPLOAD close (v7): writeback with the comments restored, Steam + site read live, outbox cleared (`smr-bugfixpack-f0`, owner in conversation)
+
+tags: release v7 POST_UPLOAD writeback C74 C77 C83 store-card screenshots
+
+Owner's words: "Both should be live on steam and paradox". Writeback: `metadata.lua` rebuilt
+from HEAD keeping the four fields the 18:58:59 save set (`version` 6→7, `saved`, `code_hash`,
+`pdx_version` "5"→"6"; not hand-set, H-02); `items.lua` = HEAD (the save changed comments only).
+parsecheck 0 errors; upload_preflight 23 checked · 0 FAIL · 1 UNCHECKABLE. Steam, read from the
+page: updated Sep 10 @ 3:59pm, 325.512 KB, "Forty-eight repairs", 3 gallery images, body whole
+but rendered BOLD (BBCode paste likely), Change Notes carry v7's three lines. Delivered
+`ModContent.fpk` 325,512 B md5 `c58eea7e3b51de227adf1759e7bbc61e` (09-10 19:09, computed);
+pack_predict 50 files. Site: deployments API newest `13e8b75` 23:08:19Z; live fix list 45
+success + 3 question = 48 = the deployed markdown's 48 rows. Paradox page is JS-only from here:
+MOD VER., gallery and body length OWED from the owner (checklist receipt). Outbox cleared into
+"Released in v7"; STATE to v7; STORE_CARD_LIVE first-time facts. Tag `fixpack-v1.0.0` not moved.
+
+---
+
 ## 2026-09-10 late — handoff FR-1 taken: the two "still checking" sound leads closed; an upload-sitting save found in the tree (`smr-bugfixpack-f0`, unattended)
 
 tags: C74 sound-leads DroneHub dig-reveerse handoff v7 upload metadata
