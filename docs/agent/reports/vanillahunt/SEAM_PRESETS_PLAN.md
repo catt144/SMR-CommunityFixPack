@@ -16,10 +16,10 @@ parent owns every repository write, sample, verdict, filing and handoff.
 - [x] Read the 510-row support/story preset batch; parent re-derives its
   surviving leads and sample, records exact coverage, then runs chain gates and
   commits the durable report.
-- [>] Read all 360 generated INVENTORY rows and six CALLERS items, enumerate
+- [x] Read all 360 generated INVENTORY rows and six CALLERS items, enumerate
   generated/Data twins and actual consumers in both directions, reconcile the
   three preset reports, then run chain gates and commit the durable report.
-- [ ] Falsify and file every surviving candidate in one or more race-safe
+- [>] Falsify and file every surviving candidate in one or more race-safe
   batches; add only fresh-fixture/runtime decisions to the owner checklist;
   regenerate indexes, repeat applicable desk controls, run chain gates, commit
   and push each batch immediately.
@@ -63,9 +63,10 @@ items. Agents do not write repository files or issue verdicts.
 | progression/politics | 548 | FactionDef, TechPreset, Tech, LawDef, PolicyDef, FlightPolicyDef, CommanderProfilePreset, SponsorGoals, MissionSponsorPreset, Challenge, GameRuleDef, EffectDef, TechFieldPreset, Milestone |
 | support/story | 510 | PresetDef, StoryBit, SA_Exec, OnScreenHint, Label, SA_WaitMessage, SoundPreset, ClassDef, NotificationPreset, PopupNotificationPreset, EncyclopediaArticle, SA_GrantTechBoost, MsgDef, SA_WaitChoice, AppendClassDef, DumbAIDef, ScriptConditionList, StatsImpactRest, StatusEffectPreset, TraitPreset |
 
-The parent reads the generated queue and caller contracts so it can establish
-which definition is live, connect each field change to an actual Lua reader,
-and distinguish generated twins from duplicate runtime effects. Priority seams
+The generated readers exhaustively read the queue and caller contracts; the
+parent re-derives live-definition contracts, samples, and surviving findings so
+it can connect field changes to actual Lua readers and distinguish generated
+twins from duplicate runtime effects. Priority seams
 are Crop/Resource/recipes, Tech/TechPreset, Law/Policy/Faction, cargo,
 BuildingTemplate and XDef/class twins. FR preset rows are read first: four
 ParticleSystemPreset FR-1(c), one EffectDef FR-2 and one StoryBit FR-2.
