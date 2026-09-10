@@ -8,6 +8,24 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-10 — doccheck's "kit-tree state is UNKNOWN" hook WARN was the hook itself: `GIT_INDEX_FILE` leaked into the kit's git
+
+tags: doccheck testkit_tree hook GIT_INDEX_FILE pathspec-commit dispatch
+
+Dispatch session (`smr-bugfixpack-ae`). Owner asked why vanillahunt 03's (Codex) commit hook printed `WARN kit-tree state is
+UNKNOWN on this run` on every commit while a standalone doccheck read the kit clean. Cause, reproduced rather than argued:
+git exports `GIT_INDEX_FILE` to a pre-commit hook; the required `git commit -F msg -- <paths>` form sets it to the ABSOLUTE
+path of this repo's temporary index (`.git/next-index-<pid>.lock`), and `testkit_tree()`'s `git -C <kit> status` obeyed it,
+reading blobs the kit does not hold (`fatal: unable to read <sha>`, exit 128). Control in a scratch repo with a hook that
+dumps its env: bare commit (relative `.git/index`, lands on the kit's own index by luck) exit 0; pathspec commit exit 128;
+same hook with `git rev-parse --local-env-vars` stripped, exit 0 and clean. Fix: `GIT_LOCAL_ENV` stripped from that one
+call. The 09-09 docstring's "transient git lock" 128 re-diagnosed as most likely the same cause (the pathspec rule dates
+from 08-29, `1561dad`; the 09-09 run's context is not recorded, so not proven). 03b/03c/03d "retain the wording" notes
+replaced, 99's inbox gains the resolution. `SEAM_REPORT.md` left as written (a record). No kit state ever hidden: every
+standalone rerun was a real check.
+
+---
+
 ## 2026-09-10 — vanillahunt 01's largest hole measured and closed: `treediff` v1.1 covers the indented orphans, INVENTORY 9,832 → 11,742
 
 tags: vanillahunt treediff ck135 INDENTED ONE-LINE luafn find_bodies

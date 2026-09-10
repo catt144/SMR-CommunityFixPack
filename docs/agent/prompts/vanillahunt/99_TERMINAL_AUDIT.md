@@ -441,6 +441,11 @@ explicit clean sweep plus desk/gate reruns reverified the result for close-out.
 Repeated hook warning, VERBATIM:
 `  WARN kit-tree state is UNKNOWN on this run — re-run doccheck before trusting a clean kit tree`
 Standalone doccheck reported kit clean. Do not call the commit hook warning-free.
+✅ Resolved 2026-09-10 (dispatch session): not a kit problem — the hook's
+absolute `GIT_INDEX_FILE` from the required `git commit -- <paths>` form leaked
+into doccheck's `git -C <kit> status` (exit 128). `testkit_tree()` now strips
+git's local env vars; the 09-09 "transient git lock" docstring was re-diagnosed
+as the same cause. 03's commits are warning-bearing, not kit-dirty.
 
 FR-1(b)3/10 rows read, FR-2 zero/seven, FR-3 eleven/21; remaining keys have
 owners and no report is closed. For dlccheck must include successor verdicts:

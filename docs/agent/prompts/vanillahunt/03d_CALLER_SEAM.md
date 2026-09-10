@@ -147,9 +147,12 @@ includes incidental reads and shape-only caller checks; it means you still owe
 the declared read. `python tools/seam_coverage.py` checks the dated partition,
 not your future coverage.
 
-The initial commit hook repeatedly emitted this warning despite standalone
-doccheck reporting the kit clean; retain the precise wording if it recurs:
-`  WARN kit-tree state is UNKNOWN on this run — re-run doccheck before trusting a clean kit tree`
+03's commit hook repeatedly emitted `WARN kit-tree state is UNKNOWN on this
+run` while standalone doccheck read the kit clean. ✅ CAUSE FOUND AND FIXED
+2026-09-10: the pathspec commit form hands the hook an absolute
+`GIT_INDEX_FILE`, which the kit's `git -C` obeyed (exit 128); `testkit_tree()`
+now strips git's repo-local env vars. If the WARN recurs, it is a NEW cause —
+report it verbatim with the `not checked (...)` line above it.
 03 rechecked its desk result after an explicit clean probe sweep because its
 initial two commit messages omitted the required PROBE SWEEP line.
 

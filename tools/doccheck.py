@@ -700,6 +700,17 @@ def alias_gate(out):
     return True
 
 
+# `git rev-parse --local-env-vars` (git 2.x): the variables that pin a git
+# process to ONE repository. A hook inherits some of them from the commit that
+# runs it, so any git call aimed at ANOTHER repo must drop them (testkit_tree).
+GIT_LOCAL_ENV = frozenset((
+    "GIT_ALTERNATE_OBJECT_DIRECTORIES", "GIT_CONFIG", "GIT_CONFIG_PARAMETERS",
+    "GIT_CONFIG_COUNT", "GIT_OBJECT_DIRECTORY", "GIT_DIR", "GIT_WORK_TREE",
+    "GIT_IMPLICIT_WORK_TREE", "GIT_GRAFT_FILE", "GIT_INDEX_FILE",
+    "GIT_NO_REPLACE_OBJECTS", "GIT_REPLACE_REF_BASE", "GIT_PREFIX",
+    "GIT_SHALLOW_FILE", "GIT_COMMON_DIR"))
+
+
 def testkit_tree(out):
     """REPORT-ONLY (owner GO, 2026-08-04): a dirty TestKit working tree is how
     a true, verified record sat stranded unseen for a day — no gate checked
@@ -715,10 +726,23 @@ def testkit_tree(out):
     now also emits a WARN line, because a run that says NOTHING about the kit
     tree must not read like a run that found it clean — `not checked` is one
     word away from `clean` in a 17-line report whose summary still says GREEN.
-    Seen live 2026-09-09: a transient git lock in the kit's tree printed
-    `not checked (git exited 128)` inside an otherwise green run, on the eve of
-    link 07, whose entire subject is that repo. Still report-only, still never
-    a block — the owner's 2026-08-04 GO is untouched."""
+    Seen live 2026-09-09: `not checked (git exited 128)` inside an otherwise
+    green run, on the eve of link 07, whose entire subject is that repo — then
+    blamed on "a transient git lock in the kit's tree".
+
+    ⛔ RE-DIAGNOSED 2026-09-10 — it was not a lock, it was THE HOOK. Git exports
+    `GIT_INDEX_FILE` to a pre-commit hook, and the `git commit -F msg -- <paths>`
+    form the shared index requires (DISPATCH §1) sets it to the ABSOLUTE path of
+    this repo's temporary index (`.git/next-index-<pid>.lock`). A child `git -C
+    <kit>` still obeys it, reads blobs the kit's object store does not hold, and
+    dies `fatal: unable to read <sha>` / 128 — on EVERY pathspec commit, while a
+    standalone run reads clean (vanillahunt 03 hit it on all its commits).
+    Reproduced in a throwaway repo: bare commit (relative `.git/index`, which
+    under -C lands on the kit's OWN index by luck) exit 0, pathspec commit 128,
+    same hook with `GIT_LOCAL_ENV` stripped 0. A relative temporary index would
+    be worse — the kit reads a missing index and reports every file DELETED, a
+    false dirty. Hence the stripped env below. Still report-only, still never a
+    block — the owner's 2026-08-04 GO is untouched."""
     if not os.path.isdir(os.path.join(TESTKIT, ".git")):
         out.append("TESTKIT TREE: not checked (no repo at %s)" % TESTKIT)
         return True
@@ -731,9 +755,11 @@ def testkit_tree(out):
                    "doccheck before trusting a clean kit tree")
         return True
 
+    env = {k: v for k, v in os.environ.items() if k not in GIT_LOCAL_ENV}
     try:
         res = subprocess.run(["git", "-C", TESTKIT, "status", "--porcelain"],
-                             capture_output=True, text=True, timeout=30)
+                             capture_output=True, text=True, timeout=30,
+                             env=env)
     except OSError as exc:
         return did_not_run(exc)
     if res.returncode != 0:
