@@ -9,7 +9,7 @@ and **clears it** (moves the entries to *Released* below) once the upload is don
 
 **Live tree version:** `metadata.lua` `version` — read it, never hand-set (H-02).
 **Live count word:** whatever `metadata.lua`'s `description` currently says
-(`grep -o 'Eighty[a-z-]* repairs' metadata.lua`). Each pending fix that has a
+(`grep -oE '[A-Z][a-z]+(-[a-z]+)? repairs' metadata.lua` — one hit; zero is a FAIL). Each pending fix that has a
 player surface bumps it by one on release.
 
 ## How to use it

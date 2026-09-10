@@ -11,12 +11,18 @@ driven by `RELEASE_OUTBOX.md`, which it clears at the end. **Any model.**
 > portal action is the owner's. The agent does the words and the repo work around
 > them; the owner does the pack + upload in the middle.
 
+> 🔧 **Updated 2026-09-10:** the count-word grep no longer assumes "Eighty" (v6 made it
+> Forty-six, and the old pattern matched nothing — a vacuous gate); the auto-fill line
+> reflects v6's first clean auto-fill.
+
 ## 0 · Orient
-1. `git log --oneline -10` + `git pull`.
+1. `git log --oneline -10` + `git pull` + `git status --short` (other sessions commit here).
 2. Read `agent/STATE.md` and `agent/prompts/RELEASE_OUTBOX.md`.
 3. `python tools/doccheck.py --emit-counts` — every count comes from here, never
    hand-typed.
-4. Read the live count word: `grep -o 'Eighty[a-z-]* repairs' metadata.lua`.
+4. Read the live count word: `grep -oE '[A-Z][a-z]+(-[a-z]+)? repairs' metadata.lua`.
+   Exactly ONE hit expected. ⛔ **Zero hits is a FAIL, never a pass** — a pattern that
+   matches nothing proves nothing.
 
 ## 1 · Agent — apply the outbox to every surface (this is `PUBLIC_SURFACE_SWEEP.md`)
 For **each `### Pending` entry** in the outbox, do that entry's row of the
@@ -31,19 +37,25 @@ authority on *which* surfaces and *how*. In short, per pending fix:
 - **`metadata.lua` `last_changes`** — rewrite it as THIS version's change note
   from the pending entries' change-note lines (H-02: never touch `version`).
 - **FAQ / judgment-call count** if any pending entry is a judgment call.
+- **Reporters** (`PUBLIC_SURFACE_SWEEP.md` §4, `reports/FIELD_REPORT_REPLIES.md`) —
+  any pending entry that answers a field report gets its reply updated.
 **Gate:** the count word must now match across `metadata.lua`, `STORE_CARD_LIVE.md`
-and `UPLOAD_WORKFLOW.md` — `grep -o 'Eighty[a-z-]* repairs'` on all three, plus
-the site fix-list row count. `doccheck` GREEN. Commit ("release words for vNEXT").
+and `UPLOAD_WORKFLOW.md` — `grep -oE '[A-Z][a-z]+(-[a-z]+)? repairs'` on all three
+(every hit the same word, and the same number of hits as before the edit), plus the
+site fix-list row count. ⛔ Zero hits anywhere is a FAIL. `doccheck` GREEN. Commit
+("release words for vNEXT") with `git commit -F <msg> -- <paths>`.
 
 ## 2 · Agent — hand off
 Tell the owner **"ready to upload"** and point them at `UPLOAD_WORKFLOW.md`. Say
 plainly what the new count and change note are, and that the store bodies should
-auto-fill from `metadata.lua` (⚠️ still UNTESTED — the §3 backups are the paste
-fallback, kept current in step 1; they are NOT "optional polish").
+auto-fill from `metadata.lua` — v6 (2026-09-09) was the FIRST cycle where both pages
+auto-filled clean (owner-seen; STATE). One clean cycle is not a pattern: the §3
+backups stay the REQUIRED paste fallback, kept current in step 1 — they are NOT
+"optional polish".
 
 ## 3 · Owner — pack + upload (`UPLOAD_WORKFLOW.md`)
-The owner packs (Mod Editor → Pack Mod, version auto-bumps), uploads **Paradox
-then Steam**, checks the pages, and reports back the four things
+The owner packs (main menu → MOD EDITOR → File → Pack Mod; the version auto-bumps),
+uploads **Paradox then Steam**, checks the pages, and reports back the four things
 `UPLOAD_WORKFLOW.md` §5 asks for (each store's version, whether the descriptions
 auto-filled or needed a paste, anything that looked wrong, whether the site
 published).

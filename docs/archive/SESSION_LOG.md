@@ -43,6 +43,20 @@ miss, not falsely treated as proof of the earlier moment. C83 → `tested-attend
 
 ---
 
+## 2026-09-10 — RELEASE.md made fire-ready for v7 (`smr-bugfixpack-04`, owner asked "update out now")
+
+tags: RELEASE RELEASE_OUTBOX count-word vacuous-gate auto-fill v7
+
+Owner: C74/C77 + C83 are tested-attended — ship. `RELEASE.md` (last edited 08-30, pre-v6) had
+a VACUOUS count-word gate: `grep -o 'Eighty[a-z-]* repairs'` matches nothing since v6's
+Forty-six (same line in `RELEASE_OUTBOX.md:12`). Replaced with a count-agnostic pattern and a
+zero-hits-is-FAIL rule; control run: one `Forty-six repairs` in `metadata.lua`, two each in
+`UPLOAD_WORKFLOW.md` and `STORE_CARD_LIVE.md`. Auto-fill line updated (v6 = first clean
+cycle; backups stay required); reporter step made explicit. Outbox holds both entries
+(46 → 48). Not a gate but flagged to the owner: STATE's v6 post-upload sitting is still owed.
+
+---
+
 ## 2026-09-10 — ck143 RULED FIX; `prompts/C83_FIX.md` written (`smr-bugfixpack-04`, owner in conversation)
 
 tags: C83 ck143 Fix_ArrivalDeaths prompt
