@@ -295,3 +295,33 @@ nothing the `Data/` side does not.
 - ⚠️ **FR-3 `PERF` gap:** fan-out batches **B01–B15** were briefed before README §2b and carry no PERF tells; your agents re-open those WORTH-READING bodies with PERF in their briefs — 99 checks that you did.
 - ⚠️ **Appended-parameter callers are benign BY SHAPE only** (TRIAGE.md 1.5): the heuristic was falsified once (`ActionFX:GetLocObj`); a same-signature body that starts needing an argument (R08311) is invisible to CALLERS — read the agent (b′) row verdicts.
 - The agents' verbatim cross-row NOTES are TRIAGE.md §3.x — several are tree-wide contract shifts (`table.ifilter` callback, `OnSetWorking` → `RecursiveCallMethods`, `IsInWalkingDist` −1).
+
+
+### From 03 · core food seam close-out, 2026-09-10
+
+03 consumed after 396 complete present-span reads; its required split is now
+03b_SEAM_PRESETS.md (360 generated + 1,618 fields),03c_PROGRESS_SEAM.md (284 hand),
+03d_CALLER_SEAM.md (249 hand + 18NOROWS). Callers are partitioned too. Your original
+04 rows are unchanged; no new untagged seam was reassigned away from you.
+SEAM_COVERAGE.tsv and SEAM_REPORT.md give exact ownership and evidence.
+
+Avoid duplicates C56-C62, all cand/source-read. Five DIFF-CAUSED; C59 bounded
+next-slot loop and C62 discarded explosion list are PASSING. C56/C57/C59 desk
+controls discriminate; no runtime/native proof. Untagged support/caller bodies
+were opened for routes (e.g. producer callbacks, MicroGHabitat, death handlers),
+not counted as draining your rows. Read your own full bodies as planned.
+
+For FR-1: three03 new-game-tagged base bodies read, seven pending03c/03d;
+Lua guard3/1 vs Lua + Data10/1, no crash ruling. Temporal-upscaler lead stays yours.
+Lua/Config/config.lua belongs to 03d's18NOROWS but is also in your explicit
+FR-1 support list: coordinate the finding;03d owns whole-file coverage.
+FR-2 none read by03. FR-3 hard C60 allocation plus unmeasured Community hourly
+resident scans, farm synchronization, widened pet enumeration and recipe loops;
+no claim about the original 2025 stutter. SEAM_REPORT has old/new counterevidence.
+
+C62's four wrappers still lack a concrete instantiated scenario.03b/03d may
+consult generated effects/ScriptStatements; an original 04-E preset stays yours.
+No absence search proves a dynamic/native caller cannot exist. For all non-owner
+claims, base class existence does not prove a constructible building/preset route.
+Send new seam handoffs to the open03b/03c/03d owner;99 waits for all. Detailed
+drift and corrected source names/recipes are in SEAM_REPORT, not hidden by the split.

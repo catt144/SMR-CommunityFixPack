@@ -1,0 +1,241 @@
+PROBE SWEEP: clean (explicit rg, both repos; exit1 = no hits)
+
+$ tools/doccheck.py
+ENTRIES: 157 files (2 grouped), 192 preserved index rows, 154 heading tags compared
+  status derived from: c-row-default x1, row-evidence x36, row-status x1, tag x154
+  warn F85: the frozen index-row cell says 'filed', entry says 'wontfix' (from 'tag')
+  warn C12: the frozen index-row cell says 'filed', entry says 'cand' (from 'row-evidence')
+  warn C13: the frozen index-row cell says 'filed', entry says 'cand' (from 'row-evidence')
+  warn C14: the frozen index-row cell says 'filed', entry says 'cand' (from 'row-evidence')
+  warn C15: the frozen index-row cell says 'filed', entry says 'cand' (from 'row-evidence')
+  warn C16: the frozen index-row cell says 'filed', entry says 'cand' (from 'row-evidence')
+  warn C17: the frozen index-row cell says 'filed', entry says 'cand' (from 'row-evidence')
+  warn C37: the frozen index-row cell says 'filed', entry says 'cand' (from 'row-evidence')
+  warn C35: the frozen index-row cell says 'filed', entry says 'cand' (from 'row-evidence')
+  warn C34: the frozen index-row cell says 'filed', entry says 'cand' (from 'row-evidence')
+  warn C38: the frozen index-row cell says 'filed', entry says 'cand' (from 'row-evidence')
+  warn C39: the frozen index-row cell says 'filed', entry says 'tested-unattended' (from 'tag')
+  warn F100: the frozen index-row cell says 'filed', entry says 'fixed' (from 'tag')
+  warn C43: the frozen index-row cell says 'filed', entry says 'fixed' (from 'tag')
+  warn C49: the frozen index-row cell says 'filed', entry says 'wontfix' (from 'tag')
+  warn C50: the frozen index-row cell says 'filed', entry says 'tested-attended' (from 'tag')
+  warn C51: the frozen index-row cell says 'filed', entry says 'tested-attended' (from 'tag')
+  warn C52: the frozen index-row cell says 'filed', entry says 'parked' (from 'tag')
+INDEX: fresh — regenerating from front matter reproduces INDEX.md byte for byte (192 rows)
+FACTS: 85 files, 53 state an observation date, 2946 source lines preserved
+FACTS INDEX: fresh — regenerating from front matter reproduces INDEX.md byte for byte (85 rows)
+ROOT: docs/ holds exactly the 9 entries docs/README.md's map declares (BUGS.md, FUTURE_IDEAS.md, PLAYTEST_CHECKLIST.md, PLAYTEST_HELP.md, README.md, STATUS.md, UPLOAD_WORKFLOW.md, agent, archive)
+ENTRY MIRROR: AGENTS.md == CLAUDE.md, byte for byte (2100 bytes)
+STATE + STUBS: STATE.md 11437 bytes (warn 12288, hard 18432, line 200); 3 stubs present and pointing
+COUNTS: 45 Code/*.lua files, 44 registered modules (44 default-active, 0 files carry optional = true), 94 probes
+        index rows: 118 F + 12 D + 62 C = 192 (in 157 entry files)
+TEMPORARY SWEEP: 0 hit(s) in Code/ + TestKit Code/
+LOAD ORDER: 1 shared-symbol constraint(s) checked, 45 file(s) in the code list
+WRAP CHECK: 0 wrap site(s) outside Require, 4 allowlisted (FIX_POLICY §2; detector+allowlist in tools/harvest_wrap_targets.py)
+PARSE: 45 file(s) in Code, 0 error(s) [Lua 5.5]
+PARSE: 24 file(s) in ..\SMR-BugFixPack-TestKit\Code, 0 error(s) [Lua 5.5]  (report-only)
+MODULE SETS: 45 file(s) in Code/, items.lua and metadata.lua's code list agree by name
+BODYCHECK SELFTEST: PASS (the falsifier; every verdict fired on a known case)
+TESTKIT TREE: clean
+ALIASCHECK: 24 file(s), 37 SMRTest member(s) derived, 0 finding(s)  (report-only)
+doccheck: GREEN
+exit=0
+
+$ tools/treediff.py --selftest
+==============================================================================
+PART 1 — planted fixtures (two tiny trees; the NEW side is CRLF, so a
+         line-ending difference is under every single assertion below)
+  PASS   planted BODY change, name + arity identical -> kind=body
+  PASS   planted LEADING parameter (the F115 shape) -> kind=sig
+  PASS   planted REMOVAL -> kind=removed
+  PASS   planted ADDITION -> kind=added
+  PASS   planted RENAME, identical body -> RENAME? on BOTH partners, named
+  PASS   ⛔ CRLF + trailing-space-only change is NOT A ROW
+  PASS   ⭐ a changed COMMENT *is* a row (bodycheck keeps comments)
+  ---- the one-line-function trap, pinned (NOT fixed here) ----
+  PASS   `function OneLiner() return 1 end` OVER-SPANS past its own end (pinned at 4 lines, and the next function is inside it)
+  PASS   ...and the row it produces is flagged SPAN-SUSPECT (or it is identical on both sides and produces no row)
+  PASS   duplicate declaration -> ordinal keys Dup#1/Dup#2 and MULTI
+  ---- v1.1: indented orphans (table-field methods, sequence steps) ----
+  PASS   planted change in a ONE-LINE table-field method -> kind=body, flags INDENTED+ONE-LINE
+  PASS   planted NEW table-field method -> kind=added, INDENTED
+  PASS   ⛔ the UNCHANGED sibling below the insertion (SetB) is NOT a row
+  PASS   ⛔ an indented declaration INSIDE an orphan (inner) is NOT a row
+  PASS   a change inside a NESTED local surfaces as the OUTER function's body row, and the nested local is not its own row
+  PASS   an inserted sequence step among same-named `Run` steps -> exactly ONE added row (hash-matching cancels the shifted siblings)
+  ---- v1.2: NOROWS, changed files the inventory emits no row for ----
+  PASS   ⭐ a DATA-TABLE-only change (no function touched) is LISTED, content=yes, reader=NONE — the options.lua / DLSS 2->4 shape
+  PASS   a whitespace-only file is listed but marked ws-only, so it is not mistaken for missed content
+  PASS   ⛔ a file WITH rows (Lua/A.lua) is NOT listed
+
+PART 2 — the REAL trees: the four seeded positives of chain README §4.
+         ⭐ These are the control. An inventory that cannot see them
+            is not reporting on the other 2,437 files either.
+  PASS   F114  Lua/Units/Train.lua:Train.UnloadAll  ->  body   [1.0.7 ::783 | 1.1.0 ::779]
+  PASS   F115  Lua/Landscape/Landscaping.lua:LandscapeForEachUnit  ->  body+sig   [1.0.7 .mark,callback,...:455 | 1.1.0 .map,mark,callback,...:509]
+  PASS         ...and its parameter list moved .mark,callback,... -> .map,mark,callback,...
+  PASS   F116  Lua/Buildings/TrackElement.lua:TrackGridElement.DemolishAndSplitTrack  ->  body   [1.0.7 :mass_delete,skip_track_process:448 | 1.1.0 :mass_delete,skip_track_process:467]
+  PASS   F117  Lua/_GameUtils.lua:ChooseDome  ->  body+sig   [1.0.7 .traits,domes,safety_dome,dome_elevators:426 | 1.1.0 .colonist,domes,safety_dome,dome_elevators:486]
+==============================================================================
+SELFTEST: PASS — every verdict fired on a known case
+exit=0
+
+$ tools/presetdiff.py --selftest
+==============================================================================
+PART 1 — planted fixtures
+  PASS   changed NUMERIC value -> a row, churn `none`
+  PASS   changed STRING deep in a nested table -> a row at `nested.b.deep`
+  PASS   a key ADDED -> a row (old side `<absent>`)
+  PASS   a key REMOVED -> a row (new side `<absent>`)
+  PASS   a preset ADDED -> `added-preset`
+  PASS   a preset REMOVED -> `removed-preset`
+  PASS   ⛔ a REORDER-ONLY preset produces NO ROW AT ALL
+  PASS   ⭐ T() id changed, TEXT IDENTICAL -> `T-ID`
+  PASS   ⭐ T() id changed AND TEXT CHANGED -> `none`, never T-ID (a player can see this one)
+  PASS   quote style only ('single' -> "single") -> `FORMAT`
+  PASS   `save_in` -> `SAVE-ID`
+  PASS   an UNCHANGED key produces no row
+  ---- parser defects found on the real trees, now pinned ----
+  PASS   ⛔ an embedded `function … end` is ONE value, not a shred of tokens: a changed handler is exactly ONE row carrying its source
+  PASS   ...and an UNCHANGED handler is no row at all
+  PASS   ⭐ `PlaceObj` sub-item PAIR form keys by NAME (`kids[1].Colour`), not by position
+  PASS   ⭐ inserting a child at the FRONT of a list re-indexes it, and the shifted rows are classed REINDEX, not `none`
+
+PART 2 — the REAL trees: falsify each churn RULE on its own rows.
+         ⭐ 20 random rows per class, printed for a human to read
+  ---- COMMENT: 1 rows ----
+     Data/ClassDef-PresetDefs.lua | PresetDef:SponsorGoals | [2].params
+        107: "self, state,  param1, param2, param3"
+        110: "self, state, param1, param2, param3"
+  ---- REINDEX: 10462 rows ----
+     Data/XDef/Infopanel.lua | XDef:Infopanel | [1].children[1].children[2].children[3].children[1].children[4].IconColumns
+        107: 2
+        110: <absent>
+     Data/XDef/PoliticsDlg.lua | XDef:PoliticsDlg | [1].children[22].children[1].children[3].children[2].children[1].children[1].ActionShortcut
+        107: <absent>
+        110: "Escape"
+     Data/FactionDef/Europe.lua | FactionDef:Europe | tasks[13].GenerateCondition[1][1].Tech
+        107: <absent>
+        110: "MartianEducation"
+     Data/XDef/PlanetaryView.lua | XDef:PlanetaryView | [1].children[23].children[1].children[2].children[1].children[6].children[3].children[1].children[1].children[1].OnPress
+        107: function ( self , gamepad ) local obj = GetDialog ( self ) context local spot = self.context if spot.fixed_loc then obj MoveToSelectionFixedLoc ( spot
+        110: <absent>
+     Data/XDef/DialogTitleNew.lua | XDef:DialogTitleNew | [1].children[1].TintColor
+        107: RGBA(255, 255, 255, 255)
+        110: <absent>
+  ---- REINDEX-SWAP: 1924 rows ----
+     Data/LawDef/LawDef-Governance.lua | LawDef:Policy_Apportionment_SingleParty | FactionLikes[12].Value
+        107: -300
+        110: -1500
+     Data/XDef/ipBuilding.lua | XDef:ipBuilding | [1].children[1].children[47].__class
+        107: "InfopanelButton"
+        110: "customDomeButtons"
+     Data/XDef/TouristOverview.lua | XDef:TouristOverview | [1].children[5].children[2].children[2].children[1].children[7].OnContextUpdate
+        107: function ( self , context , ) self SetRolloverText ( GetColonistsFilterRollover ( context , T ( 11616 , "Filter by Quirk." ) ) ) local hint_gamepad =
+        110: function ( self , context , ) self SetRolloverText ( GetColonistsFilterRollover ( context , T ( 11618 , "Filter by Flaw." ) ) ) local hint_gamepad = T
+     Data/XDef/GameShortcuts.lua | XDef:GameShortcuts | [1][4].children[53].ActionGamepad
+        107: "ButtonX"
+        110: "RightTrigger-ButtonY"
+     Data/ClassDef-PresetDefs.lua | PresetDef:MissionSponsorPreset | [48].id
+        107: "CostModifierPercent"
+        110: "FreeSpaceLeft"
+  ---- T-ID: 22 rows ----
+     Data/NotificationPreset.lua | NotificationPreset:HeavyWorkload | VoicedText
+        107: T(647083959110, "Heavy Drone workload")
+        110: T(294617179416, "Heavy Drone workload")
+     Data/NotificationPreset.lua | NotificationPreset:HeavyShuttleWorkload | VoicedText
+        107: T(261764915623, "Heavy Shuttle workload")
+        110: T(514739941321, "Heavy Shuttle workload")
+     Data/XDef/customMagneticFieldGenerator.lua | XDef:customMagneticFieldGenerator | [1][1].RolloverTitle
+        107: T(308, "Research Progress")
+        110: T(629514206415, "Research Progress")
+     Data/NotificationPreset.lua | NotificationPreset:NotWorkingBuildings | VoicedText
+        107: T(769547039933, "A building has stopped working")
+        110: T(576360560312, "A building has stopped working")
+     Data/NotificationPreset.lua | NotificationPreset:ToxicRains | VoicedText
+        107: T(366608314169, "Toxic Rain approaching")
+        110: T(929256152285, "Toxic Rain approaching")
+  ---- added-preset: 1471 rows ----
+     Data/PopupNotifications/PopupNotificationPreset-NewTutorial.lua | PopupNotificationPreset:Tutorial_ActiveMods | <preset>
+        107:
+        110: <added>
+     Data/TechGroup.lua | TechGroup:Habitation_1 | <preset>
+        107:
+        110: <added>
+     Data/Tech.lua | Tech:WildfireCure_10 | <preset>
+        107:
+        110: <added>
+     Data/FXPreset/ActionFXSound.lua | ActionFXSound:Sound_Jv7eiIcO | <preset>
+        107:
+        110: <added>
+     Data/TechFieldPreset.lua | TechFieldPreset:Hi-Tech | <preset>
+        107:
+        110: <added>
+  ---- none: 22738 rows ----
+     Data/FactionDef/Europe.lua | FactionDef:Europe | tasks[15].DomeFilter[1].__class
+        107: 'ScriptCheckDomeNearbyObjectsInLabel'
+        110: 'ScriptCheckDomeCanBuildSpire'
+     Data/StoryBit/Boost16_TrainingProgram.lua | StoryBit:Boost16_TrainingProgram | qa_info.data[1].user
+        107: "Boyan"
+        110: <absent>
+     Data/AssemblyChoiceDef.lua | AssemblyChoiceDef:FaithHopeCourage | goals[3].condition.Params
+        107: "self"
+        110: <absent>
+     Data/StoryBit/MedSt_IndustrialEspionage.lua | StoryBit:MedSt_IndustrialEspionage | [4].Effects[2].Effects[1].__class
+        107: 'ModifyObject'
+        110: 'ModifyColonistStat'
+     Data/StoryBit/SuperHabitableWorld_Discredited.lua | StoryBit:SuperHabitableWorld_Discredited | qa_info.data[1].user
+        107: "Assen"
+        110: <absent>
+  ---- removed-preset: 894 rows ----
+     Data/BuildingTemplate/MechanizedDepotFuel.lua | BuildingTemplate:Data/BuildingTemplate/MechanizedDepotFuel.lua#1 | <preset>
+        107: <removed>
+        110:
+     Data/ClassDef-Factions.lua | ClassDef:FactionDisaster_GlobalTension | <preset>
+        107: <removed>
+        110:
+     Data/BuildingTemplate/MegaMall.lua | BuildingTemplate:Data/BuildingTemplate/MegaMall.lua#1 | <preset>
+        107: <removed>
+        110:
+     Data/ClassDef-Factions.lua | ClassDef:FactionTaskDome | <preset>
+        107: <removed>
+        110:
+     Data/BuildingTemplate/ConcretePlant.lua | BuildingTemplate:Data/BuildingTemplate/ConcretePlant.lua#1 | <preset>
+        107: <removed>
+        110:
+==============================================================================
+SELFTEST: PASS — every verdict fired on a known case
+exit=0
+
+$ tools/desk_seam_food.py
+SEAM DESK: Lua 5.5 | lupa 2.8 (archived bodies; no runtime claim)
+pasture 1.0.7 performance=0: actual=0, expected=0, ui=None
+pasture 1.0.7 performance=48: actual=2400, expected=2400, ui=None
+pasture 1.0.7 performance=100: actual=5000, expected=5000, ui=None
+pasture 1.1.0 performance=0: actual=0, expected=0, ui=0
+pasture 1.1.0 performance=48: actual=2500.0, expected=1200.0, ui=1200
+pasture 1.1.0 performance=100: actual=2500.0, expected=2500.0, ui=2500
+counterfactual identity round helper: mismatch demand would FAIL (control discriminates)
+ingredient enabled=True registry=True vegan=False: advertised, consumed, remaining=(1, 1, 200)
+ingredient enabled=False registry=True vegan=False: advertised, consumed, remaining=(0, 1, 200)
+ingredient enabled=False registry=False vegan=False: advertised, consumed, remaining=(0, 0, 300)
+ingredient enabled=True registry=True vegan=True: advertised, consumed, remaining=(1, 0, 300)
+1.0.7: ingredient consumer absent; no equivalent ingredient behavior control claimed
+GetNextCrop 1.0.7: adjacent=B, gap-before-B=None (bounded loop; player caller not found)
+GetNextCrop 1.1.0: adjacent=B, gap-before-B=None (bounded loop; player caller not found)
+PASS: pasture branch difference and ingredient-toggle contradiction discriminate
+exit=0
+
+$ tools/seam_coverage.py
+PASS: 2955 unique items, exact input coverage and disjoint continuation ownership
+  03 CALLERS: 6
+  03b CALLERS: 6
+  03c CALLERS: 2
+  03d CALLERS: 16
+  03 INVENTORY: 396
+  03b INVENTORY: 360
+  03c INVENTORY: 284
+  03d INVENTORY: 249
+  03d NOROWS: 18
+  03b PRESETS: 1618
+exit=0

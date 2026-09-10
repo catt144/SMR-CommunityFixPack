@@ -8,9 +8,10 @@ The parent owns all writes, candidate verdicts, filing, and handoffs.
 - [x] Record the measured split and source pins; chain gates GREEN, both instrument selftests PASS.
 - [x] Read the 396-row core-food slice and adjudicate candidate leads; execute suitable
   falsifiers and file C56-C62 with checklist riders; chain gates GREEN.
-- [ ] IN PROGRESS: record explicit read coverage and continuation ownership; gates and commit.
-- [ ] Write full continuation inboxes and 04/99 outboxes, update manifest and state,
-  consume 03, run chain gates, commit and push.
+- [x] Close-out as one commit-and-verify unit: record explicit read
+  coverage and continuation ownership; write full continuation inboxes and 04/99
+  outboxes, update manifest/state, consume 03, run probe sweep and chain gates,
+  commit and push. Coverage and handoff are one reviewable change, not two commits.
 
 ## Pin and split
 
@@ -49,3 +50,7 @@ behavior cannot be settled here. EF-085 proves 1.1.0 packed bytes match Src, not
 execution. The old DLC archive is incomplete and excluded. Preset C consumers,
 anonymous functions and dynamically dispatched unchanged callers can escape the
 instruments. No report closes FR-1/2/3 without the required runtime witness.
+
+PROBE SWEEP: clean. Final receipt: 396 complete present-span reads; 2,955 unique
+assigned items, no gaps/duplicates. Doccheck, both instrument selftests, desk
+control and coverage verifier GREEN; outputs in SEAM_GATES.txt.

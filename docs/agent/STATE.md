@@ -25,9 +25,10 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   A3 (F118) · A10 · A5 c2 · A9 c4/c5 · F117's station recipe · the first `RunAll()` on the 94-probe kit (re-stamps
   `WORKFLOW.md:407`, VOID since 09-09). ⛔ Kit verdicts are PREDICTIONS until then; still FAIL/ERROR by name:
   `C47OpenFarmSeedBufferShape` (Herbs 100→50), retired `LanderCargoRatchet`/`DroneUnreachableForever`/`AutoExportPriority`.
-- ⏭ NEXT: fire `prompts/vanillahunt/03_SEAM.md` + `04_HUNT.md` (independent; may run at once; 04 = Codex Sol Ultra, no split). ✅ 02 DONE 09-10:
-  3 `*.tagged.tsv` + `TRIAGE.md` §1–§4 (`reports/vanillahunt/`), 3,699 rows agent-classified, 8 F117-SHAPE candidates, seeds 4/4 content.
-  ✅ 01 DONE (`7f7d87a`); `treediff` v1.2 adds `NOROWS.tsv`. README §2b: FR-1/2/3 field reports read FIRST. `DLC_DEEP_CHECK.md` fires AFTER 99.
+- ⏭ NEXT: `prompts/vanillahunt/03b_SEAM_PRESETS.md`, `03c_PROGRESS_SEAM.md`, `03d_CALLER_SEAM.md` + `04_HUNT.md`
+  (independent, coordinate shared writes; 04 = Codex Sol Ultra, no split). 03 DONE 09-10 with required split: 396 full present-span
+  reads, C56-C62 cand/source-read, desk controls only. Exact remaining queues/limits: `reports/vanillahunt/SEAM_REPORT.md` +
+  `SEAM_COVERAGE.tsv`; 99 waits for every continuation. 02 tagging and 01 instruments DONE; FR-1/2/3 first. DLC_DEEP_CHECK AFTER 99.
 - ⭐ PUBLISHED both portals — `pdx_id` **156049**, `steam_id` **3787202810**, tree `version` **6** (hotfix 2, 09-09).
   ⛔ Never re-upload to "fix" a version number — each upload bumps again (H-02). ⛔ Every upload OVERWRITES both
   page bodies from `metadata.lua`; `description` IS the full card (08-24). ✅ v6 auto-fill delivered BOTH pages clean

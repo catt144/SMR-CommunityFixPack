@@ -397,3 +397,53 @@ files"; that count included the one whitespace-only file.
 - 0 of the 15 pure-sig rows have a byte-identical body still reading a dropped parameter name (measured).
 - The appended-param heuristic (indexed-unguarded vs tested/passed-on) found 0 unguarded indexings; object-typed appended params were each read (all defaulted or guarded).
 - 14 unchanged caller-only files had no link until hand-assigned (tri_other.py caller-only group).
+
+
+### From 03 · close-out gate and evidence, 2026-09-10
+
+GATE: original 03's consumed prompt does NOT mean all seams are finished.
+03b_SEAM_PRESETS.md,03c_PROGRESS_SEAM.md,03d_CALLER_SEAM.md and 04_HUNT.md
+(plus any declared children) must close before this terminal audit/DLC kickoff.
+03's required ~400-row stop yielded396 complete present spans in 25 files, six
+complete caller/contract reads. Deferred:893 inventory + 1,618 presets + 24 callers+
+18NOROWS. `SEAM_COVERAGE.tsv` gives2,955 unique items and disjoint owners;
+`python tools/seam_coverage.py` verifies original-input membership and partition.
+It reproduces declared read attestations, not independently measured reading.
+
+Audit `SEAM_REPORT.md` (parent synthesis, not verbatim chaser transcripts),
+`SEAM_PLAN.md`, C56-C62, `tools/desk_seam_food.py`, `SEAM_DESK.txt`, and
+TRIAGE §03 coverage / For dlccheck. Parent owns all judgments and writes.
+Five DIFF-CAUSED, two PASSING(C59/C62). C56 accepting-producer desk mismatch
+old 2400/2400,new 2500/1200 at48 performance; C57 synthetic disabled-stock control;
+C59 bounded gap/adjacent controls both trees. C58 native requests, C60 cost and
+C61 actual death-popup outcomes unobserved. No module, metadata or game writes.
+Checklist carries fresh-fixture riders; C59/C62 lack real player recipes.
+
+Control numbers:0 eligible seeded positives; random6-row parent sample 6/6
+actual-change agreement,5/6 route precision before correcting GetCropName to
+no literal caller. Full Building.Destroy/GetUIWarning rereads repaired output
+truncation before final coverage. Rows overlap and malformed spans remain.
+All24 pending caller records stay pending even where four call lines were checked.
+
+Drift (EVERY detailed correction is in SEAM_REPORT → Drift and audit inbox):
+wrong task slash; brief guard scope3/1Lua versus10/1Lua + Data; required split;
+DLC ingredient/recipe excerpt lookup exceeded the single-function fence, stopped,
+and gives no DLC clearance; ranch zero prediction and old 1200 corrected using
+real helper and old Chicken food200; C57 one caller corrected to two, registry
+group/food-set distinction corrected; absent old FoodServiceBuilding desk path;
+localization concat and Research dot-self false positives rejected; Hungry raw-food
+flag corrected; C61 synthetic-harness possibility and owner-override caveat;
+bulk truncation resolved; GetCropName route narrowed; synthesis method/path/field
+names corrected; NOROWS `file`->`path` generator error, scratch syntax and stray
+patch sentence corrected. Initial commit messages missed PROBE SWEEP line;
+explicit clean sweep plus desk/gate reruns reverified the result for close-out.
+
+Repeated hook warning, VERBATIM:
+`  WARN kit-tree state is UNKNOWN on this run — re-run doccheck before trusting a clean kit tree`
+Standalone doccheck reported kit clean. Do not call the commit hook warning-free.
+
+FR-1(b)3/10 rows read, FR-2 zero/seven, FR-3 eleven/21; remaining keys have
+owners and no report is closed. For dlccheck must include successor verdicts:
+base classes do not establish concrete non-owner recipe instances, and missing
+literal callers do not exclude dynamic/native/DLC dispatch. The report retains
+all chain blind spots and does not rule on the DLC chain's additive premise.

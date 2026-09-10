@@ -701,3 +701,77 @@ Each agent ended with a NOTES line: contract shifts it saw outside its rows, cal
 - ⛔ **Every `CHURN` row (473) is UNREAD by anyone but the one agent that labelled it** — the self-sample (§2) is the only second read, and it is a sample.
 - The chain blind spots (README "What this hunt CANNOT see") are inherited unchanged; the seeds' hit rate says nothing about `generated` rows or `DLC/`.
 
+
+
+## §03 coverage — core food seam close-out, 2026-09-10
+
+MEASURED: original 03 =1,289 INVENTORY (929 hand/360 generated),1,618 PRESETS,
+30 CALLERS,18 NOROWS. Complete present-span reads:396 hand rows; six full
+caller/contract checks. All remaining items have disjoint owners in
+`SEAM_COVERAGE.tsv`:03b360 generated + 1,618 presets + 6 callers;
+03c284 hand + 2 callers;03d249 hand + 16 callers + 18NOROWS. Four03d callers are
+line-checked only, still pending. No tagged input was changed. The ~400-row
+stop was taken;396 is not clearance of the entire DLC-adjacent set.
+
+`SEAM_REPORT.md` is the parent's synthesis with read-group verdicts, both-tree
+routes/counterevidence, incidental-vs-complete limits, native gaps, FR subsections,
+all caught drift and control scores. `tools/seam_coverage.py` reproduces the
+2,955-item snapshot from original row keys and declared file groups; it does
+not infer reading. Later links retain this receipt and append their own.
+
+Filed C56-C62: ranch quantization/forecast, disabled ingredient consumption,
+reserved-food spoilage, bounded next-crop slot error (PASSING), unused ranch
+panel allocation (PERF), stale death-penalty popup, discarded explosion list
+(PASSING). All cand/source-read; no module or game changes. C56/C57/C59 have
+executing desk controls in `tools/desk_seam_food.py` / `SEAM_DESK.txt`; native
+and runtime outcomes remain unobserved. Runtime riders are in the owner checklist.
+
+Reader control:0 eligible seeded positives; random six-row parent sample agrees
+6/6 on actual changes,5/6 on initial route precision. GetCropName's generic UI
+route was narrowed to no literal caller. Two initially truncated Building spans
+were fully reread before completion. Overlapping/one-line spans are rows, not
+distinct functions. See report for the random seed, keys and detailed controls.
+
+### FR-1(b)
+
+Read3 of10 FR-1 rows: R05598,R07542,R07544. Base underfed/colony/funding code
+does not require DLC; non-owner execution remains in scope. Seven pending rows
+are explicit in 03c/03d. No new-game/native crash conclusion;04 owns the temporal
+upscaler lead. A zero count of explicitly DLC-guarded FR-1 rows is not clearance
+of the changed base paths. See `SEAM_REPORT.md` FR-1(b).
+
+### FR-2 and FR-3
+
+FR-2:0/7 read here;03c has4,03d3,03b relevant tech fields. FR-3:11/21 tagged
+rows read; C60's dead allocation has a profiling falsifier. Other periodic-work
+shapes and unchanged cadences are listed in SEAM_REPORT; none measures frame time
+or establishes the original 2025 stutter cause. No field report is closed.
+
+### For dlccheck
+
+The full per-seam contract is `SEAM_REPORT.md` → For dlccheck and its five
+read-group sections: services/ingredients, recipes/input reservations, crops and
+producer hooks, FungalFarm/insect names, ranch output/panel, spoilage, colonist/dome
+assignment, Building fixups/UpgradeUnlocks and death/applicant behavior. Use the
+base citations and limits; do not redo them as if unseen or extend them to
+uninspected DLC overrides. Remaining research/law/policy/cargo and preset seams
+are TAKEABLE WHEN 03b/03c/03d finish their rows, before 99's DLC kickoff.
+
+TAKEABLE WHEN DLC deep-check opens the named actual definitions/callers:
+recipe input debit versus reserved portions needs a concrete recipe + template+
+colonist pile route; crop augmentation needs an instantiated effect; ingredient
+toggle and meal behavior needs actual registration/overrides; specialized dining,
+AssignMeals and death handlers require their DLC bodies. No ordinary base recipe
+processor was established simply from the existence of its class. No broad
+claim about DLC being mostly additive was made.
+
+Guard re-derivation: base Lua3 norman/1 thomas, base Lua + Data10/1. Exact files/lines
+in SEAM_REPORT; brief's3/1 used a narrower scope. Names in 12 files is an inherited
+count, not a reproducible dependency test. Base FungalFarm exists; missing
+FarmInsect/PanoramicRestaurant classes are guarded in Building's fixup; upgrade
+literal keys are not preset dereferences. The food chaser's broader-than-allowed
+DLC definition/excerpt lookup is disclosed as scope drift, not DLC clearance.
+
+99 waits for 03b/03c/03d/04 and any declared children. Blind spots unchanged:
+assets absent from Src, native/timing/console behavior, actual execution,
+incomplete old DLC, anonymous/dynamic callers and C-consumed presets.
