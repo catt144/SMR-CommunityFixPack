@@ -19,11 +19,11 @@ parent owns every repository write, sample, verdict, filing and handoff.
 - [x] Read all 360 generated INVENTORY rows and six CALLERS items, enumerate
   generated/Data twins and actual consumers in both directions, reconcile the
   three preset reports, then run chain gates and commit the durable report.
-- [>] Falsify and file every surviving candidate in one or more race-safe
+- [x] Falsify and file every surviving candidate in one or more race-safe
   batches; add only fresh-fixture/runtime decisions to the owner checklist;
   regenerate indexes, repeat applicable desk controls, run chain gates, commit
   and push each batch immediately.
-- [ ] Close out: append 03b's named TRIAGE section and complete outboxes,
+- [>] Close out: append 03b's named TRIAGE section and complete outboxes,
   preserve exact read/not-reached receipts and limits, update README/STATE,
   consume this one-shot prompt, run the clean probe sweep and all chain gates,
   commit with explicit paths, push, and verify HEAD plus worktree state.

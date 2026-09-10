@@ -1,9 +1,9 @@
 <!-- GENERATED — never hand-edit; regenerate with: python tools/doccheck.py --regen -->
 <!-- split_bugs.py --write is the one-time MIGRATION from the retired pre-split doc, never a regeneration; verify: python tools/doccheck.py -->
 
-# Bug index — 204 rows, 169 entry files
+# Bug index — 206 rows, 171 entry files
 
-118 F + 12 D + 74 C. `seq` is the entry's position in the old BUGS.md file order;
+118 F + 12 D + 76 C. `seq` is the entry's position in the old BUGS.md file order;
 the row order below is the old index table's own. Generated from the front matter of
 `docs/agent/bugs/*.md` — edit an entry, not this file.
 
@@ -217,4 +217,6 @@ the row order below is the old index table's own. Generated from the front matte
 | 167 | C72 | Basics tutorial polls colony resources and construction state every 40–50 milliseconds | cand | P3 | source-read | [C72.md](C72.md) |
 | 168 | C73 | Infobar Food text computes available Food and immediately discards the result | cand | P3 | source-read | [C73.md](C73.md) |
 | 169 | C74 | Rare Metals Extractor hammer and MOXIE pump play no strike FX: the moment tracker looks presets up by animation INDEX while they are keyed by NAME, and the hammer/pump have no AnimMetadata presets at all — fix PROVEN LIVE (attended) | filed | P3 | MEASURED (owner console, attended) + LIVE FIX PROVEN attended + source-read | [C74.md](C74.md) |
+| 170 | C75 | The Incident's no-explosion branch never suspends new Fusion Reactor construction | cand | P2 | source-read | [C75.md](C75.md) |
+| 171 | C76 | DiscoverTech ignores all 26 authored custom costs for ordinary researchable techs | cand | P2 | source-read | [C76.md](C76.md) |
 

@@ -29,6 +29,19 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### 2026-09-10 — 140 rider: The Incident can answer two source-only candidates in one fresh fixture. **Decision: test it only if a fresh 1.1 colony naturally has two working Fusion Reactors, or leave both candidates source-only. Recommendation: fold the two reads together; neither is a release gate.**
+
+> **TAKEABLE WHEN** the fresh colony lacks Eternal Fusion and reaches The
+> Incident during a dust storm; never convert the branch-locked 1.0.7 campaign.
+> Save before answering. For [C75](agent/bugs/C75.md), take emergency shutdown,
+> reach the no-explosion aftermath, and before researching the revealed tech
+> record the Fusion Reactor build-menu entry and a pre-placed site's state. If
+> convenient, reload for the explosion branch as the control. For
+> [C76](agent/bugs/C76.md), record the revealed The Incident tech's research
+> cost on the 10,000-RP no-explosion path and the 5,000-RP explosion path before
+> any boosts. Apply each entry's vacuity/falsifier; skip the fixture if it does
+> not arise naturally.
+
 ### 2026-09-10 — 139: C74, the Rare Metals Extractor's hammer (and the MOXIE pump) play no strike sounds. You proved the fix live: the game's own code plays them once two small things are added. **Decision: build it for hotfix 3, or file and watch. Recommendation: build it — small, save-clean, and the game does the work, not a timer of ours.**
 
 > **What you measured and proved (2026-09-10, thank you):** the sounds, the
