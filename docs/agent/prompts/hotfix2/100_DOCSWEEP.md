@@ -183,8 +183,12 @@ the deleted `Fix_MeteorStormWedge:154/:165` as a precedent;
 1.1.0 moved it out of the table); `Fix_AnomalyCaveInMap.lua:106` (`:27 object_hex_grid`
 — the first `map` index is now `map.buildable`, `CaveInRubble.lua:23`);
 `tools/harvest_wrap_targets.py:174` describes the deleted `IsSuitable` replacement.
-Put the list, verbatim, in that link's inbox if it has not fired; if it has, file
-it as one checklist line under "nothing to decide".
+⚠️ **SUPERSEDED 2026-09-09 (evening): decision 127's link (`99a`) has FIRED AND
+CLOSED, so this list was orphaned. `99b_BENCH.md` §5 adopts it — same conditions
+(`Code/`, game closed) — and fires BEFORE this sweep.** ⛔ Do not re-file it and do
+not re-fix it: check `99b`'s close-out first and, if it ran, treat the list as
+already drained. If `99b` did NOT run, file the list as one checklist line under
+"nothing to decide" as originally written.
 
 ⛔ **Do NOT touch:** `metadata.lua`'s `PackVersion` gloss (`:226`, `:243`, `:336`)
 — UNVERIFIABLE from source on either branch, not false, rewritten twice already;
