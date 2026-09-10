@@ -24,7 +24,9 @@ Paradox's 2 MB), `*/store_screenshots/*` in `ignore_files` + pack_predict (50 pa
 ignored). ⚠️ Description 6,206 chars, Paradox untested above 5,342. ⚠️ The owner's
 "Metal Extractor 1" circles the stacked-squares button, not Change Skin (the paintbrush) —
 zoom-verified; owner to fix and re-run the script before upload. The "Water Extractor" image
-is the MOXIE (owner confirmed).
+is the MOXIE (owner confirmed). ✅ Same evening: owner supplied `Metal Extractor 1 -
+corrected.png` (circle on the paintbrush, zoom-verified; a faint ghost of the brush remains
+beside it); `store_screenshots.py` now reads it and the gallery JPG was rebuilt.
 
 ---
 

@@ -22,7 +22,8 @@ LIMIT = 1_000_000  # Steam's cap is 1 MiB; keep a margin
 # gallery order = screenshot1..3 in metadata.lua
 MAP = [
     ("Metal Extractor 2.png", "1_rare_metals_drill_skin.jpg"),
-    ("Metal Extractor 1.png", "2_rare_metals_hammer_skin.jpg"),
+    # the original circled the stacked-squares button; the corrected copy circles Change Skin
+    ("Metal Extractor 1 - corrected.png", "2_rare_metals_hammer_skin.jpg"),
     ("Water Extractor.png", "3_moxie_skins.jpg"),  # the owner's file shows the MOXIE
 ]
 
