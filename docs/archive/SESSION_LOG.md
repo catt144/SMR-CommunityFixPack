@@ -8,6 +8,22 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-10 — ck143 RULED FIX; `prompts/C83_FIX.md` written (`smr-bugfixpack-04`, owner in conversation)
+
+tags: C83 ck143 Fix_ArrivalDeaths prompt
+
+Owner asked whether C83 needs more diagnosis; answer: no — one read closed the gap
+(`Community:HasLifeSupport` = water and (breathable or power and air), `Community.lua:462-463`;
+an unassigned arrival goes Confused at the pad, `Colonist.lua:1625-1626`). Design, desk-derived:
+extend `Fix_ArrivalDeaths`' `Colonist:Idle` pre-wrapper with a welcoming test (vanilla's local
+`is_welcoming_community`, copied), re-choose with the nearest welcoming dome as safety (min of
+`dome_dist` — the station sweep appends after the sort), stand down when none is welcoming.
+Arrival-only; declines by construction if vanilla fixes it. Prompt step 0 re-derives; steps 1–2
+check the homeless follow-through and the opt-in pack's D03 hook; step 9 = the owner's
+pre-landing save. Gated on the C74 build (Codex) committing first — shared tree.
+
+---
+
 ## 2026-09-10 — C83 filed from a Steam report, reproduced by the owner the same hour (`smr-bugfixpack-04`, owner attended)
 
 tags: C83 ck143 F53 arrivals safety_dome quarantine field-report steam

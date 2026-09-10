@@ -103,6 +103,7 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   self-check-promise decisions (`reports/SELFCHECK_PROMISE_COMBINED.md` §7), routed 09-09 · **134** assign the vanillahunt
   chain's models (5 links; rec 03 + 99 Fable), routed 09-10 · **139 RULED 09-10: BUILD** all seven `C74`+`C77`
   hit-moment FX units (no Metatron) — `prompts/C74_BUILD.md` is TAKEABLE (adds the old-save load pass + dev-fix decline rules).
+  **143 RULED 09-10: FIX** `C83` (P1, OBSERVED: arrivals fall back into a dead quarantined dome) — `prompts/C83_FIX.md`, after the C74 build commits.
 - 73 blame surface — harden or not · 76 confirm (a) was a ruling not a leaning · 53 harden now or in 1.0.1
   (rec 1.0.1) · 51 both-packs leg timing (rec after launch) · 50 chain-vs-replace wording · 47 two modder-page
   wordings · 43 opt-in pack re-tick · 41 dialog wording + sweep cap 5→8 · 40 `smr_shuttles` name · 39 dialog re-fire.

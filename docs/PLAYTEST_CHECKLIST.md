@@ -29,7 +29,9 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
-### 2026-09-10 — 143: new arrivals with nowhere to live get sent into a switched-off, quarantined dome with no life support, and suffocate ([C83](agent/bugs/C83.md)). You reproduced it. **Decision: fix it for hotfix 3, or file and watch. Recommendation: fix it — colonists die, and the game already does the right thing in its elevator case.**
+### ✅ 2026-09-10 — 143 RULED: **FIX** — new arrivals sent into a switched-off, quarantined dome ([C83](agent/bugs/C83.md)). Fix prompt: `agent/prompts/C83_FIX.md`; fire it with *task docs/agent/prompts/C83_FIX.md* once the C74 build has committed (the prompt checks). Owed from you at the end: one short in-person check from your pre-landing save.
+
+Original question, kept as asked: new arrivals with nowhere to live get sent into a switched-off, quarantined dome with no life support, and suffocate. You reproduced it. **Decision: fix it for hotfix 3, or file and watch. Recommendation: fix it — colonists die, and the game already does the right thing in its elevator case.**
 
 > **What you saw (2026-09-10, thank you):** two domes in walking range of the pad, the
 > nearer one switched off, quarantined and unconnected. The rocket's colonists split — some
