@@ -10,7 +10,7 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 ## Now
 - ⭐ **v7 IS LIVE** (2026-09-10, owner's word; Steam page read: updated 3:59pm PT, 325.512 KB, "Forty-eight", 3 gallery images,
   change notes carry v7): C74+C77 `SilentHitMomentFX` + C83 `ArrivalDeaths`. Tree `version` **7**, `pdx_version` "6" (PDX display
-  lags by one, ck71: never chase). ⚠️ Paradox page unread (JS-only): MOD VER., gallery, whole 6,206-char body OWED from the owner.
+  lags by one, ck71: never chase). ✅ Owner: both pages correct after the §3 paste (for formatting); Steam shows no version number.
 - v6 = hotfix 2 (09-09): 36 modules DELETED (1.1.0 fixes them), 10 re-copied; `prompts/hotfix2/README.md`, `reports/HOTFIX_2_AUDIT.md`.
   ⚖️ Owner rule 09-08: a patch note saying "Fixed" is a **CLAIM, false until we confirm it**.
 - ⛔ GAME **1.1.0.403908** + DLC shipped 2026-09-08 (`EF-075`); installed Steam build still **24995074** = the archived 1.1.0

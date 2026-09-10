@@ -8,6 +8,17 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-10 night (addendum) — the owner's store receipt for v7 (`smr-bugfixpack-f0`)
+
+tags: release v7 store-card paste
+
+Owner, with screenshots of the Steam page + change notes: "Everything seems to be correct, I had
+to use the copy and paste ones to get the formatting right but thats ok I am used to the workflow
+now. Steam doesn't show a v number". Recorded in STORE_CARD_LIVE, STATE, the checklist receipt
+(asks retired); UPLOAD_WORKFLOW §5 item 1 now asks only for Paradox's number.
+
+---
+
 ## 2026-09-10 night — POST_UPLOAD close (v7): writeback with the comments restored, Steam + site read live, outbox cleared (`smr-bugfixpack-f0`, owner in conversation)
 
 tags: release v7 POST_UPLOAD writeback C74 C77 C83 store-card screenshots

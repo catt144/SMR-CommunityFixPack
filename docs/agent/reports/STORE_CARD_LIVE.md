@@ -454,6 +454,13 @@ unknown this cycle). **Paradox: UNREAD** — the page is JavaScript-only from he
 shell). Whether its gallery took the three images and whether the 6,206-char body arrived
 whole are OWED from the owner (checklist receipt 2026-09-10); until then **5,342** stays the
 largest Paradox-accepted length on record.
+✅ **Owner, same night (verbatim):** "Everything seems to be correct, I had to use the copy and
+paste ones to get the formatting right but thats ok I am used to the workflow now. Steam
+doesn't show a v number". ⇒ Both pages carry the §3 paste blocks (pasted for FORMATTING, not
+because auto-fill failed — auto-fill's own result was not observed this cycle). The Paradox
+UPLOAD path accepted the 6,206-char `description` (the upload returned `pdx_version` "6"); what
+the page shows is the pasted block. The owner's Steam screenshot shows all three gallery images.
+Paradox's gallery was covered only by "everything seems to be correct", not itemised.
 
 ## Provenance of the headliners
 

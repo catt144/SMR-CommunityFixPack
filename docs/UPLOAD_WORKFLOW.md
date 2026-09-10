@@ -348,7 +348,7 @@ Give it a minute, then check the fix list page shows the new entry.
 
 Four things, and then you are done:
 
-1. The **version number each store shows**.
+1. The **version number the Paradox page shows** (Steam shows none — confirmed 2026-09-10).
 2. **Whether the descriptions filled themselves**, or you had to paste. This is
    the one we do not know yet.
 3. Anything else that **looked wrong** on either page.

@@ -37,11 +37,10 @@ completed tests move whole to
 > `c58eea7e3b51de227adf1759e7bbc61e`. The site's fix list shows 48 entries. `metadata.lua` has
 > its comments back; version 7 kept exactly as the upload left it.
 >
-> **Tell me (none blocks anything):** (1) the MOD VER. the Paradox page shows; (2) whether the
-> Paradox page shows all three screenshots and the full description down to "Source, and the
-> reasoning behind every fix" — Paradox had never taken a description this long; (3) whether
-> either description filled itself or you pasted — Steam's page has bold text, which the
-> automatic text does not have, so it looks pasted.
+> ✅ **Your answer, same night:** "Everything seems to be correct, I had to use the copy and
+> paste ones to get the formatting right" — both pages carry the pasted, formatted text, and
+> Steam shows no version number. The upload itself accepted the 6,206-character description.
+> Nothing more is asked here (the Paradox version display is never chased, item 71).
 >
 > **Now postable:** the two Steam replies for the C74 and C83 reporters
 > (`agent/reports/FIELD_REPORT_REPLIES.md`, "Steam comments answered by the v7 update").
