@@ -39,25 +39,46 @@ completed tests move whole to
 > audit answers each report for you in one paragraph. `DLC_DEEP_CHECK.md` got
 > FR-1's DLC half.
 >
-> **Ask 1 — get one log from one affected Linux player (FR-1). Recommended:
-> yes.** The chain can only name Lua candidates, and the crash is most likely
-> native (the last Proton-only failure, `F102`, was a shader/asset problem
-> below Lua). The log must be from **`Mars.exe`, from a new game that
-> crashed**. A Lua error prints in it; a native crash prints none but cuts the
-> log short, so its last lines name the phase that died. **Ask each reporter
-> for their GPU vendor too** — `F102` hit NVIDIA only, and the one log posted
-> so far is NVIDIA as well.
+> **Ask 1 — evidence from one affected Linux machine (FR-1). Recommended:
+> yes, and it is now the most valuable item here.** The chain can only name
+> Lua candidates. A second report (relayed 2026-09-10) says it is an INSTANT
+> crash to desktop, it survives an uninstall and reinstall, it happens on a
+> clean install with no mods, and there is no crash report or popup. That
+> rules out mods and our pack. It also points below the game's Lua: the
+> project has watched a vanilla Lua error throw 157 times in one session while
+> the game kept running (`F114`), so a Lua error does not end the process, and
+> a crash to desktop does. ⛔ "No popup" proves nothing either way: on a no-mod
+> install the engine shows no popup for a Lua error (`EF-065`).
+>
+> **What to ask for, in order of value:**
+> 1. **Proton's own log.** Add the Steam launch option `PROTON_LOG=1 %command%`,
+>    then reproduce the crash. Valve's documented switch writes
+>    `steam-3215050.log` in the home folder, and it records the crash on the
+>    Wine side, where the game itself cannot.
+> 2. **The game's `Mars.exe` log** from that same crashed attempt. ⚠️ The engine
+>    writes the last stretch of its log only at a clean exit (`EF-047`), so
+>    after a crash the end may simply be missing. It is useful for what it
+>    shows (GPU, driver, how far startup got), not for where it stopped.
+> 3. **Four one-line answers.** Does loading a saved game also crash, or only a
+>    new game? At exactly what moment: clicking New Game, mission setup, the
+>    loading screen, or the first frame of the map? Does it stop crashing with
+>    *Feeding the Future* disabled in Steam? GPU brand and driver version?
+>
+> ⛔ Before anyone posts instructions to players, an agent confirms the log
+> locations and the `PROTON_LOG` step by walking them. The thread's author
+> asked where logs live and nobody has answered, so that answer has to be
+> right. Whether a reinstall also clears the Proton prefix and Steam's shader
+> cache for this game is not verified, so don't advise deleting them until it
+> is.
 >
 > ⭐ **The log a player already posted (2026-09-08) is useful, but it is not
 > the crash.** It is `MarsDebug.exe` running the mod editor's Preset Editor,
 > which ran for 8 seconds and quit normally. What it does prove: logs ARE
 > written under Proton, with the same naming as ours; the engine detects
 > Proton (`Proton/Wine: 11.0`) while the game's Lua still believes it is plain
-> Windows (no `linux` platform flag); the GPU is NVIDIA; and D3D12's crash
-> diagnostics are unavailable under Proton (`Failed activating D3D12 Dred`).
-> ⛔ Before anyone tells a player where the log is, an agent checks the
-> location under Proton by walking the route. The thread's author asked where
-> logs live and nobody has answered, so that answer has to be right.
+> Windows (no `linux` platform flag); the GPU is NVIDIA, as in `F102`; and
+> D3D12's crash diagnostics are unavailable under Proton (`Failed activating
+> D3D12 Dred`).
 >
 > **Ask 2 — commission a code-side performance pass over the WHOLE tree for
 > FR-3? Recommended: decide after the chain's audit (99).** The diff can only

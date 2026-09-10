@@ -248,11 +248,42 @@ settings; the menu loads, starting a new game crashes.)
   and **FR-1(b)** in 03's — every FR-1 row read, its verdict, candidates
   ranked, a NOT-reached list. ⛔ "No Lua cause found" is written as the
   surfaces read, never as "not a Lua bug". ⭐ The falsifier that beats every
-  source read is **one `Mars.exe` log from an affected player's crashed
-  new-game attempt** — a Lua error prints there; a native crash prints none but
-  cuts the log short, so its LAST lines name the phase that died (video mode,
-  shader compile, map load, first sol). The owner's to obtain, routed as
-  checklist 136.
+  source read is **evidence from one affected machine** (the owner's to obtain,
+  checklist 136): Proton's own log (`PROTON_LOG=1 %command%` as a Steam launch
+  option — Valve's documented switch, writing `steam-3215050.log` in the home
+  folder; ⛔ route-check before any player is told) records the fault on the
+  Wine side, where the game cannot; plus the game's own `Mars.exe` log. ⚠️
+  **`EF-047`: the engine flushes a large log tail only at process EXIT**, so a
+  hard crash can lose the game log's last lines entirely — quote that log for
+  what is PRESENT (GPU, driver, Proton version, DLC load, how far startup got),
+  never for where it stopped.
+- ⭐ **Second report (Steam, relayed by the owner 2026-09-10): an INSTANT crash
+  to desktop, persisting through uninstall/reinstall, on a confirmed clean
+  no-mod install, with no crash report or popup of any kind.** What it settles
+  and what it does not:
+  - ⇒ **Not a mod, and not our pack** — vanilla.
+  - ⇒ **Points further below Lua.** MEASURED here: vanilla Lua errors do not
+    end the process — `F114`'s thread threw 157 times, every 6 s of game time,
+    across a ~42-minute session, and the game kept running. A crash to desktop
+    is the PROCESS dying, which a Lua error, on everything this project has
+    watched, does not do. So the Lua-visible levers are the ones that can kill
+    a process FROM Lua — (a)'s NEW engine/native calls (a C function handed a
+    value it does not check), (c)'s new assets, (d)'s engine settings. **Read
+    those rows ahead of the rest of FR-1.**
+  - ⛔ **"No popup" does NOT discriminate.** The engine's Lua-error message box
+    fires only when a MOD's path is in the error's stack (`EF-065`), so on a
+    clean install a vanilla Lua error shows no popup either.
+  - ⚠️ "Persists through reinstall" rules out damaged game files. Whether a
+    reinstall also clears the Proton prefix and Steam's shader pre-cache for
+    app `3215050` is UNVERIFIED here — route-check before anyone is advised to
+    delete them.
+  - ⭐ **The cheapest discriminators, for the owner to ask reporters**
+    (checklist 136): does LOADING a save also crash, or only a new game
+    (only-new-game ⇒ new-game / map-generation code, surface (a); both ⇒ the
+    shared map-entry and render path, (c)/(d)); at WHICH moment (clicking New
+    Game, the mission setup screen, the loading screen, the first frame of the
+    map); does it stop with the DLC disabled in Steam (⇒ FR-1(b)); GPU vendor
+    and driver.
 
 **FR-2 · "Deep scanning with probes reveals no deep resources."** (Steam,
 2026-09-08, two players; intermittent; one says a clean reinstall fixed it,
