@@ -1,9 +1,9 @@
 <!-- GENERATED — never hand-edit; regenerate with: python tools/doccheck.py --regen -->
 <!-- split_bugs.py --write is the one-time MIGRATION from the retired pre-split doc, never a regeneration; verify: python tools/doccheck.py -->
 
-# Bug index — 207 rows, 172 entry files
+# Bug index — 211 rows, 176 entry files
 
-118 F + 12 D + 77 C. `seq` is the entry's position in the old BUGS.md file order;
+118 F + 12 D + 81 C. `seq` is the entry's position in the old BUGS.md file order;
 the row order below is the old index table's own. Generated from the front matter of
 `docs/agent/bugs/*.md` — edit an entry, not this file.
 
@@ -204,7 +204,7 @@ the row order below is the old index table's own. Generated from the front matte
 | 154 | C59 | Unused GetNextCrop helper checks the same empty crop slot three times and misses the next planted slot | cand | P3 | source-read | [C59.md](C59.md) |
 | 155 | C60 | Ranch infopanel updater allocates and fills a resource-id list that it never reads | cand | P3 | source-read | [C60.md](C60.md) |
 | 156 | C61 | Non-natural death popup still promises two lost applicants after the base death code removed that penalty | cand | P3 | source-read | [C61.md](C61.md) |
-| 157 | C62 | Building explosion body collects a local list of destroyed buildings that is never consumed | cand | P3 | source-read | [C62.md](C62.md) |
+| 157 | C62 | Hostage Situation building explosion collects a local list of destroyed neighbors that is never consumed | cand | P3 | source-read | [C62.md](C62.md) |
 | 158 | C63 | A faction disaster can run forever after its faction loses every legislature seat | cand | P2 | source-read | [C63.md](C63.md) |
 | 159 | C64 | A completed Faction Opportunity's temporary approval bonus can become permanent | cand | P2 | source-read | [C64.md](C64.md) |
 | 160 | C65 | The Earth Council introductory popup lost its only caller in 1.1.0 | cand | P3 | source-read | [C65.md](C65.md) |
@@ -220,4 +220,8 @@ the row order below is the old index table's own. Generated from the front matte
 | 170 | C75 | The Incident's no-explosion branch never suspends new Fusion Reactor construction | cand | P2 | source-read | [C75.md](C75.md) |
 | 171 | C76 | DiscoverTech ignores all 26 authored custom costs for ordinary researchable techs | cand | P2 | source-read | [C76.md](C76.md) |
 | 172 | C77 | Five units' animation-moment FX never play — The Excavator dust, Shuttle Hub landing/take-off, Water Extractor pump, RC Terraformer, RC Driller: TrackAllMoments finds zero moments because no AnimMetadata preset exists for their entities (C74's second half, on a correct tracker) | filed | P3 | Water Extractor: MEASURED + LIVE FIX PROVEN attended on both skins (owner, 2026-09-10), plus a third, Water-Extractor-only start-order defect source-derived and matched live; Excavator/Shuttle/RC Terraformer/RC Driller source-read | [C77.md](C77.md) |
+| 173 | C78 | Astrogeologist old-save fixup fails to remove the profile's actual 10% extractor modifiers before applying the new bonuses | cand | P2 | source-read | [C78.md](C78.md) |
+| 174 | C79 | Scenario tech reveals discard their authored research costs and apply the same 20% boost instead | cand | P2 | source-read | [C79.md](C79.md) |
+| 175 | C80 | A traveler can call GetPos on a destroyed paired elevator because the validity check comes one line too late | cand | P2 | source-read | [C80.md](C80.md) |
+| 176 | C81 | The infobar now rescans every power, water and oxygen grid's visible buildings once per second | cand | P3 | source-read | [C81.md](C81.md) |
 

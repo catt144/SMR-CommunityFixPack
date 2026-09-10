@@ -29,6 +29,25 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### 2026-09-10 — 141 rider: vanillahunt 04 left three functional candidates and two profiling reads; none is a release gate. **Decision: take only a naturally available 1.1 fixture, or leave them source-only. Recommendation: prioritize C79; take C80 only on a disposable elevator save, and leave the profiling reads until a large colony already exists.**
+
+> **TAKEABLE WHEN** a fresh 1.1 colony naturally reaches the named surface;
+> never convert the branch-locked 1.0.7 campaign. [C79](agent/bugs/C79.md):
+> immediately after an authored `SA_RevealTech` event, record the target's
+> required/remaining points and all boosts (Mystery 10's 3,000 or Wildfire's
+> 90,000 are strong discriminators). [C80](agent/bugs/C80.md): on a disposable
+> save, order a traveler into an elevator and finish demolition during entry;
+> record the log and traveler command/location. [C81](agent/bugs/C81.md): only
+> with an attributable profiler and a large fragmented grid, compare the three
+> per-second visibility scans with a counterfactual. [C62](agent/bugs/C62.md):
+> only if Hostage Situation naturally reaches its detonation with neighboring
+> buildings, profile the unused allocation. Apply each entry's vacuity test.
+>
+> [C78](agent/bugs/C78.md) is **not owner-takeable on this Steam install**:
+> Steam blocks 1.0.7 saves before its Astrogeologist migration route. It needs
+> a supported non-Steam old-save tester; do not override or convert the owner's
+> campaign to manufacture it.
+
 ### 2026-09-10 — 140 rider: The Incident can answer two source-only candidates in one fresh fixture. **Decision: test it only if a fresh 1.1 colony naturally has two working Fusion Reactors, or leave both candidates source-only. Recommendation: fold the two reads together; neither is a release gate.**
 
 > **TAKEABLE WHEN** the fresh colony lacks Eternal Fusion and reaches The
