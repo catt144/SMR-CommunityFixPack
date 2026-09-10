@@ -97,8 +97,11 @@ description that actually auto-fills the page): this file, **`metadata.lua`'s
 `description`** (the auto-fill source that ships inside the mod — the plain block),
 and **`docs/UPLOAD_WORKFLOW.md`'s embedded backup copies** (owner-facing, so the
 owner never leaves the workflow to paste). Any count or headliner change touches
-all three. ⭐ Fast check: `grep -o 'Eighty[a-z-]* repairs' metadata.lua` and the
-same count word in `STORE_CARD_LIVE.md` and `UPLOAD_WORKFLOW.md` must all match.
+all three. ⭐ Fast check: `grep -oE '[A-Z][a-z]+(-[a-z]+)? repairs' metadata.lua`
+and the same count word in `STORE_CARD_LIVE.md` and `UPLOAD_WORKFLOW.md` must all
+match — and match §1's `grep -c`. ⛔ The word is whatever the count is TODAY,
+never a number carried in this sheet: this line said *Eighty* through a sweep
+that recounted the card to forty-six (hotfix 2, 2026-09-09).
 
 | block | line marker | format |
 |---|---|---|
@@ -107,9 +110,10 @@ same count word in `STORE_CARD_LIVE.md` and `UPLOAD_WORKFLOW.md` must all match.
 
 Both carry the same claims. Edit **both**, then diff them by eye.
 
-**The count is a WORD, not a numeral** — *"Eighty repairs"*, spelled out — and it
-is derived from §1's `grep -c`, never from the last value written here (this line
-itself said *"Seventy-nine"* one sweep after that stopped being true). Update it
+**The count is a WORD, not a numeral** — the count word on the card, spelled out —
+and it is derived from §1's `grep -c`, never from the last value written here
+(this line itself said *"Seventy-nine"* one sweep after that stopped being true,
+and *"Eighty"* for the two sweeps after that). Update it
 in both blocks. ⭐ The count is only safe
 because the reader can check it on the page the card links to; if that link ever
 breaks, the count must come out.
@@ -256,8 +260,8 @@ If the fix answers an open field report, the reply is part of shipping it.
    invisible to every player** until the owner runs *Actions → Publish docs site
    → Run workflow*. ⭐ That collides head-on with §2: the store card's count is
    only safe *"because the reader can check it on the page the card links to."*
-   Paste a card claiming **eighty** while the deployed site still lists
-   **seventy-nine** and the card is falsifiable by the first person who counts.
+   Paste a card claiming one count while the deployed site still lists
+   another and the card is falsifiable by the first person who counts.
    ⛔⛔ **RULED 2026-08-24 BY THE OWNER — THE ORDER IS THE OTHER WAY ROUND, AND
    THIS LINE USED TO SAY THE WRONG THING.** It said *"the site deploy MUST precede
    the card paste."* Owner: *"people have to actually go to GitHub to see changes,
@@ -269,7 +273,7 @@ If the fix answers an open field report, the reply is part of shipping it.
      description (§2). That is a visible regression on the page **every visitor
      lands on**, and it lasts exactly as long as the paste is delayed.
    * The count mismatch is a **theoretical** exposure: it costs someone only if
-     they read *"Eighty repairs"*, click through to the fix list, and count.
+     they read the count word, click through to the fix list, and count.
    ⇒ Do not hold the store pages hostage to a deploy. Paste, then deploy.
 
    ⚠️ **The count constraint is not cancelled, it is REPRICED.** It still binds

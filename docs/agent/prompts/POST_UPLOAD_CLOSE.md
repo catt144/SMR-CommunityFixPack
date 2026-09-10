@@ -56,7 +56,10 @@ only decidable now.
   not exist, write that on the sheet and move on — nothing else to do.
 - **§0.5(f)** — the delivered-bytes check. The blank row was filled **at pack
   time** with the real md5/bytes/entry count. If the owner gives you the path to
-  the downloaded pack, md5 it yourself and compare; expect **82 entries**.
+  the downloaded pack, md5 it yourself and compare. The entry count to expect
+  is whatever `python tools/pack_predict.py <mod-root>` emits for the tree at
+  the release commit — ⛔ never a number carried in this sheet (the one it
+  carried until 2026-09-09 was the v1.0.0 pack's, three uploads stale).
   ⛔ **Never write an md5 you did not compute from a real file.** ⚠️ File-level
   only — `H-09` makes a behavioural check on this rig measure the junction.
 - **The tag does NOT move.** `fixpack-v1.0.0` marks the bytes that were packed and

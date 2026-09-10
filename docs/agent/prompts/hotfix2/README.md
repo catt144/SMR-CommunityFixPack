@@ -162,13 +162,8 @@ read it before any row of the main report.
 
 Game source: the 1.1.0 tree at
 `A:\SteamLibrary\steamapps\common\Project Spark\ModTools\Src`. The 1.0.7 tree is
-GONE (`EF-075`) — every "1.0.7 said X" is our module's own header or a bug entry,
-never a re-read.
-
-> ⚠️ **ROUTED, NOT FIXED (99a, 2026-09-09 — for `100_DOCSWEEP`).** The paragraph
-> directly above is **stale and load-bearing**: the 1.0.7 tree is **archived, not
-> gone**, at `C:\Dev\SMR-SrcArchive\1.0.7.396349\Src` (`ad5f93d`, `EF-075`), and
-> 99a read both trees side by side for every claim it made. Left alone here
-> because it is outside 99a's four-item fence — it belongs to the same "1.0.7
-> tree is GONE" seed `100_DOCSWEEP` already carries for `README.md:137`, and this
-> is a **second instance of it** that the seed list does not name.
+**ARCHIVED, not gone** — `C:\Dev\SMR-SrcArchive\1.0.7.396349\Src` (`ad5f93d`, a
+sha256 manifest beside it; `EF-083`) — so every "1.0.7 said X" CAN be a re-read
+of the shipped 1.0.7 body, and from link 04 onward every body diff was two-sided.
+*(Corrected 2026-09-09 by `100_DOCSWEEP`: this paragraph said "GONE (`EF-075`)"
+from 09-08 until then; 99a routed it here as a second instance of that seed.)*

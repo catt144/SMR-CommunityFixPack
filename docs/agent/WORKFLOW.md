@@ -414,6 +414,12 @@ issue because we should be compatible as well."*
    OUTERMOST).** Every "the pack" claim names WHICH pack. An opt-in-mod line
    in a fix-pack leg's log is expected background: attributed, never flagged
    as foreign.
+   ⛔ **THAT SUITE BASELINE IS VOID as of 2026-09-09 (`100_DOCSWEEP`).** It was
+   measured on the 74-module pack against game 1.0.7; the pack is now 44
+   modules, the kit is a different 94-probe set rebuilt for 1.1.0 (32 of them
+   `retired`), and the game is 1.1.0. The new baseline is the next attended
+   `SMRTest.RunAll()` after the hotfix-2 upload, which re-stamps this line —
+   none is written here.
 2. **Same confound rule as cheats:** a loaded opt-in module is only a confound
    where the reading intersects what it changes (D09 dials touch drone
    speed/carry; NoHomeless/CohortHousing move colonists; MultipleSuns touches
