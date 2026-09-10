@@ -28,6 +28,7 @@ IGNORE = [
     "*/tools/*",
     "*README.md",
     "*CLAUDE.md",
+    "*AGENTS.md",
     "*.gitignore",
     "*.gitattributes",
 ]

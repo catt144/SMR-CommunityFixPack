@@ -163,7 +163,7 @@ def main():
 
     # ── packaging: what actually ships ───────────────────────────────────────
     ignore = md.get("ignore_files", [])
-    for pat in ("*/docs/*", "*/tools/*", "*CLAUDE.md", "*.git/*"):
+    for pat in ("*/docs/*", "*/tools/*", "*CLAUDE.md", "*AGENTS.md", "*.git/*"):
         check(pat in ignore, "ignore_files carries %s" % pat, "present",
               "MISSING — that content would ship inside the player's download")
 

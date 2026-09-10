@@ -3,7 +3,8 @@
 ## Reading path for a new session
 
 1. `docs/agent/STATE.md` — current state: authoritative build counts, open
-   owner decisions, next gates (`CLAUDE.md`, auto-loaded, points here).
+   owner decisions, next gates (`CLAUDE.md`, auto-loaded, points here; `AGENTS.md`
+   is its byte-identical Codex mirror — any edit hits both).
    Session history lives in `docs/archive/SESSION_LOG.md` (append-only,
    newest first).
 2. `docs/agent/facts/INDEX.md` — one row per proven engine behavior (several
@@ -895,7 +896,12 @@ say what the owner reads afterwards. Owner-facing record of the decision:
   (`ModTools\Src\CommonLua\Classes\GedModEditor.lua:678-741`), so everything
   unlisted ships inside the player's download. Nothing *runs* (only `code`-listed
   files execute), but `CLAUDE.md` is agent instructions and does not belong on a
-  player's disk. ⭐ **Re-derived per mod 2026-08-13 (`public-docs/02_QA.md`) —
+  player's disk. ⭐ 2026-09-10: `AGENTS.md` (the Codex mirror of `CLAUDE.md`)
+  joined the list — `*AGENTS.md` sits in `metadata.lua`'s `ignore_files`, in
+  `tools/pack_predict.py`'s own copy of that list, and in `upload_preflight.py`'s
+  check, all three together; the predictor does NOT read `metadata.lua`, so a
+  pattern added in one place only makes the predicted count lie.
+  ⭐ **Re-derived per mod 2026-08-13 (`public-docs/02_QA.md`) —
   the three lists are NOT the same:**
   | mod | add |
   |---|---|
