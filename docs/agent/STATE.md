@@ -25,7 +25,8 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   A3 (F118) · A10 · A5 c2 · A9 c4/c5 · F117's station recipe · the first `RunAll()` on the 94-probe kit (re-stamps
   `WORKFLOW.md:407`, VOID since 09-09). ⛔ Kit verdicts are PREDICTIONS until then; still FAIL/ERROR by name:
   `C47OpenFarmSeedBufferShape` (Herbs 100→50), retired `LanderCargoRatchet`/`DroneUnreachableForever`/`AutoExportPriority`.
-- ⏭ NEXT: `prompts/DLC_DEEP_CHECK.md` (owner-raised; kickoff line + what changes its shape: `reports/vanillahunt/HUNT_AUDIT.md` §8).
+- ⏭ NEXT (owner 09-10): **FR-1 Linux** `prompts/FR1_LINUX_SITTING.md` once the 3070 laptop boots Mint (ck136); THEN
+  `prompts/DLC_DEEP_CHECK.md` (shape: `reports/vanillahunt/HUNT_AUDIT.md` §8). Owner: upload v7 → `RELEASE.md` §4–5; ck144.
   vanillahunt CLOSED 09-10 (99): instruments SOUND WITH STATED GAPS — 1,281 table-level hunks in 368 rowed hand files listed by
   no instrument (§1.4); 12 P2s re-derived: 6 hold, 5 weakened, **C80 REFUTED**; **C82** filed by the audit (Incident reactors stay
   off); every P2 is a gain/cosmetic except C82/C66/C63; ck142 = hotfix-3 list (rec none). FR-1/2/3 OPEN; FR-1 needs the Linux sitting.

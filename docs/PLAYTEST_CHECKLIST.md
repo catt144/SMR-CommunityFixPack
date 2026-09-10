@@ -29,6 +29,17 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### 2026-09-10 — 144: two small asks around the v7 upload; neither blocks it.
+
+> **(a) The v6 check you still owe** (one boot: a handful of hotfix-2 checks plus the first
+> full run of the test kit — STATE's "OWED" line). **Decision: run it on your first v7 boot, or
+> later. Recommendation: first v7 boot — one sitting covers both versions.**
+>
+> **(b) The Steam sounds thread:** did you post the long reply (restored / silent on purpose /
+> can't fix or haven't nailed down / still checking), and which version? If it says "still
+> checking", two small leads (a Drone Hub effect, one misspelled animation name) are owed a
+> check and a follow-up post. Just say which you posted; the next free session does the rest.
+
 ### ✅ 2026-09-10 — 143 CLOSED: **FIX BUILT + TESTED-ATTENDED** — new arrivals no longer fall back into a switched-off, quarantined dome ([C83](agent/bugs/C83.md)).
 
 Original question, kept as asked: new arrivals with nowhere to live get sent into a switched-off, quarantined dome with no life support, and suffocate. You reproduced it. **Decision: fix it for hotfix 3, or file and watch. Recommendation: fix it — colonists die, and the game already does the right thing in its elevator case.**

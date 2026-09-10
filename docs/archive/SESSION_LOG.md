@@ -8,6 +8,29 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-10 — lookback at the owner's stop (`smr-bugfixpack-04`): what lived only in the conversation
+
+tags: lookback handoff FR-1 v7 ck144 steam-sounds-thread memory
+
+Owner stopped the session and named FR-1 (Linux) next. Handoff: `prompts/HANDOFF_FR1_2026-09-10.md`.
+This session's arc: consumed the silent-FX handoff (C75 1.0.7 citations), answered the owner's
+C74 questions (no player restart needed — a load pass; dev-fix routes decline clean, worst case a
+doubled sound), wrote the C74 and C83 build prompts (both built by other sessions, Codex for C74),
+filed C83 from a Steam comment the owner then reproduced, and repaired `RELEASE.md`'s vacuous
+count-word gate. Items that had no home until now:
+* **A public Steam post** on the sounds thread was drafted in conversation with a "still checking"
+  section (Drone Hub effect, `dig-reveerse`) — posted or not unknown. Homed:
+  `FIELD_REPORT_REPLIES.md` (its promises + an owed row), `C74_SOUND_SWEEP.md` note, ck144 (b).
+* **The owed v6 sitting** folded into the first v7 boot as a recommendation — ck144 (a).
+* **STATE NEXT** reordered to FR-1 first (owner), DLC_DEEP_CHECK after.
+* **Technique:** C83's index commit (`e57d7dc`) staged HEAD's `bugs/INDEX.md` + only the C83 hunks
+  by `hash-object`/`update-index` because the C74 build's uncommitted rows were on disk and its
+  session (Codex) was unreachable — in memory `commit-with-pathspec-shared-index`.
+* Owner's Steam BBCode reference (screenshot): `[list]`/`[olist]`/`[*]`, `[quote=author]`,
+  `[code]`, workshop-URL widgets; `[h1]`–`[h3]`, `[b]`, `[spoiler]` also render.
+
+---
+
 ## 2026-09-10 — RELEASE.md steps 0–2 for v7: words applied, handed off as "ready to upload" (`smr-bugfixpack-5f`, unattended)
 
 tags: RELEASE v7 C74 C77 C83 outbox store-card last_changes fix-list

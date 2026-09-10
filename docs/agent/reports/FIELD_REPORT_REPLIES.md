@@ -245,6 +245,18 @@ reporter's memory, never checked (`C77` §What is NOT established).
 ⛔ Do not say the colonists in the bad dome died — the owner's run saw the
 **Suffocation!** warning but did not wait it out (`C83` §OBSERVED).
 
+**The long sounds-thread post (drafted in conversation 2026-09-10, BEFORE the build; posted or
+not is the owner's to say — checklist 144 b).** Its sections, so a follow-up can honour them:
+*Being restored* — the seven units (C74/C77), "currently in testing"; *Silent on purpose* — the
+drill Rare Metals skin (NASA, SpaceY, BlueSun, Brazil, Roscosmos, Japan, ISRO default) and the
+white CP3 MOXIE; *Can't fix* — the Metatron's 7 rotation sounds (never requested,
+`Metatron.lua:78`, `:86`) and extra Rare Metals hammer variants (`hit-moment3` never fires on a
+2-strike loop, `hit-moment4` is in no list — `reports/C74_SOUND_SWEEP.md`); *Haven't nailed down*
+— Metatron rotation dust (fixable, untimed), Hydroponic Farm lift/spray/rotate (empty
+`StartAnimThread`, possibly deliberate), and **"still checking"**: a Drone Hub effect while it
+builds drones and one sound on a misspelled animation name. ⚠️ If that last line went out, the
+two leads are OWED a check and a follow-up (row below).
+
 ## Owed, and where it is tracked
 
 | Item | Where |
@@ -254,3 +266,4 @@ reporter's memory, never checked (`C77` §What is NOT established).
 | ⭐ **NOW DUE — 1.0.x went live 2026-08-24.** Post **Draft C** on #2, then close the issue and drop `Fix in progress` | `F105`, Draft C above |
 | ⛔ Draft B is now **unposted and superseded** — keep it as the accurate wording for any FUTURE reply, since the posted text has the four overreaches listed above | here |
 | F105 end-to-end repro — attended, rides a sitting | `F105`; not a blocker for either reply |
+| Steam sounds thread — IF the long post went out: re-derive the DroneHub `ConstructingDrones` Hit1-4 and `dig-reveerse` leads, file or close each, post a follow-up | checklist 144 (b); `reports/C74_SOUND_SWEEP.md` |

@@ -115,3 +115,9 @@ no-attach / found cases, 2026-09-10):** `scratchpad`-built, carried in checklist
 It prints `C74 sweep: <class>[n]:<tracked class>/<state>/<moment count>` per candidate
 present on the map; a count of 0 on a working unit, with the unit visibly animating,
 samples the claim.
+
+**Added 2026-09-10 (after the build, `0cfc53a`):** the eight candidates are built and
+tested-attended except Metatron (#3, deliberately out of scope). Still NOT re-derived and now
+possibly promised in public: the DroneHub `ConstructingDrones` Hit1-4 and `dig-reveerse` rows
+above — a Steam post drafted that day called them "still checking" (whether it was posted:
+checklist 144 b; the post's promises: `FIELD_REPORT_REPLIES.md`).
