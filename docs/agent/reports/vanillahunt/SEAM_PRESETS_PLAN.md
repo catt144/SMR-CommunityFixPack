@@ -13,10 +13,10 @@ parent owns every repository write, sample, verdict, filing and handoff.
 - [x] Read the 548-row progression/politics preset batch; parent re-derives its
   surviving leads and sample, records exact coverage, then runs chain gates and
   commits the durable report.
-- [>] Read the 510-row support/story preset batch; parent re-derives its
+- [x] Read the 510-row support/story preset batch; parent re-derives its
   surviving leads and sample, records exact coverage, then runs chain gates and
   commits the durable report.
-- [ ] Read all 360 generated INVENTORY rows and six CALLERS items, enumerate
+- [>] Read all 360 generated INVENTORY rows and six CALLERS items, enumerate
   generated/Data twins and actual consumers in both directions, reconcile the
   three preset reports, then run chain gates and commit the durable report.
 - [ ] Falsify and file every surviving candidate in one or more race-safe
