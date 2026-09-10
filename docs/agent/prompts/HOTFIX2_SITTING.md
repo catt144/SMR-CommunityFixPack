@@ -70,9 +70,21 @@ live on all four saves.
 3. ⛔ `FlushLogFile()` is not to be trusted — on 09-09 it left the file
    byte-identical. Check the file actually grew.
 4. Use `tools/logscan.py` — ⛔ never a hand-rolled grep.
-5. Known instrument noise (5 FAIL + 5 ERROR + 7 install SKIPs) is triaged and
-   listed in `PLAYTEST_CHECKLIST.md`. ⛔ Do not re-file it. Baselines:
-   `44 applied / 0 inactive / 0 errors`; `58 PASS / 5 FAIL / 27 SKIP / 5 ERROR` = 95.
+5. **Boot baseline, still live:** `44 applied / 0 inactive / 0 errors` — met on
+   three independent boots.
+6. ⛔ **The SUITE baseline is VOID as of 2026-09-09 evening.** It read
+   `58 PASS / 5 FAIL / 27 SKIP / 5 ERROR` = 95 across the two sitting-1 runs.
+   Link `99b` then **repaired the instrument** (kit `29fd13b`, `4f062de`,
+   owner-ruled): the `[LUA ERROR] HGE::GetDomeAtHex` header is gone, the
+   backwards `LandscapeCostGuard` FAIL is gone, `LanderReturnFuel`'s dead
+   assertion is gone, `SaveSanitizerUpgradeLeak` was deleted with the pass it
+   tested, and two probes were rebuilt. **Probe count 95 → 94.**
+   ⛔ **Nobody has run the suite since.** Do NOT carry the old numbers forward and
+   ⛔ **do not invent replacements** — the first `SMRTest.RunAll()` after those
+   commits re-establishes the baseline, and *that* run is the measurement.
+   ⚠️ Until then, treat any FAIL/ERROR as worth reading rather than matching
+   against a triaged list: the list in `PLAYTEST_CHECKLIST.md` describes the
+   **pre-repair** instrument.
 
 ## 4 · ⛔ The two refuted rows — what is owed instead
 
@@ -201,13 +213,20 @@ and any suite result would be unattributable.
 ## 9 · What may NOT be claimed
 
 - ⛔ **Not "hotfix 2 is ready."** `H-04`. The upload is the owner's.
-- ⛔ **Not "F117 is fixed."** Its repair is source-derived, it has never been
-  observed in either direction, and **its control recipe is currently wrong**.
+- ⛔ **Not "F117 is fixed."** Its repair is source-derived and it has never been
+  observed in either direction. ⚠️ Its §Control recipe was **wrong** and was
+  re-derived at the desk by `99b` (`94cfa2c`) — the new one is shown to reach
+  `GetScoreFor` on the shipped bodies but is **untested in play**. Take it from
+  `bugs/F117.md`, not from §4a, and ⛔ a desk-derived recipe running clean is
+  still not the same as the defect having been reproduced first.
 - ⛔ **Not "F118 is fixed"** — no probe exists and it has never been measured.
 - ⛔ **Not a `tested` grant on any row that did not run.**
 - ⛔ **Never re-quote a count from a partially-copied log.**
-- ⛔ **Not "the suite is clean"** — say *"no new failures beyond the triaged
-  instrument noise"*.
+- ⛔ **Not "the suite is clean"**, and ⛔ **not "no new failures beyond the
+  triaged noise"** either — that phrasing is now unsafe, because the triaged list
+  describes the **pre-repair** instrument (§3.6). Until a `RunAll()` has run since
+  kit `4f062de`, report the census as measured and say the baseline is being
+  re-established.
 
 ## 10 · Read path — files, not folders
 
