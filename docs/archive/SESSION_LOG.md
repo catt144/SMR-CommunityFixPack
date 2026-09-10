@@ -8,6 +8,27 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-10 — ⭐ the silent-FX sitting (`smr-bugfixpack-08`, owner attended): six units proven, a third defect found
+
+tags: C74 C77 ck139 attended sound PlayFX-hook SetAllVolumesReason Water-Extractor Shuttle RC-Driller RC-Dozer
+
+Owner at the keyboard on colony `BlankBig_02` (1.1.0.403908), console lines parse-checked with a must-fail control and
+desk-run on stubs before every hand-over; every reading read back from the flushed log. **C74 MOXIE PROVEN**: classic
+skin (the colony has one of each), preset ¼/¾ of 13,300 ms (3325/9975) + class-level conversion → "works and in sync"
+first try. **C77 proven unit by unit** (entry has the log lines): Water Extractor both skins (presets alone did NOTHING —
+a third, Water-Extractor-only defect: `OnSetWorking` starts the tracker while the pump is still at anim speed 0, the queued
+`Notify` restores 1000 later, so the first `TimeToMoment` sleeps `max_int`; restart-after-running fixes it; CP3 1667/5000
+of 6667, classic 1658/4975 of 6633); Shuttle (0 `Hit` in 20 vanilla landings/take-offs under a logging hook + group
+mute, then 16/16 with midpoint presets, "heard both, distinctly"); RC Driller (A/B by ear with markers emptied in place,
+logged off/on); RC Dozer = RC Terraformer (only the Load phase has the shovel sound; 5/5 `Load Hit1` logged and heard).
+The Excavator is the only C77 unit unproven (not in the colony). Corrections on the record: rockets are not hub shuttles;
+the Jumper hub's sounds sit on start/end (not a unit); the RC Driller is Roscosmos-only for players (a cheat unlocked it
+here); my "dead tracker" prediction was wrong in mechanism. ⚠️ Process slip: a `--regen` in the shared tree committed the
+99 session's uncommitted C82 row (900fb79); resolved by that session's b0d119f, byte-identical; the commit guard now
+refuses to regen when foreign `bugs/` changes are present (memory note). ck139 now spans six proven units.
+
+---
+
 ## 2026-09-10 — vanillahunt 99 terminal audit: instruments SOUND WITH STATED GAPS, all 12 P2 findings re-derived (6 hold / 5 weakened / C80 refuted), C82 filed, chain folder emptied (`smr-bugfixpack-f8`)
 
 tags: vanillahunt 99 audit treediff presetdiff soundness C58 C63 C64 C66 C67 C68 C69 C75 C76 C78 C79 C80 C82 R08311 ck142 DLC_DEEP_CHECK FR-1 FR-2 FR-3
