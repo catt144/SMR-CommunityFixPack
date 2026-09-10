@@ -49,6 +49,11 @@ with every stand-in named in the entries and negative/counterfactual controls.
 The first local harness attempt omitted the positive-control
 `service:Service` shim and stopped on that nil method; the shim was added and
 the entire desk was rerun. No partial/failed output was retained.
+At close-out, the explicit `git add` command also named the already removed and
+staged one-shot prompt; Git rejected that absent pathspec. `git rm -- <exact
+prompt>` had already staged the deletion, and the required explicit-path
+`git commit -F ... -- <all paths>` committed it and the seven named edits. The
+commit was inspected before this process correction was recorded.
 
 Eight candidates were filed, all source-read and untested:
 
