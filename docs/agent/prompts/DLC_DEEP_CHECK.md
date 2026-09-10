@@ -91,8 +91,9 @@ the new economy touches an existing system is a seam:
   starting: the DLC code that runs at new game (map setup, starting resources,
   `thomas`'s sponsor, preset injection) is the DLC half of that surface, and
   the one the base-game chain was fenced out of. ⚠️ **Re-ranked the same day:
-  the crash persists with all DLC content disabled**, and the base-game lead is
-  now the temporal upscaler (DLSS 2 → 4), so DLC-internal code is an unlikely
+  the crash persists with all DLC content disabled**, and the base-game
+  upscaler lead (DLSS 2 → 4) was itself refuted the same day (anti-aliasing
+  Off / FXAA still crashes, README §2b), so DLC-internal code is an unlikely
   cause — read the chain's FR-1 result before spending effort here;
 - **the existing `Food` resource** — production, storage, consumption, trade,
   the `Meal` layer on top of it;

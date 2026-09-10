@@ -316,8 +316,8 @@ settings; the menu loads, starting a new game crashes.)
     default TAA auto-picks DLSS 4. ⇒ **DLSS 4 itself works on NVIDIA; not
     "NVIDIA", not "DLSS 4", but NVIDIA × Proton** — vkd3d-proton / dxvk-nvapi on
     NVIDIA's Linux driver — meeting something 1.1.0 does at new game, of which
-    the upscaler's initialisation under Proton is the leading Lua-visible
-    candidate.
+    the upscaler's initialisation under Proton was the leading Lua-visible
+    candidate (⛔ refuted as the trigger 2026-09-10 — the falsifier bullet below).
   - ⚠️ **The AMD side, partly filled (owner, 2026-09-10): Steam Deck players
     report NO problem.** That is consistent with NVIDIA × Proton — the Deck is
     AMD (RADV) — but `F102` warns a Deck negative is weaker than it looks:
@@ -331,7 +331,8 @@ settings; the menu loads, starting a new game crashes.)
     still crashes. ⛔ It does NOT clear 03's seam — base-game code changed to
     accommodate the DLC ships to everyone and runs with the DLC off. (How the
     DLC was "disabled" — the in-game content toggle or Steam — is unstated.)
-  - ⭐ **The lead the diff already shows — read FIRST (surfaces c, d): the
+  - ⛔ **REFUTED AS THE TRIGGER 2026-09-10 (falsifier bullet below); kept as the
+    record of why it led. The lead the diff showed (surfaces c, d): the
     temporal upscaler.** 1.1.0 upgraded **NVIDIA DLSS 2 → DLSS 4**
     (`CommonLua/Core/options.lua`, the `Antialiasing` and `Upscaling` tables).
     The DEFAULT anti-aliasing is `"TAA"` (`CommonLua/Core/GlobalStorageTables.lua:114`),
@@ -388,6 +389,46 @@ settings; the menu loads, starting a new game crashes.)
     Antialiasing`, and `Upscaling` shows the upscaler TAA picked. Still to walk
     before any player is told: that `SMAA` / `FXAA` is selectable there and that
     `Upscaling` then stops showing DLSS.
+  - ⛔ **FALSIFIER FIRED 2026-09-10 — the temporal upscaler is REFUTED as the
+    trigger.** Two Steam replies relayed by the owner (whether two players or
+    one is not established): *"Tried FXAA and also just setting
+    antialiasing/upscaling off entirely. Still crashes on "New Game", no
+    change."* (thread post #13), and a player on NVIDIA already launching with
+    *"anti-aliasing completely off (all graphics minimum, everything off that
+    can be off)"*, still crashing. Source confirms the setting takes effect
+    (1.1.0 `CommonLua/OptionsObject.lua:348-370`, `SyncUpscaling`): with `Off` /
+    `FXAA`, `IsTemporalAntialiasingOption` is false, so at Native 100% the
+    `Upscaling` option is forced `Off` (`ResolutionUpscale = "none"`) and below
+    100% DLSS / FSR 2 / XeSS are `not_selectable` (`options.lua:668-685`) — no
+    temporal upscaler is APPLIED. ⚠️ What survives, weakly: the capability
+    probe `hr.TemporalIsTypeSupported` runs at every PC boot whatever the
+    setting (`options.lua:209-230`, `OnMsg.Autorun`), but it ran identically on
+    1.0.7 (archive `:216-218`) and runs at startup while the menu works, so it
+    is no lead for a New-Game-moment crash; the engine's native DLSS 4 library
+    load is below Lua and a menu setting cannot exclude it. ⇒ **As
+    pre-registered above: (a)'s NEW engine/native calls on the New-Game path
+    now lead** — map generation first (the `MapGen` NOROWS files in the list
+    above; agent B21's double `ResumePartialPassEdits` note in 04's inbox),
+    then (c) new assets / lightmodel (`LightmodelFeaturePreset.lua`, new) and
+    (d) `hr.*` settings. There is no settings workaround to publish.
+  - ⭐ **A reporter's `Mars.exe` log, OBSERVED 2026-09-10 (pasted in the thread):**
+    the same executable as ours (`Timestamp 6a91a190`, cf.
+    `archive/logs/first110_Mars.exe-20260908-15.20.28-6a91a190.log`),
+    `Proton/Wine: 9.0`, Wine-reported `Windows 10 10.0.19043`, i7-6700K 4/8,
+    32 GB — and it ENDS at `*** Debug::Init()`. Ours continues 0.1 s later
+    (`Steam initialized`, the GPU block at 2.07 s, Lua at 4.6 s; `:24-52`).
+    That game reached the menu and New Game, so this is `EF-047` seen in the
+    field: after the hard crash only the first flushed block survived, not even
+    the GPU line. ⇒ the game log carries NO crash location; **`PROTON_LOG=1` is
+    now the only player-side instrument that can.**
+  - ⚠️ **"Does loading a save also crash?" cannot be answered as asked:** a
+    Linux player's saves are 1.0.7, which 1.1.0 on Steam refuses (`EF-079`),
+    and a player whose every new game crashes has never made a 1.1.0 save. The
+    discriminator needs a SUPPLIED save — a vanilla (no-mod) 1.1.0 Sol-1 save
+    from the owner: loads and runs ⇒ the fault is in new-game map GENERATION
+    (surface (a)); crashes too ⇒ the shared map-entry / render path. ⛔ The
+    Proton save-folder location is unverified — route-check it before any
+    player is told where to put the file (checklist 136).
 
 **FR-2 · "Deep scanning with probes reveals no deep resources."** (Steam,
 2026-09-08, two players; intermittent; one says a clean reinstall fixed it,

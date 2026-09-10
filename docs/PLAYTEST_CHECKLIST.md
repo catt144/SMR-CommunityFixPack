@@ -59,24 +59,33 @@ completed tests move whole to
 >    writes the last stretch of its log only at a clean exit (`EF-047`), so
 >    after a crash the end may simply be missing. It is useful for what it
 >    shows (GPU, driver, how far startup got), not for where it stopped.
-> 3. **Two one-line answers still open.** Does loading a saved game also crash,
->    or only a new game? At exactly what moment: clicking New Game, mission
->    setup, the loading screen, or the first frame of the map? (Reporters have
->    already answered the rest: it still crashes with all DLC content disabled,
->    in normal, sandbox and challenge modes, on two distros, on X11 and Wayland,
->    and on every Proton version; both GPUs named are NVIDIA.)
-> 4. ⭐ **The cheapest test, and possibly a workaround:** before New Game,
->    change anti-aliasing from its default `TAA` to `SMAA` or `FXAA`. The
->    default TAA auto-picks a GPU upscaler, and 1.1.0 upgraded NVIDIA's from
->    DLSS 2 to DLSS 4; SMAA and FXAA use none. If new games then start, that is
->    the cause and a workaround players can use today. ⛔ Untested. Half the
->    route is walked: your screenshots show the setting is `OPTIONS / VIDEO →
->    Antialiasing`, currently `TAA`, with `Upscaling` showing the upscaler it
->    picked. Still unwalked: that `SMAA` / `FXAA` can be selected there and
->    that `Upscaling` then stops showing DLSS — confirm both on your rig (a
->    minute, no new game needed) before anyone posts it. (One report is a
->    GTX 1070, which cannot run DLSS at all, so the cause may be the upscaler
->    auto-pick in general rather than DLSS 4 itself; this test covers both.)
+> 3. **One-line answers still open:** at exactly what moment does it crash
+>    (clicking New Game, mission setup, the loading screen, or the first frame
+>    of the map)? And the GPU model and driver version, because the game's log
+>    lost even that (see 4). (Reporters have already answered the rest: it
+>    still crashes with all DLC content disabled, in normal, sandbox and
+>    challenge modes, on two distros, on X11 and Wayland, and on every Proton
+>    version; every GPU named is NVIDIA.)
+>    ⚠️ **"Does loading a save also crash?" can't be answered by them.** Their
+>    saves are from 1.0.7, which 1.1.0 refuses, and they have never been able
+>    to make a 1.1.0 save. **New ask, your call:** make a vanilla (no mods)
+>    1.1.0 new game, save on Sol 1, and share the file. If it loads for them,
+>    the crash is in new-game map generation; if it crashes too, it is in
+>    loading any map. ⛔ Where Proton keeps the save folder isn't verified yet;
+>    an agent walks that before anyone is told.
+> 4. ✅ **Players ran the anti-aliasing test (2026-09-10): it's ruled out.** One
+>    reply tried FXAA and then anti-aliasing and upscaling off entirely: "Still
+>    crashes on 'New Game', no change." Another was already playing with
+>    anti-aliasing and everything else off, on NVIDIA, and still crashes. The
+>    game's code confirms those settings really do switch the upscaler off. So
+>    it isn't the DLSS 4 upgrade, there's no settings workaround to post, and
+>    the check on your rig is no longer needed. The agents now look first at
+>    what 1.1.0 changed in new-game map generation.
+>    ⭐ **That second reply included a game log, and it shows why item 1 comes
+>    first:** it's the same game build as ours, but the log stops at the
+>    startup banner (about 20 lines), before even the graphics card is listed. The game got as far as New
+>    Game, so everything after those lines was lost in the crash. Only
+>    Proton's log can show where it dies.
 >
 > **The two controls are both in, so no test is needed from you.** ✅ A new
 > game on 1.1.0 WORKS on your Windows/NVIDIA rig **with DLSS 4 on**: every save

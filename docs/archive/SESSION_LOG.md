@@ -8,6 +8,24 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-10 — FR-1: the anti-aliasing falsifier FIRED — the temporal upscaler is refuted as the Linux new-game crash trigger
+
+tags: FR-1 linux proton nvidia upscaler DLSS falsifier EF-047 EF-079 vanillahunt dispatch
+
+Dispatch session (`smr-bugfixpack-ae`). Owner relayed two Steam replies to their own ask: one tried FXAA and then
+anti-aliasing/upscaling off entirely, "Still crashes on 'New Game', no change" (#13); another already ran with
+anti-aliasing and everything off, on NVIDIA, still crashing. The route was checked in source before the verdict: 1.1.0
+`OptionsObject:SyncUpscaling` (`OptionsObject.lua:348-370`) forces `Upscaling` `Off` at Native 100% when the AA option is
+non-temporal, and the temporal entries are `not_selectable` below it (`options.lua:668-685`) ⇒ nothing temporal is applied.
+The `OnMsg.Autorun` capability probe (`options.lua:209-230`) runs regardless, but it is identical on 1.0.7 (`:216-218`)
+and runs at boot, not at New Game. ⇒ pre-registered falsifier fired; (a)'s new native calls on the New-Game path lead,
+map generation first. The reporter's `Mars.exe` log (same exe `6a91a190`, Proton 9.0, i7-6700K) ENDS at
+`*** Debug::Init()` though the game reached New Game — `EF-047` observed in the field, no GPU line survived. "Does loading a
+save crash?" is unanswerable without a supplied 1.1.0 save (`EF-079`); proposed as a new owner ask. README §2b, checklist
+136, 04 (agent C's item re-ranked) and DLC_DEEP_CHECK updated; SEAM_REPORT / TRIAGE left as records.
+
+---
+
 ## 2026-09-10 — doccheck's "kit-tree state is UNKNOWN" hook WARN was the hook itself: `GIT_INDEX_FILE` leaked into the kit's git
 
 tags: doccheck testkit_tree hook GIT_INDEX_FILE pathspec-commit dispatch
