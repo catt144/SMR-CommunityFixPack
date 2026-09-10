@@ -8,6 +8,24 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-10 — lookback before a context limit (`smr-bugfixpack-08`): what lived only in the conversation
+
+tags: lookback handoff C75 03b C74_BUILD ck139 ck142 log-line
+
+Owner asked for a lookback and a handoff. Handoff: `prompts/HANDOFF_SOUNDFX_2026-09-10.md` (one-shot: the seven proven
+units' build table for `C74_BUILD.md` if ck139 = build, the Water Extractor restart design note, loose ends, keyboard
+practice). Items that had no home until now:
+* **Codex 03b filing check** (owner asked "make sure it filed everything correctly", no substance re-derivation):
+  1,984/1,984 reconciled by key SET (the food ledger writes CropPreset as a range `P02426–P02578`; its `P36893–P36906`
+  range over-names two keys absent from the queue — cosmetic); C75/C76 carry every required field; TRIAGE append-only;
+  frozen TSVs untouched. Gaps: **C75 cites only 1.1.0 lines** (brief required old/new — owed); close-out `3902ac2`
+  lacks the `PROBE SWEEP` line; its "3902ac2 is pushed" was false — it reached origin inside `ad0ef71` (reflog).
+* **Unexplained log line, verbatim:** `Missing spot 'Top' in 'ElectricityGridElement' state 'idle'`
+  (`Mars.exe-20260910-13.22.25-6a91a190.log:582`, after a Quick Build cheat; no console line of ours touches grids).
+* Two commit subjects today carry a leading BOM (`900fb79`, `cf28d8e`) from PowerShell message writing — cosmetic.
+
+---
+
 ## 2026-09-10 — The Excavator proven too: C77 is complete (`smr-bugfixpack-08`, owner attended)
 
 tags: C77 ck139 attended Excavator visual-FX
