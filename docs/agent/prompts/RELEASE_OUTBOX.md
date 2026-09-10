@@ -45,6 +45,20 @@ player surface bumps it by one on release.
   no power cycle, owner heard/saw every intended effect, 0 Lua errors.
 - **Judgment-call count:** unchanged. Metatron is deliberately out of scope.
 
+### Pending — C83: keep arriving colonists out of dead domes
+
+- **Count impact:** +1 player-facing repair / fix-list row (47 → 48 after the
+  earlier pending C74+C77 entry).
+- **Fix-list scope:** passenger-rocket and lander arrivals whose vanilla safety
+  fallback is reachable but switched off, quarantined or without life support.
+- **Change-note line:** Arriving colonists no longer overflow into a nearby dead
+  or quarantined dome when a working, open and supplied dome is reachable.
+- **Evidence:** `C83` is `tested-attended` on 1.1.0.403908; the ordinary safe
+  route stayed silent, the forced overflow rerouted into the working dome, and
+  nobody moved into the bad dome during the following sol; 0 Lua errors.
+- **Judgment-call count:** unchanged. C84's player-forced homeless move remains
+  intentional and out of scope.
+
 ---
 
 ## Released — history, newest first (cleared here by RELEASE.md)

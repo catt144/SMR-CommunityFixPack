@@ -6,7 +6,7 @@
 -- verified-synchronous seam — the design pass §6.2 flagged as owed, run and
 -- answered below.
 --
--- Two defects on the arrival path:
+-- Three defects on the arrival path:
 --  (a) Colonist:Arrive (Lua\Units\Colonist.lua:1254-1300) drops the colonist at
 --      the rocket's raw "Colonistout" spot — `self:SetPos(pos)` with no
 --      passability search. Its sibling CargoTransporterNew:EjectColonists goes
@@ -19,6 +19,15 @@
 --      safety_dome by raw distance, WITHOUT the `is_walking` test that every real
 --      candidate has to pass (:346-423). So the fallback is routinely a dome the
 --      colonist cannot walk to, and the hike burns their oxygen.
+--  (c) The same fallback ignores vanilla's own welcoming rule —
+--      `accept_colonists and ui_working and HasLifeSupport()`
+--      (_GameUtils.lua:382-384 on 1.1.0, :342-344 on 1.0.7). Once a working
+--      dome's housing fills, later arrivals can therefore be assigned to a
+--      nearer dome that is off, quarantined and unable to support life (C83,
+--      observed on 1.1.0). The pre-wrapper re-chooses only this arrival's
+--      destination, using the nearest welcoming candidate as the homeless
+--      fallback. With no welcoming candidate it leaves vanilla's assignment
+--      alone; clearing it would strand the colonist outside instead.
 --
 -- Elevator routes are NOT part of the bug and must not be caught by the fix.
 -- The arrival pipeline assigns emigration_dome and emigration_elevator together
@@ -70,9 +79,10 @@
 -- (`GetDomesReachableByColonists(city, self:GetPos())` with `self` the rocket,
 -- RocketBase.lua:2029, :1981), so the re-check is judged on vanilla's own terms.
 -- Every function it calls is VERIFIED SYNCHRONOUS — `IsInWalkingDist`,
--- `GetDomesReachableByColonists`, `ChooseDome`, `ValidateBuilding`, `IsSameMap`
--- all report `clear` under `tools/blocking_analysis.py` — so nothing in the
--- re-choose can itself put us on a blocked stack.
+-- `GetDomesReachableByColonists`, `ChooseDome`, `ValidateBuilding`, `IsSameMap`,
+-- `Community:HasLifeSupport` and `Community:CanAcceptNewColonists` all report
+-- `clear` under `tools/blocking_analysis.py` — so nothing in the re-choose can
+-- itself put us on a blocked stack.
 --
 -- ⚠️ Why not wrap `ChooseDome` itself, which is where the bad fallback is born:
 -- because the blast radius is wrong. `ChooseDome` has EIGHT shipped call sites
@@ -83,6 +93,17 @@
 -- dome fallback and its own walking-distance test at :1163) — behaviour with no
 -- evidence behind it, which FIX_POLICY §4 does not permit. Keying on
 -- `self.arriving` is the narrowest thing that separates the call sites, per §5.3.
+-- C83 stays under the same `ArrivalDeaths` veto: all three halves guard the one
+-- arrival pipeline, and disabling that id restores that pipeline wholly to
+-- vanilla rather than exposing a second, surprising half-switch.
+--
+-- D03 COMPOSITION. The opt-in Residency Control wraps
+-- `Community:CanAcceptNewColonists` and `ChooseDome`. Its `ChooseDome` wrapper
+-- deliberately filters only the candidate list, not `safety_dome`; passing a
+-- closed dome as C83's fallback would therefore bypass it. For non-tourists the
+-- nearest-fallback scan also asks `CanAcceptNewColonists`, so D03's closed domes
+-- cannot be handed back as the fallback. Tourists retain D03's documented
+-- exemption. No opt-in field or global is read here.
 --
 -- ── HALF (a): the passability snap moves BEHIND Arrive (design pass, answered) ─
 -- §6.2's warning was that the raw `SetPos` has no route: it happens inside the
@@ -169,9 +190,13 @@
 --   (Lua/Units/Colonist.lua:1586-1632 at pin time)
 -- DEFECT: self:SetPos\(pos\)
 --   the raw spot is used with no passability search
+-- SRC: Lua/_GameUtils.lua is_welcoming_community sha256=3a339650502f439c57da2f1145a75acfb7af2cfe862c07d8339366c2fe9afbca
+--   (Lua/_GameUtils.lua:382-384 at pin time; byte-identical rule at 1.0.7 :342-344)
+-- DEFECT: return community and community\.accept_colonists and community\.ui_working and community:HasLifeSupport\(\)
+--   C83: the safety_dome fallback omits this shipped welcoming rule
 
 SMRFixPack.Register("ArrivalDeaths", {
-	title = "Arriving colonists no longer hike to unreachable domes or land in impassable ground",
+	title = "Arriving colonists avoid unreachable or uninhabitable domes and impassable ground",
 	apply = function()
 		local err = SMRFixPack.Require("ArrivalDeaths", {
 			{ class = "Colonist", method = "Idle" },
@@ -183,6 +208,10 @@ SMRFixPack.Register("ArrivalDeaths", {
 			{ global = "IsInWalkingDist" },
 			{ global = "GetDomesReachableByColonists" },
 			{ global = "ChooseDome" },
+			-- C83 copies vanilla's welcoming rule and consults the public
+			-- move-in gate so the opt-in Residency Control composes with it.
+			{ class = "Community", method = "HasLifeSupport" },
+			{ class = "Community", method = "CanAcceptNewColonists" },
 			-- F117: the body the argument-shape probe drives, and the one
 			-- constant its two branches share. Existence only — WHICH argument
 			-- it wants is a behaviour question and is asked at first use.
@@ -323,7 +352,20 @@ SMRFixPack.Register("ArrivalDeaths", {
 		}
 		-- ── F117-PROBE-END ───────────────────────────────────────────────────
 
-		-- (b) do not send an arrival to a dome it cannot reach
+		-- C83: copied from the shipped file-local `is_welcoming_community`
+		-- (_GameUtils.lua:382-384; 1.0.7 :342-344). Residency Control's
+		-- public move-in gate is an additional filter for non-tourists only.
+		local function is_welcoming_arrival_dome(dome, colonist)
+			if not (dome and dome.accept_colonists and dome.ui_working
+					and dome:HasLifeSupport()) then
+				return false
+			end
+			return colonist.traits.Tourist or dome:CanAcceptNewColonists()
+		end
+
+		local c83_reroute_logged = false
+
+		-- (b)/(c) do not send an arrival to a dome it cannot reach or survive in
 		local orig_idle = C.Idle
 		function C:Idle(...)
 			-- FIX (F53b): Idle is the only issuer of "Arrive" (:1791-1793), and
@@ -342,7 +384,10 @@ SMRFixPack.Register("ArrivalDeaths", {
 				local reachable = IsInWalkingDist(dome, pos, self.city)
 					or (elevator and IsSameMap(rocket, elevator) and elevator.other
 						and elevator.other:GetMapSlot() == dome:GetMapSlot())
-				if not reachable then
+				-- Preserve F53's not-reachable branch exactly: only inspect the
+				-- destination's welcoming state after reachability has succeeded.
+				local welcoming = reachable and is_welcoming_arrival_dome(dome, self)
+				if not reachable or not welcoming then
 					-- F117: what ChooseDome wants is asked of the shipped body,
 					-- once, and only on the branch that is about to call it.
 					-- `nil` is UNKNOWN and means STAND DOWN — vanilla's own
@@ -350,15 +395,44 @@ SMRFixPack.Register("ArrivalDeaths", {
 					-- player got before this module existed.
 					local dome_arg = choose_dome_arg(self)
 					if dome_arg ~= nil then
-						local domes, _, _, dome_elevators = GetDomesReachableByColonists(self.city, pos)
-						-- safety_dome deliberately withheld: the walkable candidates
-						-- are the only acceptable answers here
-						local new_dome, new_elevator = ChooseDome(dome_arg, domes, false, dome_elevators)
+						local domes, _, dome_dist, dome_elevators = GetDomesReachableByColonists(self.city, pos)
+						local fallback = false
+						if reachable then
+							-- C83 only: station-sweep domes are appended after the
+							-- distance sort, so domes[1] is not necessarily nearest.
+							-- Select the minimum returned distance, while applying D03's
+							-- public move-in gate through the helper above.
+							local fallback_dist
+							for _, candidate in ipairs(domes) do
+								if is_welcoming_arrival_dome(candidate, self) then
+									local dist = dome_dist[candidate]
+									if not fallback or (dist and (not fallback_dist or dist < fallback_dist)) then
+										fallback = candidate
+										fallback_dist = dist
+									end
+								end
+							end
+							-- No welcoming destination: preserve vanilla's assignment.
+							if not fallback then
+								return orig_idle(self, ...)
+							end
+						end
+						-- F53 withholds the unsafe fallback. C83 supplies the nearest
+						-- welcoming one so a full working dome receives the colonist
+						-- homeless instead of ChooseDome returning the dead dome.
+						local new_dome, new_elevator = ChooseDome(dome_arg, domes, fallback, dome_elevators)
 						-- TransportByFoot rides self.emigration_elevator (:2725); keep
 						-- it paired with the destination we just picked. `false` is the
 						-- class default for both (Colonist.lua:92, :264).
 						self.emigration_dome = new_dome or false
 						self.emigration_elevator = new_elevator or false
+						if reachable and new_dome and new_dome ~= dome and not c83_reroute_logged then
+							c83_reroute_logged = true
+							SMRFixPack.Log("ArrivalDeaths: C83 rerouted %s from %s to %s",
+								self.name or "<unnamed colonist>",
+								dome.name or "<unnamed dome>",
+								new_dome.name or "<unnamed dome>")
+						end
 					end
 				end
 			end

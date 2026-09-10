@@ -8,6 +8,41 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-10 — C83 built and tested-attended; arrivals stayed out of the dead dome (`smr-bugfixpack-04`, owner attended)
+
+tags: C83 C84 F53 ArrivalDeaths arrivals quarantine D03 attended H-06
+
+Re-derived the shipped 1.1.0.403908 and archived 1.0.7 bodies (5/5): the nearest
+`safety_dome` omits vanilla's welcoming test in both branches; arrival construction reaches
+the existing `Colonist:Idle` seam before `Arrive` snapshots the destination. Extended
+`Fix_ArrivalDeaths` there: a reachable but off, closed or unsupplied destination is re-chosen
+with the nearest welcoming fallback; no welcoming candidate and UNKNOWN F117 argument shape
+both stand down. D03's public non-tourist move-in gate is composed into the fallback, tourists
+retain its documented exemption, and dome/elevator pairing is preserved. The homeless
+follow-through became C84 `wontfix — intentional`: the shipped score comment explicitly
+allows the player's must-have rule to force an unpowered dome. Desk C83 12/12; all nine desk
+harnesses HELD; parse 46/0, bodycheck and blocking analysis clear; doccheck GREEN. No new
+module, TestKit probe, persistent state, `items.lua` or `metadata.lua` change.
+
+Attended from `USA Sol 31.savegame.sav`: the ordinary landing used only good domes / its
+adjacent passenger station and emitted no C83 line. With that station disabled and working
+housing unavailable/full, every arrival entered the good dome, none used the station or dead
+Fuller #1, and the log emitted exactly one actual-reroute line. One sol later nobody had moved
+into the bad dome. Archived `c83_attended_Mars.exe-20260910-17.36.10.log`, SHA-256
+`9730B3DC12F201E25E2A8A85F8811351AE6E9CD1845D16D31DB9D7DD7046BF9D`: module applied,
+reroute at line 372, 0 `[LUA ERROR]`, 0 `[ERROR]`. Afterward, the diagnostic-only arguments
+were changed from object identities to colonist/dome names and desk-controlled; routing is
+unchanged. H-06 backup: `_SMR_autosave_backup_20260910_C83`; Sol 31 stayed byte-identical,
+Sol 26 rotated out but is recoverable there, and Sol 36 was newly created.
+
+Process-fence caveat: this session missed the required `tasklist` check before its first Code
+edit. The immediately subsequent check found no `Mars.exe`; every later Code edit was preceded
+by a clean check, and no Code was edited during the attended run. Recorded as a sequencing
+miss, not falsely treated as proof of the earlier moment. C83 → `tested-attended`; checklist
+143 closed; +1 repair staged in `RELEASE_OUTBOX`; one-shot build prompt removed.
+
+---
+
 ## 2026-09-10 — ck143 RULED FIX; `prompts/C83_FIX.md` written (`smr-bugfixpack-04`, owner in conversation)
 
 tags: C83 ck143 Fix_ArrivalDeaths prompt

@@ -29,7 +29,7 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
-### ✅ 2026-09-10 — 143 RULED: **FIX** — new arrivals sent into a switched-off, quarantined dome ([C83](agent/bugs/C83.md)). Fix prompt: `agent/prompts/C83_FIX.md`; fire it with *task docs/agent/prompts/C83_FIX.md* once the C74 build has committed (the prompt checks). Owed from you at the end: one short in-person check from your pre-landing save.
+### ✅ 2026-09-10 — 143 CLOSED: **FIX BUILT + TESTED-ATTENDED** — new arrivals no longer fall back into a switched-off, quarantined dome ([C83](agent/bugs/C83.md)).
 
 Original question, kept as asked: new arrivals with nowhere to live get sent into a switched-off, quarantined dome with no life support, and suffocate. You reproduced it. **Decision: fix it for hotfix 3, or file and watch. Recommendation: fix it — colonists die, and the game already does the right thing in its elevator case.**
 
@@ -48,17 +48,33 @@ Original question, kept as asked: new arrivals with nowhere to live get sent int
 > **Our pack doesn't touch this today:** our arrival fix only redirects colonists sent to a
 > dome they *can't walk to*. Yours was walkable.
 >
-> **The fix would:** send the overflow to the nearest dome that is actually **working** —
+> **The fix does:** send the overflow to the nearest dome that is actually **working, open
+> and supplied** —
 > they arrive homeless but alive, and move into housing when it appears — and only fall back
 > to any dome at all when no working one is in reach. The build first checks everyone else
 > who uses the same "nearest dome" rule, so the change only lands where it should.
 >
-> **For the reporter**, if you want to reply: *Confirmed and reproduced. When new colonists
+> **Attended receipt (2026-09-10):** an ordinary landing used only safe routes and stayed
+> silent. In the forced overflow leg, every arrival entered the working dome, nobody used the
+> disabled station or dead Fuller #1, the repair logged one actual reroute, and nobody moved
+> into the bad dome during the following sol. The archived log has 0 Lua errors.
+>
+> **For the reporter**, if you want to reply: *Confirmed, reproduced, and fixed for the next
+> Relaunched Fix Pack update. When new colonists
 > can't find free housing in a working dome within walking distance, the game sends the rest
 > to the nearest dome of any kind — even one that is off, quarantined and has no life support.
-> It isn't covered by the pack yet; it's logged for a fix. Until then, keep free housing in a
+> The repair redirects that overflow into the nearest powered, open and supplied dome, where
+> they can wait homeless rather than suffocating. Until the update ships, keep free housing in a
 > working dome near where you land, or don't leave a dead dome as the closest one to the
 > landing site.*
+
+### ✅ 2026-09-10 — 144 CLOSED: C83's homeless follow-through found a distinct intentional override, not another fix ([C84](agent/bugs/C84.md)). No decision is owed.
+
+Later homeless resettlement can consider a switched-on, accepting dome without life support,
+but only the player's must-have filter (or direct forced-dome order) can make it beat the live
+home C83 chose. The shipped 1.1.0 score comment explicitly preserves that override so players
+can force colonists into an unpowered dome. C84 records it `wontfix — intentional`; C83 stays
+arrival-only. The attended C83 leg watched the arrivals for one sol; nobody moved into the bad dome.
 
 ### 2026-09-10 — 142: the vanillahunt terminal audit re-derived every P2 candidate — which of these, if any, go to a hotfix-3 candidate list? **Decision: name any entry you want on a hotfix-3 candidate list, or accept "file and watch" for all. Recommendation: none today; take C66 and C82 as cheap organic looks and leave the rest.**
 

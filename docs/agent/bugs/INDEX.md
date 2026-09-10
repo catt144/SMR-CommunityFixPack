@@ -1,9 +1,9 @@
 <!-- GENERATED — never hand-edit; regenerate with: python tools/doccheck.py --regen -->
 <!-- split_bugs.py --write is the one-time MIGRATION from the retired pre-split doc, never a regeneration; verify: python tools/doccheck.py -->
 
-# Bug index — 213 rows, 178 entry files
+# Bug index — 214 rows, 179 entry files
 
-118 F + 12 D + 83 C. `seq` is the entry's position in the old BUGS.md file order;
+118 F + 12 D + 84 C. `seq` is the entry's position in the old BUGS.md file order;
 the row order below is the old index table's own. Generated from the front matter of
 `docs/agent/bugs/*.md` — edit an entry, not this file.
 
@@ -225,5 +225,6 @@ the row order below is the old index table's own. Generated from the front matte
 | 175 | C80 | A traveler can call GetPos on a destroyed paired elevator because the validity check comes one line too late | cand | P2 | source-read | [C80.md](C80.md) |
 | 176 | C81 | The infobar now rescans every power, water and oxygen grid's visible buildings once per second | cand | P3 | source-read | [C81.md](C81.md) |
 | 177 | C82 | The Incident's 'Stop all Fusion Reactors until we know more' reply leaves every reactor disabled for good | cand | P2 | source-read | [C82.md](C82.md) |
-| 178 | C83 | Arrivals with no free housing fall back to the nearest dome even when it is switched off, quarantined and has no life support — they walk in and suffocate | filed | P1 | OBSERVED (owner, attended) + source-read | [C83.md](C83.md) |
+| 178 | C83 | Arrivals with no free housing fall back to the nearest dome even when it is switched off, quarantined and has no life support — they walk in and suffocate | tested-attended | P1 | OBSERVED (owner, attended) + source-read + desk-controlled fix | [C83.md](C83.md) |
+| 179 | C84 | Homeless resettlement can select a switched-on dome without life support when the player's must-have filter forces it | wontfix | P3 | source-read; explicit shipped intent | [C84.md](C84.md) |
 
