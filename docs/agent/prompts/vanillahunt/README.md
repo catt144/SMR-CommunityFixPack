@@ -65,7 +65,7 @@ inside a blind spot is not a result.
 | 1.0.7 tree archived | ✅ `C:\Dev\SMR-SrcArchive\1.0.7.396349\Src`, 4448 files, digest `09d95e34…9921`, Steam build `23584660` (`EF-083`) | same |
 | installed build = archived 1.1.0 | ✅ `appmanifest_3215050.acf` `buildid 24995074` (checked 2026-09-09 by this session and by `smr-bugfixpack-05`) | ⛔ **re-read the appmanifest at link top.** A different buildid ⇒ ARCHIVE THE NEW TREE FIRST (standing rule), then STOP AND ASK — the inventory's 1.1.x side is pinned to `24995074` and a re-pin is a chain decision, not a link's |
 | the diff is measured | ✅ from the two manifests, excluding nothing: **2444 changed**, 1968 identical, **305 added**, 36 removed | link 01 re-derives these from the manifests as its first control — the numbers must match or the archive moved |
-| fpk parity on 1.1.0 | ⛔ **NOT DONE** | link 01, unit A |
+| fpk parity on 1.1.0 | ✅ **DONE 2026-09-10, and PERFECT** — `EF-085`: 4,564/4,564 non-DLC Src files ship byte-identical in `Packs\Lua.fpk`/`Data.fpk`, **0 divergent, 0 absent** (against 1.0.7's 2250/2256-with-5). ⇒ blind spot 3 above is CLOSED for the bytes: every `1.1.0 file:line` this chain writes cites bytes the install ships. ⛔ Still not proof the game EXECUTES them (`EF-078`), and it says nothing about `Mars.exe` | `python tools/flpk_extract.py`-based re-run; `EF-085` carries the route. Re-run after any buildid change |
 
 ⭐ **MEASURED 2026-09-09 (authoring session), the shape that sized this chain**
 — re-derive in 01, do not inherit:
@@ -83,7 +83,7 @@ inside a blind spot is not a result.
 
 | # | file | model | owner needed? | what it drains |
 |---|---|---|---|---|
-| 01 | `01_INVENTORY.md` | Opus (rec) | no | fpk parity on 1.1.0 · `tools/treediff.py` (imports `luafn.find_bodies`, never re-implements it) + `--selftest` · `tools/presetdiff.py` (field-level preset differ, churn RULES + a 20-row sample per class) + `--selftest` · `INVENTORY.tsv`, `STORAGE.tsv`, `FILES.tsv`, `CALLERS.tsv`, `PRESETS.tsv` · mechanical classes and counts · the four seeded positives confirmed by the TOOL |
+| ~~01~~ | ~~`01_INVENTORY.md`~~ | Opus | no | ✅ **DONE 2026-09-10** (`smr-bugfixpack-04`). fpk parity **PERFECT, 0 divergent** (`EF-085`) ⇒ no row carries `FPK-DIVERGENT`. `tools/treediff.py` + `tools/presetdiff.py`, both importing `luafn.find_bodies`, both `--selftest` 16 PASS / 0 FAIL and broken-on-purpose once each. Five TSVs in `reports/vanillahunt/`: INVENTORY 9,832 · PRESETS 37,512 · CALLERS 4,096 · STORAGE 1,155 · FILES 202. `TRIAGE.md` §0 written and CLOSED. Manifest re-derivation MATCHES §0 (2437+7 / 1963+5 / 166+139 / 36+0). **Seeded positives 4/4 by the tool.** ⭐ 2,465 `same`-against-changed-sig call lines (9 against a pure-`sig` callee); `Landscapes` GameVar→MapVar found mechanically; the "removed" modding backend was MOVED. ⛔ Known holes: 8,473 indented declarations (4,883 in `hand` files) covered by neither instrument; 133 `SPAN-SUSPECT` rows; delimiter fix routed as checklist **135** |
 | 02 | `02_TRIAGE.md` | Opus (rec) | no | the first parent-orchestrates-agents link: system + DLC-adjacent tags on every Lua and preset row, fan-out classification of body-changed rows (with the `SMELL` surface sweep), class (g) set built, the seeded-positive control scored, `TRIAGE.md` ledger with exact counts, row lists for 03 and for each of 04's agents |
 | 03 | `03_SEAM.md` | **Fable** (rec) | no | class (g) — the OLD × NEW seam: base-game changes (Lua and presets) made to accommodate the DLC that ship to EVERYONE; both-sides discipline per row; the handoff section `dlccheck` consumes. Independent of 04 |
 | 04 | `04_HUNT.md` | **Codex Sol Ultra** (owner-assigned 09-10) | no | the second parent-orchestrates-agents link, everything not tagged (g): one agent per system (turf · colony · engine · storage+removed/added) and one per preset registry, each under its own binding reading order; the parent verifies one finding per agent from the trees, files, and commits every agent report verbatim to `reports/vanillahunt/agents/`. ⚖️ **Does NOT split** (owner, 09-10) — the whole plan runs in one orchestrator, committed as it goes |
@@ -240,16 +240,21 @@ INDEX AT FILING TIME (150/185 at authoring — peers file too); `status: "cand"`
 generated index (never hand-edit it):
 
 ```
-python - <<'PY'
-import sys; sys.path.insert(0, "tools")
-import split_bugs as sb
-sb.write_lines("docs/agent/bugs/INDEX.md", sb.render_index(sb.load_from_dir()))
-PY
+python tools/doccheck.py --regen
 ```
 
-`python tools/doccheck.py` must then read `BUGS INDEX: fresh`; red means the
-front matter and the heading tag disagree. A fact goes to `facts/EF-###.md` the
-same way with `split_facts` (keep `lines:` equal to the body length).
+⚠️ **CORRECTED BY LINK 01, 2026-09-10.** This block used to hand-drive
+`split_bugs.write_lines(...)` and say "a fact goes the same way with
+`split_facts`". **It does not** — `split_facts` has no `write_lines`, so that
+recipe fails on any fact. `--regen` is the one route: it rewrites
+`bugs/INDEX.md`, `facts/INDEX.md` and `AGENTS.md` together, it is what
+`doccheck`'s own RED tells you to run, and ⛔ it is never
+`split_bugs.py --write` / `split_facts.py --write` (those re-run the retired
+one-time migration).
+
+`python tools/doccheck.py` must then read `BUGS INDEX: fresh` and `FACTS INDEX:
+fresh`; red means the front matter and the heading tag disagree. For a fact,
+keep `lines:` equal to the body length.
 
 ## 4 · Subagents — fan out the READING, keep the JUDGEMENT central
 

@@ -1,0 +1,213 @@
+# treediff.py v1 (2026-09-10) | old=C:\Dev\SMR-SrcArchive\1.0.7.396349\Src digest=09d95e3448573dc3… | new=C:\Dev\SMR-SrcArchive\1.1.0.403908\Src digest=a4577da25cb3fe85… | python treediff.py --out docs/agent/reports/vanillahunt | 2026-09-10
+# NORMALISATION: CRLF->LF, trailing whitespace stripped per line; leading indentation KEPT; ⭐ COMMENTS ARE KEPT AND COUNT — a whitespace-only diff is NOT a row, a changed comment IS a row.
+# DELIMITER: luafn.find_bodies, imported not re-implemented. Keys collapse `Class:Method` and `Class.Method`; the separator actually written is the first character of the sig columns.
+# COVERAGE: indent-0 declarations only, five forms (function C:M / function C.M / function G / local function f / [local] x = function). NOT COVERED: 8473 indented declarations (4883 in `hand` files, 3590 in `generated` — presetdiff.py reads the generated side at field level) and every anonymous `function(` literal. ⛔ A function never emitted is not a function that did not change.
+# FILES: changed=2437 identical=1963 added=166 removed=36 (DLC/ excluded: 151 paths). ⭐ MANIFEST RE-DERIVATION CONTROL vs chain README §0 (which counts DLC): 2437+7=2444 changed, 1963+5=1968 identical, 166+139=305 added, 36+0=36 removed — MATCHES; the 139 DLC adds are 138 `DLC/norman` + 1 `DLC/thomas`.
+# FPK PARITY (EF-085, measured 2026-09-10): every `Lua/`, `CommonLua/` and `Data/` file in the archived 1.1.0 Src ships BYTE-IDENTICAL in Packs\Lua.fpk / Packs\Data.fpk — 0 divergent. ⇒ NO ROW CARRIES `FPK-DIVERGENT`, because there is nothing to flag. ⛔ That proves the bytes match, not that the game executes them (EF-078 stands).
+# FUNCTIONS: 1.0.7=27762 1.1.0=30355 | IDENTICAL (counted, not listed)=22139 | SPAN-SUSPECT=441 declarations (the one-line-function trap, MEASURED — see the tool header; ⛔ NOT fixed here, a delimiter change re-hashes every SRC: pin in Code/) | MULTI=474 declarations | spans reaching EOF=567
+# RENAME? is a HINT, never a verdict, and it is GUARDED: a partner needs >=4 distinct non-blank body lines and <=3 candidates. Rejected as too trivial to be evidence: 441 added rows (bodies like `end` or `return true`); rejected as ambiguous (one body, many partners): 0. Those are NOT `no match` — they are `too generic to say`.
+# FILES: the added and removed files (DLC/ excluded — the 305/36 of chain README §0 include 139 DLC adds; here that is 166 added and 36 removed).
+# ⛔ THE METHOD RULE, MECHANISED. `names_still_in_110` is the PRESENCE SIDE for every removed file: how many of the names it declared are still declared SOMEWHERE in the 1.1.0 tree. A NONZERO COUNT SAYS 'MOVED', NOT 'GONE'. 21 of the 36 removed files have a nonzero count. ⛔ This is a HINT for a reader, not a verdict: a surviving name can be an unrelated homonym, and a zero count still only proves the NAME is gone, never the FEATURE (search for the capability — the preset, the UI string, the inheriting class).
+path	status	bucket	declared_names	names_still_in_110	sample_of_surviving_names
+CommonLua/ArtTest.lua	removed	hand	11	2	ArtTest.Start; OnMsg.ChangeMapDone
+CommonLua/Classes/AutoAttachPlacement.lua	added	hand	2		
+CommonLua/Classes/EnvColorPalette.lua	removed	hand	25	7	ApplyCurrentEnvColorizedToObj; EnvColorizedEvaluateCMs; EnvironmentColorEntry.GetEditorView; EnvironmentColorEntryBase.__eq; EnvironmentColorPalette.GetEditorView; EnvironmentTerrainColorEntry.GetEditorView; OnMsg.NewMap
+CommonLua/Classes/Flight.lua	removed	hand	69	21	FlightObstacle.OnMoved; FlyingMovable.ClearPath; FlyingMovable.Face; FlyingMovable.GetFlying; FlyingMovable.GetPathHash; FlyingMovable.OnMoved; FlyingMovable.SetFlying; FlyingMovable.Step
+CommonLua/Classes/LootDef.lua	added	hand	21		
+CommonLua/Classes/MantisTaskTemplate.lua	added	hand	7		
+CommonLua/Classes/Mod.lua	removed	hand	188	188	AddToModsAffectedResourcesCache; ApplyModOptions; AreModSignaturesRequired; AreModdingToolsActive; CacheModDependencyGraph; CanLoadUnpackedMods; CancelModOptions; CheckBlacklistedMods
+CommonLua/Classes/ModItem.lua	removed	hand	166	165	CanAppendToTable; DefineModItemActionFX; DefineModItemPreset; DelayedLoadEntity; DoModItemChangePropTargetSameProp; DuplicateT; DuplicateTs; EditTypeItems
+CommonLua/Classes/ModItemFolder.lua	removed	hand	6	6	GedOpAddModItemsToFolder; GedOpRelocateModItemToFolder; ModItemFolder.EditorItemsMenu; ModItemFolder.GetDiagnosticMessage; ModItemFolder.OnAfterEditorNew; ModItemFolder.__ForEachModItem
+CommonLua/Classes/ModItemMap.lua	removed	hand	22	22	ModItemMapDataPreset.CanSaveMap; ModItemMapDataPreset.CopyPreset; ModItemMapDataPreset.CopyRelatedFiles; ModItemMapDataPreset.DeleteMapFolder; ModItemMapDataPreset.EditMap; ModItemMapDataPreset.GatherPropertiesBlacklisted; ModItemMapDataPreset.GetEditorMessage; ModItemMapDataPreset.GetFilesContents
+CommonLua/Classes/ModItemSetpiece.lua	removed	hand	1	1	ModItemSetpiecePrg.TestModItem
+CommonLua/Classes/ModsBackend.lua	removed	hand	33	33	GetModsBackendClass; IsModsBackendLoaded; ModsBackend.AttemptingLogin; ModsBackend.CanAuth; ModsBackend.CanFavorite; ModsBackend.CanFlag; ModsBackend.CanInstall; ModsBackend.CanRate
+CommonLua/Classes/SkyObject.lua	added	hand	1		
+CommonLua/Data/LightmodelFeaturePreset.lua	added	hand	0		
+CommonLua/Features/GameSpeed.lua	added	hand	21		
+CommonLua/Libs/DevToolsPublic/Connectivity.lua	added	hand	3		
+CommonLua/Libs/DevToolsPublic/DumpAllMethods.lua	added	hand	9		
+CommonLua/Libs/DevToolsPublic/FlightDebug.lua	removed	hand	27	4	FlyingObj.OnEditorSetProperty; OnMsg.DbgClear; OnMsg.LoadGame; OnMsg.SelectedObjChange
+CommonLua/Libs/DevToolsPublic/LightmodelDebug.lua	added	hand	4		
+CommonLua/Libs/Objectives/ClassDefs/ClassDef-Objectives.generated.lua	added	hand	35		
+CommonLua/Libs/Objectives/Data/ClassDef-Objectives.lua	added	hand	0		
+CommonLua/Libs/Objectives/Data/MsgDef.lua	added	hand	0		
+CommonLua/Libs/Objectives/Data/__load.lua	added	hand	0		
+CommonLua/Libs/Tutorial/ClassDefs/ClassDef-Tutorials.generated.lua	added	hand	29		
+CommonLua/Libs/Tutorial/Classes/XDef/TutorialHintPopup.generated.lua	added	hand	4		
+CommonLua/Libs/Tutorial/Classes/XDef/TutorialListEntry.generated.lua	added	hand	2		
+CommonLua/Libs/Tutorial/Data/ClassDef-Tutorials.lua	added	hand	0		
+CommonLua/Libs/Tutorial/Data/NotificationPreset.lua	added	hand	0		
+CommonLua/Libs/Tutorial/Data/XDef/TutorialHintPopup.lua	added	hand	0		
+CommonLua/Libs/Tutorial/Data/XDef/TutorialListEntry.lua	added	hand	0		
+CommonLua/Libs/Tutorial/Data/__load.lua	added	hand	0		
+CommonLua/Libs/Tutorial/Tasks.lua	added	hand	6		
+CommonLua/Libs/Tutorial/Tutorials.lua	added	hand	20		
+CommonLua/Libs/Tutorial/TutorialsList.lua	added	hand	13		
+CommonLua/Libs/__DebugAdapter.lua	added	hand	0		
+CommonLua/Libs/__EnvColorPalette.lua	added	hand	2		
+CommonLua/Modding/Mod.lua	added	hand	190		
+CommonLua/Modding/ModItem.lua	added	hand	165		
+CommonLua/Modding/ModItemFolder.lua	added	hand	6		
+CommonLua/Modding/ModItemMap.lua	added	hand	22		
+CommonLua/Modding/ModItemSetpiece.lua	added	hand	1		
+CommonLua/Modding/ModsBackend.lua	added	hand	33		
+CommonLua/Notifier.lua	removed	hand	3	1	Notifier.RegisterNotification
+CommonLua/PFClassDef.lua	added	hand	10		
+CommonLua/PresetMapSource.lua	added	hand	19		
+CommonLua/PresetPackage.lua	added	hand	7		
+CommonLua/UI/OldTerminalTarget.lua	removed	hand	4	4	OldTerminalTarget.OnMouseButtonDoubleClick; OldTerminalTarget.OnMouseButtonDown; OldTerminalTarget.OnMouseButtonUp; stub
+Data/AmbientLife/VisitFastFoodRestaurant.lua	added	generated	0		
+Data/AmbientLife/VisitFoodStand.lua	added	generated	0		
+Data/AmbientLife/VisitGourmetRestaurant.lua	added	generated	0		
+Data/AmbientLife/Visittable1.lua	added	generated	0		
+Data/AmbientLife/WorkFarmSmall.lua	added	generated	0		
+Data/AmbientLife/WorkFoodStand.lua	added	generated	0		
+Data/BuildingTemplate/PassageHub.lua	added	generated	0		
+Data/BuildingTemplate/UniversalFarmPlantStorageDepot.lua	added	generated	0		
+Data/BuildingTemplate/UniversalFungiStorageDepot.lua	added	generated	0		
+Data/BuildingTemplate/UniversalMeatStorageDepot.lua	added	generated	0		
+Data/CheatDef.lua	added	generated	0		
+Data/ClassDef-Conditions.lua	removed	generated	0	0	
+Data/ClassDef-Factions.lua	removed	generated	0	0	
+Data/DiscoveryGenericPreset.lua	removed	generated	0	0	
+Data/Event/ClosedLoopDome.lua	added	generated	0		
+Data/Event/ClosedLoopDome_FollowUp.lua	added	generated	0		
+Data/Event/PrefabLaunchDamage_ElectronicsFactory.lua	added	generated	0		
+Data/FactionDef/TransHumanistMovement.lua	removed	generated	0	0	
+Data/GameStateDef.lua	added	generated	0		
+Data/MissionParamsDef.lua	added	generated	0		
+Data/PFClassDef.lua	added	generated	0		
+Data/ParticleSystemPreset/SmallFarm_Shower.lua	added	generated	0		
+Data/ParticleSystemPreset/SupplyPodUI_Glow.lua	added	generated	0		
+Data/ParticleSystemPreset/SupplyPodUI_Trail.lua	added	generated	0		
+Data/PopupNotifications/PopupNotificationPreset-NewTutorial.lua	added	generated	0		
+Data/PopupNotifications/PopupNotificationPreset-Tutorial.lua	removed	generated	0	0	
+Data/ResourceProductionRecipe.lua	added	generated	0		
+Data/StatsImpact.lua	added	generated	0		
+Data/StatusEffectPreset.lua	added	generated	0		
+Data/StoryBit/MartianYellowstone_Expedition1.lua	added	generated	0		
+Data/Tech.lua	added	generated	0		
+Data/Tutorial.lua	added	generated	0		
+Data/TutorialPreset.lua	removed	generated	0	0	
+Data/TutorialStep.lua	added	generated	0		
+Data/XDef/CommandCenterLifeSupportGridsOverview.lua	removed	generated	0	0	
+Data/XDef/CommandCenterLifeSupportGridsOverviewRow.lua	removed	generated	0	0	
+Data/XDef/CommandCenterOxygenGridsOverview.lua	added	generated	0		
+Data/XDef/CommandCenterOxygenGridsOverviewRow.lua	added	generated	0		
+Data/XDef/CommandCenterWaterGridsOverview.lua	added	generated	0		
+Data/XDef/CommandCenterWaterGridsOverviewRow.lua	added	generated	0		
+Data/XDef/FactionCardInfoDevRollover.lua	added	generated	0		
+Data/XDef/HoverableTitle.lua	added	generated	0		
+Data/XDef/InfopanelSectionRolloverNoTitleRight.lua	added	generated	0		
+Data/XDef/ResearchDlg.lua	removed	generated	0	0	
+Data/XDef/ResupplyCategoryRollover.lua	added	generated	0		
+Data/XDef/RolloverCropItem.lua	added	generated	0		
+Data/XDef/RolloverModManager.lua	added	generated	0		
+Data/XDef/RolloverRecipeIngredientHex.lua	added	generated	0		
+Data/XDef/RolloverRecipeItem.lua	added	generated	0		
+Data/XDef/RolloverRecipeSection.lua	added	generated	0		
+Data/XDef/RolloverTitleSection.lua	added	generated	0		
+Data/XDef/TutorialDlg.lua	added	generated	0		
+Data/XDef/TutorialListEntry.lua	added	generated	0		
+Data/XDef/TutorialsLeftList.lua	added	generated	0		
+Data/XDef/TutorialsListItem.lua	added	generated	0		
+Data/XDef/XTechNode.lua	added	generated	0		
+Data/XDef/XTechTree.lua	added	generated	0		
+Data/XDef/XTechTreeMapLabel.lua	added	generated	0		
+Data/XDef/contextResourceAcceptToggles.lua	added	generated	0		
+Data/XDef/customSecurityPost.lua	added	generated	0		
+Data/XDef/ipFirefly.lua	removed	generated	0	0	
+Data/XDef/ipMixedPoolStockpile.lua	added	generated	0		
+Data/XDef/sectionFactoryResearch.lua	added	generated	0		
+Data/XDef/sectionFoodProducerStoredResources.lua	added	generated	0		
+Data/XDef/sectionFoodService.lua	added	generated	0		
+Data/XDef/sectionIngredientRow.lua	added	generated	0		
+Data/XDef/sectionMultiResourceStorage.lua	added	generated	0		
+Data/XDef/sectionRecipeProductionBuilding.lua	added	generated	0		
+Data/XDef/sectionResourceGroupStorage.lua	added	generated	0		
+Data/XDef/sectionStorage.lua	removed	generated	0	0	
+Lua/AgentPlayTest.lua	added	hand	1		
+Lua/AmbientLife/VisitFastFoodRestaurant.lua	added	hand	0		
+Lua/AmbientLife/VisitFoodStand.lua	added	hand	0		
+Lua/AmbientLife/VisitGourmetRestaurant.lua	added	hand	0		
+Lua/AmbientLife/Visittable1.lua	added	hand	0		
+Lua/AmbientLife/WorkFarmInsect.lua	added	hand	0		
+Lua/AmbientLife/WorkFarmSmall.lua	added	hand	0		
+Lua/AmbientLife/WorkFoodStand.lua	added	hand	0		
+Lua/BuildingTemplate/PassageHub.generated.lua	added	generated	0		
+Lua/BuildingTemplate/UniversalFarmPlantStorageDepot.generated.lua	added	generated	0		
+Lua/BuildingTemplate/UniversalFungiStorageDepot.generated.lua	added	generated	0		
+Lua/BuildingTemplate/UniversalMeatStorageDepot.generated.lua	added	generated	0		
+Lua/Buildings/ContinuousOps.lua	added	hand	7		
+Lua/Buildings/Decoration.lua	added	hand	0		
+Lua/Buildings/FoodServiceBuilding.lua	added	hand	98		
+Lua/Buildings/InteriorAmbientLife.lua	removed	hand	2	1	InteriorAmbientLife.AttachToSpotIdx
+Lua/Buildings/MixedPoolStockpile.lua	added	hand	17		
+Lua/Buildings/MultiResourceCubeVisuals.lua	added	hand	38		
+Lua/Buildings/MultiResourceDepot.lua	added	hand	37		
+Lua/Buildings/RecipeProductionBuilding.lua	added	hand	84		
+Lua/Buildings/ResourceProduction.lua	added	hand	7		
+Lua/ClassDefs/ClassDef-Conditions.generated.lua	removed	generated	111	111	AreDomesOpen.__eval; CanCauseFault.__eval; CheckAverageComfort.__eval; CheckAverageComfort.__eval_relaxed; CheckAverageMorale.__eval; CheckAverageMorale.__eval_relaxed; CheckBuildingCount.GetDescription; CheckBuildingCount.__eval
+Lua/ClassDefs/ClassDef-Factions.generated.lua	removed	generated	144	143	AssemblyChoiceColonyGoal.TestCondition; AssemblyChoiceDef.GetError; ConditionalPolarization.GetEditorView; ConditionalPolarization.GetError; FactionDef.EvalApproval; FactionDef.EvalTension; FactionDef.GetDefaultPolarizationDef; FactionDef.GetError
+Lua/Conditions.lua	added	hand	31		
+Lua/Config/_pfclasses.lua	added	hand	0		
+Lua/Factions/FactionDef.lua	added	hand	132		
+Lua/Factions/LawDef.lua	added	hand	59		
+Lua/HasSupport.lua	added	hand	6		
+Lua/MarsEvents.lua	added	hand	5		
+Lua/Meal.lua	added	hand	12		
+Lua/PassageHub.lua	added	hand	8		
+Lua/RecentEvents.lua	added	hand	7		
+Lua/ScriptConditions.lua	added	hand	11		
+Lua/ScriptStatements.lua	added	hand	55		
+Lua/SpaceElevatorCargoRequest.lua	added	hand	11		
+Lua/Spoilage.lua	added	hand	5		
+Lua/Stats.lua	added	hand	38		
+Lua/StatusEffectPreset.lua	added	hand	9		
+Lua/TechTree.lua	added	hand	144		
+Lua/TraitPreset.lua	added	hand	6		
+Lua/Tutorial1.lua	removed	hand	4	0	
+Lua/Tutorial2.lua	removed	hand	7	1	DisableMaintenance
+Lua/Tutorial3.lua	removed	hand	1	0	
+Lua/Tutorial4.lua	removed	hand	1	0	
+Lua/Tutorial5.lua	removed	hand	1	0	
+Lua/TutorialUI.lua	added	hand	15		
+Lua/TutorialsNew.lua	added	hand	128		
+Lua/X/MarsXRollover.lua	added	hand	2		
+Lua/X/PassthroughWindow.lua	added	hand	5		
+Lua/XDef/CommandCenterLifeSupportGridsOverview.generated.lua	removed	generated	1	1	CommandCenterLifeSupportGridsOverview.Init
+Lua/XDef/CommandCenterLifeSupportGridsOverviewRow.generated.lua	removed	generated	2	2	CommandCenterLifeSupportGridsOverviewRow.Init; CommandCenterLifeSupportGridsOverviewRow.OnMouseButtonDoubleClick
+Lua/XDef/CommandCenterOxygenGridsOverview.generated.lua	added	generated	1		
+Lua/XDef/CommandCenterOxygenGridsOverviewRow.generated.lua	added	generated	4		
+Lua/XDef/CommandCenterWaterGridsOverview.generated.lua	added	generated	1		
+Lua/XDef/CommandCenterWaterGridsOverviewRow.generated.lua	added	generated	4		
+Lua/XDef/FactionCardInfoDevRollover.generated.lua	added	generated	1		
+Lua/XDef/HoverableTitle.generated.lua	added	generated	7		
+Lua/XDef/InfopanelSectionRolloverNoTitleRight.generated.lua	added	generated	1		
+Lua/XDef/ResearchDlg.generated.lua	removed	generated	4	4	ResearchDlg.Init; ResearchDlg.OnDelete; ResearchDlg.OnShortcut; ResearchDlg.Open
+Lua/XDef/ResupplyCategoryRollover.generated.lua	added	generated	1		
+Lua/XDef/RolloverCropItem.generated.lua	added	generated	1		
+Lua/XDef/RolloverModManager.generated.lua	added	generated	1		
+Lua/XDef/RolloverRecipeIngredientHex.generated.lua	added	generated	2		
+Lua/XDef/RolloverRecipeItem.generated.lua	added	generated	2		
+Lua/XDef/RolloverRecipeSection.generated.lua	added	generated	1		
+Lua/XDef/RolloverTitleSection.generated.lua	added	generated	2		
+Lua/XDef/TutorialDlg.generated.lua	added	generated	4		
+Lua/XDef/TutorialListEntry.generated.lua	added	generated	2		
+Lua/XDef/TutorialsLeftList.generated.lua	added	generated	1		
+Lua/XDef/TutorialsListItem.generated.lua	added	generated	5		
+Lua/XDef/XTechNode.generated.lua	added	generated	22		
+Lua/XDef/XTechTree.generated.lua	added	generated	10		
+Lua/XDef/XTechTreeMapLabel.generated.lua	added	generated	2		
+Lua/XDef/contextResourceAcceptToggles.generated.lua	added	generated	4		
+Lua/XDef/customSecurityPost.generated.lua	added	generated	1		
+Lua/XDef/ipFirefly.generated.lua	removed	generated	1	1	ipFirefly.new
+Lua/XDef/ipMixedPoolStockpile.generated.lua	added	generated	2		
+Lua/XDef/sectionFactoryResearch.generated.lua	added	generated	2		
+Lua/XDef/sectionFoodProducerStoredResources.generated.lua	added	generated	2		
+Lua/XDef/sectionFoodService.generated.lua	added	generated	2		
+Lua/XDef/sectionIngredientRow.generated.lua	added	generated	4		
+Lua/XDef/sectionMultiResourceStorage.generated.lua	added	generated	2		
+Lua/XDef/sectionRecipeProductionBuilding.generated.lua	added	generated	2		
+Lua/XDef/sectionResourceGroupStorage.generated.lua	added	generated	3		
+Lua/XDef/sectionStorage.generated.lua	removed	generated	2	2	sectionStorage.Init; sectionStorage.new

@@ -160,3 +160,125 @@ are in README §4 and their pins in 01's inbox. The authoring session's own
 numbers (README §0 shape table) were produced by a declaration-line regex and
 a manifest comparison, not by `treediff` — if 01's inventory disagrees with
 them, 01 is right and the README table is the drift.
+
+---
+
+*(from link 01, `smr-bugfixpack-04`, 2026-09-10)*
+
+**What exists to audit.** `tools/treediff.py` + `tools/presetdiff.py`, the five
+TSVs and `TRIAGE.md` §0 in `docs/agent/reports/vanillahunt/`, and `EF-085` (fpk
+parity). Both tools import `luafn.find_bodies` rather than re-implementing it;
+`treediff` also imports `sigcheck.params`. Re-run both `--selftest`s: 16 PASS /
+0 FAIL each, exit 0. Full counts in `TRIAGE.md` §0; my outbox to 02 is the
+reading guide and is not repeated here.
+
+⭐ **THE ASSERTION I BROKE ON PURPOSE, AND ITS RED** (both tools — an instrument
+nobody has watched fail is not an instrument):
+
+- `treediff.py`: inverted the whitespace negative to demand the row EXISTS.
+  ```
+  FAIL   ⛔ CRLF + trailing-space-only change is NOT A ROW   -> None
+  SELFTEST: *** FAIL ***          exit=1
+  ```
+  Restored → 16 PASS, exit 0. **The exit code was verified in both states**, so
+  the green gate is a real gate and not a print statement.
+- `presetdiff.py`: inverted the `T-ID` expectation to `FORMAT`.
+  ```
+  FAIL   ⭐ T() id changed, TEXT IDENTICAL -> `T-ID`
+         -> ['Data/Widget.lua', 'Widget', 'alpha', 'label', 'T(111, "Hello")',
+             'T(222, "Hello")', 'T-ID', '']
+  SELFTEST: *** FAIL ***          exit=1
+  ```
+  Restored → 16 PASS, exit 0. ⚠️ My FIRST attempt at this break used `sed` and
+  produced a `SyntaxError`, which also exits 1 — I caught that the RED was the
+  interpreter and not the assertion, and redid it as a clean edit. **A non-zero
+  exit is not by itself evidence that a falsifier fired.**
+
+⛔ **DRIFT — every mistake caught, mine and upstream's.**
+
+1. ⭐ **My own first design was wrong, and the falsifier caught it, not me.**
+   `treediff` v0 hashed the whole body span — which includes the declaration
+   line. So every signature change reported as `body+sig` (the planted F115
+   fixture failed) and a RENAME could never hash-match its partner (that
+   fixture failed too). Fixed by hashing twice: `hash` (whole span, byte-for-byte
+   `bodycheck`-compatible so a row cross-checks against a `SRC:` pin) and
+   `ihash` (declaration line dropped) for the body verdict and for `RENAME?`.
+   ⚠️ **Audit point: if the two fixtures had not been in the brief, this ships
+   silently and every `sig` row is mislabelled.**
+2. **`RENAME?` had no triviality guard and fired 1,328 times inside one
+   `LuaExportedDocs` file** on bodies like `end` and `return true` (57 pairs
+   with a ONE-line body, 304 with two, single hashes with 32 partners). Guarded
+   to ≥4 distinct non-blank body lines and ≤3 candidates; both rejection counts
+   are in the banner. After the guard it found the real thing: the modding
+   backend MOVED `CommonLua/Classes/` → `CommonLua/Modding/`.
+3. **`presetdiff` had three parser defects, all found by SAMPLING the real
+   trees, none by the fixtures.** (a) `call()` counted bracket depth manually
+   while `value()` also consumed the nesting, so the two desynced and the
+   parser ran to end-of-file — it arrived as a `RecursionError`, which is lucky;
+   it could equally have been a wrong answer. (b) Embedded `function … end`
+   bodies in `XDef`/`FlightPolicyDef` fields were shredded into pseudo array
+   items, so a one-line handler edit produced hundreds of rows whose "values"
+   were `local`, `then`, `end`, `dlg` — **42,072 such rows, every one
+   mis-explained by my own REINDEX rule as positional churn.** (c) Nested
+   `PlaceObj` sub-items use the POSITIONAL PAIR form
+   `{'Name', value, 'Name2', value2}`, which I was indexing as `[1][2][3]…`, so
+   property names became values and one insertion shifted everything
+   (`XDef:PoliticsDlg` alone: 5,307 rows). Row count across the three fixes:
+   **78,243 → 54,291 → 37,512.** All three are now PINNED by fixture
+   assertions. ⚠️ **Audit point: fixtures I wrote could not find defects in a
+   parser I wrote — only the real data could. Judge the other instrument the
+   same way.**
+4. ⭐ **A churn class I had to split after reading it.** The brief requires 20
+   rows per class read by the author. Reading 20 `REINDEX` rows showed the class
+   was two different claims: the `<absent>` half is provable (I found the
+   matching pair — `XDef:ipTrack`'s `T(529, "Today…")` leaving `children[6]`,
+   arriving at `children[5]`), the value-vs-value half is not. Split into
+   `REINDEX` (10,462) and **`REINDEX-SWAP` (1,924, ⛔ must be read)**.
+   `T-ID`: all 22 rows read, 0 misses.
+5. ⚠️ **I shipped an overstated justification in `presetdiff`'s own header and
+   corrected it from my own run.** The header claimed preset identity had to be
+   `class::id` because "the generated files were renamed wholesale, and
+   file-keying would have produced thousands of false rows". The measurement
+   says **0 matched presets changed file** (17 generated files exist only in
+   1.0.7, 59 only in 1.1.0). The identity choice is still right — it is how the
+   GAME names a preset — but the stated reason was a story. Corrected in the
+   docstring and the banner. **Check the other headers for the same failure.**
+6. ⚠️ **`FORMAT` and `SAVE-ID` classify 0 real rows.** They pass on fixtures and
+   never fire on the trees. I report them as UNFALSIFIED rather than as working
+   rules.
+7. **Drift against my own brief, reported rather than acted on.** The prompt
+   defers the `luafn.py` delimiter fix because "a delimiter change re-hashes
+   every `SRC:` pin in `Code/`". I resolved all **49** pins against the 1.1.0
+   tree: **0** target a self-closing declaration, so a narrow fix moves **0**
+   hashes. I did not fix it (fence), but checklist **135** now puts the real
+   cost in front of the owner instead of the assumed one.
+8. **README §0 reconciles exactly** once DLC is separated — no drift there. Its
+   "138 are `DLC/norman`" is right; the 139th DLC add is `DLC/thomas`.
+9. `01_INVENTORY.md` §2.B.4 asked whether the one-line-function trap is real:
+   **confirmed at source AND measured** — 441 self-closing declarations
+   over-span, 133 rows flagged, 567 spans reach EOF.
+
+⚠️ **WHAT I DID NOT DO, so you can weigh the silence.** I did not read a single
+row for meaning (fence §3) — including the three pure-`sig` rows I noticed while
+testing the tool and passed to 02 unread (`Station:GetScoreFor` `:traits` →
+`:colonist`, and the two `TraverseTunnel` methods). I did not touch `luafn.py`,
+`bodycheck.py`, `sigcheck.py` or `doccheck.py`. I did not wire either selftest
+into `doccheck` (01's fence says you re-run them). I did not read `DLC/` or
+`Code/` beyond resolving the 49 `SRC:` pins for checklist 135.
+
+⭐ **THE HOLE TO WEIGH HARDEST.** `treediff` covers **indent-0 declarations
+only**. **8,473 indented declarations exist on the 1.1.0 side; 4,883 of them are
+in `hand` files and are covered by NEITHER instrument** (`presetdiff` reaches
+only the `generated` share). Plus every anonymous `function(` literal
+(~12,200 lines). I sampled the indented set and it is overwhelmingly preset
+data, which is why the contract was set at indent-0 — but that sample is an
+argument, not a proof, and the hand-file remainder is unmeasured territory. If
+you re-falsify one thing in this link, make it that.
+
+**Re-falsification handles for you.** Plant fresh changes with
+`python tools/treediff.py --old <dir> --new <dir>` on two temp trees (the
+fixture builders `OLD_FIX`/`NEW_FIX` in each tool show the shape), and
+`python tools/presetdiff.py --sample <churn-class> -n 20 --seed <n>` prints any
+class for reading. The four seeded positives are re-scored by
+`treediff --selftest` PART 2 on every run, so a regression in the real trees
+shows up there and not only in a ledger.

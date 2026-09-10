@@ -29,6 +29,58 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### 2026-09-10 — 135: `luafn.py`'s body delimiter over-spans one-line functions (441 declarations, 133 inventory rows). ⭐ The measurement says the fix would change **0** shipped hashes — cheaper than the chain brief assumed. **TAKEABLE WHEN you rule; recommendation: take it in hotfix 3, as a small standalone change.** Nothing here needs the keyboard.
+
+> **What was measured** (vanillahunt link 01, 2026-09-10, `TRIAGE.md` §0.6).
+> `find_bodies` scans forward from a declaration for a bare `end` at the same
+> indentation and **never checks whether the declaration line already closed
+> the function**. So `function Community:GetAverageComfort() return … end`
+> spans past its own `end` into whatever comes next, and its "body" swallows
+> the following function. Confirmed at source, then MEASURED on the two trees:
+> **441 self-closing declarations over-span**, and **133 inventory rows** carry
+> the resulting `SPAN-SUSPECT` flag (one-line getters — `Community:GetAverage*`,
+> `SupplyGridFragment:GetCurrent*`, `LightmodelPreset:Get*`,
+> `object.GetLocalPoint*` — plus a block of `OnMsg.*` handlers in
+> `CommonLua/Ged.lua`). A further 567 spans run to end-of-file.
+>
+> **Why link 01 did NOT fix it, deliberately.** `luafn.find_bodies` is the
+> project's single canonical body delimiter: `bodycheck.py` imports it so every
+> `-- SRC: … sha256=…` pin in `Code/` hashes exactly what it prints. **Changing
+> the delimiter changes those hashes**, so every pinned module would report
+> `BODY-CHANGED` until re-pinned. That is a pack-wide re-pin, not an inventory
+> link's side effect.
+>
+> **What it costs us today:** a `body` verdict on one of those 133 rows is
+> unreliable — the body may have "changed" only because the next function did.
+> The chain's downstream links are told this and will not treat them as
+> ordinary rows. ⛔ It does NOT affect any currently shipped fix, and that was
+> **MEASURED, not assumed**: all **49** `SRC:` pins in `Code/` were resolved
+> against the 1.1.0 tree and **0** of them target a self-closing declaration
+> (the 4 seeded controls also delimit correctly, and `bodycheck --selftest`
+> stays green). ⇒ option (b)'s re-pin would change 0 hashes today — its cost is
+> the sweep and the re-verification, not a wave of red.
+>
+> ⚠️ **DRIFT, REPORTED AGAINST MY OWN BRIEF.** The chain prompt told link 01 not
+> to touch `luafn.py` because "a delimiter change re-hashes every `SRC:` pin in
+> `Code/`". **The measurement above says otherwise**: a narrow fix (if the
+> declaration line closes its own function, the span is that line) changes the
+> span of self-closing declarations ONLY, and no pin targets one — so **0
+> hashes move**. I did not fix it anyway, because the fence is the fence and
+> the delimiter is a pack-wide instrument; but the decision should be made on
+> the real cost, not the assumed one.
+>
+> **The options.** (a) **Leave it** — the flag plus this note is enough for the
+> chain; the defect is disclosed and bounded, but it stays in the instrument
+> every future link inherits. (b) ⭐ **Fix `luafn.py` in hotfix 3**
+> (recommended) — a narrow change, 0 shipped hashes affected, `bodycheck
+> --selftest` + `sigcheck --selftest` + the new `treediff --selftest` (which
+> PINS the current over-span behaviour on a fixture, so the change shows up as
+> a deliberate RED there and nowhere else) are the gate. The one real cost is
+> that the vanillahunt TSVs were generated under the OLD behaviour, so either
+> the chain finishes first or the inventory is regenerated. (c) Fix it but keep
+> the old behaviour behind a flag — ⛔ two extractors that can disagree, exactly
+> what `luafn.py`'s own header forbids.
+
 ### 2026-09-10 — 134: the vanilla diff hunt is authored as a chain of FIVE links; assign the models, then fire link 01 when convenient. Nothing here needs the keyboard.
 
 > **What exists now:** `docs/agent/prompts/vanillahunt/` — 5 links + a README

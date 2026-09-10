@@ -164,3 +164,121 @@ batch, every drift). Strike your row. Explicit-path `git add`:
 argument for the batch counts above: ~807 hand-written changed files, of which
 `CommonLua/**` is ~365 and `Lua/**` ~440. If the `body` row count for `hand`
 files exceeds ~6,000, take the split in §4 up front rather than at batch 30.
+
+---
+
+*(from link 01, `smr-bugfixpack-04`, 2026-09-10 — the inventory is BUILT and
+committed. ⛔ Everything below is a MEASUREMENT; nothing was read for meaning.)*
+
+**The five TSVs**, all in `docs/agent/reports/vanillahunt/`, all with a `#`
+banner block before the header row (line 1 names the tool, both tree digests,
+the command and the date; later `#` lines carry the counts and the caveats —
+⛔ read them, they are where each instrument states what it cannot do):
+`INVENTORY.tsv` (9,832 rows) · `PRESETS.tsv` (37,512) · `CALLERS.tsv` (4,096) ·
+`STORAGE.tsv` (1,155) · `FILES.tsv` (202). **`TRIAGE.md` §0 is written and
+CLOSED** — it holds every count below with its derivation; start there.
+
+**Your `body` row count for `hand` files is 3,421** — under the ~6,000
+threshold above, so the §4 split is NOT forced up front. Full kind × bucket
+table in `TRIAGE.md` §0.4. Note the shape: `added` 4,209 and `removed` 1,616
+are larger than expected, but **1,709 of the adds are inside the 166 new files
+(`NEWFILE`) and 836 of the removals inside the 36 gone files (`GONEFILE`)** —
+so the rows that need a reader are 2,500 added and 780 removed.
+
+⭐ **START HERE — the highest-yield rows, already isolated:**
+1. **9 `same` call lines against a PURE `sig` callee** (`CALLERS.tsv`): the
+   parameter list moved and the callee body is BYTE-IDENTICAL, so arguments are
+   silently one slot off. `ParadoxModData.GetAuthor` (3) ·
+   `GridProc.GetSeedSaveDest` (2) · `LockablePreset.OnLockStateChanged` (2) ·
+   `collision.Collide` (1) · `table.farthest` (1). This is the F117 shape at its
+   tightest.
+2. **2,465 `same` rows overall** across 660 call files — the wider (b′) pool.
+3. **All 15 pure-`sig` rows**, which I saw in passing while checking the tool
+   and did NOT read (fence §3). Three look like the chain's target shape and are
+   passed on as ROWS, not findings: `Lua/Buildings/Station.lua Station:GetScoreFor`
+   `:traits` → `:colonist` with a byte-identical body — F117's own callee shape
+   in a different class; and `Lua/Buildings/Tunnel.lua TunnelBase:TraverseTunnel`
+   + `Lua/Buildings/Dome_Entrance.lua Dome_Entrance:TraverseTunnel`, both
+   `(unit, start_point, end_point, …)` → `(unit, end_point, end_point_map, …)`,
+   a dropped leading parameter with an unchanged body.
+4. **`Landscapes` `GameVar` → `MapVar`** — the one `kind-changed` storage row,
+   class (c) exactly (`STORAGE.tsv`, `TRIAGE.md` §0.8).
+5. ⭐ **The tech registry exists TWICE in 1.1.0**: 264 `TechPreset` in 1.0.7
+   became 274 `TechPreset` **plus** 441 `Tech`, 258 ids under both classes.
+   Mechanical count only — routed, unread.
+
+⛔ **Corrections to the README you must carry forward.** (a) The 36 removed
+files are NOT all removals: **21 of 36 have surviving declared names**, and the
+modding backend named there was **MOVED**, not deleted —
+`CommonLua/Classes/Mod.lua` → `CommonLua/Modding/Mod.lua` (115 body-identical
+pairs), `ModItem.lua` (94), plus `ModsBackend`, `ModItemMap`, `ModItemFolder`,
+`ModItemSetpiece`. (b) The manifest re-derivation MATCHES the README exactly
+once DLC is separated (2437+7, 1963+5, 166+139, 36+0) — the README's "138 are
+`DLC/norman`" is right, the 139th is `DLC/thomas`.
+
+⭐ **fpk parity is DONE and PERFECT** (`EF-085`): 4,564/4,564 non-DLC Src files
+ship byte-identical in `Lua.fpk`/`Data.fpk`, **0 divergent**. ⇒ no row carries
+`FPK-DIVERGENT`; every `1.1.0 file:line` you write cites bytes the install
+ships. ⛔ Bytes matching is not execution — `EF-078` stands.
+
+⛔ **WHAT THE REGEX DOES NOT RECOGNISE — do not read a silence as a clean bill.**
+`treediff` emits **indent-0 declarations only**. Not covered: **8,473 indented
+declarations** (4,883 in `hand` files, 3,590 in `generated`) and every anonymous
+`function(` literal (~12,200 lines). The generated share is `presetdiff`'s at
+field level; **the ~4,883 in hand files are covered by NEITHER instrument and
+are this inventory's largest known hole.** Full list in `TRIAGE.md` §0.11.
+
+⚠️ **`SPAN-SUSPECT` — 133 rows whose `body` verdict is UNRELIABLE.** The
+delimiter over-spans one-line functions (measured: 441 declarations), so such a
+row may read as `body`-changed only because the NEXT function changed. ⛔ Do not
+batch these as ordinary `body` rows. They cluster in: `CommonLua/Ged.lua`
+(15 `OnMsg.*`) · `CommonLua/Classes/Lightmodel.lua` (13) ·
+`CommonLua/LuaExportedDocs/**` (18, `object.Get*` / `ResolvePos*`) ·
+`Lua/SupplyGrid.lua` (6) · `Lua/Buildings/Community.lua` (5) ·
+`Lua/ResourceOverview.lua` (5) · `Lua/Factions/Laws.lua` (8 `Filter*Shift*`,
+all `added`) · `Lua/Buildings/DroneControl.lua` (5) ·
+`CommonLua/Classes/AutoAttach.lua` (5) · `Lua/TechTree.lua` (5) ·
+`CommonLua/Core/lib.lua` (3) · `CommonLua/Editor/ArtSpecEditor.lua` (3) ·
+`CommonLua/Libs/MapGen/**` (5) · `CommonLua/Classes/ModItem.lua` +
+`CommonLua/Modding/ModItem.lua` (5) · `Lua/Buildings/BuildingComponents.lua` (3)
+· `Lua/GameOverlays.lua` (3) · `Lua/Decor.lua` (2) · `CommonLua/Classes/Common.lua`
+(3) · singles in `Farm.lua`, `ResourceStockpile.lua`, `Dome.lua`, `Passage.lua`,
+`Colony.lua`, `_GameUtils.lua`, `_StoryBits.lua`, `ShiftsBuilding.lua`,
+`BlackCubes.lua`, `XEditor.lua`, `XPresetMap.lua`, `LockablePreset.lua`,
+`OldTerminalTarget.lua`, `FlightDebug.lua`, `options.lua`, `map.lua`,
+`Components.lua`. Regenerate the exact list with
+`awk -F'\t' '$9 ~ /SPAN-SUSPECT/' INVENTORY.tsv`. **Routed to the owner as
+checklist 135** (fixing the delimiter is a pack-wide re-pin decision;
+⚠️ measured: it would change **0** shipped hashes, which is cheaper than the
+chain brief assumed).
+
+⚠️ **`MULTI` — 100 rows** are ordinal-keyed duplicates (`name#2`). The ordinal
+is positional, so if a duplicate was inserted ABOVE another the pairing shifts
+and both halves look changed. Concentrated in `CommonLua/LuaExportedDocs/**`
+(overload documentation) and `Lua/Stubs.lua`.
+
+⚠️ **`PRESETS.tsv` churn classes are RULES, and two of them are weaker than the
+others.** `T-ID` (22 rows) — **all 22 read by me, 0 misses**. `REINDEX` (10,462)
+— 20 read, 0 misses, and the read is what SPLIT the class: the `<absent>` half
+is provable (one value leaving `children[6]` and arriving at `children[5]`),
+the value-vs-value half is not, so it is now **`REINDEX-SWAP` (1,924 rows) and
+⛔ MUST BE READ** wherever a list's order is semantic (`Parameters`, `likes`,
+`Effects`). `FORMAT` and `SAVE-ID` fire on fixtures and **never on the real
+trees** — an unfired rule is unfalsified; they classify nothing. `REORDER` is 0
+by construction. **The readable `none` pile is 22,738 rows over 90 registries**
+(StoryBit 6,683 · XDef 5,071 · TechPreset 2,669 · FactionDef 1,599 · LawDef
+1,536 — full top-20 in `TRIAGE.md` §0.10); size 04's registry agents from that
+table, and `python tools/presetdiff.py --sample <class>` prints rows of any
+class so you can falsify a rule yourself.
+
+**Both instruments' falsifiers pass and are real gates**: `python
+tools/treediff.py --selftest` and `python tools/presetdiff.py --selftest`, 16
+PASS / 0 FAIL each, exit 0 — and exit **1** when an assertion is inverted
+(verified). ⛔ Neither is wired into `doccheck.py`; run them yourself before
+your commit (chain rule 9).
+
+⭐ **The seeded-positive control is 4/4 — scored BY THE TOOL, which scores the
+INSTRUMENT and not any agent.** F114 `body`; F115 `body+sig` with exactly
+`(mark, callback, ...)` → `(map, mark, callback, ...)`; F116 `body`; F117
+`body+sig` `traits` → `colonist`. ⛔ **You still owe the AGENT-POOL score** —
+the seeds must go into your batches without the agents being told.

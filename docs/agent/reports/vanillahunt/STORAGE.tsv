@@ -1,0 +1,1169 @@
+# treediff.py v1 (2026-09-10) | old=C:\Dev\SMR-SrcArchive\1.0.7.396349\Src digest=09d95e3448573dc3… | new=C:\Dev\SMR-SrcArchive\1.1.0.403908\Src digest=a4577da25cb3fe85… | python treediff.py --out docs/agent/reports/vanillahunt | 2026-09-10
+# NORMALISATION: CRLF->LF, trailing whitespace stripped per line; leading indentation KEPT; ⭐ COMMENTS ARE KEPT AND COUNT — a whitespace-only diff is NOT a row, a changed comment IS a row.
+# DELIMITER: luafn.find_bodies, imported not re-implemented. Keys collapse `Class:Method` and `Class.Method`; the separator actually written is the first character of the sig columns.
+# COVERAGE: indent-0 declarations only, five forms (function C:M / function C.M / function G / local function f / [local] x = function). NOT COVERED: 8473 indented declarations (4883 in `hand` files, 3590 in `generated` — presetdiff.py reads the generated side at field level) and every anonymous `function(` literal. ⛔ A function never emitted is not a function that did not change.
+# FILES: changed=2437 identical=1963 added=166 removed=36 (DLC/ excluded: 151 paths). ⭐ MANIFEST RE-DERIVATION CONTROL vs chain README §0 (which counts DLC): 2437+7=2444 changed, 1963+5=1968 identical, 166+139=305 added, 36+0=36 removed — MATCHES; the 139 DLC adds are 138 `DLC/norman` + 1 `DLC/thomas`.
+# FPK PARITY (EF-085, measured 2026-09-10): every `Lua/`, `CommonLua/` and `Data/` file in the archived 1.1.0 Src ships BYTE-IDENTICAL in Packs\Lua.fpk / Packs\Data.fpk — 0 divergent. ⇒ NO ROW CARRIES `FPK-DIVERGENT`, because there is nothing to flag. ⛔ That proves the bytes match, not that the game executes them (EF-078 stands).
+# FUNCTIONS: 1.0.7=27762 1.1.0=30355 | IDENTICAL (counted, not listed)=22139 | SPAN-SUSPECT=441 declarations (the one-line-function trap, MEASURED — see the tool header; ⛔ NOT fixed here, a delimiter change re-hashes every SRC: pin in Code/) | MULTI=474 declarations | spans reaching EOF=567
+# RENAME? is a HINT, never a verdict, and it is GUARDED: a partner needs >=4 distinct non-blank body lines and <=3 candidates. Rejected as too trivial to be evidence: 441 added rows (bodies like `end` or `return true`); rejected as ambiguous (one body, many partners): 0. Those are NOT `no match` — they are `too generic to say`.
+# STORAGE: class (c), 'same concept, new home' — the shape that moved `Landscapes` GameVar->MapVar and the walk consts `const.`->`g_Consts`, and that NO instrument this project owns sees. Forms scanned: GlobalVar, MapVar, GameVar, PersistableGlobals, const, g_Consts.
+# STATUS COUNTS: added=102 kind-changed=1 moved-file=9 removed=36 same=1007
+# ⛔ PRESENCE SIDE, ENUMERATED: `GlobalVar("…")` has 0 declarations in 1.0.7 and 0 in 1.1.0 — the form exists in `CommonLua/Core/lib.lua` but the game declares through GameVar/MapVar. Zero is a MEASUREMENT here, not an omission.
+# ⚠️ NOT NAMEABLE BY THIS TOOL: 1 dynamic declarations in 1.0.7 and 1 in 1.1.0 (`GameVar(modified_name, …)` — the name is a variable). They are storage this row set does not cover.
+# ⚠️ NOT COVERED AT ALL: `ConstDef` preset definitions, which is where most consts are actually DEFINED — `presetdiff.py` reads those. `const.X =` here is the Lua-side assignment only.
+name	kind107	kind110	file107	line107	file110	line110	status
+ActiveLaws	GameVar	GameVar	Lua/Factions/Legislature.lua	1	Lua/Factions/Legislature.lua	1	same
+AdvanceToGameTimeLimit	GameVar	GameVar	CommonLua/Libs/Network/NetworkSync.lua	22	CommonLua/Libs/Network/NetworkSync.lua	22	same
+AdvancedStirlingGeneratorHeatRadius	const	const	Lua/_GameConst.lua	70	Lua/_GameConst.lua	71	same
+AlienDiggerBigID	GameVar	GameVar	Lua/Mysteries/Diggers.lua	348	Lua/Mysteries/Diggers.lua	348	same
+AlienDiggerID	GameVar	GameVar	Lua/Mysteries/Diggers.lua	26	Lua/Mysteries/Diggers.lua	26	same
+AmbienceDefaultVolume	const	const	Lua/Config/sound.lua	59	Lua/Config/sound.lua	59	same
+AmbienceMaxVolume	const	const	Lua/Config/sound.lua	58	Lua/Config/sound.lua	58	same
+AmbientSoundsEnabled	GameVar	GameVar	CommonLua/SoundSource.lua	10	CommonLua/SoundSource.lua	10	same
+AncientArtifactGlobalUpgrade	GameVar	GameVar	Lua/Buildings/AncientArtifactInterface.lua	101	Lua/Buildings/AncientArtifactInterface.lua	100	same
+AnimMomentsToolObjDistToNearPlane	const	const	CommonLua/Core/const.lua	124	CommonLua/Core/const.lua	124	same
+AnimalThreadsStarted	GameVar	GameVar	Lua/Units/Animals.lua	318	Lua/Units/Animals.lua	317	same
+AnomalyUnlockTechCountWeights		const			Lua/Buildings/Anomaly.lua	373	added
+ApplicantsWeights	const	const	Lua/_GameConst.lua	388	Lua/_GameConst.lua	413	same
+AppliedSavegameFixups	GameVar	GameVar	CommonLua/SavegameFixup.lua	10	CommonLua/SavegameFixup.lua	10	same
+AsteroidsNeverLeave107	GameVar	GameVar	Lua/Asteroids.lua	1	Lua/Asteroids.lua	1	same
+AtmosphereDecayThread	GameVar	GameVar	Lua/Terraforming.lua	417	Lua/Terraforming.lua	424	same
+AutosavePeriod	const	const	Lua/Savegame.lua	1	Lua/Savegame.lua	1	same
+AxisConusHeight	const	const	CommonLua/Core/const.lua	271	CommonLua/Core/const.lua	271	same
+AxisConusRadius	const	const	CommonLua/Core/const.lua	270	CommonLua/Core/const.lua	270	same
+AxisConusSlices	const	const	CommonLua/Core/const.lua	272	CommonLua/Core/const.lua	272	same
+AxisCylinderHeight	const	const	CommonLua/Core/const.lua	267	CommonLua/Core/const.lua	267	same
+AxisCylinderRadius	const	const	CommonLua/Core/const.lua	266	CommonLua/Core/const.lua	266	same
+AxisCylinderSlices	const	const	CommonLua/Core/const.lua	268	CommonLua/Core/const.lua	268	same
+AxisLength	const	const	CommonLua/Core/const.lua	301	CommonLua/Core/const.lua	301	same
+AxisRadius	const	const	CommonLua/Core/const.lua	300	CommonLua/Core/const.lua	300	same
+AxisSlices	const	const	CommonLua/Core/const.lua	302	CommonLua/Core/const.lua	302	same
+BehaviorAreaUpdate	MapVar	MapVar	CommonLua/FXSource.lua	6	CommonLua/FXSource.lua	6	same
+BehaviorLabels	MapVar	MapVar	CommonLua/FXSource.lua	4	CommonLua/FXSource.lua	4	same
+BehaviorLabelsUpdate	MapVar	MapVar	CommonLua/FXSource.lua	5	CommonLua/FXSource.lua	5	same
+BigTorusColor	const	const	CommonLua/Core/const.lua	315	CommonLua/Core/const.lua	315	same
+BigTorusColorSelected	const	const	CommonLua/Core/const.lua	316	CommonLua/Core/const.lua	316	same
+BigTorusRadius	const	const	CommonLua/Core/const.lua	321	CommonLua/Core/const.lua	321	same
+BigTorusRadius2	const	const	CommonLua/Core/const.lua	322	CommonLua/Core/const.lua	322	same
+BigTorusRings	const	const	CommonLua/Core/const.lua	323	CommonLua/Core/const.lua	323	same
+BigTorusSlices	const	const	CommonLua/Core/const.lua	324	CommonLua/Core/const.lua	324	same
+BiomeSlopeAngleThreshold	const	const	CommonLua/Core/const.lua	172	CommonLua/Core/const.lua	172	same
+BiomeTileSize	const	const	CommonLua/Libs/MapGen/Biome.lua	1	CommonLua/Libs/MapGen/Biome.lua	1	same
+BreakChanceCable	const	const	Lua/SupplyGrid.lua	2	Lua/SupplyGrid.lua	2	same
+BreakChancePipe	const	const	Lua/SupplyGrid.lua	3	Lua/SupplyGrid.lua	3	same
+BreakDrainModifierPct	const	const	Lua/SupplyGridBreakable.lua	1	Lua/SupplyGridBreakable.lua	1	same
+BreakDrainOxygenMax	const	const	Lua/SupplyGridBreakable.lua	5	Lua/SupplyGridBreakable.lua	5	same
+BreakDrainOxygenMin	const	const	Lua/SupplyGridBreakable.lua	4	Lua/SupplyGridBreakable.lua	4	same
+BreakDrainPowerMax	const	const	Lua/SupplyGridBreakable.lua	3	Lua/SupplyGridBreakable.lua	3	same
+BreakDrainPowerMin	const	const	Lua/SupplyGridBreakable.lua	2	Lua/SupplyGridBreakable.lua	2	same
+BreakDrainWaterMax	const	const	Lua/SupplyGridBreakable.lua	7	Lua/SupplyGridBreakable.lua	7	same
+BreakDrainWaterMin	const	const	Lua/SupplyGridBreakable.lua	6	Lua/SupplyGridBreakable.lua	6	same
+BreakIntervalHours	const	const	Lua/SupplyGrid.lua	1	Lua/SupplyGrid.lua	1	same
+BreakScheduleObjs	GameVar,PersistableGlobals	GameVar,PersistableGlobals	CommonLua/Classes/CommandObject.lua	762,763	CommonLua/Classes/CommandObject.lua	762,763	same
+BreakThroughTechsPerGame	const	const	Lua/_GameConst.lua	52	Lua/_GameConst.lua	53	same
+BreakthroughOrder	GameVar	GameVar	Lua/Buildings/Anomaly.lua	638	Lua/Buildings/Anomaly.lua	683	same
+BreathableAtmosphere	GameVar	GameVar	Lua/Terraforming.lua	302	Lua/Terraforming.lua	309	same
+BugPriorityNames	const	const	CommonLua/UI/uiXBugReportDlg.lua	309	CommonLua/UI/uiXBugReportDlg.lua	318	same
+BugPriorityValues	const	const	CommonLua/UI/uiXBugReportDlg.lua	310	CommonLua/UI/uiXBugReportDlg.lua	319	same
+BugReproducibilityNames	const	const	CommonLua/UI/uiXBugReportDlg.lua	331	CommonLua/UI/uiXBugReportDlg.lua	340	same
+BugReproducibilityValues	const	const	CommonLua/UI/uiXBugReportDlg.lua	332	CommonLua/UI/uiXBugReportDlg.lua	341	same
+BugSeverityNames	const	const	CommonLua/UI/uiXBugReportDlg.lua	319	CommonLua/UI/uiXBugReportDlg.lua	328	same
+BugSeverityValues	const	const	CommonLua/UI/uiXBugReportDlg.lua	320	CommonLua/UI/uiXBugReportDlg.lua	329	same
+BuildMenuPrerequisiteOverrides	GameVar	GameVar	Lua/X/BuildMenu.lua	319	Lua/X/BuildMenu.lua	332	same
+BuildingWithRCRover	GameVar	GameVar	Lua/X/BuildMenu.lua	2	Lua/X/BuildMenu.lua	2	same
+BuriedWonders	const	const	Lua/Buildings/UndergroundWonder.lua	24	Lua/Buildings/UndergroundWonder.lua	25	same
+BuyApplicantsCount	const	const	Lua/ApplicantsPool.lua	6	Lua/ApplicantsPool.lua	6	same
+CableLOSTestGranularity	const	const	Lua/ElectricityGrid.lua	557	Lua/ElectricityGrid.lua	624	same
+CablePiecesDelledThisCascade	GameVar	GameVar	Lua/ElectricityGrid.lua	151	Lua/ElectricityGrid.lua	169	same
+Camera3pRealTime	const	const	Lua/Config/camera.lua	123	Lua/Config/camera.lua	131	same
+Camera3pTerrainCollisionHeight	const	const	Lua/Config/camera.lua	125	Lua/Config/camera.lua	133	same
+CameraClipExtendRadius	const	const	CommonLua/Core/const.lua	111	CommonLua/Core/const.lua	111	same
+CameraControlInvertLook	const	const	Lua/ProjectOptions.lua	372	Lua/ProjectOptions.lua	375	same
+CameraControlInvertRotation	const	const	Lua/ProjectOptions.lua	373	Lua/ProjectOptions.lua	376	same
+CameraControlRotationSpeed	const	const	Lua/Config/camera.lua	124	Lua/Config/camera.lua	132	same
+CameraControllerStateUpdateTime	const	const	CommonLua/Core/const.lua	132	CommonLua/Core/const.lua	132	same
+CameraEditorDefaultSharpness	const	const	CommonLua/Core/const.lua	103	CommonLua/Core/const.lua	103	same
+CameraFollowObj	GameVar	GameVar	Lua/FollowCamera.lua	6	Lua/FollowCamera.lua	6	same
+CameraFollowObjWaiting	GameVar	GameVar	Lua/FollowCamera.lua	7	Lua/FollowCamera.lua	7	same
+CameraFollowVerticalOffset	GameVar	GameVar	Lua/FollowCamera.lua	8	Lua/FollowCamera.lua	8	same
+CameraShakeFOV	const	const	CommonLua/Core/const.lua	112	CommonLua/Core/const.lua	112	same
+CameraState	MapVar	MapVar	Lua/Config/camera.lua	3	Lua/Config/camera.lua	3	same
+CameraVerticalOffset	const	const	Lua/FollowCamera.lua	12,63	Lua/FollowCamera.lua	12,74	same
+CaptureAsteroids	GameVar	GameVar	Lua/Asteroids.lua	2	Lua/Asteroids.lua	2	same
+CapturedMirrorSpheres	GameVar	GameVar	Lua/Mysteries/MirrorSphere.lua	25	Lua/Mysteries/MirrorSphere.lua	25	same
+CargoRequestItemMax	const	const	Lua/_GameConst.lua	137	Lua/_GameConst.lua	153	same
+CavesOpened	MapVar	MapVar	CommonLua/Editor/XEditor/XCaveBrush.lua	4	CommonLua/Editor/XEditor/XCaveBrush.lua	4	same
+ChallengeRating	GameVar	GameVar	Lua/Milestones.lua	73	Lua/Milestones.lua	79	same
+ChangeWorkshiftThread	GameVar	GameVar	Lua/Buildings/ShiftsBuilding.lua	72	Lua/Buildings/ShiftsBuilding.lua	113	same
+CheatsUsed	GameVar	GameVar	CommonLua/Libs/Network/Network.lua	241	CommonLua/Libs/Network/Network.lua	241	same
+CheatsVegGrowthModifier	GameVar	GameVar	Lua/Vegetation.lua	19	Lua/Vegetation.lua	20	same
+Cities	GameVar	GameVar	Lua/City.lua	465	Lua/City.lua	506	same
+City	MapVar	MapVar	Lua/City.lua	466	Lua/City.lua	507	same
+CityConstruction	GameVar	GameVar	Lua/Construction/ConstructionControllers.lua	87	Lua/Construction/ConstructionControllers.lua	87	same
+CityGridConstruction	GameVar	GameVar	Lua/Construction/ConstructionControllers.lua	88	Lua/Construction/ConstructionControllers.lua	88	same
+CityGridSwitchConstruction	GameVar	GameVar	Lua/Construction/ConstructionControllers.lua	89	Lua/Construction/ConstructionControllers.lua	89	same
+CityLandscapeClearWasteRock	GameVar	GameVar	Lua/Construction/ConstructionControllers.lua	98	Lua/Construction/ConstructionControllers.lua	98	same
+CityLandscapeRamp	GameVar	GameVar	Lua/Construction/ConstructionControllers.lua	96	Lua/Construction/ConstructionControllers.lua	96	same
+CityLandscapeTerrace	GameVar	GameVar	Lua/Construction/ConstructionControllers.lua	95	Lua/Construction/ConstructionControllers.lua	95	same
+CityLandscapeTexture	GameVar	GameVar	Lua/Construction/ConstructionControllers.lua	97	Lua/Construction/ConstructionControllers.lua	97	same
+CityLayoutConstruction	GameVar	GameVar	Lua/Construction/ConstructionControllers.lua	91	Lua/Construction/ConstructionControllers.lua	91	same
+CityLevelPrefabConstruction	GameVar	GameVar	Lua/Construction/ConstructionControllers.lua	92	Lua/Construction/ConstructionControllers.lua	92	same
+CityTunnelConstruction	GameVar	GameVar	Lua/Construction/ConstructionControllers.lua	90	Lua/Construction/ConstructionControllers.lua	90	same
+CityUnitController	GameVar	GameVar	Lua/UnitControl.lua	1	Lua/UnitControl.lua	1	same
+ColdWavesDisabled	GameVar	GameVar	Lua/TerraformingDisasters.lua	1	Lua/TerraformingDisasters.lua	1	same
+Collections	MapVar	MapVar	CommonLua/Classes/collection.lua	4	CommonLua/Classes/collection.lua	4	same
+CollectionsByName	MapVar	MapVar	CommonLua/Classes/collection.lua	5	CommonLua/Classes/collection.lua	5	same
+ColliderColors	const	const	CommonLua/Core/config.lua	24	CommonLua/Core/config.lua	30	same
+ColonistAgeGroups	const	const	Lua/_GameConst.lua	376	Lua/_GameConst.lua	401	same
+ColonistAges	const	const	Lua/_GameConst.lua	384	Lua/_GameConst.lua	409	same
+ColonistDeathStats	GameVar	GameVar	Lua/MarsStoryBits.lua	152	Lua/MarsStoryBits.lua	161	same
+ColonistMaxDepartureRocketDist	const	const	Lua/_GameConst.lua	132	Lua/_GameConst.lua	147	same
+ColonistMaxDomeWalkDist	const		Data/GameRuleDef.lua,Lua/Buildings/Station.lua,Lua/_GameConst.lua	201,133,1311			removed
+ColonistMaxPassagePassthroughDomes	const	const	Lua/_GameConst.lua	135	Lua/_GameConst.lua	151	same
+ColonistMaxWaitInDomeTurnedOff	const	const	Lua/_GameConst.lua	131	Lua/_GameConst.lua	146	same
+ColonistMaxWaitShuttlePickupTimeMs	const	const	Lua/_GameConst.lua	130	Lua/_GameConst.lua	143	same
+ColonistMinDistToIgnorePassage	const		Data/GameRuleDef.lua,Lua/Buildings/Station.lua,Lua/_GameConst.lua	202,134,1312			removed
+ColonistSpecialization	const	const	Lua/Specialization.lua	3	Lua/Specialization.lua	3	same
+ColonistTransportTaskExpirationCheck		const			Lua/_GameConst.lua	145	added
+ColonistTransportTaskExpirationTime		const			Lua/_GameConst.lua	144	added
+ColonyViableByDelay	const	const	Lua/ColonyViability.lua	101	Lua/ColonyViability.lua	103	same
+ColorList	const	const	CommonLua/Core/const.lua	221	CommonLua/Core/const.lua	221	same
+ColorModifierReasonsData	GameVar	GameVar	CommonLua/Classes/ReasonSetters/ColorModifierReason.lua	14	CommonLua/Classes/ReasonSetters/ColorModifierReason.lua	14	same
+CommandCenterDefaultRadius	const	const	Lua/_GameConst.lua	62	Lua/_GameConst.lua	63	same
+CommandCenterMaxRadius	const	const	Lua/_GameConst.lua	63	Lua/_GameConst.lua	64	same
+CommandCenterMinRadius	const	const	Lua/_GameConst.lua	64	Lua/_GameConst.lua	65	same
+ComponentsPropCategory	const	const	CommonLua/Classes/Composite.lua	7	CommonLua/Classes/Composite.lua	7	same
+ConnectionStates		GameVar			Lua/TechTree.lua	547	added
+ConstructBorder	const	const	Lua/_GameConst.lua	187	Lua/_GameConst.lua	204	same
+ConstructableArea	MapVar	MapVar	Lua/Construction/Construction.lua	111	Lua/Construction/Construction.lua	184	same
+ConstructionCounter	GameVar	GameVar	Lua/Buildings/ConstructionSite.lua	1	Lua/Buildings/ConstructionSite.lua	1	same
+ConstructiongGridElementsGroupSize	const	const	Lua/_GameConst.lua	480	Lua/_GameConst.lua	506	same
+ContourReasons	MapVar	MapVar	CommonLua/Classes/ReasonSetters/ContourReason.lua	1	CommonLua/Classes/ReasonSetters/ContourReason.lua	1	same
+ControllerUIScale	const	const	CommonLua/Core/const.lua	392	CommonLua/Core/const.lua	392	same
+CrashTestMode	GameVar	GameVar	Lua/CrashTest.lua	8	Lua/CrashTest.lua	8	same
+CropOutputAugmentations		GameVar			Lua/Crop.lua	113	added
+CropTechLocks	GameVar	GameVar	Lua/Crop.lua	59	Lua/Crop.lua	60	same
+CurrentEvent	GameVar	GameVar	CommonLua/Libs/TriggersAndEvents/Events.lua	142	CommonLua/Libs/TriggersAndEvents/Events.lua	150	same
+CurrentLayoutDir	GameVar	GameVar	Lua/Construction/LayoutConstruction.lua	3	Lua/Construction/LayoutConstruction.lua	3	same
+CurrentLayoutPos	GameVar	GameVar	Lua/Construction/LayoutConstruction.lua	2	Lua/Construction/LayoutConstruction.lua	2	same
+CurrentLayoutPreset	GameVar	GameVar	Lua/Construction/LayoutConstruction.lua	1	Lua/Construction/LayoutConstruction.lua	1	same
+CurrentLightmodel	MapVar	MapVar	CommonLua/Classes/Lightmodel.lua	792	CommonLua/Classes/Lightmodel.lua	908	same
+CurrentSpoilage		GameVar			Lua/Spoilage.lua	7	added
+CurrentWorkshift	GameVar	GameVar	Lua/DayTime.lua	10	Lua/DayTime.lua	10	same
+CustomGameColors	const	const	CommonLua/Core/const.lua	206	CommonLua/Core/const.lua	206	same
+CustomSyncHandles	GameVar	GameVar	CommonLua/Classes/_object.lua	466	CommonLua/Classes/_object.lua	468	same
+CutsceneNearZ	const	const	CommonLua/Core/const.lua	108	CommonLua/Core/const.lua	108	same
+DayDuration	const	const	Lua/_GameConst.lua	3	Lua/_GameConst.lua	3	same
+DayStart	GameVar	GameVar	Lua/DayTime.lua	11	Lua/DayTime.lua	11	same
+DbgConnectivityMeshes		GameVar			CommonLua/Libs/DevToolsPublic/Connectivity.lua	5	added
+DbgDrawPathObjs	MapVar	MapVar	CommonLua/Libs/DevToolsPublic/PathDebug.lua	473	CommonLua/Libs/DevToolsPublic/PathDebug.lua	514	same
+DbgFlightObjs	MapVar		CommonLua/Libs/DevToolsPublic/FlightDebug.lua	183			removed
+DbgOverlayMode	MapVar	MapVar	CommonLua/Libs/DevToolsPublic/TerrainGridInspect.lua	331	CommonLua/Libs/DevToolsPublic/TerrainGridInspect.lua	338	same
+DbgTestObjs		GameVar			CommonLua/Libs/DevToolsPublic/debug.lua	522	added
+DeepSectorsScanned	GameVar	GameVar	Lua/Exploration.lua	2	Lua/Exploration.lua	2	same
+DefaultAutosaveCount	const	const	CommonLua/Savegame.lua,Lua/_GameConst.lua	1446,18	CommonLua/Savegame.lua,Lua/_GameConst.lua	1444,17	same
+DefaultAutosaveInterval	const	const	CommonLua/Savegame.lua,Lua/_GameConst.lua	1448,20	CommonLua/Savegame.lua,Lua/_GameConst.lua	1446,19	same
+DefaultAutosaveIntervalScale	const	const	CommonLua/Savegame.lua,Lua/_GameConst.lua	1447,19	CommonLua/Savegame.lua,Lua/_GameConst.lua	1445,18	same
+DefaultCameraRTS	const	const	Lua/Config/camera.lua	84	Lua/Config/camera.lua	92	same
+DefaultDefrostTime	const	const	Lua/_GameConst.lua	195	Lua/_GameConst.lua	212	same
+DefaultFlyCameraSpeed	const	const	Lua/Config/camera.lua	162	Lua/Config/camera.lua	170	same
+DefaultFlyScrollCameraSpeed	const	const	Lua/Config/camera.lua	163	Lua/Config/camera.lua	171	same
+DefaultFreezeHeat	const	const	Lua/_GameConst.lua	193	Lua/_GameConst.lua	210	same
+DefaultFreezeTime	const	const	Lua/_GameConst.lua	194	Lua/_GameConst.lua	211	same
+DefaultInteractionCursor	const	const	Lua/_GameConst.lua	92	Lua/_GameConst.lua	105	same
+DefaultMaintenanceBuildUpPerHour	const	const	Lua/_GameConst.lua	50	Lua/_GameConst.lua	46	same
+DefaultMouseCursor	const	const	CommonLua/Core/const.lua,Lua/_GameConst.lua	85,90	CommonLua/Core/const.lua,Lua/_GameConst.lua	85,103	same
+DefaultPanaltyHeat	const	const	Lua/_GameConst.lua	191	Lua/_GameConst.lua	208	same
+DefaultPanaltyPct	const	const	Lua/_GameConst.lua	192	Lua/_GameConst.lua	209	same
+DefaultPlayerColorizationChannel		const			CommonLua/Core/const.lua	453	added
+DefaultReporter	const	const	Lua/Config/_config.lua	8	Lua/Config/_config.lua	8	same
+DefaultRoverCursor	const	const	Lua/_GameConst.lua	91	Lua/_GameConst.lua	104	same
+DefaultTimeFactor	const	const	CommonLua/Core/const.lua	126	CommonLua/Core/const.lua	126	same
+DefaultWorkshiftDurations	const	const	Lua/_GameConst.lua	371	Lua/_GameConst.lua	396	same
+DefaultWorkshifts	const	const	Lua/_GameConst.lua	370	Lua/_GameConst.lua	395	same
+DelayedCallObjects	GameVar	GameVar	CommonLua/Core/notify.lua	3	CommonLua/Core/notify.lua	3	same
+DelayedCallThreads	GameVar	GameVar	CommonLua/Core/notify.lua	4	CommonLua/Core/notify.lua	4	same
+DelayedGridUpdateGrids	GameVar	GameVar	Lua/SupplyGrid.lua	377	Lua/SupplyGrid.lua	383	same
+DelayedGridUpdateThread	GameVar	GameVar	Lua/SupplyGrid.lua	378	Lua/SupplyGrid.lua	384	same
+DelayedTrackPowerLinksThread	GameVar	GameVar	Lua/Buildings/Station.lua	1377	Lua/Buildings/Station.lua	1535	same
+DemolishCountdownMax	const	const	Lua/_GameConst.lua	101	Lua/_GameConst.lua	114	same
+DepletedDeposits	GameVar	GameVar	Lua/Buildings/SubsurfaceDeposit.lua	279	Lua/Buildings/SubsurfaceDeposit.lua	278	same
+DepositDeepestLayer	const	const	Lua/_GameConst.lua	88	Lua/_GameConst.lua	101	same
+DepositObstructMaxRadius	const	const	Lua/_GameConst.lua	128	Lua/_GameConst.lua	141	same
+DestroyedMirrorSpheres	GameVar	GameVar	Lua/Mysteries/MirrorSphere.lua	26	Lua/Mysteries/MirrorSphere.lua	26	same
+DirtyFlagPassability	const	const	Lua/_fixup.lua	1217	Lua/_fixup.lua	1316	same
+DisabledInEnvironment	GameVar	GameVar	Lua/Buildings/Building.lua	42	Lua/Buildings/Building.lua	41	same
+DisasterLightmodelList	GameVar	GameVar	Lua/Lightmodel.lua	126	Lua/Lightmodel.lua	126	same
+DistressCallCooldown	const	const	Lua/_GameConst.lua	107	Lua/_GameConst.lua	120	same
+DistressCallCooldownEnd	GameVar	GameVar	Lua/RivalColonies.lua	83	Lua/RivalColonies.lua	79	same
+DomeCap	const	const	Lua/Buildings/Dome.lua	1	Lua/Buildings/Dome.lua	1	same
+DomeSkinsCache	GameVar	GameVar	Lua/Buildings/Dome.lua	3470	Lua/Buildings/Dome.lua	4095	same
+DomeSoundEnhanced	MapVar	MapVar	Lua/Buildings/Dome.lua	3505	Lua/Buildings/Dome.lua	4130	same
+DomeTraitsCameraParams	GameVar	GameVar	Lua/Buildings/Community.lua	297	Lua/Buildings/Community.lua	339	same
+DoneInSuspendPassObjs	MapVar	MapVar	CommonLua/SuspendedProcessing.lua	242	CommonLua/SuspendedProcessing.lua	242	same
+DroneBatteryMax	const	const	Lua/_GameConst.lua	78	Lua/_GameConst.lua	81	same
+DroneDebugInfo	GameVar	GameVar	Lua/Dev/MapTools.lua	28	Lua/Dev/MapTools.lua	28	same
+DroneDebugObjects	GameVar	GameVar	Lua/Dev/MapTools.lua	29	Lua/Dev/MapTools.lua	29	same
+DroneFractionRepairTime	const	const	Lua/_GameConst.lua	81	Lua/_GameConst.lua	84	same
+DroneLoadHighPct		const			Lua/_GameConst.lua	97	added
+DroneLoadLowThreshold	const		Lua/_GameConst.lua	83			removed
+DroneLoadMediumPct		const			Lua/_GameConst.lua	98	added
+DroneLoadMediumThreshold	const		Lua/_GameConst.lua	84			removed
+DroneLoadMediumThresholdNotification	const		Lua/_GameConst.lua	85			removed
+DroneLoadSampleInterval		const			Lua/_GameConst.lua	94	added
+DroneLoadWindow		const			Lua/_GameConst.lua	95	added
+DroneRestrictRadius	const	const	Lua/_GameConst.lua	71	Lua/_GameConst.lua	72	same
+DroneRestrictRadiusUnderground		const			Lua/_GameConst.lua	73	added
+DroneTaskOnTheWayEnabled		const			Lua/_GameConst.lua	86	added
+DroneTaskOnTheWayInterval		const			Lua/_GameConst.lua	87	added
+DroneTaskSwapDistancePct		const			Lua/_GameConst.lua	91	added
+DroneTaskSwapEnabled		const			Lua/_GameConst.lua	89	added
+DroneTaskSwapMinGain		const			Lua/_GameConst.lua	92	added
+DroneTaskSwapRecentPickers		const			Lua/_GameConst.lua	90	added
+DroneTimeAfterUserGotoToRest	const	const	Lua/_GameConst.lua	79	Lua/_GameConst.lua	82	same
+DroneTimeAfterUserPickUpToRest	const	const	Lua/_GameConst.lua	80	Lua/_GameConst.lua	83	same
+DroneUnreachablesVersion		MapVar			Lua/Units/Drone.lua	941	added
+DustDevils		GameVar			Lua/DustDevils.lua	296	added
+DustStorm		GameVar			Lua/DustStorm.lua	607	added
+DustStormSuspendBuildings	const	const	Lua/_GameConst.lua	196	Lua/_GameConst.lua	213	same
+DustStormSuspendReason	const	const	Lua/_GameConst.lua	197	Lua/_GameConst.lua	214	same
+DustStormsDisabled	GameVar	GameVar	Lua/TerraformingDisasters.lua	2	Lua/TerraformingDisasters.lua	2	same
+EditorCursorObjs	MapVar,PersistableGlobals	MapVar,PersistableGlobals	CommonLua/Editor/editor.lua	699,700	CommonLua/Editor/editor.lua	699,700	same
+ElevatorRopesOverviewCameraScaleDown	const	const	Lua/_GameConst.lua	486	Lua/_GameConst.lua	512	same
+ElevatorRopesOverviewCameraScaleUp	const	const	Lua/_GameConst.lua	485	Lua/_GameConst.lua	511	same
+EnactedInactiveLaws	GameVar	GameVar	Lua/Factions/Legislature.lua	3	Lua/Factions/Legislature.lua	2	same
+EntityVolumeMedium	const	const	CommonLua/Core/const.lua	430	CommonLua/Core/const.lua	430	same
+EntityVolumeSmall	const	const	CommonLua/Core/const.lua	429	CommonLua/Core/const.lua	429	same
+EnvSoundsSortedCache	MapVar	MapVar	CommonLua/Libs/MapGen/EnvironmentSounds.lua	63	CommonLua/Libs/MapGen/EnvironmentSounds.lua	62	same
+Env_ID_To_VFXPts	MapVar	MapVar	CommonLua/Libs/MapGen/EnvironmentVisuals.lua	17	CommonLua/Libs/MapGen/EnvironmentVisuals.lua	17	same
+Env_ID_To_VFXPtsCount	MapVar	MapVar	CommonLua/Libs/MapGen/EnvironmentVisuals.lua	18	CommonLua/Libs/MapGen/EnvironmentVisuals.lua	18	same
+Env_VFXPts_Weight	MapVar	MapVar	CommonLua/Libs/MapGen/EnvironmentVisuals.lua	19	CommonLua/Libs/MapGen/EnvironmentVisuals.lua	19	same
+Env_VFX_Cooldowns	MapVar	MapVar	CommonLua/Libs/MapGen/EnvironmentVisuals.lua	16	CommonLua/Libs/MapGen/EnvironmentVisuals.lua	16	same
+EnvironmentFXTileSize		const			CommonLua/Libs/MapGen/EnvironmentSounds.lua	3	added
+EnvironmentSoundTileSize	const		CommonLua/Libs/MapGen/EnvironmentSounds.lua	3			removed
+ErodeAmount	const	const	CommonLua/Core/const.lua	257	CommonLua/Core/const.lua	257	same
+ErodeCoefDiag	const	const	CommonLua/Core/const.lua	260	CommonLua/Core/const.lua	260	same
+ErodeCoefRect	const	const	CommonLua/Core/const.lua	261	CommonLua/Core/const.lua	261	same
+ErodeIterations	const	const	CommonLua/Core/const.lua	256	CommonLua/Core/const.lua	256	same
+ErodePersist	const	const	CommonLua/Core/const.lua	258	CommonLua/Core/const.lua	258	same
+ErodeThreshold	const	const	CommonLua/Core/const.lua	259	CommonLua/Core/const.lua	259	same
+ErrorOnSave	MapVar	MapVar	CommonLua/Editor/EditorGame.lua	422	CommonLua/Editor/EditorGame.lua	404	same
+EventPopupsWaiting	GameVar	GameVar	CommonLua/Libs/TriggersAndEvents/Events.lua	475	CommonLua/Libs/TriggersAndEvents/Events.lua	516	same
+ExcludedEvents		GameVar			CommonLua/Libs/TriggersAndEvents/Events.lua	3	added
+ExecutionTimestamps	MapVar	MapVar	CommonLua/SuspendedProcessing.lua	267	CommonLua/SuspendedProcessing.lua	267	same
+ExplorationQueueMaxSize	const	const	Lua/_GameConst.lua	127	Lua/_GameConst.lua	140	same
+FXBehaviorNotifyRadius		MapVar			CommonLua/FXSource.lua	7	added
+FXCameraSounds	MapVar	MapVar	CommonLua/Classes/ActionFX.lua	1671	CommonLua/Classes/ActionFX.lua	1755	same
+FXDecalMaxOffsetZ	const	const	CommonLua/Core/const.lua	445	CommonLua/Core/const.lua	445	same
+FXDecalMinOffsetZ	const	const	CommonLua/Core/const.lua	444	CommonLua/Core/const.lua	444	same
+FXShallowWaterOffsetZ	const	const	CommonLua/Core/const.lua	446	CommonLua/Core/const.lua	446	same
+FXSourceStates	MapVar	MapVar	CommonLua/FXSource.lua	445	CommonLua/FXSource.lua	477	same
+FXSourceToUpdate	MapVar	MapVar	CommonLua/FXSource.lua	446	CommonLua/FXSource.lua	478	same
+FXWaterMaxOffsetZ	const	const	CommonLua/Core/const.lua	443	CommonLua/Core/const.lua	443	same
+FXWaterMinOffsetZ	const	const	CommonLua/Core/const.lua	442	CommonLua/Core/const.lua	442	same
+FactionTasksCompleted	GameVar	GameVar	Lua/Achievements.lua	112	Lua/Achievements.lua	129	same
+FallbackSize	const	const	CommonLua/Core/const.lua	56	CommonLua/Core/const.lua	56	same
+FirstColdWave	GameVar	GameVar	Lua/ColdWave.lua	180	Lua/ColdWave.lua	150	same
+FirstPlayedTrack	GameVar	GameVar	Lua/Radio.lua	187	Lua/Radio.lua	188	same
+FirstTerraformingBuildingUnlocked	GameVar	GameVar	Lua/Research.lua	1673	Lua/Research.lua	1219	same
+FirstUniversalStorage	GameVar	GameVar	Lua/City.lua	93	Lua/City.lua	92	same
+FlightCache	MapVar	MapVar	Lua/Flight.lua	92	Lua/Flight.lua	95	same
+FlightDbgObj	MapVar		CommonLua/Libs/DevToolsPublic/FlightDebug.lua	222			removed
+FlightDbgSaveTime	MapVar		CommonLua/Libs/DevToolsPublic/FlightDebug.lua	223			removed
+FlightId	GameVar	GameVar	Lua/Flight.lua	1	Lua/Flight.lua	1	same
+FlightSystem	MapVar	MapVar	Lua/Flight.lua	68	Lua/Flight.lua	69	same
+Flight_BufferLock	MapVar	MapVar	Lua/Flight.lua	103	Lua/Flight.lua	106	same
+Flight_CalcId	GameVar	GameVar	Lua/Flight.lua	2	Lua/Flight.lua	2	same
+Flight_DbgObjs	GameVar	GameVar	Lua/Flight.lua	1202	Lua/Flight.lua	1381	same
+Flight_Errors	GameVar	GameVar	Lua/Flight.lua	105	Lua/Flight.lua	108	same
+Flight_LastPt1	GameVar	GameVar	Lua/Flight.lua	1100	Lua/Flight.lua	1287	same
+Flight_LastPt2	GameVar	GameVar	Lua/Flight.lua	1101	Lua/Flight.lua	1288	same
+Flight_RandState	GameVar	GameVar	Lua/Flight.lua	1102	Lua/Flight.lua	1289	same
+FloatingTextExpireTime	const	const	CommonLua/UI/FloatingText.lua	1	CommonLua/UI/FloatingText.lua	1	same
+FlyingDroneLandings	GameVar	GameVar	Lua/Units/FlyingDrone.lua	7	Lua/Units/FlyingDrone.lua	7	same
+FlyingObjs	MapVar		CommonLua/Classes/Flight.lua	138			removed
+ForceAdvanceToGameTime	GameVar	GameVar	CommonLua/Libs/Network/NetworkSync.lua	23	CommonLua/Libs/Network/NetworkSync.lua	23	same
+ForcedImpassableMarkers	MapVar	MapVar	CommonLua/Classes/marker.lua	705	CommonLua/Classes/marker.lua	713	same
+ForcedTemplateObjs	MapVar	MapVar	CommonLua/Classes/EditorBase.lua	335	CommonLua/Classes/EditorBase.lua	350	same
+ForcedWindAngle	MapVar	MapVar	CommonLua/Wind.lua	145	CommonLua/Wind.lua	144	same
+FullTransitionToMarsNames	const	const	Lua/_GameConst.lua	15	Lua/_GameConst.lua	13	same
+FundingGenerated	GameVar	GameVar	Lua/Achievements.lua	95	Lua/Achievements.lua	112	same
+Game	PersistableGlobals	PersistableGlobals	CommonLua/Game.lua	6	CommonLua/Game.lua	6	same
+GameInitAfterLoading	MapVar	MapVar	CommonLua/Classes/_object.lua	114	CommonLua/Classes/_object.lua	116	same
+GameInitThreads	PersistableGlobals	PersistableGlobals	CommonLua/Classes/_object.lua	113	CommonLua/Classes/_object.lua	115	same
+GameLeafResourceIds		GameVar			CommonLua/TaskRequest.lua	415	added
+GameObjectMaxRadius	const	const	Lua/_GameConst.lua,Lua/_fixup.lua	297,24	Lua/_GameConst.lua,Lua/_fixup.lua	312,24	same
+GameResourceInGroupIds		GameVar			CommonLua/TaskRequest.lua	414	added
+GameSeed	GameVar	GameVar	CommonLua/Random.lua	1	CommonLua/Random.lua	1	same
+GameSpeedLimit		GameVar			CommonLua/Features/GameSpeed.lua	46	added
+GameSpeedLimitReasons		GameVar			CommonLua/Features/GameSpeed.lua	47	added
+GameSpeeds		const			CommonLua/Features/GameSpeed.lua,Lua/Config/config.lua	18,122	added
+GameSpeeds.pause		const			CommonLua/Features/GameSpeed.lua	20	added
+GameSpeedsExcludeFromList		const			CommonLua/Features/GameSpeed.lua,Lua/Config/config.lua	19,125	added
+GameSpeedsList		const			CommonLua/Features/GameSpeed.lua	28	added
+GameTimeAdvanced	MapVar	MapVar	CommonLua/Core/map.lua	539	CommonLua/Core/map.lua	565	same
+GameTimeStarted	MapVar	MapVar	CommonLua/Core/map.lua	518	CommonLua/Core/map.lua	544	same
+GardensBuildingClasses	const	const	Lua/Units/Animals.lua	328	Lua/Units/Animals.lua	327	same
+GlobalRegisters	GameVar	GameVar	CommonLua/Libs/Sequences/SequenceListPlayer.lua	22	CommonLua/Libs/Sequences/SequenceListPlayer.lua	22	same
+GridSpacing	const	const	Lua/_GameConst.lua	30	Lua/_GameConst.lua	26	same
+GroundOffsetForLosTest	const	const	Lua/ElectricityGrid.lua	305	Lua/ElectricityGrid.lua	363	same
+Groups	MapVar	MapVar	CommonLua/Classes/_cobject.lua	851	CommonLua/Classes/_cobject.lua	855	same
+HUDNotificationsDotHideDelay	const	const	Lua/_GameConst.lua	96	Lua/_GameConst.lua	109	same
+HaeraldProjectName	const	const	Lua/Config/config.lua	26	Lua/Config/config.lua	32	same
+HandleToObject	PersistableGlobals	PersistableGlobals	CommonLua/Classes/_object.lua	112	CommonLua/Classes/_object.lua	114	same
+HeatGridBorder	const	const	Lua/_GameConst.lua	188	Lua/_GameConst.lua	205	same
+HeatGridTileSize	const	const	Lua/_GameConst.lua	189	Lua/_GameConst.lua	206	same
+Height	MapVar	MapVar	Lua/_init.lua	48	Lua/_init.lua	53	same
+HexEdges	const	const	Lua/_GameConst.lua	38	Lua/_GameConst.lua	34	same
+HexPainterResultArr	GameVar	GameVar	Lua/hex.lua	790	Lua/hex.lua	811	same
+HexSize	const	const	Lua/_GameConst.lua	31	Lua/_GameConst.lua	27	same
+HiddenSpawnedObjects	MapVar	MapVar	CommonLua/BaseClasses.lua	1	CommonLua/BaseClasses.lua	1	same
+HoldButtonFillTime	const	const	CommonLua/X/XHoldButtonControl.lua	1	CommonLua/X/XHoldButtonControl.lua	1	same
+HorizonWaterObj	MapVar	MapVar	CommonLua/Water.lua	862	CommonLua/Water.lua	868	same
+HourDuration	const	const	Lua/_GameConst.lua	5	Lua/_GameConst.lua	5	same
+HourFractions	const	const	Lua/_GameConst.lua	6	Lua/_GameConst.lua	6	same
+HoursPerDay	const	const	Lua/_GameConst.lua	4	Lua/_GameConst.lua	4	same
+HyperlinkColors	const	const	CommonLua/Core/const.lua	99	CommonLua/Core/const.lua	99	same
+IndependenceFeeReduceModifer	g_Consts	g_Consts	Lua/Factions/Independence.lua	263	Lua/Factions/Independence.lua	267	same
+InputShortageBufferPct		const			Lua/_GameConst.lua	49	added
+InputShortageDroneGraceHours		const			Lua/_GameConst.lua	51	added
+InputShortageGraceHours		const			Lua/_GameConst.lua	50	added
+InstantPassages	g_Consts	g_Consts	Data/MissionSponsorPreset.lua	739	Data/MissionSponsorPreset.lua	747	same
+InteractionSeed	GameVar	GameVar	CommonLua/Random.lua	3	CommonLua/Random.lua	3	same
+InteractionSeeds	GameVar	GameVar	CommonLua/Random.lua	2	CommonLua/Random.lua	2	same
+InteractionTypeSeeds	GameVar	GameVar	CommonLua/Libs/Network/NetworkAsync.lua	27	CommonLua/Libs/Network/NetworkAsync.lua	27	same
+InterfaceAnimDuration	const	const	CommonLua/Core/const.lua,Lua/_GameConst.lua	105,94	CommonLua/Core/const.lua,Lua/_GameConst.lua	105,107	same
+InvalidZ	const	const	CommonLua/Core/const.lua	141	CommonLua/Core/const.lua	141	same
+InvisibleReasons	MapVar	MapVar	CommonLua/Classes/ReasonSetters/ColorModifierReason.lua	184	CommonLua/Classes/ReasonSetters/ColorModifierReason.lua	184	same
+KbdAutoRepeatInterval	const	const	CommonLua/Core/const.lua	174	CommonLua/Core/const.lua	174	same
+LRManagerInstance	GameVar	GameVar	Lua/LRTransport.lua	3	Lua/LRTransport.lua	3	same
+LandscapeConstructionSiteColoredRocks	GameVar	GameVar	Lua/Landscape/LandscapeConstructionController.lua	446	Lua/Landscape/LandscapeConstructionController.lua	576	same
+LandscapeLastMark	GameVar	GameVar	Lua/Landscape/Landscaping.lua	19	Lua/Landscape/Landscaping.lua	19	same
+LandscapeMark	GameVar	GameVar	Lua/Landscape/Landscaping.lua	20	Lua/Landscape/Landscaping.lua	20	same
+Landscapes	GameVar	MapVar	Lua/Landscape/Landscaping.lua	21	Lua/Landscape/Landscaping.lua	21	kind-changed
+LastBinAssetsBuildRevision	const	const	CommonLua/Core/mount.lua	84	CommonLua/Core/mount.lua	87	same
+LastGameSpeed		GameVar			CommonLua/Features/GameSpeed.lua	45	added
+LastGridHandle	GameVar	GameVar	Lua/GridObject.lua	421	Lua/GridObject.lua	443	same
+LastMapLoadRandom	GameVar	GameVar	CommonLua/Random.lua	5	CommonLua/Random.lua	5	same
+LastPlaytime	GameVar	GameVar	CommonLua/Game.lua	172	CommonLua/Game.lua	172	same
+LastPublishedAssetsRevision	const	const	CommonLua/Core/map.lua	189	CommonLua/Core/map.lua	203	same
+LastSetLightmodel	MapVar	MapVar	CommonLua/Classes/Lightmodel.lua	793	CommonLua/Classes/Lightmodel.lua	909	same
+LastTerraformingQueueTime	GameVar	GameVar	Lua/MarsNotifications.lua	359	Lua/MarsNotifications.lua	415	same
+LerpHeatGridThread	MapVar	MapVar	Lua/Heat.lua	113	Lua/Heat.lua	113	same
+LightmodelListNames	MapVar	MapVar	Lua/Lightmodel.lua	95	Lua/Lightmodel.lua	95	same
+LightmodelOverrides		MapVar			CommonLua/Classes/Lightmodel.lua	910	added
+LightningThreads	MapVar	MapVar	CommonLua/Classes/Lightmodel.lua	1292	CommonLua/Classes/Lightmodel.lua	1373	same
+LineBreak_ForbiddenEOL	const	const	CommonLua/X/XTextParser.lua	1710	CommonLua/X/XTextParser.lua	1765	same
+LineBreak_ForbiddenSOL	const	const	CommonLua/X/XTextParser.lua	1709	CommonLua/X/XTextParser.lua	1764	same
+LoadedMaps	PersistableGlobals	PersistableGlobals	CommonLua/Core/map.lua	11	CommonLua/Core/map.lua	11	same
+LoadedRealTime	GameVar,PersistableGlobals		CommonLua/SavegameMetadata.lua	2,4			removed
+LockablePresetsInitialized	GameVar		CommonLua/Features/LockablePreset.lua	351			removed
+LogEntryNumber	GameVar	GameVar	Lua/UI/PopupNotification.lua	16	Lua/UI/PopupNotification.lua	16	same
+LuaErrors	GameVar	GameVar	CommonLua/Savegame.lua	1589	CommonLua/Savegame.lua	1590	same
+LuaReloads	const	const	CommonLua/Core/lib.lua	367	CommonLua/Core/lib.lua	367	same
+MagneticFieldMarsquakeThread	GameVar	GameVar	Lua/Marsquake.lua	41	Lua/Marsquake.lua	70	same
+MainCity	GameVar	GameVar	Lua/_init.lua	16	Lua/_init.lua	21	same
+MainMap	GameVar	GameVar	Lua/_init.lua	17	Lua/_init.lua	22	same
+MaintenanceWarnFraction		const			Lua/_GameConst.lua	47	added
+MannedExpeditionTaskNextId	GameVar	GameVar	Lua/Buildings/RocketExpedition.lua	1272	Lua/Buildings/RocketExpedition.lua	1285	same
+MannedExpeditionTasks	GameVar	GameVar	Lua/Buildings/RocketExpedition.lua	1271	Lua/Buildings/RocketExpedition.lua	1284	same
+MapChangeProcesses	const	const	CommonLua/SuspendedProcessing.lua	213	CommonLua/SuspendedProcessing.lua	213	same
+MapDirections	const	const	CommonLua/Core/const.lua	298	CommonLua/Core/const.lua	298	same
+MapHighestZ	MapVar	MapVar	Lua/Elevation.lua	2	Lua/Elevation.lua	2	same
+MapLoadRandom	MapVar	MapVar	CommonLua/Random.lua	6	CommonLua/Random.lua	6	same
+MapLowestZ	MapVar	MapVar	Lua/Elevation.lua	1	Lua/Elevation.lua	1	same
+MapPassable	MapVar	MapVar	CommonLua/Core/map.lua	532	CommonLua/Core/map.lua	558	same
+MapPlayers	MapVar	MapVar	CommonLua/Classes/Player.lua	147	CommonLua/Classes/Player.lua	151	same
+MapStates	MapVar	MapVar	CommonLua/Features/GameState.lua	196	CommonLua/Features/GameState.lua	199	same
+Maps	PersistableGlobals	PersistableGlobals	CommonLua/Core/map.lua	10	CommonLua/Core/map.lua	10	same
+MarkerObjs	MapVar	MapVar	CommonLua/Classes/marker.lua	258	CommonLua/Classes/marker.lua	266	same
+MarsScreenLandingSpots	GameVar	GameVar	Lua/PlanetaryView.lua	1	Lua/PlanetaryView.lua	1	same
+MarsScreenMapParams	GameVar	GameVar	Lua/PlanetaryView.lua	3	Lua/PlanetaryView.lua	3	same
+MarsTradeRouteNextId	GameVar	GameVar	Lua/TradeRoutes.lua	2	Lua/TradeRoutes.lua	2	same
+MarsTradeRoutes	GameVar	GameVar	Lua/TradeRoutes.lua	1	Lua/TradeRoutes.lua	1	same
+MasterDefaultVolume	const	const	Lua/Config/sound.lua	50	Lua/Config/sound.lua	50	same
+MasterMaxVolume	const	const	Lua/Config/sound.lua	49	Lua/Config/sound.lua	49	same
+MaxActiveTutorials		const			CommonLua/Libs/Tutorial/Tutorials.lua	30	added
+MaxBrushDensity	const	const	CommonLua/Core/const.lua	346	CommonLua/Core/const.lua	346	same
+MaxBuildingPriority	const	const	Lua/_GameConst.lua	56	Lua/_GameConst.lua	57	same
+MaxDestsAroundObject	const	const	CommonLua/Core/const.lua	191	CommonLua/Core/const.lua	191	same
+MaxDomeDist	const	const	Lua/_GameConst.lua	103	Lua/_GameConst.lua	116	same
+MaxMaintenance	const	const	Lua/_GameConst.lua	49	Lua/_GameConst.lua	45	same
+MaxModDataSize	const	const	CommonLua/Classes/Mod.lua	1462	CommonLua/Modding/Mod.lua	1475	moved-file
+MaxObjSaveSize	const	const	Lua/Config/config.lua	179	Lua/Config/config.lua	205	same
+MaxPassableTerrainSlope	const	const	Lua/Config/pathfind.lua	56	Lua/Config/pathfind.lua	1	same
+MaxSaneTimeFactor	const	const	CommonLua/Core/const.lua	129	CommonLua/Core/const.lua	129	same
+MaxScale	const	const	CommonLua/Core/const.lua,Lua/_fixup.lua	83,287	CommonLua/Core/const.lua,Lua/_fixup.lua	83,302	same
+MaxShakeDuration	const	const	CommonLua/Core/const.lua	117	CommonLua/Core/const.lua	117	same
+MaxShakeOffset	const	const	CommonLua/Core/const.lua	115	CommonLua/Core/const.lua	115	same
+MaxShakePower	const	const	CommonLua/Core/const.lua	120	CommonLua/Core/const.lua	120	same
+MaxShakeRoll	const	const	CommonLua/Core/const.lua	116	CommonLua/Core/const.lua	116	same
+MaxSingleScale	const	const	CommonLua/Core/const.lua	288	CommonLua/Core/const.lua	288	same
+MaxTerrainDepositRadius	GameVar	GameVar	Lua/Buildings/TerrainDeposit.lua	7	Lua/Buildings/TerrainDeposit.lua	7	same
+MaxTimeFactor	const	const	CommonLua/Core/const.lua	128	CommonLua/Core/const.lua	128	same
+MaxToxicRainPools	const	const	Lua/TerraformingDisasters.lua	186	Lua/TerraformingDisasters.lua	186	same
+MaxTradeAmount	const	const	Lua/_GameConst.lua	106	Lua/_GameConst.lua	119	same
+MaxUnreachablesInTable	const	const	Lua/Units/Drone.lua	817	Lua/Units/Drone.lua	888	same
+MaxUserUIScaleHighRes	const	const	CommonLua/Core/const.lua	391	CommonLua/Core/const.lua	391	same
+MaxUserUIScaleLowRes	const	const	CommonLua/Core/const.lua	390	CommonLua/Core/const.lua	390	same
+MeteorStorm		GameVar			Lua/Meteors.lua	389	added
+MeteorStormsDisabled	GameVar	GameVar	Lua/TerraformingDisasters.lua	3	Lua/TerraformingDisasters.lua	3	same
+Meteors		GameVar			Lua/Meteors.lua	388	added
+MilestoneCompleted	GameVar	GameVar	Lua/Milestones.lua	70	Lua/Milestones.lua	76	same
+MilestoneEnactors	GameVar	GameVar	Lua/Milestones.lua	72	Lua/Milestones.lua	78	same
+MilestoneThreads	GameVar	GameVar	Lua/Milestones.lua	71	Lua/Milestones.lua	77	same
+MinBrushDensity	const	const	CommonLua/Core/const.lua	345	CommonLua/Core/const.lua	345	same
+MinDaysFoodSupplyBeforeNotification	const		Lua/_GameConst.lua	11			removed
+MinDaysMaintenanceSupplyBeforeNotification	const		Lua/_GameConst.lua	10			removed
+MinHoursAirResourceSupplyBeforeNotification	const	const	Lua/_GameConst.lua	12	Lua/_GameConst.lua	10	same
+MinHoursPowerResourceSupplyBeforeNotification	const	const	Lua/_GameConst.lua	14	Lua/_GameConst.lua	12	same
+MinHoursWaterResourceSupplyBeforeNotification	const	const	Lua/_GameConst.lua	13	Lua/_GameConst.lua	11	same
+MinScale	const	const	CommonLua/Core/const.lua	82	CommonLua/Core/const.lua	82	same
+MinShakeDuration	const	const	CommonLua/Core/const.lua	118	CommonLua/Core/const.lua	118	same
+MinTimeFactor	const	const	CommonLua/Core/const.lua	127	CommonLua/Core/const.lua	127	same
+MinTradeAmount	const	const	Lua/_GameConst.lua	105	Lua/_GameConst.lua	118	same
+MinUserUIScale	const	const	CommonLua/Core/const.lua	389	CommonLua/Core/const.lua	389	same
+MinimumElevationMarker	MapVar	MapVar	Lua/Elevation.lua	12	Lua/Elevation.lua	12	same
+MinuteDuration	const	const	Lua/_GameConst.lua	8	Lua/_GameConst.lua	8	same
+MinutesPerHour	const	const	Lua/_GameConst.lua	7	Lua/_GameConst.lua	7	same
+MirrorSphereEvents	GameVar	GameVar	Lua/Mysteries/MirrorSphere.lua	23	Lua/Mysteries/MirrorSphere.lua	23	same
+MirrorSphereForcedTarget	GameVar	GameVar	Lua/Mysteries/MirrorSphere.lua	29	Lua/Mysteries/MirrorSphere.lua	30	same
+MirrorSphereResonanceActive		GameVar			Lua/Mysteries/MirrorSphere.lua	29	added
+MirrorSphereResonanceProgress	GameVar	GameVar	Lua/Mysteries/MirrorSphere.lua	27	Lua/Mysteries/MirrorSphere.lua	27	same
+MirrorSphereResonanceThread	GameVar	GameVar	Lua/Mysteries/MirrorSphere.lua	28	Lua/Mysteries/MirrorSphere.lua	28	same
+MirrorSphere_ActionMaxProgress	const	const	Lua/_GameConst.lua	512	Lua/_GameConst.lua	538	same
+MirrorSphere_ActionMaxTime	const	const	Lua/_GameConst.lua	510	Lua/_GameConst.lua	536	same
+MirrorSphere_ActionMinProgress	const	const	Lua/_GameConst.lua	511	Lua/_GameConst.lua	537	same
+MirrorSphere_ActionMinTime	const	const	Lua/_GameConst.lua	509	Lua/_GameConst.lua	535	same
+MirrorSphere_EffectFallout	const	const	Lua/_GameConst.lua	493	Lua/_GameConst.lua	519	same
+MirrorSphere_EffectRange	const	const	Lua/_GameConst.lua	492	Lua/_GameConst.lua	518	same
+MirrorSphere_ExcavationDepth	const	const	Lua/_GameConst.lua	524	Lua/_GameConst.lua	550	same
+MirrorSphere_ExcavationRadius	const	const	Lua/_GameConst.lua	523	Lua/_GameConst.lua	549	same
+MirrorSphere_HatchPctDay	const	const	Lua/_GameConst.lua	517	Lua/_GameConst.lua	543	same
+MirrorSphere_IceStrength	const	const	Lua/_GameConst.lua	520	Lua/_GameConst.lua	546	same
+MirrorSphere_IrradiateDamageH	const	const	Lua/_GameConst.lua	508	Lua/_GameConst.lua	534	same
+MirrorSphere_MaxMoveDelay	const	const	Lua/_GameConst.lua	495	Lua/_GameConst.lua	521	same
+MirrorSphere_MaxSpheres	const	const	Lua/_GameConst.lua	491	Lua/_GameConst.lua	517	same
+MirrorSphere_MinBuildingDist	const	const	Lua/_GameConst.lua	490	Lua/_GameConst.lua	516	same
+MirrorSphere_MinMoveDelay	const	const	Lua/_GameConst.lua	494	Lua/_GameConst.lua	520	same
+MirrorSphere_PowerCapacity	const	const	Lua/_GameConst.lua	497	Lua/_GameConst.lua	523	same
+MirrorSphere_PowerDrainInterval	const	const	Lua/_GameConst.lua	498	Lua/_GameConst.lua	524	same
+MirrorSphere_PowerHumStates	const	const	Lua/_GameConst.lua	501	Lua/_GameConst.lua	527	same
+MirrorSphere_PrefabName	const	const	Lua/_GameConst.lua	522	Lua/_GameConst.lua	548	same
+MirrorSphere_RechargeRateH	const	const	Lua/_GameConst.lua	496	Lua/_GameConst.lua	522	same
+MirrorSphere_ResonanceAccumSpheresStart	const	const	Lua/_GameConst.lua	515	Lua/_GameConst.lua	541	same
+MirrorSphere_ResonanceAccumSpheresSustain	const	const	Lua/_GameConst.lua	516	Lua/_GameConst.lua	542	same
+MirrorSphere_ResonancePtsMax	const	const	Lua/_GameConst.lua	514	Lua/_GameConst.lua	540	same
+MirrorSphere_ResonancePtsPerDay	const	const	Lua/_GameConst.lua	513	Lua/_GameConst.lua	539	same
+MirrorSphere_SplitDist	const	const	Lua/_GameConst.lua	500	Lua/_GameConst.lua	526	same
+MirrorSphere_SplitPctDay	const	const	Lua/_GameConst.lua	518	Lua/_GameConst.lua	544	same
+MirrorSphere_SplitTime	const	const	Lua/_GameConst.lua	499	Lua/_GameConst.lua	525	same
+MirrorSphere_TargetBuildingChance	const	const	Lua/_GameConst.lua	521	Lua/_GameConst.lua	547	same
+MirrorSphere_TurnToDepositTime	const	const	Lua/_GameConst.lua	519	Lua/_GameConst.lua	545	same
+MissionSponsorLockModifiers	const	const	Lua/_GameConst.lua	399	Lua/_GameConst.lua	424	same
+MissionSponsorNations	const	const	Lua/_GameConst.lua	400	Lua/_GameConst.lua	425	same
+MissionSponsorPriceModifiers	const	const	Lua/_GameConst.lua	398	Lua/_GameConst.lua	423	same
+ModItemAttachment_ChildObj	GameVar	GameVar	Lua/ModItemAttachment.lua	134	Lua/ModItemAttachment.lua	134	same
+ModItemAttachment_Item	GameVar	GameVar	Lua/ModItemAttachment.lua	132	Lua/ModItemAttachment.lua	132	same
+ModItemAttachment_ParentObj	GameVar	GameVar	Lua/ModItemAttachment.lua	133	Lua/ModItemAttachment.lua	133	same
+ModItemAttachment_Thread	GameVar	GameVar	Lua/ModItemAttachment.lua	135	Lua/ModItemAttachment.lua	135	same
+MoholeMineHeatRadius	const	const	Lua/_GameConst.lua	69	Lua/_GameConst.lua	70	same
+MoistureVaporatorPenaltyPercent	const	const	Lua/_GameConst.lua	66	Lua/_GameConst.lua	67	same
+MoistureVaporatorRange	const	const	Lua/_GameConst.lua	65	Lua/_GameConst.lua	66	same
+MonumentOfMarsLibertyBecomeSupporterChance	const	const	Data/BuildingTemplate/MonumentOfMarsLiberty.lua,Lua/BuildingTemplate/MonumentOfMarsLiberty.generated.lua	40,45	Data/BuildingTemplate/MonumentOfMarsLiberty.lua,Lua/BuildingTemplate/MonumentOfMarsLiberty.generated.lua	9,49	same
+MovePace	const	const	CommonLua/Classes/UnitComponent.lua	37	CommonLua/Classes/UnitComponent.lua	37	same
+MovieCorrectionDesaturation	const	const	Lua/Config/config.lua	108	Lua/Config/config.lua	114	same
+MovieCorrectionGamma	const	const	Lua/Config/config.lua	109	Lua/Config/config.lua	115	same
+MusicDefaultRadioStation	const	const	Lua/Config/sound.lua	51	Lua/Config/sound.lua	51	same
+MusicDefaultVolume	const	const	Lua/Config/sound.lua	48	Lua/Config/sound.lua	48	same
+MusicMaxVolume	const	const	Lua/Config/sound.lua	47	Lua/Config/sound.lua	47	same
+NetObjects	GameVar	GameVar	CommonLua/Libs/Network/NetworkAsync.lua	4	CommonLua/Libs/Network/NetworkAsync.lua	4	same
+NetTimeFactor	GameVar	GameVar	CommonLua/Libs/Network/NetworkSync.lua	199	CommonLua/Libs/Network/NetworkSync.lua	199	same
+NextHour	GameVar	GameVar	Lua/Lightmodel.lua	1	Lua/Lightmodel.lua	1	same
+NextSpawnAnomally	GameVar	GameVar	Lua/Vegetation.lua	35	Lua/Vegetation.lua	34	same
+NextSyncHandle	GameVar	GameVar	CommonLua/Classes/_object.lua	467	CommonLua/Classes/_object.lua	469	same
+NightLightsState	MapVar	MapVar	Lua/NightLightObjects.lua	22	Lua/NightLightObjects.lua	22	same
+NightLightsThread	MapVar	MapVar	Lua/NightLightObjects.lua	23	Lua/NightLightObjects.lua	23	same
+NoColorization	const	const	CommonLua/Core/const.lua	452	CommonLua/Core/const.lua	452	same
+NormalLightmodelList	GameVar	GameVar	Lua/Lightmodel.lua	125	Lua/Lightmodel.lua	125	same
+NotificationHoldingPad	GameVar	GameVar	Lua/Buildings/TradePad.lua	1	Lua/Buildings/TradePad.lua	1	same
+NotificationVoiceCooldown	const	const	Lua/_GameConst.lua	16	Lua/_GameConst.lua	14	same
+Notifications	GameVar	GameVar	CommonLua/Libs/Notifications/Notifications.lua	1	CommonLua/Libs/Notifications/Notifications.lua	1	same
+ObjsToDeleteOnLoadGame	GameVar	GameVar	CommonLua/Core/persist.lua	184	CommonLua/Core/persist.lua	188	same
+ObjsToRestoreColorOnLoad	GameVar	GameVar	Lua/Construction/Construction.lua	945	Lua/Construction/Construction.lua	1019	same
+ObstructOpacity	const	const	CommonLua/Core/const.lua	350	CommonLua/Core/const.lua	350	same
+ObstructOpacityFadeInTime	const	const	CommonLua/Core/const.lua	352	CommonLua/Core/const.lua	352	same
+ObstructOpacityFadeOutTime	const	const	CommonLua/Core/const.lua	351	CommonLua/Core/const.lua	351	same
+ObstructOpacityRefreshTime	const	const	CommonLua/Core/const.lua	354	CommonLua/Core/const.lua	354	same
+ObstructViewMaxObjectSize	const	const	CommonLua/Core/const.lua	355	CommonLua/Core/const.lua	355	same
+ObstructViewRefreshTime	const	const	CommonLua/Core/const.lua	353	CommonLua/Core/const.lua	353	same
+OldExcavatorMineLocations	GameVar	GameVar	Lua/Buildings/TheExcavator.lua	40	Lua/Buildings/TheExcavator.lua	41	same
+OldMineLocations	GameVar	GameVar	Lua/Buildings/RegolithExtractor.lua	8	Lua/Buildings/RegolithExtractor.lua	8	same
+OmegaTelescopeBoostPercent	const	const	Lua/_GameConst.lua	68	Lua/_GameConst.lua	69	same
+OmegaTelescopeBreakthroughsCount	const	const	Lua/_GameConst.lua	67	Lua/_GameConst.lua	68	same
+OneTimeLawsActivated	GameVar		Lua/Factions/Legislature.lua	2			removed
+OpacityReasons	GameVar	GameVar	CommonLua/Classes/ReasonSetters/OpacityReason.lua	1	CommonLua/Classes/ReasonSetters/OpacityReason.lua	1	same
+OpacityRelatedObjs	GameVar	GameVar	CommonLua/Classes/ReasonSetters/OpacityReason.lua	3	CommonLua/Classes/ReasonSetters/OpacityReason.lua	3	same
+OpenAirBuildings	GameVar	GameVar	Lua/Buildings/OpenAirBuilding.lua	1	Lua/Buildings/OpenAirBuilding.lua	1	same
+OpenAirBuildingsAtSomePoint		GameVar			Lua/Buildings/OpenCity.lua	350	added
+OpenAirChangeThread	GameVar	GameVar	Lua/Buildings/OpenAirBuilding.lua	3	Lua/Buildings/OpenAirBuilding.lua	3	same
+OpenAirLightmodelThread	GameVar	GameVar	Lua/Buildings/OpenAirBuilding.lua	2	Lua/Buildings/OpenAirBuilding.lua	2	same
+OpenCityConstruction	GameVar	GameVar	Lua/Construction/ConstructionControllers.lua	93	Lua/Construction/ConstructionControllers.lua	93	same
+OrigAssetsRev	GameVar	GameVar	CommonLua/SavegameMetadata.lua	291	CommonLua/SavegameMetadata.lua	324	same
+OrigLuaRev	GameVar	GameVar	CommonLua/SavegameMetadata.lua	288	CommonLua/SavegameMetadata.lua	321	same
+OriginalOpacity	GameVar	GameVar	CommonLua/Classes/ReasonSetters/OpacityReason.lua	2	CommonLua/Classes/ReasonSetters/OpacityReason.lua	2	same
+OverlayGridIdCounters	GameVar	GameVar	Lua/SupplyGrid.lua	376	Lua/SupplyGrid.lua	382	same
+OverlaysVisibleDuration	const	const	Lua/_GameConst.lua	95	Lua/_GameConst.lua	108	same
+OverrideBuildingLockedState	GameVar	GameVar	CommonLua/Features/LockablePreset.lua	624	CommonLua/Features/LockablePreset.lua	724	same
+OverviewCamLookAt	const	const	Lua/_GameConst.lua	140	Lua/_GameConst.lua	156	same
+OverviewCamPos	const	const	Lua/_GameConst.lua	141	Lua/_GameConst.lua	157	same
+OverviewCamRotateArea	const	const	Lua/_GameConst.lua	142	Lua/_GameConst.lua	158	same
+OverviewPhysSkySceneParams	GameVar	GameVar	Lua/UI/OverviewModeDialog.lua	308	Lua/UI/OverviewModeDialog.lua	308	same
+POIMaxLat	const	const	Lua/_GameConst.lua	111	Lua/_GameConst.lua	124	same
+POIMaxLongDist	const	const	Lua/_GameConst.lua	112	Lua/_GameConst.lua	125	same
+POIMinLat	const	const	Lua/_GameConst.lua	110	Lua/_GameConst.lua	123	same
+POISameSideMaxDist	const	const	Lua/_GameConst.lua	113	Lua/_GameConst.lua	126	same
+PRG_BldSlotData	MapVar	MapVar	CommonLua/X/XPrgAmbientLife.lua	530	CommonLua/X/XPrgAmbientLife.lua	529	same
+ParSystemsForceLooped		MapVar			CommonLua/Classes/particles.lua	129	added
+PartialEditStopReasons	MapVar	MapVar	CommonLua/Core/map.lua	612	CommonLua/Core/map.lua	638	same
+ParticleHandlesToggleRadius	const	const	CommonLua/Core/const.lua	122	CommonLua/Core/const.lua	122	same
+PassTypeMaxCount		MapVar			CommonLua/Classes/PassTypeObj.lua	40	added
+PassTypeMaxRadius		MapVar			CommonLua/Classes/PassTypeObj.lua	39	added
+PassVersion	MapVar	MapVar	CommonLua/Pass.lua	1	CommonLua/Pass.lua	1	same
+PassageConstructionGroupMaxSize	const	const	Lua/Passage.lua	1633	Lua/Passage.lua	1916	same
+PastureVeganMoraleImpact	const		Lua/Units/Animals.lua	916			removed
+PathCache	MapVar	MapVar	Lua/Pathfinding.lua	179	Lua/Pathfinding.lua	158	same
+PathMaxUnitRadius	const	const	Lua/Config/pathfind.lua	57	Lua/Config/pathfind.lua	2	same
+PathMaxZTolerance	const	const	Lua/Config/pathfind.lua	58	Lua/Config/pathfind.lua	3	same
+PathStrandedArea	const	const	Lua/Config/pathfind.lua	59	Lua/Config/pathfind.lua	4	same
+PeriodicRepeatThreads	PersistableGlobals	PersistableGlobals	CommonLua/Core/lib.lua	1536	CommonLua/Core/lib.lua	1557	same
+PlacedCloudsPresetId	MapVar	MapVar	CommonLua/Classes/OutsiderObjects.lua	2	CommonLua/Classes/OutsiderObjects.lua	2	same
+PlacedMountainsPresetId	MapVar	MapVar	CommonLua/Classes/OutsiderObjects.lua	3	CommonLua/Classes/OutsiderObjects.lua	3	same
+PlacedOutsiderObjects	MapVar	MapVar	CommonLua/Classes/OutsiderObjects.lua	1	CommonLua/Classes/OutsiderObjects.lua	1	same
+PlaneColor	const	const	CommonLua/Core/const.lua	285	CommonLua/Core/const.lua	285	same
+PlaneLineHeight	const	const	CommonLua/Core/const.lua	275	CommonLua/Core/const.lua	275	same
+PlaneLineRadius	const	const	CommonLua/Core/const.lua	274	CommonLua/Core/const.lua	274	same
+PlaneLineSlices	const	const	CommonLua/Core/const.lua	276	CommonLua/Core/const.lua	276	same
+PlanetBackground	GameVar	GameVar	Lua/UI/PlanetScene.lua	114	Lua/UI/PlanetScene.lua	114	same
+PlanetCamera	GameVar	GameVar	Lua/UI/PlanetScene.lua	17	Lua/UI/PlanetScene.lua	17	same
+PlanetMaxWaterLevel	GameVar	GameVar	Lua/UI/PlanetScene.lua	125	Lua/UI/PlanetScene.lua	125	same
+PlanetObj	GameVar	GameVar	Lua/UI/PlanetScene.lua	112	Lua/UI/PlanetScene.lua	112	same
+PlanetRocket	GameVar	GameVar	Lua/UI/PlanetScene.lua	115	Lua/UI/PlanetScene.lua	115	same
+PlanetRotationObj	GameVar	GameVar	Lua/UI/PlanetScene.lua	113	Lua/UI/PlanetScene.lua	113	same
+PlanetScene	GameVar	GameVar	Lua/UI/PlanetScene.lua	16	Lua/UI/PlanetScene.lua	16	same
+PlanetStack	GameVar	GameVar	Lua/UI/PlanetScene.lua	21	Lua/UI/PlanetScene.lua	21	same
+PlayArea	MapVar	MapVar	CommonLua/Core/map.lua	965	CommonLua/Core/map.lua	1014	same
+Players	GameVar	GameVar	CommonLua/Classes/Player.lua	1	CommonLua/Classes/Player.lua	1	same
+PopupMinimizedAutoOpenTime		const			Lua/_GameConst.lua	16	added
+PostMsgList	GameVar	GameVar	CommonLua/Core/lib.lua	1750	CommonLua/Core/lib.lua	1772	same
+PreGameMenuFadeInDuration	const	const	Lua/_GameConst.lua	98	Lua/_GameConst.lua	111	same
+PreGameMenuFadeOutDuration	const	const	Lua/_GameConst.lua	99	Lua/_GameConst.lua	112	same
+PredefinedSceneActors	const	const	CommonLua/Core/const.lua	101	CommonLua/Core/const.lua	101	same
+PrefabFeatureDensity	const	const	Lua/_GameConst.lua	466	Lua/_GameConst.lua	492	same
+PrefabInfoBox	const	const	CommonLua/Libs/MapGen/BiomeFiller.lua	33	CommonLua/Libs/MapGen/BiomeFiller.lua	33	same
+PrefabInfoMeta	const	const	CommonLua/Libs/MapGen/BiomeFiller.lua	30	CommonLua/Libs/MapGen/BiomeFiller.lua	30	same
+PrefabInfoRaster	const	const	CommonLua/Libs/MapGen/BiomeFiller.lua	31	CommonLua/Libs/MapGen/BiomeFiller.lua	31	same
+PrefabInfoType	const	const	CommonLua/Libs/MapGen/BiomeFiller.lua	32	CommonLua/Libs/MapGen/BiomeFiller.lua	32	same
+PrefabInvalidTerrain	const	const	Lua/_GameConst.lua	461	Lua/_GameConst.lua	487	same
+PrefabMaxMapSize	const	const	Lua/_GameConst.lua	464	Lua/_GameConst.lua	490	same
+PrefabMaxPlayAngle	const	const	Lua/_GameConst.lua	459	Lua/_GameConst.lua	485	same
+PrefabMinObjRadius	const	const	Lua/_GameConst.lua	462	Lua/_GameConst.lua	488	same
+PrefabMinPlayRadius	const	const	Lua/_GameConst.lua	460	Lua/_GameConst.lua	486	same
+PrefabRasterCacheMemory	const	const	Lua/_GameConst.lua	473,475	Lua/_GameConst.lua	499,501	same
+PrefabRasterParallelDiv	const	const	Lua/_GameConst.lua	463	Lua/_GameConst.lua	489	same
+PrefabVersionOverride	const	const	Lua/_GameConst.lua	477	Lua/_GameConst.lua	503	same
+PrefabWorkRatio	const	const	Lua/_GameConst.lua	458	Lua/_GameConst.lua	484	same
+PresetLockStates	GameVar		CommonLua/Features/LockablePreset.lua	3			removed
+ProcessedLockablePresets	GameVar		CommonLua/Features/LockablePreset.lua	350			removed
+ProhibitPresetTemplates	GameVar	GameVar	CommonLua/PresetTemplate.lua	1	CommonLua/PresetTemplate.lua	1	same
+PropertyHelpers	MapVar	MapVar	CommonLua/Editor/PropertyHelpers.lua	1152	CommonLua/Editor/PropertyHelpers.lua	1152	same
+PropertyHelpers_Refs	MapVar	MapVar	CommonLua/Editor/PropertyHelpers.lua	1153	CommonLua/Editor/PropertyHelpers.lua	1153	same
+PyramidColor	const	const	CommonLua/Core/const.lua	294	CommonLua/Core/const.lua	294	same
+PyramidSideRadius	const	const	CommonLua/Core/const.lua	291	CommonLua/Core/const.lua	291	same
+PyramidSideSlices	const	const	CommonLua/Core/const.lua	292	CommonLua/Core/const.lua	292	same
+PyramidSize	const	const	CommonLua/Core/const.lua	290	CommonLua/Core/const.lua	290	same
+QueuedEnableBlockPassObjects	GameVar	GameVar	Lua/LifeSupportGrid.lua	717	Lua/LifeSupportGrid.lua	767	same
+RCRoverDefaultRadius	const	const	Lua/_GameConst.lua	74	Lua/_GameConst.lua	75	same
+RCRoverMaxRadius	const	const	Lua/_GameConst.lua	75	Lua/_GameConst.lua	76	same
+RCRoverMinRadius	const	const	Lua/_GameConst.lua	76	Lua/_GameConst.lua	77	same
+RadicalizedFactionsPolarizationDefs	GameVar	GameVar	Lua/ClassDefs/ClassDef-Factions.generated.lua	512	Lua/Factions/FactionDef.lua	636	moved-file
+RainsDisasterThreads	GameVar	GameVar	Lua/TerraformingDisasters.lua	323	Lua/TerraformingDisasters.lua	418	same
+RandomMap.PrefabAvgObjRadius	const	const	Lua/_fixup.lua	290	Lua/_fixup.lua	305	same
+RandomMap.PrefabFeatureDensity	const	const	Lua/_fixup.lua	313	Lua/_fixup.lua	328	same
+RandomMap.PrefabHeightRoughnessError	const	const	Lua/_fixup.lua	291	Lua/_fixup.lua	306	same
+RandomMap.PrefabInvalidTerrain	const	const	Lua/_fixup.lua	308	Lua/_fixup.lua	323	same
+RandomMap.PrefabMaxMapSize	const	const	Lua/_fixup.lua	311	Lua/_fixup.lua	326	same
+RandomMap.PrefabMaxPlayAngle	const	const	Lua/_fixup.lua	306	Lua/_fixup.lua	321	same
+RandomMap.PrefabMinObjRadius	const	const	Lua/_fixup.lua	309	Lua/_fixup.lua	324	same
+RandomMap.PrefabMinPlayRadius	const	const	Lua/_fixup.lua	307	Lua/_fixup.lua	322	same
+RandomMap.PrefabRasterCacheMemory	const	const	Lua/_fixup.lua	320,322	Lua/_fixup.lua	335,337	same
+RandomMap.PrefabRasterParallelDiv	const	const	Lua/_fixup.lua	310	Lua/_fixup.lua	325	same
+RandomMap.PrefabVersionOverride	const	const	Lua/_fixup.lua	324	Lua/_fixup.lua	339	same
+RandomMap.PrefabWorkRatio	const	const	Lua/_fixup.lua	305	Lua/_fixup.lua	320	same
+RangeToCheckForExploitersOnDepositReveal	const	const	Lua/_GameConst.lua	87	Lua/_GameConst.lua	100	same
+ReactionObjects	GameVar	GameVar	CommonLua/Reactions.lua	411	CommonLua/Reactions.lua	449	same
+ReconPointsScale	const	const	Lua/_GameConst.lua	45	Lua/_GameConst.lua	41	same
+RegionId	MapVar	MapVar	CommonLua/Classes/ClassDefs/ClassDef-Common.generated.lua	253	CommonLua/Classes/ClassDefs/ClassDef-Common.generated.lua	268	same
+RegisteredPluginUIs	GameVar	GameVar	CommonLua/UI/PluginUIs.lua	278	CommonLua/UI/PluginUIs.lua	279	same
+RegolithExtractorExtendedExtractionShape	GameVar	GameVar	Lua/Buildings/RegolithExtractor.lua	168	Lua/Buildings/RegolithExtractor.lua	171	same
+RegolithExtractorHintPopupThread	GameVar	GameVar	Lua/Buildings/RegolithExtractor.lua	276	Lua/Buildings/RegolithExtractor.lua	290	same
+RenderGizmoScreenDist	const	const	CommonLua/Core/const.lua	264	CommonLua/Core/const.lua	264	same
+RepeatButtonInterval	const	const	CommonLua/Core/const.lua	176	CommonLua/Core/const.lua	176	same
+RepeatButtonStart	const	const	CommonLua/Core/const.lua	175	CommonLua/Core/const.lua	175	same
+RepeatThreads	MapVar	MapVar	CommonLua/Core/lib.lua	1698	CommonLua/Core/lib.lua	1720	same
+RequestToMapSource	GameVar	GameVar	Lua/_TaskRequest.lua	4	Lua/_TaskRequest.lua	4	same
+ResearchPointsScale	const	const	Lua/_GameConst.lua	44	Lua/_GameConst.lua	40	same
+ResearchQueueSize	const	const	Lua/_GameConst.lua	22	Lua/_GameConst.lua	21	same
+ResourceDeliverers	MapVar	MapVar	CommonLua/Libs/Resources/Resources.lua	1	CommonLua/Libs/Resources/Resources.lua	1	same
+ResourceIconScale	const	const	CommonLua/Libs/Resources/ResourcesFormatting.lua	5	CommonLua/Libs/Resources/ResourcesFormatting.lua	5	same
+ResourceIconUISizeScale	const	const	CommonLua/Libs/Resources/ResourcesFormatting.lua	4	CommonLua/Libs/Resources/ResourcesFormatting.lua	4	same
+ResourceOverviewCity	MapVar	MapVar	Lua/ResourceOverview.lua	1	Lua/ResourceOverview.lua	1	same
+ResourceScale	const	const	CommonLua/Libs/Resources/ResourcesFormatting.lua,Lua/_GameConst.lua	6,41	CommonLua/Libs/Resources/ResourcesFormatting.lua,Lua/_GameConst.lua	6,37	same
+ResourceUnitsInPile	const	const	Lua/_GameConst.lua	185	Lua/_GameConst.lua	202	same
+ResupplyCargoRocketCost	g_Consts	g_Consts	Lua/Factions/Independence.lua	255	Lua/Factions/Independence.lua	259	same
+ResupplyItemDefinitions	GameVar	GameVar	Lua/ResupplyItems.lua	1	Lua/ResupplyItems.lua	1	same
+ResupplyPassengerRocketCost	g_Consts	g_Consts	Data/XDef/ResupplyCategories.lua,Lua/Factions/Independence.lua,Lua/XDef/ResupplyCategories.generated.lua	233,259,226	Data/XDef/ResupplyCategories.lua,Lua/Factions/Independence.lua,Lua/XDef/ResupplyCategories.generated.lua	241,263,234	same
+RevealDarknessFastObjects	MapVar	MapVar	Lua/RevealDarkness.lua	54	Lua/RevealDarkness.lua	58	same
+RevealDarknessObjects	MapVar	MapVar	Lua/RevealDarkness.lua	53	Lua/RevealDarkness.lua	57	same
+RivalAISabotageTime	GameVar	GameVar	Lua/RivalColonies.lua	82	Lua/RivalColonies.lua	78	same
+RivalAIs	GameVar	GameVar	Lua/RivalColonies.lua	81	Lua/RivalColonies.lua	77	same
+RocketMaxDrones	const	const	Lua/Buildings/RocketBase.lua,Lua/UniversalRocket.lua	1478,1592	Lua/UniversalRocket.lua	1703	moved-file
+RocketTakeOffHoldTime		const			Lua/UniversalRocket.lua	451	added
+RolloverDestroyTime	const	const	CommonLua/Core/const.lua	161	CommonLua/Core/const.lua	161	same
+RolloverRefreshDistance	const	const	CommonLua/Core/const.lua	163	CommonLua/Core/const.lua	163	same
+RolloverTime	const	const	CommonLua/Core/const.lua	160	CommonLua/Core/const.lua	160	same
+RolloverWidth	const	const	CommonLua/Core/const.lua	164	CommonLua/Core/const.lua	164	same
+RoversWeightModifierPercent	g_Consts	g_Consts	Lua/_fixup.lua	1938	Lua/_fixup.lua	2181	same
+SafariMaxRouteLength		const			Lua/_GameConst.lua	79	added
+SanatoriumTraits	const	const	Lua/_GameConst.lua	539	Lua/_GameConst.lua	565	same
+SandTraceThreads	GameVar	GameVar	Lua/VehicleSandTrace.lua	8	Lua/VehicleSandTrace.lua	8	same
+SanityBreakdownTraits	const	const	Lua/_GameConst.lua	549	Lua/_GameConst.lua	575	same
+SavegameMeta	GameVar,PersistableGlobals		CommonLua/SavegameMetadata.lua	1,3			removed
+Scale	const	const	CommonLua/Core/const.lua	60	CommonLua/Core/const.lua	60	same
+Scale.res	const	const	CommonLua/Libs/Resources/ResourcesFormatting.lua	7	CommonLua/Libs/Resources/ResourcesFormatting.lua	7	same
+ScaleupGrowthThread	GameVar	GameVar	Lua/Vegetation.lua	357	Lua/Vegetation.lua	362	same
+ScaleupGrowthThreadData	GameVar	GameVar	Lua/Vegetation.lua	358	Lua/Vegetation.lua	363	same
+ScanTick	const	const	Lua/_GameConst.lua	115	Lua/_GameConst.lua	128	same
+SchoolExtraTraits	const	const	Lua/_GameConst.lua	534	Lua/_GameConst.lua	560	same
+SchoolTraits	const	const	Lua/_GameConst.lua	526	Lua/_GameConst.lua	552	same
+ScriptVars	GameVar	GameVar	CommonLua/Features/ScriptVars.lua	75	CommonLua/Features/ScriptVars.lua	78	same
+SectorCount	const	const	Lua/_GameConst.lua	116	Lua/_GameConst.lua	129	same
+SectorDeepScanPoints	const	const	Lua/_GameConst.lua	119	Lua/_GameConst.lua	132	same
+SectorScanBase	const	const	Lua/_GameConst.lua	117	Lua/_GameConst.lua	130	same
+SectorScanPoints	const	const	Lua/_GameConst.lua	118	Lua/_GameConst.lua	131	same
+Seed	GameVar,MapVar	GameVar,MapVar	CommonLua/Classes/ScriptRandom.lua	1,4	CommonLua/Classes/ScriptRandom.lua	1,4	same
+SelectedObj	GameVar	GameVar	CommonLua/Selection.lua	1	CommonLua/Selection.lua	1	same
+SelectedSideColor	const	const	CommonLua/Core/const.lua	295	CommonLua/Core/const.lua	295	same
+Selection	GameVar	GameVar	CommonLua/Selection.lua	2	CommonLua/Selection.lua	2	same
+SelectionArrowsOwners	GameVar	GameVar	Lua/UI/SelectionArrow.lua	1	Lua/UI/SelectionArrow.lua	1	same
+SensorTowerCumulativeScanBoost	const	const	Lua/_GameConst.lua	120	Lua/_GameConst.lua	133	same
+SensorTowerCumulativeScanBoostMax	const	const	Lua/_GameConst.lua	121	Lua/_GameConst.lua	134	same
+SensorTowerPredictionAddTime	const	const	Lua/_GameConst.lua	125	Lua/_GameConst.lua	138	same
+SensorTowerPredictionMaxTime	const	const	Lua/_GameConst.lua	126	Lua/_GameConst.lua	139	same
+SensorTowerScanBoostMax	const	const	Lua/_GameConst.lua	122	Lua/_GameConst.lua	135	same
+SensorTowerScanBoostMaxRange	const	const	Lua/_GameConst.lua	124	Lua/_GameConst.lua	137	same
+SensorTowerScanBoostMinRange	const	const	Lua/_GameConst.lua	123	Lua/_GameConst.lua	136	same
+SequenceDefaultLoopDelay	const	const	CommonLua/Core/const.lua	204	CommonLua/Core/const.lua	204	same
+SessionRandom	GameVar	GameVar	Lua/_init.lua	5	Lua/_init.lua	10	same
+ShadowDirsComboItems	const	const	CommonLua/Classes/Light.lua	268	CommonLua/Classes/Light.lua	268	same
+ShakeRadiusInSight	const	const	CommonLua/Core/const.lua	113	CommonLua/Core/const.lua	113	same
+ShakeRadiusOutOfSight	const	const	CommonLua/Core/const.lua	114	CommonLua/Core/const.lua	114	same
+ShakeTick	const	const	CommonLua/Core/const.lua	119	CommonLua/Core/const.lua	119	same
+ShortenedButtonNames	const	const	CommonLua/Core/locutils.lua	152	CommonLua/Core/locutils.lua	152	same
+ShowOnceNotifications	GameVar	GameVar	CommonLua/Libs/Notifications/Notifications.lua	2	CommonLua/Libs/Notifications/Notifications.lua	2	same
+ShowResourceIconReasons	GameVar	GameVar	Lua/Buildings/Deposit.lua	155	Lua/Buildings/Deposit.lua	159	same
+ShowingGridTileWaterAttachesOn	GameVar	GameVar	Lua/Buildings/Building.lua	3354	Lua/Buildings/Building.lua	3535	same
+SignalBoostersBuff	const		Lua/_GameConst.lua	72			removed
+SignsOverviewCameraOpacityDown	const	const	Lua/_GameConst.lua	484	Lua/_GameConst.lua	510	same
+SignsOverviewCameraOpacityUp	const	const	Lua/_GameConst.lua	483	Lua/_GameConst.lua	509	same
+SignsOverviewCameraScaleDown	const	const	Lua/_GameConst.lua	482	Lua/_GameConst.lua	508	same
+SignsOverviewCameraScaleUp	const	const	Lua/_GameConst.lua	481	Lua/_GameConst.lua	507	same
+SnapAngleCoef	const	const	CommonLua/Core/const.lua	341	CommonLua/Core/const.lua	341	same
+SnapAngleTolerance	const	const	CommonLua/Core/const.lua	332	CommonLua/Core/const.lua	332	same
+SnapBoxSize	const	const	CommonLua/Core/const.lua	328	CommonLua/Core/const.lua	328	same
+SnapDistXYCoef	const	const	CommonLua/Core/const.lua	339	CommonLua/Core/const.lua	339	same
+SnapDistXYTolerance	const	const	CommonLua/Core/const.lua	329	CommonLua/Core/const.lua	329	same
+SnapDistZCoef	const	const	CommonLua/Core/const.lua	340	CommonLua/Core/const.lua	340	same
+SnapDistZTolerance	const	const	CommonLua/Core/const.lua	330	CommonLua/Core/const.lua	330	same
+SnapDrawWarningFitnessTreshold	const	const	CommonLua/Core/const.lua	343	CommonLua/Core/const.lua	343	same
+SnapRadius	const	const	CommonLua/Core/const.lua	327	CommonLua/Core/const.lua	327	same
+SnapScaleCoef	const	const	CommonLua/Core/const.lua	342	CommonLua/Core/const.lua	342	same
+SnapScaleTolerance	const	const	CommonLua/Core/const.lua	331	CommonLua/Core/const.lua	331	same
+SoilGrid	GameVar	GameVar	Lua/Soil.lua	4	Lua/Soil.lua	4	same
+SoilQualityScale	const	const	Lua/_GameConst.lua	42	Lua/_GameConst.lua	38	same
+SolarPanelOrientation		GameVar			Lua/Buildings/SolarPanel.lua	277	added
+SortedMarsScreenLandingSpots	GameVar	GameVar	Lua/PlanetaryView.lua	2	Lua/PlanetaryView.lua	2	same
+SoundDefaultVolume	const	const	Lua/Config/sound.lua	53	Lua/Config/sound.lua	53	same
+SoundMaxVolume	const	const	Lua/Config/sound.lua	52	Lua/Config/sound.lua	52	same
+SoundSourcesCover	MapVar	MapVar	CommonLua/SoundSource.lua	308	CommonLua/SoundSource.lua	308	same
+SphereColor	const	const	CommonLua/Core/const.lua	317	CommonLua/Core/const.lua	317	same
+SphereRings	const	const	CommonLua/Core/const.lua	319	CommonLua/Core/const.lua	319	same
+SphereSlices	const	const	CommonLua/Core/const.lua	320	CommonLua/Core/const.lua	320	same
+SpoilageHistory		GameVar			Lua/Spoilage.lua	8	added
+SponsorGoalProgress	GameVar	GameVar	Lua/Colony.lua	317	Lua/Colony.lua	336	same
+StartCargoCapacity	const	const	Lua/_GameConst.lua	397	Lua/_GameConst.lua	422	same
+StartFunding	const	const	Lua/_GameConst.lua	396	Lua/_GameConst.lua	421	same
+StartedEvents	GameVar	GameVar	CommonLua/Libs/TriggersAndEvents/Events.lua	2	CommonLua/Libs/TriggersAndEvents/Events.lua	2	same
+StorableResources	GameVar	GameVar	Lua/LRTransport.lua	4	Lua/LRTransport.lua	4	same
+StorableResourcesForSession	GameVar	GameVar	Lua/LRTransport.lua	5	Lua/LRTransport.lua	5	same
+StoragePropagationThreshold	const	const	Lua/_GameConst.lua	47	Lua/_GameConst.lua	43	same
+StrongWindThreshold	const	const	CommonLua/Core/const.lua	435	CommonLua/Core/const.lua	435	same
+SubsurfaceHeaterFrameRange	const	const	Lua/_GameConst.lua	190	Lua/_GameConst.lua	207	same
+SuggestedResupplyMissionPopupThread	GameVar	GameVar	Lua/Buildings/RocketUtilities.lua	391	Lua/Buildings/RocketUtilities.lua	463	same
+SunAboveHorizon	GameVar	GameVar	Lua/DayTime.lua	9	Lua/DayTime.lua	9	same
+SupplyGridElementsAllowUnbuildableChunksCables	const	const	Lua/ElectricityGrid.lua	556	Lua/ElectricityGrid.lua	623	same
+SupplyGridElementsAllowUnbuildableChunksPipes	const	const	Lua/LifeSupportGrid.lua	883	Lua/LifeSupportGrid.lua	938	same
+SuppressedNotifications	GameVar	GameVar	CommonLua/Libs/Notifications/Notifications.lua	3	CommonLua/Libs/Notifications/Notifications.lua	3	same
+SurfaceDepositGroups	GameVar	GameVar	Lua/Buildings/SurfaceDeposit.lua	121	Lua/Buildings/SurfaceDeposit.lua	121	same
+SuspendPassEditsReasons	MapVar	MapVar	CommonLua/Core/map.lua	731	CommonLua/Core/map.lua	780	same
+SuspendProcessReasons	MapVar	MapVar	CommonLua/SuspendedProcessing.lua	43	CommonLua/SuspendedProcessing.lua	43	same
+SuspendTerrainInvalidationReasons	MapVar	MapVar	CommonLua/Core/map.lua	824	CommonLua/Core/map.lua	873	same
+SuspendedProcessing	MapVar	MapVar	CommonLua/SuspendedProcessing.lua	44	CommonLua/SuspendedProcessing.lua	44	same
+SyncEventsQueue	GameVar	GameVar	CommonLua/Libs/Network/NetworkSync.lua	328	CommonLua/Libs/Network/NetworkSync.lua	328	same
+TagLookupTable	const	const	CommonLua/Core/localization.lua	7	CommonLua/Core/localization.lua	7	same
+TagLookupTable.icon_Colonist_large	const	const	Lua/Buildings/Station.lua	1271	Lua/Buildings/Station.lua	1432	same
+TagLookupTable.icon_Drone_red	const	const	Lua/Buildings/Station.lua	1270	Lua/Buildings/Station.lua	1431	same
+TagLookupTable.icon_Resources_large	const	const	Lua/Buildings/Station.lua	1266	Lua/Buildings/Station.lua	1427	same
+TagLookupTable.icon_Train	const	const	Lua/Buildings/Station.lua	1262	Lua/Buildings/Station.lua	1423	same
+TagLookupTable.icon_Train_large	const	const	Lua/Buildings/Station.lua	1265	Lua/Buildings/Station.lua	1426	same
+TagLookupTable.icon_Train_orig	const	const	Lua/Buildings/Station.lua	1263	Lua/Buildings/Station.lua	1424	same
+TagLookupTable.icon_Train_small	const	const	Lua/Buildings/Station.lua	1264	Lua/Buildings/Station.lua	1425	same
+TagLookupTable.icon_Transport_accept	const	const	Lua/Buildings/Station.lua	1268	Lua/Buildings/Station.lua	1429	same
+TagLookupTable.icon_Transport_default	const	const	Lua/Buildings/Station.lua	1267	Lua/Buildings/Station.lua	1428	same
+TagLookupTable.icon_Transport_send	const	const	Lua/Buildings/Station.lua	1269	Lua/Buildings/Station.lua	1430	same
+TangentColor	const	const	CommonLua/Core/const.lua	312	CommonLua/Core/const.lua	312	same
+TangentConusHeight	const	const	CommonLua/Core/const.lua	313	CommonLua/Core/const.lua	313	same
+TangentConusRadius	const	const	CommonLua/Core/const.lua	314	CommonLua/Core/const.lua	314	same
+TangentLength	const	const	CommonLua/Core/const.lua	310	CommonLua/Core/const.lua	310	same
+TangentRadius	const	const	CommonLua/Core/const.lua	309	CommonLua/Core/const.lua	309	same
+TangentSlices	const	const	CommonLua/Core/const.lua	311	CommonLua/Core/const.lua	311	same
+TargetVersions	const	const	Lua/Config/_config.lua	9	Lua/Config/_config.lua	9	same
+TaskPriorityBoost	const	const	Lua/_GameConst.lua	55	Lua/_GameConst.lua	56	same
+TaskRequestDemandRegistry	GameVar	GameVar	Lua/_TaskRequest.lua	20	Lua/_TaskRequest.lua	22	same
+TaskRequestEventLog	GameVar	GameVar	Lua/_TaskRequest.lua	18	Lua/_TaskRequest.lua	20	same
+TaskRequestRegistry	GameVar	GameVar	Lua/_TaskRequest.lua	17	Lua/_TaskRequest.lua	19	same
+TaskRequestSupplyRegistry	GameVar	GameVar	Lua/_TaskRequest.lua	19	Lua/_TaskRequest.lua	21	same
+TaskResourceIdx	GameVar	GameVar	Lua/_TaskRequest.lua	3	Lua/_TaskRequest.lua	3	same
+TechLastSeen	GameVar	GameVar	Lua/Research.lua	646	Lua/Research.lua	428	same
+TechPointResearchCost		const			Lua/_GameConst.lua	22	added
+TechPosOverride		GameVar			Lua/TechTree.lua	1959	added
+TechTreeSearchConnectionActiveTransparency		const			Lua/TechTree.lua	1683	added
+TechTreeSearchConnectionTransparency		const			Lua/TechTree.lua	1682	added
+TemplateSpawn	MapVar	MapVar	CommonLua/Classes/Template.lua	367	CommonLua/Classes/Template.lua	367	same
+Terraforming	GameVar	GameVar	Lua/Terraforming.lua	1	Lua/Terraforming.lua	1	same
+TerraformingParamSuffix	const	const	Lua/Terraforming.lua	9	Lua/Terraforming.lua	9	same
+TerraformingScale	const	const	Lua/Terraforming.lua	11	Lua/Terraforming.lua	11	same
+TerraformingSpecialProjectSpawned	GameVar	GameVar	Lua/SpecialProjects.lua	217	Lua/SpecialProjects.lua	230	same
+TerraformingThresholds	GameVar	GameVar	Lua/Terraforming.lua	38	Lua/Terraforming.lua	38	same
+TerraformingThresholdsPassedOnce	GameVar	GameVar	Lua/Terraforming.lua	39	Lua/Terraforming.lua	39	same
+TerrainClipPlanesCache		MapVar			CommonLua/Classes/BaseObjects.lua	395	added
+TerrainDepositCircles	MapVar	MapVar	Lua/Buildings/TerrainDeposit.lua	263	Lua/Buildings/TerrainDeposit.lua	263	same
+TerrainDepositGrid	MapVar	MapVar	Lua/Buildings/TerrainDeposit.lua	6	Lua/Buildings/TerrainDeposit.lua	6	same
+TimeFactorBeforePause	PersistableGlobals	PersistableGlobals	CommonLua/Libs/Network/NetworkSync.lua	126	CommonLua/Libs/Network/NetworkSync.lua	126	same
+TimeOfDayLightmodelChange	GameVar	GameVar	Lua/Lightmodel.lua	2	Lua/Lightmodel.lua	2	same
+TorusRadius1	const	const	CommonLua/Core/const.lua	304	CommonLua/Core/const.lua	304	same
+TorusRadius2	const	const	CommonLua/Core/const.lua	305	CommonLua/Core/const.lua	305	same
+TorusRings	const	const	CommonLua/Core/const.lua	306	CommonLua/Core/const.lua	306	same
+TorusSlices	const	const	CommonLua/Core/const.lua	307	CommonLua/Core/const.lua	307	same
+TotalNonLichenPlants	GameVar	GameVar	Lua/Vegetation.lua	20	Lua/Vegetation.lua	21	same
+TotalTrainedSpecialists	GameVar	GameVar	Lua/Achievements.lua	94	Lua/Achievements.lua	111	same
+TrackConstructionGroupMaxSize	const	const	Lua/Tracks.lua	1	Lua/Tracks.lua	1	same
+TracksFadeOutDist	const	const	CommonLua/Core/const.lua	193	CommonLua/Core/const.lua	193	same
+TraitLocks	GameVar	GameVar	Lua/Traits.lua	1207	Lua/Traits.lua	1231	same
+TransportDistMin	const	const	Lua/_GameConst.lua	60	Lua/_GameConst.lua	61	same
+TransportDistThreshold	const	const	Lua/_GameConst.lua	59	Lua/_GameConst.lua	60	same
+TransportMinResAmountTreshold	const	const	Lua/_GameConst.lua	58	Lua/_GameConst.lua	59	same
+TutorialSaveLoaded		MapVar			CommonLua/Libs/Tutorial/Tutorials.lua	281	added
+TutorialsTickDuration		const			CommonLua/Libs/Tutorial/Tutorials.lua	204	added
+UICity	GameVar	GameVar	Lua/_init.lua	11	Lua/_init.lua	16	same
+UIColony	GameVar	GameVar	Lua/Colony.lua	102	Lua/Colony.lua	104	same
+UIDefaultVolume	const	const	Lua/Config/sound.lua	57	Lua/Config/sound.lua	57	same
+UIMapPlayer	GameVar,MapVar	GameVar,MapVar	CommonLua/Classes/Player.lua	148,149	CommonLua/Classes/Player.lua	152,153	same
+UIMaxVolume	const	const	Lua/Config/sound.lua	56	Lua/Config/sound.lua	56	same
+UIPlayer	GameVar	GameVar	CommonLua/Classes/Player.lua	2	CommonLua/Classes/Player.lua	2	same
+UISpeedState	GameVar		Lua/X/HUD.lua	461			removed
+UndergroundMap	GameVar	GameVar	Lua/RandomMap/RandomMapGenerator_Picard.lua	263	Lua/RandomMap/RandomMapGenerator_Picard.lua	283	same
+UndergroundMapsRaiseFixUp	const	const	Lua/_fixup.lua	1870	Lua/_fixup.lua	2039	same
+UndergroundRework106	GameVar	GameVar	Lua/Buildings/UndergroundDome.lua	17	Lua/Buildings/UndergroundDome.lua	17	same
+UnnaturalDeaths	GameVar	GameVar	Lua/Units/Colonist.lua	949	Lua/Units/Colonist.lua	1246	same
+UnreachablesCleanupDeltaT	const		Lua/Units/Drone.lua	868			removed
+UpgradeModifierModifiers	GameVar	GameVar	Lua/Buildings/Building.lua	1047	Lua/Buildings/Building.lua	1074	same
+VegObjsToKill	GameVar	GameVar	Lua/Vegetation.lua	525	Lua/Vegetation.lua	518	same
+VegUpdateThread	GameVar	GameVar	Lua/Vegetation.lua	727	Lua/Vegetation.lua	726	same
+VegetationGrid	GameVar	GameVar	Lua/Vegetation.lua	23	Lua/Vegetation.lua	24	same
+VegetationOutputAugmentations		GameVar			Lua/Vegetation.lua	1769	added
+VegetationPlantTechLocks	GameVar	GameVar	Lua/Buildings/TerraformingBuilding.lua	282	Lua/Buildings/TerraformingBuilding.lua	287	same
+VegetationRandomizationGrid	GameVar	GameVar	Lua/Vegetation.lua	25	Lua/Vegetation.lua	26	same
+VegetationSelectedObj	GameVar	GameVar	Lua/Vegetation.lua	1935	Lua/Vegetation.lua	2025	same
+VendorIds	const	const	CommonLua/Core/const.lua	135	CommonLua/Core/const.lua	135	same
+VerticalTextureZThreshold	const	const	CommonLua/Core/const.lua	171	CommonLua/Core/const.lua	171	same
+VoiceChatFadeTime	const	const	CommonLua/Core/const.lua	386	CommonLua/Core/const.lua	386	same
+VoiceChatForcedSampleRate	const	const	CommonLua/Core/const.lua	383	CommonLua/Core/const.lua	383	same
+VoiceChatMaxSilence	const	const	CommonLua/Core/const.lua	385	CommonLua/Core/const.lua	385	same
+VoiceChatSoundType	const	const	CommonLua/Core/const.lua	384	CommonLua/Core/const.lua	384	same
+VoiceDefaultVolume	const	const	Lua/Config/sound.lua	55	Lua/Config/sound.lua	55	same
+VoiceMaxVolume	const	const	Lua/Config/sound.lua	54	Lua/Config/sound.lua	54	same
+VoiceQueue	GameVar,PersistableGlobals	GameVar,PersistableGlobals	CommonLua/Voice.lua	313,314	CommonLua/Voice.lua	314,315	same
+VoicesCooldown	GameVar,PersistableGlobals	GameVar,PersistableGlobals	CommonLua/Voice.lua	315,316	CommonLua/Voice.lua	316,317	same
+WaitingActions	GameVar	GameVar	CommonLua/Libs/Sequences/SequenceAction.lua	443	CommonLua/Libs/Sequences/SequenceAction.lua	442	same
+WalkableMaxRadius	const	const	CommonLua/Core/const.lua	202	CommonLua/Core/const.lua	202	same
+WasteRockConverted	GameVar	GameVar	Lua/Achievements.lua	97	Lua/Achievements.lua	114	same
+WasteRockConvertedToRareMetals	GameVar	GameVar	Lua/Achievements.lua	98	Lua/Achievements.lua	115	same
+WaterFrozen	GameVar	GameVar	Lua/Buildings/LandscapeLake.lua	328	Lua/Buildings/LandscapeLake.lua	381	same
+WaterFrozenEvent	GameVar	GameVar	Lua/Buildings/LandscapeLake.lua	330	Lua/Buildings/LandscapeLake.lua	383	same
+WaterMarkerCollisionDetector	GameVar	GameVar	Lua/Construction/Construction.lua	3000	Lua/Construction/Construction.lua	3896	same
+WaterUnfrozenEvent	GameVar	GameVar	Lua/Buildings/LandscapeLake.lua	329	Lua/Buildings/LandscapeLake.lua	382	same
+Width	MapVar	MapVar	Lua/_init.lua	44	Lua/_init.lua	49	same
+WindChangeLast	MapVar	MapVar	CommonLua/Wind.lua	424	CommonLua/Wind.lua	424	same
+WindChangeNext	MapVar	MapVar	CommonLua/Wind.lua	425	CommonLua/Wind.lua	425	same
+WindChangeTime	MapVar	MapVar	CommonLua/Wind.lua	423	CommonLua/Wind.lua	423	same
+WindMarkerAttenuationRange	const	const	CommonLua/Core/const.lua	434	CommonLua/Core/const.lua	434	same
+WindMarkerMaxRange	const	const	CommonLua/Core/const.lua	433	CommonLua/Core/const.lua	433	same
+WindModifierMaskComboItems	const	const	CommonLua/Core/const.lua	436	CommonLua/Core/const.lua	436	same
+WindOff	MapVar	MapVar	CommonLua/Wind.lua	427	CommonLua/Wind.lua	427	same
+WorkRadiusShownForRover	GameVar	GameVar	Lua/Units/RCRover.lua	1	Lua/Units/RCRover.lua	1	same
+WorkRadiusShownForRoverReasons	GameVar	GameVar	Lua/Units/RCRover.lua	2	Lua/Units/RCRover.lua	2	same
+WorldSpaceDirX	const	const	CommonLua/Patterns.lua	6	CommonLua/Patterns.lua	6	same
+WorldSpaceDirY	const	const	CommonLua/Patterns.lua	7	CommonLua/Patterns.lua	7	same
+XAxisColor	const	const	CommonLua/Core/const.lua	278	CommonLua/Core/const.lua	278	same
+XAxisColorSelected	const	const	CommonLua/Core/const.lua	281	CommonLua/Core/const.lua	281	same
+XSeatsCtrlTest	MapVar	MapVar	Lua/Factions/Elections.lua	319	Lua/Factions/Elections.lua	414	same
+XboxToPlayStationButtons	const	const	CommonLua/Core/locutils.lua	135	CommonLua/Core/locutils.lua	135	same
+YAxisColor	const	const	CommonLua/Core/const.lua	279	CommonLua/Core/const.lua	279	same
+YAxisColorSelected	const	const	CommonLua/Core/const.lua	282	CommonLua/Core/const.lua	282	same
+ZAxisColor	const	const	CommonLua/Core/const.lua	280	CommonLua/Core/const.lua	280	same
+ZAxisColorSelected	const	const	CommonLua/Core/const.lua	283	CommonLua/Core/const.lua	283	same
+__cobjectToCObject	PersistableGlobals	PersistableGlobals	CommonLua/Classes/_cobject.lua	655	CommonLua/Classes/_cobject.lua	659	same
+__missing_net_objs	GameVar	GameVar	CommonLua/Libs/Network/NetworkAsync.lua	580	CommonLua/Libs/Network/NetworkAsync.lua	580	same
+__net_event_counter_thread	GameVar	GameVar	CommonLua/Libs/Network/Network.lua	1383	CommonLua/Libs/Network/Network.lua	1392	same
+__net_event_counters	GameVar	GameVar	CommonLua/Libs/Network/Network.lua	1382	CommonLua/Libs/Network/Network.lua	1391	same
+__shown_planes	MapVar	MapVar	CommonLua/GedGameObjectEditor.lua	199	CommonLua/GedGameObjectEditor.lua	201	same
+__string_reference	const	const	CommonLua/Core/const.lua	370	CommonLua/Core/const.lua	370	same
+alignBottom	const	const	CommonLua/Core/const.lua	168	CommonLua/Core/const.lua	168	same
+alignLeft	const	const	CommonLua/Core/const.lua	165	CommonLua/Core/const.lua	165	same
+alignRight	const	const	CommonLua/Core/const.lua	166	CommonLua/Core/const.lua	166	same
+alignTop	const	const	CommonLua/Core/const.lua	167	CommonLua/Core/const.lua	167	same
+all_construction_group_leaders	GameVar	GameVar	Lua/Buildings/ConstructionSite.lua	2521	Lua/Buildings/ConstructionSite.lua	2733	same
+base_IndependenceFeeReduceModifer	g_Consts	g_Consts	Lua/Factions/Independence.lua	264	Lua/Factions/Independence.lua	268	same
+base_ResupplyCargoRocketCost	g_Consts	g_Consts	Lua/Factions/Independence.lua	256	Lua/Factions/Independence.lua	260	same
+base_ResupplyPassengerRocketCost	g_Consts	g_Consts	Lua/Factions/Independence.lua	260	Lua/Factions/Independence.lua	264	same
+black_cube_interactions_active		GameVar			Lua/Mysteries/BlackCubesBuildingInteractionsModFriendly.lua	6	added
+build_grid_debug_mode	GameVar	GameVar	Lua/hex.lua	565	Lua/hex.lua	586	same
+build_grid_debug_objs	GameVar	GameVar	Lua/hex.lua	562	Lua/hex.lua	583	same
+build_grid_debug_text	GameVar	GameVar	Lua/hex.lua	563	Lua/hex.lua	584	same
+build_grid_debug_thread	GameVar	GameVar	Lua/hex.lua	564	Lua/hex.lua	585	same
+buildable	MapVar	MapVar	Lua/BuildableGrid.lua	29	Lua/BuildableGrid.lua	32	same
+building_selection_particle	GameVar	GameVar	Lua/SelectionParticle.lua	51	Lua/SelectionParticle.lua	51	same
+camera_shake_max_offset	MapVar	MapVar	CommonLua/Camera.lua	36	CommonLua/Camera.lua	36	same
+camera_shake_thread	MapVar	MapVar	CommonLua/Camera.lua	35	CommonLua/Camera.lua	35	same
+clrBlack	const	const	CommonLua/Core/const.lua	143	CommonLua/Core/const.lua	143	same
+clrBlue	const	const	CommonLua/Core/const.lua	148	CommonLua/Core/const.lua	148	same
+clrCyan	const	const	CommonLua/Core/const.lua	147	CommonLua/Core/const.lua	147	same
+clrDarkGray	const	const	CommonLua/Core/const.lua	156	CommonLua/Core/const.lua	156	same
+clrGray	const	const	CommonLua/Core/const.lua	153	CommonLua/Core/const.lua	153	same
+clrGreen	const	const	CommonLua/Core/const.lua	146	CommonLua/Core/const.lua	146	same
+clrMagenta	const	const	CommonLua/Core/const.lua	158	CommonLua/Core/const.lua	158	same
+clrOrange	const	const	CommonLua/Core/const.lua	157	CommonLua/Core/const.lua	157	same
+clrPaleBlue	const	const	CommonLua/Core/const.lua	149	CommonLua/Core/const.lua	149	same
+clrPaleYellow	const	const	CommonLua/Core/const.lua	152	CommonLua/Core/const.lua	152	same
+clrPink	const	const	CommonLua/Core/const.lua	150	CommonLua/Core/const.lua	150	same
+clrRed	const	const	CommonLua/Core/const.lua	145	CommonLua/Core/const.lua	145	same
+clrSilverGray	const	const	CommonLua/Core/const.lua	155	CommonLua/Core/const.lua	155	same
+clrStoneGray	const	const	CommonLua/Core/const.lua	154	CommonLua/Core/const.lua	154	same
+clrWhite	const	const	CommonLua/Core/const.lua	144	CommonLua/Core/const.lua	144	same
+clrYellow	const	const	CommonLua/Core/const.lua	151	CommonLua/Core/const.lua	151	same
+cube_thread	GameVar	GameVar	Lua/Mysteries/BlackCubesBuildingInteractionsModFriendly.lua	5	Lua/Mysteries/BlackCubesBuildingInteractionsModFriendly.lua	5	same
+dbg_ForceWither	GameVar	GameVar	Lua/Vegetation.lua	728	Lua/Vegetation.lua	727	same
+dbg_IgnoreReqs	GameVar	GameVar	Lua/Vegetation.lua	729	Lua/Vegetation.lua	728	same
+debug_pass_vectors	MapVar	MapVar	CommonLua/Libs/DevToolsPublic/PathDebug.lua	10	CommonLua/Libs/DevToolsPublic/PathDebug.lua	10	same
+ebtNull	const	const	CommonLua/Core/const.lua	254	CommonLua/Core/const.lua	254	same
+fastGameSpeed	const	const	Lua/_GameConst.lua	27	Lua/Config/config.lua	118	moved-file
+fx_colorization	MapVar	MapVar	CommonLua/Classes/ActionFX.lua	3911	CommonLua/Classes/ActionFX.lua	4025	same
+g_ActiveHints	GameVar	GameVar	Lua/Hints.lua	270	Lua/Hints.lua	324	same
+g_AllPoliciesVisibleCheat	GameVar	GameVar	Lua/Factions/Legislature.lua	1033	Lua/Factions/Legislature.lua	1175	same
+g_ApplicantPool	GameVar	GameVar	Lua/ApplicantsPool.lua	1	Lua/ApplicantsPool.lua	1	same
+g_ApplicantPoolFilter	GameVar	GameVar	Lua/ApplicantsPool.lua	2	Lua/ApplicantsPool.lua	2	same
+g_AsteroidLanderPassengerPoolFilter	GameVar	GameVar	Lua/LanderRocketCargoRequest.lua	251	Lua/LanderRocketCargoRequest.lua	251	same
+g_AsteroidPartA	GameVar	GameVar	Lua/AsteroidNames.lua	158	Lua/AsteroidNames.lua	158	same
+g_AsteroidPartB	GameVar	GameVar	Lua/AsteroidNames.lua	159	Lua/AsteroidNames.lua	159	same
+g_AsteroidPartC	GameVar	GameVar	Lua/AsteroidNames.lua	160	Lua/AsteroidNames.lua	160	same
+g_AsteroidUniqueNames	GameVar	GameVar	Lua/AsteroidNames.lua	157	Lua/AsteroidNames.lua	157	same
+g_AsteroidsInEvac	GameVar	GameVar	Lua/Asteroids.lua	112	Lua/Asteroids.lua	121	same
+g_AutoSatisfiedNeeds	GameVar	GameVar	Lua/ServiceBase.lua	80	Lua/ServiceBase.lua	131	same
+g_AutoSatisfiedNeedsReasons	GameVar	GameVar	Lua/ServiceBase.lua	79	Lua/ServiceBase.lua	130	same
+g_AwardedBottomlessPitUpgrades	GameVar	GameVar	Lua/Buildings/BottomlessPitResearchCenter.lua	159	Lua/Buildings/BottomlessPitResearchCenter.lua	154	same
+g_BCHexRangeEnable	GameVar	GameVar	Lua/Mysteries/BlackCubes.lua	2	Lua/Mysteries/BlackCubes.lua	2	same
+g_BlackCubeStockpileAnimThread	GameVar	GameVar	Lua/Mysteries/BlackCubes.lua	1	Lua/Mysteries/BlackCubes.lua	1	same
+g_BlackCubesActive	GameVar	GameVar	Lua/Mysteries/BlackCubes.lua	290	Lua/Mysteries/BlackCubes.lua	300	same
+g_BoostWorkersInWorkshopsCount	GameVar		Lua/Buildings/ArtWorkshop.lua	1			removed
+g_BreakthroughsResearched	GameVar	GameVar	Lua/Research.lua	271	Lua/Research.lua	144	same
+g_BuildMenuDefaultItem	GameVar	GameVar	Lua/X/BuildMenu.lua	5	Lua/X/BuildMenu.lua	5	same
+g_BuildMenuEntriesDisabledByLawEffects	GameVar	GameVar	Lua/ClassDefs/ClassDef-Factions.generated.lua	2009	Lua/Factions/LawDef.lua	435	moved-file
+g_BuildMenuHUDClicksCount	GameVar	GameVar	Lua/X/BuildMenu.lua	8	Lua/X/BuildMenu.lua	8	same
+g_BuildMenuRightClickPopupShown	GameVar	GameVar	Lua/X/BuildMenu.lua	7	Lua/X/BuildMenu.lua	7	same
+g_BuildMenuRightClicksCount	GameVar	GameVar	Lua/X/BuildMenu.lua	9	Lua/X/BuildMenu.lua	9	same
+g_CameraObj	MapVar	MapVar	CommonLua/Classes/ActionFX.lua	4322	CommonLua/Classes/ActionFX.lua	4452	same
+g_CargoRequestTemplates	GameVar	GameVar	Lua/CargoRequest.lua	32	Lua/CargoRequest.lua	32	same
+g_CheatUnlockAllSponsorBuildings	GameVar	GameVar	Lua/X/BuildMenu.lua	1846	Lua/X/BuildMenu.lua	1913	same
+g_ClusterWorkplacesVersion		GameVar			Lua/Buildings/Dome.lua	760	added
+g_ColdWave	GameVar	GameVar	Lua/ColdWave.lua	25	Lua/ColdWave.lua	25	same
+g_ColdWaveEndTime	GameVar	GameVar	Lua/ColdWave.lua	27	Lua/ColdWave.lua	27	same
+g_ColdWaveExtend	GameVar	GameVar	Lua/ColdWave.lua	28	Lua/ColdWave.lua	28	same
+g_ColdWaveGameDescr	GameVar	GameVar	Lua/ColdWave.lua	181	Lua/ColdWave.lua	151	same
+g_ColdWaveStartTime	GameVar	GameVar	Lua/ColdWave.lua	26	Lua/ColdWave.lua	26	same
+g_CollideLuaObjects	MapVar	MapVar	CommonLua/Editor/XEditor/XTwoPointAttachHelper.lua	1	CommonLua/Classes/EditorBase.lua	539	moved-file
+g_ColonistDeathsSincePlacement	GameVar	GameVar	Lua/Telemetry.lua	149	Lua/Telemetry.lua	149	same
+g_ColonistsDied	GameVar	GameVar	Lua/ColonyViability.lua	157	Lua/ColonyViability.lua	161	same
+g_ColonyNotViableUntil	GameVar	GameVar	Lua/ColonyViability.lua	80	Lua/ColonyViability.lua	82	same
+g_CommandCenterOpen	GameVar,PersistableGlobals	GameVar,PersistableGlobals	Lua/X/ColonyControlCenter.lua	1607,1608	Lua/X/ColonyControlCenter.lua	1506,1507	same
+g_CommandCenterSavedContext	GameVar	GameVar	Lua/X/ColonyControlCenter.lua	1604	Lua/X/ColonyControlCenter.lua	1503	same
+g_CommandCenterSavedMode	GameVar	GameVar	Lua/X/ColonyControlCenter.lua	1605	Lua/X/ColonyControlCenter.lua	1504	same
+g_ConstructedTracksQueue	GameVar	GameVar	Lua/Buildings/TrackElement.lua	676	Lua/Buildings/TrackElement.lua	773	same
+g_ConstructionNanitesResearched	GameVar	GameVar	Lua/Buildings/ConstructionSite.lua	2826	Lua/Buildings/ConstructionSite.lua	3085	same
+g_Consts	GameVar	GameVar	Lua/Modifiers.lua	427	Lua/Modifiers.lua	427	same
+g_CoverArtStoredDepositionTypes	GameVar	GameVar	Lua/CoverArtPhotoFilter.lua	2	Lua/CoverArtPhotoFilter.lua	2	same
+g_CurrentCCS	GameVar	GameVar	Lua/ColonyColorScheme.lua	3	Lua/ColonyColorScheme.lua	3	same
+g_CurrentDepositOpacity	GameVar	GameVar	Lua/Buildings/Deposit.lua	133	Lua/Buildings/Deposit.lua	139	same
+g_CurrentDepositScale	GameVar	GameVar	Lua/Buildings/Deposit.lua	132	Lua/Buildings/Deposit.lua	138	same
+g_CurrentGameTitle	GameVar	GameVar	Lua/Buildings/GameDeveloper.lua	10	Lua/Buildings/GameDeveloper.lua	10	same
+g_CurrentTVShowTitle	GameVar	GameVar	Lua/Buildings/TVStudioWorkshop.lua	20	Lua/Buildings/TVStudioWorkshop.lua	20	same
+g_DepositsRunningOutShown	GameVar	GameVar	Lua/Buildings/SubsurfaceDeposit.lua	289	Lua/Buildings/SubsurfaceDeposit.lua	288	same
+g_DisasterDescriptionShown	GameVar	GameVar	Lua/MapSettings.lua	132	Lua/MapSettings.lua	160	same
+g_DisastersPredicted	GameVar	GameVar	Lua/MapSettings.lua	131	Lua/MapSettings.lua	159	same
+g_DisastersSettings	GameVar		Lua/MapSettings.lua	29			removed
+g_DomeToDomeDist	GameVar	GameVar	Lua/Buildings/Dome.lua	49	Lua/Buildings/Dome.lua	49	same
+g_DomeVersion	GameVar	GameVar	Lua/Buildings/Dome.lua	48	Lua/Buildings/Dome.lua	48	same
+g_DontBuildHere	MapVar	MapVar	Lua/Geysers.lua	26	Lua/Geysers.lua	26	same
+g_DroneUnreachablesVersion	GameVar	GameVar	Lua/Units/Drone.lua	867	Lua/Units/Drone.lua	940	same
+g_DustDevils	MapVar	MapVar	Lua/DustDevils.lua	243	Lua/DustDevils.lua	329	same
+g_DustDevilsNextEventTime		GameVar			Lua/DustDevils.lua	232	added
+g_DustDevilsSpawnLeft		GameVar			Lua/DustDevils.lua	233	added
+g_DustDevilsState		GameVar			Lua/DustDevils.lua	231	added
+g_DustRepulsion	GameVar	GameVar	Lua/Buildings/SolarPanel.lua	271	Lua/Buildings/SolarPanel.lua	291	same
+g_DustStorm	GameVar	GameVar	Lua/DustStorm.lua	31	Lua/DustStorm.lua	31	same
+g_DustStormDuration	GameVar	GameVar	Lua/DustStorm.lua	34	Lua/DustStorm.lua	34	same
+g_DustStormEnd	GameVar	GameVar	Lua/DustStorm.lua	36	Lua/DustStorm.lua	36	same
+g_DustStormFirstSpawn		GameVar			Lua/DustStorm.lua	608	added
+g_DustStormGameDescr	GameVar	GameVar	Lua/DustStorm.lua	37	Lua/DustStorm.lua	37	same
+g_DustStormPredictedEnd		GameVar			Lua/DustStorm.lua	39	added
+g_DustStormPredictedStart		GameVar			Lua/DustStorm.lua	38	added
+g_DustStormStart	GameVar	GameVar	Lua/DustStorm.lua	35	Lua/DustStorm.lua	35	same
+g_DustStormStopped	GameVar	GameVar	Lua/DustStorm.lua	33	Lua/DustStorm.lua	33	same
+g_DustStormType	GameVar	GameVar	Lua/DustStorm.lua	32	Lua/DustStorm.lua	32	same
+g_EmptyLabelContainer	GameVar	GameVar	Lua/Factions/Factions.lua	1394	Lua/Factions/Factions.lua	1499	same
+g_EternalFusionResearched	GameVar	GameVar	Lua/Buildings/MetalsExtractor.lua	2	Lua/Buildings/MetalsExtractor.lua	2	same
+g_ExecLaterArgs	GameVar	GameVar	Lua/Buildings/Dome.lua	1247	Lua/Buildings/Dome.lua	1651	same
+g_ExecLaterObjs	GameVar	GameVar	Lua/Buildings/Dome.lua	1245	Lua/Buildings/Dome.lua	1649	same
+g_ExecLaterThreads	GameVar	GameVar	Lua/Buildings/Dome.lua	1246	Lua/Buildings/Dome.lua	1650	same
+g_ExplorationNotificationShown	GameVar	GameVar	Lua/Exploration.lua	1	Lua/Exploration.lua	1	same
+g_ExtractorAIResearched	GameVar	GameVar	Lua/Buildings/MetalsExtractor.lua	1	Lua/Buildings/MetalsExtractor.lua	1	same
+g_FXBuildingType	GameVar	GameVar	Lua/UI/InGameInterface.lua	1	Lua/UI/InGameInterface.lua	1	same
+g_FactionDisaster_Dissolution_FactionDissolved	GameVar	GameVar	Lua/ClassDefs/ClassDef-Factions.generated.lua	434	Lua/Factions/FactionDef.lua	579	moved-file
+g_FactionsHolder	GameVar	GameVar	Lua/Factions/Factions.lua	196	Lua/Factions/Factions.lua	210	same
+g_FarmId	GameVar	GameVar	Lua/Buildings/Farm.lua	63	Lua/Buildings/Farm.lua	93	same
+g_FirstLegislatureSessionPopup	GameVar		Lua/Factions/Legislature.lua	211			removed
+g_FirstMeteorStorm		GameVar			Lua/Meteors.lua	326	added
+g_FirstWorkingLowGLab	GameVar	GameVar	Lua/Buildings/LowGLab.lua	4	Lua/Buildings/LowGLab.lua	4	same
+g_ForceTechRepeatable		GameVar			Lua/Research.lua	229	added
+g_FounderDiedOfOldAge	GameVar	GameVar	Lua/ColonyViability.lua	163	Lua/ColonyViability.lua	167	same
+g_FoundersArrived	GameVar	GameVar	Lua/ColonyViability.lua	81	Lua/ColonyViability.lua	83	same
+g_FoundersTraitsCheckThread	GameVar	GameVar	Lua/ColonyViability.lua	33	Lua/ColonyViability.lua	33	same
+g_GameProgress	GameVar	GameVar	Lua/Buildings/GameDeveloper.lua	9	Lua/Buildings/GameDeveloper.lua	9	same
+g_GameSessionOutcome	GameVar	GameVar	Lua/GameOver.lua	26	Lua/GameOver.lua	26	same
+g_GlobalSupportUnlockedSponsors	GameVar	GameVar	Lua/Colony.lua	797	Lua/Colony.lua	946	same
+g_GridIdCounter	GameVar	GameVar	Lua/SupplyGrid.lua	1723	Lua/SupplyGrid.lua	2320	same
+g_GridToGridConnections	GameVar	GameVar	Lua/SupplyGrid.lua	710	Lua/SupplyGrid.lua	1151	same
+g_HUDNotifications	GameVar	GameVar	Lua/X/HUDNotifications.lua	9	Lua/X/HUDNotifications.lua	9	same
+g_HexRanges	GameVar	GameVar	Lua/UI/InGameInterface.lua	2	Lua/UI/InGameInterface.lua	2	same
+g_HiddenTraits	GameVar	GameVar	Lua/Traits.lua	877	Lua/Traits.lua	918	same
+g_HintPrevSolPowerSolarPanelsOnly		GameVar			Lua/Hints.lua	1196	added
+g_HintRocketLandingCount		GameVar			Lua/Hints.lua	1163	added
+g_ImportLocks	GameVar	GameVar	Lua/RocketPayload.lua	81	Lua/RocketPayload.lua	82	same
+g_IncomingMissiles	MapVar	MapVar	Lua/Bombardment.lua	52	Lua/Bombardment.lua	52	same
+g_Independence	GameVar	GameVar	Lua/Factions/Independence.lua	12	Lua/Factions/Independence.lua	12	same
+g_InitialCargoCost	GameVar	GameVar	Lua/Colony.lua	393	Lua/Colony.lua	550	same
+g_InitialCargoWeight	GameVar	GameVar	Lua/Colony.lua	394	Lua/Colony.lua	551	same
+g_InitialRocketCargo	GameVar	GameVar	Lua/Colony.lua	392	Lua/Colony.lua	549	same
+g_InitialSessionSeed	GameVar	GameVar	Lua/_init.lua	4	Lua/_init.lua	9	same
+g_IonStorms	GameVar	GameVar	Lua/Mysteries/Metatron.lua	418	Lua/Mysteries/Metatron.lua	417	same
+g_LandedRocketsInNeedOfFuel	GameVar	GameVar	Lua/Buildings/RocketUtilities.lua	140	Lua/Buildings/RocketUtilities.lua	196	same
+g_LandingSiteObject	GameVar,PersistableGlobals	GameVar,PersistableGlobals	Lua/UI/PlanetUI.lua	1661,1662	Lua/UI/PlanetUI.lua	1738,1739	same
+g_LastAutosaveFilename	GameVar	GameVar	CommonLua/UI/uiXBugReportDlg.lua	402	CommonLua/UI/uiXBugReportDlg.lua	399	same
+g_LastAutosaveGameTime	GameVar	GameVar	CommonLua/UI/uiXBugReportDlg.lua	403	CommonLua/UI/uiXBugReportDlg.lua	400	same
+g_LastAutosaveTime	GameVar	GameVar	CommonLua/Savegame.lua	1548	CommonLua/Savegame.lua	1549	same
+g_LastBuildCat	GameVar	GameVar	Lua/X/BuildMenu.lua	3	Lua/X/BuildMenu.lua	3	same
+g_LastBuildItem	GameVar	GameVar	Lua/X/BuildMenu.lua	4	Lua/X/BuildMenu.lua	4	same
+g_LastExpandedResourceGroup		GameVar			Lua/Resources.lua	175	added
+g_LastFounderDies	GameVar	GameVar	Lua/ColonyViability.lua	164	Lua/ColonyViability.lua	168	same
+g_LastGeneratedApplicantTime	GameVar	GameVar	Lua/ApplicantsPool.lua	3	Lua/ApplicantsPool.lua	3	same
+g_LastPlacedTunnel	GameVar	GameVar	Lua/Buildings/Tunnel.lua	2	Lua/Buildings/Tunnel.lua	2	same
+g_LastSectorScanTime		GameVar			Lua/Exploration.lua	3	added
+g_Legislature	GameVar	GameVar	Lua/Factions/Legislature.lua	102	Lua/Factions/Legislature.lua	108	same
+g_LifetimeMartianborn		GameVar			Lua/Units/Colonist.lua	4523	added
+g_LockExport	GameVar	GameVar	Lua/RocketPayload.lua	120	Lua/RocketPayload.lua	126	same
+g_MapSlotEnvironments	GameVar		Lua/MapData.lua	49			removed
+g_MarsquakeActive	GameVar	GameVar	Lua/Marsquake.lua	62	Lua/Marsquake.lua	83	same
+g_MartianbornStrength	GameVar	GameVar	Lua/Units/Colonist.lua	3668	Lua/Units/Colonist.lua	4522	same
+g_MediaCenterWorkingCheckVersion	GameVar	GameVar	Lua/Buildings/Dome.lua	1639	Lua/Buildings/Dome.lua	2039	same
+g_Metatron	GameVar	GameVar	Lua/Mysteries/Metatron.lua	18	Lua/Mysteries/Metatron.lua	18	same
+g_MeteorDecals	GameVar		Lua/Meteors.lua	890			removed
+g_MeteorStorm	GameVar	GameVar	Lua/Meteors.lua	38	Lua/Meteors.lua	40	same
+g_MeteorStormDuration		GameVar			Lua/Meteors.lua	46	added
+g_MeteorStormEnd		GameVar			Lua/Meteors.lua	45	added
+g_MeteorStormGameDescr	GameVar	GameVar	Lua/Meteors.lua	40	Lua/Meteors.lua	42	same
+g_MeteorStormStart		GameVar			Lua/Meteors.lua	44	added
+g_MeteorStormStop	GameVar	GameVar	Lua/Meteors.lua	39	Lua/Meteors.lua	41	same
+g_MeteorsGameDescr	GameVar	GameVar	Lua/Meteors.lua	41	Lua/Meteors.lua	43	same
+g_MeteorsPredicted	GameVar	GameVar	Lua/Meteors.lua	361	Lua/Meteors.lua	437	same
+g_MysteryDream	GameVar	GameVar	Lua/Mysteries/Dream.lua	18	Lua/Mysteries/Dream.lua	18	same
+g_NativeFoodProduction	GameVar	GameVar	Lua/Buildings/Farm.lua	871	Lua/Buildings/Farm.lua	1132	same
+g_NegotiationHistory	GameVar	GameVar	Lua/Negotiations.lua	6	Lua/Negotiations.lua	6	same
+g_NextMagneticFieldMarsquakeTime		GameVar			Lua/Marsquake.lua	41	added
+g_NextMeteorStormTime		GameVar			Lua/Meteors.lua	327	added
+g_NextMeteorsTime		GameVar			Lua/Meteors.lua	295	added
+g_NocturnalAdaptation	GameVar	GameVar	Lua/Units/Colonist.lua	1314	Lua/Units/Colonist.lua	1642	same
+g_OffgameOverview	GameVar	GameVar	Lua/UI/InGameInterface.lua	815	Lua/UI/InGameInterface.lua	861	same
+g_OmegaTelescopeBonusGiven	GameVar	GameVar	Lua/Buildings/OmegaTelescope.lua	49	Lua/Buildings/OmegaTelescope.lua	49	same
+g_OnCooldownTasks	GameVar	GameVar	Lua/Factions/Legislature.lua	1184	Lua/Factions/Legislature.lua	1331	same
+g_OneTimeSequences	GameVar	GameVar	Lua/Buildings/Anomaly.lua	97	Lua/Buildings/Anomaly.lua	159	same
+g_OverrideCCS	GameVar	GameVar	Lua/ColonyColorScheme.lua	4	Lua/ColonyColorScheme.lua	4	same
+g_PassageOverrideConnections	GameVar	GameVar	Lua/Passage.lua	953	Lua/Passage.lua	1054	same
+g_Phase	GameVar	GameVar	Lua/Telemetry.lua	16	Lua/Telemetry.lua	16	same
+g_PlanetaryAnomalies	GameVar	GameVar	Lua/Buildings/PlanetaryAnomaly.lua	1	Lua/Buildings/PlanetaryAnomaly.lua	1	same
+g_PopulationHighWatermark	GameVar	GameVar	Lua/Milestones.lua	144	Lua/Milestones.lua	161	same
+g_QuickPolicyPreparation		GameVar			Lua/Factions/Legislature.lua	1865	added
+g_QuickSessionsCheat	GameVar		Lua/Factions/Legislature.lua	183			removed
+g_RainDisaster	GameVar	GameVar	Lua/MapSettings.lua	125	Lua/MapSettings.lua	153	same
+g_RainPredictedEnd		GameVar			Lua/TerraformingDisasters.lua	422	added
+g_RainPredictedStart		GameVar			Lua/TerraformingDisasters.lua	421	added
+g_RainPredictedType		GameVar			Lua/TerraformingDisasters.lua	420	added
+g_ReassignQueue		GameVar			Lua/Stats.lua	214	added
+g_RecentlyRevDeposits	GameVar	GameVar	Lua/Buildings/SubsurfaceDeposit.lua	233	Lua/Buildings/SubsurfaceDeposit.lua	232	same
+g_RefugeeOutcome	MapVar	MapVar	Lua/UniversalRocket.lua	213	Lua/UniversalRocket.lua	231	same
+g_ResearchFocus	GameVar	GameVar	Lua/Research.lua	17	Lua/Research.lua	17	same
+g_ResearchPointInitiative		GameVar			Lua/TechTree.lua	1534	added
+g_ResearchPointInitiativeState		GameVar			Lua/TechTree.lua	1535	added
+g_ResearchScroll	GameVar	GameVar	Lua/Research.lua	16	Lua/Research.lua	16	same
+g_ResearchView		GameVar			Lua/Research.lua	18	added
+g_ResidenceVersion		GameVar			Lua/Buildings/Community.lua	359	added
+g_ResilientVegetationMod	GameVar	GameVar	Lua/Vegetation.lua	152	Lua/Vegetation.lua	151	same
+g_ResourceIconsTurnedOff	GameVar		Lua/Buildings/Deposit.lua	153			removed
+g_ResourceIconsVisible	GameVar		Lua/Buildings/Deposit.lua	154			removed
+g_ResourceOverviewTotal	GameVar	GameVar	Lua/ResourceOverview.lua	2	Lua/ResourceOverview.lua	2	same
+g_ResourceProducedTotal	GameVar	GameVar	Lua/Buildings/BuildingComponents.lua	1013	Lua/Buildings/BuildingComponents.lua	1269	same
+g_RocketLanded		MapVar			Lua/Buildings/RocketBase.lua	373	added
+g_RocketsLandedCount	GameVar	GameVar	Lua/Achievements.lua	92	Lua/Achievements.lua	109	same
+g_RoverAIResearched	GameVar	GameVar	Lua/Buildings/BaseRover.lua	703	Lua/Buildings/BaseRover.lua	717	same
+g_SanatoriumTraits	GameVar	GameVar	Lua/Traits.lua	876	Lua/Traits.lua	917	same
+g_ScannedAnomaly	GameVar	GameVar	Lua/Buildings/Anomaly.lua	383	Lua/Buildings/Anomaly.lua	431	same
+g_ScannedPlanetaryAnomaly	GameVar	GameVar	Lua/Buildings/PlanetaryAnomaly.lua	259	Lua/Buildings/PlanetaryAnomaly.lua	270	same
+g_SchoolTraits	GameVar	GameVar	Lua/Traits.lua	875	Lua/Traits.lua	916	same
+g_SecondOpenDome	GameVar	GameVar	Lua/Passage.lua	1590	Lua/Passage.lua	1871	same
+g_SeniorsCanWork	GameVar	GameVar	Lua/Units/Colonist.lua	1462	Lua/Units/Colonist.lua	1788	same
+g_SeniorsCanWorkReasons	GameVar	GameVar	Lua/Units/Colonist.lua	1464	Lua/Units/Colonist.lua	1790	same
+g_SeniorsFertile	GameVar	GameVar	Lua/Units/Colonist.lua	1463	Lua/Units/Colonist.lua	1789	same
+g_SessionOptions	GameVar	GameVar	CommonLua/OptionsObject.lua	13	CommonLua/OptionsObject.lua	13	same
+g_SetpieceActors	MapVar	MapVar	CommonLua/SetpieceStatements.lua	122	CommonLua/SetpieceStatements.lua	122	same
+g_ShowCollectionLimitWarning	MapVar	MapVar	CommonLua/Classes/collection.lua	6	CommonLua/Classes/collection.lua	6	same
+g_ShownOnScreenHints	GameVar	GameVar	Lua/X/OnScreenHintDlg.lua	48	Lua/X/OnScreenHintDlg.lua	45	same
+g_ShownOnScreenNotifications	GameVar	GameVar	Lua/UI/OnScreenNotification.lua	46	Lua/UI/OnScreenNotification.lua	47	same
+g_ShownPopupNotifications	GameVar	GameVar	Lua/UI/PopupNotification.lua	244	Lua/UI/PopupNotification.lua	259	same
+g_SignsVisible	GameVar	GameVar	Lua/Buildings/BuildingSigns.lua	256	Lua/Buildings/BuildingSigns.lua	262	same
+g_SortedActiveFactionsCache	GameVar	GameVar	Lua/Factions/Factions.lua	229	Lua/Factions/Factions.lua	245	same
+g_SpecialProjectCompleted	GameVar	GameVar	Lua/SpecialProjects.lua	3	Lua/SpecialProjects.lua	3	same
+g_SpecialProjectNextSpawn	GameVar	GameVar	Lua/SpecialProjects.lua	1	Lua/SpecialProjects.lua	1	same
+g_SpecialProjectSpawnNextIdx	GameVar	GameVar	Lua/SpecialProjects.lua	2	Lua/SpecialProjects.lua	2	same
+g_SpecialProjectsDisabled	GameVar	GameVar	Lua/SpecialProjects.lua	5	Lua/SpecialProjects.lua	5	same
+g_SponsorBuildingsLocks	GameVar	GameVar	Lua/Factions/Independence.lua	13	Lua/Factions/Independence.lua	13	same
+g_StartSpecialProjects	GameVar	GameVar	Lua/SpecialProjects.lua	4	Lua/SpecialProjects.lua	4	same
+g_StartVaccinating	GameVar	GameVar	Lua/Traits.lua	1154	Lua/Traits.lua	1206	same
+g_StatusEffectGroupShownTime	GameVar	GameVar	Lua/ColonyViability.lua	228	Lua/ColonyViability.lua	236	same
+g_StatusEffectNotificationsShown	GameVar	GameVar	Lua/ColonyViability.lua	227	Lua/ColonyViability.lua	235	same
+g_StoryBitActive	GameVar	GameVar	Lua/_StoryBits.lua	107	Lua/_StoryBits.lua	130	same
+g_StoryBitCategoryStates	GameVar	GameVar	Lua/_StoryBits.lua	105	Lua/_StoryBits.lua	128	same
+g_StoryBitConstructionCostModifications	GameVar	GameVar	Lua/ConstructionCost.lua	15	Lua/ConstructionCost.lua	15	same
+g_StoryBitStates	GameVar	GameVar	Lua/_StoryBits.lua	106	Lua/_StoryBits.lua	129	same
+g_StoryBitsLog	GameVar	GameVar	Lua/_StoryBits.lua	46	Lua/_StoryBits.lua	45	same
+g_StoryBitsScopeStack	GameVar		Lua/_StoryBits.lua	47			removed
+g_SubsurfaceDepositsVisible	GameVar	GameVar	Lua/Buildings/SubsurfaceDeposit.lua	139	Lua/Buildings/SubsurfaceDeposit.lua	141	same
+g_SupplyGridOverrideConnectionAffectedBuildings	GameVar	GameVar	Lua/GridTunnelConnector.lua	3	Lua/GridTunnelConnector.lua	3	same
+g_SupplyGridOverrideConnections	GameVar	GameVar	Lua/GridTunnelConnector.lua	2	Lua/GridTunnelConnector.lua	2	same
+g_TVShowProgress	GameVar	GameVar	Lua/Buildings/TVStudioWorkshop.lua	19	Lua/Buildings/TVStudioWorkshop.lua	19	same
+g_TechDiscoveredCount	GameVar	GameVar	Lua/Research.lua	197	Lua/Research.lua	102	same
+g_TechFieldDiscoveredCount	GameVar		Lua/Research.lua	198			removed
+g_TechFieldResearchedCount	GameVar		Lua/Research.lua	200			removed
+g_TechResearchedCount	GameVar	GameVar	Lua/Research.lua	199	Lua/Research.lua	109	same
+g_TechResearchedLog		GameVar			Lua/Research.lua	113	added
+g_TechTimesResearched		GameVar			Lua/TechTree.lua	1198	added
+g_TechTreeGamepadLastSelection		GameVar			Lua/TechTree.lua	1680	added
+g_TechUnlockedCount		GameVar			Lua/Research.lua	103	added
+g_TotalChildrenBornWithMating	GameVar	GameVar	Lua/Achievements.lua	66	Lua/Achievements.lua	83	same
+g_TotalColonistComfort	GameVar	GameVar	Lua/Units/Colonist.lua	139	Lua/Units/Colonist.lua	175	same
+g_TotalExtractedResources	GameVar	GameVar	Lua/Achievements.lua	51	Lua/Achievements.lua	68	same
+g_TransportationModeToCommunityCache	GameVar	GameVar	Lua/Units/Colonist.lua	2478	Lua/Units/Colonist.lua	3122	same
+g_TunnelsAdjacency	GameVar	GameVar	Lua/Buildings/Tunnel.lua	1	Lua/Buildings/Tunnel.lua	1	same
+g_TutorialQueue		GameVar			CommonLua/Libs/Tutorial/Tutorials.lua	31	added
+g_TutorialStates		GameVar			CommonLua/Libs/Tutorial/Tutorials.lua	32	added
+g_TutorialVars		GameVar			CommonLua/Libs/Tutorial/Tutorials.lua	33	added
+g_UniqueHumanNames	GameVar	GameVar	Lua/Names.lua	3102	Lua/Names.lua	3101	same
+g_UniqueMachineNames	GameVar	GameVar	Lua/Names.lua	3103	Lua/Names.lua	3102	same
+g_UnlockedMenuAfterLanding	GameVar	GameVar	Lua/X/BuildMenu.lua	1890	Lua/X/BuildMenu.lua	1958	same
+g_UnpromotableTrees	GameVar	GameVar	Lua/Vegetation.lua	1380	Lua/Vegetation.lua	1376	same
+g_UsedMachineNames	GameVar	GameVar	Lua/Names.lua	3164	Lua/Names.lua	3163	same
+g_VegSpreadFoci	GameVar	GameVar	Lua/VegetationFocus.lua	1	Lua/VegetationFocus.lua	1	same
+g_VocationOrientedSociety	GameVar	GameVar	Lua/Units/Colonist.lua	3931	Lua/Units/Colonist.lua	4853	same
+g_WirelessPower	GameVar	GameVar	Lua/Buildings/RechargeStation.lua	25	Lua/Buildings/RechargeStation.lua	25	same
+g_WorkforceVersion		GameVar			Lua/Buildings/Workforce.lua	8	added
+gsAttack	const	const	CommonLua/Core/const.lua	183	CommonLua/Core/const.lua	183	same
+gsDeflect	const	const	CommonLua/Core/const.lua	184	CommonLua/Core/const.lua	184	same
+gsDeflectIdle	const	const	CommonLua/Core/const.lua	185	CommonLua/Core/const.lua	185	same
+gsDie	const	const	CommonLua/Core/const.lua	186	CommonLua/Core/const.lua	186	same
+gsIdle	const	const	CommonLua/Core/const.lua	180	CommonLua/Core/const.lua	180	same
+gsRun	const	const	CommonLua/Core/const.lua	182	CommonLua/Core/const.lua	182	same
+gsWalk	const	const	CommonLua/Core/const.lua	181	CommonLua/Core/const.lua	181	same
+gv_CurrentTechPointDiscount		GameVar			Lua/TechTree.lua	1286	added
+gv_WindNoUpdate	GameVar		CommonLua/Wind.lua	144			removed
+heat_grid	MapVar	MapVar	Lua/Heat.lua	8	Lua/Heat.lua	8	same
+hex_height	MapVar	MapVar	Lua/_init.lua	56	Lua/_init.lua	61	same
+hex_width	MapVar	MapVar	Lua/_init.lua	53	Lua/_init.lua	58	same
+l_DomeLastOpened	MapVar	MapVar	Lua/Buildings/Dome.lua	1243	Lua/Buildings/Dome.lua	1647	same
+l_mirror_sphere_targets	GameVar	GameVar	Lua/Mysteries/MirrorSphere.lua	24	Lua/Mysteries/MirrorSphere.lua	24	same
+landscape_grid	MapVar	MapVar	Lua/Landscape/Landscaping.lua	23	Lua/Landscape/Landscaping.lua	23	same
+lr_manager	MapVar	MapVar	Lua/LRManager.lua	5	Lua/LRManager.lua	5	same
+mediumGameSpeed	const	const	Lua/_GameConst.lua	26	Lua/Config/config.lua	117	moved-file
+mouse_button_tag_scale	const	const	CommonLua/Core/const.lua	450	CommonLua/Core/const.lua	450	same
+mouse_rotates_camera	const	const	CommonLua/Core/const.lua	133	CommonLua/Core/const.lua	133	same
+nConsoleHistoryMaxSize	const	const	CommonLua/Core/const.lua	189	CommonLua/Core/const.lua	189	same
+object_hex_grid	MapVar	MapVar	Lua/GridObject.lua	41	Lua/GridObject.lua	41	same
+painted_hexes	GameVar	GameVar	Lua/hex.lua	692	Lua/hex.lua	713	same
+painted_hexes_thread	GameVar	GameVar	Lua/hex.lua	693	Lua/hex.lua	714	same
+pinned	MapVar	MapVar	Lua/PinnableObject.lua	6	Lua/PinnableObject.lua	6	same
+promoted_trees_count	GameVar	GameVar	Lua/Vegetation.lua	31	Lua/Vegetation.lua	32	same
+s_ConstructionControllerDeleteOnLoad	GameVar	GameVar	Lua/Construction/Construction.lua	944	Lua/Construction/Construction.lua	1018	same
+s_DelayedBindMomentsThread	MapVar	MapVar	CommonLua/Editor/AnimationMomentsEditor.lua	92	CommonLua/Editor/AnimationMomentsEditor.lua	92	same
+s_FrostStrengths	MapVar	MapVar	CommonLua/TemperatureVisualization.lua	97	CommonLua/TemperatureVisualization.lua	97	same
+s_SelectedWires	MapVar	MapVar	CommonLua/Editor/XEditor/XTwoPointAttachHelper.lua	2	CommonLua/Editor/XEditor/XTwoPointAttachHelper.lua	1	same
+s_SeqListPlayers	GameVar	GameVar	CommonLua/Libs/Sequences/SequenceListPlayer.lua	21	CommonLua/Libs/Sequences/SequenceListPlayer.lua	21	same
+s_SeqRestarts	GameVar	GameVar	CommonLua/Libs/Sequences/SequenceListPlayer.lua	23	CommonLua/Libs/Sequences/SequenceListPlayer.lua	23	same
+seed_cooldowns	GameVar	GameVar	Lua/Vegetation.lua	32	Lua/Vegetation.lua	33	same
+solar_panel_bc_modifiers	GameVar	GameVar	Lua/Mysteries/BlackCubesBuildingInteractionsModFriendly.lua	2	Lua/Mysteries/BlackCubesBuildingInteractionsModFriendly.lua	2	same
+state_growing_vegetation_info	GameVar		Lua/Vegetation.lua	33			removed
+supply_connection_grid	MapVar	MapVar	Lua/SupplyConnectionGrid.lua	2	Lua/SupplyConnectionGrid.lua	2	same
+supply_overlay_grid	MapVar	MapVar	Lua/GameOverlays.lua	36	Lua/GameOverlays.lua	36	same
+surfImpassableTerrain	const	const	CommonLua/Core/const.lua	198	CommonLua/Core/const.lua	198	same
+surfImpassableVolume	const	const	CommonLua/Core/const.lua	197	CommonLua/Core/const.lua	197	same
+surfNoCollision	const	const	CommonLua/Core/const.lua	196	CommonLua/Core/const.lua	196	same
+surfPassableTerrain	const	const	CommonLua/Core/const.lua	200	CommonLua/Core/const.lua	200	same
+surfWalkableSurface	const	const	CommonLua/Core/const.lua	199	CommonLua/Core/const.lua	199	same
+transport_route_labels	GameVar	GameVar	Lua/Units/RCSafari.lua	251	Lua/Units/RCSafari.lua	347	same
+transport_route_visuals	GameVar	GameVar	Lua/Units/RCTransport.lua	840	Lua/Units/RCTransport.lua	930	same
+transport_route_wireframes	GameVar	GameVar	Lua/Units/RCSafari.lua	250	Lua/Units/RCSafari.lua	346	same
+trfBidirectional	const	const	Lua/TrainTransport.lua	363	Lua/TrainTransport.lua	366	same
+trfInclusive	const	const	Lua/TrainTransport.lua	361	Lua/TrainTransport.lua	364	same
+trfPassengerTransport	const	const	Lua/TrainTransport.lua	362	Lua/TrainTransport.lua	365	same
+trfRunnableOnly		const			Lua/TrainTransport.lua	367	added
+ultraGameSpeed	const	const	Lua/_GameConst.lua	28	Lua/Config/config.lua	119	moved-file
+veg_growth_cache	GameVar	GameVar	Lua/Vegetation.lua	21	Lua/Vegetation.lua	22	same
+veg_preset_lookup	GameVar	GameVar	Lua/Vegetation.lua	22	Lua/Vegetation.lua	23	same
+vegetaton_state_manage_thread_started	GameVar		Lua/Vegetation.lua	34			removed
+work_thread	GameVar	GameVar	Lua/Mysteries/BlackCubesBuildingInteractionsModFriendly.lua	4	Lua/Mysteries/BlackCubesBuildingInteractionsModFriendly.lua	4	same
