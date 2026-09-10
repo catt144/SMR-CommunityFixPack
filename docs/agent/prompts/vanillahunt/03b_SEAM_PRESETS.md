@@ -215,3 +215,27 @@ vegetation-augmentation instance. Treat this as an unverified lead only, not
 DLC coverage or clearance; re-derive it within your authorized registries and
 hand actual DLC interiors to dlccheck. `PROGRESS_SEAM_REPORT.md` has exact keys,
 FR outcomes and the full boundary.
+
+## Inbox from completed 03d — 2026-09-10
+
+03d read 283/283 (249 INVENTORY + 16 CALLERS + 18 NOROWS), filed C66-C73,
+and has no child queue. Exact receipt and limits are in
+`CALLER_SEAM_REPORT.md`; controls are `CALLER_SEAM_DESK.txt`. For your generated
+registry work, C69 establishes a base authored consumer:
+`Lua/Scenario/Mystery 5.generated.lua` keeps an `SA_WaitResearch` state of
+`In Progress` for `NumberSixTracing`, followed by the intensified attack and a
+second Researched wait. The changed callee now sends both states down the
+Researched wait. Use that complete consumer as supporting evidence, but derive
+the Tech/sequence registry fields in your own assigned rows and do not count
+03d's hand read as preset coverage.
+
+C62's four ScriptStatements wrappers do validate and call `BlowUp` with
+StoryBit provenance, but 03d found no concrete authored scenario instance;
+your assigned instantiated preset/receiver search remains the owner. R11004's
+missing universal-storage Seeds gate is also unresolved until your Resource /
+BuildingTemplate fields plus a concrete acceptance/availability consumer prove
+the route. FR-2's live DeepScanning effect/Exploration route remains connected;
+do not treat source as closing the intermittent report. Checklist 138 owns
+C66-C73 runtime choices. For dlccheck, TAKEABLE WHEN a concrete owning class or
+preset is read: WorkFarmInsect/WorkFarmSmall `Maps[1]` and the prior recipe-
+input double-consumption route. Base definitions do not clear DLC overrides.

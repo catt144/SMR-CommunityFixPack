@@ -25,9 +25,10 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   A3 (F118) · A10 · A5 c2 · A9 c4/c5 · F117's station recipe · the first `RunAll()` on the 94-probe kit (re-stamps
   `WORKFLOW.md:407`, VOID since 09-09). ⛔ Kit verdicts are PREDICTIONS until then; still FAIL/ERROR by name:
   `C47OpenFarmSeedBufferShape` (Herbs 100→50), retired `LanderCargoRatchet`/`DroneUnreachableForever`/`AutoExportPriority`.
-- ⏭ NEXT: `prompts/vanillahunt/03b_SEAM_PRESETS.md`, `03d_CALLER_SEAM.md` + `04_HUNT.md`
+- ⏭ NEXT: `prompts/vanillahunt/03b_SEAM_PRESETS.md` + `04_HUNT.md`
   (independent, coordinate shared writes; 04 = Codex Sol Ultra, no split). 03 DONE 09-10 with required split: 396 full present-span
   reads, C56-C62 cand/source-read, desk controls only. 03c DONE 09-10: 286/286 rows, C63-C65 cand/source-read, no child queue.
+  03d DONE 09-10: 283/283 items, C66-C73 cand/source-read, no child queue.
   Exact remaining queues/limits: `reports/vanillahunt/SEAM_REPORT.md` +
   `SEAM_COVERAGE.tsv`; 99 waits for every continuation. 02 tagging and 01 instruments DONE; FR-1/2/3 first. DLC_DEEP_CHECK AFTER 99.
 - ⭐ PUBLISHED both portals — `pdx_id` **156049**, `steam_id` **3787202810**, tree `version` **6** (hotfix 2, 09-09).

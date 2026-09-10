@@ -841,3 +841,60 @@ disasters; R07992's thomas Assembly-of-Planets sponsor equality; R08645/R08646
 crop/vegetation augmentation instances; and R09449/R09450/R09452 Tech groups.
 The out-of-fence search suggested some law-effect instances exist only in Norman,
 but that claim must be re-derived by the authorized owner. No child queue remains.
+
+## §03d coverage — remaining base callers, services and rowless seams (2026-09-10)
+
+MEASURED: the immutable 03d partition is **249 INVENTORY + 16 CALLERS + 18
+NOROWS = 283**. Complete reads: **283/283; NOT-REACHED 0**. Supporting
+owner/non-owner reads are not claimed as coverage. `R02394` and
+`R09646/R09647` retain their overlap/malformed-span caveats; caller key
+ordinal/name drift affects `C00376 C00381 C00383`, and `C03915` is a class
+homonym. The durable derivation, route evidence, controls, drift and limits are
+`CALLER_SEAM_REPORT.md` and `CALLER_SEAM_DESK.txt`.
+
+Exact READ keys:
+
+- Reader A INVENTORY: `R05559 R06537 R06555 R06580 R06689 R06717 R06718 R06721 R06723 R06735 R06771 R06777 R06778 R06803 R06809 R06815 R06916 R06918 R07000 R07002 R07003 R07100 R07101 R07110 R07115 R07116 R07128 R07133 R07155 R07156 R07721 R08852 R08873 R09300 R09301 R09310 R09634 R09644 R09646 R09647 R09661 R09893 R10477 R10666 R10668 R10676 R10685 R10686 R10692 R10698 R10699 R10708 R10756 R10758 R10769 R10784 R10786 R10804 R10805 R10812 R10820 R10825 R10831 R10832 R10848 R10862 R10863 R10880 R10886 R10892 R10893 R10895`; CALLERS: `C00144 C00373 C00374 C00376 C00381 C00383 C00570 C00571 C00595 C00596 C00597 C03747 C03915 C03968`; NOROWS: `Lua/Buildings/RocketTrade.lua`.
+- Reader B INVENTORY: `R02391 R02392 R02393 R02394 R02405 R02406 R02408 R05283 R05301 R05306 R05307 R05320 R05334 R05336 R05337 R05477 R05526 R05697 R05965 R06180 R06189 R06190 R06199 R06210 R06211 R06219 R06436 R06440 R06441 R06442 R06592 R06594 R06602 R06604 R06612 R06632 R06633 R06653 R06659 R06780 R06910 R06925 R06927 R06928 R06938 R06939 R06940 R06941 R06942 R06943 R06944 R06945 R06946 R06947 R06949 R06950 R06952 R06953 R06954 R06957 R06960 R06963 R06964 R07050 R07052 R07076 R07078 R07087 R07088 R09021 R09029 R09043 R09048 R09491`; CALLERS: `C03760`; NOROWS: `CommonLua/Libs/Research/ClassDefs/ClassDef-Conditions.generated.lua`, `CommonLua/Libs/Research/ClassDefs/ClassDef-PresetDefs.generated.lua`, `CommonLua/Libs/Research/Data/ClassDef-Conditions.lua`, `CommonLua/Libs/Research/Data/ClassDef-Effects.lua`, `CommonLua/Libs/Research/Data/ClassDef-PresetDefs.lua`, `Lua/AmbientLife/VisitFastFoodRestaurant.lua`, `Lua/AmbientLife/VisitFoodStand.lua`, `Lua/AmbientLife/VisitGourmetRestaurant.lua`, `Lua/AmbientLife/WorkFarmInsect.lua`, `Lua/AmbientLife/WorkFarmSmall.lua`, `Lua/AmbientLife/WorkFoodStand.lua`, `Lua/Buildings/Diner.lua`, `Lua/Refabable.lua`.
+- Reader C INVENTORY: `R00312 R00597 R00852 R00925 R00956 R00957 R02349 R02350 R02820 R02892 R02921 R02922 R03236 R05239 R07568 R07699 R07705 R07743 R07749 R07752 R08417 R08434 R08681 R08720 R08822 R08823 R08988 R09014 R09253 R09254 R09255 R09256 R09284 R09335 R09336 R09340 R09341 R09345 R09346 R09347 R09348 R09349 R09350 R09351 R09352 R09353 R09354 R09355 R09356 R09357 R09359 R09366 R09369 R09381 R09386 R09409 R09596 R09597 R09608 R09609 R09967 R09984 R09986 R09987 R10005 R10102 R10115 R10122 R10125 R10168 R10210 R10515 R10538 R10596 R10954 R10983 R11004 R11007 R11038 R11071 R11072 R11079 R11080 R11089 R11095 R11098 R11099 R11103 R11107 R11108 R11109 R11115 R11117 R11132 R11133 R11616 R11692 R11700 R11711 R11715 R11717 R11720 R11725`; CALLERS: `C00588`; NOROWS: `Lua/__const.lua`, `Lua/_EntityData.generated.lua`, `Lua/Config/config.lua`, `Lua/UI/CreditsData.lua`.
+
+Filed **C66-C73**, all `cand`/`source-read`, no modules: C66 ground group-All
+unloads every resource rather than the selected group; C67 returns an old-shift
+meal against the reset current-shift count; C68 fulfills/eats after failed
+building entry; C69 handles an active AI mystery research wait as Researched;
+C70 can rebind a destroyed St. Elmo experiment to a pre-existing tank; C71
+retains an Explorer-malfunction message after its rover effect/register were
+removed; C72 adds 40/50 ms Basics tutorial polling; C73 computes and then
+overwrites Food availability. C67-C69 archived-body desks discriminate with
+positive and counterfactual controls. All runtime decisions are checklist 138.
+
+Control sample `.NET Random(20260910)`: RocketTrade whole-file, `R06537 R06941
+R06944 R07699 R09348`; **6/6 change description and 6/6 route precision**.
+Eligible seeded positives: **0**, score N/A. Caught drift includes a first desk
+attempt missing the positive-control `service:Service` shim; it stopped, the
+shim was added, and the complete desk was rerun. Rejected/conditional leads
+include R10804 future-import warning, R11004 unresolved Seeds availability,
+R11616 validation-only assert text, stale generated reward params, and R02393's
+unproven native/mod consumer. No failed/partial desk output was retained.
+
+### 03d FR outcomes
+
+**FR-1(b): not reached.** R05283 is an ordinary base City new-game migration.
+`Lua/Config/config.lua` and `_EntityData.generated.lua` add broad native/all-
+player surfaces but no entitlement path or Proton crash mechanism; 04 owns the
+temporal-upscaler conclusion. **FR-2: not explained.** R05697 is debug-only,
+R09340 changes mystery tech fields, and R10168 changes rollover anchors. The
+DeepScanning effect/Exploration route remains connected, while probes require
+AdaptedProbes. **FR-3: not closed.** R07155 retains the old bounded 500 ms wait.
+Added tutorial, rocket, elevator and UI work is unprofiled and cannot cause a
+report predating 1.1.0. No source result closes a field report.
+
+### 03d For dlccheck
+
+All C66-C73 routes are established in base Lua and need no named DLC class;
+that is the non-owner boundary, not DLC clearance. TAKEABLE WHEN dlccheck reads
+a concrete owning class/preset: verify WorkFarmInsect/WorkFarmSmall's `Maps[1]`
+temporary-tablet assumption and the prior recipe-input double-consumption route.
+Do not infer DLC safety from base class existence or infer caller absence from
+literal Lua search: native/dynamic dispatch, assets absent from Src, consoles,
+runtime timing and incomplete old DLC remain blind spots. No child queue remains.

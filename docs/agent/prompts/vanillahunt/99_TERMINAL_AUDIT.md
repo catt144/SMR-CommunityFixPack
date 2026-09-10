@@ -480,3 +480,46 @@ bodies traced to old generated counterparts; delegated Norman instance search
 exceeded the fence and supplies no coverage/clearance. dlccheck outbox: R08012
 removable-faction disasters, R07992 thomas sponsor equality, R08645/R08646 actual
 augmentation instances, and R09449/R09450/R09452 actual Tech groups.
+
+### From 03d — caller, service and rowless seams, 2026-09-10
+
+03d is complete: **283/283 READ**, 249 INVENTORY + 16 CALLERS + 18 NOROWS,
+NOT-REACHED 0, no child queue. Audit the exact per-key receipt and all corrected
+routes/limits in `CALLER_SEAM_REPORT.md`, the archived-body controls in
+`CALLER_SEAM_DESK.txt`, TRIAGE §03d, C66-C73, and checklist decision 138. The
+tagged inputs and `SEAM_COVERAGE.tsv` were not changed.
+
+Filed C66-C73, all cand/source-read and untested. C66: RC Transport ground
+group-All calls `DumpCargo(...,"all")`. C67: an old-shift meal return decrements
+the reset current-shift count. C68: failed `EnterBuilding` still fulfills/eats.
+C69: AI mystery In Progress research falls into the Researched branch. C70: a
+destroyed St. Elmo experiment can rebind to an existing tank. C71: Dredger text
+retains a removed Explorer-malfunction outcome. C72: Basics tutorial adds
+40/50 ms polling. C73: Food infobar immediately overwrites availability.
+C67-C69 desk controls discriminate; C72/C73 are profiling-only. Re-derive a
+sample against the cited complete bodies and do not promote source labels to
+runtime verdicts.
+
+Control numbers: `.NET Random(20260910)` sample RocketTrade whole-file plus
+`R06537 R06941 R06944 R07699 R09348`, 6/6 change description and 6/6 route
+precision; eligible positive seeds 0, score N/A. Drift/corrections: overlapping
+R02394 and R09646/R09647 receipts retained; caller ordinal/class homonyms
+disclosed; the first desk attempt omitted `service:Service`, stopped, and was
+fully rerun after adding the shim; R10804, R11616, generated stale params and
+R02393 were rejected; R11004 remains conditional. No failed/partial output was
+retained.
+
+FR-1(b) was not reached: config/entity-data whole-file additions establish no
+DLC-entitlement or Proton crash mechanism, and 04 owns temporal-upscaler. FR-2
+was not explained: DeepScanning's effect/Exploration route remains connected
+and probes require AdaptedProbes. FR-3 was not closed: the old bounded 500 ms
+wait remains, added short-cadence/hourly work is unprofiled, and it cannot cause
+the pre-1.1 report. No field report is closed.
+
+For dlccheck, C66-C73 have base/non-owner Lua routes but no DLC clearance.
+TAKEABLE WHEN the authorized chain reads a concrete owning class/preset:
+WorkFarmInsect/WorkFarmSmall `Maps[1]` temporary-tablet assumptions and the prior
+recipe-input double-consumption route. Literal Lua absence does not rule out
+anonymous/dynamic/native callers. Assets absent from Src, console behavior,
+runtime timing and incomplete old DLC remain blind spots. Terminal gate now
+waits for 03b, 04, and any child 04 declares.

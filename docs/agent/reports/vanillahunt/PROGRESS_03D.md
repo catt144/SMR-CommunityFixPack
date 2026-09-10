@@ -30,10 +30,11 @@ read-only and follows the README per-row return contract.
   outputs. No eligible seed was scored 4/4: eligible count is zero. Filed
   C66-C73; the archived-body desk discriminates C67-C69 and records its clean
   stale-probe sweep. Routed all runtime choices to checklist decision 138.
-- [ ] **IN PROGRESS — U3: synthesis and close-out.** Append the named TRIAGE section,
-  finish the durable report and DLC/sibling/04/99 outboxes, update STATE and the
-  README queue, remove the consumed prompt, run every required gate, commit,
-  push, and verify the commit and clean worktree.
+- [x] **COMPLETE — U3: synthesis and close-out.** Appended the named TRIAGE
+  section and complete 03b/04/99 outboxes, updated STATE and the README queue,
+  removed the consumed prompt, and reran the desk and every required gate.
+  The close-out commit carries this final ledger update; push and clean-tree
+  verification follow that commit.
 
 No game launch, module work, metadata/version edit, archived-source write, or
 out-of-fence DLC/norman interior read is authorized.

@@ -349,3 +349,46 @@ Exact receipt, FR-1/2/3 outcomes, random sample 6/6+6/6, drift and scope limits:
 `PROGRESS_SEAM_REPORT.md`; controls: `PROGRESS_SEAM_DESK.txt`. A delegated Norman
 instance search exceeded 03c's fence and is disclosed only as an outbox lead,
 not DLC coverage.
+
+## From completed 03d — caller, service and rowless seams, 2026-09-10
+
+03d consumed **283/283** (249 INVENTORY + 16 CALLERS + 18 whole-file NOROWS),
+NOT-REACHED 0, and has no child queue. Exact keys, limits, rejected leads and
+the random 6/6 change + 6/6 route sample are in `CALLER_SEAM_REPORT.md`; archived-
+body controls are `CALLER_SEAM_DESK.txt`. The tagged inputs and
+`SEAM_COVERAGE.tsv` remain unchanged.
+
+Avoid duplicates C66-C73, all cand/source-read and runtime-unobserved: C66
+ground RC Transport group-All unloads all cargo; C67 returns an old-shift meal
+against the reset current-shift counter; C68 fulfills/eats after failed service
+entry; C69 treats an active AI-mystery research wait as Researched; C70 can
+rebind a destroyed St. Elmo experiment to a pre-existing tank; C71 retains an
+Explorer-malfunction message after the rover effect/register were removed; C72
+adds 40/50 ms Basics tutorial polling; C73 overwrites a just-computed Food
+availability value. C67-C69 desks discriminate; C72/C73 require profiling.
+Checklist 138 owns all fresh-fixture/runtime choices.
+
+For FR-1, 03d's whole-file read of `Lua/Config/config.lua` found broad new
+native/all-player workers and settings but no entitlement branch or Proton
+crash mechanism. Do not double-claim that file; your temporal-upscaler result
+remains yours. FR-2 remains unexplained: the DeepScanning definition/effect and
+Exploration route are connected, while probes separately require AdaptedProbes.
+FR-3 remains open: R07155 keeps its old bounded 500 ms wait; the new short-
+cadence/tutorial and hourly work is unprofiled and cannot cause the pre-1.1
+report. No field report was closed.
+
+C69's route reaches the generated `SA_WaitResearch`/research-effect surface in
+your 04-B queue; use the 03d direct-callee read as supporting evidence, not as
+drainage of your assigned row/preset. C62's ScriptStatements wrappers were
+confirmed to validate and call `BlowUp` with StoryBit provenance, but no
+concrete authored instance was found; your original 04-E preset search remains
+the owner. R11004's absent universal-storage Seeds gate remains unresolved
+until a concrete acceptance/availability route is read.
+
+For dlccheck only, TAKEABLE WHEN it reads a concrete owning class/preset:
+WorkFarmInsect/WorkFarmSmall's `Maps[1]` temporary-tablet assumption and the
+prior recipe-input double-consumption route. Base routes do not clear DLC
+overrides; anonymous/dynamic/native callers, assets absent from Src, consoles,
+timing and incomplete old DLC remain blind spots. Send any new seam back only
+if it is outside this completed exact receipt; 99 still waits for 03b, 04 and
+any child 04 declares.
