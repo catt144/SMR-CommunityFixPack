@@ -284,6 +284,78 @@ settings; the menu loads, starting a new game crashes.)
     Game, the mission setup screen, the loading screen, the first frame of the
     map); does it stop with the DLC disabled in Steam (⇒ FR-1(b)); GPU vendor
     and driver.
+- ⭐ **Third report + the DLC-off result (relayed by the owner 2026-09-10) —
+  what is now ESTABLISHED, and it re-ranks FR-1.** The OP adds *"it keeps
+  crashing even when all DLC content is disabled"*; a second player (Manjaro,
+  KDE on Wayland, kernel 6.18, NVIDIA **GTX 1070**) crashes on new game in
+  normal, sandbox AND challenge, after validating files, with no crash-report
+  popup on relaunch.
+
+  | varies across reports ⇒ not the cause | constant |
+  |---|---|
+  | distro (Mint 22.2, Manjaro) · display server (X11 Cinnamon, Wayland KDE) · kernel (7.0, 6.18) · Proton 9.0–11.02 + hotfix/experimental · in-game settings · game mode · DLC content on/off · mods (none) · file integrity (validated, reinstalled) | **1.1.0 · Proton · the moment a new game starts · NVIDIA on every GPU named** (RTX 3060 Laptop, GTX 1070; `F102`'s earlier Proton freeze was NVIDIA too) |
+
+  - ✅ **CONTROL, MEASURED 2026-09-10: a new game on 1.1.0 WORKS on Windows +
+    NVIDIA.** The owner's rig (RTX 4080, D3D12, per `F102`) started colony
+    `BlankBig_02`; every save of it, its Sol-1 start included, carries
+    `orig_lua_revision=403908` (headers read from
+    `C:\Dev\SMR-SaveBackup\20260909-hotfix2-sitting\`). ⭐ **And it ran on the
+    upscaler under suspicion — OBSERVED (owner's screenshots, 2026-09-10):**
+    `OPTIONS / VIDEO` shows `Antialiasing: TAA`, `Upscaling: NVIDIA DLSS 4`,
+    `Resolution Percent: Native (100%)`, `Graphics Adapter: NVIDIA GeForce RTX
+    4080`, 3840×2160 fullscreen; the owner states all 1.1.0 testing ran this
+    way. That also OBSERVES what was only read in source: on an RTX card the
+    default TAA auto-picks DLSS 4. ⇒ **DLSS 4 itself works on NVIDIA; not
+    "NVIDIA", not "DLSS 4", but NVIDIA × Proton** — vkd3d-proton / dxvk-nvapi on
+    NVIDIA's Linux driver — meeting something 1.1.0 does at new game, of which
+    the upscaler's initialisation under Proton is the leading Lua-visible
+    candidate.
+  - ⚠️ **"No AMD report" is not "AMD is fine"** — that presence side is
+    unenumerated (§2's method rule). The project's Steam Deck (AMD, Proton;
+    `F102`'s negative repro) can fill it in minutes (checklist 136); `F102`
+    warns a Deck negative is weaker than it looks, because Valve pre-distributes
+    its shader caches.
+  - ⇒ **FR-1(b) drops in rank:** a DLC-DEPENDENT branch is unlikely when DLC-off
+    still crashes. ⛔ It does NOT clear 03's seam — base-game code changed to
+    accommodate the DLC ships to everyone and runs with the DLC off. (How the
+    DLC was "disabled" — the in-game content toggle or Steam — is unstated.)
+  - ⭐ **The lead the diff already shows — read FIRST (surfaces c, d): the
+    temporal upscaler.** 1.1.0 upgraded **NVIDIA DLSS 2 → DLSS 4**
+    (`CommonLua/Core/options.lua`, the `Antialiasing` and `Upscaling` tables).
+    The DEFAULT anti-aliasing is `"TAA"` (`CommonLua/Core/GlobalStorageTables.lua:114`),
+    which *"automatically picks a temporal anti-aliasing technique based on the
+    machine's GPU"* — `options.lua:210-228` hands TAA the DLSS, XeSS or FSR 2
+    settings (read its conditions), and the DLSS entry is selectable only when
+    `hr.TemporalIsTypeSupported("dlss")`. So every NVIDIA player on default
+    settings initialises an upscaler at the first 3D frame. ⚠️ **The GTX 1070
+    cuts against "DLSS 4 alone":** it cannot run DLSS (the game's own help text
+    says it "requires an NVIDIA RTX graphics card"), so its TAA falls back — the
+    honest surface is **the auto-pick, the capability probe, and whichever
+    upscaler they initialise**. Also new in 1.1.0: NVIDIA's **REBLUR / NRD
+    denoiser** (59 `REBLUR*` parameter lines in
+    `CommonLua/Classes/RenderFeaturesParams.lua`, 0 in 1.0.7; `NRD` 0 → 2
+    files) — whether any new-game code path writes those `hr` values is a
+    question for (d). Minor: a new `FilmGrain` option whose values set no `hr`
+    key.
+  - ⛔ **COVERAGE HOLE this exposes — diff these files AS TEXT.** The DLSS 2 → 4
+    change sits in a top-level DATA TABLE in a `hand` file: `treediff` emits
+    functions and `presetdiff` reads only the `generated` bucket, so **neither
+    instrument lists it**. The same is true of every top-level option, const
+    and config table in hand files. For FR-1, `CommonLua/Core/options.lua`,
+    `CommonLua/Core/GlobalStorageTables.lua`,
+    `CommonLua/Classes/RenderFeaturesParams.lua`, `CommonLua/Core/Postprocessing.lua`,
+    `Lua/ProjectOptions.lua` and `Lua/Config/*` are diffed line by line, never
+    trusted to the inventory.
+  - ⭐ **Player-side falsifier AND candidate workaround (checklist 136):** before
+    New Game, change anti-aliasing from the default `TAA` to the non-temporal
+    `SMAA` or `FXAA` — `NotSelectableTemporalUpscalingOption` then rules DLSS,
+    XeSS and FSR 2 out. If new games then start, the temporal upscaler path is
+    the trigger and there is a workaround to publish; if they still crash, the
+    upscaler is cleared and (a)'s native calls lead. ⛔ Untested. Route half
+    walked (owner's screenshots): the setting is `OPTIONS / VIDEO →
+    Antialiasing`, and `Upscaling` shows the upscaler TAA picked. Still to walk
+    before any player is told: that `SMAA` / `FXAA` is selectable there and that
+    `Upscaling` then stops showing DLSS.
 
 **FR-2 · "Deep scanning with probes reveals no deep resources."** (Steam,
 2026-09-08, two players; intermittent; one says a clean reinstall fixed it,

@@ -59,10 +59,35 @@ completed tests move whole to
 >    writes the last stretch of its log only at a clean exit (`EF-047`), so
 >    after a crash the end may simply be missing. It is useful for what it
 >    shows (GPU, driver, how far startup got), not for where it stopped.
-> 3. **Four one-line answers.** Does loading a saved game also crash, or only a
->    new game? At exactly what moment: clicking New Game, mission setup, the
->    loading screen, or the first frame of the map? Does it stop crashing with
->    *Feeding the Future* disabled in Steam? GPU brand and driver version?
+> 3. **Two one-line answers still open.** Does loading a saved game also crash,
+>    or only a new game? At exactly what moment: clicking New Game, mission
+>    setup, the loading screen, or the first frame of the map? (Reporters have
+>    already answered the rest: it still crashes with all DLC content disabled,
+>    in normal, sandbox and challenge modes, on two distros, on X11 and Wayland,
+>    and on every Proton version; both GPUs named are NVIDIA.)
+> 4. ⭐ **The cheapest test, and possibly a workaround:** before New Game,
+>    change anti-aliasing from its default `TAA` to `SMAA` or `FXAA`. The
+>    default TAA auto-picks a GPU upscaler, and 1.1.0 upgraded NVIDIA's from
+>    DLSS 2 to DLSS 4; SMAA and FXAA use none. If new games then start, that is
+>    the cause and a workaround players can use today. ⛔ Untested. Half the
+>    route is walked: your screenshots show the setting is `OPTIONS / VIDEO →
+>    Antialiasing`, currently `TAA`, with `Upscaling` showing the upscaler it
+>    picked. Still unwalked: that `SMAA` / `FXAA` can be selected there and
+>    that `Upscaling` then stops showing DLSS — confirm both on your rig (a
+>    minute, no new game needed) before anyone posts it. (One report is a
+>    GTX 1070, which cannot run DLSS at all, so the cause may be the upscaler
+>    auto-pick in general rather than DLSS 4 itself; this test covers both.)
+>
+> **And one test on hardware we already own (minutes).** ✅ Already confirmed,
+> no action needed: a new game on 1.1.0 WORKS on your Windows/NVIDIA rig
+> **with DLSS 4 on** — every save of the `BlankBig_02` colony, its Sol 1 start
+> included, was created by 1.1.0, and your screenshots show `TAA` → `NVIDIA
+> DLSS 4` on the RTX 4080, which is how you say all your testing ran. So DLSS 4
+> itself works on NVIDIA; the fault needs Proton.
+> **Start a new 1.1.0 game on the Steam Deck (AMD, Proton), mods off.** If it
+> crashes, the problem is Proton-wide and we have a machine that reproduces
+> it. If it starts, that fits "NVIDIA under Proton", though `F102` notes a Deck
+> negative is weaker than it looks (Valve ships the Deck's shader caches).
 >
 > ⛔ Before anyone posts instructions to players, an agent confirms the log
 > locations and the `PROTON_LOG` step by walking them. The thread's author
