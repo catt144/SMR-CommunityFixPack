@@ -80,37 +80,71 @@ completed tests move whole to
 > screen check), so tonight's FAIL is not evidence either way. And **C47's entry
 > cites Herbs at 100 seeds/hex; 1.1.0 halved it to 50.**
 >
-> #### 🚫 What the sitting still owes — eight rows, recipes intact
+> #### ✅ 2026-09-09 (evening) — the sitting ran again: six rows exercised, six PASSED, two recipes refuted
 >
-> ⭐ **`agent/prompts/HOTFIX2_SITTING.md` has been REWRITTEN for exactly this
-> remainder** — paste it into a fresh session and it picks up here. Tier 1 is
-> not repeated, the ten known false FAILs are listed so nobody re-files them,
-> and the rows are **re-ordered**: the two-minute one first, the rockets started
-> early so their flight time is not dead time, and ⛔ **the destructive track-split
-> row moved to LAST** (it was fourth, which would have contaminated the colony
-> for every row after it). Serially these are ~50 min; overlapped, ~30.
+> **Attended, `USA Sol 18`, game 1.1.0.403908.** Log archived as
+> `archive/logs/sitting2play110_*`, read AFTER the process exited (`Debug::Done`
+> present — it grew 1,282 bytes after the mid-session read, which is exactly why
+> §3 forbids quoting a running log). ⛔ A clean sitting is still not clearance
+> (`H-04`); the upload is yours.
 >
-> The table below is the same work in the order it was originally listed — the
-> brief is the authority on sequence. Everything here is `NOT RUN`, never
-> "probably fine".
+> **Census re-confirmed on a third independent boot: `44 applied / 0 inactive`,
+> and `0 error-shaped lines` across the whole session** (`tools/logscan.py`, complete
+> file). Opt-in pack confirmed OFF by the correct discriminator — `Loaded mod items
+> for:` lists only the pack and the kit; its `Loaded mod def` line is merely the
+> folder being present.
 >
-> | # | control | fix | ~time | why it did not run |
-> |---|---|---|---|---|
-> | 1c | a train with **nowhere** to deliver still unloads | F-10/F46 | 2 min | needs the resource OFF at **both** stations; that setup was never built |
-> | 4 | **Track split** ⚠️ destructive, save-persistent | F116 | 5 min | never reproduced, never run. Your `USA Sol 18` is backed up at `C:\Dev\SMR-SaveBackup\20260909-hotfix2-sitting\` — this row will damage the colony |
-> | 5 | **F117 arrival re-choose** | F117 | 8 min | repaired 09-09, **never observed**. Needs a passenger rocket landed beyond walking distance of every dome, no elevator route |
-> | 6 | **Vacuum walks** | F-9/F52 | 5 min | out of time |
-> | 7 | **Edit Payload** | F-6/F70 | 10 min | out of time (includes a round trip) |
-> | 8 | **Rocket refuel toggle** | F-7/F50 | 3 min | out of time |
-> | 9 | **Expedition housing** | F-2 | 5 min | out of time |
-> | 10 | **Asteroid habitat trait filter** | F-3 | 2 min | out of time — **cheapest row left**, and it threw before this build |
-> | 11 | **F118 layout leak** | F118 | 5 min | out of time. ⛔ Nobody has ever measured this one, so **"nothing visible" is a legitimate result** |
-> | T1.3 | the F95 sanitizer pass, non-vacuously | F95 | — | ⛔ **BLOCKED, not deferred.** No Astrogeologist save exists on 1.1.0 and 1.0.7 saves cannot load (`EF-079`). It cannot be run without provisioning a new colony |
-> | T1.6 | pack-OFF baseline leg | — | 10 min | optional; the retired probes produced nothing surprising, which was its trigger |
-> | 12 | Saint's blessing | F-1/F92 | — | ⛔ **shelved by your ruling 130** — the condition is historical and unforgeable |
+> | row | fix | result |
+> |---|---|---|
+> | **A1** asteroid habitat trait filter | F-3 | ✅ **PASS** — Quarantined filter, 6 residents, several hours, no mod-error dialog, no error line |
+> | **A4** rocket refuel toggle | F-7/F50 | ✅ **PASS**, three clauses — OFF held at `0/30` for **a full sol** (5× the asked window), ON → `30/30`, deliveries completed |
+> | **A5** Edit Payload | F-6/F70 | ✅ **PASS** on both evidence-bearing clauses — the zeroed row survived a reopen **and a full manual round trip**, the clause PT-31 singled out |
+> | **A6** vacuum walks | F-9/F52 | ✅ **PASS, both clauses** — took the passage; passage destroyed → surface walk returned. The falsifier makes this the strongest row of the night |
+> | **A8** train with nowhere to deliver | F-10/F46 | ✅ **PASS** — both stations refusing ⇒ the module's deliberate escape hatch fired and the train unloaded instead of hanging |
+> | **A9** track split ⚠️ destructive | F116 | ✅ **PASS** — merge while under construction, then a middle piece salvaged: exactly one section went, **nothing scattered on the untouched leg**, line split cleanly. **The first time F116's repair has been exercised in a game at all** |
 >
-> ⭐ **If you do only one more row, do 10** — two minutes, and it is a fix that
-> demonstrably threw before this build.
+> ⛔ **TWO ROWS WERE NOT RUN BECAUSE THEIR RECIPES CANNOT WORK. This is the
+> sitting's most valuable output — both would have recorded a FALSE PASS.**
+>
+> * **A2 (F117 arrival re-choose) — recipe refuted from the shipped source.** It
+>   says to land beyond walking distance of **every** dome.
+>   `GetDomesReachableByColonists` (`_GameUtils.lua:390-420`) only adds domes that
+>   ARE in walking distance, and `ChooseDome` (`:486-500`) iterates that list — so
+>   the list is **empty**, `Community:GetScoreFor` is never called, and the throw
+>   site is unreachable. A clean arrival would have proved nothing. The real
+>   trigger needs the assigned dome out of walking distance **while another
+>   welcoming dome is in it**, which vanilla's own landing-time assignment makes
+>   hard to force; the live route looks to be the **elevator / cross-map** case.
+>   ⇒ ⚠️ **F117 is probably RARER than its entry's "ordinary mid-game" claim.**
+>   `bugs/F117.md` §Control and the brief both carry the wrong recipe.
+> * **A7 (expedition housing) — vacuous by construction.** The sweep runs on
+>   `OnMsg.NewDay` and its age branch compares against
+>   `ForcedByUserLockTimeout = 3,600,000` (~5 sols). The only crewed expedition
+>   this colony offers is **Project Yukon — 6 Officers, 3h**, roughly 1/40th of
+>   the timeout and short enough that the daily sweep may never tick. None of the
+>   branches above the exemption fire on a healthy crew either, so the row cannot
+>   distinguish a fixed pack from a broken one.
+>
+> ⚖️ **Three of nine rows had recipes that could not run as written** (A2, A7,
+> and A4 would have been vacuous had the rocket stayed at `30/30`). All three were
+> written from source reads without checking whether the colony could produce the
+> trigger. That is a pattern in how the brief was built, not bad luck.
+>
+> ✅ **You ruled three decisions during the sitting:** F03's stale claim to be
+> withdrawn (see below — the word needs picking), the four stale instruments to be
+> **repaired now**, and probes to be **built** for `LanderEmptyLaunch` /
+> `FreedHousingNotice`. Both kit items are bench work, ship nothing to players, and
+> are queued before the upload.
+>
+> #### 🚫 What is still owed — two rows and three clauses
+>
+> | # | control | why it did not run |
+> |---|---|---|
+> | **A3** | **F118 layout leak** | needs the `SMRFIX 1.1 testing` save (Sol 1) and an **unresearched** building confirmed there first. ⛔ Nobody has ever measured this leak, so "nothing visible" is a legitimate result |
+> | **A10** | pack-OFF baseline leg | optional; never reached |
+> | A5 c2 | cancel the launch prompt | the *flight* was cancelled instead of the cargo dialog's prompt — a different path (`PromptRocketCargoIssue`) |
+> | A9 c4/c5 | assigned trains survive; both halves accept a train | the test line was freshly built with no train assigned to it |
+> | A2 / A7 | see above | ⛔ **not deferred — their recipes are wrong.** Do not re-run as written |
 
 ### ✅ CLOSED 2026-09-09 — the brief that produced the block above, kept for its recipes: `agent/prompts/HOTFIX2_SITTING.md`. Two tiers, and the second is designed to be stopped partway.
 

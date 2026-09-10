@@ -19,29 +19,30 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   ck114-117; QA'd by 3 fresh readers, `reports/VANILLA_FIX_QA.md` §0, 0 flips).
   ⭐ **LINKS 02–07 DONE 09-08/09** (commits in `prompts/hotfix2/README.md`): 36 modules DELETED; F-1/F-2/F-3
   repaired; F-6…F-10 RE-COPIED; F116 ck111/119 landed. Kit **95** probes (measured 09-09), 32 `retired`.
-  ✅ HOTFIX_1_AUDIT 09-08 SHIP WITH CHANGES, text-only; never uploaded (`version` still 5) — folded into hotfix 2.
   ⭐ **99 TERMINAL AUDIT 09-09: SHIP WITH CHANGES** (`reports/HOTFIX_2_AUDIT.md`). F117 found + ruled ⇒ ck127 (repaired, below).
   Change-note bullet 2 contradicts link 08's F95 pass ⇒ ck128 rides ck126. Site publish WITH the upload ⇒ ck129. F118/C55 filed, F60 REMOVE
   candidate for hotfix 3. Pass D: 3 of 35 KEEP wrappers moved under class (c), seen by NO instrument.
   `100_DOCSWEEP.md` AUTHORED — fires after 126+127 are ruled and BEFORE the upload sitting (bullet 2 ships in `metadata.lua`).
   ⭐ **LINK 99a LANDED 09-09** (`777249d` F117, `0136af1` riders, `cb6415f` publish; kit `c1114ed`) — LAST CODE in hotfix 2.
-  F117: `ChooseDome`'s argument picked by a BEHAVIOUR probe on `Community:GetScoreFor`; UNKNOWN ⇒ the re-choose stands down.
-  Derivation + desk transcript: `bugs/F117.md`. F118 re-assert + `FlightPolicies` named decline landed.
   ⛔ NEITHER REPRODUCED, no probe for F118, NO status word moved. ⚠️ Desk falsifiers SCRATCHPAD-only (`F117.md` has the ask
   to promote them). Next and last: `100_DOCSWEEP`.
   🎮 **SITTING RAN 09-09 ATTENDED** (`archive/logs/sitting{boot,suite,play}110_*`, all read AFTER exit). 99 SHIP ≠ clearance (H-04).
-  ✅ TIER 1 COMPLETE: **44 applied / 0 inactive / 0 errors on TWO independent boots** — the prediction met, first ever boot of this pack.
-  ✅ Suite `58 PASS/5 FAIL/27 SKIP/5 ERROR` = **95**, run twice identical: **0 regressions, 0 wrong removals**; all 5 FAIL + 5 ERROR
-  traced to the INSTRUMENT against 1.1.0 source. ⛔ 7 `install` probes SKIP by design (no `debug.getinfo` in the mod sandbox).
+  🎮 **SITTING 2 RAN 09-09 EVENING ATTENDED** (`archive/logs/sitting2play110_*`, read AFTER exit; it grew 1282 B
+  after a mid-session read that had already said "no errors" ⇒ §3 earned again). Census `44 applied / 0 inactive`,
+  **0 error-shaped lines** / 360 (THIRD independent boot). Opt-in OFF by `Loaded mod items for:`, not the `def` line.
+  ✅ **SIX ROWS EXERCISED, SIX PASS**: A1 habitat trait filter · A4 refuel toggle (3 clauses, OFF held a FULL SOL) ·
+  A5 Edit Payload (clause 1 + the MANUAL ROUND TRIP, PT-31's clause) · A6 vacuum walks (BOTH clauses, falsifier held) ·
+  A8 train-with-nowhere-to-deliver (row 1's unrun 3rd clause) · A9 track split — **F116's FIRST exercise in a game, ever**.
+  ⛔ **A2 (F117) RECIPE REFUTED FROM SOURCE**: "beyond walking distance of EVERY dome" ⇒ candidate list EMPTY ⇒
+  `GetScoreFor` never called ⇒ throw unreachable. It would have banked a FALSE PASS. Real trigger = elevator/cross-map.
+  ⚠️ ⇒ F117 is likely RARER than its entry's "ordinary mid-game" claim. ⛔ `bugs/F117.md` §Control + the brief carry the
+  wrong recipe and are NOT yet re-derived — owed work. ⛔ **A7 VACUOUS**: only crewed expedition is 3h vs
+  `ForcedByUserLockTimeout` 3,600,000 (~5 sols). ⚖️ 3 of 9 recipes could not run as written — pattern, not luck.
+  🚫 STILL OWED: A3 (F118), A10, A5 c2, A9 c4/c5 — by name in the checklist. Brief REWRITTEN, not deleted.
+  ✅ OWNER RULED 09-09 eve: F03 claim withdrawn (word pending — `retired` is NOT in doccheck's STATUS_WORDS);
+  4 stale instruments REPAIR NOW; probes BUILT for `LanderEmptyLaunch`+`FreedHousingNotice`. Both kit-only, pre-upload.
   ⭐ **F114 + F115 OBSERVED FIXED IN PLAY**: train leaves platform, carries past the station that refuses it, unloads at B;
   flatten raises NO mod-error dialog and drones board through one (F34d, never before observed).
-  ⭐ **F-10 PREMISE READ**: disabled reads `false 60000` ⇒ the 1.1.0 bug is REAL, the guard works, **F46 is NOT a REMOVE candidate**.
-  ⚠️ T1.3 + T1.5 VACUOUS — no Astrogeologist and no Saint save exists on 1.1.0; recorded as vacuous, NOT as coverage.
-  ⛔ **F03 CLAIMS A FIX THAT NO LONGER SHIPS** — pass deleted `f707903` under ck117, vanilla's replacement verified at
-  `Building.lua:1313`; entry still reads `tested`. Status word NOT moved; owner decision filed (checklist).
-  ⛔ **4 STALE INSTRUMENTS**, one printing a REAL `[LUA ERROR]` header every run (kit `CaveInRubble`/`IsNearDome` stub gap);
-  `LanderEmptyLaunch` + `FreedHousingNotice` now have NO working probe. ⚠️ F20 unresolved — its probe cannot pass once retired.
-  🚫 8 T2 rows + T1.6 `NOT RUN`, filed to checklist; **`HOTFIX2_SITTING.md` REWRITTEN for the remainder** (A1–A10, destructive row LAST).
   ⚖️ Owner rule 09-08: a patch note saying "Fixed" is a **CLAIM, false until we confirm it**.
 - ⭐ PUBLISHED both portals — `pdx_id` **156049**, `steam_id` **3787202810**, tree `version` **5** (F110, 08-30).
   ⛔ Never re-upload to "fix" a version number — each upload bumps again (H-02). ⛔ Every upload OVERWRITES both

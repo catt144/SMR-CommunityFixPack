@@ -15,7 +15,7 @@ the row order below is the old index table's own. Generated from the front matte
 |----|----|-------|--------|----------|----------|-------|
 | 1 | F01 | Cave-ins ignore "No Disasters" rule | tested | P1 | high | [F01.md](F01.md) |
 | 2 | F02 | Meteors strike ~every 6h instead of 35–115h | tested | P1 | high | [F02.md](F02.md) |
-| 3 | F03 | Upgrade buffs leak & stack after salvage/demolish | tested | P1 | high | [F03.md](F03.md) |
+| 3 | F03 | Upgrade buffs leak & stack after salvage/demolish | closed | P1 | high | [F03.md](F03.md) |
 | 4 | F04 | Night-shift workers never return to work after midnight | fixed | P1 | high | [F04.md](F04.md) |
 | 5 | F05 | Milestone completion crashes (NoTerraforming/NoPolitics) | tested | P1 | high | [F05.md](F05.md) |
 | 6 | F06 | Philosopher's Stone mystery can hang forever | fixed | P1 | med+ | [F06.md](F06.md) |

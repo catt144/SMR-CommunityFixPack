@@ -8,6 +8,108 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-09 (evening) — the second sitting: six rows exercised, six passed, and two recipes that could never have worked
+
+tags: sitting hotfix2 A1 A2 A3 A4 A5 A6 A7 A8 A9 A10 F-2 F-3 F-6 F-7 F-9 F-10 F03 F46 F50 F52 F58 F70 F73 F116 F117 F118 EF-056 EF-065 EF-079 ck130 logscan
+
+Brief `prompts/HOTFIX2_SITTING.md` part 2 (NOT deleted — A3, A10 and three clauses remain `NOT RUN`). Owner at
+the keyboard 19:48–21:00. Tree `d63e5eb`. Log `archive/logs/sitting2play110_Mars.exe-20260909-19.48.51-*`,
+complete (`Debug::Done`) and read AFTER `Mars.exe` exited. ⛔ **The log grew 1,282 bytes (12,103 → 13,385) after
+a mid-session read that had already reported "no error-shaped lines"** — §3's rule earned again in the same week.
+
+**Preconditions re-verified mechanically:** stale-probe sweep CLEAN (0 hits, and doccheck's independent
+`TEMPORARY SWEEP` agrees), 97/98 DISARMED, 95 inert (96 absent from the code list), H-09 clean (3 junctions),
+`Mars.exe` not running before edits. **H-06 fired for real:** a new `Autosave Sol 21` existed outside the backup
+and `Autosave Sol 11(2)` had already been deleted from the live folder while still present in the backup —
+`EF-056`'s rotation observed rather than cited. Opt-in pack confirmed OFF by the CORRECT discriminator:
+`Loaded mod items for:` lists only the pack and the kit; its `Loaded mod def` line is merely the folder present.
+⚠️ Save-header read confirms the `EF` warning live: bare `lua_revision` reads **350453** (a mod's), only
+`orig_lua_revision` reads **403908**.
+
+**RESULTS — six rows, six PASS, on `USA Sol 18` / 1.1.0.403908. Census `44 applied / 0 inactive`,
+`0 error-shaped lines` across all 360 lines (third independent boot).**
+* **A1 `Fix_ShelterReflex` half-(a) removal (F-3/F73)** — Micro-G Habitat, `Quarantined` filter set, 6 residents,
+  several hours: no mod-error dialog, no error line. Non-vacuous: half (a) threw on ANY habitat with a non-empty
+  filter, and the default filter is `{}`.
+* **A4 refuel toggle (F-7/F50)** — three clauses. OFF held at `0/30` for **a full sol** (5× the asked window) with
+  the rocket empty and willing; ON → `30/30`; the earlier 109,600 KG load and the 0→30 refuel both completed, so
+  no drone churn. ⭐ Toggling OFF also RELEASED the 30 aboard and drones carried it back — `ToggleRefuel`'s
+  `UpdateEarthExportRequests` (`UniversalRocket.lua:3319-3325`), which the owner correctly read as vanilla.
+* **A5 Edit Payload (F-6/F70)** — clause 1 (zero survives reopen) and ⭐ **clause 3 (survives a full MANUAL round
+  trip)**, the clause PT-31 singled out, both PASS. Manual mode throughout, so no automation `Ignore` confound.
+  Clause 4 (destination pick refills) is exempt by design. Clause 2 NOT RUN.
+* **A6 vacuum walks (F-9/F52)** — **both clauses.** Resident re-homed across a passage between two sub-400 m
+  domes took the passage; passage destroyed, the surface walk returned. The falsifier is what makes clause 1
+  attributable to the fix rather than the map. Atmosphere confirmed non-breathable (the fix is a deliberate no-op
+  on a breathable map).
+* **A8 train with nowhere to deliver (F-10/F46)** — row 1's unrun third clause from the afternoon. Electronics OFF
+  at BOTH stations ⇒ `route_accepts_elsewhere` false ⇒ the guard stands down and the train unloads. That is
+  `Fix_TrainCargoDumping`'s **deliberate escape hatch**, written so the ping-pong fix can never stall a train.
+* **A9 track split (F116)** — ⚠️ destructive, and **the first time F116's repair has been exercised in a game at
+  all** (it was source-derived 09-08 and never reproduced in either direction). Track extended while elements were
+  still under construction — the merge that makes `node_idx` collide — then a middle piece salvaged with a plain
+  click: exactly one section went, **nothing scattered on the untouched leg**, line split cleanly, all remaining
+  pieces selectable. Clauses 4/5 (assigned trains survive; both halves accept a train) NOT RUN — the test line was
+  fresh and had no train assigned.
+
+⛔ **TWO ROWS NOT RUN BECAUSE THEIR RECIPES CANNOT WORK. Both would have recorded a FALSE PASS.**
+* **A2 (F117) — refuted from the shipped source.** The recipe says land beyond walking distance of EVERY dome.
+  `GetDomesReachableByColonists` (`_GameUtils.lua:390-420`) adds only domes that ARE in walking distance (or behind
+  a reachable elevator), and `ChooseDome` (`:486-500`) iterates that list — so it is **empty**,
+  `Community:GetScoreFor` is never called, and the throw site (`Community.lua:442`/`:449`) is unreachable. The real
+  trigger needs the assigned dome out of walking distance **while another welcoming dome is in it**; vanilla's own
+  landing-time assignment (`RocketBase.lua:2064`, `:2103`, falling back to the nearest foot-reachable
+  `safety_dome`) makes that hard to force by landing position, and the live route looks to be the **elevator /
+  cross-map** case the module itself singles out. ⇒ ⚠️ **F117 is probably RARER than its entry's "ordinary
+  mid-game" frequency claim.** `bugs/F117.md` §Control and the brief both carry the wrong recipe. NOT re-derived
+  to a working recipe — that is owed work, not a finding.
+* **A7 (F-2/F58 expedition housing) — vacuous by construction.** The sweep is `OnMsg.NewDay` and its age branch
+  compares against `ForcedByUserLockTimeout = 3,600,000` (~5 sols). The only crewed expedition the colony offers is
+  **Project Yukon, 6 Officers, 3h** — ~1/40th of the timeout, short enough the daily sweep may never tick, and none
+  of the three branches above the exemption (`IsValid`, `reserved_residence` desync, `IsDying`) fires on a healthy
+  crew. ⇒ cannot distinguish a fixed pack from a broken one.
+
+⚖️ **Three of nine rows had recipes that could not run as written** (A2 refuted, A7 vacuous, and A4 would have been
+vacuous had the rocket stayed at `30/30`). All three were written from source reads without checking whether the
+colony could produce the trigger — a pattern in how the brief was built, not bad luck.
+
+⭐ **F03's stale claim is smaller than the brief said.** Traced every surface: the **site fix list was already
+clean** — the entry *"Salvaging an upgraded building left its bonuses behind forever"* went with link 02's site
+commit `7cef4f3` (82 → 46 entries) on 09-08 — and `metadata.lua` never mentioned it. Only the internal entry, its
+heading tag and the generated INDEX row still read `tested`. ⚠️ The owner's word "retired" is **not in doccheck's
+`STATUS_WORDS`** (`tools/doccheck.py:115-124`); F21 is the precedent for downgrading with the reason in the tag.
+
+**Owner rulings during the sitting:** F03's claim to be withdrawn (word pending); the **four stale instruments to
+be repaired now**, not filed to hotfix 3; and probes to be **built** for `LanderEmptyLaunch` / `FreedHousingNotice`.
+Both kit items are bench work, ship nothing to players, and are queued before the upload — deliberately NOT done
+during the sitting, because editing the kit mid-session would have made the running suite unattributable.
+
+**EVICTED FROM STATE.md in this commit** — grave: `git show d63e5eb:docs/agent/STATE.md`. Move, never delete;
+every line below names where it now lives. STATE went 12,273 → 12,288 B (13 lines added, 13 evicted).
+* afternoon suite detail (`58 PASS/5 FAIL/27 SKIP/5 ERROR` = 95, twice identical; all ten failures traced to the
+  instrument; 7 `install` SKIPs by design) → the 2026-09-09 entry below, `PLAYTEST_CHECKLIST.md` §4 noise table,
+  `archive/logs/sittingsuite110_*`
+* "8 T2 rows + T1.6 `NOT RUN`" → superseded by the results above
+* `TIER 1 COMPLETE … TWO independent boots` → superseded by this sitting's THIRD-boot census line
+* **F-10 premise read** (`false 60000` ⇒ F46 is NOT a REMOVE candidate) → `bugs/F46.md`
+* T1.3 + T1.5 vacuity → `PLAYTEST_CHECKLIST.md`; T1.5 additionally closed by ck130
+* `HOTFIX_1_AUDIT` folded-into-hotfix-2 line → `reports/HOTFIX_1_AUDIT.md`
+* F117's `ChooseDome`-argument **derivation** + desk transcript pointer → `bugs/F117.md` (derivation is pull, not
+  kernel — `STATE_EVICTION.md`'s "status + pointer, never derivation")
+* the two-line **F03 claims-a-fix-that-no-longer-ships** block → `PLAYTEST_CHECKLIST.md` + `bugs/F03.md`;
+  superseded in STATE by the one-line owner ruling
+* the two-line **4 stale instruments** block (incl. the `F20`-unresolved note) → `PLAYTEST_CHECKLIST.md`
+  "Decisions waiting on you"; superseded in STATE by the one-line owner ruling
+
+⚠️ **STATE.md now sits at EXACTLY 12,288 B — zero headroom.** The warn was raised 9 KiB → 12 KiB *this morning*
+precisely because a file that sits against its cap is being silently evicted rather than budgeted, and its own
+comment budgeted "~32 lines spare … a runway, not a licence". That runway was consumed inside one day by genuine
+1.1.0 fallout (the file grew 9,200 → 12,288 B across the last seven commits; it is **growing**, not suppressed).
+doccheck is GREEN (`>` not `>=`), but the next session evicts on arrival. ⇒ **owner decision: raise the warn again,
+or accept per-session eviction.** ⛔ Not an agent's call, and the HARD cap stays where it is either way.
+
+---
+
 ## 2026-09-09 — the hotfix-2 sitting: the pack finally ran in a game, and every failure it reported was the instrument
 
 tags: sitting hotfix2 T1-census T1-suite F114 F115 F46 F-10 F03 F20 C47 F95 ck117 ck130 EF-079 EF-083 logscan stale-probes
