@@ -38,6 +38,10 @@ These are **meant** to upload by themselves, with nothing pasted:
 - the short summary
 - the title and tags
 - the change note
+- **the three screenshots** (new in v7: the two Rare Metals Extractor skins and the
+  MOXIE skins). On each page, check the gallery shows all three. If an upload refuses
+  them, or the Paradox description comes out cut off (it is longer than any Paradox
+  has taken before), tell the agent — the paste copies in step 3 still work.
 
 ✅ **It has worked once** — at the v6 upload (2026-09-09) both pages filled
 themselves in full with nothing pasted. Once is not a habit yet, so still do
@@ -136,6 +140,23 @@ rockets, research, storylines and the interface.
 The full list — every fix, what you would have seen, and what was actually
 wrong — is here:
 https://catt144.github.io/SMR-CommunityMods/fix-list/
+
+
+SEVEN MACHINES THAT WORKED IN SILENCE
+
+The Rare Metals Extractor's hammer, the MOXIE, the Water Extractor, Shuttle Hub
+shuttles, the RC Driller, the RC Dozer and The Excavator all had sounds or
+effects made for them that never played. They play now.
+
+Two of them also have a skin that is silent by design, so if one of these stays
+quiet, check its skin before you blame the fix:
+· Rare Metals Extractor — the hammer strikes and puffs steam; the drill never
+  strikes. NASA, SpaceY, BlueSun, Brazil, Roscosmos, Japan and ISRO colonies
+  get the drill by default.
+· MOXIE — the double-pump skin thumps and puffs; the blocky one is silent.
+
+Select the building and press Change Skin (the paintbrush on its panel) to
+switch. The screenshots on this page show which skin is which.
 
 
 STILL PLAYING ON GAME VERSION 1.0.7?
@@ -238,6 +259,16 @@ And [b]three[/b] of them repair things you cannot see at all today: real defects
 
 [b]The full list[/b] — every fix, what you would have seen, and what was actually wrong:
 [url=https://catt144.github.io/SMR-CommunityMods/fix-list/]the complete fix list[/url]
+
+[h2]Seven machines that worked in silence[/h2]
+The Rare Metals Extractor's hammer, the MOXIE, the Water Extractor, Shuttle Hub shuttles, the RC Driller, the RC Dozer and The Excavator all had sounds or effects made for them that never played. They play now.
+
+Two of them also have a skin that is [b]silent by design[/b], so if one of these stays quiet, check its skin before you blame the fix:
+[list]
+[*][b]Rare Metals Extractor[/b] — the hammer strikes and puffs steam; the drill never strikes. NASA, SpaceY, BlueSun, Brazil, Roscosmos, Japan and ISRO colonies get the drill by default.
+[*][b]MOXIE[/b] — the double-pump skin thumps and puffs; the blocky one is silent.
+[/list]
+Select the building and press [b]Change Skin[/b] (the paintbrush on its panel) to switch. The screenshots on this page show which skin is which.
 
 [h2]Still playing on game version 1.0.7?[/h2]
 This pack tracks the current version of the game. If you stayed on 1.0.7, there is a separate frozen build for it, with instructions: [url=https://catt144.github.io/SMR-CommunityMods/legacy-1-0-7/]Playing on 1.0.7[/url]

@@ -31,6 +31,7 @@ IGNORE = [
     "*AGENTS.md",
     "*.gitignore",
     "*.gitattributes",
+    "*/store_screenshots/*",
 ]
 
 # the engine hands paths with forward slashes and the content_path prefix

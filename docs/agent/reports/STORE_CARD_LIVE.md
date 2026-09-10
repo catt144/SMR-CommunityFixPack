@@ -190,6 +190,23 @@ wrong — is here:
 https://catt144.github.io/SMR-CommunityMods/fix-list/
 
 
+SEVEN MACHINES THAT WORKED IN SILENCE
+
+The Rare Metals Extractor's hammer, the MOXIE, the Water Extractor, Shuttle Hub
+shuttles, the RC Driller, the RC Dozer and The Excavator all had sounds or
+effects made for them that never played. They play now.
+
+Two of them also have a skin that is silent by design, so if one of these stays
+quiet, check its skin before you blame the fix:
+· Rare Metals Extractor — the hammer strikes and puffs steam; the drill never
+  strikes. NASA, SpaceY, BlueSun, Brazil, Roscosmos, Japan and ISRO colonies
+  get the drill by default.
+· MOXIE — the double-pump skin thumps and puffs; the blocky one is silent.
+
+Select the building and press Change Skin (the paintbrush on its panel) to
+switch. The screenshots on this page show which skin is which.
+
+
 STILL PLAYING ON GAME VERSION 1.0.7?
 
 This pack tracks the current version of the game. If you stayed on 1.0.7, there
@@ -297,6 +314,16 @@ And [b]three[/b] of them repair things you cannot see at all today: real defects
 [b]The full list[/b] — every fix, what you would have seen, and what was actually wrong:
 [url=https://catt144.github.io/SMR-CommunityMods/fix-list/]the complete fix list[/url]
 
+[h2]Seven machines that worked in silence[/h2]
+The Rare Metals Extractor's hammer, the MOXIE, the Water Extractor, Shuttle Hub shuttles, the RC Driller, the RC Dozer and The Excavator all had sounds or effects made for them that never played. They play now.
+
+Two of them also have a skin that is [b]silent by design[/b], so if one of these stays quiet, check its skin before you blame the fix:
+[list]
+[*][b]Rare Metals Extractor[/b] — the hammer strikes and puffs steam; the drill never strikes. NASA, SpaceY, BlueSun, Brazil, Roscosmos, Japan and ISRO colonies get the drill by default.
+[*][b]MOXIE[/b] — the double-pump skin thumps and puffs; the blocky one is silent.
+[/list]
+Select the building and press [b]Change Skin[/b] (the paintbrush on its panel) to switch. The screenshots on this page show which skin is which.
+
 [h2]Still playing on game version 1.0.7?[/h2]
 This pack tracks the current version of the game. If you stayed on 1.0.7, there is a separate frozen build for it, with instructions: [url=https://catt144.github.io/SMR-CommunityMods/legacy-1-0-7/]Playing on 1.0.7[/url]
 
@@ -396,6 +423,25 @@ the run saw the warning, not a death.
 **C74+C77 stays in the "… and a good deal more" tail** — cosmetic, and the skin
 caveat it needs (drill extractor and white MOXIE silent by design) does not fit
 a one-line headliner. It carries that caveat on the fix list and in `last_changes`.
+
+## ⭐ 2026-09-10 (later) — OWNER RULING: feature the silent machines + the two skins, with pictures
+
+Supersedes the "stays in the tail" call directly above. The owner asked for the card
+to **feature the sound fixes, explain the two extractors' skins, and point players at
+pictures** of them. New section **"SEVEN MACHINES THAT WORKED IN SILENCE"** between the
+fix-list link and the 1.0.7 section, in all five copies (plain ×3, BBCode ×2). Every
+sentence traces to C74/C77 (tested-attended) or the owner's screenshots: the drill
+never strikes, the blocky (CP3) MOXIE is silent, the sponsor list is C74's, "Change
+Skin" is the paintbrush button (owner's screenshots show its tooltip). The owner's
+"Water Extractor" image shows the **MOXIE** (owner confirmed) — the Water Extractor has
+no silent skin (C77 fixed both). The "screenshots on this page" are REAL: three gallery
+images now upload from `metadata.lua` `screenshot1..3` (`tools/store_screenshots.py`
+builds them; `ignore_files` keeps them out of the pack — pack_predict 50 files, 3
+IGNORED). Checked by script: `description` == UPLOAD plain; BBCode copies identical;
+this file's plain block differs only in the portal passages; count word Forty-eight ×5.
+⚠️ **Length now 6,206** (+778). Steam's cap is 8,000; **Paradox has accepted 5,342 and
+its cap is not on record** — if the Paradox page comes out cut or the upload refuses the
+text, the §3 paste backup is the route and the owner reports it (UPLOAD_WORKFLOW §2).
 
 ## Provenance of the headliners
 

@@ -32,6 +32,11 @@ player surface bumps it by one on release.
 > vNEXT"): fix-list rows (46 → 48), count word Forty-six → **Forty-eight** in all
 > five card copies, C83 headliner, `last_changes` rewritten as v7's note. ⛔ NOT
 > uploaded — these entries stay Pending until the owner confirms the listing (step 5).
+> ⭐ **Owner addition, 2026-09-10 later:** the card gains a "SEVEN MACHINES THAT WORKED IN
+> SILENCE" section (the two extractors' skins explained) and the listing gains THREE
+> gallery screenshots via `metadata.lua` `screenshot1..3` (`tools/store_screenshots.py`;
+> kept out of the pack by `ignore_files`). Description 6,206 chars — Paradox untested
+> above 5,342 (STORE_CARD_LIVE, latest section).
 
 ### Pending — C74 + C77: restore seven units' missing animation-moment FX
 

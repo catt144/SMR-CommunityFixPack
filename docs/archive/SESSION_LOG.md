@@ -8,6 +8,26 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-10 — the card features the silent machines; three store screenshots wired (`smr-bugfixpack-04`, owner in conversation)
+
+tags: store-card screenshots C74 C77 MOXIE metadata ignore_files v7
+
+The owner's folder `docs\ScreenCaptures\` had been MOVED (not lost) at ~11:40 by the C74
+sitting session because docs/ root is contract-locked — originals now in
+`C:\Dev\SMR-ScreenCaptures\c74_skins\`. The owner then made three marked-up images and asked
+the card to feature the sound fixes, explain the two extractors' skins and point at the
+images. Done: "SEVEN MACHINES THAT WORKED IN SILENCE" in all five card copies (script-checked
+lockstep), `screenshot1..3` in `metadata.lua` (uploaders: `GedModEditor.lua:687-702`,
+`ParadoxMods.lua:97-110`, Steam touches only `ModScreenshot_*`, `SteamWorkshop.lua:43-81`),
+`tools/store_screenshots.py` (JPEG under Steam's 1 MB; the PNGs were ~2 MB, one over
+Paradox's 2 MB), `*/store_screenshots/*` in `ignore_files` + pack_predict (50 packed, 3
+ignored). ⚠️ Description 6,206 chars, Paradox untested above 5,342. ⚠️ The owner's
+"Metal Extractor 1" circles the stacked-squares button, not Change Skin (the paintbrush) —
+zoom-verified; owner to fix and re-run the script before upload. The "Water Extractor" image
+is the MOXIE (owner confirmed).
+
+---
+
 ## 2026-09-10 — lookback at the owner's stop (`smr-bugfixpack-04`): what lived only in the conversation
 
 tags: lookback handoff FR-1 v7 ck144 steam-sounds-thread memory
