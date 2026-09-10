@@ -1,6 +1,7 @@
 # C74 sound sweep — every FX that waits on an animation moment (desk, both trees) — 2026-09-10
 
-Handoff `HANDOFF_DISPATCH_2026-09-10.md` §3. Desk only: 1.1.0.403908 and 1.0.7.396349
+Handoff `prompts/HANDOFF_DISPATCH_2026-09-10.md` §3 (one-shot, retired after this work; read it with
+`git show 3abe125:docs/agent/prompts/HANDOFF_DISPATCH_2026-09-10.md`). Desk only: 1.1.0.403908 and 1.0.7.396349
 source trees, read-only. Two sub-agents did the census; the coordinator re-derived
 every claim below that this report relays (see "Re-verified here"). Raw agent reports,
 verbatim: `c74_sweep/sweep_A_consumers.md`, `c74_sweep/sweep_B_fxcensus.md` (NOT

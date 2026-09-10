@@ -8,6 +8,26 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-10 — the dispatch handoff worked (`smr-bugfixpack-08`): C74 sound sweep → C77, FR-1 sitting script, handoff retired
+
+tags: dispatch C74 C77 FR-1 ck136 ck139 sweep
+
+Took `prompts/HANDOFF_DISPATCH_2026-09-10.md` (the author session `ae` acked and stood down). **§3 sweep DONE (desk,
+both trees):** two sub-agents (moment consumers; a lupa-loaded census of 2,680 / 2,876 ActionFX rows), every relayed
+claim re-derived by the coordinator. The C74 class is wider: `TrackAllMoments`, a CORRECT name-keyed tracker, is just
+as silent without presets on The Excavator (24 particles), shuttles at a hub, the Water Extractor pump, the RC
+Terraformer and the RC Driller — presets exist, samples ship (`Sounds.fpk` byte search, known-present + fabricated
+controls) → **`C77` filed (cand/source-read)**. C74 corrected: Metatron's 7 rotate sounds are unreachable (thread emits
+only `Start`/`End`), the hammer's `hit-moment4` can never fire. The 13 actor-less rows are code-fired storm FX, so the
+Electrolyzer/MicroG trackers lose nothing (answers `ae`'s caveat). Report `reports/C74_SOUND_SWEEP.md`, raw census
+`reports/c74_sweep/`. **§4:** `prompts/FR1_LINUX_SITTING.md` (`2ed4278`), adds the hybrid-laptop PRIME hazard (a
+"works" on the iGPU is vacuous). **§2a:** owner "later this session"; the MOXIE lines + the C77 readout restated in
+`bugs/C74.md` "OWED live test". **§5:** rule 15 — owner: leave it. Instrument notes: two desk runs caught real
+faults before the owner saw them (lupa's single return; the readout's `pick and pick(o) or o` silently reading the
+building when an attach was missing). ck139 grows: hammer+MOXIE only, or C77 too.
+
+---
+
 ## 2026-09-10 — dispatch session handoff (`smr-bugfixpack-ae`): what was open when the context was retired
 
 tags: handoff dispatch C74 FR-1 EF-015 EF-086 ck136 ck139
