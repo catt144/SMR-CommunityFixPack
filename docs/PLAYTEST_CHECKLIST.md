@@ -69,9 +69,25 @@ completed tests move whole to
 > the delimiter is a pack-wide instrument; but the decision should be made on
 > the real cost, not the assumed one.
 >
+> ⭐ **NEW INPUT, same day (`treediff` v1.1, `smr-bugfixpack-c3`).** Covering the
+> indented declarations forced a span rule for them, and the correct one was
+> taken: a self-closing INDENTED declaration hashes **its own line only**
+> (flag `ONE-LINE`, 275 rows) — because inside a table constructor the next
+> same-indent `end` belongs to the NEXT field, so the old behaviour would
+> re-hash a row every time a neighbour was edited. ⇒ **`INVENTORY.tsv` now
+> carries two span rules for the same syntactic shape**: an indent-0 one-liner
+> keeps the over-span (`SPAN-SUSPECT`, 133 rows), an indented one gets the
+> correct span (`ONE-LINE`, 275 rows). Both are flagged, so a reader can tell
+> them apart, and ⛔ **it cannot collide with a shipped pin — re-measured: 0 of
+> the 49 `SRC:` pins target an indented declaration**, so `luafn.py`'s
+> "never a second extractor" rule is not breached where it actually binds.
+> **What this adds to your decision:** option (b) now also removes an
+> asymmetry inside our own instrument, and option (a) means `treediff` carries
+> two rules for one shape indefinitely.
+>
 > **The options.** (a) **Leave it** — the flag plus this note is enough for the
 > chain; the defect is disclosed and bounded, but it stays in the instrument
-> every future link inherits. (b) ⭐ **Fix `luafn.py` in hotfix 3**
+> every future link inherits, alongside the two-rule asymmetry above. (b) ⭐ **Fix `luafn.py` in hotfix 3**
 > (recommended) — a narrow change, 0 shipped hashes affected, `bodycheck
 > --selftest` + `sigcheck --selftest` + the new `treediff --selftest` (which
 > PINS the current over-span behaviour on a fixture, so the change shows up as
