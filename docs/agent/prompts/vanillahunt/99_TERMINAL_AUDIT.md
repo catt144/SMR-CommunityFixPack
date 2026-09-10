@@ -561,3 +561,45 @@ was disclosed and was not counted as coverage; the only authorized 03b DLC
 body read was the directly called Norman `FarmInsect.lua:57-59`. Base routes
 do not clear DLC ownership. Terminal audit now waits only for 04 and any child
 04 declares.
+
+### From 04 — owner-rescoped file/registry/list skim, 2026-09-10
+
+04 is complete with no child queue. Audit the five one-line unit reports and
+`drill-01.md` under `reports/vanillahunt/agents/`, then TRIAGE §04. Scope is
+**944/944 units**: A 121 files, B 237, C 454, D 9 storage/file lists, E 123
+registries. This is file/registry/list-level changed-hunk coverage only, never
+per-row coverage or clearance. NOT skimmed: zero. Controls F114-F117 **4/4**;
+parent `nothing odd` reopens 10/10. Inherited SMELL routing: 345 keep/drop lines,
+7 KEEP and **338 DROP/not drilled**, all named in A/B/C.
+
+Four FILE verdicts survived central re-derivation, all cand/source-read and
+untested: **C78** Astrogeologist old-save fixup matches 20 instead of the old
+profile's 10 (DIFF-CAUSED, non-Steam migration route); **C79** exact authored
+scenario research costs are discarded for 20% (DIFF-CAUSED); **C80** elevator
+pair `GetPos` precedes its post-LeadIn validity guard (PASSING); **C81** adds
+three all-grid visible-building scans to the infobar's one-second loop
+(DIFF-CAUSED PERF, profiling-only). **C62** gained the concrete authored
+`HostageSituation_BlowUp` route but remains unprofiled PASSING P3. Checklist 141
+owns the combined fixture decision; C78 is not takeable on the owner's Steam
+install because old saves are blocked.
+
+Fourteen ranked drill bundles total: 4 FILE, 1 existing-entry amendment, 8
+REJECT, 1 native LEAD. Re-derive especially the rejected R08311 route:
+`RocketCompatibility.lua:950-975` converts all shipped old rocket classes before
+the bad legacy funding caller can run. Other main rejects: deliberate
+`GetTransportRoute` fallback booleans; no base `ActionObj` preset; no Seeds-
+accepting MultiResourceDepot; no F118 child-only deactivate caller; explicit
+RC-Dozer-only landscaping; uncalled/commented Paradox API bodies.
+
+FR-1: MapGen/native changes remain a LEAD, double-resume refuted by reason-set
+semantics; AA-Off/FXAA reports refute the upscaler trigger. FR-2 route remains
+connected and probes separately require AdaptedProbes; report open. FR-3: C81
+and C62 are profiling-only and cannot explain the pre-1.1 report. No field report
+was closed.
+
+Drift for audit: R08311 looked fileable until the conversion fixup killed its
+route. Upstream's `GetEnvironment(City)` concern missed City → Object → CObject;
+current `ResolveMap` accepts that game object, so 04 REJECTED it. During filing,
+the owner's C77/checklist/index edits appeared, landed as `a842043`, and 04
+waited/pulled before entering those paths. Blind spots: native crashes/timing,
+assets outside Src, actual execution, dynamic callers and DLC bodies.

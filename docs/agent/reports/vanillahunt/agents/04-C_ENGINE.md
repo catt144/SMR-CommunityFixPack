@@ -1,0 +1,681 @@
+# 04-C skim — engine and UI
+
+Banner: plan brief `41672f1`; units given: 364 inventory-bearing files + 90 NOROWS files; date: 2026-09-10.
+
+This is a file-level changed-hunk skim. `nothing odd` is not a row audit or a claim that a file is safe.
+
+## Loader-route notes
+
+- `CommonLua` top-level, `Modding`, `Classes`, `Features`, `UI`, and `X`: shipped runtime; `CommonLua/Core/autorun.lua:355-360` loads those folders.
+- `CommonLua/Ged`: shipped and loaded unconditionally at `Core/autorun.lua:369`; a GED-oriented name is not grounds to skip it.
+- `CommonLua/Editor`: shipped runtime load when not in GED at `Core/autorun.lua:371-373`; no directory-name-only exclusion was used.
+- `CommonLua/Libs/*`: conditional shipped libraries selected from `LibsList` and loaded at `Core/autorun.lua:396-407`; MapGen is separately connected to the new-game route. `DevToolsPrivate`'s explicit helpers are dev+cmdline-only at `:376-379`.
+- `CommonLua/Data`: preset data loaded by `CommonLua/Dlc.lua:645-646`; registry interpretation is reported in 04-E.
+
+## Skim table
+
+- `CommonLua/Billboards.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Braze.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Camera.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/CanonizeFilename.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Classes/Achievement.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Classes/ActionFX.lua` — FLAG: appended `action_pos` reaches the new `ActionObj` source (old `GetLocObj:1245`, current `:1318`), but destroy/follow callers at current `:2052/:2821/:3967` omit it. Drilled: REJECT for shipped data; no base `ActionObj` preset exists.
+- `CommonLua/Classes/AnimMoment.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Classes/AnimMomentHook.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Classes/AppearanceObject.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Classes/AutoAttach.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Classes/BaseObjects.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Classes/CharacterControl.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Classes/ClassDef.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Classes/ClassDefFunctionObjects.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Classes/ClassDefSubItem.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Classes/ClassDefs/ClassDef-Common.generated.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Classes/ClassDefs/ClassDef-Config.generated.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Classes/ClassDefs/ClassDef-Default.generated.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Classes/ClassDefs/ClassDef-PresetDefs.generated.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Classes/CodeRenderableObject.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Classes/CollectionAnimator.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Classes/Colorization.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Classes/ColorizationInheritable.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Classes/CommandObject.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Classes/Common.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Classes/Components.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Classes/Composite.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Classes/Context.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Classes/ContinuousEffect.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Classes/EditorBase.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Classes/EntityClass.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Classes/Explanation.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Classes/FXPreset.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Classes/GameEffect.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Classes/GedModEditor.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Classes/JSONSocket.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Classes/Light.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Classes/Lightmodel.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Classes/MapData.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Classes/ModifiableInstances.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Classes/Modifiers.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Classes/ObjContainer.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Classes/ObjModule.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Classes/OutsiderObjects.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Classes/Particles/ParticleBehavior.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Classes/Particles/ParticleEmitter.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Classes/Particles/ParticleOrientation.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Classes/Particles/ParticleSystemPreset.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Classes/PassTypeObj.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Classes/Player.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Classes/RangeVisuals.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Classes/ReasonSetters/ContourReason.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Classes/ReasonSetters/OpacityReason.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Classes/RenderFeaturesParams.lua` — FLAG/LEAD FR-1 — current adds large NRD/REBLUR parameter tables absent in old; no Lua writer establishing a new-game Proton crash was found.
+- `CommonLua/Classes/ReverbParams.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Classes/ScriptObj.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Classes/ScriptRandom.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Classes/ScriptSetCommand.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Classes/Socket.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Classes/SoundDummy.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Classes/Sounds.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Classes/StateTriggerSource.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Classes/TerrainConfig.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Classes/TunnelMarker.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Classes/UnitComponent.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Classes/XDef/AmountControl.generated.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Classes/XDef/BugReport.generated.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Classes/XDef/CommonMessageDialog.generated.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Classes/XDef/CommonShortcuts.generated.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Classes/XDef/EULADialog.generated.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Classes/XDef/EditorShortcuts.generated.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Classes/XDef/PresetEditDef.generated.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Classes/XDef/PropChoice.generated.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Classes/XDef/SelectionEditorDlgUI.generated.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Classes/_cobject.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Classes/_object.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Classes/collection.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Classes/marker.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Classes/particles.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Connectivity.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Core/ConstDef.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Core/GlobalStorageTables.lua` — FLAG FR-1 render surface — changed defaults feed current render setup; AA Off/FXAA reports falsify the upscaler trigger.
+- `CommonLua/Core/ParseCSV.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Core/Postprocessing.lua` — FLAG/LEAD FR-1 — current adds conditional FilmGrain passes; no source route to process death was established.
+- `CommonLua/Core/ProceduralMeshShaders.lua` — FLAG/LEAD FR-1 — current adds SkyObject shader setup; native shader behavior is outside the Lua archive.
+- `CommonLua/Core/Terrain.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Core/ToLuaCode.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Core/asyncop.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Core/autorun.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Core/classes.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Core/config.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Core/const.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Core/cthreads.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Core/error.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Core/lib.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Core/localization.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Core/locutils.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Core/luaDebuggerOutput.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Core/luadebugger.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Core/map.lua` — FLAG FR-1 falsifier — current `SuspendPartialPassEdits:641-645` / `ResumePartialPassEdits:646-652` use a reason set, proving the second MapGen resume is idempotent rather than a count underflow.
+- `CommonLua/Core/mount.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Core/options.lua` — FLAG FR-1 render surface — current TAA auto-selection invokes temporal capability probes; affected players also crash with AA Off/FXAA, so this trigger is REJECTED.
+- `CommonLua/Core/persist.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Core/terminal.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Core/types.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Data/LightmodelFeaturePreset.lua` — FLAG/LEAD FR-1 — current adds FilmGrain feature presets; no crash mechanism was established.
+- `CommonLua/Data/MsgDef.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Data/PersistedRenderVars.lua` — FLAG/LEAD FR-1 — current adds construction/render persistence fields; source does not connect them to the Linux crash.
+- `CommonLua/Data/PropertyCategory.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Data/TerrainObj.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Data/XDef/AmountControl.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Data/XDef/BugReport.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Data/XDef/CommonMessageDialog.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Data/XDef/CommonShortcuts.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Data/XDef/EULADialog.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Data/XDef/EditorShortcuts.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Data/XDef/GedArtSpecEditor.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Data/XDef/GedAutoAttachEditor.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Data/XDef/GedCharacterBrowser.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Data/XDef/GedMapPatchEditor.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Data/XDef/GedPopupList.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Data/XDef/GedPropRollover.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Data/XDef/GedPropertyButton.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Data/XDef/GedScriptEditor.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Data/XDef/GedShortcuts.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Data/XDef/GedStatusBar.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Data/XDef/ModEditor.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Data/XDef/PresetEditDef.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Data/XDef/PresetEditor.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Data/XDef/PrgEditor.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Data/XDef/PropChoice.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Data/XDef/SceneImportEditor.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Data/XDef/SelectionEditorDlgUI.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Data/XDef/StdItemChoiceDialogBase.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Data/__SceneParamDef.lua` — FLAG/LEAD FR-1 — current adds FilmGrain and moon scene parameters; no harmful value/consumer contradiction found.
+- `CommonLua/Data/__const.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Editor/AnimationMomentsEditor.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Editor/ArtSpecEditor.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Editor/EditorGame.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Editor/MapPatchData.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Editor/MapPatchState.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Editor/PropertyHelpers.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Editor/XEditor/MoveGizmo.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Editor/XEditor/XAreaCopyTool.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Editor/XEditor/XClutterDensityBrush.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Editor/XEditor/XEditor.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Editor/XEditor/XEditorBrushTool.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Editor/XEditor/XEditorCallbacks.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Editor/XEditor/XEditorFilters.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Editor/XEditor/XEditorObjectPalette.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Editor/XEditor/XEditorSelection.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Editor/XEditor/XEditorSettings.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Editor/XEditor/XEditorTool.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Editor/XEditor/XEditorUndo.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Editor/XEditor/XEnrichTerrainTool.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Editor/XEditor/XMapGenArea.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Editor/XEditor/XMapGridAreaBrush.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Editor/XEditor/XPlaceMultipleObjectsToolBase.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Editor/XEditor/XPlacePrefabBrush.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Editor/XEditor/XSelectObjectsTool.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Editor/XEditor/XTerrainTypeBrush.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Editor/XEditor/XTwoPointAttachHelper.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Editor/collection.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Editor/editor.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/EventLog.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/FXSource.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Features/Formula.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Features/GameRules.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Features/GameState.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Features/LockablePreset.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Features/ModifierDef.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Features/ScriptVars.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Features/TrackedValues.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Game.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Ged.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Ged/GedApp.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Ged/GedCreateSubItemsPopup.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Ged/GedPanel.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Ged/GedPropEditors.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Ged/LogViewer.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Ged/XDefClasses/GedArtSpecEditor.generated.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Ged/XDefClasses/GedAutoAttachEditor.generated.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Ged/XDefClasses/GedCharacterBrowser.generated.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Ged/XDefClasses/GedMapPatchEditor.generated.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Ged/XDefClasses/GedPopupList.generated.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Ged/XDefClasses/GedPropRollover.generated.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Ged/XDefClasses/GedPropertyButton.generated.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Ged/XDefClasses/GedScriptEditor.generated.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Ged/XDefClasses/GedShortcuts.generated.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Ged/XDefClasses/GedStatusBar.generated.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Ged/XDefClasses/ModEditor.generated.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Ged/XDefClasses/PresetEditor.generated.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Ged/XDefClasses/PrgEditor.generated.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Ged/XDefClasses/SceneImportEditor.generated.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Ged/XDefClasses/StdItemChoiceDialogBase.generated.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/GedEditedObject.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/GedGameObjectEditor.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/GedMultiSelectAdapter.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/GedOps.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Gossip.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/InfiniteLoops.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/InheritPreset.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/LabelContainer.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Libs/DebugAdapter/DebugAdapter.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Libs/DevToolsPublic/Classes/XDef/DevToolsShortcuts.generated.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Libs/DevToolsPublic/Classes/XDef/ForceTimeOfDay.generated.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Libs/DevToolsPublic/Data/XDef/DevToolsShortcuts.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Libs/DevToolsPublic/Data/XDef/ForceTimeOfDay.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Libs/DevToolsPublic/EntityViewer.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Libs/DevToolsPublic/FileSystemChanged.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Libs/DevToolsPublic/GFXMaterial.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Libs/DevToolsPublic/PathDebug.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Libs/DevToolsPublic/SceneImport.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Libs/DevToolsPublic/TerrainGridInspect.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Libs/DevToolsPublic/WindDebug.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Libs/DevToolsPublic/debug.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Libs/MapGen/Biome.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Libs/MapGen/BiomeFiller.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Libs/MapGen/BiomeZdit.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Libs/MapGen/Data/MapGen/MapGen-Default.lua` — FLAG/LEAD FR-1 — added/changed map-generation pass definitions feed the new current `MapGen:ApplyPass`; absent on this route in 1.0.7. Native Proton behavior remains unmeasured.
+- `CommonLua/Libs/MapGen/Data/MapGen/MapGen-SubProc.lua` — FLAG/LEAD FR-1 — new subprocess pass definitions on the new-game map-generation route; no Lua contradiction found after drill.
+- `CommonLua/Libs/MapGen/Data/MapGen/MapGen-Tools.lua` — FLAG/LEAD FR-1 — new map-generation tooling call surface; no source-level harmful argument established.
+- `CommonLua/Libs/MapGen/Data/__const.lua` — FLAG/LEAD FR-1 — new MapGen constants configure the changed pass path; no source-level crash mechanism established.
+- `CommonLua/Libs/MapGen/EnvironmentSounds.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Libs/MapGen/EnvironmentVisuals.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Libs/MapGen/GridOps.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Libs/MapGen/MapGen.lua` — FLAG/LEAD FR-1 — new `MapGen:ApplyPass:1153-1161` invokes native pass/collision operations on the new-game path and resumes the same reason twice after one suspend. Drilled: the duplicate resume is idempotent by `Core/map.lua:641-652`; native crash behavior is not source-visible.
+- `CommonLua/Libs/MapGen/PlacePrefabMarker.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Libs/MapGen/PrefabMarker.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Libs/MapGen/PrefabMarkerEdit.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Libs/MapGen/XBiomeBrush.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Libs/Network/Network.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Libs/Network/NetworkSync.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Libs/Notifications/Classes/XDef/DefaultNotification.generated.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Libs/Notifications/Data/XDef/DefaultNotification.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Libs/Notifications/LabelNotificationPreset.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Libs/Notifications/NotificationPreset.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Libs/Notifications/NotificationUI.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Libs/Notifications/Notifications.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Libs/Notifications/ParentNotificationPreset.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Libs/Notifications/StatusNotificationPreset.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Libs/Objectives/Data/MsgDef.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Libs/Objectives/Data/__load.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Libs/Paradox/Classes/XDef/ParadoxAccountDialog.generated.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Libs/Paradox/Classes/XDef/ParadoxUIActionBars.generated.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Libs/Paradox/Data/XDef/ParadoxAccountDialog.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Libs/Paradox/Data/XDef/ParadoxAccountLogIn.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Libs/Paradox/Data/XDef/ParadoxAccountSignUp.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Libs/Paradox/Data/XDef/ParadoxUIActionBars.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Libs/Paradox/ParadoxModManager.lua` — FLAG: current `GetAuthorThirdPartyAccountLink:220-230` reads undefined `mod_details`; `AsyncResolveThirdPartyAccountLink:383-400` reads undefined `self`. Drilled: REJECT for shipped reach—no live caller to the first, and the only resolver call at `:460-468` is commented out.
+- `CommonLua/Libs/Paradox/ParadoxMods.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Libs/Paradox/PdxSDK.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Libs/Research/Research.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Libs/Resources/Data/ClassDef-Resources.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Libs/Resources/ResInventory.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Libs/Resources/ResStorage.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Libs/Resources/Resources.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Libs/Sequences/SceneActor.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Libs/Sequences/SequenceAction.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Libs/TriggersAndEvents/Classes/XDef/XEventDialog.generated.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Libs/TriggersAndEvents/Data/XDef/XEventDialog.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Libs/TriggersAndEvents/Events.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Libs/TriggersAndEvents/Interactions.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Libs/TriggersAndEvents/PopupMessage.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Libs/TriggersAndEvents/ScriptEvents.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Libs/TriggersAndEvents/Triggers.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Libs/Tutorial/Data/XDef/TutorialHintPopup.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Libs/Tutorial/Data/XDef/TutorialListEntry.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Libs/Tutorial/Data/__load.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Libs/__DebugAdapter.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Libs/__DevToolsPrivate.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Libs/__DevToolsPublic.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/LuaExportedDocs/Game/GameObject.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/LuaExportedDocs/Game/MapQueries.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/LuaExportedDocs/Global/LuaExports.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/LuaExportedDocs/Global/collision.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/LuaExportedDocs/Global/point.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/LuaExportedDocs/Global/table.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Movable.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/NonDevStubs.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/OptionsObject.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Patterns.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/PhotoMode.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Platforms/steam/SteamGame.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Preset.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/PresetConnection.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/PresetDLCSplitting.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/PresetDef.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/PresetParam.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/PresetTemplate.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/PresetWithExclusivity.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/PresetWithTags.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/PrgPreset.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/PropMeta.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/PropertyObject.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/PropertyObjectContainers.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/PropertyObjectWarningsCache.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Reactions.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Savegame.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/SavegameFixup.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/SavegameMetadata.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/ScriptBasics.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Scripting.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/ScriptingTypes.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Selection.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/SetpiecePrg.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/SetpieceStatements.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/StatusObject.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/TFormat.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/TableParentCache.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/TaskRequest.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/ThreePointLighting.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/UI/Dev/uiConsole.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/UI/Dev/uiRenderDebugForceMode.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/UI/DeveloperInterface.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/UI/FloatingText.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/UI/InGameInterface.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/UI/LoadingScreen.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/UI/ModManager.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/UI/ObjectAttachedUIs.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/UI/PluginUIs.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/UI/SaveLoadUI.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/UI/SelectionEditorDlg.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/UI/SplashScreen.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/UI/StdDialogs.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/UI/StdItemChoiceDialog.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/UI/tips.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/UI/uiScale.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/UI/uiXBugReportDlg.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/UI/xinput.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Voice.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/VolumetricLighting.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Water.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/Wind.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/X/XActions.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/X/XButton.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/X/XColorPicker.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/X/XCombo.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/X/XControl.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/X/XDef.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/X/XDialog.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/X/XDialogCabinet.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/X/XFrame.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/X/XHistogram.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/X/XImage.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/X/XLabel.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/X/XLayers.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/X/XLayouts.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/X/XList.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/X/XMap.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/X/XPresetMap.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/X/XPrg.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/X/XPrgAmbientLife.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/X/XRollover.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/X/XScroll.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/X/XShaderEffect.lua` — FLAG/LEAD FR-1 — current adds a shader-effect editor setting; loader makes X runtime, but this setting did not supply the crash route.
+- `CommonLua/X/XShortcuts.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/X/XTemplate.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/X/XText.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/X/XTextEditor.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/X/XTextEditorPlugins.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/X/XTextParser.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/X/XTree.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/X/XWindow.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/_EntityData.generated.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/_Stubs.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/clutter.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/collision.lua` — nothing odd in the file-level changed-hunk skim.
+- `CommonLua/gamelib.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/ModItemBuildingTemplate.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Camera.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Cheats.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Config/Libs/Network.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Config/_config.lua` — FLAG FR-1 config surface — startup/config changes were skimmed; no candidate route survived.
+- `Lua/Config/_libs.lua` — FLAG FR-1 loader surface — current library set controls MapGen/render loading; no wrong library gate found.
+- `Lua/Config/_pfclasses.lua` — FLAG FR-1 config surface — current pathfinding-class table is new; no source-level crash mechanism found.
+- `Lua/Config/camera.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Config/pathfind.lua` — FLAG FR-1 config surface — changed native pathfinding settings were skimmed; no invalid value was established.
+- `Lua/Config/render.lua` — FLAG FR-1 render surface — current adds shadow `hr` values and removes old time-of-day values; no Linux-specific or new-game-only contradiction found.
+- `Lua/CrashTest.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Decor.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Dev/GameTests.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Dev/MapTools.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Dev/fixup.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/EpicDlcIds.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/FadingDecal.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/FollowCamera.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/GameOverlays.lua` — FLAG/PERF consumer — current `CountVisibleBuildings:205-226` walks every producer/consumer/storage reference per grid; `RefreshMostVisibleGrid:258-263` calls it for each grid list. Drilled with Infobar into C81.
+- `Lua/GameRandom.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/GamepadTerrainObjects.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Hints.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Lightmodel.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/LocalizationTexts.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/MapData.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/MapSwitch.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/MarsMarkers.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/MarsNotifications.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Mod.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/ModItemAttachment.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/ModItemTech.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/NightLightObjects.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/PhotoMode.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/ProjectOptions.lua` — FLAG FR-1 render surface — project option changes were skimmed; no source-level trigger survived.
+- `Lua/RandomMap/RandomMapGenerator.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/RandomMap/RandomMapGenerator_Asteroids.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/RandomMap/RandomMapGenerator_Picard.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/RichPresence.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/SelectionParticle.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Stubs.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Telemetry.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/UI/Encyclopedia.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/UI/GamepadCursor.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/UI/InGameInterface.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/UI/InterfaceModeDialog.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/UI/LoadingScreen.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/UI/MarsGamepad.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/UI/OnScreenIndication.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/UI/OnScreenNotification.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/UI/OverviewModeDialog.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/UI/PlanetScene.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/UI/PlanetUI.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/UI/PopupNotification.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/UI/PreGameMenus.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/UI/SaveLoad.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/UI/SelectionArrow.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/UI/SelectionModeDialog.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/X/BuildMenu.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/X/ColonyControlCenter.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/X/HUD.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/X/HUDNotifications.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/X/HexMenuButton.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/X/Infobar.lua` — FLAG/PERF R11086 — current `UpdateContext:30-35` adds three `RefreshMostVisibleGrid` scans to the pre-existing one-second loop (old `:30-40`, current `:30-43`). Drilled: FILE C81, DIFF-CAUSED profiling candidate.
+- `Lua/X/Infopanel.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/X/InfopanelItems.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/X/ItemsMenu.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/X/OnScreenHintDlg.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/X/PinsDlg.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/X/ResourceItems.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/X/XActionBar.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/X/XBlinkingButton.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/X/XCreditsWindow.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/X/XFoldedList.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/X/XLayers.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/X/XPGMission.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/X/XRenameControl.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/X/XSplashScreen.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/XTemplates/ModsUIDialog.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/XTemplates/ModsUIMainContent.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/XTemplates/ModsUIModDetails.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/XTemplates/ModsUIPCGamepadSearch.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/XTemplates/PGMainMenu.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/_init.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/error.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/init.lua` — nothing odd in the file-level changed-hunk skim.
+
+## Ranked flags and drills
+
+1. `Lua/X/Infobar.lua` + `Lua/GameOverlays.lua` — FILE C81: three new all-grid visibility scans run every second while the HUD is open; profiling-only P3.
+2. FR-1 MapGen/native set — LEAD: highest Lua-visible suspect class, but duplicate resume is refuted by reason-set semantics and the crash remains native/unobserved. Use `prompts/FR1_LINUX_SITTING.md`.
+3. FR-1 render/config set — LEAD/REJECT mix: temporal upscaler trigger refuted by affected AA-Off/FXAA players; NRD/shader/native surfaces remain unmeasured.
+4. `ActionFX.lua` omitted `action_pos` — REJECT for base data; no shipped `ActionObj` preset.
+5. `ParadoxModManager.lua` broken-looking globals — REJECT for shipped reach; one API is uncalled and the other call block is commented.
+6. `InfobarObj:ShouldShowDiscoveredDeposits` passing `City` to `GetEnvironment` — REJECT: `City` inherits `Object`/`CObject`, and current `ResolveMap` accepts a game object.
+
+## SMELL keep/drop
+
+- R00025 — KEEP: promoted to a ranked drill above (ActionFX REJECT; Infobar FILE C81).
+- R00030 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R00125 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R00163 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R00256 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R00257 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R00267 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R00278 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R00320 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R00323 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R00365 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R00369 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R00531 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R01023 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R01082 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R01094 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R01196 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R01216 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R01233 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R01239 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R01247 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R01261 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R01276 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R01280 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R01287 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R01296 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R01299 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R01317 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R01322 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R01339 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R01348 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R01362 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R01418 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R01421 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R01438 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R01450 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R01457 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R01462 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R01466 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R01469 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R01470 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R01472 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R01491 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R01499 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R01507 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R01557 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R01597 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R01623 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R01624 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R01628 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R01629 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R01693 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R01731 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R01759 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R01790 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R01810 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R01811 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R01814 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R01832 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R01833 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R01857 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R01863 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R01866 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R01875 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R01904 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R01906 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R01925 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R01936 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R01938 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R01939 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R01940 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R01948 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R01949 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R01967 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R01968 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R02011 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R02038 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R02041 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R02043 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R02047 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R02064 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R02100 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R02109 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R02122 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R02130 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R02131 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R02142 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R02143 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R02144 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R02152 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R02153 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R02162 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R02178 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R02180 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R02182 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R02183 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R02193 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R02194 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R02202 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R02209 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R02224 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R02231 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R02247 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R02262 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R02263 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R02278 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R02302 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R02385 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R02388 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R02390 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R02415 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R02446 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R03024 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R03060 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R03198 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R03200 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R03201 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R03209 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R03224 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R03243 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R03261 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R03274 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R03280 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R03297 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R03305 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R03318 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R03322 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R03344 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R03345 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R03346 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R03367 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R03373 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R03398 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R03499 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R03501 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R03505 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R03543 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R03544 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R03545 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R03550 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R03554 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R03558 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R03559 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R03560 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R03561 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R03562 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R03574 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R03612 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R03627 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R03628 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R07748 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R08429 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R08430 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R08992 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R09002 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R09008 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R10157 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R10167 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R10188 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R10209 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R10216 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R10225 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R10979 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R10984 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R10985 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R10990 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R10991 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R10993 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R10997 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R11002 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R11005 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R11014 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R11016 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R11019 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R11020 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R11026 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R11046 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R11048 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R11066 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R11068 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R11075 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R11082 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R11086 — KEEP: promoted to a ranked drill above (ActionFX REJECT; Infobar FILE C81).
+- R11087 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R11127 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R11143 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R11145 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R11150 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R11157 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R11158 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R11166 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+
+## Limits and control
+
+- NOT skimmed: none of the 454 assigned file units.
+- Flagged, not drilled: the 189 SMELL rows marked DROP above; all named file flags were drilled or explicitly retained as FR-1 native leads.
+- Parent reopen sample: `CommonLua/Patterns.lua` and `Lua/X/XLayers.lua`, 2/2 still `nothing odd` at file-level depth.
+- Positive controls: none assigned to C; combined A+B score remains 4/4.
+

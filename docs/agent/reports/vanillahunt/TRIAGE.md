@@ -930,31 +930,99 @@ completion, Sugar/Spices flight-list registration, and DLC Techs' data shape.
 Base routes do not clear DLC overrides. No field report was closed; 99 now
 waits only for 04 and any child 04 declares.
 
-## §04 · File-level skim and ranked drill-downs (plan, 2026-09-10)
+## §04 · File-level skim and ranked drill-downs (complete, 2026-09-10)
 
-SOURCE plan: link 04 is the owner-rescoped file/registry/list skim in
-`prompts/vanillahunt/04_HUNT.md`; it does not split and does not create a
-per-row coverage ledger. The installed-build pin was re-read before work:
-`appmanifest_3215050.acf` still says build `24995074`. `git pull --ff-only`
-reported current, the worktree was clean, and no peer agent was active.
+SOURCE scope: the owner-rescoped file/registry/list skim, not an exhaustive row
+read. Installed build `24995074` still matched the 1.1.0 archive. The five
+durable reports and the central drill report are in
+`reports/vanillahunt/agents/`; no child task or continuation exists.
 
-The durable units are five reports under `reports/vanillahunt/agents/`: A turf
-(112 inventory-bearing files plus the 9 named NOROWS files), B colony (231 plus
-6 NOROWS), C engine/UI (364 plus 90 NOROWS, with loader-route notes), D the
-storage and removed/added lists, and E 123 preset registries. Each report gives
-one line per unit, ranked flags, required SMELL keep/drop lines where applicable,
-and a named NOT-skimmed list. Leads are drilled first; remaining flags are ranked
-by likely player harm and the combined drill budget is about 25. Every surviving
-FILE verdict is re-derived centrally before filing.
+| unit | skimmed | flagged files/registries/lists | parent reopen |
+|---|---:|---:|---:|
+| A turf | 121/121 (112 inventory-bearing + 9 NOROWS) | 7 | 2/2 |
+| B colony | 237/237 (231 + 6 NOROWS) | 13 | 2/2 |
+| C engine/UI | 454/454 (364 + 90 NOROWS) | 25 | 2/2 |
+| D storage/files lists | 9/9 | 1 | 2/2 |
+| E preset registries | 123/123 | 8 | 2/2 |
+| **total** | **944/944 units** | **54** | **10/10** |
 
-Live todo (exactly one item is in progress):
+The one-line units are file/registry/list-level changed-hunk judgements only;
+`nothing odd` is not a safety claim or per-row coverage. NOT skimmed: **none**.
+The 345 inherited SMELL rows received explicit keep/drop routing: A 2 KEEP / 62
+DROP, B 3/87, C 2/189. The **338 DROP rows are the complete flagged-not-drilled
+list**, named individually in the reports. Every promoted file flag was drilled
+or retained as a native FR-1 lead.
 
-- **IN PROGRESS:** leads pass — FR-1 MapGen/render, eight F117-shape callers,
-  R08311, and the carried F95/research/C62/R11004/F118/EF-083 questions.
-- pending: skim A — turf, retired-fix neighbourhoods, and 64 SMELL decisions.
-- pending: skim B — colony, fixup/load bodies first, and 90 SMELL decisions.
-- pending: skim C — loader routing, engine/UI, NOROWS, and 191 SMELL decisions.
-- pending: skim D — moved storage plus removed/added files.
-- pending: skim E — 123 registries, high-risk registries first.
-- pending: ranked drill-down batch and central FILE verification/filing.
-- pending: controls, FR-1/FR-2/FR-3 synthesis, 99 outbox, gates, close-out.
+Central work used **14 ranked drill bundles**: **4 FILE** (C78-C81), **1 existing
+entry amendment** (C62), **8 REJECT**, **1 native LEAD**. `drill-01.md` has both
+trees, routes, falsifiers, recipes and vacuity. Findings, all untested:
+
+- **C78, DIFF-CAUSED, P2:** Astrogeologist's new old-save fixup matches 20%,
+  while 1.0.7 serialized ten 10% modifiers; the old effects survive before the
+  new profile applies. Supported non-Steam old-save route; Steam blocks it.
+- **C79, DIFF-CAUSED, P2:** `ChangeResearchCost(points)` now discards `points`
+  for a constant 20% boost, while shipped scenario actions still author exact
+  3,000–90,000 costs.
+- **C80, PASSING, P2:** after asynchronous elevator lead-in, both trees call
+  `self.other:GetPos()` before checking whether the pair was destroyed.
+- **C81, DIFF-CAUSED PERF, P3:** the infobar adds three all-grid visible-building
+  scans to its one-second loop; source establishes work, not meaningful cost.
+- **C62, PASSING, P3:** `HostageSituation_BlowUp` supplies the previously missing
+  concrete authored route to the unused `buildings_hit` allocation.
+
+Principal rejections: current `RocketCompatibility.lua:950-975` converts every
+shipped legacy rocket, so R08311's real contract mismatch has no base route;
+`GetTransportRoute` booleans implement deliberate staged fallback; no shipped
+`ActionObj` FX preset needs the omitted `action_pos`; no current multi-resource
+depot accepts Seeds; F118 has no vanilla child-only deactivate route; the new
+landscape contract explicitly blocks/no-ops drones. Paradox mod-manager's two
+undefined-global bodies are uncalled/commented dead API. The upstream
+`GetEnvironment(City)` concern was corrected: City inherits Object/CObject, an
+accepted `ResolveMap` game-object input. This correction is routed to 99.
+
+### 04 controls
+
+All four hidden positives were FLAGGED: F114 `Train:UnloadAll`, F115
+`LandscapeForEachUnit`, F116 `TrackGridElement:DemolishAndSplitTrack`, F117
+`ChooseDome` — **4/4**. Ten deterministic `nothing odd` reopens (two per report)
+agreed **10/10** at the same skim depth; their names are in A-E.
+
+### FR-1 — Linux new-game crash
+
+MapGen's changed data set and new native-facing `MapGen:ApplyPass` were drilled
+first. The suspected double resume is refuted: current
+`CommonLua/Core/map.lua:641-652` tracks reasons as set keys. TAA/upscaler,
+NRD/REBLUR, FilmGrain, shader,
+lightmodel, scene-param and render/config surfaces were skimmed; affected
+AA-Off/FXAA players refute the temporal-upscaler trigger. The new MapGen/native
+surface remains the strongest Lua-visible **LEAD**, but source cannot locate a
+Proton process crash. No FILE; field report open. The owner-machine discriminator
+in `prompts/FR1_LINUX_SITTING.md` outranks this source read.
+
+### FR-2 — deep scanning
+
+04 re-skimmed Exploration/probe files and the relevant Tech/TechPreset/action
+registries. Both trees connect sector deep-scan status to deep-marker reveal
+(old `Lua/Exploration.lua:251-262`, current `:256-267`); orbital probes in both
+trees separately require `AdaptedProbes` (old/current
+`Lua/OrbitalProbe.lua:66,94-97`). No 04 flag broke that route. This does not
+reproduce or close the
+intermittent player report; no FILE.
+
+### FR-3 — stutter
+
+C81 is the only new 04 PERF filing: three new one-second grid/building scans.
+C62's PASSING explosion allocation remains profiling-only. Other short-cadence
+shapes did not survive route/rank drills. Neither can explain a report predating
+1.1.0, and no source read measures frame time. FR-3 remains open.
+
+### 04 drift and limits for 99
+
+The initial plan commit said the worktree was clean; during filing the owner's
+C77/checklist/index lane became dirty and then landed as `a842043`. 04 waited,
+pulled, and resumed only after it was clean; explicit path commits remain
+required. The R08311 lead was initially considered fileable until the conversion
+fixup falsified its route. Upstream's City concern said no direct `City:GetMap*`
+method; the missed inheritance through `Object`/`CObject` corrects that premise.
+Blind spots remain: native timing/crashes, assets outside Src, dynamic callers,
+actual execution, and DLC bodies. The 338 dropped SMELL flags were not drills.

@@ -1,0 +1,354 @@
+# 04-B skim — colony
+
+Banner: plan brief `41672f1`; units given: 231 inventory-bearing files + 6 NOROWS files; date: 2026-09-10.
+
+This is a file-level changed-hunk skim. Fixup/load bodies were ranked first. `nothing odd` is not a safety or row-coverage claim.
+
+## Skim table
+
+- `Lua/Achievements.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/AmbientLife/Visittable1.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/ApplicantsPool.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/AsteroidSkirt.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Asteroids.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Bombardment.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/BuildableGrid.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/AncientArtifact.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/AncientArtifactInterface.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/Anomaly.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/Arcology.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/ArtWorkshop.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/ArtificialSun.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/AsteroidCatcher.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/AutoMode.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/Banner.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/BaseBuilding.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/BaseRover.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/BioroboticsWorkshop.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/BottomlessPit.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/BottomlessPitResearchCenter.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/Building.lua` — FLAG: C62 — `Building:BlowUp` allocates/fills unread `buildings_hit` in both trees (old `:3428/:3464`, current `:3611/:3656`). Drilled: FILE amendment; Hostage Situation now supplies a concrete authored route.
+- `Lua/Buildings/BuildingComponents.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/BuildingSigns.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/CargoTransporter.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/CaveInRubble.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/CloningVats.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/ColdSensitive.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/Community.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/ConstructionSite.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/CorporateOffice.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/CrystalStatue.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/Decoration.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/DefenceTower.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/Deposit.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/Dome.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/DomeOutskirtBld.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/Dome_Entrance.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/DroneControl.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/DustGenerator.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/EffectDeposit.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/Elevator.lua` — FLAG: R05943 — both trees read `self.other:GetPos()` before the immediately following validity check (old `:857-858`, current `:952-953`). Drilled: FILE C80, PASSING destruction race.
+- `Lua/Buildings/Factory.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/Farm.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/ForeignTradeRocket.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/GameDeveloper.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/Hotel.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/JumboCave.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/LanderRocket.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/LandscapeLake.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/LowGLab.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/MDSLaser.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/MarsReservation.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/MartianAssembly.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/MartianUniversity.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/MedicalCenter.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/MegaMall.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/MicroGHabitat.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/MonumentOfMarsLiberty.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/NaturalHabitat.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/NetworkNode.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/OmegaTelescope.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/OpenAirBuilding.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/OpenAirGym.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/OpenCity.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/OutsideBuildingWithShifts.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/PlanetaryAnomaly.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/Plant.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/ReconCenter.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/ResearchLab.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/Residence.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/RocketBase.lua` — FLAG: R08311 caller — current `FlyToEarth:966` still omits `res_id` versus old `:968`, but only the retired legacy class inherits it. Drilled: REJECT after `RocketCompatibility.lua:950-975`.
+- `Lua/Buildings/RocketBuildingBase.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/RocketExpedition.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/RocketUtilities.lua` — FLAG: R08311 reach check — current `GetRocketClass:430-433` defaults new games to `UniversalRocket`, whose export code supplies resource ids. Drilled: REJECT.
+- `Lua/Buildings/Sanatorium.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/School.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/SchoolSpire.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/SecurityStation.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/SensorTower.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/Service.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/ShiftsBuilding.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/ShuttleHub.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/SolarPanel.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/SpaceElevator.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/SpireBase.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/Station.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/StorageDepot.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/SubsurfaceDeposit.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/SupplyRocket.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/SurfacePassage.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/TVStudioWorkshop.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/TerraformingBuilding.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/ThreeHarvestTypesBuilding.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/Track.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/TrackElement.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/TradePad.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/TrainingBuilding.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/TunnelBlockerRubble.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/UIRangeBuilding.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/UndergroundDome.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/UndergroundPassage.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/UndergroundWonder.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/UpgradableBuilding.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/Workforce.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Buildings/Workplace.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Cargo.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/CargoRequestNew.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/CargoTransporterNew.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Challenges.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/City.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/CityObject.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/ClassDef-StoryBits.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/ColdWave.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Colony.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/ColonyViability.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/CovertOps.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Demolishable.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Dev/fixup.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Discoveries.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/DustDevils.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/DustStorm.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/ElectricityGrid.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/ElectricityStorage.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Exploration.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Factions/Elections.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Factions/Factions.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Factions/FactionsBuildings.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Factions/Independence.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Factions/Laws.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Factions/Legislature.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/FadingDecal.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Flight.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Funding.lua` — FLAG: R08311 — `CalcBaseExportFunding` changed old `:28-33` to require `res_id` at current `:28-34`, while `RocketBase` omits it. Drilled: REJECT for base reach; current load fixup converts all shipped legacy rockets.
+- `Lua/GameRules.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/GridObject.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/HasConsumption.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Heat.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/HolidayRating.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Interests.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/LRTransport.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/LabelContainer.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/LanderRocketCargoRequest.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/MapData.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/MapSettings.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/MarsGameEffects.lua` — FLAG: F95 lead — added `SavegameFixups.RefreshAstrogeologistExtractorBonus:309-343` removes only stored `Percent == 20`, although the old profile wrote 10%. Drilled: FILE C78, DIFF-CAUSED old-save stacking.
+- `Lua/MarsStoryBits.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Marsquake.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Meteors.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Milestones.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/MissionLogo.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/MissionProfileDlg.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Modifiers.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Mysteries/BlackCubes.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Mysteries/BlackCubesBuildingInteractionsModFriendly.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Mysteries/Crystals.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Mysteries/Dream.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Mysteries/Fireflies.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Mysteries/Metatron.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Mysteries/MiniMysteries.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Mysteries/MirrorSphere.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Mysteries/Mystery.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Mysteries/TheMarsBug.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Names.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Negotiations.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/OrbitalProbe.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Passage.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/PinnableObject.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/PlanetaryView.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/PreGameMission.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Radio.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/RandomMap/RandomMapGenerator_Picard.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Renamable.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/RequiresMaintenance.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Research.lua` — FLAG: R09089 — old `ChangeResearchCost:353-360` stored `points`; current `:225-227` ignores it and always applies a 20% boost. Drilled: FILE C79, DIFF-CAUSED.
+- `Lua/ResourceTracking.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Resupply.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/ResupplyItems.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/RevealDarkness.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/RivalColonies.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/RocketCompatibility.lua` — FLAG: R08311 reach check — current `SavegameFixups.UpdateOldRockets:950-975` converts every shipped old rocket class, including in-flight rockets. Drilled: this falsifies the proposed base route.
+- `Lua/RocketPayload.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/SafariRouteInsertWaypointHandler.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/SafariRouteInteractionHandler.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/SafariRouteMoveWaypointHandler.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/SafariSight.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Savegame.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Scenario/BuildingAnomalies.generated.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Scenario/BuriedWonder_Cave_Of_Wonders.generated.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Scenario/BuriedWonder_Jumbo_Cave.generated.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Scenario/BuriedWonder_Jumbo_Cave_106.generated.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Scenario/Mini_Mystery 1.generated.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Scenario/Mini_Mystery 4.generated.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Scenario/Mini_Mystery 5.generated.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Scenario/UndergroundAnomalies_FollowUps.generated.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/ScriptBlocks.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Sequences/SA_Filters.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Sequences/SA_Gameplay.lua` — FLAG: R09475 route — `SA_RevealTech:SAExec` still forwards authored `self.cost` (old `:1187-1203`, current `:1196-1214`) into the changed helper. Drilled: FILE C79.
+- `Lua/Sequences/SequenceAction.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/ServiceBase.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Soil.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/SpecialProjects.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/StatusEffects.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/StoryBitsParamSupport.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/SupplyGrid.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/SupplyGridBreakable.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Tech.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Terraforming.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/TerraformingDisasters.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/TerraformingParamsBar.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/ToxicPool.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/TradeRoutes.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Traits.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Tutorial.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Units/Animals.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Units/AttackRover.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Units/Colonist.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Units/ColonistTransport.lua` — FLAG: four unchanged `GetTransportRoute` boolean call shapes at current `:114/:123/:136/:141` after the parameter rename. Drilled: REJECT; the four values deliberately implement direct then reachable fallback stages.
+- `Lua/Units/Drone.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Units/DroneBase.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Units/ExplorerRover.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Units/RCRover.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Units/RCSafari.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Units/RCTransport.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/UniversalPod.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/UniversalRocket.lua` — FLAG: R08311 sibling — current universal export funding calls carry each resource id, unlike the dead legacy caller. Drilled: REJECT for shipped current routes.
+- `Lua/UpgradeUnlocks.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/Vegetation.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/VegetationFocus.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/VegetationObject.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/VegetationObstructor.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/WasteRock.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/_GameUtils.lua` — FLAG: F117 control — `ChooseDome` changed from `traits` (old `:426`) to `colonist` (current `:486`). Drilled: every vanilla caller uses the new shape; the known stale caller is the pack's old copy.
+- `Lua/_StoryBits.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/_StoryBitsRemaster.lua` — nothing odd in the file-level changed-hunk skim.
+- `Lua/_fixup.lua` — FLAG: F117-shape/compatibility — current `FXShouldPlay:1328-1339` omits `action_pos` when calling `GetLocObj`, and its legacy `Environment='any'` path feeds nil to `next`. Drilled: REJECT for shipped base data; no `ActionObj` or legacy-string base preset was found.
+- `Lua/hex.lua` — nothing odd in the file-level changed-hunk skim.
+
+## Ranked flags and drills
+
+1. `MarsGameEffects.lua` + `CommanderProfilePreset` — FILE C78: the 1.1 fixup matches 20%, not the 1.0.7 profile's 10%, then reapplies the new effects.
+2. `Research.lua` + `SA_Gameplay.lua` — FILE C79: authored exact scenario costs are discarded for a constant 20% boost.
+3. `Buildings/Elevator.lua` — FILE C80: paired elevator can become invalid during `LeadIn`, yet `GetPos` precedes the guard.
+4. `Buildings/Building.lua` — C62 amended: authored `HostageSituation_BlowUp` reaches the dead allocation.
+5. R08311 rocket funding — REJECT: mismatch is real, but `RocketCompatibility.lua:950-975` converts every shipped old class and current creation defaults Universal.
+6. Four `GetTransportRoute` calls and four `ActionFX.GetLocObj` calls — REJECT: route booleans match the new staged meaning; no shipped `ActionObj` preset makes omitted `action_pos` harmful.
+
+## SMELL keep/drop
+
+- R05259 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R05282 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R05294 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R05385 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R05430 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R05456 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R05678 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R05749 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R05750 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R05798 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R06143 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R06325 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R06328 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R06331 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R06439 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R06480 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R06548 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R06561 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R06652 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R06668 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R06791 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R06923 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R07061 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R07085 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R07130 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R07134 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R07139 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R07141 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R07142 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R07147 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R07530 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R07531 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R07831 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R07985 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R08311 — KEEP: promoted to a ranked drill above (the drill may still REJECT it).
+- R08436 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R08444 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R08745 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R08746 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R08754 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R08830 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R08832 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R08853 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R08866 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R08925 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R09035 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R09079 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R09089 — KEEP: promoted to a ranked drill above (the drill may still REJECT it).
+- R09100 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R09130 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R09264 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R09265 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R09271 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R09329 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R09331 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R09462 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R09463 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R09465 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R09466 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R09467 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R09478 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R09524 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R09526 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R09530 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R09533 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R09892 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R09916 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R09927 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R09932 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R09973 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R10309 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R10324 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R10327 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R10387 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R10388 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R10393 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R10396 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R10479 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R10483 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R10788 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R10809 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R10837 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R10858 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R10871 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R10931 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R10942 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R11637 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R11638 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R11657 — DROP: not promoted from the skim; no current harmful player route was established within the ranked drill budget.
+- R11676 — KEEP: promoted to a ranked drill above (the drill may still REJECT it).
+
+## Limits and control
+
+- NOT skimmed: none of the 237 assigned file units.
+- Flagged, not drilled: the 87 SMELL rows marked DROP above; no named file flag was left undrilled.
+- Parent reopen sample: `Lua/Names.lua` and `Lua/Buildings/Banner.lua`, 2/2 still `nothing odd` at file-level depth.
+- Positive control: F117 was FLAGGED. Together with 04-A, the seeded score is 4/4.
