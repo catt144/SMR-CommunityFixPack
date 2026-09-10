@@ -1,9 +1,9 @@
 <!-- GENERATED — never hand-edit; regenerate with: python tools/doccheck.py --regen -->
 <!-- split_bugs.py --write is the one-time MIGRATION from the retired pre-split doc, never a regeneration; verify: python tools/doccheck.py -->
 
-# Bug index — 211 rows, 176 entry files
+# Bug index — 212 rows, 177 entry files
 
-118 F + 12 D + 81 C. `seq` is the entry's position in the old BUGS.md file order;
+118 F + 12 D + 82 C. `seq` is the entry's position in the old BUGS.md file order;
 the row order below is the old index table's own. Generated from the front matter of
 `docs/agent/bugs/*.md` — edit an entry, not this file.
 
@@ -224,4 +224,5 @@ the row order below is the old index table's own. Generated from the front matte
 | 174 | C79 | Scenario tech reveals discard their authored research costs and apply the same 20% boost instead | cand | P2 | source-read | [C79.md](C79.md) |
 | 175 | C80 | A traveler can call GetPos on a destroyed paired elevator because the validity check comes one line too late | cand | P2 | source-read | [C80.md](C80.md) |
 | 176 | C81 | The infobar now rescans every power, water and oxygen grid's visible buildings once per second | cand | P3 | source-read | [C81.md](C81.md) |
+| 177 | C82 | The Incident's 'Stop all Fusion Reactors until we know more' reply leaves every reactor disabled for good | cand | P2 | source-read | [C82.md](C82.md) |
 
