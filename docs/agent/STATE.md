@@ -25,9 +25,10 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   A3 (F118) · A10 · A5 c2 · A9 c4/c5 · F117's station recipe · the first `RunAll()` on the 94-probe kit (re-stamps
   `WORKFLOW.md:407`, VOID since 09-09). ⛔ Kit verdicts are PREDICTIONS until then; still FAIL/ERROR by name:
   `C47OpenFarmSeedBufferShape` (Herbs 100→50), retired `LanderCargoRatchet`/`DroneUnreachableForever`/`AutoExportPriority`.
-- ⏭ NEXT: `prompts/vanillahunt/99_TERMINAL_AUDIT.md` — vanillahunt 04 DONE 09-10: skim 944/944 units, 14 ranked drills, controls 4/4.
-  C78-C81 filed cand/source-read; C62 gained a route; no child queue. 03/03b/03c/03d are done. Evidence: `reports/vanillahunt/agents/` + TRIAGE §04.
-  FR-1/2/3 remain open; C81 is only a profiling candidate. DLC_DEEP_CHECK AFTER 99.
+- ⏭ NEXT: `prompts/DLC_DEEP_CHECK.md` (owner-raised; kickoff line + what changes its shape: `reports/vanillahunt/HUNT_AUDIT.md` §8).
+  vanillahunt CLOSED 09-10 (99): instruments SOUND WITH STATED GAPS — 1,281 table-level hunks in 368 rowed hand files listed by
+  no instrument (§1.4); 12 P2s re-derived: 6 hold, 5 weakened, **C80 REFUTED**; **C82** filed by the audit (Incident reactors stay
+  off); every P2 is a gain/cosmetic except C82/C66/C63; ck142 = hotfix-3 list (rec none). FR-1/2/3 OPEN; FR-1 needs the Linux sitting.
 - ⭐ PUBLISHED both portals — `pdx_id` **156049**, `steam_id` **3787202810**, tree `version` **6** (hotfix 2, 09-09).
   ⛔ Never re-upload to "fix" a version number — each upload bumps again (H-02). ⛔ Every upload OVERWRITES both
   page bodies from `metadata.lua`; `description` IS the full card (08-24). ✅ v6 auto-fill delivered BOTH pages clean

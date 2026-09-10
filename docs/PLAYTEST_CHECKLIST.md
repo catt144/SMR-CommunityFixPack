@@ -29,6 +29,37 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### 2026-09-10 — 142: the vanillahunt terminal audit re-derived every P2 candidate — which of these, if any, go to a hotfix-3 candidate list? **Decision: name any entry you want on a hotfix-3 candidate list, or accept "file and watch" for all. Recommendation: none today; take C66 and C82 as cheap organic looks and leave the rest.**
+
+> Full verdicts: [HUNT_AUDIT.md](agent/reports/vanillahunt/HUNT_AUDIT.md) §3 (each entry
+> also carries a dated `99 terminal audit` stamp). Of the 12 P2 entries re-derived from the
+> two trees: 6 hold, 5 are weakened, 1 is refuted; 04's R08311 rejection stands. Per entry:
+> - [C82](agent/bugs/C82.md) — NEW, found by the audit, one read only, both trees: after The
+>   Incident's "Stop all Fusion Reactors" reply the reactors are never re-enabled. **Verify
+>   first, then decide:** it rides the ck140 Incident fixture with one extra reload. If it
+>   reproduces it is the one real loss on this list.
+> - [C66](agent/bugs/C66.md) — holds: group-All ground unload dumps everything. Piles are
+>   recoverable. **Cheap organic look** next time an RC Transport carries two resource
+>   groups; watch, no hotfix slot unless it bites you.
+> - [C63](agent/bugs/C63.md) — holds: a faction disaster runs forever after its faction loses
+>   every seat, and its card is hidden. Needs the ck137 politics fixture. Watch.
+> - [C69](agent/bugs/C69.md) — the AI mystery's intensified phase is now one burst; the cause
+>   is the instant-research model, not the dropped branch — nothing to patch. Leave.
+> - [C64](agent/bugs/C64.md), [C75](agent/bugs/C75.md), [C78](agent/bugs/C78.md),
+>   [C67](agent/bugs/C67.md), [C79](agent/bugs/C79.md) — hold, but every one is an UNEARNED
+>   GAIN for the player (permanent approval, free construction, +10 % extractors, extra meals,
+>   a small RP refund). ⚠️ Your 09-08 rule said gains are not chased and your 09-09 ask
+>   reversed it; the tension is yours, not resolved here. Recommendation: leave.
+> - [C58](agent/bugs/C58.md) (4 % of a reserved portion; depot half impossible),
+>   [C76](agent/bugs/C76.md) (no visible effect — 1.1.0 has no per-tech price),
+>   [C68](agent/bugs/C68.md) (trigger unreachable as written) — weakened. Leave.
+> - [C80](agent/bugs/C80.md) — REFUTED (the destroyed elevator evicts its traveller first).
+>   Nothing to do; the entry keeps the refutation.
+> - The 12 P3s (C56, C57, C59–C62, C65, C70–C73, C81) were not re-derived; unchanged, watch.
+>
+> **TAKEABLE WHEN** you want a hotfix-3 candidate list at all; otherwise nothing is owed.
+> FR-1/2/3 stay open — the Linux sitting (136) outranks every source read for FR-1.
+
 ### 2026-09-10 — 141 rider: vanillahunt 04 left three functional candidates and two profiling reads; none is a release gate. **Decision: take only a naturally available 1.1 fixture, or leave them source-only. Recommendation: prioritize C79; take C80 only on a disposable elevator save, and leave the profiling reads until a large colony already exists.**
 
 > **TAKEABLE WHEN** a fresh 1.1 colony naturally reaches the named surface;

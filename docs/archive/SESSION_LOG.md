@@ -8,6 +8,33 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-10 — vanillahunt 99 terminal audit: instruments SOUND WITH STATED GAPS, all 12 P2 findings re-derived (6 hold / 5 weakened / C80 refuted), C82 filed, chain folder emptied (`smr-bugfixpack-f8`)
+
+tags: vanillahunt 99 audit treediff presetdiff soundness C58 C63 C64 C66 C67 C68 C69 C75 C76 C78 C79 C80 C82 R08311 ck142 DLC_DEEP_CHECK FR-1 FR-2 FR-3
+
+Ran `prompts/vanillahunt/99_TERMINAL_AUDIT.md` on a folder holding `99` + README; report `reports/vanillahunt/HUNT_AUDIT.md`.
+**Instruments (pass A):** both selftests GREEN (24 / 16 PASS, exit 0; `presetdiff` PART 2 is print-only, stated); churn rules
+re-sampled 10/class, none voided; six changes planted on real-file copies → six rows, no cascade (body, pure `sig`, preset,
+INDENTED one-line edit + insert, an inserted `Run` step surfacing on its enclosing `Create`); both manifests re-hash to the banner
+digests. Soundness sample (5 hand + 2 generated, seeded) accounted every hunk but one — a `__parents` edit in a file that HAS rows,
+which neither instrument nor NOROWS lists; measured tree-wide: **1,281 hunks in 368 of the 699 rowed hand files** (916 table/field,
+71 `__parents`, 47 storage, 12 `DefineClass`) — the only read they got was 04's file skim. Ruling SOUND WITH STATED GAPS.
+**Controls (B):** seeds classed NOW as the ledger says; parent's 4/4 ruling upheld; blind 20-row reclassification 17/20 on routing,
+0 CHURN rows hid a value change; my reopen of 6 `nothing odd` skim units 6/6 after two chases. **Findings (C):** four
+re-derivation agents, claim-only briefs, derive-before-open; C63/C64/C66/C67/C75/C78 HOLD, C58/C68/C69/C76/C79 WEAKENED,
+**C80 REFUTED** (`Holder:Done` evicts the traveller before the read), R08311 rejection and the `GetEnvironment(City)` correction
+stand. Shared root the entries missed: 1.1.0 research is instant at a flat 1 tech point, so C69's cause and C76/C79's "cost"
+have no surface. Every P2 but C82/C66/C63 is an unearned gain, a sub-percent effect or unreachable as written. **C82 filed**
+(cand, PASSING both trees, un-audited): The Incident's "Stop all Fusion Reactors" reply never re-enables them. **Coverage (D):**
+46 % of changed hand rows opened at row level, 0 % of the unchanged tree on its own account, 338 DROP tells, B01–B15's PERF
+gap unread; FR-1/2/3 each get an owner paragraph and stay OPEN. **Consistency (E):** every count re-derives; no status moved by
+a link (C77's move was the owner's); `Code/`/`items.lua` untouched. Checklist **142** routed (rec: no hotfix-3 candidate today;
+C66 + C82 cheap organic looks). Kickoff line for `DLC_DEEP_CHECK.md` in HUNT_AUDIT §8, with the two instrument gaps it inherits.
+Drift of mine: inbox read first; a wrong TSV column name and a wrong class name in scratch scripts, all caught before a row was
+read. Grave: `git show f8bdb2b:docs/agent/prompts/vanillahunt/99_TERMINAL_AUDIT.md`.
+
+---
+
 ## 2026-09-10 — ⚖️ vanillahunt 04 rescoped to a SKIM before it ran (owner ruling, `smr-bugfixpack-08`)
 
 tags: vanillahunt 04 owner-ruling skim yield DLC_DEEP_CHECK
