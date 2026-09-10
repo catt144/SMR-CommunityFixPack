@@ -8,6 +8,54 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-09 (late) — 99b, the bench link: four instruments repaired, two probes rebuilt, F117's recipe re-derived — nothing ran in a game
+
+tags: 99b hotfix2 F03 F20 F31 F59 F67 F69 F105 F117 C43 C47 ck131 ck132 EF-065 testkit lupa
+
+Brief `prompts/hotfix2/99b_BENCH.md` (CONSUMED by this commit). Tree `e8c354c` at start. No game launched, no status
+word moved, `Code/` bodies byte-identical (comments only). Preconditions: `Mars.exe` not running, TEMPORARY sweep 0 both
+repos (re-run at close-out: 0), 97/98 disarmed and 96 absent from the kit code list, both trees clean. The three owner
+rulings of 09-09 eve all landed.
+* **Unit A (kit `29fd13b`, `4f062de`)** — all four are the instrument. `AnomalyCaveInMap`: the `[LUA ERROR]
+  HGE::GetDomeAtHex` header was 1.1.0-born — its file-local `IsNearDome` (`CaveInRubble.lua:76-101`) hands the stand-in
+  map's missing `object_hex_grid` to the engine (1.0.7's asked the map for the nearest Dome and took nil). Step 3 now hands
+  the shipped body a stand-in SUPPORT STRUT that takes the "cave-in prevented" branch (`:109-113`): the body completes
+  through a real branch, places nothing, `ok` is asserted, and C43's two dead stubs (file locals) go with it — as do their
+  `set_global refused` lines and the SKIP they forced. `LandscapeCostGuard`: the FAIL was BACKWARDS (the stub request lacked
+  `GetTargetAmount`, which the 1.1.0 refresh calls AFTER SetAmount, `:740→:1385`) — repaired at the stub, `:748` tail stood
+  in. `LanderReturnFuel`: the `reserve` assertion the dropped leg left behind is gone (`:1894` returns ONE value).
+  `SaveSanitizerUpgradeLeak`: DELETED, not rewritten (its pass went at `f707903`; F03 `closed`; a retired-kind rewrite
+  would be vacuous on any save through vanilla's fixup). ⚠️ Beyond the four, free: `MoraleComfortTooltip` FAIL→named
+  SKIP on every path (the FAIL read the raw stand-in value — any stat tooltip reading its stat). Left BY NAME:
+  `C47OpenFarmSeedBufferShape` (Herbs 100→50 needs a C47 re-derivation, not a re-pin); retired ERRORs
+  `LanderCargoRatchet`/`DroneUnreachableForever`/`AutoExportPriority` (not in the ruling; evidence of nothing). Probes 95→94.
+* **Unit B (kit `4f062de`)** — `LanderEmptyLaunch` rebuilt on `IsCargoReady:535-559`: borrows `WaitsForManualLaunch`
+  (`:544`, new) and pre-dates the NEW `:554-556` one-hour automode gate by two hours — a fresh fixture reads false for the
+  LOADED rocket on vanilla alone and would report "over-broad fix" on a healthy module. ⭐ That gate NARROWS F67 without
+  fixing it (tail still `return cargo_status == "ready"`, `:558`) — K-26 KEEP stands. `FreedHousingNotice`: an
+  `UpdateLowComfortNotification` stand-in (`Colonist.lua:2913-2915`, new); every call in `:2898-2917` re-read. Desk harness
+  (lupa; shipped bodies via `luafn.find_bodies` under their REAL file names and line offsets; module files through a stub
+  `Register`; probe text from the kit files): **9/9**, the OLD probe text reproducing each sitting ERROR line byte for byte.
+* **Unit C (`a8e0ca2`)** — `100_DOCSWEEP` §4's hand-off list drained: 6 sites + 1 adjacent (`Fix_AnomalyCaveInMap.lua:80`);
+  `harvest_wrap_targets.py:174` was already fixed in `29b7a68` (the list entry was stale). No comment described changed
+  behaviour, so §9's stop condition never fired.
+* **Unit D (`94cfa2c`)** — `bugs/F117.md` §Control RE-DERIVED. The far landing yields an EMPTY list (`GetScoreFor` never
+  called); vanilla's fallback is the NEAREST foot-reachable community at ANY distance (`_GameUtils.lua:404-407`), so any
+  walkable dome makes the wrapper stand down; the elevator route stands down BY DESIGN (paired picks `:432`/`:441`); the one
+  route that fires the wrapper with a non-empty list is the passenger-station sweep (`:450-478`). Desk **8/8** on the shipped
+  span `:382-501` (two engine tolerances shimmed and named: `ipairs(false)` at `:415`, `Min(nil,n)` at `:434`). ⛔ UNTESTED
+  in play; in-play falsifier = `SMRFixPack.ArrivalDeaths.CachedArgShape()` nil after the landing ⇒ vacuous. "Ordinary
+  mid-game" WITHDRAWN. `C43.md` and `HOTFIX2_SITTING.md` §4a annotated.
+* **Unit E** — STATE.md measured 12215 B / 129 lines against warn 12288 (73 B ≈ 0 lines); 9,212 → 12,215 B over the ten
+  09-09 commits, GROWING not suppressed ⇒ checklist **132**. ck131 (promote the four desk falsifiers) re-raised ONCE.
+
+**EVICTED FROM STATE.md in this commit** — grave: `git show 94cfa2c:docs/agent/STATE.md`. Compressed to pointers; every claim
+already has a home: sitting 2's log-growth story and A7's numbers → the 09-09 (evening) entry below + `PLAYTEST_CHECKLIST.md`;
+F114/F115 in-play detail → the 09-09 sitting entry; 99's routed items (ck128/129 wording, F60, Pass D's count) →
+`reports/HOTFIX_2_AUDIT.md` + the checklist; "F03 word pending" → superseded by `closed` (`1851b1a`).
+
+---
+
 ## 2026-09-09 (evening) — the second sitting: six rows exercised, six passed, and two recipes that could never have worked
 
 tags: sitting hotfix2 A1 A2 A3 A4 A5 A6 A7 A8 A9 A10 F-2 F-3 F-6 F-7 F-9 F-10 F03 F46 F50 F52 F58 F70 F73 F116 F117 F118 EF-056 EF-065 EF-079 ck130 logscan

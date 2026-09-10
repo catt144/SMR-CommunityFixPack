@@ -17,31 +17,28 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   ⭐ **1.1.0 RE-VERIFICATION 09-08: 10 FIX / 35 REMOVE / 35 KEEP** (`reports/PACK_1_1_0_REVERIFICATION.md`,
   ck114-117; QA'd by 3 fresh readers, `reports/VANILLA_FIX_QA.md` §0, 0 flips).
   ⭐ **LINKS 02–07 DONE 09-08/09** (commits in `prompts/hotfix2/README.md`): 36 modules DELETED; F-1/F-2/F-3
-  repaired; F-6…F-10 RE-COPIED; F116 ck111/119 landed. Kit **95** probes (measured 09-09), 32 `retired`.
-  ⭐ **99 TERMINAL AUDIT 09-09: SHIP WITH CHANGES** (`reports/HOTFIX_2_AUDIT.md`). F117 found + ruled ⇒ ck127 (repaired, below).
-  Change-note bullet 2 contradicts link 08's F95 pass ⇒ ck128 rides ck126. Site publish WITH the upload ⇒ ck129. F118/C55 filed, F60 REMOVE
-  candidate for hotfix 3. Pass D: 3 of 35 KEEP wrappers moved under class (c), seen by NO instrument.
-  `100_DOCSWEEP.md` AUTHORED — fires after 126+127 are ruled and BEFORE the upload sitting (bullet 2 ships in `metadata.lua`).
-  ⭐ **LINK 99a LANDED 09-09** — LAST CODE in hotfix 2 (commits: `prompts/hotfix2/README.md`).
-  ⛔ NEITHER REPRODUCED, no probe for F118, NO status word moved. ⚠️ Desk falsifiers SCRATCHPAD-only (`F117.md` has the ask
-  to promote them). Next and last: `100_DOCSWEEP`.
+  repaired; F-6…F-10 RE-COPIED; F116 ck111/119 landed. Kit **94** probes (99b, 09-09 late), 32 `retired`.
+  ⭐ **99 TERMINAL AUDIT 09-09: SHIP WITH CHANGES** (`reports/HOTFIX_2_AUDIT.md`): F117 ⇒ ck127 (repaired, below); ck128 rides
+  ck126; ck129; F118/C55 filed; F60 REMOVE candidate (hotfix 3); Pass D: 3 KEEP wrappers under class (c), seen by NO instrument.
+  `100_DOCSWEEP.md` AUTHORED — fires BEFORE the upload sitting (bullet 2 ships in `metadata.lua`).
+  ⭐ **LINK 99a LANDED 09-09** — LAST CODE in hotfix 2; **99b BENCH LANDED 09-09 late** (commits: `prompts/hotfix2/README.md`).
+  ⛔ NEITHER REPRODUCED, no probe for F118, NO status word moved. ⚠️ Desk falsifiers (99a ×2, 99b ×2) SCRATCHPAD-only ⇒ ck131.
+  Next and last: `100_DOCSWEEP` — the ONLY thing between the tree and the upload.
   🎮 **SITTING RAN 09-09 ATTENDED** (`archive/logs/sitting{boot,suite,play}110_*`, all read AFTER exit). 99 SHIP ≠ clearance (H-04).
-  🎮 **SITTING 2 RAN 09-09 EVENING ATTENDED** (`archive/logs/sitting2play110_*`, read AFTER exit; it grew 1282 B
-  after a mid-session read that had already said "no errors" ⇒ §3 earned again). Census `44 applied / 0 inactive`,
-  **0 error-shaped lines** / 360 (THIRD independent boot). Opt-in OFF by `Loaded mod items for:`, not the `def` line.
+  🎮 **SITTING 2 RAN 09-09 EVENING ATTENDED** (`archive/logs/sitting2play110_*`, read AFTER exit — §3 earned again, SESSION_LOG).
+  Census `44 applied / 0 inactive`, **0 error-shaped lines** (THIRD independent boot). Opt-in OFF by `Loaded mod items for:`.
   ✅ **SIX ROWS EXERCISED, SIX PASS**: A1 habitat trait filter · A4 refuel toggle (3 clauses, OFF held a FULL SOL) ·
   A5 Edit Payload (clause 1 + the MANUAL ROUND TRIP, PT-31's clause) · A6 vacuum walks (BOTH clauses, falsifier held) ·
   A8 train-with-nowhere-to-deliver (row 1's unrun 3rd clause) · A9 track split — **F116's FIRST exercise in a game, ever**.
-  ⛔ **A2 (F117) RECIPE REFUTED FROM SOURCE**: "beyond walking distance of EVERY dome" ⇒ candidate list EMPTY ⇒
-  `GetScoreFor` never called ⇒ throw unreachable. It would have banked a FALSE PASS. Real trigger = elevator/cross-map.
-  ⚠️ ⇒ F117 is likely RARER than its entry's "ordinary mid-game" claim. ⛔ `bugs/F117.md` §Control + the brief carry the
-  wrong recipe and are NOT yet re-derived — owed work. ⛔ **A7 VACUOUS**: only crewed expedition is 3h vs
-  `ForcedByUserLockTimeout` 3,600,000 (~5 sols). ⚖️ 3 of 9 recipes could not run as written — pattern, not luck.
+  ⛔ **A2 (F117) RECIPE REFUTED** ⇒ ✅ **§Control RE-DERIVED 09-09 late (99b `94cfa2c`)**: the far landing NEVER reaches
+  `GetScoreFor`; the elevator route stands down BY DESIGN; forceable route = passenger-station sweep, desk 8/8 on the shipped
+  span, ⛔ UNTESTED in play (falsifier in the entry). "Ordinary mid-game" WITHDRAWN. ⛔ **A7 VACUOUS** on this colony (checklist).
   🚫 STILL OWED: A3 (F118), A10, A5 c2, A9 c4/c5 — by name in the checklist. Brief REWRITTEN, not deleted.
-  ✅ OWNER RULED 09-09 eve: F03 claim withdrawn (word pending — `retired` is NOT in doccheck's STATUS_WORDS);
-  4 stale instruments REPAIR NOW; probes BUILT for `LanderEmptyLaunch`+`FreedHousingNotice`. Both kit-only, pre-upload.
-  ⭐ **F114 + F115 OBSERVED FIXED IN PLAY**: train leaves platform, carries past the station that refuses it, unloads at B;
-  flatten raises NO mod-error dialog and drones board through one (F34d, never before observed).
+  ✅ OWNER RULED 09-09 eve — ALL LANDED by 99b: F03 `closed` (`1851b1a`) · 4 instruments REPAIRED, `SaveSanitizerUpgradeLeak`
+  DELETED, `MoraleComfortTooltip` SKIPs by name (kit `29fd13b`, `4f062de`) · `LanderEmptyLaunch`/`FreedHousingNotice` REBUILT on
+  1.1.0 bodies, desk 9/9. ⛔ Predictions until the next suite. Still FAIL/ERROR by name: `C47OpenFarmSeedBufferShape` (Herbs
+  100→50); retired `LanderCargoRatchet`/`DroneUnreachableForever`/`AutoExportPriority`.
+  ⭐ **F114 + F115 OBSERVED FIXED IN PLAY** (attended; detail in the 09-09 sitting entry; F34d drones-through-flatten first seen).
   ⚖️ Owner rule 09-08: a patch note saying "Fixed" is a **CLAIM, false until we confirm it**.
 - ⭐ PUBLISHED both portals — `pdx_id` **156049**, `steam_id` **3787202810**, tree `version` **5** (F110, 08-30).
   ⛔ Never re-upload to "fix" a version number — each upload bumps again (H-02). ⛔ Every upload OVERWRITES both
@@ -112,8 +109,10 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 - **130 RULED 09-09**: Saint heal SHIPS UNEXERCISED — condition is historical, unforgeable (`EF-080` override yields
   `restored 0`); additive-only and cannot throw (`Lua/TraitPreset.lua:77-95` no throwing path, `WhenActive` is a gate not
   a trap). ⛔ Its kit probe PASSes vacuously with no domed Saint — NOT coverage. Field reports are the detector.
-- ⛔ BLOCKS the upload: `100_DOCSWEEP` **+ the 2 kit items ruled 09-09 eve** (§Now). NOT "docsweep alone" any
-  more. 118 RULED ⇒ re-copies MUST decline on 1.0.7 (§2a).
+- ⛔ BLOCKS the upload: `100_DOCSWEEP` ALONE again (the 2 kit items landed 09-09 late, 99b). 118 RULED ⇒ re-copies MUST
+  decline on 1.0.7 (§2a).
+- **131** promote the 4 desk falsifiers (99a ×2, 99b ×2) into `tools/` — re-raised ONCE by 99b, rec yes · **132** STATE.md warn:
+  raise 12288 again or accept per-session eviction until the 1.1.0 fallout closes (99b found 73 B headroom on arrival; GROWING).
 - 73 blame surface — harden or not · 76 confirm (a) was a ruling not a leaning · 53 harden now or in 1.0.1
   (rec 1.0.1) · 51 both-packs leg timing (rec after launch) · 50 chain-vs-replace wording · 47 two modder-page
   wordings · 43 opt-in pack re-tick · 41 dialog wording + sweep cap 5→8 · 40 `smr_shuttles` name · 39 dialog re-fire.
@@ -123,7 +122,7 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 BUILD STATE (emitted by tools/doccheck.py)
 - modules: 44 registered (44 default-active, 0 optional-gated files)
 - Code/*.lua files: 45
-- TestKit probes: 95
+- TestKit probes: 94
 - BUGS index rows: 118 F + 12 D + 55 C
 ```
 Re-emit after any change. Game: records describe **1.0.7.396349** (`EF-014`); INSTALLED is now **1.1.0** (`EF-075`).

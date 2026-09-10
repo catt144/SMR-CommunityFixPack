@@ -145,6 +145,29 @@ completed tests move whole to
 > | A5 c2 | cancel the launch prompt | the *flight* was cancelled instead of the cargo dialog's prompt — a different path (`PromptRocketCargoIssue`) |
 > | A9 c4/c5 | assigned trains survive; both halves accept a train | the test line was freshly built with no train assigned to it |
 > | A2 / A7 | see above | ⛔ **not deferred — their recipes are wrong.** Do not re-run as written |
+>
+> #### ✅ 2026-09-09 (late) — 99b ran: everything you ruled during sitting 2 has landed, and F117's recipe is re-derived. Two small calls at the bottom.
+>
+> **Receipts for the three rulings** (nothing ran in a game; every kit verdict below is a prediction until the next suite run):
+>
+> | ruling | what landed |
+> |---|---|
+> | **F03 withdrawn** | `closed` (`1851b1a`, done during the sitting) — nothing further |
+> | **Repair the four instruments now** | kit `29fd13b` + `4f062de`. The fake `[LUA ERROR] HGE::GetDomeAtHex` header is gone: the cave-in probe now hands the shipped body a stand-in support strut that takes the game's own "cave-in prevented" branch, so the body completes without reaching the helper that raised, and the probe now FAILs if the body raises instead of discarding it. `LandscapeCostGuard`'s FAIL was backwards — the stub lacked a method the 1.1.0 refresh calls only AFTER delegating — fixed at the stub. `LanderReturnFuel` lost an assertion the 1.1.0 branch can never satisfy. `SaveSanitizerUpgradeLeak` is DELETED, not rewritten: the pass it tested went with link 02, and a rewrite would be a new probe whose PASS is vacuous on any save that has been through vanilla's own fixup. ⚠️ One beyond your four, because it was free: `MoraleComfortTooltip` now SKIPs by name on every path instead of a FAIL that read as "the REMOVE was wrong" while proving nothing |
+> | **Build the two probes** | kit `4f062de`. `LanderEmptyLaunch` and `FreedHousingNotice` rebuilt against the 1.1.0 bodies, read line by line. Both falsified both ways on a desk harness — 9 of 9, including the OLD probe text reproducing the sitting's exact ERROR lines byte for byte. ⭐ One trap avoided: 1.1.0 makes an auto rocket wait an hour before its first launch, so a naive fixture reads "loaded rocket blocked" on a HEALTHY module; the fixture now pre-dates that gate. That same gate narrows F67 without fixing it — the module stays KEEP |
+>
+> **Still failing, by name, and why they stay:** `C47OpenFarmSeedBufferShape` (1.1.0 halved Herbs to 50 seeds/hex; re-pinning the probe without re-deriving C47's arithmetic would make it assert a number the entry does not derive from — a re-derivation, not a free fix); the three retired ERRORs `LanderCargoRatchet`, `DroneUnreachableForever`, `AutoExportPriority` (not in your ruling; an ERROR under the retired kind is evidence of nothing either way). Probe count 95 → 94.
+>
+> **F117's recipe: corrected — and the bug is rarer than the entry claimed.** "Land beyond walking distance of every dome" can never reach the throw (the candidate list is empty). The elevator route the sitting guessed at is where the module stands down on purpose. The one layout that reaches it: no dome walkable from the pad, a passenger train station by the pad reaching a far welcoming dome, and a trait filter or filtered residence among those domes. Shown to reach the scoring call on the shipped bodies at the desk (8 of 8 scenarios), ⛔ **untested in play**, and the entry now carries a console read that tells a vacuous run from a real one. "Ordinary mid-game" is withdrawn. Details: `agent/bugs/F117.md` §Control.
+>
+> **The orphaned comment list** from the doc sweep's §4 is drained (`a8e0ca2`) — comments only, no behaviour found changed.
+>
+> #### ⛔ Two things that want your decision
+>
+> 1. **131, raised once more and then dropped:** the F117 desk falsifiers (two from 99a, two from 99b) live in session scratchpads. Promote them into `tools/` (one file each, re-runnable by anyone), or let the transcripts in `F117.md` be the record? Recommendation: promote — the recipe harness is the only way to re-check that logic without a game.
+> 2. **132 — `STATE.md`'s warn line.** Measured now, not quoted: **12,215 bytes / 129 lines against a 12,288 warn — 73 bytes of headroom, i.e. none.** The warn was raised 9 → 12 KiB this morning as a runway; the file grew ~3.0 KiB over the last ten commits (09-09 03:28 → 21:19) and it is growing, not being suppressed. This link stayed under only by compressing four history lines into pointers (grave in the commit, named in SESSION_LOG) and then trimming its own two new lines twice — the close-out first landed 38 bytes OVER. ⛔ Not an agent's call, and the hard cap (18 KiB) stays either way: **raise the warn again (recommendation: 14 KiB, ~20 lines of runway), or accept a per-session eviction until the 1.1.0 fallout is closed?**
+>
+> ⛔ Not clearance (`H-04`). `100_DOCSWEEP` is now the ONLY thing between the tree and the upload; it fires next.
 
 ### ✅ CLOSED 2026-09-09 — the brief that produced the block above, kept for its recipes: `agent/prompts/HOTFIX2_SITTING.md`. Two tiers, and the second is designed to be stopped partway.
 

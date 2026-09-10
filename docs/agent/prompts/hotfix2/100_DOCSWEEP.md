@@ -266,3 +266,29 @@ on text, verbatim enough that you do not re-derive them.)*
   `mod.prop` + `mod.percent == 10` — looser than the pass — so at the sitting
   "probe FAIL + `LEFT … ALONE` line" is the near-miss report, not a bug. The
   owner's 126 block already says so; keep it consistent if you touch that block.
+
+*(From link 99b, `smr-bugfixpack-96`, 2026-09-09 late — the bench link.)*
+
+- **Your §4 "Handed on, NOT this sweep's" list is DRAINED** (`a8e0ca2`): six
+  sites plus one adjacent cite in the same file (`Fix_AnomalyCaveInMap.lua:80`,
+  `CaveInRubble.lua:101` → `:109`); `tools/harvest_wrap_targets.py:174` had
+  already been fixed in `29b7a68` before the list was compiled. ⛔ Do not
+  re-file, do not re-fix. No comment on the list described changed behaviour.
+- **The upload blockers are back to you alone.** The two kit items ruled 09-09
+  eve landed (kit `29fd13b`, `4f062de`; probes 95 → 94; every suite verdict is
+  a prediction until the next run).
+- **F117's player line (§3.2), if you write one:** `bugs/F117.md` §Control is
+  re-derived (`94cfa2c`). The defect bites on a RARE layout — arrivals whose
+  only link to a dome is a passenger train station — not "ordinary mid-game";
+  the entry's frequency claim is withdrawn. Still unreproduced, still `filed`,
+  still not "Fixed".
+- **STATE.md** sits just under its 12288 warn after this link compressed four
+  history lines to pointers (grave `git show 94cfa2c:docs/agent/STATE.md`; the
+  SESSION_LOG 09-09 (late) entry names each) and then trimmed its own wording
+  twice to get back under. Expect the WARN; checklist **132** asks the owner
+  whether to raise it again. Never quote a stored byte number — measure with
+  `python tools/doccheck.py`.
+- **Drift captured (chain rule 5):** the §4 list entry for
+  `harvest_wrap_targets.py:174` was stale when compiled — link 05's `29b7a68`
+  had corrected the file the same day. A hand-off list is a claim; re-check
+  each line, as §4 itself says.
