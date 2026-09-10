@@ -1,9 +1,9 @@
 <!-- GENERATED — never hand-edit; regenerate with: python tools/doccheck.py --regen -->
 <!-- split_bugs.py --write is the one-time MIGRATION from the retired pre-split doc, never a regeneration; verify: python tools/doccheck.py -->
 
-# Bug index — 192 rows, 157 entry files
+# Bug index — 195 rows, 160 entry files
 
-118 F + 12 D + 62 C. `seq` is the entry's position in the old BUGS.md file order;
+118 F + 12 D + 65 C. `seq` is the entry's position in the old BUGS.md file order;
 the row order below is the old index table's own. Generated from the front matter of
 `docs/agent/bugs/*.md` — edit an entry, not this file.
 
@@ -205,4 +205,7 @@ the row order below is the old index table's own. Generated from the front matte
 | 155 | C60 | Ranch infopanel updater allocates and fills a resource-id list that it never reads | cand | P3 | source-read | [C60.md](C60.md) |
 | 156 | C61 | Non-natural death popup still promises two lost applicants after the base death code removed that penalty | cand | P3 | source-read | [C61.md](C61.md) |
 | 157 | C62 | Building explosion body collects a local list of destroyed buildings that is never consumed | cand | P3 | source-read | [C62.md](C62.md) |
+| 158 | C63 | A faction disaster can run forever after its faction loses every legislature seat | cand | P2 | source-read | [C63.md](C63.md) |
+| 159 | C64 | A completed Faction Opportunity's temporary approval bonus can become permanent | cand | P2 | source-read | [C64.md](C64.md) |
+| 160 | C65 | The Earth Council introductory popup lost its only caller in 1.1.0 | cand | P3 | source-read | [C65.md](C65.md) |
 

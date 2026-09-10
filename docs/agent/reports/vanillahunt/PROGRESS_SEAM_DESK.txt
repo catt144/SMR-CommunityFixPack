@@ -1,0 +1,12 @@
+PROGRESS SEAM DESK: Lua 5.5 | lupa 2.8 (archived bodies; no runtime claim)
+expired disaster 1.0.7: (False, 0, 'FactionDisasterStop', True)
+expired disaster 1.1.0 zero seats: (True, 1, None, None)
+expired disaster 1.1.0 one seat: (False, 0, 'FactionDisasterStop', True)
+counterfactual one-seat branch stops and removes the disaster (control discriminates)
+expired completed task, no active task: 1
+expired completed task, active-task control: 0
+counterfactual active-task branch removes the expired approval bonus (control discriminates)
+First-session popup route: old declaration+BeginSession call became a new declaration only; the retained EarthCouncilIntro preset and new closure message have no literal consumer
+DeepScanning route: live Tech carries both effects; TechPreset is an inert id/group stub; exploration reads DeepScanAvailable; probes separately require AdaptedProbes
+PROBE SWEEP: clean
+PASS: disaster and completed-task controls discriminate; popup orphan and research route are source-connected

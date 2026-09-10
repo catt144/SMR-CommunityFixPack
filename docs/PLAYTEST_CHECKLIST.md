@@ -29,6 +29,22 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### 2026-09-10 — 137 rider: three vanilla politics candidates need a fresh 1.1 colony, never the branch-locked campaign. **Decision: provision one politics fixture when convenient, or leave all three source-only. Recommendation: provision only if the ordinary play setup can cover them together.**
+
+> **TAKEABLE WHEN** a fresh 1.1 sponsor-faction colony has active politics and
+> can naturally reach faction opportunities, a timed faction disaster and the
+> first Earth Council availability. One fixture can answer [C63](agent/bugs/C63.md),
+> [C64](agent/bugs/C64.md) and [C65](agent/bugs/C65.md); none is a release gate.
+> Do not use or convert a 1.0.7 campaign save.
+>
+> Record: (1) whether an active faction can fall to zero seats while retaining
+> a timed Radicalization/Renegades disaster, and whether it stops at its cap;
+> (2) whether a completed Faction Opportunity's approval explanation disappears
+> after 15 sols with no new active opportunity; (3) whether `EarthCouncilIntro`
+> appears at first Council availability. The agent supplies counters and the
+> one-seat / active-opportunity / manual-popup controls during the sitting.
+> Skip a leg as vacuous if its precise state cannot be reached naturally.
+
 ### 2026-09-10 — 136: three player reports are now priority surfaces in the vanilla diff hunt. Two asks; neither needs the keyboard.
 
 > **What changed:** the vanillahunt chain README §2b now makes three Steam
