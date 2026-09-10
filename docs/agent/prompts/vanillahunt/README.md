@@ -286,7 +286,12 @@ split it across subagents. Rules, binding on every link that fans out:
    Several smr-bugfixpack sessions edit this tree at once; message any peer
    whose lane you are about to enter, and never touch a stranger's unstaged
    file. ⛔ Explicit FILE paths on every `git add` — never `add -A`, never a
-   directory pathspec (both swept a peer's work on 2026-09-08).
+   directory pathspec (both swept a peer's work on 2026-09-08) — **and on
+   every `git commit`: `git commit -F <msg> -- <paths>`.** The index is shared
+   between sessions and a bare `git commit` commits the WHOLE index: on
+   2026-09-10 a peer's `6ad619a` carried this chain's staged rename and four
+   deletions under its own message, minutes after they were staged. Explicit
+   paths on `add` alone do not close that race; paths on `commit` do.
 2. **Inbox / outbox.** Read `## Notes from upstream` at the bottom of your
    prompt before you start. On close-out, append your outbox to the NEXT
    prompt's `## Notes from upstream` **and** to `99_TERMINAL_AUDIT.md`'s, strike
@@ -315,8 +320,8 @@ split it across subagents. Rules, binding on every link that fans out:
 9. **Green gates before every commit:** `python tools/doccheck.py` GREEN, plus
    `python tools/treediff.py --selftest` and `python tools/presetdiff.py
    --selftest` from 01 onward; a WARN goes VERBATIM
-   into your summary. `git commit -F <file>` (embedded quotes split args under
-   PS 5.1), then push.
+   into your summary. `git commit -F <file> -- <your paths>` (embedded quotes
+   split args under PS 5.1; the path list is rule 1's race guard), then push.
 10. **⛔ Read-only on the game directory and on both archives. Always.** Nothing
     here needs `Mars.exe` running; nothing here writes under `Project Spark\`
     or `SMR-SrcArchive\` except a NEW archive folder when a newer build lands.
