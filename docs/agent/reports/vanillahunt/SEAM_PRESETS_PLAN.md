@@ -10,10 +10,10 @@ parent owns every repository write, sample, verdict, filing and handoff.
 - [x] Read the 560-row food/resource/UI preset batch; parent re-derives its
   surviving leads and sample, records exact coverage, then runs chain gates and
   commits the durable report.
-- [>] Read the 548-row progression/politics preset batch; parent re-derives its
+- [x] Read the 548-row progression/politics preset batch; parent re-derives its
   surviving leads and sample, records exact coverage, then runs chain gates and
   commits the durable report.
-- [ ] Read the 510-row support/story preset batch; parent re-derives its
+- [>] Read the 510-row support/story preset batch; parent re-derives its
   surviving leads and sample, records exact coverage, then runs chain gates and
   commits the durable report.
 - [ ] Read all 360 generated INVENTORY rows and six CALLERS items, enumerate
