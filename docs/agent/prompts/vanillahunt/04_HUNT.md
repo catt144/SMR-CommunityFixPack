@@ -1,237 +1,191 @@
-# 04 — the hunt: one parent, one agent per system and per preset registry
+# 04 — the skim: a fast pass over everything 03 did not own, with drill-downs where something looks odd
 
 ⛔ ONE-SHOT: this file `git rm`s itself on close-out (README rule 2).
-Model: **Codex Sol Ultra — owner-assigned 2026-09-10** (*"its specialty is
-massive subagent coordination; it is specifically designed for this sort of
-task"*) · owner needed: no · after 02; **independent of 03** (the seam) — the
-two may run at once in separate sessions, they share no rows. ⚖️ **Owner
-ruling, same date: this link does NOT split.** The whole hunt is one
-orchestrator; rule 4 of the README does not apply here. What still binds is
-everything below about verification and evidence — a bigger fan-out raises
-the bar on those, it does not lower it.
+Model: **Codex Sol Ultra — owner-assigned 2026-09-10** · owner needed: no · after
+02; 03 and its continuations are all closed, so nothing runs beside you.
 
-⚠️ **Written tool-neutral.** Where this brief says "agent" it means your
-platform's judgement-capable subagent (one that reads whole bodies and
-reasons), never a locate-only search agent. Where the README's chain rules
-name Claude Code tools (`ListAgents`, `SendMessage`), use the git-visible
-equivalents in README rule 1 and rule 15 — they were rewritten for this.
+> ⚖️ **OWNER RULING 2026-09-10 — 04 IS A SKIM, NOT AN EXHAUSTIVE READ.** *"I want
+> 04 to still fire but I want it to be more of a skim, and if it sees something
+> that looks odd in the skim it can do a deeper check in that area."* The owner's
+> original framing of the hunt was a **high-level sweep of the diff**, not an
+> exhaustive search. The earlier design of this link (every untagged row read: ~10,450
+> inventory rows + 25,409 preset rows + 2,435 callers, roughly 19× the whole 03b
+> leg) is RETIRED — `git show e2b0e22:docs/agent/prompts/vanillahunt/04_HUNT.md`.
+> Why: the 03 family read 2,955 items to exact receipts and filed 20 candidates,
+> none yet observed in play; the cost did not buy proportionate yield. ⛔ Do not
+> rebuild the exhaustive design by the back door (per-row ledgers, "every row
+> assigned exactly once", `04b` for a remainder). **This link does not split** (owner,
+> 09-10): it is sized to fit one orchestrator session.
 
-> 🎯 Every row 02 did not tag `dlc-adjacent` is read here: the hand-written
-> Lua by SYSTEM, the preset data by REGISTRY, the storage moves and the
-> removed/added files. **You are the parent.** You do not read rows; you brief
-> agents, verify a sample of what each returns from the two trees, file the
-> findings that survive, and commit every agent report verbatim as primary
-> evidence for 99. ⭐ Consolidated from four links on the owner's question of
-> 2026-09-10 — same job on disjoint row sets, so one orchestrator; the reading
-> orders below are what those four links were going to enforce, now enforced
-> per agent brief.
+⚠️ **Written tool-neutral.** "Agent" = your platform's judgement-capable
+subagent (reads bodies and reasons), never a locate-only search agent. Where the
+README's chain rules name Claude Code tools, use the git-visible equivalents in
+README rules 1 and 15.
 
 ## 0 · Open in this order
 
-`git log --oneline -10` · `git pull` · `ListAgents` · `README.md` (§2, §3, §4
-— binding, and §4's return format goes into every brief VERBATIM) · `STATE.md`
-· `TRIAGE.md` §1–§4 (your row lists are §3 "04": per system and per registry,
-with (h) seeds, `F117-SHAPE` candidates, `unsure` rows, and the preset readable
-pile after 01's churn rules) · the TSV banners · 01's fpk-parity fact ·
-`PACK_1_1_0_REVERIFICATION.md` §1 (REMOVE bucket) · `VANILLA_FIX_QA.md` §0 ·
-`bugs/F95.md`, `F114.md`, `F116.md`, `F117.md`, `F118.md`, `C54.md`, `C55.md` ·
-`facts/INDEX.md` (`EF-005`, `EF-008`, `EF-009`, `EF-017`, `EF-066`, `EF-079`,
-`EF-080`, `EF-083`) · `FIX_POLICY.md` §4, §6 · your inbox. Pin check (README §0).
+`git log --oneline -10` · `git pull` · `ListAgents` (if your platform has it) ·
+`README.md` §2 (taxonomy — the flag vocabulary), §2b (the three field reports),
+§3 (the `C` entry contract), rules §5 · `STATE.md` · `TRIAGE.md` §1.3 (per-system
+counts), §1.7 (FR tags), §3 "04 agent A…E" (your MAP: which files changed in each
+system — not an assignment list) · `FIX_POLICY.md` §4 (the tells) · your inbox
+(`## Notes from upstream` below — its leads are your first drill-downs). Pin check
+(README §0: `appmanifest_3215050.acf` buildid still `24995074`).
 
 ## 1 · 🗒 Live todo list, from your first action
 
-One item per agent wave, one per verification pass, one per filing batch.
+One item per skim agent, one for the leads pass, one per drill-down batch, one
+per filing batch. Exactly one in progress; the owner reads it.
 
-## 2 · The design — decide the split BEFORE spawning anything
+## 2 · What the skim is
 
-1. **Size from the ledger, not from hope.** Per system and per registry, take
-   02's `WORTH-READING` row count. **~250 rows is one agent.** A system above
-   that is cut into file-group agents (e.g. `turf` → tracks+trains /
-   landscaping+construction / drones+logistics+depots). Write the full agent
-   plan (agent · rows · files) into `TRIAGE.md` "04" BEFORE the first spawn,
-   so 99 can check that every row was assigned to exactly one agent. ⛔ No
-   `04b` — the owner ruled this link does not split; the whole plan runs
-   here, in as many waves as it takes. What the parent must hold is the
-   VERDICTS, never the reading: keep per-agent results in the committed
-   `agents/` reports (§2.5) and work from those files, not from memory.
-2. **One brief per agent**, a judgement-capable subagent (⛔ never a
-   locate-only one), holding: the two archive roots; its row list (file · function ·
-   both line ranges, or `class:id · key` for presets); README §2's taxonomy
-   VERBATIM; the system's reading order from §3 below; README §4's return
-   format VERBATIM plus the surface-sweep clause; the `find_bodies` call it
-   must use for spans; ⛔ no seeds named; ⛔ no file writes; ⛔ "looks fine"
-   rejected. Waves of 6–8 in parallel.
-3. **Verify before you write.** For every agent: re-derive at least ONE of its
-   findings from the two trees yourself (the highest-severity one), and re-read
-   any agent whose "rows reached" exceeds the rows it was given or whose report
-   carries no NOT-reached list. An agent whose verified finding does not hold is
-   re-issued with the failure quoted; both reports are kept.
-4. **File what survives** as `C` entries per README §3 — the agent returns
-   entry-ready text (route, both citations, reach, falsifier, recipe, severity,
-   `DIFF-CAUSED` or `PASSING`); you check it, you write it. Batch the index
-   regeneration per wave.
-5. **Commit every agent report verbatim** to
-   `reports/vanillahunt/agents/<system-or-registry>[-<n>].md` (banner: brief
-   hash, wave, rows given, date). ⛔ Not optional — 99 audits verdict-by-verdict
-   against these, and evidence living only in a session transcript is the
-   failure `CHAIN_METHOD` §3 records twice.
-6. **⭐ Field-report rows FIRST (README §2b, owner 2026-09-10).** Every row 02
-   tagged `FR-1` / `FR-2` / `FR-3` goes to the agent that owns its system, at
-   the TOP of that agent's list, and the agent's brief carries README §2b's
-   paragraph for that report VERBATIM, plus the `PERF` tell for its `SMELL`
-   field. Record in the agent plan which agent took which FR rows. From the
-   verified returns, write subsections **FR-1** (surfaces a, c, d), **FR-2**
-   (the route answer) and **FR-3** into your `TRIAGE.md` section — each with
-   rows read, candidates and a NOT-reached list. ⛔ An agent's "nothing" on an
-   FR row is re-read by you from the trees before it is written; FR-1 is the
-   report players say leaves the game unplayable.
-7. **⭐ `NOROWS.tsv` — the changed code that has no rows (added 2026-09-10).**
-   Every `reader=NONE`, `content=yes` file in `NOROWS.tsv` (123 on these
-   trees) is changed hand code with no inventory row, so no row list can carry
-   it: top-level option / config / const tables, and preset data stored outside
-   the `generated` prefixes. Assign each to the agent that owns its system as a
-   TEXT-DIFF item (both trees, compared after trailing-whitespace
-   normalisation), the FR-relevant ones first (README §2b names them), and
-   record the assignment in the agent plan. The agent reports what changed and
-   applies the same taxonomy and `SMELL` / `PERF` tells as for rows. ⛔ A
-   `NONE`+`yes` file that no agent was given is a coverage defect, and 99
-   checks for it.
+**Unit = a changed FILE** (hand-written Lua), a **REGISTRY** (presets), or a
+**LIST** (storage moves, removed/added files). Per unit the agent looks at the
+DIFF — `git diff --no-index` of the two archived copies, or that file's
+`INVENTORY.tagged.tsv` rows with both line ranges — reads the changed hunks and
+just enough context to understand them, and writes **ONE line**: `nothing odd`
+or `FLAG: <what looks odd, file:line both trees>`. No per-row verdicts, no
+per-row coverage ledger, no full-body reads unless a hunk cannot be understood
+without one.
 
-## 3 · Per-system reading orders — go into the briefs, binding
+**What counts as odd — flag it** (README §2's classes, as triggers, not a checklist):
+- a `FIX_POLICY` §4 tell in a changed hunk: dead code or dead validation, a sibling
+  that does it differently, a body contradicting itself, an explicit dev comment
+  ("TODO", "should", "hack", "temporary") on changed lines;
+- a signature or argument contract changed while a caller visibly kept the old
+  shape (the F117/F115 shape) — or a same-signature body that starts needing an
+  argument (R08311's shape);
+- storage moved (GameVar → MapVar, `const` → `g_Consts`) with a reader in view
+  still using the old address;
+- a function, preset key or file removed while something visible still names it;
+- a new call into an engine/native function on the new-game / map-entry path (FR-1);
+- new or shortened periodic work — a new thread, hourly/daily handler, a scan in a
+  loop (FR-3 `PERF`);
+- a new preset key with no Lua reader in view, or a removed key still read;
+- an old system meeting a new feature (the owner's thesis, README §2 class g).
+**Not odd:** balance and number changes by themselves, renames carried
+consistently, whitespace/churn, text changes.
 
-**A · turf** (`trains` `landscape` `construction` `drones` `logistics`
-`depots`). (h) FIRST — for each retired module in these systems (`git show
-2dc1dbe^:Code/<module>.lua` for its header, target and stated defect) read the
-1.1.0 target body, confirm the developers' fix is what the re-verification
-said (`VANILLA_FIX_QA` §0 corrects the main report in four places), then the
-NEIGHBOURHOOD: every caller, every sibling, every field the fix now writes.
-Then (b′) rows (write the argument positions out), then (a)/(b)
-`WORTH-READING` biggest files first (`Track*`, `Train*`, `Station*`,
-`Landscaping.lua`, `LandscapeConstructionSite*`, `ConstructionSite.lua`,
-`Construction/Construction.lua`, `Drone.lua`, `DroneControl.lua`,
-`ShuttleHub.lua`, `*Depot*`, `Resources.lua`), then (i), (f), then a 30-row
-`CHURN` spot check. ⭐ Extend `EF-083`: landscaping is rover-only and
-research-gated on 1.1.0 — enumerate what else assumed drones reach a
-landscaping site (`ShouldAddRequestToCommandCenter` readers, the research
-flag readers). `C55` is filed — extend, never duplicate.
+**Drill-down = the deeper check, only on a FLAG.** Read the flagged function(s)
+in full in both trees, their callers (one hop, counting inheritors — memory:
+caller counts must count inheritors), siblings, and the consumer that matters.
+Return one verdict: **FILE** (entry-ready text per README §3: route, both
+citations, reach, falsifier, recipe with its vacuity condition, severity,
+`DIFF-CAUSED` or `PASSING`) · **REJECT** (why it is fine, with the line that
+shows it) · **LEAD** (plausible but needs a running game or a DLC read — a note,
+not an entry). **Budget: about 25 drill-downs for the whole link.** Rank flags by
+likely player harm and drill the top ones; every flag you do not drill is listed
+by name as `flagged, not drilled` in your section — that list is a result, not a
+failure.
 
-**B · colony** (`colonists` `domes` `services` `rockets` `disasters` `story`
-`saveload`). **Save/load FIRST**: every changed/added function in
-`_fixup.lua`, `SavegameFixups.*`, `Persist*`, every `PersistGatherPermanents`
-/ `OnMsg.LoadGame` / `PostLoad` body — what state it rewrites, what 1.0.7
-wrote there, idempotent or not, once-per-save (cite the versioning mechanism
-in `CommonLua`) or every load, and what it does to a colony STARTED on 1.1.0.
-The `RefreshAstrogeologistExtractorBonus` fixup narrowing on `Percent == 20`
-where 1.0.7 pays 10 is noted inside `bugs/F95.md` and never filed — file it
-with the route or refute it, first. Then (h), then (b′) — `ChooseDome`'s own
-vanilla callers from `CALLERS.tsv` — then (a)/(b) biggest first
-(`Colonist.lua` ~298 declarations, `Dome.lua` ~281, `Building.lua` ~254 by
-class prefix, `UniversalRocket.lua` ~239, `SA_Gameplay.lua` ~182), then (i),
-(f), spot check. Story/scenario/mystery Lua last (`Lua/Mysteries` 11,
-`Lua/Scenario` 26); the `StoryBit` presets are a registry agent's. ⛔ `C54`'s
-lesson before any unguarded-read filing: count the unguarded siblings, check
-`EF-005`. The F118 mechanism (1.1.0 registering the layout controller in
-`s_ConstructionControllerDeleteOnLoad`) raises the vanilla question of whether
-any VANILLA `Deactivate` caller resets that flag — this agent's.
+## 3 · The plan — commit it to `TRIAGE.md` "04" before spawning
 
-**C · engine** (`commonlua` `ui`). **The tooling gate first, by ROUTE:** for
-every `CommonLua` subtree, cite the loader (`dofile`/`require` and the
-platform flag) and verdict `shipped-runtime` (read in full) /
-`shipped-dev-only` (read the gate, sample 10 rows for leaks past it) /
-`not-in-fpk` (01's parity list — not read, counted). ⛔ A verdict by directory
-name is a label check; `CommonLua/Libs/MapGen` and `Lua/RandomMap` are RUNTIME
-until the loader says otherwise. The parent keeps the gate table in
-`TRIAGE.md` "04". Then (b′), (a)/(b) in `shipped-runtime` files
-(`CommonLua/Classes` 76, `Core` 25, `Libs` runtime part, `X` 30, `UI` 18,
-`Lua/UI` 17, `Lua/X` 20, `XTemplates` 5), (i), (f), spot check. ⚠️ A
-`CommonLua` change is felt above it: for every real change name ONE consumer
-in `Lua/**` and read whether it still holds (`EF-066`: a `classes.lua` change
-reaches every descendant). UI wrongness is a hypothesis until a keyboard sees
-it (`FIX_POLICY` §4) — file `cand`, tier U, observation named.
+**Leads pass first (parent, or one agent): drill these directly, no skim needed.**
+1. **FR-1 (Linux new-game crash, the highest-priority report):** the map-generation
+   set — `CommonLua/Libs/MapGen/Data/MapGen/MapGen-Default.lua`, `MapGen-SubProc.lua`,
+   `MapGen-Tools.lua`, `CommonLua/Libs/MapGen/Data/__const.lua`, and agent B21's
+   lead that `MapGen:ApplyPass` calls `ResumePartialPassEdits("MapGen")` twice
+   against one `Suspend` (`CommonLua/Libs/MapGen/MapGen.lua` 1.1.0 :1160-1161).
+   Then skim README §2b's FR-1 render/config list. ⛔ The temporal upscaler is
+   REFUTED as the trigger; the crash is almost certainly native — say what the Lua
+   side can and cannot show, and point at `prompts/FR1_LINUX_SITTING.md`, the
+   owner's machine test that beats any source read.
+2. **The 8 F117-SHAPE caller sites** (TRIAGE §3: `ColonistTransport.lua:114/123/136/141`
+   `GetTransportRoute`; `_fixup.lua:1335`, `ActionFX.lua:2052/2821/3967`
+   `ActionFX.GetLocObj`) and R08311 (`RocketBase.lua:966` omits `res_id`).
+3. **The carried leads in your inbox below:** the F95 note (`RefreshAstrogeologistExtractorBonus`
+   on `Percent == 20` vs 1.0.7's 10), R09089 / R09475 research-cost migration (not
+   C76's `DiscoverTech` route), C62's missing authored ScriptStatements instance,
+   R11004's universal-storage Seeds route, the F118 question (does any vanilla
+   `Deactivate` caller reset `s_ConstructionControllerDeleteOnLoad`?), and `EF-083`
+   (what else assumed drones reach a landscaping site).
 
-**D · storage + removed/added** (one agent). Class (c) from `STORAGE.tsv`:
-every `moved-file` / `kind-changed` / `removed` row, grep both trees for every
-READER, classify `updated / still-old-address / dynamic`; a `still-old-address`
-reader in shipped runtime code is a finding naming what it now reads. Calibrate
-on the `Landscapes` move first (1.1.0 `MapVar("Landscapes", {})`,
-`Landscaping.lua:21`; `bugs/F115.md` line ~46) and check against the entry.
-Then `FILES.tsv`: the 36 removed — a nonzero still-present-names count is a
-MOVE (find where: `CommonLua/Classes/Mod.lua` → `CommonLua/Modding/Mod.lua` is
-the known case), zero is a candidate (e) that still needs the CAPABILITY
-searched (UI string, preset, `XTemplate`); the five removed `XDef` dialogs and
-the five tutorial files are the obvious (d)-or-(e) cases; the old modding
-backend (`Mod*.lua`, `ModsBackend.lua`) has the widest reach. The 305 added
-minus `DLC/norman`: class (f) grouped by what they plug into; zero callers ⇒
-dead-on-arrival (tell 2) or a hook by name — say which, with the search.
+**Skim agents (5, waves as you like), each told the flag list above VERBATIM:**
+- **A · turf** (trains, landscape, construction, drones, logistics, depots) — its
+  changed files, biggest first; the 64 `SMELL` rows TRIAGE lists get a one-line
+  keep/drop each.
+- **B · colony** (colonists, domes, services, rockets, disasters, story, save/load) —
+  `_fixup.lua` / `SavegameFixups*` / `PostLoad` / `OnMsg.LoadGame` bodies FIRST
+  (what a 1.0.7-era fixup does to a colony started on 1.1.0); 90 `SMELL` rows keep/drop.
+- **C · engine** (`CommonLua`, UI) — first a one-line-per-subtree loader note
+  (`shipped-runtime` / `dev-only` / `not in fpk`; ⛔ by the loader's line, never by
+  the directory name) so dev tooling is skipped honestly; then runtime files; the
+  90 `NOROWS` text-diff files are skimmed here as plain diffs; 191 `SMELL` rows keep/drop.
+- **D · storage + removed/added** — `STORAGE.tsv` moved/removed rows and `FILES.tsv`:
+  flag only where a reader of the OLD address or name is still visible
+  (calibrate on `Landscapes`, `bugs/F115.md`); the 36 removed files: moved or gone?
+- **E · presets** — per REGISTRY, not per row: skim `PRESETS.tsv`'s changed keys
+  for the registry (churn classes skipped), flag removed-but-read keys,
+  new-but-unread keys, type changes. Split the 123 registries across 2–3 agents by
+  size; `StoryBit`, `BuildingTemplate`, `TraitPreset`, `XDef` first.
 
-**E · presets, one agent per registry** (`CropPreset`, `Meal`, `Resource`,
-`LawDef`, `PolicyDef`, `Tech`, `Cargo` are 03's where `dlc-adjacent`; yours
-are the remainder plus `BuildingTemplate`, `TraitPreset`, `StoryBit`, `XDef`,
-`FactionDef`, `Scenario`, `PopupNotifications`). Rows are the readable pile
-after 01's churn rules (`PRESETS.tsv` `churn-class = none`). ⛔ Field-level:
-the deliverable per row is **which key, what value, which base-game CONSUMER
-reads it (`file:line`)**, or `no Lua reader found` with the grep. The question
-is the thesis's: does the old consumer still read the new value correctly? A
-new key nobody reads is tell 2; a removed key someone still reads is a nil
-where a value was. No balance opinions. Removed data files worth a presence
-check: `TutorialPreset`, `DiscoveryGenericPreset`,
-`FactionDef/TransHumanistMovement`, `PopupNotificationPreset-Tutorial`.
+Retired-module neighbourhoods (the (h) seeds in TRIAGE §3) are skimmed by their
+system's agent: glance at the neighbours of each 1.1.0 target for anything the
+developers' fix disturbed; flag, do not re-audit the fix.
 
-## 4 · What every agent returns — README §4's list, plus
+## 4 · What every skim agent returns (committed verbatim)
 
-- **`DIFF-CAUSED` or `PASSING`** on every finding. ⭐ **The surface sweep
-  (owner, 2026-09-10):** a body opened for any reason — a changed row, a
-  caller, a sibling, a consumer — that meets a `FIX_POLICY` §4 tell (dead code
-  or dead validation, sibling contradiction, self-contradiction, an explicit
-  dev comment) is returned as a `PASSING` finding with the tell named, whether
-  or not 1.1.0 caused it. Not a hunch: a tell, or nothing.
-- **coverage**: rows given, rows read, rows NOT reached with the reason; the
-  30-row `CHURN` spot check (hits reopen that file's churn).
-- **for each finding**: entry-ready text per README §3, both trees cited, the
-  recipe derived separately from the diagnosis, the falsifier's form
-  (executing via the `tools/desk_*.py` pattern where the body allows;
-  `desk_probes_f67_f59.py` for building/unit bodies, `desk_f117_argshape.py`
-  for scoring/choice bodies).
+1. The skim table: `unit · nothing odd | FLAG: …` — one line per unit.
+2. Flags ranked by likely player harm, each with both-tree citations.
+3. `SMELL` keep/drop lines (A, B, C).
+4. NOT skimmed: units it did not reach, by name, with the reason.
+Commit each to `reports/vanillahunt/agents/<A..E>[-n].md` (banner: brief hash,
+units given, date) — 99 audits against these. Drill-down results go to
+`agents/drill-<nn>.md` the same way.
 
-## 5 · Scope fence
+## 5 · The control — kept, because it is cheap
 
-**In:** §2–§4, filing, `agents/` reports, `TRIAGE.md` "04" (the gate table,
-coverage per agent, spot checks). **Out:** every `dlc-adjacent` row (03's —
-a seam an agent finds in an untagged row is a one-line note to 03 and a triage
-drift for 99); `DLC/**`; any `Code/` edit or module; any tool edit; ⛔ a
-finding that implies a KEEP module is now wrong on 1.1.0 is a hotfix-3
-checklist item, TAKEABLE WHEN the owner rules — never repaired here.
+The four seeded positives are in the pool, and the agents are NOT told:
+`Lua/Units/Train.lua` `Train:UnloadAll` (F114), `Lua/Landscape/Landscaping.lua`
+`LandscapeForEachUnit` (F115), `Lua/Buildings/TrackElement.lua`
+`TrackGridElement:DemolishAndSplitTrack` (F116), `Lua/_GameUtils.lua` `ChooseDome`
+(F117). Score whether the skim FLAGGED each file (a skim that walks past F115's
+added `map` parameter is not a skim). Also re-open 2 random `nothing odd` units per
+agent yourself; report both numbers in your section.
 
-## 6 · Stop conditions
+## 6 · Parent duties
 
-An agent's verified finding fails twice (the brief is wrong — fix the brief,
-record the drift, re-issue) · a falsifier needs a running game (checklist
-rider, TAKEABLE IN the post-upload sitting or the next organic play) · ⚠️ if
-the session cannot complete the plan: commit every report and filing so far,
-mark the unrun agents in the `TRIAGE.md` "04" plan as NOT RUN with the
-reason, and STOP — ⛔ do not author `04b`; the owner decides how the remainder
-runs (the same orchestrator resumed on the committed plan is the designed
-recovery, which is why the plan and the reports are committed as you go).
+- Verify every **FILE** verdict yourself from the two trees before writing an entry
+  (re-derive the route — README rule 6); a verdict that does not hold is REJECT, noted.
+- File surviving findings as `C` entries per README §3 and rule 15's filing protocol
+  (pull, next free numbers, `--regen`, commit, push immediately).
+- A runtime check that needs a fresh 1.1.0 colony → ONE combined checklist rider at
+  the end, TAKEABLE WHEN, not one per entry.
+- Write `TRIAGE.md` section "04": the plan, per-agent units skimmed / flagged /
+  drilled, the control numbers, the `flagged, not drilled` list, and short
+  **FR-1 / FR-2 / FR-3** subsections (what was skimmed and drilled for each, what
+  was found, what the source cannot show).
 
-## 7 · What may NOT be claimed
+## 7 · Scope fence and stops
 
-`tested`. That a system with no findings is clean (report rows and agent
-count). That an unread `CHURN` row is safe. That a retired module's vanilla
-fix is COMPLETE (the re-verification's claim; yours is whether it broke a
-neighbour). That a subtree is tooling by its name. That "no caller found"
-means unreachable without the inheritor count and the search string on the
-entry. That an agent's report is evidence until you re-derived one finding
-from it.
+**In:** the skim, the drill-downs, filing, `agents/` reports, `TRIAGE.md` "04".
+**Out:** `DLC/**` (the DLC deep check's), any `Code/` edit or module, any tool edit,
+metadata/version. A finding implying a KEEP module is wrong on 1.1.0 → a hotfix-3
+checklist item, never repaired here. 03's closed receipts are not reopened; a seam
+you find in your units is yours to file.
+**Stop when** the skim is done and the drill budget is spent, or the context runs
+short: commit what exists, list the unskimmed units and undrilled flags by name,
+close out. ⛔ No `04b`.
 
-## 8 · Close-out
+## 8 · What may NOT be claimed
 
-Outbox to 03 (seams found in untagged rows, if 03 has not closed) and to 99
-(every finding with its route and `DIFF-CAUSED`/`PASSING`, the agent count,
-verification results per agent, every re-issue, NOT-reached lists, spot
-checks, drift). Strike your row. Explicit-path `git add`: `TRIAGE.md`,
+`tested`. That a system or file is clean or bug-free. Any row-level coverage (the
+skim is file-level; say "skimmed N of M files, drilled K flags"). That `nothing odd`
+means safe. That a `LEAD` is a finding. That an FR report is closed.
+
+## 9 · Close-out
+
+Outbox to 99 (every finding with route and `DIFF-CAUSED`/`PASSING`, the skim and
+drill counts, the control numbers, the not-skimmed and not-drilled lists, drift).
+Strike your README row. Explicit-path `git add` of `TRIAGE.md`, each
 `reports/vanillahunt/agents/*.md` by name, `bugs/C##.md` + `bugs/INDEX.md`,
-`facts/EF-###.md` + `facts/INDEX.md` if any, README, 03 (if open), 99; `git rm`
-this file. doccheck GREEN, both selftests GREEN, commit `-F`, push.
+checklist if a rider, README, 99; `git rm` this file. doccheck GREEN, both
+selftests GREEN, `git commit -F <msg> -- <paths>`, push, and verify the push landed
+(`git log origin/main -1` shows your commit).
+
+> ℹ️ **The notes below were written for the retired exhaustive design.** Their
+> row counts and "~250 rows per agent" sizing are context and a map of where the
+> leads are — not an assignment. Their specific leads are live and feed §3.
 
 ## Notes from upstream
 

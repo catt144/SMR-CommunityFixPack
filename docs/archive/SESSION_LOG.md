@@ -8,6 +8,26 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-10 — ⚖️ vanillahunt 04 rescoped to a SKIM before it ran (owner ruling, `smr-bugfixpack-08`)
+
+tags: vanillahunt 04 owner-ruling skim yield DLC_DEEP_CHECK
+
+Owner saw Codex's estimate that the exhaustive 04 was ~38,400 items (~19× the 03b leg) and asked whether our sweeps had
+real value. Measured from the entries' own records: sweeps of OUR code (the 1.1.0 re-verification → hotfix 2's 36
+deletions/10 repairs; reachability/blind audits; call-site sweeps → F113/F115) and targeted follow-ups (C74 → C77) changed
+what shipped or was proven; the broad vanilla source hunt's 03 family filed 20 candidates (C56-C73, C75, C76), none observed
+in play, none built, and closed none of FR-1/2/3. The owner had framed the hunt as a high-level sweep plus a deeper DLC
+check; the chain had grown into exhaustive per-row receipts (01's inventory growth, 02 assigning every row, 03's remainder
+rule spawning 03b/c/d) while the DLC check was queued last. Ruling: *"I want 04 to still fire but I want it to be more of a
+skim, and if it sees something that looks odd in the skim it can do a deeper check in that area."* Rewrote `04_HUNT.md` §0-§9
+(file-level skim by five agents, one line per unit, ~25-drill budget, FR-1 map-gen and inbox leads first, seeded-positive
+control kept, no per-row ledger, no split; upstream notes kept verbatim under a banner); README queue row + deviation (5) +
+agent-return rule + artefact line; 99 pass D audits a skim, plus an upstream note on the ruling and on yield; STATE NEXT;
+`DLC_DEEP_CHECK.md` banner restating the owner's framing (deep on new DLC functions, bounded, no exhaustive census).
+Retired design: `git show e2b0e22:docs/agent/prompts/vanillahunt/04_HUNT.md`.
+
+---
+
 ## 2026-09-10 — the dispatch handoff worked (`smr-bugfixpack-08`): C74 sound sweep → C77, FR-1 sitting script, handoff retired
 
 tags: dispatch C74 C77 FR-1 ck136 ck139 sweep

@@ -71,16 +71,21 @@ refutation (C54's precedent: the reasoning error is the reusable part).
 
 ### D · Coverage — what the chain did NOT reach
 
-Collect every link's and every 04 agent's NOT-reached section; add what they
-did not admit: 01's churn classes by sample size, 04's tooling table by loader
-citation, 02's `other` rows, `SPAN-SUSPECT`/`MULTI`/fpk-divergent rows,
+Collect every link's NOT-reached section and every 04 agent's NOT-skimmed list
+plus 04's `flagged, not drilled` list. ⚖️ **04 is a SKIM by owner ruling
+(2026-09-10, `04_HUNT.md` header): audit it as one** — did each skim agent return
+a line for every unit it was given, were its flags reasonable, did the parent
+verify every FILE verdict, did the seeded-positive files get flagged (04 §5)?
+⛔ Do NOT fault 04 for missing per-row coverage; do report its skim as
+file-level, never as a read of every row. Add what the links did not admit:
+01's churn classes by sample size, 04's loader note by citation, 02's `other` rows, `SPAN-SUSPECT`/`MULTI`/fpk-divergent rows,
 `DLC/` (by design), ⭐ the `PASSING` surface sweep's real reach (it covers
 only bodies someone opened — count them against the unchanged-body total in
 the fragile systems, so the owner sees what fraction of unchanged code was
 ever looked at),
 and README's blind-spot list re-read in the light of the run — did the chain
 learn a new one? State it. ⛔ A "nothing found" in a system is reported with
-its row count and its agent count, never alone.
+its row count (or, for 04, its skimmed-file count) and its agent count, never alone.
 
 ⭐ **The three field reports (README §2b)** each get one plain-language paragraph
 in `HUNT_AUDIT.md` for the owner: what the chain read for it (rows and
@@ -158,6 +163,18 @@ explicit-path `git add`; doccheck GREEN; commit `-F`; push. The owner report
 ends with the `DLC_DEEP_CHECK.md` kickoff line, or says why it should not fire.
 
 ## Notes from upstream
+
+*(dispatch session `smr-bugfixpack-08`, 2026-09-10 — ⚖️ OWNER RULING)* **04 was
+rescoped to a skim before it ran.** The owner: *"I want 04 to still fire but I want
+it to be more of a skim, and if it sees something that looks odd in the skim it can
+do a deeper check in that area."* The owner had framed the whole hunt as a
+high-level sweep of the diff; the exhaustive 04 (~38,400 items) was retired
+(`git show e2b0e22:docs/agent/prompts/vanillahunt/04_HUNT.md`). Consequences for
+you: pass D audits 04 as a file-level skim with ~25 drill-downs, not row coverage;
+pass C's sample still covers every chain-filed entry the same way. The owner's
+concern behind the ruling is YIELD — the 03 family filed 20 candidates, none
+observed in play — so your owner report should say plainly what the chain's
+findings are worth to a player, not only whether they were derived soundly.
 
 *(authoring session, 2026-09-09/10)* Top tier is the authoring RECOMMENDATION;
 at five links the owner assigns (README §1). The chain was consolidated from

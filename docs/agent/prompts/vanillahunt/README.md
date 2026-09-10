@@ -89,7 +89,7 @@ inside a blind spot is not a result.
 | ~~03b~~ | ~~`03b_SEAM_PRESETS.md`~~ | Fable (rec) | no | **DONE 2026-09-10:** 1,984/1,984 read (1,618 PRESETS + 360 generated INVENTORY + 6 CALLERS); C75-C76 filed cand/source-read; six exact ledgers; no child queue |
 | ~~03c~~ | ~~`03c_PROGRESS_SEAM.md`~~ | Fable (rec) | no | **DONE 2026-09-10:** 286/286 read; C63-C65 filed; DeepScanning route connected; no child queue |
 | ~~03d~~ | ~~`03d_CALLER_SEAM.md`~~ | Fable (rec) | no | **DONE 2026-09-10:** 283/283 read (249 INVENTORY + 16 CALLERS + 18 NOROWS); C66-C73 filed; no child queue |
-| 04 | `04_HUNT.md` | **Codex Sol Ultra** (owner-assigned 09-10) | no | the second parent-orchestrates-agents link, everything not tagged (g): one agent per system (turf · colony · engine · storage+removed/added) and one per preset registry, each under its own binding reading order; the parent verifies one finding per agent from the trees, files, and commits every agent report verbatim to `reports/vanillahunt/agents/`. ⚖️ **Does NOT split** (owner, 09-10) — the whole plan runs in one orchestrator, committed as it goes |
+| 04 | `04_HUNT.md` | **Codex Sol Ultra** (owner-assigned 09-10) | no | ⚖️ **RESCOPED TO A SKIM (owner, 2026-09-10):** a file-level skim of everything 03 did not own — five skim agents (turf · colony · engine · storage+removed/added · presets by registry), one line per changed file, drill-downs (~25 budget) only where something looks odd, FR-1 map-generation leads and the carried inbox leads first. Files what survives, commits every agent report verbatim to `reports/vanillahunt/agents/`. No per-row ledger. **Does NOT split** — sized for one orchestrator session. The retired exhaustive design: `git show e2b0e22:docs/agent/prompts/vanillahunt/04_HUNT.md` |
 | 99 | `99_TERMINAL_AUDIT.md` | **Fable** (rec) | ✅ raises the kickoff | adversarial backward QA: re-derive a sample of findings from scratch against the agent reports, re-falsify both instruments by planting fresh changes, rule on whether the inventory was SOUND, score the controls, measure the surface sweep's real reach, sweep the not-reached lists, empty the folder, end with the `DLC_DEEP_CHECK.md` kickoff line |
 
 **03 split,2026-09-10:** 03b/03c/03d are first-class continuations of03's
@@ -135,7 +135,16 @@ surface sweep** (owner, same day): every body an agent opens for any reason is
 also read for a `FIX_POLICY` §4 tell, and a hit is filed `PASSING` whether or
 not the diff caused it (§3 below). It widens the read only to bodies someone
 was opening anyway; 99 measures that reach so nobody mistakes it for a sweep of
-the unchanged tree.
+the unchanged tree. (5) **04 rescoped to a skim** (owner, 2026-09-10, after the 03
+family closed): *"I want 04 to still fire but I want it to be more of a skim, and
+if it sees something that looks odd in the skim it can do a deeper check in that
+area."* The owner's framing of the hunt had been a high-level sweep of the diff;
+the exhaustive 04 (~38,400 items, ~19× the 03b leg) was not what was asked for, and
+the 03 family's exact receipts (2,955 items → 20 candidates, none observed in play)
+did not show a yield that justified scaling it. 04 now skims per FILE / REGISTRY
+and drills down only on a flag; everything in this README that speaks of 04
+reading "every row", per-row returns or per-agent row coverage is superseded by
+`04_HUNT.md` §2–§8.
 
 ⭐ **Model placement — the OWNER's at five links (`CHAIN_METHOD` §4.0: five or
 fewer, the owner assigns; "(rec)" in the table is this Fable session's
@@ -569,9 +578,11 @@ split it across subagents. Rules, binding on every link that fans out:
   **`SMELL`** — a `FIX_POLICY` §4 tell in EITHER body it opened, with the line,
   or `none` (the surface sweep, §3). ⛔ "Looks fine" and "no issues found" with
   nothing behind them are REJECTED results — re-issue the batch.
-- **A hunt agent (04) additionally returns** entry-ready findings tagged
-  `DIFF-CAUSED`/`PASSING`, a coverage section (rows given / read / NOT reached
-  with reasons) and its `CHURN` spot check; **the parent commits the report
+- **A hunt agent (04) returns the SKIM shape instead** (owner, 2026-09-10 —
+  `04_HUNT.md` §4): one line per changed file / registry / list (`nothing odd`
+  or `FLAG: …`), ranked flags, and a NOT-skimmed list; a drill-down returns
+  FILE (entry-ready, `DIFF-CAUSED`/`PASSING`) / REJECT / LEAD. The per-row list
+  above binds 02 and the 03 family, not 04. **The parent commits every report
   verbatim** to `reports/vanillahunt/agents/` — 99's primary evidence.
 - ⛔ **THE CONTROL.** *"Twelve agents found nothing"* is indistinguishable from
   *"twelve agents read badly."* Seeded positives are in the pool WITHOUT the
@@ -675,7 +686,7 @@ docs/agent/reports/vanillahunt/
   NOROWS.tsv      01  (treediff v1.2, added 2026-09-10) every changed .lua file with NO inventory row — reader NONE/presetdiff, content yes/ws-only, normalised lines changed. The NONE+yes rows (123) are changed code no instrument lists; 04 reads them as text
   *.tagged.tsv    02  the two working copies with system / dlc-adjacent / class / SMELL columns (01's files untouched)
   TRIAGE.md       01 §0 counts · 02 §1–§4 ledger (counts, control scores, row lists per link and per 04 agent) · 03 and 04 APPEND a named coverage section each (reached / NOT reached; 04's per agent, plus its tooling gate table) · 03 writes "For dlccheck"
-  agents/*.md     04  every hunt agent's report, verbatim, bannered (brief hash, wave, rows given) — the primary evidence 99 audits
+  agents/*.md     04  every skim agent's and drill-down's report, verbatim, bannered (brief hash, units given) — the primary evidence 99 audits
   HUNT_AUDIT.md   99  the verdict
 ```
 

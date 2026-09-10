@@ -12,6 +12,15 @@ as §2, §3 and §4. ⛔ Fire this brief only after that chain's 99 has run — 
 owner report carries your kickoff line and the base-game seam result you
 inherit rather than redo.)*
 
+> ⚖️ **OWNER'S FRAMING (restated 2026-09-10, when the vanilla hunt's 04 was cut
+> to a skim):** the owner asked for *a high-level sweep of the diff* and *a deeper
+> check into the NEW functions for bugs in the DLC* — this brief is the deep half.
+> Keep it deep and bounded: the DLC's own new code (~15.8k lines in `norman`, ~1.3k
+> in `thomas`) read properly, plus the base-game changes made to accommodate it.
+> ⛔ Do NOT inflate it into an exhaustive per-row census of the whole tree with
+> exact receipts — that is what the owner rejected for 04. Size the chain from the
+> DLC's function count, and state its budget up front.
+
 > 🎯 **YOUR JOB IS TO AUTHOR A CHAIN, NOT TO RUN THE CHECK.** Handoff brief in
 > the shape of `HOTFIX_2_HANDOFF.md`. Decompose into `prompts/dlccheck/` with a
 > terminal audit. ⛔ 17k lines of new content will not fit one context.
