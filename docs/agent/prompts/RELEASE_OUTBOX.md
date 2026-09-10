@@ -34,6 +34,24 @@ player surface bumps it by one on release.
 
 ## Released — history, newest first (cleared here by RELEASE.md)
 
+### Released in v6 (2026-09-09) — hotfix 2, the game-1.1.0 patch
+- Nothing passed through *Pending*: the whole release was a chain
+  (`prompts/hotfix2/README.md`, every commit by link) and its text link (06)
+  wrote the surfaces directly, then link 100 re-swept them after the audit.
+- **36 modules DELETED** — game 1.1.0 repairs those defects itself; 36 fix-list
+  entries removed (`SMR-CommunityMods` `7cef4f3`), count word Eighty-two →
+  **Forty-six**, "Under the hood" four → three, judgment calls six → three.
+- **Repaired or re-copied on 1.1.0 bodies:** F114 `TrainCargoDumping`, F115
+  `LandscapeUnitFilter`, F116 track salvage, F117 `ArrivalDeaths` (`777249d`),
+  F118 rider, `SaintBlessing`, `StaleReservations`, `ShelterReflex` half (b),
+  `RocketDroneChurn`, `PayloadTemplateRefill`, `VacuumWalks`; the F95 residue
+  pass in `90_SaveSanitizer` (ck126). `last_changes` rewritten wholesale as v6's
+  note (five bullets, the last a disclaimer — nothing watched in a running
+  colony on 1.1.0). ⛔ No "Fixed" anywhere; every "works again" is a claim
+  until the post-upload sitting.
+- New on the card: the "Still playing on game version 1.0.7?" section pointing
+  at the frozen v5 build (`v5-game-1.0.7`, ck118).
+
 ### Released in v5 (2026-08-30)
 - **F110 · `Fix_JumboCaveReinforcementWedge`** — a Jumbo Cave mystery could get
   stuck forever clearing waste rock the drones could not reach, so the

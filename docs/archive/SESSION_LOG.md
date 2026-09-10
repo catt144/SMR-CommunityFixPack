@@ -8,6 +8,35 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-09 (night) — hotfix 2 SHIPPED as v6: both stores auto-filled clean, the site published, the writeback landed
+
+tags: v6 hotfix2 release ck71 ck129 ck132 F114 F115 F116 F117 F118 EF-078 EF-083 site STORE_CARD_LIVE POST_UPLOAD_CLOSE
+
+Standing close-out `prompts/POST_UPLOAD_CLOSE.md` (persists), fired on the owner's word "I have uploaded we are live" +
+"page deployed" with two screenshots. Same session as link 100 (`smr-bugfixpack-05`). Nothing ran in a game; no status moved.
+* **Live, owner-confirmed:** PDX updated 09-09 23:27 local, MOD VER. 5, suggested game ver. 350453, 318.92 KB, full card
+  auto-filled, changelog v5 carries the new note. Steam updated 23:22, 315.457 KB, description auto-filled ("Forty-six
+  repairs", the 1.0.7 section — read from the page HTML), Change Notes tab carries both of today's sentences (read from
+  `/changelog/`). ⭐ First clean auto-fill in three cycles; the §3 backups stay REQUIRED (`STORE_CARD_LIVE` updated:
+  5,342 chars ACCEPTED). Tree `version` 6, `pdx_version` "5": PDX displays one behind the tree, as v5 did — ck71, not chased.
+* **Delivered bytes (§0.5(f)):** Steam workshop copy `ModContent.fpk` 315,457 B, md5 `57e01a71f08788be9c79393d6194690f`
+  (downloaded 23:38). `pack_predict` says 49 files for the v6 tree. PDX's 318.92 KB differs from Steam's, as on v5.
+* **Site:** deployments API newest run = `dc892d1` success 2026-09-10T03:38Z; live FAQ + for-modders read 1.1.0.403908,
+  live index has no "published yet" note, live fix list = 43 success + 3 question = 46 = `git show dc892d1` count.
+* **Writeback:** the forced save had stripped all 273 comment lines from `metadata.lua` and every comment from `items.lua`
+  and changed nothing else in items. `metadata.lua` rebuilt from HEAD + the five fields the save set (`version` 5→6,
+  `saved_with_revision` 396349→403908, `saved`, `code_hash`, `pdx_version` "4"→"5"); `items.lua` = HEAD. parsecheck OK,
+  preflight 0 FAIL (PackVersion 1.0.6), `verify_sync` OK. Tag `fixpack-v1.0.0` NOT moved (H-01).
+* **Records:** checklist receipt at the top; `RELEASE_OUTBOX` Pending → Released in v6; STATE rewritten to the v6 kernel.
+
+**EVICTED FROM STATE.md in this commit** — grave: `git show 1aafdbf:docs/agent/STATE.md`. Moved, not deleted: the link
+02–100 landing lines → `prompts/hotfix2/README.md` (every commit) + `reports/HOTFIX_2_AUDIT.md`; the two 09-09 sittings'
+row-by-row readings → this log's 09-09 sitting entries + the checklist "THE SITTING RAN" block; 99b's instrument repairs →
+this log's 09-09 (late) entry; the 126–129 ruling text → the checklist (carried out, receipts in 100's block); the
+re-verification counts → `reports/PACK_1_1_0_REVERIFICATION.md`; "BLOCKS the upload" → nothing does, so the line is gone.
+
+---
+
 ## 2026-09-09 (last) — 100, the doc sweep: the change note says what the tree does, the site says which build is which, and the hotfix-2 chain is closed
 
 tags: 100 hotfix2 F95 F115 F117 ck47 ck126 ck127 ck128 ck129 ck133 EF-075 EF-078 EF-083 STORE_CARD_LIVE UPLOAD_WORKFLOW site

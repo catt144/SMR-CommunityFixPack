@@ -19,8 +19,9 @@ here are false on the other store and were rewritten out of it:
 * *"This page has no comment section"* — true on Paradox, false on Steam.
 * the trailing *"Also on the Steam Workshop"* cross-link — self-referential there.
 ⇒ **Never paste either block into `metadata.lua` verbatim.** The shipped body is
-**5,342** chars as of 2026-09-09; ⚠️ that length is unverified against the upload
-API, and if an upload ever rejects it the field reverts and the report says so.
+**5,342** chars as of 2026-09-09; ✅ **ACCEPTED by both portals at the v6 upload
+(2026-09-09, owner-seen: both pages auto-filled with the full card, nothing
+pasted — the first clean auto-fill in three cycles).** The §3 backups stay.
 ⛔ **The "5,124" this line carried until today was stale** — it predated the
 F105/F108/F110 additions, and the body that actually shipped as v5 measured
 **5,228**. So the upload path is known to accept at least 5,228; this rewrite is

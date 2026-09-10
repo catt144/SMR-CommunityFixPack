@@ -29,6 +29,50 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### ✅ 2026-09-09 — HOTFIX 2 IS LIVE AS v6 ON BOTH STORES, AND THE SITE IS PUBLISHED. This is the receipt; nothing is owed from you tonight.
+
+> **What is live, from your screenshots and what I could read myself:**
+> * **Paradox Mods** — updated 2026-09-09 23:27, MOD VER. **5**, suggested game
+>   ver. 350453, 318.92 KB, the full card auto-filled (the headliner list and the
+>   new changelog are both on the page). ⚠️ "5" is expected, not a slip: the
+>   page shows the number the upload was sent, and the tree moved to **6** in
+>   the save that followed — the same one-behind display v5 had. ⛔ Not a reason
+>   to re-upload (your ruling 71).
+> * **Steam Workshop** — updated Sep 9 @ 11:22pm, 315.457 KB, the description
+>   auto-filled with "Forty-six repairs" and the 1.0.7 section, and the v6 note
+>   is on the Change Notes tab (both of today's sentences are on it). The copy
+>   Steam delivered to your machine is **315,457 bytes**, md5
+>   `57e01a71f08788be9c79393d6194690f` — that is the §0.5(f) bytes check, done
+>   from the real file.
+> * ⭐ **Both pages auto-filled clean. First time in three cycles** — nothing to
+>   paste, and the §3 backups stay in the workflow as the fallback.
+> * **The site** — published at 03:38 UTC from `dc892d1` (deployments API, not a
+>   stored sha): 46 entries live, both "built against" lines read 1.1.0.403908,
+>   the front page's stale "not published yet" note is gone.
+>
+> **What I did after:** the upload's forced save had stripped every comment
+> from `metadata.lua` and `items.lua`. Restored from git in the writeback
+> commit, keeping the five fields the save set (`version` 6, revision 403908,
+> save stamp, code hash, Paradox version "5"). `version` was not hand-set.
+> Item **129** is discharged (upload → pages → site, in that order, done).
+>
+> **What is still owed, and none of it is tonight:**
+> 1. **The post-upload sitting** — one boot on v6, the rows the last sitting left
+>    unrun, by name in "THE SITTING RAN" below: A3 (F118), A10, A5 clause 2,
+>    A9 clauses 4/5, plus the F117 passenger-station recipe (`bugs/F117.md`
+>    §Control — ⛔ never the old "beyond walking distance" one) and the first
+>    suite run on the rebuilt kit. Batch it with the next organic play.
+> 2. **132** — the STATE.md warn. This close-out evicted the pre-release
+>    material from STATE, so it no longer sits against the cap; rule it when
+>    convenient rather than now.
+> 3. **Then the two hunts**, in this order: `VANILLA_DIFF_HUNT.md`, then
+>    `DLC_DEEP_CHECK.md`. Both are authoring briefs (they write chains, they do
+>    not read diffs), both trees are archived, and the installed build has not
+>    changed, so no re-archive is needed.
+>
+> ⛔ Every "works again" in the v6 note is still a claim until that sitting; the
+> note's last bullet tells players so. Field reports are the detector from here.
+
 ### ✅ 2026-09-09 — `100_DOCSWEEP` IS DONE: the words now match the pack that ships. The hotfix-2 chain is closed; the only thing left is your upload sitting.
 
 > **Receipts for 126, 127 and 128 — carried out, not just ruled.**

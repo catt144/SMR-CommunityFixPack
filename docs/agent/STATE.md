@@ -2,59 +2,48 @@
 
 Kernel only: status + pointer, never derivation.
 Eviction procedure: `agent/prompts/STATE_EVICTION.md` (byte-budgeted by doccheck; owner ruling, checklist 42).
-History newest-first in `docs/archive/SESSION_LOG.md`; full pre-eviction STATE = `git show 3ef6fcb:docs/agent/STATE.md`.
+History newest-first in `docs/archive/SESSION_LOG.md`; pre-eviction STATE graves: `git show 1aafdbf:docs/agent/STATE.md`
+(hotfix 2, 09-09) · `git show 3ef6fcb:docs/agent/STATE.md` (08-18).
 Defect truth `agent/bugs/INDEX.md` · facts `agent/facts/INDEX.md` · doc map `docs/README.md`.
 Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/reports/CHAIN_METHOD.md`.
 
 ## Now
-- ⛔ GAME **1.1.0.403908** + DLC shipped 2026-09-08; rig auto-updated, `ModTools\Src` overwritten; 1.0.7 tree
-  ARCHIVED `C:\Dev\SMR-SrcArchive\1.0.7.396349\Src` (`ad5f93d`, `EF-075`). ⛔ Trust runtime over source reads (`EF-078`).
+- ⭐ **HOTFIX 2 IS LIVE AS v6** (2026-09-09, Steam 23:22 / PDX 23:27 local, owner-confirmed by screenshot): 44 modules,
+  36 DELETED (game 1.1.0 fixes them itself), 10 repaired or re-copied on 1.1.0 bodies. Every commit: `prompts/hotfix2/README.md`;
+  verdict `reports/HOTFIX_2_AUDIT.md` (SHIP WITH CHANGES, both changes landed); re-verification `reports/PACK_1_1_0_REVERIFICATION.md`.
+  Tree `version` **6**, `pdx_version` "5" — PDX shows MOD VER. **5** (the display lags the tree by one, ck71: never chase).
+  ⚖️ Owner rule 09-08: a patch note saying "Fixed" is a **CLAIM, false until we confirm it** — the v6 note says so in bullet 5.
+- ⛔ GAME **1.1.0.403908** + DLC shipped 2026-09-08 (`EF-075`); installed Steam build still **24995074** = the archived 1.1.0
+  tree. 1.0.7 tree ARCHIVED `C:\Dev\SMR-SrcArchive\1.0.7.396349\Src` (`ad5f93d`, `EF-083`). ⛔ Trust runtime over source (`EF-078`).
   ⛔ **1.0.7 SAVES CANNOT LOAD ON 1.1.0** (`EF-079`) ⇒ the ENTIRE fixture library is branch-locked; a 1.1.0 leg
   needs a NEW colony provisioned from scratch (hours). Override exists but is triage-only (`EF-080`).
-  ✅ F114+F115 GATED 09-08 (ck106/ck109), then **REPAIRED ON TOP 09-09 (ck123, link 04b)**: F-8/F-9/F-10 carry
-  1.1.0 bodies + behaviour probes, gates KEPT (sense inverted) ⇒ `sigcheck` 0 MISMATCH now.
-  ✅ **F116 REPAIRED in-body** (`add94b3`), NOT gated. Source-derived, NEVER reproduced.
-  ⭐ **1.1.0 RE-VERIFICATION 09-08: 10 FIX / 35 REMOVE / 35 KEEP** (`reports/PACK_1_1_0_REVERIFICATION.md`,
-  ck114-117; QA'd by 3 fresh readers, `reports/VANILLA_FIX_QA.md` §0, 0 flips).
-  ⭐ **LINKS 02–07 DONE 09-08/09** (commits in `prompts/hotfix2/README.md`): 36 modules DELETED; F-1/F-2/F-3
-  repaired; F-6…F-10 RE-COPIED; F116 ck111/119 landed. Kit **94** probes (99b, 09-09 late), 32 `retired`.
-  ⭐ **99 TERMINAL AUDIT 09-09: SHIP WITH CHANGES** (`reports/HOTFIX_2_AUDIT.md`): F117 ⇒ ck127 (repaired, below); ck128 rides
-  ck126; ck129; F118/C55 filed; F60 REMOVE candidate (hotfix 3); Pass D: 3 KEEP wrappers under class (c), seen by NO instrument.
-  ⭐ **LINK 99a LANDED 09-09** — LAST CODE in hotfix 2; **99b BENCH LANDED 09-09 late** (commits: `prompts/hotfix2/README.md`).
-  ⛔ NEITHER REPRODUCED, no probe for F118, NO status word moved. ✅ Desk falsifiers PROMOTED: `tools/deskbench.py` + 4 `desk_*.py`.
-  ✅ **100_DOCSWEEP LANDED 09-09** (`7830134` note · site `dc892d1` · `5d6af93` drift · close-out = the commit striking README row 100):
-  CHAIN CLOSED, folder = `README.md` alone. NEXT = the UPLOAD SITTING, ck129 order: upload → store pages → publish site.
-  🎮 **SITTING RAN 09-09 ATTENDED** (`archive/logs/sitting{boot,suite,play}110_*`, all read AFTER exit). 99 SHIP ≠ clearance (H-04).
-  🎮 **SITTING 2 RAN 09-09 EVENING ATTENDED** (`archive/logs/sitting2play110_*`, read AFTER exit — §3 earned again, SESSION_LOG).
-  Census `44 applied / 0 inactive`, **0 error-shaped lines** (THIRD independent boot). Opt-in OFF by `Loaded mod items for:`.
-  ✅ **SIX ROWS EXERCISED, SIX PASS**: A1 habitat trait filter · A4 refuel toggle (3 clauses, OFF held a FULL SOL) ·
-  A5 Edit Payload (clause 1 + the MANUAL ROUND TRIP, PT-31's clause) · A6 vacuum walks (BOTH clauses, falsifier held) ·
-  A8 train-with-nowhere-to-deliver (row 1's unrun 3rd clause) · A9 track split — **F116's FIRST exercise in a game, ever**.
-  ⛔ **A2 (F117) RECIPE REFUTED** ⇒ ✅ **§Control RE-DERIVED 09-09 late (99b `94cfa2c`)**: the far landing NEVER reaches
-  `GetScoreFor`; the elevator route stands down BY DESIGN; forceable route = passenger-station sweep, desk 8/8 on the shipped
-  span, ⛔ UNTESTED in play (falsifier in the entry). "Ordinary mid-game" WITHDRAWN. ⛔ **A7 VACUOUS** on this colony (checklist).
-  🚫 STILL OWED: A3 (F118), A10, A5 c2, A9 c4/c5 — by name in the checklist. Brief REWRITTEN, not deleted.
-  ✅ OWNER RULED 09-09 eve — ALL LANDED by 99b: F03 `closed` (`1851b1a`) · 4 instruments REPAIRED, `SaveSanitizerUpgradeLeak`
-  DELETED, `MoraleComfortTooltip` SKIPs by name (kit `29fd13b`, `4f062de`) · `LanderEmptyLaunch`/`FreedHousingNotice` REBUILT on
-  1.1.0 bodies, desk 9/9. ⛔ Predictions until the next suite. Still FAIL/ERROR by name: `C47OpenFarmSeedBufferShape` (Herbs
-  100→50); retired `LanderCargoRatchet`/`DroneUnreachableForever`/`AutoExportPriority`.
-  ⭐ **F114 + F115 OBSERVED FIXED IN PLAY** (attended; detail in the 09-09 sitting entry; F34d drones-through-flatten first seen).
-  ⚖️ Owner rule 09-08: a patch note saying "Fixed" is a **CLAIM, false until we confirm it**.
-- ⭐ PUBLISHED both portals — `pdx_id` **156049**, `steam_id` **3787202810**, tree `version` **5** (F110, 08-30).
+- ⛔ NEVER REPRODUCED, status HELD at `filed`/source-derived: **F116** (repaired in-body `add94b3`), **F117** (`777249d`,
+  behaviour probe picks `ChooseDome`'s argument; passenger-station recipe in `bugs/F117.md` §Control, desk 8/8, ⛔ untested in
+  play — `CachedArgShape()` nil ⇒ vacuous), **F118** (rider `0136af1`, no probe). Saint heal SHIPS UNEXERCISED (ck130).
+  ✅ **F114 + F115 OBSERVED FIXED IN PLAY** 09-09 (attended; SESSION_LOG 09-09 sitting entries).
+- 🚫 OWED — the post-upload sitting, ONE boot on v6 (recipes: checklist "THE SITTING RAN" block + `bugs/F117.md`):
+  A3 (F118) · A10 · A5 c2 · A9 c4/c5 · F117's station recipe · the first `RunAll()` on the 94-probe kit (re-stamps
+  `WORKFLOW.md:407`, VOID since 09-09). ⛔ Kit verdicts are PREDICTIONS until then; still FAIL/ERROR by name:
+  `C47OpenFarmSeedBufferShape` (Herbs 100→50), retired `LanderCargoRatchet`/`DroneUnreachableForever`/`AutoExportPriority`.
+- ⏭ NEXT: rule **132** → fire `prompts/VANILLA_DIFF_HUNT.md`, then `prompts/DLC_DEEP_CHECK.md` (authoring briefs, that
+  order — they share the base-game diff). Both trees archived with manifests; no re-archive needed while the build is 24995074.
+- ⭐ PUBLISHED both portals — `pdx_id` **156049**, `steam_id` **3787202810**, tree `version` **6** (hotfix 2, 09-09).
   ⛔ Never re-upload to "fix" a version number — each upload bumps again (H-02). ⛔ Every upload OVERWRITES both
-  page bodies from `metadata.lua`; `description` IS the full card (08-24). ⛔ Auto-fill has NEVER delivered a
-  clean page in 2 cycles ⇒ `UPLOAD_WORKFLOW` §3 paste backups REQUIRED.
-- ⭐ SITE deployed 08-30, **46** live fix-list entries (was 82). ⛔ `publish-site.yml` is `workflow_dispatch` only —
-  committing never publishes. ⛔ Never quote a stored "deployed = <sha>"; read the deployments API
-  (`prompts/SITE_AUDIT.md`).
-- Post-launch LIVE: F105, F107, F108 (v4), F110 (v5); F104 NOT OURS. ⛔ F107 field route untested. ⛔ Read the
+  page bodies from `metadata.lua`; `description` IS the full card (08-24). ✅ v6 auto-fill delivered BOTH pages clean
+  (owner-seen) — the first clean cycle of three; `UPLOAD_WORKFLOW` §3 paste backups stay REQUIRED.
+- ⭐ SITE deployed 2026-09-10 03:38Z (`dc892d1` per the deployments API), **46** live fix-list entries (was 82), the two
+  "built against" lines read 1.1.0.403908. ⛔ `publish-site.yml` is `workflow_dispatch` only — committing never publishes.
+  ⛔ Never quote a stored "deployed = <sha>"; read the deployments API (`prompts/SITE_AUDIT.md`).
+- Post-launch LIVE: F105, F107, F108 (v4), F110 (v5), hotfix 2 (v6); F104 NOT OURS. ⛔ F107 field route untested. ⛔ Read the
   GitHub tracker via `api.github.com/.../issues/<n>/comments`, never the HTML page. ✅ Passage Network UNTICKED 09-09.
-- Shipping artifact: packed `.fpk` = 85 files (`tools/pack_predict.py`); v5 pack verified 08-30 (app **3215050**).
+- Shipping artifact: v6 pack = **49** files (`tools/pack_predict.py`); Steam-delivered `ModContent.fpk` **315,457 B**
+  md5 `57e01a71f08788be9c79393d6194690f` (workshop folder, 09-09 23:38); PDX page shows 318.92 KB — the two portals'
+  sizes differed on v5 too (documented, `RELEASE_PORTAL_PREP` §0.5(f)). Tag `fixpack-v1.0.0` NOT moved (H-01).
   ⛔ Pack route is main menu → MOD EDITOR → File → Pack Mod, NOT Mods Manager → Ctrl-E (⚠️ PORTAL_PREP §0.5 old).
 - Watches: `EF-066` subclass reach unmeasured, ck74 half-open · localisation: German only one SEEN (`EF-039`) ·
   C47 (unrun) · C48 opt-in · F02/F78/F81 organic · riders C42/F99/F80/F96-R2 · `EF-051` falsifier = stray save ·
-  **F109 PARKED** (entry has it). ⛔ Do NOT harden `DestroyedRebuild`'s `efVisible` guard; reopen ONLY with the
-  hex's buildings list + mod list + a save.
+  **F109 PARKED** (entry has it) · **F60** REMOVE candidate for hotfix 3 (audit F-4) · **C55** vanilla pre-sort read.
+  ⛔ Do NOT harden `DestroyedRebuild`'s `efVisible` guard; reopen ONLY with the hex's buildings list + mod list + a save.
 
 ## Hazards — each names an action an agent could take unattended; never do it
 - **H-01** Tag `fixpack-v1.0.0` marks what actually gets packed (moved onto the close-out audit's commit 08-20).
@@ -97,20 +86,19 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 - Display name Relaunched Fix Pack; `id` + `[CommunityFixPack]` log tag KEPT (08-17).
 - Never name fredware's mod on a player surface; no player load-order advice (`EF-054`, FIX_POLICY §8).
 - STATE.md format: most efficient and safest — one fact per line, byte caps do the read job (08-18, item 42).
+- ck118 (09-08): every module carrying a 1.1.0 body MUST decline on 1.0.7 by a behaviour test, never a label (`FIX_POLICY` §2a).
+  1.0.7 players are served by the frozen v5 GitHub build (`v5-game-1.0.7`), linked from the card and the site.
 
 ## Open owner decisions (bodies in `docs/PLAYTEST_CHECKLIST.md` → "Decisions waiting on you")
 - 98 rig half only (⛔ Steam = ONE branch at a time, owner 09-08) · 99 disposition of the self-disabled ·
   100 say anything to players yet (rec no) · 101 accept the re-verification chain shape.
 - 112 DEFERRED 09-09 · **125** RULED+LANDED 09-09: F66 guard yields to `force` (desk-controlled, untested); wrapper re-read → 99.
-- ✅ **126/127/128/129 RULED 09-09 and CARRIED OUT by 100** (receipts in the checklist): F95 pass STAYS, note bullet 2 says
-  "removed on next load" · F117 FIXED BEFORE the upload (`777249d`) · **129 = the sitting's order: upload → store pages → site**.
 - **130 RULED 09-09**: Saint heal SHIPS UNEXERCISED — condition is historical, unforgeable (`EF-080` override yields
   `restored 0`); additive-only and cannot throw (`Lua/TraitPreset.lua:77-95` no throwing path, `WhenActive` is a gate not
   a trap). ⛔ Its kit probe PASSes vacuously with no domed Saint — NOT coverage. Field reports are the detector.
-- ⛔ BLOCKS the upload: nothing but the sitting itself (H-04; chain closed 09-09). 118 RULED ⇒ re-copies MUST decline on 1.0.7 (§2a).
-- ✅ **131** RULED promote + LANDED 09-09 late (`tools/desk_*.py`) · **132** STATE.md warn:
-  raise 12288 again or accept per-session eviction until the 1.1.0 fallout closes (GROWING) · **133** six self-check-promise
-  decisions (`reports/SELFCHECK_PROMISE_COMBINED.md` §7), routed 09-09.
+- ✅ **131** RULED promote + LANDED 09-09 late (`tools/desk_*.py`) · **132** STATE.md warn: raise 12288 again or accept
+  per-session eviction (this close-out evicted the pre-release material; measure, never quote) · **133** six
+  self-check-promise decisions (`reports/SELFCHECK_PROMISE_COMBINED.md` §7), routed 09-09.
 - 73 blame surface — harden or not · 76 confirm (a) was a ruling not a leaning · 53 harden now or in 1.0.1
   (rec 1.0.1) · 51 both-packs leg timing (rec after launch) · 50 chain-vs-replace wording · 47 two modder-page
   wordings · 43 opt-in pack re-tick · 41 dialog wording + sweep cap 5→8 · 40 `smr_shuttles` name · 39 dialog re-fire.
