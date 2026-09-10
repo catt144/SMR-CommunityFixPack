@@ -290,7 +290,7 @@ exit code, so the green gate is a real gate. ⛔ Neither is wired into
 **4 / 4.** ⛔ This scores the INSTRUMENT, not any agent — 02 still owes the
 agent-pool score.
 
-### 0.13 · ⭐ v1.1 re-emission (2026-09-10, the authoring session `smr-bugfixpack-c3`, AFTER 01 closed) — hole 0.11.1 MEASURED, then CLOSED for the orphans
+### 0.13 · ⭐ v1.1 re-emission (2026-09-10, the authoring session `smr-bugfixpack-c3`, AFTER 01 closed) — hole 0.11.1 MEASURED, then REDUCED (not closed: the orphans are now rows; in-span declarations are covered only THROUGH their outer function's hash, and anonymous `function(` literals stay outside)
 
 The owner asked whether the "4,883 indented declarations covered by neither
 instrument" could be repaired rather than only passed on. Measured first, on
@@ -299,7 +299,7 @@ the 1.1.0 side of the changed + added `hand` files:
 | indented declarations | count | status |
 |---|---|---|
 | total (`INDENTED` regex, as 0.11.1 counted) | 4,142 | — |
-| INSIDE an enumerated indent-0 span | 2,033 | were ALWAYS covered — the outer body's hash includes them; 0.11.1 over-stated the hole by this much |
+| INSIDE an enumerated indent-0 span | 2,033 | were ALWAYS covered — the outer body's hash includes them; 0.11.1 over-stated the hole by this much. ⚠️ Covered THROUGH the outer row only: a `body` verdict on the outer function does not say which nested function moved — the reader finds that in the diff of the outer span |
 | OUTSIDE every indent-0 span | 2,109 | the real hole: table-field methods in `DefineClass{}`/metatables, `Run = function(seq_state)` steps in `Lua/Scenario/*.generated.lua` (player-facing mystery code), file-level nested locals |
 | of those, nested inside ANOTHER orphan | ~1,059 | covered once the enclosing orphan is enumerated |
 | ⇒ orphans enumerated by v1.1, `hand`, 1.1.0 side | **1,050** | plus 1,885 in `generated` (613 one-line); 1,377 identical across the trees |
