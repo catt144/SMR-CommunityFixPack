@@ -25,12 +25,9 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   A3 (F118) · A10 · A5 c2 · A9 c4/c5 · F117's station recipe · the first `RunAll()` on the 94-probe kit (re-stamps
   `WORKFLOW.md:407`, VOID since 09-09). ⛔ Kit verdicts are PREDICTIONS until then; still FAIL/ERROR by name:
   `C47OpenFarmSeedBufferShape` (Herbs 100→50), retired `LanderCargoRatchet`/`DroneUnreachableForever`/`AutoExportPriority`.
-- ⏭ NEXT: fire `prompts/vanillahunt/02_TRIAGE.md`. ✅ 01 DONE 09-10 (`7f7d87a`): `tools/treediff.py` + `tools/presetdiff.py`
-  (both `--selftest` 16 PASS), five TSVs + `TRIAGE.md` §0 in `reports/vanillahunt/`, seeds 4/4, fpk parity PERFECT (`EF-085`,
-  0 divergent). Delimiter over-span routed as **ck135** (0 shipped hashes affected). ⭐ `treediff` **v1.1** same day: indented
-  orphans covered, INVENTORY 9,832 → 11,742 (`TRIAGE.md` §0.13; 99 audits it as drift — a second author on a closed link's tool). (chain authored 09-10; 5 links,
-  04 = Codex Sol Ultra + NO split (owner 09-10); rest ck134, rec 03 + 99 Fable). `DLC_DEEP_CHECK.md` fires AFTER its 99.
-  Both trees archived with manifests; no re-archive needed while the build is 24995074. 132 still unruled (not a gate).
+- ⏭ NEXT: fire `prompts/vanillahunt/03_SEAM.md` + `04_HUNT.md` (independent; may run at once; 04 = Codex Sol Ultra, no split). ✅ 02 DONE 09-10:
+  3 `*.tagged.tsv` + `TRIAGE.md` §1–§4 (`reports/vanillahunt/`), 3,699 rows agent-classified, 8 F117-SHAPE candidates, seeds 4/4 content.
+  ✅ 01 DONE (`7f7d87a`); `treediff` v1.2 adds `NOROWS.tsv`. README §2b: FR-1/2/3 field reports read FIRST. `DLC_DEEP_CHECK.md` fires AFTER 99.
 - ⭐ PUBLISHED both portals — `pdx_id` **156049**, `steam_id` **3787202810**, tree `version` **6** (hotfix 2, 09-09).
   ⛔ Never re-upload to "fix" a version number — each upload bumps again (H-02). ⛔ Every upload OVERWRITES both
   page bodies from `metadata.lua`; `description` IS the full card (08-24). ✅ v6 auto-fill delivered BOTH pages clean

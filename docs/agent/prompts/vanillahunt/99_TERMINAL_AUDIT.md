@@ -357,3 +357,43 @@ whether `presetdiff`'s fixed four-prefix scope should become "every file that
 holds `PlaceObj` blocks" (it could not change mid-chain without invalidating
 02's `PRESETS.tagged.tsv`). Minor: in the owner session I first said "124
 files"; that count included the one whitespace-only file.
+
+---
+
+*(from link 02, `smr-bugfixpack-b6`, 2026-09-10 — TRIAGE.md §1–§4 is WRITTEN. ⛔ A class is a sort key, `WORTH-READING` a routing flag, a `SMELL` a PASSING candidate to derive; no row here is a finding.)*
+
+**The control, in numbers (TRIAGE.md §2):** seeds **4/4 by content, 2/4 by strict label** — F114 returned (i)+(g), F117 returned (b); the parent ruled 4/4 with reasons you may overturn (F117's (b′) caller was OUR module, absent from vanilla; F114's change IS two guards). Second numbers: BLIND self-sample n=20 — WR/CHURN 20/20, guard 19/20, primary class 15/20; round 2 on 295 rows (B05, B06) — WR/CHURN 99 %, primary class 77 %. B12.r2 issued, not ingested. ⭐ F115's agent independently re-found the known F34(d) dead `filter_embark` (tell 2) — the surface sweep's own positive control.
+
+
+# 02 drift + deviations log (for 99's inbox) — kept as it happens
+
+## Deviations by the parent (stated, deliberate)
+- D1 dlc-adjacent tag two-tier (T1 literal + T2 qualified), not the brief's literal 25-term list (2,918 Lua / 8,209 preset rows literal vs 1,289 / 1,618 applied). Reason: a tagged row leaves 04; 03 cannot hold thousands.
+- D2 Taxonomy "our scar" cells for F115 and F117 redacted to `[example withheld]` in every agent brief — the brief demands both "taxonomy VERBATIM" and "not told which rows are seeds"; the verbatim cells named the seeds' functions and changes. Agents also told not to open C:\Dev\SMR-BugFixPack\docs (bugs/F11x would name them).
+- D3 Agents wrote their verbatim return to a private scratchpad file (returns/Bxx.txt) and replied with COUNTS+NOTES only — the brief says "It does not write files". Reason: 24 inline returns would have put ~140k tokens into the parent context and forced hand re-typing into the TSV; the parent still wrote every shared file, and ingestion is mechanical (tri_ingest.py validates each row).
+- D4 Fan-out pool includes the 13 non-SPAN-SUSPECT pure `sig` rows (brief names body/body+sig only).
+- D5 Returned per-row fields follow the 02 brief §2.C.2 list; README §4's "who reaches it" and "the falsifier" were NOT asked of triage agents (02 classifies, 03/04 derive — 02 fence).
+- D6 PRESETS: REINDEX-SWAP, added-preset, removed-preset rows routed to 04-E as READ (brief names only `none`); REINDEX / T-ID / COMMENT are NOT-READ.
+- D7 A third tagged copy, CALLERS.tagged.tsv, holds unit D's verdicts (README §6 names "the two working copies").
+- D8 Long bodies (>400 lines, mostly Lua/Scenario/*.generated.lua `Create@` rows) shown to agents as hunks + 8 lines context (`--full` available) — "both bodies open" is partial there.
+- D9 Trains forced into their own batch (B01) so the four seeds sit in three agents, not two.
+
+## Agent drift (each noted by the agent itself or caught at ingest)
+- PARENT drift caught by an agent: unit D first marked 3 `from_ui` caller rows `unsure` (LanderRocket.lua:803, customLanderRocket ×2); agent B10's notes showed they resolve to LanderRocketBase's override, whose (…, from_ui) signature is unchanged on both trees — parent re-checked (LanderRocket.lua:787/:801 both trees) and flipped them to benign. The call-form homonym test cannot see a same-named override on a sibling class.
+- PARENT drift caught by an agent, the second and more serious: unit D marked `ActionFX:GetLocObj`'s four `same` callers (ActionFX.lua:2052/:2821/:3967, _fixup.lua:1335) benign under the appended-param heuristic ("tested/passed-on"). Agent B16 showed the appended `action_pos` feeds a NEW `Source == "ActionObj"` branch — the play paths were updated, the destroy/follow/should-play paths were not. Parent re-read both bodies (ActionFX.lua 1.0.7:1245-1275, 1.1.0:1318-1350) and flipped all four to F117-SHAPE. ⇒ The heuristic can see an unguarded INDEX of a new parameter, never a new BRANCH that only a passed parameter reaches; all ~1,460 appended rows are now worded "benign BY SHAPE — whether the caller needed the new behaviour is not read here". 99: re-derive a sample of appended callees whose new param gates a new branch.
+- PARENT drift caught by an agent, the third: unit D ruled all 9 `GetEnvironment` `same` callers benign because `ResolveMap` is documented to take a game object — but `Lua/X/Infobar.lua:582` (C00694) passes a CITY (agent B24), and City.lua defines no GetMap/GetMapSlot in either tree. The reason covered objects, not the argument actually passed; C00694 flipped to `unsure`, the 8 object-passing callers stay benign. ⇒ a per-callee verdict needs each call's ARGUMENT kind checked, not just the callee's contract.
+- A (b′) shape unit D cannot see by construction: R08311 `Funding:CalcBaseExportFunding(amount, res_id)` — SAME signature both trees, but the body now needs `res_id`; `RocketBase.lua:966` still omits it (agent B12). CALLERS.tsv is keyed on signature changes, so it never listed this call. Reaches 04 via the agent's (b′) row verdict.
+- B02, B09, B10, B13: wrote a temporary rowdump dump file in the scratchpad to read in chunks, deleted after (rule 1 of the brief breached, disclosed by both).
+- B07: 52 rows returned `WORTH-READING` with no reason clause (format lapse; accepted, counted, marked `[no reason clause returned]`); 1 row with a three-part class `(a)+(c)+(i)` (validator widened).
+- B06: three SMELLs (R10333, R10393 `#log` on false; R10383 `next(nil)`) rest on "throws in stock Lua" — EF-005 says this engine TOLERATES #nil / next(nil) / ipairs(false); those smells are probably void. B01 withdrew its own such smell after reading a dev comment.
+- B08: its first return file was read mid-write (123/228, no COUNTS) before the completion notice — parent waited for the notice; no partial ingest was kept (ingest re-reads the final file).
+- PERF gap: B01–B15 briefed before README §2b (10eecc8) landed; B16–B24 carry the PERF clause (brief hashes `_v2_perf`).
+
+## Control notes
+- Seeds by CONTENT 4/4 (every change sentence names the real change). By strict LABEL 2/4: F114 returned (i)+(g) [expected (a) — (i) is the guard-specific derived shape of a body change and F114's change IS two nil-guards]; F117 returned (b) [expected (b′) — F117's (b′) caller was OUR module in Code/, absent from the vanilla tree; the agent enumerated the vanilla callers (0 kept the old contract, DroneFactory.lua:230 traced safe)]. Parent ruled 4/4 and re-issued a random 3 of 21 non-seed batches anyway (B05, B06, B12; seed 20260910) for an independent agreement number — a parent grading its own control must not let a lenient ruling stand alone.
+- F115's agent SMELL independently rediscovered the known F34(d) dead `filter_embark` (REVERIFICATION F-8) — evidence the surface sweep works.
+
+## Unit D notes
+- 0 of the 15 pure-sig rows have a byte-identical body still reading a dropped parameter name (measured).
+- The appended-param heuristic (indexed-unguarded vs tested/passed-on) found 0 unguarded indexings; object-typed appended params were each read (all defaulted or guarded).
+- 14 unchanged caller-only files had no link until hand-assigned (tri_other.py caller-only group).

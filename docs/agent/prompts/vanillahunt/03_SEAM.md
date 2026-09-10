@@ -127,3 +127,18 @@ files on 2026-09-08 including `Building.lua`, `ConstructionSite.lua`,
 F117 lesson (README §2 (b′)) came from `ChooseDome` in `_GameUtils.lua`, a
 dome-choice function the DLC work touched — the colonist/dome seam is where a
 vanilla (b′) is most likely.
+
+---
+
+*(from link 02, `smr-bugfixpack-b6`, 2026-09-10 — TRIAGE.md §1–§4 is WRITTEN. ⛔ A class is a sort key, `WORTH-READING` a routing flag, a `SMELL` a PASSING candidate to derive; no row here is a finding.)*
+
+**Your fence is the `dlc-adjacent` set** (TRIAGE.md §1.2): 1289 INVENTORY rows + 1618 PRESETS rows, tagged TWO-TIER, not by the brief's literal list (T1 food/DLC words literal, T2 `Tech`/`Resource`/`Law`/`Policy`/`Cargo` in their qualified sense only; literal matching would have given you 2918 + 8209 rows and fenced them off from 04). Every row also carries `dlc_literal`, so a seam you suspect in an untagged row is checkable in one filter.
+
+- **Row lists:** `TRIAGE.md` §3 "03" — pointers into `INVENTORY.tagged.tsv` (`link` column == `03`: 1289 rows, 320 fan-out classified, **301 WORTH-READING**) + `PRESETS.tagged.tsv` (1618 rows) and `CALLERS.tagged.tsv` (`caller_link` == `03`).
+- ⭐ **FR rows FIRST (README §2b): 36** — FR-3 21, FR-1(a) 10, FR-2 7.
+- **NOROWS text-diff items: 18 files** (changed hand code no instrument lists; `diff` both trees; list in TRIAGE.md §3 "03").
+- **(h) seeds: 0** — —.
+- **F117-SHAPE candidates (0)** — TAKEABLE WHEN you read the caller's body: —.
+- **SMELL rows: 44** (PASSING candidates; the list is in §3) · **agent `unsure`: 0** · **CALLERS `unsure`: 0**.
+- **FR-1(b) = 0 MEASURED** (no FR-1-path row branches on `IsDlcAvailable`/`norman`); the FR-1 rows already in your set arrived by the dlc tag — read them as FR-1(b)'s surface. ⚠️ **Re-ranked by README §2b at ce06307:** the crash persists with ALL DLC content disabled, so DLC-dependent branches on the new-game path go AFTER your (b′) rows, not first; the seam rows on that path stay FR-1.
+- ⚠️ Your stop line (~400 rows) is exceeded by construction on the preset side — `03b_SEAM_PRESETS.md` is the split your own §6 names.
