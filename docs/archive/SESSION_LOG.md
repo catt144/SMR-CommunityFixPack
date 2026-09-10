@@ -8,6 +8,21 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-10 — C74 root cause is two vanilla defects, and the fix is PROVEN LIVE; EF-086 filed
+
+tags: C74 EF-086 AnimMetadata GetAnim GetStateName TrackMultipleHitMoments MOXIE Metatron ck139 dispatch
+
+Dispatch session (`smr-bugfixpack-ae`), continuing C74 with the owner at the keyboard. Moments turned out to be Lua data
+(`Presets.AnimMetadata`, only 5 groups ship) — the "unreadable asset" was never the store. The live-test preset still
+read 0: `GetAnim(1)` returns a state INDEX (`anim 20 number`, log `:255`) while the lookup is keyed by NAME, and the
+tracker (`BaseBuilding.lua:1045-1046`) and Metatron skip the `GetStateName` every other caller uses. Preset + a
+class-level conversion ⇒ owner heard the authored thunks/puffs "perfectly in sync" (¼ and ¾ of the 12,333 ms loop).
+MOXIE measured (classic `MoxiePump working 0`, hand-fire plays; CP3 FX-less by design); Metatron predicted. The first
+strike-timing probe FAILED as an instrument (root-bound spots, travel 0) — its desk control had assumed the premise it
+needed to test. Filed `EF-086`; C74 rewritten; checklist 139 now recommends building.
+
+---
+
 ## 2026-09-10 — C74 filed: the Rare Metals Extractor's hammer strikes in silence — zero `Hit` moments, MEASURED attended
 
 tags: C74 PreciousMetalsExtractor UniversalExtractorHammer RareMetalExtractorCP3 skin hit-moment ActionFX asset field-report dispatch ck139

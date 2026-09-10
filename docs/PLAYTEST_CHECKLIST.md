@@ -29,25 +29,26 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
-### 2026-09-10 — 139: C74, the Rare Metals Extractor's hammer strikes in silence. It's a vanilla animation defect, and our pack could supply the missing strike sounds and steam puffs. **Decision: build a small cosmetic fix, or file and watch. Recommendation: file and watch for now; build only if you want it in a hotfix, after one timing measurement.**
+### 2026-09-10 — 139: C74, the Rare Metals Extractor's hammer (and the MOXIE pump) play no strike sounds. You proved the fix live: the game's own code plays them once two small things are added. **Decision: build it for hotfix 3, or file and watch. Recommendation: build it — small, save-clean, and the game does the work, not a timer of ours.**
 
-> **What you measured (2026-09-10, thank you):** on the hammer skin the hammer
-> visibly strikes, but its working animation reports **0** strike markers, so
-> the game never triggers the strike sound or the steam puff. When you fired the
-> strike effect by hand, both the thunk and the puff played, and on the drill
-> skin the same command did nothing (as it should). So the sounds, the puffs and
-> their wiring all work; only the markers on the animation are missing.
+> **What you measured and proved (2026-09-10, thank you):** the sounds, the
+> steam puffs and their wiring all work when fired by hand. Two game bugs stop
+> them firing on their own: the game stores no "strike" markers for the hammer
+> (or the MOXIE pump), and the code that looks for markers asks with the
+> animation's *number* while they are stored by *name*, so it would never find
+> them anyway. With both patched in the console, you heard the thunks and saw
+> the puffs "perfectly in sync".
 >
 > **The drill skin is not broken.** NASA, SpaceY, BlueSun, Brazil, Roscosmos,
 > Japan and ISRO colonies place the drill model by default. It spins and never
-> strikes, and the developers gave it its own steady steam instead.
+> strikes, and the developers gave it its own steady steam instead. The white
+> (CP3) MOXIE is silent by design the same way.
 >
-> **What a fix would be:** a small module that fires the strike
-> effect itself each time the hammer comes down. Two things come first: an agent
-> designs a one-minute console readout to find *when* in the animation the
-> strikes land (our tools cannot read that from the files), and the design has
-> to pass the save-safety rules, because the game keeps this effect's timer
-> inside your save. Cosmetic only; nothing about production changes.
+> **What the fix is:** one small code correction (look markers up by name) plus
+> strike markers for the hammer (times already proven), the classic MOXIE pump
+> (times still to find, about a minute with you at the MOXIE) and, if wanted,
+> the rare Metatron. Nothing goes into your saves; removing the mod removes it
+> cleanly. Cosmetic only; production is untouched.
 >
 > **For the reporter**, if you want to reply: *Confirmed. It's a bug in the
 > game's own hammer animation, not a mod. If your sponsor is NASA, SpaceY,

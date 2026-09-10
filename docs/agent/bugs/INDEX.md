@@ -216,5 +216,5 @@ the row order below is the old index table's own. Generated from the front matte
 | 166 | C71 | Dredger mystery still reports an RC Explorer malfunction after removing the malfunction effect | cand | P3 | source-read | [C71.md](C71.md) |
 | 167 | C72 | Basics tutorial polls colony resources and construction state every 40–50 milliseconds | cand | P3 | source-read | [C72.md](C72.md) |
 | 168 | C73 | Infobar Food text computes available Food and immediately discards the result | cand | P3 | source-read | [C73.md](C73.md) |
-| 169 | C74 | Rare Metals Extractor hammer strikes in silence: its working animation carries zero Hit moments, so all 11 authored strike FX never fire | filed | P3 | MEASURED (owner console, attended) + source-read | [C74.md](C74.md) |
+| 169 | C74 | Rare Metals Extractor hammer and MOXIE pump play no strike FX: the moment tracker looks presets up by animation INDEX while they are keyed by NAME, and the hammer/pump have no AnimMetadata presets at all — fix PROVEN LIVE (attended) | filed | P3 | MEASURED (owner console, attended) + LIVE FIX PROVEN attended + source-read | [C74.md](C74.md) |
 
