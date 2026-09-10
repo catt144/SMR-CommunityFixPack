@@ -29,6 +29,26 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### 2026-09-10 — 138 rider: eight caller-seam candidates need fresh 1.1 fixtures; none is a release gate. **Decision: take only the naturally available fixture(s), or leave the candidates source-only. Recommendation: prioritize C66 and fold C67/C68 together if a food-service fixture is already available.**
+
+> **TAKEABLE WHEN** a fresh 1.1 colony naturally has the named surface; never
+> convert the branch-locked 1.0.7 campaign. [C66](agent/bugs/C66.md): RC
+> Transport carrying resources from two displayed groups—choose one group's
+> ground-unload **All** and record every resource. [C67](agent/bugs/C67.md) /
+> [C68](agent/bugs/C68.md): hold a meal reservation across a workshift or a
+> genuine failed service entry; record service Food, reservation/capacity and
+> hunger without sacrificing a colonist. [C69](agent/bugs/C69.md): begin Number
+> Six Tracing and time **En Garde** / the intensifier against research start and
+> completion. [C70](agent/bugs/C70.md): with an older large tank present,
+> destroy only the newly designated St. Elmo tank before 80% and identify the
+> rebound target. [C71](agent/bugs/C71.md): on the unlucky first-Dredger close-
+> inspection branch, record the scanning Explorer's status when the popup says
+> it malfunctioned. [C72](agent/bugs/C72.md) / [C73](agent/bugs/C73.md) are
+> profiler-only: attribute the Basics tutorial 40/50 ms callbacks or the Food
+> infobar's discarded availability query against an otherwise identical
+> counterfactual. Apply each entry's vacuity/falsifier; skip what cannot be
+> reached naturally.
+
 ### 2026-09-10 — 137 rider: three vanilla politics candidates need a fresh 1.1 colony, never the branch-locked campaign. **Decision: provision one politics fixture when convenient, or leave all three source-only. Recommendation: provision only if the ordinary play setup can cover them together.**
 
 > **TAKEABLE WHEN** a fresh 1.1 sponsor-faction colony has active politics and

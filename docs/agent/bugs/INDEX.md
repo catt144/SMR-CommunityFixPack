@@ -1,9 +1,9 @@
 <!-- GENERATED — never hand-edit; regenerate with: python tools/doccheck.py --regen -->
 <!-- split_bugs.py --write is the one-time MIGRATION from the retired pre-split doc, never a regeneration; verify: python tools/doccheck.py -->
 
-# Bug index — 195 rows, 160 entry files
+# Bug index — 203 rows, 168 entry files
 
-118 F + 12 D + 65 C. `seq` is the entry's position in the old BUGS.md file order;
+118 F + 12 D + 73 C. `seq` is the entry's position in the old BUGS.md file order;
 the row order below is the old index table's own. Generated from the front matter of
 `docs/agent/bugs/*.md` — edit an entry, not this file.
 
@@ -208,4 +208,12 @@ the row order below is the old index table's own. Generated from the front matte
 | 158 | C63 | A faction disaster can run forever after its faction loses every legislature seat | cand | P2 | source-read | [C63.md](C63.md) |
 | 159 | C64 | A completed Faction Opportunity's temporary approval bonus can become permanent | cand | P2 | source-read | [C64.md](C64.md) |
 | 160 | C65 | The Earth Council introductory popup lost its only caller in 1.1.0 | cand | P3 | source-read | [C65.md](C65.md) |
+| 161 | C66 | RC Transport group-All unloads every carried resource when dumping to the ground | cand | P2 | source-read | [C66.md](C66.md) |
+| 162 | C67 | Returning an old-shift meal reservation decrements the new shift's capacity | cand | P2 | source-read | [C67.md](C67.md) |
+| 163 | C68 | A colonist fulfills and eats a reserved meal after failing to enter its service | cand | P2 | source-read | [C68.md](C68.md) |
+| 164 | C69 | AI mystery treats its authored In Progress research wait as Researched | cand | P2 | source-read | [C69.md](C69.md) |
+| 165 | C70 | St. Elmo tank objective can rebind to a pre-existing tank after the required new tank is destroyed | cand | P3 | source-read | [C70.md](C70.md) |
+| 166 | C71 | Dredger mystery still reports an RC Explorer malfunction after removing the malfunction effect | cand | P3 | source-read | [C71.md](C71.md) |
+| 167 | C72 | Basics tutorial polls colony resources and construction state every 40–50 milliseconds | cand | P3 | source-read | [C72.md](C72.md) |
+| 168 | C73 | Infobar Food text computes available Food and immediately discards the result | cand | P3 | source-read | [C73.md](C73.md) |
 

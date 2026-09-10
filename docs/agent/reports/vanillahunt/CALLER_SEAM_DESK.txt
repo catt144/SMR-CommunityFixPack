@@ -1,0 +1,13 @@
+CALLER SEAM DESK: Lua 5.5 | lupa 2.8 (archived bodies; no runtime claim)
+In Progress while active, 1.0.7 waits: (0, None)
+In Progress while active, 1.1.0 waits: (1, 'TechResearched')
+already researched control, 1.0.7/1.1.0: (0, None) (0, None)
+counterfactual: restoring the named In Progress branch makes the active case return without a wait
+meal return, same-shift A+B remaining count: 1
+meal return, old A/new-shift B remaining count: 0
+counterfactual: tagging A with its reservation shift would leave new-shift B counted
+VisitService entered=true fulfilled/eaten: (1, 1000)
+VisitService entered=false fulfilled/eaten: (1, 1000)
+counterfactual: guarding fulfillment/eating with successful entry would make the false case (0, 0)
+PROBE SWEEP: clean
+PASS: all three seam contradictions discriminate
