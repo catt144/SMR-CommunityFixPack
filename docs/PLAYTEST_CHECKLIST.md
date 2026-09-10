@@ -39,6 +39,11 @@ completed tests move whole to
 > can't fix or haven't nailed down / still checking), and which version? If it says "still
 > checking", two small leads (a Drone Hub effect, one misspelled animation name) are owed a
 > check and a follow-up post. Just say which you posted; the next free session does the rest.
+>
+> ✅ **Update 09-10 late: both leads are checked — neither is something players are missing.**
+> The Drone Hub effect is never triggered by anything in the game; the misspelled sound is a
+> duplicate of a loop that is already playing. A short follow-up post is ready in
+> `agent/reports/FIELD_REPORT_REPLIES.md` — post it only if your reply said "still checking".
 
 ### ✅ 2026-09-10 — 143 CLOSED: **FIX BUILT + TESTED-ATTENDED** — new arrivals no longer fall back into a switched-off, quarantined dome ([C83](agent/bugs/C83.md)).
 

@@ -69,8 +69,28 @@ Samples ship (byte search of `Packs/Sounds.fpk`, 90,324,753 B, 2026-09-10):
 - **HydroponicFarm Lift/Spray/Rotate** — 10 sounds; `FarmHydroponic:StartAnimThread`
   is empty (`Farm.lua:1033-1034`, both trees). Looks like a deliberate stub; a design
   question, not filed.
-- **DroneHub ConstructingDrones Hit1-4** — 4 particles (agent B; not re-derived here).
-- **`dig-reveerse`** — 1 sound keyed to a typo of `dig-reverse` (agent B; not re-derived).
+- **DroneHub ConstructingDrones Hit1-4** — 4 particles (`ActionFXParticles.lua:6149-6235`,
+  1.1.0; 1.0.7 `:6400-6469`). **Re-derived 2026-09-10 late: UNREACHABLE, closed, not filed.**
+  The only `ConstructingDrones` callers fire `start`/`end` with a `DroneFactoryBase` or a
+  `Station` as actor (`DroneFactory.lua:52`, `:63`; `Station.lua:527`, `:537`; 1.0.7 `:54`,
+  `:65`, `:399`, `:409`); a hub only orders from the nearest factory (`DroneHub.lua:186`) and
+  `DroneHubBase` is not a factory (`DroneHub.lua:2`). The anim-moment relay cannot reach it
+  either: `CObject:OnAnimMoment` plays `FXAnimToAction(anim)` (`AnimMoment.lua:153`) =
+  `"Anim:"..anim` (`ActionFX.lua:1464-1468`, `lib.lua:3302-3310`; 1.0.7 `ActionFX.lua:1388`).
+  No FX inherit preset names `Hit1`/`DroneHub`/`ConstructingDrones` (grep, 0). No moment in
+  the game was ever wired to it ⇒ a fix would have to INVENT the timing; not a defect.
+- **`dig-reveerse`** — 1 sound (`ActionFXSound.lua:10141-10160`, 1.1.0; 1.0.7 `:10227`).
+  **Re-derived 2026-09-10 late: typo REAL in both trees, player-INERT, closed, not filed.**
+  Actor is the CP3 shovel `ConcreteExtractorCP3JointShovel` (`RegolithMineVisualCP3.lua:42`,
+  `:48`, `:332`), and the code emits the correct spelling on it (`:305`) — agent B's
+  `RegolithExtractor.lua:494/737` citation is the classic digger's, a different actor. What
+  the typo loses is a SECOND start of `Object RegolithExtractorCP3 LoopDig` (`looping = true`,
+  `SoundPreset.lua:13686-13689`) that is already sounding: the shovel's forward `dig` preset
+  (`ActionFXSound.lua:10090-10108`) ends only at `digEnd`/`Working end`, and the sequence is
+  `dig` `:198` → `dig-reverse` `:305` → `digEnd` `:208`, so the forward loop spans the reverse
+  stroke. (Contrast the classic digger, whose forward loop ENDS at `dig-reverse`, `:10117`.)
+  The reverse-stroke dust particles are spelled right (`ActionFXParticles.lua:7311-7329`).
+  Fixing the spelling would stack the same loop twice. ⛔ Not ear-tested; desk only.
 
 ## Settled
 
@@ -120,4 +140,5 @@ samples the claim.
 tested-attended except Metatron (#3, deliberately out of scope). Still NOT re-derived and now
 possibly promised in public: the DroneHub `ConstructingDrones` Hit1-4 and `dig-reveerse` rows
 above — a Steam post drafted that day called them "still checking" (whether it was posted:
-checklist 144 b; the post's promises: `FIELD_REPORT_REPLIES.md`).
+checklist 144 b; the post's promises: `FIELD_REPORT_REPLIES.md`). ✅ **Both re-derived the
+same night (rows above): neither is a player loss; follow-up drafted in `FIELD_REPORT_REPLIES.md`.**

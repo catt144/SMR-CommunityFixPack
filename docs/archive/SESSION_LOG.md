@@ -8,6 +8,26 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-10 late — handoff FR-1 taken: the two "still checking" sound leads closed; an upload-sitting save found in the tree (`smr-bugfixpack-f0`, unattended)
+
+tags: C74 sound-leads DroneHub dig-reveerse handoff v7 upload metadata
+
+Handoff `HANDOFF_FR1_2026-09-10.md` §4.1 done from the 1.1.0 tree (+1.0.7 archive): DroneHub
+`ConstructingDrones` Hit1-4 UNREACHABLE (only `start`/`end` callers, factory/station actors; the
+anim-moment relay yields `Anim:`-prefixed actions) and `dig-reveerse` a REAL typo that is
+player-INERT (the CP3 shovel's forward LoopDig, `looping = true`, already spans the reverse
+stroke). Neither filed; lines in `C74_SOUND_SWEEP.md`; follow-up post drafted in
+`FIELD_REPORT_REPLIES.md`; checklist 144(b) updated. Not ear-tested.
+Observed, NOT a publish claim (H-04): `items.lua` + `metadata.lua` were rewritten by a Mod
+Editor save at 18:58:59 (log `MarsDebug.exe-20260910-18.56.50`, boot `v1.00-006`): comments
+stripped, `version` 6→7, `pdx_version` "5"→"6" — for an unpacked def the only writer is the
+Paradox upload result (`ParadoxMods.lua:172`; `ModManager.lua:1895` is packed-pdx only). No
+upload lines in any log of that session; the Steam-delivered `ModContent.fpk` is still the
+09-09 23:38 v6 file (315,457 B). Left UNCOMMITTED for `POST_UPLOAD_CLOSE.md` on the owner's word.
+FR-1 (§2) not fired: waits on the owner's "laptop boots Mint".
+
+---
+
 ## 2026-09-10 — the card features the silent machines; three store screenshots wired (`smr-bugfixpack-04`, owner in conversation)
 
 tags: store-card screenshots C74 C77 MOXIE metadata ignore_files v7

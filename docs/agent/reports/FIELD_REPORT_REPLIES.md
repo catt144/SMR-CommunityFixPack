@@ -257,6 +257,14 @@ white CP3 MOXIE; *Can't fix* — the Metatron's 7 rotation sounds (never request
 builds drones and one sound on a misspelled animation name. ⚠️ If that last line went out, the
 two leads are OWED a check and a follow-up (row below).
 
+**Follow-up for "still checking" (drafted 2026-09-10 late; both leads re-derived from the 1.1.0
+tree, `reports/C74_SOUND_SWEEP.md` "Unreachable even WITH presets").** Post ONLY if the owner's
+posted text said "still checking"; no version number needed.
+> Following up on the two I said I was still checking — neither turned out to be something you're missing. The Drone Hub effect was made for building drones, but nothing in the game ever plays it on a Drone Hub, and there is no moment it was ever tied to, so there is nothing to restore without making one up. The misspelled one is real: one digging sound on a version of the Concrete Extractor never starts because its name is spelled wrong. But the same digging loop is already playing through that part of the dig, so correcting the spelling would only play the same sound twice on top of itself. Nothing there is silent that should be making noise.
+
+⚠️ Desk-only (neither was ear-tested) — the post says nothing it would need an ear for. ⛔ Do not
+name the extractor's skin: which skin uses `ConcreteExtractorCP3Dome` was NOT route-checked.
+
 ## Owed, and where it is tracked
 
 | Item | Where |
@@ -266,4 +274,4 @@ two leads are OWED a check and a follow-up (row below).
 | ⭐ **NOW DUE — 1.0.x went live 2026-08-24.** Post **Draft C** on #2, then close the issue and drop `Fix in progress` | `F105`, Draft C above |
 | ⛔ Draft B is now **unposted and superseded** — keep it as the accurate wording for any FUTURE reply, since the posted text has the four overreaches listed above | here |
 | F105 end-to-end repro — attended, rides a sitting | `F105`; not a blocker for either reply |
-| Steam sounds thread — IF the long post went out: re-derive the DroneHub `ConstructingDrones` Hit1-4 and `dig-reveerse` leads, file or close each, post a follow-up | checklist 144 (b); `reports/C74_SOUND_SWEEP.md` |
+| Steam sounds thread — IF the long post went out with "still checking": post the follow-up drafted above. ✅ Leads re-derived + closed 2026-09-10 late (neither a loss) | checklist 144 (b); `reports/C74_SOUND_SWEEP.md` |
