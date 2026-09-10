@@ -107,6 +107,13 @@ none is forceable and say so in the entry; (2) fix `bugs/F117.md` §Control;
 "ordinary mid-game", and this analysis suggests **rarer**. ⛔ That is a claim
 about player impact and it is currently unsupported in the entry.
 
+✅ **DONE 2026-09-09 (99b).** All three landed in `bugs/F117.md`: §Control now
+carries the passenger-station recipe (desk-derived, shown to reach `GetScoreFor`
+on the shipped bodies, ⛔ untested in play) with an in-play falsifier, and the
+frequency claim is withdrawn. ⛔ The elevator guess above is where the wrapper
+stands down BY DESIGN (elevator picks come paired) — not a trigger. If A2 is
+ever re-run, take the recipe from the entry, not from this section.
+
 ### 4b · A7 (F-2 / F58 expedition housing) is vacuous on this colony
 
 The sweep is `OnMsg.NewDay`; its age branch compares against
