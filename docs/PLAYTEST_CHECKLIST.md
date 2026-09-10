@@ -110,8 +110,11 @@ completed tests move whole to
 > landings and 8 take-offs, and the game never once played the touchdown or
 > take-off sound; you heard both land and lift off silently. Then, with only
 > the markers added, you **heard both, distinctly** (16 of 16 landings and
-> take-offs). Markers alone fix the shuttle. The Excavator, RC Terraformer and
-> RC Driller are still unproven. So the decision grows: **build the hammer + MOXIE only,
+> take-offs). Markers alone fix the shuttle. ✅ **The RC Driller too:** drill
+> hits with the markers, none with them removed (your A/B). It's a Roscosmos-only
+> rover for normal players; your colony can build it because of a cheat. Still
+> unproven: The Excavator, and the RC Terraformer, which the game calls the
+> **RC Dozer**. So the decision grows: **build the hammer + MOXIE only,
 > or all of them?** Each extra unit costs one "find the times by ear" step with
 > you. Recommendation: keep 139 as the hammer + MOXIE, and decide C77 after one
 > check in the MOXIE sitting below.
