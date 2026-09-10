@@ -77,7 +77,8 @@ SMRFixPack.Register("AnomalyCaveInMap", {
 
 		-- Can this value stand in for a map in TriggerCaveIn's body? The only
 		-- thing it does with it before anything else is call MapFindNearest on it
-		-- (CaveInRubble.lua:101), so that is what gets asked. Wrapped in pcall
+		-- (CaveInRubble.lua:109 on 1.1.0; `:101` on 1.0.7), so that is what gets
+		-- asked. Wrapped in pcall
 		-- because indexing `false` — the exact value this fix is about — raises.
 		local function is_usable_map(map)
 			if not map then return false end
@@ -102,9 +103,10 @@ SMRFixPack.Register("AnomalyCaveInMap", {
 
 		-- FIX (QA 2026-07-25): the Cave_Of_Wonders site calls
 		-- `TriggerCaveIn(UndergroundMap, FindCaveInLocation(UndergroundMap, ...))`
-		-- — the INNER call evaluates first and indexes `map.object_hex_grid`
-		-- unguarded (CaveInRubble.lua:27), so it raised before the wrapper above
-		-- was ever entered. Same decline treatment for it: returning nil hands
+		-- — the INNER call evaluates first and indexes the map unguarded
+		-- (`map.buildable`, CaveInRubble.lua:23 on 1.1.0; `map.object_hex_grid`,
+		-- `:27` on 1.0.7), so it raised before the wrapper above was ever
+		-- entered. Same decline treatment for it: returning nil hands
 		-- TriggerCaveIn a nil pos, which its own shipped guard already handles.
 		local orig_find = rawget(_G, "FindCaveInLocation")
 		if type(orig_find) == "function" then

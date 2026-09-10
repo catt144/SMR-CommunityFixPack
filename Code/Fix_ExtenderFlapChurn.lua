@@ -45,7 +45,8 @@
 -- orphan would wake once and run one full hub Disconnect/ConnectTaskRequesters
 -- cycle, then end. One-shot and all-vanilla, but ours — so the body now opens
 -- after its yield with the FIX_POLICY §3a orphan gate (form copied from
--- `Fix_MeteorStormWedge:154/:165`). Nothing vanilla is touched before it, so a
+-- `Fix_MeteorStormWedge:154/:165`; that module was deleted 2026-09-08, hotfix2
+-- link 02 — the form is §3a's). Nothing vanilla is touched before it, so a
 -- bare `return` satisfies §3a's reset clause. With the pack installed the gate
 -- is always true and behaviour is unchanged: on load the restored thread runs
 -- its one rebuild (idempotent — it is the rebuild the flap asked for, against
@@ -90,9 +91,9 @@ if not install_error then
 		pending[hub] = CreateGameTimeThread(function(hub)
 			Sleep(DEBOUNCE)
 			-- ⛔ orphan gate (FIX_POLICY §3a; header above), first statement after
-			-- the yield, per the precedent at Fix_MeteorStormWedge:154/:165. No
-			-- vanilla state has been touched yet — the rebuild is below — so a bare
-			-- return complies.
+			-- the yield, per the precedent at Fix_MeteorStormWedge:154/:165 (module
+			-- deleted 2026-09-08; the form is §3a's). No vanilla state has been
+			-- touched yet — the rebuild is below — so a bare return complies.
 			if not SMRFixPack then return end
 			pending[hub] = nil
 			if IsValid(hub) and hub.can_control_drones then

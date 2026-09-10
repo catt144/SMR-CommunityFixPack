@@ -106,8 +106,9 @@
 -- (the machinery is C-side). Worst case if it is: an orphan wakes once in an
 -- uninstalled player's save and rebuilds one connector element from an
 -- all-vanilla body — it would not die, because it touches no mod-created name.
--- The gate below is the same one-line §3a form the other three thread bodies
--- carry (precedent `Fix_MeteorStormWedge:154/:165`); it costs nothing on the
+-- The gate below is the same one-line §3a form the other thread bodies carry
+-- (precedent `Fix_MeteorStormWedge:154/:165`, a module deleted 2026-09-08,
+-- hotfix2 link 02 — the form is §3a's); it costs nothing on the
 -- installed path, where `SMRFixPack` is always present, and it makes the open
 -- question moot rather than load-bearing. No vanilla state is set before it,
 -- so a bare `return` satisfies §3a's reset clause.
@@ -206,7 +207,8 @@ SMRFixPack.Register("TrackConnectorPingPong", {
 						-- revalidation included (TrackElement.lua:194-198)
 						CreateGameTimeThread(function(station)
 							-- ⛔ orphan gate (FIX_POLICY §3a; header above), the body's
-							-- first statement — precedent Fix_MeteorStormWedge:154/:165.
+							-- first statement — precedent Fix_MeteorStormWedge:154/:165
+							-- (module deleted 2026-09-08; the form is §3a's).
 							-- Yield-free body: this can only be false if the thread was
 							-- captured before it ever ran.
 							if not SMRFixPack then return end

@@ -236,8 +236,9 @@ function SMRFixPack.WhenActive(id, fn)
 end
 
 -- Shared DataLoaded/DataChanged preset-patch scaffold (Phase 4, audit C2 —
--- generalises the Fix_LastTransmissionStorage donor; the F75, B3 and A1
--- lessons live HERE so a site cannot forget them).
+-- generalises the scaffold first written in Fix_LastTransmissionStorage, a
+-- module deleted 2026-09-08 (hotfix2 link 02) that this outlived; the F75, B3
+-- and A1 lessons live HERE so a site cannot forget them).
 --
 --   local run = SMRFixPack.DataPatch(id, {
 --       changed_class = "TraitPreset",   -- rerun when DataChanged names this
@@ -300,10 +301,13 @@ end
 -- the site's "shipped data is already right" latch, which is false.
 -- The whole second-load delta in both archived sessions is exactly that: four
 -- modules going `inactive` over a reason that is not true. The cost is not
--- cosmetic — three save-repair paths are gated on the entry reading `active`
+-- cosmetic — a save-repair path gated on the entry reading `active` stops
+-- running for the rest of the session. When this was measured there were three
 -- (Fix_AstrogeologistExtractors:174 and Fix_SaintBlessing:151 via WhenActive,
--- Fix_IndependenceTerraforming:128 by its own status test), so they stop running
--- for the rest of the session.
+-- Fix_IndependenceTerraforming:128 by its own status test); the first and third
+-- modules were deleted 2026-09-08 (hotfix2 link 02), and today the DataPatch
+-- modules with such a path are Fix_SaintBlessing:329 and
+-- Fix_DustSicknessBiorobots:175, both via WhenActive.
 -- Seeding from a per-PROCESS memo makes the B3 branch ("nothing left to change is
 -- SUCCESS") span the reload, which is the lifetime it always meant. A new process
 -- starts with an empty table, so a game update that genuinely fixes the shipped

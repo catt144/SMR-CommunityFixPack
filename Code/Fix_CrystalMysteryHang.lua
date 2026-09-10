@@ -36,7 +36,8 @@
 -- would go on broadcasting CrystalFlyAway hourly for up to its frozen 10-sol
 -- deadline. Bounded and silent, but ours and undisclosed — so the body now
 -- opens each wake with the FIX_POLICY §3a orphan gate (form copied from
--- `Fix_MeteorStormWedge:154/:165`, the pack's proven precedent). It sets no
+-- `Fix_MeteorStormWedge:154/:165`, then the pack's proven precedent; that
+-- module was deleted 2026-09-08, hotfix2 link 02 — the form is §3a's). It sets no
 -- vanilla state, so a bare `return` satisfies §3a's reset clause vacuously.
 -- With the pack installed `SMRFixPack` is always present, the gate is always
 -- true, and this module behaves exactly as before.
@@ -73,8 +74,9 @@ local function start_repeater()
 		while GameTime() < deadline and my_gen == repeater_gen do
 			Sleep(const.HourDuration)
 			-- ⛔ orphan gate (FIX_POLICY §3a; header above). Re-checked after the
-			-- yield, per the precedent at Fix_MeteorStormWedge:154/:165. No vanilla
-			-- state is set here, so a bare return complies vacuously.
+			-- yield, per the precedent at Fix_MeteorStormWedge:154/:165 (module
+			-- deleted 2026-09-08; the form is §3a's). No vanilla state is set
+			-- here, so a bare return complies vacuously.
 			if not SMRFixPack then return end
 			if my_gen ~= repeater_gen or not crystals_mystery_active() then break end
 			Msg("CrystalFlyAway") -- re-announce for a listener that was still in the Epilogue popup

@@ -99,7 +99,7 @@ local function HealStuckReinforcements()
 									local ub = type(d) == "table" and d.unreachable_buildings
 									if type(ub) == "table" then
 										for b in pairs(ub) do
-											flagged[b] = true   -- keys include a plain "version"; harmless
+											flagged[b] = true   -- 1.0.7 kept a plain "version" key in here (Drone.lua:875); 1.1.0 moved it to unreachable_buildings_version (:72, :894) — harmless either way
 										end
 									end
 								end
