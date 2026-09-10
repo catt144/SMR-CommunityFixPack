@@ -1,9 +1,9 @@
 <!-- GENERATED — never hand-edit; regenerate with: python tools/doccheck.py --regen -->
 <!-- split_bugs.py --write is the one-time MIGRATION from the retired pre-split doc, never a regeneration; verify: python tools/doccheck.py -->
 
-# Bug index — 203 rows, 168 entry files
+# Bug index — 204 rows, 169 entry files
 
-118 F + 12 D + 73 C. `seq` is the entry's position in the old BUGS.md file order;
+118 F + 12 D + 74 C. `seq` is the entry's position in the old BUGS.md file order;
 the row order below is the old index table's own. Generated from the front matter of
 `docs/agent/bugs/*.md` — edit an entry, not this file.
 
@@ -216,4 +216,5 @@ the row order below is the old index table's own. Generated from the front matte
 | 166 | C71 | Dredger mystery still reports an RC Explorer malfunction after removing the malfunction effect | cand | P3 | source-read | [C71.md](C71.md) |
 | 167 | C72 | Basics tutorial polls colony resources and construction state every 40–50 milliseconds | cand | P3 | source-read | [C72.md](C72.md) |
 | 168 | C73 | Infobar Food text computes available Food and immediately discards the result | cand | P3 | source-read | [C73.md](C73.md) |
+| 169 | C74 | Rare Metals Extractor hammer strikes in silence: its working animation carries zero Hit moments, so all 11 authored strike FX never fire | filed | P3 | MEASURED (owner console, attended) + source-read | [C74.md](C74.md) |
 

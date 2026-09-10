@@ -8,6 +8,23 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-10 — C74 filed: the Rare Metals Extractor's hammer strikes in silence — zero `Hit` moments, MEASURED attended
+
+tags: C74 PreciousMetalsExtractor UniversalExtractorHammer RareMetalExtractorCP3 skin hit-moment ActionFX asset field-report dispatch ck139
+
+Dispatch session (`smr-bugfixpack-ae`). A Steam player reported the Rare Metals Extractor's hammer is silent where the
+original's was not. Desk trace: class tracks hit moments 1-3, 11 authored FX fire on them with the hammer as target,
+presets resolve, samples ship — every Lua/data link identical on 1.0.7 and 1.1.0 (PASSING); the tracker exits silently on
+zero `Hit` moments (`BaseBuilding.lua:1046-1049`). Asset moment tables proved unreadable (controls negative too), so no
+asset verdict. The owner's console readout then OVERTURNED my first inference: the NASA colony places the CP3 DRILL skin
+by sponsor default (no hammer; by design, it has its own steam FX). Switching to the hammer skin (infopanel Change Skin,
+route walked): hammer visibly strikes, `UniversalExtractorHammer working 0`, tracker dead, and a hand-fired
+`PlayFX("Working","hit-moment1",...)` played the strike sound ⇒ cause MEASURED, FX chain sound. Filed `filed` P3; the
+pack could drive the FX (needs strike-phase timing, save-safety per §3a) ⇒ owner decision 139. Lesson (already a rule:
+close cases completely): the one-minute readout I nearly deferred changed both the object and the verdict.
+
+---
+
 ## 2026-09-10 — FR-1: the anti-aliasing falsifier FIRED — the temporal upscaler is refuted as the Linux new-game crash trigger
 
 tags: FR-1 linux proton nvidia upscaler DLSS falsifier EF-047 EF-079 vanillahunt dispatch
