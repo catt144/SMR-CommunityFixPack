@@ -8,6 +8,22 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-10 — C83 filed from a Steam report, reproduced by the owner the same hour (`smr-bugfixpack-04`, owner attended)
+
+tags: C83 ck143 F53 arrivals safety_dome quarantine field-report steam
+
+A Steam discussion comment: arrivals go to the nearest dome though it is off, quarantined and
+unsupplied. Source read first (both trees): the arrival fallback `safety_dome` is picked by
+distance with no welcoming test (1.1.0 `_GameUtils.lua:403-407`, 1.0.7 `:359-362`), while the
+elevator branch prefers a welcoming one (`:437`); quarantined home dome blocks emigration
+(`Colonist.lua:3510-3512`). Owner then built the layout and OBSERVED it (1.1.0.403908, pack
+on): the rocket's colonists split between the powered dome and the dead quarantined one;
+Suffocation! raised. Attribution: `Fix_ArrivalDeaths` stands down for a walkable destination
+(`:341-345`) — vanilla's. Filed C83 (P1); ck143 = fix or file (rec fix: prefer the nearest
+welcoming dome, as `:437` does). Reply drafts for the reporter in ck143 and in conversation.
+
+---
+
 ## 2026-09-10 — ck139 RULED BUILD; the build prompt made takeable (`smr-bugfixpack-04`, owner in conversation)
 
 tags: ck139 C74 C77 C74_BUILD old-save patch-safety

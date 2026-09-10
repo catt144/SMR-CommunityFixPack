@@ -29,6 +29,35 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### 2026-09-10 — 143: new arrivals with nowhere to live get sent into a switched-off, quarantined dome with no life support, and suffocate ([C83](agent/bugs/C83.md)). You reproduced it. **Decision: fix it for hotfix 3, or file and watch. Recommendation: fix it — colonists die, and the game already does the right thing in its elevator case.**
+
+> **What you saw (2026-09-10, thank you):** two domes in walking range of the pad, the
+> nearer one switched off, quarantined and unconnected. The rocket's colonists split — some
+> into the working dome, the rest walked into the dead one — and the game raised
+> Suffocation!.
+>
+> **Why:** each arriving colonist first looks for a working, open, supplied dome in walking
+> range **with free housing**. When the working dome fills up, the rest fall back to "the
+> nearest dome" — and that fallback never checks power, life support or quarantine. The
+> game's own code does check it when the fallback dome is across an elevator, so this looks
+> like an oversight. Once inside a quarantined dome, the game won't let them leave for a
+> better one.
+>
+> **Our pack doesn't touch this today:** our arrival fix only redirects colonists sent to a
+> dome they *can't walk to*. Yours was walkable.
+>
+> **The fix would:** send the overflow to the nearest dome that is actually **working** —
+> they arrive homeless but alive, and move into housing when it appears — and only fall back
+> to any dome at all when no working one is in reach. The build first checks everyone else
+> who uses the same "nearest dome" rule, so the change only lands where it should.
+>
+> **For the reporter**, if you want to reply: *Confirmed and reproduced. When new colonists
+> can't find free housing in a working dome within walking distance, the game sends the rest
+> to the nearest dome of any kind — even one that is off, quarantined and has no life support.
+> It isn't covered by the pack yet; it's logged for a fix. Until then, keep free housing in a
+> working dome near where you land, or don't leave a dead dome as the closest one to the
+> landing site.*
+
 ### 2026-09-10 — 142: the vanillahunt terminal audit re-derived every P2 candidate — which of these, if any, go to a hotfix-3 candidate list? **Decision: name any entry you want on a hotfix-3 candidate list, or accept "file and watch" for all. Recommendation: none today; take C66 and C82 as cheap organic looks and leave the rest.**
 
 > Full verdicts: [HUNT_AUDIT.md](agent/reports/vanillahunt/HUNT_AUDIT.md) §3 (each entry
