@@ -775,3 +775,69 @@ DLC definition/excerpt lookup is disclosed as scope drift, not DLC clearance.
 99 waits for 03b/03c/03d/04 and any declared children. Blind spots unchanged:
 assets absent from Src, native/timing/console behavior, actual execution,
 incomplete old DLC, anonymous/dynamic callers and C-consumed presets.
+
+## 03c — research, laws, missions and progression seams, 2026-09-10
+
+MEASURED: the exact 03c partition is **284 INVENTORY + 2 CALLERS = 286**.
+Complete present-body reads: **286/286; NOT-REACHED 0**. `C03016 C03021` are
+HUNKS-ONLY rows whose complete caller/callee contracts were also read.
+`R09783` is comment-only; `R09791 R09792 R09793 R09794` are overlapping
+SPAN-SUSPECT getter rows, each resolved to its real one-line body. No other
+malformed/overlap item remains. The durable derivation, per-file exact receipt,
+limits and controls are `PROGRESS_SEAM_REPORT.md` and
+`PROGRESS_SEAM_DESK.txt`.
+
+Exact READ keys:
+
+- Factions group: `R07833 R07834 R07862 R07881 R07911 R07912 R07913 R07914 R07940 R07941 R07942 R07943 R07944 R07945 R07946 R07947 R07952 R07953 R07954 R07955 R07956 R07957 R07958 R07959 R07966 R07967 R07968 R07969 R07970 R07971 R07986 R07988 R07989 R07990 R07991 R07992 R07998 R07999 R08000 R08003 R08007 R08012 R08016 R08017 R08021 C03016 C03021`
+- LawDef/Laws group: `R08032 R08034 R08035 R08037 R08038 R08039 R08040 R08041 R08042 R08043 R08044 R08045 R08046 R08047 R08048 R08049 R08050 R08051 R08052 R08053 R08054 R08055 R08056 R08057 R08058 R08059 R08060 R08061 R08062 R08063 R08064 R08065 R08066 R08067 R08068 R08069 R08070 R08071 R08072 R08079 R08080 R08081 R08082 R08083 R08084 R08085 R08086 R08088 R08090 R08092 R08095 R08097 R08106 R08109 R08110 R08111 R08112 R08113 R08114 R08115 R08116 R08120 R08121 R08122 R08133 R08134 R08135 R08136 R08137 R08140 R08141 R08147 R08153 R08154 R08156 R08157 R08158 R08159 R08162 R08163`
+- Legislature group: `R08166 R08168 R08169 R08170 R08174 R08180 R08181 R08182 R08183 R08185 R08186 R08187 R08188 R08189 R08190 R08191 R08192 R08193 R08194 R08195 R08196 R08197 R08198 R08199 R08200 R08201 R08202 R08203 R08204 R08205 R08206 R08207 R08208 R08209 R08210 R08211 R08212 R08213 R08214 R08215 R08216 R08217 R08218 R08219 R08220 R08221 R08222 R08223 R08224 R08225 R08226 R08227 R08228 R08229 R08230 R08231 R08232 R08233 R08234 R08235 R08236 R08237 R08238 R08239 R08240 R08241 R08242 R08243 R08244 R08245 R08246 R08247 R08248 R08249 R08250 R08251 R08252 R08253`
+- Progression/misc group: `R08645 R08646 R08655 R08660 R08749 R08751 R08957 R08966 R08997 R09000 R09001 R09062 R09073 R09075 R09076 R09106 R09107 R09111 R09114 R09123 R09146 R09153 R09240 R09242 R09449 R09450 R09452 R09457 R09459 R09474 R09476 R09479 R09673 R09674 R09675 R09677 R09678 R09683 R09688 R09691 R09692 R09693 R09696 R09700 R09709 R09715 R09759 R09760 R09762 R09773 R09774 R09776 R09777 R09780 R09783 R09785 R09786 R09787 R09788 R09789 R09790 R09791 R09792 R09793 R09794 R09795 R09796 R09797 R09798 R09799 R09800 R09801 R09802 R09822 R09826 R09915 R09921 R09922 R11625 R11633 R11636`
+
+Filed **C63-C65**, all `cand`/`source-read`, no modules: R08000 is
+DIFF-CAUSED—the new zero-seat branch bypasses duration/ShouldStop while the
+stored disaster keeps receiving daily updates. R08193 is PASSING—completed
+Faction Opportunity expiry remains nested under the presence of another active
+opportunity, while the retained entry continues granting approval. R08236 is
+DIFF-CAUSED—the retained and newly modified Earth Council intro wrapper lost its
+sole BeginSession caller. Archived-body/source controls discriminate each shape;
+runtime and native/dynamic dispatch remain unobserved. Fresh-fixture decisions
+are checklist item 137.
+
+Refuted/conditional leads: `GameRules.lua:167` is a redundant late fixup read,
+because PersistLoad's earlier `LoadGameSettingFixup` already copies game rules.
+DeepScanning's live `Tech` carries both effects and its Exploration consumer is
+connected; probes separately require AdaptedProbes. EasyResearch also discovers
+seven initiatives, but its own data promises all technologies unlocked and the
+runtime UI/intent result is unresolved, so no defect was filed. The obsolete
+initial-law recap mismatch has no shipped base instance. R08012's omitted
+`factions_disaster` cleanup has no established supported removable-faction
+instance. R09675 is covered by lowercase Tech compatibility getters. R09822's
+700 ms Tech Tree refresh is profiling-only; no frame-time claim was made.
+
+### 03c FR outcomes
+
+All 16 unique tagged rows were read first. **FR-1(b):** six rows are base paths
+available without DLC, but none supplies a source mechanism for the Proton
+new-game crash; editor rows do not imply runtime reach. **FR-2:** the four rows
+plus live definition/effect/Exploration route are internally connected; source
+does not close the report or provide a valid old-save fixture. **FR-3:** seven
+rows were read; only R09822 adds a short-cadence waiter, and it is unprofiled,
+bounded to an open Tech Tree, and cannot be the pre-1.1 report's cause.
+
+Reader control seed 31003: `R09683 R09762 R08060 R08116 R09787 R08054`.
+Parent score **6/6 change/body and 6/6 route precision**. Eligible positive
+seeds: **0**, therefore N/A, not 4/4. Count drift 50/156/78→47/158/81 and the
+failed-then-corrected first DeepScanning block parser are preserved in the
+report. A delegated Norman instance search exceeded the fence; it is an outbox
+lead only, not coverage or clearance.
+
+### 03c For dlccheck
+
+Base Lua and base data establish ordinary non-owner routes for the three filed
+politics candidates. Do not extrapolate that to DLC subclasses or data. Open the
+actual official definitions for: R08012 removable factions and persisted
+disasters; R07992's thomas Assembly-of-Planets sponsor equality; R08645/R08646
+crop/vegetation augmentation instances; and R09449/R09450/R09452 Tech groups.
+The out-of-fence search suggested some law-effect instances exist only in Norman,
+but that claim must be re-derived by the authorized owner. No child queue remains.

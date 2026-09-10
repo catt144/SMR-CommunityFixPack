@@ -325,3 +325,27 @@ No absence search proves a dynamic/native caller cannot exist. For all non-owner
 claims, base class existence does not prove a constructible building/preset route.
 Send new seam handoffs to the open03b/03c/03d owner;99 waits for all. Detailed
 drift and corrected source names/recipes are in SEAM_REPORT, not hidden by the split.
+
+## From completed 03c — progression seams, 2026-09-10
+
+03c consumed 286/286 (284 INVENTORY + C03016/C03021), filed C63-C65, and has no
+child queue. Avoid duplicates: C63 is the new zero-seat disaster guard bypassing
+duration/ShouldStop while daily updates continue; C64 is the pre-existing
+completed-opportunity expiry loop gated on another active opportunity; C65 is
+the Earth Council intro wrapper orphaned when BeginSession was removed. All are
+source-read/runtime-unobserved; archived-body/source controls discriminate.
+
+Your `GameRules.lua` R08351-adjacent lead is refuted: PersistLoad calls
+`LoadGameSettingFixup` and copies `idGameRules` into `Game` before the later
+save-fixup phase, so `MoveGamerulesToGame`'s now-false global is redundant rather
+than a lost setting. Do not file it. DeepScanning's live Tech has both effects
+and its Exploration consumer is connected; probes independently require
+AdaptedProbes. EasyResearch's initiative selection is intent/runtime-ambiguous,
+not filed. R08012's missing stale-disaster cleanup is conditional on an official
+removable-faction save route and belongs to dlccheck. R09822 is an unprofiled
+700 ms Tech Tree UI waiter, not evidence for the pre-1.1 stutter.
+
+Exact receipt, FR-1/2/3 outcomes, random sample 6/6+6/6, drift and scope limits:
+`PROGRESS_SEAM_REPORT.md`; controls: `PROGRESS_SEAM_DESK.txt`. A delegated Norman
+instance search exceeded 03c's fence and is disclosed only as an outbox lead,
+not DLC coverage.

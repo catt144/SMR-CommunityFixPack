@@ -199,3 +199,21 @@ extend evidence if warranted, do not make duplicate entries.
 TAKEABLE WHEN this prompt runs on the pinned sources. 18 NOROWS include ambient
 food-service/work routines, research metadata, Diner/RocketTrade, Refabable and
 constants/entity data. Existing partial references are not their full text diff.
+
+## Inbox from completed 03c — 2026-09-10
+
+03c read 286/286 and filed C63-C65; no child queue. Two complete caller/callee
+answers are available: C03016's zero-arg hourly
+`g_FactionsHolder:RecalcFactionsApproval()` deliberately keeps the appended
+`all_factions` false while daily `FactionsUpdate` requests all factions;
+C03021's zero-arg daily `self:RecalcFactionsDisasters()` deliberately keeps
+appended `stop_only` false. Both are benign F117-shaped omissions.
+
+Please retain one caller falsifier for C65/R08236: old
+`OpenFirstLegislatureSessionPopup` had the sole literal `BeginSession` caller;
+new Src has only the modified declaration and no listener for its new
+`FirstLegislatureSessionPopupClosed` message. 03c's exhaustive literal search
+cannot exclude dynamic/native invocation, so record any such route your caller
+surfaces establish. DeepScanning's live Tech/effect/Exploration route is connected;
+TechPreset is an inert compatibility stub. Full citations, limits and exact keys
+are in `PROGRESS_SEAM_REPORT.md`.

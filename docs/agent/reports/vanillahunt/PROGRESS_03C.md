@@ -23,10 +23,11 @@ per-row return contract.
   sweep, files any first-class C entries/checklist decisions, and commits verified
   outputs. C63-C65 are filed with discriminating archived-body/source controls;
   no eligible seeded positive existed, so its score is N/A.
-- [ ] **IN PROGRESS — U3: synthesis and close-out.** Append the named TRIAGE section,
-  finish the durable report and DLC/sibling/04/99 outboxes, update STATE and the
-  README queue, remove the consumed prompt, run every required gate, commit,
-  push, and verify the commit and clean worktree.
+- [x] **DONE — U3: synthesis and close-out.** Appended the named TRIAGE section,
+  finished the durable report and DLC/sibling/04/99 outboxes, updated STATE and
+  the README queue, removed the consumed prompt, ran every required gate, and
+  committed the close-out. Push and remote/worktree verification follow the
+  commit as the final non-mutating checks.
 
 No game launch, module work, metadata/version edit, archived-source write, or
 out-of-fence DLC/norman interior read is authorized.

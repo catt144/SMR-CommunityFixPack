@@ -161,6 +161,18 @@ Tech block instead of the nearest one and failed, then was corrected to `rfind`
 before the recorded passing run; the first plan commit's HEAD was followed by
 independent 03b/03d pin commits, with no source-pin change.
 
+The laws reader also searched `DLC/norman` for actual augmentation/build-lock/
+turnoff effect instances. That exceeded 03c's single-direct-callee DLC fence.
+The result is disclosed only as an outbox lead: it is **not** DLC coverage or a
+non-owner safety verdict, and `dlccheck`/03b must re-establish the instances from
+their own authorized data reads. The same reader corrected another apparent
+drift: 42 of 49 functions in the new hand-authored `LawDef.lua` have real old
+counterparts in generated class files, so they were not treated as additions.
+At close-out, the first doccheck went RED because a concurrent 03d task had
+created uncommitted C66-C70 without yet regenerating the shared bug index. The
+index was regenerated for validation, but that peer-owned index delta and every
+03d candidate/tool/report path were excluded from 03c's explicit commit paths.
+
 ## DLC and successor outbox
 
 Base/non-owner routes are established only for the files and shipped base data

@@ -190,3 +190,28 @@ any original 04-E preset stays 04-E. 99 must know if that route is still U.
 
 TAKEABLE WHEN this prompt runs on the pinned sources. It is not necessary to
 wait for 03c/03d to start; coordinate shared output writes and hand off contracts.
+
+## Inbox from completed 03c — 2026-09-10
+
+03c read 286/286 and filed C63-C65; no child queue. For your generated/data
+contracts, the authoritative FR-2 route is: live `Data/Tech.lua:3934-3961`
+`Tech:DeepScanning` carries both `Effect_ModifyLabel(DeepScanAvailable)` and
+`Effect_UnlockDeeperDeposits`; `Data/TechPreset.lua:847-852` is only an inert
+legacy id/group stub. Tech effect application reaches `Exploration.lua`'s
+DeepScanAvailable consumer; probes separately require AdaptedProbes. Confirm
+registry population and DLC groups from your own rows—do not treat the stub as
+a second live effect definition.
+
+Contract handoffs: C03016's zero-arg hourly `RecalcFactionsApproval()`
+intentionally omits appended `all_factions`, while the daily route passes true;
+C03021's daily `RecalcFactionsDisasters()` intentionally omits appended
+`stop_only`, preserving the full pass. No caller bug was found. R07986/R07990's
+obsolete-initial-law activation/recap mismatch is vacuous in current base data;
+reopen only if your authoritative AssemblyChoice rows instantiate it.
+
+A delegated 03c reader searched Norman data beyond the link's permitted fence
+and reported crop/build-lock/build-turnoff law-effect instances there but no
+vegetation-augmentation instance. Treat this as an unverified lead only, not
+DLC coverage or clearance; re-derive it within your authorized registries and
+hand actual DLC interiors to dlccheck. `PROGRESS_SEAM_REPORT.md` has exact keys,
+FR outcomes and the full boundary.

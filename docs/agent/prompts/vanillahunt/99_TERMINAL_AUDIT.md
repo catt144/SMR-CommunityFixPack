@@ -452,3 +452,31 @@ owners and no report is closed. For dlccheck must include successor verdicts:
 base classes do not establish concrete non-owner recipe instances, and missing
 literal callers do not exclude dynamic/native/DLC dispatch. The report retains
 all chain blind spots and does not rule on the DLC chain's additive premise.
+
+### From 03c — research, laws, missions and progression, 2026-09-10
+
+03c is complete: **286/286 READ**, 284 INVENTORY + 2 CALLERS, NOT-REACHED 0,
+no child queue. Exact keys/exceptions are in `PROGRESS_SEAM_REPORT.md` and TRIAGE
+§03c. Filed C63-C65, all cand/source-read: zero-seat factions can strand an
+active finite disaster while its DailyUpdate continues (DIFF-CAUSED); completed
+Faction Opportunity approval expiry still runs only while another opportunity
+is active (PASSING); the retained Earth Council intro lost its only literal
+BeginSession caller (DIFF-CAUSED). Desk/source controls discriminate, but actual
+execution and dynamic/native callers remain unmeasured. Checklist item 137 owns
+the combined fresh-1.1 politics fixture decision.
+
+FR answers: six FR-1 rows are base/non-owner paths but no Lua crash mechanism
+survived; the stale `g_CurrentMissionParams` fixup lead is refuted by the earlier
+PersistLoad migration. Four FR-2 rows plus live Tech/effect/Exploration consumers
+are connected; probes separately require AdaptedProbes, so source does not
+confirm the DeepScanning report. Seven FR-3 rows yield only an unprofiled 700 ms
+Tech Tree waiter as added short-cadence work; it cannot be the pre-1.1 cause.
+No field report is closed.
+
+Random seed 31003 sample: 6/6 body/change and 6/6 route precision; eligible
+positive seeds 0, score N/A. Drift: counts 50/156/78→47/158/81; failed first
+DeepScanning block parser corrected before the recorded run; 42 moved LawDef
+bodies traced to old generated counterparts; delegated Norman instance search
+exceeded the fence and supplies no coverage/clearance. dlccheck outbox: R08012
+removable-faction disasters, R07992 thomas sponsor equality, R08645/R08646 actual
+augmentation instances, and R09449/R09450/R09452 actual Tech groups.
