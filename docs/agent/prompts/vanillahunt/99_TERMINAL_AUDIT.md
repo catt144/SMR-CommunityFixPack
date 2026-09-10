@@ -316,3 +316,44 @@ it. Three things for you specifically:
    `body`. MEASURED by me: `INDENTED` added/removed pairs sharing a file and an
    `ihash` = **11, all `generated`, 0 `hand`** (`TRIAGE.md` §0.13). Re-derive
    that count; it is a labelling error, not a coverage one.
+
+---
+
+*(from `smr-bugfixpack-04`, 2026-09-10, after link 01 closed — ⛔ DRIFT IN LINK 01's COMPLETENESS STATEMENT, found downstream)*
+
+Link 02 (`smr-bugfixpack-b6`) found NVIDIA DLSS 2 → 4 sitting in a top-level
+DATA TABLE of `CommonLua/Core/options.lua`, a change with no `INVENTORY` row
+and no `PRESETS` row. Link 01's `TRIAGE.md` §0.11 listed the indented
+declarations and the anonymous `function(` literals as the inventory's holes
+and **did not name this one**. Measured the same day: **123 of the 897 changed,
+added or removed hand files have ZERO inventory rows but real content** (1
+more is whitespace-only). They are top-level config, const and option tables
+(`Lua/Config/*`, `Lua/__const.lua` with 347 changed lines,
+`CommonLua/Core/const.lua`, …) and preset data stored OUTSIDE the four
+`generated` prefixes (`CommonLua/Data/` 28, `CommonLua/Libs/` 26, mostly their
+`Data/` and `ClassDefs/` folders), which `presetdiff` never reads by design.
+Because link 02 partitions ROWS, **none of the 123 could reach any 04 reader.**
+
+Fixed as `treediff` **v1.2**: a sixth generated TSV, `NOROWS.tsv`, lists every
+changed file with no row, with its `reader` (`NONE` / `presetdiff`), `content`
+(`yes` / `ws-only`, under the tool's own normalisation) and normalised
+`lines_changed`. Three fixture assertions were added: a data-table-only change
+is LISTED; a whitespace-only file is marked `ws-only`; a file with rows is NOT
+listed. Selftest 24 PASS / 0 FAIL, exit 0. **Broken on purpose** on a scratch
+copy (the real file untouched), with the data-table assertion inverted:
+
+```
+FAIL   ⭐ a DATA-TABLE-only change (no function touched) is LISTED, content=yes, reader=NONE — the options.lua / DLSS 2->4 shape   -> ['Lua/Tbl.lua', 'changed', 'hand', 'NONE', 'yes', 2]
+SELFTEST: *** FAIL ***          exit=1
+```
+
+Regenerating left INVENTORY, STORAGE, FILES and CALLERS byte-identical apart
+from their banner's version string (0 non-banner diff lines, checked).
+`TRIAGE.md` §0.11 was NOT amended: it is link 01's closed record, and the file
+is link 02's live lane. This note plus README §2b / §6 and 04 §2 point 7 carry
+the correction. ⛔ Audit points: re-derive the 123 yourself, check that 04
+assigned every `NONE`+`yes` file to an agent as a text-diff item, and ask
+whether `presetdiff`'s fixed four-prefix scope should become "every file that
+holds `PlaceObj` blocks" (it could not change mid-chain without invalidating
+02's `PRESETS.tagged.tsv`). Minor: in the owner session I first said "124
+files"; that count included the one whitespace-only file.

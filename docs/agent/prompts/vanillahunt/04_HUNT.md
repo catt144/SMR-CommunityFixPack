@@ -85,6 +85,17 @@ One item per agent wave, one per verification pass, one per filing batch.
    rows read, candidates and a NOT-reached list. ⛔ An agent's "nothing" on an
    FR row is re-read by you from the trees before it is written; FR-1 is the
    report players say leaves the game unplayable.
+7. **⭐ `NOROWS.tsv` — the changed code that has no rows (added 2026-09-10).**
+   Every `reader=NONE`, `content=yes` file in `NOROWS.tsv` (123 on these
+   trees) is changed hand code with no inventory row, so no row list can carry
+   it: top-level option / config / const tables, and preset data stored outside
+   the `generated` prefixes. Assign each to the agent that owns its system as a
+   TEXT-DIFF item (both trees, compared after trailing-whitespace
+   normalisation), the FR-relevant ones first (README §2b names them), and
+   record the assignment in the agent plan. The agent reports what changed and
+   applies the same taxonomy and `SMELL` / `PERF` tells as for rows. ⛔ A
+   `NONE`+`yes` file that no agent was given is a coverage defect, and 99
+   checks for it.
 
 ## 3 · Per-system reading orders — go into the briefs, binding
 

@@ -123,7 +123,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from luafn import find_bodies, read_lines          # THE delimiter -- see above
 from sigcheck import params                        # THE parameter reader
 
-VERSION = "treediff.py v1.1 (2026-09-10, indented orphans covered)"
+VERSION = "treediff.py v1.2 (2026-09-10, indented orphans covered; NOROWS)"
 
 ARCHIVE = r"C:\Dev\SMR-SrcArchive"
 DEFAULT_OLD = os.path.join(ARCHIVE, "1.0.7.396349", "Src")
@@ -838,6 +838,51 @@ def caller_rows(old_root, new_root, rows):
     return out, tally
 
 
+# --------------------------------------------------------------------------- #
+# NOROWS.tsv -- the files this inventory saw change but emitted NO row for.
+# Added 2026-09-10 (v1.2) after link 02 (`smr-bugfixpack-b6`) found NVIDIA
+# DLSS 2 -> 4 sitting in a top-level DATA TABLE of `CommonLua/Core/options.lua`.
+# `treediff` emits functions and `presetdiff` reads only the `generated`
+# bucket, so a hand file whose change is data, config or const tables is read
+# by NEITHER -- and link 02, which partitions ROWS, could never hand it to a
+# reader. Link 01's completeness statement (TRIAGE §0.11) did not name this
+# hole; every run's banner now measures it.
+# --------------------------------------------------------------------------- #
+def norows(rows, file_class, old_files, new_files):
+    """-> [path, status, bucket, reader, content, lines_changed], sorted.
+
+    `content` is `ws-only` when the two sides are equal after THIS tool's own
+    normalisation (CRLF->LF, trailing whitespace stripped): such a file has no
+    row because nothing changed, not because something was missed. `reader` is
+    `presetdiff` for the `generated` bucket and `NONE` otherwise -- a `NONE` +
+    `yes` row is changed code that no instrument lists and that must be read
+    as text. `lines_changed` counts normalised +/- lines, hand files only.
+    """
+    import difflib
+    have = {r["file"] for r in rows}
+    out = []
+    for rel, st in sorted(file_class.items()):
+        if st not in ("changed", "added", "removed") or not rel.endswith(".lua"):
+            continue
+        if rel in have:
+            continue
+        a = [l.rstrip() for l in read_lines(old_files[rel])] if rel in old_files else []
+        z = [l.rstrip() for l in read_lines(new_files[rel])] if rel in new_files else []
+        b = bucket(rel)
+        if a == z:
+            content, n = "ws-only", 0
+        else:
+            content = "yes"
+            if b == "generated":
+                n = ""                          # presetdiff sizes these
+            else:
+                d = list(difflib.unified_diff(a, z, lineterm="", n=0))[2:]
+                n = sum(1 for x in d if x[:1] in "+-")
+        out.append([rel, st, b, "presetdiff" if b == "generated" else "NONE",
+                    content, n])
+    return out
+
+
 def banner(old_root, new_root, stats, extra=()):
     cmd = "python " + " ".join([os.path.basename(sys.argv[0])] + sys.argv[1:])
     out = ["# %s | old=%s digest=%s | new=%s digest=%s | %s | %s"
@@ -998,6 +1043,12 @@ OLD_FIX = {
     "})",
     "",
 ],
+"Lua/Tbl.lua": [
+    "Config = {",
+    "\tspeed = 1,",
+    "}",
+    "",
+],
 }
 NEW_FIX = {
 "Lua/A.lua": [
@@ -1076,6 +1127,12 @@ NEW_FIX = {
     "\t\treturn 2",
     "\tend,",
     "})",
+    "",
+],
+"Lua/Tbl.lua": [
+    "Config = {",
+    "\tspeed = 2,",
+    "}",
     "",
 ],
 }
@@ -1188,6 +1245,18 @@ def selftest(old_root, new_root, break_one=None):
           len(runs) == 1 and runs[0]["kind"] == "added"
           and "MULTI" in runs[0]["flags"],
           repr([(x["kind"], x["flags"]) for x in runs]))
+    print("  ---- v1.2: NOROWS, changed files the inventory emits no row for ----")
+    nr = {x[0]: x for x in norows(rows, _fc, tree_files(o), tree_files(n))}
+    t = nr.get("Lua/Tbl.lua")
+    check("⭐ a DATA-TABLE-only change (no function touched) is LISTED, "
+          "content=yes, reader=NONE — the options.lua / DLSS 2->4 shape",
+          t is not None and t[4] == "yes" and t[3] == "NONE", repr(t))
+    w = nr.get("Lua/Ws.lua")
+    check("a whitespace-only file is listed but marked ws-only, so it is not "
+          "mistaken for missed content",
+          w is not None and w[4] == "ws-only", repr(w))
+    check("⛔ a file WITH rows (Lua/A.lua) is NOT listed",
+          "Lua/A.lua" not in nr, repr(nr.get("Lua/A.lua")))
     shutil.rmtree(tmp, ignore_errors=True)
 
     print()
@@ -1359,6 +1428,37 @@ def main():
               ]),
               ["callee_file", "callee_function", "name", "call_file",
                "call_line107", "call_line110", "status", "call_text"], crows)
+
+    print("  norows...")
+    nrows = norows(rows, file_class, old_files, new_files)
+    hole = [r for r in nrows if r[3] == "NONE" and r[4] == "yes"]
+    write_tsv(os.path.join(a.out, "NOROWS.tsv"),
+              banner(a.old, a.new, stats, extra=[
+                  "NOROWS (v1.2): every changed / added / removed .lua file "
+                  "(DLC/ excluded) for which INVENTORY.tsv has NO row. Added "
+                  "2026-09-10 after link 02 found NVIDIA DLSS 2 -> 4 in a "
+                  "top-level DATA TABLE of `CommonLua/Core/options.lua` — a "
+                  "change neither instrument lists.",
+                  "⛔ READ THIS AS A HOLE, NOT AS NOISE: %d files are "
+                  "`reader=NONE` + `content=yes` — changed hand code that no "
+                  "instrument lists and that link 02, which partitions ROWS, "
+                  "cannot hand to any reader. Whoever owns their system diffs "
+                  "them AS TEXT. %d more are `ws-only` (no row because nothing "
+                  "changed after normalisation) and %d are `generated` with "
+                  "content, which presetdiff reads at field level."
+                  % (len(hole),
+                     sum(1 for r in nrows if r[4] == "ws-only"),
+                     sum(1 for r in nrows if r[3] == "presetdiff" and r[4] == "yes")),
+                  "WHY A HAND FILE CAN HAVE NO ROW: its change is in top-level "
+                  "data / config / const tables, in preset data stored outside "
+                  "the four `generated` prefixes (`CommonLua/Data/`, "
+                  "`CommonLua/Libs/*/Data/`), inside an anonymous `function(` "
+                  "literal, or in a declaration form the regex does not "
+                  "recognise. `lines_changed` (normalised +/- lines, hand files "
+                  "only) sizes the reading; it is not a verdict.",
+              ]),
+              ["path", "status", "bucket", "reader", "content",
+               "lines_changed"], nrows)
     return 0
 
 

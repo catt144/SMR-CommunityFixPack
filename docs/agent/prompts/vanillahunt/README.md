@@ -310,11 +310,15 @@ settings; the menu loads, starting a new game crashes.)
     NVIDIA's Linux driver — meeting something 1.1.0 does at new game, of which
     the upscaler's initialisation under Proton is the leading Lua-visible
     candidate.
-  - ⚠️ **"No AMD report" is not "AMD is fine"** — that presence side is
-    unenumerated (§2's method rule). The project's Steam Deck (AMD, Proton;
-    `F102`'s negative repro) can fill it in minutes (checklist 136); `F102`
-    warns a Deck negative is weaker than it looks, because Valve pre-distributes
-    its shader caches.
+  - ⚠️ **The AMD side, partly filled (owner, 2026-09-10): Steam Deck players
+    report NO problem.** That is consistent with NVIDIA × Proton — the Deck is
+    AMD (RADV) — but `F102` warns a Deck negative is weaker than it looks:
+    Valve pre-distributes the Deck's shader caches, and SteamOS pairs its own
+    Proton with RADV. So a Deck "works" cannot separate "NVIDIA-specific" from
+    "shader-cache or SteamOS-specific". ⭐ **The datum still missing is DESKTOP
+    Linux on AMD** — one such report, working or crashing, splits the two
+    (checklist 136). The project's own Deck test was dropped: it would only
+    repeat what players already report.
   - ⇒ **FR-1(b) drops in rank:** a DLC-DEPENDENT branch is unlikely when DLC-off
     still crashes. ⛔ It does NOT clear 03's seam — base-game code changed to
     accommodate the DLC ships to everyone and runs with the DLC off. (How the
@@ -337,15 +341,35 @@ settings; the menu loads, starting a new game crashes.)
     files) — whether any new-game code path writes those `hr` values is a
     question for (d). Minor: a new `FilmGrain` option whose values set no `hr`
     key.
-  - ⛔ **COVERAGE HOLE this exposes — diff these files AS TEXT.** The DLSS 2 → 4
-    change sits in a top-level DATA TABLE in a `hand` file: `treediff` emits
-    functions and `presetdiff` reads only the `generated` bucket, so **neither
-    instrument lists it**. The same is true of every top-level option, const
-    and config table in hand files. For FR-1, `CommonLua/Core/options.lua`,
-    `CommonLua/Core/GlobalStorageTables.lua`,
+  - ⛔ **COVERAGE HOLE this exposes — measured, and now a generated list.** The
+    DLSS 2 → 4 change sits in a top-level DATA TABLE in a `hand` file:
+    `treediff` emits functions and `presetdiff` reads only the `generated`
+    bucket, so **neither instrument lists it**. Measured (`treediff` v1.2,
+    2026-09-10): **123 changed / added hand files have ZERO inventory rows
+    with real content** — top-level option / config / const tables, and preset
+    data stored OUTSIDE the four `generated` prefixes (`CommonLua/Data/` 28
+    files, `CommonLua/Libs/` 26, mostly their `Data/` and `ClassDefs/`
+    folders). They are listed in **`NOROWS.tsv`** (`reader=NONE`,
+    `content=yes`); link 02 hands them to 04 as TEXT-DIFF items, because no row
+    exists to tag. **FR-relevant files in that list — read AS TEXT first**
+    (normalised changed lines in brackets):
+    FR-1 — new-game map generation: `CommonLua/Libs/MapGen/Data/MapGen/MapGen-Default.lua`
+    (12), `MapGen-SubProc.lua` (42), `MapGen-Tools.lua` (2),
+    `CommonLua/Libs/MapGen/Data/__const.lua` (6); render and scene:
+    `CommonLua/Data/LightmodelFeaturePreset.lua` (**new**, 37),
+    `CommonLua/Data/PersistedRenderVars.lua` (11), `CommonLua/Data/__SceneParamDef.lua`
+    (29), `Lua/Config/render.lua` (10), `CommonLua/Core/ProceduralMeshShaders.lua`
+    (2), `CommonLua/X/XShaderEffect.lua` (1); config and consts:
+    `Lua/Config/config.lua` (40), `CommonLua/Core/config.lua` (6),
+    `Lua/__const.lua` (347); the path to a new game: `Lua/XTemplates/PGMainMenu.lua`
+    (2, the pre-game menu), `Lua/UI/LoadingScreen.lua` (2). Plus the TABLE
+    parts of files that do have rows: `CommonLua/Core/options.lua` (the DLSS
+    pick, 1.1.0 `:210-228`), `CommonLua/Core/GlobalStorageTables.lua`,
     `CommonLua/Classes/RenderFeaturesParams.lua`, `CommonLua/Core/Postprocessing.lua`,
-    `Lua/ProjectOptions.lua` and `Lua/Config/*` are diffed line by line, never
-    trusted to the inventory.
+    `Lua/ProjectOptions.lua`.
+    FR-2 — `Lua/Units/RCSensor.lua` (4), `Lua/Buildings/SurfaceDeposit.lua` (2).
+    FR-3 — `Lua/Config/pathfind.lua` (55), `Lua/Config/_pfclasses.lua`
+    (**new**, 63).
   - ⭐ **Player-side falsifier AND candidate workaround (checklist 136):** before
     New Game, change anti-aliasing from the default `TAA` to the non-temporal
     `SMAA` or `FXAA` — `NotSelectableTemporalUpscalingOption` then rules DLSS,
@@ -591,6 +615,7 @@ docs/agent/reports/vanillahunt/
   FILES.tsv       01  the 305 added + 36 removed files with a one-word bucket each
   CALLERS.tsv     01  for every class (b) row: its call sites in BOTH trees, each marked updated / unchanged / new
   PRESETS.tsv     01  field-level preset diff (PlaceObj id → key → 1.0.7 value → 1.1.0 value), churn RULE-classed and sampled
+  NOROWS.tsv      01  (treediff v1.2, added 2026-09-10) every changed .lua file with NO inventory row — reader NONE/presetdiff, content yes/ws-only, normalised lines changed. The NONE+yes rows (123) are changed code no instrument lists; 04 reads them as text
   *.tagged.tsv    02  the two working copies with system / dlc-adjacent / class / SMELL columns (01's files untouched)
   TRIAGE.md       01 §0 counts · 02 §1–§4 ledger (counts, control scores, row lists per link and per 04 agent) · 03 and 04 APPEND a named coverage section each (reached / NOT reached; 04's per agent, plus its tooling gate table) · 03 writes "For dlccheck"
   agents/*.md     04  every hunt agent's report, verbatim, bannered (brief hash, wave, rows given) — the primary evidence 99 audits

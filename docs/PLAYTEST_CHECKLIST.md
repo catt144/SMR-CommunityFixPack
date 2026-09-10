@@ -78,16 +78,18 @@ completed tests move whole to
 >    GTX 1070, which cannot run DLSS at all, so the cause may be the upscaler
 >    auto-pick in general rather than DLSS 4 itself; this test covers both.)
 >
-> **And one test on hardware we already own (minutes).** ✅ Already confirmed,
-> no action needed: a new game on 1.1.0 WORKS on your Windows/NVIDIA rig
-> **with DLSS 4 on** — every save of the `BlankBig_02` colony, its Sol 1 start
-> included, was created by 1.1.0, and your screenshots show `TAA` → `NVIDIA
-> DLSS 4` on the RTX 4080, which is how you say all your testing ran. So DLSS 4
-> itself works on NVIDIA; the fault needs Proton.
-> **Start a new 1.1.0 game on the Steam Deck (AMD, Proton), mods off.** If it
-> crashes, the problem is Proton-wide and we have a machine that reproduces
-> it. If it starts, that fits "NVIDIA under Proton", though `F102` notes a Deck
-> negative is weaker than it looks (Valve ships the Deck's shader caches).
+> **The two controls are both in, so no test is needed from you.** ✅ A new
+> game on 1.1.0 WORKS on your Windows/NVIDIA rig **with DLSS 4 on**: every save
+> of the `BlankBig_02` colony, its Sol 1 start included, was created by 1.1.0,
+> and your screenshots show `TAA` → `NVIDIA DLSS 4` on the RTX 4080, which is
+> how you say all your testing ran. So DLSS 4 itself works on NVIDIA; the fault
+> needs Proton. ✅ Steam Deck players report no problem (you've seen those
+> reports), so the Deck test suggested earlier is dropped; it would only repeat
+> them. ⚠️ A Deck "works" is weaker than it looks: Valve ships the Deck's shader
+> caches, and SteamOS pairs its own Proton with AMD's RADV driver. It can't
+> separate "NVIDIA-specific" from "Deck-specific". ⭐ **The one missing data
+> point is a DESKTOP Linux player on an AMD card.** Ask in the threads; one
+> such report, working or crashing, splits the two.
 >
 > ⛔ Before anyone posts instructions to players, an agent confirms the log
 > locations and the `PROTON_LOG` step by walking them. The thread's author
