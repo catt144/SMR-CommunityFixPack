@@ -523,3 +523,24 @@ recipe-input double-consumption route. Literal Lua absence does not rule out
 anonymous/dynamic/native callers. Assets absent from Src, console behavior,
 runtime timing and incomplete old DLC remain blind spots. Terminal gate now
 waits for 03b, 04, and any child 04 declares.
+
+### From 03b — preset/generated seam close-out, 2026-09-10
+
+03b completed **1,984/1,984** assigned reads: 1,618 PRESETS, 360 generated
+INVENTORY, and 6 CALLERS, with zero missing/duplicate/extra rows and no child
+queue. Start with `reports/vanillahunt/SEAM_PRESETS_REPORT.md`, then use its six
+named exact ledgers. Re-derive **C75** and **C76** from their complete cited
+bodies; both remain cand/source-read and runtime unobserved.
+
+Control: `.NET Random(2026091003)` sampled `P02567 P25371 P05044 P07434 P09902
+P09779 R11538 R11606`, scoring **8/8 descriptions and 8/8 routes**; eligible
+F114-F117 seeds were zero, N/A. Preserve the rejected FactionOpportunity lead,
+the unfiled LongWinter delta, the old-only repaired Data tells, and the
+unprofiled XTechTree/Now Serving/Renegade PERF leads. C62's missing concrete
+authored instance and R11004's Seeds route remain 04-owned.
+
+FR-1/2/3 remain open; no field report was closed. DLC name-line search drift
+was disclosed and was not counted as coverage; the only authorized 03b DLC
+body read was the directly called Norman `FarmInsect.lua:57-59`. Base routes
+do not clear DLC ownership. Terminal audit now waits only for 04 and any child
+04 declares.

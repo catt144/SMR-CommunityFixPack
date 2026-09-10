@@ -23,13 +23,13 @@ parent owns every repository write, sample, verdict, filing and handoff.
   batches; add only fresh-fixture/runtime decisions to the owner checklist;
   regenerate indexes, repeat applicable desk controls, run chain gates, commit
   and push each batch immediately.
-- [>] Close out: append 03b's named TRIAGE section and complete outboxes,
+- [x] Close out: append 03b's named TRIAGE section and complete outboxes,
   preserve exact read/not-reached receipts and limits, update README/STATE,
   consume this one-shot prompt, run the clean probe sweep and all chain gates,
   commit with explicit paths, push, and verify HEAD plus worktree state.
 
-Exactly one item is in progress. If a stage produces more than one reviewable
-commit, this list is expanded before the extra work begins.
+No item remains in progress. The completed stages and their commit boundaries
+are retained as the durable execution receipt.
 
 ## Pin and exact queue
 

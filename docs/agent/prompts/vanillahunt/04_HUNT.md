@@ -392,3 +392,29 @@ overrides; anonymous/dynamic/native callers, assets absent from Src, consoles,
 timing and incomplete old DLC remain blind spots. Send any new seam back only
 if it is outside this completed exact receipt; 99 still waits for 03b, 04 and
 any child 04 declares.
+
+## From completed 03b — presets and generated consumers, 2026-09-10
+
+03b is exact and closed: **1,984/1,984** assigned items read (1,618 PRESETS,
+360 generated INVENTORY, 6 CALLERS), with zero missing/duplicate/extra rows and
+no child queue. Use `reports/vanillahunt/SEAM_PRESETS_REPORT.md` and its six
+named per-key ledgers; do not reopen the receipt.
+
+Do not duplicate **C75** (The Incident no-explosion construction lock) or
+**C76** (`DiscoverTech` authored Cost rejected by the initiative-only helper).
+Your R09089 `Research.ChangeResearchCost` and R09475
+`SA_RevealTech.SAExec` rows touch the broader research-cost migration: judge
+their discarded caller cost/fixed 20% boost independently from C76's narrowly
+owned `DiscoverTech` route. C62's concrete authored ScriptStatements-instance
+search and R11004's universal-storage Seeds acceptance/availability route also
+remain yours.
+
+FR-1/2/3 remain open. 03b found no native-particle crash mechanism;
+DeepScanning's Tech/effect/Exploration route is connected; its PERF-only leads
+are unprofiled and cannot explain the pre-1.1 report. For dlccheck, TAKEABLE
+WHEN a concrete owner is read: added AmbientLife programs/building
+`prg_class`, cross-map WorkFarmSmall, InsectFarming task completion,
+Sugar/Spices flight-list registration, and official DLC Techs' new data shape.
+Base routes do not establish DLC clearance. Send back only a genuinely new
+seam outside the completed receipt; 99 now waits for 04 and any child you
+declare.

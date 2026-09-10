@@ -898,3 +898,34 @@ temporary-tablet assumption and the prior recipe-input double-consumption route.
 Do not infer DLC safety from base class existence or infer caller absence from
 literal Lua search: native/dynamic dispatch, assets absent from Src, consoles,
 runtime timing and incomplete old DLC remain blind spots. No child queue remains.
+
+## §03b coverage — presets and generated consumers (2026-09-10)
+
+03b read **1,984/1,984** assigned items: 1,618 PRESETS, 360 generated
+INVENTORY, and 6 CALLERS; zero missing, duplicate, extra, or `NOROWS` items.
+Every key is recorded in the six `SEAM_PRESETS_*_REPORT.md` ledgers and the
+close-out is `SEAM_PRESETS_REPORT.md`. NOT-REACHED assigned source keys: zero.
+No child queue remains.
+
+Filed **C75** (The Incident's no-explosion branch disables existing Fusion
+Reactors but does not suspend new construction as stated) and **C76** (new
+`DiscoverTech` routes authored Cost to an initiative-only helper that rejects
+all 13 scanned ordinary-Tech targets). Both are P2 cand/source-read and runtime
+unobserved. Parent sample `.NET Random(2026091003)`, `P02567 P25371 P05044
+P07434 P09902 P09779 R11538 R11606`: **8/8 descriptions, 8/8 routes**;
+eligible F114-F117 seeds 0, N/A.
+
+Rejected or retained-only leads: guarded/unguarded FactionOpportunity cleanup
+has a lifecycle invariant; LongWinter's full-grant delta lacks a hard
+unintended tell; four Data hard tells are old-only fixes. XTechTree, Now
+Serving, and Renegade work remain PERF-only/unprofiled. SameOldSlop,
+LowGFungi, and DeepScanning routes are internally consistent. C62 has no
+located authored ScriptStatements instance; R11004 remains 04-owned.
+
+FR-1/2/3 remain open: native particle rendering is unmeasured, DeepScanning's
+route is connected, and unprofiled new work cannot explain the pre-1.1 PERF
+report. For dlccheck, TAKEABLE WHEN a concrete owner is read: added AmbientLife
+programs/building `prg_class`, cross-map WorkFarmSmall, InsectFarming task
+completion, Sugar/Spices flight-list registration, and DLC Techs' data shape.
+Base routes do not clear DLC overrides. No field report was closed; 99 now
+waits only for 04 and any child 04 declares.
