@@ -4,7 +4,13 @@ Paste into a fresh Claude Code session. Written **2026-09-08**, to fire **after
 the current fix pack is patched, pushed and stable** (owner instruction).
 **Start with `git log --oneline -15` + `git pull`.** Read `docs/agent/STATE.md`
 (mandatory), `docs/agent/FIX_POLICY.md`, `docs/agent/reports/CHAIN_METHOD.md`,
-and **`prompts/VANILLA_DIFF_HUNT.md` §3** — the two efforts overlap by design.
+and **`prompts/vanillahunt/README.md` §7 + link 04's "For dlccheck" section of
+`reports/vanillahunt/TRIAGE.md`** — the two efforts overlap by design. *(The
+brief `VANILLA_DIFF_HUNT.md` was consumed into that chain on 2026-09-10; its
+§2 taxonomy, §4 finding contract and §7 subagent rules now live in that README
+as §2, §3 and §4. ⛔ Fire this brief only after that chain's 99 has run — its
+owner report carries your kickoff line and the base-game seam result you
+inherit rather than redo.)*
 
 > 🎯 **YOUR JOB IS TO AUTHOR A CHAIN, NOT TO RUN THE CHECK.** Handoff brief in
 > the shape of `HOTFIX_2_HANDOFF.md`. Decompose into `prompts/dlccheck/` with a
@@ -53,7 +59,8 @@ them rather than around a file-by-file read of `norman/`:
 
 1. ⭐ **Base-game changes made TO ACCOMMODATE the DLC — which ship to EVERYONE,
    DLC or not.** These land in the 1.1.x vanilla diff, so they are shared
-   territory with `VANILLA_DIFF_HUNT.md`. **Coordinate; do not duplicate.**
+   territory with the `vanillahunt` chain, whose link 04 reads exactly this set
+   and writes `TRIAGE.md` → "For dlccheck". **Inherit it; do not duplicate.**
 2. ⭐ **The non-owner path.** Base Lua **references DLC content in 12 files** —
    including `Building.lua`, `ConstructionSite.lua`, `FoodServiceBuilding.lua`,
    `Resources.lua`, `UpgradeUnlocks.lua` — while `IsDlcAvailable("norman")`
@@ -63,7 +70,7 @@ them rather than around a file-by-file read of `norman/`:
    `Lua/Buildings/FungalFarm.lua` *and* a DLC `FungalFarmBase`), so **a name
    match is not a DLC dependency.** ⛔ Enumerate which references genuinely
    require DLC content and which do not — this is exactly the
-   absence/presence discipline in `VANILLA_DIFF_HUNT` §2, and getting it wrong
+   absence/presence discipline in `prompts/vanillahunt/README.md` §2, and getting it wrong
    in either direction is easy.
 3. ⭐ **Presets and data, which is where DLC QC is worst and where our
    instruments are weakest.** `CropPreset`, `Meal`, `Resource`, `LawDef`,
@@ -110,7 +117,7 @@ and make every step earn its place. ⛔ Do not propose "play the DLC and see".
 
 ## 4 · What a finding must contain
 
-As `VANILLA_DIFF_HUNT.md` §4 — route re-derived, file:line, who reaches it,
+As `prompts/vanillahunt/README.md` §3 — route re-derived, file:line, who reaches it,
 **a falsifier**, severity in player terms — plus one more that is specific here:
 
 ⭐ **Does it affect players who do NOT own the DLC?** That single question sorts

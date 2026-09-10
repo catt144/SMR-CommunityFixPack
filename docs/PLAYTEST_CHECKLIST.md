@@ -29,6 +29,38 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### 2026-09-10 — 134: the vanilla diff hunt is authored as a chain; accept the shape, then fire link 01 when convenient. Nothing here needs the keyboard.
+
+> **What exists now:** `docs/agent/prompts/vanillahunt/` — 8 links + a README
+> manifest, written from your `VANILLA_DIFF_HUNT.md` brief (consumed). It hunts
+> for what 1.1.0 broke in the GAME, by diffing the two archived trees at
+> function granularity and reading the changes by the risk classes the pack
+> has already been bitten by. It files candidates; it adds no module, and it
+> never touches the game directory or the archives. Every link is unattended.
+>
+> **The one decision — 134: accept the chain as authored?** Two things to argue
+> with rather than accept:
+> 1. **Model placement** (my call at 8 links, per the chain method; you may
+>    re-route by renaming — bodies are model-neutral): **04 the DLC seam** and
+>    **99 the audit** on Fable, the other six on Opus. 04 is your thesis's home
+>    and a thin read there yields nothing an audit can recover; 01 the differ
+>    is Opus despite being load-bearing because it ships with a falsifier that
+>    02 scores and 99 re-runs.
+> 2. **Link 03 is an addition beyond the brief.** 1630 of the 2444 changed
+>    files are editor-exported preset data; the brief's blind-spot list would
+>    have written them off. 03 diffs them at field level with a second small
+>    tool. Strike it if you would rather bank the Lua result first — 04 then
+>    runs without the preset hand-off and says so.
+>
+> **Recommendation:** accept as authored. **Kickoff:** paste
+> `prompts/vanillahunt/01_INVENTORY.md` into a fresh session any time; the
+> chain is read-only on the game, so it does not collide with the owed
+> post-upload sitting (one boot on v6) and can run alongside it. 01 also runs
+> the 1.1.0 `Lua.fpk`-vs-Src parity check the release gate still owes since
+> the update. **132** (the STATE warn) is still yours and is not a gate on
+> this; the chain touches STATE only at 99. `DLC_DEEP_CHECK.md` fires AFTER
+> this chain's 99 — its brief now says so.
+
 ### ✅ 2026-09-09 — HOTFIX 2 IS LIVE AS v6 ON BOTH STORES, AND THE SITE IS PUBLISHED. This is the receipt; nothing is owed from you tonight.
 
 > **What is live, from your screenshots and what I could read myself:**

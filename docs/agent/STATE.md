@@ -25,8 +25,9 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   A3 (F118) · A10 · A5 c2 · A9 c4/c5 · F117's station recipe · the first `RunAll()` on the 94-probe kit (re-stamps
   `WORKFLOW.md:407`, VOID since 09-09). ⛔ Kit verdicts are PREDICTIONS until then; still FAIL/ERROR by name:
   `C47OpenFarmSeedBufferShape` (Herbs 100→50), retired `LanderCargoRatchet`/`DroneUnreachableForever`/`AutoExportPriority`.
-- ⏭ NEXT: rule **132** → fire `prompts/VANILLA_DIFF_HUNT.md`, then `prompts/DLC_DEEP_CHECK.md` (authoring briefs, that
-  order — they share the base-game diff). Both trees archived with manifests; no re-archive needed while the build is 24995074.
+- ⏭ NEXT: fire `prompts/vanillahunt/01_INVENTORY.md` (chain authored 09-10 from the consumed `VANILLA_DIFF_HUNT.md`; 8 links,
+  04 + 99 Fable; ck134 = accept the shape). `DLC_DEEP_CHECK.md` fires AFTER its 99. ⛔ Read-only on the game and both archives.
+  Both trees archived with manifests; no re-archive needed while the build is 24995074. 132 still unruled (not a gate).
 - ⭐ PUBLISHED both portals — `pdx_id` **156049**, `steam_id` **3787202810**, tree `version` **6** (hotfix 2, 09-09).
   ⛔ Never re-upload to "fix" a version number — each upload bumps again (H-02). ⛔ Every upload OVERWRITES both
   page bodies from `metadata.lua`; `description` IS the full card (08-24). ✅ v6 auto-fill delivered BOTH pages clean
@@ -98,7 +99,8 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   a trap). ⛔ Its kit probe PASSes vacuously with no domed Saint — NOT coverage. Field reports are the detector.
 - ✅ **131** RULED promote + LANDED 09-09 late (`tools/desk_*.py`) · **132** STATE.md warn: raise 12288 again or accept
   per-session eviction (this close-out evicted the pre-release material; measure, never quote) · **133** six
-  self-check-promise decisions (`reports/SELFCHECK_PROMISE_COMBINED.md` §7), routed 09-09.
+  self-check-promise decisions (`reports/SELFCHECK_PROMISE_COMBINED.md` §7), routed 09-09 · **134** accept the vanillahunt
+  chain as authored (rec yes; link 03 is the strikeable addition), routed 09-10.
 - 73 blame surface — harden or not · 76 confirm (a) was a ruling not a leaning · 53 harden now or in 1.0.1
   (rec 1.0.1) · 51 both-packs leg timing (rec after launch) · 50 chain-vs-replace wording · 47 two modder-page
   wordings · 43 opt-in pack re-tick · 41 dialog wording + sweep cap 5→8 · 40 `smr_shuttles` name · 39 dialog re-fire.

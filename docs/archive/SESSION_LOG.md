@@ -8,6 +8,29 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-10 (early) — the vanilla diff hunt authored as a chain: `prompts/vanillahunt/`, 8 links, nothing read yet
+
+tags: vanillahunt VANILLA_DIFF_HUNT DLC_DEEP_CHECK ck134 ck132 F114 F115 F116 F117 F118 C54 C55 EF-005 EF-075 EF-078 EF-079 EF-083 treediff presetdiff
+
+Brief `prompts/VANILLA_DIFF_HUNT.md` fired on the owner's word (session `smr-bugfixpack-c3`, tree `b27778e`); the brief is
+CONSUMED by this commit (`git log --diff-filter=D -- docs/agent/prompts/VANILLA_DIFF_HUNT.md` names it). Authoring only: no diff was read,
+no body was opened, no tool was written, nothing ran in a game, no status moved.
+* **Sized from the manifests, not inherited:** 2444 changed / 1968 same / 305 added / 36 removed reproduced; of the 2437
+  non-DLC changed files **1630 are editor-exported data** (`Data/`, `BuildingTemplate`, `XDef`, `ClassDefs`; `StoryBit` 514)
+  and **807 hand-written**, carrying ~28,250 function-declaration lines (upper bound on rows). That split is why the chain
+  partitions by SYSTEM with class as the sort order inside each link (deviation from the brief's "(a)/(b) own link", stated
+  in the README), and why a field-level preset link (03) was added.
+* **Two lessons folded in from peers at authoring:** class (b′) — a callee's argument contract changed while a caller kept the
+  old one (the developers' own F117 shape; `CALLERS.tsv` is its mechanical pass, `smr-bugfixpack-0f`), and `tools/deskbench.py`
+  as the preferred EXECUTING falsifier form; plus the recipe-separately-from-diagnosis rule from 99b's F117 refutation.
+* **Blind spots stated first** (README): non-Src content, the engine, ⛔ fpk parity NOT re-run for 1.1.0 (01 unit A does it),
+  runtime-only behaviour, the 1.0.7 `DLC/` subtree, generated data at function level, semantics under an unchanged body.
+* Queue: 01 inventory+falsifier → 02 triage (fan-out, seeded controls F114/F115/F116/F117) → 03 data → 04 seam (Fable) →
+  05 turf / 06 colony / 07 engine (independent) → 99 audit (Fable). `DLC_DEEP_CHECK.md` re-pointed at the README and told to
+  fire after 99. Owner decision **134** routed (accept shape + placement; 03 is the strikeable addition).
+
+---
+
 ## 2026-09-09 (night) — hotfix 2 SHIPPED as v6: both stores auto-filled clean, the site published, the writeback landed
 
 tags: v6 hotfix2 release ck71 ck129 ck132 F114 F115 F116 F117 F118 EF-078 EF-083 site STORE_CARD_LIVE POST_UPLOAD_CLOSE
