@@ -83,7 +83,11 @@ completed tests move whole to
 > way, so each unit needs only its markers, not the code correction. ✅ **You
 > confirmed the Water Extractor (2026-09-10):** its water-running loop plays, but
 > the pump-stroke "peak" sound only plays when fired by hand, never on its own.
-> The other four are still unproven. So the decision grows: **build the hammer + MOXIE only,
+> ✅ **And you proved its fix on both skins the same day ("both are working now
+> and match").** The Water Extractor needs one more piece than the others: it
+> starts listening for markers a moment before its pump starts moving, so it
+> never hears them. The fix restarts it once the pump is running. The other
+> four are still unproven. So the decision grows: **build the hammer + MOXIE only,
 > or all of them?** Each extra unit costs one "find the times by ear" step with
 > you. Recommendation: keep 139 as the hammer + MOXIE, and decide C77 after one
 > check in the MOXIE sitting below.
