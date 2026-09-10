@@ -80,8 +80,10 @@ completed tests move whole to
 > **shuttle's** landing and take-off sounds at a Shuttle Hub, the **Water
 > Extractor** pump, the **RC Terraformer** and the **RC Driller**. It is the same
 > missing strike-marker data, but their code already asks for markers the right
-> way, so each unit needs only its markers, not the code correction. Nothing is
-> proven on these yet. So the decision grows: **build the hammer + MOXIE only,
+> way, so each unit needs only its markers, not the code correction. ✅ **You
+> confirmed the Water Extractor (2026-09-10):** its water-running loop plays, but
+> the pump-stroke "peak" sound only plays when fired by hand, never on its own.
+> The other four are still unproven. So the decision grows: **build the hammer + MOXIE only,
 > or all of them?** Each extra unit costs one "find the times by ear" step with
 > you. Recommendation: keep 139 as the hammer + MOXIE, and decide C77 after one
 > check in the MOXIE sitting below.
