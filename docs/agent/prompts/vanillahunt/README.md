@@ -339,6 +339,16 @@ split it across subagents. Rules, binding on every link that fans out:
 14. **⛔ A subagent's result is a claim.** The parent verifies a sample from the
     primary artefact before writing it anywhere (memory: *a peer session's
     finding is a claim and so is your own*).
+15. **Running 03 and 04 at the same time is designed for — on two shared
+    surfaces it needs a protocol.** (a) `TRIAGE.md`: write ONLY inside your own
+    named section, never reflow the file. (b) `bugs/INDEX.md` and the `seq`/
+    `row` numbers: two sessions filing in the same minute can pick the same
+    "next free" numbers. So, per filing batch: `git pull` FIRST, re-read the
+    next free numbers from the index, `SendMessage` the peer link naming the
+    numbers you are taking, then create the entries, regenerate the index and
+    commit `-- <paths>` in one go. On a rebase conflict in `INDEX.md`, resolve
+    it by regenerating (never by hand-merging) and re-run doccheck. Everything
+    else the two links touch is disjoint by construction (02's partition).
 
 ## 6 · Artefacts
 
