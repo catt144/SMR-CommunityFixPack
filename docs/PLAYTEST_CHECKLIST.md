@@ -54,6 +54,12 @@ completed tests move whole to
 > BlueSun, Brazil, Roscosmos, Japan or ISRO, you get a drill model by default,
 > which is meant to be silent; use "Change Skin" to get the hammer.* Details:
 > `agent/bugs/C74.md`.
+>
+> **If we fix it, the patch note has to explain the two skins**, or drill-skin
+> players will report the fix as broken. Your three screenshots are saved for
+> that (`agent/reports/c74_skins/`: drill default → Change Skin button →
+> hammer). ⚠️ They show the Cheats panel, so crop or recapture them before
+> they go on a store page or the site.
 
 ### 2026-09-10 — 138 rider: eight caller-seam candidates need fresh 1.1 fixtures; none is a release gate. **Decision: take only the naturally available fixture(s), or leave the candidates source-only. Recommendation: prioritize C66 and fold C67/C68 together if a food-service fixture is already available.**
 
