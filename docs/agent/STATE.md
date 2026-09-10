@@ -22,8 +22,8 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   ck126; ck129; F118/C55 filed; F60 REMOVE candidate (hotfix 3); Pass D: 3 KEEP wrappers under class (c), seen by NO instrument.
   `100_DOCSWEEP.md` AUTHORED — fires BEFORE the upload sitting (bullet 2 ships in `metadata.lua`).
   ⭐ **LINK 99a LANDED 09-09** — LAST CODE in hotfix 2; **99b BENCH LANDED 09-09 late** (commits: `prompts/hotfix2/README.md`).
-  ⛔ NEITHER REPRODUCED, no probe for F118, NO status word moved. ⚠️ Desk falsifiers (99a ×2, 99b ×2) SCRATCHPAD-only ⇒ ck131.
-  Next and last: `100_DOCSWEEP` — the ONLY thing between the tree and the upload.
+  ⛔ NEITHER REPRODUCED, no probe for F118, NO status word moved. ✅ Desk falsifiers PROMOTED: `tools/deskbench.py` + 4 `desk_*.py`.
+  Next and last: `100_DOCSWEEP` — owner CLEARED it 09-09 late; the ONLY thing between the tree and the upload.
   🎮 **SITTING RAN 09-09 ATTENDED** (`archive/logs/sitting{boot,suite,play}110_*`, all read AFTER exit). 99 SHIP ≠ clearance (H-04).
   🎮 **SITTING 2 RAN 09-09 EVENING ATTENDED** (`archive/logs/sitting2play110_*`, read AFTER exit — §3 earned again, SESSION_LOG).
   Census `44 applied / 0 inactive`, **0 error-shaped lines** (THIRD independent boot). Opt-in OFF by `Loaded mod items for:`.
@@ -111,7 +111,7 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   a trap). ⛔ Its kit probe PASSes vacuously with no domed Saint — NOT coverage. Field reports are the detector.
 - ⛔ BLOCKS the upload: `100_DOCSWEEP` ALONE again (the 2 kit items landed 09-09 late, 99b). 118 RULED ⇒ re-copies MUST
   decline on 1.0.7 (§2a).
-- **131** promote the 4 desk falsifiers (99a ×2, 99b ×2) into `tools/` — re-raised ONCE by 99b, rec yes · **132** STATE.md warn:
+- ✅ **131** RULED promote + LANDED 09-09 late (`tools/desk_*.py`) · **132** STATE.md warn:
   raise 12288 again or accept per-session eviction until the 1.1.0 fallout closes (99b found 73 B headroom on arrival; GROWING).
 - 73 blame surface — harden or not · 76 confirm (a) was a ruling not a leaning · 53 harden now or in 1.0.1
   (rec 1.0.1) · 51 both-packs leg timing (rec after launch) · 50 chain-vs-replace wording · 47 two modder-page

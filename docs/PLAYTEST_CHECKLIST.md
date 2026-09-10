@@ -162,10 +162,28 @@ completed tests move whole to
 >
 > **The orphaned comment list** from the doc sweep's §4 is drained (`a8e0ca2`) — comments only, no behaviour found changed.
 >
-> #### ⛔ Two things that want your decision
+> #### ✅ 2026-09-09 (later still) — you ruled 131 "promote": landed. And yes, you are good to fire `100_DOCSWEEP`.
 >
-> 1. **131, raised once more and then dropped:** the F117 desk falsifiers (two from 99a, two from 99b) live in session scratchpads. Promote them into `tools/` (one file each, re-runnable by anyone), or let the transcripts in `F117.md` be the record? Recommendation: promote — the recipe harness is the only way to re-check that logic without a game.
-> 2. **132 — `STATE.md`'s warn line.** Measured now, not quoted: **12,215 bytes / 129 lines against a 12,288 warn — 73 bytes of headroom, i.e. none.** The warn was raised 9 → 12 KiB this morning as a runway; the file grew ~3.0 KiB over the last ten commits (09-09 03:28 → 21:19) and it is growing, not being suppressed. This link stayed under only by compressing four history lines into pointers (grave in the commit, named in SESSION_LOG) and then trimming its own two new lines twice — the close-out first landed 38 bytes OVER. ⛔ Not an agent's call, and the hard cap (18 KiB) stays either way: **raise the warn again (recommendation: 14 KiB, ~20 lines of runway), or accept a per-session eviction until the 1.1.0 fallout is closed?**
+> * **131 — PROMOTED.** `tools/deskbench.py` is the shared half (paths, the body
+>   extractor, the loader that puts a shipped body back at its real line
+>   numbers, the engine shims), and the four harnesses sit beside it:
+>   `desk_f117_argshape.py` + `desk_f117_kitprobe.py` (99a's two),
+>   `desk_probes_f67_f59.py` + `desk_f117_recipe.py` (99b's two). Demands
+>   verbatim, only paths moved; the two "old probe text" legs are pinned to the
+>   kit commit before the rebuild so they keep meaning. `python tools/deskbench.py`
+>   runs all four and summarises — every demand held on promotion. The kit
+>   harnesses need the local kit (`SMR_TESTKIT`), the 1.0.7 legs the archive
+>   (`SMR_SRC_ARCHIVE`); both default to their rig paths.
+> * **Fire 100: yes.** Every gate it names is met — 126 and 127 ruled, 99a and
+>   99b consumed, the folder is `100_DOCSWEEP.md` + `README.md`, the upload
+>   blockers are the sweep alone, the tree is pushed. Fresh session, docs only,
+>   no game. Its inbox already carries 99b's notes, including "the §4 comment
+>   list is drained — do not re-file". ⛔ It still is not clearance (`H-04`): the
+>   sweep ends at the upload sitting, which is yours.
+>
+> #### ⛔ One thing still wants your decision
+>
+> 1. **132 — `STATE.md`'s warn line.** Measured now, not quoted: **12,215 bytes / 129 lines against a 12,288 warn — 73 bytes of headroom, i.e. none.** The warn was raised 9 → 12 KiB this morning as a runway; the file grew ~3.0 KiB over the last ten commits (09-09 03:28 → 21:19) and it is growing, not being suppressed. This link stayed under only by compressing four history lines into pointers (grave in the commit, named in SESSION_LOG) and then trimming its own two new lines twice — the close-out first landed 38 bytes OVER. ⛔ Not an agent's call, and the hard cap (18 KiB) stays either way: **raise the warn again (recommendation: 14 KiB, ~20 lines of runway), or accept a per-session eviction until the 1.1.0 fallout is closed?**
 >
 > ⛔ Not clearance (`H-04`). `100_DOCSWEEP` is now the ONLY thing between the tree and the upload; it fires next.
 
