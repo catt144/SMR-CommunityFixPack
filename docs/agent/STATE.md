@@ -26,7 +26,7 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   `WORKFLOW.md:407`, VOID since 09-09). ⛔ Kit verdicts are PREDICTIONS until then; still FAIL/ERROR by name:
   `C47OpenFarmSeedBufferShape` (Herbs 100→50), retired `LanderCargoRatchet`/`DroneUnreachableForever`/`AutoExportPriority`.
 - ⏭ NEXT: fire `prompts/vanillahunt/01_INVENTORY.md` (chain authored 09-10 from the consumed `VANILLA_DIFF_HUNT.md`; 5 links,
-  owner assigns models, rec 03 + 99 Fable; ck134). `DLC_DEEP_CHECK.md` fires AFTER its 99. ⛔ Read-only on the game and archives.
+  04 = Codex Sol Ultra + NO split (owner 09-10); rest ck134, rec 03 + 99 Fable). `DLC_DEEP_CHECK.md` fires AFTER its 99.
   Both trees archived with manifests; no re-archive needed while the build is 24995074. 132 still unruled (not a gate).
 - ⭐ PUBLISHED both portals — `pdx_id` **156049**, `steam_id` **3787202810**, tree `version` **6** (hotfix 2, 09-09).
   ⛔ Never re-upload to "fix" a version number — each upload bumps again (H-02). ⛔ Every upload OVERWRITES both

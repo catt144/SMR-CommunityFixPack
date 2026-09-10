@@ -86,7 +86,7 @@ inside a blind spot is not a result.
 | 01 | `01_INVENTORY.md` | Opus (rec) | no | fpk parity on 1.1.0 · `tools/treediff.py` (imports `luafn.find_bodies`, never re-implements it) + `--selftest` · `tools/presetdiff.py` (field-level preset differ, churn RULES + a 20-row sample per class) + `--selftest` · `INVENTORY.tsv`, `STORAGE.tsv`, `FILES.tsv`, `CALLERS.tsv`, `PRESETS.tsv` · mechanical classes and counts · the four seeded positives confirmed by the TOOL |
 | 02 | `02_TRIAGE.md` | Opus (rec) | no | the first parent-orchestrates-agents link: system + DLC-adjacent tags on every Lua and preset row, fan-out classification of body-changed rows (with the `SMELL` surface sweep), class (g) set built, the seeded-positive control scored, `TRIAGE.md` ledger with exact counts, row lists for 03 and for each of 04's agents |
 | 03 | `03_SEAM.md` | **Fable** (rec) | no | class (g) — the OLD × NEW seam: base-game changes (Lua and presets) made to accommodate the DLC that ship to EVERYONE; both-sides discipline per row; the handoff section `dlccheck` consumes. Independent of 04 |
-| 04 | `04_HUNT.md` | Opus (rec) | no | the second parent-orchestrates-agents link, everything not tagged (g): one agent per system (turf · colony · engine · storage+removed/added) and one per preset registry, each under its own binding reading order; the parent verifies one finding per agent from the trees, files, and commits every agent report verbatim to `reports/vanillahunt/agents/`. Pre-splits into `04b` from the ledger's counts before spawning if the agent count exceeds ~30 |
+| 04 | `04_HUNT.md` | **Codex Sol Ultra** (owner-assigned 09-10) | no | the second parent-orchestrates-agents link, everything not tagged (g): one agent per system (turf · colony · engine · storage+removed/added) and one per preset registry, each under its own binding reading order; the parent verifies one finding per agent from the trees, files, and commits every agent report verbatim to `reports/vanillahunt/agents/`. ⚖️ **Does NOT split** (owner, 09-10) — the whole plan runs in one orchestrator, committed as it goes |
 | 99 | `99_TERMINAL_AUDIT.md` | **Fable** (rec) | ✅ raises the kickoff | adversarial backward QA: re-derive a sample of findings from scratch against the agent reports, re-falsify both instruments by planting fresh changes, rule on whether the inventory was SOUND, score the controls, measure the surface sweep's real reach, sweep the not-reached lists, empty the folder, end with the `DLC_DEEP_CHECK.md` kickoff line |
 
 **Ordering.** 01 → 02 strictly (02 reads 01's TSVs). **03 and 04 are
@@ -115,10 +115,14 @@ where multiple could be one leg that utilises sub agents?"*). The four
 per-system reading links were the same job on disjoint row sets, and the
 preset-reading link was that job on presets; they are now 04's agents, and
 their reading orders survive verbatim as per-agent briefs. What the
-consolidation costs, said plainly: 04's parent must size its agents from 02's
-counts BEFORE spawning (a mid-link split is what the owner said to avoid), it
-files every surviving entry itself, and 99 can only audit 04 through the agent
-reports — so committing those verbatim is a chain rule, not hygiene. (4) **The
+consolidation costs, said plainly: 04's parent must plan its agents from 02's
+counts BEFORE spawning and commit that plan, it files every surviving entry
+itself, and 99 can only audit 04 through the agent reports — so committing
+those verbatim is a chain rule, not hygiene. ⚖️ **The owner then ruled (same
+day) that 04 does not split and runs on Codex Sol Ultra**, whose specialty is
+large subagent coordination; the pre-split clause was removed from 04 and its
+stop condition became "commit the plan and the reports, mark the unrun agents,
+stop" — so a resumed orchestrator picks up from committed state. (4) **The
 surface sweep** (owner, same day): every body an agent opens for any reason is
 also read for a `FIX_POLICY` §4 tell, and a hit is filed `PASSING` whether or
 not the diff caused it (§3 below). It widens the read only to bodies someone
@@ -126,16 +130,20 @@ was opening anyway; 99 measures that reach so nobody mistakes it for a sweep of
 the unchanged tree.
 
 ⭐ **Model placement — the OWNER's at five links (`CHAIN_METHOD` §4.0: five or
-fewer, the owner assigns; the "(rec)" in the table is this Fable session's
-recommendation, bodies are model-neutral).** Recommended: 03 and 99 on the top
-tier. 03 because the seam is the thesis's home and a thin read there yields
-nothing an audit can recover; 99 because it is the fresh-context adversary. 01
-and 04 are NOT recommended top-tier despite being load-bearing: 01 ships with
-falsifiers that 99 re-runs and a seeded control that 02 scores, and 04's every
-finding is verified by its parent from the trees and audited by 99 against a
-verbatim agent report — their errors are CAUGHT downstream, which is the
-placement rule. ⚠️ 04 is the heaviest session in the chain; if the owner wants
-one more top-tier link, 04 is the one. Routed as checklist **134**.
+fewer, the owner assigns; "(rec)" in the table is this Fable session's
+recommendation, bodies are model-neutral).** ✅ **04 is ASSIGNED: Codex Sol
+Ultra** (owner, 2026-09-10) — the heaviest session, handed to the model built
+for large subagent coordination; its brief is written tool-neutral for that
+reason. Recommended for the rest: 03 and 99 on the top tier. 03 because the
+seam is the thesis's home and a thin read there yields nothing an audit can
+recover; 99 because it is the fresh-context adversary. 01 is NOT recommended
+top-tier despite being load-bearing: it ships with falsifiers that 99 re-runs
+and a seeded control that 02 scores — its errors are CAUGHT downstream, which
+is the placement rule. ⚠️ Cross-vendor: 99 audits 04's work through the
+committed `agents/` reports and the filed entries, never through a session
+transcript — the same discipline a Claude 04 would have been held to, and the
+reason those reports are a chain rule. Routed as checklist **134** for the
+remaining three.
 
 ## 2 · The risk taxonomy — binding sort order for every row
 
@@ -282,10 +290,14 @@ split it across subagents. Rules, binding on every link that fans out:
 
 ## 5 · Binding chain rules — every prompt inherits these
 
-1. **Staleness check first.** `git log --oneline -10`, `git pull`, `ListAgents`.
-   Several smr-bugfixpack sessions edit this tree at once; message any peer
-   whose lane you are about to enter, and never touch a stranger's unstaged
-   file. ⛔ Explicit FILE paths on every `git add` — never `add -A`, never a
+1. **Staleness check first.** `git log --oneline -10`, `git pull`, `git status
+   --short`, and `ListAgents` where your platform has it. Several sessions —
+   Claude and Codex — edit this tree at once; a peer's unstaged file in `git
+   status` is a lane you do not enter, and a peer's commit in `git log` since
+   your prompt was written is a staleness check you run before acting on the
+   prompt. Where a messaging tool exists, message the peer whose lane you are
+   about to enter; where it does not, the git-visible claim in rule 15 IS the
+   coordination. ⛔ Explicit FILE paths on every `git add` — never `add -A`, never a
    directory pathspec (both swept a peer's work on 2026-09-08) — **and on
    every `git commit`: `git commit -F <msg> -- <paths>`.** The index is shared
    between sessions and a bare `git commit` commits the WHOLE index: on
@@ -344,11 +356,14 @@ split it across subagents. Rules, binding on every link that fans out:
     named section, never reflow the file. (b) `bugs/INDEX.md` and the `seq`/
     `row` numbers: two sessions filing in the same minute can pick the same
     "next free" numbers. So, per filing batch: `git pull` FIRST, re-read the
-    next free numbers from the index, `SendMessage` the peer link naming the
-    numbers you are taking, then create the entries, regenerate the index and
-    commit `-- <paths>` in one go. On a rebase conflict in `INDEX.md`, resolve
-    it by regenerating (never by hand-merging) and re-run doccheck. Everything
-    else the two links touch is disjoint by construction (02's partition).
+    next free numbers from the index, create the entries, regenerate the
+    index, commit `-- <paths>` and **push immediately — the push IS the
+    claim** (tool-neutral: it works across vendors). A rejected push means the
+    peer claimed first: pull, renumber your new entries to the next free
+    numbers, regenerate, commit, push again. On a rebase conflict in
+    `INDEX.md`, resolve it by regenerating (never by hand-merging) and re-run
+    doccheck. Everything else the two links touch is disjoint by construction
+    (02's partition).
 
 ## 6 · Artefacts
 

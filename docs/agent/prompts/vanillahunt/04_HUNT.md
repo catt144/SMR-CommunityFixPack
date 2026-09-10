@@ -1,9 +1,20 @@
 # 04 — the hunt: one parent, one agent per system and per preset registry
 
 ⛔ ONE-SHOT: this file `git rm`s itself on close-out (README rule 2).
-Model: Opus (recommendation; the owner assigns — README §1) · owner needed:
-no · after 02; **independent of 03** (the seam) — the two may run at once in
-separate sessions, they share no rows.
+Model: **Codex Sol Ultra — owner-assigned 2026-09-10** (*"its specialty is
+massive subagent coordination; it is specifically designed for this sort of
+task"*) · owner needed: no · after 02; **independent of 03** (the seam) — the
+two may run at once in separate sessions, they share no rows. ⚖️ **Owner
+ruling, same date: this link does NOT split.** The whole hunt is one
+orchestrator; rule 4 of the README does not apply here. What still binds is
+everything below about verification and evidence — a bigger fan-out raises
+the bar on those, it does not lower it.
+
+⚠️ **Written tool-neutral.** Where this brief says "agent" it means your
+platform's judgement-capable subagent (one that reads whole bodies and
+reasons), never a locate-only search agent. Where the README's chain rules
+name Claude Code tools (`ListAgents`, `SendMessage`), use the git-visible
+equivalents in README rule 1 and rule 15 — they were rewritten for this.
 
 > 🎯 Every row 02 did not tag `dlc-adjacent` is read here: the hand-written
 > Lua by SYSTEM, the preset data by REGISTRY, the storage moves and the
@@ -36,13 +47,15 @@ One item per agent wave, one per verification pass, one per filing batch.
 1. **Size from the ledger, not from hope.** Per system and per registry, take
    02's `WORTH-READING` row count. **~250 rows is one agent.** A system above
    that is cut into file-group agents (e.g. `turf` → tracks+trains /
-   landscaping+construction / drones+logistics+depots). ⛔ If the total implies
-   more than ~30 agents, author `04b_HUNT_<systems>.md` NOW with a full inbox
-   and its README row, and take only the first half — a parent that discovers
-   at agent 25 that it cannot hold the verdicts is the failure the owner named
-   (*"a chain cannot tell what its current context is"*).
-2. **One brief per agent**, `general-purpose` type (⛔ never `Explore` for
-   judgement), holding: the two archive roots; its row list (file · function ·
+   landscaping+construction / drones+logistics+depots). Write the full agent
+   plan (agent · rows · files) into `TRIAGE.md` "04" BEFORE the first spawn,
+   so 99 can check that every row was assigned to exactly one agent. ⛔ No
+   `04b` — the owner ruled this link does not split; the whole plan runs
+   here, in as many waves as it takes. What the parent must hold is the
+   VERDICTS, never the reading: keep per-agent results in the committed
+   `agents/` reports (§2.5) and work from those files, not from memory.
+2. **One brief per agent**, a judgement-capable subagent (⛔ never a
+   locate-only one), holding: the two archive roots; its row list (file · function ·
    both line ranges, or `class:id · key` for presets); README §2's taxonomy
    VERBATIM; the system's reading order from §3 below; README §4's return
    format VERBATIM plus the surface-sweep clause; the `find_bodies` call it
@@ -170,12 +183,14 @@ checklist item, TAKEABLE WHEN the owner rules — never repaired here.
 
 ## 6 · Stop conditions
 
-The ledger implies > ~30 agents (author `04b` first, §2.1) · an agent's
-verified finding fails twice (the brief is wrong — fix the brief, record the
-drift, re-issue) · a falsifier needs a running game (checklist rider, TAKEABLE
-IN the post-upload sitting or the next organic play) · context half spent with
-waves outstanding (commit reports and filings so far, author `04b` for the
-remaining agents, full inbox).
+An agent's verified finding fails twice (the brief is wrong — fix the brief,
+record the drift, re-issue) · a falsifier needs a running game (checklist
+rider, TAKEABLE IN the post-upload sitting or the next organic play) · ⚠️ if
+the session cannot complete the plan: commit every report and filing so far,
+mark the unrun agents in the `TRIAGE.md` "04" plan as NOT RUN with the
+reason, and STOP — ⛔ do not author `04b`; the owner decides how the remainder
+runs (the same orchestrator resumed on the committed plan is the designed
+recovery, which is why the plan and the reports are committed as you go).
 
 ## 7 · What may NOT be claimed
 

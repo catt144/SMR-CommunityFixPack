@@ -56,8 +56,11 @@ completed tests move whole to
 >
 > **The decision — 134: at five links the chain method says YOU assign the
 > models** (bodies are model-neutral; the table carries my recommendation).
-> Recommended: **03 the seam and 99 the audit on Fable**, 01/02/04 on Opus. If
-> you want one more on Fable, 04 is the heaviest session and the one to pick.
+> ✅ **04 is assigned — Codex Sol Ultra, no split (your ruling, 09-10);** its
+> brief is rewritten tool-neutral, the pre-split clause is gone, and its stop
+> condition is "commit the plan and reports, mark the unrun agents, stop" so a
+> resumed orchestrator continues from committed state. Still yours: 01, 02, 03,
+> 99. Recommended: **03 the seam and 99 the audit on Fable**, 01/02 on Opus.
 >
 > **Kickoff:** paste `prompts/vanillahunt/01_INVENTORY.md` into a fresh session
 > any time; the chain is read-only on the game, so it does not collide with the
