@@ -13,7 +13,6 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   needs a NEW colony provisioned from scratch (hours). Override exists but is triage-only (`EF-080`).
   ✅ F114+F115 GATED 09-08 (ck106/ck109), then **REPAIRED ON TOP 09-09 (ck123, link 04b)**: F-8/F-9/F-10 carry
   1.1.0 bodies + behaviour probes, gates KEPT (sense inverted) ⇒ `sigcheck` 0 MISMATCH now.
-  ✅ Opt-in pack UNTICKED (ck43): ZERO `applied` lines since 15.21 — no confound.
   ✅ **F116 REPAIRED in-body** (`add94b3`), NOT gated. Source-derived, NEVER reproduced.
   ⭐ **1.1.0 RE-VERIFICATION 09-08: 10 FIX / 35 REMOVE / 35 KEEP** (`reports/PACK_1_1_0_REVERIFICATION.md`,
   ck114-117; QA'd by 3 fresh readers, `reports/VANILLA_FIX_QA.md` §0, 0 flips).
@@ -23,7 +22,7 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   Change-note bullet 2 contradicts link 08's F95 pass ⇒ ck128 rides ck126. Site publish WITH the upload ⇒ ck129. F118/C55 filed, F60 REMOVE
   candidate for hotfix 3. Pass D: 3 of 35 KEEP wrappers moved under class (c), seen by NO instrument.
   `100_DOCSWEEP.md` AUTHORED — fires after 126+127 are ruled and BEFORE the upload sitting (bullet 2 ships in `metadata.lua`).
-  ⭐ **LINK 99a LANDED 09-09** (`777249d` F117, `0136af1` riders, `cb6415f` publish; kit `c1114ed`) — LAST CODE in hotfix 2.
+  ⭐ **LINK 99a LANDED 09-09** — LAST CODE in hotfix 2 (commits: `prompts/hotfix2/README.md`).
   ⛔ NEITHER REPRODUCED, no probe for F118, NO status word moved. ⚠️ Desk falsifiers SCRATCHPAD-only (`F117.md` has the ask
   to promote them). Next and last: `100_DOCSWEEP`.
   🎮 **SITTING RAN 09-09 ATTENDED** (`archive/logs/sitting{boot,suite,play}110_*`, all read AFTER exit). 99 SHIP ≠ clearance (H-04).
@@ -113,7 +112,8 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 - **130 RULED 09-09**: Saint heal SHIPS UNEXERCISED — condition is historical, unforgeable (`EF-080` override yields
   `restored 0`); additive-only and cannot throw (`Lua/TraitPreset.lua:77-95` no throwing path, `WhenActive` is a gate not
   a trap). ⛔ Its kit probe PASSes vacuously with no domed Saint — NOT coverage. Field reports are the detector.
-- ⛔ BLOCKS the upload: `100_DOCSWEEP` ALONE — the F117 link LANDED 09-09. 118 RULED ⇒ re-copies MUST decline on 1.0.7 (§2a).
+- ⛔ BLOCKS the upload: `100_DOCSWEEP` **+ the 2 kit items ruled 09-09 eve** (§Now). NOT "docsweep alone" any
+  more. 118 RULED ⇒ re-copies MUST decline on 1.0.7 (§2a).
 - 73 blame surface — harden or not · 76 confirm (a) was a ruling not a leaning · 53 harden now or in 1.0.1
   (rec 1.0.1) · 51 both-packs leg timing (rec after launch) · 50 chain-vs-replace wording · 47 two modder-page
   wordings · 43 opt-in pack re-tick · 41 dialog wording + sweep cap 5→8 · 40 `smr_shuttles` name · 39 dialog re-fire.
