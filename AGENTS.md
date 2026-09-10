@@ -24,7 +24,10 @@ is GENERATED — edit the entry or fact file, never the index** (line-1 banner).
 > edit records.
 
 Before committing doc changes run `python tools/doccheck.py`; red blocks. Set up
-once: `git config core.hooksPath tools/hooks`. **Owner decisions go in
+once: `git config core.hooksPath tools/hooks`. Generated files (`bugs/INDEX.md`,
+`facts/INDEX.md`, and `AGENTS.md`, the Codex entry file, a byte copy of
+`CLAUDE.md`) are rewritten by `python tools/doccheck.py --regen` — edit the
+source, never the copy; doccheck goes RED if they drift. **Owner decisions go in
 `docs/PLAYTEST_CHECKLIST.md` → "Decisions waiting on you", never only in agent
 docs.** Authoring `docs/agent/WORKFLOW.md` · code `docs/agent/FIX_POLICY.md` ·
 efforts over ~2 sessions `docs/agent/reports/CHAIN_METHOD.md`.

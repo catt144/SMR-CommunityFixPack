@@ -199,8 +199,9 @@ return PlaceObj('ModDef', {
 	-- all TEN files of `tools/` into a player's download — 90 files where 78
 	-- belong. Nothing there ever RUNS (only `code` executes), but CLAUDE.md is
 	-- agent instructions and `tools/` is our build machinery.
-	-- ⭐ `*AGENTS.md` added 2026-09-10: the Codex mirror of CLAUDE.md (byte-
-	-- identical, kept in step by hand), excluded for the same reason.
+	-- ⭐ `*AGENTS.md` added 2026-09-10: the Codex mirror of CLAUDE.md (a byte
+	-- copy written by `doccheck.py --regen`, checked on every run), excluded
+	-- for the same reason.
 	-- ⚠️ `LICENSE` is NOT excluded, deliberately: item 23 listed it, but the
 	-- rescue mod built afterwards states "LICENSE ships on purpose" and a licence
 	-- inside the package is right. All three mods now agree on that.
