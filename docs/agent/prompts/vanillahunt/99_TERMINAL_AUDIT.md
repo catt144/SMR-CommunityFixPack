@@ -13,7 +13,10 @@ kickoff · runs ONLY on a folder holding `99` + `README.md`.
 ## 0 · Open in this order
 
 `git log --oneline -30` · `git pull` · `ListAgents` · `README.md` (whole) ·
-`STATE.md` · `reports/vanillahunt/TRIAGE.md` (whole) · every `bugs/C##.md`
+`STATE.md` · `reports/vanillahunt/TRIAGE.md` (whole) ·
+`reports/vanillahunt/agents/*.md` (04's verbatim agent reports — the primary
+evidence for every 04 finding; audit verdict-by-verdict against them, and
+treat a finding with no agent report behind it as unevidenced) · every `bugs/C##.md`
 with `updated:` inside the chain's date range (list them with `git log
 --diff-filter=A -- docs/agent/bugs/` over the chain's commits) · your
 `## Notes from upstream` (every link's outbox lands here — read it LAST, after
@@ -28,8 +31,10 @@ say which links ran against which build.
 ### A · Instruments — re-falsify by hand, then plant something fresh
 
 1. `python tools/treediff.py --selftest` and `python tools/presetdiff.py
-   --selftest` GREEN — then read each fixture list against 01 §2.B.7 and 03
-   §2.A: is every required case actually asserted, or merely printed?
+   --selftest` GREEN — then read each fixture list against 01 §2.B.7 and
+   §2.B2: is every required case actually asserted, or merely printed? And
+   the churn rules: 01 sampled 20 rows per class — re-sample 10 per class
+   yourself; a hidden value change voids the class for the whole chain.
 2. **Plant a fresh change.** Copy ONE archived file pair into your scratchpad
    (⛔ never write under `SMR-SrcArchive\`), edit a body, a signature, and a
    preset value, run both tools on the scratch pair, confirm three rows.
@@ -66,9 +71,13 @@ refutation (C54's precedent: the reasoning error is the reusable part).
 
 ### D · Coverage — what the chain did NOT reach
 
-Collect every link's NOT-reached section; add what the links did not admit:
-03's churn classes by sample size, 07's tooling table by loader citation, 02's
-`other` rows, `SPAN-SUSPECT`/`MULTI`/fpk-divergent rows, `DLC/` (by design),
+Collect every link's and every 04 agent's NOT-reached section; add what they
+did not admit: 01's churn classes by sample size, 04's tooling table by loader
+citation, 02's `other` rows, `SPAN-SUSPECT`/`MULTI`/fpk-divergent rows,
+`DLC/` (by design), ⭐ the `PASSING` surface sweep's real reach (it covers
+only bodies someone opened — count them against the unchanged-body total in
+the fragile systems, so the owner sees what fraction of unchanged code was
+ever looked at),
 and README's blind-spot list re-read in the light of the run — did the chain
 learn a new one? State it. ⛔ A "nothing found" in a system is reported with
 its row count and its agent count, never alone.
@@ -89,8 +98,8 @@ STATE/checklist/SESSION_LOG say what the chain did and nothing more.
 1. Instruments: SOUND / WITH GAPS / UNSOUND, with A.4's table.
 2. Controls: the numbers, re-derived.
 3. Findings: ranked by **player severity**, each with the non-owner sorter,
-   the falsifier's state (executing / source-only / needs a game), and your
-   verdict (holds / weakened / refuted). ⛔ Not a fix list — what becomes a fix
+   `DIFF-CAUSED` or `PASSING`, the falsifier's state (executing / source-only
+   / needs a game), and your verdict (holds / weakened / refuted). ⛔ Not a fix list — what becomes a fix
    is `FIX_POLICY` §4 + the owner: route ONE checklist decision item
    ("which of these, if any, go to a hotfix-3 candidate list") with a
    recommendation per finding, and say plainly that most will be "file and
@@ -142,8 +151,11 @@ ends with the `DLC_DEEP_CHECK.md` kickoff line, or says why it should not fire.
 
 ## Notes from upstream
 
-*(authoring session, 2026-09-09/10)* Placed on the top tier per README §1's
-placement note. Nothing has run; the three seeds and their expected classes
+*(authoring session, 2026-09-09/10)* Top tier is the authoring RECOMMENDATION;
+at five links the owner assigns (README §1). The chain was consolidated from
+eight links to five on 2026-09-10 (README §1's deviation note) — 04 is now a
+parent over agents, so its `agents/` reports are your primary evidence and a
+04 finding with no report behind it is a chain defect. Nothing has run; the three seeds and their expected classes
 are in README §4 and their pins in 01's inbox. The authoring session's own
 numbers (README §0 shape table) were produced by a declaration-line regex and
 a manifest comparison, not by `treediff` — if 01's inventory disagrees with

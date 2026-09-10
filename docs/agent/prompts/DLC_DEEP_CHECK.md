@@ -4,7 +4,7 @@ Paste into a fresh Claude Code session. Written **2026-09-08**, to fire **after
 the current fix pack is patched, pushed and stable** (owner instruction).
 **Start with `git log --oneline -15` + `git pull`.** Read `docs/agent/STATE.md`
 (mandatory), `docs/agent/FIX_POLICY.md`, `docs/agent/reports/CHAIN_METHOD.md`,
-and **`prompts/vanillahunt/README.md` §7 + link 04's "For dlccheck" section of
+and **`prompts/vanillahunt/README.md` §7 + link 03's "For dlccheck" section of
 `reports/vanillahunt/TRIAGE.md`** — the two efforts overlap by design. *(The
 brief `VANILLA_DIFF_HUNT.md` was consumed into that chain on 2026-09-10; its
 §2 taxonomy, §4 finding contract and §7 subagent rules now live in that README

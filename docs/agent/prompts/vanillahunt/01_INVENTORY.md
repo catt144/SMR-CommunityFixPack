@@ -80,7 +80,7 @@ Given two `Src` roots, emit one row per top-level function that is
    `Lua/BuildingTemplate/`, `Lua/XDef/`, `Lua/ClassDefs/`) — rows still emitted
    but link 03 owns them; `dlc` (`DLC/`) — ⛔ excluded from the base diff
    entirely (README blind spot 5); everything else `hand`. ⛔ Do NOT add a
-   "tooling" bucket by path — link 07 decides that by route.
+   "tooling" bucket by path — 04's engine agent decides that by route.
 7. **`--selftest` — the falsifier, mandatory, and it must fail first.** Build
    two tiny trees in a temp dir from fixtures and assert the tool reports:
    a planted body change (name+arity same); a planted leading parameter
@@ -102,7 +102,33 @@ Given two `Src` roots, emit one row per top-level function that is
 ⛔ Do not wire `treediff --selftest` into `doccheck.py`; this is a one-effort
 instrument and doccheck already carries `bodycheck --selftest`. 99 re-runs it.
 
-### C · the four TSVs (README §6)
+### B2 · `tools/presetdiff.py` — the second instrument, same author, same discipline
+
+The 1630 generated files are `PlaceObj('Class', { key = value, … })` blocks —
+Lua-form preset data the function differ reads as noise. Parse every block in
+both trees' `generated` bucket into `(file, class, id, key) → value-text`,
+nested tables flattened with a path (`key.sub[3].leaf`). Emit `PRESETS.tsv`:
+one row per key whose value differs, plus `added-preset` / `removed-preset`
+rows keyed by `class:id`. Columns: `file · class · id · key · value107 ·
+value110 · churn-class`. **Churn classes are RULES the tool applies**, one
+column: `T-ID` (a `T(123, "text")` localisation-id change with identical
+text), `REORDER` (keys reordered, values equal — ⛔ must NOT be a row at all),
+`FORMAT` (number formatting, quote style), `SAVE-ID` (editor-generated ids,
+`save_in`), `COMMENT`, or `none` (the readable pile). `--selftest` on
+fixtures: a changed numeric value; a changed string; a key added; a key
+removed; a preset added; a preset removed; a reorder-only preset (no row); a
+nested element change; a `T-ID` change with the same text (`T-ID`) and with a
+changed text (`none`). Break one assertion on purpose, see RED, restore, say so.
+⭐ **Then falsify the rules on the real trees:** 20 random rows per churn
+class READ BY YOU against both files — a single row where the rule hid a value
+change voids that class (it becomes `none`) and the miss is recorded. Report
+per class: rows, sample, misses. Both `Data/` and its generated Lua twins
+(`Lua/BuildingTemplate`, `Lua/XDef`) are parsed; the banner states the twin
+row count so 04's registry agents can confirm the twins carry nothing extra.
+
+### C · the five TSVs (README §6)
+
+- `PRESETS.tsv` — from B2, as specified there.
 
 - `INVENTORY.tsv` — columns: `file · function · kind(added|removed|body|sig|body+sig) · bucket · line107 · line110 · sig107 · sig110 · flags(MULTI,SPAN-SUSPECT,RENAME?<partner>,FPK-DIVERGENT)`. Identical functions COUNTED in the banner, not listed.
 - `STORAGE.tsv` — every `GlobalVar(`, `MapVar(`, `GameVar(`, `PersistableGlobals`, `const.<X> =` / `g_Consts` declaration line in both trees, with `same / moved-file / added / removed / kind-changed` — class (c)'s raw material.
@@ -114,16 +140,20 @@ instrument and doccheck already carries `bodycheck --selftest`. 99 re-runs it.
 In `TRIAGE.md`'s **§0 (you create the file; 02 owns the rest)**: rows per kind
 × bucket; the manifest re-derivation (2444/1968/305/36 — must match the README
 or STOP); `SPAN-SUSPECT` and `MULTI` counts; `CALLERS.tsv`'s `same`-against-
-changed-signature count by file; `STORAGE.tsv` moved/added/removed counts; the
-fpk parity result. Numbers only — no reading, no verdicts.
+changed-signature count by file; `STORAGE.tsv` moved/added/removed counts;
+`PRESETS.tsv` rows per churn class with the sample results and the readable
+pile per registry; the fpk parity result. Numbers only — no reading for
+meaning, no verdicts.
 
 ## 3 · Scope fence
 
-**In:** units A–D, `tools/treediff.py`, the four TSVs, `TRIAGE.md` §0, one fact
-for the fpk result. **Out:** reading any diff for meaning (02–07); touching
-`luafn.py`, `bodycheck.py`, `sigcheck.py`, `doccheck.py`; anything in `DLC/`;
-`Code/`. Something interesting in a row you happened to see ⇒ one line in 02's
-inbox, not a read.
+**In:** units A–D, `tools/treediff.py`, `tools/presetdiff.py`, the five TSVs,
+`TRIAGE.md` §0, one fact for the fpk result. **Out:** reading any diff for
+meaning (02–04); touching `luafn.py`, `bodycheck.py`, `sigcheck.py`,
+`doccheck.py`; anything in `DLC/`; `Code/`. Something interesting in a row you
+happened to see ⇒ one line in 02's inbox, not a read. ⚠️ If the two tools do
+not both fit this context with their falsifiers, split at the boundary:
+`01b_PRESETDIFF.md` takes B2 and the `PRESETS.tsv` counts, full inbox, own row.
 
 ## 4 · Stop conditions (permission, not failure)
 
@@ -146,10 +176,10 @@ Outbox to `02_TRIAGE.md` (the TSV paths, the counts, the `SPAN-SUSPECT` and
 `MULTI` lists by name, what the regex missed, the fpk divergences by name) and
 to `99_TERMINAL_AUDIT.md` (the same, plus every drift you caught, plus the one
 assertion you broke on purpose and its RED output). Strike your README row.
-`git add` by explicit path: `tools/treediff.py`, the four TSVs, `TRIAGE.md`,
-the fact file + `facts/INDEX.md`, README, 02, 99, and `git rm` this file.
-`python tools/doccheck.py` GREEN, `python tools/treediff.py --selftest` GREEN.
-Commit `-F`, push.
+`git add` by explicit path: `tools/treediff.py`, `tools/presetdiff.py`, the
+five TSVs, `TRIAGE.md`, the fact file + `facts/INDEX.md`, README, 02, 99, and
+`git rm` this file. `python tools/doccheck.py` GREEN, both `--selftest`s
+GREEN. Commit `-F`, push.
 
 ## Notes from upstream
 

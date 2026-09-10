@@ -1,20 +1,23 @@
-# 04 — the seam: class (g), where the owner's thesis predicts the yield
+# 03 — the seam: class (g), where the owner's thesis predicts the yield
 
 ⛔ ONE-SHOT: this file `git rm`s itself on close-out (README rule 2).
-Model: **Fable** · owner needed: no · after 02 and 03; independent of 05–07.
+Model: **Fable** (recommendation; the owner assigns — README §1) · owner needed: no ·
+after 02; **independent of 04** (the hunt) — the two may run at once, they share no rows.
 
 > ⚖️ *"They are famous for not correctly judging how old features will interact
 > with new ones."* This link reads every row 02 tagged `dlc-adjacent` and every
 > row 03 handed over — **the base-game changes made to accommodate the DLC,
 > which ship to EVERYONE, DLC owner or not** (`DLC_DEEP_CHECK` §1.1). The DLC's
 > own Lua is mostly new classes; the breakage lands HERE, in old code that now
-> has to know about food, meals, farms, laws and a sponsor it never had.
+> has to know about food, meals, farms, laws and a sponsor it never had. Your
+> rows are BOTH the `dlc-adjacent` Lua rows and the `dlc-adjacent` preset rows
+> (02 tags `PRESETS.tsv` too) — the food registries are yours at field level.
 
 ## 0 · Open in this order
 
 `git log --oneline -10` · `git pull` · `ListAgents` · `README.md` (§2, §3, §4)
-· `STATE.md` · `TRIAGE.md` §1–§4 + "For 04, from 03" · `INVENTORY.tagged.tsv`
-rows tagged `dlc-adjacent` · `CALLERS.tsv` rows in your set · `DLC_DEEP_CHECK.md`
+· `STATE.md` · `TRIAGE.md` §1–§4 (your row lists are §3 "03") · `INVENTORY.tagged.tsv`
+and `PRESETS.tagged.tsv` rows tagged `dlc-adjacent` · `CALLERS.tsv` rows in your set · `DLC_DEEP_CHECK.md`
 §1–§2 (the seam list; ⛔ its "mostly additive" premise is a CLAIM that chain
 attacks — you neither rely on it nor rule on it) · `facts/INDEX.md` · your
 inbox. Pin check.
@@ -47,9 +50,10 @@ inbox. Pin check.
 - **Sort:** (b′) `F117-SHAPE` rows first (a base caller keeping an old contract
   the DLC work changed), then (a) body-changed rows in `Colonist`, `Dome`,
   `Building`, `FoodServiceBuilding`, `Resources`, `UpgradeUnlocks`,
-  `ConstructionSite`, then (i) guard rows, then (f) new call sites, then 03's
+  `ConstructionSite`, then (i) guard rows, then (f) new call sites, then the
   preset rows by registry (`CropPreset`, `Meal`, `Resource`, `LawDef`,
-  `PolicyDef`, `Tech`, `Cargo`).
+  `PolicyDef`, `Tech`, `Cargo`) — field-level, the CONSUMER named by
+  `file:line` per row, the way 04 §3.E states it.
 - **Fan out chasing, not judging** (README §4): one agent per candidate to
   enumerate callers/inheritors and the non-owner path; it returns a paragraph
   with citations in BOTH trees; you rule. ⛔ The seam judgement is yours — a
@@ -61,6 +65,8 @@ inbox. Pin check.
   executing non-owner-path control, and it is cheap.
 - **Recipe separately from diagnosis** (README §3). Name the trigger, not the
   code path; name the recipe's vacuity condition.
+- **The surface sweep applies here too** (README §3, `PASSING`): a body you or
+  an agent opened that meets a `FIX_POLICY` §4 tell is filed, diff-caused or not.
 
 ## 4 · Deliverables
 
@@ -71,20 +77,20 @@ inbox. Pin check.
   `DLC/norman` (TAKEABLE WHEN the DLC chain reads that class). ⛔ This section
   is the contract with `DLC_DEEP_CHECK.md`'s chain: what it need not redo and
   what it must.
-- `TRIAGE.md` → "04" coverage: rows read / not reached, with the reason.
+- `TRIAGE.md` → "03" coverage: rows read / not reached, with the reason.
 
 ## 5 · Scope fence
 
-**In:** the `dlc-adjacent` set + 03's hand-off, both paths, filing. **Out:**
-any row not tagged (05–07 own them; a seam you discover in an untagged row is a
-one-line note to the owning link, with the tag added to the ledger and
-recorded as triage drift for 99); reading `DLC/norman/**` beyond the single
+**In:** the `dlc-adjacent` set (Lua + presets), both paths, filing. **Out:**
+any row not tagged (04 owns them; a seam you discover in an untagged row is a
+one-line note to 04, with the tag added to the ledger and recorded as triage
+drift for 99); reading `DLC/norman/**` beyond the single
 function a base row calls into; ruling on the DLC chain's premise.
 
 ## 6 · Stop conditions
 
-The `dlc-adjacent` set exceeds ~400 rows after 03's hand-off (split by
-registry: `04b_SEAM_PRESETS.md`) · the `IsDlcAvailable` re-derivation differs
+The `dlc-adjacent` set exceeds ~400 rows (split by registry:
+`03b_SEAM_PRESETS.md`) · the `IsDlcAvailable` re-derivation differs
 from 3/1 (record it, it is a finding about the brief, continue) · a finding's
 falsifier needs a running game (route to the checklist as a rider; do not
 guess).
@@ -97,9 +103,9 @@ mostly additive" or is not. `tested`, ever.
 
 ## 8 · Close-out
 
-Outbox to 05/06/07 (untagged seams found, by system), to 99 (every ruling with
-its route, the not-settled list, drift). Strike your row. Explicit-path
-`git add`: `TRIAGE.md`, `bugs/C##.md` + `bugs/INDEX.md`, README, 05–07, 99;
+Outbox to 04 (untagged seams found, by system, if 04 is still open), to 99
+(every ruling with its route, the not-settled list, drift). Strike your row.
+Explicit-path `git add`: `TRIAGE.md`, `bugs/C##.md` + `bugs/INDEX.md`, README, 04, 99;
 `git rm` this file. doccheck GREEN, commit `-F`, push.
 
 ## Notes from upstream

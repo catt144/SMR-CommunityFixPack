@@ -29,35 +29,41 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
-### 2026-09-10 — 134: the vanilla diff hunt is authored as a chain; accept the shape, then fire link 01 when convenient. Nothing here needs the keyboard.
+### 2026-09-10 — 134: the vanilla diff hunt is authored as a chain of FIVE links; assign the models, then fire link 01 when convenient. Nothing here needs the keyboard.
 
-> **What exists now:** `docs/agent/prompts/vanillahunt/` — 8 links + a README
-> manifest, written from your `VANILLA_DIFF_HUNT.md` brief (consumed). It hunts
-> for what 1.1.0 broke in the GAME, by diffing the two archived trees at
-> function granularity and reading the changes by the risk classes the pack
-> has already been bitten by. It files candidates; it adds no module, and it
-> never touches the game directory or the archives. Every link is unattended.
+> **What exists now:** `docs/agent/prompts/vanillahunt/` — 5 links + a README
+> manifest, written from your `VANILLA_DIFF_HUNT.md` brief (consumed) and
+> reshaped on your two questions this morning. It hunts for what 1.1.0 broke
+> in the GAME by diffing the two archived trees at function granularity (and
+> the preset data at field level), reading the changes by the risk classes the
+> pack has already been bitten by. It files candidates; it adds no module, and
+> it never touches the game directory or the archives. Every link is unattended.
 >
-> **The one decision — 134: accept the chain as authored?** Two things to argue
-> with rather than accept:
-> 1. **Model placement** (my call at 8 links, per the chain method; you may
->    re-route by renaming — bodies are model-neutral): **04 the DLC seam** and
->    **99 the audit** on Fable, the other six on Opus. 04 is your thesis's home
->    and a thin read there yields nothing an audit can recover; 01 the differ
->    is Opus despite being load-bearing because it ships with a falsifier that
->    02 scores and 99 re-runs.
-> 2. **Link 03 is an addition beyond the brief.** 1630 of the 2444 changed
->    files are editor-exported preset data; the brief's blind-spot list would
->    have written them off. 03 diffs them at field level with a second small
->    tool. Strike it if you would rather bank the Lua result first — 04 then
->    runs without the preset hand-off and says so.
+> **Your two questions, answered in the tree:**
+> 1. **Surface sweep — yes, added.** Every body a reader opens for any reason
+>    (the changed function, its callers, its siblings, a preset's consumer) is
+>    also read for a `FIX_POLICY` §4 tell, and a hit is filed `PASSING` whether
+>    or not the diff caused it. Honest limit: it reaches only bodies someone
+>    opened; the audit counts that reach so it is never mistaken for a sweep of
+>    the unchanged tree.
+> 2. **Fewer legs — 8 → 5.** The four per-system reading links and the preset
+>    link were the same job on disjoint row sets; they are now ONE link (04)
+>    whose parent runs an agent per system and per preset registry, verifies
+>    one finding per agent from the trees, and commits every agent report
+>    verbatim as the audit's evidence. The seam link (03) stays separate —
+>    it is the one cross-system judgement an agent per system cannot make.
+>    Queue: 01 instruments → 02 triage → 03 seam ∥ 04 hunt → 99 audit.
 >
-> **Recommendation:** accept as authored. **Kickoff:** paste
-> `prompts/vanillahunt/01_INVENTORY.md` into a fresh session any time; the
-> chain is read-only on the game, so it does not collide with the owed
-> post-upload sitting (one boot on v6) and can run alongside it. 01 also runs
-> the 1.1.0 `Lua.fpk`-vs-Src parity check the release gate still owes since
-> the update. **132** (the STATE warn) is still yours and is not a gate on
+> **The decision — 134: at five links the chain method says YOU assign the
+> models** (bodies are model-neutral; the table carries my recommendation).
+> Recommended: **03 the seam and 99 the audit on Fable**, 01/02/04 on Opus. If
+> you want one more on Fable, 04 is the heaviest session and the one to pick.
+>
+> **Kickoff:** paste `prompts/vanillahunt/01_INVENTORY.md` into a fresh session
+> any time; the chain is read-only on the game, so it does not collide with the
+> owed post-upload sitting (one boot on v6) and can run alongside it. 01 also
+> runs the 1.1.0 `Lua.fpk`-vs-Src parity check the release gate still owes
+> since the update. **132** (the STATE warn) is still yours and is not a gate on
 > this; the chain touches STATE only at 99. `DLC_DEEP_CHECK.md` fires AFTER
 > this chain's 99 — its brief now says so.
 

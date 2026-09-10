@@ -1,13 +1,14 @@
 # 02 — triage: the parent orchestrating agents, not a session reading rows
 
 ⛔ ONE-SHOT: this file `git rm`s itself on close-out (README rule 2).
-Model: Opus · owner needed: no · after 01, before 03–07.
+Model: Opus (recommendation; the owner assigns — README §1) · owner needed:
+no · after 01, before 03 and 04.
 
 > 🎯 You turn the raw inventory into a LEDGER the hunt links can work from:
 > every row tagged with a system, the DLC-adjacent set built, body-changed
 > rows in runtime files classified by a fan-out, the seeded-positive control
 > SCORED, and per-link row lists written. **You do not hunt** — a row you
-> find yourself chasing is a row you hand to 04–07 with a one-line note.
+> find yourself chasing is a row you hand to 03 or 04 with a one-line note.
 > ⭐ *"One session cannot hold 2444 files, but it can hold 2444 verdicts."*
 
 ## 0 · Open in this order
@@ -28,15 +29,20 @@ One item per unit; the fan-out is several items (one per batch wave).
 
 Add a `system` column to a working copy of `INVENTORY.tsv` (⛔ never edit 01's
 generated file; write `INVENTORY.tagged.tsv` with its own banner). Systems, and
-the link that owns each — this partition is BINDING on 04–07:
+the 04 agent that owns each — this partition is BINDING on 03 and 04:
 
 | system | what lands here | link |
 |---|---|---|
-| `trains` `landscape` `construction` `drones` `logistics` `depots` | `Lua/Buildings/Track*`, `Train*`, `Station*`; `Lua/Landscape/`; `Lua/Construction/`, `ConstructionSite`; `Drone*`, `Shuttle*`, `DroneControl`, `CommandCenter`; `*Depot*`, `Resource*`, `Storage*`, `Supply*` | 05 |
-| `colonists` `domes` `services` `rockets` `disasters` `story` `saveload` | `Colonist*`, `Trait*`, `Morale`; `Dome*`, `Residence*`, `Service*`, `Workplace*`; `*Rocket*`, `Cargo*`, `Trade*`, `Payload*`; `Disaster*`, `Meteor*`, `Dust*`, `ColdWave`; `Lua/Mysteries/`, `Lua/Scenario/`, `Sequences/`, `StoryBit*`; `_fixup.lua`, `SavegameFixups`, `Persist*` | 06 |
-| `commonlua` `ui` `removed-added` `storage` | `CommonLua/**` (all of it — 07 decides tooling by ROUTE, not you by path); `Lua/UI/`, `Lua/X/`, `Lua/XTemplates/`; every row from `FILES.tsv`; every row from `STORAGE.tsv` | 07 |
-| `generated` | 01's `generated` bucket | 03 |
+| `trains` `landscape` `construction` `drones` `logistics` `depots` | `Lua/Buildings/Track*`, `Train*`, `Station*`; `Lua/Landscape/`; `Lua/Construction/`, `ConstructionSite`; `Drone*`, `Shuttle*`, `DroneControl`, `CommandCenter`; `*Depot*`, `Resource*`, `Storage*`, `Supply*` | 04 agent A (turf) |
+| `colonists` `domes` `services` `rockets` `disasters` `story` `saveload` | `Colonist*`, `Trait*`, `Morale`; `Dome*`, `Residence*`, `Service*`, `Workplace*`; `*Rocket*`, `Cargo*`, `Trade*`, `Payload*`; `Disaster*`, `Meteor*`, `Dust*`, `ColdWave`; `Lua/Mysteries/`, `Lua/Scenario/`, `Sequences/`, `StoryBit*`; `_fixup.lua`, `SavegameFixups`, `Persist*` | 04 agent B (colony) |
+| `commonlua` `ui` | `CommonLua/**` (all of it — 04's engine agent decides tooling by ROUTE, not you by path); `Lua/UI/`, `Lua/X/`, `Lua/XTemplates/` | 04 agent C (engine) |
+| `removed-added` `storage` | every row from `FILES.tsv`; every row from `STORAGE.tsv` | 04 agent D |
+| `preset:<registry>` | every `PRESETS.tsv` row with `churn-class = none`, tagged by the registry its `class` belongs to | 04 agents E, one per registry |
 | `other` | whatever the rules above do not catch — ⛔ list them BY FILE in the ledger and assign each by hand with a reason; an `other` left unassigned is a row no link reads | you |
+
+Rows tagged `dlc-adjacent` in unit B — Lua AND preset rows — leave every set
+above and go to **03** instead. The partition 03 / 04-A / 04-B / 04-C / 04-D /
+04-E is disjoint by construction; the ledger states each set's count.
 
 A file may hold several systems' functions (`Building.lua`, `Dome.lua`,
 `Colonist.lua` are 250–300 declarations each); tag by CLASS prefix where the
@@ -44,7 +50,8 @@ file is mixed, and say in the ledger which files you split.
 
 ### B · The DLC-adjacent tag — class (g)'s raw set, built in the parent
 
-Tag `dlc-adjacent` every row whose 1.1.0 body or signature mentions any of:
+Tag `dlc-adjacent` every row — `INVENTORY` rows by 1.1.0 body or signature,
+`PRESETS` rows by `class:id`, key, or value — that mentions any of:
 `Food`, `Meal`, `Crop`, `Farm`, `Fungal`, `Bakery`, `Replicator`, `Restaurant`,
 `Insect`, `Animal`, `Hunger`/`Starv`, `Consumption`, `FoodService`,
 `norman`, `thomas`, `IsDlcAvailable`, `AssemblyOfPlanets`, `LawOffice`, `Law`,
@@ -53,8 +60,9 @@ Tag `dlc-adjacent` every row whose 1.1.0 body or signature mentions any of:
 `DLC/thomas/Code` (grep the declaration lines of those two trees ONCE, in the
 parent, for the name list — that is the only read of `DLC/` this chain makes).
 ⚠️ A name match is not a dependency (`DLC_DEEP_CHECK` §1.2); the tag says
-"04 looks", not "04 files". Count the set; it is 04's whole fence, and **04's
-rows are removed from 05–07's lists** (disjoint by construction).
+"03 looks", not "03 files". Count the set; it is 03's whole fence, and **03's
+rows are removed from 04's lists** (disjoint by construction). Write the
+tagged preset copy as `PRESETS.tagged.tsv`, own banner, 01's file untouched.
 
 ### C · The fan-out — classification of `body` and `body+sig` rows in `hand` files
 
@@ -72,8 +80,14 @@ rows are removed from 05–07's lists** (disjoint by construction).
    seam flag (`old system × new feature`, or `none`) · a `GUARD` flag when the
    change adds or removes a nil-guard (class (i)) · a `WORTH-READING` flag with
    a one-clause reason, or `CHURN` with the reason (renamed local, reformat,
-   moved helper, log string). "Looks fine" ⇒ reject the batch, re-issue with
-   the rejection quoted.
+   moved helper, log string) · ⭐ **a `SMELL` field** — the surface sweep
+   (owner, 2026-09-10): the agent has both bodies open, so if EITHER body
+   meets a `FIX_POLICY` §4 tell (dead code or dead validation, a sibling
+   contradiction, a self-contradiction, an explicit dev comment saying it is
+   wrong) it names the tell and the line, diff-caused or not; `none`
+   otherwise. A `SMELL` is not a finding — it is routed to 03/04 with the row
+   as a `PASSING` candidate for the owning agent to derive. "Looks fine" ⇒
+   reject the batch, re-issue with the rejection quoted.
 3. **The control.** The four seeds are in ordinary batches. Score: did each
    come back with the right class and a sentence that names the real change
    (`map` prepended; the two nil-guards + `MultiResourceDepotBase`; the pre-sort
@@ -98,22 +112,28 @@ the owning system's link with `TAKEABLE WHEN the link reads the caller's body`
 ### E · The ledger — `TRIAGE.md` §1–§4
 
 §1 counts: rows per class × system × bucket, `dlc-adjacent` count, `F117-SHAPE`
-count, `GUARD` count, `WORTH-READING` vs `CHURN`. §2 the control: seeds hit
+count, `F117-SHAPE` count, `GUARD` count, `SMELL` count, `WORTH-READING` vs
+`CHURN`, preset readable-pile rows per registry. §2 the control: seeds hit
 rate, self-sample agreement, batches re-issued and why. §3 **per-link row
-lists** for 03–07 as file+function ranges pointing INTO the tagged TSV (never
-copied rows), (a)/(b)/(b′) first, then (g)-adjacent notes, then (h) seeds from
-the REMOVE bucket (`PACK_1_1_0_REVERIFICATION.md` §1 — map each retired
-module's target function to its system). §4 "NOT reached by triage": the
-`other` rows you could not place, the `SPAN-SUSPECT` rows, the fpk-divergent
-rows, the `generated` bucket (03's), anything an agent returned `unsure`.
+lists** — "03" (the `dlc-adjacent` set, Lua + presets) and "04" broken down
+per agent A–E — as file+function ranges pointing INTO the tagged TSVs (never
+copied rows), (a)/(b)/(b′) first, then (h) seeds from the REMOVE bucket
+(`PACK_1_1_0_REVERIFICATION.md` §1 — map each retired module's target
+function to its system), then `SMELL` rows, then the `WORTH-READING` COUNT
+per set — ⭐ 04 sizes its agents from these counts, so they must be exact.
+§4 "NOT reached by triage": the `other` rows you could not place, the
+`SPAN-SUSPECT` rows, the fpk-divergent rows, the churn-classed preset rows
+(rule-classed and sampled by 01, unread here), anything an agent returned
+`unsure`.
 
 ## 3 · Scope fence
 
-**In:** A–E, `INVENTORY.tagged.tsv`, `TRIAGE.md` §1–§4. **Out:** filing `C`
-entries (a classified row is not a finding — 04–07 derive routes); reading
-`Data/`; reading `DLC/` beyond the one declaration-name grep; amending the
-taxonomy (README §2 is set — if a row fits no class, `other` + a note to 99);
-touching any tool.
+**In:** A–E, `INVENTORY.tagged.tsv`, `PRESETS.tagged.tsv`, `TRIAGE.md` §1–§4.
+**Out:** filing `C` entries (a classified row is not a finding — 03/04 derive
+routes); reading any preset row for meaning (tagging is by name match);
+reading `DLC/` beyond the one declaration-name grep; amending the taxonomy
+(README §2 is set — if a row fits no class, `other` + a note to 99); touching
+any tool.
 
 ## 4 · Stop conditions
 
@@ -131,11 +151,12 @@ the row count instead).
 
 ## 6 · Close-out
 
-Outbox to `03`, `04`, `05`, `06`, `07` (each: its §3 row list pointer, its (h)
-seeds, its `F117-SHAPE` candidates, its `unsure` rows) and to `99` (the control
-numbers, every re-issued batch, every drift). Strike your row. Explicit-path
-`git add`: `INVENTORY.tagged.tsv`, `TRIAGE.md`, README, 03–07, 99; `git rm`
-this file. doccheck GREEN, treediff selftest GREEN, commit `-F`, push.
+Outbox to `03` and `04` (each: its §3 row list pointer, its (h) seeds, its
+`F117-SHAPE` candidates, its `SMELL` rows, its `unsure` rows; 04's broken down
+per agent with the counts) and to `99` (the control numbers, every re-issued
+batch, every drift). Strike your row. Explicit-path `git add`:
+`INVENTORY.tagged.tsv`, `PRESETS.tagged.tsv`, `TRIAGE.md`, README, 03, 04, 99;
+`git rm` this file. doccheck GREEN, both selftests GREEN, commit `-F`, push.
 
 ## Notes from upstream
 

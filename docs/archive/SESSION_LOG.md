@@ -8,6 +8,24 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-10 — vanillahunt reshaped on the owner's two questions: 8 links → 5, and a surface sweep for tells
+
+tags: vanillahunt ck134 FIX_POLICY-§4 PASSING presetdiff CHAIN_METHOD-§4.0
+
+Same session as the entry below (`smr-bugfixpack-c3`), minutes after `c0e8bc8`. Owner asked (1) whether the hunt looks
+for new bugs beyond the diff, (2) whether seven reading legs were needed when several do the same thing and could be one
+leg over subagents. Both acted on, nothing read, nothing ran, no status moved.
+* **Surface sweep:** every body a reader opens (changed function, caller, sibling, preset consumer) is also read for a
+  `FIX_POLICY` §4 tell; a hit is filed `PASSING` diff-caused or not. Classification agents return a `SMELL` field. Limit
+  stated in the README §3 and measured by 99: it reaches only opened bodies, never the unchanged tree on its own account.
+* **Consolidation:** `03_DATA` + `05_TURF` + `06_COLONY` + `07_ENGINE` → `04_HUNT`, a parent over one agent per system and
+  per preset registry, reading orders carried verbatim per agent; `presetdiff` moved into 01 (same author as `treediff`);
+  `04_SEAM` → `03_SEAM`, independent of 04. Cost stated: 04 pre-splits from 02's counts, files everything itself, and
+  commits agent reports verbatim to `reports/vanillahunt/agents/` as 99's evidence. At five links the OWNER assigns
+  models (`CHAIN_METHOD` §4.0); ck134 reworded to that, rec 03 + 99 Fable.
+
+---
+
 ## 2026-09-10 (early) — the vanilla diff hunt authored as a chain: `prompts/vanillahunt/`, 8 links, nothing read yet
 
 tags: vanillahunt VANILLA_DIFF_HUNT DLC_DEEP_CHECK ck134 ck132 F114 F115 F116 F117 F118 C54 C55 EF-005 EF-075 EF-078 EF-079 EF-083 treediff presetdiff

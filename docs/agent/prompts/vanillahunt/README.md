@@ -47,8 +47,8 @@ inside a blind spot is not a result.
    DLC facts come from `prompts/DLC_DEEP_CHECK.md`'s chain.
 6. **Generated data at function granularity.** `Data/`, `Lua/BuildingTemplate/`,
    `Lua/XDef/`, `Lua/ClassDefs/` are editor exports; a function-level differ
-   reads them as noise. Link 03 diffs them at FIELD level instead — a second
-   instrument, with its own falsifier and its own blind spots (a preset consumed
+   reads them as noise. Link 01's second instrument diffs them at FIELD level
+   instead, with its own falsifier and its own blind spots (a preset consumed
    by C-side code has no Lua reader to find).
 7. **Semantics moving under an UNCHANGED body** — the F117 shape (see class
    (b′) below). The inventory sees the callee's signature change; it cannot see
@@ -73,55 +73,69 @@ inside a blind spot is not a result.
 | bucket | files | note |
 |---|---|---|
 | changed, `DLC/` excluded | 2437 | all `.lua` |
-| of which generated/data (`Data/`, `Lua/BuildingTemplate/`, `Lua/XDef/`, `Lua/ClassDefs/`) | 1630 | `Data/StoryBit` alone is 514 — link 03's instrument, not 01's |
+| of which generated/data (`Data/`, `Lua/BuildingTemplate/`, `Lua/XDef/`, `Lua/ClassDefs/`) | 1630 | `Data/StoryBit` alone is 514 — `presetdiff`'s rows, read by 04's registry agents |
 | of which hand-written | 807 | `Lua/` 155 · `Lua/Buildings` 139 · `CommonLua/Classes` 76 · `CommonLua/Libs` 71 · `CommonLua/` 59 · `CommonLua/Data` 30 · `CommonLua/X` 30 · `CommonLua/Editor` 28 · `Lua/Scenario` 26 · `CommonLua/Core` 25 · `Lua/Units` 22 · `CommonLua/Ged` 20 · `Lua/X` 20 · `CommonLua/UI` 18 · `Lua/UI` 17 · `Lua/Mysteries` 11 · `Lua/Landscape` 10 · `Lua/Construction` 8 · the rest under 8 each |
 | function-declaration lines across the 807 (max of the two trees) | ~28,250 | the inventory's upper bound on rows; the changed subset is what the links read |
-| removed files | 36 | tutorials 1–5, `CommonLua/Classes/Mod*.lua` (the old modding backend), `Flight.lua`, `Notifier.lua`, five `XDef` dialogs incl. `ResearchDlg` and `CommandCenterLifeSupportGridsOverview`, `ClassDef-Conditions`/`-Factions`, `InteriorAmbientLife.lua` — ⛔ each is a class (d)-or-(e) question, link 07 |
-| added files | 305 | 138 are `DLC/norman`; 31+31 `XDef` pairs; 20 `CommonLua/Libs`; 17 `Lua/`; 8 `Lua/Buildings`; 7 `Lua/AmbientLife` — class (f), links 05–07 by system |
+| removed files | 36 | tutorials 1–5, `CommonLua/Classes/Mod*.lua` (the old modding backend), `Flight.lua`, `Notifier.lua`, five `XDef` dialogs incl. `ResearchDlg` and `CommandCenterLifeSupportGridsOverview`, `ClassDef-Conditions`/`-Factions`, `InteriorAmbientLife.lua` — ⛔ each is a class (d)-or-(e) question, 04's agent D |
+| added files | 305 | 138 are `DLC/norman`; 31+31 `XDef` pairs; 20 `CommonLua/Libs`; 17 `Lua/`; 8 `Lua/Buildings`; 7 `Lua/AmbientLife` — class (f), 04's agents by system |
 
 ## 1 · The queue
 
 | # | file | model | owner needed? | what it drains |
 |---|---|---|---|---|
-| 01 | `01_INVENTORY.md` | Opus | no | fpk parity on 1.1.0 · `tools/treediff.py` (imports `luafn.find_bodies`, never re-implements it) + `--selftest` falsifier · `reports/vanillahunt/INVENTORY.tsv`, `STORAGE.tsv`, `FILES.tsv`, `CALLERS.tsv` · mechanical classes and counts · the three seeded positives confirmed by the TOOL |
-| 02 | `02_TRIAGE.md` | Opus | no | the parent-orchestrates-agents link: system + DLC-adjacent tags on every row, fan-out classification of body-changed rows in runtime files, class (g) set built, the seeded-positive control scored, `TRIAGE.md` ledger with counts, per-link row lists for 04–07 |
-| 03 | `03_DATA.md` | Opus | no | field-level preset diff over the 1630 generated/data files (`PRESETS.tsv` + its falsifier), churn counted and set aside, the non-churn read, DLC-adjacent preset changes handed to 04 |
-| 04 | `04_SEAM.md` | **Fable** | no | class (g) — the OLD × NEW seam: base-game changes made to accommodate the DLC that ship to EVERYONE; both-sides discipline per row; the handoff section `dlccheck` consumes |
-| 05 | `05_TURF.md` | Opus | no | trains/tracks, landscaping, construction, drones/shuttles/logistics, depots/resources — our historically fragile turf, classes (a)/(b)/(b′) first, the 36 retired modules' targets as "what did their fix touch?" seeds |
-| 06 | `06_COLONY.md` | Opus | no | colonists/traits/morale, domes/services, rockets/cargo/trade, disasters, mysteries/scenario/story bits (Lua side), save/load fixups |
-| 07 | `07_ENGINE.md` | Opus | no | `CommonLua` runtime + UI (`Lua/UI`, `Lua/X`, `XTemplates`), class (c) from `STORAGE.tsv`, the 36 removed and 305 added files as (d)/(e)/(f) with the presence side enumerated, the "tooling" bucket confirmed by route not by path |
-| 99 | `99_TERMINAL_AUDIT.md` | **Fable** | ✅ raises the kickoff | adversarial backward QA: re-derive a sample of findings from scratch, re-falsify both instruments by planting fresh changes, rule on whether the inventory was SOUND, score the controls, sweep the not-reached lists, empty the folder, and end with the `DLC_DEEP_CHECK.md` kickoff line |
+| 01 | `01_INVENTORY.md` | Opus (rec) | no | fpk parity on 1.1.0 · `tools/treediff.py` (imports `luafn.find_bodies`, never re-implements it) + `--selftest` · `tools/presetdiff.py` (field-level preset differ, churn RULES + a 20-row sample per class) + `--selftest` · `INVENTORY.tsv`, `STORAGE.tsv`, `FILES.tsv`, `CALLERS.tsv`, `PRESETS.tsv` · mechanical classes and counts · the four seeded positives confirmed by the TOOL |
+| 02 | `02_TRIAGE.md` | Opus (rec) | no | the first parent-orchestrates-agents link: system + DLC-adjacent tags on every Lua and preset row, fan-out classification of body-changed rows (with the `SMELL` surface sweep), class (g) set built, the seeded-positive control scored, `TRIAGE.md` ledger with exact counts, row lists for 03 and for each of 04's agents |
+| 03 | `03_SEAM.md` | **Fable** (rec) | no | class (g) — the OLD × NEW seam: base-game changes (Lua and presets) made to accommodate the DLC that ship to EVERYONE; both-sides discipline per row; the handoff section `dlccheck` consumes. Independent of 04 |
+| 04 | `04_HUNT.md` | Opus (rec) | no | the second parent-orchestrates-agents link, everything not tagged (g): one agent per system (turf · colony · engine · storage+removed/added) and one per preset registry, each under its own binding reading order; the parent verifies one finding per agent from the trees, files, and commits every agent report verbatim to `reports/vanillahunt/agents/`. Pre-splits into `04b` from the ledger's counts before spawning if the agent count exceeds ~30 |
+| 99 | `99_TERMINAL_AUDIT.md` | **Fable** (rec) | ✅ raises the kickoff | adversarial backward QA: re-derive a sample of findings from scratch against the agent reports, re-falsify both instruments by planting fresh changes, rule on whether the inventory was SOUND, score the controls, measure the surface sweep's real reach, sweep the not-reached lists, empty the folder, end with the `DLC_DEEP_CHECK.md` kickoff line |
 
-**Ordering.** 01 → 02 strictly (02 reads 01's TSVs). **03 before 04** (the seam
-link wants the preset-level food/farming diff in hand). 04, 05, 06, 07 are
-**independent of each other** — any order, or in parallel by separate sessions;
-they share no rows (02 partitions by system and the (g) tag is exclusive) and
-no files except the ledger, which is append-only per link with a named section.
-99 last, on a folder holding `99` + this file. ⛔ **Choose the shape before link
-1, not after link 5** (`CHAIN_METHOD` §5a): the hunt links are sequential-within
-and parallel-across BY DESIGN — a hunt link compounds inside its own system (the
-question "what did every changed function in this system assume?" is the yield),
-and systems do not compound across each other enough to pay for serialising them.
+**Ordering.** 01 → 02 strictly (02 reads 01's TSVs). **03 and 04 are
+independent of each other** — either order, or in parallel by two sessions;
+they share no rows (02's partition is disjoint by construction) and no files
+except the ledger, which each appends to under its own named section. 99 last,
+on a folder holding `99` + this file. ⛔ **Choose the shape before link 1, not
+after link 5** (`CHAIN_METHOD` §5a): inside 04 each agent compounds within its
+own system (the question "what did every changed function in this system
+assume?" is the yield), and systems do not compound across each other enough to
+pay for serialising them — which is what makes them agents rather than links.
 
-⭐ **Deviation from the brief's suggested split, stated per `CHAIN_METHOD` §3.**
-The brief proposed *"classes (a)/(b) their own link; the rest by system."* Class
-(a) — body changed, name and arity identical — is **most of the inventory** and
-cannot be one context, and a link that reads "all class (a) rows" reads every
-system at once with no system in its head. So the hunt links partition by
-SYSTEM (disjoint), and CLASS is the sort order inside each link with (a)/(b)/(b′)
-read first. Class (g) stays its own link because it is a TAG across systems, not
-a system, and it is the owner's thesis. Link 03 is added because the brief's
-blind-spot list would otherwise write off 1630 of the 2444 changed files unread
-— they are Lua-form preset data and a field-level differ can read them.
+⭐ **Deviations from the brief's suggested split, stated per `CHAIN_METHOD` §3.**
+(1) The brief proposed *"classes (a)/(b) their own link; the rest by system."*
+Class (a) is **most of the inventory** and cannot be one context, and a reader of
+"all class (a) rows" has no system in its head. So the reading partitions by
+SYSTEM (disjoint), with CLASS as the sort order inside each, (a)/(b)/(b′) first.
+Class (g) stays its own link because it is a TAG across systems, not a system,
+and it is the owner's thesis — the one judgement a per-system agent cannot make.
+(2) The generated data is read: the brief's blind-spot list would have written
+off 1630 of the 2444 changed files; they are Lua-form preset data and a
+field-level differ reads them, so 01 builds that second instrument beside the
+first — same author, same falsifier discipline. (3) **Consolidated 8 → 5 links
+on the owner's question of 2026-09-10** (*"do some of these do similar things
+where multiple could be one leg that utilises sub agents?"*). The four
+per-system reading links were the same job on disjoint row sets, and the
+preset-reading link was that job on presets; they are now 04's agents, and
+their reading orders survive verbatim as per-agent briefs. What the
+consolidation costs, said plainly: 04's parent must size its agents from 02's
+counts BEFORE spawning (a mid-link split is what the owner said to avoid), it
+files every surviving entry itself, and 99 can only audit 04 through the agent
+reports — so committing those verbatim is a chain rule, not hygiene. (4) **The
+surface sweep** (owner, same day): every body an agent opens for any reason is
+also read for a `FIX_POLICY` §4 tell, and a hit is filed `PASSING` whether or
+not the diff caused it (§3 below). It widens the read only to bodies someone
+was opening anyway; 99 measures that reach so nobody mistakes it for a sweep of
+the unchanged tree.
 
-⭐ **Why the model placement (`CHAIN_METHOD` §4.0; 8 links ⇒ the placement is this
-Fable session's call; the owner may re-route, bodies are model-neutral).** 04 and
-99 on the top tier = 2 of 8. 04 because the seam link is the thesis's home and a
-thin read there yields nothing that 99 can only sample after the fact; 99 because
-it is the fresh-context adversary. 01 is NOT top-tier despite being load-bearing,
-because it ships with a falsifier that 99 re-runs and a planted-change control
-that 02 scores — its errors are CAUGHT downstream, which is the placement rule.
-Routed as checklist **134** with recommendation "accept as authored".
+⭐ **Model placement — the OWNER's at five links (`CHAIN_METHOD` §4.0: five or
+fewer, the owner assigns; the "(rec)" in the table is this Fable session's
+recommendation, bodies are model-neutral).** Recommended: 03 and 99 on the top
+tier. 03 because the seam is the thesis's home and a thin read there yields
+nothing an audit can recover; 99 because it is the fresh-context adversary. 01
+and 04 are NOT recommended top-tier despite being load-bearing: 01 ships with
+falsifiers that 99 re-runs and a seeded control that 02 scores, and 04's every
+finding is verified by its parent from the trees and audited by 99 against a
+verbatim agent report — their errors are CAUGHT downstream, which is the
+placement rule. ⚠️ 04 is the heaviest session in the chain; if the owner wants
+one more top-tier link, 04 is the one. Routed as checklist **134**.
 
 ## 2 · The risk taxonomy — binding sort order for every row
 
@@ -199,6 +213,18 @@ it is clearly player-visible AND the route is complete), carrying:
 chain files is `cand` + `source-read` until something is reproduced in a game,
 and most never will be. ⛔ Never move a status you did not witness.
 
+⭐ **`DIFF-CAUSED` or `PASSING` — every entry says which (owner, 2026-09-10).**
+The chain is diff-anchored, but every reader has bodies open: the two versions
+of a changed function, its callers, its siblings, the consumer of a changed
+preset. **A body opened for any reason is also read for a `FIX_POLICY` §4
+tell** — dead code or dead validation (a computed value discarded, a guard that
+cannot fire, a message nothing emits), a sibling contradiction, a self-
+contradiction within one function or preset, an explicit dev comment saying it
+is wrong. A tell is filed as a `PASSING` candidate with the tell named, whether
+or not 1.1.0 caused it; no tell, no filing — the surface sweep is for tells,
+not hunches. ⛔ It reaches only bodies someone opened; 99 counts that reach.
+What it does NOT do: read the unchanged tree on its own account.
+
 **Filing mechanics (route watched working 2026-09-09):** copy the front-matter
 shape of `bugs/C55.md`; `seq` and `row` are the next free numbers READ FROM THE
 INDEX AT FILING TIME (150/185 at authoring — peers file too); `status: "cand"`,
@@ -233,9 +259,14 @@ split it across subagents. Rules, binding on every link that fans out:
   `Explore` only to find call sites.
 - **What an agent MUST return, per row:** `file:function` · class · the 1.0.7
   and 1.1.0 line numbers · what actually changed, one sentence · who reaches it
-  · the falsifier · the seam flag (which existing system, which new feature).
-  ⛔ "Looks fine" and "no issues found" with nothing behind them are REJECTED
-  results — re-issue the batch.
+  · the falsifier · the seam flag (which existing system, which new feature) ·
+  **`SMELL`** — a `FIX_POLICY` §4 tell in EITHER body it opened, with the line,
+  or `none` (the surface sweep, §3). ⛔ "Looks fine" and "no issues found" with
+  nothing behind them are REJECTED results — re-issue the batch.
+- **A hunt agent (04) additionally returns** entry-ready findings tagged
+  `DIFF-CAUSED`/`PASSING`, a coverage section (rows given / read / NOT reached
+  with reasons) and its `CHURN` spot check; **the parent commits the report
+  verbatim** to `reports/vanillahunt/agents/` — 99's primary evidence.
 - ⛔ **THE CONTROL.** *"Twelve agents found nothing"* is indistinguishable from
   *"twelve agents read badly."* Seeded positives are in the pool WITHOUT the
   agent being told: **`Lua/Units/Train.lua Train:UnloadAll`** (F114, class (a)),
@@ -282,7 +313,8 @@ split it across subagents. Rules, binding on every link that fans out:
    moment it completes; exactly one in progress. The owner reads it to decide
    when to step in.
 9. **Green gates before every commit:** `python tools/doccheck.py` GREEN, plus
-   `python tools/treediff.py --selftest` from 01 onward; a WARN goes VERBATIM
+   `python tools/treediff.py --selftest` and `python tools/presetdiff.py
+   --selftest` from 01 onward; a WARN goes VERBATIM
    into your summary. `git commit -F <file>` (embedded quotes split args under
    PS 5.1), then push.
 10. **⛔ Read-only on the game directory and on both archives. Always.** Nothing
@@ -311,8 +343,10 @@ docs/agent/reports/vanillahunt/
   STORAGE.tsv     01  GameVar/MapVar/GlobalVar/PersistableGlobals/const-table declarations, both trees, moved/added/removed
   FILES.tsv       01  the 305 added + 36 removed files with a one-word bucket each
   CALLERS.tsv     01  for every class (b) row: its call sites in BOTH trees, each marked updated / unchanged / new
-  PRESETS.tsv     03  field-level preset diff (PlaceObj id → key → 1.0.7 value → 1.1.0 value), churn-classed
-  TRIAGE.md       02  the ledger: counts per class × system, the control scores, per-link row lists; 03–07 APPEND a named coverage section each (reached / NOT reached)
+  PRESETS.tsv     01  field-level preset diff (PlaceObj id → key → 1.0.7 value → 1.1.0 value), churn RULE-classed and sampled
+  *.tagged.tsv    02  the two working copies with system / dlc-adjacent / class / SMELL columns (01's files untouched)
+  TRIAGE.md       01 §0 counts · 02 §1–§4 ledger (counts, control scores, row lists per link and per 04 agent) · 03 and 04 APPEND a named coverage section each (reached / NOT reached; 04's per agent, plus its tooling gate table) · 03 writes "For dlccheck"
+  agents/*.md     04  every hunt agent's report, verbatim, bannered (brief hash, wave, rows given) — the primary evidence 99 audits
   HUNT_AUDIT.md   99  the verdict
 ```
 
@@ -325,9 +359,9 @@ git, so the inventory is the only portable record of the diff.
 
 `prompts/DLC_DEEP_CHECK.md` is the next authoring brief and it **shares the base-
 game diff with this chain by design** (its §1.1: DLC-integration bugs surface in
-the BASE-GAME diff). Link 04 writes the handoff section `dlccheck` consumes
+the BASE-GAME diff). Link 03 writes the handoff section `dlccheck` consumes
 (`TRIAGE.md` → "For dlccheck"), and 99's owner report ends with the kickoff line
-for `DLC_DEEP_CHECK.md`. ⛔ The DLC chain must not redo 04's rows; this chain
+for `DLC_DEEP_CHECK.md`. ⛔ The DLC chain must not redo 03's rows; this chain
 must not read `DLC/norman` beyond what a base-game row calls into.
 
 ## Read path — declared
