@@ -164,7 +164,7 @@ with); a `GetStack` that prints a tail-called frame changes job two.
 
 ---
 
-## 7 · Owner decisions, consolidated (bodies belong in `PLAYTEST_CHECKLIST.md`; not written by these reports)
+## 7 · Owner decisions, consolidated (LANDED as `PLAYTEST_CHECKLIST.md` item **133** by link 100, 2026-09-09, one line each pointing here; on STATE's open-decisions line)
 
 1. **Commission the pilot, then the bounded prototype** (three modules:
    `LandscapeUnitFilter`, `TrainCargoDumping`, `StaleReservations`' callee),
