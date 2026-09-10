@@ -105,8 +105,13 @@ completed tests move whole to
 > ✅ **And you proved its fix on both skins the same day ("both are working now
 > and match").** The Water Extractor needs one more piece than the others: it
 > starts listening for markers a moment before its pump starts moving, so it
-> never hears them. The fix restarts it once the pump is running. The other
-> four are still unproven. So the decision grows: **build the hammer + MOXIE only,
+> never hears them. The fix restarts it once the pump is running. ✅ **The
+> shuttle is measured too (2026-09-10):** with the other sounds muted, about 12
+> landings and 8 take-offs, and the game never once played the touchdown or
+> take-off sound; you heard both land and lift off silently. Then, with only
+> the markers added, you **heard both, distinctly** (16 of 16 landings and
+> take-offs). Markers alone fix the shuttle. The Excavator, RC Terraformer and
+> RC Driller are still unproven. So the decision grows: **build the hammer + MOXIE only,
 > or all of them?** Each extra unit costs one "find the times by ear" step with
 > you. Recommendation: keep 139 as the hammer + MOXIE, and decide C77 after one
 > check in the MOXIE sitting below.
