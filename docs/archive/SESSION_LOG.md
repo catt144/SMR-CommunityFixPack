@@ -8,6 +8,22 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-10 — the silent-FX handoff consumed (`smr-bugfixpack-04`)
+
+tags: handoff C75 C74_BUILD C77 ck139 STATE-counts
+
+Executed `prompts/HANDOFF_SOUNDFX_2026-09-10.md`, then removed it. **§4 C75:** the 1.0.7.396349 line for every 1.1.0
+citation added as a dated paragraph, 1.1.0 text untouched (`EF-075`); read from both archives (NoExplosion `:46`→`:37`,
+activation `:4-12`→`:4-11`, effect body `:2770-2784`→`:2753-2767`, Explosion sibling `:13-25`→`:11-23`, TheIncident
+outcomes shifted by the 1.0.7 `qa_info` block; comments, TechResearched, prerequisites unchanged). **§2:** ck139 still
+UNRULED, so nothing built; the handoff's seven-unit table + Water Extractor restart + guards + Metatron limits +
+attended-check rule were restated into `prompts/C74_BUILD.md` (now C74 + C77, subset-aware). Table re-checked row by row
+against C74/C77 **Fix shape** — all match. **§3** already lives in checklist 139. **§4 log line** stays homed in the lookback
+entry below (attribution only if asked). STATE build-state block corrected 77 C → 82 C from `--emit-counts` (stale since
+vanillahunt 04/99 filed C78-C82).
+
+---
+
 ## 2026-09-10 — lookback before a context limit (`smr-bugfixpack-08`): what lived only in the conversation
 
 tags: lookback handoff C75 03b C74_BUILD ck139 ck142 log-line

@@ -114,6 +114,6 @@ BUILD STATE (emitted by tools/doccheck.py)
 - modules: 44 registered (44 default-active, 0 optional-gated files)
 - Code/*.lua files: 45
 - TestKit probes: 94
-- BUGS index rows: 118 F + 12 D + 77 C
+- BUGS index rows: 118 F + 12 D + 82 C
 ```
 Re-emit after any change. Game: records describe **1.0.7.396349** (`EF-014`); INSTALLED is now **1.1.0** (`EF-075`).
