@@ -29,6 +29,40 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### 2026-09-11 — 148: an on/off button for every fix — the chain is written and ready to start. **Decisions: (a) how console players reach the buttons, (b) whether this counts as a "major overhaul" for the release gate, (c) accept that the first prompt re-checks how the chain was cut. Recommendations: (a) our own panel, proven on a controller before it is built out, falling back to the game's built-in Mod Options page; (b) no extra sweep — the chain's own final audit and its two sittings are the gate; (c) yes.**
+
+> **What you asked for (09-11):** a button per fix so players can switch any fix off — prompted by the ~1.5 days in which
+> v5 (a 1.0.7 build) ran on 1.1.0 and several fixes did harm, while the player who reported it couldn't narrow it down
+> because nothing could be switched off individually. Plus **Beta** labels for fixes released before full testing, and
+> **linked** buttons where fixes depend on each other. Our own look, not a copy of the other mod's.
+> **Already ruled by you today:** buttons first; the game-version selector and bringing 1.0.7 back into the main mod are
+> *researched only* (link 09) and come back to you as a separate "B step" decision; each Beta fix's default (on or off)
+> is decided per fix.
+>
+> **What the research found:** every one of the 45 fixes can get a button. About 36 switch instantly; the rest need a
+> little extra (one needs a restart, four need a small undo, and the track power-tunnel fix keeps its clean-up part
+> always on so tunnels can't leak into saves). Much of the switching machinery is already in the pack, unused since the
+> opt-in split. The other mod's version dropdown only filters the list — nothing in it checks the real game version, so
+> its 1.0.7 fixes run on 1.1.0 too. It has no licence, so we study it and copy nothing. Full record:
+> `agent/reports/FIXTOGGLES_RESEARCH_2026-09-11.md`.
+>
+> **(a) Console players.** You asked how the other mod handles it: it mostly doesn't — its panel is mouse-first, the
+> controller check in its own test plan is unticked, and it has no fallback. The game's built-in Mod Options page works
+> with a controller but is a plain checkbox list. **Recommendation:** build our own-look panel, but the chain's first
+> in-game test (link 03) must show it working with a controller before the full build; if it can't, everyone gets the
+> built-in page. Either way, one place stores the choices. *(If you have a controller, bring it to that sitting.)*
+> **(b) Release gate.** Your 08-20 rule: the big pre-release sweeps return only for a major overhaul, and this touches
+> every fix. **Recommendation:** the chain's own final audit and its two sittings are enough; no extra sweep.
+> **(c) Who cut the chain.** Our chain playbook says a chain this long (13 prompts) should be cut by a Fable session; an
+> Opus session wrote this one. **Recommendation:** accept that the first prompt (on Fable) re-checks the cut and the model
+> choices before anything is built, instead of a separate authoring session.
+> **FYI, nothing to decide:** the policy line "if it needs a toggle, it isn't a fix" gets reworded, because your ask
+> overrides it; "don't build a version detector" stays in force until the B step. Item 88 is overtaken — the parked
+> per-fix-toggles idea is now this chain.
+>
+> **Your time:** two sittings (link 03 about 30 minutes; link 11 longer, priced by link 10). **To start:** fire
+> `docs/agent/prompts/fixtoggles/01_SPEC_fable.md`. Link 09 (the version research) can run any time, in parallel.
+
 ### 2026-09-11 — 146: the Wildfire cure rocket can get stuck on the pad for good. **Decision: build the fix for the next update (built and desk-tested first, then one attended check), or file and watch. Recommendation: build it — it permanently blocks the Wildfire mystery, two players hit it within a day, and the repair is small.**
 
 > Two players on Reddit (one PC, one PS5): the cargo rocket Earth sends for the Wildfire cure sits loaded on the pad,

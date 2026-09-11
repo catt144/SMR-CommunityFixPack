@@ -8,6 +8,24 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-11 - fixtoggles chain authored: an on/off button per fix, Beta labels, linked buttons (smr-bugfixpack-24)
+
+tags: fixtoggles chain toggles beta mod-options ui versioning-research
+
+Began as a read-only orientation on `GENERAL_USE_PROMPT` while a peer reorganised the prompts (`4d5a1fa`). The owner then asked
+to revisit per-fix toggles (fredware's panel as inspiration, never code), prompted by the 1.1.0 incident, and to author a chain.
+- **Research:** three read-only agents (the reference mod; our 45 modules; the project record) plus the author's own reads →
+  `reports/FIXTOGGLES_RESEARCH_2026-09-11.md`, provenance-tagged (`[A]` author-read · `[R]` agent-read · `[I]` inferred).
+- **Findings:** the live-toggle machinery sits dormant in `00_Core.lua`; every module looks switchable by a per-call gate
+  (never a restore — `EF-058` subclass copies, the `Colonist:Idle` pair); ~9 need undo / next-load / a split. The reference mod
+  has no licence, its version dropdown is display-only (1.0.7 fixes run on 1.1.0), and its gamepad path is unproven.
+- **Owner rulings in session:** buttons first; versioning and the 1.0.7 re-import researched only (link 09) as a B step; Beta
+  default decided per fix. The console/gamepad question was answered in session and routed (ck148 a).
+- **Chain** `prompts/fixtoggles/`, 13 prompts: 01 spec (Fable) · 02 skeleton · 03 kill-gate sitting · 04/05/06(Fable)/06b
+  conversions · 07 panel · 08 text · 09 version research · 10 prep · 11 sitting · 99 audit (Fable). Checklist 148. Lane agreed
+  with `smr-bugfixpack-0d` (field leads, ck146/147).
+- ⚠️ Cut by an Opus session against `CHAIN_METHOD` §4.0's top-tier recommendation; 01's job 0 re-validates it (ck148 c).
+
 ## 2026-09-11 - Six field leads triaged; F119 filed (Wildfire cure-rocket soft-lock), C85 + C86 candidates (smr-bugfixpack-0d)
 
 tags: field-reports triage F119 C85 C86 wildfire rockets storybits exploration lakes meteors

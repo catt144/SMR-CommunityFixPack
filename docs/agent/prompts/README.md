@@ -33,6 +33,8 @@
 
 ## Chain folders
 
+- `fixtoggles/`: **LIVE** (authored 09-11): an on/off button per fix, Beta labels, linked buttons; link 09 researches
+  versioning for a B step. Its README is the manifest; checklist 148.
 - `arming/`: the unattended-leg harness (`tools/arm_leg.ps1` reads it). Infrastructure, not a prompt.
 - `hotfix2/`: done (v6 shipped 09-09); STATE and the entries cite its manifest.
 - `vanillahunt/`: done (CLOSED 09-10).
