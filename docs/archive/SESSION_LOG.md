@@ -8,6 +8,39 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-11 - Prompt reorg + Linux dispatch + handoff (smr-bugfixpack-5d); SESSION LOOKBACK
+
+tags: prompts reorg handoff lookback FR-1
+
+The owner asked for four things: reusable prompts in `prompts/perma/`, no duplicates, fired one-offs removed, and a standing Linux
+dispatch. The handoff goes into perma/ until the outbox empties, and the owner asked for a lookback so they can refire.
+- **Moved 10:** DISPATCH, GENERAL_USE_PROMPT, RELEASE, RELEASE_OUTBOX, POST_UPLOAD_CLOSE, PUBLIC_SURFACE_SWEEP, SITE_AUDIT,
+  STATE_EVICTION, DRONE_PROJECT_PROMPT, COMBINED_SITTING.
+- **Removed 5:** FR1_LINUX_SITTING (it ran), FR1_TEMP_MOD_R3 (overtaken), ONCALL_HANDOFF (duplicated DISPATCH; nothing cited it),
+  SELFCHECK_PROMISE_AUDIT and CODEX_CROSSCHECK_SELFCHECK_PROMISE (reports delivered).
+- **Kept in the root** (pending or owner-ruled): DLC_DEEP_CHECK, HOTFIX2_SITTING (recipes for the owed sitting), SELFCHECK_PILOT,
+  CAPTURE_SITTING, SMRCF_CHAIN_SET. The chain folders stay.
+- **References:** 36 live references rewritten; the archive, `metadata.lua` and the arming payloads were untouched; doccheck's
+  GENERAL_USE path was updated.
+- **New files:** `prompts/README.md` (the map), `perma/LINUX_DISPATCH.md` (the FR-1 brief: playbooks P1–P5, tools, bindings) and
+  `perma/HANDOFF_ORCHESTRATOR.md` (the outbox).
+- **FR-1 tools saved beside the mod source:** `identify_dump_names.py` (selftest PASS), the harness, and the preview generator.
+- **Field tally (owner-stated):** 3 working (one a 10xx), 1 failing (GTX 1070).
+
+**Lookback, the whole session.**
+1. **Good:** every bench claim was graded (measured vs owner-stated), and the owner's "it's working" became a log read within the
+   hour. The FNV-1 dump-name rule turned a zip with no dump files into shader identities.
+2. **Good:** the owner's direct asks (build it, the store pages, the reorg) were done with the tension flagged once, not
+   re-litigated.
+3. **Miss:** my first player log request was written for us, not a player (a folder step, a username placeholder, two greps). The
+   owner caught it. Write player-facing steps for a non-technical reader the first time.
+4. **Miss:** a PowerShell `*> $null` after `git commit` skipped a push silently. It was caught by comparing HEAD with `origin/main`;
+   always verify the push.
+5. **Miss:** the cheapest test of the #1 risk (packed delivery: pack the existing probe and try it) came from the owner's "why not
+   just pak it". It should have been my first proposal.
+6. **Watch:** the store page says "Paradox is aware" and "tested on one machine". Keep both true as reports arrive (LINUX_DISPATCH
+   P1/P2).
+
 ## 2026-09-11 - FR-1 temp mod field report 1 (smr-bugfixpack-5d): GTX 1070 still crashes
 
 tags: FR-1 temp-mod field-report

@@ -261,7 +261,7 @@ extraction diff.
   `agent/bugs/F78.md`/`F81.md`.
   **PT-52 B2 is FROZEN**, not
   parked — it tests D06 v1's design and the design is unsettled; it is
-  drone-owned, see `docs/agent/prompts/DRONE_PROJECT_PROMPT.md`.)
+  drone-owned, see `docs/agent/prompts/perma/DRONE_PROJECT_PROMPT.md`.)
 - **The needs-eyes observations** (Detailed Scan recoverability, F85's tier,
   the storybit reconnect) — minutes each, and they grade **defects**.
 - ~~**The FIX_POLICY §4 amendment**~~ — **APPLIED 2026-08-01**, so it is off

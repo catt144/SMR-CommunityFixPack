@@ -73,7 +73,7 @@ Two mechanical rules that came with the same restructure:
    checklist 42; the 2026-08-03 60-line cap is RETIRED — it was satisfied while
    being defeated). doccheck enforces warn/hard byte caps plus a per-line cap;
    a doccheck WARN must be copied VERBATIM into the owner report, and the owner
-   fires `agent/prompts/STATE_EVICTION.md`. Format for machine efficiency and
+   fires `agent/prompts/perma/STATE_EVICTION.md`. Format for machine efficiency and
    safety: one fact per line, never widen or pack lines to satisfy a budget —
    evict, don't compress. Resolved or superseded material moves to
    `docs/archive/SESSION_LOG.md` (append-only, newest-first, `tags:` line).

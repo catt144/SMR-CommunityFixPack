@@ -104,6 +104,6 @@ DomeStreamlining/MarsNoveau only to correct build-menu *display*, and its
   renderers (`split_bugs`/`split_facts.render_index`) — never hand-edited.
 * STATE.md byte warn (9505 > 9216) predates this session and is already
   receipted verbatim on the checklist (item 73 block); the owner fires
-  `agent/prompts/STATE_EVICTION.md`.
+  `agent/prompts/perma/STATE_EVICTION.md`.
 * The session ran without a harness todo tool; the brief's §1 live list was
   kept as a repo-root `F105_TODO.md`, deleted in the closing commit.

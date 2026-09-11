@@ -1,6 +1,6 @@
 -- SMR Community Fix Pack — Test Kit :: COMBINED SITTING harness. TEMPORARY
 --
--- Declared by: docs/agent/prompts/COMBINED_SITTING.md (the ONE attended sitting:
+-- Declared by: docs/agent/prompts/perma/COMBINED_SITTING.md (the ONE attended sitting:
 -- PT-20 redo state-3 + D13 attended after-sweep + F102's minute). Predictions
 -- are in that brief §4, committed BEFORE the first launch.
 --

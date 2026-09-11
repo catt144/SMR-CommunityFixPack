@@ -13,7 +13,7 @@ every specific against `git log` and the live API before trusting it.
 > has audited nothing a player can see.
 
 > 🧭 **NOT this prompt** — a fix was added, retired or re-scoped and the WORDS
-> need writing across every surface: that is `prompts/PUBLIC_SURFACE_SWEEP.md`,
+> need writing across every surface: that is `prompts/perma/PUBLIC_SURFACE_SWEEP.md`,
 > which authors. This one only reads, measures and reports.
 
 ## ⛔ The two things you may never do

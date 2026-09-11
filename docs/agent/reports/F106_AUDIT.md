@@ -34,7 +34,7 @@ falsifiability artifact).
    only raise). Corrected in all seven places. The ordering conclusion gets
    STRONGER, not weaker.
 4. ⛔ **Owner action, verbatim from doccheck:**
-   `warn STATE.md is 10596 bytes, warn threshold is 9216 — copy this line VERBATIM into the owner report; the owner fires agent/prompts/STATE_EVICTION.md`
+   `warn STATE.md is 10596 bytes, warn threshold is 9216 — copy this line VERBATIM into the owner report; the owner fires agent/prompts/perma/STATE_EVICTION.md`
 5. ⛔ **Durability gap that needs your hands: the TestKit repo has NO git
    remote** (`git remote -v` is empty). Chain rule 10 ("push both repos")
    cannot be satisfied for it; four commits of instrument work

@@ -1,7 +1,7 @@
 # Project State — the one mandatory read
 
 Kernel only: status + pointer, never derivation.
-Eviction procedure: `agent/prompts/STATE_EVICTION.md` (byte-budgeted by doccheck; owner ruling, checklist 42).
+Eviction procedure: `agent/prompts/perma/STATE_EVICTION.md` (byte-budgeted by doccheck; owner ruling, checklist 42).
 History newest-first in `docs/archive/SESSION_LOG.md`; pre-eviction STATE graves: `git show 1aafdbf:docs/agent/STATE.md`
 (hotfix 2, 09-09) · `git show 3ef6fcb:docs/agent/STATE.md` (08-18).
 Defect truth `agent/bugs/INDEX.md` · facts `agent/facts/INDEX.md` · doc map `docs/README.md`.
@@ -25,20 +25,19 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   A3 (F118) · A10 · A5 c2 · A9 c4/c5 · F117's station recipe · the first `RunAll()` on the 94-probe kit (re-stamps
   `WORKFLOW.md:407`, VOID since 09-09). ⛔ Kit verdicts are PREDICTIONS until then; still FAIL/ERROR by name:
   `C47OpenFarmSeedBufferShape` (Herbs 100→50), retired `LanderCargoRatchet`/`DroneUnreachableForever`/`AutoExportPriority`.
-- ⏭ NEXT: FR-1 cache v2 READ 09-11 (FINDINGS §11): Q2's no-reload overlay LOADS worlds on 580 (no-op 18×, 36 FULL, 0 faults);
-  R2 reverses it; C2 valid. ck145: TEMPORARY mod BUILT (5d; `C:\Dev\SMR-FR1-TempMod-2026-09-11`); P1 WORKS; ⭐ LIVE 09-11 pdx 158711 / steam 3799500849 (public).
-  Then desk `prompts/DLC_DEEP_CHECK.md` (shape: `HUNT_AUDIT.md` §8).
-  FR-1 options `reports/FR1_OPTIONS_2026-09-10.md`; EF-088 cache, EF-089 mod timing; dev reply POSTED. Owner: ck144 (v7 checks + sounds thread).
+- ⏭ NEXT: handoff + pending outbox `prompts/perma/HANDOFF_ORCHESTRATOR.md` (temporary). Desk `prompts/DLC_DEEP_CHECK.md` (`HUNT_AUDIT.md` §8).
+  ⭐ FR-1 TEMP WORKAROUND MOD LIVE 09-11 (Steam 3799500849 / PDX 158711; FINDINGS §11–§12). ALL FR-1 work → `prompts/perma/LINUX_DISPATCH.md`.
+  Field: 3 working (one 10xx), 1 failing (GTX 1070, log requested). Prompt map `prompts/README.md`. Owner: ck144 (v7 checks + sounds thread).
   vanillahunt CLOSED 09-10 (99): instruments SOUND WITH STATED GAPS — 1,281 table-level hunks in 368 rowed hand files listed by
   no instrument (§1.4); 12 P2s re-derived: 6 hold, 5 weakened, **C80 REFUTED**; **C82** filed by the audit (Incident reactors stay
-  off); every P2 is a gain/cosmetic except C82/C66/C63; ck142 = hotfix-3 list (rec none). FR-1/2/3 OPEN; FR-1 next bench is ck145.
+  off); every P2 is a gain/cosmetic except C82/C66/C63; ck142 = hotfix-3 list (rec none). FR-1/2/3 OPEN (FR-1 → LINUX_DISPATCH).
 - ⭐ PUBLISHED both portals — `pdx_id` **156049**, `steam_id` **3787202810**, tree `version` **7** (v7, 09-10).
   ⛔ Never re-upload to "fix" a version number — each upload bumps again (H-02). ⛔ Every upload OVERWRITES both
   page bodies from `metadata.lua`; `description` IS the full card (08-24). ✅ v6 auto-fill delivered BOTH pages clean
   (owner-seen) — the first clean cycle of three; `UPLOAD_WORKFLOW` §3 paste backups stay REQUIRED.
 - ⭐ SITE deployed 2026-09-10 23:08Z (`13e8b75` per the deployments API), **48** live fix-list entries (45 success + 3 ?), the two
   "built against" lines read 1.1.0.403908. ⛔ `publish-site.yml` is `workflow_dispatch` only — committing never publishes.
-  ⛔ Never quote a stored "deployed = <sha>"; read the deployments API (`prompts/SITE_AUDIT.md`).
+  ⛔ Never quote a stored "deployed = <sha>"; read the deployments API (`prompts/perma/SITE_AUDIT.md`).
 - Post-launch LIVE: F105, F107, F108 (v4), F110 (v5), hotfix 2 (v6), C74+C77+C83 (v7); F104 NOT OURS. ⛔ F107 field route untested. ⛔ Read the
   GitHub tracker via `api.github.com/.../issues/<n>/comments`, never the HTML page. ✅ Passage Network UNTICKED 09-09.
 - ✅ C74+C77 `SilentHitMomentFX` BUILT + TESTED-ATTENDED 09-10: all seven intended units function across two

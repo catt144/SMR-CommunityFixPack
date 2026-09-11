@@ -20,7 +20,7 @@ the user picks per task.** **Start with `git log --oneline -10` + `git pull`**
 > main line of work. Standing non-playtest work: `agent/STATE.md` (the kernel
 > names the active chain and next step). `FIX_POLICY.md` §3a binds any code
 > any session writes. Drone work is separately owned by
-> `docs/agent/prompts/DRONE_PROJECT_PROMPT.md`.
+> `docs/agent/prompts/perma/DRONE_PROJECT_PROMPT.md`.
 
 > 📁 **LAYOUT** — `docs/README.md` is the map (`CLAUDE.md`, auto-loaded,
 > carries the contract). Two judgment rules that bite in sittings: **both

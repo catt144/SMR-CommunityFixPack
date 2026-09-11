@@ -1,6 +1,6 @@
 -- SMR Community Fix Pack — Test Kit :: COMBINED SITTING payload. TEMPORARY
 --
--- Declared by: docs/agent/prompts/COMBINED_SITTING.md. One cell per launch; the
+-- Declared by: docs/agent/prompts/perma/COMBINED_SITTING.md. One cell per launch; the
 -- CELL line below is rewritten by CS_ARM.ps1 and READ BACK OFF DISK by its gate,
 -- so a cell can never be misattributed after the fact.
 --

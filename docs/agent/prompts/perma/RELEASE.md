@@ -17,7 +17,7 @@ driven by `RELEASE_OUTBOX.md`, which it clears at the end. **Any model.**
 
 ## 0 · Orient
 1. `git log --oneline -10` + `git pull` + `git status --short` (other sessions commit here).
-2. Read `agent/STATE.md` and `agent/prompts/RELEASE_OUTBOX.md`.
+2. Read `agent/STATE.md` and `agent/prompts/perma/RELEASE_OUTBOX.md`.
 3. `python tools/doccheck.py --emit-counts` — every count comes from here, never
    hand-typed.
 4. Read the live count word: `grep -oE '[A-Z][a-z]+(-[a-z]+)? repairs' metadata.lua`.

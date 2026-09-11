@@ -1,6 +1,6 @@
 {
   "leg": "combined-sitting",
-  "_what": "The PT-20 combined sitting's payload pair: CSCommon (library) + CSRun (driver). Brief: prompts/COMBINED_SITTING.md, which declares itself a STANDING per-era re-check and does not self-delete.",
+  "_what": "The PT-20 combined sitting's payload pair: CSCommon (library) + CSRun (driver). Brief: prompts/perma/COMBINED_SITTING.md, which declares itself a STANDING per-era re-check and does not self-delete.",
 
   "_INCOMPLETE_ON_PURPOSE": "⛔ THIS MANIFEST COVERS ONLY THE ARM/DISARM HALF. The ancestor CS_ARM.ps1 also had a `config` mode with a six-cell matrix (dry, c1, a1, b1, b2, zrestore), a per-cell rescue-junction requirement, and a save-directory dependency. arm_leg.ps1 does NOT model cell orchestration and does not pretend to. Recover that logic from the grave before running a cell: git show 49e32bf:docs/agent/prompts/combined-sitting/CS_ARM.ps1.txt",
 

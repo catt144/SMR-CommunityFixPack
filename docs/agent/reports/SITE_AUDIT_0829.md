@@ -1,6 +1,6 @@
 # Site audit 2026-08-29 — what the PUBLIC pages actually say
 
-**Written 2026-08-29 by `agent/prompts/SITE_AUDIT.md`**, its first run. Subject
+**Written 2026-08-29 by `agent/prompts/perma/SITE_AUDIT.md`**, its first run. Subject
 is the DEPLOYED GitHub Pages site <https://catt144.github.io/SMR-CommunityMods/>
 and the two live store listings — **not** the working tree.
 

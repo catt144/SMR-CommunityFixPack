@@ -16,7 +16,7 @@ verify against `git log` before trusting any specific it names.
 > 🧭 **THIS IS THE CATCH-ALL. If the task has a dedicated prompt, SWITCH TO IT** —
 > this one only orients and routes. The dedicated ones (§4): a **live playtest**,
 > an **upload**, a **post-upload close**, a **public-doc sweep**, **drone** work,
-> a **multi-session effort**, a **STATE eviction**. Everything else — one defect,
+> a **multi-session effort**, a **STATE eviction**, and **anything FR-1 / Linux** (`perma/LINUX_DISPATCH.md`). Everything else — one defect,
 > one question, one report — is dispatch, and stays here.
 
 You are doing focused, self-contained work in a bug-fix mod for Surviving Mars:
@@ -126,15 +126,19 @@ patched at runtime; no game files are modified). The map is `docs/README.md`.
 
 | the task is really… | switch to |
 |---|---|
-| a LIVE playtest at the keyboard | `prompts/GENERAL_USE_PROMPT.md` |
-| doing an update / shipping a patch — THE WHOLE THING | `prompts/RELEASE.md` (orchestrates the three below; reads+clears `prompts/RELEASE_OUTBOX.md`) |
+| a LIVE playtest at the keyboard | `prompts/perma/GENERAL_USE_PROMPT.md` |
+| doing an update / shipping a patch — THE WHOLE THING | `prompts/perma/RELEASE.md` (orchestrates the three below; reads+clears `prompts/perma/RELEASE_OUTBOX.md`) |
 | the owner's mechanical pack+upload only | `UPLOAD_WORKFLOW.md` (+ `reports/RELEASE_PORTAL_PREP.md`) |
-| closing out after a listing exists | `prompts/POST_UPLOAD_CLOSE.md` |
-| updating public-facing docs / cards / site | `prompts/PUBLIC_SURFACE_SWEEP.md` |
-| auditing what the LIVE Pages site says (vs what is committed) | `prompts/SITE_AUDIT.md` |
-| the drone system | `prompts/DRONE_PROJECT_PROMPT.md` |
+| closing out after a listing exists | `prompts/perma/POST_UPLOAD_CLOSE.md` |
+| updating public-facing docs / cards / site | `prompts/perma/PUBLIC_SURFACE_SWEEP.md` |
+| auditing what the LIVE Pages site says (vs what is committed) | `prompts/perma/SITE_AUDIT.md` |
+| the drone system | `prompts/perma/DRONE_PROJECT_PROMPT.md` |
 | an effort larger than ~2 sessions | `reports/CHAIN_METHOD.md` (propose a chain) |
-| STATE is over its byte cap | `prompts/STATE_EVICTION.md` |
+| STATE is over its byte cap | `prompts/perma/STATE_EVICTION.md` |
+| ANYTHING about FR-1 (the Linux/NVIDIA 580 crash, the TEMPORARY workaround mod, player reports, the Paradox dev) | `prompts/perma/LINUX_DISPATCH.md` |
+| picking up where the last orchestrator stopped (while its outbox is open) | `prompts/perma/HANDOFF_ORCHESTRATOR.md` |
+
+The map of every prompt, reusable (`perma/`) and one-off (root), is `prompts/README.md`.
 
 ## 5 · End of session
 

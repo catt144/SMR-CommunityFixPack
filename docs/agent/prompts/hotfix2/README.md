@@ -136,7 +136,7 @@ splits that consistency check across two sessions. One prompt owns it.
     and compressed four history lines to pointers (grave in its close-out
     commit); the next link should expect the warn rather than assume room. It is
     still a kernel: add the fact, not the story, and when the warn does fire it
-    goes verbatim to the owner (`prompts/STATE_EVICTION.md`).
+    goes verbatim to the owner (`prompts/perma/STATE_EVICTION.md`).
 
 ## ⛔ The constraint that binds every code prompt (ck118)
 

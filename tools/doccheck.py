@@ -63,7 +63,7 @@ CODE = os.path.join(REPO, "Code")
 # (emoji-dense prose costs ~2.2 B/token). Bytes are the resource a session
 # actually spends at boot. Crossing WARN prints a warn line that close-out
 # reports must copy to the owner verbatim; the owner then fires
-# agent/prompts/STATE_EVICTION.md. The hard cap is the backstop if flags go
+# agent/prompts/perma/STATE_EVICTION.md. The hard cap is the backstop if flags go
 # unread. The per-line cap keeps lines atomic (grep/diff/Edit-safe) so walls
 # cannot return inside the budget; never widen lines to satisfy anything.
 #
@@ -91,7 +91,7 @@ STATE_MAX_LINE_BYTES = 200
 # old 43k-token prompt). The cap is a tripwire, not a prohibition: at the cap,
 # relocate per the prompt's own routing rule (WORKFLOW / PLAYTEST_HELP /
 # agent/facts/ / the entry), then trim.
-GENERAL_USE = os.path.join(DOCS, "agent", "prompts", "GENERAL_USE_PROMPT.md")
+GENERAL_USE = os.path.join(DOCS, "agent", "prompts", "perma", "GENERAL_USE_PROMPT.md")
 GENERAL_USE_MAX_LINES = 220
 
 # The three stubs spec §3e leaves behind so historical references resolve one
@@ -511,12 +511,12 @@ def check_state_and_stubs(out):
         n_state = len(raw)
         if n_state > STATE_MAX_BYTES:
             red.append("STATE.md is %d bytes, hard cap is %d — run "
-                       "agent/prompts/STATE_EVICTION.md; history belongs in "
+                       "agent/prompts/perma/STATE_EVICTION.md; history belongs in "
                        "archive/SESSION_LOG.md" % (n_state, STATE_MAX_BYTES))
         elif n_state > STATE_WARN_BYTES:
             warns.append("STATE.md is %d bytes, warn threshold is %d — copy "
                          "this line VERBATIM into the owner report; the owner "
-                         "fires agent/prompts/STATE_EVICTION.md"
+                         "fires agent/prompts/perma/STATE_EVICTION.md"
                          % (n_state, STATE_WARN_BYTES))
         for i, ln in enumerate(raw.split(b"\n"), 1):
             if len(ln) > STATE_MAX_LINE_BYTES:

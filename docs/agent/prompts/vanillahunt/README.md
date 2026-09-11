@@ -656,7 +656,7 @@ split it across subagents. Rules, binding on every link that fans out:
 13. **STATE.md is byte-capped** (warn 12288, hard 18432; ⛔ never raise it — ck132
     is the owner's open call). Measure with `python tools/doccheck.py` (the
     `STATE + STUBS` line), never quote a number from here; add facts not
-    stories; expect the WARN and evict per `prompts/STATE_EVICTION.md`.
+    stories; expect the WARN and evict per `prompts/perma/STATE_EVICTION.md`.
 14. **⛔ A subagent's result is a claim.** The parent verifies a sample from the
     primary artefact before writing it anywhere (memory: *a peer session's
     finding is a claim and so is your own*).

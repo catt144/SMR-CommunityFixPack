@@ -23,7 +23,7 @@ docs/
     bugs/                 defect truth — one file per entry
     facts/                engine behaviour — one file per fact
     reports/              reports, plans, specs, audits, surveys
-    prompts/              the standing prompts + any live one-off
+    prompts/              README.md = the map · perma/ = standing prompts · root = live one-offs
   archive/                spent. SESSION_LOG.md, PLAYTEST_ARCHIVE.md,
                           MOD_DESCRIPTION.md (frozen), retired prompts
 ```
@@ -62,7 +62,8 @@ difference. Generated files say so on line 1.
 - A **rule that binds future work** → `agent/WORKFLOW.md` or `agent/FIX_POLICY.md`,
   not buried in a report.
 - A **report, plan, spec, audit or survey** → `agent/reports/`.
-- A **prompt** → `agent/prompts/`; one-offs delete themselves when consumed.
+- A **prompt** → reusable: `agent/prompts/perma/`; one-off: the `agent/prompts/` root, deleted when consumed. Update the
+  map, `agent/prompts/README.md`, either way.
 - A **session leg** → `archive/SESSION_LOG.md` (append-only, newest first).
 - A **decision the owner must make** → `PLAYTEST_CHECKLIST.md` →
   "Decisions waiting on you". Never only in an agent doc.
@@ -79,7 +80,11 @@ same change that discovers it.
 > `docs/agent/reports/`; `docs/prompts/` → `docs/agent/prompts/`;
 > `docs/agent/ENGINE_FACTS.md` → `docs/agent/facts/`. Pre-restructure
 > documents cite the old paths; translate mentally, do not edit records.
-> Renamed 2026-08-03: `FABLE_NEXT_PROMPT.md` → `agent/prompts/GENERAL_USE_PROMPT.md`.
+> Renamed 2026-08-03: `FABLE_NEXT_PROMPT.md` → `agent/prompts/perma/GENERAL_USE_PROMPT.md`.
+
+> 2026-09-11 (owner ask): the standing prompts moved into `agent/prompts/perma/` (DISPATCH, GENERAL_USE_PROMPT, RELEASE,
+> RELEASE_OUTBOX, POST_UPLOAD_CLOSE, PUBLIC_SURFACE_SWEEP, SITE_AUDIT, STATE_EVICTION, DRONE_PROJECT_PROMPT, COMBINED_SITTING).
+> Live references were rewritten; the archive and `metadata.lua` comments still cite `agent/prompts/<name>.md`, so translate them.
 
 `MOD_DESCRIPTION.md` and `PLAYTEST_ARCHIVE.md` moved from `docs/` to
 `docs/archive/` in the same change.

@@ -38,6 +38,10 @@ completed tests move whole to
 > boot with them on. That covers the one flagged store line (a save loaded straight from launch), so **the store page is ready as
 > written.** You saw nothing wrong with Reflections on, but a bare colony has few reflective surfaces. As you asked, the page now
 > says it loads with Reflections on but isn't properly tested that way and will very likely look glitchy, so Off is **recommended**.
+> ➡️ **From now on, Linux reports go to their own prompt.** Start a fresh session with
+> `agent/prompts/perma/LINUX_DISPATCH.md`; it is fully briefed on everything in this item. **Field tally so far (you, 09-11):**
+> 3 working, one of them on a 10xx card; 1 not working (the GTX 1070 below; its log has been requested).
+>
 > ⚠️ **First field report: it did NOT work for a GTX 1070** (Manjaro, Wayland, driver 580.178.04, Proton Hotfix, Reflections Off and
 > Medium). Cause unknown; details in findings §12. **Your quick test, and the first one to do:** on the laptop, move your
 > hand-copied `SMR_FR1TempWorkaround` folder out of the Mods folder, **subscribe to the Workshop item**, and start a New Game. A crash
@@ -117,7 +121,7 @@ completed tests move whole to
 >
 > ✅ **RULED 2026-09-11 (you):** not the main pack. It will be a one-off, clearly **temporary** mod that tells players it's a
 > workaround and to uninstall it once Paradox fixes the real issue. No GitHub repo; it's stood up on a temporary basis. Astra builds it
-> (round-3 brief: `agent/prompts/FR1_TEMP_MOD_R3.md`), and your bench steps and the store text will land here. ✅ Your answers
+> (the round-3 brief was held, then removed on 09-11 once the mod shipped), and your bench steps and the store text will land here. ✅ Your answers
 > (09-11): **Steam for sure, possibly Paradox too**; yes, a post to the dev mentions the mod once it is live. Your directive,
 > passed to Astra verbatim: **this is the LAST round**, an emergency workaround until the hotfix, not a long-term mod, and
 > "Reflections Off" is an acceptable answer.
@@ -715,7 +719,8 @@ Original question, kept as asked: C74, the Rare Metals Extractor's hammer (and t
 >    tell an agent: the FR-1 sitting script is owed then** (crash moment,
 >    `PROTON_LOG=1`, the built-in graphics chip as a non-NVIDIA control, the
 >    1.0.7 branch as a "did it work before" control, a no-mod 1.1.0 save).
->    ✅ The script is written (2026-09-10): `agent/prompts/FR1_LINUX_SITTING.md`.
+>    ✅ The script is written (2026-09-10): `agent/prompts/FR1_LINUX_SITTING.md` (it ran 09-10 and was removed 09-11; all
+>    Linux work now goes to `agent/prompts/perma/LINUX_DISPATCH.md`).
 >    Hand that to the agent. One thing it adds for you: on a hybrid laptop Mint's
 >    graphics setting (`prime-select`) can quietly run games on the Intel chip,
 >    so the script checks which GPU the game really used before it counts a
@@ -2424,7 +2429,7 @@ Original question, kept as asked: C74, the Rare Metals Extractor's hammer (and t
     Say which to run, or "none yet".
 
 91. **The D06 design decision, restated with the new inputs (supersedes the three-option
-    framing in `prompts/DRONE_PROJECT_PROMPT.md` §3 as the thing to decide).** The report's
+    framing in `prompts/perma/DRONE_PROJECT_PROMPT.md` §3 as the thing to decide).** The report's
     ranked shortlist: (1) **V** view tiers — bands 4–5 as tier ORDER handed to the matcher
     in transient tables, full 5/4/3 distinction, zero residue by construction, pending E-4
     and E-8; (2) **P** finder pre-emption, same result, pending E-8 only; (3) **2-S** table
@@ -2473,7 +2478,7 @@ Original question, kept as asked: C74, the Rare Metals Extractor's hammer (and t
     and `Opt_DroneStatDials` (D09): design and playtest work may resume under
     FIX_POLICY with an A/B per change. Recorded in the opt-in repo's `STATE.md`
     and `D06.md`; PT-52's status below updated. Still yours: the D06 design
-    decision itself (`prompts/DRONE_PROJECT_PROMPT.md` §3 — three options), and
+    decision itself (`prompts/perma/DRONE_PROJECT_PROMPT.md` §3 — three options), and
     whether `FUTURE_IDEAS.md` #7 (gleaner / pairing policy) is un-parked too — this
     ruling was read as NOT touching that post-launch parking.
 
@@ -2686,7 +2691,7 @@ Original question, kept as asked: C74, the Rare Metals Extractor's hammer (and t
     — and I treated three agreeing reads as confirmation when they were the same
     broken method three times. The comment **count** was one field away in the
     issues list and would have caught it instantly. That control is now written
-    into `agent/prompts/PUBLIC_SURFACE_SWEEP.md` §4 and the reply record, and
+    into `agent/prompts/perma/PUBLIC_SURFACE_SWEEP.md` §4 and the reply record, and
     `F104` carries the correction in its own entry rather than quietly reading
     right.
 
@@ -3061,7 +3066,7 @@ rock-clearing jobs) crashes the same way, not just levelling.
 
     ⚠️ **doccheck, copied verbatim:** `STATE.md is 9505 bytes, warn threshold is
     9216 — copy this line VERBATIM into the owner report; the owner fires
-    agent/prompts/STATE_EVICTION.md`
+    agent/prompts/perma/STATE_EVICTION.md`
 
 ### ⭐⭐⭐ 2026-08-20 — IT IS PUBLISHED, ON BOTH PORTALS. The ids are committed. One number came out differently on each store, and that was mechanical, not a mistake.
 
@@ -3186,7 +3191,7 @@ rock-clearing jobs) crashes the same way, not just levelling.
     ⚠️ Housekeeping line, emitted after my edits and copied verbatim as it
     requires: **`warn STATE.md is 9941 bytes, warn threshold is 9216 — copy
     this line VERBATIM into the owner report; the owner fires
-    agent/prompts/STATE_EVICTION.md`** — fire the eviction prompt whenever
+    agent/prompts/perma/STATE_EVICTION.md`** — fire the eviction prompt whenever
     convenient; nothing about the upload waits on it.
 
 67. ⭐⭐ **Your upload sitting, restated — nothing else stands between you and
@@ -3252,7 +3257,7 @@ rock-clearing jobs) crashes the same way, not just levelling.
     `reports/RELEASE_PORTAL_PREP.md` §0.5 open beside you.
 
     ✅ **After the listing exists, fire
-    `docs/agent/prompts/POST_UPLOAD_CLOSE.md`** — written 08-20 for exactly that
+    `docs/agent/prompts/perma/POST_UPLOAD_CLOSE.md`** — written 08-20 for exactly that
     moment. It exists because the writeback is not a copy-paste: the forced save
     that writes `pdx_id`/`steam_id` into `metadata.lua` also **regenerates that
     file from memory and strips every hand-written comment in it**, so the ids
@@ -4437,7 +4442,7 @@ rock-clearing jobs) crashes the same way, not just levelling.
     rulings in force · pointers), the six days of closed history moved to the
     session log as digests with grep tags, nothing was deleted (the full old
     file is readable forever via git), and a standing cleanup prompt
-    (`agent/prompts/STATE_EVICTION.md`) exists so you can fire future
+    (`agent/prompts/perma/STATE_EVICTION.md`) exists so you can fire future
     evictions with one line.
 
     **The measured numbers you asked for: old file 71,077 bytes = 33,066
@@ -5606,7 +5611,7 @@ open decisions are back to the **3** standing non-release items.)*
     already happened with the game closed and nobody at the keyboard; every
     fixture is verified to exist, the harness is proven, and the predictions
     are committed. **Sit down and say "run the combined sitting"** on a session
-    opened at `agent/prompts/COMBINED_SITTING.md`. **Your part: ~30–45 min, four
+    opened at `agent/prompts/perma/COMBINED_SITTING.md`. **Your part: ~30–45 min, four
     launches, two Mod-Manager visits.** The measure-moments (full table in the
     brief):
     * **F102's minute** (packs ON). ⛔ **Two corrections you would otherwise have
