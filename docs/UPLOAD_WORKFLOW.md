@@ -366,3 +366,182 @@ The agent writes the rest down.
 | An upload is rejected | Stop. Tell the agent what it said, word for word. |
 | The description came out short | Paste it by hand (step 3), then tell the agent it did not fill itself. |
 | You uploaded Steam before Paradox | Not fixable, and not worth chasing. Say so, carry on. |
+
+---
+
+## FR-1 temporary workaround mod: store pages (copy-paste)
+
+**This is a separate mod, not the fix pack:** `SMR_FR1TempWorkaround`, "TEMPORARY - Linux NVIDIA 580 Crash Workaround".
+It sits in your Windows Mods folder; its source copy is in `C:\Dev\SMR-FR1-TempMod-2026-09-11\`. Checklist item **145** has
+the background.
+
+> ⚠️ **Written 2026-09-11 assuming P1 passes** (you asked for it that way). Before you post, have an agent check one line
+> against the P1 result: *"With the mod on, New Game and existing saves loaded and played normally."* P1 is what tests a
+> save loaded straight after launch, from the packed mod.
+
+**Uploading it (different from the fix pack):**
+- **Steam first is fine here, if Steam is the only store.** If you also do Paradox, do Paradox first, as usual.
+- Pack and upload from **MOD EDITOR**, the same as the fix pack. Because this is a **new** mod, the first upload **saves
+  it by itself** and creates the listing. That is expected this once (it is the fix pack's "stop, tell the agent" case only
+  for the fix pack). Afterwards the copy in your Mods folder holds the listing number, so tell the agent: that copy becomes
+  the master.
+- The description, short summary, change note and preview picture are **meant to fill themselves**. They come from the
+  mod's `metadata.lua`, which matches the blocks below. If a page comes out short, plain, or missing, paste the matching block.
+  **Paradox:** paste the plain block, then re-apply the headings with the editor buttons. **Steam:** paste the BBCode block as-is.
+
+#### 📋 Title
+
+```
+TEMPORARY - Linux NVIDIA 580 Crash Workaround
+```
+
+#### 📋 Short summary
+
+```
+TEMPORARY, Linux only: stops the NVIDIA driver 580 crash when you start a New Game or load a save in 1.1.0. Keep Reflections Off, and remove it once Paradox fixes the crash.
+```
+
+#### 📋 Paradox Mods — description (plain text, paste as-is)
+
+```
+TEMPORARY WORKAROUND. LINUX ONLY. Remove it as soon as Paradox fixes this crash.
+
+
+WHO THIS IS FOR
+
+You play Surviving Mars: Relaunched on Linux (through Steam's Proton) with an
+NVIDIA graphics card on driver 580, and the game crashes to the desktop as soon
+as you start a New Game or load a save.
+
+If that is not you, you do not need this mod:
+· Windows: this crash does not happen on Windows. Do not install it there.
+· Steam Deck, AMD or Intel graphics: not affected. The mod switches itself off.
+· NVIDIA driver 595: not affected (we tested it).
+
+
+WHAT IT DOES
+
+On driver 580, NVIDIA's shader compiler crashes while the game prepares its
+screen-space reflection shaders, and the game prepares them even with
+Reflections turned Off. This mod swaps those shaders for an empty stand-in, so
+there is nothing left to crash on and the world loads.
+
+The trade-off: screen-space reflections will not work while the mod is on, so
+keep Reflections Off.
+
+
+HOW TO USE IT
+
+1. Subscribe to this mod.
+2. Start the game. On the main menu, open MOD MANAGER and enable
+   "TEMPORARY - Linux NVIDIA 580 Crash Workaround".
+3. Open Options, then Video, and set Reflections to Off.
+4. Quit the game completely, then start it again.
+5. Start a New Game or load your save.
+
+That is all: no launch options and no files to edit. The mod does not change
+your saves.
+
+
+REMOVE IT WHEN PARADOX FIXES THE CRASH
+
+This is a stopgap, not a fix, and Paradox is aware of the crash. As soon as a
+game update fixes it:
+1. Unsubscribe from this mod (or disable it in MOD MANAGER).
+2. Restart the game.
+
+After any game update the mod switches itself off anyway, because it only fits
+game version 1.1.0.403908. Please still remove it then. Removing it is safe: it
+writes nothing into your saves, and saves made with it do not need it.
+
+
+WHAT WE TESTED IT ON
+
+· Alienware m15 R4 laptop, NVIDIA GeForce RTX 3070 Laptop GPU
+  (hybrid graphics, PRIME On-Demand)
+· Linux Mint 22.2 (X11), kernel 7.0.0-31
+· NVIDIA driver 580.173.02
+· Steam Proton Hotfix (hotfix-20260828)
+· Surviving Mars: Relaunched 1.1.0.403908, Reflections Off
+
+With the mod on, New Game and existing saves loaded and played normally. With
+it off, the same laptop crashed on every world load.
+
+
+IT MAY NOT WORK FOR EVERY SETUP
+
+We could test only one machine. Other NVIDIA cards (especially the older GTX 900
+and 1000 series), other 580 driver builds, other Linux distributions, Wayland,
+or other Proton versions may behave differently. If it does not help, disable
+it, restart the game, and tell us in the comments: your graphics card, driver
+version, Linux distribution and Proton version.
+
+This is an unofficial fan workaround, not made or supported by Paradox. Use it
+at your own risk.
+
+From the maintainer of the Relaunched Fix Pack. It is a separate mod; the fix
+pack does not include it.
+```
+
+#### 📋 Steam Workshop — description (BBCode, paste as-is)
+
+```
+[h1]TEMPORARY WORKAROUND. LINUX ONLY.[/h1]
+[b]Remove it as soon as Paradox fixes this crash.[/b]
+
+[h2]Who this is for[/h2]
+You play [i]Surviving Mars: Relaunched[/i] on [b]Linux[/b] (through Steam's Proton) with an [b]NVIDIA graphics card on driver 580[/b], and the game crashes to the desktop as soon as you start a New Game or load a save.
+
+If that is not you, you do not need this mod:
+[list]
+[*][b]Windows:[/b] this crash does not happen on Windows. Do not install it there.
+[*][b]Steam Deck, AMD or Intel graphics:[/b] not affected. The mod switches itself off.
+[*][b]NVIDIA driver 595:[/b] not affected (we tested it).
+[/list]
+
+[h2]What it does[/h2]
+On driver 580, NVIDIA's shader compiler crashes while the game prepares its screen-space reflection shaders, and the game prepares them even with Reflections turned Off. This mod swaps those shaders for an empty stand-in, so there is nothing left to crash on and the world loads.
+
+[b]The trade-off:[/b] screen-space reflections will not work while the mod is on, so keep Reflections Off.
+
+[h2]How to use it[/h2]
+[olist]
+[*]Subscribe to this mod.
+[*]Start the game. On the main menu, open [b]MOD MANAGER[/b] and enable [b]TEMPORARY - Linux NVIDIA 580 Crash Workaround[/b].
+[*]Open [b]Options → Video[/b] and set [b]Reflections[/b] to [b]Off[/b].
+[*]Quit the game completely, then start it again.
+[*]Start a New Game or load your save.
+[/olist]
+That is all: no launch options and no files to edit. The mod does not change your saves.
+
+[h2]Remove it when Paradox fixes the crash[/h2]
+This is a stopgap, not a fix, and Paradox is aware of the crash. As soon as a game update fixes it:
+[olist]
+[*][b]Unsubscribe[/b] from this mod (or disable it in MOD MANAGER).
+[*]Restart the game.
+[/olist]
+After any game update the mod switches itself off anyway, because it only fits game version 1.1.0.403908. Please still remove it then. Removing it is safe: it writes nothing into your saves, and saves made with it do not need it.
+
+[h2]What we tested it on[/h2]
+[list]
+[*]Alienware m15 R4 laptop, NVIDIA GeForce RTX 3070 Laptop GPU (hybrid graphics, PRIME On-Demand)
+[*]Linux Mint 22.2 (X11), kernel 7.0.0-31
+[*]NVIDIA driver 580.173.02
+[*]Steam Proton Hotfix (hotfix-20260828)
+[*]Surviving Mars: Relaunched 1.1.0.403908, Reflections Off
+[/list]
+With the mod on, New Game and existing saves loaded and played normally. With it off, the same laptop crashed on every world load.
+
+[h2]It may not work for every setup[/h2]
+We could test only one machine. Other NVIDIA cards (especially the older GTX 900 and 1000 series), other 580 driver builds, other Linux distributions, Wayland, or other Proton versions may behave differently. If it does not help, disable it, restart the game, and [b]tell us in the comments[/b]: your graphics card, driver version, Linux distribution and Proton version.
+
+[i]This is an unofficial fan workaround, not made or supported by Paradox. Use it at your own risk.[/i]
+
+From the maintainer of the Relaunched Fix Pack. It is a separate mod; the fix pack does not include it.
+```
+
+#### 📋 Change note (both stores)
+
+```
+First release: a temporary workaround for the Linux + NVIDIA driver 580 crash on New Game or loading a save (game 1.1.0.403908).
+```

@@ -68,6 +68,12 @@ completed tests move whole to
 > - The stand-in plus a crash ⇒ something new; bring everything back.
 > - `unpacked` in the mod line ⇒ the folder was copied instead of the pack.
 > Optional, same sitting: turn Reflections On for a minute and look (a `WARNING` log line is expected). Afterwards, clear the launch options.
+>
+> ✅ **Store pages are written** (you asked, 09-11, assuming P1 passes). The copy-paste blocks (title, summary, Paradox plain
+> text, Steam BBCode, change note) are in [UPLOAD_WORKFLOW → "FR-1 temporary workaround mod"](UPLOAD_WORKFLOW.md#fr-1-temporary-workaround-mod-store-pages-copy-paste).
+> The same text is the mod's own description, so it should fill the page by itself on upload. The mod now also carries a preview
+> picture (Paradox refuses an upload without one) and is marked optional, so a save made with it doesn't ask for it once it's
+> removed. Before posting, one line needs checking against P1.
 
 > ✅ **RESULT: you ran C2, Q2 and R2 on 2026-09-11, and the evidence is read**
 > ([findings §11](agent/reports/FR1_LINUX_FINDINGS_2026-09-10.md#11--2026-09-11--cache-probe-v2-bench-ran-owner-laptop-on-580-q2-loads-worlds-with-the-rays-no-op-r2-reverses-it)).

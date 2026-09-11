@@ -8,6 +8,19 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-11 - FR-1 temp mod store pages (smr-bugfixpack-5d): written assuming P1 passes
+
+tags: FR-1 temp-mod store-pages
+
+Owner: "assume it's going to work", write the description pages plus copy-paste copies: Linux only, what it was tested on, a
+may-not-work disclaimer, simple steps, and remove it once Paradox fixes it. The pages are in `UPLOAD_WORKFLOW.md` → "FR-1
+temporary workaround mod" (title, summary, Paradox plain, Steam BBCode, change note). The mod's `metadata.lua` description is the
+auto-fill source and matches the Paradox block word for word (checked). Routes checked against 1.1.0 source: MOD MANAGER
+(`PGMenuRemastered.generated.lua:111`), Options → Video → Reflections (`OptionsObject.lua:77`). "Tested on" facts come from Q2's
+system-state and log (Proton `hotfix-20260828`). Added `image` (Paradox hard-rejects without one, `ParadoxMods.lua:39-42`; plain
+1024² card, 64,756 B), `optional_mod` (a save made with it won't require it, `SavegameMetadata.lua:102-104`), `TagOther`, and
+`last_changes`. One P1-dependent line is flagged for a check before posting.
+
 ## 2026-09-11 - FR-1 owner answers (smr-bugfixpack-5d): LAST round for Astra; handoff consumed
 
 tags: FR-1 temp-mod owner-answers
