@@ -8,6 +8,18 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-11 - FR-1 cache v2 bench READ (smr-bugfixpack-5d): Q2's no-reload overlay loads worlds on 580; R2 reverses it
+
+tags: FR-1 linux proton nvidia shader cache bench read
+
+Ran `HANDOFF_FR1_CACHE_V2_2026-09-11.md` §1–§2 (records only). Owner's evidence at `C:\Dev\Success\` (C2, Q2, R2; F2 skipped by
+design). C2 control valid: boot CTD on 271ec, 1 ms, same thread. **Q2 (`noop-noreload`) MEASURED:** the first world load dumped the
+no-op 18× (one per RAYS record) at the exact stage A/R2 die, then all 36 REFLECT_FULL, 0 faults in a 1.88 GB log; New Game plus
+two saves in one process. **R2** (no marker): the original crash returns on 38121 (2 ms), 115 DXIL = the original baseline. Saves loaded on
+already-built pipelines; a cold launch into a save is unsampled. Recorded: FINDINGS §11, ck145 result block + decision, dev reply
+FOLLOW-UP POST 2 drafted, STATE NEXT. Asked the owner: was POST 1 posted; scope (rec opt-in mod) → Astra round 3; the unexplained
+01:47:24 control launch. Handoff kept (§2 decisions + §5 still open).
+
 ## 2026-09-10/11 - FR-1 orchestration (smr-bugfixpack-bd): M1/M2 bench, cache route briefed; v2 LOADS WORLDS (owner, unread)
 
 tags: FR-1 linux proton nvidia shader cache bench orchestration lookback

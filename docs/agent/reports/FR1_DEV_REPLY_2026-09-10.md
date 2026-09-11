@@ -92,3 +92,34 @@ What this suggests on your side (you know the engine better than we do):
 - The REFLECT_FULL path compiles on 580. If we read the Lua right, the game already switches AMD cards to a "full tile" path (hr.SSRFullTile8x8 = 1), so using REFLECT_FULL on NVIDIA as well might be a low-risk option.
 
 We're next testing a replacement for all 18 REFLECT_RAYS cache entries (the 12 debug variants included) and will post the result. Happy to share the test mod, the cache records and the logs.
+
+---
+
+## FOLLOW-UP POST 2 — draft 2026-09-11 (from FINDINGS §11; post as a NEW reply, after POST 1)
+
+Every line is MEASURED unless it says "suggestions" / "if we read it right". It assumes POST 1 is up. ⚠️ The owner has not said
+whether POST 1 was posted. If it was not, post 1 then 2, or ask an agent for one merged post. Delete POST 1's closing line
+("We're next testing...") from any merge.
+
+---
+
+UPDATE 2 — replacing the REFLECT_RAYS shaders makes the crash go away
+
+We extended the test to all 18 REFLECT_RAYS entries in the shader cache: the 6 regular variants and the 12 REFLECTION_DEBUG ones. Each was replaced by the same empty compute shader with the original root signature. The 36 REFLECT_FULL entries and every other shader were left untouched. Same laptop, NVIDIA 580.173.02, Reflections Off. This time the mod did not force a shader-cache reload; it only layered the replacement folder over the cache.
+
+- New Game loaded and ran normally. Two 1.1.0 saves then loaded in the same session.
+- Right after "*** Reloading assets from folder 'BinAssets/'" (exactly where the original crash happens), vkd3d dumped our empty shader 18 times on the loading thread, once per replaced entry. None of the original REFLECT_RAYS shaders was built.
+- The same thread then built all 36 REFLECT_FULL compute shaders. NVIDIA 580 compiled every one of them with no fault.
+- There was no access violation anywhere in the Proton log.
+
+Then the reverse: with the mod still installed but not switched on, New Game crashed exactly as before. The shader was 38121decbc3eee12, the crash was at libnvidia-glvkspirv.so.580.173.02 +0x157c88, on the same thread, 2 ms after the dump. A control run loading the original shaders through the mod crashed during startup as before (271ec9634b1ab87b).
+
+So on driver 580 it is the REFLECT_RAYS shaders: take them out of the cache and the world loads; put them back and it crashes.
+
+One more observation: with Reflections Off, 1.1.0 built all 54 cached Reflections.fx variants (the debug ones included) at the first world load, and none again at later loads in the same session.
+
+Suggestions for your side (you know the engine):
+- Not creating the REFLECT_RAYS pipelines while reflections are Off would fix this for NVIDIA 580 players.
+- All 36 REFLECT_FULL variants compile on 580. If we read the Lua right, the game already uses the full-tile path on AMD (hr.SSRFullTile8x8), so that path looks like a workable option for NVIDIA on Linux when reflections are on.
+
+What we haven't shown: that the picture is identical to Reflections Off (we didn't compare), or what happens with Reflections On while the empty shader is in place (we kept it Off). The test mod is a bench tool and isn't published. Happy to share it, the cache records and the logs.

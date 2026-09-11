@@ -263,3 +263,68 @@ full inventory throws before the LoadBinAssets wrapper and ChangingMap hook inst
 `wrapper=False`, `writes=1`. Whether a live `hr` string holds a `%` is UNSAMPLED (no Lua-side assignment does, grep G); Astra's 7
 mocks never logged one. **v2** escapes `%`, installs hooks first, pcalls each phase and logs the render device: 7/7 PASS (v1 6/7).
 Mock execution does not prove retail sandbox reach; the leg's `[FR1Options v2]` lines do. Owner steps: checklist **145**.
+
+## 11 · 2026-09-11 — cache-probe v2 bench RAN (owner, laptop on 580): Q2 LOADS WORLDS with the RAYS no-op; R2 reverses it
+
+Evidence (outside git): **`C:\Dev\Success\fr1-cache-v2\fr1-cache-v2\`**: C2/Q2/R2 dumps plus `steam-{C2,Q2,R2}.log`. Q2's `after-action/` holds
+the owner's result note, the game logs, key-line extracts, the file timeline, sha256 list and system state; `R2/` holds `R2-result.txt` and its
+game log. `C:\Dev\Success\Q2-SUCCESS-BACKUP\` is the owner's duplicate of Q2 (same 965 files and sizes; not re-hashed).
+`C:\Dev\Success\fr1-cache\` is the v1 C1/N1 set (795 files, same byte total as `C:\Dev\fr1-cache\fr1-cache\`). **F2 was not run, by
+design: Q2 loaded.** Readers: Astra's v2 `classify_dump.py` (the 228 compute programs plus the no-op, by DXIL bytes), plus a timeline
+scan of the dump lines. Read by `smr-bugfixpack-5d`. Setup (Q2 `system-state` / result notes): probe v2 (`9031634`), NVIDIA
+580.173.02, PRIME On-Demand, Reflections Off. Only `SMR_FR1CacheProbe` loaded mod items; the fix pack was installed but not loaded.
+
+| leg | `Command line:` (game log) | probe witness (Proton log) | Reflections programs dumped | fault | result |
+|---|---|---|---|---|---|
+| C2 | `-fr1-cache=control` | `ARMED Control reload=true records=18` → `MOUNT_HELPER_OK` → `RELOAD_REQUESTED` | 1 original RAYS (`271ec9634b1ab87b`), 0 FULL; 123 DXIL | thread 0140, last dump 271ec `.spv`, 1 ms; `glvkspirv +0x157c88`; 90 ms after `RELOAD_REQUESTED` | CTD during boot, no ChangingMap: reproduces C1/D/E |
+| Q2 | `-fr1-cache=noop-noreload` | `ARMED Noop reload=false records=18` → `MOUNT_HELPER_OK` → `EXPECTED_DXIL_SHA256=516fc383…` → `NO_RELOAD_REQUESTED` | **the no-op** `4f866e2c54fc9064` (DXIL sha256 `516fc383…` = expected), dumped 18×; **0 original RAYS**; **all 36 FULL**; 2 ReflectionConvolution; 476 DXIL | **none**: 0 `c0000005` in the 1.88 GB log | menu → New Game loaded, ran ~1 min; two saves loaded in the same process; quit through the menu (exit code 0) |
+| R2 | empty | `UNARMED` (probe installed and enabled) | 1 original RAYS (`38121decbc3eee12`), 0 FULL; 115 DXIL | thread 013c, last dump 38121 `.spv`, 2 ms; same site; 19 ms after `before-LoadBinAssets` | menu → CTD on New Game: the original crash |
+
+- **MEASURED — normal world loading consumes the overlay WITHOUT a forced reload (Q2).** The probe left `ForceShaderCacheReload` false
+  (its own witness). At New Game's first `before-LoadBinAssets` (Proton 21659.949), loading thread 013c dumped the no-op **18 times**
+  in 17 ms (21659.961–.978), one per covered RAYS record, then all 36 REFLECT_FULL programs (to 21661.005), with no fault. That is
+  the stage where leg A (§9) and R2 die on 38121. No Q2 dump matches any original RAYS digest. ⇒ The overlay reaches the pipelines
+  the normal first world load creates. F2's forced rebuild is not needed, which answers the route report's §8.3 open question for this path.
+- **MEASURED — the first world load builds the whole Reflections family, and later loads build none of it.** Q2 dumped all 54
+  Reflections records at the first map change (18 no-op + 36 FULL). It dumped none of them at the later map changes or at either
+  save load, although vkd3d does not de-duplicate (the same no-op dumped 18×). ⚠️ So both save loads ran on pipelines already created
+  in this process. **A cold launch straight into a save is NOT SAMPLED.** It is that process's first world load and is expected to take
+  the same path. This also sharpens the dev reply's "built at world load even when Off" claim: 1.1.0 builds every cached Reflections.fx
+  variant, the debug ones included, at the first world load with Reflections Off.
+- **MEASURED — REFLECT_FULL passes NVVM 580: 36 of 36** were dumped on 013c with no fault, and the process then ran ~5 min (§10 had 1 of 36).
+  Astra's caveat stands: a dump is not an instrumented pipeline return. Here the evidence is survival plus the owner's loaded worlds.
+- **MEASURED — the reversal (R2).** The probe was still installed and enabled with no marker, so it logged `UNARMED` and mounted nothing.
+  The first world load rebuilt `38121decbc3eee12` from the original bytes and faulted on the same thread 2 ms later at `+0x157c88`.
+  R2's 115 DXIL equals the original dump run's count (§10 grounding). ⇒ The treatment is what made Q2 load, and Q2 left nothing the next
+  launch reused on this path.
+- **MEASURED — the control is valid (C2):** the boot crash on 271ec, 1 ms, same thread, as C1/D/E. The witness lines rule out marker, gate or
+  setup drift.
+- **Count, graded:** still three distinct original RAYS programs attributed to faults (38121, 271ec, a26e); C2/R2 repeat two of them. With
+  all 18 replaced, nothing else faulted in three world loads. §8.2's working completeness hypothesis ("a fault in another family would
+  falsify it") is **not falsified in this sample**; it is not proven for other maps, settings or drivers.
+- **Owner statements reconciled.** The world-loading leg was **Q2** (not F2). The game log names the two saves. Save 1 (Lua 03:19):
+  `BlankTerraceBig_05`, orig 403908, mods `SMR_CommunityFixPack`; this is the Intel-made 1.1.0 save per the owner (not identified from
+  the log). Save 2 (04:32): `BlankBig_02`, mods TestKit + fix pack, i.e. the owner's Windows colony (checklist item 5 names that map).
+  Both loaded with the fix pack "present, but not loaded" and TestKit missing, so they ran as vanilla + probe. "Fully functional" is
+  owner-witnessed.
+- **NOT MEASURED:** whether the picture matches Reflections Off (no comparison was made); what the no-op does with Reflections **On**;
+  a cold launch into a save; other maps; packed-mod (`ModContent.fpk`) delivery; Windows/AMD with the overlay installed.
+- **MEASURED: no other error the log can see in Q2 (owner's ask, 09-11: "any other errors I was not able to see?").** Every
+  `err:`/`fixme:` line and every vkd3d/vulkan/d3d `warn:` line was bucketed by shape in all three legs (C2 50 shapes, R2 55, Q2 54).
+  There is no `err:vulkan`, `err:vkd3d`, `VK_ERROR`, device-lost or `c0000005`, and the game log has no Lua error. Only two shapes are
+  Q2-only. (a) `warn:vkd3d-proton:d3d12_resource_QueryInterface: {6b3b2502-6e51-45b3-90ee-9884265e8df3} not implemented, returning
+  E_NOINTERFACE`, ×4 at 21666.870 (PreGame map load, 7 s after the Reflections builds). (b) `fixme:kernelbase:AppPolicyGetProcessTerminationMethod`
+  at the clean exit, which the crash legs never reach. (a) is a CPU-side COM query on a resource, not shader content. It is
+  **UNATTRIBUTED**: no vanilla world load on 580 exists to compare, and `C:\Dev\SMR-FR1-Evidence\` holds no world-loading Proton log (0 hits).
+  A 595 or Intel world-load Proton log from the same laptop would settle it. The 1.88 GB is volume, not errors: PROTON_LOG's unwind trace,
+  plus 3.6 M `ResourceBarrier: Issuing split barrier(s)` warnings that vanilla R2 also prints (900 in its short run).
+- **Unexplained, verbatim (DISPATCH §2), attribute only if asked:** (1) an extra `-fr1-cache=control` launch,
+  `Mars.exe-20260911-01.47.24`, whose game log stops at `*** Debug::Init()`. R2's crashed log stops at the same line, the shape a crash
+  leaves. Its Proton log was overwritten by the next launch, so it is not attributable. It was followed by `01.47.47`, no marker, `UNARMED`,
+  menu, clean exit at 34 s: the recipe's pre-leg check. (2) `Failed activating D3D12 Dred` and `[Console Error]
+  OptionsData.Options.Upscaling sets hr.ResolutionUpscale which was already set by another table` (every leg; both already listed). (3)
+  `err:msvcrt:msvcrt_get_flags incorrect mode flag: x` brackets the dump lines on the faulting threads (C2 152397/152399, R2
+  414729/414731).
+- **Routed:** scope decision (fix pack / separate opt-in mod / instructions) is the owner's, ck145; if productized, Astra gets a
+  round-3 brief (Windows/AMD with Reflections On, a self-gate with no Proton detector per EF-089, Reflections turned On, packed delivery,
+  H-02/H-03/H-10). Dev reply FOLLOW-UP POST 2 drafted (`FR1_DEV_REPLY_2026-09-10.md`).

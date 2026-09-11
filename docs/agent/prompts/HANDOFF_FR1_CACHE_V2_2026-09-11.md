@@ -1,5 +1,9 @@
 # Handoff — 2026-09-11, FR-1 cache-probe v2 bench → the next session (model-agnostic)
 
+✅ **§1 DONE 09-11 (`smr-bugfixpack-5d`):** evidence `C:\Dev\Success\`; legs C2/Q2/R2 (Q2 loaded; F2 skipped); FINDINGS §11. §2 records
+written (ck145 block, dev POST 2 drafted). **Still open:** the owner's answers (POST 1 posted? scope? the 01:47:24 launch), Astra round 3 if
+productized, and §5. `git rm` this once those are answered or restated.
+
 ⛔ ONE-SHOT: read this first. `git rm` it once every item below is done, routed to its home, or restated in its own prompt.
 The records win if they disagree. Written by `smr-bugfixpack-bd` at the owner's request ("get you on a fresh context before
 you examine these"). **Verify every specific against `git log` and the tree:** Claude and Codex sessions both commit here, and

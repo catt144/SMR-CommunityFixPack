@@ -31,7 +31,43 @@ completed tests move whole to
 
 ### 2026-09-11 — 145: FR-1 cache probe v2 covers all 18 RAYS records; test normal loading first.
 
-> **Current step - TAKEABLE WHEN you are at the laptop on NVIDIA 580, PRIME On-Demand.**
+> ✅ **RESULT: you ran C2, Q2 and R2 on 2026-09-11, and the evidence is read**
+> ([findings §11](agent/reports/FR1_LINUX_FINDINGS_2026-09-10.md#11--2026-09-11--cache-probe-v2-bench-ran-owner-laptop-on-580-q2-loads-worlds-with-the-rays-no-op-r2-reverses-it)).
+> - **C2 (control)** crashed during the boot slides on a known reflections shader. The control is valid.
+> - **Q2 (the swap, no forced reload) WORKED.** New Game loaded on driver 580, and both saves loaded after it in the same session.
+>   The shader dump shows the game built our empty stand-in once for each of the 18 ray-queue reflection shaders, then built the 36
+>   other reflection shaders with no crash. No original ray-queue shader was built. F2 was rightly skipped.
+> - **R2 (no marker)** crashed on New Game on the original shader, 2 ms after building it. Take the swap away and the crash comes back.
+> - **Not shown yet:** that the picture matches Reflections Off (nobody compared); what happens if Reflections is turned **On** with
+>   the stand-in installed; a fresh launch going straight into a save (both saves loaded after a New Game, when the shaders were
+>   already built).
+> - **One launch I can't place:** a `control` launch at 01:47:24 whose game log stops at the startup banner, which is how a crash
+>   leaves it. The next launch overwrote its Proton log. Do you remember it, e.g. a first try that died before the menu?
+>
+> **Decision now live:** should the stand-in ship **(a)** in the fix pack, **(b)** as a separate opt-in mod, or **(c)** as player
+> instructions? **Recommendation: (b).** It is a driver workaround, not a repair to the game's Lua (`FIX_POLICY` §1). This bench
+> does not approve shipping anything. For (a) or (b), Astra gets a round-3 brief first: Windows/AMD safety, Reflections On,
+> packed-mod delivery, and whether the mod can switch itself off where it isn't needed.
+> **Can it be released? Not yet.** The bench proves the swap works; it does not prove a mod is safe to hand out. No hidden errors
+> showed up: the Proton log has no graphics errors and the game log has no Lua errors (findings §11). Risks, biggest first:
+> 1. **Delivery is untested.** Workshop/PDX mods arrive packed; the bench ran unpacked. A packed mod might not mount the folder
+>    at all, and would then silently do nothing.
+> 2. **It can't tell who needs it.** No mod can reliably detect Linux/Proton (EF-089). On Windows, or with Reflections On, the
+>    ray-queue reflections become an empty shader: likely missing reflections, probably not a crash (inferred, not tested). AMD cards
+>    already use the other reflections path (inferred).
+> 3. **Reflections On is untested**, even on Linux 580.
+> 4. **It is tied to this game build.** A patch that changes the shader cache makes it stale. It must refuse to run on a new build
+>    and be rebuilt after each patch.
+> 5. **One machine, about 6 minutes.** One 3070 laptop on 580.173.02, not tested on a GTX 900/1000 card (the players who can't upgrade),
+>    not in a long session, and not on a cold launch into a save.
+> 6. **It relies on an engine helper (`DlcMountFolder`) outside the normal mod sandbox**, and a game patch could close that route.
+> **Fastest safe path, if you want one:** Astra round 3 builds a packed opt-in mod that refuses to run off this build or off NVIDIA.
+> Then one Linux bench (packed, cold launch into a save, longer play) and a Windows check on your rig with Reflections On. Only then a
+> clearly labelled "Linux + NVIDIA 580, keep Reflections Off" opt-in mod.
+> **Dev reply:** follow-up post 2 (the swap removes the crash, removing the swap brings it back) is drafted in
+> `agent/reports/FR1_DEV_REPLY_2026-09-10.md`. Did you post follow-up 1?
+
+> **These steps RAN 2026-09-11 (result above); kept as the record. Originally: TAKEABLE WHEN you are at the laptop on NVIDIA 580, PRIME On-Demand.**
 > **MEASURED:** your valid C1/N1 bench proved that the game consumed our replacement.
 > V1 then crashed on a debug RAYS program I had missed. V2 covers all 18 indexed
 > RAYS records; all 36 FULL records remain original. It passes 36 shader/root

@@ -25,10 +25,10 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   A3 (F118) · A10 · A5 c2 · A9 c4/c5 · F117's station recipe · the first `RunAll()` on the 94-probe kit (re-stamps
   `WORKFLOW.md:407`, VOID since 09-09). ⛔ Kit verdicts are PREDICTIONS until then; still FAIL/ERROR by name:
   `C47OpenFarmSeedBufferShape` (Herbs 100→50), retired `LanderCargoRatchet`/`DroneUnreachableForever`/`AutoExportPriority`.
-- ⏭ NEXT (owner 09-11): FR-1 cache v2 bench RAN, worlds LOADED (owner); read the evidence FIRST —
-  `prompts/HANDOFF_FR1_CACHE_V2_2026-09-11.md`; then desk `prompts/DLC_DEEP_CHECK.md` (shape: `HUNT_AUDIT.md` §8).
-  FR-1 options DONE: `reports/FR1_OPTIONS_2026-09-10.md`; shader/cache proof EF-088, mod timing EF-089; next bench + scope ck145.
-  Attribution: same-thread log evidence (§7, §9 x4), switch legs failed; cache overlay v2 LOADS (owner, unread); dev reply POSTED. Owner: ck144 (v7 checks + Steam sounds thread).
+- ⏭ NEXT: FR-1 cache v2 READ 09-11 (FINDINGS §11): Q2's no-reload overlay LOADS worlds on 580 (no-op 18×, 36 FULL, 0 faults);
+  R2 reverses it; C2 valid. Owner: scope ck145 (rec opt-in mod) → Astra round 3; dev POST 2 drafted. Open asks:
+  `prompts/HANDOFF_FR1_CACHE_V2_2026-09-11.md` §2/§5; then desk `prompts/DLC_DEEP_CHECK.md` (shape: `HUNT_AUDIT.md` §8).
+  FR-1 options `reports/FR1_OPTIONS_2026-09-10.md`; EF-088 cache, EF-089 mod timing; dev reply POSTED. Owner: ck144 (v7 checks + sounds thread).
   vanillahunt CLOSED 09-10 (99): instruments SOUND WITH STATED GAPS — 1,281 table-level hunks in 368 rowed hand files listed by
   no instrument (§1.4); 12 P2s re-derived: 6 hold, 5 weakened, **C80 REFUTED**; **C82** filed by the audit (Incident reactors stay
   off); every P2 is a gain/cosmetic except C82/C66/C63; ck142 = hotfix-3 list (rec none). FR-1/2/3 OPEN; FR-1 next bench is ck145.
