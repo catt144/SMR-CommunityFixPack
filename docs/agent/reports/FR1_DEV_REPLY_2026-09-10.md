@@ -4,9 +4,9 @@
 `FR1_LINUX_FINDINGS_2026-09-10.md` (§1, §6, §7) and `FR1_OPTIONS_2026-09-10.md` (§1, R9).
 Every line is MEASURED except where it says otherwise. Plain text, safe in a Steam post.
 Files offered: `C:\Dev\SMR-FR1-DevPackage.zip` (redacted, checksummed; outside git).
-⚠️ One open check: the shader-dump run was at Reflections Low OR Off (owner: "my test
-attempted reflections low and off"), not confirmed which — a single Off-only dump run makes
-"built while SSR is disabled" measured. The post says so.
+✅ The open check was ANSWERED on 09-10 late by the owner's Off-only legs (FINDINGS §9): SSR read 0 before the load, and the
+crash was on 38121 on the same thread. The post below was updated to match and adds the second crashing RAYS variant. If the
+owner already posted the earlier text, this becomes a follow-up post.
 
 ---
 
@@ -40,7 +40,9 @@ THE SHADER
 38121decbc3eee12 is Shaders/Reflections.fx compiled with REFLECT_RAYS (the 8x8 tiled SSR ray-march that writes the TileCounter buffer). Proof: recompiling the shipped Reflections.fx with the game's own dxcompiler.dll (cs_6_6, REFLECT_RAYS, HLSL 2021, row-major matrices) gives byte-identical DXIL, PSV0 and HASH chunks. The same bytecode is also in ShaderCached3d12.fpk (entry 14281071190732923386).
 
 WHY 1.1.0 SEEMS TO HAVE CHANGED THINGS
-This looks like the NVIDIA compiler bug from vkd3d-proton issue #2701 (November 2025, driver 580). Back then, on 1.0.7, it only crashed with Reflections above Low, and pyroveil added a workaround for that shader's old hash (b73d41d886185985). On 1.1.0 the shader's hash has changed, so that workaround no longer matches, and the crash now happens with Reflections Low or Off too. That suggests 1.1.0 creates the REFLECT_RAYS pipeline at world load whether or not reflections are enabled. One caveat: our shader-dump run was at Low or Off, and I haven't confirmed which. I can repeat it at Off specifically if that helps.
+This looks like the NVIDIA compiler bug from vkd3d-proton issue #2701 (November 2025, driver 580). Back then, on 1.0.7, it only crashed with Reflections above Low, and pyroveil added a workaround for that shader's old hash (b73d41d886185985). On 1.1.0 the shader's hash has changed, so that workaround no longer matches, and the crash now happens with Reflections Low or Off too. 1.1.0 creates the REFLECT_RAYS pipeline at world load even with reflections disabled. In a repeat run with Reflections Off, the game's own setting read hr.EnableScreenSpaceReflections = 0 just before the world load, and the crash was on the same shader, on the same thread, 1 ms after it was dumped.
+
+It is also not just one shader. Forcing a shader-cache reload (hr.ForceShaderCacheReload = true) makes the game rebuild its reflection pipelines during startup, and driver 580 then crashes the same way on a second REFLECT_RAYS variant (USE_HYPERBOLIC_DEPTH + REFLECT_IMPORTANCE_SAMPLE, hash 271ec9634b1ab87b), before the main menu appears. So the ray-queue kernel as a family seems to be what trips NVIDIA's compiler.
 
 WHY DRIVER 595 ISN'T A FIX FOR EVERYONE
 NVIDIA's 580 branch is the last one for Maxwell, Pascal and Volta GPUs (GTX 900 and 1000 series, Titan V): https://nvidia.custhelp.com/app/answers/detail/a_id/3142. Those players can never move to 595, and most affected players in this thread say they can't.
@@ -51,7 +53,7 @@ POSSIBLE FIXES ON YOUR SIDE (suggestions only; you know the engine)
 3. Expose a startup setting that skips it.
 
 WHAT WE HAVEN'T SHOWN YET
-We haven't yet run the test that swaps out just this one shader and makes the crash go away; that's our next step. We also can't see the engine's native pipeline-creation code, so "built at world load even with reflections off" is our reading of the evidence, not something we have seen in the code.
+We haven't yet run the test that swaps out just this one shader and makes the crash go away. We also can't see the engine's native pipeline-creation code: "built at world load even with reflections off" is what the runtime logs show, not something we have read in the code. We also tried the hidden SSR settings from a mod (hr.SSRFullTile8x8 = 1, and alongside a forced cache reload). Neither changed which reflections shader the game built, so there doesn't seem to be a setting a mod can use to avoid it.
 
 FILES
 I have the shader bytecode (.dxil and .spv), the Proton crash excerpt, the shader-dump timeline, driver and system info, and the byte-identity receipt, all with checksums. Happy to share them however suits you.

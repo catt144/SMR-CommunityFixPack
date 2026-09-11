@@ -180,6 +180,38 @@ inventory reads it; an M1 leg is worth running ONLY if it reads `true` before Lo
   game-faithful ModLog mocks). ck145 **Leg D** = `SSRFullTile8x8:1,ForceShaderCacheReload:1`. The reload alone is now Leg E, a
   control run ONLY if D loads, to tell which half did it.
 
+## 9 · 2026-09-10 late night — bench legs A/B/D/E RAN (owner; laptop on 580, probe v3, Reflections Off, New Game)
+
+Evidence (outside git): **`C:\Dev\fr1-mm-complete\fr1-mm\`**: per-leg dumps `A B D E`, `steam-{A,B,D,E}.log`, and the owner's extras
+in `D/` + `E/` (game logs, key-line extracts, `D-test-config.txt`). C was not run because no leg loaded. Readers: `variant-map/classify_dump.py`,
+plus a faulting-thread script (the last `vkd3d_shader_dump_blob` on the thread that faults).
+
+| leg | marker | probe witness (Proton log) | Reflections program built | faulting thread, last dump | result |
+|---|---|---|---|---|---|
+| A | none | inventory; `render device: NVIDIA-G0 4318/9437` | `38121decbc3eee12` RAYS default | 013c: 38121 `.spv`, 1 ms before | CTD at world load |
+| B | `SSRFullTile8x8:1` | mod-load `CHANGED 0 -> 1`; ChangingMap + before-LoadBinAssets `NOOP` (holds 1) | `38121decbc3eee12` | 013c: 38121, 1 ms | CTD at world load |
+| D | `SSRFullTile8x8:1,ForceShaderCacheReload:1` | both `CHANGED` at mod-load | `271ec9634b1ab87b` RAYS hyp+imp (cache entry `12556516658419309610`) | 013c: 271ec, 1 ms | **CTD during boot slides, before the menu** |
+| E | `ForceShaderCacheReload:1` | `CHANGED false -> true` | `271ec9634b1ab87b` | 0140: 271ec, 1 ms | CTD during boot, same as D |
+
+- **MEASURED — "built while SSR is Off":** A's before-LoadBinAssets inventory reads `hr.EnableScreenSpaceReflections = 0`, and the fault
+  is on 38121 on the same thread. This closes §7's ⚠️ and the dev reply's open check.
+- **REFUTED (condition sampled) — `SSRFullTile8x8` as a mod-reachable selector:** B held 1 through before-LoadBinAssets and still built 38121.
+  D set it BEFORE a forced rebuild, and the rebuild still chose a RAYS program. Neither dump holds a FULL program. §8's INFERRED bet is withdrawn.
+- **MEASURED — the live `hr` SSR values do not pick this pipeline's defines:** A's baseline has `hr.SSRTraceHiZ = 1`, yet 38121 is the build
+  WITHOUT `TRACE_HIZ`, so these values are either read only at init or are not the selecting vars. The `SSRTraceHiZ` / `SSRForceHyperbolicDepth`
+  legs are dropped: the hyperbolic RAYS program (271ec) is itself measured crashing. `hr.SSRDenoiserMode` reads string `""`.
+- **MEASURED — NVVM fails on the RAYS KERNEL FAMILY, not one hash:** 38121 and 271ec both fault at `glvkspirv +0x157c88` (`_nv014nvvm +0x9c`).
+  ⇒ a pyroveil rule or override must cover every shipped RAYS program (6 distinct; cache entries in §8 / `variant-map`).
+- **MEASURED — `ForceShaderCacheReload = true` set at mod load is consumed AT ONCE:** the engine re-creates reflections pipelines from the
+  cache during boot (fault 67 ms after the SET in D, 1.07 s in E), NOT "on next map/savegame load" as the comment at `Dlc.lua:412`
+  says, and that boot build selects the hyp+imp variant. ⇒ the "blank push" makes things worse (menu unreachable), but it proves that
+  a cache change takes effect at boot, which is the lever the §8(b) fake-DLC route needs.
+- **Routes left.** Mod-side: §8(b), a fake-DLC cache carrying replacement entries for the 6 RAYS programs (e.g., a no-op kernel with the same
+  root signature, for players who keep Reflections Off). Unknowns: the cache record format (entry `14281071190732923386` is 25,133 B with
+  the DXBC at 8,549, plus `index.bin` / `index.txt`); whether a partial pack overlays seethrough; whether the RAYS pass dispatches when Off; and the
+  Windows/AMD effect if installed. Launch options (L2 `VKD3D_CONFIG=force_static_cbv`, L1 `PROTON_DISABLE_NVAPI=1`) and pyroveil (every RAYS
+  hash) are still NEVER RUN. Routed: ck145.
+
 **M2 grounding — MEASURED desk.** The 1.1.0 `Reflections.fx` variants were compiled with the game's `dxcompiler.dll` and the argv that reproduced
 `38121decbc3eee12` (§6), plus `TRACE_HIZ` / `USE_HYPERBOLIC_DEPTH` / `REFLECT_IMPORTANCE_SAMPLE` / `REFLECT_TILE`. The DXIL payloads
 were then searched across all 6,455 decoded `ShaderCached3d12.fpk` entries (the 2 with no DXBC are `index.bin` / `index.txt`).

@@ -127,7 +127,34 @@ completed tests move whole to
 > reload) are ready as one-line legs, at lower odds because they keep the complicated shader. After
 > them come your fake-DLC shader-cache route, the launch-option routes and pyroveil.
 >
-> **Still yours to decide, and it only matters if B works:** does the workaround ship in this pack,
+> ✅ **2026-09-10 late — you ran legs A, B, D and E. None of the switches fixes it, but three
+> things are now solid** (details: `agent/reports/FR1_LINUX_FINDINGS_2026-09-10.md` §9; your files
+> stay at `C:\Dev\fr1-mm-complete`; leg C wasn't needed because nothing loaded):
+> - **"The game builds the bad shader even with reflections Off" is now proven.** The probe read
+>   reflections as off right before the world loaded, and the crash was on that shader. I've updated
+>   the developer reply draft so it no longer says "not yet confirmed".
+> - **The AMD switch doesn't work from a mod.** It was set early and held, and even with your reload
+>   after it, the game still built the same kind of shader. The other hidden reflection switches look
+>   just as disconnected (one was already "on" with no effect), so I'm not asking you to run them.
+> - **Your reload experiment was the most useful leg.** It proved that a forced reload makes the game
+>   rebuild its reflection shaders from the cache immediately, during startup. It also crashed on a
+>   **second** version of the same shader. So driver 580 chokes on that whole shader family, not one file.
+>
+> **What's left — your call:**
+> 1. **Mod-side, desk work for me (no time from you):** your fake-DLC idea, made concrete. A mod hands
+>    the game its own small shader cache in which the crashing reflection shaders are swapped for a
+>    harmless stand-in, so reflections would stay off for those players. Your reload leg shows a cache swap
+>    takes effect at startup. I first have to learn the cache's file format, and I'll report whether it's
+>    doable before building anything.
+> 2. **Two quick launch-option legs on the laptop (one line each, nothing to install):**
+>    `VKD3D_CONFIG=force_static_cbv` and `PROTON_DISABLE_NVAPI=1`. These aren't mods, but they're easy
+>    for players if one works.
+> 3. **pyroveil** (the tool that fixed the 1.0.7 version of this bug), set up for the new shaders.
+>    It needs a small build on the laptop.
+>
+> **Recommendation:** start 1 now (it costs you nothing), and run 2 whenever you're next at the laptop.
+>
+> **Still yours to decide, and it only matters once something works:** does the workaround ship in this pack,
 > in a separate opt-in mod, or as player instructions? (Recommendation above: a separate opt-in mod.)
 
 ### ✅ 2026-09-10 — v7 IS LIVE on both stores (your word). Nothing to decide; three things to tell me when convenient.
