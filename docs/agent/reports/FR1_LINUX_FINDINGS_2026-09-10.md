@@ -155,6 +155,14 @@ MEASURED: `AssetsRevision` = 33006 (printed at `G/CommonLua/Core/mount.lua:240`;
 lines 51/57/59) and both DLCs (norman, thomas) = 33006, same in the dump run's Proton log. ⇒ the flag is never set by Lua,
 at boot or via `ModsLoadAssets` (`G/CommonLua/Modding/Mod.lua:2239`, same `find()`). A native default is UNSAMPLED: probe v2's
 inventory reads it; an M1 leg is worth running ONLY if it reads `true` before LoadBinAssets.
+- **Owner challenge, answered (MEASURED):** "two DLCs, different release dates, same revision?" The revision is a BUILD STAMP,
+  not a release date. Retail DLCs read their own `revisions.lua` (`Dlc.lua:198`; `:196` is developer-only), and in both
+  decoded packs it is `return 403908, 33006`. Both `DLC/norman.fpk` (= **Feeding the Future**, steam_dlc_id 3889430) and
+  `DLC/thomas.fpk` (= **Interplanetary Codex**, 3889420) were written 2026-09-08 23:24, the same minute as
+  `Packs/ShaderCached3d12.fpk`: 1.1.0 rebuilt both packs. **Second, independent kill:** neither pack carries a shader cache
+  at all. `tools/flpk_extract.py` decoded both (2,493 + 66 files) and found 0 names containing "shader" and 0 nested packs. Control:
+  `revisions.lua` was found in each. `find()` needs BOTH the newer revision AND `ShaderCache<api>.fpk` in the DLC, so M1 stays
+  dead even after a future DLC rebuild bumps the revision, unless that DLC also ships a shader cache.
 
 **M2 grounding — MEASURED desk.** The 1.1.0 `Reflections.fx` variants were compiled with the game's `dxcompiler.dll` and the argv that reproduced
 `38121decbc3eee12` (§6), plus `TRACE_HIZ` / `USE_HYPERBOLIC_DEPTH` / `REFLECT_IMPORTANCE_SAMPLE` / `REFLECT_TILE`. The DXIL payloads
