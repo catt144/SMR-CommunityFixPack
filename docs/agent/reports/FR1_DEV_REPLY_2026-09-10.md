@@ -95,7 +95,7 @@ We're next testing a replacement for all 18 REFLECT_RAYS cache entries (the 12 d
 
 ---
 
-## FOLLOW-UP POST 2 — draft 2026-09-11 (from FINDINGS §11; post as a NEW reply, after POST 1)
+## FOLLOW-UP POST 2 — draft 2026-09-11 (from FINDINGS §11) — ⛔ SUPERSEDED by "CURRENT DEV NOTE" below unless already posted
 
 Every line is MEASURED unless it says "suggestions" / "if we read it right". POST 1 is up (owner, 09-11), so this posts as-is.
 Owner 09-11: yes, a later post will mention the temporary workaround mod once it is live. Draft that as POST 3 when the listing exists.
@@ -125,7 +125,7 @@ What we haven't shown: that the picture is identical to Reflections Off (we didn
 
 ---
 
-## FOLLOW-UP POST 3 — draft 2026-09-11 (the temporary mod is LIVE; owner said yes to mentioning it)
+## FOLLOW-UP POST 3 — draft 2026-09-11 (the temporary mod is LIVE) — ⛔ SUPERSEDED by "CURRENT DEV NOTE" below
 
 ⚠️ If POST 2 is not up yet, post it first. POST 2's last paragraph says "The test mod is a bench tool and isn't published". That is
 still true of the bench probe, but it reads oddly next to this, so either delete that sentence from POST 2 or post both together.
@@ -144,3 +144,70 @@ It uses the same approach as the test above: at startup it layers the empty comp
 On our test laptop it loads New Game and existing saves on driver 580. We tested one machine only, and the page says so.
 
 We'd much rather see this fixed properly, and we'll retire the mod the moment it is.
+
+---
+
+## ⭐ CURRENT DEV NOTE — ONE POST, 2026-09-11 late (replaces POSTS 2 + 3)
+
+**Use this instead of POSTS 2 and 3**, as a new reply after POST 1 (which is up). ⚠️ **If you already posted POST 2**, post only
+the part from "A TEMPORARY WORKAROUND" down. Every line is MEASURED, published, or the owner's own observation ("including
+straight from a fresh launch" and the Low/Ultra runs are the owner's). Plain text, safe in a Steam post.
+
+---
+
+UPDATE 2 — replacing the REFLECT_RAYS shaders stops the crash, and a temporary workaround is out
+
+Following on from the partial swap test above: we extended it to all 18 REFLECT_RAYS entries in the shader cache (the 6 regular variants and the 12 REFLECTION_DEBUG ones), each replaced by the same empty compute shader with the original root signature. The 36 REFLECT_FULL entries and every other shader were left untouched. Same laptop, NVIDIA 580.173.02. This time nothing forced a shader-cache reload; the replacement folder was simply layered over the cache at startup.
+
+- New Game loaded and ran normally. 1.1.0 saves loaded too, including straight from a fresh launch.
+- Right after "*** Reloading assets from folder 'BinAssets/'" (exactly where the crash happens), vkd3d dumped our empty shader 18 times on the loading thread, once per replaced entry. None of the original REFLECT_RAYS shaders was built.
+- The same thread then built all 36 REFLECT_FULL compute shaders. NVIDIA 580 compiled every one of them.
+- No access violation anywhere in the Proton log. With Reflections set to Low, High or Ultra the game also loaded, and the Proton log from the High run is just as clean.
+
+Then the reverse: with the mod installed but not switched on, New Game crashed exactly as before, on 38121decbc3eee12 at libnvidia-glvkspirv.so.580.173.02 +0x157c88, on the same thread, 2 ms after the dump. A control run loading the original shaders through the mod crashed during startup as before (271ec9634b1ab87b).
+
+So on driver 580 it is the REFLECT_RAYS shaders: take them out of the cache and the world loads; put them back and it crashes.
+
+One more observation: with Reflections Off, 1.1.0 built all 54 cached Reflections.fx variants (the debug ones included) at the first world load, and none again at later loads in the same session.
+
+A TEMPORARY WORKAROUND
+Since most affected players can't move to driver 595, we've published this as a clearly marked temporary mod for Linux players on driver 580:
+Steam Workshop: https://steamcommunity.com/sharedfiles/filedetails/?id=3799500849
+Paradox Mods: https://mods.paradoxplaza.com/mods/158711/Any
+
+It layers the empty shader over the 18 REFLECT_RAYS cache entries at startup. It doesn't modify any game files or write anything into saves. It only acts on NVIDIA with D3D12 on build 1.1.0.403908, and it switches itself off after any game update, so it won't linger once you ship a fix. The page asks players to keep Reflections Off and to remove it as soon as a fix is out. We'd much rather see this fixed properly, and we'll retire the mod the moment it is.
+
+SUGGESTIONS (you know the engine better than we do)
+- Not creating the REFLECT_RAYS pipelines while reflections are Off would fix this for NVIDIA 580 players.
+- All 36 REFLECT_FULL variants compile on 580. If we read the Lua right, the game already uses the full-tile path on AMD (hr.SSRFullTile8x8), so that path looks like a workable option for NVIDIA on Linux when reflections are on.
+
+WHAT WE HAVEN'T SHOWN
+That the picture with the empty shader matches Reflections Off (we didn't compare), or how reflections look with Reflections on (not properly tested, and very likely wrong). And it's one test machine.
+
+Happy to share the mod, the cache records and the logs.
+
+---
+
+## 📋 PLAYER REPLY — for players asking for help in the thread (2026-09-11)
+
+Plain text, safe in a Steam discussion. It can be reused as-is in any thread. Every claim matches the store page.
+
+---
+
+If you're on Linux with an NVIDIA card on driver 580, and the game crashes to the desktop when you start a New Game or load a save (1.1.0), there's now a temporary workaround mod while we wait for Paradox's fix:
+
+Steam Workshop: https://steamcommunity.com/sharedfiles/filedetails/?id=3799500849
+Paradox Mods: https://mods.paradoxplaza.com/mods/158711/Any
+
+How to use it:
+1. Subscribe to the mod.
+2. Start the game. On the main menu, open MOD MANAGER and enable "TEMPORARY - Linux NVIDIA 580 Crash Workaround".
+3. Recommended: Options, then Video, set Reflections to Off.
+4. Quit the game completely, then start it again.
+5. Start a New Game or load your save.
+
+What it does: driver 580's shader compiler crashes on the game's screen-space reflection shaders, which 1.1.0 prepares even with Reflections Off. The mod swaps those shaders for an empty stand-in, so the world loads. Reflections will very likely look wrong if you turn them on, so keep them Off.
+
+Please remove it as soon as Paradox releases a fix (it also switches itself off after any game update). It doesn't change your saves, and you don't need it on Windows, Steam Deck, AMD or Intel graphics, or NVIDIA driver 595.
+
+It's been tested on one laptop (RTX 3070, Linux Mint 22.2, driver 580.173.02, Proton Hotfix), so it may not work on every setup. Whether it helps or not, please reply with your graphics card, driver version, Linux distribution and Proton version. That helps us, and it helps Paradox track the bug down.

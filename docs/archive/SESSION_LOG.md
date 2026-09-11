@@ -8,6 +8,16 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-11 - FR-1 dev note + player reply (smr-bugfixpack-5d)
+
+tags: FR-1 dev-reply player-reply
+
+Owner asked for an updated dev note and a separate player-help reply. `FR1_DEV_REPLY_2026-09-10.md` gains "CURRENT DEV NOTE" (one
+post after POST 1: the v2 full swap, the R2 reversal, the P1 packed run with Reflections High, the 54-variant first-load build, the
+live mod with both links, suggestions, and what isn't shown; it supersedes POSTS 2 and 3 unless POST 2 is already up) and "PLAYER
+REPLY" (steps, Reflections Off, remove on fix, one machine tested, report your setup). Every claim is traced to FINDINGS §11–§12 or
+the store page.
+
 ## 2026-09-11 - FR-1 temp mod LIVE (smr-bugfixpack-5d): Paradox 158711, Steam 3799500849
 
 tags: FR-1 temp-mod published

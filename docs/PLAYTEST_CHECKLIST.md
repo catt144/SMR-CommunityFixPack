@@ -42,7 +42,8 @@ completed tests move whole to
 > (<https://steamcommunity.com/sharedfiles/filedetails/?id=3799500849>). Steam's public API reads it as **public**, titled right,
 > tagged Other; its description filled itself in as plain text, so paste the Steam BBCode block to style it. The upload wrote the
 > listing numbers into the mod, and my source copy is re-synced from your Mods folder (that copy is now the master).
-> A short dev post announcing it (with both links) is drafted in `agent/reports/FR1_DEV_REPLY_2026-09-10.md`.
+> Ready to paste, in `agent/reports/FR1_DEV_REPLY_2026-09-10.md`: **"CURRENT DEV NOTE"** (one post after follow-up 1, covering
+> the full result plus the mod) and **"PLAYER REPLY"** (for players asking for help in the thread).
 >
 > ✅ **Your P1 logs are read** (`C:\Dev\Success\fr1-packed-proof.zip`: a New Game with Reflections High). They show the packed
 > mod loaded (`packed from appdata`) and switched on (`ACTIVE`, plus the Reflections-on warning). The game built our stand-in for
