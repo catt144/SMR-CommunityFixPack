@@ -109,6 +109,11 @@ completed tests move whole to
 > - **Leg C — only if B loaded (proves the switch made the difference):**
 >   `PROTON_LOG=1 VKD3D_SHADER_DUMP_PATH=/home/ladmin/fr1-mm/C %command%`. Reflections back to Off.
 >   Expected: the crash returns.
+> - **Leg D — your "blank push" (run it whatever B did):** `mkdir -p ~/fr1-mm/D`, then
+>   `PROTON_LOG=1 VKD3D_SHADER_DUMP_PATH=/home/ladmin/fr1-mm/D %command% -fr1-options=ForceShaderCacheReload:1`
+>   (Reflections Off, New Game). This forces the game's shader-cache reload with nothing new to load.
+>   My expectation is low odds, because the reload re-reads the same cache and the crashing shader is inside
+>   it. But a forced reload may change *how* the game builds its pipelines, and the dump will show whether it did.
 >
 > Then `cd ~ && zip -r fr1-mm.zip fr1-mm`, bring the zip to Windows as before, and put your laptop
 > back how you had it (clear Launch Options). Tell me in one line: **A crashed? B loaded? C crashed?**

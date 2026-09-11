@@ -163,6 +163,16 @@ inventory reads it; an M1 leg is worth running ONLY if it reads `true` before Lo
   at all. `tools/flpk_extract.py` decoded both (2,493 + 66 files) and found 0 names containing "shader" and 0 nested packs. Control:
   `revisions.lua` was found in each. `find()` needs BOTH the newer revision AND `ShaderCache<api>.fpk` in the DLC, so M1 stays
   dead even after a future DLC rebuild bumps the revision, unless that DLC also ships a shader cache.
+- **Owner's two follow-on ideas, homed (09-10 night):**
+  - **(a) "Blank push":** force the reload with nothing new behind it, as probe v2 marker
+    `ForceShaderCacheReload:1` (ck145 Leg D). INFERRED low odds: the base cache holds `38121decbc3eee12` verbatim (§6),
+    so the same program reaches NVVM. Kept because the owner's lead is that a forced reload may change pipeline-creation
+    behaviour, which the leg's dump can show. Falsifier: `CHANGED false -> true` at before-LoadBinAssets + the same 38121 crash.
+  - **(b) Fake-DLC cache (SOURCE, NEVER RUN):** `DlcReloadShaders` is NOT in `ModEnvBlacklist`, but `MountPack` / `MountFolder` are
+    (`Mod.lua:1366-1367`). So a mod could call `DlcReloadShaders{ {folder = <mod path>, assets_revision = <above 33006>} }` and have
+    the game's own env mount a mod-shipped `ShaderCached3d12.fpk` (`Dlc.lua:406-414`). This is M4's delivery route, better than
+    `DlcMountFolder`. Cost: a cache-pack writer in the engine's format, an NVVM-safe replacement for the RAYS entry, packed-mod path
+    readability, and Windows/AMD render checks. Scope it only if M2 Leg B fails.
 
 **M2 grounding — MEASURED desk.** The 1.1.0 `Reflections.fx` variants were compiled with the game's `dxcompiler.dll` and the argv that reproduced
 `38121decbc3eee12` (§6), plus `TRACE_HIZ` / `USE_HYPERBOLIC_DEPTH` / `REFLECT_IMPORTANCE_SAMPLE` / `REFLECT_TILE`. The DXIL payloads
