@@ -384,5 +384,5 @@ No fix was edited, no release file was touched, and no developer was messaged.
 Doccheck result: GREEN. Required owner-facing warning (verbatim):
 
 ```text
-warn STATE.md is 12474 bytes, warn threshold is 12288 ? copy this line VERBATIM into the owner report; the owner fires agent/prompts/perma/STATE_EVICTION.md
+warn STATE.md is 12474 bytes, warn threshold is 12288 — copy this line VERBATIM into the owner report; the owner fires agent/prompts/perma/STATE_EVICTION.md
 ```
