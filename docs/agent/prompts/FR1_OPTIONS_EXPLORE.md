@@ -51,6 +51,16 @@ run the Linux game; write each test as a short recipe with its expected result a
       `RenderFeaturesParams.lua`, `Lightmodel.lua`; a runtime `hr` dump on the owner's Windows rig via
       the Test Kit console is one cheap owner ask). A mod can act before the map (`Msg("ChangingMap")`,
       `map.lua:482`; mod-load time).
+      ⭐ **Owner's modding experience (2026-09-10): "turning it off in a menu and turning something off in an
+      ini are very different — menus don't play by the same rules."** Take it seriously: hunt settings the
+      menu never touches. Known so far: the startup config already sets `hr.EnableScreenSpaceReflections = 0`
+      at FirstLoad (`Lua/Config/render.lua:59-67`), before options apply, and saved options live in AppData
+      `LocalStorage.lua` (an `SSR = "…"` field) — so in the owner's Reflections-Off run that ONE flag was 0 from
+      startup and the shader still built ⇒ look for OTHER variables: SSR tuning (`SSR*` hr names in
+      `options.lua:518-524`), reflection method/quality/denoiser switches, video-preset fields
+      (`Lua/ProjectOptions.lua`, `render.lua:1-57` autodetect: RTX 3070 → "High"), render-feature toggles, and
+      whether the engine accepts engine settings from the command line (Lua reads `GetAppCmdLine()` only for
+      named flags — an engine-native parser is unverified).
    b. **Ship a modified shader source from a mod:** shaders mount "seethrough" (`mount.lua:47-51`) and
       compile at runtime from source; `ReloadShaders()` / `DlcReloadShaders` (`Dlc.lua:406`) exist. Can
       mod Lua mount a folder over `Shaders/` (sandbox permitting) with a `Reflections.fx` whose
