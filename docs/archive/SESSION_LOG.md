@@ -8,6 +8,30 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-11 - Six field leads triaged; F119 filed (Wildfire cure-rocket soft-lock), C85 + C86 candidates (smr-bugfixpack-0d)
+
+tags: field-reports triage F119 C85 C86 wildfire rockets storybits exploration lakes meteors
+
+The session was started with the orchestrator handoff (orientation only). The owner then relayed six player reports (Steam + Reddit
+screenshots) and asked for them to be investigated, meteors surface-only, before stepping away for hours.
+- **Method:** seven read-only investigators, then every load-bearing claim re-read against both trees here. Record:
+  `reports/FIELD_LEADS_2026-09-11.md`.
+- **F119 (P1, filed, source-read):** a landed `Trade` rocket never re-sizes its fuel request on a fuel-cost change (the only
+  re-size is player-rocket-gated, `UniversalRocket.lua:1916-1920`, both trees). Advanced Martian Engines −20 matches the
+  reported "20 fuel to unload". New in 1.1.0: the Fuel Conservation law, and every Ministry of Technology working flip under it
+  (`FactionsBuildings.lua:383-388`). The Wildfire loop waits with no timeout. Fix proposed, not built → checklist 146.
+- **C85 (cand, P2):** "Clogged after a Dust Storm" is the one-time story bit `BuildingClogged`; its "after the storm" follow-up
+  waits for a later storm end, one follow-up per end (`_StoryBits.lua:199-216`), no fallback. Two hypotheses, neither pinned.
+- **C86 (cand, P3):** the Advanced Orbital Probe without Adapted Probes downgrades a deep-scanned neighbour to "scanned"
+  (`Exploration.lua:230` guard only rejects equal status). The "deep scan finds nothing" report itself is the Adapted Probes rule.
+- **Not defects:** Building Codes (prefab exemption is deliberate, a gain); meteors (random passable point, unchanged, pack has
+  no meteor module); lakes (identical check on 1.0.7; decode shows every variant ships a prefab and stock templates sit far above
+  the deepest lake; the pattern points to low ground on that player's generated map — optional owner check in 147).
+- Checklist 146 + 147; reply drafts in `FIELD_REPORT_REPLIES.md`. Lane agreed with `smr-bugfixpack-24` (fixtoggles chain; told
+  F119 would want a Beta label if built).
+
+---
+
 ## 2026-09-11 - Prompt reorg + Linux dispatch + handoff (smr-bugfixpack-5d); SESSION LOOKBACK
 
 tags: prompts reorg handoff lookback FR-1

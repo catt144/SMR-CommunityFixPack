@@ -265,6 +265,36 @@ posted text said "still checking"; no version number needed.
 ⚠️ Desk-only (neither was ear-tested) — the post says nothing it would need an ear for. ⛔ Do not
 name the extractor's skin: which skin uses `ConcreteExtractorCP3Dome` was NOT route-checked.
 
+## Field reports triaged 2026-09-11 — drafts (checklist 146 / 147)
+
+Source: `reports/FIELD_LEADS_2026-09-11.md`. ⛔ All desk reads — nothing here was witnessed in play. No version number,
+no fix promise; "filed" is the strongest word. Check each thread first; skip a draft if it is already answered.
+
+**Wildfire cure rocket stuck (Reddit, r/SurvivingMars) — F119**
+> This looks like a real bug in the game, and the Advanced Martian Engines hunch is close. The cargo rocket Earth sends works out how much fuel it needs once, when it lands. If the fuel cost changes while it's sitting on the pad (finishing Advanced Martian Engines cuts it by 20, which is exactly your "20 fuel to unload"), the game updates your own rockets but not Earth's, so the rocket ends up holding fuel it no longer needs, and nothing is set up to take it off. The Fuel Conservation law can do the same. It only bites while a cure rocket is waiting on the pad. If you have a save from before that rocket landed, loading it and holding off on Advanced Martian Engines (and on changing Fuel Conservation) until the rocket has left should avoid it. We've filed it for the Relaunched Fix Pack.
+
+⛔ The save-reload advice is INFERRED, not route-checked. Do NOT mention the console: whether Relaunched players can open
+one is unchecked, and PS5 has none.
+
+**Clogged after a dust storm (Steam, "Clogged Extractor") — C85**
+> "Clogged after a Dust Storm" comes from a one-time story event, not from wear, so maintenance won't clear it. What happens next depends on which answer you picked in its popup: "Send a colonist" fixes it straight away; "Have the drones replace the entire component" turns it into a normal repair needing 3 Electronics; "We'll fix it after the storm" only fixes it when a later dust storm ends, and it can miss that storm's turn, so it may take more than one storm. If you remember which answer you chose, or whether you saved and reloaded while that popup was still open, please say — we're checking whether it can get stuck for good.
+
+⚠️ "maintenance won't clear it" is INHERITED (`RequiresMaintenance.lua:413-417`, investigator read).
+
+**Deep scan finds nothing (Steam, "Possible Bug")**
+> Orbital probes only deep-scan once you've researched Adapted Probes. Deep Scanning on its own doesn't change probes; it lets your normal sector scans find deep deposits when a sector is scanned again. So probes launched before Adapted Probes only do a normal scan, which matches what you saw. One small real bug turned up while checking: with the five-sector Advanced Orbital Probe and no Adapted Probes, a neighbouring sector you had already deep-scanned gets marked back to "Scanned", and scanning it again finds nothing new.
+
+**Building codes vs prefabs (Steam, helfisk)**
+> It looks intentional. A building placed from a prefab pays no construction cost, so the law's cost change has nothing to act on, and the game deliberately skips the maintenance change for prefab buildings too. Under Lax that works in your favour (no +50% maintenance); under Strict you miss the −30%, but you never paid the +20% cost either.
+
+⚠️ The law numbers are INHERITED (`LawDef-Efficiency.lua:692`, `:900`, investigator read).
+
+**Lakes, "excavation too deep" (Steam)**
+> The game refuses a lake if its bottom would end up below the lowest height the map allows. The lake shapes have different depths, and the small one that works for you is the shallowest of them, so this points to very low ground where you're building. We couldn't make it happen on normal ground. If you can share which map or landing site this is, and any mods, we'll take a look.
+
+**Meteors (Steam) — optional; recommendation (checklist 147): skip**
+> Meteors land at random spots across the whole map, and the way the spot is picked didn't change in the update, so a bigger base simply gets hit more often. The Relaunched Fix Pack doesn't change meteors any more.
+
 ## Owed, and where it is tracked
 
 | Item | Where |
@@ -275,3 +305,4 @@ name the extractor's skin: which skin uses `ConcreteExtractorCP3Dome` was NOT ro
 | ⛔ Draft B is now **unposted and superseded** — keep it as the accurate wording for any FUTURE reply, since the posted text has the four overreaches listed above | here |
 | F105 end-to-end repro — attended, rides a sitting | `F105`; not a blocker for either reply |
 | Steam sounds thread — IF the long post went out with "still checking": post the follow-up drafted above. ✅ Leads re-derived + closed 2026-09-10 late (neither a loss) | checklist 144 (b); `reports/C74_SOUND_SWEEP.md` |
+| 2026-09-11 field-report drafts (Wildfire, clogged, deep scan, building codes, lakes; meteors optional) — owner posts or not | checklist 146 / 147; `reports/FIELD_LEADS_2026-09-11.md` |

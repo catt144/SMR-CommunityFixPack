@@ -29,6 +29,40 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### 2026-09-11 — 146: the Wildfire cure rocket can get stuck on the pad for good. **Decision: build the fix for the next update (built and desk-tested first, then one attended check), or file and watch. Recommendation: build it — it permanently blocks the Wildfire mystery, two players hit it within a day, and the repair is small.**
+
+> Two players on Reddit (one PC, one PS5): the cargo rocket Earth sends for the Wildfire cure sits loaded on the pad,
+> shows "20 fuel to unload", and never leaves. **Cause (read from the game's code, not yet reproduced):** the rocket
+> works out its fuel need once, when it lands. If the fuel cost changes while it waits — researching **Advanced Martian
+> Engines** (−20, exactly the reported number), or, new in this update, the **Fuel Conservation** law, which also shifts
+> every time the Ministry of Technology stops or starts working — the game updates *your* rockets but not Earth's. Earth's
+> rocket is left with fuel it can't unload (or short of fuel no drone will bring), and the mystery waits for it forever.
+> There is no button a player can use. The bug is older than 1.1.0; the new laws just add ways to hit it. Our pack neither
+> causes nor fixes it today. Full record: [F119](agent/bugs/F119.md).
+>
+> **The fix:** when a fuel cost changes, update Earth's landed rockets the way the game already updates yours, and
+> un-stick an already-stuck rocket when the save loads. It would carry a Beta label until tested in play.
+> A reply for the Reddit thread is ready in `agent/reports/FIELD_REPORT_REPLIES.md` — post it or not, your call.
+
+### 2026-09-11 — 147: five more field reports triaged. **Decision: only whether to post the replies. Recommendation: post the clogged-building and deep-scan replies (they help players now); skip meteors.** Nothing here needs the keyboard.
+
+> - **Building codes vs prefabs:** intended. Prefabs pay no construction cost, and the game deliberately skips the law's
+>   maintenance change for them — under Lax that's in the player's favour. Not a bug.
+> - **Clogged after a dust storm:** a one-time story event. Its "we'll fix it after the storm" answer waits for the
+>   *next* storm to end, can miss that one, and never comes if storms have stopped. Filed as a candidate
+>   ([C85](agent/bugs/C85.md)); the reply asks the players which answer they picked.
+> - **Lakes, "excavation too deep":** a real rule (a lake's bottom can't go below the map's floor), unchanged since
+>   1.0.7, and not our pack. The pattern they describe — only the shallowest small lake fits — points to very low ground
+>   on that map. ⭐ Optional 1-minute check if you're in a 1.1.0 colony anyway: try placing any lake. If it places, the
+>   report is specific to their map and nothing more is owed.
+> - **Deep scan finds nothing:** probes only deep-scan after researching **Adapted Probes**; Deep Scanning alone doesn't
+>   change probes. While checking, a small separate bug turned up — the five-sector Advanced Orbital Probe can knock an
+>   already deep-scanned neighbour back to "Scanned" ([C86](agent/bugs/C86.md), low priority).
+> - **Meteors always hit the base:** nothing concerning. Strikes land at random spots across the map, picked the same way
+>   as before the update, and our pack no longer touches meteors. Bigger bases simply get hit more.
+>
+> Details: `agent/reports/FIELD_LEADS_2026-09-11.md`.
+
 ### 2026-09-11 — 145: FR-1 cache probe v2 covers all 18 RAYS records; test normal loading first.
 
 > ✅ **P1 RAN 2026-09-11: "That pakd mod is working" (you).** Checked here: the archive you packed (02:43, 100,411 B) holds the

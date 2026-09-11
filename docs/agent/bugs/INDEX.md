@@ -1,9 +1,9 @@
 <!-- GENERATED — never hand-edit; regenerate with: python tools/doccheck.py --regen -->
 <!-- split_bugs.py --write is the one-time MIGRATION from the retired pre-split doc, never a regeneration; verify: python tools/doccheck.py -->
 
-# Bug index — 214 rows, 179 entry files
+# Bug index — 217 rows, 182 entry files
 
-118 F + 12 D + 84 C. `seq` is the entry's position in the old BUGS.md file order;
+119 F + 12 D + 86 C. `seq` is the entry's position in the old BUGS.md file order;
 the row order below is the old index table's own. Generated from the front matter of
 `docs/agent/bugs/*.md` — edit an entry, not this file.
 
@@ -227,4 +227,7 @@ the row order below is the old index table's own. Generated from the front matte
 | 177 | C82 | The Incident's 'Stop all Fusion Reactors until we know more' reply leaves every reactor disabled for good | cand | P2 | source-read | [C82.md](C82.md) |
 | 178 | C83 | Arrivals with no free housing fall back to the nearest dome even when it is switched off, quarantined and has no life support — they walk in and suffocate | tested-attended | P1 | OBSERVED (owner, attended) + source-read + desk-controlled fix | [C83.md](C83.md) |
 | 179 | C84 | Homeless resettlement can select a switched-on dome without life support when the player's must-have filter forces it | wontfix | P3 | source-read; explicit shipped intent | [C84.md](C84.md) |
+| 180 | F119 | A landed Earth-sent trade rocket never re-sizes its fuel request when a fuel-cost modifier changes, so the Wildfire cure rocket can sit on the pad forever with surplus fuel nothing unloads (or a shortfall no drone fills) | filed | P1 | source-read; two independent field reports (r/SurvivingMars, 1.1.0, PC + PS5) | [F119.md](F119.md) |
+| 181 | C85 | A producer 'Clogged after a Dust Storm' can stay disabled for good: the story event's 'fix it after the storm' reply waits for a LATER storm end, competes with other follow-ups for it, and has no fallback | cand | P2 | source-read; field reports (Steam, 2 players, 1.1.0) | [C85.md](C85.md) |
+| 182 | C86 | An Advanced Orbital Probe fired without Adapted Probes knocks an already deep-scanned neighbouring sector back to 'Scanned' | cand | P3 | source-read | [C86.md](C86.md) |
 
