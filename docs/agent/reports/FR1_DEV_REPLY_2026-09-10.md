@@ -1,4 +1,8 @@
-# FR-1 — reply for the Steam discussion (Paradox dev tracking it) — DRAFT, NOT POSTED
+# FR-1 — reply for the Steam discussion (Paradox dev tracking it) — POSTED by the owner (no dev response yet, 09-11)
+
+> **Owner, 2026-09-11:** posted, editable, "doesn't look like it's been read yet". The text below is the CURRENT version.
+> Three passages changed after the owner posted: the end of "WHY 1.1.0 SEEMS TO HAVE CHANGED THINGS", the new
+> "It is also not just one shader" paragraph, and "WHAT WE HAVEN'T SHOWN YET". These are the owner's paste-in edits.
 
 ⛔ The owner posts; no agent posts. Written 2026-09-10 by `smr-bugfixpack-f0` from
 `FR1_LINUX_FINDINGS_2026-09-10.md` (§1, §6, §7) and `FR1_OPTIONS_2026-09-10.md` (§1, R9).

@@ -20,7 +20,7 @@ summarise, ask** — do not start executing items (memory: handoff-invocation-me
 > Probe **v3** (`fr1-options-probe-v3.zip`) replaces v1 (which had a `%`/printf defect) and v2. v3 adds the owner's
 > set-then-reload combination (Leg D). Evidence: `reports/FR1_LINUX_FINDINGS_2026-09-10.md` §8.
 > Owner legs A–E (B = switch alone, D = switch + reload): checklist 145, "M1 + M2 bench". Read the returned dumps with
-> `C:\Dev\SMR-FR1-Options-2026-09-10\variant-map\classify_dump.py`. §2's two asks (dev reply posted? any answer?) are still open.
+> `C:\Dev\SMR-FR1-Options-2026-09-10\variant-map\classify_dump.py`. §2's two asks, answered 09-11: POSTED; no dev response yet (FINDINGS §9).
 
 **`agent/reports/FR1_OPTIONS_2026-09-10.md`** (`fb7c247`; the owner calls it "Astra's report").
 Read §0 (evidence keys), §1 (shader proof + the cache correction), §2 (mod reach), **§3 ranked

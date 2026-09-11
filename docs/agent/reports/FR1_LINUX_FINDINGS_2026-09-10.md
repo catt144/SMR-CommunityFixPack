@@ -211,6 +211,8 @@ plus a faulting-thread script (the last `vkd3d_shader_dump_blob` on the thread t
   the DXBC at 8,549, plus `index.bin` / `index.txt`); whether a partial pack overlays seethrough; whether the RAYS pass dispatches when Off; and the
   Windows/AMD effect if installed. Launch options (L2 `VKD3D_CONFIG=force_static_cbv`, L1 `PROTON_DISABLE_NVAPI=1`) and pyroveil (every RAYS
   hash) are still NEVER RUN. Routed: ck145.
+- **Developer reply (2026-09-11, owner):** POSTED in the Steam discussion the Paradox dev tracks; editable; **no dev response yet**
+  ("doesn't look like it's been read yet"). The owner is pasting in the three §9 updates (`FR1_DEV_REPLY_2026-09-10.md` header).
 
 **M2 grounding — MEASURED desk.** The 1.1.0 `Reflections.fx` variants were compiled with the game's `dxcompiler.dll` and the argv that reproduced
 `38121decbc3eee12` (§6), plus `TRACE_HIZ` / `USE_HYPERBOLIC_DEPTH` / `REFLECT_IMPORTANCE_SAMPLE` / `REFLECT_TILE`. The DXIL payloads
