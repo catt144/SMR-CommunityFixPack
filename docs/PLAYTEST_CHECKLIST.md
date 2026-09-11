@@ -93,6 +93,18 @@ completed tests move whole to
 >
 > That is the whole check. If you want the control, do the same four steps with the pack switched off — it
 > should read 2/2 both before and after.
+>
+> ⛔ **Follow-up 2026-09-11 — this also affects the frozen 1.0.7 download, and a normal update will NOT reach it.**
+> Your store card sends 1.0.7 players to the legacy page, whose download button points at the frozen
+> `v5-game-1.0.7` release — and that release contains this same fix, with a byte-identical body. Checked the whole
+> way along: card → legacy page → release tag → the file inside it.
+>
+> **Decision (e): do 1.0.7 players get a repair too?** That means cutting a NEW frozen 1.0.7 build, which is your
+> release call, not a code one. Recommendation: decide it at the same time as (d), so it is not discovered later.
+>
+> ⚠️ What is and is not known: the code chain is definitely there on 1.0.7, and the fix is definitely in that
+> download. **Nobody has seen the bug happen in a real game on either version.** The good news is that the
+> four-click check above works on 1.0.7 exactly as it does on 1.1.0 — so one sitting could settle both.
 
 ### 2026-09-11 — 150: the Paradox developer answered in the Building Codes thread. **Three decisions: (a) what to tell them about how we find bugs, (b) the prefab fix's shape, (c) retire the farm-oxygen fix?** Nothing here needs the keyboard.
 
