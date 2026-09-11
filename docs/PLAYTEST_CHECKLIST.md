@@ -44,10 +44,10 @@ completed tests move whole to
 > - **One launch I can't place:** a `control` launch at 01:47:24 whose game log stops at the startup banner, which is how a crash
 >   leaves it. The next launch overwrote its Proton log. Do you remember it, e.g. a first try that died before the menu?
 >
-> **Decision now live:** should the stand-in ship **(a)** in the fix pack, **(b)** as a separate opt-in mod, or **(c)** as player
-> instructions? **Recommendation: (b).** It is a driver workaround, not a repair to the game's Lua (`FIX_POLICY` §1). This bench
-> does not approve shipping anything. For (a) or (b), Astra gets a round-3 brief first: Windows/AMD safety, Reflections On,
-> packed-mod delivery, and whether the mod can switch itself off where it isn't needed.
+> ✅ **RULED 2026-09-11 (you):** not the main pack. It will be a one-off, clearly **temporary** mod that tells players it's a
+> workaround and to uninstall it once Paradox fixes the real issue. No GitHub repo; it's stood up on a temporary basis. Astra builds it
+> (round-3 brief: `agent/prompts/FR1_TEMP_MOD_R3.md`), and your bench steps and the store text will land here. Two small asks
+> whenever suits: **Steam only, or Steam + Paradox?** And should a post to the dev mention the mod once it exists?
 > **Can it be released? Not yet.** The bench proves the swap works; it does not prove a mod is safe to hand out. No hidden errors
 > showed up: the Proton log has no graphics errors and the game log has no Lua errors (findings §11). Risks, biggest first:
 > 1. **Delivery is untested.** Workshop/PDX mods arrive packed; the bench ran unpacked. A packed mod might not mount the folder
@@ -61,9 +61,9 @@ completed tests move whole to
 > 5. **One machine, about 6 minutes.** One 3070 laptop on 580.173.02, not tested on a GTX 900/1000 card (the players who can't upgrade),
 >    not in a long session, and not on a cold launch into a save.
 > 6. **It relies on an engine helper (`DlcMountFolder`) outside the normal mod sandbox**, and a game patch could close that route.
-> **Fastest safe path, if you want one:** Astra round 3 builds a packed opt-in mod that refuses to run off this build or off NVIDIA.
-> Then one Linux bench (packed, cold launch into a save, longer play) and a Windows check on your rig with Reflections On. Only then a
-> clearly labelled "Linux + NVIDIA 580, keep Reflections Off" opt-in mod.
+> **What round 3 must settle before you upload:** risks 1–6 above. That means a packed build that mounts; a build check so it switches
+> itself off (and says "uninstall me") after Paradox's patch; your Windows rig with Reflections On; and one longer Linux run that
+> includes a cold launch into a save.
 > **Dev reply:** follow-up post 2 (the swap removes the crash, removing the swap brings it back) is drafted in
 > `agent/reports/FR1_DEV_REPLY_2026-09-10.md`. Did you post follow-up 1?
 

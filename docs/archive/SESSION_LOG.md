@@ -8,6 +8,15 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-11 - FR-1 ck145 RULED (smr-bugfixpack-5d): a separate temporary workaround mod; Astra round 3 briefed
+
+tags: FR-1 scope decision temp-mod
+
+Owner, after the release-risk answer: not the main pack. It will be a one-off, clearly temporary mod that tells players to
+uninstall it once Paradox fixes the issue; no GitHub repo. Brief `prompts/FR1_TEMP_MOD_R3.md`: Q2 shape only (no marker, no
+reload); self-retires on a build change; NVIDIA gate plus the Windows blast-radius leg; Reflections On policy (owner's call); packed
+delivery is the #1 risk; store text; owner legs.
+
 ## 2026-09-11 - FR-1 cache v2 bench READ (smr-bugfixpack-5d): Q2's no-reload overlay loads worlds on 580; R2 reverses it
 
 tags: FR-1 linux proton nvidia shader cache bench read
