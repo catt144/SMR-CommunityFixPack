@@ -98,7 +98,9 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   1.0.7 players are served by the frozen v5 GitHub build (`v5-game-1.0.7`), linked from the card and the site.
 
 ## Open owner decisions (bodies in `docs/PLAYTEST_CHECKLIST.md` → "Decisions waiting on you")
-- **151** Migration audit DONE (`reports/MIGRATION_DEV_REPORT.md`): F59 repair/F60 retirement proposed; desk only, no build.
+- **151** Migration audit DONE (`MIGRATION_DEV_REPORT.md`); F60 retirement proposed. ⛔ **F59 RE-DERIVED 09-11**: expedition claim
+  CONFIRMED **+ 2nd caller** — manual Set Residence on a full home OVERFILLS it, BOTH branches, ships today (`desk_f59_interact.py` 8/8).
+  Repair must cover both; cheap in-play check is in ck151. Desk only, no build.
 - **150** PDX dev reply (C88 shape · F37 REMOVE · wording) · **149** upload (F119+C86 tested-attended 09-11) · **147** field replies · **148** fixtoggles.
 - 98 rig half only (⛔ Steam = ONE branch at a time, owner 09-08) · 99 disposition of the self-disabled ·
   100 say anything to players yet (rec no) · 101 accept the re-verification chain shape.

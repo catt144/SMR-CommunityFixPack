@@ -58,6 +58,41 @@ completed tests move whole to
 > expensive, and its relationship to the old waiting incident is unproved. The report supplies the exact capture.
 > The one-off audit brief is consumed. **151 remains the single decision item; no implementation or game run approved
 > by the instruction to continue checking.**
+>
+> ---
+>
+> ⭐ **2026-09-11, VERIFICATION (151 a): the expedition finding CHECKS OUT — and the same fix has a second,
+> WORSE problem that you can see in about two minutes.** A separate session re-derived the whole thing from
+> the game's own code instead of trusting the audit. Verdict on the audit's claim: **CONFIRMED** (source-level;
+> still never seen in a real game). Details and every citation: [F59](agent/bugs/F59.md), last section.
+>
+> **The new one, in plain terms.** When you click a colonist and use **Set Residence** on a home that is
+> already full, the game throws the oldest resident out and puts your colonist in. Our fix fires in the gap
+> between those two steps and hands the just-emptied bed straight back to the person who was thrown out —
+> and then the game puts your colonist in anyway. **You end up with more people in the home than it holds:
+> the residence panel reads something like 3/2.** The colonist you wanted evicted is not evicted.
+> This is NOT new in 1.1.0 — the same code is in 1.0.7, so **every released version of the pack has had it**.
+> Desk-controlled 8/8 (`tools/desk_f59_interact.py`), with a control showing it does NOT happen when the dome
+> has a better free bed elsewhere.
+>
+> **Decision (d): does this change the priority of (a)?** Recommendation: **yes — treat F59 as a repair to
+> schedule rather than an open question**, because the audit's proposed expedition-home exclusion fixes the
+> expedition case only and does nothing for this one. Temporary disable remains your separate call.
+> *(No fix was built this session — verdict and repair were deliberately kept in separate sessions.)*
+>
+> **Answer to (c) — is an F59 check cheap enough for the owed sitting 144 a?** The expedition check is NOT
+> (it needs full housing + a competing homeless neighbour + a housed crew member, built from scratch).
+> **This new one IS** — it is the same fix and the same mechanism, and it needs no expedition and no waiting:
+>
+> 1. In any 1.1.0 colony, pick a dome and open a residence that is **full** (if none is full, open a residence
+>    and click the little bed slots to close the spare ones until it reads full, e.g. 2/2).
+> 2. Make sure that dome has **no other free beds** — close spare slots in the dome's other residences too.
+> 3. Click any other colonist in that same dome, then click that full residence and choose **Set Residence**.
+> 4. Look at the residence panel. **With the fix working properly you should see 2/2 and the evicted colonist
+>    standing homeless. If you see 3/2 (more residents than the home holds), that is the bug.**
+>
+> That is the whole check. If you want the control, do the same four steps with the pack switched off — it
+> should read 2/2 both before and after.
 
 ### 2026-09-11 — 150: the Paradox developer answered in the Building Codes thread. **Three decisions: (a) what to tell them about how we find bugs, (b) the prefab fix's shape, (c) retire the farm-oxygen fix?** Nothing here needs the keyboard.
 

@@ -8,6 +8,47 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-11 - smr-bugfixpack-cb: F59 verdict (ck151 a) — expedition claim CONFIRMED, and a second, worse caller found
+
+tags: F59 verdict re-derivation desk-control ck151 ck144 over-capacity astra-check
+
+Task: verify Astra's F59 claim (commit `40a0c6b`) before anyone repairs it. Read the migration report, the desk
+transcript, `desk_f59_expedition.py`, F59 and F58, then re-derived the route from the shipped 1.1.0 bodies
+without reusing the audit's reasoning. **File, don't fix** — no `Code/` change.
+
+**Verdict: CONFIRMED** (source-level; never reproduced in play, unchanged). Both halves separately:
+(1) the window exists in vanilla's own order — `Colonist:EnterTransporter:5029-5031` saves the hold, `:5039`
+`SetDome(false)` → `:434` `SetResidence(false)`, `:5043` `Unit.EnterTransporter` → `Unit.lua:1305` → `:1225`
+`OnDisappear` → `Colonist.lua:5003-5008` takes the hold; no yield in between, `OnPreDisappear` empty, and vanilla
+calls `CheckHomeForHomeless` from four player-caused sites only. (2) our hook does fire there — `Colonist:SetResidence`
+is defined once with no subclass and no override, and the guard passes.
+
+**Harness legs checked.** `desk_f59_expedition.py` re-runs 12/12; both principal legs are cross-sensitive (each
+expression is FALSE in the other configuration), and `deskbench.body()` asserts a single body match. `bodycheck.py`
+reads 110 OK, so the live tree still matches the 09-08 pins. Named fixture gaps: suitability always passes, comfort
+constant, no colony.
+
+**⛔ NEW FINDING — the same hook fires inside MANUAL ASSIGN, and that one overfills a residence.**
+`Residence:ColonistInteract:342` → `KickOldestResident:368` → `KickResident:157` → `SetResidence(false)`. Here
+`self.dome` is intact, so `UpdateHomelessLabels:2893` puts the just-kicked resident in the dome's Homeless label
+inside the same call — our hook then hands them back the slot `ColonistInteract:348` is about to use, and
+`AddResident`'s `assert(GetFreeSpace() > 0)` does not unwind (`EF-008`) ⇒ a capacity-2 home holding 3, infopanel
+3/2, and the eviction the player asked for silently undone. The identical bodies are in the 1.0.7 archive ⇒
+**this has shipped on both branches in every released version of the module.** New control
+`tools/desk_f59_interact.py`, 8/8, with a negative leg (a better free bed elsewhere in the dome ⇒ no overflow).
+
+**The design error, named.** The module's "only caller of `RemoveResident`" claim is true; the load-bearing
+inference — "hooking one level up means the notification runs when the move is FINISHED" — is not, and the callers
+of `SetResidence` were never enumerated. There are 11; `Residence.lua:157` is the confirmed hazard, `:265`'s
+capacity-shrink loop is safe by inspection (our `GetFreeSpace() > 0` guard never opens there), and
+`Residence:OnDestroyed:81-92` is recorded as an UNRESOLVED lead (vanilla's own `:86` has the same exposure).
+
+**Consequence for the repair:** the report's unbuilt expedition-home exclusion is necessary but NOT sufficient.
+Checklist **151** gains decision (d) and — answering (c) — a genuinely cheap in-play check for owed sitting
+**144 a**: four clicks on any 1.1.0 colony, no expedition and no waiting, with a player-visible 3/2 readout.
+Peer `smr-bugfixpack-e6` messaged first and confirmed it held no edits to the touched files; Astra (Codex) is
+invisible to ListAgents, so the 151 block was APPENDED to, never rewritten.
+
 ## 2026-09-11 - smr-bugfixpack-e6 close-out: the PDX dev's reply — C88 answered, F37 refuted, two briefs written
 
 tags: lookback handoff dev-reply C88 F37 ck150 migration astra prefabs tooling
