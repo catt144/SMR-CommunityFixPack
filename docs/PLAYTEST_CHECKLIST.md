@@ -64,6 +64,61 @@ completed tests move whole to
 > **Off**, the same `VKD3D_SHADER_DUMP_PATH` launch option, New Game. If
 > `38121decbc3eee12` is dumped again right before the crash, "the game builds it even with
 > reflections off" is proven, not inferred.
+>
+> ⭐ **2026-09-10 night — M1 + M2 bench, READY (you asked: "start with M1 and M2"). Nothing has
+> run in a game yet.** Desk results (evidence: `agent/reports/FR1_LINUX_FINDINGS_2026-09-10.md` §8):
+> - **M1 is dead on your install.** The game only turns on the shader-cache reload when a DLC
+>   is *newer* than the base game, and both DLCs have the same assets revision (33006) as the
+>   base game. So there is nothing for a mod to switch off. The probe still reads the setting;
+>   if it ever shows `true`, I'll hand you one extra leg.
+> - **M2 has a strong candidate: `SSRFullTile8x8 = 1`.** The game already switches it on for
+>   every AMD graphics card. It selects a simpler reflections shader that ships ready-made in the
+>   game's cache. That shader doesn't have the complicated loop the crashing one has. Your
+>   crashing run built only the complicated one. The unknown is whether a mod's setting lands
+>   early enough; your dump will show that.
+> - **Built:** probe **v2**. It fixes a hidden fault in the first version that could have made a
+>   leg silently test nothing. Zip: `C:\Dev\SMR-FR1-Options-2026-09-10\fr1-options-probe-v2.zip`
+>   (Linux-safe paths; the folder inside is `FR1OptionsProbe`).
+>
+> **Step 1 — Windows, optional, about 5 minutes (checks the probe works in the real game).**
+> Unzip into `%APPDATA%\Surviving Mars Relaunched\Mods\`, replacing any earlier `FR1OptionsProbe`.
+> Start the game → Mod Manager → tick **FR-1 Options Probe v2** → restart. In Steam → Surviving
+> Mars: Relaunched → Properties → General → Launch Options, put `-fr1-options=SSRFullTile8x8:1`.
+> Set Reflections to **High**. Start a **New Game** (not one of your colonies: loading a copy
+> costs its autosaves). Once the colony appears, glance at anything shiny for a few seconds.
+> Then quit through the menu. Tell me "Windows done" plus anything that looked wrong; I read the
+> log myself. Afterwards clear the Launch Options field and set Reflections back to your usual level.
+>
+> **Step 2 — the laptop on driver 580 (the real test).** Once per laptop:
+> 1. Disable the old **FR-1 Test (film grain)** mod. Copy the v2 `FR1OptionsProbe` folder to
+>    `/home/ladmin/.steam/debian-installation/steamapps/compatdata/3215050/pfx/drive_c/users/steamuser/AppData/Roaming/Surviving Mars Relaunched/Mods/`
+>    Then start the game (the main menu works on 580) → Mod Manager → tick **FR-1 Options Probe v2** → quit.
+> 2. In the game's options set Reflections to **Off** and keep it Off for legs A–C.
+> 3. In a terminal: `mkdir -p ~/fr1-mm/A ~/fr1-mm/B ~/fr1-mm/C`
+>
+> Each leg: paste the line into Launch Options → start → **New Game** → watch whether the world
+> loads → close the game (or it crashes) → then in a terminal copy the Proton log:
+> `cp ~/steam-3215050.log ~/fr1-mm/steam-A.log`. Use B or C in that command to match the leg.
+>
+> - **Leg A — baseline, reflections Off (this is also the "one quick run" above):**
+>   `PROTON_LOG=1 VKD3D_SHADER_DUMP_PATH=/home/ladmin/fr1-mm/A %command%`. Expected: the usual crash.
+> - **Leg B — the treatment:**
+>   `PROTON_LOG=1 VKD3D_SHADER_DUMP_PATH=/home/ladmin/fr1-mm/B %command% -fr1-options=SSRFullTile8x8:1`
+>   **If the world loads:** stay a minute. Set Reflections to High and look around. Then load your
+>   Intel-made 1.1.0 laptop save. Quit through the menu.
+> - **Leg C — only if B loaded (proves the switch made the difference):**
+>   `PROTON_LOG=1 VKD3D_SHADER_DUMP_PATH=/home/ladmin/fr1-mm/C %command%`. Reflections back to Off.
+>   Expected: the crash returns.
+>
+> Then `cd ~ && zip -r fr1-mm.zip fr1-mm`, bring the zip to Windows as before, and put your laptop
+> back how you had it (clear Launch Options). Tell me in one line: **A crashed? B loaded? C crashed?**
+> From the dumps I'll read which reflections shader each leg built. If B still crashes, I'll have
+> the next two switches (`SSRTraceHiZ:1`, `SSRForceHyperbolicDepth:1`) ready as one-line legs.
+> These are lower odds, because they keep the complicated shader. After them come the launch-option
+> and pyroveil routes.
+>
+> **Still yours to decide, and it only matters if B works:** does the workaround ship in this pack,
+> in a separate opt-in mod, or as player instructions? (Recommendation above: a separate opt-in mod.)
 
 ### ✅ 2026-09-10 — v7 IS LIVE on both stores (your word). Nothing to decide; three things to tell me when convenient.
 

@@ -15,6 +15,12 @@ summarise, ask** — do not start executing items (memory: handoff-invocation-me
 
 ## 1 · FIRST (owner-named): walk the owner through Astra's FR-1 options report
 
+> ✅ **DONE 2026-09-10 night (`smr-bugfixpack-bd`).** The owner was walked through it and chose **M1 + M2**. The results
+> supersede the ranking below: M1 is DEAD on the desk, and M2's top treatment is `SSRFullTile8x8:1` (the AMD path).
+> Probe **v2** replaces v1, which had a `%`/printf defect. Evidence: `reports/FR1_LINUX_FINDINGS_2026-09-10.md` §8.
+> Owner legs A/B/C: checklist 145, "M1 + M2 bench". Read the returned dumps with
+> `C:\Dev\SMR-FR1-Options-2026-09-10\variant-map\classify_dump.py`. §2's two asks (dev reply posted? any answer?) are still open.
+
 **`agent/reports/FR1_OPTIONS_2026-09-10.md`** (`fb7c247`; the owner calls it "Astra's report").
 Read §0 (evidence keys), §1 (shader proof + the cache correction), §2 (mod reach), **§3 ranked
 register**, §4 recipes R1–R7, §6 (not explored), §7 (scope). Then give the owner, in plain words:

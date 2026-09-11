@@ -143,3 +143,41 @@ Grade: **direct log evidence**. The exact-hash override is still the formal proo
 no OTHER pipeline faults once this one is fixed). ⚠️ The dump run's Reflections setting is
 **Low or Off, not confirmed which** (owner, 09-10). "Built while SSR is disabled" becomes MEASURED
 only with an Off-only dump run. The developer reply is `FR1_DEV_REPLY_2026-09-10.md` (not posted).
+
+## 8 · 2026-09-10 night — M1 + M2 desk checks, probe v2 (`smr-bugfixpack-bd`, owner: "start with M1 and M2")
+
+Tree **G** = `C:\Dev\SMR-SrcArchive\1.1.0.403908\Src\`. Scratch (outside git): `C:\Dev\SMR-FR1-Options-2026-09-10\`
+`variant-map\` (compiled variants, scan scripts + JSON receipts, `classify_dump.py`) and `fr1-options-probe-v2\` + `.zip`.
+
+**M1 (`ForceShaderCacheReload`) — DEAD from Lua on this install.** SOURCE: its only Lua setter is `G/CommonLua/Dlc.lua:413`,
+reached only when `find()` (`:262-274`) sees a DLC whose `assets_revision` is **strictly greater** than `AssetsRevision`.
+MEASURED: `AssetsRevision` = 33006 (printed at `G/CommonLua/Core/mount.lua:240`; Windows log `Mars.exe-20260910-19.35.56`
+lines 51/57/59) and both DLCs (norman, thomas) = 33006, same in the dump run's Proton log. ⇒ the flag is never set by Lua,
+at boot or via `ModsLoadAssets` (`G/CommonLua/Modding/Mod.lua:2239`, same `find()`). A native default is UNSAMPLED: probe v2's
+inventory reads it; an M1 leg is worth running ONLY if it reads `true` before LoadBinAssets.
+
+**M2 grounding — MEASURED desk.** The 1.1.0 `Reflections.fx` variants were compiled with the game's `dxcompiler.dll` and the argv that reproduced
+`38121decbc3eee12` (§6), plus `TRACE_HIZ` / `USE_HYPERBOLIC_DEPTH` / `REFLECT_IMPORTANCE_SAMPLE` / `REFLECT_TILE`. The DXIL payloads
+were then searched across all 6,455 decoded `ShaderCached3d12.fpk` entries (the 2 with no DXBC are `index.bin` / `index.txt`).
+Control PASS (RAYS default → entry `14281071190732923386`).
+- REFLECT_RAYS: all **6** distinct programs ship (hiz+hyp ≡ hyp, the `#elif` at `Reflections.fx:135-138`).
+- REFLECT_FULL: **tile 8 and tile 16** ship, 6 distinct programs each; tile 4 does not.
+- The dump run (`fr1dump-complete.zip`, 115 `.dxil`) holds exactly **one** Reflections program: `38121decbc3eee12` = RAYS
+  default. No other RAYS variant and no FULL variant. ⚠️ The crash truncates the run: this is "not built BEFORE the crash".
+- `Mars.exe` 0xfaa290–0xfaa580: the `hr.SSR*` names sit beside `Reflections.fx`, `REFLECT_FULL/RAYS/TILE`, `TRACE_HIZ` and
+  `REFLECT_IMPORTANCE_SAMPLE`; `USE_HYPERBOLIC_DEPTH` sits at 0xfaa468.
+
+**INFERRED — the M2 bet:** the engine builds the variant its settings select, and `hr.SSRFullTile8x8 = 1` selects REFLECT_FULL
+tile 8. That is the one-pixel-per-thread kernel (`:515-529`) with no ray-queue `while(true)`/atomics loop (`:440-513`), and the game
+already forces it on every AMD GPU (`G/CommonLua/Core/options.lua:81-85`). It is the top M2 treatment; `SSRTraceHiZ:1` and
+`SSRForceHyperbolicDepth:1` keep the same ray-queue kernel (lower odds). ⚠️ Timing risk: the AMD block runs BEFORE
+`InitRenderEngine` (`G/CommonLua/Core/autorun.lua:332→341`); if the engine reads the key only at init, a mod's late set does nothing.
+⇒ **the witness is the leg's dump (which program was built), never the readback line.** The M3 "saved adapter name contains
+amd" route is DEAD: `options.lua:57-59` re-reads `GraphicsAdapter` from the live device every startup, before that test.
+
+**Probe v1 defect (desk, lupa `variant-map/probe_harness.py`).** Log → `ModLog(msg)` → `ModPrint` runs `string.format(msg)` with
+no arguments (`G/CommonLua/Core/lib.lua:144,174`; `Mod.lua:109-132`), so a `%` in any `hr` string printed by the mod-load
+full inventory throws before the LoadBinAssets wrapper and ChangingMap hook install. The harness showed v1 at `load_error`,
+`wrapper=False`, `writes=1`. Whether a live `hr` string holds a `%` is UNSAMPLED (no Lua-side assignment does, grep G); Astra's 7
+mocks never logged one. **v2** escapes `%`, installs hooks first, pcalls each phase and logs the render device: 7/7 PASS (v1 6/7).
+Mock execution does not prove retail sandbox reach; the leg's `[FR1Options v2]` lines do. Owner steps: checklist **145**.
