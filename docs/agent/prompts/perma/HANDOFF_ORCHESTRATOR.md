@@ -34,9 +34,10 @@ which is fully briefed.
 - **Triage** of six owner-relayed reports (Steam + Reddit): `reports/FIELD_LEADS_2026-09-11.md` (the table at the top is current).
 - **F119 (P1)** — a landed Trade rocket never re-sizes its fuel request, so the Wildfire cure rocket soft-locks the mystery.
   **Built `2c68bb1`** (`Fix_TradeRocketFuelRefresh`) from a one-off brief in a separate session; attended check staged `8787d0f`
-  (checklist **149**). Status held `filed` until that check.
-- **C86 (P3)** — the Advanced Orbital Probe downgrades deep-scanned neighbours. **Built `5ca9a0f`** (`Fix_ScanDowngrade`), desk 7/7.
-- Both sit in `perma/RELEASE_OUTBOX.md` → Pending as **Beta candidates** (untested in play). The build brief was closed and removed
+  (checklist **149**) and RAN 09-11 (`smr-bugfixpack-24`): **tested-attended** — A/B plus the load heal, in play.
+- **C86 (P3)** — the Advanced Orbital Probe downgrades deep-scanned neighbours. **Built `5ca9a0f`** (`Fix_ScanDowngrade`), desk 7/7;
+  seam check in play 09-11, **tested-attended**.
+- Both sit in `perma/RELEASE_OUTBOX.md` → Pending (both tested-attended 09-11; the upload is the owner's). The build brief was closed and removed
   (`91f32af`).
 - **Candidates:** C85 (clogged after a dust storm), **C87** (lakes, reopened on the owner's pushback), **C88** (Building Codes vs
   prefabs, reopened on the owner's pushback, waiting on the devs). Meteors: not a bug. Deep scan: the Adapted Probes rule.
@@ -57,9 +58,8 @@ which is fully briefed.
 - The Steam BBCode and Paradox paste-in styling: done? The owner was pasting on 09-11.
 
 **Fix pack — from `smr-bugfixpack-0d` (newest first):**
-- ⭐ **ck149: F119 + C86 attended check, then the upload.** The owner wants F119 out TODAY (09-11). Boot once for the `applied`
-  line; the throwaway Trade-rocket route if a 1.1.0 colony is handy; then `prompts/perma/RELEASE.md` (the outbox holds both
-  entries). ⛔ Do not call it fixed before that check (F119 stays `filed`).
+- ⭐ **ck149: the check RAN 09-11 — F119 and C86 are both tested-attended (`smr-bugfixpack-24`). The upload remains**, the
+  owner's: `prompts/perma/RELEASE.md` (the outbox holds both entries).
 - **ck147: field replies.** Post the Wildfire, clogged and deep-scan drafts (`FIELD_REPORT_REPLIES.md`); the lakes reply is
   HELD until the lake check; meteors: skip. The owner decides.
 - **C87 lakes:** the 2-minute in-game check plus the copy-paste `LAKECHK` line in ck147 decides "every 1.1.0 map" vs

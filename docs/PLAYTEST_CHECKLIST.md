@@ -29,7 +29,17 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
-### 2026-09-11 — 149: F119's build is staged; one short attended check is the only release gate. **Action: boot once for the applied line, then use the throwaway Trade-rocket route below if you have a 1.1.0 colony handy. The upload remains a separate owner action.**
+### ✅ 2026-09-11 — 149 RAN: F119 and C86 are both TESTED-ATTENDED (you at the keyboard). **Nothing to decide here; the upload is your separate action (`agent/prompts/perma/RELEASE.md`).** The original steps are kept below.
+
+> ✅ **What ran (09-11):** the boot check passed — both modules `applied`, no mod errors. Then more than the
+> throwaway route asked for: an A/B on a real reproduction. With the fix switched off for one rocket,
+> researching Advanced Martian Engines while the rocket was still fuelling left it stuck with 20 fuel to
+> unload — the Reddit bug, reproduced. You saved and reloaded that stuck rocket: the heal fixed it, and you
+> watched it unload the 20 and leave. With the fix on, the same trigger re-sized it at once, and you watched
+> it leave. C86: the probe's own scan call left a deep-scanned sector deep and still scanned its neighbour.
+> The record is in `agent/bugs/F119.md` and `agent/bugs/C86.md` → "Attended check"; the log is archived.
+> **Still not covered:** the Wildfire mystery's own loop, a player's real stuck save, and a real Advanced
+> Orbital Probe firing. The steps below were written before the sitting; the sitting used a stronger route.
 
 > **What is staged:** `Fix_TradeRocketFuelRefresh` (`2c68bb1`) refreshes an
 > Earth-sent Trade rocket's fuel supply/demand request when its fuel cost changes

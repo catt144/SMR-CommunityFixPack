@@ -8,6 +8,28 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-11 - ck149 sitting (smr-bugfixpack-24): F119 + C86 TESTED-ATTENDED — A/B + load heal in play
+
+tags: sitting attended F119 C86 ck149 A/B heal trade-rocket EF-091
+
+Oriented from `perma/GENERAL_USE_PROMPT.md`; the owner then ran checklist 149 on a throwaway 1.1.0 colony (Terra Initiative,
+BlankBig_04). PROBE SWEEP clean. Log `archive/logs/f119sitting110_Mars.exe-20260911-14.02.05-6a91a190.log`.
+- **Boot:** both new modules `applied`; 47 applied / 1 inactive (SaintBlessing, ck130); 0 mod errors.
+- **F119:** the mystery's own spawn step run from the console (no mystery active), the real Advanced Martian Engines trigger.
+  Fix off for one rocket (per-object `rawset`) → stuck, 20 fuel over, no unload request: the Reddit bug. Save + load → the
+  heal's `refreshed 1`; the owner watched it unload and leave. Fix on → re-sized at once; the owner watched it leave.
+- **C86:** the probe's own `Scan("scanned","probe")` on real sectors kept a deep-scanned sector deep and still scanned its
+  neighbour. Fix-off leg desk-only (the vanilla body is a module upvalue, out of the console's reach).
+- **Owner calls in the sitting:** "presumed fixed until a player says otherwise" (made before the A/B, which then went
+  further); the A/B itself was the owner's ask.
+- **Lessons routed:** `EF-091` (non-player rockets launch the instant they are ready; negative demand targets); a
+  PLAYTEST_HELP row for the console Trade-rocket route and the per-object A/B pattern.
+- **Misses:** (1) the first rocket took off before the trigger: I had assumed a full rocket sits on the pad; (2) my first
+  tech check predated a save load, caught only by reading the log's `Load Game` block; (3) predicted demand 0, read −10000
+  (explained in EF-091); (4) my first identity line errored on a non-rocket selection (the later version guards it).
+
+---
+
 ## 2026-09-11 - smr-bugfixpack-0d close-out: SESSION LOOKBACK, doc sweep, handoff updated
 
 tags: lookback handoff doc-sweep field-reports F119 C86 C85 C87 C88

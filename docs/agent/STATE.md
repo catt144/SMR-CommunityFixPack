@@ -27,7 +27,7 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   `C47OpenFarmSeedBufferShape` (Herbs 100→50), retired `LanderCargoRatchet`/`DroneUnreachableForever`/`AutoExportPriority`.
 - ⏭ NEXT: handoff + pending outbox `prompts/perma/HANDOFF_ORCHESTRATOR.md` (temporary). Desk `prompts/DLC_DEEP_CHECK.md` (`HUNT_AUDIT.md` §8).
   ⭐ FR-1 TEMP WORKAROUND MOD LIVE 09-11 (Steam 3799500849 / PDX 158711; FINDINGS §11–§12). ALL FR-1 work → `prompts/perma/LINUX_DISPATCH.md`.
-  Field: 3 working (one 10xx), 1 failing (GTX 1070, log requested). Chain `prompts/fixtoggles/` (ck148). Owner: ck149 (F119 → release) · ck144 (v7 checks + sounds thread).
+  Field: 3 working (one 10xx), 1 failing (GTX 1070, log requested). Chain `prompts/fixtoggles/` (ck148). Owner: ck149 upload · ck144 (v7 checks + sounds thread).
   vanillahunt CLOSED 09-10 (99): instruments SOUND WITH STATED GAPS — 1,281 table-level hunks in 368 rowed hand files listed by
   no instrument (§1.4); 12 P2s re-derived: 6 hold, 5 weakened, **C80 REFUTED**; **C82** filed by the audit (Incident reactors stay
   off); every P2 is a gain/cosmetic except C82/C66/C63; ck142 = hotfix-3 list (rec none). FR-1/2/3 OPEN (FR-1 → LINUX_DISPATCH).
@@ -98,7 +98,7 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   1.0.7 players are served by the frozen v5 GitHub build (`v5-game-1.0.7`), linked from the card and the site.
 
 ## Open owner decisions (bodies in `docs/PLAYTEST_CHECKLIST.md` → "Decisions waiting on you")
-- **149** F119+C86 check · **147** field replies · **148** fixtoggles.
+- **149** upload (F119+C86 tested-attended 09-11) · **147** field replies · **148** fixtoggles.
 - 98 rig half only (⛔ Steam = ONE branch at a time, owner 09-08) · 99 disposition of the self-disabled ·
   100 say anything to players yet (rec no) · 101 accept the re-verification chain shape.
 - 112 DEFERRED 09-09 · **125** RULED+LANDED 09-09: F66 guard yields to `force` (desk-controlled, untested); wrapper re-read → 99.

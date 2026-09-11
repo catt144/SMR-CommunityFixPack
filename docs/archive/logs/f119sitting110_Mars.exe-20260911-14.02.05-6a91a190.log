@@ -1,0 +1,781 @@
+					Render 0:00:00:007
+*** executable info
+Timestamp:     	6a91a190
+Date:          	Fri Aug 28 10:56:16 2026
+Command line:  	
+Compiler:      	195136247, 142 (VS 2019) or newer
+
+
+*** hardware info
+CPU name      	Intel(R) Core(TM) i7-14700K
+CPU MHz       	3418
+CPU cores     	20/28
+Phys. Memory   	65278 MBytes
+Memory In Use  	67%
+Disk Free      	806674 MBytes
+
+
+*** OS info
+OS:            	Windows 11
+Version:       	10.0.26100 
+
+
+*** Debug::Init()
+
+
+					Render 0:00:00:069
+Steam initialized (AppId 3215050)
+					Render 0:00:00:072
+Drive type for game installation: SSD, savegames: SSD
+Language: English
+					Render 0:00:01:489
+*** graphics info
+GPU                            	NVIDIA GeForce RTX 4080 Feature Level: 12.1 {  DoublePrecisionFloatShaderOps: 1 OutputMergerLogicOp: 1 MinPrecisionSupport: 2 TiledResourcesTier: 4 ResourceBindingTier: 3 PSSpecifiedStencilRefSupported: 0 TypedUAVLoadAdditionalFormats: 1 ROVsSupported: 1 ConservativeRasterizationTier: 3 MaxGPUVirtualAddressBitsPerResource: 40 StandardSwizzle64KBSupported: 0 CrossNodeSharingTier: 0 CrossAdapterRowMajorTextureSupported: 0 VPAndRTArrayIndexFromAnyShaderFeedingRasterizerSupportedWithoutGSEmulation: 1 ResourceHeapTier: 2 NotZeroedPools: 1 UMA: 0 UnalignedBlockTextures: 1}
+API                            	d3d12
+GPU Driver Version             	32.0.16.1074
+GPU Driver Package Version     	610.74
+GPU Dedicated Video Memory     	16048 MB
+					Render 0:00:01:638
+
+Libs: Network, Sequences, MouseTrackWin, DumbAI, MapGen, Paradox, TriggersAndEvents, Notifications, Research, Resources, Tutorial, Objectives 
+
+					Render 0:00:01:869
+
+Platform: desktop, editor, goldmaster, paradox, pc, steam
+
+					Render 0:00:02:825
+*** audio info
+Audio Endpoint                 	Speakers (Razer Leviathan V2)
+						Lua 0:00:02:826
+Lua revision: 403908
+Assets revision: 33006
+Steam AppID: 3215050
+Build version: 1.1.0.403908
+Build branch:  Release
+						Lua 0:00:12:485
+Account storage loaded successfully in 2 ms
+						Lua 0:00:12:486
+DLC norman loaded, lua revision 403908, assets revision 33006
+DLC thomas loaded, lua revision 403908, assets revision 33006
+						Lua 0:00:12:490
+[mod] Loaded mod def Relaunched Fix Pack (id SMR_CommunityFixPack, v1.00-007) unpacked from appdata
+[mod] Loaded mod def TEMPORARY - Linux NVIDIA 580 Crash Workaround (id SMR_FR1TempWorkaround, v0.00-003) unpacked from appdata
+[mod] Loaded mod def Relaunched Fix Pack: Opt-In Modules (id SMR_CommunityOptInPack, v1.00-000) unpacked from appdata
+[mod] Loaded mod def Community Fix Pack — Test Kit (id SMR_CommunityFixPackTestKit, v0.00-001) unpacked from appdata
+						Lua 0:00:12:876
+[mod] [SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:12:877
+[mod] [SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[mod] [SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+[SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+						Lua 0:00:12:882
+[mod] [SMRTest][carry] fixture-carry dump available — run SMRTest.FixtureCarry()
+						Lua 0:00:12:883
+[mod] [CommunityFixPack] NightShiftWork: applied
+[mod] [CommunityFixPack] WispRewards: applied
+[mod] [CommunityFixPack] TrainsToVoid: applied
+[mod] [CommunityFixPack] LanderEmptyLaunch: applied
+[mod] [CommunityFixPack] ShelterReflex: applied
+[mod] [CommunityFixPack] BrokenTrackSalvage: applied
+[mod] [CommunityFixPack] TrackSalvageWipe: applied
+[mod] [CommunityFixPack] LakeEntombment: applied
+[mod] [CommunityFixPack] GhostFarmOxygen: applied
+						Lua 0:00:12:884
+[mod] [CommunityFixPack] RocketDroneChurn: applied
+[mod] [CommunityFixPack] TradeRocketFuelRefresh: applied
+[mod] [CommunityFixPack] ShuttleTransportCache: applied
+[mod] [CommunityFixPack] VacuumWalks: applied
+[mod] [CommunityFixPack] ArrivalDeaths: applied
+[mod] [CommunityFixPack] StaleReservations: applied
+[mod] [CommunityFixPack] CrystalMysteryHang: applied
+[mod] [CommunityFixPack] DomeOverviewHighlight: applied
+						Lua 0:00:12:885
+[mod] [CommunityFixPack] TrainCargoDumping: applied
+[mod] [CommunityFixPack] DestroyedTunnels: applied
+[mod] [CommunityFixPack] DustSicknessBiorobots: applied
+[mod] [CommunityFixPack] GeneForging: applied
+[mod] [CommunityFixPack] MirrorSphereSite: applied
+[mod] [CommunityFixPack] PayloadTemplateRefill: applied
+[mod] [CommunityFixPack] ShuttleHubOffAvailable: applied
+[mod] [CommunityFixPack] FreedHousingNotice: applied
+[mod] [CommunityFixPack] DomeFreeSpaceMismatch: applied
+[mod] [CommunityFixPack] LandscapeUnitFilter: applied
+						Lua 0:00:12:886
+[mod] [CommunityFixPack] RocketInteractGuard: applied
+						Lua 0:00:12:887
+[mod] [CommunityFixPack] TrackConnectorPingPong: applied
+[mod] [CommunityFixPack] TrackTunnelPowerBridge: applied
+[mod] [CommunityFixPack] GraphConsumedCaption: applied
+[mod] [CommunityFixPack] TrainWaitTime: applied
+[mod] [CommunityFixPack] FounderTraitNotification: applied
+[mod] [CommunityFixPack] SequenceLatents: applied
+[mod] [CommunityFixPack] TrackSalvageRefund: applied
+[mod] [CommunityFixPack] LayoutTechLock: applied
+[mod] [CommunityFixPack] DroneTransportMinors: applied
+[mod] [CommunityFixPack] AnomalyCaveInMap: applied
+						Lua 0:00:12:888
+[mod] [CommunityFixPack] ScanDowngrade: applied
+[mod] [CommunityFixPack] BombardmentSpread: applied
+[mod] [CommunityFixPack] ExtenderFlapChurn: applied
+[mod] [CommunityFixPack] SaintBlessing: applied
+[mod] [CommunityFixPack] SinkholeIndestructible: applied
+[mod] [CommunityFixPack] ExoticDepositSign: applied
+[mod] [CommunityFixPack] JumboCaveReinforcementWedge: applied
+						Lua 0:00:12:889
+[mod] [CommunityFixPack] SilentHitMomentFX: applied
+[mod] [CommunityFixPack] SaveSanitizer: applied
+						Lua 0:00:13:644
+[mod] [CommunityFixPack] SaintBlessing: inactive (no dome-colonists trait presets)
+[mod] [CommunityFixPack] SinkholeIndestructible: the St. Elmo's Fire sinkhole is now indestructible, like every other mystery set-piece
+						Lua 0:00:13:735
+Reloading done in 1245 ms
+						Lua 0:00:13:738
+Available DLCs: norman(Feeding the Future),thomas(Interplanetary Codex) 
+						Lua 0:00:14:171
+[preset] Preset postprocess took 166 ms.
+						Lua 0:00:14:227
+482 / 482 particle streams loaded in 50 ms.
+						Lua 0:00:14:228
+5 / 5 particle streams loaded in 1 ms.
+						Lua 0:00:14:230
+[mod] [CommunityFixPack] SilentHitMomentFX: registered 11 missing animation-moment preset(s)
+						Lua 0:00:14:438
+[mod] [CommunityFixPack] SaintBlessing: the shipped code resolves the trait label itself — data left untouched; save re-base armed for 1 preset(s) of 2
+						Lua 0:00:14:549
+[mod] Loaded mod items for: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack
+						Lua 0:00:15:532
+[PdxSDK] Started up. Took 1232
+						Lua 0:00:15:933
+[Braze] SessionStart error The server name or address could not be resolved
+
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:16:123
+[Braze] SessionStart error The server name or address could not be resolved
+
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:47:842
+Load Game: 
+	lua_revision: 403908 (last saved with) 
+	orig_lua_revision: 403908 (created with) 
+	assets_revision: 33006 
+
+	dlcs: norman, thomas 
+
+	mods: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack 
+						Lua 0:00:47:849
+*** Reloading assets from folder 'BinAssets/'
+						Lua 0:00:50:905
+*** Assets reloaded in 3.1 s, read 359.3 MB, read speed 117.6 MB/s, average read 8136 bytes.
+						Lua 0:00:52:561
+[mod] This savegame tries to load Mod Relaunched Fix Pack (id SMR_CommunityFixPack, v1.00-006), which is loaded with a different version 1.00-007
+						Lua 0:00:53:995
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:53:998
+[mod] [CommunityFixPack] SilentHitMomentFX: restored 4 missing hit-moment tracker(s) on load
+						Lua 0:00:54:007
+game_settings:
+						Lua 0:00:54:008
+    sponsor: NASA
+    profile: rocketscientist
+    founding_faction: AssemblyOfPlanets
+    rival_colonies: CNSA, IMM, ESA
+    mystery_random: 
+    game_rules: (none)
+more_game_settings: save_game_id: lD1jaGcMJOxaiFcU, mystery: none, coordinates: 16N120E, landing_spot: , logo: USA
+map_conditions: altitude: -3122, temperature: -25, cold_wave: 61, dust_devils: 44, dust_storm: 123, meteors: 109
+map_resources: concrete: 109, metals: 176, precious_metals: 176, water: 212
+						Lua 0:00:54:024
+[mod] [CommunityFixPack] SaveSanitizer: F95 astrogeologist-residue pass removed 0 modifier(s), left 0 unidentified
+Game Loaded in 6182 ms
+						Lua 0:00:54:051
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:54:830
+Game loaded on map BlankBig_02 in 7107 ms
+						Lua 0:00:57:135
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:01:40:658
+Story bits: Triggered story bit - ExperimentalRocket						Lua 0:02:59:389
+Story bits: Reply selected - For science! Accept						Lua 0:26:29:231
+
+!!! Quick Build !!!
+						Lua 0:45:26:521
+ObjCheat CheatFill
+						Lua 0:45:43:093
+
+!!! Quick Build !!!
+						Lua 0:56:14:510
+Missing spot 'Top' in 'ElectricityGridElement' state 'idle'
+						Lua 1:00:34:974
+ObjCheat CheatSpawnDrone
+						Lua 1:00:35:108
+ObjCheat CheatSpawnDrone
+						Lua 1:00:35:278
+ObjCheat CheatSpawnDrone
+						Lua 1:00:35:412
+ObjCheat CheatSpawnDrone
+						Lua 1:00:35:547
+ObjCheat CheatSpawnDrone
+						Lua 1:00:35:685
+ObjCheat CheatSpawnDrone
+						Lua 1:07:58:629
+Game Seed:  7nI88CsW -6805199862586418294 
+						Lua 1:07:59:094
+MapLoadRandom:  478498559914847738 
+						Lua 1:08:00:306
+Map (slot 1) changed to "PreGame" in 1663 ms.
+						Lua 1:08:00:359
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 1:08:01:666
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 1:09:10:932
+game_settings:
+    sponsor: SpaceY
+    profile: rocketscientist
+    founding_faction: WorkersParty
+    rival_colonies: Roscosmos, paradox, ISRO
+    mystery_random: 
+    game_rules: (none)
+more_game_settings: save_game_id: I75jOeLn68tZHzlu, mystery: TheMarsBug, coordinates: 6S38W, landing_spot: , logo: SpaceY
+map_conditions: altitude: 917, temperature: -1, cold_wave: 0, dust_devils: 79, dust_storm: 0, meteors: 73
+map_resources: concrete: 73, metals: 109, precious_metals: 109, water: 182
+						Lua 1:09:10:937
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 1:09:10:945
+MapLoadRandom:  3871320992629042998 
+						Lua 1:09:12:015
+Map (slot 1) changed to "BlankBigTerraceCMix_15" in 1873 ms.
+						Lua 1:09:15:135
+MapLoadRandom:  -8790021198259322211 
+						Lua 1:09:15:762
+Map (slot 2) changed to "BlankUnderground_02" in 1166 ms.
+						Lua 1:09:20:881
+starting sector selected: I7
+						Lua 1:09:20:969
+Stop sequence Mystery 8 - Init : Finished						Lua 1:09:22:275
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 1:09:23:274
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 1:11:20:934
+ObjCheat CheatFill
+						Lua 1:11:22:733
+ObjCheat CheatFill
+						Lua 1:11:24:866
+ObjCheat CheatFill
+						Lua 1:11:33:133
+ObjCheat CheatFill
+						Lua 1:11:35:883
+ObjCheat CheatFill
+						Lua 1:11:37:336
+ObjCheat CheatFill
+						Lua 1:11:42:795
+ObjCheat CheatFill
+						Lua 1:12:25:179
+ObjCheat CheatFill
+						Lua 1:12:29:778
+
+!!! Quick Build !!!
+						Lua 1:13:02:382
+
+!!! Quick Build !!!
+						Lua 1:13:04:161
+
+!!! Quick Build !!!
+						Lua 1:13:06:326
+
+!!! Quick Build !!!
+						Lua 1:13:08:444
+
+!!! Quick Build !!!
+						Lua 1:13:10:199
+
+!!! Quick Build !!!
+						Lua 1:13:12:021
+
+!!! Quick Build !!!
+						Lua 1:13:13:993
+
+!!! Quick Build !!!
+						Lua 1:13:15:713
+
+!!! Quick Build !!!
+						Lua 1:13:17:340
+
+!!! Quick Build !!!
+						Lua 1:14:32:987
+
+!!! Quick Build !!!
+						Lua 1:14:59:879
+
+!!! Quick Build !!!
+						Lua 1:15:03:460
+ObjCheat CheatSpawnDrone
+						Lua 1:15:03:616
+ObjCheat CheatSpawnDrone
+						Lua 1:15:03:776
+ObjCheat CheatSpawnDrone
+						Lua 1:15:03:910
+ObjCheat CheatSpawnDrone
+						Lua 1:15:04:041
+ObjCheat CheatSpawnDrone
+						Lua 1:15:04:183
+ObjCheat CheatSpawnDrone
+						Lua 1:15:04:316
+ObjCheat CheatSpawnDrone
+						Lua 1:15:04:455
+ObjCheat CheatSpawnDrone
+						Lua 1:15:04:588
+ObjCheat CheatSpawnDrone
+						Lua 1:15:04:730
+ObjCheat CheatSpawnDrone
+						Lua 1:15:04:888
+ObjCheat CheatSpawnDrone
+						Lua 1:15:05:030
+ObjCheat CheatSpawnDrone
+						Lua 1:15:05:181
+ObjCheat CheatSpawnDrone
+						Lua 1:15:05:324
+ObjCheat CheatSpawnDrone
+						Lua 1:15:05:463
+ObjCheat CheatSpawnDrone
+						Lua 1:15:05:613
+ObjCheat CheatSpawnDrone
+						Lua 1:15:05:771
+ObjCheat CheatSpawnDrone
+						Lua 1:15:05:906
+ObjCheat CheatSpawnDrone
+						Lua 1:15:09:735
+ObjCheat CheatSpawnDrone
+						Lua 1:15:09:887
+ObjCheat CheatSpawnDrone
+						Lua 1:15:10:043
+ObjCheat CheatSpawnDrone
+						Lua 1:15:11:413
+ObjCheat CheatSpawnDrone
+						Lua 1:15:11:564
+ObjCheat CheatSpawnDrone
+						Lua 1:16:09:661
+Story bits: Triggered story bit - BadPrefab						Lua 1:16:14:818
+Story bits: Reply selected - Let's try to jury-rig something						Lua 1:16:34:143
+
+!!! Quick Build !!!
+						Lua 1:17:33:736
+
+!!! Quick Build !!!
+						Lua 1:18:13:264
+
+!!! Quick Build !!!
+						Lua 1:18:50:095
+
+!!! Quick Build !!!
+						Lua 1:19:03:289
+ObjCheat CheatFill
+						Lua 1:20:01:749
+
+!!! Quick Build !!!
+						Lua 1:23:22:192
+ObjCheat CheatFill
+						Lua 1:23:23:882
+ObjCheat CheatFill
+						Lua 1:23:25:637
+ObjCheat CheatFill
+						Lua 1:23:27:272
+ObjCheat CheatFill
+						Lua 1:23:28:938
+ObjCheat CheatFill
+						Lua 1:23:30:942
+ObjCheat CheatFill
+						Lua 1:23:32:933
+ObjCheat CheatFill
+						Lua 1:23:35:355
+ObjCheat CheatFill
+						Lua 1:34:03:474
+Load Game: 
+	lua_revision: 403908 (last saved with) 
+	orig_lua_revision: 403908 (created with) 
+	assets_revision: 33006 
+
+	dlcs: norman, thomas 
+
+	mods: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack 
+						Lua 1:34:06:403
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 1:34:06:406
+[mod] [CommunityFixPack] SilentHitMomentFX: restored 1 missing hit-moment tracker(s) on load
+						Lua 1:34:06:415
+game_settings:
+    sponsor: SpaceY
+    profile: rocketscientist
+    founding_faction: WorkersParty
+    rival_colonies: Roscosmos, paradox, ISRO
+    mystery_random: 
+    game_rules: (none)
+more_game_settings: save_game_id: I75jOeLn68tZHzlu, 						Lua 1:34:06:416
+mystery: TheMarsBug, coordinates: 6S38W, landing_spot: , logo: SpaceY
+map_conditions: altitude: 917, temperature: -1, cold_wave: 0, dust_devils: 79, dust_storm: 0, meteors: 73
+map_resources: concrete: 73, metals: 109, precious_metals: 109, water: 182
+						Lua 1:34:06:457
+[mod] [CommunityFixPack] SaveSanitizer: F95 astrogeologist-residue pass removed 0 modifier(s), left 0 unidentified
+[mod] [CommunityFixPack] SaveSanitizer: F48 station-connector pass repaired 0 of 0 track(s) walked (0 raised)
+Game Loaded in 2983 ms
+						Lua 1:34:06:481
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 1:34:06:890
+Game loaded on map BlankBigTerraceCMix_15 in 3551 ms
+						Lua 1:34:08:752
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 1:34:09:751
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 1:34:35:467
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 1:34:35:651
+Game Seed:  KVSD01lL -678370432383122225 
+						Lua 1:34:36:090
+MapLoadRandom:  -6126306431928946585 
+						Lua 1:34:37:297
+Map (slot 1) changed to "PreGame" in 1630 ms.
+						Lua 1:34:38:671
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 1:36:00:951
+game_settings:
+    sponsor: TerraInitiative
+    profile: CEO
+    founding_faction: MarsDemocraticParty
+    rival_colonies: Japan, ESA, IMM
+    mystery_random: 
+    game_rules: (none)
+more_game_settings: save_game_id: Zp9yXI55ZxuksNmK, mystery: none, coordinates: 11N95W, landing_spot: , logo: TerraInitiative
+map_conditions: altitude: 3225, temperature: -13, cold_wave: 30, dust_devils: 99, dust_storm: 123, meteors: 36
+map_resources: concrete: 73, metals: 73, precious_metals: 73, water: 182
+						Lua 1:36:00:955
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 1:36:00:963
+MapLoadRandom:  2704867865121038196 
+						Lua 1:36:01:868
+Map (slot 1) changed to "BlankBig_04" in 1656 ms.
+						Lua 1:36:04:731
+MapLoadRandom:  -5233936071167428352 
+						Lua 1:36:05:327
+Map (slot 2) changed to "BlankUnderground_02" in 1117 ms.
+						Lua 1:36:10:321
+starting sector selected: B7
+						Lua 1:36:10:322
+starting sector selected: D8
+						Lua 1:36:11:715
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 1:36:12:715
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 1:38:35:808
+ObjCheat CheatFill
+						Lua 1:38:38:090
+ObjCheat CheatFill
+						Lua 1:38:39:851
+ObjCheat CheatFill
+						Lua 1:38:41:470
+ObjCheat CheatFill
+						Lua 1:38:43:265
+ObjCheat CheatFill
+						Lua 1:38:45:884
+ObjCheat CheatFill
+						Lua 1:38:47:559
+ObjCheat CheatFill
+						Lua 1:38:55:812
+
+!!! Quick Build !!!
+						Lua 1:38:57:623
+
+!!! Quick Build !!!
+						Lua 1:39:33:818
+
+!!! Quick Build !!!
+						Lua 1:39:35:397
+
+!!! Quick Build !!!
+						Lua 1:39:36:867
+
+!!! Quick Build !!!
+						Lua 1:39:38:906
+
+!!! Quick Build !!!
+						Lua 1:39:52:284
+Story bits: Triggered story bit - Boost11_OtherSideSun						Lua 1:40:42:449
+Story bits: Reply selected - Thank you, Glorious Leader!						Lua 1:40:56:831
+ObjCheat CheatAddMaintenancePnts
+						Lua 1:40:57:211
+
+!!! Quick Build !!!
+						Lua 1:40:58:626
+
+!!! Quick Build !!!
+						Lua 1:40:59:954
+
+!!! Quick Build !!!
+						Lua 1:41:01:219
+
+!!! Quick Build !!!
+						Lua 1:41:02:485
+
+!!! Quick Build !!!
+						Lua 1:41:03:869
+
+!!! Quick Build !!!
+						Lua 1:41:05:346
+
+!!! Quick Build !!!
+						Lua 1:41:06:803
+ObjCheat CheatFill
+						Lua 1:41:08:555
+ObjCheat CheatFill
+						Lua 1:41:11:067
+ObjCheat CheatFill
+						Lua 1:41:12:517
+ObjCheat CheatFill
+						Lua 1:41:13:951
+ObjCheat CheatFill
+						Lua 1:41:15:453
+ObjCheat CheatFill
+						Lua 1:41:16:902
+ObjCheat CheatFill
+						Lua 1:41:25:740
+ObjCheat CheatFill
+						Lua 1:41:34:690
+ObjCheat CheatSpawnDrone
+						Lua 1:41:34:848
+ObjCheat CheatSpawnDrone
+						Lua 1:41:34:999
+ObjCheat CheatSpawnDrone
+						Lua 1:41:35:134
+ObjCheat CheatSpawnDrone
+						Lua 1:41:35:285
+ObjCheat CheatSpawnDrone
+						Lua 1:41:35:415
+ObjCheat CheatSpawnDrone
+						Lua 1:41:36:273
+ObjCheat CheatSpawnDrone
+						Lua 1:41:36:415
+ObjCheat CheatSpawnDrone
+						Lua 1:41:36:557
+ObjCheat CheatSpawnDrone
+						Lua 1:41:36:710
+ObjCheat CheatSpawnDrone
+						Lua 1:41:36:843
+ObjCheat CheatSpawnDrone
+						Lua 1:41:43:897
+ObjCheat CheatFill
+						Lua 1:42:30:145
+
+!!! Quick Build !!!
+						Lua 1:42:31:600
+
+!!! Quick Build !!!
+						Lua 1:42:33:630
+
+!!! Quick Build !!!
+						Lua 1:42:35:536
+
+!!! Quick Build !!!
+						Lua 1:42:37:043
+
+!!! Quick Build !!!
+						Lua 1:42:38:700
+
+!!! Quick Build !!!
+						Lua 1:42:40:250
+
+!!! Quick Build !!!
+						Lua 1:42:51:035
+ObjCheat CheatFill
+						Lua 1:46:16:358
+ObjCheat CheatFill
+						Lua 1:47:30:255
+AMECHK false
+						Lua 1:48:37:052
+thread: 000002C1547B79F0
+						Lua 1:49:34:958
+Load Game: 
+	lua_revision: 403908 (last saved with) 
+	orig_lua_revision: 403908 (created with) 
+	assets_revision: 33006 
+
+	dlcs: norman, thomas 
+
+	mods: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack 
+						Lua 1:49:37:779
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 1:49:37:782
+[mod] [CommunityFixPack] SilentHitMomentFX: restored 2 missing hit-moment tracker(s) on load
+						Lua 1:49:37:793
+game_settings:
+    sponsor: TerraInitiative
+    profile: CEO
+    founding_faction: MarsDemocraticParty
+    rival_colonies: Japan, ESA, IMM
+    mystery_random: 
+    game_rules: (none)
+more_game_settings: save_game_id: Zp9yXI55ZxuksNmK, mystery: none, coordinates: 11N95W, landing_spot: , logo: TerraInitiative
+map_conditions: altitude: 3225, temperature: -13, cold_wave: 30, dust_devils: 99, dust_storm: 123, meteors: 36
+map_resources: concrete: 73, metals: 73, precious_metals: 73, water: 182
+						Lua 1:49:37:833
+[mod] [CommunityFixPack] SaveSanitizer: F95 astrogeologist-residue pass removed 0 modifier(s), left 0 unidentified
+[mod] [CommunityFixPack] SaveSanitizer: F48 station-connector pass repaired 0 of 0 track(s) walked (0 raised)
+Game Loaded in 2875 ms
+						Lua 1:49:37:858
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 1:49:38:310
+Game loaded on map BlankBig_04 in 3479 ms
+						Lua 1:49:39:615
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 1:49:40:615
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 1:50:09:471
+thread: 000002C15B726288
+						Lua 1:55:22:371
+F119 ID UniversalTradeRocket TradeRocket CmdLoad fuel 0 need 50000
+						Lua 1:59:50:205
+Stop sequence GenericAnomalies - Rare metals in meteor : FinishedStop sequence list GenericAnomalies						Lua 2:01:53:179
+thread: 000002C1551ADA78
+						Lua 2:01:58:667
+ObjCheat CheatFill
+						Lua 2:05:49:556
+F119 ID false false false fuel false need false
+						Lua 2:06:00:153
+[string "SMRF119Rocket=SelectedObj local r=SMRF119Rock..."]:1: attempt to call a nil value (method 'GetFuelResourceRequest')
+						Lua 2:06:03:771
+F119 ID UniversalTradeRocket TradeRocket CmdLoad fuel 41000 need 50000
+						Lua 2:07:32:763
+F119 OFF true AMECHK false
+						Lua 2:08:17:660
+F119 AME-OFF fuel 41000 need 30000 supply 0 demand 5000
+						Lua 2:09:54:634
+F119 AME-OFF fuel 50000 need 30000 supply 0 demand 0
+						Lua 2:10:41:390
+F119 ON true cmd CmdLoad fuel 50000
+						Lua 2:11:48:891
+Load Game: 
+	lua_revision: 403908 (last saved with) 
+	orig_lua_revision: 403908 (created with) 
+	assets_revision: 33006 
+
+	dlcs: norman, thomas 
+
+	mods: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack 
+						Lua 2:11:51:701
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 2:11:51:702
+[mod] [CommunityFixPack] TradeRocketFuelRefresh: refreshed 1 landed trade rocket fuel request(s) after load
+						Lua 2:11:51:703
+[mod] [CommunityFixPack] SilentHitMomentFX: restored 2 missing hit-moment tracker(s) on load
+						Lua 2:11:51:714
+game_settings:
+    sponsor: TerraInitiative
+    profile: CEO
+    founding_faction: MarsDemocraticParty
+    rival_colonies: Japan, ESA, IMM
+    mystery_random: 
+    game_rules: (none)
+more_game_settings: save_game_id: Zp9yXI55ZxuksNmK, mystery: none, coordinates: 11N95W, landing_spot: , logo: TerraInitiative
+map_conditions: altitude: 3225, temperature: -13, cold_wave: 30, dust_devils: 99, dust_storm: 123, meteors: 36
+map_resources: concrete: 73, metals: 73, precious_metals: 73, water: 182
+						Lua 2:11:51:734
+[mod] [CommunityFixPack] SaveSanitizer: F95 astrogeologist-residue pass removed 0 modifier(s), left 0 unidentified
+Game Loaded in 2843 ms
+						Lua 2:11:51:759
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 2:11:52:221
+Game loaded on map BlankBig_04 in 3445 ms
+						Lua 2:11:53:524
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 2:11:54:525
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 2:12:03:046
+F119 HEAL cmd CmdLoad fuel 50000 need 30000 supply 20000 demand 0
+						Lua 2:19:17:375
+Load Game: 
+	lua_revision: 403908 (last saved with) 
+	orig_lua_revision: 403908 (created with) 
+	assets_revision: 33006 
+
+	dlcs: norman, thomas 
+
+	mods: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack 
+						Lua 2:19:20:162
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 2:19:20:165
+[mod] [CommunityFixPack] SilentHitMomentFX: restored 2 missing hit-moment tracker(s) on load
+						Lua 2:19:20:175
+game_settings:
+    sponsor: TerraInitiative
+    profile: CEO
+    founding_faction: MarsDemocraticParty
+    rival_colonies: Japan, ESA, IMM
+    mystery_random: 
+    game_rules: (none)
+more_game_settings: save_game_id: Zp9yXI55ZxuksNmK, mystery: none, coordinates: 11N95W, landing_spot: , logo: TerraInitiative
+map_conditions: altitude: 3225, temperature: -13, cold_wave: 30, dust_devils: 99, dust_storm: 123, meteors: 36
+map_resources: concrete: 73, metals: 73, precious_metals: 73, water: 182
+						Lua 2:19:20:212
+[mod] [CommunityFixPack] SaveSanitizer: F95 astrogeologist-residue pass removed 0 modifier(s), left 0 unidentified
+[mod] [CommunityFixPack] SaveSanitizer: F48 station-connector pass repaired 0 of 0 track(s) walked (0 raised)
+Game Loaded in 2838 ms
+						Lua 2:19:20:236
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 2:19:20:693
+Game loaded on map BlankBig_04 in 3447 ms
+						Lua 2:19:21:998
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 2:19:22:999
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 2:20:01:678
+thread: 000002C15B735510
+						Lua 2:21:12:646
+F119 ID2 false false false fuel false need false override false AMECHK false
+						Lua 2:21:18:007
+F119 ID2 UniversalTradeRocket TradeRocket CmdLoad fuel 40000 need 50000 override false AMECHK false
+						Lua 2:22:46:653
+F119 AME-ON fuel 40000 need 30000 supply 10000 demand -10000
+						Lua 2:25:30:916
+Stop sequence GenericAnomalies - Rare metals in meteor : FinishedStop sequence list GenericAnomalies						Lua 2:28:35:066
+
+!!! Quick Build !!!
+						Lua 2:28:59:184
+C86 SETUP X 1 1 deep scanned Y 1 2 unexplored class MapSector adapted false
+						Lua 2:28:59:196
+C86 TEST X deep scanned Y scanned

@@ -1,12 +1,12 @@
 <!-- GENERATED — never hand-edit; regenerate with: python tools/doccheck.py --regen -->
 <!-- split_facts.py --write is the one-time MIGRATION from the retired pre-split doc, never a regeneration; verify: python tools/doccheck.py -->
 
-# Engine facts index — 90 facts
+# Engine facts index — 91 facts
 
 One file per top-level bullet of the old `docs/agent/ENGINE_FACTS.md`, in
 source order; ids are stable. `updated` is git's last touch of the fact's
 own lines. `verified` is the first date the fact's TEXT presents as an
-observation (58 of 90 state one) — a mechanical extraction, not an
+observation (59 of 91 state one) — a mechanical extraction, not an
 adjudication: read the fact for what was actually measured, several of
 which carry their own ⚖️ "what is measured and what is not" paragraph.
 The preamble that opened the old file is `_preamble.md`.
@@ -103,4 +103,5 @@ The preamble that opened the old file is `_preamble.md`.
 | EF-088 | 1.1.0 shader 38121decbc3eee12 is byte-proven Reflections.fx REFLECT_RAYS and exists verbatim in the cache; owner logs tie two RAYS programs to the faulting threads, intervention remains owed | 2026-09-11 | 2026-09-11 | 32 | [EF-088.md](EF-088.md) |
 | EF-089 | 1.1.0 mod renderer routes: mod code follows InitRenderEngine; hidden hr values require native enumeration; persistent data is not arbitrary startup config; DlcMountFolder is an untested overlay route | 2026-09-11 | 2026-09-11 | 38 | [EF-089.md](EF-089.md) |
 | EF-090 | 1.1.0 cache overlay consumed in owner bench; index names 18 RAYS records; v2 covers all, with normal-loading treatment untested | 2026-09-11 | 2026-09-11 | 56 | [EF-090.md](EF-090.md) |
+| EF-091 | A landed non-player rocket launches the instant its cargo reads ready, and a drone request's GetTargetAmount goes negative after a re-size while drones hold claims (F119 sitting) | 2026-09-11 | 2026-09-11 | 18 | [EF-091.md](EF-091.md) |
 

@@ -354,6 +354,7 @@ both return/drop anything in `ModEnvBlacklist`). Consequences you must know:
 | `CheatTriggerUndergroundCaveIn(pos)` | `Lua/Marsquake.lua:284` | cave-in at a position |
 | `CheatStopDisaster()` | `Lua/Cheats.lua:74` | stop the running disaster |
 | `CheatStartMystery(id)` | `Lua/Mysteries/Mysteries.lua:91` | **gated on `Platform.cheats`** — see PT-15 |
+| `CreateGameTimeThread(function() SA_CallTradeRocketWithCargo:SARun{rocket_id="<id>", cargo=PlaceObj("ResourceCargoList", {Food=5000})} end)` | `Lua/Sequences/SA_Gameplay.lua:2831` | ✅ **[RAN 2026-09-11, F119 sitting]** summons an Earth-sent **Trade** rocket — the class Mysteries 7/8/9 send — with NO mystery running; needs a thread (`SAExec` ends in `Sleep(1)`). Lands wherever you put it. ⚠️ It launches the INSTANT its cargo reads ready (`EF-091`), so trigger anything while it is still loading. Per-object A/B from the same sitting: `rawset(obj, "<method>", fn)` shadows a class method for ONE object; remove it with `rawset(obj, "<method>", nil)` BEFORE any save — a function on a persisted object enters the save (`EF-022`). Record: `agent/bugs/F119.md` |
 | `CheatMapExplore("scanned"\|"deep scanned"\|"scan queued")` | `Lua/Cheats.lua:5` | reveal deposits |
 | `UIColony:UnlockUnderground()` | `Lua/Colony.lua:490` | underground access |
 | `CheatRevealDarkness()` | `Lua/Cheats.lua:390` | generate + switch to the underground map |

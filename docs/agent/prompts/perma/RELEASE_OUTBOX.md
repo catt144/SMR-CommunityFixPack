@@ -37,10 +37,11 @@ player surface bumps it by one on release.
   refreshes a pre-stuck Trade rocket when a save loads. Player-facing example:
   the Wildfire cure rocket can otherwise wait forever and stop the mystery.
   Count 48 → 49.
-- **Status:** `filed`; source re-verified on 1.1.0.403908, **11/11 desk demands
-  held**, not reproduced or exercised in the game. **Beta candidate (untested in
-  play)** pending checklist 149's attended boot/callback check. A desk-simulated
-  heal is not evidence that a real stuck save heals.
+- **Status:** **`tested-attended` 2026-09-11** (checklist 149): 11/11 desk demands,
+  then in play — fix off for one rocket reproduced the stuck rocket on the real
+  Advanced Martian Engines trigger; a save/load of that stuck rocket was healed
+  (`refreshed 1`) and it left; fix on re-sized it at once and it left. Not
+  covered: the Wildfire loop itself, a player's real save. Entry §Attended check.
 
 ### Pending — C86 Advanced Orbital Probe scan downgrade
 
@@ -49,9 +50,10 @@ player surface bumps it by one on release.
   back to “Scanned,” inviting a pointless repeat deep scan. The staged repair
   makes the three shipped scan statuses monotonic while preserving equal,
   upward, unknown and foreign-subclass calls. Count 49 → 50.
-- **Status:** `cand`; every `MapSector:Scan` caller re-read on 1.1.0.403908,
-  **7/7 desk demands held**, not exercised in the game. **Beta candidate
-  (untested in play)** pending checklist 149's applied-line boot.
+- **Status:** **`tested-attended` 2026-09-11** (checklist 149): 7/7 desk demands,
+  then the probe's own scan call on real sectors kept a deep-scanned sector deep
+  and still scanned its neighbour. Fix-off leg desk-only; a real probe object not
+  fired. Entry §Attended check.
 
 ---
 
