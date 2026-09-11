@@ -8,6 +8,9 @@ every specific below.
 > *"Excluding prefabs is wrong, and will be fixed in the next patch - until then, please include it in your mod."*
 > So the exemption is a confirmed defect by the game's own developers, and they have asked us to carry the fix
 > until their patch ships. Entry: `docs/agent/bugs/C88.md`.
+>
+> ⚖️ **Owner ruling 2026-09-11: this build runs in a CLAUDE session** — broad hunts go to Codex/Astra, builds stay
+> with Claude. The brief is still tool-neutral; nothing in it depends on a particular tool set.
 
 ## ⛔ GATE 0 — do not start until these two are true
 

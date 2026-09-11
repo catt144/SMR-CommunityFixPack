@@ -8,6 +8,64 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-11 - smr-bugfixpack-e6 close-out: the PDX dev's reply — C88 answered, F37 refuted, two briefs written
+
+tags: lookback handoff dev-reply C88 F37 ck150 migration astra prefabs tooling
+
+Started as the orchestrator handoff (orientation; the owner picked the work). **Arc:** oriented → found the v8 Mod Editor
+pack uncommitted and confirmed BY MESSAGE that it was the release session's lane → the owner relayed a Paradox developer's
+reply in the Building Codes thread → recorded it (`3b880dc`, checklist **150**) → tooling inventory for the owner's
+disclosure decision → measured the migration cluster's real evidence state → `prompts/MIGRATION_CLUSTER_CHECK.md`
+(`18fd4ce`, fired in Codex/Astra by the owner within minutes) → `prompts/C88_PREFAB_BUILD.md` (`63a5bae`) → RUNNING
+markers + the e6 outbox block (`613174b`).
+
+**Findings.**
+1. **F37 is NOT reachable on 1.1.0 — the developer was right.** 1.1.0 applies the farm's oxygen modifier only while
+   working (`Farm.lua:165/:630/:648`; 1.0.7's ungated `:557` was the whole leak window), and `Building:Destroy` clears it
+   at `:1570` while the dome is still attached, before `Done`'s `SetDome(false)` (`:537`). REMOVE candidate, ck150 (c).
+2. **C88 answered:** not intended, fixed in their next patch, carry it meanwhile. The build brief pins the mechanism —
+   `msg_reactions` handlers register BY FUNCTION REFERENCE (`CommonLua/Reactions.lua:130-137`, `:469-479`), so the fix is
+   an ADDITIVE `OnMsg.ConstructionComplete`, not a preset edit; `SetModifier` is id-keyed (`Lua/Modifiers.lua:181-204`),
+   so it degrades to a no-op when their patch lands; `from_prefab` is stored nowhere (8 sites tree-wide), so buildings
+   already standing CANNOT be repaired; and an open question — what clears the modifier on a mid-game repeal, since only
+   `SavegameFixups.RemoveRepealedBuildingCodesMaintenance` (`Laws.lua:465-473`) was found — may be a vanilla defect.
+3. **The migration cluster's evidence state, measured:** `bodycheck` OK on all 21 pinned rows, `sigcheck` 0 MISMATCH; the
+   hotfix-2 re-read did cover all eight modules and changed five; **but the seven migration functions 1.1.0 rewrote
+   (`FindEmigrationDome` body+sig with a new `force_leave`, `TryToEmigrateToDome`, `UpdateResidence`, `ChooseResidence`,
+   `CanReserveResidence`, `CancelResidenceReservation`, `GatherFreeLivingSpaces`) appear in `INVENTORY.tsv` and in NO
+   `SEAM_COVERAGE.tsv` row** — only a file-level skim. In-play since 1.1.0 in this cluster: C83 alone.
+
+**Lookback.**
+1. **Good:** the foreign uncommitted `items.lua`/`metadata.lua` were checked by message with the release session before
+   assuming anything, and that lane was untouched all session; ck150 was claimed by message to both live peers first.
+2. **Good:** a peer planned to run a STATE eviction inside its post-upload close; flagged that eviction is owner-fired
+   (ck132) and it stood down. A peer's reasonable-sounding plan is still a claim.
+3. **Good:** the F37 verdict came from a read-only investigator, but every load-bearing line was re-read here before it
+   reached an entry or the owner — including the `Destroy`-order lines the whole verdict rests on.
+4. **Miss:** I described the tooling to the owner from my own summary instead of the tools' own headers, and they had to
+   ask twice before I read the artefacts. Read the thing before describing it.
+5. **Miss:** my ck150 pointer pushed STATE 56 bytes past its warn — the same failure the previous close-out logged the
+   day before. When STATE already sits at the cap, the pointer belongs in the handoff, not in STATE.
+6. **Routing learned:** broad hunts go to Codex/Astra (the owner fired the migration brief there unprompted — *"this
+   kinda broad hunt task seems particularly suited to astra's abilities"*), builds stay with Claude (owner ruling on
+   C88). A one-off brief may be RUNNING elsewhere within minutes of its commit, so the run is marked in git.
+
+**The migration check STOPPED during this close-out, under the brief's own §5 harm condition.** Astra's banner claims
+**F59's vacancy notification can take an expedition crew member's bed before vanilla reserves it** — 6/6 desk controls,
+**no in-play reproduction** ⇒ a desk-controlled CLAIM, the same shape as hotfix 2's F-2, filed by Astra as owner
+decision **151** (checklist + a STATE line). Seven S1 reads and S2 through F59 are done; F60/F73, S4 and the report
+remain; no fix was changed. ⇒ The brief and its map row stay until the real completion conditions hold.
+
+**Uncommitted at close (Astra's, untouched — its ENTIRE output):** `bugs/F51.md`, `bugs/F59.md`, `bugs/F60.md`,
+`agent/STATE.md`, `PLAYTEST_CHECKLIST.md`, `prompts/MIGRATION_CLUSTER_CHECK.md`, `prompts/README.md`,
+`reports/MIGRATION_CHECK_PROGRESS.md`, `reports/MIGRATION_DEV_REPORT.md`, `reports/MIGRATION_DESK_RESULTS.txt`,
+`tools/desk_migration_cluster.py`, `tools/desk_f59_expedition.py` — plus the owner's v8 pack (`items.lua`,
+`metadata.lua`), the release session's. ⛔ The next session verifies the F59 claim from the primary artefacts before
+relaying it: a peer's finding is a claim, and this one would change a shipped module. ⛔ The next session verifies the F59 claim from the
+primary artefacts before relaying it: a peer's finding is a claim, and this one would change a shipped module.
+
+---
+
 ## 2026-09-11 - ck149 sitting (smr-bugfixpack-24): F119 + C86 TESTED-ATTENDED — A/B + load heal in play
 
 tags: sitting attended F119 C86 ck149 A/B heal trade-rocket EF-091

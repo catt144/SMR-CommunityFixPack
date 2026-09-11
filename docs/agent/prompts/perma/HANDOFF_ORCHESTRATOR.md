@@ -58,11 +58,22 @@ which is fully briefed.
 - The Steam BBCode and Paradox paste-in styling: done? The owner was pasting on 09-11.
 
 **Fix pack — from `smr-bugfixpack-e6` (2026-09-11, the PDX dev's reply):**
-- ⏳ **RUNNING — `prompts/MIGRATION_CLUSTER_CHECK.md` (Codex/Astra, fired at `18fd4ce`).** The eight colonist-migration
-  fixes re-checked against 1.1.0 plus a dev-facing report. ⛔ Never start a second run; Astra is invisible to
-  `ListAgents` and its live progress is the uncommitted `reports/MIGRATION_CHECK_PROGRESS.md`.
-- **`prompts/C88_PREFAB_BUILD.md` — READY, not started.** Gated on (1) the release lane clearing (H-10 needs an
-  `items.lua` entry, and `items.lua`/`metadata.lua` are the owner's uncommitted v8 pack) and (2) checklist 150 (b).
+- ⛔ **STOPPED, not finished — `prompts/MIGRATION_CLUSTER_CHECK.md` (Codex/Astra, fired at `18fd4ce`).** It stopped under
+  the brief's own §5 harm condition and its banner claims: **F59's vacancy notification can take an expedition crew
+  member's bed before vanilla reserves it** — 6/6 desk controls held, **no in-play reproduction**, so this is a
+  DESK-CONTROLLED CLAIM, not a confirmed harm; it is the same shape as hotfix 2's F-2. Astra filed owner decision
+  **151** (checklist + a STATE line). ⛔ Do not start a second run and do not delete the brief: resume from
+  `reports/MIGRATION_CHECK_PROGRESS.md` + `reports/MIGRATION_DEV_REPORT.md`. Done: all seven S1 reads and S2 through
+  F59. Remaining: F60/F73, S4, the report. No fix was changed.
+  ⚠️ **At this close its whole output was UNCOMMITTED** (`bugs/F51.md`, `F59.md`, `F60.md`, `STATE.md`,
+  `PLAYTEST_CHECKLIST.md`, the brief, the prompt-map row, `reports/MIGRATION_CHECK_PROGRESS.md`,
+  `MIGRATION_DEV_REPORT.md`, `MIGRATION_DESK_RESULTS.txt`, `tools/desk_migration_cluster.py`,
+  `tools/desk_f59_expedition.py`). A Claude session must **verify both halves of the F59 claim from the primary
+  artefacts before relaying it anywhere** — a peer's finding is a claim, and this one would change a shipped module.
+  ⚠️ Astra's STATE line put STATE over its warn again (12474 B at this close) — measure it, never quote that number.
+- **`prompts/C88_PREFAB_BUILD.md` — READY, not started. ⚖️ Owner ruling 09-11: this build goes to a CLAUDE session,
+  not Astra** (hunts → Astra, builds → Claude). Gated on (1) the release lane clearing (H-10 needs an `items.lua`
+  entry, and `items.lua`/`metadata.lua` are the owner's uncommitted v8 pack) and (2) checklist 150 (b).
 - **Checklist 150** carries the owner's three decisions: the "where do you collect your bugs" wording, the C88 fix
   shape, and retiring F37 (1.1.0 closed its leak — the dev was right).
 
