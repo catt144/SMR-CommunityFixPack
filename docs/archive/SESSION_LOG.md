@@ -8,6 +8,30 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-11 - FR-1 cache route: formats decoded; directory-overlay probe ready, native bench owed
+
+tags: FR-1 linux proton nvidia cache shader mod bench
+
+Consumed the cache-route exploration brief after checking HEAD f4e5409 and owner A/B/D/E.
+All 6,453 numeric records parse to EOF; binary/text indexes reproduce byte-identically.
+FLPK writer reconstructs the whole stock directory; its final entry word is a subtree
+length. Fake-DLC reload removes the base mount and ignores mount failure, so a partial
+replacement through it cannot assume base fallback. DlcMountFolder is the better candidate:
+preserve the base cache/index, layer six records, then request the measured boot reload.
+An exact-root empty 8x8 shader passes DXIL validation; disposable opt-in mod and classifier
+are at C:\Dev\SMR-FR1-CacheRoute-2026-09-10\fr1-cache-probe-v1.zip. Lua harness 27/27;
+gameplay, native overlay precedence, record acceptance and NVIDIA 580 compilation NEVER RUN.
+Only two distinct RAYS variants have measured faults; family-wide failure remains inferred.
+Native SSR-zero resource-creation guard found; complete dispatch/visual equivalence remains open.
+Report: agent/reports/FR1_CACHE_ROUTE_2026-09-11.md; receipt:
+archive/fr1-cache-route-desk-2026-09-11.json. EF-090 added; EF-088 attribution and EF-089
+timing corrected; checklist 145 updated. Shared FINDINGS/reply edits belong to a concurrent
+session; this report holds the new corrections. STATE 12,248 bytes: optional NEXT would not fit.
+No shipping code, game/source/evidence write, game/editor launch, portal or tracker action.
+One-shot brief consumed in the delivery commit. Owner bench and scope decision remain ck145.
+
+---
+
 ## 2026-09-10 late - FR-1 options: shader identity and packaged cache proved; mitigation bench still owed
 
 tags: FR-1 linux proton nvidia shader cache options mod scope

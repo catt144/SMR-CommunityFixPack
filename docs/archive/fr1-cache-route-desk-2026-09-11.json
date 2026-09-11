@@ -1,0 +1,1534 @@
+{
+  "date": "2026-09-11",
+  "orientation_head": "f4e5409",
+  "verdict": "BETTER-ROUTE-FOUND; desk feasible; native bench NEVER RUN",
+  "evidence_roots": {
+    "G": "C:\\Dev\\SMR-SrcArchive\\1.1.0.403908\\Src",
+    "S": "C:\\Dev\\SMR-FR1-Options-2026-09-10\\shadercache-extracted",
+    "B": "C:\\Dev\\fr1-mm-complete\\fr1-mm",
+    "D": "C:\\Dev\\SMR-FR1-CacheRoute-2026-09-10"
+  },
+  "corpus": {
+    "numeric_records": 6453,
+    "index_files": 2,
+    "all_parsed_to_EOF": true,
+    "stages": {
+      "vertex_pixel": 6225,
+      "compute": 228
+    },
+    "corpus_receipt": {
+      "path": "C:\\Dev\\SMR-FR1-CacheRoute-2026-09-10\\corpus-parsed.json",
+      "bytes": 29163532,
+      "sha256": "29ab25c2d73ea80934947e1c5a700ad5d280d7fd4a477c706b3508b7d50fb154"
+    }
+  },
+  "index": {
+    "binary": {
+      "path": "C:\\Dev\\SMR-FR1-Options-2026-09-10\\shadercache-extracted\\index.bin",
+      "bytes": 1269962,
+      "sha256": "e39b148c0d8121caa12da16e6c10dfe8cedf0d57b0afd9b22a8bfd8526428ae3"
+    },
+    "text": {
+      "path": "C:\\Dev\\SMR-FR1-Options-2026-09-10\\shadercache-extracted\\index.txt",
+      "bytes": 1419240,
+      "sha256": "e11055e007854ec1c7712ee19cd27849e02cb6e065cab01cb7d2d43f5c722eb2"
+    },
+    "binary_roundtrip": true,
+    "text_byte_identical": true,
+    "tags": {
+      "binary": 6453,
+      "lookup": 7177,
+      "source": 288,
+      "end": 1
+    }
+  },
+  "replacements": [
+    {
+      "variant": "default",
+      "key": "14281071190732923386",
+      "original_bytes": 25133,
+      "replacement_bytes": 10237,
+      "metadata_bytes": 8545,
+      "metadata_sha256": "a96b1a718ef7f07b407419f48299fc89906b668164afd4a2c14520e2d6126a0b",
+      "original_sha256": "03f7807dc5570447a32d981a39fb620ecc139ddeb24500eb9cbe55541808bb11",
+      "replacement_sha256": "9285b0005c5d2a57e24f0f78d460a575d1b9bf73d78cb4f842514a8706f362b4",
+      "dxbc_sha256": "d9f88d669fdf2c37c1046fbf977d28760a49a7189f71c955a77e55f68662dc83",
+      "dxil_sha256": "516fc3836f468850495bceefbc0d9417f5dceae6ec106f9e72ca299e27e2bac9",
+      "root_sha256": "3ff5c9b85551833d481d786ea535d6135089532ddee3f53e3a3f09a8a2aa44f3"
+    },
+    {
+      "variant": "imp",
+      "key": "6121468085666728083",
+      "original_bytes": 28174,
+      "replacement_bytes": 10262,
+      "metadata_bytes": 8570,
+      "metadata_sha256": "c3cabff3b8d74821fa7ccc3351f21306937b17bd042cce82cba25c740697133e",
+      "original_sha256": "63fedaa1cee7649849dc5835f561de373aa1839d0717af83738b3bde625ec700",
+      "replacement_sha256": "5a4fd96ea2fc4ffba83c27ea6da98755156d757538dba176de05a78a36407776",
+      "dxbc_sha256": "d9f88d669fdf2c37c1046fbf977d28760a49a7189f71c955a77e55f68662dc83",
+      "dxil_sha256": "516fc3836f468850495bceefbc0d9417f5dceae6ec106f9e72ca299e27e2bac9",
+      "root_sha256": "3ff5c9b85551833d481d786ea535d6135089532ddee3f53e3a3f09a8a2aa44f3"
+    },
+    {
+      "variant": "hyp",
+      "key": "3532759928818375094",
+      "original_bytes": 25171,
+      "replacement_bytes": 10231,
+      "metadata_bytes": 8539,
+      "metadata_sha256": "1940050382635c24ef0874421d0fa42c15ba91ca53f89e6de1f3d9f08c011a86",
+      "original_sha256": "7de7ba3100163fcbd89947327cc65f95311b2955aa75a31fc698d6932bc53743",
+      "replacement_sha256": "2315647acb20e8edaf170caa5c4e4f6e4b4a2faa0adef50608456b73c3ddd917",
+      "dxbc_sha256": "d9f88d669fdf2c37c1046fbf977d28760a49a7189f71c955a77e55f68662dc83",
+      "dxil_sha256": "516fc3836f468850495bceefbc0d9417f5dceae6ec106f9e72ca299e27e2bac9",
+      "root_sha256": "3ff5c9b85551833d481d786ea535d6135089532ddee3f53e3a3f09a8a2aa44f3"
+    },
+    {
+      "variant": "hyp_imp",
+      "key": "12556516658419309610",
+      "original_bytes": 28212,
+      "replacement_bytes": 10256,
+      "metadata_bytes": 8564,
+      "metadata_sha256": "420aa62add8d27e3f4685d94f845953d7ba9b3785c7eba41f41ea40f4e797eff",
+      "original_sha256": "7d77b258aec40e7dfc099b04a49062d8b0f2d271de1fc7118b1c186069462602",
+      "replacement_sha256": "77261668057cc0fdf979ae45472c927dd54959d94180bc5a5681fe59e9189f3b",
+      "dxbc_sha256": "d9f88d669fdf2c37c1046fbf977d28760a49a7189f71c955a77e55f68662dc83",
+      "dxil_sha256": "516fc3836f468850495bceefbc0d9417f5dceae6ec106f9e72ca299e27e2bac9",
+      "root_sha256": "3ff5c9b85551833d481d786ea535d6135089532ddee3f53e3a3f09a8a2aa44f3"
+    },
+    {
+      "variant": "hiz",
+      "key": "14433279818421691317",
+      "original_bytes": 25942,
+      "replacement_bytes": 10210,
+      "metadata_bytes": 8518,
+      "metadata_sha256": "9343714d5c68cbf4d0b29fbdf08a4926acbc775b5e6d8e5598483e6825aa9cd9",
+      "original_sha256": "6d2cd88fa3bee5f9e8f107da7e071217606be435dfdd597b24c942fdf0885567",
+      "replacement_sha256": "cd0a158cb9e3790bac9d7d313e451759485e6175d5aab646cdcdbab6d80d1378",
+      "dxbc_sha256": "d9f88d669fdf2c37c1046fbf977d28760a49a7189f71c955a77e55f68662dc83",
+      "dxil_sha256": "516fc3836f468850495bceefbc0d9417f5dceae6ec106f9e72ca299e27e2bac9",
+      "root_sha256": "3ff5c9b85551833d481d786ea535d6135089532ddee3f53e3a3f09a8a2aa44f3"
+    },
+    {
+      "variant": "hiz_imp",
+      "key": "7464541473171016648",
+      "original_bytes": 29319,
+      "replacement_bytes": 10235,
+      "metadata_bytes": 8543,
+      "metadata_sha256": "10638a2953dbb2ae619732cd5f3e058a8e799b6fc589f67fa9a2819c8051e272",
+      "original_sha256": "dde0e1892d79be29b63b127a8c6c843b6ffe4825e4e24004ef9e10a19334394e",
+      "replacement_sha256": "ba8cdf29c2c30df0f6504d57b1a197c36cf7d0c2578610be2bf2a0723a9bc24b",
+      "dxbc_sha256": "d9f88d669fdf2c37c1046fbf977d28760a49a7189f71c955a77e55f68662dc83",
+      "dxil_sha256": "516fc3836f468850495bceefbc0d9417f5dceae6ec106f9e72ca299e27e2bac9",
+      "root_sha256": "3ff5c9b85551833d481d786ea535d6135089532ddee3f53e3a3f09a8a2aa44f3"
+    }
+  ],
+  "flpk": {
+    "stock": {
+      "entries": 6455,
+      "directory_bytes": 228555,
+      "byte_identical_directory": true
+    },
+    "partial": {
+      "path": "C:\\Dev\\SMR-FR1-CacheRoute-2026-09-10\\partial-ShaderCached3d12.fpk",
+      "bytes": 61676,
+      "sha256": "ed605284cb1d8c2082ab17197cff75350f60580ac9f55912d1de467771d0812e",
+      "files": 6,
+      "reader_roundtrip": true,
+      "native_mount": "NEVER RUN"
+    }
+  },
+  "full_comparison": {
+    "6307822963999535568": {
+      "aliases": [
+        "REFLECT_FULL_tile8_hiz0_hyp0_imp0"
+      ],
+      "types": 42,
+      "resources": 13,
+      "parameters": [
+        [
+          145,
+          8
+        ],
+        [
+          146,
+          8
+        ],
+        [
+          147,
+          1
+        ],
+        [
+          149,
+          0
+        ]
+      ],
+      "root_sha256": "3ff5c9b85551833d481d786ea535d6135089532ddee3f53e3a3f09a8a2aa44f3",
+      "bytes": 16386
+    },
+    "1479045878789461016": {
+      "aliases": [
+        "REFLECT_FULL_tile8_hiz0_hyp0_imp1"
+      ],
+      "types": 42,
+      "resources": 15,
+      "parameters": [
+        [
+          145,
+          8
+        ],
+        [
+          146,
+          8
+        ],
+        [
+          147,
+          1
+        ],
+        [
+          149,
+          0
+        ]
+      ],
+      "root_sha256": "3ff5c9b85551833d481d786ea535d6135089532ddee3f53e3a3f09a8a2aa44f3",
+      "bytes": 17854
+    },
+    "5327575114630207334": {
+      "aliases": [
+        "REFLECT_FULL_tile8_hiz0_hyp1_imp0",
+        "REFLECT_FULL_tile8_hiz1_hyp1_imp0"
+      ],
+      "types": 42,
+      "resources": 13,
+      "parameters": [
+        [
+          145,
+          8
+        ],
+        [
+          146,
+          8
+        ],
+        [
+          147,
+          1
+        ],
+        [
+          149,
+          0
+        ]
+      ],
+      "root_sha256": "3ff5c9b85551833d481d786ea535d6135089532ddee3f53e3a3f09a8a2aa44f3",
+      "bytes": 16396
+    },
+    "5775549574148126130": {
+      "aliases": [
+        "REFLECT_FULL_tile8_hiz0_hyp1_imp1",
+        "REFLECT_FULL_tile8_hiz1_hyp1_imp1"
+      ],
+      "types": 42,
+      "resources": 15,
+      "parameters": [
+        [
+          145,
+          8
+        ],
+        [
+          146,
+          8
+        ],
+        [
+          147,
+          1
+        ],
+        [
+          149,
+          0
+        ]
+      ],
+      "root_sha256": "3ff5c9b85551833d481d786ea535d6135089532ddee3f53e3a3f09a8a2aa44f3",
+      "bytes": 17864
+    },
+    "13446704771257979524": {
+      "aliases": [
+        "REFLECT_FULL_tile8_hiz1_hyp0_imp0"
+      ],
+      "types": 42,
+      "resources": 13,
+      "parameters": [
+        [
+          145,
+          8
+        ],
+        [
+          146,
+          8
+        ],
+        [
+          147,
+          1
+        ],
+        [
+          149,
+          0
+        ]
+      ],
+      "root_sha256": "3ff5c9b85551833d481d786ea535d6135089532ddee3f53e3a3f09a8a2aa44f3",
+      "bytes": 16902
+    },
+    "17379507639012790088": {
+      "aliases": [
+        "REFLECT_FULL_tile8_hiz1_hyp0_imp1"
+      ],
+      "types": 42,
+      "resources": 14,
+      "parameters": [
+        [
+          145,
+          8
+        ],
+        [
+          146,
+          8
+        ],
+        [
+          147,
+          1
+        ],
+        [
+          149,
+          0
+        ]
+      ],
+      "root_sha256": "3ff5c9b85551833d481d786ea535d6135089532ddee3f53e3a3f09a8a2aa44f3",
+      "bytes": 18407
+    },
+    "10965947805870513868": {
+      "aliases": [
+        "REFLECT_FULL_tile16_hiz0_hyp0_imp0"
+      ],
+      "types": 42,
+      "resources": 13,
+      "parameters": [
+        [
+          145,
+          16
+        ],
+        [
+          146,
+          16
+        ],
+        [
+          147,
+          1
+        ],
+        [
+          149,
+          0
+        ]
+      ],
+      "root_sha256": "3ff5c9b85551833d481d786ea535d6135089532ddee3f53e3a3f09a8a2aa44f3",
+      "bytes": 16386
+    },
+    "10229761774943259924": {
+      "aliases": [
+        "REFLECT_FULL_tile16_hiz0_hyp0_imp1"
+      ],
+      "types": 42,
+      "resources": 15,
+      "parameters": [
+        [
+          145,
+          16
+        ],
+        [
+          146,
+          16
+        ],
+        [
+          147,
+          1
+        ],
+        [
+          149,
+          0
+        ]
+      ],
+      "root_sha256": "3ff5c9b85551833d481d786ea535d6135089532ddee3f53e3a3f09a8a2aa44f3",
+      "bytes": 17854
+    },
+    "12862042566670310166": {
+      "aliases": [
+        "REFLECT_FULL_tile16_hiz0_hyp1_imp0",
+        "REFLECT_FULL_tile16_hiz1_hyp1_imp0"
+      ],
+      "types": 42,
+      "resources": 13,
+      "parameters": [
+        [
+          145,
+          16
+        ],
+        [
+          146,
+          16
+        ],
+        [
+          147,
+          1
+        ],
+        [
+          149,
+          0
+        ]
+      ],
+      "root_sha256": "3ff5c9b85551833d481d786ea535d6135089532ddee3f53e3a3f09a8a2aa44f3",
+      "bytes": 16396
+    },
+    "2525756359264690620": {
+      "aliases": [
+        "REFLECT_FULL_tile16_hiz0_hyp1_imp1",
+        "REFLECT_FULL_tile16_hiz1_hyp1_imp1"
+      ],
+      "types": 42,
+      "resources": 15,
+      "parameters": [
+        [
+          145,
+          16
+        ],
+        [
+          146,
+          16
+        ],
+        [
+          147,
+          1
+        ],
+        [
+          149,
+          0
+        ]
+      ],
+      "root_sha256": "3ff5c9b85551833d481d786ea535d6135089532ddee3f53e3a3f09a8a2aa44f3",
+      "bytes": 17864
+    },
+    "16126860326959266965": {
+      "aliases": [
+        "REFLECT_FULL_tile16_hiz1_hyp0_imp0"
+      ],
+      "types": 42,
+      "resources": 13,
+      "parameters": [
+        [
+          145,
+          16
+        ],
+        [
+          146,
+          16
+        ],
+        [
+          147,
+          1
+        ],
+        [
+          149,
+          0
+        ]
+      ],
+      "root_sha256": "3ff5c9b85551833d481d786ea535d6135089532ddee3f53e3a3f09a8a2aa44f3",
+      "bytes": 16902
+    },
+    "6981418209766408862": {
+      "aliases": [
+        "REFLECT_FULL_tile16_hiz1_hyp0_imp1"
+      ],
+      "types": 42,
+      "resources": 14,
+      "parameters": [
+        [
+          145,
+          16
+        ],
+        [
+          146,
+          16
+        ],
+        [
+          147,
+          1
+        ],
+        [
+          149,
+          0
+        ]
+      ],
+      "root_sha256": "3ff5c9b85551833d481d786ea535d6135089532ddee3f53e3a3f09a8a2aa44f3",
+      "bytes": 18407
+    }
+  },
+  "hash_candidates": [
+    {
+      "variant": "default",
+      "key": "14281071190732923386",
+      "region": "record",
+      "hashes": {
+        "fnv1a64": "18246141357221007006",
+        "xxh64_seed0": "15811480393660247923",
+        "xxh3_64_seed0": "411881432318230156"
+      },
+      "matched": []
+    },
+    {
+      "variant": "default",
+      "key": "14281071190732923386",
+      "region": "body",
+      "hashes": {
+        "fnv1a64": "7105254157862098976",
+        "xxh64_seed0": "2592842685836066622",
+        "xxh3_64_seed0": "12755842829573696421"
+      },
+      "matched": []
+    },
+    {
+      "variant": "default",
+      "key": "14281071190732923386",
+      "region": "metadata",
+      "hashes": {
+        "fnv1a64": "13866731801671650303",
+        "xxh64_seed0": "9553766813771655440",
+        "xxh3_64_seed0": "8289835744234988868"
+      },
+      "matched": []
+    },
+    {
+      "variant": "default",
+      "key": "14281071190732923386",
+      "region": "DXBC",
+      "hashes": {
+        "fnv1a64": "3395185398262645960",
+        "xxh64_seed0": "2653905116020256477",
+        "xxh3_64_seed0": "6122591384401189590"
+      },
+      "matched": []
+    },
+    {
+      "variant": "imp",
+      "key": "6121468085666728083",
+      "region": "record",
+      "hashes": {
+        "fnv1a64": "13493483172056455827",
+        "xxh64_seed0": "14344896121027886042",
+        "xxh3_64_seed0": "9286052626466504823"
+      },
+      "matched": []
+    },
+    {
+      "variant": "imp",
+      "key": "6121468085666728083",
+      "region": "body",
+      "hashes": {
+        "fnv1a64": "17748329001467231257",
+        "xxh64_seed0": "16802732299044701600",
+        "xxh3_64_seed0": "14799817389923254736"
+      },
+      "matched": []
+    },
+    {
+      "variant": "imp",
+      "key": "6121468085666728083",
+      "region": "metadata",
+      "hashes": {
+        "fnv1a64": "9499565874411619322",
+        "xxh64_seed0": "14956768870526315256",
+        "xxh3_64_seed0": "13807184950359625630"
+      },
+      "matched": []
+    },
+    {
+      "variant": "imp",
+      "key": "6121468085666728083",
+      "region": "DXBC",
+      "hashes": {
+        "fnv1a64": "11637373767507188920",
+        "xxh64_seed0": "9699164205819220233",
+        "xxh3_64_seed0": "8259110691128717655"
+      },
+      "matched": []
+    },
+    {
+      "variant": "hyp",
+      "key": "3532759928818375094",
+      "region": "record",
+      "hashes": {
+        "fnv1a64": "9103422038908415704",
+        "xxh64_seed0": "15203225306399159082",
+        "xxh3_64_seed0": "198442344830180479"
+      },
+      "matched": []
+    },
+    {
+      "variant": "hyp",
+      "key": "3532759928818375094",
+      "region": "body",
+      "hashes": {
+        "fnv1a64": "13491249920581460186",
+        "xxh64_seed0": "17417495133301113534",
+        "xxh3_64_seed0": "10758972241431962113"
+      },
+      "matched": []
+    },
+    {
+      "variant": "hyp",
+      "key": "3532759928818375094",
+      "region": "metadata",
+      "hashes": {
+        "fnv1a64": "10365499229541187336",
+        "xxh64_seed0": "5697078185605377594",
+        "xxh3_64_seed0": "18178618885714192359"
+      },
+      "matched": []
+    },
+    {
+      "variant": "hyp",
+      "key": "3532759928818375094",
+      "region": "DXBC",
+      "hashes": {
+        "fnv1a64": "11557084354195750965",
+        "xxh64_seed0": "3767394121791506973",
+        "xxh3_64_seed0": "5811546629820929187"
+      },
+      "matched": []
+    },
+    {
+      "variant": "hyp_imp",
+      "key": "12556516658419309610",
+      "region": "record",
+      "hashes": {
+        "fnv1a64": "13211336872186293089",
+        "xxh64_seed0": "14174812970014256341",
+        "xxh3_64_seed0": "8075201080608006112"
+      },
+      "matched": []
+    },
+    {
+      "variant": "hyp_imp",
+      "key": "12556516658419309610",
+      "region": "body",
+      "hashes": {
+        "fnv1a64": "3793079382777211043",
+        "xxh64_seed0": "13913414136681300518",
+        "xxh3_64_seed0": "8345736539799945087"
+      },
+      "matched": []
+    },
+    {
+      "variant": "hyp_imp",
+      "key": "12556516658419309610",
+      "region": "metadata",
+      "hashes": {
+        "fnv1a64": "3213195071464997879",
+        "xxh64_seed0": "12069071205729882495",
+        "xxh3_64_seed0": "17568173169477721716"
+      },
+      "matched": []
+    },
+    {
+      "variant": "hyp_imp",
+      "key": "12556516658419309610",
+      "region": "DXBC",
+      "hashes": {
+        "fnv1a64": "2484746734310679847",
+        "xxh64_seed0": "6974969421859799467",
+        "xxh3_64_seed0": "3000316427682492899"
+      },
+      "matched": []
+    },
+    {
+      "variant": "hiz",
+      "key": "14433279818421691317",
+      "region": "record",
+      "hashes": {
+        "fnv1a64": "5873553639713434435",
+        "xxh64_seed0": "9102188880243539513",
+        "xxh3_64_seed0": "15447615065060127450"
+      },
+      "matched": []
+    },
+    {
+      "variant": "hiz",
+      "key": "14433279818421691317",
+      "region": "body",
+      "hashes": {
+        "fnv1a64": "7934331144486057329",
+        "xxh64_seed0": "10367458230531884196",
+        "xxh3_64_seed0": "12961338742401107428"
+      },
+      "matched": []
+    },
+    {
+      "variant": "hiz",
+      "key": "14433279818421691317",
+      "region": "metadata",
+      "hashes": {
+        "fnv1a64": "10753690215645547968",
+        "xxh64_seed0": "15337388128274901969",
+        "xxh3_64_seed0": "5407723900080552785"
+      },
+      "matched": []
+    },
+    {
+      "variant": "hiz",
+      "key": "14433279818421691317",
+      "region": "DXBC",
+      "hashes": {
+        "fnv1a64": "3023433042888286942",
+        "xxh64_seed0": "4175212851320537927",
+        "xxh3_64_seed0": "9520256259726071372"
+      },
+      "matched": []
+    },
+    {
+      "variant": "hiz_imp",
+      "key": "7464541473171016648",
+      "region": "record",
+      "hashes": {
+        "fnv1a64": "7465098227692752076",
+        "xxh64_seed0": "16108187506473701525",
+        "xxh3_64_seed0": "16256420234611488497"
+      },
+      "matched": []
+    },
+    {
+      "variant": "hiz_imp",
+      "key": "7464541473171016648",
+      "region": "body",
+      "hashes": {
+        "fnv1a64": "17585087064502002714",
+        "xxh64_seed0": "5081180194350290765",
+        "xxh3_64_seed0": "13932275571885122525"
+      },
+      "matched": []
+    },
+    {
+      "variant": "hiz_imp",
+      "key": "7464541473171016648",
+      "region": "metadata",
+      "hashes": {
+        "fnv1a64": "18025966086164234979",
+        "xxh64_seed0": "17255304800843935664",
+        "xxh3_64_seed0": "15548662677482032203"
+      },
+      "matched": []
+    },
+    {
+      "variant": "hiz_imp",
+      "key": "7464541473171016648",
+      "region": "DXBC",
+      "hashes": {
+        "fnv1a64": "5829170040863317785",
+        "xxh64_seed0": "15704679192768697853",
+        "xxh3_64_seed0": "13840484821867019699"
+      },
+      "matched": []
+    }
+  ],
+  "compiler": [
+    {
+      "argv": [
+        "C:\\Dev\\SMR-FR1-Options-2026-09-10\\dxc-game\\dxc.exe",
+        "-T",
+        "cs_6_6",
+        "-E",
+        "ComputeShaderMain",
+        "-HV",
+        "2021",
+        "-Zpr",
+        "-Qstrip_reflect",
+        "-Qstrip_debug",
+        "-Fo",
+        "C:\\Dev\\SMR-FR1-CacheRoute-2026-09-10\\noop-unrooted.dxil",
+        "C:\\Dev\\SMR-FR1-CacheRoute-2026-09-10\\fr1_noop.hlsl"
+      ],
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Dev\\SMR-FR1-Options-2026-09-10\\dxc-game\\dxc.exe",
+        "-dumpbin",
+        "-extractrootsignature",
+        "-Fo",
+        "C:\\Dev\\SMR-FR1-CacheRoute-2026-09-10\\original-root.bin",
+        "C:\\Dev\\SMR-FR1-CacheRoute-2026-09-10\\default-original.dxil"
+      ],
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Dev\\SMR-FR1-Options-2026-09-10\\dxc-game\\dxc.exe",
+        "-dumpbin",
+        "-setrootsignature",
+        "C:\\Dev\\SMR-FR1-CacheRoute-2026-09-10\\original-root.bin",
+        "-Fo",
+        "C:\\Dev\\SMR-FR1-CacheRoute-2026-09-10\\noop-rooted.dxil",
+        "C:\\Dev\\SMR-FR1-CacheRoute-2026-09-10\\noop-unrooted.dxil"
+      ],
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Dev\\SMR-FR1-Options-2026-09-10\\dxc-game\\dxc.exe",
+        "-dumpbin",
+        "-verifyrootsignature",
+        "C:\\Dev\\SMR-FR1-CacheRoute-2026-09-10\\original-root.bin",
+        "C:\\Dev\\SMR-FR1-CacheRoute-2026-09-10\\noop-rooted.dxil"
+      ],
+      "exit": 0,
+      "stdout": "root signature verification succeeded.",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Dev\\SMR-FR1-Options-2026-09-10\\dxc-new\\dxv.exe",
+        "C:\\Dev\\SMR-FR1-CacheRoute-2026-09-10\\noop-rooted.dxil"
+      ],
+      "exit": 0,
+      "stdout": "Validation succeeded.",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Dev\\SMR-FR1-Options-2026-09-10\\dxc-game\\dxc.exe",
+        "-dumpbin",
+        "C:\\Dev\\SMR-FR1-CacheRoute-2026-09-10\\noop-rooted.dxil"
+      ],
+      "exit": 0,
+      "stdout": ";\n; Input signature:\n;\n; Name                 Index   Mask Register SysValue  Format   Used\n; -------------------- ----- ------ -------- -------- ------- ------\n; no parameters\n;\n; Output signature:\n;\n; Name                 Index   Mask Register SysValue  Format   Used\n; -------------------- ----- ------ -------- -------- ------- ------\n; no parameters\n; shader hash: c7ed1d1e407bf157809dedd8049d8de1\n;\n; Pipeline Runtime Information: \n;\n;PSVRuntimeInfo:\n; Compute Shader\n; NumThreads=(8,8,1)\n; MinimumExpectedWaveLaneCount: 0\n; MaximumExpectedWaveLaneCount: 4294967295\n; UsesViewID: false\n; SigInputElements: 0\n; SigOutputElements: 0\n; SigPatchConstOrPrimElements: 0\n; SigInputVectors: 0\n; SigOutputVectors[0]: 0\n; SigOutputVectors[1]: 0\n; SigOutputVectors[2]: 0\n; SigOutputVectors[3]: 0\n; EntryFunctionName: ComputeShaderMain\n;\n;\n; Buffer Definitions:\n;\n;\n; Resource Bindings:\n;\n; Name                                 Type  Format         Dim      ID      HLSL Bind  Count\n; ------------------------------ ---------- ------- ----------- ------- -------------- ------\n;\ntarget datalayout = \"e-m:e-p:32:32-i1:32-i8:32-i16:32-i32:32-i64:64-f16:32-f32:32-f64:64-n8:16:32:64\"\ntarget triple = \"dxil-ms-dx\"\n\ndefine void @ComputeShaderMain() {\n  ret void\n}\n\n!llvm.ident = !{!0}\n!dx.version = !{!1}\n!dx.valver = !{!2}\n!dx.shaderModel = !{!3}\n!dx.entryPoints = !{!4}\n\n!0 = !{!\"dxcoob 1.8.2505.28 (9efbb6c32)\"}\n!1 = !{i32 1, i32 6}\n!2 = !{i32 1, i32 9}\n!3 = !{!\"cs\", i32 6, i32 6}\n!4 = !{void ()* @ComputeShaderMain, !\"ComputeShaderMain\", null, null, !5}\n!5 = !{i32 4, !6}\n!6 = !{i32 8, i32 8, i32 1}\n\n",
+      "stderr": ""
+    }
+  ],
+  "harness": [
+    {
+      "case": "unarmed",
+      "PASS": true,
+      "mount_calls": 0,
+      "engine_writes": 0,
+      "log": [
+        "[FR1Cache v1] mod-load SSR=0 api=d3d12 adapter=NVIDIA-G0",
+        "[FR1Cache v1] UNARMED; no mount or engine setting changed",
+        "[FR1Cache v1] ChangingMap SSR=0 api=d3d12 adapter=NVIDIA-G0",
+        "[FR1Cache v1] before-LoadBinAssets SSR=0 api=d3d12 adapter=NVIDIA-G0"
+      ]
+    },
+    {
+      "case": "control",
+      "PASS": true,
+      "mount_calls": 1,
+      "engine_writes": 1,
+      "log": [
+        "[FR1Cache v1] mod-load SSR=0 api=d3d12 adapter=NVIDIA-G0",
+        "[FR1Cache v1] ARMED Control folder=Mod/SMR_FR1CacheProbe/Control; keep Reflections Off",
+        "[FR1Cache v1] MOUNT_HELPER_OK; precedence and shader consumption NOT verified",
+        "[FR1Cache v1] RELOAD_REQUESTED; the dump is the treatment witness",
+        "[FR1Cache v1] ChangingMap SSR=0 api=d3d12 adapter=NVIDIA-G0",
+        "[FR1Cache v1] before-LoadBinAssets SSR=0 api=d3d12 adapter=NVIDIA-G0"
+      ]
+    },
+    {
+      "case": "noop",
+      "PASS": true,
+      "mount_calls": 1,
+      "engine_writes": 1,
+      "log": [
+        "[FR1Cache v1] mod-load SSR=0 api=d3d12 adapter=NVIDIA-G0",
+        "[FR1Cache v1] ARMED Noop folder=Mod/SMR_FR1CacheProbe/Noop; keep Reflections Off",
+        "[FR1Cache v1] MOUNT_HELPER_OK; precedence and shader consumption NOT verified",
+        "[FR1Cache v1] EXPECTED_DXIL_SHA256=516fc3836f468850495bceefbc0d9417f5dceae6ec106f9e72ca299e27e2bac9",
+        "[FR1Cache v1] RELOAD_REQUESTED; the dump is the treatment witness",
+        "[FR1Cache v1] ChangingMap SSR=0 api=d3d12 adapter=NVIDIA-G0",
+        "[FR1Cache v1] before-LoadBinAssets SSR=0 api=d3d12 adapter=NVIDIA-G0"
+      ]
+    },
+    {
+      "case": "duplicate",
+      "PASS": true,
+      "mount_calls": 0,
+      "engine_writes": 0,
+      "log": [
+        "[FR1Cache v1] mod-load SSR=0 api=d3d12 adapter=NVIDIA-G0",
+        "[FR1Cache v1] DECLINED marker must be exactly control or noop, once",
+        "[FR1Cache v1] ChangingMap SSR=0 api=d3d12 adapter=NVIDIA-G0",
+        "[FR1Cache v1] before-LoadBinAssets SSR=0 api=d3d12 adapter=NVIDIA-G0"
+      ]
+    },
+    {
+      "case": "conflicting",
+      "PASS": true,
+      "mount_calls": 0,
+      "engine_writes": 0,
+      "log": [
+        "[FR1Cache v1] mod-load SSR=0 api=d3d12 adapter=NVIDIA-G0",
+        "[FR1Cache v1] DECLINED marker must be exactly control or noop, once",
+        "[FR1Cache v1] ChangingMap SSR=0 api=d3d12 adapter=NVIDIA-G0",
+        "[FR1Cache v1] before-LoadBinAssets SSR=0 api=d3d12 adapter=NVIDIA-G0"
+      ]
+    },
+    {
+      "case": "empty",
+      "PASS": true,
+      "mount_calls": 0,
+      "engine_writes": 0,
+      "log": [
+        "[FR1Cache v1] mod-load SSR=0 api=d3d12 adapter=NVIDIA-G0",
+        "[FR1Cache v1] DECLINED marker must be exactly control or noop, once",
+        "[FR1Cache v1] ChangingMap SSR=0 api=d3d12 adapter=NVIDIA-G0",
+        "[FR1Cache v1] before-LoadBinAssets SSR=0 api=d3d12 adapter=NVIDIA-G0"
+      ]
+    },
+    {
+      "case": "bad-mode",
+      "PASS": true,
+      "mount_calls": 0,
+      "engine_writes": 0,
+      "log": [
+        "[FR1Cache v1] mod-load SSR=0 api=d3d12 adapter=NVIDIA-G0",
+        "[FR1Cache v1] DECLINED marker must be exactly control or noop, once",
+        "[FR1Cache v1] ChangingMap SSR=0 api=d3d12 adapter=NVIDIA-G0",
+        "[FR1Cache v1] before-LoadBinAssets SSR=0 api=d3d12 adapter=NVIDIA-G0"
+      ]
+    },
+    {
+      "case": "bad-token",
+      "PASS": true,
+      "mount_calls": 0,
+      "engine_writes": 0,
+      "log": [
+        "[FR1Cache v1] mod-load SSR=0 api=d3d12 adapter=NVIDIA-G0",
+        "[FR1Cache v1] DECLINED marker must be exactly control or noop, once",
+        "[FR1Cache v1] ChangingMap SSR=0 api=d3d12 adapter=NVIDIA-G0",
+        "[FR1Cache v1] before-LoadBinAssets SSR=0 api=d3d12 adapter=NVIDIA-G0"
+      ]
+    },
+    {
+      "case": "old-probe-marker",
+      "PASS": true,
+      "mount_calls": 0,
+      "engine_writes": 0,
+      "log": [
+        "[FR1Cache v1] DECLINED old options-treatment marker present"
+      ]
+    },
+    {
+      "case": "non-pc",
+      "PASS": true,
+      "mount_calls": 0,
+      "engine_writes": 0,
+      "log": []
+    },
+    {
+      "case": "wrong-api",
+      "PASS": true,
+      "mount_calls": 0,
+      "engine_writes": 0,
+      "log": [
+        "[FR1Cache v1] mod-load SSR=0 api=vulkan adapter=NVIDIA-G0",
+        "[FR1Cache v1] DECLINED API",
+        "[FR1Cache v1] ChangingMap SSR=0 api=vulkan adapter=NVIDIA-G0",
+        "[FR1Cache v1] before-LoadBinAssets SSR=0 api=vulkan adapter=NVIDIA-G0"
+      ]
+    },
+    {
+      "case": "amd",
+      "PASS": true,
+      "mount_calls": 0,
+      "engine_writes": 0,
+      "log": [
+        "[FR1Cache v1] mod-load SSR=0 api=d3d12 adapter=NVIDIA-G0",
+        "[FR1Cache v1] DECLINED adapter is not NVIDIA",
+        "[FR1Cache v1] ChangingMap SSR=0 api=d3d12 adapter=NVIDIA-G0",
+        "[FR1Cache v1] before-LoadBinAssets SSR=0 api=d3d12 adapter=NVIDIA-G0"
+      ]
+    },
+    {
+      "case": "intel",
+      "PASS": true,
+      "mount_calls": 0,
+      "engine_writes": 0,
+      "log": [
+        "[FR1Cache v1] mod-load SSR=0 api=d3d12 adapter=NVIDIA-G0",
+        "[FR1Cache v1] DECLINED adapter is not NVIDIA",
+        "[FR1Cache v1] ChangingMap SSR=0 api=d3d12 adapter=NVIDIA-G0",
+        "[FR1Cache v1] before-LoadBinAssets SSR=0 api=d3d12 adapter=NVIDIA-G0"
+      ]
+    },
+    {
+      "case": "unknown-adapter",
+      "PASS": true,
+      "mount_calls": 0,
+      "engine_writes": 0,
+      "log": [
+        "[FR1Cache v1] mod-load SSR=0 api=d3d12 adapter=false",
+        "[FR1Cache v1] DECLINED adapter is not NVIDIA",
+        "[FR1Cache v1] ChangingMap SSR=0 api=d3d12 adapter=false",
+        "[FR1Cache v1] before-LoadBinAssets SSR=0 api=d3d12 adapter=false"
+      ]
+    },
+    {
+      "case": "wrong-lua",
+      "PASS": true,
+      "mount_calls": 0,
+      "engine_writes": 0,
+      "log": [
+        "[FR1Cache v1] mod-load SSR=0 api=d3d12 adapter=NVIDIA-G0",
+        "[FR1Cache v1] DECLINED cache artifact revision mismatch",
+        "[FR1Cache v1] ChangingMap SSR=0 api=d3d12 adapter=NVIDIA-G0",
+        "[FR1Cache v1] before-LoadBinAssets SSR=0 api=d3d12 adapter=NVIDIA-G0"
+      ]
+    },
+    {
+      "case": "wrong-assets",
+      "PASS": true,
+      "mount_calls": 0,
+      "engine_writes": 0,
+      "log": [
+        "[FR1Cache v1] mod-load SSR=0 api=d3d12 adapter=NVIDIA-G0",
+        "[FR1Cache v1] DECLINED cache artifact revision mismatch",
+        "[FR1Cache v1] ChangingMap SSR=0 api=d3d12 adapter=NVIDIA-G0",
+        "[FR1Cache v1] before-LoadBinAssets SSR=0 api=d3d12 adapter=NVIDIA-G0"
+      ]
+    },
+    {
+      "case": "ssr-on",
+      "PASS": true,
+      "mount_calls": 0,
+      "engine_writes": 0,
+      "log": [
+        "[FR1Cache v1] mod-load SSR=1 api=d3d12 adapter=NVIDIA-G0",
+        "[FR1Cache v1] DECLINED Reflections must already be Off",
+        "[FR1Cache v1] ChangingMap SSR=1 api=d3d12 adapter=NVIDIA-G0",
+        "[FR1Cache v1] before-LoadBinAssets SSR=1 api=d3d12 adapter=NVIDIA-G0"
+      ]
+    },
+    {
+      "case": "reload-already-true",
+      "PASS": true,
+      "mount_calls": 0,
+      "engine_writes": 0,
+      "log": [
+        "[FR1Cache v1] mod-load SSR=0 api=d3d12 adapter=NVIDIA-G0",
+        "[FR1Cache v1] DECLINED reload is not a readable false boolean",
+        "[FR1Cache v1] ChangingMap SSR=0 api=d3d12 adapter=NVIDIA-G0",
+        "[FR1Cache v1] before-LoadBinAssets SSR=0 api=d3d12 adapter=NVIDIA-G0"
+      ]
+    },
+    {
+      "case": "reload-wrong-type",
+      "PASS": true,
+      "mount_calls": 0,
+      "engine_writes": 0,
+      "log": [
+        "[FR1Cache v1] mod-load SSR=0 api=d3d12 adapter=NVIDIA-G0",
+        "[FR1Cache v1] DECLINED reload is not a readable false boolean",
+        "[FR1Cache v1] ChangingMap SSR=0 api=d3d12 adapter=NVIDIA-G0",
+        "[FR1Cache v1] before-LoadBinAssets SSR=0 api=d3d12 adapter=NVIDIA-G0"
+      ]
+    },
+    {
+      "case": "read-error",
+      "PASS": true,
+      "mount_calls": 0,
+      "engine_writes": 0,
+      "log": [
+        "[FR1Cache v1] mod-load SSR=false api=d3d12 adapter=NVIDIA-G0",
+        "[FR1Cache v1] DECLINED Reflections must already be Off",
+        "[FR1Cache v1] ChangingMap SSR=false api=d3d12 adapter=NVIDIA-G0",
+        "[FR1Cache v1] before-LoadBinAssets SSR=false api=d3d12 adapter=NVIDIA-G0"
+      ]
+    },
+    {
+      "case": "missing-mount-api",
+      "PASS": true,
+      "mount_calls": 0,
+      "engine_writes": 0,
+      "log": [
+        "[FR1Cache v1] mod-load SSR=0 api=d3d12 adapter=NVIDIA-G0",
+        "[FR1Cache v1] DECLINED mount/set API missing",
+        "[FR1Cache v1] ChangingMap SSR=0 api=d3d12 adapter=NVIDIA-G0",
+        "[FR1Cache v1] before-LoadBinAssets SSR=0 api=d3d12 adapter=NVIDIA-G0"
+      ]
+    },
+    {
+      "case": "missing-set-api",
+      "PASS": true,
+      "mount_calls": 0,
+      "engine_writes": 0,
+      "log": [
+        "[FR1Cache v1] mod-load SSR=0 api=d3d12 adapter=NVIDIA-G0",
+        "[FR1Cache v1] DECLINED mount/set API missing",
+        "[FR1Cache v1] ChangingMap SSR=0 api=d3d12 adapter=NVIDIA-G0",
+        "[FR1Cache v1] before-LoadBinAssets SSR=0 api=d3d12 adapter=NVIDIA-G0"
+      ]
+    },
+    {
+      "case": "missing-folder",
+      "PASS": true,
+      "mount_calls": 0,
+      "engine_writes": 0,
+      "log": [
+        "[FR1Cache v1] mod-load SSR=0 api=d3d12 adapter=NVIDIA-G0",
+        "[FR1Cache v1] ARMED Noop folder=Mod/SMR_FR1CacheProbe/Noop; keep Reflections Off",
+        "[FR1Cache v1] DECLINED mount helper did not return true; no reload requested",
+        "[FR1Cache v1] ChangingMap SSR=0 api=d3d12 adapter=NVIDIA-G0",
+        "[FR1Cache v1] before-LoadBinAssets SSR=0 api=d3d12 adapter=NVIDIA-G0"
+      ]
+    },
+    {
+      "case": "mount-error",
+      "PASS": true,
+      "mount_calls": 1,
+      "engine_writes": 0,
+      "log": [
+        "[FR1Cache v1] mod-load SSR=0 api=d3d12 adapter=NVIDIA-G0",
+        "[FR1Cache v1] ARMED Noop folder=Mod/SMR_FR1CacheProbe/Noop; keep Reflections Off",
+        "[FR1Cache v1] DECLINED mount helper did not return true; no reload requested",
+        "[FR1Cache v1] ChangingMap SSR=0 api=d3d12 adapter=NVIDIA-G0",
+        "[FR1Cache v1] before-LoadBinAssets SSR=0 api=d3d12 adapter=NVIDIA-G0"
+      ]
+    },
+    {
+      "case": "mount-throw",
+      "PASS": true,
+      "mount_calls": 1,
+      "engine_writes": 0,
+      "log": [
+        "[FR1Cache v1] mod-load SSR=0 api=d3d12 adapter=NVIDIA-G0",
+        "[FR1Cache v1] ARMED Noop folder=Mod/SMR_FR1CacheProbe/Noop; keep Reflections Off",
+        "[FR1Cache v1] DECLINED mount helper did not return true; no reload requested",
+        "[FR1Cache v1] ChangingMap SSR=0 api=d3d12 adapter=NVIDIA-G0",
+        "[FR1Cache v1] before-LoadBinAssets SSR=0 api=d3d12 adapter=NVIDIA-G0"
+      ]
+    },
+    {
+      "case": "set-error",
+      "PASS": true,
+      "mount_calls": 1,
+      "engine_writes": 0,
+      "log": [
+        "[FR1Cache v1] mod-load SSR=0 api=d3d12 adapter=NVIDIA-G0",
+        "[FR1Cache v1] ARMED Noop folder=Mod/SMR_FR1CacheProbe/Noop; keep Reflections Off",
+        "[FR1Cache v1] MOUNT_HELPER_OK; precedence and shader consumption NOT verified",
+        "[FR1Cache v1] EXPECTED_DXIL_SHA256=516fc3836f468850495bceefbc0d9417f5dceae6ec106f9e72ca299e27e2bac9",
+        "[FR1Cache v1] RELOAD_SET_FAILED [string \"<python>\"]:19: denied; quit fully before another leg",
+        "[FR1Cache v1] ChangingMap SSR=0 api=d3d12 adapter=NVIDIA-G0",
+        "[FR1Cache v1] before-LoadBinAssets SSR=0 api=d3d12 adapter=NVIDIA-G0"
+      ]
+    },
+    {
+      "case": "percent-strings",
+      "PASS": true,
+      "mount_calls": 1,
+      "engine_writes": 1,
+      "log": [
+        "[FR1Cache v1] mod-load SSR=0 api=d3d12 adapter=NVIDIA %s %04d 100%",
+        "[FR1Cache v1] ARMED Noop folder=Mod/100%done_%q%/Noop; keep Reflections Off",
+        "[FR1Cache v1] MOUNT_HELPER_OK; precedence and shader consumption NOT verified",
+        "[FR1Cache v1] EXPECTED_DXIL_SHA256=516fc3836f468850495bceefbc0d9417f5dceae6ec106f9e72ca299e27e2bac9",
+        "[FR1Cache v1] RELOAD_REQUESTED; the dump is the treatment witness",
+        "[FR1Cache v1] ChangingMap SSR=0 api=d3d12 adapter=NVIDIA %s %04d 100%",
+        "[FR1Cache v1] before-LoadBinAssets SSR=0 api=d3d12 adapter=NVIDIA %s %04d 100%"
+      ]
+    }
+  ],
+  "bench_reclassification": {
+    "A": {
+      "dxil_files": 115,
+      "matched_programs": [
+        {
+          "file": "38121decbc3eee12.dxil",
+          "dxil_sha256": "01581a930d8ea2dd363deee40c5072fa330dd88d2866c6d71fd8d0c8e515036f",
+          "programs": [
+            "REFLECT_RAYS_hiz0_hyp0_imp0"
+          ]
+        }
+      ],
+      "unmatched_files": 114,
+      "fault_threads": [
+        {
+          "line": 835214,
+          "time": 11122.399,
+          "process": "0138",
+          "thread": "013c",
+          "text": "11122.399:0138:013c:trace:seh:handle_syscall_fault code=c0000005 flags=0 addr=0x77f81bb57c88 ip=77f81bb57c88 tid=013c",
+          "last_dump_on_thread": {
+            "time": 11122.398,
+            "line": 835212,
+            "file": "38121decbc3eee12.spv",
+            "shader": {
+              "file": "38121decbc3eee12.dxil",
+              "dxil_sha256": "01581a930d8ea2dd363deee40c5072fa330dd88d2866c6d71fd8d0c8e515036f",
+              "programs": [
+                "REFLECT_RAYS_hiz0_hyp0_imp0"
+              ]
+            }
+          },
+          "elapsed_ms": 1.0
+        }
+      ],
+      "probe_lines": [],
+      "caution": "Dump matching proves bytes submitted; successful rendering/NVVM acceptance needs the bench outcome. Multiple loads/cached programs can bypass new dump writes."
+    },
+    "B": {
+      "dxil_files": 115,
+      "matched_programs": [
+        {
+          "file": "38121decbc3eee12.dxil",
+          "dxil_sha256": "01581a930d8ea2dd363deee40c5072fa330dd88d2866c6d71fd8d0c8e515036f",
+          "programs": [
+            "REFLECT_RAYS_hiz0_hyp0_imp0"
+          ]
+        }
+      ],
+      "unmatched_files": 114,
+      "fault_threads": [
+        {
+          "line": 910693,
+          "time": 11211.975,
+          "process": "0138",
+          "thread": "013c",
+          "text": "11211.975:0138:013c:trace:seh:handle_syscall_fault code=c0000005 flags=0 addr=0x72067a757c88 ip=72067a757c88 tid=013c",
+          "last_dump_on_thread": {
+            "time": 11211.974,
+            "line": 910691,
+            "file": "38121decbc3eee12.spv",
+            "shader": {
+              "file": "38121decbc3eee12.dxil",
+              "dxil_sha256": "01581a930d8ea2dd363deee40c5072fa330dd88d2866c6d71fd8d0c8e515036f",
+              "programs": [
+                "REFLECT_RAYS_hiz0_hyp0_imp0"
+              ]
+            }
+          },
+          "elapsed_ms": 1.0
+        }
+      ],
+      "probe_lines": [],
+      "caution": "Dump matching proves bytes submitted; successful rendering/NVVM acceptance needs the bench outcome. Multiple loads/cached programs can bypass new dump writes."
+    },
+    "D": {
+      "dxil_files": 119,
+      "matched_programs": [
+        {
+          "file": "271ec9634b1ab87b.dxil",
+          "dxil_sha256": "59d733f3138027977cb4cb6a8a126eac36846fd67a2dd8a95fed31f436b412be",
+          "programs": [
+            "REFLECT_RAYS_hiz0_hyp1_imp1",
+            "REFLECT_RAYS_hiz1_hyp1_imp1"
+          ]
+        }
+      ],
+      "unmatched_files": 118,
+      "fault_threads": [
+        {
+          "line": 225651,
+          "time": 11308.609,
+          "process": "0138",
+          "thread": "013c",
+          "text": "11308.609:0138:013c:trace:seh:handle_syscall_fault code=c0000005 flags=0 addr=0x788756757c88 ip=788756757c88 tid=013c",
+          "last_dump_on_thread": {
+            "time": 11308.608,
+            "line": 225189,
+            "file": "271ec9634b1ab87b.spv",
+            "shader": {
+              "file": "271ec9634b1ab87b.dxil",
+              "dxil_sha256": "59d733f3138027977cb4cb6a8a126eac36846fd67a2dd8a95fed31f436b412be",
+              "programs": [
+                "REFLECT_RAYS_hiz0_hyp1_imp1",
+                "REFLECT_RAYS_hiz1_hyp1_imp1"
+              ]
+            }
+          },
+          "elapsed_ms": 1.0
+        }
+      ],
+      "probe_lines": [],
+      "caution": "Dump matching proves bytes submitted; successful rendering/NVVM acceptance needs the bench outcome. Multiple loads/cached programs can bypass new dump writes."
+    },
+    "E": {
+      "dxil_files": 123,
+      "matched_programs": [
+        {
+          "file": "271ec9634b1ab87b.dxil",
+          "dxil_sha256": "59d733f3138027977cb4cb6a8a126eac36846fd67a2dd8a95fed31f436b412be",
+          "programs": [
+            "REFLECT_RAYS_hiz0_hyp1_imp1",
+            "REFLECT_RAYS_hiz1_hyp1_imp1"
+          ]
+        }
+      ],
+      "unmatched_files": 122,
+      "fault_threads": [
+        {
+          "line": 570995,
+          "time": 11749.305,
+          "process": "013c",
+          "thread": "0140",
+          "text": "11749.305:013c:0140:trace:seh:handle_syscall_fault code=c0000005 flags=0 addr=0x709635b57c88 ip=709635b57c88 tid=0140",
+          "last_dump_on_thread": {
+            "time": 11749.304,
+            "line": 570582,
+            "file": "271ec9634b1ab87b.spv",
+            "shader": {
+              "file": "271ec9634b1ab87b.dxil",
+              "dxil_sha256": "59d733f3138027977cb4cb6a8a126eac36846fd67a2dd8a95fed31f436b412be",
+              "programs": [
+                "REFLECT_RAYS_hiz0_hyp1_imp1",
+                "REFLECT_RAYS_hiz1_hyp1_imp1"
+              ]
+            }
+          },
+          "elapsed_ms": 1.0
+        }
+      ],
+      "probe_lines": [],
+      "caution": "Dump matching proves bytes submitted; successful rendering/NVVM acceptance needs the bench outcome. Multiple loads/cached programs can bypass new dump writes."
+    }
+  },
+  "classifier_positive": {
+    "dxil_files": 1,
+    "matched_programs": [
+      {
+        "file": "deliberately-arbitrary-name.dxil",
+        "dxil_sha256": "516fc3836f468850495bceefbc0d9417f5dceae6ec106f9e72ca299e27e2bac9",
+        "programs": [
+          "FR1_NOOP_8x8_all_six_RAYS_keys"
+        ]
+      }
+    ],
+    "unmatched_files": 0,
+    "fault_threads": [],
+    "probe_lines": [],
+    "caution": "Dump matching proves bytes submitted; successful rendering/NVVM acceptance needs the bench outcome. Multiple loads/cached programs can bypass new dump writes."
+  },
+  "native_ssr_xrefs": [
+    {
+      "target": "0x1411c8a48",
+      "label": "SSR object",
+      "address": "0x140027351",
+      "asm": "lea rcx, [rip + 0x11a16f0]"
+    },
+    {
+      "target": "0x1411c8a68",
+      "label": "SSR value",
+      "address": "0x140027364",
+      "asm": "mov qword ptr [rip + 0x11a16f9], 0"
+    },
+    {
+      "target": "0x1411c8a48",
+      "label": "SSR object",
+      "address": "0x140027376",
+      "asm": "mov qword ptr [rip + 0x11a16cb], rax"
+    },
+    {
+      "target": "0x1411c85e8",
+      "label": "ReflectionsFx object",
+      "address": "0x14002792d",
+      "asm": "lea rcx, [rip + 0x11a0cb4]"
+    },
+    {
+      "target": "0x1411c85e8",
+      "label": "ReflectionsFx object",
+      "address": "0x140027cf0",
+      "asm": "mov eax, dword ptr [rip + 0x11a08f2]"
+    },
+    {
+      "target": "0x1411c85e8",
+      "label": "ReflectionsFx object",
+      "address": "0x14070f8db",
+      "asm": "mov eax, dword ptr [rip + 0xab8d07]"
+    },
+    {
+      "target": "0x1411c8a68",
+      "label": "SSR value",
+      "address": "0x14070fd2b",
+      "asm": "cmp qword ptr [rip + 0xab8d36], rcx"
+    },
+    {
+      "target": "0x1411c8a68",
+      "label": "SSR value",
+      "address": "0x14070fe20",
+      "asm": "cmp qword ptr [rip + 0xab8c41], r14"
+    },
+    {
+      "target": "0x1411c8a48",
+      "label": "SSR object",
+      "address": "0x140bc7db0",
+      "asm": "lea rcx, [rip + 0x600c91]"
+    }
+  ],
+  "probe_files": {
+    "analysis/classify_dump.py": {
+      "bytes": 3147,
+      "sha256": "537dde44f0da7f85665ee3f4f844f59329ee46369ef507a044d1365bbfc022b0"
+    },
+    "analysis/shader-identities.json": {
+      "bytes": 3296,
+      "sha256": "1f456195920d25b84d056678126612190a7a7cd0ad44a17a1f8dfcb396ac817f"
+    },
+    "Code/FR1CacheProbe.lua": {
+      "bytes": 4487,
+      "sha256": "9a97e66699346158762802059eeecf097e5582efcd5464a5901d4bba12c97a03"
+    },
+    "Control/ShaderCache/12556516658419309610": {
+      "bytes": 28212,
+      "sha256": "7d77b258aec40e7dfc099b04a49062d8b0f2d271de1fc7118b1c186069462602"
+    },
+    "Control/ShaderCache/14281071190732923386": {
+      "bytes": 25133,
+      "sha256": "03f7807dc5570447a32d981a39fb620ecc139ddeb24500eb9cbe55541808bb11"
+    },
+    "Control/ShaderCache/14433279818421691317": {
+      "bytes": 25942,
+      "sha256": "6d2cd88fa3bee5f9e8f107da7e071217606be435dfdd597b24c942fdf0885567"
+    },
+    "Control/ShaderCache/3532759928818375094": {
+      "bytes": 25171,
+      "sha256": "7de7ba3100163fcbd89947327cc65f95311b2955aa75a31fc698d6932bc53743"
+    },
+    "Control/ShaderCache/6121468085666728083": {
+      "bytes": 28174,
+      "sha256": "63fedaa1cee7649849dc5835f561de373aa1839d0717af83738b3bde625ec700"
+    },
+    "Control/ShaderCache/7464541473171016648": {
+      "bytes": 29319,
+      "sha256": "dde0e1892d79be29b63b127a8c6c843b6ffe4825e4e24004ef9e10a19334394e"
+    },
+    "items.lua": {
+      "bytes": 105,
+      "sha256": "818a28bc2883ef5cab49cdb28036190b762952494c15428419a11bc5631714ea"
+    },
+    "metadata.lua": {
+      "bytes": 386,
+      "sha256": "01a9aa335714ddee67d190c267a55af997b2647a95478453cd1b09bb6d3727a5"
+    },
+    "Noop/ShaderCache/12556516658419309610": {
+      "bytes": 10256,
+      "sha256": "77261668057cc0fdf979ae45472c927dd54959d94180bc5a5681fe59e9189f3b"
+    },
+    "Noop/ShaderCache/14281071190732923386": {
+      "bytes": 10237,
+      "sha256": "9285b0005c5d2a57e24f0f78d460a575d1b9bf73d78cb4f842514a8706f362b4"
+    },
+    "Noop/ShaderCache/14433279818421691317": {
+      "bytes": 10210,
+      "sha256": "cd0a158cb9e3790bac9d7d313e451759485e6175d5aab646cdcdbab6d80d1378"
+    },
+    "Noop/ShaderCache/3532759928818375094": {
+      "bytes": 10231,
+      "sha256": "2315647acb20e8edaf170caa5c4e4f6e4b4a2faa0adef50608456b73c3ddd917"
+    },
+    "Noop/ShaderCache/6121468085666728083": {
+      "bytes": 10262,
+      "sha256": "5a4fd96ea2fc4ffba83c27ea6da98755156d757538dba176de05a78a36407776"
+    },
+    "Noop/ShaderCache/7464541473171016648": {
+      "bytes": 10235,
+      "sha256": "ba8cdf29c2c30df0f6504d57b1a197c36cf7d0c2578610be2bf2a0723a9bc24b"
+    },
+    "README.md": {
+      "bytes": 4085,
+      "sha256": "aacc68c225d906cc32afd17a4fe7438964ecaae16491c718f16ba75b17515de3"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "C:\\Dev\\SMR-FR1-CacheRoute-2026-09-10\\fr1-cache-probe-v1.zip",
+      "bytes": 138670,
+      "sha256": "7b44ac6e36ab9b8d4ba364eee5ecdc29d1f1fadbca8dc9de8da2af06b8b297d4"
+    },
+    {
+      "path": "C:\\Dev\\SMR-FR1-CacheRoute-2026-09-10\\cache-route-desk-tools.zip",
+      "bytes": 65716,
+      "sha256": "20c380ab15bf3534843fd88c96d281ceacbd058464c36c99507ffc7e8cfb5ef6"
+    },
+    {
+      "path": "C:\\Dev\\SMR-FR1-CacheRoute-2026-09-10\\noop-rooted.dxil",
+      "bytes": 1688,
+      "sha256": "d9f88d669fdf2c37c1046fbf977d28760a49a7189f71c955a77e55f68662dc83"
+    },
+    {
+      "path": "C:\\Dev\\SMR-FR1-CacheRoute-2026-09-10\\partial-ShaderCached3d12.fpk",
+      "bytes": 61676,
+      "sha256": "ed605284cb1d8c2082ab17197cff75350f60580ac9f55912d1de467771d0812e"
+    }
+  ],
+  "input_files": [
+    {
+      "path": "A:\\SteamLibrary\\steamapps\\common\\Project Spark\\Mars.exe",
+      "bytes": 18741760,
+      "sha256": "28599c4acf318b0354969fe7e537fbcea6251e14616368a0274b7ff492293c6f"
+    },
+    {
+      "path": "A:\\SteamLibrary\\steamapps\\common\\Project Spark\\Packs\\ShaderCached3d12.fpk",
+      "bytes": 140187936,
+      "sha256": "1fdfc23abe36426139685fd0206d5e498e4801f0710715c5885c34367af813be"
+    },
+    {
+      "path": "C:\\Dev\\SMR-FR1-Options-2026-09-10\\dxc-game\\dxcompiler.dll",
+      "bytes": 18091048,
+      "sha256": "75c019e3541980eea8ae661d81998d06f99627e3004c800532475a1c3551c6fb"
+    },
+    {
+      "path": "C:\\Dev\\SMR-FR1-Options-2026-09-10\\dxc-game\\dxil.dll",
+      "bytes": 3831600,
+      "sha256": "feb57253eff0a622561e29b44cedbe86b89fc9a5bc8dc00fa2f98fafd712c2d8"
+    },
+    {
+      "path": "C:\\Dev\\SMR-SrcArchive\\1.1.0.403908\\Src\\CommonLua\\Dlc.lua",
+      "bytes": 26610,
+      "sha256": "1af60e2e617a5d683ccc56d34b94bfb0f097d98cceb520875d305c987d747b6f"
+    },
+    {
+      "path": "C:\\Dev\\SMR-SrcArchive\\1.1.0.403908\\Src\\CommonLua\\Modding\\Mod.lua",
+      "bytes": 101766,
+      "sha256": "7dda95fc941924e5eb48ed4c1a83fd1fb0b2f7eef15dae33920cb2044001b7c4"
+    }
+  ],
+  "bench_logs": [
+    {
+      "path": "C:\\Dev\\fr1-mm-complete\\fr1-mm\\steam-A.log",
+      "bytes": 76549702,
+      "sha256": "0b4d97ca737e914244aefafc1684bf042e577f3691a753a0768f429bbabe077a"
+    },
+    {
+      "path": "C:\\Dev\\fr1-mm-complete\\fr1-mm\\steam-B.log",
+      "bytes": 83473599,
+      "sha256": "835c1c55aae8b604a00d0849319d0fc9748f2918480ab1ee1386377b24ebe890"
+    },
+    {
+      "path": "C:\\Dev\\fr1-mm-complete\\fr1-mm\\steam-D.log",
+      "bytes": 20831929,
+      "sha256": "7c79d1be8234b7c353ddc43bc28f0b7a5142417acd5afac80d279ef3803bf28f"
+    },
+    {
+      "path": "C:\\Dev\\fr1-mm-complete\\fr1-mm\\steam-E.log",
+      "bytes": 52359302,
+      "sha256": "04c1d6e771e7db35a277325af05e5d1a3bb80bd89055151cd74ee1c72cc9463a"
+    }
+  ],
+  "limitations": [
+    "No retail/editor execution",
+    "No native VFS precedence or FLPK mount test",
+    "Record-key derivation and upper-layer verification unresolved",
+    "No replacement vkd3d/NVVM execution",
+    "Off dispatch and visual equivalence unproved",
+    "Only two distinct original RAYS programs measured faulting",
+    "Packed mod and nested pack not tested",
+    "Shipping scope is owner checklist 145"
+  ]
+}

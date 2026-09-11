@@ -29,7 +29,66 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
-### 2026-09-10 — 145: FR-1 options are mapped; the next step is a small hidden-settings check.
+### 2026-09-11 — 145: FR-1 cache replacement is ready for a controlled laptop test.
+
+> **Current step — TAKEABLE WHEN you are at the laptop on NVIDIA 580, PRIME On-Demand.**
+> The desk work found a usable route to test: the mod can ask the game to layer a small
+> cache folder over its existing cache, then request your immediate reload. The fake-DLC
+> helper removes the old cache first, so a small partial pack through that helper was the
+> wrong assumption. The new folder route keeps the base cache and its index available.
+>
+> **Built, desk-checked, NEVER RUN in the game:** an empty replacement for all six RAYS
+> shaders, preserving their original binding layout, plus a disposable mod. The shader
+> passes Microsoft's validator; all 27 probe checks pass. We still need to establish that
+> the game actually consumes the replacement and driver 580 accepts it. Two RAYS variants
+> have been measured crashing; the other four have not been tested independently.
+>
+> **Zip:** `C:\Dev\SMR-FR1-CacheRoute-2026-09-10\fr1-cache-probe-v1.zip`.
+> **Report:** [cache-route findings](agent/reports/FR1_CACHE_ROUTE_2026-09-11.md).
+> The zip includes the plain instructions and the updated shader classifier.
+>
+> **Setup [NEVER RUN]:** disable **FR-1 Options Probe** and the old film-grain **FR-1 Test**.
+> Remove their launch markers. Unzip `FR1CacheProbe` into the same Linux Mods folder used
+> below for the options probe. Start without a `-fr1-cache` marker, tick **FR-1 Cache Probe
+> v1**, set Reflections **Off**, then quit fully. This setup needs no world load.
+> **Keep Reflections Off for every leg, including a leg that loads.** This replacement
+> does not render reflections, and its visual equivalence with Off is still untested.
+>
+> **Fresh folders [NEVER RUN]:** in a terminal, run
+> `mkdir -p ~/fr1-cache/C1 ~/fr1-cache/N1 ~/fr1-cache/R1`.
+> Each leg uses a fresh process. After exit/crash, preserve its Proton log before starting
+> another leg. Use a **New Game**, not a valued colony.
+>
+> 1. **C1 — unchanged-shader control [NEVER RUN]:** Steam Launch Options:
+>    `PROTON_LOG=1 VKD3D_SHADER_DUMP_PATH=/home/ladmin/fr1-cache/C1 %command% -fr1-cache=control`
+>    Expected: the previous boot crash. After exit, run
+>    `cp ~/steam-3215050.log ~/fr1-cache/steam-C1.log`.
+> 2. **N1 — replacement [NEVER RUN]:**
+>    `PROTON_LOG=1 VKD3D_SHADER_DUMP_PATH=/home/ladmin/fr1-cache/N1 %command% -fr1-cache=noop`
+>    If the menu appears, start New Game. If the world loads, watch it for a minute with
+>    Reflections still Off, then quit. Preserve
+>    `cp ~/steam-3215050.log ~/fr1-cache/steam-N1.log`.
+> 3. **R1 — only if N1 loads, restart without treatment [NEVER RUN]:**
+>    `PROTON_LOG=1 VKD3D_SHADER_DUMP_PATH=/home/ladmin/fr1-cache/R1 %command%`
+>    Start New Game; the original world-load crash is expected to return. Preserve
+>    `cp ~/steam-3215050.log ~/fr1-cache/steam-R1.log`.
+>
+> Zip the new `fr1-cache` folder and bring it to Windows as before. Tell me which stage
+> each leg reached and whether anything looked wrong. I will identify the program built
+> on the faulting thread, including a different shader if a new crash appears. A mod
+> "mount succeeded" line alone does not prove the replacement was used. If the probe
+> says **DECLINED**, bring that log back; that leg did not apply the treatment.
+>
+> **Cleanup [NEVER RUN]:** clear these added Launch Options, quit fully, then disable the
+> disposable probe. The mount lasts until process exit; disabling it mid-session does
+> not undo the mount. The mod writes no persistent settings or game files.
+>
+> **Scope decision remains yours after a successful bench:** fix pack, separate opt-in
+> mod, or instructions. Recommendation remains a separate opt-in mod for a mod-carried
+> driver workaround. This bench does not approve shipping it. STATE had only 40 bytes
+> below its warning threshold, so its optional NEXT addition was omitted.
+
+**Earlier options work and bench history — the current steps above supersede the earlier recommendations below.**
 
 > **What changed:** the reflections shader is now identified exactly, and it is
 > already in the game's packaged cache. Changing its source alone may therefore
@@ -145,7 +204,7 @@ completed tests move whole to
 >    the game its own small shader cache in which the crashing reflection shaders are swapped for a
 >    harmless stand-in, so reflections would stay off for those players. Your reload leg shows a cache swap
 >    takes effect at startup. I first have to learn the cache's file format, and I'll report whether it's
->    doable before building anything. ▶ **Prompt ready for Astra:** `agent/prompts/FR1_CACHE_ROUTE_EXPLORE.md`.
+>    doable before building anything. **Completed 09-11:** see the cache-route report and current bench above.
 > 2. **Two quick launch-option legs on the laptop (one line each, nothing to install):**
 >    `VKD3D_CONFIG=force_static_cbv` and `PROTON_DISABLE_NVAPI=1`. These aren't mods, but they're easy
 >    for players if one works.
