@@ -63,3 +63,32 @@ FILES
 I have the shader bytecode (.dxil and .spv), the Proton crash excerpt, the shader-dump timeline, driver and system info, and the byte-identity receipt, all with checksums. Happy to share them however suits you.
 
 Thanks for tracking this.
+
+---
+
+## FOLLOW-UP POST 1 — draft 2026-09-11 (from FINDINGS §10; post as a NEW reply, not an edit)
+
+Every line is MEASURED unless it says "we think" / "if we read it right". Hold the "swap makes it go away" claim for FOLLOW-UP 2
+(Astra's v2 covering all 18 REFLECT_RAYS records).
+
+---
+
+UPDATE — shader swap test (partial)
+
+We tested replacing the REFLECT_RAYS shaders ourselves. A test mod layered a small ShaderCache folder over the game's cache using the game's own DlcMountFolder helper. In it, the six non-debug REFLECT_RAYS entries were replaced by an empty compute shader with the same root signature. The mod then forced a shader-cache reload.
+
+- The game used our replacement: the shader vkd3d dumped matches the empty shader byte for byte.
+- The game got past the REFLECT_RAYS pipelines that had been crashing. It built about twice as many shaders as the control run, including the REFLECT_FULL (tile 16) compute shader, which NVIDIA 580 compiled with no problem.
+- It then crashed at the same place in NVIDIA's compiler (libnvidia-glvkspirv.so.580.173.02 +0x157c88) on a REFLECT_RAYS variant we hadn't replaced: USE_HYPERBOLIC_DEPTH + REFLECTION_DEBUG + REFLECTION_ITERATIONS, hash a26e0bbfe7751fbf, on the same thread, 1 ms after it was dumped.
+
+With the same mod loading the original, unchanged shaders instead, the game crashes exactly as before.
+
+So three different REFLECT_RAYS programs now crash driver 580 (38121decbc3eee12, 271ec9634b1ab87b, a26e0bbfe7751fbf). The one REFLECT_FULL program we saw compiled fine. Two related observations:
+- With hr.SSRTraceHiZ = 1, the game still built the REFLECT_RAYS variant without TRACE_HIZ, so the live SSR settings don't seem to choose which variant gets built.
+- A forced shader-cache reload rebuilds every cached Reflections.fx variant, including the debug ones, during startup.
+
+What this suggests on your side (you know the engine better than we do):
+- Not building REFLECT_RAYS when reflections are Off would unblock NVIDIA 580 players.
+- The REFLECT_FULL path compiles on 580. If we read the Lua right, the game already switches AMD cards to a "full tile" path (hr.SSRFullTile8x8 = 1), so using REFLECT_FULL on NVIDIA as well might be a low-risk option.
+
+We're next testing a replacement for all 18 REFLECT_RAYS cache entries (the 12 debug variants included) and will post the result. Happy to share the test mod, the cache records and the logs.
