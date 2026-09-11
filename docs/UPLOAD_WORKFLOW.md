@@ -375,9 +375,11 @@ The agent writes the rest down.
 It sits in your Windows Mods folder; its source copy is in `C:\Dev\SMR-FR1-TempMod-2026-09-11\`. Checklist item **145** has
 the background.
 
-> ⚠️ **Written 2026-09-11 assuming P1 passes** (you asked for it that way). Before you post, have an agent check one line
-> against the P1 result: *"With the mod on, New Game and existing saves loaded and played normally."* P1 is what tests a
-> save loaded straight after launch, from the packed mod.
+> ✅ **P1 passed, and the page is ready as written** (you, 09-11). The packed mod works, including a cold boot straight into a
+> colony, and it also ran with Reflections Low, High and Ultra. You don't need to pack again: the upload re-packs the folder itself,
+> with the new text and picture.
+> Optional simplification, waiting on one answer: if reflections looked fine with them on, step 3 and the "keep Reflections
+> Off" line can come out.
 
 **Uploading it (different from the fix pack):**
 - **Steam first is fine here, if Steam is the only store.** If you also do Paradox, do Paradox first, as usual.

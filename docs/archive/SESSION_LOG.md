@@ -8,6 +8,17 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-11 - FR-1 P1 (smr-bugfixpack-5d): the packed temp mod WORKS (owner-witnessed)
+
+tags: FR-1 temp-mod P1 packed
+
+Owner: "That pakd mod is working." Checked here: the Mod Editor pack (02:43, 100,411 B) holds code, items and all 18 records
+byte-identical to the build (`pack_list.py --tree`); its metadata.lua is the pre-store-page one, and the upload re-packs anyway.
+⇒ packed-mount risk answered on the owner's word. P1's logs and dump are still on the laptop (NOT READ; for the record only).
+Same hour, owner: Reflections Low, High and Ultra also get into a colony, both switched mid-run and on a cold boot. ⇒ cold launch into a
+save closed on the owner's word; the flagged store line stands; the page is ready. Asked: how reflections LOOK with it on (if fine,
+the "Reflections Off" step can go). FINDINGS §12.
+
 ## 2026-09-11 - FR-1 temp mod store pages (smr-bugfixpack-5d): written assuming P1 passes
 
 tags: FR-1 temp-mod store-pages

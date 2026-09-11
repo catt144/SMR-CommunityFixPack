@@ -329,3 +329,21 @@ scan of the dump lines. Read by `smr-bugfixpack-5d`. Setup (Q2 `system-state` / 
 - **Routed:** scope decision (fix pack / separate opt-in mod / instructions) is the owner's, ck145; if productized, Astra gets a
   round-3 brief (Windows/AMD with Reflections On, a self-gate with no Proton detector per EF-089, Reflections turned On, packed delivery,
   H-02/H-03/H-10). Dev reply FOLLOW-UP POST 2 drafted (`FR1_DEV_REPLY_2026-09-10.md`).
+
+## 12 · 2026-09-11 — P1: the temporary workaround mod, PACKED, works on the laptop (owner-witnessed)
+
+The build is `SMR_FR1TempWorkaround` (`C:\Dev\SMR-FR1-TempMod-2026-09-11\`, outside git; built by `smr-bugfixpack-5d` at the owner's
+ask). It is Q2's path with no marker and no reload. Steps are in checklist 145 P1.
+- **OWNER-WITNESSED:** "That pakd mod is working" (09-11), on the laptop from the Mod Editor pack. The same hour: "I have also
+  tested reflections on low and high and I can still get into a colony mid run and cold boot with them enabled", then "Ultra works
+  as well". ⇒ On the owner's word, §11's unsampled cold launch into a save is closed (cold boot straight into a colony), and
+  Reflections On (Low, High, Ultra; Medium not reported) does
+  not crash with the overlay, whether switched mid-run or set at boot. **NOT REPORTED:** what reflections look like with the overlay
+  and Reflections On. The stand-in writes nothing to the reflection target, so missing or stale reflections are INFERRED, not seen.
+- **MEASURED desk — what was packed:** `ModUpload\Pack\ModContent.fpk`, 100,411 B, 02:43:03. `tools/pack_list.py --tree` against the
+  staged folder gives 21 entries: code, `items.lua` and all 18 `Noop/ShaderCache` records byte-identical to the current build; `metadata.lua`
+  differs (1,162 B = the pre-store-page version; no preview entry). ⇒ P1 exercised the shipping code and payload. The upload's
+  `CreatePackageForUpload` re-packs the current folder (`GedModEditor.lua:713-733`), so it carries the new metadata and picture.
+- **Answered:** the #1 risk from §11 (packed delivery): `DlcMountFolder` on a folder inside a mod's `ModContent.fpk` works, on the
+  owner's word. **NOT READ:** P1's Proton log, game log and dump are still on the laptop (the `packed from appdata` and `ACTIVE`
+  lines, and the stand-in in the dump). They are for the record; the release does not wait on them.

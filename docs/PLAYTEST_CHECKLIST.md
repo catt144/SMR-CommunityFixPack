@@ -31,7 +31,16 @@ completed tests move whole to
 
 ### 2026-09-11 — 145: FR-1 cache probe v2 covers all 18 RAYS records; test normal loading first.
 
-> **P1: the temporary mod itself, packed, launched straight into a save [NEVER RUN]. You asked for it built so you can pak it:
+> ✅ **P1 RAN 2026-09-11: "That pakd mod is working" (you).** Checked here: the archive you packed (02:43, 100,411 B) holds the
+> code and all 18 shaders byte for byte as the current build; only its `metadata.lua` is the earlier one, from before the store
+> text, picture and optional flag. So you tested the code that ships, and the upload's own re-pack carries the new text.
+> ✅ **And with Reflections Low, High and Ultra (you, same hour):** you got into a colony both after switching mid-run and on a cold
+> boot with them on. That covers the one flagged store line (a save loaded straight from launch), so **the store page is ready as
+> written.** **One small question:** with Reflections on, did reflective surfaces look normal, missing, or glitchy? If they
+> looked fine, step 3 ("set Reflections to Off") could come out of the instructions and make them simpler.
+> The P1 logs and dump can come over whenever it suits; they're for the record and nothing waits on them.
+>
+> **P1: the temporary mod itself, packed, launched straight into a save [RAN 09-11, steps kept as the record]. You asked for it built so you can pak it:
 > it's built** and waiting in your Windows Mods folder as `SMR_FR1TempWorkaround`; the source copy is in
 > `C:\Dev\SMR-FR1-TempMod-2026-09-11\`. It is the benched Q2 path with the bench parts removed: no launch option and no forced
 > reload. It only switches on for NVIDIA + D3D12 + game 1.1.0.403908, and it logs one line: `[FR1 Temp Workaround] ACTIVE` or
