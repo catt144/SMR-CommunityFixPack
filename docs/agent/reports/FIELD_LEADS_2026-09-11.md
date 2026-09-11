@@ -15,7 +15,7 @@ Written by `smr-bugfixpack-0d` at the owner's ask ("investigate some new leads";
 | 1 | Wildfire cure rocket stuck on the pad, "20 fuel to unload" (Reddit, 2 players, PC + PS5) | **real vanilla defect, P1 mystery soft-lock** | [F119](../bugs/F119.md), checklist 146 |
 | 2 | "Building codes" law doesn't apply to prefabs (Steam) | by design; at worst a gain for the player | here §2 |
 | 3 | Producer "Clogged after a Dust Storm" never recovers (Steam, 2 players) | candidate; the failing link not pinned | [C85](../bugs/C85.md) |
-| 4 | "Landscaping excavation is too deep" for lakes (Steam) | a real terrain rule, not a regression, not the pack; this map's cause undetermined | here §4 |
+| 4 | "Landscaping excavation is too deep" for lakes (Steam) | **REOPENED (owner pushback)**: code unchanged, so an input changed in 1.1.0; not the pack | [C87](../bugs/C87.md), checklist 147 |
 | 5 | Probe deep scan reveals nothing (Steam) | the ordinary Adapted Probes rule; a separate minor defect found | [C86](../bugs/C86.md) |
 | 6 | Meteors always hit the base (Steam) | nothing concerning | here §6 |
 
@@ -50,7 +50,13 @@ NEXT storm end, which fires one follow-up per end (SOURCE, the pick at `Lua/_Sto
 hypotheses in the entry. SOURCE: the 1.0.7 body disables the building with no reason text
 (`Data/StoryBit/BuildingClogged.lua:4-6 @1.0.7`, `SetBuildingEnabledState` nil); 1.1.0 adds "Clogged after a Dust Storm."
 
-## 4 · Lakes: "excavation too deep" — a terrain rule; this map's cause undetermined
+## 4 · Lakes: "excavation too deep" — REOPENED → C87
+
+> ⚠️ **Superseded conclusion, kept for the record (2026-09-11, same day).** This section first ended "a terrain rule;
+> most likely low ground on that map". The owner pushed back ("not a normal terrain warning … never seen before", and a
+> Paradox developer asked for a bug report) and relayed the screenshot: ordinary flat ground by the domes. Follow-up diffs
+> showed everything on the check's path is identical on 1.0.7, so a new-in-1.1.0 warning means an INPUT changed.
+> The live record is [C87](../bugs/C87.md); the text below is the first pass.
 
 - SOURCE: the only raiser is `LandscapeLake:GatherConstructionStatuses` — `if z + z0 <= 0` with `z = prefab.min.z` and
   `z0` the cursor's visual Z (`Lua/Buildings/LandscapeLake.lua:347-358`), **byte-identical on 1.0.7** (`:295-305`). Not a

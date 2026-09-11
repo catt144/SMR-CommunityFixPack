@@ -78,17 +78,26 @@ completed tests move whole to
 > un-stick an already-stuck rocket when the save loads. It would carry a Beta label until tested in play.
 > A reply for the Reddit thread is ready in `agent/reports/FIELD_REPORT_REPLIES.md` — post it or not, your call.
 
-### 2026-09-11 — 147: five more field reports triaged. **Decision: only whether to post the replies. Recommendation: post the clogged-building and deep-scan replies (they help players now); skip meteors.** Nothing here needs the keyboard.
+### 2026-09-11 — 147: five more field reports triaged. **Decision: only whether to post the replies. Recommendation: post the clogged-building and deep-scan replies (they help players now); skip meteors.** Nothing here needs the keyboard except the optional 2-minute lake check below.
 
 > - **Building codes vs prefabs:** intended. Prefabs pay no construction cost, and the game deliberately skips the law's
 >   maintenance change for them — under Lax that's in the player's favour. Not a bug.
 > - **Clogged after a dust storm:** a one-time story event. Its "we'll fix it after the storm" answer waits for the
 >   *next* storm to end, can miss that one, and never comes if storms have stopped. Filed as a candidate
 >   ([C85](agent/bugs/C85.md)); the reply asks the players which answer they picked.
-> - **Lakes, "excavation too deep":** a real rule (a lake's bottom can't go below the map's floor), unchanged since
->   1.0.7, and not our pack. The pattern they describe — only the shallowest small lake fits — points to very low ground
->   on that map. ⭐ Optional 1-minute check if you're in a 1.1.0 colony anyway: try placing any lake. If it places, the
->   report is specific to their map and nothing more is owed.
+> - **Lakes, "excavation too deep":** ⚠️ **REOPENED after your pushback (09-11): "not a normal terrain warning, never seen
+>   it, and Paradox is interested".** The check's code, and everything on its path, is identical to 1.0.7 — so if the
+>   warning is new, one of its two inputs changed in 1.1.0: the lake-shape depth data (which looks re-exported for 1.1.0)
+>   or the ground height the cursor reports. The player's screenshot is ordinary flat ground by the domes, so my "very
+>   low ground" guess no longer fits. Candidate [C87](agent/bugs/C87.md); not our pack either way.
+>   ⭐ **The 2-minute check that settles it, in any 1.1.0 colony:** build menu → Lakes → Small Lake, hover flat ground next
+>   to your base. **If "Excavation too deep" shows,** it's broken for everyone on 1.1.0: keep the lake cursor there, open
+>   the console, paste the line below, press Enter, then tell me — the numbers land in the game log.
+>   **If the lake places fine,** it's specific to their map; say so and nothing more is owed.
+>   `[NEVER RUN]` — copy-paste exactly:
+>   ```
+>   local c=GetConstructionController() local o=c.cursor_obj local x,y,z=o:GetVisualPosXYZ() local e=o:GetEntity() local m=PrefabMarkers["Gameplay.Any."..e] print("LAKECHK", e, "cursor_z", z, "ground", o:GetMap():GetHeight(x,y), "min_z", m and m.min and m.min:z() or "NOPREFAB") FlushLogFile()
+>   ```
 > - **Deep scan finds nothing:** probes only deep-scan after researching **Adapted Probes**; Deep Scanning alone doesn't
 >   change probes. While checking, a small separate bug turned up — the five-sector Advanced Orbital Probe can knock an
 >   already deep-scanned neighbour back to "Scanned" ([C86](agent/bugs/C86.md), low priority).

@@ -8,6 +8,20 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-11 - Lakes lead reopened on the owner's pushback → C87 (smr-bugfixpack-0d)
+
+tags: field-reports lakes C87 pushback
+
+The owner: "not a normal terrain warning … never seen before", and a PDX developer asked for a bug report; the relayed
+screenshot shows ordinary flat ground, which my "very low ground" inference did not survive. Diffs of both trees: the
+check, its only caller, `is_template`, the lake template and `PrefabMarker.lua`'s `min` handling are unchanged, so a
+new warning needs an INPUT change (prefab data, cursor Z, or generated terrain). No 1.0.7 `Data.fpk` is on disk. Filed
+**C87** (cand, P2); checklist 147 now carries a 2-minute in-game check plus a copy-paste `LAKECHK` line `[NEVER RUN]`; the
+lake reply draft is held until it runs. **Lesson:** an inference about the reporter's terrain was written without the
+screenshot; when the input artefact is unfetched, say the verdict is unverified instead of fitting a story to the pattern.
+
+---
+
 ## 2026-09-11 - fixtoggles chain authored: an on/off button per fix, Beta labels, linked buttons (smr-bugfixpack-24)
 
 tags: fixtoggles chain toggles beta mod-options ui versioning-research

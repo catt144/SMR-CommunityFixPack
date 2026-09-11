@@ -290,7 +290,10 @@ one is unchecked, and PS5 has none.
 ⚠️ The law numbers are INHERITED (`LawDef-Efficiency.lua:692`, `:900`, investigator read).
 
 **Lakes, "excavation too deep" (Steam)**
-> The game refuses a lake if its bottom would end up below the lowest height the map allows. The lake shapes have different depths, and the small one that works for you is the shallowest of them, so this points to very low ground where you're building. We couldn't make it happen on normal ground. If you can share which map or landing site this is, and any mods, we'll take a look.
+> Worth sending through the in-game report tool as the developer asked. That warning means the game thinks the lake's bottom would end up below the lowest height the map allows, but your spot is ordinary flat ground, so it shouldn't fire there. The check itself didn't change in the update, so something it reads did; we're checking whether it happens on every 1.1.0 map.
+
+⚠️ Revised 2026-09-11 after the owner's pushback (the first draft blamed very low ground; the player's screenshot shows
+ordinary ground). Hold this until the checklist 147 lake check has run — its result changes the reply (C87).
 
 **Meteors (Steam) — optional; recommendation (checklist 147): skip**
 > Meteors land at random spots across the whole map, and the way the spot is picked didn't change in the update, so a bigger base simply gets hit more often. The Relaunched Fix Pack doesn't change meteors any more.
