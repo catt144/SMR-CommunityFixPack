@@ -145,7 +145,7 @@ completed tests move whole to
 >    the game its own small shader cache in which the crashing reflection shaders are swapped for a
 >    harmless stand-in, so reflections would stay off for those players. Your reload leg shows a cache swap
 >    takes effect at startup. I first have to learn the cache's file format, and I'll report whether it's
->    doable before building anything.
+>    doable before building anything. ▶ **Prompt ready for Astra:** `agent/prompts/FR1_CACHE_ROUTE_EXPLORE.md`.
 > 2. **Two quick launch-option legs on the laptop (one line each, nothing to install):**
 >    `VKD3D_CONFIG=force_static_cbv` and `PROTON_DISABLE_NVAPI=1`. These aren't mods, but they're easy
 >    for players if one works.
