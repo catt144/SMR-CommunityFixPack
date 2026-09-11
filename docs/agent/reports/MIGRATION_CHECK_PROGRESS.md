@@ -39,7 +39,7 @@ report and entry/decision updates are complete.
 
 - DONE — Finish documents: report/entries/checklist updated, superseded handoff pointers refreshed; one-off brief consumed.
 - DONE — Verification: six desk suites 71/71 demands; eight bodychecks 21/21 pins; TEMPORARY sweep zero.
-- IN PROGRESS — Close: doccheck/regeneration, explicit-path commit and push.
+- DONE — Close: doccheck GREEN; audit committed/pushed as `11c0384`; HEAD matched upstream. Only owner's `items.lua`/`metadata.lua` remained dirty.
 
 Final readback caught failed intermediate replacements caused by PowerShell stdin
 encoding. This list was reconciled against the recorded reads and controls at
