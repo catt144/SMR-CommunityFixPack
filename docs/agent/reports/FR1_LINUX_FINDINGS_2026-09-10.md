@@ -214,6 +214,30 @@ plus a faulting-thread script (the last `vkd3d_shader_dump_blob` on the thread t
 - **Developer reply (2026-09-11, owner):** POSTED in the Steam discussion the Paradox dev tracks; editable; **no dev response yet**
   ("doesn't look like it's been read yet"). The owner is pasting in the three §9 updates (`FR1_DEV_REPLY_2026-09-10.md` header).
 
+## 10 · 2026-09-11 — cache-probe v1 bench RAN (owner, laptop on 580): the overlay WORKS; 12 debug RAYS records were uncovered
+
+Evidence (outside git): **`C:\Dev\fr1-cache\fr1-cache\`** (C1 + N1 dumps and Proton logs; owner note `N1/N1-result.txt`). Readers: Astra's
+`fr1-cache-probe/analysis/classify_dump.py`, plus the faulting-thread script (§9). Build and design: `reports/FR1_CACHE_ROUTE_2026-09-11.md`.
+
+- **First attempt — NO TREATMENT (marker typo):** the markers were `-fr1-cache-control` / `-fr1-cache-noop` (dash, not `=`; the game log's
+  `Command line:` shows it). The probe logged `DECLINED marker must be exactly control or noop` in both; menu reached, then the usual
+  world-load CTD with the faulting thread on `38121decbc3eee12` (1 ms). This is a baseline repeat, not a result. Fail-closed worked.
+- **C1 `control` — MEASURED:** `ARMED Control` → `MOUNT_HELPER_OK` → `RELOAD_REQUESTED`; CTD during boot. The faulting thread's last dump is
+  `271ec9634b1ab87b`, 1 ms before. That reproduces D/E.
+- **N1 `noop` — MEASURED, the overlay wins precedence and is consumed:** the dump holds the no-op DXIL (`4f866e2c54fc9064.dxil`, sha256
+  `516fc383…` = the probe's `EXPECTED_DXIL_SHA256`). Past C1's stage, the game built 260 DXIL (C1: 123), including REFLECT_FULL tile 16
+  (`c2aacc1919769303`) **without a fault** ⇒ that FULL kernel passes NVVM 580. The owner saw a pre-menu loading screen hang for seconds, then
+  a CTD ~11 s after `RELOAD_REQUESTED`, still in the boot rebuild (no ChangingMap). The faulting thread's last dump is **`a26e0bbfe7751fbf`**,
+  1 ms before, at the same NVVM site.
+- **`a26e0bbfe7751fbf` identified (MEASURED desk):** compute cs_6_6, cache record `5519638363063710019`; `index.txt` names it
+  `Reflections.fx|USE_HYPERBOLIC_DEPTH|(TRACE_HIZ|)REFLECTION_DEBUG|REFLECTION_ITERATIONS|REFLECT_RAYS`. It is a **debug RAYS build**. Its
+  RTS0 is byte-identical to the default RAYS root. It is absent from every earlier dump.
+- **The gap:** `index.txt` `[k]` lines (source|defines → record key) list **18 REFLECT_RAYS records**; v1 replaced the 6 non-debug ones. The
+  12 `REFLECTION_DEBUG` builds are listed in `prompts/FR1_CACHE_ROUTE_V2.md` §2. A third RAYS program is now measured faulting 580 (38121,
+  271ec, a26e), which strengthens the family inference (Astra's precision note stands: the rest are not individually measured).
+- **Next (owner rule: the orchestrator briefs, Astra builds):** probe v2 covering all 18 records, plus a no-reload treatment leg, is briefed
+  to Astra in `prompts/FR1_CACHE_ROUTE_V2.md`. Routed: ck145.
+
 **M2 grounding — MEASURED desk.** The 1.1.0 `Reflections.fx` variants were compiled with the game's `dxcompiler.dll` and the argv that reproduced
 `38121decbc3eee12` (§6), plus `TRACE_HIZ` / `USE_HYPERBOLIC_DEPTH` / `REFLECT_IMPORTANCE_SAMPLE` / `REFLECT_TILE`. The DXIL payloads
 were then searched across all 6,455 decoded `ShaderCached3d12.fpk` entries (the 2 with no DXBC are `index.bin` / `index.txt`).

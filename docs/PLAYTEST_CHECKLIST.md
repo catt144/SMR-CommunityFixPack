@@ -31,7 +31,16 @@ completed tests move whole to
 
 ### 2026-09-11 — 145: FR-1 cache replacement is ready for a controlled laptop test.
 
-> **Current step — TAKEABLE WHEN you are at the laptop on NVIDIA 580, PRIME On-Demand.**
+> ✅ **2026-09-11 — you ran C1 and N1 (second try, correct markers). The cache swap WORKS, but one more set of
+> shaders needs covering.** The game read Astra's stand-in shader: it got past the point where it used to die and built
+> twice as many shaders, including a different reflections shader that driver 580 compiles fine. Then it crashed on a
+> **debug** version of the same bad reflections shader, which the first build didn't replace. The game's cache index
+> lists **18** of these shaders, and v1 covered 6. **Next: Astra builds v2 covering all 18**
+> (`agent/prompts/FR1_CACHE_ROUTE_V2.md`). Nothing to do until its new steps appear here. (The first try's marker
+> typo, `-fr1-cache-noop` instead of `-fr1-cache=noop`, made the probe refuse, as designed; v2 is asked to make that
+> harder to miss.) Details: `agent/reports/FR1_LINUX_FINDINGS_2026-09-10.md` §10.
+>
+> **Current step — TAKEABLE WHEN you are at the laptop on NVIDIA 580, PRIME On-Demand.** *(v1 steps below; v2 will replace them.)*
 > The desk work found a usable route to test: the mod can ask the game to layer a small
 > cache folder over its existing cache, then request your immediate reload. The fake-DLC
 > helper removes the old cache first, so a small partial pack through that helper was the
