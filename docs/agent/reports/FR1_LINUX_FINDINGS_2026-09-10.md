@@ -338,8 +338,10 @@ ask). It is Q2's path with no marker and no reload. Steps are in checklist 145 P
   tested reflections on low and high and I can still get into a colony mid run and cold boot with them enabled", then "Ultra works
   as well". ⇒ On the owner's word, §11's unsampled cold launch into a save is closed (cold boot straight into a colony), and
   Reflections On (Low, High, Ultra; Medium not reported) does
-  not crash with the overlay, whether switched mid-run or set at boot. **NOT REPORTED:** what reflections look like with the overlay
-  and Reflections On. The stand-in writes nothing to the reflection target, so missing or stale reflections are INFERRED, not seen.
+  not crash with the overlay, whether switched mid-run or set at boot. **Visuals with Reflections On: owner saw nothing wrong, on a bare colony
+  with few reflective surfaces ("I don't know I didn't see anything"); NOT properly tested.** The stand-in writes nothing to the
+  reflection target, so glitchy or missing reflections are INFERRED likely. The owner ruled the store page says exactly that:
+  it loads, may have issues, isn't fully tested, and Off is recommended.
 - **MEASURED desk — what was packed:** `ModUpload\Pack\ModContent.fpk`, 100,411 B, 02:43:03. `tools/pack_list.py --tree` against the
   staged folder gives 21 entries: code, `items.lua` and all 18 `Noop/ShaderCache` records byte-identical to the current build; `metadata.lua`
   differs (1,162 B = the pre-store-page version; no preview entry). ⇒ P1 exercised the shipping code and payload. The upload's

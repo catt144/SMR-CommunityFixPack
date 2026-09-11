@@ -378,8 +378,8 @@ the background.
 > ✅ **P1 passed, and the page is ready as written** (you, 09-11). The packed mod works, including a cold boot straight into a
 > colony, and it also ran with Reflections Low, High and Ultra. You don't need to pack again: the upload re-packs the folder itself,
 > with the new text and picture.
-> Optional simplification, waiting on one answer: if reflections looked fine with them on, step 3 and the "keep Reflections
-> Off" line can come out.
+> ✅ Reflections wording settled (you, 09-11): it loads with Reflections on, but that isn't properly tested and will very likely
+> look glitchy, so keeping Reflections Off is a recommendation, not a requirement.
 
 **Uploading it (different from the fix pack):**
 - **Steam first is fine here, if Steam is the only store.** If you also do Paradox, do Paradox first, as usual.
@@ -400,7 +400,7 @@ TEMPORARY - Linux NVIDIA 580 Crash Workaround
 #### 📋 Short summary
 
 ```
-TEMPORARY, Linux only: stops the NVIDIA driver 580 crash when you start a New Game or load a save in 1.1.0. Keep Reflections Off, and remove it once Paradox fixes the crash.
+TEMPORARY, Linux only: stops the NVIDIA driver 580 crash when you start a New Game or load a save in 1.1.0. Best with Reflections Off. Remove it once Paradox fixes the crash.
 ```
 
 #### 📋 Paradox Mods — description (plain text, paste as-is)
@@ -428,8 +428,10 @@ screen-space reflection shaders, and the game prepares them even with
 Reflections turned Off. This mod swaps those shaders for an empty stand-in, so
 there is nothing left to crash on and the world loads.
 
-The trade-off: screen-space reflections will not work while the mod is on, so
-keep Reflections Off.
+The trade-off: the mod empties the shaders the game uses for screen-space
+reflections. The game still loads and runs with Reflections on (we tried Low,
+High and Ultra), but reflections have not been properly tested that way and will
+very likely look wrong or glitchy. We recommend keeping Reflections Off.
 
 
 HOW TO USE IT
@@ -437,7 +439,7 @@ HOW TO USE IT
 1. Subscribe to this mod.
 2. Start the game. On the main menu, open MOD MANAGER and enable
    "TEMPORARY - Linux NVIDIA 580 Crash Workaround".
-3. Open Options, then Video, and set Reflections to Off.
+3. Recommended: open Options, then Video, and set Reflections to Off.
 4. Quit the game completely, then start it again.
 5. Start a New Game or load your save.
 
@@ -464,7 +466,8 @@ WHAT WE TESTED IT ON
 · Linux Mint 22.2 (X11), kernel 7.0.0-31
 · NVIDIA driver 580.173.02
 · Steam Proton Hotfix (hotfix-20260828)
-· Surviving Mars: Relaunched 1.1.0.403908, Reflections Off
+· Surviving Mars: Relaunched 1.1.0.403908, mostly with Reflections Off
+  (it also loaded with Low, High and Ultra)
 
 With the mod on, New Game and existing saves loaded and played normally. With
 it off, the same laptop crashed on every world load.
@@ -504,13 +507,13 @@ If that is not you, you do not need this mod:
 [h2]What it does[/h2]
 On driver 580, NVIDIA's shader compiler crashes while the game prepares its screen-space reflection shaders, and the game prepares them even with Reflections turned Off. This mod swaps those shaders for an empty stand-in, so there is nothing left to crash on and the world loads.
 
-[b]The trade-off:[/b] screen-space reflections will not work while the mod is on, so keep Reflections Off.
+[b]The trade-off:[/b] the mod empties the shaders the game uses for screen-space reflections. The game still loads and runs with Reflections on (we tried Low, High and Ultra), but reflections have not been properly tested that way and will very likely look wrong or glitchy. [b]We recommend keeping Reflections Off.[/b]
 
 [h2]How to use it[/h2]
 [olist]
 [*]Subscribe to this mod.
 [*]Start the game. On the main menu, open [b]MOD MANAGER[/b] and enable [b]TEMPORARY - Linux NVIDIA 580 Crash Workaround[/b].
-[*]Open [b]Options → Video[/b] and set [b]Reflections[/b] to [b]Off[/b].
+[*][b]Recommended:[/b] open [b]Options → Video[/b] and set [b]Reflections[/b] to [b]Off[/b].
 [*]Quit the game completely, then start it again.
 [*]Start a New Game or load your save.
 [/olist]
@@ -530,7 +533,7 @@ After any game update the mod switches itself off anyway, because it only fits g
 [*]Linux Mint 22.2 (X11), kernel 7.0.0-31
 [*]NVIDIA driver 580.173.02
 [*]Steam Proton Hotfix (hotfix-20260828)
-[*]Surviving Mars: Relaunched 1.1.0.403908, Reflections Off
+[*]Surviving Mars: Relaunched 1.1.0.403908, mostly with Reflections Off (it also loaded with Low, High and Ultra)
 [/list]
 With the mod on, New Game and existing saves loaded and played normally. With it off, the same laptop crashed on every world load.
 

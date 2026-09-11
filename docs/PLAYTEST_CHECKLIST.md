@@ -36,8 +36,8 @@ completed tests move whole to
 > text, picture and optional flag. So you tested the code that ships, and the upload's own re-pack carries the new text.
 > ✅ **And with Reflections Low, High and Ultra (you, same hour):** you got into a colony both after switching mid-run and on a cold
 > boot with them on. That covers the one flagged store line (a save loaded straight from launch), so **the store page is ready as
-> written.** **One small question:** with Reflections on, did reflective surfaces look normal, missing, or glitchy? If they
-> looked fine, step 3 ("set Reflections to Off") could come out of the instructions and make them simpler.
+> written.** You saw nothing wrong with Reflections on, but a bare colony has few reflective surfaces. As you asked, the page now
+> says it loads with Reflections on but isn't properly tested that way and will very likely look glitchy, so Off is **recommended**.
 > The P1 logs and dump can come over whenever it suits; they're for the record and nothing waits on them.
 >
 > **P1: the temporary mod itself, packed, launched straight into a save [RAN 09-11, steps kept as the record]. You asked for it built so you can pak it:

@@ -8,6 +8,15 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-11 - FR-1 temp mod: Reflections wording (smr-bugfixpack-5d)
+
+tags: FR-1 temp-mod store-pages
+
+Owner: saw nothing wrong with Reflections on, but a bare colony has few reflective surfaces. Note that it loads but may have
+issues and isn't fully tested; very likely glitchy with the shaders emptied. The store text (metadata.lua + UPLOAD_WORKFLOW
+blocks) now says so: step 3 is "Recommended", the summary says "Best with Reflections Off", and "tested on" says mostly Off,
+also loaded with Low/High/Ultra. Mod code unchanged (still the P1-tested bytes).
+
 ## 2026-09-11 - FR-1 P1 (smr-bugfixpack-5d): the packed temp mod WORKS (owner-witnessed)
 
 tags: FR-1 temp-mod P1 packed
