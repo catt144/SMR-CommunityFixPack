@@ -25,7 +25,8 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   A3 (F118) · A10 · A5 c2 · A9 c4/c5 · F117's station recipe · the first `RunAll()` on the 94-probe kit (re-stamps
   `WORKFLOW.md:407`, VOID since 09-09). ⛔ Kit verdicts are PREDICTIONS until then; still FAIL/ERROR by name:
   `C47OpenFarmSeedBufferShape` (Herbs 100→50), retired `LanderCargoRatchet`/`DroneUnreachableForever`/`AutoExportPriority`.
-- ⏭ NEXT desk: `prompts/DLC_DEEP_CHECK.md` (shape: `reports/vanillahunt/HUNT_AUDIT.md` §8).
+- ⏭ NEXT (owner 09-10): FIRST walk the owner through the FR-1 options report + next bench (ck145) —
+  `prompts/HANDOFF_FR1_OPTIONS_2026-09-10.md`; then desk `prompts/DLC_DEEP_CHECK.md` (shape: `HUNT_AUDIT.md` §8).
   FR-1 options DONE: `reports/FR1_OPTIONS_2026-09-10.md`; shader/cache proof EF-088, mod timing EF-089; next bench + scope ck145.
   Attribution: same-thread log evidence (FINDINGS §7), override proof owed; no Linux mitigation tested; dev reply drafted. Owner: ck144 (v7 checks + Steam sounds thread).
   vanillahunt CLOSED 09-10 (99): instruments SOUND WITH STATED GAPS — 1,281 table-level hunks in 368 rowed hand files listed by

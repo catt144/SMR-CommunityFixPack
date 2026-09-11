@@ -28,6 +28,31 @@ Exploration prompt consumed in the delivery commit; next desk task remains DLC_D
 
 ---
 
+## 2026-09-10 night — lookback + handoff at the owner's stop (`smr-bugfixpack-f0`)
+
+tags: lookback handoff FR-1 v7 practice
+
+Session arc: handoff FR1 taken → C74 sound leads closed → v7 close-out (owner: both live) → FR-1 bench read
+(owner-run) → film grain + extension tests refuted → shader dump → `38121decbc3eee12` matched to `Reflections.fx`
+REFLECT_RAYS → options hunt handed to Astra (`fb7c247`, byte-proof + ranked register) → same-thread attribution →
+Steam dev reply drafted. Next session: `prompts/HANDOFF_FR1_OPTIONS_2026-09-10.md` (FIRST: walk the owner through
+Astra's report). Lessons (memory holds the reusable ones):
+- **Orientation overreach:** the handoff was pasted as a task; I executed §4.1 and committed before the owner said
+  "this was just supposed to be an orientation" ⇒ a pasted handoff = orient, summarise, ask.
+- **My cache-absence claim was wrong:** I byte-searched `ShaderCached3d12.fpk` without decompressing its zstd
+  entries and concluded "compiled at runtime from source"; Astra decompressed and found the DXBC (EF-088). A negative
+  search over encoded bytes is not a sample.
+- **A zip for Linux nearly shipped broken:** PS 5.1 `Compress-Archive` stored `SMR-FR1Test\Code\…` backslash entries;
+  caught by listing the zip, rebuilt with Python `zipfile`.
+- **Attribution by thread, not timestamps:** Astra ruled parallel dump order non-attributing (correct); the Proton
+  log's TID column (025c dump → 025c fault, 2 ms) answered it. Read every column before accepting "cannot attribute".
+- **What worked:** the film-grain mod had a clean-exit control run, so "still crashes" was a SAMPLED refutation;
+  the owner's menu-vs-ini lead (a veteran modder's) was checked for the one flag and routed as a hunt, and Astra's
+  hidden-controls work followed from it. **Communication:** "our mod can't fix it" (meaning "no KNOWN setting")
+  was heard as "impossible" — state the condition with the verdict.
+
+---
+
 ## 2026-09-10 night — FR-1: same-thread attribution found; Steam reply for the Paradox dev drafted (`smr-bugfixpack-f0`, owner in conversation)
 
 tags: FR-1 attribution vkd3d thread dev-reply Paradox Steam evidence-package
