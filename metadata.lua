@@ -316,6 +316,7 @@ return PlaceObj('ModDef', {
 		"Code/Fix_LakeEntombment.lua",
 		"Code/Fix_GhostFarmOxygen.lua",
 		"Code/Fix_RocketDroneChurn.lua",
+		"Code/Fix_TradeRocketFuelRefresh.lua",
 		"Code/Fix_ShuttleTransportCache.lua",
 		"Code/Fix_VacuumWalks.lua",
 		"Code/Fix_ArrivalDeaths.lua",
