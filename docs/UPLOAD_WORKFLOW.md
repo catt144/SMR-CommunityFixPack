@@ -383,7 +383,13 @@ the background.
 
 **Uploading it (different from the fix pack):**
 - **Steam first is fine here, if Steam is the only store.** If you also do Paradox, do Paradox first, as usual.
-- Pack and upload from **MOD EDITOR**, the same as the fix pack. Because this is a **new** mod, the first upload **saves
+- **Steps:** on the dev PC, main menu → **MOD EDITOR** (yes to the restart) → open **TEMPORARY - Linux NVIDIA 580 Crash
+  Workaround** → press **Upload to Steam** on the editor's **top toolbar** (the Steam icon; it is not in the File menu). **No
+  separate Pack step:** the upload packs the folder itself. If it asks "The mod needs to be saved before uploading. Continue?",
+  answer **Yes**. Wait for "Mod … was successfully uploaded!". For Paradox, use **Upload to Paradox** (same toolbar), before Steam.
+- **After the upload, open the new Steam item and check its visibility.** Whether a brand-new item starts public or hidden is
+  decided inside Steam, and the agent can't read that code. If it's hidden, set it to Public on the item's page.
+- Because this is a **new** mod, the first upload **saves
   it by itself** and creates the listing. That is expected this once (it is the fix pack's "stop, tell the agent" case only
   for the fix pack). Afterwards the copy in your Mods folder holds the listing number, so tell the agent: that copy becomes
   the master.
