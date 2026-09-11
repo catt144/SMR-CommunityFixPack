@@ -344,6 +344,7 @@ return PlaceObj('ModDef', {
 		"Code/Fix_LayoutTechLock.lua",
 		"Code/Fix_DroneTransportMinors.lua",
 		"Code/Fix_AnomalyCaveInMap.lua",
+		"Code/Fix_ScanDowngrade.lua",
 		"Code/Fix_BombardmentSpread.lua",
 		"Code/Fix_ExtenderFlapChurn.lua",
 		"Code/Fix_SaintBlessing.lua",

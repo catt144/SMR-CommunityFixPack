@@ -179,6 +179,10 @@ return {
 		'CodeFileName', "Code/Fix_AnomalyCaveInMap.lua",
 	}),
 	PlaceObj('ModItemCode', {
+		'name', "Fix_ScanDowngrade",
+		'CodeFileName', "Code/Fix_ScanDowngrade.lua",
+	}),
+	PlaceObj('ModItemCode', {
 		'name', "Fix_BombardmentSpread",
 		'CodeFileName', "Code/Fix_BombardmentSpread.lua",
 	}),
