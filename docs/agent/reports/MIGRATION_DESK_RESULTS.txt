@@ -1,0 +1,171 @@
+2026-09-11 migration audit desk receipt. No game run.
+TEMPORARY sweep: zero matches in pack and TestKit Code directories before desk runs.
+
+> python tools/desk_migration_cluster.py
+==============================================================================
+Migration cluster: controlled branch evidence, not in-play reproduction
+==============================================================================
+lua: Lua 5.5 | lupa 2.8
+
+  PASS  F51 vanilla retains false after shuttles become available
+  PASS  F51 patch recomputes both false-to-true and true-to-false
+  PASS  F51 old permanent-block inference fails: false mode still creates shuttle task
+  PASS  F52 vanilla 300-unit vacuum leg omits passage
+  PASS  F52 patch uses available passage
+  PASS  F52 no-passage control remains an outside walk
+  PASS  F52 breathable control unchanged
+  PASS  F54 vanilla admits player-disabled hub
+  PASS  F54 wrapper rejects player-disabled hub
+  PASS  F54 working-hub control admitted
+  PASS  F54 self-lifting suspension control admitted
+  PASS  F60 vanilla tally/gate exclude unpowered home, assignment accepts it
+  PASS  F60 patched tally counts 3 but migration gate still rejects
+  PASS  F60 powered-home control agrees on tally and gate
+
+==============================================================================
+14 of 14 demands held
+ALL DEMANDS HELD
+
+exit=0
+
+> python tools/desk_f59_expedition.py
+==============================================================================
+F59 expedition hold: same shipped sequence, module off/on controls
+==============================================================================
+lua: Lua 5.5 | lupa 2.8
+
+  PASS  vanilla: crew retains reserved home with a homeless neighbour
+  PASS  F59 applied: neighbour takes bed and expedition hold is lost
+  PASS  F59 applied: residence remains within capacity (this is loss of hold, not overflow)
+  PASS  negative control: F59 preserves crew home when no neighbour competes
+  PASS  current F58 exemption cannot protect a hold F59 prevented from being created
+  PASS  F58 daily sweep does not restore the missing hold
+
+==============================================================================
+6 of 6 demands held
+ALL DEMANDS HELD
+
+exit=0
+
+> python tools/desk_f117_argshape.py
+==============================================================================
+F117 desk falsifier -- shipped bodies verbatim, our probe verbatim, real Lua
+==============================================================================
+lua: Lua 5.5 | lupa 2.8
+
+[1.1.0] Community:GetScoreFor extracted, 19 lines; first line: function Community:GetScoreFor(colonist)
+  PASS  [1.1.0] probe answers 'colonist'  -- got 'colonist'
+  PASS  [1.1.0] no decline logged  -- []
+[1.0.7] Community:GetScoreFor extracted, 28 lines; first line: function Community:GetScoreFor(traits)
+  PASS  [1.0.7] probe answers 'traits'  -- got 'traits'
+  PASS  [1.0.7] no decline logged  -- []
+
+  PASS  [1.1.0] the OLD call ChooseDome(self.traits, ...) THROWS  -- [string "<python>"]:4: attempt to index a nil value (local 'obj_attributes')
+  PASS  [1.1.0] the NEW call ChooseDome(colonist, ...) does not throw  -- <Lua table at 0x000001FE4D03D940>
+  PASS  [1.0.7] passing the COLONIST does not throw (so no instrument would see it)  -- 100.0
+  PASS  [1.0.7] ... but MIS-SCORES: correct=110.0, with-colonist=100.0  -- ck118's 'pass self on both branches' really is silently wrong
+
+  PASS  [control] a body that indexes neither table is answered UNKNOWN, not guessed  -- shape=False
+  PASS  [control] ... and the decline is NAMED in the log  -- ["ArrivalDeaths: ChooseDome's argument contract could not be read from Community:GetScoreFor -- the F53(b) arrival re-choose stands down for this session (F117)"]
+  PASS  [control] a body that indexes BOTH tables is answered UNKNOWN too  -- shape=False
+
+==============================================================================
+11 of 11 demands held
+ALL DEMANDS HELD -- the probe fires on 1.1.0, does not fire on 1.0.7,
+both defects it guards against are real, and UNKNOWN is not guessed.
+
+exit=0
+
+> python tools/desk_c83_arrivals.py
+==============================================================================
+C83 arrivals -- welcoming fallback and composition control
+==============================================================================
+lua: Lua 5.5 | lupa 2.8
+
+extracted Lua/_GameUtils.lua:382-501 (120 lines)
+  PASS  control: without apply, the dead assignment survives (the harness cannot pass by vanilla alone)
+
+== A/B: reachable dead assignment, welcoming target with and without housing ==
+  PASS  A: dead reachable dome -> welcoming dome with space
+  PASS  log: first C83 reroute names the colonist and both domes once per session
+  PASS  B: full welcoming dome is still the fallback (arrival becomes homeless there)
+
+== stand-down controls ==
+  PASS  C: no welcoming dome -> preserve vanilla's assignment
+  PASS  D: welcoming assigned dome is untouched and never asks the F117 probe
+  PASS  F: unknown ChooseDome argument shape -> stand down
+
+== F53 regression and station-order falsifier ==
+  PASS  E: F53 not-reachable branch still re-picks with no safety fallback
+  PASS  G: station-sweep dome appended after sort wins by minimum dome_dist, not list order
+
+== D03 composition and elevator pairing ==
+  PASS  D03: non-tourist fallback cannot bypass a closed dome's CanAcceptNewColonists veto
+  PASS  D03: tourists retain the opt-in module's documented closed-dome exemption
+  PASS  pairing: a rerouted elevator dome keeps its matching emigration_elevator
+
+==============================================================================
+12 of 12 demands held
+ALL C83 DEMANDS HELD -- negative control discriminates; all seven prompt cases, D03 composition, one-shot logging and elevator pairing pass.
+
+exit=0
+
+> python tools/bodycheck.py --module ShuttleTransportCache
+==============================================================================
+2 manifest row(s) over 1 stamped module(s); 0 module(s) carry no manifest.
+  2 OK
+A GREEN here is NOT a clearance: it sees a changed body, a vanished defect
+and a vanished target. It does NOT see semantics moving under a wrapper
+(class c), and it sees nothing at all for a NO-DEFECT or NO-MANIFEST module.
+
+exit=0
+
+> python tools/bodycheck.py --module VacuumWalks
+==============================================================================
+2 manifest row(s) over 1 stamped module(s); 0 module(s) carry no manifest.
+  2 OK
+A GREEN here is NOT a clearance: it sees a changed body, a vanished defect
+and a vanished target. It does NOT see semantics moving under a wrapper
+(class c), and it sees nothing at all for a NO-DEFECT or NO-MANIFEST module.
+
+exit=0
+
+> python tools/bodycheck.py --module ArrivalDeaths
+==============================================================================
+4 manifest row(s) over 1 stamped module(s); 0 module(s) carry no manifest.
+  4 OK
+A GREEN here is NOT a clearance: it sees a changed body, a vanished defect
+and a vanished target. It does NOT see semantics moving under a wrapper
+(class c), and it sees nothing at all for a NO-DEFECT or NO-MANIFEST module.
+
+exit=0
+
+> python tools/bodycheck.py --module ShuttleHubOffAvailable
+==============================================================================
+2 manifest row(s) over 1 stamped module(s); 0 module(s) carry no manifest.
+  2 OK
+A GREEN here is NOT a clearance: it sees a changed body, a vanished defect
+and a vanished target. It does NOT see semantics moving under a wrapper
+(class c), and it sees nothing at all for a NO-DEFECT or NO-MANIFEST module.
+
+exit=0
+
+> python tools/bodycheck.py --module StaleReservations
+==============================================================================
+3 manifest row(s) over 1 stamped module(s); 0 module(s) carry no manifest.
+  3 OK
+A GREEN here is NOT a clearance: it sees a changed body, a vanished defect
+and a vanished target. It does NOT see semantics moving under a wrapper
+(class c), and it sees nothing at all for a NO-DEFECT or NO-MANIFEST module.
+
+exit=0
+
+> python tools/bodycheck.py --module FreedHousingNotice
+==============================================================================
+2 manifest row(s) over 1 stamped module(s); 0 module(s) carry no manifest.
+  2 OK
+A GREEN here is NOT a clearance: it sees a changed body, a vanished defect
+and a vanished target. It does NOT see semantics moving under a wrapper
+(class c), and it sees nothing at all for a NO-DEFECT or NO-MANIFEST module.
+
+exit=0

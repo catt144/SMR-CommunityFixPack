@@ -98,6 +98,7 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   1.0.7 players are served by the frozen v5 GitHub build (`v5-game-1.0.7`), linked from the card and the site.
 
 ## Open owner decisions (bodies in `docs/PLAYTEST_CHECKLIST.md` → "Decisions waiting on you")
+- **151** F59 expedition-home harm desk-controlled; migration audit STOPPED (`reports/MIGRATION_DEV_REPORT.md`); no repair built.
 - **150** PDX dev reply (C88 shape · F37 REMOVE · wording) · **149** upload (F119+C86 tested-attended 09-11) · **147** field replies · **148** fixtoggles.
 - 98 rig half only (⛔ Steam = ONE branch at a time, owner 09-08) · 99 disposition of the self-disabled ·
   100 say anything to players yet (rec no) · 101 accept the re-verification chain shape.

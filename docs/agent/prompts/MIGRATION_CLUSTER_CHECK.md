@@ -1,5 +1,11 @@
 # MIGRATION CLUSTER CHECK — are our colonist-migration fixes still right on 1.1.0, and what do we tell Paradox?
 
+> **2026-09-11 — STOPPED under §5, not completed.** F59's vacancy notification can take an expedition crew member's
+> bed before vanilla reserves it; 6/6 desk controls held, no in-play reproduction. Owner decision **151**.
+> Resume from `reports/MIGRATION_CHECK_PROGRESS.md` and `reports/MIGRATION_DEV_REPORT.md`, not from scratch.
+> All seven S1 reads and S2 through F59 are recorded. F60/F73 final reviews, S4 and full report completion remain.
+> No fix was changed. Keep this brief and its map row until the original completion conditions actually hold.
+
 Paste into a fresh session (any model; the owner picks). Written **2026-09-11** by `smr-bugfixpack-e6`.
 **Staleness anchor: HEAD was `3b880dc` when this was written.** Start with `git pull` + `git log --oneline -15`
 and read what landed since; the records win over every specific below.

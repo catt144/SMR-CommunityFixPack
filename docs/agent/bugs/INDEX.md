@@ -63,7 +63,7 @@ the row order below is the old index table's own. Generated from the front matte
 | 48 | F48 | Station-connector savegame fixup no-op (paren misplaced) | fixed | P3 | high | [F48.md](F48.md) |
 | 49 | F49 | Train minors bundle (palette, split kills trains, etc.) | fixed* | P3 | med | [F49.md](F49.md) |
 | 50 | F50 | Auto-rockets kick approaching drones to Idle every hour | tested | P1 | high | [F50.md](F50.md) |
-| 51 | F51 | Transport-mode cache never sees new shuttles (homeless) | tested | P1 | high | [F51.md](F51.md) |
+| 51 | F51 | Transport-mode cache omits shuttle availability; 1.1.0 player impact unverified | tested | P1 | high | [F51.md](F51.md) |
 | 52 | F52 | Colonists still walk ≤400m in vacuum past passages | tested | P1 | high | [F52.md](F52.md) |
 | 53 | F53 | Arrivals hike to unreachable "safety dome" and die | fixed | P1 | high | [F53.md](F53.md) |
 | 54 | F54 | Switched-off shuttle hubs count as transport available | tested | P2 | med+ | [F54.md](F54.md) |
@@ -71,8 +71,8 @@ the row order below is the old index table's own. Generated from the front matte
 | 56 | F56 | Auto RC Transports never offload rockets | wontfix | P2 | high | [F56.md](F56.md) |
 | 57 | F57 | Drone/transport minors bundle | fixed* | P3 | med | [F57.md](F57.md) |
 | 58 | F58 | Invisible residence reservations never expire | fixed* | P1 | high | [F58.md](F58.md) |
-| 59 | F59 | Freed housing never notifies homeless (12h retry lag) | fixed* | P2 | med | [F59.md](F59.md) |
-| 60 | F60 | Dome free-space uses `working`, assignment `ui_working` | fixed | P2 | med | [F60.md](F60.md) |
+| 59 | F59 | Freed housing notification ? HARMFUL expedition-home loss on 1.1.0 (desk-controlled; ck151) | fixed* | P2 | med | [F59.md](F59.md) |
+| 60 | F60 | Dome tally/assignment mismatch; 1.1.0 migration gate bypasses our fix ? removal candidate | fixed | P2 | med | [F60.md](F60.md) |
 | 61 | F61 | Home dome's migration toggle blocks outbound shopping | wontfix | P1 | med+ | [F61.md](F61.md) |
 | 62 | F62 | Services reach 1 passage hop only, never trains | wontfix | P2 | high | [F62.md](F62.md) |
 | 63 | F63 | Universities invisible to emigration (no students) | wontfix | P2 | high | [F63.md](F63.md) |

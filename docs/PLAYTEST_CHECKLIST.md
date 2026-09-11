@@ -29,6 +29,31 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### 2026-09-11 — 151: migration audit stopped: our immediate housing notification can cost expedition crews their reserved homes
+
+> **[F59](agent/bugs/F59.md), desk-controlled, not yet reproduced in play.** At boarding, the game frees a crew member's
+> bed and then reserves it for their return. Our notification can give that bed to a homeless neighbour between those
+> steps. Same shipped sequence: vanilla keeps the hold; our module loses it. All six controls held. The existing F58
+> expedition exemption cannot protect a hold that was never created. **No fix or release file was changed.**
+>
+> **Decisions:** (a) prioritize repairing F59 while preserving its ordinary vacancy notification (recommended), or
+> choose temporary disable/removal; (b) which completed sections of the
+> [partial developer report](agent/reports/MIGRATION_DEV_REPORT.md) may be sent — recommendation: hold the full report
+> until the audit resumes, and disclose the F59 finding with its desk-only limit if useful; (c) which checks should
+> join owed sitting **144 a**. F52 passage/F54 hub/C83 arrival checks are cheap only if that loaded 1.1.0 fixture already
+> has their layouts; F59 needs full housing, a competing homeless neighbour and a housed expedition crew member.
+> Building those conditions from scratch is expensive. The agent supplies the numbered A/B recipes from the report.
+>
+> **TAKEABLE WHEN:** use `agent/prompts/perma/GENERAL_USE_PROMPT.md` with the owner at the keyboard and a disposable
+> 1.1.0 colony meeting the chosen recipe. Back up its autosaves before loading a copy. F59's measure is at boarding;
+> it does not require waiting for the crew to return. No playtest status is granted by the desk results.
+>
+> **Other decisions to retain:** F51's cache is stale but its old permanent-homelessness claim is not established on
+> 1.1.0. F60 remains a removal candidate; its tally/gate mismatch now has a desk control, not a measured player impact.
+> F60/F73 final reviews, declined entries and F80's current-body handoff remain unfinished under the brief's explicit
+> harmful-module stop rule. Resume `agent/prompts/MIGRATION_CLUSTER_CHECK.md` from its linked progress list after
+> the F59 disposition. **151 claimed in session before writing; ListAgents exposed no peer recipients.**
+
 ### 2026-09-11 — 150: the Paradox developer answered in the Building Codes thread. **Three decisions: (a) what to tell them about how we find bugs, (b) the prefab fix's shape, (c) retire the farm-oxygen fix?** Nothing here needs the keyboard.
 
 > Their post (#7, `ivanassen [developer]`): excluding prefabs is wrong and will be fixed in their next patch, so include it
