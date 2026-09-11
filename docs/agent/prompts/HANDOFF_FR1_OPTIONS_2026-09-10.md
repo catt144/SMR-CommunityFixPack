@@ -17,8 +17,9 @@ summarise, ask** — do not start executing items (memory: handoff-invocation-me
 
 > ✅ **DONE 2026-09-10 night (`smr-bugfixpack-bd`).** The owner was walked through it and chose **M1 + M2**. The results
 > supersede the ranking below: M1 is DEAD on the desk, and M2's top treatment is `SSRFullTile8x8:1` (the AMD path).
-> Probe **v2** replaces v1, which had a `%`/printf defect. Evidence: `reports/FR1_LINUX_FINDINGS_2026-09-10.md` §8.
-> Owner legs A/B/C: checklist 145, "M1 + M2 bench". Read the returned dumps with
+> Probe **v3** (`fr1-options-probe-v3.zip`) replaces v1 (which had a `%`/printf defect) and v2. v3 adds the owner's
+> set-then-reload combination (Leg D). Evidence: `reports/FR1_LINUX_FINDINGS_2026-09-10.md` §8.
+> Owner legs A–E (B = switch alone, D = switch + reload): checklist 145, "M1 + M2 bench". Read the returned dumps with
 > `C:\Dev\SMR-FR1-Options-2026-09-10\variant-map\classify_dump.py`. §2's two asks (dev reply posted? any answer?) are still open.
 
 **`agent/reports/FR1_OPTIONS_2026-09-10.md`** (`fb7c247`; the owner calls it "Astra's report").

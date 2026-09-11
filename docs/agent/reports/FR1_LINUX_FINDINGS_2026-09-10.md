@@ -172,7 +172,13 @@ inventory reads it; an M1 leg is worth running ONLY if it reads `true` before Lo
     (`Mod.lua:1366-1367`). So a mod could call `DlcReloadShaders{ {folder = <mod path>, assets_revision = <above 33006>} }` and have
     the game's own env mount a mod-shipped `ShaderCached3d12.fpk` (`Dlc.lua:406-414`). This is M4's delivery route, better than
     `DlcMountFolder`. Cost: a cache-pack writer in the engine's format, an NVVM-safe replacement for the RAYS entry, packed-mod path
-    readability, and Windows/AMD render checks. Scope it only if M2 Leg B fails.
+    readability, and Windows/AMD render checks. Scope it only if M2 Legs B and D BOTH fail.
+- **Probe v3, the owner's actual design (09-10 night):** the idea is the COMBINATION: set the selector, THEN force the
+  reload. If the engine reads `SSRFullTile8x8` once at renderer init (before any mod runs, EF-089), the world-load reload is what
+  would make it re-read the value. This supersedes (a)'s framing; the blank push is a component, not the idea. v3 takes a comma
+  list applied in the order written and fails closed on any bad or duplicate pair. lupa 8/8 (`variant-map/probe_harness3.py`,
+  game-faithful ModLog mocks). ck145 **Leg D** = `SSRFullTile8x8:1,ForceShaderCacheReload:1`. The reload alone is now Leg E, a
+  control run ONLY if D loads, to tell which half did it.
 
 **M2 grounding — MEASURED desk.** The 1.1.0 `Reflections.fx` variants were compiled with the game's `dxcompiler.dll` and the argv that reproduced
 `38121decbc3eee12` (§6), plus `TRACE_HIZ` / `USE_HYPERBOLIC_DEPTH` / `REFLECT_IMPORTANCE_SAMPLE` / `REFLECT_TILE`. The DXIL payloads
