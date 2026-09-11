@@ -1,5 +1,11 @@
 # FR-1 cache route — 2026-09-11
 
+**Current verdict: v1's replacement was consumed; v2 covers all 18 indexed RAYS
+records and is ready for the laptop bench, not yet a verified fix.** See
+[§8](#8--round-2-all-rays-coverage-and-normal-loading) for the correction,
+evidence and v2 artifact. The text before §8 is the retained round-1 snapshot:
+its six-record coverage and untested-consumption statements are superseded.
+
 **Verdict: BETTER-ROUTE-FOUND; feasible to bench, not a verified fix.**
 Use the shipped `DlcMountFolder` helper to layer six replacement records over
 `ShaderCache`, then request one reload. The fake-DLC helper **unmounts the base
@@ -324,3 +330,184 @@ preserves the tools without game executables. The committed receipt stores compi
 output, record hashes, format checks, harness results and bench reclassification.
 STATE was 12,248 bytes against its 12,288-byte warning threshold, so the permitted
 optional NEXT addition would not fit and was omitted. The existing holds stay intact.
+
+## 8 · Round 2: all RAYS coverage and normal loading
+
+**Verdict — MEASURED / NEVER RUN:** the owner proved that the directory overlay
+can supply our replacement to the game. V1 then exposed a debug RAYS program
+that I had omitted. V2 covers all 18 RAYS records, with a separate treatment that
+does not request a reload. All desk checks pass; v2 gameplay, world-load success
+and visual equivalence remain **NEVER RUN**. Owner steps replace v1 in
+[checklist 145](../../PLAYTEST_CHECKLIST.md).
+
+Additional evidence keys: **B2** is `C:\Dev\fr1-cache\fr1-cache\`, read-only
+owner C1/N1 evidence; **D2** is `C:\Dev\SMR-FR1-CacheRoute-V2-2026-09-11\`,
+external build, classifier, full compute disassembly and validation receipts.
+The committed evidence is
+[`fr1-cache-route-v2-desk-2026-09-11.json`](../../archive/fr1-cache-route-v2-desk-2026-09-11.json).
+G and S retain the exact version and paths defined above.
+
+### 8.1 · Coverage correction and replacement validation
+
+**MEASURED:** independently filtering the binary index and the text index by
+the exact `Reflections.fx` and `REFLECT_RAYS` tokens produces the same 18 keys.
+The full Reflections set contains 54 records: 18 RAYS and 36 FULL. V1's manually
+selected six were only the non-debug RAYS subset; my earlier claim that they
+covered all RAYS was wrong. The missing 12 are debug builds, including N1's
+`5519638363063710019`. V2 derives coverage from the index rather than a key list.
+
+**MEASURED:** all 18 RAYS roots are byte-identical, 536 bytes, SHA256
+`3ff5c9b85551833d481d786ea535d6135089532ddee3f53e3a3f09a8a2aa44f3`;
+all declare 8×8×1 threads. Original PSV0 sizes differ (356, 380, 404, 428, 452
+and 476 bytes), so matching only one debug program's root was insufficient.
+Each replacement preserves that record's metadata prefix, replacing only its
+compute-slot length and DXBC. Each actual replacement was validated by `dxv`
+and checked against its root by game-matched `dxc`: **36 successful checks**.
+The 1,688-byte no-op DXBC retains DXIL SHA256
+`516fc3836f468850495bceefbc0d9417f5dceae6ec106f9e72ca299e27e2bac9`.
+
+**MEASURED:** a separate ZIP audit uses the text index as its oracle and checks
+the exact file set and bytes of both folders. V2 passes with 18 original Control
+and 18 replacement Noop records. The real v1 ZIP is the negative control: it
+fails with exactly the 12 missing keys, including N1's crasher. All three Lua
+files parse; the game-shaped harness passes **35/35 cases**, using the actual
+G `DlcMountFolder` body, ModEnv restrictions and ModLog formatting behavior.
+
+**MEASURED owner evidence, reclassified:** C1's 123 DXIL dumps include 23
+identified cached compute programs. Thread `013c` last dumps
+`271ec9634b1ab87b.spv` at 19222.239, 1 ms before its fault: original
+hyperbolic+importance RAYS, key `12556516658419309610`.
+N1 has 260 DXIL dumps and 31 identified compute programs, including our no-op
+in `4f866e2c54fc9064.dxil`. Its thread `0140` last dumps
+`a26e0bbfe7751fbf.spv` at 19285.776, again 1 ms before the fault: debug RAYS
+key `5519638363063710019`, DXIL SHA256
+`9aca6902d7e5f825828bf90a7145cbe04e8b553f0ec4c0826b567fc9ff2bc069`.
+Its aliases include `USE_HYPERBOLIC_DEPTH|REFLECTION_DEBUG|REFLECTION_ITERATIONS|REFLECT_RAYS`
+with and without `TRACE_HIZ`. The logs contain the armed, successful-mount and
+reload witnesses. Repeated trace/print copies of those messages do not establish
+multiple reload requests.
+
+**MEASURED / INHERITED:** the N1 no-op bytes prove replacement consumption on
+this unpacked probe setup. N1 also dumps FULL tile 16 (`c2aacc1919769303`, key
+`10965947805870513868`); no FULL fault was observed. A dump is not an independently
+instrumented successful pipeline return. The owner's pre-menu screen/hang result
+is inherited from FINDINGS §10: `N1/N1-result.txt` was not present in B2 when
+re-read. Three distinct original RAYS programs have now been attributed to faults;
+18 independently crashing programs have not been measured.
+
+### 8.2 · Looking past Reflections.fx
+
+**MEASURED desk:** disassembled all 228 cached compute programs with the
+game-matched DXC. A control-flow scan finds cycles in 149. Exactly 18 have both
+barrier and atomic calls inside the **same strongly connected cyclic region**;
+that set equals the entire indexed RAYS set. Each has eight barrier calls and
+four atomic operations in such regions (static instructions, not execution
+counts). Three synthetic controls check that an out-of-loop barrier, and barriers
+and atomics in separate cycles, cannot create a false match. All pass.
+
+**SOURCE:** S `Reflections.fx:440–513` contains the shared queue, synchronization
+and atomic tile counter; `:515–529` is the FULL path. Other large compiled cycles
+provide a watch list, not evidence of additional defective programs:
+
+| Program | Compiled structure and evidence |
+| --- | --- |
+| VolumetricLighting INTEGRATE / INTEGRATE_INJECTION | **MEASURED:** largest cyclic region 68 blocks each; no barrier or atomic inside a cycle. |
+| VolumetricShadows EXTINCTION_VOLUMES | **MEASURED:** largest cycle 20 blocks; no barrier or atomic inside a cycle. |
+| TerrainSplatMask PASS_DEFER | **MEASURED:** largest cycle 13 blocks; four cyclic atomic operations, no cyclic barrier. |
+| AtmosphereMultipleScattering | **MEASURED:** largest cycle 11 blocks; neither operation inside a cycle; present in N1 dumps. |
+| AutoExposure PASS_BUILD_LUMINANCE_HISTOGRAM | **MEASURED:** largest cycle nine blocks; two cyclic atomics, no cyclic barrier; present in N1 dumps. |
+| SinglePassDownsample variants | **MEASURED:** cyclic barriers without cyclic atomics; several present in N1 dumps. |
+
+**SOURCE, upstream:** [vkd3d-proton #2701](https://github.com/HansKristian-Work/vkd3d-proton/issues/2701)
+reports the older NVIDIA 580 failure, valid SPIR-V and successful RADV/NVK
+replay. Its [workaround comment](https://github.com/HansKristian-Work/vkd3d-proton/issues/2701#issuecomment-3541285729)
+links a pyroveil GLSL round trip; the [following comment](https://github.com/HansKristian-Work/vkd3d-proton/issues/2701#issuecomment-3541297064)
+says it was reported to NVIDIA. The two published comments provide no exact
+bad opcode, loop shape or NVIDIA fix identifier. The older report's quality
+setting boundary is not the owner's current 1.1.0 Off behavior.
+The pinned [hack configuration](https://github.com/HansKristian-Work/pyroveil/blob/e1f547372cf1b9d14da56621716d2137088d0061/hacks/surviving-mars-relaunched-nv-580-stable/pyroveil.json)
+selects an old shader hash, requests the round trip and disables
+`VK_NV_raw_access_chains`; its [compiler](https://github.com/HansKristian-Work/pyroveil/blob/e1f547372cf1b9d14da56621716d2137088d0061/compiler/compiler.cpp)
+uses shaderc optimization level zero. These change several inputs, so their
+success does not isolate a queue-loop mechanism.
+
+**INFERRED:** the structural signature supports replacing all RAYS before the
+next bench. It cannot predict every NVIDIA compiler failure: DXIL is upstream
+of SPIR-V lowering and the closed compiler. A fault attributed to another family
+would falsify the working completeness hypothesis. To identify that immediately,
+the packaged classifier now recognizes all 228 cached compute records plus the
+no-op by DXIL bytes. A sample ZIP with arbitrary filenames correctly identifies
+both the no-op and the newly observed debug crasher.
+
+### 8.3 · Separate normal-loading treatment
+
+**SOURCE / MEASURED desk:** render initialization precedes mod code, but that
+alone does not tell us when native code reads each cache record. The new
+`-fr1-cache=noop-noreload` branch mounts all 18 replacements and returns without
+calling the engine setter. Its witness is `NO_RELOAD_REQUESTED`, with
+`reload=false`. It declines an already-set reload flag to avoid a confounded leg;
+the harness also proves this branch works when the setter is unavailable.
+
+**INFERRED route / NEVER RUN game:** try Q2 after the unchanged-shader C2
+control. Q2 reaching the menu is expected even if the treatment did nothing;
+the useful result is New Game loading with replacement consumption evidence.
+If Q2 succeeds, skip the forced F2 rebuild. If normal loading retains an original
+program already in memory, Q2 may reproduce the original world-load crash;
+F2 then tests coverage with the previously demonstrated forced route. A missing
+dump can also reflect cache reuse, so the full evidence matters.
+
+### 8.4 · Marker ergonomics and first-screen witness
+
+**MEASURED desk:** the accepted strings are exactly `-fr1-cache=control`,
+`-fr1-cache=noop` and `-fr1-cache=noop-noreload`. A typo emits `MARKER ERROR`,
+the received marker and all three accepted forms. The harness covers the owner's
+dash form, double leading dash, spaces, case, underscore and duplicate markers;
+all refuse treatment. Missing markers log `UNARMED` and the accepted strings.
+V2 logs also identify the version, mode, reload choice and 18-record coverage.
+
+**INFERRED / NEVER RUN v2:** C2 should reproduce the boot-slides crash, before
+the menu. Reaching the menu is a reason to stop that control and examine its log
+for marker/gate/setup drift, not evidence of a valid control or proof of one
+specific typo. Checklist 145 and the ZIP README supply whole copy-paste launch
+lines, per-leg expected results and log-preservation commands.
+
+### 8.5 · Better route and scope
+
+**INFERRED route:** prefer Q2's normal loading if the bench proves it consumes
+the replacement; this avoids deliberately rebuilding unrelated/debug pipelines.
+Forced F2 remains a fallback whose mount/reload mechanism is already observed.
+No persistent-config step is required by either probe mode. This moves the
+owner's first-choice mod route forward without claiming that a shipping mod is
+approved or that an engine cache replacement meets the pack's Lua-fix policy.
+
+**MEASURED implementation / INFERRED scope:** all 36 FULL records and every
+other shader remain untouched. No measured fault requires replacing them, and
+preemptive no-ops could suppress unrelated rendering. Generic loop complexity
+does not justify expanding the treatment. A resource-preserving queue rewrite
+or a SPIR-V round trip might retain reflections, but neither has been built or
+bench-validated here. Keep Reflections Off throughout this disposable test.
+
+### Not opened / not established in round 2
+
+- **NEVER RUN:** any v2 game launch, Q2 normal-path consumption, F2 full-coverage
+  success, loaded-world visuals, or R2 reversal; packed-mod behavior.
+- **UNRESOLVED:** native preload/lookup/invalidation graph and whether Q2's
+  overlay can supersede an already-loaded original without forcing reload.
+- **UNRESOLVED:** exact NVIDIA NVVM defect; no native replay or compiler safety
+  verdict across the 228 programs. The cyclic-region scan is a triage heuristic.
+- **UNRESOLVED:** complete Off dispatch graph, persistence effects of the game's
+  own normal caches, automatic driver/Proton gate and shipping scope (owner ck145).
+
+### Round-2 delivered artifacts
+
+**MEASURED desk:** `D2/fr1-cache-probe-v2.zip`, **403,169 bytes**, SHA256
+`3a67dcd6721814d1d3cdf523f19ef76ff91d3f519b01a463e6da72d6f50ea6d4`.
+The authoritative hash is also recorded in the committed receipt. It contains
+the same `FR1CacheProbe` folder/mod ID, v2 Lua/metadata, both 18-record folders,
+owner README and the full-compute classifier. Install by overwriting v1 while
+the game is fully closed, never by enabling both versions side by side.
+`D2/cache-route-v2-desk-tools.zip` preserves the build/audit/classifier scripts;
+the receipt preserves per-record checks, corpus metrics, harness outcomes,
+upstream comments and C1/N1 reclassification. V1 artifacts and earlier archive
+records remain unchanged. No game/editor launch, shipping-code change or
+persistent engine-setting write was made in this session.

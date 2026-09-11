@@ -8,6 +8,34 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-11 - FR-1 cache probe v2: all 18 RAYS covered; normal-loading treatment ready
+
+tags: FR-1 linux proton nvidia cache shader coverage noreload bench
+
+Oriented at b5c992e; concurrent dev-reply commit d06b340 left intact. Reclassified
+owner C1/N1: C1 reproduces hyp+importance RAYS; N1 contains our no-op, then faults
+on debug RAYS 5519638363063710019. Overlay consumption is measured; no world-load
+success was shown. V1's six-record selection missed twelve debug records.
+Independent binary/text index filters now agree on 18 RAYS among 54 Reflections
+records; all 18 roots match. V2 preserves metadata, passes 36 shader/root checks,
+and contains exact 18-key Control/Noop folders. ZIP audit passes v2 and rejects
+actual v1 for its twelve missing keys. Lua harness 35/35; all three Lua files parse.
+All 228 compute programs scanned: 149 cyclic, exactly 18 RAYS with barrier+atomic
+in the same cyclic region. Three synthetic scanner controls pass. This is triage,
+not a proven NVVM defect mechanism. Upstream #2701 supplies no more exact cause.
+FULL's 36 records remain unchanged. Full compute classifier identifies N1's new
+crasher and no-op by bytes. Separate noop-noreload leg mounts without a setter
+call; normal-path consumption is NEVER RUN. Copy-paste ck145 steps: C2 control,
+Q2 normal loading, F2 forced fallback if needed, R2 reversal after world success.
+V2 zip: C:\Dev\SMR-FR1-CacheRoute-V2-2026-09-11\fr1-cache-probe-v2.zip.
+Report: agent/reports/FR1_CACHE_ROUTE_2026-09-11.md section 8; receipt:
+archive/fr1-cache-route-v2-desk-2026-09-11.json. EF-090 and FINDINGS updated.
+All five brief tasks completed at the desk; v2 gameplay/visuals remain NEVER RUN.
+No shipping code, game/source/bench evidence write, game/editor launch, portal or
+tracker action. One-shot V2 brief consumed in delivery. Owner scope remains ck145.
+
+---
+
 ## 2026-09-11 - FR-1 cache route: formats decoded; directory-overlay probe ready, native bench owed
 
 tags: FR-1 linux proton nvidia cache shader mod bench

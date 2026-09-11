@@ -233,10 +233,10 @@ Evidence (outside git): **`C:\Dev\fr1-cache\fr1-cache\`** (C1 + N1 dumps and Pro
   `Reflections.fx|USE_HYPERBOLIC_DEPTH|(TRACE_HIZ|)REFLECTION_DEBUG|REFLECTION_ITERATIONS|REFLECT_RAYS`. It is a **debug RAYS build**. Its
   RTS0 is byte-identical to the default RAYS root. It is absent from every earlier dump.
 - **The gap:** `index.txt` `[k]` lines (source|defines → record key) list **18 REFLECT_RAYS records**; v1 replaced the 6 non-debug ones. The
-  12 `REFLECTION_DEBUG` builds are listed in `prompts/FR1_CACHE_ROUTE_V2.md` §2. A third RAYS program is now measured faulting 580 (38121,
+  12 `REFLECTION_DEBUG` builds are recorded in `reports/FR1_CACHE_ROUTE_2026-09-11.md` §8 and its round-2 receipt. A third RAYS program is now measured faulting 580 (38121,
   271ec, a26e), which strengthens the family inference (Astra's precision note stands: the rest are not individually measured).
-- **Next (owner rule: the orchestrator briefs, Astra builds):** probe v2 covering all 18 records, plus a no-reload treatment leg, is briefed
-  to Astra in `prompts/FR1_CACHE_ROUTE_V2.md`. Routed: ck145.
+- **MEASURED desk follow-up:** Astra built probe v2 covering all 18 records, with a separate no-reload treatment: 36 shader/root checks
+  and 35/35 harness cases pass. Game bench NEVER RUN; copy-paste steps replace v1 in ck145. Report: `reports/FR1_CACHE_ROUTE_2026-09-11.md` §8.
 
 **M2 grounding — MEASURED desk.** The 1.1.0 `Reflections.fx` variants were compiled with the game's `dxcompiler.dll` and the argv that reproduced
 `38121decbc3eee12` (§6), plus `TRACE_HIZ` / `USE_HYPERBOLIC_DEPTH` / `REFLECT_IMPORTANCE_SAMPLE` / `REFLECT_TILE`. The DXIL payloads

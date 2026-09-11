@@ -29,73 +29,125 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
-### 2026-09-11 — 145: FR-1 cache replacement is ready for a controlled laptop test.
+### 2026-09-11 — 145: FR-1 cache probe v2 covers all 18 RAYS records; test normal loading first.
 
-> ✅ **2026-09-11 — you ran C1 and N1 (second try, correct markers). The cache swap WORKS, but one more set of
-> shaders needs covering.** The game read Astra's stand-in shader: it got past the point where it used to die and built
-> twice as many shaders, including a different reflections shader that driver 580 compiles fine. Then it crashed on a
-> **debug** version of the same bad reflections shader, which the first build didn't replace. The game's cache index
-> lists **18** of these shaders, and v1 covered 6. **Next: Astra builds v2 covering all 18**
-> (`agent/prompts/FR1_CACHE_ROUTE_V2.md`). Nothing to do until its new steps appear here. (The first try's marker
-> typo, `-fr1-cache-noop` instead of `-fr1-cache=noop`, made the probe refuse, as designed; v2 is asked to make that
-> harder to miss.) Details: `agent/reports/FR1_LINUX_FINDINGS_2026-09-10.md` §10.
+> **Current step - TAKEABLE WHEN you are at the laptop on NVIDIA 580, PRIME On-Demand.**
+> **MEASURED:** your valid C1/N1 bench proved that the game consumed our replacement.
+> V1 then crashed on a debug RAYS program I had missed. V2 covers all 18 indexed
+> RAYS records; all 36 FULL records remain original. It passes 36 shader/root
+> checks and 35 Lua harness cases. **V2 has NEVER RUN in the game.**
 >
-> **Current step — TAKEABLE WHEN you are at the laptop on NVIDIA 580, PRIME On-Demand.** *(v1 steps below; v2 will replace them.)*
-> The desk work found a usable route to test: the mod can ask the game to layer a small
-> cache folder over its existing cache, then request your immediate reload. The fake-DLC
-> helper removes the old cache first, so a small partial pack through that helper was the
-> wrong assumption. The new folder route keeps the base cache and its index available.
+> **Zip:** `C:\Dev\SMR-FR1-CacheRoute-V2-2026-09-11\fr1-cache-probe-v2.zip`.
+> **Report:** [round-2 findings](agent/reports/FR1_CACHE_ROUTE_2026-09-11.md#8--round-2-all-rays-coverage-and-normal-loading).
+> The zip includes these steps and a classifier covering all 228 cached compute
+> programs. Keep Reflections **Off** throughout: the stand-in produces no reflections.
 >
-> **Built, desk-checked, NEVER RUN in the game:** an empty replacement for all six RAYS
-> shaders, preserving their original binding layout, plus a disposable mod. The shader
-> passes Microsoft's validator; all 27 probe checks pass. We still need to establish that
-> the game actually consumes the replacement and driver 580 accepts it. Two RAYS variants
-> have been measured crashing; the other four have not been tested independently.
+> **Install v2 [NEVER RUN]**
 >
-> **Zip:** `C:\Dev\SMR-FR1-CacheRoute-2026-09-10\fr1-cache-probe-v1.zip`.
-> **Report:** [cache-route findings](agent/reports/FR1_CACHE_ROUTE_2026-09-11.md).
-> The zip includes the plain instructions and the updated shader classifier.
+> With the game fully closed, copy the zip's FR1CacheProbe folder over the existing
+> FR1CacheProbe folder in:
 >
-> **Setup [NEVER RUN]:** disable **FR-1 Options Probe** and the old film-grain **FR-1 Test**.
-> Remove their launch markers. Unzip `FR1CacheProbe` into the same Linux Mods folder used
-> below for the options probe. Start without a `-fr1-cache` marker, tick **FR-1 Cache Probe
-> v1**, set Reflections **Off**, then quit fully. This setup needs no world load.
-> **Keep Reflections Off for every leg, including a leg that loads.** This replacement
-> does not render reflections, and its visual equivalence with Off is still untested.
+> /home/ladmin/.steam/debian-installation/steamapps/compatdata/3215050/pfx/drive_c/users/steamuser/AppData/Roaming/Surviving Mars Relaunched/Mods/
 >
-> **Fresh folders [NEVER RUN]:** in a terminal, run
-> `mkdir -p ~/fr1-cache/C1 ~/fr1-cache/N1 ~/fr1-cache/R1`.
-> Each leg uses a fresh process. After exit/crash, preserve its Proton log before starting
-> another leg. Use a **New Game**, not a valued colony.
+> Overwrite existing files. Keep the same folder and mod ID; don't place v1 and
+> v2 side by side. Start with no cache marker, confirm Mod Manager shows
+> **FR-1 Cache Probe v2**, keep it enabled, set Reflections Off, and quit fully.
+> Disable the old FR-1 Options Probe / film-grain FR-1 Test and remove their markers.
 >
-> 1. **C1 — unchanged-shader control [NEVER RUN]:** Steam Launch Options:
->    `PROTON_LOG=1 VKD3D_SHADER_DUMP_PATH=/home/ladmin/fr1-cache/C1 %command% -fr1-cache=control`
->    Expected: the previous boot crash. After exit, run
->    `cp ~/steam-3215050.log ~/fr1-cache/steam-C1.log`.
-> 2. **N1 — replacement [NEVER RUN]:**
->    `PROTON_LOG=1 VKD3D_SHADER_DUMP_PATH=/home/ladmin/fr1-cache/N1 %command% -fr1-cache=noop`
->    If the menu appears, start New Game. If the world loads, watch it for a minute with
->    Reflections still Off, then quit. Preserve
->    `cp ~/steam-3215050.log ~/fr1-cache/steam-N1.log`.
-> 3. **R1 — only if N1 loads, restart without treatment [NEVER RUN]:**
->    `PROTON_LOG=1 VKD3D_SHADER_DUMP_PATH=/home/ladmin/fr1-cache/R1 %command%`
->    Start New Game; the original world-load crash is expected to return. Preserve
->    `cp ~/steam-3215050.log ~/fr1-cache/steam-R1.log`.
+> Create fresh dump directories in a terminal [NEVER RUN]:
 >
-> Zip the new `fr1-cache` folder and bring it to Windows as before. Tell me which stage
-> each leg reached and whether anything looked wrong. I will identify the program built
-> on the faulting thread, including a different shader if a new crash appears. A mod
-> "mount succeeded" line alone does not prove the replacement was used. If the probe
-> says **DECLINED**, bring that log back; that leg did not apply the treatment.
+> ```sh
+> mkdir -p ~/fr1-cache-v2/C2 ~/fr1-cache-v2/Q2 ~/fr1-cache-v2/F2 ~/fr1-cache-v2/R2
+> ```
 >
-> **Cleanup [NEVER RUN]:** clear these added Launch Options, quit fully, then disable the
-> disposable probe. The mount lasts until process exit; disabling it mid-session does
-> not undo the mount. The mod writes no persistent settings or game files.
+> Paste each whole line into Steam Launch Options. The markers use **one leading
+> dash and an equals sign**. The only accepted markers are:
 >
-> **Scope decision remains yours after a successful bench:** fix pack, separate opt-in
-> mod, or instructions. Recommendation remains a separate opt-in mod for a mod-carried
-> driver workaround. This bench does not approve shipping it. STATE had only 40 bytes
-> below its warning threshold, so its optional NEXT addition was omitted.
+> ```
+> -fr1-cache=control
+> -fr1-cache=noop
+> -fr1-cache=noop-noreload
+> ```
+>
+> A typo logs MARKER ERROR and the exact accepted strings; it applies no treatment.
+> Logs must say **[FR1Cache v2]**. An absent v2 log means the update is not witnessed.
+>
+> **C2 - unchanged-shader control [NEVER RUN]**
+>
+> ```text
+> PROTON_LOG=1 VKD3D_SHADER_DUMP_PATH=/home/ladmin/fr1-cache-v2/C2 %command% -fr1-cache=control
+> ```
+>
+> Expected: a boot-slides crash before the menu, as in the valid C1/D/E runs.
+> The log should contain ARMED Control, reload=true, records=18, MOUNT_HELPER_OK,
+> RELOAD_REQUESTED. If the menu appears, stop this control and preserve the log;
+> do not infer a working control from reaching the menu. Marker/gate/setup drift
+> must be checked. After exit/crash preserve [NEVER RUN]:
+>
+> ```sh
+> cp ~/steam-3215050.log ~/fr1-cache-v2/steam-C2.log
+> ```
+>
+> **Q2 - replacement without forced reload, try first [NEVER RUN]**
+>
+> ```text
+> PROTON_LOG=1 VKD3D_SHADER_DUMP_PATH=/home/ladmin/fr1-cache-v2/Q2 %command% -fr1-cache=noop-noreload
+> ```
+>
+> Expected menu, then choose New Game. This tests whether normal world loading
+> reads the overlay. If it does, the world should load and the dump should contain
+> the no-op. If it still builds original RAYS, it may crash at world load: that
+> means this route has not replaced the program used by normal loading.
+>
+> Log witness: ARMED Noop, reload=false, records=18, MOUNT_HELPER_OK and
+> **NO_RELOAD_REQUESTED**. Merely reaching the menu is not success. If the world
+> loads, keep Reflections Off, watch for a minute, then quit and skip F2. Preserve:
+>
+> ```sh
+> cp ~/steam-3215050.log ~/fr1-cache-v2/steam-Q2.log
+> ```
+>
+> **F2 - only if Q2 does not load the world [NEVER RUN]**
+>
+> ```text
+> PROTON_LOG=1 VKD3D_SHADER_DUMP_PATH=/home/ladmin/fr1-cache-v2/F2 %command% -fr1-cache=noop
+> ```
+>
+> Expected: the boot rebuild gets past the debug RAYS shader that killed N1.
+> It may still expose a different failure; all shader files and the Proton log
+> matter. If the menu appears, choose New Game. Watch a loaded world for a minute
+> with Reflections Off, then quit. Log witness: ARMED Noop, reload=true,
+> records=18, MOUNT_HELPER_OK, RELOAD_REQUESTED. Preserve:
+>
+> ```sh
+> cp ~/steam-3215050.log ~/fr1-cache-v2/steam-F2.log
+> ```
+>
+> **R2 - only after Q2 or F2 loads a world [NEVER RUN]**
+>
+> Fully quit the successful leg, then run without a treatment marker:
+>
+> ```text
+> PROTON_LOG=1 VKD3D_SHADER_DUMP_PATH=/home/ladmin/fr1-cache-v2/R2 %command%
+> ```
+>
+> Expected: UNARMED, menu appears, then the original RAYS crash on New Game.
+> If it keeps working, preserve that unexpected result; do not clear caches or
+> call it a confirmed reversal. Preserve:
+>
+> ```sh
+> cp ~/steam-3215050.log ~/fr1-cache-v2/steam-R2.log
+> ```
+>
+> Use New Game throughout; do not save a valued colony. Zip the new fr1-cache-v2
+> folder and bring it to Windows. Report each leg's furthest stage and anything
+> visually wrong. Cleanup: clear these added Launch Options, quit fully, then
+> disable the disposable probe. In-session disabling does not unmount it.
+>
+> **Scope decision remains yours after a successful bench:** fix pack, separate
+> opt-in mod, or instructions. Recommendation remains a separate opt-in mod for
+> a driver workaround. This bench does not approve shipping it. The probe writes
+> no persistent settings; the game may still update its normal caches and logs.
 
 **Earlier options work and bench history — the current steps above supersede the earlier recommendations below.**
 

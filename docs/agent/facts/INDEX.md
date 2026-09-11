@@ -102,5 +102,5 @@ The preamble that opened the old file is `_preamble.md`.
 | EF-087 | At OnMsg.LoadGame, IsValidThread can still accept a persisted cosmetic tracker that is dead by the first post-load read; a safe replace-own-tracker path must replace it, not treat the handle as proof of liveness (C74 attended, 2026-09-10) | 2026-09-10 | 2026-09-10 | 19 | [EF-087.md](EF-087.md) |
 | EF-088 | 1.1.0 shader 38121decbc3eee12 is byte-proven Reflections.fx REFLECT_RAYS and exists verbatim in the cache; owner logs tie two RAYS programs to the faulting threads, intervention remains owed | 2026-09-11 | 2026-09-11 | 32 | [EF-088.md](EF-088.md) |
 | EF-089 | 1.1.0 mod renderer routes: mod code follows InitRenderEngine; hidden hr values require native enumeration; persistent data is not arbitrary startup config; DlcMountFolder is an untested overlay route | 2026-09-11 | 2026-09-11 | 38 | [EF-089.md](EF-089.md) |
-| EF-090 | 1.1.0 shader-cache formats decoded; fake-DLC reload unmounts the base; DlcMountFolder preserves it but replacement consumption is untested | 2026-09-11 | 2026-09-11 | 42 | [EF-090.md](EF-090.md) |
+| EF-090 | 1.1.0 cache overlay consumed in owner bench; index names 18 RAYS records; v2 covers all, with normal-loading treatment untested | 2026-09-11 | 2026-09-11 | 56 | [EF-090.md](EF-090.md) |
 
