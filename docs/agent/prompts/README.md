@@ -25,6 +25,7 @@
 
 | prompt | state |
 |---|---|
+| `MIGRATION_CLUSTER_CHECK.md` | **LIVE (09-11)**: re-check the 8 colonist-migration fixes against 1.1.0 and write the dev-facing report; deletes itself |
 | `DLC_DEEP_CHECK.md` | desk NEXT, after the fix pack is stable |
 | `HOTFIX2_SITTING.md` | closed 09-09; kept for the recipes the owed v7 sitting uses |
 | `SELFCHECK_PILOT.md` | rides the owed v7 sitting's boot |
