@@ -56,12 +56,18 @@ markers + the e6 outbox block (`613174b`).
 decision **151** (checklist + a STATE line). Seven S1 reads and S2 through F59 are done; F60/F73, S4 and the report
 remain; no fix was changed. ⇒ The brief and its map row stay until the real completion conditions hold.
 
-**Uncommitted at close (Astra's, untouched — its ENTIRE output):** `bugs/F51.md`, `bugs/F59.md`, `bugs/F60.md`,
-`agent/STATE.md`, `PLAYTEST_CHECKLIST.md`, `prompts/MIGRATION_CLUSTER_CHECK.md`, `prompts/README.md`,
-`reports/MIGRATION_CHECK_PROGRESS.md`, `reports/MIGRATION_DEV_REPORT.md`, `reports/MIGRATION_DESK_RESULTS.txt`,
-`tools/desk_migration_cluster.py`, `tools/desk_f59_expedition.py` — plus the owner's v8 pack (`items.lua`,
-`metadata.lua`), the release session's. ⛔ The next session verifies the F59 claim from the primary artefacts before
-relaying it: a peer's finding is a claim, and this one would change a shipped module. ⛔ The next session verifies the F59 claim from the
+**Astra's output landed in `40a0c6b` + `767f26e`** (entries `F51`/`F58`/`F59`/`F60` + regenerated `bugs/INDEX.md`,
+checklist 151, a STATE line, `MIGRATION_DEV_REPORT.md`, `MIGRATION_DESK_RESULTS.txt`, `MIGRATION_CHECK_PROGRESS.md`,
+`tools/desk_migration_cluster.py`, `tools/desk_f59_expedition.py`) — one of them BETWEEN this session's status read and
+its own commit, which is why this entry first recorded them as uncommitted. Nothing of Astra's was touched or swept:
+this session's close-out commit is exactly three files. Only the owner's v8 pack (`items.lua`, `metadata.lua`) is left
+uncommitted, the release session's. ⛔ The next session verifies the F59 claim from the primary artefacts before
+relaying it: a peer's finding is a claim, and this one would change a shipped module.
+
+**7. Lesson (this close-out):** in a tree with three sessions committing, a `git status` read is stale the moment it
+prints. Verify a commit's CONTENTS (`git show --stat`) rather than inferring from a status list that changed under
+you — the disappearing files here were a peer committing, not a sweep, and the entry said "uncommitted" for ten
+minutes because it trusted the earlier read. ⛔ The next session verifies the F59 claim from the
 primary artefacts before relaying it: a peer's finding is a claim, and this one would change a shipped module.
 
 ---

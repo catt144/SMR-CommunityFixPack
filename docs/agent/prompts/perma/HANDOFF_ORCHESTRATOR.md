@@ -65,12 +65,13 @@ which is fully briefed.
   **151** (checklist + a STATE line). ⛔ Do not start a second run and do not delete the brief: resume from
   `reports/MIGRATION_CHECK_PROGRESS.md` + `reports/MIGRATION_DEV_REPORT.md`. Done: all seven S1 reads and S2 through
   F59. Remaining: F60/F73, S4, the report. No fix was changed.
-  ⚠️ **At this close its whole output was UNCOMMITTED** (`bugs/F51.md`, `F59.md`, `F60.md`, `STATE.md`,
-  `PLAYTEST_CHECKLIST.md`, the brief, the prompt-map row, `reports/MIGRATION_CHECK_PROGRESS.md`,
-  `MIGRATION_DEV_REPORT.md`, `MIGRATION_DESK_RESULTS.txt`, `tools/desk_migration_cluster.py`,
-  `tools/desk_f59_expedition.py`). A Claude session must **verify both halves of the F59 claim from the primary
-  artefacts before relaying it anywhere** — a peer's finding is a claim, and this one would change a shipped module.
-  ⚠️ Astra's STATE line put STATE over its warn again (12474 B at this close) — measure it, never quote that number.
+  ✅ **Astra COMMITTED its work** — `40a0c6b` (entries `F51`/`F58`/`F59`/`F60` + regenerated `bugs/INDEX.md`,
+  checklist **151**, one STATE line, `reports/MIGRATION_DEV_REPORT.md` 388 lines, `MIGRATION_DESK_RESULTS.txt`,
+  `MIGRATION_CHECK_PROGRESS.md`, `tools/desk_migration_cluster.py`, `tools/desk_f59_expedition.py`) and `767f26e`
+  (progress close). ⛔ **Read those two commits before acting on any of it.** A Claude session must **verify both
+  halves of the F59 claim from the primary artefacts before relaying it anywhere** — a peer's finding is a claim,
+  and this one would change a shipped module. ⚠️ Astra's STATE line put STATE further over its warn — measure it,
+  never quote a stored number.
 - **`prompts/C88_PREFAB_BUILD.md` — READY, not started. ⚖️ Owner ruling 09-11: this build goes to a CLAUDE session,
   not Astra** (hunts → Astra, builds → Claude). Gated on (1) the release lane clearing (H-10 needs an `items.lua`
   entry, and `items.lua`/`metadata.lua` are the owner's uncommitted v8 pack) and (2) checklist 150 (b).
