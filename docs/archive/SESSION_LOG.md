@@ -8,6 +8,25 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-10 night — FR-1: the owner's Linux bench read; crash pinned to one NVIDIA-580 compile of the SSR shader; options hunt handed off (`smr-bugfixpack-f0`, owner on the bench)
+
+tags: FR-1 linux proton nvidia vkd3d shader SSR Reflections.fx film-grain handoff
+
+The owner ran the bench themselves (reports: `reports/FR1_LINUX_BENCH_REPORT_2026-09-10.md` verbatim +
+`reports/FR1_LINUX_FINDINGS_2026-09-10.md`; evidence `C:\Dev\SMR-FR1-Evidence\`, outside git). Established:
+580 crashes on ANY world load (New Game and an Intel-made save), 595-open and Intel work; fault in
+NVIDIA NVVM during `vkCreateComputePipelines` 12–17 ms after the `BinAssets/` reload; VKD3D-Proton #2701
+(closed 2025-11-17, "NV compiler bug", pyroveil hack for hash `b73d41d886185985`) is the 1.0.7-era
+precedent and that hash is absent from the 1.1.0 dump. Refuted with the condition sampled: film grain
+(`hr.EnablePostProcGrain` reads 1; test mod logged `1 -> 0`, still crashed) and
+`VKD3D_DISABLE_EXTENSIONS=VK_NV_raw_access_chains`. STRONG inference, not byte-proven: dumped shader
+`38121decbc3eee12` = `Reflections.fx` `REFLECT_RAYS` (every binding matched; only 2/281 sources have a
+structured u1) — built even with Reflections Off. A mod cannot set `VKD3D_SHADER_OVERRIDE` (env var read at
+start). Owner asked for a creative, every-option exploration preferring mod-side: `prompts/FR1_OPTIONS_EXPLORE.md`.
+Retired: `HANDOFF_FR1_2026-09-10.md` (§2 restated there; §3 in checklist 144; §4 done/homed).
+
+---
+
 ## 2026-09-10 night (addendum) — the owner's store receipt for v7 (`smr-bugfixpack-f0`)
 
 tags: release v7 store-card paste

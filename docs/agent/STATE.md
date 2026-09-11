@@ -25,7 +25,8 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   A3 (F118) · A10 · A5 c2 · A9 c4/c5 · F117's station recipe · the first `RunAll()` on the 94-probe kit (re-stamps
   `WORKFLOW.md:407`, VOID since 09-09). ⛔ Kit verdicts are PREDICTIONS until then; still FAIL/ERROR by name:
   `C47OpenFarmSeedBufferShape` (Herbs 100→50), retired `LanderCargoRatchet`/`DroneUnreachableForever`/`AutoExportPriority`.
-- ⏭ NEXT (owner 09-10): **FR-1 Linux** `prompts/FR1_LINUX_SITTING.md` once the 3070 laptop boots Mint (ck136); THEN
+- ⏭ NEXT (owner 09-10): **FR-1 options hunt** `prompts/FR1_OPTIONS_EXPLORE.md` (bench RAN 09-10: NVIDIA 580 NVVM crash building
+  the SSR compute shader `38121decbc3eee12` even with Reflections Off — `reports/FR1_LINUX_FINDINGS_2026-09-10.md`); THEN
   `prompts/DLC_DEEP_CHECK.md` (shape: `reports/vanillahunt/HUNT_AUDIT.md` §8). Owner: ck144 (a) v6 checks on a v7 boot, (b) Steam sounds thread.
   vanillahunt CLOSED 09-10 (99): instruments SOUND WITH STATED GAPS — 1,281 table-level hunks in 368 rowed hand files listed by
   no instrument (§1.4); 12 P2s re-derived: 6 hold, 5 weakened, **C80 REFUTED**; **C82** filed by the audit (Incident reactors stay

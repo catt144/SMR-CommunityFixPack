@@ -363,6 +363,12 @@ Original question, kept as asked: C74, the Rare Metals Extractor's hammer (and t
 >    graphics setting (`prime-select`) can quietly run games on the Intel chip,
 >    so the script checks which GPU the game really used before it counts a
 >    "works".
+>    ✅ **You ran it yourself on 2026-09-10, and it pinned the crash:** NVIDIA 580's
+>    shader compiler dies building the game's reflections shader at every world load,
+>    even with Reflections Off (driver 595 and the Intel chip work). Film grain and the
+>    extension launch option were tested and ruled out. Summary:
+>    `agent/reports/FR1_LINUX_FINDINGS_2026-09-10.md`. Next: an agent explores every
+>    workaround, mod-side first (`agent/prompts/FR1_OPTIONS_EXPLORE.md`).
 >
 > **The two controls are both in, so no test is needed from you.** ✅ A new
 > game on 1.1.0 WORKS on your Windows/NVIDIA rig **with DLSS 4 on**: every save
