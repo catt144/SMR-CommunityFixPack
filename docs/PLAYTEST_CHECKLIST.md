@@ -38,7 +38,10 @@ completed tests move whole to
 > boot with them on. That covers the one flagged store line (a save loaded straight from launch), so **the store page is ready as
 > written.** You saw nothing wrong with Reflections on, but a bare colony has few reflective surfaces. As you asked, the page now
 > says it loads with Reflections on but isn't properly tested that way and will very likely look glitchy, so Off is **recommended**.
-> The P1 logs and dump can come over whenever it suits; they're for the record and nothing waits on them.
+> ✅ **Your P1 logs are read** (`C:\Dev\Success\fr1-packed-proof.zip`: a New Game with Reflections High). They show the packed
+> mod loaded (`packed from appdata`) and switched on (`ACTIVE`, plus the Reflections-on warning). The game built our stand-in for
+> all 18 crashing shaders and none of the originals, built all 36 other reflection shaders, didn't crash anywhere, and quit cleanly.
+> Five extra shaders were built because Reflections were on. None of them is one of the crashing shaders, and all compiled fine.
 >
 > **P1: the temporary mod itself, packed, launched straight into a save [RAN 09-11, steps kept as the record]. You asked for it built so you can pak it:
 > it's built** and waiting in your Windows Mods folder as `SMR_FR1TempWorkaround`; the source copy is in

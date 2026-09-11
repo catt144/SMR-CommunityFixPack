@@ -8,6 +8,17 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-11 - FR-1 P1 evidence READ (smr-bugfixpack-5d): the packed temp mod MEASURED working, Reflections High
+
+tags: FR-1 temp-mod P1 packed evidence
+
+Owner's `C:\Dev\Success\fr1-packed-proof.zip` (extracted beside it): one launch, New Game, Reflections HIGH. The log shows
+`packed from appdata`, then `ACTIVE (SSR=1)` and the WARNING; the stand-in was dumped 18× on 013c, with 0 faults, 36/36 FULL, none of
+the three known crashers, and exit code 0. The zip has no dump files, but vkd3d names each dump by the FNV-1 64 hash of the DXBC
+blob: 3 Q2 controls reproduce, and the rule maps 38121/271ec/a26e to their known cache keys. So the 5 shaders that were never in Q2
+can be named: 1 is a cached compute program outside the 18 replaced keys, and 4 are not among the 228 cached compute programs.
+All 5 compiled with no fault. FINDINGS §12.
+
 ## 2026-09-11 - FR-1 temp mod: Reflections wording (smr-bugfixpack-5d)
 
 tags: FR-1 temp-mod store-pages

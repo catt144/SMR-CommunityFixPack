@@ -346,6 +346,23 @@ ask). It is Q2's path with no marker and no reload. Steps are in checklist 145 P
   staged folder gives 21 entries: code, `items.lua` and all 18 `Noop/ShaderCache` records byte-identical to the current build; `metadata.lua`
   differs (1,162 B = the pre-store-page version; no preview entry). ⇒ P1 exercised the shipping code and payload. The upload's
   `CreatePackageForUpload` re-packs the current folder (`GedModEditor.lua:713-733`), so it carries the new metadata and picture.
-- **Answered:** the #1 risk from §11 (packed delivery): `DlcMountFolder` on a folder inside a mod's `ModContent.fpk` works, on the
-  owner's word. **NOT READ:** P1's Proton log, game log and dump are still on the laptop (the `packed from appdata` and `ACTIVE`
-  lines, and the stand-in in the dump). They are for the record; the release does not wait on them.
+- **MEASURED: P1's log** (`C:\Dev\Success\fr1-packed-proof.zip`, extracted beside it; one launch: New Game, Reflections HIGH, per
+  the owner's `TEST-RESULT.txt`). It shows `Loaded mod def TEMPORARY … (id SMR_FR1TempWorkaround, v0.00-001) packed from appdata`, then
+  `[FR1 Temp Workaround] ACTIVE … (SSR=1)` and the SSR-on `WARNING`; only `SMR_FR1TempWorkaround` loaded mod items. The stand-in
+  `4f866e2c54fc9064` was dumped **18×** on thread 013c (25475.714–.730). The log holds 348 distinct DXIL (510 dump lines), **0
+  `c0000005`**, 36/36 REFLECT_FULL, none of 38121/271ec/a26e, and exit code 0. ⇒ The #1 risk from §11, packed delivery, is
+  **answered and MEASURED**: `DlcMountFolder` on a folder inside a mod's `ModContent.fpk` works.
+- **MEASURED: the dump-name rule.** vkd3d names a dump by the 64-bit FNV-1 hash of the DXBC blob. Three Q2 dumps reproduce their own
+  names, and the rule maps 38121/271ec/a26e to cache keys 14281071190732923386/12556516658419309610/5519638363063710019 (§8, §10).
+  ⇒ a Proton log alone can identify cached programs, without the dump files.
+- **MEASURED: the 5 DXIL in P1 never seen in Q2 (Reflections High).** `3c6ebc2a5299d67f` is cached compute `8728250156999904579`,
+  `SinglePassDownsample.fx|REDUCE_MIN…` (on the route report's §8.2 watch list; not a replaced key), dumped during the PreGame
+  load. `936b11865bd194f2`, `eafb0d16984cf7f7`, `2bfc5215a03eac7e` and `d351fa9ffff99063` are **not among the 228 cached compute
+  programs**, so none is one of the 18 RAYS records. They are most likely graphics shaders, UNIDENTIFIED without their bytes, and
+  were dumped ~38 s into play on thread 015c. All 5 compiled with no fault.
+- **Discrepancies, verbatim:** (1) `TEST-RESULT.txt` gives the launch line as `PROTON_LOG=1 %command% -fr1-cache=noop-noreload` (no
+  `VKD3D_SHADER_DUMP_PATH`), yet the log holds dump lines, so a dump path was set; the dump files are not in the zip. (2) The old
+  probe marker was still on the command line; it is inert (no probe mod def loaded, and the temp mod reads no marker). (3) "World
+  observed for several minutes": the log shows ~77 s between `BlankBigTerraceCMix_20` loading (25497.0) and the quit (25574.4). (4)
+  The owner's cold boot into a colony and the Low/Ultra runs were separate launches. Each launch overwrites Steam's log, so only this
+  run is measured; those stay owner-witnessed.
