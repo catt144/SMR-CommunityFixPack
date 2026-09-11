@@ -188,6 +188,29 @@ Happy to share the mod, the cache records and the logs.
 
 ---
 
+## 📋 PLAYER LOG REQUEST — for a player the mod didn't help (2026-09-11, owner: "very clear step by step")
+
+Plain text for a Workshop or discussion comment. The dump path is `/tmp` (it exists everywhere, so there is no folder step, and no
+username appears in the pasted lines). The one pasted command prints the mod's status line plus the 5 lines before the fault; the
+fault's preceding dump line names the shader (FNV-1 rule, FINDINGS §12). Proton writes the log to `~/steam-3215050.log`.
+
+---
+
+Thanks, that's really useful. A GTX 1070 is exactly who this mod is meant for, so I'd like to find out why it didn't work for you. If you have five minutes:
+
+1. In Steam, right-click Surviving Mars: Relaunched, choose Properties, and on the General tab find "Launch Options".
+2. Paste this into the Launch Options box exactly as it is:
+PROTON_LOG=1 VKD3D_SHADER_DUMP_PATH=/tmp %command%
+3. Start the game. Check that the mod is still enabled in MOD MANAGER, then start a New Game and let it crash.
+4. Open a terminal (Konsole on KDE), paste this line, and press Enter:
+grep -a -m1 "FR1 Temp Workaround" ~/steam-3215050.log; grep -a -m1 -B4 "handle_syscall_fault code=c0000005" ~/steam-3215050.log
+5. Copy everything it prints and paste it in a reply here. It's a few lines of text.
+6. Go back to Launch Options and delete what you pasted in step 2.
+
+The first line tells me whether the mod switched on; the rest tells me which shader your card crashed on.
+
+---
+
 ## 📋 PLAYER REPLY — for players asking for help in the thread (2026-09-11)
 
 Plain text, safe in a Steam discussion. It can be reused as-is in any thread. Every claim matches the store page.
