@@ -105,6 +105,14 @@ completed tests move whole to
 > ⚠️ What is and is not known: the code chain is definitely there on 1.0.7, and the fix is definitely in that
 > download. **Nobody has seen the bug happen in a real game on either version.** The good news is that the
 > four-click check above works on 1.0.7 exactly as it does on 1.1.0 — so one sitting could settle both.
+>
+> ✅ **RULED 2026-09-11 (owner): (e) 1.0.7 STAYS FROZEN. No new legacy build; work targets the ~99% on 1.1.0.**
+> Decisions (a)–(d) stay open. One thing that ruling does NOT buy, checked rather than assumed:
+> **the portals only ever serve ONE version**, so a player still on game 1.0.7 who subscribes on Steam or Paradox
+> gets the LIVE pack, not the frozen one — only people who follow the card's legacy link get the frozen build.
+> `Fix_FreedHousingNotice` has no version gate (its guard only checks that the methods exist), so it runs on both.
+> ⇒ "1.0.7 is frozen" means *we ship them nothing new*, not *they are out of range*: a repair shipped to 1.1.0
+> still reaches the Steam/Paradox 1.0.7 players, and today's defect already does.
 
 ### 2026-09-11 — 150: the Paradox developer answered in the Building Codes thread. **Three decisions: (a) what to tell them about how we find bugs, (b) the prefab fix's shape, (c) retire the farm-oxygen fix?** Nothing here needs the keyboard.
 

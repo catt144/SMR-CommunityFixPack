@@ -101,7 +101,8 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 - **151** Migration audit DONE (`MIGRATION_DEV_REPORT.md`); F60 retirement proposed. ⛔ **F59 RE-DERIVED 09-11**: expedition claim
   CONFIRMED **+ 2nd caller** — manual Set Residence on a full home OVERFILLS it, BOTH branches, ships today (`desk_f59_interact.py` 8/8).
   Repair must cover both; cheap in-play check in ck151. ⛔ The frozen `v5-game-1.0.7` download (card → legacy page) SHIPS
-  the same body ⇒ a 1.1.0 repair does NOT reach 1.0.7 players; ck151 (e) is a release call. Desk only, no build.
+  the same body; ✅ **ck151 (e) RULED 09-11: 1.0.7 STAYS FROZEN**, work targets 1.1.0 — but the portals serve ONE version,
+  so Steam/PDX 1.0.7 players run the LIVE pack and F59 has no version gate. Desk only, no build.
 - **150** PDX dev reply (C88 shape · F37 REMOVE · wording) · **149** upload (F119+C86 tested-attended 09-11) · **147** field replies · **148** fixtoggles.
 - 98 rig half only (⛔ Steam = ONE branch at a time, owner 09-08) · 99 disposition of the self-disabled ·
   100 say anything to players yet (rec no) · 101 accept the re-verification chain shape.
