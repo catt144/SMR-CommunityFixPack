@@ -87,7 +87,7 @@ render.
 ```
 Bug fixes for Surviving Mars: Relaunched.
 
-Forty-eight repairs, each one written up on the fix list with what you would
+Fifty repairs, each one written up on the fix list with what you would
 have seen and what was actually wrong. Every one targets something the game's
 own code gets wrong — the code says one thing, does another, and the fix makes
 it do what it says. It fixes bugs; it does not rebalance the game. Preferences
@@ -128,6 +128,7 @@ SOME OF WHAT IT FIXES
 · Two train buildings fought over the same connector hex forever.
 · A destroyed tunnel still worked as a shortcut.
 · Automatic rockets and landers took off with nothing aboard.
+· An Earth-sent Trade rocket, most often the Wildfire mystery's cure rocket, could get stuck on the landing pad forever.
 · A Jumbo Cave mystery could get stuck clearing waste rock and never complete.
 · The Philosopher's Stone mystery hung one step from the end.
 · A story step asked for a cave-in on a map that does not exist, and the story stopped.
@@ -223,7 +224,7 @@ https://github.com/catt144/SMR-CommunityFixPack
 ```
 Bug fixes for [i]Surviving Mars: Relaunched[/i].
 
-[b]Forty-eight repairs[/b], each one written up on the fix list with what you would have seen and what was actually wrong. Every one targets something the game's own code gets wrong — the code says one thing, does another, and the fix makes it do what it says. It fixes bugs; it does not rebalance the game. Preferences and features are deliberately not in it.
+[b]Fifty repairs[/b], each one written up on the fix list with what you would have seen and what was actually wrong. Every one targets something the game's own code gets wrong — the code says one thing, does another, and the fix makes it do what it says. It fixes bugs; it does not rebalance the game. Preferences and features are deliberately not in it.
 
 Some of them you could hardly miss: an entire train line and every train on it deleted by salvaging a single hex, colonists suffocating on a walk between two domes, an artificial lake burying the rover that was building it.
 
@@ -249,6 +250,7 @@ And [b]three[/b] of them repair things you cannot see at all today: real defects
 [*]Two train buildings fought over the same connector hex forever.
 [*]A destroyed tunnel still worked as a shortcut.
 [*]Automatic rockets and landers took off with nothing aboard.
+[*]An Earth-sent Trade rocket, most often the Wildfire mystery's cure rocket, could get stuck on the landing pad forever.
 [*]A Jumbo Cave mystery could get stuck clearing waste rock and never complete.
 [*]The Philosopher's Stone mystery hung one step from the end.
 [*]A story step asked for a cave-in on a map that does not exist, and the story stopped.
@@ -306,8 +308,8 @@ Usually auto-fills. If it is missing under **CHANGELOG** (Paradox) or **Change
 Notes** (Steam), paste this:
 
 ```
-- New arrivals are no longer sent into a nearby dome that is switched off, quarantined or without life support when the working domes they can reach have no free homes. They go to the nearest working dome instead, even if some of them have to wait there for a home.
-- The missing strike, pump, landing, drilling, shovel and bucket effects are back on seven machines and vehicles: the Rare Metals Extractor's hammer, the classic MOXIE, the Water Extractor, Shuttle Hub shuttles, the RC Driller, the RC Dozer and The Excavator. Sound and visuals only. The drill-style Rare Metals Extractor and the white MOXIE are silent by design; use Change Skin to switch the extractor to its hammer.
+- An Earth-sent Trade rocket (most often the Wildfire mystery's cure rocket) could get stuck on the landing pad forever if its fuel cost changed while it waited there — finishing Advanced Martian Engines research is the reported trigger. The fuel request is now resized when that happens, and a rocket already stuck like this in your save is corrected the moment you load it.
+- An Advanced Orbital Probe fired without Adapted Probes no longer knocks an already deep-scanned neighbouring sector back to merely "Scanned".
 - Both were watched working in a running colony on game 1.1.0.
 ```
 

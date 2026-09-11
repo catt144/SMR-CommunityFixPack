@@ -135,7 +135,7 @@ back at Paradox. ⛔ Do not paste the same block on both.
 ```
 Bug fixes for Surviving Mars: Relaunched.
 
-Forty-eight repairs, each one written up on the fix list with what you would
+Fifty repairs, each one written up on the fix list with what you would
 have seen and what was actually wrong. Every one targets something the game's
 own code gets wrong — the code says one thing, does another, and the fix makes
 it do what it says. It fixes bugs; it does not rebalance the game. Preferences
@@ -176,6 +176,7 @@ SOME OF WHAT IT FIXES
 · Two train buildings fought over the same connector hex forever.
 · A destroyed tunnel still worked as a shortcut.
 · Automatic rockets and landers took off with nothing aboard.
+· An Earth-sent Trade rocket, most often the Wildfire mystery's cure rocket, could get stuck on the landing pad forever.
 · A Jumbo Cave mystery could get stuck clearing waste rock and never complete.
 · The Philosopher's Stone mystery hung one step from the end.
 · A story step asked for a cave-in on a map that does not exist, and the story stopped.
@@ -277,7 +278,7 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=3787202810
 ```
 Bug fixes for [i]Surviving Mars: Relaunched[/i].
 
-[b]Forty-eight repairs[/b], each one written up on the fix list with what you would have seen and what was actually wrong. Every one targets something the game's own code gets wrong — the code says one thing, does another, and the fix makes it do what it says. It fixes bugs; it does not rebalance the game. Preferences and features are deliberately not in it.
+[b]Fifty repairs[/b], each one written up on the fix list with what you would have seen and what was actually wrong. Every one targets something the game's own code gets wrong — the code says one thing, does another, and the fix makes it do what it says. It fixes bugs; it does not rebalance the game. Preferences and features are deliberately not in it.
 
 Some of them you could hardly miss: an entire train line and every train on it deleted by salvaging a single hex, colonists suffocating on a walk between two domes, an artificial lake burying the rover that was building it.
 
@@ -303,6 +304,7 @@ And [b]three[/b] of them repair things you cannot see at all today: real defects
 [*]Two train buildings fought over the same connector hex forever.
 [*]A destroyed tunnel still worked as a shortcut.
 [*]Automatic rockets and landers took off with nothing aboard.
+[*]An Earth-sent Trade rocket, most often the Wildfire mystery's cure rocket, could get stuck on the landing pad forever.
 [*]A Jumbo Cave mystery could get stuck clearing waste rock and never complete.
 [*]The Philosopher's Stone mystery hung one step from the end.
 [*]A story step asked for a cave-in on a map that does not exist, and the story stopped.
@@ -461,6 +463,29 @@ because auto-fill failed — auto-fill's own result was not observed this cycle)
 UPLOAD path accepted the 6,206-char `description` (the upload returned `pdx_version` "6"); what
 the page shows is the pasted block. The owner's Steam screenshot shows all three gallery images.
 Paradox's gallery was covered only by "everything seems to be correct", not itemised.
+
+## ⭐ 2026-09-11 — release words for vNEXT (`RELEASE.md` step 1): count 48 → 50, one headliner (F119)
+
+Recounted, not typed: `grep -c '^??? '` = **50** in `SMR-CommunityMods`, tally
+1+14+4+5+9+5+7+2+3; "Under the hood" still **3**, judgment calls still **3**
+(neither F119 nor C86 is one). Count word *Fifty* now in all five copies
+(`metadata.lua`, this file's two blocks, `UPLOAD_WORKFLOW.md`'s two blocks).
+
+**New headliner — "An Earth-sent Trade rocket, most often the Wildfire
+mystery's cure rocket, could get stuck on the landing pad forever"** (F119),
+added after the empty-launch rocket bullet it sits next to in the fix list.
+It clears the F105/F108/C83 bar: **players saw it** (two independent Reddit
+reports, r/SurvivingMars, PC + PS5, "Game-breaking bug for the Wildfire
+mystery"), **it is reproduced** (the owner's attended A/B, `F119.md` §Attended
+check — fix off reproduced the exact reported "20 fuel to unload"; a save/load
+healed a pre-stuck rocket; fix on re-sized it at once), and it answers a
+permanent-soft-lock question players can check for themselves. ⛔ No Beta
+label — the owner cut it 2026-09-11 after the attended check (checklist 149).
+
+**C86 (scan downgrade) stays in the "and a good deal more" tail** — P3, a
+wasted deep scan and a misleading map reading, not a loss a player would
+recognise as a headline the way F119's stuck rocket is. It is on the fix list
+(`Buildings & economy`) and in `last_changes`.
 
 ## Provenance of the headliners
 

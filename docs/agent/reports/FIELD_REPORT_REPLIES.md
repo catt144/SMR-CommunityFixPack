@@ -270,19 +270,25 @@ name the extractor's skin: which skin uses `ConcreteExtractorCP3Dome` was NOT ro
 Source: `reports/FIELD_LEADS_2026-09-11.md`. ⛔ All desk reads — nothing here was witnessed in play. No version number,
 no fix promise; "filed" is the strongest word. Check each thread first; skip a draft if it is already answered.
 
+⭐ **Updated 2026-09-11 (release words, `RELEASE.md` step 1): F119 and the deep-scan bug went from "filed" to
+`tested-attended` in play (checklist 149) and now ship in the next update** — the two drafts below are rewritten to say
+so, superseding the "no fix promise" framing above for these two only. Still no version number (the upload is the
+owner's, `H-02`).
+
 **Wildfire cure rocket stuck (Reddit, r/SurvivingMars) — F119**
-> This looks like a real bug in the game, and the Advanced Martian Engines hunch is close. The cargo rocket Earth sends works out how much fuel it needs once, when it lands. If the fuel cost changes while it's sitting on the pad (finishing Advanced Martian Engines cuts it by 20, which is exactly your "20 fuel to unload"), the game updates your own rockets but not Earth's, so the rocket ends up holding fuel it no longer needs, and nothing is set up to take it off. The Fuel Conservation law can do the same. It only bites while a cure rocket is waiting on the pad. If you have a save from before that rocket landed, loading it and holding off on Advanced Martian Engines (and on changing Fuel Conservation) until the rocket has left should avoid it. We've filed it for the Relaunched Fix Pack.
+> This looks like a real bug in the game, and the Advanced Martian Engines hunch is right on target. The cargo rocket Earth sends works out how much fuel it needs once, when it lands. If the fuel cost changes while it's sitting on the pad (finishing Advanced Martian Engines cuts it by 20, which is exactly your "20 fuel to unload"), the rocket ends up holding fuel it no longer needs, and nothing is set up to take it off. The Fuel Conservation law can do the same. We've fixed this for the Relaunched Fix Pack — it's tested and will be in the next update, and it also repairs a rocket that's already stuck the moment you load your save. Until then, if you have a save from before that rocket landed, loading it and holding off on Advanced Martian Engines (and on changing Fuel Conservation) until the rocket has left should avoid it.
 
 ⛔ The save-reload advice is INFERRED, not route-checked. Do NOT mention the console: whether Relaunched players can open
-one is unchecked, and PS5 has none.
+one is unchecked, and PS5 has none. ✅ The load-heal claim is OBSERVED (`F119.md` §Attended check, 2026-09-11): a
+pre-stuck rocket reloaded and left.
 
 **Clogged after a dust storm (Steam, "Clogged Extractor") — C85**
 > "Clogged after a Dust Storm" comes from a one-time story event, not from wear, so maintenance won't clear it. What happens next depends on which answer you picked in its popup: "Send a colonist" fixes it straight away; "Have the drones replace the entire component" turns it into a normal repair needing 3 Electronics; "We'll fix it after the storm" only fixes it when a later dust storm ends, and it can miss that storm's turn, so it may take more than one storm. If you remember which answer you chose, or whether you saved and reloaded while that popup was still open, please say — we're checking whether it can get stuck for good.
 
 ⚠️ "maintenance won't clear it" is INHERITED (`RequiresMaintenance.lua:413-417`, investigator read).
 
-**Deep scan finds nothing (Steam, "Possible Bug")**
-> Orbital probes only deep-scan once you've researched Adapted Probes. Deep Scanning on its own doesn't change probes; it lets your normal sector scans find deep deposits when a sector is scanned again. So probes launched before Adapted Probes only do a normal scan, which matches what you saw. One small real bug turned up while checking: with the five-sector Advanced Orbital Probe and no Adapted Probes, a neighbouring sector you had already deep-scanned gets marked back to "Scanned", and scanning it again finds nothing new.
+**Deep scan finds nothing (Steam, "Possible Bug") — C86**
+> Orbital probes only deep-scan once you've researched Adapted Probes. Deep Scanning on its own doesn't change probes; it lets your normal sector scans find deep deposits when a sector is scanned again. So probes launched before Adapted Probes only do a normal scan, which matches what you saw. One small real bug turned up while checking: with the five-sector Advanced Orbital Probe and no Adapted Probes, a neighbouring sector you had already deep-scanned gets marked back to "Scanned", and scanning it again finds nothing new. We've fixed that too — it'll be in the next update.
 
 **Building codes vs prefabs (Steam, helfisk; a PDX developer active in the thread) — C88**
 
