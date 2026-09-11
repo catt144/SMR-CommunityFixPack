@@ -113,6 +113,21 @@ completed tests move whole to
 > `Fix_FreedHousingNotice` has no version gate (its guard only checks that the methods exist), so it runs on both.
 > ⇒ "1.0.7 is frozen" means *we ship them nothing new*, not *they are out of range*: a repair shipped to 1.1.0
 > still reaches the Steam/Paradox 1.0.7 players, and today's defect already does.
+>
+> ⚖️ **2026-09-11 — (a)/(d) DIRECTION SET (not yet a final ruling): LEAN REPAIR, with both chain links free to
+> stop and come back to you.** Owner: *"I'm leaning on the repair side, but let Opus consider it during the
+> build — if it finds reason to retire instead of repair, let it stop and tell me. Opus can stop and report any
+> concerns at any time. The Fable audit can do the same, and if it finds a concern it can recommend the repair
+> shape, or retire, if it thinks it's needed."*
+>
+> Built into `prompts/migrationfix/` as the 2-link chain (01 Opus builds → 02 Fable audits → **you upload**).
+> Both links default to repair, weigh retirement honestly, and are told that repair-vs-retire is a §4a
+> who-benefits call that belongs to **you** — so either one that reaches for it stops and lands the question
+> here rather than settling it quietly. Both are also told, in their own text, that a stop is cheaper than a
+> wrong ship, because the "tonight" deadline biases an executor against stopping.
+>
+> ⇒ **(a)/(d) stay OPEN.** If the chain runs clean, repair ships and you never have to answer them. If either
+> link stops, the question arrives here with the evidence attached.
 
 ### 2026-09-11 — 150: the Paradox developer answered in the Building Codes thread. **Three decisions: (a) what to tell them about how we find bugs, (b) the prefab fix's shape, (c) retire the farm-oxygen fix?** Nothing here needs the keyboard.
 

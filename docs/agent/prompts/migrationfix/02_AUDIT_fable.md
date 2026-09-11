@@ -15,6 +15,9 @@ which link 01 wrote for you.
 > which is cheap — a refutation after upload costs a release. So **refuse to be reassuring**: this tier's value
 > on a self-correcting executor is *certification plus residue*, not rescue, and a clean bill of health you
 > cannot defend is worse than an honest list of open points.
+>
+> 🛑 **You may STOP at any point and report a concern — and you may recommend the repair shape, or recommend
+> retirement, if the evidence says so. See "Stop authority" at the foot of this file BEFORE you start.**
 
 ## 0 · Trust nothing forward
 
@@ -89,3 +92,25 @@ file** and `migrationfix/README.md` in the same commit if the chain is finished,
 
 ⛔ **Do not build the repairs you recommend.** Your job ends at the verdict; a fix for something you found goes
 back to the owner as a decision, not into this commit.
+
+## 🛑 Stop authority, and the design input the owner asked you for
+
+⚖️ Owner, 2026-09-11: **you have the same stop-any-time authority as link 01** — *"Fable audit can do the same,
+and if it finds a concern it can recommend the repair shape, or retire, if it thinks it's needed."*
+
+So this link is **not** limited to grading. Two things are explicitly yours to say:
+
+1. **Recommend the repair SHAPE.** If link 01's guard is wrong, too wide, or aimed at the wrong seam, say what
+   shape would be right and why — at the level of *what it must key on*, not a diff. A shape you can defend from
+   the shipped bodies is worth more to the owner than a bare "insufficient".
+2. **Recommend RETIREMENT instead.** The owner is leaning repair and link 01 defaults to it, but that lean is not
+   a ruling and you are not bound by it. If the evidence says the module cannot be guarded without gutting the
+   benefit it exists to provide, **say retire, and show the reasoning.** ⚠️ The bar: `FIX_POLICY` §4a who-benefits
+   — name what players lose by retiring (a freed bed offered immediately instead of after up to 12 h at 3,600+
+   colonists) against what they lose by keeping it. That trade is the OWNER's to settle, so route it to
+   `PLAYTEST_CHECKLIST.md` → "Decisions waiting on you" as a recommendation, never as a decision you took.
+
+**Stop at any point** — you do not have to finish the sweep to raise something. If you find a reason the release
+should not go out, say so immediately rather than banking it for the report; the owner is waiting on this link,
+and a late-arriving blocker is worth less than an early one. A partial audit with an honest "I stopped here and
+why" is a legitimate deliverable; so is "ship A only", or "ship nothing".

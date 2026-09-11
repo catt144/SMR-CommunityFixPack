@@ -39,8 +39,39 @@ If the owner expected seven fixes, say this in one line and carry on — the job
    module — a repair inside an existing file does not.** Run `git status --short`: if either file is modified
    and uncommitted, **do not edit, stage, or work around them**; ask the owner. Item B *removes* a module and
    therefore DOES collide with H-10 — see item B's own gate.
-2. **ck151 (a)/(d) is ruled, or you default and say so.** The recommendation on the checklist is *repair, not
-   retire* for F59. If unruled, build the repair and note the default in one line of the commit body.
+2. **ck151 (a)/(d): the owner is LEANING REPAIR, and has asked you to genuinely weigh it while you build.**
+   ⚖️ Owner, 2026-09-11, verbatim in substance: *"I'm leaning on the repair side, but let Opus consider it during
+   the build — if it finds reason to retire instead of repair, let it stop and tell me."*
+   ⇒ **Default: repair.** But repair-vs-retire is a `FIX_POLICY` §4a who-benefits call, which is the owner's, not
+   yours — so if the evidence in your hands starts pointing at retirement, **that is a STOP, not a judgement call
+   you make quietly.** See "Stop authority" immediately below.
+
+
+## 🛑 Stop authority — the owner granted it explicitly; use it
+
+⚖️ Owner, 2026-09-11: **"Opus can stop and report any concerns at any time if it finds a concern."**
+
+A stop is **cheaper than a wrong ship**, and you are working under a "tonight" deadline that will bias you
+against stopping. Resist that. Stopping is not failing the night — shipping something the audit then has to
+unpick is.
+
+**Stop, write it to `PLAYTEST_CHECKLIST.md` → "Decisions waiting on you", and tell the owner directly, if:**
+- **Retirement starts looking right for F59.** The sharpest tell: *the only guard you can find that stops both
+  harms also suppresses ordinary notifications in reachable cases.* At that point the "repair" has become a
+  removal wearing a fix's clothes, and the honest move is to say so and let the owner choose — not to ship a
+  narrower guard you privately doubt.
+- **The fix has to reach beyond the module's remit** — changing shipped behaviour the defect does not require,
+  or hardening something vanilla owns.
+- **`Residence:OnDestroyed:81-92` turns out to be ours after all** (it is filed as an UNRESOLVED lead precisely
+  because vanilla's own `:86` has the same exposure). That would widen the job past tonight.
+- **F60's replacement trace collapses**, or the release lane is dirty (both already gated in §B).
+- **Anything else that would change what the owner thinks they are approving.** You do not need a rule to cover
+  it; if you would want to be asked, ask.
+
+**How to stop well:** do not half-start. Land whatever is complete and safe on its own, file the rest as an
+entry rather than leaving it in the tree, say which items are DONE and which are STOPPED **by name** (never a
+total), and put the decision on the checklist — not only in an agent doc. Then hand over; link 02 still runs on
+what exists.
 
 ## ⛔ "Build it as Astra wrote it" holds for F60 — NOT for F59
 

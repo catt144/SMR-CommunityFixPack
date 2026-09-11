@@ -24,6 +24,17 @@ does nothing for the other — the manual-assign over-capacity route, desk-contr
 report's shape as-is would have shipped a fix leaving the more reachable harm in place, so link 01 builds against
 `bugs/F59.md`'s last two sections instead. **F60 is built as the report proposes**, with link 02 as its check.
 
+## Both links can stop at any time — the owner granted it explicitly
+
+⚖️ Owner, 2026-09-11: Opus may stop and report any concern at any point; Fable has the same authority, **and**
+may recommend the repair shape or recommend retirement if it thinks that is what the evidence says. On
+repair-vs-retire for F59 the owner is **leaning repair** — link 01 defaults to it and weighs the alternative while
+building, but that lean is not a ruling and neither link is bound by it. Because repair-vs-retire is a
+`FIX_POLICY` §4a who-benefits call, it belongs to the owner: either link that reaches for it **stops and routes
+it to `PLAYTEST_CHECKLIST.md` → "Decisions waiting on you"**, rather than settling it quietly.
+A stop is cheaper than a wrong ship, and both links are told so in their own text, because a "tonight" deadline
+biases an executor against stopping.
+
 ## What is NOT in this chain
 
 The audit reviews eight modules but proposes only **two** code actions. The five PARTIAL rows (F51, F52, F53,
