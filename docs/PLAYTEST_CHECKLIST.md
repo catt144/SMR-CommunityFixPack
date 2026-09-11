@@ -40,6 +40,8 @@ completed tests move whole to
 > The record is in `agent/bugs/F119.md` and `agent/bugs/C86.md` → "Attended check"; the log is archived.
 > **Still not covered:** the Wildfire mystery's own loop, a player's real stuck save, and a real Advanced
 > Orbital Probe firing. The steps below were written before the sitting; the sitting used a stronger route.
+> ⚖️ **Your call (09-11): no Beta label for either fix** — the in-play reproduction is enough. The fix-toggles
+> chain (item 148) must not add one to F119 or C86.
 
 > **What is staged:** `Fix_TradeRocketFuelRefresh` (`2c68bb1`) refreshes an
 > Earth-sent Trade rocket's fuel supply/demand request when its fuel cost changes

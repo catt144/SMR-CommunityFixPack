@@ -161,6 +161,8 @@ instead of the pack; it is a **mitigation, not a detector**.
 - Status vocabulary `tested-attended`/`tested-unattended`; "Fixed" is a claim until confirmed (owner, 2026-09-08).
 - `[R]` Beta candidates today (shipped unexercised or source-derived): F116, F117, F118, the Saint heal
   (`STATE.md:20-22`); F119 if built (peer `smr-bugfixpack-0d`, ck146). No rule maps Beta to status words yet.
+  ⚖️ **Superseded for F119 and C86 (later 2026-09-11):** both went `tested-attended` in play (checklist 149), and the
+  owner cut the Beta label for both. Do not tag either Beta.
 
 ## 6 · The owner's rulings in this session (2026-09-11, verbatim where quoted)
 
