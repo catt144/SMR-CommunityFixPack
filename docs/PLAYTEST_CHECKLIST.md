@@ -148,7 +148,7 @@ completed tests move whole to
 > **Your time:** two sittings (link 03 about 30 minutes; link 11 longer, priced by link 10). **To start:** fire
 > `docs/agent/prompts/fixtoggles/01_SPEC_fable.md`. Link 09 (the version research) can run any time, in parallel.
 
-### 2026-09-11 — 146: the Wildfire cure rocket can get stuck on the pad for good. **Decision: build the fix for the next update (built and desk-tested first, then one attended check), or file and watch. Recommendation: build it — it permanently blocks the Wildfire mystery, two players hit it within a day, and the repair is small.**
+### ✅ 2026-09-11 — 146 RULED + BUILT: the Wildfire cure rocket can get stuck on the pad for good. **You ruled: build it, out today. Built `2c68bb1` (`Fix_TradeRocketFuelRefresh`), desk-verified, staged for release as a Beta candidate — your check is item 149.** The original ask is kept below.
 
 > Two players on Reddit (one PC, one PS5): the cargo rocket Earth sends for the Wildfire cure sits loaded on the pad,
 > shows "20 fuel to unload", and never leaves. **Cause (read from the game's code, not yet reproduced):** the rocket

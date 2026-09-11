@@ -8,6 +8,34 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-11 - smr-bugfixpack-0d close-out: SESSION LOOKBACK, doc sweep, handoff updated
+
+tags: lookback handoff doc-sweep field-reports F119 C86 C85 C87 C88
+
+Started as the orchestrator handoff (orientation). Then the owner relayed six field leads, asked for a build brief, and ruled F119
+out today. **Arc:** triage (`6b3cd82`) → STATE counts (`dc31795`) → C87 lakes reopened (`5aff54f`) → build brief (`283ff34`; a
+separate session built F119 `2c68bb1` + C86 `5ca9a0f`, staged ck149, closed the brief `91f32af`) → C88 Building Codes reopened
+(`274fc1b`) → this close-out. **Doc sweep:** checklist 146 flipped to RULED + BUILT → 149; STATE's owner pointer names ck149;
+`perma/HANDOFF_ORCHESTRATOR.md` §1b / §3 / §4 carry this session's outbox. Nothing else was found stale: the triage report,
+entries, reply drafts, prompt map and release outbox were already current.
+
+**Lookback.**
+1. **Good:** parallel read-only investigators, then every load-bearing claim re-read against both trees before filing. The
+   re-read caught a citation that didn't exist (`Triggers.lua`) and found what the investigator had missed on F119: 1.1.0's
+   Fuel Conservation law, which the Ministry of Technology re-applies on every working flip. That turned "an old bug" into
+   "why players hit it now".
+2. **Good:** three sessions committing the same files with zero collisions — ids and checklist numbers claimed by message
+   first, `git status` checked before every `--regen`, pathspec commits, `HEAD` read back against `origin/main` every time.
+3. **Good:** "F119 out today" reordered the brief with F119 as the critical path and C86 gated behind it; the build session
+   delivered both, desk-verified, before this session ended.
+4. **Miss (C87):** I fitted "very low ground on that map" to a report pattern without the screenshot (imgur was blocked). The
+   owner's pushback + the screenshot overturned it. With the input artefact missing, the verdict is "unverified", not a story.
+5. **Miss (C88):** I called an explicit `from_prefab` exemption "intended". Deliberate in code is not intended by design when it
+   contradicts the player-facing text; report the mismatch and ask the devs.
+6. **Miss:** my first STATE line pushed STATE 10 bytes over the warn; doccheck caught it. STATE gets pointers, never bodies.
+
+---
+
 ## 2026-09-11 - Building Codes vs prefabs re-classified on the owner's pushback → C88, waiting on the devs (smr-bugfixpack-0d)
 
 tags: field-reports building-codes laws prefabs C88 pushback

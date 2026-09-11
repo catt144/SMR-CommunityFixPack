@@ -27,7 +27,7 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   `C47OpenFarmSeedBufferShape` (Herbs 100→50), retired `LanderCargoRatchet`/`DroneUnreachableForever`/`AutoExportPriority`.
 - ⏭ NEXT: handoff + pending outbox `prompts/perma/HANDOFF_ORCHESTRATOR.md` (temporary). Desk `prompts/DLC_DEEP_CHECK.md` (`HUNT_AUDIT.md` §8).
   ⭐ FR-1 TEMP WORKAROUND MOD LIVE 09-11 (Steam 3799500849 / PDX 158711; FINDINGS §11–§12). ALL FR-1 work → `prompts/perma/LINUX_DISPATCH.md`.
-  Field: 3 working (one 10xx), 1 failing (GTX 1070, log requested). Chain `prompts/fixtoggles/` (ck148). Owner: ck144 (v7 checks + sounds thread).
+  Field: 3 working (one 10xx), 1 failing (GTX 1070, log requested). Chain `prompts/fixtoggles/` (ck148). Owner: ck149 (F119 → release) · ck144 (v7 checks + sounds thread).
   vanillahunt CLOSED 09-10 (99): instruments SOUND WITH STATED GAPS — 1,281 table-level hunks in 368 rowed hand files listed by
   no instrument (§1.4); 12 P2s re-derived: 6 hold, 5 weakened, **C80 REFUTED**; **C82** filed by the audit (Incident reactors stay
   off); every P2 is a gain/cosmetic except C82/C66/C63; ck142 = hotfix-3 list (rec none). FR-1/2/3 OPEN (FR-1 → LINUX_DISPATCH).
