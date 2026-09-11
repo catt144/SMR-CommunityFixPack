@@ -129,3 +129,17 @@ No new Linux mitigation was tested. Full evidence, ranked options, unrun
 recipes and two unposted upstream drafts: [options report](FR1_OPTIONS_2026-09-10.md).
 Archived desk receipt: `docs/archive/fr1-options-desk-2026-09-10.json`;
 engine facts EF-088/EF-089; owner bench/scope routing is checklist **145**.
+
+## 7 · 2026-09-10 night — same-thread attribution (`smr-bugfixpack-f0`, from the dump run's Proton log)
+
+**MEASURED, `steam-3215050.log` (the dump run: 772 `vkd3d_shader_dump_blob` lines into
+`fr1dump/`):** thread **025c** dumps `38121decbc3eee12.dxil` at **7537.824** and `.spv` at
+**7537.829**, then faults at **7537.831** in `libnvidia-glvkspirv.so.580.173.02 +0x157c88` →
+`vkCreateComputePipelines` error at 7537.832. The only lines on 025c in between are two
+`msvcrt_get_flags incorrect mode flag: x` errors. A compute pipeline has exactly one shader stage.
+⇒ §6's "parallel dump timing cannot attribute" is answered by the THREAD, not the timestamps:
+the pipeline NVIDIA was compiling at the fault was built from `38121decbc3eee12` on that thread.
+Grade: **direct log evidence**. The exact-hash override is still the formal proof (it would also show
+no OTHER pipeline faults once this one is fixed). ⚠️ The dump run's Reflections setting is
+**Low or Off, not confirmed which** (owner, 09-10). "Built while SSR is disabled" becomes MEASURED
+only with an Off-only dump run. The developer reply is `FR1_DEV_REPLY_2026-09-10.md` (not posted).

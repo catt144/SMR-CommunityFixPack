@@ -55,6 +55,15 @@ completed tests move whole to
 > a driver workaround into this pack needs your policy exception: it is not yet
 > a verified defect in the game's shipped Lua. The two upstream drafts are ready
 > for review in the report; neither has been posted.
+>
+> ✅ **Added the same night — your Steam reply for the Paradox dev is ready:**
+> `agent/reports/FR1_DEV_REPLY_2026-09-10.md` (paste the part below the line). The crash
+> log now ties the crash directly to the reflections shader: the same thread dumps
+> it and crashes 2 ms later. Files to offer them: `C:\Dev\SMR-FR1-DevPackage.zip` (your
+> username redacted). **One quick run would make the strongest line airtight:** Reflections
+> **Off**, the same `VKD3D_SHADER_DUMP_PATH` launch option, New Game. If
+> `38121decbc3eee12` is dumped again right before the crash, "the game builds it even with
+> reflections off" is proven, not inferred.
 
 ### ✅ 2026-09-10 — v7 IS LIVE on both stores (your word). Nothing to decide; three things to tell me when convenient.
 

@@ -28,6 +28,19 @@ Exploration prompt consumed in the delivery commit; next desk task remains DLC_D
 
 ---
 
+## 2026-09-10 night — FR-1: same-thread attribution found; Steam reply for the Paradox dev drafted (`smr-bugfixpack-f0`, owner in conversation)
+
+tags: FR-1 attribution vkd3d thread dev-reply Paradox Steam evidence-package
+
+After the options session (`fb7c247`) left fault attribution as STRONG INFERENCE, the dump run's Proton log
+settled it by thread: 025c dumps `38121decbc3eee12` (.dxil 7537.824, .spv 7537.829) and faults in NVVM at 7537.831
+with only two msvcrt noise lines between (FINDINGS §7). Owner chose to reply in the Steam discussion a Paradox dev is
+tracking: `reports/FR1_DEV_REPLY_2026-09-10.md` (NOT posted; owner posts). Redacted, checksummed files:
+`C:\Dev\SMR-FR1-DevPackage.zip` (outside git). Open: the dump run was Reflections Low OR Off (owner) —
+checklist 145 asks for one Off-only dump run.
+
+---
+
 ## 2026-09-10 night — FR-1: the owner's Linux bench read; crash pinned to one NVIDIA-580 compile of the SSR shader; options hunt handed off (`smr-bugfixpack-f0`, owner on the bench)
 
 tags: FR-1 linux proton nvidia vkd3d shader SSR Reflections.fx film-grain handoff
