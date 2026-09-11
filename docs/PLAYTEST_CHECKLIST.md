@@ -31,6 +31,44 @@ completed tests move whole to
 
 ### 2026-09-11 — 145: FR-1 cache probe v2 covers all 18 RAYS records; test normal loading first.
 
+> **P1: the temporary mod itself, packed, launched straight into a save [NEVER RUN]. You asked for it built so you can pak it:
+> it's built** and waiting in your Windows Mods folder as `SMR_FR1TempWorkaround`; the source copy is in
+> `C:\Dev\SMR-FR1-TempMod-2026-09-11\`. It is the benched Q2 path with the bench parts removed: no launch option and no forced
+> reload. It only switches on for NVIDIA + D3D12 + game 1.1.0.403908, and it logs one line: `[FR1 Temp Workaround] ACTIVE` or
+> `INACTIVE: <why>`. After a game update it says "Please uninstall it". The desk harness passes 21/21 cases on mocks, not the game.
+>
+> **On Windows, to pack it (about 5 min):**
+> 1. Game → main menu → **MOD EDITOR** → **TEMPORARY - Linux NVIDIA 580 Crash Workaround** → **File → Pack Mod**. You don't need to
+>    enable it on Windows. Don't save anything, and don't open the fix pack in the editor (every save bumps its version).
+> 2. Tell an agent it's packed. The agent checks that the archive (`%LOCALAPPDATA%\Temp\Surviving Mars Relaunched\ModUpload\Pack\ModContent.fpk`)
+>    holds the code and all 18 shader records, byte for byte, before you carry it over.
+>
+> **On the laptop:**
+> 1. With the game fully closed, make its folder:
+>    ```sh
+>    MODS="/home/ladmin/.steam/debian-installation/steamapps/compatdata/3215050/pfx/drive_c/users/steamuser/AppData/Roaming/Surviving Mars Relaunched/Mods"
+>    mkdir -p "$MODS/SMR_FR1TempWorkaround" ~/fr1-cache-v2/P1
+>    ```
+>    Copy **only** `ModContent.fpk` from Windows into that folder.
+> 2. Launch once with no launch options. In Mod Manager, **enable** the TEMPORARY workaround and **disable** FR-1 Cache Probe v2,
+>    then quit fully.
+> 3. Paste this whole line into Steam Launch Options. There is no marker any more:
+>    ```text
+>    PROTON_LOG=1 VKD3D_SHADER_DUMP_PATH=/home/ladmin/fr1-cache-v2/P1 %command%
+>    ```
+> 4. Go straight to **Load Game → a save**, with no New Game first. Play about 10 min with Reflections Off, quit through the menu,
+>    and don't save.
+> 5. Preserve `cp ~/steam-3215050.log ~/fr1-cache-v2/steam-P1.log` plus the newest `Mars.exe-*.log`, then zip `~/fr1-cache-v2/P1`.
+>
+> **Expected, stated in advance:** the game log says `TEMPORARY - Linux NVIDIA 580 Crash Workaround … packed from appdata`, then
+> `[FR1 Temp Workaround] ACTIVE: 18 reflections shaders replaced`; the save loads; the dump holds `4f866e2c54fc9064.dxil` (the stand-in).
+> - `INACTIVE: the shader overlay did not mount`, or a crash with the original `38121…` in the dump ⇒ **the packed form doesn't
+>   work.** Plan B is the route Q2 already proved: players drop the unpacked folder into `Mods/` by hand. One more run with the
+>   unpacked folder confirms it.
+> - The stand-in plus a crash ⇒ something new; bring everything back.
+> - `unpacked` in the mod line ⇒ the folder was copied instead of the pack.
+> Optional, same sitting: turn Reflections On for a minute and look (a `WARNING` log line is expected). Afterwards, clear the launch options.
+
 > ✅ **RESULT: you ran C2, Q2 and R2 on 2026-09-11, and the evidence is read**
 > ([findings §11](agent/reports/FR1_LINUX_FINDINGS_2026-09-10.md#11--2026-09-11--cache-probe-v2-bench-ran-owner-laptop-on-580-q2-loads-worlds-with-the-rays-no-op-r2-reverses-it)).
 > - **C2 (control)** crashed during the boot slides on a known reflections shader. The control is valid.
@@ -41,13 +79,15 @@ completed tests move whole to
 > - **Not shown yet:** that the picture matches Reflections Off (nobody compared); what happens if Reflections is turned **On** with
 >   the stand-in installed; a fresh launch going straight into a save (both saves loaded after a New Game, when the shaders were
 >   already built).
-> - **One launch I can't place:** a `control` launch at 01:47:24 whose game log stops at the startup banner, which is how a crash
->   leaves it. The next launch overwrote its Proton log. Do you remember it, e.g. a first try that died before the menu?
+> - ✅ **The extra 01:47:24 launch is explained** (you, 09-11): you had put the launch option in before enabling the mod, so it was
+>   a setup launch and not a leg.
 >
 > ✅ **RULED 2026-09-11 (you):** not the main pack. It will be a one-off, clearly **temporary** mod that tells players it's a
 > workaround and to uninstall it once Paradox fixes the real issue. No GitHub repo; it's stood up on a temporary basis. Astra builds it
-> (round-3 brief: `agent/prompts/FR1_TEMP_MOD_R3.md`), and your bench steps and the store text will land here. Two small asks
-> whenever suits: **Steam only, or Steam + Paradox?** And should a post to the dev mention the mod once it exists?
+> (round-3 brief: `agent/prompts/FR1_TEMP_MOD_R3.md`), and your bench steps and the store text will land here. ✅ Your answers
+> (09-11): **Steam for sure, possibly Paradox too**; yes, a post to the dev mentions the mod once it is live. Your directive,
+> passed to Astra verbatim: **this is the LAST round**, an emergency workaround until the hotfix, not a long-term mod, and
+> "Reflections Off" is an acceptable answer.
 > **Can it be released? Not yet.** The bench proves the swap works; it does not prove a mod is safe to hand out. No hidden errors
 > showed up: the Proton log has no graphics errors and the game log has no Lua errors (findings §11). Risks, biggest first:
 > 1. **Delivery is untested.** Workshop/PDX mods arrive packed; the bench ran unpacked. A packed mod might not mount the folder
@@ -65,7 +105,7 @@ completed tests move whole to
 > itself off (and says "uninstall me") after Paradox's patch; your Windows rig with Reflections On; and one longer Linux run that
 > includes a cold launch into a save.
 > **Dev reply:** follow-up post 2 (the swap removes the crash, removing the swap brings it back) is drafted in
-> `agent/reports/FR1_DEV_REPLY_2026-09-10.md`. Did you post follow-up 1?
+> `agent/reports/FR1_DEV_REPLY_2026-09-10.md`. Follow-up 1 is up (you, 09-11), so post 2 can go as-is whenever you like.
 
 > **These steps RAN 2026-09-11 (result above); kept as the record. Originally: TAKEABLE WHEN you are at the laptop on NVIDIA 580, PRIME On-Demand.**
 > **MEASURED:** your valid C1/N1 bench proved that the game consumed our replacement.

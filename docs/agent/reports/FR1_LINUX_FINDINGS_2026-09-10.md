@@ -320,7 +320,8 @@ scan of the dump lines. Read by `smr-bugfixpack-5d`. Setup (Q2 `system-state` / 
   plus 3.6 M `ResourceBarrier: Issuing split barrier(s)` warnings that vanilla R2 also prints (900 in its short run).
 - **Unexplained, verbatim (DISPATCH §2), attribute only if asked:** (1) an extra `-fr1-cache=control` launch,
   `Mars.exe-20260911-01.47.24`, whose game log stops at `*** Debug::Init()`. R2's crashed log stops at the same line, the shape a crash
-  leaves. Its Proton log was overwritten by the next launch, so it is not attributable. It was followed by `01.47.47`, no marker, `UNARMED`,
+  leaves. Its Proton log was overwritten by the next launch. **Owner-attributed 09-11:** the launch option was set before the mod was
+  enabled, so this was a setup launch, not a leg. It was followed by `01.47.47`, no marker, `UNARMED`,
   menu, clean exit at 34 s: the recipe's pre-leg check. (2) `Failed activating D3D12 Dred` and `[Console Error]
   OptionsData.Options.Upscaling sets hr.ResolutionUpscale which was already set by another table` (every leg; both already listed). (3)
   `err:msvcrt:msvcrt_get_flags incorrect mode flag: x` brackets the dump lines on the faulting threads (C2 152397/152399, R2

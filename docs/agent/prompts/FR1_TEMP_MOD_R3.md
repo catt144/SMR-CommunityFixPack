@@ -1,5 +1,9 @@
 # FR-1 round 3 — turn the Q2 overlay into a TEMPORARY standalone workaround mod (one-shot, model-agnostic)
 
+⏸ **HELD 2026-09-11. Do not run this unless the owner re-fires it.** The owner then asked the orchestrator to build the mod
+directly ("build it in a directory and I pak it in the mod editor"). The build is `C:\Dev\SMR-FR1-TempMod-2026-09-11\SMR_FR1TempWorkaround`
+(checklist 145 P1; desk harness 21/21). If re-fired, treat this brief as an **audit of that build**, not a rebuild.
+
 ⛔ ONE-SHOT: consume this file (`git rm`) in your delivery commit. Written 2026-09-11 by `smr-bugfixpack-5d` (the orchestrator)
 for **Astra** (the builder), after the owner's v2 bench and scope ruling. The records win if they disagree with this brief.
 Verify every specific against `git log` and the tree; Codex sessions are invisible to `ListAgents`.
@@ -33,6 +37,27 @@ list), and your own `reports/FR1_CACHE_ROUTE_2026-09-11.md` §5–§8.
 So: a **separate mod** with its own id (never `SMR_CommunityFixPack`, never inside `Code/`); **temporary by name and text**; **no
 GitHub repo**. The build lives outside git like the probes (e.g. `C:\Dev\SMR-FR1-TempMod-2026-09-11\`), with a receipt JSON in
 `docs/archive/` and your report here. The owner uploads; no agent touches a portal.
+
+## 2b · Owner directive, same day (verbatim): THIS IS THE LAST ROUND
+
+> "tell astra that I want this to be the last round, we are doing an emergency workaround until its hot fixed. not a long term mod.
+> If the answer is reflections off thats fine to. It lets them play where otherwise they wouldn't be able to"
+
+What that changes (**it wins over §3–§4 wherever they conflict**):
+- **Ship-ready in one pass.** Deliver a build the owner can pack and upload after ONE bench sitting. There is no round 4, so fold every
+  fallback into this delivery. If the packed mount might fail, ship plan B in the same package (e.g., player steps to drop the unpacked
+  folder into `Mods/`, the route the benches proved), and state in advance which leg decides between the plans.
+- **The smallest safe thing wins.** Anything that is polish gets cut: the description carries the "temporary, uninstall when Paradox
+  fixes it" message, and the in-game notice happens only if it is nearly free. Open questions that don't block an emergency release go
+  in "not opened", not into new work.
+- **Reflections Off is an accepted answer.** The mod may work only with Reflections Off. Either instruct players to keep it Off, or set
+  it Off if that is simpler and safer; say which you chose and why. Keeping reflections looking right with Reflections On is not a goal.
+- **The owner may run P1 first** (checklist 145: the unchanged v2 probe, packed through the Mod Editor, launched straight into a save
+  with `-fr1-cache=noop-noreload`). If its result is in, build on it: the release mod should be the v2 probe with the bench parts
+  stripped, not a rebuild. If P1 is not in yet, keep §3 task 5 answerable by the owner's first leg.
+- **Portals:** Steam for certain, Paradox possibly. Draft the Steam text first; the Paradox text is optional.
+- **Owner legs: only the minimum that makes it safe to hand out.** On Linux 580: the packed mount, a cold launch into a save, and the
+  disable reversal. Plus one look on the Windows rig. Order them so the first failure tells the owner which plan to ship.
 
 ## 3 · Tasks — leads, not a plan
 

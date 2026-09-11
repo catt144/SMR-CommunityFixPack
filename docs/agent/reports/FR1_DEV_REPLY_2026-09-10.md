@@ -66,7 +66,7 @@ Thanks for tracking this.
 
 ---
 
-## FOLLOW-UP POST 1 — draft 2026-09-11 (from FINDINGS §10; post as a NEW reply, not an edit)
+## FOLLOW-UP POST 1 — POSTED by the owner (confirmed 09-11); drafted 2026-09-11 from FINDINGS §10
 
 Every line is MEASURED unless it says "we think" / "if we read it right". Hold the "swap makes it go away" claim for FOLLOW-UP 2
 (Astra's v2 covering all 18 REFLECT_RAYS records).
@@ -97,9 +97,8 @@ We're next testing a replacement for all 18 REFLECT_RAYS cache entries (the 12 d
 
 ## FOLLOW-UP POST 2 — draft 2026-09-11 (from FINDINGS §11; post as a NEW reply, after POST 1)
 
-Every line is MEASURED unless it says "suggestions" / "if we read it right". It assumes POST 1 is up. ⚠️ The owner has not said
-whether POST 1 was posted. If it was not, post 1 then 2, or ask an agent for one merged post. Delete POST 1's closing line
-("We're next testing...") from any merge.
+Every line is MEASURED unless it says "suggestions" / "if we read it right". POST 1 is up (owner, 09-11), so this posts as-is.
+Owner 09-11: yes, a later post will mention the temporary workaround mod once it is live. Draft that as POST 3 when the listing exists.
 
 ---
 

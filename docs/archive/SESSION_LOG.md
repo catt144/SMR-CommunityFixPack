@@ -8,6 +8,25 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-11 - FR-1 owner answers (smr-bugfixpack-5d): LAST round for Astra; handoff consumed
+
+tags: FR-1 temp-mod owner-answers
+
+Owner: the 01:47:24 launch was a setup launch (marker set before the mod was enabled); Steam for sure, possibly Paradox; dev
+POST 1 was posted; a later dev post mentions the mod once it is live. Directive relayed verbatim into `FR1_TEMP_MOD_R3.md` §2b: this is
+the LAST round, an emergency workaround until the hotfix, and Reflections Off is acceptable. `HANDOFF_FR1_CACHE_V2_2026-09-11.md`
+consumed: §1–§2 done; §3/§4 live in FINDINGS §9–§11; §5 items have homes (STATE ck144 + DLC_DEEP_CHECK NEXT, FIELD_REPORT_REPLIES,
+FINDINGS unexplained lines, the options report §5 drafts noted in ck145's history). Owner: "why can't we just pak it as is and
+try it?" Yes: ck145 **P1** packs the unchanged v2 probe (Windows Mod Editor), then runs it on the laptop straight into a save.
+Source: a folder holding only `ModContent.fpk` loads as packed, with metadata read from inside the pack, at the same `Mod/<id>/` path
+(1.1.0 `Mod.lua:1733-1747,1771`); an unpacked copy wins at equal version (`:1783`), so it gets moved out first. P1 runs alongside Astra's round.
+Owner then: "build it in a directory and I pak it in the mod editor". This departs from the 09-11 "Astra builds" rule, and was done
+at the owner's ask. Built `SMR_FR1TempWorkaround` (`C:\Dev\SMR-FR1-TempMod-2026-09-11\`, outside git): the probe's Q2 path with
+no marker and no reload; gates PC/d3d12/NVIDIA 4318/403908+33006; mounts even with SSR On (warns); the 18 no-op records are byte-copies
+of Astra's audited Noop set. Pack Mod packs every file under the mod minus `ignore_files` (default .git/.svn/Source/SourceData;
+`GedModEditor.lua:713-730`, `Mod.lua:257`). Desk harness (Astra's mocks + the real DlcMountFolder): 21/21. Staged into the
+Windows Mods folder; P1 rewritten for it; Astra R3 brief HELD (re-fire = audit).
+
 ## 2026-09-11 - FR-1 ck145 RULED (smr-bugfixpack-5d): a separate temporary workaround mod; Astra round 3 briefed
 
 tags: FR-1 scope decision temp-mod

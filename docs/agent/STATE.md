@@ -26,8 +26,8 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   `WORKFLOW.md:407`, VOID since 09-09). ⛔ Kit verdicts are PREDICTIONS until then; still FAIL/ERROR by name:
   `C47OpenFarmSeedBufferShape` (Herbs 100→50), retired `LanderCargoRatchet`/`DroneUnreachableForever`/`AutoExportPriority`.
 - ⏭ NEXT: FR-1 cache v2 READ 09-11 (FINDINGS §11): Q2's no-reload overlay LOADS worlds on 580 (no-op 18×, 36 FULL, 0 faults);
-  R2 reverses it; C2 valid. ck145 RULED: separate TEMPORARY mod, no repo → Astra `prompts/FR1_TEMP_MOD_R3.md`; dev POST 2 drafted. Asks:
-  `prompts/HANDOFF_FR1_CACHE_V2_2026-09-11.md` §2/§5; then desk `prompts/DLC_DEEP_CHECK.md` (shape: `HUNT_AUDIT.md` §8).
+  R2 reverses it; C2 valid. ck145: TEMPORARY mod BUILT (5d, owner ask; `C:\Dev\SMR-FR1-TempMod-2026-09-11`); owner P1 pack+bench owed; dev POST 1 up, 2 ready.
+  Then desk `prompts/DLC_DEEP_CHECK.md` (shape: `HUNT_AUDIT.md` §8).
   FR-1 options `reports/FR1_OPTIONS_2026-09-10.md`; EF-088 cache, EF-089 mod timing; dev reply POSTED. Owner: ck144 (v7 checks + sounds thread).
   vanillahunt CLOSED 09-10 (99): instruments SOUND WITH STATED GAPS — 1,281 table-level hunks in 368 rowed hand files listed by
   no instrument (§1.4); 12 P2s re-derived: 6 hold, 5 weakened, **C80 REFUTED**; **C82** filed by the audit (Incident reactors stay
