@@ -1,11 +1,18 @@
-# BUILD — the migration audit's code actions: repair F59, then verify-or-drop F60
+# 01 · BUILD (opus) — the migration audit's code actions: repair F59, then build F60's retirement
 
-Paste into a fresh session (any model; the owner picks — this is a BUILD, so Claude per the 09-11 routing).
-Written **2026-09-11** by `smr-bugfixpack-cb`. **Staleness anchor: HEAD was `33b9f8e`.**
+**Link 1 of 2 in the `migrationfix` mini chain** (map: `migrationfix/README.md`). Written **2026-09-11** by
+`smr-bugfixpack-cb`. **Staleness anchor: HEAD was `33b9f8e`.**
 Start with `git pull` + `git log --oneline -15`; the records win over every specific below.
 ⚠️ **Keep a live todo list from your first tool call** — the owner reads it to decide when to step in.
 
-> ⚖️ **OWNER, 2026-09-11: ship tonight.** ⚖️ **ck151 (e) RULED: 1.0.7 stays frozen** — no new legacy build.
+> ⚖️ **OWNER, 2026-09-11: ship tonight, as a mini chain — Opus builds, Fable audits after.**
+> ⚖️ **ck151 (e) RULED: 1.0.7 stays frozen** — no new legacy build.
+
+> 🔗 **YOU ARE THE EXECUTOR, NOT THE CERTIFIER.** `02_AUDIT_fable.md` is an adversarial backward QA with fresh
+> context that trusts nothing you write, and **the owner's upload happens AFTER it, not between**. That ordering
+> is what makes "build from the report as-is" safe: a refuted build costs a revert, not a shipped defect. So
+> **build, record, and hand over — do not grade your own work**, and do not soften a finding to make the set look
+> complete. Your close-out feeds link 02 (see "Handoff" at the foot of this file).
 
 ## ⛔ READ THIS FIRST — the audit does NOT contain seven fixes
 
@@ -34,6 +41,18 @@ If the owner expected seven fixes, say this in one line and carry on — the job
    therefore DOES collide with H-10 — see item B's own gate.
 2. **ck151 (a)/(d) is ruled, or you default and say so.** The recommendation on the checklist is *repair, not
    retire* for F59. If unruled, build the repair and note the default in one line of the commit body.
+
+## ⛔ "Build it as Astra wrote it" holds for F60 — NOT for F59
+
+The owner's instruction is to build from the audit's report as-is. That is correct for **F60**, whose retirement
+is exactly what the report proposes, and link 02 checks it after.
+
+**It is NOT correct for F59, and this is measured, not an opinion.** The report proposes an *expedition-home
+exclusion*. That fixes A1 below and **does nothing at all for A2** — a second harmful caller the report never
+saw, desk-controlled 8/8 in `tools/desk_f59_interact.py`, reachable by an ordinary player action, and present on
+both game branches since the module was written. Building the report's shape as-is would ship a fix that leaves
+the more reachable of the two harms in place. **So: build F59 against the dossier below (`bugs/F59.md`, last two
+sections), which is the report PLUS the independent re-derivation that found A2.**
 
 ## A · Repair F59 — the committed deliverable
 
@@ -83,17 +102,24 @@ IS the operation, and wrong when it is a MIDDLE step of a larger one that still 
 not evidence. The unbuilt candidate inside `desk_f59_expedition.py` (`candidate=True`) is an **idea, not a
 design**: it only covers A1.
 
-## B · F60 retirement — VERIFY FIRST, and it must NOT block A
+## B · F60 retirement — build it as the report proposes, and SHOW YOUR TRACE
 
-Report §7 recommends retiring `Fix_DomeFreeSpaceMismatch`. **That verdict is single-sourced from the audit and
-nobody has checked it.** A REMOVE verdict needs the replacement traced (house rule): name the vanilla body that
-now does the job, name every residual the module still changes, and grep where any vanished name went — a rename
-reads as "gone" and has nearly retired a live fix before.
+Report §7 recommends retiring `Fix_DomeFreeSpaceMismatch`. **Build that.** The verdict is single-sourced from the
+audit and nobody has checked it — which is precisely what link 02 is for, so do not re-audit it yourself and do
+not stall the night on it.
 
-**Gate:** removing a module is an H-10 change (`items.lua` + `metadata.lua` `code` list rebuilt by `SaveDef`) and
-collides with the owner's uncommitted v8 pack. If that lane is not clear, **ship A alone tonight and leave B**.
-**If the trace does not hold cleanly, ship A alone and say why.** Do not bundle an unverified removal into a
-release to make the set look complete.
+**What you must produce alongside the removal, because link 02 will be checking exactly this** (house rule: a
+REMOVE verdict needs the replacement traced): name the vanilla body that now does the job, name every residual
+the module still changes, and grep where any vanished name went — a rename reads as "gone" and has nearly
+retired a live fix before. Write the trace into `bugs/F60.md` as claims link 02 can falsify, not as a summary.
+
+**Two hard gates, and both stop B without touching A:**
+1. **H-10 / release lane.** Removing a module rebuilds `items.lua` + `metadata.lua`'s `code` list via `SaveDef`,
+   which collides head-on with the owner's uncommitted v8 pack. If that lane is not clear, **ship A alone and
+   leave B for the next cycle.**
+2. **If the trace collapses in your own hands** — the replacement is not there, or the module still does
+   something live — **stop, ship A alone, and say why.** Do not bundle a removal you cannot trace into a release
+   to make the set look complete. Link 02 is a check, not a safety net you can lean on.
 
 ## Ship checklist (post-launch is patch-note maintenance, NOT the pre-release gate — owner ruling)
 
@@ -117,3 +143,21 @@ can settle. Hand it to the owner with the build; it needs no expedition and no w
 4. **2/2 and the evicted colonist standing homeless = repaired. 3/2 = still broken.**
 
 Then one boot with an `applied` log line, per the post-release rule.
+
+## Handoff — what link 02 needs from you (self-consuming queue)
+
+Append a **HANDOFF** section to `migrationfix/README.md` in your close-out commit, then `git rm` **this file**
+(`01_BUILD_opus.md`) in the same commit — the chain consumes its own prompts. The handoff carries, in this order:
+
+1. **Disagreements first.** Anything in Astra's report you found wrong, stale or unsupported WHILE building —
+   including "I could not build B's trace". Say it plainly; link 02 starts from your disagreements.
+2. **What you built**, per item, as claims link 02 can falsify — not a summary. For A: the guard's shape, and the
+   per-caller answer for all 11 call sites. For B: the replacement trace.
+3. **What you did NOT do and why** — skipped items by NAME, never a total.
+4. **Every command whose output a fresh session would need to re-read**, with its result (harness pass counts,
+   `doccheck --emit-counts`, `bodycheck`, `parsecheck`).
+5. **The one thing you are least sure of.** The executor is the wrong person to certify their own rewrites —
+   naming your weakest point is worth more to link 02 than a clean bill of health.
+
+⛔ **Do not stamp a playtest status word.** `tested-attended` is the sitting's. ⛔ **Do not upload, and do not
+tell the owner it is ready to upload** — the upload gate is AFTER link 02.

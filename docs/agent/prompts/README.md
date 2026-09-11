@@ -26,7 +26,7 @@
 | prompt | state |
 |---|---|
 | `C88_PREFAB_BUILD.md` | **LIVE (09-11)**: build the Building-Codes-vs-prefabs fix the PDX dev asked us to carry; gated on the release lane + checklist 150 (b); deletes itself |
-| `MIGRATION_FIXES_BUILD.md` | **LIVE (09-11)**: the migration audit's only two code actions — repair F59 (verified twice, committed deliverable) and verify-or-drop F60's retirement; states plainly that the other six modules are claim changes, not fixes; deletes itself |
+| `migrationfix/` | **LIVE (09-11)**: 2-link mini chain — `01_BUILD_opus.md` repairs F59 + builds F60's retirement, `02_AUDIT_fable.md` is the terminal QA that grades the build AND surface-sweeps Astra's eight verdicts, and holds the upload gate. Map + handoff: `migrationfix/README.md`. Self-consuming |
 | `DLC_DEEP_CHECK.md` | desk NEXT, after the fix pack is stable |
 | `HOTFIX2_SITTING.md` | closed 09-09; kept for the recipes the owed v7 sitting uses |
 | `SELFCHECK_PILOT.md` | rides the owed v7 sitting's boot |
