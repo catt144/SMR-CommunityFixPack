@@ -8,6 +8,33 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-11 - F119 + C86 built and desk-verified; attended boot owed (Codex)
+
+tags: F119 C86 trade-rockets wildfire exploration orbital-probes build desk-harness
+
+The owner fired `BUILD_F119_C86.md` with F119 due today; C86 was allowed to ride only after F119 was staged. The game
+was closed, the worktree began clean, and every target/caller was re-read against 1.1.0.403908 before code.
+
+- **F119** `Fix_TradeRocketFuelRefresh` (`2c68bb1`): a post-wrapper refreshes only the exact shipped
+  `UniversalTradeRocket` in `CmdLoad` after a fuel-cost change; a selective `LoadGame` pass refreshes a pre-stuck fuel
+  request. The inheritor/recursive-dispatch gate held. `desk_f119_trade_fuel.py`: **11/11** — vanilla reproduced DROP
+  `unloading`/supply 0 and RISE `loading`/demand 0; the module sized 20,000 supply / 10,000 demand, the selective heal
+  fired once, the healthy heal zero times, and the player path retained one vanilla refresh.
+- **C86** `Fix_ScanDowngrade` (`5ca9a0f`): a layer-2 pre-wrapper rejects only known downward scan-status transitions on
+  exact shipped `MapSector` objects. Every caller was audited; no legitimate downgrade was found. The developer **Scan
+  Map** cheat is additive by name and loses no capability when deep sectors stay deep. `desk_c86_scan_downgrade.py`:
+  **7/7** — vanilla deep→scanned reproduced; the module preserved deep, kept both upward transitions, delegated a
+  foreign subclass, and declined schema drift.
+- H-10 held in `items.lua` and `metadata.lua`; version fields were untouched. `parsecheck`, `bodycheck`, and `doccheck`
+  GREEN; stale-probe sweep 0 hits. Build state: 47 modules / 48 Code files / 94 TestKit probes / 119 F + 12 D + 87 C.
+- Checklist **149** carries the one-boot applied-line bar for both modules and a source-traced throwaway Trade-rocket
+  callback leg. Outbox counts 48→49→50. Statuses remain F119 `filed`, C86 `cand`: nothing ran in the game and no real
+  stuck save was healed. The next action is the owner's attended check, then `perma/RELEASE.md`; no upload ran here.
+- Agent roster at close contained only this session, so the requested live message to `smr-bugfixpack-24` had no target;
+  both Beta-candidate dispositions are instead recorded in the release outbox and checklist 149 for the fixtoggles chain.
+
+---
+
 ## 2026-09-11 - Lakes lead reopened on the owner's pushback → C87 (smr-bugfixpack-0d)
 
 tags: field-reports lakes C87 pushback

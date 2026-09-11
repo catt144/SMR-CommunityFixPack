@@ -42,6 +42,17 @@ player surface bumps it by one on release.
   play)** pending checklist 149's attended boot/callback check. A desk-simulated
   heal is not evidence that a real stuck save heals.
 
+### Pending — C86 Advanced Orbital Probe scan downgrade
+
+- **C86 · `Fix_ScanDowngrade`** (`5ca9a0f`) — an Advanced Orbital Probe fired
+  without Adapted Probes can change an already deep-scanned neighbouring sector
+  back to “Scanned,” inviting a pointless repeat deep scan. The staged repair
+  makes the three shipped scan statuses monotonic while preserving equal,
+  upward, unknown and foreign-subclass calls. Count 49 → 50.
+- **Status:** `cand`; every `MapSector:Scan` caller re-read on 1.1.0.403908,
+  **7/7 desk demands held**, not exercised in the game. **Beta candidate
+  (untested in play)** pending checklist 149's applied-line boot.
+
 ---
 
 ## Released — history, newest first (cleared here by RELEASE.md)

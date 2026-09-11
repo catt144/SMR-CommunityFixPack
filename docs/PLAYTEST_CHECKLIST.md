@@ -34,10 +34,12 @@ completed tests move whole to
 > **What is staged:** `Fix_TradeRocketFuelRefresh` (`2c68bb1`) refreshes an
 > Earth-sent Trade rocket's fuel supply/demand request when its fuel cost changes
 > on the pad, and performs one selective refresh of a pre-stuck Trade rocket when
-> a save loads. The desk harness reproduces vanilla's dead DROP and RISE requests
-> from the shipped bodies and holds **11/11** demands with the module. That is a
-> desk result only; F119 remains `filed` and this check must not be described as
-> proving the soft-lock fixed.
+> a save loads. `Fix_ScanDowngrade` (`5ca9a0f`) rides the same update: it keeps an
+> Advanced Orbital Probe from changing an already deep-scanned neighbour back to
+> “Scanned.” The desk harnesses reproduce both vanilla defects from shipped
+> bodies and hold **11/11** F119 plus **7/7** C86 demands. Those are desk results
+> only; F119 remains `filed`, C86 remains `cand`, and this check must not be
+> described as proving either repair in play.
 >
 > **Before the boot — agent, hard gate:** with the game fully closed, run the
 > stale-probe sweep below from the fix-pack repo. Zero hits is clean. Any hit must
@@ -55,8 +57,9 @@ completed tests move whole to
 >    enabled. Load any disposable 1.1.0 colony; do not load a 1.0.7 campaign.
 > 2. **First-screen witness:** the colony map appears and time can be paused and
 >    resumed. If the load stops earlier, this leg did not run.
-> 3. Read the current `Mars.exe-*.log`. Required line:
->    `[CommunityFixPack] TradeRocketFuelRefresh: applied`. Also record the total
+> 3. Read the current `Mars.exe-*.log`. Required lines:
+>    `[CommunityFixPack] TradeRocketFuelRefresh: applied` and
+>    `[CommunityFixPack] ScanDowngrade: applied`. Also record the total
 >    applied/inactive/error line and zero new Lua errors. An absent module line,
 >    any inactive reason, or any Lua error is a stop, not a partial pass.
 >
