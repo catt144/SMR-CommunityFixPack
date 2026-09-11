@@ -1,7 +1,6 @@
-2026-09-11 migration audit desk receipt. No game run.
-TEMPORARY sweep: zero matches in pack and TestKit Code directories before desk runs.
+Migration audit final desk receipt, 2026-09-11. No engine or colony execution.
 
-> python tools/desk_migration_cluster.py
+$ python tools/desk_migration_cluster.py
 ==============================================================================
 Migration cluster: controlled branch evidence, not in-play reproduction
 ==============================================================================
@@ -19,16 +18,18 @@ lua: Lua 5.5 | lupa 2.8
   PASS  F54 working-hub control admitted
   PASS  F54 self-lifting suspension control admitted
   PASS  F60 vanilla tally/gate exclude unpowered home, assignment accepts it
+  PASS  F60 vanilla applicant housing estimate excludes the unpowered home
   PASS  F60 patched tally counts 3 but migration gate still rejects
+  PASS  F60 patch reports all 3 applicants housed while arrival space gate rejects home
   PASS  F60 powered-home control agrees on tally and gate
 
 ==============================================================================
-14 of 14 demands held
+16 of 16 demands held
 ALL DEMANDS HELD
 
-exit=0
+Exit: 0
 
-> python tools/desk_f59_expedition.py
+$ python tools/desk_f59_expedition.py
 ==============================================================================
 F59 expedition hold: same shipped sequence, module off/on controls
 ==============================================================================
@@ -40,14 +41,66 @@ lua: Lua 5.5 | lupa 2.8
   PASS  negative control: F59 preserves crew home when no neighbour competes
   PASS  current F58 exemption cannot protect a hold F59 prevented from being created
   PASS  F58 daily sweep does not restore the missing hold
+  PASS  original F59 gap: vanilla ordinary departure leaves an eligible neighbour homeless beside a free bed
+  PASS  original-gap control: a later housing update takes that same bed
+  PASS  current F59 still supplies immediate notification for ordinary departures
+  PASS  UNBUILT IDEA: exact expedition-home exclusion preserves the hold with competing neighbour
+  PASS  UNBUILT IDEA: ordinary vacancy still offered immediately
+  PASS  UNBUILT IDEA: unrelated expedition pointer does not suppress this vacancy
 
 ==============================================================================
-6 of 6 demands held
+12 of 12 demands held
 ALL DEMANDS HELD
 
-exit=0
+Exit: 0
 
-> python tools/desk_f117_argshape.py
+$ python tools/desk_shelter_reflex.py
+==============================================================================
+F73 shelter wrapper: branch and stand-down controls only
+==============================================================================
+lua: Lua 5.5 | lupa 2.8
+
+  PASS  module-absent control calls original Idle and supplies no Rest command
+  PASS  half-budget vacuum condition sends Rest and does not call original
+  PASS  below half budget: original Idle runs, no shelter command
+  PASS  no residence: original Idle runs, no shelter command
+  PASS  nonworking residence: original Idle runs, no shelter command
+  PASS  transport task present: original Idle runs, no shelter command
+  PASS  dying colonist: original Idle runs, no shelter command
+  PASS  no outside timer: original Idle runs, no shelter command
+  PASS  retry throttle: original Idle runs, no shelter command
+  PASS  breathable atmosphere: original Idle runs, no shelter command
+
+==============================================================================
+10 of 10 demands held
+ALL DEMANDS HELD
+
+Exit: 0
+
+$ python tools/desk_migration_observations.py
+==============================================================================
+Migration observations: supplied topology, no in-play reproduction
+==============================================================================
+lua: Lua 5.5 | lupa 2.8
+
+  PASS  F62 ordinary A-B-C chain: network includes C, service candidates do not
+  PASS  F62 Passage Hub connects its spokes pairwise and offers C service to A
+  PASS  F61 selector has no own/destination quarantine gate with eligible-service fixture
+  PASS  F61/F62 service-passage switch still excludes remote service
+  PASS  F80 real builder produces a three-station loop from paired-connector fixture
+  PASS  F80 loop seam C->A uses stride -2 and omits B on that departure track
+  PASS  F80 ordinary forward direction covers both remaining loop stations
+  PASS  F80 opposite track from C covers B and A: union can hide per-track omission
+  PASS  F80 passenger flag correctly truncates a cargo-only edge
+  PASS  F80 open-line control visits both destinations without loop seam
+
+==============================================================================
+10 of 10 demands held
+ALL DEMANDS HELD
+
+Exit: 0
+
+$ python tools/desk_f117_argshape.py
 ==============================================================================
 F117 desk falsifier -- shipped bodies verbatim, our probe verbatim, real Lua
 ==============================================================================
@@ -61,7 +114,7 @@ lua: Lua 5.5 | lupa 2.8
   PASS  [1.0.7] no decline logged  -- []
 
   PASS  [1.1.0] the OLD call ChooseDome(self.traits, ...) THROWS  -- [string "<python>"]:4: attempt to index a nil value (local 'obj_attributes')
-  PASS  [1.1.0] the NEW call ChooseDome(colonist, ...) does not throw  -- <Lua table at 0x000001FE4D03D940>
+  PASS  [1.1.0] the NEW call ChooseDome(colonist, ...) does not throw  -- <Lua table at 0x000001AA1E9DCE40>
   PASS  [1.0.7] passing the COLONIST does not throw (so no instrument would see it)  -- 100.0
   PASS  [1.0.7] ... but MIS-SCORES: correct=110.0, with-colonist=100.0  -- ck118's 'pass self on both branches' really is silently wrong
 
@@ -74,9 +127,9 @@ lua: Lua 5.5 | lupa 2.8
 ALL DEMANDS HELD -- the probe fires on 1.1.0, does not fire on 1.0.7,
 both defects it guards against are real, and UNKNOWN is not guessed.
 
-exit=0
+Exit: 0
 
-> python tools/desk_c83_arrivals.py
+$ python tools/desk_c83_arrivals.py
 ==============================================================================
 C83 arrivals -- welcoming fallback and composition control
 ==============================================================================
@@ -108,9 +161,9 @@ extracted Lua/_GameUtils.lua:382-501 (120 lines)
 12 of 12 demands held
 ALL C83 DEMANDS HELD -- negative control discriminates; all seven prompt cases, D03 composition, one-shot logging and elevator pairing pass.
 
-exit=0
+Exit: 0
 
-> python tools/bodycheck.py --module ShuttleTransportCache
+$ python tools/bodycheck.py --module ShuttleTransportCache
 ==============================================================================
 2 manifest row(s) over 1 stamped module(s); 0 module(s) carry no manifest.
   2 OK
@@ -118,9 +171,9 @@ A GREEN here is NOT a clearance: it sees a changed body, a vanished defect
 and a vanished target. It does NOT see semantics moving under a wrapper
 (class c), and it sees nothing at all for a NO-DEFECT or NO-MANIFEST module.
 
-exit=0
+Exit: 0
 
-> python tools/bodycheck.py --module VacuumWalks
+$ python tools/bodycheck.py --module VacuumWalks
 ==============================================================================
 2 manifest row(s) over 1 stamped module(s); 0 module(s) carry no manifest.
   2 OK
@@ -128,9 +181,9 @@ A GREEN here is NOT a clearance: it sees a changed body, a vanished defect
 and a vanished target. It does NOT see semantics moving under a wrapper
 (class c), and it sees nothing at all for a NO-DEFECT or NO-MANIFEST module.
 
-exit=0
+Exit: 0
 
-> python tools/bodycheck.py --module ArrivalDeaths
+$ python tools/bodycheck.py --module ArrivalDeaths
 ==============================================================================
 4 manifest row(s) over 1 stamped module(s); 0 module(s) carry no manifest.
   4 OK
@@ -138,9 +191,9 @@ A GREEN here is NOT a clearance: it sees a changed body, a vanished defect
 and a vanished target. It does NOT see semantics moving under a wrapper
 (class c), and it sees nothing at all for a NO-DEFECT or NO-MANIFEST module.
 
-exit=0
+Exit: 0
 
-> python tools/bodycheck.py --module ShuttleHubOffAvailable
+$ python tools/bodycheck.py --module ShuttleHubOffAvailable
 ==============================================================================
 2 manifest row(s) over 1 stamped module(s); 0 module(s) carry no manifest.
   2 OK
@@ -148,9 +201,9 @@ A GREEN here is NOT a clearance: it sees a changed body, a vanished defect
 and a vanished target. It does NOT see semantics moving under a wrapper
 (class c), and it sees nothing at all for a NO-DEFECT or NO-MANIFEST module.
 
-exit=0
+Exit: 0
 
-> python tools/bodycheck.py --module StaleReservations
+$ python tools/bodycheck.py --module StaleReservations
 ==============================================================================
 3 manifest row(s) over 1 stamped module(s); 0 module(s) carry no manifest.
   3 OK
@@ -158,9 +211,9 @@ A GREEN here is NOT a clearance: it sees a changed body, a vanished defect
 and a vanished target. It does NOT see semantics moving under a wrapper
 (class c), and it sees nothing at all for a NO-DEFECT or NO-MANIFEST module.
 
-exit=0
+Exit: 0
 
-> python tools/bodycheck.py --module FreedHousingNotice
+$ python tools/bodycheck.py --module FreedHousingNotice
 ==============================================================================
 2 manifest row(s) over 1 stamped module(s); 0 module(s) carry no manifest.
   2 OK
@@ -168,4 +221,24 @@ A GREEN here is NOT a clearance: it sees a changed body, a vanished defect
 and a vanished target. It does NOT see semantics moving under a wrapper
 (class c), and it sees nothing at all for a NO-DEFECT or NO-MANIFEST module.
 
-exit=0
+Exit: 0
+
+$ python tools/bodycheck.py --module DomeFreeSpaceMismatch
+==============================================================================
+4 manifest row(s) over 1 stamped module(s); 0 module(s) carry no manifest.
+  4 OK
+A GREEN here is NOT a clearance: it sees a changed body, a vanished defect
+and a vanished target. It does NOT see semantics moving under a wrapper
+(class c), and it sees nothing at all for a NO-DEFECT or NO-MANIFEST module.
+
+Exit: 0
+
+$ python tools/bodycheck.py --module ShelterReflex
+==============================================================================
+2 manifest row(s) over 1 stamped module(s); 0 module(s) carry no manifest.
+  2 OK
+A GREEN here is NOT a clearance: it sees a changed body, a vanished defect
+and a vanished target. It does NOT see semantics moving under a wrapper
+(class c), and it sees nothing at all for a NO-DEFECT or NO-MANIFEST module.
+
+Exit: 0

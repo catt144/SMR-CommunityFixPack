@@ -26,7 +26,6 @@
 | prompt | state |
 |---|---|
 | `C88_PREFAB_BUILD.md` | **LIVE (09-11)**: build the Building-Codes-vs-prefabs fix the PDX dev asked us to carry; gated on the release lane + checklist 150 (b); deletes itself |
-| `MIGRATION_CLUSTER_CHECK.md` | **STOPPED (09-11), ck151**: F59 expedition-home harm desk-controlled; partial dev report + progress recorded; resume after disposition, delete only on completion |
 | `DLC_DEEP_CHECK.md` | desk NEXT, after the fix pack is stable |
 | `HOTFIX2_SITTING.md` | closed 09-09; kept for the recipes the owed v7 sitting uses |
 | `SELFCHECK_PILOT.md` | rides the owed v7 sitting's boot |

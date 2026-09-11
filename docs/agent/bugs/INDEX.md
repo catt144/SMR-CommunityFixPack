@@ -72,9 +72,9 @@ the row order below is the old index table's own. Generated from the front matte
 | 57 | F57 | Drone/transport minors bundle | fixed* | P3 | med | [F57.md](F57.md) |
 | 58 | F58 | Invisible residence reservations never expire | fixed* | P1 | high | [F58.md](F58.md) |
 | 59 | F59 | Freed housing notification — HARMFUL expedition-home loss on 1.1.0 (desk-controlled; ck151) | fixed* | P2 | med | [F59.md](F59.md) |
-| 60 | F60 | Dome tally/assignment mismatch; 1.1.0 migration gate bypasses our fix — removal candidate | fixed | P2 | med | [F60.md](F60.md) |
+| 60 | F60 | Dome tally override bypassed by migration gate; retirement recommended, applicant estimates affected | fixed | P2 | med | [F60.md](F60.md) |
 | 61 | F61 | Home dome's migration toggle blocks outbound shopping | wontfix | P1 | med+ | [F61.md](F61.md) |
-| 62 | F62 | Services reach 1 passage hop only, never trains | wontfix | P2 | high | [F62.md](F62.md) |
+| 62 | F62 | Services use neighbouring domes, including shared Passage Hub spokes; never trains | wontfix | P2 | high | [F62.md](F62.md) |
 | 63 | F63 | Universities invisible to emigration (no students) | wontfix | P2 | high | [F63.md](F63.md) |
 | 64 | D01 | Rockets don't auto-refuel/auto-export rare metals | opt-in | dsgn | high | [D01.md](D01.md) |
 | 65 | D02 | Dismissed "not working" warnings re-nag every 4 game h | tested | dsgn | med | [D02.md](D02.md) |
@@ -97,7 +97,7 @@ the row order below is the old index table's own. Generated from the front matte
 | 75 | F70 | Edit Payload silently refills from policy template | tested | P2 | med+ | [F70.md](F70.md) |
 | 76 | F71 | Auto-export fills capacity alphabetically (waste rock) | tested | P2 | med | [F71.md](F71.md) |
 | 77 | F72 | "No available landers" while a lander sits on the pad | tested | P2 | med | [F72.md](F72.md) |
-| 78 | F73 | Asteroid colonists idle outdoors; no shelter reflex | tested | P1 | med+ | [F73.md](F73.md) |
+| 78 | F73 | Shelter reflex: working-home wrapper remains; organic benefit unverified on 1.1.0 | tested | P1 | med+ | [F73.md](F73.md) |
 | 79 | F74 | RC Transports can be ordered onto trade/refugee rockets | tested | P2 | high | [F74.md](F74.md) |
 | 80 | F75 | Last Transmission storage opinions inert; Oxygen reads Power | fixed | P2 | high | [F75.md](F75.md) |
 | 81 | F76 | Depot resource picker renders off-cursor, unclickable | closed | P1 | high | [F76.md](F76.md) |

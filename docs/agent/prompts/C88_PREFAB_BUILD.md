@@ -80,7 +80,7 @@ same way, which the owner must know before this ships.
 a kit probe, the C88 entry update, the release-outbox entry, and a checklist item.
 **OUT:** ⛔ the release lane (`items.lua`/`metadata.lua` while uncommitted, `RELEASE_OUTBOX.md` edits that
 collide with a close in progress), the version number (H-02 — an agent NEVER sets it and NEVER opens the Mod
-Editor), FR-1, the migration cluster (`MIGRATION_CLUSTER_CHECK.md`), and the repeal-leak question beyond FILING
+Editor), FR-1, the migration cluster (`reports/MIGRATION_DEV_REPORT.md`), and the repeal-leak question beyond FILING
 it. Anything else interesting: **file it, do not fix it.**
 
 ## 3 · Build it

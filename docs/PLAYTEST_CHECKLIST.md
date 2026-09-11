@@ -29,17 +29,20 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
-### 2026-09-11 — 151: migration audit stopped: our immediate housing notification can cost expedition crews their reserved homes
+### 2026-09-11 — 151: migration audit complete: repair F59, consider retiring F60, choose developer sections and game checks
 
 > **[F59](agent/bugs/F59.md), desk-controlled, not yet reproduced in play.** At boarding, the game frees a crew member's
 > bed and then reserves it for their return. Our notification can give that bed to a homeless neighbour between those
-> steps. Same shipped sequence: vanilla keeps the hold; our module loses it. All six controls held. The existing F58
-> expedition exemption cannot protect a hold that was never created. **No fix or release file was changed.**
+> steps. Same shipped sequence: vanilla keeps the hold; our module loses it. The ordinary vacancy gap still exists,
+> so **repair is recommended, not retirement**. All 12 desk controls held, including an unbuilt idea that excludes
+> the departing expedition home while keeping ordinary notifications. F58 cannot protect a hold never created.
+> **No fix or release file was changed.** The owner authorized completion of checks and findings after the stop.
 >
 > **Decisions:** (a) prioritize repairing F59 while preserving its ordinary vacancy notification (recommended), or
-> choose temporary disable/removal; (b) which completed sections of the
-> [partial developer report](agent/reports/MIGRATION_DEV_REPORT.md) may be sent — recommendation: hold the full report
-> until the audit resumes, and disclose the F59 finding with its desk-only limit if useful; (c) which checks should
+> choose temporary disable/removal, and retire F60's obsolete tally override (recommended); (b) which sections of the
+> [completed developer report](agent/reports/MIGRATION_DEV_REPORT.md) may be sent — recommendation: share the scoped
+> mechanisms and C83 witness, identify F59/F60 as our maintenance findings, and give F80's per-track evidence as a
+> candidate explanation, not a solved incident; (c) which checks should
 > join owed sitting **144 a**. F52 passage/F54 hub/C83 arrival checks are cheap only if that loaded 1.1.0 fixture already
 > has their layouts; F59 needs full housing, a competing homeless neighbour and a housed expedition crew member.
 > Building those conditions from scratch is expensive. The agent supplies the numbered A/B recipes from the report.
@@ -48,11 +51,13 @@ completed tests move whole to
 > 1.1.0 colony meeting the chosen recipe. Back up its autosaves before loading a copy. F59's measure is at boarding;
 > it does not require waiting for the crew to return. No playtest status is granted by the desk results.
 >
-> **Other decisions to retain:** F51's cache is stale but its old permanent-homelessness claim is not established on
-> 1.1.0. F60 remains a removal candidate; its tally/gate mismatch now has a desk control, not a measured player impact.
-> F60/F73 final reviews, declined entries and F80's current-body handoff remain unfinished under the brief's explicit
-> harmful-module stop rule. Resume `agent/prompts/MIGRATION_CLUSTER_CHECK.md` from its linked progress list after
-> the F59 disposition. **151 claimed in session before writing; ListAgents exposed no peer recipients.**
+> **Other findings:** F60 changes applicant housing estimates without repairing the migration/birth gate. F51's
+> stale cache no longer proves permanent homelessness; F58/F73 still lack current organic benefit evidence.
+> F61's rewritten selector omits old quarantine checks; F62's neighbours now include shared Passage Hub spokes.
+> Treat those as developer policy observations. F80 has a controlled loop-boundary omission; a game loop fixture is
+> expensive, and its relationship to the old waiting incident is unproved. The report supplies the exact capture.
+> The one-off audit brief is consumed. **151 remains the single decision item; no implementation or game run approved
+> by the instruction to continue checking.**
 
 ### 2026-09-11 — 150: the Paradox developer answered in the Building Codes thread. **Three decisions: (a) what to tell them about how we find bugs, (b) the prefab fix's shape, (c) retire the farm-oxygen fix?** Nothing here needs the keyboard.
 

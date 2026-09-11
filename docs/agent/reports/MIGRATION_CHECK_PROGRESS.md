@@ -16,10 +16,12 @@ Only this session is visible in ListAgents; release files are excluded.
 - DONE — S2/4: ShuttleHubOffAvailable STILL NEEDED; off/on/suspension controls held.
 - DONE — S2/5: StaleReservations PARTIAL; ordinary waits expire, residual organic lifetime unproved.
 - DONE — S2/6: FreedHousingNotice HARMFUL; 6/6 expedition controls held, mandatory stop.
-- DEFERRED AT STOP — S2/7: DomeFreeSpaceMismatch; tally control held, final review/bodycheck owed.
-- DEFERRED AT STOP — S2/8: ShelterReflex; body read, final verdict/bodycheck owed.
-- PARTIAL AT STOP — S3: reviewed findings have recipes/limits; full set still owed.
-- DEFERRED AT STOP — S4: historical entries read; current service/train review owed.
+- DONE — F59 follow-through: original vacancy gap + exact expedition-home exclusion controlled; 12/12, idea unbuilt.
+- DONE — S2/7: PARTIAL; migration/birth gate unrepaired, applicant warning also reads modified tally; retirement recommended.
+- DONE — S2/8: PARTIAL; wrapper 10/10 controls, valid working residence required; no organic 1.1.0 coverage.
+- DONE — S3: numbered recipes, fixture costs and vacuity checks; no reliable organic recipe flagged for F51/F58/F73.
+- DONE — S4/1: cluster is adjacency, not transitive network; shared Passage Hub spokes ARE neighbours. F61 selector gates changed; F63/F79 declined decisions retained.
+- DONE — S4/2: F80 real route builder + enumerator loop-seam omission; per-track capture corrects old union-list falsifier, no July causation claim.
 - DONE FOR STOP — S5: partial developer report with explicit evidence limits; not sent.
 - DONE FOR STOP — S6: F51/F58/F59/F60 corrections and owner checklist 151 filed.
 - DONE — Close: doccheck GREEN; evidence/report committed and pushed as 40a0c6b; unfinished brief retained.
@@ -29,9 +31,15 @@ TEMPORARY probe sweep in both Code directories to return zero.
 
 Desk preflight: TEMPORARY sweep returned zero in both Code directories (2026-09-11).
 
-Resume only after owner F59 disposition (checklist 151). No fix built. The brief remains live.
+Resumed 2026-09-11 at owner's instruction: "continue with your checks and write up
+any findings, or ideas you have about it." This authorizes completing the audit
+and recording repair options; it does not request implementation or a game run.
+Checklist 151 remains the single decision item. The brief is consumed when the
+report and entry/decision updates are complete.
 
-Execution stopped; no task remains in progress while awaiting decision 151.
+- DONE — Finish documents: report/entries/checklist updated, superseded handoff pointers refreshed; one-off brief consumed.
+- DONE — Verification: six desk suites 71/71 demands; eight bodychecks 21/21 pins; TEMPORARY sweep zero.
+- IN PROGRESS — Close: doccheck/regeneration, explicit-path commit and push.
 
 Final readback caught failed intermediate replacements caused by PowerShell stdin
 encoding. This list was reconciled against the recorded reads and controls at

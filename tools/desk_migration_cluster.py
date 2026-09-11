@@ -124,6 +124,8 @@ def main():
         ('Lua/Buildings/Dome.lua', r'^function Dome:RefreshFreeLivingSpaces\('),
         ('Lua/Buildings/Community.lua', r'^function Community:HasAnyFreeLivingSpace\('),
         ('Lua/Buildings/Community.lua', r'^function Community:HasFreeLivingSpaceFor\('),
+        ('Lua/Buildings/Community.lua', r'^function Community:GetFreeLivingSpace\('),
+        ('Lua/Buildings/RocketUtilities.lua', r'^function GetAvailableResidencesFor\('),
         ('Lua/Buildings/Residence.lua', r'^function ChooseResidence\('),
     ]:
         shipped(rt, rel, pat)
@@ -136,14 +138,24 @@ def main():
       dome.labels={Residence={home}}
       dome.HasAnyFreeLivingSpace=Community.HasAnyFreeLivingSpace
       colonist={dome=dome}
+      dome.GetFreeLivingSpace=Community.GetFreeLivingSpace
+      dome.RefreshFreeLivingSpaces=Dome.RefreshFreeLivingSpaces
+      applicants={{{traits={}}},{{traits={}}},{{traits={}}}}
+      housing_city={labels={Community={dome}}}
+      ApplicantResidenceFilter=function() return "Everyone" end
+      sorted_pairs=pairs -- only one applicant group in this fixture
       Dome.RefreshFreeLivingSpaces(dome)
     ''')
     bench.check('F60 vanilla tally/gate exclude unpowered home, assignment accepts it',
                 rt.eval('dome.free_spaces.inclusive == 0 and not Community.HasFreeLivingSpaceFor(dome,colonist) and ChooseResidence(colonist,{home}) == home'))
+    bench.check('F60 vanilla applicant housing estimate excludes the unpowered home',
+                rt.eval('GetAvailableResidencesFor(applicants,3,housing_city) == 0'))
     module(rt, 'DomeFreeSpaceMismatch')
     rt.execute('Dome.RefreshFreeLivingSpaces(dome)')
     bench.check('F60 patched tally counts 3 but migration gate still rejects',
                 rt.eval('dome.free_spaces.inclusive == 3 and not Community.HasFreeLivingSpaceFor(dome,colonist)'))
+    bench.check('F60 patch reports all 3 applicants housed while arrival space gate rejects home',
+                rt.eval('GetAvailableResidencesFor(applicants,3,housing_city) == 3 and not Community.HasFreeLivingSpaceFor(dome,colonist)'))
     rt.execute('home.working=true; g_ResidenceVersion=2; Dome.RefreshFreeLivingSpaces(dome)')
     bench.check('F60 powered-home control agrees on tally and gate',
                 rt.eval('dome.free_spaces.inclusive == 3 and Community.HasFreeLivingSpaceFor(dome,colonist)'))

@@ -58,20 +58,14 @@ which is fully briefed.
 - The Steam BBCode and Paradox paste-in styling: done? The owner was pasting on 09-11.
 
 **Fix pack — from `smr-bugfixpack-e6` (2026-09-11, the PDX dev's reply):**
-- ⛔ **STOPPED, not finished — `prompts/MIGRATION_CLUSTER_CHECK.md` (Codex/Astra, fired at `18fd4ce`).** It stopped under
-  the brief's own §5 harm condition and its banner claims: **F59's vacancy notification can take an expedition crew
-  member's bed before vanilla reserves it** — 6/6 desk controls held, **no in-play reproduction**, so this is a
-  DESK-CONTROLLED CLAIM, not a confirmed harm; it is the same shape as hotfix 2's F-2. Astra filed owner decision
-  **151** (checklist + a STATE line). ⛔ Do not start a second run and do not delete the brief: resume from
-  `reports/MIGRATION_CHECK_PROGRESS.md` + `reports/MIGRATION_DEV_REPORT.md`. Done: all seven S1 reads and S2 through
-  F59. Remaining: F60/F73, S4, the report. No fix was changed.
-  ✅ **Astra COMMITTED its work** — `40a0c6b` (entries `F51`/`F58`/`F59`/`F60` + regenerated `bugs/INDEX.md`,
-  checklist **151**, one STATE line, `reports/MIGRATION_DEV_REPORT.md` 388 lines, `MIGRATION_DESK_RESULTS.txt`,
-  `MIGRATION_CHECK_PROGRESS.md`, `tools/desk_migration_cluster.py`, `tools/desk_f59_expedition.py`) and `767f26e`
-  (progress close). ⛔ **Read those two commits before acting on any of it.** A Claude session must **verify both
-  halves of the F59 claim from the primary artefacts before relaying it anywhere** — a peer's finding is a claim,
-  and this one would change a shipped module. ⚠️ Astra's STATE line put STATE further over its warn — measure it,
-  never quote a stored number.
+- **Migration audit COMPLETE 09-11 after owner-authorized resumption.** One-off brief consumed; report
+  `reports/MIGRATION_DEV_REPORT.md`, receipt `MIGRATION_DESK_RESULTS.txt`, progress `MIGRATION_CHECK_PROGRESS.md`.
+  **151**: F59 original gap persists; repair recommended after desk-controlled expedition harm, 12/12 including an
+  unbuilt exclusion idea. F60 retirement recommended; F80 loop-boundary per-track omission desk-controlled but not
+  tied to July's incident. Service/quarantine observations qualified. No fix changed or game launched.
+  Initial stop findings are in `40a0c6b` / `767f26e`; completion supersedes their incomplete-audit status.
+  A Claude build session must verify F59 from primary artefacts before implementation or relaying the claim.
+  Developer sharing and tests remain owner choices in 151; STATE size warning must be measured, not quoted from history.
 - **`prompts/C88_PREFAB_BUILD.md` — READY, not started. ⚖️ Owner ruling 09-11: this build goes to a CLAUDE session,
   not Astra** (hunts → Astra, builds → Claude). Gated on (1) the release lane clearing (H-10 needs an `items.lua`
   entry, and `items.lua`/`metadata.lua` are the owner's uncommitted v8 pack) and (2) checklist 150 (b).
