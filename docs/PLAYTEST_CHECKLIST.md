@@ -29,6 +29,88 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### 2026-09-11 — 149: F119's build is staged; one short attended check is the only release gate. **Action: boot once for the applied line, then use the throwaway Trade-rocket route below if you have a 1.1.0 colony handy. The upload remains a separate owner action.**
+
+> **What is staged:** `Fix_TradeRocketFuelRefresh` (`2c68bb1`) refreshes an
+> Earth-sent Trade rocket's fuel supply/demand request when its fuel cost changes
+> on the pad, and performs one selective refresh of a pre-stuck Trade rocket when
+> a save loads. The desk harness reproduces vanilla's dead DROP and RISE requests
+> from the shipped bodies and holds **11/11** demands with the module. That is a
+> desk result only; F119 remains `filed` and this check must not be described as
+> proving the soft-lock fixed.
+>
+> **Before the boot — agent, hard gate:** with the game fully closed, run the
+> stale-probe sweep below from the fix-pack repo. Zero hits is clean. Any hit must
+> be named and cleared before a result is recorded. Also confirm there is no
+> packed copy staged beside the live junction (H-09). If a copy of a campaign is
+> used, pre-copy **every** autosave first (H-06).
+>
+> ```text
+> grep -rln "TEMPORARY" Code/ ../SMR-BugFixPack-TestKit/Code/
+> ```
+>
+> **Leg A — the post-launch bar (one boot, any 1.1.0 colony):**
+>
+> 1. Fully close the game, then start it normally with Relaunched Fix Pack
+>    enabled. Load any disposable 1.1.0 colony; do not load a 1.0.7 campaign.
+> 2. **First-screen witness:** the colony map appears and time can be paused and
+>    resumed. If the load stops earlier, this leg did not run.
+> 3. Read the current `Mars.exe-*.log`. Required line:
+>    `[CommunityFixPack] TradeRocketFuelRefresh: applied`. Also record the total
+>    applied/inactive/error line and zero new Lua errors. An absent module line,
+>    any inactive reason, or any Lua error is a stop, not a partial pass.
+>
+> **Leg B — the live callback, only if the throwaway route is convenient:** the
+> route is the shipped `PlaceAndFlyRocketTo` seam
+> (`UniversalRocket.lua:3962-3969`) used by both Trade-rocket actions
+> (`SA_Gameplay.lua:2851-2861`; `ClassDef-Effects.lua:215-226`). It creates the
+> same exact class and `Trade` type as Wildfire, but it does **not** recreate the
+> mystery or a real stuck save.
+>
+> 1. Pause the disposable colony. Open the console and paste the following whole
+>    line. `[NEVER RUN]`
+>
+>    ```lua
+>    SMRF119Rocket=PlaceAndFlyRocketTo("UniversalTradeRocket",{departure_loc=MarsScreenLandingSpots.Earth,arrival_loc=MarsScreenLandingSpots.OurColony,custom_id="SMRF119Check",custom_flight_time_mars=1,cargo={Food={class="Food",amount=0,requested=100000}},RocketType=g_RocketTypes.Trade,name="F119 Trade Rocket"},MainMap)
+>    ```
+>
+> 2. Resume until **F119 Trade Rocket** is waiting in orbit. Select its pin, click
+>    **Land Rocket**, choose a clear landing site inside drone range, and pause as
+>    soon as it lands.
+> 3. **First-screen witness:** the selected object is visibly the named Trade
+>    rocket on the ground and its panel shows cargo activity. A rocket that never
+>    reaches the ground leaves this leg unrun.
+> 4. With that rocket still selected, paste this whole read-only identity line.
+>    It must print exact class `UniversalTradeRocket`, type `TradeRocket`, command
+>    `CmdLoad`, and a fuel entry. `[NEVER RUN]`
+>
+>    ```lua
+>    SMRF119Rocket=SelectedObj local r=SMRF119Rocket local e=r and r.cargo and r.cargo[r.FuelResource] print("F119 ID",r and r.class,r and r.RocketType,r and r.command,"fuel",e and e.amount,"need",r and r:GetFuelResourceRequest()) FlushLogFile()
+>    ```
+>
+> 5. Only if all four identity fields are present, paste this whole line while
+>    still paused. It lowers the throwaway rocket's base fuel cost by 20, prints
+>    the synchronous request change, then restores the old base in the same call
+>    and prints the clean state. It creates no global label modifier. `[NEVER RUN]`
+>
+>    ```lua
+>    local r=SMRF119Rocket local e=r.cargo[r.FuelResource] local b=r.base_FuelResourceAmount or r.FuelResourceAmount r:SetBase("FuelResourceAmount",b-20*const.ResourceScale) print("F119 DROP","fuel",e.amount,"need",r:GetFuelResourceRequest(),"supply",r.supply[r.FuelResource]:GetTargetAmount(),"demand",r.demand[r.FuelResource]:GetTargetAmount()) r:SetBase("FuelResourceAmount",b) print("F119 RESTORED","fuel",e.amount,"need",r:GetFuelResourceRequest(),"supply",r.supply[r.FuelResource]:GetTargetAmount(),"demand",r.demand[r.FuelResource]:GetTargetAmount()) FlushLogFile()
+>    ```
+>
+> 6. Read those two lines from the log, not the console history. The DROP line
+>    must show fuel exceeding need by exactly `20000`, supply `20000`, demand `0`.
+>    RESTORED must show fuel equal to need with both request targets `0`. Then
+>    resume briefly: the rocket may unload its Food and leave normally. Do not
+>    save this throwaway colony.
+>
+> **What makes Leg B vacuous:** any missing Leg-A applied line; a selected object
+> that is not exact class `UniversalTradeRocket`; a command other than `CmdLoad`;
+> a fuel base too small to change by 20; a rocket that never lands; or a packed
+> folder beside the live junction. Record such a case as **UNRUN**, never as a
+> pass. Leg A alone permits only “applies cleanly on 1.1.0”; Leg B permits only
+> “the live callback re-sized this staged Trade rocket.” Neither proves the
+> Wildfire mystery or a real pre-stuck save.
+
 ### 2026-09-11 — 148: an on/off button for every fix — the chain is written and ready to start. **Decisions: (a) how console players reach the buttons, (b) whether this counts as a "major overhaul" for the release gate, (c) accept that the first prompt re-checks how the chain was cut. Recommendations: (a) our own panel, proven on a controller before it is built out, falling back to the game's built-in Mod Options page; (b) no extra sweep — the chain's own final audit and its two sittings are the gate; (c) yes.**
 
 > **What you asked for (09-11):** a button per fix so players can switch any fix off — prompted by the ~1.5 days in which

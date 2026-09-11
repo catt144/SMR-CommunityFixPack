@@ -28,7 +28,19 @@ player surface bumps it by one on release.
 
 ## Pending — goes out with the next upload
 
-*(empty — cleared 2026-09-10 after the owner confirmed v7 live on both stores)*
+### Pending — F119 Trade-rocket fuel request refresh
+
+- **F119 · `Fix_TradeRocketFuelRefresh`** (`2c68bb1`) — an Earth-sent Trade
+  rocket can keep its landing-time fuel requests after the live trip cost
+  changes, leaving surplus fuel nothing unloads or a shortfall no drone fills.
+  The staged repair refreshes those requests on the pad and selectively
+  refreshes a pre-stuck Trade rocket when a save loads. Player-facing example:
+  the Wildfire cure rocket can otherwise wait forever and stop the mystery.
+  Count 48 → 49.
+- **Status:** `filed`; source re-verified on 1.1.0.403908, **11/11 desk demands
+  held**, not reproduced or exercised in the game. **Beta candidate (untested in
+  play)** pending checklist 149's attended boot/callback check. A desk-simulated
+  heal is not evidence that a real stuck save heals.
 
 ---
 
