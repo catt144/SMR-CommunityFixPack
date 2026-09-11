@@ -8,6 +8,29 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-10/11 - FR-1 orchestration (smr-bugfixpack-bd): M1/M2 bench, cache route briefed; v2 LOADS WORLDS (owner, unread)
+
+tags: FR-1 linux proton nvidia shader cache bench orchestration lookback
+
+Walked the owner through Astra's options report; the owner chose M1+M2. Desk: M1 dead (DLC revisions are build stamps 33006, and neither
+DLC ships a shader cache). M2 bet on SSRFullTile8x8 (the AMD path; REFLECT_FULL tile 8/16 cached). Found and fixed a latent printf
+defect in probe v1 (ModPrint formats the message); probes v2/v3 (v3 = the owner's set-then-reload design). Owner legs A/B/D/E:
+"built while SSR Off" MEASURED; SSR switches REFUTED with the condition sampled; the forced reload rebuilds at boot and crashes on a
+second RAYS program. The owner's "make it think there's something new" idea became the cache route, briefed to Astra
+(`f4e5409`). Astra corrected the fake-DLC unmount (Dlc.lua:410) and my family overclaim, and built a DlcMountFolder overlay. v1 bench:
+the overlay was consumed (no-op in the dump), then N1 died on a debug RAYS record (18 indexed, 6 covered); v2 briefed back to
+Astra on the owner's rule "we orchestrate, Astra builds". Dev reply POSTED by the owner (no response yet); follow-up 1 drafted.
+**Owner, v2 bench (evidence NOT yet read): a world loaded on 580, the Intel save loaded, and a real Windows colony loaded "fully
+functional"** (vanilla + probe; missing TestKit and the fix pack). The leg (Q2 or F2) and R2 are unconfirmed.
+Handoff: `prompts/HANDOFF_FR1_CACHE_V2_2026-09-11.md`.
+**Lookback.** (1) The dump is the witness: SSRFullTile8x8 read CHANGED and held, and did nothing. (2) I built a route
+through Dlc.lua:406-414 with its line-410 unmount on screen: read the whole body before routing through a function. (3) Owner-typed markers
+failed twice (`--fr1-options`, `-fr1-cache-noop`): copy-paste blocks plus a stated first-screen witness. (4) I wrote "whole
+family MEASURED" from two programs; grade by count. (5) Good calls: fail-closed markers turned both typos into harmless
+baselines; same-thread attribution read in every leg; the owner's intuitions (reload, fake DLC) were tested, not argued.
+
+---
+
 ## 2026-09-11 - FR-1 cache probe v2: all 18 RAYS covered; normal-loading treatment ready
 
 tags: FR-1 linux proton nvidia cache shader coverage noreload bench
