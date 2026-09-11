@@ -1,0 +1,357 @@
+{
+  "kind": "MEASURED DESK ONLY; no Linux game executed",
+  "date": "2026-09-10",
+  "game_tree": "1.1.0.403908",
+  "original": {
+    "path": "C:\\Dev\\SMR-FR1-Evidence\\linux-handoff\\primary-candidate\\38121decbc3eee12.dxil",
+    "bytes": 16584,
+    "sha256": "99db88cc6be3f438cc4db63a257f2bd19469009dd2be19773c8bdf65d161cd3c"
+  },
+  "rebuilt": {
+    "path": "C:\\Dev\\SMR-FR1-Options-2026-09-10\\rays-rowmajor.dxil",
+    "bytes": 16016,
+    "sha256": "1c8d4b7a1563cbc1fd87355c85573e1076e5dd08ecb85bb50a387037924304b0"
+  },
+  "compiler": {
+    "path": "C:\\Dev\\SMR-FR1-Options-2026-09-10\\dxc-game\\dxcompiler.dll",
+    "sha256": "75c019e3541980eea8ae661d81998d06f99627e3004c800532475a1c3551c6fb",
+    "version": "1.9(4946-9efbb6c3)(1.8.2505.28) - 1.8.2505.28 (9efbb6c32)"
+  },
+  "argv": [
+    "C:\\Dev\\SMR-FR1-Options-2026-09-10\\dxc-game\\dxc.exe",
+    "-T",
+    "cs_6_6",
+    "-E",
+    "ComputeShaderMain",
+    "-D",
+    "HLSL=400",
+    "-D",
+    "REFLECT_RAYS",
+    "-D",
+    "COMPILE_TIME_ROOT_SIGNATURE=\"\"",
+    "-Vd",
+    "-Qstrip_reflect",
+    "-Qstrip_debug",
+    "-HV",
+    "2021",
+    "-Fo",
+    "C:\\Dev\\SMR-FR1-Options-2026-09-10\\rays-rowmajor.dxil",
+    "-Fc",
+    "C:\\Dev\\SMR-FR1-Options-2026-09-10\\rays-rowmajor.ll",
+    "C:\\Dev\\SMR-FR1-Evidence\\shaders-1.1.0-extracted\\Reflections.fx",
+    "-Zpr"
+  ],
+  "chunks": [
+    {
+      "name": "SFI0",
+      "original_bytes": 8,
+      "rebuilt_bytes": 8,
+      "equal": true,
+      "original_sha256": "8191cd68605104a22123bf9c69bf764bd7afb3053626cdb1eec15185dc20f1d8",
+      "rebuilt_sha256": "8191cd68605104a22123bf9c69bf764bd7afb3053626cdb1eec15185dc20f1d8"
+    },
+    {
+      "name": "ISG1",
+      "original_bytes": 8,
+      "rebuilt_bytes": 8,
+      "equal": true,
+      "original_sha256": "7b742c398b1a841a160d67298c4e11857acc1db71c3f90509722ca74733cb814",
+      "rebuilt_sha256": "7b742c398b1a841a160d67298c4e11857acc1db71c3f90509722ca74733cb814"
+    },
+    {
+      "name": "OSG1",
+      "original_bytes": 8,
+      "rebuilt_bytes": 8,
+      "equal": true,
+      "original_sha256": "7b742c398b1a841a160d67298c4e11857acc1db71c3f90509722ca74733cb814",
+      "rebuilt_sha256": "7b742c398b1a841a160d67298c4e11857acc1db71c3f90509722ca74733cb814"
+    },
+    {
+      "name": "PSV0",
+      "original_bytes": 452,
+      "rebuilt_bytes": 452,
+      "equal": true,
+      "original_sha256": "d4425f142693d2fcfc654ab3df93ea94e141105a120d95269285ff5a4527573c",
+      "rebuilt_sha256": "d4425f142693d2fcfc654ab3df93ea94e141105a120d95269285ff5a4527573c"
+    },
+    {
+      "name": "RTS0",
+      "original_bytes": 536,
+      "rebuilt_bytes": 24,
+      "equal": false,
+      "original_sha256": "3ff5c9b85551833d481d786ea535d6135089532ddee3f53e3a3f09a8a2aa44f3",
+      "rebuilt_sha256": "7193aee7311de338790a9be36ee95ce63f9679f38df5340d5fdcf9a236a790d5"
+    },
+    {
+      "name": "ILDN",
+      "original_bytes": 44,
+      "rebuilt_bytes": null,
+      "equal": false,
+      "original_sha256": "2bb5f197fb6c5409b264c1b5945d2c2d74219b06d51f45a3e2b6d959b0f6f9be",
+      "rebuilt_sha256": null
+    },
+    {
+      "name": "HASH",
+      "original_bytes": 20,
+      "rebuilt_bytes": 20,
+      "equal": true,
+      "original_sha256": "0dbc0429b710b41b6d6599ad1bff38367a991add2227835ffdbee8c7e9dd79ef",
+      "rebuilt_sha256": "0dbc0429b710b41b6d6599ad1bff38367a991add2227835ffdbee8c7e9dd79ef"
+    },
+    {
+      "name": "DXIL",
+      "original_bytes": 15380,
+      "rebuilt_bytes": 15380,
+      "equal": true,
+      "original_sha256": "01581a930d8ea2dd363deee40c5072fa330dd88d2866c6d71fd8d0c8e515036f",
+      "rebuilt_sha256": "01581a930d8ea2dd363deee40c5072fa330dd88d2866c6d71fd8d0c8e515036f"
+    }
+  ],
+  "cache": {
+    "files": 6455,
+    "hits": [
+      {
+        "file": "14281071190732923386",
+        "offset": 8549,
+        "length": 25133,
+        "sha256": "03f7807dc5570447a32d981a39fb620ecc139ddeb24500eb9cbe55541808bb11"
+      }
+    ],
+    "candidate_sha256": "99db88cc6be3f438cc4db63a257f2bd19469009dd2be19773c8bdf65d161cd3c"
+  },
+  "spv": {
+    "bytes": 49964,
+    "sha256": "0fc95945ef099363aade85e3d0e5fbbfa7ea4b671191d12d8fda989227e3cac4",
+    "version_hex": "0x10300"
+  },
+  "probe_tests": [
+    {
+      "case": "inventory",
+      "writes": 0,
+      "result": "PASS; original arguments/returns preserved"
+    },
+    {
+      "case": "bool",
+      "writes": 3,
+      "result": "PASS; original arguments/returns preserved"
+    },
+    {
+      "case": "number",
+      "writes": 3,
+      "result": "PASS; original arguments/returns preserved"
+    },
+    {
+      "case": "bad-name",
+      "writes": 0,
+      "result": "PASS; original arguments/returns preserved"
+    },
+    {
+      "case": "bad-value",
+      "writes": 0,
+      "result": "PASS; original arguments/returns preserved"
+    },
+    {
+      "case": "bad-suffix",
+      "writes": 0,
+      "result": "PASS; original arguments/returns preserved"
+    },
+    {
+      "case": "non-pc",
+      "writes": 0,
+      "result": "PASS; original arguments/returns preserved"
+    }
+  ],
+  "limits": [
+    "Shader identity proven, faulting-pipeline attribution unproven.",
+    "Cache contains exact bytecode; actual source-vs-cache choice in owner process unproven.",
+    "Probe checks use mocked Lua APIs, not the game.",
+    "Rebuilt DXBC has deliberately different root signature and is NOT an installable override."
+  ],
+  "nrd_audit": {
+    "resource_files": 31,
+    "outputs": 215,
+    "all_outputs_RWTexture2D": true
+  },
+  "native_name_scan": [
+    [
+      "0xf47e70",
+      "FFXReflectionDenoiser"
+    ],
+    [
+      "0xf483d8",
+      "NRDReflectionDenoiser"
+    ],
+    [
+      "0xf484c0",
+      "hr.SSRDenoiserMode"
+    ],
+    [
+      "0xf484d8",
+      "hr.SSREnableValidation"
+    ],
+    [
+      "0xf48518",
+      "ReflectionDenoiser"
+    ],
+    [
+      "0xf48530",
+      "hrReflectionDenoiser"
+    ],
+    [
+      "0xfaa290",
+      "hr.SSRSkipPixels"
+    ],
+    [
+      "0xfaa2a8",
+      "hr.SSRTraceHiZ"
+    ],
+    [
+      "0xfaa2b8",
+      "hr.SSRZThicknessCoef"
+    ],
+    [
+      "0xfaa2d0",
+      "hr.SSRZThickness"
+    ],
+    [
+      "0xfaa2e8",
+      "hr.EnableScreenSpaceReflections"
+    ],
+    [
+      "0xfaa308",
+      "hr.SSRForceHyperbolicDepth"
+    ],
+    [
+      "0xfaa328",
+      "hr.SSRDownsampleCoef"
+    ],
+    [
+      "0xfaa340",
+      "hr.SSRThresholdNormalDegrees"
+    ],
+    [
+      "0xfaa360",
+      "hr.SSRThresholdParentDistance"
+    ],
+    [
+      "0xfaa380",
+      "hr.SSREnvLodBias"
+    ],
+    [
+      "0xfaa398",
+      "hr.SSRFullTile8x8"
+    ],
+    [
+      "0xfaa3b0",
+      "hr.SSRPassBehindRoughness"
+    ],
+    [
+      "0xfaa3d0",
+      "hr.SSRPassBehindPixels"
+    ],
+    [
+      "0xfaa3e8",
+      "hr.SSRPassBehindRoughnessForMultiplier"
+    ],
+    [
+      "0xfaa410",
+      "hr.SSRPassBehindMultiplierForRoughness"
+    ],
+    [
+      "0xfaa438",
+      "ReflectionDenoising.fx"
+    ],
+    [
+      "0xfaa450",
+      "ApplyReflections.fx"
+    ],
+    [
+      "0xfaa4a0",
+      "hr.SSRApplyEnvMip0Weight"
+    ],
+    [
+      "0xfaa4c0",
+      "hr.SSRApplyRoughnessMipScale"
+    ],
+    [
+      "0xfaa4e0",
+      "Reflections.fx"
+    ],
+    [
+      "0xfaa4f0",
+      "hr.SSRDebug"
+    ],
+    [
+      "0xfaa500",
+      "REFLECT_FULL"
+    ],
+    [
+      "0xfaa510",
+      "REFLECT_RAYS"
+    ],
+    [
+      "0xfaa5c8",
+      "luaReflectionDenoiser"
+    ],
+    [
+      "0xfaa5e0",
+      "ReflectionDenoiserResetHistory"
+    ],
+    [
+      "0xfab368",
+      "hr.ForceShaderCacheReload"
+    ],
+    [
+      "0xfab428",
+      "hr.EnableShaderCompilation"
+    ],
+    [
+      "0xfc2e30",
+      "ShaderCache/"
+    ],
+    [
+      "0xfc2e70",
+      "svnAssets/Bin/win32/ShaderCache/ShaderCache"
+    ],
+    [
+      "0xfc2ef0",
+      "ShaderCache/index.bin"
+    ],
+    [
+      "0xfc2f08",
+      "Packs/ShaderCache"
+    ],
+    [
+      "0xfc2f20",
+      "ShaderCache"
+    ],
+    [
+      "0xfc2f30",
+      "hrShaderCache"
+    ],
+    [
+      "0xfc8b78",
+      "wine_get_version"
+    ],
+    [
+      "0xfc8cc8",
+      "Proton/Wine: %s"
+    ],
+    [
+      "0x10e5eb8",
+      ".?AUFFXReflectionDenoiser@HR@@"
+    ],
+    [
+      "0x10e5ee8",
+      ".?AUReflectionDenoiser@HR@@"
+    ],
+    [
+      "0x10e5f18",
+      ".?AUNRDReflectionDenoiser@HR@@"
+    ]
+  ],
+  "artifact_hashes": {
+    "fr1-options-probe\\Code\\FR1OptionsProbe.lua": "864cf49316f2f734209cb2f0c577711371cfba533aa0f094531d3677374477e9",
+    "pyroveil-fr1-1.1.0.json": "cafd6672977518d8dcd2bf88b6b793c3fd8a3ec5bc0811519b78bf27f32f4711"
+  }
+}

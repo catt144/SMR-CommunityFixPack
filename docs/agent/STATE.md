@@ -25,12 +25,12 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   A3 (F118) · A10 · A5 c2 · A9 c4/c5 · F117's station recipe · the first `RunAll()` on the 94-probe kit (re-stamps
   `WORKFLOW.md:407`, VOID since 09-09). ⛔ Kit verdicts are PREDICTIONS until then; still FAIL/ERROR by name:
   `C47OpenFarmSeedBufferShape` (Herbs 100→50), retired `LanderCargoRatchet`/`DroneUnreachableForever`/`AutoExportPriority`.
-- ⏭ NEXT (owner 09-10): **FR-1 options hunt** `prompts/FR1_OPTIONS_EXPLORE.md` (bench RAN 09-10: NVIDIA 580 NVVM crash building
-  the SSR compute shader `38121decbc3eee12` even with Reflections Off — `reports/FR1_LINUX_FINDINGS_2026-09-10.md`); THEN
-  `prompts/DLC_DEEP_CHECK.md` (shape: `reports/vanillahunt/HUNT_AUDIT.md` §8). Owner: ck144 (a) v6 checks on a v7 boot, (b) Steam sounds thread.
+- ⏭ NEXT desk: `prompts/DLC_DEEP_CHECK.md` (shape: `reports/vanillahunt/HUNT_AUDIT.md` §8).
+  FR-1 options DONE: `reports/FR1_OPTIONS_2026-09-10.md`; shader/cache proof EF-088, mod timing EF-089; next bench + scope ck145.
+  ⛔ Exact faulting-pipeline attribution remains inferred; no new Linux mitigation tested. Owner: ck144 (v7 checks + Steam sounds thread).
   vanillahunt CLOSED 09-10 (99): instruments SOUND WITH STATED GAPS — 1,281 table-level hunks in 368 rowed hand files listed by
   no instrument (§1.4); 12 P2s re-derived: 6 hold, 5 weakened, **C80 REFUTED**; **C82** filed by the audit (Incident reactors stay
-  off); every P2 is a gain/cosmetic except C82/C66/C63; ck142 = hotfix-3 list (rec none). FR-1/2/3 OPEN; FR-1 needs the Linux sitting.
+  off); every P2 is a gain/cosmetic except C82/C66/C63; ck142 = hotfix-3 list (rec none). FR-1/2/3 OPEN; FR-1 next bench is ck145.
 - ⭐ PUBLISHED both portals — `pdx_id` **156049**, `steam_id` **3787202810**, tree `version` **7** (v7, 09-10).
   ⛔ Never re-upload to "fix" a version number — each upload bumps again (H-02). ⛔ Every upload OVERWRITES both
   page bodies from `metadata.lua`; `description` IS the full card (08-24). ✅ v6 auto-fill delivered BOTH pages clean

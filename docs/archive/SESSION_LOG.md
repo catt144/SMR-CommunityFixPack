@@ -8,6 +8,26 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-10 late - FR-1 options: shader identity and packaged cache proved; mitigation bench still owed
+
+tags: FR-1 linux proton nvidia shader cache options mod scope
+
+Executed the one-shot options brief including the late menu-versus-startup-settings
+amendment (1f41d68) and the owner's pure-mod / persistent-config / launch-option ranking.
+Desk rebuild with the game compiler proves the candidate's DXIL identity; decompressed
+cache search corrects the earlier absence/runtime-source claim. Faulting-pipeline
+attribution and the dump gap remain open. Findings, 26 ranked option rows, bench recipes
+and two unposted upstream drafts: `agent/reports/FR1_OPTIONS_2026-09-10.md`.
+Facts EF-088/EF-089; raw desk receipt `archive/fr1-options-desk-2026-09-10.json`.
+Appended correction to the initial findings, preserved the owner bench report.
+Checklist 145 carries the next bench and the pack/separate-mod/advice scope decision.
+External inventory probe + candidate pyroveil JSON prepared in
+`C:\Dev\SMR-FR1-Options-2026-09-10`; seven mocked-Lua probe checks pass, no game run.
+No shipping code, game installation, source archive, evidence, portal or tracker changed.
+Exploration prompt consumed in the delivery commit; next desk task remains DLC_DEEP_CHECK.
+
+---
+
 ## 2026-09-10 night — FR-1: the owner's Linux bench read; crash pinned to one NVIDIA-580 compile of the SSR shader; options hunt handed off (`smr-bugfixpack-f0`, owner on the bench)
 
 tags: FR-1 linux proton nvidia vkd3d shader SSR Reflections.fx film-grain handoff

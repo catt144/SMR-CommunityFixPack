@@ -1,12 +1,12 @@
 <!-- GENERATED — never hand-edit; regenerate with: python tools/doccheck.py --regen -->
 <!-- split_facts.py --write is the one-time MIGRATION from the retired pre-split doc, never a regeneration; verify: python tools/doccheck.py -->
 
-# Engine facts index — 87 facts
+# Engine facts index — 89 facts
 
 One file per top-level bullet of the old `docs/agent/ENGINE_FACTS.md`, in
 source order; ids are stable. `updated` is git's last touch of the fact's
 own lines. `verified` is the first date the fact's TEXT presents as an
-observation (55 of 87 state one) — a mechanical extraction, not an
+observation (57 of 89 state one) — a mechanical extraction, not an
 adjudication: read the fact for what was actually measured, several of
 which carry their own ⚖️ "what is measured and what is not" paragraph.
 The preamble that opened the old file is `_preamble.md`.
@@ -100,4 +100,6 @@ The preamble that opened the old file is `_preamble.md`.
 | EF-085 | ⭐ FPK PARITY RE-PROVEN FOR 1.1.0.403908, AND IT IS PERFECT (MEASURED 2026-09-10, vanillahunt link 01 unit A): every one of the **2373** `Lua/` + `CommonLua/` files and every one of the **2191** `Data/` files in the archived 1.1.0 `ModTools\Src` tree ships **byte-identical** inside the live install's `Packs\Lua.fpk` / `Packs\Data.fpk` — **0 divergent, 0 absent**, against 1.0.7's 2250/2256-with-5-divergences. ⭐ `Lua.fpk` carries the Src layout VERBATIM (2374 exact-path entries) PLUS a 2106-entry FLATTENED ALIAS SET (`Train.lua` beside `Lua/Units/Train.lua`); all 2106 aliases are byte-identical to their exact-path twin, so there is no stale-alias hazard. The one fpk entry with no Src counterpart is `Lua/Config/_LuaRevision.lua` (100 B), which reads `LuaRevision = 403908` / `BuildVersion = '1.1.0.403908'` — an independent control that the extracted pack IS the archived build. `Data.fpk`'s 624 extra entries are assets (482 `ParticleSystemPreset/`, 142 `MapData/`), no Src counterpart by design. DLC ships in its own `DLC\norman.fpk` / `DLC\thomas.fpk`, outside both packs. ⛔ This proves the BYTES MATCH; it does NOT prove the game executes them (`EF-078` stands: trust runtime over source) and it says nothing about `Mars.exe` | 2026-09-10 | 2026-09-10 | 40 | [EF-085.md](EF-085.md) |
 | EF-086 | ⭐ ANIMATION MOMENTS ARE LUA DATA, KEYED BY STATE NAME — and `GetAnim(channel)` returns a state INDEX. `CObject:GetAnimMomentsCount`/`GetAnimMoment`/`IterateMoments` read ONLY `Presets.AnimMetadata[<entity>][<anim name>].Moments` (`CommonLua/Classes/AnimMoment.lua:5-16`, `:35-37`, `:309-331`); there is no fallback to the `.hgacl`, and only 5 entity groups ship presets. Pass `GetStateName(obj:GetAnim(1))`, never the raw index — `preset_group[20]` is nil. MEASURED live 2026-09-10 (C74) | 2026-09-10 | 2026-09-10 | 25 | [EF-086.md](EF-086.md) |
 | EF-087 | At OnMsg.LoadGame, IsValidThread can still accept a persisted cosmetic tracker that is dead by the first post-load read; a safe replace-own-tracker path must replace it, not treat the handle as proof of liveness (C74 attended, 2026-09-10) | 2026-09-10 | 2026-09-10 | 19 | [EF-087.md](EF-087.md) |
+| EF-088 | 1.1.0 shader 38121decbc3eee12 is byte-proven Reflections.fx REFLECT_RAYS and exists verbatim in the packaged cache; faulting-pipeline attribution remains unproved | 2026-09-10 | 2026-09-10 | 29 | [EF-088.md](EF-088.md) |
+| EF-089 | 1.1.0 mod renderer routes: mod code follows InitRenderEngine; hidden hr values require native enumeration; persistent data is not arbitrary startup config; DlcMountFolder is an untested overlay route | 2026-09-10 | 2026-09-10 | 36 | [EF-089.md](EF-089.md) |
 

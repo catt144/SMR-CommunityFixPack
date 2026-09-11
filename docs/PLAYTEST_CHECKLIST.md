@@ -29,6 +29,33 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### 2026-09-10 — 145: FR-1 options are mapped; the next step is a small hidden-settings check.
+
+> **What changed:** the reflections shader is now identified exactly, and it is
+> already in the game's packaged cache. Changing its source alone may therefore
+> do nothing. Your menu-versus-startup-settings lead remains worth testing: there
+> are hidden controls the Reflections menu never touches.
+>
+> **Your preferred order is retained:** (1) a pure mod that prevents the bad
+> shader from being built; (2) a mod that saves a setting for the next launch or
+> world load; (3) a Steam launch option that changes the graphics path. After
+> those come a targeted shader rewrite, a supported driver change, the built-in
+> graphics chip, or the old game branch. No new workaround has passed a Linux test.
+>
+> **Next bench — TAKEABLE WHEN you are at the keyboard:** first collect the
+> prepared read-only settings inventory on your Windows rig; then, when the
+> Linux laptop is back on 580, test one real hidden switch at a time. Recommendation:
+> take that short settings check first. If it finds no usable switch, try the
+> launch-option tests, then the updated version of the existing shader workaround.
+> The probe and exact steps are in [the report, R1/R2](agent/reports/FR1_OPTIONS_2026-09-10.md).
+>
+> **Scope decision:** if a workaround succeeds, should it go in this pack, a
+> separate opt-in mod, or player instructions? Recommendation: a separate opt-in
+> mod if Lua can carry it; player instructions for launch/driver changes. Putting
+> a driver workaround into this pack needs your policy exception: it is not yet
+> a verified defect in the game's shipped Lua. The two upstream drafts are ready
+> for review in the report; neither has been posted.
+
 ### ✅ 2026-09-10 — v7 IS LIVE on both stores (your word). Nothing to decide; three things to tell me when convenient.
 
 > **Read from here:** the Steam page (updated Sep 10 @ 3:59pm, 325.512 KB, "Forty-eight
@@ -367,8 +394,10 @@ Original question, kept as asked: C74, the Rare Metals Extractor's hammer (and t
 >    shader compiler dies building the game's reflections shader at every world load,
 >    even with Reflections Off (driver 595 and the Intel chip work). Film grain and the
 >    extension launch option were tested and ruled out. Summary:
->    `agent/reports/FR1_LINUX_FINDINGS_2026-09-10.md`. Next: an agent explores every
->    workaround, mod-side first (`agent/prompts/FR1_OPTIONS_EXPLORE.md`).
+>    `agent/reports/FR1_LINUX_FINDINGS_2026-09-10.md`. The options exploration is
+>    complete: [report](agent/reports/FR1_OPTIONS_2026-09-10.md), next bench and scope
+>    decision in **145**. Its addendum corrects the earlier cache claim and keeps
+>    exact faulting-pipeline attribution open.
 >
 > **The two controls are both in, so no test is needed from you.** ✅ A new
 > game on 1.1.0 WORKS on your Windows/NVIDIA rig **with DLSS 4 on**: every save

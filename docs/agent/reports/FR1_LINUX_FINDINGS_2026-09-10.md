@@ -108,3 +108,24 @@ and Paradox's recommendation is the driver with no timetable. Unexplained, verba
 - `shaders-1.1.0-extracted/` — all of `Packs/Shaders.fpk` (281 files) via `tools/flpk_extract.py extract()`
 - `tools/spvscan.py` — minimal SPIR-V scanner (`one <file.spv>` / `zip <dump.zip>`)
 - `fr1test-mod/` + `.zip` — the film-grain diagnostic mod (refuted; a template for any Lua bench test)
+
+
+## 6 · 2026-09-10 late — options exploration correction (desk, not another Linux bench)
+
+**Supersedes §3's shader-identity/cache claims:** identity is now **PROVEN**:
+rebuilding 1.1.0 `Reflections.fx REFLECT_RAYS` with the game's dxcompiler and
+row-major matrices produced byte-identical DXIL, PSV0 and HASH chunks. b1/b2
+were traced and NRD's resource macros checked independently. The complete
+original DXBC was also found verbatim in a **decompressed** packaged cache
+entry; the earlier compressed-pack search did not establish absence, and its
+runtime-source-compilation conclusion is **REFUTED**. This does not establish
+which source/cache route that process used. SPIR-V entry is `main`, distinct
+from the DXIL entry `ComputeShaderMain`.
+
+**Attribution remains a STRONG INFERENCE:** parallel dump timing does not prove
+that this is the pipeline whose compile faulted; exact-hash intervention or
+isolated replay remains owed. The ~15.4-second gap is still unexplained.
+No new Linux mitigation was tested. Full evidence, ranked options, unrun
+recipes and two unposted upstream drafts: [options report](FR1_OPTIONS_2026-09-10.md).
+Archived desk receipt: `docs/archive/fr1-options-desk-2026-09-10.json`;
+engine facts EF-088/EF-089; owner bench/scope routing is checklist **145**.
