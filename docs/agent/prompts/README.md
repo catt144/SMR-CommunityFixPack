@@ -26,7 +26,7 @@
 | prompt | state |
 |---|---|
 | `C88_PREFAB_BUILD.md` | **LIVE (09-11)**: build the Building-Codes-vs-prefabs fix the PDX dev asked us to carry; gated on the release lane + checklist 150 (b); deletes itself |
-| `MIGRATION_CLUSTER_CHECK.md` | **LIVE (09-11)**: re-check the 8 colonist-migration fixes against 1.1.0 and write the dev-facing report; deletes itself |
+| `MIGRATION_CLUSTER_CHECK.md` | ⏳ **RUNNING (09-11, Codex/Astra, fired at `18fd4ce`)** — re-check the 8 colonist-migration fixes against 1.1.0 and write the dev-facing report. ⛔ Do NOT start a second run; its live progress is the uncommitted `reports/MIGRATION_CHECK_PROGRESS.md`. Deletes itself |
 | `DLC_DEEP_CHECK.md` | desk NEXT, after the fix pack is stable |
 | `HOTFIX2_SITTING.md` | closed 09-09; kept for the recipes the owed v7 sitting uses |
 | `SELFCHECK_PILOT.md` | rides the owed v7 sitting's boot |

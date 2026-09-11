@@ -57,6 +57,15 @@ which is fully briefed.
 - The dev "CURRENT DEV NOTE" and the "PLAYER REPLY": posted? Ask.
 - The Steam BBCode and Paradox paste-in styling: done? The owner was pasting on 09-11.
 
+**Fix pack — from `smr-bugfixpack-e6` (2026-09-11, the PDX dev's reply):**
+- ⏳ **RUNNING — `prompts/MIGRATION_CLUSTER_CHECK.md` (Codex/Astra, fired at `18fd4ce`).** The eight colonist-migration
+  fixes re-checked against 1.1.0 plus a dev-facing report. ⛔ Never start a second run; Astra is invisible to
+  `ListAgents` and its live progress is the uncommitted `reports/MIGRATION_CHECK_PROGRESS.md`.
+- **`prompts/C88_PREFAB_BUILD.md` — READY, not started.** Gated on (1) the release lane clearing (H-10 needs an
+  `items.lua` entry, and `items.lua`/`metadata.lua` are the owner's uncommitted v8 pack) and (2) checklist 150 (b).
+- **Checklist 150** carries the owner's three decisions: the "where do you collect your bugs" wording, the C88 fix
+  shape, and retiring F37 (1.1.0 closed its leak — the dev was right).
+
 **Fix pack — from `smr-bugfixpack-0d` (newest first):**
 - ⭐ **ck149: the check RAN 09-11 — F119 and C86 are both tested-attended (`smr-bugfixpack-24`). The upload remains**, the
   owner's: `prompts/perma/RELEASE.md` (the outbox holds both entries).
