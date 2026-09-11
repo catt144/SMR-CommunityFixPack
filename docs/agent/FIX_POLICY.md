@@ -30,6 +30,21 @@ Ranked from most to least preferred:
    Always capture at apply time, always call `orig`, always pass through returns.
    If another mod wrapped first, we chain onto theirs — and vice versa.
 
+   **⛔ A POST-HOOK MUST ENUMERATE THE WRAPPED FUNCTION'S CALLERS, NOT ITS
+   CALLEES (rule added 2026-09-11, the F59 lesson).** "Hook one level up so the
+   work runs when the operation is FINISHED" is only true if the wrapped
+   function IS the operation. `Fix_FreedHousingNotice` moved its hook from
+   `Residence:RemoveResident` up to `Colonist:SetResidence` — correctly noting
+   that `SetResidence` is `RemoveResident`'s only caller — and shipped a harm
+   anyway, because `SetResidence` has **11** shipped callers and two of them
+   (`Colonist:EnterTransporter`'s boarding sequence, `Residence:ColonistInteract`'s
+   kick-then-assign) call it as a MIDDLE step and still need the slot it frees.
+   So: list every caller of the method you wrap, and for each one ask **"does
+   this caller keep using the state my hook just published?"** A hook that acts
+   on freed capacity is the dangerous shape — the enclosing operation usually
+   freed it ON PURPOSE, for itself. When a caller does, the hook needs a guard
+   keyed on that caller's own state, not a later cleanup pass.
+
    **4b. Global-function replacement** (its own technique, between 4 and 5 in
    preference; numbered 4b so existing §1.4/§1.5 citations stay valid) —
    assigning `_G[name] = replacement` for an existing global. Works because
