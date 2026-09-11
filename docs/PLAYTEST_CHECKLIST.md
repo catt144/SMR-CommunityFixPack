@@ -38,6 +38,11 @@ completed tests move whole to
 > boot with them on. That covers the one flagged store line (a save loaded straight from launch), so **the store page is ready as
 > written.** You saw nothing wrong with Reflections on, but a bare colony has few reflective surfaces. As you asked, the page now
 > says it loads with Reflections on but isn't properly tested that way and will very likely look glitchy, so Off is **recommended**.
+> ⚠️ **First field report: it did NOT work for a GTX 1070** (Manjaro, Wayland, driver 580.178.04, Proton Hotfix, Reflections Off and
+> Medium). Cause unknown; details in findings §12. **Your quick test, and the first one to do:** on the laptop, move your
+> hand-copied `SMR_FR1TempWorkaround` folder out of the Mods folder, **subscribe to the Workshop item**, and start a New Game. A crash
+> would mean the Steam-delivered copy doesn't work for anyone; a clean load rules that out. The player's log request is drafted in chat.
+>
 > ⭐ **LIVE on both stores, 2026-09-11 (you).** Paradox **158711**, Steam **3799500849**
 > (<https://steamcommunity.com/sharedfiles/filedetails/?id=3799500849>). Steam's public API reads it as **public**, titled right,
 > tagged Other; its description filled itself in as plain text, so paste the Steam BBCode block to style it. The upload wrote the

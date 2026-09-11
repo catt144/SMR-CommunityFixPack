@@ -8,6 +8,15 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-11 - FR-1 temp mod field report 1 (smr-bugfixpack-5d): GTX 1070 still crashes
+
+tags: FR-1 temp-mod field-report
+
+A Workshop comment (GTX 1070 Pascal, Manjaro/Wayland, 580.178.04, Proton Hotfix, Reflections Off and Medium): still crashes on New
+Game. Unattributed. H1: the Workshop-delivered copy doesn't mount (it would hit everyone; P1 used an appdata pack). H2: Pascal faults
+on another shader. H3: the mod didn't activate. The owner's Workshop-subscribe test on the laptop falsifies H1; a player log-request
+reply (the `[FR1 Temp Workaround]` line plus the faulting-thread dump) was drafted in chat. FINDINGS §12, checklist 145.
+
 ## 2026-09-11 - FR-1 dev note + player reply (smr-bugfixpack-5d)
 
 tags: FR-1 dev-reply player-reply

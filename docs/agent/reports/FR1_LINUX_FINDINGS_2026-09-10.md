@@ -365,6 +365,17 @@ ask). It is Q2's path with no marker and no reload. Steps are in checklist 145 P
   description auto-filled as the plain text (3,089 chars, no BBCode). The upload saves bumped `version` to 3 and rewrote
   `items.lua` (`FileName` → `CodeFileName`; the `code` list was kept). The Mods-folder copy is the master; the source copy was
   re-synced from it (22 files identical), and the description still matches the UPLOAD_WORKFLOW Paradox block word for word.
+- **FIELD REPORT 1 (Steam Workshop comment, "Artificial Insanity", read 2026-09-11 from the owner's screenshot), verbatim:** "Didn't
+  work, still crashes on "new game". Game version 1.1.0.403908 / Distro: Manjaro Linux KDE, kernel 6.18.49-1 / Wayland (might be
+  the problem, but X11 isn't "supported" anymore) / NVIDIA GeForce GTX 1070 (Driver 580.178.04) / Intel 6600K CPU (iGPU is disabled
+  due to problems, so NOT hybrid graphics) / Proton Hotfix / Initially had Reflections Medium, but tested again with them turned Off
+  since Medium is the one configuration not mentioned. Still didn't work. Tested after disabling the mod as instructed."
+  **UNATTRIBUTED; three hypotheses that need different fixes.** H1: the **Workshop-delivered** copy does not mount. P1 used an
+  appdata pack; the Steam-delivered path is desk-equivalent only (`Mod.lua:872`, the same `Mod/<id>/` content path), so it would hit
+  every player. H2: **Pascal** (GTX 1070) faults on a different shader (P1/Q2 were Ampere RTX 3070). H3: the mod did not activate
+  (not enabled or restarted, or a gate declined). **Splitters:** the owner subscribes on the laptop with the appdata copy removed
+  (falsifies H1 cheaply); the player's Proton log gives the `[FR1 Temp Workaround]` line (H3) and the dump just before the fault on
+  the faulting thread (H2, identifiable from the log alone by the FNV-1 rule above). The request for the log is drafted for the owner.
 - **Discrepancies, verbatim:** (1) `TEST-RESULT.txt` gives the launch line as `PROTON_LOG=1 %command% -fr1-cache=noop-noreload` (no
   `VKD3D_SHADER_DUMP_PATH`), yet the log holds dump lines, so a dump path was set; the dump files are not in the zip. (2) The old
   probe marker was still on the command line; it is inert (no probe mod def loaded, and the temp mod reads no marker). (3) "World
