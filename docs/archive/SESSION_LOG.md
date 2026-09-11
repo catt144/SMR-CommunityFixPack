@@ -8,6 +8,15 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-11 - FR-1 temp mod LIVE (smr-bugfixpack-5d): Paradox 158711, Steam 3799500849
+
+tags: FR-1 temp-mod published
+
+Owner uploaded to both stores. The ids come from the uploaded metadata.lua (version 3 after the two upload saves). Steam's public
+API shows it public, titled right, tag Other, 164,043 B; the description auto-filled as plain text, so the owner pastes the BBCode
+block. The source copy was re-synced from the Mods folder (now the master); the description still matches the Paradox block.
+Dev reply FOLLOW-UP POST 3 (the mod, with both links) is drafted.
+
 ## 2026-09-11 - FR-1 P1 evidence READ (smr-bugfixpack-5d): the packed temp mod MEASURED working, Reflections High
 
 tags: FR-1 temp-mod P1 packed evidence

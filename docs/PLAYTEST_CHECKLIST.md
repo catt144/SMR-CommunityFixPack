@@ -38,6 +38,12 @@ completed tests move whole to
 > boot with them on. That covers the one flagged store line (a save loaded straight from launch), so **the store page is ready as
 > written.** You saw nothing wrong with Reflections on, but a bare colony has few reflective surfaces. As you asked, the page now
 > says it loads with Reflections on but isn't properly tested that way and will very likely look glitchy, so Off is **recommended**.
+> ⭐ **LIVE on both stores, 2026-09-11 (you).** Paradox **158711**, Steam **3799500849**
+> (<https://steamcommunity.com/sharedfiles/filedetails/?id=3799500849>). Steam's public API reads it as **public**, titled right,
+> tagged Other; its description filled itself in as plain text, so paste the Steam BBCode block to style it. The upload wrote the
+> listing numbers into the mod, and my source copy is re-synced from your Mods folder (that copy is now the master).
+> A short dev post announcing it (with both links) is drafted in `agent/reports/FR1_DEV_REPLY_2026-09-10.md`.
+>
 > ✅ **Your P1 logs are read** (`C:\Dev\Success\fr1-packed-proof.zip`: a New Game with Reflections High). They show the packed
 > mod loaded (`packed from appdata`) and switched on (`ACTIVE`, plus the Reflections-on warning). The game built our stand-in for
 > all 18 crashing shaders and none of the originals, built all 36 other reflection shaders, didn't crash anywhere, and quit cleanly.

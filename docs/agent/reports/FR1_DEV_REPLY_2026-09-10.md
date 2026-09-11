@@ -122,3 +122,25 @@ Suggestions for your side (you know the engine):
 - All 36 REFLECT_FULL variants compile on 580. If we read the Lua right, the game already uses the full-tile path on AMD (hr.SSRFullTile8x8), so that path looks like a workable option for NVIDIA on Linux when reflections are on.
 
 What we haven't shown: that the picture is identical to Reflections Off (we didn't compare), or what happens with Reflections On while the empty shader is in place (we kept it Off). The test mod is a bench tool and isn't published. Happy to share it, the cache records and the logs.
+
+---
+
+## FOLLOW-UP POST 3 — draft 2026-09-11 (the temporary mod is LIVE; owner said yes to mentioning it)
+
+⚠️ If POST 2 is not up yet, post it first. POST 2's last paragraph says "The test mod is a bench tool and isn't published". That is
+still true of the bench probe, but it reads oddly next to this, so either delete that sentence from POST 2 or post both together.
+Every line is MEASURED or a published fact.
+
+---
+
+UPDATE 3 — a temporary workaround mod for players stuck on driver 580
+
+Until there's a fix on your side, we've published a clearly marked temporary workaround for Linux players on NVIDIA driver 580:
+- Steam Workshop: https://steamcommunity.com/sharedfiles/filedetails/?id=3799500849
+- Paradox Mods: https://mods.paradoxplaza.com/mods/158711/Any
+
+It uses the same approach as the test above: at startup it layers the empty compute shader over the 18 REFLECT_RAYS entries in the shader cache. No game files are modified, and nothing is written into saves. It only acts on NVIDIA + D3D12 on build 1.1.0.403908, and it switches itself off after any game update, so it won't linger past your fix. The page tells players to keep Reflections Off and to remove it as soon as you ship a fix.
+
+On our test laptop it loads New Game and existing saves on driver 580. We tested one machine only, and the page says so.
+
+We'd much rather see this fixed properly, and we'll retire the mod the moment it is.

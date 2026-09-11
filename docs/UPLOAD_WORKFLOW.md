@@ -371,6 +371,9 @@ The agent writes the rest down.
 
 ## FR-1 temporary workaround mod: store pages (copy-paste)
 
+⭐ **LIVE since 2026-09-11:** Paradox Mods **158711**, Steam Workshop **3799500849** (public). The copy in your Mods
+folder holds these numbers and is the master; the agent's source copy is synced from it. Any later update goes out from that folder.
+
 **This is a separate mod, not the fix pack:** `SMR_FR1TempWorkaround`, "TEMPORARY - Linux NVIDIA 580 Crash Workaround".
 It sits in your Windows Mods folder; its source copy is in `C:\Dev\SMR-FR1-TempMod-2026-09-11\`. Checklist item **145** has
 the background.

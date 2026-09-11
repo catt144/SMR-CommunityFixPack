@@ -360,6 +360,11 @@ ask). It is Q2's path with no marker and no reload. Steps are in checklist 145 P
   load. `936b11865bd194f2`, `eafb0d16984cf7f7`, `2bfc5215a03eac7e` and `d351fa9ffff99063` are **not among the 228 cached compute
   programs**, so none is one of the 18 RAYS records. They are most likely graphics shaders, UNIDENTIFIED without their bytes, and
   were dumped ~38 s into play on thread 015c. All 5 compiled with no fault.
+- **PUBLISHED 09-11 (owner):** Paradox `pdx_id` 158711, Steam `steam_id` 3799500849. **MEASURED via Steam's public API**
+  (`GetPublishedFileDetails`): result 1, visibility 0 (public), title as built, tag Other, file 164,043 B, created 07:09:48Z. The
+  description auto-filled as the plain text (3,089 chars, no BBCode). The upload saves bumped `version` to 3 and rewrote
+  `items.lua` (`FileName` → `CodeFileName`; the `code` list was kept). The Mods-folder copy is the master; the source copy was
+  re-synced from it (22 files identical), and the description still matches the UPLOAD_WORKFLOW Paradox block word for word.
 - **Discrepancies, verbatim:** (1) `TEST-RESULT.txt` gives the launch line as `PROTON_LOG=1 %command% -fr1-cache=noop-noreload` (no
   `VKD3D_SHADER_DUMP_PATH`), yet the log holds dump lines, so a dump path was set; the dump files are not in the zip. (2) The old
   probe marker was still on the command line; it is inert (no probe mod def loaded, and the temp mod reads no marker). (3) "World
