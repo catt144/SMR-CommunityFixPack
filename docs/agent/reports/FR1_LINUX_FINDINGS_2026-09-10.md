@@ -376,6 +376,9 @@ ask). It is Q2's path with no marker and no reload. Steps are in checklist 145 P
   (not enabled or restarted, or a gate declined). **Splitters:** the owner subscribes on the laptop with the appdata copy removed
   (falsifies H1 cheaply); the player's Proton log gives the `[FR1 Temp Workaround]` line (H3) and the dump just before the fault on
   the faulting thread (H2, identifiable from the log alone by the FNV-1 rule above). The request for the log is drafted for the owner.
+  **H1 FALSIFIED (owner-witnessed, 09-11):** "Launches via steam". The owner subscribed on the laptop with the appdata copy removed,
+  per ck145; this is read as the New Game loading, and the owner was asked to correct it if only the menu was reached. ⇒ The
+  Workshop-delivered copy works on the rig; field report 1 is H2 or H3, pending the player's log.
 - **Discrepancies, verbatim:** (1) `TEST-RESULT.txt` gives the launch line as `PROTON_LOG=1 %command% -fr1-cache=noop-noreload` (no
   `VKD3D_SHADER_DUMP_PATH`), yet the log holds dump lines, so a dump path was set; the dump files are not in the zip. (2) The old
   probe marker was still on the command line; it is inert (no probe mod def loaded, and the temp mod reads no marker). (3) "World

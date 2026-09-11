@@ -16,6 +16,8 @@ A Workshop comment (GTX 1070 Pascal, Manjaro/Wayland, 580.178.04, Proton Hotfix,
 Game. Unattributed. H1: the Workshop-delivered copy doesn't mount (it would hit everyone; P1 used an appdata pack). H2: Pascal faults
 on another shader. H3: the mod didn't activate. The owner's Workshop-subscribe test on the laptop falsifies H1; a player log-request
 reply (the `[FR1 Temp Workaround]` line plus the faulting-thread dump) was drafted in chat. FINDINGS §12, checklist 145.
+Owner, same hour: "Launches via steam". The Workshop-delivered copy works on the laptop ⇒ H1 falsified (owner-witnessed); H2/H3
+wait on the player's log.
 
 ## 2026-09-11 - FR-1 dev note + player reply (smr-bugfixpack-5d)
 

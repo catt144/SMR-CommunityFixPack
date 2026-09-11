@@ -42,6 +42,9 @@ completed tests move whole to
 > Medium). Cause unknown; details in findings §12. **Your quick test, and the first one to do:** on the laptop, move your
 > hand-copied `SMR_FR1TempWorkaround` folder out of the Mods folder, **subscribe to the Workshop item**, and start a New Game. A crash
 > would mean the Steam-delivered copy doesn't work for anyone; a clean load rules that out. The player's log request is drafted in chat.
+> ✅ **Done (you, 09-11): "Launches via steam".** The Steam-delivered copy works on the laptop, so the mod isn't broken for everyone.
+> The GTX 1070 failure is either a different shader crashing on that older card, or the mod not switching on there. The player's
+> two log lines will tell which.
 >
 > ⭐ **LIVE on both stores, 2026-09-11 (you).** Paradox **158711**, Steam **3799500849**
 > (<https://steamcommunity.com/sharedfiles/filedetails/?id=3799500849>). Steam's public API reads it as **public**, titled right,
