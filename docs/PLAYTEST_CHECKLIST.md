@@ -29,6 +29,24 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### 2026-09-11 — 150: the Paradox developer answered in the Building Codes thread. **Three decisions: (a) what to tell them about how we find bugs, (b) the prefab fix's shape, (c) retire the farm-oxygen fix?** Nothing here needs the keyboard.
+
+> Their post (#7, `ivanassen [developer]`): excluding prefabs is wrong and will be fixed in their next patch, so include it
+> in the mod until then. They are merging the pack's fixes into the game, and they couldn't reproduce the farm-oxygen fix.
+> They asked where we collect our bugs. The reply draft is in `FIELD_REPORT_REPLIES.md`, "Reply to the developer".
+>
+> - **(a) The "where do you collect" line.** A: sources only (player reports, reading the game's Lua, testing), plus an
+>   offer of repro steps. B: A plus one line saying we use AI-assisted research and code review. **Recommendation: A**;
+>   B if you want the method named. Both are true; don't reword either toward "all by hand".
+> - **(b) Prefabs ([C88](agent/bugs/C88.md)).** 1: both laws follow their text, so prefab buildings get Lax's +50% and
+>   Strict's −30% like any new building. This matches the developer's words and what they'll ship. 2: repair only
+>   Strict's missing −30%. **Recommendation: 1.** Either way the fix switches itself off once their patch is installed.
+>   Building it is a separate step after you pick.
+> - **(c) Farm oxygen ([F37](agent/bugs/F37.md)).** The developer is right: in 1.1.0 a farm only gives its dome oxygen
+>   while it is working, and destroying or salvaging it turns that off before it leaves the dome, so the old leak can't
+>   happen any more. Our fix is harmless but no longer does anything useful, and the fix list still claims the bug.
+>   **Recommendation: remove it in the next update** (F60 is already a removal candidate).
+
 ### ✅ 2026-09-11 — 149 RAN: F119 and C86 are both TESTED-ATTENDED (you at the keyboard). **Nothing to decide here; the upload is your separate action (`agent/prompts/perma/RELEASE.md`).** The original steps are kept below.
 
 > ✅ **What ran (09-11):** the boot check passed — both modules `applied`, no mod errors. Then more than the

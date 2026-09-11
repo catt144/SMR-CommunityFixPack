@@ -319,6 +319,21 @@ building shipped from Earth). This version reports the code and asks the devs. E
 Optional last line (commits the pack to leaving it alone until the devs rule): *"(We maintain the Relaunched Fix Pack;
 we'll leave this alone in the pack and follow whatever you decide.)"*
 
+**Reply to the developer (ivanassen, post #7 in the same thread) — C88 + F37 + "where do you collect your bugs?"**
+
+Drafted 2026-09-11 by `smr-bugfixpack-e6`. The farm paragraph was re-read on 1.1.0.403908 (F37's 1.1.0 section). The
+owner picks the last paragraph (checklist 150 a) and whether to promise the farm-fix retirement (150 c).
+
+> Thanks, that's great to hear. We'll add a fix for the prefab exemption to the pack and have it step aside by itself once your patch is out.
+>
+> On the farm oxygen one: you're right, and thanks for checking it. Our entry was written against 1.0.7, where a farm applied its oxygen bonus even while it wasn't working, so salvaging one that had never started work left the bonus on the dome. In 1.1.0 the bonus is only applied while the farm is working, and destroying or salvaging it switches working off while it's still attached to the dome (`Building:Destroy`, Building.lua 1560–1570; the dome is only cleared later, from `Done` at 537), so it can't leak any more. We'll retire that fix.
+>
+> **[A]** As for where the bugs come from: player reports mostly (Steam discussions and reviews, the Paradox forums, Reddit, and comments on our mod pages), plus reading the game's shipped Lua directly. We only ship a fix once we've found the cause in the code, and where we can we reproduce it in play with the fix off and on. Every fix on our list cites the file and line it repairs, and I'm happy to send the code reading and repro steps for any you're looking at, e.g. the colonist-migration ones.
+>
+> **[B, add to A]** We use AI-assisted research and code review to sweep the reports and the source; nothing ships on that alone, and each fix is checked against the code and tested.
+
+⚠️ Keep "We'll retire that fix" only if the owner rules 150 (c) yes; otherwise: "We'll look at retiring that fix."
+
 **Lakes, "excavation too deep" (Steam)**
 > Worth sending through the in-game report tool as the developer asked. That warning means the game thinks the lake's bottom would end up below the lowest height the map allows, but your spot is ordinary flat ground, so it shouldn't fire there. The check itself didn't change in the update, so something it reads did; we're checking whether it happens on every 1.1.0 map.
 

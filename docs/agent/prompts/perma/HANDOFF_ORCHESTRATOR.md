@@ -64,8 +64,9 @@ which is fully briefed.
   HELD until the lake check; meteors: skip. The owner decides.
 - **C87 lakes:** the 2-minute in-game check plus the copy-paste `LAKECHK` line in ck147 decides "every 1.1.0 map" vs
   "that player's map". The code is unchanged from 1.0.7, so a new warning means an input changed (C87 §Evidence).
-- **C88 Building Codes:** the owner is posting the code reading + question in the reporter's Steam thread (an active PDX dev).
-  Record the post and any answer in C88; then the owner picks option 1/2/3 (C88 §Waiting on the devs).
+- **C88 Building Codes:** ✅ the dev ANSWERED 09-11 (not intended, fixed in their next patch; include it meanwhile), recorded
+  in C88. The same post: F37 not reproducible, which is TRUE on 1.1.0 (F37's 1.1.0 section, a REMOVE candidate). Checklist
+  **150**: the reply wording, the C88 shape, and F37 removal. Reply draft: `FIELD_REPORT_REPLIES.md`, "Reply to the developer".
 - **C85 clogged:** needs the reporters' answer (which popup reply; save/load with the popup open). The fix sketch is
   hypothesis-agnostic but needs the owner's call on overriding "fix it after the storm".
 - **Checklist numbering collision:** two headings are numbered 144 — the open v7 asks (`### 2026-09-10 — 144: two small asks`)
