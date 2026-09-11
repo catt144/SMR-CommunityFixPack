@@ -284,10 +284,25 @@ one is unchecked, and PS5 has none.
 **Deep scan finds nothing (Steam, "Possible Bug")**
 > Orbital probes only deep-scan once you've researched Adapted Probes. Deep Scanning on its own doesn't change probes; it lets your normal sector scans find deep deposits when a sector is scanned again. So probes launched before Adapted Probes only do a normal scan, which matches what you saw. One small real bug turned up while checking: with the five-sector Advanced Orbital Probe and no Adapted Probes, a neighbouring sector you had already deep-scanned gets marked back to "Scanned", and scanning it again finds nothing new.
 
-**Building codes vs prefabs (Steam, helfisk)**
-> It looks intentional. A building placed from a prefab pays no construction cost, so the law's cost change has nothing to act on, and the game deliberately skips the maintenance change for prefab buildings too. Under Lax that works in your favour (no +50% maintenance); under Strict you miss the −30%, but you never paid the +20% cost either.
+**Building codes vs prefabs (Steam, helfisk; a PDX developer active in the thread) — C88**
 
-⚠️ The law numbers are INHERITED (`LawDef-Efficiency.lua:692`, `:900`, investigator read).
+⚠️ Replaced 2026-09-11: the first draft said "It looks intentional"; the owner disagreed (a prefab is an ordinary
+building shipped from Earth). This version reports the code and asks the devs. Every file/line below was re-read on
+1.1.0.403908 by `smr-bugfixpack-0d`. The owner is posting it (09-11) — record the post and any dev answer in C88.
+
+> Following up on this one — we took a look at the game's Lua (the source that ships in the ModTools folder, game 1.1.0.403908), and it's a deliberate exemption in code, but the law text doesn't mention it.
+>
+> **What the code does:**
+> - Lax and Strict each have two halves: a Concrete/Metals construction-cost change, and a maintenance change that gets applied to a building when its construction completes. Those maintenance halves are `ConstructionComplete` handlers in `Data/LawDef/LawDef-Efficiency.lua` (lines 699–704 for Lax, 907–912 for Strict).
+> - Both handlers begin with `if from_prefab then return end`, so a building deployed from a prefab never gets the maintenance change. The `from_prefab` flag is new in 1.1.0: `ConstructionSite.lua` reads it from the site (line 1729) and passes it along with the `ConstructionComplete` message (line 1786).
+> - The cost half doesn't come into play for prefabs anyway, since they don't pay a construction cost.
+>
+> **What that means in play:** under Strict, prefab buildings don't get the "30% less maintenance" the law promises; under Lax, they avoid the "50% more maintenance". Both law descriptions just say "new buildings", with no exception for prefabs.
+>
+> **Our question:** is excluding prefab buildings intended? If it is, it would help to say so in the two descriptions (e.g. "new buildings, except those deployed from prefabs"). If it isn't, dropping the `from_prefab` check from those two handlers would make prefab buildings follow the law like any other new building — which is what the description, and this report, expect.
+
+Optional last line (commits the pack to leaving it alone until the devs rule): *"(We maintain the Relaunched Fix Pack;
+we'll leave this alone in the pack and follow whatever you decide.)"*
 
 **Lakes, "excavation too deep" (Steam)**
 > Worth sending through the in-game report tool as the developer asked. That warning means the game thinks the lake's bottom would end up below the lowest height the map allows, but your spot is ordinary flat ground, so it shouldn't fire there. The check itself didn't change in the update, so something it reads did; we're checking whether it happens on every 1.1.0 map.

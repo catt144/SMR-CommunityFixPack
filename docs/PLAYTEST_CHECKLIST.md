@@ -165,8 +165,10 @@ completed tests move whole to
 
 ### 2026-09-11 — 147: five more field reports triaged. **Decision: only whether to post the replies. Recommendation: post the clogged-building and deep-scan replies (they help players now); skip meteors.** Nothing here needs the keyboard except the optional 2-minute lake check below.
 
-> - **Building codes vs prefabs:** intended. Prefabs pay no construction cost, and the game deliberately skips the law's
->   maintenance change for them — under Lax that's in the player's favour. Not a bug.
+> - **Building codes vs prefabs:** ⚠️ **re-classified after your pushback (09-11).** The code deliberately skips prefab
+>   buildings (both laws' maintenance handlers exit on a prefab flag new in 1.1.0), but the law text says "new buildings"
+>   with no exception — so under Strict, prefab buildings miss the promised −30%. Candidate [C88](agent/bugs/C88.md),
+>   **waiting on the devs' answer** in the Steam thread; nothing to decide until they reply.
 > - **Clogged after a dust storm:** a one-time story event. Its "we'll fix it after the storm" answer waits for the
 >   *next* storm to end, can miss that one, and never comes if storms have stopped. Filed as a candidate
 >   ([C85](agent/bugs/C85.md)); the reply asks the players which answer they picked.

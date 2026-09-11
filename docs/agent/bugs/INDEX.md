@@ -1,9 +1,9 @@
 <!-- GENERATED — never hand-edit; regenerate with: python tools/doccheck.py --regen -->
 <!-- split_bugs.py --write is the one-time MIGRATION from the retired pre-split doc, never a regeneration; verify: python tools/doccheck.py -->
 
-# Bug index — 218 rows, 183 entry files
+# Bug index — 219 rows, 184 entry files
 
-119 F + 12 D + 87 C. `seq` is the entry's position in the old BUGS.md file order;
+119 F + 12 D + 88 C. `seq` is the entry's position in the old BUGS.md file order;
 the row order below is the old index table's own. Generated from the front matter of
 `docs/agent/bugs/*.md` — edit an entry, not this file.
 
@@ -231,4 +231,5 @@ the row order below is the old index table's own. Generated from the front matte
 | 181 | C85 | A producer 'Clogged after a Dust Storm' can stay disabled for good: the story event's 'fix it after the storm' reply waits for a LATER storm end, competes with other follow-ups for it, and has no fallback | cand | P2 | source-read; field reports (Steam, 2 players, 1.1.0) | [C85.md](C85.md) |
 | 182 | C86 | An Advanced Orbital Probe fired without Adapted Probes knocks an already deep-scanned neighbouring sector back to 'Scanned' | cand | P3 | source-read | [C86.md](C86.md) |
 | 183 | C87 | 'Landscaping excavation is too deep' blocks lakes on ordinary flat ground in 1.1.0; the check is unchanged from 1.0.7, so one of its inputs (lake-prefab depth data, the cursor's height, or generated terrain) changed | cand | P2 | source-read + prefab-data decode; one field report (Steam, 1.1.0, new save, screenshot); a PDX developer asked for an in-game bug report | [C87.md](C87.md) |
+| 184 | C88 | Building Codes (Lax / Strict) skips the maintenance change on prefab-deployed buildings through an explicit `from_prefab` exit the law descriptions don't mention; under Strict, prefab buildings miss the promised −30% | cand | P3 | source-read (both handlers + the flag's source); one field report (Steam, 2026-09-08); question put to the devs in that thread | [C88.md](C88.md) |
 

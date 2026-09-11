@@ -8,6 +8,20 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-11 - Building Codes vs prefabs re-classified on the owner's pushback → C88, waiting on the devs (smr-bugfixpack-0d)
+
+tags: field-reports building-codes laws prefabs C88 pushback
+
+The first triage called the prefab exemption "intended; at worst a gain". The owner disagreed: a prefab is an ordinary
+building shipped from Earth, and the law text says "new buildings". Re-read on 1.1.0: both Lax/Strict maintenance handlers
+open with `if from_prefab then return end` (`LawDef-Efficiency.lua:700`, `:908`; flag from `ConstructionSite.lua:1729`,
+`:1786`) — deliberate in code, undisclosed in the text; Strict's −30% never reaches prefab buildings (a loss). The owner is
+posting the code reading + question in the reporter's Steam thread (an active PDX developer); filed **C88** (cand, P3)
+dependent on their answer. **Lesson:** "deliberate in code" is not "intended by design" — when the code contradicts the
+player-facing text, report the mismatch and ask; don't rule it intended on the developers' behalf.
+
+---
+
 ## 2026-09-11 - F119 + C86 built and desk-verified; attended boot owed (Codex)
 
 tags: F119 C86 trade-rockets wildfire exploration orbital-probes build desk-harness

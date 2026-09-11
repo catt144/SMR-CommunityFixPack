@@ -13,7 +13,7 @@ Written by `smr-bugfixpack-0d` at the owner's ask ("investigate some new leads";
 | # | lead (where) | verdict | home |
 |---|---|---|---|
 | 1 | Wildfire cure rocket stuck on the pad, "20 fuel to unload" (Reddit, 2 players, PC + PS5) | **real vanilla defect, P1 mystery soft-lock** | [F119](../bugs/F119.md), checklist 146 |
-| 2 | "Building codes" law doesn't apply to prefabs (Steam) | by design; at worst a gain for the player | here §2 |
+| 2 | "Building codes" law doesn't apply to prefabs (Steam) | **RE-CLASSIFIED (owner pushback)**: deliberate in code, undisclosed in the text; Strict under-delivers on prefabs; waiting on the devs | [C88](../bugs/C88.md) |
 | 3 | Producer "Clogged after a Dust Storm" never recovers (Steam, 2 players) | candidate; the failing link not pinned | [C85](../bugs/C85.md) |
 | 4 | "Landscaping excavation is too deep" for lakes (Steam) | **REOPENED (owner pushback)**: code unchanged, so an input changed in 1.1.0; not the pack | [C87](../bugs/C87.md), checklist 147 |
 | 5 | Probe deep scan reveals nothing (Steam) | the ordinary Adapted Probes rule; a separate minor defect found | [C86](../bugs/C86.md) |
@@ -28,7 +28,13 @@ rockets re-size on a fuel-cost change (`UniversalRocket.lua:1916-1920`, SOURCE, 
 (−20, the reported number) or — new in 1.1.0 — the Fuel Conservation law (and every Ministry of Technology working
 flip under it) leaves the cure rocket unable to reach "ready", and Mystery 8 waits on it with no timeout.
 
-## 2 · Building codes vs prefabs — by design
+## 2 · Building codes vs prefabs — RE-CLASSIFIED → C88 (waiting on the devs)
+
+> ⚠️ **Superseded conclusion, kept for the record (2026-09-11, same day).** This section first said "by design; at worst
+> a gain". The owner pushed back: a prefab is an ordinary building shipped from Earth, and the law text says "new
+> buildings" with no exception. Re-read: both handlers exit on `from_prefab` (`LawDef-Efficiency.lua:700`, `:908`), so
+> Strict's −30% never reaches prefab buildings — a loss against the text. "Deliberate in code" is not "intended by the
+> design"; the devs were asked. The live record is [C88](../bugs/C88.md); the text below is the first pass.
 
 - INHERITED: 1.1.0 replaces the old cost-only law with Lax/Strict (`Data/PolicyDef.lua:296-303`); the old
   `Policy_BuildingCodes` is `Obsolete` (`LawDef-Efficiency.lua:476`). Lax: −20% Concrete/Metals construction cost, +50%
