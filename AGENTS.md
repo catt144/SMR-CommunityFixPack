@@ -5,9 +5,9 @@ patched at runtime; no game files are modified. Map of the tree:
 `docs/README.md`. **Mandatory read, every session: `docs/agent/STATE.md`** —
 build state, open gates, active holds.
 
-**Folder contract** (doccheck enforces it). `docs/` root holds ONLY the five
-human files (PLAYTEST_CHECKLIST, PLAYTEST_HELP, UPLOAD_WORKFLOW, FUTURE_IDEAS,
-README), the BUGS/STATUS stubs, `agent/` and `archive/`. Agent material is `docs/agent/`
+**Folder contract** (doccheck enforces it). `docs/` root holds ONLY the six
+human files (PLAYTEST_CHECKLIST, PLAYTEST_HELP, UPLOAD_WORKFLOW, FIELD_REPORT_REPLIES,
+FUTURE_IDEAS, README), the BUGS/STATUS stubs, `agent/` and `archive/`. Agent material is `docs/agent/`
 (`bugs/`, `facts/`, `reports/`, `prompts/`, STATE/WORKFLOW/FIX_POLICY);
 `docs/archive/` is append-only, never edited. **`INDEX.md` in `bugs/`+`facts/`
 is GENERATED — edit the entry or fact file, never the index** (line-1 banner).
@@ -20,6 +20,8 @@ Prompts: the map is `docs/agent/prompts/README.md`. Reusable prompts live in `pr
 > `docs/agent/ENGINE_FACTS.md` → `docs/agent/facts/`. Pre-restructure
 > documents cite the old paths; translate mentally, do not edit records.
 > Renamed 2026-08-03: `FABLE_NEXT_PROMPT.md` → `agent/prompts/perma/GENERAL_USE_PROMPT.md`.
+> 2026-09-11 (owner): `docs/agent/reports/FIELD_REPORT_REPLIES.md` → `docs/FIELD_REPORT_REPLIES.md`,
+> a human file (the owner posts, agents draft). Older records cite the old path; translate mentally.
 > 2026-08-17: the pack was renamed **Community Fix Pack → Relaunched Fix Pack**
 > (display name only; the mod `id` and `[CommunityFixPack]` log tag are
 > unchanged). Earlier records use the old name — translate mentally, do not

@@ -48,7 +48,7 @@ which is fully briefed.
 - STATE is the kernel. Owner decisions are in checklist → "Decisions waiting on you".
 - FR-1 has the LINUX_DISPATCH prompt, FINDINGS §11–§12 and ck145.
 - The release machinery is `prompts/perma/RELEASE.md`, with its outbox ledger `perma/RELEASE_OUTBOX.md`.
-- Field-report reply drafts: `reports/FIELD_REPORT_REPLIES.md` (the 2026-09-11 section).
+- Field-report reply drafts: `docs/FIELD_REPORT_REPLIES.md` (the 2026-09-11 section).
 
 ## 3 · Pending outbox — retire this file when every line is done or rehomed
 
@@ -75,7 +75,7 @@ which is fully briefed.
 - **ck144 (a): the owed v7 sitting, ONE boot.** A3 (F118), A10, A5 c2, A9 c4/c5, F117's station recipe, and the first `RunAll()` on the
   94-probe kit (the STATE OWED line). Recipes: the checklist's "THE SITTING RAN" block, `prompts/HOTFIX2_SITTING.md` and
   `bugs/F117.md`. `prompts/SELFCHECK_PILOT.md` rides the same boot (see its banner). It can share ck149's boot.
-- **ck144 (b):** the Steam sounds thread. A "still checking" follow-up is drafted in `reports/FIELD_REPORT_REPLIES.md`.
+- **ck144 (b):** the Steam sounds thread. A "still checking" follow-up is drafted in `docs/FIELD_REPORT_REPLIES.md`.
 - **Desk NEXT:** `prompts/DLC_DEEP_CHECK.md` (bounded; the owner's framing is in its banner).
 - **`FIELD_REPORT_REPLIES.md`:** the Hydroponic Farm stub (the owner's design question) and Metatron `End1..7` particles (fixable,
   untimed).
@@ -84,7 +84,9 @@ which is fully briefed.
 - **Unexplained lines, verbatim; attribute only if asked:**
   - `Failed activating D3D12 Dred`
   - `OptionsData.Options.Upscaling sets hr.ResolutionUpscale which was already set by another table`
-  - `Missing spot 'Top' in 'ElectricityGridElement' state 'idle'`
+  - `Missing spot 'Top' in 'ElectricityGridElement' state 'idle'` — ✅ attributed 09-11 (`smr-bugfixpack-24`, owner asked):
+    vanilla. A broken cable's sign (`SupplyGridBreakable.lua:277-282`) asks for the building sign spot "Top", which the
+    cable model lacks; `gamelib.lua:161-166` prints once and falls back to origin. Identical Lua on 1.0.7; harmless.
   - P1's `d3d12_resource_QueryInterface {6b3b2502-…} E_NOINTERFACE` ×4
 
 **Closed here:** the Astra R3 brief (removed 09-11); the F119/C86 build brief (fired and removed 09-11, `91f32af`). Astra has nothing

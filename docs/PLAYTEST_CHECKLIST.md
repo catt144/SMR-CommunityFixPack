@@ -173,7 +173,7 @@ completed tests move whole to
 >
 > **The fix:** when a fuel cost changes, update Earth's landed rockets the way the game already updates yours, and
 > un-stick an already-stuck rocket when the save loads. It would carry a Beta label until tested in play.
-> A reply for the Reddit thread is ready in `agent/reports/FIELD_REPORT_REPLIES.md` — post it or not, your call.
+> A reply for the Reddit thread is ready in `FIELD_REPORT_REPLIES.md` — post it or not, your call.
 
 ### 2026-09-11 — 147: five more field reports triaged. **Decision: only whether to post the replies. Recommendation: post the clogged-building and deep-scan replies (they help players now); skip meteors.** Nothing here needs the keyboard except the optional 2-minute lake check below.
 
@@ -580,7 +580,7 @@ completed tests move whole to
 > Nothing more is asked here (the Paradox version display is never chased, item 71).
 >
 > **Now postable:** the two Steam replies for the C74 and C83 reporters
-> (`agent/reports/FIELD_REPORT_REPLIES.md`, "Steam comments answered by the v7 update").
+> (`FIELD_REPORT_REPLIES.md`, "Steam comments answered by the v7 update").
 
 ### 2026-09-10 — 144: two small asks around the v7 upload; neither blocks it.
 
@@ -596,7 +596,7 @@ completed tests move whole to
 > ✅ **Update 09-10 late: both leads are checked — neither is something players are missing.**
 > The Drone Hub effect is never triggered by anything in the game; the misspelled sound is a
 > duplicate of a loop that is already playing. A short follow-up post is ready in
-> `agent/reports/FIELD_REPORT_REPLIES.md` — post it only if your reply said "still checking".
+> `FIELD_REPORT_REPLIES.md` — post it only if your reply said "still checking".
 
 ### ✅ 2026-09-10 — 143 CLOSED: **FIX BUILT + TESTED-ATTENDED** — new arrivals no longer fall back into a switched-off, quarantined dome ([C83](agent/bugs/C83.md)).
 

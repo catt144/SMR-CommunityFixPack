@@ -37,7 +37,7 @@ authority on *which* surfaces and *how*. In short, per pending fix:
 - **`metadata.lua` `last_changes`** — rewrite it as THIS version's change note
   from the pending entries' change-note lines (H-02: never touch `version`).
 - **FAQ / judgment-call count** if any pending entry is a judgment call.
-- **Reporters** (`PUBLIC_SURFACE_SWEEP.md` §4, `reports/FIELD_REPORT_REPLIES.md`) —
+- **Reporters** (`PUBLIC_SURFACE_SWEEP.md` §4, `docs/FIELD_REPORT_REPLIES.md`) —
   any pending entry that answers a field report gets its reply updated.
 **Gate:** the count word must now match across `metadata.lua`, `STORE_CARD_LIVE.md`
 and `UPLOAD_WORKFLOW.md` — `grep -oE '[A-Z][a-z]+(-[a-z]+)? repairs'` on all three

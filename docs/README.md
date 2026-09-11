@@ -13,6 +13,9 @@ docs/
   PLAYTEST_HELP.md        playtest reference: console facts, commands, fixtures
   UPLOAD_WORKFLOW.md      owner's step-by-step for putting an update live:
                           pack, upload, store pages, publish the site
+  FIELD_REPORT_REPLIES.md  replies to player reports (Steam, Reddit, GitHub):
+                          drafts the owner posts, and the record of what went
+                          up — agents draft them and keep them current
   FUTURE_IDEAS.md         parking lot, NOT a backlog. Nothing in it is work
   README.md               this map
   BUGS.md · STATUS.md     3-line stubs pointing at where they went
@@ -67,6 +70,9 @@ difference. Generated files say so on line 1.
 - A **session leg** → `archive/SESSION_LOG.md` (append-only, newest first).
 - A **decision the owner must make** → `PLAYTEST_CHECKLIST.md` →
   "Decisions waiting on you". Never only in an agent doc.
+- A **reply to a player's report** (Steam, Reddit, GitHub) → `FIELD_REPORT_REPLIES.md`
+  at the root. The owner posts; agents draft, record what went up, and update a
+  draft in the same commit that changes the fact it states.
 - **Spent** anything → `archive/`, which is append-only and never edited.
 
 ⚠️ **Reports are not authority.** When a report disagrees with `agent/bugs/` or
@@ -85,6 +91,10 @@ same change that discovers it.
 > 2026-09-11 (owner ask): the standing prompts moved into `agent/prompts/perma/` (DISPATCH, GENERAL_USE_PROMPT, RELEASE,
 > RELEASE_OUTBOX, POST_UPLOAD_CLOSE, PUBLIC_SURFACE_SWEEP, SITE_AUDIT, STATE_EVICTION, DRONE_PROJECT_PROMPT, COMBINED_SITTING).
 > Live references were rewritten; the archive and `metadata.lua` comments still cite `agent/prompts/<name>.md`, so translate them.
+
+> 2026-09-11 (owner ask): `agent/reports/FIELD_REPORT_REPLIES.md` → `FIELD_REPORT_REPLIES.md` at the root, a human file (the
+> owner posts, agents draft). Live references were rewritten; the archive and the committed Codex report still cite the
+> old path, so translate them.
 
 `MOD_DESCRIPTION.md` and `PLAYTEST_ARCHIVE.md` moved from `docs/` to
 `docs/archive/` in the same change.

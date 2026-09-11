@@ -198,7 +198,7 @@ comments belongs **after the upload**, not after the pack.
 
 ---
 
-## 4 · The reporter — `reports/FIELD_REPORT_REPLIES.md`
+## 4 · The reporter — `docs/FIELD_REPORT_REPLIES.md`
 
 If the fix answers an open field report, the reply is part of shipping it.
 

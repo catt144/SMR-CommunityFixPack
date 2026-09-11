@@ -7,8 +7,8 @@ the end of every drone session.
 
 > 📁 **DOCS LAYOUT (restructured 2026-08-03) — read `docs/README.md` if unsure
 > where something lives or where a new document goes.**
-> `docs/` root = the four human docs (`PLAYTEST_CHECKLIST`, `PLAYTEST_HELP`,
-> `FUTURE_IDEAS`, `README`) plus MOVED stubs · `docs/agent/` = agent truth:
+> `docs/` root = the human docs (`PLAYTEST_CHECKLIST`, `PLAYTEST_HELP`, `UPLOAD_WORKFLOW`,
+> `FIELD_REPORT_REPLIES`, `FUTURE_IDEAS`, `README`) plus MOVED stubs · `docs/agent/` = agent truth:
 > `STATE.md` (the mandatory read; counts live there), `agent/bugs/` (defect
 > tracker, one file per entry — **entry point `agent/bugs/INDEX.md`**),
 > `agent/facts/` (engine behaviour — **entry point `agent/facts/INDEX.md`**),

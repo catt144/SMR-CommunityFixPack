@@ -1,9 +1,18 @@
-# Reply drafts for the two GitHub field reports (F104, F105)
+# Replies to player reports — drafts to post, and what went up
 
-⚠️ **A report is not authority** — `agent/bugs/F104.md` and `F105.md` are. This
-file exists because these drafts were written in a session and **posting them is
-the owner's action, not an agent's**. Without this file they would have lived only
-in a transcript. Written 2026-08-24.
+**For you (the owner):** each section below is a reply drafted for a player's report
+on Steam, Reddit or GitHub. Post the ones you want, then tell the agent what went
+up; it records that under "What was actually posted" and keeps the drafts current
+when a fix ships. Newest batches are near the bottom, above the "Owed" table.
+Every reply: check the thread first (skip it if already answered), no version
+numbers, and no fix promise until the fix is tested.
+
+**For agents:** a reply is not authority — the `agent/bugs/` entries are. Drafts
+live here because posting is the owner's action; update a draft in the same
+commit that changes the fact it states. Moved here from `agent/reports/` on
+2026-09-11 (owner ask); older records cite the old path.
+
+## The first two reports — GitHub #1 (F104) and #2 (F105), written 2026-08-24
 
 ✅ **BOTH ARE ANSWERED AND BOTH REPORTERS REPLIED — 2026-08-24.** This file is now
 a *record*, not a queue. Draft A went up verbatim on #1; #2 got a **different**
