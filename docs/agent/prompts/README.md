@@ -25,6 +25,7 @@
 
 | prompt | state |
 |---|---|
+| `BUILD_F119_C86.md` | ⏱ fire now (owner 09-11: F119 out today); C86 rides only if it doesn't delay F119 |
 | `DLC_DEEP_CHECK.md` | desk NEXT, after the fix pack is stable |
 | `HOTFIX2_SITTING.md` | closed 09-09; kept for the recipes the owed v7 sitting uses |
 | `SELFCHECK_PILOT.md` | rides the owed v7 sitting's boot |
