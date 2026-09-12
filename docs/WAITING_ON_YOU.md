@@ -7,7 +7,7 @@ Everything this project is currently holding for the owner, newest first. Genera
 editing this file does nothing; change the checklist item (or its marker) and re-run
 `python tools/doccheck.py --regen`.
 
-## Decisions (7)
+## Decisions (6)
 
 `marker` = your own recorded word · `_inferred_` = read off STATE, a claim ·
 ⚠️ `_conflict_` = STATE lists it as owed but the checklist header reads settled;
@@ -15,13 +15,12 @@ one marker settles which is right.
 
 | # | date | from | the ask |
 |---|---|---|---|
-| 164 | 2026-09-12 | ⚠️ _conflict_ | [✅ 164 RULED BY YOU: **KEEP** — "fine as long as we are sure it won't cause issues." **The condition was checked, not assumed; it holds, and the check…](PLAYTEST_CHECKLIST.md#L32) |
-| 162 | 2026-09-12 | ⚠️ _conflict_ | [⚖️ 162 PART-RULED: **(a) leave dropped · (b) the draft is let go, deliberately.** ⏳ **(c) the 2-minute lake check is still owed · (d) is still yours…](PLAYTEST_CHECKLIST.md#L199) |
-| 157 | 2026-09-12 | _inferred_ | [157: new Steam report, "Prosperity for Mars angry about unemployment with 0 unemployed" — triaged, not ours. **Your pushback checked out: it is an…](PLAYTEST_CHECKLIST.md#L724) |
-| 151 | 2026-09-11 | ⚠️ _conflict_ | [⚖️ 151: migration audit complete — **(a) and (d) CLOSED 09-12 as overtaken by events · (e) RULED 09-11 · (b) and (c) still open**](PLAYTEST_CHECKLIST.md#L1164) |
-| 144 | 2026-09-10 | ⚠️ _conflict_ | [✅ 144 CLOSED 09-12: **(b) cleared by you.** Two small asks around the v7 upload; neither blocked it.](PLAYTEST_CHECKLIST.md#L1882) |
-| 144 | 2026-09-10 | ⚠️ _conflict_ | [✅ 144 CLOSED: C83's homeless follow-through found a distinct intentional override, not another fix (C84(agent/bugs/C84.md)). No decision is owed.](PLAYTEST_CHECKLIST.md#L1954) |
-| 53 | 2026-08-19 | ⚠️ _conflict_ | [⭐⭐ THE VERDICT REVIEW IS DONE: **UPHELD**. **53 RULED 09-12: pare the modder surface down, and the hardening queue shrinks with it — six rows go, one…](PLAYTEST_CHECKLIST.md#L5452) |
+| 165 | 2026-09-12 | ⚠️ _conflict_ | [✅ 165 RULED BY YOU: **replies to players are PULL-ONLY from now on.** Nothing is owed from you, and no agent will raise one at you again unless you…](PLAYTEST_CHECKLIST.md#L155) |
+| 158 | 2026-09-12 | _inferred_ | [158: three new fixes are built and waiting on your eyes. **ONE boot does all three. C89 is the one you asked to watch yourself; the other two are…](PLAYTEST_CHECKLIST.md#L625) |
+| 151 | 2026-09-11 | ⚠️ _conflict_ | [⚖️ 151: migration audit complete — **(a) and (d) CLOSED 09-12 as overtaken by events · (e) RULED 09-11 · (b) and (c) still open**](PLAYTEST_CHECKLIST.md#L1348) |
+| 144 | 2026-09-10 | ⚠️ _conflict_ | [✅ 144 CLOSED 09-12: **(b) cleared by you.** Two small asks around the v7 upload; neither blocked it.](PLAYTEST_CHECKLIST.md#L2066) |
+| 144 | 2026-09-10 | ⚠️ _conflict_ | [✅ 144 CLOSED: C83's homeless follow-through found a distinct intentional override, not another fix (C84(agent/bugs/C84.md)). No decision is owed.](PLAYTEST_CHECKLIST.md#L2138) |
+| 53 | 2026-08-19 | ⚠️ _conflict_ | [⭐⭐ THE VERDICT REVIEW IS DONE: **UPHELD**. **53 RULED 09-12: pare the modder surface down, and the hardening queue shrinks with it — six rows go, one…](PLAYTEST_CHECKLIST.md#L5553) |
 
 ## Owed playtest legs
 
@@ -34,47 +33,43 @@ From `docs/agent/STATE.md`, verbatim:
   `C47OpenFarmSeedBufferShape` (Herbs 100→50), retired `LanderCargoRatchet`/`DroneUnreachableForever`/`AutoExportPriority`.
 ```
 
-## Needs a marker to settle (32)
+## Needs a marker to settle (28)
 
 The header's prose and STATE's open-decisions section disagree, so no row above can
 be trusted for these. One marker line each settles it permanently.
 
-- **158** 2026-09-12 — [158: three new fixes are built and waiting on your eyes. **ONE boot does all three. C89 is the one you asked…](PLAYTEST_CHECKLIST.md#L443)
-- **148** 2026-09-11 — [⏳ 148 DEFERRED 09-12 (you said **skip**; the chain is NOT started) — an on/off button for every fix…](PLAYTEST_CHECKLIST.md#L1407)
-- **145** 2026-09-11 — [145: FR-1 cache probe v2 covers all 18 RAYS records; test normal loading first.](PLAYTEST_CHECKLIST.md#L1504)
-- **136** 2026-09-10 — [136: three player reports are now priority surfaces in the vanilla diff hunt. Two asks; neither needs the…](PLAYTEST_CHECKLIST.md#L2152)
-- **135** 2026-09-10 — [135: `luafn.py`'s body delimiter over-spans one-line functions (441 declarations, 133 inventory rows). ⭐ The…](PLAYTEST_CHECKLIST.md#L2271)
-- **125** 2026-09-09 — [ITEM 125 OPEN: the first checks the 1.0.7 tree makes possible were run — one real finding, one bounded…](PLAYTEST_CHECKLIST.md#L3228)
-- **118** 2026-09-08 — [ITEM 118: how 1.0.7 players get served — Steam's branch feature is OFF, so it is one manual route](PLAYTEST_CHECKLIST.md#L3384)
-- **114** 2026-09-08 — [ITEMS 114–117 OPEN: the pack-wide 1.1.0 re-verification — 10 FIX, 35 REMOVE, 35 KEEP (QA'd)](PLAYTEST_CHECKLIST.md#L3427)
-- **112** 2026-09-08 — [ITEMS 112–113 OPEN: the hotfix-1 audit says SHIP WITH CHANGES, and both changes are wording](PLAYTEST_CHECKLIST.md#L3479)
-- **111** 2026-09-08 — [ITEM 111 OPEN: F116 track salvage was repaired, and it left one judgement call](PLAYTEST_CHECKLIST.md#L3638)
-- **94** 2026-09-01 — [ITEMS 94–97 OPEN: the D06 rebuild DESIGN SPEC (opt-in repo…](PLAYTEST_CHECKLIST.md#L4005)
-- **91** 2026-09-01 — [ITEMS 91–93 OPEN: the drone bands-and-clean-revert report (opt-in repo…](PLAYTEST_CHECKLIST.md#L4048)
-- **88** 2026-09-01 — [ITEMS 88–90 OPEN: raised by the OPT-IN mod's contamination audit (its repo…](PLAYTEST_CHECKLIST.md#L4082)
-- **83** 2026-08-31 — [ITEMS 83–86 OPEN: raised by the OPT-IN mod's readiness pass (its repo…](PLAYTEST_CHECKLIST.md#L4118)
-- **—** 2026-08-24 — [⭐⭐⭐ F105 IS REPRODUCED ON OUR OWN RIG, AND THE FIX WAS WATCHED TO STOP IT. Nothing is owed; this is a receipt.](PLAYTEST_CHECKLIST.md#L4457)
-- **—** 2026-08-20 — [⚠️ C50 IS BUILT, AND IT TOUCHES THREE SCREENS RATHER THAN THE TWO ITS BRIEF NAMED. Your sitting in link 4…](PLAYTEST_CHECKLIST.md#L5201)
-- **—** 2026-08-20 — [⭐⭐ THE PLAN CHANGED ON YOUR RULING: C50+C51 ship IN 1.0.0, C52 is frozen, and the chain that closes this repo…](PLAYTEST_CHECKLIST.md#L5239)
-- **—** 2026-08-19 — [⚠️ the SAME defect class, in the third mod. Not today's problem; do not let it be forgotten.](PLAYTEST_CHECKLIST.md#L5881)
-- **—** 2026-08-17 — [⛔⛔ THE UPLOAD IS PAUSED ON YOUR OWN WORD. Two defects found at the sitting and fixed; two questions for you.](PLAYTEST_CHECKLIST.md#L6063)
-- **—** 2026-08-17 — [⭐ SWEEP CHAIN, LINK 1 REPORTED. Nothing blocks launch. One small call for you, and it can wait.](PLAYTEST_CHECKLIST.md#L6558)
-- **—** 2026-08-16 — [⭐⭐ NEW "ONE MOD FIX ALL": I checked the other community mod against the game's code. Four real bugs we had…](PLAYTEST_CHECKLIST.md#L6732)
-- **—** 2026-08-15 — [⭐⭐ NEW (late) — WE MEASURED YOUR OPEN FARM CASE ON YOUR OWN SAVE, AND IT DID NOT REPRODUCE. One sentence from…](PLAYTEST_CHECKLIST.md#L6884)
-- **—** 2026-08-15 — [⛔⛔ NEW (later) — pricing your "quick playtest?" question found that the F85 dialog CANNOT BE OPENED IN THE…](PLAYTEST_CHECKLIST.md#L7076)
-- **—** 2026-08-14 — [⭐ NEW (later) — ④ IS CUT: your launch afternoon reads ONE sheet, and the audit found one more call that comes…](PLAYTEST_CHECKLIST.md#L7297)
-- **—** 2026-08-14 — [⭐ NEW the release descriptions are being written: ONE question, and it is bundled with a call you already owe](PLAYTEST_CHECKLIST.md#L7380)
-- **—** 2026-08-13 — [⭐ NEW the SITE is built (unpublished): one small question, and two things for your awareness](PLAYTEST_CHECKLIST.md#L7426)
-- **—** 2026-08-13 — [⚖️ NEW your Steam ID is scrubbed from the live docs, but NOT from git history](PLAYTEST_CHECKLIST.md#L8235)
-- **—** 2026-08-12 — [⛔ NEW I DELETED ONE OF YOUR AUTOSAVES. Telling you straight.](PLAYTEST_CHECKLIST.md#L8268)
-- **—** 2026-08-12 — [⭐ NEW raised by you mid-sitting during `corun-pt60`](PLAYTEST_CHECKLIST.md#L8336)
-- **—** 2026-08-11 — [⭐⭐ NEW from the `corun-pt15` SITTING (two calls, both yours)](PLAYTEST_CHECKLIST.md#L8440)
-- **—** 2026-08-10 — [⭐⭐ NEW from the `corun-batch-2` SITTING (four calls, all yours)](PLAYTEST_CHECKLIST.md#L8482)
-- **—** 2026-08-05 — [⭐ NEW from the `corun-batch-1` sitting (four calls, all yours)](PLAYTEST_CHECKLIST.md#L8634)
+- **157** 2026-09-12 — [⏸ 157 — **OFF YOUR OWED LIST 2026-09-12 under the pull-only ruling (165).** Both calls are messaging, not…](PLAYTEST_CHECKLIST.md#L906)
+- **157** 2026-09-12 — [157 (the original ask): new Steam report, "Prosperity for Mars angry about unemployment with 0 unemployed"…](PLAYTEST_CHECKLIST.md#L908)
+- **148** 2026-09-11 — [⏳ 148 DEFERRED 09-12 (you said **skip**; the chain is NOT started) — an on/off button for every fix…](PLAYTEST_CHECKLIST.md#L1591)
+- **145** 2026-09-11 — [145: FR-1 cache probe v2 covers all 18 RAYS records; test normal loading first.](PLAYTEST_CHECKLIST.md#L1688)
+- **136** 2026-09-10 — [136: three player reports are now priority surfaces in the vanilla diff hunt. Two asks; neither needs the…](PLAYTEST_CHECKLIST.md#L2336)
+- **125** 2026-09-09 — [ITEM 125 OPEN: the first checks the 1.0.7 tree makes possible were run — one real finding, one bounded…](PLAYTEST_CHECKLIST.md#L3412)
+- **118** 2026-09-08 — [ITEM 118: how 1.0.7 players get served — Steam's branch feature is OFF, so it is one manual route](PLAYTEST_CHECKLIST.md#L3568)
+- **114** 2026-09-08 — [ITEMS 114–117 OPEN: the pack-wide 1.1.0 re-verification — 10 FIX, 35 REMOVE, 35 KEEP (QA'd)](PLAYTEST_CHECKLIST.md#L3611)
+- **112** 2026-09-08 — [ITEMS 112–113 OPEN: the hotfix-1 audit says SHIP WITH CHANGES, and both changes are wording](PLAYTEST_CHECKLIST.md#L3663)
+- **111** 2026-09-08 — [ITEM 111 OPEN: F116 track salvage was repaired, and it left one judgement call](PLAYTEST_CHECKLIST.md#L3822)
+- **—** 2026-08-24 — [⭐⭐⭐ F105 IS REPRODUCED ON OUR OWN RIG, AND THE FIX WAS WATCHED TO STOP IT. Nothing is owed; this is a receipt.](PLAYTEST_CHECKLIST.md#L4557)
+- **—** 2026-08-20 — [⚠️ C50 IS BUILT, AND IT TOUCHES THREE SCREENS RATHER THAN THE TWO ITS BRIEF NAMED. Your sitting in link 4…](PLAYTEST_CHECKLIST.md#L5302)
+- **—** 2026-08-20 — [⭐⭐ THE PLAN CHANGED ON YOUR RULING: C50+C51 ship IN 1.0.0, C52 is frozen, and the chain that closes this repo…](PLAYTEST_CHECKLIST.md#L5340)
+- **—** 2026-08-19 — [⚠️ the SAME defect class, in the third mod. Not today's problem; do not let it be forgotten.](PLAYTEST_CHECKLIST.md#L5982)
+- **—** 2026-08-17 — [⛔⛔ THE UPLOAD IS PAUSED ON YOUR OWN WORD. Two defects found at the sitting and fixed; two questions for you.](PLAYTEST_CHECKLIST.md#L6164)
+- **—** 2026-08-17 — [⭐ SWEEP CHAIN, LINK 1 REPORTED. Nothing blocks launch. One small call for you, and it can wait.](PLAYTEST_CHECKLIST.md#L6659)
+- **—** 2026-08-16 — [⭐⭐ NEW "ONE MOD FIX ALL": I checked the other community mod against the game's code. Four real bugs we had…](PLAYTEST_CHECKLIST.md#L6833)
+- **—** 2026-08-15 — [⭐⭐ NEW (late) — WE MEASURED YOUR OPEN FARM CASE ON YOUR OWN SAVE, AND IT DID NOT REPRODUCE. One sentence from…](PLAYTEST_CHECKLIST.md#L6985)
+- **—** 2026-08-15 — [⛔⛔ NEW (later) — pricing your "quick playtest?" question found that the F85 dialog CANNOT BE OPENED IN THE…](PLAYTEST_CHECKLIST.md#L7177)
+- **—** 2026-08-14 — [⭐ NEW (later) — ④ IS CUT: your launch afternoon reads ONE sheet, and the audit found one more call that comes…](PLAYTEST_CHECKLIST.md#L7398)
+- **—** 2026-08-14 — [⭐ NEW the release descriptions are being written: ONE question, and it is bundled with a call you already owe](PLAYTEST_CHECKLIST.md#L7481)
+- **—** 2026-08-13 — [⭐ NEW the SITE is built (unpublished): one small question, and two things for your awareness](PLAYTEST_CHECKLIST.md#L7527)
+- **—** 2026-08-13 — [⚖️ NEW your Steam ID is scrubbed from the live docs, but NOT from git history](PLAYTEST_CHECKLIST.md#L8336)
+- **—** 2026-08-12 — [⛔ NEW I DELETED ONE OF YOUR AUTOSAVES. Telling you straight.](PLAYTEST_CHECKLIST.md#L8369)
+- **—** 2026-08-12 — [⭐ NEW raised by you mid-sitting during `corun-pt60`](PLAYTEST_CHECKLIST.md#L8437)
+- **—** 2026-08-11 — [⭐⭐ NEW from the `corun-pt15` SITTING (two calls, both yours)](PLAYTEST_CHECKLIST.md#L8541)
+- **—** 2026-08-10 — [⭐⭐ NEW from the `corun-batch-2` SITTING (four calls, all yours)](PLAYTEST_CHECKLIST.md#L8583)
+- **—** 2026-08-05 — [⭐ NEW from the `corun-batch-1` sitting (four calls, all yours)](PLAYTEST_CHECKLIST.md#L8735)
 
 ## Coverage
 
-**0 of 117** checklist items carry a `<!-- ck:N status:… owner:… -->` marker; **117** are inferred
+**0 of 120** checklist items carry a `<!-- ck:N status:… owner:… -->` marker; **120** are inferred
 from prose and may be wrong. This number is the one to move: every marker added
 retires a guess.
 
