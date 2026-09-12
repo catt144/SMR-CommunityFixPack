@@ -2023,6 +2023,11 @@ Original question, kept as asked: C74, the Rare Metals Extractor's hammer (and t
 > 4. Whether `LuaRevision` may serve as an **observation label** — clarify
 >    `FIX_POLICY` §2a's heading, or leave it forbidden.
 > 5. "Job two": a **breadcrumb** yes/no; the engine box untouched (recommended).
+>    ⚠️ **2026-09-12 — this is the SAME ~15 lines as item 73 tier 0, and 73 was CLOSED that day**
+>    ("we have spent more resources looking for a fix for something that has only come up once").
+>    Closing 73 implies this, but **it is not ruled** — sub-decision 5 is still yours. Read 73's
+>    closure before taking it: the blame mechanism, the two field sightings and the tier costs are
+>    all written up there.
 > 6. If the pilot confirms an indirect `load` in the engine environment
 >    (`LuaCodeToTuple`), whether to **report it to the developers**. Not ours to
 >    use either way.
@@ -4088,7 +4093,7 @@ rock-clearing jobs) crashes the same way, not just levelling.
     for the opt-in-era maintenance window, exactly where `EF-066` always put
     them.
 
-### ⭐⭐ 2026-08-23 — THE FIRST FIELD REPORTS ARRIVED. Two GitHub issues, one reporter, and the pack was named in both. Neither error was ours.
+### ⭐⭐ 2026-08-23 — THE FIRST FIELD REPORTS ARRIVED. Two GitHub issues, one reporter, and the pack was named in both. Neither error was ours. **73 CLOSED 09-12: not worth further resources.**
 
 72. ✅ **RULED 2026-08-24, in-session ("number 1 fix priority") — BUILT AND
     BOOT-VERIFIED the same day; receipt in the 2026-08-24 section above.**
@@ -4115,7 +4120,37 @@ rock-clearing jobs) crashes the same way, not just levelling.
     research a dome-cost tech, watch for `ConstructionSite.lua:673`. ~10 minutes.
     ❓ **Your call:** build it now, build it after a repro, or leave it filed.
 
-73. **The bigger one — we get blamed for other mods' crashes, and it will keep
+73. ✅ **CLOSED 2026-09-12 — "lets just close it". Not worth further resources.** Your words:
+    *"we have spent more resources looking for a fix for something that has only come up once."*
+    No tier is taken, and the four options below stay on the record as the reasoning, not as work
+    owed. **What was learned, so nobody re-opens this blind:**
+
+    * **The mechanism is understood and it is not going to get better.** The engine attributes a
+      crash by asking whether a mod's folder name appears in the error text or the stack
+      (`Mod.lua:3001-3013`); its own comment calls that a *"rough estimation"*. Nothing we do to
+      our own code changes how that question is asked.
+    * **Both field sightings were pass-through frames, and neither was our defect** — F104 and
+      F105. Two sightings, one reporter, one day, and the rate since has been zero.
+    * **The surface already shrank about 40% for free** when hotfix 2 (`2dc1dbe`) deleted 36
+      modules. The cheapest tier was overtaken by ordinary work.
+    * **Tier 1 lost its only measured candidate**: `Fix_MilestoneCrash`, the module the whole
+      "patch leaves, not ancestors" argument was built on, is one of the 36 deletions.
+    * **Tier 3 would put us on the error path for every mod in the process** — wrapping the global
+      `ReportModLuaError` means our code runs when anyone else's mod throws. That is a large,
+      permanent liability bought for a symptom seen twice.
+    * **The "cheap popup recipe" is dead** — the two modules it relied on to raise the engine's
+      *Mod Flagged* box on demand were deleted by the same commit, so it cannot be run as
+      written. ⚠️ Recorded from your ruling: the recipe itself is not written down anywhere in
+      this tree, so anyone who wants it again has to re-derive it from `EF-065`.
+
+    ⚠️ **Link, flagged and NOT decided here: item 133 sub-decision 5 (the log breadcrumb) is the
+    same ~15 lines as tier 0 above.** Closing 73 implies it, but **133 is still open and you have
+    not ruled it** — so it stays open. Whoever takes 133 should read this closure first; if you
+    say yes to 133(5), that is the breadcrumb and tier 0 arrives with it.
+
+    *(The original finding is kept below.)*
+
+    **The bigger one — we get blamed for other mods' crashes, and it will keep
     happening.** The engine decides which mod to flag by asking "does this mod's
     folder name appear anywhere in the crash text" (`Mod.lua:3001-3013`, its own
     comment calls it a "rough estimation"). We wrap ~60 game functions, so any
@@ -4862,7 +4897,7 @@ rock-clearing jobs) crashes the same way, not just levelling.
     ⇒ **Your remaining list is unchanged and short: re-tick the three mods, then
     upload — Paradox first.**
 
-### ⭐⭐ 2026-08-19 — THE VERDICT REVIEW IS DONE: **UPHELD**. The upload now waits only on you.
+### ⭐⭐ 2026-08-19 — THE VERDICT REVIEW IS DONE: **UPHELD**. **53 RULED 09-12: pare the modder surface down, and the hardening queue shrinks with it — six rows go, one survives and needs your word.**
 
 54. ⭐⭐ **I tried to break the audit's upload verdict and could not.** A second,
     independent session ruled on it as your design required — not by trusting
@@ -4899,7 +4934,62 @@ rock-clearing jobs) crashes the same way, not just levelling.
     re-ticked (21:23 log) — no launch was taken and nothing was changed on the
     rig by this session.
 
-53. ⭐ **The audit's verdict: upload the mod exactly as it stands.** A second,
+53. ✅ **RULED 2026-09-12 — pare the modder surface down. The scope decision was applied the
+    same session; the hardening queue is disposed of row by row below, and ONE row survives the
+    ruling and is still open.** Your words: *"We seem to be doing alot of work and checking for
+    other modders, maybe we just need to pair that down to basic of what our mod does and how it
+    does it. If they are a modder they should be able to examine it and handle it themselves."*
+
+    **What the ruling did to the documentation.** The modder-facing text is now three things:
+    what the pack does, how it does it, and the veto stated once and correctly. **Cut** from
+    `README.md` and the site's `for-modders` page: the offer to narrow our patch if your mod
+    conflicts, the invitation to tell us where `ListFixes()` prints, the ⛔ box about load order
+    we said we could not explain, the "a small number of fixes re-read the table" detail, and the
+    console-is-not-a-route aside. **Kept:** the runtime-patching description, item 50's ruled
+    chain-vs-copy sentence, the stand-down check, the veto snippet, and where the ids come from.
+    ⛔ `metadata.lua` is untouched — the store card was already this short and already correct, so
+    it was the reference the other two surfaces were made to match, and **no upload is triggered**.
+    The corrections that rode along are **item 47**.
+
+    ⚖️ **The queue, row by row.** Canonical list: `agent/reports/99_TERMINAL_AUDIT.md` §6; line
+    numbers below re-read against today's `Code/`, because hotfix 2 moved them.
+
+    * **Rows 1 and 2 — DEPRIORITISED BY THIS RULING. Not fixed, not closed.** Their entire
+      exposure is a third party writing a hostile value into our globals, which is exactly the
+      surface the ruling shrinks. ⚠️ **Written down so a future session can find it rather than
+      re-derive it:** `SMRFixPack_Disabled = "yes"` passes the `or {}` adoption at
+      `00_Core.lua:13`, and the index at `:512` then reads nil for every id — **the modder's veto
+      is silently ignored and every fix applies anyway**. `SMRFixPack_Disabled = true` throws at
+      that same index instead, which **kills the whole pack log-only, with nothing the player can
+      see**. Row 2 is the same shape one level up: the `SMRFixPack` adoption itself (`:19`) and
+      `SMRFixPack_Optional` (`:17`, read at `OptionEnabled`, `:57`) are adopted with `or {}` and
+      never type-normalised. The closing forms are derived in the audit's §6 and still apply if
+      the row is ever taken — including its finding that a plain `type(x) == "table"` guard is
+      **not** enough on its own.
+    * ⛔ **Row 3 — STILL OPEN, and INDEPENDENT of this ruling. It needs its own word from you.**
+      `Code/Fix_StaleReservations.lua:120-159` walks every Residence's reservation list on
+      `OnMsg.NewDay` with no per-item `pcall`. **Its trigger is save corruption, not another
+      mod**, so paring the modder surface does nothing for it: a throw mid-sweep abandons the rest
+      of the list every sol with the fix still reading `active`, and it can reach the player's
+      error box. The pack's own donor shape is live in `Code/90_SaveSanitizer.lua:224`.
+      ⚠️ The audit's donor pointer (`Fix_TrainMinors:141`) is stale — that module was deleted by
+      `2dc1dbe`.
+    * **Row 4 — `OnDataReady` (`Code/00_Core.lua:433-448`) belongs to C90's build**, so it is
+      tracked there rather than here. The consumer the audit named
+      (`Fix_FirstAsteroidPrefabs:237`) was deleted by `2dc1dbe`; the two live consumers today are
+      `Fix_BuildingCodesPrefab.lua:247` and `Fix_SilentHitMomentFX.lua:286`.
+      → [agent/bugs/C90.md](agent/bugs/C90.md)
+    * **Rows 5, 6 and 7 — DROPPED.** Cosmetic or latent, and none is a player-visible loss: a
+      `ctx.heal()` log line plus the two silent heal sites; mark-clear completeness at
+      `ApplyModOptions` and the benign-latch-after-non-benign-latch pair (both latent — the first
+      needs `def.optional`, and **no shipping module declares it**); and a re-registration log on
+      a title mismatch, which the audit itself filed as a candidate only.
+    * **Row 8 — MOOT.** Both modules it was about are gone: `2dc1dbe` deleted
+      `Fix_DustDevilSpawnGate.lua` and `Fix_DustDevilsDescrMap.lua`.
+
+    *(The original finding is kept below.)*
+
+    ⭐ **The audit's verdict: upload the mod exactly as it stands.** A second,
     independent session (`99b_VERDICT_REVIEW_fable.md`) will try to break that
     verdict before you act on it — that review is the next session to run, and
     the upload waits for it, not for anything below.
@@ -5300,7 +5390,7 @@ rock-clearing jobs) crashes the same way, not just levelling.
     ℹ️ **The only thing that is yours:** if you would rather the first check stay
     loose, say so and I will put it back. Otherwise nothing is owed here.
 
-### ⛔⛔ 2026-08-19 — the upload would have shipped one fix missing, on Steam. Already fixed; two small wording calls are yours.
+### ⛔⛔ 2026-08-19 — the upload would have shipped one fix missing, on Steam. **47 RULED + APPLIED 09-12, both halves — and a third defect was found in the same snippet. Nothing is owed from you.**
 
 46. ⛔⛔ **A fix would have vanished from the Steam release, and the check that
     was supposed to catch it said "pass".** ⇒ **Nothing to do — it is fixed and
@@ -5334,7 +5424,35 @@ rock-clearing jobs) crashes the same way, not just levelling.
     for a different reason, but I did not verify it and it is not this chain's
     repo to touch. Worth one look before it ever uploads.
 
-47. ⚖️ **Two wording calls on the modder page — your call, ten minutes, and
+47. ✅ **RULED 2026-09-12 — "fix this". APPLIED the same session, words only, and the
+    ruled paring in item 53 was applied to the same text in the same pass.** Your word on both
+    halves. The store card was already right (it was rewritten for hotfix 2), so it was the
+    reference the other two surfaces were made to match — and `metadata.lua` is untouched, so
+    **no upload is triggered by this**.
+
+    * **(a) the strict-globals form — done.** `README.md` published
+      `SMRFixPack_Disabled = SMRFixPack_Disabled or {}`; it now publishes the same
+      `rawget(_G, "SMRFixPack_Disabled") or {}` the pack's own `00_Core.lua:13` uses. The site's
+      page had the same defect and is fixed too.
+    * **(b) load order — done.** Both pages now say it in the card's words: *"Before the pack
+      loads" means your mod has to load first.* The site's *"it does not matter whether yours or
+      ours is created first"* sentence is gone, and so is the ⛔ box that said we could not tell
+      you how to load first — the requirement is now stated plainly instead.
+    * ⛔ **A third defect, not in the original item, and the worst of the three: the example named
+      a fix that does not exist.** `DustDevilSpawnGate` was deleted by `2dc1dbe` in hotfix 2, so a
+      modder following the published instruction today vetoed nothing at all. Both pages now use
+      **`LakeEntombment`** (`Code/Fix_LakeEntombment.lua:41` registers it), which is the id the
+      store card already used.
+    * ⚠️ **Two site pages that pointed at deleted sections were repaired in the same pass**
+      (`content/faq.md`, `content/install.md`): they promised *"the part of it we cannot tell you
+      how to do"* and *"what we have not yet confirmed about it"*, and both of those sections were
+      cut by the item-53 paring.
+    * ⛔ **The site edits are in the OTHER repo (`SMR-CommunityMods`), uncommitted.** They are
+      staged on disk in a clean tree for you to review and push with the next site publish.
+
+    *(The original finding is kept below.)*
+
+    ⚖️ **Two wording calls on the modder page — your call, ten minutes, and
     neither blocks launch.** Both are on `README.md` and the site's
     "For modders" page, which say the same thing in the same words.
 

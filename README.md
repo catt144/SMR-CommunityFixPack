@@ -62,28 +62,27 @@ a log, [open an issue](https://github.com/catt144/SMR-CommunityFixPack/issues)
 
 ## For modders
 
-See [docs/agent/FIX_POLICY.md](docs/agent/FIX_POLICY.md) for the house rules:
-patch the smallest thing that fixes the bug, chain the original where the bug
-can be hooked and copy a corrected body where it cannot, additive message
-handlers, fail safe rather than fail clever. Every fix inspects the code it is
-about to patch and stands down with a logged reason if a game update changed
-its shape.
+No game files are modified: the pack patches the game's code at runtime. Where a
+bug can be hooked, the fix wraps the game's function and calls the original;
+where the bug sits mid-function, the fix copies a corrected body instead, and
+that copy names in its source the game file and lines it came from. Every fix
+inspects the code it is about to patch and stands down, with a logged reason, if
+a game update changed its shape. House rules:
+[docs/agent/FIX_POLICY.md](docs/agent/FIX_POLICY.md); the source is the record.
 
-`SMRFixPack_Disabled` is the veto surface. Setting a fix's identifier in that
-global table **before the fix pack loads** vetoes the fix — the pack registers
-it, marks it disabled, and never applies it:
+Any single fix can be switched off from another mod, without touching this one.
+Set the fix's id as a key on the veto table before the pack loads:
 
 ```lua
-SMRFixPack_Disabled = SMRFixPack_Disabled or {}
-SMRFixPack_Disabled["DustDevilSpawnGate"] = true
+SMRFixPack_Disabled = rawget(_G, "SMRFixPack_Disabled") or {}
+SMRFixPack_Disabled["LakeEntombment"] = true
 ```
 
-Identifiers are the fix file names minus the `Fix_` prefix
-(`Code/Fix_DustDevilSpawnGate.lua` registers `DustDevilSpawnGate`); the
-save-repair module `Code/90_SaveSanitizer.lua` registers `SaveSanitizer`. The
-developer console is not a route — the veto table is read at load, long before
-anything can be typed. `SMRFixPack.ListFixes()` walks every registered fix and
-writes its identifier, status and title through the mod's logging path.
+The id is the key, not a list entry — a plain list looks valid and switches off
+nothing. Ids are the fix file names minus the `Fix_` prefix
+(`Code/Fix_LakeEntombment.lua` registers `LakeEntombment`); the save-repair
+module `Code/90_SaveSanitizer.lua` registers `SaveSanitizer`. "Before the pack
+loads" means your mod has to load first.
 
 ## Credits
 
