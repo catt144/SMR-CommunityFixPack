@@ -133,7 +133,7 @@ claim the record holds only tentatively, because that changes what the next sess
 
 ## 2 · Upload verdict
 
-**SHIP A.** The F59 repair stops all three measured harms, keeps the benefit, is falsifiable in both directions on the
+**SHIP A.** The F59 repair stops both measured harms (A1, A2; "A3" was a fixture artefact — §6), keeps the benefit, is falsifiable in both directions on the
 shipped bodies, holds on both game branches, and touched no release file. What it does NOT have is a boot: no sitting
 has seen `[CommunityFixPack] … FreedHousingNotice … applied`, and `Sleep(0)`'s latency is a model. The post-release rule
 (STATE "Rules in force": one boot `applied` log) is the gate that remains, and the four-click receipt in checklist 152
@@ -177,6 +177,38 @@ sustained by the evidence, not merely honoured.
   wrapper and on an over-broad one.
 - **A save/load A/B across the `Sleep` window** — link 01 named it as the sharpest control it did not build; still unbuilt.
 - **`items.lua`/`metadata.lua`** — read (owner's v8 writeback, `version 7 → 8`), not verified further, not touched.
+
+## 6 · CORRECTION, 2026-09-11 (same day, after `640eab8`) — A3 does not exist; finding 7, variant B and ck152 (f) are withdrawn
+
+Link 01 retracted A3 in `640eab8` and I have **verified the retraction from the shipped bodies, not taken it from the
+message.** `GetResidenceComfort` (`Residence.lua:417-418`) returns nil unless `ValidateBuilding` passes, and
+`ValidateBuilding` (`Workplace.lua:1316-1327`) rejects `destroyed`, `demolishing` and `refab_work_request` buildings.
+`ChooseResidence` turns that nil into `min_int` (`:455`), and the one tie-break that could still select it (`:459`)
+requires `best_home ~= current_home`, which is false for a homeless colonist (both are `false`). ⇒ **no residence
+selector on either branch of the dome path can pick a destroyed residence**; `MicroGHabitatBase:ChooseResidence:164`
+guards it explicitly. The three code facts in finding 7 stay true (no label removal, `working` not `ui_working`
+cleared, no `destroyed` test in `ChooseResidence`'s own text); the conclusion drawn from them was false because the
+guard is inherited through the comfort call. The fixture in both harnesses had stubbed `GetResidenceComfort` to a
+constant, which deleted a vanilla validity gate and manufactured the harm.
+
+What that changes here, item by item:
+- **Finding 7 → WITHDRAWN.** The `OnDestroyed` lead is CLOSED in vanilla's favour. **ck152 (f) withdrawn** (link 01
+  already struck it in the checklist); nothing to file.
+- **§0 variant B → an artefact, faithfully reproduced.** The `destroyed` guard is now DEFENSIVE (relabelled in the
+  module header by `640eab8`): it changes no outcome, saves one thread per evicted resident, and covers us if
+  `ValidateBuilding` ever stops testing `destroyed`. My scratch-variant method proved the harness *discriminates*; it
+  cannot prove the harness is *faithful*, and it did not.
+- **Finding 5 stands with one word changed:** the widest input the guard suppresses is still a destroyed residence,
+  and now vanilla provably wants nothing there either. Benefit intact, unchanged.
+- **Finding 3 stands** (the three entry paths are closed by `destroyed`/`DoneObject`); it now describes a defensive
+  property rather than a repaired harm.
+- **Ideas list:** the "file a C candidate" item is withdrawn; the `Building.lua:1560/:1576` EF promotion is now
+  optional rather than load-bearing.
+- **Verdict unchanged: SHIP A.** A1 and A2 and the deferral were re-run by link 01 under `real_comfort=True` (both
+  harnesses now pin the stub-vs-real difference) and I re-ran them here — see the line below.
+
+Lesson, recorded in memory as well: **a fixture stub standing in for a function that can REFUSE is a behaviour change,
+not a tolerance.** `GetResidenceComfort=function() return 50,0 end` looked inert because comfort was not under test.
 
 ## 5 · What this commit changes
 
