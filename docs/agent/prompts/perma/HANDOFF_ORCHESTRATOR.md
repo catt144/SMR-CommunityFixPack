@@ -121,8 +121,11 @@ As of 2026-09-12 **the batch as a whole had not been tackled**: no ruling stamp 
 | **141** | vanillahunt leftovers C79/C80/C81/C62. ⛔ **C78 is not owner-takeable on this Steam install** (one branch at a time) | owner (rec: C79 first) |
 | **142** | terminal audit re-derived all 12 P2s: 6 hold, 5 weakened, **C80 refuted**, C82 newly filed | owner: name any for hotfix 3, or accept file-and-watch (rec: **none today**) |
 
-⚠️ **142 also surfaces an unresolved tension the owner must settle, not an agent:** the 09-08 rule "gains are not chased"
-against the 09-09 reversal. Surface it; do not resolve it.
+✅ **The "unresolved tension" this section used to carry is GONE — checklist 161, 2026-09-12.** The owner explained the
+09-08 rule themselves: it was **triage scoped to the 1.1.0 recovery**, not standing policy, and it expired with that
+condition; the 09-09 ask was never a reversal. Unearned-gain candidates are ordinary candidates now, priced on cost.
+⛔ **Do not re-derive the contradiction** — three documents already did, and handing it back to the owner is the exact
+attention drain the original triage rule existed to prevent. 142 itself stays open as a straight cost call.
 
 ---
 

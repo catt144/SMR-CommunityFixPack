@@ -29,6 +29,49 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### ✅ 2026-09-12 — 161 CLARIFIED BY YOU: the 09-08 "we don't chase small positives" rule was **triage for the 1.1.0 emergency**, not standing policy — and it expired with the emergency. There was never a contradiction. **Nothing is owed from you; three documents stop asking.**
+
+> **Your words (2026-09-12), on why the 09-08 ruling and the 09-09 "Leave ck126 in" never fought
+> each other** — the 09-08 ruling was made
+>
+> > *"when we were trying to repair our mod, because our mod had the ability to do active harm. I
+> > did not at the time want to concern myself with things that could do no harm and are relatively
+> > minor when we was trying to get back to a functional state. I made the ruling to attempt to get
+> > agents to stop focusing on [non-]game-breaking changes."*
+>
+> **What that settles.** The 09-08 rule (item **120**, *"we fix anything negatives, a small positive
+> I am not as concerned about"*) was an **attention-routing device scoped to the 1.1.0 recovery** —
+> keep agents on the things that could hurt a player while the pack itself was capable of doing harm.
+> It was never a standing policy about gains versus losses. **The condition it was made under has
+> lifted** — v9 is live, hotfix 2 shipped, the 1.1.0 re-verification is closed — **so the rule lifted
+> with it.** Your 09-09 *"Leave ck126 in"* was ordinary judgment once the emergency framing no longer
+> applied: **not a reversal, and there was never a tension for you to settle.**
+>
+> **What changes in practice.** Unearned-gain candidates — item 142's list is
+> [C64](agent/bugs/C64.md), [C75](agent/bugs/C75.md), [C78](agent/bugs/C78.md),
+> [C67](agent/bugs/C67.md), [C79](agent/bugs/C79.md) — are **ordinary candidates from now on, priced
+> on cost and merit like anything else.** They are not auto-excluded by a rule, and they are not
+> auto-included either. Most will still land on "file and watch", because a minor win does not justify
+> provisioning a fixture — but that is a **pricing call and revisitable**, not a category ban.
+> [C82](agent/bugs/C82.md) remains the one genuine player **LOSS** on that list and never depended on
+> the ruling either way.
+>
+> ⛔ **This does not rule item 142.** You have removed the blocker; you have not said what goes on a
+> hotfix-3 list. **142 stays open, now as a straight cost call.**
+>
+> **Where this was applied** (nothing else was touched): item **142**'s tension paragraph, item **126**'s
+> "supersedes" receipt, item **120**'s scope, [F95](agent/bugs/F95.md), [C91](agent/bugs/C91.md),
+> `agent/prompts/perma/HANDOFF_ORCHESTRATOR.md` §3c, and dated corrections inside
+> `agent/reports/vanillahunt/HUNT_AUDIT.md` §3.4 and `agent/reports/HOTFIX_2_AUDIT.md`.
+>
+> ⚖️ **The lesson, and it is worth more than this case — recorded as binding authoring rule 5a in
+> `agent/WORKFLOW.md`: a ruling made under a named condition expires with that condition.** Three
+> separate documents (item 142, `HUNT_AUDIT.md` §3.4, `HANDOFF_ORCHESTRATOR.md` §3c) each re-derived
+> this false contradiction from the record and handed it back to you as an open question — which is
+> precisely the attention drain the original triage rule existed to prevent. From now on, recording an
+> owner ruling means recording the **state it was made in**, and re-reading it against today's state
+> before treating it as binding.
+
 ### 2026-09-12 — 160: our GitHub front page still says the mod **is not on a store**. One line, one decision: fix it now, or let it ride to v10?
 
 > **The problem, in one sentence.** `README.md` — the page anyone who clicks through from a
@@ -1592,8 +1635,12 @@ arrival-only. The attended C83 leg watched the arrivals for one sol; nobody move
 > - [C64](agent/bugs/C64.md), [C75](agent/bugs/C75.md), [C78](agent/bugs/C78.md),
 >   [C67](agent/bugs/C67.md), [C79](agent/bugs/C79.md) — hold, but every one is an UNEARNED
 >   GAIN for the player (permanent approval, free construction, +10 % extractors, extra meals,
->   a small RP refund). ⚠️ Your 09-08 rule said gains are not chased and your 09-09 ask
->   reversed it; the tension is yours, not resolved here. Recommendation: leave.
+>   a small RP refund). ✅ **The 09-08/09-09 "tension" this item used to hand you is
+>   DISSOLVED — item 161, 2026-09-12:** the 09-08 rule was triage scoped to the 1.1.0
+>   recovery and expired with it, and the 09-09 ask was never a reversal. **No rule
+>   excludes these; each is now an ordinary cost call.** Recommendation unchanged —
+>   leave, because a minor win does not pay for a fixture — but that is **pricing, and
+>   revisitable**, not a category ban.
 > - [C58](agent/bugs/C58.md) (4 % of a reserved portion; depot half impossible),
 >   [C76](agent/bugs/C76.md) (no visible effect — 1.1.0 has no per-tech price),
 >   [C68](agent/bugs/C68.md) (trigger unreachable as written) — weakened. Leave.
@@ -2373,6 +2420,11 @@ Original question, kept as asked: C74, the Rare Metals Extractor's hammer (and t
 > two-directions tension link 08 raised is settled in favour of cleaning up
 > after ourselves.
 >
+> ⚖️ [**Corrected 2026-09-12, item 161** — "supersedes" was the wrong word and no reversal
+> ever happened. The 09-08 ruling was **triage scoped to the 1.1.0 recovery** (the owner's own
+> later account), so it had already expired by 09-09; this ask is ordinary judgment after the
+> condition lifted, not a rule being overturned. The outcome below is unchanged.]
+>
 > Two reasons you gave, both recorded because they settle more than this item:
 > * *"as far as people who stay on 1.0.7 we are offering them a frozen version
 >   on github release that handles 1.0.7 so I am not concerned about that. If
@@ -2937,6 +2989,14 @@ Original question, kept as asked: C74, the Rare Metals Extractor's hammer (and t
 > ⚖️ **120 — RULED: no save cleanup is built for the stranded Astrogeologist bonus.** Your principle, verbatim,
 > and it is recorded because it generalises well beyond this one case:
 > **_"we fix anything negatives, a small positive I am not as concerned about."_**
+>
+> ⚠️ [**Scope recorded 2026-09-12, item 161** — the phrase "it generalises well beyond this one
+> case" above is the part that was wrong. The owner's own later account: this was **triage scoped
+> to the 1.1.0 recovery**, an attention-routing device to keep agents on items that could do active
+> harm while the pack was broken — **not standing policy about gains versus losses**. It expired with
+> that condition and does not bind work after v9. ⛔ Do not cite ck120 as a live rule; cite item 161.
+> The decision below stands exactly as made.]
+>
 > * The residue: `+10% production_per_day1` on AutomaticMetalsExtractors and `+10% water_production` on
 >   MicroGAutoWaterExtractors, sitting in the persisted `UIColony.label_modifiers` of any 1.1.0 save that ran an
 >   Astrogeologist playthrough under the pack. It is an unearned **bonus**, so it is not chased.

@@ -377,7 +377,10 @@ a green run is not a clearance.
 The 04/04b split was right and pre-authorised. 07 and 08 were added mid-run:
 07 because no fence owned the Test Kit (a decomposition miss the author named),
 08 because the owner reversed ck120 — the reversal is now ck126 and is the
-owner's to re-rule, not drift. The ck111 reversal (delete → rehome) is defensible
+owner's to re-rule, not drift. *[Corrected 2026-09-12, checklist **161**: it was
+not a reversal. ck120 was triage scoped to the 1.1.0 recovery and had already
+expired; the 09-09 ask was ordinary judgment after the condition lifted. Nothing
+was owed back to the owner here, and ck126 stands as ruled.]* The ck111 reversal (delete → rehome) is defensible
 on the machinery argument and the code matches vanilla's loop verbatim; the
 risk stated when (a) was recommended has not gone away, and row 6 of the sitting
 is where it is paid. The one structural fault: 06 (text) ran before 08 (code),

@@ -234,6 +234,10 @@ resource groups; C82 in the Incident fixture ck140 already owns, one extra reloa
 needs the politics fixture ck137 already owns (C63), and the rest are file-and-watch —
 most are gains, not losses, and the owner's 09-08 rule and its 09-09 reversal both bear on
 whether an unearned bonus is ever chased (surfaced in 142, not resolved here).
+*[Corrected 2026-09-12, checklist **161**: there was no reversal and no open question. The 09-08
+rule was triage scoped to the 1.1.0 recovery and expired with that condition; unearned-gain
+candidates are ordinary candidates priced on cost. The recommendation above is unaffected — it
+rests on cost, not on a category ban — but ⛔ do not re-derive the "tension" from this paragraph.]*
 
 ### 3.5 What the chain's findings are worth to a player — the owner's yield question
 Twenty-four candidates from a diff of 2,437 files: after this audit, the player-facing

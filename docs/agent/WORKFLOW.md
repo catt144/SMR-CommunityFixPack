@@ -57,6 +57,21 @@ time and each one is named after the miss it prevents.
    mirrored into `docs/PLAYTEST_CHECKLIST.md` → "Decisions waiting on you"
    (one line + pointer), and struck the moment it is decided. **An owner
    decision recorded only in an entry or a report is not considered asked.**
+5a. **A ruling carries the state it was made in (R10b, adopted 2026-09-12,
+   checklist 161).** When you write an owner ruling down, record the CONDITION
+   it was made under beside the words — what was broken, what was being triaged,
+   which release it was steering. ⚖️ **A ruling made under a named condition
+   expires with that condition**: re-read it against today's state before
+   treating it as binding, and ⛔ **never record a later, different ruling as a
+   "reversal" without first checking whether the earlier one's condition still
+   holds.** Named after the miss: the 09-08 *"we fix anything negatives, a small
+   positive I am not as concerned about"* ruling was **triage scoped to the 1.1.0
+   recovery** — an attention-routing device for a period when the pack could do
+   active harm. Recorded without that scope (and, worse, stamped "it generalises
+   well beyond this one case"), it read as standing policy, and **three separate
+   documents re-derived a false contradiction with the 09-09 ask and handed it
+   back to the owner as an open question** — the exact attention drain the
+   original triage rule existed to prevent.
 
 Two mechanical rules that came with the same restructure:
 
