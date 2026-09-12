@@ -49,6 +49,17 @@ completed tests move whole to
 > call under our policy, not a code error, so it would sit beside the Biorobots and asteroid-vacuum rows. The
 > hourly sampling itself stays theirs. Entry: [C89](agent/bugs/C89.md). Developer note drafted below the reporter
 > reply in `FIELD_REPORT_REPLIES.md`.
+>
+> **Gut check you asked for (same day):** an average-good player keeps Prosperity content almost regardless. One
+> dome blip costs 300 and all domes together floor at 3,000, while the faction pays 1,500 for smart residences,
+> 900 and 1,200 for the two extractor types, 1,500 for factories and 1,500 again for three shifts — a player who
+> builds toward it has 3,000 to 6,000 of headroom and "content" needs zero. Only a player hovering near zero is
+> tipped, and tension needs several bad midnights in a row. The ten-colonist guard protects the first dome and a
+> dome that is still filling; a dome of ten with one idle worker trips it either way. The twelve-hour idle figure
+> is the quiet-colony ceiling — any workplace change in the cluster re-sweeps the idle immediately. ⇒ the harm
+> the reporter saw is the notification and the hour-stale panel, and a guard would not touch that. **Revised
+> recommendation for (c): no.** For (b): the report came through our channel, so the route is the fix list the
+> developers already plan from, or the Building Codes thread where their developer is active.
 
 > **What it is:** the faction's "high unemployment" dislike is a **once-an-hour snapshot** (stored and shown on the
 > panel until the next hour, and it fires a notification the first hour it appears), while the top-bar Unemployed
