@@ -168,7 +168,8 @@ none of the four present DataPatch modules is optional. No code fix was landed.
 
 ## Landing receipts
 
-Implementation/report landing SHA is recorded below after the implementation commit. The follow-up
+Implementation/report landing: **576581c00e95f090414353a6df537f7b99293527** — only the eleven explicit
+task paths, including this report and the brief deletion. Its pre-commit doccheck was GREEN. The follow-up
 receipt commit is identified by `git log -1 -- docs/agent/reports/DESKBENCH_C90.md`; a commit cannot
 contain its own hash. Both exact SHAs are supplied in the final owner handback.
 
