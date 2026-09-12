@@ -25,11 +25,15 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   A3 (F118) · A10 · A5 c2 · A9 c4/c5 · F117's station recipe · the first `RunAll()` on the 94-probe kit (re-stamps
   `WORKFLOW.md:407`, VOID since 09-09). ⛔ Kit verdicts are PREDICTIONS until then; still FAIL/ERROR by name:
   `C47OpenFarmSeedBufferShape` (Herbs 100→50), retired `LanderCargoRatchet`/`DroneUnreachableForever`/`AutoExportPriority`.
-- ⏭ NEXT: **fire `prompts/SURFACE_AUDIT_FABLE.md`** (ck156 RULED 09-12: retire F37 + F43/F118, F21 STAYS, F31 deep-dig; wording =
-  `reports/still-needed/WORDING_RULED.md` + its ⚖️ VOICE RULE), then `RELEASE.md` on the outbox's Held batch = v10. Handoff
-  `prompts/perma/HANDOFF_ORCHESTRATOR.md`. Desk `prompts/DLC_DEEP_CHECK.md` (`HUNT_AUDIT.md` §8).
+- 🔴 RUNNING 09-12 night (⛔ do not enter their lanes; a MODULE SETS/PARSE red may be the builder mid-edit):
+  `smr-bugfixpack-aa` = `prompts/C85_C88_BUILD.md` (C85 sweep · **C89** dome gate, judgment call · C88 prefab; owns `Code/`,
+  `items.lua`, TestKit, outbox Pending; ck158) · `smr-bugfixpack-07` = `prompts/SURFACE_AUDIT_FABLE.md` (ck159, report only).
+- ⏭ NEXT when both report: `RELEASE.md` over the outbox's **Held** batch + their 3 Pending = **v10**; text =
+  `reports/still-needed/WORDING_RULED.md` + its ⚖️ **VOICE RULE** (binds every surface); ck156 RULED (retire F37 + F43/F118,
+  F21 STAYS, F31 → the audit). ⛔ Re-derive every count once. Then the owner's upload + the **held** site deploy.
+  Handoff `prompts/perma/HANDOFF_ORCHESTRATOR.md` §3 LIVE. Desk `prompts/DLC_DEEP_CHECK.md` (`HUNT_AUDIT.md` §8).
   ⭐ FR-1 TEMP WORKAROUND MOD LIVE 09-11 (Steam 3799500849 / PDX 158711; FINDINGS §11–§12). ALL FR-1 work → `prompts/perma/LINUX_DISPATCH.md`.
-  Field: 3 working (one 10xx), 1 failing (GTX 1070, log requested). Chain `prompts/fixtoggles/` (ck148). Owner: ck155 v8+v9 receipts · ck144 (v7 checks + sounds thread).
+  Field: 3 working (one 10xx), 1 failing (GTX 1070, log requested). Chain `prompts/fixtoggles/` (ck148). Owner: ck155 v8+v9 receipts · ck157 (C89 reply + dev route) · ck144 (v7 checks + sounds).
   vanillahunt CLOSED 09-10 (99): instruments SOUND WITH STATED GAPS — 1,281 table-level hunks in 368 rowed hand files listed by
   no instrument (§1.4); 12 P2s re-derived: 6 hold, 5 weakened, **C80 REFUTED**; **C82** filed by the audit (Incident reactors stay
   off); every P2 is a gain/cosmetic except C82/C66/C63; ck142 = hotfix-3 list (rec none). FR-1/2/3 OPEN (FR-1 → LINUX_DISPATCH).

@@ -3,7 +3,9 @@
 ⏳ **TEMPORARY resident of `perma/`** (owner, 2026-09-11): it stays here only until the pending outbox (§3) is empty or the owner
 says things have settled, and then it is `git rm`'d. Its history is in SESSION_LOG, and each item has a named home. Written
 2026-09-11 by `smr-bugfixpack-5d` at the owner's stop (context); **updated the same day by `smr-bugfixpack-0d`** at its stop
-(field leads: §1b, §3, §4). **Verify every specific against `git log` and the tree**; the records win. Claude and Codex sessions both
+(field leads: §1b, §3, §4); **rewritten 2026-09-12 at the owner's stop by `smr-bugfixpack-d0`** (§1c and the LIVE
+block at the top of §3 are the current state; everything above §1c is history). **Verify every specific against `git log`
+and the tree**; the records win. Claude and Codex sessions both
 commit here, and Codex is invisible to `ListAgents`.
 
 ## 0 · Orient, then ask
@@ -43,6 +45,29 @@ which is fully briefed.
   prefabs, reopened on the owner's pushback, waiting on the devs). Meteors: not a bug. Deep scan: the Adapted Probes rule.
 - Peer `smr-bugfixpack-24` authored the fixtoggles chain (`prompts/fixtoggles/`, checklist **148**); it owns any Beta label.
 
+### 1c · 2026-09-12 (`smr-bugfixpack-d0`) — v9 closed, ck156 ruled, C89 filed and ruled, two prompts fired
+
+- **v9 was ALREADY LIVE and nobody had closed it.** Found by `RELEASE.md` §0.5's three reads (added after v8's
+  identical miss — it paid for itself on the very next release). Closed out: `metadata.lua` comments restored by a
+  scripted merge with the proof printed *before* writing, outbox F59/F60 → *Released in v9*, STATE + ck155.
+  ⚠️ **New wrinkle: the writeback hid inside an unrelated commit** (`1583dcd`, a card edit), so "which commit
+  bumped `version`" needs `git log -p -- metadata.lua`, not the commit subjects.
+- **ck156 RULED** (retire F37 + F43/F118, 1.0.7 frozen, the 14-item wording batch with the owner's corrections).
+  ⚖️ **A VOICE RULE was born here and binds every public surface** — plain for the players, precise for the two
+  developers, **no "no guarantees"/"unverified" hedging**; scope is stated by saying what a fix does and for whom.
+  The owner rejected 3 of Codex's 14 sentences as word salad. Text: `reports/still-needed/WORDING_RULED.md`
+  (supersedes `SURFACE_PLAN.md` where they differ); the rule is also in `PUBLIC_SURFACE_SWEEP.md` §0.
+- **F21 was challenged and survived, from source** (the owner asked why it was not a retirement): 1.1.0 still feeds
+  the inflated duration to the "Travel time (rolling average)" panel line; only the Comfort charge is gone.
+- **C89 filed, then escalated twice by the owner's own domain knowledge** — this month's clearest case of "their
+  intuitions are leads to test, not argue". A Steam report ("Prosperity angry about unemployment with 0 unemployed")
+  triaged as not-ours; the owner said *oversight territory*, and the enumeration proved it (five factions carry the
+  identical per-dome test, only Justice guards it); then the owner corrected my gut check — **I had priced the
+  balance on mid-game positives, and the early game is the binding phase** — which flipped the recommendation and
+  the ruling to BUILD. A second instrument surfaced on the re-read: `MinColonists`, which the devs set to 50 on Free
+  Love's comparable per-dome dislikes and never set here.
+- **Three prompts written, two fired the same night** (§3 LIVE block).
+
 ### Later on 2026-09-11 — the migration cluster shipped, from `smr-bugfixpack-cb` (+ `-31`, `-b7`, `-d3`)
 
 - **F59 REPAIRED, AUDITED AND WITNESSED IN PLAY.** An independent re-derivation confirmed the audit's expedition
@@ -75,6 +100,41 @@ which is fully briefed.
 - Field-report reply drafts: `docs/FIELD_REPORT_REPLIES.md` (the 2026-09-11 section).
 
 ## 3 · Pending outbox — retire this file when every line is done or rehomed
+
+### 🔴 LIVE AS THIS WAS WRITTEN (2026-09-12, the owner went off for the night) — read this before anything else
+
+**Two sibling sessions are RUNNING in this checkout.** `git pull` + `git log --oneline -15` first: if their commits
+are in, they finished; if not, they may still be working (`ListAgents`). ⛔ Do not enter their lanes, and a
+`doccheck` RED on MODULE SETS/PARSE may be the builder mid-edit, not a defect.
+
+| session | prompt | owns | ck |
+|---|---|---|---|
+| `smr-bugfixpack-aa` | `prompts/C85_C88_BUILD.md` — C85 sweep · C89 dome gate · C88 prefab handler | `Code/`, `items.lua`, `tools/desk_*`, TestKit, entries C85/C88/C89, `RELEASE_OUTBOX` Pending, `FIELD_REPORT_REPLIES.md` | **158** |
+| `smr-bugfixpack-07` | `prompts/SURFACE_AUDIT_FABLE.md` — the F37/F43 retirements, the F31 deep dig, the 14 ruled sentences | `reports/SURFACE_AUDIT_2026-09-12.md` only | **159** |
+
+Shared by both (pull before every write, commit by pathspec): `PLAYTEST_CHECKLIST.md`, `archive/SESSION_LOG.md`,
+`prompts/README.md`. Both prompts `git rm` themselves when they land, and two dossiers go with the build
+(`CLOGGED_BUILD.md`, `C88_PREFAB_BUILD.md`).
+
+**WHEN BOTH HAVE REPORTED, the next move is v10:** `perma/RELEASE.md` over the outbox's **Held** batch (the
+still-needed wording + the two retirements; the text to apply is `reports/still-needed/WORDING_RULED.md`) **plus the
+three new Pending entries**. ⛔ Re-derive every count once, never carry one: modules 46 → 49 from the build, then
+−2 for the retirements (−3 if the audit also retires F31); the card count word Forty-nine → derive; card headlines
+21 → 19 (F37 + F31); "real defects you cannot see today" three → two; **judgment calls three → four (C89)**. Then the
+owner uploads, pastes if auto-fill fails, and fires the site job **once** — it has been held since 09-11 for exactly
+this.
+
+**⛔ OWED FROM THE OWNER (nothing an agent can do):**
+- **v8 AND v9 receipts** (ck155): the version the Paradox page shows, auto-fill or paste, anything that looked wrong.
+- **ck157 (a)** post the C89 reporter reply · **(b)** route the developer note — ⚠️ that report came in through **our**
+  channel, not the dev channel, so the route is the fix list the developers already plan from, or the Building Codes
+  thread where their developer is active.
+- **ck150 (a)** the "where do you collect your bugs" wording · **ck147** field replies · **ck144** the owed v7 one-boot
+  sitting + the Steam sounds thread · **ck148** fixtoggles.
+- **The C89 in-game A/B**, which the owner flagged to observe themselves on a fresh one-shot colony (build brief S7).
+- ⚠️ The site sits at **50 live entries against a 49 card** until the v10 deploy. Deliberate and correct; say so if
+  it stretches past a day.
+
 
 **FR-1 (all of it goes to `perma/LINUX_DISPATCH.md`; listed here only so the outbox is complete):**
 - The GTX 1070 player's log: PLAYER LOG REQUEST sent? Answer pending.

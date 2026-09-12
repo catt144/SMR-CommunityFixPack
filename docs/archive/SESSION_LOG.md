@@ -50,6 +50,63 @@ the doccheck line goes to the owner verbatim.
 for itself on v9. The one new thing: a writeback can hide inside an unrelated commit (`1583dcd` was a card edit), so
 "which commit bumped `version`" needs `git log -p -- metadata.lua`, not the commit subjects.
 
+### Continued the same day — C89 filed and escalated twice, the C85/C88/C89 build brief, two prompts fired
+
+**C89 (new Steam report: "Prosperity for Mars becomes angry because of high unemployment, when there's 0
+unemployment to be had").** Triaged from source: the dislike is a **per-dome** `#Unemployed*100 >= 10*#Colonist`
+test evaluated **once an hour and stored** (`Factions.lua:716-724`, `:665-688`; the panel reads the stored list
+back at `:1167-1170` and `AddFactionLikeDislikeNotification` fires for any id absent the hour before), while the
+top-bar count is live (`Infobar.lua:799` → `ResourceOverview.lua:722`). Two hypotheses were **refuted from source
+before filing**: empty/off domes cannot trigger it (`FactionDef.lua:855`, `:862`), and expedition crews land in
+**Employed** because `disappeared` is set *before* `OnDisappear` calls `SetWorkplace(false)` (`Unit.lua:1223-1225`,
+`Colonist.lua:4992-4997`). Not ours: no module touches the labels, `CanWork`, any `FactionDef`, or the approval code.
+
+**The owner escalated it twice, and both times the enumeration proved them right.**
+1. *"This sounds like oversight territory; no other faction has a dislike that easy to trip."* Enumerating **every
+   negative like in every `FactionDef`** showed five factions carry the identical per-dome test and **only the
+   Justice Movement guards it** with `#obj.labels.Colonist >= 10` (`JusticeMovement.lua:104`, Homeless `:129`);
+   `ProsperityForMars.lua:225`, `MarsDemocraticParty.lua:88`/`:107`, `WorkersParty.lua:114`/`:133`,
+   `NewSol.lua:47`/`:66` are bare. Identical on 1.0.7. Every *other* per-dome dislike keys on something structural.
+2. *"You are missing something only a player knows: the early game is the hardest and longest-felt part."* My first
+   gut check had priced the balance on Prosperity's **mid-game** positives (smart residences +1500, factories
+   +1500 ×2, extractors +900/+1200) and concluded "content, close to certain". ⛔ **That measured the wrong
+   regime.** Early game those positives do not exist, player factions can be live from the first dome (the Assembly
+   is a 40/20/20 spire with **no research or population condition**, `MartianAssembly.lua:9-28`;
+   `Legislature.lua:833-835`), and every filling dome sits under ten colonists with its workplaces still under
+   construction. The re-read also found a **second shipped instrument**: the per-like `MinColonists`/`MinSols`
+   gates (`FactionDef.lua:771-772`, evaluated `:804-822`) — the devs set `MinColonists 50` on Free Love's four
+   comparable per-dome dislikes (`FreeLove.lua:32/51/71/90`) and on the Enlightenment research dislike, and set
+   neither gate on any of the five unemployment dislikes. ⇒ recommendation flipped to BUILD; owner ruled
+   **"bring them to 10"** and flagged it as a **judgment call** with an **in-game A/B they will observe themselves**
+   on a one-shot colony. Entry `bugs/C89.md`, checklist **157**.
+
+**Built no code — wrote the brief.** `prompts/C85_C88_BUILD.md`: one session, three modules
+(C85 sweep-only per ck154 · C89 dome gate · C88 prefab handler per ck150 b), each on top of its existing dossier
+prompt, ordered so a stop on a later item still ships the earlier ones. C89's shape is a `DataPatch` wrapping
+`DomeFilter.eval` — favourable because `FactionLikeDomes:CountDome` reads that field **at call time**
+(`FactionDef.lua:857`), unlike C88's message reactions which are captured by reference; seven `DEFECT` pins give
+per-like DEFECT-GONE when the devs add the gate themselves.
+
+**Both prompts fired by the owner the same night**, into `smr-bugfixpack-aa` (build, ck158) and
+`smr-bugfixpack-07` (surface audit, ck159); concurrency notes were added to both briefs first, and all three
+sessions declared lanes and claimed checklist numbers by message with zero collisions.
+
+**Lookback (second half).**
+- ⭐ **A quantitative gut check must name its regime.** "Close to certain" was true for a mature colony and wrong
+  for the phase the player actually lives in. Before pricing player impact, ask *which phase these numbers
+  describe* and check the **hardest** one, not the steady state. The owner — a veteran player — supplied the
+  regime; the code then confirmed it in three independent places.
+- **The asymmetry was the evidence, not the expression.** A single unguarded filter is a design choice; four
+  unguarded and one guarded, by the same studio in the same data, is an oversight. Enumerating the whole family
+  turned a "file and watch" into a ruled build.
+- **Two refutations before filing** kept the entry honest (empty domes, expedition crews) — both were my own first
+  hypotheses.
+- **Three sessions, one checkout, no collisions:** lanes declared by message, numbers claimed before writing,
+  commit by pathspec, and each `Code/` module landing with its `items.lua` entry in the same commit so a sibling's
+  `doccheck` never sees a false MODULE SETS red.
+- ⚠️ **Working-tree line endings:** this checkout is CRLF while the repo pins LF, so a Python edit must read and
+  write with `newline=""` and re-apply the file's own ending — a naive match on `\n` anchors fails silently.
+
 ## 2026-09-11 - smr-bugfixpack-cb (continued): F59 shipped and witnessed, F60 retired, C85 solved, one Reddit report refuted
 
 tags: F59 F60 C85 F108 C39 EF-019 ck151 ck152 ck153 ck154 release-outbox attended lookback
