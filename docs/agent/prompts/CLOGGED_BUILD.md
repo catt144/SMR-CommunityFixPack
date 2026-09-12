@@ -1,50 +1,38 @@
-# SKELETON BUILD — unstick a producer left "Clogged after a Dust Storm." (C85)
+# BUILD — unstick a producer left "Clogged after a Dust Storm." (C85)
 
-> 🚧 **SKELETON, NOT YET FIREABLE.** Written **2026-09-11** by `smr-bugfixpack-cb`.
-> **Staleness anchor: HEAD was `bb50f5d`.** The owner may **fold a second fix into this prompt** before it runs —
-> see the FOLD-IN SLOT at the foot. Do not fire it until the owner says the slot is closed.
+> ✅ **FIREABLE — the fold-in slot was closed empty on 2026-09-11 (see the foot).** Written by
+> `smr-bugfixpack-cb`. **Staleness anchor: HEAD was `15c6ea6`.**
 > ⚠️ Start with `git pull` + `git log --oneline -15`; records win over every specific here.
-> ⚠️ Keep a live todo list from your first tool call. 🛑 Stop and ask at any point — see the house rule in
-> `prompts/migrationfix/README.md` ("Both links can stop at any time"), which applies here too. ⚠️ That chain's
-> `01_BUILD_opus.md` was consumed on 2026-09-11; its stop rule and its close-out are in that README's HANDOFF.
+> ⚠️ Keep a live todo list from your first tool call. 🛑 **Stop and report a concern at any point** — the owner
+> granted that standing on 2026-09-11; the house wording is in `prompts/migrationfix/README.md`
+> ("Both links can stop at any time"). A stop is cheaper than a wrong ship.
 
-Entry: `bugs/C85.md`. Field reports: two Steam players on 1.1.0 (a Rare Metals Extractor and a Polymer factory),
-both saying destroy-and-rebuild was the only way out. ⚠️ **C85 does not yet carry the findings below** — they were
-established after it was written, and landing them in the entry is part of this build's job.
+Entry: `bugs/C85.md`. Field reports: two Steam players on 1.1.0 — a Rare Metals Extractor and a Polymer
+factory, both saying destroy-and-rebuild was the only way out.
 
-## 1 · Dossier — all SOURCE on 1.1.0.403908, re-checkable
+> ⛔ **ONE OWNER DECISION IS OPEN AND IT CHANGES WHAT YOU BUILD (checklist 154): sweep only, or sweep + a
+> `Duration` DataPatch as well?** §2 has the trade. **If it is unruled when you start, build the SWEEP ALONE**
+> — it is the half that rescues the players who already reported this, the Duration cannot, and the Duration
+> also adds a visible countdown, which is a UI addition and `FIX_POLICY` §4's call, not yours. Say in one line
+> of the commit body that you defaulted.
 
-**What "Clogged" is.** Not maintenance: the story bit `Data/StoryBit/BuildingClogged.lua`, fired at dust-storm
-start, `OneTime`. Its ActivationEffects disable the building **before the player answers** (`:4-8`) with
-`Reason` = `T(789863173059, "Clogged after a Dust Storm.")` — **and no `Duration`**.
+## 1 · Dossier — DO NOT RE-DERIVE IT; it is in the entry
 
-**Why no Duration matters.** `SetBuildingEnabledState` (`Lua/ClassDefs/ClassDef-Effects.generated.lua:2770-2785`)
-has two branches: with a `Duration` it spawns a game-time thread that sleeps and **re-enables automatically**;
-without one it takes the permanent `else`. Two other shipped events DO pass a duration —
-`DLC/norman/Presets/Event/BugAppetit.lua:26` (3 sols) and `KitchenRescue_Reopening.lua:44` (5 sols).
-⇒ **the engine already has the safety net and this story bit simply does not use it** — the strongest available
-argument that this is an oversight, and the one to give Paradox.
+⭐ **`bugs/C85.md` now carries the whole mechanism** (landed `15c6ea6`, dated section "mechanism resolved"),
+all SOURCE on **1.1.0.403908**. Read it rather than this prompt: **the entry is the truth, a prompt is not
+authority.** In one breath, so you know what you are building against:
 
-**Those vanilla durations survive a save/load** (checked, because it decides the fix shape):
-`CreateGameTimeThread` threads are persistable **by default** — `OnMsg.PersistSave` serialises every thread with
-`threadPersist`, with its sleep state (`CommonLua/Core/cthreads.lua:481-517`), `PersistLoad` restores them
-(`:519-524`), and `permanents` registers `Sleep`/`WaitWakeup`/`WaitMsg` as resumable stack functions (`:470-478`).
-Real-time threads must opt in via `MakeThreadPersistable`; the engine's own branching shows the asymmetry
-(`Libs/Notifications/Notifications.lua:245-251`, `Classes/ActionFX.lua:1186-1191`).
+* `BuildingClogged` disables the producer **before** the player answers, with `Reason` = `T(789863173059, …)`
+  and **no `Duration`** — while `SetBuildingEnabledState` has a `Duration` branch that auto-re-enables and two
+  other shipped events use it. The engine's own safety net, unused here.
+* A **lost reply is permanent**: the outcome path is inside `if reply then`, and the fall-through runs
+  `Complete()`, which never re-registers a `OneTime` bit. That predicts the reporters' permanence.
+* The stuck state is **two saved fields** on the building, so detection is exact and the cure is the game's own
+  setter.
+* Already **refuted**, do not re-check: the player cannot Escape that popup.
 
-**Why a lost reply is permanent, not delayed.** In `Lua/_StoryBits.lua` the whole outcome path sits inside
-`if reply then`; with no reply it falls through to `ProcessOutcomeEffects(storybit)` + `Complete()`, and because
-the bit is `OneTime`, `Complete()` does not re-register it. ⇒ the story bit is **finished and gone** while the
-building stays disabled and no follow-up was ever armed. This predicts the reporters' *permanence*, which C85's
-H1 (a delayed follow-up) does not.
-
-**Refuted, so nobody re-derives it:** the player cannot Escape the popup. `disallow_escape = #choices > 1`
-(`Lua/MarsStoryBits.lua:79`) and all four replies are always present (none carries `HideIfDisabled`,
-`BuildingClogged.lua:51/88/98/113`), so `#choices` is 4.
-
-**The stuck state is two saved fields** (`Lua/Buildings/BaseBuilding.lua:30-31`):
-`exceptional_circumstances = true` and `exceptional_circumstances_reason` = that `T`. Read the id with `TGetID`
-(`CommonLua/Core/localization.lua:48`), which handles both the packed-userdata and table forms.
+⚠️ The entry's older `H1`/`H2` sections and its first "Fix sketch" are **superseded but preserved** — read the
+dated 2026-09-11 section as current.
 
 ## 2 · Fix shape — PROPOSED, and the owner has not chosen it
 
@@ -108,19 +96,21 @@ which (Escape being blocked) means save/load or quit-to-menu with the popup open
 
 `parsecheck` · `bodycheck` (`--pin` for the `SRC:`/`DEFECT:` manifest, `FIX_POLICY` §2b) · `doccheck` GREEN with
 counts from `--emit-counts` · **H-10: a new `Code/*.lua` needs an `items.lua` entry or it ships absent** ·
-⛔ **H-02: never touch `version`, never open the Mod Editor** · land the §1 findings in `bugs/C85.md` and route
-the §2 fix-shape choice to `PLAYTEST_CHECKLIST.md` → "Decisions waiting on you" · commit by pathspec, push.
+⛔ **H-02: never touch `version`, never open the Mod Editor** · record what you built on `bugs/C85.md` and move
+its status word only as far as the evidence goes · commit by pathspec, push.
+⚠️ **`items.lua`/`metadata.lua` may still be the owner's uncommitted v8 writeback** — H-10 makes a NEW module
+collide with it head-on. `git status --short` first; if either is modified and uncommitted, **do not edit, stage
+or work around them** — ask the owner. That gate stopped `migrationfix`'s item B the same night, which is the
+precedent for stopping rather than improvising.
 ⛔ No status word here is a playtest grant; `tested-attended` is the sitting's.
 
 ---
 
-## 🧩 FOLD-IN SLOT — reserved by the owner, 2026-09-11
+## 🧩 FOLD-IN SLOT — CLOSED EMPTY, 2026-09-11
 
-A second fix may be folded into this build. **Nothing is assigned yet.** When it is, add it here as its own
-lettered item with the same shape as §1–§4 (dossier → fix shape → open checks → A/B), and say explicitly whether
-the two items are **independent** — if they are, each must be able to ship without the other, exactly as
-`migrationfix/` kept its A and B separable — and that was not theoretical: A shipped and B stopped on its own
-gate the same night (see that chain's README → HANDOFF §3). ⛔ Do not let a second item's uncertainty hold up a
-first item that is ready.
+The owner reserved this for a second fix. The candidate was the Reddit "160% productivity" thread, and it was
+**checked and is not a defect** — the extractor upgrades boost Production, never Performance, in either game
+version, and 1.1.0 actually made that sponsor goal easier twice over (`bugs/F108.md`, dated 2026-09-11;
+checklist 153). So nothing folds in and **this prompt ships one item.**
 
-**Status: OPEN — do not fire this prompt while this slot is open.**
+**Status: CLOSED — this prompt is fireable.**

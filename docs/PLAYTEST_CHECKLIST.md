@@ -29,6 +29,36 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### 2026-09-11 — 154: the clogged-producer fix is written up and ready to fire — one shape decision
+
+> **Build prompt: `agent/prompts/CLOGGED_BUILD.md` (fireable). Entry: [C85](agent/bugs/C85.md).** This is the
+> one where a Rare Metals Extractor or Polymer factory goes dead with "Clogged after a Dust Storm." and the only
+> way out is demolish and rebuild — two Steam players, and a third report since.
+>
+> **What we now know (it was worth the dig):** the game's own code has a built-in safety net for exactly this —
+> when an event switches a building off it can set a timer that switches it back on, and two other events in the
+> game use it. This one doesn't set the timer. And if the popup's answer is ever lost, the event marks itself
+> *finished* and never fires again, so the building is stranded permanently rather than just delayed. That
+> matches "never recovered" far better than our original guess did. We also killed one theory: the player
+> cannot close that popup with Escape, so that isn't the route.
+>
+> **Decision (a): sweep only, or sweep + timer as well?** **Recommendation: sweep only.**
+> - The **sweep** notices a building stuck with that exact reason and switches it back on, with two safety
+>   interlocks so it never touches one that is legitimately waiting. It writes nothing new into your save, and
+>   crucially **it rescues saves that are already broken** — which is where both reporters are.
+> - The **timer** version patches the event so future clogs heal themselves. It cannot help anyone already
+>   stuck, it edits shipped game data, and it puts a visible countdown on the building — a UI change, which is
+>   your call, not an agent's.
+>
+> If you don't rule, the prompt builds the sweep alone and says so in the commit. **Nothing here needs the
+> keyboard.**
+>
+> **Decision (b): do you want the in-game A/B in the same sitting as 144 a?** It's minutes and works on any
+> 1.1.0 colony at any sol — no dust storm needed. Select a producer, paste one line to force the stuck state,
+> and check it stays dead with the fix off and clears with it on. ⭐ The "fix off" leg is worth having on its
+> own: **it tests the entry's core claim — that nothing in the game ever clears this — which has never been
+> checked in a real game.** Full recipe in the prompt's §4.
+
 ### 2026-09-11 — 153: the Reddit "160% productivity" thread is NOT a bug — one reply to post if you want to
 
 > **Checked end to end against both game versions; no defect filed.** A Russia player can't get 3 extractors to

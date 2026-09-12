@@ -26,7 +26,7 @@
 | prompt | state |
 |---|---|
 | `C88_PREFAB_BUILD.md` | **LIVE (09-11)**: build the Building-Codes-vs-prefabs fix the PDX dev asked us to carry; gated on the release lane + checklist 150 (b); deletes itself |
-| `CLOGGED_BUILD.md` | 🚧 **SKELETON (09-11), not fireable**: unstick a producer left "Clogged after a Dust Storm." (C85) — dossier, proposed sweep + interlocks, and the owner's A/B. Has an OPEN fold-in slot for a second fix; deletes itself when fired |
+| `CLOGGED_BUILD.md` | ✅ **LIVE (09-11), fireable**: unstick a producer left "Clogged after a Dust Storm." (C85) — read-only sweep + two interlocks, acceptance conditions and the owner's A/B; dossier lives in the entry. Fold-in slot CLOSED empty; one open owner decision (ck154) with a stated default; deletes itself |
 | ~~`migrationfix/`~~ | **CONSUMED 09-11, both links.** Link 01 (`3b41d9f`) repaired F59 by deferring the notification (a THIRD harm found while building) and stopped F60's retirement on the uncommitted-release-file gate; link 02's terminal audit ruled **SHIP A** — `reports/MIGRATIONFIX_AUDIT.md`. Link 01's HANDOFF lives in git: `git show 3b41d9f:docs/agent/prompts/migrationfix/README.md` |
 | `DLC_DEEP_CHECK.md` | desk NEXT, after the fix pack is stable |
 | `HOTFIX2_SITTING.md` | closed 09-09; kept for the recipes the owed v7 sitting uses |
