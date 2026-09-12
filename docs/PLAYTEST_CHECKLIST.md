@@ -133,6 +133,12 @@ this dome, and with the fix it does not.** On a dome of **ten or more** every ro
 switched the dislike off. ⛔ If it says `GATE-ABSENT` or `shipped=not-wrapped`, the fix is not applied and
 nothing below is worth doing.
 
+> ⚠️ **Why there is no "switch the fix off" leg here, since that is how we normally do an A/B.** Turning one
+> module off needs a restart with the whole pack disabled, because this one edits the faction data once at
+> load. The `shipped=` / `live=` pair above gives you the same comparison **in the same boot, on your actual
+> dome** — `shipped=` is literally the game's own rule, kept aside so it can be asked. If you would rather
+> have the real pack-off leg as well, say so and it becomes its own item.
+
 **B2 — the colony, if you want to watch the faction itself.** This is the 20–30 minutes.
 
 1. Start a **new colony**, any sponsor except one playing with *No Politics*. Build the first dome and get
