@@ -17,6 +17,9 @@ docs/
                           drafts the owner posts, and the record of what went
                           up — agents draft them and keep them current
   FUTURE_IDEAS.md         parking lot, NOT a backlog. Nothing in it is work
+  WAITING_ON_YOU.md       GENERATED owner register — every decision and playtest
+                          leg currently held for the owner, newest first. Never
+                          hand-edit: `python tools/doccheck.py --regen`
   README.md               this map
   BUGS.md · STATUS.md     3-line stubs pointing at where they went
   agent/
