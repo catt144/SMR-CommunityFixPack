@@ -55,7 +55,8 @@ completed tests move whole to
 > The store bodies should fill themselves from `metadata.lua` ("Forty-nine repairs"); the §3 paste copies are
 > current if they do not. ⚠️ Until v9 goes up, the live pages say **Fifty** and still list the retired fix — right
 > for v8, wrong for the tree — so **after the upload run the site publish (step 4) in the same sitting**, so the
-> fix list drops to 49 with the card. Then tell me the same four things for v9.
+> fix list drops to 49 with the card. Nothing is inconsistent right now: the live site (published 21:10Z, 50 entries)
+> and the live card (Fifty) agree, and both are correct for v8. Then tell me the same four things for v9.
 >
 > ⚠️ One caveat is IN the note on purpose: the F59 expedition half was never run in play, so it says "verified in
 > the code only". ⚠️ The site's F51 and F58 rows were narrowed (`a061665`) with wording you have not approved;
