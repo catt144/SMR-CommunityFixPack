@@ -153,7 +153,7 @@ warn STATE.md is 12991 bytes, warn threshold is 12288 — copy this line VERBATI
 >
 > ✅ **152 (b) is closed:** your v8 files were committed in `9bc4360` and F60's retirement ran on top of them.
 
-### 2026-09-11 — 154: the clogged-producer fix is written up and ready to fire — one shape decision
+### ✅ 2026-09-11 — 154 RULED 09-12: sweep only, the safest version. **Build prompt: `agent/prompts/C85_C88_BUILD.md` (with C88). Nothing else owed here; the attended check comes back as its own item when built.**
 
 > **Build prompt: `agent/prompts/CLOGGED_BUILD.md` (fireable). Entry: [C85](agent/bugs/C85.md).** This is the
 > one where a Rare Metals Extractor or Polymer factory goes dead with "Clogged after a Dust Storm." and the only
@@ -431,6 +431,12 @@ warn STATE.md is 12991 bytes, warn threshold is 12288 — copy this line VERBATI
 > link stops, the question arrives here with the evidence attached.
 
 ### 2026-09-11 — 150: the Paradox developer answered in the Building Codes thread. **Three decisions: (a) what to tell them about how we find bugs, (b) the prefab fix's shape, (c) retire the farm-oxygen fix?** Nothing here needs the keyboard.
+
+> **Update 2026-09-12:** (c) is RULED by item 156 (retire). (b): you said "build it" — the build prompt
+> `agent/prompts/C85_C88_BUILD.md` carries **option 1** (both laws apply to prefab buildings, as the developer
+> will ship) and **the law's own id** on the modifier (so it becomes a no-op the day their patch lands, and
+> repeal cleans it up). Both are the recommendations; if you want the other shape, edit the override slot at
+> the top of that prompt before firing it. (a) is still yours: the reply draft in `FIELD_REPORT_REPLIES.md`.
 
 > Their post (#7, `ivanassen [developer]`): excluding prefabs is wrong and will be fixed in their next patch, so include it
 > in the mod until then. They are merging the pack's fixes into the game, and they couldn't reproduce the farm-oxygen fix.
