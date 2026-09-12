@@ -123,8 +123,8 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 ## Build state — `python tools/doccheck.py --emit-counts`, never hand-typed
 ```
 BUILD STATE (emitted by tools/doccheck.py)
-- modules: 47 registered (47 default-active, 0 optional-gated files)
-- Code/*.lua files: 48
+- modules: 46 registered (46 default-active, 0 optional-gated files)
+- Code/*.lua files: 47
 - TestKit probes: 94
 - BUGS index rows: 119 F + 12 D + 88 C
 ```

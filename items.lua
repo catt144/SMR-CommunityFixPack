@@ -1,26 +1,3 @@
--- The pack's Mod Editor item list.
---
--- ⛔ THIS PACK HAS NO MOD OPTIONS (2026-08-12, the opt-in split). Every
--- ModItemOptionToggle and ModItemOptionChoice, and the eight Opt_ modules they
--- steered, moved to the standalone Community Opt-In Pack
--- (C:\Dev\SMR-OptInPack). metadata.lua consequently has no `default_options`
--- field, so the pack no longer lists in Options → Mod Options at all — that is
--- the intended post-split shape, and the TestKit's OptionsMenuFixPack probe
--- asserts it. The rules that governed those entries (toggle name == Register
--- id == default_options key; the D09 dial exception) moved with them, into the
--- new mod's items.lua and its FIX_POLICY §5.
---
--- Individual fixes remain vetoable on PC without any of that:
--- `SMRFixPack_Disabled["<FixId>"] = true` before the pack loads.
---
--- ModItemCode entries (audit 2026-07-29, A3): the Mod Editor's SaveDef
--- regenerates metadata.lua's `code` list SOLELY from these items
--- (Mod.lua:960-974 via UpdateCode :816-840) — without them an editor
--- round-trip (and the editor upload flow, which saves-if-dirty) would write
--- `code = false` and publish a mod that loads NO code at all. ORDER IS
--- LOAD-BEARING: the entries below must stay in exactly metadata.lua's
--- current `code` order (00_Core first, then the Fix_ files, then
--- 90_SaveSanitizer last), or a round-trip reorders the load sequence.
 return {
 	PlaceObj('ModItemCode', {
 		'name', "00_Core",
@@ -127,10 +104,6 @@ return {
 		'CodeFileName', "Code/Fix_FreedHousingNotice.lua",
 	}),
 	PlaceObj('ModItemCode', {
-		'name', "Fix_DomeFreeSpaceMismatch",
-		'CodeFileName', "Code/Fix_DomeFreeSpaceMismatch.lua",
-	}),
-	PlaceObj('ModItemCode', {
 		'name', "Fix_LandscapeUnitFilter",
 		'CodeFileName', "Code/Fix_LandscapeUnitFilter.lua",
 	}),
@@ -202,26 +175,6 @@ return {
 		'name', "Fix_ExoticDepositSign",
 		'CodeFileName', "Code/Fix_ExoticDepositSign.lua",
 	}),
-	-- ⛔ ADDED 2026-08-19 (pre-launch sweep, link 6 — LAUNCH-BLOCKING). The
-	-- module shipped in `metadata.lua`'s `code` list on 2026-08-15 and its
-	-- ModItemCode was never written, so this file held 75 entries against 76
-	-- code lines. That is the exact failure the header above describes:
-	-- `SaveDef` rebuilds `code` SOLELY from these items (`ModDef:UpdateCode`,
-	-- Mod.lua:816-840 — `local code = false`, then one entry per item, no disk
-	-- scan; `SaveDef` calls it at :973), and BOTH portals force a
-	-- `SaveWholeMod` on a first upload — Steam's runs in step 1 of `UploadMod`,
-	-- BEFORE `CreatePackageForUpload` (`Steam_PrepareForUpload`,
-	-- SteamWorkshop.lua:17-22; GedModEditor.lua:786-793). Steam would therefore
-	-- have shipped a `code` list with this file missing, and the automation-law
-	-- compensation fix would never have loaded for a single player.
-	-- Added 2026-08-20 (close-out chain, link 1 — C51). Written by hand, in the
-	-- same position it takes in `metadata.lua`'s `code` list, per the header
-	-- above and H-10: a module absent from this file SHIPS ABSENT.
-	-- Added 2026-08-20 (close-out chain, link 2 — C50), same rule as above.
-	-- Added 2026-08-24 (F105, post-release maintenance — owner ruling, checklist
-	-- 72), same rule as above: hand-written, in metadata.lua's `code` position.
-	-- Added 2026-08-28 (F108, post-release maintenance — owner ruling, Steam field
-	-- report), same rule as above: hand-written, in metadata.lua's `code` position.
 	PlaceObj('ModItemCode', {
 		'name', "Fix_JumboCaveReinforcementWedge",
 		'CodeFileName', "Code/Fix_JumboCaveReinforcementWedge.lua",
