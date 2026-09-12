@@ -29,6 +29,38 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### ✅ 2026-09-12 — 167 RULED BY YOU: **the opt-in mod's decisions move to the opt-in mod's repo.** Eleven items off your list; three stay because they bind the fix pack. **Nothing is owed from you.**
+
+> **Your words:** *"Can we fully offload anything opt-in related to its repo, and just retain anything
+> that's fact based that could be useful, like engine facts etc, and just rehome those facts where
+> they should be?"*
+>
+> **Done.** Items **84, 85, 89, 90, 91, 92, 93, 94, 95, 96, 97** now live in
+> `C:\Dev\SMR-OptInPack\docs\DECISIONS_OWED.md`, **reproduced verbatim** — nothing deleted, nothing
+> re-summarised. The four source reports were already in that repo, so only the decisions needed
+> moving. ⛔ They are that mod's launch obligations and it is not launching.
+>
+> ⭐ **Three did NOT move, because they bind the fix pack rather than that mod** — and this is the
+> "retain anything useful to us" half of your ruling:
+>
+> | item | why it stayed |
+> |---|---|
+> | **83** | the **Test Kit is SHARED**, so those edits land in our tree. ⏸ Not owed and not urgent, but two of its five proposals (a `RunAll` owner filter, a `PACK_ID` on the enable-path leg) would improve the kit **for us** regardless of that mod |
+> | **86** | `EF-###` ids are allocated **by this repo** — a rule about OUR facts index. ⚠️ **Already in force**, resolved 08-31: a fact learned there is filed here first, then mirrored. Nothing owed |
+> | **88** | `FUTURE_IDEAS.md` #9 is a **fix-pack feature** (per-fix player toggles), parked there only by analogy. ⭐ Overtaken: it is what checklist **148**'s `fixtoggles/` chain builds, so it rises or falls with 148 |
+>
+> ✅ **On the facts half — checked, not assumed, and the answer is that nothing was stranded.** Every
+> engine fact those items cite (`EF-023`, `EF-059`, `EF-069`, `EF-072`) is **already in this repo's
+> `agent/facts/INDEX.md`**, which is the canonical home for both repos — that is exactly what item 86
+> above enforces. So the offload rehomed no facts because there were none to rehome, and item 86 is
+> the reason why.
+>
+> ⚠️ **One thing recorded on the way out, because it is what would most mislead whoever opens that
+> file next:** all eleven were written 2026-08-31 / 09-01, **before 1.1.0 + the first DLC shipped on
+> 09-08**, and **none has been re-verified since**. The new file says so at the top and tells its
+> reader to re-check every citation against the live tree first. This project has already been bitten
+> by exactly that: line numbers moved, modules were deleted, and some defects vanilla fixed itself.
+
 ### ✅ 2026-09-12 — 166 RULED BY YOU (batch 1 of the decision sweep): **133 (2) as a hybrid · 133 (4) label-only · 135 into hotfix 3.** All three landed the same session. **Nothing is owed from you.**
 
 > **(a) 133 (2) — an UNKNOWN probe answer DECLINES, and an exception is PROPOSED, never taken.**
@@ -4095,106 +4127,32 @@ Original question, kept as asked: C74, the Rare Metals Extractor's hammer (and t
      -context adversarial QA. Accept, reorder, or cut scope — and tell us where it sits against
      the opt-in pack (item 68), which was the named next effort before today.
 
-### 2026-09-01 — ITEMS 94–97 OPEN: the D06 rebuild DESIGN SPEC (opt-in repo, `docs/agent/reports/DRONE_REBUILD_DESIGN_20260901.md`)
+### ✅ 2026-09-01 — ITEMS 89–97 **OFFLOADED to the opt-in repo 2026-09-12 (ck167).** Item **88 STAYS** — it is a fix-pack feature. **Nothing here is owed from you.**
 
-> The spec is the build-out of the tiers **under your directive that it must not need the Save
-> Rescue or any uninstall mod** — which makes "uninstall-clean" and "nothing for the Rescue to do"
-> hard constraints rather than trade-offs. Its build brief
-> (`prompts/DRONE_REBUILD_BUILD.md`) is written and **will not start until item 94 has a line.**
+> ⭐ **Your ruling:** *"Can we fully offload anything opt-in related to its repo, and just retain
+> anything that's fact based that could be useful — and rehome those facts where they should be?"*
+>
+> **Where they went.** Items **89, 90, 91, 92, 93, 94, 95, 96, 97** — the drone-rebuild design spec,
+> the bands-and-clean-revert report and the contamination audit — are now
+> `C:\Dev\SMR-OptInPack\docs\DECISIONS_OWED.md`, **reproduced verbatim**, alongside 84 and 85.
+> Nothing was deleted, nothing re-summarised, and the four source reports were already in that repo.
+> ⛔ **They are that mod's launch obligations. It is not launching, so nothing is owed.**
+>
+> ✅ **No engine fact needed rehoming, checked rather than assumed.** Every fact those items cite —
+> `EF-023`, `EF-059`, `EF-069`, `EF-072` — is **already in this repo's `agent/facts/INDEX.md`**, which
+> is the canonical home for both repos (item 86). Nothing was stranded by the move.
+>
+> ⚠️ **Recorded on the way out, because it is the thing most likely to mislead whoever opens that file:**
+> all of it was written 2026-08-31 / 09-01, **before 1.1.0 + the first DLC shipped on 09-08**. Every
+> citation in it predates the patch and **none has been re-verified since.** The file says so at the top.
 
-97. **The disclaimer's final player-facing wording.** A full draft is spec §7 — what the module
-    does, what it does NOT do (it changes which job is served first, never which pile feeds it —
-    a broken water extractor can still wait on parts scavenged across the map while a full depot
-    sits beside it, `EF-059`), and the off-ramp. Two of its sentences are gated on the playtest's
-    uninstall legs actually running and do not ship before that. Reword, approve, or say "at the
-    build".
-
-96. **Repair moonlighting: keep or drop?** The spec recommends **KEEP, mechanism unchanged.**
-    For: it serves ground the tiers do not — the tiers reorder work *within a hub's poll*, and a
-    workless drone helping a saturated neighbour is the only thing in the module that moves labour
-    between fleets; its F86 leak was repaired 08-01 and verified by PT-58; it reads the flat
-    `const.MaxBuildingPriority`, which the tiers never touch, so there is no interaction to reason
-    about. Against: it was never measured (the B2 table records `vetoed`, not `moonlighted`), and
-    dropping it makes the rebuild a strictly smaller product. Spec §6 part 2.
-
-95. **Food-service default priority 3: in the rebuild, separate, or dropped?** `ServiceWorkplace`
-    AND a Food demand = exactly four buildings (Diner, Mega Mall, Grocer, Small Grocer). Q4 makes
-    it clean — `priority` is a class member, no template sets one, instances carry it only after a
-    real change, so it is omitted from saves and reverts on uninstall. ⚠️ One honest limit the
-    spec adds: priority is baked at queue-insert, so on an existing colony the change reaches the
-    four only at their next re-registration — the build handles that with a **targeted** reconnect
-    of those four buildings, not a colony-wide one. Your 07-31 framing was "correct attribution of
-    failure", which ties it to the same complaint as the tiers; the counter is that it is a
-    *supply-allocation* opinion riding on an *urgency* toggle. Spec §2 row 3, §6 part 5.
-
-94. **RATIFY THE D06 REBUILD SPEC — the mechanism and the tier table. This answers item 91.**
-    Mechanism: **V-a "view tiers"** — the tiers are a VIEW handed to the matcher in transient
-    tables, the filing stays vanilla's; nothing is ever written at band 4 or 5. Fallback ladder
-    already written into the spec and the brief: **P** (finder pre-emption) if E-4 fails, **2-S**
-    (table surgery at band 3, no experiment owed, one band) if E-8 fails too, **D** (the devs' own
-    tier on the five producers) if you rule the 5/4/3 distinction a preference. The claim gate is
-    deleted; ONE toggle; D09 stays separate. Footprint: **zero new persisted names**, argued per
-    structure from `EF-072`'s only-route rule — and it is an argument, not yet a witness (the
-    Mod-Manager-disable and both-config legs are what witness it). Two matcher cells still need
-    item 92. **Nothing is built until this line exists.**
-
-### 2026-09-01 — ITEMS 91–93 OPEN: the drone bands-and-clean-revert report (opt-in repo, `docs/agent/reports/DRONE_BANDS_CLEAN_REVERT_20260901.md`)
-
-93. **Should the urgency tiers apply to rockets and RC Rovers, or to Drone Hubs only?**
-    Every `DroneControl` carrier shares `FindTask`, so a wrapper there serves tiers on
-    rockets/rovers too unless gated on `DroneHubBase` the way v1's claim gate is
-    (`Opt_DroneOverhaul.lua:185`). Rovers are player-zoned; rockets refuel/unload. Say
-    "hubs only", "all carriers", or "decide at the build brief" (report §4.2 V, R11).
-
-92. **Run the two matcher experiments (E-4, E-8; ≈ 70 attended minutes, one sitting, NEW
-    game, TEMPORARY TestKit module)?** They are the only cells the desk could not fill:
-    does `Request_FindTask` honour a mod-built table set, and is a wrapper-substituted
-    pairing claimed and executed like a matcher-chosen one. E-9 (tier precedence, n≥3)
-    follows if both pass; E-3/E-5 only if option 1 is chosen; E-6 turns EF-069 from
-    source-read to measured; E-2 is refused by EF-023. Cards with predictions: report §5.
-    Say which to run, or "none yet".
-
-91. **The D06 design decision, restated with the new inputs (supersedes the three-option
-    framing in `prompts/perma/DRONE_PROJECT_PROMPT.md` §3 as the thing to decide).** The report's
-    ranked shortlist: (1) **V** view tiers — bands 4–5 as tier ORDER handed to the matcher
-    in transient tables, full 5/4/3 distinction, zero residue by construction, pending E-4
-    and E-8; (2) **P** finder pre-emption, same result, pending E-8 only; (3) **2-S** table
-    surgery at band 3 — clean revert from citations alone, no experiment, but ONE band
-    (the pipes/dome tier); (4) **D** the devs' own tier on the five producers only.
-    Bands 4–5 as PERSISTED data (option 1) fail uninstall by the §9 measurements and the
-    Rescue would have to learn a queue shape; tear-down-on-save is layer 1, which you
-    declined 2026-07-31, and Src shows it cannot hold its invariant on autosaves. **Two
-    questions decide it:** (a) is *5 vs 4 vs player-3* a requirement (V/P) or a preference
-    (2-S/D suffice)? — the devs' own tier is one band and they withdrew a one-band urgency
-    in 2018; (b) if a requirement, do you authorise item 92 first? The recommendation is V
-    with 2-S as the documented fallback; the pick is yours. Nothing is built until you say.
-    ⭐ **2026-09-01: ANSWERED IN FORM BY ITEM 94** — the opt-in mod's rebuild-design session
-    turned the recommendation into a full spec (mechanism, tier table, guard, footprint,
-    playtest, build brief). Rule item 94 and 91 closes with it.
-
-### 2026-09-01 — ITEMS 88–90 OPEN: raised by the OPT-IN mod's contamination audit (its repo, `docs/agent/reports/CONTAMINATION_AUDIT_20260901.md`)
-
-90. **Does your 2026-08-02 loc-table ruling extend to the opt-in mod?** You ruled
-    (this repo's `FIX_POLICY` §6) that *the pack* WILL ship its own `ModItemLocTable`
-    translations post-release — twelve days before the split, about THIS mod. The
-    opt-in mod has 17 `Untranslated(` sites (rollover titles, policy rows, the
-    stand-down dialog) and its `FUTURE_IDEAS.md` #4(b) hangs on the answer. Say
-    "both", "fix pack only", or "decide at its launch".
-
-89. **Opt-in `Code/`: allow a comment-only wording sweep?** Five comments still speak
-    the donor's terms — "the pack" meaning the opt-in mod itself
-    (`00_Core.lua:497`, `:536`, `:558`, `Opt_ResidencyControl.lua:63`) and one that
-    points players' FAQ guidance at THIS repo's frozen `MOD_DESCRIPTION.md`
-    (`Opt_NoHomeless.lua:319`). Zero behaviour change, parse sweep after; but it is a
-    module-file edit, so it is yours. Say "sweep" or "leave as history".
-
-88. **`FUTURE_IDEAS.md` #9 ("Per-fix player toggles for the FIX PACK") is parked in
-    the OPT-IN repo with no ruling of its own.** Your 2026-08-14 move order covered
-    "anything that's possible opt ins"; #9 is a fix-pack feature (a Mod Options page
-    for THIS mod's fixes), routed there by analogy to #5. It also carries a stale
-    release rider ("confirm `MOD_DESCRIPTION.md` no longer says 'in the console'")
-    and cites a prompt that no longer exists (`COVERAGE_SWEEP_SMRCF.md`). Say "keep
-    there", "move to this repo's `FUTURE_IDEAS.md`", or "delete".
+88. ⏸ **STAYS — it is a FIX-PACK feature parked in the wrong repo.** `FUTURE_IDEAS.md` #9,
+    "per-fix player toggles for the FIX PACK", is a Mod Options page for **this** mod's fixes; it was
+    routed to the opt-in repo on 2026-08-14 by analogy to #5, and has no ruling of its own.
+    ⭐ **It is also no longer hypothetical: this is what checklist 148's `prompts/fixtoggles/` chain
+    builds**, and you deferred that on 09-12. ⇒ **Nothing to decide here** — #9 is overtaken by 148
+    and rises or falls with it. ⚠️ Its two stale riders are noted so nobody chases them: it cites
+    `MOD_DESCRIPTION.md` (frozen) and a prompt that no longer exists (`COVERAGE_SWEEP_SMRCF.md`).
 
 
 ### ✅ 2026-08-31 — ITEM 87 RULED THE SAME DAY: drones UNFROZEN
@@ -4208,45 +4166,35 @@ Original question, kept as asked: C74, the Rare Metals Extractor's hammer (and t
     whether `FUTURE_IDEAS.md` #7 (gleaner / pairing policy) is un-parked too — this
     ruling was read as NOT touching that post-launch parking.
 
-### 2026-08-31 — ITEMS 83–86 OPEN: raised by the OPT-IN mod's readiness pass (its repo, `docs/agent/reports/READINESS_REVIEW_0831.md`)
+### ✅ 2026-08-31 — ITEMS 83–86: **84 and 85 OFFLOADED to the opt-in repo 2026-09-12 (ck167). 83 and 86 STAY — they bind the fix pack, not that mod.**
 
-86. **Ratify or reverse: `EF-###` ids are allocated by THIS repo.** After the split
-    both repos minted their own numbers and collided (the opt-in repo's `EF-057`/`058`
-    of 08-16 were different facts from ours). Resolved 08-31 by re-syncing its facts
-    folder from ours @ `bec2e06`; the rule written into its `WORKFLOW.md`: a fact
-    learned there is filed HERE first (or its next id reserved here), then mirrored
-    there at the same id. Costs you nothing; say "reverse" if you want independent
-    numbering with a prefix instead.
+> Raised by the opt-in mod's readiness pass (its repo, `docs/agent/reports/READINESS_REVIEW_0831.md`).
+> **84** (three unpaired wrap sites in its `Code/`) and **85** (its preview art) are that mod's launch
+> obligations and now live in `C:\Dev\SMR-OptInPack\docs\DECISIONS_OWED.md`, verbatim. The two below
+> did **not** move.
 
-85. **Preview art for the opt-in mod (owner task).** `tools/upload_preflight.py`
-    run against `C:\Dev\SMR-OptInPack` FAILS on exactly one clause: no `image` /
-    `preview.png` — Paradox rejects before packing (`ParadoxMods.lua:39`). Same
-    limits as ours (≤1 MB Steam / ≤2 MB PDX). Not urgent — that mod is not launching —
-    but it is the only mechanical FAIL between it and an upload sitting.
+86. ⚠️ **STAYS — it is a rule about THIS repo's facts index, not an opt-in decision, and it is
+    ALREADY IN FORCE.** `EF-###` ids are allocated **here**. After the split both repos minted their
+    own numbers and collided (the opt-in repo's `EF-057`/`058` of 08-16 were different facts from
+    ours). Resolved 08-31 by re-syncing its facts folder from ours @ `bec2e06`, and the rule is
+    written into that repo's `WORKFLOW.md`: **a fact learned there is filed HERE first** (or its next
+    id reserved here), then mirrored there at the same id. ⇒ **Nothing is owed** — it costs you
+    nothing and it is running. Say "reverse" only if you ever want independent numbering with a
+    prefix instead. ⭐ This is also why no engine fact needed rehoming in the 09-12 offload: every
+    fact those items cite (`EF-023`, `EF-059`, `EF-069`, `EF-072`) was **already in our index**.
 
-84. **Opt-in: name three wrap pairs in `Require` blocks?** The F107 check (now run by
-    its doccheck) found three capture+install sites with no Require pair:
-    `Opt_DroneOverhaul` → `Drone.CleanUnreachables` + `TaskRequestHub.FindTask` (that
-    module uses inline guards, no `Require` at all) and `Opt_MultipleSuns` →
-    `SolarPanelBase.GameInit`. Each captured class DECLARES the method at Src
-    (Drone.lua:879, _TaskRequest.lua:72, SolarPanel.lua:8), so `prev` is real and
-    nothing is broken — they are allowlisted with those citations. The tidy fix is a
-    code edit to frozen modules (`DroneOverhaul` carries PT-52's freeze) and needs an
-    A/B. **Options:** (a) leave allowlisted until the next planned edit of each file;
-    (b) do it at the opt-in launch session with its boot check. Recommend (a).
-
-83. **TestKit edits for the opt-in mod's coverage (needs your go — it is the SHARED
-    kit).** Survey findings (`READINESS_REVIEW_0831.md` §5): the kit has **no opt-in-only
-    run mode** (a standalone leg prints ~85 fix-pack FAILs around 8 real verdicts);
-    **D06 `DroneOverhaul` has no `RunAll` probe** (only the manual stress harness);
-    `98_EnablePathLeg.lua:54` hardcodes `SMR_CommunityFixPack`, so the opt-in mod's
-    normal first-run path has never been measured by that leg; `99_FixtureCarry.lua`
-    channel 5 hardcodes `SMRFixPack_F35_` and cannot see D09's dial modifiers; only
-    D12 has a vanilla-control clause (the 08-24 probe rule). **Proposed, in order of
-    value:** (1) `RunAll` owner filter + a `fix pack absent = expected` mode;
-    (2) `PACK_ID` parameter on the enable-path leg; (3) FixtureCarry D09 channel;
-    (4) a D06 `RunAll` probe; (5) control clauses for D01–D04/D07/D09. Each needs a
-    real launch to verify; none was made. Say which, or "all, next sitting".
+83. ⏸ **STAYS — the Test Kit is SHARED, so these edits land in our tree.** ⛔ **Not owed, and not
+    urgent:** every item needs a real launch to verify, none was made, and the opt-in mod is not
+    launching. Survey findings (`READINESS_REVIEW_0831.md` §5): the kit has **no opt-in-only run
+    mode** (a standalone leg prints ~85 fix-pack FAILs around 8 real verdicts); **D06
+    `DroneOverhaul` has no `RunAll` probe**; `98_EnablePathLeg.lua:54` hardcodes
+    `SMR_CommunityFixPack`, so the opt-in mod's normal first-run path has never been measured by
+    that leg; `99_FixtureCarry.lua` channel 5 hardcodes `SMRFixPack_F35_` and cannot see D09's dial
+    modifiers; only D12 has a vanilla-control clause. **Proposed, in value order:** (1) `RunAll`
+    owner filter + a `fix pack absent = expected` mode; (2) `PACK_ID` parameter on the enable-path
+    leg; (3) FixtureCarry D09 channel; (4) a D06 `RunAll` probe; (5) control clauses for
+    D01–D04/D07/D09. ⚠️ Items (1) and (2) would improve the kit **for us** regardless of that mod,
+    which is the only reason this is still on your list at all.
 
 
 ### ✅ 2026-08-30 — ITEM 82 CLOSED: F110 live on both stores in v5, site deployed, delivered Steam pack verified. Nothing owed.

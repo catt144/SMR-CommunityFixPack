@@ -93,7 +93,7 @@ RULE**. ⛔ **Re-derive every count once, carry none:** modules ±the retirement
 | **98** | the 1.0.7 branch: pin back, move the baseline to 1.1.0, or both — see §5 |
 | **53** | hardening-queue **row 3** (see §5), plus the older timing call (harden now or in 1.0.1, rec 1.0.1) |
 | **47** | the veto-snippet rider: the modder-page example still names `DustDevilSpawnGate`, deleted by `2dc1dbe` |
-| **83–97** | the opt-in-mod repo decisions, never ruled. ⚠️ **88 is overtaken** by ck148 |
+| **83** | the SHARED Test Kit's opt-in coverage — ⏸ not owed; 2 of its 5 proposals help us regardless. ✅ **84/85/89–97 OFFLOADED to the opt-in repo 09-12 (ck167); 86 is already in force; 88 rides with ck148** |
 | — | the **C89 in-game A/B** the owner flagged to observe personally, and the **three site files** below |
 
 ⛔ **`C:\Dev\SMR-CommunityMods` has three uncommitted files waiting on the owner** (2026-09-12): `content/faq.md`,

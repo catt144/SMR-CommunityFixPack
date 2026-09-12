@@ -38,6 +38,8 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   ⭐ FR-1 TEMP WORKAROUND MOD LIVE 09-11 (Steam 3799500849 / PDX 158711; FINDINGS §11–§12). ALL FR-1 work → `prompts/perma/LINUX_DISPATCH.md`.
   Field: 3 working (one 10xx), 1 failing (GTX 1070, log requested). Chain `prompts/fixtoggles/` (ck148, DEFERRED 09-12).
   Owner OWES: ck151 (b)/(c) · ck144 (a) v7 boot · ck98 (1.0.7 branch) · hardening row 3.
+  ✅ ck167 09-12: opt-in items 84/85/89-97 OFFLOADED to `SMR-OptInPack/docs/DECISIONS_OWED.md` (verbatim, ⚠️ all pre-1.1.0, unverified).
+  83 (SHARED TestKit) + 86 (EF-ids are OURS, in force) + 88 (fix-pack feature, rides ck148) STAY. No fact needed rehoming — all 4 already ours.
   ✅ ck166 09-12: 133 (2) DECLINE, exception is PROPOSE-only · 133 (4) `LuaRevision` = label, NEVER a guard (118 unweakened).
   Both in `FIX_POLICY` §2a. 135 → hotfix 3 (⛔ not v10; now that batch's ONLY item). **ck133 fully closed.**
   ⛔ **ck165: REPLIES ARE PULL-ONLY — never list one here** (ck157 removed 09-12). ✅ ck162 FULLY RULED 09-12 (all four §4 loose ends shut;
