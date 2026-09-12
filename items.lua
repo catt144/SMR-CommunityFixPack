@@ -239,6 +239,13 @@ return {
 		'name', "Fix_FactionDomeSizeGate",
 		'CodeFileName', "Code/Fix_FactionDomeSizeGate.lua",
 	}),
+	-- Added 2026-09-12 (C88, post-release maintenance — owner ruling, checklist
+	-- 150 (b) option 1; a Paradox developer asked us to carry it until their patch),
+	-- same rule as above.
+	PlaceObj('ModItemCode', {
+		'name', "Fix_BuildingCodesPrefab",
+		'CodeFileName', "Code/Fix_BuildingCodesPrefab.lua",
+	}),
 	PlaceObj('ModItemCode', {
 		'name', "90_SaveSanitizer",
 		'CodeFileName', "Code/90_SaveSanitizer.lua",
