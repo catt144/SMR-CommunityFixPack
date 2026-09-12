@@ -19,6 +19,16 @@ complete and the owner has ruled on retirement/constituency and wording in
 `docs/PLAYTEST_CHECKLIST.md` item156. Then run this whole sheet, including every
 card copy/intro/category/count, and use RELEASE_OUTBOX's **Held after-v9** batch.
 Do not consume it in v9 or equate this audit's report push with public publication.
+**Update 2026-09-12:** v9 is closed and item 156 is RULED — the text to apply is
+`reports/still-needed/WORDING_RULED.md` (owner-ruled; supersedes `SURFACE_PLAN.md`
+where they differ), gated on `prompts/SURFACE_AUDIT_FABLE.md` reporting first.
+
+⚖️ **VOICE RULE (owner, 2026-09-12) — binds every surface on this sheet.** Plain
+enough for the players, precise enough for the two Paradox developers who plan
+hotfixes from our fix list. **No "no guarantees", "unverified", "not witnessed"
+hedging on a public surface** — it reads as no confidence in the product. State
+scope by saying what the fix does and for whom; the dated entry keeps the limits.
+If the owner (the author) cannot follow a sentence, it is word salad and it fails.
 
 1. `python tools/doccheck.py --emit-counts` — never hand-type a count anywhere.
 2. Read the entry in `agent/bugs/<ID>.md`. The **entry is authority**; store and

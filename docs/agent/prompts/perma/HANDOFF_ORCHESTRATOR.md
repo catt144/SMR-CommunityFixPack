@@ -110,13 +110,15 @@ which is fully briefed.
   No Code/items/metadata/public row/card changes. Existing metadata10/pdx8 predates sweep, is untouched and is
   not a receipt. Checklist156 now carries concrete retirement/constituency/wording choices. PUBLIC_SURFACE_SWEEP
   and RELEASE_OUTBOX **Held after-v9** section route the batch; v9's F59/F60 Pending note stays separate.
-  TAKEABLE WHEN v9 is closed and owner ck156 rules. Consumed brief removed per lifecycle, preserved at
+  ✅ v9 closed and ck156 ruled 09-12 — now gated on `SURFACE_AUDIT_FABLE.md`. Consumed brief removed per lifecycle, preserved at
   `git show 2be1402:docs/agent/prompts/STILL_NEEDED_SWEEP.md`. Do not treat report push as publication or
   agent agreement as independent evidence. The hidden-repair count supports2 rather than3 current latent rows;
   judgment count3/Lake veto/seven-machine scope are checked. See final report for all named unchecked cases.
-- **v9 is written and waiting on the owner** (ck155): F59 repair + F60 retirement, `last_changes` settled as a
-  LIST after three passes (shape recorded in `RELEASE_OUTBOX`), count 49 on all five copies, site fix-list at 49
-  and committed-but-unpublished. Sequence: upload, then fire the site job **in the same sitting**.
+- ✅ **v9 LIVE 2026-09-12 04:11Z and CLOSED OUT** (`smr-bugfixpack-d0`, read from Steam; owner receipts for v8+v9 owed,
+  ck155). Site deploy of `a061665` (49) **HELD by the owner for v10** — live list 50 vs card 49 meanwhile.
+- ✅ **ck156 RULED 09-12:** retire F37 + F43/F118, frozen 1.0.7 untouched, wording batch in the owner's voice
+  (`reports/still-needed/WORDING_RULED.md`, with the ⚖️ VOICE RULE), F21 stays (panel line, source-settled), F31 → deep
+  audit. **NEXT = fire `prompts/SURFACE_AUDIT_FABLE.md`**, then `RELEASE.md` on the Held batch = v10.
 - **Surfaces are the weak spot, not the modules** (2026-09-12). The modules have had two systematic passes
   (hotfix 2, then the migration audit). The **public surfaces have never had one** — only targeted edits, several
   of them mine. Proof: the owner spotted the store card still carrying the F51 overclaim *after* the site row was
@@ -131,7 +133,7 @@ which is fully briefed.
   named residuals; **F59's A1 expedition half has never been run in play** and the change note says so.
 
 **Fix pack — from `smr-bugfixpack-cb` (2026-09-11, the migration cluster):**
-- ⏳ **`RELEASE.md` IS RUNNING** in `smr-bugfixpack-d3` as this was written — it consumes `RELEASE_OUTBOX`
+- ✅ (ran; v9 went up the same night and was closed 09-12) **`RELEASE.md` IS RUNNING** in `smr-bugfixpack-d3` as this was written — it consumes `RELEASE_OUTBOX`
   (four Pending entries, count chaining to **49**), sweeps the public surfaces and hands the owner the upload.
   ⚠️ Three surfaces were applied **ad hoc from a dispatch session** before the sweep ran (card count, site
   fix-list rows, F51/F58 rewordings) — treat them as unverified input, not a completed sweep; the F51/F58 wording

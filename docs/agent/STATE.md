@@ -8,9 +8,9 @@ Defect truth `agent/bugs/INDEX.md` · facts `agent/facts/INDEX.md` · doc map `d
 Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/reports/CHAIN_METHOD.md`.
 
 ## Now
-- ⭐ **v8 IS LIVE** (2026-09-11 ~20:50Z, READ from Steam, ⛔ owner's word OWED ck155: the changelog carries the F119+C86 note, the
-  page says "Fifty repairs", delivered fpk 331,428 B; PDX page unread, `pdx_version` "7" written ⇒ its upload ran): F119
-  `TradeRocketFuelRefresh` + C86 `ScanDowngrade`. Tree `version` **8**, `pdx_version` "7" (lags by one, ck71: never chase).
+- ⭐ **v9 IS LIVE** (2026-09-12 04:11Z, READ from Steam, ⛔ owner's word OWED ck155: changelog "Sep 11 @ 9:11pm" carries the F59/F60
+  note verbatim, page says "Forty-nine repairs", delivered fpk 337,653 B md5 `222b0f60d00319516c1bcc7beeb97491`; PDX unread,
+  `pdx_version` "8" ⇒ its upload ran): F59 repair + F60 retired. Tree `version` **10** (two saves; ck71: never chase), `pdx_version` "8".
 - v6 = hotfix 2 (09-09): 36 modules DELETED (1.1.0 fixes them), 10 re-copied; `prompts/hotfix2/README.md`, `reports/HOTFIX_2_AUDIT.md`.
   ⚖️ Owner rule 09-08: a patch note saying "Fixed" is a **CLAIM, false until we confirm it**.
 - ⛔ GAME **1.1.0.403908** + DLC shipped 2026-09-08 (`EF-075`); installed Steam build still **24995074** = the archived 1.1.0
@@ -25,10 +25,11 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   A3 (F118) · A10 · A5 c2 · A9 c4/c5 · F117's station recipe · the first `RunAll()` on the 94-probe kit (re-stamps
   `WORKFLOW.md:407`, VOID since 09-09). ⛔ Kit verdicts are PREDICTIONS until then; still FAIL/ERROR by name:
   `C47OpenFarmSeedBufferShape` (Herbs 100→50), retired `LanderCargoRatchet`/`DroneUnreachableForever`/`AutoExportPriority`.
-- ⏭ NEXT: **v9 READY TO UPLOAD** (ck155: F59 repair + F60 retirement, count Forty-nine; `RELEASE.md` §3 is the owner's, then
-  `POST_UPLOAD_CLOSE.md`). Handoff `prompts/perma/HANDOFF_ORCHESTRATOR.md`. Desk `prompts/DLC_DEEP_CHECK.md` (`HUNT_AUDIT.md` §8).
+- ⏭ NEXT: **fire `prompts/SURFACE_AUDIT_FABLE.md`** (ck156 RULED 09-12: retire F37 + F43/F118, F21 STAYS, F31 deep-dig; wording =
+  `reports/still-needed/WORDING_RULED.md` + its ⚖️ VOICE RULE), then `RELEASE.md` on the outbox's Held batch = v10. Handoff
+  `prompts/perma/HANDOFF_ORCHESTRATOR.md`. Desk `prompts/DLC_DEEP_CHECK.md` (`HUNT_AUDIT.md` §8).
   ⭐ FR-1 TEMP WORKAROUND MOD LIVE 09-11 (Steam 3799500849 / PDX 158711; FINDINGS §11–§12). ALL FR-1 work → `prompts/perma/LINUX_DISPATCH.md`.
-  Field: 3 working (one 10xx), 1 failing (GTX 1070, log requested). Chain `prompts/fixtoggles/` (ck148). Owner: ck155 v8 receipt + v9 upload · ck144 (v7 checks + sounds thread).
+  Field: 3 working (one 10xx), 1 failing (GTX 1070, log requested). Chain `prompts/fixtoggles/` (ck148). Owner: ck155 v8+v9 receipts · ck144 (v7 checks + sounds thread).
   vanillahunt CLOSED 09-10 (99): instruments SOUND WITH STATED GAPS — 1,281 table-level hunks in 368 rowed hand files listed by
   no instrument (§1.4); 12 P2s re-derived: 6 hold, 5 weakened, **C80 REFUTED**; **C82** filed by the audit (Incident reactors stay
   off); every P2 is a gain/cosmetic except C82/C66/C63; ck142 = hotfix-3 list (rec none). FR-1/2/3 OPEN (FR-1 → LINUX_DISPATCH).
@@ -37,13 +38,13 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   page bodies from `metadata.lua`; `description` IS the full card (08-24). v6 auto-fill clean (owner-seen), v7 pasted for
   formatting, v8 unreported; `UPLOAD_WORKFLOW` §3 paste backups stay REQUIRED.
 - ⭐ SITE deployed 2026-09-11 21:10Z (`398a1b0` per the deployments API), **50** live entries; HEAD `a061665` (**49**: F60 row gone,
-  F51/F58 narrowed, wording owner-unapproved) UNDEPLOYED — deploy with v9. ⛔ `publish-site.yml` is `workflow_dispatch` only.
+  F51/F58 narrowed) UNDEPLOYED — ⚖️ owner HOLDS the deploy for v10 (09-12): live list 50 vs card 49 until then. ⛔ `publish-site.yml` is `workflow_dispatch` only.
   ⛔ Never quote a stored "deployed = <sha>"; read the deployments API (`prompts/perma/SITE_AUDIT.md`).
-- Post-launch LIVE: F105, F107, F108 (v4), F110 (v5), hotfix 2 (v6), C74+C77+C83 (v7), F119+C86 (v8); F104 NOT OURS. ⛔ F107 field
+- Post-launch LIVE: F105, F107, F108 (v4), F110 (v5), hotfix 2 (v6), C74+C77+C83 (v7), F119+C86 (v8), F59 repair + F60 out (v9); F104 NOT OURS. ⛔ F107 field
   route untested. ⛔ Read the GitHub tracker via `api.github.com/.../issues/<n>/comments`, never the HTML page. ✅ Passage Network UNTICKED 09-09.
 - ✅ v7's C74+C77 + C83 and v8's F119 + C86 were all `tested-attended` before upload (SESSION_LOG 09-10 / 09-11; entries §Attended check).
-- Shipping artifact: v9 tree predicts **51** files (`tools/pack_predict.py`); v8 Steam-delivered `ModContent.fpk` **331,428 B**
-  md5 `ec4cfd88d4adfeb24211823972f456d2` (workshop folder, 09-11 16:55); PDX size unread — the two portals'
+- Shipping artifact: v9 Steam-delivered `ModContent.fpk` **337,653 B** md5 `222b0f60d00319516c1bcc7beeb97491` (workshop folder,
+  09-12 00:25 local; predict with `tools/pack_predict.py`, never carry a number); PDX size unread — the two portals'
   sizes differed on v5/v6 (documented, `RELEASE_PORTAL_PREP` §0.5(f)). Tag `fixpack-v1.0.0` NOT moved (H-01).
   ⛔ Pack route is main menu → MOD EDITOR → File → Pack Mod, NOT Mods Manager → Ctrl-E (⚠️ PORTAL_PREP §0.5 old).
 - Watches: `EF-066` subclass reach unmeasured, ck74 half-open · localisation: German only one SEEN (`EF-039`) ·
@@ -96,7 +97,7 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   1.0.7 players are served by the frozen v5 GitHub build (`v5-game-1.0.7`), linked from the card and the site.
 
 ## Open owner decisions (bodies in `docs/PLAYTEST_CHECKLIST.md` → "Decisions waiting on you")
-- **155** v8 receipt owed (read from Steam, not the owner) + **v9 READY TO UPLOAD**. **152** F59 REPAIRED (`3b41d9f`, AUDITED SHIP A),
+- **155** v8 + v9 receipts owed (both read from Steam: PDX version, auto-fill or paste). **156** RULED 09-12 (NEXT line). **152** F59 REPAIRED (`3b41d9f`, AUDITED SHIP A),
   A2 half `tested-attended` 09-11 (`11d163e`; no `applied` line quoted), A1 expedition half untested. F60 RETIRED `9bc4360`; 152 (b) closed.
 - **151** Migration audit DONE (`MIGRATION_DEV_REPORT.md`); F60 retirement proposed. ⛔ **F59 RE-DERIVED 09-11**: expedition claim
   CONFIRMED **+ 2nd caller** — manual Set Residence on a full home OVERFILLS it, BOTH branches, ships today (`desk_f59_interact.py` 8/8).

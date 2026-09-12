@@ -8,6 +8,48 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-12 - smr-bugfixpack-d0: v9 found live and closed out; ck156 ruled; the Fable surface-audit brief written
+
+tags: release v9 post-upload-close comment-restore ck155 ck156 still-needed wording voice-rule F21 F31 F37 F43 surface-audit
+
+Task: the owner pasted `HANDOFF_ORCHESTRATOR.md` with "Codex landed review". Oriented first (memory rule). **Found v9
+LIVE and unclosed** by the three RELEASE §0.5 reads: Steam changelog newest entry "Update: Sep 11 @ 9:11pm" (Pacific;
+= 04:11Z 09-12) carries the F59/F60 note verbatim; live body "Forty-nine repairs" ×1, "Fifty" ×0; tree `version` 8 → 10
+and `pdx_version` "7" → "8" committed STRIPPED inside `1583dcd` (a card edit at 00:19 -04:00; `metadata.lua` comments 0,
+`items.lua` 43). Workshop `ModContent.fpk` 337,653 B md5 `222b0f60d00319516c1bcc7beeb97491`, 00:25 local. Site: the
+deployments API still says `398a1b0` (50 entries); `a061665` (49) undeployed. Codex's sweep had seen the version-10
+writeback and correctly refused to infer an upload from it.
+
+**Owner rulings (in order, same session).** Held the site job on purpose (another release soon). Ck156: retire F37 and
+F43 (+F118), frozen 1.0.7 build untouched; the wording batch approved with corrections — 1/2/6/7/9/10/11/14 polished,
+3/8/12 rewritten as "word salad", 4 held; **a voice rule** (plain for 2k players, precise for the 2 devs, no
+"no guarantees"/"unverified" hedges on public surfaces — scope by saying what the fix does and for whom). Asked why
+F21 was not a retirement: **answered from source** — on 1.1.0 `ExitVehicle` still feeds the inflated duration to
+`AddSpentTime` on train and track (`ColonistTransport.lua:671`, `:696-697`) and that is the panel line "Travel time
+(rolling average)" (`ipTrain.generated.lua:85`, `ipTrack.generated.lua:186`); no `ChangeComfort` in `:665-700`. F21
+stays; the Comfort claim goes. F31: owner wants a real dig, not a surface sweep; and the audit has standing licence to
+dig into anything it judges closer to retirement than Codex did.
+
+**Done.** (1) `reports/still-needed/WORDING_RULED.md` — the applied text, item by item, plus the voice rule and the
+whole-list arithmetic to re-derive at apply time; `SURFACE_PLAN.md` left verbatim. (2) `prompts/SURFACE_AUDIT_FABLE.md`
+— one-off, self-consuming: claims A (F37) / B (F43+F118, DLC + inheritors) / C (F31 deep, both trees, observed-or-derived
+first), then one claim per ruled sentence; output = `reports/SURFACE_AUDIT_2026-09-12.md`, no public/Code edits.
+(3) POST_UPLOAD_CLOSE for v9: `metadata.lua` comments restored by a scripted merge from `8eff833` — proof printed
+before writing: non-comment lines equal HEAD in order, 319 comment lines (314 + the v9 history lines); the shipped
+`last_changes` kept as the owner typed it in the box (em-dashes, no space after the bullet dash — it differs from the
+tree's draft). `parsecheck` 0 errors, `upload_preflight` 0 FAIL, counts 46/47/94 unchanged. Outbox: F59 + F60 →
+*Released in v9* on read evidence, Pending empty, Held batch re-gated on the audit. STATE, ck155 (receipts for v8 AND
+v9 owed), ck156 RULED, handoff §3, `PUBLIC_SURFACE_SWEEP` §0 (voice rule), prompts map.
+
+**Not done / owed:** the owner's receipts (PDX version, auto-fill or paste) for v8 and v9; the Paradox page is
+unreadable from here; the site deploy is held by the owner for v10 (live 50 vs card 49 meanwhile — said so); the
+TestKit probe `DomeFreeSpaceMismatch` still targets the deleted F60 module (local kit). STATE stays over its warn cap;
+the doccheck line goes to the owner verbatim.
+
+**Lookback.** The three RELEASE §0.5 reads found the unclosed upload in one pass — the check written after v8 paid
+for itself on v9. The one new thing: a writeback can hide inside an unrelated commit (`1583dcd` was a card edit), so
+"which commit bumped `version`" needs `git log -p -- metadata.lua`, not the commit subjects.
+
 ## 2026-09-11 - smr-bugfixpack-cb (continued): F59 shipped and witnessed, F60 retired, C85 solved, one Reddit report refuted
 
 tags: F59 F60 C85 F108 C39 EF-019 ck151 ck152 ck153 ck154 release-outbox attended lookback

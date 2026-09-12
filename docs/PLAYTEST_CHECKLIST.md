@@ -29,7 +29,32 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
-### 2026-09-12 — 156: sweep complete — retirement and wording choices, after v9
+### ✅ 2026-09-12 — 156 RULED: retire the farm-oxygen and layout fixes, the frozen 1.0.7 build stays as it is, the wording goes out in your voice. **Nothing owed from you until the audit reports.**
+
+> **What you ruled (this morning):** retire F37 (farm oxygen) and F43 (layout research lock, with its F118 rider); the
+> frozen 1.0.7 download is untouched; the wording batch is approved with your corrections — items 1, 2, 6, 7, 9, 10,
+> 11, 14 polished, items 3, 8, 12 rewritten plain (they were word salad), item 4 held. The final text is
+> [WORDING_RULED.md](agent/reports/still-needed/WORDING_RULED.md); Codex's original stays on file unedited.
+>
+> **Your voice rule is now written down and binds every public surface** (top of that file, and in the sweep sheet):
+> plain enough for the players, precise enough for the two developers, and no "no guarantees" / "unverified" hedging
+> on anything public — scope is said by stating what a fix does and for whom. Word salad fails.
+>
+> **Item 5 (train wait time) — why it is not a retirement:** on 1.1.0 the double-counted wait still feeds the
+> **"Travel time (rolling average)"** line on every train and track info panel. Only the Comfort penalty is gone from
+> the game. So the fix still repairs a number you can see; the Comfort claim comes off the row and the card.
+>
+> **Item 13 (cave-in on a missing map) — sent to a deep audit, as you asked.** The Fable brief is
+> `agent/prompts/SURFACE_AUDIT_FABLE.md`: it re-derives both retirements, digs F31 to the bottom on both game
+> versions (was the stop ever observed; can the step even run under the No Underground rule), checks every ruled
+> sentence against the code, and has your standing licence to dig into anything it thinks is closer to retirement
+> than Codex thought. It touches no public surface. **Fire it in a fresh Fable session.** After its report: the
+> release lane applies the batch as v10, you upload, paste if needed, and run the site job once.
+>
+> **The site job:** held for v10 by your choice, recorded. Until then the live fix list shows 50 entries (with the
+> retired dome-housing fix) while the card says Forty-nine. Fine for days; say so if it stretches.
+>
+> The original item follows for the record.
 
 Your still-needed sweep ran across **all 46 modules** on **1.1.0.403908**:
 **2 retirement recommendations, 0 rebuilds, 30 keeps, 14 claim corrections or
@@ -75,7 +100,22 @@ Required owner report warning (STATE was left untouched):
 warn STATE.md is 12991 bytes, warn threshold is 12288 — copy this line VERBATIM into the owner report; the owner fires agent/prompts/perma/STATE_EVICTION.md
 ```
 
-### 2026-09-11 — 155: v8 went live this afternoon with no close-out — one receipt from you · v9 is READY TO UPLOAD
+### 2026-09-11 — 155: v8 AND v9 are both LIVE, read from Steam — two receipts from you, nothing else
+
+> **Update 2026-09-12 (`smr-bugfixpack-d0`): v9 is live too, and it is closed out.** The Steam changelog shows an
+> update at **Sep 11, 9:11pm** (Pacific) carrying the F59/F60 note word for word, the page body says "Forty-nine
+> repairs", and the pack your client downloaded at 00:25 is 337,653 bytes. The tree carries the writeback
+> (`version` 10, `pdx_version` "8" — two saves in the sitting, never chased). The Mod Editor stripped the comments
+> out of `metadata.lua` again and that got committed inside a card edit; they are restored, with the shipped
+> change note kept exactly as you typed it in the box. The outbox is cleared to "Released in v9".
+>
+> **Receipts owed, for v8 and v9 together** (`UPLOAD_WORKFLOW.md` §5): 1. the version number the Paradox page
+> shows now; 2. whether the descriptions filled themselves or you pasted; 3. anything that looked wrong on either
+> page. The Paradox page cannot be read from here.
+>
+> ⛔ Nothing here needs a re-upload. The site job is held for v10 by your choice (item 156).
+>
+> The original item follows for the record.
 
 > **What I found, read from the live Steam page rather than from you:** the Workshop page shows an update at
 > **Sep 11, 1:50pm** carrying the F119 + C86 change note, and the page body says "Fifty repairs". Your Steam client
