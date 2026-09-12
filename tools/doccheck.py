@@ -379,7 +379,7 @@ WAITING_MD = os.path.join(DOCS, "WAITING_ON_YOU.md")
 CHECKLIST = os.path.join(DOCS, "PLAYTEST_CHECKLIST.md")
 CK_SECTION = "## Decisions waiting on you"
 
-MARKER_RE = re.compile(r"<!--\s*ck:(\d+)\s+status:([a-z]+)\s+owner:(yes|no)\s*-->")
+MARKER_RE = re.compile(r"<!--\s*ck:(\d+|-)\s+status:([a-z]+)\s+owner:(yes|no)\s*-->")
 MARKER_STATUSES = ("open", "ruled", "closed", "deferred")
 
 # The prose fallback, inherited verbatim in behaviour from the 2026-09-12 move
@@ -471,8 +471,11 @@ def checklist_items():
         for line in body[:4]:            # a marker sits directly under its header
             hit = MARKER_RE.search(line)
             if hit:
-                marker = {"ck": int(hit.group(1)), "status": hit.group(2),
-                          "owner": hit.group(3) == "yes"}
+                # Most old items were never numbered — `ck:-` marks those, so a
+                # status can be recorded without inventing an identifier for them.
+                ck = hit.group(1)
+                marker = {"ck": None if ck == "-" else int(ck),
+                          "status": hit.group(2), "owner": hit.group(3) == "yes"}
                 break
         item["marker"] = marker
         head = item["header"]
