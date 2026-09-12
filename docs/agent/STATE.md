@@ -33,7 +33,8 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 - ⏭ NEXT: `RELEASE.md` over the outbox's **Held** batch + the 3 Pending = **v10**; text =
   `reports/still-needed/WORDING_RULED.md` + its ⚖️ **VOICE RULE** (binds every surface); ck156 RULED (retire F37 + F43/F118,
   F21 STAYS, F31 → the audit). ⛔ Re-derive every count once. Then the owner's upload + the **held** site deploy.
-  Handoff `prompts/perma/HANDOFF_ORCHESTRATOR.md` §3 LIVE. Desk `prompts/DLC_DEEP_CHECK.md` (`HUNT_AUDIT.md` §8).
+  Handoff `prompts/perma/HANDOFF_ORCHESTRATOR.md` §3 LIVE. ⭐ **ck158 sitting prompt WRITTEN + UNFIRED: `prompts/SITTING_158.md`.**
+  Desk `prompts/DLC_DEEP_CHECK.md` (`HUNT_AUDIT.md` §8).
   ⭐ FR-1 TEMP WORKAROUND MOD LIVE 09-11 (Steam 3799500849 / PDX 158711; FINDINGS §11–§12). ALL FR-1 work → `prompts/perma/LINUX_DISPATCH.md`.
   Field: 3 working (one 10xx), 1 failing (GTX 1070, log requested). Chain `prompts/fixtoggles/` (ck148, DEFERRED 09-12).
   Owner OWES: ck157 (C89 reply + dev route) · ck151 (b)/(c) · ck144 (a) v7 boot. ✅ ck162 FULLY RULED 09-12 (all four §4 loose ends shut;
