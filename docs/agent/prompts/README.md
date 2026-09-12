@@ -26,6 +26,7 @@
 | prompt | state |
 |---|---|
 | `C88_PREFAB_BUILD.md` | **LIVE (09-11)**: build the Building-Codes-vs-prefabs fix the PDX dev asked us to carry; gated on the release lane + checklist 150 (b); deletes itself |
+| `CLOGGED_BUILD.md` | 🚧 **SKELETON (09-11), not fireable**: unstick a producer left "Clogged after a Dust Storm." (C85) — dossier, proposed sweep + interlocks, and the owner's A/B. Has an OPEN fold-in slot for a second fix; deletes itself when fired |
 | `migrationfix/` | **LIVE (09-11)**: 2-link mini chain — `01_BUILD_opus.md` repairs F59 + builds F60's retirement, `02_AUDIT_fable.md` is the terminal QA that grades the build AND surface-sweeps Astra's eight verdicts, and holds the upload gate. Map + handoff: `migrationfix/README.md`. Self-consuming |
 | `DLC_DEEP_CHECK.md` | desk NEXT, after the fix pack is stable |
 | `HOTFIX2_SITTING.md` | closed 09-09; kept for the recipes the owed v7 sitting uses |
