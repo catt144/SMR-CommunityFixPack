@@ -57,9 +57,20 @@ completed tests move whole to
 > tipped, and tension needs several bad midnights in a row. The ten-colonist guard protects the first dome and a
 > dome that is still filling; a dome of ten with one idle worker trips it either way. The twelve-hour idle figure
 > is the quiet-colony ceiling — any workplace change in the cluster re-sweeps the idle immediately. ⇒ the harm
-> the reporter saw is the notification and the hour-stale panel, and a guard would not touch that. **Revised
-> recommendation for (c): no.** For (b): the report came through our channel, so the route is the fix list the
+> the reporter saw is the notification and the hour-stale panel, and a guard would not touch that. ~~**Revised
+> recommendation for (c): no.**~~ For (b): the report came through our channel, so the route is the fix list the
 > developers already plan from, or the Building Codes thread where their developer is active.
+>
+> **Corrected by you, and it holds (third pass):** that headroom is mid-game. In the early game — the hardest and
+> longest-felt phase, most of it at 1× — smart residences and factories are far off, so Prosperity's positives are
+> zero and one dome blip is the whole distance from content to not content. And the code lets the player factions
+> be live from the first dome: the Assembly is a 40/20/20 spire with no research or population requirement. In
+> that window every filling dome sits under ten colonists with its jobs still under construction, so the unguarded
+> filter fires every hour until they exist. The developers had **two** instruments for exactly this — the Justice
+> Movement's ten-colonist gate, and a per-like "MinColonists" setting that Prosperity uses on one other like — and
+> applied neither here. **(c) recommendation now: yes**, as a judgment call: apply the Justice gate to the four
+> unguarded unemployment filters and the three homeless ones. It can ride the C85/C88 build if you say so — I
+> would add it as a third item to that prompt before you fire it.
 
 > **What it is:** the faction's "high unemployment" dislike is a **once-an-hour snapshot** (stored and shown on the
 > panel until the next hour, and it fires a notification the first hour it appears), while the top-bar Unemployed
