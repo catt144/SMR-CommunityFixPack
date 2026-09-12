@@ -55,6 +55,61 @@ player surface bumps it by one on release.
   and still scanned its neighbour. Fix-off leg desk-only; a real probe object not
   fired. Entry §Attended check.
 
+### Pending — F59 vacancy notification repaired (our own regression)
+
+- **F59 · `Fix_FreedHousingNotice`** (`3b41d9f`, audited `74b2c8f`) — ⚠️ **this is
+  a repair to OUR OWN module, not a new game bug.** The fix that offers a freed bed
+  to the dome's homeless was firing *inside* larger housing operations that still
+  needed the bed. Two harms, both measured at the desk: using **Set Residence** on a
+  full home could leave it **over capacity** with the eviction silently undone (both
+  game versions, present since the module was written), and a colonist boarding an
+  **expedition** could lose the home the game had just reserved for their return
+  (1.1.0 only). The repair defers the notification until the game's own operation
+  has finished, then re-decides. **Count unchanged** — the fix already exists on the
+  fix list and its player-facing description ("A bed that fell vacant sat empty
+  while colonists were homeless") is still accurate.
+- **Status:** **`tested-attended` 2026-09-11 for the MANUAL-ASSIGN half only**
+  (owner granted, checklist 152). In play on 1.1.0, owner at the keyboard: a full
+  residence read `residents=14` against `cap=20 closed=6` — no overfill, where the
+  unrepaired module reads 15 — and the evicted resident landed in the incoming
+  colonist's old bed, a slot that only frees *after* the old fire point, so the
+  ordering itself was witnessed. `HasAnyFreeLivingSpace()=false` on the dome proved
+  the check was not vacuous. ⛔ **Not covered:** the expedition half (no expedition
+  was boarded, still source-derived); the broken side was never run in play; the
+  original defect has never been reproduced in a game on either version.
+  Desk: 18/18 + 27/27 + 10/10, each with a control that defeats the deferral and
+  brings the harms back. Entry: `bugs/F59.md`.
+- ⚠️ **For `last_changes`:** worth a player-facing line — the manual-assign harm was
+  reachable by an ordinary four-click action and left a visibly wrong resident count.
+  Suggested wording: *"Assigning a colonist to a residence that was already full
+  could leave that home with more residents than it has beds, and fail to evict the
+  colonist it displaced. Fixed."*
+- ⛔ **The frozen 1.0.7 download (`v5-game-1.0.7`) still ships the unrepaired body.**
+  Owner ruled 1.0.7 stays frozen (ck151 e), so this is knowingly not delivered there.
+
+### Pending — F60 retired (fix removed from the pack)
+
+- **F60 · `Fix_DomeFreeSpaceMismatch`** (`9bc4360`) — **RETIRED and DELETED** by
+  owner ruling (checklist 151 a / 152 b). On game 1.1.0 the admission gate stopped
+  reading the housing tally this fix corrected — `Community:HasFreeLivingSpaceFor`
+  iterates residences directly — so the fix no longer repaired births or migration,
+  and what it still changed (the launch housing estimate) it changed *optimistically
+  against the gate*, i.e. it could promise room the game would then refuse.
+  Historically correct on 1.0.7 and left on the record as such.
+  **Count 50 → 49.** ✅ Already applied: `items.lua` + `metadata.lua` code list
+  (`9bc4360`), count word in all five copies (`0392162`), fix-list entry removed
+  (`SMR-CommunityMods` `a061665`).
+- **Status:** desk-controlled (16/16) and source-verified; **no player outcome was
+  measured** — the control is an enabled-but-unpowered residence plus a passenger
+  rocket, and nobody ran it. The ruling was taken on the source position.
+- ⚠️ **For `last_changes`:** a retirement is a player-facing change — the count drops
+  and a listed fix disappears. Suggested wording: *"One older fix has been retired:
+  the game's own 1.1.0 changes made the dome housing-total repair unnecessary, so it
+  has been removed rather than left to change numbers it no longer corrects."*
+- ⚠️ **Loose end, not release-blocking:** the TestKit probe `DomeFreeSpaceMismatch`
+  (`30_Probes_Wave3.lua`) still targets the deleted module and will fail on the next
+  kit run. TestKit is local-only by design.
+
 ---
 
 ## Released — history, newest first (cleared here by RELEASE.md)
