@@ -226,8 +226,9 @@ this.
   `bugs/F117.md`. `prompts/SELFCHECK_PILOT.md` rides the same boot (see its banner). It can share ck149's boot.
 - **ck144 (b):** the Steam sounds thread. A "still checking" follow-up is drafted in `docs/FIELD_REPORT_REPLIES.md`.
 - **Desk NEXT:** `prompts/DLC_DEEP_CHECK.md` (bounded; the owner's framing is in its banner).
-- **`FIELD_REPORT_REPLIES.md`:** the Hydroponic Farm stub (the owner's design question) and Metatron `End1..7` particles (fixable,
-  untimed).
+- **`bugs/C74.md` §"Two leads the fix does not cover":** the Hydroponic Farm stub (the owner's design question) and
+  Metatron `End1..7` particles (fixable, untimed). ↳ **Rehomed there 2026-09-12** from `FIELD_REPORT_REPLIES.md`, which
+  was their only home and has since been purged of posted drafts.
 - **Open owner decisions:** checklist → "Decisions waiting on you" (STATE lists the numbers).
 - **Upstream drafts:** options report §5.1 (vkd3d/pyroveil) and §5.2 (Paradox) are unposted; the owner's call.
 - **Unexplained lines, verbatim; attribute only if asked:**
