@@ -54,6 +54,26 @@ then `GameVar`/`const`, `__parents`, `DefineClass` smallest).
 2. §1.4 labels its split "916 table/field **lines**, 71 `__parents`…". Those six numbers sum to 1,281 — they are
    **hunk** counts, not line counts. Nothing downstream depends on it; the label is wrong.
 
+### 0.2 The method note this session earned, stated narrowly
+
+⭐ **A record that states a MEASUREMENT or a NEGATIVE cannot be tested by re-reading it.** Re-reading tells you what
+the record says; only re-running tells you whether it is true. Three same-day cases, two of them mine:
+
+* §1.4's 1,281 had been read and relayed by several documents. Re-running it **confirmed** it — and only re-running
+  could have, because the script had been gone the whole time.
+* A peer's correction to an unrun console recipe (checklist 147 / `C87`) asserted that a spelling was *"witnessed
+  nowhere in the shipped tree"*. Re-running the search found it in **19 files**, including the recipe's own receiver
+  spelling at `Landscaping.lua:225`. The original line would have run; the "repair" rested on a truncated grep.
+  ⇒ ⛔ **a claim about what is ABSENT needs the presence side enumerated**, and `| head -5` is not an enumeration.
+* This project's own standing git rule ("always name a pathspec", from `6ad619a`) turned out to be **half a rule** —
+  a pathspec fences *other* files but takes the work-tree content of the paths it names. Found by running it, not by
+  re-reading the rule. Corrected in `441cc92`.
+
+⚠️ **The narrow form is the defensible one.** Reading records is how three of this report's findings were made at all
+(the `WORKFLOW.md` procedure gap, `a4_gap.py`'s absence from git, rec 5's "three tools" being a different three). The
+claim is not "records are worthless"; it is that a **number** or an **absence** in a record is a claim of the same
+kind as an instrument's output, and §2.2's rule applies to it identically — including when the record is ours.
+
 ---
 
 ## 1 · Question 1 — what we do with it
