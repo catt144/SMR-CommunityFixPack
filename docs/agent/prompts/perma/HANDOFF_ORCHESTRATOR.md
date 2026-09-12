@@ -119,18 +119,23 @@ Shared by both (pull before every write, commit by pathspec): `PLAYTEST_CHECKLIS
 **WHEN BOTH HAVE REPORTED, the next move is v10:** `perma/RELEASE.md` over the outbox's **Held** batch (the
 still-needed wording + the two retirements; the text to apply is `reports/still-needed/WORDING_RULED.md`) **plus the
 three new Pending entries**. ⛔ Re-derive every count once, never carry one: modules 46 → 49 from the build, then
-−2 for the retirements (−3 if the audit also retires F31); the card count word Forty-nine → derive; card headlines
-21 → 19 (F37 + F31); "real defects you cannot see today" three → two; **judgment calls three → four (C89)**. Then the
-owner uploads, pastes if auto-fill fails, and fires the site job **once** — it has been held since 09-11 for exactly
-this.
+−3 for the retirements (✅ **ck159 RULED 09-12: F31 retires too**); the card count word Forty-nine → **Forty-six**,
+derive it; card headlines 21 → 19 (F37 + F31); "real defects you cannot see today" three → two; **judgment calls
+three → four (C89)**. Then the owner uploads, does the formatting cleanup pass, and fires the site job **once** —
+it has been held since 09-11 for exactly this.
 
 **⛔ OWED FROM THE OWNER (nothing an agent can do):**
-- **v8 AND v9 receipts** (ck155): the version the Paradox page shows, auto-fill or paste, anything that looked wrong.
 - **ck157 (a)** post the C89 reporter reply · **(b)** route the developer note — ⚠️ that report came in through **our**
   channel, not the dev channel, so the route is the fix list the developers already plan from, or the Building Codes
   thread where their developer is active.
-- **ck150 (a)** the "where do you collect your bugs" wording · **ck147** field replies · **ck144** the owed v7 one-boot
-  sitting + the Steam sounds thread · **ck148** fixtoggles.
+- **ck152 (c)** the residence kick-button lead — the owner asked for a refresher 09-12, no ruling yet.
+- **ck151 (b)** which sections of the migration developer report may be sent · **(c)** which checks join sitting 144 a.
+- **ck144 (a)** the owed v7 one-boot sitting (STATE's OWED line).
+- ✅ **CLOSED 2026-09-12, do not re-ask:** ck155 (receipts answered — the descriptions always auto-fill, the
+  formatting never survives, the owner pastes the backups and does a cleanup pass; **method satisfactory**) ·
+  ck150 (a) (posted, majority of A+B) · ck147 · ck144 (b) · ck151 (a)/(d) · ck153 (post the Reddit reply: yes) ·
+  ck159 (1)(2)(3). ⏳ **ck148 fixtoggles DEFERRED 09-12** (owner said skip; chain not started, all three calls open).
+  ⏳ **ck132 SKIPPED 09-12**: STATE's warn stays 12288, no eviction ordered, and the file has sat over it since 09-11.
 - **The C89 in-game A/B**, which the owner flagged to observe themselves on a fresh one-shot colony (build brief S7).
 - ⚠️ The site sits at **50 live entries against a 49 card** until the v10 deploy. Deliberate and correct; say so if
   it stretches past a day.

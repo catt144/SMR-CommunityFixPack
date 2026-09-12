@@ -228,6 +228,13 @@ patch, and they asked us to carry the fix meanwhile.
   still owed:** guard the two modules (recommended), or change the shared core's apply-verdict contract.
   C89 already guards its pass; neither current OnDataReady caller exposes the same data-write gap.
   **No production fix landed.** Full evidence and limits: `agent/reports/DESKBENCH_C90.md`.
+  - ✅ **RULED 2026-09-12: the bounded shape — per-module apply-success guards in `Fix_SaintBlessing` and
+    `Fix_SinkholeIndestructible`.** ⛔ **NOT** the shared core's apply-verdict contract; the four DataPatch
+    callers and `OnDataReady` are out of scope. ⛔ **Hard constraint, carried by both `agent/bugs/C90.md` and
+    `agent/reports/DESKBENCH_C90.md`: do not gate the pass on `entry.status == "active"`** — `run_apply` sets
+    status only *after* apply returns, so a legitimate live re-apply calls the pass while the previous status is
+    still inactive. Any implementation must also define reset/retry behaviour rather than treating a once-true
+    flag as an everlasting success verdict. ⚠️ **Nothing is built.** This authorises the shape, not a ship.
 - **C91 — the game leaks the Building Codes maintenance change on repeal** (`agent/bugs/C91.md`). Repeal the
   law and every building it touched keeps the maintenance change; the developers clearly know, because they
   shipped a one-time save cleanup for it rather than fixing repeal. **Good material for the developer
@@ -241,7 +248,24 @@ All 16 original demands remain, including every F51 leg and both F60 harm legs. 
 20 harnesses, 254/254 numbered demands plus three unnumbered harnesses. This repairs the pre-existing
 failure from F60's deleted file; it is desk evidence, not release clearance or an attended playtest.
 
-### 2026-09-12 — 159: the surface audit is in. **Both retirements you ruled check out. The cave-in fix (F31) should go too. Three of the fourteen sentences need a different wording. Three decisions, nothing at the keyboard.**
+### ✅ 2026-09-12 — 159 RULED 09-12: F31 retires, F37's load-time clean-up is a loss you accept, and every sentence replacement goes in. **Nothing owed from you; the release lane carries it into v10.**
+
+> **What you ruled (2026-09-12), all three as recommended:**
+>
+> 1. **Retire F31 — yes.** Module out (H-10: `items.lua` entry), the site row off, the card headline off, the
+>    count word to **Forty-six**.
+> 2. **F37's load-time clean-up — accept the loss.** It does **not** move into `90_SaveSanitizer.lua`.
+> 3. **All three sentence replacements approved — "3 all" — and the optional fourth (F73) with them.** All four
+>    are applied verbatim to [WORDING_RULED.md](agent/reports/still-needed/WORDING_RULED.md) (2026-09-12): item 1
+>    (F54), item 3 (F58), item 12 (F48), item 14 (F73). That file is the source the release lane reads.
+>    ⛔ **Nothing was pushed to the live public surfaces** — `content/fix-list.md`, the card and the site are the
+>    release lane's job at the v10 publish (`agent/prompts/perma/PUBLIC_SURFACE_SWEEP.md`).
+>
+> ⚠️ **One thing to know, not a decision anyone made for you.** The ruled batch *drops* F54's dust-storm sentence
+> ("Suspensions the game imposes on itself — a dust storm, for instance — still count as before") on the grounds
+> that the case was never measured. The audit found the opposite: a hub the *game* has paused does still count, on
+> purpose, so **the dropped sentence was the true one** (audit D3). It has **not** been restored — say the word if
+> you want it back on the row.
 
 > **What the audit found** ([full report](agent/reports/SURFACE_AUDIT_2026-09-12.md)): the farm-oxygen fix (F37) and the
 > layout fix (F43, with its F118 rider) are redundant on the current game exactly as you ruled — traced from the shipped
@@ -337,6 +361,10 @@ failure from F60's deleted file; it is desk evidence, not release clearance or a
 > half is my inclusion; strike it in the override slot at the top of the prompt if you want unemployment only.
 > Still open here: (a) post the reporter reply, (b) the developer note's route.
 >
+> ⏳ **(a) and (b) STILL OPEN — reviewed with you 2026-09-12, no ruling.** You had not got to them. Both drafts
+> stay live and unposted in `FIELD_REPORT_REPLIES.md` (the C89 reporter reply, gate ck157 (a); the developer note,
+> gate ck157 (b)), plus the C89 follow-up line drafted for v10.
+>
 > 🎮 **You flagged this one for an in-game A/B you observe yourself, on a one-shot colony.** The build brief now
 > requires a fresh-colony recipe: first dome, Assembly built, one of the four factions active, a small second dome
 > with three idle adults, fix-off then fix-on across one game hour each, with copy-paste reads of the dome counts
@@ -425,7 +453,18 @@ Required owner report warning (STATE was left untouched):
 warn STATE.md is 12991 bytes, warn threshold is 12288 — copy this line VERBATIM into the owner report; the owner fires agent/prompts/perma/STATE_EVICTION.md
 ```
 
-### 2026-09-11 — 155: v8 AND v9 are both LIVE, read from Steam — two receipts from you, nothing else
+### ✅ 2026-09-11 — 155 CLOSED 09-12: you answered the upload receipts, and the answer is standing — **the documents will stop asking.**
+
+> **Your answer (2026-09-12), recorded as your word:** the descriptions **always auto-fill**, but the **formatting
+> does not survive**. You fix it with the copy-paste backups and do a **cleanup pass on both Steam and Paradox**.
+> It is minor — the auto-fill gives the page something until the cleanup lands. **The method is satisfactory.**
+>
+> ⇒ **"I keep getting this question."** So it is no longer a question. `UPLOAD_WORKFLOW.md` §2, §3 and §5 now
+> record the known answer instead of asking whether the fill worked and whether you pasted; the same ask is
+> removed from `agent/prompts/perma/RELEASE.md` §2/§3/§4/§6. What a receipt still asks for is only what varies
+> per upload: the version the Paradox page shows, anything that looked wrong, and whether the site published.
+> ⛔ The §3 paste backups stay REQUIRED and stay current every sweep — your answer is *why* they are, not a
+> reason to drop them.
 
 > **Update 2026-09-12 (`smr-bugfixpack-d0`): v9 is live too, and it is closed out.** The Steam changelog shows an
 > update at **Sep 11, 9:11pm** (Pacific) carrying the F59/F60 note word for word, the page body says "Forty-nine
@@ -507,7 +546,11 @@ warn STATE.md is 12991 bytes, warn threshold is 12288 — copy this line VERBATI
 > own: **it tests the entry's core claim — that nothing in the game ever clears this — which has never been
 > checked in a real game.** Full recipe in the prompt's §4.
 
-### 2026-09-11 — 153: the Reddit "160% productivity" thread is NOT a bug — one reply to post if you want to
+### ✅ 2026-09-11 — 153 RULED 09-12: the Reddit "160% productivity" thread is NOT a bug — **post the reply: yes.** The draft is approved; posting is yours whenever you want it.
+
+> **What you ruled (2026-09-12):** post it, as recommended. The draft in `FIELD_REPORT_REPLIES.md` is now
+> `DRAFT`, gate discharged — nothing is holding it but the click. Tell the next session when it goes up and it
+> is recorded in "What was actually posted".
 
 > **Checked end to end against both game versions; no defect filed.** A Russia player can't get 3 extractors to
 > 160 Performance and blames the update for amplification and fuel "no longer adding to it". **That's a mix-up
@@ -526,7 +569,23 @@ warn STATE.md is 12991 bytes, warn threshold is 12288 — copy this line VERBATI
 > the entry. The run itself and its result stand. It matters because that line was a candidate to repeat to
 > Paradox.
 
-### 2026-09-11 — 152: F59 IS REPAIRED (not uploaded, not playtested) · F60's retirement is STOPPED on your uncommitted pack
+### ⚖️ 2026-09-11 — 152 PART-RULED 09-12: **F59's A2 half is `tested-attended`** · **(e)'s three overclaiming rows sweep with the v10 site publish** · ⏳ **(c), the kick-button lead, stays open — you asked for a refresher**
+
+> **What you ruled (2026-09-12), both as recommended:**
+>
+> - **`tested-attended` GRANTED to F59's A2 half** — the manual Set Residence overfill, the one you watched at
+>   the four-click receipt on 2026-09-11. ⛔ **A1, the expedition half, stays source-derived** until an
+>   expedition is actually sent. The word is yours and it covers A2 only.
+> - **(e) — sweep the three overclaiming fix-list rows with the v10 site publish.** Run
+>   `agent/prompts/perma/PUBLIC_SURFACE_SWEEP.md` over "A dome read as full while its power was out",
+>   "Colonists stayed homeless after you built a Shuttle Hub" and "A dome sat half empty…" (its "no expiry at
+>   all" line) as part of the v10 publish, not as a separate errand.
+>
+> ⏳ **(c) STILL OPEN — no ruling 2026-09-12.** You asked for a refresher on the residence infopanel's kick
+> button (right-click an occupant does not close the slot, so the freed bed can go straight back to the colonist
+> you just kicked). It is filed as a lead, not a defect; nothing is owed until you have read it back.
+>
+> (a) needed nothing and (b) closed on 2026-09-11; (d) is a note, not a decision.
 
 > **Built tonight** (migrationfix link 01; `Code/Fix_FreedHousingNotice.lua`). The vacancy
 > notification no longer fires in the middle of someone else's operation — it now runs a
@@ -654,7 +713,24 @@ warn STATE.md is 12991 bytes, warn threshold is 12288 — copy this line VERBATI
 > Required owner-facing warning, verbatim from `doccheck` after this session's one STATE line (item 132 is yours):
 > `warn STATE.md is 13240 bytes, warn threshold is 12288 — copy this line VERBATIM into the owner report; the owner fires agent/prompts/perma/STATE_EVICTION.md`
 
-### 2026-09-11 — 151: migration audit complete: repair F59, consider retiring F60, choose developer sections and game checks
+### ⚖️ 2026-09-11 — 151: migration audit complete — **(a) and (d) CLOSED 09-12 as overtaken by events · (e) RULED 09-11 · (b) and (c) still open**
+
+> **Closed 2026-09-12 on your "use your best judgement, close it if everything is shipped", after checking that
+> it is.** Three reads, none of them a quote:
+> - The migration chain ran clean end to end: link 01 built the repair (`3b41d9f`), link 02's audit returned
+>   **SHIP A** ([MIGRATIONFIX_AUDIT.md](agent/reports/MIGRATIONFIX_AUDIT.md)) — recorded in item 152.
+> - **F59's repair shipped in v9**, read live from Steam 2026-09-12, together with F60's retirement (`9bc4360`).
+>   (The Paradox page cannot be read from here; its upload ran — `pdx_version` "8" in the tree.)
+> - **(e) is RULED** (2026-09-11: 1.0.7 stays frozen).
+>
+> ⇒ **(a)** — "repair F59 rather than retire it, and retire F60's obsolete tally override" — is answered by what
+> shipped: both halves are done and live. **(d)** — "does the second harm change the priority of (a)?" — asked
+> whether to treat F59 as a repair to schedule; it was scheduled, built, audited and shipped. Neither asks a live
+> question any more. **Nothing is owed from you on either.**
+>
+> ⏳ **(b) and (c) stay OPEN**, and they are the live halves: **(b)** which sections of the
+> [developer report](agent/reports/MIGRATION_DEV_REPORT.md) may be sent, and **(c)** which checks join the owed
+> sitting 144 a.
 
 > **[F59](agent/bugs/F59.md), desk-controlled, not yet reproduced in play.** At boarding, the game frees a crew member's
 > bed and then reserves it for their return. Our notification can give that bed to a homeless neighbour between those
@@ -754,7 +830,12 @@ warn STATE.md is 12991 bytes, warn threshold is 12288 — copy this line VERBATI
 > ⇒ **(a)/(d) stay OPEN.** If the chain runs clean, repair ships and you never have to answer them. If either
 > link stops, the question arrives here with the evidence attached.
 
-### 2026-09-11 — 150: the Paradox developer answered in the Building Codes thread. **Three decisions: (a) what to tell them about how we find bugs, (b) the prefab fix's shape, (c) retire the farm-oxygen fix?** Nothing here needs the keyboard.
+### ✅ 2026-09-11 — 150 CLOSED 09-12: all three decided. **(a) you posted the developer reply · (b) built as option 1 with the law's own id · (c) retire, ruled by item 156.**
+
+> **(a) CLOSED 2026-09-12 — done, not owed.** You posted the reply to `ivanassen` in the Building Codes thread
+> and used **the majority of A+B**: the sources paragraph *and* the line naming AI-assisted research and code
+> review. There is no API for a Steam comment, so it is recorded as **owner-stated, 2026-09-12** (no posting
+> timestamp given) in `FIELD_REPORT_REPLIES.md` — the draft is marked POSTED and the Steam table carries the row.
 
 > **Update 2026-09-12:** (c) is RULED by item 156 (retire). (b): you said "build it" — the build prompt
 > `agent/prompts/C85_C88_BUILD.md` carries **option 1** (both laws apply to prefab buildings, as the developer
@@ -875,7 +956,10 @@ warn STATE.md is 12991 bytes, warn threshold is 12288 — copy this line VERBATI
 > “the live callback re-sized this staged Trade rocket.” Neither proves the
 > Wildfire mystery or a real pre-stuck save.
 
-### 2026-09-11 — 148: an on/off button for every fix — the chain is written and ready to start. **Decisions: (a) how console players reach the buttons, (b) whether this counts as a "major overhaul" for the release gate, (c) accept that the first prompt re-checks how the chain was cut. Recommendations: (a) our own panel, proven on a controller before it is built out, falling back to the game's built-in Mod Options page; (b) no extra sweep — the chain's own final audit and its two sittings are the gate; (c) yes.**
+### ⏳ 2026-09-11 — 148 DEFERRED 09-12 (you said **skip**; the chain is NOT started) — an on/off button for every fix. **Decisions: (a) how console players reach the buttons, (b) whether this counts as a "major overhaul" for the release gate, (c) accept that the first prompt re-checks how the chain was cut. Recommendations: (a) our own panel, proven on a controller before it is built out, falling back to the game's built-in Mod Options page; (b) no extra sweep — the chain's own final audit and its two sittings are the gate; (c) yes.**
+
+> ⏳ **Deferred 2026-09-12, not closed.** You said skip. All three calls (a), (b) and (c) stay open exactly as
+> written; nothing was fired and `docs/agent/prompts/fixtoggles/01_SPEC_fable.md` has not been started.
 
 > **What you asked for (09-11):** a button per fix so players can switch any fix off — prompted by the ~1.5 days in which
 > v5 (a 1.0.7 build) ran on 1.1.0 and several fixes did harm, while the player who reported it couldn't narrow it down
@@ -924,7 +1008,14 @@ warn STATE.md is 12991 bytes, warn threshold is 12288 — copy this line VERBATI
 > un-stick an already-stuck rocket when the save loads. It would carry a Beta label until tested in play.
 > A reply for the Reddit thread is ready in `FIELD_REPORT_REPLIES.md` — post it or not, your call.
 
-### 2026-09-11 — 147: five more field reports triaged. **Decision: only whether to post the replies. Recommendation: post the clogged-building and deep-scan replies (they help players now); skip meteors.** Nothing here needs the keyboard except the optional 2-minute lake check below.
+### ✅ 2026-09-11 — 147 CLOSED 09-12: **cleared by you.** The original triage is kept below. Nothing here is owed from you.
+
+> **Closed 2026-09-12 on your word: cleared.** You did not say which replies went up, so nothing is recorded as
+> posted — the drafts keep their own status lines in `FIELD_REPORT_REPLIES.md` and are yours to post or drop.
+> ⛔ **The C87 lake draft stays HELD.** Its hold is on the 2-minute lake check below, which is still **unrun** —
+> the check's result changes the reply. Closing this item does not discharge that hold.
+
+> The original ask: **Decision: only whether to post the replies. Recommendation: post the clogged-building and deep-scan replies (they help players now); skip meteors.** Nothing here needs the keyboard except the optional 2-minute lake check below.
 
 > - **Building codes vs prefabs:** ⚠️ **re-classified after your pushback (09-11).** The code deliberately skips prefab
 >   buildings (both laws' maintenance handlers exit on a prefab flag new in 1.1.0), but the law text says "new buildings"
@@ -1332,7 +1423,16 @@ warn STATE.md is 12991 bytes, warn threshold is 12288 — copy this line VERBATI
 > went up with the v7 update. Recorded in `FIELD_REPORT_REPLIES.md` → "What was actually
 > posted" → the Steam table, marked owner-stated (there is no API for a Steam comment).
 
-### 2026-09-10 — 144: two small asks around the v7 upload; neither blocks it.
+### ✅ 2026-09-10 — 144 CLOSED 09-12: **(b) cleared by you.** Two small asks around the v7 upload; neither blocked it.
+
+> **Closed 2026-09-12 on your word: (b) is cleared.** You did not say which way — whether the long sounds post
+> went up, or what it said — and nothing has been inferred from that. The two drafts that were gated on it
+> (`HELD on ck144 (b)` in `FIELD_REPORT_REPLIES.md`: the long sounds post and its "still checking" follow-up) are
+> marked **SUPERSEDED** there with the reason, because their gate can no longer be evaluated and the follow-up's
+> "currently in testing" wording has gone stale across v7, v8 and v9. ⚠️ **Say the word if you want the follow-up
+> back as a live draft** — its two leads are recorded in `agent/bugs/C74.md` either way.
+> **(a)** was already discharged here as a decision (below); the boot it names is tracked in `agent/STATE.md`'s
+> OWED line, not in this item.
 
 > **(a) The v6 check you still owe** (one boot: a handful of hotfix-2 checks plus the first
 > full run of the test kit — STATE's "OWED" line). **Decision: run it on your first v7 boot, or
@@ -2072,6 +2172,12 @@ Original question, kept as asked: C74, the Rare Metals Extractor's hammer (and t
 > #### ⛔ One thing still wants your decision
 >
 > 1. **132 — `STATE.md`'s warn line.** Measured now, not quoted: **12,215 bytes / 129 lines against a 12,288 warn — 73 bytes of headroom, i.e. none.** The warn was raised 9 → 12 KiB this morning as a runway; the file grew ~3.0 KiB over the last ten commits (09-09 03:28 → 21:19) and it is growing, not being suppressed. This link stayed under only by compressing four history lines into pointers (grave in the commit, named in SESSION_LOG) and then trimming its own two new lines twice — the close-out first landed 38 bytes OVER. ⛔ Not an agent's call, and the hard cap (18 KiB) stays either way: **raise the warn again (recommendation: 14 KiB, ~20 lines of runway), or accept a per-session eviction until the 1.1.0 fallout is closed?**
+>
+>    ✅ **RULED 2026-09-12: SKIP.** You said skip. **The warn stays at 12288 and no eviction is ordered.**
+>    ⚠️ For the record, so nobody reads the silence as "it fits": `STATE.md` has sat **over** the warn
+>    continuously since 2026-09-11 — every session's `doccheck` emits the warn line and every owner report has
+>    been repeating it. That is the state you accepted, not a state that has gone away. The hard cap (18 KiB) is
+>    untouched and still enforced.
 >
 > ⛔ Not clearance (`H-04`). `100_DOCSWEEP` is now the ONLY thing between the tree and the upload; it fires next.
 

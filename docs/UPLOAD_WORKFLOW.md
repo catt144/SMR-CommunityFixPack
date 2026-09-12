@@ -43,10 +43,10 @@ These are **meant** to upload by themselves, with nothing pasted:
   them, or the Paradox description comes out cut off (it is longer than any Paradox
   has taken before), tell the agent — the paste copies in step 3 still work.
 
-✅ **It has worked once** — at the v6 upload (2026-09-09) both pages filled
-themselves in full with nothing pasted (v7 you pasted for the formatting; v8's
-result was never reported). Once is not a habit yet, so still do step 3's check;
-the paste copies there stay current in case it does not.
+✅ **They do fill themselves — that is settled** (owner, 2026-09-12, checklist 155):
+the descriptions **always** auto-fill. What does **not** survive is the formatting,
+so step 3 is a styling pass rather than a rescue, and the paste copies there stay
+current for it. Not an open question any more — nobody needs to report the result.
 
 **Two things that look wrong and are not:**
 
@@ -66,8 +66,9 @@ way down to the modder section?**
 
 ### ✅ Yes — the automatic fill worked
 
-Nothing to paste. **Tell the agent it worked** — that is the thing we are waiting
-to find out. Go to step 4, unless you want the styling below.
+The normal case, every time. **Nothing to report** — the agent already knows this is
+what happens (step 5). Nothing to paste either, unless you want the styling below,
+which is the part the fill never carries. Go to step 4.
 
 ### ❌ No — it is short, stale, or missing
 
@@ -319,16 +320,21 @@ Housing and migration fixes, reviewed against the 1.1.0 patch:
 Bug fixes for Surviving Mars: Relaunched — it repairs defects verified in the game's own code rather than rebalancing the game, and it is safe to add to a save you have already played.
 ```
 
-Then **tell the agent it did not work**, and what the page showed instead.
+This one **is** worth reporting, because it is the exception: tell the agent the
+description came out short, stale or missing, and what the page showed instead. That
+is step 5's "anything that looked wrong", not the auto-fill question.
 
-### Optional either way: make it pretty
+### Either way: the styling pass
 
-Even when the automatic fill works, the page comes out as plain text — correct,
-but no headings or bold. The two blocks above are the styled versions; paste one
-and apply the headings with the editor buttons.
+The fill gives you plain text — correct, but no headings or bold, and **the formatting
+never survives an upload** (owner, 2026-09-12). So this pass runs every time: paste the
+matching styled block above and apply the headings with the editor buttons, on **both**
+Steam and Paradox.
 
-⚠️ Cosmetic only, and **it does not survive the next upload.** Skip it whenever
-you like; the page is still correct without it.
+⚠️ Cosmetic, and the owner calls it minor — the auto-fill gives the page something
+until the cleanup lands. Skip it whenever you like; the page is still correct without
+it. ⛔ It is not optional for the **agent**, though: keeping those blocks current every
+sweep is what makes the pass possible.
 
 ---
 
@@ -348,15 +354,27 @@ Give it a minute, then check the fix list page shows the new entry.
 
 ## 5 · Tell the agent
 
-Four things, and then you are done:
+Three things, and then you are done:
 
 1. The **version number the Paradox page shows** (Steam shows none — confirmed 2026-09-10).
-2. **Whether the descriptions filled themselves**, or you had to paste. This is
-   the one we do not know yet.
-3. Anything else that **looked wrong** on either page.
-4. Whether the **site published**.
+2. Anything that **looked wrong** on either page.
+3. Whether the **site published**.
 
 The agent writes the rest down.
+
+> ⛔ **Agents: two questions are ANSWERED — never ask them again.** The owner ruled
+> this on **2026-09-12** (checklist 155) after being asked once too often:
+>
+> - **"Did the descriptions fill themselves?"** — **Yes. They always auto-fill.**
+> - **"Did you have to paste?"** — **Yes, always, for the formatting.** The auto-fill
+>   does not carry the styling, so the owner pastes the step-3 backups and does a
+>   **cleanup pass on both Steam and Paradox**. It is minor: the auto-fill gives the
+>   page something until the cleanup lands. **The method is satisfactory.**
+>
+> ⇒ Record that as the known state of every upload; do not open it as a question, and
+> do not report a cycle as "auto-fill result unknown". ⛔ The step-3 paste backups stay
+> **REQUIRED** and current every sweep — the owner's answer is *why*, not a reason to
+> drop them.
 
 ---
 
@@ -366,7 +384,7 @@ The agent writes the rest down.
 |---|---|
 | The mod editor asks to save before uploading | Stop. Tell the agent. Something changed that should not have. |
 | An upload is rejected | Stop. Tell the agent what it said, word for word. |
-| The description came out short | Paste it by hand (step 3), then tell the agent it did not fill itself. |
+| The description came out short | Paste it by hand (step 3), then tell the agent — this is the exception, not the norm. |
 | You uploaded Steam before Paradox | Not fixable, and not worth chasing. Say so, carry on. |
 
 ---

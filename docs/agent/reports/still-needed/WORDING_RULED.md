@@ -12,8 +12,14 @@ the two differ. Rulings by the owner, 2026-09-12, in `smr-bugfixpack-d0`:
   info panel (`Lua/XDef/ipTrain.generated.lua:85`, `ipTrack.generated.lua:186`,
   `Lua/Buildings/Track.lua:601`). Only the Comfort charge is gone from `ExitVehicle`
   (no `ChangeComfort` in `:665-700`). The Comfort claim goes; the fix does not.
-- **F31 is HELD** for the deep half of `prompts/SURFACE_AUDIT_FABLE.md`. No text
-  below is final for it.
+- **F31 RETIRES.** ✅ Ruled by the owner **2026-09-12** (checklist 159 (1)) on the deep
+  audit's RETIRE verdict (`reports/SURFACE_AUDIT_2026-09-12.md` §2 C1–C6). Was HELD for
+  that audit; the hold is discharged. Module out under H-10, row and headline off, count
+  word to **Forty-six**. See item 13 below.
+- **F37's load-time clean-up is not rehomed.** ✅ Ruled 2026-09-12 (checklist 159 (2)):
+  accept the loss; it does **not** move into `90_SaveSanitizer.lua`.
+- **Items 1, 3, 12 and 14 carry replacement text ruled 2026-09-12** (checklist 159 (3),
+  "3 all" plus the optional fourth). Each replaced line names its audit finding inline.
 - **F52 is HELD** as already ruled (Codex marked it inferred; the row is right).
 
 ## ⚖️ Voice rule (owner, 2026-09-12) — binds every public surface from now on
@@ -35,11 +41,19 @@ that a developer reading the row finds the right code. The dated entry in
 Line numbers are `content/fix-list.md` in `SMR-CommunityMods` at `a061665`. Only the
 lines quoted change; everything else in the row stays.
 
-### 1 · F54 Shuttle hub switched off (`:94`) — approved, polished
-- **After the fix:** a hub you switch off stops counting. Only hubs that are on and
-  able to fly count.
+### 1 · F54 Shuttle hub switched off (`:94`) — approved, polished; **After line replaced 2026-09-12**
+- **After the fix:** a hub you switch off stops counting. Only hubs you have left
+  switched on count.
 - (drops the "Suspensions the game imposes on itself — a dust storm, for instance —
-  still count as before" sentence; the dust-storm case was never measured)
+  still count as before" sentence)
+- ⚠️ **Replaced on the owner's 2026-09-12 ruling of checklist 159 (3)**, from the
+  surface audit's D3/§3 item 1: "on and able to fly" was stronger than the module.
+  The strict test is `hub.working or (hub.ui_working and permitted-reason and not
+  possible-reason)` (`Code/Fix_ShuttleHubOffAvailable.lua:86`), so a hub the **game**
+  has paused — maintenance, exceptional circumstances — still counts, on purpose.
+- ⚠️ **Known, not acted on:** the same audit found the dropped dust-storm sentence
+  was the **true** one. It is still dropped; restoring it is the owner's call
+  (flagged on checklist 159).
 
 ### 2 · Saint's blessing (`:142`) — approved, polished
 - **What you saw:** nothing, which is the problem — the blessing meant for the
@@ -50,8 +64,16 @@ lines quoted change; everything else in the row stays.
 - **Headline:** Beds stayed reserved for colonists who were never going to take them
 - **What you saw:** free beds in a dome, homeless colonists outside it, and nothing
   happening. *(unchanged)*
-- **What was wrong:** a bed could stay reserved for a colonist who had died, left, or
-  moved to another dome, and those reservations are invisible in the interface.
+- **What was wrong:** a bed could stay reserved for a colonist who was never going to
+  arrive — one still waiting for a ride that never came, or one who set off on foot —
+  and those reservations are invisible in the interface.
+- ⚠️ **"What was wrong" replaced on the owner's 2026-09-12 ruling of checklist 159 (3)**,
+  from the surface audit's D2/§3 item 3: two of the three original cases are vanilla's
+  own release paths. Death releases it (`Colonist:Die` → `ClearTransportRequest` →
+  `CancelResidenceReservation`, `Lua/Units/Colonist.lua:1288`, `:2037`; `Erase` at
+  `:1250`), and moving in elsewhere releases it (`Residence:AddResident`,
+  `Lua/Buildings/Residence.lua:110`). The defect is the colonist who never arrives —
+  committed-shuttle limbo and the walk path (`Code/Fix_StaleReservations.lua:73-82`).
 - **After the fix:** reservations held by a colonist who can no longer use the bed are
   released, and stale ones expire. A bed held for a colonist away on an expedition
   is kept for their return.
@@ -116,38 +138,56 @@ lines quoted change; everything else in the row stays.
 - **What was wrong:** one of the game's own repair passes for saves from an earlier
   version was written so that it did nothing. The current game has corrected that,
   but a save that already recorded the repair as done will never run it.
-- **After the fix:** the pass runs properly, once, when you load. If the sort fails
-  on a track, that track is put back the way it was and the rest carry on.
+- **After the fix:** the pass runs properly, once, when you load. A track it cannot
+  sort keeps its old order, and the rest carry on.
+- ⚠️ **"After the fix" replaced on the owner's 2026-09-12 ruling of checklist 159 (3)**,
+  from the surface audit's D4/§3 item 12: "put back the way it was" overstates it. On
+  failure the engine restores only the element **order** (`Lua/Tracks.lua:617-620`
+  @1.1.0 copies `all_elements` back); `connections` and `node_idx`, rewritten at
+  `:578-579`, `:602`, `:610`, stay rewritten, and the failure is an `assert` that does
+  not unwind, so the sanitizer's `pcall` (`Code/90_SaveSanitizer.lua:224`) sees no
+  error on that path.
 - **Worth knowing:** keep the first two sentences ("we cannot tell you this fixes a
   symptom you have. It puts your save into the state the game's own migration
   intended, and on our test save it corrected several tracks and stayed corrected.");
   drop the rest, which the new After line now says.
 
-### 13 · F31 cave-in on a missing map (`:561`) — HELD for the deep audit
-- Owner's lead, confirmed from source 09-12: the "No Asteroids and Underground" rule
-  is **`Obsolete = true`** on 1.1.0 (`Data/GameRuleDef.lua:55-62`; not on 1.0.7), so
-  the row's own scenario ("a game created with the No Underground and Asteroids
-  rule") cannot be created on the live branch. The audit settles the other route
-  (a non-Surface map) and the wrong-map half.
-- If the audit confirms nothing player-visible remains on 1.1.0: **retire** (row and
-  headline off, module out under H-10), and the headline count drops with it.
-- If a guard with a real player-visible reach survives: the row is rewritten plain
-  after the audit names that reach, and the headline stays or goes on that basis.
+### 13 · F31 cave-in on a missing map (`:561`) — ✅ **RETIRE** (owner, 2026-09-12)
+- **No replacement text.** The row at `:561-570` comes **off**, and the card's
+  stopped-story headline bullet comes off all five copies. Module out under H-10
+  (`items.lua` entry), and the TestKit's `AnomalyCaveInMap`
+  (`50_Probes_Wave5.lua:400`) plus its `64_Probes_Wave14.lua` census row retire with it.
+- Why: the deep audit (`reports/SURFACE_AUDIT_2026-09-12.md` §2 C1–C6) found neither
+  half reachable on 1.1.0 and no observation on either branch — no save, no log, no
+  report. The owner's lead held (`NoUndergroundAndAsteroids` is `Obsolete = true` on
+  1.1.0, `Data/GameRuleDef.lua:53-63`), and the two routes it left open closed: the
+  eight cave-in sequences run only on the underground map, so the map they name is the
+  map they run on, and the new-game picker admits no non-Surface start (map data read
+  out of all 142 `Packs/Maps/*.fpk`).
+- The frozen `v5-game-1.0.7` build keeps the module; that build is untouched (ck156).
 
-### 14 · F73 asteroid vacuum reflex (`:189`) — approved, polished; judgment marker stays
-- **After the fix:** a colonist with a home who is idling out in vacuum is sent home
-  once half their oxygen is gone.
+### 14 · F73 asteroid vacuum reflex (`:189`) — approved, polished; judgment marker stays; **After line replaced 2026-09-12**
+- **After the fix:** a colonist whose home is up and running, idling out in vacuum, is
+  sent home once half their oxygen time is gone.
+- ⚠️ **Replaced on the owner's 2026-09-12 ruling of checklist 159 (3) — "3 all", the
+  optional fourth included**, from the surface audit's D7/§3 item 14: "a colonist with
+  a home" is one word short. The reflex requires `IsValid(self.residence) and
+  self.residence.working` (`Code/Fix_ShelterReflex.lua:101-108`), so a switched-off
+  home does not call them in.
 
 ## Whole-list arithmetic after the batch (derive once, at apply time — never carry)
 
-- Card count word: Forty-nine → **Forty-seven** with F37 + F43 retired; one lower again
-  if F31 retires.
-- Headlines on the card: 21 → 19 (F37's farm-oxygen line and F31's stopped-story line
-  gone) — F31's removal is conditional on item 13; F58's headline keeps its slot with
-  the new words.
+- Card count word: Forty-nine → **Forty-six** — F37 + F43 + F31 all retire (owner,
+  2026-09-12; F31 no longer conditional).
+- Headlines on the card: 21 → **19** (F37's farm-oxygen line and F31's stopped-story
+  line gone); F58's headline keeps its slot with the new words.
 - "Real defects you cannot see today" count on the card: three → **two** (F57a and
   F29; F43 leaves that set).
-- Judgment calls: **three**, unchanged.
-- Modules 46 → 44 (45 if F31 also goes); `Code/*.lua` 47 → 45 (44). TestKit probes:
-  `GhostFarmOxygen`, `LayoutTechLock` and the already-loose `DomeFreeSpaceMismatch`
-  retire with their modules (local kit, not part of the release).
+- Judgment calls: **three** in this batch — but ⚠️ **C89 adds a fourth** in the same
+  v10 (checklist 158). Re-read the `??? question` rows at apply time.
+- ⛔ **Module and file totals: DO NOT carry the old 46 → 44 / 47 → 45 line.** Three new
+  modules (C85, C88, C89) land in the same v10, so the retirements' arithmetic no
+  longer stands alone. Derive from `python tools/doccheck.py --emit-counts` at apply
+  time. TestKit probes: `GhostFarmOxygen`, `LayoutTechLock`, `AnomalyCaveInMap` and the
+  already-loose `DomeFreeSpaceMismatch` retire with their modules, plus the
+  `64_Probes_Wave14.lua` census rows (local kit, not part of the release).

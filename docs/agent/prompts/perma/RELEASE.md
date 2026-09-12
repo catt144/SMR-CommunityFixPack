@@ -12,8 +12,9 @@ driven by `RELEASE_OUTBOX.md`, which it clears at the end. **Any model.**
 > them; the owner does the pack + upload in the middle.
 
 > 🔧 **Updated 2026-09-10:** the count-word grep no longer assumes "Eighty" (v6 made it
-> Forty-six, and the old pattern matched nothing — a vacuous gate); the auto-fill line
-> reflects v6's first clean auto-fill.
+> Forty-six, and the old pattern matched nothing — a vacuous gate).
+> 🔧 **Updated 2026-09-12:** auto-fill is settled, not tracked (owner, checklist 155) —
+> §2, §3, §4 and §6 record the answer instead of asking for it.
 
 ## 0 · Orient
 1. `git log --oneline -10` + `git pull` + `git status --short` (other sessions commit here).
@@ -57,25 +58,26 @@ site fix-list row count. ⛔ Zero hits anywhere is a FAIL. `doccheck` GREEN. Com
 
 ## 2 · Agent — hand off
 Tell the owner **"ready to upload"** and point them at `UPLOAD_WORKFLOW.md`. Say
-plainly what the new count and change note are, and that the store bodies should
-auto-fill from `metadata.lua` — v6 (2026-09-09) was the FIRST cycle where both pages
-auto-filled clean (owner-seen; STATE). One clean cycle is not a pattern: the §3
-backups stay the REQUIRED paste fallback, kept current in step 1 — they are NOT
-"optional polish".
+plainly what the new count and change note are. ✅ **Settled, do not raise it as a
+question** (owner, 2026-09-12, checklist 155): the store bodies **always** auto-fill
+from `metadata.lua`; what does not survive is the **formatting**, which the owner
+restores from the §3 blocks in a cleanup pass on both stores. ⇒ the §3 backups stay
+REQUIRED and are kept current in step 1 — they are NOT "optional polish".
 
 ## 3 · Owner — pack + upload (`UPLOAD_WORKFLOW.md`)
 The owner packs (main menu → MOD EDITOR → File → Pack Mod; the version auto-bumps),
-uploads **Paradox then Steam**, checks the pages, and reports back the four things
-`UPLOAD_WORKFLOW.md` §5 asks for (each store's version, whether the descriptions
-auto-filled or needed a paste, anything that looked wrong, whether the site
-published).
+uploads **Paradox then Steam**, checks the pages, and reports back the **three** things
+`UPLOAD_WORKFLOW.md` §5 asks for (the version the Paradox page shows, anything that
+looked wrong, whether the site published). ⛔ **Never ask again whether the
+descriptions auto-filled or whether the owner pasted** — both are permanently answered
+in §5 (owner, 2026-09-12; "I keep getting this question").
 
 ## 4 · Agent — close out (`POST_UPLOAD_CLOSE.md`)
 AFTER the owner confirms the listing exists: run `POST_UPLOAD_CLOSE.md` — the
 `pdx_id`/`steam_id` writeback commit with the stripped `metadata.lua` comments
 restored, counts re-emitted, `STATE.md` updated, entries flipped to their live
-status. Record whether auto-fill worked (the open question UPLOAD_WORKFLOW §2/§5
-tracks).
+status. ⛔ Auto-fill is **no longer an open question** — do not record a per-cycle
+result for it (UPLOAD_WORKFLOW §5, owner 2026-09-12).
 
 ## 5 · Agent — CLEAR THE OUTBOX (the step that makes this repeatable)
 In the same close-out commit, rewrite `RELEASE_OUTBOX.md`:
@@ -86,7 +88,7 @@ This is what stops a fix shipping twice or being forgotten. ⛔ The outbox is no
 cleared until the upload is CONFIRMED — never on "ready", only after step 4.
 
 ## 6 · Done
-Summarise to the owner: version each store shows, the count now live, whether the
-paste auto-filled, the site status, and that the outbox is clear. Route any
+Summarise to the owner: version each store shows, the count now live, the site
+status, and that the outbox is clear. Route any
 lesson to its home (`WORKFLOW.md`/`FIX_POLICY.md`), append the leg to
 `archive/SESSION_LOG.md`.

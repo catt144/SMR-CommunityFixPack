@@ -35,7 +35,8 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   F21 STAYS, F31 → the audit). ⛔ Re-derive every count once. Then the owner's upload + the **held** site deploy.
   Handoff `prompts/perma/HANDOFF_ORCHESTRATOR.md` §3 LIVE. Desk `prompts/DLC_DEEP_CHECK.md` (`HUNT_AUDIT.md` §8).
   ⭐ FR-1 TEMP WORKAROUND MOD LIVE 09-11 (Steam 3799500849 / PDX 158711; FINDINGS §11–§12). ALL FR-1 work → `prompts/perma/LINUX_DISPATCH.md`.
-  Field: 3 working (one 10xx), 1 failing (GTX 1070, log requested). Chain `prompts/fixtoggles/` (ck148). Owner: ck155 v8+v9 receipts · ck157 (C89 reply + dev route) · ck144 (v7 checks + sounds).
+  Field: 3 working (one 10xx), 1 failing (GTX 1070, log requested). Chain `prompts/fixtoggles/` (ck148, DEFERRED 09-12).
+  Owner OWES: ck157 (C89 reply + dev route) · ck151 (b)/(c) · ck152 (c) · ck144 (a) v7 boot.
   vanillahunt CLOSED 09-10 (99): instruments SOUND WITH STATED GAPS — 1,281 table-level hunks in 368 rowed hand files listed by
   no instrument (§1.4); 12 P2s re-derived: 6 hold, 5 weakened, **C80 REFUTED**; **C82** filed by the audit (Incident reactors stay
   off); every P2 is a gain/cosmetic except C82/C66/C63; ck142 = hotfix-3 list (rec none). FR-1/2/3 OPEN (FR-1 → LINUX_DISPATCH).
@@ -103,22 +104,23 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   1.0.7 players are served by the frozen v5 GitHub build (`v5-game-1.0.7`), linked from the card and the site.
 
 ## Open owner decisions (bodies in `docs/PLAYTEST_CHECKLIST.md` → "Decisions waiting on you")
-- **155** v8 + v9 receipts owed (both read from Steam: PDX version, auto-fill or paste). **156** RULED 09-12 (NEXT line). **152** F59 REPAIRED (`3b41d9f`, AUDITED SHIP A),
-  A2 half `tested-attended` 09-11 (`11d163e`; no `applied` line quoted), A1 expedition half untested. F60 RETIRED `9bc4360`; 152 (b) closed.
-- **151** Migration audit DONE (`MIGRATION_DEV_REPORT.md`); F60 retirement proposed. ⛔ **F59 RE-DERIVED 09-11**: expedition claim
+- **155** CLOSED 09-12: descriptions ALWAYS auto-fill, formatting never survives, owner pastes + cleans both stores; ⛔ never re-ask.
+- **156**/**159** RULED 09-12: F31 RETIRES, F37 sweep loss accepted, 4 wordings applied. **152** PART-RULED: A2 `tested-attended`, A1 source-derived, (e) sweeps with v10, (c) open.
+- **151** (a)/(d) CLOSED 09-12, overtaken (SHIP A, F59 in v9, F60 out); (b)/(c) OPEN. ⛔ **F59 RE-DERIVED 09-11**: expedition claim
   CONFIRMED **+ 2nd caller** — manual Set Residence on a full home OVERFILLS it, BOTH branches, ships today (`desk_f59_interact.py` 8/8).
   Repair must cover both; cheap in-play check in ck151. ⛔ The frozen `v5-game-1.0.7` download (card → legacy page) SHIPS
   the same body; ✅ **ck151 (e) RULED 09-11: 1.0.7 STAYS FROZEN**, work targets 1.1.0 — but the portals serve ONE version,
   so Steam/PDX 1.0.7 players run the LIVE pack and F59 has no version gate. Desk only, no build.
-- **150** PDX dev reply (C88 shape · F37 REMOVE · wording) · **149** CLOSED by the v8 upload · **147** field replies · **148** fixtoggles.
+- CLOSED 09-12: **150** (dev reply POSTED, majority of A+B) · **147** · **144** · **149** (by v8). **148** DEFERRED (skip, chain not started) · **153** RULED post it.
+- **132** SKIP 09-12: warn stays 12288, over it since 09-11. **C90** shape RULED 09-12 — apply-success guards in Saint + Sinkhole only, NOT the shared core,
+  ⛔ never gate on `entry.status == "active"`; NOT BUILT.
 - 98 rig half only (⛔ Steam = ONE branch at a time, owner 09-08) · 99 disposition of the self-disabled ·
   100 say anything to players yet (rec no) · 101 accept the re-verification chain shape.
 - 112 DEFERRED 09-09 · **125** RULED+LANDED 09-09: F66 guard yields to `force` (desk-controlled, untested); wrapper re-read → 99.
 - **130 RULED 09-09**: Saint heal SHIPS UNEXERCISED — condition is historical, unforgeable (`EF-080` override yields
   `restored 0`); additive-only and cannot throw (`Lua/TraitPreset.lua:77-95` no throwing path, `WhenActive` is a gate not
   a trap). ⛔ Its kit probe PASSes vacuously with no domed Saint — NOT coverage. Field reports are the detector.
-- ✅ **131** RULED promote + LANDED 09-09 late (`tools/desk_*.py`) · **132** STATE.md warn: raise 12288 again or accept
-  per-session eviction (this close-out evicted the pre-release material; measure, never quote) · **133** six
+- ✅ **131** RULED promote + LANDED 09-09 late (`tools/desk_*.py`) · **133** six
   self-check-promise decisions (`reports/SELFCHECK_PROMISE_COMBINED.md` §7), routed 09-09 · **134** assign the vanillahunt
   chain's models (5 links; rec 03 + 99 Fable), routed 09-10.
 - 73 blame surface — harden or not · 76 confirm (a) was a ruling not a leaning · 53 harden now or in 1.0.1

@@ -75,11 +75,17 @@ the author.** A draft says *"hasn't been updated for the current build"*, never
 
 **The long sounds post** (drafted in conversation 2026-09-10, BEFORE the build)
 
-`STATUS: HELD on ck144 (b)` · thread: Steam · subject: C74 + C77 · drafted 2026-09-10 · gate: ck144 (b)
+`STATUS: SUPERSEDED by ck144 (b) cleared 2026-09-12` · thread: Steam · subject: C74 + C77 · drafted 2026-09-10 · gate: ck144 (b) — discharged
 
-⛔ **Whether this went up is still unanswered.** The owner confirmed on 2026-09-12 that
-the C74 and C83 replies below were posted; that answer did **not** cover this post.
-Everything here stays intact until ck144 (b) is answered.
+⛔ **Whether this went up was never answered, and now cannot be.** The owner cleared
+ck144 (b) on **2026-09-12** without saying which way; nothing has been inferred from
+that. The post is therefore neither recorded as posted nor live to post, and its
+"currently in testing" wording has gone stale across v7, v8 and v9.
+⚠️ **Convention note:** the four-token rule reserves `SUPERSEDED by <section>` for a
+later draft in this file, and no draft replaces this one. The token is used here to
+mean *dead, cut at the next release sweep*, because `HELD` is no longer true and
+`DRAFT` would say it is postable. Its content is preserved below and its two leads live
+in `agent/bugs/C74.md`. Say the word to bring it back as a `DRAFT`.
 
 Its sections, so a follow-up can honour them:
 *Being restored* — the seven units (C74/C77), "currently in testing"; *Silent on purpose* — the
@@ -100,9 +106,14 @@ have both gone live since (2026-09-11, checklist 155). A follow-up must not repe
 **Follow-up for "still checking"** (drafted 2026-09-10 late; both leads re-derived from the 1.1.0
 tree, `reports/C74_SOUND_SWEEP.md` "Unreachable even WITH presets")
 
-`STATUS: HELD on ck144 (b)` · thread: Steam · subject: C74 · drafted 2026-09-10 · gate: ck144 (b)
+`STATUS: SUPERSEDED by ck144 (b) cleared 2026-09-12` · thread: Steam · subject: C74 · drafted 2026-09-10 · gate: ck144 (b) — discharged
 
-Post ONLY if the owner's posted text said "still checking"; no version number needed.
+⛔ **Its posting condition can no longer be evaluated.** It was "post ONLY if the
+owner's posted text said 'still checking'", and the owner cleared ck144 (b) on
+**2026-09-12** without saying what the post said. Marked dead rather than guessed at;
+same convention note as the draft above. ⚠️ **Say the word and it becomes a live
+`DRAFT` again** — both leads are re-derived and recorded in `agent/bugs/C74.md`, so
+nothing is lost either way. No version number would be needed.
 
 > Following up on the two I said I was still checking — neither turned out to be something you're missing. The Drone Hub effect was made for building drones, but nothing in the game ever plays it on a Drone Hub, and there is no moment it was ever tied to, so there is nothing to restore without making one up. The misspelled one is real: one digging sound on a version of the Concrete Extractor never starts because its name is spelled wrong. But the same digging loop is already playing through that part of the dig, so correcting the spelling would only play the same sound twice on top of itself. Nothing there is silent that should be making noise.
 
@@ -136,7 +147,10 @@ pre-stuck rocket reloaded and left. ✅ `tested-attended` in play (checklist 149
 
 **Russia's "3 manned Extractors at 160% Performance" goal (Pancer1900) — no bug; see `agent/bugs/F108.md`**
 
-`STATUS: DRAFT` · thread: Reddit · subject: F108 · drafted 2026-09-11 · gate: ck153
+`STATUS: DRAFT` · thread: Reddit · subject: F108 · drafted 2026-09-11 · gate: none
+
+✅ **Approved to post — owner ruled YES on checklist 153, 2026-09-12.** The gate is discharged; nothing holds
+this but the owner's click. Not posted as of 2026-09-12.
 
 > **TL;DR — Performance and Production are two different numbers, and none of the extractor upgrades touch Performance.**
 >
@@ -183,10 +197,16 @@ advice is stale. ⚠️ Enthusiast/Melancholic fire on `HighStatLevel`/`LowStatL
 
 **Reply to the developer (ivanassen, post #7 in the Building Codes thread) — C88 + F37 + "where do you collect your bugs?"**
 
-`STATUS: DRAFT` · thread: Steam · subject: C88 + F37 · drafted 2026-09-11 · gate: ck150 (a)
+`STATUS: POSTED 2026-09-12` · thread: Steam · subject: C88 + F37 · drafted 2026-09-11 · gate: ck150 (a) — discharged
+
+✅ **POSTED — owner-stated 2026-09-12; ck150 (a) is CLOSED.** The owner posted it and used **the majority of
+A+B**: the sources paragraph **and** the line naming AI-assisted research and code review. ⚠️ **No posting
+timestamp was given** — there is no API for a Steam comment, so the date is the day the owner said so, not a
+read time, and the status line carries a date where the convention wants `YYYY-MM-DDThh:mmZ`. The row is in the
+Steam table under "What was actually posted". ⇒ This draft is CUT at the next release sweep.
 
 Drafted 2026-09-11 by `smr-bugfixpack-e6`. The farm paragraph was re-read on 1.1.0.403908 (F37's 1.1.0 section). The
-owner picks the last paragraph (checklist 150 a).
+owner picked the last paragraph (checklist 150 a).
 
 > Thanks, that's great to hear. We'll add a fix for the prefab exemption to the pack and have it step aside by itself once your patch is out.
 >
@@ -204,6 +224,9 @@ which discharges the old "keep only if 150 (c) rules yes" condition on this para
 `STATUS: HELD on ck147` · thread: Steam · subject: C87 · drafted 2026-09-11 · gate: ck147
 
 ⛔ Held: the checklist 147 lake check is **unrun** (`C87.md` row_status), and its result changes the reply.
+⚠️ **Checklist 147 was CLOSED 2026-09-12 (owner: cleared) and this hold SURVIVES it.** The gate is the lake
+check itself, not the item number — the check was never run, so the reply's facts are still undecided. Do not
+read a closed ck147 as permission to post this.
 
 > Worth sending through the in-game report tool as the developer asked. That warning means the game thinks the lake's bottom would end up below the lowest height the map allows, but your spot is ordinary flat ground, so it shouldn't fire there. The check itself didn't change in the update, so something it reads did; we're checking whether it happens on every 1.1.0 map.
 
@@ -406,6 +429,7 @@ to spend and no thread to correct them in.
 | The C74 sounds reply ("you were right, and it wasn't only the hammer…") | C74 / C77 | with the **v7** update, 2026-09-10 | **owner-stated 2026-09-12** |
 | The C83 rocket-arrivals reply ("no listed fix covered this…") | C83 | with the **v7** update, 2026-09-10 | **owner-stated 2026-09-12** |
 | The Building Codes code reading + "is excluding prefabs intended?" question | C88 | 2026-09-11 | posted and **answered** — `ivanassen [developer]`: *"Excluding prefabs is wrong, and will be fixed in the next patch - until then, please include it in your mod."* (`C88.md` §"The devs' answer (2026-09-11)") |
+| The reply to `ivanassen` (prefab fix + farm-oxygen retirement + "where do you collect your bugs?") | C88 + F37 | 2026-09-12 | **owner-stated 2026-09-12**, no timestamp given. The owner used **the majority of A+B** — the sources paragraph plus the line naming AI-assisted research and code review. Closes checklist 150 (a) |
 
 Both C74/C83 replies said **"Today's update"**, meaning v7. **v8 and v9 have both shipped
 since** (2026-09-11, checklist 155), so a follow-up on either thread must not reuse that
