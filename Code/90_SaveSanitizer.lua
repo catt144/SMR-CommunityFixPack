@@ -94,6 +94,25 @@
 --   platform-conditional one F35 has. Whether it still earns its place is the
 --   owner's call: checklist 164.
 --
+-- F48, second pin -- the body the pass ACTUALLY CALLS, which was unpinned until
+-- 2026-09-12. The pass calls ProcessTrackElements; the fixup above is only what
+-- was SUPPOSED to call it. No DEFECT: line, deliberately -- we patch nothing here
+-- and claim no bug in it; the pin exists so a game patch that moves this body
+-- flips BODY-CHANGED and forces a read instead of silently invalidating PT-37's
+-- do-no-harm measurement, which was taken against the 1.0.7 body.
+-- ⚠️ It HAS already moved once, checked by hand 2026-09-12 (checklist 164), and
+-- the change is in our favour: 1.0.7 asserted every element share one
+-- is_construction_site state ("we only support all built or all under
+-- construction"); 1.1.0 replaced that with `assert(el.track_obj == track)` and a
+-- comment saying a mix of built track and construction sites is now supported,
+-- and it reads is_construction_site per element at the visuals step. So 1.1.0 is
+-- strictly MORE tolerant of the messy track PT-37's case B was written about.
+-- The failure path is byte-identical in both trees: `if not OrderTrackElements(
+-- map, elements, start_element) then return end` -- an early return BEFORE
+-- track.start_el / end_el are touched.
+-- SRC: Lua/Tracks.lua ProcessTrackElements sha256=6eb26b2f7dfb1b9bab8b061585819aee2789d33d31b282eef06a6103b566d59b
+--   (Lua/Tracks.lua:807-988 at pin time, 182 lines hashed; 1.0.7 was :807-990, 184 lines)
+--
 -- F95 -- no shipped target by construction. The residue it cleans was written
 -- into saves by a module of OURS that no longer exists (deleted by 2dc1dbe), so
 -- there is no vanilla body to pin and nothing upstream that can repair it.

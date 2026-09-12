@@ -29,7 +29,47 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
-### ⚖️ 2026-09-12 — 164: vanilla fixed the bug F48's cleanup was written for — but its fix can never reach the saves already damaged. **One call, and my recommendation is KEEP.**
+### ✅ 2026-09-12 — 164 RULED BY YOU: **KEEP** — "fine as long as we are sure it won't cause issues." **The condition was checked, not assumed; it holds, and the check closed a gap.** Nothing further is owed.
+
+> **What was checked, because "are we sure" deserved a real answer rather than a restatement.**
+>
+> **1. The pass's shape, read from the CODE, not its comments.** One-shot per save (`F48_FLAG` on
+> `UIColony`, gated at `:499`) · every call `pcall`'d **per track**, so a raise costs that track and is
+> logged by name · it counts an **effect**, not an execution — a track counts as repaired only if its
+> connection total or duplicate-`node_idx` count actually moved, so a healthy save logs a plain zero ·
+> it declines cleanly, with a log line, if a game update moves `ProcessTrackElements`/`ResolveMap` · and
+> it does **not** hand-assign `track.start_el`/`end_el`, which the shipped fixup does. Every one of those
+> is in the executable body, not only in the header prose.
+>
+> **2. ⭐ A real gap, found and closed by the check.** PT-37's do-no-harm measurement (2026-08-05, you at
+> the keyboard, on a copy of your own save) was taken against the **1.0.7** tree — and the function the
+> pass actually calls is `ProcessTrackElements` in `Tracks.lua`, which **was not pinned by anything**.
+> The manifest pinned only the fixup that was *supposed* to call it. So the safety evidence rested on a
+> body nothing was watching. **It has moved:** 1.0.7 `:807-990` (184 lines) vs 1.1.0 `:807-988` (182).
+>
+> **3. The change is in our favour, which is what settles your condition.** 1.0.7 asserted that every
+> element share one `is_construction_site` state (*"we only support all built or all under
+> construction"*). 1.1.0 replaces that with `assert(el.track_obj == track)` plus a comment saying a
+> **mix** of built track and construction sites is now supported, and reads `is_construction_site` per
+> element at the visuals step. ⇒ 1.1.0 is **strictly more tolerant** of exactly the messy track PT-37's
+> case B was written about. The failure path is **byte-identical** in both trees —
+> `if not OrderTrackElements(map, elements, start_element) then return end` — an early return *before*
+> `start_el`/`end_el` are touched.
+>
+> ⇒ **`Tracks.lua ProcessTrackElements` is now pinned** in the module, with **no `DEFECT:` line** on
+> purpose: we patch nothing there and claim no bug in it. The pin exists so the next game patch that
+> moves it flips `BODY-CHANGED` and forces a read, instead of silently invalidating the measurement the
+> ship decision rests on. `bodycheck`: 126 OK, 0 NO-MANIFEST.
+>
+> ⚠️ **The one residual, stated rather than smoothed** — unchanged by today and already on the record
+> from the 2026-08-11 SHIP decision: `assert` does not unwind in this engine ([EF-008](agent/facts/EF-008.md)),
+> so a failure *inside* `OrderTrackElements` reports and continues rather than raising, and `pcall`
+> cannot catch what never raises. PT-37 case B measured the one route the original block was written
+> about and found the walk **succeeds** there. What was never established — then or now — is that the
+> assert is unreachable by *every* route. **Keeping the pass does not change that risk; retiring it
+> would not reduce it either**, since the same call shape is what the repair is made of.
+>
+> **The original ask is kept below as the reasoning you ruled on.**
 
 > Surfaced by your 163 (d) ruling within minutes of the manifest lines going in, which is precisely
 > what you bought them for. **Nothing was changed except the stale sentence; no pass was touched.**
