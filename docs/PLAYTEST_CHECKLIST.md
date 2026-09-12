@@ -8838,7 +8838,7 @@ organic play: the agent preps everything unattended (scripts, staged save
 copy, a measure-moments list), launches and drives the game, and you attend
 ONLY the minutes where eyes or a judgment call are needed. Such riders are
 tagged **TAKEABLE IN a co-run**. Protocol and the forced-vs-organic evidence
-rule: `docs/agent/WORKFLOW.md` "Co-runs". First candidates: the F11
+rule: `docs/agent/prompts/perma/CO_RUNS.md` (moved 2026-09-12, D5). First candidates: the F11
 pre-wrapper watch (below), C41's vanishing picker (amplified spawn/open loop),
 F99's no-cheat discriminator (forced break, organic drone repair), plus the
 two C-side console reads that need no eyes at all.

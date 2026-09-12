@@ -120,5 +120,10 @@ same change that discovers it.
 > owner posts, agents draft). Live references were rewritten; the archive and the committed Codex report still cite the
 > old path, so translate them.
 
+> 2026-08-17: the pack was renamed **Community Fix Pack → Relaunched Fix Pack** (display name only; the mod
+> `id` and the `[CommunityFixPack]` log tag are UNCHANGED). Earlier records use the old name — translate
+> mentally, do not edit records. The old name is still live in `agent/bugs/`, `agent/facts/EF-054.md` and
+> several reports.
+
 `MOD_DESCRIPTION.md` and `PLAYTEST_ARCHIVE.md` moved from `docs/` to
 `docs/archive/` in the same change.

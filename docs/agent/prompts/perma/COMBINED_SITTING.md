@@ -26,7 +26,7 @@ nobody at the keyboard; everything in §1 and §2 below is a reading off their
 archived logs, not a plan. **What is left is your ~30–45 attended minutes and
 nothing else.**
 
-This is a CO-RUN (WORKFLOW co-run protocol binds in full: live todo list updated
+This is a CO-RUN (the co-run protocol in `perma/CO_RUNS.md` binds in full: live todo list updated
 per item — the owner reads it to decide when to step in; R2 execution markers;
 EF-050 verbatim savenames; EF-051 hold wording — "deleted, listing verified",
 never "gone"; ⛔ EF-056 — byte-copy EVERY autosave BY NAME before any launch that

@@ -612,7 +612,8 @@ run reads `84 PASS / 10 SKIP`). SKIPs enumerated BY NAME in `agent/STATE.md`
 **✅ EXECUTED FOUR TIMES, 2026-08-04** (co-run #0 walking skeleton + co-run #1
 runs 1–3) — every step below ran, none is merely written. Raw logs:
 `docs/archive/corun0_*.log`, `corun1_*.log`, `corun1b_*.log`, `corun1c_*.log`.
-Protocol rules (binding): `agent/WORKFLOW.md` "Co-runs" — this section is the
+Protocol rules (binding): `agent/prompts/perma/CO_RUNS.md` (moved out of
+`agent/WORKFLOW.md` 2026-09-12, D5; still binding) — this section is the
 mechanics.
 
 1. **Stage the save, game CLOSED:** `Copy-Item` the designated save (owner's
