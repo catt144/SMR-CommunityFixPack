@@ -29,7 +29,81 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
-### ⚖️ 2026-09-12 — 163: the vanilla diff — one ruling closes five open items, and one bounded desk pass is worth taking
+### ⚖️ 2026-09-12 — 164: vanilla fixed the bug F48's cleanup was written for — but its fix can never reach the saves already damaged. **One call, and my recommendation is KEEP.**
+
+> Surfaced by your 163 (d) ruling within minutes of the manifest lines going in, which is precisely
+> what you bought them for. **Nothing was changed except the stale sentence; no pass was touched.**
+>
+> **What the machine-readable line found.** `90_SaveSanitizer.lua`'s header asserted *"F48 STAYS.
+> The paren is still misplaced upstream."* It is not. Vanilla repaired it in 1.1.0 — verified on both
+> sides, which is the standard this project now holds itself to:
+>
+> | tree | `SavegameFixups.A_StationConnectorElements3` |
+> |---|---|
+> | **1.0.7** archive, `Station.lua:1346` | `ProcessTrackElements(ResolveMap(track, track.elements))` — the misplaced paren |
+> | **1.1.0** live, `Station.lua:1504` | `ProcessTrackElements(ResolveMap(track), track.elements)` — **corrected** |
+>
+> `ResolveMap` takes one argument, so on 1.0.7 `track.elements` was silently swallowed and
+> `ProcessTrackElements` received `nil` — the migration re-ordered nothing, ever.
+>
+> ⭐ **But the upstream fix cannot heal a single existing save, and this is the part that decides it.**
+> Savegame fixups run **once per save and never again**: `FixupSavegame` skips any fixup already in
+> `AppliedSavegameFixups` (`CommonLua/SavegameFixup.lua:33-39`). The corrected function **kept the same
+> name** — `A_StationConnectorElements3` is still the only one of its family in the tree, there is no
+> `…Elements4`. So on any save where the broken version already ran, that key is set, vanilla's
+> repaired body is skipped forever, and the track elements stay unordered. **Our pass is the only
+> thing that repairs them.**
+>
+> **Reach, stated plainly:** a player on a **pre-1.1.0 save**, **off Steam**. 1.1.0 blocks old saves on
+> Steam and only warns elsewhere (`config.OldSavegameBehavior`), so off-Steam players can "Load anyway".
+> ⇒ **Exactly the same reach as the F35 pass in the same module, which you already ruled stays.**
+>
+> ❓ **Your call:**
+> - ⭐ **KEEP (recommended).** Nothing about the pass was wrong — only the sentence explaining it, which
+>   is now corrected in place. Retiring it would strand the one group of players it exists for, and
+>   they are the same group F35 serves.
+> - **RETIRE.** Defensible only if you want the sanitizer to carry nothing that depends on pre-1.1.0
+>   saves — but then F35 goes with it, and that reverses item 126.
+>
+> ⚠️ **Left deliberately noisy until you rule:** the module's `DEFECT:` line for F48 now reports
+> **`DEFECT-GONE`** on every `bodycheck` run, because the expression genuinely is gone. That is the
+> honest state and it does **not** turn doccheck red (doccheck gates on bodycheck's selftest only).
+> ⛔ Whoever reads that verdict next: **do not "repair" it by rewriting the regex** — the manifest says
+> so in place, and this item is why.
+
+### ✅ 2026-09-12 — 163 RULED BY YOU: **all four — (a) accept · (b) yes · (c) confirm · (d) yes.** Items 137/138/140/141/142 CLOSE with (a); (d) is BUILT and surfaced a new call (**164**). **Nothing is owed from you here.**
+
+> ✅ **RULED BY YOU 2026-09-12 — all four: (a) accept · (b) yes · (c) confirm · (d) yes.**
+> **Nothing is owed from you here.** The original ask is kept below as the reasoning you ruled on.
+>
+> **(a) ACCEPTED — the four-group disposition stands, and it CLOSES items 137, 138, 140, 141 and 142.**
+> All five are stamped closed and name this ruling. Group A (C63, C66, C82) stay candidates as
+> **organic riders only** — ⛔ never provision a colony for them. Group B (C64, C67, C75, C78, C79)
+> need no action ever, absent a field report. Group C (C58, C68, C69, C76, C80) and the 12 P3s of
+> group D are source-only. ⛔ **A disposition, not a dismissal:** every entry stays and any field
+> report naming one reopens it instantly.
+> ⭐ **Done on the back of it:** [C80](agent/bugs/C80.md)'s status flip, which the disposition flagged
+> as owed and unowned — its entry said REFUTED while its index row still said `cand`.
+>
+> **(b) YES — the bounded desk session is commissioned.** One session, no game, no play time, on the
+> 29-of-51 overlap `bodycheck` cannot see. ⛔ It is a READ: it files candidates, it does not build.
+>
+> **(c) CONFIRMED — and nothing further added to the after-patch step.** `bodycheck` + `sigcheck` on
+> every patch (binding, `WORKFLOW.md:156`); `treediff` + `presetdiff` on trigger, never retired. The
+> archive-first step keeps its ⭐⭐: copy `ModTools\Src` **before** an update or a Steam branch switch.
+>
+> **(d) YES — DONE THE SAME DAY, and it paid for itself on the first run.** Both modules now carry
+> machine-readable manifests; `bodycheck` reports **0 modules with no manifest** where it reported 2.
+> `00_Core.lua` took a one-line `SRC: none` declaration (it is the registry and patches nothing).
+> ⭐⭐ **`90_SaveSanitizer.lua`'s new pins immediately surfaced a second stale claim — exactly the
+> failure you bought these lines to catch.** Its header asserted *"F48 STAYS. The paren is still
+> misplaced upstream."* **Vanilla repaired that paren in 1.1.0.** Verified both sides: the 1.0.7
+> archive (`Station.lua:1346`) carries the broken `ProcessTrackElements(ResolveMap(track,
+> track.elements))`; live 1.1.0 (`:1504`) carries the corrected
+> `ProcessTrackElements(ResolveMap(track), track.elements)`. The prose is corrected in place and the
+> `DEFECT:` line is deliberately left to report **DEFECT-GONE** on every run until you rule.
+> ⇒ **That is a new decision for you: checklist 164.** ⛔ The pass is **not** thereby dead — it
+> repairs saves the broken migration already ran on.
 
 > Full reasoning: `agent/reports/VANILLA_DIFF_DISPOSITION.md`. **(a) is the one that saves you
 > time — it retires items 137, 138, 140, 141 and 142 in one go. (b) is a yes/no on a desk
@@ -82,7 +156,64 @@ completed tests move whole to
 > **give it the machine-readable lines** so the next one is caught in five seconds. Cost: minutes.
 > ⛔ Not done — the brief was read-only.
 
-### ⚖️ 2026-09-12 — 162: the four loose ends that were flagged and never answered. **Three need one word each; one needs two minutes of yours. None blocks v10.**
+### ⚖️ 2026-09-12 — 162 PART-RULED: **(a) leave dropped · (b) the draft is let go, deliberately.** ⏳ **(c) the 2-minute lake check is still owed · (d) is still yours — the information you asked for is below.**
+
+> ⚖️ **RULED BY YOU 2026-09-12 — (a) leave dropped · (b) don't remember ⇒ the loss is ACCEPTED.**
+> ⏳ **(c) is still owed** — it is a 2-minute look, not a decision. ⏳ **(d) you asked for more
+> information; it is below, and the call is still yours.**
+>
+> **(a) LEAVE IT DROPPED — closed.** F54's row ships without the dust-storm sentence. The surface
+> audit's D3 had it backwards and that is now recorded in [F54](agent/bugs/F54.md) and in
+> `reports/still-needed/WORDING_RULED.md`, which says ⛔ do not restore. No replacement sentence is
+> offered, because the two states the fix really does leave alone are the game's two
+> "exceptional circumstances" ones and no player would call either a dust storm.
+>
+> **(b) "DON'T REMEMBER" ⇒ THE DRAFT IS LET GO, DELIBERATELY.** The follow-up's posting condition
+> ("post only if your 09-10 post said *still checking*") can never be evaluated, so it cannot go up.
+> **The freeze is lifted: both `SUPERSEDED` C74 blocks are cut at the v10 release sweep as the file's
+> own rule requires.** ⛔ This is an accepted loss, not an oversight — it is being recorded as a
+> decision so no later session treats the deletion as a mistake and tries to reconstruct the prose.
+> ✅ **Nothing of substance is lost:** both *leads* live in [C74](agent/bugs/C74.md) ("Two leads the
+> fix does not cover"), re-derived from the 1.1.0 tree. Only the written reply goes.
+>
+> **(c) STILL OWED — the 2-minute lake check.** Build menu → Lakes → Small Lake, hover flat ground.
+> Places fine ⇒ that player's map, the reply goes out. Warning shows ⇒ broken for everyone on 1.1.0,
+> paste the console line. It is holding a reply to a player a Paradox developer is already talking to.
+>
+> **(d) ⏳ OPEN — here is the information you asked for.**
+>
+> > **The breadcrumb is not a defence, and that is the whole distinction.** Item 73 was about the
+> > engine blaming us for other mods' crashes: it picks the culprit by asking whether a mod's folder
+> > name appears anywhere in the crash text (`Mod.lua:3001-3013`; its own comment calls that a
+> > *"rough estimation"*). We wrap ~60 game functions, so anything throwing *underneath* one of ours
+> > names us. That is how F104 and F105 were pinned on the pack, and the mod that actually caused
+> > F104 can never be named — its function had already returned when the error fired.
+> >
+> > 73 offered four tiers. **Tiers 1–3 change what the engine or the player sees** — patch leaves
+> > instead of ancestors, route calls through a separate chunk, or wrap the global error reporter to
+> > show our own wording. Those are what your *"we have spent more resources looking for a fix for
+> > something that has only come up once"* closed.
+> >
+> > **Tier 0 — the breadcrumb — does nothing about the blame at all.** ~15 lines: one handler that
+> > writes a log line saying *the throw site is not a pack file*. It suppresses nothing, accuses
+> > nobody, and the player sees no difference. It is a note for whoever reads the log afterwards.
+> > ⇒ **Same ~15 lines as 73's cheapest tier; not the same purpose.** That is why two records
+> > disagreed — both were half right.
+> >
+> > **Recommendation: close it with 73** — and the reason is not "it is the same work". The
+> > breadcrumb's entire benefit is saving a future reader the derivation, and **that derivation is
+> > already written down** ([EF-065](agent/facts/EF-065.md), F104, F105, and 73's own closure), so a
+> > future agent gets the answer without it. Against that it is live code on an error path, in a pack
+> > whose value depends on not adding risk — and a breadcrumb handler that ever threw would name us
+> > in exactly the way it exists to explain.
+> > **What would flip it:** false-blame reports arriving *from players*. Then it stops saving our
+> > time and starts producing evidence in *their* log, which we cannot get any other way. Rate since
+> > those two sightings — one day, one reporter — is **zero**.
+> > ⚖️ **In fairness:** the agent who wrote the tier list said *"I'd do this regardless."* There is a
+> > real opinion on the other side and "do it anyway" is not a wrong answer.
+>
+> ❓ **Your call:** **"closed with 73"** (recommended) → the tension note comes out of both records ·
+> **"build it"** → ~15 lines, and 73's tier 0 arrives with it · **"leave it open"** → it stays here.
 
 > These are the handoff's §4 — each was raised, written down, and then nothing happened.
 > **(a) is already settled by evidence and only needs your agreement; (b) turns on a single
@@ -1787,7 +1918,7 @@ home C83 chose. The shipped 1.1.0 score comment explicitly preserves that overri
 can force colonists into an unpowered dome. C84 records it `wontfix — intentional`; C83 stays
 arrival-only. The attended C83 leg watched the arrivals for one sol; nobody moved into the bad dome.
 
-### 2026-09-10 — 142: the vanillahunt terminal audit re-derived every P2 candidate — which of these, if any, go to a hotfix-3 candidate list? **Decision: name any entry you want on a hotfix-3 candidate list, or accept "file and watch" for all. Recommendation: none today; take C66 and C82 as cheap organic looks and leave the rest.**
+### ✅ 2026-09-10 — 142 — **CLOSED 2026-09-12 by your ruling of item 163 (a)**, which dispositioned all 25 source-only candidates as four groups rather than one by one: the 12 P2s land in the four groups; **no hotfix-3 list is named**, which is what the recommendation asked for. **Nothing is owed from you; the original ask is kept below as the reasoning.** ⛔ A disposition, not a dismissal — a field report naming any candidate reopens it instantly.: the vanillahunt terminal audit re-derived every P2 candidate — which of these, if any, go to a hotfix-3 candidate list? **Decision: name any entry you want on a hotfix-3 candidate list, or accept "file and watch" for all. Recommendation: none today; take C66 and C82 as cheap organic looks and leave the rest.**
 
 > Full verdicts: [HUNT_AUDIT.md](agent/reports/vanillahunt/HUNT_AUDIT.md) §3 (each entry
 > also carries a dated `99 terminal audit` stamp). Of the 12 P2 entries re-derived from the
@@ -1822,7 +1953,7 @@ arrival-only. The attended C83 leg watched the arrivals for one sol; nobody move
 > **TAKEABLE WHEN** you want a hotfix-3 candidate list at all; otherwise nothing is owed.
 > FR-1/2/3 stay open — the Linux sitting (136) outranks every source read for FR-1.
 
-### 2026-09-10 — 141 rider: vanillahunt 04 left three functional candidates and two profiling reads; none is a release gate. **Decision: take only a naturally available 1.1 fixture, or leave them source-only. Recommendation: prioritize C79; take C80 only on a disposable elevator save, and leave the profiling reads until a large colony already exists.**
+### ✅ 2026-09-10 — 141 — **CLOSED 2026-09-12 by your ruling of item 163 (a)**, which dispositioned all 25 source-only candidates as four groups rather than one by one: C79/C80/C81/C62 are dispositioned — C80 **REFUTED** (status flipped today), the rest source-only. **Nothing is owed from you; the original ask is kept below as the reasoning.** ⛔ A disposition, not a dismissal — a field report naming any candidate reopens it instantly. rider: vanillahunt 04 left three functional candidates and two profiling reads; none is a release gate. **Decision: take only a naturally available 1.1 fixture, or leave them source-only. Recommendation: prioritize C79; take C80 only on a disposable elevator save, and leave the profiling reads until a large colony already exists.**
 
 > **TAKEABLE WHEN** a fresh 1.1 colony naturally reaches the named surface;
 > never convert the branch-locked 1.0.7 campaign. [C79](agent/bugs/C79.md):
@@ -1841,7 +1972,7 @@ arrival-only. The attended C83 leg watched the arrivals for one sol; nobody move
 > a supported non-Steam old-save tester; do not override or convert the owner's
 > campaign to manufacture it.
 
-### 2026-09-10 — 140 rider: The Incident can answer two source-only candidates in one fresh fixture. **Decision: test it only if a fresh 1.1 colony naturally has two working Fusion Reactors, or leave both candidates source-only. Recommendation: fold the two reads together; neither is a release gate.**
+### ✅ 2026-09-10 — 140 — **CLOSED 2026-09-12 by your ruling of item 163 (a)**, which dispositioned all 25 source-only candidates as four groups rather than one by one: C75 + C76 need no fixture; C75 is a group B **player benefit**. **Nothing is owed from you; the original ask is kept below as the reasoning.** ⛔ A disposition, not a dismissal — a field report naming any candidate reopens it instantly. rider: The Incident can answer two source-only candidates in one fresh fixture. **Decision: test it only if a fresh 1.1 colony naturally has two working Fusion Reactors, or leave both candidates source-only. Recommendation: fold the two reads together; neither is a release gate.**
 
 > **TAKEABLE WHEN** the fresh colony lacks Eternal Fusion and reaches The
 > Incident during a dust storm; never convert the branch-locked 1.0.7 campaign.
@@ -1941,7 +2072,7 @@ Original question, kept as asked: C74, the Rare Metals Extractor's hammer (and t
 > sees. The agent hands it over; a zero on a unit that is visibly moving proves
 > it. Report: `agent/reports/C74_SOUND_SWEEP.md`.
 
-### 2026-09-10 — 138 rider: eight caller-seam candidates need fresh 1.1 fixtures; none is a release gate. **Decision: take only the naturally available fixture(s), or leave the candidates source-only. Recommendation: prioritize C66 and fold C67/C68 together if a food-service fixture is already available.**
+### ✅ 2026-09-10 — 138 — **CLOSED 2026-09-12 by your ruling of item 163 (a)**, which dispositioned all 25 source-only candidates as four groups rather than one by one: the eight caller-seam candidates are dispositioned; **C66 stays a group A organic rider**, never provisioned for. **Nothing is owed from you; the original ask is kept below as the reasoning.** ⛔ A disposition, not a dismissal — a field report naming any candidate reopens it instantly. rider: eight caller-seam candidates need fresh 1.1 fixtures; none is a release gate. **Decision: take only the naturally available fixture(s), or leave the candidates source-only. Recommendation: prioritize C66 and fold C67/C68 together if a food-service fixture is already available.**
 
 > **TAKEABLE WHEN** a fresh 1.1 colony naturally has the named surface; never
 > convert the branch-locked 1.0.7 campaign. [C66](agent/bugs/C66.md): RC
@@ -1961,7 +2092,7 @@ Original question, kept as asked: C74, the Rare Metals Extractor's hammer (and t
 > counterfactual. Apply each entry's vacuity/falsifier; skip what cannot be
 > reached naturally.
 
-### 2026-09-10 — 137 rider: three vanilla politics candidates need a fresh 1.1 colony, never the branch-locked campaign. **Decision: provision one politics fixture when convenient, or leave all three source-only. Recommendation: provision only if the ordinary play setup can cover them together.**
+### ✅ 2026-09-10 — 137 — **CLOSED 2026-09-12 by your ruling of item 163 (a)**, which dispositioned all 25 source-only candidates as four groups rather than one by one: the three politics candidates stay source-only; no colony is provisioned for them. **Nothing is owed from you; the original ask is kept below as the reasoning.** ⛔ A disposition, not a dismissal — a field report naming any candidate reopens it instantly. rider: three vanilla politics candidates need a fresh 1.1 colony, never the branch-locked campaign. **Decision: provision one politics fixture when convenient, or leave all three source-only. Recommendation: provision only if the ordinary play setup can cover them together.**
 
 > **TAKEABLE WHEN** a fresh 1.1 sponsor-faction colony has active politics and
 > can naturally reach faction opportunities, a timed faction disaster and the

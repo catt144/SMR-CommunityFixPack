@@ -86,9 +86,10 @@ later draft in this file, and no draft replaces this one. The token is used here
 mean *dead, cut at the next release sweep*, because `HELD` is no longer true and
 `DRAFT` would say it is postable. Its content is preserved below and its two leads live
 in `agent/bugs/C74.md`. Say the word to bring it back as a `DRAFT`.
-⛔ **DO NOT CUT AT THE v10 SWEEP — frozen 2026-09-12 pending checklist 162 (b).** The one question
-that decides this (did the 09-10 post end by saying you were still checking two sounds?) is now in front
-of the owner. The sweep's cut rule resumes the moment 162 (b) is answered either way.
+✅ **FREEZE LIFTED 2026-09-12 — checklist 162 (b) RULED: the owner does not remember what the 09-10
+post said.** The condition can never be evaluated, so this can never go up. ⛔ **CUT IT AT THE v10 SWEEP**
+as this file's own rule requires. This is an **accepted loss, deliberately taken** — not an oversight, and
+not something for a later session to reconstruct. The two leads are safe in `agent/bugs/C74.md`.
 
 Its sections, so a follow-up can honour them:
 *Being restored* — the seven units (C74/C77), "currently in testing"; *Silent on purpose* — the
@@ -117,8 +118,10 @@ owner's posted text said 'still checking'", and the owner cleared ck144 (b) on
 same convention note as the draft above. ⚠️ **Say the word and it becomes a live
 `DRAFT` again** — both leads are re-derived and recorded in `agent/bugs/C74.md`, so
 nothing is lost either way. No version number would be needed.
-⛔ **DO NOT CUT AT THE v10 SWEEP — frozen 2026-09-12 pending checklist 162 (b).** This is the draft
-whose prose is held nowhere else; the blockquote below is the only copy.
+✅ **FREEZE LIFTED 2026-09-12 — checklist 162 (b) RULED "don't remember".** Its posting condition cannot
+be evaluated, so it cannot go up. ⛔ **CUT AT THE v10 SWEEP.** The prose below is the only copy and it goes
+with it — an **accepted loss, deliberately taken**, recorded so nobody treats the deletion as a mistake.
+Both leads survive in `agent/bugs/C74.md`; only the written reply is lost.
 
 > Following up on the two I said I was still checking — neither turned out to be something you're missing. The Drone Hub effect was made for building drones, but nothing in the game ever plays it on a Drone Hub, and there is no moment it was ever tied to, so there is nothing to restore without making one up. The misspelled one is real: one digging sound on a version of the Concrete Extractor never starts because its name is spelled wrong. But the same digging loop is already playing through that part of the dig, so correcting the spelling would only play the same sound twice on top of itself. Nothing there is silent that should be making noise.
 

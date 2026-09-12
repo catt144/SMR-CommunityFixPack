@@ -115,44 +115,29 @@ stash or checkout there.** Recorded in `RELEASE_OUTBOX.md` (Held) and `PUBLIC_SU
 - **`prompts/SELFCHECK_PILOT.md`** was authored for ck133(1), never fired, now unreachable. Marked "do not fire"; **removal
   recommended to the owner, not done.** The two `SELFCHECK_PROMISE_*` reports stay — reports are not consumed by rulings.
 - **Desk NEXT, unclaimed:** `prompts/DLC_DEEP_CHECK.md` (bounded; framing in its banner).
-- ⭐ **C80's status flip is OWED and UNOWNED** (raised by the disposition report, ck163 (a)): the entry says **REFUTED**,
-  its index row still says `cand`. The brief that found it was read-only, so nobody landed it. Cheap; defect truth is
-  wrong until someone does. ⚠️ Check `git status docs/agent/bugs/` before `--regen`.
-- **`90_SaveSanitizer.lua` + `00_Core.lua` carry no `SRC:`/`DEFECT:` manifest** — the two `NO-MANIFEST` modules, now named.
-  `00_Core` patches nothing (a declaration closes it); the Sanitizer is the real one. Owner's word = **ck163 (d)**, then minutes of work.
+- ✅ **Both of the disposition report's owed items are DONE (ck163 ruled 09-12).** C80 flipped `cand`→`closed` (heading tag
+  AND front matter — doccheck goes RED on one without the other); both `NO-MANIFEST` modules stamped, `bodycheck` now
+  reports **0 with no manifest**. ⚠️ That immediately surfaced **ck164**: F48's upstream defect was fixed by vanilla in
+  1.1.0, but savegame fixups never re-run (`SavegameFixup.lua:33-39`) and the name is unchanged, so the repair cannot reach
+  an already-damaged save — the pass is the only thing that can. Recommendation KEEP; owner's call.
+  ⛔ `90_SaveSanitizer.lua`'s F48 `DEFECT:` line now reports **DEFECT-GONE every run, deliberately** — do NOT rewrite the
+  regex to silence it; it is the ck164 flag and doccheck does not gate on it.
 
-### 3c · The hotfix-3 batch — 135, 137, 138, 140, 141, 142
+### 3c · The hotfix-3 batch — FIVE OF SIX CLOSED 2026-09-12, only 135 is left
 
-⚠️ **Being tackled next, and it may have moved since this was written — read the checklist headings, do not trust this table.**
-As of 2026-09-12 **the batch as a whole had not been tackled**: no ruling stamp on any of the six.
+✅ **ck163 (a) closed 137, 138, 140, 141 and 142 in one ruling** by dispositioning all 25 source-only candidates as four
+groups instead of one by one. ⛔ **Do not re-open them and do not re-derive the old table** — it is gone from this file on
+purpose. The groups: **A** (C63, C66, C82) stay candidates as **organic riders only**, never provisioned for · **B** (C64,
+C67, C75, C78, C79) are player *benefits*, no action ever absent a field report · **C** (C58, C68, C69, C76, C80) weakened
+or refuted · **D** the 12 P3s, source-only. ⛔ A disposition, **not** a dismissal: any field report naming one reopens it.
 
-| # | one line | owed by |
-|---|---|---|
-| **135** | `luafn.py`'s body delimiter over-spans one-line functions; measured to change **0** shipped hashes | **owner** — (a) leave / (b) ⭐ fix in hotfix 3 (rec) / (c) ⛔ flag-gated, forbidden by the tool's own header |
-| **137** | three vanilla politics candidates (C63/C64/C65), need one fresh 1.1 politics colony | owner: provision a fixture, or leave source-only |
-| **138** | eight caller-seam candidates (C66–C73), need fresh 1.1 fixtures; none is a gate | owner: take naturally available fixtures only (rec: C66 first) |
-| **140** | C75 + C76 answerable in one Incident fixture (two Fusion Reactors, no Eternal Fusion) | owner: only if it arises naturally |
-| **141** | vanillahunt leftovers C79/C80/C81/C62. ⛔ **C78 is not owner-takeable on this Steam install** (one branch at a time) | owner (rec: C79 first) |
-| **142** | terminal audit re-derived all 12 P2s: 6 hold, 5 weakened, **C80 refuted**, C82 newly filed | owner: name any for hotfix 3, or accept file-and-watch (rec: **none today**) |
+**Still open: 135 only.** `luafn.py`'s body delimiter over-spans one-line functions; measured to change **0** shipped
+hashes; blocker discharged when vanillahunt closed 09-10. Owner options: leave / ⭐ fix in hotfix 3 (rec) / ⛔ flag-gated,
+which the tool's own header forbids.
 
-✅ **The "unresolved tension" this section used to carry is GONE — checklist 161, 2026-09-12** (`ea91f19`). The owner
-explained the 09-08 rule themselves: it was **triage scoped to the 1.1.0 recovery**, not standing policy, and it expired
-with that condition; the 09-09 "Leave ck126 in" was never a reversal. Unearned-gain candidates (C64/C75/C78/C67/C79) are
-ordinary candidates now, priced on cost; **C82 was always a straight player LOSS and never depended on the rule.**
-⛔ **DO NOT RE-DERIVE THE CONTRADICTION.** Three documents already did and handed it back to the owner, which is the exact
-attention drain the original triage rule existed to prevent. The generalisable lesson is binding **authoring rule 5a**
-(`WORKFLOW.md:60`): *a ruling made under a named condition expires with that condition* — record the state a ruling was
-made in, re-read it against today's before treating it as binding, and never call a later ruling a "reversal" without
-checking the earlier one's condition first.
-
-⭐ **The standing recommendation for the batch, re-derived on COST on 2026-09-12 after 161 removed the blocker — so it
-does not rest on the expired rule.** The owner has seen it; **nothing here is ruled.**
-- **Take 135.** 0 shipped hashes affected, and its blocker discharged when vanillahunt closed 09-10. Small standalone change.
-- **Leave 137 / 138 / 140 / 141 opportunistic.** All four are source-read candidates with **no field report behind them**,
-  so a provisioned fixture is the only route, and none is a release gate. Take one only if a colony arises naturally.
-- **Keep C82 + C66 on a watch list** as the two cheapest organic looks.
-- ⛔ **142 is explicitly STILL OPEN** — 161 removed the blocker, it did **not** rule 142. The owner has not named anything
-  for a hotfix-3 list, and "accept file-and-watch for all" is also unsaid.
+✅ **The "unresolved tension" this section used to carry is GONE** (ck161, `ea91f19`) and the generalisable lesson is
+binding authoring **rule 5a** (`WORKFLOW.md:60`): *a ruling made under a named condition expires with that condition.*
+⛔ **DO NOT RE-DERIVE THE CONTRADICTION** — three documents already did and handed it back to the owner.
 
 ### 3d · The four vanilla instruments — RESOLVED 2026-09-12, do not re-open
 

@@ -8,6 +8,78 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-12 — the owner ruled 163 and most of 162; five items closed on one word, and the manifest lines paid for themselves in minutes
+
+tags: ck163 ck162 ck164 F48 C80 bodycheck manifest SaveSanitizer hotfix-3 disposition
+
+Six rulings taken in one message: **163 (a) accept · (b) yes · (c) confirm · (d) yes · 162 (a) leave
+dropped · 162 (b) don't remember.** 162 (d) came back as "give me more information" and is answered in
+place, still open. One `Code/` change (comment headers only, no behaviour), the rest docs. doccheck
+GREEN, `--regen` run with `git status docs/agent/bugs/` checked clean first, counts unchanged
+(49 modules / 50 files / 97 probes / 222 rows).
+
+**⭐ 163 (a) closed five checklist items on one word.** Items 137, 138, 140, 141 and 142 were five
+phrasings of "provision a fixture or leave it source-only", each carrying its own rider. The
+disposition ruled all 25 source-only candidates as four groups: **A** (C63, C66, C82) stay candidates
+as *organic riders only*, never provisioned for; **B** (C64, C67, C75, C78, C79) are player benefits,
+no action ever absent a field report; **C** (C58, C68, C69, C76, C80) weakened or refuted; **D** the 12
+P3s. ⛔ Recorded as a disposition, **not** a dismissal — every entry stays and a field report reopens
+any of them. The handoff's §3c table is deleted rather than demoted, per that file's own rule; only
+**135** is left in the hotfix-3 batch.
+
+**C80 flipped `cand` → `closed`**, the flip the disposition report flagged as owed and unowned (its
+brief was read-only, so nobody landed it). ⚠️ **The first `--regen` went RED**: front matter said
+`closed` while the heading tag still said `cand`. That is the documented trap — a status flip must hit
+BOTH the front matter and the body's heading tag — and it fired exactly as recorded. Title prefixed
+with the refutation so the index row no longer advertises a live P2 the record had already withdrawn,
+following the C54 precedent the entry itself cites.
+
+**⭐⭐ 163 (d) was ruled "yes", built the same hour, and surfaced a defect-adjacent finding on its first
+run — which is precisely what it was bought for.** Both `NO-MANIFEST` modules are stamped;
+`bodycheck` now reports **0 modules with no manifest** where it reported 2. `00_Core.lua` took a
+one-line `SRC: none` (it is the registry and patches nothing). `90_SaveSanitizer.lua` took real pins —
+and the act of pinning them showed its own header prose was stale.
+
+**⇒ ck164 filed: vanilla fixed F48's bug, and the fix cannot reach a single damaged save.** The
+sanitizer header asserted *"F48 STAYS. The paren is still misplaced upstream."* Verified both sides
+before saying so: **1.0.7** archive `Station.lua:1346` has the broken
+`ProcessTrackElements(ResolveMap(track, track.elements))` — `ResolveMap` takes one argument, so
+`track.elements` was swallowed and the migration re-ordered nothing, ever; **1.1.0** live `:1504` has
+the corrected `ProcessTrackElements(ResolveMap(track), track.elements)`. ⭐ **But savegame fixups run
+once and never again** — `FixupSavegame` skips anything already in `AppliedSavegameFixups`
+(`CommonLua/SavegameFixup.lua:33-39`) — **and the corrected function kept the same name**
+(`A_StationConnectorElements3` is still the only one of its family; there is no `…Elements4`). So on
+any save the broken version already ran, the key is set, vanilla's repair is skipped forever, and our
+pass is the only thing that fixes it. **Recommendation KEEP**, reach identical to the F35 pass beside
+it, which item 126 already ruled stays. This is the "REMOVE verdicts need the replacement traced" rule
+producing the opposite of its usual answer: vanilla *did* fix it, and the fix still doesn't help anyone
+already hurt.
+
+⛔ **The F48 `DEFECT:` line is left reporting `DEFECT-GONE` on every `bodycheck` run, deliberately** —
+the expression genuinely is gone, that is the honest state, and doccheck does not gate on it (it runs
+bodycheck's *selftest* only, `doccheck.py:1104`). The manifest says in place: do not "repair" it by
+rewriting the regex.
+
+**162 (b) — "don't remember" is a ruling, and the loss is now deliberate.** The ck144 (b) follow-up
+draft's posting condition ("post only if the 09-10 post said *still checking*") can never be evaluated,
+so it can never go up. The freeze this session put on it yesterday is **lifted**: both `SUPERSEDED` C74
+blocks are cut at the v10 sweep as `FIELD_REPORT_REPLIES.md`'s own rule requires, and both now say the
+loss was **accepted deliberately** so no later session treats the deletion as an error and tries to
+reconstruct the prose. Both *leads* survive in `bugs/C74.md`; only the written reply goes.
+
+**162 (a) closed** — F54's row ships without the dust-storm sentence; the audit's D3 had it backwards
+and `WORDING_RULED.md` already says ⛔ do not restore. **162 (c)** (the 2-minute lake check) and
+**162 (d)** (the breadcrumb) remain owed, (d) with the requested information now written into the item:
+the breadcrumb is ~15 lines that log *the throw site is not a pack file* — the same code as item 73's
+cheapest tier but **not the same purpose**, since it does nothing about the blame. Recommendation to
+close it with 73, on the ground that the derivation it saves is already written down (`EF-065`, F104,
+F105), with the honest counter recorded that the tier list's author said *"I'd do this regardless."*
+
+**Still open after this:** 163 (b)'s commissioned desk session is **not started** — one bounded read of
+the 29-of-51 overlap `bodycheck` cannot see, no game, no play. 158 remains the v10 gate.
+
+---
+
 ## 2026-09-12 — CORRECTION to the entry below: the LAKECHK "would have thrown" claim is refuted, by a peer, within the hour
 
 tags: correction LAKECHK C87 ck162 one-sided-count cross-session fb87a6e

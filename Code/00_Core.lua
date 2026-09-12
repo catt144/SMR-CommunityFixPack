@@ -10,6 +10,13 @@
 --   * Fail-safe: a fix that finds the game code in an unexpected state (e.g. a
 --     game hotfix already repaired it) deactivates itself instead of erroring.
 
+-- MANIFEST (FIX_POLICY 2b) -- machine-read by `python tools/bodycheck.py`.
+-- Declared 2026-09-12 (owner ruling, checklist 163 (d)). This module is the
+-- REGISTRY: it patches no shipped function and pins no shipped body, so there is
+-- nothing to hash and nothing that can go stale under it. Every actual patch
+-- target is declared in the Fix_*.lua module that owns it.
+-- SRC: none registry only -- 00_Core patches no shipped body; it registers, gates and reports
+
 SMRFixPack_Disabled = rawget(_G, "SMRFixPack_Disabled") or {}
 
 -- Pre-load override surface for the optional modules (kept for other mods and

@@ -33,7 +33,13 @@
 --     `WindTurbine_Diffuser` only, leaving the tech's `WindTurbine` and
 --     `WindTurbine_Large` labels unbuffed. The old record claiming vanilla
 --     re-applies it was WRONG (corrected by `VANILLA_FIX_QA.md` §0.6).
---   * F48 STAYS. The paren is still misplaced upstream.
+--   * F48 — ⛔ **CORRECTED 2026-09-12:** this line used to read "F48 STAYS. The
+--     paren is still misplaced upstream." **That is no longer true.** Vanilla
+--     repaired the paren in 1.1.0 (`Station.lua:1504` now calls
+--     `ProcessTrackElements(ResolveMap(track), track.elements)`); the 1.0.7 archive
+--     at `:1346` still carries the broken form. The pass survives only for saves the
+--     BROKEN migration already ran on — pre-1.1.0 saves, same platform-conditional
+--     reach as F35. Whether it still earns its place: checklist 164.
 --   * F03 REMOVED. Unlike the other two, vanilla now cleans this itself, on
 --     exactly the migrated saves that matter: `SavegameFixups.RemoveLeakedUpgradeModifiers`
 --     (`Lua/Buildings/Building.lua:1313-1345`) strips leaked `<handle>_upgrade<t>_mod_<i>`
@@ -48,6 +54,50 @@
 -- run finds nothing. F35 re-derives its answer every load; F48 also
 -- carries a one-shot flag, because its work is a re-ordering rather than a
 -- comparison and there is no reason to redo it on a save it has already fixed.
+
+-- MANIFEST (FIX_POLICY 2b) -- machine-read by `python tools/bodycheck.py`.
+-- Pinned 2026-09-12 against shipped game 1.1.0.403908 (owner ruling, checklist
+-- 163 (d)). This module carried NO machine-readable manifest until then: its
+-- dependence on shipped bodies lived only in the prose above, which is how the
+-- F03 pass came to be retired late -- a human had to re-read it to notice the
+-- game had fixed the bug itself. These lines make the same question a
+-- five-second one. Only two of the three passes have a shipped target at all.
+-- ⛔ These are CLAIMS about the shipped tree, not a clearance: re-pin them
+-- deliberately when a target moves, never to silence a BODY-CHANGED.
+--
+-- F35 -- the migration that was supposed to give the buff back.
+-- SRC: Lua/Buildings/WindTurbine.lua SavegameFixups.WindTurbine_Large_ReapplyModifiers sha256=5ab2492328948515c351b7089c9f04e6976ff6119b493e16b17888dae8f923a3
+--   (Lua/Buildings/WindTurbine.lua:95-105 at pin time, 11 lines hashed)
+-- DEFECT: SetLabelModifier\("WindTurbine_Diffuser"
+--   the fixup re-applies the Diffuser label ALONE, leaving the tech's other two
+--   labels (WindTurbine, WindTurbine_Large) unbuffed -- the damage F35 undoes.
+--   ⚠️ Honest limit: this expression is a LOCATOR, not a falsifier. A vanilla
+--   repair would most likely ADD the two missing labels and keep this line, so
+--   the regex would still match. The real detector for F35 is the SRC hash --
+--   any edit to that body flips BODY-CHANGED and forces a read.
+--
+-- F48 -- the migration that was supposed to re-order track elements.
+-- SRC: Lua/Buildings/Station.lua SavegameFixups.A_StationConnectorElements3 sha256=d32beeb77122659b231271c48fe87b89675fb25247daf219cb3380d80db5bffb
+--   (Lua/Buildings/Station.lua:1497-1513 at pin time, 17 lines hashed)
+-- DEFECT: ResolveMap\(track, track\.elements\)
+--   the misplaced paren: ResolveMap takes ONE argument, so track.elements was
+--   silently dropped and ProcessTrackElements got nil.
+--   ⛔⛔ THIS DEFECT IS **EXPECTED GONE** ON 1.1.0 AND THE GONE IS CORRECT --
+--   DO NOT "FIX" IT BY REWRITING THE REGEX. Vanilla repaired the paren in
+--   1.1.0: the shipped call is now `ProcessTrackElements(ResolveMap(track),
+--   track.elements)`. Verified both sides on 2026-09-12 -- 1.0.7 archive
+--   `Station.lua:1346` carries the broken form, live 1.1.0 `:1504` the corrected
+--   one. ⇒ The prose above this manifest ("F48 STAYS. The paren is still
+--   misplaced upstream.") is STALE and is corrected in place at its own line.
+--   The pass itself is NOT thereby dead -- it repairs saves the BROKEN migration
+--   already ran on, i.e. pre-1.1.0 saves, whose reach is the same
+--   platform-conditional one F35 has. Whether it still earns its place is the
+--   owner's call: checklist 164.
+--
+-- F95 -- no shipped target by construction. The residue it cleans was written
+-- into saves by a module of OURS that no longer exists (deleted by 2dc1dbe), so
+-- there is no vanilla body to pin and nothing upstream that can repair it.
+-- SRC: none F95 cleans residue this pack itself wrote; no shipped body is involved
 
 local FIX_ID = "SaveSanitizer"
 
