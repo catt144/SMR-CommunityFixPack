@@ -59,12 +59,19 @@ then `GameVar`/`const`, `__parents`, `DefineClass` smallest).
 ⭐ **A record that states a MEASUREMENT or a NEGATIVE cannot be tested by re-reading it.** Re-reading tells you what
 the record says; only re-running tells you whether it is true. Three same-day cases, two of them mine:
 
-* §1.4's 1,281 had been read and relayed by several documents. Re-running it **confirmed** it — and only re-running
-  could have, because the script had been gone the whole time.
+* ⭐ **The headline case, and it is the worst of the three: §1.4's 1,281.** Billed as *"the largest known unexamined
+  surface in the project"*, relayed by three documents, and **unfalsifiable by construction** the entire time — its
+  instrument, `a4_gap.py`, was never committed, so no reader could have tested it even if they had thought to.
+  Re-running **confirmed** it (within 3%), which is the good outcome; the defect is that the confirmation required
+  rebuilding the instrument from a prose description of its method. ⇒ **a measurement is only as durable as the
+  instrument that produced it**, and this is precisely why §1b's recommendation is *"`treediff` gains a `TABLE-HUNK`
+  list"* rather than "someone re-measures it": the next run should be a flag, not archaeology.
 * A peer's correction to an unrun console recipe (checklist 147 / `C87`) asserted that a spelling was *"witnessed
   nowhere in the shipped tree"*. Re-running the search found it in **19 files**, including the recipe's own receiver
   spelling at `Landscaping.lua:225`. The original line would have run; the "repair" rested on a truncated grep.
   ⇒ ⛔ **a claim about what is ABSENT needs the presence side enumerated**, and `| head -5` is not an enumeration.
+  ⚖️ The lesser case of the three, and the contrast is the point: a live tree existed to check it against, so it was
+  refuted in an hour. The bullet above could not have been refuted at all.
 * This project's own standing git rule ("always name a pathspec", from `6ad619a`) turned out to be **half a rule** —
   a pathspec fences *other* files but takes the work-tree content of the paths it names. Found by running it, not by
   re-reading the rule. Corrected in `441cc92`.
