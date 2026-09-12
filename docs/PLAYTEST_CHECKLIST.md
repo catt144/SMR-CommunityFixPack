@@ -95,6 +95,34 @@ completed tests move whole to
 > **Also fixed, because the repair broke it:** the Test Kit's own `FreedHousingNotice` probe
 > read the notification *inline*, so it would have reported **FAIL on the corrected module**
 > at your next `RunAll()`. It now tests the real contract (committed in the Test Kit repo).
+>
+> ---
+>
+> ✅ **2026-09-11, THE AUDIT RAN (migrationfix link 02, Fable) — verdict: SHIP A.** Full report:
+> [MIGRATIONFIX_AUDIT.md](agent/reports/MIGRATIONFIX_AUDIT.md). In plain terms: I re-read every line the
+> repair rests on in the game's own code, ran all the desk checks, and then deliberately broke the fix three
+> ways in scratch copies (put the notification back inline · removed the destroyed-home guard · silenced it
+> entirely) — each break made the right checks fail, so the checks are real and the fix does what it says.
+> It also holds on game 1.0.7, which matters because Steam and Paradox 1.0.7 players run this same pack.
+> **What the audit could not do is boot the game**: the one thing still owed is the post-release boot with
+> the `applied` line, plus the four-click receipt above if you want to see it with your own eyes.
+> Retiring the fix instead of repairing it is NOT recommended — you would lose the immediate offer of every
+> genuinely freed bed (up to 12 hours per bed in a big colony) and gain nothing the audit could find.
+>
+> **Two new decisions from the audit:**
+> - **(e) The fix list's "A dome read as full while its power was out" entry is wrong on 1.1.0 whether or not
+>   you retire F60** — the game no longer gates births or arrivals on that figure, so "After the fix: they
+>   agree" is not true any more. Two more entries overclaim ("Colonists stayed homeless after you built a
+>   Shuttle Hub", "A dome sat half empty…" — its "no expiry at all" line). These are public-surface text fixes,
+>   not code. **Recommendation: run `agent/prompts/perma/PUBLIC_SURFACE_SWEEP.md` on those three rows before
+>   or with the next site publish.**
+> - **(f) A possible game bug found on the way, yours to file or drop:** when a residence is destroyed, the
+>   game leaves it in the dome's housing list with its switch on, so its own housing update can move a
+>   homeless colonist INTO the rubble. Read in the code, never seen in play. **Recommendation: file it as a
+>   candidate (desk-only, no build) so it is on record if a player ever reports colonists "living" in a ruin.**
+>
+> Required owner-facing warning, verbatim from `doccheck` after this session's one STATE line (item 132 is yours):
+> `warn STATE.md is 13240 bytes, warn threshold is 12288 — copy this line VERBATIM into the owner report; the owner fires agent/prompts/perma/STATE_EVICTION.md`
 
 ### 2026-09-11 — 151: migration audit complete: repair F59, consider retiring F60, choose developer sections and game checks
 

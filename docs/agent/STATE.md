@@ -98,6 +98,8 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   1.0.7 players are served by the frozen v5 GitHub build (`v5-game-1.0.7`), linked from the card and the site.
 
 ## Open owner decisions (bodies in `docs/PLAYTEST_CHECKLIST.md` → "Decisions waiting on you")
+- **152** F59 REPAIRED (`3b41d9f`, deferred notification) + **AUDITED 09-11: SHIP A** (`reports/MIGRATIONFIX_AUDIT.md`); owed: one boot
+  `applied` + four-click receipt. F60 retirement STOPPED on the owner's uncommitted v8 files; its fix-list row is FALSE on 1.1.0 (ck152 e).
 - **151** Migration audit DONE (`MIGRATION_DEV_REPORT.md`); F60 retirement proposed. ⛔ **F59 RE-DERIVED 09-11**: expedition claim
   CONFIRMED **+ 2nd caller** — manual Set Residence on a full home OVERFILLS it, BOTH branches, ships today (`desk_f59_interact.py` 8/8).
   Repair must cover both; cheap in-play check in ck151. ⛔ The frozen `v5-game-1.0.7` download (card → legacy page) SHIPS
