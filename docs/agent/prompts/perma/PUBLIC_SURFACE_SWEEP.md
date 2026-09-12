@@ -11,6 +11,19 @@ reads, and a fix missing from any of them is a fix nobody knows about.
 
 ## 0 · Before you touch anything
 
+**⚖️ Surface reach — owner, 2026-09-12. Read this before pricing ANY surface fix.**
+The surfaces are not equal and agents keep assuming they are. Owner's ranking:
+**Steam store page — thousands. Paradox store page — hundreds. Our own site and
+the repo `README.md` — a small minority.** *"Most people just subscribe to a mod,
+they rarely do deep reading for a game mod."*
+⇒ A wrong line on a **store card** is the expensive one; the same error on the site
+or the README is cheap and can ride the next release. ⛔ Do not argue "our
+most-visited page" about the repo or the site — that reasoning was used on
+2026-09-12 to recommend an early one-line fix and the owner corrected it (ck160).
+⭐ The one exception worth remembering: the two Paradox developers DO read the repo,
+because we cite `file:line` at them and offer repro steps — accuracy there is about
+that relationship, not about traffic.
+
 **Held follow-through, 2026-09-12 — still-needed sweep (ck156).**
 All 46 modules reviewed; proposed F37/F43 retirement and 14 retained-claim
 corrections are **not applied**. Read `reports/STILL_NEEDED_SWEEP.md` and exact
