@@ -87,7 +87,7 @@ render.
 ```
 Bug fixes for Surviving Mars: Relaunched.
 
-Fifty repairs, each one written up on the fix list with what you would
+Forty-nine repairs, each one written up on the fix list with what you would
 have seen and what was actually wrong. Every one targets something the game's
 own code gets wrong — the code says one thing, does another, and the fix makes
 it do what it says. It fixes bugs; it does not rebalance the game. Preferences
@@ -224,7 +224,7 @@ https://github.com/catt144/SMR-CommunityFixPack
 ```
 Bug fixes for [i]Surviving Mars: Relaunched[/i].
 
-[b]Fifty repairs[/b], each one written up on the fix list with what you would have seen and what was actually wrong. Every one targets something the game's own code gets wrong — the code says one thing, does another, and the fix makes it do what it says. It fixes bugs; it does not rebalance the game. Preferences and features are deliberately not in it.
+[b]Forty-nine repairs[/b], each one written up on the fix list with what you would have seen and what was actually wrong. Every one targets something the game's own code gets wrong — the code says one thing, does another, and the fix makes it do what it says. It fixes bugs; it does not rebalance the game. Preferences and features are deliberately not in it.
 
 Some of them you could hardly miss: an entire train line and every train on it deleted by salvaging a single hex, colonists suffocating on a walk between two domes, an artificial lake burying the rover that was building it.
 

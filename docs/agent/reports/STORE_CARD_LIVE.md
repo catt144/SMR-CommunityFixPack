@@ -135,7 +135,7 @@ back at Paradox. ⛔ Do not paste the same block on both.
 ```
 Bug fixes for Surviving Mars: Relaunched.
 
-Fifty repairs, each one written up on the fix list with what you would
+Forty-nine repairs, each one written up on the fix list with what you would
 have seen and what was actually wrong. Every one targets something the game's
 own code gets wrong — the code says one thing, does another, and the fix makes
 it do what it says. It fixes bugs; it does not rebalance the game. Preferences
@@ -278,7 +278,7 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=3787202810
 ```
 Bug fixes for [i]Surviving Mars: Relaunched[/i].
 
-[b]Fifty repairs[/b], each one written up on the fix list with what you would have seen and what was actually wrong. Every one targets something the game's own code gets wrong — the code says one thing, does another, and the fix makes it do what it says. It fixes bugs; it does not rebalance the game. Preferences and features are deliberately not in it.
+[b]Forty-nine repairs[/b], each one written up on the fix list with what you would have seen and what was actually wrong. Every one targets something the game's own code gets wrong — the code says one thing, does another, and the fix makes it do what it says. It fixes bugs; it does not rebalance the game. Preferences and features are deliberately not in it.
 
 Some of them you could hardly miss: an entire train line and every train on it deleted by salvaging a single hex, colonists suffocating on a walk between two domes, an artificial lake burying the rover that was building it.
 
@@ -474,6 +474,27 @@ Recounted, not typed: `grep -c '^??? '` = **50** in `SMR-CommunityMods`, tally
 **New headliner — "An Earth-sent Trade rocket, most often the Wildfire
 mystery's cure rocket, could get stuck on the landing pad forever"** (F119),
 added after the empty-launch rocket bullet it sits next to in the fix list.
+
+### ⭐ 2026-09-11 later — count 50 → **49**: F60 RETIRED
+
+`Fix_DomeFreeSpaceMismatch` was deleted from the pack the same day (owner ruling,
+ck151 a / ck152 b, commit `9bc4360`), so the card's count drops by one. Count word
+**Forty-nine** now in all five copies (`metadata.lua`, this file's two blocks,
+`UPLOAD_WORKFLOW.md`'s two blocks) — they move together or the paste backups drift
+from the live card.
+
+⛔ **49 IS NOT TRUE UNTIL THE SITE ROW GOES.** `grep -c '^??? '` in
+`SMR-CommunityMods/content/fix-list.md` still reads **50**; the F60 entry
+(`:113-122`, "A dome read as full while its power was out") has NOT been removed
+yet, and its "births and new arrivals refused … After the fix: they agree" body is
+false on 1.1.0 regardless of the retirement (ck152 e). ⇒ **remove that entry before
+the upload**, or the card will claim 49 while the fix list shows 50.
+
+⚠️ Do not read the card count off the module count. They are different axes: 46
+registered modules / 47 `Code/*.lua` against 49 repairs, because one module can
+carry several fixes (`Fix_ArrivalDeaths` → F53/C83/F117, `Fix_SilentHitMomentFX` →
+C74+C77) and `00_Core.lua` is not a fix. The card number is the **fix-list entry
+count**, recounted with `grep -c '^??? '`, never derived from `Code/`.
 It clears the F105/F108/C83 bar: **players saw it** (two independent Reddit
 reports, r/SurvivingMars, PC + PS5, "Game-breaking bug for the Wildfire
 mystery"), **it is reproduced** (the owner's attended A/B, `F119.md` §Attended
