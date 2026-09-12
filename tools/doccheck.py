@@ -609,6 +609,139 @@ def render_waiting(items):
     return L
 
 
+# ---------------------------------------------------------------------------
+# The push set, and the durable-fact fingerprints.
+#
+# PUSH = the files loaded into EVERY session before it has decided anything.
+# They are the only documents in this repo where bytes genuinely hurt, because
+# nobody chooses to read them and the cost is paid on every single session,
+# forever. Everything else is PULL (read a section on demand, uncapped) or
+# RECORD (written once, read rarely, never capped). Capping the wrong class is
+# how a doc system starts destroying its own record; so the budget is on this
+# SET, as one number, and on nothing else.
+
+PUSH_SET = [
+    ("CLAUDE.md", lambda: CLAUDE_MD),
+    ("docs/agent/STATE.md", lambda: STATE),
+    ("prompts/perma/GENERAL_USE_PROMPT.md",
+     lambda: os.path.join(DOCS, "agent", "prompts", "perma", "GENERAL_USE_PROMPT.md")),
+    ("prompts/perma/DISPATCH.md",
+     lambda: os.path.join(DOCS, "agent", "prompts", "perma", "DISPATCH.md")),
+    # Claude's own memory index: outside the repo, per-machine, and absent for
+    # any other vendor — reported when present, never required.
+    ("MEMORY.md (Claude, outside the repo)",
+     lambda: os.environ.get("SMR_MEMORY", os.path.join(
+         os.path.expanduser("~"), ".claude", "projects",
+         "c--Dev-SMR-BugFixPack", "memory", "MEMORY.md"))),
+]
+PUSH_BUDGET = 40 * 1024
+PUSH_CHARS_PER_TOKEN = 2.17     # measured on this tree's own documents
+
+
+def push_set_report(out):
+    """Report the auto-loaded set as ONE number. Report-only; never gates."""
+    rows, total, missing = [], 0, 0
+    for label, resolve in PUSH_SET:
+        path = resolve()
+        if os.path.exists(path):
+            size = os.path.getsize(path)
+            total += size
+            rows.append("    %-38s %7d B" % (label, size))
+        else:
+            missing += 1
+            rows.append("    %-38s   absent" % label)
+    out.append("PUSH SET: %d B in %d file(s) ≈ %dk tokens (budget %d B)%s"
+               % (total, len(PUSH_SET) - missing, round(total / PUSH_CHARS_PER_TOKEN / 1000),
+                  PUSH_BUDGET, "" if total <= PUSH_BUDGET else "  ⚠ OVER"))
+    out.extend(rows)
+    if total > PUSH_BUDGET:
+        out.append("    → every session pays this before it has decided anything; "
+                   "evict from the largest, not the easiest")
+
+
+ACF = os.environ.get("SMR_ACF", r"A:\SteamLibrary\steamapps\appmanifest_3215050.acf")
+
+
+def installed_build():
+    """-> the installed game's Steam buildid, read from the .acf, or None.
+
+    A build id is VOLATILE-external: it changes without anyone here doing
+    anything (this rig auto-updated into 1.1.0 unasked on 2026-09-08). So it is
+    always read, never stored — a number pasted into a doc is a number that will
+    be wrong.
+    """
+    try:
+        with open(ACF, encoding="utf-8", errors="replace") as fh:
+            hit = re.search(r'"buildid"\s+"(\d+)"', fh.read())
+        return hit.group(1) if hit else None
+    except OSError:
+        return None
+
+
+def emit_fingerprints(out):
+    """--emit-fingerprint: does each group of facts still describe what is here?
+
+    This is the O(1) half of three-way verification. A fact whose fingerprint
+    still holds needs no re-read at all; a fact whose fingerprint moved is the
+    only kind worth re-deriving. Without this the only way to answer "does this
+    still hold" was to re-read the source, which is why nobody did.
+    """
+    sf = facts_splitter()
+    groups, total = {}, 0
+    for fact in sf.load_from_dir()["facts"]:
+        total += 1
+        pin = str(fact.get("derived_at") or "").strip()
+        bare = re.sub(r"\s*\(inferred[^)]*\)", "", pin) or "(none)"
+        g = groups.setdefault(bare, {"n": 0, "inferred": 0})
+        g["n"] += 1
+        g["inferred"] += 1 if "(inferred" in pin else 0
+
+    build = installed_build()
+    out.append("")
+    out.append("FINGERPRINTS — derived_at across %d facts; installed game build %s"
+               % (total, build or "UNREADABLE (%s)" % ACF))
+
+    shas, behind = [], []
+    for bare in sorted(groups, key=lambda k: (-groups[k]["n"], k)):
+        g = groups[bare]
+        note = " (%d inferred)" % g["inferred"] if g["inferred"] else ""
+        if bare.startswith("game"):
+            if build is None:
+                verdict = "cannot check — the .acf is unreadable from here"
+            elif build in bare:
+                verdict = "HOLDS — this IS the installed build; no re-read needed"
+            else:
+                verdict = ("MOVED — installed is %s, so these line citations describe "
+                           "a tree that is not on disk (1.0.7 archived, EF-083)" % build)
+            out.append("  %-30s %3d fact(s)%s  %s" % (bare, g["n"], note, verdict))
+        elif re.match(r"^[0-9a-f]{7,40}$", bare):
+            shas.append((bare, g))
+        else:
+            out.append("  %-30s %3d fact(s)%s  no fingerprint — re-derive before "
+                       "relying on it" % (bare, g["n"], note))
+
+    # Repo shas collapse to one row: a dozen "N commits behind" lines is noise,
+    # and the only thing a reader does with them is notice none is current.
+    if shas:
+        nfacts = sum(g["n"] for _, g in shas)
+        ninf = sum(g["inferred"] for _, g in shas)
+        for sha, _ in shas:
+            try:
+                behind.append(int(subprocess.check_output(
+                    ["git", "rev-list", "--count", "%s..HEAD" % sha],
+                    cwd=REPO, stderr=subprocess.DEVNULL).decode().strip()))
+            except (subprocess.CalledProcessError, OSError, ValueError):
+                behind.append(-1)
+        live = [b for b in behind if b >= 0]
+        out.append("  %-30s %3d fact(s)%s  %s"
+                   % ("repo shas (%d distinct)" % len(shas), nfacts,
+                      " (%d inferred)" % ninf if ninf else "",
+                      "all behind HEAD by %d–%d commits — re-check before quoting"
+                      % (min(live), max(live)) if live else "none resolve here"))
+        out.append("      %s" % "  ".join("%s+%d" % (s, b) for (s, _), b in zip(shas, behind)))
+    out.append("  → a group that HOLDS needs no re-read; re-derive only what moved.")
+
+
 def regen(out):
     """--regen: rewrite every GENERATED file from its source; the checks then run."""
     sb, sf = splitter(), facts_splitter()
@@ -1358,6 +1491,10 @@ def main():
                          "AGENTS.md (byte copy of CLAUDE.md) — then run the checks")
     ap.add_argument("--emit-counts", action="store_true",
                     help="also print the STATE-ready counts block")
+    ap.add_argument("--emit-fingerprint", action="store_true",
+                    help="also print, per derived_at group, whether the facts "
+                         "still describe what is installed/checked out — the "
+                         "O(1) answer to \"does this still hold\"")
     ap.add_argument("--verify-split", nargs="?", const="HEAD~1", metavar="REV",
                     help="re-run the BUGS split accounting against REV's "
                          "docs/BUGS.md and the files on disk (default HEAD~1)")
@@ -1400,6 +1537,7 @@ def main():
     ok = parse_gate(out) and ok
     ok = module_set_agreement(out) and ok
     ok = bodycheck_selftest(out) and ok
+    push_set_report(out)   # report-only: the budget is the owner's to act on
     testkit_tree(out)  # report-only by owner decision (2026-08-04) — never gates
     alias_gate(out)    # report-only, same standing as testkit_tree
 
@@ -1419,6 +1557,9 @@ def main():
         except sb.SplitError as exc:
             out.append("  RED  %s" % exc)
             ok = False
+
+    if args.emit_fingerprint:
+        emit_fingerprints(out)
 
     print("\n".join(out))
     print("doccheck: %s" % ("GREEN" if ok else "RED"))
