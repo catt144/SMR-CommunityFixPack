@@ -29,6 +29,40 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### 2026-09-11 — 155: v8 went live this afternoon with no close-out — one receipt from you · v9 is READY TO UPLOAD
+
+> **What I found, read from the live Steam page rather than from you:** the Workshop page shows an update at
+> **Sep 11, 1:50pm** carrying the F119 + C86 change note, and the page body says "Fifty repairs". Your Steam client
+> downloaded the new pack at 16:55. The tree carries the upload's writeback (`version` 8), and the site published at
+> 21:10Z. So **v8 is live** as far as Steam and the tree can show; nobody recorded it, and the session that was
+> holding the close-out ended. I have done that close-out (the comments the Mod Editor strips from `metadata.lua`
+> and `items.lua` are restored, STATE and the outbox updated). ⛔ Nothing here needs a re-upload — never re-upload to
+> fix a number.
+>
+> **Receipt for v8 (`UPLOAD_WORKFLOW.md` §5):** 1. the version number the Paradox page shows; 2. whether the
+> descriptions filled themselves or you pasted; 3. anything that looked wrong on either page. (4, the site: I can
+> see it published, so only say if it looked wrong.)
+>
+> **v9 is READY TO UPLOAD — `UPLOAD_WORKFLOW.md`, the same steps.** In it: the **F59 repair** (our own module: Set
+> Residence on a full home could overfill it; you watched it fixed, item 152) and the **F60 retirement** (module
+> deleted; the card and the fix list drop to **Forty-nine**). The Mod Editor's *Last changes* box should read:
+>
+> ```
+> - Assigning a colonist to a residence that was already full could leave that home with more residents than it has beds, and fail to evict the colonist it displaced. This was the fix pack's own doing, not the game's, and it is repaired: the freed-bed notice now waits until the move that freed the bed has finished. Watched working in a running colony on game 1.1.0. The same repair should also stop a colonist boarding an expedition from losing the home held for their return; that half is verified in the code only.
+> - One older fix has been retired: the game's own 1.1.0 changes made the dome housing-total repair unnecessary, so it has been removed rather than left to change numbers it no longer corrects. The fix list drops from fifty to forty-nine.
+> ```
+>
+> The store bodies should fill themselves from `metadata.lua` ("Forty-nine repairs"); the §3 paste copies are
+> current if they do not. ⚠️ Until v9 goes up, the live pages say **Fifty** and still list the retired fix — right
+> for v8, wrong for the tree — so **after the upload run the site publish (step 4) in the same sitting**, so the
+> fix list drops to 49 with the card. Then tell me the same four things for v9.
+>
+> ⚠️ One caveat is IN the note on purpose: the F59 expedition half was never run in play, so it says "verified in
+> the code only". ⚠️ The site's F51 and F58 rows were narrowed (`a061665`) with wording you have not approved;
+> publishing the site is your approval of it — read those two rows first if you want to.
+>
+> ✅ **152 (b) is closed:** your v8 files were committed in `9bc4360` and F60's retirement ran on top of them.
+
 ### 2026-09-11 — 154: the clogged-producer fix is written up and ready to fire — one shape decision
 
 > **Build prompt: `agent/prompts/CLOGGED_BUILD.md` (fireable). Entry: [C85](agent/bugs/C85.md).** This is the

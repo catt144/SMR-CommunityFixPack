@@ -475,6 +475,19 @@ Recounted, not typed: `grep -c '^??? '` = **50** in `SMR-CommunityMods`, tally
 mystery's cure rocket, could get stuck on the landing pad forever"** (F119),
 added after the empty-launch rocket bullet it sits next to in the fix list.
 
+It clears the F105/F108/C83 bar: **players saw it** (two independent Reddit
+reports, r/SurvivingMars, PC + PS5, "Game-breaking bug for the Wildfire
+mystery"), **it is reproduced** (the owner's attended A/B, `F119.md` §Attended
+check — fix off reproduced the exact reported "20 fuel to unload"; a save/load
+healed a pre-stuck rocket; fix on re-sized it at once), and it answers a
+permanent-soft-lock question players can check for themselves. ⛔ No Beta
+label — the owner cut it 2026-09-11 after the attended check (checklist 149).
+
+**C86 (scan downgrade) stays in the "and a good deal more" tail** — P3, a
+wasted deep scan and a misleading map reading, not a loss a player would
+recognise as a headline the way F119's stuck rocket is. It is on the fix list
+(`Buildings & economy`) and in `last_changes`.
+
 ### ⭐ 2026-09-11 later — count 50 → **49**: F60 RETIRED
 
 `Fix_DomeFreeSpaceMismatch` was deleted from the pack the same day (owner ruling,
@@ -495,18 +508,32 @@ registered modules / 47 `Code/*.lua` against 49 repairs, because one module can
 carry several fixes (`Fix_ArrivalDeaths` → F53/C83/F117, `Fix_SilentHitMomentFX` →
 C74+C77) and `00_Core.lua` is not a fix. The card number is the **fix-list entry
 count**, recounted with `grep -c '^??? '`, never derived from `Code/`.
-It clears the F105/F108/C83 bar: **players saw it** (two independent Reddit
-reports, r/SurvivingMars, PC + PS5, "Game-breaking bug for the Wildfire
-mystery"), **it is reproduced** (the owner's attended A/B, `F119.md` §Attended
-check — fix off reproduced the exact reported "20 fuel to unload"; a save/load
-healed a pre-stuck rocket; fix on re-sized it at once), and it answers a
-permanent-soft-lock question players can check for themselves. ⛔ No Beta
-label — the owner cut it 2026-09-11 after the attended check (checklist 149).
+✅ **Discharged 2026-09-11 (site `a061665`):** the F60 row is gone and `grep -c '^??? '`
+reads **49** (tally 1+13+4+5+9+5+7+2+3); the F51 and F58 rows were narrowed in the same
+commit. ⛔ UNDEPLOYED — the live site still serves `398a1b0` (50 entries) until the owner
+publishes it with v9.
 
-**C86 (scan downgrade) stays in the "and a good deal more" tail** — P3, a
-wasted deep scan and a misleading map reading, not a loss a player would
-recognise as a headline the way F119's stuck rocket is. It is on the fix list
-(`Buildings & economy`) and in `last_changes`.
+## ⭐ 2026-09-11 (night) — v8 LIVE as READ from Steam; v9 words (`RELEASE.md` step 1): F59 repair + F60 retirement
+
+**v8 arrived without anyone recording it.** The Steam changelog's newest entry,
+"Update: Sep 11 @ 1:50pm", carries the F119/C86 note verbatim; the live body says
+**"Fifty repairs"**; the workshop folder took a new `ModContent.fpk` (331,428 B) at
+16:55 local; the tree carried the writeback (`version` 8, `pdx_version` "7"); the site
+deployed `398a1b0` at 21:10Z. **Paradox: UNREAD** (JavaScript page). Whether either
+page auto-filled or was pasted is OWED from the owner (checklist 155). ⇒ Until v9 is
+uploaded the live pages correctly say **Fifty** and list the F60 row, while every copy
+in this tree says **Forty-nine** — a known, deliberate gap, closed by the v9 upload.
+
+**v9 words.** Count word **Forty-nine** verified ×5 by grep (`metadata.lua`, this file's
+two blocks, `UPLOAD_WORKFLOW.md`'s two blocks) — set at `0392162`, unchanged here.
+**No headliner moves:** F59's bullet ("A bed that fell vacant sat empty while colonists
+were homeless") is still the accurate player sentence — the repair fixed OUR module's
+side effect, not the description — and F60 never had a bullet ("A dome sat half empty
+and still refused to house anyone" is F58's, `fix-list.md:105`). Judgment calls still
+**3**. `last_changes` rewritten wholesale as v9's note (two bullets: the manual-assign
+overfill repaired and watched on 1.1.0, the expedition half stated as code-verified
+only; the F60 retirement and the count drop stated plainly). ⛔ The F59 line names the
+defect as the pack's own — it was never a game bug and gets no fix-list row.
 
 ## Provenance of the headliners
 

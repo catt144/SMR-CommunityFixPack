@@ -283,6 +283,8 @@ no fix promise; "filed" is the strongest word. Check each thread first; skip a d
 `tested-attended` in play (checklist 149) and now ship in the next update** — the two drafts below are rewritten to say
 so, superseding the "no fix promise" framing above for these two only. Still no version number (the upload is the
 owner's, `H-02`).
+⭐ **2026-09-11 later: both are LIVE in v8** (the Steam page's Sep 11 update carries their change note). If posting
+after that, say "it's in the update that went out on 11 September" rather than "the next update".
 
 **Wildfire cure rocket stuck (Reddit, r/SurvivingMars) — F119**
 > This looks like a real bug in the game, and the Advanced Martian Engines hunch is right on target. The cargo rocket Earth sends works out how much fuel it needs once, when it lands. If the fuel cost changes while it's sitting on the pad (finishing Advanced Martian Engines cuts it by 20, which is exactly your "20 fuel to unload"), the rocket ends up holding fuel it no longer needs, and nothing is set up to take it off. The Fuel Conservation law can do the same. We've fixed this for the Relaunched Fix Pack — it's tested and will be in the next update, and it also repairs a rocket that's already stuck the moment you load your save. Until then, if you have a save from before that rocket landed, loading it and holding off on Advanced Martian Engines (and on changing Fuel Conservation) until the rocket has left should avoid it.

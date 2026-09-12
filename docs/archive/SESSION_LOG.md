@@ -60,6 +60,35 @@ A3 finding that three sessions agreed on; my A2 was re-run with the real body an
 cross-sensitive legs sharing one stub prove nothing — is the sharpest thing to come out of the night.
 
 
+## 2026-09-11 - smr-bugfixpack-d3: RELEASE.md run — found v8 already live and unclosed; closed it, wrote the v9 words
+
+tags: release v8 v9 post-upload-close comment-restore F119 C86 F59 F60 outbox ck155
+
+Task: the owner fired `prompts/perma/RELEASE.md`. §0 orient found the tree at `version` 8 / `pdx_version` "7" — the
+post-upload pattern — while STATE said v7 was live and the outbox still held F119 + C86 as Pending. **Measured, not
+inferred:** the Steam changelog's newest entry ("Update: Sep 11 @ 1:50pm") carries the F119/C86 note verbatim, the live
+body says "Fifty repairs", the workshop `ModContent.fpk` is 331,428 B md5 `ec4cfd88d4adfeb24211823972f456d2` dated 16:55
+local, and the site deployed `398a1b0` at 21:10Z. ⇒ **v8 shipped at ~20:50Z on 09-11 and nobody closed it.** Peers
+e6 + cb replied (no collisions); e6 relayed that a third session (f8) had claimed the v8 close-out and it is no longer
+in ListAgents, and confirmed the comment count: `metadata.lua` 299 → 0, `items.lua` 43 → 0 — the Mod Editor writeback
+was committed stripped in `9bc4360` and `0392162` built on it.
+
+**Done.** (1) POST_UPLOAD_CLOSE for v8, retroactive: comments restored by MERGE from `21f6140` (base with comments)
+keeping today's data — the non-comment lines of the result equal HEAD's except `last_changes`, proved by the script
+before writing; `doccheck` MODULE SETS and `upload_preflight` 0 FAIL after. STATE rewritten for v8; outbox F119 + C86
+moved to *Released in v8* on the read evidence with the owner's word flagged as owed; field-reply note says both are
+live. (2) RELEASE §1 for v9 = F59 repair + F60 retirement: count word Forty-nine already ×5 (`0392162`, verified by
+grep, 5 hits + 1 historical "Forty-eight" unchanged); site at 49 with the F60 row gone (`a061665`, undeployed; F51/F58
+narrowing read against `MIGRATIONFIX_AUDIT` §1 rows and consistent, wording owner-unapproved); no headliner moves
+("A dome sat half empty" is F58's, not F60's); `last_changes` rewritten wholesale (F59 as OUR module's side effect,
+A2 watched on 1.1.0, A1 code-only; F60 retired, fifty → forty-nine); `UPLOAD_WORKFLOW` §3 change-note block matched;
+checklist **155** = v8 receipt + v9 "ready to upload". F59/F60 answer no field report; not judgment calls.
+
+**Not done / owed:** the owner's v8 receipt (Paradox version, auto-fill or paste); the Paradox page is unreadable
+from here; F59's `applied` log line was never quoted (the attended A2 check implies the module loaded); the TestKit
+probe `DomeFreeSpaceMismatch` still targets the deleted module (local-only kit); STATE sits over its warn byte cap —
+line relayed verbatim to the owner. ⛔ Outbox F59 + F60 stay Pending until the v9 upload is confirmed (RELEASE §5).
+
 ## 2026-09-11 - smr-bugfixpack-cb: F59 verdict (ck151 a) — expedition claim CONFIRMED, and a second, worse caller found
 
 tags: F59 verdict re-derivation desk-control ck151 ck144 over-capacity astra-check

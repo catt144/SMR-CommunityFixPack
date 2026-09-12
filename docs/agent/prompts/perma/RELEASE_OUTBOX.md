@@ -28,33 +28,6 @@ player surface bumps it by one on release.
 
 ## Pending — goes out with the next upload
 
-### Pending — F119 Trade-rocket fuel request refresh
-
-- **F119 · `Fix_TradeRocketFuelRefresh`** (`2c68bb1`) — an Earth-sent Trade
-  rocket can keep its landing-time fuel requests after the live trip cost
-  changes, leaving surplus fuel nothing unloads or a shortfall no drone fills.
-  The staged repair refreshes those requests on the pad and selectively
-  refreshes a pre-stuck Trade rocket when a save loads. Player-facing example:
-  the Wildfire cure rocket can otherwise wait forever and stop the mystery.
-  Count 48 → 49.
-- **Status:** **`tested-attended` 2026-09-11** (checklist 149): 11/11 desk demands,
-  then in play — fix off for one rocket reproduced the stuck rocket on the real
-  Advanced Martian Engines trigger; a save/load of that stuck rocket was healed
-  (`refreshed 1`) and it left; fix on re-sized it at once and it left. Not
-  covered: the Wildfire loop itself, a player's real save. Entry §Attended check.
-
-### Pending — C86 Advanced Orbital Probe scan downgrade
-
-- **C86 · `Fix_ScanDowngrade`** (`5ca9a0f`) — an Advanced Orbital Probe fired
-  without Adapted Probes can change an already deep-scanned neighbouring sector
-  back to “Scanned,” inviting a pointless repeat deep scan. The staged repair
-  makes the three shipped scan statuses monotonic while preserving equal,
-  upward, unknown and foreign-subclass calls. Count 49 → 50.
-- **Status:** **`tested-attended` 2026-09-11** (checklist 149): 7/7 desk demands,
-  then the probe's own scan call on real sectors kept a deep-scanned sector deep
-  and still scanned its neighbour. Fix-off leg desk-only; a real probe object not
-  fired. Entry §Attended check.
-
 ### Pending — F59 vacancy notification repaired (our own regression)
 
 - **F59 · `Fix_FreedHousingNotice`** (`3b41d9f`, audited `74b2c8f`) — ⚠️ **this is
@@ -113,6 +86,26 @@ player surface bumps it by one on release.
 ---
 
 ## Released — history, newest first (cleared here by RELEASE.md)
+
+### Released in v8 (2026-09-11) — F119 and C86
+- **F119 · `Fix_TradeRocketFuelRefresh`** (`2c68bb1`) — an Earth-sent Trade rocket
+  (most often the Wildfire cure rocket) kept its landing-time fuel request after the
+  live trip cost changed and could sit on the pad forever; the request is refreshed
+  on the pad and a pre-stuck rocket is healed on load. `tested-attended` 2026-09-11
+  (checklist 149: fix-off reproduced the reported "20 fuel to unload", the load heal
+  and the fix-on leg both left). Count 48 → 49.
+- **C86 · `Fix_ScanDowngrade`** (`5ca9a0f`) — an Advanced Orbital Probe fired
+  without Adapted Probes no longer knocks a deep-scanned neighbour back to
+  "Scanned". `tested-attended` 2026-09-11. Count 49 → 50.
+- Card: count word **Fifty**, F119 headliner added; `last_changes` = the two-line
+  note plus "watched working on 1.1.0". Judgment-call count unchanged (three).
+- ⚠️ **Cleared on READ evidence, not the owner's word** (the session holding the
+  v8 close-out ended without running it; closed by the v9 release session, which
+  asked for the receipt in checklist 155): the Steam changelog's newest entry,
+  "Update: Sep 11 @ 1:50pm", carries this exact note; the live Steam body says
+  "Fifty repairs"; the workshop pack (331,428 B, md5 `ec4cfd88d4adfeb24211823972f456d2`)
+  landed 16:55 local; the tree carries the writeback (`version` 8, `pdx_version`
+  "7"); the site deployed `398a1b0` at 21:10Z. The Paradox page is unread.
 
 ### Released in v7 (2026-09-10) — C74+C77 and C83
 - **C74 + C77 · `Fix_SilentHitMomentFX`** — the missing animation-moment FX

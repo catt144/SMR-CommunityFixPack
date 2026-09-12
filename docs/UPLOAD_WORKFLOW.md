@@ -44,8 +44,9 @@ These are **meant** to upload by themselves, with nothing pasted:
   has taken before), tell the agent — the paste copies in step 3 still work.
 
 ✅ **It has worked once** — at the v6 upload (2026-09-09) both pages filled
-themselves in full with nothing pasted. Once is not a habit yet, so still do
-step 3's check; the paste copies there stay current in case it does not.
+themselves in full with nothing pasted (v7 you pasted for the formatting; v8's
+result was never reported). Once is not a habit yet, so still do step 3's check;
+the paste copies there stay current in case it does not.
 
 **Two things that look wrong and are not:**
 
@@ -308,9 +309,8 @@ Usually auto-fills. If it is missing under **CHANGELOG** (Paradox) or **Change
 Notes** (Steam), paste this:
 
 ```
-- An Earth-sent Trade rocket (most often the Wildfire mystery's cure rocket) could get stuck on the landing pad forever if its fuel cost changed while it waited there — finishing Advanced Martian Engines research is the reported trigger. The fuel request is now resized when that happens, and a rocket already stuck like this in your save is corrected the moment you load it.
-- An Advanced Orbital Probe fired without Adapted Probes no longer knocks an already deep-scanned neighbouring sector back to merely "Scanned".
-- Both were watched working in a running colony on game 1.1.0.
+- Assigning a colonist to a residence that was already full could leave that home with more residents than it has beds, and fail to evict the colonist it displaced. This was the fix pack's own doing, not the game's, and it is repaired: the freed-bed notice now waits until the move that freed the bed has finished. Watched working in a running colony on game 1.1.0. The same repair should also stop a colonist boarding an expedition from losing the home held for their return; that half is verified in the code only.
+- One older fix has been retired: the game's own 1.1.0 changes made the dome housing-total repair unnecessary, so it has been removed rather than left to change numbers it no longer corrects. The fix list drops from fifty to forty-nine.
 ```
 
 #### 📋 Short summary (only if it also came out blank)
