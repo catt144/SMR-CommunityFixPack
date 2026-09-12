@@ -164,33 +164,35 @@ verification) are unmoved. Re-check any `WORKFLOW.md` line number written before
 
 ---
 
-## 4 · The four loose ends — WORKED 2026-09-12, now one checklist item
+## 4 · The four loose ends — ALL FOUR CLOSED 2026-09-12 (checklist 162)
 
-⭐ **All four are `docs/PLAYTEST_CHECKLIST.md` item 162.** They were raised, recorded, and then asked of nobody;
-they are now in front of the owner as **three one-word calls and one 2-minute look**. ⛔ **Do not re-derive them
-here** — read 162. None is release-blocking. What an agent could do has been done:
+✅ **Nothing is owed here and this section is a receipt, not a task.** All four were raised, recorded, and then
+asked of nobody until they became checklist **162**; the owner ruled every one the same day. ⛔ **Do not re-open
+or re-derive any of them** — read 162 for the reasoning.
 
-1. **The dropped F54 dust-storm sentence — ANSWERED, and the audit was wrong.** `SURFACE_AUDIT_2026-09-12.md`
-   D3 recorded the dropped sentence as the TRUE one. Re-derived from the shipped tree instead of inherited: a
-   dust storm sets `self.suspended`, which `GetWorkNotPossibleReason` returns — a not-POSSIBLE reason — while the
-   lax clause only ever forgave a not-PERMITTED one. **A storm-suspended hub never counted, before our fix or
-   after**, so the sentence is false and no replacement is offered. Route in `bugs/F54.md` (09-12 section);
-   `still-needed/WORDING_RULED.md` corrected so no later pass restores it. Owner confirms on **162 (a)**.
-2. ✅ **The ck144 (b) follow-up draft — CUT 2026-09-12 on the owner's word (162 (b)).** They do not remember what
-   the 09-10 post said, so the posting condition was permanently unevaluable. Both `SUPERSEDED` C74 blocks are
-   **removed** from `docs/FIELD_REPORT_REPLIES.md` and logged in its cut table with a `git show` pointer.
-   ⛔ An **accepted loss, deliberately taken** — do not reconstruct the prose. Both leads survive in `bugs/C74.md`.
-3. ✅ **The C87 lake check — DECLINED ON COST 2026-09-12 (162 (c)): "a lead not a test … only ever had one
-   report".** C87 is **file-and-watch**; a second report reopens it. ⛔ Do not re-ask for that sitting.
-   ⭐ It forced one real edit: the held reply promised *"we're checking whether it happens on every 1.1.0 map"* —
-   work we had just decided not to do — so the clause was **removed** rather than left to go quietly false, and
-   the reply is now a plain postable `DRAFT`. ⚠️ Watch for that shape elsewhere: **a declined check can leave a
-   promise standing in a player-facing draft.**
-   ⛔ **Do not repeat the claim that went with the earlier `LAKECHK` edit:** I recorded `map:GetHeight(x,y)` as
+1. **The dropped F54 dust-storm sentence — STAYS DROPPED.** The surface audit's D3 recorded it as the TRUE one;
+   re-derived from the shipped tree it is false — a dust storm sets `self.suspended`, which
+   `GetWorkNotPossibleReason` returns, while the lax clause only ever forgave a not-PERMITTED reason. A
+   storm-suspended hub never counted, before our fix or after. Route in `bugs/F54.md` (09-12);
+   `still-needed/WORDING_RULED.md` says ⛔ do not restore.
+2. **The ck144 (b) follow-up draft — CUT.** The owner does not remember what the 09-10 post said, so its posting
+   condition was permanently unevaluable. Both `SUPERSEDED` C74 blocks are **removed** from
+   `docs/FIELD_REPORT_REPLIES.md` and logged in its cut table with a `git show` pointer. **An accepted loss,
+   deliberately taken** — do not reconstruct the prose. Both leads survive in `bugs/C74.md`.
+3. **The C87 lake check — DECLINED ON COST:** *"a lead not a test … only ever had one report."* C87 is
+   **file-and-watch**; a second report reopens it. ⛔ Do not re-ask for that sitting.
+   ⭐ **The transferable bit: a declined check can leave a promise standing in a player-facing draft.** The held
+   reply still read *"we're checking whether it happens on every 1.1.0 map"* — removed rather than left to go
+   quietly false; it is now a plain postable `DRAFT`.
+   ⛔ **Do not repeat the claim that went with the earlier `LAKECHK` edit:** I called `map:GetHeight(x,y)`
    witnessed nowhere and said the line would have thrown; a peer refuted it — **19 shipped files use it**,
    including the exact `obj:GetMap():GetHeight(x, y)` form (`Landscaping.lua:225`). The old line would have run.
-4. **The 133(5) / 73 breadcrumb contradiction — asked as 162 (d)**, a yes/no. Both records carried it and
-   neither asked. Nothing was built either way.
+4. **The 133(5) / 73 breadcrumb contradiction — RESOLVED.** The owner was asked directly and confirmed that
+   closing 73 closes (5); the breadcrumb is **not built**, and both records are reconciled.
+   ⚖️ **Closed under a named condition (rule 5a):** the rate is effectively zero — two sightings, one reporter,
+   one day, nothing since. **More false-blame reports reopen it.**
+
+---
 
 ## 5 · Still open from today's rulings — a fresh session will otherwise miss these
 

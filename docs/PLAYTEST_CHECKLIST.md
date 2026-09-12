@@ -196,7 +196,7 @@ completed tests move whole to
 > **give it the machine-readable lines** so the next one is caught in five seconds. Cost: minutes.
 > ⛔ Not done — the brief was read-only.
 
-### ⚖️ 2026-09-12 — 162: **(a) leave dropped · (b) CUT · (c) declined on cost, C87 is file-and-watch.** ⏳ **Only (d) is left — the log breadcrumb, and it is one word.**
+### ✅ 2026-09-12 — 162 FULLY RULED: **(a) leave dropped · (b) cut · (c) declined on cost, C87 is file-and-watch · (d) closed with item 73.** **Nothing is owed from you; all four §4 loose ends are shut.**
 
 > ⚖️ **RULED BY YOU 2026-09-12 — (a) leave dropped · (b) don't remember ⇒ the loss is ACCEPTED.**
 > ⏳ **(c) is still owed** — it is a 2-minute look, not a decision. ⏳ **(d) you asked for more
@@ -231,40 +231,28 @@ completed tests move whole to
 > ⚠️ The `[NEVER RUN]` recipe is kept in [C87](agent/bugs/C87.md), marked declined-on-cost, so a second
 > report revives a correct instrument rather than a rebuilt one.
 >
-> **(d) ⏳ OPEN — here is the information you asked for.**
+> **(d) ✅ RULED 2026-09-12 — CLOSED WITH ITEM 73. The log breadcrumb is not built.** Your words:
+> *"Right now I just want to close it, we have only had the blame issue once and it was quickly resolved.
+> If the problem comes up more we will revisit it."*
 >
-> > **The breadcrumb is not a defence, and that is the whole distinction.** Item 73 was about the
-> > engine blaming us for other mods' crashes: it picks the culprit by asking whether a mod's folder
-> > name appears anywhere in the crash text (`Mod.lua:3001-3013`; its own comment calls that a
-> > *"rough estimation"*). We wrap ~60 game functions, so anything throwing *underneath* one of ours
-> > names us. That is how F104 and F105 were pinned on the pack, and the mod that actually caused
-> > F104 can never be named — its function had already returned when the error fired.
-> >
-> > 73 offered four tiers. **Tiers 1–3 change what the engine or the player sees** — patch leaves
-> > instead of ancestors, route calls through a separate chunk, or wrap the global error reporter to
-> > show our own wording. Those are what your *"we have spent more resources looking for a fix for
-> > something that has only come up once"* closed.
-> >
-> > **Tier 0 — the breadcrumb — does nothing about the blame at all.** ~15 lines: one handler that
-> > writes a log line saying *the throw site is not a pack file*. It suppresses nothing, accuses
-> > nobody, and the player sees no difference. It is a note for whoever reads the log afterwards.
-> > ⇒ **Same ~15 lines as 73's cheapest tier; not the same purpose.** That is why two records
-> > disagreed — both were half right.
-> >
-> > **Recommendation: close it with 73** — and the reason is not "it is the same work". The
-> > breadcrumb's entire benefit is saving a future reader the derivation, and **that derivation is
-> > already written down** ([EF-065](agent/facts/EF-065.md), F104, F105, and 73's own closure), so a
-> > future agent gets the answer without it. Against that it is live code on an error path, in a pack
-> > whose value depends on not adding risk — and a breadcrumb handler that ever threw would name us
-> > in exactly the way it exists to explain.
-> > **What would flip it:** false-blame reports arriving *from players*. Then it stops saving our
-> > time and starts producing evidence in *their* log, which we cannot get any other way. Rate since
-> > those two sightings — one day, one reporter — is **zero**.
-> > ⚖️ **In fairness:** the agent who wrote the tier list said *"I'd do this regardless."* There is a
-> > real opinion on the other side and "do it anyway" is not a wrong answer.
+> **What this settles.** Item 133 sub-decision (5) is closed by your closure of 73, which is what one of
+> the two records said all along. ⛔ **The disagreement between those two records is resolved and removed
+> from both** — nobody re-derives it. Nothing was built either way, so being wrong here cost nothing, and
+> the ~15 lines remain unwritten.
 >
-> ❓ **Your call:** **"closed with 73"** (recommended) → the tension note comes out of both records ·
-> **"build it"** → ~15 lines, and 73's tier 0 arrives with it · **"leave it open"** → it stays here.
+> ⚖️ **THE CONDITION THIS WAS CLOSED UNDER, recorded deliberately** (authoring rule 5a,
+> `agent/WORKFLOW.md:60` — *a ruling made under a named condition expires with that condition*, the
+> lesson from checklist 161): **closed because the rate is effectively zero.** The blame issue produced
+> **two sightings — F104 and F105 — from one reporter on one day, 2026-08-23, and nothing since.** It was
+> diagnosed and answered quickly, and neither error was ours.
+> ⇒ **The trigger to revisit is named: more of them.** A further false-blame report — particularly one
+> from a *different* reporter — puts this back on the table, and the argument changes when it does: the
+> breadcrumb would no longer be saving an agent derivation time (that derivation is written down in
+> [EF-065](agent/facts/EF-065.md), F104, F105 and 73's closure), it would be producing evidence in the
+> **player's own log**, which we cannot get any other way. ⛔ Absent that trigger, do not re-ask.
+>
+> ⚠️ **Untouched by this:** 133 **(2)** and **(4)** are still open — one `FIX_POLICY` §2a line each — and
+> `agent/prompts/SELFCHECK_PILOT.md` is still recommended for removal under 133 (1), not done.
 
 > These are the handoff's §4 — each was raised, written down, and then nothing happened.
 > **(a) is already settled by evidence and only needs your agreement; (b) turns on a single
@@ -2492,7 +2480,7 @@ Original question, kept as asked: C74, the Rare Metals Extractor's hammer (and t
 > | **2** what a fix does when a probe answers **UNKNOWN** | open | ⏳ **STILL YOURS — not touched by the reword.** The code already fails closed (`Code/00_Core.lua:156-167`: only literal `true` applies; a throw, nil or any other value declines). This decides whether that is written down as policy. One line in `FIX_POLICY` §2a. |
 > | **3** the wording interim | hold the over-promise through the upload | ✅ **DISCHARGED BY THE REWORD ITSELF.** There is no interim left to hold. |
 > | **4** `LuaRevision` as an **observation label** | open | ⏳ **STILL YOURS — not touched by the reword.** A `FIX_POLICY` §2a heading clarification, independent of any prototype. |
-> | **5** the breadcrumb | recommend yes | ✅ **CLOSED WITH ITEM 73** (you closed 73 on 2026-09-12). Noted at 73 as well. ⚠️ **A tension, surfaced not resolved:** the note added under (5) earlier that same day read 73's closure as *implying* this without deciding it. Today's ruling takes it as decided. If you meant (5) to stay a separate call, say so and it re-opens — nothing was built either way. ⭐ **Asked as a yes/no on checklist 162 (d), 2026-09-12.** |
+> | **5** the breadcrumb | recommend yes | ✅ **CLOSED WITH ITEM 73 — CONFIRMED BY THE OWNER 2026-09-12 on checklist 162 (d)**, which asked the question directly rather than inferring it. *"We have only had the blame issue once and it was quickly resolved. If the problem comes up more we will revisit it."* The breadcrumb is **not built**. ⚖️ Closed under a named condition (rule 5a): the rate is effectively zero — two sightings, one reporter, one day, nothing since. **More false-blame reports reopen it**, and the argument changes then: it would produce evidence in the player's log rather than save an agent derivation time. ✅ The two records that disagreed about whether 73's closure covered this are now reconciled; ⛔ do not re-derive the tension. |
 > | **6** report the indirect `load` (`LuaCodeToTuple`) to the developers | conditional on the pilot | ✅ **MOOT.** It was conditional on a reading the pilot would have produced, and there is no pilot. |
 >
 > ⚠️ **One prompt this strands. Nothing was deleted; this is a recommendation.**
@@ -4702,13 +4690,14 @@ rock-clearing jobs) crashes the same way, not just levelling.
     not ruled it** — so it stays open. Whoever takes 133 should read this closure first; if you
     say yes to 133(5), that is the breadcrumb and tier 0 arrives with it.
 
-    ⚖️ **SUPERSEDED LATER THE SAME DAY — the paragraph above is left as the record.** Your
-    "do the reword" ruling (item **112** = option (a); recorded on **133**) takes this closure as
-    deciding **133(5)** as well, so (5) is now closed rather than open. Nothing was built either
-    way, and nothing else in 73 changes. ⚠️ If you meant (5) to stay a separate call, say so and
-    it re-opens — this is the one place today's two records disagreed, and it is flagged rather
-    than smoothed over. ⭐ **Now asked as a yes/no on checklist 162 (d), 2026-09-12** — it had been
-    flagged in two records and asked in neither.
+    ✅ **RESOLVED 2026-09-12 — the owner was asked directly (checklist 162 (d)) and confirmed that
+    closing 73 closes **133 (5)**, the log breadcrumb. It is not built.** The paragraph above and the
+    one before it are left as the record of how the two readings arose; ⛔ **the disagreement itself is
+    settled and must not be re-derived** — it was flagged in two records and asked in neither until 162 (d).
+    ⚖️ **Closed under a named condition** (rule 5a, `agent/WORKFLOW.md:60`): the rate is effectively zero
+    — two sightings, one reporter, one day, nothing since, and neither error was ours. **More false-blame
+    reports reopen it**, and the case changes then: the breadcrumb would be producing evidence in the
+    *player's* log rather than saving an agent the derivation, which is already written down.
 
     *(The original finding is kept below.)*
 
