@@ -410,6 +410,19 @@ reply asks for the two facts that decide it. Plain register, no hedging words.
 > If it stays on across hours, a save would let us pin it exactly, and we will pass it to the developers with the
 > code lines.
 
+**For the developers — C89 (owner posts where they read us; checklist 157 b)**
+
+> Faction "unemployment" dislikes fire on tiny domes, and four of five presets lack the guard the fifth has.
+> `JusticeMovement.lua:104` gates `JusticeUnemployment` with `#obj.labels.Colonist >= 10 and …` (and `:129` for
+> Homeless). `ProsperityForMars.lua:225`, `MarsDemocraticParty.lua:88`, `WorkersParty.lua:114` and `NewSol.lua:47`
+> use the bare `#Unemployed * 100 >= 10 * #Colonist` (Homeless twins at `MarsDemocraticParty.lua:107`,
+> `WorkersParty.lua:133`, `NewSol.lua:66`), so one idle colonist in a dome of nine is "more than 10%". Because
+> `RecalcFactionsApproval` runs on `NewHour` and stores the list, and `AddFactionLikeDislikeNotification` fires for
+> any id absent the previous hour, a one-hour blip on a small dome notifies the player while the top-bar count is
+> already 0; at hour 0 the same snapshot feeds `EvalTension`. On large colonies the blips are long: a colonist who
+> loses a job re-checks only every `Clamp(#Colonist / 300, 0, 12)` hours (`City.lua:118`). Same on 1.0.7. Player
+> report: Steam, 2026-09-12.
+
 ## Owed, and where it is tracked
 
 | Item | Where |

@@ -29,7 +29,26 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
-### 2026-09-12 — 157: new Steam report, "Prosperity for Mars angry about unemployment with 0 unemployed" — triaged, not ours, not a build. **One decision: post the reply asking for details (draft below), or wait.**
+### 2026-09-12 — 157: new Steam report, "Prosperity for Mars angry about unemployment with 0 unemployed" — triaged, not ours. **Your pushback checked out: it is an oversight, and the developers' own fix exists in one faction out of five. Three decisions: (a) post the reporter reply, (b) hand it to the developers, (c) carry a judgment-call fix ourselves. Recommendations: (a) yes, (b) yes, (c) not yet — wait for their answer.**
+
+> **What your pushback found (added later the same day):**
+> - **Five factions** carry the identical "dome with 10 % unemployed" dislike (Prosperity, Mars Democratic Party,
+>   Workers' Party, New Sol, Justice Movement), and the Homeless twin on four of them. **Only the Justice Movement
+>   guards it with "at least ten colonists in the dome".** The other four fire on a dome of three with one idle
+>   colonist. Same on 1.0.7, so not a regression.
+> - **Every like of every faction is polled the same way:** once an hour, the whole list is re-evaluated and stored;
+>   the panel shows the stored list, and a dislike that was absent the hour before fires a notification. So a blip is
+>   held for one hour, and a flickering one notifies every time it comes back. Not a perpetual lock.
+> - **The ratchet is daily:** at hour zero the faction's tension rises if approval is below the threshold at that
+>   moment and only falls on days it is above. A midnight blip costs a day of tension.
+> - **Large colonies are worse for a measurable reason:** a colonist who loses a job only looks for another every
+>   (colonists ÷ 300) hours, capped at twelve. At 3,600 colonists that is half a sol idle per lost job.
+>
+> **(c), the fix shape if you want it:** apply the Justice Movement's own "ten colonists" gate to the other four
+> unemployment filters and the three homeless ones. It is the game's own rule, applied consistently — a judgment
+> call under our policy, not a code error, so it would sit beside the Biorobots and asteroid-vacuum rows. The
+> hourly sampling itself stays theirs. Entry: [C89](agent/bugs/C89.md). Developer note drafted below the reporter
+> reply in `FIELD_REPORT_REPLIES.md`.
 
 > **What it is:** the faction's "high unemployment" dislike is a **once-an-hour snapshot** (stored and shown on the
 > panel until the next hour, and it fires a notification the first hour it appears), while the top-bar Unemployed
