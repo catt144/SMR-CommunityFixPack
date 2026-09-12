@@ -454,6 +454,24 @@ def main():
           "permission (fail closed)",
           len(dict(vac.eval("mods_of(P, 'maintenance_resource_amount')") or {})) == 0)
 
+    # ---- (j) THE OWNER'S CONSOLE LINE IS A CLAIM TOO ------------------------
+    # checklist 158 hands the owner SMRFixPack.BuildingCodesPrefab.Report(SelectedObj).
+    # Trace it here rather than in the game: it must print the modifier on a repaired
+    # prefab, and must SAY "C88 reproduces" rather than something reassuring when the
+    # prefab carries none.
+    rep = make_runtime()
+    rep.execute("LOG = {} P = building() construction_complete(P, nil, true)"
+                " SMRFixPack.BuildingCodesPrefab.Report(P)")
+    good = " | ".join(str(v) for v in dict(rep.globals().LOG).values())
+    check("(j) Report() on a repaired prefab prints the law's modifier and its percent",
+          "modifier id=Policy_BuildingCodesStrict" in good and "percent=-30" in good,
+          good[:170])
+    rep.execute("LOG = {} Q = building() SMRFixPack.BuildingCodesPrefab.Report(Q)")
+    bad = " | ".join(str(v) for v in dict(rep.globals().LOG).values())
+    check("(j2) Report() on a prefab with NO modifier says C88 reproduces -- the owner "
+          "cannot bank a false PASS",
+          "C88 reproduces" in bad, bad[:170])
+
     # ---- (h3) the F75 trap: loading before the presets exist ----------------
     # If the guard had run at apply time it would have found an EMPTY LawDefs on every
     # cold boot and declined this module for the whole session. It runs from

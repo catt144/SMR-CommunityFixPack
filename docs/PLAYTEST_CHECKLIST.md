@@ -29,6 +29,210 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### 2026-09-12 — 158: three new fixes are built and waiting on your eyes. **ONE boot does all three. C89 is the one you asked to watch yourself; the other two are minutes.**
+
+> **What is built** (all three ride v10, all three desk-checked, none of them run in a game yet):
+>
+> | | fix | what it does |
+> |---|---|---|
+> | **C85** | `Fix_CloggedBuildingRelease` | a building left "Clogged after a Dust Storm." is switched back on, including one already stuck in a save |
+> | **C89** | `Fix_FactionDomeSizeGate` | ⚖️ **judgment call** — all five factions wait for ten colonists in a dome before disliking its unemployment or homelessness |
+> | **C88** | `Fix_BuildingCodesPrefab` | Building Codes applies to prefab-deployed buildings, as its description says |
+>
+> **Cost to you.** C85 and C88 are a few minutes each on any 1.1.0 colony. **C89 needs a fresh one-shot
+> colony and about 20–30 minutes of ordinary play to warm up** — a first dome with colonists, the Martian
+> Assembly, and a second small dome. That is real play time, not a fixture you can load, and it is the
+> leg you said you wanted to observe. If you only have ten minutes, do **A** and **C** and leave **B**.
+>
+> **Before you start:** open the console (`~`) once and paste this, so every line the fixes print lands in
+> the log where you can read it back:
+>
+> ```
+> FlushLogFile()
+> ```
+>
+> After each leg, paste it again and the lines are in the log.
+>
+> ⚠️ **Some lines below start with `*r ` or `*g `. Type them exactly as written, prefix included.** This
+> console needs that prefix for anything longer than one statement (`PLAYTEST_HELP.md`, "Console input
+> forms"): `*r` runs it immediately, `*g` runs it on the game's own clock, which is what anything that
+> *changes* the colony needs. A line pasted without its prefix will look like it did nothing.
+
+---
+
+#### A · C85 — a clogged building comes back (minutes, any colony, no storm needed)
+
+The fix keys on the exact state the dust-storm event leaves behind, so you can put a building into that
+state directly instead of waiting for a storm.
+
+1. Load any 1.1.0 colony. Select a **Metals Extractor** (or any extractor, Polymer Plant, Fuel Factory or
+   Fungal Farm).
+2. Open the console and paste:
+
+   ```
+   *g SelectedObj:Setexceptional_circumstances(true, StoryBits.BuildingClogged.ActivationEffects[1].Reason)
+   ```
+
+   (The `*g ` prefix runs it on a game-time thread — the same kind of thread the
+   dust-storm event uses for this exact call, so it is the faithful version.)
+
+   **First-screen witness:** the building stops and its info panel says **"Clogged after a Dust Storm."**
+   If it does not say that, stop — the rest measures nothing.
+3. **Save**, quit to the main menu, and **load that save**.
+4. **What you should see:** the building is working again.
+5. **The control — this is the part that matters.** Paste:
+
+   ```
+   FlushLogFile()
+   ```
+
+   and find this line in the log:
+
+   ```
+   [CommunityFixPack] CloggedBuildingRelease: released 1 building(s) stuck 'Clogged after a Dust Storm.' (load)
+   ```
+
+   **No line = the fix did not do it**, and a working building proves nothing on its own. One line with
+   `(load)` is the pass.
+6. *Optional, same colony:* instead of saving, leave the game running at high speed until the next sol.
+   The building clears and the line reads `(daily)` instead of `(load)`.
+
+> ⚠️ **One thing this does NOT test, and it is the only claim of ours never checked in play:** that *nothing
+> in the game itself* ever clears this. To see that you would have to switch the whole pack off in the Mods
+> Manager, restart, do steps 1–3, and watch the building stay dead across a sol and a reload. It is a whole
+> extra boot. **Say the word and it becomes its own item — I am not asking for it here.**
+
+---
+
+#### B · C89 — ⚖️ the judgment call you asked to watch (a fresh one-shot colony)
+
+⚖️ **Read this first: this is not a repair of a code error.** Four factions count a dome of any size when
+they judge "more than 10% unemployment"; the Justice Movement waits until a dome has ten colonists. The fix
+gives the other four the Justice Movement's own rule. Nothing here says the game was wrong, and every public
+surface will say "judgment call".
+
+**B1 — the two-second version, and it is the real falsifier.** You can do this on *any* colony with a dome,
+before building anything. Select a dome and paste:
+
+```
+*r SMRFixPack.FactionDomeGate.Report(SelectedObj) FlushLogFile()
+```
+
+The log gets one block. On a dome of **under ten** colonists with at least one idle or homeless, it reads:
+
+```
+[CommunityFixPack] C89-AB dome=Dome colonists=3 unemployed=1 homeless=0 threshold=10
+[CommunityFixPack] C89-AB   ProsperityUnemployment   shipped=true live=false
+[CommunityFixPack] C89-AB   ... six more rows ...
+[CommunityFixPack] C89-AB 7 row(s), 7 where the gate changed the answer -- GATE ACTIVE on this dome
+```
+
+`shipped=true live=false` is the whole fix in one line: **the game's own rule would have complained about
+this dome, and with the fix it does not.** On a dome of **ten or more** every row reads
+`shipped=true live=true` — the gate changes nothing there, which is the control that we have not simply
+switched the dislike off. ⛔ If it says `GATE-ABSENT` or `shipped=not-wrapped`, the fix is not applied and
+nothing below is worth doing.
+
+**B2 — the colony, if you want to watch the faction itself.** This is the 20–30 minutes.
+
+1. Start a **new colony**, any sponsor except one playing with *No Politics*. Build the first dome and get
+   colonists into it as you normally would.
+2. Build the **Martian Assembly** (a dome spire — 40 Concrete, 20 Metals, 20 Polymers; **no research
+   needed**). Until it stands, the player factions have no seats and none of this can fire.
+3. Let a sol tick over. Then paste:
+
+   ```
+   *r local n=0 for id in pairs(g_Legislature.legislature_members) do n=n+1 SMRFixPack.Log("C89-SEATS %s", id) end SMRFixPack.Log("C89-SEATS total=%d", n) FlushLogFile()
+   ```
+
+   The last line always prints a `total=`, so "no seats" reads as `total=0` rather than
+   as an empty result you have to interpret.
+
+   **You need at least one of these four to be seated:** `ProsperityForMars`, `MarsDemocraticParty`,
+   `WorkersParty`, `NewSol`. ⚠️ **There is no cheat that seats a faction** — I looked, and the game has
+   none. Seats come from which faction your colonists support, so if none of the four is seated, keep
+   playing a sol or two, or accept that this leg cannot run today and say so. **Do not force it.**
+4. Build a **second, small dome**, and here is the part that makes the reading real: **do not connect it by
+   a passage, and put no workplace inside it.** Move **three adult colonists** into it. With nowhere to work
+   they are genuinely unemployed, and the game will keep them that way — no console cheat needed, and
+   nothing to undo itself a minute later.
+5. With the small dome selected, paste the B1 line again. It should read **3 colonists, 1+ unemployed** and
+   `GATE ACTIVE`. That is the control that the dome really does qualify — without it, "the faction said
+   nothing" could just mean the dome never counted.
+6. **Now watch, across one game hour:** the faction does **not** announce "dislikes: high unemployment", and
+   its panel does not list **"Domes with more than 10% Unemployment"** — while that dome still reads three
+   colonists with one or more idle.
+7. **The number to quote instead of a screenshot.** Paste:
+
+   ```
+   *g g_FactionsHolder:RecalcFactionsApproval("all factions") local n=0 for fid,a in pairs(g_FactionsHolder.factions_approval) do for _,r in ipairs(a.likes_data or empty_table) do if r.id and (string.find(r.id,"Unemploy") or string.find(r.id,"Homeless")) then n=n+1 SMRFixPack.Log("C89-PANEL %s %s value=%s", fid, r.id, tostring(r.value)) end end end SMRFixPack.Log("C89-PANEL total=%d", n) FlushLogFile()
+   ```
+
+   With the fix on this should print **`C89-PANEL total=0`** and no rows. (It re-runs the game's own faction
+   maths for every faction immediately, so you do not have to wait for the clock; `*g ` runs it on a
+   game-time thread, which is where the game itself runs it.)
+8. ⭐ **The strongest leg, and it is one click:** move **seven more colonists** into that small dome so it
+   has ten. Paste the line from step 7 again — now the dislike **appears**. That shows the fix is a
+   ten-colonist rule and not a blanket switch-off, which is the thing I would most want you to see.
+
+> `tested-attended` for C89 is yours to grant after this, and nothing else grants it.
+
+---
+
+#### C · C88 — Building Codes reaches a prefab (minutes, needs the law)
+
+⚖️ A Paradox developer answered the reporter's thread: excluding prefabs is wrong, it is fixed in their next
+patch, and they asked us to carry the fix meanwhile.
+
+1. On a colony that has the **Martian Assembly**, enact **Building Codes → Strict**.
+2. Order a **prefab** of a building that needs maintenance, and deploy it. ⚠️ **Pick one whose info panel
+   shows a maintenance figure at all** — on a building with no maintenance there is nothing to see and the
+   whole leg is empty.
+3. **First-screen witness**, in the log:
+
+   ```
+   [CommunityFixPack] BuildingCodesPrefab: Building Codes applied to a prefab-deployed <building>
+   ```
+
+   No line = the fix did not fire.
+4. Select that building and paste:
+
+   ```
+   *r SMRFixPack.BuildingCodesPrefab.Report(SelectedObj) FlushLogFile()
+   ```
+
+   The log should show `modifier id=Policy_BuildingCodesStrict percent=-30`. If it instead says
+   **"NO Building Codes modifier on this building"**, the fix did not work — the line says so on purpose, so
+   a quiet log cannot read as a pass.
+5. **The comparison:** build the **same building type normally** and check its maintenance. The two should
+   now match. Before this fix the prefab one was higher.
+
+> ⛔ **Buildings already standing cannot be fixed, and that is not a gap in the test.** The game does not
+> record that a finished building came from a prefab, so there is nothing to find. The fix reaches buildings
+> completed after it is installed, which is why step 2 deploys a fresh one.
+
+---
+
+#### Two things I found while building these, neither of them needing you today
+
+- **C90 — a bug in our own pack** (`agent/bugs/C90.md`). A module whose safety self-check *fails* can still
+  edit the game's data, while the log and the fix list both say it switched itself off. The new C89 module
+  carries a guard against it; **`Fix_SaintBlessing` and `Fix_SinkholeIndestructible` do not.** Nothing has
+  gone wrong in the field — it needs a game update to break one of their self-checks first — so it is filed,
+  not fixed. Worth a decision at some point: fix the two modules, or fix the shared core.
+- **C91 — the game leaks the Building Codes maintenance change on repeal** (`agent/bugs/C91.md`). Repeal the
+  law and every building it touched keeps the maintenance change; the developers clearly know, because they
+  shipped a one-time save cleanup for it rather than fixing repeal. **Good material for the developer
+  thread.** Our fix uses the law's own id precisely so it leaks the same way and is cleaned by the same
+  sweep — one more building in an existing leak, not a new one.
+
+#### One housekeeping flag for whoever uploads v10
+
+`python tools/deskbench.py` currently has one **REFUTED** row, and it is **not** from this work:
+`tools/desk_migration_cluster.py` still loads `Code/Fix_DomeFreeSpaceMismatch.lua`, which F60's retirement
+deleted on 09-11. I confirmed it was already failing before my first commit. It should be repaired before
+the release gate reads `deskbench` as a signal — otherwise a real failure hides behind a known one.
+
 ### 2026-09-12 — 159: the surface audit is in. **Both retirements you ruled check out. The cave-in fix (F31) should go too. Three of the fourteen sentences need a different wording. Three decisions, nothing at the keyboard.**
 
 > **What the audit found** ([full report](agent/reports/SURFACE_AUDIT_2026-09-12.md)): the farm-oxygen fix (F37) and the

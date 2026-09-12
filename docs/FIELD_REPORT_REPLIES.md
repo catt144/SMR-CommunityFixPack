@@ -423,6 +423,62 @@ reply asks for the two facts that decide it. Plain register, no hedging words.
 > loses a job re-checks only every `Clamp(#Colonist / 300, 0, 12)` hours (`City.lua:118`). Same on 1.0.7. Player
 > report: Steam, 2026-09-12.
 
+## Built for v10 — three reply lines, drafted 2026-09-12 (checklist 158)
+
+Drafted by `smr-bugfixpack-aa` when C85, C88 and C89 were built. **Drafts only; the owner posts.**
+⚖️ Voice rule (`reports/still-needed/WORDING_RULED.md`): plain for players, precise enough for the two
+developers who read us, and **no hedging words**. Scope is stated as what the fix does and for whom.
+⛔ None of the three has been watched in a game yet (checklist 158), so nothing below claims it was.
+
+**1 · The Building Codes thread — the developer's own thread (`ivanassen`), C88**
+
+Post this where the developer answered. It is the one thread where a fix of ours is something they asked for.
+
+> Done — it is in the next update of the pack. Both versions of the law now apply their maintenance change to
+> prefab-deployed buildings, at whatever value the law is set to, and it reads that value from the law itself
+> rather than carrying its own copy. It applies to buildings completed after the update: the finished building
+> does not record that it came from a prefab, so there is nothing on an existing one to go by.
+>
+> It is written to get out of your way when your patch lands. Our modifier carries the law's own id, so once
+> your handler applies it too the second write is a no-op and there is exactly one modifier, in either order —
+> and the module checks the shipped handler at startup, so the moment it stops skipping prefabs ours switches
+> itself off. No version check involved.
+>
+> One thing we found next door while doing it, in case it is useful: the maintenance half of Building Codes
+> survives the law's repeal. The cost half is a `LawEffectModifyLabel` and its `OnStop` reverts it, but the
+> maintenance half is the `ConstructionComplete` `MsgReaction`, and no `OnMsg.LawDeactivated` handler clears
+> `maintenance_resource_amount` — `SavegameFixups.RemoveRepealedBuildingCodesMaintenance` is the only sweep,
+> and it runs once per save. So a repeal after that sweep keeps the change. Ours behaves identically, on
+> purpose, because it uses your id.
+
+**2 · The clogged-producer reporters — C85 (two Steam players, "Clogged Extractor")**
+
+Both said destroy-and-rebuild was the only way out; the important part for them is that they do not have to.
+
+> The next update fixes this, and it repairs the buildings you already have — you do not need to rebuild
+> anything. When you load a save, any building still stuck on "Clogged after a Dust Storm." is switched back
+> on, and it checks again once a day after that. A building that is still waiting on your answer, or that is
+> off because you chose "we'll fix it after the storm", is left alone.
+>
+> What happens is that the dust-storm event switches the building off before it asks you what to do, and if
+> that question is ever lost — saving and reloading while it is on screen will do it — nothing switches the
+> building back on. The game already has the timer that would have handled it; this one event does not use it.
+> We have passed that to the developers.
+
+**3 · The C89 reporter — added to the 2026-09-12 draft above (`Madmouse Ked`)**
+
+⚖️ Append this to reply 1 above (the "not ours" reply) rather than replacing it: the sampling half of what
+they saw is still the game's and is not something we change. **Say "judgment call" plainly.**
+
+> Following up: the next update does change one part of this, as a judgment call rather than a bug fix. Four of
+> the five factions count a dome of any size when they check for "more than 10% unemployment", so one idle
+> colonist in a dome of three counts. The Justice Movement's identical dislike waits until a dome has ten
+> colonists. From the next update all five use that same ten-colonist rule, and homelessness too.
+>
+> That will stop it on small and half-built domes, which is where it is most annoying. It does not change how
+> often the game checks, so if you are seeing it on a dome of ten or more we would still like the answers to
+> the two questions above.
+
 ## Owed, and where it is tracked
 
 | Item | Where |

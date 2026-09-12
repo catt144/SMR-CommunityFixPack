@@ -28,7 +28,103 @@ player surface bumps it by one on release.
 
 ## Pending — goes out with the next upload
 
-*(empty — cleared 2026-09-12 by the v9 close-out; the next batch is the **Held** section below)*
+⚠️ Three entries below, all landed 2026-09-12 by `prompts/C85_C88_BUILD.md`. They ride v10 **together with** the Held batch — do not ship them separately, and re-derive every count at apply time.
+
+### Pending — C85 · `Fix_CloggedBuildingRelease` (`59c8c47`, 2026-09-12)
+
+**`last_changes` bullet (owner's list style, one line, `NEW`):**
+> NEW: a building left "Clogged after a Dust Storm." is switched back on — including one that is already stuck in your save.
+
+**Fix-list row (voice rule: what it does and for whom).**
+- *What you saw:* an extractor or factory stopped after a dust storm, said "Clogged
+  after a Dust Storm.", and never started again — destroy and rebuild was the only
+  way out. Two players reported it.
+- *What was wrong:* the dust-storm event switches the building off before it asks you
+  what to do, and if that question is ever lost — a save and reload while it is on
+  screen, for instance — nothing switches the building back on. The game already has
+  the timer that would have done it; this event does not use it.
+- *After the fix:* the building is switched back on, on load and once a day. A
+  building that is already stuck in your save recovers the next time you load it.
+  A building still waiting on your answer, or waiting because you chose "we'll fix it
+  after the storm", is left alone.
+
+Count impact **+1**. Judgment-call count unchanged.
+⚠️ Status is `fixed`, desk-controlled — **not** a playtest word. The attended A/B is
+checklist 158 and has not run. Entry: `bugs/C85.md` (2026-09-12 section) carries every
+limit, including the one case deliberately not repaired (an armed "fix it after the
+storm" follow-up that never gets its storm).
+
+### Pending — C89 · `Fix_FactionDomeSizeGate` (`98d0461`, 2026-09-12) ⚖️ JUDGMENT CALL
+
+⚖️ **This is a judgment call, not a repair of a code error, and every surface must say
+so the way F40 and F73 do** (owner, 2026-09-12): the site row uses the `??? question`
+block with "— *judgment call*" in the headline and the "⚠️ Worth knowing: this one is a
+judgment call" paragraph; the **FAQ judgment-call count goes three → four in all three
+places** (`PUBLIC_SURFACE_SWEEP.md` §6); the card's judgment-call sentence is updated
+if it lists them by name. ⛔ Nothing here may be worded as "the game was wrong".
+
+**`last_changes` bullet (owner's list style, one line, `NEW`):**
+> NEW: all five factions now use the same ten-colonist rule before they dislike a dome's unemployment or homelessness (judgment call).
+
+**Fix-list row.**
+- *What you saw:* a faction turning on you over "unemployment" in a dome of a handful
+  of colonists that was still being built, with nobody unemployed in the colony.
+- *What was wrong:* four of the five factions count any dome, however small, so one
+  idle colonist in a dome of three is "more than 10% unemployment". The Justice
+  Movement's identical dislike waits until a dome has ten colonists.
+- *After the fix:* all five use the same ten-colonist rule, for homelessness too.
+
+Count impact **+1**. **Judgment-call count three → four.**
+⚠️ Status on the defect question stays `cand` — it is a judgment call. The module is
+desk-controlled and has **not** run in a game: 🎮 the owner flagged C89 for an A/B they
+will observe themselves, `tested-attended` is theirs to grant, and the recipe is
+checklist 158. Entry: `bugs/C89.md`.
+
+### Pending — C88 · `Fix_BuildingCodesPrefab` (`4dc5073`, 2026-09-12)
+
+**`last_changes` bullet (owner's list style, one line, `NEW`):**
+> NEW: the Building Codes law now applies to buildings deployed from prefabs, as its description says — for buildings completed after this update.
+
+**Fix-list row.**
+- *What you saw:* with Building Codes enacted, a building deployed from a prefab kept
+  ordinary maintenance — under Strict it never got the lower maintenance the law
+  promises.
+- *What was wrong:* both versions of the law skip prefab-deployed buildings, and
+  neither description mentions it.
+- *After the fix:* prefab-deployed buildings get the same maintenance change as any
+  other, at whatever value the law is set to. This applies to buildings completed
+  after this update.
+
+⚖️ **Worth saying on the row, because it is the strongest thing we can say:** a Paradox
+developer answered the reporter's thread — excluding prefabs is wrong, it is fixed in
+their next patch, and they asked us to carry the fix meanwhile. When their patch lands
+this fix stands itself down on its own.
+
+Count impact **+1**. Judgment-call count unchanged.
+⚠️ "Applies to buildings completed after this update" is a **scope statement, not a
+hedge** — keep it. Buildings already standing cannot be repaired: the game does not
+record that a finished building came from a prefab. Status is `fixed`, desk-controlled;
+the attended A/B is checklist 158. Entry: `bugs/C88.md`.
+
+### ⛔ Notes for whoever runs `RELEASE.md` on this batch
+
+- **Re-derive every count.** These three are **+3** on the fix count, but the Held
+  section above retires F37, F43 (+F118 rider) and — per
+  `reports/SURFACE_AUDIT_2026-09-12.md` — possibly **F31**, so the net is not +3.
+  Read the live count word and `doccheck --emit-counts` at apply time; never carry a
+  number from here.
+- **Judgment-call count: three → four**, in all three places, for C89 only.
+- ⚠️ **`deskbench` has one REFUTED row that is not part of this batch and is
+  pre-existing since `9bc4360` (09-11):** `tools/desk_migration_cluster.py` still
+  loads `Code/Fix_DomeFreeSpaceMismatch.lua`, which F60's retirement deleted.
+  Confirmed by running it at `59c8c47^`. It needs repairing before `deskbench` can be
+  read as a release signal — otherwise a real failure hides behind a known one.
+- **Two new candidate entries were filed by this build and neither is a player
+  surface:** `C90` (a defect in the pack's own core — a declined `DataPatch`
+  self-check still patches shipped data; reaches `Fix_SaintBlessing` and
+  `Fix_SinkholeIndestructible`) and `C91` (vanilla leaks the Building Codes
+  maintenance modifier on repeal; a dev-report candidate). Neither gets an outbox
+  entry; both want owner attention separately.
 
 ---
 

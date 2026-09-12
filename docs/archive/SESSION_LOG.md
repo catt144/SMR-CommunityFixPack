@@ -8,6 +8,117 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-12 - smr-bugfixpack-aa: C85 + C89 + C88 BUILT for v10 — three modules, two new candidates filed, four near-misses caught at the desk
+
+tags: C85 C88 C89 C90 C91 build judgment-call clogged faction-dome-gate building-codes prefab DataPatch GameVar F75 falsification ck158
+
+Task: the owner fired `prompts/C85_C88_BUILD.md` (one-off, with its two dossiers `CLOGGED_BUILD.md` and
+`C88_PREFAB_BUILD.md`; **all three `git rm`'d in this commit — graves are this commit for the prompts, and
+`59c8c47` / `98d0461` / `4dc5073` for the work**). Desk only, no game launched, so the stale-probe gate did not
+bind. Ran beside `smr-bugfixpack-07`'s surface audit (`4c7b11a`) and after `smr-bugfixpack-d0`'s close-out
+(`22f4708`), shared checkout; peers messaged before starting, checklist **158** claimed by message, every module
+committed in the same commit as its `items.lua`/`metadata.lua` entry so no sibling saw a MODULE SETS red.
+
+**Shipped, all three desk-controlled and none run in a game** (statuses are `fixed`/`cand`, never a playtest word):
+
+- **C85 `Fix_CloggedBuildingRelease`** (`59c8c47`) — the sweep only, per ck154. Load + daily, keyed on
+  `exceptional_circumstances` + `TGetID(reason) == 789863173059`, cured with the game's own
+  `Setexceptional_circumstances(false)` (one argument, deliberately — an explicit `false` would clear a live
+  maintenance reason), enumerated with the developers' own `AllMapsForEach("map", "BaseBuilding", …)` idiom.
+- **C89 `Fix_FactionDomeSizeGate`** (`98d0461`) — ⚖️ **judgment call**, ck157 (c), unemployment **+** homeless.
+  A DataPatch wrapping the seven unguarded `DomeFilter.eval`s with Justice's own gate, threshold read from
+  Justice **by behaviour** (probing its eval over domes of 1..200), a like already gated skipped by the same
+  behavioural test so the pass is idempotent by construction.
+- **C88 `Fix_BuildingCodesPrefab`** (`4dc5073`) — option 1 + the law's own id, ck150 (b). An additive
+  `OnMsg.ConstructionComplete` for prefabs only, mirroring vanilla's three conditions, percentages read from the
+  preset. ⛔ Cannot repair buildings already standing: `from_prefab` is not stored on a finished building.
+
+**⭐ FOUR THINGS THE BRIEFS DID NOT CARRY, each found by a desk leg or a source read:**
+
+1. **C85's two GameVar interlocks do not cover the open popup.** `OnStopRunning()` runs **before**
+   `OpenPopup()` (`_StoryBits.lua:515-521`), so a state whose popup is on screen is in neither
+   `g_StoryBitActive` nor `g_StoryBitStates`. The popup dialog does pause the game (`PopupNotification`
+   declares `dont_pause = false` → `XPauseLayer`), which closes the common case, but an unopened context can sit
+   in `g_PopupQueue` while `ArePopupsEnabled()` is false and then nothing is paused. Added a third, read-only
+   interlock keyed on `is_storybit`, fail-closed for the whole pass. Also **refuted** the notification-timeout
+   route for the daily pass (`:606-607` returns true either way and the popup still opens) and replaced it with
+   the real one: any non-choice close of the dialog posts `Msg(async_signal, reason)` and only a choice index
+   indexes `replies`. And **closed H2's mechanism**: the story-bit popup is async, `OnMsg.PersistSave` keeps only
+   `sync_popup_id` contexts, so a save taken with it open drops it and the run thread waits on a signal nobody
+   will post — exactly the reporters' end state.
+2. **C89: the 1.0.7 branch is NOT interchangeable, and the C89 dossier was wrong about it.** The expressions are
+   byte-identical but the like **IDS** are not: 1.0.7 has **three** likes called `JusticeHomeless`
+   (`JusticeMovement.lua:123` guarded, `MarsDemocraticParty.lua:102` and `WorkersParty.lua:128` unguarded), which
+   1.1.0 renamed to `UtopiaHomeless` / `CollectiveHomeless`. The precedent check therefore has to require
+   **every** like carrying a precedent id to be gated, or the outcome depends on `pairs` order. It does, so the
+   module declines on 1.0.7 deterministically, naming the unguarded duplicate, before a single eval is wrapped —
+   the §2a branch guard doing its job with no version check. The desk leg runs it six times over.
+3. **C90 — a defect in our own core, filed not fixed** (`bugs/C90.md`). `DataPatch`'s runner re-reads the user
+   veto before every pass but **never the apply verdict**, and its `OnMsg` handlers install at file scope — so a
+   module whose `apply()` DECLINED still patches shipped data on `ClassesBuilt` while the entry and the log both
+   read `inactive`. The inverse of F87. Reaches `Fix_SaintBlessing` and `Fix_SinkholeIndestructible`; C89 carries
+   the guard, and it is a module-local flag rather than `entry.status`, because `run_apply` writes the status only
+   *after* `apply` returns, so a live Mod Options re-apply legitimately runs the pass while the status is stale.
+   Desk leg (k2) is the control and the template.
+4. **C91 — vanilla leaks the Building Codes maintenance modifier on repeal** (`bugs/C91.md`), which answers C88's
+   open S1. Each law's cost half is a `LawEffectModifyLabel` with an `OnStop`; the maintenance half is the
+   `MsgReaction`, and every `OnMsg.LawDeactivated` handler in the tree was enumerated — none touches
+   `maintenance_resource_amount`. The only clear-down is the one-shot
+   `SavegameFixups.RemoveRepealedBuildingCodesMaintenance`, whose existence says the developers met this in the
+   field and swept it rather than fixing repeal. Build **continued** per the brief: with the law's own id our
+   modifier leaks identically and is cleared by the same sweep — one more building inside an existing leak.
+
+**⛔ AND TWO BUGS C88 ACTUALLY HAD, each of which would have shipped a silently dead module, and the first
+harness draft passed both:**
+
+- **`GameVar` rawsets its global to `false`, not nil**, and `OnMsg.DoneGame` sets it back to false
+  (`CommonLua/Core/lib.lua:1061-1093`). `ActiveLaws` is a GameVar, so at the menu it is `false`; the draft's
+  "no game loaded" test read `~= nil`, which is **true** there — the probe would have declined and the module
+  would have gone inactive on **every boot**.
+- **The branch guard must not run at apply time (the F75 lesson).** A preset GlobalMap is present but **empty**
+  before `DataLoaded` and mod code loads first on a cold boot, so capturing the two handlers in `apply()` would
+  have found nothing and declined on every **cold** boot while working on the enable path. It runs from
+  `SMRFixPack.OnDataReady` instead.
+
+The harness now models the real menu value **and** the real cold-boot order; both reversions fail five legs each.
+
+**Verification.** `parsecheck` · `bodycheck` (C85 1 SRC-NONE + 2 OK; C89 1 + 7 OK with every one of the seven
+pins matching **exactly once**, no pin matching `JusticeMovement.lua` at all, and no other `Data/FactionDef/*.lua`
+carrying an unguarded expression — the set of seven is complete; C88 1 + 1 OK) · `sigcheck` 46 OK · `doccheck`
+**GREEN**, counts **46 → 49 modules, 47 → 50 `Code/*.lua`, 94 → 97 probes**, index rows 220 → 222.
+Desk: `desk_c85_clogged.py` **24/24**, `desk_c89_faction_gate.py` **26/26**, `desk_c88_prefab.py` **24/24**.
+
+**⭐ All three harnesses were FALSIFIED against guard-reverted copies of their module** (the builder's own
+`APPLY_MODULE` switch is not independent): C85 six variants, C89 six, C88 nine — **21 reversions, every one
+caught by the legs that name it**. The exact replacements are recorded in each harness docstring so this is
+re-runnable. Two honest non-findings are recorded rather than hidden: C85's whole-pass popup early-out
+duplicates a per-building check and so is an optimisation (leg (e3) drives the exposed predicate directly,
+because the two sites otherwise mask each other through `OnMsg`), and C88's prefab gate changes no **end state**
+because our write coalesces with vanilla's under the law's id — only the `SetModifier` **call count** shows it,
+which is why leg (c3) exists.
+
+**⚠️ One pre-existing RED that is not ours.** `tools/deskbench.py` has a REFUTED row:
+`tools/desk_migration_cluster.py` still loads `Code/Fix_DomeFreeSpaceMismatch.lua`, which **F60's retirement
+deleted** (`9bc4360`, 09-11). Confirmed pre-existing by running it at `59c8c47^`. Reported in the outbox notes
+and in checklist 158, **not fixed** — but it must be repaired before the release gate can read `deskbench` as a
+signal, or a real failure hides behind a known one.
+
+**Routed.** Three `### Pending` entries in `perma/RELEASE_OUTBOX.md` (each with its one-line `NEW` bullet in the
+owner's list style; count **+1 each**, judgment-call count **three → four** for C89 only, and a ⛔ note to
+re-derive every count at apply time because the Held batch retires F37/F43/F118 and possibly F31) · checklist
+**158** with the attended recipes for all three in one boot, numbered clicks, fenced copy-paste lines — every
+multi-statement line carries its `*r `/`*g ` prefix per `PLAYTEST_HELP.md`'s console-input forms, and a control
+per fix that fails when the fix is absent (each module now exposes a `Report()` the owner can paste, and those
+lines are themselves desk-traced: they cannot print a pass when the fix did not apply) · three reply drafts in
+`docs/FIELD_REPORT_REPLIES.md` (the developer's Building Codes thread, the two clogged-producer reporters, and a
+follow-up for the C89 reporter) · kit probes for all three in a new `TestKit/Code/66_Probes_Wave15.lua`
+(`behavior` kind; TestKit commits `04deac2`, `53adbec`, `dbc68f8`, local by design).
+
+**Owner's to grant, nothing else grants it:** `tested-attended` for all three, via checklist 158. C89 in
+particular is the leg the owner asked to observe themselves on a fresh one-shot colony, and the item says plainly
+that it costs 20–30 minutes of ordinary play and that there is **no cheat that seats a faction** — the game has
+none, so if none of the four is seated that leg cannot run that day.
+
 ## 2026-09-12 - smr-bugfixpack-07: surface audit fired — F37/F43 retirements confirmed, F31 settled (RETIRE), three ruled sentences refuted
 
 tags: surface-audit still-needed F31 F37 F43 F118 F54 F58 F48 wording voice-rule mapdata ck159

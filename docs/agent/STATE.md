@@ -25,10 +25,12 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   A3 (F118) · A10 · A5 c2 · A9 c4/c5 · F117's station recipe · the first `RunAll()` on the 94-probe kit (re-stamps
   `WORKFLOW.md:407`, VOID since 09-09). ⛔ Kit verdicts are PREDICTIONS until then; still FAIL/ERROR by name:
   `C47OpenFarmSeedBufferShape` (Herbs 100→50), retired `LanderCargoRatchet`/`DroneUnreachableForever`/`AutoExportPriority`.
-- 🔴 RUNNING 09-12 night (⛔ do not enter their lanes; a MODULE SETS/PARSE red may be the builder mid-edit):
-  `smr-bugfixpack-aa` = `prompts/C85_C88_BUILD.md` (C85 sweep · **C89** dome gate, judgment call · C88 prefab; owns `Code/`,
-  `items.lua`, TestKit, outbox Pending; ck158) · `smr-bugfixpack-07` = `prompts/SURFACE_AUDIT_FABLE.md` (ck159, report only).
-- ⏭ NEXT when both report: `RELEASE.md` over the outbox's **Held** batch + their 3 Pending = **v10**; text =
+- ✅ BOTH 09-12 LANES REPORTED: build `59c8c47` C85 + `98d0461` C89 (⚖️ judgment call, FAQ count 3→4) + `4dc5073` C88
+  (ck158 = all three attended A/Bs, ONE boot; owner grants `tested-attended`), audit `4c7b11a` (ck159).
+  ⛔ NEW, ours: **C90** a declined `DataPatch` self-check still patches (hits `SaintBlessing`, `SinkholeIndestructible`);
+  **C91** vanilla leaks the Building Codes modifier on repeal. ⛔ `deskbench` REFUTED row is PRE-EXISTING (`9bc4360`):
+  `desk_migration_cluster.py` loads F60's deleted module — repair before reading deskbench as a release signal.
+- ⏭ NEXT: `RELEASE.md` over the outbox's **Held** batch + the 3 Pending = **v10**; text =
   `reports/still-needed/WORDING_RULED.md` + its ⚖️ **VOICE RULE** (binds every surface); ck156 RULED (retire F37 + F43/F118,
   F21 STAYS, F31 → the audit). ⛔ Re-derive every count once. Then the owner's upload + the **held** site deploy.
   Handoff `prompts/perma/HANDOFF_ORCHESTRATOR.md` §3 LIVE. Desk `prompts/DLC_DEEP_CHECK.md` (`HUNT_AUDIT.md` §8).
@@ -126,9 +128,9 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 ## Build state — `python tools/doccheck.py --emit-counts`, never hand-typed
 ```
 BUILD STATE (emitted by tools/doccheck.py)
-- modules: 46 registered (46 default-active, 0 optional-gated files)
-- Code/*.lua files: 47
-- TestKit probes: 94
-- BUGS index rows: 119 F + 12 D + 89 C
+- modules: 49 registered (49 default-active, 0 optional-gated files)
+- Code/*.lua files: 50
+- TestKit probes: 97
+- BUGS index rows: 119 F + 12 D + 91 C
 ```
 Re-emit after any change. Game: records describe **1.0.7.396349** (`EF-014`); INSTALLED is now **1.1.0** (`EF-075`).

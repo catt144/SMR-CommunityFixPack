@@ -252,7 +252,15 @@ OnMsg.ConstructionComplete = SMRFixPack.WhenActive(FIX_ID, function(bld, dome, f
 	if guard ~= true then return end
 	if not from_prefab then return end
 	if not IsValid(bld) then return end
-	apply_to_prefab(bld)
+	local applied = apply_to_prefab(bld)
+	if applied > 0 then
+		-- A positive witness for the owner's attended A/B (checklist 158): "the
+		-- building's maintenance looks different" could be many things, but this line
+		-- says OUR handler did it, on THIS building. One line per prefab deployed
+		-- while the law is active, so it cannot spam a log.
+		SMRFixPack.Log("%s: Building Codes applied to a prefab-deployed %s", FIX_ID,
+			tostring(bld.class))
+	end
 end)
 
 -- Exposed for the TestKit's behaviour probe and for the owner's attended A/B, so both
@@ -266,6 +274,45 @@ SMRFixPack.BuildingCodesPrefab = {
 	Guard = function() return guard end,
 	CheckShape = check_shape,
 	ShippedHandlers = shipped_handlers,
+
+	-- ⭐ THE OWNER'S ATTENDED A/B, in one call (checklist 158). Give it a building --
+	-- the selected one by default -- and it prints which Building Codes maintenance
+	-- modifier that building actually carries, so the leg quotes a number instead of a
+	-- screenshot. Read-only: it only walks the building's own modifier list.
+	-- ⛔ The control is built in: a prefab-deployed building with NO row is the defect,
+	-- and the line says so rather than printing something reassuring.
+	Report = function(bld)
+		bld = bld or rawget(_G, "SelectedObj")
+		if type(bld) ~= "table" then
+			SMRFixPack.Log("C88-AB: select a building first")
+			return
+		end
+		local laws = rawget(_G, "ActiveLaws")
+		local active = {}
+		for _, law_id in ipairs(LAW_IDS) do
+			if type(laws) == "table" and laws[law_id] then active[#active + 1] = law_id end
+		end
+		SMRFixPack.Log("C88-AB building=%s guard=%s active_law=%s maintenance=%s",
+			tostring(bld.class), tostring(guard),
+			#active > 0 and table.concat(active, ",") or "NONE",
+			tostring(rawget(bld, PROP) or bld[PROP]))
+		local rows = 0
+		for _, law_id in ipairs(LAW_IDS) do
+			local mod = type(bld.FindModifier) == "function"
+				and bld:FindModifier(law_id, PROP) or nil
+			if mod then
+				rows = rows + 1
+				SMRFixPack.Log("C88-AB   modifier id=%s percent=%s amount=%s",
+					tostring(mod.id), tostring(mod.percent), tostring(mod.amount))
+			end
+		end
+		if rows == 0 then
+			SMRFixPack.Log("C88-AB   NO Building Codes modifier on this building%s",
+				#active > 0
+					and " -- on a PREFAB-deployed one that is the defect (C88 reproduces)"
+					or " -- expected, because no Building Codes law is active")
+		end
+	end,
 }
 
 SMRFixPack.Register(FIX_ID, {
