@@ -207,6 +207,17 @@ What that changes here, item by item:
 - **Verdict unchanged: SHIP A.** A1 and A2 and the deferral were re-run by link 01 under `real_comfort=True` (both
   harnesses now pin the stub-vs-real difference) and I re-ran them here — see the line below.
 
+**Attribution note on finding 11.** `9c333d1` (the FIX_POLICY save-window rule + an F59 section) was written by a
+third session, NOT by link 01 — every session here commits under one git identity, so the author field attributes
+nothing. Finding 11 was derived from the module and EF-023 before that commit existed and does not lean on it; I have
+now checked the rule's primary citations myself (`CommonLua/Core/cthreads.lua:481-524` persists every thread carrying
+`threadPersist`; `persist.lua:52-54` `__unpersisted_function__` asserts without unwinding) and they hold. One sentence
+in that section — that the build left the thread's own capture unchecked — is wrong: the build declared the capture
+(module header `SAVEGAME / §3a LAYER`; F59.md "§3a disposition — a NEW capturable site") and the gate exists because
+of it; link 01 footnoted it in `3d9719e`. Nothing in this report rested on that sentence. The honest limit stands: no
+save was taken inside the deferral window and no load observed — after the four-click receipt, that is where attended
+time should go.
+
 Lesson, recorded in memory as well: **a fixture stub standing in for a function that can REFUSE is a behaviour change,
 not a tolerance.** `GetResidenceComfort=function() return 50,0 end` looked inert because comfort was not under test.
 
