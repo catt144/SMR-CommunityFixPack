@@ -108,10 +108,25 @@ completed tests move whole to
 >    full, e.g. 2/2).
 > 2. Make sure that dome has **no other free beds** — close spare slots in its other
 >    residences too.
-> 3. Click another colonist in that dome, then the full residence, and choose
->    **Set Residence**.
+> 3. Click a colonist in that dome **who does not already live in that residence**, then the
+>    full residence, and choose **Set Residence**.
 > 4. **Reads 2/2 and the evicted colonist is standing homeless = repaired. 3/2 = still
->    broken.**
+>    broken.** More generally: **the left number going above the right number is the bug.**
+>    If you made the home full by closing slots on a bigger residence the pair may read
+>    1/1 vs 2/1 rather than 2/2 vs 3/2 — same defect, different digits.
+>
+> ⛔ **IF YOU REPEAT THE CHECK, USE A DIFFERENT COLONIST EACH TIME — otherwise it
+> silently does nothing.** Found at source after this was first written, so it is my
+> omission and not a game bug: the first attempt stamps the colonist with that residence
+> (`Residence:ColonistInteract:340`), and `:334` makes any later attempt by the **same
+> colonist on the same residence** return immediately — no kick, no assignment, no change
+> to the numbers. It is not transient either; that stamp lasts a sol of game time. So a
+> re-click to "make sure" looks exactly like "the fix did nothing". Same silent no-op if
+> the colonist you click already lives there (`:331`).
+>
+> ⚠️ **Step 2 is load-bearing, not belt-and-braces.** A free bed elsewhere in the dome with
+> better comfort draws the evicted colonist away, and then the bug does not show even on the
+> unrepaired module — so a "pass" with other free beds around proves nothing.
 >
 > Then one boot, and check the log says the fix applied (post-release rule). No playtest
 > status is granted by the desk results — the word is yours to give.
