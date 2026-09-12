@@ -20,6 +20,7 @@
 | `STATE_EVICTION.md` | when STATE is over its byte budget |
 | `DRONE_PROJECT_PROMPT.md` | drone work |
 | `COMBINED_SITTING.md` | the PT-20 per-era re-check recipe (it ran 08-14; nothing owed) |
+| `CO_RUNS.md` | the attended co-run protocol (labor-inverted experiment legs); binding when it applies |
 
 ## Root — live one-offs
 
