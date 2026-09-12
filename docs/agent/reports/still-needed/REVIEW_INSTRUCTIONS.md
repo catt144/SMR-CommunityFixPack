@@ -8,7 +8,7 @@ regenerate indexes, launch the game, or spawn another agent. No live game is nee
 
 Read `docs/agent/STATE.md` (mandatory), `docs/agent/facts/INDEX.md` before engine
 claims, the relevant individual facts, `docs/agent/FIX_POLICY.md` sections 2b and
-4/4a, and `docs/agent/prompts/STILL_NEEDED_SWEEP.md`. Then read the assigned module,
+4/4a, and the consumed brief (`git show 2be1402:docs/agent/prompts/STILL_NEEDED_SWEEP.md`). Then read the assigned module,
 its relevant entry files found via `docs/agent/bugs/INDEX.md` or `rg`, its site
 row(s) at `C:/Dev/SMR-CommunityMods/content/fix-list.md`, and its card bullet(s)
 in `metadata.lua` description. Primary game evidence is READ ONLY:

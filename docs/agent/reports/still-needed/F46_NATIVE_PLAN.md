@@ -33,3 +33,5 @@ A positive suspended native target establishes this premise on the sampled reque
 A zero target closes this sampled flag-only path, requiring retirement review.
 Neither result witnesses actual dumping, routing exceptions, or the fix's cure.
 Execution result belongs in RUNTIME and F46's verbatim agent report.
+
+Execution: RAN 2026-09-12; native suspended target remained 2500. Exact restore passed. See RUNTIME and F46_NATIVE_RESULT.json.

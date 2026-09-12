@@ -99,20 +99,21 @@ which is fully briefed.
 - ⭐⭐ **NEW CONSTRAINT, and it re-prices everything we publish: TWO PARADOX DEVELOPERS ARE USING OUR FIX LIST TO
   PLAN THEIR NEXT HOTFIXES** (owner, 09-12). A stale or overstated row now costs **a developer's time**, not just
   our credibility. ⇒ treat every public-surface claim as an input to someone else's engineering plan.
-- ⏳ **`prompts/STILL_NEEDED_SWEEP.md` — FIRED ON CODEX/ASTRA (owner, 2026-09-12), and the owner intends to open
-  THIS handoff only once Astra finishes.** ⇒ **when you pick this up, the sweep has probably RUN: find and read its
-  output BEFORE anything else** (`git log`, `agent/reports/`, and any committed subagent reports — Astra commits
-  them verbatim precisely so a Claude session can audit what was produced rather than a summary). ⚠️ Its verdicts
-  are CLAIMS: the retire/keep call is the owner's, no module should have been deleted inside it, and
-  `items.lua`/`metadata.lua` should be untouched. **If a module WAS deleted, that is out of scope and worth
-  raising.** The brief is written fan-out-shaped (one module per agent, fixed schema, hazards, serial bottleneck,
-  and the "agreement is not independence" warning). Details of the original ask below (ck156). Per-module settlement of "is this fix still
-  needed on 1.1.0?" across all 46, judging the **module and its fix-list row separately**. Prompted by the owner:
-  *"I really hate keeping things in there if they are not needed."* Carries the three cases that motivate it —
-  F60 (hotfix 2 kept it; the CONSUMER had moved, not the fix), `SaintBlessing` (self-disables and is correctly
-  KEPT — save heal + 1.0.7 players who get the live pack from the stores), `F102`/ExoticDepositSign (never
-  re-checked for 1.1.0 at all). ⚖️ A 46-module census is a HUNT ⇒ Codex/Astra, and it should be proposed as a
-  chain. ⛔ Not part of v9.
+- **Still-needed sweep COMPLETED 2026-09-12 by Codex coordinator `/root` and three agents.** Read
+  `reports/STILL_NEEDED_SWEEP.md` before release/surface work; all46 verbatim module MD/JSON pairs are under
+  `reports/still-needed/`, with coordinator primary disagreement traces and exact `SURFACE_PLAN.md`.
+  Recommendations: **2 RETIRE (F37 ordinary oxygen cleanup; F43 outer layout gate with F118), 0 REBUILD,
+  30 KEEP, 14 KEEP-BUT-FIX-CLAIM**. These are evidence-backed recommendations, not owner rulings.
+  Fresh direct registry measured46/46active (Saint healing active); F102 replacement entity valid.
+  Native F46 control measured a disabled Station demand retaining positive2500 target with exact flag restore;
+  actual unloading was not witnessed. All121 original saves unchanged; probe removed/TestKit metadata byteexact.
+  No Code/items/metadata/public row/card changes. Existing metadata10/pdx8 predates sweep, is untouched and is
+  not a receipt. Checklist156 now carries concrete retirement/constituency/wording choices. PUBLIC_SURFACE_SWEEP
+  and RELEASE_OUTBOX **Held after-v9** section route the batch; v9's F59/F60 Pending note stays separate.
+  TAKEABLE WHEN v9 is closed and owner ck156 rules. Consumed brief removed per lifecycle, preserved at
+  `git show 2be1402:docs/agent/prompts/STILL_NEEDED_SWEEP.md`. Do not treat report push as publication or
+  agent agreement as independent evidence. The hidden-repair count supports2 rather than3 current latent rows;
+  judgment count3/Lake veto/seven-machine scope are checked. See final report for all named unchecked cases.
 - **v9 is written and waiting on the owner** (ck155): F59 repair + F60 retirement, `last_changes` settled as a
   LIST after three passes (shape recorded in `RELEASE_OUTBOX`), count 49 on all five copies, site fix-list at 49
   and committed-but-unpublished. Sequence: upload, then fire the site job **in the same sitting**.

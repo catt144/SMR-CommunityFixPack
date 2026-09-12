@@ -1,0 +1,292 @@
+{
+  "review_anchor": "2983fac",
+  "census_anchor": "8469ae453b3d6312128ab187f38305f62fa41b92",
+  "close_read_head": "2be1402f47b1f5bda05360a7d418bf8ca88e8e0c",
+  "site_head": "a0616650b98acbb6b11dfb3ff6c0e8fa8fc44f30",
+  "source_buildid": "24995074",
+  "coverage": 46,
+  "verdict_counts": {
+    "KEEP-BUT-FIX-CLAIM": 14,
+    "KEEP": 30,
+    "RETIRE": 2
+  },
+  "reports": [
+    {
+      "module": "90_SaveSanitizer.lua",
+      "json_sha256": "0ebb580b834ff3fe5125f86a1f5a8498ec6c9e118833db42090dd0cd68f16272",
+      "md_sha256": "7bb2d4f179cc4e9737f095cd8272014e01aa4479c0d4c90a5302f792ff73e1eb",
+      "registry_line": 269
+    },
+    {
+      "module": "Fix_AnomalyCaveInMap.lua",
+      "json_sha256": "47b4a3d90a4b63d8440a3fe8511caa11ae53845aaa065df9cf876e0a0145e52a",
+      "md_sha256": "0abd582b19e934023d41dee3608bc24ef321e7e0f275483b15285cf18c2d4c32",
+      "registry_line": 260
+    },
+    {
+      "module": "Fix_ArrivalDeaths.lua",
+      "json_sha256": "8be902c7604da0b18434482b51fbc6cd466580a5c70115733106c4dce67aebfd",
+      "md_sha256": "5661b998a4e7a61a38f0aa033a0c8617a503b2bf4427f17b11095adf45ee8218",
+      "registry_line": 237
+    },
+    {
+      "module": "Fix_BombardmentSpread.lua",
+      "json_sha256": "785285d3f1c9faf431b565cbe42175fd0bd4005ac06920366b9fd00f5f576072",
+      "md_sha256": "c0002576dea21b181db0a2b4d299d5d6d5699099104c65a29fa08944867eea00",
+      "registry_line": 262
+    },
+    {
+      "module": "Fix_BrokenTrackSalvage.lua",
+      "json_sha256": "eb09a4539107a6e882720ae30e8f8d409e03451092d757411d880a01dc5fd359",
+      "md_sha256": "fcc48a038a3d9f4792a591694b6b0df0878ee2862482d54eb9471209a2c288a3",
+      "registry_line": 229
+    },
+    {
+      "module": "Fix_CrystalMysteryHang.lua",
+      "json_sha256": "b0fa6d48cbfca01368fc24d31508b94b79b8fa28e1c235e261c40e652da701fd",
+      "md_sha256": "9c4fd22d39358159372cf77720255f244672430165111372e16301b9b311ee88",
+      "registry_line": 239
+    },
+    {
+      "module": "Fix_DestroyedTunnels.lua",
+      "json_sha256": "ef685bda88bc607bf0bc281b3778d6942553243c00953a53127066750fb3cd33",
+      "md_sha256": "c7142e7eaf2f55a31848dd26b60852f1404f4519aec303abe3129b26f8e4e157",
+      "registry_line": 242
+    },
+    {
+      "module": "Fix_DomeOverviewHighlight.lua",
+      "json_sha256": "c6e1c4ef7b8838aeba579f7e3d621fea5c8502b5b1475c13f7ee59fde76e2dcd",
+      "md_sha256": "98fb6e8b1fa5cfd87c9db7196859d68d7fe86ff5368f91ead669562f1d3ceccf",
+      "registry_line": 240
+    },
+    {
+      "module": "Fix_DroneTransportMinors.lua",
+      "json_sha256": "55a318c00da1fa0b079033a1607323d6e22942908d99a26120d84e9191904301",
+      "md_sha256": "cf1c71f4d5e73ebd76777231d30d863845e08564bbeaab8403d9f385cc9aa9e9",
+      "registry_line": 259
+    },
+    {
+      "module": "Fix_DustSicknessBiorobots.lua",
+      "json_sha256": "0018eaaee89b5922cc919aef6c6226e32637bda8e286aac48430b36525471f25",
+      "md_sha256": "4bc8fd3370763b7dc131c2df2ada6dd4e497a472b9f810a680a52a573004cfc6",
+      "registry_line": 243
+    },
+    {
+      "module": "Fix_ExoticDepositSign.lua",
+      "json_sha256": "1d54e8fcc6b245fd79f7559012bf785eddddfe08326a99d9b29967d157c03d3c",
+      "md_sha256": "6466f99a6e392b7d10c3a4a565a6b0819993bc679daffdcc4c6be1635e2efc87",
+      "registry_line": 266
+    },
+    {
+      "module": "Fix_ExtenderFlapChurn.lua",
+      "json_sha256": "0e8ca7a10b097510b0d5266cba0729d8e36581ff0bec18b41caa254e19b700fa",
+      "md_sha256": "6319eeb8df3657764e90eecd8b5572229a3d48f9b64e5e56cca7e7acf0364a69",
+      "registry_line": 263
+    },
+    {
+      "module": "Fix_FounderTraitNotification.lua",
+      "json_sha256": "69fe7f5c8a4c9506faa1c6c3aba54125219d67d7a56a9aaed60e17c72c99fc96",
+      "md_sha256": "241ee84bc0e42d8769ad4a739806b419134a378263057d4540cc5c640dd8a7e1",
+      "registry_line": 255
+    },
+    {
+      "module": "Fix_FreedHousingNotice.lua",
+      "json_sha256": "307db352f556f77c1860aec956ebf06868ef9df162b4dd8b5824153f53d8f35a",
+      "md_sha256": "6d9e3238333a403058059d8d1a8bdd15f2c8da5ce788066ef997982750074791",
+      "registry_line": 248
+    },
+    {
+      "module": "Fix_GeneForging.lua",
+      "json_sha256": "5d83271be33e5cf6f0d8b21cf9ba28d5b8a8c8f338c39a51a379139ba618bd9c",
+      "md_sha256": "dad02832e49833e9d666e05d0a87582a80af3d50c3aa56c25145e015b993af3e",
+      "registry_line": 244
+    },
+    {
+      "module": "Fix_GhostFarmOxygen.lua",
+      "json_sha256": "3ed2e39c41dd25a14b17c3fd9730cd417ae1c75d9fc1c64c9e65fc7f86af6ea8",
+      "md_sha256": "8f6b11e2bfd1636d2122ce1009a73a3d571094075e95bb053a74069c988895c7",
+      "registry_line": 232
+    },
+    {
+      "module": "Fix_GraphConsumedCaption.lua",
+      "json_sha256": "8b97852f56b5db440ee9c4024eef563ca7c7e1e0a0b2f19063f1f5cddd644abf",
+      "md_sha256": "ac743073855d7feeddade88348567107fa702d0e4731fb75d946fd936f412bf8",
+      "registry_line": 253
+    },
+    {
+      "module": "Fix_JumboCaveReinforcementWedge.lua",
+      "json_sha256": "63f71a32d006354a92dc3bec9b0c2c41a41875b323059940c4b4f7d87329d5ba",
+      "md_sha256": "6691499f8e8e07d1dc2cb785cdfba13b126ec2c3669041b2307c9ed218b422e8",
+      "registry_line": 267
+    },
+    {
+      "module": "Fix_LakeEntombment.lua",
+      "json_sha256": "81f2b7151dc07a6cd79a87f25dcf3a515e81aab29d1726933ba2f4fb622d7ae3",
+      "md_sha256": "0b027282d23a053a5f1e6e6d4ab831b8a40fc05c162165b9e9aa674b8290a1b0",
+      "registry_line": 231
+    },
+    {
+      "module": "Fix_LanderEmptyLaunch.lua",
+      "json_sha256": "2a2fdecdb792810bf02129626a50e89aae2831810a669da39efbc38ff2c5398e",
+      "md_sha256": "1de28165a9867e6d0c14280febb5cc906ebd3a2e5c0a975dc9fc4b9d1dcde896",
+      "registry_line": 227
+    },
+    {
+      "module": "Fix_LandscapeUnitFilter.lua",
+      "json_sha256": "8dd824f20bc398d0e0374a85ca77e7c53eb7b6d2d8f378660c19b04f3fc9dfe5",
+      "md_sha256": "fd24632fd320a242c27eb1d82e4850cbabb61c4ce578541d20f19d12b39426a2",
+      "registry_line": 249
+    },
+    {
+      "module": "Fix_LayoutTechLock.lua",
+      "json_sha256": "2c734e4be58bf3d48b70704b6e15fd74037dafab2d79599f4de2cf8b15cd7267",
+      "md_sha256": "4d47bde57973176035fc2b241ef6c5b758b42b2b1e1d0951c3ed9e66c7997567",
+      "registry_line": 258
+    },
+    {
+      "module": "Fix_MirrorSphereSite.lua",
+      "json_sha256": "779ad916c9774b14d408743876d58e88c552785f82ad7e12fe8c1d63a41541d6",
+      "md_sha256": "b3d0b3da647ebe2dd79b4775166102c5d2c7c2290f94bb2e1097e4d455ccf516",
+      "registry_line": 245
+    },
+    {
+      "module": "Fix_NightShiftWork.lua",
+      "json_sha256": "24fc17e08cc2e1382e4378457a35cd19a452f945e36c9cd14860660fcfa4e3c4",
+      "md_sha256": "786479fef459b906dcfb402de4d5cff545671d18b26699a40bb03db0cfb440cb",
+      "registry_line": 224
+    },
+    {
+      "module": "Fix_PayloadTemplateRefill.lua",
+      "json_sha256": "e181e5c5479407ad462a20437243db74bf569f0c67ccf62000b21bed48cb9883",
+      "md_sha256": "13de0521b4a25afcea662d86daf8550288baa0be00c4b76a2129549d1adb3c9c",
+      "registry_line": 246
+    },
+    {
+      "module": "Fix_RocketDroneChurn.lua",
+      "json_sha256": "29b05b621b00687cbfdc86a6a08f186cd61cd81cffdd01340b48884b4fa3f2d1",
+      "md_sha256": "1e2afe1cd98b3657eddf9153dc129be8569dc5c48c2a00352e965c1c037c879f",
+      "registry_line": 233
+    },
+    {
+      "module": "Fix_RocketInteractGuard.lua",
+      "json_sha256": "96ae2b9f90c1e43a01b1c15f34ec268bbf43dba429652cb5c5b39682c040d603",
+      "md_sha256": "cec3432a31ac7b35c9aa76ba9029306869860aa31ac8e84a8d8ee8cf3c64900d",
+      "registry_line": 250
+    },
+    {
+      "module": "Fix_SaintBlessing.lua",
+      "json_sha256": "422a0a90861b4bc36c7c143989161bcea74525d54ffdf2bbba83736215de54fc",
+      "md_sha256": "1992e10070c80f50a6151f5978b43b9f6f99b267a6f8e07abf8b9b5e480bf467",
+      "registry_line": 264
+    },
+    {
+      "module": "Fix_ScanDowngrade.lua",
+      "json_sha256": "267267694160adfa9dddaafb663ab42e5167d0ea78c093f0e06f0c2edf1e99b1",
+      "md_sha256": "d48676359fdd71d83fc74e47d15f21f3bc5d54c3e3e023cf7826194ca3bd3894",
+      "registry_line": 261
+    },
+    {
+      "module": "Fix_SequenceLatents.lua",
+      "json_sha256": "fb67718807b8cd39d7a76b62474abe63cf2481abf5debd4b13226b8dcbf0e228",
+      "md_sha256": "5792b8b648aaed0bb55103791e8907146d2b28807aa95a988d4a290ef040ba39",
+      "registry_line": 256
+    },
+    {
+      "module": "Fix_ShelterReflex.lua",
+      "json_sha256": "a6ed3a1488fd8f3baa3624a43f3464e677fe2e93e942930394f46ae1f0daae3b",
+      "md_sha256": "b5231709334f3b4d12594f7c1d3c349ca316dd86e531d37206e2e0a11cc671fc",
+      "registry_line": 228
+    },
+    {
+      "module": "Fix_ShuttleHubOffAvailable.lua",
+      "json_sha256": "165d8afa41a7d1305f00269c82ef95b02cc60ed42896bddf63f6d4a26aad861a",
+      "md_sha256": "647ad90ddf1fe37a692b43c70fe4614a485bdfa17e2e0810c940a504fe1d73c6",
+      "registry_line": 247
+    },
+    {
+      "module": "Fix_ShuttleTransportCache.lua",
+      "json_sha256": "729941215d8c853f977719fe52d8d07168909b61a92263a7144ceeab14877132",
+      "md_sha256": "b1caf4357aa51c6d3688908e30a3e9a677fee3019b318688257d4dab1c9b57c4",
+      "registry_line": 235
+    },
+    {
+      "module": "Fix_SilentHitMomentFX.lua",
+      "json_sha256": "8be33e42b39aa6cf538e0023cfd178e0f4abe9a31ca551432d0d41d9dc0e83f0",
+      "md_sha256": "e6613407f4e083a94b6fc4ed6a7ffd92294fef86103a8ff0ebfcd670593e8306",
+      "registry_line": 268
+    },
+    {
+      "module": "Fix_SinkholeIndestructible.lua",
+      "json_sha256": "8e41e3135e77ae735a701e545b7422730e91873e88ba7f57c46032c06c68f403",
+      "md_sha256": "2e82c00525259a275da1338ca74e99eab7e3344942959763f1bffe71fc6c9219",
+      "registry_line": 265
+    },
+    {
+      "module": "Fix_StaleReservations.lua",
+      "json_sha256": "cdd7cb14e3ff216705510ff1e7eeba09418dad318930e5737f8587de1c8b9b26",
+      "md_sha256": "94548616bee9ae8a7ce1bc1d73dd4a32b7a788f9a1ea4ce0b7c5cfeaae29e58e",
+      "registry_line": 238
+    },
+    {
+      "module": "Fix_TrackConnectorPingPong.lua",
+      "json_sha256": "589d5a315b43a7eeb34c88adb803ed28017c57626804a5bcf052104ac05831d6",
+      "md_sha256": "d01e5abc9ee6940daad16f2dedb0fb0ad8a7d96f8bac7965b024aa12369fcf6a",
+      "registry_line": 251
+    },
+    {
+      "module": "Fix_TrackSalvageRefund.lua",
+      "json_sha256": "3601ebf481e261fea5aa4a747d1b0045ade6734a50d59c10d69adabe6d482b5d",
+      "md_sha256": "9fbf8455c56f2c66eaaff158cf39da98519ef45c146e0e792e11ab2b2aa8e610",
+      "registry_line": 257
+    },
+    {
+      "module": "Fix_TrackSalvageWipe.lua",
+      "json_sha256": "510fe1022fbb2797a5eb21acc9547428a4d86c31b1775ebb1f0d121b53b77544",
+      "md_sha256": "b71d1d09341615df462eb24c2ef549341d54cba675dbf2d76803727aedc73ffd",
+      "registry_line": 230
+    },
+    {
+      "module": "Fix_TrackTunnelPowerBridge.lua",
+      "json_sha256": "08406bd68d3b6cf18e86374ef7517ee67b2427bf1c0042c8df09c758cd3947a5",
+      "md_sha256": "32f1aab007be9bec79639dced3b1bf44282d9b31318012d46e61fbe7290fb2d9",
+      "registry_line": 252
+    },
+    {
+      "module": "Fix_TradeRocketFuelRefresh.lua",
+      "json_sha256": "41888ff5317f5f1646c647aefe484f1b952dacf1af4cb8cfba678ac966636586",
+      "md_sha256": "2822ae103784f5301d838bdcaf93b3b9829ba408d8f5ce86a455a939a325d3e2",
+      "registry_line": 234
+    },
+    {
+      "module": "Fix_TrainCargoDumping.lua",
+      "json_sha256": "df6f99378add3b8e3e2950b9e950b703293efc782b9c9c5e3e4f58e71a1493f0",
+      "md_sha256": "7ee819c21fd14ff117472fa7c7493f18e86a524ef4d8aa78e28f39ded051c80a",
+      "registry_line": 241
+    },
+    {
+      "module": "Fix_TrainsToVoid.lua",
+      "json_sha256": "84e86d6b5c156cb013581f5aa8235bdbc30522096d1d012ea54f9bdcc1e8dac9",
+      "md_sha256": "2521fc98cc04b0fb9e9e78b0cda050da5f756d80749d64bcfdfaaeb4aa22e835",
+      "registry_line": 226
+    },
+    {
+      "module": "Fix_TrainWaitTime.lua",
+      "json_sha256": "4d1cedde4cf5f5b9f23222072f94b03035d2aac67fbf597f352f1d49ab5d7630",
+      "md_sha256": "ba2f94b51b783eaef28c86cf2f76598504643e01f916bff57a13ef35477dd91d",
+      "registry_line": 254
+    },
+    {
+      "module": "Fix_VacuumWalks.lua",
+      "json_sha256": "eba242aa420ec9ab62bcbc30988d11037ec9c6b93cff5f17e910268d296f81d6",
+      "md_sha256": "63c93386e4ce6b4317cbb86b6ca373a1866cdb3a0e0443ad69f9d83d4734a653",
+      "registry_line": 236
+    },
+    {
+      "module": "Fix_WispRewards.lua",
+      "json_sha256": "9899f6809176708c23093f875c2ba6ae336a613b7eec9cefd993c21a9c895bd4",
+      "md_sha256": "acc3c81b2eed14eb8c6081150d4152b38828c56a61ced9e44bb0ffcd149e6dd8",
+      "registry_line": 225
+    }
+  ],
+  "inputs_unchanged": true
+}

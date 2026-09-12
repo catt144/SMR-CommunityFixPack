@@ -1,3 +1,30 @@
+# Coordinator scratchpad - sweep settled 2026-09-12
+
+Final report `../STILL_NEEDED_SWEEP.md`: all46 pairs complete, 2 RETIRE, 0 REBUILD,
+30 KEEP, 14 KEEP-BUT-FIX-CLAIM. All three agents finished; no agent work pending.
+RESULTS/REVIEW_MANIFEST capture fixed-schema corpus/report hashes. Primary disputed
+checks in TRIAGE; exact held proposals in SURFACE_PLAN. Owner checklist156 rewritten.
+PUBLIC_SURFACE_SWEEP/RELEASE_OUTBOX Held after-v9 routing, no public/module changes.
+Root added 15 entry-home freshness annotations, no statuses changed; generated
+INDEX refreshed, final doccheck GREEN. Final explicit-path commit/push closes the task.
+
+Native F46 extra launch RAN: real Station userdata Concrete target2500 unchanged
+under rfSuspended65536 while IsResourceEnabled becamefalse. Flags/target exact
+restore. Full archived log stillneeded_f46_Mars.exe-20260912-01.00.26-6a91a190.log,
+SHA a24941a12a7ae1269a62a65587c6fd829405f5be983dc6b69635b3feac4260db, lines223-227.
+All121 original saves unchanged after6GB backup; zero new/rotated saves, copy/probe
+removed, TestKitmetadata9eaee43.. byteexact treeclean, Mars absent. Native premise,
+not actual unload/route/cure. F46 agent pair nowKEEP; entrycurrentnote supersedesunknown.
+
+Fresh registry remains46/46active inclSaint264; F102replacementvalid271. All inputs
+Code/items/metadata/siteheadhash unchanged at finalreview. Metadata10/pdx8 present
+before sweep, untouched; do not infer new uploadreceipt. No suite/runall/newcolony.
+Consumed one-off prompt delete/map atclose perworkflow; full brief preserved at2be1402.
+Required owner warning EXACT in report/checklist/final:
+warn STATE.md is 12991 bytes, warn threshold is 12288 — copy this line VERBATIM into the owner report; the owner fires agent/prompts/perma/STATE_EVICTION.md
+
+Prior scratchpad (historical working notes; superseded assignments):
+
 # Coordinator scratchpad — resume here after compaction
 
 User invoked `docs/agent/prompts/STILL_NEEDED_SWEEP.md` on 2026-09-12. All work

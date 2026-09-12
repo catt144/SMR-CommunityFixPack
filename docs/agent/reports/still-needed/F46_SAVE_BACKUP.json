@@ -1,0 +1,736 @@
+{
+  "save_directory": "C:\\Users\\stkot\\Saved Games\\Surviving Mars Relaunched\\76561198020568696",
+  "backup": "C:\\Dev\\tmp\\stillneeded-f46-backup-20260912",
+  "files": [
+    {
+      "name": "asttest.savegame.sav",
+      "sha256": "71aed98b07feb192dbcec93713a943e8cd5dfc598a2eb57f3914836e865bff36",
+      "size": 48630700,
+      "mtime_ns": 1785458249560092500
+    },
+    {
+      "name": "asttestnoans.savegame.sav",
+      "sha256": "d232f67677b6ecac1bd98e9742628234ba075c618353eea0a3f2c6b0d68a460c",
+      "size": 48658146,
+      "mtime_ns": 1785458397401139400
+    },
+    {
+      "name": "asttestnoans2.savegame.sav",
+      "sha256": "5338d35171560f816f7540541eed04b935e652af86c305674ff3aa9848e488fa",
+      "size": 48575323,
+      "mtime_ns": 1785519342430897100
+    },
+    {
+      "name": "Autosave Sol 51.savegame.sav",
+      "sha256": "f8deb5a78355f4b0326461818069459945ec6f01c8407bb3dde505887d2a7512",
+      "size": 30385460,
+      "mtime_ns": 1789174765552326200
+    },
+    {
+      "name": "Autosave Sol 6(2).savegame.sav",
+      "sha256": "89a193c9d1f88f821a4c11f3f1bcbdb7651debe6c98b9adb42d0dc37e78ddb2a",
+      "size": 29214839,
+      "mtime_ns": 1789184919348865800
+    },
+    {
+      "name": "C47FARM.savegame.sav",
+      "sha256": "1c31e49e791879c981ff4ec27996a067c591d47c16a1a91d4105d53ad9a9931c",
+      "size": 56382611,
+      "mtime_ns": 1786819666955146300
+    },
+    {
+      "name": "c47farmnomod.savegame.sav",
+      "sha256": "e67edd2e8788a9b52df30611166f16b56f8173078cd14dd1f4f8d9a273c016ad",
+      "size": 56331748,
+      "mtime_ns": 1787175857066470900
+    },
+    {
+      "name": "c47farmreload.savegame.sav",
+      "sha256": "cf9e74ade6a6497c8de20f8202934e416bcd50e9f1797f3e3925d1df9227d215",
+      "size": 56163950,
+      "mtime_ns": 1787174984564316200
+    },
+    {
+      "name": "C48BRAKE.savegame.sav",
+      "sha256": "1c31e49e791879c981ff4ec27996a067c591d47c16a1a91d4105d53ad9a9931c",
+      "size": 56382611,
+      "mtime_ns": 1786819666955146300
+    },
+    {
+      "name": "C48PAIR.savegame.sav",
+      "sha256": "1c31e49e791879c981ff4ec27996a067c591d47c16a1a91d4105d53ad9a9931c",
+      "size": 56382611,
+      "mtime_ns": 1786819666955146300
+    },
+    {
+      "name": "C48STAGE.savegame.sav",
+      "sha256": "1c31e49e791879c981ff4ec27996a067c591d47c16a1a91d4105d53ad9a9931c",
+      "size": 56382611,
+      "mtime_ns": 1786819666955146300
+    },
+    {
+      "name": "CB1STAGE.savegame.sav",
+      "sha256": "e2b2c9682ffe7ce41c49e9e10e9982d4f9654f528e051d5b325eba3cb9d4acb9",
+      "size": 55667524,
+      "mtime_ns": 1785810110000000000
+    },
+    {
+      "name": "CB2F85.savegame.sav",
+      "sha256": "f99c228a98105400c67ebf8a4c86b020223e2759202b53e08eb893e8f2a3ccfe",
+      "size": 54395258,
+      "mtime_ns": 1786394517000000000
+    },
+    {
+      "name": "CB2PKEY.savegame.sav",
+      "sha256": "ff6f5559dfff317545eb291126cb58eed101057d4366b65f3716424bf1311e58",
+      "size": 54324959,
+      "mtime_ns": 1786392044000000000
+    },
+    {
+      "name": "CB2PKEY2.savegame.sav",
+      "sha256": "b49078e24356806dc9fbb4eaad672fc5e9a34761396e1f008b47fc82c5a3cb64",
+      "size": 54477207,
+      "mtime_ns": 1786392591000000000
+    },
+    {
+      "name": "CB2STAGE.savegame.sav",
+      "sha256": "e2b2c9682ffe7ce41c49e9e10e9982d4f9654f528e051d5b325eba3cb9d4acb9",
+      "size": 55667524,
+      "mtime_ns": 1785810109000000000
+    },
+    {
+      "name": "CB2UNINSTALL.savegame.sav",
+      "sha256": "dd46d0ddc029d69a019bd72c7d0b7bc1a4aeb07b60df3d5f382965ee99f272c2",
+      "size": 54397168,
+      "mtime_ns": 1786396568000000000
+    },
+    {
+      "name": "CORUN0.savegame.sav",
+      "sha256": "e2b2c9682ffe7ce41c49e9e10e9982d4f9654f528e051d5b325eba3cb9d4acb9",
+      "size": 55667524,
+      "mtime_ns": 1785810105000000000
+    },
+    {
+      "name": "CORUN1.savegame.sav",
+      "sha256": "e2b2c9682ffe7ce41c49e9e10e9982d4f9654f528e051d5b325eba3cb9d4acb9",
+      "size": 55667524,
+      "mtime_ns": 1785810105000000000
+    },
+    {
+      "name": "CP15F15.savegame.sav",
+      "sha256": "90d57d57644f278e63abb792d479a019ad347cd4aaa890058af5641e09b57859",
+      "size": 47371366,
+      "mtime_ns": 1786487323609614000
+    },
+    {
+      "name": "CP15PT15.savegame.sav",
+      "sha256": "5232d38afa7ca057efc609a6eab2e397ebf243069f8b699321347b7a3f2c2e7f",
+      "size": 47370762,
+      "mtime_ns": 1786485982082390100
+    },
+    {
+      "name": "CP60RT.savegame.sav",
+      "sha256": "07d4a69cad21ef76113fb722bf03d69a7dfb6411d510c1a942eb894e263bf9d3",
+      "size": 53940049,
+      "mtime_ns": 1786558687614070600
+    },
+    {
+      "name": "CP60STAGE.savegame.sav",
+      "sha256": "44c100563a4ff2e90ddb5503403122740728506317972e49fe1dde618a83c7ff",
+      "size": 54842984,
+      "mtime_ns": 1785621348000000000
+    },
+    {
+      "name": "CSHOST.savegame.sav",
+      "sha256": "1b8a27f14953d59c6bf78eba571278438aff342444e61735bfe54e9100b72094",
+      "size": 53851365,
+      "mtime_ns": 1786575176000000000
+    },
+    {
+      "name": "CSSWEEP.savegame.sav",
+      "sha256": "d67f91ee9211527c42c5dc1c3c1f71871875a7d6ed2d6b37e07367034fd179b6",
+      "size": 54358960,
+      "mtime_ns": 1786575270000000000
+    },
+    {
+      "name": "D10test1.savegame.sav",
+      "sha256": "98be432b9fa79b1295609ba4d63b78fe459b1371aff7fbb746929111aff77cc5",
+      "size": 49412748,
+      "mtime_ns": 1785700375608055500
+    },
+    {
+      "name": "D13SWEEP.savegame.sav",
+      "sha256": "ead539df1af6cc96fa29e1c32bd2b53a82924368d25c0ffd3734e80e80fbcdb5",
+      "size": 55635757,
+      "mtime_ns": 1786726170000000000
+    },
+    {
+      "name": "dronetest1.savegame.sav",
+      "sha256": "a82891b76f3297a01fdebfafa4b47377490a3f3019518f7307d507b62081597d",
+      "size": 48203545,
+      "mtime_ns": 1785524037901892400
+    },
+    {
+      "name": "Dronetest2.savegame.sav",
+      "sha256": "6f1a81344da76428975248cc7dae54a0535b31488d5476984a7240f008972439",
+      "size": 48091286,
+      "mtime_ns": 1785526418447940300
+    },
+    {
+      "name": "F119stuck.savegame.sav",
+      "sha256": "9eea61d1fd9e323574901ea7c525c6d7eb5d38178a2495b57db839c5a96a74b6",
+      "size": 30353858,
+      "mtime_ns": 1789157620723147200
+    },
+    {
+      "name": "F59 Test1.savegame.sav",
+      "sha256": "ba0c7b01969e20c70e70001f3f003d2bf5b68f34f308e8f8c4240230e50270cf",
+      "size": 48306453,
+      "mtime_ns": 1785686642433093200
+    },
+    {
+      "name": "f59 test2.savegame.sav",
+      "sha256": "1f3062502af5235acdec1d58a80f7a88b1c00ae88d270fd05d69daaecc10dce0",
+      "size": 48271409,
+      "mtime_ns": 1785693499022812600
+    },
+    {
+      "name": "F90 Alert.savegame.sav",
+      "sha256": "e04101957e3554f0d79ccf733d20f74bab32af93b347dbd1ca481ebc9906cdb8",
+      "size": 49600566,
+      "mtime_ns": 1785690385345011300
+    },
+    {
+      "name": "F95 Baseline.savegame.sav",
+      "sha256": "24c154c9cadd3d98711467af072a803ed2471a1f66e1687988050e7c3eb71dc0",
+      "size": 49037469,
+      "mtime_ns": 1785691551557985100
+    },
+    {
+      "name": "F95 fresh.savegame.sav",
+      "sha256": "dcb917b88fa13e01a0e048ece95ab13583b2639be26b0cb5ed4ff7dc3809ff2c",
+      "size": 49603059,
+      "mtime_ns": 1785693324951574800
+    },
+    {
+      "name": "f95 healed.savegame.sav",
+      "sha256": "3658fe2d7b5f7ec30bbdb4e3891b2d22b301fd1f71279a71aae43eb5dd013074",
+      "size": 48976089,
+      "mtime_ns": 1785692887596402400
+    },
+    {
+      "name": "International Mars Mission Sol 84.savegame.sav",
+      "sha256": "cf2eb300aa1cddf49be53213141572d29884e286645ff2b292b505a5d57a64ff",
+      "size": 45811132,
+      "mtime_ns": 1788115625780217700
+    },
+    {
+      "name": "Interplanetary Codex Sol 14.savegame.sav",
+      "sha256": "9bf615aa715025f4bcd0636e442a6512f6459e780e4371cb7ea99a1ec85f4807",
+      "size": 43729563,
+      "mtime_ns": 1788285514944849100
+    },
+    {
+      "name": "Interplanetary Codex Sol 7.savegame.sav",
+      "sha256": "7d774e893280ff317c25b588d9983aab515897a7ce5c8414ab0e6f6cd688f5d4",
+      "size": 43349033,
+      "mtime_ns": 1788236126782826700
+    },
+    {
+      "name": "No disasters underground setup.savegame.sav",
+      "sha256": "29db9446ac8b9441e69b28216c719dba824d4aad806ce8eb3e7aec3df05334df",
+      "size": 46173601,
+      "mtime_ns": 1785459311734006500
+    },
+    {
+      "name": "POST 105-DIRTY.savegame.sav",
+      "sha256": "64526d6361fa291de87df56c8a2bb0db3bcc7115803f0331732761a46932653f",
+      "size": 49699367,
+      "mtime_ns": 1787602725489263300
+    },
+    {
+      "name": "Pre F105.savegame.sav",
+      "sha256": "852972034f71ff6faf47201395e80e9763ca5ea2b5631aa4e96c8249aa3bf90e",
+      "size": 49549327,
+      "mtime_ns": 1787601515650267200
+    },
+    {
+      "name": "pref 105-2.savegame.sav",
+      "sha256": "606517f7e95491e60f8a09f704f7d8a191b5e7c179c50b62b639755e32ec1090",
+      "size": 49757737,
+      "mtime_ns": 1787601722893836300
+    },
+    {
+      "name": "PT-15 post save.savegame.sav",
+      "sha256": "fcd1014f9aebe753bf5c63a82c038f76b751bbba38e5347147f8d86b97ccceed",
+      "size": 48606517,
+      "mtime_ns": 1786487312670798300
+    },
+    {
+      "name": "PT-15.savegame.sav",
+      "sha256": "bde6bff0fbfd148696c1ae638ecc44976342ff3421078f729e7c81c6ce7d1fb6",
+      "size": 48086314,
+      "mtime_ns": 1786461221571949000
+    },
+    {
+      "name": "PT-20TEST-B.savegame.sav",
+      "sha256": "91548a239802ba577f2bc9d1faa556bca7c9c6f48efd55ef8e65b964ffc61c30",
+      "size": 54638704,
+      "mtime_ns": 1785530467874323800
+    },
+    {
+      "name": "PT-20TEST.savegame.sav",
+      "sha256": "b667f46b4130657602a8e8b3d844ace24e5d3aeea8dad6ee021134e8418233d5",
+      "size": 54736668,
+      "mtime_ns": 1785529626160697900
+    },
+    {
+      "name": "PT20REDO.savegame.sav",
+      "sha256": "16e6f8c4b18e9541fd11a0702410fbdc8c4f39f9acee71497cf29fddcd708bdf",
+      "size": 54976556,
+      "mtime_ns": 1786724530000000000
+    },
+    {
+      "name": "PT35FIXTURE.savegame.sav",
+      "sha256": "efb125d960298ff1c0dc14628aefb4516ad22dcc8af1047d7ceb2fabfab93a74",
+      "size": 54424001,
+      "mtime_ns": 1786396443362421500
+    },
+    {
+      "name": "pt611uninstall.savegame.sav",
+      "sha256": "adb08d87fb99e205cf3210c73e7521f7240b5032ca4c06798829a3e1428df219",
+      "size": 49812792,
+      "mtime_ns": 1785704484038290900
+    },
+    {
+      "name": "PT61save.savegame.sav",
+      "sha256": "a119f65931c7314bb8a749f1170e34e3be49c060114f3d53a6f076a71dbc60bb",
+      "size": 49781250,
+      "mtime_ns": 1785703610124671600
+    },
+    {
+      "name": "randotest.savegame.sav",
+      "sha256": "1e8bf9e189b58d8e7b1e1b3962110c2360b5bca00ab9cf92697879e2594ecc67",
+      "size": 50453116,
+      "mtime_ns": 1785547380152497500
+    },
+    {
+      "name": "RESCUECLEAN.savegame.sav",
+      "sha256": "fb231495303cc916bbead92c75bb272a4d4aedf35856f8b700e84fd9df6983e3",
+      "size": 54391001,
+      "mtime_ns": 1786636364000000000
+    },
+    {
+      "name": "RESCUEDMG.savegame.sav",
+      "sha256": "2b912c0a78b0b83e8c8740b18e79cec1336d914efcf9bc86ba5676f1fd964468",
+      "size": 54347228,
+      "mtime_ns": 1786636230000000000
+    },
+    {
+      "name": "RESCUESTAGE.savegame.sav",
+      "sha256": "efb125d960298ff1c0dc14628aefb4516ad22dcc8af1047d7ceb2fabfab93a74",
+      "size": 54424001,
+      "mtime_ns": 1786396442000000000
+    },
+    {
+      "name": "RESCUEWIT.savegame.sav",
+      "sha256": "d67f91ee9211527c42c5dc1c3c1f71871875a7d6ed2d6b37e07367034fd179b6",
+      "size": 54358960,
+      "mtime_ns": 1786575267000000000
+    },
+    {
+      "name": "RUSTESTPRE.savegame.sav",
+      "sha256": "31406b2f084b7a6df5df800caef4401cf6ea55f6277b1b7c7b144ec2af8faaec",
+      "size": 50568565,
+      "mtime_ns": 1787952038420848900
+    },
+    {
+      "name": "saint test.savegame.sav",
+      "sha256": "c5fdb007de643008ce67a74edf0af457977c425b592bab4d1ddd265aa6aa414c",
+      "size": 54457873,
+      "mtime_ns": 1785694451472665100
+    },
+    {
+      "name": "Save A post research setup.savegame.sav",
+      "sha256": "36d1f8656901b3340a3947fe9432869f310b6cc27355a123548949cb1d299b17",
+      "size": 49483671,
+      "mtime_ns": 1785097758168860600
+    },
+    {
+      "name": "Save A setup pre research all.savegame.sav",
+      "sha256": "6da1e41d087649585afa3872ee8074a92b68d69ecf76dfb36881845adabcefd6",
+      "size": 49646295,
+      "mtime_ns": 1785096934256782100
+    },
+    {
+      "name": "savesavetest.savegame.sav",
+      "sha256": "f20e1e583efdf0c65177559c2905b1cc706119ef20fd873b455678a03b5c7efe",
+      "size": 54543629,
+      "mtime_ns": 1785532533947786200
+    },
+    {
+      "name": "SMRFIX 1.1 Testing backup.savegame.sav",
+      "sha256": "fa0f957e87586c2949b11ae8f29f22c20b34c64012289fe4bcd21b94d19f0089",
+      "size": 29718657,
+      "mtime_ns": 1788895949453691800
+    },
+    {
+      "name": "SMRFIX 1.1 testing.savegame.sav",
+      "sha256": "020291f0fdeba0cbc3fd0ff1f467635eefd0ebee1db92b596c2a7c9ef4efe4b8",
+      "size": 29702795,
+      "mtime_ns": 1788895935332719600
+    },
+    {
+      "name": "SPCONRT.savegame.sav",
+      "sha256": "d67f91ee9211527c42c5dc1c3c1f71871875a7d6ed2d6b37e07367034fd179b6",
+      "size": 54358960,
+      "mtime_ns": 1786575268000000000
+    },
+    {
+      "name": "SPSTAGE.savegame.sav",
+      "sha256": "efb125d960298ff1c0dc14628aefb4516ad22dcc8af1047d7ceb2fabfab93a74",
+      "size": 54424001,
+      "mtime_ns": 1786396443000000000
+    },
+    {
+      "name": "SPWIT.savegame.sav",
+      "sha256": "5232d38afa7ca057efc609a6eab2e397ebf243069f8b699321347b7a3f2c2e7f",
+      "size": 47370762,
+      "mtime_ns": 1786485981000000000
+    },
+    {
+      "name": "SPWIT2.savegame.sav",
+      "sha256": "d6cee043f2c7109f172a3c27dba4887538b77973ff022f5ff20ebf908b8a559a",
+      "size": 47380162,
+      "mtime_ns": 1786574793000000000
+    },
+    {
+      "name": "SPWITB.savegame.sav",
+      "sha256": "07d4a69cad21ef76113fb722bf03d69a7dfb6411d510c1a942eb894e263bf9d3",
+      "size": 53940049,
+      "mtime_ns": 1786558687000000000
+    },
+    {
+      "name": "SPWITBRT.savegame.sav",
+      "sha256": "9fc8cd9c9c4831661bced632dbd0d95054bdefde2b3a5341dd6efc816cee6310",
+      "size": 53895208,
+      "mtime_ns": 1786575130000000000
+    },
+    {
+      "name": "SPWITCRT.savegame.sav",
+      "sha256": "1b8a27f14953d59c6bf78eba571278438aff342444e61735bfe54e9100b72094",
+      "size": 53851365,
+      "mtime_ns": 1786575174000000000
+    },
+    {
+      "name": "SPWITRT.savegame.sav",
+      "sha256": "cdd6054212ec40f665c117e5e1521eb93b86de8ba6ea189858087b4e56cd9d6c",
+      "size": 47372717,
+      "mtime_ns": 1786575087000000000
+    },
+    {
+      "name": "T1-UNINSTALL-R.savegame.sav",
+      "sha256": "40e1dc793f979b730d20383ac329a1f00fd76a3cf3ce312dec33eb7e644be728",
+      "size": 54952081,
+      "mtime_ns": 1785626744328341900
+    },
+    {
+      "name": "T1-UNINSTALL.savegame.sav",
+      "sha256": "5c7fd4efb85c109accad5baf7b14a701c51fd10712101b45757f7f1f67611b01",
+      "size": 54977848,
+      "mtime_ns": 1785625999388668200
+    },
+    {
+      "name": "T2-UNINSTALL-R.savegame.sav",
+      "sha256": "c70dcf74a38049f03e94c65984f9e94752f17e72f8bec2ba7cbd5a4a904973c5",
+      "size": 54955415,
+      "mtime_ns": 1785636252626712100
+    },
+    {
+      "name": "T2-Uninstall.savegame.sav",
+      "sha256": "9c5714f5a911bb9cf5b71af6e25719733f607e983f1fa76709a859675676d583",
+      "size": 55045593,
+      "mtime_ns": 1785635402942822300
+    },
+    {
+      "name": "Terraforming Initiative Sol 4 Backup.savegame.sav",
+      "sha256": "a2ff42976fb99e4f78d47a4d7efbd6d8d82ca842f0bdb3e928376097e1737874",
+      "size": 30366701,
+      "mtime_ns": 1789156163165594500
+    },
+    {
+      "name": "Terraforming Initiative Sol 4.savegame.sav",
+      "sha256": "dfed347d8be63051b4183791faa7c7ea9d9d9d26e105834a9890933c0155c211",
+      "size": 30365704,
+      "mtime_ns": 1789156127184213300
+    },
+    {
+      "name": "Terraforming Initiative Sol 5.savegame.sav",
+      "sha256": "278175c237e8e4010f221775acb4623ce568f3a9a8937f29363f76a9bcfa07c8",
+      "size": 30236369,
+      "mtime_ns": 1789156235484469700
+    },
+    {
+      "name": "test 2 pre events.savegame.sav",
+      "sha256": "80a55f0d99eea134cdc3680838d1ca66d2181016222dbe410f3ed44f3def0efe",
+      "size": 44014045,
+      "mtime_ns": 1785095485818032300
+    },
+    {
+      "name": "Test 2 pre test.savegame.sav",
+      "sha256": "77386349d1695442c7084873884ab4164d49d1bbeddb770c6546079166aa342f",
+      "size": 49735760,
+      "mtime_ns": 1785119047685492000
+    },
+    {
+      "name": "test 2.savegame.sav",
+      "sha256": "14b91c6daac76e2d9c2d5e05d51aa04ed0c4ba4479b1198365f236be1d5e3d4d",
+      "size": 43903646,
+      "mtime_ns": 1785092540301192600
+    },
+    {
+      "name": "Test 2B.savegame.sav",
+      "sha256": "10c5a6ad39cae05966480f064a07d5abe344011e4db247adc6a912ebc37f9b81",
+      "size": 49698874,
+      "mtime_ns": 1785164699130138100
+    },
+    {
+      "name": "Test 2C.savegame.sav",
+      "sha256": "fb9a8e43ac88846293ae73cc857d218b054f4a36d7220fb09799a7a642a37ded",
+      "size": 49957637,
+      "mtime_ns": 1785166684329996700
+    },
+    {
+      "name": "Test 2D.savegame.sav",
+      "sha256": "40a7be439ab96822fe8755802966d97d594793ec55c9d7405333e14b0704517c",
+      "size": 49808041,
+      "mtime_ns": 1785172711803549000
+    },
+    {
+      "name": "TEST 2E.savegame.sav",
+      "sha256": "de108dd43ad6dfdbffe271687fc6accec15fcaa5c2f5d281f6736a971726df1f",
+      "size": 50456093,
+      "mtime_ns": 1785189561430205900
+    },
+    {
+      "name": "TEST 2F.savegame.sav",
+      "sha256": "112a3dc46ca502cb691968e0f796c2a6dc5cf9989a91798c522204c87e6c8ed6",
+      "size": 50266219,
+      "mtime_ns": 1785207211569291100
+    },
+    {
+      "name": "TEST 2G.savegame.sav",
+      "sha256": "efb293e26fbee5e21b7a2b56fa11520b3f3c21f7e08dddca7072b432d23a97c8",
+      "size": 53144205,
+      "mtime_ns": 1785334823571793500
+    },
+    {
+      "name": "TEST 2H.savegame.sav",
+      "sha256": "c4022ae146ff57f3897be9da089c184b5d3aa1f9a9495563ee19c25c274d4f24",
+      "size": 54475143,
+      "mtime_ns": 1785427342889721800
+    },
+    {
+      "name": "TEST 2I TEST.savegame.sav",
+      "sha256": "3720150e520f66a1aae36b5013ff0d366bd24c5e8955446da189581719f77d49",
+      "size": 54787371,
+      "mtime_ns": 1785617631499369700
+    },
+    {
+      "name": "TEST 2I TEST2.savegame.sav",
+      "sha256": "6bae915640247bac313095c32ebede595604d731438c4677b270bd4fbef4a505",
+      "size": 54597170,
+      "mtime_ns": 1785619305918369000
+    },
+    {
+      "name": "TEST 2I TEST3.savegame.sav",
+      "sha256": "a61336538d84115037bab243d91fdfd7720d39cc7fe215cf95134ddfbbb6b127",
+      "size": 54637709,
+      "mtime_ns": 1785619479210398000
+    },
+    {
+      "name": "TEST 2I TEST4.savegame.sav",
+      "sha256": "e12612cb3a327ae0fa0ebe2ba65b4197d6ed289789594cc8e6c5ea6acbc99fb0",
+      "size": 54747192,
+      "mtime_ns": 1785620078551866900
+    },
+    {
+      "name": "TEST 2I.savegame.sav",
+      "sha256": "9d5e7b32b2c472a06c5899153a5e77ee33fa93b6f1f5c73c40ecba48c9cfd2d0",
+      "size": 54692916,
+      "mtime_ns": 1785512550920006000
+    },
+    {
+      "name": "TEST2 AST.savegame.sav",
+      "sha256": "531321f4123a17ad617fd2e9900843babf2bcfa06a7e4199cd1afdc541601f14",
+      "size": 50143577,
+      "mtime_ns": 1786551315357574800
+    },
+    {
+      "name": "Test2 I.savegame.sav",
+      "sha256": "921b0983b3ee715a9dd63d5bfd700e3ad5e632e3ba31a0f6fa2963a56d3ff7cf",
+      "size": 55955770,
+      "mtime_ns": 1786898395305021700
+    },
+    {
+      "name": "test2 J.savegame.sav",
+      "sha256": "ba4c56c538e009a7d469644286522cbe42ea8b3736e14ed1fc949723de204db1",
+      "size": 54715709,
+      "mtime_ns": 1785779010739248400
+    },
+    {
+      "name": "TEST2H TRAIN.savegame.sav",
+      "sha256": "e2b2c9682ffe7ce41c49e9e10e9982d4f9654f528e051d5b325eba3cb9d4acb9",
+      "size": 55667524,
+      "mtime_ns": 1785810108356842800
+    },
+    {
+      "name": "TestE.savegame.sav",
+      "sha256": "8e2512c51444fa2f7a1541239d3f079f88a167d401fbbf7e7c43b701a49f89e8",
+      "size": 49865622,
+      "mtime_ns": 1785180845925776600
+    },
+    {
+      "name": "TestF.savegame.sav",
+      "sha256": "98492abca5d3ff8ec7568bc321d0e4058639a7d5fb694e070d2dc35d349123bc",
+      "size": 50088426,
+      "mtime_ns": 1785188596744962000
+    },
+    {
+      "name": "track test.savegame.sav",
+      "sha256": "12cc598f9a0c6cdd92387c609d375de28661765986439ce2d77f17a7519bca0d",
+      "size": 31080101,
+      "mtime_ns": 1789001499701094400
+    },
+    {
+      "name": "U1C0PROOF.savegame.sav",
+      "sha256": "d7847980a11c14dd780726132fe985e5cb8604754648de2cc3dfc5b35e060383",
+      "size": 54328798,
+      "mtime_ns": 1785875882000000000
+    },
+    {
+      "name": "U1C1HEAL.savegame.sav",
+      "sha256": "39752363601579ee3d9cbd894f00143cbf001eb24bacb3c57108abec96ddce26",
+      "size": 54337731,
+      "mtime_ns": 1785876435000000000
+    },
+    {
+      "name": "U1C2PT35.savegame.sav",
+      "sha256": "46be96a06743835af29346190836c5cc5c2fee82acabd4d009325631387660f8",
+      "size": 54297340,
+      "mtime_ns": 1785877434000000000
+    },
+    {
+      "name": "U1C6FORCED.savegame.sav",
+      "sha256": "8bce4b05d828e9bf5cb622a2c47eb9d61471966528a49f4e234169050a401cf6",
+      "size": 54294242,
+      "mtime_ns": 1785878742000000000
+    },
+    {
+      "name": "U1C6HEALED.savegame.sav",
+      "sha256": "2ec9ce58ae243002bb492edc1aaaa3482815fc06d38f9c435dd1ae9208c64db6",
+      "size": 54350030,
+      "mtime_ns": 1785878763000000000
+    },
+    {
+      "name": "U1STAGE.savegame.sav",
+      "sha256": "e2b2c9682ffe7ce41c49e9e10e9982d4f9654f528e051d5b325eba3cb9d4acb9",
+      "size": 55667524,
+      "mtime_ns": 1785810105000000000
+    },
+    {
+      "name": "U2RT1.savegame.sav",
+      "sha256": "6d6d492515b6b40d2a900bd8750fa34ee59eb392554a4c6d8f7ae15bf37bc321",
+      "size": 54349540,
+      "mtime_ns": 1786428113000000000
+    },
+    {
+      "name": "U2RT2.savegame.sav",
+      "sha256": "9c778041ec0879203724ad930bf6b246c94993a4e8f40c62db182c5286372fb8",
+      "size": 54384956,
+      "mtime_ns": 1786428135000000000
+    },
+    {
+      "name": "U2STAGE.savegame.sav",
+      "sha256": "efb125d960298ff1c0dc14628aefb4516ad22dcc8af1047d7ceb2fabfab93a74",
+      "size": 54424001,
+      "mtime_ns": 1786396444000000000
+    },
+    {
+      "name": "USA Sol 18.savegame.sav",
+      "sha256": "eff8a6f96c99e34d2fba685cd3ce9389df4daf9b375a582a42ab40c3d4bcbb5f",
+      "size": 29940968,
+      "mtime_ns": 1788899933062781200
+    },
+    {
+      "name": "USA Sol 2.savegame.sav",
+      "sha256": "d809361d264eae4285f33903c4900d888747935e98a1e36428062b4a920bee4a",
+      "size": 47799136,
+      "mtime_ns": 1785020630538319700
+    },
+    {
+      "name": "USA Sol 22.savegame.sav",
+      "sha256": "4523ca246686a5c4315c1053709e478f830694b17cec1925feeef68ecfd0f918",
+      "size": 30099844,
+      "mtime_ns": 1789056737993876900
+    },
+    {
+      "name": "USA Sol 298.savegame.sav",
+      "sha256": "b5da3953de13ce3a5f0fe6250ad0aefcc0cd5267c17b8c84e97a5e2150894252",
+      "size": 54773364,
+      "mtime_ns": 1785620518576516200
+    },
+    {
+      "name": "USA Sol 3.savegame.sav",
+      "sha256": "c18acc70f25f85c3f42deab04382dbc63a777a5f2271b94320530b22b216e267",
+      "size": 48874049,
+      "mtime_ns": 1785018550468918200
+    },
+    {
+      "name": "USA Sol 302.savegame.sav",
+      "sha256": "44c100563a4ff2e90ddb5503403122740728506317972e49fe1dde618a83c7ff",
+      "size": 54842984,
+      "mtime_ns": 1785621348626597000
+    },
+    {
+      "name": "USA Sol 31.savegame.sav",
+      "sha256": "98c1797facbcba4f03c0ea28d682904b3672125c2f918c11870a4c3790ec68af",
+      "size": 30087868,
+      "mtime_ns": 1789065965372245200
+    },
+    {
+      "name": "USA Sol 32.savegame.sav",
+      "sha256": "183dc4743fe399a38f44e40513deac16c330856ce4cb21272f13e9f164b1f65f",
+      "size": 30183794,
+      "mtime_ns": 1789072303198184700
+    },
+    {
+      "name": "USA Sol 35.savegame.sav",
+      "sha256": "344db6d2490816740097ab6a73e5e44f2750f9777238a1f1e40a9950cd4134b4",
+      "size": 30324777,
+      "mtime_ns": 1789073939618315300
+    },
+    {
+      "name": "USA Sol 47.savegame.sav",
+      "sha256": "6baf0e8db9e10afb3518c30fe25bb5dfe0c566dba36081397fdb850546905d3c",
+      "size": 30348516,
+      "mtime_ns": 1789153798247900700
+    },
+    {
+      "name": "USA Sol 55.savegame.sav",
+      "sha256": "3454bd56eb541c5d3ce8d198c5e0354b47e97599940884e1bac5731107c8ba98",
+      "size": 48137979,
+      "mtime_ns": 1785085680188039700
+    },
+    {
+      "name": "USA Sol 59.savegame.sav",
+      "sha256": "b98150c0498496b3fd3314fa13e8dfc9dcf7e6025932467c9824089eec89b782",
+      "size": 48350104,
+      "mtime_ns": 1785088675326331900
+    }
+  ],
+  "designated_copy": "C:\\Users\\stkot\\Saved Games\\Surviving Mars Relaunched\\76561198020568696\\STILLNEEDED_F46.savegame.sav",
+  "testkit_metadata_sha256": "9eaee43ba86ff1e0731c17bc4997928648ad63d3a8413f405665a8f0a6f18f76",
+  "source_manual": "USA Sol 47.savegame.sav",
+  "copy_sha256": "6baf0e8db9e10afb3518c30fe25bb5dfe0c566dba36081397fdb850546905d3c"
+}

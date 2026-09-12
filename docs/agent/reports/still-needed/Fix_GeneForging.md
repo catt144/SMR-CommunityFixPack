@@ -3,7 +3,7 @@
 Agent `/root` (coordinator's local review), 2026-09-12, anchor `2983fac`.
 **KEEP.** The current vanilla rare-weight helper still ignores Gene Forging.
 Record freshness: F41's historical "have only" limit is no longer the current
-call topology; 1.1.0 GetRandomTrait itself supplies the missing default bonus.
+call topology; 1.1.0 GetRandomTrait itself calls the helper for its default rare weight.
 This broadens the helper's consumers and does not make the module redundant.
 
 | module | entry | applies? | consumer still reads it? | row true? | bullet true? | verdict | evidence file:line on 1.1.0.403908 | basis | what I did NOT check |

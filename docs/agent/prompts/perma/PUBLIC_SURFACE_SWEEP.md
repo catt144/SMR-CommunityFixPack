@@ -11,6 +11,15 @@ reads, and a fix missing from any of them is a fix nobody knows about.
 
 ## 0 · Before you touch anything
 
+**Held follow-through, 2026-09-12 — still-needed sweep (ck156).**
+All 46 modules reviewed; proposed F37/F43 retirement and 14 retained-claim
+corrections are **not applied**. Read `reports/STILL_NEEDED_SWEEP.md` and exact
+`reports/still-needed/SURFACE_PLAN.md`. **TAKEABLE WHEN:** v9 F59/F60 close-out is
+complete and the owner has ruled on retirement/constituency and wording in
+`docs/PLAYTEST_CHECKLIST.md` item156. Then run this whole sheet, including every
+card copy/intro/category/count, and use RELEASE_OUTBOX's **Held after-v9** batch.
+Do not consume it in v9 or equate this audit's report push with public publication.
+
 1. `python tools/doccheck.py --emit-counts` — never hand-type a count anywhere.
 2. Read the entry in `agent/bugs/<ID>.md`. The **entry is authority**; store and
    site copy are derived from it, never the other way round.

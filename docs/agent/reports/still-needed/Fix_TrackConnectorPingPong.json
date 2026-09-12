@@ -1,0 +1,49 @@
+{
+  "module": "Fix_TrackConnectorPingPong.lua",
+  "entry": "F66",
+  "applies": "yes — fresh boot reports applied and final direct settled registry read active; no colony or forced-pass cure witness",
+  "consumer": "yes — current GameInit/retry/fixup callers reach replacement; grid, actual-owner endpoint, station/tunnel and direct station-connection readers remain; Done/reclaim/orphan gate paths remain",
+  "row_true": "yes — ordinary unforced competing-building context scopes occupied-connector outcome; sanctioned force and replaceable plain/abandoned elements remain source conditions, with optional isolated-reading ambiguity INFERRED",
+  "bullet_true": "yes — two-train-building fight headline fits current generic guard, with no promise of shared ownership or universally usable routes",
+  "verdict": "KEEP",
+  "evidence": [
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/TrainTransport.lua:11",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/TrainTransport.lua:128",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/TrainTransport.lua:129",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/TrainTransport.lua:138",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/TrainTransport.lua:152",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Buildings/TrackElement.lua:206",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Buildings/TrackElement.lua:355",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/TrainTransport.lua:181",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Buildings/Station.lua:56",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Buildings/Station.lua:932",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Buildings/TrackTunnel.lua:2",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Buildings/TrackTunnel.lua:8",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Buildings/Track.lua:195",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Buildings/Track.lua:199",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Buildings/Track.lua:348",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Buildings/Track.lua:532",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Buildings/StationsLink.lua:78",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Buildings/TrackElement.lua:992",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Buildings/TrackElement.lua:995",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Buildings/Station.lua:1510",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/TrainTransport.lua:22",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/TrainTransport.lua:26",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Buildings/Track.lua:182"
+  ],
+  "basis": "SOURCE",
+  "not_checked": [
+    "Current live shared-hex positions, station/tunnel/direct train routes, repeated rebuild timing or screenshots",
+    "In-play forced fixups, repeated force ordering and cross-platform old-save triggering; no new forced-path grade",
+    "Actual survivor recovery, ruin clearance, concurrent destruction and radius-three coverage of all native or foreign connector spots",
+    "New save/uninstall round trip, pending-thread capture or orphan execution",
+    "Double-turn rules, shared ownership redesign, unrelated salvage rebuild status, exhaustive topology and fresh 1.0.7 runtime"
+  ],
+  "findings": [
+    "No material public disagreement in ordinary competing-building context; force and plain/abandoned exceptions are SOURCE conditions, while optional isolated-reading ambiguity is INFERRED rather than a filed defect",
+    "Current steal branch and owner-rebuild return leg remain; repeated unforced claims stabilize one owner, while force remains sanctioned vanilla behavior",
+    "Direct station connection consumes distinct actual endpoint owners; stopping fight does not grant both buildings ownership of one connector",
+    "Destructor recovery runs at actual Done and can follow vanilla removal of another surviving owner's coincident element; retry/helper paths converge through guarded creator",
+    "Historical PT-41 unforced result and later untested in-play force repair remain separate inherited grades; fresh registry active is installation only"
+  ]
+}

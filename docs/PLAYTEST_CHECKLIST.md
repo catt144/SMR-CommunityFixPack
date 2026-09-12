@@ -29,29 +29,51 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
-### 2026-09-12 — 156: are we still shipping fixes the game no longer needs? One sweep to settle it
+### 2026-09-12 — 156: sweep complete — retirement and wording choices, after v9
 
-> **Your ask, 2026-09-12:** *"I really hate keeping things in there if they are not needed"* — sharpened by the fact
-> that **two Paradox developers are using our fix list to plan their next hotfixes.** That turns a stale row from
-> an embarrassment into **their wasted time**: a row claiming a bug the game already fixed can send a developer to
-> repair something that is not broken. Brief is written and ready: `agent/prompts/STILL_NEEDED_SWEEP.md`.
->
-> **What prompted it — three real cases, all found this week:**
-> - **F60** was kept by hotfix 2 and turned out to need retiring. The fix still worked; what moved was *who reads
->   the number it corrects*. A sweep that only asks "does it still apply?" would miss it again.
-> - **Saint's blessing** self-switches off on 1.1.0 and is **correctly kept** — it still heals affected saves and
->   still works for 1.0.7 players, who get the live pack from the stores. Not every silent module is dead weight.
-> - **The asteroid deposit sign fix** was never re-checked against 1.1.0 at all. It just survived the cull.
->
-> **Decision: do you want this run, and as a chain?** Recommendation: **yes, as a chain** — 46 modules is too many
-> for one sitting, and the honest first step is a cheap pass over all of them to find the handful worth real work.
-> ⚖️ By your own routing a census goes to **Codex/Astra**, not a Claude build session.
->
-> ⛔ **Not part of the v9 upload**, which is finished and waiting on you.
->
-> ⚠️ One thing the brief cannot decide for you: **retire-vs-keep is a who-benefits call and it is yours.** Two live
-> examples pull opposite ways — F60 was removed for changing numbers nothing reads, Saint's blessing was kept for
-> a population (1.0.7 players on the stores) that a 1.1.0-only view would have ignored.
+Your still-needed sweep ran across **all 46 modules** on **1.1.0.403908**:
+**2 retirement recommendations, 0 rebuilds, 30 keeps, 14 claim corrections or
+qualifications**. [Complete evidence/table](agent/reports/STILL_NEEDED_SWEEP.md),
+[exact proposed wording](agent/reports/still-needed/SURFACE_PLAN.md).
+Fresh direct registry read measured **46/46 active**, including Saint's retained
+healing disposition; F102's replacement entity was valid. These are installation
+reads, not cure witnesses. A real Station native control also settled F46's old
+unknown: disabled demand still reported target2500, with exact restoration.
+All 121 original saves remained hash-identical; no temporary probe remains.
+
+Decisions for you:
+
+- **F37 farm oxygen:** recommend retirement for normal 1.1.0 salvage/destruction;
+  vanilla now clears the modifier before removal. This reinforces item150(c).
+  Choose retirement or explicit legacy/orphan-healing retention. Refab dying-worker
+  and custom removal residuals are unmeasured, not verified defects.
+- **F43 layout filter, with F118 rider:** recommend retirement on stable normal
+  1.1.0 menu/shortcut admission; vanilla now gates research and owned prefabs
+  outside it. Choose retirement or named 1.0.7/custom/cached-race retention.
+  It is no longer justified as a current defect hidden only by shipped numbers.
+- **Retained scope:** approve historical/dormant F40 prevention plus existing-carrier
+  healing, F48 affected-save latch healing despite corrected vanilla migration,
+  and F31 argument guards as insurance rather than an unconfirmed stopped-story
+  account; or commission a different who-benefits decision. Saint's existing
+  historical/1.0.7 ruling remains; its row only needs dome/Religious scope.
+- **Wording batch:** approve the linked 14 corrections/qualifications, including
+  obsolete train Comfort benefit, drones called colonists, ordinary-foot reservation
+  cleanup, bounded Crystal/Extender outcomes and available-passage wording.
+  The F52 headline change is an inferred precision recommendation, not a new defect.
+
+**Nothing is retired or rewritten publicly yet. Not part of v9's F59/F60 upload.**
+The review is queued in PUBLIC_SURFACE_SWEEP and RELEASE_OUTBOX as **Held after-v9**.
+Takeable after that close-out and your ruling. Retiring both predicts 49 ->47 rows
+and 46 ->44 modules; final release counts must be rederived. Current hidden-repair
+claim supports **two** rows rather than three; judgment rows still three, Lake veto
+key still ships, and seven-machine wording remains true. Broad current suite,
+actual F46 unloading and named in-play/save/legacy residuals remain unmeasured.
+
+Required owner report warning (STATE was left untouched):
+
+```
+warn STATE.md is 12991 bytes, warn threshold is 12288 — copy this line VERBATIM into the owner report; the owner fires agent/prompts/perma/STATE_EVICTION.md
+```
 
 ### 2026-09-11 — 155: v8 went live this afternoon with no close-out — one receipt from you · v9 is READY TO UPLOAD
 

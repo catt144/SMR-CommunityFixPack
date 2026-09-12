@@ -83,3 +83,32 @@ Both logs also contain Braze network diagnostics (second `:166`, `:169`, `:171`,
 
 Each sequence appears twice. They are preserved as reported SDK failures; this
 sweep did not establish their cause or alter network/SDK configuration.
+
+
+## Additional bounded F46 native premise control - 2026-09-12
+
+Parked/committed plan before arming: `F46_NATIVE_PLAN.md`, payload and harness
+manifest in this directory. Retail launch 01:00:26, complete archive
+`docs/archive/logs/stillneeded_f46_Mars.exe-20260912-01.00.26-6a91a190.log`, SHA256
+`a24941a12a7ae1269a62a65587c6fd829405f5be983dc6b69635b3feac4260db`.
+:53 measures 1.1.0.403908, :217 reports copied colony loaded in 7364 ms. No speed
+change, actual unloading, route execution, new object, suite or save write.
+
+MEASURED real Station Concrete request userdata:
+:223 baseline flags1548 enabledtrue actual2500 target2500;
+:224 AddFlags(rfSuspended65536) flags67084 enabledfalse actual2500 target2500;
+:225 cleared and :226 SetFlags-restored reproduce exact baseline;
+:227 control and independent restore both true. Positive suspended native cap
+settles the F46 premise that was previously explicitly unestablished. Lua still
+reads it in Train UnloadAll; actual dumping and cured routing remain unobserved.
+
+Backup inventory `F46_SAVE_BACKUP.json`: 121 original saves, 5,964,340,606 bytes,
+externally copied with hashes/mtime before launch. Result `F46_NATIVE_RESULT.json`:
+all originals hash-verified unchanged, zero rotated originals and zero additional
+saves, designated copy removed. External recovery backup remains under
+`C:/Dev/tmp/stillneeded-f46-backup-20260912`.
+Harness disarm passed. TestKit metadata SHA256 restored to
+`9eaee43ba86ff1e0731c17bc4997928648ad63d3a8413f405665a8f0a6f18f76`, tree clean.
+All temporary Code hits removed; no game remains running. Graceful quit/WM_QUIT
+and complete Debug::Done footer at log end. This control adds no tested-attended
+status and transfers no cure coverage to F114 or other modules.
