@@ -38,8 +38,9 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   Field: 3 working (one 10xx), 1 failing (GTX 1070, log requested). Chain `prompts/fixtoggles/` (ck148, DEFERRED 09-12).
   Owner OWES: ck157 (C89 reply + dev route) · ck151 (b)/(c) · ck144 (a) v7 boot. ✅ ck162 FULLY RULED 09-12 (all four §4 loose ends shut;
   C87 file-and-watch, 133(5) closed with 73 — reopens only if false-blame reports recur) · ✅ ck164 KEEP (F48 pass stays; `Tracks.lua` now pinned).
-  ✅ ck163 RULED all four 09-12: (a) CLOSED ck137/138/140/141/142 + C80 cand→closed · (b) desk session commissioned · (c) after-patch
-  procedure BINDING `WORKFLOW.md:156` · (d) BUILT, bodycheck **0 NO-MANIFEST** (was 2) and it surfaced ck164 (F48's defect is vanilla-fixed).
+  ✅ ck163 RULED all four 09-12: (a) CLOSED ck137/138/140/141/142 + C80 cand→closed · (b) desk session commissioned · (c) after-patch procedure BINDING
+  `WORKFLOW.md:156` · (d) BUILT, bodycheck **0 NO-MANIFEST** (was 2), surfaced ck164 · **(b) RAN + FOUND NOTHING** (`reports/PINNED_PARENTS_PASS.md`:
+  7/7 rows clean, Residence re-composed not re-scoped, Station row a line-shift FALSE POSITIVE; option (ii) NOT triggered).
   ✅ ck152 (c) CLOSED 09-12: the kick button is DESIGN (hint promises evict only; closing the slot is a documented 2nd click).
   vanillahunt CLOSED 09-10 (99): instruments SOUND WITH STATED GAPS — 1,281 table-level hunks in 368 rowed hand files listed by
   no instrument (§1.4); 12 P2s re-derived: 6 hold, 5 weakened, **C80 REFUTED**; **C82** filed by the audit (Incident reactors stay

@@ -111,7 +111,7 @@ completed tests move whole to
 > ⛔ Whoever reads that verdict next: **do not "repair" it by rewriting the regex** — the manifest says
 > so in place, and this item is why.
 
-### ✅ 2026-09-12 — 163 RULED BY YOU: **all four — (a) accept · (b) yes · (c) confirm · (d) yes.** Items 137/138/140/141/142 CLOSE with (a); (d) is BUILT and surfaced a new call (**164**). **Nothing is owed from you here.**
+### ✅ 2026-09-12 — 163 RULED BY YOU: **all four — (a) accept · (b) yes · (c) confirm · (d) yes.** Items 137/138/140/141/142 CLOSE with (a); **(b) RAN AND FOUND NOTHING** (`reports/PINNED_PARENTS_PASS.md`); (d) is BUILT and surfaced a new call (**164**). **Nothing is owed from you here.**
 
 > ✅ **RULED BY YOU 2026-09-12 — all four: (a) accept · (b) yes · (c) confirm · (d) yes.**
 > **Nothing is owed from you here.** The original ask is kept below as the reasoning you ruled on.
@@ -125,8 +125,31 @@ completed tests move whole to
 > ⭐ **Done on the back of it:** [C80](agent/bugs/C80.md)'s status flip, which the disposition flagged
 > as owed and unowned — its entry said REFUTED while its index row still said `cand`.
 >
-> **(b) YES — the bounded desk session is commissioned.** One session, no game, no play time, on the
-> 29-of-51 overlap `bodycheck` cannot see. ⛔ It is a READ: it files candidates, it does not build.
+> **(b) ✅ YES — COMMISSIONED, RUN AND FINISHED THE SAME DAY. Nothing found; nothing owed.**
+> Report: `agent/reports/PINNED_PARENTS_PASS.md`. **All seven rows resolved, no defect filed, no `Code/`
+> change, no game launched.** ⛔ **Option (ii) is NOT triggered** — §1b's own rule is *"do it only if (i)
+> finds anything"*, and (i) found nothing. Option (iii) stays recommended against.
+> - **`Unit` + `BaseBuilding` gaining `ReactionObject`** — the two the report flagged hardest, being the
+>   base classes of every colonist and every building: **12 methods, zero collisions** with our 83 hooked
+>   names, and it defines no `Init`/`GameInit`/`Done`, so it never enters the composition chain.
+> - **`WaterExtractor` + `ContinuousOps`** clean · **`Farm` losing `InteriorAmbientLife`** clean (deleted
+>   tree-wide, provided two decorative methods, we touch neither) · **`Fireflies`** clean and strictly
+>   additive.
+> - **`Residence`** — the row the report left ⚠️ UNSETTLED, and our biggest exposure (4 Residence hooks +
+>   6 `Building` hooks): **resolved.** `Building` moved from a transitive ancestor to a direct parent and
+>   the stats parent was swapped — but `Building` is in the ancestry in **both** trees, and our four
+>   Residence methods are defined on `Residence` itself. **Re-composed, not re-scoped.**
+> - ⛔ **The `Station` row was a FALSE POSITIVE**, wrong in both halves: the class is not new (it is in
+>   1.0.7 at `:7`, moved to `:9`) and its parent is not `Door` (it is `BuildingEntityClass`; the `Door`
+>   classes are two different, also pre-existing, blocks nearby). **A pure line-shift artefact.**
+>
+> ⭐ **The useful output is about the instrument, not the game.** The classifier reports blocks that merely
+> *moved* as new, and attributes `__parents` across adjacent blocks. So the `TABLE-HUNK` list `treediff` is
+> meant to grow (`HUNT_AUDIT` §8 item 2) **must compare content between trees, not position**, or it will
+> spend reader attention on rows containing no change at all.
+> ⚠️ **And the cost estimate was wrong in your favour:** priced at one desk session, it took about fifteen
+> tool calls, because the decisive question is a **set intersection, not a reading task**. ⛔ Do not budget
+> the next pass of this kind as a reading pass.
 >
 > **(c) CONFIRMED — and nothing further added to the after-patch step.** `bodycheck` + `sigcheck` on
 > every patch (binding, `WORKFLOW.md:156`); `treediff` + `presetdiff` on trigger, never retired. The

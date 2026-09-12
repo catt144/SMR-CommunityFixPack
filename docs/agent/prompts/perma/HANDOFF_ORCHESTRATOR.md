@@ -86,8 +86,6 @@ RULE**. ⛔ **Re-derive every count once, carry none:** modules ±the retirement
 | ck | what |
 |---|---|
 | **158** | the three-leg sitting above — **the v10 gate** |
-| **163** | the vanilla diff, four calls: (a) the 25 source-only candidates as GROUPS — **closes ck137/138/140/141/142 in one ruling** · (b) one bounded desk pass on the 29-of-51 overlap · (c) the instruments' schedule · (d) the two NO-MANIFEST modules. Nothing needs play |
-| **162** | the four §4 loose ends: three one-word calls + the 2-minute lake check. See §4 |
 | **157** | (a) post the C89 reporter reply · (b) route the developer note — ⚠️ that report came through **our** channel, so the route is the fix list the devs plan from, or the Building Codes thread |
 | **151** | (b) which sections of `MIGRATION_DEV_REPORT.md` may be sent · (c) which checks join the ck144 (a) sitting |
 | **144 (a)** | the owed post-upload boot, ONE boot, now on v8 (STATE's OWED line carries the recipe list) |

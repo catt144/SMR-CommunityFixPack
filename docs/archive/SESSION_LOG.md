@@ -8,6 +8,62 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-12 — 163 (b) ran and found nothing; the Residence row resolved, and the Station row was a line-shift false positive
+
+tags: ck163b pinned-parents ReactionObject Residence Station false-positive treediff TABLE-HUNK cost-estimate
+
+Commissioned by the owner's 163 (b) ruling, then run the same day rather than briefed out, because pricing
+it revealed the work was mechanical. Report: `reports/PINNED_PARENTS_PASS.md`. No game, no `Code/` change,
+nothing re-pinned, no defect filed. doccheck GREEN.
+
+**⭐ The estimate was the finding.** `VANILLA_DIFF_DISPOSITION.md` §1b priced option (i) at one desk session,
+assuming a reading pass. It took about fifteen tool calls. **The decisive question is a set intersection, not
+a reading task:** "does a new parent change what our hooks see?" decomposes into *does it define a method
+name we hook* (lookup re-routing) and *does it define `Init`/`GameInit`/`Done`* (composition, `EF-058`/
+`EF-066`) — both greps against two generated lists. Reading was needed only where a test came back positive
+or a row was unsettled. ⛔ Do not budget the next pass of this kind as a reading pass.
+
+**All seven rows clean.** Our surface harvested as 100 `(class, method)` target lines / **83 distinct method
+names**. `ReactionObject` — added to `Unit` and `BaseBuilding`, the two rows the report flagged hardest as
+the base classes of every colonist and every building — defines 12 methods, **zero** colliding with our 83,
+and no `Init`/`GameInit`/`Done`, so it never enters the composition chain. `ContinuousOps` onto
+`WaterExtractor`: 7 methods, zero collisions. `Farm` losing `InteriorAmbientLife`: confirmed deleted
+tree-wide (definition located in 1.0.7 first, then absence confirmed — not inferred from the old name missing
+in one file), it provided exactly two decorative methods and we reference neither. ⚠️ Checked as live, not
+waved off: `Fix_GhostFarmOxygen` is **still shipping** — ck156's retirement is staged for v10, not landed.
+`Fireflies`: the re-parented class is `FlowerLamp`, and `DecorationService = { "Decoration", "Service" }` is
+**strictly additive**.
+
+**⭐ The `Residence` row — the report's ⚠️ UNSETTLED one, and our largest exposure (4 Residence hooks + 6
+`Building` hooks) — resolved in two greps.** 1.0.7: `{ "StatsChange", "Holder" }` with
+`StatsChange.__parents = { "StatsChangeBase", "Building" }`. 1.1.0: `{ "StatValues", "Building", "Holder" }`
+with `StatValues.__parents = { "PropertyObject" }`. ⇒ **`Building` moved from a transitive ancestor to a
+direct parent** and the stats parent was swapped for one that no longer drags it along. `Building` is in the
+ancestry in **both** trees, and our four Residence targets are defined on `Residence` itself, so lookup
+resolves them first either way. **Re-composed, not re-scoped.** Residual named, not measured: resolution
+*order* changed and `StatsChangeBase` left the ancestry (we hook nothing in either).
+
+**⛔ The `Station` row was a FALSE POSITIVE, wrong in both halves.** Published as *"new
+`DefineClass.TrainStationDepotCCP3`, `__parents = {"Door"}`"*. It is **not new** — 1.0.7 `Station.lua:7`,
+1.1.0 `:9`, and 1.0.7's own `:1084` references it, so it was live code — and its parent is
+**`BuildingEntityClass`**, not `Door`. The `{"Door"}` classes are `TrainStationDoorCCP3` and
+`TrainStationLargeDoor1CCP3`, two different blocks nearby, **both also present in 1.0.7**. The row conflated
+adjacent `DefineClass` blocks around a two-line shift. Also recorded: both our `Station` entries are
+**class-existence checks with no `method` field**, so they hook nothing on it.
+
+**⭐ The transferable output is about the instrument, not the game.** The unaccounted-hunk classifier reports
+blocks that merely **moved** as new declarations and attributes `__parents` across adjacent blocks. So the
+`TABLE-HUNK` list `treediff` is meant to grow (`HUNT_AUDIT` §8 item 2) **must compare content between trees,
+not position**, or it will spend reader attention on rows containing no change at all — as this one did, at
+the highest per-row cost of the seven.
+
+⇒ **Option (ii) is NOT triggered** — §1b's rule is "do it only if (i) finds anything", and (i) found nothing.
+Option (iii) stays recommended against. ⛔ Scope stated in the report so no wider clearance is read out of
+it: this is a name-collision and composition test, over 7 rows, not the 157 hunks in the 29 pinned files and
+not the ≥1,281 tree-wide.
+
+---
+
 ## 2026-09-12 — the owner ruled 163 and most of 162; five items closed on one word, and the manifest lines paid for themselves in minutes
 
 tags: ck163 ck162 ck164 F48 C80 bodycheck manifest SaveSanitizer hotfix-3 disposition
