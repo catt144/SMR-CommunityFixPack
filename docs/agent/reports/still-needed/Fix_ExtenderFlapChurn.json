@@ -1,0 +1,34 @@
+{
+  "module": "Fix_ExtenderFlapChurn.lua",
+  "entry": "F77",
+  "applies": "yes: direct final registry line 263 active",
+  "consumer": "yes: working edges still rebuild the root requester set; removal still sends matching drones to Idle",
+  "row_true": "partial: one interruption requires events inside the two-second coalescing window; spaced edges still each rebuild",
+  "bullet_true": "yes: defect headline is supported; registered title overstates removal of all rebuilds",
+  "verdict": "KEEP-BUT-FIX-CLAIM",
+  "evidence": [
+    "1.1.0.403908 Lua/Buildings/DroneHubExtender.lua:109",
+    "1.1.0.403908 Lua/Buildings/DroneHubExtender.lua:114",
+    "1.1.0.403908 Lua/Buildings/DroneHubExtender.lua:147",
+    "1.1.0.403908 Lua/Buildings/DroneHubExtender.lua:156",
+    "1.1.0.403908 Lua/Buildings/DroneHubExtender.lua:184",
+    "1.1.0.403908 Lua/Buildings/DroneHubExtender.lua:186",
+    "1.1.0.403908 Lua/Buildings/DroneControl.lua:387",
+    "1.1.0.403908 Lua/Buildings/DroneControl.lua:500",
+    "1.1.0.403908 Lua/Buildings/DroneControl.lua:784",
+    "1.1.0.403908 Lua/Buildings/DroneControl.lua:790",
+    "1.1.0.403908 CommonLua/TaskRequest.lua:164",
+    "1.1.0.403908 CommonLua/TaskRequest.lua:167"
+  ],
+  "basis": "SOURCE",
+  "not_checked": [
+    "Organic current extender working-flap interruptions and exact throughput gain",
+    "Gathered orphan drone behavior during the two-second stale-registration window",
+    "Current save/load during debounce, uninstall orphan gate, enable/reload and 1.0.7 runtime"
+  ],
+  "findings": [
+    "Site :215-217 omits the two-second grouping condition; working edges separated by more than that window still cause separate interruptions",
+    "Registered title promises no whole-hub rebuild, while the module intentionally runs one delayed full rebuild",
+    "F77 opening entry incorrectly says blocked game-time debounce threads are not persisted; current module and EF-023 already correct this"
+  ]
+}

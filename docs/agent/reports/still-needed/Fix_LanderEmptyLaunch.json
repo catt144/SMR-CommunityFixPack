@@ -1,0 +1,26 @@
+{
+  "module": "Fix_LanderEmptyLaunch.lua",
+  "entry": "F67",
+  "consumer": "yes: CmdLoad and flight policy call IsCargoReady before loading end/departure",
+  "row_true": "yes: empty request still ready inside noninstant normal auto wait window after one-hour minimum",
+  "bullet_true": "yes: automatic empty-launch symptom maps to retained row",
+  "verdict": "KEEP",
+  "evidence": [
+    "1.1.0.403908 Lua/UniversalRocket.lua:500",
+    "1.1.0.403908 Lua/UniversalRocket.lua:554",
+    "1.1.0.403908 Lua/UniversalRocket.lua:558",
+    "1.1.0.403908 Lua/UniversalRocket.lua:2106",
+    "1.1.0.403908 Lua/UniversalRocket.lua:2110",
+    "1.1.0.403908 Lua/CargoTransporterNew.lua:1305"
+  ],
+  "findings": [
+    "Current vanilla minimum one-hour automode delay applies in IsCargoReady on both sides; header/oldentry only-asteroid brake prose is stale, without changing retained defect"
+  ],
+  "not_checked": [
+    "Organic current auto-lander empty request and live gate/timer dwell on both sides",
+    "Current cargo/passenger and instant/special-mode controls, actual fuel waste",
+    "Current behavior firing, menu enable/reload, save/load/uninstall,1.0.7 runtime"
+  ],
+  "applies": "yes: direct final registry line 227 active",
+  "basis": "SOURCE"
+}

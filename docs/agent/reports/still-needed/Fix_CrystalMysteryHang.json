@@ -1,0 +1,28 @@
+{
+  "module": "Fix_CrystalMysteryHang.lua",
+  "entry": "F06, F103",
+  "consumer": "yes: scenario waits for CrystalFlyAway after player popup before MysteryEnd",
+  "row_true": "partial: original race remains; cure is bounded ten sols and cannot guarantee every arbitrarily late popup answer",
+  "bullet_true": "partial: headline symptom supported; registered never-hang title omits ten-sol bound",
+  "verdict": "KEEP-BUT-FIX-CLAIM",
+  "evidence": [
+    "1.1.0.403908 Lua/Mysteries/Crystals.lua:67",
+    "1.1.0.403908 Lua/Mysteries/Crystals.lua:69",
+    "1.1.0.403908 Lua/Mysteries/Crystals.lua:70",
+    "1.1.0.403908 Lua/Scenario/Mystery 10.generated.lua:243",
+    "1.1.0.403908 Lua/Scenario/Mystery 10.generated.lua:271",
+    "1.1.0.403908 Lua/Scenario/Mystery 10.generated.lua:277"
+  ],
+  "findings": [
+    "Public after-fix promise covers any late answer, but module repeater stops after ten sols; narrow guarantee to actual repeated-message window",
+    "F103 duplicate restored-thread lineage remains known/unrepaired, not reopened or promoted by this sweep"
+  ],
+  "not_checked": [
+    "Current organic PhilosopherStone finale and late-popup race",
+    "Live late answer beyond ten-sol window, repeated-message cure and historical probe",
+    "F103 restored-thread duplication, orphan/uninstall gate or current save/load",
+    "Menu enable/reload,1.0.7 runtime and other mystery completion routes"
+  ],
+  "applies": "yes: direct final registry line 239 active",
+  "basis": "SOURCE"
+}

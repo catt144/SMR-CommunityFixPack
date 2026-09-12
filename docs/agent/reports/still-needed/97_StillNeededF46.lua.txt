@@ -1,0 +1,75 @@
+-- TEMPORARY: still-needed native F46 premise control; copied manual save only.
+SN46 = {}
+function SN46.Read()
+  local function log(s) ModLog("[STILLNEEDED_F46] " .. s) end
+  local city, suspended = MainCity, const and const.rfSuspended
+  if not city or not city.labels or type(suspended) ~= "number" then
+    log("NO_FIXTURE no city/flag"); return
+  end
+  local picked, resource, req
+  for _, st in ipairs(city.labels.Station or {}) do
+    if IsValid(st) and st.demand and type(st.IsResourceEnabled) == "function" then
+      for _, res in ipairs({"Concrete", "Metals", "WasteRock"}) do
+        local candidate = st.demand[res]
+        if type(candidate) == "userdata" then
+          local ok, eligible = pcall(function()
+            return type(candidate.GetFlags) == "function" and type(candidate.SetFlags) == "function"
+              and type(candidate.AddFlags) == "function" and type(candidate.ClearFlags) == "function"
+              and st:IsResourceEnabled(res) and not candidate:IsAnyFlagSet(suspended)
+              and candidate:GetTargetAmount() > 0
+          end)
+          if ok and eligible then picked, resource, req = st, res, candidate; break end
+        end
+      end
+      if req then break end
+    end
+  end
+  if not req then log("NO_FIXTURE no real Station with enabled positive native demand"); return end
+  local saved_flags, baseline_target = req:GetFlags(), req:GetTargetAmount()
+  local function read(phase)
+    log(phase .. " station=" .. tostring(picked) .. " resource=" .. resource
+      .. " native=" .. type(req) .. " flags=" .. tostring(req:GetFlags())
+      .. " rfSuspended=" .. tostring(suspended)
+      .. " suspended=" .. tostring(req:IsAnyFlagSet(suspended))
+      .. " enabled=" .. tostring(picked:IsResourceEnabled(resource))
+      .. " actual=" .. tostring(req:GetActualAmount())
+      .. " target=" .. tostring(req:GetTargetAmount()))
+  end
+  local ok, err = pcall(function()
+    read("BASELINE")
+    req:AddFlags(suspended)
+    read("SUSPENDED")
+    req:ClearFlags(suspended)
+    read("CLEARED")
+  end)
+  local restored, restore_err = pcall(function()
+    req:SetFlags(saved_flags)
+    read("RESTORED")
+    if req:GetFlags() ~= saved_flags then error("flags failed exact restore") end
+    if req:GetTargetAmount() ~= baseline_target then error("target differs after restore") end
+  end)
+  log("CONTROL ok=" .. tostring(ok) .. " error=" .. tostring(err)
+    .. " restore=" .. tostring(restored) .. " restore_error=" .. tostring(restore_err))
+end
+function SN46.Boot()
+  CreateRealTimeThread(function()
+    Sleep(1000)
+    local deadline = RealTime() + 90000
+    while not GetPreGameMainMenu() do
+      if RealTime() >= deadline then ModLog("[STILLNEEDED_F46] MENU_TIMEOUT"); quit(); return end
+      Sleep(250)
+    end
+    Sleep(5000)
+    local ok, err = pcall(function()
+      ModLog("[STILLNEEDED_F46] LOAD copied USA Sol47; no speed change or save")
+      local load_err = LoadGame("STILLNEEDED_F46.savegame.sav", {})
+      if load_err then ModLog("[STILLNEEDED_F46] LOAD_ERROR " .. tostring(load_err)); return end
+      Sleep(15000)
+      SN46.Read()
+    end)
+    if not ok then ModLog("[STILLNEEDED_F46] ERROR " .. tostring(err)) end
+    Sleep(2000)
+    quit()
+  end)
+end
+SN46.Boot()

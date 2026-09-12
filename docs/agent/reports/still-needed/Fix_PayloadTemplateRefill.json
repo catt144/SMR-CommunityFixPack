@@ -1,0 +1,30 @@
+{
+  "module": "Fix_PayloadTemplateRefill.lua",
+  "entry": "F70",
+  "applies": "yes: direct final registry line 246 active",
+  "consumer": "yes: RetrieveRequests populates GetCargoList, consumed by Apply and transporter CmdLoad; confirmed first-use stamp gates later template reuse",
+  "row_true": "yes: ordinary confirmed payload reuse honors zero; destination picks and tutorial are explicit exceptions",
+  "bullet_true": "n/a: no headline; judgment-call description agrees",
+  "verdict": "KEEP",
+  "evidence": [
+    "1.1.0.403908 Lua/CargoRequestNew.lua:120",
+    "1.1.0.403908 Lua/CargoRequestNew.lua:174",
+    "1.1.0.403908 Lua/CargoRequestNew.lua:191",
+    "1.1.0.403908 Lua/CargoRequestNew.lua:215",
+    "1.1.0.403908 Lua/CargoRequestNew.lua:221",
+    "1.1.0.403908 Lua/CargoRequestNew.lua:226",
+    "1.1.0.403908 Lua/CargoRequestNew.lua:240",
+    "1.1.0.403908 Lua/CargoRequestNew.lua:321",
+    "1.1.0.403908 Lua/CargoRequestNew.lua:371",
+    "1.1.0.403908 Lua/CargoRequestNew.lua:379",
+    "1.1.0.403908 Lua/UniversalRocket.lua:491",
+    "1.1.0.403908 Lua/UniversalRocket.lua:577"
+  ],
+  "basis": "SOURCE",
+  "not_checked": [
+    "Organic 1.1.0 payload zero/refill, confirmation/cancel and destination-pick/tutorial controls",
+    "Current save/load/uninstall of payload flag and real-time blocked Apply thread",
+    "Current behavior probe firing and 1.0.7 runtime"
+  ],
+  "findings": []
+}

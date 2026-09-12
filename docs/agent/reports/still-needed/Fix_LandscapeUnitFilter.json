@@ -1,0 +1,28 @@
+{
+  "module": "Fix_LandscapeUnitFilter.lua",
+  "entry": "F34(d), F115",
+  "consumer": "yes: ClearWasteRock site collects units and ScatterUnitsUnderneath issues ExitImpassable",
+  "row_true": "no: affected Embark units are drones, not colonists; RCCommander route still exists",
+  "bullet_true": "n/a: no dedicated metadata headline; registered title has same colonist overclaim",
+  "verdict": "KEEP-BUT-FIX-CLAIM",
+  "evidence": [
+    "1.1.0.403908 Lua/Landscape/Landscaping.lua:517",
+    "1.1.0.403908 Lua/Landscape/Landscaping.lua:522",
+    "1.1.0.403908 Lua/Landscape/ClearWasteRockConstructionSite.lua:81",
+    "1.1.0.403908 Lua/Buildings/ConstructionSite.lua:1915",
+    "1.1.0.403908 Lua/Buildings/ConstructionSite.lua:1928",
+    "1.1.0.403908 Lua/Units/RCRover.lua:279"
+  ],
+  "findings": [
+    "Site row and registered module title still name boarding colonists; entry has explicitly corrected this to drones since2026-07/08",
+    "F115 entry front/current tag still claims gate-only and no repair, despite hotfix2 recopied/rearmed1.1.0body; append current entry-home note without promoting cure status"
+  ],
+  "not_checked": [
+    "Current live RCCommander drone embark plus landscaping mark and dedup behavior",
+    "Full current Embark-setter and obstruction path inventory across DLC/remaster",
+    "Current landscaping cure and F115 in-play no-throw control, menu enable/reload, save/load/uninstall",
+    "Actual1.0.7 branch decline and runtime"
+  ],
+  "applies": "yes: direct final registry line 249 active",
+  "basis": "SOURCE"
+}

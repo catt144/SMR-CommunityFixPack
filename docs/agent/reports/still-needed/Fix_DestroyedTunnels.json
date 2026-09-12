@@ -1,0 +1,24 @@
+{
+  "module": "Fix_DestroyedTunnels.lua",
+  "entry": "F38",
+  "consumer": "yes: load rebuilds pf tunnel; TraverseTunnel consumes valid ruin links without destroyed guard",
+  "row_true": "yes: destroyed linked objects still regain pathfinding unless corrected",
+  "bullet_true": "yes: destroyed-tunnel shortcut headline supported",
+  "verdict": "KEEP",
+  "evidence": [
+    "1.1.0.403908 Lua/Buildings/Tunnel.lua:193",
+    "1.1.0.403908 Lua/Buildings/Tunnel.lua:204",
+    "1.1.0.403908 Lua/Buildings/Tunnel.lua:212",
+    "1.1.0.403908 Lua/Buildings/Tunnel.lua:261",
+    "1.1.0.403908 Lua/Buildings/TrackTunnel.lua:2",
+    "1.1.0.403908 Data/BuildingTemplate/UniversalTunnel.lua:25"
+  ],
+  "findings": [],
+  "not_checked": [
+    "Current live destroyed tunnel save/quit/load and rover/colonist long route",
+    "Current rebuilt-tunnel control and native pf.AddTunnel/RemoveTunnel behavior",
+    "Current behavior firing, menu enable/reload, save/load/uninstall,1.0.7 runtime"
+  ],
+  "applies": "yes: direct final registry line 242 active",
+  "basis": "SOURCE"
+}

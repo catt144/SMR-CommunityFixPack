@@ -20,49 +20,49 @@ the existing handoff edit is nevertheless excluded from this work.
 
 ## Module reports
 
-- [ ] 90_SaveSanitizer.lua
-- [ ] Fix_AnomalyCaveInMap.lua
+- [x] 90_SaveSanitizer.lua
+- [x] Fix_AnomalyCaveInMap.lua
 - [x] Fix_ArrivalDeaths.lua
-- [ ] Fix_BombardmentSpread.lua
-- [ ] Fix_BrokenTrackSalvage.lua
-- [ ] Fix_CrystalMysteryHang.lua
-- [ ] Fix_DestroyedTunnels.lua
+- [x] Fix_BombardmentSpread.lua
+- [x] Fix_BrokenTrackSalvage.lua
+- [x] Fix_CrystalMysteryHang.lua
+- [x] Fix_DestroyedTunnels.lua
 - [x] Fix_DomeOverviewHighlight.lua
-- [ ] Fix_DroneTransportMinors.lua
-- [ ] Fix_DustSicknessBiorobots.lua
+- [x] Fix_DroneTransportMinors.lua
+- [x] Fix_DustSicknessBiorobots.lua
 - [x] Fix_ExoticDepositSign.lua
-- [ ] Fix_ExtenderFlapChurn.lua
+- [x] Fix_ExtenderFlapChurn.lua
 - [x] Fix_FounderTraitNotification.lua
 - [x] Fix_FreedHousingNotice.lua
 - [x] Fix_GeneForging.lua
-- [ ] Fix_GhostFarmOxygen.lua
+- [x] Fix_GhostFarmOxygen.lua
 - [x] Fix_GraphConsumedCaption.lua
-- [ ] Fix_JumboCaveReinforcementWedge.lua
-- [ ] Fix_LakeEntombment.lua
-- [ ] Fix_LanderEmptyLaunch.lua
-- [ ] Fix_LandscapeUnitFilter.lua
+- [x] Fix_JumboCaveReinforcementWedge.lua
+- [x] Fix_LakeEntombment.lua
+- [x] Fix_LanderEmptyLaunch.lua
+- [x] Fix_LandscapeUnitFilter.lua
 - [x] Fix_LayoutTechLock.lua
 - [x] Fix_MirrorSphereSite.lua
 - [x] Fix_NightShiftWork.lua
-- [ ] Fix_PayloadTemplateRefill.lua
-- [ ] Fix_RocketDroneChurn.lua
+- [x] Fix_PayloadTemplateRefill.lua
+- [x] Fix_RocketDroneChurn.lua
 - [x] Fix_RocketInteractGuard.lua
 - [x] Fix_SaintBlessing.lua
-- [ ] Fix_ScanDowngrade.lua
+- [x] Fix_ScanDowngrade.lua
 - [x] Fix_SequenceLatents.lua
 - [x] Fix_ShelterReflex.lua
 - [x] Fix_ShuttleHubOffAvailable.lua
 - [x] Fix_ShuttleTransportCache.lua
-- [ ] Fix_SilentHitMomentFX.lua
-- [ ] Fix_SinkholeIndestructible.lua
+- [x] Fix_SilentHitMomentFX.lua
+- [x] Fix_SinkholeIndestructible.lua
 - [x] Fix_StaleReservations.lua
-- [ ] Fix_TrackConnectorPingPong.lua
-- [ ] Fix_TrackSalvageRefund.lua
-- [ ] Fix_TrackSalvageWipe.lua
+- [x] Fix_TrackConnectorPingPong.lua
+- [x] Fix_TrackSalvageRefund.lua
+- [x] Fix_TrackSalvageWipe.lua
 - [ ] Fix_TrackTunnelPowerBridge.lua
-- [ ] Fix_TradeRocketFuelRefresh.lua
+- [x] Fix_TradeRocketFuelRefresh.lua
 - [ ] Fix_TrainCargoDumping.lua
-- [ ] Fix_TrainsToVoid.lua
-- [ ] Fix_TrainWaitTime.lua
+- [x] Fix_TrainsToVoid.lua
+- [x] Fix_TrainWaitTime.lua
 - [x] Fix_VacuumWalks.lua
-- [ ] Fix_WispRewards.lua
+- [x] Fix_WispRewards.lua

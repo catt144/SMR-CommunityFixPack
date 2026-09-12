@@ -1,0 +1,25 @@
+{
+  "module": "Fix_BrokenTrackSalvage.lua",
+  "entry": "F45, C55",
+  "consumer": "yes: salvage combined-list sort still reads repair-site node_idx after partial prepass",
+  "row_true": "yes: current repair copy still omits node_idx and midtrack duplicate hex defeats normal restamping",
+  "bullet_true": "yes: damaged-track unsalvageable headline supported",
+  "verdict": "KEEP",
+  "evidence": [
+    "1.1.0.403908 Lua/Buildings/Track.lua:634",
+    "1.1.0.403908 Lua/Buildings/Track.lua:641",
+    "1.1.0.403908 Lua/Buildings/TrackElement.lua:475",
+    "1.1.0.403908 Lua/Buildings/TrackElement.lua:487",
+    "1.1.0.403908 Lua/Tracks.lua:616",
+    "1.1.0.403908 Lua/Tracks.lua:633"
+  ],
+  "findings": [],
+  "not_checked": [
+    "Current midtrack damaged-site salvage and end-break self-heal control",
+    "Native HexGetTrackGridElement duplicate-hex walk and C55 visible connection/assert effects",
+    "Current LoadGame repair-site stamp and healthy numeric controls",
+    "Current behavior firing,menu enable/reload,save/load/uninstall,1.0.7 runtime"
+  ],
+  "applies": "yes: direct final registry line 229 active",
+  "basis": "SOURCE"
+}

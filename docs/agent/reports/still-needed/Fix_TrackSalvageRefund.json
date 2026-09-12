@@ -1,0 +1,24 @@
+{
+  "module": "Fix_TrackSalvageRefund.lua",
+  "entry": "F47",
+  "consumer": "yes: OnDemolish ReturnResources uses replaced getter; partial delete emits returned stamped costs",
+  "row_true": "yes: whole-track one-stamp read and bare partial DoneObject remain",
+  "bullet_true": "yes: card intro stub-based refund example supported; no dedicated headline",
+  "verdict": "KEEP",
+  "evidence": [
+    "1.1.0.403908 Lua/Buildings/Track.lua:291",
+    "1.1.0.403908 Lua/Buildings/Track.lua:271",
+    "1.1.0.403908 Lua/Buildings/Building.lua:1004",
+    "1.1.0.403908 Lua/Buildings/ConstructionSite.lua:2698",
+    "1.1.0.403908 Lua/Buildings/TrackElement.lua:536",
+    "1.1.0.403908 Lua/Buildings/TrackElement.lua:463"
+  ],
+  "findings": [],
+  "not_checked": [
+    "Current whole/partial/trim-empty/mixed/repair salvage stockpile A/B and no-double-refund controls",
+    "Current runtime construction group costs/stamps, freeconstruction fallback and refund rounding",
+    "Current behavior firing,menu enable/reload,save/load/uninstall,1.0.7 runtime"
+  ],
+  "applies": "yes: direct final registry line 257 active",
+  "basis": "SOURCE"
+}

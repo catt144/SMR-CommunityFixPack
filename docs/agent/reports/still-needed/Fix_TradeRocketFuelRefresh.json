@@ -1,0 +1,26 @@
+{
+  "module": "Fix_TradeRocketFuelRefresh.lua",
+  "entry": "F119",
+  "consumer": "yes: live fuel requirement determines cargo status; resized supply/demand drives drones and CmdLoad wait",
+  "row_true": "yes: landed Earth Trade fuel-cost changes still excluded by vanilla player-only modifier callback",
+  "bullet_true": "yes: Earth Trade fuel wedge headline supported",
+  "verdict": "KEEP",
+  "evidence": [
+    "1.1.0.403908 Lua/UniversalRocket.lua:1917",
+    "1.1.0.403908 Lua/UniversalRocket.lua:2633",
+    "1.1.0.403908 Data/FlightPolicyDef.lua:568",
+    "1.1.0.403908 Lua/CargoTransporterNew.lua:1295",
+    "1.1.0.403908 Lua/CargoTransporterNew.lua:1457",
+    "1.1.0.403908 Lua/CargoTransporterNew.lua:1458",
+    "1.1.0.403908 Lua/UniversalRocket.lua:500"
+  ],
+  "findings": [],
+  "not_checked": [
+    "Full current Wildfire mystery cure loop or player stuck save",
+    "Fuel-cost rise and ministry/law/other modifier trigger routes",
+    "Actual1.0.7 runtime, other rocket families and foreign subclasses",
+    "Current TestKit firing, menu enable/reload and additional save/load/uninstall"
+  ],
+  "applies": "yes: direct final registry line 234 active",
+  "basis": "SOURCE"
+}

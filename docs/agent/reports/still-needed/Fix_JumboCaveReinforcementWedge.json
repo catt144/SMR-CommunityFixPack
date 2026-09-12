@@ -1,0 +1,26 @@
+{
+  "module": "Fix_JumboCaveReinforcementWedge.lua",
+  "entry": "F110",
+  "consumer": "yes: rock deletion removes blocker and readiness advances construction to scenario label",
+  "row_true": "yes: drone-proven unreachable rock remains blocker outside vanilla permanent-building cleanup",
+  "bullet_true": "yes: JumboCave waste-rock wedge headline supported",
+  "verdict": "KEEP",
+  "evidence": [
+    "1.1.0.403908 Lua/WasteRock.lua:330",
+    "1.1.0.403908 Lua/Units/Drone.lua:926",
+    "1.1.0.403908 Lua/WasteRock.lua:129",
+    "1.1.0.403908 Lua/Buildings/ConstructionSite.lua:534",
+    "1.1.0.403908 Lua/Buildings/ConstructionSite.lua:631",
+    "1.1.0.403908 Lua/Scenario/BuriedWonder_Jumbo_Cave_106.generated.lua:104",
+    "1.1.0.403908 Lua/WasteRock.lua:182"
+  ],
+  "findings": [],
+  "not_checked": [
+    "Fresh1.1.0 JumboCave geometry producing stranded rock and organic proactive cure",
+    "Current NewHour timing/drone attempt availability and field-save heal",
+    "Current permanent-building cleanup residual incidence and stockpile controls",
+    "Current behavior firing, menu enable/reload,save/load/uninstall,1.0.7 runtime"
+  ],
+  "applies": "yes: direct final registry line 267 active",
+  "basis": "SOURCE"
+}

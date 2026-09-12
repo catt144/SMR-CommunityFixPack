@@ -1,0 +1,53 @@
+{
+  "module": "Fix_TrainsToVoid.lua",
+  "entry": "F64",
+  "applies": "yes — fresh boot reports applied and final direct settled registry read active; no colony demolition or cure witness",
+  "consumer": "yes — inherited station demolition reaches pre-hook, DestroySilent reaches Train.OnDemolish refund and cleanup/notification paths, and returned count is still read by station UI and valid-track assignment",
+  "row_true": "yes — matching docked or mid-leg trains are stored before bare deletion; redeployment capability remains conditional on an eligible surviving or rebuilt route",
+  "bullet_true": "yes — parked-train demolition headline is a narrower covered current_station case",
+  "verdict": "KEEP",
+  "evidence": [
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Demolishable.lua:133",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Demolishable.lua:139",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Buildings/Building.lua:908",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Buildings/Station.lua:293",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Buildings/Station.lua:273",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Units/Train.lua:86",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Units/Train.lua:166",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Units/Train.lua:190",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Units/Train.lua:179",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/CityObject.lua:37",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Colony.lua:842",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Colony.lua:867",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Colony.lua:816",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Colony.lua:830",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/City.lua:481",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/City.lua:475",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Buildings/Station.lua:789",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Buildings/Track.lua:430",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Buildings/Track.lua:436",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Buildings/Station.lua:838",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Buildings/Station.lua:865",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Buildings/Station.lua:587",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Buildings/Station.lua:1093",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Buildings/Station.lua:1117",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Buildings/Station.lua:1208",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Units/Train.lua:372"
+  ],
+  "basis": "SOURCE",
+  "not_checked": [
+    "Live demolition, exact refund delta, notification, UI refresh or successful redeployment",
+    "Loaded passengers or cargo, destroyed-train edges, transit races, callback order and station ruin clearance in play",
+    "Non-demolition destruction, disasters, direct deletion, malformed labels, foreign overrides or enable-after-load wiring",
+    "Track repairs, rebuilt route eligibility, capacity or platform races and unrelated train movement/passenger bugs",
+    "Historical corrupted-save compensation or Train.Done refund guard; neither exists in assigned module",
+    "Fresh 1.0.7 comparison or renewed search for unlocated verbatim field report"
+  ],
+  "findings": [
+    "No material site/card disagreement: station demolition still bare-deletes current_station matches and ordinary Train.Done omits refund",
+    "Legitimate storage path preserves Train prefab before event; counter writes, UI reads and valid-track assignment remain current consumers",
+    "Redeployment needs eligible route; header forever-disabled operational claim is overstated because vanilla can construct replacements",
+    "F64 entry's Train.Done guard and historical compensation are proposals absent from implemented module",
+    "Historical field evidence is family-level only; current boot measures installation, not a new deletion/refund/redeployment cure"
+  ]
+}

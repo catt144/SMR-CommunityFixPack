@@ -1,0 +1,23 @@
+{
+  "module": "Fix_SinkholeIndestructible.lua",
+  "entry": "F96",
+  "consumer": "yes: large meteor calls DestroyBuildingImmediate and instance/class indestructible blocks deletion",
+  "row_true": "yes: row describes set-piece destruction without asserting unproved softlock",
+  "bullet_true": "n/a: no dedicated metadata headline",
+  "verdict": "KEEP",
+  "evidence": [
+    "1.1.0.403908 Lua/BuildingTemplate/Sinkhole.generated.lua:10",
+    "1.1.0.403908 Lua/Buildings/Building.lua:237",
+    "1.1.0.403908 Lua/Buildings/Building.lua:1445",
+    "1.1.0.403908 Lua/Meteors.lua:964"
+  ],
+  "findings": [],
+  "not_checked": [
+    "Current organic StElmo mystery plus large meteor on sinkhole hex",
+    "Current instance own-field overrides and forced destruction control",
+    "Reward-branch dead-object behavior or mystery softlock, full current flag-consumer inventory",
+    "Current behavior firing, menu enable/reload, save/load/uninstall,1.0.7 runtime"
+  ],
+  "applies": "yes: direct final registry line 265 active",
+  "basis": "SOURCE"
+}

@@ -1,0 +1,28 @@
+{
+  "module": "Fix_TrackSalvageWipe.lua",
+  "entry": "F44, F45 rider, F91, F116",
+  "consumer": "yes: player/station split calls decide surviving elements and assigned trains; shells still enter daily TrackBase walk",
+  "row_true": "yes: vanilla curve/short-side branches still demolish entire track and trains",
+  "bullet_true": "yes: one-piece salvage deleting line/trains headline supported",
+  "verdict": "KEEP",
+  "evidence": [
+    "1.1.0.403908 Lua/Buildings/TrackElement.lua:506",
+    "1.1.0.403908 Lua/Buildings/TrackElement.lua:529",
+    "1.1.0.403908 Lua/Buildings/TrackElement.lua:543",
+    "1.1.0.403908 Lua/Buildings/Track.lua:252",
+    "1.1.0.403908 Lua/Buildings/TrackElement.lua:491",
+    "1.1.0.403908 Lua/ResourceTracking.lua:198",
+    "1.1.0.403908 Lua/Buildings/TrackElement.lua:471"
+  ],
+  "findings": [
+    "F116 original unresolved-divergence prose is superseded by owner-ruled hotfix2 rehome/combined processing already present; append entry build-state annotation, no new repair/status promotion"
+  ],
+  "not_checked": [
+    "Current curve/near-end/mass/mixed/repaired/station-build salvage and train-survival A/B",
+    "Current F91 shell cleanup/load heal and C55 connection/assert effects",
+    "F116 rehome/combined processing and skip_process live controls",
+    "Current behavior firing,menu enable/reload,save/load/uninstall,1.0.7 runtime"
+  ],
+  "applies": "yes: direct final registry line 230 active",
+  "basis": "SOURCE"
+}

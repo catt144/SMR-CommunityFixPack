@@ -1,0 +1,24 @@
+{
+  "module": "Fix_BombardmentSpread.lua",
+  "entry": "F26",
+  "consumer": "yes: mystery starts volley; missile position/axis/travel use corrected spawn position",
+  "row_true": "yes: vanilla still discards per-missile elevation direction",
+  "bullet_true": "n/a: no dedicated metadata headline",
+  "verdict": "KEEP",
+  "evidence": [
+    "1.1.0.403908 Lua/Bombardment.lua:82",
+    "1.1.0.403908 Lua/Bombardment.lua:83",
+    "1.1.0.403908 Lua/Bombardment.lua:85",
+    "1.1.0.403908 Lua/Bombardment.lua:93",
+    "1.1.0.403908 Lua/Bombardment.lua:158",
+    "1.1.0.403908 Lua/Scenario/Mystery 7.generated.lua:949"
+  ],
+  "findings": [],
+  "not_checked": [
+    "Organic 1.1.0 Mystery7 volley, visible spread and no-mod A/B",
+    "Current decal fade, notification clearing, interception, dome cracks, volley finish",
+    "Current random-draw parity and TestKit firing, menu-enable/reload, save/load/uninstall,1.0.7 runtime"
+  ],
+  "applies": "yes: direct final registry line 262 active",
+  "basis": "SOURCE"
+}

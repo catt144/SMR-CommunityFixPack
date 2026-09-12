@@ -1,0 +1,12 @@
+{
+  "leg": "stillneeded-f46",
+  "kit": "C:\\Dev\\SMR-BugFixPack-TestKit",
+  "park": "C:\\Dev\\SMR-BugFixPack\\docs\\agent\\reports\\still-needed",
+  "stripPattern": "Code/97_StillNeededF46",
+  "bootSymbol": "SN46.Boot",
+  "symbolNamespace": "SN46",
+  "mustNotBeListed": ["Code/96_AutoRunFlag.lua"],
+  "bannedPatterns": ["SaveGame\\s*\\(", "SetGameSpeed\\s*\\(", "SetAmount\\s*\\(", "DoneObject\\s*\\("],
+  "requiredPresent": ["req:AddFlags(suspended)", "req:ClearFlags(suspended)", "req:SetFlags(saved_flags)", "STILLNEEDED_F46.savegame.sav"],
+  "payloads": [{"src": "97_StillNeededF46.lua.txt", "dst": "97_StillNeededF46.lua", "selfDrives": true}]
+}

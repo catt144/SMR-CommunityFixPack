@@ -1,0 +1,49 @@
+{
+  "module": "Fix_LakeEntombment.lua",
+  "entry": "F30",
+  "applies": "yes — fresh boot reports applied and final direct settled registry read active; no colony or cure witness",
+  "consumer": "yes — Lake GameInit still calls wrapped PlacePrefab; assigned ExitImpassable reaches rover and drone forwarding methods, Unit nearby-point/straight-line movement and drone movement-battery exception",
+  "row_true": "partial — pre-basin timing and post-basin rescue fit; explicit scatter exemption is obstruction-clearing constructor only, and escape depends on eligibility and a passable destination",
+  "bullet_true": "yes — artificial-lake headline fits remaining timing defect and veto example uses the actual keyed LakeEntombment registration ID",
+  "verdict": "KEEP-BUT-FIX-CLAIM",
+  "evidence": [
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Buildings/LandscapeLake.lua:34",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Buildings/LandscapeLake.lua:287",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Buildings/LandscapeLake.lua:343",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Buildings/ConstructionSite.lua:1712",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Buildings/ConstructionSite.lua:1766",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Buildings/ConstructionSite.lua:1771",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Buildings/ConstructionSite.lua:1918",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Units/RCConstructorBase.lua:216",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Units/RCConstructorBase.lua:233",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Units/RCConstructorBase.lua:314",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/CommonLua/Classes/CommandObject.lua:250",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Buildings/BaseRover.lua:94",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Units/DroneBase.lua:110",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Units/Unit.lua:740",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Units/Unit.lua:770",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Units/Unit.lua:774",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Units/Unit.lua:777",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Units/Drone.lua:1747",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Units/Drone.lua:1769",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Units/Drone.lua:1717",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Units/Drone.lua:3084",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Buildings/BaseRover.lua:764"
+  ],
+  "basis": "SOURCE",
+  "not_checked": [
+    "Live lake completion, entombment recurrence, rescue movement, power survival or screenshots",
+    "Native prefab or terrain geometry, passability timing, straight-line motion or nearby destination availability",
+    "Uninterruptible command acceptance, queued jobs, holder/dead/depleted units and reassignment destructors",
+    "Map-wide effects on already-stuck units elsewhere and post-pass after missing or failed prefab placement",
+    "Fresh old-save or save-fixup recovery, historical lake healing, uninstall or runtime veto test",
+    "Fresh 1.0.7 comparison, every lake size or skin and foreign overrides"
+  ],
+  "findings": [
+    "Site exemption explanation should specify obstruction-clearing RCConstructorBase; current field is cleared before ordinary RoverWork, so not every normal finishing builder is exempt",
+    "Independent pre-basin timing defect and post-basin escape consumers remain; rover-only save fixup is separate mitigation, not an immediate Unit rescue replacement",
+    "Entry bbox/teleport and header battery-to-Freeze descriptions differ from current map-wide command-only wrapper and NoBattery consumer",
+    "Map-wide rescue eligibility and absent-destination return are explicit source conditions; current cure and global side effects unmeasured",
+    "Artificial-lake headline and keyed LakeEntombment veto example agree with current registration/core; no save veto or separate old-save healer in module"
+  ]
+}

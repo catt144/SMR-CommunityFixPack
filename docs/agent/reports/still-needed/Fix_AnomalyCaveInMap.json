@@ -1,0 +1,30 @@
+{
+  "module": "Fix_AnomalyCaveInMap.lua",
+  "entry": "F31",
+  "consumer": "yes: all eight compiled scenario sites resolve globals; missing-map branch lacks a confirmed shipped trigger",
+  "row_true": "no: rule-specific stopped-story account is presented as observed but trigger and missing-map condition exclude each other in inspected generation",
+  "bullet_true": "partial: headline repeats unconfirmed stopped-story route, while missing-map decline is supported",
+  "verdict": "KEEP-BUT-FIX-CLAIM",
+  "evidence": [
+    "1.1.0.403908 Lua/Buildings/CaveInRubble.lua:23",
+    "1.1.0.403908 Lua/Buildings/CaveInRubble.lua:109",
+    "1.1.0.403908 Lua/Scenario/UndergroundAnomalies.generated.lua:241",
+    "1.1.0.403908 Lua/Scenario/BuriedWonder_Cave_Of_Wonders.generated.lua:431",
+    "1.1.0.403908 Lua/RandomMap/RandomMapGenerator_Picard.lua:201",
+    "1.1.0.403908 Lua/RandomMap/RandomMapGenerator_Picard.lua:286",
+    "1.1.0.403908 Lua/RandomMap/RandomMapGenerator_Picard.lua:303",
+    "1.1.0.403908 Lua/RandomMap/RandomMapGenerator.lua:4453"
+  ],
+  "findings": [
+    "Current row presents NoUnderground-rule stopped-story route as observed; existing R3 audit says trigger/precondition mutually exclusive in inspected data",
+    "Keep cheap argument guards as insurance recommendation; binary mapdata/custom/future callers unmeasured and not a verified current player route",
+    "Entry retains old environment/Marsquake explanation already corrected by module QA; current facts need entry-home annotation"
+  ],
+  "not_checked": [
+    "Runtime binary mapdata anomaly_sequence_list_names inventory and DLC/custom scenario routes",
+    "Organic missing-map story stop/continuation, runtime false-map wrapper and valid-map control",
+    "Current C43 probe SKIP leg, full scenario replay, menu-enable/reload, save/load/uninstall,1.0.7 runtime"
+  ],
+  "applies": "yes: direct final registry line 260 active",
+  "basis": "SOURCE"
+}

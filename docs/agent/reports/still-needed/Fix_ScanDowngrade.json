@@ -1,0 +1,26 @@
+{
+  "module": "Fix_ScanDowngrade.lua",
+  "entry": "C86",
+  "consumer": "yes: Advanced probe passes status to each pattern sector; sector status drives decal/UI/queue",
+  "row_true": "yes: vanilla permits deep-to-scanned downgrade and wrapper preserves higher status",
+  "bullet_true": "n/a: no dedicated metadata headline",
+  "verdict": "KEEP",
+  "evidence": [
+    "1.1.0.403908 Lua/OrbitalProbe.lua:81",
+    "1.1.0.403908 Lua/OrbitalProbe.lua:97",
+    "1.1.0.403908 Lua/OrbitalProbe.lua:99",
+    "1.1.0.403908 Lua/OrbitalProbe.lua:170",
+    "1.1.0.403908 Lua/Exploration.lua:230",
+    "1.1.0.403908 Lua/Exploration.lua:275",
+    "1.1.0.403908 Lua/Exploration.lua:278",
+    "1.1.0.403908 Lua/Exploration.lua:284"
+  ],
+  "findings": [],
+  "not_checked": [
+    "Actual AdvancedOrbitalProbe object firing and overview entry refusal",
+    "Live no-mod downgrade A/B and player repeat-scan time/notification effects",
+    "Current TestKit firing, menu-enable/reload, save/load/uninstall,1.0.7 runtime"
+  ],
+  "applies": "yes: direct final registry line 261 active",
+  "basis": "SOURCE"
+}

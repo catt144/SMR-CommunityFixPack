@@ -1,0 +1,30 @@
+{
+  "module": "Fix_GhostFarmOxygen.lua",
+  "entry": "F37",
+  "applies": "yes: direct final registry line 232 active",
+  "consumer": "yes: dome/grid demand still reads air_consumption; prevention is redundant on ordinary 1.1.0 removal route",
+  "row_true": "no: ordinary current-game salvage/destruction clears the modifier in vanilla; narrow refab residual unmeasured",
+  "bullet_true": "no: farm oxygen headline presents closed ordinary 1.1.0 leak as current",
+  "verdict": "RETIRE",
+  "evidence": [
+    "1.1.0.403908 Lua/Buildings/Farm.lua:165",
+    "1.1.0.403908 Lua/Buildings/Farm.lua:630",
+    "1.1.0.403908 Lua/Buildings/Farm.lua:641",
+    "1.1.0.403908 Lua/Buildings/Building.lua:1570",
+    "1.1.0.403908 Lua/Buildings/Building.lua:537",
+    "1.1.0.403908 Lua/Buildings/Dome.lua:1881",
+    "1.1.0.403908 Lua/Buildings/Workplace.lua:962"
+  ],
+  "basis": "SOURCE",
+  "not_checked": [
+    "Current live farm salvage/destruction and consumption readout",
+    "Refab during last-worker dying window and direct custom DoneObject/SetDome routes",
+    "Orphan modifiers in existing 1.1.0 saves, menu enable/reload, save/load/uninstall",
+    "Fresh 1.0.7 runtime and live-pack legacy constituency owner decision"
+  ],
+  "findings": [
+    "Entry already recommends ordinary-route retirement; hotfix2 attachment clearance did not trace the working edge",
+    "Site row and metadata headline still describe ordinary leak closed by vanilla in1.1.0",
+    "Narrow dying-worker refab residual is INFERRED and unmeasured, not a verified defect or all-routes retirement proof"
+  ]
+}
