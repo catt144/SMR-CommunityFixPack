@@ -1,0 +1,24 @@
+{
+  "module": "Fix_MirrorSphereSite.lua",
+  "entry": "F16",
+  "consumer": "yes: infopanel actions call StartAction and the PierceTheShell branch creates drone work",
+  "row_true": "yes: finished raw progress still bypasses vanilla percentage comparison",
+  "bullet_true": "n/a: no dedicated metadata headline",
+  "evidence": [
+    "1.1.0.403908 Lua/Mysteries/MirrorSphere.lua:16",
+    "1.1.0.403908 Lua/Mysteries/MirrorSphere.lua:70",
+    "1.1.0.403908 Lua/Mysteries/MirrorSphere.lua:747",
+    "1.1.0.403908 Lua/Mysteries/MirrorSphere.lua:836",
+    "1.1.0.403908 Lua/Mysteries/MirrorSphere.lua:844",
+    "1.1.0.403908 Lua/Mysteries/MirrorSphereInfopanel.lua:15"
+  ],
+  "not_checked": [
+    "Current mystery-to-completion route and unfinished-site controls",
+    "Live finished-site drone requests/action cancellation and infopanel rendering",
+    "Current behavior firing, menu enable/reload, save/load/uninstall, 1.0.7 runtime"
+  ],
+  "applies": "yes: direct final registry line 245 active",
+  "verdict": "KEEP",
+  "basis": "SOURCE",
+  "findings": []
+}

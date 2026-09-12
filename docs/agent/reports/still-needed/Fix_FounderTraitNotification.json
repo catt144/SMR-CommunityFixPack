@@ -1,0 +1,23 @@
+{
+  "module": "Fix_FounderTraitNotification.lua",
+  "entry": "F23",
+  "applies": "yes: direct final registry line 255 active",
+  "consumer": "yes: trait grants emit ColonistAddTrait and notification preset consumes founder/trait parameters",
+  "row_true": "yes: eligible Founder trait grants cannot reach vanilla notification",
+  "bullet_true": "n/a: no dedicated metadata headline",
+  "verdict": "KEEP",
+  "evidence": [
+    "1.1.0.403908 Lua/ColonyViability.lua:300",
+    "1.1.0.403908 Lua/ColonyViability.lua:309",
+    "1.1.0.403908 Lua/Units/Colonist.lua:527",
+    "1.1.0.403908 Lua/Buildings/OpenAirGym.lua:10",
+    "1.1.0.403908 Data/NotificationPreset.lua:313"
+  ],
+  "basis": "SOURCE",
+  "not_checked": [
+    "Current live Founder trait grant and notification render/click",
+    "Organic grant frequency and current TestKit behavior firing",
+    "Menu enable/reload, save/load/uninstall, 1.0.7 runtime"
+  ],
+  "findings": []
+}

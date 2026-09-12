@@ -1,0 +1,37 @@
+{
+  "module": "Fix_ShuttleTransportCache.lua",
+  "entry": "F51",
+  "applies": "yes — archived settled 1.1.0 boot logs ShuttleTransportCache applied at line 89; current module bytes match CENSUS; no later module status/heal message",
+  "consumer": "yes — FindEmigrationDome still reads the cached tuple after choosing; TryToEmigrate uses mode/elevator and TryToEmigrateToDome branches on walk; conditional passage walk-to-shuttle and shuttle-to-walk changes remain meaningful, although organic current harm is INFERRED",
+  "row_true": "yes — narrowed site row claims a stale cached answer and explicitly disclaims curing refusal to move on the current version; source supports that bounded claim",
+  "bullet_true": "n/a — no F51-specific card headline bullet remains in metadata.lua:3",
+  "verdict": "KEEP",
+  "evidence": [
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Units/Colonist.lua:3199",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Units/Colonist.lua:3200",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Units/Colonist.lua:3203",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Units/Colonist.lua:3525",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Units/Colonist.lua:2015",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Units/Colonist.lua:1898",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Units/Colonist.lua:1969",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Units/Colonist.lua:3597",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Buildings/Dome.lua:315",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Buildings/Dome.lua:316",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Buildings/ShuttleHub.lua:1562",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Units/Colonist.lua:3377",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/UniversalRocket.lua:2223",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/UniversalRocket.lua:2245",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Buildings/SupplyRocket.lua:68"
+  ],
+  "basis": "SOURCE",
+  "not_checked": [
+    "Organic 1.1.0 reproduction of a selected passage-connected pair with outside path length above 1200m and no competing train route",
+    "A 1.1.0 runtime false-to-shuttle or shuttle-to-walk cache transition or resulting colonist movement",
+    "Geometry/pathfinder behavior and passage construction establishing that candidate geography in an actual colony",
+    "Whether a fixed-false rocket query's separate dependence on current global shuttle availability causes player harm",
+    "Full save/uninstall or main-menu enable-path verification on 1.1.0",
+    "Whole-card assertions, repair counts, other modules, or retirement decisions"
+  ],
+  "findings": []
+}
+

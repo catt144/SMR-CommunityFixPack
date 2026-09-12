@@ -1,0 +1,21 @@
+{
+  "module": "Fix_DomeOverviewHighlight.lua",
+  "entry": "F14",
+  "applies": "yes: direct final registry line 240 active",
+  "consumer": "yes: generated Dome Overview OnContextUpdate invokes Community stat method and renders idLabel text",
+  "row_true": "yes: vanilla still discards computed red-tagged tv and displays raw v",
+  "bullet_true": "yes: dedicated Domes Overview headline names the same retained defect",
+  "verdict": "KEEP",
+  "evidence": [
+    "1.1.0.403908 Lua/X/ColonyControlCenter.lua:1300",
+    "1.1.0.403908 Lua/X/ColonyControlCenter.lua:495",
+    "1.1.0.403908 Lua/XDef/CommandCenterDomeOverviewRow.generated.lua:56"
+  ],
+  "basis": "SOURCE",
+  "not_checked": [
+    "1.1.0 visible colour and localisation/T rendering",
+    "Current behavior probe",
+    "Menu-enable/reload, save/load/uninstall, 1.0.7 runtime"
+  ],
+  "findings": []
+}

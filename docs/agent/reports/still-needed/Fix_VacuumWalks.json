@@ -1,0 +1,45 @@
+{
+  "module": "Fix_VacuumWalks.lua",
+  "entry": "F52",
+  "applies": "yes — fresh settled boot logs applied and final direct registry read measures active",
+  "consumer": "yes — ordinary TryToEmigrate calls the patched method; TransportByFoot still consumes its passage path through sequential dome entries; no-passage branch still walks outside",
+  "row_true": "yes — site row describes bypassing an available built passage; 1.1.0 route cure and death prevention remain unverified in play",
+  "bullet_true": "partial — headline and introduction are true for the original passage-bypass case but omit its available-passage condition; generic inter-dome suffocation is not prevented",
+  "verdict": "KEEP-BUT-FIX-CLAIM",
+  "evidence": [
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Units/Colonist.lua:2006",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Units/Colonist.lua:2018",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Units/Colonist.lua:3525",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Units/Colonist.lua:3113",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Buildings/Dome.lua:220",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Buildings/Dome.lua:227",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/_GameConst.lua:149",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Units/Colonist.lua:1903",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Units/Colonist.lua:1908",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Units/Colonist.lua:1914",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Units/Colonist.lua:1927",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Units/Colonist.lua:3548",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Units/Colonist.lua:3551",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Units/Colonist.lua:3553",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Passage.lua:1300",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Passage.lua:1328",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Units/Colonist.lua:3018",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Units/Colonist.lua:4577",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Units/Colonist.lua:4578"
+  ],
+  "basis": "SOURCE",
+  "not_checked": [
+    "Organic 1.1.0 short positive-distance migration using an available passage",
+    "Oxygen loss, Health loss, or death prevention in play",
+    "Actual 1.1.0 no-passage suffocation or deaths and their frequency",
+    "Entrance queues, detours, movement timing, or oxygen-budget cap",
+    "Breathable-map and negative-distance passage-only controls in play",
+    "Shuttle-owned task, elevator, and long passage-chain controls in play",
+    "Fresh 1.0.7 runtime decline",
+    "Whole-list card consistency and generic card claims"
+  ],
+  "findings": [
+    "Card headline and introductory inter-dome suffocation example omit the available-passage condition; source confirms no-passage surface walking remains allowed; broad reader interpretation is INFERRED",
+    "No disagreement with existing migration PARTIAL baseline: passage bypass repaired, no-passage oxygen risk retained"
+  ]
+}

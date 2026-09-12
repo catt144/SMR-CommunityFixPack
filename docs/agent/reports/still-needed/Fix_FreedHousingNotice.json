@@ -1,0 +1,39 @@
+{
+  "module": "Fix_FreedHousingNotice.lua",
+  "entry": "F59",
+  "applies": "yes — final direct 1.1.0 menu registry says FreedHousingNotice active at registry log line 248; module applied at line 102; current bytes match CENSUS",
+  "consumer": "yes — deferred CheckHomeForHomeless still walks dome Homeless and calls UpdateResidence; that chooses a home and SetResidence mutates live membership; post-operation GetFreeSpace includes reservations and final occupants",
+  "row_true": "yes — original vacancy notification gap persists; straight away means the next scheduler opportunity after the enclosing operation unwinds and only while a suitable working home remains free; original hours-long symptom remains source-derived",
+  "bullet_true": "yes — vacant-bed headline remains supported by the current gap; last_changes correctly separates attended manual-assignment repair from code-only expedition repair",
+  "verdict": "KEEP",
+  "evidence": [
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Buildings/Residence.lua:119",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Buildings/Residence.lua:124",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Buildings/Residence.lua:160",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Buildings/Residence.lua:165",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Units/Colonist.lua:2920",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Units/Colonist.lua:2924",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Buildings/Residence.lua:452",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Units/Colonist.lua:2905",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Units/Colonist.lua:2909",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Buildings/Community.lua:361",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/City.lua:118",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Units/Colonist.lua:2344",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Buildings/Residence.lua:342",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Buildings/Residence.lua:348",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Units/Colonist.lua:5005",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Buildings/Residence.lua:233",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Units/Unit.lua:1305"
+  ],
+  "basis": "SOURCE",
+  "not_checked": [
+    "New 1.1.0 reproduction of the original hours-long empty-bed symptom or a broken-side in-play comparison",
+    "A1 expedition boarding, return-home hold, failure/cancellation/return, or expedition behavior in play",
+    "Saving/loading/uninstalling within the deferred-thread Sleep(0) window",
+    "Scheduler latency bounds or a visible delay at pause; the repair only requires ordering after the caller unwinds",
+    "Reservation cancellation notification, which remains deliberately outside this module",
+    "Foreign-mod interactions, a major-overhaul audit, whole-card counts, or retirement decisions"
+  ],
+  "findings": []
+}
+

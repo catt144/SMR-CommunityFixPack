@@ -1,0 +1,24 @@
+{
+  "module": "Fix_RocketInteractGuard.lua",
+  "entry": "F74",
+  "consumer": "yes: unit-control cursor, direct orders and transport routes consume the wrapped predicate/action",
+  "row_true": "yes: guard still names legacy rocket family and misses Universal event classes",
+  "bullet_true": "n/a: no dedicated metadata headline",
+  "evidence": [
+    "1.1.0.403908 Lua/Units/RCTransport.lua:412",
+    "1.1.0.403908 Lua/BuildingTemplate/UniversalTradeRocket.generated.lua:5",
+    "1.1.0.403908 Lua/BuildingTemplate/UniversalRefugeeRocket.generated.lua:5",
+    "1.1.0.403908 Lua/UnitControl.lua:481",
+    "1.1.0.403908 Lua/UnitControl.lua:412",
+    "1.1.0.403908 Lua/TransportRouteInteractionHandler.lua:50"
+  ],
+  "not_checked": [
+    "Current live event-rocket refusal, cursor/route and controls",
+    "Current halt-mid-load/overflow terminal harm and plain UniversalRocket rival trade-pad behavior",
+    "Static subclass callers, menu enable/reload, save/load/uninstall, 1.0.7 runtime"
+  ],
+  "applies": "yes: direct final registry line 250 active",
+  "verdict": "KEEP",
+  "basis": "SOURCE",
+  "findings": []
+}

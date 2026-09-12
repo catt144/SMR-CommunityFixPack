@@ -1,0 +1,23 @@
+{
+  "module": "Fix_GraphConsumedCaption.lua",
+  "entry": "F19",
+  "applies": "yes: direct final registry line 253 active",
+  "consumer": "yes: colony stats UI consumes matched resource panel caption and consumed series",
+  "row_true": "yes: vanilla caption still omits maintenance included by plotted series",
+  "bullet_true": "n/a: no dedicated metadata headline",
+  "verdict": "KEEP",
+  "evidence": [
+    "1.1.0.403908 Lua/X/ColonyControlCenter.lua:184",
+    "1.1.0.403908 Lua/ResourceTracking.lua:162",
+    "1.1.0.403908 Lua/ResourceOverview.lua:225",
+    "1.1.0.403908 Lua/ResourceOverview.lua:229",
+    "1.1.0.403908 Lua/XDef/CommandCenterColonyStats.generated.lua:78"
+  ],
+  "basis": "SOURCE",
+  "not_checked": [
+    "1.1.0 live panel Matched() and visible caption/bar readout",
+    "Localisation/T rendering and current behavior probe",
+    "Menu-enable/reload, save/load/uninstall, 1.0.7 runtime"
+  ],
+  "findings": []
+}

@@ -1,0 +1,48 @@
+{
+  "module": "Fix_ShelterReflex.lua",
+  "entry": "F73",
+  "applies": "yes — fresh settled boot reports applied; final direct settled registry read measures active",
+  "consumer": "yes — ordinary command scheduler resolves current Idle; wrapper consumes its retry timestamp on subsequent Idle entries and dispatches current Rest; Rest and EnterBuilding retain home-entry path",
+  "row_true": "partial — judgment-call label correct; heads home before oxygen runs out outcome omits working-home eligibility, task/dying/retry exclusions, Idle-entry timing, and unverified timely successful entry",
+  "bullet_true": "n/a — no dedicated store-card headline",
+  "verdict": "KEEP-BUT-FIX-CLAIM",
+  "evidence": [
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/CommonLua/Classes/CommandObject.lua:250",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/CommonLua/Classes/CommandObject.lua:276",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/CommonLua/Classes/CommandObject.lua:277",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/CommonLua/Classes/CommandObject.lua:378",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Units/Colonist.lua:2212",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Units/Colonist.lua:2388",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Units/Colonist.lua:2578",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Units/Colonist.lua:2581",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Units/Unit.lua:317",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Units/Unit.lua:385",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Units/Colonist.lua:1496",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Units/Colonist.lua:1498",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Units/Colonist.lua:3018",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Units/Colonist.lua:3023",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Units/Colonist.lua:4577",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Units/Colonist.lua:4578",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Buildings/MicroGHabitat.lua:166",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Buildings/MicroGHabitat.lua:174",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Buildings/Community.lua:437",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Buildings/Community.lua:443"
+  ],
+  "basis": "SOURCE",
+  "not_checked": [
+    "Organic 1.1.0 eligible outside-state trigger at actual Idle entry",
+    "Incremental shelter benefit versus vanilla Roam home entry",
+    "Successful entry before oxygen limit, Health preservation, or survival",
+    "Full scheduling and one-hour retry timing in play",
+    "Homeless, unpowered-home, and unreachable-home residuals in play",
+    "Retired half a asteroid habitat trait-filter no-throw control in play",
+    "Organic effects on all non-breathable maps or colonist subclasses",
+    "Fresh 1.0.7 runtime compatibility",
+    "Whole-list judgment-call count, hidden-repair count, and generic card claims"
+  ],
+  "findings": [
+    "Site judgment-call label is correct but outcome should state eligible Idle-entry Rest request, not unqualified return home before oxygen expires",
+    "Working residence is required; homeless colonists without a residence cannot benefit; removed suitability half remains absent",
+    "Organic incremental benefit beyond existing Roam entry remains INFERRED; missing timer branch alone does not establish a hidden latent defect"
+  ]
+}

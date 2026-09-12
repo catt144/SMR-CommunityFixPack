@@ -1,0 +1,26 @@
+{
+  "module": "Fix_GeneForging.lua",
+  "entry": "F41",
+  "applies": "yes: final registry log line 244 active; current researched-tech ladder not fired",
+  "consumer": "yes: GenerateTraits passes bonus and current GetRandomTrait falls back to the helper when no explicit modifier is supplied",
+  "row_true": "yes: current vanilla helper still omits GeneForging; additive repair remains supported",
+  "bullet_true": "yes: dedicated research-does-nothing headline maps to the retained defect",
+  "verdict": "KEEP",
+  "evidence": [
+    "1.1.0.403908 Lua/Units/Colonist.lua:4399",
+    "1.1.0.403908 Lua/Units/Colonist.lua:4419",
+    "1.1.0.403908 Lua/Traits.lua:1049",
+    "1.1.0.403908 Lua/Traits.lua:1064",
+    "1.1.0.403908 Data/Tech.lua:8976"
+  ],
+  "basis": "SOURCE",
+  "not_checked": [
+    "1.1.0 researched-tech bonus ladder and probabilistic outcome",
+    "Current Techs.GeneForging runtime value",
+    "Exact school/sanity/newborn callers and explicit rare-weight arguments",
+    "Menu-enable, save/load/uninstall, fresh 1.0.7 runtime"
+  ],
+  "findings": [
+    "F41 historical have-only limitation is not the 1.1.0 topology: current GetRandomTrait itself reads the helper as a default. No public-row overclaim follows."
+  ]
+}

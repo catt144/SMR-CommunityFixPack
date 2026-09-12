@@ -1,0 +1,53 @@
+{
+  "module": "Fix_SequenceLatents.lua",
+  "entry": "F29(a) sampling + F29(b) timing swap; tracker items 1 and 3",
+  "applies": "yes: direct settled registry active at line 256; both source target declarations remain; live per-subfix fixed/skipped arrays were not separately captured",
+  "consumer": "yes: all four compiled Mystery 2 SARun callers consume sampling result lists in filtering and Digger placement; spawned Diggers consume both timing fields in landing waits and distinct pre-hit effects",
+  "row_true": "yes: both defective bodies remain; all four shipped sampling calls inherit full-list defaults, and Diggers inherit ordered 1000/500 timings without overrides; both execute through shipped mystery code and remain latent by current data",
+  "bullet_true": "yes: no dedicated F29 headline; this module supports the shared invisible-repairs paragraph as one contributor; total count of three is not checked in this one-module report",
+  "verdict": "KEEP",
+  "evidence": [
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Sequences/SA_Filters.lua:10",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Sequences/SA_Filters.lua:33",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Sequences/SA_Filters.lua:39",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Scenario/Mystery 2.generated.lua:298",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Scenario/Mystery 2.generated.lua:315",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Scenario/Mystery 2.generated.lua:365",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Scenario/Mystery 2.generated.lua:369",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Scenario/Mystery 2.generated.lua:376",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Scenario/Mystery 2.generated.lua:394",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/CommonLua/Libs/Sequences/SequenceAction.lua:267",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/CommonLua/Libs/Sequences/SequenceAction.lua:261",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/CommonLua/PropertyObject.lua:1474",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Data/Scenario/Mystery 2.lua:235",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Data/Scenario/Mystery 2.lua:252",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Data/Scenario/Mystery 2.lua:280",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Data/Scenario/Mystery 2.lua:284",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Sequences/SA_Gameplay.lua:166",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Mysteries/Diggers.lua:53",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Mysteries/Diggers.lua:54",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Mysteries/Diggers.lua:94",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Mysteries/Diggers.lua:350",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Data/Scenario/Mystery 2.lua:318",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Data/Scenario/Mystery 2.lua:981",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/CommonLua/Classes/_object.lua:192",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Mysteries/Diggers.lua:89",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Mysteries/Diggers.lua:249",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Mysteries/Diggers.lua:120",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Mysteries/Diggers.lua:123"
+  ],
+  "basis": "SOURCE",
+  "not_checked": [
+    "Fresh 1.1.0 Mystery 2 playthrough, register output and Digger landing visuals",
+    "Live SequenceLatents fixed/skipped arrays",
+    "Nondefault sampling and reversed timing controls in the game",
+    "Fresh SequenceLatents TestKit probe or RunAll()",
+    "Future preset/DLC values and third-party content",
+    "Deliberately excluded tracker item 2 workshift-code generator",
+    "Save/load/uninstall, fresh 1.0.7 execution and whole-card invisible-repair count",
+    "Other modules and fenced prelaunch sweep verdict reports"
+  ],
+  "findings": [
+    "No module or public-row disagreement: both defects retain shipped mystery consumers and are hidden by current data. The old entry's no-subclass assertion is too broad because AlienDiggerBig exists; it inherits ordered timings and does not change the latent-by-data verdict."
+  ]
+}

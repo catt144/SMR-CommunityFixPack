@@ -60,11 +60,22 @@ three is in the store-card editorial notes and site FAQ. Derive the latent
 classification from current primary data as well as the section's prose; three
 rows under a heading alone cannot prove that all three remain latent on 1.1.0.
 
+## Whole-list mechanical coverage
+
+SOURCE: `SURFACE_MAP.json` maps all 49 folded rows to all 46 registered modules.
+ArrivalDeaths, SaveSanitizer and WispRewards each have two rows; all others have
+one. No row is assigned only to a deleted/unregistered module. This is coverage
+of the maintained source lists, not clearance of every row's substantive claim.
+
+SOURCE: `SURFACE_COPY_CHECK.json` extracts the five maintained card bodies:
+metadata description, plain/Steam STORE_CARD_LIVE records, plain/Steam upload
+backups. All five contain the same 21 headlines, the latent count of three, and
+the LakeEntombment example. Headline equality proves consistency; any shared
+overclaim would remain shared until corrected through the release workflow.
+
 ## Final checks still pending
 
-- All 49 rows assigned to module reports, including multi-row modules and sanitizer.
 - Module-review findings integrated into the headline and aggregate conclusions.
-- Plain/Steam card records and upload backups compared with metadata claims.
 - Named unverified routes retained, including hardware cure and live page receipt.
 
 ## Not checked

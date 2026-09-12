@@ -22,40 +22,40 @@ the existing handoff edit is nevertheless excluded from this work.
 
 - [ ] 90_SaveSanitizer.lua
 - [ ] Fix_AnomalyCaveInMap.lua
-- [ ] Fix_ArrivalDeaths.lua
+- [x] Fix_ArrivalDeaths.lua
 - [ ] Fix_BombardmentSpread.lua
 - [ ] Fix_BrokenTrackSalvage.lua
 - [ ] Fix_CrystalMysteryHang.lua
 - [ ] Fix_DestroyedTunnels.lua
-- [ ] Fix_DomeOverviewHighlight.lua
+- [x] Fix_DomeOverviewHighlight.lua
 - [ ] Fix_DroneTransportMinors.lua
 - [ ] Fix_DustSicknessBiorobots.lua
 - [x] Fix_ExoticDepositSign.lua
 - [ ] Fix_ExtenderFlapChurn.lua
-- [ ] Fix_FounderTraitNotification.lua
-- [ ] Fix_FreedHousingNotice.lua
-- [ ] Fix_GeneForging.lua
+- [x] Fix_FounderTraitNotification.lua
+- [x] Fix_FreedHousingNotice.lua
+- [x] Fix_GeneForging.lua
 - [ ] Fix_GhostFarmOxygen.lua
-- [ ] Fix_GraphConsumedCaption.lua
+- [x] Fix_GraphConsumedCaption.lua
 - [ ] Fix_JumboCaveReinforcementWedge.lua
 - [ ] Fix_LakeEntombment.lua
 - [ ] Fix_LanderEmptyLaunch.lua
 - [ ] Fix_LandscapeUnitFilter.lua
-- [ ] Fix_LayoutTechLock.lua
-- [ ] Fix_MirrorSphereSite.lua
-- [ ] Fix_NightShiftWork.lua
+- [x] Fix_LayoutTechLock.lua
+- [x] Fix_MirrorSphereSite.lua
+- [x] Fix_NightShiftWork.lua
 - [ ] Fix_PayloadTemplateRefill.lua
 - [ ] Fix_RocketDroneChurn.lua
-- [ ] Fix_RocketInteractGuard.lua
+- [x] Fix_RocketInteractGuard.lua
 - [x] Fix_SaintBlessing.lua
 - [ ] Fix_ScanDowngrade.lua
-- [ ] Fix_SequenceLatents.lua
-- [ ] Fix_ShelterReflex.lua
+- [x] Fix_SequenceLatents.lua
+- [x] Fix_ShelterReflex.lua
 - [x] Fix_ShuttleHubOffAvailable.lua
-- [ ] Fix_ShuttleTransportCache.lua
+- [x] Fix_ShuttleTransportCache.lua
 - [ ] Fix_SilentHitMomentFX.lua
 - [ ] Fix_SinkholeIndestructible.lua
-- [ ] Fix_StaleReservations.lua
+- [x] Fix_StaleReservations.lua
 - [ ] Fix_TrackConnectorPingPong.lua
 - [ ] Fix_TrackSalvageRefund.lua
 - [ ] Fix_TrackSalvageWipe.lua
@@ -64,5 +64,5 @@ the existing handoff edit is nevertheless excluded from this work.
 - [ ] Fix_TrainCargoDumping.lua
 - [ ] Fix_TrainsToVoid.lua
 - [ ] Fix_TrainWaitTime.lua
-- [ ] Fix_VacuumWalks.lua
+- [x] Fix_VacuumWalks.lua
 - [ ] Fix_WispRewards.lua

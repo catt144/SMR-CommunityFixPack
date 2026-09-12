@@ -1,0 +1,23 @@
+{
+  "module": "Fix_NightShiftWork.lua",
+  "entry": "F04",
+  "applies": "yes: direct final registry line 224 active",
+  "consumer": "yes: current Idle calls ShouldLeaveForWork and sends suitable healthy workers to Work",
+  "row_true": "yes: midnight catch-up range remains defective; row describes that retained case",
+  "bullet_true": "yes: dedicated night-shift headline maps to the same current row",
+  "verdict": "KEEP",
+  "evidence": [
+    "1.1.0.403908 Lua/Units/Colonist.lua:2198",
+    "1.1.0.403908 Lua/Units/Colonist.lua:2362",
+    "1.1.0.403908 Lua/_GameConst.lua:395",
+    "1.1.0.403908 Lua/Lightmodel.lua:11"
+  ],
+  "basis": "SOURCE",
+  "not_checked": [
+    "Organic 1.1.0 midnight return and staffing cure",
+    "Current TestKit behavior firing",
+    "Menu-enable propagation, save/load/uninstall",
+    "Fresh 1.0.7 runtime and original external-thread build"
+  ],
+  "findings": []
+}

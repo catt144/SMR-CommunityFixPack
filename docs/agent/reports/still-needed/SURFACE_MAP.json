@@ -1,0 +1,250 @@
+{
+  "site_head": "a0616650b98acbb6b11dfb3ff6c0e8fa8fc44f30",
+  "rows": [
+    {
+      "line": 33,
+      "title": "Bombardment missiles arrived in a neat parallel row",
+      "module": "Fix_BombardmentSpread.lua"
+    },
+    {
+      "line": 46,
+      "title": "Colonists walked across the surface between two domes and suffocated",
+      "module": "Fix_VacuumWalks.lua"
+    },
+    {
+      "line": 56,
+      "title": "Rocket loads of new arrivals died on their way to a dome",
+      "module": "Fix_ArrivalDeaths.lua"
+    },
+    {
+      "line": 66,
+      "title": "New arrivals moved into a dome that was switched off, quarantined or without air",
+      "module": "Fix_ArrivalDeaths.lua"
+    },
+    {
+      "line": 82,
+      "title": "A stale answer to whether colonists could travel between domes",
+      "module": "Fix_ShuttleTransportCache.lua"
+    },
+    {
+      "line": 94,
+      "title": "Colonists queued for shuttles from a hub you had switched off",
+      "module": "Fix_ShuttleHubOffAvailable.lua"
+    },
+    {
+      "line": 105,
+      "title": "A dome sat half empty and still refused to house anyone",
+      "module": "Fix_StaleReservations.lua"
+    },
+    {
+      "line": 118,
+      "title": "A bed that fell vacant sat empty while colonists were homeless",
+      "module": "Fix_FreedHousingNotice.lua"
+    },
+    {
+      "line": 130,
+      "title": "Night-shift colonists never came back to work after midnight",
+      "module": "Fix_NightShiftWork.lua"
+    },
+    {
+      "line": 139,
+      "title": "The Gene Forging research did nothing at all",
+      "module": "Fix_GeneForging.lua"
+    },
+    {
+      "line": 147,
+      "title": "The Saint's dome blessing never reached anybody",
+      "module": "Fix_SaintBlessing.lua"
+    },
+    {
+      "line": 166,
+      "title": "Biorobots caught Dust Sickness — *judgment call*",
+      "module": "Fix_DustSicknessBiorobots.lua"
+    },
+    {
+      "line": 181,
+      "title": "You were never told when a Founder gained a trait",
+      "module": "Fix_FounderTraitNotification.lua"
+    },
+    {
+      "line": 189,
+      "title": "Colonists on asteroids stood in vacuum until they died — *judgment call*",
+      "module": "Fix_ShelterReflex.lua"
+    },
+    {
+      "line": 206,
+      "title": "Drone Hubs paralysed themselves every time an Extender flickered",
+      "module": "Fix_ExtenderFlapChurn.lua"
+    },
+    {
+      "line": 219,
+      "title": "Drones could not finish a delivery to a landed automatic rocket",
+      "module": "Fix_RocketDroneChurn.lua"
+    },
+    {
+      "line": 229,
+      "title": "Building an artificial lake buried the rover that built it",
+      "module": "Fix_LakeEntombment.lua"
+    },
+    {
+      "line": 242,
+      "title": "Starting a landscaping job yanked colonists out of the vehicle they were boarding",
+      "module": "Fix_LandscapeUnitFilter.lua"
+    },
+    {
+      "line": 257,
+      "title": "A salvaged farm kept supplying its dome with oxygen forever",
+      "module": "Fix_GhostFarmOxygen.lua"
+    },
+    {
+      "line": 267,
+      "title": "A destroyed tunnel still worked as a shortcut",
+      "module": "Fix_DestroyedTunnels.lua"
+    },
+    {
+      "line": 278,
+      "title": "Large Wind Turbines never got their Frictionless Composites bonus",
+      "module": "90_SaveSanitizer.lua"
+    },
+    {
+      "line": 288,
+      "title": "The Rare Metals Extractor's hammer, and six other machines, worked without their sounds and effects",
+      "module": "Fix_SilentHitMomentFX.lua"
+    },
+    {
+      "line": 310,
+      "title": "An Advanced Orbital Probe could downgrade an already deep-scanned sector",
+      "module": "Fix_ScanDowngrade.lua"
+    },
+    {
+      "line": 324,
+      "title": "Salvaging one piece of track deleted the whole line and its trains",
+      "module": "Fix_TrackSalvageWipe.lua"
+    },
+    {
+      "line": 335,
+      "title": "Meteor-damaged track could not be salvaged at all",
+      "module": "Fix_BrokenTrackSalvage.lua"
+    },
+    {
+      "line": 345,
+      "title": "Salvaging track refunded a stub's worth of Metals however long the line was",
+      "module": "Fix_TrackSalvageRefund.lua"
+    },
+    {
+      "line": 356,
+      "title": "Trains dumped cargo at stations you had told not to store it",
+      "module": "Fix_TrainCargoDumping.lua"
+    },
+    {
+      "line": 369,
+      "title": "Demolishing a station permanently deleted its trains",
+      "module": "Fix_TrainsToVoid.lua"
+    },
+    {
+      "line": 378,
+      "title": "A station attached straight to a Train Tunnel never bridged the power grid",
+      "module": "Fix_TrackTunnelPowerBridge.lua"
+    },
+    {
+      "line": 388,
+      "title": "Two train buildings fought over the same connector hex forever",
+      "module": "Fix_TrackConnectorPingPong.lua"
+    },
+    {
+      "line": 398,
+      "title": "Waiting on the platform was charged again as time on the train",
+      "module": "Fix_TrainWaitTime.lua"
+    },
+    {
+      "line": 408,
+      "title": "A repair the game meant to run on old track had never run",
+      "module": "90_SaveSanitizer.lua"
+    },
+    {
+      "line": 427,
+      "title": "Automatic rockets and landers took off with nothing aboard",
+      "module": "Fix_LanderEmptyLaunch.lua"
+    },
+    {
+      "line": 437,
+      "title": "Edit Payload forgot what you told it, every trip — *judgment call*",
+      "module": "Fix_PayloadTemplateRefill.lua"
+    },
+    {
+      "line": 452,
+      "title": "RC Transports could be ordered onto trade and refugee rockets",
+      "module": "Fix_RocketInteractGuard.lua"
+    },
+    {
+      "line": 461,
+      "title": "The game froze on arrival at an asteroid with subsurface Exotic Minerals",
+      "module": "Fix_ExoticDepositSign.lua"
+    },
+    {
+      "line": 477,
+      "title": "An Earth trade rocket could sit on the landing pad forever",
+      "module": "Fix_TradeRocketFuelRefresh.lua"
+    },
+    {
+      "line": 498,
+      "title": "The Philosopher's Stone mystery hung one step from the end",
+      "module": "Fix_CrystalMysteryHang.lua"
+    },
+    {
+      "line": 510,
+      "title": "A Jumbo Cave's Reinforcement could get stuck clearing waste rock forever",
+      "module": "Fix_JumboCaveReinforcementWedge.lua"
+    },
+    {
+      "line": 524,
+      "title": "Freeing the wisps paid about a thousandth of the power it promised",
+      "module": "Fix_WispRewards.lua"
+    },
+    {
+      "line": 532,
+      "title": "Destroying trapped wisps paid twice what the message promised",
+      "module": "Fix_WispRewards.lua"
+    },
+    {
+      "line": 541,
+      "title": "A meteor could destroy the St. Elmo's Fire sinkhole",
+      "module": "Fix_SinkholeIndestructible.lua"
+    },
+    {
+      "line": 551,
+      "title": "A finished Mirror Sphere site still offered its actions",
+      "module": "Fix_MirrorSphereSite.lua"
+    },
+    {
+      "line": 561,
+      "title": "A story step asked for a cave-in on a map that does not exist, and the story stopped",
+      "module": "Fix_AnomalyCaveInMap.lua"
+    },
+    {
+      "line": 574,
+      "title": "The Domes Overview stopped marking domes in trouble",
+      "module": "Fix_DomeOverviewHighlight.lua"
+    },
+    {
+      "line": 582,
+      "title": "A graph said a resource was barely consumed while its bar was full height",
+      "module": "Fix_GraphConsumedCaption.lua"
+    },
+    {
+      "line": 597,
+      "title": "A rocket that had left could have gone on restricting your drones",
+      "module": "Fix_DroneTransportMinors.lua"
+    },
+    {
+      "line": 605,
+      "title": "Two story-scripting defects that the shipped numbers happen to hide",
+      "module": "Fix_SequenceLatents.lua"
+    },
+    {
+      "line": 611,
+      "title": "Pre-set building layouts ignored your research",
+      "module": "Fix_LayoutTechLock.lua"
+    }
+  ]
+}
