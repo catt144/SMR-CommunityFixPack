@@ -29,6 +29,25 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### 2026-09-11 — 153: the Reddit "160% productivity" thread is NOT a bug — one reply to post if you want to
+
+> **Checked end to end against both game versions; no defect filed.** A Russia player can't get 3 extractors to
+> 160 Performance and blames the update for amplification and fuel "no longer adding to it". **That's a mix-up
+> between two different numbers, not a regression** — Amplify and Fueled Extractor boost *Production*, and never
+> touched *Performance*, in either version. I also diffed every number that does feed Performance (traits,
+> specialist penalties, the lot): **all identical, and the update actually made this goal easier twice over** —
+> the old "Extractor AI pins a staffed extractor at 50" bug is now fixed in the game itself (which is why our own
+> fix for it was deleted in hotfix 2), and heavy workload went from +20 to +25.
+>
+> **Decision: post the reply or not.** Recommendation: **post it** — it's a player who can actually finish the
+> goal with the right advice, and the thread's one comment is pointing them toward filing a bug report that
+> would go nowhere. Draft is in `FIELD_REPORT_REPLIES.md`. Nothing here needs the keyboard.
+>
+> ⚠️ **One correction landed in our own records:** `F108.md` credited its completed 3/3 run partly to the
+> "Amplify upgrade". Amplify cannot affect Performance, so that attribution was wrong and is now corrected in
+> the entry. The run itself and its result stand. It matters because that line was a candidate to repeat to
+> Paradox.
+
 ### 2026-09-11 — 152: F59 IS REPAIRED (not uploaded, not playtested) · F60's retirement is STOPPED on your uncommitted pack
 
 > **Built tonight** (migrationfix link 01; `Code/Fix_FreedHousingNotice.lua`). The vacancy

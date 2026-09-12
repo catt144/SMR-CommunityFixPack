@@ -296,6 +296,18 @@ pre-stuck rocket reloaded and left.
 
 ⚠️ "maintenance won't clear it" is INHERITED (`RequiresMaintenance.lua:413-417`, investigator read).
 
+**Russia's "3 manned Extractors at 160% Performance" goal (Reddit, r/SurvivingMars, Pancer1900) — no bug; see `agent/bugs/F108.md`**
+> Performance and Production are two different numbers, and the upgrades you're looking at only move the second one. Amplify (+25%) and Fueled Extractor (+30%) boost Production — they have never added to Performance, in this version or the last one, so nothing changed there in the update. The goal counts Performance only. What actually raises it: the workers themselves. A colonist's Performance is 50 plus their Morale, so maxed Morale alone gets you to about 150 — which is exactly where you are. Everything past that comes from the extras stacking: Workaholic is +20, heavy workload is +25 (it went up from 20 in this update), and the big one is specialisation — extractors want **geologists**, and a worker of the wrong specialisation is −50. Also check nobody is working outside their home dome, which is −10. Avoid Lazy, Alcoholic or Renegade workers in those three buildings. One thing that should make this less painful: the goal is checked every hour and only needs all three extractors at 160 at the same check, so a short overlap is enough — you don't have to hold it indefinitely.
+
+⚠️ The "−50 for the wrong specialisation" and "+25 heavy workload" numbers are SOURCE (`Lua/__const.lua`,
+`NonSpecialistPerformancePenalty` / `OvertimedShiftPerformance`, both re-read on 1.1.0.403908 and diffed against
+the 1.0.7 archive). ✅ The hourly-check-and-latch claim rests on our OWN attended run (`F108.md` row_status,
+2026-08-28, goal ticked 3/3 and completed) plus `Data/SponsorGoals.lua:557-576` — it is not a player report.
+⛔ Do NOT repeat the old "Amplify upgrade helped reach 160" line from F108's record; it is corrected there.
+⚠️ Nothing in this reply mentions the pack — this player has not said they use it, and the answer is the same
+either way. ⛔ Do not tell them to research or un-research Extractor AI: on 1.1.0 vanilla no longer caps a
+staffed extractor at 50, so that advice is stale.
+
 **Deep scan finds nothing (Steam, "Possible Bug") — C86**
 > Orbital probes only deep-scan once you've researched Adapted Probes. Deep Scanning on its own doesn't change probes; it lets your normal sector scans find deep deposits when a sector is scanned again. So probes launched before Adapted Probes only do a normal scan, which matches what you saw. One small real bug turned up while checking: with the five-sector Advanced Orbital Probe and no Adapted Probes, a neighbouring sector you had already deep-scanned gets marked back to "Scanned", and scanning it again finds nothing new. We've fixed that too — it'll be in the next update.
 
