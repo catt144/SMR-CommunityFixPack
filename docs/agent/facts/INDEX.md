@@ -31,7 +31,7 @@ The preamble that opened the old file is `_preamble.md`.
 | EF-016 | Sample mod format in `<game>\ModTools\Samples\Mods`; docs in `ModTools\Docs\index.md.html`. | — | 2026-07-29 | 1 | [EF-016.md](EF-016.md) |
 | EF-017 | Replacing an EXISTING global from mod code works | — | 2026-07-29 | 6 | [EF-017.md](EF-017.md) |
 | EF-018 | `OnMsg` is additive, confirmed structurally | — | 2026-07-29 | 3 | [EF-018.md](EF-018.md) |
-| EF-019 | GAME-TIME THREADS PERSIST BY DEFAULT — real-time threads do not | — | 2026-07-30 | 16 | [EF-019.md](EF-019.md) |
+| EF-019 | GAME-TIME THREADS PERSIST BY DEFAULT — real-time threads do not | — | 2026-09-11 | 31 | [EF-019.md](EF-019.md) |
 | EF-020 | A named GLOBAL game-time thread's BODY is stored in a table you can edit, and the engine ships the restart helper | 2026-08-02 | 2026-08-02 | 23 | [EF-020.md](EF-020.md) |
 | EF-021 | Every shipped popup is ASYNC — the persistable popup path is dead code | — | 2026-07-30 | 11 | [EF-021.md](EF-021.md) |
 | EF-022 | A MOD-AUTHORED CLOSURE STORED ON A PERSISTED GAME OBJECT GOES INTO THE SAVE, SURVIVES UNINSTALL, AND KEEPS RUNNING | 2026-07-31 | 2026-07-31 | 28 | [EF-022.md](EF-022.md) |
