@@ -30,6 +30,25 @@ What every harness here does, and why it is trusted exactly as far as it is:
     argument (:434), table.get is a nil-safe nested index. Stock Lua raises on
     all three, so ENGINE_SHIMS supplies them. A shim is a convention the shipped
     code depends on, not a claim about the game.
+  * ⛔ BUT A STUB FOR A BODY THAT CAN *REFUSE* IS A BEHAVIOUR CHANGE, NOT A
+    TOLERANCE -- the rule above does NOT extend to it, and the distinction cost a
+    false finding that cleared a full audit (F59 "A3", filed and retracted
+    2026-09-11; EF-092). desk_f59_interact.py stubbed GetResidenceComfort to
+    `function() return 50,0 end`, which reads as inert because comfort SCORES were
+    not what the test measured. The real body (Residence.lua:416-434) gates on
+    ValidateBuilding (Workplace.lua:1316-1327), which tests `destroyed` -- so the
+    constant stub DELETED a validity guard and three legs then "measured" a harm
+    that cannot happen, repeatably, in a fixture that could not have produced the
+    right answer. Shim what the shipped code needs to RUN; never what it uses to
+    DECIDE. Before asserting a harm, list every stubbed function the result passes
+    through and ask of each: can the real body return nil, validate, or reject?
+    Cheap tell -- the claim turns on an object being in an unusual STATE
+    (destroyed / demolishing / dying / disabled), which is exactly what validity
+    helpers test. When you find one, keep BOTH legs (stub shows the difference,
+    shipped body refutes it) so the artefact cannot be re-derived; desk_f59_*.py's
+    `real_comfort=True` is the worked example. And note that a peer re-running
+    your harness is NOT an independent check of your fixture: consistency across
+    legs proves nothing when every leg shares one stub.
 
 ⚠️ WHAT THIS IS NOT. The desk Lua is lupa's, not the engine's; nothing here ran
 in a game; a harness that holds shows that a probe or a recipe DISCRIMINATES on
