@@ -10,4 +10,7 @@ __pycache__/
 # OS
 Thumbs.db
 Desktop.ini
-.claude/
+# .claude/ is local scratch and never committed -- except the skills, which are
+# project material both vendors load (mirrored to .agents/skills/ by --regen).
+.claude/*
+!.claude/skills/

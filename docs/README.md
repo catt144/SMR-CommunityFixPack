@@ -17,6 +17,9 @@ docs/
                           drafts the owner posts, and the record of what went
                           up — agents draft them and keep them current
   FUTURE_IDEAS.md         parking lot, NOT a backlog. Nothing in it is work
+  WAITING_ON_YOU.md       GENERATED owner register — every decision and playtest
+                          leg currently held for the owner, newest first. Never
+                          hand-edit: `python tools/doccheck.py --regen`
   README.md               this map
   BUGS.md · STATUS.md     3-line stubs pointing at where they went
   agent/
@@ -30,6 +33,27 @@ docs/
   archive/                spent. SESSION_LOG.md, PLAYTEST_ARCHIVE.md,
                           MOD_DESCRIPTION.md (frozen), retired prompts
 ```
+
+## The archive boundary
+
+`docs/archive/` is append-only history — spent reports, retired prompts, session
+logs, settled decision bodies. A root **`.rgignore`** keeps it out of a *default*
+ripgrep, which is what the agent `Grep` tool runs, so an ordinary search returns
+only what is **live**. This is a search boundary, not a deletion: the record is
+whole, and sometimes it is exactly what you want — *"we may already have learned
+this in an archived report."*
+
+Two ways to search it **on purpose**:
+
+```
+rg <term> docs/archive/     the archive alone — naming the path defeats the filter
+rg --no-ignore <term>       live + archive in one pass
+```
+
+`grep -r`, `git grep` and `git log` never consult `.rgignore` and always see
+everything. If a default search comes back empty on something you are sure this
+project once knew, that is the boundary working — re-run with one of the two forms
+above before concluding it was never here. It is not a bug and not a missing file.
 
 ## The two split folders
 

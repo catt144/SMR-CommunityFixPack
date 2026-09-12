@@ -347,6 +347,479 @@ def check_entry_mirror(out):
     return False
 
 
+# ---------------------------------------------------------------------------
+# docs/WAITING_ON_YOU.md — the generated owner register
+#
+# The owner's own account of the problem: they opened PLAYTEST_CHECKLIST.md to
+# find where three playtest items stood, found "a spaghetti doc", and closed it
+# again. The decisions section is 615 KB across 114 items and nothing in it
+# answers the one question the owner actually arrives with — *what is waiting on
+# me?*  This register answers exactly that and nothing else.
+#
+# It is GENERATED, for the reason every hand-kept register in the sister repo
+# failed: they all grew (open-threads to 46 KB, decisions to 81 KB) and then
+# needed eviction of their own. A generated file cannot drift from its source
+# and cannot bloat past what its source says.
+#
+# Source of truth is a marker line placed directly under a checklist `### ` item:
+#
+#     <!-- ck:162 status:open owner:yes -->
+#
+# status ∈ open · ruled · closed · deferred;  owner = whether an action is owed
+# *by the owner* (as opposed to owed by an agent). One marker is written once per
+# lifecycle change, by whoever makes the change.
+#
+# Until an item carries a marker its row is INFERRED from the header's prose plus
+# STATE's open-decisions section, and the row says so. That fallback is the whole
+# reason this file is useful on day one instead of after 114 hand edits: a marker
+# row is the owner's own word, an inferred row is a claim, and the register never
+# blurs the two. Markers land item by item and the coverage line is what moves.
+
+WAITING_MD = os.path.join(DOCS, "WAITING_ON_YOU.md")
+CHECKLIST = os.path.join(DOCS, "PLAYTEST_CHECKLIST.md")
+CK_SECTION = "## Decisions waiting on you"
+
+MARKER_RE = re.compile(r"<!--\s*ck:(\d+|-)\s+status:([a-z]+)\s+owner:(yes|no)\s*-->")
+MARKER_STATUSES = ("open", "ruled", "closed", "deferred")
+
+# The prose fallback, inherited verbatim in behaviour from the 2026-09-12 move
+# dry-run so the two never disagree about what a header says.
+CK_CLOSED_RE = re.compile(
+    r"✅|CLOSED|RULED|LANDED|\bRAN\b|~~|RETIRED|\bDONE\b|DECIDED|IS FIXED|"
+    r"IS PUBLISHED|IS REPAIRED|Already fixed|Nothing to decide", re.I)
+CK_DEFER_RE = re.compile(r"⏳|DEFERRED|HELD|PARKED|PART-RULED|⚖️")
+STATE_SETTLED_RE = re.compile(r"[^\d]{0,3}\s*(RULED|CLOSED|LANDED|DONE|DEFERRED|RAN)")
+
+
+def state_owed_numbers():
+    """-> the decision numbers STATE says outright are owed BY THE OWNER.
+
+    An earlier cut of this inferred openness by walking every number in STATE's
+    open-decisions section and reading the words next to it. That parse was
+    brittle in exactly the way prose always is — `**156**/**159** RULED` reads as
+    "156 is open" because the RULED is not adjacent to the 156 — and it produced
+    a register that put five plainly-closed items in the doubtful pile and left
+    two plainly-owed ones out of the table.
+
+    So this reads only the places where STATE *enumerates* what is owed, and
+    infers nothing from adjacency:
+      `Owner OWES: ck157 … · ck151 (b)/(c) · ck144 (a) … · ck162 …`
+      `STILL OPEN: 53 harden now or in 1.0.1 · 47 two modder-page wordings.`
+    Everything else is left to a marker, which is the point of markers.
+    """
+    if not os.path.exists(STATE):
+        return set()
+    text = open(STATE, encoding="utf-8", errors="replace").read()
+    owed = set()
+    for line in text.split("\n"):
+        hit = re.search(r"Owner OWES:(.*)$", line)
+        if hit:
+            owed.update(int(x) for x in re.findall(r"ck(\d{2,3})\b", hit.group(1)))
+        hit = re.search(r"STILL OPEN:(.*?)(?:\(|$)", line)
+        if hit:
+            tail = re.sub(r"\d+\.\d+\.\d+", "", hit.group(1))
+            # "53 harden", "47 two" are open items; "73 CLOSED" is not.
+            owed.update(int(x) for x in re.findall(r"\b(\d{2,3})\b(?=\s+[a-z])", tail))
+    return owed
+
+
+def state_owed_lines():
+    """-> STATE's OWED bullet, as text lines, or []. The playtest legs the owner owes."""
+    if not os.path.exists(STATE):
+        return []
+    lines = open(STATE, encoding="utf-8", errors="replace").read().split("\n")
+    for i, line in enumerate(lines):
+        if line.startswith("- 🚫 OWED") or line.startswith("- 🚫OWED"):
+            block = [line]
+            for nxt in lines[i + 1:]:
+                if nxt.startswith("- ") or nxt.startswith("## ") or not nxt.strip():
+                    break
+                block.append(nxt)
+            return block
+    return []
+
+
+def checklist_items():
+    """-> one record per `### ` item in the checklist's decisions section.
+
+    Fenced `###` lines are not items (measured: 0 of 114 sit inside a fence, but
+    the guard is what keeps that true). Each record carries its marker if it has
+    one, and the prose reading either way so the two can be compared.
+    """
+    if not os.path.exists(CHECKLIST):
+        return None
+    lines = open(CHECKLIST, encoding="utf-8", errors="replace").read().split("\n")
+    try:
+        start = next(i for i, l in enumerate(lines) if l.startswith(CK_SECTION))
+    except StopIteration:
+        return None
+    end = next((i for i in range(start + 1, len(lines)) if lines[i].startswith("## ")),
+               len(lines))
+    items, fence = [], False
+    for i in range(start + 1, end):
+        line = lines[i]
+        if line.startswith("```"):
+            fence = not fence
+            continue
+        if not fence and line.startswith("### "):
+            items.append({"line": i + 1, "header": line})
+    for k, item in enumerate(items):
+        stop = items[k + 1]["line"] - 1 if k + 1 < len(items) else end
+        body = lines[item["line"]:stop]
+        item["bytes"] = sum(len(x) + 1 for x in lines[item["line"] - 1:stop])
+        marker = None
+        for line in body[:4]:            # a marker sits directly under its header
+            hit = MARKER_RE.search(line)
+            if hit:
+                # Most old items were never numbered — `ck:-` marks those, so a
+                # status can be recorded without inventing an identifier for them.
+                ck = hit.group(1)
+                marker = {"ck": None if ck == "-" else int(ck),
+                          "status": hit.group(2), "owner": hit.group(3) == "yes"}
+                break
+        item["marker"] = marker
+        head = item["header"]
+        date = re.search(r"2026-\d\d-\d\d", head)
+        item["date"] = date.group(0) if date else ""
+        nums = [int(x) for x in re.findall(
+            r"\b(\d{2,3})\b",
+            re.sub(r"2026-\d\d-\d\d|\d\d-\d\d|\d+\.\d+\.\d+", "", head))
+            if int(x) < 400]
+        # An item's own number is the FIRST in its header ("### ✅ 156 RULED: …");
+        # every later one is prose ("441 declarations, 133 inventory rows").
+        item["num"] = nums[0] if nums else None
+        item["prose_closed"] = bool(CK_CLOSED_RE.search(head))
+        item["prose_defer"] = bool(CK_DEFER_RE.search(head))
+    return items
+
+
+def classify_items(items):
+    """Give every item a status + where that status came from.
+
+    A marker is the owner's own word and wins outright. Without one the fallback
+    is deliberately CONSERVATIVE rather than clever — it claims a status only in
+    the two cases where a wrong answer is nearly impossible, and sends everything
+    else to "needs a marker" instead of guessing:
+
+      open    STATE enumerates the item's number as owed by the owner.
+      closed  the header's prose says settled AND STATE does not list it as owed.
+
+    A register that quietly guesses wrong is worse than one that says "I don't
+    know about these 40" — the owner can act on the second.
+    """
+    owed = state_owed_numbers()
+    for item in items:
+        mark = item["marker"]
+        if mark:
+            item["status"] = mark["status"]
+            item["owner"] = mark["owner"]
+            item["source"] = "marker"
+            continue
+        item["source"] = "inferred"
+        is_owed = item["num"] is not None and item["num"] in owed
+        if is_owed:
+            item["status"], item["owner"] = "open", True
+            # STATE is the kernel and more current than a header that has been
+            # edited in place for weeks, so it wins -- but where the two actually
+            # contradict each other the row SAYS SO instead of looking settled.
+            item["conflict"] = item["prose_closed"]
+        elif item["prose_closed"]:
+            item["status"], item["owner"] = "closed", False
+        else:
+            item["status"], item["owner"] = "ambiguous", True
+    return items
+
+
+def _ask(header, limit=150):
+    """The header trimmed to a one-line ask. Never reworded — only cut.
+
+    A register is read at a glance; a row that carries a whole paragraph is the
+    checklist again. The link goes to the full item, so cutting loses nothing.
+    """
+    text = re.sub(r"^#+\s*", "", header).strip()
+    text = re.sub(r"\s*2026-\d\d-\d\d\s*—?\s*", " ", text, count=1).strip(" —·")
+    text = re.sub(r"\s+", " ", text)
+    text = re.sub(r"[\[\]|]", "", text)          # keep the markdown table intact
+    if len(text) > limit:
+        text = text[:limit].rsplit(" ", 1)[0].rstrip(" ,.;:—·*") + "…"
+    return text
+
+
+def render_waiting(items):
+    """-> the full docs/WAITING_ON_YOU.md as lines. Pure function of its sources."""
+    L = ["<!-- GENERATED — never hand-edit; regenerate with: python tools/doccheck.py --regen -->",
+         "<!-- Source: docs/PLAYTEST_CHECKLIST.md markers (+ prose fallback) and docs/agent/STATE.md -->",
+         "",
+         "# Waiting on you",
+         "",
+         "Everything this project is currently holding for the owner, newest first. Generated —",
+         "editing this file does nothing; change the checklist item (or its marker) and re-run",
+         "`python tools/doccheck.py --regen`.",
+         ""]
+
+    if items is None:
+        L += ["> ⚠️ `docs/PLAYTEST_CHECKLIST.md` has no `%s` section — nothing to read." % CK_SECTION, ""]
+        items = []
+
+    waiting = [i for i in items if i["status"] in ("open", "deferred") and i["owner"]]
+    ambiguous = [i for i in items if i["status"] == "ambiguous"]
+
+    L += ["## Decisions (%d)" % len(waiting), "",
+          "`marker` = your own recorded word · `_inferred_` = read off STATE, a claim ·",
+          "⚠️ `_conflict_` = STATE lists it as owed but the checklist header reads settled;",
+          "one marker settles which is right.", ""]
+    if waiting:
+        L += ["| # | date | from | the ask |", "|---|---|---|---|"]
+        for item in waiting:
+            num = str(item["num"]) if item["num"] else "—"
+            flag = ("marker" if item["source"] == "marker"
+                    else "⚠️ _conflict_" if item.get("conflict") else "_inferred_")
+            note = " ⏳" if item["status"] == "deferred" else ""
+            L.append("| %s | %s | %s | [%s](PLAYTEST_CHECKLIST.md#L%d)%s |"
+                     % (num, item["date"] or "—", flag, _ask(item["header"]),
+                        item["line"], note))
+    else:
+        L.append("_Nothing open._")
+    L.append("")
+
+    owed = state_owed_lines()
+    L += ["## Owed playtest legs", ""]
+    if owed:
+        L += ["From `docs/agent/STATE.md`, verbatim:", "", "```"] + \
+             [x.rstrip() for x in owed] + ["```"]
+    else:
+        L.append("_STATE records no OWED line._")
+    L.append("")
+
+    L += ["## Needs a marker to settle (%d)" % len(ambiguous), "",
+          "The header's prose and STATE's open-decisions section disagree, so no row above can",
+          "be trusted for these. One marker line each settles it permanently.", ""]
+    if ambiguous:
+        for item in ambiguous:
+            num = str(item["num"]) if item["num"] else "—"
+            L.append("- **%s** %s — [%s](PLAYTEST_CHECKLIST.md#L%d)"
+                     % (num, item["date"] or "", _ask(item["header"], 110), item["line"]))
+    else:
+        L.append("_None._")
+    L.append("")
+
+    marked = len([i for i in items if i["source"] == "marker"])
+    L += ["## Coverage", "",
+          "**%d of %d** checklist items carry a `<!-- ck:N status:… owner:… -->` marker; "
+          "**%d** are inferred" % (marked, len(items), len(items) - marked),
+          "from prose and may be wrong. This number is the one to move: every marker added",
+          "retires a guess.", ""]
+    return L
+
+
+# ---------------------------------------------------------------------------
+# The push set, and the durable-fact fingerprints.
+#
+# PUSH = the files loaded into EVERY session before it has decided anything.
+# They are the only documents in this repo where bytes genuinely hurt, because
+# nobody chooses to read them and the cost is paid on every single session,
+# forever. Everything else is PULL (read a section on demand, uncapped) or
+# RECORD (written once, read rarely, never capped). Capping the wrong class is
+# how a doc system starts destroying its own record; so the budget is on this
+# SET, as one number, and on nothing else.
+
+PUSH_SET = [
+    ("CLAUDE.md", lambda: CLAUDE_MD),
+    ("docs/agent/STATE.md", lambda: STATE),
+    ("prompts/perma/GENERAL_USE_PROMPT.md",
+     lambda: os.path.join(DOCS, "agent", "prompts", "perma", "GENERAL_USE_PROMPT.md")),
+    ("prompts/perma/DISPATCH.md",
+     lambda: os.path.join(DOCS, "agent", "prompts", "perma", "DISPATCH.md")),
+    # Claude's own memory index: outside the repo, per-machine, and absent for
+    # any other vendor — reported when present, never required.
+    ("MEMORY.md (Claude, outside the repo)",
+     lambda: os.environ.get("SMR_MEMORY", os.path.join(
+         os.path.expanduser("~"), ".claude", "projects",
+         "c--Dev-SMR-BugFixPack", "memory", "MEMORY.md"))),
+]
+PUSH_BUDGET = 40 * 1024
+PUSH_CHARS_PER_TOKEN = 2.17     # measured on this tree's own documents
+
+
+def push_set_report(out):
+    """Report the auto-loaded set as ONE number. Report-only; never gates."""
+    rows, total, missing = [], 0, 0
+    for label, resolve in PUSH_SET:
+        path = resolve()
+        if os.path.exists(path):
+            size = os.path.getsize(path)
+            total += size
+            rows.append("    %-38s %7d B" % (label, size))
+        else:
+            missing += 1
+            rows.append("    %-38s   absent" % label)
+    out.append("PUSH SET: %d B in %d file(s) ≈ %dk tokens (budget %d B)%s"
+               % (total, len(PUSH_SET) - missing, round(total / PUSH_CHARS_PER_TOKEN / 1000),
+                  PUSH_BUDGET, "" if total <= PUSH_BUDGET else "  ⚠ OVER"))
+    out.extend(rows)
+    if total > PUSH_BUDGET:
+        out.append("    → every session pays this before it has decided anything; "
+                   "evict from the largest, not the easiest")
+
+
+ACF = os.environ.get("SMR_ACF", r"A:\SteamLibrary\steamapps\appmanifest_3215050.acf")
+
+
+def installed_build():
+    """-> the installed game's Steam buildid, read from the .acf, or None.
+
+    A build id is VOLATILE-external: it changes without anyone here doing
+    anything (this rig auto-updated into 1.1.0 unasked on 2026-09-08). So it is
+    always read, never stored — a number pasted into a doc is a number that will
+    be wrong.
+    """
+    try:
+        with open(ACF, encoding="utf-8", errors="replace") as fh:
+            hit = re.search(r'"buildid"\s+"(\d+)"', fh.read())
+        return hit.group(1) if hit else None
+    except OSError:
+        return None
+
+
+def emit_fingerprints(out):
+    """--emit-fingerprint: does each group of facts still describe what is here?
+
+    This is the O(1) half of three-way verification. A fact whose fingerprint
+    still holds needs no re-read at all; a fact whose fingerprint moved is the
+    only kind worth re-deriving. Without this the only way to answer "does this
+    still hold" was to re-read the source, which is why nobody did.
+    """
+    sf = facts_splitter()
+    groups, total = {}, 0
+    for fact in sf.load_from_dir()["facts"]:
+        total += 1
+        pin = str(fact.get("derived_at") or "").strip()
+        bare = re.sub(r"\s*\(inferred[^)]*\)", "", pin) or "(none)"
+        g = groups.setdefault(bare, {"n": 0, "inferred": 0})
+        g["n"] += 1
+        g["inferred"] += 1 if "(inferred" in pin else 0
+
+    build = installed_build()
+    out.append("")
+    out.append("FINGERPRINTS — derived_at across %d facts; installed game build %s"
+               % (total, build or "UNREADABLE (%s)" % ACF))
+
+    shas, behind = [], []
+    for bare in sorted(groups, key=lambda k: (-groups[k]["n"], k)):
+        g = groups[bare]
+        note = " (%d inferred)" % g["inferred"] if g["inferred"] else ""
+        if bare.startswith("game"):
+            if build is None:
+                verdict = "cannot check — the .acf is unreadable from here"
+            elif build in bare:
+                verdict = "HOLDS — this IS the installed build; no re-read needed"
+            else:
+                verdict = ("MOVED — installed is %s, so these line citations describe "
+                           "a tree that is not on disk (1.0.7 archived, EF-083)" % build)
+            out.append("  %-30s %3d fact(s)%s  %s" % (bare, g["n"], note, verdict))
+        elif re.match(r"^[0-9a-f]{7,40}$", bare):
+            shas.append((bare, g))
+        else:
+            out.append("  %-30s %3d fact(s)%s  no fingerprint — re-derive before "
+                       "relying on it" % (bare, g["n"], note))
+
+    # Repo shas collapse to one row: a dozen "N commits behind" lines is noise,
+    # and the only thing a reader does with them is notice none is current.
+    if shas:
+        nfacts = sum(g["n"] for _, g in shas)
+        ninf = sum(g["inferred"] for _, g in shas)
+        for sha, _ in shas:
+            try:
+                behind.append(int(subprocess.check_output(
+                    ["git", "rev-list", "--count", "%s..HEAD" % sha],
+                    cwd=REPO, stderr=subprocess.DEVNULL).decode().strip()))
+            except (subprocess.CalledProcessError, OSError, ValueError):
+                behind.append(-1)
+        live = [b for b in behind if b >= 0]
+        out.append("  %-30s %3d fact(s)%s  %s"
+                   % ("repo shas (%d distinct)" % len(shas), nfacts,
+                      " (%d inferred)" % ninf if ninf else "",
+                      "all behind HEAD by %d–%d commits — re-check before quoting"
+                      % (min(live), max(live)) if live else "none resolve here"))
+        out.append("      %s" % "  ".join("%s+%d" % (s, b) for (s, _), b in zip(shas, behind)))
+    out.append("  → a group that HOLDS needs no re-read; re-derive only what moved.")
+
+
+# ---------------------------------------------------------------------------
+# Skills, and their Codex mirror.
+#
+# Same shape as CLAUDE.md -> AGENTS.md: the vendor that edits has the source,
+# the other vendor gets a byte copy written by --regen, and drift is RED. A
+# skill that differed between vendors would be worse than no skill, because the
+# difference would be invisible to whoever was not looking.
+#
+# `.claude/` is otherwise local scratch and gitignored; `.claude/skills/` is
+# re-included by .gitignore because it is project material, not scratch.
+
+SKILLS_DIR = os.path.join(REPO, ".claude", "skills")
+CODEX_SKILLS_DIR = os.path.join(REPO, ".agents", "skills")
+SKILL_WARN = 3 * 1024           # the design target
+SKILL_HARD = 4 * 1024           # a skill past this is a document, not a skill
+
+
+def skill_names():
+    """-> sorted skill folder names that actually hold a SKILL.md."""
+    if not os.path.isdir(SKILLS_DIR):
+        return []
+    return sorted(n for n in os.listdir(SKILLS_DIR)
+                  if os.path.isfile(os.path.join(SKILLS_DIR, n, "SKILL.md")))
+
+
+def regen_skills():
+    """Mirror every skill byte-for-byte into .agents/skills/ for Codex."""
+    for name in skill_names():
+        dst_dir = os.path.join(CODEX_SKILLS_DIR, name)
+        if not os.path.isdir(dst_dir):
+            os.makedirs(dst_dir)
+        with open(os.path.join(SKILLS_DIR, name, "SKILL.md"), "rb") as fh:
+            data = fh.read()
+        with open(os.path.join(dst_dir, "SKILL.md"), "wb") as fh:
+            fh.write(data)
+
+
+def check_skills(out):
+    """Both vendors' copies identical, and neither skill has grown into a doc."""
+    names = skill_names()
+    if not names:
+        out.append("SKILLS: none")
+        return True
+    ok, rows = True, []
+    for name in names:
+        src = os.path.join(SKILLS_DIR, name, "SKILL.md")
+        dst = os.path.join(CODEX_SKILLS_DIR, name, "SKILL.md")
+        size = os.path.getsize(src)
+        note = ""
+        if not os.path.exists(dst):
+            out.append("SKILLS: RED  .agents/skills/%s/SKILL.md is missing — Codex "
+                       "cannot see this skill" % name)
+            out.append(REGEN_CURE)
+            ok = False
+        else:
+            with open(src, "rb") as a, open(dst, "rb") as b:
+                if a.read() != b.read():
+                    out.append("SKILLS: RED  %s differs between .claude/skills/ and "
+                               ".agents/skills/ — the two vendors would read different "
+                               "instructions" % name)
+                    out.append(REGEN_CURE)
+                    ok = False
+        if size > SKILL_HARD:
+            out.append("SKILLS: RED  %s is %d B, hard cap %d — a skill this long is a "
+                       "document; move the body into docs/ and point at it"
+                       % (name, size, SKILL_HARD))
+            ok = False
+        elif size > SKILL_WARN:
+            note = "  ⚠ over the %d B target" % SKILL_WARN
+        rows.append("    %-24s %5d B%s" % (name, size, note))
+    out.append("SKILLS: %d skill(s), mirrored to .agents/skills/" % len(names))
+    out.extend(rows)
+    return ok
+
+
 def regen(out):
     """--regen: rewrite every GENERATED file from its source; the checks then run."""
     sb, sf = splitter(), facts_splitter()
@@ -358,9 +831,46 @@ def regen(out):
         data = fh.read()
     with open(AGENTS_MD, "wb") as fh:
         fh.write(data)
-    out.append("REGEN: wrote docs/agent/bugs/INDEX.md, docs/agent/facts/INDEX.md "
-               "and AGENTS.md (byte copy of CLAUDE.md) — the checks below read "
-               "the result")
+    regen_skills()
+    items = checklist_items()
+    sb.write_lines(WAITING_MD, render_waiting(classify_items(items) if items else items))
+    out.append("REGEN: wrote docs/agent/bugs/INDEX.md, docs/agent/facts/INDEX.md, "
+               "docs/WAITING_ON_YOU.md, the .agents/skills/ mirror and AGENTS.md "
+               "(byte copy of CLAUDE.md) — "
+               "the checks below read the result")
+
+
+def check_waiting(out):
+    """docs/WAITING_ON_YOU.md must be exactly what its sources render right now.
+
+    Same standing as the two INDEXes: a generated file that has drifted from its
+    source is a file that lies, and the owner reads this one to decide what to do
+    next, so it is RED and not a warn.
+    """
+    if not os.path.exists(WAITING_MD):
+        out.append("WAITING: RED  docs/WAITING_ON_YOU.md is missing")
+        out.append(REGEN_CURE)
+        return False
+    items = checklist_items()
+    want = render_waiting(classify_items(items) if items else items)
+    have = open(WAITING_MD, encoding="utf-8", errors="replace").read().split("\n")
+    if have and have[-1] == "":
+        have = have[:-1]
+    if have != want:
+        first = next((i for i in range(max(len(have), len(want)))
+                      if (have[i:i + 1] or [None]) != (want[i:i + 1] or [None])), 0)
+        out.append("WAITING: RED  docs/WAITING_ON_YOU.md is stale — first differs at "
+                   "line %d" % (first + 1))
+        out.append(REGEN_CURE)
+        return False
+    total = len(items or [])
+    marked = len([i for i in (items or []) if i["source"] == "marker"])
+    waiting = len([i for i in (items or [])
+                   if i["status"] in ("open", "deferred") and i["owner"]])
+    amb = len([i for i in (items or []) if i["status"] == "ambiguous"])
+    out.append("WAITING: fresh — %d checklist items, %d marked, %d waiting on the owner, "
+               "%d need a marker" % (total, marked, waiting, amb))
+    return True
 
 
 def facts_splitter():
@@ -1061,6 +1571,10 @@ def main():
                          "AGENTS.md (byte copy of CLAUDE.md) — then run the checks")
     ap.add_argument("--emit-counts", action="store_true",
                     help="also print the STATE-ready counts block")
+    ap.add_argument("--emit-fingerprint", action="store_true",
+                    help="also print, per derived_at group, whether the facts "
+                         "still describe what is installed/checked out — the "
+                         "O(1) answer to \"does this still hold\"")
     ap.add_argument("--verify-split", nargs="?", const="HEAD~1", metavar="REV",
                     help="re-run the BUGS split accounting against REV's "
                          "docs/BUGS.md and the files on disk (default HEAD~1)")
@@ -1095,6 +1609,8 @@ def main():
     ok = check_root(out) and ok
     ok = check_entry_mirror(out) and ok
     ok = check_state_and_stubs(out) and ok
+    ok = check_waiting(out) and ok
+    ok = check_skills(out) and ok
     counts = recount(model, out)
     ok = temporary_sweep(out) and ok
     ok = load_order(out) and ok
@@ -1102,6 +1618,7 @@ def main():
     ok = parse_gate(out) and ok
     ok = module_set_agreement(out) and ok
     ok = bodycheck_selftest(out) and ok
+    push_set_report(out)   # report-only: the budget is the owner's to act on
     testkit_tree(out)  # report-only by owner decision (2026-08-04) — never gates
     alias_gate(out)    # report-only, same standing as testkit_tree
 
@@ -1121,6 +1638,9 @@ def main():
         except sb.SplitError as exc:
             out.append("  RED  %s" % exc)
             ok = False
+
+    if args.emit_fingerprint:
+        emit_fingerprints(out)
 
     print("\n".join(out))
     print("doccheck: %s" % ("GREEN" if ok else "RED"))

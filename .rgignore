@@ -1,0 +1,9 @@
+# Deliberate search boundary, not an exclusion of the record.
+# `docs/archive/` is append-only history: spent reports, retired prompts, session
+# logs, settled decision bodies. It is kept OUT of a default ripgrep so a routine
+# search returns only what is live — and it is still there, on purpose:
+#     rg <term> docs/archive/     search the archive by naming it
+#     rg --no-ignore <term>       search live + archive in one pass
+# `grep -r` and `git log/grep` ignore this file entirely and always see everything.
+# Full note: docs/README.md -> "The archive boundary".
+docs/archive/
