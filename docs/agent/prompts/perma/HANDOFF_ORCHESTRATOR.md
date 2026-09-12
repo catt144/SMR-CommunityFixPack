@@ -95,6 +95,23 @@ which is fully briefed.
 - **Checklist 150** carries the owner's three decisions: the "where do you collect your bugs" wording, the C88 fix
   shape, and retiring F37 (1.1.0 closed its leak — the dev was right).
 
+**Fix pack — from `smr-bugfixpack-cb` (2026-09-12, handed off at low context):**
+- ⭐⭐ **NEW CONSTRAINT, and it re-prices everything we publish: TWO PARADOX DEVELOPERS ARE USING OUR FIX LIST TO
+  PLAN THEIR NEXT HOTFIXES** (owner, 09-12). A stale or overstated row now costs **a developer's time**, not just
+  our credibility. ⇒ treat every public-surface claim as an input to someone else's engineering plan.
+- **`prompts/STILL_NEEDED_SWEEP.md` — READY, not started (ck156).** Per-module settlement of "is this fix still
+  needed on 1.1.0?" across all 46, judging the **module and its fix-list row separately**. Prompted by the owner:
+  *"I really hate keeping things in there if they are not needed."* Carries the three cases that motivate it —
+  F60 (hotfix 2 kept it; the CONSUMER had moved, not the fix), `SaintBlessing` (self-disables and is correctly
+  KEPT — save heal + 1.0.7 players who get the live pack from the stores), `F102`/ExoticDepositSign (never
+  re-checked for 1.1.0 at all). ⚖️ A 46-module census is a HUNT ⇒ Codex/Astra, and it should be proposed as a
+  chain. ⛔ Not part of v9.
+- **v9 is written and waiting on the owner** (ck155): F59 repair + F60 retirement, `last_changes` settled as a
+  LIST after three passes (shape recorded in `RELEASE_OUTBOX`), count 49 on all five copies, site fix-list at 49
+  and committed-but-unpublished. Sequence: upload, then fire the site job **in the same sitting**.
+- **Still open from the migration eight:** F54 was **never swept** (audit §4 by name); F52/F53/F73 are PARTIAL with
+  named residuals; **F59's A1 expedition half has never been run in play** and the change note says so.
+
 **Fix pack — from `smr-bugfixpack-cb` (2026-09-11, the migration cluster):**
 - ⏳ **`RELEASE.md` IS RUNNING** in `smr-bugfixpack-d3` as this was written — it consumes `RELEASE_OUTBOX`
   (four Pending entries, count chaining to **49**), sweeps the public surfaces and hands the owner the upload.

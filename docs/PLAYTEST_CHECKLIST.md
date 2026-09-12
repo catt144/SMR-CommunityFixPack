@@ -29,6 +29,30 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### 2026-09-12 — 156: are we still shipping fixes the game no longer needs? One sweep to settle it
+
+> **Your ask, 2026-09-12:** *"I really hate keeping things in there if they are not needed"* — sharpened by the fact
+> that **two Paradox developers are using our fix list to plan their next hotfixes.** That turns a stale row from
+> an embarrassment into **their wasted time**: a row claiming a bug the game already fixed can send a developer to
+> repair something that is not broken. Brief is written and ready: `agent/prompts/STILL_NEEDED_SWEEP.md`.
+>
+> **What prompted it — three real cases, all found this week:**
+> - **F60** was kept by hotfix 2 and turned out to need retiring. The fix still worked; what moved was *who reads
+>   the number it corrects*. A sweep that only asks "does it still apply?" would miss it again.
+> - **Saint's blessing** self-switches off on 1.1.0 and is **correctly kept** — it still heals affected saves and
+>   still works for 1.0.7 players, who get the live pack from the stores. Not every silent module is dead weight.
+> - **The asteroid deposit sign fix** was never re-checked against 1.1.0 at all. It just survived the cull.
+>
+> **Decision: do you want this run, and as a chain?** Recommendation: **yes, as a chain** — 46 modules is too many
+> for one sitting, and the honest first step is a cheap pass over all of them to find the handful worth real work.
+> ⚖️ By your own routing a census goes to **Codex/Astra**, not a Claude build session.
+>
+> ⛔ **Not part of the v9 upload**, which is finished and waiting on you.
+>
+> ⚠️ One thing the brief cannot decide for you: **retire-vs-keep is a who-benefits call and it is yours.** Two live
+> examples pull opposite ways — F60 was removed for changing numbers nothing reads, Saint's blessing was kept for
+> a population (1.0.7 players on the stores) that a 1.1.0-only view would have ignored.
+
 ### 2026-09-11 — 155: v8 went live this afternoon with no close-out — one receipt from you · v9 is READY TO UPLOAD
 
 > **What I found, read from the live Steam page rather than from you:** the Workshop page shows an update at
