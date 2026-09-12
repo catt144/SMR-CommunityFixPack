@@ -233,6 +233,12 @@ return {
 		'name', "Fix_CloggedBuildingRelease",
 		'CodeFileName', "Code/Fix_CloggedBuildingRelease.lua",
 	}),
+	-- Added 2026-09-12 (C89, post-release maintenance — owner ruling, checklist
+	-- 157 (c); a JUDGMENT CALL, not a defect repair), same rule as above.
+	PlaceObj('ModItemCode', {
+		'name', "Fix_FactionDomeSizeGate",
+		'CodeFileName', "Code/Fix_FactionDomeSizeGate.lua",
+	}),
 	PlaceObj('ModItemCode', {
 		'name', "90_SaveSanitizer",
 		'CodeFileName', "Code/90_SaveSanitizer.lua",

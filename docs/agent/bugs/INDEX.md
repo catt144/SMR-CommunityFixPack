@@ -1,9 +1,9 @@
 <!-- GENERATED — never hand-edit; regenerate with: python tools/doccheck.py --regen -->
 <!-- split_bugs.py --write is the one-time MIGRATION from the retired pre-split doc, never a regeneration; verify: python tools/doccheck.py -->
 
-# Bug index — 220 rows, 185 entry files
+# Bug index — 221 rows, 186 entry files
 
-119 F + 12 D + 89 C. `seq` is the entry's position in the old BUGS.md file order;
+119 F + 12 D + 90 C. `seq` is the entry's position in the old BUGS.md file order;
 the row order below is the old index table's own. Generated from the front matter of
 `docs/agent/bugs/*.md` — edit an entry, not this file.
 
@@ -232,5 +232,6 @@ the row order below is the old index table's own. Generated from the front matte
 | 182 | C86 | An Advanced Orbital Probe fired without Adapted Probes knocks an already deep-scanned neighbouring sector back to 'Scanned' | tested-attended | P3 | source-read; attended in-game seam check 2026-09-11 | [C86.md](C86.md) |
 | 183 | C87 | 'Landscaping excavation is too deep' blocks lakes on ordinary flat ground in 1.1.0; the check is unchanged from 1.0.7, so one of its inputs (lake-prefab depth data, the cursor's height, or generated terrain) changed | cand | P2 | source-read + prefab-data decode; one field report (Steam, 1.1.0, new save, screenshot); a PDX developer asked for an in-game bug report | [C87.md](C87.md) |
 | 184 | C88 | Building Codes (Lax / Strict) skips the maintenance change on prefab-deployed buildings through an explicit `from_prefab` exit the law descriptions don't mention; under Strict, prefab buildings miss the promised −30% | cand | P3 | source-read (both handlers + the flag's source); one field report (Steam, 2026-09-08); question put to the devs in that thread | [C88.md](C88.md) |
-| 185 | C89 | Prosperity for Mars reports 'domes with more than 10% unemployment' while the top bar shows 0 unemployed; the faction reads an hourly stored snapshot, the bar reads live | cand | P2 | source-read on 1.1.0.403908 + 1.0.7; one field report (Steam, 09-12, no save); not reproduced; not ours; design inconsistency pinned (4 of 5 factions lack the dome-size guard the 5th has) | [C89.md](C89.md) |
+| 185 | C89 | Prosperity for Mars reports 'domes with more than 10% unemployment' while the top bar shows 0 unemployed; the faction reads an hourly stored snapshot, the bar reads live | cand | P2 | source-read on 1.1.0.403908 + 1.0.7; one field report (Steam, 09-12, no save); not reproduced; JUDGMENT-CALL fix BUILT 09-12 (Fix_FactionDomeSizeGate), desk control 26/26 + the harness falsified on 6 guard-reverted variants; NOT run in a game | [C89.md](C89.md) |
+| 186 | C90 | OUR BUG, not the game's: a DataPatch module whose apply() self-check DECLINED still patches shipped data — the runner re-reads the veto before every pass but never the apply verdict | cand | P3 | source-read of Code/00_Core.lua + the three DataPatch call sites; desk-reproduced on a scratch copy (desk_c89_faction_gate.py leg k2 holds the guard for the one module that has it) | [C90.md](C90.md) |
 
