@@ -742,6 +742,81 @@ def emit_fingerprints(out):
     out.append("  → a group that HOLDS needs no re-read; re-derive only what moved.")
 
 
+# ---------------------------------------------------------------------------
+# Skills, and their Codex mirror.
+#
+# Same shape as CLAUDE.md -> AGENTS.md: the vendor that edits has the source,
+# the other vendor gets a byte copy written by --regen, and drift is RED. A
+# skill that differed between vendors would be worse than no skill, because the
+# difference would be invisible to whoever was not looking.
+#
+# `.claude/` is otherwise local scratch and gitignored; `.claude/skills/` is
+# re-included by .gitignore because it is project material, not scratch.
+
+SKILLS_DIR = os.path.join(REPO, ".claude", "skills")
+CODEX_SKILLS_DIR = os.path.join(REPO, ".agents", "skills")
+SKILL_WARN = 3 * 1024           # the design target
+SKILL_HARD = 4 * 1024           # a skill past this is a document, not a skill
+
+
+def skill_names():
+    """-> sorted skill folder names that actually hold a SKILL.md."""
+    if not os.path.isdir(SKILLS_DIR):
+        return []
+    return sorted(n for n in os.listdir(SKILLS_DIR)
+                  if os.path.isfile(os.path.join(SKILLS_DIR, n, "SKILL.md")))
+
+
+def regen_skills():
+    """Mirror every skill byte-for-byte into .agents/skills/ for Codex."""
+    for name in skill_names():
+        dst_dir = os.path.join(CODEX_SKILLS_DIR, name)
+        if not os.path.isdir(dst_dir):
+            os.makedirs(dst_dir)
+        with open(os.path.join(SKILLS_DIR, name, "SKILL.md"), "rb") as fh:
+            data = fh.read()
+        with open(os.path.join(dst_dir, "SKILL.md"), "wb") as fh:
+            fh.write(data)
+
+
+def check_skills(out):
+    """Both vendors' copies identical, and neither skill has grown into a doc."""
+    names = skill_names()
+    if not names:
+        out.append("SKILLS: none")
+        return True
+    ok, rows = True, []
+    for name in names:
+        src = os.path.join(SKILLS_DIR, name, "SKILL.md")
+        dst = os.path.join(CODEX_SKILLS_DIR, name, "SKILL.md")
+        size = os.path.getsize(src)
+        note = ""
+        if not os.path.exists(dst):
+            out.append("SKILLS: RED  .agents/skills/%s/SKILL.md is missing — Codex "
+                       "cannot see this skill" % name)
+            out.append(REGEN_CURE)
+            ok = False
+        else:
+            with open(src, "rb") as a, open(dst, "rb") as b:
+                if a.read() != b.read():
+                    out.append("SKILLS: RED  %s differs between .claude/skills/ and "
+                               ".agents/skills/ — the two vendors would read different "
+                               "instructions" % name)
+                    out.append(REGEN_CURE)
+                    ok = False
+        if size > SKILL_HARD:
+            out.append("SKILLS: RED  %s is %d B, hard cap %d — a skill this long is a "
+                       "document; move the body into docs/ and point at it"
+                       % (name, size, SKILL_HARD))
+            ok = False
+        elif size > SKILL_WARN:
+            note = "  ⚠ over the %d B target" % SKILL_WARN
+        rows.append("    %-24s %5d B%s" % (name, size, note))
+    out.append("SKILLS: %d skill(s), mirrored to .agents/skills/" % len(names))
+    out.extend(rows)
+    return ok
+
+
 def regen(out):
     """--regen: rewrite every GENERATED file from its source; the checks then run."""
     sb, sf = splitter(), facts_splitter()
@@ -753,10 +828,12 @@ def regen(out):
         data = fh.read()
     with open(AGENTS_MD, "wb") as fh:
         fh.write(data)
+    regen_skills()
     items = checklist_items()
     sb.write_lines(WAITING_MD, render_waiting(classify_items(items) if items else items))
     out.append("REGEN: wrote docs/agent/bugs/INDEX.md, docs/agent/facts/INDEX.md, "
-               "docs/WAITING_ON_YOU.md and AGENTS.md (byte copy of CLAUDE.md) — "
+               "docs/WAITING_ON_YOU.md, the .agents/skills/ mirror and AGENTS.md "
+               "(byte copy of CLAUDE.md) — "
                "the checks below read the result")
 
 
@@ -1530,6 +1607,7 @@ def main():
     ok = check_entry_mirror(out) and ok
     ok = check_state_and_stubs(out) and ok
     ok = check_waiting(out) and ok
+    ok = check_skills(out) and ok
     counts = recount(model, out)
     ok = temporary_sweep(out) and ok
     ok = load_order(out) and ok
