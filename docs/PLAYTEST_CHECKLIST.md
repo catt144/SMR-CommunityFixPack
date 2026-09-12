@@ -71,6 +71,14 @@ completed tests move whole to
 > applied neither here. **(c) recommendation now: yes**, as a judgment call: apply the Justice gate to the four
 > unguarded unemployment filters and the three homeless ones. It can ride the C85/C88 build if you say so — I
 > would add it as a third item to that prompt before you fire it.
+>
+> ✅ **(c) RULED YES (you, same day): "bring them to 10".** Your question — do the other unemployment-dislike
+> factions have a minimum guard? **No.** Only the Justice Movement has one (its ten-colonist dome gate, on both
+> unemployment and homeless). Mars Democratic Party, Workers' Party, New Sol and Prosperity have no dome gate, no
+> MinColonists and no MinSols on either. **Added as the third item to `agent/prompts/C85_C88_BUILD.md`**: four
+> unemployment filters brought to ten, **and the three unguarded homeless twins on the same precedent** — that
+> half is my inclusion; strike it in the override slot at the top of the prompt if you want unemployment only.
+> Still open here: (a) post the reporter reply, (b) the developer note's route.
 
 > **What it is:** the faction's "high unemployment" dislike is a **once-an-hour snapshot** (stored and shown on the
 > panel until the next hour, and it fires a notification the first hour it appears), while the top-bar Unemployed
