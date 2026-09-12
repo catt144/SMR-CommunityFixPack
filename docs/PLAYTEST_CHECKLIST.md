@@ -29,6 +29,44 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### ✅ 2026-09-12 — 165 RULED BY YOU: **replies to players are PULL-ONLY from now on.** Nothing is owed from you, and no agent will raise one at you again unless you ask.
+
+> **Your words:** *"We are gonna move replies to pull only, when I ask for them, not agent tracked.
+> We keep getting side tracked with replies. Replies are as we can do them, our primary focus is
+> fixing bugs, not a messaging service. And I have fielded a load of reply questions today."*
+>
+> **What changes, in the order an agent is most likely to get it wrong:**
+>
+> 1. ⛔ **No agent drafts a reply unless you ask in that session.** A new field report is not a
+>    request for a draft.
+> 2. ⛔ **Replies come off your owed list entirely** — `STATE.md`'s OWES line, the handoff's
+>    decisions-owed table, and the "waiting on you" summary at the end of a session. They are not
+>    owed. They are pulled.
+> 3. ⛔ **A `DRAFT` sitting in `docs/FIELD_REPORT_REPLIES.md` is not a nudge and not work in
+>    progress.** It waits indefinitely, by design. No "while you're here".
+> 4. ⛔ **Nothing else is ever gated on a reply going out** — not a fix, not a release, not a sitting.
+> 5. ✅ **When you ask, you get one draft and then silence** — no follow-on queue.
+>
+> **Applied immediately:** item **157** is the only reply currently on your list and it comes off —
+> see below. Nothing was deleted; the drafts stay where they are, waiting.
+>
+> ✅ **WHAT THIS DOES NOT TOUCH, stated so no agent narrows it wrongly.** A player's report is
+> **evidence about a defect**, and triaging one into `agent/bugs/` is **ordinary bug-fixing work and
+> continues exactly as before** — the pack exists because players tell us things. What is pull-only
+> is the **messaging**: writing the reply and chasing whether it went up. ⛔ No agent may cite this
+> ruling to avoid reading, filing or investigating a report. Today's Foreign Aid Rocket report is the
+> live example: it stays a lead, and if the reporter answers it gets filed like any other.
+>
+> **Where it is written down, so it binds rather than being remembered:**
+> - `agent/WORKFLOW.md` authoring **rule 5b** (`R10c`) — the rule agents are bound by, placed directly
+>   under rule 5, which is the mirroring obligation it carves the exception out of.
+> - `docs/FIELD_REPORT_REPLIES.md` — at the very top, as the first thing anyone opening that file reads.
+> - `agent/STATE.md` — in "Rules in force", and the OWES line no longer carries a reply.
+>
+> ⚖️ **The condition it was ruled under** (authoring rule 5a): you had fielded a day of reply questions
+> while the project's actual gate was an unrun playtest. **The cost being cut is your attention being
+> diverted from fixing bugs** — not the replies, which still go out as and when you want them.
+
 ### ✅ 2026-09-12 — 164 RULED BY YOU: **KEEP** — "fine as long as we are sure it won't cause issues." **The condition was checked, not assumed; it holds, and the check closed a gap.** Nothing further is owed.
 
 > **What was checked, because "are we sure" deserved a real answer rather than a restatement.**
@@ -742,7 +780,9 @@ failure from F60's deleted file; it is desk evidence, not release clearance or a
 > Required doccheck line, verbatim: `warn STATE.md is 13722 bytes, warn threshold is 12288 — copy this line VERBATIM
 > into the owner report; the owner fires agent/prompts/perma/STATE_EVICTION.md` (STATE was not touched by this audit).
 
-### 2026-09-12 — 157: new Steam report, "Prosperity for Mars angry about unemployment with 0 unemployed" — triaged, not ours. **Your pushback checked out: it is an oversight, and the developers' own fix exists in one faction out of five. Three decisions: (a) post the reporter reply, (b) hand it to the developers, (c) carry a judgment-call fix ourselves. Recommendations: (a) yes, (b) yes, (c) not yet — wait for their answer.**
+### ⏸ 2026-09-12 — 157 — **OFF YOUR OWED LIST 2026-09-12 under the pull-only ruling (165).** Both calls are messaging, not fixing: (a) the reporter reply is a **draft waiting in `docs/FIELD_REPORT_REPLIES.md`, pulled when you want it** · (b) the developer note is **yours to route whenever** — ⚠️ worth knowing it carries more weight than an ordinary reply, because two Paradox developers plan hotfixes from our fix list, but it is still not owed and no agent will raise it again. ⛔ **The triage underneath this item stands and is unaffected.** Original ask kept below.
+
+### 2026-09-12 — 157 (the original ask): new Steam report, "Prosperity for Mars angry about unemployment with 0 unemployed" — triaged, not ours. **Your pushback checked out: it is an oversight, and the developers' own fix exists in one faction out of five. Three decisions: (a) post the reporter reply, (b) hand it to the developers, (c) carry a judgment-call fix ourselves. Recommendations: (a) yes, (b) yes, (c) not yet — wait for their answer.**
 
 > **What your pushback found (added later the same day):**
 > - **Five factions** carry the identical "dome with 10 % unemployed" dislike (Prosperity, Mars Democratic Party,

@@ -73,6 +73,21 @@ time and each one is named after the miss it prevents.
    back to the owner as an open question** — the exact attention drain the
    original triage rule existed to prevent.
 
+5b. **Player replies are PULL-ONLY (R10c, owner ruling 2026-09-12, checklist
+   165).** Rule 5's mirroring obligation ⛔ **does NOT extend to replies to player
+   reports.** Never draft one unasked, never put one on the owner's owed list
+   (`STATE.md`'s OWES line, a handoff's decisions table, a session summary's
+   "waiting on you"), never raise a waiting `DRAFT` as a nudge, and never gate
+   other work on a reply going out. A draft in `docs/FIELD_REPORT_REPLIES.md`
+   waits indefinitely **by design**. When the owner asks for one, write it and
+   stop — one ask, one draft, no follow-on queue. ✅ **This does not touch
+   triage:** a player's report is evidence about a defect, and filing it into
+   `agent/bugs/` is ordinary bug-fixing work that continues unchanged — ⛔ never
+   cite this rule to avoid reading, filing or investigating a report. ⚖️ Condition
+   (per 5a): the owner had fielded a day of reply questions while the project's
+   real gate was an unrun playtest. The cost being cut is **owner attention
+   diverted from fixing bugs**, not the replies themselves.
+
 Two mechanical rules that came with the same restructure:
 
 6. **`INDEX.md` in `agent/bugs/` and `agent/facts/` is GENERATED.** Edit the

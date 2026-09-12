@@ -86,7 +86,6 @@ RULE**. ⛔ **Re-derive every count once, carry none:** modules ±the retirement
 | ck | what |
 |---|---|
 | **158** | the three-leg sitting above — **the v10 gate** |
-| **157** | (a) post the C89 reporter reply · (b) route the developer note — ⚠️ that report came through **our** channel, so the route is the fix list the devs plan from, or the Building Codes thread |
 | **151** | (b) which sections of `MIGRATION_DEV_REPORT.md` may be sent · (c) which checks join the ck144 (a) sitting |
 | **144 (a)** | the owed post-upload boot, ONE boot, now on v8 (STATE's OWED line carries the recipe list) |
 | **148** | ⏳ deferred, not closed — all three calls open |
@@ -228,6 +227,11 @@ or re-derive any of them** — read 162 for the reasoning.
   → **a dedicated cross-vendor Claude agent ONLY if the sniff test fails.**
 - Standing: **hunts, broad diffs and heavy subagent-coordination legs go to Astra (Codex); builds go to a Claude session.**
   Write such briefs tool-neutral, make coordination git-visible (the push is the claim), commit agent reports verbatim.
+- ⛔⛔ **REPLIES TO PLAYERS ARE PULL-ONLY (owner, 2026-09-12, ck165; `WORKFLOW.md` rule 5b).** Never draft one unasked; never
+  put one on the owner's owed list, in this table or a session summary; never raise a waiting `DRAFT` as a nudge; never gate a
+  fix, a release or a sitting on a reply. The owner had fielded a day of reply questions while the real gate was an unrun
+  playtest. ✅ **Triaging a report into `agent/bugs/` is UNAFFECTED and continues** — the report is evidence about a defect;
+  what is pull-only is the messaging. ⛔ Never cite this to avoid reading, filing or investigating a report.
 - ⚖️ **The VOICE RULE binds every public surface:** plain for players, precise for the two Paradox developers who plan their
   hotfixes from our fix list. **No "no guarantees" / "unverified" / "not witnessed" hedging.** State scope by saying what the
   fix does and for whom; the dated entry keeps the limits. If the owner cannot follow a sentence, it is word salad and it fails.

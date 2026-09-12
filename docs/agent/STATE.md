@@ -37,7 +37,7 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   Desk `prompts/DLC_DEEP_CHECK.md` (`HUNT_AUDIT.md` §8).
   ⭐ FR-1 TEMP WORKAROUND MOD LIVE 09-11 (Steam 3799500849 / PDX 158711; FINDINGS §11–§12). ALL FR-1 work → `prompts/perma/LINUX_DISPATCH.md`.
   Field: 3 working (one 10xx), 1 failing (GTX 1070, log requested). Chain `prompts/fixtoggles/` (ck148, DEFERRED 09-12).
-  Owner OWES: ck157 (C89 reply + dev route) · ck151 (b)/(c) · ck144 (a) v7 boot. ✅ ck162 FULLY RULED 09-12 (all four §4 loose ends shut;
+  Owner OWES: ck151 (b)/(c) · ck144 (a) v7 boot. ⛔ **ck165: REPLIES ARE PULL-ONLY — never list one here** (ck157 removed 09-12). ✅ ck162 FULLY RULED 09-12 (all four §4 loose ends shut;
   C87 file-and-watch, 133(5) closed with 73 — reopens only if false-blame reports recur) · ✅ ck164 KEEP (F48 pass stays; `Tracks.lua` now pinned).
   ✅ ck163 RULED all four 09-12: (a) CLOSED ck137/138/140/141/142 + C80 cand→closed · (b) desk session commissioned · (c) after-patch procedure BINDING
   `WORKFLOW.md:156` · (d) BUILT, bodycheck **0 NO-MANIFEST** (was 2), surfaced ck164 · **(b) RAN + FOUND NOTHING** (`reports/PINNED_PARENTS_PASS.md`:
@@ -102,6 +102,8 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 - Both-mods-loaded is the rig's normal config (08-12).
 - Status words: `tested-attended`/`tested-unattended`; bare `tested` = legacy, closed to new work, never bulk-
   upgraded (08-15). Screen claims need an attended witness.
+- ⛔ **Replies to players are PULL-ONLY (09-12, ck165; `WORKFLOW.md` rule 5b).** Never draft one unasked, never put one on the
+  owner's owed list, never nudge a waiting `DRAFT`, never gate work on one. ✅ Triaging a report into `agent/bugs/` is UNAFFECTED.
 - ⛔ SKIPs BY NAME, never a total.
 - Display name Relaunched Fix Pack; `id` + `[CommunityFixPack]` log tag KEPT (08-17).
 - Never name fredware's mod on a player surface; no player load-order advice (`EF-054`, FIX_POLICY §8).

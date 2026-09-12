@@ -8,6 +8,52 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-12 — ck165: replies to players become PULL-ONLY, and come off the owner's owed list
+
+tags: ck165 replies pull-only rule-5b R10c owner-attention FIELD_REPORT_REPLIES ck157
+
+Owner ruling, in their words: *"We are gonna move replies to pull only, when I ask for them, not agent
+tracked. We keep getting side tracked with replies. Replies are as we can do them, our primary focus is
+fixing bugs, not a messaging service. And I have fielded a load of reply questions today."* Docs only,
+doccheck GREEN, no `Code/` change, nothing deleted — every existing draft stays where it is, waiting.
+
+**The rule, as bound rather than remembered.** Agents must not: draft a reply unasked (a new field report
+is not a request for one); put a reply on the owner's owed list (`STATE.md`'s OWES line, a handoff's
+decisions table, a session summary's "waiting on you"); raise a waiting `DRAFT` as a nudge or a "while
+you're here"; or gate any fix, release or sitting on a reply going out. A draft in
+`docs/FIELD_REPORT_REPLIES.md` **waits indefinitely by design.** When the owner asks, write one and stop —
+one ask, one draft, no follow-on queue.
+
+**✅ The carve-out that matters more than the rule, written into every copy.** A player's report is
+**evidence about a defect**, and triaging one into `agent/bugs/` is **ordinary bug-fixing work and
+continues unchanged**. What is pull-only is the *messaging*. ⛔ No agent may cite this ruling to avoid
+reading, filing or investigating a report — the pack exists because players tell us things, and a rule
+aimed at message-drafting must never be read as a rule against listening. Today's Foreign Aid Rocket
+report is the live example and stays a lead.
+
+**Where it landed, deliberately in four places so it binds at the point of the mistake:**
+`agent/WORKFLOW.md` **rule 5b (R10c)**, placed directly beneath rule 5 — the owner-decision *mirroring*
+obligation — because 5b is precisely an exception carved out of 5, and an agent reaching for 5 needs to
+meet 5b in the same breath · the very top of `docs/FIELD_REPORT_REPLIES.md`, as the first thing anyone
+opening that file reads · `STATE.md` "Rules in force", with the OWES line rewritten to carry a ⛔ never
+list one here · the handoff's working-method section.
+
+**Applied immediately: checklist 157 came off the owed list.** Both its calls are messaging — (a) the C89
+reporter reply, now a draft pulled when wanted; (b) the developer note, the owner's to route whenever.
+⚠️ Recorded beside (b) rather than flattened: it carries more weight than an ordinary reply, because two
+Paradox developers plan hotfixes from our fix list — but it is still not owed and no agent raises it again.
+The triage underneath 157 is untouched.
+
+⚖️ **Condition recorded, per rule 5a:** the owner had fielded a day of reply questions while the project's
+actual gate was an unrun playtest (ck158). **The cost being cut is owner attention diverted from fixing
+bugs**, not the replies, which still go out as and when they want them.
+
+⚠️ **Noted, not acted on:** `STATE.md` is now 15,917 bytes against a 12,288 warn and an 18,432 hard cap —
+~2,500 bytes of headroom. The warn is a ruled, accepted state (ck132 SKIP) and no eviction is authorised,
+but the trajectory is worth the owner's eye before it reaches the hard cap.
+
+---
+
 ## 2026-09-12 — 163 (b) ran and found nothing; the Residence row resolved, and the Station row was a line-shift false positive
 
 tags: ck163b pinned-parents ReactionObject Residence Station false-positive treediff TABLE-HUNK cost-estimate

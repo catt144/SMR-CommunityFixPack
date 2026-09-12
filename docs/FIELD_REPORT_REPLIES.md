@@ -1,10 +1,43 @@
 # Replies to player reports — drafts to post, and what went up
 
+⛔⛔ **REPLIES ARE PULL-ONLY — owner ruling, 2026-09-12 (checklist 165). THIS IS THE FIRST
+THING TO READ IN THIS FILE.** *"We are gonna move replies to pull only, when I ask for them, not
+agent tracked. We keep getting side tracked with replies. Replies are as we can do them, our
+primary focus is fixing bugs, not a messaging service."*
+
+**What that means, for agents, in order of how often it will be got wrong:**
+
+1. ⛔ **Do NOT draft a reply unless the owner asks for one in that session.** A new field report
+   is not a request for a draft.
+2. ⛔ **Do NOT put replies on the owner's owed list** — not in `STATE.md`'s OWES line, not in a
+   handoff's "decisions owed" table, not in a session summary's "waiting on you". They are not
+   owed. They are pulled.
+3. ⛔ **Do NOT raise a `DRAFT` sitting in this file as a prompt, a nudge, or a "while you're
+   here".** A draft waiting here is **not** a task in progress. It waits indefinitely, by design.
+4. ⛔ **Do NOT gate any other work on a reply going out**, and never let a reply's wording block a
+   fix, a release or a sitting.
+5. ✅ **When the owner DOES ask** — "draft a reply to X", "what do we say to Y" — draft it here,
+   to the usual standard, and stop. One ask, one draft, no follow-on queue.
+
+✅ **WHAT THIS RULING DOES NOT TOUCH — read this before narrowing anything:** a player's report is
+still **evidence about a defect**, and triaging one into `agent/bugs/` is **ordinary bug-fixing
+work that continues exactly as before**. The pack exists because players tell us things. What is
+pull-only is the **messaging** — writing and chasing the reply. ⛔ Never use this rule to justify
+not filing, not reading, or not investigating a report.
+
+⚖️ **The condition it was ruled under** (authoring rule 5a — record the state, re-read it before
+treating it as binding): the owner had **fielded a load of reply questions in a single day** while
+the project's actual gate was an unrun playtest. The cost being cut is **owner attention diverted
+from fixing bugs**, not the replies themselves.
+
+---
+
 **For you (the owner):** each section below is a reply drafted for a player's report
-on Steam, Reddit or GitHub. Post the ones you want, then tell the agent what went
-up; it records that under "What was actually posted". Every reply: check the thread
-first (skip it if it is already answered), no version numbers, and no fix promise
-until the fix is tested.
+on Steam, Reddit or GitHub. Post the ones you want, whenever you want; nothing here
+expires and nothing here is chasing you. Tell an agent what went up and it records
+that under "What was actually posted". Every reply: check the thread first (skip it
+if it is already answered), no version numbers, and no fix promise until the fix is
+tested.
 
 **For agents:** a reply is not authority — the `agent/bugs/` entries are. Drafts
 live here because posting is the owner's action; update a draft in the same commit
