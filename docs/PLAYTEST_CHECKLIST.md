@@ -196,7 +196,7 @@ completed tests move whole to
 > **give it the machine-readable lines** so the next one is caught in five seconds. Cost: minutes.
 > ⛔ Not done — the brief was read-only.
 
-### ⚖️ 2026-09-12 — 162 PART-RULED: **(a) leave dropped · (b) the draft is let go, deliberately.** ⏳ **(c) the 2-minute lake check is still owed · (d) is still yours — the information you asked for is below.**
+### ⚖️ 2026-09-12 — 162: **(a) leave dropped · (b) CUT · (c) declined on cost, C87 is file-and-watch.** ⏳ **Only (d) is left — the log breadcrumb, and it is one word.**
 
 > ⚖️ **RULED BY YOU 2026-09-12 — (a) leave dropped · (b) don't remember ⇒ the loss is ACCEPTED.**
 > ⏳ **(c) is still owed** — it is a 2-minute look, not a decision. ⏳ **(d) you asked for more
@@ -217,9 +217,19 @@ completed tests move whole to
 > ✅ **Nothing of substance is lost:** both *leads* live in [C74](agent/bugs/C74.md) ("Two leads the
 > fix does not cover"), re-derived from the 1.1.0 tree. Only the written reply goes.
 >
-> **(c) STILL OWED — the 2-minute lake check.** Build menu → Lakes → Small Lake, hover flat ground.
-> Places fine ⇒ that player's map, the reply goes out. Warning shows ⇒ broken for everyone on 1.1.0,
-> paste the console line. It is holding a reply to a player a Paradox developer is already talking to.
+> **(c) ✅ RULED 2026-09-12 — DECLINED ON COST, and the reply no longer depends on it.** Your words:
+> *"162 (c) is a lead not a test, we have only ever had one report. So I am not spending time to run it
+> down when we have so many other things to work on."* ⇒ **C87 is file-and-watch.**
+> ⛔ **This is a pricing call, not a doubt about the lead** — the source read stands unchanged and a
+> **second field report reopens it immediately**. No agent should re-ask you for this sitting.
+> ⭐ **One thing it forced, and it is the reason this needed acting on rather than just recording:** the
+> held reply's closing clause read *"we're checking whether it happens on every 1.1.0 map"* — a promise
+> of work we have now decided not to do. **Removed**, not left to go quietly false. The reply is
+> re-drafted, its hold is discharged, and it is now a plain `DRAFT` you can post whenever you like: every
+> remaining sentence is source-derived and true either way. It also now says plainly that the pack does
+> not touch lakes, which the reporter has reason to want in writing.
+> ⚠️ The `[NEVER RUN]` recipe is kept in [C87](agent/bugs/C87.md), marked declined-on-cost, so a second
+> report revives a correct instrument rather than a rebuilt one.
 >
 > **(d) ⏳ OPEN — here is the information you asked for.**
 >

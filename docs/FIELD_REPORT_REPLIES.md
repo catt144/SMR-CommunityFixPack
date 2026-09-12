@@ -170,17 +170,16 @@ which discharges the old "keep only if 150 (c) rules yes" condition on this para
 
 **Lakes, "excavation too deep" — C87**
 
-`STATUS: HELD on ck147` · thread: Steam · subject: C87 · drafted 2026-09-11 · gate: ck147
+`STATUS: DRAFT` · thread: Steam · subject: C87 · drafted 2026-09-11 · **re-drafted 2026-09-12** · gate: none
 
-⛔ Held: the checklist 147 lake check is **unrun** (`C87.md` row_status), and its result changes the reply.
-⚠️ **Checklist 147 was CLOSED 2026-09-12 (owner: cleared) and this hold SURVIVES it.** The gate is the lake
-check itself, not the item number — the check was never run, so the reply's facts are still undecided. Do not
-read a closed ck147 as permission to post this.
-⭐ **The check is now re-asked as checklist 162 (c), 2026-09-12**, with its console line corrected
-(the 09-11 version would have thrown and printed nothing). The gate is unchanged — it is still the
-check, not the item number — but it is back on the owner's list instead of orphaned behind a closed item.
+✅ **THE HOLD IS DISCHARGED, and the check behind it will NOT be run — owner ruling, checklist 162 (c),
+2026-09-12: "a lead not a test … only ever had one report … not spending time to run it down."** C87 is
+**file-and-watch**. ⛔ The previous draft's closing clause — *"we're checking whether it happens on every
+1.1.0 map"* — **promised work this project has now decided not to do, so it is removed rather than left to
+go quietly false.** Nothing else in the reply depended on the check: every sentence below is source-derived
+and true whether the warning turns out to be universal on 1.1.0 or specific to that player's map.
 
-> Worth sending through the in-game report tool as the developer asked. That warning means the game thinks the lake's bottom would end up below the lowest height the map allows, but your spot is ordinary flat ground, so it shouldn't fire there. The check itself didn't change in the update, so something it reads did; we're checking whether it happens on every 1.1.0 map.
+> Worth sending through the in-game report tool as the developer asked — that's the route that puts it in front of them. That warning means the game thinks the lake's bottom would end up below the lowest height the map allows, but your spot is ordinary flat ground, so it shouldn't fire there. The code that makes that decision is unchanged from the last version, so something it reads must have changed instead. The Relaunched Fix Pack doesn't touch lakes, so this one isn't ours either way — but the more detail you can put in that report, the better their chances of pinning it down.
 
 ⚠️ Revised 2026-09-11 after the owner's pushback (the first draft blamed very low ground; the player's screenshot shows
 ordinary ground).

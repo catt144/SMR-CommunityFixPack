@@ -180,12 +180,15 @@ here** — read 162. None is release-blocking. What an agent could do has been d
    the 09-10 post said, so the posting condition was permanently unevaluable. Both `SUPERSEDED` C74 blocks are
    **removed** from `docs/FIELD_REPORT_REPLIES.md` and logged in its cut table with a `git show` pointer.
    ⛔ An **accepted loss, deliberately taken** — do not reconstruct the prose. Both leads survive in `bugs/C74.md`.
-3. **The C87 lake check — re-asked as 162 (c)**, no longer orphaned behind a closed ck147. Its `LAKECHK` console
-   line gained a `NOCURSOR` guard (it threw on a nil controller). ⛔ **Do not repeat the claim that went with
-   that edit:** I recorded the 09-11 spelling `map:GetHeight(x,y)` as witnessed nowhere and said the line would
-   have thrown; a peer refuted it the same day — **19 shipped files use it**, including the exact
-   `obj:GetMap():GetHeight(x, y)` form (`Landscaping.lua:225`). The old line would have run. The claim came from
-   a grep read at `head -5`. Corrected in `bugs/C87.md`, ck147 and 162 (c).
+3. ✅ **The C87 lake check — DECLINED ON COST 2026-09-12 (162 (c)): "a lead not a test … only ever had one
+   report".** C87 is **file-and-watch**; a second report reopens it. ⛔ Do not re-ask for that sitting.
+   ⭐ It forced one real edit: the held reply promised *"we're checking whether it happens on every 1.1.0 map"* —
+   work we had just decided not to do — so the clause was **removed** rather than left to go quietly false, and
+   the reply is now a plain postable `DRAFT`. ⚠️ Watch for that shape elsewhere: **a declined check can leave a
+   promise standing in a player-facing draft.**
+   ⛔ **Do not repeat the claim that went with the earlier `LAKECHK` edit:** I recorded `map:GetHeight(x,y)` as
+   witnessed nowhere and said the line would have thrown; a peer refuted it — **19 shipped files use it**,
+   including the exact `obj:GetMap():GetHeight(x, y)` form (`Landscaping.lua:225`). The old line would have run.
 4. **The 133(5) / 73 breadcrumb contradiction — asked as 162 (d)**, a yes/no. Both records carried it and
    neither asked. Nothing was built either way.
 
