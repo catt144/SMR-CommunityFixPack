@@ -79,11 +79,16 @@ player surface bumps it by one on release.
   and a listed fix disappears. ⚖️ **Owner reworded it 2026-09-11: do not name the
   individual fix or its mechanism.** The line describes the ONGOING review instead,
   which is what it actually is (hotfix 2 retired 36 modules on the same reasoning):
-  *"We are still reviewing our own fixes against the 1.1.0 patch, and where the
-  game's update has resolved all or part of what one of them was written for, that
-  fix is reworked or retired rather than left in. One has been retired this time, so
-  the fix list drops from fifty to forty-nine."* ⇒ future retirements reuse this
-  shape and only change the count sentence.
+  *"We are still working through our own fixes against the 1.1.0 patch. Where the
+  game's own update has solved all or part of what one of our fixes was written for,
+  that fix is retired; where 1.1.0 rewrote the code a fix was built on, the fix is
+  rebuilt against the new version rather than left to drift. Several have been
+  rebuilt that way already, and one more has been retired this time, so the fix list
+  drops from fifty to forty-nine."*
+  ⇒ **Both halves are load-bearing and both are true of the record** — hotfix 2
+  (v6, 09-09) retired **36** modules and **re-copied 10** against 1.1.0's changed
+  bodies, so "several rebuilt" is understated, not spin. ⇒ future retirements reuse
+  this shape and change only the final count sentence.
 - ⚠️ **Loose end, not release-blocking:** the TestKit probe `DomeFreeSpaceMismatch`
   (`30_Probes_Wave3.lua`) still targets the deleted module and will fail on the next
   kit run. TestKit is local-only by design.
