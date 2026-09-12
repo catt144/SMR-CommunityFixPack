@@ -110,6 +110,13 @@ completed tests move whole to
 >    residences too.
 > 3. Click a colonist in that dome **who does not already live in that residence**, then the
 >    full residence, and choose **Set Residence**.
+>    ⛔ **EVERY ATTEMPT NEEDS A DIFFERENT COLONIST.** Repeating with the *same* colonist on
+>    the *same* residence does **nothing at all** — no eviction, no assignment, no change to
+>    the numbers — because the first attempt stamped `user_forced_residence` and
+>    `Residence:ColonistInteract` returns immediately on it (`Residence.lua:334`, stamped at
+>    `:341`), and that stamp lasts `g_Consts.ForcedByUserLockTimeout` = 3,600,000 ms of game
+>    time. A repeat reads exactly like "the fix did nothing", which is a FALSE NEGATIVE, not
+>    a result. (The `:331` rule above is the same trap by a different door.)
 > 4. **Reads 2/2 and the evicted colonist is standing homeless = repaired. 3/2 = still
 >    broken.** More generally: **the left number going above the right number is the bug.**
 >    If you made the home full by closing slots on a bigger residence the pair may read

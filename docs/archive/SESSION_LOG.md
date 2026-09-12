@@ -8,6 +8,58 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-11 - smr-bugfixpack-cb (continued): F59 shipped and witnessed, F60 retired, C85 solved, one Reddit report refuted
+
+tags: F59 F60 C85 F108 C39 EF-019 ck151 ck152 ck153 ck154 release-outbox attended lookback
+
+Continuation of the leg below (the F59 verdict). The owner drove; work went where they pointed.
+
+**Shipped work.** F59's repair was built and audited by sibling sessions and then **OBSERVED WORKING IN PLAY**
+(owner at the keyboard, 1.1.0): a full residence read `residents=14` against `cap=20 closed=6` where the
+unrepaired module reads 15, and the evicted resident landed in the *incoming* colonist's bed — a slot that only
+frees after the old fire point, so the ordering itself was witnessed. `HasAnyFreeLivingSpace()=false` proved the
+check was not vacuous. Owner granted `tested-attended` for the A2 half only. **F60 RETIRED** on the owner's
+ruling: module deleted across `Code/`, `items.lua` and the `metadata.lua` code list together (47/47/47), card
+count 50 → 49 on all five copies, site fix-list entry removed and the F51/F58 rows narrowed.
+
+**Investigations.** **C85** (clogged producers) went from two hypotheses to a mechanism: vanilla's own
+`SetBuildingEnabledState` has a `Duration` branch that auto-re-enables and two shipped events use it, while
+`BuildingClogged` passes only a `Reason`; and a lost reply is *permanent*, not delayed, because the outcome path
+sits inside `if reply then` and `Complete()` never re-registers a `OneTime` bit. Escape-out-of-the-popup refuted.
+Fix shape proposed (read-only sweep, two `GameVar` interlocks) with a build prompt and an A/B that needs no storm.
+**A Reddit "160% productivity" report was REFUTED** — the extractor upgrades boost Production, never Performance,
+in either game version, and 1.1.0 made that sponsor goal *easier* twice over; the param diff found no retune, and
+`OvertimedShiftPerformance` went 20 → 25. **C39/F112**: 1.1.0 deleted the automation-law uplift outright, and the
+arithmetic says it removed a bug — C39's own attended bracket, read the other way up, shows the *uncompensated*
+building was the one behaving as the law's text promises.
+
+**Two corrections to our own records**, both of which were candidates to repeat to Paradox: F108 credited its
+completed 3/3 run partly to the Amplify upgrade, which cannot affect Performance; and F59's `row_status` and the
+public fix list carried claims that 1.1.0 had falsified.
+
+**Rules landed.** `FIX_POLICY` §4 gained two: **enumerate the wrapped function's CALLERS, not its callees**
+(written from F59's failure — "X is Y's only caller" justified a hook site whose wrapped function had eleven
+callers), and **anything deferred into a game-time thread rides in the player's save**, with the zero-upvalue and
+orphan-gate rules that follow. `EF-019` gained what happens when the thread's own body cannot be persisted.
+
+**⚠️ Three process failures worth more than the findings.**
+1. **I asserted an absence without reading the section above my own insertion point** — wrote "the builder never
+   checked the save route" into `F59.md` when the build's own section directly above said exactly that. A peer
+   caught it; corrected in place (`f8d3d65`).
+2. **I re-derived a recorded fact.** The persistence half of that same section is `EF-019`, filed 2026-07-30. The
+   standing rule is to read `facts/INDEX.md` before deriving an engine claim.
+3. **I went in the side door on the public surfaces** — hand-applied three fix-list rows and a count word from a
+   dispatch session instead of routing to `PUBLIC_SURFACE_SWEEP`/`RELEASE.md`, so `RELEASE_OUTBOX` still held only
+   F119 and C86 and `last_changes` described neither of the night's changes. **The owner caught it by asking "the
+   dispatch prompt doesn't need to run?"** Outbox completed (four entries, count arithmetic chaining to 49) and
+   `RELEASE.md` fired to double-check the lot.
+
+Also: my paused-game prediction for the in-play check was wrong and cost the owner minutes — recorded in `F59.md`
+so nobody builds on it. And a shared desk-harness fixture (constant `GetResidenceComfort`) manufactured a false
+A3 finding that three sessions agreed on; my A2 was re-run with the real body and held at 27/27. The lesson —
+cross-sensitive legs sharing one stub prove nothing — is the sharpest thing to come out of the night.
+
+
 ## 2026-09-11 - smr-bugfixpack-cb: F59 verdict (ck151 a) — expedition claim CONFIRMED, and a second, worse caller found
 
 tags: F59 verdict re-derivation desk-control ck151 ck144 over-capacity astra-check

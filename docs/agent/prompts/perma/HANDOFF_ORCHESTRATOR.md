@@ -43,6 +43,30 @@ which is fully briefed.
   prefabs, reopened on the owner's pushback, waiting on the devs). Meteors: not a bug. Deep scan: the Adapted Probes rule.
 - Peer `smr-bugfixpack-24` authored the fixtoggles chain (`prompts/fixtoggles/`, checklist **148**); it owns any Beta label.
 
+### Later on 2026-09-11 — the migration cluster shipped, from `smr-bugfixpack-cb` (+ `-31`, `-b7`, `-d3`)
+
+- **F59 REPAIRED, AUDITED AND WITNESSED IN PLAY.** An independent re-derivation confirmed the audit's expedition
+  claim and found a **second, more reachable harm** the report missed (manual **Set Residence** on a full home
+  left it **over capacity** with the eviction undone — both game branches, shipped since the module was written).
+  Repaired by deferring the notification out of the caller's stack (`3b41d9f`), Fable-audited **SHIP A**
+  (`74b2c8f`), then **observed working by the owner at the keyboard** (`11d163e`): `residents=14` against
+  `cap=20 closed=6`, with `HasAnyFreeLivingSpace()=false` proving the check was not vacuous.
+  Owner granted **`tested-attended` for the A2 half only** (`2cbd729`).
+- **F60 RETIRED** by owner ruling (`9bc4360`) — module deleted across `Code/` + `items.lua` + the `metadata.lua`
+  code list together; card count **50 → 49** on all five copies (`0392162`); site fix-list row removed and the
+  **F51/F58 rows narrowed** (`SMR-CommunityMods` `a061665`).
+- **C85 (clogged producers) solved at source** and written up: vanilla's `SetBuildingEnabledState` has a
+  `Duration` branch that auto-re-enables and two shipped events use it, while `BuildingClogged` passes only a
+  `Reason`; and a **lost reply is permanent, not delayed**. Build prompt `prompts/CLOGGED_BUILD.md` is fireable.
+- **A Reddit report was REFUTED, not filed** ("160% productivity"): the extractor upgrades move Production, never
+  Performance, in either version, and 1.1.0 made that goal *easier* twice over. Reply drafted; **ck153**.
+- **Two of our own records were corrected** — F108's Amplify attribution and C39/F112's reading of the
+  automation-law uplift (1.1.0 deleted it, and the arithmetic says that removed a bug).
+- **Rules landed:** `FIX_POLICY` §4 ×2 (enumerate the wrapped function's **callers**; anything deferred into a
+  game-time thread **rides in the player's save**) and `EF-019`'s unpersistable-body fallback. `EF-092` (a
+  constant-comfort desk stub deletes an inherited validity test) came from `-31` and cost a false finding that
+  three sessions agreed on.
+
 ## 2 · Where things live now
 
 - STATE is the kernel. Owner decisions are in checklist → "Decisions waiting on you".
@@ -58,19 +82,31 @@ which is fully briefed.
 - The Steam BBCode and Paradox paste-in styling: done? The owner was pasting on 09-11.
 
 **Fix pack — from `smr-bugfixpack-e6` (2026-09-11, the PDX dev's reply):**
-- **Migration audit COMPLETE 09-11 after owner-authorized resumption.** One-off brief consumed; report
-  `reports/MIGRATION_DEV_REPORT.md`, receipt `MIGRATION_DESK_RESULTS.txt`, progress `MIGRATION_CHECK_PROGRESS.md`.
-  **151**: F59 original gap persists; repair recommended after desk-controlled expedition harm, 12/12 including an
-  unbuilt exclusion idea. F60 retirement recommended; F80 loop-boundary per-track omission desk-controlled but not
-  tied to July's incident. Service/quarantine observations qualified. No fix changed or game launched.
-  Initial stop findings are in `40a0c6b` / `767f26e`; completion supersedes their incomplete-audit status.
-  A Claude build session must verify F59 from primary artefacts before implementation or relaying the claim.
-  Developer sharing and tests remain owner choices in 151; STATE size warning must be measured, not quoted from history.
+- ✅ **Migration audit DISCHARGED 09-11 (was: complete, awaiting decisions).** Report
+  `reports/MIGRATION_DEV_REPORT.md`, Fable cross-check `reports/MIGRATIONFIX_AUDIT.md`. **151 (a)–(e) all ruled:**
+  F59 repaired + witnessed, F60 retired, 1.0.7 stays frozen. ⛔ **What is still owed from it:** F59's **A1
+  expedition half is UNTESTED** (no expedition boarded — source-derived only, and no in-play reproduction of the
+  original defect exists on either branch); **F80** is still capture-before-mitigate and nothing here mitigated
+  it; and the developer-sharing decision in 151 (b) is untouched. ⚠️ The report's F51/F58/F73 verdicts were
+  surface-swept by the audit, not re-derived.
 - **`prompts/C88_PREFAB_BUILD.md` — READY, not started. ⚖️ Owner ruling 09-11: this build goes to a CLAUDE session,
   not Astra** (hunts → Astra, builds → Claude). Gated on (1) the release lane clearing (H-10 needs an `items.lua`
   entry, and `items.lua`/`metadata.lua` are the owner's uncommitted v8 pack) and (2) checklist 150 (b).
 - **Checklist 150** carries the owner's three decisions: the "where do you collect your bugs" wording, the C88 fix
   shape, and retiring F37 (1.1.0 closed its leak — the dev was right).
+
+**Fix pack — from `smr-bugfixpack-cb` (2026-09-11, the migration cluster):**
+- ⏳ **`RELEASE.md` IS RUNNING** in `smr-bugfixpack-d3` as this was written — it consumes `RELEASE_OUTBOX`
+  (four Pending entries, count chaining to **49**), sweeps the public surfaces and hands the owner the upload.
+  ⚠️ Three surfaces were applied **ad hoc from a dispatch session** before the sweep ran (card count, site
+  fix-list rows, F51/F58 rewordings) — treat them as unverified input, not a completed sweep; the F51/F58 wording
+  has had no second reader. **`last_changes` was the real hole** and is the release prompt's to fill.
+- **`prompts/CLOGGED_BUILD.md` — FIREABLE, not started** (C85). Fold-in slot closed empty. **ck154** carries one
+  decision that changes what gets built (sweep only vs sweep + a `Duration` DataPatch; default = sweep only, and
+  only the sweep rescues already-stuck saves) and one on whether its in-game A/B joins the owed sitting.
+- **ck153 — the Reddit "160% productivity" reply:** post it or not. Not a defect; nothing to build.
+- **Loose end, not release-blocking:** the TestKit probe `DomeFreeSpaceMismatch` (`30_Probes_Wave3.lua`) targets
+  the deleted F60 module and will fail on the next kit run. TestKit is local-only by design.
 
 **Fix pack — from `smr-bugfixpack-0d` (newest first):**
 - ⭐ **ck149: the check RAN 09-11 — F119 and C86 are both tested-attended (`smr-bugfixpack-24`). The upload remains**, the
