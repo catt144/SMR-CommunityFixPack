@@ -23,6 +23,16 @@ driven by `RELEASE_OUTBOX.md`, which it clears at the end. **Any model.**
 4. Read the live count word: `grep -oE '[A-Z][a-z]+(-[a-z]+)? repairs' metadata.lua`.
    Exactly ONE hit expected. ⛔ **Zero hits is a FAIL, never a pass** — a pattern that
    matches nothing proves nothing.
+5. ⛔ **Was the LAST release closed?** (Added 2026-09-11: v8 had gone live that afternoon,
+   nobody ran `POST_UPLOAD_CLOSE.md`, and the outbox still held its entries as Pending.)
+   Three reads, all free: (a) `metadata.lua` `version` vs STATE's "tree version" — a bump
+   STATE does not know about is an upload; (b) `grep -c '^\s*--' metadata.lua items.lua` —
+   **0 means the Mod Editor writeback was committed with the comments stripped**, and the
+   restore is owed; (c) the Steam changelog page, readable with curl:
+   `https://steamcommunity.com/sharedfiles/filedetails/changelog/<steam_id>` — its newest
+   `Update:` entry and text say what is live. If any of the three says an upload happened
+   that the outbox's *Released* section does not carry, run §4–§5 for THAT version first
+   (owner's word still owed — ask for the §5 receipt in the checklist), then continue.
 
 ## 1 · Agent — apply the outbox to every surface (this is `PUBLIC_SURFACE_SWEEP.md`)
 For **each `### Pending` entry** in the outbox, do that entry's row of the
