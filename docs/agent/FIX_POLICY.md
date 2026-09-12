@@ -45,6 +45,22 @@ Ranked from most to least preferred:
    freed it ON PURPOSE, for itself. When a caller does, the hook needs a guard
    keyed on that caller's own state, not a later cleanup pass.
 
+   **⛔ ANY WORK YOU DEFER INTO A GAME-TIME THREAD RIDES IN THE PLAYER'S SAVE
+   (rule added 2026-09-11, from F59's repair).** `CreateGameTimeThread` threads are
+   persisted by default — `OnMsg.PersistSave` serialises every thread carrying
+   `threadPersist` together with its sleep state (`CommonLua/Core/cthreads.lua:481-524`);
+   only REAL-time threads must opt in via `MakeThreadPersistable`. So deferral is a
+   legitimate technique (it is what repairs F59) but it is a §3a decision, not a free
+   one: a save taken while the thread sleeps captures a thread pointing at OUR
+   function. Two rules follow. (1) **Give the thread body zero upvalues** and pass its
+   state as thread arguments, so nothing of ours is dragged in by value. (2) **Put the
+   orphan gate — `if not SMRFixPack then return end` — as the FIRST statement after
+   the only yield**, before any vanilla state is touched, so a load without the mod
+   returns harmlessly. Both are in `Fix_FreedHousingNotice`; the precedent is
+   `Fix_ExtenderFlapChurn:97`. The engine's fallback is benign either way
+   (`__unpersisted_function__`, `CommonLua/Core/persist.lua:52-54`, asserts without
+   unwinding per `EF-008`), but do not rely on it in place of the gate.
+
    **4b. Global-function replacement** (its own technique, between 4 and 5 in
    preference; numbered 4b so existing §1.4/§1.5 citations stay valid) —
    assigning `_G[name] = replacement` for an existing global. Works because
