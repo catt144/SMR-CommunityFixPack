@@ -83,11 +83,28 @@ each before opening the next, so a stop on a later one still ships the earlier o
   none other; (f) a simulated post-patch vanilla (guard already present) → the module skips that like; (g) a
   negative leg that FAILS if the module registers but never applies.
 - **S6 — kit probe**, `behavior` kind: call each patched `DomeFilter.eval` on a fake 3/1 dome and a 10/1 dome.
-- **S7 — the owner's in-game recipe** (their colonies are large): with the Assembly built and Prosperity seated,
-  build a new dome, move three colonists into it with no workplace, wait for the hour. Fix-off: the panel lists
-  "Domes with more than 10% Unemployment" and the dislike notification fires. Fix-on: neither. ⚠️ Trace for
-  vacuity first — Prosperity must be **active** (`g_FactionsHolder.active_factions`), and the moved colonists must
-  be able to work (adults, not tourists). Give one copy-paste read of the like's current value.
+- **S7 — 🎮 OWNER-FLAGGED FOR IN-GAME A/B, OBSERVED AT THE KEYBOARD (09-12): "I want to observe it; simple enough
+  to spin up a one-shot colony."** Write the recipe for a **fresh one-shot colony**, not the owner's large saves:
+  1. What the colony needs before the read: a first dome with colonists, the Martian Assembly built (40 Concrete /
+     20 Metals / 20 Polymers, a dome spire, no research), and **one of the four factions active** — name the
+     console read (`g_FactionsHolder.active_factions`) and what to do if none of the four is active (which sponsor
+     or founder choices push supporters toward Prosperity / Workers' Party; or the cheat that seats a faction, if
+     one exists — find it, do not guess).
+  2. The A/B object: a **second, small dome** with three adult colonists moved in and **no workplace inside it**
+     (or a first dome kept under ten colonists with one worker made idle). Give the copy-paste line that makes a
+     selected colonist idle (`SelectedObj:SetWorkplace(false)` — verify it sticks past `UpdateWorkplace`, or give
+     the line that does) and one that reads the dome's counts (`#SelectedObj.labels.Colonist`,
+     `#SelectedObj.labels.Unemployed`).
+  3. **Fix-off leg first, then fix-on, same save**, across one game hour each: fix-off — at the hour the faction
+     panel lists "Domes with more than 10% Unemployment" and the dislike notification fires; fix-on — neither,
+     while the dome still reads 3 colonists / 1+ idle (the control that proves the read is not vacuous). Name how
+     the owner turns the one module off for the A leg (the precedent is the F119 fix-off leg, checklist 149).
+  4. One copy-paste read of the like's current value from the stored approval data, so the owner can quote a
+     number, not a screenshot (memory rule: read console output from the flushed log, prefixed).
+  ⚠️ Trace the whole recipe for vacuity before it goes in the checklist: the faction must be **active**, the idle
+  colonists must be adults who `CanWork()`, and the hour boundary must actually pass with the panel open. Say
+  the warm-up cost plainly (a one-shot colony is a 20–30 minute organic warm-up, not a saved fixture).
+  `tested-attended` for C89 is the owner's to grant after this leg; nothing else grants it.
 - ⚖️ **FLAGGED AS A JUDGMENT CALL EVERYWHERE (owner, 09-12) — this is not a repair of a code error, and every
   surface must say so the way F40 (Biorobots) and F73 (asteroid vacuum) do:** the site row uses the
   `??? question` block with "— *judgment call*" in the headline and the "⚠️ Worth knowing: this one is a judgment

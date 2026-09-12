@@ -79,6 +79,12 @@ completed tests move whole to
 > unemployment filters brought to ten, **and the three unguarded homeless twins on the same precedent** — that
 > half is my inclusion; strike it in the override slot at the top of the prompt if you want unemployment only.
 > Still open here: (a) post the reporter reply, (b) the developer note's route.
+>
+> 🎮 **You flagged this one for an in-game A/B you observe yourself, on a one-shot colony.** The build brief now
+> requires a fresh-colony recipe: first dome, Assembly built, one of the four factions active, a small second dome
+> with three idle adults, fix-off then fix-on across one game hour each, with copy-paste reads of the dome counts
+> and the like's value. The build session writes it as its own checklist item; `tested-attended` for this fix is
+> yours to grant after that sitting.
 
 > **What it is:** the faction's "high unemployment" dislike is a **once-an-hour snapshot** (stored and shown on the
 > panel until the next hour, and it fires a notification the first hour it appears), while the top-bar Unemployed
