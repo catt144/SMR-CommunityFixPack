@@ -205,6 +205,28 @@ Every fix goes through `SMRFixPack.Register(id, {title, apply})` (Code/00_Core.l
 Adopted 2026-09-08 (hotfix2 link 01, decision 118). Binding on every module that
 carries a body, expression or data shape taken from one game branch.
 
+**Two clarifications adopted 2026-09-12 (owner ruling, checklist 166).**
+
+**(i) An UNKNOWN probe answer DECLINES — and an exception needs the owner's word,
+not an agent's judgement.** A probe that does not return a clear yes is not a
+maybe: only a literal `true` applies. This is already what the code does
+(`Code/00_Core.lua:156-167` — a throw, a `nil`, or any other value declines), and
+it is now policy so a future module cannot quietly choose otherwise.
+✅ **A hybrid, at the owner's direction:** decline is the standing plan, but an
+agent that finds a real case for applying on UNKNOWN may **PROPOSE** the exception
+— as a checklist item, naming the module, the probe, and why declining is the
+worse outcome there. ⛔ **An agent never self-authorises one**, and no exception
+exists today. If one is ever granted, it is named in that module's wording.
+
+**(ii) `LuaRevision` may be an OBSERVATION LABEL, never a guard.** It may be used
+to record **which build a reading was taken on** — in an entry, a report, a log
+line or a probe's output. ⛔ It may **NOT** gate whether a fix applies: that stays
+a behaviour probe, per the rule below, and this clarification does not weaken
+decision 118 by a word. The distinction is *describing* a build versus *deciding*
+on one. ⚠️ And note the trap that makes it a label and not a guard in the first
+place: `lua_revision` is **350453 on BOTH branches** (`EF-077`), so it could not
+separate them even if it were allowed to try.
+
 **The problem.** Nothing stops a build reaching a player on the *other* branch.
 Our `lua_revision` is 350453 and 1.1.0's `ModMinLuaRevision` and
 `ModRequiredLuaRevision` are BOTH 350453 (`EF-077`), so `ModDef:IsObsolete()` is

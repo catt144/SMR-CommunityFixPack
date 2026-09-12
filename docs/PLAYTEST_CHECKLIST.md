@@ -29,6 +29,38 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### ✅ 2026-09-12 — 166 RULED BY YOU (batch 1 of the decision sweep): **133 (2) as a hybrid · 133 (4) label-only · 135 into hotfix 3.** All three landed the same session. **Nothing is owed from you.**
+
+> **(a) 133 (2) — an UNKNOWN probe answer DECLINES, and an exception is PROPOSED, never taken.**
+> Your steer: *"Is a hybrid possible — do decline as a plan, but allow an agent to propose an
+> exception if we ever find a need for one."* ⭐ **Yes, and it is the better rule than either option
+> I offered**, because it keeps the safe default absolute while leaving a door that only you can
+> open. Written into `agent/FIX_POLICY.md` **§2a (i)**:
+> - Decline is the standing plan. Only a literal `true` applies — a throw, a `nil`, or any other
+>   value declines. ⚠️ This is **already what the code does** (`Code/00_Core.lua:156-167`); the
+>   ruling makes the existing behaviour binding so a future module cannot quietly choose otherwise.
+> - An agent that finds a real case **PROPOSES** it as a checklist item — naming the module, the
+>   probe, and why declining is the worse outcome there. ⛔ **An agent never self-authorises one.**
+> - **No exception exists today**, and if one is ever granted it is named in that module's wording.
+>
+> **(b) 133 (4) — `LuaRevision` is allowed as an OBSERVATION LABEL, never as a guard.** Written into
+> §2a **(ii)**. It may record **which build a reading was taken on**, in an entry, a report, a log
+> line or a probe's output. ⛔ It may not gate whether a fix applies — that stays a behaviour probe,
+> and **decision 118 is not weakened by a word.** The line is *describing* a build versus *deciding*
+> on one. ⚠️ Worth keeping in view: `lua_revision` is **350453 on BOTH branches** (`EF-077`), so it
+> could not separate them even if it were allowed to try — which is precisely why it is a label.
+>
+> ⇒ **133 is now fully closed.** (1), (3), (5) and (6) fell with the reword and the 73 closure;
+> (2) and (4) are these. ⚠️ One loose thread it leaves, unchanged and still only a recommendation:
+> `agent/prompts/SELFCHECK_PILOT.md` was authored for 133 (1), never fired, and is now unreachable —
+> **removal recommended, not done.** Say the word at any time and it goes.
+>
+> **(c) 135 — take the `luafn.py` delimiter fix in hotfix 3.** Small standalone change to a **desk
+> tool**, not shipped code; measured to change **0 shipped hashes**, so nothing re-pins and no module
+> is affected. Its blocker discharged when vanillahunt closed on 09-10. ⛔ It is **not** part of v10
+> and must not be smuggled into that pass — it waits for the hotfix-3 batch, where 135 is now the
+> only item left after 137/138/140/141/142 closed with 163 (a).
+
 ### ✅ 2026-09-12 — 165 RULED BY YOU: **replies to players are PULL-ONLY from now on.** Nothing is owed from you, and no agent will raise one at you again unless you ask.
 
 > **Your words:** *"We are gonna move replies to pull only, when I ask for them, not agent tracked.
@@ -2329,7 +2361,7 @@ Original question, kept as asked: C74, the Rare Metals Extractor's hammer (and t
 > frame time, so anything it found would still need a profiling check. FR-3's
 > result will show whether the pass is needed and where to aim it.
 
-### 2026-09-10 — 135: `luafn.py`'s body delimiter over-spans one-line functions (441 declarations, 133 inventory rows). ⭐ The measurement says the fix would change **0** shipped hashes — cheaper than the chain brief assumed. **TAKEABLE WHEN you rule; recommendation: take it in hotfix 3, as a small standalone change.** Nothing here needs the keyboard.
+### ✅ 2026-09-10 — 135 **RULED 2026-09-12 (ck166 c): TAKE IT IN HOTFIX 3.** Desk tool only, 0 shipped hashes, ⛔ not part of v10 — and now the only item left in the hotfix-3 batch. Original ask below. — `luafn.py`'s body delimiter over-spans one-line functions (441 declarations, 133 inventory rows). ⭐ The measurement says the fix would change **0** shipped hashes — cheaper than the chain brief assumed. **TAKEABLE WHEN you rule; recommendation: take it in hotfix 3, as a small standalone change.** Nothing here needs the keyboard.
 
 > **What was measured** (vanillahunt link 01, 2026-09-10, `TRIAGE.md` §0.6).
 > `find_bodies` scans forward from a declaration for a bare `end` at the same
@@ -2540,9 +2572,9 @@ Original question, kept as asked: C74, the Rare Metals Extractor's hammer (and t
 > | | was | after the reword |
 > |---|---|---|
 > | **1** pilot, then the bounded prototype | recommend yes | ❌ **NOT COMMISSIONED.** Their only purpose was to make bullet 3 true. The reword makes it true for the cost of one sentence, so the purpose is gone. |
-> | **2** what a fix does when a probe answers **UNKNOWN** | open | ⏳ **STILL YOURS — not touched by the reword.** The code already fails closed (`Code/00_Core.lua:156-167`: only literal `true` applies; a throw, nil or any other value declines). This decides whether that is written down as policy. One line in `FIX_POLICY` §2a. |
+> | **2** what a fix does when a probe answers **UNKNOWN** | open | ✅ **RULED 2026-09-12 (ck166 a) — DECLINE, with a PROPOSE-only exception door.** Only a literal `true` applies; an agent may propose an exception as a checklist item but ⛔ never self-authorise one, and none exists today. Landed in `FIX_POLICY` §2a (i). *(original note:)* **not touched by the reword.** The code already fails closed (`Code/00_Core.lua:156-167`: only literal `true` applies; a throw, nil or any other value declines). This decides whether that is written down as policy. One line in `FIX_POLICY` §2a. |
 > | **3** the wording interim | hold the over-promise through the upload | ✅ **DISCHARGED BY THE REWORD ITSELF.** There is no interim left to hold. |
-> | **4** `LuaRevision` as an **observation label** | open | ⏳ **STILL YOURS — not touched by the reword.** A `FIX_POLICY` §2a heading clarification, independent of any prototype. |
+> | **4** `LuaRevision` as an **observation label** | open | ✅ **RULED 2026-09-12 (ck166 b) — ALLOWED as a label, ⛔ never as a guard.** It may record which build a reading came from; it may not gate whether a fix applies. Decision 118 stands unweakened. Landed in `FIX_POLICY` §2a (ii). *(original note:)* **not touched by the reword.** A `FIX_POLICY` §2a heading clarification, independent of any prototype. |
 > | **5** the breadcrumb | recommend yes | ✅ **CLOSED WITH ITEM 73 — CONFIRMED BY THE OWNER 2026-09-12 on checklist 162 (d)**, which asked the question directly rather than inferring it. *"We have only had the blame issue once and it was quickly resolved. If the problem comes up more we will revisit it."* The breadcrumb is **not built**. ⚖️ Closed under a named condition (rule 5a): the rate is effectively zero — two sightings, one reporter, one day, nothing since. **More false-blame reports reopen it**, and the argument changes then: it would produce evidence in the player's log rather than save an agent derivation time. ✅ The two records that disagreed about whether 73's closure covered this are now reconciled; ⛔ do not re-derive the tension. |
 > | **6** report the indirect `load` (`LuaCodeToTuple`) to the developers | conditional on the pilot | ✅ **MOOT.** It was conditional on a reading the pilot would have produced, and there is no pilot. |
 >

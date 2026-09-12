@@ -37,7 +37,10 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   Desk `prompts/DLC_DEEP_CHECK.md` (`HUNT_AUDIT.md` §8).
   ⭐ FR-1 TEMP WORKAROUND MOD LIVE 09-11 (Steam 3799500849 / PDX 158711; FINDINGS §11–§12). ALL FR-1 work → `prompts/perma/LINUX_DISPATCH.md`.
   Field: 3 working (one 10xx), 1 failing (GTX 1070, log requested). Chain `prompts/fixtoggles/` (ck148, DEFERRED 09-12).
-  Owner OWES: ck151 (b)/(c) · ck144 (a) v7 boot. ⛔ **ck165: REPLIES ARE PULL-ONLY — never list one here** (ck157 removed 09-12). ✅ ck162 FULLY RULED 09-12 (all four §4 loose ends shut;
+  Owner OWES: ck151 (b)/(c) · ck144 (a) v7 boot · ck98 (1.0.7 branch) · hardening row 3.
+  ✅ ck166 09-12: 133 (2) DECLINE, exception is PROPOSE-only · 133 (4) `LuaRevision` = label, NEVER a guard (118 unweakened).
+  Both in `FIX_POLICY` §2a. 135 → hotfix 3 (⛔ not v10; now that batch's ONLY item). **ck133 fully closed.**
+  ⛔ **ck165: REPLIES ARE PULL-ONLY — never list one here** (ck157 removed 09-12). ✅ ck162 FULLY RULED 09-12 (all four §4 loose ends shut;
   C87 file-and-watch, 133(5) closed with 73 — reopens only if false-blame reports recur) · ✅ ck164 KEEP (F48 pass stays; `Tracks.lua` now pinned).
   ✅ ck163 RULED all four 09-12: (a) CLOSED ck137/138/140/141/142 + C80 cand→closed · (b) desk session commissioned · (c) after-patch procedure BINDING
   `WORKFLOW.md:156` · (d) BUILT, bodycheck **0 NO-MANIFEST** (was 2), surfaced ck164 · **(b) RAN + FOUND NOTHING** (`reports/PINNED_PARENTS_PASS.md`:
