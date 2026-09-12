@@ -37,19 +37,13 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   Desk `prompts/DLC_DEEP_CHECK.md` (`HUNT_AUDIT.md` §8).
   ⭐ FR-1 TEMP WORKAROUND MOD LIVE 09-11 (Steam 3799500849 / PDX 158711; FINDINGS §11–§12). ALL FR-1 work → `prompts/perma/LINUX_DISPATCH.md`.
   Field: 3 working (one 10xx), 1 failing (GTX 1070, log requested). Chain `prompts/fixtoggles/` (ck148, DEFERRED 09-12).
-  Owner OWES: ck144 (a) boot · ck151 (b) ONLY (dev-report scope; ck165 lets you defer it).
-  ✅ ck168 09-12: **ck98 RULED — baseline MOVES TO 1.1.0**, no branch install (source archive answers desk A/B; Steam = one branch; `EF-079`).
-  ⛔ Old entries KEEP their version stamp — never re-point a citation. Hardening row 3 BUILT into v10 (per-colonist `pcall`, F58 entry).
-  ck151 (c) RULED: F52/F54/C83 join the 144 (a) boot IF the loaded colony already has those layouts — else SKIP BY NAME.
-  ✅ ck167 09-12: opt-in items 84/85/89-97 OFFLOADED to `SMR-OptInPack/docs/DECISIONS_OWED.md` (verbatim, ⚠️ all pre-1.1.0, unverified).
-  83 (SHARED TestKit) + 86 (EF-ids are OURS, in force) + 88 (fix-pack feature, rides ck148) STAY. No fact needed rehoming — all 4 already ours.
-  ✅ ck166 09-12: 133 (2) DECLINE, exception is PROPOSE-only · 133 (4) `LuaRevision` = label, NEVER a guard (118 unweakened).
-  Both in `FIX_POLICY` §2a. 135 → hotfix 3 (⛔ not v10; now that batch's ONLY item). **ck133 fully closed.**
-  ⛔ **ck165: REPLIES ARE PULL-ONLY — never list one here** (ck157 removed 09-12). ✅ ck162 FULLY RULED 09-12 (all four §4 loose ends shut;
-  C87 file-and-watch, 133(5) closed with 73 — reopens only if false-blame reports recur) · ✅ ck164 KEEP (F48 pass stays; `Tracks.lua` now pinned).
-  ✅ ck163 RULED all four 09-12: (a) CLOSED ck137/138/140/141/142 + C80 cand→closed · (b) desk session commissioned · (c) after-patch procedure BINDING
-  `WORKFLOW.md:156` · (d) BUILT, bodycheck **0 NO-MANIFEST** (was 2), surfaced ck164 · **(b) RAN + FOUND NOTHING** (`reports/PINNED_PARENTS_PASS.md`:
-  7/7 rows clean, Residence re-composed not re-scoped, Station row a line-shift FALSE POSITIVE; option (ii) NOT triggered).
+  Owner OWES: **ck158 the v10 GATE** (fire `prompts/SITTING_158.md`) · ck144 (a) boot · ck151 (b) dev-report scope (ck165 lets you defer it).
+  ⛔ **ck165: REPLIES ARE PULL-ONLY** — never draft unasked, never list one here, never nudge (`WORKFLOW.md` rule 5b). Triage into `bugs/` UNAFFECTED.
+  ⛔ **ck168: BASELINE IS 1.1.0**; 1.0.7 is history, no branch install. Old entries KEEP their version stamp — never re-point a citation.
+  ✅ RULED 09-12, bodies in the checklist, ⛔ do not re-derive: **162** (§4 loose ends, all four) · **163** (vanilla diff, all four) · **164** (F48 KEEP) ·
+  **165** (replies) · **166** (133 closed; 135→hotfix 3) · **167** (opt-in items offloaded to `SMR-OptInPack/docs/DECISIONS_OWED.md`) · **168** (98 + row 3 + 151c).
+  Built 09-12 into v10 beyond the three fixes: hardening row 3 — per-colonist `pcall` on `Fix_StaleReservations`' sweep (F58 entry; no public row).
+  `bodycheck` now **0 NO-MANIFEST** (was 2). 163 (b) ran: `reports/PINNED_PARENTS_PASS.md` — 7/7 clean, option (ii) NOT triggered.
   ✅ ck152 (c) CLOSED 09-12: the kick button is DESIGN (hint promises evict only; closing the slot is a documented 2nd click).
   vanillahunt CLOSED 09-10 (99): instruments SOUND WITH STATED GAPS — 1,281 table-level hunks in 368 rowed hand files listed by
   no instrument (§1.4); 12 P2s re-derived: 6 hold, 5 weakened, **C80 REFUTED**; **C82** filed by the audit (Incident reactors stay

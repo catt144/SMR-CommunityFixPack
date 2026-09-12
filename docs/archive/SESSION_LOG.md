@@ -8,6 +8,63 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-12 — lookback: the decision sweep (ck165–168), the opt-in offload, and a handoff rewritten from 257 to 179 lines
+
+tags: lookback ck165 ck166 ck167 ck168 handoff STATE-budget orphans sitting-158 decision-sweep
+
+Closing pass on a long session. Everything below was already committed; this entry is the lookback the
+owner asked for — what moved, what is left, and an audit that **every loose thing has a home outside this
+conversation.** doccheck GREEN, tree clean at the end.
+
+**The decision sweep, run as batched `AskUserQuestion` calls at the owner's suggestion.** ⭐ The method
+worked and is worth repeating: two batches of four cleared **eleven open items** in a few minutes of owner
+time. Two of the eight came back as *modifications* rather than picks, and both were better than the
+options offered — 133 (2) as a hybrid (decline standing, exception **proposed** not taken), and the
+opt-in block as an offload-plus-retain rather than a park.
+
+⛔ **A correction that shaped the sweep: the "pending" list I gave the owner was WRONG.** It was built from
+this handoff's owed-table, which contradicted the same handoff's own "closed today" line — items **47 and
+53 had both been ruled that morning**. Verified against the checklist before asking anything further, and
+the real open set was seven calls, not eleven. ⇒ The rewritten handoff now carries the warning explicitly:
+**do not rebuild an owed list from an older document.**
+
+**What the four rulings settled.** **165** — replies to players are **pull-only**, off the owner's owed
+list entirely, bound as `WORKFLOW.md` rule 5b directly beneath the mirroring rule it carves an exception
+out of; the carve-out (triage into `bugs/` is unaffected) is written into every copy. **166** — 133 (2)
+and (4) into `FIX_POLICY` §2a, closing 133 entirely; 135 to hotfix 3. **167** — the opt-in mod's eleven
+decisions offloaded verbatim to `SMR-OptInPack/docs/DECISIONS_OWED.md`, with **83, 86 and 88 retained
+here** because they bind the fix pack; no engine fact needed rehoming, and item 86 is *why* (EF ids are
+allocated here for both repos). **168** — the baseline moves to **1.1.0**, hardening row 3 **built** into
+v10, and ck151 (c)'s checks join the owed boot conditionally.
+
+**Two things had no home outside the conversation and now do.** ⭐ The **Foreign Aid Rocket report**
+(Steam, wgtiii): not ours, not filed, owner waiting on the reporter — but the source lead was derived here
+and would have been lost. It is now handoff §3d with the route recorded (`LeaveForever` sets
+`launch_after_unload`, so departure is gated on an unload that can never finish) and the explicit note that
+**F119's fix cannot touch it**, so nobody re-derives that. ⭐ The **P38 restore trap**: the parked opt-in
+`metadata.lua` description still contains the over-promise the card retired on 09-12, and its restore
+checklist says to paste it back verbatim. That warning was living only in this repo's handoff — which the
+person running the opt-in launch may never read — so it was homed in the opt-in repo's own
+`DECISIONS_OWED.md` (`11a5528`), where the launch that would trip it lives.
+
+**The handoff was rewritten end to end, 257 → 179 lines**, after a day of piecemeal patching left it
+carrying closed items. ⭐ Its §1 is now a single thing: **`prompts/SITTING_158.md`, the one artefact the
+owner can fire.** §3a lists three owner items, two of which are actions rather than decisions.
+
+⚠️ **`STATE.md`'s budget is the one thing the next session should watch.** It reached **16,899 bytes**
+against an **18,432 HARD cap that BLOCKS commits** — because this session wrote thirteen lines of
+closed-ruling *derivation* into a file whose own first line says *"status + pointer, never derivation"*.
+Compressed back to seven pointer lines, recovering 706 bytes; headroom is ~2.2 KB. ⛔ **This was not an
+eviction** (ck132 SKIP stands and was not re-opened) — it was undoing my own over-writing. Recorded in the
+handoff §7: closed rulings belong in the checklist, and if the hard cap is actually approached that is an
+**owner decision** (raise the warn, or authorise an eviction pass), never a silent trim.
+
+**Still open at the close:** ck158 the v10 gate · ck144 (a) the owed boot · ck151 (b) whenever the owner
+pulls it. Agent-side: C90 unbuilt, `DLC_DEEP_CHECK` unclaimed, the `treediff` `TABLE-HUNK` flag (with the
+compare-content-not-position requirement), and the six migration residuals named in §3b.
+
+---
+
 ## 2026-09-12 — ck165: replies to players become PULL-ONLY, and come off the owner's owed list
 
 tags: ck165 replies pull-only rule-5b R10c owner-attention FIELD_REPORT_REPLIES ck157
