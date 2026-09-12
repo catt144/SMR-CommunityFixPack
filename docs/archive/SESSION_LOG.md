@@ -8,6 +8,87 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-12 — lookback + context handover: four orphaned findings homed, ck152 (c) closed DESIGN, handoff rewritten as a working document
+
+tags: lookback handoff ck152 ck160 F59 README public-surface orphans verification
+
+Owner asked for a session lookback before a context handover: give findings that existed only in a
+session transcript a durable home, then rewrite `prompts/perma/HANDOFF_ORCHESTRATOR.md` so a fresh
+session can pick up. Docs only; no game launched, no `Code/` change, no `--regen`, doccheck GREEN
+throughout. Shas: `5c21f36`, `6f5abaf`, this one. Tree was clean at start and no peer session was
+committing.
+
+**Every orphan was VERIFIED before recording, and verification changed three of the four.**
+Two read-only subagents re-read the live 1.1.0 tree; a third surveyed the 9,080-line checklist.
+
+- **ck152 (c) — the residence kick button — CLOSED as DESIGN** (`5c21f36`). The transcript's verdict
+  survived but **three of its citations were wrong**: `T(8988)` is at `sectionResidenceList.lua:116`
+  and `T(4177)` at `:104` (the transcript swapped them), `OnAltPress` spans `:50-62` not `:50-56`,
+  and its middle branch also catches the reserved/appointed icon, not just an empty slot. The
+  argument stands on the corrected lines: the hint promises an eviction only, closing the slot is a
+  documented second right-click, all nine `SetResidence(false)` sites set no marker (no
+  `avoid_residence` analogue exists anywhere), and the `avoid_workplace` asymmetry is across the
+  housing/job boundary. The counter-evidence — `KickResident` takes an `idx` it never reads
+  (`Residence.lua:156-158`), and the `NaturalHabitatBase` override ignores it too — is recorded on
+  the item rather than dropped, named as where to start if anyone reopens it.
+
+- **⭐ F59: a NEW cost of ours, recorded on the entry** (`6f5abaf`). Vanilla's residence-refill
+  latency is colony-size dependent and ours is not — `City.lua:117-119`,
+  `Clamp(#self.labels.Colonist / 300, 0, 12) * const.HourDuration`, with `/` truncating (`int Clamp`,
+  `EF-005`, and two of our own archived runtime dumps reading exact hour multiples). **Under 300
+  colonists the throttle is 0, so the module changes nothing for the overwhelming majority of
+  colonies**; at 3,600+ vanilla gives the player up to 12 game hours to get the second click in and
+  our deferred `CheckHomeForHomeless` collapses it to one scheduler pass. The refill path was checked
+  to be genuinely the throttled one rather than assumed (`Colonist:Idle:2338-2360`; the non-throttled
+  `else` branch serves only `user_forced_residence`/`reserved_residence`, which a plain homeless
+  colonist is not). Tiered SOURCE-DERIVED and bounded four ways.
+  **Two things recorded rather than smoothed over.** (1) The pause mitigation is *exactly* the
+  prediction the same entry already records as having FAILED in play, so it is marked unverified
+  rather than claimed as a get-out. (2) **The same 12-hour figure is already cited one section up in
+  the module's FAVOUR** — the module trades the player's manual window for faster automatic
+  re-housing, both readings are true, and which side wins is the owner's judgment. No recommendation
+  was made. An unbuilt ~15-minute desk control is written down so it is not lost.
+
+- **`README.md` is a public surface that was on NO sweep list, and it had rotted** (`5c21f36`).
+  Six wrong claims, four of them counts (75 modules vs 49 registered/50 files; 167 tracked findings
+  vs 222 rows; 96 checks vs 97 probes; "Five fixes are judgment calls" vs three going to four), plus
+  the game-version line and — months after both stores went live — **"not yet on a store"**. ⛔ Not
+  fixed here: counts belong to the release lane's single re-derivation, so they were FILED into
+  `RELEASE_OUTBOX.md`'s v10 batch notes with an explicit "do not hand-copy these numbers". The
+  durable repair is that `README.md` is now `PUBLIC_SURFACE_SWEEP.md` **§3b** — it rotted precisely
+  because no list watched it. The store-status line is not a count, so it went to the owner as
+  **checklist 160** with a recommendation to fix it now rather than wait for a v10 that is gated
+  behind a 20–30 minute play sitting.
+
+- **The site tree's three uncommitted files** (`content/faq.md`, `for-modders.md`, `install.md` in
+  `C:\Dev\SMR-CommunityMods`, today's modder-doc paring) are recorded in both places the held v10
+  site deploy is read from, with the instruction not to commit in that tree and to re-read
+  `git status` there rather than trust the record.
+
+- **One claim CONFIRMED, no record needed:** the "cheap popup recipe" for item 73 genuinely is
+  written down nowhere in the tree. `EF-065` carries the mechanism but not the procedure, and item 73
+  is its only mention. Nuance worth one line: 73's own note does not name the two deleted modules
+  either, so even the "re-derive from EF-065" route has lost which ones they were.
+
+**Handoff rewritten, 266 → 215 lines, as a working document rather than a history.** Everything
+pre-09-12 was cut to this log and to the entries; today's landings are one table. It now carries the
+v10 critical path in order (ck159 RULED → the ck158 one-boot sitting → `RELEASE.md` over Held + 3
+Pending → the owner's upload → the held site deploy), all open work grouped by who owes it, the
+hotfix-3 batch with a warning to read the checklist rather than the table, the four loose ends that
+were flagged and never answered (the dropped F54 sentence the audit found was the true one; the
+SUPERSEDED ck144 (b) draft whose prose is held nowhere else and which the next release sweep will
+destroy; the C87 lake draft still `HELD on ck147` after 147 closed, with the 2-minute check unrun;
+and the 133(5)/73 breadcrumb contradiction), the still-open items today's rulings leave behind
+(hardening row 3, independent of 53's ruling; rows 1+2 deprioritised not closed; 133 (2) and (4);
+98's rig half, which the source archive cannot serve because it has no executable and no data packs;
+and `PARKED_OPTIN_REFERENCES.md:697`, which would put the retired over-promise back on the store card
+if restored verbatim), and the owner's working method — delegate heavy reads, review at surface level
+and escalate, **because the orchestrator runs at high context and is at higher hallucination risk
+than a fresh agent**.
+
+**STATE.md** had gone stale the moment ck152 (c) closed; its owner-owes line was corrected in the
+same pass rather than left for the next reader to trip over.
+
 ## 2026-09-12 — Codex DESKBENCH_C90: instrument repaired, C90 measured, no production fix
 
 tags: C90 F60 deskbench self-check DataPatch census falsification
