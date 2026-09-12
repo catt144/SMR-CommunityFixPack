@@ -30,6 +30,7 @@ completed tests move whole to
 ## Decisions waiting on you
 
 ### ✅ 2026-09-12 — 168 RULED BY YOU (batch 2): **98 → baseline moves to 1.1.0 · hardening row 3 → BUILT into v10 · 151 (c) → the three cheap checks join the owed boot.** ⏳ **151 (b) came back as a question and is answered below — the call is still yours.**
+<!-- ck:168 status:ruled owner:no -->
 
 > **(a) 98 — THE BASELINE MOVES TO 1.1.0. 1.0.7 is history.** ⛔ No branch install, no re-download.
 > ⚠️ **The item's own framing was out of date and that is why it looked harder than it is:** it said a
@@ -89,6 +90,7 @@ completed tests move whole to
 > or **defer it as pull-only messaging** and ask for it whenever you want it. ⛔ No agent will raise it.
 
 ### ✅ 2026-09-12 — 167 RULED BY YOU: **the opt-in mod's decisions move to the opt-in mod's repo.** Eleven items off your list; three stay because they bind the fix pack. **Nothing is owed from you.**
+<!-- ck:167 status:ruled owner:no -->
 
 > **Your words:** *"Can we fully offload anything opt-in related to its repo, and just retain anything
 > that's fact based that could be useful, like engine facts etc, and just rehome those facts where
@@ -121,6 +123,7 @@ completed tests move whole to
 > by exactly that: line numbers moved, modules were deleted, and some defects vanilla fixed itself.
 
 ### ✅ 2026-09-12 — 166 RULED BY YOU (batch 1 of the decision sweep): **133 (2) as a hybrid · 133 (4) label-only · 135 into hotfix 3.** All three landed the same session. **Nothing is owed from you.**
+<!-- ck:166 status:ruled owner:no -->
 
 > **(a) 133 (2) — an UNKNOWN probe answer DECLINES, and an exception is PROPOSED, never taken.**
 > Your steer: *"Is a hybrid possible — do decline as a plan, but allow an agent to propose an
@@ -153,6 +156,7 @@ completed tests move whole to
 > only item left after 137/138/140/141/142 closed with 163 (a).
 
 ### ✅ 2026-09-12 — 165 RULED BY YOU: **replies to players are PULL-ONLY from now on.** Nothing is owed from you, and no agent will raise one at you again unless you ask.
+<!-- ck:165 status:ruled owner:no -->
 
 > **Your words:** *"We are gonna move replies to pull only, when I ask for them, not agent tracked.
 > We keep getting side tracked with replies. Replies are as we can do them, our primary focus is
@@ -191,6 +195,7 @@ completed tests move whole to
 > diverted from fixing bugs** — not the replies, which still go out as and when you want them.
 
 ### ✅ 2026-09-12 — 164 RULED BY YOU: **KEEP** — "fine as long as we are sure it won't cause issues." **The condition was checked, not assumed; it holds, and the check closed a gap.** Nothing further is owed.
+<!-- ck:164 status:ruled owner:no -->
 
 > **What was checked, because "are we sure" deserved a real answer rather than a restatement.**
 >
@@ -273,6 +278,7 @@ completed tests move whole to
 > so in place, and this item is why.
 
 ### ✅ 2026-09-12 — 163 RULED BY YOU: **all four — (a) accept · (b) yes · (c) confirm · (d) yes.** Items 137/138/140/141/142 CLOSE with (a); **(b) RAN AND FOUND NOTHING** (`reports/PINNED_PARENTS_PASS.md`); (d) is BUILT and surfaced a new call (**164**). **Nothing is owed from you here.**
+<!-- ck:163 status:ruled owner:no -->
 
 > ✅ **RULED BY YOU 2026-09-12 — all four: (a) accept · (b) yes · (c) confirm · (d) yes.**
 > **Nothing is owed from you here.** The original ask is kept below as the reasoning you ruled on.
@@ -381,6 +387,7 @@ completed tests move whole to
 > ⛔ Not done — the brief was read-only.
 
 ### ✅ 2026-09-12 — 162 FULLY RULED: **(a) leave dropped · (b) cut · (c) declined on cost, C87 is file-and-watch · (d) closed with item 73.** **Nothing is owed from you; all four §4 loose ends are shut.**
+<!-- ck:162 status:ruled owner:no -->
 
 > ⚖️ **RULED BY YOU 2026-09-12 — (a) leave dropped · (b) don't remember ⇒ the loss is ACCEPTED.**
 > ⏳ **(c) is still owed** — it is a 2-minute look, not a decision. ⏳ **(d) you asked for more
@@ -576,6 +583,7 @@ completed tests move whole to
 > before treating it as binding.
 
 ### ✅ 2026-09-12 — 160 RULED BY YOU: **(b) — let it ride with v10.** This is ordinary release-lane work, not a separate decision. **Nothing is owed from you; the original ask is kept below.**
+<!-- ck:160 status:ruled owner:no -->
 
 > **Your ruling (2026-09-12).** The store-status line is release-lane work like the five counts beside
 > it — one commit, one pass, the whole page correct at once, rather than an agent making a one-line
@@ -842,6 +850,7 @@ All 16 original demands remain, including every F51 leg and both F60 harm legs. 
 failure from F60's deleted file; it is desk evidence, not release clearance or an attended playtest.
 
 ### ✅ 2026-09-12 — 159 RULED 09-12: F31 retires, F37's load-time clean-up is a loss you accept, and every sentence replacement goes in. **Nothing owed from you; the release lane carries it into v10.**
+<!-- ck:159 status:ruled owner:no -->
 
 > **What you ruled (2026-09-12), all three as recommended:**
 >
@@ -977,6 +986,7 @@ failure from F60's deleted file; it is desk evidence, not release clearance or a
 > save would pin it. The reply asks for exactly that. Draft: `FIELD_REPORT_REPLIES.md`, 2026-09-12 section.
 
 ### ✅ 2026-09-12 — 156 RULED: retire the farm-oxygen and layout fixes, the frozen 1.0.7 build stays as it is, the wording goes out in your voice. **Nothing owed from you until the audit reports.**
+<!-- ck:156 status:ruled owner:no -->
 
 > **What you ruled (this morning):** retire F37 (farm oxygen) and F43 (layout research lock, with its F118 rider); the
 > frozen 1.0.7 download is untouched; the wording batch is approved with your corrections — items 1, 2, 6, 7, 9, 10,
@@ -1049,6 +1059,7 @@ warn STATE.md is 12991 bytes, warn threshold is 12288 — copy this line VERBATI
 ```
 
 ### ✅ 2026-09-11 — 155 CLOSED 09-12: you answered the upload receipts, and the answer is standing — **the documents will stop asking.**
+<!-- ck:155 status:closed owner:no -->
 
 > **Your answer (2026-09-12), recorded as your word:** the descriptions **always auto-fill**, but the **formatting
 > does not survive**. You fix it with the copy-paste backups and do a **cleanup pass on both Steam and Paradox**.
@@ -1112,6 +1123,7 @@ warn STATE.md is 12991 bytes, warn threshold is 12288 — copy this line VERBATI
 > ✅ **152 (b) is closed:** your v8 files were committed in `9bc4360` and F60's retirement ran on top of them.
 
 ### ✅ 2026-09-11 — 154 RULED 09-12: sweep only, the safest version. **Build prompt: `agent/prompts/C85_C88_BUILD.md` (with C88). Nothing else owed here; the attended check comes back as its own item when built.**
+<!-- ck:154 status:ruled owner:no -->
 
 > **Build prompt: `agent/prompts/CLOGGED_BUILD.md` (fireable). Entry: [C85](agent/bugs/C85.md).** This is the
 > one where a Rare Metals Extractor or Polymer factory goes dead with "Clogged after a Dust Storm." and the only
@@ -1142,6 +1154,7 @@ warn STATE.md is 12991 bytes, warn threshold is 12288 — copy this line VERBATI
 > checked in a real game.** Full recipe in the prompt's §4.
 
 ### ✅ 2026-09-11 — 153 RULED 09-12: the Reddit "160% productivity" thread is NOT a bug — **post the reply: yes.** The draft is approved; posting is yours whenever you want it.
+<!-- ck:153 status:ruled owner:no -->
 
 > **What you ruled (2026-09-12):** post it, as recommended. The draft in `FIELD_REPORT_REPLIES.md` is now
 > `DRAFT`, gate discharged — nothing is holding it but the click. Tell the next session when it goes up and it
@@ -1165,6 +1178,7 @@ warn STATE.md is 12991 bytes, warn threshold is 12288 — copy this line VERBATI
 > Paradox.
 
 ### ✅ 2026-09-11 — 152 FULLY RULED: **F59's A2 half is `tested-attended`** (09-12) · **(e)'s three overclaiming rows sweep with the v10 site publish** (09-12) · **(c) CLOSED 09-12 — the kick button is DESIGN, not a defect. Nothing is owed from you.**
+<!-- ck:152 status:ruled owner:no -->
 
 > **What you ruled (2026-09-12), both as recommended:**
 >
@@ -1463,6 +1477,7 @@ warn STATE.md is 12991 bytes, warn threshold is 12288 — copy this line VERBATI
 > link stops, the question arrives here with the evidence attached.
 
 ### ✅ 2026-09-11 — 150 CLOSED 09-12: all three decided. **(a) you posted the developer reply · (b) built as option 1 with the law's own id · (c) retire, ruled by item 156.**
+<!-- ck:150 status:closed owner:no -->
 
 > **(a) CLOSED 2026-09-12 — done, not owed.** You posted the reply to `ivanassen` in the Building Codes thread
 > and used **the majority of A+B**: the sources paragraph *and* the line naming AI-assisted research and code
@@ -1626,6 +1641,7 @@ warn STATE.md is 12991 bytes, warn threshold is 12288 — copy this line VERBATI
 > `docs/agent/prompts/fixtoggles/01_SPEC_fable.md`. Link 09 (the version research) can run any time, in parallel.
 
 ### ✅ 2026-09-11 — 146 RULED + BUILT: the Wildfire cure rocket can get stuck on the pad for good. **You ruled: build it, out today. Built `2c68bb1` (`Fix_TradeRocketFuelRefresh`), desk-verified, staged for release as a Beta candidate — your check is item 149.** The original ask is kept below.
+<!-- ck:146 status:ruled owner:no -->
 
 > Two players on Reddit (one PC, one PS5): the cargo rocket Earth sends for the Wildfire cure sits loaded on the pad,
 > shows "20 fuel to unload", and never leaves. **Cause (read from the game's code, not yet reproduced):** the rocket
@@ -1641,6 +1657,7 @@ warn STATE.md is 12991 bytes, warn threshold is 12288 — copy this line VERBATI
 > A reply for the Reddit thread is ready in `FIELD_REPORT_REPLIES.md` — post it or not, your call.
 
 ### ✅ 2026-09-11 — 147 CLOSED 09-12: **cleared by you.** The original triage is kept below. Nothing here is owed from you.
+<!-- ck:147 status:closed owner:no -->
 
 > **Closed 2026-09-12 on your word: cleared.** You did not say which replies went up, so nothing is recorded as
 > posted — the drafts keep their own status lines in `FIELD_REPORT_REPLIES.md` and are yours to post or drop.
@@ -2064,6 +2081,7 @@ warn STATE.md is 12991 bytes, warn threshold is 12288 — copy this line VERBATI
 > posted" → the Steam table, marked owner-stated (there is no API for a Steam comment).
 
 ### ✅ 2026-09-10 — 144 CLOSED 09-12: **(b) cleared by you.** Two small asks around the v7 upload; neither blocked it.
+<!-- ck:144 status:closed owner:no -->
 
 > **Closed 2026-09-12 on your word: (b) is cleared.** You did not say which way — whether the long sounds post
 > went up, or what it said — and nothing has been inferred from that. The two drafts that were gated on it
@@ -2097,6 +2115,7 @@ warn STATE.md is 12991 bytes, warn threshold is 12288 — copy this line VERBATI
 > "currently in testing" wording has gone stale: v7, v8 and v9 have all shipped since.
 
 ### ✅ 2026-09-10 — 143 CLOSED: **FIX BUILT + TESTED-ATTENDED** — new arrivals no longer fall back into a switched-off, quarantined dome ([C83](agent/bugs/C83.md)).
+<!-- ck:143 status:closed owner:no -->
 
 Original question, kept as asked: new arrivals with nowhere to live get sent into a switched-off, quarantined dome with no life support, and suffocate. You reproduced it. **Decision: fix it for hotfix 3, or file and watch. Recommendation: fix it — colonists die, and the game already does the right thing in its elevator case.**
 
@@ -2136,6 +2155,7 @@ Original question, kept as asked: new arrivals with nowhere to live get sent int
 > landing site.*
 
 ### ✅ 2026-09-10 — 144 CLOSED: C83's homeless follow-through found a distinct intentional override, not another fix ([C84](agent/bugs/C84.md)). No decision is owed.
+<!-- ck:144 status:closed owner:no -->
 
 Later homeless resettlement can consider a switched-on, accepting dome without life support,
 but only the player's must-have filter (or direct forced-dome order) can make it beat the live
@@ -2144,6 +2164,7 @@ can force colonists into an unpowered dome. C84 records it `wontfix — intentio
 arrival-only. The attended C83 leg watched the arrivals for one sol; nobody moved into the bad dome.
 
 ### ✅ 2026-09-10 — 142 — **CLOSED 2026-09-12 by your ruling of item 163 (a)**, which dispositioned all 25 source-only candidates as four groups rather than one by one: the 12 P2s land in the four groups; **no hotfix-3 list is named**, which is what the recommendation asked for. **Nothing is owed from you; the original ask is kept below as the reasoning.** ⛔ A disposition, not a dismissal — a field report naming any candidate reopens it instantly.: the vanillahunt terminal audit re-derived every P2 candidate — which of these, if any, go to a hotfix-3 candidate list? **Decision: name any entry you want on a hotfix-3 candidate list, or accept "file and watch" for all. Recommendation: none today; take C66 and C82 as cheap organic looks and leave the rest.**
+<!-- ck:142 status:closed owner:no -->
 
 > Full verdicts: [HUNT_AUDIT.md](agent/reports/vanillahunt/HUNT_AUDIT.md) §3 (each entry
 > also carries a dated `99 terminal audit` stamp). Of the 12 P2 entries re-derived from the
@@ -2179,6 +2200,7 @@ arrival-only. The attended C83 leg watched the arrivals for one sol; nobody move
 > FR-1/2/3 stay open — the Linux sitting (136) outranks every source read for FR-1.
 
 ### ✅ 2026-09-10 — 141 — **CLOSED 2026-09-12 by your ruling of item 163 (a)**, which dispositioned all 25 source-only candidates as four groups rather than one by one: C79/C80/C81/C62 are dispositioned — C80 **REFUTED** (status flipped today), the rest source-only. **Nothing is owed from you; the original ask is kept below as the reasoning.** ⛔ A disposition, not a dismissal — a field report naming any candidate reopens it instantly. rider: vanillahunt 04 left three functional candidates and two profiling reads; none is a release gate. **Decision: take only a naturally available 1.1 fixture, or leave them source-only. Recommendation: prioritize C79; take C80 only on a disposable elevator save, and leave the profiling reads until a large colony already exists.**
+<!-- ck:141 status:closed owner:no -->
 
 > **TAKEABLE WHEN** a fresh 1.1 colony naturally reaches the named surface;
 > never convert the branch-locked 1.0.7 campaign. [C79](agent/bugs/C79.md):
@@ -2198,6 +2220,7 @@ arrival-only. The attended C83 leg watched the arrivals for one sol; nobody move
 > campaign to manufacture it.
 
 ### ✅ 2026-09-10 — 140 — **CLOSED 2026-09-12 by your ruling of item 163 (a)**, which dispositioned all 25 source-only candidates as four groups rather than one by one: C75 + C76 need no fixture; C75 is a group B **player benefit**. **Nothing is owed from you; the original ask is kept below as the reasoning.** ⛔ A disposition, not a dismissal — a field report naming any candidate reopens it instantly. rider: The Incident can answer two source-only candidates in one fresh fixture. **Decision: test it only if a fresh 1.1 colony naturally has two working Fusion Reactors, or leave both candidates source-only. Recommendation: fold the two reads together; neither is a release gate.**
+<!-- ck:140 status:closed owner:no -->
 
 > **TAKEABLE WHEN** the fresh colony lacks Eternal Fusion and reaches The
 > Incident during a dust storm; never convert the branch-locked 1.0.7 campaign.
@@ -2298,6 +2321,7 @@ Original question, kept as asked: C74, the Rare Metals Extractor's hammer (and t
 > it. Report: `agent/reports/C74_SOUND_SWEEP.md`.
 
 ### ✅ 2026-09-10 — 138 — **CLOSED 2026-09-12 by your ruling of item 163 (a)**, which dispositioned all 25 source-only candidates as four groups rather than one by one: the eight caller-seam candidates are dispositioned; **C66 stays a group A organic rider**, never provisioned for. **Nothing is owed from you; the original ask is kept below as the reasoning.** ⛔ A disposition, not a dismissal — a field report naming any candidate reopens it instantly. rider: eight caller-seam candidates need fresh 1.1 fixtures; none is a release gate. **Decision: take only the naturally available fixture(s), or leave the candidates source-only. Recommendation: prioritize C66 and fold C67/C68 together if a food-service fixture is already available.**
+<!-- ck:138 status:closed owner:no -->
 
 > **TAKEABLE WHEN** a fresh 1.1 colony naturally has the named surface; never
 > convert the branch-locked 1.0.7 campaign. [C66](agent/bugs/C66.md): RC
@@ -2318,6 +2342,7 @@ Original question, kept as asked: C74, the Rare Metals Extractor's hammer (and t
 > reached naturally.
 
 ### ✅ 2026-09-10 — 137 — **CLOSED 2026-09-12 by your ruling of item 163 (a)**, which dispositioned all 25 source-only candidates as four groups rather than one by one: the three politics candidates stay source-only; no colony is provisioned for them. **Nothing is owed from you; the original ask is kept below as the reasoning.** ⛔ A disposition, not a dismissal — a field report naming any candidate reopens it instantly. rider: three vanilla politics candidates need a fresh 1.1 colony, never the branch-locked campaign. **Decision: provision one politics fixture when convenient, or leave all three source-only. Recommendation: provision only if the ordinary play setup can cover them together.**
+<!-- ck:137 status:closed owner:no -->
 
 > **TAKEABLE WHEN** a fresh 1.1 sponsor-faction colony has active politics and
 > can naturally reach faction opportunities, a timed faction disaster and the
@@ -2453,6 +2478,7 @@ Original question, kept as asked: C74, the Rare Metals Extractor's hammer (and t
 > result will show whether the pass is needed and where to aim it.
 
 ### ✅ 2026-09-10 — 135 **RULED 2026-09-12 (ck166 c): TAKE IT IN HOTFIX 3.** Desk tool only, 0 shipped hashes, ⛔ not part of v10 — and now the only item left in the hotfix-3 batch. Original ask below. — `luafn.py`'s body delimiter over-spans one-line functions (441 declarations, 133 inventory rows). ⭐ The measurement says the fix would change **0** shipped hashes — cheaper than the chain brief assumed. **TAKEABLE WHEN you rule; recommendation: take it in hotfix 3, as a small standalone change.** Nothing here needs the keyboard.
+<!-- ck:135 status:ruled owner:no -->
 
 > **What was measured** (vanillahunt link 01, 2026-09-10, `TRIAGE.md` §0.6).
 > `find_bodies` scans forward from a declaration for a bare `end` at the same
@@ -2521,6 +2547,7 @@ Original question, kept as asked: C74, the Rare Metals Extractor's hammer (and t
 > what `luafn.py`'s own header forbids.
 
 ### ✅ 2026-09-10 — 134 CLOSED 09-12 as overtaken: the models were assigned, the chain ran end to end, and its audit closed it on 09-10. **Nothing is owed from you.**
+<!-- ck:134 status:closed owner:no -->
 
 > **Closed 2026-09-12 on your "if it's overtaken close it", after reading the chain's own manifest
 > rather than a status line.** Every row in `agent/prompts/vanillahunt/README.md` is struck through
@@ -2865,6 +2892,7 @@ Original question, kept as asked: C74, the Rare Metals Extractor's hammer (and t
 > ⛔ Not clearance (`H-04`). `100_DOCSWEEP` is now the ONLY thing between the tree and the upload; it fires next.
 
 ### ✅ CLOSED 2026-09-09 — the brief that produced the block above, kept for its recipes: `agent/prompts/HOTFIX2_SITTING.md`. Two tiers, and the second is designed to be stopped partway.
+<!-- ck:- status:closed owner:no -->
 
 > **Every in-play control the chain owes you is in one file**, one boot, on
 > `BlankBig_02` — links 03, 04, 04b, 07, 08 and 99a, plus the F95 line you just
@@ -3105,6 +3133,7 @@ Original question, kept as asked: C74, the Rare Metals Extractor's hammer (and t
 > (09-09), so the count measures content, not the checkout. Verified 0 CR.
 
 ### ✅ 2026-09-09 — ITEM 126 RULED: **KEEP THE PASS IN** (see the ruling block at the top of this section). Left below as the reasoning you ruled on; link 08 wrote a pass that cleans up after **us**, and it changes what "remove the save sanitizer" means
+<!-- ck:126 status:ruled owner:no -->
 
 > **What we left behind.** One of the 36 modules link 02 deleted,
 > `Fix_AstrogeologistExtractors`, did its job by adding two +10% extractor
@@ -3450,6 +3479,7 @@ Original question, kept as asked: C74, the Rare Metals Extractor's hammer (and t
 > says to research Dozer Rover first, and F115's "unverifiable" line is closed as verified.
 
 ### ✅ 2026-09-08 — ITEM 124 RULED: `StaleReservations` is FIXED, not removed. This was the last thing blocking chain link 03.
+<!-- ck:124 status:ruled owner:no -->
 
 > ⚖️ **124 — RULED: FIX.** Owner, verbatim: *"fix is the ruling."* ⇒ `Fix_StaleReservations` **stays** and gains
 > the exemption clause; it does not go to a deletion sweep. **Link 03 is now unblocked in full** — all three of
@@ -3481,6 +3511,7 @@ Original question, kept as asked: C74, the Rare Metals Extractor's hammer (and t
 > value and will not re-run, so the Saint blesses **nobody** — a **loss**, so it gets repaired.
 
 ### ✅✅ 2026-09-08 — ITEMS 98, 117 AND 120 RULED IN-SESSION AND ACTIONED THE SAME HOUR. Nothing here is owed from you; one 3-minute control is offered at the bottom and it is optional.
+<!-- ck:98 status:ruled owner:no -->
 
 > ⚖️⚖️ **98 — RULED: DELETE, not gate. There is no 1.0.7 line in the live pack.** Your words:
 > *"I am fine with the 1.0.7 issue, we are giving a path which we don't have to do. The main mod serves the
@@ -4215,6 +4246,7 @@ Original question, kept as asked: C74, the Rare Metals Extractor's hammer (and t
 
 
 ### ✅ 2026-08-31 — ITEM 87 RULED THE SAME DAY: drones UNFROZEN
+<!-- ck:87 status:ruled owner:no -->
 
 87. ✅ **RULED 2026-08-31 — "Un freeze drones" (verbatim).** Lifts the PT-52
     freeze and the module freeze on the opt-in mod's `Opt_DroneOverhaul` (D06)
@@ -4257,6 +4289,7 @@ Original question, kept as asked: C74, the Rare Metals Extractor's hammer (and t
 
 
 ### ✅ 2026-08-30 — ITEM 82 CLOSED: F110 live on both stores in v5, site deployed, delivered Steam pack verified. Nothing owed.
+<!-- ck:82 status:closed owner:no -->
 
 82. ✅ **SHIPPED — v5, both portals, 2026-08-30.** You packed and uploaded Paradox
     then Steam; you told me the store pages look good. The tree now reads `version 5`
@@ -4609,6 +4642,7 @@ rock-clearing jobs) crashes the same way, not just levelling.
     look after the upload; nothing about it blocks anything.
 
 ### ✅ 2026-08-24 — F107 IS REPAIRED. **76 CLOSED 09-12 as overtaken — the module was deleted by `2dc1dbe`, so there is nothing left to revert. Nothing is owed from you.**
+<!-- ck:76 status:closed owner:no -->
 
 76. ✅ **BUILT on your item-74 (a), same session — `Fix_LandscapeCostRefresh`
     now installs ONE chained wrap on `ConstructionSite` instead of three on the
@@ -4735,6 +4769,7 @@ rock-clearing jobs) crashes the same way, not just levelling.
     them.
 
 ### ⭐⭐ 2026-08-23 — THE FIRST FIELD REPORTS ARRIVED. Two GitHub issues, one reporter, and the pack was named in both. Neither error was ours. **73 CLOSED 09-12: not worth further resources.**
+<!-- ck:73 status:closed owner:no -->
 
 72. ✅ **RULED 2026-08-24, in-session ("number 1 fix priority") — BUILT AND
     BOOT-VERIFIED the same day; receipt in the 2026-08-24 section above.**
@@ -5863,6 +5898,7 @@ rock-clearing jobs) crashes the same way, not just levelling.
     that would have sent a runner hunting a module that does not exist.
 
 ### ✅ 2026-08-19 — two calls from the last sweep link. **50 RULED + APPLIED 09-12 (soften the chain-vs-copy promise) · 51 CLOSED 09-12 as overtaken, with the unrun leg re-filed as a takeable. Nothing is owed from you.**
+<!-- ck:50 status:ruled owner:no -->
 
 50. ✅ **RULED 2026-09-12 — soften it. APPLIED the same session, words only.** Your word. The
     sentence that promised an outcome for other mods now says what the code does, and the README's
@@ -6044,6 +6080,7 @@ rock-clearing jobs) crashes the same way, not just levelling.
     loose, say so and I will put it back. Otherwise nothing is owed here.
 
 ### ⛔⛔ 2026-08-19 — the upload would have shipped one fix missing, on Steam. **47 RULED + APPLIED 09-12, both halves — and a third defect was found in the same snippet. Nothing is owed from you.**
+<!-- ck:47 status:ruled owner:no -->
 
 46. ⛔⛔ **A fix would have vanished from the Steam release, and the check that
     was supposed to catch it said "pass".** ⇒ **Nothing to do — it is fixed and
@@ -6261,6 +6298,7 @@ rock-clearing jobs) crashes the same way, not just levelling.
     deciding when you get there.
 
 ### ✅ 2026-08-19 — THE VERIFICATION LAUNCH RAN: the mod is running clean in a real game. **43 CLOSED 09-12 as overtaken — the opt-in pack is enabled again. Nothing is owed from you.**
+<!-- ck:43 status:closed owner:no -->
 
 43. ✅ **CLOSED 2026-09-12 as overtaken — the opt-in pack is back on.** On your
     "if it's overtaken close it". The evidence is an observation, not a note:
@@ -6388,6 +6426,7 @@ rock-clearing jobs) crashes the same way, not just levelling.
     is one edit whenever you want.
 
 ### ✅ 2026-08-18 — SWEEP CHAIN, LINK 4 REPORTED. **41 RULED + BUILT 09-12: the stand-down box names the fixes and stops blaming the game. Nothing is owed from you.**
+<!-- ck:41 status:ruled owner:no -->
 
 41. ✅ **RULED + BUILT 2026-09-12 — the box names the fixes, and it no longer blames the game for
     our own failures.** Your word: *"same shape as 39"*. Both halves went in as one text change,
@@ -6493,6 +6532,7 @@ rock-clearing jobs) crashes the same way, not just levelling.
     costs you only the moment you spend kicking it off.
 
 ### ✅ 2026-08-18 — SWEEP CHAIN, LINK 3 REPORTED. **40 RULED 09-12: `smr_shuttles` keeps its name, accepted as recorded. Nothing is owed from you.**
+<!-- ck:40 status:ruled owner:no -->
 
 40. ✅ **RULED 2026-09-12 — option (a), accept as recorded. No rename.** Your word. The
     `smr_shuttles` flag keeps its name; no shipped byte changes. Your 2026-08-01 hard rule is
@@ -6569,6 +6609,7 @@ rock-clearing jobs) crashes the same way, not just levelling.
     And nobody has ever actually walked an uninstall, let alone a reinstall.
 
 ### ✅ 2026-08-18 — SWEEP CHAIN, LINK 2 REPORTED. **39 RULED + BUILT 09-12: the stand-down box shows once per session. Nothing is owed from you.**
+<!-- ck:39 status:ruled owner:no -->
 
 39. ✅ **RULED + BUILT 2026-09-12 — the box shows once per session; the log line still writes every
     time.** Your word: *"this can be fixed if its cheap, but its also minor."* It was cheap — **4
