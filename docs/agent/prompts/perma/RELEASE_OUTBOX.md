@@ -76,9 +76,14 @@ player surface bumps it by one on release.
   measured** — the control is an enabled-but-unpowered residence plus a passenger
   rocket, and nobody ran it. The ruling was taken on the source position.
 - ⚠️ **For `last_changes`:** a retirement is a player-facing change — the count drops
-  and a listed fix disappears. Suggested wording: *"One older fix has been retired:
-  the game's own 1.1.0 changes made the dome housing-total repair unnecessary, so it
-  has been removed rather than left to change numbers it no longer corrects."*
+  and a listed fix disappears. ⚖️ **Owner reworded it 2026-09-11: do not name the
+  individual fix or its mechanism.** The line describes the ONGOING review instead,
+  which is what it actually is (hotfix 2 retired 36 modules on the same reasoning):
+  *"We are still reviewing our own fixes against the 1.1.0 patch, and where the
+  game's update has resolved all or part of what one of them was written for, that
+  fix is reworked or retired rather than left in. One has been retired this time, so
+  the fix list drops from fifty to forty-nine."* ⇒ future retirements reuse this
+  shape and only change the count sentence.
 - ⚠️ **Loose end, not release-blocking:** the TestKit probe `DomeFreeSpaceMismatch`
   (`30_Probes_Wave3.lua`) still targets the deleted module and will fail on the next
   kit run. TestKit is local-only by design.

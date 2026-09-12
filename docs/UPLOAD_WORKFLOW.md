@@ -310,7 +310,7 @@ Notes** (Steam), paste this:
 
 ```
 - Assigning a colonist to a residence that was already full could leave that home with more residents than it has beds, and fail to evict the colonist it displaced. This was the fix pack's own doing, not the game's, and it is repaired: the freed-bed notice now waits until the move that freed the bed has finished. Watched working in a running colony on game 1.1.0. The same repair should also stop a colonist boarding an expedition from losing the home held for their return; that half is verified in the code only.
-- One older fix has been retired: the game's own 1.1.0 changes made the dome housing-total repair unnecessary, so it has been removed rather than left to change numbers it no longer corrects. The fix list drops from fifty to forty-nine.
+- We are still reviewing our own fixes against the 1.1.0 patch, and where the game's update has resolved all or part of what one of them was written for, that fix is reworked or retired rather than left in. One has been retired this time, so the fix list drops from fifty to forty-nine.
 ```
 
 #### 📋 Short summary (only if it also came out blank)
