@@ -389,6 +389,27 @@ ordinary ground). Hold this until the checklist 147 lake check has run — its r
 **Meteors (Steam) — optional; recommendation (checklist 147): skip**
 > Meteors land at random spots across the whole map, and the way the spot is picked didn't change in the update, so a bigger base simply gets hit more often. The Relaunched Fix Pack doesn't change meteors any more.
 
+## Field report triaged 2026-09-12 — draft (checklist 157)
+
+**Prosperity for Mars "angry" about unemployment with 0 unemployed (Steam bug-report inbox, Madmouse Ked) — C89**
+
+Drafted 2026-09-12 by `smr-bugfixpack-d0`. Not ours; the cause is inferred from the code, not reproduced, so the
+reply asks for the two facts that decide it. Plain register, no hedging words.
+
+> Thanks for the report. That one is the game's own faction logic rather than anything the fix pack changes, and here
+> is what we can see in the code: the faction's "high unemployment" mark is checked once per game hour, and it counts
+> any dome where one in ten colonists who could work has no job at that moment. So a single idle colonist in a small
+> dome, a shift change, or a building you just switched off can set it at the top of the hour, and the panel keeps
+> showing it until the next hour even though the Unemployed number at the top of the screen is already back to 0.
+>
+> Two things would tell us whether it is only that or something more:
+> 1. Does the faction panel still list "Domes with more than 10% Unemployment" an hour or more later, with the top
+>    bar still at 0?
+> 2. Roughly how many colonists are in your smallest dome?
+>
+> If it stays on across hours, a save would let us pin it exactly, and we will pass it to the developers with the
+> code lines.
+
 ## Owed, and where it is tracked
 
 | Item | Where |

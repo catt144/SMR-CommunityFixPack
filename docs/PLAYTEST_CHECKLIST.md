@@ -29,6 +29,18 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### 2026-09-12 — 157: new Steam report, "Prosperity for Mars angry about unemployment with 0 unemployed" — triaged, not ours, not a build. **One decision: post the reply asking for details (draft below), or wait.**
+
+> **What it is:** the faction's "high unemployment" dislike is a **once-an-hour snapshot** (stored and shown on the
+> panel until the next hour, and it fires a notification the first hour it appears), while the top-bar Unemployed
+> number is **live**. The dislike counts any working dome where one in ten colonists who could work has no job at
+> that moment — so one idle colonist in a small dome, a shift change or a switched-off building at the top of the
+> hour is enough, and the bar can read 0 a minute later. Nothing in the pack touches any of it. Entry:
+> [C89](agent/bugs/C89.md). It does **not** join the C85/C88 build; fire that as written.
+>
+> **If it persists across hours with the bar at 0** it is something else (a stale dome label), and the reporter's
+> save would pin it. The reply asks for exactly that. Draft: `FIELD_REPORT_REPLIES.md`, 2026-09-12 section.
+
 ### ✅ 2026-09-12 — 156 RULED: retire the farm-oxygen and layout fixes, the frozen 1.0.7 build stays as it is, the wording goes out in your voice. **Nothing owed from you until the audit reports.**
 
 > **What you ruled (this morning):** retire F37 (farm oxygen) and F43 (layout research lock, with its F118 rider); the
