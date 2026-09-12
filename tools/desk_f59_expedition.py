@@ -28,7 +28,7 @@ from desk_migration_cluster import (runtime, shipped, module, module_text,
 
 
 def scenario(patched, waiting=True, stale_sweep=False, action='expedition',
-             candidate=False, legacy=False, synchronous=False):
+             candidate=False, legacy=False, synchronous=False, real_comfort=False):
     rt = runtime()
     defer_shim(rt, synchronous)
     rt.execute('''
@@ -95,6 +95,17 @@ def scenario(patched, waiting=True, stale_sweep=False, action='expedition',
       crew=colonist(); crew.residence=home; home.colonists={crew}
       homeless=colonist()
     ''')
+    if real_comfort:
+        # ⛔ The constant-comfort stub silently removes a VANILLA GUARD: the real
+        # `GetResidenceComfort` (Residence.lua:416-434) gates on `ValidateBuilding`
+        # (Workplace.lua:1316-1327), which tests destroyed/demolishing/refab.
+        # A1 involves no destroyed building, so this must change nothing here --
+        # which is exactly why it is worth running.
+        shipped(rt, 'Lua/Buildings/Workplace.lua', r'^function ValidateBuilding\(')
+        shipped(rt, 'Lua/Buildings/Residence.lua', r'^function GetResidenceComfort\(')
+        rt.execute('ColonistStatList = {"Comfort"}')
+        rt.execute('home.Comfort = 50')
+        rt.execute('home.IsKindOf = function() return false end')
     if waiting:
         rt.execute('dome.labels.Homeless={homeless}')
     if action == 'expedition':
@@ -176,6 +187,28 @@ def main():
     rt = scenario(True, candidate=True, action='unrelated_hold')
     b.check('AUDIT IDEA: unrelated expedition pointer does not suppress this vacancy',
             rt.eval('homeless.residence == home'))
+    # --- the same legs without the comfort STUB. A3 (a third harm I reported at
+    # Residence:OnDestroyed while building) turned out to be an artefact of a
+    # constant-comfort stub, which silently deletes the `destroyed` test the real
+    # `GetResidenceComfort` inherits from `ValidateBuilding` (Workplace.lua:1322).
+    # A1 involves no destroyed building so nothing here should move -- and that is
+    # precisely why it is asserted rather than assumed. See desk_f59_interact.py.
+    rt = scenario(True, legacy=True, real_comfort=True)
+    b.check('REAL comfort: the A1 hold loss is REAL -- neighbour takes the bed, hold cleared',
+            rt.eval('homeless.residence == home and crew.reserved_residence == false'))
+    rt = scenario(True, real_comfort=True)
+    b.check('REAL comfort: REPAIRED keeps the expedition hold against a competing neighbour',
+            rt.eval('crew.expedition_residence == home and crew.reserved_residence == home and home.reserved[crew] == true and homeless.residence == false'))
+    rt = scenario(True, synchronous=True, real_comfort=True)
+    b.check('REAL comfort: defeating the deferral loses the hold again',
+            rt.eval('crew.reserved_residence == false and homeless.residence == home'))
+    rt = scenario(True, action='ordinary', real_comfort=True)
+    b.check('REAL comfort: an ordinary vacancy is still offered (the benefit survives)',
+            rt.eval('homeless.residence == home and DEFERRED_RAN >= 1'))
+    rt = scenario(False, action='ordinary', real_comfort=True)
+    b.check('REAL comfort: vanilla still leaves that neighbour homeless beside the free bed',
+            rt.eval('homeless.residence == false and home:GetFreeSpace() == 1'))
+
     return b.finish()
 
 

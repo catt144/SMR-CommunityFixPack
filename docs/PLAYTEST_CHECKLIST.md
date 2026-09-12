@@ -83,8 +83,13 @@ completed tests move whole to
 > **Built tonight** (migrationfix link 01; `Code/Fix_FreedHousingNotice.lua`). The vacancy
 > notification no longer fires in the middle of someone else's operation — it now runs a
 > scheduler step later, after the operation that freed the bed has finished, and re-checks
-> whether the bed is still free. That closes **both** harms 151 described, **and a third one
-> found while building** (a colonist dragged into a residence being *destroyed*).
+> whether the bed is still free. That closes **both** harms 151 described.
+> ⚠️ **CORRECTION, same day, by the session that wrote this line.** I first reported a *third*
+> harm here (a colonist dragged into a residence being destroyed). **It does not exist** — it
+> was an artefact of my own test fixture, and re-running the test against the real game code
+> refutes it. The two real harms and the repair are unaffected and were re-checked without
+> that fixture. Details in [F59](agent/bugs/F59.md)'s retraction section. **This also
+> withdraws item (f) below — please do not file it.**
 > ⛔ **Nothing is uploaded and nothing may be.** The upload gate is AFTER the audit
 > (`agent/prompts/migrationfix/02_AUDIT_fable.md`), not between. No version number was
 > touched and the Mod Editor was not opened.
@@ -146,10 +151,14 @@ completed tests move whole to
 >   Shuttle Hub", "A dome sat half empty…" — its "no expiry at all" line). These are public-surface text fixes,
 >   not code. **Recommendation: run `agent/prompts/perma/PUBLIC_SURFACE_SWEEP.md` on those three rows before
 >   or with the next site publish.**
-> - **(f) A possible game bug found on the way, yours to file or drop:** when a residence is destroyed, the
->   game leaves it in the dome's housing list with its switch on, so its own housing update can move a
->   homeless colonist INTO the rubble. Read in the code, never seen in play. **Recommendation: file it as a
->   candidate (desk-only, no build) so it is on record if a player ever reports colonists "living" in a ruin.**
+> - **(f) ⛔ WITHDRAWN — nothing to file, no action from you.** This item said the game can move a homeless
+>   colonist into a destroyed residence. The three code facts behind it are individually true (a destroyed
+>   residence does stay in the dome's housing list, its switch does stay on, and the selector itself does not
+>   test "destroyed"), **but the conclusion is wrong**: the test is there, one level down — the comfort
+>   scoring the selector calls refuses a destroyed building outright, so it can never be chosen. Measured
+>   against the real game code, not argued. **There is no game bug here, and the matching "unresolved lead"
+>   in [F59](agent/bugs/F59.md) is now closed in the game's favour.** Withdrawn by the session that caused
+>   it — the audit was reasoning from my retracted finding, not making its own mistake.
 >
 > Required owner-facing warning, verbatim from `doccheck` after this session's one STATE line (item 132 is yours):
 > `warn STATE.md is 13240 bytes, warn threshold is 12288 — copy this line VERBATIM into the owner report; the owner fires agent/prompts/perma/STATE_EVICTION.md`

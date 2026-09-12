@@ -32,9 +32,10 @@
 -- hands the bed to a neighbour the enclosing operation is about to collide with.
 -- FIX_POLICY §1.4 carries this as a general rule now; it was written from here.
 --
--- THREE HARMS WERE MEASURED AT THE DESK (all on shipped bodies, module off/on).
--- A1 and A2 are fixed by the deferral; A3, described after it, is not and needs a
--- guard of its own:
+-- TWO HARMS WERE MEASURED AT THE DESK (both on shipped bodies, module off/on),
+-- and both are fixed by the deferral. A third, A3, was reported on 2026-09-11 and
+-- then REFUTED the same day by my own re-measurement -- the retraction is kept
+-- below rather than deleted, because the way it was wrong is reusable:
 --
 --   A1 -- expedition boarding loses the crew member's return home (1.1.0 only).
 --   Colonist:EnterTransporter saves expedition_residence (Colonist.lua:5029-5031)
@@ -54,34 +55,37 @@
 --   unwind (EF-008) => three residents in a capacity-2 home, infopanel 3/2,
 --   and the player's eviction silently undone.
 --
---   A3 -- a NON-RESIDENT is dragged into a residence being DESTROYED (both
---   branches). NEW, measured here 2026-09-11 while building; it was on record in
---   neither direction, and it is the one harm deferral alone does NOT fix, which
---   is why the guard below is not only about timing.
---   Residence:OnDestroyed:81-92 evicts its residents one at a time (:85) and
---   re-houses each with vanilla's own colonist:UpdateResidence() at :86, so the
---   old hook's guard opened mid-destruction; :89's `self.colonists = {}` then
---   drops whoever was assigned, leaving them pointing at a dead home. MEASURED,
---   and it corrects a plausible-but-wrong reading of this site: at a capacity the
---   evictions fill exactly, ALL THREE shapes (absent / pre-repair / repaired) end
---   identically, because the evicted resident is appended LAST to the dome's
---   Homeless label and CheckHomeForHomeless walks it BACKWARDS -- so the hook
---   only ever reached the same colonist vanilla's :86 was about to re-house, and
---   added nothing. Give the dying residence ONE SPARE SLOT, though, and the hook
---   reaches a colonist who was never a resident and whom vanilla never touches.
---   THAT is the harm, and it is ours.
---   Deferral cannot close it: after the loop, colonists and reserved are both
---   empty, so free space is the FULL capacity and a deferred guard opens wider
---   than the synchronous one did. So the guard declines a destroyed home
---   outright, at both the pre-filter and the fire-time check. Our module now
---   participates in NONE of OnDestroyed's three entry paths -- Building:Destroy
---   sets self.destroyed at Building.lua:1560 BEFORE calling OnDestroyed at :1576,
---   while Residence:Done (:78) and Building:Refabricate (:1870, DoneObject at
---   :1889) leave the object invalid by the time the thread wakes.
---   ⛔ What this does NOT do is fix the UNRESOLVED lead filed against this site:
---   vanilla's :86 still re-homes the evicted residents into the home it is about
---   to empty, in every shape including the repaired one, and that is untouched
---   here. It is vanilla's shape to answer, not ours -- see bugs/F59.md.
+--   ⛔ A3 -- RETRACTED, and the retraction is the instructive part.
+--   CLAIMED 2026-09-11 while building: that at Residence:OnDestroyed:81-92 the old
+--   hook dragged a colonist who was never a resident into the residence being
+--   destroyed (`:89 self.colonists = {}` then dropping them onto a dead home), and
+--   that deferral could not fix it because after the eviction loop free space is
+--   the FULL capacity. REFUTED the same day, by re-running the same legs with the
+--   shipped comfort bodies instead of the harness's stub:
+--     * `GetResidenceComfort` (Residence.lua:416-434) gates on `ValidateBuilding`
+--       (Workplace.lua:1316-1327), which tests `destroyed` (and `demolishing`,
+--       `refab_work_request`, `exceptional_circumstances`) -- so it returns NIL for
+--       a destroyed residence;
+--     * `ChooseResidence` then scores it `min_int` (:454-455), and the only
+--       tie-break that could still select it (:459) requires
+--       `best_home ~= current_home`, which is FALSE for a homeless colonist.
+--   ⇒ **vanilla cannot assign anyone into a destroyed residence, and neither could
+--   the old hook.** With the real bodies loaded, absent / pre-repair / repaired are
+--   INDISTINGUISHABLE at this site. The whole effect came from the harness stubbing
+--   `GetResidenceComfort` to a constant, which silently deleted a vanilla guard.
+--   ⇒ The UNRESOLVED lead that `bugs/F59.md` carried against this site is therefore
+--   CLOSED IN VANILLA'S FAVOUR, not open: vanilla's own `colonist:UpdateResidence()`
+--   at `:86` re-homes nobody into the home it is about to empty either.
+--   Both halves are pinned as legs in `tools/desk_f59_interact.py` (stub shows the
+--   difference, real bodies refute it) so this cannot be re-derived wrongly again.
+--
+--   WHY THE `not home.destroyed` GUARD STAYS ANYWAY, relabelled honestly: it is
+--   DEFENSIVE, not harm-driven. It changes no outcome -- it declines work on a
+--   residence vanilla would refuse one level down -- but it keeps the eviction loop
+--   from creating a thread per evicted resident for nothing, and it means we would
+--   not start handing out beds in rubble if `ValidateBuilding` ever stopped testing
+--   `destroyed`. Removing it is a legitimate simplification; keeping it is not
+--   evidence of a harm. ⛔ Do not cite A3 as a reason for anything.
 --
 -- THE REPAIR: publish the vacancy when the ENCLOSING OPERATION has finished,
 -- not when SetResidence has. The only caller-agnostic definition of "the
@@ -141,8 +145,10 @@
 --                                        at :2901). Deferral also covers it if a
 --                                        path ever reaches it with a live home,
 --                                        since :5003-5008 is the same shape as A1.
---   Residence.lua:85  OnDestroyed        CHANGED, deliberately: A3 above. We now
---                                        contribute nothing there, in any branch.
+--   Residence.lua:85  OnDestroyed        UNCHANGED in outcome. The `destroyed`
+--                                        guard declines here, but vanilla refuses
+--                                        the assignment anyway -- see A3's
+--                                        retraction. Defensive only.
 --   Residence.lua:157 KickResident       A2. CHANGED: deferred, so :348's
 --                                        assignment lands first and we decline.
 --                                        The infopanel kick button (same method,

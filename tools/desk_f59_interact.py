@@ -27,12 +27,12 @@ audit's PROPOSED expedition-home exclusion against THIS harm, and it still
 overfills -- the measured reason the shipped repair is not that shape.
 """
 import deskbench as db
-from desk_migration_cluster import (runtime, shipped, module, module_text,
+from desk_migration_cluster import (runtime, shipped as M_shipped, module, module_text,
                                     load_module, defer_shim, F59_HARMFUL_REV)
 
 
 def scenario(patched, alt_home=False, legacy=False, synchronous=False,
-             candidate=False, action='interact', capacity=2):
+             candidate=False, action='interact', capacity=2, real_comfort=False):
     rt = runtime()
     defer_shim(rt, synchronous)
     rt.execute('''
@@ -54,14 +54,14 @@ def scenario(patched, alt_home=False, legacy=False, synchronous=False,
     for method in ['SetResidence', 'UpdateResidence', 'CancelResidenceReservation',
                    'CanChangeCommand', 'CheckForcedResidence', 'CheckForcedDome',
                    'UpdateHomelessLabels']:
-        shipped(rt, 'Lua/Units/Colonist.lua', '^function Colonist:' + method + r'\(')
+        M_shipped(rt, 'Lua/Units/Colonist.lua', '^function Colonist:' + method + r'\(')
     for method in ['AddResident', 'RemoveResident', 'GetFreeSpace', 'CanReserveResidence',
                    'ReserveResidence', 'CancelResidenceReservation', 'CheckHomeForHomeless',
                    'IsSuitable', 'KickResident', 'KickOldestResident', 'ColonistInteract',
                    'GetUICapacity', 'GetUIResidentsCount', 'OnDestroyed']:
-        shipped(rt, 'Lua/Buildings/Residence.lua', '^function Residence:' + method + r'\(')
-    shipped(rt, 'Lua/Buildings/Residence.lua', r'^function ChooseResidence\(')
-    shipped(rt, 'Lua/Buildings/Dome.lua', r'^function Dome:ChooseResidence\(')
+        M_shipped(rt, 'Lua/Buildings/Residence.lua', '^function Residence:' + method + r'\(')
+    M_shipped(rt, 'Lua/Buildings/Residence.lua', r'^function ChooseResidence\(')
+    M_shipped(rt, 'Lua/Buildings/Dome.lua', r'^function Dome:ChooseResidence\(')
     rt.execute('ALT = ' + ('true' if alt_home else 'false'))
     rt.execute('CAPACITY = %d' % capacity)
     if patched:
@@ -113,6 +113,22 @@ def scenario(patched, alt_home=False, legacy=False, synchronous=False,
         GetResidenceComfort=function(r) if r==alt then return 90,0 end return 50,0 end
       end
     ''')
+    if real_comfort:
+        # ⛔ THE COMFORT STUB WAS HIDING A VANILLA GUARD. `GetResidenceComfort`
+        # (Residence.lua:416-434) gates on `ValidateBuilding`
+        # (Workplace.lua:1316-1327), which tests `destroyed`/`demolishing`/
+        # `refab_work_request`/`exceptional_circumstances` -- so for a destroyed
+        # residence the real body returns NIL, ChooseResidence scores it
+        # `min_int` (:454-455) and its tie-break at :459 requires
+        # `best_home ~= current_home`, which is false for a homeless colonist.
+        # A constant-comfort stub removes all of that. Load the shipped bodies.
+        M_shipped(rt, 'Lua/Buildings/Workplace.lua', r'^function ValidateBuilding\(')
+        M_shipped(rt, 'Lua/Buildings/Residence.lua', r'^function GetResidenceComfort\(')
+        rt.execute('ColonistStatList = {"Comfort"}')
+        rt.execute('home.Comfort = 50; if ALT and alt then alt.Comfort = 90 end')
+        # the real body reaches `residence:IsKindOf("HotelBase")` at :430
+        rt.execute('home.IsKindOf = function() return false end')
+        rt.execute('if ALT and alt then alt.IsKindOf = function() return false end end')
     if action == 'interact':
         # the player's "Set Residence" on a FULL residence
         rt.execute('home:ColonistInteract(newcomer)')
@@ -197,27 +213,54 @@ def main():
     b.check('REPAIRED: the infopanel kick DOES still offer the freed bed (same method, benign caller)',
             rt.eval('#home.colonists == 2 and home.capacity == 2 and #asserts_fired == 0 and DEFERRED_RAN == 1'))
 
-    # --- A3: Residence:OnDestroyed. Measured 2026-09-11, and NOT previously on
-    # record in either direction. `capacity=3` gives the dying residence a spare
-    # slot, which is what lets a colonist who was never a resident be reached;
-    # at capacity 2 all three shapes are indistinguishable, because the evicted
-    # residents sit at the END of the Homeless label and so are always taken
-    # first -- which is why this needs the capacity-3 fixture to show at all.
-    rt = scenario(False, action='destroy', capacity=3)
-    b.check('vanilla OnDestroyed: its own :86 re-homes the evicted residents into the dying home',
-            rt.eval('old.residence == home and young.residence == home and #home.colonists == 0'))
-    b.check('vanilla OnDestroyed: a colonist who was NOT a resident is never reached',
-            rt.eval('newcomer.residence == false'))
+    # --- ⛔ A3 RETRACTED. Read this before trusting any OnDestroyed claim here.
+    # While building the repair I reported a third harm at Residence:OnDestroyed:
+    # with one spare slot, the pre-repair hook appeared to drag a colonist who was
+    # never a resident into the residence being destroyed. THAT WAS A FIXTURE
+    # ARTEFACT OF THIS FILE. The fixture stubs `GetResidenceComfort` to a constant,
+    # and the REAL body (Residence.lua:416-434) gates on `ValidateBuilding`
+    # (Workplace.lua:1316-1327) which tests `destroyed` -- so it returns NIL for a
+    # destroyed residence, `ChooseResidence` scores it `min_int` (:454-455), and the
+    # only tie-break that could still pick it (:459) requires
+    # `best_home ~= current_home`, false for a homeless colonist. Vanilla cannot
+    # assign anyone into a destroyed residence, and neither could our old hook.
+    # The legs below pin BOTH halves, because the stub-vs-real difference is the
+    # whole lesson: a constant-comfort stub silently deletes a vanilla guard.
     rt = scenario(True, legacy=True, action='destroy', capacity=3)
-    b.check('PRE-REPAIR A3: the hook drags a NON-RESIDENT into the residence being destroyed',
-            rt.eval('newcomer.residence == home and #home.colonists == 0'))
-    rt = scenario(True, action='destroy', capacity=3)
-    b.check('REPAIRED A3: no non-resident is dragged in -- identical to vanilla',
+    b.check('STUB comfort: the pre-repair hook APPEARS to drag a non-resident into a dying home',
+            rt.eval('newcomer.residence == home'))
+    rt = scenario(True, legacy=True, action='destroy', capacity=3, real_comfort=True)
+    b.check('⛔ REAL comfort REFUTES it: the pre-repair hook drags nobody in -- A3 does not exist',
             rt.eval('newcomer.residence == false'))
-    b.check('REPAIRED A3: the `destroyed` pre-filter declines, so no thread is even created',
-            rt.eval('DEFERRED_RAN == 0'))
-    b.check("REPAIRED A3: vanilla's own :86 exposure is UNTOUCHED -- the evicted two still dangle",
-            rt.eval('old.residence == home and young.residence == home and #home.colonists == 0'))
+    absent = scenario(False, action='destroy', capacity=3, real_comfort=True)
+    repaired = scenario(True, action='destroy', capacity=3, real_comfort=True)
+    probe = ('tostring(old.residence == home) .. tostring(young.residence == home) .. '
+             'tostring(newcomer.residence == home)')
+    b.check('REAL comfort: absent / pre-repair / repaired are INDISTINGUISHABLE at OnDestroyed',
+            absent.eval(probe) == repaired.eval(probe) == 'falsefalsefalse')
+    b.check("LEAD CLOSED in vanilla's favour: even vanilla's own :86 re-homes nobody into the dying home",
+            absent.eval('old.residence == false and young.residence == false'))
+    b.check('the repaired guard still declines at the door, so no thread is created either way',
+            repaired.eval('DEFERRED_RAN == 0'))
+
+    # --- the same real bodies against the harms that DID survive. These are the
+    # legs that matter: A1/A2 were measured under the comfort stub too, so they
+    # have to be re-run without it or they carry the same doubt A3 turned out to.
+    rt = scenario(True, legacy=True, real_comfort=True)
+    b.check('REAL comfort: A2 overfill is REAL -- 3 residents in a capacity-2 home, one assert',
+            rt.eval('#home.colonists == 3 and home.capacity == 2 and #asserts_fired == 1'))
+    rt = scenario(True, real_comfort=True)
+    b.check('REAL comfort: REPAIRED lands exactly one colonist, 2/2, no assert',
+            rt.eval('#home.colonists == 2 and newcomer.residence == home and old.residence == false and #asserts_fired == 0'))
+    rt = scenario(True, synchronous=True, real_comfort=True)
+    b.check('REAL comfort: defeating the deferral brings the overfill back',
+            rt.eval('#home.colonists == 3 and #asserts_fired == 1'))
+    rt = scenario(True, candidate=True, real_comfort=True)
+    b.check("REAL comfort: the audit's expedition-only exclusion still overfills",
+            rt.eval('#home.colonists == 3 and #asserts_fired == 1'))
+    rt = scenario(True, action='uikick', real_comfort=True)
+    b.check('REAL comfort: the infopanel kick still gets its freed bed offered',
+            rt.eval('#home.colonists == 2 and #asserts_fired == 0 and DEFERRED_RAN == 1'))
 
     return b.finish()
 

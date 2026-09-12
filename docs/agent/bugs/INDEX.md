@@ -71,7 +71,7 @@ the row order below is the old index table's own. Generated from the front matte
 | 56 | F56 | Auto RC Transports never offload rockets | wontfix | P2 | high | [F56.md](F56.md) |
 | 57 | F57 | Drone/transport minors bundle | fixed* | P3 | med | [F57.md](F57.md) |
 | 58 | F58 | Invisible residence reservations never expire | fixed* | P1 | high | [F58.md](F58.md) |
-| 59 | F59 | Freed housing notification — REPAIRED 2026-09-11: the notification is DEFERRED out of the caller's call stack, closing expedition-home loss (1.1.0), manual-assign overfill (both branches) and a THIRD harm found while building; desk-controlled, unplaytested; ck151 | fixed* | P2 | med | [F59.md](F59.md) |
+| 59 | F59 | Freed housing notification — REPAIRED 2026-09-11: the notification is DEFERRED out of the caller's call stack, closing expedition-home loss (1.1.0) and manual-assign overfill (both branches); a claimed THIRD harm was RETRACTED the same day (fixture artefact) and the OnDestroyed lead is CLOSED; desk-controlled, unplaytested; ck151 | fixed* | P2 | med | [F59.md](F59.md) |
 | 60 | F60 | Dome tally override bypassed by migration gate; retirement recommended, applicant estimates affected | fixed | P2 | med | [F60.md](F60.md) |
 | 61 | F61 | Home dome's migration toggle blocks outbound shopping | wontfix | P1 | med+ | [F61.md](F61.md) |
 | 62 | F62 | Services use neighbouring domes, including shared Passage Hub spokes; never trains | wontfix | P2 | high | [F62.md](F62.md) |
