@@ -305,6 +305,13 @@ semantics moving under a wrapper (class c — F111, F112, F-1, F-2, F-3, F-5), a
 nothing this project owns does. A `DEFECT-GONE` is a REMOVE **candidate**, never
 a verdict: read the replacement body before retiring anything.
 
+📍 **The full trust table for all four source-diff instruments — and the rule for
+what a session may claim on their output alone — lives in `WORKFLOW.md` →
+"After a game patch — the source-diff instruments".** That is the canonical
+copy and the binding after-every-patch procedure; this paragraph is the
+authoring-time warning only. Disposition record:
+`reports/VANILLA_DIFF_DISPOSITION.md`.
+
 ## 3. Savegame discipline
 
 - No new persisted classes or GameVars unless unavoidable; if needed, name them

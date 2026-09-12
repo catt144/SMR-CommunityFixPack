@@ -140,9 +140,10 @@ In-game checks: console `SMRFixPack.ListFixes()` prints each fix's status
 
 All agent/bugs/ line numbers come from `ModTools\Src`; the game executes
 `Packs\Lua.fpk` + `Data.fpk`. **Parity is PROVEN for the current build
-(1.0.7.396349, extraction diff 2026-07-29): 2,250/2,256 shipped Lua files
-byte-identical to Src; the 5 divergences are engine/tooling only** (details in
-agent/facts/). The discipline guards *future* updates:
+(1.1.0.403908, re-proven 2026-09-10, `EF-085`): all 2,373 `Lua/`+`CommonLua/`
+and all 2,191 `Data/` files byte-identical — 0 divergent, 0 absent.** (The
+earlier 1.0.7.396349 reading was 2,250/2,256 with 5 engine/tooling divergences;
+⛔ never quote that one as current.) The discipline guards *future* updates:
 
 1. After every game patch, re-extract `Packs\Lua.fpk` (FLPK container, zstd
    per file) and diff against the new Src tree; re-verify every replacement
@@ -151,6 +152,89 @@ agent/facts/). The discipline guards *future* updates:
 2. Runtime self-checks stay mandatory in every apply() regardless (existence/
    layout checks only — the sandbox has no introspection; they catch renamed/
    removed targets, NOT an edited same-named function — hence step 1).
+
+## After a game patch — the source-diff instruments (BINDING; adopted 2026-09-12)
+
+Promoted from `reports/PACK_1_1_0_REVERIFICATION.md` §4 rec 5, which sat as a
+recommendation inside a report for four days and was never a procedure.
+Disposition record: `reports/VANILLA_DIFF_DISPOSITION.md`.
+
+⚖️ **Why this is binding and not advisory.** The store card publishes *"Every
+game patch is read against the pack as well, and the fixes it changed are
+updated or retired."* That is a claim about a RECURRING PROCESS. It was true of
+hotfix 1, hotfix 2 and v9 — but it rested on a track record plus the fpk rule
+above, and a track record is not something the next session inherits.
+
+### The order of operations
+
+0. ⭐⭐ **ARCHIVE FIRST — BEFORE the update lands, not after.** Copy
+   `ModTools\Src` to `C:\Dev\SMR-SrcArchive\<version>\Src` and build its
+   `MANIFEST.sha256` (`C:\Dev\SMR-SrcArchive\README.md` holds the rule, the
+   layout and the regenerator). ⛔ **This is the one irreversible step.** On
+   2026-09-08 Steam auto-updated unasked and overwrote `ModTools\Src` in place
+   (`EF-075`); every citation written before that date lost its base, and only
+   the 1.0.7 Steam branch made the loss recoverable — a vendor surface that may
+   not be offered next time. ~48 MB per version. A Steam **branch switch**
+   overwrites the tree the same way. Practical form: **archive whenever you
+   notice a version you have not archived yet.**
+1. **`python tools/bodycheck.py`** — is the code each module patches still the
+   code it was pinned to? (class b/d/e). Then **`python tools/sigcheck.py`** —
+   did any patched arity move? (class a). Both are seconds.
+2. **Read the table, then write the REMOVE/FIX prompts from it.** The verdicts
+   and what each OBLIGES:
+
+   | verdict | what it means | what you owe |
+   |---|---|---|
+   | `BODY-CHANGED` | the pinned body's bytes moved | three-way read (1.0.7 / 1.1.x / our `Code/`) before the module is trusted or re-pinned |
+   | `DEFECT-GONE` | the stated expression is no longer in the target | ⛔ a REMOVE **candidate, never a verdict** — trace the REPLACEMENT body and name residuals first. Landing our correction on top of vanilla's is how F-1 stopped every Saint in the game from blessing anyone |
+   | `TARGET-ABSENT` / `TARGET-MULTI` | selector resolves to nothing / to several | the pin is not a pin; re-pin before shipping |
+   | `MALFORMED` | a manifest line that does not parse | worse than no manifest — it looks like coverage |
+   | `NO-MANIFEST` | the module declares neither line | it is not being checked at all (`FIX_POLICY` §2b) |
+   | `OK` | hash matches, every defect expression still ships | see the ⛔ below |
+
+3. **`treediff.py` + `presetdiff.py` are ON TRIGGER, NOT ON SCHEDULE.** They ask
+   a different question — *what did the GAME change?*, with no reference to our
+   pack — and emit ~25k rows that cost a chain to read. Run them when: (a) the
+   patch notes claim changes to a system we fix; (b) a `DLC_DEEP_CHECK`-class
+   chain is actually being run; (c) a `BODY-CHANGED`/`DEFECT-GONE` replacement
+   cannot be explained by hand from the two trees. ⛔ Never "to stay current".
+
+### ⛔ What a GREEN does NOT license — the trust table
+
+⭐ **This is the canonical copy.** `FIX_POLICY` §2b points here; the tool headers
+carry the machine half. Do not copy it to a fourth place.
+
+| instrument | what its output LICENSES you to state | what it CANNOT see |
+|---|---|---|
+| `bodycheck.py` | the pinned body's bytes changed / did not (b); a stated regex is / is not present **in that body** (d); the selector resolves to nothing (e) | ⛔ **class c — semantics moving under a wrapper whose target body is byte-identical. 6 of the 10 FIX rows in the 1.1.0 re-verification were class c**, so it is blind to the majority case. Anything OUTSIDE the pinned body — a changed `__parents` one line above is invisible. A defect that is an **absence** cannot be a regex; a regex pinned to today's *phrasing* yields a **false** `DEFECT-GONE`, the direction that retires a live fix |
+| `sigcheck.py` | a named function's arity changed / did not | everything else — it is an arity bound and stays one |
+| `treediff.py` | a named function exists in one tree and not the other; its body/signature differ | `SPAN-SUSPECT` (441 self-closing declarations, 567 spans reaching EOF, 133 rows flagged; **79 changed hand rows never classified by any agent**); anonymous `function(` literals; **≥1,281 hunks in ≥368 rowed files fall outside every row span** — `NOROWS.tsv` lists a file only when it has ZERO rows, so that class is invisible to the row partition |
+| `presetdiff.py` | a preset field's value differs — **in generated files only** | the 54 `CommonLua/Data` + `Libs/*/Data` `PlaceObj` files (no field-level reader; widening recommended, not done); `REINDEX-SWAP`, which the tool itself flags as the class it cannot distinguish from a real change |
+| **all four** | — | ⛔ anything outside `ModTools\Src`; the engine (`Mars.exe` changes builds); runtime-only behaviour; the 1.0.7 `DLC/` subtree |
+| **copy-vs-wrapper** | nothing — **it is a PRACTICE, not a tool flag**: assembled from `luafn.find_bodies` across both archives plus our `Code/`. ⛔ Never classify by name proxy | — |
+
+⚖️ **THE RULE. On these instruments' output alone you may state exactly four
+things:** (1) a pinned body's bytes did or did not change; (2) a named arity did
+or did not change; (3) a stated regex is or is not present **in a named body**;
+(4) a named function or preset field exists in one tree and not the other.
+**Everything else needs a second source** — *"vanilla fixed it"*, *"this fix is
+still needed"*, *"that change is harmless"*, *"nothing moved under us"*, *"this
+file is behaviourally unchanged"* are none of them. The second source is a read
+of the **replacement body** in both trees, or a run **in the game**.
+⛔ A clean run over all 49 modules is not evidence that 49 fixes still work.
+
+### Where the artefacts are
+
+- **The trees:** `C:\Dev\SMR-SrcArchive\{1.0.7.396349,1.1.0.403908}\Src` + a
+  `MANIFEST.sha256` each; that folder's `README.md` carries the archive rule and
+  the 1.0.7 recovery route. ⚠️ Outside the repo — `perma/DISPATCH.md` §1 is the
+  only other pointer.
+- **The diff artefacts:** `reports/vanillahunt/` — `INVENTORY*.tsv`, `FILES.tsv`,
+  `NOROWS.tsv`, `PRESETS*.tsv`, `CALLERS*.tsv`, the seam reports, `HUNT_AUDIT.md`.
+  All tracked in git (~21 MB), so they are durable, not scratch.
+- **The tools:** `tools/{bodycheck,sigcheck,treediff,presetdiff}.py`. All four
+  carry `--selftest`; ⚠️ `doccheck.py` gates only `bodycheck --selftest` — the
+  falsifier, not the check, and not the other three.
 
 ## ⛔ Probe hygiene — HARD GATE before ANY testing (owner, 2026-08-01)
 

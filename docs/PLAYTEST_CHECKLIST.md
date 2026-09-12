@@ -29,6 +29,59 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### ⚖️ 2026-09-12 — 163: the vanilla diff — one ruling closes five open items, and one bounded desk pass is worth taking
+
+> Full reasoning: `agent/reports/VANILLA_DIFF_DISPOSITION.md`. **(a) is the one that saves you
+> time — it retires items 137, 138, 140, 141 and 142 in one go. (b) is a yes/no on a desk
+> session. (c) and (d) are one word each. Nothing here needs you to play.**
+>
+> **(a) The 25 source-only candidates — rule them as GROUPS, not one by one. Recommendation:
+> accept the four-group disposition below, which CLOSES items 137/138/140/141/142.** Those five
+> items are five different phrasings of "provision a fixture or leave it source-only", each
+> already carrying its own rider. The terminal audit re-derived all 12 P2s at the cost of a chain
+> link and **zero became fixes**, so the expensive work is done and only the decision is missing.
+>   - **A — worth a look, but only if you are already there (C63, C66, C82):** the only three with
+>     a plain player-visible loss on an ordinary route. Keep as candidates and attach as *organic
+>     riders* — "if you happen to have an RC Transport carrying two resources, click to dump one".
+>     ⛔ Never provision a colony for them. Cost: **zero extra play time.**
+>   - **B — the player BENEFITS (C64, C67, C75, C78, C79):** every "loss" turned out to be an
+>     unearned gain or freedom. No action ever, absent a field report. Cost: zero.
+>   - **C — weakened or refuted (C58, C68, C69, C76, C80):** no fixture. ⚠️ **C80 is REFUTED in
+>     its own entry but its status still reads `cand`** — a status flip is owed (I left it alone;
+>     that brief was read-only). Cost: zero.
+>   - **D — the 12 P3s (C56, C57, C59–C62, C65, C70–C73, C81):** source-only, and no re-derivation
+>     pass either. Cost: zero.
+>   - ⛔ This is a disposition, **not a dismissal**: every entry stays, and a field report naming
+>     any of them reopens it instantly.
+>
+> **(b) One bounded desk session on the blind spot that touches US. Recommendation: YES, take it.**
+> The chain left ≥1,281 changed hunks that no instrument lists (I reproduced that number
+> independently today — it had rested on a script that was never committed). Most of it is not
+> worth reading. But I measured the part that is: **29 of the 51 shipped files our pack pins carry
+> such hunks, and `bodycheck` cannot see one of them by construction.** Eight have a known
+> mechanism and are real — e.g. `Unit` and `BaseBuilding` (the base classes of every colonist and
+> every building) each gained a new parent in 1.1.0, and a Farm parent was removed. Whether any of
+> that changes our behaviour is **unread**. Cost: **one desk session, no game, no play time.**
+> ⛔ I filed no defect and am not claiming one — this is an unexamined overlap, not a bug report.
+> The alternative (read all 1,281) is several sessions and I recommend against it.
+>
+> **(c) The instruments' schedule. Recommendation: `bodycheck` + `sigcheck` run on EVERY patch
+> (now binding in `WORKFLOW.md`); `treediff` + `presetdiff` run ON TRIGGER only, never retired.**
+> Your store card now publishes *"Every game patch is read against the pack as well"* — that was
+> true in practice but rested on a track record, and no procedure named the tools. It does now.
+> ⭐ The step that actually matters is free and irreversible if missed: **archive `ModTools\Src`
+> BEFORE any game update or Steam branch switch** (~48 MB). When Steam auto-updated on 09-08 it
+> overwrote the tree unasked and we only got it back because the old branch happened to still be
+> offered. Do you want anything else added to the after-patch step?
+>
+> **(d) Two modules ship without the header that says what they correct.** `00_Core.lua` is the
+> registry and patches nothing — a one-line declaration closes it, no real exposure.
+> ⚠️ `90_SaveSanitizer.lua` is the real one: its header prose already names the shipped defects it
+> depends on, and one of its three passes was retired earlier precisely because the game fixed the
+> bug itself — caught by a human re-reading that prose, which is the expensive way. Recommendation:
+> **give it the machine-readable lines** so the next one is caught in five seconds. Cost: minutes.
+> ⛔ Not done — the brief was read-only.
+
 ### ⚖️ 2026-09-12 — 162: the four loose ends that were flagged and never answered. **Three need one word each; one needs two minutes of yours. None blocks v10.**
 
 > These are the handoff's §4 — each was raised, written down, and then nothing happened.
@@ -104,10 +157,12 @@ completed tests move whole to
 > local c=GetConstructionController() local o=c and c.cursor_obj if not o then print("LAKECHK", "NOCURSOR") else local x,y,z=o:GetVisualPosXYZ() local e=o:GetEntity() local m=PrefabMarkers["Gameplay.Any."..e] print("LAKECHK", e, "cursor_z", z, "ground", terrain.GetHeight(o:GetMap(), x, y), "min_z", m and m.min and m.min:z() or "NOPREFAB") end FlushLogFile()
 > ```
 >
-> ⚠️ **That line was corrected today before it was ever run.** The version sitting in item 147 since
-> 09-11 called a form of one engine function that appears nowhere in the game's own code; it would
-> have thrown an error and printed nothing, and the sitting would have been spent for no reading.
-> Every other symbol in it was traced to the shipped body. Details in [C87](agent/bugs/C87.md).
+> ⚠️ **One honest note about that line.** I first reported that the 09-11 version was broken and
+> would have thrown, and **that was my error, caught the same day by another session**: the spelling I
+> called absent is used in 19 shipped files. **The old line would have worked.** What is genuinely
+> better in the line above is the `NOCURSOR` guard — if the lake cursor is not active when you press
+> Enter, you get that word instead of a Lua error. Every symbol in it was traced to the shipped body.
+> Details in [C87](agent/bugs/C87.md).
 >
 > ---
 >
@@ -1258,10 +1313,14 @@ warn STATE.md is 12991 bytes, warn threshold is 12288 — copy this line VERBATI
 >   ```
 >   local c=GetConstructionController() local o=c and c.cursor_obj if not o then print("LAKECHK", "NOCURSOR") else local x,y,z=o:GetVisualPosXYZ() local e=o:GetEntity() local m=PrefabMarkers["Gameplay.Any."..e] print("LAKECHK", e, "cursor_z", z, "ground", terrain.GetHeight(o:GetMap(), x, y), "min_z", m and m.min and m.min:z() or "NOPREFAB") end FlushLogFile()
 >   ```
->   ⚠️ **Line corrected 2026-09-12** (checklist 162 (c)) before it was ever run: the old one called
->   `map:GetHeight(x,y)`, a two-number form witnessed nowhere in the shipped tree — it would have thrown and
->   printed nothing. The replacement uses `terrain.GetHeight(map, x, y)` (witnessed, `BottomlessPit.lua:23`)
->   and prints `NOCURSOR` instead of throwing if the lake cursor was not active when you pressed Enter.
+>   ⚠️ **Line touched up 2026-09-12** (checklist 162 (c)): it now prints `NOCURSOR` instead of throwing
+>   a Lua error if the lake cursor was not active when you pressed Enter, and the ground read is spelled
+>   `terrain.GetHeight(map, x, y)` (`BottomlessPit.lua:23`). ⛔ **Correction, same day:** I first recorded the
+>   old spelling `map:GetHeight(x,y)` as broken and said the line would have thrown. **That was wrong** — a
+>   peer session enumerated it and that form is used in 19 shipped files, including the exact
+>   `obj:GetMap():GetHeight(x, y)` spelling (`Landscaping.lua:225`). **The original line would have run.** I
+>   had read a truncated grep and stated an absence from it. The line above is still the one to paste; only
+>   the `NOCURSOR` guard is a real improvement over the 09-11 version.
 > - **Deep scan finds nothing:** probes only deep-scan after researching **Adapted Probes**; Deep Scanning alone doesn't
 >   change probes. While checking, a small separate bug turned up — the five-sector Advanced Orbital Probe can knock an
 >   already deep-scanned neighbour back to "Scanned" ([C86](agent/bugs/C86.md), low priority).
