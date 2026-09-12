@@ -5,7 +5,8 @@ have settled, then it is `git rm`'d. **Still true as of 2026-09-12** — `RELEAS
 
 ⛔ **THIS IS A WORKING DOCUMENT, NOT A SESSION LOG.** History lives in `docs/archive/SESSION_LOG.md` (append-only, newest first,
 prepended under the preamble). If you close something here, **delete its block** or demote it to one line in §1's closed list.
-Rewritten 2026-09-12 (lookback); everything from before 2026-09-12 has been cut to `SESSION_LOG.md` and to the entries.
+Rewritten 2026-09-12 (lookback, `0bc756b`) and **refreshed the same day at the orchestrator's retirement**; everything
+from before 2026-09-12 has been cut to `SESSION_LOG.md` and to the entries.
 
 ⛔ **Verify every specific against `git log` and the tree — the records win, this file is a pointer.** Claude and Codex sessions
 both commit here, several at once, and **Codex is invisible to `ListAgents`**.
@@ -21,28 +22,35 @@ which is fully briefed. The temp workaround mod is LIVE (Steam 3799500849 / Para
 **Unless the owner's message names a task, a pasted handoff means ORIENT: summarise §2 and §3 and ASK what to take.**
 Do not execute (memory: handoff-invocation-means-orient-first).
 
+⚠️ **Your first `doccheck` will print a STATE.md warn (14,915 bytes against a 12,288 warn, hard 18,432).
+That is a RULED, ACCEPTED state, not a task** — the owner answered ck132 with **SKIP** on 09-12: the warn
+stays where it is, no eviction is authorised, and `perma/STATE_EVICTION.md` is not to be fired. doccheck is
+GREEN with it. Do not spend your first act on it, and do not re-propose eviction unless the owner asks.
+
 ---
 
 ## 1 · What landed on 2026-09-12
 
+⛔ **This is a pointer list, not the record.** Every sha below has a full entry in `docs/archive/SESSION_LOG.md`
+(`git show <sha>` for the reasoning) — read there, not here, and do not grow this list.
+
 | sha | what |
 |---|---|
-| `690a1ee` | Astra brief written: deskbench repair + C90 reach, one run, two legs, sequenced |
-| `576581c` + `1d625e4` | **Astra's F60 harness repair + C90 measurement.** Deskbench **20/20** (254/254 demands), C90 control **18/18**, **8 scratch falsifiers** all discriminate. Report `reports/DESKBENCH_C90.md` |
-| `59c8c47` `98d0461` `4dc5073` | The three v10 builds: **C85** clogged release · **C89** faction dome gate (⚖️ judgment call) · **C88** Building Codes vs prefabs |
+| `59c8c47` `98d0461` `4dc5073` | **The three v10 builds:** C85 clogged release · **C89** faction dome gate (⚖️ judgment call) · C88 Building Codes vs prefabs. Attended check = ck158, §2 |
+| `690a1ee` → `576581c` + `1d625e4` | Astra: F60 harness repaired, C90 measured. Deskbench **20/20**, C90 control **18/18**, 8 scratch falsifiers. `reports/DESKBENCH_C90.md` |
 | `4c7b11a` | Surface audit: F37/F43 retirements confirmed, **F31 settled → RETIRE**, three ruled sentences refuted |
-| `7d8c384` | `FIELD_REPORT_REPLIES` purged to live drafts + a complete posted record; the two C74 leads rehomed to `bugs/C74.md` |
-| `42eab2a` | ck144 (b): the owner's half-answer recorded, stale replies pointer repointed |
-| `929a293` | Ruling batch 1 + the four approved sentences applied |
-| `cf8f04a` | Ruling batch 2: seven closures, 40/50, the 39/41 dialog fixes |
-| `bef5e81` | Modder-doc paring + items 47 / 53 / 73 |
-| `2e919b5` | ck133/ck112 **reword** — HOW IT WORKS bullet 3 now matches what `Require` can actually do; all five live copies, byte-verified |
-| `5c21f36` | Lookback: ck152 (c) CLOSED as DESIGN · `README.md` filed as a public surface (new ck160) · the site tree's 3 pending files recorded |
-| `6f5abaf` | F59: a cost of ours recorded — see §4 |
+| `929a293` `cf8f04a` `bef5e81` | The three owner ruling batches: the four approved sentences, seven closures, the 39/41 dialog fixes, items 47/53/73, modder-doc paring |
+| `2e919b5` | ck133/ck112 **reword** — HOW IT WORKS bullet 3 now matches what `Require` can do; all five live copies, byte-verified. ⚠️ Its card sentence is what makes §3d urgent |
+| `7d8c384` `42eab2a` | `FIELD_REPORT_REPLIES` purged to live drafts + posted record (C74 leads rehomed); ck144 (b) recorded |
+| `5c21f36` `6f5abaf` | Lookback: ck152 (c) CLOSED as DESIGN · `README.md` filed as a public surface · the 3 site files recorded · **F59 cost of ours** (§4) |
+| `ea91f19` | ⭐ **ck161** — the 09-08 "small positives" rule was 1.1.0-recovery triage and **EXPIRED with it**; corrected in 7 places, lesson = binding **rule 5a, `WORKFLOW.md:60`**. See §3c |
+| `7806c0a` | ⭐ **New one-off brief, NOT YET FIRED:** `prompts/VANILLA_DIFF_DISPOSITION.md`. See §3d |
+| last one | ck160 closed to the release lane; this refresh; §3d added |
 
 **Closed today, do not re-ask:** ck133(1)(3)(5)(6) · ck144 (b) · ck147 · ck150 (a) · ck151 (a)/(d) · ck152 (all) · ck153 ·
-ck155 · ck156 · ck159 (1)(2)(3) · items 39/40/41/47/50/73. ⏳ **ck148 DEFERRED** (owner: skip; chain not started, all three
-calls still open). ⏳ **ck132 SKIPPED** — STATE's warn stays 12288, no eviction ordered.
+ck155 · ck156 · ck159 (1)(2)(3) · **ck160** (ordinary release-lane work; all six `README.md` claims, the store-status line
+included, are staged in `RELEASE_OUTBOX.md:122-134`) · **ck161** · items 39/40/41/47/50/73. ⏳ **ck148 DEFERRED** (owner:
+skip; chain not started, all three calls still open). ⏳ **ck132 SKIPPED** — see §0.
 
 ---
 
@@ -78,7 +86,6 @@ RULE**. ⛔ **Re-derive every count once, carry none:** modules ±the retirement
 | ck | what |
 |---|---|
 | **158** | the three-leg sitting above — **the v10 gate** |
-| **160** | ⭐ NEW: `README.md:9` still says the mod is **"not yet on a store"**. Fix now (recommended) or let it ride to v10? |
 | **157** | (a) post the C89 reporter reply · (b) route the developer note — ⚠️ that report came through **our** channel, so the route is the fix list the devs plan from, or the Building Codes thread |
 | **151** | (b) which sections of `MIGRATION_DEV_REPORT.md` may be sent · (c) which checks join the ck144 (a) sitting |
 | **144 (a)** | the owed post-upload boot, ONE boot, now on v8 (STATE's OWED line carries the recipe list) |
@@ -106,6 +113,8 @@ stash or checkout there.** Recorded in `RELEASE_OUTBOX.md` (Held) and `PUBLIC_SU
 - **`prompts/SELFCHECK_PILOT.md`** was authored for ck133(1), never fired, now unreachable. Marked "do not fire"; **removal
   recommended to the owner, not done.** The two `SELFCHECK_PROMISE_*` reports stay — reports are not consumed by rulings.
 - **Desk NEXT, unclaimed:** `prompts/DLC_DEEP_CHECK.md` (bounded; framing in its banner).
+- ⭐ **UNFIRED, ready to take: `prompts/VANILLA_DIFF_DISPOSITION.md`** (`7806c0a`) — the only live one-off in the prompts
+  root that is not a grave. Tool-neutral, read-mostly, one report + a checklist item. See §3d.
 
 ### 3c · The hotfix-3 batch — 135, 137, 138, 140, 141, 142
 
@@ -121,11 +130,44 @@ As of 2026-09-12 **the batch as a whole had not been tackled**: no ruling stamp 
 | **141** | vanillahunt leftovers C79/C80/C81/C62. ⛔ **C78 is not owner-takeable on this Steam install** (one branch at a time) | owner (rec: C79 first) |
 | **142** | terminal audit re-derived all 12 P2s: 6 hold, 5 weakened, **C80 refuted**, C82 newly filed | owner: name any for hotfix 3, or accept file-and-watch (rec: **none today**) |
 
-✅ **The "unresolved tension" this section used to carry is GONE — checklist 161, 2026-09-12.** The owner explained the
-09-08 rule themselves: it was **triage scoped to the 1.1.0 recovery**, not standing policy, and it expired with that
-condition; the 09-09 ask was never a reversal. Unearned-gain candidates are ordinary candidates now, priced on cost.
-⛔ **Do not re-derive the contradiction** — three documents already did, and handing it back to the owner is the exact
-attention drain the original triage rule existed to prevent. 142 itself stays open as a straight cost call.
+✅ **The "unresolved tension" this section used to carry is GONE — checklist 161, 2026-09-12** (`ea91f19`). The owner
+explained the 09-08 rule themselves: it was **triage scoped to the 1.1.0 recovery**, not standing policy, and it expired
+with that condition; the 09-09 "Leave ck126 in" was never a reversal. Unearned-gain candidates (C64/C75/C78/C67/C79) are
+ordinary candidates now, priced on cost; **C82 was always a straight player LOSS and never depended on the rule.**
+⛔ **DO NOT RE-DERIVE THE CONTRADICTION.** Three documents already did and handed it back to the owner, which is the exact
+attention drain the original triage rule existed to prevent. The generalisable lesson is binding **authoring rule 5a**
+(`WORKFLOW.md:60`): *a ruling made under a named condition expires with that condition* — record the state a ruling was
+made in, re-read it against today's before treating it as binding, and never call a later ruling a "reversal" without
+checking the earlier one's condition first.
+
+⭐ **The standing recommendation for the batch, re-derived on COST on 2026-09-12 after 161 removed the blocker — so it
+does not rest on the expired rule.** The owner has seen it; **nothing here is ruled.**
+- **Take 135.** 0 shipped hashes affected, and its blocker discharged when vanillahunt closed 09-10. Small standalone change.
+- **Leave 137 / 138 / 140 / 141 opportunistic.** All four are source-read candidates with **no field report behind them**,
+  so a provisioned fixture is the only route, and none is a release gate. Take one only if a colony arises naturally.
+- **Keep C82 + C66 on a watch list** as the two cheapest organic looks.
+- ⛔ **142 is explicitly STILL OPEN** — 161 removed the blocker, it did **not** rule 142. The owner has not named anything
+  for a hotfix-3 list, and "accept file-and-watch for all" is also unsaid.
+
+### 3d · The four vanilla instruments, and a live procedure gap
+
+**Two pairs, two subjects — routinely conflated, including by the session that wrote this** (source read, 2026-09-12):
+`treediff.py` + `presetdiff.py` were written **inside vanillahunt as its instruments** (*what did the GAME change
+1.0.7 → 1.1.0?*, and they produced the C-candidates); `bodycheck.py` + `sigcheck.py` came from **hotfix 2 /
+`reports/PACK_1_1_0_REVERIFICATION.md`** (*what moved under the code WE patch?*).
+
+⚠️ **The gap: `WORKFLOW.md`'s two after-every-patch rules (`:139` fpk verification, `:974` five-shape enumeration) name
+NONE of the four.** The one procedural sentence — *"the update-day checklist becomes: run three tools, read one table,
+write the REMOVE/FIX prompts from it"* — is a **recommendation inside a report** (`PACK_1_1_0_REVERIFICATION.md` §4
+rec 5), never promoted. Meanwhile the card reworded today (`2e919b5`) publishes *"Every game patch is read against the
+pack as well…"* — a **recurring-process claim currently resting on a track record.**
+
+⛔ **`prompts/VANILLA_DIFF_DISPOSITION.md` is what resolves this — DO NOT SOLVE IT TWICE.** It carries all three owner
+questions (what we do with the diff, how far we trust it, where the information should live) and it is unfired.
+
+**Open thread it also names:** `bodycheck` reports **2 NO-MANIFEST modules** against `FIX_POLICY` §2b (*every module
+carries `SRC:` + `DEFECT:` headers or it does not ship*) — **unnamed and unexamined**; the brief asks for them to be
+named and classified as violation or exemption. Re-confirmed at exit 0, 2026-09-12.
 
 ---
 

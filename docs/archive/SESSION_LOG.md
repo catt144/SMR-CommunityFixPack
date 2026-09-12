@@ -8,6 +8,87 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-12 — orchestrator retirement: the expired triage rule (ck161), the vanilla-diff brief, and the handoff refresh
+
+tags: ck161 ck160 handoff WORKFLOW rule-5a vanilla-diff treediff bodycheck disposition orchestrator
+
+The tail of the orchestrator session, after the lookback rewrite at `0bc756b`. Docs only; no game
+launched, no `Code/` change, no `--regen`, doccheck GREEN throughout. Shas: `ea91f19`, `7806c0a`, and
+the handoff refresh that follows this entry. Tree clean at the start of each; the three uncommitted
+files in `C:\Dev\SMR-CommunityMods` were left untouched, as they are a different repo and the owner's.
+
+**⭐ The "we do not chase small positives" rule was never standing policy, and it had cost real owner
+attention** (`ea91f19`, checklist **161**). Three separate documents — checklist item 142,
+`reports/vanillahunt/HUNT_AUDIT.md` §3.4 and `HANDOFF_ORCHESTRATOR.md` §3c — had each independently
+re-derived a contradiction between the 09-08 ruling (*"we fix anything negatives, a small positive I am
+not as concerned about"*, item 120) and the 09-09 *"Leave ck126 in"*, and each had handed it back to the
+owner as an open question. The owner explained it in their own words: the 09-08 ruling was made **while
+the pack itself could still do active harm**, as an attention-routing device to keep agents off
+non-game-breaking work during the 1.1.0 recovery. **It was triage scoped to a condition, that condition
+has lifted (v9 live, hotfix 2 shipped, the 1.1.0 re-verification closed), and the rule lifted with it.**
+There was never a tension and the 09-09 ask was never a reversal. Corrected in seven places — items 142,
+126 and 120, `bugs/F95.md` (appended, nothing above the insertion edited), `bugs/C91.md` (the live
+house-rule citation removed), and dated inline corrections inside `HUNT_AUDIT.md` §3.4 and
+`HOTFIX_2_AUDIT.md` §3 with the originals kept. ⛔ **Item 142 is NOT ruled by this** — the blocker was
+removed, not the decision made; unearned-gain candidates (C64/C75/C78/C67/C79) are now ordinary
+candidates priced on cost, and C82 was always a straight player LOSS that never depended on the rule.
+
+**The generalisable lesson is worth more than the case, and it is now binding: `WORKFLOW.md` rule 5a
+(`:60`) — a ruling made under a named condition expires with that condition.** Recording an owner
+ruling now means recording the **state it was made in**, re-reading that against today's state before
+treating it as binding, and never calling a later ruling a "reversal" without checking the earlier
+one's condition first. This is the rule that would have saved three documents' worth of re-derivation.
+
+**⭐ The four vanilla instruments are two pairs with two different subjects, and the distinction had
+been lost.** Established by a source read: `tools/treediff.py` + `tools/presetdiff.py` were written
+**inside vanillahunt as its own instruments** — a defect hunt asking *what did the GAME change between
+1.0.7 and 1.1.0?*, and they produced the C-candidate backlog. `tools/bodycheck.py` + `tools/sigcheck.py`
+came from **hotfix 2 / `reports/PACK_1_1_0_REVERIFICATION.md`** — a pack regression check asking *what
+moved under the code WE patch?* The two pairs are routinely conflated, including by the session that
+found this.
+
+**⚠️ And that read surfaced a live procedure gap with a now-public consequence.** `WORKFLOW.md` carries
+exactly two after-every-patch rules — `:139` fpk verification and `:974` the five-shape exposure
+enumeration — and **neither names any of the four tools.** `bodycheck` appears only as a per-module
+authoring rule (`FIX_POLICY` §2b), `doccheck` gates only `bodycheck --selftest` (the falsifier, not the
+check), and `perma/RELEASE.md` names none of them. The one procedural sentence that exists —
+*"the update-day checklist becomes: run three tools, read one table, write the REMOVE/FIX prompts from
+it"* — is a **recommendation inside a report** (`PACK_1_1_0_REVERIFICATION.md` §4 rec 5) and was never
+promoted. Meanwhile the store card reworded the same day (`2e919b5`) publishes *"Every game patch is
+read against the pack as well, and the fixes it changed are updated or retired"* — a claim about a
+**recurring process**, true of hotfix 1, hotfix 2 and v9, but resting on a track record rather than a
+procedure. That is the same over-claim shape 09-12 spent the day correcting on the self-check sentence.
+
+**Brief written, deliberately NOT fired** (`7806c0a`): `agent/prompts/VANILLA_DIFF_DISPOSITION.md`,
+tool-neutral and read-mostly, carrying the owner's three questions — what we do with the diff
+information we already have, how far we trust it, and where that information should live. It asks for a
+per-instrument trust table (⚠️ `bodycheck` is blind to **class c**, and 6 of the 10 FIX rows in the
+1.1.0 re-verification were class c), for a disposition on the **1,281 hunks across 368 files** that fell
+outside every treediff row span — the largest known unexamined surface in the project — and for a ruling
+on whether the "three tools" recommendation is promoted into `WORKFLOW.md` as a binding after-every-patch
+step. It also asks for the **2 NO-MANIFEST modules** `bodycheck` reports to be named and classified as a
+real `FIX_POLICY` §2b violation or a legitimate exemption; they are still unnamed and unexamined.
+
+**Checklist 160 closed to the release lane.** The owner ruled the stale `README.md` store-status line is
+ordinary release-lane work rather than a separate decision: one commit, one pass, the whole page correct
+at once. Verified before closing that all six wrong claims — the store-status line included — really are
+staged in `RELEASE_OUTBOX.md` under the v10 batch notes, with the "⛔ do NOT hand-copy these numbers"
+instruction on the five counts. The outbox's own contrary note (*"the `:9` line should not wait for
+v10"*) was rewritten rather than left to contradict the ruling, and it records that `:9` is the one of
+the six needing no re-derivation, so it cannot go stale while it waits.
+
+**Handoff refreshed rather than rewritten** — 215 → 260 lines, shape kept. Added: the STATE.md warn is a
+**ruled, accepted state and not a task** (ck132 SKIP; a fresh session hits that warn on its first
+doccheck and must not spend its first act on it), a new **§3d** for the instrument distinction and the
+procedure gap, the hotfix-3 batch's standing cost-based recommendation (take 135; leave 137/138/140/141
+opportunistic since none has a field report behind it and a fixture is the only route; watch C82 + C66;
+**142 still open**), the unfired brief in both the handoff and `prompts/README.md`'s live-one-offs table
+— where every other row is a grave, so its unfired state is called out explicitly — and rule 5a with a
+⛔ against re-deriving the dissolved contradiction. Compressed: §1's landing table, whose detail is
+duplicated in this log, is now a pointer list with an instruction to read the log rather than grow it.
+The four never-answered loose ends (§4) and the five open threads from the 09-12 rulings (§5) were each
+re-verified against the tree and carried unchanged.
+
 ## 2026-09-12 — lookback + context handover: four orphaned findings homed, ck152 (c) closed DESIGN, handoff rewritten as a working document
 
 tags: lookback handoff ck152 ck160 F59 README public-surface orphans verification

@@ -132,8 +132,10 @@ the attended A/B is checklist 158. Entry: `bugs/C88.md`.
   | `README.md:16` | "**Five** fixes are judgment calls" | three, going to four with C89 |
   | `README.md:24` | "**167 tracked findings**" | 222 index rows |
   | `README.md:54` | "**96 checks**" | 97 probes |
-  ⚖️ **The `:9` store-status line is NOT a count and should not wait for v10** — see
-  checklist **160**. The five counts belong to this batch's single re-derivation.
+  ⚖️ **RULED 2026-09-12 (checklist 160, now CLOSED): all six ride this batch.** The `:9` store-status
+  line is not a count and could have gone early, but the owner ruled it ordinary release-lane work —
+  one commit, one pass, the whole page correct at once. **`:9` needs no re-derivation** (v9 is live on
+  both stores, and v10 will be by then); the other five belong to this batch's single count pass.
 - **Two new candidate entries were filed by this build and neither is a player
   surface:** `C90` (a defect in the pack's own core — a declined `DataPatch`
   self-check still patches shipped data; reaches `Fix_SaintBlessing` and

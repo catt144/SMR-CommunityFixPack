@@ -72,9 +72,23 @@ completed tests move whole to
 > owner ruling means recording the **state it was made in**, and re-reading it against today's state
 > before treating it as binding.
 
-### 2026-09-12 — 160: our GitHub front page still says the mod **is not on a store**. One line, one decision: fix it now, or let it ride to v10?
+### ✅ 2026-09-12 — 160 RULED BY YOU: **(b) — let it ride with v10.** This is ordinary release-lane work, not a separate decision. **Nothing is owed from you; the original ask is kept below.**
 
-> **The problem, in one sentence.** `README.md` — the page anyone who clicks through from a
+> **Your ruling (2026-09-12).** The store-status line is release-lane work like the five counts beside
+> it — one commit, one pass, the whole page correct at once, rather than an agent making a one-line
+> edit today and the same page being edited again next week.
+>
+> **Where it lands, and it is already staged.** All six wrong `README.md` claims — the store-status
+> line included — are in `agent/prompts/perma/RELEASE_OUTBOX.md:122-138`, inside the v10 batch notes,
+> with the "⛔ do NOT hand-copy these numbers, re-derive at apply time" instruction on the five counts.
+> `README.md` is also `PUBLIC_SURFACE_SWEEP.md` **§3b** now, so it is on a list and cannot rot unseen
+> again. ⚠️ **The `:9` line is the one of the six that needs no re-derivation** — v9 is live on both
+> stores today and v10 will be by the time the pass runs — so it cannot go stale in the meantime.
+>
+> ⛔ **Nothing further is owed here and no agent should re-ask this.** The only remaining trigger is
+> the v10 release pass itself, which is gated on checklist **158**.
+
+> **The original ask, kept as the reasoning you ruled on. The problem, in one sentence.** `README.md` — the page anyone who clicks through from a
 > Steam or Paradox comment lands on first — has never been swept, and line 9 still reads:
 >
 > > **Status: version 1.0.0 — prepared for first release, not yet on a store.**
