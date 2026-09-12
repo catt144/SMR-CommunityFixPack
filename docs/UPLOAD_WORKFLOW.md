@@ -118,7 +118,6 @@ SOME OF WHAT IT FIXES
 · New arrivals moved into a dome that was switched off, quarantined or without air.
 · A dome sat half empty and still refused to house anyone.
 · A bed that fell vacant sat empty while colonists were homeless.
-· Colonists stayed homeless after you built a Shuttle Hub.
 · Night-shift colonists never came back to work after midnight.
 · A salvaged farm kept supplying its dome with oxygen forever.
 · Building an artificial lake buried the rover that built it.
@@ -240,7 +239,6 @@ And [b]three[/b] of them repair things you cannot see at all today: real defects
 [*]New arrivals moved into a dome that was switched off, quarantined or without air.
 [*]A dome sat half empty and still refused to house anyone.
 [*]A bed that fell vacant sat empty while colonists were homeless.
-[*]Colonists stayed homeless after you built a Shuttle Hub.
 [*]Night-shift colonists never came back to work after midnight.
 [*]A salvaged farm kept supplying its dome with oxygen forever.
 [*]Building an artificial lake buried the rover that built it.

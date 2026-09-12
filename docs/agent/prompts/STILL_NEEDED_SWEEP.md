@@ -58,6 +58,29 @@ is the residue it left and the cases it got wrong, and there are known examples 
   never swept at all** (audit §4, "not swept, by name"). ⇒ start from that table, do not re-derive it, and
   **F54 is an outright gap**.
 
+## ⛔ A SECOND axis, added 2026-09-12 after the owner caught a live drift: SURFACE CONSISTENCY
+
+The owner spotted that the store card still read **"Colonists stayed homeless after you built a Shuttle Hub"** —
+the exact F51 overclaim that had just been removed from the site fix list. Cause: a session applied
+`PUBLIC_SURFACE_SWEEP` **§1 (the site) without §2/§3 (the store cards)**. Fixed on the spot, but the class is open.
+
+**Nobody has ever diffed the card's ~22 headline bullets against the 49 fix-list rows.** Both are hand-maintained,
+they live in different repos, and only the *count word* is checked mechanically. ⇒ **add to this sweep: for every
+card bullet, does a fix-list row still support it, and does that row still match the module?** Three surfaces, and
+a claim can rot on any one of them independently.
+
+Also unverified on the card, and cheap to settle while you are there:
+* **"And three of them repair things you cannot see at all today"** — is it still three after F60's retirement?
+* **The judgment-call count (3)** — the v8 close-out said unchanged, but it was not re-derived after F60.
+* **The `SMRFixPack_Disabled["LakeEntombment"]` example in the modders' section** — verify that id still ships.
+
+✅ **One class that IS clean, checked 2026-09-12 — do not re-open it.** Of the 13 modules `EF-078` measured going
+inactive on the 1.1.0 baseline, **11 were removed by hotfix 2**, `SaintBlessing` is correctly kept (above), and
+`Fix_VacuumWalks` was **re-copied and repaired** by hotfix 2 (`7a401f1`; its header at `:78` names the
+`{ path = {"const","ColonistMaxDomeWalkDist"} }` spec that had failed). ⇒ no shipping module is silently inactive
+for that reason. ⚠️ That is a *source-and-log* read of the 09-08 baseline plus hotfix 2's commits — **a fresh boot
+log supersedes it**, which is why §3 of the Method asks for one early.
+
 ## Method — the parts that are binding
 
 1. **Both sides, always.** A REMOVE verdict needs the **replacement traced**: name the vanilla body that now does
