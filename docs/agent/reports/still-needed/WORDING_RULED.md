@@ -51,9 +51,19 @@ lines quoted change; everything else in the row stays.
   The strict test is `hub.working or (hub.ui_working and permitted-reason and not
   possible-reason)` (`Code/Fix_ShuttleHubOffAvailable.lua:86`), so a hub the **game**
   has paused — maintenance, exceptional circumstances — still counts, on purpose.
-- ⚠️ **Known, not acted on:** the same audit found the dropped dust-storm sentence
-  was the **true** one. It is still dropped; restoring it is the owner's call
-  (flagged on checklist 159).
+- ✅ **SETTLED 2026-09-12 — it stays dropped, and the audit was wrong about it.**
+  The audit (D3) recorded the dropped dust-storm sentence as the **true** one and the
+  handoff carried that forward as an open restore-or-drop call. Re-derived from the
+  shipped tree instead of inherited: **a dust-stormed Shuttle Hub does not count as
+  available transport, before or after this fix.** A storm sets `self.suspended`
+  (`Building.lua:518-521` → `BaseBuilding:SetSuspended`), which
+  `GetWorkNotPossibleReason` returns (`BaseBuilding.lua:635-637`) — a not-POSSIBLE
+  reason — while `GetWorkNotPermittedReason` (`:657-663`) returns only `"TurnedOff"` or
+  `"ExceptionalCircumstancesDisabled"`. The lax clause fails on both conjuncts. The two
+  states the module really does keep are the two exceptional-circumstances ones, which no
+  player would call a dust storm, so **no replacement sentence is offered.** Full route in
+  `agent/bugs/F54.md` (2026-09-12 section); owner's word on checklist **162 (a)**.
+  ⛔ **Do not restore it** — it would publish a false sentence.
 
 ### 2 · Saint's blessing (`:142`) — approved, polished
 - **What you saw:** nothing, which is the problem — the blessing meant for the

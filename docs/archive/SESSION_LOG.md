@@ -8,6 +8,74 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-12 — the four §4 loose ends worked: a refuted audit finding, a frozen draft, and a control line that would have thrown
+
+tags: ck162 F54 C87 D3 LAKECHK dust-storm loose-ends handoff ck144b ck133-5
+
+Handoff `HANDOFF_ORCHESTRATOR.md` §4 carried four items that had each been raised, recorded, and then
+asked of nobody. The owner picked them off the orientation menu. Docs only; no game launched, no
+`Code/` change, no `--regen` (INDEX reproduces byte for byte — `updated:` is not an index field),
+doccheck GREEN. Tree was clean before and re-checked mid-way; one live Claude peer (`smr-bugfixpack-96`)
+held no files in this lane. The three uncommitted files in `C:\Dev\SMR-CommunityMods` were left alone.
+
+**⭐ The surface audit's D3 is REFUTED on its example, and a false sentence was one ruling away from the
+store card.** The ruled wording batch drops F54's *"Suspensions the game imposes on itself — a dust
+storm, for instance — still count as before"*; `SURFACE_AUDIT_2026-09-12.md` D3 found that the **dropped**
+sentence was the TRUE one, and both the handoff and `WORDING_RULED.md` carried "restore it?" forward as
+the owner's call. Re-derived from the shipped 1.1.0 tree rather than inherited (memory: recorded facts are
+claims too), the sentence is **false**: `ShuttleHub.generated.lua:29` sets `suspend_on_dust_storm`, so
+`Building.lua:518-521` calls `SetSuspended(true, const.DustStormSuspendReason)`, which stores
+`"SuspendedDustStorm"` in `self.suspended` (`BaseBuilding.lua:772`) — and `self.suspended` is returned by
+**`GetWorkNotPossibleReason`** (`:635-637`), not by `GetWorkNotPermittedReason`, which returns only
+`"TurnedOff"` or `"ExceptionalCircumstancesDisabled"` (`:657-663`). The shipped lax clause
+`GetWorkNotPermittedReason() and not GetWorkNotPossibleReason()` therefore fails on **both** conjuncts for
+a storm-suspended hub, and `working` is false as well: **such a hub never counted as available transport,
+before our fix or after it.** The two states the module really does keep are the two exceptional-
+circumstances ones (`BaseBuilding.lua:661`; `RequiresMaintenance.lua:131-133`), which no player would call
+a dust storm — so no replacement sentence is offered and the recommendation is to ship without it.
+Recorded in `bugs/F54.md` (new dated section, appended without editing anything above it) and
+`WORDING_RULED.md`'s note flipped from "restoring it is the owner's call" to "⛔ do not restore it".
+⚠️ **A residual is recorded there rather than left to be rediscovered:** the two kept states never
+dispatch a shuttle either (`SendOutShuttles` runs only under `working`), which is the same shape F54
+repairs — left in on purpose, because those suspensions lift by themselves. No candidate filed.
+
+**⭐ The C87 `LAKECHK` console line would have thrown and printed nothing — corrected before it was ever
+run.** Checklist 147 has carried it since 09-11 as a `[NEVER RUN]` copy-paste for the owner; it read the
+ground with `o:GetMap():GetHeight(x,y)`, a two-number form of that method witnessed **nowhere** in the
+shipped tree (every `map:GetHeight` caller passes a point). The sitting would have been spent for no
+reading. Replaced with `terrain.GetHeight(o:GetMap(), x, y)` (witnessed, `BottomlessPit.lua:23`) plus a
+`NOCURSOR` print instead of a throw when the lake cursor is not active. Every other symbol was re-traced
+and is sound: `GetConstructionController()` resolves from the current interface mode
+(`ConstructionControllers.lua:29-37`), `cursor_obj` is the controller's own field (`Construction.lua:1133`),
+the key `"Gameplay.Any."..entity` matches `LandscapeLake:GetPrefabName` (`:265-267`) verbatim, and
+`m.min:z()` is valid because the shipped check itself calls `prefab.min:xyz()` (`:351`). Corrected in both
+homes (checklist 147, `bugs/C87.md`). This is the "control recipes are claims too" trap firing again on a
+recipe that three documents had passed along unexamined.
+
+**The ck144 (b) follow-up draft's deletion is FROZEN, and the question that decides it is now asked.**
+`FIELD_REPORT_REPLIES.md`'s own rule cuts any draft reaching `POSTED` or `SUPERSEDED` at the next release
+sweep — which is the imminent v10 sweep — and this draft's prose is held nowhere else. It went dead only
+because its posting condition ("post only if the owner's post said *still checking*") stopped being
+evaluable when ck144 (b) was cleared without saying what went up. Both `SUPERSEDED` C74 blocks now carry
+a ⛔ **DO NOT CUT** freeze line naming checklist 162 (b); the cut rule resumes the moment it is answered
+either way. Its two *leads* remain safe in `bugs/C74.md` regardless.
+
+**The C87 reply hold and the 133(5) breadcrumb were both orphaned — each is now an owner-facing ask.**
+The lake reply's gate is the 2-minute check, not the item number, and it survived ck147's closure with
+nobody holding it; the 133(5)/item-73 disagreement was flagged in two records and asked in neither.
+Both are on checklist **162** with the other two.
+
+**Everything landed as one checklist item, 162** — three one-word calls plus the 2-minute lake look,
+written to the owner's plain-steps standard (numbered clicks, one copy-paste line, no placeholders).
+`HANDOFF_ORCHESTRATOR.md` §4 was rewritten from four open items to a five-line pointer at 162 with the
+F54 answer folded in, per its own "close something here ⇒ delete or demote the block" rule. STATE's
+`Owner OWES` line had gone stale on ck160 (closed 09-12) and now names ck162; STATE 14,915 → 14,944 bytes,
+still inside the ruled-accepted warn, hard cap untouched.
+
+⛔ **Nothing here touched a public surface, a module, or a count.** The v10 gate is still ck158.
+
+---
+
 ## 2026-09-12 — orchestrator retirement: the expired triage rule (ck161), the vanilla-diff brief, and the handoff refresh
 
 tags: ck161 ck160 handoff WORKFLOW rule-5a vanilla-diff treediff bodycheck disposition orchestrator

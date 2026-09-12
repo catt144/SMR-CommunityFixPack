@@ -86,6 +86,9 @@ later draft in this file, and no draft replaces this one. The token is used here
 mean *dead, cut at the next release sweep*, because `HELD` is no longer true and
 `DRAFT` would say it is postable. Its content is preserved below and its two leads live
 in `agent/bugs/C74.md`. Say the word to bring it back as a `DRAFT`.
+⛔ **DO NOT CUT AT THE v10 SWEEP — frozen 2026-09-12 pending checklist 162 (b).** The one question
+that decides this (did the 09-10 post end by saying you were still checking two sounds?) is now in front
+of the owner. The sweep's cut rule resumes the moment 162 (b) is answered either way.
 
 Its sections, so a follow-up can honour them:
 *Being restored* — the seven units (C74/C77), "currently in testing"; *Silent on purpose* — the
@@ -114,6 +117,8 @@ owner's posted text said 'still checking'", and the owner cleared ck144 (b) on
 same convention note as the draft above. ⚠️ **Say the word and it becomes a live
 `DRAFT` again** — both leads are re-derived and recorded in `agent/bugs/C74.md`, so
 nothing is lost either way. No version number would be needed.
+⛔ **DO NOT CUT AT THE v10 SWEEP — frozen 2026-09-12 pending checklist 162 (b).** This is the draft
+whose prose is held nowhere else; the blockquote below is the only copy.
 
 > Following up on the two I said I was still checking — neither turned out to be something you're missing. The Drone Hub effect was made for building drones, but nothing in the game ever plays it on a Drone Hub, and there is no moment it was ever tied to, so there is nothing to restore without making one up. The misspelled one is real: one digging sound on a version of the Concrete Extractor never starts because its name is spelled wrong. But the same digging loop is already playing through that part of the dig, so correcting the spelling would only play the same sound twice on top of itself. Nothing there is silent that should be making noise.
 
@@ -227,6 +232,9 @@ which discharges the old "keep only if 150 (c) rules yes" condition on this para
 ⚠️ **Checklist 147 was CLOSED 2026-09-12 (owner: cleared) and this hold SURVIVES it.** The gate is the lake
 check itself, not the item number — the check was never run, so the reply's facts are still undecided. Do not
 read a closed ck147 as permission to post this.
+⭐ **The check is now re-asked as checklist 162 (c), 2026-09-12**, with its console line corrected
+(the 09-11 version would have thrown and printed nothing). The gate is unchanged — it is still the
+check, not the item number — but it is back on the owner's list instead of orphaned behind a closed item.
 
 > Worth sending through the in-game report tool as the developer asked. That warning means the game thinks the lake's bottom would end up below the lowest height the map allows, but your spot is ordinary flat ground, so it shouldn't fire there. The check itself didn't change in the update, so something it reads did; we're checking whether it happens on every 1.1.0 map.
 

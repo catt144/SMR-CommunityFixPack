@@ -36,7 +36,7 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   Handoff `prompts/perma/HANDOFF_ORCHESTRATOR.md` §3 LIVE. Desk `prompts/DLC_DEEP_CHECK.md` (`HUNT_AUDIT.md` §8).
   ⭐ FR-1 TEMP WORKAROUND MOD LIVE 09-11 (Steam 3799500849 / PDX 158711; FINDINGS §11–§12). ALL FR-1 work → `prompts/perma/LINUX_DISPATCH.md`.
   Field: 3 working (one 10xx), 1 failing (GTX 1070, log requested). Chain `prompts/fixtoggles/` (ck148, DEFERRED 09-12).
-  Owner OWES: ck157 (C89 reply + dev route) · ck151 (b)/(c) · ck144 (a) v7 boot · ck160 (README store line).
+  Owner OWES: ck157 (C89 reply + dev route) · ck151 (b)/(c) · ck144 (a) v7 boot · ck162 (§4 loose ends: 3 words + the 2-min lake check).
   ✅ ck152 (c) CLOSED 09-12: the kick button is DESIGN (hint promises evict only; closing the slot is a documented 2nd click).
   vanillahunt CLOSED 09-10 (99): instruments SOUND WITH STATED GAPS — 1,281 table-level hunks in 368 rowed hand files listed by
   no instrument (§1.4); 12 P2s re-derived: 6 hold, 5 weakened, **C80 REFUTED**; **C82** filed by the audit (Incident reactors stay

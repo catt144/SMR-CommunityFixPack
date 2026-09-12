@@ -171,33 +171,27 @@ named and classified as violation or exemption. Re-confirmed at exit 0, 2026-09-
 
 ---
 
-## 4 · Loose ends that were flagged and NEVER answered
+## 4 · The four loose ends — WORKED 2026-09-12, now one checklist item
 
-Each of these was raised, recorded, and then nothing happened. None is release-blocking; all four are cheap.
+⭐ **All four are `docs/PLAYTEST_CHECKLIST.md` item 162.** They were raised, recorded, and then asked of nobody;
+they are now in front of the owner as **three one-word calls and one 2-minute look**. ⛔ **Do not re-derive them
+here** — read 162. None is release-blocking. What an agent could do has been done:
 
-1. **The dropped F54 sentence.** The ruled wording batch *drops* F54's dust-storm sentence ("Suspensions the game imposes on
-   itself — a dust storm, for instance — still count as before") because the case was never measured. **The audit found the
-   opposite: the dropped sentence was the TRUE one** (`SURFACE_AUDIT_2026-09-12.md`, finding D3). It has **not** been restored.
-   ⇒ **restore it, or ship without it — the owner's word, and v10 ships the row either way.** Recorded inside ck159.
-
-2. **The ck144 (b) follow-up draft is marked SUPERSEDED and is therefore due for DESTRUCTION at the next release sweep**
-   (`docs/FIELD_REPORT_REPLIES.md`'s own rule: a draft reaching `POSTED` or `SUPERSEDED` is cut). **Its text is held nowhere
-   else.** It went dead only because its posting condition ("post only if the owner's post said 'still checking'") can no
-   longer be evaluated — ck144 (b) was cleared without saying what went up. ⇒ **before the sweep cuts it, either get the
-   owner's word to revive it as a `DRAFT`, or accept the loss deliberately.** Its two *leads* are safe in `bugs/C74.md`;
-   the *prose* is not.
-
-3. **The C87 lake draft's gate is still `HELD on ck147` after ck147 CLOSED.** The hold is on the **2-minute lake check**,
-   which is **still unrun**, and the closure explicitly does not discharge it. The check: build menu → Lakes → Small Lake,
-   hover flat ground; "Excavation too deep" ⇒ broken for everyone on 1.1.0, then paste the `LAKECHK` line. C87 is **not our
-   pack either way** — the check only decides "every 1.1.0 map" vs "that player's map", which changes the reply's wording.
-
-4. **The 133(5) / 73-tier-0 breadcrumb contradiction.** `bef5e81` closed item 73 and recorded that 133(5) "stays open and you
-   have not ruled it"; `2e919b5`, later the same day, takes 73's closure as deciding (5). Both records carry the tension,
-   flagged rather than smoothed. **Nothing was built either way, so being wrong costs nothing** — leave it flagged unless the
-   owner says (5) was a separate call, in which case it re-opens.
-
----
+1. **The dropped F54 dust-storm sentence — ANSWERED, and the audit was wrong.** `SURFACE_AUDIT_2026-09-12.md`
+   D3 recorded the dropped sentence as the TRUE one. Re-derived from the shipped tree instead of inherited: a
+   dust storm sets `self.suspended`, which `GetWorkNotPossibleReason` returns — a not-POSSIBLE reason — while the
+   lax clause only ever forgave a not-PERMITTED one. **A storm-suspended hub never counted, before our fix or
+   after**, so the sentence is false and no replacement is offered. Route in `bugs/F54.md` (09-12 section);
+   `still-needed/WORDING_RULED.md` corrected so no later pass restores it. Owner confirms on **162 (a)**.
+2. **The ck144 (b) follow-up draft.** Its deletion at the v10 sweep is **FROZEN** pending **162 (b)**, which asks
+   the one question that decides it (did the 09-10 post say "still checking"?). ⛔ The sweep must not cut either
+   `SUPERSEDED` C74 draft until that is answered; both carry the freeze line.
+3. **The C87 lake check — re-asked as 162 (c)**, no longer orphaned behind a closed ck147. ⚠️ **Its `LAKECHK`
+   console line was CORRECTED before it was ever run:** the 09-11 version read the ground with
+   `map:GetHeight(x,y)`, a form witnessed nowhere in the shipped tree — it would have thrown and printed nothing,
+   spending the sitting for no reading. Every other symbol re-traced and sound (`bugs/C87.md`).
+4. **The 133(5) / 73 breadcrumb contradiction — asked as 162 (d)**, a yes/no. Both records carried it and
+   neither asked. Nothing was built either way.
 
 ## 5 · Still open from today's rulings — a fresh session will otherwise miss these
 

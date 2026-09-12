@@ -29,6 +29,100 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### ⚖️ 2026-09-12 — 162: the four loose ends that were flagged and never answered. **Three need one word each; one needs two minutes of yours. None blocks v10.**
+
+> These are the handoff's §4 — each was raised, written down, and then nothing happened.
+> **(a) is already settled by evidence and only needs your agreement; (b) turns on a single
+> question about a post you made; (c) is a 2-minute in-game look; (d) is a yes/no.**
+>
+> ---
+>
+> **(a) The dropped dust-storm sentence on the shuttle-hub row — recommendation: leave it dropped.
+> The audit that flagged it was wrong.**
+>
+> The wording batch you approved drops this sentence from F54's row:
+>
+> > *"Suspensions the game imposes on itself — a dust storm, for instance — still count as before."*
+>
+> The 09-12 surface audit recorded that the dropped sentence was the **true** one and left
+> "restore it?" as your call. **It is not true, and restoring it would put a false sentence in
+> front of the two Paradox developers who read the fix list.** Re-derived from the game's own
+> code rather than taken from the audit: a Shuttle Hub caught in a dust storm is *suspended*,
+> and the game files a suspension as "can't work" — not as "not allowed to work". The shipped
+> test only ever forgave the second kind. **So a dust-stormed hub never counted as available
+> transport, before our fix or after it.** The two states our fix really does leave alone are
+> the game's two "exceptional circumstances" ones — a law or a story event switching a building
+> off, and an event putting it into emergency maintenance — and no player would call either of
+> those a dust storm, so there is no honest one-line replacement to offer.
+>
+> Full route, link by link, is in [F54](agent/bugs/F54.md) (2026-09-12 section);
+> `reports/still-needed/WORDING_RULED.md` has been corrected so no later pass restores it.
+> ❓ **Your call:** agree it stays dropped (recommended, and nothing more is owed), or say restore
+> and I will write a sentence that is actually true about the two states above.
+>
+> ---
+>
+> **(b) One question decides whether a written reply survives: did your Steam sounds post say you
+> were "still checking" two of them?**
+>
+> On 09-10 you had a long sounds post for the Steam thread (C74 / C77). A **follow-up** was
+> written for it the same day, to be posted **only if** your post ended by saying you were still
+> checking two sounds. You cleared that item on 09-12 without saying which way, so the condition
+> can no longer be evaluated — and the follow-up is now marked dead, due to be deleted at the v10
+> release sweep. **Its text exists nowhere else.** (Its two *findings* are safe in
+> [C74](agent/bugs/C74.md); only the written reply is at risk.)
+>
+> The reply says, in short: neither loose end turned out to be something players are missing — the
+> Drone Hub effect was never tied to any moment in the game, and the misspelled sound is real but
+> the same digging loop is already playing over that part, so fixing the spelling would just play
+> it twice.
+>
+> ❓ **Your call, one word:** **"yes"** (your post said still checking) → it comes back as a live
+> draft and you can post it whenever · **"no" / "don't remember"** → it is deleted at the sweep and
+> nothing is lost but the prose. ⛔ **I have frozen the deletion until you answer** — the v10 sweep
+> will not cut it in the meantime.
+>
+> ---
+>
+> **(c) The 2-minute lake check, still unrun. It is holding a reply to a player.**
+>
+> A player reported "Excavation too deep" blocking lakes on ordinary flat ground since the update,
+> and a Paradox developer asked them for a bug report. **This is not our pack either way** — the
+> check decides only whether the reply says "this is broken for everyone on 1.1.0" or "this is
+> something about your map", and the reply cannot go out until it is settled. The item it was
+> attached to got closed, but the check itself was never done, so it is still owed.
+>
+> In any 1.1.0 colony:
+>
+> 1. Open the build menu and choose **Lakes → Small Lake**.
+> 2. Move the cursor over ordinary flat ground next to your base.
+> 3. **If it places fine** — say so. It is that player's map, nothing more is owed, and the reply goes out.
+> 4. **If "Excavation too deep" shows** — leave the cursor there, open the console, paste the line
+>    below, press Enter, and tell me. The numbers land in the game log.
+>
+> ```
+> local c=GetConstructionController() local o=c and c.cursor_obj if not o then print("LAKECHK", "NOCURSOR") else local x,y,z=o:GetVisualPosXYZ() local e=o:GetEntity() local m=PrefabMarkers["Gameplay.Any."..e] print("LAKECHK", e, "cursor_z", z, "ground", terrain.GetHeight(o:GetMap(), x, y), "min_z", m and m.min and m.min:z() or "NOPREFAB") end FlushLogFile()
+> ```
+>
+> ⚠️ **That line was corrected today before it was ever run.** The version sitting in item 147 since
+> 09-11 called a form of one engine function that appears nowhere in the game's own code; it would
+> have thrown an error and printed nothing, and the sitting would have been spent for no reading.
+> Every other symbol in it was traced to the shipped body. Details in [C87](agent/bugs/C87.md).
+>
+> ---
+>
+> **(d) Did you mean the log breadcrumb to be a separate call?**
+>
+> When you closed item 73 on 09-12 ("lets just close it"), one record read that as also closing
+> item **133 (5)**, the ~15-line log breadcrumb, because it is the same code as 73's cheapest tier.
+> A record written earlier the same day says 73's closure *implies* it but does not decide it. Both
+> records carry the disagreement rather than smoothing it over, and **nothing was built either way,
+> so being wrong costs nothing.**
+>
+> ❓ **Your call, yes/no:** **"it's closed with 73"** (recommended — it is the same work you just
+> declined) → the tension note comes out of both records and nobody re-derives it · **"it was
+> separate"** → 133 (5) re-opens as its own decision and stays on this list.
+
 ### ✅ 2026-09-12 — 161 CLARIFIED BY YOU: the 09-08 "we don't chase small positives" rule was **triage for the 1.1.0 emergency**, not standing policy — and it expired with the emergency. There was never a contradiction. **Nothing is owed from you; three documents stop asking.**
 
 > **Your words (2026-09-12), on why the 09-08 ruling and the 09-09 "Leave ck126 in" never fought
@@ -1162,8 +1256,12 @@ warn STATE.md is 12991 bytes, warn threshold is 12288 — copy this line VERBATI
 >   **If the lake places fine,** it's specific to their map; say so and nothing more is owed.
 >   `[NEVER RUN]` — copy-paste exactly:
 >   ```
->   local c=GetConstructionController() local o=c.cursor_obj local x,y,z=o:GetVisualPosXYZ() local e=o:GetEntity() local m=PrefabMarkers["Gameplay.Any."..e] print("LAKECHK", e, "cursor_z", z, "ground", o:GetMap():GetHeight(x,y), "min_z", m and m.min and m.min:z() or "NOPREFAB") FlushLogFile()
+>   local c=GetConstructionController() local o=c and c.cursor_obj if not o then print("LAKECHK", "NOCURSOR") else local x,y,z=o:GetVisualPosXYZ() local e=o:GetEntity() local m=PrefabMarkers["Gameplay.Any."..e] print("LAKECHK", e, "cursor_z", z, "ground", terrain.GetHeight(o:GetMap(), x, y), "min_z", m and m.min and m.min:z() or "NOPREFAB") end FlushLogFile()
 >   ```
+>   ⚠️ **Line corrected 2026-09-12** (checklist 162 (c)) before it was ever run: the old one called
+>   `map:GetHeight(x,y)`, a two-number form witnessed nowhere in the shipped tree — it would have thrown and
+>   printed nothing. The replacement uses `terrain.GetHeight(map, x, y)` (witnessed, `BottomlessPit.lua:23`)
+>   and prints `NOCURSOR` instead of throwing if the lake cursor was not active when you pressed Enter.
 > - **Deep scan finds nothing:** probes only deep-scan after researching **Adapted Probes**; Deep Scanning alone doesn't
 >   change probes. While checking, a small separate bug turned up — the five-sector Advanced Orbital Probe can knock an
 >   already deep-scanned neighbour back to "Scanned" ([C86](agent/bugs/C86.md), low priority).
@@ -2153,7 +2251,7 @@ Original question, kept as asked: C74, the Rare Metals Extractor's hammer (and t
 > | **2** what a fix does when a probe answers **UNKNOWN** | open | ⏳ **STILL YOURS — not touched by the reword.** The code already fails closed (`Code/00_Core.lua:156-167`: only literal `true` applies; a throw, nil or any other value declines). This decides whether that is written down as policy. One line in `FIX_POLICY` §2a. |
 > | **3** the wording interim | hold the over-promise through the upload | ✅ **DISCHARGED BY THE REWORD ITSELF.** There is no interim left to hold. |
 > | **4** `LuaRevision` as an **observation label** | open | ⏳ **STILL YOURS — not touched by the reword.** A `FIX_POLICY` §2a heading clarification, independent of any prototype. |
-> | **5** the breadcrumb | recommend yes | ✅ **CLOSED WITH ITEM 73** (you closed 73 on 2026-09-12). Noted at 73 as well. ⚠️ **A tension, surfaced not resolved:** the note added under (5) earlier that same day read 73's closure as *implying* this without deciding it. Today's ruling takes it as decided. If you meant (5) to stay a separate call, say so and it re-opens — nothing was built either way. |
+> | **5** the breadcrumb | recommend yes | ✅ **CLOSED WITH ITEM 73** (you closed 73 on 2026-09-12). Noted at 73 as well. ⚠️ **A tension, surfaced not resolved:** the note added under (5) earlier that same day read 73's closure as *implying* this without deciding it. Today's ruling takes it as decided. If you meant (5) to stay a separate call, say so and it re-opens — nothing was built either way. ⭐ **Asked as a yes/no on checklist 162 (d), 2026-09-12.** |
 > | **6** report the indirect `load` (`LuaCodeToTuple`) to the developers | conditional on the pilot | ✅ **MOOT.** It was conditional on a reading the pilot would have produced, and there is no pilot. |
 >
 > ⚠️ **One prompt this strands. Nothing was deleted; this is a recommendation.**
@@ -4368,7 +4466,8 @@ rock-clearing jobs) crashes the same way, not just levelling.
     deciding **133(5)** as well, so (5) is now closed rather than open. Nothing was built either
     way, and nothing else in 73 changes. ⚠️ If you meant (5) to stay a separate call, say so and
     it re-opens — this is the one place today's two records disagreed, and it is flagged rather
-    than smoothed over.
+    than smoothed over. ⭐ **Now asked as a yes/no on checklist 162 (d), 2026-09-12** — it had been
+    flagged in two records and asked in neither.
 
     *(The original finding is kept below.)*
 
