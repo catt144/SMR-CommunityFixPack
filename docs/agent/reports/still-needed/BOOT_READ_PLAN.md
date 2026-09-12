@@ -53,7 +53,7 @@ CreateRealTimeThread(function()
 end)
 ```
 
-Execution: [NEVER RUN] at plan creation. Arm through TestKit metadata code list,
+Execution: [RAN 2026-09-12, log stillneeded_registry_Mars.exe-20260912-00.29.01-6a91a190.log]. Arm through TestKit metadata code list,
 read back exact source/list entry, parsecheck, declare marker sweep, launch retail
 through Steam (without autorun), wait at most 90 seconds, archive flushed log,
 restore TestKit metadata byte-for-byte and delete payload in result-recording

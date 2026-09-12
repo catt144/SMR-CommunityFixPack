@@ -1,0 +1,48 @@
+{
+  "module": "Fix_SaintBlessing.lua",
+  "entry": "F92",
+  "applies": "yes — direct settled registry read measures active; 1.1.0 data rewrite correctly declined and historical healer armed; archived second boot inactive line 141 was superseded by line 158 healing transition",
+  "consumer": "yes — matching dome labels retain add/remove paths; stored modifier applies to current members and newcomers; base_morale still contributes to current rest target and trait-text UI",
+  "row_true": "partial — vanilla-repair and historical-healing caveat is correct; colony-wide effect wording is inaccurate because Saint targets Religious colonists in its dome",
+  "bullet_true": "n/a — no Saint headline bullet in metadata.lua description",
+  "verdict": "KEEP-BUT-FIX-CLAIM",
+  "evidence": [
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Data/TraitPreset.lua:396",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Data/TraitPreset.lua:405",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/TraitPreset.lua:86",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/TraitPreset.lua:88",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/TraitPreset.lua:100",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/TraitPreset.lua:117",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/TraitPreset.lua:126",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Units/Colonist.lua:431",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Units/Colonist.lua:442",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Units/Colonist.lua:445",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/LabelContainer.lua:21",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/LabelContainer.lua:62",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/LabelContainer.lua:73",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Units/Colonist.lua:2563",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Units/Colonist.lua:2610",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Stats.lua:898",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Stats.lua:902",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Traits.lua:1326",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/_fixup.lua:2083",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/_fixup.lua:2132",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/_fixup.lua:2167",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/CommonLua/SavegameFixup.lua:34",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/CommonLua/SavegameFixup.lua:38"
+  ],
+  "basis": "SOURCE",
+  "not_checked": [
+    "Historical 1.1.0 damaged-save healing cure",
+    "Visible Blessed by a Saint infopanel and morale change in play",
+    "1.1.0 healed-save reload silence and idempotence in play",
+    "Fresh 1.0.7 boot of current live pack",
+    "Affected-save player population",
+    "Mod-added trait preset behavior",
+    "Whole-list card consistency and generic card claims"
+  ],
+  "findings": [
+    "Fix-list row calls Saint's effect colony-wide; shipped target is Religious colonists in the Saint's dome",
+    "Resolved raw-status parser disagreement: second boot inactive line 141 misses later line 158 healing transition; direct registry archive stillneeded_registry_Mars.exe-20260912-00.29.01-6a91a190.log:264 measures active"
+  ]
+}

@@ -474,5 +474,193 @@
       "reason": "",
       "line": 129
     }
+  },
+  "registry_log": "docs/archive/logs/stillneeded_registry_Mars.exe-20260912-00.29.01-6a91a190.log",
+  "registry_sha256": "c2b3b25f6862b4aeb9e80648e2938e3f54308cc8b705153aa844469afa8b275c",
+  "final_registry": {
+    "NightShiftWork": {
+      "status": "active",
+      "line": 224
+    },
+    "WispRewards": {
+      "status": "active",
+      "line": 225
+    },
+    "TrainsToVoid": {
+      "status": "active",
+      "line": 226
+    },
+    "LanderEmptyLaunch": {
+      "status": "active",
+      "line": 227
+    },
+    "ShelterReflex": {
+      "status": "active",
+      "line": 228
+    },
+    "BrokenTrackSalvage": {
+      "status": "active",
+      "line": 229
+    },
+    "TrackSalvageWipe": {
+      "status": "active",
+      "line": 230
+    },
+    "LakeEntombment": {
+      "status": "active",
+      "line": 231
+    },
+    "GhostFarmOxygen": {
+      "status": "active",
+      "line": 232
+    },
+    "RocketDroneChurn": {
+      "status": "active",
+      "line": 233
+    },
+    "TradeRocketFuelRefresh": {
+      "status": "active",
+      "line": 234
+    },
+    "ShuttleTransportCache": {
+      "status": "active",
+      "line": 235
+    },
+    "VacuumWalks": {
+      "status": "active",
+      "line": 236
+    },
+    "ArrivalDeaths": {
+      "status": "active",
+      "line": 237
+    },
+    "StaleReservations": {
+      "status": "active",
+      "line": 238
+    },
+    "CrystalMysteryHang": {
+      "status": "active",
+      "line": 239
+    },
+    "DomeOverviewHighlight": {
+      "status": "active",
+      "line": 240
+    },
+    "TrainCargoDumping": {
+      "status": "active",
+      "line": 241
+    },
+    "DestroyedTunnels": {
+      "status": "active",
+      "line": 242
+    },
+    "DustSicknessBiorobots": {
+      "status": "active",
+      "line": 243
+    },
+    "GeneForging": {
+      "status": "active",
+      "line": 244
+    },
+    "MirrorSphereSite": {
+      "status": "active",
+      "line": 245
+    },
+    "PayloadTemplateRefill": {
+      "status": "active",
+      "line": 246
+    },
+    "ShuttleHubOffAvailable": {
+      "status": "active",
+      "line": 247
+    },
+    "FreedHousingNotice": {
+      "status": "active",
+      "line": 248
+    },
+    "LandscapeUnitFilter": {
+      "status": "active",
+      "line": 249
+    },
+    "RocketInteractGuard": {
+      "status": "active",
+      "line": 250
+    },
+    "TrackConnectorPingPong": {
+      "status": "active",
+      "line": 251
+    },
+    "TrackTunnelPowerBridge": {
+      "status": "active",
+      "line": 252
+    },
+    "GraphConsumedCaption": {
+      "status": "active",
+      "line": 253
+    },
+    "TrainWaitTime": {
+      "status": "active",
+      "line": 254
+    },
+    "FounderTraitNotification": {
+      "status": "active",
+      "line": 255
+    },
+    "SequenceLatents": {
+      "status": "active",
+      "line": 256
+    },
+    "TrackSalvageRefund": {
+      "status": "active",
+      "line": 257
+    },
+    "LayoutTechLock": {
+      "status": "active",
+      "line": 258
+    },
+    "DroneTransportMinors": {
+      "status": "active",
+      "line": 259
+    },
+    "AnomalyCaveInMap": {
+      "status": "active",
+      "line": 260
+    },
+    "ScanDowngrade": {
+      "status": "active",
+      "line": 261
+    },
+    "BombardmentSpread": {
+      "status": "active",
+      "line": 262
+    },
+    "ExtenderFlapChurn": {
+      "status": "active",
+      "line": 263
+    },
+    "SaintBlessing": {
+      "status": "active",
+      "line": 264
+    },
+    "SinkholeIndestructible": {
+      "status": "active",
+      "line": 265
+    },
+    "ExoticDepositSign": {
+      "status": "active",
+      "line": 266
+    },
+    "JumboCaveReinforcementWedge": {
+      "status": "active",
+      "line": 267
+    },
+    "SilentHitMomentFX": {
+      "status": "active",
+      "line": 268
+    },
+    "SaveSanitizer": {
+      "status": "active",
+      "line": 269
+    }
   }
 }

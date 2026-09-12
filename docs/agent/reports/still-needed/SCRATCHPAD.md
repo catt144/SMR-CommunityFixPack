@@ -28,10 +28,12 @@ armed. Retail, both packs/TestKit enabled. No colony, suite, or screen witness.
 First unarchived boot closed during data load; SECOND archived boot settled and
 gracefully closed via CloseMainWindow/WM_QUIT. No forced termination.
 Stale-probe gate CLEAN zero TEMPORARY hits before launching. No TestKit mutations.
-Boot contains an invalid SIE_ExporterValidity object message plus opt-in transient
-NoHomeless/MultipleSuns diagnostics: quote rather than silently dismiss in report.
+First unsettled boot contains invalid SIE_ExporterValidity object message; settled
+archived logs have opt-in transient NoHomeless/MultipleSuns diagnostics. RUNTIME
+preserves the distinction; don't transfer diagnostic lines between launch logs.
 
-Agent pool: module_a starts F102, module_b F54, module_c Saint. Reuse idle agents
+Agent pool: module_a finished F102, now F51; module_b finished F54, now F58;
+module_c finished Saint, now F52. Reuse idle agents
 via followup_task for ONE module per task, until every census module has a JSON
 and verbatim MD. No agent git/code/entry changes. Root can do useful whole-list
 surface audit while agents review. Parent owns coverage checks, disputed-primary

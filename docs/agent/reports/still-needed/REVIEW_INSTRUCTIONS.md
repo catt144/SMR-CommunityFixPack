@@ -16,12 +16,18 @@ in `metadata.lua` description. Primary game evidence is READ ONLY:
 
 `CENSUS.json` contains the captured inputs, module hashes and fresh runtime status
 for all 46 modules. Its `boot_log` is archived verbatim and complete after graceful
-WM_QUIT. MEASURED: 45 final applied, SaintBlessing final inactive. Read your module's
+WM_QUIT. Its last status-shaped lines are 45 applied and SaintBlessing inactive;
+Saint subsequently calls ctx.heal without another applied line. A THIRD retail
+launch explicitly read the final menu registry: `CENSUS.json` `registry_log` and
+`final_registry` contain MEASURED 46/46 active including SaintBlessing. This later
+direct registry read supersedes the raw boot-message mapping. Read your module's
 line and any later data/heal message. Applies means installation, never proof of
 the cure or of reachable benefit. Both packs and TestKit were enabled; no colony
 loaded, no suite run, no screen claim. The first launch was closed while data
 loaded; the second (archived) was allowed to settle. Use only the archived second
-boot. `BODYCHECK.txt` records the whole-pack check; falsifier passed all ten cases.
+boot, or the final registry log (third launch, temporary reader removed and
+TestKit metadata restored byte-for-byte). `BODYCHECK.txt` records the whole-pack
+check; falsifier passed all ten cases.
 This check found no changed body or gone expression but is blind to consumer drift.
 
 Answer all four questions: applies on 1.1.0? consumer still reads every value/path

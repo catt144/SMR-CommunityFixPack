@@ -1,0 +1,131 @@
+1: Bug fixes for Surviving Mars: Relaunched.
+2: 
+3: Forty-nine repairs, each one written up on the fix list with what you would
+4: have seen and what was actually wrong. Every one targets something the game's
+5: own code gets wrong — the code says one thing, does another, and the fix makes
+6: it do what it says. It fixes bugs; it does not rebalance the game. Preferences
+7: and features are deliberately not in it.
+8: 
+9: Some of them you could hardly miss: an entire train line and every train on it
+10: deleted by salvaging a single hex, colonists suffocating on a walk between two
+11: domes, an artificial lake burying the rover that was building it.
+12: 
+13: More of them you would never have blamed on a bug, because the game looked
+14: perfectly normal while the arithmetic underneath it was wrong — a reward for
+15: freeing the wisps that paid about a thousandth of what its own message promised,
+16: a researched breakthrough the game restored to only one of the three wind
+17: turbine types it covers, a track refund that paid a stub's worth of Metals
+18: however long the line was, a Comfort penalty billed for longer than the journey
+19: actually took.
+20: 
+21: And three of them repair things you cannot see at all today: real defects that
+22: the shipped numbers happen to hide, which another mod, a game patch or a DLC
+23: could walk straight into.
+24: 
+25: 
+26: SOME OF WHAT IT FIXES
+27: 
+28: · Colonists walked across the surface between domes and suffocated.
+29: · Rocket loads of new arrivals died on their way to a dome.
+30: · New arrivals moved into a dome that was switched off, quarantined or without air.
+31: · A dome sat half empty and still refused to house anyone.
+32: · A bed that fell vacant sat empty while colonists were homeless.
+33: · Night-shift colonists never came back to work after midnight.
+34: · A salvaged farm kept supplying its dome with oxygen forever.
+35: · Building an artificial lake buried the rover that built it.
+36: · Drone Hubs paralysed themselves every time an Extender flickered.
+37: · Salvaging one piece of track deleted the whole line, and its trains with it.
+38: · Demolishing a station permanently deleted the trains parked there.
+39: · Meteor-damaged track could not be salvaged at all.
+40: · Two train buildings fought over the same connector hex forever.
+41: · A destroyed tunnel still worked as a shortcut.
+42: · Automatic rockets and landers took off with nothing aboard.
+43: · An Earth-sent Trade rocket, most often the Wildfire mystery's cure rocket, could get stuck on the landing pad forever.
+44: · A Jumbo Cave mystery could get stuck clearing waste rock and never complete.
+45: · The Philosopher's Stone mystery hung one step from the end.
+46: · A story step asked for a cave-in on a map that does not exist, and the story stopped.
+47: · The Gene Forging research did nothing at all.
+48: · The Domes Overview stopped marking domes in trouble.
+49: 
+50: … and a good deal more, including quieter repairs to drones, shuttles, domes,
+51: rockets, research, storylines and the interface.
+52: 
+53: The full list — every fix, what you would have seen, and what was actually
+54: wrong — is here:
+55: https://catt144.github.io/SMR-CommunityMods/fix-list/
+56: 
+57: 
+58: SEVEN MACHINES THAT WORKED IN SILENCE
+59: 
+60: The Rare Metals Extractor's hammer, the MOXIE, the Water Extractor, Shuttle Hub
+61: shuttles, the RC Driller, the RC Dozer and The Excavator all had sounds or
+62: effects made for them that never played. They play now.
+63: 
+64: Two of them also have a skin that is silent by design, so if one of these stays
+65: quiet, check its skin before you blame the fix:
+66: · Rare Metals Extractor — the hammer strikes and puffs steam; the drill never
+67:   strikes. NASA, SpaceY, BlueSun, Brazil, Roscosmos, Japan and ISRO colonies
+68:   get the drill by default.
+69: · MOXIE — the double-pump skin thumps and puffs; the blocky one is silent.
+70: 
+71: Select the building and press Change Skin (the paintbrush on its panel) to
+72: switch. The screenshots on this page show which skin is which.
+73: 
+74: 
+75: STILL PLAYING ON GAME VERSION 1.0.7?
+76: 
+77: This pack tracks the current version of the game. If you stayed on 1.0.7, there
+78: is a separate frozen build for it, with instructions:
+79: https://catt144.github.io/SMR-CommunityMods/legacy-1-0-7/
+80: 
+81: 
+82: HOW IT WORKS
+83: 
+84: · No game files are modified. The pack wraps the game's own code while it runs.
+85: · Safe to add to a save you have already played. It writes almost nothing into
+86:   your savegame, and removing it simply lets the original bugs come back.
+87: · Every fix checks the game's code before it touches anything, and stands down
+88:   by itself if an official patch changes what it was written for. A fix that
+89:   stands down does nothing at all — it never guesses.
+90: · A few of the fixes are judgment calls rather than plain repairs. Those are
+91:   marked as such on the fix list, with the reasoning, rather than folded in
+92:   quietly.
+93: 
+94: 
+95: FOUND A BUG, OR ONE THIS PACK DID NOT FIX?
+96: 
+97: Reports are read and acted on, and a save file where it reliably happens is
+98: worth more than any description of it.
+99: 
+100: · Issue tracker — the route for everyone, and the only one that can carry a
+101:   save file or a log:
+102:   https://github.com/catt144/SMR-CommunityFixPack/issues
+103:   It needs a free GitHub account and works from a browser on any device.
+104: 
+105: · If this page has a comment section, that works too for anything you can
+106:   describe in words. Only the tracker can carry a file.
+107: 
+108: On console — every Xbox and PlayStation player — there is nothing to attach in
+109: the first place, and a plain description in your own words is genuinely useful.
+110: 
+111: 
+112: FOR MODDERS
+113: 
+114: The pack is built to share the game with your mod rather than take it over. It
+115: hooks the game's functions and calls the original where it can, so another mod
+116: that touches the same function keeps working. Where a bug sits in the middle of
+117: a function and cannot be hooked, the fix copies the corrected body instead —
+118: those are the ones most likely to clash, and each one names in its source the
+119: game file and lines it came from.
+120: 
+121: Any single fix can be switched off from another mod, without touching this one.
+122: Set the fix's id as a key on the veto table before the pack loads:
+123: 
+124:     SMRFixPack_Disabled = rawget(_G, "SMRFixPack_Disabled") or {}
+125:     SMRFixPack_Disabled["LakeEntombment"] = true
+126: 
+127: The id is the key, not a list entry — a plain list looks valid and switches off
+128: nothing. "Before the pack loads" means your mod has to load first.
+129: 
+130: Source, and the reasoning behind every fix:
+131: https://github.com/catt144/SMR-CommunityFixPack

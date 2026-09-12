@@ -1,0 +1,34 @@
+{
+  "module": "Fix_ExoticDepositSign.lua",
+  "entry": "F102",
+  "applies": "yes — archived settled 1.1.0 boot logs ExoticDepositSign applied at line 125; replacement-entity and original-class-default checks passed; no later module status/heal message",
+  "consumer": "yes — SubsurfaceDeposit.UpdateEntity still reads g_Classes[self.class].entity and calls ChangeEntity; GameInit covers new objects and the guarded LoadGame sweep invokes the same consumer for existing objects; locked deep deposits continue using untouched disabled_entity",
+  "row_true": "partial — retarget, unchanged resource/amount/mining logic, and explicit unverified-cure disclaimer are supported; current non-Lua material uniqueness/cleanliness and continued affected-hardware freeze were not independently verified",
+  "bullet_true": "n/a — no F102-specific headline bullet in metadata.lua description",
+  "verdict": "KEEP",
+  "evidence": [
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Buildings/SubsurfaceDeposit.lua:517",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Buildings/SubsurfaceDeposit.lua:394",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Buildings/SubsurfaceDeposit.lua:395",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Buildings/SubsurfaceDeposit.lua:396",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Buildings/SubsurfaceDeposit.lua:228",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Buildings/SubsurfaceDeposit.lua:97",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Buildings/SubsurfaceDeposit.lua:475",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/CommonLua/Savegame.lua:808",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/CommonLua/Core/map.lua:1125",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Buildings/PreciousMineralsExtractor.lua:4",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Lua/Buildings/Deposit.lua:104",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Data/RandomMapPreset.lua:1529",
+    "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src/Data/ResourcePreset.lua:89"
+  ],
+  "basis": "SOURCE",
+  "not_checked": [
+    "Freeze reproduction or cure on affected Linux/NVIDIA/Proton hardware on 1.1.0.403908",
+    "Current Materials.fpk vertex-animation uniqueness, replacement material cleanliness, mesh/texture parity, or shader/native renderer changes",
+    "1.1.0 colony-load re-sign sweep, rendered/selectable sign, or uninstall playtest",
+    "Main-menu enable/reload path on 1.1.0",
+    "Whole-card consistency, repair counts, or other registered modules",
+    "Exhaustive enumeration of all discovery, map-generation, tutorial, and asteroid-travel callers"
+  ],
+  "findings": []
+}

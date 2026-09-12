@@ -30,7 +30,7 @@ the existing handoff edit is nevertheless excluded from this work.
 - [ ] Fix_DomeOverviewHighlight.lua
 - [ ] Fix_DroneTransportMinors.lua
 - [ ] Fix_DustSicknessBiorobots.lua
-- [ ] Fix_ExoticDepositSign.lua
+- [x] Fix_ExoticDepositSign.lua
 - [ ] Fix_ExtenderFlapChurn.lua
 - [ ] Fix_FounderTraitNotification.lua
 - [ ] Fix_FreedHousingNotice.lua
@@ -47,11 +47,11 @@ the existing handoff edit is nevertheless excluded from this work.
 - [ ] Fix_PayloadTemplateRefill.lua
 - [ ] Fix_RocketDroneChurn.lua
 - [ ] Fix_RocketInteractGuard.lua
-- [ ] Fix_SaintBlessing.lua
+- [x] Fix_SaintBlessing.lua
 - [ ] Fix_ScanDowngrade.lua
 - [ ] Fix_SequenceLatents.lua
 - [ ] Fix_ShelterReflex.lua
-- [ ] Fix_ShuttleHubOffAvailable.lua
+- [x] Fix_ShuttleHubOffAvailable.lua
 - [ ] Fix_ShuttleTransportCache.lua
 - [ ] Fix_SilentHitMomentFX.lua
 - [ ] Fix_SinkholeIndestructible.lua
