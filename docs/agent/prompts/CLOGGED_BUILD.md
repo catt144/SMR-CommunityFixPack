@@ -5,7 +5,8 @@
 > see the FOLD-IN SLOT at the foot. Do not fire it until the owner says the slot is closed.
 > ⚠️ Start with `git pull` + `git log --oneline -15`; records win over every specific here.
 > ⚠️ Keep a live todo list from your first tool call. 🛑 Stop and ask at any point — see the house rule in
-> `prompts/migrationfix/01_BUILD_opus.md`, which applies here too.
+> `prompts/migrationfix/README.md` ("Both links can stop at any time"), which applies here too. ⚠️ That chain's
+> `01_BUILD_opus.md` was consumed on 2026-09-11; its stop rule and its close-out are in that README's HANDOFF.
 
 Entry: `bugs/C85.md`. Field reports: two Steam players on 1.1.0 (a Rare Metals Extractor and a Polymer factory),
 both saying destroy-and-rebuild was the only way out. ⚠️ **C85 does not yet carry the findings below** — they were
@@ -118,7 +119,8 @@ the §2 fix-shape choice to `PLAYTEST_CHECKLIST.md` → "Decisions waiting on yo
 A second fix may be folded into this build. **Nothing is assigned yet.** When it is, add it here as its own
 lettered item with the same shape as §1–§4 (dossier → fix shape → open checks → A/B), and say explicitly whether
 the two items are **independent** — if they are, each must be able to ship without the other, exactly as
-`migrationfix/01_BUILD_opus.md` keeps its A and B separable. ⛔ Do not let a second item's uncertainty hold up a
+`migrationfix/` kept its A and B separable — and that was not theoretical: A shipped and B stopped on its own
+gate the same night (see that chain's README → HANDOFF §3). ⛔ Do not let a second item's uncertainty hold up a
 first item that is ready.
 
 **Status: OPEN — do not fire this prompt while this slot is open.**

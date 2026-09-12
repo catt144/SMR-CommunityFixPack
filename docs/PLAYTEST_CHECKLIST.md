@@ -29,6 +29,54 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### 2026-09-11 — 152: F59 IS REPAIRED (not uploaded, not playtested) · F60's retirement is STOPPED on your uncommitted pack
+
+> **Built tonight** (migrationfix link 01; `Code/Fix_FreedHousingNotice.lua`). The vacancy
+> notification no longer fires in the middle of someone else's operation — it now runs a
+> scheduler step later, after the operation that freed the bed has finished, and re-checks
+> whether the bed is still free. That closes **both** harms 151 described, **and a third one
+> found while building** (a colonist dragged into a residence being *destroyed*).
+> ⛔ **Nothing is uploaded and nothing may be.** The upload gate is AFTER the audit
+> (`agent/prompts/migrationfix/02_AUDIT_fable.md`), not between. No version number was
+> touched and the Mod Editor was not opened.
+>
+> **⛔ ITEM B WAS STOPPED, BY ITS OWN GATE — and it needs you.** The brief's second job was
+> to retire `Fix_DomeFreeSpaceMismatch` (F60). Removing a module makes the Mod Editor rebuild
+> `items.lua` and `metadata.lua`, and **both of those are sitting uncommitted in your tree**
+> (your v8 pack — the comments are stripped, so it is a `SaveDef` round-trip). The gate says
+> ship F59 alone rather than touch or work around your files, so that is what happened. F60
+> is untouched and still shipping. **To unblock it: commit or discard those two files, then
+> F60's retirement can run in the next cycle.** Nothing about F59 depends on this.
+>
+> **YOUR RECEIPT — four clicks, any 1.1.0 colony, no expedition and no waiting.** This is the
+> one thing no desk control can settle, and it also runs on 1.0.7:
+> 1. Open a residence that is **full** (close spare bed slots on its panel until it reads
+>    full, e.g. 2/2).
+> 2. Make sure that dome has **no other free beds** — close spare slots in its other
+>    residences too.
+> 3. Click another colonist in that dome, then the full residence, and choose
+>    **Set Residence**.
+> 4. **Reads 2/2 and the evicted colonist is standing homeless = repaired. 3/2 = still
+>    broken.**
+>
+> Then one boot, and check the log says the fix applied (post-release rule). No playtest
+> status is granted by the desk results — the word is yours to give.
+>
+> **Decisions:** (a) **nothing is owed from you on F59's code** — it is built and recorded;
+> (b) **the two uncommitted release files** — land them or drop them, so F60 can be retired;
+> (c) **a new lead, your call on whether it is even a bug:** the residence infopanel's own
+> kick button (right-click an occupant) does *not* close the slot, so the freed bed can be
+> handed straight back to the colonist you just kicked. That behaviour is **unchanged by
+> tonight's repair** — the old module did the same, and vanilla re-homes them on its own
+> timetable anyway — so it is filed as a lead, not a defect. Fixing it would mean deciding
+> whether a kick is meant to stick; (d) `agent/bugs/F59.md` also records that the **frozen
+> 1.0.7 download still carries the unrepaired module**, which ck151 (e) already ruled stays
+> frozen — noted so the record does not read as if 1.0.7 were covered.
+>
+> **Also fixed, because the repair broke it:** the Test Kit's own `FreedHousingNotice` probe
+> read the notification *inline*, so it would have reported **FAIL on the corrected module**
+> at your next `RunAll()`. It now tests the real contract (committed in the Test Kit repo).
+
 ### 2026-09-11 — 151: migration audit complete: repair F59, consider retiring F60, choose developer sections and game checks
 
 > **[F59](agent/bugs/F59.md), desk-controlled, not yet reproduced in play.** At boarding, the game frees a crew member's

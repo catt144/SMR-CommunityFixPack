@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""F59: immediate vacancy notification can steal an expedition home.
+"""F59: immediate vacancy notification can steal an expedition home, and the
+repair (2026-09-11) defers the notification out of the caller's call stack.
 
 Runs extracted Colonist.EnterTransporter -> SetDome -> SetResidence, followed by
 extracted OnDisappear, with real residence selection/reservation bodies and whole
@@ -7,13 +8,29 @@ F59/F58 modules. Unit.EnterTransporter is a named engine-boundary stub: it marks
 disappeared and calls OnDisappear (the real path goes via Unit.Disappear).
 Labels, UI, comfort, geometry and trait-free suitability are fixtures. No claim
 about engine timing, real expedition completion, or in-play reproduction.
+
+THREE MODULE SHAPES are compared, which is what makes this a falsifier rather
+than a demonstration:
+  * absent           -- vanilla ordering.
+  * `legacy=True`    -- the PRE-REPAIR wrapper, extracted from git at
+                        desk_migration_cluster.F59_HARMFUL_REV. The harm legs run
+                        on this, because the repair deleted the harmful shape
+                        from Code/ and a leg that can no longer express the harm
+                        is not evidence that the harm was ever there.
+  * shipped          -- today's Code/ module, which must NOT express it.
+And `synchronous=True` defeats the deferral on the SHIPPED module: under it the
+harm must come back. That is the control proving the repair is the deferral and
+not some incidental change to the guard.
 """
 import deskbench as db
-from desk_migration_cluster import runtime, shipped, module
+from desk_migration_cluster import (runtime, shipped, module, module_text,
+                                    load_module, defer_shim, F59_HARMFUL_REV)
 
 
-def scenario(patched, waiting=True, stale_sweep=False, action='expedition', candidate=False):
+def scenario(patched, waiting=True, stale_sweep=False, action='expedition',
+             candidate=False, legacy=False, synchronous=False):
     rt = runtime()
+    defer_shim(rt, synchronous)
     rt.execute('''
       Unit={OnDisappear=function() end,
         EnterTransporter=function(self) self.disappeared=true; self:OnDisappear() end}
@@ -36,20 +53,23 @@ def scenario(patched, waiting=True, stale_sweep=False, action='expedition', cand
     shipped(rt, 'Lua/Buildings/Dome.lua', r'^function Dome:ChooseResidence\(')
     if patched:
         if candidate:
-            # AUDIT IDEA ONLY. Transform an in-memory copy, never the Code file.
-            # Capture the exact departing expedition home before orig can mutate it.
-            from pathlib import Path
-            text = db.read(Path(db.REPO) / 'Code' / 'Fix_FreedHousingNotice.lua')
+            # THE AUDIT'S UNBUILT IDEA, kept as a record of what it did and did
+            # not buy. It is a transform of the PRE-REPAIR body (the shape it was
+            # proposed against), in memory, never of a Code file: capture the
+            # exact departing expedition home before orig can mutate it.
+            # ⛔ It covers A1 only. desk_f59_interact.py runs the same transform
+            # against A2 and the overfill still happens -- which is why the
+            # shipped repair is not this.
+            text, _ = module_text('FreedHousingNotice', F59_HARMFUL_REV)
             needle = 'local left = self.residence'
             assert text.count(needle) == 1
             text = text.replace(needle, needle + '\n\t\t\tlocal expedition_home = left and self.expedition_residence == left')
             needle = 'if left and left ~= self.residence and IsValid(left)'
             assert text.count(needle) == 1
             text = text.replace(needle, 'if not expedition_home and left and left ~= self.residence and IsValid(left)')
-            db.load_at(rt, text, '=F59_UNBUILT_IDEA')
-            rt.execute('assert(modules.FreedHousingNotice.apply() == nil)')
+            load_module(rt, 'FreedHousingNotice', text, 'F59_UNBUILT_IDEA')
         else:
-            module(rt, 'FreedHousingNotice')
+            module(rt, 'FreedHousingNotice', F59_HARMFUL_REV if legacy else None)
     if stale_sweep:
         module(rt, 'StaleReservations')
     rt.execute('''
@@ -85,45 +105,76 @@ def scenario(patched, waiting=True, stale_sweep=False, action='expedition', cand
         rt.execute('crew.expedition_residence={}; crew:SetDome(false)')
     else:
         raise ValueError(action)
+    # the next scheduler opportunity, AFTER the shipped operation returned
+    rt.execute('DEFERRED_RAN = RunDeferred()')
     return rt
 
 
 def main():
-    b = db.Bench('F59 expedition hold: same shipped sequence, module off/on controls')
+    b = db.Bench('F59 expedition hold: same shipped sequence, module absent / pre-repair / repaired')
+
     rt = scenario(False)
     b.check('vanilla: crew retains reserved home with a homeless neighbour',
             rt.eval('crew.expedition_residence == home and crew.reserved_residence == home and home.reserved[crew] == true and homeless.residence == false'))
-    rt = scenario(True)
-    b.check('F59 applied: neighbour takes bed and expedition hold is lost',
+
+    # --- the measured harm, on the shape that shipped it (extracted from git) ---
+    rt = scenario(True, legacy=True)
+    b.check('PRE-REPAIR: neighbour takes bed and expedition hold is lost',
             rt.eval('homeless.residence == home and crew.expedition_residence == false and crew.reserved_residence == false and not home.reserved[crew]'))
-    b.check('F59 applied: residence remains within capacity (this is loss of hold, not overflow)',
+    b.check('PRE-REPAIR: residence remains within capacity (this is loss of hold, not overflow)',
             rt.eval('#home.colonists == 1 and #home.reserved == 0'))
+
+    # --- the repair ---
+    rt = scenario(True)
+    b.check('REPAIRED: the expedition hold survives a competing homeless neighbour',
+            rt.eval('crew.expedition_residence == home and crew.reserved_residence == home and home.reserved[crew] == true'))
+    b.check('REPAIRED: the neighbour is not given a bed the boarding crew still holds',
+            rt.eval('homeless.residence == false and #home.colonists == 0 and #home.reserved == 1'))
+    b.check('REPAIRED: the deferred notification really ran (it declined, it was not skipped)',
+            rt.eval('DEFERRED_RAN == 1'))
+
+    # --- the falsifier for the repair itself: defeat the deferral, harm returns ---
+    rt = scenario(True, synchronous=True)
+    b.check('CONTROL: with the deferral defeated the harm returns => the deferral IS the repair',
+            rt.eval('homeless.residence == home and crew.reserved_residence == false'))
+
     rt = scenario(True, waiting=False)
-    b.check('negative control: F59 preserves crew home when no neighbour competes',
+    b.check('negative control: REPAIRED preserves crew home when no neighbour competes',
             rt.eval('crew.expedition_residence == home and crew.reserved_residence == home'))
-    rt = scenario(True, stale_sweep=True)
-    b.check('current F58 exemption cannot protect a hold F59 prevented from being created',
+
+    rt = scenario(True, stale_sweep=True, legacy=True)
+    b.check('PRE-REPAIR: F58 exemption cannot protect a hold F59 prevented from being created',
             rt.eval('homeless.residence == home and crew.expedition_residence == false and crew.reserved_residence == false'))
     rt.execute('OnMsg.NewDay()')
-    b.check('F58 daily sweep does not restore the missing hold',
+    b.check('PRE-REPAIR: F58 daily sweep does not restore the missing hold',
             rt.eval('homeless.residence == home and crew.reserved_residence == false'))
+    rt = scenario(True, stale_sweep=True)
+    b.check('REPAIRED: with F58 also loaded the hold is held, so F58 has nothing to rescue',
+            rt.eval('crew.reserved_residence == home and home.reserved[crew] == true'))
+
+    # --- the benefit the module exists for, which the repair must not lose ---
     rt = scenario(False, action='ordinary')
     b.check('original F59 gap: vanilla ordinary departure leaves an eligible neighbour homeless beside a free bed',
             rt.eval('home:GetFreeSpace() == 1 and homeless.residence == false'))
     rt.execute('homeless:UpdateResidence()')
     b.check('original-gap control: a later housing update takes that same bed',
             rt.eval('homeless.residence == home'))
-    rt = scenario(True, action='ordinary')
-    b.check('current F59 still supplies immediate notification for ordinary departures',
+    rt = scenario(True, legacy=True, action='ordinary')
+    b.check('PRE-REPAIR: ordinary departure was notified immediately',
             rt.eval('homeless.residence == home'))
+    rt = scenario(True, action='ordinary')
+    b.check('REPAIRED: ordinary departure is STILL notified, one scheduler step later',
+            rt.eval('homeless.residence == home and DEFERRED_RAN >= 1'))
+
+    # --- the audit's unbuilt candidate: what it bought, recorded, not shipped ---
     rt = scenario(True, candidate=True, stale_sweep=True)
-    b.check('UNBUILT IDEA: exact expedition-home exclusion preserves the hold with competing neighbour',
+    b.check('AUDIT IDEA (A1 only): exact expedition-home exclusion preserves the hold',
             rt.eval('crew.reserved_residence == home and home.reserved[crew] == true and homeless.residence == false'))
     rt = scenario(True, candidate=True, action='ordinary')
-    b.check('UNBUILT IDEA: ordinary vacancy still offered immediately',
+    b.check('AUDIT IDEA: ordinary vacancy still offered immediately',
             rt.eval('homeless.residence == home'))
     rt = scenario(True, candidate=True, action='unrelated_hold')
-    b.check('UNBUILT IDEA: unrelated expedition pointer does not suppress this vacancy',
+    b.check('AUDIT IDEA: unrelated expedition pointer does not suppress this vacancy',
             rt.eval('homeless.residence == home'))
     return b.finish()
 

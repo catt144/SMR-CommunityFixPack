@@ -6,8 +6,15 @@ stubbed: these tests measure runtime branches, NOT install/branch-guard safety.
 Geometry, engine validity, transport availability and task creation are fixtures;
 they cannot establish that a real colony reaches the supplied state.
 """
+import subprocess
 from pathlib import Path
 import deskbench as db
+
+# The last commit that carried the PRE-REPAIR Fix_FreedHousingNotice wrapper
+# (the synchronous CheckHomeForHomeless call inside Colonist:SetResidence).
+# F59's harm legs run against this shape, because the repair removed it from
+# Code/ and a falsifier that cannot express the harm is not a falsifier.
+F59_HARMFUL_REV = 'bb50f5d'
 
 
 def runtime():
@@ -38,10 +45,85 @@ def shipped(rt, rel, pattern):
     db.load_at(rt, text, '=' + rel, start)
 
 
-def module(rt, name):
-    path = Path(db.REPO) / 'Code' / ('Fix_' + name + '.lua')
-    db.load_at(rt, db.read(path), '=' + str(path))
-    rt.execute('assert(modules["' + name + '"].apply() == nil)')
+def module_text(name, rev=None):
+    """-> (source, chunkname) for a pack module: from Code/, or from git at `rev`.
+
+    `rev` reads a SUPERSEDED shape out of git by sha rather than re-typing it,
+    which keeps deskbench's "our code is extracted, never retyped" property for
+    a body that no longer exists on disk.
+    """
+    rel = 'Code/Fix_%s.lua' % name
+    if rev is None:
+        path = Path(db.REPO) / rel
+        return db.read(path), str(path)
+    spec = '%s:%s' % (rev, rel)
+    out = subprocess.run(['git', 'show', spec], cwd=db.REPO, check=True,
+                         capture_output=True, text=True, encoding='utf-8')
+    return out.stdout, spec
+
+
+def load_module(rt, name, text, chunkname):
+    """Load module source and apply it, raising if apply() declined.
+
+    ⛔ `error`, not `assert`: two harnesses here shim `assert` to
+    record-and-continue (EF-008), which would swallow a failed apply() and read
+    as coverage it never was.
+    """
+    db.load_at(rt, text, '=' + chunkname)
+    rt.execute('do local e = modules["%s"].apply()'
+               ' if e ~= nil then error("apply() declined: " .. tostring(e)) end end' % name)
+
+
+def module(rt, name, rev=None):
+    text, chunkname = module_text(name, rev)
+    load_module(rt, name, text, chunkname)
+
+
+def defer_shim(rt, synchronous=False):
+    """Model game-time thread scheduling for a one-shot deferred body.
+
+    EF-029 (MEASURED 2026-08-01, owner at the keyboard): `CreateGameTimeThread`
+    DEFERS -- the body does NOT run before the creating statement continues. The
+    engine's Lua is cooperative, so a thread also cannot resume in the middle of
+    a synchronous call stack. Together those mean a created thread's body runs
+    only once the creating stack has unwound, which is what the queue below
+    models: `CreateGameTimeThread` records the call, and `RunDeferred()` is what
+    a harness calls AFTER the shipped operation returns, standing in for the next
+    scheduler opportunity.
+
+    ⚠️ A CONVENTION modelling EF-029, not a measurement of the engine scheduler.
+    It models ORDERING only -- never latency, never pause behaviour, and it does
+    not establish that a real colony reaches the supplied state.
+
+    `synchronous=True` DEFEATS the deferral (the body runs inside the creating
+    statement, i.e. back to the pre-repair timing). That is the falsifier for the
+    repair itself: under it the repaired module must express the harm again.
+    """
+    rt.execute('SYNCHRONOUS = ' + ('true' if synchronous else 'false'))
+    rt.execute('''
+      _deferred = {}
+      Sleep = function() end
+      IsValidThread = function() return false end
+      if SYNCHRONOUS then
+        CreateGameTimeThread = function(f, ...) f(...) return {} end
+      else
+        CreateGameTimeThread = function(f, ...)
+          _deferred[#_deferred+1] = {f, {...}}
+          return {}
+        end
+      end
+      -- `error`, not `assert`: assert is shimmed to record-and-continue here.
+      function RunDeferred()
+        local ran = 0
+        while #_deferred > 0 do
+          ran = ran + 1
+          if ran > 50 then error("deferred queue did not drain") end
+          local job = table.remove(_deferred, 1)
+          job[1](table.unpack(job[2]))
+        end
+        return ran
+      end
+    ''')
 
 
 def main():

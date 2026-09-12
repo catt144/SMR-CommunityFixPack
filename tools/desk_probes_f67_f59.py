@@ -20,7 +20,9 @@ Demands, per probe:
   L0  OLD probe text vs the 1.1.0 body -> the sitting's exact ERROR line
   L1  module registered `active`, apply NOT run -> FAIL on the defect clause
   L2  module applied -> PASS
-  L3  an over-broad wrapper -> FAIL on the over-broad clause
+  L3  a wrapper that notifies INLINE -> FAIL on the repair's deferral clause
+  L3b an over-broad wrapper (defers, no free-space test) -> FAIL on the no-slot
+      clause
   L4  (F67 only) vanilla alone: a LOADED fixture reads false inside its first
       automode hour and true two hours in -- the :554 gate a naive fixture trips
 
@@ -189,16 +191,32 @@ def main():
            st == "FAIL" and "does not offer itself" in msg, f"{st}: {msg}")
     st, msg = leg("Code/Fix_FreedHousingNotice.lua", "Code/30_Probes_Wave3.lua", kit3_new, True, "FreedHousingNotice")
     expect("[F59 L2] module applied -> PASS", st == "PASS", f"{st}: {msg}")
+    # L3 and L3b are two SEPARATE axes, and the repair split them. L3 notifies
+    # INLINE, which the probe must now reject on its own (it is exactly the F59
+    # A1/A2 shape); L3b defers correctly but drops the free-space test, which is
+    # the original over-broad demand and still has to be caught.
     st, msg = leg("Code/Fix_FreedHousingNotice.lua", "Code/30_Probes_Wave3.lua", kit3_new, True, "FreedHousingNotice",
                   rewrap=r'''
 		local o = Colonist.SetResidence
 		function Colonist:SetResidence(home, ...)
 			local left = self.residence
 			local r1, r2 = o(self, home, ...)
-			if left and left ~= self.residence then left:CheckHomeForHomeless() end   -- no free-space test
+			if left and left ~= self.residence then left:CheckHomeForHomeless() end   -- INLINE: the pre-repair shape
 			return r1, r2
 		end''')
-    expect("[F59 L3] over-broad wrapper (notifies without the free-space test) -> FAIL on the no-slot clause",
+    expect("[F59 L3] a wrapper that notifies INLINE -> FAIL on the repair's own clause",
+           st == "FAIL" and "fires INSIDE Colonist:SetResidence" in msg, f"{st}: {msg}")
+    st, msg = leg("Code/Fix_FreedHousingNotice.lua", "Code/30_Probes_Wave3.lua", kit3_new, True, "FreedHousingNotice",
+                  rewrap=r'''
+		local o = Colonist.SetResidence
+		local function notify(home) Sleep(0) if IsValid(home) then home:CheckHomeForHomeless() end end
+		function Colonist:SetResidence(home, ...)
+			local left = self.residence
+			local r1, r2 = o(self, home, ...)
+			if left and left ~= self.residence then CreateGameTimeThread(notify, left) end   -- no free-space test
+			return r1, r2
+		end''')
+    expect("[F59 L3b] over-broad wrapper (defers, but no free-space test) -> FAIL on the no-slot clause",
            st == "FAIL" and "no usable slot still walks" in msg, f"{st}: {msg}")
 
     return bench.finish("ALL DEMANDS HELD -- both probes fail without the module, pass with it, fail on an\n"
