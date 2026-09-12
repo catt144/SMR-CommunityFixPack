@@ -99,7 +99,14 @@ which is fully briefed.
 - ⭐⭐ **NEW CONSTRAINT, and it re-prices everything we publish: TWO PARADOX DEVELOPERS ARE USING OUR FIX LIST TO
   PLAN THEIR NEXT HOTFIXES** (owner, 09-12). A stale or overstated row now costs **a developer's time**, not just
   our credibility. ⇒ treat every public-surface claim as an input to someone else's engineering plan.
-- **`prompts/STILL_NEEDED_SWEEP.md` — READY, not started (ck156).** Per-module settlement of "is this fix still
+- ⏳ **`prompts/STILL_NEEDED_SWEEP.md` — FIRED ON CODEX/ASTRA (owner, 2026-09-12), and the owner intends to open
+  THIS handoff only once Astra finishes.** ⇒ **when you pick this up, the sweep has probably RUN: find and read its
+  output BEFORE anything else** (`git log`, `agent/reports/`, and any committed subagent reports — Astra commits
+  them verbatim precisely so a Claude session can audit what was produced rather than a summary). ⚠️ Its verdicts
+  are CLAIMS: the retire/keep call is the owner's, no module should have been deleted inside it, and
+  `items.lua`/`metadata.lua` should be untouched. **If a module WAS deleted, that is out of scope and worth
+  raising.** The brief is written fan-out-shaped (one module per agent, fixed schema, hazards, serial bottleneck,
+  and the "agreement is not independence" warning). Details of the original ask below (ck156). Per-module settlement of "is this fix still
   needed on 1.1.0?" across all 46, judging the **module and its fix-list row separately**. Prompted by the owner:
   *"I really hate keeping things in there if they are not needed."* Carries the three cases that motivate it —
   F60 (hotfix 2 kept it; the CONSUMER had moved, not the fix), `SaintBlessing` (self-disables and is correctly
@@ -109,6 +116,16 @@ which is fully briefed.
 - **v9 is written and waiting on the owner** (ck155): F59 repair + F60 retirement, `last_changes` settled as a
   LIST after three passes (shape recorded in `RELEASE_OUTBOX`), count 49 on all five copies, site fix-list at 49
   and committed-but-unpublished. Sequence: upload, then fire the site job **in the same sitting**.
+- **Surfaces are the weak spot, not the modules** (2026-09-12). The modules have had two systematic passes
+  (hotfix 2, then the migration audit). The **public surfaces have never had one** — only targeted edits, several
+  of them mine. Proof: the owner spotted the store card still carrying the F51 overclaim *after* the site row was
+  narrowed, because a session did `PUBLIC_SURFACE_SWEEP` §1 and skipped §2/§3. The stale bullet is removed
+  (`1583dcd`) and the whole-list diff is now an axis of the sweep. ⇒ **expect the remaining errors to be on the
+  card and the fix list, not in `Code/`.**
+- ⚠️ **Disclosure: on 2026-09-12 this session ran `git checkout -- items.lua` on an uncommitted change without
+  reading it first** — the owner's file, a Mod Editor comment-strip. No loss (it matched `dea9a1a` after, all 47
+  entries intact, game not running, and the editor rewrites it on its next save), and the owner was told. Recorded
+  because the rule it broke is a standing one: **never discard a file you did not write without looking at it.**
 - **Still open from the migration eight:** F54 was **never swept** (audit §4 by name); F52/F53/F73 are PARTIAL with
   named residuals; **F59's A1 expedition half has never been run in play** and the change note says so.
 
