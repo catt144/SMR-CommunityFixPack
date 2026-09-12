@@ -450,7 +450,7 @@ text, the §3 paste backup is the route and the owner reports it (UPLOAD_WORKFLO
 Read from the live Steam page HTML after the owner said both stores were live:
 **Steam gallery: all three images arrived** (3 `highlight_strip_screenshot` items) — the
 first use of `screenshot1..3`. **Steam body: WHOLE** — every section through the final
-GitHub link, "Forty-eight repairs". ⚠️ It renders **bold**, which the plain `description`
+GitHub link, count word "Forty-eight". ⚠️ It renders **bold**, which the plain `description`
 has none of ⇒ the §3 BBCode block was most likely pasted (owner to confirm; auto-fill
 unknown this cycle). **Paradox: UNREAD** — the page is JavaScript-only from here (3,444 B
 shell). Whether its gallery took the three images and whether the 6,206-char body arrived
@@ -516,8 +516,8 @@ publishes it with v9.
 ## ⭐ 2026-09-11 (night) — v8 LIVE as READ from Steam; v9 words (`RELEASE.md` step 1): F59 repair + F60 retirement
 
 **v8 arrived without anyone recording it.** The Steam changelog's newest entry,
-"Update: Sep 11 @ 1:50pm", carries the F119/C86 note verbatim; the live body says
-**"Fifty repairs"**; the workshop folder took a new `ModContent.fpk` (331,428 B) at
+"Update: Sep 11 @ 1:50pm", carries the F119/C86 note verbatim; the live body carries the count word
+**Fifty**; the workshop folder took a new `ModContent.fpk` (331,428 B) at
 16:55 local; the tree carried the writeback (`version` 8, `pdx_version` "7"); the site
 deployed `398a1b0` at 21:10Z. **Paradox: UNREAD** (JavaScript page). Whether either
 page auto-filled or was pasted is OWED from the owner (checklist 155). ⇒ Until v9 is
