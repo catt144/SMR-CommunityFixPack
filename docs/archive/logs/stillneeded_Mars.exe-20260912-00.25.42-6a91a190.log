@@ -1,0 +1,189 @@
+					Render 0:00:00:007
+*** executable info
+Timestamp:     	6a91a190
+Date:          	Fri Aug 28 10:56:16 2026
+Command line:  	
+Compiler:      	195136247, 142 (VS 2019) or newer
+
+
+*** hardware info
+CPU name      	Intel(R) Core(TM) i7-14700K
+CPU MHz       	3418
+CPU cores     	20/28
+Phys. Memory   	65278 MBytes
+Memory In Use  	63%
+Disk Free      	805905 MBytes
+
+
+*** OS info
+OS:            	Windows 11
+Version:       	10.0.26100 
+
+
+*** Debug::Init()
+
+
+					Render 0:00:00:110
+Steam initialized (AppId 3215050)
+					Render 0:00:00:113
+Drive type for game installation: SSD, savegames: SSD
+					Render 0:00:00:114
+Language: English
+					Render 0:00:01:552
+*** graphics info
+GPU                            	NVIDIA GeForce RTX 4080 Feature Level: 12.1 {  DoublePrecisionFloatShaderOps: 1 OutputMergerLogicOp: 1 MinPrecisionSupport: 2 TiledResourcesTier: 4 ResourceBindingTier: 3 PSSpecifiedStencilRefSupported: 0 TypedUAVLoadAdditionalFormats: 1 ROVsSupported: 1 ConservativeRasterizationTier: 3 MaxGPUVirtualAddressBitsPerResource: 40 StandardSwizzle64KBSupported: 0 CrossNodeSharingTier: 0 CrossAdapterRowMajorTextureSupported: 0 VPAndRTArrayIndexFromAnyShaderFeedingRasterizerSupportedWithoutGSEmulation: 1 ResourceHeapTier: 2 NotZeroedPools: 1 UMA: 0 UnalignedBlockTextures: 1}
+API                            	d3d12
+GPU Driver Version             	32.0.16.1074
+					Render 0:00:01:553
+GPU Driver Package Version     	610.74
+GPU Dedicated Video Memory     	16048 MB
+					Render 0:00:01:721
+
+Libs: Network, Sequences, MouseTrackWin, DumbAI, MapGen, Paradox, TriggersAndEvents, Notifications, Research, Resources, Tutorial, Objectives 
+
+					Render 0:00:01:979
+
+Platform: desktop, editor, goldmaster, paradox, pc, steam
+
+					Render 0:00:03:053
+*** audio info
+Audio Endpoint                 	Speakers (Razer Leviathan V2)
+						Lua 0:00:03:054
+Lua revision: 403908
+Assets revision: 33006
+Steam AppID: 3215050
+Build version: 1.1.0.403908
+Build branch:  Release
+						Lua 0:00:16:558
+Account storage loaded successfully in 2 ms
+						Lua 0:00:16:559
+DLC norman loaded, lua revision 403908, assets revision 33006
+DLC thomas loaded, lua revision 403908, assets revision 33006
+						Lua 0:00:16:563
+[mod] Loaded mod def Relaunched Fix Pack (id SMR_CommunityFixPack, v1.00-010) unpacked from appdata
+[mod] Loaded mod def TEMPORARY - Linux NVIDIA 580 Crash Workaround (id SMR_FR1TempWorkaround, v0.00-003) unpacked from appdata
+[mod] Loaded mod def Community Fix Pack — Test Kit (id SMR_CommunityFixPackTestKit, v0.00-001) unpacked from appdata
+[mod] Loaded mod def Relaunched Fix Pack: Opt-In Modules (id SMR_CommunityOptInPack, v1.00-000) unpacked from appdata
+						Lua 0:00:16:967
+[mod] [SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony						Lua 0:00:16:968
+
+[SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+[mod] [SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[mod] [SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+[SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+						Lua 0:00:16:973
+[mod] [SMRTest][carry] fixture-carry dump available — run SMRTest.FixtureCarry()
+[mod] [CommunityFixPack] NightShiftWork: applied
+[mod] [CommunityFixPack] WispRewards: applied
+[mod] [CommunityFixPack] TrainsToVoid: applied
+						Lua 0:00:16:974
+[mod] [CommunityFixPack] LanderEmptyLaunch: applied
+[mod] [CommunityFixPack] ShelterReflex: applied
+[mod] [CommunityFixPack] BrokenTrackSalvage: applied
+[mod] [CommunityFixPack] TrackSalvageWipe: applied
+[mod] [CommunityFixPack] LakeEntombment: applied
+[mod] [CommunityFixPack] GhostFarmOxygen: applied
+[mod] [CommunityFixPack] RocketDroneChurn: applied
+[mod] [CommunityFixPack] TradeRocketFuelRefresh: applied
+[mod] [CommunityFixPack] ShuttleTransportCache: applied
+						Lua 0:00:16:975
+[mod] [CommunityFixPack] VacuumWalks: applied
+[mod] [CommunityFixPack] ArrivalDeaths: applied
+[mod] [CommunityFixPack] StaleReservations: applied
+[mod] [CommunityFixPack] CrystalMysteryHang: applied
+[mod] [CommunityFixPack] DomeOverviewHighlight: applied
+[mod] [CommunityFixPack] TrainCargoDumping: applied
+[mod] [CommunityFixPack] DestroyedTunnels: applied
+[mod] [CommunityFixPack] DustSicknessBiorobots: applied
+[mod] [CommunityFixPack] GeneForging: applied
+[mod] [CommunityFixPack] MirrorSphereSite: applied
+						Lua 0:00:16:976
+[mod] [CommunityFixPack] PayloadTemplateRefill: applied
+[mod] [CommunityFixPack] ShuttleHubOffAvailable: applied
+[mod] [CommunityFixPack] FreedHousingNotice: applied
+[mod] [CommunityFixPack] LandscapeUnitFilter: applied
+						Lua 0:00:16:977
+[mod] [CommunityFixPack] RocketInteractGuard: applied
+[mod] [CommunityFixPack] TrackConnectorPingPong: applied
+[mod] [CommunityFixPack] TrackTunnelPowerBridge: applied
+[mod] [CommunityFixPack] GraphConsumedCaption: applied
+[mod] [CommunityFixPack] TrainWaitTime: applied
+						Lua 0:00:16:978
+[mod] [CommunityFixPack] FounderTraitNotification: applied
+[mod] [CommunityFixPack] SequenceLatents: applied
+[mod] [CommunityFixPack] TrackSalvageRefund: applied
+[mod] [CommunityFixPack] LayoutTechLock: applied
+[mod] [CommunityFixPack] DroneTransportMinors: applied
+[mod] [CommunityFixPack] AnomalyCaveInMap: applied
+[mod] [CommunityFixPack] ScanDowngrade: applied
+[mod] [CommunityFixPack] BombardmentSpread: applied
+						Lua 0:00:16:979
+[mod] [CommunityFixPack] ExtenderFlapChurn: applied
+[mod] [CommunityFixPack] SaintBlessing: applied
+[mod] [CommunityFixPack] SinkholeIndestructible: applied
+[mod] [CommunityFixPack] ExoticDepositSign: applied
+[mod] [CommunityFixPack] JumboCaveReinforcementWedge: applied
+[mod] [CommunityFixPack] SilentHitMomentFX: applied
+						Lua 0:00:16:980
+[mod] [CommunityFixPack] SaveSanitizer: applied
+[mod] [CommunityOptInPack] ClassicRockets: applied
+[mod] [CommunityOptInPack] AcknowledgedWarnings: applied
+[mod] [CommunityOptInPack] ResidencyControl: applied
+[mod] [CommunityOptInPack] MultipleSuns: applied
+						Lua 0:00:16:981
+[mod] [CommunityOptInPack] DroneOverhaul: applied
+[mod] [CommunityOptInPack] CohortHousing: applied
+[mod] [CommunityOptInPack] NoHomeless: self-check targets Community but Workforce declares HasFreeWorkplacesAround — authoring error, not a game update (FIX_POLICY §2)
+[mod] [CommunityOptInPack] NoHomeless: inactive (Community.HasFreeWorkplacesAround not found — expected on the FIRST load pass and NOT a game update: this check names Community while Workforce declares the method (authoring error — see the preceding line), and mod code loads before the class hierarchy is built, so the module applies cleanly on the second pass. If no 'NoHomeless: applied' line follows this one, the method is genuinely gone — without it a flagged dome could never be staffed)
+[mod] [CommunityOptInPack] DroneStatDials: applied
+						Lua 0:00:17:782
+[mod] [CommunityFixPack] SaintBlessing: inactive (no dome-colonists trait presets)
+[mod] [CommunityFixPack] SinkholeIndestructible: the St. Elmo's Fire sinkhole is now indestructible, like every other mystery set-piece
+						Lua 0:00:17:872
+Reloading done in 1309 ms
+						Lua 0:00:17:873
+Available DLCs: norman(Feeding the Future),thomas(Interplanetary Codex) 
+						Lua 0:00:18:304
+[preset] Preset postprocess took 152 ms.						Lua 0:00:18:305
+
+						Lua 0:00:18:353
+482 / 482 particle streams loaded in 41 ms.
+						Lua 0:00:18:354
+5 / 5 particle streams loaded in 1 ms.
+						Lua 0:00:18:355
+[mod] [CommunityFixPack] SilentHitMomentFX: registered 11 missing animation-moment preset(s)
+[mod] [CommunityOptInPack] MultipleSuns: BuildingTemplates.ArtificialSun not found — build limit NOT lifted (binding fix still active)
+						Lua 0:00:18:570
+[mod] [CommunityFixPack] SaintBlessing: the shipped code resolves the trait label itself — data left untouched; save re-base armed for 1 preset(s) of 2
+[mod] [CommunityOptInPack] MultipleSuns: Artificial Sun build-once limit lifted
+						Lua 0:00:18:705
+[mod] Loaded mod items for: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack, SMR_CommunityOptInPack
+[mod] [CommunityOptInPack] NoHomeless: applied
+						Lua 0:00:19:581
+[PdxSDK] Started up. Took 1156
+						Lua 0:00:19:999
+[Braze] SessionStart error The server name or address could not be resolved
+
+						Lua 0:00:20:000
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:20:082
+[Braze] SessionStart error The server name or address could not be resolved
+
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+					Render 0:00:41:357
+
+
+Stopping the game threads after receiving WM_QUIT.
+
+					Render 0:00:41:590
+
+
+*** Debug::Done()
+Time (ms)	41590
+
+

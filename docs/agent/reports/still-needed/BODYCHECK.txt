@@ -1,0 +1,360 @@
+NO-MANIFEST   00_Core.lua
+              declares neither SRC: nor DEFECT:
+NO-MANIFEST   90_SaveSanitizer.lua
+              declares neither SRC: nor DEFECT:
+NO-DEFECT     Fix_SinkholeIndestructible.lua
+              pinned but cannot state the expression it corrects (FIX_POLICY §2b exception)
+SRC-NONE      Fix_DustSicknessBiorobots.lua:162
+              target  none
+              a StoryBit preset patch -- no function body to hash
+SRC-NONE      Fix_ExoticDepositSign.lua:59
+              target  none
+              a class-default patch on a classdef table -- no function body to hash
+SRC-NONE      Fix_SaintBlessing.lua:3
+              target  none
+              DataPatch on shipped preset data — no game function body is replaced
+SRC-NONE      Fix_SilentHitMomentFX.lua:11
+              target  none
+              additive AnimMetadata presets for shipped moment-keyed FX
+OK            Fix_AnomalyCaveInMap.lua:62
+              target  Lua/Buildings/CaveInRubble.lua TriggerCaveIn
+              body matches the pin (Lua/Buildings/CaveInRubble.lua:103-126)
+OK            Fix_AnomalyCaveInMap.lua:64
+              target  Lua/Buildings/CaveInRubble.lua TriggerCaveIn
+              defect expression still shipped
+OK            Fix_ArrivalDeaths.lua:189
+              target  Lua/Units/Colonist.lua Colonist:Arrive
+              body matches the pin (Lua/Units/Colonist.lua:1586-1632)
+OK            Fix_ArrivalDeaths.lua:191
+              target  Lua/Units/Colonist.lua Colonist:Arrive
+              defect expression still shipped
+OK            Fix_ArrivalDeaths.lua:193
+              target  Lua/_GameUtils.lua is_welcoming_community
+              body matches the pin (Lua/_GameUtils.lua:382-384)
+OK            Fix_ArrivalDeaths.lua:195
+              target  Lua/_GameUtils.lua is_welcoming_community
+              defect expression still shipped
+OK            Fix_BombardmentSpread.lua:43
+              target  Lua/Bombardment.lua WaitBombard
+              body matches the pin (Lua/Bombardment.lua:55-154)
+OK            Fix_BombardmentSpread.lua:45
+              target  Lua/Bombardment.lua WaitBombard
+              defect expression still shipped
+OK            Fix_BrokenTrackSalvage.lua:29
+              target  Lua/Buildings/Track.lua TrackBase:BreakTrackElement
+              body matches the pin (Lua/Buildings/Track.lua:623-658)
+OK            Fix_BrokenTrackSalvage.lua:35
+              target  Lua/Buildings/TrackElement.lua TrackGridElement:DemolishAndSplitTrack
+              body matches the pin (Lua/Buildings/TrackElement.lua:467-618)
+OK            Fix_BrokenTrackSalvage.lua:37
+              target  Lua/Buildings/TrackElement.lua TrackGridElement:DemolishAndSplitTrack
+              defect expression still shipped
+OK            Fix_CrystalMysteryHang.lua:94
+              target  Lua/Mysteries/Crystals.lua Crystal:ComposeProc
+              body matches the pin (Lua/Mysteries/Crystals.lua:45-84)
+OK            Fix_CrystalMysteryHang.lua:96
+              target  Lua/Mysteries/Crystals.lua Crystal:ComposeProc
+              defect expression still shipped
+OK            Fix_DestroyedTunnels.lua:36
+              target  Lua/Buildings/Tunnel.lua TunnelBase:AddPFTunnel
+              body matches the pin (Lua/Buildings/Tunnel.lua:193-205)
+OK            Fix_DestroyedTunnels.lua:38
+              target  Lua/Buildings/Tunnel.lua TunnelBase:AddPFTunnel
+              defect expression still shipped
+OK            Fix_DomeOverviewHighlight.lua:21
+              target  Lua/X/ColonyControlCenter.lua Community:UICommandCenterStatUpdate
+              body matches the pin (Lua/X/ColonyControlCenter.lua:1290-1301)
+OK            Fix_DomeOverviewHighlight.lua:23
+              target  Lua/X/ColonyControlCenter.lua Community:UICommandCenterStatUpdate
+              defect expression still shipped
+OK            Fix_DroneTransportMinors.lua:141
+              target  Lua/Buildings/DroneControl.lua DroneControl:UpdateRocketsInternal
+              body matches the pin (Lua/Buildings/DroneControl.lua:672-698)
+OK            Fix_DroneTransportMinors.lua:143
+              target  Lua/Buildings/DroneControl.lua DroneControl:UpdateRocketsInternal
+              defect expression still shipped
+OK            Fix_DustSicknessBiorobots.lua:163
+              target  Data/StoryBit/DustSickness.lua
+              defect expression still shipped
+OK            Fix_ExoticDepositSign.lua:60
+              target  Lua/Buildings/SubsurfaceDeposit.lua
+              defect expression still shipped
+OK            Fix_ExtenderFlapChurn.lua:111
+              target  Lua/Buildings/DroneHubExtender.lua DroneHubExtenderBase:OnSetWorking
+              body matches the pin (Lua/Buildings/DroneHubExtender.lua:181-190)
+OK            Fix_ExtenderFlapChurn.lua:113
+              target  Lua/Buildings/DroneHubExtender.lua DroneHubExtenderBase:OnSetWorking
+              defect expression still shipped
+OK            Fix_FounderTraitNotification.lua:29
+              target  Lua/ColonyViability.lua OnMsg.ColonistAddTrait
+              body matches the pin (Lua/ColonyViability.lua:306-314)
+OK            Fix_FounderTraitNotification.lua:31
+              target  Lua/ColonyViability.lua OnMsg.ColonistAddTrait
+              defect expression still shipped
+OK            Fix_FreedHousingNotice.lua:205
+              target  Lua/Buildings/Residence.lua Residence:RemoveResident
+              body matches the pin (Lua/Buildings/Residence.lua:119-126)
+OK            Fix_FreedHousingNotice.lua:207
+              target  Lua/Buildings/Residence.lua Residence:RemoveResident
+              defect expression still shipped
+OK            Fix_FreedHousingNotice.lua:212
+              target  Lua/Buildings/Residence.lua Residence:GetFreeSpace
+              body matches the pin (Lua/Buildings/Residence.lua:232-234)
+OK            Fix_FreedHousingNotice.lua:214
+              target  Lua/Buildings/Residence.lua Residence:GetFreeSpace
+              defect expression still shipped
+OK            Fix_FreedHousingNotice.lua:219
+              target  Lua/Units/Unit.lua Unit:EnterTransporter
+              body matches the pin (Lua/Units/Unit.lua:1292-1306)
+OK            Fix_FreedHousingNotice.lua:221
+              target  Lua/Units/Unit.lua Unit:EnterTransporter
+              defect expression still shipped
+OK            Fix_FreedHousingNotice.lua:226
+              target  Lua/Buildings/Residence.lua Residence:ColonistInteract
+              body matches the pin (Lua/Buildings/Residence.lua:330-354)
+OK            Fix_FreedHousingNotice.lua:228
+              target  Lua/Buildings/Residence.lua Residence:ColonistInteract
+              defect expression still shipped
+OK            Fix_GeneForging.lua:103
+              target  Lua/Units/Colonist.lua GetRareTraitChance
+              body matches the pin (Lua/Units/Colonist.lua:4398-4402)
+OK            Fix_GeneForging.lua:105
+              target  Lua/Units/Colonist.lua GetRareTraitChance
+              defect expression still shipped
+OK            Fix_GhostFarmOxygen.lua:29
+              target  Lua/Buildings/Farm.lua FarmBase:ApplyOxygenProductionMod
+              body matches the pin (Lua/Buildings/Farm.lua:634-644)
+OK            Fix_GhostFarmOxygen.lua:31
+              target  Lua/Buildings/Farm.lua FarmBase:ApplyOxygenProductionMod
+              defect expression still shipped
+OK            Fix_GraphConsumedCaption.lua:41
+              target  Lua/X/ColonyControlCenter.lua City:GetColonyStatsButtons
+              body matches the pin (Lua/X/ColonyControlCenter.lua:8-233)
+OK            Fix_GraphConsumedCaption.lua:43
+              target  Lua/X/ColonyControlCenter.lua City:GetColonyStatsButtons
+              defect expression still shipped
+OK            Fix_JumboCaveReinforcementWedge.lua:149
+              target  Lua/WasteRock.lua GetDroneApproachPos
+              body matches the pin (Lua/WasteRock.lua:328-331)
+OK            Fix_JumboCaveReinforcementWedge.lua:151
+              target  Lua/WasteRock.lua GetDroneApproachPos
+              defect expression still shipped
+OK            Fix_LakeEntombment.lua:31
+              target  Lua/Buildings/LandscapeLake.lua LandscapeLake:PlacePrefab
+              body matches the pin (Lua/Buildings/LandscapeLake.lua:270-345)
+OK            Fix_LakeEntombment.lua:35
+              target  Lua/Buildings/ConstructionSite.lua ConstructionSite:ScatterUnitsUnderneath
+              body matches the pin (Lua/Buildings/ConstructionSite.lua:1914-1933)
+OK            Fix_LakeEntombment.lua:37
+              target  Lua/Buildings/ConstructionSite.lua ConstructionSite:ScatterUnitsUnderneath
+              defect expression still shipped
+OK            Fix_LanderEmptyLaunch.lua:32
+              target  Lua/UniversalRocket.lua UniversalRocketBase:IsCargoReady
+              body matches the pin (Lua/UniversalRocket.lua:535-559)
+OK            Fix_LanderEmptyLaunch.lua:34
+              target  Lua/UniversalRocket.lua UniversalRocketBase:IsCargoReady
+              defect expression still shipped
+OK            Fix_LandscapeUnitFilter.lua:109
+              target  Lua/Landscape/Landscaping.lua LandscapeForEachUnit
+              body matches the pin (Lua/Landscape/Landscaping.lua:509-523)
+OK            Fix_LandscapeUnitFilter.lua:111
+              target  Lua/Landscape/Landscaping.lua LandscapeForEachUnit
+              defect expression still shipped
+OK            Fix_LandscapeUnitFilter.lua:115
+              target  Lua/Landscape/Landscaping.lua L505-507
+              body matches the pin (Lua/Landscape/Landscaping.lua:505-507)
+OK            Fix_LayoutTechLock.lua:59
+              target  Lua/Construction/LayoutConstruction.lua LayoutConstructionController:Activate
+              body matches the pin (Lua/Construction/LayoutConstruction.lua:313-388)
+OK            Fix_LayoutTechLock.lua:61
+              target  Lua/Construction/LayoutConstruction.lua LayoutConstructionController:Activate
+              defect expression still shipped
+OK            Fix_MirrorSphereSite.lua:33
+              target  Lua/Mysteries/MirrorSphere.lua MirrorSphereBuildingBase:StartAction
+              body matches the pin (Lua/Mysteries/MirrorSphere.lua:826-883)
+OK            Fix_MirrorSphereSite.lua:35
+              target  Lua/Mysteries/MirrorSphere.lua MirrorSphereBuildingBase:StartAction
+              defect expression still shipped
+OK            Fix_NightShiftWork.lua:43
+              target  Lua/Units/Colonist.lua Colonist:ShouldLeaveForWork
+              body matches the pin (Lua/Units/Colonist.lua:2194-2204)
+OK            Fix_NightShiftWork.lua:45
+              target  Lua/Units/Colonist.lua Colonist:ShouldLeaveForWork
+              defect expression still shipped
+OK            Fix_PayloadTemplateRefill.lua:97
+              target  Lua/CargoRequestNew.lua CargoRequestNew:RetrieveRequests
+              body matches the pin (Lua/CargoRequestNew.lua:194-243)
+OK            Fix_PayloadTemplateRefill.lua:99
+              target  Lua/CargoRequestNew.lua CargoRequestNew:RetrieveRequests
+              defect expression still shipped
+OK            Fix_PayloadTemplateRefill.lua:106
+              target  Lua/CargoRequestNew.lua resolve_loc_cargo_template
+              body matches the pin (Lua/CargoRequestNew.lua:169-192)
+OK            Fix_PayloadTemplateRefill.lua:110
+              target  Lua/CargoRequestNew.lua CargoRequestNew:Apply
+              body matches the pin (Lua/CargoRequestNew.lua:368-385)
+OK            Fix_RocketDroneChurn.lua:71
+              target  Lua/CargoTransporterNew.lua CargoTransporterNew:UpdateCargoResourceRequests
+              body matches the pin (Lua/CargoTransporterNew.lua:1430-1463)
+OK            Fix_RocketDroneChurn.lua:73
+              target  Lua/CargoTransporterNew.lua CargoTransporterNew:UpdateCargoResourceRequests
+              defect expression still shipped
+OK            Fix_RocketInteractGuard.lua:62
+              target  Lua/Units/RCTransport.lua RCTransport:CanInteractWithObject
+              body matches the pin (Lua/Units/RCTransport.lua:409-456)
+OK            Fix_RocketInteractGuard.lua:64
+              target  Lua/Units/RCTransport.lua RCTransport:CanInteractWithObject
+              defect expression still shipped
+OK            Fix_SaintBlessing.lua:4
+              target  Data/TraitPreset.lua
+              defect expression still shipped
+OK            Fix_SaintBlessing.lua:5
+              target  Lua/TraitPreset.lua TraitPreset:AddDomeColonistsModifier
+              body matches the pin (Lua/TraitPreset.lua:77-95)
+OK            Fix_ScanDowngrade.lua:42
+              target  Lua/Exploration.lua MapSector:Scan
+              body matches the pin (Lua/Exploration.lua:229-286)
+OK            Fix_ScanDowngrade.lua:44
+              target  Lua/Exploration.lua MapSector:Scan
+              defect expression still shipped
+OK            Fix_SequenceLatents.lua:87
+              target  Lua/Sequences/SA_Filters.lua SA_GetLabelToRegister:SAExec
+              body matches the pin (Lua/Sequences/SA_Filters.lua:30-40)
+OK            Fix_SequenceLatents.lua:89
+              target  Lua/Sequences/SA_Filters.lua SA_GetLabelToRegister:SAExec
+              defect expression still shipped
+OK            Fix_SequenceLatents.lua:92
+              target  Lua/Mysteries/Diggers.lua AlienDigger:GameInit
+              body matches the pin (Lua/Mysteries/Diggers.lua:87-96)
+OK            Fix_SequenceLatents.lua:94
+              target  Lua/Mysteries/Diggers.lua AlienDigger:GameInit
+              defect expression still shipped
+OK            Fix_ShelterReflex.lua:4
+              target  Lua/Units/Colonist.lua Colonist:Idle
+              body matches the pin (Lua/Units/Colonist.lua:2212-2389)
+OK            Fix_ShelterReflex.lua:5
+              target  Lua/Units/Colonist.lua Colonist:Idle
+              defect expression still shipped
+OK            Fix_ShuttleHubOffAvailable.lua:56
+              target  Lua/Buildings/ShuttleHub.lua IsLRTransportAvailable
+              body matches the pin (Lua/Buildings/ShuttleHub.lua:410-419)
+OK            Fix_ShuttleHubOffAvailable.lua:58
+              target  Lua/Buildings/ShuttleHub.lua IsLRTransportAvailable
+              defect expression still shipped
+OK            Fix_ShuttleTransportCache.lua:31
+              target  Lua/Units/Colonist.lua FindTransportationModeToCommunity
+              body matches the pin (Lua/Units/Colonist.lua:3170-3204)
+OK            Fix_ShuttleTransportCache.lua:33
+              target  Lua/Units/Colonist.lua FindTransportationModeToCommunity
+              defect expression still shipped
+OK            Fix_SilentHitMomentFX.lua:3
+              target  CommonLua/Classes/AnimMoment.lua CObject:GetAnimMoments
+              body matches the pin (CommonLua/Classes/AnimMoment.lua:35-37)
+OK            Fix_SilentHitMomentFX.lua:4
+              target  CommonLua/Classes/AnimMoment.lua CObject:GetAnimMoments
+              defect expression still shipped
+OK            Fix_SilentHitMomentFX.lua:5
+              target  Lua/Buildings/BaseBuilding.lua BaseBuilding:TrackMultipleHitMoments
+              body matches the pin (Lua/Buildings/BaseBuilding.lua:1037-1079)
+OK            Fix_SilentHitMomentFX.lua:6
+              target  Lua/Buildings/BaseBuilding.lua BaseBuilding:TrackMultipleHitMoments
+              defect expression still shipped
+OK            Fix_SilentHitMomentFX.lua:7
+              target  Lua/Buildings/WaterExtractor.lua WaterExtractorBase:OnSetWorking
+              body matches the pin (Lua/Buildings/WaterExtractor.lua:105-123)
+OK            Fix_SilentHitMomentFX.lua:8
+              target  Lua/Buildings/WaterExtractor.lua WaterExtractorBase:OnSetWorking
+              defect expression still shipped
+OK            Fix_SilentHitMomentFX.lua:9
+              target  Lua/Buildings/Building.lua TrackAllMoments
+              body matches the pin (Lua/Buildings/Building.lua:3364-3409)
+OK            Fix_SilentHitMomentFX.lua:10
+              target  Lua/Buildings/Building.lua TrackAllMoments
+              defect expression still shipped
+OK            Fix_SilentHitMomentFX.lua:12
+              target  Data/FXPreset/ActionFXSound.lua
+              defect expression still shipped
+OK            Fix_SilentHitMomentFX.lua:13
+              target  Data/FXPreset/ActionFXParticles.lua
+              defect expression still shipped
+OK            Fix_SinkholeIndestructible.lua:130
+              target  Lua/BuildingTemplate/Sinkhole.generated.lua L4-25
+              body matches the pin (Lua/BuildingTemplate/Sinkhole.generated.lua:4-25)
+OK            Fix_StaleReservations.lua:4
+              target  Lua/Buildings/Residence.lua Residence:GetFreeSpace
+              body matches the pin (Lua/Buildings/Residence.lua:232-234)
+OK            Fix_StaleReservations.lua:5
+              target  Lua/Buildings/Residence.lua Residence:GetFreeSpace
+              defect expression still shipped
+OK            Fix_StaleReservations.lua:6
+              target  Lua/Buildings/Residence.lua Residence:ReserveResidence
+              body matches the pin (Lua/Buildings/Residence.lua:290-307)
+OK            Fix_TrackConnectorPingPong.lua:120
+              target  Lua/TrainTransport.lua TrackConnectedObjBase:CreateConnectorElements
+              body matches the pin (Lua/TrainTransport.lua:116-156)
+OK            Fix_TrackConnectorPingPong.lua:122
+              target  Lua/TrainTransport.lua TrackConnectedObjBase:CreateConnectorElements
+              defect expression still shipped
+OK            Fix_TrackSalvageRefund.lua:95
+              target  Lua/Buildings/Track.lua TrackBase:GetRefundResources
+              body matches the pin (Lua/Buildings/Track.lua:286-307)
+OK            Fix_TrackSalvageRefund.lua:97
+              target  Lua/Buildings/Track.lua TrackBase:GetRefundResources
+              defect expression still shipped
+OK            Fix_TrackSalvageWipe.lua:90
+              target  Lua/Buildings/TrackElement.lua TrackGridElement:DemolishAndSplitTrack
+              body matches the pin (Lua/Buildings/TrackElement.lua:467-618)
+OK            Fix_TrackSalvageWipe.lua:92
+              target  Lua/Buildings/TrackElement.lua TrackGridElement:DemolishAndSplitTrack
+              defect expression still shipped
+OK            Fix_TrackTunnelPowerBridge.lua:88
+              target  Lua/Buildings/Track.lua OnMsg.StationsConnected
+              body matches the pin (Lua/Buildings/Track.lua:667-679)
+OK            Fix_TrackTunnelPowerBridge.lua:90
+              target  Lua/Buildings/Track.lua OnMsg.StationsConnected
+              defect expression still shipped
+OK            Fix_TradeRocketFuelRefresh.lua:45
+              target  Lua/UniversalRocket.lua UniversalRocketBase:OnModifiableValueChanged
+              body matches the pin (Lua/UniversalRocket.lua:1916-1920)
+OK            Fix_TradeRocketFuelRefresh.lua:47
+              target  Lua/UniversalRocket.lua UniversalRocketBase:OnModifiableValueChanged
+              defect expression still shipped
+OK            Fix_TradeRocketFuelRefresh.lua:49
+              target  Lua/CargoTransporterNew.lua CargoTransporterNew:UpdateCargoResourceRequests
+              body matches the pin (Lua/CargoTransporterNew.lua:1430-1463)
+OK            Fix_TrainCargoDumping.lua:112
+              target  Lua/Units/Train.lua Train:UnloadAll
+              body matches the pin (Lua/Units/Train.lua:779-805)
+OK            Fix_TrainCargoDumping.lua:114
+              target  Lua/Units/Train.lua Train:UnloadAll
+              defect expression still shipped
+OK            Fix_TrainWaitTime.lua:77
+              target  Lua/Units/ColonistTransport.lua Colonist:BoardVehicle
+              body matches the pin (Lua/Units/ColonistTransport.lua:614-639)
+OK            Fix_TrainWaitTime.lua:79
+              target  Lua/Units/ColonistTransport.lua Colonist:BoardVehicle
+              defect expression still shipped
+OK            Fix_TrainsToVoid.lua:33
+              target  Lua/Buildings/Station.lua OnMsg.BuildingDemolished
+              body matches the pin (Lua/Buildings/Station.lua:289-299)
+OK            Fix_TrainsToVoid.lua:35
+              target  Lua/Buildings/Station.lua OnMsg.BuildingDemolished
+              defect expression still shipped
+OK            Fix_VacuumWalks.lua:115
+              target  Lua/Units/Colonist.lua Colonist:TryToEmigrateToDome
+              body matches the pin (Lua/Units/Colonist.lua:1886-1983)
+OK            Fix_VacuumWalks.lua:117
+              target  Lua/Units/Colonist.lua Colonist:TryToEmigrateToDome
+              defect expression still shipped
+OK            Fix_WispRewards.lua:26
+              target  Lua/Mysteries/Fireflies.lua SetLightTrapMode
+              body matches the pin (Lua/Mysteries/Fireflies.lua:677-704)
+OK            Fix_WispRewards.lua:28
+              target  Lua/Mysteries/Fireflies.lua SetLightTrapMode
+              defect expression still shipped
+==============================================================================
+117 manifest row(s) over 45 stamped module(s); 2 module(s) carry no manifest.
+  2 NO-MANIFEST, 1 NO-DEFECT, 4 SRC-NONE, 112 OK
+A GREEN here is NOT a clearance: it sees a changed body, a vanished defect
+and a vanished target. It does NOT see semantics moving under a wrapper
+(class c), and it sees nothing at all for a NO-DEFECT or NO-MANIFEST module.

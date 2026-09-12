@@ -1,0 +1,478 @@
+{
+  "anchor": "8469ae453b3d6312128ab187f38305f62fa41b92",
+  "game": "1.1.0.403908",
+  "buildid": "24995074",
+  "source": "C:/Dev/SMR-SrcArchive/1.1.0.403908/Src",
+  "site_head": "a0616650b98acbb6b11dfb3ff6c0e8fa8fc44f30",
+  "fix_list_sha256": "02f7be66c4f1f0aecf2ec4bcf0584c591af1cdb67699232167ea18f5d6c0d651",
+  "inputs": {
+    "metadata.lua": "1f26d12086013fad3f75de25e8d7094ef91e42feff7dbd4d4e49d3bbad72814d",
+    "items.lua": "ae69745f535b6f87c788e899b9a81efbfd244e7a954231ae67ce02b0c504d1a7"
+  },
+  "modules": [
+    {
+      "module": "90_SaveSanitizer.lua",
+      "id": "SaveSanitizer",
+      "sha256": "f18c4e0f656126c7c41c9f0038e170c46ca24420b39ecc2d7dd8c698917098ad"
+    },
+    {
+      "module": "Fix_AnomalyCaveInMap.lua",
+      "id": "AnomalyCaveInMap",
+      "sha256": "46ad4b3cf37588c5a215b278c4e5192a7880949d9b0611411e696d4ef93e3abe"
+    },
+    {
+      "module": "Fix_ArrivalDeaths.lua",
+      "id": "ArrivalDeaths",
+      "sha256": "9d9365c50a176a2d57be1caa13da983a64f1fee15818ebccafcaa5116cbd1752"
+    },
+    {
+      "module": "Fix_BombardmentSpread.lua",
+      "id": "BombardmentSpread",
+      "sha256": "1264320926f2339f77f026801723f466e652ab361261a3f3cbcad46cafdec18c"
+    },
+    {
+      "module": "Fix_BrokenTrackSalvage.lua",
+      "id": "BrokenTrackSalvage",
+      "sha256": "f839edcd38669cd4e18f43856389340f52f73ed476a4374581de363c695a0201"
+    },
+    {
+      "module": "Fix_CrystalMysteryHang.lua",
+      "id": "CrystalMysteryHang",
+      "sha256": "40f676a3f5ee49cac59a1a5dc06d786352ab186a141cd1c9ffa7cbe93402693e"
+    },
+    {
+      "module": "Fix_DestroyedTunnels.lua",
+      "id": "DestroyedTunnels",
+      "sha256": "54ff8fa08ab22a0dc500134075934a75580047c600addf708cd3e645b7cdde8f"
+    },
+    {
+      "module": "Fix_DomeOverviewHighlight.lua",
+      "id": "DomeOverviewHighlight",
+      "sha256": "7cb2d38c2c0e39ad06b3a5cbab9935a3e8541bff467f8f5e0ab501503f90486c"
+    },
+    {
+      "module": "Fix_DroneTransportMinors.lua",
+      "id": "DroneTransportMinors",
+      "sha256": "371fd0652450eaaa5ca9434d7642af1b2ce37c37457939ccd92e555e8c6905e8"
+    },
+    {
+      "module": "Fix_DustSicknessBiorobots.lua",
+      "id": "DustSicknessBiorobots",
+      "sha256": "845c2e1b27aa3d80ddc6b9e6b3db1cac0128cd27db2198cc0025efeac34bc40b"
+    },
+    {
+      "module": "Fix_ExoticDepositSign.lua",
+      "id": "ExoticDepositSign",
+      "sha256": "4deeb3026468d8f617b9bfae5241e8dfb092c235ebc38bd8fb683df1f76f28b9"
+    },
+    {
+      "module": "Fix_ExtenderFlapChurn.lua",
+      "id": "ExtenderFlapChurn",
+      "sha256": "94a5c24337ffa04662f45b1fa1a25b8a0ba2e2c0cf8c29f93b4ce6221c6671c4"
+    },
+    {
+      "module": "Fix_FounderTraitNotification.lua",
+      "id": "FounderTraitNotification",
+      "sha256": "746c995f66c2f8b4357653a872ec44852fdd64a9a6200994cc23177793746976"
+    },
+    {
+      "module": "Fix_FreedHousingNotice.lua",
+      "id": "FreedHousingNotice",
+      "sha256": "86468802ed4de2f26a52d259e3b5fd264faf77038ddb658931f036ab5854b526"
+    },
+    {
+      "module": "Fix_GeneForging.lua",
+      "id": "GeneForging",
+      "sha256": "327222cf1cd64ebf35fce025cf2751b1afa59d8665bba84ce2b14d69aedfeae9"
+    },
+    {
+      "module": "Fix_GhostFarmOxygen.lua",
+      "id": "GhostFarmOxygen",
+      "sha256": "272bd1e84c2fd543f50e41ab38b5b8050d0bf69858a30eef72b4cd7c66e1b1d9"
+    },
+    {
+      "module": "Fix_GraphConsumedCaption.lua",
+      "id": "GraphConsumedCaption",
+      "sha256": "d70c70a76ed176cf0e0d241bdbadb989b34f3ebffe5cb5b7c60e2e14f6678f0f"
+    },
+    {
+      "module": "Fix_JumboCaveReinforcementWedge.lua",
+      "id": "JumboCaveReinforcementWedge",
+      "sha256": "1f01db6e900ea6cd0da06f2bdcff1282d014f3805cb1e1f3d54e799f2145576e"
+    },
+    {
+      "module": "Fix_LakeEntombment.lua",
+      "id": "LakeEntombment",
+      "sha256": "35bc9237b92f43803ad5b01d9bcea4b896881617ec8566fa88d2476d28991e1d"
+    },
+    {
+      "module": "Fix_LanderEmptyLaunch.lua",
+      "id": "LanderEmptyLaunch",
+      "sha256": "b1f06ffd889bb1ed2738d05755946fcb00962efd378d9fa1d414894d50ae23a6"
+    },
+    {
+      "module": "Fix_LandscapeUnitFilter.lua",
+      "id": "LandscapeUnitFilter",
+      "sha256": "fa652af525b48cdb98d724a1bb9c91e7e0e2c8271a14b3261b42d1619cdfb3e4"
+    },
+    {
+      "module": "Fix_LayoutTechLock.lua",
+      "id": "LayoutTechLock",
+      "sha256": "b89952744f452db50ec2ad04be35e31de6de18571949b0ecfe0312f0373923f2"
+    },
+    {
+      "module": "Fix_MirrorSphereSite.lua",
+      "id": "MirrorSphereSite",
+      "sha256": "9c560b616ad5b89d8268f332856aba81f7a80c40de1c579edb860e4a72eb5bc0"
+    },
+    {
+      "module": "Fix_NightShiftWork.lua",
+      "id": "NightShiftWork",
+      "sha256": "19f7a1800226f8ab066a072907d5387b697a3c7bd62703ec515d93d454e3b781"
+    },
+    {
+      "module": "Fix_PayloadTemplateRefill.lua",
+      "id": "PayloadTemplateRefill",
+      "sha256": "405819921449faa094193b0bc1b9ce29a59ab604347e2a008af61e69685eb189"
+    },
+    {
+      "module": "Fix_RocketDroneChurn.lua",
+      "id": "RocketDroneChurn",
+      "sha256": "5cc705627f42e16439095ec7b29a2b0131e29445c276a2baf452d2496573c8f2"
+    },
+    {
+      "module": "Fix_RocketInteractGuard.lua",
+      "id": "RocketInteractGuard",
+      "sha256": "70133819b35ec5d596d2ec686755c87e41cc32e8068ea948959bc70fdf4d884f"
+    },
+    {
+      "module": "Fix_SaintBlessing.lua",
+      "id": "SaintBlessing",
+      "sha256": "1b4e04679e886672030fe47c7c323e9afbfc10ec1a1866917348d63c572e63a5"
+    },
+    {
+      "module": "Fix_ScanDowngrade.lua",
+      "id": "ScanDowngrade",
+      "sha256": "27958169c559b0a309a2cedb87ae95d3e8cda649973c56a39ae29ec6a62cb564"
+    },
+    {
+      "module": "Fix_SequenceLatents.lua",
+      "id": "SequenceLatents",
+      "sha256": "7382e4b6fbd8dc24deeb23fb429850c189b13c5b8942307d095092f73415eef6"
+    },
+    {
+      "module": "Fix_ShelterReflex.lua",
+      "id": "ShelterReflex",
+      "sha256": "ae3c3f9a3f2aaf8be0d3ec709be7fec3f101036e063d0a6a96883313cd02abc4"
+    },
+    {
+      "module": "Fix_ShuttleHubOffAvailable.lua",
+      "id": "ShuttleHubOffAvailable",
+      "sha256": "4881bea2bf1a50bfd2429da716c939418db36c7e5f2cf9227630c39abfb8c725"
+    },
+    {
+      "module": "Fix_ShuttleTransportCache.lua",
+      "id": "ShuttleTransportCache",
+      "sha256": "ac350299e81b29d50d45feb5df787d0a1b2a72452c976c791eefa3eeaa6de4fd"
+    },
+    {
+      "module": "Fix_SilentHitMomentFX.lua",
+      "id": "SilentHitMomentFX",
+      "sha256": "1acd92c6b8a09bd4232407d665c029b981b282a974e5271bcb07a532055477ff"
+    },
+    {
+      "module": "Fix_SinkholeIndestructible.lua",
+      "id": "SinkholeIndestructible",
+      "sha256": "d1d748f0bf44ffd0cc1cd10d6c9ba60ff183582cff099ec428f4a8fc4dc3b727"
+    },
+    {
+      "module": "Fix_StaleReservations.lua",
+      "id": "StaleReservations",
+      "sha256": "eca21f4cd79eae1c2ae0af2a16be7fce3e8868a86fe058bccd433b8b61a1a21e"
+    },
+    {
+      "module": "Fix_TrackConnectorPingPong.lua",
+      "id": "TrackConnectorPingPong",
+      "sha256": "94148290a1ec610878bd8590812970b93753d1b30bfb24bf48547b3f05fef020"
+    },
+    {
+      "module": "Fix_TrackSalvageRefund.lua",
+      "id": "TrackSalvageRefund",
+      "sha256": "a1957b576e846a594cae7756d716a8f63e78bb11c8c10ab2874c7242ea10b934"
+    },
+    {
+      "module": "Fix_TrackSalvageWipe.lua",
+      "id": "TrackSalvageWipe",
+      "sha256": "62fa1c6ba2d961a3e68aa9acd29d18eae0cc671d2aa9c8ba1d971f031e2b7f96"
+    },
+    {
+      "module": "Fix_TrackTunnelPowerBridge.lua",
+      "id": "TrackTunnelPowerBridge",
+      "sha256": "b39db8721912956b9bcfcc7b73dbad3a62112276240b60ea02ce8cfc438826ef"
+    },
+    {
+      "module": "Fix_TradeRocketFuelRefresh.lua",
+      "id": "TradeRocketFuelRefresh",
+      "sha256": "720dfaafea5c970ad7f33de4a72425271dc62d1c9a42c0b498f71360fd42871d"
+    },
+    {
+      "module": "Fix_TrainCargoDumping.lua",
+      "id": "TrainCargoDumping",
+      "sha256": "1216a7fcfff558cf836dd6682d20620005b2ba6406ad2056d50107ad4edb37a8"
+    },
+    {
+      "module": "Fix_TrainsToVoid.lua",
+      "id": "TrainsToVoid",
+      "sha256": "63aef6dd6c235fb208e8b44a5c0e056608ccd291c28309fc7fbd373f2d17d9ec"
+    },
+    {
+      "module": "Fix_TrainWaitTime.lua",
+      "id": "TrainWaitTime",
+      "sha256": "140562b16f08741e12a9070996944c34529a7cb0aa840ce5444b6dd5237eb9e1"
+    },
+    {
+      "module": "Fix_VacuumWalks.lua",
+      "id": "VacuumWalks",
+      "sha256": "a05c14f891a856d2c98d61f47d241263eb3bdea48718e25dfaf0c3da7ff05948"
+    },
+    {
+      "module": "Fix_WispRewards.lua",
+      "id": "WispRewards",
+      "sha256": "ab08ebc20ffed4667e3e08ef6001f94cdfcd2a51062b55e3f423bd27f52fd7af"
+    }
+  ],
+  "boot_log": "docs/archive/logs/stillneeded_Mars.exe-20260912-00.25.42-6a91a190.log",
+  "boot_sha256": "fb36ba55fec6986c100d21ea736980c1e8e8ccbe29e59321d2d31b50a1490a56",
+  "runtime_status": {
+    "NightShiftWork": {
+      "status": "applied",
+      "reason": "",
+      "line": 77
+    },
+    "WispRewards": {
+      "status": "applied",
+      "reason": "",
+      "line": 78
+    },
+    "TrainsToVoid": {
+      "status": "applied",
+      "reason": "",
+      "line": 79
+    },
+    "LanderEmptyLaunch": {
+      "status": "applied",
+      "reason": "",
+      "line": 81
+    },
+    "ShelterReflex": {
+      "status": "applied",
+      "reason": "",
+      "line": 82
+    },
+    "BrokenTrackSalvage": {
+      "status": "applied",
+      "reason": "",
+      "line": 83
+    },
+    "TrackSalvageWipe": {
+      "status": "applied",
+      "reason": "",
+      "line": 84
+    },
+    "LakeEntombment": {
+      "status": "applied",
+      "reason": "",
+      "line": 85
+    },
+    "GhostFarmOxygen": {
+      "status": "applied",
+      "reason": "",
+      "line": 86
+    },
+    "RocketDroneChurn": {
+      "status": "applied",
+      "reason": "",
+      "line": 87
+    },
+    "TradeRocketFuelRefresh": {
+      "status": "applied",
+      "reason": "",
+      "line": 88
+    },
+    "ShuttleTransportCache": {
+      "status": "applied",
+      "reason": "",
+      "line": 89
+    },
+    "VacuumWalks": {
+      "status": "applied",
+      "reason": "",
+      "line": 91
+    },
+    "ArrivalDeaths": {
+      "status": "applied",
+      "reason": "",
+      "line": 92
+    },
+    "StaleReservations": {
+      "status": "applied",
+      "reason": "",
+      "line": 93
+    },
+    "CrystalMysteryHang": {
+      "status": "applied",
+      "reason": "",
+      "line": 94
+    },
+    "DomeOverviewHighlight": {
+      "status": "applied",
+      "reason": "",
+      "line": 95
+    },
+    "TrainCargoDumping": {
+      "status": "applied",
+      "reason": "",
+      "line": 96
+    },
+    "DestroyedTunnels": {
+      "status": "applied",
+      "reason": "",
+      "line": 97
+    },
+    "DustSicknessBiorobots": {
+      "status": "applied",
+      "reason": "",
+      "line": 98
+    },
+    "GeneForging": {
+      "status": "applied",
+      "reason": "",
+      "line": 99
+    },
+    "MirrorSphereSite": {
+      "status": "applied",
+      "reason": "",
+      "line": 100
+    },
+    "PayloadTemplateRefill": {
+      "status": "applied",
+      "reason": "",
+      "line": 102
+    },
+    "ShuttleHubOffAvailable": {
+      "status": "applied",
+      "reason": "",
+      "line": 103
+    },
+    "FreedHousingNotice": {
+      "status": "applied",
+      "reason": "",
+      "line": 104
+    },
+    "LandscapeUnitFilter": {
+      "status": "applied",
+      "reason": "",
+      "line": 105
+    },
+    "RocketInteractGuard": {
+      "status": "applied",
+      "reason": "",
+      "line": 107
+    },
+    "TrackConnectorPingPong": {
+      "status": "applied",
+      "reason": "",
+      "line": 108
+    },
+    "TrackTunnelPowerBridge": {
+      "status": "applied",
+      "reason": "",
+      "line": 109
+    },
+    "GraphConsumedCaption": {
+      "status": "applied",
+      "reason": "",
+      "line": 110
+    },
+    "TrainWaitTime": {
+      "status": "applied",
+      "reason": "",
+      "line": 111
+    },
+    "FounderTraitNotification": {
+      "status": "applied",
+      "reason": "",
+      "line": 113
+    },
+    "SequenceLatents": {
+      "status": "applied",
+      "reason": "",
+      "line": 114
+    },
+    "TrackSalvageRefund": {
+      "status": "applied",
+      "reason": "",
+      "line": 115
+    },
+    "LayoutTechLock": {
+      "status": "applied",
+      "reason": "",
+      "line": 116
+    },
+    "DroneTransportMinors": {
+      "status": "applied",
+      "reason": "",
+      "line": 117
+    },
+    "AnomalyCaveInMap": {
+      "status": "applied",
+      "reason": "",
+      "line": 118
+    },
+    "ScanDowngrade": {
+      "status": "applied",
+      "reason": "",
+      "line": 119
+    },
+    "BombardmentSpread": {
+      "status": "applied",
+      "reason": "",
+      "line": 120
+    },
+    "ExtenderFlapChurn": {
+      "status": "applied",
+      "reason": "",
+      "line": 122
+    },
+    "SaintBlessing": {
+      "status": "inactive",
+      "reason": "(no dome-colonists trait presets)",
+      "line": 141
+    },
+    "SinkholeIndestructible": {
+      "status": "applied",
+      "reason": "",
+      "line": 124
+    },
+    "ExoticDepositSign": {
+      "status": "applied",
+      "reason": "",
+      "line": 125
+    },
+    "JumboCaveReinforcementWedge": {
+      "status": "applied",
+      "reason": "",
+      "line": 126
+    },
+    "SilentHitMomentFX": {
+      "status": "applied",
+      "reason": "",
+      "line": 127
+    },
+    "SaveSanitizer": {
+      "status": "applied",
+      "reason": "",
+      "line": 129
+    }
+  }
+}
