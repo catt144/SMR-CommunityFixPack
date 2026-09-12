@@ -176,9 +176,10 @@ here** — read 162. None is release-blocking. What an agent could do has been d
    lax clause only ever forgave a not-PERMITTED one. **A storm-suspended hub never counted, before our fix or
    after**, so the sentence is false and no replacement is offered. Route in `bugs/F54.md` (09-12 section);
    `still-needed/WORDING_RULED.md` corrected so no later pass restores it. Owner confirms on **162 (a)**.
-2. **The ck144 (b) follow-up draft.** Its deletion at the v10 sweep is **FROZEN** pending **162 (b)**, which asks
-   the one question that decides it (did the 09-10 post say "still checking"?). ⛔ The sweep must not cut either
-   `SUPERSEDED` C74 draft until that is answered; both carry the freeze line.
+2. ✅ **The ck144 (b) follow-up draft — CUT 2026-09-12 on the owner's word (162 (b)).** They do not remember what
+   the 09-10 post said, so the posting condition was permanently unevaluable. Both `SUPERSEDED` C74 blocks are
+   **removed** from `docs/FIELD_REPORT_REPLIES.md` and logged in its cut table with a `git show` pointer.
+   ⛔ An **accepted loss, deliberately taken** — do not reconstruct the prose. Both leads survive in `bugs/C74.md`.
 3. **The C87 lake check — re-asked as 162 (c)**, no longer orphaned behind a closed ck147. Its `LAKECHK` console
    line gained a `NOCURSOR` guard (it threw on a nil controller). ⛔ **Do not repeat the claim that went with
    that edit:** I recorded the 09-11 spelling `map:GetHeight(x,y)` as witnessed nowhere and said the line would

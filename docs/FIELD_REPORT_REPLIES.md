@@ -71,65 +71,6 @@ the author.** A draft says *"hasn't been updated for the current build"*, never
 
 ---
 
-## Steam sounds thread — C74 / C77
-
-**The long sounds post** (drafted in conversation 2026-09-10, BEFORE the build)
-
-`STATUS: SUPERSEDED by ck144 (b) cleared 2026-09-12` · thread: Steam · subject: C74 + C77 · drafted 2026-09-10 · gate: ck144 (b) — discharged
-
-⛔ **Whether this went up was never answered, and now cannot be.** The owner cleared
-ck144 (b) on **2026-09-12** without saying which way; nothing has been inferred from
-that. The post is therefore neither recorded as posted nor live to post, and its
-"currently in testing" wording has gone stale across v7, v8 and v9.
-⚠️ **Convention note:** the four-token rule reserves `SUPERSEDED by <section>` for a
-later draft in this file, and no draft replaces this one. The token is used here to
-mean *dead, cut at the next release sweep*, because `HELD` is no longer true and
-`DRAFT` would say it is postable. Its content is preserved below and its two leads live
-in `agent/bugs/C74.md`. Say the word to bring it back as a `DRAFT`.
-✅ **FREEZE LIFTED 2026-09-12 — checklist 162 (b) RULED: the owner does not remember what the 09-10
-post said.** The condition can never be evaluated, so this can never go up. ⛔ **CUT IT AT THE v10 SWEEP**
-as this file's own rule requires. This is an **accepted loss, deliberately taken** — not an oversight, and
-not something for a later session to reconstruct. The two leads are safe in `agent/bugs/C74.md`.
-
-Its sections, so a follow-up can honour them:
-*Being restored* — the seven units (C74/C77), "currently in testing"; *Silent on purpose* — the
-drill Rare Metals skin (NASA, SpaceY, BlueSun, Brazil, Roscosmos, Japan, ISRO default) and the
-white CP3 MOXIE; *Can't fix* — the Metatron's 7 rotation sounds (never requested,
-`Metatron.lua:78`, `:86`) and extra Rare Metals hammer variants (`hit-moment3` never fires on a
-2-strike loop, `hit-moment4` is in no list — `reports/C74_SOUND_SWEEP.md`); *Haven't nailed down*
-— Metatron rotation dust (fixable, untimed), Hydroponic Farm lift/spray/rotate (empty
-`StartAnimThread`, possibly deliberate), and **"still checking"**: a Drone Hub effect while it
-builds drones and one sound on a misspelled animation name. ⚠️ If that last line went out, the
-two leads are OWED a check and a follow-up (below).
-
-⭐ **The two "haven't nailed down" leads now live in `agent/bugs/C74.md`** ("Two leads the fix
-does not cover", rehomed 2026-09-12). This file was their only home; it is no longer.
-⚠️ **"Currently in testing" has gone stale.** The seven units shipped in v7, and v8 and v9
-have both gone live since (2026-09-11, checklist 155). A follow-up must not repeat it.
-
-**Follow-up for "still checking"** (drafted 2026-09-10 late; both leads re-derived from the 1.1.0
-tree, `reports/C74_SOUND_SWEEP.md` "Unreachable even WITH presets")
-
-`STATUS: SUPERSEDED by ck144 (b) cleared 2026-09-12` · thread: Steam · subject: C74 · drafted 2026-09-10 · gate: ck144 (b) — discharged
-
-⛔ **Its posting condition can no longer be evaluated.** It was "post ONLY if the
-owner's posted text said 'still checking'", and the owner cleared ck144 (b) on
-**2026-09-12** without saying what the post said. Marked dead rather than guessed at;
-same convention note as the draft above. ⚠️ **Say the word and it becomes a live
-`DRAFT` again** — both leads are re-derived and recorded in `agent/bugs/C74.md`, so
-nothing is lost either way. No version number would be needed.
-✅ **FREEZE LIFTED 2026-09-12 — checklist 162 (b) RULED "don't remember".** Its posting condition cannot
-be evaluated, so it cannot go up. ⛔ **CUT AT THE v10 SWEEP.** The prose below is the only copy and it goes
-with it — an **accepted loss, deliberately taken**, recorded so nobody treats the deletion as a mistake.
-Both leads survive in `agent/bugs/C74.md`; only the written reply is lost.
-
-> Following up on the two I said I was still checking — neither turned out to be something you're missing. The Drone Hub effect was made for building drones, but nothing in the game ever plays it on a Drone Hub, and there is no moment it was ever tied to, so there is nothing to restore without making one up. The misspelled one is real: one digging sound on a version of the Concrete Extractor never starts because its name is spelled wrong. But the same digging loop is already playing through that part of the dig, so correcting the spelling would only play the same sound twice on top of itself. Nothing there is silent that should be making noise.
-
-⚠️ Desk-only (neither was ear-tested) — the post says nothing it would need an ear for. ⛔ Do not
-name the extractor's skin: which skin uses `ConcreteExtractorCP3Dome` was NOT route-checked.
-
----
-
 ## Field reports triaged 2026-09-11 (checklist 146 / 147 / 150 / 153)
 
 Source: `reports/FIELD_LEADS_2026-09-11.md`. ⛔ Desk reads unless a draft says otherwise.
@@ -460,5 +401,7 @@ warning but did not wait it out (`C83` §OBSERVED).
 | C74 and C83 replies | 2026-09-12 | POSTED with v7 (owner-stated 2026-09-12) |
 | The C88 prefab question to the developers | 2026-09-12 | POSTED 2026-09-11 and answered |
 | The 2026-09-11 C85 diagnostic draft | 2026-09-12 | SUPERSEDED by "Built for v10" reply 2 |
+| **The long C74/C77 sounds post** | 2026-09-12 | ⛔ **Cut on the owner's word, checklist 162 (b) — an ACCEPTED LOSS, not an oversight.** Whether it went up was never recorded and the owner does not remember, so it could be marked neither POSTED nor live. Its four sections and both leads live on in `agent/bugs/C74.md`; the prose is in git at `git show 5923eeb:docs/FIELD_REPORT_REPLIES.md`. ⛔ Do not reconstruct it |
+| **The C74 "still checking" follow-up** | 2026-09-12 | ⛔ **Cut on the owner's word, checklist 162 (b) — an ACCEPTED LOSS.** Its posting condition ("post only if the 09-10 post said *still checking*") became permanently unevaluable when ck144 (b) was cleared without recording what went up. Desk-only, never ear-tested, and stale on "currently in testing" since v7. Both findings survive in `agent/bugs/C74.md` — a fresh reply from them takes minutes if it is ever wanted. Prose in git at `git show 5923eeb:docs/FIELD_REPORT_REPLIES.md` |
 | The two GitHub timeline tables and the "context a fresh session needs" block | 2026-09-12 | folded into this record and into the three-line context above; the doctrine lives in `PUBLIC_SURFACE_SWEEP.md` §4 |
 | The "Owed, and where it is tracked" table | 2026-09-12 | fully derivable from the status lines; see the rule at the top |

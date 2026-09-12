@@ -208,10 +208,11 @@ completed tests move whole to
 > offered, because the two states the fix really does leave alone are the game's two
 > "exceptional circumstances" ones and no player would call either a dust storm.
 >
-> **(b) "DON'T REMEMBER" ⇒ THE DRAFT IS LET GO, DELIBERATELY.** The follow-up's posting condition
-> ("post only if your 09-10 post said *still checking*") can never be evaluated, so it cannot go up.
-> **The freeze is lifted: both `SUPERSEDED` C74 blocks are cut at the v10 release sweep as the file's
-> own rule requires.** ⛔ This is an accepted loss, not an oversight — it is being recorded as a
+> **(b) ✅ CUT — DONE 2026-09-12 on your word ("thats fine cut 162b").** The follow-up's posting
+> condition ("post only if your 09-10 post said *still checking*") can never be evaluated, so it could
+> never go up. **Both `SUPERSEDED` C74 blocks are REMOVED from `docs/FIELD_REPORT_REPLIES.md` now**
+> rather than left for the v10 sweep, and both are recorded in that file's "Cut from this file, and
+> why" table with the reason and a `git show` pointer to the prose. ⛔ This is an accepted loss, not an oversight — it is being recorded as a
 > decision so no later session treats the deletion as a mistake and tries to reconstruct the prose.
 > ✅ **Nothing of substance is lost:** both *leads* live in [C74](agent/bugs/C74.md) ("Two leads the
 > fix does not cover"), re-derived from the 1.1.0 tree. Only the written reply goes.
