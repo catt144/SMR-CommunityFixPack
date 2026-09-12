@@ -44,7 +44,7 @@ GREEN with it. Do not spend your first act on it, and do not re-propose eviction
 | `7d8c384` `42eab2a` | `FIELD_REPORT_REPLIES` purged to live drafts + posted record (C74 leads rehomed); ck144 (b) recorded |
 | `5c21f36` `6f5abaf` | Lookback: ck152 (c) CLOSED as DESIGN · `README.md` filed as a public surface · the 3 site files recorded · **F59 cost of ours** (§4) |
 | `ea91f19` | ⭐ **ck161** — the 09-08 "small positives" rule was 1.1.0-recovery triage and **EXPIRED with it**; corrected in 7 places, lesson = binding **rule 5a, `WORKFLOW.md:60`**. See §3c |
-| `7806c0a` | ⭐ **New one-off brief, NOT YET FIRED:** `prompts/VANILLA_DIFF_DISPOSITION.md`. See §3d |
+| `7806c0a` → `cc3edf2` `7e445d3` `4b6beda` | **FIRED and landed 09-12** (peer `smr-bugfixpack-b2`): `reports/VANILLA_DIFF_DISPOSITION.md`, the brief `git rm`'d, `WORKFLOW.md` gained a BINDING after-patch section, `FIX_POLICY` §2b a pointer. Owner calls = **ck163**. See §3d |
 | last one | ck160 closed to the release lane; this refresh; §3d added |
 
 **Closed today, do not re-ask:** ck133(1)(3)(5)(6) · ck144 (b) · ck147 · ck150 (a) · ck151 (a)/(d) · ck152 (all) · ck153 ·
@@ -86,6 +86,8 @@ RULE**. ⛔ **Re-derive every count once, carry none:** modules ±the retirement
 | ck | what |
 |---|---|
 | **158** | the three-leg sitting above — **the v10 gate** |
+| **163** | the vanilla diff, four calls: (a) the 25 source-only candidates as GROUPS — **closes ck137/138/140/141/142 in one ruling** · (b) one bounded desk pass on the 29-of-51 overlap · (c) the instruments' schedule · (d) the two NO-MANIFEST modules. Nothing needs play |
+| **162** | the four §4 loose ends: three one-word calls + the 2-minute lake check. See §4 |
 | **157** | (a) post the C89 reporter reply · (b) route the developer note — ⚠️ that report came through **our** channel, so the route is the fix list the devs plan from, or the Building Codes thread |
 | **151** | (b) which sections of `MIGRATION_DEV_REPORT.md` may be sent · (c) which checks join the ck144 (a) sitting |
 | **144 (a)** | the owed post-upload boot, ONE boot, now on v8 (STATE's OWED line carries the recipe list) |
@@ -113,8 +115,11 @@ stash or checkout there.** Recorded in `RELEASE_OUTBOX.md` (Held) and `PUBLIC_SU
 - **`prompts/SELFCHECK_PILOT.md`** was authored for ck133(1), never fired, now unreachable. Marked "do not fire"; **removal
   recommended to the owner, not done.** The two `SELFCHECK_PROMISE_*` reports stay — reports are not consumed by rulings.
 - **Desk NEXT, unclaimed:** `prompts/DLC_DEEP_CHECK.md` (bounded; framing in its banner).
-- ⭐ **UNFIRED, ready to take: `prompts/VANILLA_DIFF_DISPOSITION.md`** (`7806c0a`) — the only live one-off in the prompts
-  root that is not a grave. Tool-neutral, read-mostly, one report + a checklist item. See §3d.
+- ⭐ **C80's status flip is OWED and UNOWNED** (raised by the disposition report, ck163 (a)): the entry says **REFUTED**,
+  its index row still says `cand`. The brief that found it was read-only, so nobody landed it. Cheap; defect truth is
+  wrong until someone does. ⚠️ Check `git status docs/agent/bugs/` before `--regen`.
+- **`90_SaveSanitizer.lua` + `00_Core.lua` carry no `SRC:`/`DEFECT:` manifest** — the two `NO-MANIFEST` modules, now named.
+  `00_Core` patches nothing (a declaration closes it); the Sanitizer is the real one. Owner's word = **ck163 (d)**, then minutes of work.
 
 ### 3c · The hotfix-3 batch — 135, 137, 138, 140, 141, 142
 
@@ -149,25 +154,28 @@ does not rest on the expired rule.** The owner has seen it; **nothing here is ru
 - ⛔ **142 is explicitly STILL OPEN** — 161 removed the blocker, it did **not** rule 142. The owner has not named anything
   for a hotfix-3 list, and "accept file-and-watch for all" is also unsaid.
 
-### 3d · The four vanilla instruments, and a live procedure gap
+### 3d · The four vanilla instruments — RESOLVED 2026-09-12, do not re-open
 
-**Two pairs, two subjects — routinely conflated, including by the session that wrote this** (source read, 2026-09-12):
-`treediff.py` + `presetdiff.py` were written **inside vanillahunt as its instruments** (*what did the GAME change
-1.0.7 → 1.1.0?*, and they produced the C-candidates); `bodycheck.py` + `sigcheck.py` came from **hotfix 2 /
-`reports/PACK_1_1_0_REVERIFICATION.md`** (*what moved under the code WE patch?*).
+✅ **The procedure gap this section existed to flag is CLOSED.** `WORKFLOW.md` now carries a **BINDING**
+"After a game patch — the source-diff instruments" section (`:156`, adopted 09-12), promoted out of
+`PACK_1_1_0_REVERIFICATION.md` §4 rec 5 where it had sat as a recommendation inside a report; `FIX_POLICY` §2b points at
+it as the canonical copy. So the card's *"Every game patch is read against the pack as well…"* now rests on a written
+procedure rather than a track record. The whole disposition is `reports/VANILLA_DIFF_DISPOSITION.md`; the owner's four
+calls are **ck163**, and (c) asks whether anything else joins the after-patch step.
+⚠️ **Note when relaying (c): the procedure is already IN FORCE, not awaiting the ruling** — it is an agent-side
+authoring doc, so it landed ahead of the word and is reversible. The owner is confirming, not choosing from scratch.
 
-⚠️ **The gap: `WORKFLOW.md`'s two after-every-patch rules (`:139` fpk verification, `:974` five-shape enumeration) name
-NONE of the four.** The one procedural sentence — *"the update-day checklist becomes: run three tools, read one table,
-write the REMOVE/FIX prompts from it"* — is a **recommendation inside a report** (`PACK_1_1_0_REVERIFICATION.md` §4
-rec 5), never promoted. Meanwhile the card reworded today (`2e919b5`) publishes *"Every game patch is read against the
-pack as well…"* — a **recurring-process claim currently resting on a track record.**
+⛔ **Do not re-derive the two-pairs distinction** — it is in the report. In one line: `treediff`/`presetdiff` ask *what
+did the GAME change?* (vanillahunt's instruments, they produced the C-candidates, now **on trigger, never retired**);
+`bodycheck`/`sigcheck` ask *what moved under the code WE patch?* (hotfix 2's, now **every patch**).
+⭐ The step that matters most is free and irreversible if missed: **archive `ModTools\Src` BEFORE an update or a Steam
+branch switch** — 09-08 overwrote it unasked.
 
-⛔ **`prompts/VANILLA_DIFF_DISPOSITION.md` is what resolves this — DO NOT SOLVE IT TWICE.** It carries all three owner
-questions (what we do with the diff, how far we trust it, where the information should live) and it is unfired.
+⚠️ **One stale pointer this section used to carry, corrected:** the five-shape enumeration is `WORKFLOW.md:1059`,
+**not `:974`** — the new section pushed everything below `:156` down by ~90 lines. `:60` (rule 5a) and `:139` (fpk
+verification) are unmoved. Re-check any `WORKFLOW.md` line number written before 09-12.
 
-**Open thread it also names:** `bodycheck` reports **2 NO-MANIFEST modules** against `FIX_POLICY` §2b (*every module
-carries `SRC:` + `DEFECT:` headers or it does not ship*) — **unnamed and unexamined**; the brief asks for them to be
-named and classified as violation or exemption. Re-confirmed at exit 0, 2026-09-12.
+**Still open from it:** the **C80 status flip** and the **two NO-MANIFEST modules**, both in §3b above.
 
 ---
 
