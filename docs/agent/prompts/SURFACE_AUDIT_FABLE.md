@@ -85,16 +85,32 @@ puts F31 on the edge of retirement, and the public row currently tells players a
 stopped. Settle it:
 1. Read `bugs/F31.md` first. Was the stop ever **observed** (a save, a log, a report),
    or was it derived? Name the artefact or say there is none.
-2. On **both** trees: walk the eight story steps that ask for a cave-in on the
-   underground map by name. Under the "No Underground and Asteroids" rule, is that
-   step reachable at all (the rule's own gating of the anomaly/Buried Wonder
-   sequences), and if reached, what does the shipped code do with a missing map —
-   error and halt the sequence, or skip? Quote the lines.
-3. If the step is unreachable under the rule on 1.1.0 **and** 1.0.7, the row claims a
-   symptom nobody could have had on either branch → recommend **RETIRE** (module out
-   under H-10, row and headline off, counts re-derived).
-4. If reachable on one branch only, say which, and what a player there would see.
-5. If a guard with a real player-visible reach survives, write the plain row for it
+2. ⭐ **The owner's lead, confirmed 09-12 (`smr-bugfixpack-d0`) — start from it:** on
+   1.1.0 the "No Asteroids and Underground" rule is **`Obsolete = true`**
+   (`Data/GameRuleDef.lua:55-62` @1.1.0; the 1.0.7 definition has no such flag), and
+   `Lua/GameRules.lua:71` @1.1.0 says obsolete rules survive only "still active in
+   loaded games" — which 1.0.7 saves cannot be (`EF-079`). So **no 1.1.0 game can run
+   under that rule**, and the missing-map half of F31 has lost its only known route.
+   Confirm the generic `ForEachPreset` Obsolete skip in `CommonLua` and that the
+   new-game rules screen builds from it; then check the **other** route the engine
+   itself names: `Lua/AgentPlayTest.lua:4` @1.1.0 says the underground map is absent
+   "with the NoUndergroundAndAsteroids rule **or a non-Surface map**". What is a
+   non-Surface map on 1.1.0, can a player start on one, and can an anomaly/Buried
+   Wonder sequence run there?
+3. **The other half of F31 is not the missing map at all** (read the entry): eight
+   story steps pass the global `UndergroundMap` where every sibling action uses the
+   sequence-local `map` (`UndergroundAnomalies.generated.lua:240`, the three Jumbo
+   Cave files, Cave of Wonders `:430`). On which maps can those sequences run on
+   1.1.0? If only on the underground map itself, the global and the local are the
+   same object and the "wrong-map rubble" half is unreachable too. If any can run
+   elsewhere, name the map and what the player sees.
+4. Walk the eight call sites on **both** trees and quote what `TriggerCaveIn` does with
+   `false` (`CaveInRubble.lua:95-101` @1.0.7 per the entry; re-cite @1.1.0).
+5. If neither half is reachable on 1.1.0, the row claims a symptom nobody can have on
+   the live branch → recommend **RETIRE** (module out under H-10, row and headline
+   off, counts re-derived); state separately whether 1.0.7 players under the rule
+   ever could have hit it (the frozen v5 build keeps the module regardless).
+6. If a guard with a real player-visible reach survives, write the plain row for it
    in the voice rule and say what the headline should be, if any.
 Do not soften an unconfirmed sentence into a different invented symptom.
 

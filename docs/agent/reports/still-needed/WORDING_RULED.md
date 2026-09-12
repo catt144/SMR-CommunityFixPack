@@ -124,9 +124,13 @@ lines quoted change; everything else in the row stays.
   drop the rest, which the new After line now says.
 
 ### 13 · F31 cave-in on a missing map (`:561`) — HELD for the deep audit
-- If the audit confirms the No Underground route cannot stop a story on either
-  branch and nothing player-visible remains: **retire** (row and headline off,
-  module out under H-10), and the headline count drops with it.
+- Owner's lead, confirmed from source 09-12: the "No Asteroids and Underground" rule
+  is **`Obsolete = true`** on 1.1.0 (`Data/GameRuleDef.lua:55-62`; not on 1.0.7), so
+  the row's own scenario ("a game created with the No Underground and Asteroids
+  rule") cannot be created on the live branch. The audit settles the other route
+  (a non-Surface map) and the wrong-map half.
+- If the audit confirms nothing player-visible remains on 1.1.0: **retire** (row and
+  headline off, module out under H-10), and the headline count drops with it.
 - If a guard with a real player-visible reach survives: the row is rewritten plain
   after the audit names that reach, and the headline stays or goes on that basis.
 

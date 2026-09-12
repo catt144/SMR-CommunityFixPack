@@ -46,7 +46,8 @@ completed tests move whole to
 >
 > **Item 13 (cave-in on a missing map) — sent to a deep audit, as you asked.** The Fable brief is
 > `agent/prompts/SURFACE_AUDIT_FABLE.md`: it re-derives both retirements, digs F31 to the bottom on both game
-> versions (was the stop ever observed; can the step even run under the No Underground rule), checks every ruled
+> versions (was the stop ever observed; **your lead checks out: the No Underground rule is marked obsolete on 1.1.0,
+> so that route is closed on the live game** — the audit settles the remaining routes), checks every ruled
 > sentence against the code, and has your standing licence to dig into anything it thinks is closer to retirement
 > than Codex thought. It touches no public surface. **Fire it in a fresh Fable session.** After its report: the
 > release lane applies the batch as v10, you upload, paste if needed, and run the site job once.
