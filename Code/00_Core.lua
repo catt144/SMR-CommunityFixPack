@@ -1,8 +1,10 @@
 -- Relaunched Fix Pack — core registry.
 --
 -- Every fix lives in its own Code/Fix_*.lua file and registers here. Design goals:
---   * Mod-compatible: fixes prefer wrapping/chaining originals over replacement,
---     so other mods that hook the same functions keep working.
+--   * Mod-compatible where the bug allows: a fix chains the original where the
+--     defect can be hooked, so another mod that hooks the same function keeps
+--     working; where the defect sits mid-function it copies a corrected body
+--     instead (FIX_POLICY §1.5), and those are the ones most likely to clash.
 --   * Individually disableable: another mod (or the console) can set
 --     SMRFixPack_Disabled["<FixId>"] = true BEFORE our code loads to veto a fix.
 --   * Fail-safe: a fix that finds the game code in an unexpected state (e.g. a
@@ -381,7 +383,7 @@ function SMRFixPack.DataPatch(id, opts)
 			log("%s: FAILED to patch data: %s", id, tostring(err))
 		end
 		-- Write the memo back on the SAME table SMRFixPack lives on, which is the
-		-- one thing here that survives a Lua reload (:17). Latch-only, never
+		-- one thing here that survives a Lua reload (:19). Latch-only, never
 		-- cleared: "we have edited this data in this process" cannot become false
 		-- while the process lives.
 		if ctx.ever_changed then SMRFixPack.data_edited[id] = true end
@@ -491,7 +493,7 @@ function SMRFixPack.Register(id, def)
 	local entry = { title = def.title, status = "pending", detail = "" }
 	-- ⛔ 2026-08-17, MEASURED AT THE UPLOAD SITTING: the append below used to be
 	-- unconditional, and `SMRFixPack` itself is deliberately preserved across a
-	-- Lua reload (`rawget(_G, ...) or {...}`, :17). So every `ReloadLua` re-ran
+	-- Lua reload (`rawget(_G, ...) or {...}`, :19). So every `ReloadLua` re-ran
 	-- every Register and pushed a SECOND copy of each id into `order`, while
 	-- `fixes[id]` was replaced in place — one module, two order entries pointing
 	-- at one shared entry. Everything that walks `order` then double-counted:
@@ -632,12 +634,23 @@ CreateRealTimeThread(function()
 	if #suspects == 0 then return end
 	local list = table.concat(suspects, ", ")
 	log("update report: %d fix(es) deactivated over a game-code change: %s", #suspects, list)
+	-- ck39 (owner ruling 2026-09-12): the log line above runs on every script
+	-- reload; the BOX shows at most once per session. `SMRFixPack` is deliberately
+	-- preserved across a Lua reload (:19), so the flag is preserved with it.
+	if SMRFixPack.update_dialog_shown then return end
 	local wait_message = rawget(_G, "WaitMessage")
 	if type(wait_message) == "function" then
+		SMRFixPack.update_dialog_shown = true
+		-- ck41: name the fixes the way the fix list names them, not by module id.
+		local titles = {}
+		for i, id in ipairs(suspects) do
+			local f = SMRFixPack.fixes[id]
+			titles[i] = (f and f.title ~= "" and f.title) or id
+		end
 		wait_message(nil,
 			Untranslated("Relaunched Fix Pack"),
 			Untranslated(string.format(
-				"%d of this pack's fixes found that the game code they patch has changed — usually after a game update — and switched themselves off for safety.\n\nFixes that cannot detect such changes may still need attention: if the game was recently updated, check for a new version of the Relaunched Fix Pack.\n\nSwitched off: %s", #suspects, list)))
+				"%d of this pack's fixes did not recognise the game code they repair, and switched themselves off. A fix that switches itself off does nothing at all: the game behaves as it would without it.\n\nMost often a game update has moved what the fix was written for. It can also be a fault in this pack, or another mod changing the same code. Whichever it is, the repair comes in a new version of the Relaunched Fix Pack.\n\nSwitched off:\n· %s", #suspects, table.concat(titles, "\n· "))))
 	end
 end)
 

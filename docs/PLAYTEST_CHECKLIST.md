@@ -1876,7 +1876,17 @@ Original question, kept as asked: C74, the Rare Metals Extractor's hammer (and t
 > the old behaviour behind a flag — ⛔ two extractors that can disagree, exactly
 > what `luafn.py`'s own header forbids.
 
-### 2026-09-10 — 134: the vanilla diff hunt is authored as a chain of FIVE links; assign the models, then fire link 01 when convenient. Nothing here needs the keyboard.
+### ✅ 2026-09-10 — 134 CLOSED 09-12 as overtaken: the models were assigned, the chain ran end to end, and its audit closed it on 09-10. **Nothing is owed from you.**
+
+> **Closed 2026-09-12 on your "if it's overtaken close it", after reading the chain's own manifest
+> rather than a status line.** Every row in `agent/prompts/vanillahunt/README.md` is struck through
+> and marked DONE: **01** (Opus) · **02** (Opus) · **03** + its three splits **03b/03c/03d** · **04**
+> (Codex Sol Ultra, the assignment you made on 09-10) · **99** (Fable). The terminal audit returned
+> **SOUND WITH STATED GAPS** and is the authority — `agent/reports/vanillahunt/HUNT_AUDIT.md`; its
+> results are already carried in `agent/STATE.md` (12 P2s re-derived, 6 hold, 5 weakened, C80
+> refuted, C82 filed) and its hotfix-3 question is item **142**, which is a separate live item.
+> ⇒ The decision this item asked for — assign the models — was made and executed. There is nothing
+> left to assign. *(The original brief is kept below.)*
 
 > **What exists now:** `docs/agent/prompts/vanillahunt/` — 5 links + a README
 > manifest, written from your `VANILLA_DIFF_HUNT.md` brief (consumed) and
@@ -3179,7 +3189,7 @@ Original question, kept as asked: C74, the Rare Metals Extractor's hammer (and t
 > the instrument we lean on most, and this is exactly the class of problem it cannot see. That is the honest
 > reason the patch notes do not claim 1.1.0 compatibility.
 
-### 2026-09-08 — ITEMS 98–101 OPEN: the game shipped **1.1.0 + the first DLC**, and the rig auto-updated
+### 2026-09-08 — ITEMS 98–101: the game shipped **1.1.0 + the first DLC**, and the rig auto-updated. **99, 100 and 101 all CLOSED 09-12 as overtaken; 98's rig half stays open (⛔ Steam = ONE branch at a time).**
 
 > *Services & Science* (1.1.0, Steam build 24995074) and the paid DLC *Feeding the Future* both
 > landed 2026-09-08. Full reading: `docs/agent/reports/GAME_1_1_0_IMPACT.md`; facts `EF-075`
@@ -3376,7 +3386,21 @@ Original question, kept as asked: C74, the Rare Metals Extractor's hammer (and t
 > want one before the audit: add the dead method to its `Require` list so it self-disables instead of
 > installing a body that throws.
 
-99. **The six modules that now switch themselves off — what do you want them to be?** They are
+99. ✅ **CLOSED 2026-09-12 as overtaken — all six are gone from the pack.** On your "if it's
+    overtaken close it". Verified in the commit and on disk, not from a note: **`2dc1dbe`**
+    (hotfix 2 link 02, 2026-09-08) deletes all six by name — `Fix_TouristSatisfaction`,
+    `Fix_LowStorageWarning`, `Fix_GridGlobalStorage`, `Fix_RainsDeadlock`,
+    `Fix_AsteroidLanderAvailable`, `Fix_DroneUnreachableForever` — and **none of the six is in
+    `Code/` today**. The disposition rule this item asked for was answered in practice by option
+    **(b)+(c)**, module by module, under the item-98 DELETE ruling. The three modules that were
+    re-seamed rather than dropped were re-armed on their 1.1.0 bodies by link 04b, 2026-09-09:
+    `Fix_LandscapeUnitFilter` `799f145`, `Fix_TrainCargoDumping` (F46) `3d4c933`,
+    `Fix_VacuumWalks` `7a401f1` — all three present in `Code/` and carrying their branch guards.
+    ⛔ The item's own warning still binds and is not discharged by this closure: **"its target is
+    gone" is NOT "the defect is gone"** — a deleted module is not a repaired game.
+    *(The original ask is kept below.)*
+
+    **The six modules that now switch themselves off — what do you want them to be?** They are
     `Fix_TouristSatisfaction` (F09), `Fix_LowStorageWarning` (F12), `Fix_GridGlobalStorage` (F22),
     `Fix_RainsDeadlock` (F81), `Fix_AsteroidLanderAvailable` (F94), `Fix_DroneUnreachableForever`
     (F55/F57). Each declares a symbol 1.1.0 deleted, so `Require` declines and the fix does not
@@ -3389,7 +3413,19 @@ Original question, kept as asked: C74, the Rare Metals Extractor's hammer (and t
     obsolete; **(c)** re-seam them as they are re-derived. This is a "defect or not" call, so it
     is yours under `FIX_POLICY` §4a, not an agent's.
 
-100. **Do we say anything to players yet?** The pack is live at v5 on both portals and every
+100. ✅ **CLOSED 2026-09-12 as overtaken — the message went out with v6, and we did not decide to
+     send it.** On your "if it's overtaken close it". The recommendation here was (a), say nothing;
+     what actually happened is that the hotfix-2 upload carried the substance of (b) anyway,
+     because the card is rewritten from `metadata.lua` on every upload. From the 2026-09-09 v6
+     receipt block above: the Steam description auto-filled with the recounted headline and **the
+     1.0.7 section** (ck118's line, pointing 1.0.7 players at the frozen build), the v6 note went
+     on the Change Notes tab, the Paradox card auto-filled with the same body, and **the site
+     republished with both "built against" lines reading 1.1.0.403908**. The live card still
+     carries that section today (`metadata.lua`, "STILL PLAYING ON GAME VERSION 1.0.7?").
+     ⇒ A player looking at either listing can now see where the pack stands on 1.1.0. The question
+     "do we say anything yet" has no live answer left. *(The original options are kept below.)*
+
+     **Do we say anything to players yet?** The pack is live at v5 on both portals and every
      player who auto-updated is now running it on 1.1.0. `EF-077`: we clear 1.1.0's mod floor by
      **exactly zero** (`ModMinLuaRevision = 350453`, our `lua_revision = 350453`, the test is a
      strict `<`), so no incompatibility prompt fires and saves do not mark us obsolete. So there
@@ -3400,7 +3436,18 @@ Original question, kept as asked: C74, the Rare Metals Extractor's hammer (and t
      yet. ⛔ Note that **any** listing edit overwrites both page bodies from `metadata.lua` and
      needs the §3 paste backups.
 
-101. **The re-verification chain — accept the shape or reshape it.** Re-checking 82 shipped fixes
+101. ✅ **CLOSED 2026-09-12 as overtaken — a chain ran, in a different shape, and it finished.** On
+     your "if it's overtaken close it". The C1–C5 shape proposed here was never built. What ran was
+     `agent/prompts/hotfix2/` — links 01, 02, 03, 04, 04b, 05, 06, 07, 08, 99, 99a, 99b, 100 — and
+     **every row in that README's table is struck through and marked DONE**, which I read off the
+     file rather than taking on trust. Its terminal audit returned **SHIP WITH CHANGES** and is the
+     authority: `agent/reports/HOTFIX_2_AUDIT.md`. The work this item wanted done is done
+     (36 modules removed, 10 re-copied, the store card and site recounted, the Test Kit rebuilt),
+     so accepting or reshaping the proposal cannot change anything.
+     ⛔ **It is not a clean bill.** The audit's own gaps stand, and the post-upload sitting it owes
+     is still open — see the ⛔ owed rows in `agent/STATE.md`. *(The original proposal is below.)*
+
+     **The re-verification chain — accept the shape or reshape it.** Re-checking 82 shipped fixes
      across two wholesale system rewrites (research and services) is far past the ~2-session line,
      so `CHAIN_METHOD.md` says it should be a self-consuming prompt chain with a terminal backward
      QA. Proposed in the report §5: **C1** baseline + the live `ListFixes()` read → **C2** the six
@@ -3915,7 +3962,7 @@ rock-clearing jobs) crashes the same way, not just levelling.
     our code, and `FIX_POLICY` §3a's posture is that it should not. Filed for a
     look after the upload; nothing about it blocks anything.
 
-### ⭐ 2026-08-24 — F107 IS REPAIRED. One module, one wrap, doccheck green — and one thing to check I read you right.
+### ✅ 2026-08-24 — F107 IS REPAIRED. **76 CLOSED 09-12 as overtaken — the module was deleted by `2dc1dbe`, so there is nothing left to revert. Nothing is owed from you.**
 
 76. ✅ **BUILT on your item-74 (a), same session — `Fix_LandscapeCostRefresh`
     now installs ONE chained wrap on `ConstructionSite` instead of three on the
@@ -3965,6 +4012,13 @@ rock-clearing jobs) crashes the same way, not just levelling.
     ❓ **One thing still open: I read your "I'd take (a)" as the ruling and
     built it.** If that was a leaning rather than a decision, say so — it is one
     `git revert`, though the tree is now measured green on it.
+    ✅ **CLOSED 2026-09-12 as overtaken — there is nothing left to revert.** On
+    your "if it's overtaken close it". `Code/Fix_LandscapeCostRefresh.lua` was
+    **deleted** by `2dc1dbe` (hotfix 2 link 02, 2026-09-08) under the item-98
+    DELETE ruling — verified in that commit's own name-status (`D
+    Code/Fix_LandscapeCostRefresh.lua`) and by the file's absence from `Code/`
+    today. Whether the item-74 (a) build was a ruling or a leaning no longer
+    changes any byte we ship.
 
 74. ✅ **MEASURED AND ANSWERED 2026-08-24 — and the answer is the opposite of
     the question. It cost you nothing: the run was unattended.**
@@ -5065,9 +5119,39 @@ rock-clearing jobs) crashes the same way, not just levelling.
     them** — one asked for a number the game never prints, one had arithmetic
     that would have sent a runner hunting a module that does not exist.
 
-### ⚠️ 2026-08-19 — two calls from the last sweep link. Neither blocks launch; one is a wording call, one is a "when", and my recommendation on the second is *not yet*.
+### ✅ 2026-08-19 — two calls from the last sweep link. **50 RULED + APPLIED 09-12 (soften the chain-vs-copy promise) · 51 CLOSED 09-12 as overtaken, with the unrun leg re-filed as a takeable. Nothing is owed from you.**
 
-50. ⚠️ **Two sentences we publish promise other mods more than the code delivers.
+50. ✅ **RULED 2026-09-12 — soften it. APPLIED the same session, words only.** Your word. The
+    sentence that promised an outcome for other mods now says what the code does, and the README's
+    half-sentence says the same thing:
+
+    * **`Code/00_Core.lua:4-7`** (was `:4-5`) — the design goal now reads
+      *"Mod-compatible where the bug allows: a fix chains the original where the defect can be
+      hooked, so another mod that hooks the same function keeps working; where the defect sits
+      mid-function it copies a corrected body instead (FIX_POLICY §1.5), and those are the ones
+      most likely to clash."* The old sentence was true at the chaining sites and false at the
+      copying ones; the new one describes both, so it stays true whatever the split is.
+      ⚠️ **The 66 / 42-chain / 24-copy count in this item is the 2026-08-19 number, taken at 80
+      modules. Hotfix 2 removed 36 and re-copied 10; nobody has re-derived the split since, and
+      this ruling did not.** Do not quote 42/24 as current.
+    * **`README.md`, "For modders"** — *"chain rather than clobber"* → *"chain the original where
+      the bug can be hooked and copy a corrected body where it cannot"*.
+    * ⛔ **`metadata.lua` untouched.** The store card already carries the honest version (it was
+      rewritten for hotfix 2): *"It hooks the game's functions and calls the original where it can
+      … Where a bug sits in the middle of a function and cannot be hooked, the fix copies the
+      corrected body instead — those are the ones most likely to clash."* Nothing to change there,
+      and no upload is triggered by this.
+    * ⛔ **No code behaviour changed** — comment and documentation text only; `parsecheck` 50/50,
+      doccheck GREEN.
+
+    ⚠️ **The veto-snippet rider below is NOT part of this ruling and is still open.** The README's
+    *"setting a fix's identifier in that global table"* still reads as an invitation to write a
+    list, and its example still names **`DustDevilSpawnGate`, a module `2dc1dbe` deleted** — the
+    site's `for-modders` page was re-pointed at a live id by hotfix-2 link 100, and this README was
+    missed. One word plus one half-sentence; say the word and it goes in with the next doc pass.
+    *(The original finding is kept below.)*
+
+    ⚠️ **Two sentences we publish promise other mods more than the code delivers.
     Your call on the wording; nothing else changes.**
 
     **What we say.** The README's "For modders" section says the pack will
@@ -5111,7 +5195,23 @@ rock-clearing jobs) crashes the same way, not just levelling.
     directly under that sentence is correct; the sentence above it is what misleads.
     One clarifying half-sentence fixes it.
 
-51. ⚠️ **There is one test worth running that I could not run, and my
+51. ✅ **THE TIMING DECISION IS CLOSED 2026-09-12 as overtaken — but ⚠️ THE LEG
+    ITSELF WAS NEVER RUN, and it is re-filed so it cannot be lost.** On your
+    "if it's overtaken close it". Every blocker this item names is gone, and I
+    checked each rather than quoting the list: **run B ran 2026-08-19 and scored
+    10 of 10** (item 52's block, "run B scored **10/10**"), **the pack launched
+    2026-08-20** (item 71, both portal ids committed), and **the opt-in tick is
+    done** (item 105, 09-08, 9 modules applying). There is no ordering left to
+    decide, so the *"when"* has nothing to answer.
+    ⛔ **What is NOT closed is the measurement.** No session has ever watched two
+    independently-written patches stacked on one function. ⚠️ **Ordinary play is
+    coverage-by-default, not this leg** — both mods have been loaded together for
+    months (the 08-12 both-mods-loaded rule), which is why nothing has *broken*,
+    but nobody has ever measured the stacked function. Re-filed as a takeable:
+    **"Rider — the both-packs stacked leg"** under *Cross-cutting*, at the end of
+    this file. *(The original reasoning is kept below.)*
+
+    ⚠️ **There is one test worth running that I could not run, and my
     recommendation is to run it AFTER launch, not before. Your call on the timing.**
 
     **The test.** Every claim this pack makes about getting along with other mods
@@ -5389,9 +5489,21 @@ rock-clearing jobs) crashes the same way, not just levelling.
     stores — but it is genuinely a shrug either way and you lose nothing by
     deciding when you get there.
 
-### ⛔ 2026-08-19 — THE VERIFICATION LAUNCH RAN: the mod is running clean in a real game. Nothing blocks launch. Two things need your hands, and one of them is a mess I made.
+### ✅ 2026-08-19 — THE VERIFICATION LAUNCH RAN: the mod is running clean in a real game. **43 CLOSED 09-12 as overtaken — the opt-in pack is enabled again. Nothing is owed from you.**
 
-43. ⛔ **I broke the Opt-In pack's enable state, and I could not put it back.**
+43. ✅ **CLOSED 2026-09-12 as overtaken — the opt-in pack is back on.** On your
+    "if it's overtaken close it". The evidence is an observation, not a note:
+    item **105** (2026-09-08) records the opt-in pack **ENABLED and applying, 9
+    modules including `DroneOverhaul`**, read off a running 1.1.0 game — and
+    says in its own words that ck43's "OFF" record is stale. The minute below
+    was spent at some point between 08-19 and 09-08; nothing is owed.
+    ⛔ **Not closed on `H-08`.** The hazard still stands exactly as written —
+    `EF-055` records that pulling a junction DID cost the enable in August, and
+    a folder-for-folder swap under the same id is the only shape that keeps it.
+    This item closes because the enable came back, not because the risk did not.
+    *(The original report is kept below.)*
+
+    ⛔ **I broke the Opt-In pack's enable state, and I could not put it back.**
     Telling you straight, the way the autosave deletion was told to you.
 
     To run the suite "as a player will have it" I needed the Opt-In pack absent.
@@ -5504,9 +5616,51 @@ rock-clearing jobs) crashes the same way, not just levelling.
     three numbers are adjacent constants in `tools/doccheck.py` — retuning
     is one edit whenever you want.
 
-### ⭐ 2026-08-18 — SWEEP CHAIN, LINK 4 REPORTED. Nothing blocks launch. No code changed. One wording call, and one bigger question about the chain itself.
+### ✅ 2026-08-18 — SWEEP CHAIN, LINK 4 REPORTED. **41 RULED + BUILT 09-12: the stand-down box names the fixes and stops blaming the game. Nothing is owed from you.**
 
-41. ⭐ **Link 4 — lens 4 of 8, "player experience".** The question: **what does a
+41. ✅ **RULED + BUILT 2026-09-12 — the box names the fixes, and it no longer blames the game for
+    our own failures.** Your word: *"same shape as 39"*. Both halves went in as one text change,
+    **7 lines in `Code/00_Core.lua`**, in the same thread as 39. ⛔ No new module, `items.lua` and
+    `metadata.lua` untouched, apply path untouched.
+
+    **(1) Readable names.** The list now maps each suspect id through
+    `SMRFixPack.fixes[id].title` — the same plain-English title the fix list uses — and falls back
+    to the id if a title is ever missing. The **log line keeps the ids**, so the diagnostic is
+    unchanged. Titles go one per line behind a `·` bullet rather than comma-joined.
+    ✅ **Route-checked, because this is the console surface:** the game's message box puts its
+    description inside an `XScrollArea` with a scrollbar and RightThumbUp/Down gamepad bindings
+    (`Lua/XDef/StdMessageDialog.generated.lua:166-209`), so a long list scrolls on a controller.
+    Titles average 69 characters, so no cap was added.
+
+    **(2) The wording.** Old: *"…found that the game code they patch has changed — usually after a
+    game update — and switched themselves off for safety … if the game was recently updated, check
+    for a new version."* New, in full:
+
+    > **%d of this pack's fixes did not recognise the game code they repair, and switched
+    > themselves off. A fix that switches itself off does nothing at all: the game behaves as it
+    > would without it.**
+    >
+    > **Most often a game update has moved what the fix was written for. It can also be a fault in
+    > this pack, or another mod changing the same code. Whichever it is, the repair comes in a new
+    > version of the Relaunched Fix Pack.**
+    >
+    > **Switched off:**
+    > **· <the fix titles, one per line>**
+
+    It names our own fault and another mod as live possibilities instead of pointing at Paradox,
+    and it tells the player what a switched-off fix actually costs them. The "check for a new
+    version" advice survives, because it is still where the repair arrives.
+
+    ⛔ **CORRECTION: "this box has never once appeared in any of the 57 recorded sessions" is no
+    longer true.** It fired on the 1.1.0 boots of 2026-09-08 — `update report:` lines in six
+    archived logs, up to **14** ids in one — and you asked to be exempted from it that same day
+    (items 107–108). ⇒ Both defects this item describes have been in front of a player: the
+    internal ids were on screen, and the message blamed a game update for a set that included
+    modules our own re-verification had not yet re-seamed. ⚠️ **The new text has not been seen in
+    play** — no boot since the change — so it is `built`, nothing stronger; the cheap check is one
+    boot with any fix inactive. *(The original finding is kept below.)*
+
+    ⭐ **Link 4 — lens 4 of 8, "player experience".** The question: **what does a
     player actually SEE and READ?** The answer should be *nothing*, and it very
     nearly is — the pack raises **no** notification, popup, banner or voice line
     of its own. Everything it can put on screen is a box the game already owns.
@@ -5567,9 +5721,17 @@ rock-clearing jobs) crashes the same way, not just levelling.
     that I do **not** think one more link closes it. Each link is unattended and
     costs you only the moment you spend kicking it off.
 
-### ⭐ 2026-08-18 — SWEEP CHAIN, LINK 3 REPORTED. Nothing blocks launch. No code changed. One call for you, and it is a small one.
+### ✅ 2026-08-18 — SWEEP CHAIN, LINK 3 REPORTED. **40 RULED 09-12: `smr_shuttles` keeps its name, accepted as recorded. Nothing is owed from you.**
 
-40. ⭐ **Link 3 — lens 3 of 8, "save & exit".** The question: **not "is each fix
+40. ✅ **RULED 2026-09-12 — option (a), accept as recorded. No rename.** Your word. The
+    `smr_shuttles` flag keeps its name; no shipped byte changes. Your 2026-08-01 hard rule is
+    satisfied the way you wrote it: the place has a **written** decision, with reasons, in
+    `agent/reports/L3_SAVE_FOOTPRINT.md`. ⚠️ **The consequence is the one option (b) would have
+    bought:** a sweep keyed on the `SMRFixPack_` prefix will keep missing this one flag, so any
+    future save-footprint pass has to add it by hand. That is the accepted cost, not an oversight.
+    *(The original finding is kept below.)*
+
+    ⭐ **Link 3 — lens 3 of 8, "save & exit".** The question: **not "is each fix
     save-safe" — every module was checked alone — but "what does the whole pack
     put into one savegame, and what happens to all of it at once when someone
     removes the mod?"** Nobody had added them up.
@@ -5635,9 +5797,29 @@ rock-clearing jobs) crashes the same way, not just levelling.
     own 237 built-in save repairs; the other 13 are unchecked for interference.
     And nobody has ever actually walked an uninstall, let alone a reinstall.
 
-### ⭐ 2026-08-18 — SWEEP CHAIN, LINK 2 REPORTED. Nothing blocks launch. One real defect found and fixed; one small call for you, and it can wait.
+### ✅ 2026-08-18 — SWEEP CHAIN, LINK 2 REPORTED. **39 RULED + BUILT 09-12: the stand-down box shows once per session. Nothing is owed from you.**
 
-39. ⭐ **Link 2 — lens 2 of 8, "lifecycle & idempotency".** The question: **what
+39. ✅ **RULED + BUILT 2026-09-12 — the box shows once per session; the log line still writes every
+    time.** Your word: *"this can be fixed if its cheap, but its also minor."* It was cheap — **4
+    lines in `Code/00_Core.lua`**, inside the C1 report thread only. A flag on the `SMRFixPack`
+    table (which is deliberately preserved across a Lua reload, `:19`) is checked after the log
+    line and set before the box opens. ⛔ No new module, `items.lua` and `metadata.lua` untouched,
+    and the `DataPatch` / `run_apply` / apply-verdict seam is not touched — this is the reporting
+    surface, not the apply path.
+
+    ⛔ **CORRECTION, and it matters more than the fix.** This item said the dialog *"has never once
+    appeared in any of the 58 logs we have archived"*, and item 41 said the same. **That is no
+    longer true, and the re-fire this item predicted has been OBSERVED — twice, in real sessions:**
+    * `archive/logs/first110_*.log` (2026-09-08, the first 1.1.0 boot): **two** `Reloading done`
+      events, each followed by its own `update report: 11 fix(es) deactivated…` line.
+    * `archive/sit0817_MarsDebug*.log` (2026-08-17, your upload sitting): the same shape.
+
+    On 2026-09-08 you asked to be exempted from that very box (items 107–108), so it was on screen,
+    naming up to **14** internal module ids. ⇒ The re-fire is measured, not predicted. ⚠️ **What is
+    still unexercised is the FIX**: nobody has booted the game since this change, so the guard
+    itself has no in-play evidence and no status word above `built`. *(The original is kept below.)*
+
+    ⭐ **Link 2 — lens 2 of 8, "lifecycle & idempotency".** The question: **what
     happens the second time our code runs in one session?** The game re-runs every
     mod's scripts whenever you close the Mod Manager after changing anything — so
     "the second time" is not a corner case, it is what happens to any player who
@@ -8673,3 +8855,30 @@ multi-display geometry alongside.
 These are candidate observations, not release gates or approvals to add fixes.
 The terminal hunt audit owns any hotfix recommendation. C59/C62 have no
 independently established player recipe and do not get artificial play legs.
+
+### Rider — the both-packs stacked leg (re-filed from item 51, 2026-09-12) · Status: unrun
+
+**What it measures:** the one thing this project has never watched — **two
+independently written patches stacked on the same function**, live. Every
+compatibility claim the pack makes is derived from reading code. The only
+second mod we may legitimately use is our own opt-in pack, which patches
+functions the fix pack also patches.
+
+⚠️ **Ordinary play does NOT cover this.** Both mods have been loaded together
+for months (the 2026-08-12 both-mods-loaded rule) and nothing has broken — that
+is coverage-by-default, and it is why the leg keeps not being missed. It is not
+the measurement: nobody has ever read what the stacked function actually does.
+
+**Why it is takeable now (item 51's blockers are all gone):** run B scored 10/10
+on 2026-08-19, the pack launched 2026-08-20, and the opt-in pack is enabled and
+applying again (item 105, 9 modules, 2026-09-08).
+
+⛔ **Re-derive the overlap before running it.** Item 51's "two of the same
+functions" was counted at 80 fix-pack modules and 8 opt-in ones; the pack is now
+49 modules and the opt-in pack has 9. The overlap set has NOT been recounted —
+if it is now empty, the leg is vacuous and the finding is that, not a pass.
+
+**Shape:** unattended, both mods enabled, ordinary boot. Read which wrapper runs
+first on each shared function, whether both run, and whether either loses a
+return value. `SMRFixPack.ListFixes()` on both packs is the census. Nothing here
+is a release gate — it is information, by the owner's own 2026-08-19 ruling.

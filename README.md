@@ -63,10 +63,11 @@ a log, [open an issue](https://github.com/catt144/SMR-CommunityFixPack/issues)
 ## For modders
 
 See [docs/agent/FIX_POLICY.md](docs/agent/FIX_POLICY.md) for the house rules:
-patch the smallest thing that fixes the bug, chain rather than clobber,
-additive message handlers, fail safe rather than fail clever. Every fix
-inspects the code it is about to patch and stands down with a logged reason if
-a game update changed its shape.
+patch the smallest thing that fixes the bug, chain the original where the bug
+can be hooked and copy a corrected body where it cannot, additive message
+handlers, fail safe rather than fail clever. Every fix inspects the code it is
+about to patch and stands down with a logged reason if a game update changed
+its shape.
 
 `SMRFixPack_Disabled` is the veto surface. Setting a fix's identifier in that
 global table **before the fix pack loads** vetoes the fix — the pack registers

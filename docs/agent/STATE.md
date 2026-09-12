@@ -114,18 +114,20 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 - CLOSED 09-12: **150** (dev reply POSTED, majority of A+B) · **147** · **144** · **149** (by v8). **148** DEFERRED (skip, chain not started) · **153** RULED post it.
 - **132** SKIP 09-12: warn stays 12288, over it since 09-11. **C90** shape RULED 09-12 — apply-success guards in Saint + Sinkhole only, NOT the shared core,
   ⛔ never gate on `entry.status == "active"`; NOT BUILT.
-- 98 rig half only (⛔ Steam = ONE branch at a time, owner 09-08) · 99 disposition of the self-disabled ·
-  100 say anything to players yet (rec no) · 101 accept the re-verification chain shape.
+- 98 rig half only (⛔ Steam = ONE branch at a time, owner 09-08). **99/100/101 CLOSED 09-12, overtaken**: six modules
+  deleted `2dc1dbe` (3 re-seamed 04b), v6's card carried the 1.1.0/1.0.7 note, hotfix2 chain ran + closed (`HOTFIX_2_AUDIT.md`).
 - 112 DEFERRED 09-09 · **125** RULED+LANDED 09-09: F66 guard yields to `force` (desk-controlled, untested); wrapper re-read → 99.
 - **130 RULED 09-09**: Saint heal SHIPS UNEXERCISED — condition is historical, unforgeable (`EF-080` override yields
   `restored 0`); additive-only and cannot throw (`Lua/TraitPreset.lua:77-95` no throwing path, `WhenActive` is a gate not
   a trap). ⛔ Its kit probe PASSes vacuously with no domed Saint — NOT coverage. Field reports are the detector.
 - ✅ **131** RULED promote + LANDED 09-09 late (`tools/desk_*.py`) · **133** six
   self-check-promise decisions (`reports/SELFCHECK_PROMISE_COMBINED.md` §7), routed 09-09 · **134** assign the vanillahunt
-  chain's models (5 links; rec 03 + 99 Fable), routed 09-10.
-- 73 blame surface — harden or not · 76 confirm (a) was a ruling not a leaning · 53 harden now or in 1.0.1
-  (rec 1.0.1) · 51 both-packs leg timing (rec after launch) · 50 chain-vs-replace wording · 47 two modder-page
-  wordings · 43 opt-in pack re-tick · 41 dialog wording + sweep cap 5→8 · 40 `smr_shuttles` name · 39 dialog re-fire.
+  chain's models — **CLOSED 09-12, overtaken** (all links struck, `vanillahunt/HUNT_AUDIT.md`).
+- STILL OPEN: 73 blame surface · 53 harden now or in 1.0.1 (rec 1.0.1) · 47 two modder-page wordings.
+- BATCH 2 RULED 09-12: **76**/**43**/**51** overtaken (⚠ 51's leg RE-FILED **UNRUN**, Cross-cutting rider; ⛔ 43 NOT closed on
+  `H-08`, which stands) · **40** `smr_shuttles` accepted as recorded · **50** softened in `00_Core.lua:4-7` + README ·
+  **39**+**41** BUILT into v10 (box once/session, fix titles not ids, no game-blame). ⛔ The box HAS fired in play
+  (09-08, 14 ids, ck107); the NEW text is UNEXERCISED. ⛔ 50's 42-chain/24-copy count is 08-19 at 80 modules, NOT re-derived.
 
 ## Build state — `python tools/doccheck.py --emit-counts`, never hand-typed
 ```
