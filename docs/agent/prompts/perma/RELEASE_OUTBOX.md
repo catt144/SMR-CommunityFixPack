@@ -108,6 +108,14 @@ the attended A/B is checklist 158. Entry: `bugs/C88.md`.
 
 ### ⛔ Notes for whoever runs `RELEASE.md` on this batch
 
+⚠️ **A fourth module changed in v10 and it has NO public row — do not go looking for one.**
+`Code/Fix_StaleReservations.lua` gained a per-colonist `pcall` on its daily sweep (hardening queue
+row 3, owner ruling ck168, 2026-09-12). It is a **hardening, not a repair**: no player-visible
+behaviour changes on the happy path, the F58 fix-list row is unchanged, and **no count moves**.
+⛔ Do not add it to the fix list, the card or the site. It belongs in the change note only if the
+release pass carries one at that level of detail. `items.lua` and `metadata.lua` are untouched (no
+module added, renamed or dropped — H-10 does not fire).
+
 - **Re-derive every count.** These three are **+3** on the fix count, but the Held
   section above retires F37, F43 (+F118 rider) and — per
   `reports/SURFACE_AUDIT_2026-09-12.md` — possibly **F31**, so the net is not +3.

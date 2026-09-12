@@ -37,7 +37,10 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   Desk `prompts/DLC_DEEP_CHECK.md` (`HUNT_AUDIT.md` §8).
   ⭐ FR-1 TEMP WORKAROUND MOD LIVE 09-11 (Steam 3799500849 / PDX 158711; FINDINGS §11–§12). ALL FR-1 work → `prompts/perma/LINUX_DISPATCH.md`.
   Field: 3 working (one 10xx), 1 failing (GTX 1070, log requested). Chain `prompts/fixtoggles/` (ck148, DEFERRED 09-12).
-  Owner OWES: ck151 (b)/(c) · ck144 (a) v7 boot · ck98 (1.0.7 branch) · hardening row 3.
+  Owner OWES: ck144 (a) boot · ck151 (b) ONLY (dev-report scope; ck165 lets you defer it).
+  ✅ ck168 09-12: **ck98 RULED — baseline MOVES TO 1.1.0**, no branch install (source archive answers desk A/B; Steam = one branch; `EF-079`).
+  ⛔ Old entries KEEP their version stamp — never re-point a citation. Hardening row 3 BUILT into v10 (per-colonist `pcall`, F58 entry).
+  ck151 (c) RULED: F52/F54/C83 join the 144 (a) boot IF the loaded colony already has those layouts — else SKIP BY NAME.
   ✅ ck167 09-12: opt-in items 84/85/89-97 OFFLOADED to `SMR-OptInPack/docs/DECISIONS_OWED.md` (verbatim, ⚠️ all pre-1.1.0, unverified).
   83 (SHARED TestKit) + 86 (EF-ids are OURS, in force) + 88 (fix-pack feature, rides ck148) STAY. No fact needed rehoming — all 4 already ours.
   ✅ ck166 09-12: 133 (2) DECLINE, exception is PROPOSE-only · 133 (4) `LuaRevision` = label, NEVER a guard (118 unweakened).

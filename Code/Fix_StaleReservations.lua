@@ -115,6 +115,58 @@ SMRFixPack.Register("StaleReservations", {
 	end,
 })
 
+-- One slot of the daily sweep, lifted out of the loop below so it can be
+-- pcall'd per colonist. Returns true when it released the slot.
+--
+-- HARDENING (row 3 of the 99_TERMINAL_AUDIT queue, built 2026-09-12 on owner
+-- ruling ck168). The loop below used to call straight into this body with no
+-- guard, so ONE throw abandoned every remaining Residence for that sol -- and
+-- kept doing so every sol, while SMRFixPack.ListFixes() still reported the
+-- module `active`. ⛔ The trigger is NOT another mod: it is a colonist or
+-- residence a corrupt save left in a shape these reads do not expect, which is
+-- exactly the player who cannot be asked to reproduce anything. Donor shape is
+-- the F48 pass in `90_SaveSanitizer.lua` -- per-item pcall, count the raises,
+-- name the object in the log, keep going.
+-- ⚠️ Honest limit, per `EF-008`: `pcall` catches a genuine runtime error. It does
+-- NOT catch an `assert()` in shipped code, because asserts do not unwind in this
+-- engine -- they report and execution continues. This guard bounds the throw
+-- case, which is the one the audit raised; it cannot bound that one.
+local function sweep_one_slot(residence, reserved, i, now, timeout)
+	local colonist = reserved[i]
+	local stale
+	if not IsValid(colonist) then
+		stale = true
+	elseif colonist.reserved_residence ~= residence then
+		stale = true -- the two sides disagree; the slot is orphaned
+	elseif colonist:IsDying() then
+		stale = true
+	elseif colonist.expedition_residence then
+		-- FIX (1.1.0, F-2): a colonist away on an expedition holds their
+		-- home DELIBERATELY (Colonist.lua:5003-5005 re-takes it through the
+		-- very method we wrap), the residence panel promises they will
+		-- return to it, and a round trip routinely outlasts the lock this
+		-- sweep reuses. Never let the age branch below cancel that — and
+		-- cancelling would not just free the slot, it would wipe
+		-- expedition_residence itself (Residence.lua:394-396). The three
+		-- branches ABOVE are deliberately left to fire: an invalid,
+		-- desynced or dying colonist is not coming back, and releasing the
+		-- slot is right for them whether they were on an expedition or not.
+	else
+		local since = colonist.SMRFixPack_reserved_at
+		if not since then
+			-- pre-existing reservation from an older save: start its clock now
+			colonist.SMRFixPack_reserved_at = now
+		elseif now - since >= timeout then
+			stale = true
+		end
+	end
+	if stale then
+		residence:CancelResidenceReservation(colonist)
+		return true
+	end
+	return false
+end
+
 -- Daily sweep. Additive handler: the shipped OnMsg.NewDay in Residence.lua:567
 -- keeps running untouched.
 OnMsg.NewDay = SMRFixPack.WhenActive("StaleReservations", function()
@@ -123,40 +175,18 @@ OnMsg.NewDay = SMRFixPack.WhenActive("StaleReservations", function()
 	if not timeout then return end
 
 	local now = GameTime()
-	local released = 0
+	local released, raised = 0, 0
 	for _, residence in ipairs(MainCity.labels.Residence or empty_table) do
 		local reserved = residence.reserved
 		for i = #(reserved or empty_table), 1, -1 do
-			local colonist = reserved[i]
-			local stale
-			if not IsValid(colonist) then
-				stale = true
-			elseif colonist.reserved_residence ~= residence then
-				stale = true -- the two sides disagree; the slot is orphaned
-			elseif colonist:IsDying() then
-				stale = true
-			elseif colonist.expedition_residence then
-				-- FIX (1.1.0, F-2): a colonist away on an expedition holds their
-				-- home DELIBERATELY (Colonist.lua:5003-5005 re-takes it through the
-				-- very method we wrap), the residence panel promises they will
-				-- return to it, and a round trip routinely outlasts the lock this
-				-- sweep reuses. Never let the age branch below cancel that — and
-				-- cancelling would not just free the slot, it would wipe
-				-- expedition_residence itself (Residence.lua:394-396). The three
-				-- branches ABOVE are deliberately left to fire: an invalid,
-				-- desynced or dying colonist is not coming back, and releasing the
-				-- slot is right for them whether they were on an expedition or not.
-			else
-				local since = colonist.SMRFixPack_reserved_at
-				if not since then
-					-- pre-existing reservation from an older save: start its clock now
-					colonist.SMRFixPack_reserved_at = now
-				elseif now - since >= timeout then
-					stale = true
-				end
-			end
-			if stale then
-				residence:CancelResidenceReservation(colonist)
+			-- ⛔ Per COLONIST, not per residence: a residence-level guard would
+			-- still abandon the rest of that residence's list on one bad slot.
+			local ok, result = pcall(sweep_one_slot, residence, reserved, i, now, timeout)
+			if not ok then
+				raised = raised + 1
+				SMRFixPack.Log("StaleReservations: sweep raised on Residence#%s slot %d: %s — that slot is left alone and the sweep continues",
+					tostring(rawget(residence, "handle")), i, tostring(result))
+			elseif result then
 				released = released + 1
 			end
 		end
@@ -164,5 +194,11 @@ OnMsg.NewDay = SMRFixPack.WhenActive("StaleReservations", function()
 
 	if released > 0 then
 		SMRFixPack.Log("StaleReservations: released %d stale housing reservation(s)", released)
+	end
+	-- ⛔ Printed whenever it is non-zero and never folded into the line above: a
+	-- raise means this sol's sweep was INCOMPLETE, which is a different fact from
+	-- "nothing was stale", and the two must not read the same in a log.
+	if raised > 0 then
+		SMRFixPack.Log("StaleReservations: %d slot(s) raised and were skipped this sol — the sweep did not complete; send the lines above", raised)
 	end
 end)

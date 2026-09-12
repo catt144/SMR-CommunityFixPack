@@ -29,6 +29,65 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### ✅ 2026-09-12 — 168 RULED BY YOU (batch 2): **98 → baseline moves to 1.1.0 · hardening row 3 → BUILT into v10 · 151 (c) → the three cheap checks join the owed boot.** ⏳ **151 (b) came back as a question and is answered below — the call is still yours.**
+
+> **(a) 98 — THE BASELINE MOVES TO 1.1.0. 1.0.7 is history.** ⛔ No branch install, no re-download.
+> ⚠️ **The item's own framing was out of date and that is why it looked harder than it is:** it said a
+> branch install was *"the only way to tell '1.1.0 changed this' from 'we were wrong'"*. That stopped
+> being true when `C:\Dev\SMR-SrcArchive.0.7.396349\Src` was archived — **four such questions were
+> settled from it on 2026-09-12 alone** (Station's paren, `Tracks.lua`'s body, `Residence`'s parents,
+> Farm's removed parent). What the archive cannot give is a **runnable** 1.0.7, and the price of one is
+> steep: Steam serves **one branch at a time**, so the 1.1.0 install goes away while switched, and
+> `EF-079` means the entire fixture library is branch-locked anyway.
+> ✅ **This also aligns the records with a ruling you already made:** ck151 (e), *1.0.7 STAYS FROZEN,
+> work targets 1.1.0*. 1.0.7 players keep the frozen `v5-game-1.0.7` GitHub build (ck118).
+> ⇒ **Every re-verification is now a 1.1.0 derivation.** ⛔ Existing entries are NOT re-pointed — an
+> entry records a defect in the version it names, and re-writing old citations to the live tree is
+> forbidden. New work cites 1.1.0; old work keeps its version stamp.
+>
+> **(b) Hardening row 3 — BUILT, and it ships in v10.** `Code/Fix_StaleReservations.lua`'s `OnMsg.NewDay`
+> sweep now runs **one `pcall` PER COLONIST**. Before, a single throw abandoned every remaining Residence
+> for that sol — and every sol after — while `ListFixes()` still reported the module `active`.
+> - ⛔ **Per colonist, not per residence:** a residence-level guard would still abandon the rest of that
+>   residence's list on one bad slot.
+> - A raise is **logged with the residence handle and slot**, and a **separate summary line** says the
+>   sweep did not complete — deliberately not folded into the "released N" line, because *"nothing was
+>   stale"* and *"this sol's sweep was incomplete"* must never read the same in a log.
+> - Donor shape is our own F48 pass in `90_SaveSanitizer.lua` — not a new pattern.
+> - ⚠️ **Honest limit, recorded in the module:** per `EF-008`, `pcall` catches a genuine runtime error but
+>   **not an `assert()` in shipped code**, because asserts do not unwind in this engine. This bounds the
+>   throw case, which is what the audit raised. It cannot bound that one.
+> - ✅ **Checked, not assumed:** `parsecheck` 50/50 clean · `desk_f59_expedition.py` **23/23 demands held**
+>   after the change · the three TestKit probes that cover this module key on the **wrap pairs** and the
+>   `SMRFixPack_reserved_at` field, not on the log text, so none is invalidated. ⛔ No public fix-list row
+>   changes — this is a hardening, not a new repair.
+>
+> **(c) 151 (c) — F52 passage / F54 hub / C83 arrival JOIN the owed 144 (a) boot.** ⚠️ They are cheap
+> **only if the colony you load already has those layouts** — a passage, a shuttle hub, an arrival route.
+> ⛔ If it does not, **skip them by name and say so**; do not build the layouts to make the checks
+> possible. F59's expedition check is **not** joining — it needs full housing, a competing homeless
+> neighbour and a housed crew member, which is a provisioning job, not an addition to a boot.
+>
+> **(d) ⏳ 151 (b) — your question: "Are we completely finished with our migration passes and checks?
+> Nothing outstanding?" NO. Five residuals and one unswept case, read from the entries:**
+>
+> | | what is outstanding |
+> |---|---|
+> | [F51](agent/bugs/F51.md) | 1.1.0 **PARTIAL** — stale cache desk-controlled, the permanent migration-block claim **not established**; its leg is re-filed **UNRUN** |
+> | [F53](agent/bugs/F53.md) | **PARTIAL** — no fresh 1.1.0 game evidence |
+> | [F59](agent/bugs/F59.md) | repaired 09-11, but the **A1 expedition half is UNTESTED** |
+> | [F73](agent/bugs/F73.md) | **PARTIAL** — retained wrapper 10/10 at the desk, organic benefit unverified |
+> | [F80](agent/bugs/F80.md) | still `investigating` — buildability and July incident causation **unproved** |
+> | [F54](agent/bugs/F54.md) | never swept |
+> | ✅ F60 · C83 | done — retired, and `tested-attended` |
+>
+> ⭐ **What that means for the decision, stated plainly:** the recommended scope was **written knowing
+> this** — it offers F80's evidence as *"a candidate explanation, not a solved incident"* and names
+> F59/F60 as **our maintenance findings** rather than game defects. So sending it does not overstate
+> anything. But *"we are finished"* is not true, and if the covering note said so it would be wrong.
+> ❓ **Still your call, and ck165 gives you a third option:** send the recommended scope · send nothing ·
+> or **defer it as pull-only messaging** and ask for it whenever you want it. ⛔ No agent will raise it.
+
 ### ✅ 2026-09-12 — 167 RULED BY YOU: **the opt-in mod's decisions move to the opt-in mod's repo.** Eleven items off your list; three stay because they bind the fix pack. **Nothing is owed from you.**
 
 > **Your words:** *"Can we fully offload anything opt-in related to its repo, and just retain anything
