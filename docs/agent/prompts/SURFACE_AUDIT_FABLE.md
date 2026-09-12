@@ -4,6 +4,13 @@
 fresh session. `git rm` this file in the commit that lands the report, naming its
 grave. Verify every specific here against `git log` and the tree before trusting it.
 
+> ⚠️ **CONCURRENCY (owner, 2026-09-12): `prompts/C85_C88_BUILD.md` may be running in a sibling Claude session at the
+> same time, in the same checkout.** It owns `Code/`, `items.lua`, `tools/desk_*`, the TestKit, entries C85/C88/C89 and
+> the outbox's Pending section — never touch those. Shared with it: `docs/PLAYTEST_CHECKLIST.md` (claim your item number
+> by message first), `docs/archive/SESSION_LOG.md`, `prompts/README.md`. `git pull` before every shared-doc write, commit
+> by pathspec only, and if `doccheck` goes RED on MODULE SETS or PARSE while the build is mid-edit, that is the sibling's
+> transient state — wait and re-run, do not "fix" it.
+
 ## 0 · Orient, and open a live todo list
 
 `git pull` · `git log --oneline -15` · `git status --short` · `ListAgents` (several

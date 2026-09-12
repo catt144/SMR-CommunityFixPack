@@ -7,6 +7,13 @@ specific here. Open a **live todo list** from the first tool call, one item per 
 current — the owner reads it to decide when to step in. 🛑 Stop and report a concern at any point; a stop is
 cheaper than a wrong ship.
 
+> ⚠️ **CONCURRENCY (owner, 2026-09-12): `prompts/SURFACE_AUDIT_FABLE.md` may be running in a sibling session at the same
+> time, in the same checkout.** It owns `reports/SURFACE_AUDIT_2026-09-12.md` and touches no `Code/`, `items.lua` or
+> outbox. Shared: `docs/PLAYTEST_CHECKLIST.md` (claim your item number by message first), `docs/archive/SESSION_LOG.md`,
+> `prompts/README.md`. `git pull` before every shared-doc write, commit by pathspec only, and keep each `Code/` module and
+> its `items.lua` entry in the SAME commit so the sibling never sees a MODULE SETS mismatch. Its F31 verdict does not
+> change anything you build.
+
 ## ⚖️ The rulings this prompt carries (owner, 2026-09-12)
 
 | item | ruling | where the detail lives |
