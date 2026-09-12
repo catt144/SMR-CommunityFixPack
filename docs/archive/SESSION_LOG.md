@@ -8,6 +8,59 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-12 — CORRECTION to the entry below: the LAKECHK "would have thrown" claim is refuted, by a peer, within the hour
+
+tags: correction LAKECHK C87 ck162 one-sided-count cross-session fb87a6e
+
+⛔ **This corrects the `fb87a6e` entry immediately below. Read this first; that entry's second
+starred paragraph is wrong and is left standing per the append-only rule.**
+
+**The claim.** `fb87a6e` recorded that C87's `[NEVER RUN]` `LAKECHK` console line was broken: that it
+read the ground with `map:GetHeight(x,y)`, "a two-number form witnessed **nowhere** in the shipped
+tree (every `map:GetHeight` caller passes a point)", and that it "would have thrown and printed
+nothing, spending an owner sitting for no reading". It was written up as a cautionary tale about
+unrun instruments, put in the commit message, the checklist, `bugs/C87.md`, the handoff, and relayed
+to a peer session as material for its own report on how far our instruments are trusted.
+
+**It is refuted.** `smr-bugfixpack-b2`, firing `VANILLA_DIFF_DISPOSITION.md`, checked it against the
+live tree rather than relaying it and pushed back with the presence side enumerated: the two-argument
+method form appears in **19 shipped files** — `ResourceStockpile.lua:1358`, `TerrainDeposit.lua:297`,
+`Construction.lua:1331`/`:1341`, `LevelPrefabBuilding.lua:196`, `ElectricityGrid.lua:865`,
+`GridObject.lua:198`, `Meteors.lua:685`, `Pathfinding.lua:79`, `Flight.lua:636`, `Passage.lua:2198`
+and more — **including the exact `obj:GetMap():GetHeight(x, y)` receiver spelling the recipe used, at
+`Landscaping.lua:225` and `:243`.** Re-run here independently before conceding: confirmed, 19 files.
+It is an overload the exported docs do not enumerate (`LuaExportedDocs/Game/Terrain.lua:97-99`), which
+is the likely reason it read as absent. **The 09-11 line would have run.**
+
+**How the error was made, because it is a named house failure and it still got through.** The grep was
+`grep -rn ":GetMap():GetHeight(\|map:GetHeight(" ... | head -5`. Five hits came back, all passing a
+point, and "every caller passes a point" was written from them. **An absence was stated from a
+truncated list** — the `head -5` was the whole of the evidence. The project's own rule is that a claim
+about what is ABSENT needs the presence side enumerated; that rule exists because this has happened
+before, and it did not fire here because the grep *looked* like a survey.
+
+**What survives, stated narrowly.** The replacement spelling `terrain.GetHeight(map, x, y)` is attested
+(`BottomlessPit.lua:23`, 5 sites) and stays — re-changing it would be churn for churn. The `NOCURSOR`
+guard is a **real** improvement: the 09-11 line indexed `c.cursor_obj` with no nil check and would
+throw if the controller were nil. The other half of the 09-12 trace stands and was not challenged:
+`GetConstructionController()` resolves from the current interface mode, `cursor_obj` is the
+controller's field, the key `"Gameplay.Any."..entity` matches `LandscapeLake:GetPrefabName` verbatim,
+and `m.min:z()` is valid because the shipped check calls `prefab.min:xyz()`. **What does NOT survive
+is the finding itself: no defect in that recipe was found, and it must not be cited as one.**
+The F54/D3 half of `fb87a6e` is untouched by this and was independently derived.
+
+**Corrected in:** `bugs/C87.md` (the section reversed in place, original claim quoted), checklist 147's
+note and item 162 (c), `HANDOFF_ORCHESTRATOR.md` §4 item 3. The `fb87a6e` commit message cannot be
+amended — it is pushed — so this entry is the correction of record.
+
+⭐ **Worth keeping beyond the case: the cross-vendor check worked, and it worked because the peer
+refused the offer.** The claim was handed to `b2` as a gift for its report; it declined to use it,
+checked it, and pushed back inside the hour — costing this project one wrong cautionary tale instead
+of a cited one. That is the practice functioning exactly as intended, and the right response to it is
+this entry, not a defence.
+
+---
+
 ## 2026-09-12 — the four §4 loose ends worked: a refuted audit finding, a frozen draft, and a control line that would have thrown
 
 tags: ck162 F54 C87 D3 LAKECHK dust-storm loose-ends handoff ck144b ck133-5

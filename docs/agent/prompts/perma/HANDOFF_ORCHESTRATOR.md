@@ -186,10 +186,12 @@ here** — read 162. None is release-blocking. What an agent could do has been d
 2. **The ck144 (b) follow-up draft.** Its deletion at the v10 sweep is **FROZEN** pending **162 (b)**, which asks
    the one question that decides it (did the 09-10 post say "still checking"?). ⛔ The sweep must not cut either
    `SUPERSEDED` C74 draft until that is answered; both carry the freeze line.
-3. **The C87 lake check — re-asked as 162 (c)**, no longer orphaned behind a closed ck147. ⚠️ **Its `LAKECHK`
-   console line was CORRECTED before it was ever run:** the 09-11 version read the ground with
-   `map:GetHeight(x,y)`, a form witnessed nowhere in the shipped tree — it would have thrown and printed nothing,
-   spending the sitting for no reading. Every other symbol re-traced and sound (`bugs/C87.md`).
+3. **The C87 lake check — re-asked as 162 (c)**, no longer orphaned behind a closed ck147. Its `LAKECHK` console
+   line gained a `NOCURSOR` guard (it threw on a nil controller). ⛔ **Do not repeat the claim that went with
+   that edit:** I recorded the 09-11 spelling `map:GetHeight(x,y)` as witnessed nowhere and said the line would
+   have thrown; a peer refuted it the same day — **19 shipped files use it**, including the exact
+   `obj:GetMap():GetHeight(x, y)` form (`Landscaping.lua:225`). The old line would have run. The claim came from
+   a grep read at `head -5`. Corrected in `bugs/C87.md`, ck147 and 162 (c).
 4. **The 133(5) / 73 breadcrumb contradiction — asked as 162 (d)**, a yes/no. Both records carried it and
    neither asked. Nothing was built either way.
 
