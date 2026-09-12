@@ -357,6 +357,7 @@ return PlaceObj('ModDef', {
 		"Code/Fix_ExoticDepositSign.lua",
 		"Code/Fix_JumboCaveReinforcementWedge.lua",
 		"Code/Fix_SilentHitMomentFX.lua",
+		"Code/Fix_CloggedBuildingRelease.lua",
 		"Code/90_SaveSanitizer.lua",
 	},
 	-- ⭐⭐ WRITTEN BY THE UPLOADS, 2026-08-20 — THESE ARE HOW EVERY FUTURE UPDATE

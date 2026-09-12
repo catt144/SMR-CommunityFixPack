@@ -226,6 +226,13 @@ return {
 		'name', "Fix_SilentHitMomentFX",
 		'CodeFileName', "Code/Fix_SilentHitMomentFX.lua",
 	}),
+	-- Added 2026-09-12 (C85, post-release maintenance — owner ruling, checklist
+	-- 154: the sweep only), same rule as above: hand-written, in metadata.lua's
+	-- `code` position, ahead of 90_SaveSanitizer which loads last by design.
+	PlaceObj('ModItemCode', {
+		'name', "Fix_CloggedBuildingRelease",
+		'CodeFileName', "Code/Fix_CloggedBuildingRelease.lua",
+	}),
 	PlaceObj('ModItemCode', {
 		'name', "90_SaveSanitizer",
 		'CodeFileName', "Code/90_SaveSanitizer.lua",
