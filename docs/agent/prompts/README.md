@@ -31,7 +31,7 @@
 | ~~`migrationfix/`~~ | **CONSUMED 09-11, both links.** Link 01 (`3b41d9f`) repaired F59 by deferring the notification (a THIRD harm found while building) and stopped F60's retirement on the uncommitted-release-file gate; link 02's terminal audit ruled **SHIP A** — `reports/MIGRATIONFIX_AUDIT.md`. Link 01's HANDOFF lives in git: `git show 3b41d9f:docs/agent/prompts/migrationfix/README.md` |
 | `DLC_DEEP_CHECK.md` | desk NEXT, after the fix pack is stable |
 | `HOTFIX2_SITTING.md` | closed 09-09; kept for the recipes the owed v7 sitting uses |
-| `SELFCHECK_PILOT.md` | rides the owed v7 sitting's boot |
+| `SELFCHECK_PILOT.md` | ⛔ **UNREACHABLE 09-12 — do not fire.** Its job was ck133 (1), the self-check pilot; the owner ruled the **reword** instead (ck112 = (a)), so there is nothing for it to measure. **Removal recommended, awaiting the owner's word** (ck133) — nothing has been deleted. |
 | `CAPTURE_SITTING.md` | owner ruling 09-09: KEEP ("we may get to it") |
 | `SMRCF_CHAIN_SET.md` | owner ruling: keep for now (it goes with `smrcf-modbrowser/` and `smrcf-verify/`) |
 

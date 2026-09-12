@@ -174,8 +174,10 @@ HOW IT WORKS
 · Safe to add to a save you have already played. It writes almost nothing into
   your savegame, and removing it simply lets the original bugs come back.
 · Every fix checks the game's code before it touches anything, and stands down
-  by itself if an official patch changes what it was written for. A fix that
-  stands down does nothing at all — it never guesses.
+  by itself if what it was written for has been renamed, removed or reshaped.
+  A fix that stands down does nothing at all — it never guesses. Every game
+  patch is read against the pack as well, and the fixes it changed are updated
+  or retired.
 · A few of the fixes are judgment calls rather than plain repairs. Those are
   marked as such on the fix list, with the reasoning, rather than folded in
   quietly.
@@ -279,7 +281,7 @@ This pack tracks the current version of the game. If you stayed on 1.0.7, there 
 [list]
 [*][b]No game files are modified.[/b] The pack wraps the game's own code while it runs.
 [*][b]Safe to add to a save you have already played.[/b] It writes almost nothing into your savegame, and removing it simply lets the original bugs come back.
-[*][b]It stands down instead of guessing.[/b] Every fix checks the game's code before it touches anything, and switches itself off if an official patch changes what it was written for.
+[*][b]It stands down instead of guessing.[/b] Every fix checks the game's code before it touches anything, and switches itself off if what it was written for has been renamed, removed or reshaped. Every game patch is read against the pack as well, and the fixes it changed are updated or retired.
 [*]A few fixes are judgment calls rather than plain repairs. Those are marked on the fix list, with the reasoning.
 [/list]
 

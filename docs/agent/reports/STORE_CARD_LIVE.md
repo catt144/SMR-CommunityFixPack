@@ -220,8 +220,10 @@ HOW IT WORKS
 · Safe to add to a save you have already played. It writes almost nothing into
   your savegame, and removing it simply lets the original bugs come back.
 · Every fix checks the game's code before it touches anything, and stands down
-  by itself if an official patch changes what it was written for. A fix that
-  stands down does nothing at all — it never guesses.
+  by itself if what it was written for has been renamed, removed or reshaped.
+  A fix that stands down does nothing at all — it never guesses. Every game
+  patch is read against the pack as well, and the fixes it changed are updated
+  or retired.
 · A few of the fixes are judgment calls rather than plain repairs. Those are
   marked as such on the fix list, with the reasoning, rather than folded in
   quietly.
@@ -331,7 +333,7 @@ This pack tracks the current version of the game. If you stayed on 1.0.7, there 
 [list]
 [*][b]No game files are modified.[/b] The pack wraps the game's own code while it runs.
 [*][b]Safe to add to a save you have already played.[/b] It writes almost nothing into your savegame, and removing it simply lets the original bugs come back.
-[*][b]It stands down instead of guessing.[/b] Every fix checks the game's code before it touches anything, and switches itself off if an official patch changes what it was written for.
+[*][b]It stands down instead of guessing.[/b] Every fix checks the game's code before it touches anything, and switches itself off if what it was written for has been renamed, removed or reshaped. Every game patch is read against the pack as well, and the fixes it changed are updated or retired.
 [*]A few fixes are judgment calls rather than plain repairs. Those are marked on the fix list, with the reasoning.
 [/list]
 
@@ -532,6 +534,41 @@ and still refused to house anyone" is F58's, `fix-list.md:105`). Judgment calls 
 overfill repaired and watched on 1.1.0, the expedition half stated as code-verified
 only; the F60 retirement and the count drop stated plainly). ⛔ The F59 line names the
 defect as the pack's own — it was never a game bug and gets no fix-list row.
+
+## ⚖️ 2026-09-12 — HOW IT WORKS bullet 3 REWORDED (owner ruling, checklist 112 = (a) / 133)
+
+**The owner ruled "do the reword", reversing the 2026-09-09 deferral that had chosen instead to
+repair the capability so the old sentence would become true.** The old bullet promised a fix
+would stand down *"if an official patch changes what it was written for"*. `SMRFixPack.Require`
+cannot do that: it is an existence-and-surface test, so it catches a target renamed, removed or
+reshaped and cannot catch a patch that keeps the name and rewrites the body — **F115 was exactly
+that shape**. The replacement is the pack's own honesty limit, already written in
+`Code/00_Core.lua:620-625`.
+
+**Shipped wording** (⛔ the second sentence is unchanged — it was true and stays verbatim):
+
+> Every fix checks the game's code before it touches anything, and stands down by itself if what
+> it was written for has been renamed, removed or reshaped. A fix that stands down does nothing
+> at all — it never guesses. Every game patch is read against the pack as well, and the fixes it
+> changed are updated or retired.
+
+The third sentence is not a promise but a description of what has already happened twice: the
+after-every-patch extraction diff (`WORKFLOW.md`) is what produced hotfix 2 (36 modules retired,
+10 re-copied for 1.1.0) and v9 (F60 retired).
+
+**Applied to all five copies in one commit, and they are byte-identical by script:** the shipped
+`metadata.lua` description, the Paradox plain block and the Steam BBCode block in
+`UPLOAD_WORKFLOW.md` §3, and both blocks here. The BBCode form keeps its bold lead-in
+(*"It stands down instead of guessing."*) and takes the same clause change.
+
+⚠️ **Length: 6,267 → 6,383 characters (+116).** Both portals accepted 6,267 at v9, and the web
+editor has taken every increase so far; this is the largest single body to date. ⛔ Nothing was
+uploaded — it ships with **v10**, and `version` was not touched (`H-02`).
+
+⭐ **No other surface needed changing, and this was checked rather than assumed.** `README.md`
+and the site (`content/faq.md`, `content/for-modders.md` in `SMR-CommunityMods`) already said
+"shape", and the FAQ already carries an explicit note about the body-rewrite case. The store card
+was the last surface still carrying the old promise.
 
 ## Provenance of the headliners
 

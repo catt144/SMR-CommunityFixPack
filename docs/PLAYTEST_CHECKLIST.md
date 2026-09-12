@@ -2009,7 +2009,31 @@ Original question, kept as asked: C74, the Rare Metals Extractor's hammer (and t
 > `version` untouched. `tools/upload_preflight.py` reads 0 FAIL; the store
 > strings and both backups are byte-identical by script.
 
-### 2026-09-09 — 133: six decisions from the self-check promise audit that lived only in an agent report. None blocks the upload.
+### ⚖️ 2026-09-09 — 133: six decisions from the self-check promise audit. **RULED IN PART 2026-09-12 — "do the reword". Four of the six fall with it; (2) and (4) are still yours, and they are one doc line each.**
+
+> ⚖️ **Your ruling, 2026-09-12: "do the reword."** It reverses your 09-09 ruling on item
+> **112** — that item carries the reversal, the three candidate sentences and the one that
+> shipped. Recorded here because the reword decides most of this item, and because what it
+> does **not** decide should not be swept up with it.
+>
+> | | was | after the reword |
+> |---|---|---|
+> | **1** pilot, then the bounded prototype | recommend yes | ❌ **NOT COMMISSIONED.** Their only purpose was to make bullet 3 true. The reword makes it true for the cost of one sentence, so the purpose is gone. |
+> | **2** what a fix does when a probe answers **UNKNOWN** | open | ⏳ **STILL YOURS — not touched by the reword.** The code already fails closed (`Code/00_Core.lua:156-167`: only literal `true` applies; a throw, nil or any other value declines). This decides whether that is written down as policy. One line in `FIX_POLICY` §2a. |
+> | **3** the wording interim | hold the over-promise through the upload | ✅ **DISCHARGED BY THE REWORD ITSELF.** There is no interim left to hold. |
+> | **4** `LuaRevision` as an **observation label** | open | ⏳ **STILL YOURS — not touched by the reword.** A `FIX_POLICY` §2a heading clarification, independent of any prototype. |
+> | **5** the breadcrumb | recommend yes | ✅ **CLOSED WITH ITEM 73** (you closed 73 on 2026-09-12). Noted at 73 as well. ⚠️ **A tension, surfaced not resolved:** the note added under (5) earlier that same day read 73's closure as *implying* this without deciding it. Today's ruling takes it as decided. If you meant (5) to stay a separate call, say so and it re-opens — nothing was built either way. |
+> | **6** report the indirect `load` (`LuaCodeToTuple`) to the developers | conditional on the pilot | ✅ **MOOT.** It was conditional on a reading the pilot would have produced, and there is no pilot. |
+>
+> ⚠️ **One prompt this strands. Nothing was deleted; this is a recommendation.**
+> `agent/prompts/SELFCHECK_PILOT.md` was authored for (1), was **never fired**, and nothing can
+> reach it now. Under `prompts/README.md` a root one-off is `git rm`'d when it is fired or
+> consumed — this one is consumed by a ruling instead of by a run. **Recommendation: remove it,
+> with the commit message naming this ruling as what consumed it**, the way the other root
+> one-offs are retired; git keeps it. Its row in `prompts/README.md` has been marked so nobody
+> fires it in the meantime. ⛔ **The two reports stay** — `reports/SELFCHECK_PROMISE_AUDIT.md`
+> and `reports/SELFCHECK_PROMISE_COMBINED.md` are the record of *why* the sentence was wrong,
+> and the reword's justification cites them. Reports are not consumed by rulings.
 
 > Raised by `smr-bugfixpack-db` and routed here so they are not lost; the
 > bodies and the reasoning are in `agent/reports/SELFCHECK_PROMISE_COMBINED.md`
@@ -3001,6 +3025,50 @@ Original question, kept as asked: C74, the Rare Metals Extractor's hammer (and t
 >   gameplay one.
 > ⭐ **My recommendation: (a).** It is your sentence, so it is your call; the cost is one commit.
 >
+112. ✅ **RULED 2026-09-12 — take (a): the reword. DONE, in `metadata.lua` and both paste backups.**
+> ⚖️ **This REVERSES your 2026-09-09 ruling on this item, which chose (c) — "make the sentence
+> TRUE again" — and was recorded as a ruling, not an omission.** That block is left immediately
+> below, verbatim and unedited, as the record. It is no longer in force: (c) is not being built,
+> and item **133** records the four sub-decisions the reversal collapses.
+>
+> **The sentence that shipped** (HOW IT WORKS bullet 3, `metadata.lua`; the same words in the
+> Paradox plain block and, in BBCode, the Steam block of `UPLOAD_WORKFLOW.md` §3 and
+> `reports/STORE_CARD_LIVE.md`):
+>
+> > Every fix checks the game's code before it touches anything, and stands down by itself if
+> > what it was written for has been renamed, removed or reshaped. A fix that stands down does
+> > nothing at all — it never guesses. Every game patch is read against the pack as well, and
+> > the fixes it changed are updated or retired.
+>
+> **What changed and why.** Only the false clause moved. *"if an official patch changes what it
+> was written for"* promised something `SMRFixPack.Require` cannot do: it is an
+> existence-and-surface test, so it sees a target renamed, removed or reshaped and cannot see a
+> patch that keeps the name and rewrites the body — F115 was exactly that. The replacement is
+> the pack's own honesty limit, already written in the code (`Code/00_Core.lua:620-625`) and
+> already live on the site FAQ and in `README.md`. The second sentence was true and is untouched.
+> The third states what actually covers the rest: the after-every-patch extraction diff
+> (`WORKFLOW.md`), which is not a promise but a description of hotfix 1, hotfix 2 and v9 —
+> 36 modules retired and 10 re-copied for 1.1.0, F60 retired.
+>
+> **Two candidates not taken, if you would rather swap one in.** Both are drop-in replacements
+> for the whole bullet; tell me which and it is one commit.
+> * **B, shortest — says what the check tests and stops there, no forward statement:**
+>   *"Every fix checks the game's code before it touches anything — the functions and fields it
+>   needs have to be present, and be the shape it expects — and stands down by itself if they
+>   are not. A fix that stands down does nothing at all — it never guesses."*
+> * **C, answers the update question first:** *"Every fix checks the game's code before it
+>   touches anything, and a fix whose target a game update has renamed, removed or restructured
+>   stands down by itself. A fix that stands down does nothing at all — it never guesses. Each
+>   game update is read against the whole pack, and the fixes it changed are updated or retired."*
+>
+> **Reach.** Every live copy was found and changed; the three plain copies are byte-identical by
+> script and both BBCode copies match. The site needed **no** change — `content/faq.md` and
+> `content/for-modders.md` in `SMR-CommunityMods` already carry the "shape" wording *and* an
+> explicit note about the body-rewrite case, and `README.md` already says "changed its shape".
+> The store card was the only surface still carrying the old promise.
+> ⚠️ The description grows **6,267 → 6,383** characters (+116). Both portals accepted 6,267 at v9.
+> ⛔ Nothing here has been uploaded: it ships with **v10**, and `version` was not touched (`H-02`).
+
 112. ⏸️ **DEFERRED 2026-09-09 by the owner — 06 MUST SKIP IT, and this is a ruling, not an omission.**
 > Neither (a) nor (b). The owner is firing a separate high-tier session on the option this item never offered:
 > **(c) make the sentence TRUE again** — repair the capability rather than reword the promise down to match it.
@@ -4120,7 +4188,10 @@ rock-clearing jobs) crashes the same way, not just levelling.
     research a dome-cost tech, watch for `ConstructionSite.lua:673`. ~10 minutes.
     ❓ **Your call:** build it now, build it after a repro, or leave it filed.
 
-73. ✅ **CLOSED 2026-09-12 — "lets just close it". Not worth further resources.** Your words:
+73. ✅ **CLOSED 2026-09-12 — "lets just close it". Not worth further resources.**
+    ⭐ **It also closes item 133 sub-decision (5), the breadcrumb** — recorded 2026-09-12 alongside the
+    "do the reword" ruling, because (5) is the same ~15 lines as tier 0 here. See 133 for the tension
+    that reading resolves. Your words:
     *"we have spent more resources looking for a fix for something that has only come up once."*
     No tier is taken, and the four options below stay on the record as the reasoning, not as work
     owed. **What was learned, so nobody re-opens this blind:**
@@ -4147,6 +4218,13 @@ rock-clearing jobs) crashes the same way, not just levelling.
     same ~15 lines as tier 0 above.** Closing 73 implies it, but **133 is still open and you have
     not ruled it** — so it stays open. Whoever takes 133 should read this closure first; if you
     say yes to 133(5), that is the breadcrumb and tier 0 arrives with it.
+
+    ⚖️ **SUPERSEDED LATER THE SAME DAY — the paragraph above is left as the record.** Your
+    "do the reword" ruling (item **112** = option (a); recorded on **133**) takes this closure as
+    deciding **133(5)** as well, so (5) is now closed rather than open. Nothing was built either
+    way, and nothing else in 73 changes. ⚠️ If you meant (5) to stay a separate call, say so and
+    it re-opens — this is the one place today's two records disagreed, and it is flagged rather
+    than smoothed over.
 
     *(The original finding is kept below.)*
 
