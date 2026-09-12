@@ -297,16 +297,48 @@ pre-stuck rocket reloaded and left.
 ⚠️ "maintenance won't clear it" is INHERITED (`RequiresMaintenance.lua:413-417`, investigator read).
 
 **Russia's "3 manned Extractors at 160% Performance" goal (Reddit, r/SurvivingMars, Pancer1900) — no bug; see `agent/bugs/F108.md`**
-> Performance and Production are two different numbers, and the upgrades you're looking at only move the second one. Amplify (+25%) and Fueled Extractor (+30%) boost Production — they have never added to Performance, in this version or the last one, so nothing changed there in the update. The goal counts Performance only. What actually raises it: the workers themselves. A colonist's Performance is 50 plus their Morale, so maxed Morale alone gets you to about 150 — which is exactly where you are. Everything past that comes from the extras stacking: Workaholic is +20, heavy workload is +25 (it went up from 20 in this update), and the big one is specialisation — extractors want **geologists**, and a worker of the wrong specialisation is −50. Also check nobody is working outside their home dome, which is −10. Avoid Lazy, Alcoholic or Renegade workers in those three buildings. One thing that should make this less painful: the goal is checked every hour and only needs all three extractors at 160 at the same check, so a short overlap is enough — you don't have to hold it indefinitely.
+> **TL;DR — Performance and Production are two different numbers, and none of the extractor upgrades touch Performance.**
+>
+> Amplify, Fueled Extractor and Magnetic Extraction all boost **Production**. They've never added to **Performance**, in this update or the last one, so nothing changed there. The goal only counts Performance — and Performance comes almost entirely from the colonists working the building.
+>
+> A colonist's Performance is **50 + their Morale**. Perfect Morale on its own is ~150, which is exactly where you're stuck. Everything past that has to be stacked:
+>
+> **Traits that help**
+> • Workaholic **+20**
+> • Enthusiast **+20** — only while Morale is in the green
+>
+> **Traits to move out of those three buildings**
+> • Renegade **−50**
+> • Refugee **−40**
+> • Lazy **−20**
+> • Melancholic **−20** — whenever Morale drops into the red
+> • Alcoholic **−10**
+>
+> **Specialisation — the biggest single lever**
+> • Extractors want **Geologists**. A worker with the wrong specialisation is **−50**, which outweighs every trait above put together. Staff all three with Geologists first, then worry about traits.
+> • Make sure they live in the dome they work in — working in another dome is **−10**.
+>
+> **Laws, techs and bonuses**
+> • **Single Shift** law — **+40** to buildings running one active shift. Biggest thing you can switch on today.
+> • **Double Shifts** +20 · **Triple Shifts** +10
+> • **Productivity** law (Welfare) — **+10** for colonists with high Comfort
+> • **Vocation-Oriented Society** tech — **+10** while Morale, Health, Sanity *and* Comfort are all green
+> • **Heavy workload** — **+25** (it was +20 before the update, so this one actually got better)
+> • Astrogeologist commander is +20 Extractor Performance, but that's a new-game pick, not something you can add mid-run
+>
+> Last thing, and it should save you a lot of grief: **the goal is checked once an hour and locks in as soon as it's met**, so all three extractors only have to be at 160 at the *same* check. You don't have to hold it there.
 
-⚠️ The "−50 for the wrong specialisation" and "+25 heavy workload" numbers are SOURCE (`Lua/__const.lua`,
-`NonSpecialistPerformancePenalty` / `OvertimedShiftPerformance`, both re-read on 1.1.0.403908 and diffed against
-the 1.0.7 archive). ✅ The hourly-check-and-latch claim rests on our OWN attended run (`F108.md` row_status,
-2026-08-28, goal ticked 3/3 and completed) plus `Data/SponsorGoals.lua:557-576` — it is not a player report.
-⛔ Do NOT repeat the old "Amplify upgrade helped reach 160" line from F108's record; it is corrected there.
-⚠️ Nothing in this reply mentions the pack — this player has not said they use it, and the answer is the same
-either way. ⛔ Do not tell them to research or un-research Extractor AI: on 1.1.0 vanilla no longer caps a
-staffed extractor at 50, so that advice is stale.
+⚠️ Every number above is SOURCE on 1.1.0.403908 and diffed against the 1.0.7 archive: trait amounts
+`Data/TraitPreset.lua`; `NonSpecialistPerformancePenalty` 50 / `NonHomeDomePerformancePenalty` 10 /
+`OvertimedShiftPerformance` 25 (was 20) `Lua/__const.lua`; shift + Productivity laws `Data/LawDef/LawDef-Economy.lua`
+`:1526/:1620/:1706` and `LawDef-Welfare.lua:347`; Vocation-Oriented Society `param1` 10 `Data/Tech.lua:2155-2163`;
+Astrogeologist `Data/CommanderProfilePreset.lua:329-341`; `specialist = "geologist"` on both extractor templates.
+✅ The hourly-check-and-latch claim rests on `Data/SponsorGoals.lua:557-576` plus our OWN attended run
+(`F108.md`, 2026-08-28, goal ticked 3/3 and completed) — not on a player report.
+⛔ Do NOT repeat F108's old "Amplify upgrade helped reach 160" line; it is corrected in that entry.
+⚠️ Says nothing about the pack — this player has not said they use it and the answer is the same either way.
+⛔ Do not tell them to avoid Extractor AI: on 1.1.0 vanilla no longer caps a staffed extractor at 50, so that
+advice is stale. ⚠️ Enthusiast/Melancholic fire on `HighStatLevel`/`LowStatLevel` (70%/30%), `Colonist.lua:4864-4873`.
 
 **Deep scan finds nothing (Steam, "Possible Bug") — C86**
 > Orbital probes only deep-scan once you've researched Adapted Probes. Deep Scanning on its own doesn't change probes; it lets your normal sector scans find deep deposits when a sector is scanned again. So probes launched before Adapted Probes only do a normal scan, which matches what you saw. One small real bug turned up while checking: with the five-sector Advanced Orbital Probe and no Adapted Probes, a neighbouring sector you had already deep-scanned gets marked back to "Scanned", and scanning it again finds nothing new. We've fixed that too — it'll be in the next update.
