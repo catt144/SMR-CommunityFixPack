@@ -53,6 +53,24 @@ The F54/D3 half of `fb87a6e` is untouched by this and was independently derived.
 note and item 162 (c), `HANDOFF_ORCHESTRATOR.md` §4 item 3. The `fb87a6e` commit message cannot be
 amended — it is pushed — so this entry is the correction of record.
 
+**⚠️ Where the two checklist copies actually landed, and a git fact that will bite the next pair of
+us.** This entry's commit `e7d1eef` deliberately EXCLUDED `docs/PLAYTEST_CHECKLIST.md`, because the
+peer's unstaged item **163** was sitting in that same file and `git add <path>` would have swept it in.
+The corrections went in anyway: **`cc3edf2`** — the peer's own vanilla-diff commit — carries both of
+them (ck147's note and item 162 (c)'s paragraph), landed inadvertently and disclosed by
+`smr-bugfixpack-b2` unprompted. Verified here against HEAD before doing anything: both present exactly
+once, the false claim gone, tree clean, nothing to re-apply. **Attribution only** — that commit's
+message does not mention them, and this line is the record.
+
+⛔ **The reusable half, and it corrects a rule this project has been relying on: `git commit -- <path>`
+is NOT a fence against a peer's work.** A pathspec protects every OTHER file, but for a path you NAME
+it commits that path's **working-tree** content — including a peer's unstaged edits to that same file.
+The 09-10 lesson (`6ad619a`) was that a bare commit takes a peer's staged deletions, and the fix
+recorded then was "always name a pathspec"; that fix is only half of one. **The actual fence on a
+shared file is staging only your own hunks** (`git add -p`, or `hash-object` + `update-index`) **and
+committing without a pathspec.** Both halves are needed: pathspec for other files, hunk-level staging
+for a file two sessions are inside at once.
+
 ⭐ **Worth keeping beyond the case: the cross-vendor check worked, and it worked because the peer
 refused the offer.** The claim was handed to `b2` as a gift for its report; it declined to use it,
 checked it, and pushed back inside the hour — costing this project one wrong cautionary tale instead
