@@ -49,6 +49,24 @@ If the owner (the author) cannot follow a sentence, it is word salad and it fail
 
 ## 1 · The site — `C:\Dev\SMR-CommunityMods` (the fix list is the spine)
 
+⛔⛔ **READ THIS BEFORE YOU TOUCH THE SITE TREE — three files are sitting UNCOMMITTED
+there and they are not yours** (recorded 2026-09-12, still true at that date; **run
+`git -C C:\Dev\SMR-CommunityMods status --porcelain` and believe that, not this line**):
+
+```
+ M content/faq.md
+ M content/for-modders.md
+ M content/install.md
+```
+
+They are **today's modder-doc paring, waiting on the owner** — see `bef5e81` in the fix-pack
+tree for the same day's work. ⛔ `SMR-CommunityMods` is a **DIFFERENT git repository**; do not
+commit, stash, checkout or `--regen` over it. If your sweep needs to edit any of those three
+files, **stop and ask the owner** rather than writing on top of an unread working copy (the
+2026-09-12 `git checkout -- items.lua` disclosure is the standing reason). The site deploy of
+`a061665` is already HELD for v10, so these ride the same release; the deploy must not go out
+until the owner has ruled on them.
+
 `content/fix-list.md` is the canonical player-readable list, and **the store
 cards' count is derived from it**, so it goes first.
 
@@ -214,6 +232,32 @@ lines intact. The force-save that bumps the version and regenerates
 `metadata.lua` from memory is `ValidateModBeforeUpload`, which runs at **upload**
 (`GedModEditor.lua:836-844`). ⇒ the `git diff metadata.lua` check for stripped
 comments belongs **after the upload**, not after the pack.
+
+---
+
+## 3b · The repo front page — `README.md` (added 2026-09-12)
+
+⛔ **This surface was MISSING from this sheet until 2026-09-12, and it had rotted
+accordingly** — six wrong claims, one of them still saying the mod was unreleased
+months after both stores went live. It is the GitHub page every reporter and both
+Paradox developers land on before they read anything else, so it is a public surface
+in exactly the sense §0 means. Treat it as one.
+
+Check on every sweep, with `--emit-counts` open:
+
+* **The status line** (`README.md:9`) — version and store presence. ⚠️ Not a count:
+  it can and should be corrected the moment it is wrong, without waiting for a
+  release batch.
+* **The game-version line** (`:7`) — which branch the pack tracks, and that the
+  1.0.7 build is named as the frozen legacy one.
+* **The module count** (`:13`), the **judgment-call count** (`:16`), the
+  **tracked-findings count** (`:24`) and the **probe count** (`:54`). All four are
+  `doccheck --emit-counts` outputs; never hand-carry one.
+* The **veto example id** (`For modders`) must name a fix that still exists — the
+  same trap `5abbfaa` had to fix on the site.
+
+⚠️ `README.md` is **not** in `metadata.lua`'s description and is **not** a store
+card, so the byte-identity scripts of §2/§3 do not cover it. It needs its own read.
 
 ---
 

@@ -119,6 +119,21 @@ the attended A/B is checklist 158. Entry: `bugs/C88.md`.
   loads `Code/Fix_DomeFreeSpaceMismatch.lua`, which F60's retirement deleted.
   Confirmed by running it at `59c8c47^`. It needs repairing before `deskbench` can be
   read as a release signal — otherwise a real failure hides behind a known one.
+- ⭐ **NEWLY FOUND SURFACE, 2026-09-12: the repo's own `README.md` is stale and it is
+  PUBLIC** (it is the GitHub front page every reporter and both Paradox developers
+  land on, and it has never been in `PUBLIC_SURFACE_SWEEP.md` — now added there as §3b).
+  **Six wrong claims, all verified against `doccheck` on 2026-09-12; ⛔ do NOT hand-copy
+  these replacement numbers, re-derive them at apply time:**
+  | line | says | doccheck says |
+  |---|---|---|
+  | `README.md:7` | "against game version **1.0.7.396349**" | the pack tracks **1.1.0**; 1.0.7 is the frozen legacy build |
+  | `README.md:9` | "version 1.0.0 — prepared for first release, **not yet on a store**" | **v9 is LIVE** on Steam and Paradox |
+  | `README.md:13` | "**75 fix modules**" | 49 registered / 50 files |
+  | `README.md:16` | "**Five** fixes are judgment calls" | three, going to four with C89 |
+  | `README.md:24` | "**167 tracked findings**" | 222 index rows |
+  | `README.md:54` | "**96 checks**" | 97 probes |
+  ⚖️ **The `:9` store-status line is NOT a count and should not wait for v10** — see
+  checklist **160**. The five counts belong to this batch's single re-derivation.
 - **Two new candidate entries were filed by this build and neither is a player
   surface:** `C90` (a defect in the pack's own core — a declined `DataPatch`
   self-check still patches shipped data; reaches `Fix_SaintBlessing` and
@@ -161,6 +176,13 @@ in full, apply, and turn this section into the Pending entries for v10.
   Current-data-hidden claim supports **two**, not three, rows (F57a and F29, not
   subfix counting); judgment rows still3, Lake key ships, seven-machine scope true.
   Full proposed F31+F37 headline removal gives19; headlines are not repair count.
+- ⛔ **THE SITE TREE HAS THREE UNCOMMITTED FILES WAITING ON THE OWNER** (2026-09-12):
+  `content/faq.md`, `content/for-modders.md`, `content/install.md` in
+  `C:\Dev\SMR-CommunityMods` — today's modder-doc paring, not yet ruled on. The
+  deploy of `a061665` is already held for v10, so they ride the same release, but
+  **the deploy must not go out until the owner has ruled on them**, and no agent may
+  commit or discard in that repo. Re-read `git -C C:\Dev\SMR-CommunityMods status
+  --porcelain` rather than trusting this line. Detail: `PUBLIC_SURFACE_SWEEP.md` §1.
 - **All maintained copies:** metadata description, both STORE_CARD_LIVE blocks,
   both UPLOAD_WORKFLOW backups, complete site rows and FAQ/editorial tallies.
   Recheck intro examples/categories, not only bullets. No live body/deploy read

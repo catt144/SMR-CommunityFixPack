@@ -29,6 +29,39 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### 2026-09-12 — 160: our GitHub front page still says the mod **is not on a store**. One line, one decision: fix it now, or let it ride to v10?
+
+> **The problem, in one sentence.** `README.md` — the page anyone who clicks through from a
+> Steam or Paradox comment lands on first — has never been swept, and line 9 still reads:
+>
+> > **Status: version 1.0.0 — prepared for first release, not yet on a store.**
+>
+> v9 has been live on both stores since 2026-09-12. A reporter who reads that line concludes
+> the thing they are running is not the released build; **one of the two Paradox developers
+> reading our fix list could conclude the same.**
+>
+> **Five other claims on that page are also wrong, and those are counts** — module count,
+> judgment-call count, tracked findings, probe count, and the "against game version 1.0.7.396349"
+> line. ⛔ Agents are **not** touching those: counts have a re-derivation protocol that belongs
+> to the release lane, and they are now filed in `agent/prompts/perma/RELEASE_OUTBOX.md` under
+> the v10 notes so the single v10 count pass picks them up. `README.md` is also now a numbered
+> surface in `PUBLIC_SURFACE_SWEEP.md` (§3b), which is why it had rotted — it was on no list.
+>
+> ❓ **Your call, and it is only about line 9:**
+>
+> **(a) Fix it now, on its own, before v10.** ✅ **Recommended.** It is not a count, so it needs
+> no re-derivation and cannot go stale between now and the upload. It is one sentence of pure
+> factual error on the most-visited page we have, it costs an agent about a minute, and every
+> day it stands is a day a reporter or a developer can be misled about what they are running.
+> The five counts still wait for v10; nothing about this pre-empts that pass.
+>
+> **(b) Let it ride with the v10 sweep.** One commit instead of two, and the whole page becomes
+> correct at once. The cost is that the wrong sentence stays up for however long v10 takes, and
+> v10 is currently gated behind a play sitting (**158**) that needs 20–30 minutes of your time.
+>
+> ⚠️ Say **(a)** and an agent can do it unattended the moment you answer; nothing else on the
+> page gets touched.
+
 ### 2026-09-12 — 158: three new fixes are built and waiting on your eyes. **ONE boot does all three. C89 is the one you asked to watch yourself; the other two are minutes.**
 
 > **What is built** (all three ride v10, all three desk-checked, none of them run in a game yet):
@@ -569,7 +602,7 @@ warn STATE.md is 12991 bytes, warn threshold is 12288 — copy this line VERBATI
 > the entry. The run itself and its result stand. It matters because that line was a candidate to repeat to
 > Paradox.
 
-### ⚖️ 2026-09-11 — 152 PART-RULED 09-12: **F59's A2 half is `tested-attended`** · **(e)'s three overclaiming rows sweep with the v10 site publish** · ⏳ **(c), the kick-button lead, stays open — you asked for a refresher**
+### ✅ 2026-09-11 — 152 FULLY RULED: **F59's A2 half is `tested-attended`** (09-12) · **(e)'s three overclaiming rows sweep with the v10 site publish** (09-12) · **(c) CLOSED 09-12 — the kick button is DESIGN, not a defect. Nothing is owed from you.**
 
 > **What you ruled (2026-09-12), both as recommended:**
 >
@@ -581,9 +614,46 @@ warn STATE.md is 12991 bytes, warn threshold is 12288 — copy this line VERBATI
 >   "Colonists stayed homeless after you built a Shuttle Hub" and "A dome sat half empty…" (its "no expiry at
 >   all" line) as part of the v10 publish, not as a separate errand.
 >
-> ⏳ **(c) STILL OPEN — no ruling 2026-09-12.** You asked for a refresher on the residence infopanel's kick
-> button (right-click an occupant does not close the slot, so the freed bed can go straight back to the colonist
-> you just kicked). It is filed as a lead, not a defect; nothing is owed until you have read it back.
+> ✅ **(c) CLOSED 2026-09-12 — VERDICT: DESIGN, not a defect. Nothing to build, nothing owed from you.**
+> You asked for a refresher on the residence infopanel's kick button (right-click an occupant does not close
+> the slot, so the freed bed can go straight back to the colonist you just kicked). A source investigation
+> settled it, and the answer is that **the button does exactly what it says and closing the slot is a
+> deliberate SECOND click on the same pixel.** All citations below are re-read from the live 1.1.0 tree
+> (`ModTools\Src`, the `bodycheck.py` `DEFAULT_SRC`) on 2026-09-12.
+>
+> 1. **The button's own hint promises an eviction and nothing more.**
+>    `T(12193, "<left_click> Select  <right_click> Evict")` —
+>    `Data/XDef/sectionResidenceList.lua:114`, byte-identical at `Data/XDef/sectionOccupantList.lua:98`.
+>    It evicts. It never claims to close the slot.
+> 2. **Closing the slot is a documented second right-click on the now-empty slot.** Same file:
+>    `T(8988, "<right_click> Close this residential slot")` at **`:116`**, its result
+>    `T(4177, "This slot is closed. Colonists will never occupy it.")` at **`:104`**, and the reopen
+>    counterpart `T(8990, "<right_click> Open this residential slot")` at `:124`. `OnAltPress`
+>    (**`sectionResidenceList.lua:50-62`**) is a three-way switch on the same control:
+>    occupant → `KickResident`; empty **or reserved/appointed** → `ClosePositions`; otherwise →
+>    `OpenPositions`. **Evict-then-close is a two-click design, not a missing step.**
+> 3. **There is no asymmetry inside housing.** All **nine** `SetResidence(false)` call sites in the shipped
+>    tree were enumerated (`TraitPreset.lua:772`, `NaturalHabitat.lua:7`, `Residence.lua:85/157/265`,
+>    `Colonist.lua:435/1255/1297/4995`) and **none** sets an avoidance marker; no `avoid_residence`
+>    analogue exists anywhere in the tree. The workplace kick *does* blacklist — `Colonist:GetFired`
+>    (`Colonist.lua:1875-1882`) stamps `avoid_workplace` + `avoid_workplace_start`, honoured for
+>    `g_Consts.AvoidWorkplaceSols` (`Workplace.lua:1273-1275`, `:1294`, `:1331-1332`). So the asymmetry is
+>    **across the housing/job boundary**, where the cost of a bad re-seat differs, not inside housing.
+> 4. **No state leak.** After a kick the counts, the panel labels and the colonist's `residence` pointer all
+>    agree; the re-home is `ChooseResidence` working as intended, on vanilla's own timetable.
+>
+> ⚠️ **The strongest counter-evidence, recorded so it is not lost and nobody re-derives it:**
+> `Residence:KickResident` **accepts a slot index and never uses it** —
+> ```lua
+> function Residence:KickResident(colonist, idx)   -- Residence.lua:156-158
+> 	colonist:SetResidence(false)
+> end
+> ```
+> The `NaturalHabitatBase` override (`NaturalHabitat.lua:5-8`) ignores `idx` too, and the one internal
+> caller (`Residence.lua:368`) does not pass it at all — only the UI does. That dead parameter is the best
+> argument that someone once intended the kick to act on the slot. It is **not enough to overturn the hint
+> text plus the documented second click**, so the verdict stands as DESIGN; if a future reader wants to
+> reopen this, that parameter is where to start.
 >
 > (a) needed nothing and (b) closed on 2026-09-11; (d) is a note, not a decision.
 
