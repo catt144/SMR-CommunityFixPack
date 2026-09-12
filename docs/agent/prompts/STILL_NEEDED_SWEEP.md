@@ -5,6 +5,11 @@
 > `Code/*.lua`.** `git pull` + `git log --oneline -15` first; the records win.
 > ⚠️ Live todo list from your first tool call. 🛑 Stop and ask at any point.
 > ⛔ **Do NOT bundle any of this into the v9 upload.** v9 is F59 + F60 and is already written.
+>
+> ⚖️ **WRITTEN FOR A FAN-OUT COORDINATOR** (owner 2026-09-12: firing this on Codex/Astra, whose design is subagent
+> coordination). The work is partitioned one-module-per-agent with a fixed output schema — see **Running this as a
+> FAN-OUT**, and read that section BEFORE spawning anything: it carries what must NOT be parallelised, the shared
+> working-copy hazards, the one serial bottleneck, and the failure mode a fan-out is most exposed to.
 
 ## ⚖️ Why the owner wants this, in their own framing
 
@@ -99,14 +104,86 @@ log supersedes it**, which is why §3 of the Method asks for one early.
 5. `FIX_POLICY` §4a who-benefits and the retire-vs-keep call are **the owner's**, not yours. Produce verdicts with
    evidence; route the decisions to `PLAYTEST_CHECKLIST.md`.
 
-## Size, and how to run it
+## Running this as a FAN-OUT — the owner is firing it on a coordinator
 
-46 modules is more than ~2 sessions ⇒ **propose a chain** (`reports/CHAIN_METHOD.md`), do not start swinging.
-A sensible cut: a cheap mechanical pass over all 46 first (does it still apply? does anything still read what it
-changes? is its fix-list row still true?), which triages into a short list that gets the expensive treatment.
-⚖️ Owner routing: **broad hunts and censuses go to Codex/Astra; builds stay with Claude.** A 46-module census is a
-hunt. ⛔ Write the brief tool-neutral and make the coordination git-visible — Codex sessions are invisible to
-`ListAgents`.
+⚖️ Owner, 2026-09-12: this runs on Codex/Astra, whose design is subagent coordination and multitasking.
+The work is written to be **partitioned**. What follows is the part that changes when many agents run at once.
+
+### The unit of work — one module, one agent, one row
+
+Each subagent takes **one shipped module** and answers exactly four questions, in this order, stopping at the
+first that settles it:
+
+1. **Does it still apply on 1.1.0?** (its `Require`/probe passes — ⚠️ a source read cannot answer this for a
+   preset/data check; see the boot-log bottleneck below.)
+2. **Does anything still READ what it changes?** ← the F60 question, and the one a naive sweep skips.
+3. **Is its fix-list row still true?** (`SMR-CommunityMods/content/fix-list.md`)
+4. **Is its store-card bullet still true**, if it has one? (`metadata.lua` `description`)
+
+**Fixed output schema, so 46 results merge without anyone reconciling prose.** One row per module:
+
+```
+module | entry | applies? | consumer still reads it? | row true? | bullet true? |
+verdict RETIRE|REBUILD|KEEP|KEEP-BUT-FIX-CLAIM | evidence file:line on 1.1.0.403908 | SOURCE|INFERRED |
+what I did NOT check
+```
+
+⛔ **A verdict with no `file:line` is not a result.** ⛔ **`INFERRED` is not a defect.** Label honestly; a wrong
+`SOURCE` label is worse than an honest `INFERRED` one, because the merge trusts the label.
+
+### ⛔ What must NOT be parallelised
+
+* **The retire/keep DECISION.** `FIX_POLICY` §4a who-benefits is the owner's. Subagents produce verdicts; the
+  coordinator collates; the owner rules. No module is deleted inside this sweep.
+* **The surface-consistency diff.** "Do the ~22 card bullets and the 49 rows agree?" is a **whole-list** question
+  and cannot be sliced per module — a bullet can be stale because a row was *removed*, which no per-module agent
+  sees. One agent, one pass, over both lists together.
+* **Anything that writes `items.lua` or `metadata.lua`.** See the hazards below.
+* **The count words.** Derived once, at the end, from the final list — never by an agent mid-flight.
+
+### ⛔ Shared-tree hazards — several agents in ONE working copy
+
+These have all bitten this repo, with commits to prove it:
+
+* **`items.lua` / `metadata.lua` are a single serialised lane (H-10).** A module's deletion touches `Code/`,
+  `items.lua` and the `metadata.lua` code list *together*, and the owner's Mod Editor writeback lands in the same
+  two files. ⇒ **no subagent edits them. Ever.** Collect deletions as a list; the coordinator applies them once.
+* **`doccheck.py --regen` rebuilds `INDEX.md` from every entry ON DISK, including a peer's uncommitted ones.**
+  Check `git status docs/agent/bugs/` for foreign ` M`/`??` before regen, or you commit someone else's draft.
+* **`git add <paths> && git commit` still sweeps a peer's staged deletions.** Always
+  `git commit -F <msg> -- <explicit paths>`.
+* **Every session commits under the same git identity**, so `git log --author` cannot separate agents. Put the
+  agent's name in the commit body — on 2026-09-11 a sibling's commit was read as the build author's own reply and
+  an audit finding was stood down on it.
+* **Codex sessions are invisible to `ListAgents`.** ⇒ **make the coordination git-visible: the push is the claim.**
+  Commit each subagent's report **verbatim** so a later Claude audit can read what was actually produced, not a
+  summary of it.
+
+### The one genuine SERIAL BOTTLENECK — schedule it, do not assume it
+
+**A preset/data check can only be measured by a runtime read** (`EF-078`). Exactly one agent can launch the game,
+and the boot log's active/inactive list settles question 1 for **all 46 modules at once**. ⇒ **get that log FIRST,
+publish it to every subagent, and let them treat it as given.** 46 agents each reasoning about whether their
+module applies is 46 chances to be wrong about something one log answers. ⚠️ The retail game also cannot be
+launched while `Mars.exe` is running, and the **stale-probe gate** binds (`grep -rln "TEMPORARY" Code/
+../SMR-BugFixPack-TestKit/Code/` must be clean or every hit declared).
+
+### ⛔ The failure mode a fan-out is MOST exposed to
+
+**Agreement between agents is not independence.** On 2026-09-11 three sessions — a build, an audit and a
+re-derivation — all confirmed a harm (A3) that **did not exist**: every one of them inherited the same desk
+fixture, a constant `GetResidenceComfort` stub that silently deleted a validity test the real body inherits
+(`EF-092`). The legs were cross-sensitive, which *reads* as rigour and is satisfied by a fixture that cannot
+produce the right answer. ⇒ **When N agents agree, ask what they SHARE** — a harness, a fixture, a prior report,
+this prompt's own framing — and make at least one check come from the primary artefact instead.
+Corollary: **a subagent re-running another's harness is not an independent check of that harness.**
+
+### Sequencing that keeps the expensive work small
+
+1. **Boot log** (serial, first). 2. **Cheap mechanical pass over all 46** — questions 1–4, schema above, fan out
+wide. 3. **Triage**: only modules whose answers disagree with the record get the expensive treatment (replacement
+traced both ways, residuals named). 4. **The whole-list surface diff**, one agent. 5. **Collate → owner.**
+⚠️ Do not re-derive what hotfix 2 cleared, and do not re-open the inactive-module class marked ✅ clean above.
 
 ## Deliverables
 
