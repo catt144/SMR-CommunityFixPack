@@ -29,6 +29,51 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### 2026-09-12 — 159: the surface audit is in. **Both retirements you ruled check out. The cave-in fix (F31) should go too. Three of the fourteen sentences need a different wording. Three decisions, nothing at the keyboard.**
+
+> **What the audit found** ([full report](agent/reports/SURFACE_AUDIT_2026-09-12.md)): the farm-oxygen fix (F37) and the
+> layout fix (F43, with its F118 rider) are redundant on the current game exactly as you ruled — traced from the shipped
+> code, callers and inheritors counted, nothing found that Codex missed in the other direction. The one loose end
+> Codex named on F37 (a worker dying during a refab) is closed: the game kicks the workers before the building goes, and
+> no farm inside a dome can run with none.
+>
+> **F31, the "cave-in on a map that does not exist" fix — dug to the bottom, as you asked.** Nobody ever saw the story
+> stop: no save, no log, no report, on either game version — the row was written from the code. Your lead held (the
+> "No Asteroids and Underground" rule is marked obsolete on 1.1.0, so a new game cannot pick it). The two routes left
+> open are closed too: the audit read the map data inside all 142 map packs, which no earlier audit had done. The
+> sequences that call for a cave-in exist only on the underground map itself, so the map they name is always the map
+> they run on. There is no non-surface map a player can start on. And on 1.0.7 the rule removed the underground map
+> and every story that could ask for a cave-in with it, so that player could not hit it either.
+>
+> **(1) Retire F31?** Recommended **yes**: module out, row and headline off, count word to Forty-six. The only other
+> honest option is to keep the module as silent insurance for other mods with **no** public row, because there is no
+> true sentence to write about a symptom nobody can have.
+>
+> **(2) One thing the F37 retirement also removes:** its load-time clean-up. On Steam a 1.0.7 save cannot be loaded at
+> all, but on Paradox/console the game only warns and offers "Load anyway", so a player carrying an old save with a
+> phantom oxygen bonus loses the clean-up. You kept the save sanitizer's passes for exactly that crowd (item 117).
+> Recommended **accept the loss** — the leak needed a farm salvaged before it ever worked, and the developer could not
+> reproduce it — or say "move it" and the release lane puts the clean-up into the sanitizer as a third pass.
+>
+> **(3) Three sentences from item 156's batch overstate what the fix does; the replacements are written to ship:**
+> - Item 1 (shuttle hubs): "Only hubs that are on and able to fly count" — a hub the *game* has paused still counts, on
+>   purpose. → **"a hub you switch off stops counting. Only hubs you have left switched on count."**
+> - Item 3 (reserved beds): "a colonist who had died, left, or moved to another dome" — the game already frees the bed on
+>   death and on moving in elsewhere; the bug is the colonist who never arrives. → **"a bed could stay reserved for a
+>   colonist who was never going to arrive — one still waiting for a ride that never came, or one who set off on foot —
+>   and those reservations are invisible in the interface."**
+> - Item 12 (old-track repair): "that track is put back the way it was" — the game restores only the order of the pieces.
+>   → **"A track it cannot sort keeps its old order, and the rest carry on."**
+> - Optional, item 14 (vacuum reflex): "a colonist with a home" → "a colonist whose home is up and running", since a
+>   switched-off home does not call them in.
+>
+> Everything else in the batch is true at the shipped line. Counts: the audit's arithmetic agrees with item 156's
+> (Forty-seven, or Forty-six with F31), but the module and file totals must be re-read at release time because the
+> C85/C88/C89 build is adding three modules to the same update.
+>
+> Required doccheck line, verbatim: `warn STATE.md is 13722 bytes, warn threshold is 12288 — copy this line VERBATIM
+> into the owner report; the owner fires agent/prompts/perma/STATE_EVICTION.md` (STATE was not touched by this audit).
+
 ### 2026-09-12 — 157: new Steam report, "Prosperity for Mars angry about unemployment with 0 unemployed" — triaged, not ours. **Your pushback checked out: it is an oversight, and the developers' own fix exists in one faction out of five. Three decisions: (a) post the reporter reply, (b) hand it to the developers, (c) carry a judgment-call fix ourselves. Recommendations: (a) yes, (b) yes, (c) not yet — wait for their answer.**
 
 > **What your pushback found (added later the same day):**

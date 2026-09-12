@@ -25,7 +25,7 @@
 
 | prompt | state |
 |---|---|
-| `SURFACE_AUDIT_FABLE.md` | **LIVE (09-12), fire next**: cross-vendor check of the Codex still-needed sweep — re-derive the F37/F43 retirements, dig F31 to the bottom, check every owner-ruled sentence (`reports/still-needed/WORDING_RULED.md`); no public edits; deletes itself. Then `perma/RELEASE.md` on the Held batch = v10 |
+| ~~`SURFACE_AUDIT_FABLE.md`~~ | **FIRED 09-12** (`smr-bugfixpack-07`; grave = the commit that landed `reports/SURFACE_AUDIT_2026-09-12.md`): F37/F43 retirements confirmed, F31 settled → RETIRE recommended, three ruled sentences refuted with replacements; decisions on checklist 159. Next: `perma/RELEASE.md` on the Held batch = v10 |
 | `C85_C88_BUILD.md` | **LIVE (09-12), fire in a Claude session**: builds C85 (sweep only, owner-ruled), C89 (the ten-colonist dome gate on seven faction dislikes — judgment call, owner-ruled) and C88 (option 1, law's id) for v10 on top of the two dossier prompts below; consumes all three when done |
 | `C88_PREFAB_BUILD.md` | dossier for the row above (09-11): the Building-Codes-vs-prefabs fix the PDX dev asked us to carry; fired via `C85_C88_BUILD.md`, deleted with it |
 | `CLOGGED_BUILD.md` | dossier for `C85_C88_BUILD.md` (09-11; ck154 RULED 09-12: sweep only), fired via it and deleted with it: unstick a producer left "Clogged after a Dust Storm." (C85) — read-only sweep + two interlocks, acceptance conditions and the owner's A/B; dossier lives in the entry. Fold-in slot CLOSED empty; one open owner decision (ck154) with a stated default; deletes itself |

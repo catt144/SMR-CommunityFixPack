@@ -8,6 +8,43 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-12 - smr-bugfixpack-07: surface audit fired — F37/F43 retirements confirmed, F31 settled (RETIRE), three ruled sentences refuted
+
+tags: surface-audit still-needed F31 F37 F43 F118 F54 F58 F48 wording voice-rule mapdata ck159
+
+Task: the owner fired `prompts/SURFACE_AUDIT_FABLE.md` (one-off; `git rm`'d in this commit). Desk only, no launch, no
+public surface touched. Report: `reports/SURFACE_AUDIT_2026-09-12.md`. Checklist **159** carries the three decisions.
+Ran beside `smr-bugfixpack-aa`'s C85/C88/C89 build (its unstaged files untouched) and after `smr-bugfixpack-d0`'s
+close-out (`22f4708`, shared checkout).
+
+**New instrument.** The one hole every prior audit of F31 left open — per-map `anomaly_sequence_list_names` in binary map
+data — was closed by pulling `mapdata.lua` out of all 142 `Packs/Maps/*.fpk` with `tools/flpk_extract.py`'s parser and
+reading the compiled chunks' string constants (scratch scripts, not committed). Result: `UndergroundAnomalies` is declared
+by the 16 underground blanks only; 41 surface blanks declare `MarsAnomalies`, 20 asteroid maps `GenericAnomalies`; the
+four `BuriedWonder_*` lists are on no map (Underground-gated generator only). With the rule `Obsolete = true` on 1.1.0
+(`Data/GameRuleDef.lua:53-63`), the only `UndergroundMap` assignment in the generator (`Picard.lua:303`), and the
+new-game picker excluding every non-surface map (`map_location_exclude` on all 36, absent on all 41 surface blanks),
+neither half of F31 is reachable on 1.1.0, and the crash half was never reachable on 1.0.7 either (no underground map
+under the rule; the Mar-21 surface data is 1.0.7's). Never observed by anyone (C1). Recommendation RETIRE.
+
+**F37 CONFIRMED redundant**, and Codex's residuals narrowed: the "dying-worker refab window" is closed (`dying` is set only
+in the Die/Erase destructors that call `SetWorkplace(false)` in the same synchronous block, `Colonist.lua:1290-1296`,
+`:1252-1254`); refab always kicks (`FarmBase:OnDestroyed` chains `Workplace.OnDestroyed`, `Farm.lua:416-420`) and no
+in-dome farm can work with zero workers (automation floors 4/2/4, DLC 1/1/4; the only `max_workers = 0` farm is
+`dome_forbidden`). Remaining: scripted routes, and the sweep's off-Steam 1.0.7-save constituency ("Load anyway",
+`config.lua:175`, `SavegameMetadata.lua:164` — `EF-079` records the Steam refusal only) → owner decision 159 (2).
+
+**F43 + F118 CONFIRMED redundant**: outer gate `LayoutConstruction.lua:207-234/:268-297` + `BuildMenu.lua:743/:784-786/
+:836-846` + `GameShortcuts.generated.lua:2069/:2082`; callers of the HOOKED `Activate` = `ConstructionModeDialog:OnStartup`
+(three gated `SetMode` feeders incl. `CopyBuilding`) and the Ged-only `RegisterLayout`; 0 subclasses, 1 layout preset,
+0 in DLC; Codex's cached-admission race bounded to a non-shipped entry shape. F118 has no standalone job.
+
+**Ruled wording**: 10 of 13 checked sentences CONFIRMED at the 1.1.0 line; three REFUTED in one clause each with
+ship-ready replacements — item 1 (F54: game-paused hubs still count), item 3 (F58: vanilla releases on death and
+re-home; the defect is the colonist who never arrives), item 12 (F48: the engine restores element order only). Item 14
+noted (working home). Arithmetic holds for the two retirements; modules/files must be re-derived at apply time because
+the sibling build adds three. F31 retiring makes the card Forty-six and the headlines 19 (20 if it stays).
+
 ## 2026-09-12 - smr-bugfixpack-d0: v9 found live and closed out; ck156 ruled; the Fable surface-audit brief written
 
 tags: release v9 post-upload-close comment-restore ck155 ck156 still-needed wording voice-rule F21 F31 F37 F43 surface-audit
