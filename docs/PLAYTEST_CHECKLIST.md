@@ -48,8 +48,10 @@ completed tests move whole to
 > deleted; the card and the fix list drop to **Forty-nine**). The Mod Editor's *Last changes* box should read:
 >
 > ```
-> - Assigning a colonist to a residence that was already full could leave that home with more residents than it has beds, and fail to evict the colonist it displaced. This was the fix pack's own doing, not the game's, and it is repaired: the freed-bed notice now waits until the move that freed the bed has finished. Watched working in a running colony on game 1.1.0. The same repair should also stop a colonist boarding an expedition from losing the home held for their return; that half is verified in the code only.
-> - We are still working through our own fixes against the 1.1.0 patch. Where the game's own update has solved all or part of what one of our fixes was written for, that fix is retired; where 1.1.0 rewrote the code a fix was built on, the fix is rebuilt against the new version rather than left to drift. Several have been rebuilt that way already, and one more has been retired this time, so the fix list drops from fifty to forty-nine.
+> Housing and migration fixes, reviewed against the 1.1.0 patch:
+>
+> - Freed housing notice - REPAIRED. Assigning a colonist to a residence that was already full could leave that home with more residents than it has beds, and fail to evict the colonist it displaced. That was this pack's own doing, not the game's. The notice now waits until the move that freed the bed has finished. Watched working in a running colony on 1.1.0. The same repair should also stop a colonist boarding an expedition from losing the home held for their return; that half is checked in the code only.
+> - Dome housing total - RETIRED. 1.1.0 changed how a dome decides whether it has room, and it no longer uses the total this fix corrected. Rather than leave it adjusting a number that no longer feeds the decision, the fix has been removed. The fix list drops from fifty to forty-nine.
 > ```
 >
 > The store bodies should fill themselves from `metadata.lua` ("Forty-nine repairs"); the §3 paste copies are
