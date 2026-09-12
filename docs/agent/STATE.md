@@ -27,9 +27,9 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   `C47OpenFarmSeedBufferShape` (Herbs 100→50), retired `LanderCargoRatchet`/`DroneUnreachableForever`/`AutoExportPriority`.
 - ✅ BOTH 09-12 LANES REPORTED: build `59c8c47` C85 + `98d0461` C89 (⚖️ judgment call, FAQ count 3→4) + `4dc5073` C88
   (ck158 = all three attended A/Bs, ONE boot; owner grants `tested-attended`), audit `4c7b11a` (ck159).
-  ⛔ NEW, ours: **C90** a declined `DataPatch` self-check still patches (hits `SaintBlessing`, `SinkholeIndestructible`);
-  **C91** vanilla leaks the Building Codes modifier on repeal. ⛔ `deskbench` REFUTED row is PRE-EXISTING (`9bc4360`):
-  `desk_migration_cluster.py` loads F60's deleted module — repair before reading deskbench as a release signal.
+  ⛔ **C90** measured: declined passes can write/arm healing, then restore active; fix shape UNRULED (ck158).
+  **C91** vanilla leaks the Building Codes modifier on repeal. ✅ F60 harness repaired from git; deskbench 20/20 HELD.
+  C90 control 18/18 + all eight scratch falsifiers discriminate; limits/census: `reports/DESKBENCH_C90.md`.
 - ⏭ NEXT: `RELEASE.md` over the outbox's **Held** batch + the 3 Pending = **v10**; text =
   `reports/still-needed/WORDING_RULED.md` + its ⚖️ **VOICE RULE** (binds every surface); ck156 RULED (retire F37 + F43/F118,
   F21 STAYS, F31 → the audit). ⛔ Re-derive every count once. Then the owner's upload + the **held** site deploy.

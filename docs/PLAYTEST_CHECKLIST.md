@@ -222,10 +222,12 @@ patch, and they asked us to carry the fix meanwhile.
 #### Two things I found while building these, neither of them needing you today
 
 - **C90 — a bug in our own pack** (`agent/bugs/C90.md`). A module whose safety self-check *fails* can still
-  edit the game's data, while the log and the fix list both say it switched itself off. The new C89 module
-  carries a guard against it; **`Fix_SaintBlessing` and `Fix_SinkholeIndestructible` do not.** Nothing has
-  gone wrong in the field — it needs a game update to break one of their self-checks first — so it is filed,
-  not fixed. Worth a decision at some point: fix the two modules, or fix the shared core.
+  bypass that decision. **Measured at the desk 09-12:** Sinkhole writes both flags after a missing-target
+  decline; Saint rewrites old-branch data or arms its 1.1.0 save repair. Both then report **active** again,
+  clearing the failed self-check from the update warning. No field trigger is established. **Owner decision
+  still owed:** guard the two modules (recommended), or change the shared core's apply-verdict contract.
+  C89 already guards its pass; neither current OnDataReady caller exposes the same data-write gap.
+  **No production fix landed.** Full evidence and limits: `agent/reports/DESKBENCH_C90.md`.
 - **C91 — the game leaks the Building Codes maintenance change on repeal** (`agent/bugs/C91.md`). Repeal the
   law and every building it touched keeps the maintenance change; the developers clearly know, because they
   shipped a one-time save cleanup for it rather than fixing repeal. **Good material for the developer
@@ -234,10 +236,10 @@ patch, and they asked us to carry the fix meanwhile.
 
 #### One housekeeping flag for whoever uploads v10
 
-`python tools/deskbench.py` currently has one **REFUTED** row, and it is **not** from this work:
-`tools/desk_migration_cluster.py` still loads `Code/Fix_DomeFreeSpaceMismatch.lua`, which F60's retirement
-deleted on 09-11. I confirmed it was already failing before my first commit. It should be repaired before
-the release gate reads `deskbench` as a signal — otherwise a real failure hides behind a known one.
+**Resolved 09-12:** `tools/desk_migration_cluster.py` now reads F60's pre-retirement body from git.
+All 16 original demands remain, including every F51 leg and both F60 harm legs. Full deskbench is green:
+20 harnesses, 254/254 numbered demands plus three unnumbered harnesses. This repairs the pre-existing
+failure from F60's deleted file; it is desk evidence, not release clearance or an attended playtest.
 
 ### 2026-09-12 — 159: the surface audit is in. **Both retirements you ruled check out. The cave-in fix (F31) should go too. Three of the fourteen sentences need a different wording. Three decisions, nothing at the keyboard.**
 

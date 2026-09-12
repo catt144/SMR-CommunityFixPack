@@ -16,6 +16,10 @@ import deskbench as db
 # Code/ and a falsifier that cannot express the harm is not a falsifier.
 F59_HARMFUL_REV = 'bb50f5d'
 
+# F60 was retired in 9bc4360. Keep its harm controls on the actual last
+# pre-retirement body; the live pack deliberately no longer contains this file.
+F60_HARMFUL_REV = '9bc4360^'
+
 
 def runtime():
     rt = db.lua_runtime()
@@ -232,7 +236,7 @@ def main():
                 rt.eval('dome.free_spaces.inclusive == 0 and not Community.HasFreeLivingSpaceFor(dome,colonist) and ChooseResidence(colonist,{home}) == home'))
     bench.check('F60 vanilla applicant housing estimate excludes the unpowered home',
                 rt.eval('GetAvailableResidencesFor(applicants,3,housing_city) == 0'))
-    module(rt, 'DomeFreeSpaceMismatch')
+    module(rt, 'DomeFreeSpaceMismatch', rev=F60_HARMFUL_REV)
     rt.execute('Dome.RefreshFreeLivingSpaces(dome)')
     bench.check('F60 patched tally counts 3 but migration gate still rejects',
                 rt.eval('dome.free_spaces.inclusive == 3 and not Community.HasFreeLivingSpaceFor(dome,colonist)'))

@@ -8,6 +8,18 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-12 — Codex DESKBENCH_C90: instrument repaired, C90 measured, no production fix
+
+tags: C90 F60 deskbench self-check DataPatch census falsification
+
+Owner-fired `agent/prompts/DESKBENCH_C90.md`, consumed in this landing. Report:
+`agent/reports/DESKBENCH_C90.md`. F60's pre-existing missing-file failure (since `9bc4360`) is repaired
+by loading its own pre-retirement body; all 16 migration demands preserved. This resolves the old STATE
+warning to repair the instrument before using deskbench. Full run: 20 harnesses HELD, 254/254 numbered
+demands plus three unnumbered harnesses. C90: 18/18 and eight external scratch falsifiers, all discriminate.
+No shipped Lua changed or game launched. C90 remains cand and its fix shape remains the owner's decision
+in checklist 158. The census and measured status correction are in the entry, with limits in the report.
+
 ## 2026-09-12 - smr-bugfixpack-aa: C85 + C89 + C88 BUILT for v10 — three modules, two new candidates filed, four near-misses caught at the desk
 
 tags: C85 C88 C89 C90 C91 build judgment-call clogged faction-dome-gate building-codes prefab DataPatch GameVar F75 falsification ck158
