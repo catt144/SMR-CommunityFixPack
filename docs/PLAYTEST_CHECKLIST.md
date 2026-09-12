@@ -1328,8 +1328,9 @@ warn STATE.md is 12991 bytes, warn threshold is 12288 — copy this line VERBATI
 > Steam shows no version number. The upload itself accepted the 6,206-character description.
 > Nothing more is asked here (the Paradox version display is never chased, item 71).
 >
-> **Now postable:** the two Steam replies for the C74 and C83 reporters
-> (`FIELD_REPORT_REPLIES.md`, "Steam comments answered by the v7 update").
+> ✅ **Posted** (your word, 2026-09-12): the two Steam replies for the C74 and C83 reporters
+> went up with the v7 update. Recorded in `FIELD_REPORT_REPLIES.md` → "What was actually
+> posted" → the Steam table, marked owner-stated (there is no API for a Steam comment).
 
 ### 2026-09-10 — 144: two small asks around the v7 upload; neither blocks it.
 
@@ -1346,6 +1347,14 @@ warn STATE.md is 12991 bytes, warn threshold is 12288 — copy this line VERBATI
 > The Drone Hub effect is never triggered by anything in the game; the misspelled sound is a
 > duplicate of a loop that is already playing. A short follow-up post is ready in
 > `FIELD_REPORT_REPLIES.md` — post it only if your reply said "still checking".
+>
+> ✅ **Answered 2026-09-12 — half of it.** The **C74 and C83 replies did go up** with the v7
+> update (your word; there is no API for a Steam comment, so it is recorded as owner-stated in
+> `FIELD_REPORT_REPLIES.md` → "What was actually posted" → the Steam table). **The long sounds
+> post is still unanswered** — this item stays open for that half only. If your post said "still
+> checking", the short follow-up is ready (`FIELD_REPORT_REPLIES.md`, marked `HELD on ck144 (b)`);
+> if it did not, say so and the item closes with nothing owed. ⚠️ Either way the post's
+> "currently in testing" wording has gone stale: v7, v8 and v9 have all shipped since.
 
 ### ✅ 2026-09-10 — 143 CLOSED: **FIX BUILT + TESTED-ATTENDED** — new arrivals no longer fall back into a switched-off, quarantined dome ([C83](agent/bugs/C83.md)).
 
