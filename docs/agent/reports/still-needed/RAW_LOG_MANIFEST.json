@@ -1,0 +1,29 @@
+{
+  "reason": "Git autocrlf normalized original mixed line endings; append-only raw companions preserve original byte hashes",
+  "logs": [
+    {
+      "readable_log": "docs/archive/logs/stillneeded_Mars.exe-20260912-00.25.42-6a91a190.log",
+      "raw_companion": "docs/archive/logs/stillneeded_Mars.exe-20260912-00.25.42-6a91a190.log.raw",
+      "raw_sha256": "fb36ba55fec6986c100d21ea736980c1e8e8ccbe29e59321d2d31b50a1490a56",
+      "readable_blob_sha256": "823eef306ac575dfd6684272ed4630d7360799bc31264282835e92930dfbd850",
+      "same_lines": true,
+      "size": 8987
+    },
+    {
+      "readable_log": "docs/archive/logs/stillneeded_registry_Mars.exe-20260912-00.29.01-6a91a190.log",
+      "raw_companion": "docs/archive/logs/stillneeded_registry_Mars.exe-20260912-00.29.01-6a91a190.log.raw",
+      "raw_sha256": "c2b3b25f6862b4aeb9e80648e2938e3f54308cc8b705153aa844469afa8b275c",
+      "readable_blob_sha256": "cc6b2b4d15a2eeb36522229ac2fbe3c395124cc0ec34661c64f1a2cfccdde5df",
+      "same_lines": true,
+      "size": 17509
+    },
+    {
+      "readable_log": "docs/archive/logs/stillneeded_f46_Mars.exe-20260912-01.00.26-6a91a190.log",
+      "raw_companion": "docs/archive/logs/stillneeded_f46_Mars.exe-20260912-01.00.26-6a91a190.log.raw",
+      "raw_sha256": "a24941a12a7ae1269a62a65587c6fd829405f5be983dc6b69635b3feac4260db",
+      "readable_blob_sha256": "8eb683aded71e75bee7cbf64a6bc80cf82724a481a466ad63535fb16c7320c2a",
+      "same_lines": true,
+      "size": 12068
+    }
+  ]
+}

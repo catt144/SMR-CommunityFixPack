@@ -112,3 +112,15 @@ Harness disarm passed. TestKit metadata SHA256 restored to
 All temporary Code hits removed; no game remains running. Graceful quit/WM_QUIT
 and complete Debug::Done footer at log end. This control adds no tested-attended
 status and transfers no cure coverage to F114 or other modules.
+
+
+## Byte preservation in git - append-only raw companions
+
+A post-push byte check found core.autocrlf normalized the readable .log blobs.
+Their lines are identical but their git-blob hashes differ from the original
+mixed-line-ending log bytes captured above. No existing archive record was edited.
+Three new `.log.raw` companions preserve the original bytes with a narrow -text
+attribute; `RAW_LOG_MANIFEST.json` maps both forms and hashes. The original boot,
+registry and native-control SHA256 values above/CENSUS refer to these raw bytes.
+Line numbers are identical in the readable and raw forms. Fresh-checkout byte
+verification should use the raw companions, not the normalized readable .log.

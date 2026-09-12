@@ -16,3 +16,7 @@ tools/hooks/* text eol=lf
 # calling it a "transient"). Pinned so the cap measures the resource and not
 # the checkout. ⇒ Any file a tool measures in BYTES belongs here.
 docs/agent/STATE.md text eol=lf
+
+# Append-only companions preserve this sweep's original mixed log line endings.
+# Recorded SHA256 hashes describe these raw bytes; readable .log blobs normalize.
+docs/archive/logs/stillneeded_*.log.raw -text

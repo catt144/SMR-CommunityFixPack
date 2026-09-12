@@ -75,3 +75,5 @@ Final unit includes native F46 complete log/control/save reconciliation, generat
 owner checklist156, held after-v9 surface/outbox proposals and consumed-prompt lifecycle.
 Reports committed verbatim across coordinator batches and pushed; see git history.
 No loadable, public, version, deployment or retirement changes. TestKit clean/Mars absent.
+
+Post-push byte check: Git normalized readable log endings; three new append-only raw companions preserve original SHA256 byte pins. Same evidence lines; narrow -text attribute and RAW_LOG_MANIFEST mapping. No existing archive edits.
