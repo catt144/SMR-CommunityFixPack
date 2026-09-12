@@ -156,6 +156,27 @@ completed tests move whole to
 > It also holds on game 1.0.7, which matters because Steam and Paradox 1.0.7 players run this same pack.
 > **What the audit could not do is boot the game**: the one thing still owed is the post-release boot with
 > the `applied` line, plus the four-click receipt above if you want to see it with your own eyes.
+>
+> ✅ **THE FOUR-CLICK RECEIPT RAN, 2026-09-11 — YOU SAW IT, AND IT PASSED.** Your own console lines:
+> `[F59] cap=20 closed=6 residents=14 reserved=0 free=0` and `[F59] dome has a spare bed:  false`.
+> Effective capacity is 20 − 6 = **14** and there were **14** residents ⇒ **no overfill**. The unrepaired
+> version reads **15** there. Better still, the evicted resident ended up in the *incoming* colonist's old
+> bed — a bed that only frees up **after** the point where the old code fired — so the ordering was visible,
+> not just the count. And the dome read `false` for spare beds, which is what stops this being a test that
+> passes no matter what. **F59's manual-assign half is now observed working in a real game.**
+>
+> ⛔ **What that does NOT mean, so it isn't over-claimed later:** the expedition half (a crew member losing
+> their held home at boarding) is **still untested** — no expedition was sent. Nobody has seen the *broken*
+> behaviour in play either; that it would read 15 is desk-measured, not witnessed. And the frozen 1.0.7
+> download still carries the unrepaired module.
+>
+> ⚠️ **One of my predictions was wrong and cost you a few minutes:** I said pausing the game would visibly
+> hold the repair's notification back. It didn't — it looked instant even paused. That guess was never what
+> the repair needs (it needs to run after the game's own operation finishes, which can still be instant), and
+> I should not have offered it as a test. The numbers were the right check all along.
+>
+> **Decision: grant `tested-attended` to F59's A2 half?** That word is yours, not an agent's. Recommendation:
+> **yes for A2**, and leave A1 source-derived until an expedition is actually sent.
 > Retiring the fix instead of repairing it is NOT recommended — you would lose the immediate offer of every
 > genuinely freed bed (up to 12 hours per bed in a big colony) and gain nothing the audit could find.
 >
