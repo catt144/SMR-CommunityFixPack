@@ -1,6 +1,7 @@
 # smrtk 02 — the skeleton in the real game (attended) — ⛔ KILL GATE
 
-Link 02 of `smrtk`. Any model, the owner at the keyboard. README rules 1–22 are yours; rule 13 shaped the script
+Link 02 of `smrtk`. A **Claude** session attending (rule 22: the non-building vendor scores the builder's
+predictions), the owner at the keyboard. README rules 1–22 are yours; rule 13 shaped the script
 below (01 writes it). Score every step against `reports/SMRTK_SKELETON_PREDICTIONS.md`, prediction by prediction.
 
 ## The four premises this sitting decides

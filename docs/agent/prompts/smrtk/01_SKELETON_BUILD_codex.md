@@ -1,11 +1,12 @@
 # smrtk 01 — the walking skeleton (build)
 
-Link 01 of `smrtk`. README binding rules 1–22 are yours. Staleness: rule 1 in both repos. Pre-flight: the
+Link 01 of `smrtk`. **Codex / Astra** (rule 22: Codex builds, Claude judges). README binding rules 1–22 are yours. Staleness: rule 1 in both repos. Pre-flight: the
 five facts' fingerprint (rule 12) and `Mars.exe` closed (rule 16).
 
-## Job 0 — re-validate the cut (30 minutes, not a re-design)
+## Job 0 — re-validate the cut (30 minutes, not a re-design) — this is a CROSS-VENDOR read
 
-Read the README's queue, layout and rules against `EF-095`–`EF-099` and the TestKit as it is on disk. If a link is
+This chain and its five facts were authored by a Claude session. You are the first other vendor to read them, before
+any code exists; that is the point of seating you here. Read the README's queue, layout and rules against `EF-095`–`EF-099` and the TestKit as it is on disk. If a link is
 mis-sized, mis-ordered or rests on a premise you cannot find in the source, **rewrite that unconsumed link and say
 so in its inbox and in ck175** — never absorb the disagreement silently. If the cut holds, write one line in 02's
 inbox: "cut re-validated, no change".

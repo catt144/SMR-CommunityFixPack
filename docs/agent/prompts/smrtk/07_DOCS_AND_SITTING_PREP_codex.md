@@ -1,6 +1,6 @@
 # smrtk 07 — the documentation, the standing slot prompt, and 08's preparation
 
-Link 07 of `smrtk`. README rules 1–22 are yours. After 03B has closed (read its outbox first — it carries the verified
+Link 07 of `smrtk`. **Codex / Astra** (rule 22). README rules 1–22 are yours. After 03B has closed (read its outbox first — it carries the verified
 button lists per page, the stubs still owed, and the owner items already consolidated into ck175).
 
 ## Job A — the rules the owner asked for ("we need rules about cheats in the documentation")

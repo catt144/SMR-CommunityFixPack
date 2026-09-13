@@ -54,7 +54,7 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   Owner's 2 pared files (`for-modders.md`, `install.md`) stay uncommitted = decision 47.
 - ⭐ FR-1 TEMP WORKAROUND MOD LIVE 09-11 (Steam 3799500849 / PDX 158711). **ALL FR-1 / Linux / NVIDIA work →
   `prompts/perma/LINUX_DISPATCH.md`.** Field: 3 working (one 10xx), 1 failing (GTX 1070, log requested).
-- ⭐ **`prompts/smrtk/` LIVE 09-13 (ck175): the SMR Tool Kit chain — fire `01_SKELETON_BUILD_opus.md`; 02 is the owner's
+- ⭐ **`prompts/smrtk/` LIVE 09-13 (ck175): the SMR Tool Kit chain — fire `01_SKELETON_BUILD_codex.md` (Codex builds, Claude judges); 02 is the owner's
   kill gate.** Premises `EF-095`–`EF-099`, all source-derived until 02.
 - ⏭ NEXT: fire `prompts/STANDDOWN_AUDIT.md` (no blocker) · `prompts/C92_ACHIEVEMENT_BUILD.md` (build+test, ⛔ ships never
   without ck172's hold lifted) · then the playtest sitting. ⛔ `SELFCHECK_PILOT` REMOVED 09-13 (`cf8d51f`).

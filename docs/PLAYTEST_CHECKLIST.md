@@ -143,6 +143,11 @@ a judge of the work done. Codex does A and Claude does B."* Done: the five page 
 cross-vendor judge (**03B**, Claude) sits between the build and the docs. 03B is also where every owner-routed item
 from the builds lands — **as ONE append here**, not five. The queue is now 01 → 02 → 03A → 03B → 07 → 08 → 99.
 
+**Seating, your third ruling:** *"nearly all the work is being done by claude which makes our cross vendor checks
+weak … flip it to codex doing most of the build."* Flipped: **Codex builds 01, 03A and 07; Claude judges 03B and
+audits 99 (Fable)**; your two sittings are attended by Claude. 01's re-validation of the cut is now the first
+cross-vendor check, before any code.
+
 ### ✅ 2026-09-13 — 174 RULED: a fired one-off leaves the prompts map entirely
 <!-- ck:174 status:ruled owner:no -->
 

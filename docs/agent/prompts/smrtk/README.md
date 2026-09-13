@@ -26,18 +26,20 @@ contract). Authoring mechanics: `agent/WORKFLOW.md` "Authoring a prompt" element
 >
 > ⚖️ **SHAPE (owner, 2026-09-13):** *"3A and 3B … cross platform this as a primary / secondary with B being a judge
 > of the work done. Codex does A and Claude does B."* — the five page builds are one fan-out link whose coordinator
-> first settles the shared UI-hook techniques, and a cross-vendor judge sits between the build and the docs.
+> first settles the shared UI-hook techniques, and a cross-vendor judge sits between the build and the docs. Then:
+> *"nearly all the work is being done by claude which makes our cross vendor checks weak … flip it to codex doing
+> most of the build"* — **every build link is Codex, every check is Claude.**
 
 ## The queue
 
 | # | file | model | owner needed? | what it drains |
 |---|---|---|---|---|
-| 01 | `01_SKELETON_BUILD_opus.md` | Opus | no | job 0 re-validates this cut; core (slot engine, logger, ring buffer, taint assert, `ConsoleEnabled` arm), the panel frame (status strip, top row, tabs), MARK / Copy / Flush / cls / eligibility; predictions + 02's script |
-| 02 | `02_SKELETON_SITTING_owner.md` | any (attended) | ✅ keyboard, ~20–30 min | ⛔ KILL GATE: no taint after a leaf action, console hotkey with the Mod Manager CLOSED, the console tap sees prints, clipboard copy pastes, panel survives a load |
+| 01 | `01_SKELETON_BUILD_codex.md` | **Codex / Astra** | no | job 0 re-validates this Claude-authored cut (a cross-vendor read of the plan); core (slot engine, logger, ring buffer, taint assert, `ConsoleEnabled` arm), the panel frame (status strip, top row, tabs), MARK / Copy / Flush / cls / eligibility; predictions + 02's script |
+| 02 | `02_SKELETON_SITTING_owner.md` | Claude attending (attended) | ✅ keyboard, ~20–30 min | ⛔ KILL GATE: no taint after a leaf action, console hotkey with the Mod Manager CLOSED, the console tap sees prints, clipboard copy pastes, panel survives a load |
 | 03A | `03A_PAGES_FANOUT_codex.md` | **Codex / Astra** (top tier on P5) | no | the spike (shared UI-hook techniques, once), then the five payloads below as parallel subagents; gates per result; commit per file; a numbered-claims report |
 | 03B | `03B_JUDGE_claude.md` | **Claude** (Opus) | no | re-runs every gate, samples routes against the facts, checks the shared techniques were shared, enumerates idle patches, consolidates every owner item into ONE ck175 append; PASS / PASS WITH FIXES / RE-FIRE |
-| 07 | `07_DOCS_AND_SITTING_PREP_opus.md` | Opus | no | WORKFLOW + PLAYTEST_HELP + TestKit README; `perma/SMRTK_SLOTS.md` (how an agent pre-loads a sitting); predictions + 08's script |
-| 08 | `08_FULL_SITTING_owner.md` | any (attended) | ✅ keyboard, 07 prices it | the full attended leg: every page, every button class, a stamp, a save/load round trip, a trigger firing |
+| 07 | `07_DOCS_AND_SITTING_PREP_codex.md` | **Codex / Astra** | no | WORKFLOW + PLAYTEST_HELP + TestKit README; `perma/SMRTK_SLOTS.md` (how an agent pre-loads a sitting); predictions + 08's script |
+| 08 | `08_FULL_SITTING_owner.md` | Claude attending (attended) | ✅ keyboard, 07 prices it | the full attended leg: every page, every button class, a stamp, a save/load round trip, a trigger firing |
 | 99 | `99_AUDIT_fable.md` | Fable | ✅ raises | terminal adversarial audit: the taint invariant re-derived against the ARCHIVED log, every action's route read for `NetSyncEvent`/`LogCheatUsed`, tag coverage, idle invariant, the 03A/03B cross-vendor split adjudicated, falsifiers RED, verdict, folder-empty gate, kickoff lines |
 
 ### 03A's payloads (`payloads/`, consumed by 03A on its close-out)
@@ -50,11 +52,15 @@ contract). Authoring mechanics: `agent/WORKFLOW.md` "Authoring a prompt" element
 | P4 | `P4_SAVES_KIT.md` | `75_SMRTK_Saves.lua` + `76_SMRTK_Kit.lua`: slots A/B/C with the session-id guard, provenance; RunAll / run-one-probe, logger toggles, log tail, error counter, fingerprint, dump, snapshot + diff, watch-a-field, force-open console |
 | P5 | `P5_STAMPER.md` | `77_SMRTK_Stamper.lua` + `Layouts/`: the format contract, capture → clipboard, ordered replay, fit check, grids, then state |
 
-Model placement: Fable on **99** only among the Claude links; 03A's vendor puts its top tier on P5 (the capture format is
-a contract every future layout depends on). 01 is Opus because this README and `EF-095`–`EF-099` carry the contract;
-**01's job 0 is to re-validate the cut** with authority to rewrite any unconsumed link (route a disagreement to
-ck175 rather than absorb it). The cross-vendor pair is standing, not conditional: 03A is the chain's largest code
-drop, and without 03B the first check of it would be 99 — after 07 has documented it and after the owner's sitting.
+Model placement — **Codex builds, Claude judges** (owner, 2026-09-13: *"if claude is going to do most of the build
+codex should do that audit or flip it to codex doing most of the build"* — flipped). Every build link (01, 03A, 07)
+is Codex / Astra, with Codex's top tier on P5 (the capture format is a contract every future layout depends on);
+every check (03B, 99) is Claude, Fable on 99; the two sittings are attended by Claude so the non-building vendor
+scores the builder's predictions. 01 inherits the contract from this README and `EF-095`–`EF-099`, and **its job 0
+re-validates a Claude-authored cut** — the first cross-vendor check happens before any code exists — with authority
+to rewrite any unconsumed link (route a disagreement to ck175 rather than absorb it). The judge pair is standing, not
+conditional: 03A is the chain's largest code drop, and without 03B the first check of it would be 99 — after 07 has
+documented it and after the owner's sitting.
 
 **Owner time:** two attended sittings (02 short, 08 longer) plus any ck175 rulings — 03B delivers those as one append.
 
@@ -144,9 +150,10 @@ cross-references by registry id with stubs). 03B may send a payload back to 03A 
     a **numbered-claims report** (built · verified-how with command output · stopped · OWNER-ROUTED · for-07 · DRIFT);
     the coordinator re-runs the gates and commits per file. A payload never `git rm`s anything; 03A consumes the
     payload files on its own close-out.
-22. **Cross-vendor rail.** 03A (Codex) builds, 03B (Claude) judges, 99 (Fable) adjudicates the split. A report is a
-    claim set: numbered, falsifiable by one command, **disagreements first**. B may not PASS a payload whose routes
-    it did not open; A may not treat a payload's self-report as a gate.
+22. **Cross-vendor rail.** Codex builds (01, 03A, 07); Claude judges (03B) and audits (99, Fable). Never the same
+    vendor on both sides of a check. A report is a claim set: numbered, falsifiable by one command, **disagreements
+    first**. A judge may not PASS a payload whose routes it did not open; a builder may not treat a payload's
+    self-report as a gate. If the owner re-seats a link, re-seat its check to the other vendor in the same edit.
 
 ## Derived facts (R-C) — inherited by every link
 
