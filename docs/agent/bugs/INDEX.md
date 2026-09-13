@@ -1,9 +1,9 @@
 <!-- GENERATED — never hand-edit; regenerate with: python tools/doccheck.py --regen -->
 <!-- split_bugs.py --write is the one-time MIGRATION from the retired pre-split doc, never a regeneration; verify: python tools/doccheck.py -->
 
-# Bug index — 222 rows, 187 entry files
+# Bug index — 223 rows, 188 entry files
 
-119 F + 12 D + 91 C. `seq` is the entry's position in the old BUGS.md file order;
+119 F + 12 D + 92 C. `seq` is the entry's position in the old BUGS.md file order;
 the row order below is the old index table's own. Generated from the front matter of
 `docs/agent/bugs/*.md` — edit an entry, not this file.
 
@@ -235,4 +235,5 @@ the row order below is the old index table's own. Generated from the front matte
 | 185 | C89 | Prosperity for Mars reports 'domes with more than 10% unemployment' while the top bar shows 0 unemployed; the faction reads an hourly stored snapshot, the bar reads live | tested-attended | P2 | source-read on 1.1.0.403908 + 1.0.7; one field report (Steam, 09-12, no save); the DEFECT is still not reproduced; JUDGMENT-CALL fix BUILT 09-12 (Fix_FactionDomeSizeGate), desk control 26/26 + the harness falsified on 6 guard-reverted variants; attended in-game A/B 2026-09-12 (ck158) — same dome at 10 then 9 colonists, gate inactive then GATE ACTIVE | [C89.md](C89.md) |
 | 186 | C90 | OUR BUG: DataPatch ignores apply self-check decline; unguarded passes can write data or arm healing, then restore active status | fixed | P3 | actual-core historical and live controls held; eight original scratch falsifiers plus both live guard removals discriminate; source-checked reset ordering; unexercised in play | [C90.md](C90.md) |
 | 187 | C91 | Repealing Building Codes leaves its maintenance modifier on every building it touched: the cost half is reverted by a LawEffect's OnStop, the maintenance half is written by a MsgReaction that nothing reverts | cand | P3 | source-read on 1.1.0.403908; every OnMsg.LawDeactivated handler in the tree enumerated; not reproduced in play | [C91.md](C91.md) |
+| 188 | C92 | The Boundaries of Knowledge (ResearchedAllTechs) achievement can never fire once a Repeatable tech sits in a tracked group — the filter excludes Initiatives but not Repeatables | cand | P2 | source-read on 1.1.0.403908; one field report (Steam bug-report channel, 2026-09-12, no save at first, then the reporter's own save supplied); the reporter's save (Sol 490, sponsor Japan, DLCs norman+thomas, active_mods={}) read live in-game confirms the predicted state — both Repeatable techs in Society's Pride cluster show the repeat icon, never a checkmark, with 3 research points sitting idle | [C92.md](C92.md) |
 
