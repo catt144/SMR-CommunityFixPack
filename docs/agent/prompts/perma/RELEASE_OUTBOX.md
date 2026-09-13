@@ -30,6 +30,15 @@ player surface bumps it by one on release.
 
 ⚠️ Three entries below, all landed 2026-09-12 by `prompts/C85_C88_BUILD.md`. They ride v10 **together with** the Held batch — do not ship them separately, and re-derive every count at apply time.
 
+> ✅ **`RELEASE.md` STEP 1 IS APPLIED — 2026-09-12, commit `release words for v10`.** Every
+> surface below carries this batch already: the site fix list (3 rows out, 3 in, 12 re-worded),
+> `content/faq.md`'s judgment count, all five card copies, `metadata.lua`'s `description` +
+> `last_changes`, and `README.md` (§3b's six stale claims). ⛔ **Do not re-apply.** The entries
+> stay *Pending* on purpose — `RELEASE.md` §5 clears them only after the owner confirms the
+> upload. Derived at apply time: count word **stays Forty-nine** (−3 retired, +3 added),
+> headliners 21 → **20**, judgment calls three → **four**. Next step is the owner's upload
+> (`docs/UPLOAD_WORKFLOW.md`), then `POST_UPLOAD_CLOSE.md`.
+
 ### Pending — C85 · `Fix_CloggedBuildingRelease` (`59c8c47`, 2026-09-12)
 
 **`last_changes` bullet (owner's list style, one line, `NEW`):**
@@ -131,11 +140,13 @@ build brief called it a single additional module. Do not add a card, fix-list or
   Read the live count word and `doccheck --emit-counts` at apply time; never carry a
   number from here.
 - **Judgment-call count: three → four**, in all three places, for C89 only.
-- ⚠️ **`deskbench` has one REFUTED row that is not part of this batch and is
-  pre-existing since `9bc4360` (09-11):** `tools/desk_migration_cluster.py` still
-  loads `Code/Fix_DomeFreeSpaceMismatch.lua`, which F60's retirement deleted.
-  Confirmed by running it at `59c8c47^`. It needs repairing before `deskbench` can be
-  read as a release signal — otherwise a real failure hides behind a known one.
+- ✅ **STALE — the `deskbench` REFUTED row is REPAIRED.** This line said
+  `tools/desk_migration_cluster.py` still loaded the deleted
+  `Code/Fix_DomeFreeSpaceMismatch.lua` and needed fixing before `deskbench` could be read
+  as a release signal. It was repaired from git (STATE: "F60 harness repaired from git").
+  **Re-run 2026-09-12 at the v10 release pass: `DESK BENCH: 20 harness(es)`, all 20 HELD**,
+  `desk_migration_cluster.py` among them, and with F37/F43/F31's modules already deleted.
+  `deskbench` reads clean as a release signal.
 - ⭐ **NEWLY FOUND SURFACE, 2026-09-12: the repo's own `README.md` is stale and it is
   PUBLIC** (it is the GitHub front page every reporter and both Paradox developers
   land on, and it has never been in `PUBLIC_SURFACE_SWEEP.md` — now added there as §3b).

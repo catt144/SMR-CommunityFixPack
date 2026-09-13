@@ -4,29 +4,34 @@ A bug-fix mod for Surviving Mars: Relaunched. Almost every fix repairs a
 **defect verified in the game's own shipped Lua** — the code says one thing,
 does another, and the fix makes it do what it says. No rebalancing, no
 features, no game files modified: everything is patched at runtime, in a
-mod-compatible way, against game version **1.0.7.396349**.
+mod-compatible way, against game version **1.1.0.403908**. Players still on
+**1.0.7.396349** are served by a separate frozen build, tagged
+[`v5-game-1.0.7`](https://github.com/catt144/SMR-CommunityFixPack/releases/tag/v5-game-1.0.7).
 
-**Status: version 1.0.0 — prepared for first release, not yet on a store.**
+**Status: live on both stores** —
+[Paradox Mods](https://mods.paradoxplaza.com/mods/156049/Any) and the
+[Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=3787202810).
 
 ## What it fixes
 
-**75 fix modules**, covering disasters and weather, colonists and domes,
-drones and logistics, buildings and economy, trains, rockets and asteroids,
-story sequences, and the numbers on your screen. Several of them also repair
-damage already sitting in your save when you load it. Five fixes are judgment
-calls rather than plain repairs — each one is disclosed on the mod page, with
-the reasoning.
+**46 fix modules** (47 files in `Code/`), covering disasters and weather,
+colonists and domes, drones and logistics, buildings and economy, trains,
+rockets and asteroids, story sequences, and the numbers on your screen. Several
+of them also repair damage already sitting in your save when you load it. Four
+fixes are judgment calls rather than plain repairs — each one is disclosed on
+the mod page, with the reasoning.
 
 The full player-facing list, one entry per fix, lives on the companion docs
-site: [fix-list](https://github.com/catt144/SMR-CommunityMods/blob/main/content/fix-list.md)
-(the rendered site goes live alongside the store release). The engineering
-tracker behind it is in this tree: [docs/agent/bugs/INDEX.md](docs/agent/bugs/INDEX.md)
-— 167 tracked findings, ranging from verified-and-fixed to open candidates.
+site: [the fix list](https://catt144.github.io/SMR-CommunityMods/fix-list/).
+The engineering tracker behind it is in this tree:
+[docs/agent/bugs/INDEX.md](docs/agent/bugs/INDEX.md) — 222 tracked findings,
+ranging from verified-and-fixed to open candidates.
 
 ## For players
 
-Install to `%AppData%\Surviving Mars Relaunched\Mods\` (or from the mod page,
-once it is live) and enable **"Relaunched Fix Pack"** in the Mod Manager.
+Subscribe on the Steam Workshop or install from Paradox Mods — or drop it in
+`%AppData%\Surviving Mars Relaunched\Mods\` by hand — then enable
+**"Relaunched Fix Pack"** in the Mod Manager.
 **Then restart the game** — enabling or disabling any mod only takes effect on
 a full restart.
 
@@ -51,7 +56,7 @@ game does not unlock achievements on Xbox, PlayStation or the Microsoft Store.
 That is the game's own rule and it applies to every mod; Steam and other PC
 versions are unaffected.
 
-Before anything ships, an automated suite of **96 checks** is run against the
+Before anything ships, an automated suite of **97 checks** is run against the
 game with the pack installed and without it.
 
 ## Reporting a bug

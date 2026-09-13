@@ -150,10 +150,10 @@ perfectly normal while the arithmetic underneath it was wrong — a reward for
 freeing the wisps that paid about a thousandth of what its own message promised,
 a researched breakthrough the game restored to only one of the three wind
 turbine types it covers, a track refund that paid a stub's worth of Metals
-however long the line was, a Comfort penalty billed for longer than the journey
-actually took.
+however long the line was, a train travel-time figure that counted the platform
+wait twice.
 
-And three of them repair things you cannot see at all today: real defects that
+And two of them repair things you cannot see at all today: real defects that
 the shipped numbers happen to hide, which another mod, a game patch or a DLC
 could walk straight into.
 
@@ -163,10 +163,10 @@ SOME OF WHAT IT FIXES
 · Colonists walked across the surface between domes and suffocated.
 · Rocket loads of new arrivals died on their way to a dome.
 · New arrivals moved into a dome that was switched off, quarantined or without air.
-· A dome sat half empty and still refused to house anyone.
+· Beds stayed reserved for colonists who were never going to take them.
 · A bed that fell vacant sat empty while colonists were homeless.
 · Night-shift colonists never came back to work after midnight.
-· A salvaged farm kept supplying its dome with oxygen forever.
+· A building clogged by a dust storm never started again.
 · Building an artificial lake buried the rover that built it.
 · Drone Hubs paralysed themselves every time an Extender flickered.
 · Salvaging one piece of track deleted the whole line, and its trains with it.
@@ -178,7 +178,6 @@ SOME OF WHAT IT FIXES
 · An Earth-sent Trade rocket, most often the Wildfire mystery's cure rocket, could get stuck on the landing pad forever.
 · A Jumbo Cave mystery could get stuck clearing waste rock and never complete.
 · The Philosopher's Stone mystery hung one step from the end.
-· A story step asked for a cave-in on a map that does not exist, and the story stopped.
 · The Gene Forging research did nothing at all.
 · The Domes Overview stopped marking domes in trouble.
 
@@ -283,19 +282,19 @@ Bug fixes for [i]Surviving Mars: Relaunched[/i].
 
 Some of them you could hardly miss: an entire train line and every train on it deleted by salvaging a single hex, colonists suffocating on a walk between two domes, an artificial lake burying the rover that was building it.
 
-More of them you would never have blamed on a bug, because the game looked perfectly normal while the arithmetic underneath it was wrong — a reward for freeing the wisps that paid about a thousandth of what its own message promised, a researched breakthrough the game restored to only one of the three wind turbine types it covers, a track refund that paid a stub's worth of Metals however long the line was, a Comfort penalty billed for longer than the journey actually took.
+More of them you would never have blamed on a bug, because the game looked perfectly normal while the arithmetic underneath it was wrong — a reward for freeing the wisps that paid about a thousandth of what its own message promised, a researched breakthrough the game restored to only one of the three wind turbine types it covers, a track refund that paid a stub's worth of Metals however long the line was, a train travel-time figure that counted the platform wait twice.
 
-And [b]three[/b] of them repair things you cannot see at all today: real defects that the shipped numbers happen to hide, which another mod, a game patch or a DLC could walk straight into.
+And [b]two[/b] of them repair things you cannot see at all today: real defects that the shipped numbers happen to hide, which another mod, a game patch or a DLC could walk straight into.
 
 [h2]Some of what it fixes[/h2]
 [list]
 [*]Colonists walked across the surface between domes and suffocated.
 [*]Rocket loads of new arrivals died on their way to a dome.
 [*]New arrivals moved into a dome that was switched off, quarantined or without air.
-[*]A dome sat half empty and still refused to house anyone.
+[*]Beds stayed reserved for colonists who were never going to take them.
 [*]A bed that fell vacant sat empty while colonists were homeless.
 [*]Night-shift colonists never came back to work after midnight.
-[*]A salvaged farm kept supplying its dome with oxygen forever.
+[*]A building clogged by a dust storm never started again.
 [*]Building an artificial lake buried the rover that built it.
 [*]Drone Hubs paralysed themselves every time an Extender flickered.
 [*]Salvaging one piece of track deleted the whole line, and its trains with it.
@@ -307,7 +306,6 @@ And [b]three[/b] of them repair things you cannot see at all today: real defects
 [*]An Earth-sent Trade rocket, most often the Wildfire mystery's cure rocket, could get stuck on the landing pad forever.
 [*]A Jumbo Cave mystery could get stuck clearing waste rock and never complete.
 [*]The Philosopher's Stone mystery hung one step from the end.
-[*]A story step asked for a cave-in on a map that does not exist, and the story stopped.
 [*]The Gene Forging research did nothing at all.
 [*]The Domes Overview stopped marking domes in trouble.
 [/list]
@@ -569,6 +567,45 @@ uploaded — it ships with **v10**, and `version` was not touched (`H-02`).
 and the site (`content/faq.md`, `content/for-modders.md` in `SMR-CommunityMods`) already said
 "shape", and the FAQ already carries an explicit note about the body-rewrite case. The store card
 was the last surface still carrying the old promise.
+
+## ⭐ 2026-09-12 — v10 words (`RELEASE.md` step 1): count word UNCHANGED, headliners 21 → 20
+
+The biggest single batch since hotfix 2, and the only one where **the count word does not move**.
+
+**Count: Forty-nine → Forty-nine.** Three retirements (F37 ghost farm oxygen, F43 layout tech
+lock, F31 cave-in on a missing map — all ruled, modules already deleted in `560343a`) and three
+additions (C85 clogged-after-a-dust-storm, C88 Building Codes prefabs, C89 faction dome size).
+⛔ **Re-derived, not carried:** `WORDING_RULED.md`'s arithmetic predicted **Forty-six** because it
+priced the retirements alone, before the three v10 builds joined the same release. The number
+comes from `grep -c '^??? ' content/fix-list.md` = **49**, section tally summing to 49.
+
+**Headliners 21 → 20.** OFF: F37's *"A salvaged farm kept supplying its dome with oxygen forever."*
+and F31's *"A story step asked for a cave-in on a map that does not exist, and the story stopped."*
+REWORDED: F58's bullet to the ruled headline, *"Beds stayed reserved for colonists who were never
+going to take them."* ON: **C85**, *"A building clogged by a dust storm never started again."* —
+it clears §2's *recognisable* bar (two independent player reports, and the symptom is a building
+visibly stuck with an on-screen reason). C88 and C89 stay in the *"… and a good deal more"* tail:
+C88 is specific to one law, and C89 is a judgment call whose row belongs on the fix list.
+
+**Intro paragraph, two ruled changes.** F21's example *"a Comfort penalty billed for longer than
+the journey actually took"* → *"a train travel-time figure that counted the platform wait twice"*
+(1.1.0 removed the Comfort charge; the travel-time figure is what the fix still corrects). And
+*"three of them repair things you cannot see at all today"* → **two** — F43 leaves that set, which
+now holds F57a and F29 only. The site's *Under the hood* intro moved with it.
+
+**Judgment calls three → four** for C89, in all three `content/faq.md` places (`:24`, `:141`,
+`:145-148`) plus the fix-list `??? question` marker. Derived: `grep -c '^??? .*judgment call\*"$'`
+= **4**. The card's judgment-call sentence states no number, so it did not change.
+
+**Applied to all five copies and verified by script, not by eye:** `metadata.lua`'s `description`
+is byte-identical to `UPLOAD_WORKFLOW.md` §3's plain backup, and this file's BBCode block is
+byte-identical to §3's BBCode backup; this file's plain block differs from the neutral body only
+by the by-design Paradox cross-link paragraph and footer. Length 6,383 → **6,298 characters**
+(two bullets out, one in). ⛔ Nothing uploaded; `version` untouched (`H-02`).
+
+**Twelve fix-list rows re-worded** from `reports/still-needed/WORDING_RULED.md` (items 1, 2, 3, 5,
+6, 7, 8, 9, 10, 11, 12, 14; item 4 F52 held, item 13 F31 is the retirement). ⛔ Those are **not**
+in `last_changes`: a wording correction is not a game repair (outbox, Held §Change note).
 
 ## Provenance of the headliners
 

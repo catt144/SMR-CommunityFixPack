@@ -104,10 +104,10 @@ perfectly normal while the arithmetic underneath it was wrong — a reward for
 freeing the wisps that paid about a thousandth of what its own message promised,
 a researched breakthrough the game restored to only one of the three wind
 turbine types it covers, a track refund that paid a stub's worth of Metals
-however long the line was, a Comfort penalty billed for longer than the journey
-actually took.
+however long the line was, a train travel-time figure that counted the platform
+wait twice.
 
-And three of them repair things you cannot see at all today: real defects that
+And two of them repair things you cannot see at all today: real defects that
 the shipped numbers happen to hide, which another mod, a game patch or a DLC
 could walk straight into.
 
@@ -117,10 +117,10 @@ SOME OF WHAT IT FIXES
 · Colonists walked across the surface between domes and suffocated.
 · Rocket loads of new arrivals died on their way to a dome.
 · New arrivals moved into a dome that was switched off, quarantined or without air.
-· A dome sat half empty and still refused to house anyone.
+· Beds stayed reserved for colonists who were never going to take them.
 · A bed that fell vacant sat empty while colonists were homeless.
 · Night-shift colonists never came back to work after midnight.
-· A salvaged farm kept supplying its dome with oxygen forever.
+· A building clogged by a dust storm never started again.
 · Building an artificial lake buried the rover that built it.
 · Drone Hubs paralysed themselves every time an Extender flickered.
 · Salvaging one piece of track deleted the whole line, and its trains with it.
@@ -132,7 +132,6 @@ SOME OF WHAT IT FIXES
 · An Earth-sent Trade rocket, most often the Wildfire mystery's cure rocket, could get stuck on the landing pad forever.
 · A Jumbo Cave mystery could get stuck clearing waste rock and never complete.
 · The Philosopher's Stone mystery hung one step from the end.
-· A story step asked for a cave-in on a map that does not exist, and the story stopped.
 · The Gene Forging research did nothing at all.
 · The Domes Overview stopped marking domes in trouble.
 
@@ -231,19 +230,19 @@ Bug fixes for [i]Surviving Mars: Relaunched[/i].
 
 Some of them you could hardly miss: an entire train line and every train on it deleted by salvaging a single hex, colonists suffocating on a walk between two domes, an artificial lake burying the rover that was building it.
 
-More of them you would never have blamed on a bug, because the game looked perfectly normal while the arithmetic underneath it was wrong — a reward for freeing the wisps that paid about a thousandth of what its own message promised, a researched breakthrough the game restored to only one of the three wind turbine types it covers, a track refund that paid a stub's worth of Metals however long the line was, a Comfort penalty billed for longer than the journey actually took.
+More of them you would never have blamed on a bug, because the game looked perfectly normal while the arithmetic underneath it was wrong — a reward for freeing the wisps that paid about a thousandth of what its own message promised, a researched breakthrough the game restored to only one of the three wind turbine types it covers, a track refund that paid a stub's worth of Metals however long the line was, a train travel-time figure that counted the platform wait twice.
 
-And [b]three[/b] of them repair things you cannot see at all today: real defects that the shipped numbers happen to hide, which another mod, a game patch or a DLC could walk straight into.
+And [b]two[/b] of them repair things you cannot see at all today: real defects that the shipped numbers happen to hide, which another mod, a game patch or a DLC could walk straight into.
 
 [h2]Some of what it fixes[/h2]
 [list]
 [*]Colonists walked across the surface between domes and suffocated.
 [*]Rocket loads of new arrivals died on their way to a dome.
 [*]New arrivals moved into a dome that was switched off, quarantined or without air.
-[*]A dome sat half empty and still refused to house anyone.
+[*]Beds stayed reserved for colonists who were never going to take them.
 [*]A bed that fell vacant sat empty while colonists were homeless.
 [*]Night-shift colonists never came back to work after midnight.
-[*]A salvaged farm kept supplying its dome with oxygen forever.
+[*]A building clogged by a dust storm never started again.
 [*]Building an artificial lake buried the rover that built it.
 [*]Drone Hubs paralysed themselves every time an Extender flickered.
 [*]Salvaging one piece of track deleted the whole line, and its trains with it.
@@ -255,7 +254,6 @@ And [b]three[/b] of them repair things you cannot see at all today: real defects
 [*]An Earth-sent Trade rocket, most often the Wildfire mystery's cure rocket, could get stuck on the landing pad forever.
 [*]A Jumbo Cave mystery could get stuck clearing waste rock and never complete.
 [*]The Philosopher's Stone mystery hung one step from the end.
-[*]A story step asked for a cave-in on a map that does not exist, and the story stopped.
 [*]The Gene Forging research did nothing at all.
 [*]The Domes Overview stopped marking domes in trouble.
 [/list]

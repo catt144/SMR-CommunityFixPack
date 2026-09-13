@@ -42,9 +42,12 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   C90 historical + live controls HELD; original scratch + live guard removals discriminate; reset moot on current non-optional path.
 - ✅ **RETIREMENTS LANDED 09-12** (ck156 + ck159): F37/F43+F118/F31 modules DELETED across Code + `items.lua` + `metadata.lua`
   (H-10), entries restatused, F21 STAYS. ⛔ ck159's predicted count word "Forty-six" PREDATES this — re-derive, never carry.
-- ⏭ NEXT (⭐ UNBLOCKED — retirements are in, so counts derive ONCE): `RELEASE.md` over the outbox's **Held** batch + the
-  3 Pending = **v10**; text = `reports/still-needed/WORDING_RULED.md` + its ⚖️ **VOICE RULE** (binds every surface).
-  ⛔ Re-derive every count once. Then the owner's upload + the **held** site deploy.
+- ⏭ NEXT = **THE OWNER'S UPLOAD** (ck169). ✅ `RELEASE.md` §1 RAN 09-12 over the Held batch + 3 Pending: every surface
+  carries v10. ⛔ Count word **STAYS Forty-nine** (−3 retired, +3 added; derived `grep -c '^??? '`=49, NOT
+  `WORDING_RULED`'s Forty-six, which priced retirements alone); headliners 21→**20** (C85 on); judgment calls 3→**4**.
+  5 card copies byte-checked; `last_changes` rewritten; README's 6 stale claims fixed (46 modules/47 files/97 probes/222 rows).
+  🚫 **`content/faq.md` LEFT UNCOMMITTED** beside the owner's own 3 pared files — site deploy blocked on the owner
+  committing it (ck169 ➋). `content/fix-list.md` IS committed. Then upload → `POST_UPLOAD_CLOSE.md` → outbox §5.
   Handoff `prompts/perma/HANDOFF_ORCHESTRATOR.md` §3 LIVE. ✅ ck158 sitting FIRED + CLOSED 09-12; its one-off prompt `git rm`'d.
   Desk `prompts/DLC_DEEP_CHECK.md` (`HUNT_AUDIT.md` §8).
   ⭐ FR-1 TEMP WORKAROUND MOD LIVE 09-11 (Steam 3799500849 / PDX 158711; FINDINGS §11–§12). ALL FR-1 work → `prompts/perma/LINUX_DISPATCH.md`.

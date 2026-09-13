@@ -29,6 +29,43 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### ⭐ 2026-09-12 — 169 **v10 IS READY TO UPLOAD.** All the words are written and committed; the pack is waiting on your hands. Two small calls inside, and one thing only you can commit.
+<!-- ck:169 status:open owner:yes -->
+
+> **The release in one line: the count word does NOT move.** Three fixes retire (F37 ghost farm
+> oxygen, F43 layout tech lock, F31 cave-in on a missing map) and three arrive (C85 clogged after
+> a dust storm, C88 Building Codes prefabs, C89 faction dome size), so the card still says
+> **Forty-nine repairs**. ⛔ Re-derived from the fix list itself (`grep -c '^??? '` = 49, section
+> tally sums), **not** carried from `WORDING_RULED.md`, which predicted *Forty-six* because it
+> priced the retirements before the three new builds joined the same release.
+>
+> **➊ TO DO — the upload.** `docs/UPLOAD_WORKFLOW.md`, unchanged route: main menu → MOD EDITOR →
+> File → Pack Mod, then **Paradox first, then Steam**. The change note and both card bodies are
+> already in `metadata.lua`, so both pages auto-fill; §3 still holds the two paste blocks for the
+> formatting pass. When the listings are up, tell me the three things §5 asks for and I will run
+> the close-out.
+>
+> **➋ ONLY YOU CAN COMMIT THIS — `content/faq.md` in `C:\Dev\SMR-CommunityMods`.** C89 is a
+> judgment call, so the FAQ's judgment-call count had to go **three → four** in its three places.
+> That file was already holding **your** uncommitted modder-doc paring, and no agent commits over
+> your unread working copy — so I edited the three count passages (`:24`, `:141`, `:145-148`) and
+> **left the file uncommitted**, sitting beside your own changes. My hunks and yours do not
+> overlap. ⛔ **The site must not deploy until that file is committed** — the card will say
+> *Forty-nine* and mark four judgment calls, and a deployed FAQ still saying *three* contradicts
+> it. The deploy was already held on your ruling for these three files, so it is the same gate.
+> `content/fix-list.md` **is** committed (3 rows out, 3 in, 12 re-worded).
+>
+> **➌ A CALL I MADE — say if you want it different.** I added **one** new card headliner, C85's
+> *"A building clogged by a dust storm never started again."*, taking the bullet list 21 → **20**
+> (F37's and F31's bullets came off). It clears the *recognisable* bar — two independent player
+> reports, and the symptom is a building visibly stuck with its reason on screen. C88 (one law)
+> and C89 (a judgment call) I left in the *"… and a good deal more"* tail. Reversing any of that
+> is a one-line edit before you pack.
+>
+> ⚠️ **Nothing is uploaded and `version` was not touched** (`H-02`) — the bump is your sitting's.
+> Detail and the byte-identity proof for all five card copies: `reports/STORE_CARD_LIVE.md`
+> (2026-09-12 section).
+
 ### ✅ 2026-09-12 — 168 RULED BY YOU (batch 2): **98 → baseline moves to 1.1.0 · hardening row 3 → BUILT into v10 · 151 (c) → the three cheap checks join the owed boot.** ⏳ **151 (b) came back as a question and is answered below — the call is still yours.**
 <!-- ck:168 status:ruled owner:no -->
 
