@@ -29,6 +29,52 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### 2026-09-13 — 172: C92 direction RULED — build the restoration, shipping HELD
+<!-- ck:172 status:ruled owner:yes -->
+
+**You ruled this in conversation 2026-09-13; recording it so it is not only in a prompt.**
+
+> *"We will be holding it open as a fix, I want to test it, and then we may ship it, but
+> shipping is on hold until I lift the hold. Right now I want to finish it, because even
+> if we never ship it I think we will gain valuable knowledge attempting it along with
+> the poison pill part of the testing."*
+
+⇒ **Build option B (restore the technology), not the narrow exemption.** Brief is
+[`prompts/C92_ACHIEVEMENT_BUILD.md`](agent/prompts/C92_ACHIEVEMENT_BUILD.md), reshaped to
+match. ⛔ **SHIPPING IS HELD until you lift it in words** — no release, no outbox entry,
+no public row. Knowledge is an accepted deliverable even if it never ships.
+
+⚠️ **171 is NOT thereby ruled** and stays open. 172 says what to build and that it will
+not ship; 171 is still the scope decision for whether it ever does.
+
+⭐ Testing route is settled and recorded as [`EF-094`](agent/facts/EF-094.md): **move
+`account.dat` aside, test, move it back.** No mod and no retail console can clear an
+achievement flag — the console *is* the mod sandbox on a retail build. The file move
+resets your account options until you restore it, which is why it is your call, not an
+agent's.
+
+### 2026-09-13 — 173: FIX_POLICY §2a's version-detector ban is factually wrong in one half
+<!-- ck:173 status:open owner:yes -->
+
+§2a gives two reasons for ⛔ **DO NOT BUILD A GAME-VERSION DETECTOR**. **Reason 2 is
+wrong**: it says a detector is *"unbuildable from the mod's own fields anyway"* because
+`lua_revision` / `ModMinLuaRevision` are 350453 on both branches. That is true of the
+**metadata** fields and false of the **runtime** `LuaRevision`, which is **403908** on
+1.1.0 and tracks the build — confirmed independently from `account.dat`'s plain metadata
+block (`EF-094`).
+
+⚠️ **And we already ship a version guard.** The live FR-1 temp workaround mod goes inert
+on `lua_rev ~= 403908 or assets_rev ~= 33006`. Nobody raised §2a when it was built.
+
+**Reason 1 survives** and is the real rule: *check the thing, not its label*. The
+defensible narrowing is **"use a behaviour test whenever the guarded thing is
+inspectable; a version label is legitimate only where it is not"** — FR-1 guards pinned
+binary shader assets, which cannot be behaviour-tested; C92's preset can be.
+
+**Your call:** narrow §2a to that, record FR-1 as a named exception beside the existing
+blanket ban, or leave it. ⛔ Left as-is, the next agent either over-applies the rule or
+rediscovers the contradiction the way this session did.
+
 ### 2026-09-13 — 171: C92 — achievement repair or full technology restoration
 <!-- ck:171 status:open owner:yes -->
 

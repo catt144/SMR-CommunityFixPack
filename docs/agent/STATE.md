@@ -34,8 +34,14 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   impossible — every supplyable prefab is `require_prefab`) are unavailable, not owed. Gate evidence: each entry's
   §Attended check, SESSION_LOG 09-12; ⛔ never re-derive a leg from the module.
 - **C90** (Saint + Sinkhole apply-success guards) ships in v10 `fixed` but **UNEXERCISED** — `reports/C90_GUARDS_BUILD.md`.
-  **C91** open candidate: vanilla leaks the Building Codes modifier on repeal. **C92** (P2, `cand` 09-13):
-  `ResearchedAllTechs` counts hidden `UndergroundExploitation`; reporter-save census pins that barrier, repeatable cause WITHDRAWN — `bugs/C92.md`.
+  **C91** open candidate: vanilla leaks the Building Codes modifier on repeal. **C92** (P2, `cand`):
+  `ResearchedAllTechs` counts hidden unreachable `UndergroundExploitation`; placement pass done (`reports/C92_PLACEMENT.md`).
+  ⭐ **ck172 RULED 09-13: build the RESTORATION, ⛔ SHIPPING HELD until the owner lifts it in words** —
+  brief `prompts/C92_ACHIEVEMENT_BUILD.md`; ck171 (scope) stays OPEN. Achievement testing = `EF-094`.
+- **C93** (P2, `cand` 09-13): Outside Ranch produce stranded at the centre — a missing entity spot makes the
+  stockpile controller fall back to `Origin`. NOT ours; ⛔ cause UNRESOLVED, needs the reporter's log line +
+  mod list (pull-only, owner's call). **D14** + `prompts/STANDDOWN_AUDIT.md`: 21 of 45 modules replace a body
+  and cannot ride a vendor fix; the gap is bodycheck's own class-c blind spot.
 - ⛔ `SaintBlessing`'s kit probe PASSes **vacuously** with no domed Saint — not coverage; field reports are the detector
   (ck130). ✅ The heal itself fired in play 09-12.
 - Post-launch LIVE: F105, F107, F108 (v4), F110 (v5), hotfix 2 (v6), C74+C77+C83 (v7), F119+C86 (v8), F59 repair +
@@ -48,7 +54,8 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   Owner's 2 pared files (`for-modders.md`, `install.md`) stay uncommitted = decision 47.
 - ⭐ FR-1 TEMP WORKAROUND MOD LIVE 09-11 (Steam 3799500849 / PDX 158711). **ALL FR-1 / Linux / NVIDIA work →
   `prompts/perma/LINUX_DISPATCH.md`.** Field: 3 working (one 10xx), 1 failing (GTX 1070, log requested).
-- ⏭ NEXT: no agent item blocks anything — v10 is closed out (`POST_UPLOAD_CLOSE` + `RELEASE.md` §5 ran 09-13).
+- ⏭ NEXT: fire `prompts/STANDDOWN_AUDIT.md` (no blocker) · `prompts/C92_ACHIEVEMENT_BUILD.md` (build+test, ⛔ ships never
+  without ck172's hold lifted) · then the playtest sitting. ⛔ `SELFCHECK_PILOT` REMOVED 09-13 (`cf8d51f`).
   Owner OWES: ck144 (a) the boot · ck151 (b) dev-report scope. Handoff `prompts/perma/HANDOFF_ORCHESTRATOR.md` §3 LIVE.
   Desk `prompts/DLC_DEEP_CHECK.md` (`HUNT_AUDIT.md` §8). Chain `prompts/fixtoggles/` DEFERRED 09-12 (ck148, not started).
 - Watches: `EF-066` subclass reach unmeasured, ck74 half-open · localisation: German only one SEEN (`EF-039`) ·

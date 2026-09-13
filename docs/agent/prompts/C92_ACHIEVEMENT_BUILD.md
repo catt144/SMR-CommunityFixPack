@@ -128,51 +128,24 @@ the *shape fingerprint*, not a version compare.
 savegame and what remains if a player deletes the pack. `FIX_POLICY` §3a wants a
 recorded disposition per exposed site.
 
-## 5 · ⭐ Testing achievements — the owner asked, and here is the answer
+## 5 · ⭐ Testing achievements — the route is `EF-094`
 
-**The flag is exactly what the owner assumed:**
-`AccountStorage.achievements.unlocked["ResearchedAllTechs"]`, a plain boolean
-(`CommonLua/Classes/Achievement.lua:39-40`).
+⭐ **[`EF-094`](../facts/EF-094.md) is the answer and it is load-bearing for your test
+plan. Read it before designing any leg.** Headlines:
 
-**It persists to** `C:\Users\stkot\Saved Games\Surviving Mars Relaunched\76561198020568696\account.dat`
-— written by `SaveLuaTableToDisk(AccountStorage, folder .. "account.lua", g_encryption_key)`
-(`CommonLua/AccountStorage.lua:104-110`), i.e. **encrypted**, so hand-editing is not
-a route.
+- The flag is `AccountStorage.achievements.unlocked["ResearchedAllTechs"]`, a plain boolean.
+- ⛔ **No mod and no retail console can clear it.** `AccountStorage` and friends are in
+  `ModEnvBlacklist`, and on a `config.Mods` build the console env **is** a mod env.
+- Sync is **one-way local → Steam**, every launch, so a Steam-side reset is silently undone.
+- ⭐ **The working route: move `account.dat` aside → launch (the game regenerates an empty
+  achievement table) → test → move it back.** Local only, reversible, no Steam involvement.
+- ⭐ `AchievementUnlock(id, dont_unlock_in_provider)` sets the local flag **without calling
+  Steam at all**.
+- ⚠️ Steam keeps its own copy, so the *pop* may not re-fire. Prove the chain with a
+  **log-only sink** on the award path rather than relying on the toast.
 
-⭐ **Sync is ONE-WAY, local → Steam.** `SynchronizeAchievements` pushes local unlocked
-keys up (`Platforms/steam/SteamAchievements.lua:98-115`); **nothing reads Steam back
-into `AccountStorage`.** Consequences:
-
-- ✅ **Clearing the local flag STICKS** — Steam will not restore it, so the game can be
-  made to behave as if the achievement were unearned.
-- ⛔ **Steam's own copy is permanent** and there is no route from inside the game to
-  clear it. A test can never un-earn it on the platform.
-
-⛔ **No mod can clear it.** `ModEnvBlacklist` (`CommonLua/Modding/Mod.lua:1281-1291`)
-blocks `AccountStorage`, `SetAccountStorage`, `SaveAccountStorage` and
-`InitDefaultAccountStorage`; `AsyncAchievementUnlock` is blocked at `:1336`. So
-neither the fix nor the Test Kit can reset anything. ✅ `AchievementUnlock` and
-`GetAchievementFlags` are **not** blacklisted — the fix can unlock and query.
-
-⭐ **The clean testing lever:** `AchievementUnlock(achievement, dont_unlock_in_provider)`
-— a **truthy second argument sets the local flag without calling Steam at all**
-(`Achievement.lua:140-152`). Exercise the whole award path with zero platform side
-effects.
-
-**The safe reset procedure — propose it to the owner, do not perform it unasked:**
-
-1. **Back up `account.dat`** before any test. This is the whole remedy: restoring the
-   copy restores every achievement exactly, with no decryption and no partial edits.
-2. Clear **one key only**, never the table — the console is the likely route (it runs
-   outside the mod sandbox, and the Test Kit already has a console-enable path;
-   ⚠️ **verify that** rather than assuming it).
-3. Restore the backup when testing is done.
-
-⛔ **HAZARD, state it to the owner before they touch anything:** because sync is
-one-way, a local wipe is **permanent for the in-game list** — nothing restores
-`AccountStorage` from Steam. Clearing the whole `unlocked` table would erase the
-owner's entire in-game achievement record with no recovery except the `account.dat`
-backup.
+⛔ **Propose the file-move to the owner; do not perform it unasked.** It resets their
+account options until the file is restored, and it is their account.
 
 ## 6 · Acceptance
 

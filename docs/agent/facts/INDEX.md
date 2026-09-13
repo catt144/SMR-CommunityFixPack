@@ -1,12 +1,12 @@
 <!-- GENERATED — never hand-edit; regenerate with: python tools/doccheck.py --regen -->
 <!-- split_facts.py --write is the one-time MIGRATION from the retired pre-split doc, never a regeneration; verify: python tools/doccheck.py -->
 
-# Engine facts index — 93 facts
+# Engine facts index — 94 facts
 
 One file per top-level bullet of the old `docs/agent/ENGINE_FACTS.md`, in
 source order; ids are stable. `updated` is git's last touch of the fact's
 own lines. `verified` is the first date the fact's TEXT presents as an
-observation (60 of 93 state one) — a mechanical extraction, not an
+observation (60 of 94 state one) — a mechanical extraction, not an
 adjudication: read the fact for what was actually measured, several of
 which carry their own ⚖️ "what is measured and what is not" paragraph.
 The preamble that opened the old file is `_preamble.md`.
@@ -106,4 +106,5 @@ The preamble that opened the old file is `_preamble.md`.
 | EF-091 | A landed non-player rocket launches the instant its cargo reads ready, and a drone request's GetTargetAmount goes negative after a re-size while drones hold claims (F119 sitting) | 2026-09-11 | 2026-09-11 | 18 | [EF-091.md](EF-091.md) |
 | EF-092 | Residence selection refuses a DESTROYED building through an INHERITED test — GetResidenceComfort gates on ValidateBuilding — so a constant-comfort desk stub deletes that guard and manufactures a harm (cost a false F59 finding that cleared an audit) | 2026-09-11 | 2026-09-11 | 29 | [EF-092.md](EF-092.md) |
 | EF-093 | ⭐ VANILLA RE-SEEDS LOCKABLE-PRESET STATE ON EVERY LOAD — `OnMsg.PostLoadGame` runs `PreProcessLockablePresets()`, which calls `ResetLockablePresetState` for any preset missing from the owner's persisted `ProcessedLockablePresets` and re-applies that preset's DECLARED `LockState`. ⇒ a mod that clears a lock reason AND drops the preset from that set leaves a save vanilla itself repairs on the next load: self-healing residue with no mod code left behind, no cleanup artifact and no player action. The engine's own comment states the intent — 'process all lockable presets, which were newly added since the save was made' | — | 2026-09-13 | 35 | [EF-093.md](EF-093.md) |
+| EF-094 | ⭐ ACHIEVEMENT STATE — how to read, clear and TEST it. The flag is `AccountStorage.achievements.unlocked[id]`, persisted to `account.dat` (BPUL: 519 B of plain metadata, the rest AES+HMAC over a compressed Lua table). ⛔ NO mod and NO retail console can clear it — `AccountStorage` and friends are in `ModEnvBlacklist`, and on a `config.Mods` build the console env IS a mod env. Sync is ONE-WAY local→Steam and runs every launch, so a Steam-side reset is silently undone. ⭐ The working test route is to MOVE `account.dat` ASIDE (the game regenerates an empty achievement table), test, move it back | — | 2026-09-13 | 61 | [EF-094.md](EF-094.md) |
 
