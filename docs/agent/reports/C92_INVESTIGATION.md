@@ -113,3 +113,299 @@ that it was the only delta. The temporary Code payload and staged save are gone.
 `Autosave Sol 490.savegame.sav`, `Autosave Sol 56.savegame.sav` and
 `Autosave Sol 6.savegame.sav` unchanged. The Downloads original and its pre-existing
 import in Saved Games remain byte-identical. No save was written by the diagnostic.
+
+---
+
+# Addendum 2026-09-13 — accident vs deliberate, the finishing route, asset inventory
+
+Second pass, `smr-bugfixpack-f4`, answering the owner's question: **why is the tech
+hidden — accident, or did the devs bench it because it was not ready?** Desk only;
+no game launched, no save touched, no shipped Lua changed. This addendum does not
+revisit the r1/r2/r3 live census above; it takes that as established.
+
+**Provenance.** All code and preset citations are SOURCE, read from the archived
+`C:\Dev\SMR-SrcArchive\1.1.0.403908\Src`. Installed build re-confirmed as
+`buildid 24995074` from `appmanifest_3215050.acf` (`EF-075`'s build). Localisation
+is MEASURED from the live install's shipped packs.
+
+⚠️ **Recorded trap, cost ~6 commands here.** `A:\SteamLibrary\steamapps\common\Surviving Mars`
+is app **464920, the ORIGINAL game** — not ours. Relaunched (app 3215050) has
+`"installdir" "Project Spark"`. The wrong tree has `.hpk` packs, no `ModTools\Src`,
+and a 7-digit loc id space; ours has `.fpk` packs, `ModTools\Src`, and 12-digit ids.
+Searches against the wrong tree returned clean, confident, meaningless negatives —
+caught only because the presence controls failed too. ⛔ Resolve the game path from
+the appmanifest `installdir`, never from the folder name.
+
+## Verdict: ACCIDENT, and the shape of it
+
+**SOURCE:** The devs' retirement idiom is `Obsolete = true`, and they used it **three
+times in this very change**: on `LawDef Policy_UndergroundExploitation`
+(`Data/LawDef/LawDef-Economy.lua:1428`), on `PolicyDef UndergroundExploitation`
+(`Data/PolicyDef.lua:202`), and on `SelfSufficientLighting` — a tech in the **same
+`Underground_1` group**. `UndergroundExploitation` carries none of it.
+
+**SOURCE census, `Data/Tech.lua`, 441 Tech presets:** 10 obsolete techs across the
+ordinary groups; **zero are hidden**. 218 hidden techs; **zero are obsolete**. The two
+idioms never overlap. `Unknown` is documented as *"Shown with a question mark until
+enabled by a script"* (`Lua/TechTree.lua:257`), so the flag pair asserts *this is
+meant to be revealed*, not *this is withdrawn*.
+
+**SOURCE:** They wired a live consumer to it. `SingleResourceProducer:CalcProductionAmount`
+(`Lua/Buildings/BuildingComponents.lua:1358-1364`) is a line-for-line port of the 1.0.7
+law check (`1.0.7 Src/Lua/Buildings/BuildingComponents.lua:1083-1087`) onto
+`UIColony:IsTechResearched("UndergroundExploitation")`, and *tightened* on the way with
+an `IsInLabel("Extractors")` test the law version lacked.
+
+**SOURCE:** They migrated existing saves off the law with no replacement grant —
+`SavegameFixups.ObsoleteUndergroundExploitationLaw()` (`Lua/Factions/Laws.lua:773-775`).
+
+**SOURCE control, the sibling migrations:** the four other laws retired in that same
+batch (`RedTapeReduction`, `Policy_NativeFood`, `Policy_MoralValues`,
+`Policy_UndergroundMiningPermits`) have **no replacement Tech preset at all**. They were
+genuinely cut. `UndergroundExploitation` alone got a full replacement tech plus rewired
+code — a deliberate promotion, not a cut.
+
+**SOURCE, 1.0.7 side:** the law was live there — real `Prerequisite` (disabled only
+under `NoUndergroundAndAsteroids`), `upkeep_rp = 100`, and a designer note
+`TODO = set( "Balance" )`. The law→tech promotion *is* that pending work.
+
+⇒ **The flags are authoring leftovers, not a bench.** A refutation of this would need
+either an `Obsolete` marking, a cut sibling that kept its consumer, or a named reveal
+route. None exists. ⚠️ What this verdict depends on (rule 5a): it holds while no script
+in the shipped tree unlocks the preset. The only references to the id anywhere in Src
+are its own preset, the retired law/policy, the savegame fixup and the consumer.
+
+## The second defect, larger than the achievement
+
+**SOURCE:** The +20% underground-extractor bonus **shipped and worked in 1.0.7** via the
+law. In 1.1.0 the law is obsolete and stripped from saves, and its replacement is
+unreachable. So the bonus **cannot be obtained by anyone on 1.1.0**, and players who
+carried the enacted law across the patch lost it silently with no route back. The
+achievement is the symptom a player happened to notice; this is the underlying loss.
+
+## Can the wiring be finished? Yes — one call
+
+**SOURCE, traced end to end:** `UnlockTech(tech_id, queue, notify)`
+(`CommonLua/Libs/Research/Research.lua:31-38`) calls `UnhideTech`, removing both
+`"hidden"` lock reasons, then removes both `"locked"` reasons ⇒ state `enabled`
+⇒ `Tech:IsVisibleOnMap` passes (it rejects only `"hidden"`, `Lua/TechTree.lua:434-436`)
+⇒ `Player:CanResearch` accepts (`state == "enabled"`, `CanBeResearched` defaults true,
+one tech point — `Lua/TechTree.lua:868-873`). The game's own override
+(`Lua/TechTree.lua:1274-1282`) additionally fires `Msg("TechUnlocked", ...)`.
+
+**SOURCE, why it cannot self-heal:** `UnhideUnlockedTechs` (`:182-192`) unhides only
+what `CheckUnlockPrerequisites` passes; with no `RequireTech` that branch requires
+`IsTechUnlocked`, which requires state `enabled`, which being hidden prevents
+(`:443-459`). Circular. An explicit `UnlockTech` bypasses the loop.
+
+**SOURCE:** `Research:TechCost` returns 0 (`Lua/Research.lua:339-341`) — Relaunched
+prices research in tech points, so there is **no per-tech cost to author**.
+
+## Asset inventory — what is and is not built
+
+| component | state |
+|---|---|
+| DisplayName / Description / ShortDescription / flavor | built |
+| localisation, all 8 shipped languages | **complete, 4/4 strings each** |
+| `Effect_ModifyLabel` (declarative) | built; targets `UndergroundWaterExtractor`, a live label (`Lua/Buildings/WaterExtractor.lua:56-63,142`) |
+| hardcoded consumer | built (above) |
+| `Parameters` 20%, comment "Production Buff" | built |
+| research cost | N/A — tech-point system |
+| old law retired + saves migrated | done |
+| **Icon** | **placeholder** — see below |
+| **tree position** | **parked outside the main tree** — see below |
+| **`RequireTech`** | **absent** |
+| **reveal trigger** | **absent** |
+
+**MEASURED, localisation.** `python tools/flpk_extract.py`'s `extract()` run against
+`A:\SteamLibrary\steamapps\common\Project Spark\Local\*.fpk` yields
+`CurrentLanguage/Game.csv` per language. The tech's four loc ids — `218141292199`
+(DisplayName), `483192202247` (Description), `632638598166` (ShortDescription),
+`118750111326` (flavor) — are **translated in all eight**: German, French, Brazilian,
+Polish, Russian, Schinese, Spanish, Turkish. Presence control `516867455139`
+(`UndergroundDeepMining` DisplayName) translated in every file. **SOURCE:** all four ids
+are **absent from the 1.0.7 tree** and differ from the law's ids, so they are new strings
+authored for 1.1.0 — including new flavour prose the law never had.
+
+⇒ **INFERRED:** eight translation vendors were paid to localise flavour text for this
+tech. That is shipping-content spend, not cut-content spend. This is the single
+strongest signal that it was meant to go live.
+
+## The icon, and how the mistake probably happened
+
+**SOURCE:** `Icon = "UI/Icons/Research/advanced_drone_drive.png"` — the icon of the
+`AdvancedDroneDrive` **breakthrough**. Of 312 distinct icons across the 441 presets,
+only 9 are shared, and every other share is a legitimate tier family (`WildfireCure_1..10`,
+`FasterTrains`/`EvenFasterTrains`, the generic `story_bit.png`, the `_1.._3` mystery
+tiers). `AdvancedDroneDrive` + `UndergroundExploitation` is the **only unrelated pair in
+the dataset**.
+
+**SOURCE:** `UndergroundExploitation` sits at `MapPos = point(14576, 4352)`.
+`AdvancedDroneDrive` sits at `point(14428, 3584)` — exactly **one hex column** away
+(`hex_width = 148`, `hex_radius = 128`, `Lua/TechTree.lua:425-427`). Both are in the
+Breakthroughs field's coordinate region (x ≈ 13096–15316); the entire main tech tree
+lives at x ≈ 5918–10432.
+
+⇒ **INFERRED, mechanism:** the preset looks like a **duplicate of the breakthrough node
+beside it in the editor**, inheriting that node's `Icon`, `LockState = "hidden"` and
+`Unknown = true` — all three correct defaults for a Breakthrough — then re-authored as an
+Underground tech (new group, strings, parameter, effect) and never moved into the tree
+or un-flagged. ⚠️ This is a story about intent and is labelled INFERRED. **It does not
+carry the verdict**; the verdict rests on the five SOURCE controls above. Position alone
+proves nothing either way: the obsolete `ModularIndustry` is parked in the same region
+(`point(14724, 5376)`), so retired *and* unplaced nodes both end up there.
+
+## Double application if it is simply unlocked
+
+**SOURCE:** a `WaterExtractor` is `disabled_in_environment = set( "Asteroid" )` — so it
+**can** be built underground — carries `label4 = "Extractors"`
+(`Lua/BuildingTemplate/WaterExtractor.generated.lua`), and is added to
+`UndergroundWaterExtractor` when underground. Both effects therefore fire on the same
+building: the declarative +20% on `water_production` **and** the consumer's ×1.20.
+Underground water extractors would compound to ≈+44% while underground metals, rare
+metals, exotic minerals and concrete get the advertised +20%. ⛔ Nobody specified that
+split — it is a third unfinished edge, and an argument against "just unlock it".
+
+## Tree geometry — the layout motif, and a SEPARATE lead
+
+**SOURCE, derived from every non-Breakthrough/Mystery/Storybit `MapPos`:** the dominant
+layout motif is a **ring of six techs around an empty centre hex**. 17 groups have a
+complete 6/6 ring; several others are chains or stars rather than rings. **An empty hex
+at a group's centre is normal and is NOT evidence of a missing tech.**
+
+Groups whose shape *is* a ring but is short of six:
+
+| group | live nodes | ring occupancy | empty ring slot |
+|---|---|---|---|
+| **Hi-Tech_1** | 5 | **5/6** | **(7768, 2816)** |
+| Space_3 | 6 | 5/6 | — (one node sits off-ring) |
+| Hi_tech_3 | 4 | 4/6 | two short |
+| Industry_5 | 4 | 4/6 | two short |
+| Terraforming_1 | 4 | 4/6 | two short |
+
+⭐ **Hi-Tech_1 is the only group in the game whose node count equals its ring occupancy
+AND is exactly one short** — all five of its techs are in the ring, and one ring slot at
+`(7768, 2816)` is empty. That is the cleanest "a node is missing here" signature in the
+tree, and it was spotted by the owner from the tech-tree screen before any of this was
+computed.
+
+⚠️ **But it is probably NOT where `UndergroundExploitation` belongs**, for two reasons:
+the preset declares `group = "Underground_1"`, and **`Underground_1`'s ring is complete
+(6/6, centre `(9544, 3584)`)** with three satellites hanging off it
+(`UndergroundWaterExtraction`, `UndergroundDeepMining`, `RemoteFarming`); and Hi-Tech_1's
+members are power/manufacturing themed (`MicroManufacturing`, `AtomicAccumulator`,
+`AccumulatorDurability`, `StirlingGenerator`, `MineralApplications_MineralTreatments`),
+which an underground-extractor buff does not fit.
+
+⇒ **Two separate leads, do not merge them.** (a) Where `UndergroundExploitation` belongs
+— most likely a fourth satellite off the `Underground_1` ring near
+`UndergroundWaterExtraction (9322, 3200)` / `UndergroundDeepMining (9766, 3200)`, which
+are its thematic neighbours. (b) **Hi-Tech_1's empty ring slot may be a second, unrelated
+missing tech** — a candidate defect in its own right, never previously looked at here.
+
+### Theme, and the bridge slot (owner's read, 2026-09-13)
+
+**Owner's observation, authority:** *"most of the hi-tech items seem to follow the flavor
+of power and science, whereas industry is more production based."* **SOURCE, member
+names bear this out.** Hi-Tech_1 = `MicroManufacturing`, `AtomicAccumulator`,
+`AccumulatorDurability`, `StirlingGenerator`, `MineralApplications_MineralTreatments` —
+power storage/generation and materials science. Industry_5 = `WasteRockLiquefaction`,
+`ContinuousOperationProtocols`, `FactoryAI`, `ThermalCyclingDampeners` (+ obsolete
+`ClosedLoopExtraction`) — production throughput. **An extractor-output buff is Industry
+flavour, not Hi-Tech flavour.** This retires Hi-Tech_1 as a placement candidate for
+*this* tech on theme grounds as well as on the `group = "Underground_1"` declaration —
+and it leaves Hi-Tech_1's empty slot standing as lead (b), something else's hole.
+
+**SOURCE, Industry_5's two empty ring slots:** `(10062, 2944)` and `(9988, 2816)`.
+
+⭐ **SOURCE, the bridge slot.** `(9914, 3200)` is empty and adjacent to **three** live
+techs across two groups: `Underground_1/UndergroundDeepMining (9766, 3200)`,
+`Industry_5/FactoryAI (9840, 3072)` and `Industry_5/ThermalCyclingDampeners (9988, 3072)`.
+It is the one empty hex that touches both the Underground satellite row and the Industry_5
+cluster. ⚠️ It is **not** an Industry_5 ring slot — it sits below that ring — so this is a
+shape observation, not a claim that the devs reserved it.
+
+**SOURCE, the Underground satellite row at y = 3200** holds
+`UndergroundWaterExtraction (9322)` and `UndergroundDeepMining (9766)` with the hexes at
+`9470`, `9618` and `9914` empty between and after them.
+
+⛔ None of the above is a placement verdict. It is the geometry a placement specialist
+should start from, and it must be checked against `RequireTech` reachability (a node with
+no incoming connection stays unreachable wherever it is drawn) before anyone proposes a
+slot.
+
+## The icon question, ANSWERED from the shipped art pack
+
+**MEASURED.** `Packs\UI.fpk` (852 MB) is FLPK, the format `tools/flpk_extract.py` reads.
+Parsing its directory table alone (header `dir_off` @0x0C, `dir_size` @0x14) enumerates
+**5001 entries** without extracting payloads.
+
+**Instrument soundness — the presence side, counted.** `Icons/Research/` holds **371**
+assets. `Data/Tech.lua` references **312** distinct research icons, and **all 312 are
+present in the pack — zero missing**. Three named controls resolved:
+`advanced_drone_drive.dds`, `self_sufficient_lighting.dds`, `underground_deep_mining.dds`.
+⇒ A negative from this enumeration is a real sample, not an `EF-088` non-result.
+
+⛔ **MEASURED: there is NO research-tree icon for this tech.** No
+`Icons/Research/underground_exploitation*` exists, under that or any near spelling.
+
+✅ **MEASURED: the LAW art does exist — three variants.**
+`IconsRemaster/Laws/underground_exploitation_1.dds`, `_2.dds`, `_3.dds`. The `PolicyDef`
+references `_1`. So the art commissioned for this content is 1.0.7 law-panel art; a
+research-tree icon was never made, which is exactly why the preset points at a
+breakthrough's icon.
+
+⇒ **The owner's hypothesis is half right, and the half that holds is bigger than the
+tech.** There is no hidden icon for *this* tech — but the pack does carry unused research
+art. **22 research icons are referenced by no tech at all**, and after removing the `rm_*`
+research-map chrome and the `researched`/`obsolete_4` sprites, **19 of them name a
+technology that does not exist anywhere in the shipped tree**:
+
+```
+advanced_asteroid_economy      advanced_elevator_hydraulics   advanced_landing_techniques
+capture_asteroids              crawling_hyperdome             educating_mars
+eureka                         grand_engineering              metal_foams
+micro-g_vehicles               near_orbit_observatory         polymer_autosynthesis
+proximity_power_resonance      smart_alloys                   standardized_integration
+terraforming_mars              underground_trains             vacuum_rail_systems
+vehicle_optimization
+```
+
+(The other three orphans — `decommission_protocol`, `low-g_fungi`, `mars_hype` — do match
+live tech ids that simply reference different icon files.)
+
+**MEASURED control:** those 19 names have **no loc strings** in the Relaunched export
+`ModTools\Game.csv` (control: a shipped tech name resolves). So they are **art-only**
+orphans — art commissioned, tech never authored or dropped before localisation. That is
+the **opposite** shape to `UndergroundExploitation`, which has strings, translations in
+eight languages, a parameter, an effect and a live consumer, and lacks only the icon and
+the wiring. ⇒ The two are different kinds of debris from the same rebuild; do not merge
+them.
+
+⭐ `proximity_power_resonance` is power-flavoured and therefore a candidate for the
+**Hi-Tech_1 empty ring slot** (lead b). Unverified — offered as a lead, not a finding.
+
+## Why no 1.0.7 → 1.1.0 layout diff is possible
+
+**SOURCE:** 1.0.7 has **no hex tech tree**. Its techs are `PlaceObj('TechPreset', …)` in
+`Data/TechPreset.lua` with **no `MapPos` anywhere**; the `PlaceObj('Tech', …)` class, the
+`MapPos` hex grid and the group rings are all **new in 1.1.0**. The whole tree was rebuilt
+for *Services & Science*, which is also the change that converted laws into techs.
+
+⇒ ⛔ **Do not attempt a cross-version layout diff to locate the intended slot** — there is
+no prior layout to diff against. It also reframes the defect: this is debris from a
+full tech-tree rebuild, which is consistent with 19 further orphaned art assets.
+
+## Not opened
+
+- **Where the tech was *intended* to sit.** No positive evidence was found — only the
+  geometry above, which is INFERENCE. The cross-version diff is ruled out (previous
+  section). Untried evidence routes: the `Data.fpk` shipped preset blob (may differ from
+  `ModTools\Src`), `.dds` mtimes or pack ordering inside `UI.fpk`, and the DLC packs
+  `norman.fpk` / `thomas.fpk`.
+- Whether the three law `.dds` variants differ in art or only in tier decoration — not
+  extracted or viewed.
+- Any DLC-supplied unlock route beyond the Src tree's `Data/` and `DLC/` folders.
+- Whether the vanilla tree renders the parked node on-screen at all, or clips it.
+- The 19 orphan icons were not traced to any cut feature, and no entry was filed for them.
+- No fix was built, no module written, no public row drafted.
