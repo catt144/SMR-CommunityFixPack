@@ -27,7 +27,14 @@ regenerated with `python tools/doccheck.py --regen-waiting`, **not** `--regen`.
 Each of these is SOURCE or MEASURED in the addendum, with citations. Inheriting one costs
 one verification command; re-deriving the set wastes the session.
 
-- The flags are an **authoring leftover, not a deliberate bench** — five controls.
+- The flags are an **authoring leftover, not a deliberate bench** — five controls, plus
+  ⭐ **the sibling cohort**: of the five law→tech conversions, four were finished (group,
+  `RequireTech`, bespoke icon) and this is the only one that was not. `MartianDiet` landed
+  in Breakthroughs where hidden + no connection is correct, which controls the flags.
+- ⭐ **The conversion cohort is also a placement corpus for Q4** — `DroneHubEfficiency` →
+  Logistics_2, `ShuttleFuelEfficiency` → Logistics_3, `SensorTowers` → Space_1. Where those
+  three sit relative to their prerequisites is **evidence of how converted laws were
+  placed**, and it is closer to this tech than any generic group-shape argument.
 - The 1.0.7 **law → 1.1.0 tech** promotion, the obsoleted `LawDef`/`PolicyDef`, the
   savegame fixup, and the rewired consumer at `BuildingComponents.lua:1358-1364`.
 - **One call finishes the wiring:** `UnlockTech(...)`,
@@ -78,10 +85,17 @@ instrument is sound and its negatives are real samples.
   no tech in either version** and their origin is **NOT ESTABLISHED** — possibly
   original-game (app 464920) legacy art. Do not describe the set as rebuild debris.
 
-**What is left for you on Q2**, and it is small: if a fix or a dev report ever proposes
-unlocking the tech, **which icon should it use** — the existing law art, the current
-breakthrough placeholder, or neither? And do the three law `.dds` variants differ in art
-or only in tier decoration (never extracted or viewed)? Answer from the assets, not taste.
+⭐ **ANSWERED FURTHER — the law art is NOT the answer.** All **356** `Icon` values in
+`Data/Tech.lua` point into `UI/Icons/Research/`; **zero** into `IconsRemaster/Laws/`. And
+of the **five** law→tech conversions, the four finished ones each received a **brand-new
+bespoke research icon under a new name** — the law art was abandoned every time. ⇒
+Proposing the existing law art breaks a 356/356 convention; the expected finished state is
+a bespoke research icon **that has never been drawn**.
+
+**What is left for you on Q2**, and it is small: given the above, does a repair use the
+current breakthrough placeholder, or is "no suitable icon exists" itself part of the dev
+report's ask? Do the three law `.dds` variants differ in art or only in tier decoration
+(never extracted or viewed)? Answer from the assets, not taste.
 
 ### Q3 — What do the tech's own code and data say about where it belongs?
 

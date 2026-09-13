@@ -385,6 +385,55 @@ them.
 ⭐ `proximity_power_resonance` is power-flavoured and therefore a candidate for the
 **Hi-Tech_1 empty ring slot** (lead b). Unverified — offered as a lead, not a finding.
 
+## ⭐ The sibling cohort: the other law→tech conversions
+
+*Owner's question, 2026-09-13: did any other laws become techs, and if so did they reuse
+the law icon? Both halves answer decisively, and this is the strongest evidence in the
+investigation — a batch of siblings where every other member was finished.*
+
+**SOURCE, the icon convention is absolute.** Every one of the **356** `Icon` values in
+`Data/Tech.lua` (312 distinct) points into `UI/Icons/Research/`. **Zero** Tech preset
+uses an `IconsRemaster/Laws/` icon. ⇒ **No, the law icon is never reused as a tech icon**,
+and a fix or dev report proposing the existing law art would be breaking a 356/356
+convention.
+
+**SOURCE, the conversions.** Matching 1.0.7 `PolicyDef` ids against 1.1.0 `Tech` ids finds
+**five** law→tech conversions. Each got a **brand-new bespoke research icon under a new
+name** — the law art was abandoned every time:
+
+| converted id | 1.0.7 law icon | 1.1.0 tech icon | group | hidden | `RequireTech` |
+|---|---|---|---|---|---|
+| `DroneHubEfficiency` | `Laws/drone_hub_efficiency_1` | `Research/high_capacity_drone_networks` | Logistics_2 | no | **yes** |
+| `ShuttleFuelEfficiency` | `Laws/shuttle_fuel_efficiency_1` | `Research/shuttle_fuel_conservation` | Logistics_3 | no | **yes** |
+| `SensorTowers` | `Laws/sensor_towers_1` | `Research/extra_scanning_speed` | Space_1 | no | **yes** |
+| `MartianDiet` | `Laws/diet_1` | `Research/martian_diet` | Breakthroughs | yes | no |
+| **`UndergroundExploitation`** | `Laws/underground_exploitation_1` | **`Research/advanced_drone_drive`** ⛔ borrowed | Underground_1 | **yes** | **no** |
+
+⭐ **Four of the five were finished; one was not — and it is ours.** Three landed in an
+ordinary group with a connection and bespoke art. `MartianDiet` landed in **Breakthroughs**,
+where `hidden` + no `RequireTech` is the *correct* configuration — so it is not a
+counterexample but a **control**: it shows the devs set those flags deliberately and
+correctly when the destination was right. `UndergroundExploitation` is the only conversion
+that received neither a bespoke icon nor a connection.
+
+**SOURCE, bounding the set (a total is not a set).** 1.1.0 carries **37** obsolete
+`LawDef`/`PolicyDef` entries. Only 4 of them have a same-id Tech
+(`DroneHubEfficiency`, `MartianDiet`, `ShuttleFuelEfficiency`, `UndergroundExploitation`);
+`SensorTowers` is the fifth id-match but its `PolicyDef` is **not** marked obsolete. No
+obsolete law shares a `DisplayName` loc id with any Tech, so there are **no renamed
+conversions hiding** outside this cohort — the other ~32 retired laws were simply cut with
+no tech replacement.
+
+⇒ **This closes the accident question.** A deliberate bench would not produce one
+unfinished member inside a batch of five where the other four are complete, nor leave it
+pointing at a neighbouring breakthrough's art while its own conversion siblings each
+received new art.
+
+⇒ **Consequence for any repair, ours or the vendor's:** the expected finished state is a
+**bespoke `UI/Icons/Research/*` icon that does not exist and has never been drawn**. The
+vendor cannot finish this tech without commissioning art. That is a concrete, checkable
+ask for the dev report.
+
 ## Position provenance, and what 1.0.7 can and cannot tell us
 
 *This section follows two routes the owner proposed on 2026-09-13: trace how a tech that
