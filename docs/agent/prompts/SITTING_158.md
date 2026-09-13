@@ -101,8 +101,18 @@ not force it, and do not bank A/B1/C as if B2 had passed.
    **§Attended check** section · their `status` **and** the heading tag (⛔ **doccheck goes RED if you flip
    one and not the other** — this has already happened once) · `docs/PLAYTEST_CHECKLIST.md` item 158 ·
    `docs/agent/STATE.md` · a `SESSION_LOG.md` entry.
-4. `python tools/doccheck.py --regen` — ⚠️ **check `git status docs/agent/bugs/` for foreign ` M`/`??` first**;
-   regen builds the index from every entry **on disk**, a peer's uncommitted ones included.
+3a. ⭐⭐ **AND ITEM 158's STATUS MARKER — read this, it is new and it is undocumented.** Checklist items
+   carry a marker like `<!-- ck:162 status:ruled owner:no -->`, and a register (`docs/WAITING_ON_YOU.md`)
+   is built from them. **Changing an item's status means updating its marker in the same edit** — nothing
+   in `WORKFLOW.md`, `CLAUDE.md` or `README.md` says so yet, which is exactly why it is said here.
+   ⚠️ **Item 158 has NO marker yet** (it is one of ~28 unmarked), so this sitting **ADDS** one rather than
+   updating it. ⛔ Match the vocabulary neighbouring items use — do not invent a status word. An item that
+   moves without its marker makes the register quietly wrong, and v10 moves several.
+4. **Regenerate with the RIGHT flag.** This sitting edits **entries as well as the checklist**, so it needs
+   the full `python tools/doccheck.py --regen` — ⚠️ **check `git status docs/agent/bugs/` for foreign
+   ` M`/`??` first**, because regen builds the index from every entry **on disk**, a peer's uncommitted
+   ones included. ⛔ **If you end up making a CHECKLIST-ONLY edit, use `--regen-waiting` instead** — it
+   rewrites only `WAITING_ON_YOU.md` and cannot sweep in a peer's entries.
 5. Commit with an explicit pathspec: `git commit -F <msg> -- <paths>`. ⛔ **A pathspec is only half a fence** —
    for a path you *name*, git commits that path's **working-tree** content, including a peer's unstaged edits
    to that same file. On a file another session is also in, stage your own hunks and commit **without** a

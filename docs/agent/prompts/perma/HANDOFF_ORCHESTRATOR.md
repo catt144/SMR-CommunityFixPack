@@ -147,6 +147,40 @@ shipped code. ✅ `parsecheck` clean, `desk_f59_expedition.py` **23/23**, no Tes
 
 ---
 
+## 5a · ⛔ LANDED AFTER THIS HANDOFF WAS WRITTEN — four things every v10 agent must be told
+
+**Not this session's work; recorded from the owning session's report on 2026-09-12 (`d56293a` → `2b1fd91`).
+⛔ Do not re-litigate or re-verify any of it — it is theirs and it is done.** What matters here is that
+v10 runs straight through the first two.
+
+1. ⭐⭐ **THE MARKER OBLIGATION — the one real documentation gap, and v10 walks into it.** Checklist items
+   now carry a status marker, e.g. `<!-- ck:162 status:ruled owner:no -->`, and a register is built from
+   them. **Nothing in `WORKFLOW.md`, `CLAUDE.md`, `README.md` or `perma/` yet tells an agent that changing
+   an item's status ALSO means updating its marker.** v10 will close items and add them, and **every item
+   that moves without its marker makes the register quietly wrong.** ⇒ **Say this explicitly in any brief
+   you write until it is documented.** ⚠️ `doccheck` currently reports **41 marked, 28 needing a marker** —
+   and **ck158 is one of the unmarked**, so the sitting has to ADD one rather than update one. ⛔ Match the
+   vocabulary of neighbouring items; do not invent a new status word.
+2. ⛔ **After a CHECKLIST-ONLY edit, run `python tools/doccheck.py --regen-waiting`, NOT `--regen`.**
+   `--regen` rebuilds both indices from **every entry on disk, a peer's uncommitted ones included**.
+   `--regen-waiting` rewrites only `docs/WAITING_ON_YOU.md`. ⚠️ An edit that touches **entries** as well as
+   the checklist still needs the full `--regen` — the distinction is about what you changed, not a
+   preference.
+3. **Co-runs moved to `agent/prompts/perma/CO_RUNS.md`** (`WORKFLOW.md` keeps a stub). ⚠️ **Sign-off tiers
+   did NOT move** — they stayed behind as their own `## Sign-off tiers` section, so anything citing "the
+   co-run section" for **tier** rules is still correct.
+4. ⚠️ **`STATE.md`'s `WORKFLOW.md:407` pointer is STALE** — the `RunAll()` re-stamp line is now at **`:537`**.
+   Pre-existing, not caused by the co-run move. **The owed sitting (ck144 a) is what acts on it.**
+
+⭐ **One finding from that session worth carrying, because it is about our own records:** an archival script
+proposed moving **163, 164, 166, 167 and 168** into `docs/archive/`, which sits behind an `.rgignore`
+boundary. Those are the bodies `STATE.md` pins **by number** as "do not re-derive" — so an agent following
+STATE would have grepped the checklist, found a stub, and a default `rg` would never have surfaced the body.
+It was caught in dry-run and the rule was corrected. ⇒ **Archiving a checklist body that STATE cites by
+number is a silent failure, not a tidy-up.**
+
+---
+
 ## 6 · Traps that have each cost this project a real error
 
 1. ⛔ **All sessions share ONE git identity** — `git log --author` cannot attribute work. Identify by **sha + diff**, and list
