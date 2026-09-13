@@ -1482,6 +1482,40 @@ def module_set_agreement(out):
     return ok
 
 
+def flpk_selftest(out):
+    """Run flpk_extract.py's falsifier as a gate, for the reason it exists.
+
+    The pack reader had no fixture, and its nested-directory defect read 56
+    entries out of a 54-entry pack for a day. The two phantom names were
+    blamed on packaging, `STATE.md` recorded an "UNEXPLAINED" gap, and a
+    session concluded the only way to settle it was re-downloading the pack --
+    all from a parser bug a 40-line fixture catches. Needs no game tree: the
+    arenas are built in memory, so there is no "cannot run" case.
+    ⇒ An instrument whose output is used to SKIP evidence gets a fixture.
+    """
+    tool = os.path.join(os.path.dirname(os.path.abspath(__file__)), "flpk_extract.py")
+    if not os.path.isfile(tool):
+        out.append("FLPK SELFTEST: not checked (tools/flpk_extract.py absent)")
+        return True
+    try:
+        p = subprocess.run([sys.executable, tool, "--selftest"],
+                           capture_output=True, text=True, encoding="utf-8",
+                           errors="replace", timeout=60)
+    except Exception as exc:                  # a tool bug must report, not crash
+        out.append("FLPK SELFTEST: not checked (%s)" % exc)
+        return True
+    if p.returncode == 0:
+        out.append("FLPK SELFTEST: PASS (nested + shallow; the pack reader "
+                   "owns every descendant span)")
+        return True
+    out.append("  RED  flpk_extract --selftest FAILED -- every pack listing, "
+               "entry count and alias claim read through this parser is "
+               "untrustworthy until it is green. Full output:")
+    for line in (p.stdout or "").splitlines() + (p.stderr or "").splitlines():
+        out.append("         %s" % line)
+    return False
+
+
 def bodycheck_selftest(out):
     """Run bodycheck.py's falsifier as a gate, not as a habit.
 
@@ -1645,6 +1679,7 @@ def main():
     ok = wrap_targets_check(out) and ok
     ok = parse_gate(out) and ok
     ok = module_set_agreement(out) and ok
+    ok = flpk_selftest(out) and ok
     ok = bodycheck_selftest(out) and ok
     push_set_report(out)   # report-only: the budget is the owner's to act on
     testkit_tree(out)  # report-only by owner decision (2026-08-04) — never gates

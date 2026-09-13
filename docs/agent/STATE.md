@@ -12,9 +12,9 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   tree `version` **11**, `pdx_version` "9", count word **Forty-nine**. C85 + C89 + C88 in, F37/F43+F118/F31 out.
 - Shipping artifact: Steam-delivered `ModContent.fpk` **371,327 B** md5 `bef42a2d5405e06444b7e6efdf28cf38`
   (workshop folder, 09-13 00:25 local). ⛔ Never carry a pack size — predict with `tools/pack_predict.py`.
-  ⚠️ UNEXPLAINED still: v10's delivered archive listed **56** entries against the then-model **54**. ⛔ NOT the
-  two `.agents/skills/*/SKILL.md` files — those were tracked and already inside the 54; they now pack-ignore
-  (`*/.agents/*`, model **52**). Re-measuring needs a re-downloaded `ModContent.fpk`; none on disk 09-13.
+  ✅ The "56 vs 54" gap was a READER DEFECT, not a packaging one: `flpk_extract` re-read nested tables under the
+  parent prefix and double-counted two entries (`reports/DOC_OVERHAUL_AUDIT.md` §1). v10 shipped **54**, matching
+  the prediction exactly. Fixed + gated by doccheck's FLPK SELFTEST; `*/.agents/*` now pack-ignored, model **52**.
   PDX size unread; the two portals' sizes differed on v5/v6 (`RELEASE_PORTAL_PREP` §0.5(f)).
 - ⛔ Pack route is main menu → MOD EDITOR → File → Pack Mod, NOT Mods Manager → Ctrl-E (⚠️ PORTAL_PREP §0.5 old).
 - ⛔ **BASELINE IS 1.1.0.403908** + DLC, shipped 2026-09-08 (`EF-075`, ck168); 1.0.7 is history, no branch install,
