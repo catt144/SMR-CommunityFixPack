@@ -8,6 +8,34 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-13 — v10 post-upload close: writeback restored, outbox cleared, delivered pack read
+
+**Precondition confirmed by the owner's own word** (both Paradox and Steam ran this sitting) before
+any of this ran — `POST_UPLOAD_CLOSE.md`'s ⛔⛔ gate. Working tree arrived already forced-saved by the
+Mod Editor: `metadata.lua`/`items.lua` comment-stripped, `version` 10 → 11, `pdx_version` "8" → "9",
+`saved`/`code_hash` bumped — the documented signature, confirmed non-comment-line-identical to HEAD
+except those four fields (`code`/`items.lua` content unchanged, three new modules from the 09-12
+retirement-batch commit already present). Comments restored from `git show HEAD:` with only the real
+deltas re-applied; `items.lua` needed no manual merge (zero non-comment diff against HEAD).
+
+§0.5(d): owner reports the portal offered no required-game-version field this upload — nothing to set.
+§0.5(f): Paradox has no local pack (subscribing writes no file; the game pulls at startup). Steam's
+subscribed copy read directly: `ModContent.fpk` 371,327 B, md5 `bef42a2d5405e06444b7e6efdf28cf38`
+(`A:\SteamLibrary\steamapps\workshop\content\3215050\3787202810\`, mtime 09-13 00:25 local).
+⚠️ **`pack_list.py` counts 56 entries; `pack_predict.py` on the tree predicts 54** — two extra
+non-Code doc entries, `smr-bug-library/SKILL.md` and `smr-orientation/SKILL.md`, present in the
+delivered archive but not on disk anywhere in the tree (checked, including reparse points). Cause
+UNCONFIRMED — flagged in STATE and the owner report, not chased further this sitting. Steam changelog
+page read attempted (`WebFetch`) and hit HTTP 429 twice; not retried.
+
+37 Q2 (Steam's version number) stays closed (2026-08-29) — irrelevant now that only one save happens
+per sitting regardless of which portals ran. `RELEASE.md` §5 run in the same close-out: the three
+`### Pending` outbox entries (C85, C89, C88) moved to *Released in v10*, compressed to one-line
+summaries each; the F37/F43+F118/F31 retirement note in *Held* marked landed rather than deleted.
+`STATE.md`, checklist item 169 (➊ done, ➋ `content/faq.md` still owed from the owner) and
+`WAITING_ON_YOU.md` updated; doccheck GREEN throughout, STATE.md 18,365 B (warn threshold 12,288 B —
+eviction now unblocked per checklist 132's "deferred until v10 is live", not run this sitting).
+
 ## 2026-09-12 — ck158, the v10 gate: three fixes attended in one boot, all three `tested-attended`
 
 **Attended sitting, owner at the keyboard, one boot.** Log

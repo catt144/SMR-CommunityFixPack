@@ -28,149 +28,14 @@ player surface bumps it by one on release.
 
 ## Pending — goes out with the next upload
 
-⚠️ Three entries below, all landed 2026-09-12 by `prompts/C85_C88_BUILD.md`. They ride v10 **together with** the Held batch — do not ship them separately, and re-derive every count at apply time.
-
-> ✅ **`RELEASE.md` STEP 1 IS APPLIED — 2026-09-12, commit `release words for v10`.** Every
-> surface below carries this batch already: the site fix list (3 rows out, 3 in, 12 re-worded),
-> `content/faq.md`'s judgment count, all five card copies, `metadata.lua`'s `description` +
-> `last_changes`, and `README.md` (§3b's six stale claims). ⛔ **Do not re-apply.** The entries
-> stay *Pending* on purpose — `RELEASE.md` §5 clears them only after the owner confirms the
-> upload. Derived at apply time: count word **stays Forty-nine** (−3 retired, +3 added),
-> headliners 21 → **20**, judgment calls three → **four**. Next step is the owner's upload
-> (`docs/UPLOAD_WORKFLOW.md`), then `POST_UPLOAD_CLOSE.md`.
-
-### Pending — C85 · `Fix_CloggedBuildingRelease` (`59c8c47`, 2026-09-12)
-
-**`last_changes` bullet (owner's list style, one line, `NEW`):**
-> NEW: a building left "Clogged after a Dust Storm." is switched back on — including one that is already stuck in your save.
-
-**Fix-list row (voice rule: what it does and for whom).**
-- *What you saw:* an extractor or factory stopped after a dust storm, said "Clogged
-  after a Dust Storm.", and never started again — destroy and rebuild was the only
-  way out. Two players reported it.
-- *What was wrong:* the dust-storm event switches the building off before it asks you
-  what to do, and if that question is ever lost — a save and reload while it is on
-  screen, for instance — nothing switches the building back on. The game already has
-  the timer that would have done it; this event does not use it.
-- *After the fix:* the building is switched back on, on load and once a day. A
-  building that is already stuck in your save recovers the next time you load it.
-  A building still waiting on your answer, or waiting because you chose "we'll fix it
-  after the storm", is left alone.
-
-Count impact **+1**. Judgment-call count unchanged.
-⚠️ Status is `fixed`, desk-controlled — **not** a playtest word. The attended A/B is
-checklist 158 and has not run. Entry: `bugs/C85.md` (2026-09-12 section) carries every
-limit, including the one case deliberately not repaired (an armed "fix it after the
-storm" follow-up that never gets its storm).
-
-### Pending — C89 · `Fix_FactionDomeSizeGate` (`98d0461`, 2026-09-12) ⚖️ JUDGMENT CALL
-
-⚖️ **This is a judgment call, not a repair of a code error, and every surface must say
-so the way F40 and F73 do** (owner, 2026-09-12): the site row uses the `??? question`
-block with "— *judgment call*" in the headline and the "⚠️ Worth knowing: this one is a
-judgment call" paragraph; the **FAQ judgment-call count goes three → four in all three
-places** (`PUBLIC_SURFACE_SWEEP.md` §6); the card's judgment-call sentence is updated
-if it lists them by name. ⛔ Nothing here may be worded as "the game was wrong".
-
-**`last_changes` bullet (owner's list style, one line, `NEW`):**
-> NEW: all five factions now use the same ten-colonist rule before they dislike a dome's unemployment or homelessness (judgment call).
-
-**Fix-list row.**
-- *What you saw:* a faction turning on you over "unemployment" in a dome of a handful
-  of colonists that was still being built, with nobody unemployed in the colony.
-- *What was wrong:* four of the five factions count any dome, however small, so one
-  idle colonist in a dome of three is "more than 10% unemployment". The Justice
-  Movement's identical dislike waits until a dome has ten colonists.
-- *After the fix:* all five use the same ten-colonist rule, for homelessness too.
-
-Count impact **+1**. **Judgment-call count three → four.**
-⚠️ Status on the defect question stays `cand` — it is a judgment call. The module is
-desk-controlled and has **not** run in a game: 🎮 the owner flagged C89 for an A/B they
-will observe themselves, `tested-attended` is theirs to grant, and the recipe is
-checklist 158. Entry: `bugs/C89.md`.
-
-### Pending — C88 · `Fix_BuildingCodesPrefab` (`4dc5073`, 2026-09-12)
-
-**`last_changes` bullet (owner's list style, one line, `NEW`):**
-> NEW: the Building Codes law now applies to buildings deployed from prefabs, as its description says — for buildings completed after this update.
-
-**Fix-list row.**
-- *What you saw:* with Building Codes enacted, a building deployed from a prefab kept
-  ordinary maintenance — under Strict it never got the lower maintenance the law
-  promises.
-- *What was wrong:* both versions of the law skip prefab-deployed buildings, and
-  neither description mentions it.
-- *After the fix:* prefab-deployed buildings get the same maintenance change as any
-  other, at whatever value the law is set to. This applies to buildings completed
-  after this update.
-
-⚖️ **Worth saying on the row, because it is the strongest thing we can say:** a Paradox
-developer answered the reporter's thread — excluding prefabs is wrong, it is fixed in
-their next patch, and they asked us to carry the fix meanwhile. When their patch lands
-this fix stands itself down on its own.
-
-Count impact **+1**. Judgment-call count unchanged.
-⚠️ "Applies to buildings completed after this update" is a **scope statement, not a
-hedge** — keep it. Buildings already standing cannot be repaired: the game does not
-record that a finished building came from a prefab. Status is `fixed`, desk-controlled;
-the attended A/B is checklist 158. Entry: `bugs/C88.md`.
-
-### ⛔ Notes for whoever runs `RELEASE.md` on this batch
-
-⚠️ **A fourth module changed in v10 and it has NO public row — do not go looking for one.**
-`Code/Fix_StaleReservations.lua` gained a per-colonist `pcall` on its daily sweep (hardening queue
-row 3, owner ruling ck168, 2026-09-12). It is a **hardening, not a repair**: no player-visible
-behaviour changes on the happy path, the F58 fix-list row is unchanged, and **no count moves**.
-⛔ Do not add it to the fix list, the card or the site. It belongs in the change note only if the
-release pass carries one at that level of detail. `items.lua` and `metadata.lua` are untouched (no
-module added, renamed or dropped — H-10 does not fire).
-
-**C90 also built 2026-09-12 for v10 — no public row and no count change.**
-`Code/Fix_SaintBlessing.lua` and `Code/Fix_SinkholeIndestructible.lua` now require their local
-apply-success verdict before any DataPatch pass work. Declined self-checks cannot write flags or
-preset data, arm Saint's save repair, or erase the failure through ctx.heal(). Status `fixed` on
-desk evidence; ships unexercised in play (ck158/ck130). C89 is unchanged: its claimed stale-verdict
-retry gap is refuted on the current non-optional path. Evidence: `reports/C90_GUARDS_BUILD.md`.
-For release accounting, enumerate the changed paths above: C90 changes both modules, although the
-build brief called it a single additional module. Do not add a card, fix-list or site row for it.
-
-- **Re-derive every count.** These three are **+3** on the fix count, but the Held
-  section above retires F37, F43 (+F118 rider) and — per
-  `reports/SURFACE_AUDIT_2026-09-12.md` — possibly **F31**, so the net is not +3.
-  Read the live count word and `doccheck --emit-counts` at apply time; never carry a
-  number from here.
-- **Judgment-call count: three → four**, in all three places, for C89 only.
-- ✅ **STALE — the `deskbench` REFUTED row is REPAIRED.** This line said
-  `tools/desk_migration_cluster.py` still loaded the deleted
-  `Code/Fix_DomeFreeSpaceMismatch.lua` and needed fixing before `deskbench` could be read
-  as a release signal. It was repaired from git (STATE: "F60 harness repaired from git").
-  **Re-run 2026-09-12 at the v10 release pass: `DESK BENCH: 20 harness(es)`, all 20 HELD**,
-  `desk_migration_cluster.py` among them, and with F37/F43/F31's modules already deleted.
-  `deskbench` reads clean as a release signal.
-- ⭐ **NEWLY FOUND SURFACE, 2026-09-12: the repo's own `README.md` is stale and it is
-  PUBLIC** (it is the GitHub front page every reporter and both Paradox developers
-  land on, and it has never been in `PUBLIC_SURFACE_SWEEP.md` — now added there as §3b).
-  **Six wrong claims, all verified against `doccheck` on 2026-09-12; ⛔ do NOT hand-copy
-  these replacement numbers, re-derive them at apply time:**
-  | line | says | doccheck says |
-  |---|---|---|
-  | `README.md:7` | "against game version **1.0.7.396349**" | the pack tracks **1.1.0**; 1.0.7 is the frozen legacy build |
-  | `README.md:9` | "version 1.0.0 — prepared for first release, **not yet on a store**" | **v9 is LIVE** on Steam and Paradox |
-  | `README.md:13` | "**75 fix modules**" | 49 registered / 50 files |
-  | `README.md:16` | "**Five** fixes are judgment calls" | three, going to four with C89 |
-  | `README.md:24` | "**167 tracked findings**" | 222 index rows |
-  | `README.md:54` | "**96 checks**" | 97 probes |
-  ⚖️ **RULED 2026-09-12 (checklist 160, now CLOSED): all six ride this batch.** The `:9` store-status
-  line is not a count and could have gone early, but the owner ruled it ordinary release-lane work —
-  one commit, one pass, the whole page correct at once. **`:9` needs no re-derivation** (v9 is live on
-  both stores, and v10 will be by then); the other five belong to this batch's single count pass.
-- **Neither C90 nor C91 is a player surface.** C90 is now built for v10 in the two modules
-  named above, with no public row. C91 remains a candidate: vanilla leaks the Building Codes
-  maintenance modifier on repeal. C91 work remains outside this build.
-
----
+(empty — v10's batch below cleared by `RELEASE.md` §5, 2026-09-13, upload confirmed both portals)
 
 ## Held — still-needed follow-through AFTER v9, not Pending
+
+✅ **The retirement + wording batch below LANDED in v10 (2026-09-12/13)** — F37, F43
+(+F118 rider) and F31 retired, `WORDING_RULED.md`'s 12 rows applied; see *Released in
+v10* above. The rest of this section (retained-claim notes, aggregates, the still-
+uncommitted site files) is NOT re-verified here — read it as history, not a to-do.
 
 **Do not consume this section in the v9 change note/upload.** It records review
 proposals, not landed player-facing changes. Pending F59/F60 above is unchanged.
@@ -224,6 +89,42 @@ in full, apply, and turn this section into the Pending entries for v10.
 ---
 
 ## Released — history, newest first (cleared here by RELEASE.md)
+
+### Released in v10 (2026-09-13) — C85, C89, C88 landed; F37, F43+F118, F31 retired
+- **C85 · `Fix_CloggedBuildingRelease`** (`59c8c47`) — a building clogged by a dust
+  storm never restarted on its own; it now switches back on, on load and once a
+  day, and one already stuck in a save recovers on next load. `fixed`,
+  desk-controlled; the attended A/B ran checklist 158. Count **+1**.
+- **C89 · `Fix_FactionDomeSizeGate`** (`98d0461`) ⚖️ **judgment call** — all five
+  factions now use the same ten-colonist rule before disliking a dome's
+  unemployment or homelessness (four of five previously counted any dome,
+  however small). `cand`/desk-controlled; owner's own A/B is checklist 158, B2's
+  panel leg NOT run by ruling. Count **+1**; judgment-call count three → **four**.
+- **C88 · `Fix_BuildingCodesPrefab`** (`4dc5073`) — Building Codes now applies its
+  maintenance change to buildings deployed from prefabs too, for buildings
+  completed after this update (a Paradox developer asked us to carry this until
+  their own patch). `fixed`, desk-controlled; attended A/B ran checklist 158.
+  Count **+1**.
+- **F37 (farm oxygen), F43 + F118 rider (layout research lock), F31** — RETIRED
+  and their modules deleted: 1.1.0 handles the salvaged-farm oxygen leak and the
+  layout research check itself, and the F31 cave-in map fix repaired a situation
+  that cannot arise (`reports/SURFACE_AUDIT_2026-09-12.md`, checklist 156/159).
+  Net count change **0** (−3 retired, +3 added) — stays **Forty-nine**.
+- Also built, no public row/count change: `Fix_StaleReservations` per-colonist
+  `pcall` hardening (queue row 3, ck168); C90's apply-success guards in
+  `Fix_SaintBlessing` + `Fix_SinkholeIndestructible` (`reports/C90_GUARDS_BUILD.md`).
+- Card: count word **Forty-nine** stays; headliners 21 → **20**; judgment calls
+  three → **four**; 5 card copies byte-checked; `README.md`'s six stale claims
+  fixed (§3b, checklist 160).
+- ⚠️ **Cleared on the owner's word this sitting** (both portals ran): tree
+  writeback `version` 10 → **11**, `pdx_version` "8" → **"9"**. Steam subscribed
+  archive re-read: `ModContent.fpk` **371,327 B** md5 `bef42a2d5405e06444b7e6efdf28cf38`
+  at 00:25 local 09-13, `pack_list.py` counts **56** entries against `pack_predict.py`'s
+  **54** — 2 extra non-Code doc entries (`smr-bug-library/SKILL.md`,
+  `smr-orientation/SKILL.md`) present in the delivered archive but absent from the
+  current source tree, unexplained (see owner report). Paradox has no local
+  auto-download to check; its own `pdx_version` bump is the only receipt read.
+  §0.5(d) required-game-version field: not offered on the page this upload.
 
 ### Released in v9 (2026-09-12) — F59 repaired, F60 retired
 - **F59 · `Fix_FreedHousingNotice`** (`3b41d9f`, audited `74b2c8f`) — repair to OUR OWN

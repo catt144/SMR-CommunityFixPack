@@ -29,6 +29,37 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### ⭐ 2026-09-13 — 169 ➊ **UPLOADED — v10 IS LIVE on both portals.** ➋ **STILL OWED: `content/faq.md` commit.** ➌ accepted as shipped.
+<!-- ck:169 status:part-ruled owner:yes -->
+
+> **➊ Receipt.** You confirmed both Paradox and Steam ran this sitting. Tree writeback: `version`
+> 10 → **11**, `pdx_version` "8" → **"9"** (`pdx_id` 156049, `steam_id` 3787202810 — unchanged,
+> already-listed ids). Comments restored in the same commit (`POST_UPLOAD_CLOSE.md`); doccheck GREEN.
+>
+> **§0.5(d) — required-game-version field:** you said the field is not offered on the page this
+> upload. Nothing to set; recorded, not chased further.
+>
+> **§0.5(f) — delivered-bytes check.** Paradox has no local auto-download (subscribing there writes
+> no file — the game pulls it at startup), so its pack is unread, same as every prior release.
+> Steam's subscribed copy WAS read: `A:\SteamLibrary\steamapps\workshop\content\3215050\3787202810\
+> ModContent.fpk`, **371,327 B**, md5 **`bef42a2d5405e06444b7e6efdf28cf38`**, written 2026-09-13
+> 00:25 local. ⚠️ **`pack_list.py` counts 56 entries inside it; `pack_predict.py` on the current tree
+> predicts 54.** The two extra entries are `smr-bug-library/SKILL.md` and
+> `smr-orientation/SKILL.md` — present in the delivered archive, absent from the working tree (no
+> such folders on disk, checked). Best guess: a byproduct of this session's own tooling mirroring
+> skill files at pack time, cleaned up after — but that is a guess, not a checked cause. It shipped
+> as two small non-code documentation files; no code loads from them (`items.lua`/`metadata.lua`'s
+> `code` list is unaffected and unchanged). Flagged, not fixed — say if you want it chased down.
+>
+> **37 Q2 (Steam's version number)** is not reopened — it stayed closed since 2026-08-29 (both
+> listings ship the same tree `version` on an update; unaffected by which portals ran which sitting).
+>
+> **➋ Still yours:** `content/faq.md` in `C:\Dev\SMR-CommunityMods` is still sitting uncommitted
+> beside your own paring edits (unread by any agent) — the site deploy for v10 stays blocked on you
+> committing it. Everything else from the original ➊/➋/➌ block below is otherwise discharged.
+
+<details><summary>Original 2026-09-12 ask (kept for the record)</summary>
+
 ### ⭐ 2026-09-12 — 169 **v10 IS READY TO UPLOAD.** All the words are written and committed; the pack is waiting on your hands. Two small calls inside, and one thing only you can commit.
 <!-- ck:169 status:open owner:yes -->
 
@@ -65,6 +96,8 @@ completed tests move whole to
 > ⚠️ **Nothing is uploaded and `version` was not touched** (`H-02`) — the bump is your sitting's.
 > Detail and the byte-identity proof for all five card copies: `reports/STORE_CARD_LIVE.md`
 > (2026-09-12 section).
+
+</details>
 
 ### ✅ 2026-09-12 — 168 RULED BY YOU (batch 2): **98 → baseline moves to 1.1.0 · hardening row 3 → BUILT into v10 · 151 (c) → the three cheap checks join the owed boot.** ⏳ **151 (b) came back as a question and is answered below — the call is still yours.**
 <!-- ck:168 status:ruled owner:no -->

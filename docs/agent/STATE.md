@@ -8,9 +8,12 @@ Defect truth `agent/bugs/INDEX.md` · facts `agent/facts/INDEX.md` · doc map `d
 Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/reports/CHAIN_METHOD.md`.
 
 ## Now
-- ⭐ **v9 IS LIVE** (2026-09-12 04:11Z, READ from Steam, ⛔ owner's word OWED ck155: changelog "Sep 11 @ 9:11pm" carries the F59/F60
-  note verbatim, page says "Forty-nine repairs", delivered fpk 337,653 B md5 `222b0f60d00319516c1bcc7beeb97491`; PDX unread,
-  `pdx_version` "8" ⇒ its upload ran): F59 repair + F60 retired. Tree `version` **10** (two saves; ck71: never chase), `pdx_version` "8".
+- ⭐ **v10 IS LIVE** (2026-09-13, owner's word both portals ran; Steam changelog READ unattempted this session —
+  429 rate-limited — cleared instead on the SUBSCRIBED ARCHIVE: workshop `ModContent.fpk` **371,327 B** md5
+  `bef42a2d5405e06444b7e6efdf28cf38` at 00:25 local; `pack_list.py` **56** entries vs `pack_predict.py`'s **54** —
+  2 extra non-Code doc entries present in the archive, absent from the tree, UNEXPLAINED, watch it): C85 + C89
+  (⚖️ judgment call) + C88 landed, F37/F43+F118/F31 retired, count word stays **Forty-nine**. Tree `version` **11**,
+  `pdx_version` "9". §0.5(d) field not offered this upload; Paradox has no local pack to check.
 - v6 = hotfix 2 (09-09): 36 modules DELETED (1.1.0 fixes them), 10 re-copied; `prompts/hotfix2/README.md`, `reports/HOTFIX_2_AUDIT.md`.
   ⚖️ Owner rule 09-08: a patch note saying "Fixed" is a **CLAIM, false until we confirm it**.
 - ⛔ GAME **1.1.0.403908** + DLC shipped 2026-09-08 (`EF-075`); installed Steam build still **24995074** = the archived 1.1.0
@@ -42,14 +45,13 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   C90 historical + live controls HELD; original scratch + live guard removals discriminate; reset moot on current non-optional path.
 - ✅ **RETIREMENTS LANDED 09-12** (ck156 + ck159): F37/F43+F118/F31 modules DELETED across Code + `items.lua` + `metadata.lua`
   (H-10), entries restatused, F21 STAYS. ⛔ ck159's predicted count word "Forty-six" PREDATES this — re-derive, never carry.
-- ⏭ NEXT = **THE OWNER'S UPLOAD** (ck169). ✅ `RELEASE.md` §1 RAN 09-12 over the Held batch + 3 Pending: every surface
-  carries v10. ⛔ Count word **STAYS Forty-nine** (−3 retired, +3 added; derived `grep -c '^??? '`=49, NOT
-  `WORDING_RULED`'s Forty-six, which priced retirements alone); headliners 21→**20** (C85 on); judgment calls 3→**4**.
-  5 card copies byte-checked; `last_changes` rewritten; README's 6 stale claims fixed (46 modules/47 files/97 probes/222 rows).
-  🚫 **`content/faq.md` LEFT UNCOMMITTED** beside the owner's own 3 pared files — site deploy blocked on the owner
-  committing it (ck169 ➋). `content/fix-list.md` IS committed. Then upload → `POST_UPLOAD_CLOSE.md` → outbox §5.
-  Handoff `prompts/perma/HANDOFF_ORCHESTRATOR.md` §3 LIVE. ✅ ck158 sitting FIRED + CLOSED 09-12; its one-off prompt `git rm`'d.
-  Desk `prompts/DLC_DEEP_CHECK.md` (`HUNT_AUDIT.md` §8).
+- ⏭ NEXT: v10's `POST_UPLOAD_CLOSE.md` + `RELEASE.md` §5 RAN 09-13 (writeback restored, outbox cleared to *Released
+  in v10*). 🚫 **STILL OWED: `content/faq.md`** (site repo) — LEFT UNCOMMITTED beside the owner's own 3 pared files;
+  site deploy stays blocked on the owner committing it, live list still reads 50 against the card's 49 until then.
+  ⚠️ **NEW, unexplained**: the delivered Steam pack has 2 archive entries (`smr-bug-library/SKILL.md`,
+  `smr-orientation/SKILL.md`) that `pack_predict.py` does not model and that are not on disk now — flagged, not
+  chased, this sitting. Handoff `prompts/perma/HANDOFF_ORCHESTRATOR.md` §3 LIVE. Desk `prompts/DLC_DEEP_CHECK.md`
+  (`HUNT_AUDIT.md` §8).
   ⭐ FR-1 TEMP WORKAROUND MOD LIVE 09-11 (Steam 3799500849 / PDX 158711; FINDINGS §11–§12). ALL FR-1 work → `prompts/perma/LINUX_DISPATCH.md`.
   Field: 3 working (one 10xx), 1 failing (GTX 1070, log requested). Chain `prompts/fixtoggles/` (ck148, DEFERRED 09-12).
   Owner OWES: ck144 (a) boot · ck151 (b) dev-report scope (ck165 lets you defer it). ✅ **ck158 the v10 GATE is DISCHARGED 09-12.**
@@ -63,18 +65,20 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   vanillahunt CLOSED 09-10 (99): instruments SOUND WITH STATED GAPS — 1,281 table-level hunks in 368 rowed hand files listed by
   no instrument (§1.4); 12 P2s re-derived: 6 hold, 5 weakened, **C80 REFUTED**; **C82** filed by the audit (Incident reactors stay
   off); every P2 is a gain/cosmetic except C82/C66/C63; ck142 = hotfix-3 list (rec none). FR-1/2/3 OPEN (FR-1 → LINUX_DISPATCH).
-- ⭐ PUBLISHED both portals — `pdx_id` **156049**, `steam_id` **3787202810**, tree `version` **8** (v8, 09-11).
+- ⭐ PUBLISHED both portals — `pdx_id` **156049**, `steam_id` **3787202810**, tree `version` **11** (v10, 09-13).
   ⛔ Never re-upload to "fix" a version number — each upload bumps again (H-02). ⛔ Every upload OVERWRITES both
-  page bodies from `metadata.lua`; `description` IS the full card (08-24). v6 auto-fill clean (owner-seen), v7 pasted for
-  formatting, v8 unreported; `UPLOAD_WORKFLOW` §3 paste backups stay REQUIRED.
+  page bodies from `metadata.lua`; `description` IS the full card (08-24). Auto-fill is CLOSED, no per-cycle result
+  tracked (checklist 155, 09-12); `UPLOAD_WORKFLOW` §3 paste backups stay REQUIRED every cycle.
 - ⭐ SITE deployed 2026-09-11 21:10Z (`398a1b0` per the deployments API), **50** live entries; HEAD `a061665` (**49**: F60 row gone,
   F51/F58 narrowed) UNDEPLOYED — ⚖️ owner HOLDS the deploy for v10 (09-12): live list 50 vs card 49 until then. ⛔ `publish-site.yml` is `workflow_dispatch` only.
   ⛔ Never quote a stored "deployed = <sha>"; read the deployments API (`prompts/perma/SITE_AUDIT.md`).
-- Post-launch LIVE: F105, F107, F108 (v4), F110 (v5), hotfix 2 (v6), C74+C77+C83 (v7), F119+C86 (v8), F59 repair + F60 out (v9); F104 NOT OURS. ⛔ F107 field
+- Post-launch LIVE: F105, F107, F108 (v4), F110 (v5), hotfix 2 (v6), C74+C77+C83 (v7), F119+C86 (v8), F59 repair + F60 out (v9),
+  C85+C89+C88 in / F37+F43+F118+F31 out (v10); F104 NOT OURS. ⛔ F107 field
   route untested. ⛔ Read the GitHub tracker via `api.github.com/.../issues/<n>/comments`, never the HTML page. ✅ Passage Network UNTICKED 09-09.
 - ✅ v7's C74+C77 + C83 and v8's F119 + C86 were all `tested-attended` before upload (SESSION_LOG 09-10 / 09-11; entries §Attended check).
-- Shipping artifact: v9 Steam-delivered `ModContent.fpk` **337,653 B** md5 `222b0f60d00319516c1bcc7beeb97491` (workshop folder,
-  09-12 00:25 local; predict with `tools/pack_predict.py`, never carry a number); PDX size unread — the two portals'
+- Shipping artifact: v10 Steam-delivered `ModContent.fpk` **371,327 B** md5 `bef42a2d5405e06444b7e6efdf28cf38`
+  (workshop folder, 09-13 00:25 local; predict with `tools/pack_predict.py`, never carry a number — it read 54
+  against this archive's actual 56, see NEXT); PDX size unread — the two portals'
   sizes differed on v5/v6 (documented, `RELEASE_PORTAL_PREP` §0.5(f)). Tag `fixpack-v1.0.0` NOT moved (H-01).
   ⛔ Pack route is main menu → MOD EDITOR → File → Pack Mod, NOT Mods Manager → Ctrl-E (⚠️ PORTAL_PREP §0.5 old).
 - Watches: `EF-066` subclass reach unmeasured, ck74 half-open · localisation: German only one SEEN (`EF-039`) ·

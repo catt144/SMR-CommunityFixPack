@@ -314,8 +314,11 @@ return PlaceObj('ModDef', {
 	-- so; a session read it as a general rule on 2026-08-29 and concluded Steam
 	-- had never been updated. It had. ⇒ the ONLY controls are the store's own
 	-- change notes and the SUBSCRIBED archive — never this file. `EF-068`.
+	-- 2026-09-13 (v10, C85 + C88 + C89 landed, F37/F43+F118/F31 retired): version 10 → 11,
+	-- `pdx_version` "8" → "9". Both portals ran this sitting (owner's word). Writeback
+	-- committed STRIPPED again by the forced save; restored here (POST_UPLOAD_CLOSE).
 	'version_major', 1,
-	'version', 10,
+	'version', 11,
 	'lua_revision', 350453,
 	'saved_with_revision', 403908,
 	-- saves made with the pack load fine without it (FIX_POLICY §3), so don't
@@ -403,8 +406,8 @@ return PlaceObj('ModDef', {
 	-- after a sitting is the EXPECTED state, not a mistake by whoever worked last.
 	-- ⚠️ `saved_with_revision` now sits further up, beside `lua_revision`, because
 	-- `SaveDef` writes the fields in its own order; it is the same editor bookkeeping.
-	'saved', 1789186283,
-	'code_hash', -6221640283017790268,
+	'saved', 1789271380,
+	'code_hash', 4039348116336871338,
 	-- ⭐ ADDED 2026-09-10 (owner: the card should point players at pictures of the two
 	-- skins) — the store GALLERY. Both uploaders read screenshot1..5: the Mod Editor copies
 	-- each to TmpData/ModUpload/Screenshots as `ModScreenshot_<name>` (GedModEditor.lua:
@@ -420,7 +423,7 @@ return PlaceObj('ModDef', {
 	'screenshot2', "Mod/SMR_CommunityFixPack/store_screenshots/2_rare_metals_hammer_skin.jpg",
 	'screenshot3', "Mod/SMR_CommunityFixPack/store_screenshots/3_moxie_skins.jpg",
 	'pdx_id', 156049,
-	'pdx_version', "8",
+	'pdx_version', "9",
 	'steam_id', "3787202810",
 	'TagGameplay', true,
 })
