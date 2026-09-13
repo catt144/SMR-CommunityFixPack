@@ -630,7 +630,38 @@ completed tests move whole to
 > ⚠️ Say **(a)** and an agent can do it unattended the moment you answer; nothing else on the
 > page gets touched.
 
-### 2026-09-12 — 158: three new fixes are built and waiting on your eyes. **ONE boot does all three. C89 is the one you asked to watch yourself; the other two are minutes.**
+### ✅ 2026-09-12 — 158 RAN 09-12: all three attended in one boot; C85, C89 and C88 are `tested-attended`. **Nothing owed from you — the v10 gate is clear.**
+<!-- ck:158 status:closed owner:no -->
+
+> **THE SITTING RAN (2026-09-12, owner at the keyboard, one boot).** Log
+> `agent/../archive/logs/ck158sitting_Mars.exe-20260912-21.32.07-6a91a190.log`. Boot clean: **49 of 49 modules
+> applied**, **no error-shaped lines** anywhere in the session, game exited 0. Full evidence in each entry's
+> **§Attended check**; the raw lines are quoted there rather than paraphrased.
+>
+> | leg | verdict | the artefact |
+> |---|---|---|
+> | **A · C85** | ✅ `tested-attended` | `released 1 building(s) stuck 'Clogged after a Dust Storm.' (load)` |
+> | **B1 · C89** | ✅ `tested-attended` | same dome, 10 colonists → 0 rows changed; **9 colonists → 3 changed, GATE ACTIVE**, all `shipped=true live=false` |
+> | **C · C88** | ✅ `tested-attended` | `Building Codes applied to a prefab-deployed StirlingGenerator` + `percent=-30`, maintenance 1000 → **700** |
+>
+> ⭐ **B1 came out stronger than the recipe asked for.** Instead of a small fixture dome it was run as a **boundary
+> pair on one dome, one colonist apart** — at 10 the gate correctly does nothing, at 9 it suppresses three rows, with
+> `shipped=true` on *both* sides proving the game's own rule still wanted to complain. That is a ten-colonist rule
+> observed in both directions, not a blanket switch-off.
+>
+> ⛔ **NOT RUN, by your ruling:** **B2** (fresh colony, seated faction, `C89-PANEL total=0`). It leaves exactly one
+> link unmeasured — that a `CountDome` of 0 clears the dislike from the faction's **panel** — on a vanilla path we do
+> not touch. ⚖️ **Your call: ship it, reopen C89 if a field report counters it.** Also not run: C85's `(daily)` arm,
+> and C88's same-type comparison, which is structurally impossible (every supplyable prefab is `require_prefab`).
+>
+> ⚠️ **Two things learned that were not the point of the sitting.** (1) A prefab build sets `supplied=true`, so it
+> costs **no construction resources** — prefabs are free to build, and this session's source read had guessed
+> otherwise. (2) `SaintBlessing` latched inactive and then **healed back to active** in this boot (:142 → :160,
+> `save re-base armed for 1 preset(s) of 2`) — the first time that heal has been seen firing in play.
+
+<details>
+<summary>The recipe as it was written for the sitting (kept as the record of what was asked)</summary>
+
 
 > **What is built** (all three ride v10, all three desk-checked, none of them run in a game yet):
 >
@@ -848,6 +879,8 @@ patch, and they asked us to carry the fix meanwhile.
 All 16 original demands remain, including every F51 leg and both F60 harm legs. Full deskbench is green:
 20 harnesses, 254/254 numbered demands plus three unnumbered harnesses. This repairs the pre-existing
 failure from F60's deleted file; it is desk evidence, not release clearance or an attended playtest.
+
+</details>
 
 ### ✅ 2026-09-12 — 159 RULED 09-12: F31 retires, F37's load-time clean-up is a loss you accept, and every sentence replacement goes in. **Nothing owed from you; the release lane carries it into v10.**
 <!-- ck:159 status:ruled owner:no -->

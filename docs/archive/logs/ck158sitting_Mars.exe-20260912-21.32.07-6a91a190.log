@@ -1,0 +1,329 @@
+					Render 0:00:00:007
+*** executable info
+Timestamp:     	6a91a190
+Date:          	Fri Aug 28 10:56:16 2026
+Command line:  	
+Compiler:      	195136247, 142 (VS 2019) or newer
+
+
+					Render 0:00:00:008
+*** hardware info
+CPU name      	Intel(R) Core(TM) i7-14700K
+CPU MHz       	3418
+CPU cores     	20/28
+Phys. Memory   	65278 MBytes
+Memory In Use  	52%
+Disk Free      	799500 MBytes
+
+
+*** OS info
+OS:            	Windows 11
+Version:       	10.0.26100 
+
+
+*** Debug::Init()
+
+
+					Render 0:00:00:108
+Steam initialized (AppId 3215050)
+					Render 0:00:00:111
+Drive type for game installation: SSD, savegames: SSD
+Language: English
+					Render 0:00:01:657
+*** graphics info
+GPU                            	NVIDIA GeForce RTX 4080 Feature Level: 12.1 {  DoublePrecisionFloatShaderOps: 1 OutputMergerLogicOp: 1 MinPrecisionSupport: 2 TiledResourcesTier: 4 ResourceBindingTier: 3 PSSpecifiedStencilRefSupported: 0 TypedUAVLoadAdditionalFormats: 1 ROVsSupported: 1 ConservativeRasterizationTier: 3 MaxGPUVirtualAddressBitsPerResource: 40 StandardSwizzle64KBSupported: 0 CrossNodeSharingTier: 0 CrossAdapterRowMajorTextureSupported: 0 VPAndRTArrayIndexFromAnyShaderFeedingRasterizerSupportedWithoutGSEmulation: 1 ResourceHeapTier: 2 NotZeroedPools: 1 UMA: 0 UnalignedBlockTextures: 1}
+API                            	d3d12
+GPU Driver Version             	32.0.16.1074
+GPU Driver Package Version     	610.74
+GPU Dedicated Video Memory     	16048 MB
+					Render 0:00:01:840
+
+Libs: Network, Sequences, MouseTrackWin, DumbAI, MapGen, Paradox, TriggersAndEvents, Notifications, Research, Resources, Tutorial, Objectives 
+
+					Render 0:00:02:079
+
+Platform: desktop, editor, goldmaster, paradox, pc, steam
+
+					Render 0:00:03:057
+*** audio info
+Audio Endpoint                 	Headphones (3- A50 Game)
+Lua revision: 403908
+Assets revision: 33006
+Steam AppID: 3215050
+Build version: 1.1.0.403908
+Build branch:  Release
+						Lua 0:00:05:514
+Account storage loaded successfully in 2 ms
+DLC norman loaded, lua revision 403908, assets revision 33006
+DLC thomas loaded, lua revision 403908, assets revision 33006
+						Lua 0:00:05:518
+[mod] Loaded mod def Community Fix Pack — Test Kit (id SMR_CommunityFixPackTestKit, v0.00-001) unpacked from appdata
+[mod] Loaded mod def Relaunched Fix Pack (id SMR_CommunityFixPack, v1.00-010) unpacked from appdata
+[mod] Loaded mod def Relaunched Fix Pack: Opt-In Modules (id SMR_CommunityOptInPack, v1.00-000) unpacked from appdata
+[mod] Loaded mod def TEMPORARY - Linux NVIDIA 580 Crash Workaround (id SMR_FR1TempWorkaround, v0.00-003) unpacked from appdata
+						Lua 0:00:05:895
+[mod] [SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:05:896
+[mod] [SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[mod] [SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+[SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+						Lua 0:00:05:901
+[mod] [SMRTest][carry] fixture-carry dump available — run SMRTest.FixtureCarry()
+						Lua 0:00:05:902
+[mod] [CommunityFixPack] NightShiftWork: applied
+[mod] [CommunityFixPack] WispRewards: applied
+[mod] [CommunityFixPack] TrainsToVoid: applied
+[mod] [CommunityFixPack] LanderEmptyLaunch: applied
+[mod] [CommunityFixPack] ShelterReflex: applied
+[mod] [CommunityFixPack] BrokenTrackSalvage: applied
+						Lua 0:00:05:903
+[mod] [CommunityFixPack] TrackSalvageWipe: applied
+[mod] [CommunityFixPack] LakeEntombment: applied
+[mod] [CommunityFixPack] GhostFarmOxygen: applied
+[mod] [CommunityFixPack] RocketDroneChurn: applied
+[mod] [CommunityFixPack] TradeRocketFuelRefresh: applied
+[mod] [CommunityFixPack] ShuttleTransportCache: applied
+[mod] [CommunityFixPack] VacuumWalks: applied
+[mod] [CommunityFixPack] ArrivalDeaths: applied
+						Lua 0:00:05:904
+[mod] [CommunityFixPack] StaleReservations: applied
+[mod] [CommunityFixPack] CrystalMysteryHang: applied
+[mod] [CommunityFixPack] DomeOverviewHighlight: applied
+[mod] [CommunityFixPack] TrainCargoDumping: applied
+[mod] [CommunityFixPack] DestroyedTunnels: applied
+[mod] [CommunityFixPack] DustSicknessBiorobots: applied
+[mod] [CommunityFixPack] GeneForging: applied
+[mod] [CommunityFixPack] MirrorSphereSite: applied
+[mod] [CommunityFixPack] PayloadTemplateRefill: applied
+						Lua 0:00:05:905
+[mod] [CommunityFixPack] ShuttleHubOffAvailable: applied
+[mod] [CommunityFixPack] FreedHousingNotice: applied
+[mod] [CommunityFixPack] LandscapeUnitFilter: applied
+						Lua 0:00:05:906
+[mod] [CommunityFixPack] RocketInteractGuard: applied
+[mod] [CommunityFixPack] TrackConnectorPingPong: applied
+[mod] [CommunityFixPack] TrackTunnelPowerBridge: applied
+[mod] [CommunityFixPack] GraphConsumedCaption: applied
+[mod] [CommunityFixPack] TrainWaitTime: applied
+[mod] [CommunityFixPack] FounderTraitNotification: applied
+[mod] [CommunityFixPack] SequenceLatents: applied
+						Lua 0:00:05:907
+[mod] [CommunityFixPack] TrackSalvageRefund: applied
+[mod] [CommunityFixPack] LayoutTechLock: applied
+[mod] [CommunityFixPack] DroneTransportMinors: applied
+[mod] [CommunityFixPack] AnomalyCaveInMap: applied
+[mod] [CommunityFixPack] ScanDowngrade: applied
+[mod] [CommunityFixPack] BombardmentSpread: applied
+[mod] [CommunityFixPack] ExtenderFlapChurn: applied
+[mod] [CommunityFixPack] SaintBlessing: applied
+[mod] [CommunityFixPack] SinkholeIndestructible: applied
+						Lua 0:00:05:908
+[mod] [CommunityFixPack] ExoticDepositSign: applied
+[mod] [CommunityFixPack] JumboCaveReinforcementWedge: applied
+[mod] [CommunityFixPack] SilentHitMomentFX: applied
+[mod] [CommunityFixPack] CloggedBuildingRelease: applied
+[mod] [CommunityFixPack] FactionDomeSizeGate: applied
+[mod] [CommunityFixPack] BuildingCodesPrefab: applied
+						Lua 0:00:05:909
+[mod] [CommunityFixPack] SaveSanitizer: applied
+[mod] [CommunityOptInPack] ClassicRockets: applied
+[mod] [CommunityOptInPack] AcknowledgedWarnings: applied
+[mod] [CommunityOptInPack] ResidencyControl: applied
+[mod] [CommunityOptInPack] MultipleSuns: applied
+						Lua 0:00:05:910
+[mod] [CommunityOptInPack] DroneOverhaul: applied
+[mod] [CommunityOptInPack] CohortHousing: applied
+[mod] [CommunityOptInPack] NoHomeless: self-check targets Community but Workforce declares HasFreeWorkplacesAround — authoring error, not a game update (FIX_POLICY §2)
+[mod] [CommunityOptInPack] NoHomeless: inactive (Community.HasFreeWorkplacesAround not found — expected on the FIRST load pass and NOT a game update: this check names Community while Workforce declares the method (authoring error — see the preceding line), and mod code loads before the class hierarchy is built, so the module applies cleanly on the second pass. If no 'NoHomeless: applied' line follows this one, the method is genuinely gone — without it a flagged dome could never be staffed)
+[mod] [CommunityOptInPack] DroneStatDials: applied
+						Lua 0:00:06:666
+[mod] [CommunityFixPack] SaintBlessing: inactive (no dome-colonists trait presets)
+[mod] [CommunityFixPack] SinkholeIndestructible: the St. Elmo's Fire sinkhole is now indestructible, like every other mystery set-piece
+						Lua 0:00:06:757
+Reloading done in 1239 ms
+						Lua 0:00:06:758
+Available DLCs: norman(Feeding the Future),thomas(Interplanetary Codex) 
+						Lua 0:00:07:171
+[preset] Preset postprocess took 152 ms.
+						Lua 0:00:07:216
+482 / 482 particle streams loaded in 39 ms.
+						Lua 0:00:07:217
+5 / 5 particle streams loaded in 1 ms.
+						Lua 0:00:07:218
+[mod] [CommunityFixPack] SilentHitMomentFX: registered 11 missing animation-moment preset(s)
+						Lua 0:00:07:219
+[mod] [CommunityFixPack] FactionDomeSizeGate: 7 faction dislike(s) now wait for 10 colonists in a dome
+[mod] [CommunityOptInPack] MultipleSuns: BuildingTemplates.ArtificialSun not found — build limit NOT lifted (binding fix still active)
+						Lua 0:00:07:419
+[mod] [CommunityFixPack] SaintBlessing: the shipped code resolves the trait label itself — data left untouched; save re-base armed for 1 preset(s) of 2
+						Lua 0:00:07:420
+[mod] [CommunityOptInPack] MultipleSuns: Artificial Sun build-once limit lifted
+						Lua 0:00:07:548
+[mod] Loaded mod items for: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack, SMR_CommunityOptInPack
+[mod] [CommunityOptInPack] NoHomeless: applied
+						Lua 0:00:08:296
+[PdxSDK] Started up. Took 1011
+						Lua 0:00:08:700
+[Braze] SessionStart error The server name or address could not be resolved
+
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:08:811
+[Braze] SessionStart error The server name or address could not be resolved
+
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:14:751
+Load Game: 
+	lua_revision: 403908 (last saved with) 
+	orig_lua_revision: 403908 (created with) 
+	assets_revision: 33006 
+
+	dlcs: norman, thomas 
+
+	mods: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack 
+						Lua 0:00:14:759
+*** Reloading assets from folder 'BinAssets/'
+						Lua 0:00:17:776
+*** Assets reloaded in 3.0 s, read 359.3 MB, read speed 119.1 MB/s, average read 8137 bytes.
+						Lua 0:00:19:415
+[mod] This savegame tries to load Mod Relaunched Fix Pack (id SMR_CommunityFixPack, v1.00-007), which is loaded with a different version 1.00-010
+						Lua 0:00:20:794
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:20:797
+[mod] [CommunityFixPack] SilentHitMomentFX: restored 4 missing hit-moment tracker(s) on load
+						Lua 0:00:20:809
+game_settings:
+    sponsor: NASA
+    profile: rocketscientist
+    founding_faction: AssemblyOfPlanets
+    rival_colonies: ESA, IMM, CNSA
+    mystery_random: 
+    game_rules: (none)
+more_game_settings: save_game_id: lD1jaGcMJOxaiFcU, mystery: none, coordinates: 16N120E, landing_spot: , logo: USA
+map_conditions: altitude: -3122, temperature: -25, cold_wave: 61, dust_devils: 44, dust_storm: 123, meteors: 109
+map_resources: concrete: 109, metals: 176, precious_metals: 176, water: 212
+						Lua 0:00:20:825
+[mod] [CommunityFixPack] SaveSanitizer: F95 astrogeologist-residue pass removed 0 modifier(s), left 0 unidentified
+Game Loaded in 6075 ms
+						Lua 0:00:20:855
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:21:503
+Game loaded on map BlankBig_02 in 6869 ms
+						Lua 0:00:23:809
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:01:58:800
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:02:00:001
+Load Game: 
+	lua_revision: 403908 (last saved with) 
+	orig_lua_revision: 403908 (created with) 
+	assets_revision: 33006 
+
+	dlcs: norman, thomas 
+
+	mods: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack, SMR_CommunityOptInPack 
+						Lua 0:02:02:837
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:02:02:840
+[mod] [CommunityFixPack] SilentHitMomentFX: restored 4 missing hit-moment tracker(s) on load
+						Lua 0:02:02:843
+[mod] [CommunityFixPack] CloggedBuildingRelease: released 1 building(s) stuck 'Clogged after a Dust Storm.' (load)
+						Lua 0:02:02:853
+game_settings:
+    sponsor: NASA
+    profile: rocketscientist
+    founding_faction: AssemblyOfPlanets
+    rival_colonies: CNSA, IMM, ESA
+    mystery_random: 
+    game_rules: (none)
+more_game_settings: save_game_id: lD1jaGcMJOxaiFcU, mystery: none, coordinates: 16N120E, landing_spot: , logo: USA
+map_conditions: altitude: -3122, temperature: -25, cold_wave: 61, dust_devils: 44, dust_storm: 123, meteors: 109
+map_resources: concrete: 109, metals: 176, precious_metals: 176, water: 212
+						Lua 0:02:02:868
+[mod] [CommunityFixPack] SaveSanitizer: F95 astrogeologist-residue pass removed 0 modifier(s), left 0 unidentified
+Game Loaded in 2867 ms
+						Lua 0:02:02:892
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:02:03:336
+Game loaded on map BlankBig_02 in 3441 ms
+						Lua 0:02:05:642
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:02:34:289
+not understood
+						Lua 0:08:20:121
+[mod] [CommunityFixPack] C89-AB dome=DomeBasic colonists=18 unemployed=4 homeless=10 threshold=10
+[mod] [CommunityFixPack] C89-AB   ProsperityUnemployment   shipped=true live=true
+[mod] [CommunityFixPack] C89-AB   NewSolHomeless           shipped=true live=true
+						Lua 0:08:20:122
+[mod] [CommunityFixPack] C89-AB   NewSolUnemployment       shipped=true live=true
+[mod] [CommunityFixPack] C89-AB   UtopiaHomeless           shipped=true live=true
+[mod] [CommunityFixPack] C89-AB   CollectiveUnemployment   shipped=true live=true
+[mod] [CommunityFixPack] C89-AB   UtopiaUnemployment       shipped=true live=true
+[mod] [CommunityFixPack] C89-AB   CollectiveHomeless       shipped=true live=true
+[mod] [CommunityFixPack] C89-AB 7 row(s), 0 where the gate changed the answer -- no difference on this dome (expected when it has 10+ colonists, or the fix is off)
+						Lua 0:09:51:451
+[mod] [CommunityFixPack] C89-AB dome=DomeBasic colonists=10 unemployed=0 homeless=2 threshold=10
+[mod] [CommunityFixPack] C89-AB   ProsperityUnemployment   shipped=false live=false
+[mod] [CommunityFixPack] C89-AB   NewSolHomeless           shipped=true live=true
+[mod] [CommunityFixPack] C89-AB   NewSolUnemployment       shipped=false live=false
+[mod] [CommunityFixPack] C89-AB   UtopiaHomeless           shipped=true live=true
+[mod] [CommunityFixPack] C89-AB   CollectiveUnemployment   shipped=false live=false
+[mod] [CommunityFixPack] C89-AB   UtopiaUnemployment       shipped=false live=false
+[mod] [CommunityFixPack] C89-AB   CollectiveHomeless       shipped=true live=true
+[mod] [CommunityFixPack] C89-AB 7 row(s), 0 where the gate changed the answer -- no difference on this dome (expected when it has 10+ colonists, or the fix is off)
+						Lua 0:11:25:522
+[mod] [CommunityFixPack] C89-AB dome=DomeBasic colonists=9 unemployed=0 homeless=1 threshold=10
+[mod] [CommunityFixPack] C89-AB   ProsperityUnemployment   shipped=false live=false
+[mod] [CommunityFixPack] C89-AB   NewSolHomeless           shipped=true live=false
+[mod] [CommunityFixPack] C89-AB   NewSolUnemployment       shipped=false live=false
+[mod] [CommunityFixPack] C89-AB   UtopiaHomeless           shipped=true live=false
+[mod] [CommunityFixPack] C89-AB   CollectiveUnemployment   shipped=false live=false
+						Lua 0:11:25:523
+[mod] [CommunityFixPack] C89-AB   UtopiaUnemployment       shipped=false live=false
+[mod] [CommunityFixPack] C89-AB   CollectiveHomeless       shipped=true live=false
+[mod] [CommunityFixPack] C89-AB 7 row(s), 3 where the gate changed the answer -- GATE ACTIVE on this dome
+						Lua 0:16:28:547
+[mod] [CommunityFixPack] C88-LAW strict=true lax=false
+						Lua 0:35:36:561
+[mod] [CommunityFixPack] C88-PREFABS stirling=0 dronehub=0 vaporator=0
+						Lua 0:35:47:592
+[LUA ERROR] [string "CreateRealTimeThread(function() SMRFixPack.Lo..."]:1: attempt to index a boolean value (global 'SelectedObj')
+  [string "CreateRealTimeThread(function() SMRFixPack.Lo..."](1):   <>
+        --- end of stack
+Locals:
+						Lua 0:36:42:890
+[mod] [CommunityFixPack] C88-SITE class=ConstructionSite prefab=true supplied=true
+						Lua 0:36:59:362
+[mod] [CommunityFixPack] BuildingCodesPrefab: Building Codes applied to a prefab-deployed StirlingGenerator
+						Lua 0:37:03:263
+[mod] [CommunityFixPack] C88-AB building=StirlingGenerator guard=true active_law=Policy_BuildingCodesStrict maintenance=700
+[mod] [CommunityFixPack] C88-AB   modifier id=Policy_BuildingCodesStrict percent=-30 amount=0
+						Lua 0:42:23:902
+
+
+Stopping the game threads from the Lua side with exit code 0.
+
+					Render 0:42:23:904
+
+
+Stopping the game threads after receiving WM_QUIT.
+
+					Render 0:42:24:241
+
+
+*** Debug::Done()
+Time (ms)	2544241
+
+

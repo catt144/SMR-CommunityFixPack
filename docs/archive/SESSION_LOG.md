@@ -8,6 +8,46 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-12 — ck158, the v10 gate: three fixes attended in one boot, all three `tested-attended`
+
+**Attended sitting, owner at the keyboard, one boot.** Log
+`archive/logs/ck158sitting_Mars.exe-20260912-21.32.07-6a91a190.log` (329 lines, game 1.1.0.403908 / LuaRevision
+403908, both DLCs, exit 0). `tools/logscan.py`: **49 modules seen — applied 49**, Opt-In 8/8, **no error-shaped
+lines**. Owner granted `tested-attended` per leg, by name.
+
+- **A · C85** — a producer forced into the story bit's own end state by its own call, saved, reloaded:
+  `CloggedBuildingRelease: released 1 building(s) stuck 'Clogged after a Dust Storm.' (load)` (:240). The `(daily)`
+  arm was not run.
+- **B1 · C89** — run as a **boundary pair on one dome rather than the recipe's fixture dome**: at 10 colonists 0 of 7
+  rows changed; at **9 colonists 3 changed, `GATE ACTIVE`**, every changed row `shipped=true live=false`. An
+  18-colonist dome read all-`live=true` earlier in the same boot. A ten-colonist rule seen in both directions, with
+  `shipped=true` on both sides proving the dome still qualified. Traced to the game's real path: the pass mutates the
+  preset filter in place and vanilla's `CountDome` re-reads `self.DomeFilter.eval` uncached
+  (`FactionDef.lua:855-857`), which is the same field `Report`'s `live=` column reads.
+- **C · C88** — `C88-LAW strict=true` first, then the site read **`prefab=true`** *before* completion, so the leg
+  provably exercised the defect's branch; then `Building Codes applied to a prefab-deployed StirlingGenerator` and
+  `modifier id=Policy_BuildingCodesStrict percent=-30`, maintenance **1000 → 700** = exactly the law's −30%.
+
+⛔ **Not run, by the owner's ruling: C89's B2 panel leg.** One link stays unmeasured — that `CountDome` returning 0
+clears the dislike from the faction's approval panel, vanilla arithmetic on a path we do not touch. ⚖️ Owner: ship it,
+**reopen C89 if a field report counters it**. C88's same-type comparison is structurally impossible (every supplyable
+prefab is `require_prefab`), and is recorded as unavailable rather than owed.
+
+**Two findings that were not the point of the sitting.** (1) A prefab construction site sets `supplied=true`, the flag
+that skips the material request (`ConstructionSite.lua:696`) — **prefabs cost no construction resources**; this
+session's source read had guessed the opposite and the measurement corrected it. (2) `SaintBlessing`'s `ctx.heal()`
+**fired in play for the first time** (:142 inactive → :160 active, `save re-base armed for 1 preset(s) of 2`) — STATE
+had it shipping unexercised (ck130).
+
+⚠️ **One instrument of this session was void and is recorded as such:** a `ColonyGetPrefabs(..., MainCity)` readout
+returned 0 against a visible prefab badge of 3 — it asked the wrong city. It is not evidence; the badge and
+`site.prefab=true` settled the point independently.
+
+⏭ **v10 is unblocked** — ck158 was the last gate. Next is `prompts/perma/RELEASE.md` over the outbox's Held batch plus
+the 3 Pending. The one-off `prompts/SITTING_158.md` was `git rm`'d with this commit.
+
+---
+
 ## 2026-09-12 — lookback: the decision sweep (ck165–168), the opt-in offload, and a handoff rewritten from 257 to 179 lines
 
 tags: lookback ck165 ck166 ck167 ck168 handoff STATE-budget orphans sitting-158 decision-sweep

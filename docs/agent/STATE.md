@@ -25,19 +25,28 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   A3 (F118) · A10 · A5 c2 · A9 c4/c5 · F117's station recipe · the first `RunAll()` on the 94-probe kit (re-stamps
   `WORKFLOW.md:407`, VOID since 09-09). ⛔ Kit verdicts are PREDICTIONS until then; still FAIL/ERROR by name:
   `C47OpenFarmSeedBufferShape` (Herbs 100→50), retired `LanderCargoRatchet`/`DroneUnreachableForever`/`AutoExportPriority`.
-- ✅ BOTH 09-12 LANES REPORTED: build `59c8c47` C85 + `98d0461` C89 (⚖️ judgment call, FAQ count 3→4) + `4dc5073` C88
-  (ck158 = all three attended A/Bs, ONE boot; owner grants `tested-attended`), audit `4c7b11a` (ck159).
+- ⭐⭐ **ck158 THE V10 GATE IS CLEAR — RAN 2026-09-12 attended, ONE boot; C85 + C89 + C88 all `tested-attended`** (owner's
+  word, per leg, by name). Log `archive/logs/ck158sitting_Mars.exe-20260912-21.32.07-*.log`; 49/49 applied, 0 error lines,
+  exit 0. Evidence = each entry's §Attended check; ⛔ never re-derive a leg from the module. C89's A/B was a BOUNDARY PAIR
+  on one dome (10 → 0 rows changed; 9 → 3 changed, GATE ACTIVE, `shipped=true live=false`). C88: prefab site read
+  `prefab=true`, maintenance 1000→700 = the law's −30%. ⛔ **NOT RUN by owner ruling: C89's B2 panel leg** (one unmeasured
+  link — `CountDome` 0 ⇒ panel clear, vanilla path); **reopen C89 on a countering field report**. Also unrun: C85 `(daily)`,
+  C88 same-type compare (structurally impossible — every supplyable prefab is `require_prefab`).
+  ⚠️ Learned, not the point: a prefab build sets `supplied=true` ⇒ costs **no materials**; `SaintBlessing`'s heal FIRED in
+  play for the first time (:142 inactive → :160 active, `save re-base armed for 1 preset(s) of 2`).
+- ✅ BOTH 09-12 LANES REPORTED: build `59c8c47` C85 + `98d0461` C89 (⚖️ judgment call, FAQ count 3→4) + `4dc5073` C88,
+  audit `4c7b11a` (ck159).
   ⛔ **C90** measured: declined passes can write/arm healing, then restore active; fix shape UNRULED (ck158).
   **C91** vanilla leaks the Building Codes modifier on repeal. ✅ F60 harness repaired from git; deskbench 20/20 HELD.
   C90 control 18/18 + all eight scratch falsifiers discriminate; limits/census: `reports/DESKBENCH_C90.md`.
-- ⏭ NEXT: `RELEASE.md` over the outbox's **Held** batch + the 3 Pending = **v10**; text =
+- ⏭ NEXT (⭐ UNBLOCKED — ck158 was the last gate): `RELEASE.md` over the outbox's **Held** batch + the 3 Pending = **v10**; text =
   `reports/still-needed/WORDING_RULED.md` + its ⚖️ **VOICE RULE** (binds every surface); ck156 RULED (retire F37 + F43/F118,
   F21 STAYS, F31 → the audit). ⛔ Re-derive every count once. Then the owner's upload + the **held** site deploy.
-  Handoff `prompts/perma/HANDOFF_ORCHESTRATOR.md` §3 LIVE. ⭐ **ck158 sitting prompt WRITTEN + UNFIRED: `prompts/SITTING_158.md`.**
+  Handoff `prompts/perma/HANDOFF_ORCHESTRATOR.md` §3 LIVE. ✅ ck158 sitting FIRED + CLOSED 09-12; its one-off prompt `git rm`'d.
   Desk `prompts/DLC_DEEP_CHECK.md` (`HUNT_AUDIT.md` §8).
   ⭐ FR-1 TEMP WORKAROUND MOD LIVE 09-11 (Steam 3799500849 / PDX 158711; FINDINGS §11–§12). ALL FR-1 work → `prompts/perma/LINUX_DISPATCH.md`.
   Field: 3 working (one 10xx), 1 failing (GTX 1070, log requested). Chain `prompts/fixtoggles/` (ck148, DEFERRED 09-12).
-  Owner OWES: **ck158 the v10 GATE** (fire `prompts/SITTING_158.md`) · ck144 (a) boot · ck151 (b) dev-report scope (ck165 lets you defer it).
+  Owner OWES: ck144 (a) boot · ck151 (b) dev-report scope (ck165 lets you defer it). ✅ **ck158 the v10 GATE is DISCHARGED 09-12.**
   ⛔ **ck165: REPLIES ARE PULL-ONLY** — never draft unasked, never list one here, never nudge (`WORKFLOW.md` rule 5b). Triage into `bugs/` UNAFFECTED.
   ⛔ **ck168: BASELINE IS 1.1.0**; 1.0.7 is history, no branch install. Old entries KEEP their version stamp — never re-point a citation.
   ✅ RULED 09-12, bodies in the checklist, ⛔ do not re-derive: **162** (§4 loose ends, all four) · **163** (vanilla diff, all four) · **164** (F48 KEEP) ·
