@@ -223,8 +223,21 @@ restated as a property of the commits.
 
 ### Nit
 
-The three new gates emit lowercase labels (`ck170_selftest: PASS`) while every
-neighbouring gate emits uppercase (`FLPK SELFTEST:`, `BODYCHECK SELFTEST:`). Not
-cosmetic-only: it cost this adjudication a false "not emitted" reading, because the
-obvious `grep -E 'SELFTEST'` over doccheck's output misses them. doccheck's runtime
-went **0.835 s → 1.318 s**, which the pre-commit hook pays on every commit.
+✅ **FIXED** at the owner's ask, same session. The three new gates emitted lowercase
+labels (`ck170_selftest: PASS`) while every neighbouring gate emits uppercase
+(`FLPK SELFTEST:`, `BODYCHECK SELFTEST:`). Not cosmetic-only: it cost this
+adjudication a false "not emitted" reading, because the obvious `grep -E 'SELFTEST'`
+over doccheck's output missed them — and that grep shape is what anchors in briefs
+and handoffs use. `required_selftest` now derives `CK170 SELFTEST`,
+`REPAIR PASS SELFTEST` and `STATE COUNTS SELFTEST`; one `grep -cE '^[A-Z0-9 ]+SELFTEST:'`
+returns **5**, and the RED path was re-falsified to confirm it carries the new label
+too. ⚠️ The emitted lines quoted earlier in this report are the pre-fix strings and
+are kept as the record of what was observed then.
+
+⚖️ **Runtime NOT changed, deliberately.** doccheck went **0.835 s → 1.318 s**, paid by
+the pre-commit hook on every commit. The cost is three Python subprocess starts, and
+the obvious saving — running the falsifiers in-process — would destroy the isolation
+that makes them worth running: each one loads *copies* of `doccheck.py` and monkeypatches
+module globals (`STATE`, `PUSH_SET`, the caps) to drive fixtures. In-process, that
+contaminates the live run it is supposed to be checking. Half a second is the right
+price; it is only worth revisiting if the hook grows slow enough to tempt `--no-verify`.

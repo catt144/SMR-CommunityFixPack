@@ -1614,7 +1614,7 @@ def module_set_agreement(out):
 
 def required_selftest(filename, out):
     """Repo-local falsifiers need no game tree; missing/broken is always RED."""
-    label = filename.removesuffix(".py")
+    label = filename.removesuffix(".py").replace("_", " ").upper()
     tool = os.path.join(REPO, "tools", filename)
     started = time.perf_counter()
     try:
