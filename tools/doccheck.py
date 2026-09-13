@@ -387,13 +387,14 @@ MARKER_STATUSES = ("open", "ruled", "closed", "deferred")
 def marker_integrity(lines, out):
     """Report disk syntax independently of register selection and semantics."""
     found = parsed = 0
-    issues, numbers = [], {}
+    issues, warnings, numbers = [], [], {}
     text = "\n".join(lines)
     for hit in re.finditer(r"<!--\s*ck:(?:(?!-->).)*(?:-->|$)", text, re.S):
         comment = hit.group()
         line = text.count("\n", 0, hit.start()) + 1
         found += 1
-        if MARKER_RE.fullmatch(comment):
+        match = MARKER_RE.fullmatch(comment)
+        if match:
             parsed += 1
         else:
             issues.append("line %d: unparsed %s" % (line, comment))
@@ -402,26 +403,28 @@ def marker_integrity(lines, out):
             issues.append("line %d: unknown status %s" % (line, status.group(1)))
         ck = re.match(r"<!--\s*ck:(\d+)\b", comment)
         if ck:
-            numbers.setdefault(int(ck.group(1)), []).append(line)
-    for ck, locations in sorted(numbers.items()):
-        if len(locations) > 1:
-            issues.append("duplicate ck:%d at lines %s" %
-                          (ck, ", ".join(map(str, locations))))
-    # WARN deliberately: ck170(a) still owns vocabulary and duplicate semantics.
-    # Existing part-ruled/duplicate markers must not block peers' commits. Only
-    # an owner ruling adopting a vocabulary and uniqueness gate can make RED.
-    out.append("MARKER INTEGRITY: %d on disk, %d parsed; %s; RED only after an "
-               "owner ruling adopts vocabulary and uniqueness enforcement" %
-               (found, parsed, "WARN" if issues else "clean"))
-    out.extend("  warn " + issue for issue in issues)
+            numbers.setdefault(int(ck.group(1)), []).append(
+                (line, match.groups()[1:] if match else None))
+    for ck, entries in sorted(numbers.items()):
+        if len(entries) > 1:
+            agree = len({state for _, state in entries}) == 1
+            target = warnings if agree else issues
+            target.append("duplicate ck:%d at lines %s (%s)" %
+                          (ck, ", ".join(str(line) for line, _ in entries),
+                           "agree" if agree else "disagree"))
+    out.append("MARKER INTEGRITY: %d on disk, %d parsed; %s" %
+               (found, parsed, "RED" if issues else "WARN" if warnings else "clean"))
+    out.extend("  warn " + issue for issue in warnings)
+    out.extend("  RED  " + issue for issue in issues)
+    return not issues
 
 
 def check_marker_integrity(out):
     if not os.path.exists(CHECKLIST):
         out.append("MARKER INTEGRITY: not checked (checklist missing)")
-        return
+        return True
     with open(CHECKLIST, encoding="utf-8", errors="replace") as fh:
-        marker_integrity(fh.read().splitlines(), out)
+        return marker_integrity(fh.read().splitlines(), out)
 
 # The prose fallback, inherited verbatim in behaviour from the 2026-09-12 move
 # dry-run so the two never disagree about what a header says.
@@ -601,7 +604,7 @@ def render_waiting(items):
         L += ["> ⚠️ `docs/PLAYTEST_CHECKLIST.md` has no `%s` section — nothing to read." % CK_SECTION, ""]
         items = []
 
-    waiting = [i for i in items if i["status"] in ("open", "deferred") and i["owner"]]
+    waiting = [i for i in items if i["status"] in MARKER_STATUSES and i["owner"]]
     ambiguous = [i for i in items if i["status"] == "ambiguous"]
 
     L += ["## Decisions (%d)" % len(waiting), "",
@@ -681,13 +684,19 @@ PUSH_BUDGET = 40 * 1024
 PUSH_CHARS_PER_TOKEN = 2.17     # measured on this tree's own documents
 
 
+def lf_bytes(path):
+    """Content bytes for budgets, independent of LF/CRLF checkout (ck170)."""
+    with open(path, "rb") as fh:
+        return fh.read().replace(b"\r\n", b"\n")
+
+
 def push_set_report(out):
     """Report the auto-loaded set as ONE number. Report-only; never gates."""
     rows, total, missing = [], 0, 0
     for label, resolve in PUSH_SET:
         path = resolve()
         if os.path.exists(path):
-            size = os.path.getsize(path)
+            size = len(lf_bytes(path))
             total += size
             rows.append("    %-38s %7d B" % (label, size))
         else:
@@ -833,7 +842,7 @@ def check_skills(out):
     for name in names:
         src = os.path.join(SKILLS_DIR, name, "SKILL.md")
         dst = os.path.join(CODEX_SKILLS_DIR, name, "SKILL.md")
-        size = os.path.getsize(src)
+        size = len(lf_bytes(src))
         note = ""
         if not os.path.exists(dst):
             out.append("SKILLS: RED  .agents/skills/%s/SKILL.md is missing — Codex "
@@ -1074,8 +1083,7 @@ def check_state_and_stubs(out):
         red.append("docs/agent/STATE.md is missing — it is the mandatory read")
         n_state = None
     else:
-        with open(STATE, "rb") as f:
-            raw = f.read()
+        raw = lf_bytes(STATE)
         n_state = len(raw)
         if n_state > STATE_MAX_BYTES:
             red.append("STATE.md is %d bytes, hard cap is %d — run "
@@ -1748,7 +1756,7 @@ def main():
     ok = check_entry_mirror(out) and ok
     ok = check_state_and_stubs(out) and ok
     ok = check_waiting(out) and ok
-    check_marker_integrity(out)  # warning only, pending ck170(a)
+    ok = check_marker_integrity(out) and ok
     ok = check_skills(out) and ok
     counts = recount(model, out)
     ok = temporary_sweep(out) and ok

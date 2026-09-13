@@ -29,9 +29,9 @@ def marker_cases(module, demand=None):
     assert not any("warn " in x or "; WARN" in x for x in out), out
     demands = (
         (["<!-- ck:2 status:part-ruled owner:yes -->"],
-         ("1 on disk, 0 parsed; WARN", "line 1: unparsed", "unknown status part-ruled")),
+         ("1 on disk, 0 parsed; RED", "line 1: unparsed", "unknown status part-ruled")),
         (["<!-- ck:3 status:bogus owner:yes -->"],
-         ("1 on disk, 1 parsed; WARN", "unknown status bogus")),
+         ("1 on disk, 1 parsed; RED", "unknown status bogus")),
         (control + control, ("duplicate ck:1 at lines 1, 2",)),
         (["<!-- ck:oops status:closed owner:no -->"], ("line 1: unparsed",)),
     )

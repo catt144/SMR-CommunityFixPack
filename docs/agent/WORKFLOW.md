@@ -8,11 +8,9 @@
    --regen` and checked on every doccheck run — edit `CLAUDE.md` only).
    Session history lives in `docs/archive/SESSION_LOG.md` (append-only,
    newest first).
-2. `docs/agent/facts/INDEX.md` — one row per proven engine behavior (several
-   are the opposite of what the code suggests). Scan all 43 rows so you know
-   what exists; OPEN the fact files your job touches and read them before
-   writing or reviewing any fix. Reading all 43 files as a matter of course
-   is the cost the 2026-08-03 restructure removed — don't reinstate it.
+2. Search `docs/agent/facts/INDEX.md` by task ID or keyword with `rg -n`;
+   generated rows are lookup targets, never whole-file reads. Open the fact
+   sections your job touches before writing or reviewing a fix.
 3. `docs/agent/bugs/INDEX.md` — the defect tracker's entry point: status,
    priority and evidence label per row; the entry file carries the narrative.
    Update the ENTRY in the same change that adds or edits a fix. **`INDEX.md`
@@ -795,6 +793,16 @@ the whole folder" is not a read path: every stale reading instruction the
 restructure report catalogued was a folder-granularity one, and a brief that
 names its files is one whose staleness the next session can check against git.
 
+**9. The derived-facts block (R-C).** Follow R-C under "Verification rails":
+each inherited fact carries its measurement, HEAD/build and a falsifiable re-check.
+
+**R-D · Self-split, authoring-side.** Depth is the cost: the same unit of work runs several
+times more expensive deep in a session than early in one. So legs are **packed at authoring**
+to roughly `filesize/4 × 1.7` and ~75% fill, never pushed to the edge of a window, and a retry
+is a fresh fire rather than a continuation. Working legs are **blinded** to this — an agent
+that feels a budget cuts the corner you cannot see. Attended sittings are exempt: they are
+indivisible and run to their natural end.
+
 ## `[FAQ]` — the tag for "a player will ask about this"
 
 Owner intends to write an FAQ doc at some point. Rather than start one early
@@ -838,8 +846,8 @@ exist):
 
 ## Verification rails (adopted 2026-09-12, owner)
 
-Seven named rules. Each answers a failure this project actually had — none is a preference.
-Cite them by tag in a brief; a leg that skips one says which and why.
+Each rule answers a failure this project actually had — none is a preference.
+Cite applicable rules by tag in a brief; a leg that skips one says which and why.
 
 **R-A · Verification is routed three ways. Name the kind before you verify.**
 - **VOLATILE-external** — a game build id, a deployed sha, a portal version, `ListFixes()`.
@@ -866,13 +874,6 @@ how it was measured · the HEAD or build id · **one command that re-checks it**
 - **A fix invalidates its own tests.** Re-base harm legs on the pre-fix body and re-run the
   whole suite, not the leg you changed.
 Keep the phrasing bare. Firmer wording buys nothing measurable and costs ~20% more.
-
-**R-D · Self-split, authoring-side.** Depth is the cost: the same unit of work runs several
-times more expensive deep in a session than early in one. So legs are **packed at authoring**
-to roughly `filesize/4 × 1.7` and ~75% fill, never pushed to the edge of a window, and a retry
-is a fresh fire rather than a continuation. Working legs are **blinded** to this — an agent
-that feels a budget cuts the corner you cannot see. Attended sittings are exempt: they are
-indivisible and run to their natural end.
 
 **R-E · Run, then write.** A measurement quoted before its run exists carries
 `<<PENDING-RUN>>` until the run lands. Every count carries the command *and the filter* that

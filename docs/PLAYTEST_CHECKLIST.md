@@ -56,8 +56,20 @@ refuted; neither is a reason to reject restoration.
 This item authorizes no implementation by itself. C92 stays `cand`; no fix,
 award, save edit or external report was made in this investigation.
 
-### 2026-09-13 — 170: documentation-overhaul audit — marker semantics, byte accounting, and where the adopted rules apply
-<!-- ck:170 status:open owner:yes -->
+### ✅ 2026-09-13 — 170 RULED: marker semantics, LF byte accounting, and reading routes
+<!-- ck:170 status:ruled owner:no -->
+
+**Owner ruling, 2026-09-13, after the documentation-overhaul audit:**
+- **(a)** Keep `open`, `ruled`, `closed`, `deferred`; a partial ruling is `open`
+  with `owner:yes`. Decision status and owner action are independent. Unknown or
+  malformed markers fail doccheck; duplicate numbers warn when status and owner
+  agree, fail when they disagree. Preserve existing checklist numbering.
+- **(b)** Normalize line endings to LF before byte accounting; caps and content stay.
+- **(c)** Cite R-A…R-G where the applicable work fires, use targeted index lookup,
+  and home R-D in WORKFLOW's brief-authoring section, outside working-leg instructions.
+
+Implementation and falsifiers: [CK170_AND_FINGERPRINTS](agent/reports/CK170_AND_FINGERPRINTS.md).
+The original audit questions below are retained as the condition of this ruling.
 
 > [The audit](agent/reports/DOC_OVERHAUL_AUDIT.md) is complete, report-only. It found owner actions that disappear while doccheck stays GREEN, fingerprints that overstate what they verify, and a nested-directory reader bug behind the v10 pack-count discrepancy. Existing markers and rulings were left untouched.
 >
@@ -69,8 +81,8 @@ award, save edit or external report was made in this investigation.
 >
 > Ordinary tool repairs are recommendations in the report, not changes made by this audit. **D4 is not being re-asked:** its original membership remains the scope; the current script cannot execute it and should not be applied. No old owner decision was reopened here.
 
-### ⭐ 2026-09-13 — 169 ➊ **UPLOADED — v10 IS LIVE on both portals.** ➋ **STILL OWED: `content/faq.md` commit.** ➌ accepted as shipped.
-<!-- ck:169 status:part-ruled owner:yes -->
+### ⭐ 2026-09-13 — 169 ➊ **UPLOADED — v10 IS LIVE on both portals.** ➋ **FAQ commit DISCHARGED.** ➌ accepted as shipped.
+<!-- ck:169 status:open owner:yes -->
 
 > **➊ Receipt.** You confirmed both Paradox and Steam ran this sitting. Tree writeback: `version`
 > 10 → **11**, `pdx_version` "8" → **"9"** (`pdx_id` 156049, `steam_id` 3787202810 — unchanged,
@@ -107,8 +119,8 @@ award, save edit or external report was made in this investigation.
 
 <details><summary>Original 2026-09-12 ask (kept for the record)</summary>
 
-### ⭐ 2026-09-12 — 169 **v10 IS READY TO UPLOAD.** All the words are written and committed; the pack is waiting on your hands. Two small calls inside, and one thing only you can commit.
-<!-- ck:169 status:open owner:yes -->
+#### ⭐ 2026-09-12 — 169 **v10 IS READY TO UPLOAD.** All the words are written and committed; the pack is waiting on your hands. Two small calls inside, and one thing only you can commit.
+<!-- ck:- status:open owner:yes -->
 
 > **The release in one line: the count word does NOT move.** Three fixes retire (F37 ghost farm
 > oxygen, F43 layout tech lock, F31 cave-in on a missing map) and three arrive (C85 clogged after

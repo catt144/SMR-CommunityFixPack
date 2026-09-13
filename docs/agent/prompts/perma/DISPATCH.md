@@ -31,9 +31,9 @@ patched at runtime; no game files are modified). The map is `docs/README.md`.
    unstaged file is a lane you do not enter.
 2. **Read `docs/agent/STATE.md`** — the mandatory current-state kernel (gates,
    holds, counts, the active line of work). Every session reads it.
-3. Scan `docs/agent/bugs/INDEX.md` and `docs/agent/facts/INDEX.md` — one-line rows,
-   so you know what already exists (several behaviours are the opposite of what the
-   code suggests). Open only the entry/fact files the task touches.
+3. Search `docs/agent/bugs/INDEX.md` and `docs/agent/facts/INDEX.md` by task ID or
+   keyword with `rg -n` — generated rows are lookup targets, never whole-file reads.
+   Open only the entry/fact sections the task touches.
 4. ⚠️ **If — and only if — the task launches the retail game for a reading**, the
    STALE-PROBE GATE binds first: `grep -rln "TEMPORARY" Code/ ../SMR-BugFixPack-TestKit/Code/`,
    put it in your todo list, and CLEAN = zero hits (or every hit declared by this
@@ -81,6 +81,11 @@ patched at runtime; no game files are modified). The map is `docs/README.md`.
   totals move.
 
 ## 2 · The judgment rules (the ones the project has been burned on)
+
+Apply `WORKFLOW.md`'s verification rails: R-A routes evidence checks; R-B requires
+searches for absence; R-E requires a run before quoting measurements; R-F selects
+verification by what the owner can observe. At close-out, R-G records the executed
+model from the transcript. Brief authors also follow its authoring section (R-C).
 
 - **Challenge the cause before filing.** The owner expects a *control*, not a
   plausible story; state the root cause only when a check pins it.
