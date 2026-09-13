@@ -14,7 +14,7 @@ vendor scores the predictions. Pack HEAD `320d359`; TestKit HEAD `5d8d3b3`.
 - [x] Pre-flight gates (staleness, fingerprint, parse, stale probe, rules 6/7).
 - [x] Script pre-flight: every symbol and every game route the paste script uses,
       checked against the built code and against `ModTools\Src`.
-- [x] Fixture survey + backup of the only 1.1.0 save on the rig.
+- [x] Fixture survey (corrected after the owner named the real saves) + backup of both.
 - [ ] Owner sitting, steps 0–8.
 - [ ] Prediction-by-prediction scoring; verdict; archived log path.
 - [ ] Outbox to 03A and 99; ck175 in plain language; strike the row; `git rm` 02.
@@ -128,9 +128,9 @@ which is exactly the right place to intervene.
   not hygiene, it is the variable under test.
 - **Step 2 should discriminate.** `Libs.DevToolsPublic` is set only under
   `Platform.developer`, or under `Platform.asserts` with the lib folder present
-  (`autorun.lua:249-256`). `Autosave Sol 490`'s header serialises the whole
-  `Platform` table (`Savegame.lua:779`) and it lists exactly
-  `desktop, editor, goldmaster, paradox, pc, steam` — **no `cheats`, no
+  (`autorun.lua:249-256`). A savegame header serialises the whole `Platform`
+  table (`Savegame.lua:779`), and **both fixtures** (`My game`, `Mygame2`) list
+  exactly `desktop, editor, goldmaster, paradox, pc, steam` — **no `cheats`, no
   `developer`, no `asserts`**. So on this build, with the Mod Manager closed,
   `cond` reduces to `ConsoleEnabled` alone and 01's
   `discriminates=true negative=false positive=true` is well-founded rather than
@@ -139,32 +139,73 @@ which is exactly the right place to intervene.
   question ("record the actual `cheats` value; it was unverified at authoring")
   — expect `cheats=false`, and treat anything else as the surprise it would be.
 
-## Fixture — one candidate, and it is the owner's colony
+## Fixture — ⚠️ my first survey was wrong three ways; corrected
 
-Scanned the plain-text header of all 61 saves in
-`%APPDATA%\Surviving Mars\76561198020568696\` (the Relaunched build has no saves
-folder of its own; it writes to the legacy one). **Exactly one is a 1.1.0 save:**
+**The correction, because the first version of this section is in git history.**
+I reported "exactly one 1.1.0 save on the rig, `Autosave Sol 490`, and it is the
+owner's colony". All three parts were wrong:
 
-| save | `lua_revision` | `orig_lua_revision` | sols | sponsor | mods at save |
+1. **Wrong folder.** Relaunched writes to
+   `C:\Users\stkot\Saved Games\Surviving Mars Relaunched\76561198020568696\`
+   (**126 saves**), not `%APPDATA%\Surviving Mars\`, which belongs to the
+   *original* Surviving Mars and holds 2024-era saves. A `find` under the user
+   tree exited 2 on `Saved Games` and I read the truncated result as a complete
+   one.
+2. **Instrument defect in my header scanner.** `active_mods` sorts before
+   `lua_revision` in the metadata table, and each mod entry carries its **own**
+   `lua_revision`. A first-match regex therefore reported our mods' declared
+   `350453` as the savegame's build. Re-parsed with a brace-depth walk that
+   takes depth-1 keys only. (`EF-051`-adjacent lesson, and the house rule:
+   suspect the instrument first.)
+3. **Wrong provenance.** `Autosave Sol 490` is the **C92 reporter's** save, not
+   the owner's colony — `reports/C92_INVESTIGATION.md:20-26` records the owner
+   loading it from `Downloads`, and byte copies sit in
+   `C:\Dev\SMR-C92-Evidence-20260913\`. It is evidence, not a fixture, and the
+   sitting must not touch it.
+
+**⚖️ Owner authority, 2026-09-13:** *"Mygame and mygame 2 should both be cheat
+free. I have never used cheats on them."* That settles cleanliness; step 0's
+`TaintRead` records the value because the report needs the measured line, not
+because the statement needs checking.
+
+### The real candidates
+
+| save | `lua_revision` / `orig` | sols | sponsor | map | `active_mods` |
 |---|---|---|---|---|---|
-| `Autosave Sol 490.savegame.sav` | **403908** | **403908** | 490 | Japan | `active_mods = {}` |
+| `My game` | 403908 / **403908** | 9 | BlueSun | `BlankBig_01` | TestKit, Fix Pack, `3787202810`, OptInPack |
+| `Mygame2` | 403908 / **403908** | 9 | BlueSun | `BlankBig_01` | same four |
 
-`403908` is the baseline build exactly (`EF-075`); `orig_lua_revision` equal to it
-means natively created on 1.1.0, not migrated. Every other save is the **original**
-Surviving Mars (`lua_revision` 1009413 / 1011166 / 245618), not this game.
+`orig_lua_revision` equal to `lua_revision` means both were created natively on
+1.1.0, not migrated (`EF-079` does not bite). Both already carry the TestKit in
+`active_mods`, which is what the sitting needs loaded. `Mygame2` is the newer of
+the two (2026-09-13 19:50 local). `required_lua_revision` is 402200 on both.
 
-⛔ **`AreCheatsUsed()` is NOT readable from disk.** `CheatsUsed` is a `GameVar`
-(`Network.lua:241`), so it lives in the compressed body, not the ~2 KB header.
-**Step 0's first line IS the fixture test** — if it reads `used=true`, this save
-cannot serve the leg and fixture provisioning is owed (STATE prices a new 1.1.0
-colony in hours, `EF-079`/`EF-080`).
+**Backed both up** before anything touches them, verified byte-identical by md5:
+`My game.savegame.sav` 28,986,325 B `134addfd9d3d93662b8ce5b0001f3814`;
+`Mygame2.savegame.sav` 28,951,471 B `d43979e921b2112f32d8fe4fd34ed8e6`.
 
-**Backed up before anything touches it** — `Autosave Sol 490.savegame.sav`,
-38,643,956 B, md5 `a8d9532f4bb3aee84779b069a15be4b8`, copied to the session
-scratchpad and verified byte-identical by md5. The sitting writes only new names
-(`SMRTK_BASELINE_CLEAN`, `SMRTK_SCRATCH_TAINTED`, `SMRTK_ROUNDTRIP_CLEAN`) and
-never saves over the autosave; the colony stays paused, so no new autosave can
-land either.
+### ⭐ Nothing in our own tooling could have tainted them
+
+Worth stating because `CheatsUsed` catches more than a player calling it
+cheating: **any** `Cheat*` method routed through `ObjCheat` appends a row,
+including probe code. The TestKit is clean by construction — `NetSyncEvent`,
+`ObjCheat` and `LogCheatUsed` appear **zero** times across its 27 files, and its
+single `Cheat*` call site (`91_Stress.lua:815`, `:CheatCleanAndFix(`) is a
+**direct leaf call**, which by the route traced above logs nothing. So the
+TestKit was already taint-free by the same discipline SMRTK is being built on —
+a useful precedent, and corroboration rather than a check on the owner's word.
+
+⛔ **`AreCheatsUsed()` is still not readable from disk** — `CheatsUsed` is a
+`GameVar` (`Network.lua:241`), so it lives in the compressed body, not the
+header. Step 0's first line remains the measured reading.
+
+⚠️ **One open item for the sitting:** both candidates are **Sol 9**, and step 3
+needs a *partly empty single-resource* depot (Metals, Concrete, Polymers — not a
+Universal Depot). A Sol 9 colony may not have one yet. If neither does, the same
+folder holds native-1.1.0 colonies deep enough to be sure — `USA Sol 76` and
+`Autosave Sol 76` (NASA, `BlankBig_02`, same four mods) — but those are test
+saves whose cheat history is not covered by the owner's statement, so they would
+need step 0 to read `used=false` before they could serve.
 
 ## Boot evidence already on disk (main menu only, no save loaded)
 
