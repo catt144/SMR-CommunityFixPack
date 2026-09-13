@@ -21,7 +21,9 @@ function C92Read.Census()
     say("BUILD " .. tostring(BuildVersion) .. " LuaRevision=" .. tostring(LuaRevision))
     say("SAVE day=" .. tostring(UIColony.day) .. " sponsor=" .. GetMissionSponsor().id .. " points=" .. tostring(UIPlayer.TechPoints))
     say("ACCOUNT achievement=" .. tostring(GetAchievementFlags("ResearchedAllTechs")))
-    say("MODS " .. table.concat(ModsLoaded or {}, ","))
+    for _, mod in ipairs(ModsLoaded or {}) do
+        say("MOD " .. tostring(type(mod) == "table" and mod.id or mod))
+    end
     local all = true
     for _, group_id in ipairs(groups) do
         local ok = UIColony:IsTechGroupResearched(group_id, counted)
