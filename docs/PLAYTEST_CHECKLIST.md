@@ -29,6 +29,54 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### 2026-09-13 — 176: the checklist cleanup you ruled (D4) never ran, and D4 is ~6% of the problem
+<!-- ck:176 status:open owner:yes -->
+
+**You asked 2026-09-13:** *"I thought this was supposed to be cleaned out in this
+migration. Moving all the done and stale records to an archive."* **You are right, and
+it never happened.** Re-derived rather than relayed:
+
+- **`--apply` has never been exercised.** The route exists —
+  `.claude/tools/archive_settled.py` + `.claude/CHECKLIST_MOVE_MANIFEST.md`, 17 approved
+  members.
+- **The instrument is refuted and must not be applied.**
+  [DOC_OVERHAUL_AUDIT](agent/reports/DOC_OVERHAUL_AUDIT.md) §4: `ARCHIVE-OLD` is
+  report-only and can never enter `move_items`, so `--apply` cannot execute D4 as ruled;
+  membership drifted 17 → 18. This file already records that at item 163's note.
+- **Even run perfectly, D4 removes 5.8%** — today's dry run moves **43,223 B** of
+  **741,708 B**, leaving 698,485 B.
+- **Growth outran the remedy ~9×.** This file took **+371,007 B across 192 commits since
+  09-06**, a median ~2 KB per commit from every peer. One week of drift is 8.6× what the
+  whole approved migration would remove.
+
+**What this file is now**, by measurement across its 158 `###` sections: live decisions
+**1.3%** · PT test sections **1.0%** · settled decisions 28.8% · dated session records
+47.9% · done-marked 19.9%. It opens by saying it is *"the work list and nothing else:
+what to test"* — the tests are **1%** of it. It is also carrying history in parallel with
+`archive/SESSION_LOG.md` (91 hits for `2026-09-12` here against 20 there).
+
+⚠️ **Separate risk, needs no decision — flagging it because it is silent.** Both
+`archive_settled.py` and `CHECKLIST_MOVE_MANIFEST.md` sit under `.claude/`, which
+`.gitignore:15` excludes. **Your approved membership exists on one machine.** No peer can
+see it, a fresh clone has neither, and losing that disk loses the approval.
+
+### The decision — scope, and it is yours
+
+D4's approved membership was fixed when this file was a fraction of its size, and the
+audit is explicit that widening it needs its own owner decision. So:
+
+- **(a)** Repair the script to execute D4 as ruled — reclaims ~6%, changes nothing about
+  the 96%.
+- **(b)** Re-scope: archive the settled + dated + done-marked sections (~96%) to
+  `archive/PLAYTEST_ARCHIVE.md` and `archive/SESSION_LOG.md`, leaving a working list.
+  Bigger win, needs your membership approval, and nobody should pick it for you.
+- **(c)** Both, in that order.
+- **(d)** Leave it — the cost lands on you reading it, not on agent context, since agents
+  are told never to read it whole.
+
+⛔ No agent should widen D4's scope on its own judgement. Recommendation if you want one:
+**(c)**, with the manifest committed into the repo first so the approval survives the disk.
+
 ### 2026-09-13 — 175 RULED: build the SMR Tool Kit (chain `prompts/smrtk/`); two sittings are yours when their scripts land
 <!-- ck:175 status:ruled owner:yes -->
 
