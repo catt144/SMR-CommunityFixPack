@@ -49,7 +49,8 @@ That a save/load round trip works (08). That the fingerprint's `N/N` is right (i
 
 Do NOT commit, do NOT `git rm`. Parse-check both files; rule 6's and rule 7's greps, counts quoted. Return a
 **numbered-claims report** to 03A: per unit — built · verified how (command + output) · stopped · OWNER-ROUTED ·
-for-07 · DRIFT. If you added an accessor to `00_TestCore.lua`, it is its own numbered claim with the diff.
+for-07 · DRIFT. If you added an accessor to `00_TestCore.lua`, it is its own numbered claim with the diff. Plus **DEPARTURES** (every default you changed, why, which invariant you checked) and
+**SUGGESTIONS** (better ways, things the plan missed — wanted, not tolerated; README § "What is FIXED").
 
 ## Notes from upstream
 

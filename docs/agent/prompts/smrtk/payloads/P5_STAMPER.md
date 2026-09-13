@@ -51,7 +51,8 @@ enumerate.
 Do NOT commit, do NOT `git rm`. Parse-check your file; rule 6's and rule 7's greps, counts quoted. Return a
 **numbered-claims report** to 03A: per unit (format · capture · stamp · state · dry-run) — built · verified how
 (command + output) · stopped · OWNER-ROUTED · for-07 (the button list and the 08 stamp step) · DRIFT (any place you
-departed from `EF-099`, with the line numbers — 99 reads this).
+departed from `EF-099`, with the line numbers — 99 reads this). Plus **DEPARTURES** (every default you changed, why, which invariant you checked) and
+**SUGGESTIONS** (better ways, things the plan missed — wanted, not tolerated; README § "What is FIXED").
 
 ## Notes from upstream
 

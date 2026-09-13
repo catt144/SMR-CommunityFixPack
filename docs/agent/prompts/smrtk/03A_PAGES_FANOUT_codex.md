@@ -1,7 +1,9 @@
 # smrtk 03A — the pages, fanned out (build; cross-vendor primary)
 
 Link 03A of `smrtk`. **Codex / Astra** (the house fan-out seat; a Claude session with subagents may run it if the
-owner says so). README rules 1–22 are yours. Runs only after 02 PASSed — read 02's outbox first (which console tap
+owner says so). README rules 1–22 are yours, and README § "What is FIXED" is the licence: the five-payload cut,
+who runs the spike, the API you inherit from 01 — defaults. Re-cut, re-spike or extend the core when you see a
+better way; record it under DEPARTURES. Runs only after 02 PASSed — read 02's outbox first (which console tap
 carries lines, the hotkey that stuck). 03B (Claude) judges your output before 07 documents it: write for a judge.
 
 ## Job 0 — the spike: settle the two shared techniques BEFORE launching anything
@@ -23,7 +25,8 @@ vanilla UI". Decided twice, they diverge; decided once, both inherit. Spend the 
 ## Job — launch, gate, merge
 
 4. `tasklist` shows no `Mars.exe` (rule 16) — once, before launch, in its own command.
-5. **Launch the five payloads as subagents**, in parallel, each with its own brief (`payloads/P1_WORLD.md` …
+5. **Launch the payloads as subagents** (five is the default cut; merge or split them if the work says so — a
+   re-cut payload gets a full inbox), in parallel, each with its own brief (`payloads/P1_WORLD.md` …
    `P5_STAMPER.md`) plus this README, `EF-095`–`EF-099`, 02's outbox and your spike report as its read path.
    **Top tier of your vendor on P5** (the capture format is a contract). Payloads write files and return a
    **numbered-claims report**; they never commit and never `git rm` (README rule 21).
@@ -42,15 +45,18 @@ vanilla UI". Decided twice, they diverge; decided once, both inherit. Spend the 
 
 Numbered, falsifiable, one command each: per payload — built (file, function names, line count), verified how
 (the exact gate commands and their output, copied), stopped (what and where), OWNER-ROUTED (each with a
-recommendation), DRIFT (anything a payload corrected in its brief or found wrong upstream). **Disagreements
+recommendation), DRIFT (anything a payload corrected in its brief or found wrong upstream), **DEPARTURES** (every
+default you or a payload changed, with the reason and the invariant it was checked against), **SUGGESTIONS**
+(what the plan missed — yours and the payloads', merged, deduplicated, the ones you disagree with kept and marked). **Disagreements
 first**: anything a payload claimed that your gate contradicted. Then the outbox: what 07 must document (the final
 button list per page) and what 99 must re-derive.
 
 ## Scope fence
 
-IN: the spike, the five launches, the gates, the commits, the report. OUT: writing payload code yourself (a payload's
-job stays its own — re-fire it), the core (01's, frozen; a needed core change is OWNER-ROUTED with the diff
-proposed, not applied), docs (07).
+IN: the spike, the launches, the gates, the commits, the report, **and the core** — 01 was your vendor's work and the
+core is yours to extend between the spike and the launch or after the merge (never while payloads run in parallel
+against it; the diff goes in your report). OUT: writing payload code yourself while a payload owns that file (re-fire
+it instead), docs (07).
 
 ## Stop conditions
 

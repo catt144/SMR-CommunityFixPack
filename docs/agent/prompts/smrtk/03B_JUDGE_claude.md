@@ -11,6 +11,12 @@ to hand the owner ONE consolidated ask instead of five. You are not 99: you do n
 re-run gates, sample routes, and check the things a coordinator reading five reports is most likely to have
 waved through.
 
+**Departures are not findings.** README § "What is FIXED" gives the builder licence to change any default with a
+stated reason. Judge each DEPARTURE on whether it crosses an invariant and whether its reason holds — a better
+route than the plan's is a PASS with a note, and the note goes to 07 so the docs describe what was built. A
+*silent* departure (found by you, absent from the report) IS a finding. Engage every SUGGESTION on its merits: adopt
+(one-line fixes), route (to ck175 with your view), or decline with a reason — never ignore one.
+
 ## Job
 
 1. **Re-run every gate 03A pasted**, on HEAD, yourself: parsecheck per file, rule 6 and rule 7 greps (presence side

@@ -148,6 +148,12 @@ weak … flip it to codex doing most of the build."* Flipped: **Codex builds 01,
 audits 99 (Fable)**; your two sittings are attended by Claude. 01's re-validation of the cut is now the first
 cross-vendor check, before any code.
 
+**Fourth ruling — licence for the builder:** *"don't tie codex up with too many restrictions … it could see better
+ways or even suggestions we missed via model blindness."* The manifest now separates a short list of **invariants**
+(your two requirements, idle = no patches, TestKit only, commit hygiene, never-same-vendor) from **everything else,
+which is a default any build link may depart from with a stated reason**; every build report carries DEPARTURES and
+SUGGESTIONS sections, questions are a first-class move, and the judge weighs departures on evidence, not conformance.
+
 ### ✅ 2026-09-13 — 174 RULED: a fired one-off leaves the prompts map entirely
 <!-- ck:174 status:ruled owner:no -->
 

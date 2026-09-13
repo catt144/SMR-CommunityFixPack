@@ -22,7 +22,9 @@ Authored the 10-link kill-gated chain (01 skeleton → 02 owner kill gate → 03
 on the owner's direction:** the five page builds became one Codex fan-out link (03A, opening with a spike that
 settles the two shared UI-hook techniques) judged by a Claude link (03B) before the docs — the five briefs moved to
 `smrtk/payloads/` as subagent payloads that write but never commit. Queue: 01 → 02 → 03A → 03B → 07 → 08 → 99. Third ruling: **Codex builds every build link (01, 03A, 07), Claude
-judges (03B) and audits (99)** — the earlier placement had Claude on both sides of most checks.
+judges (03B) and audits (99)** — the earlier placement had Claude on both sides of most checks. Fourth ruling: the manifest now separates
+**invariants** (hard) from **defaults** (any build link may depart with a stated reason); DEPARTURES + SUGGESTIONS
+sections required in every build report; 03B judges departures on evidence, not conformance.
 Nothing built yet; every route is source-derived until 02.
 
 ## 2026-09-13 — C92 placement and expanded icon hunt

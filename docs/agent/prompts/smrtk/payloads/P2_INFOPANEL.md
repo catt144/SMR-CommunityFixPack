@@ -8,8 +8,10 @@ Independent of P1/P3–P5.
 1. **The injection technique is decided — inherit it.** 03A's spike (`reports/SMRTK_UI_HOOKS.md` §1, pasted into
    your inbox) names the route that (a) needs no Mod Editor, (b) does not set `config.BuildingInfopanelCheats`
    (rule 10), (c) does not wrap a vanilla function while idle (rule 9). Build on it, or on its declared fallback.
-   ⛔ Never a third route (rule 20). Re-read the cited lines before building (rule 12); if they do not say what the
-   spike says, STOP and report — that is a DRIFT finding, not a licence to improvise.
+   Not a third route on your own — not because the spike is authority, but because five of you run in parallel and
+   cannot negotiate; a better route you see goes in your SUGGESTIONS section and the coordinator may re-spike on it
+   (README § "What is FIXED"). Re-read the cited lines before building (rule 12); if they do not say what the
+   spike says, STOP and report — that is a DRIFT finding.
 2. **Buttons, all via `SMRTK.Action` with `needs = "selected"`, all leaf calls** (`EF-095` bodies): Fill, Empty, Delete
    (label it "Delete (vanish)"), Destroy (label it "Destroy (blow up)"), Clean & Fix, Malfunction, Add Prefab, Add Dust,
    Add Maintenance, Spawn Worker / Visitor / Child / Colonist / Drone / Shuttle as the class supports (probe with
@@ -35,7 +37,8 @@ That the section appears in play (08). That Delete/Destroy semantics match play 
 ## Close-out (payload — rule 21)
 
 Do NOT commit, do NOT `git rm`. Parse-check your file; rule 6's and rule 7's greps, counts quoted. Return a
-**numbered-claims report** to 03A: built · verified how (command + output) · stopped · OWNER-ROUTED · for-07 · DRIFT.
+**numbered-claims report** to 03A: built · verified how (command + output) · stopped · OWNER-ROUTED · for-07 · DRIFT. Plus **DEPARTURES** (every default you changed, why, which invariant you checked) and
+**SUGGESTIONS** (better ways, things the plan missed — wanted, not tolerated; README § "What is FIXED").
 
 ## Notes from upstream
 

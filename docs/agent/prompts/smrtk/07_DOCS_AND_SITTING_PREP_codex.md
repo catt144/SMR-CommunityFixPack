@@ -31,6 +31,10 @@ button lists per page, the stubs still owed, and the owner items already consoli
    once on purpose, one trigger firing, one screenshot+mark opened afterwards, one capture + stamp, a run-until.
    Price it in minutes. The fixture: a 1.1.0 colony with a dome, a depot, a drone hub and a rocket in flight.
 
+Document **what was built** (03B's outbox carries the DEPARTURES) — never the plan's defaults where the build
+differed. Your own SUGGESTIONS section is wanted too: a doc that is hard to write plainly is usually a button that
+is hard to explain, and that is a finding for 99.
+
 ## Scope fence
 
 IN: the files named above. OUT: any code (route a defect found while documenting to the link's grave + 99's inbox and

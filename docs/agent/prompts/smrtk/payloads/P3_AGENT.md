@@ -16,8 +16,9 @@ Independent of P1/P2/P4/P5.
    game time, then clears); **Screenshot+Mark** (`WriteScreenshot` into `C:\Dev\SMR-ScreenCaptures\SMRTK_<markid>.png`
    — if the engine confines the path, write where it allows and log the path; and `SMRTK_MARK` with the same id).
 3. **Click-to-target** for armed slots: **the capture route is decided** — 03A's spike (`reports/SMRTK_UI_HOOKS.md` §2,
-   in your inbox). Build on it or its declared fallback, never a third route (rule 20); re-read the cited lines first
-   (rule 12) and report DRIFT if they disagree. The position and any object under it go to `on_click`. Rule 9: armed
+   in your inbox). Build on it or its declared fallback; a better route you see goes in SUGGESTIONS for the coordinator to re-spike
+   on, not into your file (parallel payloads cannot negotiate — README § "What is FIXED"); re-read the cited lines
+   first (rule 12) and report DRIFT if they disagree. The position and any object under it go to `on_click`. Rule 9: armed
    only, uninstalls on disarm.
 4. **Triggers:** `SMRTK.Trigger{ id, label, when = function() ... end, do = { mark = true, pause = true, screenshot =
    false, sound = true }, once = true }` — a game-time polling thread (cadence configurable, default 1 s game time),
@@ -42,7 +43,8 @@ That a trigger fires at the right moment in play (08). That a screenshot landed 
 
 Do NOT commit, do NOT `git rm`. Parse-check both files; rule 6's and rule 7's greps, counts quoted. Return a
 **numbered-claims report** to 03A: per unit (contract · page · click-to-target · triggers · disarm) — built · verified
-how (command + output) · stopped · OWNER-ROUTED · for-07 (the slot contract, verbatim, for `perma/SMRTK_SLOTS.md`) · DRIFT.
+how (command + output) · stopped · OWNER-ROUTED · for-07 (the slot contract, verbatim, for `perma/SMRTK_SLOTS.md`) · DRIFT. Plus **DEPARTURES** (every default you changed, why, which invariant you checked) and
+**SUGGESTIONS** (better ways, things the plan missed — wanted, not tolerated; README § "What is FIXED").
 
 ## Notes from upstream
 

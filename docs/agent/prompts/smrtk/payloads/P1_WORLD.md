@@ -46,7 +46,8 @@ That a disaster button fires correctly in play (08 reads it). That quiet mode su
 Do NOT commit, do NOT `git rm`. `python tools/parsecheck.py` on your file; rule 6's and rule 7's greps on it, counts
 quoted. Return a **numbered-claims report** to 03A: per unit (disasters · quiet · speed · fix/malfunction · waits ·
 re-exposures · traits) — built (function names), verified how (the exact command + its output), stopped, OWNER-ROUTED
-(with a recommendation), for-07 (the final button list), DRIFT. Every claim falsifiable by one command.
+(with a recommendation), for-07 (the final button list), DRIFT. Every claim falsifiable by one command. Plus **DEPARTURES** (every default you changed, why, which invariant you checked) and
+**SUGGESTIONS** (better ways, things the plan missed — wanted, not tolerated; README § "What is FIXED").
 
 ## Notes from upstream
 

@@ -85,6 +85,33 @@ cross-references by registry id with stubs). 03B may send a payload back to 03A 
 | `Code/80_AgentSlots.lua` | P3 (template) | **agent-owned**: the slots for the NEXT sitting; rewritten per sitting, never by a build link |
 | `reports/SMRTK_UI_HOOKS.md` | 03A spike | the two shared UI-hook decisions, with rejected routes and line numbers |
 
+## What is FIXED, and what is only a DEFAULT (owner, 2026-09-13)
+
+> ⚖️ *"Don't tie codex up with too many restrictions if it's doing the build, it's a different vendor it could see
+> better ways or even suggestions we missed via model blindness. Restricting it and keeping it from asking questions
+> or suggestions is limiting its advantages."*
+
+**FIXED — the invariants.** These are the owner's requirements and the safety rails; no link departs from them:
+requirement **(A)** no taint (rule 6, rule 8, rule 10) · requirement **(B)** one `SMRTK_` tag through one logger
+(rule 7) · **idle = zero patched vanilla functions** (rule 9 — the kit rides A/B pairs) · **TestKit only, never
+shipped** (rule 11) · `Mars.exe` closed for `Code/` edits (rule 16) · commit hygiene in a shared tree (rules 1, 15)
+· never move a status you did not witness (rule 17) · H-03/H-08/H-09 (rule 18) · payloads write, never commit
+(rule 21) · never the same vendor on both sides of a check (rule 22) · the owner's two sittings are theirs.
+
+**DEFAULT — everything else.** The file layout, the `SMRTK.Action`/`Bind`/`Page` API shape, the page composition and
+tab layout, the ring-buffer size, the hotkey, the slot count, the five-payload cut, who runs the spike, the layout
+format, the stamp pass order, "one-shot over toggle", the stub technique, the shared-route rule for P2/P3 — all of it
+is the authoring session's best guess, written by one vendor in one sitting. ⭐ **A build link may depart from any
+default when it sees a better way.** The only obligation is to **say so**: a `DEPARTURES` section in the link's
+report — what changed, from what, why, and which invariant it was checked against — so the judge can weigh it on
+evidence. A departure that crosses no invariant and is explained is not drift; a silent one is.
+
+**Questions and suggestions are WANTED.** Every build report carries a `SUGGESTIONS` section: better routes we
+missed, game facilities the plan does not use, simplifications, things that look wrong in the facts. A link may
+**STOP AND ASK** the owner at any point (rule 3) — and may also **ask and continue**: state the question, build on
+its best reading, flag it in the report. The judge (03B) and the audit (99) weigh departures and suggestions **on
+evidence, never on conformance** — the plan is not the standard; the invariants are.
+
 ## Binding chain rules — every prompt and payload inherits these
 
 1. **Staleness check first.** `git log --oneline -10`, `git pull`, `git status --short`, `ListAgents`, in BOTH repos
@@ -95,7 +122,8 @@ cross-references by registry id with stubs). 03B may send a payload back to 03A 
    outbox to the NEXT prompt's inbox **and** `99_AUDIT_fable.md`'s, strike your row here, `git rm` your own prompt,
    and commit all of it together (PROMPT MAP gate: the folder's row in `prompts/README.md` stays until 99).
 3. **Route, do not drop.** Out-of-fence findings get FILED (a bug entry, a fact, a checklist item). Vanilla defects
-   found on the way (`EF-098` is one) are dev-report material, never fixed here. Unsure? **STOP AND ASK.**
+   found on the way (`EF-098` is one) are dev-report material, never fixed here. Unsure? **STOP AND ASK** — a
+   question is a first-class move, never a failure; so is a suggestion (see "What is FIXED" above).
 4. **Self-split at a clean commit boundary** into `NNb_*.md` with a full inbox and its own row here (links only —
    a payload that outgrows its budget reports the split point and stops; 03A re-fires the remainder as a payload).
 5. **Capture drift as evidence** — every mistake you catch goes into 99's inbox (payloads: into your report's DRIFT).
