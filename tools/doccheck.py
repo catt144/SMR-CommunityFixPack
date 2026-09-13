@@ -382,6 +382,46 @@ CK_SECTION = "## Decisions waiting on you"
 MARKER_RE = re.compile(r"<!--\s*ck:(\d+|-)\s+status:([a-z]+)\s+owner:(yes|no)\s*-->")
 MARKER_STATUSES = ("open", "ruled", "closed", "deferred")
 
+
+def marker_integrity(lines, out):
+    """Report disk syntax independently of register selection and semantics."""
+    found = parsed = 0
+    issues, numbers = [], {}
+    text = "\n".join(lines)
+    for hit in re.finditer(r"<!--\s*ck:(?:(?!-->).)*(?:-->|$)", text, re.S):
+        comment = hit.group()
+        line = text.count("\n", 0, hit.start()) + 1
+        found += 1
+        if MARKER_RE.fullmatch(comment):
+            parsed += 1
+        else:
+            issues.append("line %d: unparsed %s" % (line, comment))
+        status = re.search(r"\bstatus:([^\s>]+)", comment)
+        if status and status.group(1) not in MARKER_STATUSES:
+            issues.append("line %d: unknown status %s" % (line, status.group(1)))
+        ck = re.match(r"<!--\s*ck:(\d+)\b", comment)
+        if ck:
+            numbers.setdefault(int(ck.group(1)), []).append(line)
+    for ck, locations in sorted(numbers.items()):
+        if len(locations) > 1:
+            issues.append("duplicate ck:%d at lines %s" %
+                          (ck, ", ".join(map(str, locations))))
+    # WARN deliberately: ck170(a) still owns vocabulary and duplicate semantics.
+    # Existing part-ruled/duplicate markers must not block peers' commits. Only
+    # an owner ruling adopting a vocabulary and uniqueness gate can make RED.
+    out.append("MARKER INTEGRITY: %d on disk, %d parsed; %s; RED only after an "
+               "owner ruling adopts vocabulary and uniqueness enforcement" %
+               (found, parsed, "WARN" if issues else "clean"))
+    out.extend("  warn " + issue for issue in issues)
+
+
+def check_marker_integrity(out):
+    if not os.path.exists(CHECKLIST):
+        out.append("MARKER INTEGRITY: not checked (checklist missing)")
+        return
+    with open(CHECKLIST, encoding="utf-8", errors="replace") as fh:
+        marker_integrity(fh.read().splitlines(), out)
+
 # The prose fallback, inherited verbatim in behaviour from the 2026-09-12 move
 # dry-run so the two never disagree about what a header says.
 CK_CLOSED_RE = re.compile(
@@ -489,7 +529,6 @@ def checklist_items():
         # every later one is prose ("441 declarations, 133 inventory rows").
         item["num"] = nums[0] if nums else None
         item["prose_closed"] = bool(CK_CLOSED_RE.search(head))
-        item["prose_defer"] = bool(CK_DEFER_RE.search(head))
     return items
 
 
@@ -682,12 +721,10 @@ def installed_build():
 
 
 def emit_fingerprints(out):
-    """--emit-fingerprint: does each group of facts still describe what is here?
+    """--emit-fingerprint: route evidence checks by exact build identity.
 
-    This is the O(1) half of three-way verification. A fact whose fingerprint
-    still holds needs no re-read at all; a fact whose fingerprint moved is the
-    only kind worth re-deriving. Without this the only way to answer "does this
-    still hold" was to re-read the source, which is why nobody did.
+    Identity alone does not verify a group's claims, scope or dependencies.
+    HOLDS is a routing aid; MOVED identifies citations needing a new baseline.
     """
     sf = facts_splitter()
     groups, total = {}, 0
@@ -711,8 +748,10 @@ def emit_fingerprints(out):
         if bare.startswith("game"):
             if build is None:
                 verdict = "cannot check — the .acf is unreadable from here"
-            elif build in bare:
-                verdict = "HOLDS — this IS the installed build; no re-read needed"
+            elif re.search(r"\bbuild\s+(\d+)\b", bare) and re.search(
+                    r"\bbuild\s+(\d+)\b", bare).group(1) == build:
+                verdict = ("HOLDS — build identity matches; routing aid only, "
+                           "check claim scope and source dependencies")
             else:
                 verdict = ("MOVED — installed is %s, so these line citations describe "
                            "a tree that is not on disk (1.0.7 archived, EF-083)" % build)
@@ -742,7 +781,8 @@ def emit_fingerprints(out):
                       "all behind HEAD by %d–%d commits — re-check before quoting"
                       % (min(live), max(live)) if live else "none resolve here"))
         out.append("      %s" % "  ".join("%s+%d" % (s, b) for (s, _), b in zip(shas, behind)))
-    out.append("  → a group that HOLDS needs no re-read; re-derive only what moved.")
+    out.append("  → route by build identity; HOLDS does not verify claims, scope "
+               "or source dependencies.")
 
 
 # ---------------------------------------------------------------------------
@@ -1672,6 +1712,7 @@ def main():
     ok = check_entry_mirror(out) and ok
     ok = check_state_and_stubs(out) and ok
     ok = check_waiting(out) and ok
+    check_marker_integrity(out)  # warning only, pending ck170(a)
     ok = check_skills(out) and ok
     counts = recount(model, out)
     ok = temporary_sweep(out) and ok
