@@ -1,12 +1,12 @@
 <!-- GENERATED — never hand-edit; regenerate with: python tools/doccheck.py --regen -->
 <!-- split_facts.py --write is the one-time MIGRATION from the retired pre-split doc, never a regeneration; verify: python tools/doccheck.py -->
 
-# Engine facts index — 92 facts
+# Engine facts index — 93 facts
 
 One file per top-level bullet of the old `docs/agent/ENGINE_FACTS.md`, in
 source order; ids are stable. `updated` is git's last touch of the fact's
 own lines. `verified` is the first date the fact's TEXT presents as an
-observation (60 of 92 state one) — a mechanical extraction, not an
+observation (60 of 93 state one) — a mechanical extraction, not an
 adjudication: read the fact for what was actually measured, several of
 which carry their own ⚖️ "what is measured and what is not" paragraph.
 The preamble that opened the old file is `_preamble.md`.
@@ -105,4 +105,5 @@ The preamble that opened the old file is `_preamble.md`.
 | EF-090 | 1.1.0 cache overlay consumed in owner bench; index names 18 RAYS records; v2 covers all, with normal-loading treatment untested | 2026-09-11 | 2026-09-11 | 56 | [EF-090.md](EF-090.md) |
 | EF-091 | A landed non-player rocket launches the instant its cargo reads ready, and a drone request's GetTargetAmount goes negative after a re-size while drones hold claims (F119 sitting) | 2026-09-11 | 2026-09-11 | 18 | [EF-091.md](EF-091.md) |
 | EF-092 | Residence selection refuses a DESTROYED building through an INHERITED test — GetResidenceComfort gates on ValidateBuilding — so a constant-comfort desk stub deletes that guard and manufactures a harm (cost a false F59 finding that cleared an audit) | 2026-09-11 | 2026-09-11 | 29 | [EF-092.md](EF-092.md) |
+| EF-093 | ⭐ VANILLA RE-SEEDS LOCKABLE-PRESET STATE ON EVERY LOAD — `OnMsg.PostLoadGame` runs `PreProcessLockablePresets()`, which calls `ResetLockablePresetState` for any preset missing from the owner's persisted `ProcessedLockablePresets` and re-applies that preset's DECLARED `LockState`. ⇒ a mod that clears a lock reason AND drops the preset from that set leaves a save vanilla itself repairs on the next load: self-healing residue with no mod code left behind, no cleanup artifact and no player action. The engine's own comment states the intent — 'process all lockable presets, which were newly added since the save was made' | — | 2026-09-13 | 35 | [EF-093.md](EF-093.md) |
 

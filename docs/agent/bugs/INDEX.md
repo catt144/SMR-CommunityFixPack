@@ -1,9 +1,9 @@
 <!-- GENERATED — never hand-edit; regenerate with: python tools/doccheck.py --regen -->
 <!-- split_bugs.py --write is the one-time MIGRATION from the retired pre-split doc, never a regeneration; verify: python tools/doccheck.py -->
 
-# Bug index — 224 rows, 189 entry files
+# Bug index — 225 rows, 190 entry files
 
-119 F + 12 D + 93 C. `seq` is the entry's position in the old BUGS.md file order;
+119 F + 13 D + 93 C. `seq` is the entry's position in the old BUGS.md file order;
 the row order below is the old index table's own. Generated from the front matter of
 `docs/agent/bugs/*.md` — edit an entry, not this file.
 
@@ -237,4 +237,5 @@ the row order below is the old index table's own. Generated from the front matte
 | 187 | C91 | Repealing Building Codes leaves its maintenance modifier on every building it touched: the cost half is reverted by a LawEffect's OnStop, the maintenance half is written by a MsgReaction that nothing reverts | cand | P3 | source-read on 1.1.0.403908; every OnMsg.LawDeactivated handler in the tree enumerated; not reproduced in play | [C91.md](C91.md) |
 | 188 | C92 | Boundaries of Knowledge counts the hidden, unreachable UndergroundExploitation tech; repeatables retain completion and are not the blocker | cand | P2 | owner verified the clean current-patch original and all non-repeatable tech complete; read-only retail census of a copy on 1.1.0.403908 finds UndergroundExploitation the sole failed counted requirement, hidden with no normal reveal/research route; both repeatables completed once; desk controls execute shipped state and achievement bodies; no live achievement award attempted | [C92.md](C92.md) |
 | 189 | C93 | Outside Ranch produce reported stranded at the building centre: a missing entity spot makes the stockpile controller fall back to Origin, which on a non-walkable footprint drones cannot reach | cand | P2 | field report only (Steam, saYo, 2026-09-13); mechanism source-read on 1.1.0.403908; the Origin fallback MEASURED firing for a different building (MicroGHabitat) in our own archived 09-09 log; the reporter's own log and mod list are NOT held, so attribution is unresolved | [C93.md](C93.md) |
+| 190 | D14 | Clean stand-down for full-body replacements: 21 modules pin a shipped body and cannot ride a vendor fix, and bodycheck's own class-c blind spot means a vendor repair can land with every instrument we own still GREEN | cand | P2 | MEASURED on the pack 2026-09-13: 24 of 45 Fix_ modules delegate to the captured original, 21 do not; 15 carry a behaviour probe, 8 a custom test, 41 some Require gate. bodycheck is at FULL manifest coverage (132 rows, 47 stamped modules, 0 without a manifest) and states its own class-c blind spot. No module has been individually assessed | [D14.md](D14.md) |
 
