@@ -46,8 +46,11 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 - ✅ **RETIREMENTS LANDED 09-12** (ck156 + ck159): F37/F43+F118/F31 modules DELETED across Code + `items.lua` + `metadata.lua`
   (H-10), entries restatused, F21 STAYS. ⛔ ck159's predicted count word "Forty-six" PREDATES this — re-derive, never carry.
 - ⏭ NEXT: v10's `POST_UPLOAD_CLOSE.md` + `RELEASE.md` §5 RAN 09-13 (writeback restored, outbox cleared to *Released
-  in v10*). 🚫 **STILL OWED: `content/faq.md`** (site repo) — LEFT UNCOMMITTED beside the owner's own 3 pared files;
-  site deploy stays blocked on the owner committing it, live list still reads 50 against the card's 49 until then.
+  in v10*). ✅ `SITE_ALIGNMENT_AUDIT.md` RAN 09-13, fired: F37's orphaned "phantom farm oxygen" promise in
+  `faq.md` fixed + judgment-call count landed, `d86a347` pushed (site repo) — no other orphaned promise found
+  across the 40 modules deleted since 09-08. **Site deploy is content-clear to fire**; live 50 (`398a1b0`) vs
+  committed 49 confirmed via the deployments API. Owner's 2 pared files (`for-modders.md`, `install.md`) stay
+  UNCOMMITTED — decision 47, unrelated to the deploy (uncommitted content never publishes).
   ⚠️ **NEW, unexplained**: the delivered Steam pack has 2 archive entries (`smr-bug-library/SKILL.md`,
   `smr-orientation/SKILL.md`) that `pack_predict.py` does not model and that are not on disk now — flagged, not
   chased, this sitting. Handoff `prompts/perma/HANDOFF_ORCHESTRATOR.md` §3 LIVE. Desk `prompts/DLC_DEEP_CHECK.md`

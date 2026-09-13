@@ -135,6 +135,33 @@ grep -c '^??? .*judgment call\*"$' /c/Dev/SMR-CommunityMods/content/fix-list.md
 touches no numeral on any other page. A plain repair falsifies none of them.
 Verified consistent 2026-08-24: five marked on the fix list, five on `faq.md`.
 
+### When a fix is RETIRED — the direction this list otherwise misses
+
+Every check above runs one way: does a **new** fix falsify a page. A retirement
+falsifies the **opposite** way — the pack quietly **stops doing something** a
+page still promises — and nothing above catches that, because the fix-list row
+usually comes off in the same commit while a *named-list* sentence elsewhere
+does not. **The highest-risk shape is a named list of specific repairs** (a save
+sanitizer's contents, a headliner list): each item is a separate promise, and
+one can go stale without the sentence looking wrong.
+
+1. Get what the retired module **used to promise**: `git show <sha>^:Code/<file>`
+   plus its `agent/bugs/<ID>.md` entry — an entry's own words are a claim, what
+   matters is what a player-facing page says.
+2. Grep every content page (`fix-list.md`, `index.md`, `faq.md`, `install.md`,
+   `for-modders.md`, `legacy-1-0-7.md`), the store-card sources in §2, and the
+   repo `README.md` for keywords tied to that promise. Do not stop at
+   `fix-list.md` — its row comes off easily; a prose sentence elsewhere does not.
+3. If found, fix it (§3's factual-correction rule applies) and remove only the
+   retired item, not the whole sentence.
+
+**Worked example** (found 2026-09-12, fixed `d86a347`): F37 (ghost farm oxygen)
+retired, its LoadGame sweep never moved into `90_SaveSanitizer.lua` (accepted
+loss), and `faq.md`'s save-repair list still named "phantom farm oxygen" —
+`fix-list.md` had already lost the row; the prose sentence had not. Full sweep
+method (built to run once against a backlog): `prompts/README.md`'s grave for
+`SITE_ALIGNMENT_AUDIT.md`.
+
 ---
 
 ## 2 · The store cards — `reports/STORE_CARD_LIVE.md`
