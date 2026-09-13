@@ -33,6 +33,7 @@ the 2026-08-03 QA session that hand-ran these checks. Do not "simplify" them.
 """
 
 import argparse
+import ast
 import os
 import re
 import subprocess
@@ -1654,6 +1655,41 @@ def counts_block(counts):
     return "\n".join(lines)
 
 
+def pack_ignore_parity(out):
+    """The shipped filters and prediction must agree, including precedence."""
+    try:
+        with open(os.path.join(REPO, "metadata.lua"), encoding="utf-8-sig") as fh:
+            lua = re.sub(r"--[^\n]*", "", fh.read())
+        hit = re.search(r"['\"]ignore_files['\"]\s*,\s*\{([^}]*)\}", lua, re.S)
+        if not hit:
+            raise ValueError("metadata.lua ignore_files list missing")
+        body = hit.group(1)
+        token = r'''(?:"[^"\\]*(?:\\.[^"\\]*)*"|'[^'\\]*(?:\\.[^'\\]*)*')'''
+        if not re.fullmatch(r"\s*(?:" + token + r"\s*,\s*)*", body):
+            raise ValueError("metadata.lua ignore_files list is not literal strings")
+        shipped = [ast.literal_eval(s) for s in re.findall(token, body)]
+        with open(os.path.join(REPO, "tools", "pack_predict.py"), encoding="utf-8-sig") as fh:
+            tree = ast.parse(fh.read())
+        assignments = [node for node in tree.body if isinstance(node, ast.Assign)
+                       and any(isinstance(t, ast.Name) and t.id == "IGNORE"
+                               for t in node.targets)]
+        if len(assignments) != 1:
+            raise ValueError("pack_predict.py must define one literal IGNORE list")
+        predicted = ast.literal_eval(assignments[0].value)
+        if not isinstance(predicted, list) or not all(isinstance(p, str) for p in predicted):
+            raise ValueError("pack_predict.py IGNORE must be a string list")
+        if shipped != predicted:
+            out.append("PACK IGNORE PARITY: RED — metadata.lua ignore_files and "
+                       "pack_predict.py IGNORE differ in membership or order")
+            out.append("  shipped: %r\n  predicted: %r" % (shipped, predicted))
+            return False
+    except (OSError, ValueError, SyntaxError) as exc:
+        out.append("PACK IGNORE PARITY: RED — %s" % exc)
+        return False
+    out.append("PACK IGNORE PARITY: PASS — %d filters agree in order" % len(shipped))
+    return True
+
+
 def main():
     ap = argparse.ArgumentParser(description="SMR-BugFixPack doc structure check")
     ap.add_argument("--regen", "--regen-index", action="store_true", dest="regen",
@@ -1720,6 +1756,7 @@ def main():
     ok = wrap_targets_check(out) and ok
     ok = parse_gate(out) and ok
     ok = module_set_agreement(out) and ok
+    ok = pack_ignore_parity(out) and ok
     ok = flpk_selftest(out) and ok
     ok = bodycheck_selftest(out) and ok
     push_set_report(out)   # report-only: the budget is the owner's to act on

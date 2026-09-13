@@ -53,6 +53,45 @@ def fingerprint_cases(module):
         assert any(expected in x for x in out), (build, out)
 
 
+def parity_cases(module, root):
+    """Drift real list copies without ever mutating the live metadata."""
+    metadata = root / "metadata.lua"
+    predictor = root / "tools/pack_predict.py"
+    predictor.parent.mkdir(exist_ok=True)
+    metadata.write_bytes((ROOT / "metadata.lua").read_bytes())
+    predictor.write_bytes((ROOT / "tools/pack_predict.py").read_bytes())
+    originals = {p: p.read_bytes() for p in (metadata, predictor)}
+    original_repo = module.REPO
+    module.REPO = str(root)
+    try:
+        out = []
+        assert module.pack_ignore_parity(out), out
+        print("CONTROL " + out[0])
+        source = predictor.read_text(encoding="utf-8-sig")
+        for label, drift in (
+            ("membership", source.replace('    "*.rgignore",\n', "")),
+            ("order", source.replace('    "*.git/*",\n    "*.svn/*",',
+                                     '    "*.svn/*",\n    "*.git/*",')),
+        ):
+            assert drift != source
+            predictor.write_bytes(drift.encode("utf-8"))
+            out = []
+            result = module.pack_ignore_parity(out)
+            assert not result and any("PACK IGNORE PARITY: RED" in x for x in out), out
+            print(label.upper() + " " + out[0])
+            predictor.write_bytes(originals[predictor])
+        out = []
+        assert module.pack_ignore_parity(out), out
+        print("RESTORED " + out[0])
+        for path, content in originals.items():
+            assert path.read_bytes() == content
+            print("RESTORED %s SHA256 %s" % (path.name, hashlib.sha256(content).hexdigest()))
+    finally:
+        module.REPO = original_repo
+        for path, content in originals.items():
+            path.write_bytes(content)
+
+
 def main():
     source = (ROOT / "tools/doccheck.py").read_text(encoding="utf-8-sig")
     digest = hashlib.sha256(source.encode()).hexdigest()
@@ -92,6 +131,27 @@ def main():
         restored = load_copy(scratch, source)
         marker_cases(restored)
         fingerprint_cases(restored)
+        if hasattr(restored, "pack_ignore_parity"):
+            parity_cases(restored, Path(directory))
+            # Prove a missing parity gate cannot satisfy either drift demand.
+            start = source.index("def pack_ignore_parity(")
+            end = source.index("def main():", start)
+            mutant = source[:start] + (
+                'def pack_ignore_parity(out):\n'
+                '    out.append("PACK IGNORE PARITY: PASS (mutant)")\n'
+                '    return True\n\n\n'
+            ) + source[end:]
+            broken = load_copy(scratch, mutant)
+            try:
+                parity_cases(broken, Path(directory))
+            except AssertionError:
+                print("PASS B2 reverted scratch: control passes, drift demand FAILS")
+            else:
+                raise AssertionError("B2 mutant survived")
+            restored = load_copy(scratch, source)
+            marker_cases(restored)
+            fingerprint_cases(restored)
+            parity_cases(restored, Path(directory))
         assert hashlib.sha256(scratch.read_bytes()).hexdigest() == digest
         print("RESTORED doccheck.py SHA256 " + digest)
     assert (ROOT / "tools/doccheck.py").read_text(encoding="utf-8-sig") == source

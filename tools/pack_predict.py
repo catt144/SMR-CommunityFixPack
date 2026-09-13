@@ -31,6 +31,7 @@ IGNORE = [
     "*CLAUDE.md",
     "*AGENTS.md",
     "*.gitignore",
+    "*.rgignore",
     "*.gitattributes",
     "*/store_screenshots/*",
 ]
