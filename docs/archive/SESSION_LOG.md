@@ -10,7 +10,8 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ## 2026-09-13 — SMR Tool Kit designed and chained (`prompts/smrtk/`, ck175)
 
-Session `smr-bugfixpack-8f` (Fable). The owner asked for a replacement for the vanilla cheat menu that (A) never
+Session `smr-bugfixpack-8f` (R-G: Opus 5 for the taint/blacklist/sandbox source reads, switched to Fable 5.1 before
+the console-lock diagnosis; every fact, link and the chain cut were authored on Fable). The owner asked for a replacement for the vanilla cheat menu that (A) never
 registers as a cheat and (B) tags every log line. Source reads at build 24995074 answered both and were filed as
 `EF-095`–`EF-099`: taint is written only by the three `NetSyncEvents` wrappers (leaf bodies clean); the mod blacklist
 blocks code-from-a-string and file I/O but nothing the panel needs; the console "lock" is `DE_Console` never being
