@@ -1,18 +1,30 @@
 # Handoff — session → next session (model-agnostic)
 
-> **RETIRED — DO NOT FIRE (2026-09-13).** The launch and pending outbox are
-> closed. Use `DISPATCH.md` for current work and `docs/WAITING_ON_YOU.md` for
-> the owner's queue. The remaining text is a retained snapshot, not a task list.
+> ⭐ **LIVE — RETIREMENT OVERRIDDEN BY THE OWNER, 2026-09-13.** A session retired this
+> file earlier the same day; the owner reversed it: *"I am overriding the retirement for a
+> moment, we have too many loose ends."* It is a working handoff again. `DISPATCH.md`
+> remains the route table for ad-hoc work and `docs/WAITING_ON_YOU.md` remains the owner's
+> generated queue — this file carries the **loose ends** those two cannot hold.
 
-## ✅ v10 IS SHIPPED. THIS DOCUMENT NO LONGER HAS A LAUNCH TO DRIVE.
+## ⛔ THIS FILE IS THE OWNER'S TO RETIRE — NO SESSION MAY RETIRE IT
 
-Rewritten end-to-end **2026-09-13** after the v10 arc closed. Everything the launch needed is done and its
-blocks are deleted, per the rule below. **There is no agent item blocking anything.**
+⛔ **A session may NEVER retire, archive, gut or `git rm` this file on its own judgement**,
+however finished its list looks, and however clearly an earlier note says the removal
+condition is met. It was retired unilaterally once on 2026-09-13 and the owner reversed it
+within the day.
 
-⏳ **This file's own removal condition is MET and it is the owner's call** (owner, 2026-09-11: it stays in
-`perma/` "until the pending outbox is empty or the owner says things have settled, then it is `git rm`'d").
-`RELEASE_OUTBOX.md`'s **Pending is now empty**. `perma/DISPATCH.md` has taken over as the catch-all.
-This file is retained pending the owner's removal call; do not grow it or fire its old routes.
+✅ **What a session MAY do:** when §2's list is genuinely empty — every loose end closed or
+homed elsewhere — **ASK the owner whether to retire it**, in one line, and carry on. Their
+answer is the only thing that closes this file.
+
+⇒ An empty list is a **prompt to ask**, never a licence to act. ⛔ Do not treat an
+inherited "removal condition MET" note as authority; the condition being met is exactly
+when the question gets asked, not when the deletion happens.
+
+⏳ Standing condition, for reference (owner, 2026-09-11): it stays in `perma/` *"until the
+pending outbox is empty or the owner says things have settled, then it is `git rm`'d"*.
+`RELEASE_OUTBOX.md`'s Pending is empty, so the condition is met and the **question is
+askable** — it has been asked and the answer, 2026-09-13, is **no, keep it**.
 
 ⛔ **THIS IS A WORKING DOCUMENT, NOT A SESSION LOG.** History lives in `docs/archive/SESSION_LOG.md`
 (append-only, newest first). **If you close something here, DELETE its block.**
@@ -62,23 +74,59 @@ went divergent within a day. **Read it, then read the checklist body it links to
 ⛔ **Never rebuild an "owed" list from an older document** — this file's did exactly that on 09-12 and
 contradicted its own closed list for most of a day.
 
-### 2b · Agent work, needing no ruling — the v10 fence is LIFTED, pick one with the owner
+### 2b · The loose ends — this is why the file is still alive
 
-- **C91** — open candidate: vanilla leaks the Building Codes maintenance modifier on repeal. Dev-report material.
-- **C92** — filed 09-13 by a peer (`1b7d695`), `cand` P2: Boundaries of Knowledge can never unlock once a
-  Repeatable tech sits in a tracked group. Fix sketched, **not built** — scope call for the owner.
-- **Migration residuals, read from the entries 09-12:** **F51** 1.1.0 PARTIAL, leg re-filed **UNRUN** ·
-  **F53** PARTIAL, no fresh 1.1.0 evidence · **F59** repaired, **A1 expedition half UNTESTED** · **F73**
-  PARTIAL, organic benefit unverified · **F80** `investigating`, causation unproved · **F54** never swept.
-- **`treediff` gains a `TABLE-HUNK` list** (`HUNT_AUDIT` §8 item 2). ⭐ **It must compare CONTENT between
-  trees, not POSITION** — the classifier reported a merely *moved* block as a new `DefineClass` and
-  attributed `__parents` across adjacent blocks (`reports/PINNED_PARENTS_PASS.md`, one of seven rows).
-- **Desk NEXT, unclaimed:** `prompts/DLC_DEEP_CHECK.md` (bounded; framing in its banner).
-- **`prompts/SELFCHECK_PILOT.md`** — **REMOVED 2026-09-13 on the owner's word, `cf8d51f`.**
-- **83 (SHARED TestKit)** — two of its five proposals (a `RunAll` owner filter, a `PACK_ID` on the
-  enable-path leg) improve the kit **for us** regardless of the opt-in mod.
-- **Hotfix 3 — 135 only.** RULED 09-12: take the `luafn.py` delimiter fix. Desk tool, **0 shipped hashes**.
-  ⛔ Do not re-derive the old table or the expired-triage "tension"; both are gone on purpose (ck161).
+⭐ **PROMPTS READY TO FIRE, in order.** ① `prompts/STANDDOWN_AUDIT.md` — no blocker, fire any
+time; a 21-module sweep, good Codex fan-out. ② `prompts/C92_ACHIEVEMENT_BUILD.md` — build +
+test the C92 restoration, ⛔ **SHIPPING HELD by ck172 until the owner lifts it in words**.
+③ then the playtest sitting (could ride the owed ck144 (a) boot). ④ `prompts/DLC_DEEP_CHECK.md`
+— desk NEXT, unclaimed, bounded; the pack is stable so it is genuinely fireable.
+
+- **C92 — RULED, not finished.** ck172 (09-13): **build the restoration, shipping held**;
+  knowledge accepted as a deliverable even if it never ships. ⛔ **ck171 (scope) stays OPEN** —
+  172 says what to build and that it will not ship, 171 is whether it ever does. Evidence is
+  closed out: `reports/C92_PLACEMENT.md` + `C92_INVESTIGATION.md` "Addendum 2026-09-13".
+  ⛔ **Three claims are WITHDRAWN — do not reason from them:** a ≈44% water bonus, a
+  "never-drawn" icon, and unremovable residue. Seat / prerequisite / art are **design choices
+  to be made**, not intent to be restored — nothing was recoverable.
+- **C93 — cause UNRESOLVED, and it is not ours.** Outside Ranch produce stranded at the
+  building centre: a missing entity spot makes `StockpileController` fall back to `Origin`,
+  which a non-walkable footprint encloses. ⛔ The owner's "outdated mod" reading is the
+  leading candidate but **unproven** — our own 09-09 log shows the same fallback firing in
+  vanilla for `MicroGHabitat`. ⇒ Needs the reporter's log line + mod list. **Replies are
+  PULL-ONLY (ck165): the ask is the owner's call, nothing is drafted and nothing is owed.**
+- **D14 / stand-down** — 21 of 45 modules replace a shipped body and cannot ride a vendor fix.
+  ⛔ The gap is **not** "did the body change" (`bodycheck` answers that at the desk, at full
+  coverage, no launch) but its own declared **class-c** blind spot: a vendor repairs a defect
+  without touching the body we pinned and every instrument reads GREEN. `debug.getinfo` is
+  unavailable in the mod sandbox, so only behaviour probes can close it.
+- **ck173 — `FIX_POLICY` §2a is factually wrong in one half**, raised 09-13, unruled. Its
+  reason 2 ("unbuildable from the mod's own fields") is true of the metadata fields and false
+  of the runtime `LuaRevision`; and **we already ship a version guard** in the FR-1 mod that
+  nobody raised §2a against. Reason 1 survives and is the real rule.
+- **Two new facts worth inheriting rather than re-deriving:** `EF-093` — vanilla re-seeds
+  lockable-preset state every load, so a mod can leave an **omission vanilla repairs itself**
+  (never observed in play; ordering dependency unverified). `EF-094` — achievement state:
+  ⛔ no mod and no retail console can clear a flag (the console **is** the mod sandbox), sync
+  is one-way local→Steam, and the test route is **move `account.dat` aside, test, move back**.
+- **C91** — open candidate: vanilla leaks the Building Codes maintenance modifier on repeal.
+  Dev-report material.
+- **Migration residuals, read from the entries 09-12:** **F51** 1.1.0 PARTIAL, leg re-filed
+  **UNRUN** · **F53** PARTIAL, no fresh 1.1.0 evidence · **F59** repaired, **A1 expedition half
+  UNTESTED** · **F73** PARTIAL, organic benefit unverified · **F80** `investigating`, causation
+  unproved · **F54** never swept.
+- **`treediff` gains a `TABLE-HUNK` list** (`HUNT_AUDIT` §8 item 2). ⭐ **It must compare
+  CONTENT between trees, not POSITION** — the classifier reported a merely *moved* block as a
+  new `DefineClass` and attributed `__parents` across adjacent blocks
+  (`reports/PINNED_PARENTS_PASS.md`, one of seven rows).
+- **83 (SHARED TestKit)** — two of its five proposals (a `RunAll` owner filter, a `PACK_ID` on
+  the enable-path leg) improve the kit **for us** regardless of the opt-in mod.
+- **Hotfix 3 — 135 only.** RULED 09-12: take the `luafn.py` delimiter fix. Desk tool, **0
+  shipped hashes**. ⛔ Do not re-derive the old table or the expired-triage "tension"; both are
+  gone on purpose (ck161).
+- ✅ **Closed 09-13, do not reopen:** `SELFCHECK_PILOT.md` REMOVED on the owner's word
+  (`cf8d51f`) · the C92 placement/icon investigation (fired, `git rm`'d) · the ck170 doc
+  overhaul pass.
 
 ### 2c · Watch list, not tasks
 

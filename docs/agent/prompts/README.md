@@ -19,7 +19,7 @@ exists, and a struck row is RED. A row that outlives its file is how a next sess
 |---|---|
 | `DISPATCH.md` | **start here for ad-hoc work:** orientation, bindings, and the route table to the others |
 | `LINUX_DISPATCH.md` | **FR-1**: the Linux/NVIDIA 580 crash and the TEMPORARY workaround mod; every report, feedback item or patch |
-| `HANDOFF_ORCHESTRATOR.md` | **RETIRED — DO NOT FIRE.** Retained launch snapshot; current work uses `DISPATCH.md`, owner queue uses `docs/WAITING_ON_YOU.md`. File removal remains the owner's call. |
+| `HANDOFF_ORCHESTRATOR.md` | ⭐ **LIVE — the owner OVERRODE its retirement 2026-09-13** ("too many loose ends"). It carries the loose ends `DISPATCH.md` and `WAITING_ON_YOU.md` cannot hold. ⛔ **No session may retire it**; when its §2 list is empty a session may **ASK** the owner and nothing more. |
 | `GENERAL_USE_PROMPT.md` | a live playtest at the keyboard (a 09-09 handoff called parts of it pre-1.1.0; verify before relying on it) |
 | `RELEASE.md` | an update, end to end; uses `RELEASE_OUTBOX.md` (the staged-changes ledger) and `POST_UPLOAD_CLOSE.md` (the close-out) |
 | `RELEASE_OUTBOX.md` | the ledger `RELEASE.md` draws from: every player-facing change landed since the last upload |
