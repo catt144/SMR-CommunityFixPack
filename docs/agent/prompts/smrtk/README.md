@@ -34,7 +34,7 @@ contract). Authoring mechanics: `agent/WORKFLOW.md` "Authoring a prompt" element
 
 | # | file | model | owner needed? | what it drains |
 |---|---|---|---|---|
-| 01 | `01_SKELETON_BUILD_codex.md` | **Codex — Astra, xhigh** (difficulty 7; the chain's load-bearing leg) | no | job 0 re-validates this Claude-authored cut (a cross-vendor read of the plan); core (slot engine, logger, ring buffer, taint assert, `ConsoleEnabled` arm), the panel frame (status strip, top row, tabs), MARK / Copy / Flush / cls / eligibility; predictions + 02's script |
+| ~~01~~ | ~~`01_SKELETON_BUILD_codex.md`~~ | ~~**Codex — Astra, xhigh** (difficulty 7; the chain's load-bearing leg)~~ | ~~no~~ | ~~job 0 re-validates this Claude-authored cut (a cross-vendor read of the plan); core (slot engine, logger, ring buffer, taint assert, `ConsoleEnabled` arm), the panel frame (status strip, top row, tabs), MARK / Copy / Flush / cls / eligibility; predictions + 02's script~~ |
 | 02 | `02_SKELETON_SITTING_owner.md` | Claude attending (attended) | ✅ keyboard, ~20–30 min | ⛔ KILL GATE: no taint after a leaf action, console hotkey with the Mod Manager CLOSED, the console tap sees prints, clipboard copy pastes, panel survives a load |
 | 03A | `03A_PAGES_FANOUT_codex.md` | **Codex — Sol, xhigh or max** as coordinator; payload seats below | no | the spike (shared UI-hook techniques, once), then the five payloads below as parallel subagents; gates per result; commit per file; a numbered-claims report |
 | 03B | `03B_JUDGE_claude.md` | **Claude** (Opus) | no | re-runs every gate, samples routes against the facts, checks the shared techniques were shared, enumerates idle patches, consolidates every owner item into ONE ck175 append; PASS / PASS WITH FIXES / RE-FIRE |
@@ -175,7 +175,7 @@ evidence, never on conformance** — the plan is not the standard; the invariant
 19. **A doccheck WARN goes verbatim into your summary.** STATE.md is byte-capped; measure it (`STATE + STUBS`),
     never quote a stored number.
 20. **UI rules.** X classes only (`XDialog`/`XWindow`/`XButton`/`XTextEditor`), built in Lua, no XTemplate preset
-    that needs the Mod Editor. Panel hotkey default **Ctrl-Shift-K**; 01 greps `Data/XDef/GameShortcuts.lua` +
+    that needs the Mod Editor. Panel hotkey **Ctrl-Shift-F11** (01 found Ctrl-Shift-K in DevToolsShortcuts); 01 greps `Data/XDef/GameShortcuts.lua` +
     `CommonShortcuts.lua` for a collision and routes a different default to ck175 if found. Six agent slots by
     default. Tabs share ONE footprint; the status strip and top row never scroll; `[_]` collapses to those two rows.
     **The two shared UI-hook techniques are decided once, by 03A's spike** (`reports/SMRTK_UI_HOOKS.md`); P2 and P3
@@ -195,7 +195,7 @@ evidence, never on conformance** — the plan is not the standard; the invariant
 |---|---|---|---|
 | taint is written only by the 3 `NetSyncEvents` wrappers; leaf bodies are clean | `grep -rn LogCheatUsed ModTools/Src` = 4 hits | 1.1.0 build 24995074 | `grep -rn "LogCheatUsed" "A:/SteamLibrary/steamapps/common/Project Spark/ModTools/Src" \| wc -l` → 4 |
 | 13/105 presets re-enter `NetSyncEvent` | Python split on `PlaceObj('CheatDef'` | same | `grep -c "NetSyncEvent" ".../ModTools/Src/Data/CheatDef.lua"` → 13 |
-| every name the kit needs is outside `ModEnvBlacklist`; `Cheat` is not a blacklisted prefix | per-name grep on `Mod.lua:1280-1470` + the two prefix handlers | same | `grep -cE "^\s+(SaveGame\|LoadGame\|SetGameSpeed\|CopyToClipboard\|ConsoleEnabled\|PlaceConstructionSite) = true" ".../Mod.lua"` → 0 |
+| the listed leaf/UI names are outside `ModEnvBlacklist`; eligibility is blocked (`EF-096` correction); `Cheat` is not a blacklisted prefix | per-name grep on `Mod.lua:1280-1470` + the two prefix handlers | same | `grep -cE "^\s+(SaveGame\|LoadGame\|SetGameSpeed\|CopyToClipboard\|ConsoleEnabled\|PlaceConstructionSite) = true" ".../Mod.lua"` → 0 |
 | `DE_Console` is created under an `if`; F9/`cls` unconditional | source read + owner press | same | `grep -n "DE_Console\|DE_ClearScreen" ".../CommonShortcuts.generated.lua"` |
 | `PlaceConstructionSite` is the controller's call; completion is two-pass | source read | same | `grep -n "PlaceConstructionSite(" ".../Lua/Construction/Construction.lua"` → 2 hits |
 

@@ -12,7 +12,11 @@ Run only on a folder holding this file and `README.md` (or in the reduced form b
      (the same grep on `Data/CheatDef.lua` → 13+) so the negative is a sample;
    - every registered action's `run` read line by line against `EF-095`/`EF-098`: leaf call or not;
    - 02's and 08's `CheatsUsed` reads located in the **archived logs** by line, and the scratch-save control's RED;
-   - `CanUnlockAchievement` reason at 08's end, in the log.
+   - the eligibility read at 08's end, in the log. On build 24995074 it must
+     honestly report `UNAVAILABLE:sandbox` (`EF-096`). CanUnlockAchievement is
+     blacklisted; no taint read proves full eligibility. Adjudicate this
+     measurement limitation explicitly against requirement (A), never silently
+     accept it as an observed eligibility PASS.
 4. **The tag invariant:** from 08's archived log, every line the toolkit wrote carries `[SMRTK] SMRTK_`; count the
    toolkit's actions in the log against the panel's fire counters (a total is not a set — reconcile).
 5. **The idle invariant (rule 9):** with nothing armed, enumerate every vanilla function the toolkit has replaced
@@ -54,3 +58,27 @@ build other than the one 02/08 ran on.
   `ConsolePrint` → `ConsoleLine` (`EF-096`), and retail `Platform.cheats` (`EF-095`). Check 02 measured both rather
   than inherited them. The facts were written in one session from source reads at build 24995074 — if the game
   updated between authoring and 02, the fingerprint says MOVED and 01 must have re-derived; check that it did.
+
+- **01 outbox, 2026-09-13:** core `774b55a`, panel `b400683`, metadata `5d8d3b3`
+  in the local TestKit. `reports/SMRTK_SKELETON_PREDICTIONS.md` contains numbered
+  claims, exact commands/results, actual API, **DRIFT**, **DEPARTURES** and
+  **SUGGESTIONS**; `SMRTK_SKELETON_SMOKE.py` is the reproducible desk model.
+  Code and metadata gates GREEN; nothing ran in game, no status promoted.
+- **Disagreements to judge first:** CanUnlockAchievement's blacklist makes the
+  proposed eligibility read impossible; Ctrl-Shift-K has a developer collision;
+  00_TestCore already enables/rebuilds/auto-opens console and would mask our
+  hook; an arbitrary old playtest save cannot provide the no-taint control.
+  02's script handles these, registers its own Fill action, and separates
+  toolkit ring insertion from actual native/tee output. Inspect the two
+  native witness outputs, not input-command echoes or toolkit lines alone.
+- **DEPARTURES:** eligibility unavailable; Ctrl-Shift-F11; current-mark/absolute
+  index Copy; explicit isolated console rebuild control; empty payload pages.
+  **SUGGESTIONS:** judge retirement of the legacy console bootstrap after 02;
+  require delayed payload mutations to dispatch through Run/Fire inside their
+  threads; budget clean fixtures. All drift (including desk corrections) is in
+  the report. Scope was extended only for the reusable smoke and fact/prompt
+  corrections required to route those findings. 07/08 inboxes carry the same
+  eligibility correction. Requirement (A) has not been weakened.
+- Model-seat drift: peer `b9501dd` updated the manifest/ck175 but the old 03A/07
+  headers still said Astra. 01 aligned those two headers to Sol; payload seat
+  choices are inherited from the manifest's explicit per-payload row.

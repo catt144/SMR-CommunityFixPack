@@ -6,8 +6,10 @@ predictions (`reports/SMRTK_FULL_SITTING_PREDICTIONS.md`). The stale-probe gate 
 ## Job
 
 Run the script; score every step against its prediction; **read `CheatsUsed` at the end of the sitting** (the
-whole-sitting taint control — one read, after everything) and `CanUnlockAchievement`'s reason with the Mod Manager
-closed. Write `reports/SMRTK_FULL_SITTING.md` with the archived log path, per-step verdicts, and every drift
+whole-sitting taint control — one read, after everything) and the toolkit's
+eligibility read with the Mod Manager closed. On build 24995074 that read is
+`UNAVAILABLE:sandbox` (`EF-096`): CanUnlockAchievement is blacklisted. Do not
+claim full eligibility was measured. Write `reports/SMRTK_FULL_SITTING.md` with the archived log path, per-step verdicts, and every drift
 (a button that logged twice, a line without the tag, an armed thing that survived a load) as evidence for 99.
 
 ## Verdict classes
@@ -25,5 +27,10 @@ Outbox to 99; strike your row; `git rm` this file; push. Tell the owner in one l
 use from now on (it is, in whatever state 99 confirms — the TestKit never ships).
 
 ## Notes from upstream
+
+- **01 correction, 2026-09-13:** no eligibility verdict is available to the
+  mod on build 24995074. 07 must script the honest unavailable read separately
+  from taint. Use a clean 1.1.0 baseline; normal already-cheated fixtures cannot
+  prove no added taint. See 01's predictions §Disagreements/§DEPARTURES.
 
 - (07 writes the script here.)

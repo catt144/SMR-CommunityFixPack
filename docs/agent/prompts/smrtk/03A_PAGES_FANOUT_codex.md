@@ -1,6 +1,6 @@
 # smrtk 03A — the pages, fanned out (build; cross-vendor primary)
 
-Link 03A of `smrtk`. **Codex / Astra** (the house fan-out seat; a Claude session with subagents may run it if the
+Link 03A of `smrtk`. **Codex / Sol, xhigh or max** (owner's fifth ruling in the manifest; a Claude session with subagents may run it if the
 owner says so). README rules 1–22 are yours, and README § "What is FIXED" is the licence: the five-payload cut,
 who runs the spike, the API you inherit from 01 — defaults. Re-cut, re-spike or extend the core when you see a
 better way; record it under DEPARTURES. Runs only after 02 PASSed — read 02's outbox first (which console tap
@@ -76,3 +76,22 @@ report; outbox to 03B and 99; strike your row; push the pack repo.
 ## Notes from upstream
 
 - (02 appends here)
+
+- **01 API outbox, 2026-09-13 — still HELD behind 02:** TestKit core `774b55a`,
+  panel `b400683`, metadata `5d8d3b3`. Read `reports/SMRTK_SKELETON_PREDICTIONS.md`
+  §API frozen for 03A and §DEPARTURES/§SUGGESTIONS before the spike. Actions use
+  `Run/Arm/Disarm/Fire(id, ...)`; callbacks take `(ctx, ...)`, return fields or
+  false/reason; `ctx.state` carries toggle state and disarm must restore it.
+  Payloads do not log a second primary result; delayed work dispatches **inside**
+  its thread. `Page(id,label,build)` builds under the supplied host; `Button`
+  dispatches a registered id. Slots are `slot_1`..`slot_6`. P1 must register
+  `pause`, `stop_disaster`, and use `quiet` for the armed strip.
+- **DEPARTURES:** Ctrl-Shift-F11 avoids the wider collision; eligibility returns
+  `UNAVAILABLE:sandbox` because CanUnlockAchievement is blacklisted. Never turn
+  a clean taint read into eligibility=OK. Copy uses current-mark labels or
+  absolute ring indices and discloses eviction. Native/print/toolkit ring
+  sources are separate; our own lines do not prove native tap delivery.
+- **SUGGESTIONS:** after 02, route retirement of 00_TestCore's old console
+  bootstrap through 03B; build P3/P4 delayed mutations on Fire/Run and preserve
+  unknown readings. A clean fixture is a separate provisioning requirement.
+  No payload content or infopanel technique was built ahead of your spike.

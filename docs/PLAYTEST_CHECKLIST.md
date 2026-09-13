@@ -159,6 +159,32 @@ SUGGESTIONS sections, questions are a first-class move, and the judge weighs dep
 (high). Load-bearing: 01 alone poisons the chain (a wrong core contract or `ConsoleEnabled` hook kills at 02);
 everything else is contained to its own page.
 
+**01 built, 2026-09-13 (Codex):** local TestKit core `774b55a`, floating frame
+`b400683`, code list `5d8d3b3`. Desk smoke and parse/doc gates passed; **nothing
+has run in the game**. **02 is now takeable** from its complete one-line-at-a-time
+script in `agent/prompts/smrtk/02_SKELETON_SITTING_owner.md`; it needs a **clean
+1.1.0 baseline**, not an already-cheated playtest save. Provisioning time is
+separate from the sitting. 03A stays held behind that sitting.
+
+**The cut was re-validated with corrections, not silently accepted.** The
+default Ctrl-Shift-K is free in GameShortcuts/CommonShortcuts but collides with
+Toggle Collisions in DevToolsShortcuts; the built binding is **Ctrl-Shift-F11**
+(no source/TestKit collision found). The old TestKit already enables/opens the
+console, so 02 now isolates the new gate with a negative/positive rebuild.
+Toolkit ring lines alone cannot prove native capture; 02 measures actual print
+output and its clipboard source, with the tee off then on.
+
+**A measurement limit to keep visible:** `CanUnlockAchievement` is blacklisted
+in the shipped mod sandbox (`EF-096`, corrected). The panel reports eligibility
+**unavailable**, alongside an independent CLEAN/TAINTED read. It cannot honestly
+show vanilla's eligibility reason or claim an observed eligibility PASS. Your
+no-taint/achievement requirement stays in force; 03B/99 must adjudicate this
+limit explicitly. Recommendation: first run 02's no-taint control, retain the
+honest unavailable display, and let the judge decide the remaining evidence
+needed before the tool is adopted. No achievement/account mutation was used.
+Details, departures, suggestions and gates:
+`agent/reports/SMRTK_SKELETON_PREDICTIONS.md`.
+
 ### ✅ 2026-09-13 — 174 RULED: a fired one-off leaves the prompts map entirely
 <!-- ck:174 status:ruled owner:no -->
 
