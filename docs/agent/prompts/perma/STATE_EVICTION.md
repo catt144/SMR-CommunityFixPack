@@ -43,6 +43,14 @@ Everything else is pull: `SESSION_LOG` (history), `agent/reports/` (evidence),
 1. Read STATE.md whole. Read the newest SESSION_LOG entry to match its voice.
 2. Note the current HEAD sha — it becomes the grave:
    `git show <sha>:docs/agent/STATE.md` is the full pre-eviction file, forever.
+2b. ⛔ **Record the owner register BEFORE you touch STATE**, and keep the number:
+   `python tools/doccheck.py | grep WAITING` plus the ck numbers themselves,
+   `sed -n 's/^| \([0-9]*\) .*//p' docs/WAITING_ON_YOU.md | sort -n`. The register is parsed
+   from TWO LITERAL IDIOMS inside STATE — `Owner OWES: ck##` and
+   `STILL OPEN: <n> <word>` — so rewording either line DROPS an owner row with no
+   error anywhere. The 2026-09-13 eviction lost checklist 53 exactly this way and
+   nothing caught it; the note that was added inside STATE is itself byte-capped,
+   which is why the check belongs here instead.
 3. Prepend ONE SESSION_LOG entry (below the preamble; archive entries are
    never edited): a digest of each closed effort being evicted — a few lines
    each, dated, with pointers to its reports/graves — opening with a
@@ -56,7 +64,11 @@ Everything else is pull: `SESSION_LOG` (history), `agent/reports/` (evidence),
 5. Verify: `python tools/doccheck.py` GREEN (it enforces the warn/hard byte
    caps and the per-line cap); every hazard passes the admission test; no
    "superseded"/"⇒" chains remain; open decisions match the checklist; the
-   emitted block is byte-identical to `--emit-counts` output.
+   emitted block is byte-identical to `--emit-counts` output. Then
+   `python tools/doccheck.py --regen-waiting` and diff the register against step
+   2b: **no ck number may disappear.** One that does is an owner row you deleted —
+   restore the idiom, do not "fix" the register. A row whose status flips to
+   ⚠️ _conflict_ is fine; a row that vanishes is not.
 6. Measure the clean file (bytes; tokens ≈ bytes/2 for emoji-dense prose to
    bytes/4 for plain text — the 08-18 file measured 2.15 B/token) and put the
    numbers in the report to the owner, beside the pre-eviction size.
