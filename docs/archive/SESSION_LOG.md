@@ -8,6 +8,40 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-13 - C92 investigation: repeatable cause withdrawn, hidden requirement pinned
+
+tags: C92 research achievement 1.1.0 source-control unattended
+
+Owner asked for investigation and solution options, not a fix, and authorized
+game launches. Owner authority: personally verified the clean current-patch
+original and all non-repeatable tech complete in the tree. That check stands.
+Defect truth and corrected route: `docs/agent/bugs/C92.md`;
+options/limits/close-out: `docs/agent/reports/C92_INVESTIGATION.md`.
+
+MEASURED: Read-only retail loads of a copy of the supplied Sol 490 save found
+the hidden ordinary Tech `UndergroundExploitation` as the sole failed counted
+requirement. Both repeatables remain researched with one completion each.
+The proposed repeatable exemption still fails; exempting only the orphan makes
+all tracked groups pass (predicate comparison only, no award). Vanilla's
+first-time-only event gate also needs a recovery trigger for completed saves.
+No fix module built, no status promotion, no player reply drafted.
+
+Leg preparation committed before launches: `1053bf3` (r1), `2a7e596` (r2),
+`4586e9d` (r3). Logs retained as `docs/archive/c92_read_r{1,2,3}_Mars.exe-*.log`.
+r1's diagnostic concat error is retained and invalidates its unfinished census;
+r2/r3 completed. Recurring unexplained Braze diagnostics are quoted with process
+age in the report, not dismissed. Reproducible shipped-body desk control:
+`python tools/desk_c92_achievement.py` (prints command, HEAD, source hashes).
+
+MEASURED close-out: game quit normally, diagnostic disarmed, Test Kit restored
+to its original metadata bytes, staged C92READ save deleted. Backed-up autosaves
+`Autosave Sol 490.savegame.sav`, `Autosave Sol 56.savegame.sav`,
+`Autosave Sol 6.savegame.sav` all unchanged by SHA256. Downloads original and
+pre-existing imported reporter save remain byte-identical. STATE's stale
+repeatable-cause sentence corrected to an entry pointer; peer lanes preserved.
+
+---
+
 ## 2026-09-13 — STATE eviction, post-v10: 18,663 B of kernel-plus-history cut back to a kernel
 
 tags: STATE-eviction STATE-budget ck132 ck158 ck156 ck159 ck165 ck166 ck167 ck168 ck130 ck131 ck133 ck134 ck151

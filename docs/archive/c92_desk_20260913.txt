@@ -1,0 +1,53 @@
+REPEATABLE SolExploration cluster=Mysteries group=Special save_in=
+REPEATABLE MartianPatents cluster=Society_1 group=Society save_in=
+REPEATABLE GlobalSupport cluster=Breakthroughs group=Breakthroughs save_in=
+REPEATABLE MarsMarketing cluster=Breakthroughs group=Breakthroughs save_in=
+REPEATABLE MartianCopyrithgts cluster=Pride group=Society save_in=
+COMMAND python tools/desk_c92_achievement.py
+HEAD 4586e9d15996de7613922ba495335037217fe4f4
+==============================================================================
+C92 achievement hypothesis controls; no fix
+==============================================================================
+lua: Lua 5.5 | lupa 2.8
+
+REGISTRY Data/TechGroup.lua sha256=35e1037377bbfc311182cfcbfe0b3f44f299dcec866b057ba1c578e6738c8e66
+REGISTRY Data/Tech.lua sha256=7033a4b9330ab73eebf302347d063364c883ba229665884af52049bf5276efc9
+SOURCE 1.1.0.403908 CommonLua/Preset.lua:1802-1815 sha256=d1935dbfd261dfa94bd47faf1a4fb6fd867cc329ab489e6d32b3825bab133bd6
+SOURCE 1.1.0.403908 CommonLua/Libs/Research/Research.lua:161-164 sha256=42be02eddcb3df21691284539cc17abd63412c4dc8e0deb3da6a869d2ff9e7b4
+SOURCE 1.1.0.403908 CommonLua/Libs/Research/Research.lua:46-49 sha256=cb7158cb399c87548e85bcfcc1fe077cd05dd6eaa0c73c62d8fb23b06d430b45
+SOURCE 1.1.0.403908 CommonLua/Libs/Research/Research.lua:51-54 sha256=2b12f5ad9b1d279729ce23aa8c1c51258e6eb17e9eef9e54372212ae75a8321f
+SOURCE 1.1.0.403908 CommonLua/Libs/Research/Research.lua:23-29 sha256=76f1fa31c3c096226487fe26be0007d9d597cef687c7f1fd010b50d765265a9e
+SOURCE 1.1.0.403908 CommonLua/Libs/Research/Research.lua:31-38 sha256=d7dcf0060384a327b6e40e6ab9511e91754986768886e823105ca809a62d195c
+SOURCE 1.1.0.403908 CommonLua/Libs/Research/Research.lua:40-44 sha256=6969fd4eb54c54880863317a575259ddea03ff5ae1399bcfdf4df78ddec5b4ad
+SOURCE 1.1.0.403908 CommonLua/Libs/Research/Research.lua:147-159 sha256=2e218ab60ebae9e837fb727523da1599a9bf7d65b3d704af48c4ed95c219d2e1
+SOURCE 1.1.0.403908 Lua/TechTree.lua:892-900 sha256=0f10d7ef1f2978d8495140d4612acfed76c74791180d1d03b4cf3cc6b3c7bb36
+SOURCE 1.1.0.403908 Lua/TechTree.lua:876-878 sha256=4f41c62d8dc0acfce9a910f3d182a101fe369572868477dc6bcf1e20ca812a40
+SOURCE 1.1.0.403908 Lua/Tech.lua:468-470 sha256=983562acb12451d116779c3d5f75bc405a977d29dd95cac2fc0974a154017f2d
+SOURCE 1.1.0.403908 Lua/Tech.lua:519-521 sha256=1d04dd76c6c3cb23498ce844f50d4ad4104375085bb40f6473eac5153f81eeb5
+SOURCE 1.1.0.403908 Lua/TechTree.lua:868-874 sha256=58ec74366788a8e5b99635e06f7ff5a34aa80bd6bf377357de0a1f2bab1b10e0
+SOURCE 1.1.0.403908 Lua/TechTree.lua:1200-1240 sha256=2a5387318307ba1e8344a54e45f5e66d3ab44adb8df5b4013c0af23b3be6b8ac
+SOURCE 1.1.0.403908 Lua/TechTree.lua:1537-1540 sha256=f4bc929c69d2d3f4986f1d7f0c27a770865ef1999b9e9cfbf20f4e339d7c9e7e
+SOURCE 1.1.0.403908 Lua/Research.lua:150-159 sha256=03135d3e1a86bb9c42fdde328d3ad045280d0544c110e150423ce65866593a11
+SOURCE 1.1.0.403908 Lua/Research.lua:161-163 sha256=5cc9ef413fe805a9b57531a86952e2637629ee125deb51c0dde90df8b522b2c0
+SOURCE 1.1.0.403908 Lua/Research.lua:98-100 sha256=a87c173cc2f261fb0d9663902ec582ec2a5895d16c4d375bc4e0d923a940b0a6
+SOURCE 1.1.0.403908 Lua/Research.lua:180-190 sha256=8921d25a1fd03f0e524551d1ed21a0747e3886506e1f6a0e9a450a568337c645
+SOURCE 1.1.0.403908 Lua/Research.lua:192-202 sha256=ba2ed0d025a55beeb98024b9aea76469d3d14f8cd53fbd03459df5b6da87fd8f
+  PASS  first repeatable completion writes researched before achievement check
+  PASS  second repeatable first completion permits the vanilla achievement request
+  PASS  repeat research succeeds without clearing its completed state
+  PASS  MartianCopyrithgts remains researched with Repeatable=true
+  PASS  MartianPatents remains researched with Repeatable=true
+  PASS  vanilla achievement requests unlock when all counted techs are researched
+  PASS  repeat completions do not retry achievement (first_time gate)
+  PASS  a repeatable never completed once legitimately prevents unlock
+  PASS  preview research can also satisfy the vanilla state check
+  PASS  effective repeatability can disagree with preset Repeatable
+  PASS  actual hidden preset UndergroundExploitation is counted and blocks unlock
+  PASS  excluding repeatables still fails with the orphan unresearched
+  PASS  excluding only the orphan permits all complete groups
+  PASS  orphan-only exclusion retains the repeatable first-completion requirement
+  PASS  orphan-only exclusion still refuses an incomplete ordinary counted tech
+
+==============================================================================
+15 of 15 demands held
+CONTROLS HOLD: repeatables retain completion; unconditional exemption changes the achievement requirement.

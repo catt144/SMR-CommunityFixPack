@@ -35,7 +35,7 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   §Attended check, SESSION_LOG 09-12; ⛔ never re-derive a leg from the module.
 - **C90** (Saint + Sinkhole apply-success guards) ships in v10 `fixed` but **UNEXERCISED** — `reports/C90_GUARDS_BUILD.md`.
   **C91** open candidate: vanilla leaks the Building Codes modifier on repeal. **C92** (P2, `cand` 09-13):
-  `ResearchedAllTechs` can never fire once a Repeatable sits in a tracked group — a reporter's save CONFIRMS it.
+  `ResearchedAllTechs` counts hidden `UndergroundExploitation`; reporter-save census pins that barrier, repeatable cause WITHDRAWN — `bugs/C92.md`.
 - ⛔ `SaintBlessing`'s kit probe PASSes **vacuously** with no domed Saint — not coverage; field reports are the detector
   (ck130). ✅ The heal itself fired in play 09-12.
 - Post-launch LIVE: F105, F107, F108 (v4), F110 (v5), hotfix 2 (v6), C74+C77+C83 (v7), F119+C86 (v8), F59 repair +

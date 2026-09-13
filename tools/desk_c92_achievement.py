@@ -55,7 +55,6 @@ def main():
         function table.findfirst(t, fn, ...)
             for i, entry in ipairs(t) do if fn(i, entry, ...) then return i end end
         end
-        function IsResearchQueueEntryAResearch(entry) return entry.kind == "research" end
         function RemoveTechLockReason() end -- fixture techs are already enabled
         function ResearchQueue:DequeueTech() end -- no queue in this fixture
         function CountResearchedTech() end
@@ -80,6 +79,7 @@ def main():
         ("CommonLua/Libs/Research/Research.lua", r"^function ResearchTech\("),
         ("CommonLua/Libs/Research/Research.lua", r"^function ResearchQueue:ResearchTech\("),
         ("Lua/TechTree.lua", r"^function Player:IsTechResearched\("),
+        ("Lua/TechTree.lua", r"^function IsResearchQueueEntryAResearch\("),
         ("Lua/Tech.lua", r"^function IsTechResearched\("),
         ("Lua/Tech.lua", r"^function IsTechRepeatable\("),
         ("Lua/TechTree.lua", r"^function Player:CanResearch\("),
@@ -127,7 +127,7 @@ def main():
     rt.execute('''
         UIPlayer.tech_researched.MartianPatents = true
         UIPlayer.tech_researched.MartianCopyrithgts = nil
-        UIPlayer.TechnologiesUndoQueue = {{tech_id = "MartianCopyrithgts", kind = "research"}}
+        UIPlayer.TechnologiesUndoQueue = {{tech_id = "MartianCopyrithgts", action = "add", data = "research"}}
         OnMsg.TechResearched("MartianPatents", UIColony, true)
     ''')
     check("preview research can also satisfy the vanilla state check", rt.globals().unlocks == 1)

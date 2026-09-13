@@ -1,0 +1,269 @@
+					Render 0:00:00:006
+*** executable info
+					Render 0:00:00:007
+Timestamp:     	6a91a190
+Date:          	Fri Aug 28 10:56:16 2026
+Command line:  	
+Compiler:      	195136247, 142 (VS 2019) or newer
+
+
+*** hardware info
+CPU name      	Intel(R) Core(TM) i7-14700K
+CPU MHz       	3418
+CPU cores     	20/28
+Phys. Memory   	65278 MBytes
+Memory In Use  	57%
+Disk Free      	798302 MBytes
+
+
+*** OS info
+OS:            	Windows 11
+Version:       	10.0.26100 
+
+
+*** Debug::Init()
+
+
+					Render 0:00:00:110
+Steam initialized (AppId 3215050)
+					Render 0:00:00:114
+Drive type for game installation: SSD, savegames: SSD
+Language: English
+					Render 0:00:01:563
+*** graphics info
+GPU                            	NVIDIA GeForce RTX 4080 Feature Level: 12.1 {  DoublePrecisionFloatShaderOps: 1 OutputMergerLogicOp: 1 MinPrecisionSupport: 2 TiledResourcesTier: 4 ResourceBindingTier: 3 PSSpecifiedStencilRefSupported: 0 TypedUAVLoadAdditionalFormats: 1 ROVsSupported: 1 ConservativeRasterizationTier: 3 MaxGPUVirtualAddressBitsPerResource: 40 StandardSwizzle64KBSupported: 0 CrossNodeSharingTier: 0 CrossAdapterRowMajorTextureSupported: 0 VPAndRTArrayIndexFromAnyShaderFeedingRasterizerSupportedWithoutGSEmulation: 1 ResourceHeapTier: 2 NotZeroedPools: 1 UMA: 0 UnalignedBlockTextures: 1}
+API                            	d3d12
+GPU Driver Version             	32.0.16.1074
+GPU Driver Package Version     	610.74
+GPU Dedicated Video Memory     	16048 MB
+					Render 0:00:01:715
+
+Libs: Network, Sequences, MouseTrackWin, DumbAI, MapGen, Paradox, TriggersAndEvents, Notifications, Research, Resources, Tutorial, Objectives 
+
+					Render 0:00:01:949
+
+Platform: desktop, editor, goldmaster, paradox, pc, steam
+
+					Render 0:00:02:917
+*** audio info
+Audio Endpoint                 	Speakers (Razer Leviathan V2)
+Lua revision: 403908
+Assets revision: 33006
+Steam AppID: 3215050
+Build version: 1.1.0.403908
+Build branch:  Release
+						Lua 0:00:16:423
+Account storage loaded successfully in 2 ms
+						Lua 0:00:16:424
+DLC norman loaded, lua revision 403908, assets revision 33006
+DLC thomas loaded, lua revision 403908, assets revision 33006
+						Lua 0:00:16:428
+[mod] Loaded mod def Community Fix Pack — Test Kit (id SMR_CommunityFixPackTestKit, v0.00-001) unpacked from appdata
+[mod] Loaded mod def TEMPORARY - Linux NVIDIA 580 Crash Workaround (id SMR_FR1TempWorkaround, v0.00-003) unpacked from appdata
+[mod] Loaded mod def Relaunched Fix Pack: Opt-In Modules (id SMR_CommunityOptInPack, v1.00-000) unpacked from appdata
+[mod] Loaded mod def Relaunched Fix Pack (id SMR_CommunityFixPack, v1.00-011) unpacked from appdata
+						Lua 0:00:16:828
+[mod] [SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+[mod] [SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[mod] [SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+[SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+						Lua 0:00:16:833
+[mod] [SMRTest][carry] fixture-carry dump available — run SMRTest.FixtureCarry()
+						Lua 0:00:16:834
+[mod] [CommunityFixPack] NightShiftWork: applied
+[mod] [CommunityFixPack] WispRewards: applied
+[mod] [CommunityFixPack] TrainsToVoid: applied
+[mod] [CommunityFixPack] LanderEmptyLaunch: applied
+[mod] [CommunityFixPack] ShelterReflex: applied
+[mod] [CommunityFixPack] BrokenTrackSalvage: applied
+[mod] [CommunityFixPack] TrackSalvageWipe: applied
+[mod] [CommunityFixPack] LakeEntombment: applied
+						Lua 0:00:16:835
+[mod] [CommunityFixPack] RocketDroneChurn: applied
+[mod] [CommunityFixPack] TradeRocketFuelRefresh: applied
+[mod] [CommunityFixPack] ShuttleTransportCache: applied
+[mod] [CommunityFixPack] VacuumWalks: applied
+[mod] [CommunityFixPack] ArrivalDeaths: applied
+[mod] [CommunityFixPack] StaleReservations: applied
+[mod] [CommunityFixPack] CrystalMysteryHang: applied
+[mod] [CommunityFixPack] DomeOverviewHighlight: applied
+						Lua 0:00:16:836
+[mod] [CommunityFixPack] TrainCargoDumping: applied
+[mod] [CommunityFixPack] DestroyedTunnels: applied
+[mod] [CommunityFixPack] DustSicknessBiorobots: applied
+[mod] [CommunityFixPack] GeneForging: applied
+[mod] [CommunityFixPack] MirrorSphereSite: applied
+[mod] [CommunityFixPack] PayloadTemplateRefill: applied
+[mod] [CommunityFixPack] ShuttleHubOffAvailable: applied
+[mod] [CommunityFixPack] FreedHousingNotice: applied
+[mod] [CommunityFixPack] LandscapeUnitFilter: applied
+						Lua 0:00:16:837
+[mod] [CommunityFixPack] RocketInteractGuard: applied
+						Lua 0:00:16:838
+[mod] [CommunityFixPack] TrackConnectorPingPong: applied
+[mod] [CommunityFixPack] TrackTunnelPowerBridge: applied
+[mod] [CommunityFixPack] GraphConsumedCaption: applied
+[mod] [CommunityFixPack] TrainWaitTime: applied
+[mod] [CommunityFixPack] FounderTraitNotification: applied
+[mod] [CommunityFixPack] SequenceLatents: applied
+[mod] [CommunityFixPack] TrackSalvageRefund: applied
+[mod] [CommunityFixPack] DroneTransportMinors: applied
+[mod] [CommunityFixPack] ScanDowngrade: applied
+						Lua 0:00:16:839
+[mod] [CommunityFixPack] BombardmentSpread: applied
+[mod] [CommunityFixPack] ExtenderFlapChurn: applied
+[mod] [CommunityFixPack] SaintBlessing: applied
+[mod] [CommunityFixPack] SinkholeIndestructible: applied
+[mod] [CommunityFixPack] ExoticDepositSign: applied
+[mod] [CommunityFixPack] JumboCaveReinforcementWedge: applied
+[mod] [CommunityFixPack] SilentHitMomentFX: applied
+						Lua 0:00:16:840
+[mod] [CommunityFixPack] CloggedBuildingRelease: applied
+[mod] [CommunityFixPack] FactionDomeSizeGate: applied
+[mod] [CommunityFixPack] BuildingCodesPrefab: applied
+[mod] [CommunityFixPack] SaveSanitizer: applied
+						Lua 0:00:16:841
+[mod] [CommunityOptInPack] ClassicRockets: applied
+[mod] [CommunityOptInPack] AcknowledgedWarnings: applied
+[mod] [CommunityOptInPack] ResidencyControl: applied
+[mod] [CommunityOptInPack] MultipleSuns: applied
+[mod] [CommunityOptInPack] DroneOverhaul: applied
+						Lua 0:00:16:842
+[mod] [CommunityOptInPack] CohortHousing: applied
+[mod] [CommunityOptInPack] NoHomeless: self-check targets Community but Workforce declares HasFreeWorkplacesAround — authoring error, not a game update (FIX_POLICY §2)
+[mod] [CommunityOptInPack] NoHomeless: inactive (Community.HasFreeWorkplacesAround not found — expected on the FIRST load pass and NOT a game update: this check names Community while Workforce declares the method (authoring error — see the preceding line), and mod code loads before the class hierarchy is built, so the module applies cleanly on the second pass. If no 'NoHomeless: applied' line follows this one, the method is genuinely gone — without it a flagged dome could never be staffed)
+[mod] [CommunityOptInPack] DroneStatDials: applied
+						Lua 0:00:17:615
+[mod] [CommunityFixPack] SaintBlessing: inactive (no dome-colonists trait presets)
+[mod] [CommunityFixPack] SinkholeIndestructible: the St. Elmo's Fire sinkhole is now indestructible, like every other mystery set-piece
+						Lua 0:00:17:705
+Reloading done in 1277 ms
+						Lua 0:00:17:706
+Available DLCs: norman(Feeding the Future),thomas(Interplanetary Codex) 
+						Lua 0:00:18:142
+[preset] Preset postprocess took 159 ms.
+						Lua 0:00:18:193
+482 / 482 particle streams loaded in 44 ms.
+						Lua 0:00:18:194
+5 / 5 particle streams loaded in 1 ms.
+						Lua 0:00:18:196
+[mod] [CommunityFixPack] SilentHitMomentFX: registered 11 missing animation-moment preset(s)
+[mod] [CommunityFixPack] FactionDomeSizeGate: 7 faction dislike(s) now wait for 10 colonists in a dome
+[mod] [CommunityOptInPack] MultipleSuns: BuildingTemplates.ArtificialSun not found — build limit NOT lifted (binding fix still active)
+						Lua 0:00:18:405
+[mod] [CommunityFixPack] SaintBlessing: the shipped code resolves the trait label itself — data left untouched; save re-base armed for 1 preset(s) of 2
+[mod] [CommunityOptInPack] MultipleSuns: Artificial Sun build-once limit lifted
+						Lua 0:00:18:538
+[mod] Loaded mod items for: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack, SMR_CommunityOptInPack
+[mod] [CommunityOptInPack] NoHomeless: applied
+						Lua 0:00:19:256
+[PdxSDK] Started up. Took 991
+						Lua 0:00:19:665
+[Braze] SessionStart error The server name or address could not be resolved
+
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:19:773
+[Braze] SessionStart error The server name or address could not be resolved
+
+						Lua 0:00:19:774
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:21:116
+Load Game: 
+	lua_revision: 403908 (last saved with) 
+	orig_lua_revision: 403908 (created with) 
+	assets_revision: 33006 
+
+	dlcs: norman, thomas 
+						Lua 0:00:21:121
+*** Reloading assets from folder 'BinAssets/'
+						Lua 0:00:23:625
+*** Assets reloaded in 2.5 s, read 359.3 MB, read speed 143.5 MB/s, average read 8137 bytes.
+						Lua 0:00:28:213
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:28:223
+[mod] [CommunityFixPack] ExoticDepositSign: 1 Exotic Minerals deposit(s) re-signed onto the clean entity
+						Lua 0:00:28:224
+[mod] [CommunityFixPack] SilentHitMomentFX: restored 2 missing hit-moment tracker(s) on load
+						Lua 0:00:28:787
+game_settings:
+    sponsor: Japan
+    profile: citymayor
+    founding_faction: WorkersParty
+    rival_colonies: Roscosmos, CNSA, NewArk, SpaceY
+    mystery_random: 
+    game_rules: (none)
+more_game_settings: save_game_id: 55afqP8zZV1vEYMb, mystery: MirrorSphereMystery, coordinates: 2N176E, landing_spot: ElysiumBeta, logo: Japan
+map_conditions: altitude: -2776, temperature: -15, cold_wave: 36, dust_devils: 47, dust_storm: 0, meteors: 73
+map_resources: concrete: 254, metals: 146, precious_metals: 146, water: 109
+						Lua 0:00:28:888
+[mod] [CommunityFixPack] SaveSanitizer: F95 astrogeologist-residue pass removed 0 modifier(s), left 0 unidentified
+						Lua 0:00:28:898
+[mod] [CommunityFixPack] SaveSanitizer: F48 repaired TrackBase#5804 — 2 element(s), connections 4 -> 2, duplicate node_idx 0 -> 0
+						Lua 0:00:28:901
+[mod] [CommunityFixPack] SaveSanitizer: F48 station-connector pass repaired 1 of 11 track(s) walked (0 raised)
+						Lua 0:00:28:904
+Game Loaded in 7788 ms
+						Lua 0:00:28:940
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:29:790
+Game loaded on map BlankBig_04 in 8793 ms
+[mod] [C92READ] LOAD OK
+						Lua 0:00:32:095
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:44:789
+[mod] [C92READ] BUILD 1.1.0.403908 LuaRevision=403908
+[mod] [C92READ] SAVE day=490 sponsor=Japan points=3
+[mod] [C92READ] ACCOUNT achievement=true
+[mod] [C92READ] MOD SMR_CommunityFixPackTestKit
+[mod] [C92READ] MOD SMR_CommunityFixPack
+[mod] [C92READ] MOD SMR_CommunityOptInPack
+						Lua 0:00:44:790
+[mod] [C92READ] GROUP Habitation researched=true
+[mod] [C92READ] GROUP Hi-Tech researched=true
+[mod] [C92READ] GROUP Industry researched=true
+[mod] [C92READ] GROUP Logistics researched=true
+[mod] [C92READ] GROUP MegaProjects researched=true
+[mod] [C92READ] GROUP Society researched=true
+[mod] [C92READ] TECH MartianCopyrithgts cluster=Pride state=researched researched=true raw=true times=1 repeatable=true obsolete=false unknown=false default_state=enabled connections=3 can_research=true can_unhide=true condition=true save_in=
+[mod] [C92READ] TECH MartianPatents cluster=Society_1 state=researched researched=true raw=true times=1 repeatable=true obsolete=false unknown=false default_state=enabled connections=2 can_research=true can_unhide=true condition=true save_in=
+[mod] [C92READ] GROUP Space researched=true
+[mod] [C92READ] GROUP Sustainability researched=true
+[mod] [C92READ] GROUP Underground researched=false
+[mod] [C92READ] TECH UndergroundExploitation cluster=Underground_1 state=hidden researched=false raw=nil times=nil repeatable=false obsolete=false unknown=true default_state=hidden connections=0 can_research=false can_unhide=false condition=true save_in=
+[mod] [C92READ] ALL false
+[mod] [C92READ] OPTION exclude_repeatables all=false (read-only predicate comparison)
+[mod] [C92READ] OPTION exclude_orphan all=true (read-only predicate comparison)
+[mod] [C92READ] REPEATABLE GlobalSupport cluster=Breakthroughs group=Breakthroughs base=true override=false
+[mod] [C92READ] REPEATABLE MarsMarketing cluster=Breakthroughs group=Breakthroughs base=true override=false
+						Lua 0:00:44:791
+[mod] [C92READ] REPEATABLE SolExploration cluster=Mysteries group=Special base=true override=false
+[mod] [C92READ] REPEATABLE MartianCopyrithgts cluster=Pride group=Society base=true override=false
+[mod] [C92READ] REPEATABLE MartianPatents cluster=Society_1 group=Society base=true override=false
+[mod] [C92READ] CENSUS ok=true result=nil
+[mod] [C92READ] DONE
+						Lua 0:00:45:790
+
+
+Stopping the game threads from the Lua side with exit code 0.
+
+					Render 0:00:45:796
+
+
+Stopping the game threads after receiving WM_QUIT.
+
+					Render 0:00:46:156
+
+
+*** Debug::Done()
+Time (ms)	46156
+
+
