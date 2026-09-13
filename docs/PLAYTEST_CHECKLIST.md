@@ -867,6 +867,12 @@ patch, and they asked us to carry the fix meanwhile.
     status only *after* apply returns, so a legitimate live re-apply calls the pass while the previous status is
     still inactive. Any implementation must also define reset/retry behaviour rather than treating a once-true
     flag as an everlasting success verdict. ⚠️ **Nothing is built.** This authorises the shape, not a ship.
+  - ✅ **RULED 2026-09-12 — v10 CARRIES C90.** The owner pulled the build forward onto the launch path and
+    asked for a prompt: `agent/prompts/C90_GUARDS_BUILD.md` (one-off, `git rm` when fired). Scope is
+    unchanged — the two modules only. ⛔ It ships **unexercised**: the guard cannot fire on a healthy 1.1.0
+    install, where no target is missing, so the honest status is `fixed` on desk evidence and **never**
+    `tested-attended` (the ck130 Saint-heal precedent). C90 gets **no public row** — our own bug, invisible
+    to players — but it is v10's **fifth** changed module, after the three fixes and hardening row 3.
 - **C91 — the game leaks the Building Codes maintenance change on repeal** (`agent/bugs/C91.md`). Repeal the
   law and every building it touched keeps the maintenance change; the developers clearly know, because they
   shipped a one-time save cleanup for it rather than fixing repeal. **Good material for the developer
