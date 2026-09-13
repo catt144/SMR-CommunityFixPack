@@ -24,6 +24,7 @@ IGNORE = [
     "*/Source/*",
     "*/SourceData/*",
     "*/docs/*",
+    "*/.agents/*",
     "*/.claude/*",
     "*/tools/*",
     "*README.md",

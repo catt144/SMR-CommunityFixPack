@@ -258,6 +258,7 @@ return PlaceObj('ModDef', {
 		"*/Source/*",
 		"*/SourceData/*",
 		"*/docs/*",
+		"*/.agents/*",
 		"*/.claude/*",
 		"*/tools/*",
 		"*README.md",
