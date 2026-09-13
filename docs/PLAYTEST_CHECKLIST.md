@@ -154,6 +154,11 @@ ways or even suggestions we missed via model blindness."* The manifest now separ
 which is a default any build link may depart from with a stated reason**; every build report carries DEPARTURES and
 SUGGESTIONS sections, questions are a first-class move, and the judge weighs departures on evidence, not conformance.
 
+**Seats (Codex), your fifth ruling, on the difficulty read 01=7 · P1=5 · P2=4 · P3=7 · P4=6 · P5=8 · 07=4:**
+**Astra** on 01 (xhigh), P3 (xhigh) and P5 (max); **Sol** on the 03A coordinator (xhigh or max), P1/P2/P4 and 07
+(high). Load-bearing: 01 alone poisons the chain (a wrong core contract or `ConsoleEnabled` hook kills at 02);
+everything else is contained to its own page.
+
 ### ✅ 2026-09-13 — 174 RULED: a fired one-off leaves the prompts map entirely
 <!-- ck:174 status:ruled owner:no -->
 

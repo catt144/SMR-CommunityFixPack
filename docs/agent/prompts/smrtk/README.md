@@ -34,11 +34,11 @@ contract). Authoring mechanics: `agent/WORKFLOW.md` "Authoring a prompt" element
 
 | # | file | model | owner needed? | what it drains |
 |---|---|---|---|---|
-| 01 | `01_SKELETON_BUILD_codex.md` | **Codex / Astra** | no | job 0 re-validates this Claude-authored cut (a cross-vendor read of the plan); core (slot engine, logger, ring buffer, taint assert, `ConsoleEnabled` arm), the panel frame (status strip, top row, tabs), MARK / Copy / Flush / cls / eligibility; predictions + 02's script |
+| 01 | `01_SKELETON_BUILD_codex.md` | **Codex — Astra, xhigh** (difficulty 7; the chain's load-bearing leg) | no | job 0 re-validates this Claude-authored cut (a cross-vendor read of the plan); core (slot engine, logger, ring buffer, taint assert, `ConsoleEnabled` arm), the panel frame (status strip, top row, tabs), MARK / Copy / Flush / cls / eligibility; predictions + 02's script |
 | 02 | `02_SKELETON_SITTING_owner.md` | Claude attending (attended) | ✅ keyboard, ~20–30 min | ⛔ KILL GATE: no taint after a leaf action, console hotkey with the Mod Manager CLOSED, the console tap sees prints, clipboard copy pastes, panel survives a load |
-| 03A | `03A_PAGES_FANOUT_codex.md` | **Codex / Astra** (top tier on P5) | no | the spike (shared UI-hook techniques, once), then the five payloads below as parallel subagents; gates per result; commit per file; a numbered-claims report |
+| 03A | `03A_PAGES_FANOUT_codex.md` | **Codex — Sol, xhigh or max** as coordinator; payload seats below | no | the spike (shared UI-hook techniques, once), then the five payloads below as parallel subagents; gates per result; commit per file; a numbered-claims report |
 | 03B | `03B_JUDGE_claude.md` | **Claude** (Opus) | no | re-runs every gate, samples routes against the facts, checks the shared techniques were shared, enumerates idle patches, consolidates every owner item into ONE ck175 append; PASS / PASS WITH FIXES / RE-FIRE |
-| 07 | `07_DOCS_AND_SITTING_PREP_codex.md` | **Codex / Astra** | no | WORKFLOW + PLAYTEST_HELP + TestKit README; `perma/SMRTK_SLOTS.md` (how an agent pre-loads a sitting); predictions + 08's script |
+| 07 | `07_DOCS_AND_SITTING_PREP_codex.md` | **Codex — Sol, high** | no | WORKFLOW + PLAYTEST_HELP + TestKit README; `perma/SMRTK_SLOTS.md` (how an agent pre-loads a sitting); predictions + 08's script |
 | 08 | `08_FULL_SITTING_owner.md` | Claude attending (attended) | ✅ keyboard, 07 prices it | the full attended leg: every page, every button class, a stamp, a save/load round trip, a trigger firing |
 | 99 | `99_AUDIT_fable.md` | Fable | ✅ raises | terminal adversarial audit: the taint invariant re-derived against the ARCHIVED log, every action's route read for `NetSyncEvent`/`LogCheatUsed`, tag coverage, idle invariant, the 03A/03B cross-vendor split adjudicated, falsifiers RED, verdict, folder-empty gate, kickoff lines |
 
@@ -52,10 +52,16 @@ contract). Authoring mechanics: `agent/WORKFLOW.md` "Authoring a prompt" element
 | P4 | `P4_SAVES_KIT.md` | `75_SMRTK_Saves.lua` + `76_SMRTK_Kit.lua`: slots A/B/C with the session-id guard, provenance; RunAll / run-one-probe, logger toggles, log tail, error counter, fingerprint, dump, snapshot + diff, watch-a-field, force-open console |
 | P5 | `P5_STAMPER.md` | `77_SMRTK_Stamper.lua` + `Layouts/`: the format contract, capture → clipboard, ordered replay, fit check, grids, then state |
 
+**Payload seats (owner, 2026-09-13), by the authoring session's difficulty read (1–10):** P1 World (5) **Sol, high** ·
+P2 Infopanel (4 with the spike) **Sol, high** · P3 Agent (7) **Astra, xhigh** · P4 Saves+Kit (6) **Sol, high** ·
+P5 Stamper (8) **Astra, max**. Poison map: 01 fails ⇒ the chain kills at 02; the spike fails ⇒ P2/P3 build on the
+fallback; any one payload fails ⇒ that page is missing and the other four ship; 07 fails ⇒ only the owner's
+sitting script is bad, re-fire before they sit.
+
 Model placement — **Codex builds, Claude judges** (owner, 2026-09-13: *"if claude is going to do most of the build
 codex should do that audit or flip it to codex doing most of the build"* — flipped). Every build link (01, 03A, 07)
-is Codex / Astra, with Codex's top tier on P5 (the capture format is a contract every future layout depends on);
-every check (03B, 99) is Claude, Fable on 99; the two sittings are attended by Claude so the non-building vendor
+is Codex, seated by the owner as the queue and the payload line above say — Astra on the three difficulty-7/8 legs
+(01, P3, P5), Sol on the rest; every check (03B, 99) is Claude, Fable on 99; the two sittings are attended by Claude so the non-building vendor
 scores the builder's predictions. 01 inherits the contract from this README and `EF-095`–`EF-099`, and **its job 0
 re-validates a Claude-authored cut** — the first cross-vendor check happens before any code exists — with authority
 to rewrite any unconsumed link (route a disagreement to ck175 rather than absorb it). The judge pair is standing, not
