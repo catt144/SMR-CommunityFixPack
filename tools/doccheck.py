@@ -38,6 +38,7 @@ import os
 import re
 import subprocess
 import sys
+import time
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TESTKIT = os.environ.get("SMR_TESTKIT", r"C:\Dev\SMR-BugFixPack-TestKit")
@@ -1603,6 +1604,28 @@ def module_set_agreement(out):
     return ok
 
 
+def required_selftest(filename, out):
+    """Repo-local falsifiers need no game tree; missing/broken is always RED."""
+    label = filename.removesuffix(".py")
+    tool = os.path.join(REPO, "tools", filename)
+    started = time.perf_counter()
+    try:
+        p = subprocess.run([sys.executable, tool], capture_output=True,
+                           text=True, encoding="utf-8", errors="replace", timeout=60)
+    except Exception as exc:
+        out.append("%s: RED — could not run (%s)" % (label, exc))
+        return False
+    elapsed = time.perf_counter() - started
+    if p.returncode == 0:
+        out.append("%s: PASS (%.3f s)" % (label, elapsed))
+        return True
+    out.append("%s: RED — FAILED (exit %d, %.3f s). Full output:"
+               % (label, p.returncode, elapsed))
+    out.extend("         " + line for stream in (p.stdout, p.stderr)
+               for line in (stream or "").splitlines())
+    return False
+
+
 def flpk_selftest(out):
     """Run flpk_extract.py's falsifier as a gate, for the reason it exists.
 
@@ -1840,6 +1863,8 @@ def main():
     ok = pack_ignore_parity(out) and ok
     ok = flpk_selftest(out) and ok
     ok = bodycheck_selftest(out) and ok
+    ok = required_selftest("ck170_selftest.py", out) and ok
+    ok = required_selftest("repair_pass_selftest.py", out) and ok
     push_set_report(out)   # report-only: the budget is the owner's to act on
     testkit_tree(out)  # report-only by owner decision (2026-08-04) — never gates
     alias_gate(out)    # report-only, same standing as testkit_tree
