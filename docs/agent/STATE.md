@@ -75,17 +75,15 @@ Module lists are gated by `tools/doccheck.py` MODULE SETS + `tools/upload_prefli
   `items.lua` entry (doccheck MODULE SETS) + one boot `applied` log + doccheck counts. ⛔ Never quote `FIX_POLICY` §3a's per-module
   cost for a single added fix — run B / lens sweep / audit return only for a **major overhaul**.
 - ⚖️ A vendor patch note saying "Fixed" is a **CLAIM, false until we confirm it** (owner, 09-08).
-- Both-mods-loaded is the rig's normal config (08-12).
-- Status words: `tested-attended`/`tested-unattended`; bare `tested` = legacy, closed to new work, never bulk-
-  upgraded (08-15). Screen claims need an attended witness.
-- ⛔ **Replies to players are PULL-ONLY (09-12, ck165; `WORKFLOW.md` rule 5b).** Never draft one unasked, never put
-  one on the owner's owed list, never nudge a waiting `DRAFT`, never gate work on one. ✅ Triage into `bugs/` UNAFFECTED.
+- Both-mods rig rule (08-12): `WORKFLOW.md` § BOTH MODS LOADED.
+- Status/attendance protocol (08-15): `WORKFLOW.md` § Testing checklist per fix, step 5.
+- Player replies rule (09-12, ck165): `WORKFLOW.md` rule 5b.
 - ⛔ SKIPs BY NAME, never a total.
 - Display name Relaunched Fix Pack; `id` + `[CommunityFixPack]` log tag KEPT (08-17).
 - Never name fredware's mod on a player surface; no player load-order advice (`EF-054`, FIX_POLICY §8).
-- STATE.md format: most efficient and safest — one fact per line, byte caps do the read job (08-18, item 42).
-- ck118 (09-08): every module carrying a 1.1.0 body MUST decline on 1.0.7 by a behaviour test, never a label
-  (`FIX_POLICY` §2a). 1.0.7 players are served by the frozen v5 GitHub build (`v5-game-1.0.7`), linked from card + site.
+- STATE format (08-18, item 42): `prompts/perma/STATE_EVICTION.md` § Formatting.
+- Branch guards (09-08, ck118): `FIX_POLICY.md` §2a.
+- 1.0.7 players are served by the frozen v5 GitHub build (`v5-game-1.0.7`), linked from card + site.
 - ⛔ Every upload OVERWRITES both page bodies from `metadata.lua`; `description` IS the full card (08-24).
   `UPLOAD_WORKFLOW` §3 paste backups stay REQUIRED every cycle. Auto-fill is CLOSED (ck155, never re-ask).
 
