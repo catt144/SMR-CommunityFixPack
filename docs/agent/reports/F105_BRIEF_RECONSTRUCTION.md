@@ -459,7 +459,7 @@ build the shape it names and nothing else.
 because the ground moved is the correct outcome, not a failure to finish.
 
 **If you do build (72 answered only):** post-release cost rules apply — an
-`items.lua` entry (`H-10` — a module absent from `items.lua` **ships absent**),
+`items.lua` entry (`module-list gate (tools/doccheck.py MODULE SETS + tools/upload_preflight.py)` — a module absent from `items.lua` **ships absent**),
 one boot `applied` line, doccheck counts. ⛔ Never quote `FIX_POLICY` §3a's
 per-module cost for a single added fix (owner 2026-08-20, checklist 57).
 

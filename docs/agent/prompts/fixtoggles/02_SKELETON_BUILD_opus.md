@@ -18,7 +18,7 @@ Link 02 of `fixtoggles`. README binding rules 1–18 are yours. Staleness: `git 
    switch the converted one, persist, and be reachable by mouse AND gamepad by construction (spec §1e). Own look is
    07's job; the stub may be plain.
 5. **`items.lua` / `metadata.lua`** only as the chosen route requires (option items + `default_options` for the Mod
-   Options route — `name` == Register id == `default_options` key; H-10). ⛔ Never `version` (H-02).
+   Options route — `name` == Register id == `default_options` key; module-list gate (tools/doccheck.py MODULE SETS + tools/upload_preflight.py)). ⛔ Never `version` (editor/version rail (agent/prompts/perma/RELEASE.md § Release rails)).
 6. **Desk harness** `tools/desk_toggles.py`, registered in `tools/deskbench.py`: cold boot AND enable-path reload,
    gate on/off on the converted module, persistence round trip, deviation-only storage (change a default, an untouched
    player follows it; a touched player keeps theirs), unconverted modules unaffected. **Every assertion gets a

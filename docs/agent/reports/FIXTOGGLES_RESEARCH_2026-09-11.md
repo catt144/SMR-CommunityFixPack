@@ -155,7 +155,7 @@ instead of the pack; it is a **mitigation, not a detector**.
 - `FIX_POLICY` §7: Mod Options is the one universal (gamepad) surface; every log/console surface is invisible on console.
 - `FIX_POLICY` §3a + `EF-002`: toggles decide behaviour, never persistence. Player text must not promise "off = clean save".
 - `FIX_POLICY` §2 F87: every change works on the enable path (tick at the menu → in-place `ReloadLua`) and cold boot.
-- `STATE` H-02/H-03/H-10: no Mod Editor, no `version`, no portal API; `items.lua` is the source of `metadata.lua`'s code
+- `STATE` H-03 + editor/version rail (agent/prompts/perma/RELEASE.md § Release rails) + module-list gate (tools/doccheck.py MODULE SETS + tools/upload_preflight.py): no Mod Editor, no `version`, no portal API; `items.lua` is the source of `metadata.lua`'s code
   list (and, for Mod Options, of the option items — `ModItemOptionToggle.name` == Register id == `default_options` key,
   `FIX_POLICY` §5 `:600-602`).
 - Status vocabulary `tested-attended`/`tested-unattended`; "Fixed" is a claim until confirmed (owner, 2026-09-08).

@@ -94,7 +94,7 @@ patched at runtime; no game files are modified). The map is `docs/README.md`.
 - **Close cases completely.** "Refuted" requires the condition was SAMPLED, not
   that a count happened to be zero. Don't pre-decline a cheap confirmation.
 - **Post-launch is patch-note maintenance, NOT the pre-release gate** (owner
-  ruling). A single added/changed fix costs an `items.lua` entry (H-10), one boot
+  ruling). A single added/changed fix costs an `items.lua` entry (module-list gate (tools/doccheck.py MODULE SETS + tools/upload_preflight.py)), one boot
   `applied` line, and doccheck counts — never quote `FIX_POLICY` §3a's per-module
   gate cost; run B / lens sweep / audit return only for a **major overhaul**.
 - **Design-flavoured calls go to the OWNER, not into an agent doc.** "Is this a

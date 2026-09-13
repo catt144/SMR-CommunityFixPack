@@ -231,8 +231,8 @@ it the moment a 1.0.7 branch exists** (decision 98).
 ## 5 · What this tier does NOT do
 
 ⛔ It does not decide whether any fix is retired. ⛔ It does not touch
-`items.lua` (no module is added, renamed or dropped, so `H-10` is not engaged).
-⛔ It does not bump `version` and no agent opens the Mod Editor (`H-02`).
+`items.lua` (no module is added, renamed or dropped, so `module-list gate (tools/doccheck.py MODULE SETS + tools/upload_preflight.py)` is not engaged).
+⛔ It does not bump `version` and no agent opens the Mod Editor (`editor/version rail (agent/prompts/perma/RELEASE.md § Release rails)`).
 ⛔ It does not re-upload: three gated modules do not justify a release cycle,
 and shipping on a two-probe audit is the expensive mistake `GAME_1_1_0_IMPACT`
 §5 warns about. The build brief is `prompts/SAFETY_FIRST_FIXES.md`.

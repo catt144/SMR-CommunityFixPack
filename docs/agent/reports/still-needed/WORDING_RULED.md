@@ -14,7 +14,7 @@ the two differ. Rulings by the owner, 2026-09-12, in `smr-bugfixpack-d0`:
   (no `ChangeComfort` in `:665-700`). The Comfort claim goes; the fix does not.
 - **F31 RETIRES.** ✅ Ruled by the owner **2026-09-12** (checklist 159 (1)) on the deep
   audit's RETIRE verdict (`reports/SURFACE_AUDIT_2026-09-12.md` §2 C1–C6). Was HELD for
-  that audit; the hold is discharged. Module out under H-10, row and headline off, count
+  that audit; the hold is discharged. Module out under module-list gate (tools/doccheck.py MODULE SETS + tools/upload_preflight.py), row and headline off, count
   word to **Forty-six**. See item 13 below.
 - **F37's load-time clean-up is not rehomed.** ✅ Ruled 2026-09-12 (checklist 159 (2)):
   accept the loss; it does **not** move into `90_SaveSanitizer.lua`.
@@ -164,7 +164,7 @@ lines quoted change; everything else in the row stays.
 
 ### 13 · F31 cave-in on a missing map (`:561`) — ✅ **RETIRE** (owner, 2026-09-12)
 - **No replacement text.** The row at `:561-570` comes **off**, and the card's
-  stopped-story headline bullet comes off all five copies. Module out under H-10
+  stopped-story headline bullet comes off all five copies. Module out under module-list gate (tools/doccheck.py MODULE SETS + tools/upload_preflight.py)
   (`items.lua` entry), and the TestKit's `AnomalyCaveInMap`
   (`50_Probes_Wave5.lua:400`) plus its `64_Probes_Wave14.lua` census row retire with it.
 - Why: the deep audit (`reports/SURFACE_AUDIT_2026-09-12.md` §2 C1–C6) found neither

@@ -158,7 +158,7 @@ Everything else in the ruled batch is CONFIRMED as written (§3).
   dated 2026-03-21 (pre-1.1.0, unchanged) declare `MarsAnomalies` only. With no underground map there is no underground
   anomaly or wonder to run a sequence, so no call site executes. The frozen v5 build keeps the module regardless (ck156).
 - **C6 — recommendation: RETIRE.** No guard with a player-visible reach survives; the row tells players a story stopped
-  that no one on either branch could have seen. Module out under H-10 (`items.lua` entry), row `fix-list.md:561-570` and
+  that no one on either branch could have seen. Module out under module-list gate (tools/doccheck.py MODULE SETS + tools/upload_preflight.py) (`items.lua` entry), row `fix-list.md:561-570` and
   the card headline off all five copies, counts re-derived (§4). The kit probe `AnomalyCaveInMap` and the census row
   `64_Probes_Wave14.lua` retire with it. If the owner prefers to keep it as pure insurance for mods, it must then have
   **no public row** — there is no true sentence to write in the voice rule for a symptom nobody can have.

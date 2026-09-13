@@ -56,35 +56,23 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   **F109 PARKED** (entry has it) · **F60** RETIRED 09-11 (ships in v9) · **C55** vanilla pre-sort read · FR-2/FR-3 OPEN.
   ⛔ Do NOT harden `DestroyedRebuild`'s `efVisible` guard; reopen ONLY with the hex's buildings list + mod list + a save.
 
-## Hazards — each names an action an agent could take unattended; never do it
-- **H-01** Tag `fixpack-v1.0.0` marks what actually gets packed. ⛔ Never move it again without an equivalent gate
-  (the attended sitting + the one-time release-gate ruling, ck57).
-- **H-02** ⛔ An agent NEVER opens the Mod Editor and NEVER hand-sets `version`/`version_major`/`version_minor`.
-  Every editor save runs `version = version + 1` (`Mod.lua:967`) and `ValidateModBeforeUpload` force-saves a dirty
-  mod (`GedModEditor.lua:836-844`), so the bump is the SITTING's; a hand-set on top DOUBLE-bumps (ck71, ck75).
-  ✅ Every OTHER hand edit to `metadata.lua` (the `code` list per H-10, `last_changes`, descriptions) is ordinary work.
+## Hazards — moderate harm · universal reach · no machine gate
+Module lists are gated by `tools/doccheck.py` MODULE SETS + `tools/upload_preflight.py` (membership + order).
 - **H-03** No script/console in a launched game may touch a portal API — the FIRST call **creates the listing**
   (`SteamWorkshop.lua:17-22`). Safe: `DbgPackMod`, `tools/upload_preflight.py`. Paradox before Steam.
-- **H-04** ⛔ Never call a FUTURE release ready, and never treat "published" as covering anything the owner has not done.
 - **H-05** Sweep fence: no session reads `prompts/prelaunch-sweep/SWEEP_FINDINGS.md` or the link reports to reach
   a verdict, and neither STATE nor SESSION_LOG ever restates a link verdict — point at the ledger instead.
-- **H-06** `EF-056`: loading a COPY of a campaign still runs that campaign's autosave rotation and **deletes the
-  owner's autosaves** — pre-copy every autosave first.
-- **H-07** Never restore the ~46 parked opt-in references before the opt-in pack launches; that is ITS launch
-  obligation. Verbatim parking: `reports/PARKED_OPTIN_REFERENCES.md`.
 - **H-08** ⛔ Pulling a mod's junction COSTS its enable and restoring the folder does NOT buy it back (`EF-055`);
   recovery = owner tick + restart, never an agent's. ⚠️ The cost lands when the **id vanishes**; a folder-for-
   folder swap under the **same id KEEPS** the enable (the opt-in pack is in that state now, ck43).
 - **H-09** Never stage a packed folder beside a live junction — at equal version the **unpacked one WINS**,
   silently (`Mod.lua:1770`), and the leg measures nothing.
-- **H-10** Never add, rename or drop a `Code/*.lua` module without updating `items.lua` — `SaveDef` rebuilds
-  `metadata.lua`'s `code` list solely from its items (`Mod.lua:816-840`, `:973`) and both portals force that save
-  on a first upload (Steam's BEFORE packing), so a module absent from `items.lua` **ships absent** (ck46).
 
 ## Rules in force (owner rulings; bodies in checklist/SESSION_LOG)
+- **H-04** ⛔ Never call a FUTURE release ready, and never treat "published" as covering anything the owner has not done.
 - Ship line FROZEN (08-12): `fixed` + suite + self-checks + verified save-safety IS the bar.
 - ⛔ The gate was ONE-TIME, not a per-change tax (08-20, item 57). Post-release = patch-note-driven maintenance:
-  `items.lua` entry (H-10) + one boot `applied` log + doccheck counts. ⛔ Never quote `FIX_POLICY` §3a's per-module
+  `items.lua` entry (doccheck MODULE SETS) + one boot `applied` log + doccheck counts. ⛔ Never quote `FIX_POLICY` §3a's per-module
   cost for a single added fix — run B / lens sweep / audit return only for a **major overhaul**.
 - ⚖️ A vendor patch note saying "Fixed" is a **CLAIM, false until we confirm it** (owner, 09-08).
 - Both-mods-loaded is the rig's normal config (08-12).

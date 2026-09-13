@@ -15,7 +15,7 @@ all counts from the final list. Evidence is in the module reports/TRIAGE.
 
 - **F37, :257:** delete the ordinary farm-oxygen row and farm headline if retired.
   Keep the dated defect entry. Delete Code module, items entry and metadata code
-  list together (H-10); adapt local TestKit references without pretending a run.
+  list together (module-list gate (tools/doccheck.py MODULE SETS + tools/upload_preflight.py)); adapt local TestKit references without pretending a run.
   If owner retains legacy/orphan healing, replace the current-game leak account
   with an explicitly historical/conditional guard row and remove the ordinary
   1.1.0 headline. Do not file the unmeasured dying-worker refab window as a defect.

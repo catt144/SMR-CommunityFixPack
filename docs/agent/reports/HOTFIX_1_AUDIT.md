@@ -198,7 +198,7 @@ commit), so it is byte-identical to the shipped v5 file. The full diff against
 v5 is `Fix_AutomationLawCompensation`, `Fix_ExtractorStaffedPerformance`,
 `Fix_LanderCargoRatchet`, `Fix_LandscapeUnitFilter`, `Fix_TrackSalvageWipe`,
 `Fix_TrainCargoDumping` and `metadata.lua`. `items.lua` untouched (no module
-added, H-10 satisfied). The Test Kit's `apply_forced` reproduces `run_apply`'s
+added, module-list gate (tools/doccheck.py MODULE SETS + tools/upload_preflight.py) satisfied). The Test Kit's `apply_forced` reproduces `run_apply`'s
 three branches exactly (error / string → inactive / else active + installed +
 `update_suspect = nil`); no drift today.
 

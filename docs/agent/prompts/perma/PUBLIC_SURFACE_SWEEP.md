@@ -260,10 +260,10 @@ default, so it must stand alone as a page body even though the card replaces it.
   ⚠️ The count word lives here too now. Re-derive it with §1's `grep -c`.
 * **`short_description`** — the PDX-only Summary. Only if the fix changes a
   *claim* (the judgment-call count, a promise about save safety). Most do not.
-* **`code` list** — `H-10`: a module absent from `items.lua` **ships absent**.
+* **`code` list** — `module-list gate (tools/doccheck.py MODULE SETS + tools/upload_preflight.py)`: a module absent from `items.lua` **ships absent**.
   `python tools/upload_preflight.py` proves the two lists match, in order.
 
-⛔ **Version numbers are the sitting's, never yours** (`H-02`). Hand-editing these
+⛔ **Version numbers are the sitting's, never yours** (`editor/version rail (agent/prompts/perma/RELEASE.md § Release rails)`). Hand-editing these
 strings is ordinary agent work; hand-editing `version` is not.
 
 ⚠️ **PACKING IS NOT SAVING — measured 2026-08-24.** After File → Pack Mod the

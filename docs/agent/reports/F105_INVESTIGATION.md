@@ -16,7 +16,7 @@ derivations themselves live in the entries.
 * `Code/Fix_LandscapeCostRefresh.lua` — module 78, guarded delegation on
   `RefreshConstructionResources` installed on the three landscape leaf classes.
 * `items.lua` + `metadata.lua` `code` rows, hand-written in matching positions
-  (H-10). ⚠️ `metadata.lua`'s `version` untouched — no editor save (H-02); the
+  (module-list gate (tools/doccheck.py MODULE SETS + tools/upload_preflight.py)). ⚠️ `metadata.lua`'s `version` untouched — no editor save (editor/version rail (agent/prompts/perma/RELEASE.md § Release rails)); the
   eventual upload sitting owns the bump, and until it runs **the live listings
   are one module behind this tree**.
 * Entry `F105` rewritten to `fixed`; new entry `F106`; `EF-066` sharpened with a

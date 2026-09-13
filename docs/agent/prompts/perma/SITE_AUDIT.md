@@ -22,7 +22,7 @@ every specific against `git log` and the live API before trusting it.
    is the owner's act. You report that a deploy is owed; you do not take it.
 2. **NEVER try to "fix" a live store page by editing the strings** —
    `metadata.lua`'s `description` ships INSIDE the mod and only an upload changes
-   a live page (`H-02`; `RELEASE_PORTAL_PREP.md` §0.5). Repo content in
+   a live page (`editor/version rail (agent/prompts/perma/RELEASE.md § Release rails)`; `RELEASE_PORTAL_PREP.md` §0.5). Repo content in
    `C:\Dev\SMR-CommunityMods\content\` is ordinary editable work; if you edit it,
    say in the report that your edit is **undeployed** until the owner presses the
    button.

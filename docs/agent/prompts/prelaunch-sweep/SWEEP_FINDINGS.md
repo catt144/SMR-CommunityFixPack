@@ -790,7 +790,7 @@ modules register and apply in **≈0.57 s**; the data-patch/heal work completes 
 **≈1.3 s** (`Lua` clock markers, `EF-045`-safe). The pack writes **81 log lines
 at load**, 90 across a session, of a 1,070-line log.
 
-**VL-7 · Positive control on H-02.** The running game reports the pack at
+**VL-7 · Positive control on editor/version rail (agent/prompts/perma/RELEASE.md § Release rails).** The running game reports the pack at
 **1.0.0** (`RainsDeadlock: … version 1.0.0`, where the 08-15 baseline said
 `1.0.1`). `metadata.lua` was never opened and no editor save occurred.
 

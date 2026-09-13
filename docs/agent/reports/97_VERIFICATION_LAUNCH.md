@@ -53,7 +53,7 @@ compared** — its diff against L-B is the answer, not its diff against history.
   → **0 hits**, `doccheck` GREEN, `TESTKIT TREE: clean`.
 - Harness arming: `Code/96_AutoRunFlag.lua` added to the **TestKit's** code list
   for the duration and removed at close-out. ⛔ Nothing is added to `Code/` of
-  the pack under audit, and `metadata.lua` of the pack is not opened (**H-02**).
+  the pack under audit, and `metadata.lua` of the pack is not opened (**editor/version rail (agent/prompts/perma/RELEASE.md § Release rails)**).
 - `EF-056` pre-copy: **2** autosave-tagged files (header `autosave = true`, the
   tag-driven test, not the name) copied to `C:\Dev\_ref\EF056_precopy_20260819_97leg\`,
   **outside** the save directory:
@@ -254,7 +254,7 @@ introspection SKIPs, `AnomalyCaveInMap`, `TechDescriptionBuilding`, and the 6
 - **The pack's non-`applied` line set is identical to the 08-15 baseline**, with
   exactly one difference, and it is the right one: `RainsDeadlock: … version
   1.0.1` then, **`version 1.0.0` now.** ⇒ The running game reports the frozen
-  release version — a positive control on **H-02**.
+  release version — a positive control on **editor/version rail (agent/prompts/perma/RELEASE.md § Release rails)**.
 
 ## R4 · ⛔ THE COST THIS LEG INCURRED, AND IT IS AN OWNER ITEM
 

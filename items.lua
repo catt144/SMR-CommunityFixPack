@@ -200,7 +200,7 @@ return {
 	-- compensation fix would never have loaded for a single player.
 	-- Added 2026-08-20 (close-out chain, link 1 — C51). Written by hand, in the
 	-- same position it takes in `metadata.lua`'s `code` list, per the header
-	-- above and H-10: a module absent from this file SHIPS ABSENT.
+	-- above and module-list gate (tools/doccheck.py MODULE SETS + tools/upload_preflight.py): a module absent from this file SHIPS ABSENT.
 	-- Added 2026-08-20 (close-out chain, link 2 — C50), same rule as above.
 	-- Added 2026-08-24 (F105, post-release maintenance — owner ruling, checklist
 	-- 72), same rule as above: hand-written, in metadata.lua's `code` position.

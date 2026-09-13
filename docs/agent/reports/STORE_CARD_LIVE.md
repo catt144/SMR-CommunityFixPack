@@ -561,7 +561,7 @@ after-every-patch extraction diff (`WORKFLOW.md`) is what produced hotfix 2 (36 
 
 ⚠️ **Length: 6,267 → 6,383 characters (+116).** Both portals accepted 6,267 at v9, and the web
 editor has taken every increase so far; this is the largest single body to date. ⛔ Nothing was
-uploaded — it ships with **v10**, and `version` was not touched (`H-02`).
+uploaded — it ships with **v10**, and `version` was not touched (`editor/version rail (agent/prompts/perma/RELEASE.md § Release rails)`).
 
 ⭐ **No other surface needed changing, and this was checked rather than assumed.** `README.md`
 and the site (`content/faq.md`, `content/for-modders.md` in `SMR-CommunityMods`) already said
@@ -601,7 +601,7 @@ now holds F57a and F29 only. The site's *Under the hood* intro moved with it.
 is byte-identical to `UPLOAD_WORKFLOW.md` §3's plain backup, and this file's BBCode block is
 byte-identical to §3's BBCode backup; this file's plain block differs from the neutral body only
 by the by-design Paradox cross-link paragraph and footer. Length 6,383 → **6,298 characters**
-(two bullets out, one in). ⛔ Nothing uploaded; `version` untouched (`H-02`).
+(two bullets out, one in). ⛔ Nothing uploaded; `version` untouched (`editor/version rail (agent/prompts/perma/RELEASE.md § Release rails)`).
 
 **Twelve fix-list rows re-worded** from `reports/still-needed/WORDING_RULED.md` (items 1, 2, 3, 5,
 6, 7, 8, 9, 10, 11, 12, 14; item 4 F52 held, item 13 F31 is the retirement). ⛔ Those are **not**

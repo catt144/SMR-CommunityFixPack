@@ -94,8 +94,8 @@ accept that instead of a separate authoring session).
 15. **⛔ `Code/` edits only with `Mars.exe` closed** (`tasklist` first, never in the same command). Never stage a packed
     folder beside a live junction (`H-09`).
 16. **⛔ Never move a status you did not witness.** A desk harness is not the game; a source read is never `tested`.
-17. **Bindings in force:** `H-02` (no Mod Editor, no `version` edit, no upload), `H-03`, `H-04`, `H-08`, `H-09`,
-    `H-10` (every module or option item change updates `items.lua`). Owner decisions go to `docs/PLAYTEST_CHECKLIST.md`
+17. **Bindings in force:** `editor/version rail (agent/prompts/perma/RELEASE.md § Release rails)` (no Mod Editor, no `version` edit, no upload), `H-03`, `H-04`, `H-08`, `H-09`,
+    `module-list gate (tools/doccheck.py MODULE SETS + tools/upload_preflight.py)` (every module or option item change updates `items.lua`). Owner decisions go to `docs/PLAYTEST_CHECKLIST.md`
     → "Decisions waiting on you" (append to **148** or take the next free number AT THAT MOMENT), never only here.
 18. **A doccheck WARN goes verbatim into your summary.** STATE.md is byte-capped; measure it (`STATE + STUBS` line),
     never quote a stored number, and evict per `prompts/perma/STATE_EVICTION.md` when adding.

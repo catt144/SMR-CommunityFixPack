@@ -328,7 +328,7 @@ scan of the dump lines. Read by `smr-bugfixpack-5d`. Setup (Q2 `system-state` / 
   414729/414731).
 - **Routed:** scope decision (fix pack / separate opt-in mod / instructions) is the owner's, ck145; if productized, Astra gets a
   round-3 brief (Windows/AMD with Reflections On, a self-gate with no Proton detector per EF-089, Reflections turned On, packed delivery,
-  H-02/H-03/H-10). Dev reply FOLLOW-UP POST 2 drafted (`FR1_DEV_REPLY_2026-09-10.md`).
+  editor/version rail (agent/prompts/perma/RELEASE.md § Release rails) + STATE H-03 + module-list gate (tools/doccheck.py MODULE SETS + tools/upload_preflight.py)). Dev reply FOLLOW-UP POST 2 drafted (`FR1_DEV_REPLY_2026-09-10.md`).
 
 ## 12 · 2026-09-11 — P1: the temporary workaround mod, PACKED, works on the laptop (owner-witnessed)
 

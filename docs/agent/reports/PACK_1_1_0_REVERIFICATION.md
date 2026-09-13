@@ -245,7 +245,7 @@ wrappers were not the safe half: of the 47 pass-3 modules, **19 do nothing on
    Delete the replacement; keep half (b). One boot.
 4. **`FirstAsteroidPrefabs` (F-4) and `AstrogeologistExtractors` (F-5) — the
    two removals that are also harms today.** Each is an `items.lua` +
-   `Code/` deletion (H-10) or, for a 1.0.7 line, a gate.
+   `Code/` deletion (module-list gate (tools/doccheck.py MODULE SETS + tools/upload_preflight.py)) or, for a 1.0.7 line, a gate.
 5. **`RocketDroneChurn` (F-7) and `PayloadTemplateRefill` (F-6) — P3,
    player-visible.** A re-copy each (F-7 is one clause); F-6 touches the new
    tutorial, so gate first, re-copy with a control.

@@ -1393,7 +1393,7 @@ def wrap_targets_check(out):
     return not violations
 
 
-# --- H-10: the three lists that decide what ships -----------------------------
+# --- MODULE SETS + tools/upload_preflight.py: the three lists that decide what ships -----------------------------
 #
 # ⛔ WHY THIS IS RED AND NOT A WARN. `Code/*.lua` is what exists, `items.lua` is
 # the Mod Editor's item list, and `metadata.lua`'s `code` list is the load
@@ -1434,7 +1434,7 @@ def _metadata_code_list(text):
 
 
 def module_set_agreement(out):
-    """Code/*.lua == items.lua == metadata.lua's `code` list, by name (H-10)."""
+    """Code/*.lua == items.lua == metadata.lua's `code` list, by name (MODULE SETS + tools/upload_preflight.py)."""
     names = lua_files(CODE)
     if names is None:
         out.append("MODULE SETS: not checked (Code/ not readable)")
@@ -1468,7 +1468,7 @@ def module_set_agreement(out):
             if not only_a and not only_b:
                 continue
             ok = False
-            out.append("  RED  module sets DISAGREE: %s vs %s (H-10 -- a "
+            out.append("  RED  module sets DISAGREE: %s vs %s (MODULE SETS + tools/upload_preflight.py -- a "
                        "SaveDef rebuilds metadata.lua's code list from "
                        "items.lua on upload, so this decides what ships)"
                        % (a, b))

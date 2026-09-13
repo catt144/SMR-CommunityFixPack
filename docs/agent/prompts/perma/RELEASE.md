@@ -24,6 +24,15 @@ driven by `RELEASE_OUTBOX.md`, which it clears at the end. **Any model.**
 > 🔧 **Updated 2026-09-12:** auto-fill is settled, not tracked (owner, checklist 155) —
 > §2, §3, §4 and §6 record the answer instead of asking for it.
 
+## Release rails
+
+- Tag `fixpack-v1.0.0` marks what actually gets packed. ⛔ Never move it again without an equivalent gate
+  (the attended sitting + the one-time release-gate ruling, ck57).
+- ⛔ An agent NEVER opens the Mod Editor and NEVER hand-sets `version`/`version_major`/`version_minor`.
+  Every editor save runs `version = version + 1` (`Mod.lua:967`) and `ValidateModBeforeUpload` force-saves a dirty
+  mod (`GedModEditor.lua:836-844`), so the bump is the SITTING's; a hand-set on top DOUBLE-bumps (ck71, ck75).
+  ✅ Every OTHER hand edit to `metadata.lua` (the `code` list checked by doccheck MODULE SETS + tools/upload_preflight.py, `last_changes`, descriptions) is ordinary work.
+
 ## 0 · Orient
 1. `git log --oneline -10` + `git pull` + `git status --short` (other sessions commit here).
 2. Read `agent/STATE.md` and `agent/prompts/perma/RELEASE_OUTBOX.md`.
@@ -54,7 +63,7 @@ authority on *which* surfaces and *how*. In short, per pending fix:
   `docs/UPLOAD_WORKFLOW.md` §3 backups (Paradox plain + Steam BBCode). Bump the
   **count word** by the outbox's total count impact in all three.
 - **`metadata.lua` `last_changes`** — rewrite it as THIS version's change note
-  from the pending entries' change-note lines (H-02: never touch `version`).
+  from the pending entries' change-note lines (Release rails above: never touch `version`).
 - **FAQ / judgment-call count** if any pending entry is a judgment call.
 - **Reporters** (`PUBLIC_SURFACE_SWEEP.md` §4, `docs/FIELD_REPORT_REPLIES.md`) —
   any pending entry that answers a field report gets its reply updated.
@@ -63,6 +72,8 @@ and `UPLOAD_WORKFLOW.md` — `grep -oE '[A-Z][a-z]+(-[a-z]+)? repairs'` on all t
 (every hit the same word, and the same number of hits as before the edit), plus the
 site fix-list row count. ⛔ Zero hits anywhere is a FAIL. `doccheck` GREEN. Commit
 ("release words for vNEXT") with `git commit -F <msg> -- <paths>`.
+
+Before the handoff, run `python tools/upload_preflight.py`; any FAIL blocks it.
 
 ## 2 · Agent — hand off, then ⛔ **HOLD. THE RELEASE IS NOT FINISHED HERE.**
 Tell the owner **"ready to upload"** and point them at `UPLOAD_WORKFLOW.md`. Say
@@ -116,7 +127,7 @@ reads are exactly that check.
 
 ⛔⛔ **THE WRITEBACK IS SITTING IN THE WORKING TREE AND IT HAS STRIPPED EVERY COMMENT.**
 Packing rewrites `metadata.lua` and `items.lua` from the Mod Editor's own serialiser:
-`version` auto-bumps (H-02, never chase it), `code_hash` changes, `pdx_version` moves —
+`version` auto-bumps (Release rails above, never chase it), `code_hash` changes, `pdx_version` moves —
 and **all the `--` commentary is gone** (on v10: 319 → 0 and 51 → 0). Restoring it is
 this step's job.
 

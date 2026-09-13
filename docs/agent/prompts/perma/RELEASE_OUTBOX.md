@@ -7,7 +7,7 @@ version ships. It is the single answer to "what is in the next release?" — the
 all come from here. `RELEASE.md` reads it, applies every entry to the surfaces,
 and **clears it** (moves the entries to *Released* below) once the upload is done.
 
-**Live tree version:** `metadata.lua` `version` — read it, never hand-set (H-02).
+**Live tree version:** `metadata.lua` `version` — read it, never hand-set (editor/version rail (agent/prompts/perma/RELEASE.md § Release rails)).
 **Live count word:** whatever `metadata.lua`'s `description` currently says
 (`grep -oE '[A-Z][a-z]+(-[a-z]+)? repairs' metadata.lua` — one hit; zero is a FAIL). Each pending fix that has a
 player surface bumps it by one on release.

@@ -648,8 +648,8 @@ split it across subagents. Rules, binding on every link that fans out:
     or `SMR-SrcArchive\` except a NEW archive folder when a newer build lands.
 11. **⛔ Never move a status you did not witness.** A source read is never
     `tested`; a patch note saying "Fixed" is a claim.
-12. **Bindings in force:** `H-02` (no Mod Editor, no `version` edit, no upload),
-    `H-03`, `H-04`, `H-08`, `H-09`, `H-10`. ⛔ Never "correct" a 1.0.7 citation in
+12. **Bindings in force:** `editor/version rail (agent/prompts/perma/RELEASE.md § Release rails)` (no Mod Editor, no `version` edit, no upload),
+    `H-03`, `H-04`, `H-08`, `H-09`, `module-list gate (tools/doccheck.py MODULE SETS + tools/upload_preflight.py)`. ⛔ Never "correct" a 1.0.7 citation in
     an existing entry (`EF-075`): an entry records a defect in a STATED version.
     Owner decisions go to `docs/PLAYTEST_CHECKLIST.md` → "Decisions waiting on
     you", never only into an agent doc.

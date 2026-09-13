@@ -113,7 +113,7 @@ completed tests move whole to
 > and C89 (a judgment call) I left in the *"… and a good deal more"* tail. Reversing any of that
 > is a one-line edit before you pack.
 >
-> ⚠️ **Nothing is uploaded and `version` was not touched** (`H-02`) — the bump is your sitting's.
+> ⚠️ **Nothing is uploaded and `version` was not touched** (`editor/version rail (agent/prompts/perma/RELEASE.md § Release rails)`) — the bump is your sitting's.
 > Detail and the byte-identity proof for all five card copies: `reports/STORE_CARD_LIVE.md`
 > (2026-09-12 section).
 
@@ -986,7 +986,7 @@ failure from F60's deleted file; it is desk evidence, not release clearance or a
 <!-- ck:159 status:ruled owner:no -->
 
 > ✅ **LANDED 2026-09-12.** All three retirements are in: `Fix_GhostFarmOxygen`, `Fix_LayoutTechLock` and
-> `Fix_AnomalyCaveInMap` are deleted from `Code/`, `items.lua` and `metadata.lua` together (H-10), and the four
+> `Fix_AnomalyCaveInMap` are deleted from `Code/`, `items.lua` and `metadata.lua` together (module-list gate (tools/doccheck.py MODULE SETS + tools/upload_preflight.py)), and the four
 > entries (F37, F43, F118, F31) are restatused. **The tree now reads 47 Code files / 46 registered modules, all
 > three sets agreeing by name.** ⛔ **The count word below ("Forty-six") predates the landing — the release lane
 > re-derives every count from `doccheck --emit-counts` and carries none.** The site row, the card headline and
@@ -994,7 +994,7 @@ failure from F60's deleted file; it is desk evidence, not release clearance or a
 >
 > **What you ruled (2026-09-12), all three as recommended:**
 >
-> 1. **Retire F31 — yes.** Module out (H-10: `items.lua` entry), the site row off, the card headline off, the
+> 1. **Retire F31 — yes.** Module out (module-list gate (tools/doccheck.py MODULE SETS + tools/upload_preflight.py): `items.lua` entry), the site row off, the card headline off, the
 >    count word to **Forty-six**.
 > 2. **F37's load-time clean-up — accept the loss.** It does **not** move into `90_SaveSanitizer.lua`.
 > 3. **All three sentence replacements approved — "3 all" — and the optional fourth (F73) with them.** All four
@@ -1679,7 +1679,7 @@ warn STATE.md is 12991 bytes, warn threshold is 12288 — copy this line VERBATI
 > stale-probe sweep below from the fix-pack repo. Zero hits is clean. Any hit must
 > be named and cleared before a result is recorded. Also confirm there is no
 > packed copy staged beside the live junction (H-09). If a copy of a campaign is
-> used, pre-copy **every** autosave first (H-06).
+> used, pre-copy **every** autosave first (EF-056).
 >
 > ```text
 > grep -rln "TEMPORARY" Code/ ../SMR-BugFixPack-TestKit/Code/
@@ -3453,7 +3453,7 @@ Original question, kept as asked: C74, the Rare Metals Extractor's hammer (and t
 >    poisoned save and never again. If that save is loaded with a build carrying the fix during any intervening
 >    work, the direct evidence is spent — you would still see the end state, but not the proof the re-base
 >    produced it. ⇒ **do not load that save until the sitting.** 04/04b run nothing in a game, so this should not
->    come up on its own. ⛔ Do NOT copy the save as insurance — `H-06`: loading a copy of a campaign runs that
+>    come up on its own. ⛔ Do NOT copy the save as insurance — `EF-056`: loading a copy of a campaign runs that
 >    campaign's autosave rotation and deletes your autosaves.
 >
 > **What was built** (`3db4984`, `f38d6d2`, `19b5aaa`). All three modules survive a 1.1.0 boot and all three were
@@ -3663,7 +3663,7 @@ Original question, kept as asked: C74, the Rare Metals Extractor's hammer (and t
 > current patch period."* ⇒ the 36 modules 1.1.0 made redundant are **deleted outright**, not carried behind
 > per-module gates. This was the chain's blocking decision and it is now discharged.
 > * **Done the same session** (`2dc1dbe`): 36 `Code/*.lua` files deleted, with `items.lua` and `metadata.lua`'s
->   `code` list brought to the same state — 81 → **45** in all three, which is what `H-10` exists to protect.
+>   `code` list brought to the same state — 81 → **45** in all three, which is what `module-list gate (tools/doccheck.py MODULE SETS + tools/upload_preflight.py)` exists to protect.
 >   `doccheck --emit-counts` GREEN, modules 80 → **44** registered.
 > * **Every row was re-derived against the shipped 1.1.0 body before its file was deleted**, rather than
 >   inherited from the report. **37 rows, ZERO flips.** One needed a second look and the record was right, not
@@ -3900,7 +3900,7 @@ Original question, kept as asked: C74, the Rare Metals Extractor's hammer (and t
 > explicit note about the body-rewrite case, and `README.md` already says "changed its shape".
 > The store card was the only surface still carrying the old promise.
 > ⚠️ The description grows **6,267 → 6,383** characters (+116). Both portals accepted 6,267 at v9.
-> ⛔ Nothing here has been uploaded: it ships with **v10**, and `version` was not touched (`H-02`).
+> ⛔ Nothing here has been uploaded: it ships with **v10**, and `version` was not touched (`editor/version rail (agent/prompts/perma/RELEASE.md § Release rails)`).
 
 112. ⏸️ **DEFERRED 2026-09-09 by the owner — 06 MUST SKIP IT, and this is a ruling, not an omission.**
 > Neither (a) nor (b). The owner is firing a separate high-tier session on the option this item never offered:
@@ -3983,7 +3983,7 @@ Original question, kept as asked: C74, the Rare Metals Extractor's hammer (and t
 > modules are re-derived against 1.1.0. That is decision 99's territory.
 > ✅ **The patch notes are now cleared to upload** — the "Fixed for game 1.1.0" claim is confirmed, which is
 > what your own "a Fixed line is a CLAIM" rule required. `metadata.lua` and the `UPLOAD_WORKFLOW` §3 paste
-> backup are in sync. ⛔ Still no upload, no `version` edit, no Mod Editor from me (`H-02`).
+> backup are in sync. ⛔ Still no upload, no `version` edit, no Mod Editor from me (`editor/version rail (agent/prompts/perma/RELEASE.md § Release rails)`).
 
 > ⚠️ **WHAT THIS PATCH DELIBERATELY DOES NOT CLAIM.** 17 of the pack's 22 full-body replacements have never been
 > diffed against 1.1.0, and no instrument we own bounds body divergence — the name sweep sees names, `sigcheck`
@@ -4338,7 +4338,7 @@ Original question, kept as asked: C74, the Rare Metals Extractor's hammer (and t
      is no forced action. Options: **(a)** say nothing until the re-verification has something
      true to report — recommended, and it keeps `H-04` clean; **(b)** a short "known-good on
      1.1.0, six fixes stand down pending re-check" note on the listings, which costs an upload
-     cycle (`H-02`: the version bumps again) and would be publishing a claim we have not measured
+     cycle (`editor/version rail (agent/prompts/perma/RELEASE.md § Release rails)`: the version bumps again) and would be publishing a claim we have not measured
      yet. ⛔ Note that **any** listing edit overwrites both page bodies from `metadata.lua` and
      needs the §3 paste backups.
 
@@ -4640,11 +4640,11 @@ Original question, kept as asked: C74, the Rare Metals Extractor's hammer (and t
 75. ✅ **RULED 2026-08-24, in-session, and APPLIED the same hour.** Your words:
     *"if we have open bug reports and we are preparing a patch that should be
     assumed we are off a freeze."* ⭐ **That is a better rule than the one I
-    drafted**, and it names what was actually wrong with `H-02`: it was written
+    drafted**, and it names what was actually wrong with `editor/version rail (agent/prompts/perma/RELEASE.md § Release rails)`: it was written
     as a *state* ("frozen at 1.0.0") when it should have been about *who and
     how*. A freeze that survives into a patch cycle blocks the thing the pack
     exists to do.
-    **`H-02` now reads:** the version is the **sitting's** to set, never an
+    **`editor/version rail (agent/prompts/perma/RELEASE.md § Release rails)` now reads:** the version is the **sitting's** to set, never an
     agent's and never by hand; open field reports plus a patch in preparation
     means a patch cycle and **no freeze is assumed**.
     ⛔ **What I kept, because it is mechanical rather than policy** — an agent
@@ -4662,14 +4662,14 @@ Original question, kept as asked: C74, the Rare Metals Extractor's hammer (and t
 
     <details><summary>The original item, kept for the record</summary>
 
-    ⛔ **`H-02` forbids the 1.0.x update as written. It needs your ruling before
+    ⛔ **`editor/version rail (agent/prompts/perma/RELEASE.md § Release rails)` forbids the 1.0.x update as written. It needs your ruling before
     any agent can prepare the upload.**
     The hazard reads *"`metadata.lua` is FROZEN at 1.0.0 — no version bump, no Mod
     Editor save."* It existed to protect the 1.0.0 upload from an accidental bump.
     **A real update requires exactly that bump**, so as written it blocks the thing
     it was never meant to block. An agent obeying STATE will refuse; an agent
     ignoring a hazard is worse. ⇒ **Rule it, don't leave it ambiguous.**
-    ❓ **The call:** does `H-02` become *"frozen except at an owner-run upload
+    ❓ **The call:** does `editor/version rail (agent/prompts/perma/RELEASE.md § Release rails)` become *"frozen except at an owner-run upload
     sitting"*, or is it discharged like `H-04` was and replaced by a successor
     that guards the same accident? ⚖️ I'd take the first — the accident it
     prevents (a stray editor save silently bumping the version between sittings)
@@ -4688,8 +4688,8 @@ Original question, kept as asked: C74, the Rare Metals Extractor's hammer (and t
     thing between the tree and the upload.**
 
     ℹ️ **Drafted so this is a yes/no, not a writing task.** If you take the
-    reword, `H-02` in [agent/STATE.md](agent/STATE.md) becomes, verbatim:
-    > **H-02** `metadata.lua` is **FROZEN between sittings** — no version bump,
+    reword, `editor/version rail (agent/prompts/perma/RELEASE.md § Release rails)` in [agent/STATE.md](agent/STATE.md) becomes, verbatim:
+    > **editor/version rail (agent/prompts/perma/RELEASE.md § Release rails)** `metadata.lua` is **FROZEN between sittings** — no version bump,
     > no Mod Editor save, ever, EXCEPT inside an owner-run upload sitting, where
     > the bump is the point (every editor save runs `version = version + 1`,
     > `Mod.lua:967`). ⛔ The accident this still prevents is a stray editor save
@@ -4727,7 +4727,7 @@ rock-clearing jobs) crashes the same way, not just levelling.
   editor save (bumps the version), pack, upload — both portals. Nothing else is
   queued behind it.
 * `metadata.lua` gained ONE hand-written `code` row (the new module), version
-  untouched — no editor save happened, so H-02 held.
+  untouched — no editor save happened, so editor/version rail (agent/prompts/perma/RELEASE.md § Release rails) held.
 * ⛔ Still never reproduced on the rig. The 10-minute repro (place a levelling
   site, research a dome-cost tech, watch `ConstructionSite.lua:673` stay
   silent) rides your next sitting if you want the attended upgrade.
@@ -5122,7 +5122,7 @@ rock-clearing jobs) crashes the same way, not just levelling.
     |---|---|---|
     | the C50 regression warning | re-read the module: `preset.effect` is only ever **read** (one line), never written; your row-4 reading — first bullet **(40,000)** intact on both screens — is the screen proof | ✅ holds |
     | evidence provenance | traced every `tested-attended` word to who/screen/language/log; C51's claim rests on the **German** readings, never the English pass | ✅ holds |
-    | H-10 (ships absent) | compared `items.lua`, metadata's `code` list and disk **myself**: 78 = 78 = 78, identical order, both new modules present; `pack_predict` **82** | ✅ holds |
+    | module-list gate (tools/doccheck.py MODULE SETS + tools/upload_preflight.py) (ships absent) | compared `items.lua`, metadata's `code` list and disk **myself**: 78 = 78 = 78, identical order, both new modules present; `pack_predict` **82** | ✅ holds |
     | frozen things | `version` still `0` · `C52` still `parked` · no opt-in passage restored · no player surface names the other mod · **nothing published** (no portal line in any log) | ✅ holds |
     | the sitting's own wrong turn | re-derived the rocket-subclass story **from the engine's class builder at Src** — the report's marked correction is right, and the suite message *"a later mod has chained on top of ours"* is provably wrong about the cause (it's the engine composing `Init`; no later mod exists). Recorded as fact `EF-066` | ✅ report honest |
 
@@ -5584,7 +5584,7 @@ rock-clearing jobs) crashes the same way, not just levelling.
     expensive, which is the opposite of useful.
 
     ✅ **What a normal post-release change actually owes**, and it is short:
-    * the `items.lua` entry for any new module (**H-10** — this is the one that
+    * the `items.lua` entry for any new module (**module-list gate (tools/doccheck.py MODULE SETS + tools/upload_preflight.py)** — this is the one that
       would have shipped a fix that never loads; it is a ten-second check, and it
       is not ceremony);
     * one boot log showing the new module reports `applied`;

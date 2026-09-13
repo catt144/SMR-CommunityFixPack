@@ -24,9 +24,7 @@ STATE is a kernel: **status + pointer, never derivation.** Five sections only:
 
 1. **Now** — current position and next action. No supersession chains: if a
    sentence needs "superseded by", the superseded half is history — evict it.
-2. **Hazards** — admission test, applied per line: *it names an action an agent
-   could take unattended, states the rail, and points to the detail.* Anything
-   that fails the test is orientation, not a hazard — evict it. Headline is
+2. **Hazards** — apply all three admission tests below to every line. Headline is
    push; the evidence behind it is pull.
 3. **Rules in force** — owner rulings still binding, one line each, dated,
    with a pointer to where they were made. A ruling fully discharged or
@@ -34,6 +32,29 @@ STATE is a kernel: **status + pointer, never derivation.** Five sections only:
 4. **Open owner decisions** — item numbers + five-word gists; bodies live in
    `docs/PLAYTEST_CHECKLIST.md` "Decisions waiting on you".
 5. **Build state** — the `--emit-counts` block, verbatim, never hand-typed.
+
+### Hazards admission test (owner ruling 2026-09-13)
+
+**1 · HARM — name the victim.** Who is worse off, and can they be made whole by the next command?
+A mechanism is not a victim: *"files get deleted"* is not harm if nobody wanted them. **Floor:
+moderate.** Below it, low risk, not worth kernel space.
+⛔ **A silent harm outranks a loud one of the same size.** A loud failure self-corrects; a leg that
+measures nothing and hands you a number you trust does not.
+
+**2 · UNIVERSALITY — every agent, or one role?** STATE is read by every session, including a
+read-only QA pass. If only a release, playtest, junction or triage session can reach it, the rail
+belongs in **that role's entry doc**, not the kernel. Destructive rails are role-gated by
+construction; the **epistemic** ones — what you may not read-and-conclude, what you may not claim
+— are the universal ones.
+
+**3 · GATE — can a machine catch it?** If a hook or tool already hard-fails on it, the kernel line
+is belt-and-braces: **cite the gate instead.** If a machine *could* catch it and nothing does, the
+entry is a **placeholder** and the real deliverable is the check — the entry leaves when the check
+lands.
+
+⇒ **A hazard is a failure that has not yet been converted into a gate.** Graduating is the normal
+end of a hazard's life. That is the list's outflow, and without one the list only grows: every
+entry was admitted for a real reason, so strictness at the door can never be enough.
 
 Everything else is pull: `SESSION_LOG` (history), `agent/reports/` (evidence),
 `agent/bugs/` + `agent/facts/` (defect/fact truth), git graves.

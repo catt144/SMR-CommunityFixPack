@@ -156,7 +156,7 @@ return PlaceObj('ModDef', {
 	-- found and repaired before either ever reached a player, so naming it on a
 	-- store page would describe a problem nobody could have had.
 	-- Licence for this edit: the owner's standing 22b word ("change any wordings
-	-- to their accurate versions"); text-only, no behaviour, and `H-02` as
+	-- to their accurate versions"); text-only, no behaviour, and `editor/version rail (agent/prompts/perma/RELEASE.md § Release rails)` as
 	-- reworded 2026-08-24 puts hand edits to this string squarely in scope while
 	-- leaving the version bump to the owner's sitting.
 	-- ⭐ REWRITTEN 2026-09-08 for the 1.1.0 hotfix (HOTFIX_1_APPLY). The v5 text
@@ -177,7 +177,7 @@ return PlaceObj('ModDef', {
 	-- claim" error, aimed at our own players.
 	-- ⛔ No fix ids, no counts, no load-order advice, no other mod named (EF-054,
 	-- FIX_POLICY §8). Licence: the owner's standing 22b word; text-only, no
-	-- behaviour, and H-02 leaves the version bump to the upload sitting.
+	-- behaviour, and editor/version rail (agent/prompts/perma/RELEASE.md § Release rails) leaves the version bump to the upload sitting.
 	-- ⭐⭐ REWRITTEN WHOLESALE 2026-09-09 for hotfix 2 (`prompts/hotfix2/06_TEXT.md`).
 	-- ⛔ NOT APPENDED — the hotfix-1 text above it is a CHANGELOG entry that was
 	-- already posted to both stores, so keeping any of it would post a duplicate.

@@ -151,7 +151,7 @@ ride-along). ⚖️ **The decision is the owner's, and it belongs in
 ## 8 · Close-out
 
 `items.lua`/`metadata.lua` in the PACK are untouched — this writes no pack code, so
-`H-10` does not apply. Kit commit(s) first (local; no push exists), then any pack
+`module-list gate (tools/doccheck.py MODULE SETS + tools/upload_preflight.py)` does not apply. Kit commit(s) first (local; no push exists), then any pack
 doc commit. `python tools/doccheck.py` GREEN before the doc commit, and a WARN goes
 **verbatim** into the summary. Commits `git commit -F <file>` with an explicit list
 of individual FILE paths (the git index is shared with several live sessions), then

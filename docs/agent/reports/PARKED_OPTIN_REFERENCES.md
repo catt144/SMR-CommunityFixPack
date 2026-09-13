@@ -1,5 +1,10 @@
 # Parked opt-in references — the restore record for the solo launch
 
+## Restore rail
+
+Never restore the parked opt-in references before the opt-in pack launches; that is ITS launch
+obligation. Verbatim parking and the restore checklist are below.
+
 **Created 2026-08-17 by `agent/prompts/SHIP_SOLO_PREP_fable.md`** (self-consumed;
 grave `git show <sha>:docs/agent/prompts/SHIP_SOLO_PREP_fable.md`). Modelled on
 `SHELVED_F85_DISTRESS_PAUSE.md`, and for the same reason: *"it's in git

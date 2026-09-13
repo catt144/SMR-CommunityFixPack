@@ -28,8 +28,8 @@ enable path is exercised).
 
 ## 0 · Bindings
 
-- ⛔ `H-02` no Mod Editor, no `version` edit, no upload. `H-03` no portal API
-  from a launched game. `H-04` never call a future release ready. `H-06`
+- ⛔ `editor/version rail (agent/prompts/perma/RELEASE.md § Release rails)` no Mod Editor, no `version` edit, no upload. `H-03` no portal API
+  from a launched game. `H-04` never call a future release ready. `EF-056`
   pre-copy autosaves before any save-load the sitting needs (this pilot needs
   NONE — it is menu-only). `H-09` no packed folder beside a live junction.
 - ⛔ **You do not launch the game.** The owner does, in the sitting. Your

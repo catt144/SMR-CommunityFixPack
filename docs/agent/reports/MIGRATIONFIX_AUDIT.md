@@ -103,7 +103,7 @@ claim the record holds only tentatively, because that changes what the next sess
     function closes over its environment; in an orphan save that is the fallback `LuaModEnv` (EF-023), so
     `SMRFixPack` resolves to nil and the gate at `:254` returns. Same footing as every other §3a-gated thread in the
     pack. `reports/D13_EXPOSED_SET.md` §2a still owes the row (E-numbered); not added here — D13 derives its own set.
-12. **H-02 held; the build commit touched neither release file.** `CONFIRMED`. `git show --stat 3b41d9f` lists 12
+12. **editor/version rail (agent/prompts/perma/RELEASE.md § Release rails) held; the build commit touched neither release file.** `CONFIRMED`. `git show --stat 3b41d9f` lists 12
     files, none of them `metadata.lua`/`items.lua`; the uncommitted `version 7 → 8` / `pdx_version "7"` /
     `saved 1789159802` diff in the tree is the owner's own Mod Editor writeback (comments stripped, both files), the
     expected post-sitting state, and I did not touch it.
