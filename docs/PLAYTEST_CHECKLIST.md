@@ -43,8 +43,8 @@ it never happened.** Re-derived rather than relayed:
   [DOC_OVERHAUL_AUDIT](agent/reports/DOC_OVERHAUL_AUDIT.md) §4: `ARCHIVE-OLD` is
   report-only and can never enter `move_items`, so `--apply` cannot execute D4 as ruled;
   membership drifted 17 → 18. This file already records that at item 163's note.
-- **Even run perfectly, D4 removes 5.8%** — today's dry run moves **43,223 B** of
-  **741,708 B**, leaving 698,485 B.
+- **Even run perfectly, D4 moves only 43,223 B of 741,708 B (5.8%)** — ⭐ and the reason
+  is not that the rest is live. See the corrected breakdown below.
 - **Growth outran the remedy ~9×.** This file took **+371,007 B across 192 commits since
   09-06**, a median ~2 KB per commit from every peer. One week of drift is 8.6× what the
   whole approved migration would remove.
@@ -60,22 +60,61 @@ what to test"* — the tests are **1%** of it. It is also carrying history in pa
 `.gitignore:15` excludes. **Your approved membership exists on one machine.** No peer can
 see it, a fresh clone has neither, and losing that disk loses the approval.
 
-### The decision — scope, and it is yours
+**⭐ Why it is only 5.8% — the tool is keyed on MARKERS, and the dead mass has none**
+
+**Corrected 2026-09-13 after the owner scrolled the file and said the done/dated material
+is obviously massive. They are right; 5.8% was the size of D4's approved move set, not the
+size of the problem, and quoting it alone under-stated the cause.**
+
+The script's universe is correct — `## Decisions waiting on you` is **92.3%** of the file
+(678,779 chars, 129 items). It leaves 94% of that in place, and its own per-item verdicts
+say exactly why:
+
+| bucket | items | bytes | why it stays |
+|---|---|---|---|
+| `KEEP-unmarked` | 65 | **366,052 B (54%)** | carries no `ck:` marker comment at all, so the classifier has no status to read |
+| `KEEP-d` number-cited | 27 | 141,153 B (21%) | STATE/perma cite these numbers |
+| `KEEP-archive-old` | 18 | 92,261 B (14%) | correctly identified as old — but **report-only, never moves** |
+| `KEEP-c` procedure-bearing | 3 | 18,381 B (3%) | carries a recipe or fenced block |
+| **`MOVE`** | **16** | **43,223 B (6%)** | the only bucket that moves |
+
+**The bottleneck is marking, not moving.** Measured independently of the script: the
+decisions section holds **79 items with no marker at all, 454,783 B** — and **68 of them,
+373,458 B, are demonstrably settled-or-old from their own headers** (38 items / 220,007 B
+whose heading says ✅ or RULED/CLOSED/DONE/RAN/LANDED; 30 more / 153,451 B dated before
+2026-09-01). One of the largest untouched items is headed *"✅ 2026-09-12 — 168 RULED BY
+YOU (batch 2)"*. **That is 8.6× what D4 would move, sitting still because nobody stamped a
+marker on it.**
+
+Re-check both numbers:
+`python -X utf8 .claude/tools/archive_settled.py` (per-item table, tally the last column) ·
+`doccheck` already reports the same shortfall from the other end as **"29 need a marker"**.
+
+**The decision — scope, and it is yours**
 
 D4's approved membership was fixed when this file was a fraction of its size, and the
-audit is explicit that widening it needs its own owner decision. So:
+audit is explicit that widening it needs its own owner decision. Revised now that the
+cause is known to be **unmarked items**, not a stingy mover:
 
-- **(a)** Repair the script to execute D4 as ruled — reclaims ~6%, changes nothing about
-  the 96%.
-- **(b)** Re-scope: archive the settled + dated + done-marked sections (~96%) to
-  `archive/PLAYTEST_ARCHIVE.md` and `archive/SESSION_LOG.md`, leaving a working list.
-  Bigger win, needs your membership approval, and nobody should pick it for you.
-- **(c)** Both, in that order.
+- **(a)** Repair the script to execute D4 as ruled — reclaims **~43 KB (6%)** and changes
+  nothing about the 373 KB that carries no marker. On its own, this does not fix what you
+  were scrolling past.
+- **(b) ⭐ Mark the settled-but-unmarked backlog, then move it.** 68 items / 373,458 B
+  already announce themselves as settled or pre-09-01 in their own headings, so the
+  marking pass is mostly mechanical and auditable — and once marked they flow through the
+  existing route instead of needing a new one. Needs your approval of the membership, and
+  a rule that settles whether "unmarked + ✅ in the heading" may be auto-marked or must be
+  eyeballed.
+- **(c)** Also let `ARCHIVE-OLD` actually move (18 items / 92,261 B). It is report-only
+  today by deliberate design, so this is a genuine scope change, not a bug fix.
 - **(d)** Leave it — the cost lands on you reading it, not on agent context, since agents
   are told never to read it whole.
 
-⛔ No agent should widen D4's scope on its own judgement. Recommendation if you want one:
-**(c)**, with the manifest committed into the repo first so the approval survives the disk.
+⛔ No agent should widen D4's scope or auto-mark your decisions on its own judgement.
+Recommendation if you want one: **(b) then (a) then (c)** — biggest reclaim first, and
+commit `CHECKLIST_MOVE_MANIFEST.md` into the repo before any of it, so the approval
+outlives the disk.
+
 
 ### 2026-09-13 — 175 RULED: build the SMR Tool Kit (chain `prompts/smrtk/`); two sittings are yours when their scripts land
 <!-- ck:175 status:ruled owner:yes -->
