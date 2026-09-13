@@ -1,6 +1,6 @@
 # smrtk 02 — the skeleton in the real game (attended) — ⛔ KILL GATE
 
-Link 02 of `smrtk`. Any model, the owner at the keyboard. README rules 1–20 are yours; rule 13 shaped the script
+Link 02 of `smrtk`. Any model, the owner at the keyboard. README rules 1–22 are yours; rule 13 shaped the script
 below (01 writes it). Score every step against `reports/SMRTK_SKELETON_PREDICTIONS.md`, prediction by prediction.
 
 ## The four premises this sitting decides
@@ -34,8 +34,8 @@ Anything the log does not show. "Works on gamepad" (not tested here). That any p
 
 ## Close-out
 
-Outbox to 03, 03b, 04, 05, 06 (one paragraph each: what P1–P4 read, which tap path carries lines, the hotkey
-that stuck) and 99; strike your row; `git rm` this file; push.
+Outbox to 03A (one paragraph: what P1–P4 read, which tap path carries lines, the hotkey that stuck — 03A pastes
+it into every payload's inbox) and 99; strike your row; `git rm` this file; push.
 
 ## Notes from upstream
 

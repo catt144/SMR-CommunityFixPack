@@ -1,6 +1,6 @@
 # smrtk 08 — the full attended sitting
 
-Link 08 of `smrtk`. Any model, the owner at the keyboard. README rules 1–20; 07 wrote the script below and the
+Link 08 of `smrtk`. Any model, the owner at the keyboard. README rules 1–22; 07 wrote the script below and the
 predictions (`reports/SMRTK_FULL_SITTING_PREDICTIONS.md`). The stale-probe gate binds before any reading.
 
 ## Job

@@ -1,7 +1,8 @@
-# smrtk 05 — the Saves page and the Kit page
+# smrtk payload P4 — the Saves page and the Kit page
 
-Link 05 of `smrtk`. README rules 1–20 are yours. After 02 PASS; independent of 03/03b/04/06. Two files; self-split
-into 05b at the file boundary if the first fills your budget (rule 4).
+Payload P4 of link 03A (`smrtk`). README rules 1–22 are yours, **21 especially: you write, you never commit.**
+Independent of P1–P3/P5. Two files; if Job A fills your budget, finish it, report the split point, and stop — 03A
+re-fires Job B as its own payload (rule 4).
 
 ## Job A — `Code/75_SMRTK_Saves.lua`
 
@@ -25,10 +26,11 @@ into 05b at the file boundary if the first fills your budget (rule 4).
    loaded `ModDef`, the live `fix pack present: N/N` read (`SMRFixPack.ListFixes()` — read how the pack exposes it in
    its `00_Core.lua`, do not re-derive counts), active mod ids, save name, sol. `SMRTK_FINGERPRINT` one line.
 5. **Object dump** (`SMRTK_DUMP`) — class, handle, template, pos/hex, dome, workers/shifts, storage, modifiers,
-   malfunction/destroyed/demolishing flags, `IsValid`; registered as the id 03b's Dump button calls.
+   malfunction/destroyed/demolishing flags, `IsValid`; registered as the id P2's Dump button calls.
 6. **World snapshot** (`SMRTK_SNAPSHOT`) — sol, funding, colonists by status, buildings by class, resources,
    active disasters, current speed; and **diff** between two snapshot ids (`SMRTK_DIFF`).
-7. **Watch a field** — a trigger (04's engine) on `SelectedObj.<field>` change; armed toggle, logs each change.
+7. **Watch a field** — a trigger (P3's engine, by registry id; stub if absent at load) on `SelectedObj.<field>` change;
+   armed toggle, logs each change.
 
 ## Scope fence
 
@@ -43,10 +45,12 @@ IN: the two files + `metadata.lua` lines. OUT: the panel frame, World actions, s
 
 That a save/load round trip works (08). That the fingerprint's `N/N` is right (it is a read, quote it as one).
 
-## Close-out
+## Close-out (payload — rule 21)
 
-Rules 15–16. Commit per unit. Outbox to 07 and 99; strike your row; `git rm` this file; push.
+Do NOT commit, do NOT `git rm`. Parse-check both files; rule 6's and rule 7's greps, counts quoted. Return a
+**numbered-claims report** to 03A: per unit — built · verified how (command + output) · stopped · OWNER-ROUTED ·
+for-07 · DRIFT. If you added an accessor to `00_TestCore.lua`, it is its own numbered claim with the diff.
 
 ## Notes from upstream
 
-- (02 appends here)
+- (03A pastes 02's outbox here before launch)

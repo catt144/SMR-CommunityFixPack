@@ -47,7 +47,8 @@ exists, and a struck row is RED. A row that outlives its file is how a next sess
 - `smrtk/`: ⭐ **LIVE** (authored 2026-09-13, owner ask, checklist 175): the **SMR Tool Kit** — a TestKit panel that
   replaces the vanilla cheat menu for playtesting with untainted leaf calls (`EF-095`), one `SMRTK_` log tag, agent
   slots, triggers, save slots, a console tap + clipboard copy, and a layout stamper (`EF-099`). Kill-gated at 02;
-  fire `01_SKELETON_BUILD_opus.md` first. Its README is the manifest.
+  the five page builds are one **Codex fan-out (03A)** judged by a **Claude link (03B)** before the docs — the
+  owner's shape. Fire `01_SKELETON_BUILD_opus.md` first. Its README is the manifest; `payloads/` holds 03A's briefs.
 - `fixtoggles/`: **LIVE** (authored 09-11): an on/off button per fix, Beta labels, linked buttons; link 09 researches
   versioning for a B step. Its README is the manifest; checklist 148.
 - `arming/`: the unattended-leg harness (`tools/arm_leg.ps1` reads it). Infrastructure, not a prompt.

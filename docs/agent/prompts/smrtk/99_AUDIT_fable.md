@@ -1,6 +1,6 @@
 # smrtk 99 — the terminal adversarial audit
 
-Link 99 of `smrtk`. Fable, fresh context; your job is to **disbelieve the chain**. README rules 1–20 are yours.
+Link 99 of `smrtk`. Fable, fresh context; your job is to **disbelieve the chain**. README rules 1–22 are yours.
 Run only on a folder holding this file and `README.md` (or in the reduced form below).
 
 ## Full form
@@ -44,6 +44,11 @@ Anything you did not re-derive or re-read yourself. "Release ready" (`H-04`). Th
 build other than the one 02/08 ran on.
 
 ## Notes from upstream
+
+- (authoring session, reshaped 2026-09-13) 03A (Codex) built and 03B (Claude) judged; read 03B's **disagreements
+  with 03A** before either report's claims, and adjudicate each on evidence — a cross-vendor split is the point of
+  the pair, not noise. Also check 03A actually ran the spike BEFORE launching P2/P3 (commit order of
+  `reports/SMRTK_UI_HOOKS.md` vs the payload files) and consumed `payloads/` on its close-out.
 
 - (authoring session `smr-bugfixpack-8f`, 2026-09-13) Two premises were flagged unverified at authoring: native
   `ConsolePrint` → `ConsoleLine` (`EF-096`), and retail `Platform.cheats` (`EF-095`). Check 02 measured both rather

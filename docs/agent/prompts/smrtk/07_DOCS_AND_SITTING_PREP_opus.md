@@ -1,7 +1,7 @@
 # smrtk 07 — the documentation, the standing slot prompt, and 08's preparation
 
-Link 07 of `smrtk`. README rules 1–20 are yours. After 03, 03b, 04, 05 and 06 have all closed (read all five
-outboxes first — they carry the final button lists).
+Link 07 of `smrtk`. README rules 1–22 are yours. After 03B has closed (read its outbox first — it carries the verified
+button lists per page, the stubs still owed, and the owner items already consolidated into ck175).
 
 ## Job A — the rules the owner asked for ("we need rules about cheats in the documentation")
 
@@ -25,7 +25,7 @@ outboxes first — they carry the final button lists).
 ## Job B — 08's preparation
 
 7. **Predictions** `reports/SMRTK_FULL_SITTING_PREDICTIONS.md` — numbered, per button class (not per button): the
-   log line expected, and for the stamp (06's inbox) the placed/skipped counts predicted from a dry run.
+   log line expected, and for the stamp (03B's outbox, from P5's for-07 section) the placed/skipped counts predicted from a dry run.
 8. **08's script** into `08_FULL_SITTING_owner.md`'s inbox per rule 13: every page, one representative of each button
    class, a Delete and a Destroy on scratch buildings, a save/load round trip through slot A with the guard tripped
    once on purpose, one trigger firing, one screenshot+mark opened afterwards, one capture + stamp, a run-until.
@@ -47,4 +47,4 @@ Outbox to 08 and 99; strike your row; `git rm` this file; push.
 
 ## Notes from upstream
 
-- (03, 03b, 04, 05, 06 append here)
+- (03B appends here)

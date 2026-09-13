@@ -1,6 +1,7 @@
-# smrtk 04 — the Agent page: slots, pins, triggers, note, screenshot+mark
+# smrtk payload P3 — the Agent page: slots, pins, triggers, note, screenshot+mark
 
-Link 04 of `smrtk`. README rules 1–20 are yours. After 02 PASS; independent of 03/03b/05/06.
+Payload P3 of link 03A (`smrtk`). README rules 1–22 are yours, **21 especially: you write, you never commit.**
+Independent of P1/P2/P4/P5.
 
 ## Job — `Code/74_SMRTK_Agent.lua` + the `Code/80_AgentSlots.lua` contract
 
@@ -14,13 +15,14 @@ Link 04 of `smrtk`. README rules 1–20 are yours. After 02 PASS; independent of
    trigger list (armed/disarmed, fire count); the **note field** (`XTextEditor`; Enter → `SMRTK_NOTE "<text>"` with
    game time, then clears); **Screenshot+Mark** (`WriteScreenshot` into `C:\Dev\SMR-ScreenCaptures\SMRTK_<markid>.png`
    — if the engine confines the path, write where it allows and log the path; and `SMRTK_MARK` with the same id).
-3. **Click-to-target** for armed slots: the least invasive capture of a map click while armed (read how the
-   construction cursor takes a click in `Lua/Construction/Construction.lua` and how `UndergroundCaveIn` reads the
-   cursor); the position and any object under it go to `on_click`. Rule 9: armed only, uninstalls on disarm.
+3. **Click-to-target** for armed slots: **the capture route is decided** — 03A's spike (`reports/SMRTK_UI_HOOKS.md` §2,
+   in your inbox). Build on it or its declared fallback, never a third route (rule 20); re-read the cited lines first
+   (rule 12) and report DRIFT if they disagree. The position and any object under it go to `on_click`. Rule 9: armed
+   only, uninstalls on disarm.
 4. **Triggers:** `SMRTK.Trigger{ id, label, when = function() ... end, do = { mark = true, pause = true, screenshot =
    false, sound = true }, once = true }` — a game-time polling thread (cadence configurable, default 1 s game time),
    each firing logged `SMRTK_TRIGGER <id>`; the built-ins: `sol >= N`, `first Lua error since mark`, `selected field
-   changed` (05's watch reuses this), `rocket landed`. Auto-disarm on load/map change (rule 9).
+   changed` (P4's watch reuses this), `rocket landed`. Auto-disarm on load/map change (rule 9).
 5. **Auto-disarm + per-fire log** for every armed slot and trigger (rule 9), visible in the status strip's armed count.
 
 ## Scope fence
@@ -29,18 +31,19 @@ IN: `74_SMRTK_Agent.lua`, `80_AgentSlots.lua`, their `metadata.lua` lines. OUT: 
 
 ## Stop conditions
 
-A map click cannot be captured without wrapping a vanilla handler that stays wrapped while idle · `XTextEditor`
-cannot take focus inside an `XDialog` from a mod · `WriteScreenshot` has no writable path. Report; do not force.
+The spike's click route does not hold on re-read · `XTextEditor` cannot take focus inside an `XDialog` from a mod ·
+`WriteScreenshot` has no writable path. Report; do not force.
 
 ## What may NOT be claimed
 
 That a trigger fires at the right moment in play (08). That a screenshot landed (08 opens one).
 
-## Close-out
+## Close-out (payload — rule 21)
 
-Rules 15–16. Commit per unit (contract · page · click-to-target · triggers · disarm). Outbox to 07 (the contract, for
-`perma/SMRTK_SLOTS.md`) and 99; strike your row; `git rm` this file; push.
+Do NOT commit, do NOT `git rm`. Parse-check both files; rule 6's and rule 7's greps, counts quoted. Return a
+**numbered-claims report** to 03A: per unit (contract · page · click-to-target · triggers · disarm) — built · verified
+how (command + output) · stopped · OWNER-ROUTED · for-07 (the slot contract, verbatim, for `perma/SMRTK_SLOTS.md`) · DRIFT.
 
 ## Notes from upstream
 
-- (02 appends here)
+- (03A pastes 02's outbox and `SMRTK_UI_HOOKS.md` §2 here before launch)

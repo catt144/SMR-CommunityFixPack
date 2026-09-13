@@ -1,7 +1,8 @@
-# smrtk 06 — the layout stamper
+# smrtk payload P5 — the layout stamper
 
-Link 06 of `smrtk`. Fable. README rules 1–20 are yours. After 02 PASS; independent of 03–05 (own file, registers
-its buttons on the World page through `SMRTK.Action`). Premise: `EF-099`; re-read `PlaceConstructionSite` and
+Payload P5 of link 03A (`smrtk`) — **the vendor's top tier** (the capture format is a contract). README rules 1–22
+are yours, **21 especially: you write, you never commit.** Independent of P1–P4 (own file, registers its buttons
+on the World page through `SMRTK.Action`). Premise: `EF-099`; re-read `PlaceConstructionSite` and
 `CheatCompleteAllConstructions` in the source before writing a line (rule 12).
 
 ## Job — `Code/77_SMRTK_Stamper.lua` + `Layouts/`
@@ -11,7 +12,7 @@ its buttons on the World page through `SMRTK.Action`). Premise: `EF-099`; re-rea
    } ... }, grid = { { k = "cable"|"pipe"|"passage", dq, dr } ... }, meta = { map, sol, captured } }`. Offsets are hex
    offsets from the anchor. Version it; a stamp refuses an unknown `v`.
 2. **Capture** — selection (a dome captures itself + everything `GetDomeAtPoint` assigns to it), a rectangle drawn
-   by two clicks (04's click-to-target), or the whole map. `MapForEach` over `Building` and the grid element classes;
+   by two clicks (the spike's click-capture route, `SMRTK_UI_HOOKS.md` §2 — the same one P3 builds on), or the whole map. `MapForEach` over `Building` and the grid element classes;
    skip construction sites and `EF-099`'s special objects by name (rockets, landing pads, the map-specific set — list
    them). Result → `CopyToClipboard` as `return { ... }` and `LocalStorage.smrtk_layouts[name]`; log
    `SMRTK_CAPTURE name=<n> buildings=<b> grid=<g>`.
@@ -25,7 +26,7 @@ its buttons on the World page through `SMRTK.Action`). Premise: `EF-099`; re-rea
    button on the same page.
 5. **Desk falsification** — a lupa harness cannot run this; instead write the **stamp dry-run**: `test = true` on
    every placer and a "plan only" mode that logs each intended placement without placing. 08 runs the real one.
-   Write 08's stamp step into 07's inbox (what to capture, where to stamp, what the log must show).
+   Write 08's stamp step into your report's for-07 section (what to capture, where to stamp, what the log must show).
 6. **Rotation** is out of v1; note the `HexRotate` route in the format doc for v2.
 
 ## Scope fence
@@ -37,19 +38,21 @@ IN: `77_SMRTK_Stamper.lua`, `Layouts/README.md` (one paragraph: how a layout fil
 
 `PlaceConstructionSite` needs the construction controller's live state to accept a call · dome membership cannot be
 recovered at capture · grid replay through the line placers cannot form connections without the controller. Report
-with the line numbers; a stamper that does buildings only, grids by hand, is a legitimate v1 — say so in ck175.
+with the line numbers; a stamper that does buildings only, grids by hand, is a legitimate v1 — mark it OWNER-ROUTED
+in your report (03B carries it to ck175).
 
 ## What may NOT be claimed
 
 That a stamped colony behaves as a built one (08 reads one). That capture is complete for any class you did not
 enumerate.
 
-## Close-out
+## Close-out (payload — rule 21)
 
-Rules 15–16. Commit per unit (format · capture · stamp · state · dry-run). Outbox to 07 (the button list and the
-08 stamp step) and 99 (the format doc, and any place you departed from `EF-099`); strike your row; `git rm` this
-file; push.
+Do NOT commit, do NOT `git rm`. Parse-check your file; rule 6's and rule 7's greps, counts quoted. Return a
+**numbered-claims report** to 03A: per unit (format · capture · stamp · state · dry-run) — built · verified how
+(command + output) · stopped · OWNER-ROUTED · for-07 (the button list and the 08 stamp step) · DRIFT (any place you
+departed from `EF-099`, with the line numbers — 99 reads this).
 
 ## Notes from upstream
 
-- (02 appends here)
+- (03A pastes 02's outbox and `SMRTK_UI_HOOKS.md` §2 here before launch)

@@ -1,6 +1,6 @@
 # smrtk 01 — the walking skeleton (build)
 
-Link 01 of `smrtk`. README binding rules 1–20 are yours. Staleness: rule 1 in both repos. Pre-flight: the
+Link 01 of `smrtk`. README binding rules 1–22 are yours. Staleness: rule 1 in both repos. Pre-flight: the
 five facts' fingerprint (rule 12) and `Mars.exe` closed (rule 16).
 
 ## Job 0 — re-validate the cut (30 minutes, not a re-design)
@@ -18,7 +18,7 @@ inbox: "cut re-validated, no change".
 2. **`Code/70_SMRTK_Core.lua`** — `SMRTK = rawget(_G, "SMRTK") or {}` at load; `SMRTK.Log(verb, kv)` (the ONE
    logger, rule 7, running `id`, flush per line — reuse `SMRTest.Print`'s `%` escaping lesson); `SMRTK.Action{ id,
    label, page, run, arm, disarm, needs = "selected"|nil }` registry; `SMRTK.Bind(n, label, fn, opts)` slots API
-   (the UI is 04's; the API is yours so 03–06 can register against it); the ring buffer (`OnMsg.ConsoleLine`,
+   (the UI is P3's; the API is yours so 03A's payloads can register against it); the ring buffer (`OnMsg.ConsoleLine`,
    `OnMsg.OnLuaError` with stack, `OnMsg.OnThreadError`; ~300 lines; each with `GameTime()` and a mark index);
    the **taint assert** wrapper every action runs through (rule 8); `SMRTK.Mark(label)`; `SMRTK.CopySince(n_or_mark)`
    → `CopyToClipboard`; `SMRTK.Eligibility()` → `CanUnlockAchievement` reason or "OK"; `ConsoleEnabled = true`
@@ -28,7 +28,7 @@ inbox: "cut re-validated, no change".
    tee as a **toggle (off)** fallback per rule 9 and let 02 measure which path carries lines.
 3. **`Code/71_SMRTK_Panel.lua`** — the floating `XDialog`: status strip (taint · eligibility · armed count · quiet ·
    errors since mark), top row (MARK · Copy since mark · Flush · Pause/Resume · Stop disaster — the last two may be
-   stubs that call 03's registry id and say "not built" until 03 lands), tab bar with `SMRTK.Page(id, label)` registry
+   stubs that call P1's registry id and say "not built" until 03A lands), tab bar with `SMRTK.Page(id, label)` registry
    and empty Sitting/Agent/World/Saves/Kit pages, `[_]` collapse, drag, persistence, the hotkey (rule 20 collision
    check — write the result to ck175 either way). Plain look is fine; it must be usable with a mouse.
 4. **`metadata.lua`** `code` list: add both files (H-10). Nothing else in `metadata.lua`.
@@ -40,7 +40,7 @@ inbox: "cut re-validated, no change".
 ## Scope fence
 
 IN: the two files, `metadata.lua`'s list, the predictions doc, 02's inbox, ck175 notes. OUT: every page's content
-(03–06), the infopanel section (03b), docs (07). A World/Kit button you are tempted to add is a note in that link's
+(03A's payloads), the infopanel section (P2), docs (07). A World/Kit button you are tempted to add is a note in 03A's
 inbox, not code.
 
 ## Stop conditions

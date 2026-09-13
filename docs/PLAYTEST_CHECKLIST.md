@@ -137,6 +137,12 @@ game's own front door for the stamper (`EF-099`). You confirmed **F9 clears the 
 `02_SKELETON_SITTING_owner.md`), then the **08 full sitting** (TAKEABLE WHEN 07 has written its script). Nothing
 else is asked. Defaults you may change at any time: hotkey **Ctrl-Shift-K**, six agent slots.
 
+**Shape, your ruling later the same day:** *"3A and 3B … cross platform this as a primary / secondary with B being
+a judge of the work done. Codex does A and Claude does B."* Done: the five page builds are one fan-out link
+(**03A**, Codex, which first settles the two shared UI-hook techniques so the builds cannot diverge) and a
+cross-vendor judge (**03B**, Claude) sits between the build and the docs. 03B is also where every owner-routed item
+from the builds lands — **as ONE append here**, not five. The queue is now 01 → 02 → 03A → 03B → 07 → 08 → 99.
+
 ### ✅ 2026-09-13 — 174 RULED: a fired one-off leaves the prompts map entirely
 <!-- ck:174 status:ruled owner:no -->
 
