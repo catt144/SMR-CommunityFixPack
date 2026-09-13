@@ -26,7 +26,7 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   a nil `CachedArgShape()` makes the control vacuous), **F118** (rider `0136af1`, no probe).
 - 🚫 OWED — the post-upload sitting, ONE boot (ck144 a; recipes: checklist "THE SITTING RAN" block + `bugs/F117.md`):
   A3 (F118) · A10 · A5 c2 · A9 c4/c5 · F117's station recipe · the first `RunAll()` on the probe kit (re-stamps
-  `WORKFLOW.md:407`, VOID since 09-09). ⛔ Kit verdicts are PREDICTIONS until then; still FAIL/ERROR by name:
+  `WORKFLOW.md:537`, VOID since 09-09). ⛔ Kit verdicts are PREDICTIONS until then; still FAIL/ERROR by name:
   `C47OpenFarmSeedBufferShape` (Herbs 100→50), retired `LanderCargoRatchet`/`DroneUnreachableForever`/`AutoExportPriority`,
   `GhostFarmOxygen`/`LayoutTechLock`/`AnomalyCaveInMap` (modules retired 09-12; Wave14 wrap rows :116-117, :130 too).
 - ⛔ **C89's B2 panel leg was NOT RUN, by owner ruling** — one unmeasured link (`CountDome` 0 leaves the panel clear, vanilla
@@ -34,16 +34,18 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   impossible — every supplyable prefab is `require_prefab`) are unavailable, not owed. Gate evidence: each entry's
   §Attended check, SESSION_LOG 09-12; ⛔ never re-derive a leg from the module.
 - **C90** (Saint + Sinkhole apply-success guards) ships in v10 `fixed` but **UNEXERCISED** — `reports/C90_GUARDS_BUILD.md`.
-  **C91** open candidate: vanilla leaks the Building Codes modifier on repeal.
+  **C91** open candidate: vanilla leaks the Building Codes modifier on repeal. **C92** (P2, `cand` 09-13):
+  `ResearchedAllTechs` can never fire once a Repeatable sits in a tracked group — a reporter's save CONFIRMS it.
 - ⛔ `SaintBlessing`'s kit probe PASSes **vacuously** with no domed Saint — not coverage; field reports are the detector
   (ck130). ✅ The heal itself fired in play 09-12.
 - Post-launch LIVE: F105, F107, F108 (v4), F110 (v5), hotfix 2 (v6), C74+C77+C83 (v7), F119+C86 (v8), F59 repair +
   F60 out (v9), C85+C89+C88 in / F37+F43+F118+F31 out (v10); F104 NOT OURS. ⛔ F107 field route untested.
 - ⛔ Read the GitHub tracker via `api.github.com/.../issues/<n>/comments`, never the HTML page.
-- SITE: deployed 2026-09-11 (`398a1b0` per the deployments API) = **50** live rows; HEAD is **49** and is
-  **content-clear to deploy** (`SITE_ALIGNMENT_AUDIT` 09-13, `541e626`). ⚖️ The deploy is the owner's act —
-  `publish-site.yml` is `workflow_dispatch` only. ⛔ Never quote a stored "deployed = <sha>"; read the deployments
-  API (`prompts/perma/SITE_AUDIT.md`). Owner's 2 pared files (`for-modders.md`, `install.md`) stay uncommitted = decision 47.
+- ✅ SITE DEPLOYED 2026-09-13 07:06Z, `d86a347`, state `success` (deployments API + live page read): **49** live rows
+  (45 success + 4 question) = the card's Forty-nine, first agreement since 09-11. Live FAQ carries "Four judgment calls"
+  and no longer promises the retired farm-oxygen repair. ⚖️ The deploy is the owner's act — `publish-site.yml` is
+  `workflow_dispatch` only. ⛔ Never quote a stored "deployed = <sha>"; read the deployments API (`perma/SITE_AUDIT.md`).
+  Owner's 2 pared files (`for-modders.md`, `install.md`) stay uncommitted = decision 47.
 - ⭐ FR-1 TEMP WORKAROUND MOD LIVE 09-11 (Steam 3799500849 / PDX 158711). **ALL FR-1 / Linux / NVIDIA work →
   `prompts/perma/LINUX_DISPATCH.md`.** Field: 3 working (one 10xx), 1 failing (GTX 1070, log requested).
 - ⏭ NEXT: no agent item blocks anything — v10 is closed out (`POST_UPLOAD_CLOSE` + `RELEASE.md` §5 ran 09-13).
@@ -118,6 +120,6 @@ BUILD STATE (emitted by tools/doccheck.py)
 - modules: 46 registered (46 default-active, 0 optional-gated files)
 - Code/*.lua files: 47
 - TestKit probes: 97
-- BUGS index rows: 119 F + 12 D + 91 C
+- BUGS index rows: 119 F + 12 D + 92 C
 ```
 Re-emit after any change. Records citing **1.0.7.396349** (`EF-014`) predate the baseline move; INSTALLED is **1.1.0**.

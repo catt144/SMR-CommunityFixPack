@@ -27,7 +27,7 @@ From `docs/agent/STATE.md`, verbatim:
 ```
 - 🚫 OWED — the post-upload sitting, ONE boot (ck144 a; recipes: checklist "THE SITTING RAN" block + `bugs/F117.md`):
   A3 (F118) · A10 · A5 c2 · A9 c4/c5 · F117's station recipe · the first `RunAll()` on the probe kit (re-stamps
-  `WORKFLOW.md:407`, VOID since 09-09). ⛔ Kit verdicts are PREDICTIONS until then; still FAIL/ERROR by name:
+  `WORKFLOW.md:537`, VOID since 09-09). ⛔ Kit verdicts are PREDICTIONS until then; still FAIL/ERROR by name:
   `C47OpenFarmSeedBufferShape` (Herbs 100→50), retired `LanderCargoRatchet`/`DroneUnreachableForever`/`AutoExportPriority`,
   `GhostFarmOxygen`/`LayoutTechLock`/`AnomalyCaveInMap` (modules retired 09-12; Wave14 wrap rows :116-117, :130 too).
 ```
