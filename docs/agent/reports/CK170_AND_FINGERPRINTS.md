@@ -42,7 +42,10 @@ exposed the former status filter; live rows are unchanged by removing that filte
 (b) STATE total and per-line budgets, the push set and skill budgets count LF
 content bytes. Byte-identity gates remain raw-byte comparisons. Caps and measured
 document content are unchanged. The predicted line-ending saving did **not**
-reproduce: this checkout's measured files already use LF. `.gitattributes` keeps
+reproduce for the push set: those files already use LF. The skill-budget readings
+did change: `smr-bug-library` 3685 → 3622 B and `smr-orientation` 3312 → 3248 B,
+emitted by `python tools/doccheck.py` (filter `smr-bug-library|smr-orientation`),
+with identical skill content and unchanged caps. `.gitattributes` keeps
 the STATE pin but no longer describes raw-byte accounting as current behavior.
 
 (c) DISPATCH and WORKFLOW now route index searches by task ID/keyword instead of
@@ -181,9 +184,10 @@ unchanged. No new source/runtime conclusion was inserted into a fact body.
 Phase 1: `e9f589d` (amended locally from `f020bf3` to include the owner-action
 fixture and skill-budget falsifiers). `git show --stat e9f589d`:
 `9 files changed, 354 insertions(+), 95 deletions(-)`.
-Phase 2: the commit adding the provenance tool and this section; obtain its exact
-receipt without a self-referential hash using
-`git log -1 --format='%h %s' -- tools/fact_provenance.py`, then `git show --stat <sha>`.
+Phase 2: `14dcaa9`. `git show --stat 14dcaa9`:
+`14 files changed, 366 insertions(+), 156 deletions(-)`.
+The consumed prompt is deleted in this commit. This receipt was added afterward
+in a report-only close-out commit; no implementation or fact body changed there.
 
 Independent control: the final pre-update snapshot `f7bd2882`
 (`git log -1 --before=2026-09-08T00:00:00Z --format=%H`) contains all 54
