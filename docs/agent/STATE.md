@@ -93,7 +93,7 @@ Module lists are gated by `tools/doccheck.py` MODULE SETS + `tools/upload_prefli
   literal `STILL OPEN:` and `Owner OWES: ck##` idioms, or the owner's register silently drops items.
 - **53**: RULED 09-12 to pare the modder surface, so the hardening queue shrinks with it; rec 1.0.1.
 - **47**: the owner's 2 pared site files ride on it.
-- **133**: ⚠️ `prompts/SELFCHECK_PILOT.md` never fired and is now unreachable — removal RECOMMENDED, not done.
+- **133**: `prompts/SELFCHECK_PILOT.md` ✅ REMOVED 2026-09-13 (owner's word); (2) and (4) still open.
 - **151 (b)** dev-report scope (ck165 lets you defer it) · **151 (c)** open. ⛔ F59 re-derived 09-11: the expedition
   claim CONFIRMED **+ a 2nd caller** (manual Set Residence on a full home OVERFILLS it, both branches); the repair
   must cover both, and the frozen `v5-game-1.0.7` download ships the same body with no version gate.

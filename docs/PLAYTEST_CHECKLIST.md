@@ -263,8 +263,9 @@ award, save edit or external report was made in this investigation.
 >
 > ⇒ **133 is now fully closed.** (1), (3), (5) and (6) fell with the reword and the 73 closure;
 > (2) and (4) are these. ⚠️ One loose thread it leaves, unchanged and still only a recommendation:
-> `agent/prompts/SELFCHECK_PILOT.md` was authored for 133 (1), never fired, and is now unreachable —
-> **removal recommended, not done.** Say the word at any time and it goes.
+> `agent/prompts/SELFCHECK_PILOT.md` was authored for 133 (1), never fired, and was unreachable —
+> ✅ **REMOVED 2026-09-13 on the owner's word.** Recoverable with
+> `git log --diff-filter=D -- docs/agent/prompts/SELFCHECK_PILOT.md`.
 >
 > **(c) 135 — take the `luafn.py` delimiter fix in hotfix 3.** Small standalone change to a **desk
 > tool**, not shipped code; measured to change **0 shipped hashes**, so nothing re-pins and no module
@@ -559,8 +560,8 @@ award, save edit or external report was made in this investigation.
 > [EF-065](agent/facts/EF-065.md), F104, F105 and 73's closure), it would be producing evidence in the
 > **player's own log**, which we cannot get any other way. ⛔ Absent that trigger, do not re-ask.
 >
-> ⚠️ **Untouched by this:** 133 **(2)** and **(4)** are still open — one `FIX_POLICY` §2a line each — and
-> `agent/prompts/SELFCHECK_PILOT.md` is still recommended for removal under 133 (1), not done.
+> ⚠️ **Untouched by this:** 133 **(2)** and **(4)** are still open — one `FIX_POLICY` §2a line each.
+> `agent/prompts/SELFCHECK_PILOT.md` was ✅ **REMOVED 2026-09-13** on the owner's word.
 
 > These are the handoff's §4 — each was raised, written down, and then nothing happened.
 > **(a) is already settled by evidence and only needs your agreement; (b) turns on a single

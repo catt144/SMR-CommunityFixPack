@@ -41,7 +41,6 @@
 | `STANDDOWN_AUDIT.md` | **LIVE, authored 2026-09-13** (owner ask): can our full-body replacements stand down when vanilla fixes the defect? 21 of 45 modules do not delegate; `bodycheck` is at full coverage but declares a **class-c** blind spot (semantics moving under an unchanged body), and `debug.getinfo` is unavailable in the mod sandbox so only behaviour probes are buildable. Design record [D14](../bugs/D14.md). |
 | `DLC_DEEP_CHECK.md` | desk NEXT, after the fix pack is stable |
 | `HOTFIX2_SITTING.md` | closed 09-09; kept for the recipes the owed v7 sitting uses |
-| `SELFCHECK_PILOT.md` | ⛔ **UNREACHABLE 09-12 — do not fire.** Its job was ck133 (1), the self-check pilot; the owner ruled the **reword** instead (ck112 = (a)), so there is nothing for it to measure. **Removal recommended, awaiting the owner's word** (ck133) — nothing has been deleted. |
 | `CAPTURE_SITTING.md` | owner ruling 09-09: KEEP ("we may get to it") |
 | `SMRCF_CHAIN_SET.md` | owner ruling: keep for now (it goes with `smrcf-modbrowser/` and `smrcf-verify/`) |
 
@@ -54,6 +53,10 @@
 - `vanillahunt/`: done (CLOSED 09-10).
 - `prelaunch-sweep/`: done 08-20. ⛔ H-05 sweep fence: never read `SWEEP_FINDINGS.md` to reach a verdict.
 - `smrcf-modbrowser/`, `smrcf-verify/`: see `SMRCF_CHAIN_SET.md`.
+
+**Removed 2026-09-13** (owner's word): `SELFCHECK_PILOT.md` — authored for ck133 (1), **never fired**,
+unreachable since the owner ruled the reword instead (ck112 = 133 (a)). Recover it with
+`git log --diff-filter=D -- docs/agent/prompts/SELFCHECK_PILOT.md`.
 
 **Removed 2026-09-11** (git history keeps them): `FR1_LINUX_SITTING.md` (ran 09-10; superseded by `perma/LINUX_DISPATCH.md`),
 `FR1_TEMP_MOD_R3.md` (held, then overtaken by the live mod), `ONCALL_HANDOFF.md` (09-09; duplicated DISPATCH and nothing cited it),
