@@ -215,8 +215,11 @@ local patch = SMRFixPack.DataPatch(FIX_ID, {
 		-- a successful branch probe could otherwise write/arm healing and ctx.heal()
 		-- would erase the decline. Use the apply-success flag, not registry status:
 		-- run_apply writes status only AFTER apply() returns, including its patch().
-		-- Register applies once; Mod Options retries only optional modules (we are
-		-- not optional). A Lua reload recreates this flag, so no prior verdict survives.
+		-- Reset is moot ONLY while no module is optional and Mod Options retries
+		-- only optional modules. Making any of C89/Saint/Sinkhole optional, or
+		-- generalising the reconciler to every module (deferred ck148), opens retries:
+		-- reset this flag to false at the TOP of apply(), before Require, if that lands.
+		-- A Lua reload recreates this flag, so no prior verdict survives a reload.
 		if not self_check_passed then return end
 
 		local presets = rawget(_G, "TraitPresets")
