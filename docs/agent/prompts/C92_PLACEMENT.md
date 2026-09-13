@@ -53,7 +53,7 @@ the original game**. Ours is app **3215050**, `"installdir" "Project Spark"`. Re
 path from `appmanifest_3215050.acf`, never from the folder name. Archived trees:
 `C:\Dev\SMR-SrcArchive\1.1.0.403908\Src` and `...\1.0.7.396349\Src`.
 
-## 2 · The four questions
+## 2 · The questions
 
 ### Q1 — Should we fix this at all?
 
@@ -184,6 +184,34 @@ were dragged by hand, and the tree's semantics live in `RequireTech`, not in pix
 falsify it" is an acceptable and useful answer.** A confident placement built on geometry
 alone is not.
 
+### Q5 — Residue risk, and clean failure when the vendor patch lands
+
+⚠️ **Largely ANSWERED 2026-09-13 — inherit the analysis, then do the two jobs below.**
+Full working in the addendum's "Residue risk, and whether each route can fail cleanly".
+In short: **Route A (bypass) writes nothing to the save and declines on four behaviour
+tests; Route B (finishing the work) writes self-sustaining vanilla state that neither
+uninstalling the pack nor patching the game removes.** The unlock persists via
+`PresetLockStates` on the `Player`; research completion persists in `tech_researched`;
+and the +20% consumer is **vanilla code**, so the bonus keeps applying with our pack gone.
+Worst case is a vendor *retirement*, where the tech vanishes from the tree while the bonus
+silently continues forever. (An obsolete retirement does **not** crash — checked.)
+
+**What is left for you:**
+
+1. ⛔ **Specify the decline test as a build requirement**, in the words a builder will
+   implement. It is **not optional**: if the devs wire the tech and we keep exempting, we
+   award the achievement to players who have not researched a now-reachable tech — the
+   inverse defect. Behaviour test only, never a version or `LuaRevision` label
+   (`FIX_POLICY` §2a). Confirm all four shapes are detectable at the seam the fix actually
+   uses, and say what the fix does if the preset is **absent** rather than merely changed.
+2. **Give Route B its per-site residue disposition** if you recommend it at all — §3a
+   requires one per exposed site, and a layer-3 harmful residual is accepted only **paired
+   with its remedy** (D13). ⛔ Do not defer a site to the cleaner in advance; that is
+   explicitly not a scoping escape hatch.
+
+⇒ Fold this into **Q1**: the residue asymmetry is an argument for the bypass that stands
+independently of the reachability and loc evidence. Say whether it changes your ruling.
+
 ## 3 · Deliverable
 
 A report at `docs/agent/reports/C92_PLACEMENT.md`, and a **decision block for the owner in
@@ -208,6 +236,7 @@ technology in its own right. File it as its own candidate rather than folding it
 - [ ] 3. Q2 — icon asset: answer with a presence control, or declare unanswerable
 - [ ] 4. Q3 — authoring hints, dropped `Condition`, effect-vs-description scope
 - [ ] 5. Q4 — test the owner's two leads and the bridge slot
+- [ ] 5b. Q5 — decline test specified as a build requirement; Route B residue disposition
 - [ ] 6. Report written; owner decision block + marker added to the checklist
 - [ ] 7. Second lead (Hi-Tech_1's hole) filed or explicitly dismissed
 - [ ] 8. doccheck GREEN; committed with a pathspec; this prompt `git rm`'d

@@ -492,6 +492,96 @@ content never authored in either version — is **NOT ESTABLISHED**.
 ⚠️ This weakens but does not remove the `proximity_power_resonance` → Hi-Tech_1 lead: that
 icon matches no tech in 1.0.7 *or* 1.1.0, so nothing dates it to this rebuild.
 
+## ⭐ Residue risk, and whether each route can fail cleanly
+
+*Owner's question, 2026-09-13: if we FINISH the work rather than bypass it, what is left
+behind when the devs eventually fix it — and can our fix fail cleanly when that patch
+drops? Both halves answer from source. The two routes have **opposite** residue shapes,
+and that asymmetry is an argument on its own.*
+
+### Route A — BYPASS (the achievement exemption, standing recommendation)
+
+**SOURCE: it writes nothing to the save.** A focused listener evaluates the corrected
+predicate and calls the engine's `AchievementUnlock`. The residue is an achievement flag
+on the **account/platform** — which is the intended outcome and the thing the reporter
+asked for. Nothing of ours enters the savegame. Three-tier ethos: layer 1–2.
+
+✅ **It CAN fail cleanly, and the decline is a behaviour test, never a version label**
+(`FIX_POLICY` §2a). Any one of four shapes means stand down:
+
+1. `next(Techs.UndergroundExploitation.RequireTech)` is non-empty — it got connected;
+2. its `LockState` is no longer `"hidden"` — it got revealed;
+3. the preset reports `Obsolete` — retired, so vanilla's own iterator skips it and the
+   achievement passes unaided;
+4. the preset is absent entirely.
+
+In all four we do nothing and vanilla handles it.
+
+⛔ **The decline is REQUIRED, not optional.** If the devs wire the tech properly and we
+keep exempting it, we award the achievement to players who genuinely have **not**
+researched a now-reachable technology — we would be shipping the inverse defect. Any
+build of this fix must carry the test.
+
+### Route B — FINISH THE WORK (unlock / place the tech)
+
+**SOURCE: the unlock is persisted.** `LockablePresetOwner` declares `PresetLockStates` and
+`ProcessedLockablePresets` as properties (`CommonLua/Features/LockablePreset.lua:5-16`),
+held on the `Player` (`CommonLua/Classes/Player.lua:10`) and written by
+`RemovePresetLockStateReason` (`:190-201`). `UnlockTech` therefore writes
+`PresetLockStates.Tech.UndergroundExploitation` **into the savegame**.
+
+**SOURCE: research completion is persisted too**, in `UIPlayer.tech_researched`, and is
+**indistinguishable from a legitimately researched tech**.
+
+⛔ **The decisive point: the +20% consumer is VANILLA code.**
+`SingleResourceProducer:CalcProductionAmount` gates only on
+`UIColony:IsTechResearched("UndergroundExploitation")`
+(`Lua/Buildings/BuildingComponents.lua:1358-1364`). Once that flag is true, **the bonus
+keeps applying with our pack uninstalled.** The mod is not required to sustain the effect
+it caused.
+
+⇒ ⛔ **Route B cannot fail cleanly, by construction.** A decline test can stop us acting
+*again*; nothing undoes what is already written. Uninstalling the pack does not remove the
+bonus. A vendor patch does not remove it. Reversing it would mean clearing a vanilla
+researched flag — destructive, and it robs the player of the tech point they spent.
+Under the three-tier ethos that is **layer 3, harmful trace**, which §3a accepts only
+**paired with a remedy**, with a recorded per-site disposition. It compounds with the
+double-application: the permanent, unremovable change is ≈+44% on underground water
+extractors, not the advertised +20%.
+
+### What happens when the devs actually fix it
+
+| vendor action | Route A (bypass) | Route B (finished work) |
+|---|---|---|
+| **wires it** (adds `RequireTech`, unhides) | declines on test 1 or 2 — clean | player already holds it, obtained without the prerequisite; bonus stands |
+| **retires it** (`Obsolete = true`) | declines on test 3 — becomes a no-op | ⛔ **residue turns silent and permanent** — see below |
+| **ships a savegame fixup** | unaffected | the one mechanism that could clean it — see below |
+
+✅ **Refuted — an obsolete retirement does NOT crash.** I expected
+`Techs.UndergroundExploitation:GetParameterValue(...)` to nil-index once the preset went
+obsolete. It does not: obsolete presets are *"kept for backwards compatibility"*
+(`CommonLua/Preset.lua:85-88`) and only the **iterators** skip them (`:1773`, `:1808`,
+`:1894`), so the id still resolves. No error.
+
+⛔ **But that is exactly what makes retirement the worst case for Route B.** The tech
+disappears from the tech tree (iterators skip it), while `tech_researched` stays true and
+the vanilla consumer keeps paying the bonus — **a permanent balance change with no UI
+trace and no route for the player to see or undo it.**
+
+✅ **One reassurance for Route B.** Fixups are gated by the `AppliedSavegameFixups`
+GameVar, and any fixup **added after a save was created** runs on that save
+(`CommonLua/SavegameFixup.lua:10-40`). Our pack changes neither `lua_revision` nor that
+var, so a vendor remedy would still reach a save we had touched. ⚠️ That depends entirely
+on the vendor choosing to write one, which we cannot assume and must not plan around.
+
+### Verdict
+
+**The residue asymmetry is an independent argument for the bypass.** Route A puts nothing
+in the save and stands down on four behaviour tests. Route B writes self-sustaining
+vanilla state that neither uninstalling the pack nor patching the game removes, and whose
+worst case is silent and permanent. ⇒ This reinforces the standing recommendation without
+relying on any of the earlier reasoning.
+
 ## Not opened
 
 - **Where the tech was *intended* to sit.** No positive evidence was found — only the
