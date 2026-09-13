@@ -28,8 +28,8 @@ WAITING: fresh — 123 checklist items, 44 marked, 5 waiting on the owner, 29 ne
 doccheck: GREEN
 ```
 
-Phase 2 measurements are recorded below; implementation shas/diff-stats
-follow each commit landing.
+Both phase measurements and implementation shas/diff-stats are recorded
+below. Implementation is complete; separate-session adjudication is outstanding.
 Full owner-row list before: `[53, 133, 151, 169, 170]`. Command/filter:
 Python `re.findall(r'^\| (\d+) \|', text, re.M)` over WAITING_ON_YOU.md,
 converted to integers and sorted. Full register bytes are also compared.
@@ -66,8 +66,8 @@ Quotes spanning source line breaks join those breaks with spaces.
 
 ## Not done and deliberate exceptions
 
-- Phase 2 implements only collapses with complete landings. Final commit and
-  measurement evidence is appended as each implementation commit lands.
+- The open-decisions collapse and incomplete canonical landings are deliberately
+  not implemented for the reasons below; the authorized pass is otherwise complete.
 - Open-decisions collapse blocked on markers. MEASURED without writing sources:
   import tools/doccheck.py; run `classify_items(checklist_items())`; replace
   `state_owed_numbers` **in memory** with `lambda: {144, 151}` (remaining Owner
@@ -164,3 +164,29 @@ PUSH SET: 41970 B in 5 file(s) ≈ 19k tokens (budget 40960 B)  ⚠ OVER
 The warning remains outside this bounded pass; no additional eviction or
 owner policy call was made to clear it. Separate-session adjudication of
 these output files is still outstanding by the owner's design.
+
+Phase 2: `0bfd58853cfc55e97440036a7e61576170bd598e`. Command `git show --stat --format= 0bfd58853cfc55e97440036a7e61576170bd598e`,
+filter final non-empty summary line:
+
+```text
+4 files changed, 72 insertions(+), 240 deletions(-)
+```
+
+This final report-only evidence commit follows the two separately committed
+implementation phases so both immutable shas can be quoted. Its identity is
+retrievable with `git log -1 --format=%H -- docs/agent/reports/HAZARD_KERNEL_PASS.md`;
+its diff-stat with the same command's sha passed to `git show --stat`.
+
+MEASURED: `python tools/upload_preflight.py`, final summary and the ordered
+items/metadata guard (no portal call):
+
+```text
+  PASS        items.lua ModItemCode list == metadata `code`, same files, same order                         47 entries, in order
+  23 checked · 0 FAIL · 1 UNCHECKABLE
+```
+
+The UNCHECKABLE guard is portal login; no upload success is claimed.
+
+Entry/fact front matter and checklist execution markers were also compared
+against the baseline, preserving all fields and marker lines. No policy call
+or status change is hidden in the citation sweep.
