@@ -139,6 +139,10 @@ rebuilds both indices from **every entry on disk, a peer's uncommitted ones incl
 
 ## 5 · Traps that have each cost this project a real error
 
+✅ **HOMED 2026-09-13** — traps 1 and 2 plus the `--regen-waiting` rule above now live in
+`agent/WORKFLOW.md` § "Writing in a shared tree". They were the three things that existed ONLY in
+this file while its own retirement trigger had already fired. The copies here are a record.
+
 1. ⛔ **All sessions share ONE git identity** — `git log --author` cannot attribute work. Identify by
    **sha + diff**, and list your own shas when relaying.
 2. ⛔ **A pathspec is only HALF a commit fence.** It protects every OTHER file, but for a path you *name*, git

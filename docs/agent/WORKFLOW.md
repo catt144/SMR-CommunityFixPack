@@ -890,3 +890,25 @@ none. Cheap trusting workers, one expensive skeptic, triggered rather than const
 ### Trust by source
 The three classes are stated once, in `CLAUDE.md`, because every agent needs them before it
 could decide to load anything. R-A is how class 2 is discharged: one command, not a re-read.
+
+## Writing in a shared tree (traps, each one cost a real error)
+
+Five or more interactive sessions work this checkout at once. These are mechanical rules about
+that, not rails — they were homed here 2026-09-13 from `prompts/perma/HANDOFF_ORCHESTRATOR.md`,
+whose own retirement trigger had fired while they still lived nowhere else.
+
+- ⛔ **All sessions share ONE git identity.** `git log --author` cannot attribute work. Identify
+  by **sha + diff**, and list your own shas when you relay.
+- ⛔ **A pathspec is only HALF a commit fence.** `git commit -- <paths>` protects every OTHER
+  file, but for a path you *name* git commits that path's **working-tree** content — a peer's
+  unstaged edits included (09-12, `cc3edf2`). On a file two sessions are inside at once, stage
+  **your own hunks** (`git add -p`) and commit **without** a pathspec.
+  ⚠️ It cuts both ways: on 09-13 this session's two uncommitted `STATE.md` edits were swept into
+  a peer's commit (`bf2d75f`) seconds later. Nothing was lost, but neither commit message
+  describes what it actually contains. **Re-check `git status` on a shared file immediately
+  before the write, not at the top of the session** — a clean status 20 minutes old is not a fence.
+- ⛔ **After a CHECKLIST-ONLY edit run `python tools/doccheck.py --regen-waiting`, NOT `--regen`.**
+  `--regen` rebuilds both indices from **every entry on disk, a peer's uncommitted ones included**.
+  An edit that touches **entries** as well still needs the full `--regen` — the distinction is what
+  you changed, not a preference. Before any `--regen`, check `git status docs/agent/bugs/` for
+  foreign ` M`/`??`.
