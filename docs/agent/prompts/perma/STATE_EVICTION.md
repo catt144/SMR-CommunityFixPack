@@ -18,27 +18,6 @@ per-line byte cap, stable IDs (`F##`/`EF-###`/`H-##`/item numbers) so grep
 lands, no decorative prose, and NEVER widen or pack lines to satisfy any
 budget — if content doesn't fit, evict, don't compress.
 
-## ⏳⏳ 2026-09-13 ONLY — THIS RUN MUST ALSO PUT THE HARD CAP BACK
-
-**The hard cap is temporarily 24 KiB and reverting it is part of this run's job.**
-On 2026-09-12 the owner raised `STATE_MAX_BYTES` in `tools/doccheck.py` from `18 * 1024`
-to `24 * 1024` so the v10 release pass could write to STATE without a silent mid-pass trim
-(eviction was deferred until v10 shipped). **v10 is now live**, which is what unblocks this run.
-
-⇒ **After you have evicted and doccheck is GREEN, in the SAME commit:**
-
-1. Set `STATE_MAX_BYTES` back to `18 * 1024` in `tools/doccheck.py`.
-2. Delete the `⏳ TEMPORARY` comment block above the constant **and this section**, which exist
-   only to carry the obligation.
-3. Re-run `python tools/doccheck.py` and confirm it is still GREEN **against the restored 18 KiB
-   cap** — that is the real test of whether the eviction was deep enough. ⛔ If STATE does not fit
-   under 18,432 bytes, **evict further**; do not leave the cap raised to make it pass, and do not
-   ask for a new raise without saying what you could not evict and why.
-4. Clear the obligation from `perma/HANDOFF_ORCHESTRATOR.md` §1a, which records it.
-
-⛔ **Leaving the 24 KiB cap in place silently turns headroom into the new budget — the exact
-failure the byte cap exists to prevent.** The warn stayed at 12 KiB throughout and does not move.
-
 ## The boundary — what earns push (stays in STATE)
 
 STATE is a kernel: **status + pointer, never derivation.** Five sections only:

@@ -54,6 +54,13 @@ completed tests move whole to
 > **37 Q2 (Steam's version number)** is not reopened — it stayed closed since 2026-08-29 (both
 > listings ship the same tree `version` on an update; unaffected by which portals ran which sitting).
 >
+> ✅ **➋ DISCHARGED 2026-09-13** — `faq.md` was committed and pushed as `d86a347` by the site-alignment
+> audit (it carried the F37 promise removal). Verified in the site repo: the only files still uncommitted
+> there are your own two pared ones, `content/for-modders.md` and `content/install.md` — that is decision
+> **47**, not this one. The site deploy is content-clear; firing it is still your act (`workflow_dispatch`).
+>
+> <sub>The original ➋, kept for the record:</sub>
+>
 > **➋ Still yours:** `content/faq.md` in `C:\Dev\SMR-CommunityMods` is still sitting uncommitted
 > beside your own paring edits (unread by any agent) — the site deploy for v10 stays blocked on you
 > committing it. Everything else from the original ➊/➋/➌ block below is otherwise discharged.

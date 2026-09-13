@@ -76,30 +76,14 @@ condition — making any module optional re-opens it. **C89 was deliberately lef
 
 ---
 
-## 1a · ⛔ STATE.md EVICTION IS DEFERRED UNTIL v10 IS LIVE — owner ruling, 2026-09-12
+## 1a · ✅ STATE.md EVICTION RAN — 2026-09-13, and the hard cap is back at 18 KiB
 
-⛔ **Do NOT fire `prompts/perma/STATE_EVICTION.md` before v10 ships.** The owner has ruled it waits until live; the byte
-warn is expected and is **not** a reason to stop, to open an eviction pass, or to ask again. ⛔ **Read the live byte
-number from `doccheck`, never from this file.**
+The deferred eviction (checklist 132) fired once v10 went live: STATE 18,663 B → 11,363 B, under the
+12 KiB warn again, and `tools/doccheck.py`'s `STATE_MAX_BYTES` is restored to `18 * 1024` in the same
+commit. **The owed task recorded here is discharged — nothing is owed on the byte budget.** Grave:
+`git show 541e626:docs/agent/STATE.md`; move record in `docs/archive/SESSION_LOG.md` 2026-09-13.
 
-### ⏳⏳ THE HARD CAP IS TEMPORARILY RAISED — and putting it back is an OWED TASK
-
-**Owner ruling 2026-09-12: the hard cap moved 18 KiB → 24 KiB** (`tools/doccheck.py:97`, `STATE_MAX_BYTES`). The
-retirements left STATE at 17,778 B = **654 B** of headroom, and the release pass still had to write there; the only
-alternative was a silent mid-pass trim of load-bearing content, which the procedure forbids. **This is the first time
-the hard cap has ever moved.** ⚠️ The **warn stays at 12 KiB** on purpose — it is what fires the eviction, and a raised
-hard cap must not make the warn feel optional.
-
-⭐⭐ **OWED, IN THIS ORDER, AS THE FIRST CLEANUP AFTER v10 IS LIVE — the owner asked for this reminder by name:**
-
-1. **Run `prompts/perma/STATE_EVICTION.md`.** This is the deferred eviction, now unblocked.
-2. **Then put the hard cap BACK to `18 * 1024`** in `tools/doccheck.py` and delete the ⏳ TEMPORARY comment block
-   above the constant. ⛔ **Step 2 is not optional and is not "tidy-up": a 24 KiB cap left in place silently becomes the
-   new budget, which is exactly the failure the byte cap exists to prevent.** Every byte in STATE is paid by EVERY
-   session at boot.
-
-⚠️ **Until then, the extra 6 KiB is HEADROOM FOR ONE RELEASE, not a new budget.** Keep every STATE edit as small as it
-can be — replace lines rather than adding them, prefer a pointer to prose. Do not spend the headroom because it is there.
+⛔ Read the live byte number from `doccheck`, never from this file.
 
 ---
 

@@ -8,6 +8,95 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-13 — STATE eviction, post-v10: 18,663 B of kernel-plus-history cut back to a kernel
+
+tags: STATE-eviction STATE-budget ck132 ck158 ck156 ck159 ck165 ck166 ck167 ck168 ck130 ck131 ck133 ck134 ck151
+ck152 ck155 ck112 ck99 ck100 ck101 ck73 ck76 ck43 ck51 ck40 ck50 ck39 ck41 ck47 ck53 ck169 F31 F37 F43 F60 F114
+F115 F116 F117 F118 F119 F59 C74 C77 C83 C85 C86 C88 C89 C90 C91 EF-075 EF-078 EF-079 EF-080 EF-083 H-10 hotfix-2
+vanillahunt
+
+`prompts/perma/STATE_EVICTION.md` fired, deferred since 2026-09-12 by checklist 132 until v10 was live
+(it went live 09-13). Pre-eviction grave: **`git show 541e626:docs/agent/STATE.md`** — the full 18,663 B
+file, forever. This entry is the move record: everything cut below is CLOSED, or has a home and a pointer.
+
+**The one thing that moved besides STATE.** The hard byte cap went back to **18 KiB** in
+`tools/doccheck.py` (`STATE_MAX_BYTES`), reverting the owner's 2026-09-12 raise to 24 KiB, and the
+⏳ TEMPORARY comment block, the prompt's one-run section and `HANDOFF_ORCHESTRATOR.md` §1a's owed task
+were deleted with it. The raise existed to let the v10 release pass write to STATE without a silent
+mid-pass trim; it was headroom for one release, and the release is over. The **warn stays at 12 KiB**
+and did not move (checklist 132, SKIP 09-12). doccheck is GREEN against the restored 18 KiB cap.
+
+**Evicted, with where each now lives.**
+
+- **ck158, the v10 attended gate** (C85 + C89 + C88 all `tested-attended`, one boot, 49/49 applied,
+  0 error lines) — its own SESSION_LOG entry of 2026-09-12, each entry's **§Attended check**, and
+  checklist 158. Log `archive/logs/ck158sitting_Mars.exe-20260912-21.32.07-6a91a190.log`. ⛔ The one
+  live consequence is KEPT in STATE: C89's B2 panel leg was not run by owner ruling, and C89 reopens on
+  a countering field report. C85's `(daily)` arm and C88's same-type compare (structurally impossible)
+  are recorded there as unavailable, not owed.
+- **The three retirements** — F37 (`Fix_GhostFarmOxygen`), F43 + its F118 rider (`Fix_LayoutTechLock`),
+  F31 (`Fix_AnomalyCaveInMap`) deleted across `Code/`, `items.lua` and `metadata.lua` together (H-10),
+  entries restatused, F21 stays: `560343a` (ck156, ck159). The three orphaned TestKit probes they leave
+  behind stay named in STATE's OWED bullet, because that is live owed work.
+- **The v10 release itself** — upload, writeback, outbox close, and the delivered-pack read: SESSION_LOG
+  2026-09-13 (POST_UPLOAD_CLOSE) and checklist 169. What STATE keeps is only the live position: ids,
+  tree `version` 11, `pdx_version` "9", the count word **Forty-nine**, the delivered pack's bytes+md5,
+  and the unexplained 56-vs-54 archive-entry gap, which is a watch, not history.
+- **The 09-13 site alignment audit** — `541e626`, one orphaned promise found and closed (`faq.md`'s
+  phantom-farm-oxygen row, pushed as `d86a347` in `SMR-CommunityMods`), nothing else orphaned across the
+  40 modules deleted since 09-08; the retirement direction is now a standing check in
+  `PUBLIC_SURFACE_SWEEP.md` §1, so no future retirement needs its own audit. ✅ Checklist **169 ➋ is
+  discharged by that push** — verified in the site repo, whose only remaining uncommitted files are the
+  owner's two pared ones (`for-modders.md`, `install.md`) = decision 47. STATE keeps the deploy position
+  only: live 50 rows vs committed 49, owner's act, `workflow_dispatch` only.
+- **The ck165–168 decision sweep and the opt-in offload** — SESSION_LOG 2026-09-12 lookback; bodies in
+  the checklist. STATE keeps 165 (replies are pull-only) and 168 (baseline is 1.1.0) as Rules in force,
+  because both name an action an agent could take unattended; 162/163/164/166/167 are discharged and
+  drop to their checklist bodies. `reports/PINNED_PARENTS_PASS.md` holds 163 (b)'s 7/7.
+- **Decisions closed or overtaken, dropped to the checklist wholesale**: 155, 156, 159 · 150, 147, 144,
+  149, 153 · 99, 100, 101 (six modules deleted `2dc1dbe`, hotfix-2 chain closed, `HOTFIX_2_AUDIT.md`) ·
+  112 (a) REWORD landed · 125 · 130 · 131 · 134 · 73 · 76, 43, 51 · 40 · 50 · 39, 41 · 98 · 132 ·
+  151 (a)/(d)/(e) · 152 (A1/A2/(c) part) · 148 DEFERRED. **Still open and therefore KEPT** in STATE's
+  decisions section: 47, 53, 133 (2) + (4), 151 (b)/(c), 152 (c).
+- **The C90 guards build** (Saint + Sinkhole apply-success guards, desk-only evidence, no public row) —
+  `reports/C90_GUARDS_BUILD.md`, entry C90. STATE keeps one line: built, shipped in v10, **unexercised**.
+  **C91** (vanilla leaks the Building Codes modifier on repeal) stays as an open candidate line.
+- **hotfix 2** (v6, 36 modules deleted because 1.1.0 fixes them, 10 re-copied) — `prompts/hotfix2/README.md`,
+  `reports/HOTFIX_2_AUDIT.md`. The owner rule it produced — a patch note saying "Fixed" is a **CLAIM until
+  we confirm it** — is load-bearing and moves up into Rules in force rather than being evicted.
+- **vanillahunt** (CLOSED 09-10, item 99) — `prompts/vanillahunt/HUNT_AUDIT.md` holds the instrument gaps
+  (§1.4's 1,281 unlisted table-level hunks), the 12 re-derived P2s (6 hold, 5 weakened, **C80 REFUTED**),
+  and **C82**'s filing. ⛔ Per H-05 no link verdict is restated here or in STATE; ck142 is the hotfix-3 list.
+- **F114 + F115 observed fixed in play** 09-09 (attended) — SESSION_LOG 09-09 sitting entries; both entries
+  carry it. Closed, so it leaves STATE. **F116/F117/F118 stay** — never reproduced, status HELD, which is a
+  standing rail for any session tempted to promote them.
+- **`SaintBlessing`'s heal is no longer unexercised** — it fired in play 09-12 (ck158 entry, `:142`→`:160`).
+  The ck130 "SHIPS UNEXERCISED" framing is history; STATE keeps only the surviving rail, that its kit probe
+  PASSes vacuously with no domed Saint and field reports are the detector.
+
+**Hazards, rules and build state.** All ten hazards H-01…H-10 were re-tested against the admission test
+(*names an action an agent could take unattended, states the rail, points to the detail*) and all ten pass;
+H-02's two-paragraph derivation was cut to its two mechanical rails plus the `Mod.lua`/`GedModEditor.lua`
+citations. No rule in force was dropped. The build-state block is `--emit-counts` output, byte-identical,
+never hand-typed: **46 registered modules / 47 `Code/*.lua` / 97 probes / 119 F + 12 D + 91 C**.
+
+**Sizes.** 18,663 B → **11,566 B** (−7,097 B, −38%), 177 lines → 122 — both numbers read back from
+`doccheck`, not predicted. At the 08-18 measurement of ~2.15 B/token for this file's emoji-dense prose that
+is roughly **8,680 → 5,375 tokens paid by every session at boot**. It is under the **12,288 B warn** as well
+as the restored **18,432 B** hard cap, so doccheck no longer warns on STATE at all.
+
+⚠️ **The eviction broke an instrument, and the regen caught it.** `docs/WAITING_ON_YOU.md`'s decisions table is built by `state_owed_numbers()`, which reads two LITERAL idioms out of
+STATE — `Owner OWES: ck##` and `STILL OPEN: <n> <lowercase word>` — and infers nothing from adjacency. The first
+rewrite kept the `Owner OWES:` line but dropped `STILL OPEN:`, and the owner's register silently fell from 3 rows to
+2 (**53 vanished**). Restored as an enumeration line, with a ⛔ note in STATE saying why the wording is load-bearing;
+the register now reads **4** (169, 151, 133, 53) because 133's open halves are enumerated too. ⇒ After any STATE
+rewrite, run `--regen` and COMPARE the owner-facing row count, not just doccheck's colour.
+
+**Flagged rather than evicted** (the "when in doubt it stays one more cycle" rule): the delivered-pack
+56-vs-54 entry gap, kept in Now because nobody has explained it; F117's station recipe, kept because its
+`CachedArgShape()` nil case makes the control vacuous and a future session will otherwise re-derive that;
+and the OWED playtest bullet in full, because `doccheck` renders `docs/WAITING_ON_YOU.md` verbatim from it.
+
 ## 2026-09-13 — v10 post-upload close: writeback restored, outbox cleared, delivered pack read
 
 **Precondition confirmed by the owner's own word** (both Paradox and Steam ran this sitting) before
