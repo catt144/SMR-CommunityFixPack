@@ -21,47 +21,42 @@ and Codex sessions both commit here, several at once, and **Codex is invisible t
 
 ## 0 · Orient, then ask
 
-`git pull` · `git log --oneline -15` · `git status --short` · `ListAgents` · `docs/agent/STATE.md` ·
-`prompts/perma/DISPATCH.md` §0–§3 · `prompts/README.md`. Open a **live todo list**.
+⛔ **`perma/DISPATCH.md` §0–§1 is the orientation and the bindings — follow it, it is not repeated here.**
+Add `ListAgents` (peers edit this tree concurrently) and open a **live todo list**.
 
 **Unless the owner's message names a task, a pasted handoff means ORIENT: summarise and ASK what to take.**
 Do not execute.
 
 ---
 
-## 1 · Where v10 landed — pointers only, ⛔ do not re-derive any of it
+## 1 · Where v10 landed
 
-**Live on both portals 2026-09-13**: `version` 11, `pdx_version` "9", count word **Forty-nine**.
-C85 + C89 + C88 in; F37, F43 (+F118 rider) and F31 retired. Close-out and outbox clear ran (`1237454`).
-
-**Site deployed 2026-09-13 07:06Z at `d86a347`, state `success`** — 49 live rows (45 success + 4 question),
-matching the card for the first time since 09-11. ⛔ Never quote a stored "deployed = <sha>"; read the
-deployments API (`perma/SITE_AUDIT.md`).
+⛔ **`STATE.md` carries all of it** — version, portal ids, count word, what went in and out, the site
+deployment, C90's unexercised status, the three TestKit probes now pointing at retired modules. **Read it
+there; it is the kernel and every session already pays for it.** Nothing about v10 is re-derived here.
 
 ✅ **Discharged, and must not reappear on any owed list:** ck158 (the attended gate) · the three retirements
-· C90 (built `153d180`+`e5f1947`) · the STATE eviction **and** its cap revert to `18 * 1024` (`c820c7f`).
-
-⚠️ **Two things v10 leaves behind, both recorded so nobody re-derives them:**
-
-- **C90 ships `fixed` but UNEXERCISED** and must never be called `tested-attended` — its guard cannot fire
-  on a healthy 1.1.0 install (ck130 precedent). **No public row**; it is our own bug.
-- **Three TestKit probes target retired modules** — `GhostFarmOxygen`, `LayoutTechLock`, `AnomalyCaveInMap`,
-  plus the Wave-14 wrap rows. Expected FAIL/ERROR on the owed `RunAll()`, named in STATE. Not a regression.
+· C90 (`153d180`+`e5f1947`) · the STATE eviction **and** its cap revert to `18 * 1024` (`c820c7f`).
 
 ---
 
 ## 2 · What is open
 
-### 2a · Owner — three things, none of them blocking
+### 2a · Owner
 
-| | what |
-|---|---|
-| **144 (a)** | the owed post-upload boot, ONE session. ⚠️ ck151 (c): F52 passage / F54 hub / C83 arrival join it **only if the loaded colony already has those layouts — otherwise SKIP THEM BY NAME**; never build a layout to make a check possible. It also re-stamps the `RunAll()` line (`WORKFLOW.md:537`), VOID since 09-09. |
-| **151 (b)** | which sections of `reports/MIGRATION_DEV_REPORT.md` may go to the developers. ⚠️ **ck165 lets the owner defer this indefinitely** — it is messaging. ⛔ Do not raise it. |
-| **47** | the two modder-page wordings — `content/for-modders.md` + `content/install.md` are still uncommitted in `C:\Dev\SMR-CommunityMods`. ⛔ **A DIFFERENT repo: never commit, stash, discard or checkout there.** |
+⛔ **Do NOT maintain an owner list here.** `docs/WAITING_ON_YOU.md` is **generated** from the checklist
+markers by `doccheck --regen` and is the only list that can be trusted — a hand-kept copy in this file
+went divergent within a day. **Read it, then read the checklist body it links to.**
 
-⛔ **NOTHING ELSE IS OWED BY THE OWNER.** ⛔ **Do not rebuild an "owed" list from an older document** — this
-one was wrong for most of 09-12 because it inherited a table that contradicted its own closed list.
+⚠️ **Two things the generated list cannot tell you, so they stay here:**
+
+- **144 (a), the owed boot** — ck151 (c) ruled that F52 passage / F54 hub / C83 arrival join it **only if
+  the loaded colony already has those layouts; otherwise SKIP THEM BY NAME.** ⛔ Never build a layout to
+  make a check possible. That boot also re-stamps the `RunAll()` line (`WORKFLOW.md:537`), VOID since 09-09.
+- **151 (b)** is messaging, and **ck165 lets the owner defer it indefinitely — ⛔ do not raise it.**
+
+⛔ **Never rebuild an "owed" list from an older document** — this file's did exactly that on 09-12 and
+contradicted its own closed list for most of a day.
 
 ### 2b · Agent work, needing no ruling — the v10 fence is LIFTED, pick one with the owner
 
@@ -97,24 +92,23 @@ one was wrong for most of 09-12 because it inherited a table that contradicted i
 
 ---
 
-## 3 · Method the owner set — inherit this
+## 3 · Method — only what has no other home
 
-- ⛔⛔ **REPLIES ARE PULL-ONLY (ck165).** Never draft one unasked, never put one on the owner's owed list,
-  never nudge a waiting `DRAFT`, never gate work on one. ✅ **Triaging a report into `agent/bugs/` is
-  UNAFFECTED** — never cite the rule to avoid reading, filing or investigating a report.
+⛔ **Two of these are WORKFLOW rules, not this file's: read them there, they are canonical and dated.**
+**Rule 5b** replies are PULL-ONLY (`WORKFLOW.md:76`) · **rule 5a** a ruling carries the state it was made in
+(`:60`). ⚖️ The **VOICE RULE** lives with the text it binds: `reports/still-needed/WORDING_RULED.md` and
+`perma/PUBLIC_SURFACE_SWEEP.md`.
+
+What is only here:
+
 - **Delegate heavy reads; keep the conclusion.** Review peers at **SURFACE level** and **escalate rather
   than deep-check** — a high-context session is at *higher* hallucination risk than a fresh one.
 - **Chain:** Astra fans out → Astra re-verifies its own subagents → orchestrator sniff test → a cross-vendor
   Claude agent **only if the sniff test fails**. Hunts, broad diffs and heavy coordination go to **Astra
   (Codex)**; builds to a Claude session.
-- ⚖️ **The VOICE RULE binds every public surface:** plain for players, precise for the two Paradox developers
-  who plan hotfixes from our fix list. **No "no guarantees" / "unverified" / "not witnessed" hedging.** If the
-  owner cannot follow a sentence, it is word salad and it fails.
-- ⭐ **A ruling carries the condition it was made under** (`WORKFLOW.md` rule 5a). Record the state; re-read it
-  against today's before treating it as binding; never call a later ruling a "reversal" without checking the
-  earlier one's condition. ⇒ **When you refute a claim, say what your refutation depends on** — the C90/C89
-  "everlasting flag" refutation holds *only while no module is `optional`*, and the `fixtoggles` chain would
-  end that.
+- ⭐ **When you refute a claim, say what your refutation depends on.** The C90/C89 "everlasting flag"
+  refutation holds *only while no module is `optional`* — the `fixtoggles` chain would end that. A
+  refutation without its condition is a trap for the next reader. (The general form is rule 5a.)
 
 ---
 
@@ -170,18 +164,16 @@ this file while its own retirement trigger had already fired. The copies here ar
 
 ---
 
-## 6 · Where things live
+## 6 · Where things live — ⛔ the map is `docs/README.md` and `prompts/README.md`
 
-- **`STATE.md` is the kernel** — status + pointer, **never derivation.** ⛔ Read its live byte number from
-  `doccheck`, never from a document. Warn 12,288, hard cap **18,432** (restored 09-13 after the eviction).
-  ⇒ **Put closed rulings in the checklist, not here.** If the hard cap is approached that is an owner
-  decision — never a silent trim.
-- **Owner decisions go in `docs/PLAYTEST_CHECKLIST.md` → "Decisions waiting on you"**, never only in agent docs.
-- Release machinery `perma/RELEASE.md` (⭐ **it spans the owner's upload and is finished at §6, not §2** —
-  the close-out is part of its job) + `perma/RELEASE_OUTBOX.md`. Surfaces `perma/PUBLIC_SURFACE_SWEEP.md`
-  (`README.md` is its §3b). Site audit `perma/SITE_AUDIT.md`. Eviction `perma/STATE_EVICTION.md`.
-- Field-report reply drafts: `docs/FIELD_REPORT_REPLIES.md` (**pull-only**, see §3).
-- Prompt map `prompts/README.md`; reusable prompts in `prompts/perma/`, one-offs in the root, `git rm`'d when fired.
-- History `docs/archive/SESSION_LOG.md` · defect truth `agent/bugs/INDEX.md` · engine facts `agent/facts/INDEX.md`
-  (⭐ **`EF-###` ids are allocated by THIS repo** for both repos — ck167/86).
-- The opt-in mod's own decisions: **`C:\Dev\SMR-OptInPack\docs\DECISIONS_OWED.md`** (moved there 09-12, ck167).
+Only the things those two do not already say:
+
+- ⭐ **`perma/RELEASE.md` SPANS the owner's upload and is finished at §6, not §2** — the close-out is part of
+  its job, never a separate errand. A release that stops at "ready to upload" leaves the outbox uncleared and
+  `metadata.lua`'s comments stripped (trap 3).
+- **`STATE.md` is a kernel: status + pointer, never derivation.** ⇒ **Put closed rulings in the checklist,
+  not there.** ⛔ Read its live byte number from `doccheck`, never from a document.
+- **Owner decisions go in `docs/PLAYTEST_CHECKLIST.md` → "Decisions waiting on you"**, never only in agent
+  docs; `docs/WAITING_ON_YOU.md` is the generated view of them (§2a).
+- ⭐ **`EF-###` ids are allocated by THIS repo** for both repos (ck167/86). The opt-in mod's own decisions
+  live in **`C:\Dev\SMR-OptInPack\docs\DECISIONS_OWED.md`** (moved 09-12, ck167).
