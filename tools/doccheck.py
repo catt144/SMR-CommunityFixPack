@@ -840,6 +840,23 @@ def regen(out):
                "the checks below read the result")
 
 
+def regen_waiting(out):
+    """--regen-waiting: rewrite ONLY docs/WAITING_ON_YOU.md.
+
+    The register is a pure function of docs/PLAYTEST_CHECKLIST.md's markers and
+    docs/agent/STATE.md, so it can be rebuilt without touching anything else.
+    That matters: a full --regen rebuilds bugs/INDEX.md and facts/INDEX.md from
+    every entry ON DISK, a sibling session's uncommitted ones included, so a
+    checklist edit should never have to reach for it. The checklist is the
+    busiest file in this repo; this is the flag to use after editing it.
+    """
+    items = checklist_items()
+    splitter().write_lines(WAITING_MD,
+                           render_waiting(classify_items(items) if items else items))
+    out.append("REGEN: wrote docs/WAITING_ON_YOU.md only — bugs/INDEX.md, "
+               "facts/INDEX.md, AGENTS.md and the skills mirror were NOT touched")
+
+
 def check_waiting(out):
     """docs/WAITING_ON_YOU.md must be exactly what its sources render right now.
 
@@ -1568,7 +1585,16 @@ def main():
     ap.add_argument("--regen", "--regen-index", action="store_true", dest="regen",
                     help="rewrite every GENERATED file from its source first — "
                          "docs/agent/bugs/INDEX.md, docs/agent/facts/INDEX.md, "
-                         "AGENTS.md (byte copy of CLAUDE.md) — then run the checks")
+                         "docs/WAITING_ON_YOU.md, the .agents/skills/ mirror and "
+                         "AGENTS.md (byte copy of CLAUDE.md) — then run the checks. "
+                         "--regen-index is an ALIAS, not a narrower form: it writes "
+                         "all of the above. The indices are built from every entry "
+                         "ON DISK, a peer's uncommitted ones included — after a "
+                         "checklist-only edit prefer --regen-waiting")
+    ap.add_argument("--regen-waiting", action="store_true", dest="regen_waiting",
+                    help="rewrite ONLY docs/WAITING_ON_YOU.md (a pure function of the "
+                         "checklist's markers and STATE.md), then run the checks — the "
+                         "contained cure for the RED a checklist edit causes")
     ap.add_argument("--emit-counts", action="store_true",
                     help="also print the STATE-ready counts block")
     ap.add_argument("--emit-fingerprint", action="store_true",
@@ -1597,6 +1623,8 @@ def main():
     try:
         if args.regen:
             regen(out)
+        elif args.regen_waiting:
+            regen_waiting(out)
         model = sb.load_from_dir()
         ok = check_entries(model, out)
         ok = check_index(model, out) and ok
