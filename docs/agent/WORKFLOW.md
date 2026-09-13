@@ -779,7 +779,13 @@ narrower true thing instead.
 
 **6. Whether the brief deletes itself.** One-off jobs delete their brief on
 completion (precedent: the popup audit). Re-runnable ones say plainly that they
-do not.
+do not. ⛔ **Deleting the brief means the file AND its row in
+`prompts/README.md`, in the same commit** — that map lists LIVE prompts only
+(owner ruling 2026-09-13, checklist 174), and doccheck's PROMPT MAP gate now
+fails a commit that moves only one of the two. *Observed failure 2026-09-13:*
+the ck170 brief's whole instruction was "`git rm` this file when it has fired",
+so `14dcaa9` did exactly that and left a "NOT FIRED — for Codex" row standing
+over spent work, pointing the next session at a job already done.
 
 **7. The stale-probe gate — for any brief that runs or records a test.** The
 brief must instruct: run the probe sweep (the hard gate above) BEFORE testing,

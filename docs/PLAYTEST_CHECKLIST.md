@@ -29,6 +29,33 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### ✅ 2026-09-13 — 174 RULED: a fired one-off leaves the prompts map entirely
+<!-- ck:174 status:ruled owner:no -->
+
+**Owner ruling, 2026-09-13**, on finding ck170's brief `git rm`'d with its
+"NOT FIRED — for Codex" row still standing in `agent/prompts/README.md`:
+
+- **(a)** Firing a one-off deletes **the file and its row, in the same commit**.
+  No tombstones: the map lists LIVE prompts only. Graves come from
+  `git log --diff-filter=D -- docs/agent/prompts/`.
+- **(b)** The obligation is a **machine gate**, not a habit — doccheck's
+  **PROMPT MAP** holds both directions (every prompt file has a row, every row
+  names a file that exists, a struck-through row is RED). Nobody has to remember.
+- **(c)** The 13 struck rows and the removal-prose blocks are **purged**, not
+  relocated: 10 of 13 already pointed at a `reports/` file, and the other three
+  (`SITTING_158`, the `C85`/`C88`/`C89` build trio, `SITE_ALIGNMENT_AUDIT`) were
+  checked to be recorded in checklist 158, the three entries' §Attended check,
+  `perma/PUBLIC_SURFACE_SWEEP.md` §"When a fix is RETIRED" and STATE's site line
+  before their rows were removed. `README.md` 12,659 → 4,959 B.
+
+Why it mattered: the row is what a next session reads to decide what to fire, so
+a row outliving its file points at spent work. Measured first: **13 of 14**
+post-reorg consumptions did update the row, so this was a first failure and not a
+pattern — but compliance was one agent's habit absorbed by another's cleanup
+commit, which is not a rule. Falsifiers: the gate was shown RED on a row without
+a file, a file without a row, a struck row, a dropped `perma/` row, **and on the
+real HEAD README**, then restored to `sha256 27a5e29c…`.
+
 ### 2026-09-13 — 172: C92 direction RULED — build the restoration, shipping HELD
 <!-- ck:172 status:ruled owner:yes -->
 

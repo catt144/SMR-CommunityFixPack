@@ -1075,6 +1075,78 @@ def check_root(out):
     return False
 
 
+def prompt_map_rows(mapfile):
+    """-> ({table: {filename}}, [struck cells]) parsed out of prompts/README.md.
+
+    The map is PARSED, never duplicated here — same reason as `readme_map`: a
+    second hard-coded copy would be a third thing to drift. A row's first cell
+    may name more than one file; the heading above it says which table it is in.
+    """
+    rows = {"perma": set(), "root": set()}
+    struck = []
+    table = None
+    for line in read(mapfile):
+        if line.startswith("## "):
+            table = ("perma" if "perma" in line
+                     else "root" if "Root" in line else None)
+            continue
+        if table is None or not line.startswith("|"):
+            continue
+        cell = line.split("|")[1].strip()
+        if "~~" in cell:
+            struck.append((table, cell))
+            continue
+        for name in re.findall(r"`([^`]+\.md)`", cell):
+            rows[table].add(name)
+    return rows, struck
+
+
+def check_prompt_map(out):
+    """prompts/README.md against prompts/ — both directions, and no tombstones.
+
+    A row that outlives its file is how a next session fires spent work: on
+    2026-09-13 ck170's own brief was `git rm`'d and its "NOT FIRED — for Codex"
+    row left standing. Owner ruling, checklist 174: this map lists LIVE prompts
+    only, so a struck-through row is itself the defect and not a record — the
+    grave is `git log --diff-filter=D -- docs/agent/prompts/`.
+    """
+    prompts = os.path.join(DOCS, "agent", "prompts")
+    perma = os.path.join(prompts, "perma")
+    mapfile = os.path.join(prompts, "README.md")
+    if not os.path.exists(mapfile):
+        out.append("PROMPT MAP: RED  docs/agent/prompts/README.md is missing "
+                   "— the one-offs have no map")
+        return False
+    rows, struck = prompt_map_rows(mapfile)
+    disk = {
+        "perma": {f for f in os.listdir(perma) if f.endswith(".md")},
+        "root": {f for f in os.listdir(prompts)
+                 if f.endswith(".md") and f != "README.md"},
+    }
+    red = []
+    for cell in struck:
+        red.append("  RED  prompts/README.md keeps a struck-through row (%s) — a "
+                   "fired prompt leaves the map entirely (checklist 174)" % cell[1])
+    for table in ("perma", "root"):
+        where = "perma/" if table == "perma" else ""
+        for name in sorted(rows[table] - disk[table]):
+            red.append("  RED  prompts/README.md has a row for %s%s and the file is "
+                       "not there — delete the row in the commit that consumes it"
+                       % (where, name))
+        for name in sorted(disk[table] - rows[table]):
+            red.append("  RED  docs/agent/prompts/%s%s exists and the map does not "
+                       "list it — every prompt is reachable from the map"
+                       % (where, name))
+    if red:
+        out.extend(red)
+        out.append("PROMPT MAP: RED  %d finding(s)" % len(red))
+        return False
+    out.append("PROMPT MAP: PASS — %d perma + %d one-off row(s) agree with disk "
+               "in both directions; no tombstones"
+               % (len(rows["perma"]), len(rows["root"])))
+    return True
+
+
 def check_state_and_stubs(out):
     """STATE.md's byte budget (checklist 42), and the three stubs spec §3e requires."""
     red = []
@@ -1753,6 +1825,7 @@ def main():
         print("doccheck: RED — %s" % exc)
         return 1
     ok = check_root(out) and ok
+    ok = check_prompt_map(out) and ok
     ok = check_entry_mirror(out) and ok
     ok = check_state_and_stubs(out) and ok
     ok = check_waiting(out) and ok
