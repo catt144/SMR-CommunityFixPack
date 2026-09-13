@@ -339,8 +339,10 @@ SMRFixPack.Register("ArrivalDeaths", {
 			return nil
 		end
 
-		-- Published for the Test Kit's F117 probe, the way this pack already
-		-- publishes `SMRFixPack.LayoutTechLock.IsLockedOut`. The point is that the
+		-- Published for the Test Kit's F117 probe, the way the pack published
+		-- `SMRFixPack.LayoutTechLock.IsLockedOut` (that module was RETIRED
+		-- 2026-09-12, ck156; the pattern is what is being cited, not a live
+		-- sibling — see bugs/F43.md). The point is that the
 		-- kit asserts THIS module's verdict against the shipped `ChooseDome`, not
 		-- a second copy of the rule that could drift from it.
 		--   ReadArgShape()    -- pure: re-reads the shipped body, caches nothing

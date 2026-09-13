@@ -895,6 +895,13 @@ failure from F60's deleted file; it is desk evidence, not release clearance or a
 ### ✅ 2026-09-12 — 159 RULED 09-12: F31 retires, F37's load-time clean-up is a loss you accept, and every sentence replacement goes in. **Nothing owed from you; the release lane carries it into v10.**
 <!-- ck:159 status:ruled owner:no -->
 
+> ✅ **LANDED 2026-09-12.** All three retirements are in: `Fix_GhostFarmOxygen`, `Fix_LayoutTechLock` and
+> `Fix_AnomalyCaveInMap` are deleted from `Code/`, `items.lua` and `metadata.lua` together (H-10), and the four
+> entries (F37, F43, F118, F31) are restatused. **The tree now reads 47 Code files / 46 registered modules, all
+> three sets agreeing by name.** ⛔ **The count word below ("Forty-six") predates the landing — the release lane
+> re-derives every count from `doccheck --emit-counts` and carries none.** The site row, the card headline and
+> the fix-list rows are still to do: they are the v10 publish's job, not this landing's.
+>
 > **What you ruled (2026-09-12), all three as recommended:**
 >
 > 1. **Retire F31 — yes.** Module out (H-10: `items.lua` entry), the site row off, the card headline off, the
@@ -1031,6 +1038,11 @@ failure from F60's deleted file; it is desk evidence, not release clearance or a
 ### ✅ 2026-09-12 — 156 RULED: retire the farm-oxygen and layout fixes, the frozen 1.0.7 build stays as it is, the wording goes out in your voice. **Nothing owed from you until the audit reports.**
 <!-- ck:156 status:ruled owner:no -->
 
+> ✅ **THE RETIREMENTS LANDED 2026-09-12** — see the ✅ block on item **159** for what the tree reads now. F37's
+> F118 rider went with its parent, and that removes **our own** defect outright: F118 was caused by
+> `Fix_LayoutTechLock`'s own teardown, so deleting the module deletes the cause. ⛔ It was never reproduced, so
+> nothing there licenses a public row or a "fixed" claim.
+>
 > **What you ruled (this morning):** retire F37 (farm oxygen) and F43 (layout research lock, with its F118 rider); the
 > frozen 1.0.7 download is untouched; the wording batch is approved with your corrections — items 1, 2, 6, 7, 9, 10,
 > 11, 14 polished, items 3, 8, 12 rewritten plain (they were word salad), item 4 held. The final text is

@@ -24,7 +24,8 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 - 🚫 OWED — the post-upload sitting, ONE boot, now on v8 (ck144 a; recipes: checklist "THE SITTING RAN" block + `bugs/F117.md`):
   A3 (F118) · A10 · A5 c2 · A9 c4/c5 · F117's station recipe · the first `RunAll()` on the 94-probe kit (re-stamps
   `WORKFLOW.md:407`, VOID since 09-09). ⛔ Kit verdicts are PREDICTIONS until then; still FAIL/ERROR by name:
-  `C47OpenFarmSeedBufferShape` (Herbs 100→50), retired `LanderCargoRatchet`/`DroneUnreachableForever`/`AutoExportPriority`.
+  `C47OpenFarmSeedBufferShape` (Herbs 100→50), retired `LanderCargoRatchet`/`DroneUnreachableForever`/`AutoExportPriority`,
+  + 09-12 `GhostFarmOxygen`/`LayoutTechLock`/`AnomalyCaveInMap` (modules retired; Wave14 wrap rows :116-117, :130 too).
 - ⭐⭐ **ck158 THE V10 GATE IS CLEAR — RAN 2026-09-12 attended, ONE boot; C85 + C89 + C88 all `tested-attended`** (owner's
   word, per leg, by name). Log `archive/logs/ck158sitting_Mars.exe-20260912-21.32.07-*.log`; 49/49 applied, 0 error lines,
   exit 0. Evidence = each entry's §Attended check; ⛔ never re-derive a leg from the module. C89's A/B was a BOUNDARY PAIR
@@ -39,9 +40,11 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   ✅ **C90 BUILT for v10**: Saint + Sinkhole apply-success guards; `fixed`, unexercised; `reports/C90_GUARDS_BUILD.md`.
   **C91** vanilla leaks the Building Codes modifier on repeal. ✅ F60 harness repaired from git; deskbench 20/20 HELD.
   C90 historical + live controls HELD; original scratch + live guard removals discriminate; reset moot on current non-optional path.
-- ⏭ NEXT (⭐ UNBLOCKED — ck158 was the last gate): `RELEASE.md` over the outbox's **Held** batch + the 3 Pending = **v10**; text =
-  `reports/still-needed/WORDING_RULED.md` + its ⚖️ **VOICE RULE** (binds every surface); ck156 RULED (retire F37 + F43/F118,
-  F21 STAYS, F31 → the audit). ⛔ Re-derive every count once. Then the owner's upload + the **held** site deploy.
+- ✅ **RETIREMENTS LANDED 09-12** (ck156 + ck159): F37/F43+F118/F31 modules DELETED across Code + `items.lua` + `metadata.lua`
+  (H-10), entries restatused, F21 STAYS. ⛔ ck159's predicted count word "Forty-six" PREDATES this — re-derive, never carry.
+- ⏭ NEXT (⭐ UNBLOCKED — retirements are in, so counts derive ONCE): `RELEASE.md` over the outbox's **Held** batch + the
+  3 Pending = **v10**; text = `reports/still-needed/WORDING_RULED.md` + its ⚖️ **VOICE RULE** (binds every surface).
+  ⛔ Re-derive every count once. Then the owner's upload + the **held** site deploy.
   Handoff `prompts/perma/HANDOFF_ORCHESTRATOR.md` §3 LIVE. ✅ ck158 sitting FIRED + CLOSED 09-12; its one-off prompt `git rm`'d.
   Desk `prompts/DLC_DEEP_CHECK.md` (`HUNT_AUDIT.md` §8).
   ⭐ FR-1 TEMP WORKAROUND MOD LIVE 09-11 (Steam 3799500849 / PDX 158711; FINDINGS §11–§12). ALL FR-1 work → `prompts/perma/LINUX_DISPATCH.md`.
@@ -156,8 +159,8 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 ## Build state — `python tools/doccheck.py --emit-counts`, never hand-typed
 ```
 BUILD STATE (emitted by tools/doccheck.py)
-- modules: 49 registered (49 default-active, 0 optional-gated files)
-- Code/*.lua files: 50
+- modules: 46 registered (46 default-active, 0 optional-gated files)
+- Code/*.lua files: 47
 - TestKit probes: 97
 - BUGS index rows: 119 F + 12 D + 91 C
 ```

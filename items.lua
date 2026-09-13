@@ -59,10 +59,6 @@ return {
 		'CodeFileName', "Code/Fix_LakeEntombment.lua",
 	}),
 	PlaceObj('ModItemCode', {
-		'name', "Fix_GhostFarmOxygen",
-		'CodeFileName', "Code/Fix_GhostFarmOxygen.lua",
-	}),
-	PlaceObj('ModItemCode', {
 		'name', "Fix_RocketDroneChurn",
 		'CodeFileName', "Code/Fix_RocketDroneChurn.lua",
 	}),
@@ -163,16 +159,8 @@ return {
 		'CodeFileName', "Code/Fix_TrackSalvageRefund.lua",
 	}),
 	PlaceObj('ModItemCode', {
-		'name', "Fix_LayoutTechLock",
-		'CodeFileName', "Code/Fix_LayoutTechLock.lua",
-	}),
-	PlaceObj('ModItemCode', {
 		'name', "Fix_DroneTransportMinors",
 		'CodeFileName', "Code/Fix_DroneTransportMinors.lua",
-	}),
-	PlaceObj('ModItemCode', {
-		'name', "Fix_AnomalyCaveInMap",
-		'CodeFileName', "Code/Fix_AnomalyCaveInMap.lua",
 	}),
 	PlaceObj('ModItemCode', {
 		'name', "Fix_ScanDowngrade",
