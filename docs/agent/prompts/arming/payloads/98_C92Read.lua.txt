@@ -1,5 +1,5 @@
 -- TEMPORARY C92 read-only census, 1.1.0.403908.
--- NEVER RUN at authoring. Loads C92READ.savegame.sav paused; no research,
+-- RAN 2026-09-13 (r2). Loads C92READ.savegame.sav paused; no research,
 -- achievement unlock, save, speed increase, portal call, or UI verdict.
 -- Every autosave must be backed up before launch (EF-056).
 C92Read = {}
@@ -33,8 +33,8 @@ function C92Read.Census()
             ForEachPresetInGroup("Tech", cluster.id, function(tech)
                 local research = IsTechResearched(tech.id)
                 if counted(tech) and (not research or IsTechRepeatable(tech.id)) then
-                    local used_ok, used = pcall(tech.IsCurrentlyUsed, tech)
                     local cond_ok, cond = pcall(tech.Condition, tech)
+                    local prereq_ok, prereq = pcall(tech.CheckUnlockPrerequisites, tech, UIPlayer)
                     say("TECH " .. tech.id .. " cluster=" .. cluster.id ..
                         " state=" .. tostring(GetTechState(tech.id, UIPlayer)) ..
                         " researched=" .. tostring(research) ..
@@ -42,7 +42,11 @@ function C92Read.Census()
                         " times=" .. tostring(g_TechTimesResearched and g_TechTimesResearched[tech.id]) ..
                         " repeatable=" .. tostring(IsTechRepeatable(tech.id)) ..
                         " obsolete=" .. tostring(tech.Obsolete) ..
-                        " used=" .. tostring(used_ok and used) ..
+                        " unknown=" .. tostring(tech.Unknown) ..
+                        " default_state=" .. tostring(tech.LockState) ..
+                        " connections=" .. tostring(#(tech.RequireTech or {})) ..
+                        " can_research=" .. tostring(UIPlayer:CanResearch(tech.id)) ..
+                        " can_unhide=" .. tostring(prereq_ok and prereq) ..
                         " condition=" .. tostring(cond_ok and cond) ..
                         " save_in=" .. tostring(tech.save_in))
                 end
@@ -50,6 +54,17 @@ function C92Read.Census()
         end)
     end
     say("ALL " .. tostring(all))
+    for _, option in ipairs({"exclude_repeatables", "exclude_orphan"}) do
+        local passes = true
+        local function filter(tech)
+            if option == "exclude_repeatables" then return counted(tech) and not IsTechRepeatable(tech.id) end
+            return counted(tech) and tech.id ~= "UndergroundExploitation"
+        end
+        for _, group_id in ipairs(groups) do
+            passes = passes and UIColony:IsTechGroupResearched(group_id, filter)
+        end
+        say("OPTION " .. option .. " all=" .. tostring(passes) .. " (read-only predicate comparison)")
+    end
     ForEachPreset("Tech", function(tech)
         if IsTechRepeatable(tech.id) then
             local cluster = TechGroups[tech.group]
