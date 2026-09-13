@@ -97,6 +97,48 @@ the whole tree (`ClassDef-PresetDefs.generated.lua:947`, `Network.lua:212`,
 those vanilla buttons never taint either. P2 should know which of its per-object
 actions are already taint-free in vanilla before it re-implements them.
 
+## ⭐ Why the console keeps switching itself off — and why step 2 should discriminate
+
+The gate that creates the console shortcut is one line
+(`CommonShortcuts.generated.lua:176`):
+
+```lua
+local cond = AreCheatsEnabled() or ConsoleEnabled or Libs.DevToolsPublic
+```
+
+and `AreCheatsEnabled()` is `Platform.cheats or AreModdingToolsActive()`
+(`gamelib.lua:1014-1016`), where `AreModdingToolsActive()` is
+`IsModEditorOpened() or IsModManagerOpened() or IsModEditorMap() or
+Game.testModGame` (`Mod.lua:146-148`).
+
+⚖️ **That is the mechanism behind the owner's complaint** — *"I have to
+re-activate it every time I load"*. `IsModManagerOpened()` is **live, not
+sticky**: the vanilla cheat surface exists only while the Mod Manager is
+actually open, and closing it takes the console with it unless something else
+holds `cond` true. The toolkit's `ConsoleEnabled` arm is the second disjunct,
+which is exactly the right place to intervene.
+
+**Two consequences for the sitting, both good:**
+
+- **Step 0b does not poison step 2.** Opening the Mod Manager for the control
+  flips `AreCheatsEnabled()` true only *while it is open*; nothing persists.
+  The existing order (control → quit → fresh load with the Mod Manager never
+  opened) is already safe. It does mean the "Mod Manager CLOSED throughout"
+  clause in P1 and P2 is load-bearing in a stronger sense than it reads: it is
+  not hygiene, it is the variable under test.
+- **Step 2 should discriminate.** `Libs.DevToolsPublic` is set only under
+  `Platform.developer`, or under `Platform.asserts` with the lib folder present
+  (`autorun.lua:249-256`). `Autosave Sol 490`'s header serialises the whole
+  `Platform` table (`Savegame.lua:779`) and it lists exactly
+  `desktop, editor, goldmaster, paradox, pc, steam` — **no `cheats`, no
+  `developer`, no `asserts`**. So on this build, with the Mod Manager closed,
+  `cond` reduces to `ConsoleEnabled` alone and 01's
+  `discriminates=true negative=false positive=true` is well-founded rather than
+  hopeful. ⚠️ This is derived from a save header, not from the console. Step 0's
+  `PLATFORM_READ` is still the authoritative read, and it answers 01's open
+  question ("record the actual `cheats` value; it was unverified at authoring")
+  — expect `cheats=false`, and treat anything else as the surprise it would be.
+
 ## Fixture — one candidate, and it is the owner's colony
 
 Scanned the plain-text header of all 61 saves in
