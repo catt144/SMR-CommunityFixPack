@@ -1,6 +1,7 @@
 # GATE_WIRING — both repairs landed, falsified and restored
 
-Executed 2026-09-13. Two independently revertible repair commits:
+Executed 2026-09-13. Two repair commits ⛔ ("independently revertible" is CORRECTED
+below — they revert as a pair, B before A):
 **`f2b1898`** (A, wire the orphaned falsifiers) and **`a5f7719`** (B, regenerate
 STATE's counts). This report and removal of the consumed brief plus its map row
 land in a separate close-out commit. No game test or shipped Lua change.
@@ -158,6 +159,7 @@ There was no new out-of-scope repair or owner decision.
 
 The consumed one-off brief is removed with its `prompts/README.md` row in the
 commit carrying this report; the repair commits remain independently revertible.
+⛔ **Corrected — see § Adjudication: B calls A's helper, so they revert as a pair.**
 The original brief is recoverable with
 `git show 3196f5f:docs/agent/prompts/GATE_WIRING.md`.
 
@@ -166,3 +168,63 @@ Executed model: **`gpt-5.6-sol`, effort `high`**, read from the last
 `C:/Users/stkot/.codex/sessions/2026/09/13/rollout-2026-09-13T17-05-37-01a09c97-0423-7d02-8768-ae26ba4c2118.jsonl`.
 The command selected only `payload.model` and `payload.effort`, not an assumed
 role description. Element 7 does not apply: no game boot, save or module test.
+
+## Adjudication — separate seat, 2026-09-13: **PASS**, one claim corrected
+
+Judged against the brief's §8 by a seat that did not do the work. Every gate below
+was re-falsified here rather than read off this report.
+
+**§8, item by item.** doccheck **GREEN** · both named falsifiers wired and emitting
+(`ck170_selftest: PASS`, `repair_pass_selftest: PASS`) · `--regen` **byte-identical**
+on an already-correct tree (`sha256 0c27b62f…` before and after) · STATE's block
+agrees with `--emit-counts` · push set re-emitted per file at **43,227 B**,
+unchanged, with no external-memory delta attributed to a commit · brief and its
+`prompts/README.md` row both gone · R-G recorded (`gpt-5.6-sol`, effort high) ·
+handover present.
+
+**Gates re-falsified independently, six ways, each restored by hash.** A failing
+falsifier REDs doccheck (`exit 1`) and a *missing* one does too (`exit 2`, with the
+interpreter's message carried through). B's region gate REDs on a wrong count, on a
+**missing** region (`found 0`) and on a **duplicated** one (`found 2`), and `--regen`
+repairs a corrupted region back to the exact baseline sha. `tools/doccheck.py` and
+`tools/ck170_selftest.py` were each restored and hash-verified after use.
+
+**Coverage probed beyond the pass's own mutants.** `state_counts_selftest` mutates
+two guards; this seat removed a third it does not mutate — the `len(markers) != 1`
+check — and the selftest **failed**, so the guard is genuinely covered rather than
+covered by assertion.
+
+**Exceeded the brief in four places worth keeping.** STATE is validated *before any
+file write*, so a bad region cannot leave a half-regenerated tree — the brief only
+asked for idempotence. The regenerated result is checked against **both** the hard
+byte cap and the per-line cap. Other balanced fences in STATE are tolerated, so the
+region cannot be confused with a neighbouring block. And the pass **wired its own
+new falsifier** (`state_counts_selftest.py`) instead of leaving it orphaned, which is
+precisely the defect this pass existed to repair; the easy failure here was to
+reintroduce it, and that did not happen.
+
+### Correction — the two commits are **not** independently revertible
+
+This report says so twice (its opening line and § close-out). Measured: `def
+required_selftest` is defined **once**, introduced by `f2b1898` (A). Of its three
+call sites, lines 1933–1934 came from A and **line 1935 came from `a5f7719` (B)**.
+So reverting A alone deletes the definition and leaves B's call standing — doccheck
+raises `NameError` in `main()` and every peer's commit is blocked by the hook.
+⛔ **They revert as a pair, B before A.** The dependency itself is the right
+engineering call — B authored a falsifier and wiring it through A's runner beats
+duplicating the runner or orphaning the test — so the defect is the claim, not the
+code. Re-check: `git log -S'def required_selftest' -- tools/doccheck.py` against
+`grep -n 'ok = required_selftest' tools/doccheck.py`.
+
+The brief's "independently landable" clause was aimed at a different risk — that a
+stop on one item would halt the other, as happened to `REPAIR_PASS` group C. That
+risk did not materialise: both items landed. The clause should not have been
+restated as a property of the commits.
+
+### Nit
+
+The three new gates emit lowercase labels (`ck170_selftest: PASS`) while every
+neighbouring gate emits uppercase (`FLPK SELFTEST:`, `BODYCHECK SELFTEST:`). Not
+cosmetic-only: it cost this adjudication a false "not emitted" reading, because the
+obvious `grep -E 'SELFTEST'` over doccheck's output misses them. doccheck's runtime
+went **0.835 s → 1.318 s**, which the pre-commit hook pays on every commit.
