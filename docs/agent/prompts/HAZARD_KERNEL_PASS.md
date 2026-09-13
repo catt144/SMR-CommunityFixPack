@@ -1,9 +1,14 @@
 # HAZARD_KERNEL_PASS — execute the owner's 2026-09-13 rulings on STATE's kernel
 
-**Fire with:** a fresh session rooted at `C:\Dev\SMR-BugFixPack`. Tool-neutral. Docs + two
-comment lines only, **no shipped Lua logic**. Written 2026-09-13 by `smr-bugfixpack-da`, which
-analysed this and is **deliberately not implementing it** — the owner separated implementor from
-judge after being bitten by half-finished work that added more work than it removed.
+**Fire with:** a fresh session rooted at `C:\Dev\SMR-BugFixPack`. Tool-neutral. Docs plus
+**comment lines only, no shipped Lua logic** — that is the fence, and it is behavioural.
+Written 2026-09-13 by `smr-bugfixpack-da`, which analysed this and is **deliberately not
+implementing it** — the owner separated implementor from judge after being bitten by
+half-finished work that added more work than it removed.
+⚠️ **CORRECTED 2026-09-13, first firing:** the fence first read "two comment lines", which
+turned an arithmetic slip into a rule. A Codex run found a third shipped citation and
+correctly STOPPED rather than cross it. The fence is behavioural; the count is whatever the
+sweep finds. See §3's citation block — the real figure is six, and why it was wrong matters.
 `git rm` this file when it has fired; its grave is the commit that lands phase 2.
 
 ⚖️ **You implement. A different session adjudicates your OUTPUT, not your report.** Write the
@@ -102,8 +107,14 @@ done
 Cross-check only — a wild divergence means re-derive, not proceed: H-02 ≈ 24, H-10 ≈ 26,
 H-04 ≈ 10, H-06 ≈ 7, H-01 ≈ 1, H-07 ≈ 1.
 
-⛔ **Three citations are NOT in markdown and a `--include=*.md` sweep misses all of them:**
-`items.lua:203` (H-10) · `metadata.lua:159` (H-02) · `tools/doccheck.py:1396` (H-10).
+⛔ **SIX citations are NOT in markdown and a `--include=*.md` sweep misses every one.** Three are
+in shipped files — `items.lua:203` (H-10), `metadata.lua:159` **and `:180`** (H-02) — and three in
+`tools/doccheck.py` (`:1396`, `:1437`, `:1471`, all H-10). Enumerate them yourself with **no dedupe**:
+`grep -rno "H-0[1-9]\|H-10" --include=*.py --include=*.lua tools/ Code/ metadata.lua items.lua`
+⚠️ The first version of this brief listed three, because its own sweep piped through
+`sort -u -t: -k1,1 -k3,3` — one line per file-and-token pair, which silently collapses repeat hits of
+the same id in the same file. ⭐ That is §5's *"a grep count is not a finding"* committed by the
+brief's own author, through a flag added for tidiness. Trust the enumeration, never the count.
 `items.lua` and `metadata.lua` are **shipped files**; these are comment lines only, which is
 ordinary work under H-02's own exception, but ⚠️ the Mod Editor writeback strips every comment from
 both on upload, so never commit either while a `POST_UPLOAD_CLOSE` restore is owed
