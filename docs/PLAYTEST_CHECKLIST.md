@@ -29,6 +29,19 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### 2026-09-13 — 170: documentation-overhaul audit — marker semantics, byte accounting, and where the adopted rules apply
+<!-- ck:170 status:open owner:yes -->
+
+> [The audit](agent/reports/DOC_OVERHAUL_AUDIT.md) is complete, report-only. It found owner actions that disappear while doccheck stays GREEN, fingerprints that overstate what they verify, and a nested-directory reader bug behind the v10 pack-count discrepancy. Existing markers and rulings were left untouched.
+>
+> **Your policy calls:**
+>
+> - **(a) Marker vocabulary:** keep the existing words or add a partial-ruling status? **Recommendation:** keep the words, use `open` while a decision remains unresolved, and let `owner:yes` independently retain an outstanding action. Reconcile existing entries to recorded rulings in the follow-up.
+> - **(b) Byte accounting:** measure normalized LF bytes, keeping the current caps? **Recommendation: yes.** Identical content can currently pass with LF and fail with CRLF.
+> - **(c) Reading routes:** connect adopted R-A…R-G to actual authoring/working routes and replace mandatory full-index scans with targeted lookup? **Recommendation: yes.** Keep the author-only depth rule out of working-leg instructions and resolve inheritance versus re-derivation explicitly.
+>
+> Ordinary tool repairs are recommendations in the report, not changes made by this audit. **D4 is not being re-asked:** its original membership remains the scope; the current script cannot execute it and should not be applied. No old owner decision was reopened here.
+
 ### ⭐ 2026-09-13 — 169 ➊ **UPLOADED — v10 IS LIVE on both portals.** ➋ **STILL OWED: `content/faq.md` commit.** ➌ accepted as shipped.
 <!-- ck:169 status:part-ruled owner:yes -->
 
