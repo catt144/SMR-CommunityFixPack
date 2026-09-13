@@ -3,6 +3,13 @@
 2026-09-13. Investigation only; no fix module, achievement award, research
 mutation or shipped Lua change. Defect truth: [C92](../bugs/C92.md).
 
+**Correction, placement follow-up 2026-09-13:** the initial census and live
+achievement barrier below stand. The later claims of a 44% water bonus, an
+exhaustive five-conversion cohort, a never-drawn icon, and unremovable save
+residue have been corrected. Current reasoning and evidence are in
+[C92_PLACEMENT.md](C92_PLACEMENT.md); historical wording is retained in git.
+
+
 **MEASURED:** The supplied Sol 490 save fails the vanilla achievement predicate
 solely on `UndergroundExploitation`, a hidden, unresearched ordinary Tech in
 `Underground_1`. Both repeatables have completed once and retain `researched`.
@@ -136,52 +143,40 @@ Searches against the wrong tree returned clean, confident, meaningless negatives
 caught only because the presence controls failed too. ⛔ Resolve the game path from
 the appmanifest `installdir`, never from the folder name.
 
-## Verdict: ACCIDENT, and the shape of it
+## Intent: unfinished conversion is the leading inference
 
-**SOURCE:** The devs' retirement idiom is `Obsolete = true`, and they used it **three
-times in this very change**: on `LawDef Policy_UndergroundExploitation`
-(`Data/LawDef/LawDef-Economy.lua:1428`), on `PolicyDef UndergroundExploitation`
-(`Data/PolicyDef.lua:202`), and on `SelfSufficientLighting` — a tech in the **same
-`Underground_1` group**. `UndergroundExploitation` carries none of it.
+**SOURCE:** the shipped non-obsolete Tech remains hidden and disconnected,
+while its consumer tests research completion and its authored text/effect
+promise an underground production bonus. The law and policy are obsolete.
+These are contradictory shipping states; the live achievement barrier is
+measured independently of why the author left them that way.
 
-**SOURCE census, `Data/Tech.lua`, 441 Tech presets:** 10 obsolete techs across the
-ordinary groups; **zero are hidden**. 218 hidden techs; **zero are obsolete**. The two
-idioms never overlap. `Unknown` is documented as *"Shown with a question mark until
-enabled by a script"* (`Lua/TechTree.lua:257`), so the flag pair asserts *this is
-meant to be revealed*, not *this is withdrawn*.
+**SOURCE correction:** the original sibling census wrongly treated ID/loc-ID
+matching as exhaustive. Underground mining and water permits were converted
+under different IDs into `UndergroundDeepMining` and
+`UndergroundWaterExtraction`. `SavegameFixups.TransformLawsToTechs_v2`
+(`1.1.0 Lua/Factions/Laws.lua:1136`) explicitly names the former laws in its
+conversion list. Conversely, `MartianDiet` was already a 1.0.7 breakthrough;
+its same-ID match did not establish a new law-to-tech conversion.
 
-**SOURCE:** They wired a live consumer to it. `SingleResourceProducer:CalcProductionAmount`
-(`Lua/Buildings/BuildingComponents.lua:1358-1364`) is a line-for-line port of the 1.0.7
-law check (`1.0.7 Src/Lua/Buildings/BuildingComponents.lua:1083-1087`) onto
-`UIColony:IsTechResearched("UndergroundExploitation")`, and *tightened* on the way with
-an `IsInLabel("Extractors")` test the law version lacked.
+**INFERRED:** unfinished conversion remains the best explanation of the
+contradiction and completed neighbouring work. An absence of `Obsolete` is not
+proof of a designer's mental intent and cannot exclude a deliberate hold.
+The earlier categorical accident verdict and its purportedly exhaustive
+control set are withdrawn. [Placement evidence](c92-placement/PLACEMENT_EVIDENCE.md)
+records the corrected named cohort and limits.
 
-**SOURCE:** They migrated existing saves off the law with no replacement grant —
-`SavegameFixups.ObsoleteUndergroundExploitationLaw()` (`Lua/Factions/Laws.lua:773-775`).
+## The unavailable bonus
 
-**SOURCE control, the sibling migrations:** the four other laws retired in that same
-batch (`RedTapeReduction`, `Policy_NativeFood`, `Policy_MoralValues`,
-`Policy_UndergroundMiningPermits`) have **no replacement Tech preset at all**. They were
-genuinely cut. `UndergroundExploitation` alone got a full replacement tech plus rewired
-code — a deliberate promotion, not a cut.
+**SOURCE:** 1.0.7 had an active-law production route; 1.1.0 removes the law and
+requires research of this normally unreachable replacement. New colonies
+therefore cannot obtain the authored bonus through the normal route.
 
-**SOURCE, 1.0.7 side:** the law was live there — real `Prerequisite` (disabled only
-under `NoUndergroundAndAsteroids`), `upkeep_rp = 100`, and a designer note
-`TODO = set( "Balance" )`. The law→tech promotion *is* that pending work.
-
-⇒ **The flags are authoring leftovers, not a bench.** A refutation of this would need
-either an `Obsolete` marking, a cut sibling that kept its consumer, or a named reveal
-route. None exists. ⚠️ What this verdict depends on (rule 5a): it holds while no script
-in the shipped tree unlocks the preset. The only references to the id anywhere in Src
-are its own preset, the retired law/policy, the savegame fixup and the consumer.
-
-## The second defect, larger than the achievement
-
-**SOURCE:** The +20% underground-extractor bonus **shipped and worked in 1.0.7** via the
-law. In 1.1.0 the law is obsolete and stripped from saves, and its replacement is
-unreachable. So the bonus **cannot be obtained by anyone on 1.1.0**, and players who
-carried the enacted law across the patch lost it silently with no route back. The
-achievement is the symptom a player happened to notice; this is the underlying loss.
+**SOURCE limitation:** law-removal fixups describe what happens if an old
+colony is successfully migrated. This investigation did not observe an
+upgraded old colony losing its law, and the normal 1.0.7-to-1.1.0 save-load
+barrier remains in force (`EF-079`). The former claim that players had carried
+it across and silently lost it was not a measured field finding.
 
 ## Can the wiring be finished? Yes — one call
 
@@ -255,16 +250,21 @@ carry the verdict**; the verdict rests on the five SOURCE controls above. Positi
 proves nothing either way: the obsolete `ModularIndustry` is parked in the same region
 (`point(14724, 5376)`), so retired *and* unplaced nodes both end up there.
 
-## Double application if it is simply unlocked
+## Correction: the water and stockpile consumers are separate
 
-**SOURCE:** a `WaterExtractor` is `disabled_in_environment = set( "Asteroid" )` — so it
-**can** be built underground — carries `label4 = "Extractors"`
-(`Lua/BuildingTemplate/WaterExtractor.generated.lua`), and is added to
-`UndergroundWaterExtractor` when underground. Both effects therefore fire on the same
-building: the declarative +20% on `water_production` **and** the consumer's ×1.20.
-Underground water extractors would compound to ≈+44% while underground metals, rare
-metals, exotic minerals and concrete get the advertised +20%. ⛔ Nobody specified that
-split — it is a third unfinished edge, and an argument against "just unlock it".
+**SOURCE + MEASURED:** the earlier +44% claim is refuted. Water is produced by
+`WaterExtractorBase:ProduceSupply` and the grid's `water_production` callback
+(`1.1.0 Lua/Buildings/WaterExtractor.lua:73,125`); the +20% declarative modifier
+acts there. Stockpiled resources use
+`SingleResourceProducer:CalcProductionAmount` (`BuildingComponents.lua:1356`),
+where the hardcoded +20% consumer acts. A label shared by the buildings does
+not join those output paths.
+
+**MEASURED:** offline shipped-body controls yield 5000 → 6000 for each output;
+the water path does not become 7200. Reapplying the same keyed effect does not
+stack a second modifier. Do not change production code to repair the alleged
+double application. [Scope/residue evidence](c92-placement/SCOPE_RESIDUE.md)
+names fixtures, controls and the unmeasured retail boundary.
 
 ## Tree geometry — the layout motif, and a SEPARATE lead
 
@@ -334,105 +334,40 @@ should start from, and it must be checked against `RequireTech` reachability (a 
 no incoming connection stays unreachable wherever it is drawn) before anyone proposes a
 slot.
 
-## The icon question, ANSWERED from the shipped art pack
+## Icon search: bounded absence, corrected origin claims
 
-**MEASURED.** `Packs\UI.fpk` (852 MB) is FLPK, the format `tools/flpk_extract.py` reads.
-Parsing its directory table alone (header `dir_off` @0x0C, `dir_size` @0x14) enumerates
-**5001 entries** without extracting payloads.
+**MEASURED:** base Tech icon paths resolve through the FLPK reader's positive
+controls. No dedicated `underground_exploitation` research icon was identified.
+The law art exists as the same cave/magnifier glyph in three UI-state colors.
+The follow-up expands the search to every installed pack directory and views
+all research DDS; [ICON_HUNT.md](c92-placement/ICON_HUNT.md) records the set.
 
-**Instrument soundness — the presence side, counted.** `Icons/Research/` holds **371**
-assets. `Data/Tech.lua` references **312** distinct research icons, and **all 312 are
-present in the pack — zero missing**. Three named controls resolved:
-`advanced_drone_drive.dds`, `self_sufficient_lighting.dds`, `underground_deep_mining.dds`.
-⇒ A negative from this enumeration is a real sample, not an `EF-088` non-result.
+**WITHDRAWN:** the original assertions that the research icon had never been
+drawn, that the vendor must commission one, and that all named orphans were
+art commissioned for this rebuild. A pack inventory cannot prove those
+claims. Two orphan filenames contain pixel-identical funding art, and two
+additional names resolve to old technologies missed by ID matching. The
+historical original-game pack supplies further provenance controls.
 
-⛔ **MEASURED: there is NO research-tree icon for this tech.** No
-`Icons/Research/underground_exploitation*` exists, under that or any near spelling.
+**INFERRED:** an unused image can be considered as a substitute, but visual
+suitability does not establish its intended association with this technology.
+The target's current Advanced Drone Drive art remains a borrowed asset; its
+presence alone does not prove how the preset was authored.
 
-✅ **MEASURED: the LAW art does exist — three variants.**
-`IconsRemaster/Laws/underground_exploitation_1.dds`, `_2.dds`, `_3.dds`. The `PolicyDef`
-references `_1`. So the art commissioned for this content is 1.0.7 law-panel art; a
-research-tree icon was never made, which is exactly why the preset points at a
-breakthrough's icon.
+## Corrected sibling cohort
 
-⇒ **The owner's hypothesis is half right, and the half that holds is bigger than the
-tech.** There is no hidden icon for *this* tech — but the pack does carry unused research
-art. **22 research icons are referenced by no tech at all**, and after removing the `rm_*`
-research-map chrome and the `researched`/`obsolete_4` sprites, **19 of them name a
-technology that does not exist anywhere in the shipped tree**:
+**SOURCE:** Tech presets use research-directory icon paths; this is a shipping
+convention, not proof that each file contains newly commissioned artwork.
+The old same-ID census omitted renamed underground and asteroid conversions
+and included the pre-existing `MartianDiet` breakthrough as a new conversion.
+Its “five total, no renamed cases outside the set” conclusion is withdrawn.
 
-```
-advanced_asteroid_economy      advanced_elevator_hydraulics   advanced_landing_techniques
-capture_asteroids              crawling_hyperdome             educating_mars
-eureka                         grand_engineering              metal_foams
-micro-g_vehicles               near_orbit_observatory         polymer_autosynthesis
-proximity_power_resonance      smart_alloys                   standardized_integration
-terraforming_mars              underground_trains             vacuum_rail_systems
-vehicle_optimization
-```
-
-(The other three orphans — `decommission_protocol`, `low-g_fungi`, `mars_hype` — do match
-live tech ids that simply reference different icon files.)
-
-**MEASURED control:** those 19 names have **no loc strings** in the Relaunched export
-`ModTools\Game.csv` (control: a shipped tech name resolves). So they are **art-only**
-orphans — art commissioned, tech never authored or dropped before localisation. That is
-the **opposite** shape to `UndergroundExploitation`, which has strings, translations in
-eight languages, a parameter, an effect and a live consumer, and lacks only the icon and
-the wiring. ⇒ The two are different kinds of debris from the same rebuild; do not merge
-them.
-
-⭐ `proximity_power_resonance` is power-flavoured and therefore a candidate for the
-**Hi-Tech_1 empty ring slot** (lead b). Unverified — offered as a lead, not a finding.
-
-## ⭐ The sibling cohort: the other law→tech conversions
-
-*Owner's question, 2026-09-13: did any other laws become techs, and if so did they reuse
-the law icon? Both halves answer decisively, and this is the strongest evidence in the
-investigation — a batch of siblings where every other member was finished.*
-
-**SOURCE, the icon convention is absolute.** Every one of the **356** `Icon` values in
-`Data/Tech.lua` (312 distinct) points into `UI/Icons/Research/`. **Zero** Tech preset
-uses an `IconsRemaster/Laws/` icon. ⇒ **No, the law icon is never reused as a tech icon**,
-and a fix or dev report proposing the existing law art would be breaking a 356/356
-convention.
-
-**SOURCE, the conversions.** Matching 1.0.7 `PolicyDef` ids against 1.1.0 `Tech` ids finds
-**five** law→tech conversions. Each got a **brand-new bespoke research icon under a new
-name** — the law art was abandoned every time:
-
-| converted id | 1.0.7 law icon | 1.1.0 tech icon | group | hidden | `RequireTech` |
-|---|---|---|---|---|---|
-| `DroneHubEfficiency` | `Laws/drone_hub_efficiency_1` | `Research/high_capacity_drone_networks` | Logistics_2 | no | **yes** |
-| `ShuttleFuelEfficiency` | `Laws/shuttle_fuel_efficiency_1` | `Research/shuttle_fuel_conservation` | Logistics_3 | no | **yes** |
-| `SensorTowers` | `Laws/sensor_towers_1` | `Research/extra_scanning_speed` | Space_1 | no | **yes** |
-| `MartianDiet` | `Laws/diet_1` | `Research/martian_diet` | Breakthroughs | yes | no |
-| **`UndergroundExploitation`** | `Laws/underground_exploitation_1` | **`Research/advanced_drone_drive`** ⛔ borrowed | Underground_1 | **yes** | **no** |
-
-⭐ **Four of the five were finished; one was not — and it is ours.** Three landed in an
-ordinary group with a connection and bespoke art. `MartianDiet` landed in **Breakthroughs**,
-where `hidden` + no `RequireTech` is the *correct* configuration — so it is not a
-counterexample but a **control**: it shows the devs set those flags deliberately and
-correctly when the destination was right. `UndergroundExploitation` is the only conversion
-that received neither a bespoke icon nor a connection.
-
-**SOURCE, bounding the set (a total is not a set).** 1.1.0 carries **37** obsolete
-`LawDef`/`PolicyDef` entries. Only 4 of them have a same-id Tech
-(`DroneHubEfficiency`, `MartianDiet`, `ShuttleFuelEfficiency`, `UndergroundExploitation`);
-`SensorTowers` is the fifth id-match but its `PolicyDef` is **not** marked obsolete. No
-obsolete law shares a `DisplayName` loc id with any Tech, so there are **no renamed
-conversions hiding** outside this cohort — the other ~32 retired laws were simply cut with
-no tech replacement.
-
-⇒ **This closes the accident question.** A deliberate bench would not produce one
-unfinished member inside a batch of five where the other four are complete, nor leave it
-pointing at a neighbouring breakthrough's art while its own conversion siblings each
-received new art.
-
-⇒ **Consequence for any repair, ours or the vendor's:** the expected finished state is a
-**bespoke `UI/Icons/Research/*` icon that does not exist and has never been drawn**. The
-vendor cannot finish this tech without commissioning art. That is a concrete, checkable
-ask for the dev report.
+**SOURCE:** the two renamed underground successors share the target's explicit
+`Underground_1` group, retain the underground game-rule Condition and occupy
+its satellite row. This is stronger family evidence than generic production
+flavour or ring geometry. It supplies no exact target coordinate or prescribed
+connection. The full named comparisons and migration function are in
+[PLACEMENT_EVIDENCE.md](c92-placement/PLACEMENT_EVIDENCE.md).
 
 ## Position provenance, and what 1.0.7 can and cannot tell us
 
@@ -469,120 +404,53 @@ other converted content was placed**. ⚠️ It cannot locate `UndergroundExploi
 directly — in 1.0.7 it was a law, not a `TechPreset`, so it has no theme or tier band to
 carry forward. It constrains the answer; it does not hand it over.
 
-## ⚠️ Correction: the orphan icons are mostly NOT dropped 1.0.7 techs
+## Orphan-icon lineage: follow-up supersedes the ID-only match
 
-Tested rather than assumed, against `Data/TechPreset.lua`:
+**MEASURED:** searches of actual icon references recover `capture_asteroids`
+and `vehicle_optimization` from archived 1.0.7 `TechPreset.lua`, despite their
+different Tech IDs. Original-game art is a distinct historical comparison,
+not the current Relaunched inventory. [ICON_HUNT.md](c92-placement/ICON_HUNT.md)
+records those controls, duplicate pixels and unresolved origins.
 
-| orphan icon | 1.0.7 tech? | 1.1.0 tech? | 1.0.7 theme |
-|---|---|---|---|
-| `advanced_landing_techniques` | **yes** | no | `ReconAndExpansion` |
-| `underground_trains` | **yes** | no | `ReconAndExpansion` |
-| `decommission_protocol` | yes | yes | `Engineering` |
-| `low-g_fungi` | yes | yes | `Biotech` |
-| `mars_hype` | yes | yes | `Social` |
-| the other **17** | no | no | — |
+**INFERRED limit:** an orphan filename is not evidence of a new missing
+technology, a commissioned illustration, or an intended tree position.
 
-⇒ **Only 2 of 22 are genuinely techs dropped in the rebuild** (`AdvancedLandingTechniques`,
-`UndergroundTrains` — both `ReconAndExpansion`, a theme 1.1.0 dissolved); 3 more still
-exist under different icon files. **17 match no tech in either version.** So the earlier
-framing of the orphan set as debris from this rebuild is **only partly right** and should
-not be relied on. Their origin — original-game (app 464920) legacy art, or art for
-content never authored in either version — is **NOT ESTABLISHED**.
+## Residue: automatic cleanup is absent, removal is possible
 
-⚠️ This weakens but does not remove the `proximity_power_resonance` → Hi-Tech_1 lead: that
-icon matches no tech in 1.0.7 *or* 1.1.0, so nothing dates it to this rebuild.
+**SOURCE:** a narrow achievement recheck need not change tech lock state,
+research completion or production modifiers. Its intended lasting result is
+the ordinary platform/account achievement. It must still use normal engine
+restrictions and decline if the orphan is now reachable, changed, obsolete
+or absent. The former four field checks are an incomplete implementation
+contract: they also need nil-safe prerequisites, data-readiness handling and
+current player-state checks. [C92_PLACEMENT.md](C92_PLACEMENT.md) specifies the
+builder contract and recovery for an already-completed colony.
 
-## ⭐ Residue risk, and whether each route can fail cleanly
+**SOURCE + MEASURED:** completing the tech persists vanilla research/lock
+state and the water label modifier. Removal of the mod does not automatically
+undo those changes. However, clearing the research flag and removing the
+original keyed label modifier stops both bonuses in the offline controls.
+The former “unremovable/permanent by construction” conclusion is withdrawn;
+this is an unimplemented, unverified cleanup/migration obligation, not an
+impossibility proof. A tech-point refund and provenance for prior state still
+need a deliberate contract.
 
-*Owner's question, 2026-09-13: if we FINISH the work rather than bypass it, what is left
-behind when the devs eventually fix it — and can our fix fail cleanly when that patch
-drops? Both halves answer from source. The two routes have **opposite** residue shapes,
-and that asymmetry is an argument on its own.*
+**MEASURED distinct vendor cases:** an obsolete retained preset still lets
+the unchanged stockpile consumer pay the bonus. A physically deleted preset
+with a retained researched flag instead raises a nil-index error at
+`1.1.0 BuildingComponents.lua:1362`. Neither case predicts what an actual
+future vendor patch will do; coordinated consumer/fixup changes may resolve
+it. Declining to make new edits cannot undo old save state by itself.
 
-### Route A — BYPASS (the achievement exemption, standing recommendation)
+**INFERRED recommendation:** keep the narrow achievement exemption as the
+proposed mod-side repair pending owner scope decision. Restoration is feasible
+but requires placement and residue choices. The recommendation no longer
+rests on a 44% bonus or a claimed impossibility of cleanup.
 
-**SOURCE: it writes nothing to the save.** A focused listener evaluates the corrected
-predicate and calls the engine's `AchievementUnlock`. The residue is an achievement flag
-on the **account/platform** — which is the intended outcome and the thing the reporter
-asked for. Nothing of ours enters the savegame. Three-tier ethos: layer 1–2.
+## Not opened in the first pass (historical scope)
 
-✅ **It CAN fail cleanly, and the decline is a behaviour test, never a version label**
-(`FIX_POLICY` §2a). Any one of four shapes means stand down:
-
-1. `next(Techs.UndergroundExploitation.RequireTech)` is non-empty — it got connected;
-2. its `LockState` is no longer `"hidden"` — it got revealed;
-3. the preset reports `Obsolete` — retired, so vanilla's own iterator skips it and the
-   achievement passes unaided;
-4. the preset is absent entirely.
-
-In all four we do nothing and vanilla handles it.
-
-⛔ **The decline is REQUIRED, not optional.** If the devs wire the tech properly and we
-keep exempting it, we award the achievement to players who genuinely have **not**
-researched a now-reachable technology — we would be shipping the inverse defect. Any
-build of this fix must carry the test.
-
-### Route B — FINISH THE WORK (unlock / place the tech)
-
-**SOURCE: the unlock is persisted.** `LockablePresetOwner` declares `PresetLockStates` and
-`ProcessedLockablePresets` as properties (`CommonLua/Features/LockablePreset.lua:5-16`),
-held on the `Player` (`CommonLua/Classes/Player.lua:10`) and written by
-`RemovePresetLockStateReason` (`:190-201`). `UnlockTech` therefore writes
-`PresetLockStates.Tech.UndergroundExploitation` **into the savegame**.
-
-**SOURCE: research completion is persisted too**, in `UIPlayer.tech_researched`, and is
-**indistinguishable from a legitimately researched tech**.
-
-⛔ **The decisive point: the +20% consumer is VANILLA code.**
-`SingleResourceProducer:CalcProductionAmount` gates only on
-`UIColony:IsTechResearched("UndergroundExploitation")`
-(`Lua/Buildings/BuildingComponents.lua:1358-1364`). Once that flag is true, **the bonus
-keeps applying with our pack uninstalled.** The mod is not required to sustain the effect
-it caused.
-
-⇒ ⛔ **Route B cannot fail cleanly, by construction.** A decline test can stop us acting
-*again*; nothing undoes what is already written. Uninstalling the pack does not remove the
-bonus. A vendor patch does not remove it. Reversing it would mean clearing a vanilla
-researched flag — destructive, and it robs the player of the tech point they spent.
-Under the three-tier ethos that is **layer 3, harmful trace**, which §3a accepts only
-**paired with a remedy**, with a recorded per-site disposition. It compounds with the
-double-application: the permanent, unremovable change is ≈+44% on underground water
-extractors, not the advertised +20%.
-
-### What happens when the devs actually fix it
-
-| vendor action | Route A (bypass) | Route B (finished work) |
-|---|---|---|
-| **wires it** (adds `RequireTech`, unhides) | declines on test 1 or 2 — clean | player already holds it, obtained without the prerequisite; bonus stands |
-| **retires it** (`Obsolete = true`) | declines on test 3 — becomes a no-op | ⛔ **residue turns silent and permanent** — see below |
-| **ships a savegame fixup** | unaffected | the one mechanism that could clean it — see below |
-
-✅ **Refuted — an obsolete retirement does NOT crash.** I expected
-`Techs.UndergroundExploitation:GetParameterValue(...)` to nil-index once the preset went
-obsolete. It does not: obsolete presets are *"kept for backwards compatibility"*
-(`CommonLua/Preset.lua:85-88`) and only the **iterators** skip them (`:1773`, `:1808`,
-`:1894`), so the id still resolves. No error.
-
-⛔ **But that is exactly what makes retirement the worst case for Route B.** The tech
-disappears from the tech tree (iterators skip it), while `tech_researched` stays true and
-the vanilla consumer keeps paying the bonus — **a permanent balance change with no UI
-trace and no route for the player to see or undo it.**
-
-✅ **One reassurance for Route B.** Fixups are gated by the `AppliedSavegameFixups`
-GameVar, and any fixup **added after a save was created** runs on that save
-(`CommonLua/SavegameFixup.lua:10-40`). Our pack changes neither `lua_revision` nor that
-var, so a vendor remedy would still reach a save we had touched. ⚠️ That depends entirely
-on the vendor choosing to write one, which we cannot assume and must not plan around.
-
-### Verdict
-
-**The residue asymmetry is an independent argument for the bypass.** Route A puts nothing
-in the save and stands down on four behaviour tests. Route B writes self-sustaining
-vanilla state that neither uninstalling the pack nor patching the game removes, and whose
-worst case is silent and permanent. ⇒ This reinforces the standing recommendation without
-relying on any of the earlier reasoning.
-
-## Not opened
+The placement follow-up opens several routes below; its own Not opened list
+is the current boundary. These bullets describe the earlier pass only.
 
 - **Where the tech was *intended* to sit.** No positive evidence was found — only the
   geometry above, which is INFERENCE. The cross-version diff is ruled out (previous

@@ -29,6 +29,33 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### 2026-09-13 — 171: C92 — achievement repair or full technology restoration
+<!-- ck:171 status:open owner:yes -->
+
+**The [placement/icon investigation](agent/reports/C92_PLACEMENT.md) is complete.**
+Your screenshot confirms the visible Underground ring is complete. The broader
+Industry/Hi-Tech pass found plausible substitute art, particularly retired
+`closed_loop_extraction.png`, but no intended C92 icon, seat or connection.
+The earlier 44% water-bonus and technically unremovable-residue claims were
+refuted; neither is a reason to reject restoration.
+
+**Scope choice — recommendation A:**
+
+- **A — repair the achievement.** Build the narrow exemption for this one
+  verified unreachable requirement, including recovery for an already-completed
+  colony and decline when the technology becomes reachable/changes/disappears.
+  Preserve normal achievement restrictions and all other research requirements.
+- **B — finish the technology.** Proceed with an explicit placement, prerequisite
+  and art choice, plus a tested save-residue/refund contract. Underground I has
+  authored family evidence; its satellite row and `UndergroundDeepMining` are
+  leading design candidates, not recovered developer intent. Industry V remains
+  a thematic alternative, not a proven vacancy for this tech.
+- **C — defer a mod repair.** Retain the investigation for a later scope decision.
+
+**TAKEABLE-WHEN:** the report is read; no game launch is needed to choose scope.
+This item authorizes no implementation by itself. C92 stays `cand`; no fix,
+award, save edit or external report was made in this investigation.
+
 ### 2026-09-13 — 170: documentation-overhaul audit — marker semantics, byte accounting, and where the adopted rules apply
 <!-- ck:170 status:open owner:yes -->
 

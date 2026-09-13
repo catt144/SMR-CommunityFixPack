@@ -1,0 +1,3111 @@
+{
+  "head": "ccd4ff58762558ba79eef6065121d22ec138bea2",
+  "game": "A:\\SteamLibrary\\steamapps\\common\\Project Spark",
+  "tech_sha256": "7033a4b9330ab73eebf302347d063364c883ba229665884af52049bf5276efc9",
+  "distinct_tech_icon_references": 312,
+  "manifest": {
+    "path": "A:\\SteamLibrary\\steamapps\\appmanifest_3215050.acf",
+    "sha256": "cd6fd6b045d46b8c4ae9a423a11a0326ecea1416df2a981947dacc9c8ed946a7",
+    "appid": "3215050",
+    "buildid": "24995074"
+  },
+  "all_source_references": {
+    "installed": {
+      "root": "A:\\SteamLibrary\\steamapps\\common\\Project Spark\\ModTools\\Src",
+      "lua_files": 4715,
+      "presence_control": [
+        {
+          "file": "Data/Tech.lua",
+          "line": 384
+        },
+        {
+          "file": "Data/Tech.lua",
+          "line": 10638
+        }
+      ],
+      "matches": {
+        "Icons/Research/advanced_elevator_hydraulics.dds": [],
+        "Icons/Research/advanced_asteroid_economy.dds": [],
+        "Icons/Research/advanced_landing_techniques.dds": [],
+        "Icons/Research/capture_asteroids.dds": [],
+        "Icons/Research/crawling_hyperdome.dds": [],
+        "Icons/Research/decommission_protocol.dds": [],
+        "Icons/Research/educating_mars.dds": [],
+        "Icons/Research/eureka.dds": [],
+        "Icons/Research/grand_engineering.dds": [],
+        "Icons/Research/low-g_fungi.dds": [],
+        "Icons/Research/mars_hype.dds": [],
+        "Icons/Research/metal_foams.dds": [],
+        "Icons/Research/micro-g_vehicles.dds": [],
+        "Icons/Research/near_orbit_observatory.dds": [],
+        "Icons/Research/obsolete_4.dds": [],
+        "Icons/Research/polymer_autosynthesis.dds": [],
+        "Icons/Research/proximity_power_resonance.dds": [],
+        "Icons/Research/researched.dds": [
+          {
+            "file": "Lua/GameRules.lua",
+            "line": 163,
+            "text": "return state and \"UI/Icons/Research/researched.tga\" or \"UI/Common/mod_button.tga\""
+          }
+        ],
+        "Icons/Research/smart_alloys.dds": [],
+        "Icons/Research/standardized_integration.dds": [],
+        "Icons/Research/terraforming_mars.dds": [],
+        "Icons/Research/vehicle_optimization.dds": [],
+        "Icons/Research/underground_trains.dds": [],
+        "Icons/Research/vacuum_rail_systems.dds": []
+      }
+    },
+    "archive_1.0.7": {
+      "root": "C:\\Dev\\SMR-SrcArchive\\1.0.7.396349\\Src",
+      "lua_files": 4446,
+      "presence_control": [
+        {
+          "file": "Data/TechPreset.lua",
+          "line": 697
+        }
+      ],
+      "matches": {
+        "Icons/Research/advanced_elevator_hydraulics.dds": [],
+        "Icons/Research/advanced_asteroid_economy.dds": [],
+        "Icons/Research/advanced_landing_techniques.dds": [
+          {
+            "file": "Data/TechPreset.lua",
+            "line": 3509,
+            "text": "icon = \"UI/Icons/Research/advanced_landing_techniques.png\","
+          }
+        ],
+        "Icons/Research/capture_asteroids.dds": [
+          {
+            "file": "Data/TechPreset.lua",
+            "line": 85,
+            "text": "icon = \"UI/Icons/Research/capture_asteroids.png\","
+          }
+        ],
+        "Icons/Research/crawling_hyperdome.dds": [],
+        "Icons/Research/decommission_protocol.dds": [
+          {
+            "file": "Data/TechPreset.lua",
+            "line": 2139,
+            "text": "icon = \"UI/Icons/Research/decommission_protocol.png\","
+          }
+        ],
+        "Icons/Research/educating_mars.dds": [],
+        "Icons/Research/eureka.dds": [],
+        "Icons/Research/grand_engineering.dds": [],
+        "Icons/Research/low-g_fungi.dds": [
+          {
+            "file": "Data/TechPreset.lua",
+            "line": 1796,
+            "text": "icon = \"UI/Icons/Research/low-g_fungi.png\","
+          }
+        ],
+        "Icons/Research/mars_hype.dds": [],
+        "Icons/Research/metal_foams.dds": [],
+        "Icons/Research/micro-g_vehicles.dds": [],
+        "Icons/Research/near_orbit_observatory.dds": [],
+        "Icons/Research/obsolete_4.dds": [],
+        "Icons/Research/polymer_autosynthesis.dds": [],
+        "Icons/Research/proximity_power_resonance.dds": [],
+        "Icons/Research/researched.dds": [
+          {
+            "file": "Lua/GameRules.lua",
+            "line": 155,
+            "text": "return state and \"UI/Icons/Research/researched.tga\" or \"UI/Common/mod_button.tga\""
+          }
+        ],
+        "Icons/Research/smart_alloys.dds": [],
+        "Icons/Research/standardized_integration.dds": [],
+        "Icons/Research/terraforming_mars.dds": [],
+        "Icons/Research/vehicle_optimization.dds": [
+          {
+            "file": "Data/TechPreset.lua",
+            "line": 230,
+            "text": "icon = \"UI/Icons/Research/vehicle_optimization.png\","
+          }
+        ],
+        "Icons/Research/underground_trains.dds": [
+          {
+            "file": "Data/TechPreset.lua",
+            "line": 3572,
+            "text": "icon = \"UI/Icons/Research/underground_trains.png\","
+          }
+        ],
+        "Icons/Research/vacuum_rail_systems.dds": []
+      }
+    }
+  },
+  "identical_pixel_groups": {
+    "a3679d24c19c0d9c8b863a564a09886306e3ae85b36950bef6ef3903bda0c656": [
+      "Icons/Research/Mineral_Applications.dds",
+      "Icons/Research/advanced_mineral_composites.dds"
+    ],
+    "1eb9b61c2555768963b9c2cedadb41f825aeb2f29167ab16548dff70735b7516": [
+      "Icons/Research/crawling_hyperdome.dds",
+      "Icons/Research/near_orbit_observatory.dds",
+      "Icons/Research/terraforming_subsidies.dds"
+    ]
+  },
+  "original_game_control": {
+    "path": "A:\\SteamLibrary\\steamapps\\common\\Surviving Mars\\Packs\\UI.hpk",
+    "bytes": 176251463,
+    "table_sha256": "f9748a9f5c92ce152416e117a26920739afc7610ac3e4c8ef76f8e57c9f4970e",
+    "appid": "464920",
+    "buildid": "8705308",
+    "entries": 2534,
+    "research_entries": 224,
+    "comparisons": [
+      {
+        "path": "Icons/Research/advanced_drone_drive.dds",
+        "dds_sha256": "102fbec2b92820bc57dd1d17fa4eea9ae9f08f9ca7c7c49c1f25158fe72918e3",
+        "pixel_sha256": "26e1573f6113828659fcff57b911fb30cd15e7898984fbfe2373dfeecc3d8df7",
+        "width": 186,
+        "height": 162,
+        "same_pixels_as_relaunched": false
+      },
+      {
+        "path": "Icons/Research/eureka.dds",
+        "dds_sha256": "d28d34998a5a2e85c59659b9b5ba539b01a0afe3afeb43e6802fba1f9e2d9808",
+        "pixel_sha256": "ef27330494d0680f422a25a4dc9888676c4f3f32c838978976be71377cfcd89d",
+        "width": 72,
+        "height": 62,
+        "same_pixels_as_relaunched": false
+      },
+      {
+        "path": "Icons/Research/metal_foams.dds",
+        "dds_sha256": "a00894727538b163d32acb134af381b5091fb55dc894bc28cf3d6a11ad904cf6",
+        "pixel_sha256": "12ea3872cc450741e37d68128dc5eaa2e823be0cc99a6dcc8d8cc5968fc08f52",
+        "width": 186,
+        "height": 162,
+        "same_pixels_as_relaunched": false
+      },
+      {
+        "path": "Icons/Research/polymer_autosynthesis.dds",
+        "dds_sha256": "e71db8ef99303def5ea56dec70d6cd6bef2f37cb0d3235a19754f3034ccf7ec1",
+        "pixel_sha256": "ae5325763dcd6b54045238db698c6cef4c6838f175eda3017489d2e6e1a17949",
+        "width": 186,
+        "height": 162,
+        "same_pixels_as_relaunched": false
+      },
+      {
+        "path": "Icons/Research/smart_alloys.dds",
+        "dds_sha256": "fbf1e0cdad87d840d0bb3281900256e2bfce848b8453dcc702830196a19f0e6e",
+        "pixel_sha256": "55e98165e3150babb57bba84c143d1b6656be4234750c99eefa4f51e7e78e0ae",
+        "width": 186,
+        "height": 162,
+        "same_pixels_as_relaunched": false
+      },
+      {
+        "path": "Icons/Research/standardized_integration.dds",
+        "dds_sha256": "413cd9834676732b37b13a8e14ee8a7408bbd471cf7a35189d57587c854e6f4f",
+        "pixel_sha256": "2557292bf2b7fad2da33a839e1a0383badc9351beda34af04b68e9986cff4520",
+        "width": 186,
+        "height": 162,
+        "same_pixels_as_relaunched": false
+      }
+    ]
+  },
+  "legacy_icon_owners": {
+    "Icons/Research/capture_asteroids.dds": "CaptureAsteroid",
+    "Icons/Research/vehicle_optimization.dds": "VehicleWeightOptimizations",
+    "Icons/Research/low-g_fungi.dds": "LowGFungi",
+    "Icons/Research/decommission_protocol.dds": "DecommissionProtocol",
+    "Icons/Research/advanced_landing_techniques.dds": "AdvancedLandingTechniques",
+    "Icons/Research/underground_trains.dds": "UndergroundTrains"
+  },
+  "industry_hitech_census": {
+    "presets": 55,
+    "with_explicit_icons": 54,
+    "obsolete": 7
+  },
+  "census": {
+    "packs": 183,
+    "entries": 58037,
+    "extracted_current_dds": 412,
+    "research_dds": 395
+  },
+  "pack_controls": [
+    {
+      "pack": "DLC/norman.fpk",
+      "entries": 1844,
+      "table_sha256": "3480b6d5ee97cd64ae087b74ef6cf02e804996b082acd77100f799843114c21f",
+      "payload_control": {
+        "path": "Meshes/FoodProcessingPlantLane_mesh.1.sub_0.hgrm",
+        "bytes": 3479,
+        "sha256": "2bf4e1e57b90165d6cedcd7cbddef4b69c76b1b23ad9d7800ca460e7f1ddca69",
+        "prefix_hex": "6468736d030001006468736d"
+      }
+    },
+    {
+      "pack": "DLC/thomas.fpk",
+      "entries": 49,
+      "table_sha256": "e6f2041e33d5d6c2f4fa54812c74dfa462ea7488f066892cc3400c3f962e8b0b",
+      "payload_control": {
+        "path": "Meshes/LawOfficeDoor_mesh.sub_0.hgrm",
+        "bytes": 10008,
+        "sha256": "50e46d5a7831c44f49dc0d2872120734845c908fc104dc596e394c40be0b4a6c",
+        "prefix_hex": "6468736d030001006468736d"
+      }
+    },
+    {
+      "pack": "Local/Brazilian.fpk",
+      "entries": 1,
+      "table_sha256": "4efa03db0c75807f60590ae5c5afd29ba187f4f6ce0f187f7049957366fd394f",
+      "payload_control": {
+        "path": "CurrentLanguage/Game.csv",
+        "bytes": 8285898,
+        "sha256": "2930f5366e7b61ed8873e8317f7609126d2ff8f2d3e7e7f9a1857fb0a8282b77",
+        "prefix_hex": "49442c546578742c5472616e"
+      }
+    },
+    {
+      "pack": "Local/English.fpk",
+      "entries": 1,
+      "table_sha256": "35f04eb1172adb840f986b0dc60becf33e423ab444a6b80404f72ffe633bb6b0",
+      "payload_control": {
+        "path": "CurrentLanguage/Game.csv",
+        "bytes": 5173923,
+        "sha256": "f0e25cd6bbd1c6cc15a0563020ed653b0d5ba02e7a344c04cfc4bd337e710651",
+        "prefix_hex": "49442c546578742c5472616e"
+      }
+    },
+    {
+      "pack": "Local/French.fpk",
+      "entries": 1,
+      "table_sha256": "5a107cf15a338bba5711daf6982964bae90e47c751e04f616f12339da9b8f901",
+      "payload_control": {
+        "path": "CurrentLanguage/Game.csv",
+        "bytes": 8508034,
+        "sha256": "493f8460f3b56427daf58a7c85b3931592114d7f164879ef062937d0304f9272",
+        "prefix_hex": "49442c546578742c5472616e"
+      }
+    },
+    {
+      "pack": "Local/German.fpk",
+      "entries": 1,
+      "table_sha256": "e6acd8c66c8247561f1b757af87633fc476ad60bc3236a541a6ee020f8482112",
+      "payload_control": {
+        "path": "CurrentLanguage/Game.csv",
+        "bytes": 8496617,
+        "sha256": "7bcdcc871b0432ec0df3ecac40e32a2aa46542e642c6a6543efcad157821175a",
+        "prefix_hex": "49442c546578742c5472616e"
+      }
+    },
+    {
+      "pack": "Local/Polish.fpk",
+      "entries": 1,
+      "table_sha256": "b7e87abc121daf4bef50aea79a387e26a4c635b5c8d04313cd6402d5fe8c5924",
+      "payload_control": {
+        "path": "CurrentLanguage/Game.csv",
+        "bytes": 8354336,
+        "sha256": "a97ea0dc890479293712640ce65c68e4cf74b229ef267e76526868bd2ecf8275",
+        "prefix_hex": "49442c546578742c5472616e"
+      }
+    },
+    {
+      "pack": "Local/Russian.fpk",
+      "entries": 1,
+      "table_sha256": "9366d40d27716ff06e79e2a9f97c6b2bb11e007d7a72915f8c93654903ad6727",
+      "payload_control": {
+        "path": "CurrentLanguage/Game.csv",
+        "bytes": 10053565,
+        "sha256": "51f6fb5b6eaa3989c4563b3c34b3aeafff249b13ab40029b1d98a04b8c1b74de",
+        "prefix_hex": "49442c546578742c5472616e"
+      }
+    },
+    {
+      "pack": "Local/Schinese.fpk",
+      "entries": 1,
+      "table_sha256": "d5fb6d48898cbe756abf191833a4dc384461a7216875e4ac9f335cdb2fdde085",
+      "payload_control": {
+        "path": "CurrentLanguage/Game.csv",
+        "bytes": 7775469,
+        "sha256": "095bd123030b5f5b04b3202bc8fc6b09ee600a449a9bfbd348170c3d16bee573",
+        "prefix_hex": "49442c546578742c5472616e"
+      }
+    },
+    {
+      "pack": "Local/Spanish.fpk",
+      "entries": 1,
+      "table_sha256": "0d8af93c9e5365e1a37969f19aec68b7f7b1123d69d84546b31918b29149ee8b",
+      "payload_control": {
+        "path": "CurrentLanguage/Game.csv",
+        "bytes": 8288335,
+        "sha256": "d59a39a6f1b66e65a673933ab218243bc8896cde5bf9d7631bd82dc4636b5440",
+        "prefix_hex": "49442c546578742c5472616e"
+      }
+    },
+    {
+      "pack": "Local/Turkish.fpk",
+      "entries": 1,
+      "table_sha256": "19bde9875d08478a93dfefb72a2cc8c1fdd751e491ef23e4c053dc6a0916d10e",
+      "payload_control": {
+        "path": "CurrentLanguage/Game.csv",
+        "bytes": 8167009,
+        "sha256": "03b13632d89b340646d73283c0b9c0ef56a5fdaa191a1e03f9a8fb6e23e94433",
+        "prefix_hex": "49442c546578742c5472616e"
+      }
+    },
+    {
+      "pack": "Local/Voices/English.fpk",
+      "entries": 525,
+      "table_sha256": "3e2363ed9a7f6af295b3f0bf1099f3fa1ac4f94b2aa0c2fed7c3b984b17d0f16",
+      "payload_control": {
+        "path": "7474.opus",
+        "bytes": 80675,
+        "sha256": "b37b4e2a5faa821de9ee528f6c44e13b20fc34cf8c21f5f3868f449c5169c3ee",
+        "prefix_hex": "4f6767530002000000000000"
+      }
+    },
+    {
+      "pack": "Packs/Animations.fpk",
+      "entries": 1851,
+      "table_sha256": "eacf67e73febab1082cefbfa15ff2abd679ed22cc053a7cb7bac29086ae69785",
+      "payload_control": {
+        "path": "Male_sitDeskIdle.hgacl",
+        "bytes": 13413,
+        "sha256": "b02298fe3a59cd1c48f718254d409557b8003facbe57dc19de4f30357863313d",
+        "prefix_hex": "6c6361680b0001006c636168"
+      }
+    },
+    {
+      "pack": "Packs/BinAssets.fpk",
+      "entries": 5,
+      "table_sha256": "d09c80cbd92b01f625a9c34bd9a25aab3620609bb3a64547dd61e043ebc2e63a",
+      "payload_control": {
+        "path": "resources.meta",
+        "bytes": 2019991,
+        "sha256": "29dfdf98705232a93669bf455037433c556e599ef691702ce2c63f4a27069b66",
+        "prefix_hex": "746d737202000100df5a0000"
+      }
+    },
+    {
+      "pack": "Packs/CommonAssets.fpk",
+      "entries": 3792,
+      "table_sha256": "3513aa67cf11c0127f21cb85be7ae296c36bbc029a305e0cabcd3d444f47728d",
+      "payload_control": {
+        "path": "CommonAssets/RainStreaks/dcam40/cv40_v50_h10_osc5.dds",
+        "bytes": 5588,
+        "sha256": "884251e5b43a2ed406b626cdaffb3031aeee5533a2cb242b6eeba8c93740f7b4",
+        "prefix_hex": "444453207c00000007100a00"
+      }
+    },
+    {
+      "pack": "Packs/Cubemaps.fpk",
+      "entries": 117,
+      "table_sha256": "8ab44110d4a1487be0277adb0f73cb0190dc581ae4f06b5263dcca1d03954c2a",
+      "payload_control": {
+        "path": "TheMartian_NoonInteriorSpecular.dds",
+        "bytes": 2097460,
+        "sha256": "698eb4c51ddb717328dad484774ddf7016b437ae251c0ba1df1d8418700b8838",
+        "prefix_hex": "444453207c00000007100a00"
+      }
+    },
+    {
+      "pack": "Packs/Data.fpk",
+      "entries": 2815,
+      "table_sha256": "0f635f226b415394a29b40dc14ab0a2655fe4a16cd5c9b9db33ea18e22e8de0a",
+      "payload_control": {
+        "path": "ParticleSystemPreset/MOXIE_Smoketop.bin",
+        "bytes": 3183,
+        "sha256": "e9781d13eae476220911455de9ad2a661ff53dd7eb383ec47037aefbeba85d69",
+        "prefix_hex": "63747270160001000e000000"
+      }
+    },
+    {
+      "pack": "Packs/Fallbacks.fpk",
+      "entries": 4669,
+      "table_sha256": "57987e1c1bbd5c4fab93b522867955f7ddc18a5746deda05aab2e6ca350257ce",
+      "payload_control": {
+        "path": "Textures/3490016.dds",
+        "bytes": 2892,
+        "sha256": "37469fab130d904f255708f84effa6cd2a6c034aceb8a2bf14ab7062a4cd2c09",
+        "prefix_hex": "444453207c00000007100200"
+      }
+    },
+    {
+      "pack": "Packs/Fonts.fpk",
+      "entries": 4,
+      "table_sha256": "30bc36c82af6c9f01c87526fe6d4f9444b9589beed0ece1cf9fe6c8bcd1b84c5",
+      "payload_control": {
+        "path": "libel-suit-rg.ttf",
+        "bytes": 89904,
+        "sha256": "ab50ba825edef2a564cd0355a35260201c3e2ebf21ea23d72b9fcf1f0ca5e88c",
+        "prefix_hex": "00010000000f008000030070"
+      }
+    },
+    {
+      "pack": "Packs/Lua.fpk",
+      "entries": 2374,
+      "table_sha256": "4dd668238b8b3b537c22f46bd3b51ac03f79828c9c508bf5d6b10618aaa0d918",
+      "payload_control": {
+        "path": "Lua/GameRules.lua",
+        "bytes": 5558,
+        "sha256": "ed1c471dc95b397736f579bca2799ee74f4f845a6150a3de3bbd23d7981de740",
+        "prefix_hex": "66756e6374696f6e2052656c"
+      }
+    },
+    {
+      "pack": "Packs/Maps/BlankAsteroid_Small_BranchOut_01.fpk",
+      "entries": 6,
+      "table_sha256": "6d4064e42d14aaa9e993374adf3eb6d79864a5576786f4d7fa2b859f0219c22b",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 3747,
+        "sha256": "bcc1206e852f25acfaf15e69c245b98a8e35b8ed7c8cc7eccde00da8b7adf588",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/BlankAsteroid_Small_Connected_01.fpk",
+      "entries": 6,
+      "table_sha256": "19ca3abae7be42e15e964faa677c05156dddb83b93ef02e76c8ac2ff2027374d",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 4024,
+        "sha256": "d6ae6cac44b5ca11719a83510753978cd0eb04328fed6281b54b8a901563f961",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/BlankAsteroid_Small_Connected_02.fpk",
+      "entries": 6,
+      "table_sha256": "5f4d14e7cf5a8d3ad550bc0b5db4380aeace9b4081bbc322c1804e7f28f84aed",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 3693,
+        "sha256": "e3ace82f2de35b585dd5f544597fa7be8ecc5bf123ca9e0b10fc2af9bdc9907a",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/BlankAsteroid_Small_Donut_01.fpk",
+      "entries": 6,
+      "table_sha256": "021f15f8344c0612ef4797ca42437c9a0de11855df48de3f02020d3cba4fb831",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 4484,
+        "sha256": "6e1a26ff5bed843f738c5366c7f7b6c0b6b0059ce1126c54459e506c6b9ab2e3",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/BlankAsteroid_Small_Nano_1.fpk",
+      "entries": 6,
+      "table_sha256": "b563c70574c517b96addcace531c9d927a679ce76b680583be1cf02266ab03f8",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 274,
+        "sha256": "e8aec8ff2b61b39e2b4d648e6bb6e650f8f40616241eb1ec1f67fe32b89bcd94",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/BlankAsteroid_Small_Separate_01.fpk",
+      "entries": 6,
+      "table_sha256": "fec7b5000cbb44df8ed163a06de21891783053dc5faedec382171cfcbe68845c",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 3550,
+        "sha256": "180da7ede51bb66d37363703a6b4f7c42130ef6cab1c142916e1bab8c16b9d3c",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/BlankAsteroid_Small_Slim_01.fpk",
+      "entries": 6,
+      "table_sha256": "4785b57dea71ea03b2c582c27f25c8fb2818c96bcc489b93fec32390ffc19be4",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 3778,
+        "sha256": "21ec68128509d731f2c351684233d5b964e2539edd072a169551fc369babb551",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/BlankAsteroid_Small_Slim_02.fpk",
+      "entries": 6,
+      "table_sha256": "871447299203895ba83bef9e0c2af49aff66e5329af088f89f71f4aa8892a10f",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 3314,
+        "sha256": "be673c1c9365042a47ee34271d49f32505ba2ee7a96236cce81b8f70ba5aca06",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/BlankAsteroid_Small_Terrace_01.fpk",
+      "entries": 6,
+      "table_sha256": "b8a0e097c8f9cfd2e09bd28c44471655cd5fd7af7ec0739f67f1427aa4d9229a",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 3786,
+        "sha256": "6c6fb610a382e2283641b14299fecde7897b8c2dd9395db35296c73e38202951",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/BlankAsteroid_Small_Terrace_02.fpk",
+      "entries": 6,
+      "table_sha256": "885b63986acdbd02248d153a40ff7dcc83701aca1a29c7bce50b09b11b8e8ae1",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 4759,
+        "sha256": "bafa021db18665cf29f5b23b0bfc230ebcb46860697b9294ecba0c263f9d30c7",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/BlankAsteroidBranchOut_01.fpk",
+      "entries": 6,
+      "table_sha256": "23b91c9d8fbb6ec3f8fed883e505fe245be75bb8ef682b35bb8a6c27bca6431f",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 3609,
+        "sha256": "68d22be57dfc9c6eb804f31e7610daa01e38502e79c1d532a29e6023d98bdef4",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/BlankAsteroidConnected_01.fpk",
+      "entries": 6,
+      "table_sha256": "9305fdbec8a6e8544a595bb16f0aa6bc08eda62e48453df1b322116cac70f4eb",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 3886,
+        "sha256": "02402ff65d1cca410fc2c1f8e1a0a84f9b85940381a3135db3d25649ce38d8b4",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/BlankAsteroidConnected_02.fpk",
+      "entries": 6,
+      "table_sha256": "4013f56a36a11f3f36ff232895bcf371c29bc28e873fc9672fbc818a80030f21",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 3555,
+        "sha256": "1f485a028ec7b9ac0ef9369836f2a22561d862c5f94231d25f95a28e9162ad75",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/BlankAsteroidDonut_01.fpk",
+      "entries": 6,
+      "table_sha256": "6439976a1165c5573513a8250030dc4a1ee2b77f680b2f68838169f3e20948c0",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 4346,
+        "sha256": "67041d563a2417e9e395687a5c4bb225bcbe032ce3e66729fa1e3c8b8478c2d4",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/BlankAsteroidNano_1.fpk",
+      "entries": 6,
+      "table_sha256": "d5742aeb9cde707c8623f3b6b2cc59bb887e645662e9ec8583de96f3d250ef42",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 267,
+        "sha256": "c83dbbbba22f87a818d45e9f70e693c559c1a03cbc38597d434f73d75d13dddf",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/BlankAsteroidSeparate_01.fpk",
+      "entries": 6,
+      "table_sha256": "c683777285dd388ce6428b2751c7706e15c56a5e132e8aed89559558ab4a5fab",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 3412,
+        "sha256": "b90496f263bf5cccd7aacb4ae7b1d53127c51bd2bcf38d90dd99e08d52ecd2ca",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/BlankAsteroidSlim_01.fpk",
+      "entries": 6,
+      "table_sha256": "3e7e385dab677a5d07b36af2374fe6dae9abcb7718a9d8263fb60ddbdd40dccf",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 3640,
+        "sha256": "9ce4d62602a56018e2dd3b213a06cd4e4d81f665b16d85dbdbb5ef4a250b82ab",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/BlankAsteroidSlim_02.fpk",
+      "entries": 6,
+      "table_sha256": "17adf1d6f1c105403ac6a2efa1ff66d7ccc9eebfb745dd123c18abb0aa12c8d2",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 3176,
+        "sha256": "d4b6bdc508d3be62f354d5199d6bc13665d4e0532bf1ed9b2d0da013ea21faec",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/BlankAsteroidTerrace_01.fpk",
+      "entries": 6,
+      "table_sha256": "b335161ea7e6ebe494c8d5a3ea592021191ff0657bc2296738d66331cc8ca612",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 3689,
+        "sha256": "87707f9eae25029af5b4d53ddad4aa019104764b25d9864178d32aa2ea0e5369",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/BlankAsteroidTerrace_02.fpk",
+      "entries": 6,
+      "table_sha256": "cfaac22993dc346c1af5de476883d4cf9279def23c08a63e10ebd0ecc42a35dc",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 4635,
+        "sha256": "58722aa6fc0d8fa80d6ea91153032f0c8d96378a653a0f7c0e27786b9c05cdb0",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/BlankBig_01.fpk",
+      "entries": 6,
+      "table_sha256": "507b35ef3b70fa400e80dae6e707518d84be388d1d55adb5803993541fe69062",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 259,
+        "sha256": "12ff64d411ff739335a2ab650a6e8dd13997d73a77214ef41919319b043d3a65",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/BlankBig_02.fpk",
+      "entries": 6,
+      "table_sha256": "09eeed08f80a47b3791a8d6dc09fe960fa587e6d06fd650bd83874beb22cb937",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 259,
+        "sha256": "378dd9d1a062c6b70eb35fb0815b18df7c3fcd7e461d593fe7c116e99314d96b",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/BlankBig_03.fpk",
+      "entries": 6,
+      "table_sha256": "2ce4a567f5f7b4e72fcc130bf041e33eeaa08018f68786e92de28b02394373d5",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 259,
+        "sha256": "7110ed1a1b5bb0f7689205cc24525e0dbeac9cbe871c825d77d0dce02722096b",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/BlankBig_04.fpk",
+      "entries": 6,
+      "table_sha256": "2bd78c36ccc52b671e9011b24354e430397d8eb52b303bf4b766ec1aae746d2f",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 259,
+        "sha256": "8999d79a4efcdb399b759d3330e007299be92eaccc4ee90c9e54ea4aa345bc11",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/BlankBigCanyonCMix_01.fpk",
+      "entries": 6,
+      "table_sha256": "118deaeeb6b81c811fb3c0a2b8088a95f6f6a6d845db9f7e875e0aa138cf5ab4",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 269,
+        "sha256": "5910ca9128416f36f111fd1ce83d219beca6a176255334895c68ee5f740e1b67",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/BlankBigCanyonCMix_02.fpk",
+      "entries": 6,
+      "table_sha256": "abfd8142b44aa96cdc7814005662ade3df85ac22d28b379d1310d3a37d1fca08",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 269,
+        "sha256": "07f4d5cc3f0b3f558820b5b06f27de0bf8854e32ac1a1222b081a73086677bbd",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/BlankBigCanyonCMix_03.fpk",
+      "entries": 6,
+      "table_sha256": "54b1b684a5967d3309d2a058a2962490be8a35c6cbc3450c30de5a418735b23e",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 269,
+        "sha256": "9270b98f7a71a017a1dd94936675b14dbbad4461cdaaa515922a30536730af01",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/BlankBigCanyonCMix_04.fpk",
+      "entries": 6,
+      "table_sha256": "691af1c69fe7e27b39c680885edc692687f8285526def7d8f718757733f2817c",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 269,
+        "sha256": "203a8d33765ada785f369cc1446deb79fc6f96c7486c316829fdd59bec1f1fe0",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/BlankBigCanyonCMix_05.fpk",
+      "entries": 6,
+      "table_sha256": "f23410a04948e4eae74d0a2dc51bd07abcef8b5c538bc2eac43883727ce0a776",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 269,
+        "sha256": "983ed971bdd58b067e7d14394143a61a5befb1caae013d5a82fa5d0c7ecf698f",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/BlankBigCanyonCMix_06.fpk",
+      "entries": 6,
+      "table_sha256": "41943e056a267b8057120d757ef1a4bd65f4df2ae36eaa05f3f45d8afaca7547",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 269,
+        "sha256": "a6e632c30164fbcd72c198394b7d4c1ffccc942eb17e3b2e2041b1fd91670b2b",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/BlankBigCanyonCMix_07.fpk",
+      "entries": 6,
+      "table_sha256": "478655c63882b3c3ad0b6a4894c17218a08915dd12adc9c422b263288996826f",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 269,
+        "sha256": "df7822081cc72e9ed1399078d09799bf93b3b9068f7ec8b118cd04e57e27aa80",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/BlankBigCanyonCMix_08.fpk",
+      "entries": 6,
+      "table_sha256": "d2bd742fe9a4e94deb9b3f1c1751165ce71264fd5214c630a4fb6240e13276e4",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 269,
+        "sha256": "4e6ad3e123fa0369d24afe1d618f03871bf1998e1e9e4db611edd275f936f079",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/BlankBigCanyonCMix_09.fpk",
+      "entries": 6,
+      "table_sha256": "1d714fcb16e6f9afc0c3d08cc29d6c13325a9fc4d566febab8dc4c7a713f7035",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 269,
+        "sha256": "9dc7b66a32c2f8a7f801327c88b0bba56c0d1155e9b2f00cfee1abdcc245c543",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/BlankBigCanyonCMix_10.fpk",
+      "entries": 6,
+      "table_sha256": "604d0e55d7c505ce0a7b353fc2a9038b22fc222efaf88d8eae3ac7dc05794998",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 269,
+        "sha256": "2a713a73e169271cfafbd6e5876f7f860356bfeda77576e0000ffea181e9240b",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/BlankBigCliffsCMix_01.fpk",
+      "entries": 6,
+      "table_sha256": "91c7cf9a9e6f505ce5971a6e4fa0812a47b897603f333ed16769d34d52ceeac9",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 269,
+        "sha256": "a1fd2189045f340268bd9289b5cd8ef02588478b76c4428ffa54fcba4d3fdae8",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/BlankBigCliffsCMix_02.fpk",
+      "entries": 6,
+      "table_sha256": "0d2c5dd6ac2864a5241bd226c88deeeb4a334f29550d3842527ada7bf6aa4889",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 269,
+        "sha256": "537a0036bb7faf0b0b79dcbb3c174ed465859b9adb1d0d864c7796e9ae220a2e",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/BlankBigCrater_01.fpk",
+      "entries": 6,
+      "table_sha256": "319764de59e3bc25098cc910c88091ba99db3502f20db18b3aadbaf94de91ff0",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 265,
+        "sha256": "aa739d30ef69c73dd0364ca5e97053145d7b1e53bc58c925416e89916c083835",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/BlankBigCratersCMix_01.fpk",
+      "entries": 6,
+      "table_sha256": "6bcae5a0471a58559104dd0db92000d12147e7098695ee81cabbe37526daa8c5",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 270,
+        "sha256": "0b0409273765e00220b699894ccdc83f64b5bf70efb3aa0117f10998cbc9736c",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/BlankBigCratersCMix_02.fpk",
+      "entries": 6,
+      "table_sha256": "7d88de4497d999eda4006e7d84b891492c207ae27e1fb53b52af087969e0c721",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 270,
+        "sha256": "64b802836cbe123c4046d7acf96aeccc391fc5dbb27dde39ef113dd6d1eaae89",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/BlankBigHeartCMix_03.fpk",
+      "entries": 6,
+      "table_sha256": "388fb37a0e93cb622b9b527ea832705958b7d5ba706f90028dd833b8fbac7908",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 268,
+        "sha256": "cfde254e76a2f1599caac0c6d93a2980846c942aa09ccd235f4385cd0b557f53",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/BlankBigTerraceCMix_01.fpk",
+      "entries": 6,
+      "table_sha256": "fb6c5bb1fbfcbc17d0e5a5af63f37b1203d6069732dd4651ec3cfce719474a73",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 270,
+        "sha256": "969b8a92c96c678c5dbef933e5dd27a43e9d26e669b32632f5b7867c561cb7d5",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/BlankBigTerraceCMix_02.fpk",
+      "entries": 6,
+      "table_sha256": "451dc623482f1975b674530267154291a94460cd170b3fb76ee4a782b2131427",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 270,
+        "sha256": "c7e94de1ca2c6494af306afd636e3d373f5d5dee2ded83efcaee26b3fbcb3960",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/BlankBigTerraceCMix_03.fpk",
+      "entries": 6,
+      "table_sha256": "27cc35c8e4ee9c3d3dd28d1f7cbc842d0236eac363a4d4efd67cba32217fb3db",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 270,
+        "sha256": "d4eda69f27ea269efef3cc334134c51891372e5e8b841bcca5fbbfa82d88dd7a",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/BlankBigTerraceCMix_04.fpk",
+      "entries": 6,
+      "table_sha256": "7873656ddc5830954addd444b959f5fde00e753f232da2c363424c361590aba1",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 270,
+        "sha256": "a70f57ab16ed0603779f00e05c13dc9e70b31b5a1135d904607c7d89966546c2",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/BlankBigTerraceCMix_05.fpk",
+      "entries": 6,
+      "table_sha256": "b96bb5efe4a689fedad408f5d84c81a4b6f4dd01d83871b038bf58a0ab1039b2",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 270,
+        "sha256": "98e7b62ddb2dfc5381b938c48192c5789501337c065339f22b8848a2d37c8d2f",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/BlankBigTerraceCMix_06.fpk",
+      "entries": 6,
+      "table_sha256": "87fe9358b9833882727094dc88a5c1b4c099c5d4b8a8797ec1bd4abe88019d5e",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 270,
+        "sha256": "9dfe7a36b0ad4a2fe4067d63dcc0770f0a3f528b82306a58ab769801694a6f15",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/BlankBigTerraceCMix_07.fpk",
+      "entries": 6,
+      "table_sha256": "a2c322c9e9b195bb243c0f4b9b5c3145b60e24cb988928764223ab63574654c7",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 270,
+        "sha256": "15617f2301887364a5a05980bc8ce59a19f7aeacf7cfd7c375cfc9feb9a8d6d0",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/BlankBigTerraceCMix_08.fpk",
+      "entries": 6,
+      "table_sha256": "9be196d50ae5e117f277070bd655d7dc2d0eea9da543e2911bb887320d34118e",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 270,
+        "sha256": "9b103808da21801fe853ddb57b0f3d00e7ba1224420f1d6f4a29f972a33f1a92",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/BlankBigTerraceCMix_09.fpk",
+      "entries": 6,
+      "table_sha256": "2d9fee318d2a05ac71c92e25253509d869d4aa2881d87e581963bce2d388bbb9",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 270,
+        "sha256": "c844e39aa1c24086207a646a13a6786d96b2c3fcda9eb6710c13647cb00b2b4d",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/BlankBigTerraceCMix_10.fpk",
+      "entries": 6,
+      "table_sha256": "3b5c0b7e579e472cfb853b87d03136c45d698856f6b4556da1d2ca77122b1ca2",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 270,
+        "sha256": "0cbbbdebaf447bd3656fa5685e4c5a4fc513f58446da633c5242053e6e800383",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/BlankBigTerraceCMix_11.fpk",
+      "entries": 6,
+      "table_sha256": "0fc61742e171f0a4416eed9d3713d0d98ce25d6c39b97ceaeec0e6f7f0cb2d9c",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 270,
+        "sha256": "f882eb5e0d11b2e43fe449c755a571bcf959d5d0df506fb7ea464429efdfe04b",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/BlankBigTerraceCMix_12.fpk",
+      "entries": 6,
+      "table_sha256": "f1f76ef0858947bd2661b022573e52651c51d58c31d48f8b260607c5766c9434",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 270,
+        "sha256": "2ec6414f1d150ce7b0c8a4522b4185400c3eae519ada5acfc205539a457c99b5",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/BlankBigTerraceCMix_13.fpk",
+      "entries": 6,
+      "table_sha256": "2a02e7f99efe65abe88f6373927e39ea1c8d347e29bcf67374923306d8f2281a",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 270,
+        "sha256": "658e7bd847fca9fc743bb0d77c8c185ccbb6b00ae64adb983ccdb4c88dd7a0a4",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/BlankBigTerraceCMix_14.fpk",
+      "entries": 6,
+      "table_sha256": "253438a850ea2d65c19443dad30b721a3b1c0bf2fc274cf249a9b533571fab00",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 270,
+        "sha256": "ca1f005f0d61c6b6ec3d84761e8afd5933d03e8a3b68be8f9a4a6b53669fb7ce",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/BlankBigTerraceCMix_15.fpk",
+      "entries": 6,
+      "table_sha256": "87a5ee1646950de3926450906563f37632fdd3796db3286a83a00aceb9dfe3c1",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 270,
+        "sha256": "3023ea38aac01a6e661b0b62c6d755c0dacf6655d1995bc358611ae9bcae736b",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/BlankBigTerraceCMix_16.fpk",
+      "entries": 6,
+      "table_sha256": "5494c7b33112b2454ae326f9360e74dacfb170dc919e6f169a71b2917ae2e288",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 270,
+        "sha256": "dcfbd3882d05b78699ea4a7c5b8bb58f6fa2e5d64d2375cf68386e4450ba7371",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/BlankBigTerraceCMix_17.fpk",
+      "entries": 6,
+      "table_sha256": "2685637d9722a9a6a106bc95783a76bfb2271886ebe9dee8e1d8cf51e04da14d",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 270,
+        "sha256": "742c47a7247ae0bbd0b5bc837a6275cfb1dc324b7a2e454de9219ede6faec05f",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/BlankBigTerraceCMix_18.fpk",
+      "entries": 6,
+      "table_sha256": "1891c2c4baee3a26296d4414d55f5d64e504387262532d9e53154a30167667e6",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 270,
+        "sha256": "1f17df73ae3032de30c6ab8d08903900de5a17429e68b90f515d85dc16bd4fda",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/BlankBigTerraceCMix_19.fpk",
+      "entries": 6,
+      "table_sha256": "7c2aa40fd6078f74c04a41cb4e88d89df692dae710b174547aaf792813e006c8",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 270,
+        "sha256": "8569663e567425294cb5b79dbe133d3a7b3b466b2553f6857854a0491f92f4ce",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/BlankBigTerraceCMix_20.fpk",
+      "entries": 6,
+      "table_sha256": "d2c5606acdee81cb6b185f6b816bcf320a3d8a1cf7885200552c4cfa52db8767",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 270,
+        "sha256": "4e14039b360ce40533fd0e2837274b549d0c912be964d04083d54d0fb98fb00f",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/BlankTerraceBig_05.fpk",
+      "entries": 6,
+      "table_sha256": "1159774555237dbc300aa66a3421836f271044de2a559c2d1bb0cc7e1ca5f7d9",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 266,
+        "sha256": "7ff2e0afa426f18dfa7f5d9c57458a0d933de52392748509365a0030408b6458",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/BlankUnderground_01.fpk",
+      "entries": 6,
+      "table_sha256": "0384bf079e047779e0dfc944720f612bfa3ad49b98674cef0d1a16dd71d5edc5",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 8771,
+        "sha256": "7f4a2966b57a3caa61b9a9101050748462d32caebbbb73fd02465c2b2e498c8e",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/BlankUnderground_02.fpk",
+      "entries": 6,
+      "table_sha256": "aab8060b1e94a9a323818f9ae4aaf756f722998b19efcce253c5bbb56045e9b7",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 9067,
+        "sha256": "5ac231de31f4f9bca2acd5c3d247a9706cb215de16712e51e04dc7a4a95f9b0f",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/BlankUnderground_03.fpk",
+      "entries": 6,
+      "table_sha256": "e5c77fb652d069989bf39a18c9fe854e69156b96dd7e0fd8f8cdc0b7e2502b6b",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 10667,
+        "sha256": "31152c9c6b0c3821f44bb3d898c5519fba011ff7ec6d978accf20db6d9d00695",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/BlankUnderground_04.fpk",
+      "entries": 6,
+      "table_sha256": "c5d085bdb83a6bd9bccf0d4b4d2c2edf2dcaafe125b45e848021c099ce8368c8",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 10764,
+        "sha256": "624093505174bed0b1e7837399f858645bce673d1094a728d4ce8a7e3aa81e72",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/BlankUnderground_GroundZero_01.fpk",
+      "entries": 6,
+      "table_sha256": "eb1c3125c47dd4dc048298f31c869e3981551394bbbb8ef4a58491251c6b845f",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 8760,
+        "sha256": "7cfe9e87b0dfb3f6be5878dc1803cc639e3d097dcf973d59a9572613b5d08876",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/BlankUnderground_GroundZero_02.fpk",
+      "entries": 6,
+      "table_sha256": "36cb77436867956789922a961450afc8e668f890901579df3bdce4542d3adfe5",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 9137,
+        "sha256": "a96b4f09d9d91cf62cd7f52769e6711477c8d9cf00a6893c1ab31b441d1cfa2d",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/BlankUnderground_GroundZero_03.fpk",
+      "entries": 6,
+      "table_sha256": "1f919d5d8e5581743f36a05c38fca46d60f267fccf4dff8835ba81db0bf655a4",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 10992,
+        "sha256": "3c051ec55e32df6f3bab870ac3b0476351c2fc25ee96f1e510f08ea5bc2aeabd",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/BlankUnderground_GroundZero_04.fpk",
+      "entries": 6,
+      "table_sha256": "f40b4bea267bc9ed599be7af87ad19bf8c79822e55dd8dd7deec28466abae862",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 11324,
+        "sha256": "5705ec4f5f6af57a18e864550a1d97051da97460196dfeaefd172af001b6204c",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/BlankUnderground_ImpassableHighGround_01.fpk",
+      "entries": 6,
+      "table_sha256": "22a6f92e9ab671817acc95656ea3feea48fa82291a01d0ccc91da930a8ec4a56",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 8792,
+        "sha256": "2023c92e3317232def4e7858bc58ebdca571a955fc43982f091225a9e9392252",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/BlankUnderground_ImpassableHighGround_02.fpk",
+      "entries": 6,
+      "table_sha256": "1174b27f377854d2f5f29b51b2c5ebdf324e07c955ec897d7e7698f9bb84e1bc",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 9088,
+        "sha256": "25569555e62e98801e963bb6c07a38fdab25867c708e2e6afb85d9415417b356",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/BlankUnderground_ImpassableHighGround_03.fpk",
+      "entries": 6,
+      "table_sha256": "ac3dbbe1a24280ee4ae629a80bc0bab9fb9e537127f3e282e0980541d0cf92c4",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 10688,
+        "sha256": "d4a5bfb6325cd788922355b7fdfabd71a649d3040f3ad2c03faae394b6832b2b",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/BlankUnderground_ImpassableHighGround_04.fpk",
+      "entries": 6,
+      "table_sha256": "95fdd89d9043ce2ea22a00d76c5d348c560dbe097ed945be73f460ff5da81d91",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 10785,
+        "sha256": "10376f928ac974b0a088415e9855d66e53c26c94f09dc9e4a09b452c3ebaf90c",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/Mod.fpk",
+      "entries": 6,
+      "table_sha256": "edd8cb9a7353bdef0caf9d08127cc788ff6cd4ca5bd80e999ace608b160dd7a7",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 1305197,
+        "sha256": "feb3251b29b5cba6792597144840faede71f097f5caaff7100cbfb94ce8bfe9f",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/NewTutorial.fpk",
+      "entries": 6,
+      "table_sha256": "3b158740c4b8e6dc454fce4956f1476b6ec414ce88fcb255221e539d92b2ee7c",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 2939325,
+        "sha256": "9a84c659994e9476934e18b7e24859e30150f4726221e111b32375d3d015c027",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/NewTutorial_Colonists.fpk",
+      "entries": 6,
+      "table_sha256": "20168c01c4dc991f3986e8ff79d0e1578acedbd1234a05cb1ee1bcdf1ab494a5",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 3109490,
+        "sha256": "72182b614567e462bb166b2b066c80e6e57da0558d6c532aca870bcc6fc4ae39",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/NewTutorial_Trains.fpk",
+      "entries": 6,
+      "table_sha256": "b4b3c5a8f8b7a5d8dca44311dcda8019ee1da9a80b60190f8c7a085c084ebadc",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 3226094,
+        "sha256": "77a234b23564cefb444593cb02f9d2612f60b892dccc1a2176bddd45848b2034",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/PrefabAsteroids_02.fpk",
+      "entries": 6,
+      "table_sha256": "3351bad00b3ca53ff7cf6bde8a469fc90b41b6ec5c0d307e34728f3947931ba6",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 305991,
+        "sha256": "f55d1ff54abb60f98c70c3be281d0e3512d79693c6ebea3ad9db61a10699985e",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/PrefabBlankUnderground_01.fpk",
+      "entries": 6,
+      "table_sha256": "2dac52fc5929d94994fa7b16c3594ce8e8d3c76e3da0eb9fe19fcee75b52014d",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 7544,
+        "sha256": "9e86ad5889dfce99a47204069db71763b9961397bcc82d38a1db2e2f8ba5abc4",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/PrefabBlankUnderground_02.fpk",
+      "entries": 6,
+      "table_sha256": "1a92fa046b1d8a47a49f85b473092f8058d3a7068cd457b0aa2d9549df05cf7f",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 7744,
+        "sha256": "415d226c84eb49b88d2ff249da540ee65afcf2f34bba72f1053802d980db51f3",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/PrefabBlankUnderground_03.fpk",
+      "entries": 6,
+      "table_sha256": "617f332dcf67ea7c12c038e83eece5e5bbf59071e8cae70f8e352b943c16b71c",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 9526,
+        "sha256": "7dd3fc571b08c540227979a66fa7b18643850fc6ecc3c1c0f852a2892872d705",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/PrefabBlankUnderground_04.fpk",
+      "entries": 6,
+      "table_sha256": "1f3cca62875ed409046fd3394998ce3945130d1550fc2f09b8ac860becfa871a",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 9816,
+        "sha256": "3099ed124ba4157e3541bb3b8acea03dfc6c02b5a6a2382952894f39d22c0076",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/PrefabDark01.fpk",
+      "entries": 6,
+      "table_sha256": "ed5ff081bd4a22c8f9d7b70ba521ab570c1c92cdb929cd6aafe9bcc9a13ad2fe",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 3889567,
+        "sha256": "11415109e6d580dd3ec6ea940715f0496e979f8267e044f9fbd8f2d53859e7a0",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/PrefabDark02.fpk",
+      "entries": 6,
+      "table_sha256": "a0feb292cc4a0d0d488cddaf7eebfd1315595b5a266aff375884abac9ea521ed",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 3342953,
+        "sha256": "5709d6182aaf991171c8157c00e868b85c921b71af942698c8beab8a772c83bf",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/PrefabDark03.fpk",
+      "entries": 6,
+      "table_sha256": "a43fd12ac12c3ce8d5293665bde15d5c755ef1eccac6342e7869c8ce55bd095f",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 2477791,
+        "sha256": "756022537cb00e21af51790ee7d6fcbb05fea81fa9936132855248701361f26c",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/PrefabDark04.fpk",
+      "entries": 6,
+      "table_sha256": "3d2901448bdeaf544d230d318aed15df37c3101a156ea84753bbe76987b4372a",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 2309911,
+        "sha256": "6953ed44bf7f1480424b2e22855c2564cbd96b76327dd0da9c0d25eb262fcaa6",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/PrefabDark05.fpk",
+      "entries": 6,
+      "table_sha256": "d9b5149c43edbf688bebf096ddb8f43334e0a7cba2ae60492fb10949e35db402",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 1483302,
+        "sha256": "ae09315a8dcb39fe78ba5917b95b1b4db4fc293f686c59880ac0ea5e0b2cad78",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/PrefabDark06.fpk",
+      "entries": 7,
+      "table_sha256": "d1298a84c9dc8a342c7b1fea0608ee7ea8bb44feff84264d078a89c1409c958d",
+      "payload_control": {
+        "path": "mapdata.lua",
+        "bytes": 43893,
+        "sha256": "83705cde75aa103a2adfdffb0933e456d3cee74e9f5e94780647ad752f1b3621",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/PrefabDark07_V2.fpk",
+      "entries": 6,
+      "table_sha256": "c4eb20748d47f5ee46d48dc9bfabb88b53c203d6e19c96d5c9b21f9511ded312",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 297535,
+        "sha256": "e3f2543629ec9593eee06c7e5bb3af717e5025be9386122b177e69e1562e1ad1",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/PrefabDark08.fpk",
+      "entries": 6,
+      "table_sha256": "48768b530769127e14b25e08a5c2e43e944e3446dd3ad6bab1e1bd678a1dca39",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 561793,
+        "sha256": "8ae934bd050a0de7fda4657d89be8685be8689e2156413c740fb7a118099180a",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/PrefabDark09_V3.fpk",
+      "entries": 6,
+      "table_sha256": "9120ccd0806b671b0c1b1690e6ddd25f00e62888c99ca44b3f648571ac641686",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 253552,
+        "sha256": "9e0b009a8c9f74069546cd00518f99764fdb92273f1af4b5db67e1005fe0addd",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/PrefabGameplay_01.fpk",
+      "entries": 6,
+      "table_sha256": "7d3bfcedeb967c0805d94505f7e9eaf9f40ecaaf4a6c4c5978cbe278b3491f6e",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 94533,
+        "sha256": "580e0d7610d83fb0a1c7045cc6619519720d4fa87e2c0046f3858dc664e57201",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/PrefabGameplay_02.fpk",
+      "entries": 6,
+      "table_sha256": "0b59092874d9648a4626aafbb0e84cf72e2569bf3bafa832ca1e182c369cf273",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 92886,
+        "sha256": "d01574ffbe25173837c536d0e771fb88a32f4cbc11285d7a13108dcba4e77934",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/PrefabGameplay_03.fpk",
+      "entries": 6,
+      "table_sha256": "4f3870621e1cc48a97f3670cfe40f28844eb44631f77b01011b562ca85afe729",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 32932,
+        "sha256": "187e5cbe9f2e846b3c5bdf67d010c884421a491b4d4dd6e5feecd6fe8819d364",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/PrefabGameplay_04.fpk",
+      "entries": 6,
+      "table_sha256": "bce7f3a3fd57b4a421ff9caf66afd72f6375ec7317aad7d08c130a79efd13d9d",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 14700,
+        "sha256": "1b95f78b523e4ea916ade84e9473e3b02aa0d5a3095e3b08e8440c02a82e6b64",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/PrefabLight01.fpk",
+      "entries": 6,
+      "table_sha256": "a9dc42d7f3a2b61f13ad116f704bceeeae82afe65b07f2284319f5a02ecbd711",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 376111,
+        "sha256": "d6095a325f1bc7f64cd3df3005cf60614ebdd8fa48e2cba3415fa5dbd09ae565",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/PrefabLight02.fpk",
+      "entries": 6,
+      "table_sha256": "4029d512c9e9e4704b33e68dcae8ebc94ef10a1d505cde8e6b8bcafbb332ad8b",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 190414,
+        "sha256": "9e12ab162a06978e07401d2a16fe8bf11e987633dd2340b581d5158f8d804359",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/PrefabLight03.fpk",
+      "entries": 6,
+      "table_sha256": "fd606195f64df47c3d71de4e1844e212757239cc5ae813d5f238f4a9c9bf5459",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 366731,
+        "sha256": "1c71551377fd611f74492c7d16cbfab46c22550404577334c00bc999197f07cf",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/PrefabLight04.fpk",
+      "entries": 6,
+      "table_sha256": "48c915bdb8e9fb495dcf3308f0d825b84017f54adc1624c6c170b19ec3d60f2e",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 247756,
+        "sha256": "cfa06623292daa321e6c66cae551dcce75719ba901d4c699dc07c4f14417164a",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/PrefabLight05.fpk",
+      "entries": 6,
+      "table_sha256": "e4f389d7859d2125e6aa04e479e3b6ffad50d13c3b4b351dd04c605d94436851",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 162267,
+        "sha256": "a2d6272265df8ed04674a6dcfdd776b3d00e05475acc6640ef63b371313f238d",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/PrefabLight06.fpk",
+      "entries": 6,
+      "table_sha256": "e8867c839f171aa3bac203e4f23b177a1de4c4edbd5639e1473af58d49118bb9",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 68727,
+        "sha256": "8ea445b2a2af74bdae295a4a191691cd0567824821af265547327bce0eca1325",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/PrefabLight07_V2.fpk",
+      "entries": 6,
+      "table_sha256": "856499cd83e3eb8092203c51cd386e3048221911a03aa33276ca40fc9ae31180",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 59489,
+        "sha256": "9792a87405fa4ec82d3107142761626522dc3690d34c570d54d7aee42d143268",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/PrefabLight08_V2.fpk",
+      "entries": 6,
+      "table_sha256": "4ac82d21e4581a42f8505c37b3c41abc0bd3a4f98dc43867d50613c16279c69e",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 61185,
+        "sha256": "3c07a8e4d16328b7370db5f1d2002eb75dc1f7991c516be5399c983560bfa932",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/PrefabLight09_V3.fpk",
+      "entries": 6,
+      "table_sha256": "51497c1da4693e7641f18ec42b58a8ad68ee1d934d727583fc33593e92900ee9",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 27310,
+        "sha256": "96c0019e2ea97e6e8ed5d86a59d1053d35910ccbabcd083b664a735ecb1b7fa2",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/PrefabLight10_V3.fpk",
+      "entries": 6,
+      "table_sha256": "ef31cd05aebf46329e7cbb4949b874a9c6f83bdf4167302d63c54f1abbf759a2",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 6903,
+        "sha256": "fab3f8a8121470f689f1361b413cf66e0514cb0f754c5de0887109121dddebb1",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/PrefabMeteors.fpk",
+      "entries": 6,
+      "table_sha256": "a59ff61061209c3e98b90d44ea5886d8b878f4bbe4d122cbcf83dcdebc5685d5",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 4653,
+        "sha256": "56b80c43a40321c55738e5fa8c8ebaf9481fffc26d275a8e2bcbc0fb90b42ce0",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/PrefabMount_01.fpk",
+      "entries": 6,
+      "table_sha256": "49c6075371b317ffa8f2ec453c547afe9c253408a92a60e62816d925d756b28a",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 2012,
+        "sha256": "568236f14466c5756311ba88db89f2fa63110690749b1300e9f088186c296a06",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/PrefabMount_02.fpk",
+      "entries": 6,
+      "table_sha256": "f8bf2d49f68893e97e5c52883574cb00e5454b8f00dc327c8273fa828ec23c4a",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 1950,
+        "sha256": "6b202f0a63bc80ed9189dcbc0af8ab2a524cc8c70c7db8ae76cea7992556ec02",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/PrefabMount_03.fpk",
+      "entries": 6,
+      "table_sha256": "8474e11e592a3cbdcaeed7c2bff3f5c4b8e58fd163ed0481322e87162a07b2e4",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 2321,
+        "sha256": "514172ec6127e0cc3289dadc13f0ada0843c51dccec6e2e286f742818bd15942",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/PrefabMount_04.fpk",
+      "entries": 6,
+      "table_sha256": "216746aca2c51c4436faf8e91e4b2c05a49f6afae028c3cc38208ac068df05e4",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 2301,
+        "sha256": "b89b111bcc5d2b58ab5a60bc92344c02e46b714b4dfd3a1965a9f65974c108cc",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/PrefabMountM_01.fpk",
+      "entries": 6,
+      "table_sha256": "30e7847f555afccc686137fad5560580221c5e3b074dadbe86decd3a915064ea",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 2254,
+        "sha256": "064edb604b12c199621909e8b41fd59600d78cd825049f4b95a29dd346b1c941",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/PrefabMountM_02.fpk",
+      "entries": 6,
+      "table_sha256": "77bdc8932b0ec3ad0a3c220dab0782ff9c3c5fe3d58710e4adb9225d360575b4",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 1954,
+        "sha256": "67ac7e7b006f12c1c4bb42f1f0a39177800bbd2052508d62421b2217988fd5fc",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/PrefabMountM_03.fpk",
+      "entries": 6,
+      "table_sha256": "e91cb6fd43135e633a0384545381a28713f1a086d65046555ff2c038fea75d30",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 2132,
+        "sha256": "7b0a4175549e39f69f103b96189ce477b282ffda4629e23956082c836b6ec7b2",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/PrefabMountM_04.fpk",
+      "entries": 6,
+      "table_sha256": "0ece9b05eed2c34a802510daedd2a9957c7655685f545b96ea38786c06a6742d",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 1917,
+        "sha256": "b2596470b101b989f83f6c65d7f189e693d8d09177492a50425ea04b4cb8405e",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/PrefabMountS_01.fpk",
+      "entries": 6,
+      "table_sha256": "7d8a0172b7e2f29304ab593fa27bcd55e5b5900ec09cc3e8697e748c8a913e40",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 1979,
+        "sha256": "983158212772ac0e6ae437420ab0f4ad6f083f66566684d42ddbc168a4bbc6e0",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/PrefabMountS_02.fpk",
+      "entries": 6,
+      "table_sha256": "a250d42b66994b4f8ff91a3d4aeea6dc84632388bd7cf1548388fb31f22daac6",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 1954,
+        "sha256": "dd90c01bf611fc8cd3ece2fa4326f9730c11dcb0b37004db6eb3707b6aff3597",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/PrefabMountS_03.fpk",
+      "entries": 6,
+      "table_sha256": "15e630fda03b3d65faaee4340970882c6b7de2bcd1b83334ded0dfe35f7dd68b",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 1940,
+        "sha256": "116d095f9842ceceea10197b1c137ec86105398addd267ff8baabb857d6236e8",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/PrefabMountS_04.fpk",
+      "entries": 6,
+      "table_sha256": "a5a344eaec6ab51a3c3d0c6a3659228a0363b52d0e757814f268840a7614b39c",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 2305,
+        "sha256": "91a99d7a52d64f67d31dd6b1043830650399e9d563a08b739ab16ea713dd304d",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/PrefabRed_01.fpk",
+      "entries": 6,
+      "table_sha256": "8463ad6d467ddd2480a636cbe8deafac71b031fea4fce680de94536981119660",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 992811,
+        "sha256": "94d0d3961beda4bf86e5befbe607965531c1b76b82981a3d238a3c4ad64a0ba8",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/PrefabRed_02.fpk",
+      "entries": 6,
+      "table_sha256": "45f207ee69d3ec7d67df3976027733fc6dc1b7628129f98d847a4e515b26da06",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 849591,
+        "sha256": "b3787aaebbdf86bc11da7734aeecef8e415fda993d7f71f3d4de179607be5689",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/PrefabRed_03.fpk",
+      "entries": 6,
+      "table_sha256": "2fb601d19aa11e4839f637b0d573934bcbf182487c17147eb8daac649cc5a1c1",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 1168441,
+        "sha256": "522a52bc70a6c85f482cc4f889509d29baea4fa4a1ac897980e3cc42d8fa0528",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/PrefabRed_04.fpk",
+      "entries": 7,
+      "table_sha256": "d0e96d0960dcb9e8e82dcf1a9a23f8177f5557a670773c90df27774d7c2913bb",
+      "payload_control": {
+        "path": "mapdata.lua",
+        "bytes": 105743,
+        "sha256": "d9fe1ecf0d392d0161f9f77b0e307a6a510b60d7afb939e4646a7cb299d03f24",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/PrefabRed_05.fpk",
+      "entries": 6,
+      "table_sha256": "8d902aef5d8475aa043d882cda603575380230dce2f2579a0f7b7034595a51e7",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 935777,
+        "sha256": "32545313ce33c119e1adcdc14d134ce38d0fff262f94b952affb739e0998bf56",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/PrefabRed_06.fpk",
+      "entries": 6,
+      "table_sha256": "707f69b5564aba9b428d753b3ab97550c01d7160d272ae8d1f31d237e6820e92",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 1126522,
+        "sha256": "1b4fd72b4600bb7be6c6be3aa2bc9c4f9145f9b6618f37df4299c74693a822e9",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/PrefabRed_08_v2.fpk",
+      "entries": 6,
+      "table_sha256": "980ad69844edd8f8d369372e8f426e454ea2f9dad637a31d48f26487ba755684",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 189661,
+        "sha256": "77dcbd0f56ca5476646f9d4ccf37f17d02e6a8c4209018872c996683ca9c90d7",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/PrefabRed_10_v3.fpk",
+      "entries": 6,
+      "table_sha256": "7f3b6ed236380a0e804dc801c0938fd314a977dd856a87ad7ab8fbecd52e7e9c",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 139614,
+        "sha256": "08e5cf9fbd19af38a8c1556a7b8cfffa416e1b163baca24addec1dc769c9a36b",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/PrefabSlate_01.fpk",
+      "entries": 6,
+      "table_sha256": "d88154182a86ee4842109c7fdfb60ae85f382fea03a6d5f14d8a32e6148ea0c0",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 1984651,
+        "sha256": "a58443de61a8065e953eccb456401510c177cdb23d74175af82098cd352c4817",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/PrefabSlate_02.fpk",
+      "entries": 6,
+      "table_sha256": "ab321c594813bb066964e9d993e1ae6e29d6e37476818135a95adee8e6cadfd1",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 1216341,
+        "sha256": "4cc0addffc727d01ad284157c2c6983512cb088811871644416acaa67edae5e9",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/PrefabSlate_03.fpk",
+      "entries": 6,
+      "table_sha256": "2c8f6b4dc4ab1be94c21387a2a1249388153a49358f8b372baef513efe7c5ff3",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 1404021,
+        "sha256": "6fb00732637df718bf5502281fea230c1de4ebead4b759b2a9e8c7609a192422",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/PrefabSlate_04.fpk",
+      "entries": 8,
+      "table_sha256": "5f4a321c3443f9d1760f0a9867c32d3bb909eed130c1b59903ee51d5a7f84390",
+      "payload_control": {
+        "path": "type.grid",
+        "bytes": 16777216,
+        "sha256": "d23a14c3b23b6386d0ca5876f518dce4951073157da8ce039b2a31d3fb895eae",
+        "prefix_hex": "101010101010101010101010"
+      }
+    },
+    {
+      "pack": "Packs/Maps/PrefabSlate_05.fpk",
+      "entries": 6,
+      "table_sha256": "faee4914105b30dc73fe82c217727709be7f65c9da3f3cb4eacb92bb0bf6c1a6",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 1133748,
+        "sha256": "d2fca0c522e840359edc684dec85f5df03b0d8563c19ab208f13d31a77da1684",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/PrefabSlate_06.fpk",
+      "entries": 6,
+      "table_sha256": "30dfb6a60cf5e58f3ad706cf8ee98ebcf75b7d122d1aa23031477dbffb30374a",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 934097,
+        "sha256": "b5681e27b3c7689a922df35de10192d4fa419c7e9c14b924ea92183c4492dd5f",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/PrefabSlate_07v2.fpk",
+      "entries": 6,
+      "table_sha256": "db813785605e2243aed048eb65f9517d10df5f83a5d50040e7b3d066f239f996",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 305254,
+        "sha256": "09ce1a4295c5c656fe6123e93e3e94f583acafed25f18ddbfe37a224962bf06f",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/PrefabSlate_08_v2.fpk",
+      "entries": 6,
+      "table_sha256": "81145b12f9727debd68db750ac04123e816d57eb2e1fe99d6128b8823578b1ce",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 179413,
+        "sha256": "622247d830a6b9f5b921eb18f91a613de4ffe728d67b914647b7f54a68f97864",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/PrefabSlate_10_v3.fpk",
+      "entries": 6,
+      "table_sha256": "214ad36729fc6dcc9e82d929d9b9f17cdeb1273e1832d97f0a4b609a28a724b1",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 115279,
+        "sha256": "ae61364f163d0b5d35a4aeb0a4b5b0b4f6f9bda5abda91b10109c82660c87ca5",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/PrefabUnderground_01.fpk",
+      "entries": 6,
+      "table_sha256": "25cd805f3756dc7d564aabddc3069c46c4357c8225480e2f41cbf64dc274fc06",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 156137,
+        "sha256": "44e6ebb52266822013ddf66c44fffde13642793fa75c235a0f1f9fe77ed8e2a3",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/PreGame.fpk",
+      "entries": 4,
+      "table_sha256": "507ada1ef7e67c0de4b9a8f7971900704a3dc5b4b672f8ce43cd87b1bd32499d",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 215,
+        "sha256": "5b3939c5ff57139652488f75141823af2106409eec2f8d954c14d62b685582b3",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/Tutorial1.fpk",
+      "entries": 4,
+      "table_sha256": "07e5d52df0d7dd377fb2c8ecbab66ef54852a88952230885103f8527d43debe8",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 2985176,
+        "sha256": "57599975121df6f300694cc8b1f313cde6a83936f43126717193eb323870d490",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/Tutorial2.fpk",
+      "entries": 4,
+      "table_sha256": "297d21c46de33f50c90a71686d632cebf6af6b1bfee459184251a6c2f66c955c",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 3036838,
+        "sha256": "b081b8d797e55eabe536dccd03e3a151616a971752785524889c5bc5d83a01f4",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/Tutorial3.fpk",
+      "entries": 4,
+      "table_sha256": "6fd4976f39f6e35d53015361b994d1a44865b6eb200b8afd71f91aa39ee2d276",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 3134477,
+        "sha256": "50f1557e3133d3646d03af8559eaccc744c52ce9909cc2a2ef6df0a9b44f98dd",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/Tutorial4.fpk",
+      "entries": 4,
+      "table_sha256": "9f9e53869950416c037e785b30794853b741fd5a3484b05cb3ae4af11bc6f032",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 3138369,
+        "sha256": "706eb2ac24e4b34c2f1d45481d67452d1df88c8d538f2a666168f325b278bdae",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Maps/Tutorial5.fpk",
+      "entries": 4,
+      "table_sha256": "c9f1710f654be470840b4e51005ccf41fd0fd3404fcab3aa4e64e8f910706c84",
+      "payload_control": {
+        "path": "objects.lua",
+        "bytes": 3224013,
+        "sha256": "5ddc633bdc1373db00fbe4e0776a713069cb16e729d5ebea3a1cbf270bf1e7e5",
+        "prefix_hex": "1b4c7561530019930d0a1a0a"
+      }
+    },
+    {
+      "pack": "Packs/Materials.fpk",
+      "entries": 2428,
+      "table_sha256": "f03f2a6819d5dd514469c78846a7b46b00daff5dbabc55a6e993a51a1fac7548",
+      "payload_control": {
+        "path": "MicroGExtractor_mesh.sub_1.mtljson",
+        "bytes": 411,
+        "sha256": "55441565dd4fb55fa4203d66f329bf9e9a1448172c2249df9ec04d3f02e549c2",
+        "prefix_hex": "7b0a09222470657273697374"
+      }
+    },
+    {
+      "pack": "Packs/Meshes.fpk",
+      "entries": 10210,
+      "table_sha256": "e0954104dc01db61dccad4970563a9d52cad78ba787cea602aacac90dc1b42b8",
+      "payload_control": {
+        "path": "Underground_Arch_02_mesh.sub_1.hgrm",
+        "bytes": 67013,
+        "sha256": "24096130d979c6b77d8f7043792a17e49d104c8aa8eb3f1cfab64907bd586f55",
+        "prefix_hex": "6468736d030001006468736d"
+      }
+    },
+    {
+      "pack": "Packs/Misc.fpk",
+      "entries": 3,
+      "table_sha256": "5c1f040931ab8c648341a3c2d5aca8db987d98e57a620d7b3b41d82b6c839889",
+      "payload_control": {
+        "path": "Tutorials/RocketsTutorial.savegame.sav",
+        "bytes": 44487727,
+        "sha256": "67bfce0bc16dd0bc49643210f88415755c721c3ae072d84136e349c8417a7835",
+        "prefix_hex": "4250554c2400000001000000"
+      }
+    },
+    {
+      "pack": "Packs/Music.fpk",
+      "entries": 353,
+      "table_sha256": "d7c549f516fff6d81121529184f717e409cba0a3435c71e2770ce0084a6fa939",
+      "payload_control": {
+        "path": "OfficialMars/Radio_OfficialMars_Talks_10_2.opus",
+        "bytes": 446693,
+        "sha256": "135a72be72ffd8639b44cbffab00a7a9788e0a8a83bcce144e20ec2808de3869",
+        "prefix_hex": "4f6767530002000000000000"
+      }
+    },
+    {
+      "pack": "Packs/Prefabs.fpk",
+      "entries": 6977,
+      "table_sha256": "65e18bbcfa20402409219259aa427c99b8fc6bf22debf6486ed133a21f98b828",
+      "payload_control": {
+        "path": "Deposit.Any.ConcretS02.t.grid",
+        "bytes": 600,
+        "sha256": "aefb110e9e24d7755f4ca6016463b95460eae697a1c7af1fb491035f5211e439",
+        "prefix_hex": "000000000000010043475538"
+      }
+    },
+    {
+      "pack": "Packs/ShaderCached3d12.fpk",
+      "entries": 6455,
+      "table_sha256": "37fcd546051bbf178627108eb0ace1bfba3ac037ecbfcc3512edc93b95f81aec",
+      "payload_control": {
+        "path": "18127378576978749298",
+        "bytes": 47256,
+        "sha256": "f23233ecbeb149b583e9394f0f6818861346f20ea6af3c769393200817e651ee",
+        "prefix_hex": "727068731800010038000000"
+      }
+    },
+    {
+      "pack": "Packs/Shaders.fpk",
+      "entries": 281,
+      "table_sha256": "39040a55d2072bbee9523c960b6d4e1a1bb2b83cc7ce9b1c62de8bf98b95f553",
+      "payload_control": {
+        "path": "REBLUR_PostBlur.cs.hlsl",
+        "bytes": 3499,
+        "sha256": "8974e5765a6d6e965a08d37024dd8e2772e91ada644c8b0889495da12a75189c",
+        "prefix_hex": "2f2a0d0a436f707972696768"
+      }
+    },
+    {
+      "pack": "Packs/Skeletons.fpk",
+      "entries": 565,
+      "table_sha256": "f5b31c7186c78380b4e75418cd199aceb63f111a24012b08d83b5bdc355f1a01",
+      "payload_control": {
+        "path": "MedicalCenterDoor_03_mesh.hgskel",
+        "bytes": 655,
+        "sha256": "8335c761c35939feaa09d8921fee6bd39b1218e6c69cbb1e9ae1c228486875b2",
+        "prefix_hex": "7b0a09222470657273697374"
+      }
+    },
+    {
+      "pack": "Packs/Sounds.fpk",
+      "entries": 1762,
+      "table_sha256": "23ee6d9a6612c13d2dc7cc0258944b2dab9b254a8c5e8fa807de99dd20f96732",
+      "payload_control": {
+        "path": "Objects/MetalsRefinery/metalsrefinery_work2.opus",
+        "bytes": 112364,
+        "sha256": "728be11f95e4faea21e3516edebd0bb50f52d3d2b7a177da3ec7cb7b2c30543a",
+        "prefix_hex": "4f6767530002000000000000"
+      }
+    },
+    {
+      "pack": "Packs/Textures.fpk",
+      "entries": 348,
+      "table_sha256": "77083fa95f136d64f66b1bb9817e0f4dc88e83a3c2291b460d4025d441c4f971",
+      "payload_control": {
+        "path": "Particles/Mars_Interface_Target_Circle_04.dds",
+        "bytes": 87556,
+        "sha256": "8e670cc999ab368fbc0eb6c126e1cfd60fe0654e8defce7388876bf2e65b9251",
+        "prefix_hex": "444453207c00000007100200"
+      }
+    },
+    {
+      "pack": "Packs/Textures0.fpk",
+      "entries": 435,
+      "table_sha256": "0bdf30b985186d97544fb28f66d5722e4b9e8f3e54c560c25f2868ba90d1db23",
+      "payload_control": {
+        "path": "3531010.dds",
+        "bytes": 699212,
+        "sha256": "9978644eb9acc11a53ccb240d949b3106726568af2f79d149422276d8e857b6e",
+        "prefix_hex": "444453207c00000007100200"
+      }
+    },
+    {
+      "pack": "Packs/Textures1.fpk",
+      "entries": 467,
+      "table_sha256": "6ae00df3fcb52152ef3ca3a6fa2de8f6667a9d3862371dc53823c0eefdcbee1d",
+      "payload_control": {
+        "path": "3774000.dds",
+        "bytes": 2796364,
+        "sha256": "2d95fe03e4bdc1de36c8c15efb76d498fa0534c6935e695a099ca6679f9d5a1e",
+        "prefix_hex": "444453207c00000007100200"
+      }
+    },
+    {
+      "pack": "Packs/Textures2.fpk",
+      "entries": 471,
+      "table_sha256": "06467cb9b67e425513e957327a054733a10345d4fa88309cfe059788f5b7dc61",
+      "payload_control": {
+        "path": "3452000.dds",
+        "bytes": 174924,
+        "sha256": "519dcd4cdf6dfb511a740281f06ad72d7f4b7f34290badb8b7a372b7586f446b",
+        "prefix_hex": "444453207c00000007100200"
+      }
+    },
+    {
+      "pack": "Packs/Textures3.fpk",
+      "entries": 502,
+      "table_sha256": "c45539f881dd82dc0098bdfa31b2d319f7fa6c928ca53337d56f2e5f9925420c",
+      "payload_control": {
+        "path": "3466004.dds",
+        "bytes": 2796364,
+        "sha256": "a58a8b9396e8e22bf65f073ea05ec764902e75f092757756458b5c0c1fdb5126",
+        "prefix_hex": "444453207c00000007100200"
+      }
+    },
+    {
+      "pack": "Packs/Textures4.fpk",
+      "entries": 499,
+      "table_sha256": "84bddac56a2e2fac7a054afeef52721262855b2cd7b6b069272054a672a87710",
+      "payload_control": {
+        "path": "3478002.dds",
+        "bytes": 2796364,
+        "sha256": "5b5068e44dfb8e93ecaef1ff979173080e00b04214ad061adfc49803588ac298",
+        "prefix_hex": "444453207c00000007100200"
+      }
+    },
+    {
+      "pack": "Packs/Textures5.fpk",
+      "entries": 469,
+      "table_sha256": "7deee17e02e03a308e644ab98c2c5b549f55f0959621b31c209ab0e46abb3ec1",
+      "payload_control": {
+        "path": "3532000.dds",
+        "bytes": 2796364,
+        "sha256": "5618c6b445dc57f6f207a417abd475b0cd71d23c97579093d404536db55f1aa4",
+        "prefix_hex": "444453207c00000007100200"
+      }
+    },
+    {
+      "pack": "Packs/Textures6.fpk",
+      "entries": 485,
+      "table_sha256": "5711834ec241f5091426f3a04f953f7d8b0fd150650a4b997bf0d42be702a16b",
+      "payload_control": {
+        "path": "3681003.dds",
+        "bytes": 699212,
+        "sha256": "14a4a9995c4ceaa32fee4a620933cf15aab953474b2c5a85deba50a282ae41ec",
+        "prefix_hex": "444453207c00000007100200"
+      }
+    },
+    {
+      "pack": "Packs/Textures7.fpk",
+      "entries": 522,
+      "table_sha256": "5f34c951861abd4d8241c8337ed8ef6a0f508587726c5a7fb8ccb7b0e2243ca4",
+      "payload_control": {
+        "path": "3547001.dds",
+        "bytes": 22369796,
+        "sha256": "a380987a2a0a7570f5f16add9fbe2c0b2da52878514c963e3f07d1b5225fbf1c",
+        "prefix_hex": "444453207c00000007100200"
+      }
+    },
+    {
+      "pack": "Packs/Textures8.fpk",
+      "entries": 478,
+      "table_sha256": "2914d30e3c28738c9f0da17fe3928e0741bd82be4fb6638856a286f4e16a3323",
+      "payload_control": {
+        "path": "3526000.dds",
+        "bytes": 1398276,
+        "sha256": "16af02afe3606a868de819553c55cbd3f4a3db1985f6cf94e479820fc2c807ce",
+        "prefix_hex": "444453207c00000007100200"
+      }
+    },
+    {
+      "pack": "Packs/Textures9.fpk",
+      "entries": 428,
+      "table_sha256": "34314b4f9d8fb4b1afd61ca71b58ce5773d78e4bbf02709023576765de3f52a2",
+      "payload_control": {
+        "path": "3491005.dds",
+        "bytes": 2796364,
+        "sha256": "d91f5e502714af7d5fbf14ab4c8405ce6a0f2d8c1ac6a001a187da48b5f704d0",
+        "prefix_hex": "444453207c00000007100200"
+      }
+    },
+    {
+      "pack": "Packs/UI.fpk",
+      "entries": 5001,
+      "table_sha256": "677612de1c06e444d86989adedeec02e7c7d63b29d1c4eb763b43de5be1165e1",
+      "payload_control": {
+        "path": "Icons/Notifications/New/new_planetary_anomalies.dds",
+        "bytes": 8468,
+        "sha256": "7cc3749f13cb165c9c231e7b76c3d571d5fe6e063d68305703b6c7a700735043",
+        "prefix_hex": "444453207c0000000f100200"
+      }
+    }
+  ],
+  "art_packs": [
+    {
+      "pack": "DLC/norman.fpk",
+      "bytes": 324762352,
+      "magic": "464c504b",
+      "entries": 1844,
+      "table_sha256": "3480b6d5ee97cd64ae087b74ef6cf02e804996b082acd77100f799843114c21f",
+      "root_categories": [
+        "<root>",
+        "Animations",
+        "BinAssets",
+        "Code",
+        "Fallbacks",
+        "Materials",
+        "Meshes",
+        "Presets",
+        "Skeletons",
+        "Textures",
+        "UI"
+      ],
+      "example_entries": [
+        "Meshes/FoodProcessingPlantLane_mesh.1.sub_0.hgrm",
+        "Meshes/CropShiitake_Norman_mesh.2.sub_0.hgrm",
+        "Meshes/CropCarrots_Norman_mesh.sub_0.hgrm",
+        "Meshes/BaristaCafe_mesh.sub_2.hgrm",
+        "Meshes/BakeryBreadBaked_mesh.sub_0.hgrm"
+      ],
+      "payload_control": {
+        "path": "Meshes/FoodProcessingPlantLane_mesh.1.sub_0.hgrm",
+        "bytes": 3479,
+        "sha256": "2bf4e1e57b90165d6cedcd7cbddef4b69c76b1b23ad9d7800ca460e7f1ddca69",
+        "prefix_hex": "6468736d030001006468736d"
+      },
+      "research_assets": 24,
+      "name_leads": [
+        "Code/BuildingTemplate/FarmSmallUnderground.generated.lua",
+        "Code/BuildingTemplate/FarmUnderground.generated.lua",
+        "Presets/BuildingTemplate/FarmSmallUnderground.lua",
+        "Presets/BuildingTemplate/FarmUnderground.lua",
+        "Presets/LawDef/LawDef-Welfare.lua",
+        "Presets/LawDef/LawDef-Food.lua",
+        "UI/IconsRemaster/Meals/coleslaw.dds",
+        "UI/IconsRemaster/Laws/insect_meat_substitutes_1.dds",
+        "UI/IconsRemaster/Laws/branded_products_1.dds",
+        "UI/IconsRemaster/Laws/artificial_flavouring_1.dds",
+        "UI/IconsRemaster/Laws/animal_products_ban_1.dds",
+        "UI/IconsRemaster/Laws/gmo_1.dds",
+        "UI/IconsRemaster/Laws/food_tours_1.dds",
+        "UI/IconsRemaster/Laws/rationing_1.dds",
+        "UI/IconsRemaster/Laws/organic_produce_1.dds",
+        "UI/IconsRemaster/Laws/meat_ban_1.dds",
+        "UI/IconsRemaster/Laws/water_recycling_1.dds",
+        "UI/Icons/Research/advanced_underground_farming.dds",
+        "UI/Icons/Research/underground_farming.dds"
+      ]
+    },
+    {
+      "pack": "DLC/thomas.fpk",
+      "bytes": 5476960,
+      "magic": "464c504b",
+      "entries": 49,
+      "table_sha256": "e6f2041e33d5d6c2f4fa54812c74dfa462ea7488f066892cc3400c3f962e8b0b",
+      "root_categories": [
+        "<root>",
+        "Animations",
+        "BinAssets",
+        "Code",
+        "Fallbacks",
+        "Materials",
+        "Meshes",
+        "Presets",
+        "Skeletons",
+        "Textures",
+        "UI"
+      ],
+      "example_entries": [
+        "Meshes/LawOfficeDoor_mesh.sub_0.hgrm",
+        "Meshes/DecLogoThomas_mesh.sub_0.hgrm",
+        "Meshes/DecLawOfficeBase_mesh.sub_0.hgrm",
+        "Meshes/LawOffice_mesh.sub_1.hgrm",
+        "Meshes/LawOffice_mesh.sub_0.hgrm"
+      ],
+      "payload_control": {
+        "path": "Meshes/LawOfficeDoor_mesh.sub_0.hgrm",
+        "bytes": 10008,
+        "sha256": "50e46d5a7831c44f49dc0d2872120734845c908fc104dc596e394c40be0b4a6c",
+        "prefix_hex": "6468736d030001006468736d"
+      },
+      "research_assets": 0,
+      "name_leads": [
+        "Meshes/LawOfficeDoor_mesh.sub_0.hgrm",
+        "Meshes/DecLawOfficeBase_mesh.sub_0.hgrm",
+        "Meshes/LawOffice_mesh.sub_1.hgrm",
+        "Meshes/LawOffice_mesh.sub_0.hgrm",
+        "Fallbacks/Textures/Law_Office_CM.dds",
+        "Fallbacks/Textures/LawOffice_Decal_NM.dds",
+        "Fallbacks/Textures/LawOffice_Decal_BC.dds",
+        "Fallbacks/Textures/LawOffice_DM.dds",
+        "Fallbacks/Textures/Law_Office_BC.dds",
+        "Fallbacks/Textures/LawOffice_Decal_RM.dds",
+        "Fallbacks/Textures/Law_Office_RM.dds",
+        "Fallbacks/Textures/Law_Office_NM.dds",
+        "Fallbacks/Textures/Law_Office_EM.dds",
+        "Code/XDef/customLawOffice.generated.lua",
+        "Code/LawOffice.lua",
+        "Code/BuildingTemplate/LawOffice.generated.lua",
+        "Animations/LawOfficeDoor_opening.hgacl",
+        "Animations/LawOfficeDoor_idle.hgacl",
+        "Materials/DecLawOfficeBase.mtljson",
+        "Materials/LawOffice.mtljson",
+        "Textures/Law_Office_CM.dds",
+        "Textures/LawOffice_Decal_NM.dds",
+        "Textures/LawOffice_Decal_BC.dds",
+        "Textures/LawOffice_DM.dds",
+        "Textures/Law_Office_BC.dds",
+        "Textures/LawOffice_Decal_RM.dds",
+        "Textures/Law_Office_RM.dds",
+        "Textures/Law_Office_NM.dds",
+        "Textures/Law_Office_EM.dds",
+        "Presets/BuildingTemplate/LawOffice.lua",
+        "Presets/XDef/customLawOffice.lua",
+        "Skeletons/LawOfficeDoor_mesh.hgskel",
+        "UI/IconsRemaster/Buildings/law_office.dds"
+      ]
+    },
+    {
+      "pack": "Packs/UI.fpk",
+      "bytes": 852179201,
+      "magic": "464c504b",
+      "entries": 5001,
+      "table_sha256": "677612de1c06e444d86989adedeec02e7c7d63b29d1c4eb763b43de5be1165e1",
+      "root_categories": [
+        "<root>",
+        "Achievements",
+        "Common",
+        "CommonNew",
+        "CommonRemaster",
+        "Cursors",
+        "DesktopGamepad",
+        "Encyclopedia",
+        "Flags",
+        "HUD",
+        "HUDRemaster",
+        "Icons",
+        "IconsRemaster",
+        "Infopanel",
+        "InfopanelRemaster",
+        "LoadingScreens",
+        "Messages",
+        "Mods",
+        "Onscreen",
+        "PS4",
+        "PS5",
+        "PhotoFrames",
+        "Store Pictures",
+        "Xbox"
+      ],
+      "example_entries": [
+        "Icons/Notifications/New/new_planetary_anomalies.dds",
+        "Icons/Notifications/New/food_2.dds",
+        "Icons/Notifications/New/colonist_2.dds",
+        "Icons/Notifications/New/closed_trade_route.dds",
+        "Icons/Notifications/New/anomaly_analyzed_2.dds"
+      ],
+      "payload_control": {
+        "path": "Icons/Notifications/New/new_planetary_anomalies.dds",
+        "bytes": 8468,
+        "sha256": "7cc3749f13cb165c9c231e7b76c3d571d5fe6e063d68305703b6c7a700735043",
+        "prefix_hex": "444453207c0000000f100200"
+      },
+      "research_assets": 371,
+      "name_leads": [
+        "Icons/Notifications/underground_2.dds",
+        "Icons/Notifications/underground.dds",
+        "Icons/Buildings/automatic_metals_extractor.dds",
+        "Icons/Buildings/metals_extractor.dds",
+        "Icons/Buildings/microg_auto_extractor.dds",
+        "Icons/Buildings/microg_water_extractor.dds",
+        "Icons/Buildings/regolith_extractor.dds",
+        "Icons/Buildings/universal_extractor.dds",
+        "Icons/Buildings/underground_dome.dds",
+        "Icons/Buildings/underground_micro_dome.dds",
+        "Icons/Buildings/underground_dome_medium.dds",
+        "Icons/Buildings/water_extractor.dds",
+        "Icons/IPButtons/elevator_switch_to_underground.dds",
+        "Icons/Research/advanced_drone_drive.dds",
+        "Icons/Research/enhanced_topographical_exploitation.dds",
+        "Icons/Research/extractor_ai.dds",
+        "Icons/Research/extractor_amplification.dds",
+        "Icons/Research/fungal_farm_underground.dds",
+        "Icons/Research/fueled_extractors.dds",
+        "Icons/Research/medium_underground_dome.dds",
+        "Icons/Research/underground_psych_studies.dds",
+        "Icons/Research/underground_deep_mining.dds",
+        "Icons/Research/underground_flight_school.dds",
+        "Icons/Research/underground_domes.dds",
+        "Icons/Research/underground_water_extractor.dds",
+        "Icons/Research/underground_trains.dds",
+        "Icons/Upgrades/fueled_extractor_02.dds",
+        "Icons/Upgrades/fueled_extractor_01.dds",
+        "Icons/Upgrades/fueled_extractor_04.dds",
+        "Icons/Upgrades/fueled_extractor_03.dds",
+        "Icons/res_precious_minerals_undergrounds.dds",
+        "Icons/res_metal_undergrounds.dds",
+        "Encyclopedia/AutomaticMetalsExtractor.dds",
+        "Encyclopedia/ConcreteExtractor.dds",
+        "Encyclopedia/MetalsExtractor.dds",
+        "Encyclopedia/MicroGAutoExtractor.dds",
+        "Encyclopedia/MicroGExtractor.dds",
+        "Encyclopedia/MicroGWaterExtractor.dds",
+        "Encyclopedia/RareMetalsExtractor.dds",
+        "Encyclopedia/UndergroundExploration.dds",
+        "Encyclopedia/Underground.dds",
+        "Encyclopedia/UndergroundDome.dds",
+        "Encyclopedia/UndergroundMediumDome.dds",
+        "Encyclopedia/UndergroundMarsQuake.dds",
+        "Encyclopedia/UndergroundMicroDome.dds",
+        "Encyclopedia/WaterExtractor.dds",
+        "HUDRemaster/underground.dds",
+        "HUD/underground_map_switch.dds",
+        "IconsRemaster/Laws/insurance_3.dds",
+        "IconsRemaster/Laws/drinking_restrictions_2.dds",
+        "IconsRemaster/Laws/basic_diplomacy_1.dds",
+        "IconsRemaster/Laws/appointment_of_seats_1.dds",
+        "IconsRemaster/Laws/advanced_diplomacy_1.dds",
+        "IconsRemaster/Laws/additional_sponsor_research_3.dds",
+        "IconsRemaster/Laws/additional_sponsor_research_1.dds",
+        "IconsRemaster/Laws/active_law_2.dds",
+        "IconsRemaster/Laws/active_law.dds",
+        "IconsRemaster/Laws/additional_sponsor_research_2.dds",
+        "IconsRemaster/Laws/administration_2.dds",
+        "IconsRemaster/Laws/administration_1.dds",
+        "IconsRemaster/Laws/administration_3.dds",
+        "IconsRemaster/Laws/animal_products_ban_3.dds",
+        "IconsRemaster/Laws/advanced_diplomacy_3.dds",
+        "IconsRemaster/Laws/advanced_diplomacy_2.dds",
+        "IconsRemaster/Laws/animal_products_ban_2.dds",
+        "IconsRemaster/Laws/applicant_campaign_2.dds",
+        "IconsRemaster/Laws/applicant_campaign_1.dds",
+        "IconsRemaster/Laws/applicant_campaign_3.dds",
+        "IconsRemaster/Laws/assembly_type_2.dds",
+        "IconsRemaster/Laws/apportionment_3.dds",
+        "IconsRemaster/Laws/apportionment_1.dds",
+        "IconsRemaster/Laws/appointment_of_seats_3.dds",
+        "IconsRemaster/Laws/appointment_of_seats_2.dds",
+        "IconsRemaster/Laws/apportionment_2.dds",
+        "IconsRemaster/Laws/artificial_flavouring_3.dds",
+        "IconsRemaster/Laws/artificial_flavouring_2.dds",
+        "IconsRemaster/Laws/assembly_type_1.dds",
+        "IconsRemaster/Laws/asteroid_deep_mining_3.dds",
+        "IconsRemaster/Laws/asteroid_deep_mining_1.dds",
+        "IconsRemaster/Laws/assembly_type_3.dds",
+        "IconsRemaster/Laws/asteroid_deep_mining_2.dds",
+        "IconsRemaster/Laws/automation_2.dds",
+        "IconsRemaster/Laws/automation_1.dds",
+        "IconsRemaster/Laws/automation_3.dds",
+        "IconsRemaster/Laws/childcare_1.dds",
+        "IconsRemaster/Laws/branded_products_2.dds",
+        "IconsRemaster/Laws/birth_restrictions_3.dds",
+        "IconsRemaster/Laws/birth_restrictions_1.dds",
+        "IconsRemaster/Laws/basic_diplomacy_3.dds",
+        "IconsRemaster/Laws/basic_diplomacy_2.dds",
+        "IconsRemaster/Laws/birth_restrictions_2.dds",
+        "IconsRemaster/Laws/black_market_trading_2.dds",
+        "IconsRemaster/Laws/black_market_trading_1.dds",
+        "IconsRemaster/Laws/black_market_trading_3.dds",
+        "IconsRemaster/Laws/breakthrough_3.dds",
+        "IconsRemaster/Laws/breakthrough_1.dds",
+        "IconsRemaster/Laws/branded_products_3.dds",
+        "IconsRemaster/Laws/breakthrough_2.dds",
+        "IconsRemaster/Laws/building_codes_2.dds",
+        "IconsRemaster/Laws/building_codes_1.dds",
+        "IconsRemaster/Laws/building_codes_3.dds",
+        "IconsRemaster/Laws/culture_3.dds",
+        "IconsRemaster/Laws/comfort_2.dds",
+        "IconsRemaster/Laws/childcare_3.dds",
+        "IconsRemaster/Laws/childcare_2.dds",
+        "IconsRemaster/Laws/comfort_1.dds",
+        "IconsRemaster/Laws/culture_1.dds",
+        "IconsRemaster/Laws/comfort_3.dds",
+        "IconsRemaster/Laws/culture_2.dds",
+        "IconsRemaster/Laws/diet_1.dds",
+        "IconsRemaster/Laws/dictatorship_2.dds",
+        "IconsRemaster/Laws/dictatorship_1.dds",
+        "IconsRemaster/Laws/dictatorship_3.dds",
+        "IconsRemaster/Laws/diet_3.dds",
+        "IconsRemaster/Laws/diet_2.dds",
+        "IconsRemaster/Laws/drinking_restrictions_1.dds",
+        "IconsRemaster/Laws/exploration_2.dds",
+        "IconsRemaster/Laws/efficient_assembly_1.dds",
+        "IconsRemaster/Laws/economic_interventions_2.dds",
+        "IconsRemaster/Laws/earthsick_1.dds",
+        "IconsRemaster/Laws/drone_hub_efficiency_2.dds",
+        "IconsRemaster/Laws/drone_hub_efficiency_1.dds",
+        "IconsRemaster/Laws/drinking_restrictions_3.dds",
+        "IconsRemaster/Laws/drone_hub_efficiency_3.dds",
+        "IconsRemaster/Laws/earthsick_3.dds",
+        "IconsRemaster/Laws/earthsick_2.dds",
+        "IconsRemaster/Laws/economic_interventions_1.dds",
+        "IconsRemaster/Laws/education_3.dds",
+        "IconsRemaster/Laws/education_1.dds",
+        "IconsRemaster/Laws/economic_interventions_3.dds",
+        "IconsRemaster/Laws/education_2.dds",
+        "IconsRemaster/Laws/effective_governing_2.dds",
+        "IconsRemaster/Laws/effective_governing_1.dds",
+        "IconsRemaster/Laws/effective_governing_3.dds",
+        "IconsRemaster/Laws/energy_efficiency_3.dds",
+        "IconsRemaster/Laws/emergency_2.dds",
+        "IconsRemaster/Laws/efficient_assembly_3.dds",
+        "IconsRemaster/Laws/efficient_assembly_2.dds",
+        "IconsRemaster/Laws/emergency_1.dds",
+        "IconsRemaster/Laws/energy_efficiency_1.dds",
+        "IconsRemaster/Laws/emergency_3.dds",
+        "IconsRemaster/Laws/energy_efficiency_2.dds",
+        "IconsRemaster/Laws/environmental_1.dds",
+        "IconsRemaster/Laws/energy_focus_2.dds",
+        "IconsRemaster/Laws/energy_focus_1.dds",
+        "IconsRemaster/Laws/energy_focus_3.dds",
+        "IconsRemaster/Laws/environmental_3.dds",
+        "IconsRemaster/Laws/environmental_2.dds",
+        "IconsRemaster/Laws/exploration_1.dds",
+        "IconsRemaster/Laws/heavy_mining_3.dds",
+        "IconsRemaster/Laws/founder_privilege_3.dds",
+        "IconsRemaster/Laws/forestation_efforts_2.dds",
+        "IconsRemaster/Laws/food_tours_3.dds",
+        "IconsRemaster/Laws/food_tours_2.dds",
+        "IconsRemaster/Laws/exploration_3.dds",
+        "IconsRemaster/Laws/forestation_efforts_1.dds",
+        "IconsRemaster/Laws/founder_privilege_1.dds",
+        "IconsRemaster/Laws/forestation_efforts_3.dds",
+        "IconsRemaster/Laws/founder_privilege_2.dds",
+        "IconsRemaster/Laws/gmo_2.dds",
+        "IconsRemaster/Laws/gambling_restrictions_2.dds",
+        "IconsRemaster/Laws/gambling_restrictions_1.dds",
+        "IconsRemaster/Laws/gambling_restrictions_3.dds",
+        "IconsRemaster/Laws/heavy_mining_1.dds",
+        "IconsRemaster/Laws/gmo_3.dds",
+        "IconsRemaster/Laws/heavy_mining_2.dds",
+        "IconsRemaster/Laws/independence_3.dds",
+        "IconsRemaster/Laws/human_alteration_2.dds",
+        "IconsRemaster/Laws/hex_selection.dds",
+        "IconsRemaster/Laws/hex_rollover.dds",
+        "IconsRemaster/Laws/human_alteration_1.dds",
+        "IconsRemaster/Laws/independence_1.dds",
+        "IconsRemaster/Laws/human_alteration_3.dds",
+        "IconsRemaster/Laws/independence_2.dds",
+        "IconsRemaster/Laws/insect_meat_substitutes_2.dds",
+        "IconsRemaster/Laws/information_access_2.dds",
+        "IconsRemaster/Laws/information_access_1.dds",
+        "IconsRemaster/Laws/information_access_3.dds",
+        "IconsRemaster/Laws/insurance_1.dds",
+        "IconsRemaster/Laws/insect_meat_substitutes_3.dds",
+        "IconsRemaster/Laws/insurance_2.dds",
+        "IconsRemaster/Laws/rocket_speed_standards_3.dds",
+        "IconsRemaster/Laws/placeholder_2.dds",
+        "IconsRemaster/Laws/native_food_3.dds",
+        "IconsRemaster/Laws/mars_appreciation_3.dds",
+        "IconsRemaster/Laws/law_ready.dds",
+        "IconsRemaster/Laws/law_hex_2.dds",
+        "IconsRemaster/Laws/law_hex_1.dds",
+        "IconsRemaster/Laws/law_hex_0.dds",
+        "IconsRemaster/Laws/law_hex_3.dds",
+        "IconsRemaster/Laws/mars_appreciation_1.dds",
+        "IconsRemaster/Laws/locked.dds",
+        "IconsRemaster/Laws/mars_appreciation_2.dds",
+        "IconsRemaster/Laws/milestones_2.dds",
+        "IconsRemaster/Laws/meat_ban_3.dds",
+        "IconsRemaster/Laws/meat_ban_2.dds",
+        "IconsRemaster/Laws/milestones_1.dds",
+        "IconsRemaster/Laws/native_food_1.dds",
+        "IconsRemaster/Laws/milestones_3.dds",
+        "IconsRemaster/Laws/native_food_2.dds",
+        "IconsRemaster/Laws/open_dome_2.dds",
+        "IconsRemaster/Laws/night_shift_compensations_1.dds",
+        "IconsRemaster/Laws/needs_satisfaction_2.dds",
+        "IconsRemaster/Laws/needs_satisfaction_1.dds",
+        "IconsRemaster/Laws/needs_satisfaction_3.dds",
+        "IconsRemaster/Laws/night_shift_compensations_3.dds",
+        "IconsRemaster/Laws/night_shift_compensations_2.dds",
+        "IconsRemaster/Laws/open_dome_1.dds",
+        "IconsRemaster/Laws/outsourcing_1.dds",
+        "IconsRemaster/Laws/organic_produce_2.dds",
+        "IconsRemaster/Laws/open_dome_3.dds",
+        "IconsRemaster/Laws/organic_produce_3.dds",
+        "IconsRemaster/Laws/outsourcing_3.dds",
+        "IconsRemaster/Laws/outsourcing_2.dds",
+        "IconsRemaster/Laws/placeholder_1.dds",
+        "IconsRemaster/Laws/research_focus_2.dds",
+        "IconsRemaster/Laws/rationing_3.dds",
+        "IconsRemaster/Laws/production_focus_1.dds",
+        "IconsRemaster/Laws/political_opponents_2.dds",
+        "IconsRemaster/Laws/political_opponents_1.dds",
+        "IconsRemaster/Laws/placeholder_3.dds",
+        "IconsRemaster/Laws/political_opponents_3.dds",
+        "IconsRemaster/Laws/production_focus_3.dds",
+        "IconsRemaster/Laws/production_focus_2.dds",
+        "IconsRemaster/Laws/rationing_2.dds",
+        "IconsRemaster/Laws/renegades_1.dds",
+        "IconsRemaster/Laws/red_tape_reduction_2.dds",
+        "IconsRemaster/Laws/red_tape_reduction_1.dds",
+        "IconsRemaster/Laws/red_tape_reduction_3.dds",
+        "IconsRemaster/Laws/renegades_3.dds",
+        "IconsRemaster/Laws/renegades_2.dds",
+        "IconsRemaster/Laws/research_focus_1.dds",
+        "IconsRemaster/Laws/resource_subsidies_1.dds",
+        "IconsRemaster/Laws/research_safety_standards_3.dds",
+        "IconsRemaster/Laws/research_safety_standards_1.dds",
+        "IconsRemaster/Laws/research_focus_3.dds",
+        "IconsRemaster/Laws/research_safety_standards_2.dds",
+        "IconsRemaster/Laws/residential_2.dds",
+        "IconsRemaster/Laws/residential_1.dds",
+        "IconsRemaster/Laws/residential_3.dds",
+        "IconsRemaster/Laws/rest_2.dds",
+        "IconsRemaster/Laws/resource_subsidies_3.dds",
+        "IconsRemaster/Laws/resource_subsidies_2.dds",
+        "IconsRemaster/Laws/rest_1.dds",
+        "IconsRemaster/Laws/rocket_speed_standards_1.dds",
+        "IconsRemaster/Laws/rest_3.dds",
+        "IconsRemaster/Laws/rocket_speed_standards_2.dds",
+        "IconsRemaster/Laws/tourist_fees_3.dds",
+        "IconsRemaster/Laws/social_net_2.dds",
+        "IconsRemaster/Laws/service_capacity_3.dds",
+        "IconsRemaster/Laws/sensor_towers_2.dds",
+        "IconsRemaster/Laws/seniors_3.dds",
+        "IconsRemaster/Laws/seniors_2.dds",
+        "IconsRemaster/Laws/seniors_1.dds",
+        "IconsRemaster/Laws/sensor_towers_1.dds",
+        "IconsRemaster/Laws/service_capacity_1.dds",
+        "IconsRemaster/Laws/sensor_towers_3.dds",
+        "IconsRemaster/Laws/service_capacity_2.dds",
+        "IconsRemaster/Laws/skip_founder_stage_1.dds",
+        "IconsRemaster/Laws/shuttle_fuel_efficiency_2.dds",
+        "IconsRemaster/Laws/shuttle_fuel_efficiency_1.dds",
+        "IconsRemaster/Laws/shuttle_fuel_efficiency_3.dds",
+        "IconsRemaster/Laws/skip_founder_stage_3.dds",
+        "IconsRemaster/Laws/skip_founder_stage_2.dds",
+        "IconsRemaster/Laws/social_net_1.dds",
+        "IconsRemaster/Laws/terraforming_goals_1.dds",
+        "IconsRemaster/Laws/space_farming_3.dds",
+        "IconsRemaster/Laws/space_farming_1.dds",
+        "IconsRemaster/Laws/social_net_3.dds",
+        "IconsRemaster/Laws/space_farming_2.dds",
+        "IconsRemaster/Laws/terraforming_focus_2.dds",
+        "IconsRemaster/Laws/terraforming_focus_1.dds",
+        "IconsRemaster/Laws/terraforming_focus_3.dds",
+        "IconsRemaster/Laws/tourist_campaign_2.dds",
+        "IconsRemaster/Laws/terraforming_goals_3.dds",
+        "IconsRemaster/Laws/terraforming_goals_2.dds",
+        "IconsRemaster/Laws/tourist_campaign_1.dds",
+        "IconsRemaster/Laws/tourist_fees_1.dds",
+        "IconsRemaster/Laws/tourist_campaign_3.dds",
+        "IconsRemaster/Laws/tourist_fees_2.dds",
+        "IconsRemaster/Laws/underground_mining_permits_2.dds",
+        "IconsRemaster/Laws/train_speed_standards_3.dds",
+        "IconsRemaster/Laws/train_cargo_standards_2.dds",
+        "IconsRemaster/Laws/trade_contract_3.dds",
+        "IconsRemaster/Laws/trade_contract_2.dds",
+        "IconsRemaster/Laws/trade_contract_1.dds",
+        "IconsRemaster/Laws/train_cargo_standards_1.dds",
+        "IconsRemaster/Laws/train_speed_standards_1.dds",
+        "IconsRemaster/Laws/train_cargo_standards_3.dds",
+        "IconsRemaster/Laws/train_speed_standards_2.dds",
+        "IconsRemaster/Laws/underground_exploitation_1.dds",
+        "IconsRemaster/Laws/underground_amenities_2.dds",
+        "IconsRemaster/Laws/underground_amenities_1.dds",
+        "IconsRemaster/Laws/underground_amenities_3.dds",
+        "IconsRemaster/Laws/underground_exploitation_3.dds",
+        "IconsRemaster/Laws/underground_exploitation_2.dds",
+        "IconsRemaster/Laws/underground_mining_permits_1.dds",
+        "IconsRemaster/Laws/water_recycling_2.dds",
+        "IconsRemaster/Laws/underground_water_permits_3.dds",
+        "IconsRemaster/Laws/underground_water_permits_1.dds",
+        "IconsRemaster/Laws/underground_mining_permits_3.dds",
+        "IconsRemaster/Laws/underground_water_permits_2.dds",
+        "IconsRemaster/Laws/waste_reduction_2.dds",
+        "IconsRemaster/Laws/waste_reduction_1.dds",
+        "IconsRemaster/Laws/waste_reduction_3.dds",
+        "IconsRemaster/Laws/worker_shifts_3.dds",
+        "IconsRemaster/Laws/worker_shifts_1.dds",
+        "IconsRemaster/Laws/water_recycling_3.dds",
+        "IconsRemaster/Laws/worker_shifts_2.dds",
+        "IconsRemaster/Laws/workload_2.dds",
+        "IconsRemaster/Laws/workload_1.dds",
+        "IconsRemaster/Laws/workload_3.dds",
+        "IconsRemaster/Buildings/automatic_metals_extractor.dds",
+        "IconsRemaster/Buildings/microg_auto_extractor_exotic_minerals.dds",
+        "IconsRemaster/Buildings/metals_extractor.dds",
+        "IconsRemaster/Buildings/microg_auto_extractor.dds",
+        "IconsRemaster/Buildings/microg_auto_extractor_rare_metals.dds",
+        "IconsRemaster/Buildings/microg_auto_extractor_metals.dds",
+        "IconsRemaster/Buildings/microg_water_extractor.dds",
+        "IconsRemaster/Buildings/regolith_extractor.dds",
+        "IconsRemaster/Buildings/water_extractor.dds",
+        "IconsRemaster/Buildings/universal_extractor.dds",
+        "IconsRemaster/Buildings/underground_dome.dds",
+        "IconsRemaster/Buildings/underground_micro_dome.dds",
+        "IconsRemaster/Buildings/underground_dome_medium.dds",
+        "IconsRemaster/IPButtons/elevator_switch_to_underground.dds",
+        "IconsRemaster/Notifications/underground.dds",
+        "IconsRemaster/Meals/carrot_slaw.dds",
+        "IconsRemaster/Meals/coleslaw_pack.dds",
+        "IconsRemaster/Payload/MicroGWaterExtractor.dds",
+        "IconsRemaster/Payload/MicroGAutoExtractor.dds",
+        "IconsRemaster/Upgrades/fueled_extractor_01.dds",
+        "IconsRemaster/Upgrades/fueled_extractor_03.dds",
+        "IconsRemaster/Upgrades/fueled_extractor_02.dds",
+        "Messages/Tutorials/Tutorial3/Tutorial3_WaterExtractor.dds",
+        "Messages/Tutorials/Tutorial1/Tutorial1_ConcreteExtractor.dds",
+        "Messages/anomaly_underground.dds",
+        "Messages/underground_elevator.dds",
+        "Messages/underground_dome.dds",
+        "LoadingScreens/underground_01.dds",
+        "LoadingScreens/underground_03.dds",
+        "LoadingScreens/underground_02.dds"
+      ],
+      "missing_tech_references": [],
+      "unreferenced_research": [
+        "Icons/Research/advanced_elevator_hydraulics.dds",
+        "Icons/Research/advanced_asteroid_economy.dds",
+        "Icons/Research/advanced_landing_techniques.dds",
+        "Icons/Research/capture_asteroids.dds",
+        "Icons/Research/crawling_hyperdome.dds",
+        "Icons/Research/decommission_protocol.dds",
+        "Icons/Research/educating_mars.dds",
+        "Icons/Research/eureka.dds",
+        "Icons/Research/grand_engineering.dds",
+        "Icons/Research/low-g_fungi.dds",
+        "Icons/Research/mars_hype.dds",
+        "Icons/Research/rm_magnifying_glass.dds",
+        "Icons/Research/metal_foams.dds",
+        "Icons/Research/micro-g_vehicles.dds",
+        "Icons/Research/near_orbit_observatory.dds",
+        "Icons/Research/obsolete_4.dds",
+        "Icons/Research/polymer_autosynthesis.dds",
+        "Icons/Research/proximity_power_resonance.dds",
+        "Icons/Research/rm_boost_arrow_small.dds",
+        "Icons/Research/researched.dds",
+        "Icons/Research/rm_available.dds",
+        "Icons/Research/rm_boost_arrow.dds",
+        "Icons/Research/rm_background.dds",
+        "Icons/Research/rm_glow_not_available.dds",
+        "Icons/Research/rm_discounted.dds",
+        "Icons/Research/rm_completed.dds",
+        "Icons/Research/rm_column_selection.dds",
+        "Icons/Research/rm_glow_discounted.dds",
+        "Icons/Research/rm_glow_available.dds",
+        "Icons/Research/rm_glow_wishlisted.dds",
+        "Icons/Research/rm_glow_search.dds",
+        "Icons/Research/rm_glow_repeatable.dds",
+        "Icons/Research/rm_hex.dds",
+        "Icons/Research/rm_researched_3.dds",
+        "Icons/Research/rm_queue_others.dds",
+        "Icons/Research/rm_progress_bar.dds",
+        "Icons/Research/rm_partially_researched.dds",
+        "Icons/Research/rm_mist.dds",
+        "Icons/Research/rm_queue_first.dds",
+        "Icons/Research/rm_progress_bar_pad.dds",
+        "Icons/Research/rm_research_on.dds",
+        "Icons/Research/rm_repeatable_icon_small.dds",
+        "Icons/Research/rm_repeatable.dds",
+        "Icons/Research/rm_researched_2.dds",
+        "Icons/Research/rm_researched.dds",
+        "Icons/Research/rm_title.dds",
+        "Icons/Research/rm_shadow_hex_2.dds",
+        "Icons/Research/rm_shadow_hex.dds",
+        "Icons/Research/rm_searched_new.dds",
+        "Icons/Research/rm_shine_back.dds",
+        "Icons/Research/rm_shine.dds",
+        "Icons/Research/rm_wishlisted_hex.dds",
+        "Icons/Research/rm_unknown.dds",
+        "Icons/Research/smart_alloys.dds",
+        "Icons/Research/standardized_integration.dds",
+        "Icons/Research/terraforming_mars.dds",
+        "Icons/Research/vehicle_optimization.dds",
+        "Icons/Research/underground_trains.dds",
+        "Icons/Research/vacuum_rail_systems.dds"
+      ]
+    }
+  ],
+  "selected_art_digests": [
+    {
+      "pack": "Packs/UI.fpk",
+      "path": "Icons/Research/advanced_elevator_hydraulics.dds",
+      "bytes": 41684,
+      "sha256": "d177e7df89aa4bffa8ef2c1794e853bcc8734ad4a5fc12e017e247467c824025",
+      "pixel_sha256": "e13c597d2c49dde7421f818faf45bafca8b8af512616eecd0271d84c6f5e061f",
+      "width": 186,
+      "height": 162
+    },
+    {
+      "pack": "Packs/UI.fpk",
+      "path": "Icons/Research/advanced_drone_drive.dds",
+      "bytes": 41684,
+      "sha256": "6751f0457b64b81f89b2223088cb3a9736e7742740c6c096df9f8b68b832d776",
+      "pixel_sha256": "fdb974b42eff6bba3710aee937eca02c06f66b6c59321fac40500ad34e857a01",
+      "width": 186,
+      "height": 162
+    },
+    {
+      "pack": "Packs/UI.fpk",
+      "path": "Icons/Research/advanced_asteroid_economy.dds",
+      "bytes": 41684,
+      "sha256": "2e8345f2186227708a0dc745f9c1f22f314174ada2acc2ee3f0b8beffee7fb9d",
+      "pixel_sha256": "b758d914977d24484e82b7af93a4de6dabc835491e4b1b00dd4cec1754480a6e",
+      "width": 186,
+      "height": 162
+    },
+    {
+      "pack": "Packs/UI.fpk",
+      "path": "Icons/Research/advanced_landing_techniques.dds",
+      "bytes": 41684,
+      "sha256": "f60f71ea70f00e063fe20918afc43e532f13f2a2e51989d1c04ff6d831b75835",
+      "pixel_sha256": "f6f858e2ddbbd36c45e5358195355a35cb7c41de922221625c110b103c7e1285",
+      "width": 186,
+      "height": 162
+    },
+    {
+      "pack": "Packs/UI.fpk",
+      "path": "Icons/Research/capture_asteroids.dds",
+      "bytes": 41684,
+      "sha256": "56d9ef904fcf4eb9aaf278c8085bd21753b96d86f2cce9c1c42e7ef2239ee1c2",
+      "pixel_sha256": "b4f459240525ff2f10230e464333df5568ce3744f32d909de05ffcfb960da65b",
+      "width": 186,
+      "height": 162
+    },
+    {
+      "pack": "Packs/UI.fpk",
+      "path": "Icons/Research/crawling_hyperdome.dds",
+      "bytes": 41684,
+      "sha256": "dd70452528e583136b80f3061e337a25dd5d66cb5109b7266cea0dbef171f296",
+      "pixel_sha256": "1eb9b61c2555768963b9c2cedadb41f825aeb2f29167ab16548dff70735b7516",
+      "width": 186,
+      "height": 162
+    },
+    {
+      "pack": "Packs/UI.fpk",
+      "path": "Icons/Research/decommission_protocol.dds",
+      "bytes": 41684,
+      "sha256": "796be5a4dcbc11fa34b6e47b77e907add97c631600015cb7a2e80caeba20ca4d",
+      "pixel_sha256": "efe06cfc9b2b8de1d3e62f3cce481136406f7291e245929ddc5b4c2586e6e14a",
+      "width": 186,
+      "height": 162
+    },
+    {
+      "pack": "Packs/UI.fpk",
+      "path": "Icons/Research/educating_mars.dds",
+      "bytes": 41684,
+      "sha256": "2901f782210acbe196176784b306fd7f957da4033c9a53c711456efa4d0ab427",
+      "pixel_sha256": "037c702e3c06d8dbe0be2f0105670c85818a68d8857bd849cbe6c498d0360f02",
+      "width": 186,
+      "height": 162
+    },
+    {
+      "pack": "Packs/UI.fpk",
+      "path": "Icons/Research/eureka.dds",
+      "bytes": 6372,
+      "sha256": "2fafd9b20f7033dd7cb0fc9a8f5ded65bba65939f3f7a81f9e83cfe63b86387e",
+      "pixel_sha256": "eab1506df68b91e211238d3008fcc960299ab569ac5e424e8befab7edbf9d9dc",
+      "width": 72,
+      "height": 62
+    },
+    {
+      "pack": "Packs/UI.fpk",
+      "path": "Icons/Research/extra_scanning_speed.dds",
+      "bytes": 41684,
+      "sha256": "57f44f5acdf8682c7b37e945f5b0769b6450fc75a73055bc844cbe251a919ab5",
+      "pixel_sha256": "3f6ddf16add33f7c6344f0a009d6110ead25e875681b207069c944ef56b64913",
+      "width": 186,
+      "height": 162
+    },
+    {
+      "pack": "Packs/UI.fpk",
+      "path": "Icons/Research/grand_engineering.dds",
+      "bytes": 41684,
+      "sha256": "a7e5a64c4962fd0336a92543d64fa64e4598b904d5c3d551ebe9597e2368ea4d",
+      "pixel_sha256": "0c649589d82a296be854d6f368345a23f742b618fa324ba2181d2236901f9d4c",
+      "width": 186,
+      "height": 162
+    },
+    {
+      "pack": "Packs/UI.fpk",
+      "path": "Icons/Research/low-g_fungi.dds",
+      "bytes": 41684,
+      "sha256": "88cb1ffb47ad52c5ea3378c27b0863d9e5394fbf97523987386eb7bf23878a5b",
+      "pixel_sha256": "36c2e62911621d85ba7a74876ee51a0e2ac91b2f7de6e292b998411114cbc754",
+      "width": 186,
+      "height": 162
+    },
+    {
+      "pack": "Packs/UI.fpk",
+      "path": "Icons/Research/mars_hype.dds",
+      "bytes": 41684,
+      "sha256": "822e0eb69c7a644161a4ad80bea34df6f81f83626faac08e0a4734161e0b2461",
+      "pixel_sha256": "15383b0a85d701643c49d0b32395856eca4a1c42eec727bac7dd9047b0a072a6",
+      "width": 186,
+      "height": 162
+    },
+    {
+      "pack": "Packs/UI.fpk",
+      "path": "Icons/Research/metal_foams.dds",
+      "bytes": 41684,
+      "sha256": "c75183dd1386b99c88382cf561455229bf05e47e5f0bb855a8a7279531d9ca52",
+      "pixel_sha256": "10798d5bc98a864e70052b6e2dbbfe0f422703bce9ca702b42b1d1207bffd547",
+      "width": 186,
+      "height": 162
+    },
+    {
+      "pack": "Packs/UI.fpk",
+      "path": "Icons/Research/micro-g_vehicles.dds",
+      "bytes": 41684,
+      "sha256": "86d0dbf221e56babb3794431366c89d92871dc2ae886e08f8f1d1d5b73633edf",
+      "pixel_sha256": "b417e083eea1e83b1242a2b5784f4a7693deeb3142de8cd1dcd395ca58c56554",
+      "width": 186,
+      "height": 162
+    },
+    {
+      "pack": "Packs/UI.fpk",
+      "path": "Icons/Research/near_orbit_observatory.dds",
+      "bytes": 41684,
+      "sha256": "dd70452528e583136b80f3061e337a25dd5d66cb5109b7266cea0dbef171f296",
+      "pixel_sha256": "1eb9b61c2555768963b9c2cedadb41f825aeb2f29167ab16548dff70735b7516",
+      "width": 186,
+      "height": 162
+    },
+    {
+      "pack": "Packs/UI.fpk",
+      "path": "Icons/Research/obsolete_4.dds",
+      "bytes": 41684,
+      "sha256": "bee0dc6bafd5114c68fc9ecd64e4d3793600f710a70db5346e59b8adb95a29fc",
+      "pixel_sha256": "9ce83b362378c63931e10b08e9a6d0557d1f4ddd9e02bb0e9b56a572226e2796",
+      "width": 186,
+      "height": 162
+    },
+    {
+      "pack": "Packs/UI.fpk",
+      "path": "Icons/Research/polymer_autosynthesis.dds",
+      "bytes": 41684,
+      "sha256": "678d5b042c39ff8049ba698fb65f1f303a6dd1b1497958d6ad2513561aa92ef3",
+      "pixel_sha256": "ec2a61c8017a7a149f39b8b723c432ccd471c50d31dce799e383cfbf78645126",
+      "width": 186,
+      "height": 162
+    },
+    {
+      "pack": "Packs/UI.fpk",
+      "path": "Icons/Research/proximity_power_resonance.dds",
+      "bytes": 41684,
+      "sha256": "c055f715137a227c2b746b6b0948f3cd9076f148642e0225d7d0c399ff1e0e14",
+      "pixel_sha256": "897cf6975ed09c39bbee19d10cdf5b7333461fbce701bc0f7b41fc22ba2ac7b6",
+      "width": 186,
+      "height": 162
+    },
+    {
+      "pack": "Packs/UI.fpk",
+      "path": "Icons/Research/researched.dds",
+      "bytes": 6372,
+      "sha256": "9e250b6b40b80d0e1d9ada0187dfc18981d9b4c6a1208deec5e9f1886f08869c",
+      "pixel_sha256": "a0e020f23eb47a573cb889e181e85bf9b8d96ae20101d24e2240a5e526411270",
+      "width": 72,
+      "height": 62
+    },
+    {
+      "pack": "Packs/UI.fpk",
+      "path": "Icons/Research/smart_alloys.dds",
+      "bytes": 41684,
+      "sha256": "0e85b273564f178fdd8702c7dfe3462754ebec90e7503523204473c49183ec4b",
+      "pixel_sha256": "547b1f9f07da71470f3da7a17504cd067bf86e1e0cb7469f88c6dadb29808c19",
+      "width": 186,
+      "height": 162
+    },
+    {
+      "pack": "Packs/UI.fpk",
+      "path": "Icons/Research/standardized_integration.dds",
+      "bytes": 41684,
+      "sha256": "50fa28d50455b1d3806e826d473bbf50793cf347a2a5c3e8c670d1281713a08c",
+      "pixel_sha256": "3c3e850a7d7d434a8136b654c05c0a5f19947a13a3ca5fd74fc4c3ddaba1dcf9",
+      "width": 186,
+      "height": 162
+    },
+    {
+      "pack": "Packs/UI.fpk",
+      "path": "Icons/Research/terraforming_mars.dds",
+      "bytes": 41684,
+      "sha256": "c49855f1d8e7dd3975c0b3e5c1a1953fea421a2d0019c4e6bc73c4af4f203324",
+      "pixel_sha256": "96dca50cbff561dce0ca8446f313c1261012379b0d60dbbf67333a76cb2b7238",
+      "width": 186,
+      "height": 162
+    },
+    {
+      "pack": "Packs/UI.fpk",
+      "path": "Icons/Research/terraforming_subsidies.dds",
+      "bytes": 41684,
+      "sha256": "dd70452528e583136b80f3061e337a25dd5d66cb5109b7266cea0dbef171f296",
+      "pixel_sha256": "1eb9b61c2555768963b9c2cedadb41f825aeb2f29167ab16548dff70735b7516",
+      "width": 186,
+      "height": 162
+    },
+    {
+      "pack": "Packs/UI.fpk",
+      "path": "Icons/Research/vehicle_optimization.dds",
+      "bytes": 41684,
+      "sha256": "f216a073271dacffc095ec426ecfec71b79221fa53485ebbba5eeafcf27bd03a",
+      "pixel_sha256": "dac7abe7e74aaad64bcce241e4a14b88b72c24fa2387d9dff8c15953bbe3e0c6",
+      "width": 186,
+      "height": 162
+    },
+    {
+      "pack": "Packs/UI.fpk",
+      "path": "Icons/Research/underground_deep_mining.dds",
+      "bytes": 41684,
+      "sha256": "7c1fbca43291d580d763de3ec195e74c15056d454bdf8eb8d15873dc3e1fdfb1",
+      "pixel_sha256": "fd6a8653d323df2e3b473913587c151cd099d013e0cc4cbc5683a25ff0d07887",
+      "width": 186,
+      "height": 162
+    },
+    {
+      "pack": "Packs/UI.fpk",
+      "path": "Icons/Research/underground_water_extractor.dds",
+      "bytes": 41684,
+      "sha256": "48f97343fa0bd3e2d7a84410e26fbd059ac979f26a4adc9429fcde61b72e48f6",
+      "pixel_sha256": "81b742a98f9135c09ab818e4a0b5f40d497c5fe8f33d6c552b92cee2a3ee1ef6",
+      "width": 186,
+      "height": 162
+    },
+    {
+      "pack": "Packs/UI.fpk",
+      "path": "Icons/Research/underground_trains.dds",
+      "bytes": 41684,
+      "sha256": "0aff2209c2c2a41f2ea4de082758df04c560d7e56b053015054e7a47bb15ed9c",
+      "pixel_sha256": "d0f44cc56b66ec50c64e5bdcecb30d68aa8272bdc8a1c4d8fafc96dedd73608b",
+      "width": 186,
+      "height": 162
+    },
+    {
+      "pack": "Packs/UI.fpk",
+      "path": "Icons/Research/vacuum_rail_systems.dds",
+      "bytes": 41684,
+      "sha256": "8ac1b561eaa49445dd0d2f6cc99e55d9cae959a8cc126730a0fef17a0537a770",
+      "pixel_sha256": "59021071d5b9c3d31dc28e00e6152a5307a5622be71be18ca6bd602df1d3b045",
+      "width": 186,
+      "height": 162
+    },
+    {
+      "pack": "Packs/UI.fpk",
+      "path": "IconsRemaster/Laws/underground_exploitation_1.dds",
+      "bytes": 54772,
+      "sha256": "e6f7b223e901d31c63a853a02e1c2183feacd3306cc58cbaca7aa9c4a9b1c0cd",
+      "pixel_sha256": "2fccba18c7617b05a4b0fe3bd781dcd269ea5088738fb1e89910ad21dac1902f",
+      "width": 186,
+      "height": 216
+    },
+    {
+      "pack": "Packs/UI.fpk",
+      "path": "IconsRemaster/Laws/underground_exploitation_3.dds",
+      "bytes": 54772,
+      "sha256": "7f6c71d220ac3373e8e92b37c24b13b738647444a2ac934f716627a26cc17bb8",
+      "pixel_sha256": "4674d637ac6acc28e3b1249ea1f56355e3c04860cdd0155485e167771fe7ba90",
+      "width": 186,
+      "height": 216
+    },
+    {
+      "pack": "Packs/UI.fpk",
+      "path": "IconsRemaster/Laws/underground_exploitation_2.dds",
+      "bytes": 54772,
+      "sha256": "e9c4d8e95aa58663b852c795eb4d61c295576ad6fe80f77515b6d40a369e8cc2",
+      "pixel_sha256": "58c1cd3fdbdf18352d05e6bc40f581a8669ab52e1740da14aec9e0da83529e39",
+      "width": 186,
+      "height": 216
+    }
+  ]
+}

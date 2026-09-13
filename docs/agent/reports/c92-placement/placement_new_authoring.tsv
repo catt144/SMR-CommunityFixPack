@@ -1,0 +1,442 @@
+id	group	MapPos	SortKey	LockState	Unknown	Obsolete	Condition	Comment	TODO	connections	line
+3DMachining	Industry_4	point(9100, 3072)								FueledExtractors;DeepWaterExtraction;DronePrinting	4311
+AccumulatorDurability	Hi-Tech_1	point(7620, 3072)							"set( ""Test"" )"	StirlingGenerator;MicroManufacturing;MoistureFarming	2710
+AdaptedProbes	Space_1	point(8730, 4992)								ReconCenter;PlanetarySurvey	8196
+AdaptedVegetation	Terraforming_2	point(6066, 2944)								TerraformingAmplification;GreenView	10000
+AdaptiveExtractionProtocols	Industry_3	point(8286, 2944)							"set( ""Review"" )"	EnergyRecoverySystems;AutomatedStorage;MineralApplications_MineralTreatments	3991
+AdvancedDroneDrive	Breakthroughs	point(14428, 3584)		hidden	true						381
+AdvancedGravityManeuvers	Space_3	point(8360, 5632)								OrbitalEngineering;OptimizedTrajectories	8654
+AdvancedMartianEngines	Space_1	point(8952, 4864)								CO2JetPropulsion;ReconCenter;CompactPassengerModule	8222
+AdvancedMicroGMiningOperations	Space_2	point(9026, 5504)								AdvancedPassengerModule;MicroGMining;MeteorDefenseSystem	8401
+AdvancedPassengerModule	Space_2	point(9100, 5632)								ExtendedCargoModules;AdvancedMicroGMiningOperations;DeepSpaceScanning	8428
+AlienDiggersDestruction	Mysteries	point(3994, 4736)		hidden	true					AlienDiggersDestruction_3	6068
+AlienDiggersDestruction_1	Mysteries	point(3698, 5248)		hidden	true					AlienDiggersDestruction_2	6087
+AlienDiggersDestruction_2	Mysteries	point(3772, 5120)		hidden	true					AlienDiggersDestruction_1;AlienDiggersDestruction_3	6104
+AlienDiggersDestruction_3	Mysteries	point(3846, 4992)		hidden	true					AlienDiggersDestruction_2;AlienDiggersDestruction	6124
+AlienDiggersDetection	Mysteries	point(2810, 5504)		hidden	true					AlienDiggersDetection_2	6144
+AlienDiggersDetection_1	Mysteries	point(3254, 5504)		hidden	true					AlienDiggersDetection_2	6163
+AlienDiggersDetection_2	Mysteries	point(3106, 5504)		hidden	true					AlienDiggersDetection_1;AlienDiggersDetection	6180
+AlienImprints	Breakthroughs	point(13984, 3584)		hidden	true						406
+AnalogControlSystems	ProjectMohole	point(8138, 2432)							"set( ""Review"" )"	MantleFiltrationSystems;GeostructuralEfficiencyModeling	7334
+AncientArtifactAdaptedMachine	Mysteries	point(3106, 4736)		hidden	true					AncientArtifactAdaptedMachine_3	6200
+AncientArtifactAdaptedMachine_1	Mysteries	point(3402, 5248)		hidden	true					AncientArtifactAdaptedMachine_2	6225
+AncientArtifactAdaptedMachine_2	Mysteries	point(3328, 5120)		hidden	true					AncientArtifactAdaptedMachine_1;AncientArtifactAdaptedMachine_3	6242
+AncientArtifactAdaptedMachine_3	Mysteries	point(3254, 4992)		hidden	true					AncientArtifactAdaptedMachine_2;AncientArtifactAdaptedMachine	6262
+AncientTerraformingDevice	Breakthroughs	point(13984, 2816)		hidden	true		"function (self) return not IsGameRuleActive(""NoTerraforming"") end"				434
+AnomalousGenomeResequencing	Storybits	point(15242, 384)		hidden	true						8929
+Anti-Sphere Shield	Mysteries	point(3846, 5504)		hidden	true						6282
+Arcology	Habitation_3	point(6362, 4224)								GravityEngineering;DomeBioscaping	2612
+ArtificialMuscles	Breakthroughs	point(13540, 2304)		hidden	true						464
+AtmosphericCompressionSystems	Sustainability_3	point(7250, 2944)							"set( ""Review"" )"	MicroManufacturing;DustHardenedVaporators	9706
+AtomicAccumulator	Hi-Tech_1	point(7620, 2816)								NuclearFusion;MicroManufacturing	2736
+AutomatedStorage	Industry_3	point(8360, 2816)								AdaptiveExtractionProtocols;PredictiveMaintenance;GeostructuralEfficiencyModeling	4037
+AutonomousHubs	Breakthroughs	point(12874, 2432)		hidden	true						482
+AutonomousSensors	Land	point(8286, 4480)								FuelCompression;SoilAdaptation;MarsHype;LandOnMars	4705
+BatteryCapacity	Hi_tech_3	point(7102, 1920)							"set( ""Review"" )"	CableDurability;ResearchAmplification	3001
+BatteryOptimization	Logistics_1	point(9248, 4096)								TrainStations;DroneHub;DeepScanning	4976
+BehavioralMelding	Society_4	point(6658, 5504)								StemReconstruction;DreamReality;HolographicScanning	8018
+BehavioralShaping	Society_4	point(7102, 5248)								StemReconstruction;HumanAlteration;RejuvenationTreatment	8042
+BigStations	Logistics_2	point(9766, 4224)								FasterTrains;DroneHub;RoverCommandAI	5173
+BiomeEngineering	Society_1	point(7990, 4736)								MartianPatents;MarsHype;InsidePasture	7550
+BlackCubesDisposal	Mysteries	point(3846, 5504)		hidden	true						6295
+BlackCubesNegation	Mysteries	point(3994, 5504)		hidden	true						6325
+BottomlessPitResearchCenter	Mysteries	point(3106, 6272)		hidden	true					BottomlessPitResearchCenter_3	6343
+BottomlessPitResearchCenter_1	Mysteries	point(3402, 5760)		hidden	true					BottomlessPitResearchCenter_2	6374
+BottomlessPitResearchCenter_2	Mysteries	point(3328, 5888)		hidden	true					BottomlessPitResearchCenter_1;BottomlessPitResearchCenter_3	6391
+BottomlessPitResearchCenter_3	Mysteries	point(3254, 6016)		hidden	true					BottomlessPitResearchCenter_2;BottomlessPitResearchCenter	6411
+Breakthrough_PosOverride_1	Breakthrough_PosOverride	point(2144, 3072)		hidden							3
+Breakthrough_PosOverride_10	Breakthrough_PosOverride	point(2588, 3840)		hidden							10
+Breakthrough_PosOverride_11	Breakthrough_PosOverride	point(1996, 3840)		hidden							17
+Breakthrough_PosOverride_12	Breakthrough_PosOverride	point(1700, 3328)		hidden							24
+Breakthrough_PosOverride_13	Breakthrough_PosOverride	point(1848, 3072)		hidden							31
+Breakthrough_PosOverride_14	Breakthrough_PosOverride	point(2292, 2816)		hidden							38
+Breakthrough_PosOverride_15	Breakthrough_PosOverride	point(2736, 3072)		hidden							45
+Breakthrough_PosOverride_16	Breakthrough_PosOverride	point(2736, 3584)		hidden							52
+Breakthrough_PosOverride_17	Breakthrough_PosOverride	point(2292, 3840)		hidden							59
+Breakthrough_PosOverride_18	Breakthrough_PosOverride	point(1848, 3584)		hidden							66
+Breakthrough_PosOverride_19	Breakthrough_PosOverride	point(1404, 3328)		hidden							73
+Breakthrough_PosOverride_2	Breakthrough_PosOverride	point(2440, 3072)		hidden							80
+Breakthrough_PosOverride_20	Breakthrough_PosOverride	point(1848, 2560)		hidden							87
+Breakthrough_PosOverride_21	Breakthrough_PosOverride	point(2736, 2560)		hidden							94
+Breakthrough_PosOverride_22	Breakthrough_PosOverride	point(3180, 3328)		hidden							101
+Breakthrough_PosOverride_23	Breakthrough_PosOverride	point(2736, 4096)		hidden							108
+Breakthrough_PosOverride_24	Breakthrough_PosOverride	point(1848, 4096)		hidden							115
+Breakthrough_PosOverride_25	Breakthrough_PosOverride	point(1626, 3712)		hidden							122
+Breakthrough_PosOverride_26	Breakthrough_PosOverride	point(1626, 2944)		hidden							129
+Breakthrough_PosOverride_27	Breakthrough_PosOverride	point(2292, 2560)		hidden							136
+Breakthrough_PosOverride_28	Breakthrough_PosOverride	point(2958, 2944)		hidden							143
+Breakthrough_PosOverride_29	Breakthrough_PosOverride	point(2958, 3712)		hidden							150
+Breakthrough_PosOverride_3	Breakthrough_PosOverride	point(2588, 3328)		hidden							157
+Breakthrough_PosOverride_30	Breakthrough_PosOverride	point(2292, 4096)		hidden							164
+Breakthrough_PosOverride_31	Breakthrough_PosOverride	point(1404, 3840)		hidden							171
+Breakthrough_PosOverride_32	Breakthrough_PosOverride	point(1404, 2816)		hidden							178
+Breakthrough_PosOverride_33	Breakthrough_PosOverride	point(2292, 2304)		hidden							185
+Breakthrough_PosOverride_34	Breakthrough_PosOverride	point(3180, 2816)		hidden							192
+Breakthrough_PosOverride_35	Breakthrough_PosOverride	point(3180, 3840)		hidden							199
+Breakthrough_PosOverride_36	Breakthrough_PosOverride	point(2292, 4352)		hidden							206
+Breakthrough_PosOverride_37	Breakthrough_PosOverride	point(1700, 4352)		hidden							213
+Breakthrough_PosOverride_38	Breakthrough_PosOverride	point(1108, 3328)		hidden							220
+Breakthrough_PosOverride_39	Breakthrough_PosOverride	point(1700, 2304)		hidden							227
+Breakthrough_PosOverride_4	Breakthrough_PosOverride	point(2440, 3584)		hidden							234
+Breakthrough_PosOverride_40	Breakthrough_PosOverride	point(2884, 2304)		hidden							241
+Breakthrough_PosOverride_41	Breakthrough_PosOverride	point(3476, 3328)		hidden							248
+Breakthrough_PosOverride_42	Breakthrough_PosOverride	point(2884, 4352)		hidden							255
+Breakthrough_PosOverride_43	Breakthrough_PosOverride	point(1552, 4608)		hidden							262
+Breakthrough_PosOverride_44	Breakthrough_PosOverride	point(812, 3328)		hidden							269
+Breakthrough_PosOverride_45	Breakthrough_PosOverride	point(1552, 2048)		hidden							276
+Breakthrough_PosOverride_46	Breakthrough_PosOverride	point(3032, 2048)		hidden							283
+Breakthrough_PosOverride_47	Breakthrough_PosOverride	point(3772, 3328)		hidden							290
+Breakthrough_PosOverride_48	Breakthrough_PosOverride	point(3032, 4608)		hidden							297
+Breakthrough_PosOverride_49	Breakthrough_PosOverride	point(2292, 4608)		hidden							304
+Breakthrough_PosOverride_5	Breakthrough_PosOverride	point(2144, 3584)		hidden							311
+Breakthrough_PosOverride_50	Breakthrough_PosOverride	point(1182, 3968)		hidden							318
+Breakthrough_PosOverride_51	Breakthrough_PosOverride	point(1182, 2688)		hidden							325
+Breakthrough_PosOverride_52	Breakthrough_PosOverride	point(2292, 2048)		hidden							332
+Breakthrough_PosOverride_53	Breakthrough_PosOverride	point(3402, 2688)		hidden							339
+Breakthrough_PosOverride_54	Breakthrough_PosOverride	point(3402, 3968)		hidden							346
+Breakthrough_PosOverride_6	Breakthrough_PosOverride	point(1996, 3328)		hidden							353
+Breakthrough_PosOverride_7	Breakthrough_PosOverride	point(1996, 2816)		hidden							360
+Breakthrough_PosOverride_8	Breakthrough_PosOverride	point(2588, 2816)		hidden							367
+Breakthrough_PosOverride_9	Breakthrough_PosOverride	point(2884, 3328)		hidden							374
+Breakthroughs	Breakthroughs	point(2292, 3328)						BREAKTHROUGHS CENTER	"set( ""Implement"" )"		515
+CO2JetPropulsion	Logistics_3	point(9396, 4864)								AdvancedMartianEngines;MartianAerodynamics;HighPoweredJets	5358
+CableDurability	Hi_tech_3	point(6954, 1920)							"set( ""Test"" )"	BatteryCapacity;EternalHalfLife	3034
+CarbonateProcessor	Terraforming_2	point(5992, 2560)								TerraformingAmplification	10031
+CargobayOfHolding	Breakthroughs	point(14206, 2944)		hidden	true						528
+Casino	Society_2	point(7694, 5504)							"set( ""Test"" )"	CreativeDisposition	7735
+CaveOfWondersDecorationBuilding	Mysteries	point(3328, 5376)		hidden	true						6431
+ChargeSpeed	Hi_tech_3	point(6954, 1664)							"set( ""Review"" )"	EternalHalfLife;MicroFusion	3067
+Cloning	Breakthroughs	point(14872, 2816)		hidden	true						563
+ClosedLoopExtraction	Industry_5	point(10210, 2944)				true			"set( ""Review"" )"		4539
+ClosedLoopPolymerization	Industry_2	point(9100, 3584)							"set( ""Review"" )"	DeepMetalExtraction;UndergroundWaterExtraction;DeepScanning	3898
+CompactHangars	Logistics_3	point(9692, 4864)								DroneHubExtenders;ShuttleFuelEfficiency	5382
+CompactPassengerModule	Space_1	point(8878, 4736)								AdvancedMartianEngines;LowGDrive;SensorTowers	8254
+ConservationLandscaping	Terraforming_1	point(6510, 3456)								GrowthStimulators;DomelessFarming	9876
+ConstructionNanites	Breakthroughs	point(14428, 2560)		hidden	true						579
+ContinuousOperationProtocols	Industry_5	point(9840, 2816)							"set( ""Test"" )"	LargeScaleExcavation;WasteRockLiquefaction	4572
+CoreHeatConvertor	Terraforming_3	point(10284, 6144)								MagneticFieldGenerator	10207
+CoreMetals	Breakthroughs	point(14650, 2688)		hidden	true						595
+CoreRareMetals	Breakthroughs	point(14650, 3200)		hidden	true						629
+CoreWater	Breakthroughs	point(14650, 2944)		hidden	true						663
+CreativeBiorobotics	Society_2	point(7768, 5632)								CreativeDisposition;CreativeRealities	7755
+CreativeDisposition	Society_2	point(7620, 5632)								EmergencyTraining;CreativeBiorobotics;Casino	7776
+CreativeRealities	Society_2	point(7842, 5504)								CreativeBiorobotics;ProductivityTraining	7800
+CryoResistantCompounds	Sustainability_3	point(7102, 3200)							"set( ""Review"" )"	MegaWaterStorage;DustHardenedVaporators	9731
+CryoSleep	Breakthroughs	point(15094, 3200)		hidden	true						697
+CrystallineFrequencyJamming	Mysteries	point(3846, 5504)		hidden	true						6447
+Cure4Cancer	Storybits	point(15242, 896)		hidden	true			CRISIS TECH Cure4Cancer			8941
+DecommissionProtocol	Industry_1	point(8434, 3712)				true					3606
+DeepAsteroidMining	Space_2	point(9322, 5504)								ExtendedCargoModules;MicroGLanders;TopologyAI	8464
+DeepAsteroid_Extraction	Space_3	point(8508, 5376)					"function (self) return not IsGameRuleActive(""NoUndergroundAndAsteroids"") end"		"set( ""Test"" )"	MeteorDefenseSystem;Space_Farming	8687
+DeepMetalExtraction	Industry_1	point(8952, 3584)								FactoryAmplification;DronePrinting;ClosedLoopPolymerization	3613
+DeepScanning	Industry_2	point(9322, 3968)								LowGHydrosynthsis;LowGExcavationPermits;ClosedLoopPolymerization;BatteryOptimization	3934
+DeepSpaceScanning	Space_2	point(8952, 5888)								AdvancedPassengerModule;InterplanetaryAstronomy	8493
+DeepWaterExtraction	Industry_4	point(9248, 3072)								IndustrialErgonomics;3DMachining;UndergroundWaterExtraction	4339
+DefenseTower	Mysteries	point(3846, 5504)		hidden	true						6467
+DesignedForestation	Breakthroughs	point(14206, 2688)		hidden	true		"function (self) return not IsGameRuleActive(""NoTerraforming"") end"				722
+DistributedResearchNodes	Industry_3	point(8508, 3840)				true			"set( ""Review"" )"		4091
+DomeBioscaping	Habitation_3	point(6510, 4224)								Arcology;SmartHome	2633
+DomeStreamlining	Breakthroughs	point(14872, 2560)		hidden	true						739
+DomelessFarming	Terraforming_2	point(6288, 3072)								ConservationLandscaping;LakeCrafting;GreenView	10053
+DreamReality	Society_4	point(6362, 5504)								BehavioralMelding	8066
+DreamSimulation	Mysteries	point(3846, 5504)		hidden	true						6483
+DroneHub	Logistics_1	point(9322, 4224)								TunnelingMars;BigStations;BatteryOptimization	5009
+DroneHubEfficiency	Logistics_2	point(9988, 4352)								FasterTrains;SafeTransport	5201
+DroneHubExtenders	Logistics_3	point(9618, 4736)								HighPoweredJets;CompactHangars;FasterTrains	5412
+DronePrinting	Industry_1	point(8878, 3456)								3DMachining;PlasmaCutters;DeepMetalExtraction	3649
+DroneSwarm	Logistics_4	point(10210, 3712)								SignalBoosters;StationsStorage;TrainCapacity;LuxuriousTrains	5545
+DryFarming	Breakthroughs	point(13540, 3584)		hidden	true						769
+DustHardenedVaporators	Sustainability_3	point(6954, 2944)							"set( ""Review"" )"	CryoResistantCompounds;SelfSealingConduits;TriboelectricScrubbing;AtmosphericCompressionSystems;HighDensityWaterStorage;GrowthStimulators	9756
+DustRepulsion	Sustainability_1	point(7694, 3712)								LargeSolarPanels	9294
+DustSicknessCure	Storybits	point(14946, 384)		hidden	true			CRISIS TECH DustSickness_Cure			8954
+EarthMarsInitiative	Society_1	point(8212, 4864)								MarsHype;GeneralTraining;PlanetarySurvey	7578
+EfficientLoadDistribution	Megaprojects_1	point(10062, 2432)							"set( ""Review"" )"	LargeScaleExcavation;IndustrialDurabilityProtocols	5749
+EmergencyTraining	Society_2	point(7546, 5504)								SystematicTraining;CreativeDisposition	7821
+EnergyRecoverySystems	Industry_3	point(8360, 3072)							"set( ""Review"" )"	AdaptiveExtractionProtocols;MagneticFiltering;RoverPrinting	4114
+EnhancedTopographicalExploitation	Hi_tech_4	point(7694, 1920)							"set( ""Review"" )"	ShroudedWindTurbine;MarsProofTurbines	3122
+EternalFusion	Breakthroughs	point(13318, 2944)		hidden	true						804
+EternalHalfLife	Hi_tech_3	point(6880, 1792)							"set( ""Test"" )"	CableDurability;ChargeSpeed	3100
+EvenFasterTrains	Logistics_4	point(10432, 3584)							"set( ""Test"" )"	StationsStorage;SignalBoosters	5588
+ExplorerAI	Land	point(8286, 3968)								LandOnMars;SoilAdaptation;HygroscopicVaporators;TerraformingRover	4739
+ExtendedCargoModules	Space_2	point(9248, 5632)								AdvancedPassengerModule;DeepAsteroidMining	8534
+ExtendedRadianceField	Megaprojects_3	point(6954, 1152)							"set( ""Review"" )"	HeliosphericCondensers	5916
+ExtractorAI	Breakthroughs	point(13096, 2816)		hidden	true						830
+ExtractorAmplification	Industry_1	point(8730, 3712)								TerraformingRover;LoadBalancingAlgorithms;FactoryAmplification	3673
+FactoryAI	Industry_5	point(9840, 3072)								ThermalCyclingDampeners;UndergroundDeepMining;WasteRockLiquefaction	4601
+FactoryAmplification	Industry_1	point(8878, 3712)								TrainStations;ExtractorAmplification;DeepMetalExtraction	3733
+FactoryAutomation	Breakthroughs	point(12874, 2688)		hidden	true						873
+FarmAutomation	Habitation_1	point(7620, 4096)								UtilityCrops;LowGEngineering;HangingGardens	2216
+FasterTrains	Logistics_2	point(9840, 4352)								DroneHubExtenders;BigStations;DroneHubEfficiency	5234
+ForeverYoung	Breakthroughs	point(13984, 3072)		hidden	true						901
+FrictionlessComposites	Breakthroughs	point(14428, 3840)		hidden	true						919
+FuelCompression	Land	point(8582, 4480)								LandOnMars;TransportOptimization;SensorTowers;AutonomousSensors	4771
+FueledExtractors	Industry_4	point(9026, 2944)								MaterialFlowOptimization;ResilientArchitecture;3DMachining	4365
+FusionAutoregulation	Hi_tech_2	point(7472, 2304)								NuclearFusion;TheMartianNetwork	2841
+GemArchitecture	Breakthroughs	point(12874, 2944)		hidden	true						954
+GeneAdaptation	Habitation_2	point(6880, 4096)								MicrogravityMedicine;SmartHome;GreenhouseMars	2400
+GeneForging	Storybits	point(15538, 896)		hidden	true						8967
+GeneSelection	Breakthroughs	point(13540, 3328)		hidden	true						970
+GeneralTraining	Society_1	point(8138, 4992)								LiveFromMars;EarthMarsInitiative	7611
+GeostructuralEfficiencyModeling	ProjectMohole	point(8360, 2560)							"set( ""Review"" )"	AnalogControlSystems;PressureResistantMachinery;AutomatedStorage	7367
+GiantCrops	Breakthroughs	point(13762, 3712)		hidden	true						990
+GlobalSupport	Breakthroughs	point(14206, 2432)		hidden	true						1027
+GoodVibrations	Breakthroughs	point(15094, 2944)		hidden	true						1088
+GravityEngineering	Habitation_3	point(6214, 4224)								Arcology;LocalizedTerraforming	2666
+GreenView	Terraforming_2	point(6140, 3072)								AdaptedVegetation;DomelessFarming	10082
+GreenhouseMars	Terraforming_1	point(6658, 3712)								MartianVegetation;GeneAdaptation	9895
+GrowthStimulators	Terraforming_1	point(6658, 3456)								ConservationLandscaping;MartianVegetation;DustHardenedVaporators	9920
+HangingGardens	Sustainability_2	point(7398, 3712)								WaterCoservationSystem;FarmAutomation;MegaOxygenStorage	9548
+HeliosphericCondensers	Megaprojects_3	point(7102, 1408)							"set( ""Review"" )"	MicroFusion;ExtendedRadianceField	5935
+HighDensityWaterStorage	Sustainability_3	point(6658, 2944)							"set( ""Review"" )"	LakeCrafting;DustHardenedVaporators	9791
+HighPoweredJets	Logistics_3	point(9470, 4736)								CO2JetPropulsion;DroneHubExtenders;TunnelingMars	5442
+HighYieldAggregateProcessing	Megaprojects_1	point(9618, 2176)							"set( ""Review"" )"	LowDrawDriveSystems;SimplifiedMechanicalArchitecture	5782
+HiveMind	Breakthroughs	point(13984, 2048)		hidden	true						1106
+HolographicScanning	Society_4	point(6806, 5760)								BehavioralMelding	8086
+HomeCollective	Habitation_2	point(6880, 4352)								SmartHome;ExoticMineralMetabolism	2449
+HullPolarization	Breakthroughs	point(13540, 2816)		hidden	true						1119
+HumanAlteration	Society_4	point(6954, 5504)						INITIATIVE	"set( ""Review"" )"	BehavioralShaping	8107
+HygroscopicVaporators	Sustainability_1	point(8138, 3712)								ExplorerAI;LargeSolarPanels;LargeTurbines;StorageCompression	9319
+HypersensitivePhotovoltaics	Breakthroughs	point(15316, 2816)		hidden	true						1137
+Independence_Adaptivity	Independence	point(6436, 4608)								Independence_Research;Independence_RocketCapacity;MartianIndependence	3426
+Independence_MartianbornPerformance	Independence	point(6436, 5120)								Independence_RocketCapacity;Independence_TerraformingProjects	3458
+Independence_Research	Independence	point(6732, 4608)								Independence_Adaptivity	3487
+Independence_RocketCapacity	Independence	point(6288, 4864)								Independence_Adaptivity;Independence_MartianbornPerformance	3513
+Independence_TerraformingProjects	Independence	point(6732, 5120)								Independence_MartianbornPerformance	3552
+IndustrialDurabilityProtocols	Megaprojects_1	point(10062, 2176)							"set( ""Review"" )"	LowDrawDriveSystems;EfficientLoadDistribution	5810
+IndustrialErgonomics	Industry_4	point(9322, 2944)							"set( ""Test"" )"	DeepWaterExtraction;MarsNoveau;WasteRockLiquefaction	4418
+InsidePasture	Habitation_1	point(7768, 4352)							"set( ""Review"" )"	LowGHighrise;BiomeEngineering;OpenPasture	2249
+InspiringArchitecture	Breakthroughs	point(13984, 3840)		hidden	true						1162
+InterplanetaryAstronomy	Space_2	point(8804, 6144)								DeepSpaceScanning	8567
+InterplanetaryLearning	Breakthroughs	point(13540, 2048)		hidden	true						1181
+InterplanetaryProjects	Terraforming_3	point(9840, 5376)								TopologyAI;NuclearTerraforming;ShuttleFuelEfficiency	10229
+IonStormPrediction	Mysteries	point(3846, 5504)		hidden	true						6496
+JumboCaveReinforcementBuilding	Mysteries	point(3550, 5248)		hidden	true						6509
+JumboCaveUpgrades	Mysteries	point(3772, 5376)		hidden	true						6525
+LakeCrafting	Terraforming_2	point(6362, 2944)								DomelessFarming;TerraformingSubsidies;HighDensityWaterStorage	10106
+LakeVaporators	Breakthroughs	point(13984, 2560)		hidden	true		"function (self) return not IsGameRuleActive(""NoTerraforming"") end"				1194
+LandOnMars	Land	point(8434, 4224)						INITIATIVE	"set( ""Review"" )"	ExplorerAI;TransportOptimization;SoilAdaptation;FuelCompression;TerraformingRover;AutonomousSensors	4807
+LandscapingNanites	Breakthroughs	point(13762, 2688)		hidden	true		"function (self) return not IsGameRuleActive(""NoTerraforming"") end"				1218
+LargeScaleAtmosphereStorage	Sustainability_3	point(6214, 3456)				true			"set( ""Review"" )"		9816
+LargeScaleExcavation	Megaprojects_1	point(9840, 2304)								SimplifiedMechanicalArchitecture;EfficientLoadDistribution;LowDrawDriveSystems;ContinuousOperationProtocols	5832
+LargeScaleReservoirArchitecture	Sustainability_3	point(6066, 3456)				true			"set( ""Review"" )"		9831
+LargeSolarPanels	Sustainability_1	point(7990, 3712)							"set( ""Review"" )"	DustRepulsion;HygroscopicVaporators;SubsurfaceHeating;UtilityCrops	9353
+LargeTurbines	Sustainability_1	point(8212, 3584)							"set( ""Review"" )"	LowGTurbines;MagneticFiltering;HygroscopicVaporators;LoadBalancingAlgorithms	9381
+Left_Section_Center	Breakthroughs	point(2366, 4480)		hidden				BREAKTHROUGHS CENTER	"set( ""Implement"" )"		1246
+LiveFromMars	Society_1	point(7990, 4992)								MartianPatents;GeneralTraining;ProductivityTraining	7638
+LoadBalancingAlgorithms	Industry_1	point(8656, 3584)							"set( ""Review"" )"	LargeTurbines;PlasmaCutters;ExtractorAmplification	3794
+LocalizedTerraforming	Habitation_3	point(5918, 4224)								GravityEngineering	2690
+LowDrawDriveSystems	Megaprojects_1	point(9840, 2048)							"set( ""Review"" )"	LargeScaleExcavation;HighYieldAggregateProcessing;IndustrialDurabilityProtocols	5861
+LowGDrive	Logistics_1	point(9100, 4352)								LowGShaftDigging;TunnelingMars;CompactPassengerModule	5033
+LowGEngineering	Habitation_1	point(7546, 4224)								FarmAutomation;OpenPasture;SustainableArchitecture;LowGHighrise	2275
+LowGExcavationPermits	Underground_1	point(9470, 3712)								UndergroundDomes;UndergroundFlightSchool;DeepScanning	10437
+LowGFungi	Underground_1	point(9692, 3584)								UndergroundDomes;RemoteFarming;LowGTunnelSupports	10473
+LowGHighrise	Habitation_1	point(7842, 4224)								SoilAdaptation;UtilityCrops;InsidePasture;LowGEngineering	2308
+LowGHydrosynthsis	Industry_2	point(9766, 3968)								DeepScanning;RemoteFarming;RoverCommandAI	3964
+LowGShaftDigging	Logistics_1	point(9026, 4224)								TransportOptimization;LowGDrive;TrainStations	5091
+LowGShrimpGMO	Storybits	point(14354, 1408)		hidden	true						8986
+LowGTunnelSupports	Underground_1	point(9618, 3456)								UndergroundPsychStudies;LowGFungi;UndergroundDeepMining	10498
+LowGTurbines	Sustainability_1	point(8360, 3328)								LargeTurbines	9409
+LuxuriousTrains	Logistics_2	point(9988, 4096)								RoverCommandAI;SafeTransport;DroneSwarm	5265
+MOXIE_2	Storybits	point(14798, 640)		hidden	true			CRISIS TECH BadMoxie_Tech			8998
+MagneticExtraction	Breakthroughs	point(14872, 3584)		hidden	true						1257
+MagneticFieldGenerator	Terraforming_3	point(10136, 5888)								TeraTourism;CoreHeatConvertor	10260
+MagneticFiltering	Sustainability_1	point(8138, 3456)								LargeTurbines;StorageCompression;EnergyRecoverySystems	9440
+MantleExtractionTechniques	ProjectMohole	point(8582, 2176)							"set( ""Review"" )"	MoholeMine;PressureResistantMachinery	7403
+MantleFiltrationSystems	ProjectMohole	point(8138, 2176)							"set( ""Review"" )"	MoholeMine;AnalogControlSystems	7425
+MarsHype	Society_1	point(8138, 4736)								BiomeEngineering;EarthMarsInitiative;AutonomousSensors	7667
+MarsMarketing	Breakthroughs	point(13984, 2304)		hidden	true						1304
+MarsNoveau	Industry_4	point(9248, 2816)								ResilientArchitecture;IndustrialErgonomics	4451
+MarsProofSolar	Hi_tech_5	point(6510, 2176)							"set( ""Test"" )"	SolarAtmospherePenalty;SolarEnergyInitiative	3260
+MarsProofTurbines	Hi_tech_4	point(7768, 1792)							"set( ""Test"" )"	EnhancedTopographicalExploitation;WindEnergyInitiative	3155
+MartianAerodynamics	Logistics_3	point(9470, 4992)								CO2JetPropulsion;ShuttleFuelEfficiency;MicroGLanders	5475
+MartianBornInitiative	Society_3	point(7250, 4480)						INITIATIVE	"set( ""Review"" )"	MartianbornResilience	7949
+MartianCopyrithgts	Pride	point(7398, 4992)								MartianFestivals;MartianEducation;SystematicTraining	7175
+MartianDiet	Breakthroughs	point(13318, 3200)		hidden	true						1329
+MartianEducation	Society_3	point(7472, 4864)								MartianCopyrithgts;SupportiveCommunity	7991
+MartianFestivals	Pride	point(7250, 4992)								MartianbornAdaptability;MartianCopyrithgts	7210
+MartianIndependence	Independence	point(6584, 4864)						INITIATIVE		Independence_Adaptivity	3581
+MartianInstituteOfScience	Hi_tech_2	point(7176, 2304)								ResearchAmplification;TriboelectricScrubbing;MineralApplications	2862
+MartianPatents	Society_1	point(7916, 4864)								LiveFromMars;BiomeEngineering	7703
+MartianSteel	Breakthroughs	point(13318, 3456)		hidden	true						1354
+MartianVegetation	Terraforming_1	point(6732, 3584)								GreenhouseMars;WaterReclamation;GrowthStimulators	9949
+MartianbornAdaptability	Pride	point(7176, 4864)								MartianFestivals;MartianbornStrength;MartianbornResilience	7242
+MartianbornIngenuity	Breakthroughs	point(14872, 3072)		hidden	true						1379
+MartianbornResilience	Pride	point(7250, 4736)								MartianbornAdaptability;SupportiveCommunity;MartianBornInitiative	7272
+MartianbornStrength	Pride	point(7324, 4864)								MartianbornAdaptability	7293
+MaterialFlowOptimization	Industry_3	point(8582, 2944)							"set( ""Review"" )"	PredictiveMaintenance;FueledExtractors;RoverPrinting	4150
+MegaOxygenStorage	Sustainability_2	point(7472, 3584)							"set( ""Review"" )"	HangingGardens;MoistureFarming	9572
+MegaSatellites	Terraforming_3	point(9840, 5632)								TeraTourism;TopologyAI	10285
+MegaWaterStorage	Sustainability_2	point(7250, 3456)								MoistureFarming;WaterReclamation;CryoResistantCompounds	9594
+MeteorDefenseSystem	Space_3	point(8582, 5504)								AdvancedMicroGMiningOperations;OptimizedTrajectories;DeepAsteroid_Extraction	8712
+MicroFusion	Megaprojects_3	point(6806, 1408)								StructuralLightweighting;SelfRegulatingStellarCore;HeliosphericCondensers;ChargeSpeed	5957
+MicroGLanders	Space_2	point(9248, 5376)								MicroGMining;MartianAerodynamics;DeepAsteroidMining	8587
+MicroGMining	Space_2	point(9100, 5376)								ReconCenter;MicroGLanders;AdvancedMicroGMiningOperations	8620
+MicroManufacturing	Hi-Tech_1	point(7546, 2944)								AccumulatorDurability;AtomicAccumulator;AtmosphericCompressionSystems	2757
+MicrogravityMedicine	Habitation_2	point(7028, 4096)								WaterCoservationSystem;GeneAdaptation;SustainableArchitecture	2498
+MineralApplications	Hi_tech_5	point(6732, 2304)					function (self) return not UndergroundRework106 end			MartianInstituteOfScience;SolarAtmospherePenalty	3288
+MineralApplications_AdvancedMineralComposites	Hi_tech_5	point(6954, 2432)				true	function (self) return UndergroundRework106 end				3323
+MineralApplications_MineralTreatments	Hi-Tech_1	point(7842, 2944)					function (self) return UndergroundRework106 end			StirlingGenerator;AdaptiveExtractionProtocols	2784
+ModularIndustry	Industry_1	point(14724, 5376)				true			"set( ""Test"" )"		3830
+MoholeMine	ProjectMohole	point(8360, 2304)								ProjectMohole;MantleFiltrationSystems;MantleExtractionTechniques	7453
+MoistureFarming	Sustainability_2	point(7398, 3456)								WaterCoservationSystem;AccumulatorDurability;MegaOxygenStorage;MegaWaterStorage	9619
+MolePeople	Breakthroughs	point(13762, 2432)		hidden	true		"function (self) return not IsGameRuleActive(""NoUndergroundAndAsteroids"") end"				1408
+MultispiralArchitecture	Breakthroughs	point(14650, 3456)		hidden	true						1440
+Mystery_1	Mysteries	point(3550, 5504)		hidden							6558
+Mystery_10	Mysteries	point(3550, 5504)		hidden							6569
+Mystery_11	Mysteries	point(3550, 5504)		hidden							6580
+Mystery_12	Mysteries	point(3550, 5504)		hidden							6591
+Mystery_2	Mysteries	point(3550, 5504)		hidden							6602
+Mystery_3	Mysteries	point(3550, 5504)		hidden							6613
+Mystery_4	Mysteries	point(3550, 5504)		hidden							6624
+Mystery_5	Mysteries	point(3550, 5504)		hidden							6635
+Mystery_6	Mysteries	point(3550, 5504)		hidden							6646
+Mystery_8	Mysteries	point(3550, 5504)		hidden							6657
+Mystery_9	Mysteries	point(3550, 5504)		hidden							6668
+NanoRefinement	Breakthroughs	point(13318, 2432)		hidden	true						1456
+NeoConcrete	Breakthroughs	point(14206, 3712)		hidden	true						1481
+NeuralEmpathy	Breakthroughs	point(13984, 3328)		hidden	true						1506
+NocturnalAdaptation	Breakthroughs	point(13762, 3456)		hidden	true						1567
+NuclearFusion	Hi_tech_2	point(7398, 2432)								FusionAutoregulation;AtomicAccumulator;TriboelectricScrubbing	2886
+NuclearTerraforming	Terraforming_3	point(9988, 5376)								PlanetaryProjects;InterplanetaryProjects	10313
+NumberSixTracing	Mysteries	point(3846, 5504)		hidden	true						6679
+OpenPasture	Habitation_1	point(7620, 4352)							"set( ""Review"" )"	InsidePasture;LowGEngineering	2336
+OptimizedTrajectories	Space_3	point(8508, 5632)							"set( ""Test"" )"	MeteorDefenseSystem;AdvancedGravityManeuvers	8736
+OrbitalEngineering	Space_3	point(8212, 5888)								AdvancedGravityManeuvers	8765
+OverchargeAmplification	Breakthroughs	point(13318, 2176)		hidden	true						1597
+OverloadedFactories1	Storybits	point(15686, 640)		hidden	true						9023
+OverloadedFactories2	Storybits	point(14650, 1408)		hidden	true						9045
+PassageHub	Habitation_2	point(6954, 4224)								SustainableArchitecture;SmartHome	2522
+PlanetaryProjects	Terraforming_3	point(10062, 5504)								NuclearTerraforming;TeraTourism	10337
+PlanetarySurvey	Space_1	point(8656, 4864)								EarthMarsInitiative;AdaptedProbes;SensorTowers	8287
+PlasmaCutters	Industry_1	point(8730, 3456)								LoadBalancingAlgorithms;DronePrinting;RoverPrinting	3865
+PlasmaRocket	Breakthroughs	point(13762, 1920)		hidden	true						1740
+PlutoniumSynthesis	Breakthroughs	point(13096, 2304)		hidden	true						1768
+PolymerLatticeOptimization	Megaprojects_3	point(6436, 1280)							"set( ""Review"" )"	SelfRegulatingStellarCore	5986
+PredictiveMaintenance	Industry_3	point(8508, 2816)							"set( ""Review"" )"	MaterialFlowOptimization;AutomatedStorage	4199
+PrefabCompression	Breakthroughs	point(15094, 2688)		hidden	true						1787
+PrefabRefab	Logistics_4	point(10210, 3456)								SignalBoosters;ThermalCyclingDampeners;TrainCapacity	5613
+PressureResistantMachinery	ProjectMohole	point(8582, 2432)							"set( ""Test"" )"	MantleExtractionTechniques;GeostructuralEfficiencyModeling	7479
+PrintedElectronics	Breakthroughs	point(14428, 2304)		hidden	true						1824
+ProductivityTraining	Society_2	point(7768, 5376)								SystematicTraining;CreativeRealities;LiveFromMars	7863
+ProjectMohole	ProjectMohole	point(8360, 2048)						INITIATIVE	"set( ""Review"" )"	MoholeMine	7507
+ProjectPhoenix	Breakthroughs	point(13540, 3072)		hidden	true						1840
+Purpose of the Spheres	Mysteries	point(3994, 5504)		hidden	true						6692
+RapidSleep	Breakthroughs	point(14206, 3200)		hidden	true						1860
+ReconCenter	Space_1	point(8878, 4992)								AdvancedMartianEngines;MicroGMining;AdaptedProbes	8329
+RejuvenationTreatment	Society_4	point(7250, 5504)								BehavioralShaping	8135
+RemoteFarming	Underground_1	point(9988, 3584)								LowGFungi;UndergroundDeepMining;TrainCapacity;LowGHydrosynthsis	10527
+ResearchAmplification	Hi_tech_2	point(7250, 2176)								TheMartianNetwork;MartianInstituteOfScience;BatteryCapacity	2910
+ResearchCooperation	Storybits	point(15242, 1408)		hidden	true			CRISIS TECH Boost18_ResearchCooperation_Tech			9067
+ResilientArchitecture	Industry_4	point(9100, 2816)								FueledExtractors;MarsNoveau	4516
+ResilientVegetation	Breakthroughs	point(13762, 2944)		hidden	true		"function (self) return not IsGameRuleActive(""NoTerraforming"") end"				1873
+RogueNaniteDeactivation	Storybits	point(14798, 1152)		hidden	true			CRISIS TECH WindsOfChange_2_Typhoon			9080
+RogueNanitesAnalysis	Storybits	point(14502, 1152)		hidden	true			WindsOfChange_2_Typhoon			9093
+RoverCommandAI	Logistics_2	point(9840, 4096)								BigStations;LuxuriousTrains;LowGHydrosynthsis	5286
+RoverPrinting	Industry_3	point(8508, 3072)								EnergyRecoverySystems;MaterialFlowOptimization;PlasmaCutters	4254
+SafeMode	Breakthroughs	point(14428, 2816)		hidden	true						1902
+SafeTransport	Logistics_2	point(10062, 4224)								DroneHubEfficiency;LuxuriousTrains	5340
+SelfRegulatingStellarCore	Megaprojects_3	point(6584, 1536)							"set( ""Review"", ""Test"" )"	MicroFusion;PolymerLatticeOptimization	6016
+SelfSealingConduits	Sustainability_3	point(6806, 2688)							"set( ""Test"" )"	DustHardenedVaporators	9846
+SelfSufficientLighting	Underground_1	point(11098, 3968)				true					10557
+SensorTowers	Space_1	point(8730, 4736)							"set( ""Review"" )"	FuelCompression;PlanetarySurvey;CompactPassengerModule	8373
+ServiceBots	Breakthroughs	point(13096, 2560)		hidden	true						1927
+ShroudedWindTurbine	Hi_tech_4	point(7546, 1920)							"set( ""Review"" )"	TheMartianNetwork;EnhancedTopographicalExploitation	3183
+ShuttleAfterburners1	Storybits	point(15094, 640)		hidden	true						9106
+ShuttleAfterburners2	Storybits	point(15834, 384)		hidden	true						9147
+ShuttleFuelEfficiency	Logistics_3	point(9618, 4992)							"set( ""Review"" )"	MartianAerodynamics;CompactHangars;InterplanetaryProjects	5509
+SignalBoosters	Logistics_4	point(10358, 3456)								PrefabRefab;EvenFasterTrains;DroneSwarm	5634
+SimplifiedMechanicalArchitecture	Megaprojects_1	point(9618, 2432)							"set( ""Review"" )"	LargeScaleExcavation;HighYieldAggregateProcessing	5892
+SmartHome	Habitation_2	point(6806, 4224)						Needs initiative		GeneAdaptation;HomeCollective;DomeBioscaping;PassageHub	2543
+SoilAdaptation	Land	point(8138, 4224)								LandOnMars;LowGHighrise;ExplorerAI;AutonomousSensors	4856
+SolExploration	Mysteries	point(3846, 5504)		hidden	true						6709
+SolarAtmospherePenalty	Hi_tech_5	point(6584, 2304)							"set( ""Review"" )"	MarsProofSolar;MineralApplications	3350
+SolarEnergyInitiative	Hi_tech_5	point(6362, 1920)						INITIATIVE	"set( ""Review"" )"	MarsProofSolar	3372
+SolarStoreEnergy	Hi_tech_5	point(6510, 2688)				true			"set( ""Review"" )"		3414
+SoylentGreen	Breakthroughs	point(13762, 3200)		hidden	true						1995
+SpaceRehabilitation	Breakthroughs	point(14206, 2176)		hidden	true						2008
+Space_Farming	Space_3	point(8360, 5376)								DeepAsteroid_Extraction	8785
+Special	Storybits	point(1034, 5504)						SPECIAL CENTER	"set( ""Implement"" )"		9176
+StElmosFire	Mysteries	point(3846, 5504)		hidden	true						6723
+StationsStorage	Logistics_4	point(10358, 3712)							"set( ""Test"" )"	EvenFasterTrains;DroneSwarm	5680
+StemReconstruction	Society_4	point(6806, 5248)								BehavioralMelding;BehavioralShaping	8168
+StirlingGenerator	Hi-Tech_1	point(7768, 3072)								StorageCompression;AccumulatorDurability;MineralApplications_MineralTreatments	2816
+StirlingGeneratorFault	Storybits	point(15390, 1152)		hidden	true						9195
+StorageCompression	Sustainability_1	point(7990, 3456)								SubsurfaceHeating;MagneticFiltering;HygroscopicVaporators;StirlingGenerator	9471
+Storybit_PosOverride_1	Storybit_PosOverride	point(1034, 5248)		hidden							8803
+Storybit_PosOverride_10	Storybit_PosOverride	point(1034, 6016)		hidden							8810
+Storybit_PosOverride_11	Storybit_PosOverride	point(590, 5760)		hidden							8817
+Storybit_PosOverride_12	Storybit_PosOverride	point(590, 5248)		hidden							8824
+Storybit_PosOverride_13	Storybit_PosOverride	point(812, 5120)		hidden							8831
+Storybit_PosOverride_14	Storybit_PosOverride	point(1256, 5120)		hidden							8838
+Storybit_PosOverride_15	Storybit_PosOverride	point(1478, 5504)		hidden							8845
+Storybit_PosOverride_16	Storybit_PosOverride	point(1256, 5888)		hidden							8852
+Storybit_PosOverride_17	Storybit_PosOverride	point(812, 5888)		hidden							8859
+Storybit_PosOverride_18	Storybit_PosOverride	point(590, 5504)		hidden							8866
+Storybit_PosOverride_2	Storybit_PosOverride	point(1256, 5376)		hidden							8873
+Storybit_PosOverride_3	Storybit_PosOverride	point(1256, 5632)		hidden							8880
+Storybit_PosOverride_4	Storybit_PosOverride	point(1034, 5760)		hidden							8887
+Storybit_PosOverride_5	Storybit_PosOverride	point(812, 5632)		hidden							8894
+Storybit_PosOverride_6	Storybit_PosOverride	point(812, 5376)		hidden							8901
+Storybit_PosOverride_7	Storybit_PosOverride	point(1034, 4992)		hidden							8908
+Storybit_PosOverride_8	Storybit_PosOverride	point(1478, 5248)		hidden							8915
+Storybit_PosOverride_9	Storybit_PosOverride	point(1478, 5760)		hidden							8922
+StructuralLightweighting	Megaprojects_3	point(6658, 1152)							"set( ""Review"" )"	MicroFusion	6038
+SubsurfaceHeating	Sustainability_1	point(7916, 3584)								LargeSolarPanels;StorageCompression	9527
+SuperconductingComputing	Breakthroughs	point(13318, 2688)		hidden	true						2028
+Superfungus	Breakthroughs	point(13096, 3072)		hidden	true						2046
+SuperiorCables	Breakthroughs	point(14428, 3328)		hidden	true						2062
+SuperiorPipes	Breakthroughs	point(14206, 3456)		hidden	true						2080
+SupportiveCommunity	Pride	point(7398, 4736)								MartianbornResilience;MartianEducation	7311
+SurveyOffer	Storybits	point(14946, 1408)		hidden	true						9207
+SustainableArchitecture	Habitation_2	point(7102, 4224)								MicrogravityMedicine;ExoticMineralMetabolism;LowGEngineering;PassageHub	2583
+SustainedWorkload	Breakthroughs	point(14872, 3328)		hidden	true						2098
+SystematicTraining	Society_2	point(7620, 5376)								EmergencyTraining;ProductivityTraining;MartianCopyrithgts	7906
+TeraTourism	Terraforming_3	point(9988, 5632)								PlanetaryProjects;MagneticFieldGenerator;MegaSatellites	10364
+TerraformingAmplification	Terraforming_2	point(6140, 2816)								AdaptedVegetation;TerraformingSubsidies;CarbonateProcessor	10142
+TerraformingRover	Land	point(8582, 3968)								ExplorerAI;TransportOptimization;LandOnMars;ExtractorAmplification	4883
+TerraformingSubsidies	Terraforming_2	point(6288, 2816)								LakeCrafting;TerraformingAmplification	10175
+TheCypher	Storybits	point(14650, 896)		hidden	true						9219
+TheIncident	Storybits	point(15390, 640)		hidden	true						9231
+TheMartianNetwork	Hi_tech_2	point(7398, 2176)								ResearchAmplification;FusionAutoregulation;ShroudedWindTurbine	2950
+ThePositronicBrain	Breakthroughs	point(14428, 3072)		hidden	true						2119
+ThermalCyclingDampeners	Industry_5	point(9988, 3072)							"set( ""Review"" )"	PrefabRefab;FactoryAI	4656
+TopologyAI	Terraforming_3	point(9766, 5504)								MegaSatellites;InterplanetaryProjects;DeepAsteroidMining	10411
+TrainCapacity	Logistics_4	point(10136, 3584)							"set( ""Test"" )"	DroneSwarm;PrefabRefab;RemoteFarming	5705
+TrainStations	Logistics_1	point(9100, 4096)							"set( ""Review"" )"	LowGShaftDigging;FactoryAmplification;BatteryOptimization	5116
+TransportOptimization	Land	point(8730, 4224)								LandOnMars;LowGShaftDigging;FuelCompression;TerraformingRover	4935
+TriboelectricScrubbing	Hi_tech_2	point(7250, 2432)								MartianInstituteOfScience;NuclearFusion;DustHardenedVaporators	2977
+TunnelingMars	Logistics_1	point(9248, 4352)								LowGDrive;DroneHub;HighPoweredJets	5148
+UndergroundDeepMining	Underground_1	point(9766, 3200)					"function (self) return not IsGameRuleActive(""NoUndergroundAndAsteroids"") end"		"set( ""Review"" )"	LowGTunnelSupports;RemoteFarming;FactoryAI;UndergroundWaterExtraction	10570
+UndergroundDomes	Underground_1	point(9618, 3712)					function (self) return not UndergroundRework106 end		"set( ""Test"" )"	LowGFungi;LowGExcavationPermits	10596
+UndergroundExploitation	Underground_1	point(14576, 4352)		hidden	true						10635
+UndergroundFlightSchool	Underground_1	point(9396, 3584)								UndergroundPsychStudies;LowGExcavationPermits	10663
+UndergroundLargeDome	Mysteries	point(3772, 5632)		hidden	true		function (self) return not UndergroundRework106 end				6736
+UndergroundPsychStudies	Underground_1	point(9470, 3456)								UndergroundFlightSchool;LowGTunnelSupports;UndergroundWaterExtraction	10681
+UndergroundWaterExtraction	Underground_1	point(9322, 3200)					"function (self) return not IsGameRuleActive(""NoUndergroundAndAsteroids"") end"		"set( ""Review"" )"	UndergroundDeepMining;UndergroundPsychStudies;ClosedLoopPolymerization;DeepWaterExtraction	10708
+UtilityCrops	Habitation_1	point(7768, 4096)								LowGHighrise;LargeSolarPanels;FarmAutomation	2358
+VectorPump	Breakthroughs	point(13540, 2560)		hidden	true						2132
+ViolentUrges	Storybits	point(15094, 1152)		hidden	true						9243
+Vocation-Oriented Society	Breakthroughs	point(13762, 2176)		hidden	true						2148
+WasteRockLiquefaction	Industry_5	point(9766, 2944)								FactoryAI;ContinuousOperationProtocols;IndustrialErgonomics	4681
+WaterCoservationSystem	Sustainability_2	point(7250, 3712)								MicrogravityMedicine;WaterReclamation;HangingGardens;MoistureFarming	9646
+WaterOfPeace	Storybits	point(15538, 384)		hidden	true						9255
+WaterReclamation	Sustainability_2	point(7176, 3584)								WaterCoservationSystem;MartianVegetation;MegaWaterStorage	9682
+WildfireCure	Mysteries	point(5474, 5504)		hidden	true					WildfireCure_10	6789
+WildfireCure_1	Mysteries	point(3846, 5504)		hidden	true					WildfireCure_2	6821
+WildfireCure_10	Mysteries	point(5178, 5504)		hidden	true					WildfireCure_9;WildfireCure	6846
+WildfireCure_2	Mysteries	point(3994, 5504)		hidden	true					WildfireCure_1;WildfireCure_3	6874
+WildfireCure_3	Mysteries	point(4142, 5504)		hidden	true					WildfireCure_2;WildfireCure_4	6902
+WildfireCure_4	Mysteries	point(4290, 5504)		hidden	true					WildfireCure_3;WildfireCure_5	6930
+WildfireCure_5	Mysteries	point(4438, 5504)		hidden	true					WildfireCure_4;WildfireCure_6	6958
+WildfireCure_6	Mysteries	point(4586, 5504)		hidden	true					WildfireCure_5;WildfireCure_7	6986
+WildfireCure_7	Mysteries	point(4734, 5504)		hidden	true					WildfireCure_6;WildfireCure_8	7014
+WildfireCure_8	Mysteries	point(4882, 5504)		hidden	true					WildfireCure_7;WildfireCure_9	7042
+WildfireCure_9	Mysteries	point(5030, 5504)		hidden	true					WildfireCure_8;WildfireCure_10	7070
+WilloftheWisp	Mysteries	point(3994, 5504)		hidden	true						7098
+WindEnergyInitiative	Hi_tech_4	point(7620, 1536)						INITIATIVE	"set( ""Review"" )"	MarsProofTurbines	3205
+WindStoreEnergy	Hi_tech_4	point(7842, 2432)				true			"set( ""Review"" )"		3248
+WindTurbineRedesign	Storybits	point(14946, 896)		hidden	true			DesignFlaw			9280
+WirelessPower	Breakthroughs	point(14650, 2432)		hidden	true						2171
+Xeno-Terraforming	Mysteries	point(4142, 5504)		hidden	true						7122
+XenoExtraction	Mysteries	point(3032, 5632)		hidden	true						7135
+ZeroSpaceComputing	Breakthroughs	point(14650, 3712)		hidden	true						2194

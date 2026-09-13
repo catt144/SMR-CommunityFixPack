@@ -1,0 +1,259 @@
+id	old_group	old_position	old_SortKey	new_group	new_MapPos	new_Obsolete	old_line	new_line
+3DMachining	Robotics	range(6, 10)	10	Industry_4	point(9100, 3072)		3793	4311
+AdaptedProbes	Physics	range(1, 5)	5	Space_1	point(8730, 4992)		2846	8196
+AdaptedVegetation	Terraforming	range(11, 15)	11	Terraforming_2	point(6066, 2944)		4606	10000
+AdvancedDroneDrive	Breakthroughs		29	Breakthroughs	point(14428, 3584)		692	381
+AdvancedGravityManeuvers	ReconAndExpansion	range(10, 13)	11	Space_3	point(8360, 5632)		3381	8654
+AdvancedMartianEngines	Engineering	range(1, 5)	4	Space_1	point(8952, 4864)		2160	8222
+AdvancedMicroGMiningOperations	ReconAndExpansion	range(14, 15)	14	Space_2	point(9026, 5504)		3428	8401
+AdvancedPassengerModule	Engineering	range(14, 19)	16	Space_2	point(9100, 5632)		2413	8428
+AlienDiggersDestruction	Mysteries	range(0, 2)	3	Mysteries	point(3994, 4736)		2545	6068
+AlienDiggersDetection	Mysteries	range(0, 2)	4	Mysteries	point(2810, 5504)		2556	6144
+AlienImprints	Breakthroughs		18	Breakthroughs	point(13984, 3584)		497	406
+AncientArtifactAdaptedMachine	BuriedWonders			Mysteries	point(3106, 4736)		1399	6200
+AncientTerraformingDevice	Breakthroughs			Breakthroughs	point(13984, 2816)		3	434
+AnomalousGenomeResequencing	Storybits			Storybits	point(15242, 384)		1532	8929
+Anti-Sphere Shield	Mysteries		7	Mysteries	point(3846, 5504)		2614	6282
+Arcology	Engineering	range(13, 13)	13	Habitation_3	point(6362, 4224)		2343	2612
+ArtificialMuscles	Breakthroughs		25	Breakthroughs	point(13540, 2304)		618	464
+AtomicAccumulator	Physics	range(7, 9)	7	Hi-Tech_1	point(7620, 2816)		2877	2736
+AutomatedStorage	Robotics	range(6, 10)	6	Industry_3	point(8360, 2816)		3685	4037
+AutonomousHubs	Breakthroughs		54	Breakthroughs	point(12874, 2432)		1331	482
+AutonomousSensors	Physics	range(1, 5)	2	Land	point(8286, 4480)		2795	4705
+BatteryOptimization	Robotics	range(6, 10)	7	Logistics_1	point(9248, 4096)		3728	4976
+BehavioralMelding	Social	range(15, 19)	19	Society_4	point(6658, 5504)		4382	8018
+BehavioralShaping	Social	range(12, 14)	12	Society_4	point(7102, 5248)		4263	8042
+BigStations	Engineering	range(6, 6)	21	Logistics_2	point(9766, 4224)		2493	5173
+BiomeEngineering	Biotech	range(7, 10)	8	Society_1	point(7990, 4736)		1866	7550
+BlackCubesDisposal	Mysteries	range(0, 2)	1	Mysteries	point(3846, 5504)		2506	6295
+BlackCubesNegation	Mysteries	range(0, 2)	2	Mysteries	point(3994, 5504)		2529	6325
+BottomlessPitResearchCenter	BuriedWonders			Mysteries	point(3106, 6272)		1413	6343
+CO2JetPropulsion	Robotics	range(11, 11)	11	Logistics_3	point(9396, 4864)		3809	5358
+CarbonateProcessor	Terraforming	range(11, 15)	12	Terraforming_2	point(5992, 2560)		4624	10031
+CargobayOfHolding	Breakthroughs		1	Breakthroughs	point(14206, 2944)		95	528
+CaveOfWondersDecorationBuilding	BuriedWonders			Mysteries	point(3328, 5376)		1433	6431
+Cloning	Breakthroughs		43	Breakthroughs	point(14872, 2816)		966	563
+CompactHangars	Robotics	range(16, 18)	16	Logistics_3	point(9692, 4864)		3960	5382
+CompactPassengerModule	Engineering	range(6, 12)	6	Space_1	point(8878, 4736)		2193	8254
+ConservationLandscaping	Terraforming	range(6, 9)	7	Terraforming_1	point(6510, 3456)		4539	9876
+ConstructionNanites	Breakthroughs		1	Breakthroughs	point(14428, 2560)		122	579
+CoreHeatConvertor	Terraforming	range(16, 20)	16	Terraforming_3	point(10284, 6144)		4693	10207
+CoreMetals	Breakthroughs		13	Breakthroughs	point(14650, 2688)		410	595
+CoreRareMetals	Breakthroughs		15	Breakthroughs	point(14650, 3200)		448	629
+CoreWater	Breakthroughs		14	Breakthroughs	point(14650, 2944)		429	663
+CreativeBiorobotics	Biotech	range(12, 19)	12	Society_2	point(7768, 5632)		1958	7755
+CreativeDisposition	Social	range(12, 19)	13	Society_2	point(7620, 5632)		4276	7776
+CreativeRealities	Physics	range(11, 14)	11	Society_2	point(7842, 5504)		2962	7800
+CryoSleep	Breakthroughs		42	Breakthroughs	point(15094, 3200)		949	697
+CrystallineFrequencyJamming	Mysteries		15	Mysteries	point(3846, 5504)		2706	6447
+Cure4Cancer	Storybits			Storybits	point(15242, 896)		1540	8941
+DecommissionProtocol	Engineering	range(1, 5)	2	Industry_1	point(8434, 3712)	true	2134	3606
+DeepAsteroidMining	ReconAndExpansion	range(16, 19)	16	Space_2	point(9322, 5504)		3484	8464
+DeepMetalExtraction	Physics	range(11, 18)	13	Industry_1	point(8952, 3584)		2990	3613
+DeepScanning	Physics	range(10, 10)	10	Industry_2	point(9322, 3968)		2946	3934
+DeepSpaceScanning	ReconAndExpansion	range(16, 19)	18	Space_2	point(8952, 5888)		3517	8493
+DeepWaterExtraction	Physics	range(11, 18)	12	Industry_4	point(9248, 3072)		2975	4339
+DefenseTower	Mysteries		11	Mysteries	point(3846, 5504)		2654	6467
+DesignedForestation	Breakthroughs			Breakthroughs	point(14206, 2688)		23	722
+DomeBioscaping	Biotech	range(7, 10)	9	Habitation_3	point(6510, 4224)		1888	2633
+DomeStreamlining	Breakthroughs		45	Breakthroughs	point(14872, 2560)		994	739
+DomelessFarming	Terraforming		14	Terraforming_2	point(6288, 3072)		4665	10053
+DreamReality	Social	range(20, 20)	20	Society_4	point(6362, 5504)		4395	8066
+DreamSimulation	Mysteries		9	Mysteries	point(3846, 5504)		2634	6483
+DroneHub	Robotics	range(5, 5)	5	Logistics_1	point(9322, 4224)		3672	5009
+DroneHubExtenders	ReconAndExpansion	range(6, 8)	6	Logistics_3	point(9618, 4736)		3234	5412
+DronePrinting	Robotics	range(6, 10)	9	Industry_1	point(8878, 3456)		3780	3649
+DroneSwarm	Robotics	range(1, 4)	3	Logistics_4	point(10210, 3712)		3631	5545
+DryFarming	Breakthroughs		30	Breakthroughs	point(13540, 3584)		709	769
+DustRepulsion	Physics	range(7, 9)	8	Sustainability_1	point(7694, 3712)		2890	9294
+DustSicknessCure	Storybits			Storybits	point(14946, 384)		1548	8954
+EarthMarsInitiative	Social	range(1, 5)	3	Society_1	point(8212, 4864)		4092	7578
+EmergencyTraining	Social	range(7, 10)	9	Society_2	point(7546, 5504)		4202	7821
+EternalFusion	Breakthroughs		22	Breakthroughs	point(13318, 2944)		563	804
+ExplorerAI	Robotics	range(1, 4)	4	Land	point(8286, 3968)		3655	4739
+ExtendedCargoModules	ReconAndExpansion	range(10, 13)	12	Space_2	point(9248, 5632)		3401	8534
+ExtractorAI	Breakthroughs		47	Breakthroughs	point(13096, 2816)		1050	830
+ExtractorAmplification	Physics	range(1, 5)	1	Industry_1	point(8730, 3712)		2754	3673
+FactoryAI	Robotics	range(12, 14)	13	Industry_5	point(9840, 3072)		3858	4601
+FactoryAmplification	Physics	range(7, 9)	9	Industry_1	point(8878, 3712)		2905	3733
+FactoryAutomation	Breakthroughs		55	Breakthroughs	point(12874, 2688)		1361	873
+FasterTrains	Physics	range(6, 6)	21	Logistics_2	point(9840, 4352)		3119	5234
+ForeverYoung	Breakthroughs		40	Breakthroughs	point(13984, 3072)		912	901
+FrictionlessComposites	Breakthroughs		35	Breakthroughs	point(14428, 3840)		796	919
+FuelCompression	Engineering	range(1, 5)	1	Land	point(8582, 4480)		2117	4771
+FueledExtractors	Robotics	range(12, 14)	12	Industry_4	point(9026, 2944)		3822	4365
+FusionAutoregulation	Physics	range(15, 18)	18	Hi_tech_2	point(7472, 2304)		3078	2841
+GemArchitecture	Breakthroughs		56	Breakthroughs	point(12874, 2944)		1386	954
+GeneAdaptation	Biotech	range(11, 11)	11	Habitation_2	point(6880, 4096)		1926	2400
+GeneForging	Storybits			Storybits	point(15538, 896)		1556	8967
+GeneSelection	Breakthroughs		20	Breakthroughs	point(13540, 3328)		534	970
+GeneralTraining	Social	range(7, 10)	10	Society_1	point(8138, 4992)		4231	7611
+GiantCrops	Breakthroughs		27	Breakthroughs	point(13762, 3712)		647	990
+GlobalSupport	Breakthroughs		1	Breakthroughs	point(14206, 2432)		135	1027
+GoodVibrations	Breakthroughs		44	Breakthroughs	point(15094, 2944)		979	1088
+GravityEngineering	Engineering	range(14, 19)	17	Habitation_3	point(6214, 4224)		2433	2666
+GreenView	Terraforming	range(6, 6)	21	Terraforming_2	point(6140, 3072)		4787	10082
+GreenhouseMars	Terraforming	range(2, 5)	5	Terraforming_1	point(6658, 3712)		4507	9895
+GrowthStimulators	Terraforming	range(6, 9)	9	Terraforming_1	point(6658, 3456)		4569	9920
+HangingGardens	Biotech	range(12, 19)	15	Sustainability_2	point(7398, 3712)		2007	9548
+HighPoweredJets	Robotics	range(16, 18)	17	Logistics_3	point(9470, 4736)		3977	5442
+HiveMind	Breakthroughs		9	Breakthroughs	point(13984, 2048)		360	1106
+HolographicScanning	Biotech	range(12, 19)	16	Society_4	point(6806, 5760)		2020	8086
+HomeCollective	Social	range(12, 19)	17	Habitation_2	point(6880, 4352)		4330	2449
+HullPolarization	Breakthroughs		2	Breakthroughs	point(13540, 2816)		242	1119
+HygroscopicVaporators	Biotech	range(1, 5)	1	Sustainability_1	point(8138, 3712)		1763	9319
+HypersensitivePhotovoltaics	Breakthroughs		34	Breakthroughs	point(15316, 2816)		779	1137
+Independence_Adaptivity	Independence		50	Independence	point(6436, 4608)		4814	3426
+Independence_MartianbornPerformance	Independence		60	Independence	point(6436, 5120)		4830	3458
+Independence_Research	Independence		100	Independence	point(6732, 4608)		4869	3487
+Independence_RocketCapacity	Independence		80	Independence	point(6288, 4864)		4846	3513
+Independence_TerraformingProjects	Independence		40	Independence	point(6732, 5120)		4798	3552
+InspiringArchitecture	Breakthroughs		26	Breakthroughs	point(13984, 3840)		633	1162
+InterplanetaryAstronomy	Physics	range(20, 20)	20	Space_2	point(8804, 6144)		3105	8567
+InterplanetaryLearning	Breakthroughs		51	Breakthroughs	point(13540, 2048)		1286	1181
+InterplanetaryProjects	Terraforming	range(6, 9)	8	Terraforming_3	point(9840, 5376)		4549	10229
+IonStormPrediction	Mysteries		14	Mysteries	point(3846, 5504)		2696	6496
+JumboCaveReinforcementBuilding	BuriedWonders			Mysteries	point(3550, 5248)		1444	6509
+JumboCaveUpgrades	BuriedWonders			Mysteries	point(3772, 5376)		1455	6525
+LakeCrafting	Terraforming	range(10, 10)	10	Terraforming_2	point(6362, 2944)		4581	10106
+LakeVaporators	Breakthroughs			Breakthroughs	point(13984, 2560)		36	1194
+LandscapingNanites	Breakthroughs			Breakthroughs	point(13762, 2688)		56	1218
+LargeScaleExcavation	Robotics	range(20, 20)	20	Megaprojects_1	point(9840, 2304)		4024	5832
+LiveFromMars	Social	range(1, 5)	1	Society_1	point(7990, 4992)		4048	7638
+LocalizedTerraforming	Biotech	range(20, 20)	20	Habitation_3	point(5918, 4224)		2092	2690
+LowGDrive	Robotics	range(1, 4)	2	Logistics_1	point(9100, 4352)		3599	5033
+LowGEngineering	Engineering	range(6, 12)	8	Habitation_1	point(7546, 4224)		2252	2275
+LowGExcavationPermits	ReconAndExpansion	range(9, 9)	10	Underground_1	point(9470, 3712)		3348	10437
+LowGFungi	Biotech	range(1, 5)	3	Underground_1	point(9692, 3584)		1791	10473
+LowGHighrise	Engineering	range(1, 5)	5	Habitation_1	point(7842, 4224)		2180	2308
+LowGHydrosynthsis	Engineering	range(1, 5)	3	Industry_2	point(9766, 3968)		2144	3964
+LowGShaftDigging	ReconAndExpansion	range(1, 1)	1	Logistics_1	point(9026, 4224)		3131	5091
+LowGShrimpGMO	Storybits			Storybits	point(14354, 1408)		1566	8986
+LowGTunnelSupports	ReconAndExpansion	range(10, 13)	10	Underground_1	point(9618, 3456)		3363	10498
+LowGTurbines	Physics	range(1, 5)	4	Sustainability_1	point(8360, 3328)		2828	9409
+LuxuriousTrains	Social	range(6, 6)	21	Logistics_2	point(9988, 4096)		4409	5265
+MOXIE_2	Storybits			Storybits	point(14798, 640)		1574	8998
+MagneticExtraction	Breakthroughs		38	Breakthroughs	point(14872, 3584)		855	1257
+MagneticFieldGenerator	Terraforming	range(11, 15)	15	Terraforming_3	point(10136, 5888)		4677	10260
+MagneticFiltering	Biotech	range(1, 5)	4	Sustainability_1	point(8138, 3456)		1804	9440
+MarsHype	Social	range(1, 5)	5	Society_1	point(8138, 4736)		4135	7667
+MarsMarketing	Breakthroughs		1	Breakthroughs	point(13984, 2304)		184	1304
+MarsNoveau	Engineering	range(14, 19)	14	Industry_4	point(9248, 2816)		2356	4451
+MartianAerodynamics	Robotics	range(12, 14)	14	Logistics_3	point(9470, 4992)		3897	5475
+MartianCopyrithgts	Social	range(12, 19)	18	Pride	point(7398, 4992)		4366	7175
+MartianDiet	Breakthroughs		21	Breakthroughs	point(13318, 3200)		546	1329
+MartianEducation	Social	range(6, 6)	6	Society_3	point(7472, 4864)		4151	7991
+MartianFestivals	Social	range(12, 19)	14	Pride	point(7250, 4992)		4289	7210
+MartianInstituteOfScience	Social	range(11, 11)	11	Hi_tech_2	point(7176, 2304)		4250	2862
+MartianPatents	Social	range(7, 10)	7	Society_1	point(7916, 4864)		4170	7703
+MartianSteel	Breakthroughs		31	Breakthroughs	point(13318, 3456)		736	1354
+MartianVegetation	Terraforming	range(1, 1)	1	Terraforming_1	point(6732, 3584)		4419	9949
+MartianbornAdaptability	Biotech	range(7, 10)	7	Pride	point(7176, 4864)		1852	7242
+MartianbornIngenuity	Breakthroughs		41	Breakthroughs	point(14872, 3072)		927	1379
+MartianbornResilience	Social	range(12, 19)	16	Pride	point(7250, 4736)		4320	7272
+MartianbornStrength	Social	range(12, 19)	15	Pride	point(7324, 4864)		4307	7293
+MegaSatellites	Terraforming	range(16, 20)	19	Terraforming_3	point(9840, 5632)		4747	10285
+MeteorDefenseSystem	Physics	range(11, 18)	15	Space_3	point(8582, 5504)		3028	8712
+MicroFusion	Physics	range(19, 19)	19	Megaprojects_3	point(6806, 1408)		3091	5957
+MicroGLanders	ReconAndExpansion	range(2, 4)	3	Space_2	point(9248, 5376)		3157	8587
+MicroGMining	ReconAndExpansion	range(6, 8)	8	Space_2	point(9100, 5376)		3326	8620
+MicroManufacturing	Engineering	range(6, 12)	11	Hi-Tech_1	point(7546, 2944)		2311	2757
+MicrogravityMedicine	Biotech	range(7, 10)	10	Habitation_2	point(7028, 4096)		1913	2498
+MineralApplications	ReconAndExpansion	range(6, 8)	6	Hi_tech_5	point(6732, 2304)		3252	3288
+MineralApplications_AdvancedMineralComposites	ReconAndExpansion	range(6, 8)	6	Hi_tech_5	point(6954, 2432)	true	3283	3323
+MineralApplications_MineralTreatments	ReconAndExpansion	range(6, 8)	6	Hi-Tech_1	point(7842, 2944)		3306	2784
+MoistureFarming	Biotech	range(12, 19)	17	Sustainability_2	point(7398, 3456)		2036	9619
+MolePeople	Breakthroughs		1	Breakthroughs	point(13762, 2432)		202	1408
+MultispiralArchitecture	Breakthroughs		37	Breakthroughs	point(14650, 3456)		842	1440
+NanoRefinement	Breakthroughs		24	Breakthroughs	point(13318, 2432)		596	1456
+NeoConcrete	Breakthroughs		28	Breakthroughs	point(14206, 3712)		675	1481
+NeuralEmpathy	Breakthroughs		5	Breakthroughs	point(13984, 3328)		279	1506
+NocturnalAdaptation	Breakthroughs		19	Breakthroughs	point(13762, 3456)		514	1567
+NuclearFusion	Physics	range(11, 14)	14	Hi_tech_2	point(7398, 2432)		3015	2886
+NuclearTerraforming	Terraforming	range(16, 20)	17	Terraforming_3	point(9988, 5376)		4709	10313
+NumberSixTracing	Mysteries		10	Mysteries	point(3846, 5504)		2644	6679
+OrbitalEngineering	Engineering	range(20, 20)	20	Space_3	point(8212, 5888)		2479	8765
+OverchargeAmplification	Breakthroughs		49	Breakthroughs	point(13318, 2176)		1130	1597
+OverloadedFactories1	Storybits			Storybits	point(15686, 640)		1589	9023
+OverloadedFactories2	Storybits			Storybits	point(14650, 1408)		1607	9045
+PlanetaryProjects	Terraforming	range(16, 20)	20	Terraforming_3	point(10062, 5504)		4767	10337
+PlanetarySurvey	Terraforming	range(2, 5)	3	Space_1	point(8656, 4864)		4466	8287
+PlasmaCutters	Engineering	range(14, 19)	18	Industry_1	point(8730, 3456)		2449	3865
+PlasmaRocket	Breakthroughs		53	Breakthroughs	point(13762, 1920)		1311	1740
+PlutoniumSynthesis	Breakthroughs		50	Breakthroughs	point(13096, 2304)		1270	1768
+PrefabCompression	Breakthroughs		46	Breakthroughs	point(15094, 2688)		1016	1787
+PrefabRefab	ReconAndExpansion	range(20, 20)	20	Logistics_4	point(10210, 3456)		3557	5613
+PrintedElectronics	Breakthroughs		12	Breakthroughs	point(14428, 2304)		397	1824
+ProductivityTraining	Social	range(1, 5)	2	Society_2	point(7768, 5376)		4066	7863
+ProjectMohole	Robotics	range(19, 19)	19	ProjectMohole	point(8360, 2048)		4010	7507
+ProjectPhoenix	Breakthroughs		3	Breakthroughs	point(13540, 3072)		257	1840
+Purpose of the Spheres	Mysteries		6	Mysteries	point(3994, 5504)		2600	6692
+RapidSleep	Breakthroughs		6	Breakthroughs	point(14206, 3200)		326	1860
+ReconCenter	ReconAndExpansion	range(4, 5)	5	Space_1	point(8878, 4992)		3201	8329
+RejuvenationTreatment	Biotech	range(12, 19)	18	Society_4	point(7250, 5504)		2049	8135
+RemoteFarming	Biotech	range(6, 6)	21	Underground_1	point(9988, 3584)		2106	10527
+ResearchAmplification	Physics	range(11, 18)	17	Hi_tech_2	point(7250, 2176)		3054	2910
+ResearchCooperation	Storybits			Storybits	point(15242, 1408)		1625	9067
+ResilientArchitecture	Engineering	range(14, 19)	15	Industry_4	point(9100, 2816)		2398	4516
+ResilientVegetation	Breakthroughs			Breakthroughs	point(13762, 2944)		66	1873
+RogueNaniteDeactivation	Storybits			Storybits	point(14798, 1152)		1633	9080
+RogueNanitesAnalysis	Storybits			Storybits	point(14502, 1152)		1641	9093
+RoverCommandAI	Robotics	range(6, 10)	8	Logistics_2	point(9840, 4096)		3745	5286
+RoverPrinting	Robotics	range(15, 15)	15	Industry_3	point(8508, 3072)		3914	4254
+SafeMode	Breakthroughs		8	Breakthroughs	point(14428, 2816)		346	1902
+SafeTransport	Robotics	range(6, 6)	21	Logistics_2	point(10062, 4224)		4038	5340
+SelfSufficientLighting	ReconAndExpansion	range(2, 4)	2	Underground_1	point(11098, 3968)	true	3144	10557
+ServiceBots	Breakthroughs		48	Breakthroughs	point(13096, 2560)		1085	1927
+ShuttleAfterburners1	Storybits			Storybits	point(15094, 640)		1649	9106
+ShuttleAfterburners2	Storybits			Storybits	point(15834, 384)		1678	9147
+SignalBoosters	ReconAndExpansion	range(14, 15)	15	Logistics_4	point(10358, 3456)		3455	5634
+SmartHome	Engineering	range(6, 12)	10	Habitation_2	point(6806, 4224)		2286	2543
+SoilAdaptation	Biotech	range(1, 5)	2	Land	point(8138, 4224)		1778	4856
+SolExploration	Mysteries		12	Mysteries	point(3846, 5504)		2667	6709
+SoylentGreen	Breakthroughs		4	Breakthroughs	point(13762, 3200)		269	1995
+SpaceRehabilitation	Breakthroughs		10	Breakthroughs	point(14206, 2176)		370	2008
+StElmosFire	Mysteries		16	Mysteries	point(3846, 5504)		2723	6723
+StemReconstruction	Biotech	range(12, 19)	19	Society_4	point(6806, 5248)		2072	8168
+StirlingGenerator	Physics	range(6, 6)	6	Hi-Tech_1	point(7768, 3072)		2864	2816
+StirlingGeneratorFault	Storybits			Storybits	point(15390, 1152)		1703	9195
+StorageCompression	Engineering	range(6, 12)	7	Sustainability_1	point(7990, 3456)		2210	9471
+SubsurfaceHeating	Physics	range(1, 5)	3	Sustainability_1	point(7916, 3584)		2815	9527
+SuperconductingComputing	Breakthroughs		23	Breakthroughs	point(13318, 2688)		581	2028
+Superfungus	Breakthroughs		33	Breakthroughs	point(13096, 3072)		766	2046
+SuperiorCables	Breakthroughs		16	Breakthroughs	point(14428, 3328)		467	2062
+SuperiorPipes	Breakthroughs		17	Breakthroughs	point(14206, 3456)		482	2080
+SupportiveCommunity	Social	range(7, 10)	8	Pride	point(7398, 4736)		4187	7311
+SurveyOffer	Storybits			Storybits	point(14946, 1408)		1711	9207
+SustainableArchitecture	Engineering	range(6, 12)	9	Habitation_2	point(7102, 4224)		2271	2583
+SustainedWorkload	Breakthroughs		39	Breakthroughs	point(14872, 3328)		894	2098
+SystematicTraining	Social	range(1, 5)	4	Society_2	point(7620, 5376)		4109	7906
+TeraTourism	Terraforming	range(11, 15)	13	Terraforming_3	point(9988, 5632)		4640	10364
+TerraformingAmplification	Terraforming	range(16, 20)	18	Terraforming_2	point(6140, 2816)		4725	10142
+TerraformingRover	Terraforming	range(2, 5)	2	Land	point(8582, 3968)		4453	4883
+TerraformingSubsidies	Terraforming	range(6, 9)	6	Terraforming_2	point(6288, 2816)		4523	10175
+TheCypher	Storybits			Storybits	point(14650, 896)		1719	9219
+TheIncident	Storybits			Storybits	point(15390, 640)		1727	9231
+TheMartianNetwork	Robotics	range(16, 18)	18	Hi_tech_2	point(7398, 2176)		3994	2950
+ThePositronicBrain	Breakthroughs		7	Breakthroughs	point(14428, 3072)		336	2119
+TopologyAI	Terraforming	range(2, 5)	4	Terraforming_3	point(9766, 5504)		4492	10411
+TransportOptimization	Robotics	range(1, 4)	1	Land	point(8730, 4224)		3577	4935
+TriboelectricScrubbing	Physics	range(11, 18)	16	Hi_tech_2	point(7250, 2432)		3041	2977
+UndergroundDomes	ReconAndExpansion	range(4, 5)	4	Underground_1	point(9618, 3712)		3179	10596
+UndergroundFlightSchool	ReconAndExpansion	range(10, 13)	13	Underground_1	point(9396, 3584)		3418	10663
+UndergroundLargeDome	BuriedWonders			Mysteries	point(3772, 5632)		1484	6736
+UndergroundPsychStudies	ReconAndExpansion	range(16, 19)	19	Underground_1	point(9470, 3456)		3542	10681
+UtilityCrops	Biotech	range(6, 6)	6	Habitation_1	point(7768, 4096)		1832	2358
+VectorPump	Breakthroughs		32	Breakthroughs	point(13540, 2560)		753	2132
+ViolentUrges	Storybits			Storybits	point(15094, 1152)		1735	9243
+Vocation-Oriented Society	Breakthroughs		52	Breakthroughs	point(13762, 2176)		1296	2148
+WasteRockLiquefaction	Engineering	range(14, 19)	19	Industry_5	point(9766, 2944)		2466	4681
+WaterCoservationSystem	Biotech	range(12, 19)	13	Sustainability_2	point(7250, 3712)		1971	9646
+WaterOfPeace	Storybits			Storybits	point(15538, 384)		1743	9255
+WaterReclamation	Biotech	range(1, 5)	5	Sustainability_2	point(7176, 3584)		1819	9682
+WildfireCure	Mysteries		13	Mysteries	point(5474, 5504)		2678	6789
+WilloftheWisp	Mysteries		17	Mysteries	point(3994, 5504)		2733	7098
+WindTurbineRedesign	Storybits			Storybits	point(14946, 896)		1755	9280
+WirelessPower	Breakthroughs		11	Breakthroughs	point(14650, 2432)		382	2171
+Xeno-Terraforming	Mysteries		8	Mysteries	point(4142, 5504)		2624	7122
+XenoExtraction	Mysteries	range(0, 2)	5	Mysteries	point(3032, 5632)		2567	7135
+ZeroSpaceComputing	Breakthroughs		36	Breakthroughs	point(14650, 3712)		823	2194

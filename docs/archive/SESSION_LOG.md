@@ -8,6 +8,20 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-13 — C92 placement and expanded icon hunt
+
+tags: C92 research achievement icons placement source-control report-only
+
+Owner fired the placement brief, authorized sub-agents, supplied a complete-board
+screenshot and requested an additional Industry/Hi-Tech art pass. Report:
+`docs/agent/reports/C92_PLACEMENT.md`; reproduced evidence lives beside it in
+`c92-placement/`. The C92 entry and prior live report were corrected together.
+Owner scope choice is checklist 171. Status remains cand; no module, game
+launch, save/account mutation or external message. TEMPORARY sweep CLEAN in
+doccheck; offline controls only. The consumed prompt's grave is this commit.
+
+---
+
 ## 2026-09-13 - C92 investigation: repeatable cause withdrawn, hidden requirement pinned
 
 tags: C92 research achievement 1.1.0 source-control unattended

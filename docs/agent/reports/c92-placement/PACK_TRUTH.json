@@ -1,0 +1,321 @@
+{
+  "command": "python docs/agent/reports/c92-placement/pack_truth.py",
+  "head": "ccd4ff58762558ba79eef6065121d22ec138bea2",
+  "app": 3215050,
+  "steam_build": "24995074",
+  "game_version": "1.1.0.403908",
+  "game": "A:\\SteamLibrary\\steamapps\\common\\Project Spark",
+  "packs": [
+    {
+      "path": "Packs/Data.fpk",
+      "controls": [
+        {
+          "name": "Tech.lua",
+          "bytes": 404633,
+          "sha256": "7033a4b9330ab73eebf302347d063364c883ba229665884af52049bf5276efc9"
+        },
+        {
+          "name": "TechGroup.lua",
+          "bytes": 9041,
+          "sha256": "35e1037377bbfc311182cfcbfe0b3f44f299dcec866b057ba1c578e6738c8e66"
+        }
+      ],
+      "matches": [
+        {
+          "name": "LawDef/LawDef-Economy.lua",
+          "hits": [
+            {
+              "line": 1400,
+              "text": "'Explanation', T(988453324034, --[[LawDef Policy_UndergroundExploitation ProsperityForMars Explanation]] \"This law doesn't waste opportunities.\"),"
+            },
+            {
+              "line": 1405,
+              "text": "'Explanation', T(249954705327, --[[LawDef Policy_UndergroundExploitation HeritageTrust Explanation]] \"Surface's been claimed. The real prize is underground.\"),"
+            },
+            {
+              "line": 1410,
+              "text": "'Explanation', T(389378099490, --[[LawDef Policy_UndergroundExploitation GreenMarsCoalition Explanation]] \"Just because it's hidden doesn't mean it's safe.\"),"
+            },
+            {
+              "line": 1415,
+              "text": "'Explanation', T(764458722768, --[[LawDef Policy_UndergroundExploitation GreenNOW Explanation]] \"Buried destruction is still destruction.\"),"
+            },
+            {
+              "line": 1420,
+              "text": "'Explanation', T(130192934314, --[[LawDef Policy_UndergroundExploitation NewSol Explanation]] \"The excessive greed of this law stinks of late-stage capitalism.\"),"
+            },
+            {
+              "line": 1425,
+              "text": "'Explanation', T(314723048020, --[[LawDef Policy_UndergroundExploitation MarsDemocraticParty Explanation]] \"We're not here to hollow the planet.\"),"
+            },
+            {
+              "line": 1435,
+              "text": "description = T(795893148968, --[[LawDef Policy_UndergroundExploitation description]] \"Production of <em>underground extractors</em> is increased by <em><percent(production_change_percent)></em>\"),"
+            },
+            {
+              "line": 1436,
+              "text": "display_name = T(410769222949, --[[LawDef Policy_UndergroundExploitation display_name]] \"Underground Exploitation\"),"
+            },
+            {
+              "line": 1438,
+              "text": "id = \"Policy_UndergroundExploitation\","
+            },
+            {
+              "line": 1439,
+              "text": "policy = \"UndergroundExploitation\","
+            }
+          ]
+        },
+        {
+          "name": "PolicyDef.lua",
+          "hits": [
+            {
+              "line": 207,
+              "text": "display_name = T(545406601552, --[[PolicyDef UndergroundExploitation display_name]] \"Underground Exploitation\"),"
+            },
+            {
+              "line": 210,
+              "text": "id = \"UndergroundExploitation\","
+            }
+          ]
+        },
+        {
+          "name": "Tech.lua",
+          "hits": [
+            {
+              "line": 10636,
+              "text": "Description = T(483192202247, --[[Tech UndergroundExploitation Description]] \"Production of <em>underground extractors</em> is increased by <em><percent(production_change_percent)></em>.\"),"
+            },
+            {
+              "line": 10637,
+              "text": "DisplayName = T(218141292199, --[[Tech UndergroundExploitation DisplayName]] \"Underground Exploitation\"),"
+            },
+            {
+              "line": 10648,
+              "text": "ShortDescription = T(632638598166, --[[Tech UndergroundExploitation ShortDescription]] \"Production of <em>underground extractors</em> is increased by <em><percent(production_change_percent)></em>.\"),"
+            },
+            {
+              "line": 10650,
+              "text": "flavor = T(118750111326, --[[Tech UndergroundExploitation flavor]] \"<grey>Mars hoards her wealth beneath the crust. The deeper our extractors bite, the more freely the old planet gives it up.</grey>\"),"
+            },
+            {
+              "line": 10652,
+              "text": "id = \"UndergroundExploitation\","
+            }
+          ]
+        }
+      ],
+      "comparison": [
+        {
+          "name": "LawDef/LawDef-Economy.lua",
+          "source": "A:\\SteamLibrary\\steamapps\\common\\Project Spark\\ModTools\\Src\\Data\\LawDef\\LawDef-Economy.lua",
+          "packed_sha256": "5006fdb58dadbf4bf6f0ef3e1c1f7f40792e50803015cd5e8e21295e6d857005",
+          "source_exists": true,
+          "byte_identical": true
+        },
+        {
+          "name": "PolicyDef.lua",
+          "source": "A:\\SteamLibrary\\steamapps\\common\\Project Spark\\ModTools\\Src\\Data\\PolicyDef.lua",
+          "packed_sha256": "94d55c86cf80e0c4fc341b0c2f45101d0bff493400facbea6f2ea09c17481a6f",
+          "source_exists": true,
+          "byte_identical": true
+        },
+        {
+          "name": "Tech.lua",
+          "source": "A:\\SteamLibrary\\steamapps\\common\\Project Spark\\ModTools\\Src\\Data\\Tech.lua",
+          "packed_sha256": "7033a4b9330ab73eebf302347d063364c883ba229665884af52049bf5276efc9",
+          "source_exists": true,
+          "byte_identical": true
+        },
+        {
+          "name": "TechGroup.lua",
+          "source": "A:\\SteamLibrary\\steamapps\\common\\Project Spark\\ModTools\\Src\\Data\\TechGroup.lua",
+          "packed_sha256": "35e1037377bbfc311182cfcbfe0b3f44f299dcec866b057ba1c578e6738c8e66",
+          "source_exists": true,
+          "byte_identical": true
+        }
+      ],
+      "entries": 2815,
+      "lua_payloads_read": 2333
+    },
+    {
+      "path": "Packs/Lua.fpk",
+      "controls": [
+        {
+          "name": "Lua/Achievements.lua",
+          "bytes": 4524,
+          "sha256": "d175b68293b9f22cff6af40cb07a2493ecc4636806ddaf510f2314306cc49e7d"
+        },
+        {
+          "name": "Lua/Buildings/WaterExtractor.lua",
+          "bytes": 4726,
+          "sha256": "b0b60de2826b79b489ad70968da47669e571d3488e8b17484c6c5ad818032235"
+        },
+        {
+          "name": "Lua/LabelContainer.lua",
+          "bytes": 4254,
+          "sha256": "342d00f987272c024b322d76261014cc94b076405188cf0e3591588c8714dc63"
+        },
+        {
+          "name": "Lua/MarsGameEffects.lua",
+          "bytes": 32514,
+          "sha256": "6b486e5e4d2239801a3587d4278c3877bacf11a3efd11ad0c37682b33313f330"
+        },
+        {
+          "name": "Lua/Modifiers.lua",
+          "bytes": 14042,
+          "sha256": "af6d79d6050f28e2af9ca0e53dd51368a799e3f75547c35aa119b3ea453125da"
+        },
+        {
+          "name": "Lua/TechTree.lua",
+          "bytes": 66114,
+          "sha256": "97596b001d73d41a91f6ad040be0cd6185d94b90551c1faf926bf7e57ef1e0ca"
+        },
+        {
+          "name": "CommonLua/Libs/Research/Research.lua",
+          "bytes": 6106,
+          "sha256": "f4242445d4212cd70ef197cf5f216d641d441d530e75111636cf7b75e06a0ae0"
+        }
+      ],
+      "matches": [
+        {
+          "name": "Lua/Buildings/BuildingComponents.lua",
+          "hits": [
+            {
+              "line": 1361,
+              "text": "and ObjectIsInEnvironment(self, \"Underground\") and UIColony:IsTechResearched(\"UndergroundExploitation\") then"
+            },
+            {
+              "line": 1362,
+              "text": "amount = MulDivRound(amount, 100 + Techs.UndergroundExploitation:GetParameterValue(\"production_change_percent\"), 100)"
+            }
+          ]
+        },
+        {
+          "name": "Lua/Factions/Laws.lua",
+          "hits": [
+            {
+              "line": 773,
+              "text": "function SavegameFixups.ObsoleteUndergroundExploitationLaw()"
+            },
+            {
+              "line": 774,
+              "text": "RemoveActiveLaw(\"Policy_UndergroundExploitation\")"
+            }
+          ]
+        }
+      ],
+      "comparison": [
+        {
+          "name": "Lua/Achievements.lua",
+          "source": "A:\\SteamLibrary\\steamapps\\common\\Project Spark\\ModTools\\Src\\Lua\\Achievements.lua",
+          "packed_sha256": "d175b68293b9f22cff6af40cb07a2493ecc4636806ddaf510f2314306cc49e7d",
+          "source_exists": true,
+          "byte_identical": true
+        },
+        {
+          "name": "Lua/Buildings/BuildingComponents.lua",
+          "source": "A:\\SteamLibrary\\steamapps\\common\\Project Spark\\ModTools\\Src\\Lua\\Buildings\\BuildingComponents.lua",
+          "packed_sha256": "f0b24e0ef5e6781f0b23c7814f1478d2d1cdf61842d1f340e0ce7a603267e6b2",
+          "source_exists": true,
+          "byte_identical": true
+        },
+        {
+          "name": "Lua/Buildings/WaterExtractor.lua",
+          "source": "A:\\SteamLibrary\\steamapps\\common\\Project Spark\\ModTools\\Src\\Lua\\Buildings\\WaterExtractor.lua",
+          "packed_sha256": "b0b60de2826b79b489ad70968da47669e571d3488e8b17484c6c5ad818032235",
+          "source_exists": true,
+          "byte_identical": true
+        },
+        {
+          "name": "Lua/Factions/Laws.lua",
+          "source": "A:\\SteamLibrary\\steamapps\\common\\Project Spark\\ModTools\\Src\\Lua\\Factions\\Laws.lua",
+          "packed_sha256": "28e1d9896c28152f39288c2f57cf53c1ff35ae5e055ab3051021ca96cf76bdc6",
+          "source_exists": true,
+          "byte_identical": true
+        },
+        {
+          "name": "Lua/LabelContainer.lua",
+          "source": "A:\\SteamLibrary\\steamapps\\common\\Project Spark\\ModTools\\Src\\Lua\\LabelContainer.lua",
+          "packed_sha256": "342d00f987272c024b322d76261014cc94b076405188cf0e3591588c8714dc63",
+          "source_exists": true,
+          "byte_identical": true
+        },
+        {
+          "name": "Lua/MarsGameEffects.lua",
+          "source": "A:\\SteamLibrary\\steamapps\\common\\Project Spark\\ModTools\\Src\\Lua\\MarsGameEffects.lua",
+          "packed_sha256": "6b486e5e4d2239801a3587d4278c3877bacf11a3efd11ad0c37682b33313f330",
+          "source_exists": true,
+          "byte_identical": true
+        },
+        {
+          "name": "Lua/Modifiers.lua",
+          "source": "A:\\SteamLibrary\\steamapps\\common\\Project Spark\\ModTools\\Src\\Lua\\Modifiers.lua",
+          "packed_sha256": "af6d79d6050f28e2af9ca0e53dd51368a799e3f75547c35aa119b3ea453125da",
+          "source_exists": true,
+          "byte_identical": true
+        },
+        {
+          "name": "Lua/TechTree.lua",
+          "source": "A:\\SteamLibrary\\steamapps\\common\\Project Spark\\ModTools\\Src\\Lua\\TechTree.lua",
+          "packed_sha256": "97596b001d73d41a91f6ad040be0cd6185d94b90551c1faf926bf7e57ef1e0ca",
+          "source_exists": true,
+          "byte_identical": true
+        },
+        {
+          "name": "CommonLua/Libs/Research/Research.lua",
+          "source": "A:\\SteamLibrary\\steamapps\\common\\Project Spark\\ModTools\\Src\\CommonLua\\Libs\\Research\\Research.lua",
+          "packed_sha256": "f4242445d4212cd70ef197cf5f216d641d441d530e75111636cf7b75e06a0ae0",
+          "source_exists": true,
+          "byte_identical": true
+        }
+      ],
+      "entries": 2374,
+      "lua_payloads_read": 2374
+    },
+    {
+      "path": "DLC/norman.fpk",
+      "controls": [
+        {
+          "name": "Presets/Tech.lua",
+          "bytes": 22374,
+          "sha256": "5b779880c122a186260f3ab3099f34d837c3c813ea64d5f0e5ecb76036f50dda"
+        }
+      ],
+      "matches": [],
+      "comparison": [
+        {
+          "name": "Presets/Tech.lua",
+          "source": "A:\\SteamLibrary\\steamapps\\common\\Project Spark\\ModTools\\Src\\DLC\\norman\\Presets\\Tech.lua",
+          "packed_sha256": "5b779880c122a186260f3ab3099f34d837c3c813ea64d5f0e5ecb76036f50dda",
+          "source_exists": true,
+          "byte_identical": true
+        }
+      ],
+      "entries": 1844,
+      "lua_payloads_read": 140
+    },
+    {
+      "path": "DLC/thomas.fpk",
+      "controls": [
+        {
+          "name": "Presets/MissionSponsorPreset.lua",
+          "bytes": 3369,
+          "sha256": "21430dfae780ab2228a47f54329d55affac5fa11de0ee58a1caaf4899cebd1d1"
+        }
+      ],
+      "matches": [],
+      "comparison": [
+        {
+          "name": "Presets/MissionSponsorPreset.lua",
+          "source": "A:\\SteamLibrary\\steamapps\\common\\Project Spark\\ModTools\\Src\\DLC\\thomas\\Presets\\MissionSponsorPreset.lua",
+          "packed_sha256": "21430dfae780ab2228a47f54329d55affac5fa11de0ee58a1caaf4899cebd1d1",
+          "source_exists": true,
+          "byte_identical": true
+        }
+      ],
+      "entries": 49,
+      "lua_payloads_read": 15
+    }
+  ]
+}

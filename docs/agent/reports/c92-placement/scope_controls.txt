@@ -1,0 +1,28 @@
+Retained result excerpt from tool execution 2026-09-13. Body hashes are emitted
+by the reproducible script; parent PACK_TRUTH.json retains the separate
+packed-source file identity comparison.
+
+COMMAND python docs/agent/reports/c92-placement/scope_controls.py
+HEAD ccd4ff58762558ba79eef6065121d22ec138bea2
+INSTALL app3215050 buildid=24995074
+SRC A:\SteamLibrary\steamapps\common\Project Spark\ModTools\Src baseline 1.1.0.403908
+PASS unresearched underground stockpile component yields 5000
+PASS researched underground stockpile component yields 6000
+PASS water modifier yields 6000, not 7200
+PASS water supply extracts 6000, no second multiplier
+PASS same effect applied twice replaces modifier
+PASS surface stockpile component unchanged
+PASS underground non-extractor component unchanged
+PASS obsolete preset retained: stockpile bonus still runs
+PASS obsolete preset retained: existing water modifier still runs
+PASS absent preset + researched flag triggers Lua error: Lua/Buildings/BuildingComponents.lua:1362: attempt to index a nil value (field 'UndergroundExploitation')
+PASS absent preset + cleared flag short-circuits safely
+PASS clearing flag alone leaves water modifier
+PASS normal modifier removal returns current water output to 5000
+PASS normal modifier removal clears container entry
+RESULT 14 controls passed; offline Lua only, no retail or save persistence measurement
+
+COMMAND python tools/desk_c92_achievement.py
+HEAD ccd4ff58762558ba79eef6065121d22ec138bea2
+15 of 15 demands held
+CONTROLS HOLD: repeatables retain completion; unconditional exemption changes the achievement requirement.

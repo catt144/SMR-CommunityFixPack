@@ -1,0 +1,7 @@
+slot	x	y	occupied	adjacent_ids	adjacent_groups
+Hi-Tech I gap	7768	2816		AtomicAccumulator;MineralApplications_MineralTreatments	Hi-Tech_1;Hi-Tech_1
+Industry V right gap	10062	2944		ThermalCyclingDampeners	Industry_5
+Industry V upper-right gap	9988	2816		ContinuousOperationProtocols	Industry_5
+Underground-Industry bridge	9914	3200		FactoryAI;ThermalCyclingDampeners;UndergroundDeepMining	Industry_5;Industry_5;Underground_1
+Underground sibling-row west	9470	3200		UndergroundWaterExtraction	Underground_1
+Underground sibling-row east	9618	3200		UndergroundDeepMining	Underground_1
