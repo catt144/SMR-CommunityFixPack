@@ -478,3 +478,32 @@ PUSH SET: 42199 B in 5 file(s) ≈ 19k tokens (budget 40960 B)  ⚠ OVER
 
 Commit identity and diff-stats are recorded in the consumed-prompt close-out
 below, after the Part 1 commit exists. All load-bearing findings are on disk.
+
+
+### Group C commit and consumed-prompt close-out
+
+Part 1 landed in `9e4691d` with the following emitted diff-stat:
+
+```text
+9e4691d Complete repair-pass C authoring and retirement repairs
+ docs/agent/WORKFLOW.md                           |   5 +
+ docs/agent/prompts/README.md                     |   2 +-
+ docs/agent/prompts/perma/HANDOFF_ORCHESTRATOR.md |  26 ++--
+ docs/agent/reports/REPAIR_PASS.md                | 150 +++++++++++++++++++++++
+ items.lua                                        |   3 +-
+ metadata.lua                                     |  10 +-
+ 6 files changed, 175 insertions(+), 21 deletions(-)
+```
+
+The separate close-out consumes only `prompts/REPAIR_PASS.md` and
+`prompts/REPAIR_PASS_C.md`, as both executable briefs instruct, and updates
+`prompts/README.md` to their fired outcomes. The retired handoff and ignored
+implementation record remain on disk. The Part 1 no-deletion condition was
+satisfied before this administrative close-out.
+
+Part 2's deferred proposal and verification recipe are preserved in Git:
+`git show cda31de:docs/agent/prompts/REPAIR_PASS_C.md`, section 3. Only the
+owner-adopted choices may be implemented; the open 170(a) call was not answered
+by this pass. Marker diagnostics remain unchanged and checker validation is
+`doccheck: GREEN`. The close-out commit is discoverable with
+`git log -1 --oneline -- docs/agent/prompts/REPAIR_PASS_C.md`.
