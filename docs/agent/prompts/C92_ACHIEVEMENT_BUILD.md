@@ -8,7 +8,7 @@ and [`EF-093`](../facts/EF-093.md) (the self-healing residue seam).
 
 ## 0 · ⛔ THE HOLD — read before anything else
 
-**Owner ruling, 2026-09-13:**
+**Owner ruling, 2026-09-13 — recorded as checklist [172](../../PLAYTEST_CHECKLIST.md):**
 
 > *"We will be holding it open as a fix, I want to test it, and then we may ship it,
 > but shipping is on hold until I lift the hold. Right now I want to finish it,
@@ -29,8 +29,9 @@ here is precisely where it breaks and why" has succeeded.
 
 ⚠️ This supersedes the earlier shape of this brief (a narrow achievement exemption,
 option A under checklist 171). The owner has chosen to **finish the technology**.
-Decision 171 is not thereby ruled — it remains the owner's, and the hold is what keeps
-that true.
+⛔ **Decision 171 is NOT thereby ruled** and stays open: **172** says what to build and that
+it will not ship; **171** is still whether it ever does. The hold is what keeps that the
+owner's call.
 
 ## 1 · Your licence
 
@@ -189,7 +190,7 @@ after checking `git status` for a peer's uncommitted work.
 - [ ] 4. `EF-093` seam exercised — prove it or show where it fails
 - [ ] 5. Residue contract for a researched tech; refund question answered
 - [ ] 6. Desk controls incl. the 1.0.7 decline and the removal leg
-- [ ] 7. Achievement backup/reset procedure written for the owner, not performed
+- [ ] 7. `EF-094` test route (move `account.dat` aside) PROPOSED to the owner, not performed
 - [ ] 8. Module + `items.lua` + build report + entry update (no shipped status)
 - [ ] 9. Playtest recipe on the checklist with its marker — then **STOP**
 - [ ] 10. Your own findings, including everything that did not work
