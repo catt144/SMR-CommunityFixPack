@@ -286,3 +286,75 @@ line. The table is a historical audit receipt, not a new generated index.
 | EF-088 | `df5af12b` (2026-09-11) | Linux options/shader/driver record spans multiple artifacts and corrections; no complete dependency fingerprint recovered; no FR-1 investigation run. |
 | EF-089 | `df5af12b` (2026-09-11) | Linux renderer/cache record includes source, executable and driver dependencies; game label alone does not establish them all. |
 | EF-090 | `9031634f` (2026-09-11) | Linux shader-cache/parser/driver record has separate binary and corrected measurement artifacts; no whole-record pin established. |
+
+## Adjudication — separate seat, 2026-09-13: **PASS**, one finding
+
+Judged by a seat that did not do the work and read the report only where the brief
+required a deliverable to *exist*; every number below is independently re-derived
+from the diff. Scope is **`e9f589d` · `14dcaa9` · `49934b4`** — the executing
+agent's own three. `ef6c199` is a different seat's lookback (its diff is
+C92/`EF-094`/ck172), so the inherited "four commits" was wrong.
+
+**(i) Fingerprints — the load-bearing claim is CONFIRMED, and the rail explains the
+shape.** Every bucket count reconciles against the 11 fact diffs: `EF-049` moved
+repo-sha → explicit 1.0.7 as a *non-inferred* member (MOVED 55 → 56, inferred
+stays 54); `EF-078` and `EF-087` joined HOLDS from the repo-sha bucket and six more
+lost `(inferred from updated:)`, which is exactly the 16 → 8 fall; `EF-015` and
+`EF-019` were *demoted* to `mixed observations` rather than certified, matching the
+2-fact mixed bucket. Nothing stalled. The claim that the legacy set could not
+honestly shrink because its bodies predate the update was tested, not accepted:
+**0 of 56 MOVED facts have a body that changed after the 1.1.0 baseline**
+(front-matter excluded; `git rev-list -1 --before=2026-09-08` per fact). Provenance
+recovery can only convert *inferred → established*; it cannot move a fact across
+builds without new evidence, so the conservative rail — not a stalled job —
+explains the unchanged 54. Work was correctly spent where a wrong label is
+*dangerous* (a false HOLDS licenses skipping evidence) and not where it is merely
+expensive. Five cited receipts were opened and verified line-exact
+(`first110…:56`, `forced110…:54`, `f119sitting110…:53`, both `c74build_*` logs —
+each reads `Build version: 1.1.0.403908`), and `EF-086` honestly records a receipt
+that was *not* found.
+
+**(ii) Push set — the attribution exists, and the inherited question was malformed.**
+The per-stage table is emitted separately per change and its `(c)` delta of **+318 B**
+reproduces exactly against the diff (all `DISPATCH.md`). The rest of the rise is not
+this pass: **42,517 + 710 = 43,227**, and that 710 B is `STATE.md` growing in
+`ef6c199`. The remaining ~243 B between the inherited 41,956 and the pass's own
+42,199 anchor is `MEMORY.md` — **outside the repo, per-machine, per-session, and
+controlled by no commit**. ⚠️ Cross-session push-set deltas are therefore not
+attributable, which is how the inherited handoff came to ask why a ruling "removed"
+nothing. `(b)` removed **0 B** here and the report says so in as many words: these
+files were already LF (measured: raw == LF for all five). The ~430 B estimate was
+lines-derived paper arithmetic against a CRLF checkout that does not exist here —
+499 lines today. The real saving landed on the skills (−63 / −64 B), and `49934b4`
+exists to draw exactly that distinction.
+
+**(iii) Gates — met, and exceeded.** `tools/ck170_selftest.py` breaks *disk copies*
+in a temp root, asserts the specific RED verdict rather than a falsy return, restores,
+and prints SHA256 — then goes further than the brief asked and **mutates the
+instrument itself**, requiring the raw-byte revert to lose LF/CRLF equivalence and the
+status-filter revert to lose owner-action independence. It asserts the live
+`doccheck.py` is byte-unchanged at exit. Not taken on trust: the live marker gate was
+independently driven RED here on a real broken marker (`status:bogus`) and restored to
+`sha256 f9e886db…`.
+
+### Finding — the falsifiers are orphans, and nothing runs them
+
+`tools/ck170_selftest.py` and `tools/repair_pass_selftest.py` are referenced only by
+their own reports and each other. The pre-commit hook runs `doccheck.py --emit-counts`
+and nothing else; `flpk_selftest` and `bodycheck_selftest` are wired into doccheck,
+these two are not. So the gates were shown to fail *once*, by hand, and no machine
+will notice if a future edit quietly removes a guard — the demonstration is not
+repeatable, which is the failure class this project keeps converting into gates.
+Both run in **under 0.25 s** (0.163 s and 0.225 s against doccheck's own 0.835 s), so
+cost is not the objection. Recommend wiring both the way the other two selftests are.
+
+Separately, and **not this pass's defect**: STATE's emitted `BUILD STATE` block reads
+`119 F + 12 D + 92 C` while `--emit-counts` reads `119 F + 13 D + 93 C` — D14 and C93
+are in STATE's own prose but the block was not re-emitted, and no gate compares them.
+
+⚠️ Two instrument defects were hit *inside this adjudication* and are recorded because
+the house rail says to: a first body-comparison run reported 92 of 94 facts stale by
+counting front-matter-only commits, and a second reported 56 of 56 because `glob`
+returned Windows backslashes and every `git show` silently failed into the "changed"
+branch. Both verdicts were wrong in the alarming direction. A falsifier harness that
+reports a broken copy as passing is the same defect wearing the other face.
