@@ -8,6 +8,18 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-13 — SMR Tool Kit designed and chained (`prompts/smrtk/`, ck175)
+
+Session `smr-bugfixpack-8f` (Fable). The owner asked for a replacement for the vanilla cheat menu that (A) never
+registers as a cheat and (B) tags every log line. Source reads at build 24995074 answered both and were filed as
+`EF-095`–`EF-099`: taint is written only by the three `NetSyncEvents` wrappers (leaf bodies clean); the mod blacklist
+blocks code-from-a-string and file I/O but nothing the panel needs; the console "lock" is `DE_Console` never being
+created when the Mod Manager is closed (`ConsoleEnabled` is the fix); the meteor cheats target the camera and no-op on
+nil; `PlaceConstructionSite` + two-pass completion is the stamper's route. Owner confirmed F9 = `cls()` in play.
+Authored the 10-link kill-gated chain (01 skeleton → 02 owner kill gate → 03/03b/04/05/06 parallel → 07 docs+prep →
+08 owner sitting → 99 Fable audit), registered it, and routed the two sittings to ck175. Nothing built yet; every
+route is source-derived until 02.
+
 ## 2026-09-13 — C92 placement and expanded icon hunt
 
 tags: C92 research achievement icons placement source-control report-only

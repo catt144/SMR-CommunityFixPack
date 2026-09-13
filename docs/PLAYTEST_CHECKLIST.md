@@ -29,6 +29,27 @@ completed tests move whole to
 
 ## Decisions waiting on you
 
+### 2026-09-13 — 175 RULED: build the SMR Tool Kit (chain `prompts/smrtk/`); two sittings are yours when their scripts land
+<!-- ck:175 status:ruled owner:yes -->
+
+**Owner ruling, 2026-09-13, in one design conversation** (`smr-bugfixpack-8f`): replace the game's built-in cheat
+menu, for playtesting, with a **tool kit panel in the TestKit mod**. Your requirements, verbatim in the chain
+README: **(A)** nothing it does may register as a cheat in vanilla's detection; **(B)** every line it writes is tagged
+`SMRTK_<Verb>` so an agent never has to ask. You accepted the whole tiered list — slots an agent pre-loads, triggers,
+save slots A/B/C, console tap + clipboard copy, the TestKit on buttons, and the layout stamper (*"a game changer"*) —
+home in the TestKit, **both** UIs (infopanel section + floating tabbed panel), and a chain with a separate audit.
+
+**What the source says, filed as facts so nobody re-derives it:** the taint is written only by three
+`NetSyncEvents` wrappers and the work bodies are clean (`EF-095`); everything the panel needs is outside the mod
+blacklist, but code-from-a-string is not (`EF-096`); the console "lock" is the hotkey action never being created
+when the Mod Manager is closed, and `ConsoleEnabled` fixes it without mod tools (`EF-097`); the meteor cheats aim at
+the camera, not the cursor, and silently do nothing on a nil position (`EF-098`); `PlaceConstructionSite` is the
+game's own front door for the stamper (`EF-099`). You confirmed **F9 clears the console** today.
+
+**Yours, in order:** the **02 kill-gate sitting** (~20–30 min, TAKEABLE WHEN link 01 has written its script into
+`02_SKELETON_SITTING_owner.md`), then the **08 full sitting** (TAKEABLE WHEN 07 has written its script). Nothing
+else is asked. Defaults you may change at any time: hotkey **Ctrl-Shift-K**, six agent slots.
+
 ### ✅ 2026-09-13 — 174 RULED: a fired one-off leaves the prompts map entirely
 <!-- ck:174 status:ruled owner:no -->
 
