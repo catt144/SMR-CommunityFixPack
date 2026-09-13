@@ -101,7 +101,15 @@ not force it, and do not bank A/B1/C as if B2 had passed.
    **§Attended check** section · their `status` **and** the heading tag (⛔ **doccheck goes RED if you flip
    one and not the other** — this has already happened once) · `docs/PLAYTEST_CHECKLIST.md` item 158 ·
    `docs/agent/STATE.md` · a `SESSION_LOG.md` entry.
-3a. ⭐⭐ **AND ITEM 158's STATUS MARKER — read this, it is new and it is undocumented.** Checklist items
+3a. ⭐⭐ **AND ITEM 158's STATUS MARKER.** ⛔ **First, the boundary, because it is easy to trip over
+   here:** the checklist-marker system arrived from **an ongoing multi-agent, mixed-model effort in a
+   SEPARATE TREE**, and what is visible in this tree is a **deliberate partial** landing — that part had to
+   be in before this tree moved again, and **the rest lands only after v10 ships.** ⛔ **It is NOT this
+   sitting's job to re-derive, re-check, audit or complete it** (owner, 2026-09-12). **Partial is not
+   unfinished.** Use the marker; do not investigate it. If something about it looks wrong, **tell the owner
+   and carry on with the sitting** — do not stop to prove it.
+
+   **What you actually have to do:** Checklist items
    carry a marker like `<!-- ck:162 status:ruled owner:no -->`, and a register (`docs/WAITING_ON_YOU.md`)
    is built from them. **Changing an item's status means updating its marker in the same edit** — nothing
    in `WORKFLOW.md`, `CLAUDE.md` or `README.md` says so yet, which is exactly why it is said here.

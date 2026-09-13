@@ -149,9 +149,16 @@ shipped code. ✅ `parsecheck` clean, `desk_f59_expedition.py` **23/23**, no Tes
 
 ## 5a · ⛔ LANDED AFTER THIS HANDOFF WAS WRITTEN — four things every v10 agent must be told
 
-**Not this session's work; recorded from the owning session's report on 2026-09-12 (`d56293a` → `2b1fd91`).
-⛔ Do not re-litigate or re-verify any of it — it is theirs and it is done.** What matters here is that
-v10 runs straight through the first two.
+**Not this session's work; recorded from the owning session's report on 2026-09-12 (`d56293a` → `2b1fd91`).**
+What matters here is only that v10 runs straight through the first two.
+
+⛔⛔ **IT IS NOT YOUR JOB TO RE-DERIVE, RE-CHECK, AUDIT OR "FINISH" ANY OF IT — owner, 2026-09-12.**
+This is **an ongoing multi-agent, mixed-model effort running in a SEPARATE TREE.** What you can see here is
+a deliberate **partial** landing: that part had to be in **before this tree moved again**, and **the rest
+lands only once v10 has left.** ⇒ **Partial is not unfinished.** Do not read the gaps as work owed, do not
+tidy them, do not re-run their measurements, and do not start the documentation they say is missing beyond
+saying the marker obligation out loud in your own briefs (point 1). ⚠️ **If you think you have found a real
+problem with it, tell the owner — do not act on it**, and do not spend a session proving it first.
 
 1. ⭐⭐ **THE MARKER OBLIGATION — the one real documentation gap, and v10 walks into it.** Checklist items
    now carry a status marker, e.g. `<!-- ck:162 status:ruled owner:no -->`, and a register is built from
