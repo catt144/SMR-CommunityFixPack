@@ -1,0 +1,83 @@
+-- TEMPORARY C92 read-only census, 1.1.0.403908.
+-- NEVER RUN at authoring. Loads C92READ.savegame.sav paused; no research,
+-- achievement unlock, save, speed increase, portal call, or UI verdict.
+-- Every autosave must be backed up before launch (EF-056).
+C92Read = {}
+
+local function say(s)
+    ModLog("[C92READ] " .. tostring(s):gsub("%%", "%%%%"))
+end
+
+local groups = {
+    "Habitation", "Hi-Tech", "Industry", "Logistics", "MegaProjects",
+    "Society", "Space", "Sustainability", "Underground",
+}
+
+local function counted(tech)
+    return (tech.save_in or "") == "" and not IsInitiative(tech.id)
+end
+
+function C92Read.Census()
+    say("BUILD " .. tostring(BuildVersion) .. " LuaRevision=" .. tostring(LuaRevision))
+    say("SAVE day=" .. tostring(UIColony.day) .. " sponsor=" .. GetMissionSponsor().id .. " points=" .. tostring(UIPlayer.TechPoints))
+    say("ACCOUNT achievement=" .. tostring(GetAchievementFlags("ResearchedAllTechs")))
+    say("MODS " .. table.concat(ModsLoaded or {}, ","))
+    local all = true
+    for _, group_id in ipairs(groups) do
+        local ok = UIColony:IsTechGroupResearched(group_id, counted)
+        all = all and ok
+        say("GROUP " .. group_id .. " researched=" .. tostring(ok))
+        ForEachPresetInGroup("TechGroup", group_id, function(cluster)
+            ForEachPresetInGroup("Tech", cluster.id, function(tech)
+                local research = IsTechResearched(tech.id)
+                if counted(tech) and (not research or IsTechRepeatable(tech.id)) then
+                    local used_ok, used = pcall(tech.IsCurrentlyUsed, tech)
+                    local cond_ok, cond = pcall(tech.Condition, tech)
+                    say("TECH " .. tech.id .. " cluster=" .. cluster.id ..
+                        " state=" .. tostring(GetTechState(tech.id, UIPlayer)) ..
+                        " researched=" .. tostring(research) ..
+                        " raw=" .. tostring(UIPlayer.tech_researched and UIPlayer.tech_researched[tech.id]) ..
+                        " times=" .. tostring(g_TechTimesResearched and g_TechTimesResearched[tech.id]) ..
+                        " repeatable=" .. tostring(IsTechRepeatable(tech.id)) ..
+                        " obsolete=" .. tostring(tech.Obsolete) ..
+                        " used=" .. tostring(used_ok and used) ..
+                        " condition=" .. tostring(cond_ok and cond) ..
+                        " save_in=" .. tostring(tech.save_in))
+                end
+            end)
+        end)
+    end
+    say("ALL " .. tostring(all))
+    ForEachPreset("Tech", function(tech)
+        if IsTechRepeatable(tech.id) then
+            local cluster = TechGroups[tech.group]
+            say("REPEATABLE " .. tech.id .. " cluster=" .. tech.group ..
+                " group=" .. tostring(cluster and cluster.group) ..
+                " base=" .. tostring(tech.Repeatable) ..
+                " override=" .. tostring(g_ForceTechRepeatable and g_ForceTechRepeatable[tech.id]))
+        end
+    end)
+end
+
+function C92Read.Boot()
+    CreateRealTimeThread(function()
+        Sleep(1)
+        local deadline = RealTime() + 300000
+        while not GetPreGameMainMenu() do
+            if RealTime() > deadline then say("TIMEOUT menu"); quit(); return end
+            Sleep(500)
+        end
+        Sleep(2000)
+        local err = LoadGame("C92READ.savegame.sav", {})
+        if err then say("LOADERR " .. tostring(err)); quit(); return end
+        say("LOAD OK")
+        Sleep(15000)
+        local ok, result = pcall(C92Read.Census)
+        say("CENSUS ok=" .. tostring(ok) .. " result=" .. tostring(result))
+        say("DONE")
+        Sleep(1000)
+        quit()
+    end)
+end
+
+C92Read.Boot()

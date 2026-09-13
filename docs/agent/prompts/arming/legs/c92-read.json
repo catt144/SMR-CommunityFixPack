@@ -1,0 +1,16 @@
+{
+  "leg": "c92-read",
+  "_what": "Read-only census of the supplied Sol 490 save. NEVER RUN at authoring. Back up every autosave before staging C92READ.savegame.sav. No achievement or research mutations.",
+  "kit": "C:\\Dev\\SMR-BugFixPack-TestKit",
+  "park": "C:\\Dev\\SMR-BugFixPack\\docs\\agent\\prompts\\arming\\payloads",
+  "stripPattern": "Code/98_C92Read",
+  "anchorAfter": "99_FixtureCarry.lua",
+  "bootSymbol": "C92Read.Boot",
+  "symbolNamespace": "C92Read",
+  "permanent": ["Code/61_Probes_Wave11.lua"],
+  "mustNotBeListed": ["Code/96_AutoRunFlag.lua", "Code/97_ForceInactive.lua"],
+  "mustNotBeListedWhy": "A new-colony driver would race LoadGame; forced inactive modules change the diagnostic baseline.",
+  "bannedPatterns": ["SaveGame\\s*\\(", "AchievementUnlock\\s*\\(", "UIResearch\\s*\\(", "SetGameSpeed\\s*\\("],
+  "requiredPresent": ["C92READ.savegame.sav", "IsTechGroupResearched", "IsTechResearched"],
+  "payloads": [{"src": "98_C92Read.lua.txt", "dst": "98_C92Read.lua", "selfDrives": true}]
+}
