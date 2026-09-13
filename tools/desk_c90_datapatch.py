@@ -11,8 +11,12 @@ The write proxies preserve first-pass values but not rawget after a write;
 these are fresh-preset first-pass controls, not idempotency/reload tests.
 """
 import re
+import subprocess
 from pathlib import Path
 import deskbench as db
+
+# Last pre-guard bodies: keep every original harm/stop demand executable.
+C90_HARMFUL_REV = 'fb3751a'
 
 
 PRELUDE = db.ENGINE_SHIMS + r'''
@@ -98,9 +102,19 @@ def trait_data(rt, tree):
     shipped(rt, 'Lua/LabelContainer.lua', r'^function LabelContainer:SetLabelModifier\(', tree)
 
 
-def load_module(rt, name):
+def module_text(name, rev=None):
     rel = 'Code/Fix_' + name + '.lua'
-    db.load_at(rt, db.read(Path(db.REPO) / rel), '=' + rel)
+    if rev is None:
+        return db.read(Path(db.REPO) / rel), rel
+    spec = '%s:%s' % (rev, rel)
+    result = subprocess.run(['git', 'show', spec], cwd=db.REPO, check=True,
+                            capture_output=True, text=True, encoding='utf-8')
+    return result.stdout, spec
+
+
+def load_module(rt, name, rev=None):
+    source, chunk = module_text(name, rev)
+    db.load_at(rt, source, '=' + chunk)
 
 
 def writes(rt):
@@ -111,20 +125,20 @@ def entry(rt, name):
     return rt.globals().SMRFixPack.fixes[name]
 
 
-def saint(tree, missing=None, veto=False):
+def saint(tree, missing=None, veto=False, rev=None):
     rt = runtime()
     trait_data(rt, tree)
     if missing:
         rt.execute(missing + '=nil')
     if veto:
         rt.execute('SMRFixPack_Disabled.SaintBlessing=true')
-    load_module(rt, 'SaintBlessing')
+    load_module(rt, 'SaintBlessing', rev)
     before = entry(rt, 'SaintBlessing').status
     rt.execute('Msg("ClassesBuilt")')
     return rt, before
 
 
-def sinkhole(missing=None, veto=False):
+def sinkhole(missing=None, veto=False, rev=None):
     rt = runtime()
     rel = 'Lua/BuildingTemplate/Sinkhole.generated.lua'
     db.load_at(rt, db.read(Path(db.TREES['1.1.0']) / rel), '=' + rel)
@@ -140,19 +154,19 @@ def sinkhole(missing=None, veto=False):
         rt.execute(missing + '=nil')
     if veto:
         rt.execute('SMRFixPack_Disabled.SinkholeIndestructible=true')
-    load_module(rt, 'SinkholeIndestructible')
+    load_module(rt, 'SinkholeIndestructible', rev)
     before = entry(rt, 'SinkholeIndestructible').status
     rt.execute('Msg("ClassesBuilt")')
     return rt, before
 
 
-def main():
+def historical_main():
     bench = db.Bench('C90 actual core: decline, ordered writes, and healing of status')
     for tree in ('1.0.7', '1.1.0'):
         expected = ['Saint.modify_trait=TraitReligious'] if tree == '1.0.7' else []
         for missing in (None, 'GetTraitLabel', 'TraitPreset.AddDomeColonistsModifier',
                         'LabelContainer.SetLabelModifier'):
-            rt, before = saint(tree, missing)
+            rt, before = saint(tree, missing, rev=C90_HARMFUL_REV)
             after = entry(rt, 'SaintBlessing').status
             stopped = missing in ('GetTraitLabel', 'TraitPreset.AddDomeColonistsModifier')
             branch_log = ('corrected 1 dome-colonists' if tree == '1.0.7'
@@ -171,14 +185,14 @@ def main():
                     bench.check('1.1.0 Saint arms the save re-base despite decline',
                                 any('save re-base armed for 1 preset(s)' in s
                                     for s in rt.globals().LOGS.values()))
-        rt, before = saint(tree, veto=True)
+        rt, before = saint(tree, veto=True, rev=C90_HARMFUL_REV)
         bench.check('%s Saint veto stops the pass' % tree,
                     before == 'disabled' and entry(rt, 'SaintBlessing').status == 'disabled'
                     and writes(rt) == [] and len(rt.globals().LOGS) == 1)
 
     expected = ['class.indestructible=true', 'template.indestructible=true']
     for missing in (None, 'class', 'DestroyBuildingImmediate'):
-        rt, before = sinkhole(missing)
+        rt, before = sinkhole(missing, rev=C90_HARMFUL_REV)
         after = entry(rt, 'SinkholeIndestructible').status
         bench.check('Sinkhole %s: exact ordered writes and status' % (missing or 'intact'),
                     before == ('inactive' if missing else 'active')
@@ -189,11 +203,66 @@ def main():
             bench.check('Sinkhole failed self-check is erased from UpdateSuspects',
                         entry(rt, 'SinkholeIndestructible').update_suspect is None
                         and len(rt.eval('SMRFixPack.UpdateSuspects()')) == 0)
-    rt, before = sinkhole(veto=True)
+    rt, before = sinkhole(veto=True, rev=C90_HARMFUL_REV)
     bench.check('Sinkhole veto stops the pass',
                 before == 'disabled' and entry(rt, 'SinkholeIndestructible').status == 'disabled'
                 and writes(rt) == [])
     return bench.finish('ALL DEMANDS HELD -- injected target loss, not a field reproduction.')
+
+
+def live_main():
+    bench = db.Bench('C90 live guards: declined apply cannot write, arm, or heal')
+    for tree in ('1.0.7', '1.1.0'):
+        expected = ['Saint.modify_trait=TraitReligious'] if tree == '1.0.7' else []
+        for missing in (None, 'GetTraitLabel', 'TraitPreset.AddDomeColonistsModifier',
+                        'LabelContainer.SetLabelModifier'):
+            rt, before = saint(tree, missing)
+            after = entry(rt, 'SaintBlessing').status
+            logs = list(rt.globals().LOGS.values())
+            branch_log = ('corrected 1 dome-colonists' if tree == '1.0.7'
+                          else 'save re-base armed for 1 preset(s)')
+            bench.check('%s live Saint %s: exact writes and status' % (tree, missing or 'intact'),
+                        before == after == ('inactive' if missing else 'active')
+                        and writes(rt) == ([] if missing else expected)
+                        and (not missing or len(logs) == 1)
+                        and (bool(missing) or any(branch_log in s for s in logs)),
+                        '%s -> %s; %s' % (before, after, writes(rt)))
+            if missing == 'LabelContainer.SetLabelModifier':
+                bench.check('%s live Saint preserves failed self-check in UpdateSuspects' % tree,
+                            entry(rt, 'SaintBlessing').update_suspect is not None
+                            and len(rt.eval('SMRFixPack.UpdateSuspects()')) == 1)
+                if tree == '1.1.0':
+                    bench.check('1.1.0 live Saint does not arm save re-base after decline',
+                                not any('save re-base armed' in s for s in logs))
+        rt, before = saint(tree, veto=True)
+        bench.check('%s live Saint veto stops the pass' % tree,
+                    before == entry(rt, 'SaintBlessing').status == 'disabled'
+                    and writes(rt) == [] and len(rt.globals().LOGS) == 1)
+
+    expected = ['class.indestructible=true', 'template.indestructible=true']
+    for missing in (None, 'class', 'DestroyBuildingImmediate'):
+        rt, before = sinkhole(missing)
+        after = entry(rt, 'SinkholeIndestructible').status
+        bench.check('live Sinkhole %s: exact ordered writes and status' % (missing or 'intact'),
+                    before == after == ('inactive' if missing else 'active')
+                    and writes(rt) == ([] if missing else expected)
+                    and (not missing or len(rt.globals().LOGS) == 1),
+                    '%s -> %s; %s' % (before, after, writes(rt)))
+        if missing == 'DestroyBuildingImmediate':
+            bench.check('live Sinkhole preserves failed self-check in UpdateSuspects',
+                        entry(rt, 'SinkholeIndestructible').update_suspect is not None
+                        and len(rt.eval('SMRFixPack.UpdateSuspects()')) == 1)
+    rt, before = sinkhole(veto=True)
+    bench.check('live Sinkhole veto stops the pass',
+                before == entry(rt, 'SinkholeIndestructible').status == 'disabled'
+                and writes(rt) == [])
+    return bench.finish('ALL LIVE GUARDS HELD -- desk evidence; ships unexercised in play.')
+
+
+def main():
+    historical = historical_main()
+    live = live_main()
+    return historical or live
 
 
 if __name__ == '__main__':

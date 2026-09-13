@@ -204,9 +204,21 @@ end
 -- The scaffold (one pass per load, veto re-read, F75 data_loaded latch gate,
 -- B3 ever_changed re-fire branch, DataChanged re-arm) lives in
 -- SMRFixPack.DataPatch since Phase 4 (audit C2).
+-- This verdict belongs to this module load; reloading Lua starts it false again.
+local self_check_passed = false
+
 local patch = SMRFixPack.DataPatch(FIX_ID, {
 	changed_class = "TraitPreset",
 	pass = function(ctx)
+		-- C90: DataPatch installs handlers before apply() and checks the veto, but
+		-- not its verdict. A declined self-check must prevent ALL pass work: even
+		-- a successful branch probe could otherwise write/arm healing and ctx.heal()
+		-- would erase the decline. Use the apply-success flag, not registry status:
+		-- run_apply writes status only AFTER apply() returns, including its patch().
+		-- Register applies once; Mod Options retries only optional modules (we are
+		-- not optional). A Lua reload recreates this flag, so no prior verdict survives.
+		if not self_check_passed then return end
+
 		local presets = rawget(_G, "TraitPresets")
 		if type(presets) ~= "table" then
 			-- Before DataLoaded this just means "presets not loaded yet"; after
@@ -405,6 +417,7 @@ SMRFixPack.Register(FIX_ID, {
 			{ class = "LabelContainer", method = "SetLabelModifier" },
 		})
 		if err then return err end
+		self_check_passed = true
 		patch()   -- no-op at apply time (F87); the runner fires itself once
 		          -- the classes are built AND the presets are loaded
 	end,

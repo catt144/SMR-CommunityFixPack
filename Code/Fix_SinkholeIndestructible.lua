@@ -78,9 +78,21 @@ local CLASS_ID = "Sinkhole"
 
 local log = SMRFixPack.Log
 
+-- This verdict belongs to this module load; reloading Lua starts it false again.
+local self_check_passed = false
+
 local patch = SMRFixPack.DataPatch(FIX_ID, {
 	changed_class = "BuildingTemplate",
 	pass = function(ctx)
+		-- C90: DataPatch installs handlers before apply() and checks the veto, but
+		-- not its verdict. A declined self-check must prevent ALL pass work: target
+		-- lookups alone do not recheck Require, and ctx.heal() could erase the decline
+		-- after writing the flags. Use the apply-success flag, not registry status:
+		-- run_apply writes status only AFTER apply() returns, including its patch().
+		-- Register applies once; Mod Options retries only optional modules (we are
+		-- not optional). A Lua reload recreates this flag, so no prior verdict survives.
+		if not self_check_passed then return end
+
 		-- After ClassesBuilt the class global is the flattened class itself; before
 		-- it, this pass does not run at all (the runner's own gate).
 		local classes = rawget(_G, "g_Classes")
@@ -147,6 +159,7 @@ SMRFixPack.Register(FIX_ID, {
 			{ global = "DestroyBuildingImmediate" },
 		})
 		if err then return err end
+		self_check_passed = true
 		patch()   -- no-op at apply time (F87); the runner fires itself once
 		          -- the classes are built AND the presets are loaded
 	end,

@@ -29,7 +29,7 @@ def run(main):
 
 
 def main():
-    code, baseline = run(c90.main)
+    code, baseline = run(c90.historical_main)
     assert code == 0, baseline
     demands = demand_labels(baseline, '  PASS  ')
     covered = set()
@@ -64,11 +64,15 @@ def main():
          'though DataPatch\'s runner still fires its pass'),
     ]
     original_read = db.read
+    original_c90_module_text = c90.module_text
     with tempfile.TemporaryDirectory(prefix='c90-falsifiers-') as tmp:
         root = Path(tmp)
         for name, rel, old, new, required in variants:
             original = Path(db.REPO) / rel
-            source = original_read(original)
+            historical_module = (rel.startswith('Code/Fix_') and not name.startswith('C89'))
+            module_name = Path(rel).stem.removeprefix('Fix_')
+            source = (original_c90_module_text(module_name, c90.C90_HARMFUL_REV)[0]
+                      if historical_module else original_read(original))
             # The same veto line belongs to both WhenActive and DataPatch.
             expected_count = 2 if name == 'veto removed' else 1
             assert source.count(old) == expected_count, (name, source.count(old))
@@ -79,9 +83,14 @@ def main():
             def read(path):
                 return original_read(scratch if Path(path).resolve() == original.resolve() else path)
 
+            def c90_module_text(name, rev=None):
+                if historical_module and name == module_name and rev == c90.C90_HARMFUL_REV:
+                    return original_read(scratch), 'scratch:' + rel
+                return original_c90_module_text(name, rev)
+
             harness = c89 if name.startswith('C89') else c90
-            with patch.object(db, 'read', read):
-                code, output = run(harness.main)
+            with patch.object(db, 'read', read), patch.object(c90, 'module_text', c90_module_text):
+                code, output = run(c89.main if harness is c89 else c90.historical_main)
             failed = demand_labels(output, '  FAIL  ')
             assert code == 1 and required in failed, (name, code, output)
             if harness is c90:
@@ -118,6 +127,29 @@ def main():
     assert demands <= covered, 'unfalsified C90 demands: %s' % (demands - covered)
     print('All 8 scratch variants failed as required; %d/%d C90 demands falsified.'
           % (len(demands & covered), len(demands)))
+
+    # A removed production guard must resurrect the measured harm on the live body.
+    for module, required in (
+        ('SaintBlessing', '1.1.0 live Saint does not arm save re-base after decline'),
+        ('SinkholeIndestructible', 'live Sinkhole DestroyBuildingImmediate: exact ordered writes and status'),
+    ):
+        source, chunk = original_c90_module_text(module)
+        old = '\t\tif not self_check_passed then return end'
+        assert source.count(old) == 1
+
+        def c90_module_text(name, rev=None):
+            if name == module and rev is None:
+                return source.replace(old, '\t\t-- scratch: apply-success guard removed'), chunk
+            return original_c90_module_text(name, rev)
+
+        with patch.object(c90, 'module_text', c90_module_text):
+            code, output = run(c90.live_main)
+        failed = demand_labels(output, '  FAIL  ')
+        assert code == 1 and required in failed, (module, code, output)
+        print('EXPECTED FAIL: live %s apply-success guard removed (exit %d)' % (module, code))
+        for label in sorted(failed):
+            print('  ' + label)
+    print('Both live guard removals resurrected the measured bypass as required.')
     return 0
 
 

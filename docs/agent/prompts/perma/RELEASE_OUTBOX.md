@@ -116,6 +116,15 @@ behaviour changes on the happy path, the F58 fix-list row is unchanged, and **no
 release pass carries one at that level of detail. `items.lua` and `metadata.lua` are untouched (no
 module added, renamed or dropped — H-10 does not fire).
 
+**C90 also built 2026-09-12 for v10 — no public row and no count change.**
+`Code/Fix_SaintBlessing.lua` and `Code/Fix_SinkholeIndestructible.lua` now require their local
+apply-success verdict before any DataPatch pass work. Declined self-checks cannot write flags or
+preset data, arm Saint's save repair, or erase the failure through ctx.heal(). Status `fixed` on
+desk evidence; ships unexercised in play (ck158/ck130). C89 is unchanged: its claimed stale-verdict
+retry gap is refuted on the current non-optional path. Evidence: `reports/C90_GUARDS_BUILD.md`.
+For release accounting, enumerate the changed paths above: C90 changes both modules, although the
+build brief called it a single additional module. Do not add a card, fix-list or site row for it.
+
 - **Re-derive every count.** These three are **+3** on the fix count, but the Held
   section above retires F37, F43 (+F118 rider) and — per
   `reports/SURFACE_AUDIT_2026-09-12.md` — possibly **F31**, so the net is not +3.
@@ -144,12 +153,9 @@ module added, renamed or dropped — H-10 does not fire).
   line is not a count and could have gone early, but the owner ruled it ordinary release-lane work —
   one commit, one pass, the whole page correct at once. **`:9` needs no re-derivation** (v9 is live on
   both stores, and v10 will be by then); the other five belong to this batch's single count pass.
-- **Two new candidate entries were filed by this build and neither is a player
-  surface:** `C90` (a defect in the pack's own core — a declined `DataPatch`
-  self-check still patches shipped data; reaches `Fix_SaintBlessing` and
-  `Fix_SinkholeIndestructible`) and `C91` (vanilla leaks the Building Codes
-  maintenance modifier on repeal; a dev-report candidate). Neither gets an outbox
-  entry; both want owner attention separately.
+- **Neither C90 nor C91 is a player surface.** C90 is now built for v10 in the two modules
+  named above, with no public row. C91 remains a candidate: vanilla leaks the Building Codes
+  maintenance modifier on repeal. C91 work remains outside this build.
 
 ---
 

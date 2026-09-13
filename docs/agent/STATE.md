@@ -36,9 +36,9 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   play for the first time (:142 inactive → :160 active, `save re-base armed for 1 preset(s) of 2`).
 - ✅ BOTH 09-12 LANES REPORTED: build `59c8c47` C85 + `98d0461` C89 (⚖️ judgment call, FAQ count 3→4) + `4dc5073` C88,
   audit `4c7b11a` (ck159).
-  ⛔ **C90** measured: declined passes can write/arm healing, then restore active; fix shape UNRULED (ck158).
+  ✅ **C90 BUILT for v10**: Saint + Sinkhole apply-success guards; `fixed`, unexercised; `reports/C90_GUARDS_BUILD.md`.
   **C91** vanilla leaks the Building Codes modifier on repeal. ✅ F60 harness repaired from git; deskbench 20/20 HELD.
-  C90 control 18/18 + all eight scratch falsifiers discriminate; limits/census: `reports/DESKBENCH_C90.md`.
+  C90 historical + live controls HELD; original scratch + live guard removals discriminate; reset moot on current non-optional path.
 - ⏭ NEXT (⭐ UNBLOCKED — ck158 was the last gate): `RELEASE.md` over the outbox's **Held** batch + the 3 Pending = **v10**; text =
   `reports/still-needed/WORDING_RULED.md` + its ⚖️ **VOICE RULE** (binds every surface); ck156 RULED (retire F37 + F43/F118,
   F21 STAYS, F31 → the audit). ⛔ Re-derive every count once. Then the owner's upload + the **held** site deploy.
@@ -133,7 +133,7 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 - CLOSED 09-12: **150** (dev reply POSTED, majority of A+B) · **147** · **144** · **149** (by v8). **148** DEFERRED (skip, chain not started) · **153** RULED post it.
 - **132** SKIP 09-12: warn stays 12288. ⛔ **EVICTION IS DEFERRED UNTIL v10 IS LIVE (owner 09-12)** — never fire
   `STATE_EVICTION.md` before launch, the warn is expected; keep STATE edits minimal (hard cap 18432). **C90** shape RULED 09-12 — apply-success guards in Saint + Sinkhole only, NOT the shared core,
-  ⛔ never gate on `entry.status == "active"`; NOT BUILT.
+  ⛔ never gate on `entry.status == "active"`; BUILT, desk-only evidence; no public row.
 - 98 rig half only (⛔ Steam = ONE branch at a time, owner 09-08). **99/100/101 CLOSED 09-12, overtaken**: six modules
   deleted `2dc1dbe` (3 re-seamed 04b), v6's card carried the 1.1.0/1.0.7 note, hotfix2 chain ran + closed (`HOTFIX_2_AUDIT.md`).
 - **112 RULED 09-12 = (a) REWORD, LANDED** (⚖️ reverses the 09-09 (c); card bullet 3 + both §3 backups, 5 copies,

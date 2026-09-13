@@ -856,23 +856,27 @@ patch, and they asked us to carry the fix meanwhile.
 - **C90 — a bug in our own pack** (`agent/bugs/C90.md`). A module whose safety self-check *fails* can still
   bypass that decision. **Measured at the desk 09-12:** Sinkhole writes both flags after a missing-target
   decline; Saint rewrites old-branch data or arms its 1.1.0 save repair. Both then report **active** again,
-  clearing the failed self-check from the update warning. No field trigger is established. **Owner decision
-  still owed:** guard the two modules (recommended), or change the shared core's apply-verdict contract.
+  clearing the failed self-check from the update warning. No field trigger is established. **Ruled and built:**
+  guard the two modules; the shared core's apply-verdict contract is unchanged.
   C89 already guards its pass; neither current OnDataReady caller exposes the same data-write gap.
-  **No production fix landed.** Full evidence and limits: `agent/reports/DESKBENCH_C90.md`.
+  **Production guards built 09-12; status `fixed`, unexercised in play.** Original measurement:
+  `agent/reports/DESKBENCH_C90.md`; build controls and reset finding: `agent/reports/C90_GUARDS_BUILD.md`.
   - ✅ **RULED 2026-09-12: the bounded shape — per-module apply-success guards in `Fix_SaintBlessing` and
     `Fix_SinkholeIndestructible`.** ⛔ **NOT** the shared core's apply-verdict contract; the four DataPatch
     callers and `OnDataReady` are out of scope. ⛔ **Hard constraint, carried by both `agent/bugs/C90.md` and
     `agent/reports/DESKBENCH_C90.md`: do not gate the pass on `entry.status == "active"`** — `run_apply` sets
     status only *after* apply returns, so a legitimate live re-apply calls the pass while the previous status is
     still inactive. Any implementation must also define reset/retry behaviour rather than treating a once-true
-    flag as an everlasting success verdict. ⚠️ **Nothing is built.** This authorises the shape, not a ship.
+    flag as an everlasting success verdict. **SOURCE: reset is moot on today's path** — Register applies
+    once, Mod Options retries only `def.optional`, and none of these modules is optional; Lua reload
+    recreates the local false flag. C89's claimed stale-verdict retry gap is refuted within that ordering;
+    its attended module is unchanged. A future retry path must reset before Require.
   - ✅ **RULED 2026-09-12 — v10 CARRIES C90.** The owner pulled the build forward onto the launch path and
-    asked for a prompt: `agent/prompts/C90_GUARDS_BUILD.md` (one-off, `git rm` when fired). Scope is
+    asked for a prompt, now fired and removed; evidence is `agent/reports/C90_GUARDS_BUILD.md`. Scope is
     unchanged — the two modules only. ⛔ It ships **unexercised**: the guard cannot fire on a healthy 1.1.0
     install, where no target is missing, so the honest status is `fixed` on desk evidence and **never**
     `tested-attended` (the ck130 Saint-heal precedent). C90 gets **no public row** — our own bug, invisible
-    to players — but it is v10's **fifth** changed module, after the three fixes and hardening row 3.
+    to players. Both Saint and Sinkhole changed; the release outbox names both for batch accounting.
 - **C91 — the game leaks the Building Codes maintenance change on repeal** (`agent/bugs/C91.md`). Repeal the
   law and every building it touched keeps the maintenance change; the developers clearly know, because they
   shipped a one-time save cleanup for it rather than fixing repeal. **Good material for the developer
