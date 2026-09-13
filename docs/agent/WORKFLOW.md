@@ -57,6 +57,11 @@ time and each one is named after the miss it prevents.
    mirrored into `docs/PLAYTEST_CHECKLIST.md` → "Decisions waiting on you"
    (one line + pointer), and struck the moment it is decided. **An owner
    decision recorded only in an entry or a report is not considered asked.**
+   **Changing an item's status ALSO means updating its marker.** Update the
+   checklist's `<!-- ck:N status:... owner:... -->` marker in the same edit,
+   including whether an action is still owed by the owner. Regenerate the
+   owner register after editing its source; for the contained regeneration
+   route, see "Writing in a shared tree" below.
 5a. **A ruling carries the state it was made in (R10b, adopted 2026-09-12,
    checklist 161).** When you write an owner ruling down, record the CONDITION
    it was made under beside the words — what was broken, what was being triaged,

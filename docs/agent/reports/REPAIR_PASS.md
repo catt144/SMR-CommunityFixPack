@@ -328,3 +328,153 @@ from every commit. The peer subsequently committed it as `b74a84f`,
 which is the final validation HEAD here. Each repair commit names exact owned paths. No archive file,
 CLAUDE/AGENTS source or mirror, checklist marker, bug status, or game file changed.
 All load-bearing results of this stopped pass are recorded here.
+
+
+## Group C, completed
+
+2026-09-13. Follow-up baseline `cda31de`; Part 1 completed. The corrected
+REPAIR_PASS_C stop rule treats a refuted item as a finding to skip while
+continuing independent repairs. The initial report above remains historical;
+this section supersedes its Group C completion state.
+
+### Item 1 - marker obligation: reproduced and repaired
+
+Claim: the status-change/marker-update rule had no canonical authoring home.
+`rg -n --glob '*.md' 'updating its marker' docs/agent` found the affirmative
+instruction only in the retired handoff, with audit/brief descriptions elsewhere.
+Now WORKFLOW rule 5, beside owner-decision mirroring, says:
+
+> **Changing an item's status ALSO means updating its marker.** Update the
+
+Its next lines require the marker and owner-action field to change in the same
+edit and route regeneration to WORKFLOW's shared-tree section. The handoff's
+old sole-home claim, copied generation instructions and recorded coverage counts
+were replaced with the canonical pointer. Final lookup:
+`rg -n 'updating its marker' docs/agent/WORKFLOW.md`.
+
+### Item 2 - ignored implementation prompt: reproduced and repaired
+
+Claim: `.claude/IMPLEMENT_PROMPT.md` still opens with a live firing route and
+has no spent banner. Direct read confirmed both. Its opening now says
+**SPENT - DO NOT FIRE (2026-09-13)** above **Historical firing route (disabled)**;
+the executable `task` line and **Fire with** label were removed. Historical
+instructions remain as a record. `git check-ignore .claude/IMPLEMENT_PROMPT.md`
+confirms it is ignored: this edit exists on disk and is intentionally not in
+any commit. A Python opening-line check confirms SPENT precedes the historical
+route and the old firing label is absent. The historical four-error narrative
+was not re-audited; only the executable-entry defect was repaired.
+
+### Item 3 - handoff pilot claim and retirement residue: reproduced and repaired
+
+Claim: HANDOFF_ORCHESTRATOR still recommends a removal that already happened.
+`Test-Path docs/agent/prompts/SELFCHECK_PILOT.md` is False and
+`git log --diff-filter=D --oneline -- docs/agent/prompts/SELFCHECK_PILOT.md`
+identifies `cf8d51f`. Its retained row now reads:
+
+> **`prompts/SELFCHECK_PILOT.md`** - **REMOVED 2026-09-13 on the owner's word, `cf8d51f`.**
+
+The pilot's supposed live payload is refuted and was skipped. No pilot was
+recreated. The handoff has a **RETIRED - DO NOT FIRE** banner at its executable
+entry, routes current work to DISPATCH and the generated owner queue, and no
+longer asks the owner to schedule its deletion as another task. Its remaining
+content is explicitly a retained snapshot. The prompt map carries the same
+retirement route. Unique retained notes and the archive-citation warning remain;
+file removal is still the owner's call.
+
+### Item 4 - shipped comment grammar and wrapping: reproduced and repaired
+
+Claim: the metadata subject/verb interruption, inconsistent backticks and
+items.lua module-list comment exceeded surrounding wrapping. Direct reads
+confirmed each. Both metadata comments now use the consistent short reference
+`RELEASE.md` with its Release rails section, with the full resolving path beside
+the first use. The subject/verb grammar is repaired, and the items gate citation
+wraps across comment lines without changing its meaning. New reference lines:
+
+```text
+metadata.lua:73: -- ⭐ 2026-09-10, v7 words (`RELEASE.md` step 1): count word Forty-six → FORTY-EIGHT
+metadata.lua:81: -- ⭐ 2026-09-12 for v10 (`RELEASE.md` step 1 over the outbox's Held + 3 Pending):
+metadata.lua:160: -- rail (`RELEASE.md § Release rails`), reworded 2026-08-24, puts hand edits
+metadata.lua:162: -- owner's sitting. Reference: docs/agent/prompts/perma/RELEASE.md.
+metadata.lua:181: -- behaviour. The editor/version rail (`RELEASE.md § Release rails`) leaves
+metadata.lua:211: -- ⭐ REWRITTEN WHOLESALE 2026-09-10 for v7 (`RELEASE.md` step 1, from `RELEASE_OUTBOX.md`).
+metadata.lua:221: -- (`RELEASE.md` step 1, from `RELEASE_OUTBOX.md`): the F59 repair, named as the pack's OWN
+metadata.lua:226: -- ⭐ REWRITTEN 2026-09-12 for v10 (`RELEASE.md` step 1, from `RELEASE_OUTBOX.md`'s three
+metadata.lua:304: -- restored by merge the same night (v8 close-out inside the `RELEASE.md` run for v9).
+items.lua:203: -- above and the module-list gate (tools/doccheck.py MODULE SETS +
+items.lua:204: -- tools/upload_preflight.py): a module absent from this file SHIPS ABSENT.
+```
+
+Before writing, independent comment scans emitted nonzero totals for both Lua
+files, so no POST_UPLOAD_CLOSE restore was owed. Verification compared Lua lexer
+default-channel tokens to `git show cda31de:<file>` and parsed both edited files
+with luaparser: executable tokens are identical and syntax passes. Every added
+Lua line is a comment within the requested wrap. The referenced RELEASE.md and
+its `## Release rails` heading exist. `git diff cda31de -- Code/` is empty.
+
+### Marker output and checks
+
+`python tools/doccheck.py --emit-counts` before Part 1, verbatim:
+
+```text
+MARKER INTEGRITY: 46 on disk, 45 parsed; WARN; RED only after an owner ruling adopts vocabulary and uniqueness enforcement
+  warn line 73: unparsed <!-- ck:169 status:part-ruled owner:yes -->
+  warn line 73: unknown status part-ruled
+  warn duplicate ck:144 at lines 2257, 2331
+  warn duplicate ck:169 at lines 73, 111
+```
+
+After Part 1, verbatim (unchanged, as required while 170(a) is open):
+
+```text
+MARKER INTEGRITY: 46 on disk, 45 parsed; WARN; RED only after an owner ruling adopts vocabulary and uniqueness enforcement
+  warn line 73: unparsed <!-- ck:169 status:part-ruled owner:yes -->
+  warn line 73: unknown status part-ruled
+  warn duplicate ck:144 at lines 2257, 2331
+  warn duplicate ck:169 at lines 73, 111
+```
+
+Checker verdict: `doccheck: GREEN`; `git diff --check` passes. No gate or
+threshold was added in Part 1, so no new gate falsifier is required. Part 1
+repairs delete no file. Brief deletion is a separate consumed-prompt close-out.
+
+Emitted counts:
+
+```text
+BUILD STATE (emitted by tools/doccheck.py)
+- modules: 46 registered (46 default-active, 0 optional-gated files)
+- Code/*.lua files: 47
+- TestKit probes: 97
+- BUGS index rows: 119 F + 13 D + 93 C
+```
+
+Existing budget warnings, verbatim:
+
+```text
+    smr-bug-library           3685 B  ⚠ over the 3072 B target
+    smr-orientation           3312 B  ⚠ over the 3072 B target
+PUSH SET: 42199 B in 5 file(s) ≈ 19k tokens (budget 40960 B)  ⚠ OVER
+```
+
+### Not done and why
+
+- **Part 2:** checklist 170(a) is still open. Its marker is
+  `<!-- ck:170 status:open owner:yes -->` and its body still asks the owner to
+  choose the vocabulary. Command: `rg -n -A10 'ck:170'
+  docs/PLAYTEST_CHECKLIST.md`. No marker, duplicate rule, vocabulary enforcement,
+  checker threshold or checklist/entry status changed. The on-disk/parsed gap
+  remains visible until a ruling authorizes reconciliation.
+- **Pilot:** already removed in `cf8d51f`; the live-payload claim was refuted,
+  recorded and skipped rather than halting the group.
+- **HANDOFF_ORCHESTRATOR deletion:** not authorized by this follow-up; retained
+  with the explicit retirement banner and canonical routes.
+- **Other historical routes:** the combined self-check report was outside this
+  follow-up's enumerated Part 1 edits and retains its historical pilot references.
+  PLAN_TODO was observed changing to HISTORY ONLY during review; it was not edited.
+  Its remaining call to IMPLEMENT reaches the now-spent executable entry.
+- **Ignored-file distribution:** IMPLEMENT_PROMPT is repaired locally; ignored
+  material is deliberately not force-added to Git.
+- **Attended or external actions:** no boot, runtime test, pack, upload, portal
+  call or push. Independent adjudication remains a different session's work.
+
+Commit identity and diff-stats are recorded in the consumed-prompt close-out
+below, after the Part 1 commit exists. All load-bearing findings are on disk.

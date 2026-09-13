@@ -1,5 +1,9 @@
 # Handoff — session → next session (model-agnostic)
 
+> **RETIRED — DO NOT FIRE (2026-09-13).** The launch and pending outbox are
+> closed. Use `DISPATCH.md` for current work and `docs/WAITING_ON_YOU.md` for
+> the owner's queue. The remaining text is a retained snapshot, not a task list.
+
 ## ✅ v10 IS SHIPPED. THIS DOCUMENT NO LONGER HAS A LAUNCH TO DRIVE.
 
 Rewritten end-to-end **2026-09-13** after the v10 arc closed. Everything the launch needed is done and its
@@ -7,8 +11,8 @@ blocks are deleted, per the rule below. **There is no agent item blocking anythi
 
 ⏳ **This file's own removal condition is MET and it is the owner's call** (owner, 2026-09-11: it stays in
 `perma/` "until the pending outbox is empty or the owner says things have settled, then it is `git rm`'d").
-`RELEASE_OUTBOX.md`'s **Pending is now empty**. ⇒ **Ask the owner whether to `git rm` this** and let
-`perma/DISPATCH.md` take over as the catch-all. Do not delete it unasked; do not keep growing it either.
+`RELEASE_OUTBOX.md`'s **Pending is now empty**. `perma/DISPATCH.md` has taken over as the catch-all.
+This file is retained pending the owner's removal call; do not grow it or fire its old routes.
 
 ⛔ **THIS IS A WORKING DOCUMENT, NOT A SESSION LOG.** History lives in `docs/archive/SESSION_LOG.md`
 (append-only, newest first). **If you close something here, DELETE its block.**
@@ -70,7 +74,7 @@ contradicted its own closed list for most of a day.
   trees, not POSITION** — the classifier reported a merely *moved* block as a new `DefineClass` and
   attributed `__parents` across adjacent blocks (`reports/PINNED_PARENTS_PASS.md`, one of seven rows).
 - **Desk NEXT, unclaimed:** `prompts/DLC_DEEP_CHECK.md` (bounded; framing in its banner).
-- **`prompts/SELFCHECK_PILOT.md`** — unreachable since ck133/112; **removal recommended, not done.**
+- **`prompts/SELFCHECK_PILOT.md`** — **REMOVED 2026-09-13 on the owner's word, `cf8d51f`.**
 - **83 (SHARED TestKit)** — two of its five proposals (a `RunAll` owner filter, a `PACK_ID` on the
   enable-path leg) improve the kit **for us** regardless of the opt-in mod.
 - **Hotfix 3 — 135 only.** RULED 09-12: take the `luafn.py` delimiter fix. Desk tool, **0 shipped hashes**.
@@ -112,19 +116,11 @@ What is only here:
 
 ---
 
-## 4 · ⭐ THE MARKER OBLIGATION — still undocumented, still bites
+## 4 · Marker rule — homed in WORKFLOW
 
-Checklist items carry a status marker (`<!-- ck:159 status:ruled owner:no -->`) and a register is generated
-from them. **Nothing in `WORKFLOW.md`, `CLAUDE.md`, `README.md` or `perma/` yet tells an agent that changing
-an item's status ALSO means updating its marker** — every item that moves without one makes the register
-quietly wrong. ⇒ **Say this explicitly in any brief you write until it is documented.**
-⚠️ `doccheck` reported **43 marked, 29 needing a marker** (2026-09-13) — ⛔ read the live number from
-`doccheck`, never this line. ⛔ Permitted vocabulary is `open` · `ruled` · `closed` · `deferred` with
-`owner:yes|no`; do not invent a status word.
-
-⛔ **After a CHECKLIST-ONLY edit run `python tools/doccheck.py --regen-waiting`, NOT `--regen`.** `--regen`
-rebuilds both indices from **every entry on disk, a peer's uncommitted ones included**. An edit that touches
-**entries** as well still needs the full `--regen` — the distinction is what you changed, not a preference.
+The mandatory marker-update rule now lives in `agent/WORKFLOW.md` rule 5, beside owner-decision mirroring.
+Its regeneration route lives there under "Writing in a shared tree". Read those canonical homes rather
+than copying this handoff's retired instructions or recorded counts.
 
 ⭐ **Archiving a checklist body that `STATE.md` cites by number is a silent failure, not a tidy-up** —
 `docs/archive/` sits behind an `.rgignore`, so a default `rg` would never surface the body again.
