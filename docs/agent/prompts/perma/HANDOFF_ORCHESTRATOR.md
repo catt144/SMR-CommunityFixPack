@@ -37,28 +37,24 @@ evidence is each entry's **§Attended check** plus checklist **158**.
 
 | # | what | whose | blocks |
 |---|---|---|---|
-| **1** | **Land the three ruled retirements** | agent, no ruling needed | the count pass — do it FIRST |
-| **2** | **`prompts/perma/RELEASE.md`** over Held + 3 Pending | agent, then owner uploads | v10 itself |
+| ✅ **1** | ~~Land the three ruled retirements~~ — **DONE 2026-09-12, `560343a`** | — | — |
+| ✅ **4** | ~~C90 — build or skip~~ — **owner ruled v10 CARRIES it; BUILT `153d180`+`e5f1947`** | — | — |
+| **2** | **`prompts/perma/RELEASE.md`** over Held + 3 Pending | agent, then owner uploads | ⭐ **v10 itself — the only agent item left** |
 | **3** | **Rule on 3 uncommitted site files** | ⛔ **owner only** | the site deploy |
-| **4** | **C90 — build the guards, or let v10 go without** | ⛔ **owner's call** | nothing; decide so it stops recurring |
 
-### 1 · The retirements — ruled, NOT landed, and they must land before the count pass
+### 1 · ✅ The retirements — LANDED 2026-09-12 (`560343a`)
 
-All three are still in `Code/` **and** registered in `items.lua`, verified 2026-09-12:
+F37 (`Fix_GhostFarmOxygen`), F43 + its F118 rider (`Fix_LayoutTechLock`) and F31 (`Fix_AnomalyCaveInMap`) are deleted
+from `Code/`, `items.lua` and `metadata.lua` together (H-10), and all four entries are restatused. **The tree reads
+47 Code files / 46 registered modules, all three sets agreeing by name.** ⛔ Do not re-land them and do not re-derive
+the rulings (ck156, ck159).
 
-| entry | module | ruled by |
-|---|---|---|
-| **F37** | `Fix_GhostFarmOxygen` | ck156 |
-| **F43** + **F118** rider | `Fix_LayoutTechLock` | ck156 |
-| **F31** | `Fix_AnomalyCaveInMap` | ck159 |
+⛔ **Do NOT carry any predicted count from any document** — the Held section's "49 → 48 → 47" and ck159's "Forty-six"
+both predate this landing. Re-derive with `doccheck --emit-counts`.
+⚠️ **Three TestKit probes now target modules that no longer ship** — `GhostFarmOxygen`, `LayoutTechLock`,
+`AnomalyCaveInMap`, plus the Wave-14 wrap rows. Expected FAIL/ERROR, named in `STATE.md`; not a regression.
 
-⛔ **H-10 applies:** a module removed from `Code/` without its `items.lua` entry going too ships **absent**, silently.
-⚠️ **Sequencing is the point, not tidiness** — the module count, the card's count word, the fix-list rows and the headline
-count all depend on this. Running RELEASE first means deriving every count twice and being wrong in between.
-⛔ **Do not carry a predicted post-retirement count from any document** (the Held section's "49 → 48 → 47" predates F31).
-Re-derive with `doccheck --emit-counts` after they land.
-
-### 2 · Then `RELEASE.md`
+### 2 · ⭐ `RELEASE.md` — the only thing left on the agent side
 
 See §2 for the full ordered path. It is reusable — ⛔ never `git rm` it.
 
@@ -68,38 +64,57 @@ See §2 for the full ordered path. It is reusable — ⛔ never `git rm` it.
 (re-read 2026-09-12). ⛔ **A DIFFERENT git repo: do not commit, stash, discard or checkout there.** Possibly related:
 open decision **47** (two modder-page wordings) touches the same page.
 
-### 4 · C90 — decide, do not drift
+### 4 · ✅ C90 — RULED AND BUILT, do not re-open
 
-Shape is RULED and nothing is built (§3b has the constraints). The question is only **does v10 carry it**. A defensible
-default is **no** — it would add unexercised code to a release that is otherwise fully attended, and no field trigger is
-established. The owner decides; record the answer either way so it is not re-litigated.
+Owner ruled 2026-09-12 that **v10 carries C90**; built in `153d180` + `e5f1947`. Per-module apply-success guards in
+`Fix_SaintBlessing` and `Fix_SinkholeIndestructible` only — ⛔ **not** the shared core. Entry `bugs/C90.md` is `fixed`.
+⛔ **It ships UNEXERCISED and must never be called `tested-attended`** — the guard cannot fire on a healthy 1.1.0
+install, where no target is missing (the ck130 Saint-heal precedent). **No public row** — our own bug, invisible to
+players. ⭐ The C89 "everlasting flag" concern was **refuted** for the current path: `run_apply`'s second call site
+(`00_Core.lua:558`) is gated on `def.optional`, and no module carries `optional`. That refutation carries its
+condition — making any module optional re-opens it. **C89 was deliberately left unchanged** (it is `tested-attended`).
 
 ---
 
 ## 1a · ⛔ STATE.md EVICTION IS DEFERRED UNTIL v10 IS LIVE — owner ruling, 2026-09-12
 
-`doccheck` emits a warn every run: **STATE.md is 17,228 bytes against a warn of 12,288 and a hard cap of 18,432.**
-⛔ **Do NOT fire `prompts/perma/STATE_EVICTION.md` before v10 ships.** The owner has ruled it waits until live; the warn
-is expected and is **not** a reason to stop, to open an eviction pass, or to ask again.
+⛔ **Do NOT fire `prompts/perma/STATE_EVICTION.md` before v10 ships.** The owner has ruled it waits until live; the byte
+warn is expected and is **not** a reason to stop, to open an eviction pass, or to ask again. ⛔ **Read the live byte
+number from `doccheck`, never from this file.**
 
-⚠️ **But the headroom is ~1.2 KB and the release pass writes to STATE.** So until v10 is live:
-**keep every STATE edit as small as it can be** — replace lines rather than adding them, and prefer a pointer to prose.
-If a write would actually breach the **hard** cap, do not silently trim something load-bearing to fit: say so to the owner
-and let them choose. Eviction is the first cleanup task *after* launch.
+### ⏳⏳ THE HARD CAP IS TEMPORARILY RAISED — and putting it back is an OWED TASK
+
+**Owner ruling 2026-09-12: the hard cap moved 18 KiB → 24 KiB** (`tools/doccheck.py:97`, `STATE_MAX_BYTES`). The
+retirements left STATE at 17,778 B = **654 B** of headroom, and the release pass still had to write there; the only
+alternative was a silent mid-pass trim of load-bearing content, which the procedure forbids. **This is the first time
+the hard cap has ever moved.** ⚠️ The **warn stays at 12 KiB** on purpose — it is what fires the eviction, and a raised
+hard cap must not make the warn feel optional.
+
+⭐⭐ **OWED, IN THIS ORDER, AS THE FIRST CLEANUP AFTER v10 IS LIVE — the owner asked for this reminder by name:**
+
+1. **Run `prompts/perma/STATE_EVICTION.md`.** This is the deferred eviction, now unblocked.
+2. **Then put the hard cap BACK to `18 * 1024`** in `tools/doccheck.py` and delete the ⏳ TEMPORARY comment block
+   above the constant. ⛔ **Step 2 is not optional and is not "tidy-up": a 24 KiB cap left in place silently becomes the
+   new budget, which is exactly the failure the byte cap exists to prevent.** Every byte in STATE is paid by EVERY
+   session at boot.
+
+⚠️ **Until then, the extra 6 KiB is HEADROOM FOR ONE RELEASE, not a new budget.** Keep every STATE edit as small as it
+can be — replace lines rather than adding them, prefer a pointer to prose. Do not spend the headroom because it is there.
 
 ---
 
 ## 2 · The v10 critical path, in order
 
 0. ✅ **ck158, the attended gate — DONE 2026-09-12** (`62bbf87`). Not a step any more; listed so nobody re-opens it.
-1. ⛔ **Land the three retirements** (§1) — `Fix_GhostFarmOxygen`, `Fix_LayoutTechLock`, `Fix_AnomalyCaveInMap`, each with
-   its `items.lua` entry (H-10). Their entries get restatused. **Then** re-emit counts. Doing this after step 2 means
-   deriving every count twice.
-2. **`prompts/perma/RELEASE.md`** over the outbox's **Held** batch + the **3 Pending**. Text = `reports/still-needed/WORDING_RULED.md`
-   under the ⚖️ **VOICE RULE**. ⛔ **Re-derive every count once, carry none:** modules ± the retirements, the card count word,
-   card headlines, "real defects you cannot see today", **judgment calls three → four (C89)**, and the six `README.md` claims
-   staged in `RELEASE_OUTBOX.md`'s batch notes. ⚠️ A **fourth** module changed in v10 with **no public row** — the row-3
-   hardening in `Fix_StaleReservations` (§4). Do not go looking for a row for it.
+1. ✅ **The three retirements — LANDED 2026-09-12** (`560343a`). Not a step any more. Tree reads **47 Code files /
+   46 registered modules**, sets agreeing. ⛔ Re-emit counts rather than carrying that pair.
+2. ⭐ **`prompts/perma/RELEASE.md`** over the outbox's **Held** batch + the **3 Pending** — **this is the next action.**
+   Text = `reports/still-needed/WORDING_RULED.md` under the ⚖️ **VOICE RULE**. ⛔ **Re-derive every count once, carry
+   none:** modules, the card count word, card headlines, "real defects you cannot see today", **judgment calls three →
+   four (C89)**, and the six `README.md` claims staged in `RELEASE_OUTBOX.md`'s batch notes.
+   ⚠️ **TWO modules changed in v10 with NO public row — do not go looking for rows for them:** the row-3 hardening in
+   `Fix_StaleReservations` (§4) and **C90's guards** in `Fix_SaintBlessing` + `Fix_SinkholeIndestructible` (§1 item 4).
+   ⚠️ **Three fix-list rows come OFF** with the retirements (F37, F43, F31); F118 never had one and must not gain one.
 3. **The owner's upload**, then the formatting cleanup pass and the store-card paste backups.
 4. **The held site deploy, fired ONCE.** `a061665` (49 rows) has been held since 09-11 for exactly this; the live site shows
    **50** meanwhile, deliberately. ⛔ **Three uncommitted files in `C:\Dev\SMR-CommunityMods` are the owner's to rule on

@@ -82,8 +82,22 @@ CODE = os.path.join(REPO, "Code")
 # ⚠️ REVISIT once the 1.1.0 fallout is closed: every byte here is paid by EVERY
 # session at boot, which is the whole reason the cap exists.
 # The HARD cap is deliberately NOT moved — it is the backstop for unread flags.
+#
+# ⏳⏳ 2026-09-12 owner ruling: HARD CAP RAISED 18 KiB -> 24 KiB, **TEMPORARILY, FOR
+# THE v10 RELEASE ONLY**. This is the first time the hard cap has ever moved.
+# Reason: eviction is deferred until v10 is live (owner, 2026-09-12), the
+# retirements landing left STATE at 17,778 B = 654 B of headroom, and the release
+# pass still has to write here. The alternative was a silent trim of load-bearing
+# content mid-pass, which the procedure forbids.
+# ⛔⛔ THIS MUST BE REVERTED. The obligation is recorded in
+# `agent/prompts/perma/HANDOFF_ORCHESTRATOR.md`: once v10 is live, run
+# `agent/prompts/perma/STATE_EVICTION.md`, THEN put this back to 18 * 1024. The
+# warn stays at 12 KiB throughout on purpose — it is what fires the eviction, and
+# raising the hard cap must not make the warn feel optional.
+# ⚠️ It is HEADROOM FOR ONE RELEASE, not a new budget. Every byte here is paid by
+# EVERY session at boot. Do not spend it because it is there.
 STATE_WARN_BYTES = 12 * 1024
-STATE_MAX_BYTES = 18 * 1024
+STATE_MAX_BYTES = 24 * 1024   # ⏳ TEMPORARY (2026-09-12) — revert to 18 after the post-v10 eviction
 STATE_MAX_LINE_BYTES = 200
 
 # The standing prompt is instructions, not a logbook (rule added 2026-08-04
