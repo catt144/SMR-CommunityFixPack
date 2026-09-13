@@ -1,5 +1,12 @@
 # Handoff — session → next session (model-agnostic)
 
+## ⭐⭐ THIS DOCUMENT HAS ONE JOB: GET THE OWNER TO A v10 LAUNCH
+
+⛔ **Owner ruling, 2026-09-12.** Everything here is subordinate to shipping v10. If a task does not move v10 toward
+the two store pages and the site deploy, it waits — however tidy, however overdue, however loudly a tool warns about it.
+⛔ **Do not open a new front, a new audit or a new sweep before v10 is live.** The four items in §1 are the whole path;
+§3b's backlog is what comes *after*, not work to interleave.
+
 ⏳ **TEMPORARY resident of `perma/`** (owner, 2026-09-11): it stays until the pending outbox is empty or the owner says
 things have settled, then it is `git rm`'d. **Still true 2026-09-12** — `RELEASE_OUTBOX.md` holds 3 Pending + a Held batch.
 
@@ -22,25 +29,72 @@ The temp workaround mod is LIVE (Steam 3799500849 / Paradox 158711).
 
 ---
 
-## 1 · ⭐ THE ONE THING THE OWNER CAN FIRE RIGHT NOW
+## 1 · ⭐ THE FOUR THINGS BETWEEN HERE AND v10 — nothing else is on the path
 
-**`prompts/SITTING_158.md` — the ck158 sitting, which is the v10 gate.** Written 2026-09-12, **unfired**. Paste it into a
-fresh session when the owner is ready to play. It carries the stale-probe gate, the hazards, a **named pass artefact per
-leg** so a quiet log cannot read as a pass, and what to do with the result. The owner-facing steps stay in checklist **158**
-and are pasted from there.
+✅ **ck158, the attended gate, is DISCHARGED (2026-09-12, `62bbf87`).** C85, C89 and C88 are all `tested-attended` on the
+owner's word, per leg, by name. The one-off prompt is `git rm`'d. ⛔ Do not re-run it and do not re-derive its legs — the
+evidence is each entry's **§Attended check** plus checklist **158**.
 
-- **A · C85** minutes, any 1.1.0 colony · **B1 · C89** two seconds, any dome, and it is the real falsifier ·
-  **B2 · C89** a fresh colony, 20–30 min of ordinary play (the ⚖️ judgment call the owner asked to watch) ·
-  **C · C88** minutes, needs Building Codes → Strict + the Martian Assembly.
-- If the owner has ten minutes: **A, B1, C**. Say so before they start B2.
-- ⛔ `tested-attended` is **the owner's word to grant** and nothing else grants it.
-- ⚠️ `Fix_GhostFarmOxygen` **still ships** — ck156's retirement is staged for v10 and has not landed.
+| # | what | whose | blocks |
+|---|---|---|---|
+| **1** | **Land the three ruled retirements** | agent, no ruling needed | the count pass — do it FIRST |
+| **2** | **`prompts/perma/RELEASE.md`** over Held + 3 Pending | agent, then owner uploads | v10 itself |
+| **3** | **Rule on 3 uncommitted site files** | ⛔ **owner only** | the site deploy |
+| **4** | **C90 — build the guards, or let v10 go without** | ⛔ **owner's call** | nothing; decide so it stops recurring |
+
+### 1 · The retirements — ruled, NOT landed, and they must land before the count pass
+
+All three are still in `Code/` **and** registered in `items.lua`, verified 2026-09-12:
+
+| entry | module | ruled by |
+|---|---|---|
+| **F37** | `Fix_GhostFarmOxygen` | ck156 |
+| **F43** + **F118** rider | `Fix_LayoutTechLock` | ck156 |
+| **F31** | `Fix_AnomalyCaveInMap` | ck159 |
+
+⛔ **H-10 applies:** a module removed from `Code/` without its `items.lua` entry going too ships **absent**, silently.
+⚠️ **Sequencing is the point, not tidiness** — the module count, the card's count word, the fix-list rows and the headline
+count all depend on this. Running RELEASE first means deriving every count twice and being wrong in between.
+⛔ **Do not carry a predicted post-retirement count from any document** (the Held section's "49 → 48 → 47" predates F31).
+Re-derive with `doccheck --emit-counts` after they land.
+
+### 2 · Then `RELEASE.md`
+
+See §2 for the full ordered path. It is reusable — ⛔ never `git rm` it.
+
+### 3 · The site files — owner's word, and no agent may touch that repo
+
+`content/faq.md`, `content/for-modders.md`, `content/install.md` in `C:\Dev\SMR-CommunityMods`, still uncommitted
+(re-read 2026-09-12). ⛔ **A DIFFERENT git repo: do not commit, stash, discard or checkout there.** Possibly related:
+open decision **47** (two modder-page wordings) touches the same page.
+
+### 4 · C90 — decide, do not drift
+
+Shape is RULED and nothing is built (§3b has the constraints). The question is only **does v10 carry it**. A defensible
+default is **no** — it would add unexercised code to a release that is otherwise fully attended, and no field trigger is
+established. The owner decides; record the answer either way so it is not re-litigated.
+
+---
+
+## 1a · ⛔ STATE.md EVICTION IS DEFERRED UNTIL v10 IS LIVE — owner ruling, 2026-09-12
+
+`doccheck` emits a warn every run: **STATE.md is 17,228 bytes against a warn of 12,288 and a hard cap of 18,432.**
+⛔ **Do NOT fire `prompts/perma/STATE_EVICTION.md` before v10 ships.** The owner has ruled it waits until live; the warn
+is expected and is **not** a reason to stop, to open an eviction pass, or to ask again.
+
+⚠️ **But the headroom is ~1.2 KB and the release pass writes to STATE.** So until v10 is live:
+**keep every STATE edit as small as it can be** — replace lines rather than adding them, and prefer a pointer to prose.
+If a write would actually breach the **hard** cap, do not silently trim something load-bearing to fit: say so to the owner
+and let them choose. Eviction is the first cleanup task *after* launch.
 
 ---
 
 ## 2 · The v10 critical path, in order
 
-1. ⛔ **ck158, the sitting above.** The only thing between here and v10, and only the owner can do it.
+0. ✅ **ck158, the attended gate — DONE 2026-09-12** (`62bbf87`). Not a step any more; listed so nobody re-opens it.
+1. ⛔ **Land the three retirements** (§1) — `Fix_GhostFarmOxygen`, `Fix_LayoutTechLock`, `Fix_AnomalyCaveInMap`, each with
+   its `items.lua` entry (H-10). Their entries get restatused. **Then** re-emit counts. Doing this after step 2 means
+   deriving every count twice.
 2. **`prompts/perma/RELEASE.md`** over the outbox's **Held** batch + the **3 Pending**. Text = `reports/still-needed/WORDING_RULED.md`
    under the ⚖️ **VOICE RULE**. ⛔ **Re-derive every count once, carry none:** modules ± the retirements, the card count word,
    card headlines, "real defects you cannot see today", **judgment calls three → four (C89)**, and the six `README.md` claims
@@ -56,19 +110,26 @@ and are pasted from there.
 
 ## 3 · What is open
 
-### 3a · Owner — only three things, and two are actions not decisions
+### 3a · Owner — four things, and two of them block v10
 
-| | what |
-|---|---|
-| **158** | ⛔ the sitting = **the v10 gate**. Fire `prompts/SITTING_158.md` |
-| **144 (a)** | the owed post-upload boot. ⚠️ ck151 (c) ruled **F52 passage / F54 hub / C83 arrival join it — but only if the loaded colony already has those layouts. Otherwise SKIP THEM BY NAME**; never build a layout to make a check possible |
-| **151 (b)** | which sections of `reports/MIGRATION_DEV_REPORT.md` may go to the developers. ⚠️ **ck165 lets the owner defer this indefinitely** — it is messaging. ⛔ Do not raise it |
+| | what | blocks v10? |
+|---|---|---|
+| **site files** | ⛔ rule on `content/faq.md`, `for-modders.md`, `install.md` in `C:\Dev\SMR-CommunityMods` (§1 item 3) | ⛔ **yes — the deploy** |
+| **C90** | does v10 carry the two guards, or ship without them? (§1 item 4) | decide, then no |
+| **144 (a)** | the owed post-upload boot. ⚠️ ck151 (c) ruled **F52 passage / F54 hub / C83 arrival join it — but only if the loaded colony already has those layouts. Otherwise SKIP THEM BY NAME**; never build a layout to make a check possible | no — it is *post*-upload |
+| **151 (b)** | which sections of `reports/MIGRATION_DEV_REPORT.md` may go to the developers. ⚠️ **ck165 lets the owner defer this indefinitely** — it is messaging. ⛔ Do not raise it | no |
+
+✅ **158 is DISCHARGED** (2026-09-12) — it was the gate; it is not owed and must not reappear on any owed list.
 
 ⛔ **NOTHING ELSE IS OWED BY THE OWNER.** ck98, 133, 135, 137, 138, 140, 141, 142, 47, 53, 73, 157, 159–168 are all ruled or
 closed; 148 is deferred by the owner's word; 83–97 were offloaded or resolved (ck167). **Do not rebuild an "owed" list from
 an older document** — this one was wrong for most of 09-12 because it inherited a table that contradicted its own closed list.
 
-### 3b · Agent work, needing no ruling
+### 3b · Agent work, needing no ruling — ⛔ **AFTER v10, not alongside it**
+
+⛔ **None of this is on the launch path** (§1 is the whole path). Do not start an item here because it looks cheap;
+this list exists so the work is not *lost*, not so it is done now. The one exception is **C90**, and only if the owner
+rules in §1 item 4 that v10 carries it.
 
 - **C90 — shape RULED, NOTHING BUILT.** Per-module apply-success guards in `Fix_SaintBlessing` + `Fix_SinkholeIndestructible`.
   ⛔ **NOT** the shared core's apply-verdict contract. ⛔ **Never gate on `entry.status == "active"`** — `run_apply` sets status
@@ -118,7 +179,7 @@ on purpose (ck161, and `WORKFLOW.md` rule 5a).
 | `cc3edf2` `7e445d3` `4b6beda` | peer `smr-bugfixpack-b2`: the vanilla-diff disposition, `WORKFLOW.md:156` after-patch section **BINDING**, ck163 |
 | `fb87a6e` `e7d1eef` `441cc92` | the §4 loose ends · ⛔ **a correction: my `LAKECHK` "defect" was refuted by a peer** · attribution + the pathspec rule |
 | `7351821` | **ck163 (b) RAN — nothing found.** `reports/PINNED_PARENTS_PASS.md`, 7/7 rows clean, option (ii) NOT triggered |
-| `ce73f4a` | ⭐ `prompts/SITTING_158.md` — the sitting prompt, unfired |
+| `ce73f4a` → `62bbf87` | `prompts/SITTING_158.md` written, then **FIRED + `git rm`'d**: ck158 attended, all three `tested-attended`, log archived |
 | `38875a2` | **ck165 — replies are PULL-ONLY** (`WORKFLOW.md` rule 5b) |
 | `b162e37` `e4600f2` `5665ee2` | ck166 (133 closed, 135→hotfix 3) · ck167 (opt-in offload, + `11a5528` in `SMR-OptInPack`) · ck168 (98, row 3 built, 151 c) |
 
@@ -165,9 +226,10 @@ problem with it, tell the owner — do not act on it**, and do not spend a sessi
    them. **Nothing in `WORKFLOW.md`, `CLAUDE.md`, `README.md` or `perma/` yet tells an agent that changing
    an item's status ALSO means updating its marker.** v10 will close items and add them, and **every item
    that moves without its marker makes the register quietly wrong.** ⇒ **Say this explicitly in any brief
-   you write until it is documented.** ⚠️ `doccheck` currently reports **41 marked, 28 needing a marker** —
-   and **ck158 is one of the unmarked**, so the sitting has to ADD one rather than update one. ⛔ Match the
-   vocabulary of neighbouring items; do not invent a new status word.
+   you write until it is documented.** ⚠️ `doccheck` reports **42 marked, 28 needing a marker** (2026-09-12,
+   after ck158 added its own) — ⛔ read the live number from `doccheck`, never this line. **v10 closes several
+   items**, so this fires repeatedly. ⛔ Match the vocabulary of neighbouring items — the permitted set is
+   `open` · `ruled` · `closed` · `deferred` with `owner:yes|no`; do not invent a status word.
 2. ⛔ **After a CHECKLIST-ONLY edit, run `python tools/doccheck.py --regen-waiting`, NOT `--regen`.**
    `--regen` rebuilds both indices from **every entry on disk, a peer's uncommitted ones included**.
    `--regen-waiting` rewrites only `docs/WAITING_ON_YOU.md`. ⚠️ An edit that touches **entries** as well as

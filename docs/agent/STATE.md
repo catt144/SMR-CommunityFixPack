@@ -131,7 +131,8 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   the same body; ✅ **ck151 (e) RULED 09-11: 1.0.7 STAYS FROZEN**, work targets 1.1.0 — but the portals serve ONE version,
   so Steam/PDX 1.0.7 players run the LIVE pack and F59 has no version gate. Desk only, no build.
 - CLOSED 09-12: **150** (dev reply POSTED, majority of A+B) · **147** · **144** · **149** (by v8). **148** DEFERRED (skip, chain not started) · **153** RULED post it.
-- **132** SKIP 09-12: warn stays 12288, over it since 09-11. **C90** shape RULED 09-12 — apply-success guards in Saint + Sinkhole only, NOT the shared core,
+- **132** SKIP 09-12: warn stays 12288. ⛔ **EVICTION IS DEFERRED UNTIL v10 IS LIVE (owner 09-12)** — never fire
+  `STATE_EVICTION.md` before launch, the warn is expected; keep STATE edits minimal (hard cap 18432). **C90** shape RULED 09-12 — apply-success guards in Saint + Sinkhole only, NOT the shared core,
   ⛔ never gate on `entry.status == "active"`; NOT BUILT.
 - 98 rig half only (⛔ Steam = ONE branch at a time, owner 09-08). **99/100/101 CLOSED 09-12, overtaken**: six modules
   deleted `2dc1dbe` (3 re-seamed 04b), v6's card carried the 1.1.0/1.0.7 note, hotfix2 chain ran + closed (`HOTFIX_2_AUDIT.md`).
