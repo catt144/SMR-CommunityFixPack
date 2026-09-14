@@ -148,6 +148,33 @@ weak … flip it to codex doing most of the build."* Flipped: **Codex builds 01,
 audits 99 (Fable)**; your two sittings are attended by Claude. 01's re-validation of the cut is now the first
 cross-vendor check, before any code.
 
+**⭐ UI RULING, 2026-09-13, during the 02 sitting — the floating panel is NOT the shape you want.**
+Verbatim: *"I am not a huge fan of the panel anyway, its in my way. I would honestly much prefer a smart panal that
+replaces the area the cheats would normally be in. And for things that don't need to be there Create a SMR Icon on
+the games dock and just reuse the games natural popout menu system if thats possible. That would likely be safer,
+clearer, and a better experience."* This **supersedes** the "both UIs" line above: the per-object half stays (it was
+always the plan), the **floating tabbed panel is demoted**, and the second surface becomes a **dock icon reusing the
+game's own popout menus**.
+
+Feasibility, read at source during the sitting, so 03A does not start from zero:
+- **Per-object section: route PROVEN.** `Infopanel.lua:26-51` builds the vanilla Cheats section from the selected
+  object's own `Cheat*` methods; the sitting watched it render, and your own screenshots show a depot's section
+  carrying **Fill** and **Empty**. This was already P2's job.
+- **Dock icon + native popout: route PLAUSIBLE, not verified.** The HUD is an XDef with named containers including
+  **`idBottom`** (`Data/XDef/HUD.lua`), and there are ready-made `HUDButtonFrame` / `HUDButtonTemplate` XDefs to
+  spawn. That is the same injection shape as the `OnMsg.Shortcuts` hook the sitting proved works. ⛔ Not tested —
+  it is the third vanilla-UI injection problem and belongs in 03A's spike.
+
+⚠️ **One thing to decide, raised not assumed:** the floating panel's **status strip** (CLEAN/TAINTED, eligibility,
+armed count, errors-since-mark) is the at-a-glance safety read, and a popout that is closed most of the time cannot
+carry it. Options: keep a one-line strip with no panel behind it; fold taint/armed state into the dock icon itself
+(colour or badge); or accept it is only visible while a popout is open. **Not decided.**
+
+⭐ **The 02 verdict is unaffected by this ruling.** P1-P4 concern taint, the console gate, the console tap and
+persistence; none depends on the panel being a floating window. The panel was the vehicle for the measurements, not
+the thing measured, so the kill gate's result stands whatever surface 03A builds.
+
+
 **Fourth ruling — licence for the builder:** *"don't tie codex up with too many restrictions … it could see better
 ways or even suggestions we missed via model blindness."* The manifest now separates a short list of **invariants**
 (your two requirements, idle = no patches, TestKit only, commit hygiene, never-same-vendor) from **everything else,
