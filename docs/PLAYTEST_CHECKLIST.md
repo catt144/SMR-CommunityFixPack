@@ -5038,6 +5038,7 @@ Original question, kept as asked: C74, the Rare Metals Extractor's hammer (and t
     matter.
 
 ### ⭐⭐ 2026-08-24 — F105 IS FIXED ON YOUR WORD, AND BUILDING IT EXPOSED A NEW QUESTION. One receipt, one call.
+<!-- ck:- status:closed owner:no -->
 
 **The receipt (item 72 — RULED by you, in-session: "This is a number 1 fix
 priority").** `Fix_LandscapeCostRefresh` is built, registered, and boot-verified
@@ -5061,6 +5062,7 @@ rock-clearing jobs) crashes the same way, not just levelling.
   silent) rides your next sitting if you want the attended upgrade.
 
 ### ⭐⭐⭐ 2026-08-24 — F105 IS REPRODUCED ON OUR OWN RIG, AND THE FIX WAS WATCHED TO STOP IT. Nothing is owed; this is a receipt.
+<!-- ck:- status:closed owner:no -->
 
 77. ⭐⭐ **The one thing every F105 document said had never been done, is done —
     and you did it in about twenty minutes.** Until today the whole of F105 was
@@ -5359,6 +5361,7 @@ rock-clearing jobs) crashes the same way, not just levelling.
     agent/prompts/perma/STATE_EVICTION.md`
 
 ### ⭐⭐⭐ 2026-08-20 — IT IS PUBLISHED, ON BOTH PORTALS. The ids are committed. One number came out differently on each store, and that was mechanical, not a mistake.
+<!-- ck:- status:closed owner:no -->
 
 71. ⭐⭐⭐ **Live.** Paradox Mods **156049** · Steam Workshop **3787202810**. Both
     ids are now in `metadata.lua` and committed — ⛔ **that is how every future
@@ -5808,6 +5811,7 @@ rock-clearing jobs) crashes the same way, not just levelling.
     gets before it ships.
 
 ### ⚠️ 2026-08-20 — C50 IS BUILT, AND IT TOUCHES THREE SCREENS RATHER THAN THE TWO ITS BRIEF NAMED. Your sitting in link 4 changes slightly.
+<!-- ck:- status:closed owner:no -->
 
 59. ⚠️ **What I found, and the call I made without stopping you.** The brief for
     `C50` named two places SpaceY's description gets assembled and said to append
@@ -5846,6 +5850,7 @@ rock-clearing jobs) crashes the same way, not just levelling.
     your 08-20 ruling that `C50` is a plain repair still stands and is untouched.
 
 ### ⭐⭐ 2026-08-20 — THE PLAN CHANGED ON YOUR RULING: C50+C51 ship IN 1.0.0, C52 is frozen, and the chain that closes this repo is written and waiting.
+<!-- ck:- status:closed owner:no -->
 
 58. ⭐⭐ **Your ruling, and what is now sitting ready.** *"C52 is going frozen may
     revisit at a later date. C50-C51 we are going to close out and launch. With
@@ -6491,6 +6496,7 @@ rock-clearing jobs) crashes the same way, not just levelling.
     Mod Manager (that is item 43); this just says what it would buy.
 
 ### ⚠️ 2026-08-19 — the SAME defect class, in the third mod. Not today's problem; do not let it be forgotten.
+<!-- ck:- status:closed owner:no -->
 
 48. ⚠️ **The Save Rescue mod has no `items.lua` at all**, against a 2-entry code
     list (`Code/00_Core.lua`, `Code/10_SaveRescue.lua`). Item 46 explains why that
@@ -6522,6 +6528,7 @@ rock-clearing jobs) crashes the same way, not just levelling.
     the source path for whoever discharges it is pasted in. Receipt: **item 55**.
 
 ### ⚠️ 2026-08-19 — the launch test's own first question could not fail. Already fixed; nothing owed unless you disagree.
+<!-- ck:- status:closed owner:no -->
 
 49. ⚠️ **The final launch test had a check that was incapable of failing, and I
     changed it.** ⇒ **Nothing to do** — this is the "what happened" note, and a
@@ -6641,6 +6648,7 @@ rock-clearing jobs) crashes the same way, not just levelling.
     never get load-order advice.
 
 ### ⚠️ 2026-08-19 — run B now has an ATTENDED moment in it. Nothing to decide; something to know.
+<!-- ck:- status:closed owner:no -->
 
 45. ⚠️ **The launch rehearsal is no longer zero-cost to you, and finding that out
     early is the good news.** The verification launch measured something nobody
@@ -6674,6 +6682,7 @@ rock-clearing jobs) crashes the same way, not just levelling.
     printed on the store card. That number has already been wrong twice.
 
 ### ⛔⛔ 2026-08-17 — THE UPLOAD IS PAUSED ON YOUR OWN WORD. Two defects found at the sitting and fixed; two questions for you.
+<!-- ck:- status:closed owner:no -->
 
 37. ⛔ **What happened, in plain words.** You opened the Mod Editor to upload,
     and a dialog appeared from the *other* mod saying *"2 of this mod's modules
@@ -7174,6 +7183,7 @@ rock-clearing jobs) crashes the same way, not just levelling.
     eight. The chain has not converged.**
 
 ### ⭐ 2026-08-17 — SWEEP CHAIN, LINK 1 REPORTED. Nothing blocks launch. One small call for you, and it can wait.
+<!-- ck:- status:closed owner:no -->
 
 38. ⭐ **Link 1 of your chain is done — lens 1 of 8, "structure & collision".**
     The question it asked, which no brief here had asked before: **do our own 75
@@ -7350,6 +7360,7 @@ sections, but only when nothing is owed to you; anything on-hold or holding an
 owed input stays here no matter how struck-through it looks.
 
 ### ⭐⭐ NEW 2026-08-16 — "ONE MOD FIX ALL": I checked the other community mod against the game's code. Four real bugs we had missed. **One call from you: build them now, or after launch?**
+<!-- ck:- status:closed owner:no -->
 
 34. ❓ **THE ONLY QUESTION: do these get built before you upload, or after?**
     You said you'd like ours to be *"fully fledged, one mod fix all"*, so I took
@@ -7502,6 +7513,7 @@ owed input stays here no matter how struck-through it looks.
     ⇒ **The pages are ready to upload as they now stand.**
 
 ### ⭐⭐ NEW 2026-08-15 (late) — WE MEASURED YOUR OPEN FARM CASE ON YOUR OWN SAVE, AND IT DID NOT REPRODUCE. One sentence from you would explain that.
+<!-- ck:- status:closed owner:no -->
 
 33. ✅✅ **ANSWERED BY YOU THE SAME EVENING, AT THE KEYBOARD — and then you went
     considerably further than the question.** Your answer was *"nothing but
@@ -7694,6 +7706,7 @@ permanent check now re-tests them on every run.
     → `agent/facts/EF-051.md`, the 2026-08-15 bullet.
 
 ### ⛔⛔ NEW 2026-08-15 (later) — pricing your "quick playtest?" question found that the F85 dialog CANNOT BE OPENED IN THE GAME AT ALL, and two player-facing pages describe it as if you had seen it
+<!-- ck:- status:closed owner:no -->
 
 31. ✅✅ **RULED 2026-08-15 — REMOVE IT, BUT KEEP IT RE-APPLIABLE. DONE THE SAME
     DAY, ACROSS EVERY SURFACE.** Your words: *"I think we remove it but document
@@ -7916,6 +7929,7 @@ same day's route check found the dialog itself is dead-coded on retail —
 item 31 above owns what that means for the two player-facing descriptions.
 
 ### ⭐ NEW 2026-08-14 (later) — ④ IS CUT: your launch afternoon reads ONE sheet, and the audit found one more call that comes before any paste
+<!-- ck:- status:closed owner:no -->
 
 **The release-3 chain is closed** — both cards paste-ready and diff-proven
 verbatim to their audited sources, the third card written and gated, the
@@ -7999,6 +8013,7 @@ text before upload and add the save-step line in the same one-launch
 re-witness** (recorded on item 17 and in the rescue card's header).
 
 ### ⭐ NEW 2026-08-14 — the release descriptions are being written: ONE question, and it is bundled with a call you already owe
+<!-- ck:- status:closed owner:no -->
 
 28. ⚖️ **The Save Rescue dialog buries the one line it exists to print. Fix the
     code (costs you one launch) or ship it as built (costs nothing)?**
@@ -8045,6 +8060,7 @@ re-witness** (recorded on item 17 and in the rescue card's header).
     is the **④ IS CUT** block above this one.
 
 ### ⭐ NEW 2026-08-13 — the SITE is built (unpublished): one small question, and two things for your awareness
+<!-- ck:- status:closed owner:no -->
 
 ℹ️ **2026-08-14 — the site chain is CLOSED; nothing here is owed by you.** The
 terminal audit read all five pages and both store cards as a player, re-ran the
@@ -8217,6 +8233,7 @@ open decisions are back to the **3** standing non-release items.)*
     under your frozen ship line.
 
 ### ⭐⭐ NEW 2026-08-12 — THE SHIP LINE (three rulings, decided in the process-audit review session)
+<!-- ck:- status:closed owner:no -->
 
 14. ~~**⚖️ Is `fixed` + suite + self-checks enough to ship, or does the
     evidence campaign finish first?**~~ ✅ **DECIDED 2026-08-12, your ruling:
@@ -8523,6 +8540,7 @@ deleted when the chain closes).
     nothing — measured, a pulled mod produces no log line at all.
 
 ### ⭐ NEW 2026-08-13 — public documentation: platform decided, one question back to you
+<!-- ck:- status:closed owner:no -->
 
 21. ✅ **DECIDED 2026-08-13, your ruling: GITHUB PAGES** for the player-facing
     docs site. A working scaffold is committed at `public-site/` (MkDocs +
@@ -8855,6 +8873,7 @@ than moving to the archive only because item 24's artifact is not built yet.
 > now read from re-derive them instead. The next prompt in the chain lands it.
 
 ### ⚖️ NEW 2026-08-13 — your Steam ID is scrubbed from the live docs, but NOT from git history
+<!-- ck:- status:closed owner:no -->
 
 20. ✅ **DECIDED 2026-08-13, your ruling: LEAVE IT.** No history rewrite, ever,
     unless you re-open this: the ID is already on your public Steam profile,
@@ -8888,6 +8907,7 @@ than moving to the archive only because item 24's artifact is not built yet.
     ⚠️ Whichever you pick, the scrub already done stops it spreading further.
 
 ### ⛔ NEW 2026-08-12 — I DELETED ONE OF YOUR AUTOSAVES. Telling you straight.
+<!-- ck:- status:closed owner:no -->
 
 16. ⛔ **`Autosave Sol 306` is gone and I cannot get it back. `Autosave Sol 311`
     is fine — I restored it byte-for-byte.** No decision is owed; this is a
@@ -8916,6 +8936,7 @@ than moving to the archive only because item 24's artifact is not built yet.
     post-untick cleanup). The Steam-Cloud check at your next launch stays live.
 
 ### ⭐ NEW 2026-08-12 — asteroid Exotic-Minerals freeze (decided in-session; one owed minute)
+<!-- ck:- status:closed owner:no -->
 
 11. ✅✅ **DONE 2026-08-14 — THE OWED MINUTE IS PAID, nothing further owed by you.**
     Moment C of the combined sitting. ⛔ Two things the item had wrong and you
@@ -8956,6 +8977,7 @@ than moving to the archive only because item 24's artifact is not built yet.
     reports.
 
 ### ⭐ NEW 2026-08-12 — raised by you mid-sitting during `corun-pt60`
+<!-- ck:- status:closed owner:no -->
 
 **Cost, stated honestly: the brief promised ~40–60 attended minutes and the
 sitting took about 95** (13:38 launch → 15:15 quit). **Roughly 45 of those
@@ -9060,6 +9082,7 @@ it needed a save written before 2026-08-02, and `USA Sol 302` was the only one.*
     had to give.
 
 ### ⭐⭐ NEW 2026-08-11 — from the `corun-pt15` SITTING (two calls, both yours)
+<!-- ck:- status:closed owner:no -->
 
 **Cost, stated honestly: the brief promised ~45–90 attended minutes and the
 sitting took about 3h10m.** The overrun is ours except the march itself — that
@@ -9305,6 +9328,7 @@ evaporated and it had to be built live.
    → `agent/bugs/F100.md`.
 
 ### ⭐ NEW 2026-08-10 — from `corun-batch-2` prep (nothing needs your call; two are cleanup already done)
+<!-- ck:- status:closed owner:no -->
 
 **FYI, and it is a gap in our own gate.** Four agent-created staged saves —
 `CB1STAGE`, `CORUN0`, `CORUN1`, `U1STAGE`, about **223 MB**, all byte-identical
