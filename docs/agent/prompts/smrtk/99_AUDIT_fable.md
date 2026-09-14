@@ -359,3 +359,60 @@ use this outbox for the resulting Selected surface. No RE-FIRE or new sitting.
     partial, using the full archived boot log for the audit. Several context-
     rejected documentation patches were reapplied; no rejected patch changed
     a file or counted as a successful verification.
+
+
+### 09 architecture/semantics/More outbox — 2026-09-14
+
+1. **BUILD + DESK, no launch.** TestKit local commits `d9f8fb1`, `9057fb6`; eight
+   toolkit files changed, agent-owned 80 untouched. Pack code/items/metadata/version,
+   archive, checklist and STATE untouched by this link. Report:
+   `reports/SMRTK_09_REBUILD.md`; complete C body trace:
+   `reports/SMRTK_09_MORE_TRACE.md`; real-module instrument:
+   `python docs/agent/reports/SMRTK_09_DESK.py`. All 25 assigned defects are dispositioned.
+2. Run co-locates four triggers/run-until/shared watch; Selected co-locates selected
+   companions/traits; persistent hot bar, one toggle SMR button at HUD HList with Box
+   sibling fallback, closed armed notice, compact wrapped controls, visible disabled
+   state and controls/clear above growing readouts. Old block-1 PASS and every changed
+   class contract are explicitly invalidated in 08b's inbox. **No current-tree A PASS**.
+   08b also covers changed-surface acceptance if the Stamper is removed by owner ruling.
+3. B fixes template_name/class throughout capture, truthful deferred spawn dispatch,
+   common repair changed basis, post-mutation ERROR evidence, incomplete-stamp guards,
+   exact forced meteor/separate scattered modes, five speed constants, print tee route,
+   construction labels, trigger-pauses-run-until coordination and all inbound arrival
+   transit skips without selection. Outbound is NOT BUILT: distinct five-destination
+   completion paths/fixtures are costed. Orbit/landing waits remain native.
+4. C rechecked 84 More / 97 declaring bodies: 18 keep, 7 cut, 59 caveats, applied at
+   walk and dispatch; exact Deposit/SupplyPodBase empty functions omitted while
+   preserving overrides; unreviewed future names refuse. Source-union retained 77
+   More/10 async is exposure, not native behavior. No present suffix collision/name
+   delta or walk stop condition. C's "class-11 More" typo means classes 7/8.
+5. Reproducible desk instrument at pack `8a2dca2` / kit `9057fb6`: PASS all eight
+   constructors, HUD routes/input notice/clear/disabled/teardown, 12 spawn variants,
+   repair repeat, rocket guards/dedup, meteor args, partial mutation and receiver/
+   depot cases; P5's 19 failure fixtures remain PASS. Nine files: sync/taint 0, bare
+   print 0, logger 1, tag sink 1; source presence 26 lines. C census: 13 actual calls.
+   Parse 34 TestKit files/0 errors; doccheck GREEN. Idle source audit found no new
+   vanilla replacements; print tee/quiet remain paired explicit arms. Native taint,
+   typography, placement, connection, census and final ownership still NOT RUN.
+6. **OWNER-ROUTED → ck183/orchestrator:** actual font sizes 13 ConsoleLog versus 18
+   vanilla Cheats contradict shrink-but-larger premise. Size20 proportional controls
+   plus height26/automatic widths improve geometry by source; defect7 stays PARTIAL
+   pending native owner readability decision. Stamper remains experimental, no
+   expansion recommended; removal criteria in report cover systemic native supported-
+   fixture failures or unsafe recovery. Owner licence already persisted; no removal
+   performed and no extra sitting requested. STATE's spent-pointer repair is routed
+   to orchestrator (no new SMRTest.Register/count change).
+7. **FILED SOURCE CONCERNS/triage:** linked underground passage's missing city,
+   BreakTrack fixed indices, SpawnTrain queue consumption are named C body findings,
+   not play-verified vanilla defects. No game body fixed. Source GED correction:
+   ModEditor/GedModManager/editor map/testModGame are declared blockers; other GED
+   helpers need actual eligibility readings, not blanket "any GED" prose. Keep 08's
+   Inspect witness as historical. Fact maintainer should verify one cited command
+   before changing maintained prose.
+8. **DRIFT:** fixture missing AsyncRand/SetTextColor corrected without game inference;
+   default compact sizing initially overrode explicit dock52 and was repaired before
+   final gates; inherited suffix dedup weakness has no current collision; aliascheck
+   nested order/probes/last UNKNOWN findings are false positives against 00:18–22.
+   Report contains final doccheck warnings verbatim. Old predictions describe old
+   routes/captions and are historical, not the 08b script. 09 consumed in close-out;
+   next is owner 08b on current built surface, then this cross-vendor audit.

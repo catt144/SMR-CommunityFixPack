@@ -54,10 +54,9 @@ exists, and a struck row is RED. A row that outlives its file is how a next sess
   (*"extend before 08"*). **03C BUILT 09-14**, TestKit `f093e3b`; **07 DOCUMENTED/PREPARED 09-14**
   (`perma/SMRTK_SLOTS.md`, numbered predictions, the sitting script). ⭐ **08 RAN 2026-09-14 — PASS WITH
   CORRECTIONS**, requirement (A) PROVEN, class 18 blocked by defect 21, 25 defects and the design half in
-  `reports/SMRTK_FULL_SITTING.md` + **ck183**; its prompt is retired. So next is `09_ARCHITECTURE_BUILD_codex.md` (ck183's
-  re-layout + defects 21/22 + a subagent trace of the 84 More leaves), then owner
-  `08b_STAMP_SITTING_owner.md` (⛔ gated on 09's defect-21 fix) and Fable audit 99 — the three
-  remaining task prompts. Its README is the manifest
+  `reports/SMRTK_FULL_SITTING.md` + **ck183**; its prompt is retired. So next is owner `08b_STAMP_SITTING_owner.md` (09's build/desk complete;
+  changed-surface acceptance plus retained native stamps, gated on owner surface stability),
+  then Fable audit 99 — the two remaining task prompts. Its README is the manifest
   and is the authority on link state; spent payload briefs live in the close-out git grave.
 - `fixtoggles/`: **LIVE** (authored 09-11): an on/off button per fix, Beta labels, linked buttons; link 09 researches
   versioning for a B step. Its README is the manifest; checklist 148.
