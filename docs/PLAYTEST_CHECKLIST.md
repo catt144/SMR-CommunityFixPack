@@ -803,13 +803,35 @@ Selected (it acts on the selection) and surfaces on Run; `mark` and
 
 #### ⚖️ STILL YOURS TO ANSWER — three open design questions
 
-1. **Item 6 is UNCONFIRMED and must not be built until you say.** You wrote *"add a
-   clean button at the top of these lists, that gives me the easy quick way to
-   clean"*; 08 read that as **Clean & Fix**, asked, and the sitting overtook the
-   answer.
+1. ✅ **Item 6 — ANSWERED BY THE OWNER 2026-09-14, and 08 had it wrong.** *"clean
+   button means clean the on screen log."* ⛔ **NOT `Clean & Fix`** — 08 read the
+   original *"add a clean button at the top of these lists, that gives me the easy
+   quick way to clean"* as the per-object repair action and flagged it unconfirmed;
+   it is the **log/readout clear** (`cls`), surfaced **at the top of every list that
+   grows**. ⇒ This is the same complaint as **item 13**, not a separate ask: a
+   readout that grows downward pushes its own controls off the page, so the clear
+   belongs above the list, on every page that has one. ⚖️ Worth keeping as a
+   precedent — the unconfirmed flag is the only reason a per-object repair button
+   did not get built for a request about clearing a log.
 2. **Where the slot engine lives** (bind, pins, note) once triggers move to Run — its
    own page, or riding with Probes?
 3. **Defect 20's remedy shape** — cursor change, or a persistent banner?
+
+#### ⭐ OWNER-REQUESTED WORK ITEM — the More section has never been checked
+
+Asked again 2026-09-14 (*"did 08 include testing the rest of the buttons we imported
+from the cheat menu to make sure they both work, and are useful"*) — **it did not,
+and 08 recorded that as finding 16.** 08 sampled the group (Delete, Destroy, enough
+of More to pass block 6, `AsyncCheatInspect`); it never enumerated it. ⛔ 03C migrated
+the **84 More names by metatable walk**, so they are *"what the object exposes"* —
+nothing establishes that each still does something on 1.1.0, or that the something
+earns a button. Owner, at the sitting: *"I want a full round of checking in the games
+logic to see if the stuff migrated over is actually working and if it is, is it
+useful."* ⇒ **Sized honestly by 08: 84 names, each needing a press, an observation and
+a keep/cut judgement — a DEDICATED LINK, not a sitting step.** Output is a
+**keep / cut / needs-rollover** list so the section is pruned to what earns its place.
+⚖️ Note the dependency: this prunes the very list the ck183 re-layout arranges, so
+running it *before* the re-layout means laying out a list that is about to shrink.
 
 #### ⚠️ A grading gap, recorded for 99
 
