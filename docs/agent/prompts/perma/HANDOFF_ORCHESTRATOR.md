@@ -1,33 +1,20 @@
 # Handoff — session → next session (model-agnostic)
 
-> ⭐ **LIVE — RETIREMENT OVERRIDDEN BY THE OWNER, 2026-09-13.** A session retired this
-> file earlier the same day; the owner reversed it: *"I am overriding the retirement for a
-> moment, we have too many loose ends."* It is a working handoff again. `DISPATCH.md`
-> remains the route table for ad-hoc work and `docs/WAITING_ON_YOU.md` remains the owner's
-> generated queue — this file carries the **loose ends** those two cannot hold.
+> ⭐ **LIVE.** `DISPATCH.md` is the route table for ad-hoc work and `docs/WAITING_ON_YOU.md` is the
+> owner's generated queue — this file carries the **loose ends** those two cannot hold.
 
 ## ⛔ THIS FILE IS THE OWNER'S TO RETIRE — NO SESSION MAY RETIRE IT
 
-⛔ **A session may NEVER retire, archive, gut or `git rm` this file on its own judgement**,
-however finished its list looks, and however clearly an earlier note says the removal
-condition is met. It was retired unilaterally once on 2026-09-13 and the owner reversed it
-within the day.
+⛔ **Never retire, archive, gut or `git rm` this file on your own judgement** — however finished the
+list looks, and however clearly an inherited note says the removal condition is met. It was retired
+unilaterally on 2026-09-13 and the owner reversed it the same day: *"I am overriding the retirement
+for a moment, we have too many loose ends."* ✅ **When §2 is genuinely empty, ASK in one line and carry
+on.** An empty list is a prompt to ask, never a licence to act; the question was last asked 09-13 and
+the answer was **no, keep it**.
 
-✅ **What a session MAY do:** when §2's list is genuinely empty — every loose end closed or
-homed elsewhere — **ASK the owner whether to retire it**, in one line, and carry on. Their
-answer is the only thing that closes this file.
-
-⇒ An empty list is a **prompt to ask**, never a licence to act. ⛔ Do not treat an
-inherited "removal condition MET" note as authority; the condition being met is exactly
-when the question gets asked, not when the deletion happens.
-
-⏳ Standing condition, for reference (owner, 2026-09-11): it stays in `perma/` *"until the
-pending outbox is empty or the owner says things have settled, then it is `git rm`'d"*.
-`RELEASE_OUTBOX.md`'s Pending is empty, so the condition is met and the **question is
-askable** — it has been asked and the answer, 2026-09-13, is **no, keep it**.
-
-⛔ **THIS IS A WORKING DOCUMENT, NOT A SESSION LOG.** History lives in `docs/archive/SESSION_LOG.md`
-(append-only, newest first). **If you close something here, DELETE its block.**
+⛔ **THIS IS A WORKING DOCUMENT, NOT A SESSION LOG.** History lives in `docs/archive/SESSION_LOG.md`.
+**If you close something here, DELETE its block** — and prefer a pointer to a retelling: anything the
+entry, brief or checklist already holds belongs there, not here.
 
 ⛔ **Verify every specific against `git log` and the tree — the records win, this file is a pointer.** Claude
 and Codex sessions both commit here, several at once, and **Codex is invisible to `ListAgents`**.
@@ -49,6 +36,9 @@ Do not execute.
 
 ✅ **Discharged, and must not reappear on any owed list:** ck158 (the attended gate) · the three retirements
 · C90 (`153d180`+`e5f1947`) · the STATE eviction **and** its cap revert to `18 * 1024` (`c820c7f`).
+⚠️ **STATE's WARN threshold is TEMPORARILY raised for the doc overhaul (ck178)** — doccheck prints it as
+`warn 15360 TEMPORARY`. ⛔ Read the live number from doccheck, never from a document, and do not treat the
+headroom as permanent.
 
 ---
 
@@ -72,69 +62,77 @@ contradicted its own closed list for most of a day.
 
 ### 2b · The loose ends — this is why the file is still alive
 
-⭐⭐ **THE ACTIVE EFFORT IS `prompts/smrtk/` (ck175) — the SMR Tool Kit**, a TestKit panel replacing the
-vanilla cheat menu for playtesting. ⛔ **Its README is the manifest and is canonical** (queue, seats,
-invariants-vs-defaults licence, the owner's ranked UI ladder); the five owner rulings are in ck175.
-**Nothing about it is restated here — only the three things a README cannot tell you:**
-- **02 was a KILL GATE and it ✅ PASSED in play, 09-13** (`reports/SMRTK_SKELETON_SITTING.md`).
-  ⛔ Never re-run a passed gate to "check"; 01 and 02 are consumed.
-- **03A is RUNNING (Codex/Sol) from 09-13.** ⛔ **The whole `prompts/smrtk/` folder is ITS lane while it
-  runs** — route by message, never by editing in there. Then 03B (Claude judge) → 07 → 08 (owner) → 99.
-- Premises are `EF-095`–`EF-099`; the two unbendable invariants are (A) nothing registers as a cheat and
-  (B) one `SMRTK_` tag through one logger.
+⚠️ **TWO efforts are live at once and they share this tree.** Re-check `git log` + `git status`
+before every write; a peer commits here every few minutes.
 
-⭐ **OTHER PROMPTS READY TO FIRE, when smrtk is not eating the attention.** ① `prompts/STANDDOWN_AUDIT.md`
-— no blocker, fire any time; a 21-module sweep, good Codex fan-out. ② `prompts/C92_ACHIEVEMENT_BUILD.md`
-— build + test the C92 restoration, ⛔ **SHIPPING HELD by ck172 until the owner lifts it in words**.
-③ `prompts/CHECKLIST_ARCHIVE.md` — the checklist cleanup, ruled and never run (ck176); ⚠️ its own brief
-carries the unnumbered-items risk on its face, so read that before firing. ④ then the playtest sitting
-(could ride the owed ck144 (a) boot). ⑤ `prompts/DLC_DEEP_CHECK.md` — desk, unclaimed, bounded.
+⭐⭐ **EFFORT 1 — `prompts/smrtk/` (ck175), the SMR Tool Kit.** ⛔ **Its README is the manifest and is
+canonical** (queue, seats, invariants, the ranked UI ladder); the owner rulings are in **ck175** and
+**ck183**. **Nothing is restated here — only what a README cannot tell you:**
+- **`09_ARCHITECTURE_BUILD_codex.md` is RUNNING (Codex/Sol) from 09-14.** ⛔ **The whole
+  `prompts/smrtk/` folder is ITS lane while it runs** — route by message, never by editing in there.
+  Then **08b** (owner, attended) → **99** (Fable). 01, 02, 03A, 03B, 03C, 07 and 08 are consumed.
+- ⭐ **`ck183` IS THE SPEC 09 BUILDS TO, not a defect list** — the owner's architecture ruling: group
+  by **task**, not taxonomy; anything used with other pages' work goes on a **hot bar**. Its proof is
+  measured: all four triggers are on Agent, `run_until` is on World, so every "run until X" is two
+  pages. 08's 25 defects are all assigned inside 09's brief.
+- ⚖️ **The owner licensed 09 to RECOMMEND the Stamper's removal** (complex, heavy, possibly too
+  fragile) — given **verbally**, so ck183 holds the only written copy. ⛔ It is a recommendation;
+  the call is the owner's. **08b survives either way** — it is the re-layout's first play contact.
+- ⛔ **Requirement (A) is PROVEN** (08: `cheats_count=0`, 844 records, zero TAINT). Never re-prove it.
+  Premises `EF-095`–`EF-099`; invariants (A) nothing registers as a cheat, (B) one `SMRTK_` tag.
 
-- **C92 — RULED, not finished.** ck172 (09-13): **build the restoration, shipping held**;
-  knowledge accepted as a deliverable even if it never ships. ⛔ **ck171 (scope) stays OPEN** —
-  172 says what to build and that it will not ship, 171 is whether it ever does. Evidence is
-  closed out: `reports/C92_PLACEMENT.md` + `C92_INVESTIGATION.md` "Addendum 2026-09-13".
-  ⛔ **Three claims are WITHDRAWN — do not reason from them:** a ≈44% water bonus, a
-  "never-drawn" icon, and unremovable residue. Seat / prerequisite / art are **design choices
-  to be made**, not intent to be restored — nothing was recoverable.
-- **C93 — cause UNRESOLVED, and it is not ours.** Outside Ranch produce stranded at the
-  building centre: a missing entity spot makes `StockpileController` fall back to `Origin`,
-  which a non-walkable footprint encloses. ⛔ The owner's "outdated mod" reading is the
-  leading candidate but **unproven** — our own 09-09 log shows the same fallback firing in
-  vanilla for `MicroGHabitat`. ⇒ Needs the reporter's log line + mod list. **Replies are
-  PULL-ONLY (ck165): the ask is the owner's call, nothing is drafted and nothing is owed.**
-- **D14 / stand-down** — 21 of 45 modules replace a shipped body and cannot ride a vendor fix.
-  ⛔ The gap is **not** "did the body change" (`bodycheck` answers that at the desk, at full
-  coverage, no launch) but its own declared **class-c** blind spot: a vendor repairs a defect
-  without touching the body we pinned and every instrument reads GREEN. `debug.getinfo` is
-  unavailable in the mod sandbox, so only behaviour probes can close it.
-- **ck173 — `FIX_POLICY` §2a is factually wrong in one half**, raised 09-13, unruled. Its
-  reason 2 ("unbuildable from the mod's own fields") is true of the metadata fields and false
-  of the runtime `LuaRevision`; and **we already ship a version guard** in the FR-1 mod that
-  nobody raised §2a against. Reason 1 survives and is the real rule.
-- **Facts filed 09-13, inherit them rather than re-derive:** `EF-093` (vanilla re-seeds lockable-preset
-  state every load — a mod can leave an omission vanilla repairs itself) · `EF-094` (achievement state;
-  ⛔ no mod and no retail console can clear a flag — the console **is** the mod sandbox) · `EF-095`–`EF-099`
-  (the smrtk premises: what actually writes the cheat taint, mod-sandbox reach, why the console hotkey
-  "locks", vanilla cheat-menu defects, the programmatic-construction front door). Summaries in
+⭐⭐ **EFFORT 2 — the doc overhaul (ck176–ck183), owner-driven and peer-run.** `prompts/RULES_HEADERS.md`
+is its live brief: N scattered rules become local header blocks plus ONE kernel rule. ⛔ **Sequencing
+ruled by the owner: SMRTK finishes first, then RULES_HEADERS re-fires.** ⚠️ Its seat carries the STATE
+policy and enforces it — **corrections SUBSTITUTE, they never stack**, and a fact fails STATE's
+admission test unless it is universal to *every* session. That is why `EF-102` exists.
+
+⭐ **OTHER PROMPTS READY TO FIRE, when neither effort is eating the attention.**
+① `prompts/STANDDOWN_AUDIT.md` — no blocker, fire any time; a 21-module sweep, good Codex fan-out.
+② `prompts/C92_ACHIEVEMENT_BUILD.md` — build + test, ⛔ **SHIPPING HELD by ck172 until the owner lifts
+it in words**. ③ the owed **ck144 (a)** boot (§2a). ④ `prompts/DLC_DEEP_CHECK.md` — desk, unclaimed,
+bounded.
+
+⛔ **The blocks below are POINTERS. The entry, brief or checklist item is the record — read it there.**
+
+- **C92** — ck172 ruled *build it, shipping HELD until the owner lifts it in words*; **ck171 (scope)
+  stays OPEN**. Brief `prompts/C92_ACHIEVEMENT_BUILD.md`; evidence closed out. ⛔ **Three claims are
+  WITHDRAWN — do not reason from them:** a ≈44% water bonus, a "never-drawn" icon, unremovable residue.
+  Seat/prerequisite/art are **design choices to be made**, not intent to be restored.
+- **C93** — filed `cand`; Outside Ranch produce stranded at the centre, ⛔ **cause UNRESOLVED and it is
+  not ours**. The owner's "outdated mod" reading is leading but unproven — our own 09-09 log shows the
+  same fallback in vanilla. Needs the reporter's log line + mod list ⇒ **PULL-ONLY (ck165): the ask is
+  the owner's call, nothing is drafted and nothing is owed.**
+- **D14 / stand-down** — brief `prompts/STANDDOWN_AUDIT.md` holds it. ⛔ The gap is **not** "did the body
+  change" (`bodycheck` answers that at the desk) but its declared **class-c** blind spot: a vendor
+  repairs a defect without touching the body we pinned and every instrument reads GREEN.
+- **ck173** — `FIX_POLICY` §2a is factually wrong in one half, raised 09-13, **unruled**; body in the
+  checklist. Reason 1 survives and is the real rule.
+- **Facts filed 09-13/14, inherit them rather than re-derive:** `EF-093` (vanilla re-seeds
+  lockable-preset state every load) · `EF-094` (achievement state; ⛔ no mod and no retail console can
+  clear a flag — the console **is** the mod sandbox) · `EF-095`–`EF-099` (the smrtk premises) ·
+  `EF-100`/`EF-101` (the shader source tree ships readable) · ⭐ **`EF-102` (09-14) — the depot class
+  tree forks into two SIBLING branches**, so an `IsKindOf(o, "UniversalStorageDepotBase")` guard misses
+  5 shipped classes, and `#storable_resources` discriminates one branch only. Summaries in
   `facts/INDEX.md`; ⛔ grep it, never read it whole.
 - **C91** — open candidate: vanilla leaks the Building Codes maintenance modifier on repeal.
   Dev-report material.
-- **Migration residuals, read from the entries 09-12:** **F51** 1.1.0 PARTIAL, leg re-filed
-  **UNRUN** · **F53** PARTIAL, no fresh 1.1.0 evidence · **F59** repaired, **A1 expedition half
-  UNTESTED** · **F73** PARTIAL, organic benefit unverified · **F80** `investigating`, causation
+- **Migration residuals, in the entries (09-12) — the list nobody would reconstruct:** **F51** PARTIAL,
+  leg re-filed **UNRUN** · **F53** PARTIAL, no fresh 1.1.0 evidence · **F59** repaired, **A1 expedition
+  half UNTESTED** · **F73** PARTIAL, organic benefit unverified · **F80** `investigating`, causation
   unproved · **F54** never swept.
-- **`treediff` gains a `TABLE-HUNK` list** (`HUNT_AUDIT` §8 item 2). ⭐ **It must compare CONTENT between
-  trees, not POSITION** — the position classifier's failures are evidenced in `reports/PINNED_PARENTS_PASS.md`.
-- **83 (SHARED TestKit)** — two of its five proposals (a `RunAll` owner filter, a `PACK_ID` on
-  the enable-path leg) improve the kit **for us** regardless of the opt-in mod.
-- **Hotfix 3 — 135 only.** RULED 09-12: take the `luafn.py` delimiter fix. Desk tool, **0
-  shipped hashes**. ⛔ Do not re-derive the old table or the expired-triage "tension"; both are
-  gone on purpose (ck161).
-- ✅ **Closed 09-13, do not reopen:** `SELFCHECK_PILOT.md` REMOVED on the owner's word (`cf8d51f`) · the
-  C92 placement/icon investigation (fired, `git rm`'d) · the ck170 doc overhaul pass · `GATE_WIRING`
-  (adjudicated PASS, consumed) · smrtk links **01 and 02** (consumed; 02's verdict is PASS and the gate
-  did not fire — ⛔ never re-run a passed kill gate to "check").
+- **`treediff` gains a `TABLE-HUNK` list** (`HUNT_AUDIT` §8 item 2). ⭐ **Compare CONTENT between trees,
+  not POSITION** — the position classifier's failures are in `reports/PINNED_PARENTS_PASS.md`.
+- **83 (SHARED TestKit)** — a `RunAll` owner filter and a `PACK_ID` on the enable-path leg improve the
+  kit **for us**, regardless of the opt-in mod.
+- **Hotfix 3 — 135 only** (ck166): take the `luafn.py` delimiter fix. Desk tool, **0 shipped hashes**.
+  ⛔ Do not re-derive the old table or the expired-triage "tension"; both are gone on purpose (ck161).
+- ✅ **Closed, do not reopen.** 09-13: `SELFCHECK_PILOT.md` REMOVED on the owner's word (`cf8d51f`) ·
+  the C92 placement/icon investigation · the ck170 doc overhaul pass · `GATE_WIRING` (adjudicated PASS).
+  09-14: **`CHECKLIST_ARCHIVE.md` FIRED and consumed** (`41116e3`) — the settled backlog moved, ⛔ those
+  bodies now live in `docs/archive/PLAYTEST_ARCHIVE.md` behind the `.rgignore`, so a grep that used to
+  hit comes back empty · smrtk **01, 02, 03A, 03B, 03C, 07, 08** (08 retired on spent context, **not**
+  on failure — it closed at PASS WITH CORRECTIONS). ⛔ Never re-run a passed kill gate to "check".
 
 ### 2c · Watch list, not tasks
 
@@ -214,6 +212,15 @@ gaps on purpose, so a citation of "trap 5" still resolves.
    editor while being invisible to every default search. Hit 09-13: a pasted savegame excerpt hid a whole
    report, build-blocking correction included. Same silent-boundary family as `docs/archive/`'s `.rgignore`.
    Detect `file <p>`; repair by transcribing the byte as `\x00` **and disclosing it beside the block**.
+11. ⛔⛔ **AN `##` HEADING IN `PLAYTEST_CHECKLIST.md` CLOSES "Decisions waiting on you" AND ORPHANS EVERY
+   ITEM BELOW IT — and doccheck stays GREEN through the whole thing.** Hit 09-14: one H2 appended mid-file
+   dropped the section from **134 items to 8** (exactly the items above the insertion point) and silently
+   cut 22 lines from `WAITING_ON_YOU.md`. **`WAITING: fresh` only asserts the render matches its source,
+   never that the source is intact.** ⇒ **Verify a checklist edit against the ITEM COUNT, not the gate
+   colour:** `doccheck | grep WAITING:` and `.claude/tools/archive_settled.py | sed -n 3p` must agree and
+   must not fall. A new item is `### <date> — <n>: <title>` + its `<!-- ck:n ... -->` marker, sub-headings
+   `####`. ⛔ And **never `git checkout --` the file to recover** — the owner blocked exactly that, which
+   would have taken 132 lines of unrelated work back to HEAD.
 
 ---
 
