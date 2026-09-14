@@ -14,3 +14,8 @@ Desktop.ini
 # project material both vendors load (mirrored to .agents/skills/ by --regen).
 .claude/*
 !.claude/skills/
+
+# Owner-only scratch. NOT for agents: nothing in the repo points here, and no
+# session reads it unless the owner names it in a prompt. Mirrors the same folder
+# in the Subathon Timer repo. Holds a junction to the Claude memory store.
+zz-owner/
