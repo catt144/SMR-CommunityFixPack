@@ -313,6 +313,32 @@ per drone, per resource unit, or per interrupted request.
 strip CLEAN after a leaf `CheatFill` through `SMRTK.Run`.** The contrast is now
 anchored on the same fixture, the same depot and the same method.
 
+### ⭐ Same-colony positive control for the disk reader
+
+The scratch save turned the earlier byte-level method from "validated against
+borrowed playtest saves" into "validated on this fixture, both sides". The two
+saves are the same colony minutes apart, and the `CheatsUsed` key is followed by
+the **same next key** in both, so this is the same location differing only in its
+value:
+
+```text
+SMRTK_BASELINE_CLEAN    (
+CheatsUsed(RainsDisasterThreads…
+SMRTK_SCRATCH_TAINTED   (
+CheatsUsedRVýúx (	CheatFill8…(RainsDisasterThreads…
+```
+
+Clean carries the scalar ``; tainted carries a table (`R`, then `` =
+one entry) whose row holds the game time and the length-prefixed method name
+`	CheatFill` — exactly the `{ GameTime(), method, class, handle }` shape
+`LogCheatUsed` writes (`Network.lua:242-245`). The `Cheat*` token sweep agrees:
+`CheatFill` appears in the tainted save and in neither clean one.
+
+⇒ The reading that cleared `Mygame2` and `My game` is now anchored on a positive
+control from the owner's **own** colony, not only on `TEST 2I`/`CORUN1`. It also
+explains the scanner's odd `CheatsUsedR` / `CheatsUsedZ` tokens: the letter after
+the key is the serialiser's table opcode, and a clean save has no such letter.
+
 ### Two corrections this leg produced
 
 1. **`Platform.cheats` reads `nil`, not `false`.** This session predicted
