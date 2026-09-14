@@ -44,6 +44,52 @@ Test Kit helpers, save fixtures) stays in [PLAYTEST_HELP.md](PLAYTEST_HELP.md).
 
 ## Decisions waiting on you
 
+### 2026-09-14 — 182: PLAYTEST_HELP has no owner-facing core — dissolve it, and one live gap to close
+
+<!-- ck:182 status:open owner:yes -->
+
+From the 09-14 design session with you. Full derivation:
+[RULE_PLACEMENT_TEST.md](agent/reports/RULE_PLACEMENT_TEST.md) ·
+[C1_MONOLITHS.md](agent/reports/C1_MONOLITHS.md).
+
+⭐⭐ **The test we landed on, and it replaces "is this important?":**
+**"What actually stops this, if not the reader's memory?"** Structure ⇒ delete the rule · a guard
+⇒ one-line pointer · nothing and it's been violated ⇒ it was never a rule · binds one job ⇒ that
+job's skill · already a fact ⇒ keep the fact, cut the prose.
+
+- ⛔ **"Ground rules" goes to ZERO.** All six items fall; only 5a's *"never write 'play for a
+  while first'"* survives, into the prompt-authoring skill. **3,900 B → one line.** You had never
+  read it, correctly — it was an agent section under an owner-sounding heading.
+- ⛔ **Rule 1 ("NO third-party mods") was DEAD and nothing noticed.** `bugs/F104.md:64` records a
+  rig leg with *"all six mods + TestKit loaded"*, and F104 is the project's cleanest field closure.
+  **Zero** agents ever flagged the violation. ⇒ **This project has no gate that asks whether a rule
+  is being followed**, and an unenforced rule still costs every agent who reads it.
+- **Rule 3 ("TestKit never uploaded") is enforced by STRUCTURE, not compliance** — the TestKit repo
+  has **no git remote at all**, and it is a sibling directory the packer cannot reach.
+
+⚠️ **THE DECISION FOR YOU — dissolve `PLAYTEST_HELP.md` rather than reframe it.** It is an agent
+doc with an owner's name on it, which is why it accreted for six weeks unread. Proposed split:
+**SMRTK reference** (agent-facing, pull-only; your own surfaces need no manual — a manual on a
+system commissioned to be self-explanatory is a UI defect list, not a doc) · **playtest /
+prompt-authoring skill** (the hazards, the rider-authoring line) · **`perma/CO_RUNS.md`** (launch
+mechanics — finishes the 09-12 split, which took the protocol and left the mechanics behind) ·
+**cut** (command table, save-fixture recipes, the archived-`TESTING.md` do-not-use list).
+⛔ Settle it at the **181** attended audit, after sitting 08 shows what SMRTK actually covers.
+
+- ⚠⚠ **ONE LIVE GAP, and it does NOT wait on any of the above.** You assumed an agent setting up a
+  playtest **scans the existing saves for a suitable one** instead of asking you to build a
+  fixture. The facts exist (7 `EF-*` files) and agents have done it — sitting 08's fixture was
+  chosen 09-14 by reading `CheatsUsed` off disk. ⛔ **But no standing prompt requires it.** It is a
+  habit, not a rule. A session that does not think of it will ask you to build a save you already
+  have. ⇒ First thing into the new skill.
+
+⚠️ **Also still open from the same session (asked, not yet ruled):** does `WORKFLOW`'s rule 4
+repoint to `metadata.lua` as the per-fix player-text target, or **retire**? (Recommended: retire —
+`WORKFLOW:609` already covers the release-time half, and a per-fix duty on a field nobody reads
+between releases is how it rotted.) And `WORKFLOW:664`'s release gate still says the uninstall
+procedure *"is published in MOD_DESCRIPTION"* — that file is frozen in the archive, and the
+procedure is on no live player surface.
+
 ### 2026-09-14 — 181: the monoliths get automated first, then YOU AND I audit all of them together
 
 <!-- ck:181 status:open owner:yes -->
