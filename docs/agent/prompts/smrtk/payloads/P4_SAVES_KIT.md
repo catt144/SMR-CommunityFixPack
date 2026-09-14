@@ -93,3 +93,50 @@ Always-visible safety text lives on dock. Chrome display policy is in core; use 
 Registry ids: P3 pin_A/pin_B/pin_C; P4 dump_selected/watch_field. Resolve at invocation, not initial file load.
 Core/panel are frozen while payloads run; do not edit them. Report requested metadata lines; coordinator owns metadata writes.
 Each payload owns only its assigned files, never commits/removes files, and writes its numbered-claims report to docs/agent/reports/SMRTK_PN_REPORT.md (replace N with your number).
+
+### Settled cross-payload contracts before P4 launch
+
+P2 section/dock is built, TestKit e045884. Dump must register dump_selected.
+Its companion UI resolves that id on press; no stub masks your definition.
+Dock actions menu=true (complete zeroarg Run), menu="arm" (toggle), or
+menu={phase="run"/"arm",args={...}}; every menu callback invokes inside a
+real-time thread. Stateful Saves/Kit controls remain the shared advanced pages.
+
+P3 finished: T.pins[A/B/C] are object refs; T.triggers[id], T.fires[id],
+T.armed[id] are dynamic registries. T.TriggerField(id,obj,field,opts) registers
+a DISARMED trigger or returns false,reason. opts={label,once=false,cadence=1000,
+["do"]={mark=true,pause=true,screenshot=false,sound=true}}. Arm captures field
+baseline; polls scalar fields only (table/function values REFUSE), nil/false
+are explicit, each observed change logs object/field/before/after. It does
+not retarget after selection changes. Create an owned watch_selected_field
+trigger; keep command watch_field separate. The core auto-disarms all actions.
+P3 trigger polling is game-time, actual effects use guarded real-time Run;
+queued effects reject stale arm identity. do must be ["do"] in literal Lua.
+
+P3 Screenshot+Mark is the action screenshot_mark, verb MARK, a single result
+including mark, capture_id and path. Ordinary mark is core mark action/T.Mark.
+Automatic fingerprint must cover both. Core/panel FILES are frozen while
+payloads run: request a generic post-record/mark hook if needed; coordinator
+can add it after merge. Do not wrap vanilla or change other payload files.
+
+Coordinator independently read pack Code/00_Core.lua:665+: ListFixes prints
+registry rows and returns no counts. Use its public SMRFixPack.order/fixes
+for a live active/registered read; never infer active count from source files,
+card text or metadata. PackVersion reads live ModDef and can be unavailable.
+
+Probe hygiene is a DESKTOP preflight (TEMPORARY sweep; no file I/O in mods).
+Keep RunAll/run-one disabled unless trustworthy explicit preflight evidence
+was provisioned for the loaded sitting. Provide a stamp API or other honest
+route, document limitations, never manufacture source cleanliness from an
+unrelated loaded registry count. 07 will document/provision the next sitting.
+
+90_Loggers has local installed state: a tiny read-only state accessor is an
+authorized necessary extension if required to refuse taking over a pre-armed
+logger and preserve originals. Report the exact extra file/diff as DEPARTURE.
+Do not retire or redesign 00_TestCore's legacy console bootstrap; 03B owns
+that earlier suggestion. Any accessor is independently gated/committed.
+
+Core safe_getmetatable/safe_rawget exist (Mod.lua1579-1582,1617-1619), despite
+blacklist entries. Initial claim they were absent was corrected upstream.
+Coordinator will add VScroll and adapt tabs AFTER all payloads finish;
+current host API unchanged. Report requested metadata lines, don't edit it.

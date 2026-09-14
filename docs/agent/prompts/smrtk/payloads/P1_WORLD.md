@@ -84,3 +84,33 @@ Always-visible safety text lives on dock. Chrome display policy is in core; use 
 Registry ids: P3 pin_A/pin_B/pin_C; P4 dump_selected/watch_field. Resolve at invocation, not initial file load.
 Core/panel are frozen while payloads run; do not edit them. Report requested metadata lines; coordinator owns metadata writes.
 Each payload owns only its assigned files, never commits/removes files, and writes its numbered-claims report to docs/agent/reports/SMRTK_PN_REPORT.md (replace N with your number).
+
+### Settled cross-payload contracts before P1 launch
+
+P2 has landed its file and released ownership. Menus expose only complete
+zero-argument contracts: action menu=true invokes Run, menu="arm" toggles
+Arm/Disarm, or menu={phase="run"/"arm",args={...}} gives explicit arguments.
+Use these on World/Sitting one-shot buttons; unknown argument actions stay
+on your page. The native menu invokes each inside a real-time thread; actions
+requiring game-time mutation should arrange dispatch inside their own thread
+or expose a UI-specific invocation without logging acceptance as success.
+
+P5 follow-up requires these exact registry ids: fill_storages (zero args),
+spawn_colonists (explicit integer count), funding (explicit native amount).
+Register those, with any other parameterized variants using separate IDs or
+argument controls. P5 follow-ups are separate explicit buttons, never automatic.
+
+P3 engine: T.triggers[id], T.fires[id], T.armed[id]; TriggerField supports scalar
+fields only; T.Trigger registers disarmed actions under supplied ids. Trigger
+polling is game-time; actual effects dispatch through Run inside guarded
+real-time threads. Use ["do"] as the Lua literal key (do is reserved).
+
+Shared clicks are exclusive AcquireClick/ReleaseClick, core unchanged.
+Queued clicks MUST capture the arm state and check it inside the actual
+thread, so old clicks cannot mutate after save/disarm/re-arm. Quiet logging
+may use common ARM/DISARM action=quiet rather than add a duplicate QUIET
+primary; document any default verb departure. Scheduled suppression must not
+kill an already running disaster. Source route failures are reported, not forced.
+
+Coordinator will connect the shared page body's VScroll and shrink tabs at
+merge after all payloads release ownership. Do not edit core/panel/metadata.
