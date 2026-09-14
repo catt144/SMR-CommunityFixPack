@@ -144,6 +144,21 @@ because the count then looks complete); and **`RULES_HEADERS` must be RE-READ ag
 fires**, not just re-fired — it was built on the 852 inventory, which answers placement, and
 existence now comes first.
 
+⭐ **SEQUENCING RULED 2026-09-14 (owner):** *"I want to get smrtk finished and then I will refire
+rules header."* ⇒ **`RULES_HEADERS` is blocked on SMRTK COMPLETION** — sitting **08** then **99** —
+**not merely on the sitting ending**, and the owner fires it, not an agent. ⛔ It is also not a
+straight re-fire: it must be **re-read against this item first** (it was built on the 852
+placement inventory, and existence now comes first). The sequencing is not arbitrary — what SMRTK
+covers decides what `PLAYTEST_HELP` loses, which decides which headers are needed at all.
+
+⚠️ **Scale note, corrected 2026-09-14.** This seat described the day as having "produced less
+deletion than it looks like." That was wrong. Decided for removal or relocation in
+`PLAYTEST_HELP` alone: ~31,600 B superseded by SMRTK · 3,900 B of Ground rules down to one line ·
+2,788 B of fixtures · 1,517 B of the archived-`TESTING` list · ~7,100 B of co-run mechanics moving
+to `CO_RUNS`. ⇒ **~75% of a 62,709 B doc, decided** — on the FIRST of four monoliths, before the
+attended audit has run, with three still un-audited. ⛔ Counting a session in bytes removed from
+the tree measures execution and ignores adjudication, which is the part that was hard.
+
 ⚠️ **Also still open from the same session (asked, not yet ruled):** does `WORKFLOW`'s rule 4
 repoint to `metadata.lua` as the per-fix player-text target, or **retire**? (Recommended: retire —
 `WORKFLOW:609` already covers the release-time half, and a per-fix duty on a field nobody reads
