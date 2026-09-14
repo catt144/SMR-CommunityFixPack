@@ -18,7 +18,8 @@ vendor scores the predictions. Pack HEAD `320d359`; TestKit HEAD `5d8d3b3`.
 - [x] Decoded both fixtures' savegame bodies; `CheatsUsed` read false against a positive control.
 - [x] Step 0 COMPLETE: clean read scored, baseline saved and verified on disk, vanilla control fired RED (`entries=1`).
 - [x] Step 1 COMPLETE: fresh clean boot, PreLoadGame arm, hotkey both ways, `used=false`, scratch discarded.
-- [ ] Owner sitting, steps 2–8.
+- [x] Step 2 COMPLETE: ⭐ **P2 PROVEN** — `discriminates=true negative=false positive=true`.
+- [ ] Owner sitting, steps 3–8.
 - [ ] Prediction-by-prediction scoring; verdict; archived log path.
 - [ ] Outbox to 03A and 99; ck175 in plain language; strike the row; `git rm` 02.
 
@@ -404,6 +405,42 @@ undecided until step 2.
 discard line was posted. `EF-051` note: Steam Cloud has restored deleted saves
 before, so absence now is not a permanent guarantee — if it reappears it must be
 deleted again and never loaded.
+
+## Step 2 — RESULT: ⭐ P2 PROVEN. The console gate is ours, confounder eliminated
+
+```text
+SMRTK_SHORTCUT console=false key=Ctrl-Shift-F11 t=7369525 id=25
+SMRTK_SHORTCUT console=true  key=Ctrl-Shift-F11 t=7369525 id=27
+SMRTK_CONSOLE_CONTROL action=console_control discriminates=true negative=false positive=true status=OK id=28
+```
+
+01 predicted `discriminates=true negative=false positive=true status=OK`.
+**Measured identically.** This is the leg the whole `ConsoleEnabled` claim rested
+on, and it is the one leg the old TestKit's bootstrap could have faked.
+
+⭐ **The discrimination is independently witnessed, not merely summarised.** The
+diagnostic drives two shortcut rebuilds, and our own `OnMsg.Shortcuts` handler
+logged the host's state at each: with `ConsoleEnabled = false` the rebuild
+produced **`console=false`** — `DE_Console` genuinely absent — and after the
+toolkit's arm the next rebuild produced **`console=true`**. Three lines from two
+code paths agreeing beats one boolean.
+
+⇒ On this build, with `Platform.cheats` unset and no GED tool open, the gate
+`AreCheatsEnabled() or ConsoleEnabled or Libs.DevToolsPublic`
+(`CommonShortcuts.generated.lua:176`) reduces to `ConsoleEnabled` **alone**, and
+the toolkit's arm is what sets it. The old TestKit bootstrap is excluded as an
+explanation because turning the flag off removed the console and our arm brought
+it back inside the same synchronous call.
+
+The pre-flight predicted this from the save headers' `Platform` tables (no
+`cheats`, no `developer`, no `asserts`); the sitting confirms it from the game.
+
+### Step 6 partially satisfied early
+
+The owner exercised the tab bar while working: `SMRTK_TAB` for
+`World`, `Agent`, `Sitting`, `World`, `Saves`, `Kit` (ids 17-22), all
+`status=OK`, plus two `SMRTK_MOVE ... status=OK`. Every registered page
+switches and the drag persists. No page content was expected or seen.
 
 ## Outbox items raised during the sitting (for 03A / 99)
 
