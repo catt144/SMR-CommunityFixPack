@@ -248,6 +248,71 @@ vanilla-UI injection problem, so it joins 03A's spike and P2 builds it; if no
 route exists that leaves vanilla unpatched while idle, the hotkey stays and that
 is a finding, not a failure. All four are in `03A_PAGES_FANOUT_codex.md`'s inbox.
 
+**03B JUDGED 03A, 2026-09-13 (Claude, cross-vendor): PASS WITH FIXES.** Every
+gate re-ran identically on HEAD; all 54 World actions and all 21 Selected
+actions were opened against the game source and every one calls a clean leaf —
+none of `EF-098`'s 13, no `NetSyncEvent` wrapper. Idle patching is **zero**
+(two toggles, both with matching uninstalls). Nothing needed re-firing. Report:
+[SMRTK_JUDGE](agent/reports/SMRTK_JUDGE.md). ⛔ Still nothing seen in play — 08
+is the first sitting for every page, stamp and effect.
+
+**⚖️ SIX THINGS TO RULE — this is the one consolidated append, as you asked.**
+Each carries 03A's recommendation and mine. **Nothing here blocks 07;** items
+1 and 6 are the only ones that could change what 08 tests.
+
+1. **The dock, the lettered SMR icon, the honest Delete caveat, the 48-character
+   Saves strip.** *03A:* accept provisionally, judge look-and-feel at 08; keep
+   eligibility showing **unavailable** next to the taint read, since no clean
+   read proves eligibility. *03B: **agree** on all of that* — and I fixed the
+   Delete caveat myself (it described buildings only; on a colonist Delete
+   removes the unit outright, so the label now says so).
+   ⚠️ **But one scope question is yours, and it is the biggest thing I found.**
+   The per-object section offers **22 actions where the vanilla cheats section
+   offers 106** — vanilla lists whatever the object has, the toolkit uses a
+   fixed list. Because the toolkit never re-enables vanilla's section, the other
+   84 are simply gone. Concretely: select a **colonist** and you get *Delete*
+   (which removes them outright) and nothing else, while vanilla would offer
+   Kill, Starve, Make Renegade, Age 1 Year and more. **Recommendation: extend
+   it, and my strong preference is before 08** — the safe route is already
+   proven (list the object's own actions the way vanilla does, but call them
+   the toolkit's untainted way, which P2 already does for its 22). It is a
+   build, so it is 03A's or a follow-up's, not mine. **Your call: extend before
+   08, extend after, or ship 22 as v1?**
+2. **Quiet mode delays scheduled disasters rather than stopping them; the
+   selected-rocket finish uses ordinary landing policy.** *03A:* retain both;
+   at 08 provoke quiet while a disaster is already running, re-arm rapidly, and
+   save/load once. *03B: **agree**, nothing to add.* Manual logger arms stay
+   yours to own.
+3. **Run-until pauses on any trigger *attempt*, not only a successful fire.**
+   *03A:* accept that, because the fire counter cannot tell success from
+   attempt; if you want success-only, someone must build a success signal
+   before 07 documents it. *03B: **agree** — accept attempt-pause for v1.*
+   Success-only is a real feature, not a bug fix; it is not worth holding the
+   chain. Related limits to know rather than decide: field watches see plain
+   values only, polling stops while paused, and "first Lua error since mark"
+   means first error *notification*.
+4. **Probes refuse to run until an agent provisions fresh desktop evidence for
+   that sitting; save/load legs use a disposable current-branch fixture.**
+   *03A:* retain. *03B: **agree**.* 03A also asked me to rule on the old
+   TestKit's console bootstrap: **I ruled keep it, with one line inverted** so
+   it stops forcing the on-screen console overlay — details are in my report and
+   in 07's inbox. Nothing for you there.
+5. **Snapshots stay scoped and bounded; verify on two loaded maps at 08.**
+   *03B: **agree**.* Whole-colony totals can wait until something needs them.
+6. **The layout stamper ships as a bounded v1:** flat cables and pipes, named
+   skips for passages, switches and special buildings, and no promise of
+   duplicating a whole colony. *03A:* accept the scope; 08 must witness fit,
+   dome membership, connected grids and upgrade state. *03B: **agree** — and
+   note the stamper has never placed a single object in the game.* Its desk
+   checks are three synthetic plans that deliberately mutate nothing, because
+   no link before 08 is allowed to launch the game. That is the correct
+   sequence, not a shortcut, but it does mean **08's stamp leg is the first real
+   test of the feature you called a game changer** — expect to spend real time
+   there, and expect v1 to skip things.
+
+⛔ **Nothing else is owed by you on smrtk right now.** 07 writes the docs and
+your 08 script next; 08 becomes takeable when that script lands.
+
 ### ✅ 2026-09-13 — 174 RULED: a fired one-off leaves the prompts map entirely
 <!-- ck:174 status:ruled owner:no -->
 

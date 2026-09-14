@@ -174,3 +174,82 @@ coordinator after release added setters in72/76/77, one-file gated commits.
 Strict combined fake now discards constructor Text; three editor counterfeits
 (World/Kit/Stamper) each goRED. Review XTextEditor171-175,221-228 and
 XControl624-634. P5 nineteen cases did not model editor initialization.
+
+### 03B judge outbox, 2026-09-13 — the cross-vendor split for you to adjudicate
+
+Verdict **PASS WITH FIXES**, `reports/SMRTK_JUDGE.md`. Judged at pack `2be7c73`,
+TestKit `cee5bab`; my one label fix makes TestKit `87f3130`. No game ran:
+`tasklist` for `Mars.exe` returned `INFO: No tasks are running which match the
+specified criteria.`
+
+**My disagreements with 03A, verbatim, for you to split:**
+
+**D1 — the one that matters.** 03A built P2's Selected section as a fixed table
+of 22 `Cheat*` member names (`73_SMRTK_Infopanel.lua:6-23`). Vanilla's section
+does not use a list: `InfopanelObj:CreateCheatActions`
+(`Lua/X/Infopanel.lua:22-40`) walks the metatable chain and offers every
+`Cheat*`/`AsyncCheat*` member. Measured on build 24995074: **94 `Cheat*` + 12
+`AsyncCheat*` = 106** distinct member names; P2 covers 22; **84 are gone**, and
+`AsyncCheat*` is absent as a category even though `SMRTK_UI_HOOKS.md:108`
+records that 03A knew those already avoid taint. Because the toolkit never sets
+`config.BuildingInfopanelCheats`, there is no fallback to them.
+Sharpest instance: `CObject:CheatDelete()` is `DoneObject(self)`
+(`_cobject.lua:1591-1593`) and is the only one of the 22 a Colonist matches, so
+the section offers the blunt universal removal while hiding
+`Colonist:CheatKill()` (`Colonist.lua:5144`) and `Drone:CheatDespawn()`
+(`Drone.lua:2989`).
+**03A conformed to its brief** — the P2 payload named exactly this list — so what
+I am handing you is the frame, not the conduct: is this "built to spec", or "an
+unstated gap in the headline deliverable"? I called it the second, because
+neither DEPARTURES nor SUGGESTIONS states the ratio, the dynamic route, or the
+dropped category. I did **not** RE-FIRE: no gate failed, no invariant broke, and
+the repair is a build outside my fence. Routed to ck175 item 1 as an owner scope
+call.
+
+**D2 — 03A asked me to rule on retiring `00_TestCore`'s console bootstrap; I
+ruled invert, not retire.** `00_TestCore.lua:519` calls `ConsoleSetEnabled(true)`
+at load, the one spelling rule 10 forbids (it also calls `ShowConsoleLog`,
+forcing the overlay `70_SMRTK_Core.lua:354` avoids). Retirement is wrong — the
+console is how probes are run, and 00's comment records a real dead-binding
+session — so the fix is to try plain assignment first and keep
+`ConsoleSetEnabled` as the fallback. Not applied: pre-existing infra, outside my
+five files. Note 02 already killed the evidence confounder with a discriminating
+A/B (`SMRTK_SKELETON_SITTING.md:416-439`), so this is hygiene, not a hole.
+
+**Where I agree with 03A, having checked rather than assumed:** all 54 P1 and all
+21 P2 routes open to clean leaf bodies (I extracted each body from source and
+grepped it for `NetSyncEvent`/`LogCheatUsed`); the three shared techniques were
+genuinely shared (exactly one `terminal.AddTarget` site, `70:416`, with all
+three consumers going through `T.AcquireClick`); rule 9 holds with exactly three
+global writes in two toggles; rules 6/7/10/11 hold; every cross-id resolves;
+P5's bounded completion via `site:Complete("quick_build")` is the correct
+response to `EF-099`'s amendment; P4's refusal of `LoadMetadataCallback` (it
+calls `DoneGame`) is load-bearing and right. I accepted P5's synthetic-plan
+gate: the brief's native-stamp gate was unsatisfiable inside 03A's fence, so it
+moves to 08 rather than being waived.
+
+**Instrument caution for you.** 03A's gate/smoke/merge scripts are 03A's own
+instruments. I re-ran the raw rule 6/7 greps and re-derived both README "Derived
+facts" by hand rather than inherit the harness — they agreed. But the harness has
+never been falsified against a known-bad tree. One cheap control if you want it:
+point `SMRTK_FANOUT_GATES.py` at a scratch copy with a single `NetSyncEvent`
+inserted and require RED. While re-running I found the manifest's own recipe is
+vacuous: `grep -c "NetSyncEvent"` on `CheatDef.lua` returns **26**, not the 13
+the table claims (13 calls + 13 `Comment =` lines). Routed to 07.
+
+**A false alarm, recorded so it is not re-run.** `75_SMRTK_Saves.lua:6` calls
+`os.time()` at load and `os = true` **is** in `ModEnvBlacklist` (`Mod.lua:1438`;
+the table spans 1280-1441, while `EF-096` says 1280-1416 — also wrong). It is
+still fine: `LuaModEnv` rawsets `env.os = { time = os.time }` at `Mod.lua:1618`
+before attaching the metatable. No finding; two `EF-096` corrections routed to
+07.
+
+**DRIFT to add to yours:** 03A's close-out commit `b4aadb4` carries a UTF-8 BOM
+in its subject line — the known PowerShell 5.1 rig hazard. My own drift: I spent
+a full verification cycle on the `os.time` false alarm before finding
+`Mod.lua:1618`; the blacklist read alone was not sufficient evidence and I
+should have looked for the env constructor before drafting a finding.
+
+**What I did not open**, so you know where I could be wrong: the panel's
+rendering path (`71_SMRTK_Panel.lua` beyond its registered ids), `91_Stress.lua`,
+and 25 of the 54 P3-P5 actions (I opened 29). I opened **all** of P1 and P2.

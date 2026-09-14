@@ -59,4 +59,60 @@ Outbox to 08 and 99; strike your row; `git rm` this file; push.
   §DEPARTURES/§SUGGESTIONS; Ctrl-Shift-F11 is the built hotkey. 02 still owns all
   in-game verdicts. The legacy console bootstrap remains until judged after 02.
 
-- (03B appends here)
+### 03B judge outbox, 2026-09-13
+
+**Verdict PASS WITH FIXES** (`reports/SMRTK_JUDGE.md`). Every 03A gate re-ran
+identically at pack `2be7c73` / TestKit `cee5bab`. All 54 P1 and all 21 P2
+actions were opened against source: every one calls a clean leaf, none of
+`EF-098`'s 13, no wrapper. Idle vanilla patches: **zero** (only `print_tee` and
+`quiet`, both toggles with matching uninstalls). Cross-ids all resolve; no stub
+is owed. Rules 6, 7, 9, 10, 11 hold, measured independently of 03A's harness.
+TestKit is now `87f3130` — I changed one label, nothing else.
+
+**Six things you must get right in the docs:**
+
+1. **Do not write "replaces the cheat menu" unqualified.** The Selected section
+   offers **22 of the 106** `Cheat*`/`AsyncCheat*` member names vanilla's
+   section would offer, and vanilla's section is unreachable while the toolkit
+   is loaded (`config.BuildingInfopanelCheats` is never set). On a Colonist the
+   section shows only Delete. Document the real coverage. ck175 item 1 asks the
+   owner whether to extend before 08; write to whichever way it is ruled.
+2. **08 must prove the console with `console_control`, never with "the console
+   opened."** `00_TestCore.lua:529` arms the console at mod load, so a passive
+   observation attributes nothing to the toolkit. 02's discriminating A/B
+   (`ConsoleEnabled` false -> rebuild -> `console=false`; arm -> `console=true`)
+   is the pattern; `SMRTK_SKELETON_SITTING.md:416-439`.
+3. **The 00 bootstrap edit I ruled but did not apply** (03A handed me the
+   retirement question; I ruled **invert, do not retire**):
+   `00_TestCore.lua:519` calls `ConsoleSetEnabled(true)` first, which is the one
+   spelling rule 10 forbids, because it also calls `ShowConsoleLog` and forces
+   the on-screen overlay every boot. Swap the order — plain
+   `ConsoleEnabled = true` first, `ConsoleSetEnabled` as the fallback. Both
+   fallbacks stay (a binding really did die once, 2026-07-25). `Mars.exe`
+   closed, then re-gate.
+4. **P5's stamp gate is a required 08 leg, not optional.** 03A substituted three
+   synthetic zero-mutation plans for the brief's three native stamps; that was
+   forced (no link before 08 may launch the game), so the gate moved rather than
+   was waived. Write native fit, GameInit, dome membership, connected grids and
+   upgrade state into the script as named witnesses.
+5. **Fix the manifest's own control recipe.** `prompts/smrtk/README.md`
+   "Derived facts" says `grep -c "NetSyncEvent"` on `CheatDef.lua` gives 13. It
+   gives **26** (13 calls + 13 `Comment =` lines naming the function), so the
+   recipe is vacuous as a control. Key it on the call form instead.
+6. **Two `EF-096` corrections, both small, both mine.** `ModEnvBlacklist` spans
+   `Mod.lua:1280-1441`, not 1280-1416. And `os` **is** blacklisted, but
+   `LuaModEnv` rawsets `env.os = { time = os.time }` at `Mod.lua:1618` before
+   attaching the metatable — so `os.time` is available to a mod (P4 relies on it
+   for its session nonce) and nothing else on `os` is. The naive read of the
+   blacklist says the opposite; record it so nobody "fixes" working code.
+
+**A documentation-only nuance, not a defect:** `quiet` and `90_Loggers`'
+DustDevils logger both wrap `_G.GenerateDustDevilIn`. Both toolkit directions
+refuse the nesting (`72:130-138`, `76:117`). The unguarded path is a bare
+console `SMRTest.Log.DustDevils(true)` while quiet is armed, which would strand
+quiet's wrapper. Tell an operator to disarm quiet before touching loggers from
+the console.
+
+03A's own for-07 outbox (button tables, emitted registries, the P3 slot
+template, P4's preflight contract, P5's 08 recipe) stands unchanged — I found
+nothing wrong in it.
