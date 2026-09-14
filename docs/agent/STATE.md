@@ -54,13 +54,13 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   Owner's 2 pared files (`for-modders.md`, `install.md`) stay uncommitted = decision 47.
 - ⭐ FR-1 TEMP WORKAROUND MOD LIVE 09-11 (Steam 3799500849 / PDX 158711). **ALL FR-1 / Linux / NVIDIA work →
   `prompts/perma/LINUX_DISPATCH.md`.** Field: 3 working (one 10xx), 1 failing (GTX 1070, log requested).
-- ⭐ **`prompts/smrtk/` (ck175): 02 GATE ✅ PASSED. 03A BUILT; 03B PASS WITH FIXES 09-13; item 1 RULED 09-14 extend Selected before 08 ⇒ NEXT Codex **03C**, then 07, 08, 99.**
+- ⭐ **`prompts/smrtk/` (ck175): 02 GATE ✅ PASSED. 03A BUILT; 03B PASS WITH FIXES 09-13; item 1 RULED + **03C BUILT 09-14** ⇒ NEXT Codex **07**, then 08, 99.**
   Verdict + corrections `reports/SMRTK_SKELETON_SITTING.md`; logs `archive/logs/smrtk02_*` (`ObjCheat` 1 in the control boot, **0** in the toolkit boot).
   ⛔ 01's leaf targeted `StorageDepot.resource`, which **no** shipped depot has — every depot is `UniversalStorageDepotBase`, discriminator `#storable_resources` (binds P2).
   ⛔ Eligibility stays `UNAVAILABLE:sandbox` (`EF-096`) — no-taint is necessary, NOT proven sufficient.
   ⭐ **Owner UI ruling 09-13: floating panel DEMOTED**, ranked ladder in ck175; 03A descends it without asking.
   Build: dock/section + fixed advanced side panel; `reports/SMRTK_FANOUT_REPORT.md`, judge `reports/SMRTK_JUDGE.md` (TestKit `87f3130`).
-  ⚠ Selected section exposes **22 of 106** vanilla `Cheat*` members — ck175 item 1 asks the owner whether to extend before 08. Nothing seen in play yet.
+  ⚠ Selected covers **106/106** source names (22 curated + 84 More, 12 async), TestKit `f093e3b`, `reports/SMRTK_03C_EXTEND.md` — desk fixtures, NOT a colony census; nothing in play.
 - ⏭ NEXT: fire `prompts/STANDDOWN_AUDIT.md` (no blocker) · `prompts/C92_ACHIEVEMENT_BUILD.md` (build+test, ⛔ ships never
   without ck172's hold lifted) · then the playtest sitting. ⛔ `SELFCHECK_PILOT` REMOVED 09-13 (`cf8d51f`).
   Owner OWES: ck144 (a) the boot · ck151 (b) dev-report scope · ck175 sitting 08 when 07's script lands (02 DONE). Handoff `prompts/perma/HANDOFF_ORCHESTRATOR.md` §3 LIVE.
