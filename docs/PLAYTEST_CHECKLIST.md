@@ -822,13 +822,26 @@ a ruling carries the state it was made in — **that one was made before anyone 
 stamper had never placed a single object in the game, and before defect 21 showed its
 capture guard rejects every building.** The condition changed, so revisiting is legitimate.
 
-⛔ **THE CHAIN CONSEQUENCE, which the licence does not state:** **`08b` exists for nothing
-else.** Its whole job is blocks 13–15 — class 18, the three native stamps. ⇒ **If the
-stamper is removed, 08b is not "gated", it is moot and should be RETIRED, not fired.**
-Whoever acts on a removal recommendation retires 08b in the same breath, or the chain keeps
-an attended sitting on the queue for a feature that no longer exists. ⚠️ Defect 21's
-one-line fix goes in either way — it is what makes an honest evaluation possible, and it is
-too cheap to gate on the outcome.
+⭐ **08b SURVIVES A REMOVAL VERDICT — it has a second job (owner, 2026-09-14):** *"08B will
+still have a job we need to confirm the new menu layout, the positioning."* ⇒ **08b is the
+first play contact for 09's re-layout**, and that is true whatever happens to the stamper.
+⛔ **An earlier version of this block said 08b would be "moot" and should be retired — that
+was WRONG and is struck.** What a removal verdict changes is 08b's *scope*, not its
+existence: it loses the class-18 half (blocks 13–15, the three native stamps) and keeps the
+surface half.
+
+⚠️ **The machinery for that was already right, only the conclusion was wrong.** 09's
+close-out already requires it to **name every 08 verdict its changes invalidate and append
+that list to 08b's inbox** — because 08 scored **block 1 (dock, status, navigation —
+classes 1, 2, 4) PASS against the OLD surface**, and a re-layout puts that verdict out of
+date. ⇒ 08b's surface job comes in through that inbox; what it needs is the brief's own
+"⛔ re-runs nothing from classes 1–17" line relaxed to match, **folded in at 09's close-out**
+(`prompts/smrtk/` is 09's lane while it runs, so it is not edited from outside).
+
+⚠️ Defect 21's one-line fix goes in **either way** — it is what makes an honest evaluation
+possible, and it is far too cheap to gate on the outcome. ⛔ A verdict of *"it can never
+work"* reached without first fixing the guard that rejects every capture would not be worth
+recording.
 
 #### ⚖️ STILL YOURS TO ANSWER — three open design questions
 
