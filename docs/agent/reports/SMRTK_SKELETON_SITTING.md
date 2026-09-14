@@ -20,7 +20,8 @@ vendor scores the predictions. Pack HEAD `320d359`; TestKit HEAD `5d8d3b3`.
 - [x] Step 1 COMPLETE: fresh clean boot, PreLoadGame arm, hotkey both ways, `used=false`, scratch discarded.
 - [x] Step 2 COMPLETE: ⭐ **P2 PROVEN** — `discriminates=true negative=false positive=true`.
 - [x] Step 3 COMPLETE: ⭐⭐ **P1 PASSES** — leaf filled the depot, `used=false`, zero `ObjCheat` all boot.
-- [ ] Owner sitting, steps 4–8 (P3 tap/clipboard, P4 persistence).
+- [x] Step 4 COMPLETE: ⭐ **P3 PASSES** on the native path; clipboard verified from Windows itself.
+- [ ] Owner sitting, steps 5–8 (tee redundancy, frame, error witness, P4 persistence).
 - [ ] Prediction-by-prediction scoring; verdict; archived log path.
 - [ ] Outbox to 03A and 99; ck175 in plain language; strike the row; `git rm` 02.
 
@@ -565,6 +566,52 @@ not a design intention.
 eligibility, not proven sufficient. This is one action on one class; P2 must
 re-establish the same property per action as it builds them, and the step 3
 defect above shows the object model is where that will go wrong.
+
+## Step 4 — ⭐ P3 PASSES on the native path, with echo-rejection proven empirically
+
+```text
+SMRTK_MARK action=mark label=MARK   mark=69 status=OK id=43   (the button)
+SMRTK_MARK action=mark label=native mark=71 status=OK id=44
+SMRTK_TAP_READ action=tap_read native_console=1 native_print=1 status=OK id=45
+SMRTK_COPY action=copy from=71 lines=9 status=OK truncated=false id=46
+```
+
+01 predicted `native_console=1 native_print=1`, clipboard carrying the output
+witnesses as `source=console` and toolkit records as `source=toolkit`.
+**Measured exactly.**
+
+**The clipboard was read from the Windows clipboard by the attending session**
+(`Get-Clipboard -Raw`, 1079 bytes, 9 lines — matching `lines=9`), not
+transcribed by the owner. That is a stronger result than the brief asked for:
+it proves the copy reached the real OS clipboard, not merely an internal buffer.
+
+### ⭐ Echo rejection is now empirical, not just argued
+
+The ring contains **both** the typed echo and the real output for each witness,
+and the counter took only the output:
+
+```text
+[tap n=73 ... source=console] > print("SMRTK_NATIVE_PRINT_100%")      <- echo
+[tap n=74 ... source=console] SMRTK_NATIVE_PRINT_100%                  <- output, counted
+[tap n=75 ... source=console] > ConsolePrint("SMRTK_NATIVE_CONSOLE_100%")
+[tap n=76 ... source=console] SMRTK_NATIVE_CONSOLE_100%                <- output, counted
+```
+
+`native_print=1` and `native_console=1`, not 2. The pre-flight predicted this
+from `tap_read`'s exact-string comparison against `AddConsoleLog("> " .. text)`
+(`uiConsole.lua:369`); the sitting confirms it with both rows visible in the same
+capture. A tap that counted echoes would have read 2 and would have passed for
+the wrong reason.
+
+`source` metadata also discriminates as designed: `source=toolkit` on our own
+`SMRTK_MARK`/`SMRTK_TAP_READ` records, `source=console` on native delivery. So
+"a ring full of our own lines" is excluded as an explanation — 01's stated
+falsifier for this leg.
+
+⇒ **P3's requirement is met on the native route alone**: a real `print` output
+reached the tap, and the clipboard pasted it. Step 5's tee is therefore a
+*redundancy* check rather than P3's last chance, and is still worth running for
+the ARM/FIRE/DISARM machinery that step 8 depends on.
 
 ## Outbox items raised during the sitting (for 03A / 99)
 
