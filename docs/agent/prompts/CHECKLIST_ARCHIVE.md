@@ -66,6 +66,23 @@ to group 2 below — do not invent a word for it.**
 - prove the archive gained exactly the moved bytes and nothing else;
 - prove the tool **refuses** on a dirty tree and on a RED doccheck (break each on the copy).
 
+⛔ **Narrow the cleanliness rail to what the tool actually writes.** `git_is_clean()` runs
+`git status --porcelain` with **no pathspec**, so any peer's uncommitted file anywhere in
+the repo refuses the apply. The tool writes exactly two files. Scope the check to
+`docs/PLAYTEST_CHECKLIST.md` and `docs/archive/PLAYTEST_ARCHIVE.md`; leave the doccheck-GREEN
+rail whole-repo, and make the refusal message say **which** rail blocked and **which paths**
+were dirty. Measured 2026-09-13: those two files were clean while the repo carried five
+peer-owned dirty paths, and the owner was mid-overhaul in the *separate* `SMR-BugFixPack-TestKit`
+repo — whose dirt never appears here, and whose doccheck line is report-only. ⛔ This narrows
+the rail; it does not remove it, and it only holds **with the sha guard below** in place.
+
+⛔ **Do NOT move this work to a separate worktree or branch.** It was considered and
+rejected 2026-09-13: the sha guard protects the load→write window *in the same tree*, so
+working elsewhere and merging later defeats it and substitutes a merge on a 741 KB file
+where peers insert at the top of the section while this job deletes bodies throughout. A
+mis-resolved conflict there silently loses a decision record. ⛔ And never check out a
+branch in the main tree — it is the game's loadable mod via a junction.
+
 ⛔ **Close the load→write race before either move.** `main()` reads the checklist at
 line 320 and writes it at line 508; `git_is_clean()` sits at line 489, between them. It
 catches a peer's *uncommitted* edit, but a peer **commit** landing in that window leaves
