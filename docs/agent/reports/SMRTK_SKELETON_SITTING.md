@@ -16,7 +16,8 @@ vendor scores the predictions. Pack HEAD `320d359`; TestKit HEAD `5d8d3b3`.
       checked against the built code and against `ModTools\Src`.
 - [x] Fixture survey (corrected after the owner named the real saves) + backup of both.
 - [x] Decoded both fixtures' savegame bodies; `CheatsUsed` read false against a positive control.
-- [ ] Owner sitting, steps 0–8.
+- [~] Owner sitting: step 0A read CLEAN and scored; baseline saved and verified on disk; 0C control pending.
+- [ ] Owner sitting, steps 1–8.
 - [ ] Prediction-by-prediction scoring; verdict; archived log path.
 - [ ] Outbox to 03A and 99; ck175 in plain language; strike the row; `git rm` 02.
 
@@ -282,6 +283,69 @@ without loading a game. Three things it does establish, and two it does not:
   (01's disagreement 2) already having created `DE_Console`. It is exactly the
   confounder step 2 exists to isolate; it is not evidence for P2.
 - Nothing here reads taint, the tap, the clipboard, or persistence.
+
+## Outbox items raised during the sitting (for 03A / 99)
+
+### ⛔ The owner's cheat route sets `Platform.cheats`, and it would poison step 2
+
+**Owner, during the sitting:** *"I have to manually copy and paste these to
+commands `Platform.cheats = true` `CheatToggleInfopanelCheats()`"*.
+
+That is a **session-global** enable, not the transient GED-window one this
+report described earlier. Consequence, from the gate read above
+(`CommonShortcuts.generated.lua:176`): with `Platform.cheats = true` in force,
+`AreCheatsEnabled()` is true, so `SMRTK.ConsoleControl()`'s negative leg reads
+`negative=true` and step 2 is **non-discriminating** — it would fail to credit
+our hook for a reason that is the sitting's own doing, not a defect.
+
+⇒ **Step 2 is only valid in a boot where `Platform.cheats` was never set.**
+The brief's ordering already protects this (control → quit → fresh load), because
+`Platform` is rebuilt per process. The binding instruction is: in the boot used
+for steps 1–8 the owner must **not** paste `Platform.cheats = true`. Making that
+paste unnecessary is a large part of what the toolkit is for.
+
+Step 0A's `PLATFORM_READ cheats=nil` was taken **before** any such paste, so the
+baseline reading stands.
+
+⭐ **This is also a scope finding for 03A/P4.** The owner's habitual route is two
+pasted lines every session, one of which flips a global that changes what the
+game's own shortcut gate does. A toolkit button that arms the *console* without
+touching `Platform.cheats` is the thing that retires that paste — and the
+difference is exactly what step 2 measures. Whatever P4 builds for "force-open
+console", it must not set `Platform.cheats`.
+
+### CLEAR logs onto the screen it just wiped — peer finding, verified, fix corrected
+
+Raised by the orchestrator session `smr-bugfixpack-8f` during the sitting.
+**Verified here, both sides:**
+
+- Live log carries `SMRTK_CLEAR action=clear status=OK t=7506849 id=22`.
+- Mechanism confirmed at source: `dispatch` runs `pcall(callback, ...)` — for
+  `clear` that is `cls()` (`70_SMRTK_Core.lua:258`) — and only then calls
+  `T.Log(verb, fields)` (`:194`). The log line is printed after the wipe, so a
+  "clear screen" button reliably leaves exactly one line on screen.
+
+⚠️ **Correction to the proposed fix.** The peer described it as "a one-line
+reorder in the core", emitting `SMRTK_CLEAR` before `cls()`. It is not, because
+the line is not emitted by the action body at all — it is emitted by the generic
+`dispatch` after the callback returns. Three shapes, only one of which is sound:
+
+1. ⛔ **Move `T.Log` before `pcall(callback)` for all actions** — breaks every
+   action whose fields come from the callback's return value. Step 3's own
+   `SMRTK_ACTION` line carries `before=`/`after=`, which do not exist yet at that
+   point. This would silently empty the most important record in the sitting.
+2. ⚠️ **Defer `cls()` onto a thread** so it lands after the log — reintroduces
+   ordering nondeterminism for a cosmetic gain.
+3. ✅ **A per-action opt-in honoured by `dispatch`** (e.g. `log_first = true` on
+   the `clear` definition), so the record reaches file, ring and screen, and the
+   wipe then takes the screen. Requirement (B) is untouched: one line, one
+   logger, still present everywhere an agent reads.
+
+Dropping the line is the worst option — an agent reading the log wants to know
+the screen was cleared at that moment. **No code was changed during the sitting**
+(rule 16, `Mars.exe` live; and the core is the instrument under measurement).
+03A/03B decide the shape.
+
 
 ## Verdict
 
