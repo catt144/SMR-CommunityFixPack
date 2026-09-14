@@ -54,7 +54,7 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   Owner's 2 pared files (`for-modders.md`, `install.md`) stay uncommitted = decision 47.
 - ⭐ FR-1 TEMP WORKAROUND MOD LIVE 09-11 (Steam 3799500849 / PDX 158711). **ALL FR-1 / Linux / NVIDIA work →
   `prompts/perma/LINUX_DISPATCH.md`.** Field: 3 working (one 10xx), 1 failing (GTX 1070, log requested).
-- ⭐ **`prompts/smrtk/` (ck175): 02 GATE ✅ PASSED. 03A BUILT; 03B PASS WITH FIXES 09-13; item 1 RULED + **03C BUILT 09-14** ⇒ NEXT Codex **07**, then 08, 99.**
+- ⭐ **`prompts/smrtk/` (ck175): 02 GATE ✅ PASSED. 03A BUILT; 03B PASS WITH FIXES 09-13; item 1 RULED + 03C + **07 ALL BUILT 09-14** ⇒ NEXT **08, the owner's attended sitting**, then 99.**
   Verdict + corrections `reports/SMRTK_SKELETON_SITTING.md`; logs `archive/logs/smrtk02_*` (`ObjCheat` 1 in the control boot, **0** in the toolkit boot).
   ⛔ 01's leaf targeted `StorageDepot.resource`, which **no** shipped depot has — every depot is `UniversalStorageDepotBase`, discriminator `#storable_resources` (binds P2).
   ⛔ Eligibility stays `UNAVAILABLE:sandbox` (`EF-096`) — no-taint is necessary, NOT proven sufficient.
@@ -63,7 +63,8 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   ⚠ Selected covers **106/106** source names (22 curated + 84 More, 12 async), TestKit `f093e3b`, `reports/SMRTK_03C_EXTEND.md` — desk fixtures, NOT a colony census; nothing in play.
 - ⏭ NEXT: fire `prompts/STANDDOWN_AUDIT.md` (no blocker) · `prompts/C92_ACHIEVEMENT_BUILD.md` (build+test, ⛔ ships never
   without ck172's hold lifted) · then the playtest sitting. ⛔ `SELFCHECK_PILOT` REMOVED 09-13 (`cf8d51f`).
-  Owner OWES: ck144 (a) the boot · ck151 (b) dev-report scope · ck175 sitting 08 when 07's script lands (02 DONE). Handoff `prompts/perma/HANDOFF_ORCHESTRATOR.md` §3 LIVE.
+  Owner OWES: ck144 (a) the boot · ck151 (b) dev-report scope · ck175 sitting 08 **TAKEABLE NOW** (07's script landed).
+  ⛔ 08 needs a **NEVER-CHEATED** 1.1.0 fixture ⇒ it is a SEPARATE boot from ck144 (a), not a combine. Handoff `prompts/perma/HANDOFF_ORCHESTRATOR.md` §3 LIVE.
   Desk `prompts/DLC_DEEP_CHECK.md` (`HUNT_AUDIT.md` §8). Chain `prompts/fixtoggles/` DEFERRED 09-12 (ck148, not started).
 - Watches: `EF-066` subclass reach unmeasured, ck74 half-open · localisation: German only one SEEN (`EF-039`) ·
   C47 (unrun) · C48 opt-in · F02/F78/F81 organic · riders C42/F99/F80/F96-R2 · `EF-051` falsifier = stray save ·
