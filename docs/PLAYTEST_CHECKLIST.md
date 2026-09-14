@@ -72,7 +72,7 @@ say exactly why:
 
 | bucket | items | bytes | why it stays |
 |---|---|---|---|
-| `KEEP-unmarked` | 65 | **366,052 B (54%)** | carries no `ck:` marker comment at all, so the classifier has no status to read |
+| `KEEP-unmarked` | 65 | **366,052 B (54%)** | ⚠️ label is a misnomer — it means *not a candidate*: no marker, **or** a marker whose status is not `ruled`/`closed` (see the correction below) |
 | `KEEP-d` number-cited | 27 | 141,153 B (21%) | STATE/perma cite these numbers |
 | `KEEP-archive-old` | 18 | 92,261 B (14%) | correctly identified as old — but **report-only, never moves** |
 | `KEEP-c` procedure-bearing | 3 | 18,381 B (3%) | carries a recipe or fenced block |
@@ -89,6 +89,19 @@ marker on it.**
 Re-check both numbers:
 `python -X utf8 .claude/tools/archive_settled.py` (per-item table, tally the last column) ·
 `doccheck` already reports the same shortfall from the other end as **"29 need a marker"**.
+
+**⚠️ Correction 2026-09-14 — the `KEEP-unmarked` gloss above was wrong, and the bucket
+table is now a 09-13 snapshot.** Two things, so nobody re-derives them:
+
+- **The label does not mean "carries no marker".** `is_candidate` is
+  `marker and status in ("ruled", "closed")` (`archive_settled.py:148`), so an item marked
+  `status:open` is a non-candidate and falls into the same bucket. Live proof: **176, 173,
+  171 and 169** all carry `open` markers and all report `KEEP-unmarked` — run the script
+  and read the rows whose status column is not `unmarked`. The substantive figures in this
+  item were measured independently and stand; only the "why it stays" wording was wrong.
+- **The re-check recipe no longer reproduces these numbers.** The archival below moved
+  155 KB out, so the script now reports a different split. Re-run it for *today's* position,
+  not to confirm the table — the table is the pre-archival state the decision was taken on.
 
 **The decision — scope, and it is yours**
 
