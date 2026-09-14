@@ -30,6 +30,7 @@ exists, and a struck row is RED. A row that outlives its file is how a next sess
 | `DRONE_PROJECT_PROMPT.md` | drone work |
 | `COMBINED_SITTING.md` | the PT-20 per-era re-check recipe (it ran 08-14; nothing owed) |
 | `CO_RUNS.md` | the attended co-run protocol (labor-inverted experiment legs); binding when it applies |
+| `SMRTK_SLOTS.md` | preload a sitting into TestKit's agent-owned slots, write predictions, then hand off to the owner |
 
 ## Root — live one-offs
 

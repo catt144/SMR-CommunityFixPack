@@ -510,6 +510,20 @@ co-run model exists to protect. See also the standing fixture rule — playtest
 saves are PROVISIONED before an agent ever reads them, so their state is never
 "fresh".
 
+**SMR Tool Kit attribution — 2026-09-14 (smrtk 07, as built).** Use the
+TestKit's Selected section and World controls in place of vanilla's cheat menu
+for playtesting. Selected exposes supported curated and More methods; it does
+not reproduce the entire vanilla menu. `[SMRTK] SMRTK_<Verb>` records are
+intentional test actions, attributed by construction: **never ask the owner
+about one**. Count and name them, and name any intersection with the mechanism
+being measured. A vanilla `ObjCheat`/`Cheat` marker in a **new** log is now the
+exception worth one attribution question; do not reopen old disclosures.
+The taint strip detects a tainted save (`EF-095`). Its separate eligibility
+field is `UNAVAILABLE:sandbox` on build 24995074 (`EF-096`); absence of taint
+never proves eligibility OK. Normal life-support provisioning remains allowed;
+a no-taint experiment must still declare and provision its clean fixture.
+The advanced pages are built, with their first attended checks assigned to 08.
+
 ### ⛔ BOTH MODS LOADED is the rig's NORMAL condition (owner rule 2026-08-12 — ⚖️ ACTIVE since the `split-optins` terminal audit, same date)
 
 **The owner's words, given while the `split-optins` chain was authored:**
@@ -904,6 +918,8 @@ The three classes are stated once, in `CLAUDE.md`, because every agent needs the
 could decide to load anything. R-A is how class 2 is discharged: one command, not a re-read.
 
 ## Writing in a shared tree (traps, each one cost a real error)
+
+`80_AgentSlots.lua` is agent-owned, rewritten per sitting using `prompts/perma/SMRTK_SLOTS.md`, never edited by a build link.
 
 Five or more interactive sessions work this checkout at once. These are mechanical rules about
 that, not rails — they were homed here 2026-09-13 from `prompts/perma/HANDOFF_ORCHESTRATOR.md`,

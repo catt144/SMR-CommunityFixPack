@@ -60,14 +60,10 @@ findable there and commands are findable here.
      same claim. (Worked example: the C26 dumps of 2026-08-02 were taken ~1 minute after
      load *because the instruction said to* — their strength is the colony's 288 sols of
      history, not live play during the reading.)
-7. **The console AUTO-OPENS shortly after a colony is up — loads AND new
-   games** (Test Kit; the 2026-07-26 build waits for the loading screen to
-   close, fixing the dead console every NEW save used to get — takes effect
-   from the next game launch). If closed, reopen with **Ctrl-Alt-C** (the
-   kit's own binding, rebuild-proof) or Enter / Alt-Shift-C (the shipped
-   binding — worked in the same verification, but one earlier session had it
-   inexplicably dead, hence the fallbacks). Last resort: a Mod Editor test
-   session grants the console unconditionally.
+7. Use the TestKit's SMR dock icon or **Ctrl-Shift-F11** for the toolkit.
+   Open the console with Enter / Alt-Shift-C, or Kit → Open console.
+   The existing TestKit auto-open and Ctrl-Alt-C fallbacks remain as built.
+   You do not need to open the console before loading a colony.
 
 ### ⚠️ EXTERNAL VALIDITY — how far our results generalise (added 2026-07-29)
 
@@ -101,50 +97,64 @@ way. Full analysis on the D06 entry — it is the model for how to write these u
 
 ### Cheating without contaminating results
 
-**Sanctioned speed techs** (relocated 2026-08-04 from the standing prompt):
-`AdvancedDroneDrive`, `LowGDrive`, `MartianAerodynamics` — setup accelerators
-with no bearing on any fix under test. Everything else: judge by the rule
-below.
+Use the SMR Tool Kit for test setup and colony life support. These instructions
+describe the 03A/03C build; sitting 08 checks the new pages in play.
 
-Cheat the **setup**, never the **mechanism under observation**. The fixes patch
-decision logic; cheats inject state (money, goods, people, buildings) — state
-injection is exactly what the scenarios need. Each PT's Setup line names its
-cheats; when one must stay OFF, the PT says so. Standing accelerators — use
-freely: `CheatAddFunding`, `CheatCompleteAllConstructions`,
-`CheatSpawnNColonists`, `CheatUpdateAllWorkplaces`,
-`dbg_ToggleRocketInstantTravel`, `CheatToggleInfopanelCheats`, `MultiCheat`,
-`CheatUnlockAllBuildings`.
+1. Enable the TestKit alongside the normal test mods and load your colony.
+2. Click the SMR icon on the game's dock for its menus. Press Ctrl-Shift-F11
+   to open or close the fixed advanced side panel.
+3. Select an object for its SMR Tool Kit section. Use Fill or Empty on a
+   depot, or another supported action. Delete removes an object; Destroy
+   (blow up) follows its destruction behavior. Use scratch buildings for both.
+4. Open the page you need. Sitting: marks, copy, flush, clear, pause and status reads.
+5. Selected: curated object actions, grouped More actions, dump and pins.
+6. World: disasters, speed, run-until, repairs, supplies, people and research.
+7. Agent: six prepared slots, Scratch, pins, notes, triggers and Screenshot + Mark.
+8. Saves: Save, Load and explicit Override load for slots A, B and C, with provenance.
+9. Kit: probes after the agent's preflight, loggers, console, snapshots and scalar field watches.
+10. Stamper: capture selected, rectangle or map; plan at a click; stamp; apply upgrades separately.
+11. Check the taint strip. CLEAN means no recorded cheat taint; TAINTED means
+    the save is already tainted. Eligibility is a separate field and reads
+    UNAVAILABLE:sandbox on this build. CLEAN does not prove achievements are eligible.
+12. Mark before a test action, check its result, then copy since the mark.
+    Each toolkit record starts with [SMRTK] SMRTK_. The agent treats these as
+    intentional test actions and never asks you to explain them.
+13. Press F9 to clear the on-screen log. The file log and toolkit ring remain.
 
-⛔ **TWO OF THESE DIED IN GAME 1.1.0 (verified against the shipped source
-2026-09-08, after the owner hit it live).** 1.1.0 converted them from global
-functions into `CheatDef` presets, so the old names raise "attempt to call a
-nil value" — or, worse, are simply not there:
+Selected offers the methods the current object supports. As built, its source
+coverage is 22 curated names plus 84 More names (72 Cheat, 12 AsyncCheat),
+covering 106/106 shipped names across object types. This is not 106 buttons on
+one object: Add Dust chooses one of two alternatives. More actions retain
+vanilla method names; some open editors or use debug services unavailable on
+retail. Close a Properties editor before continuing. Changed selection refuses
+an old action, and a busy mechanized depot refuses Fill/Empty until it stops.
 
-| dead on 1.1.0 | use instead | why |
-|---|---|---|
-| `CheatResearchAll` | `CheatDefs.ResearchAll:run()` | now `CheatDef` `id = "ResearchAll"` (`Data/CheatDef.lua:848-864`). This is the exact call the game itself makes at `Lua/Cheats.lua:231`. |
-| `CheatFillAllStorages` | `CheatDefs.FillAllStorages:run()` | now `CheatDef` `id = "FillAllStorages"` (`Data/CheatDef.lua:388-395`). |
+Change the setup only where it does not intersect the mechanism being measured.
+Filled storages may keep a fixture alive; they invalidate a shortage reading.
+Speed techs AdvancedDroneDrive, LowGDrive and MartianAerodynamics remain setup
+accelerators when the brief allows them. Notification waits use game time.
+For PT-10/F55 use World's Open domes; the vanilla CheatOpenAllDomes variant also
+changes terraforming. Do not use the old Platform.cheats/menu-enable paste.
 
-⚠️ `ResearchAll`'s body opens `if not UIPlayer then return end`, so on 1.1.0 it
-can **silently do nothing** rather than error. If it no-ops, use
-`CheatDefs.UnlockAllTech:run()`, which goes through `UIColony` instead
-(`Data/CheatDef.lua:914-931`).
-⭐ For provisioning, `MultiCheat()` is still a global and still the best single
-line: all buildings + all sponsor buildings + deep-scanned map + research
-everything (`Lua/Cheats.lua:227-232`).
-⛔ The general rule this exposed: **a cheat name is a claim too.** After any
-game update, check it against `ModTools\Src` before writing a provisioning
-plan around it — every other name in the list above was re-verified on
-2026-09-08 and still resolves.
+An armed map tool takes world clicks; right-click cancels. Save/load/map change
+disarms slots, triggers and targets; loading/changing maps clears pins. Polling
+watches see scalar values at their cadence, miss intermediate changes and stop
+advancing while paused. Disarm quiet before using loggers from the console;
+the panel refuses conflicting quiet/DustDevils logger arms.
 
-Two standing cautions:
+Stamper is bounded v1 duplication. Use a new name, capture, and Plan at click
+first. Planning places zero objects. Resume before stamping; partial aborts can
+leave placed objects. Inspect dome membership and grid connections afterwards.
+Passages, suspended grids, switches and special placement families are named
+skips; a map capture can refuse its size cap. Apply captured upgrades is a
+separate action and may unlock upgrades colony-wide. Fill storages acts across
+maps; Add 10 colonists and Funding +500M are separate follow-ups.
 
-- **Notification/warning windows run on GAME time**, not wall-clock (measured
-  live 2026-07-27: the "Building Not Working" dismissal window is 120,000
-  game-ms = 4 game hours) — higher game speed SHORTENS such waits, it does not
-  stretch them.
-- **PT-10 / F55**: use `OpenAllDomes()`, not `CheatOpenAllDomes()` — the Cheat
-  variant also maxes terraforming params and muddies the observation.
+The panel cannot clear an achievement or access account.dat (`EF-094`), run
+code from a string, or read vanilla's eligibility verdict (`EF-096`). An agent
+preloads real Lua functions into the slots before launch. A no-taint experiment
+needs an explicitly prepared clean 1.1.0 save (`EF-095`); old cheated fixtures
+cannot prove that the toolkit added no taint.
 
 ### ⚠️ Compressing a scheduler with `g_Consts` — the false-PASS trap (learned running PT-11, 2026-07-29)
 
@@ -206,6 +216,19 @@ on **severity** assessments: a defect that mis-resolves a salvage target is
 announced to the player before they commit, so it can never be a silent trap.
 
 ### Console: what works and what silently does nothing
+
+The toolkit's console control was witnessed in sitting 02 with the Mod Manager
+closed: disabling ConsoleEnabled and rebuilding removed DE_Console; arming
+ConsoleEnabled and rebuilding restored it. The logged result was
+`SMRTK_CONSOLE_CONTROL discriminates=true negative=false positive=true status=OK`,
+with independent `SMRTK_SHORTCUT console=false` then `console=true` witnesses
+(`agent/reports/SMRTK_SKELETON_SITTING.md`, step 2). Use Enter / Alt-Shift-C or
+Kit → Open console after loading; opening before load is no longer a workaround.
+The legacy auto-open/Ctrl-Alt-C fallbacks remain. Its bootstrap still calls
+ConsoleSetEnabled first and can show the overlay at boot; the judge's order
+inversion is owed to a code link, and F9 clears the overlay meanwhile.
+Toolkit marks/copy/flush give attributed file evidence. 02 witnessed the native
+console-line tap and clipboard, not every new page's behavior; 08 checks those.
 
 On a retail build the console runs inside the **mod sandbox** (`CommonLua/console.lua:27-56`:
 non-asserts + `config.Mods` → `g_ConsoleFENV = LuaModEnv(...)`, and its `__index`/`__newindex`
