@@ -184,6 +184,7 @@ else:
     end
     XWindow=setmetatable({class='XWindow'},{__index=window})
     XScrollArea=setmetatable({class='XScrollArea'},{__index=window})
+    XSleekScroll=setmetatable({class='XSleekScroll'},{__index=window})
     XDialog=setmetatable({class='XDialog'},{__index=window})
     XButton=setmetatable({class='XButton'},{__index=window})
     XText=setmetatable({class='XText'},{__index=window})
@@ -202,7 +203,7 @@ else:
     assert(p.status.Text:find('eligibility: unavailable (sandbox)',1,true))
     assert(SMRTK.Run('tab_World') and SMRTK.PanelState().tab=='World')
     assert(SMRTK.Run('panel_collapse') and not SMRTK.PanelState().collapsed)
-    assert(p.tabs.visible and p.page_host.visible and p.MinHeight==540)
+    assert(p.tabs.visible and p.page_frame.visible and p.MinHeight==540)
     assert(SMRTK.Run('panel_collapse') and not p.tabs.visible and p.MinHeight==100)
     local ok,result=SMRTK.Run('pause'); assert(not ok and result.status=='NOT_BUILT')
     local strip=p[1]

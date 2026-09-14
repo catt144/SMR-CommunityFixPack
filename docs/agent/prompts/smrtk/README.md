@@ -57,7 +57,7 @@ contract). Authoring mechanics: `agent/WORKFLOW.md` "Authoring a prompt" element
 |---|---|---|---|---|
 | ~~01~~ | ~~`01_SKELETON_BUILD_codex.md`~~ | ~~**Codex — Astra, xhigh** (difficulty 7; the chain's load-bearing leg)~~ | ~~no~~ | ~~job 0 re-validates this Claude-authored cut (a cross-vendor read of the plan); core (slot engine, logger, ring buffer, taint assert, `ConsoleEnabled` arm), the panel frame (status strip, top row, tabs), MARK / Copy / Flush / cls / eligibility; predictions + 02's script~~ |
 | ~~02~~ | ~~`02_SKELETON_SITTING_owner.md`~~ | ~~Claude attending (attended)~~ | ~~✅ keyboard~~ | ✅ **RAN 2026-09-13 — P1/P2/P3/P4 all PASS, gate does NOT fire.** Verdict + corrections + both outboxes: `reports/SMRTK_SKELETON_SITTING.md`; logs `archive/logs/smrtk02_*` |
-| 03A | `03A_PAGES_FANOUT_codex.md` | **Codex — Sol, xhigh or max** as coordinator; payload seats below | no | the spike (shared UI-hook techniques, once), then the five payloads below as parallel subagents; gates per result; commit per file; a numbered-claims report |
+| ~~03A~~ | ~~`03A_PAGES_FANOUT_codex.md`~~ | **Codex — Sol, xhigh or max** as coordinator; payload seats below | no | BUILT 2026-09-13; `reports/SMRTK_FANOUT_REPORT.md`; NEXT Claude 03B; no page play claim |
 | 03B | `03B_JUDGE_claude.md` | **Claude** (Opus) | no | re-runs every gate, samples routes against the facts, checks the shared techniques were shared, enumerates idle patches, consolidates every owner item into ONE ck175 append; PASS / PASS WITH FIXES / RE-FIRE |
 | 07 | `07_DOCS_AND_SITTING_PREP_codex.md` | **Codex — Sol, high** | no | WORKFLOW + PLAYTEST_HELP + TestKit README; `perma/SMRTK_SLOTS.md` (how an agent pre-loads a sitting); predictions + 08's script |
 | 08 | `08_FULL_SITTING_owner.md` | Claude attending (attended) | ✅ keyboard, 07 prices it | the full attended leg: every page, every button class, a stamp, a save/load round trip, a trigger firing |
@@ -67,11 +67,11 @@ contract). Authoring mechanics: `agent/WORKFLOW.md` "Authoring a prompt" element
 
 | payload | file | holds |
 |---|---|---|
-| P1 | `P1_WORLD.md` | `72_SMRTK_World.lua`: disasters (cursor-targeted, leaf calls) + stop, quiet mode, speed / ultra / run-until, fix all / malfunction all, finish-waits, spawn / funding / research re-exposures, trait submenu |
-| P2 | `P2_INFOPANEL.md` | `73_SMRTK_Infopanel.lua`: the per-object section (Fill, Empty, Delete, Destroy, CleanAndFix, Malfunction, AddPrefab, Spawn*, Upgrade1–6, Dump, Pin) on the spike's injection route |
-| P3 | `P3_AGENT.md` | `74_SMRTK_Agent.lua` + `80_AgentSlots.lua`: `SMRTK.Bind`, fire-once vs armed, click-to-target (spike route), auto-disarm, fire counters, pins A/B/C, triggers, note field, screenshot+mark |
-| P4 | `P4_SAVES_KIT.md` | `75_SMRTK_Saves.lua` + `76_SMRTK_Kit.lua`: slots A/B/C with the session-id guard, provenance; RunAll / run-one-probe, logger toggles, log tail, error counter, fingerprint, dump, snapshot + diff, watch-a-field, force-open console |
-| P5 | `P5_STAMPER.md` | `77_SMRTK_Stamper.lua` + `Layouts/`: the format contract, capture → clipboard, ordered replay, fit check, grids, then state |
+| ~~P1~~ | ~~`P1_WORLD.md`~~ | `72_SMRTK_World.lua`: disasters (cursor-targeted, leaf calls) + stop, quiet mode, speed / ultra / run-until, fix all / malfunction all, finish-waits, spawn / funding / research re-exposures, trait submenu |
+| ~~P2~~ | ~~`P2_INFOPANEL.md`~~ | `73_SMRTK_Infopanel.lua`: the per-object section (Fill, Empty, Delete, Destroy, CleanAndFix, Malfunction, AddPrefab, Spawn*, Upgrade1–6, Dump, Pin) on the spike's injection route |
+| ~~P3~~ | ~~`P3_AGENT.md`~~ | `74_SMRTK_Agent.lua` + `80_AgentSlots.lua`: `SMRTK.Bind`, fire-once vs armed, click-to-target (spike route), auto-disarm, fire counters, pins A/B/C, triggers, note field, screenshot+mark |
+| ~~P4~~ | ~~`P4_SAVES_KIT.md`~~ | `75_SMRTK_Saves.lua` + `76_SMRTK_Kit.lua`: slots A/B/C with the session-id guard, provenance; RunAll / run-one-probe, logger toggles, log tail, error counter, fingerprint, dump, snapshot + diff, watch-a-field, force-open console |
+| ~~P5~~ | ~~`P5_STAMPER.md`~~ | `77_SMRTK_Stamper.lua` + `Layouts/`: the format contract, capture → clipboard, ordered replay, fit check, grids, then state |
 
 **Payload seats (owner, 2026-09-13), by the authoring session's difficulty read (1–10):** P1 World (5) **Sol, high** ·
 P2 Infopanel (4 with the spike) **Sol, high** · P3 Agent (7) **Astra, xhigh** · P4 Saves+Kit (6) **Sol, high** ·

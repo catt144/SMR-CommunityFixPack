@@ -136,9 +136,9 @@ Metadata writes are centralized to eliminate concurrent edits to one file.
 
 - [x] Spike and upstream payload inboxes committed before launch.
 - [x] Core/panel extensions gated and committed sequentially before launch.
-- [ ] P1 World: build, independent gates, file commit.
-- [ ] P2 section/dock: build, independent gates, file commit.
-- [ ] P3 Agent/slots: build, independent gates, commits.
-- [ ] P4 Saves/Kit: build, independent gates, commits.
-- [ ] P5 Stamper/format: build, independent gates, commits.
+- [x] P1 World: build, independent gates, file commit.
+- [x] P2 section/dock: build, independent gates, file commit.
+- [x] P3 Agent/slots: build, independent gates, commits.
+- [x] P4 Saves/Kit: build, independent gates, commits.
+- [x] P5 Stamper/format: build, independent gates, commits.
 - [ ] Ordered merge checks, report, successor/audit inboxes, consumption/push.
