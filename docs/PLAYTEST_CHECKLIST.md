@@ -170,6 +170,21 @@ armed count, errors-since-mark) is the at-a-glance safety read, and a popout tha
 carry it. Options: keep a one-line strip with no panel behind it; fold taint/armed state into the dock icon itself
 (colour or badge); or accept it is only visible while a popout is open. **Not decided.**
 
+**⭐ FALLBACK LADDER, same conversation — so 03A is never blocked on this.** Verbatim: *"Now if it turns out we
+cannot do that, I am ok with the panel if we need it or a hybrid cheats menu along the side where I can popout and
+close a more adv menu."* Ranked, highest first:
+
+| # | surface | status |
+|---|---|---|
+| 1 | per-object **smart panel** in the vanilla cheats area **+ SMR icon on the dock** reusing the game's own popout menus | **preferred**; half proven, half is the spike's job |
+| 2 | a **hybrid**: a cheats menu **along the side**, which pops out and closes, carrying the more advanced menu | acceptable |
+| 3 | the **floating tabbed panel** as built in 01 | acceptable *"if we need it"* |
+
+⇒ **03A does not stop and ask if the dock injection fails** — it descends the ladder and says in its report which
+rung it landed on and why. The owner has pre-approved all three, so a failed spike costs a surface, not a link.
+⚠️ Option 2 is the one nobody has costed: "along the side, popout and close" is a docked, collapsible strip rather
+than either a free-floating window or a vanilla popout, and no source route for it has been read yet.
+
 ⭐ **The 02 verdict is unaffected by this ruling.** P1-P4 concern taint, the console gate, the console tap and
 persistence; none depends on the panel being a floating window. The panel was the vehicle for the measurements, not
 the thing measured, so the kill gate's result stands whatever surface 03A builds.
