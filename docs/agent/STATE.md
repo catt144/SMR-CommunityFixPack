@@ -54,11 +54,15 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   Owner's 2 pared files (`for-modders.md`, `install.md`) stay uncommitted = decision 47.
 - ⭐ FR-1 TEMP WORKAROUND MOD LIVE 09-11 (Steam 3799500849 / PDX 158711). **ALL FR-1 / Linux / NVIDIA work →
   `prompts/perma/LINUX_DISPATCH.md`.** Field: 3 working (one 10xx), 1 failing (GTX 1070, log requested).
-- ⭐ **`prompts/smrtk/` LIVE 09-13 (ck175): 01 built; next `02_SKELETON_SITTING_owner.md` (owner + Claude), script ready; 03A HELD behind it.**
-  Evidence `reports/SMRTK_SKELETON_PREDICTIONS.md`; clean 1.1.0 fixture required. Eligibility read is sandbox-blocked (`EF-096`); no play verdict yet.
+- ⭐ **`prompts/smrtk/` (ck175): 02 KILL GATE ✅ PASSED 09-13 — P1/P2/P3/P4 all read in play. 03A RELEASED, 99 runs full.**
+  Verdict + corrections `reports/SMRTK_SKELETON_SITTING.md`; logs `archive/logs/smrtk02_*` (`ObjCheat` 1 in the control boot, **0** in the toolkit boot).
+  ⛔ 01's leaf targeted `StorageDepot.resource`, which **no** shipped depot has — every depot is `UniversalStorageDepotBase`, discriminator `#storable_resources` (binds P2).
+  ⛔ Eligibility stays `UNAVAILABLE:sandbox` (`EF-096`) — no-taint is necessary, NOT proven sufficient.
+  ⭐ **Owner UI ruling 09-13: floating panel DEMOTED**, ranked ladder in ck175; 03A descends it without asking.
+  Ladder: (1) infopanel section + dock icon on vanilla popouts, (2) side popout strip (UNCOSTED), (3) the 01 panel.
 - ⏭ NEXT: fire `prompts/STANDDOWN_AUDIT.md` (no blocker) · `prompts/C92_ACHIEVEMENT_BUILD.md` (build+test, ⛔ ships never
   without ck172's hold lifted) · then the playtest sitting. ⛔ `SELFCHECK_PILOT` REMOVED 09-13 (`cf8d51f`).
-  Owner OWES: ck144 (a) the boot · ck151 (b) dev-report scope · ck175 sittings 02/08 when their scripts land. Handoff `prompts/perma/HANDOFF_ORCHESTRATOR.md` §3 LIVE.
+  Owner OWES: ck144 (a) the boot · ck151 (b) dev-report scope · ck175 sitting 08 when 07's script lands (02 DONE). Handoff `prompts/perma/HANDOFF_ORCHESTRATOR.md` §3 LIVE.
   Desk `prompts/DLC_DEEP_CHECK.md` (`HUNT_AUDIT.md` §8). Chain `prompts/fixtoggles/` DEFERRED 09-12 (ck148, not started).
 - Watches: `EF-066` subclass reach unmeasured, ck74 half-open · localisation: German only one SEEN (`EF-039`) ·
   C47 (unrun) · C48 opt-in · F02/F78/F81 organic · riders C42/F99/F80/F96-R2 · `EF-051` falsifier = stray save ·

@@ -987,6 +987,101 @@ the screen was cleared at that moment. **No code was changed during the sitting*
 03A/03B decide the shape.
 
 
-## Verdict
+## VERDICT — ✅ PASS WITH CORRECTIONS. The kill gate does not fire.
 
-⛔ **NOT REACHED.** Fill in per prediction after the sitting.
+All four premises were read in play on 2026-09-13, build **24995074**, fixture
+the BlueSun `BlankBig_01` colony (`SMRTK_BASELINE_CLEAN`, sol 10, `EF-075`
+baseline `403908`). **99 runs its full form, not the reduced one. 03A is
+released.**
+
+| # | premise | verdict | the line that decides it |
+|---|---|---|---|
+| **P1** | a leaf action leaves `CheatsUsed` empty | ✅ **PASS** | `SMRTK_ACTION action=skeleton_fill after=180000 before=13000 object=StorageMetals(1054) status=OK` then `TAINT_READ used=false`, against a control that produced `entries=1` |
+| **P2** | `ConsoleEnabled` gives the console with mod tools closed | ✅ **PASS** | `CONSOLE_CONTROL discriminates=true negative=false positive=true status=OK`, witnessed by `SHORTCUT console=false` then `console=true` across the two rebuilds |
+| **P3** | the tap sees console lines | ✅ **PASS** | `TAP_READ native_console=1 native_print=1`, clipboard read from Windows itself carrying `source=console` **and** `source=print` |
+| **P4** | the panel survives a save/load | ✅ **PASS** | `DISARM action=print_tee reason=SavegameSaved`, then `ROUNDTRIP_READ armed=0 same_print=true tab=Kit x=1125 y=243` |
+
+⭐ **The single most compact statement of the result** is the archived logs' own
+`ObjCheat` counts: **1** in `smrtk02_…19.58.32.log` (the deliberate vanilla
+control) and **0** in `smrtk02_…20.40.33.log`, which contains every toolkit leg
+including the depot fill. The toolkit filled a depot and never once entered the
+route that writes the taint.
+
+### Archived evidence
+
+- `docs/archive/logs/smrtk02_Mars.exe-20260913-19.58.32-6a91a190.log` — step 0:
+  the clean baseline read and the RED control. 69 `SMRTK_` lines, **1** `ObjCheat`.
+- `docs/archive/logs/smrtk02_Mars.exe-20260913-20.40.33-6a91a190.log` — steps 1-8.
+  196 `SMRTK_` lines, **0** `ObjCheat`.
+
+### Corrections that strike and supersede `SMRTK_SKELETON_PREDICTIONS.md`
+
+1. ⛔ **Step 3's script, § "Predictions for 02" row 3 and the DEPARTURES bullet
+   "The sitting registers its own Fill action".** The body tests
+   `type(o.resource)=="string"` and calls `StorageDepot:CheatFill` with
+   `max_amount_<resource>`. **No shipped depot instantiates that shape** — every
+   storage template is `object_class = "UniversalStorageDepotBase"`, whose
+   `GameInit` sets `self.resource = self.storable_resources`, a **table**
+   (`StorageDepot.lua:444`). The action could only ever refuse. Superseded by the
+   corrected body using `IsKindOf(o,"UniversalStorageDepotBase")`,
+   `#storable_resources == 1`, `GetStoredAmount`/`GetMaxStorage` and the `:710`
+   leaf. **Requirement (A) is unaffected** — the corrected leaf carries no
+   `LogCheatUsed`/`NetSyncEvent` either.
+2. **Step 0's `cheats` value.** Predicted unverified, this session predicted
+   `false`; **measured `nil`** — the key is absent from `Platform`. Falsy either
+   way, gate arithmetic unchanged.
+3. **Step 8's "panel is open after the load".** Not observed as written: the
+   panel was closed at save time by an operator action, and `open=false` was
+   correctly restored. The property is established instead from **two** legs —
+   step 1 restored `open=true`, step 8 restored `open=false` — which is stronger.
+4. **Step 1's `hook=PreLoadGame` is not the only arm.** Four arm sites were seen
+   in play: `DataLoading`, `PreLoadGame`, `PreNewMap` (unexercised) and
+   **`ChangeMap`**, the last during the round trip.
+5. **`SMRTK_SHORTCUT` appears many times per boot** (six in one boot), not once.
+   Rebuilds against one singleton host; **one live action**, falsified in play by
+   one keypress producing exactly one `panel_toggle`.
+
+### What may NOT be claimed from this sitting
+
+- **Achievement eligibility.** `UNAVAILABLE:sandbox` throughout;
+  `CanUnlockAchievement` is blacklisted and was confirmed `nil` from the console.
+  No-taint is **necessary, not proven sufficient** (`EF-096`, `EF-094`).
+- **Gamepad.** Not tested.
+- **Native `OnLuaError`/`OnThreadError` delivery.** Step 7 invoked our handler
+  directly; it proves formatting and counting, not engine delivery.
+- **Any page beyond the skeleton.** Every page is a placeholder; `pause` and
+  `stop_disaster` correctly returned `NOT_BUILT`.
+- **That P1 generalises.** One action, one class. P2 must re-establish it per
+  action — and correction 1 shows the object model is where that will go wrong.
+
+### Outbox to 03A (one paragraph, for every payload's inbox)
+
+P1-P4 all PASS on build 24995074; the core, the logger, the taint assert, the
+`ConsoleEnabled` arm, the ring, the clipboard and LocalStorage persistence are
+all confirmed in play, so build on them. The native console tap **and** the print
+tee both carry real output, so either is a valid capture route. Five things to
+carry: **(a)** per-object code must target `UniversalStorageDepotBase` and
+`#storable_resources`, never `StorageDepot.resource` — 01's leaf refused on every
+depot in the game; **(b)** `AsyncCheat*` infopanel entries bypass `ObjCheat` and
+never taint even in vanilla (`ClassHierarchy`, `ClipPlane`, `Gizmo`, `Inspect`,
+`Properties`, `Screenshot`), so they need no re-implementation; **(c)** `CLEAR`
+logs onto the screen it just wiped, and the fix is a per-action opt-in honoured
+by `dispatch`, never moving `T.Log` before the callback, which would empty
+`before`/`after` on every action; **(d)** `PANEL_RESTORE` logs once per
+registration and there are **three** (`InGameInterfaceCreated`, `PostLoadGame`,
+`CurrentMapChangeDone`) though only one panel results — log on actual
+create/make-visible; **(e)** `CopySince` is destroyed by the operator's next
+copy, so it must be the last command of a block, and the panel **button** form is
+immune. The owner's surface ruling and ranked fallback ladder are in ck175.
+
+### Outbox to 99
+
+The taint invariant is re-derivable from the archived logs alone: `ObjCheat`
+count 1 in the control boot, 0 in the toolkit boot. The four `LogCheatUsed` call
+sites were enumerated tree-wide and none is reachable from a direct leaf call.
+Two instrument defects on the attending side are recorded in full rather than
+quietly fixed — a truncated `grep | head -15` that hid the `CheatFill` override,
+and a proposed flicker control that could not have cleared the panel because
+`panel_toggle` only calls `SetVisible(false)`. The flicker itself is routed,
+measured and **unattributed**; the last boot carried the mod with no strobe, so
+it does not reproduce on mod-load alone.
