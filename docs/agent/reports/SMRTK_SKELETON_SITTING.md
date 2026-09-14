@@ -774,6 +774,48 @@ in-game interface and no panel can exist; (2) boot with TestKit + Fix Pack
 bar do. If (2) shows this is vanilla, it is a defect entry and the project's own
 business, not an 03A item. Nothing here is attributed yet.
 
+### Flicker — boot comparison, and the confound in the owner's own test
+
+| boot log | `Loaded mod items for:` | strobe |
+|---|---|---|
+| `19.58.32` | TestKit, FixPack, OptInPack | not reported |
+| `20.40.33` (the sitting) | same three, **then a second, EMPTY line** = the runtime disable | **yes; persisted across the disable** |
+| `21.26.59` | *(line absent — no mod items loaded)* | none |
+
+The empty `Loaded mod items for: ` line is the owner's mid-session mod disable,
+and the strobe outliving it is consistent with already-executed mod Lua not
+unloading. `SMR_FR1TempWorkaround`'s **def** loads in every boot because the
+folder is present, but it appears in **no** boot's items list, so the Linux
+workaround mod is enabled in none of them and is not a factor.
+
+⚠️ **The owner's clearing test changed two variables at once** — mods off **and**
+a process restart — so "the restart alone fixed it" is not excluded. Attribution
+needs a boot with the mods ON.
+
+⛔ **Hypotheses ruled out at source, recorded so they are not re-tried:**
+
+- *The on-screen console log steals hover.* No: `ConsoleLog:MouseInWindow(pt)`
+  returns **false** unconditionally (`uiConsoleLog.lua:63-65`).
+- *We create the global mouse target.* No: `XShortcutsTarget` is a
+  `DeveloperInterface` created by `ReloadShortcuts()` at file scope in **vanilla**
+  (`XShortcuts.lua:7-25`), with `terminal.AddTarget(self)`,
+  `terminal_target_priority = -100` and `ZOrder = 10000000`
+  (`DeveloperInterface.lua:35-47`). It exists in every boot, mods or not — which
+  also means a global hover fight is plausible *without* any mod.
+
+**The one process-persistent thing unique to the strobing boot** is step 2's
+`SMRTK.ConsoleControl()`, which calls `ReloadShortcutsImmediate()` **twice**
+(clearing and respawning every shortcut action, then `UpdateToolbar()`). The
+`19.58` boot carried the same three mods and ran no such rebuild. That is a
+**hypothesis, not a finding** — it has not been tested.
+
+⇒ **Single-variable ladder, to run when convenient:** boot with the three mods
+ON and, before running anything, hover the main menu and the HUD bar. If it
+strobes already, nothing this sitting ran is implicated and the next control is
+a mods-off boot. If it does **not** strobe, run `SMRTK.ConsoleControl()` and
+hover again — a strobe appearing there names step 2's diagnostic as the trigger
+and makes it an 03A item.
+
 ## Outbox items raised during the sitting (for 03A / 99)
 
 ### ⛔ The owner's cheat route sets `Platform.cheats`, and it would poison step 2
