@@ -828,8 +828,17 @@ def emit_fingerprints(out):
 
 SKILLS_DIR = os.path.join(REPO, ".claude", "skills")
 CODEX_SKILLS_DIR = os.path.join(REPO, ".agents", "skills")
-SKILL_WARN = 3 * 1024           # the design target
-SKILL_HARD = 4 * 1024           # a skill past this is a document, not a skill
+# ⏳ SKILL CAPS ARE TORN DOWN — owner ruling 2026-09-14, while the skill set is
+# being BUILT. Rationale: a skill body is PULL (loaded only on invoke), and this
+# file's own PUSH_SET comment says the budget belongs on the push set "as one
+# number, and on nothing else" — a per-file body cap was capping the wrong class.
+# ⛔ REBUILD PROCEDURE, exact: set SKILL_CAPS_DOWN = False. That restores the warn
+# at SKILL_WARN and the RED at SKILL_HARD. ⛔ Owner's word only; no agent restores
+# this on its own judgement, and no agent picks the new numbers alone.
+# The values below are the PRE-TEARDOWN figures, kept as the rebuild anchor.
+SKILL_CAPS_DOWN = True          # ⛔ owner-only switch; see the block above
+SKILL_WARN = 3 * 1024           # the design target (inactive while caps are down)
+SKILL_HARD = 4 * 1024           # RED above this   (inactive while caps are down)
 
 
 def skill_names():
@@ -853,12 +862,12 @@ def regen_skills():
 
 
 def check_skills(out):
-    """Both vendors' copies identical, and neither skill has grown into a doc."""
+    """Both vendors' copies identical; body sizes reported (see SKILL_CAPS_DOWN)."""
     names = skill_names()
     if not names:
         out.append("SKILLS: none")
         return True
-    ok, rows = True, []
+    ok, rows, total = True, [], 0
     for name in names:
         src = os.path.join(SKILLS_DIR, name, "SKILL.md")
         dst = os.path.join(CODEX_SKILLS_DIR, name, "SKILL.md")
@@ -877,15 +886,24 @@ def check_skills(out):
                                "instructions" % name)
                     out.append(REGEN_CURE)
                     ok = False
-        if size > SKILL_HARD:
-            out.append("SKILLS: RED  %s is %d B, hard cap %d — a skill this long is a "
-                       "document; move the body into docs/ and point at it"
-                       % (name, size, SKILL_HARD))
-            ok = False
-        elif size > SKILL_WARN:
-            note = "  ⚠ over the %d B target" % SKILL_WARN
+        if not SKILL_CAPS_DOWN:
+            if size > SKILL_HARD:
+                out.append("SKILLS: RED  %s is %d B, hard cap %d — a skill this long "
+                           "is a document; move the body into docs/ and point at it"
+                           % (name, size, SKILL_HARD))
+                ok = False
+            elif size > SKILL_WARN:
+                note = "  ⚠ over the %d B target" % SKILL_WARN
+        total += size
         rows.append("    %-24s %5d B%s" % (name, size, note))
-    out.append("SKILLS: %d skill(s), mirrored to .agents/skills/" % len(names))
+    out.append("SKILLS: %d skill(s), %d B of bodies, mirrored to .agents/skills/"
+               % (len(names), total))
+    if SKILL_CAPS_DOWN:
+        out.append("  ⏳ SKILL CAPS ARE DOWN (were warn %d / hard %d) by owner ruling "
+                   "2026-09-14, while the skill set is being built. Bodies are PULL, so "
+                   "size here is reported, not gated. Restore: SKILL_CAPS_DOWN = False in "
+                   "tools/doccheck.py. ⛔ Owner's word only — and the new numbers are the "
+                   "owner's to pick." % (SKILL_WARN, SKILL_HARD))
     out.extend(rows)
     return ok
 

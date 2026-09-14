@@ -75,6 +75,10 @@ def skill_cases(m, root):
     m.SKILLS_DIR = str(root / "skills")
     m.CODEX_SKILLS_DIR = str(root / "mirror")
     m.SKILL_HARD, m.SKILL_WARN = 12, 10
+    # ⏳ The live caps are TORN DOWN (owner 2026-09-14, SKILL_CAPS_DOWN). The cap
+    # MACHINERY is still falsified here so that rebuilding it inherits a proven gate
+    # rather than an untested one. The teardown itself is falsified at the end.
+    m.SKILL_CAPS_DOWN = False
     paths = [Path(base) / "fixture/SKILL.md"
              for base in (m.SKILLS_DIR, m.CODEX_SKILLS_DIR)]
     good = b"abcde\nabcde\n"
@@ -97,6 +101,16 @@ def skill_cases(m, root):
     assert not m.check_skills([])  # mirror identity is still RAW bytes
     paths[1].write_bytes(good)
     assert m.check_skills([])
+    # the teardown's own positive control: with caps DOWN an oversize skill PASSES,
+    # and with them UP the same bytes FAIL. Proves the switch does what it claims.
+    for p in paths:
+        p.write_bytes(good * 2)          # 24 B against the 12 B test cap
+    m.SKILL_CAPS_DOWN = True
+    assert m.check_skills([]), "caps down should not gate on size"
+    m.SKILL_CAPS_DOWN = False
+    assert not m.check_skills([]), "caps up should gate on size"
+    for p in paths:
+        p.write_bytes(good)
     for p in paths:
         assert p.read_bytes() == good
     print("PASS skill cap FAILS both endings; raw mirror mismatch FAILS")
