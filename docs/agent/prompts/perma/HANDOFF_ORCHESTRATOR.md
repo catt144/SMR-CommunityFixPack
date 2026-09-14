@@ -45,11 +45,7 @@ Do not execute.
 
 ---
 
-## 1 · Where v10 landed
-
-⛔ **`STATE.md` carries all of it** — version, portal ids, count word, what went in and out, the site
-deployment, C90's unexercised status, the three TestKit probes now pointing at retired modules. **Read it
-there; it is the kernel and every session already pays for it.** Nothing about v10 is re-derived here.
+## 1 · Where v10 landed — ⛔ `STATE.md` carries all of it; nothing is re-derived here
 
 ✅ **Discharged, and must not reappear on any owed list:** ck158 (the attended gate) · the three retirements
 · C90 (`153d180`+`e5f1947`) · the STATE eviction **and** its cap revert to `18 * 1024` (`c820c7f`).
@@ -76,11 +72,23 @@ contradicted its own closed list for most of a day.
 
 ### 2b · The loose ends — this is why the file is still alive
 
-⭐ **PROMPTS READY TO FIRE, in order.** ① `prompts/STANDDOWN_AUDIT.md` — no blocker, fire any
-time; a 21-module sweep, good Codex fan-out. ② `prompts/C92_ACHIEVEMENT_BUILD.md` — build +
-test the C92 restoration, ⛔ **SHIPPING HELD by ck172 until the owner lifts it in words**.
-③ then the playtest sitting (could ride the owed ck144 (a) boot). ④ `prompts/DLC_DEEP_CHECK.md`
-— desk NEXT, unclaimed, bounded; the pack is stable so it is genuinely fireable.
+⭐⭐ **THE ACTIVE EFFORT IS `prompts/smrtk/` (ck175) — the SMR Tool Kit**, a TestKit panel replacing the
+vanilla cheat menu for playtesting. ⛔ **Its README is the manifest and is canonical** (queue, seats,
+invariants-vs-defaults licence, the owner's ranked UI ladder); the five owner rulings are in ck175.
+**Nothing about it is restated here — only the three things a README cannot tell you:**
+- **02 was a KILL GATE and it ✅ PASSED in play, 09-13** (`reports/SMRTK_SKELETON_SITTING.md`).
+  ⛔ Never re-run a passed gate to "check"; 01 and 02 are consumed.
+- **03A is RUNNING (Codex/Sol) from 09-13.** ⛔ **The whole `prompts/smrtk/` folder is ITS lane while it
+  runs** — route by message, never by editing in there. Then 03B (Claude judge) → 07 → 08 (owner) → 99.
+- Premises are `EF-095`–`EF-099`; the two unbendable invariants are (A) nothing registers as a cheat and
+  (B) one `SMRTK_` tag through one logger.
+
+⭐ **OTHER PROMPTS READY TO FIRE, when smrtk is not eating the attention.** ① `prompts/STANDDOWN_AUDIT.md`
+— no blocker, fire any time; a 21-module sweep, good Codex fan-out. ② `prompts/C92_ACHIEVEMENT_BUILD.md`
+— build + test the C92 restoration, ⛔ **SHIPPING HELD by ck172 until the owner lifts it in words**.
+③ `prompts/CHECKLIST_ARCHIVE.md` — the checklist cleanup, ruled and never run (ck176); ⚠️ its own brief
+carries the unnumbered-items risk on its face, so read that before firing. ④ then the playtest sitting
+(could ride the owed ck144 (a) boot). ⑤ `prompts/DLC_DEEP_CHECK.md` — desk, unclaimed, bounded.
 
 - **C92 — RULED, not finished.** ck172 (09-13): **build the restoration, shipping held**;
   knowledge accepted as a deliverable even if it never ships. ⛔ **ck171 (scope) stays OPEN** —
@@ -104,41 +112,41 @@ test the C92 restoration, ⛔ **SHIPPING HELD by ck172 until the owner lifts it 
   reason 2 ("unbuildable from the mod's own fields") is true of the metadata fields and false
   of the runtime `LuaRevision`; and **we already ship a version guard** in the FR-1 mod that
   nobody raised §2a against. Reason 1 survives and is the real rule.
-- **Two new facts worth inheriting rather than re-deriving:** `EF-093` — vanilla re-seeds
-  lockable-preset state every load, so a mod can leave an **omission vanilla repairs itself**
-  (never observed in play; ordering dependency unverified). `EF-094` — achievement state:
-  ⛔ no mod and no retail console can clear a flag (the console **is** the mod sandbox), sync
-  is one-way local→Steam, and the test route is **move `account.dat` aside, test, move back**.
+- **Facts filed 09-13, inherit them rather than re-derive:** `EF-093` (vanilla re-seeds lockable-preset
+  state every load — a mod can leave an omission vanilla repairs itself) · `EF-094` (achievement state;
+  ⛔ no mod and no retail console can clear a flag — the console **is** the mod sandbox) · `EF-095`–`EF-099`
+  (the smrtk premises: what actually writes the cheat taint, mod-sandbox reach, why the console hotkey
+  "locks", vanilla cheat-menu defects, the programmatic-construction front door). Summaries in
+  `facts/INDEX.md`; ⛔ grep it, never read it whole.
 - **C91** — open candidate: vanilla leaks the Building Codes maintenance modifier on repeal.
   Dev-report material.
 - **Migration residuals, read from the entries 09-12:** **F51** 1.1.0 PARTIAL, leg re-filed
   **UNRUN** · **F53** PARTIAL, no fresh 1.1.0 evidence · **F59** repaired, **A1 expedition half
   UNTESTED** · **F73** PARTIAL, organic benefit unverified · **F80** `investigating`, causation
   unproved · **F54** never swept.
-- **`treediff` gains a `TABLE-HUNK` list** (`HUNT_AUDIT` §8 item 2). ⭐ **It must compare
-  CONTENT between trees, not POSITION** — the classifier reported a merely *moved* block as a
-  new `DefineClass` and attributed `__parents` across adjacent blocks
-  (`reports/PINNED_PARENTS_PASS.md`, one of seven rows).
+- **`treediff` gains a `TABLE-HUNK` list** (`HUNT_AUDIT` §8 item 2). ⭐ **It must compare CONTENT between
+  trees, not POSITION** — the position classifier's failures are evidenced in `reports/PINNED_PARENTS_PASS.md`.
 - **83 (SHARED TestKit)** — two of its five proposals (a `RunAll` owner filter, a `PACK_ID` on
   the enable-path leg) improve the kit **for us** regardless of the opt-in mod.
 - **Hotfix 3 — 135 only.** RULED 09-12: take the `luafn.py` delimiter fix. Desk tool, **0
   shipped hashes**. ⛔ Do not re-derive the old table or the expired-triage "tension"; both are
   gone on purpose (ck161).
-- ✅ **Closed 09-13, do not reopen:** `SELFCHECK_PILOT.md` REMOVED on the owner's word
-  (`cf8d51f`) · the C92 placement/icon investigation (fired, `git rm`'d) · the ck170 doc
-  overhaul pass.
+- ✅ **Closed 09-13, do not reopen:** `SELFCHECK_PILOT.md` REMOVED on the owner's word (`cf8d51f`) · the
+  C92 placement/icon investigation (fired, `git rm`'d) · the ck170 doc overhaul pass · `GATE_WIRING`
+  (adjudicated PASS, consumed) · smrtk links **01 and 02** (consumed; 02's verdict is PASS and the gate
+  did not fire — ⛔ never re-run a passed kill gate to "check").
 
 ### 2c · Watch list, not tasks
 
-- ⏳ **The Foreign Aid Rocket report** (Steam, wgtiii, 09-12). Stuck "Unloading cargo", 2 Food, 40 sols.
+- ⏳ **The Foreign Aid Rocket report** (Steam, wgtiii, 09-12): stuck "Unloading cargo", 2 Food, 40 sols.
   ⛔ **NOT ours and NOT filed** — the owner messaged the reporter and is waiting. F119 cannot touch it
-  (that is `FuelResourceAmount` on **trade** rockets; this is a `ForeignAidRocketBase` carrying food).
-  Lead, recorded so it is not re-derived: `LeaveForever` (`RocketForeignAid.lua:75-85`) sets
-  `launch_after_unload = true`, so **departure is gated on the unload finishing** and cargo that can never
-  be placed strands the rocket. Their warnings showed **Low Storage**. ⇒ **If they reply, file it as a lead.**
-- **Hardening rows 1 + 2 — DEPRIORITISED by ck53, not closed.** `SMRFixPack_Disabled = "yes"` passes the
-  `or {}` adoption at `00_Core.lua:13` and every id then reads nil ⇒ **the modder's veto is silently ignored**;
-  `= true` throws at that index ⇒ **kills the whole pack, log-only**. Row 2 is the same shape for
+  (that is `FuelResourceAmount` on **trade** rockets). Lead, so it is not re-derived: `LeaveForever`
+  (`RocketForeignAid.lua:75-85`) sets `launch_after_unload = true`, so departure is gated on the unload
+  finishing and unplaceable cargo strands the rocket; their warnings showed **Low Storage**.
+  ⇒ **If they reply, file it as a lead.**
+- **Hardening rows 1 + 2 — DEPRIORITISED by ck53, not closed.** A non-table `SMRFixPack_Disabled` either
+  passes the `or {}` adoption (`00_Core.lua:13`) so every id reads nil and **the modder's veto is silently
+  ignored**, or throws and **kills the whole pack, log-only**. Row 2 is the same shape for
   `SMRFixPack_Optional` (`:17`, read at `:57`). ⚠️ A plain `type(x) == "table"` guard is **not** enough alone.
 - **C89 reopens only on a countering field report** — its B2 panel leg was not run, by owner ruling.
 
@@ -177,16 +185,11 @@ than copying this handoff's retired instructions or recorded counts.
 
 ## 5 · Traps that have each cost this project a real error
 
-✅ **HOMED 2026-09-13** — traps 1 and 2 plus the `--regen-waiting` rule above now live in
-`agent/WORKFLOW.md` § "Writing in a shared tree". They were the three things that existed ONLY in
-this file while its own retirement trigger had already fired. The copies here are a record.
+✅ **HOMED 2026-09-13, and the duplicate copies are now GONE from here** — the one-git-identity trap, the
+pathspec-is-half-a-fence trap and the `--regen-waiting` rule live in `agent/WORKFLOW.md` § "Writing in a
+shared tree". Read them there; this list carries only what has no other home. Numbering keeps its old
+gaps on purpose, so a citation of "trap 5" still resolves.
 
-1. ⛔ **All sessions share ONE git identity** — `git log --author` cannot attribute work. Identify by
-   **sha + diff**, and list your own shas when relaying.
-2. ⛔ **A pathspec is only HALF a commit fence.** It protects every OTHER file, but for a path you *name*, git
-   commits that path's **working-tree** content — a peer's unstaged edits included (09-12, `cc3edf2`). On a
-   file two sessions are inside at once: stage **your own hunks** (`git add -p`) and commit **without** a
-   pathspec. Before `--regen`, check `git status docs/agent/bugs/` for foreign ` M`/`??`.
 3. ⛔ **After an upload, the Mod Editor writeback STRIPS EVERY COMMENT from `metadata.lua` and `items.lua`**
    (v10: 319 → 0 and 51 → 0). ⛔ **No session may commit either file until `POST_UPLOAD_CLOSE.md` has restored
    them** — a commit naming the path takes its working-tree content and buries ~400 lines. Check:
@@ -204,7 +207,13 @@ this file while its own retirement trigger had already fired. The copies here ar
    longer did. The check now exists in that file — **use it, and grep the drafts whenever a fix is dropped.**
 8. ⛔ **Never discard or overwrite a file you did not write without reading it first.**
 9. ⚠️ **Quoted bash heredocs still eat one backslash level** — use the `Write` tool for scripts carrying
-   escapes or regexes, and the absolute scratchpad path (`$TMPDIR` is not set in this shell).
+   escapes or regexes, and the absolute scratchpad path (`$TMPDIR` is not set in this shell). ⚠️ **Re-triggered
+   09-13 by a session that had already read this trap** — the no-op even reported success. Written down is
+   not applied: anything with a backslash goes through `Write`.
+10. ⛔ **ONE stray NUL makes a doc BINARY and `rg` SKIPS binary files by default** — it looks normal in an
+   editor while being invisible to every default search. Hit 09-13: a pasted savegame excerpt hid a whole
+   report, build-blocking correction included. Same silent-boundary family as `docs/archive/`'s `.rgignore`.
+   Detect `file <p>`; repair by transcribing the byte as `\x00` **and disclosing it beside the block**.
 
 ---
 
