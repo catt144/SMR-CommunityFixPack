@@ -39,7 +39,6 @@ From `docs/agent/STATE.md`, verbatim:
   `WORKFLOW.md:537`, VOID since 09-09). ⛔ Kit verdicts are PREDICTIONS until then; still FAIL/ERROR by name:
   `C47OpenFarmSeedBufferShape` (Herbs 100→50), retired `LanderCargoRatchet`/`DroneUnreachableForever`/`AutoExportPriority`,
   `LayoutTechLock`/`AnomalyCaveInMap` (modules retired 09-12; Wave14 wrap rows :116-117, :130 too).
-  ⚠ CORRECTED 09-14 by 08: `GhostFarmOxygen` is **not** a FAIL — it reads `SKIP [install] introspection unavailable (retail sandbox)`.
 ```
 
 ## Needs a marker to settle (12)

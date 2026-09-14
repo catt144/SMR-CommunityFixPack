@@ -29,7 +29,6 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   `WORKFLOW.md:537`, VOID since 09-09). ⛔ Kit verdicts are PREDICTIONS until then; still FAIL/ERROR by name:
   `C47OpenFarmSeedBufferShape` (Herbs 100→50), retired `LanderCargoRatchet`/`DroneUnreachableForever`/`AutoExportPriority`,
   `LayoutTechLock`/`AnomalyCaveInMap` (modules retired 09-12; Wave14 wrap rows :116-117, :130 too).
-  ⚠ CORRECTED 09-14 by 08: `GhostFarmOxygen` is **not** a FAIL — it reads `SKIP [install] introspection unavailable (retail sandbox)`.
 - ⛔ **C89's B2 panel leg was NOT RUN, by owner ruling** — one unmeasured link (`CountDome` 0 leaves the panel clear, vanilla
   path). **Reopen C89 on a countering field report.** C85's `(daily)` arm and C88's same-type compare (structurally
   impossible — every supplyable prefab is `require_prefab`) are unavailable, not owed. Gate evidence: each entry's
@@ -60,9 +59,7 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   ⭐ Design half + owner's ARCHITECTURE ruling (group by task, hot bar) = **ck183**; 3 questions open.
   NEXT: a build for ck183's re-layout + **defect 21**, then **08b** (blocks 13-15, ⛔ gated on 21), then 99. 08 prompt RETIRED 09-14.
   Verdict + corrections `reports/SMRTK_SKELETON_SITTING.md`; logs `archive/logs/smrtk02_*` (`ObjCheat` 1 in the control boot, **0** in the toolkit boot).
-  ⛔ 01's leaf targeted `StorageDepot.resource`, which **no** shipped depot has; discriminator `#storable_resources` (binds P2).
-  ⚠ CORRECTED 09-14 by 08: **NOT every depot is `UniversalStorageDepotBase`** — 5 shipped classes sit on the sibling
-  `MultiResourceDepotBase` branch, so `73`'s `depot_read` bails and Fill/Empty log no before/after (`SMRTK_FULL_SITTING.md`).
+  ⛔ Depot class tree + what a `UniversalStorageDepotBase` guard misses = **`EF-102`**.
   ⛔ Eligibility stays `UNAVAILABLE:sandbox` (`EF-096`) — no-taint is necessary, NOT proven sufficient.
   ⭐ **Owner UI ruling 09-13: floating panel DEMOTED**, ranked ladder in ck175; 03A descends it without asking.
   Build: dock/section + fixed advanced side panel; `reports/SMRTK_FANOUT_REPORT.md`, judge `reports/SMRTK_JUDGE.md` (TestKit `87f3130`).
