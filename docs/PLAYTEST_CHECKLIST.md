@@ -2533,6 +2533,7 @@ warn STATE.md is 12991 bytes, warn threshold is 12288 — copy this line VERBATI
 > in a separate opt-in mod, or as player instructions? (Recommendation above: a separate opt-in mod.)
 
 ### ✅ 2026-09-10 — v7 IS LIVE on both stores (your word). Nothing to decide; three things to tell me when convenient.
+<!-- ck:- status:closed owner:no -->
 
 > **Read from here:** the Steam page (updated Sep 10 @ 3:59pm, 325.512 KB, "Forty-eight
 > repairs", all three gallery images, the whole description down to its last link), and the
@@ -2703,6 +2704,7 @@ arrival-only. The attended C83 leg watched the arrivals for one sol; nobody move
 > not arise naturally.
 
 ### ✅✅ 2026-09-10 — 139 BUILT + TESTED-ATTENDED: all seven silent units (C74 hammer + MOXIE, C77's five), Metatron left out. `Fix_SilentHitMomentFX.lua`; old saves heal without a power cycle; staged for the next release. Nothing is owed from you.
+<!-- ck:139 status:closed owner:no -->
 
 > **Build receipt:** the first packed-module load caught a real flaw in the
 > proposed old-save gate: persisted tracker handles could still look live while
@@ -3112,6 +3114,7 @@ Original question, kept as asked: C74, the Rare Metals Extractor's hammer (and t
 > note's last bullet tells players so. Field reports are the detector from here.
 
 ### ✅ 2026-09-09 — `100_DOCSWEEP` IS DONE: the words now match the pack that ships. The hotfix-2 chain is closed; the only thing left is your upload sitting.
+<!-- ck:- status:closed owner:no -->
 
 > **Receipts for 126, 127 and 128 — carried out, not just ruled.**
 > * **126 (F95 pass STAYS) ⇒ 128.** The change note's second bullet now says the
@@ -4960,6 +4963,7 @@ Original question, kept as asked: C74, the Rare Metals Extractor's hammer (and t
     courtesy, not a debt.
 
 ### ✅ 2026-08-24 — RULED AND APPLIED. The hazard is reworded; nothing blocks the update but your sitting.
+<!-- ck:- status:ruled owner:no -->
 
 75. ✅ **RULED 2026-08-24, in-session, and APPLIED the same hour.** Your words:
     *"if we have open bug reports and we are preparing a patch that should be
@@ -5892,6 +5896,7 @@ rock-clearing jobs) crashes the same way, not just levelling.
     player report, a real problem, or a game patch. Which is the point.
 
 ### ⚖️⚖️ 2026-08-20 — YOU RULED THE POST-RELEASE TESTING MODEL, and corrected a cost I had been quoting wrong.
+<!-- ck:- status:ruled owner:no -->
 
 57. ⚖️ **STANDING RULING — the release gate was a one-time cost, not a per-change
     tax.** Your words: *"I do not plan to do a major lens sweep and b leg like we
@@ -6015,6 +6020,7 @@ rock-clearing jobs) crashes the same way, not just levelling.
       recorded in `agent/bugs/C50.md`.
 
 ### ✅ 2026-08-20 — your two rulings are carried out. Nothing owed back; this is the receipt.
+<!-- ck:- status:closed owner:no -->
 
 55. ✅ **Both sibling decisions are done, in the siblings' own repos, and neither
     touched the fix pack's shipping files.** Your words: *"You can mirror the two
@@ -6863,6 +6869,7 @@ rock-clearing jobs) crashes the same way, not just levelling.
        your machine. Expect `nil` and `false` (or `nil nil`).
 
 ### ✅✅ 2026-08-18 — STATE.md WAS EVICTED ON YOUR DIRECTION, AND YOU RULED THE CAPS THE SAME DAY. Nothing here is owed from you.
+<!-- ck:- status:ruled owner:no -->
 
 42. ⭐ **What happened.** The agents' one mandatory-read file had quietly grown
     to **~130KB (~33,000 tokens)** — every session paid that before doing any
@@ -7224,6 +7231,7 @@ rock-clearing jobs) crashes the same way, not just levelling.
     2–8. The chain has **not** converged; it has finished one lens of eight.
 
 ### ⭐ 2026-08-17 — THE RENAME IS DONE, EVERYWHERE A PERSON LOOKS. ✅ Your two calls came back the same day; nothing is owed.
+<!-- ck:- status:closed owner:no -->
 
 36. ✅ **RULED 2026-08-17, both calls, same sitting.** (1) **You searched the
     in-game Mod Manager and "Relaunched Fix Pack" is free** — the one check no
@@ -7291,6 +7299,7 @@ rock-clearing jobs) crashes the same way, not just levelling.
     timing call. Nothing else.**
 
 ### ⛔⛔ 2026-08-17 — SOLO LAUNCH: ✅ the parking work is DONE; one question left before you upload
+<!-- ck:- status:closed owner:no -->
 
 35. ✅ **The prep prompt ran the same evening and everything mechanical is
     done.** Every public surface now describes the fix pack standing alone —
@@ -7810,6 +7819,7 @@ permanent check now re-tests them on every run.
     item — though A also moves "96 checks" to 95 when the probe goes.)*
 
 ### ⭐ NEW 2026-08-15 — the C39 repair you ruled turns out to touch TWICE as many buildings as the ruling pictured. ✅ CONFIRMED THE SAME DAY.
+<!-- ck:- status:closed owner:no -->
 
 30. ✅ **RULED 2026-08-15: SHIP AS BUILT — all eight families, no list.** Your
     words: *"Lets go with whatever is supposed to be true to the code, which
@@ -8079,6 +8089,7 @@ open decisions are back to the **3** standing non-release items.)*
     Nothing shipped is affected: neither store card mentions Sensor Towers.
 
 ### ⭐⭐ NEW 2026-08-13 — D13 CHAIN CLOSED; the ONE combined sitting is READY (step ② — the release line's next move is yours)
+<!-- ck:- status:closed owner:no -->
 
 26b. ✅✅✅ **THE COMBINED SITTING RAN 2026-08-14 AND ALL THREE MOMENTS PASSED.
     ⭐⭐ D13 IS `tested`. NOTHING HERE IS OWED BY YOU ANY MORE.**
