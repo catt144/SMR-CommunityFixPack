@@ -816,6 +816,51 @@ a mods-off boot. If it does **not** strobe, run `SMRTK.ConsoleControl()` and
 hover again — a strobe appearing there names step 2's diagnostic as the trigger
 and makes it an 03A item.
 
+### ⭐ Owner's hypothesis (2026-09-13): a presentation/compositing fight, not Lua
+
+> *"it sounds like this is a rendered chrome window so its a window on top of a
+> window which can cause a single space where two windows are fighting for
+> exclusion at the same time. That can happen on my other monitor if I take smr
+> out of full screen exclusive and put it in windows mode and try to use things
+> on my other monitor."*
+
+This explains what the Lua-level hypotheses could not: **why every widget class
+strobes equally** — vanilla menu rows, vanilla HUD icons and our `XButton`s alike.
+No single Lua defect touches all three; a presentation-layer fight touches all of
+them by construction. It also fits *survives mod-disable* and *cleared only by a
+full restart*, both of which are process/display-mode properties, not mod-state
+properties.
+
+**Machine state, read this session (not owner-reported):**
+
+| | |
+|---|---|
+| GPU / display | RTX 4080, `Resolution = point(3840, 2160)`, `DisplayIndex = 0` |
+| **`Vsync`** | **`false`** |
+| **`Upscaling`** | **`DLSS`** (temporal) |
+| preset | `VideoPreset = "Ultra"` throughout |
+| overlay stacks live | **Discord** (6 processes), **GameBarPresenceWriter** + **XboxPcAppFT**, **nvcontainer** (NVIDIA), **Steam** + 7 `steamwebhelper` |
+
+Four independent overlay/compositor stacks were resident, and the clip itself was
+made with a screen recorder (`Recording 2026-09-13 210923.mp4`, Windows
+recorder naming) — i.e. a capture overlay was active **while the symptom was
+being filmed**. Unsynced presentation (`Vsync = false`) plus temporal upscaling
+(DLSS) plus a compositing overlay is a known-plausible producer of exactly the
+alternating-frame signature measured above, and a thin hover highlight is the
+element most likely to alternate under temporal reconstruction.
+
+⛔ **Not proven, and it does not clear the mod** — but it is cheaper to test than
+the mod ladder and it now has the stronger prior. **Test order (cheapest first,
+one variable each):** ① `Vsync = true` or an fps cap · ② `Upscaling` off DLSS ·
+③ close Discord / Game Bar / NVIDIA / Steam overlays · ④ only then the mod A/B.
+⚠️ Also note the sitting's own working pattern — the owner alt-tabbed to the chat
+on nearly every step — which is repeated focus loss on a 4K exclusive-fullscreen
+title and is itself a candidate trigger.
+
+⇒ Routed, not filed. If ①-③ clear it, this is a rig/display-stack matter and
+**not** an SMRTK item and **not** a vanilla defect entry. If it survives all
+three, the mod ladder above is next.
+
 ## Outbox items raised during the sitting (for 03A / 99)
 
 ### ⛔ The owner's cheat route sets `Platform.cheats`, and it would poison step 2
