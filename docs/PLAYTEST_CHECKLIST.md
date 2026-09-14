@@ -888,6 +888,68 @@ list, generates **no** row in `WAITING_ON_YOU.md`, and is **absent from `STATE.m
 agent raises it, re-costs it, or counts it as outstanding.** You un-park it in words when
 the workload allows, or it stays parked.
 
+#### ⭐ 2026-09-14 — THE 08b SITTING RAN ITEM 1, AND YOUR UI RULINGS FROM IT
+
+⚠️ **Recorded here because rule 5 (R10) binds: a decision that lives only in a
+report — or in a commit message, a code comment and a chat transcript — is not
+considered asked.** These are yours, given live at the keyboard during 08b's
+class-1 walk. ⛔ They are RULINGS, not proposals; a later session does not
+re-litigate them.
+
+**The rulings.**
+1. ⭐ **The dock chip goes in the RIGHT CORNER**, not jammed against the game's
+   dock. *"it whould be in the right corner not right up against the dock."*
+2. ⭐ **It carries the status at a glance** — *"it should have all the info as
+   the old one just no expandable menu"* and, on review, *"its still missing the
+   information like clean errors ect."* ⇒ taint, armed count, errors, quiet.
+   ⛔ The popout stays gone; the chip is not a menu.
+3. ⭐ **Quiet is an INDICATOR, not a button** — *"Quiet mode: On/Off As an
+   indicator not a button"*. It reads On/Off at all times, never only-when-on.
+4. ⭐ **The console must NOT auto-open on game load** — *"now that this is build
+   can we stop the console from auto opening on game load?"* ⛔ Only the
+   auto-open changed: the console is still ENABLED (02's kill gate measures
+   `ConsoleEnabled` in `70_SMRTK_Core`, a different thing), Ctrl-Alt-C still
+   opens it, and the Kit's force-open still works.
+5. ⚖️ **Eligibility came OFF the always-on strip** — you asked *"I don't
+   understand the purpose of eligibility"*. It can never read anything but
+   `unavailable (sandbox)`: `CanUnlockAchievement` is blacklisted to mods
+   (`EF-096`). It is a disclaimer, not a measurement — it exists so CLEAN is
+   never read as "achievements are safe", since CLEAN proves only the taint half
+   of requirement (A). It is still answered on demand by Sitting's **Read
+   eligibility** and still in the log, where 99 re-derives it. ⚠️ This one is a
+   RECOMMENDATION I implemented, not a verbatim ruling — reversible on your word.
+
+**Eight defects found and repaired during the walk** (all TestKit, 0 shipped
+hashes). ⛔ None was a redesign; the surface read as "a mess" because of them:
+`5a281f1` every button caption invisible · `f58b3b2` status strip clipped by a
+fixed `MaxHeight`, dock jammed + carrying no status, quiet ambiguous, eligibility
+noise, console auto-open · `78305d4` the bar 106 logical units too high.
+
+⭐ **The caption bug is the one worth remembering:** `T.Button` passed a
+mod-declared TextStyle that never resolved, so **every** caption in the toolkit
+drew blank while every plain label rendered. It was **defect 7's own partial fix**
+— the size-20 style invented to answer your font complaint is what blanked the
+UI. ⇒ **A surface cannot be design-judged while a render bug is live**; this one
+nearly bought a full redesign sweep of a panel whose buttons had no labels.
+
+**Item 1 verdict: PASS with the defects above repaired.** Walked with you:
+7 tabs (Sitting · Run · Selected · Slots & notes · World · Saves · Probes & logs
+— note two labels differ from their ids), hot bar visible on every page, controls
+above the growing readouts, collapse/expand intact.
+
+⛔ **STILL OPEN, and not yours to answer:**
+- **Defect 7's readability verdict is NOT TAKEN.** The log carries
+  `SMRTK_TEXTSTYLE_FALLBACK used=ConsoleLog wanted=SMRTKControls`, so every
+  caption judged so far is the **13pt fallback**, not the intended size 20.
+  ⛔ Do not record a font verdict until that log line is gone.
+- **The command field is white-on-light until hovered** (`74:336-341` sets a
+  near-white `TextColor` *and* `TextStyle="ConsoleLog"` on an `XTextEditor` whose
+  dark `Background` is not painting). You called it minor and deferred it.
+- ⚠️ **This sitting DEPARTED from 08b's own scope fence** — the brief says a
+  defect found here is *filed, not repaired*, and you licensed repair instead
+  (*"I am ok with either you fixing it or firing up a subagent"*). Eight commits
+  came out of an attendee link. ⛔ 99 must be told, not left to discover it.
+
 #### ⚖️ STILL YOURS TO ANSWER — three open design questions
 
 1. ✅ **Item 6 — ANSWERED BY THE OWNER 2026-09-14, and 08 had it wrong.** *"clean
