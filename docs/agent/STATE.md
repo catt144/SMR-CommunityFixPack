@@ -56,8 +56,9 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   `prompts/perma/LINUX_DISPATCH.md`.** Field: 3 working (one 10xx), 1 failing (GTX 1070, log requested).
 - ⭐ **`prompts/smrtk/` (ck175): 01-07 BUILT. ⭐ 08 RAN 09-14 attended: PASS WITH CORRECTIONS.**
   Classes 1-17 PASS; ⛔ class 18 (Stamper) BLOCKED. 25 defects, `reports/SMRTK_FULL_SITTING.md`.
-  ⭐ Design half + owner's ARCHITECTURE ruling (group by task, hot bar) = **ck183**; 3 questions open.
-  NEXT: a build for ck183's re-layout + **defect 21**, then **08b** (blocks 13-15, ⛔ gated on 21), then 99. 08 prompt RETIRED 09-14.
+  ⭐ Design half + owner's ARCHITECTURE ruling (group by task, hot bar) = **ck183**; item 6 + the More trace ANSWERED 09-14.
+  NEXT: fire **`09_ARCHITECTURE_BUILD_codex.md`** (A re-layout · B defects 21+22 · C subagent trace of 84 More leaves),
+  then **08b** (blocks 13-15, ⛔ gated on 09's defect-21 fix), then 99. 08 prompt RETIRED 09-14.
   Verdict + corrections `reports/SMRTK_SKELETON_SITTING.md`; logs `archive/logs/smrtk02_*` (`ObjCheat` 1 in the control boot, **0** in the toolkit boot).
   ⛔ Depot class tree + what a `UniversalStorageDepotBase` guard misses = **`EF-102`**.
   ⛔ Eligibility stays `UNAVAILABLE:sandbox` (`EF-096`) — no-taint is necessary, NOT proven sufficient.
