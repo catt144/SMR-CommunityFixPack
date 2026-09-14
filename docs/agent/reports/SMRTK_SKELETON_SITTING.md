@@ -472,6 +472,65 @@ touching `Platform.cheats` is the thing that retires that paste — and the
 difference is exactly what step 2 measures. Whatever P4 builds for "force-open
 console", it must not set `Platform.cheats`.
 
+### Duplicated-line question — READ IN THE FILE, both shapes explained
+
+Raised mid-sitting by `smr-bugfixpack-8f` from the owner's screen. The
+diagnostic asked for was whether the duplication is in the **log file** or only
+on screen. Counted in the file (`Mars.exe-20260913-20.40.33`):
+
+| id | verb | lines in file | `[mod]`-prefixed | bare |
+|---|---|---|---|---|
+| 7, 8 | `SHORTCUT` | 2 each | 1 | 1 |
+| 9, 10 | `PANEL_RESTORE` | 2 each | 1 | 1 |
+| 14, 17, 25, 27, 28 | various | 2 each | 1 | 1 |
+| **15** | `SCRATCH_DISCARDED` (console-typed) | **3** | 1 | **2** |
+
+**Two lines per `Log` call is by design, not duplication.** `T.Log` emits once
+through `ModLog` (which the game prefixes `[mod]`) and once through
+`ConsolePrint` (`70_SMRTK_Core.lua`, `T.Log` body). Every internal call shows
+exactly this 1+1.
+
+**Shape 2 — same id twice — is a console echo of a return value, not a doubled
+record.** `T.Log` ends with `return line`, and the console wraps a typed
+expression as `ConsolePrint(print_format(<expr>))` (`uiConsole.lua:362`). So a
+`SMRTK.Log(...)` **typed at the console** gets its own returned line printed a
+second time. It affects only console-typed `Log` calls — confirmed against the
+previous boot's log, where the two console-typed `Log` calls (`PLATFORM_READ`,
+`SCRATCH_READ`) show 3 lines each and every internal call shows 2. No id is ever
+written twice by the logger. Counting toolkit actions by id remains sound.
+
+**Shape 1 — different ids at the same `t` — is two genuine calls, and only one
+of them is worth acting on.**
+
+- `SHORTCUT` ×2: two shortcut rebuilds. Already falsified as harmless in step 1
+  — six such lines, one keypress, one toggle.
+- `PANEL_RESTORE` ×2: **real, and an 03A item.** `restore_panel()` is registered
+  on **both** `OnMsg.InGameInterfaceCreated` and `OnMsg.PostLoadGame`
+  (`71_SMRTK_Panel.lua:207-209`), and a savegame load fires both.
+
+⚠️ **But it is a logging-precision finding, not a double panel.** `T.OpenPanel()`
+opens with `if T.panel and T.panel.window_state ~= "destroying" then
+T.panel:SetVisible(true); return T.panel end`, so the second restore reuses the
+existing instance. Behaviourally confirmed: one drag produced exactly one
+`SMRTK_MOVE`, one keypress exactly one `panel_toggle`. Two panel instances would
+each own a strip and a tab bar and would have doubled those. **One panel, two log
+lines.** Recommendation for 03A: log `PANEL_RESTORE` only when the panel was
+actually created or made visible, so an agent counting restores is not misled.
+⛔ This is P4's persistence evidence, so the count mattering was the right worry.
+
+**Not ours:** `[SMRTest] console enable requested` appears 8 times = 4 calls ×2,
+from the **legacy** `00_TestCore.lua:526`, outside the SMRTK fence. It is the
+bootstrap 03B is asked to decide about retiring, and step 2 has now supplied the
+evidence for that decision.
+
+### Root cause for the whole "UI chrome on screen" family
+
+`SMRTK_CLEAR`, `SMRTK_TAB` and `SMRTK_MOVE` all reach the screen for one reason:
+`T.Log` calls `ConsolePrint` for **every** line, unconditionally. So a
+destination policy is a change in **one place** — a per-verb or per-call
+destination on `T.Log` — not a change per action. Requirement (B) is unaffected
+either way: the line still reaches the log file and the ring.
+
 ### CLEAR logs onto the screen it just wiped — peer finding, verified, fix corrected
 
 Raised by the orchestrator session `smr-bugfixpack-8f` during the sitting.
