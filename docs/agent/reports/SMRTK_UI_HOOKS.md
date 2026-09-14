@@ -141,4 +141,4 @@ Metadata writes are centralized to eliminate concurrent edits to one file.
 - [x] P3 Agent/slots: build, independent gates, commits.
 - [x] P4 Saves/Kit: build, independent gates, commits.
 - [x] P5 Stamper/format: build, independent gates, commits.
-- [ ] Ordered merge checks, report, successor/audit inboxes, consumption/push.
+- [x] Ordered merge checks, report, successor/audit inboxes, consumption/push.

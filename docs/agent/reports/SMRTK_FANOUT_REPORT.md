@@ -183,7 +183,7 @@ The following claims were corrected during the build:
 - [x] Ordered parse, complete co-load, all cross-ids and meaningful desk checks.
 - [x] Post-release World, Kit, Stamper native editor corrections, one-file gates/commits.
 - [x] Last-wave P1/P4 inboxes preserved in pack commit before their consumption.
-- [ ] Successor/audit inboxes, consumed briefs/03A, row strike, doccheck/push.
+- [x] Successor/audit inboxes, consumed briefs/03A, row strike, doccheck/push.
 
 ## DEPARTURES - defaults changed, invariants retained
 
@@ -2796,4 +2796,149 @@ ALIASCHECK: 34 file(s), 38 SMRTest member(s) derived, 9 finding(s)  (report-only
   WARN UNKNOWN   76_SMRTK_Kit.lua           SMRTest.last is defined by no kit file
   WARN UNKNOWN   76_SMRTK_Kit.lua           SMRTest.last is defined by no kit file
 doccheck: GREEN
+```
+
+
+## Close-out verification
+
+The report, five payload reports, successor/audit inboxes, prompt-map row strike
+and six spent prompt deletions were committed together as
+`966e0c57b73985a07954ff14dd859022ba9efe2c`. The precommit hook returned
+doccheck GREEN; its full output follows. Pack Code/, metadata.lua and items.lua
+have no task changes. The only remaining pack dirty path is the foreign
+`docs/agent/prompts/CHECKLIST_ARCHIVE.md`; it was left untouched. TestKit is clean
+at `cee5bab230f2fac876aa0e6d86bb97f6b56ad020` and has no remote.
+
+These are the actual close-out push and remote verification results, recorded
+before this report-only completion update. Claude 03B is next; native page/effect
+validation awaits 08.
+
+```text
+$ git push
+To https://github.com/catt144/SMR-CommunityFixPack.git
+   e245d80..966e0c5  main -> main
+
+$ git ls-remote origin refs/heads/main
+966e0c57b73985a07954ff14dd859022ba9efe2c	refs/heads/main
+```
+
+### Close-out commit hook and result - verbatim
+
+```text
+warning: in the working copy of 'docs/agent/facts/EF-099.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'docs/agent/prompts/README.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'docs/agent/prompts/smrtk/03B_JUDGE_claude.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'docs/agent/prompts/smrtk/99_AUDIT_fable.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'docs/agent/prompts/smrtk/README.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'docs/agent/reports/SMRTK_FANOUT_GATES.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'docs/agent/reports/SMRTK_FANOUT_MERGE.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'docs/agent/reports/SMRTK_FANOUT_REPORT.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'docs/agent/reports/SMRTK_LAYOUT_FORMAT.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'docs/agent/reports/SMRTK_P1_REPORT.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'docs/agent/reports/SMRTK_P1_SMOKE.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'docs/agent/reports/SMRTK_P2_REPORT.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'docs/agent/reports/SMRTK_P2_SMOKE.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'docs/agent/reports/SMRTK_P3_REPORT.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'docs/agent/reports/SMRTK_P3_SMOKE.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'docs/agent/reports/SMRTK_P4_REPORT.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'docs/agent/reports/SMRTK_P4_SMOKE.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'docs/agent/reports/SMRTK_P5_DESK.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'docs/agent/reports/SMRTK_P5_REPORT.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'docs/agent/reports/SMRTK_SKELETON_SMOKE.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'docs/agent/reports/SMRTK_UI_HOOKS.md', LF will be replaced by CRLF the next time Git touches it
+ENTRIES: 191 files (2 grouped), 226 preserved index rows, 188 heading tags compared
+  status derived from: c-row-default x1, row-evidence x36, row-status x1, tag x188
+  warn F59: the frozen index-row cell says 'fixed*', entry says 'tested-attended' (from 'tag')
+  warn F85: the frozen index-row cell says 'filed', entry says 'wontfix' (from 'tag')
+  warn C12: the frozen index-row cell says 'filed', entry says 'cand' (from 'row-evidence')
+  warn C13: the frozen index-row cell says 'filed', entry says 'cand' (from 'row-evidence')
+  warn C14: the frozen index-row cell says 'filed', entry says 'cand' (from 'row-evidence')
+  warn C15: the frozen index-row cell says 'filed', entry says 'cand' (from 'row-evidence')
+  warn C16: the frozen index-row cell says 'filed', entry says 'cand' (from 'row-evidence')
+  warn C17: the frozen index-row cell says 'filed', entry says 'cand' (from 'row-evidence')
+  warn C37: the frozen index-row cell says 'filed', entry says 'cand' (from 'row-evidence')
+  warn C35: the frozen index-row cell says 'filed', entry says 'cand' (from 'row-evidence')
+  warn C34: the frozen index-row cell says 'filed', entry says 'cand' (from 'row-evidence')
+  warn C38: the frozen index-row cell says 'filed', entry says 'cand' (from 'row-evidence')
+  warn C39: the frozen index-row cell says 'filed', entry says 'tested-unattended' (from 'tag')
+  warn F100: the frozen index-row cell says 'filed', entry says 'fixed' (from 'tag')
+  warn C43: the frozen index-row cell says 'filed', entry says 'fixed' (from 'tag')
+  warn C49: the frozen index-row cell says 'filed', entry says 'wontfix' (from 'tag')
+  warn C50: the frozen index-row cell says 'filed', entry says 'tested-attended' (from 'tag')
+  warn C51: the frozen index-row cell says 'filed', entry says 'tested-attended' (from 'tag')
+  warn C52: the frozen index-row cell says 'filed', entry says 'parked' (from 'tag')
+INDEX: fresh — regenerating from front matter reproduces INDEX.md byte for byte (226 rows)
+FACTS: 101 files, 60 state an observation date, 3579 source lines preserved
+FACTS INDEX: fresh — regenerating from front matter reproduces INDEX.md byte for byte (101 rows)
+ROOT: docs/ holds exactly the 11 entries docs/README.md's map declares (BUGS.md, FIELD_REPORT_REPLIES.md, FUTURE_IDEAS.md, PLAYTEST_CHECKLIST.md, PLAYTEST_HELP.md, README.md, STATUS.md, UPLOAD_WORKFLOW.md, WAITING_ON_YOU.md, agent, archive)
+PROMPT MAP: PASS — 13 perma + 7 one-off row(s) agree with disk in both directions; no tombstones
+ENTRY MIRROR: AGENTS.md == CLAUDE.md, byte for byte (2506 bytes)
+STATE + STUBS: STATE.md 11979 bytes (warn 12288, hard 18432, line 200); 3 stubs present and pointing
+WAITING: fresh — 128 checklist items, 50 marked, 7 waiting on the owner, 28 need a marker
+MARKER INTEGRITY: 51 on disk, 51 parsed; WARN
+  warn duplicate ck:144 at lines 2553, 2627 (agree)
+SKILLS: 2 skill(s), mirrored to .agents/skills/
+    smr-bug-library           3622 B  ⚠ over the 3072 B target
+    smr-orientation           3248 B  ⚠ over the 3072 B target
+COUNTS: 47 Code/*.lua files, 46 registered modules (46 default-active, 0 files carry optional = true), 97 probes
+        index rows: 119 F + 13 D + 94 C = 226 (in 191 entry files)
+STATE BUILD STATE: fresh — regeneration reproduces the region byte for byte
+TEMPORARY SWEEP: 0 hit(s) in Code/ + TestKit Code/
+LOAD ORDER: 1 shared-symbol constraint(s) checked, 47 file(s) in the code list
+WRAP CHECK: 0 wrap site(s) outside Require, 4 allowlisted (FIX_POLICY §2; detector+allowlist in tools/harvest_wrap_targets.py)
+PARSE: 47 file(s) in Code, 0 error(s) [Lua 5.5]
+PARSE: 34 file(s) in ..\SMR-BugFixPack-TestKit\Code, 0 error(s) [Lua 5.5]  (report-only)
+MODULE SETS: 47 file(s) in Code/, items.lua and metadata.lua's code list agree by name
+PACK IGNORE PARITY: PASS — 15 filters agree in order
+FLPK SELFTEST: PASS (nested + shallow; the pack reader owns every descendant span)
+BODYCHECK SELFTEST: PASS (the falsifier; every verdict fired on a known case)
+CK170 SELFTEST: PASS (0.159 s)
+REPAIR PASS SELFTEST: PASS (0.180 s)
+STATE COUNTS SELFTEST: PASS (0.159 s)
+PUSH SET: 40191 B in 5 file(s) ≈ 19k tokens (budget 40960 B)
+    CLAUDE.md                                 2506 B
+    docs/agent/STATE.md                      11979 B
+    prompts/perma/GENERAL_USE_PROMPT.md       4227 B
+    prompts/perma/DISPATCH.md                10500 B
+    MEMORY.md (Claude, outside the repo)     10979 B
+TESTKIT TREE: clean
+ALIASCHECK: 34 file(s), 38 SMRTest member(s) derived, 9 finding(s)  (report-only)
+  WARN UNKNOWN   76_SMRTK_Kit.lua           SMRTest.order is defined by no kit file
+  WARN UNKNOWN   76_SMRTK_Kit.lua           SMRTest.order is defined by no kit file
+  WARN UNKNOWN   76_SMRTK_Kit.lua           SMRTest.probes is defined by no kit file
+  WARN UNKNOWN   76_SMRTK_Kit.lua           SMRTest.probes is defined by no kit file
+  WARN UNKNOWN   76_SMRTK_Kit.lua           SMRTest.order is defined by no kit file
+  WARN UNKNOWN   76_SMRTK_Kit.lua           SMRTest.order is defined by no kit file
+  WARN UNKNOWN   76_SMRTK_Kit.lua           SMRTest.order is defined by no kit file
+  WARN UNKNOWN   76_SMRTK_Kit.lua           SMRTest.last is defined by no kit file
+  WARN UNKNOWN   76_SMRTK_Kit.lua           SMRTest.last is defined by no kit file
+doccheck: GREEN
+
+BUILD STATE (emitted by tools/doccheck.py)
+- modules: 46 registered (46 default-active, 0 optional-gated files)
+- Code/*.lua files: 47
+- TestKit probes: 97
+- BUGS index rows: 119 F + 13 D + 94 C
+[main 966e0c5] SMRTK 03A: close fan-out build and hand independent review to Claude
+ 29 files changed, 6546 insertions(+), 728 deletions(-)
+ delete mode 100644 docs/agent/prompts/smrtk/03A_PAGES_FANOUT_codex.md
+ delete mode 100644 docs/agent/prompts/smrtk/payloads/P1_WORLD.md
+ delete mode 100644 docs/agent/prompts/smrtk/payloads/P2_INFOPANEL.md
+ delete mode 100644 docs/agent/prompts/smrtk/payloads/P3_AGENT.md
+ delete mode 100644 docs/agent/prompts/smrtk/payloads/P4_SAVES_KIT.md
+ delete mode 100644 docs/agent/prompts/smrtk/payloads/P5_STAMPER.md
+ create mode 100644 docs/agent/reports/SMRTK_FANOUT_GATES.py
+ create mode 100644 docs/agent/reports/SMRTK_FANOUT_MERGE.py
+ create mode 100644 docs/agent/reports/SMRTK_FANOUT_REPORT.md
+ create mode 100644 docs/agent/reports/SMRTK_LAYOUT_FORMAT.md
+ create mode 100644 docs/agent/reports/SMRTK_P1_REPORT.md
+ create mode 100644 docs/agent/reports/SMRTK_P1_SMOKE.py
+ create mode 100644 docs/agent/reports/SMRTK_P2_REPORT.md
+ create mode 100644 docs/agent/reports/SMRTK_P2_SMOKE.py
+ create mode 100644 docs/agent/reports/SMRTK_P3_REPORT.md
+ create mode 100644 docs/agent/reports/SMRTK_P3_SMOKE.py
+ create mode 100644 docs/agent/reports/SMRTK_P4_REPORT.md
+ create mode 100644 docs/agent/reports/SMRTK_P4_SMOKE.py
+ create mode 100644 docs/agent/reports/SMRTK_P5_DESK.py
+ create mode 100644 docs/agent/reports/SMRTK_P5_REPORT.md
 ```
