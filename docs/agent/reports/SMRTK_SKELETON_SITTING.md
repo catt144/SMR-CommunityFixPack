@@ -22,7 +22,9 @@ vendor scores the predictions. Pack HEAD `320d359`; TestKit HEAD `5d8d3b3`.
 - [x] Step 3 COMPLETE: ⭐⭐ **P1 PASSES** — leaf filled the depot, `used=false`, zero `ObjCheat` all boot.
 - [x] Step 4 COMPLETE: ⭐ **P3 PASSES** on the native path; clipboard verified from Windows itself.
 - [x] Step 5 COMPLETE: tee arm/fire/disarm clean, `same=true`, ⭐ P3 confirmed on both routes.
-- [ ] Owner sitting, steps 6-8 (frame/buttons, error witness, P4 persistence).
+- [x] Steps 6-7 COMPLETE: NOT_BUILT stubs exact, error witness exact.
+- [x] Step 8 COMPLETE: ⭐ **P4 PASSES** — auto-disarm on save, state round-trips both directions.
+- [ ] Verdict, archived log path, outbox to 03A/99, ck175 append.
 - [ ] Prediction-by-prediction scoring; verdict; archived log path.
 - [ ] Outbox to 03A and 99; ck175 in plain language; strike the row; `git rm` 02.
 
@@ -676,6 +678,101 @@ exists to serve — a concrete argument for button-first evidence capture in P4.
 with `Get-Clipboard -Raw` from the attending session rather than pasted into an
 editor by the owner. It is faster, it removes a transcription step, and it is
 stronger evidence — it proves the text reached the real OS clipboard.
+
+## Step 8 — ⭐ P4 PASSES: auto-disarm on save, and state round-trips
+
+```text
+SMRTK_PANEL action=panel_toggle open=false status=OK tab=Kit id=73   (panel closed, see below)
+SMRTK_MARK label=roundtrip mark=134 id=74
+SMRTK_DISARM action=print_tee reason=SavegameSaved status=OK id=75   <- auto-disarm, BEFORE the load
+SMRTK_CONSOLE_ARM enabled=true hook=ChangeMap id=76,77
+SMRTK_CONSOLE_ARM enabled=true hook=PreLoadGame id=79
+SMRTK_TAINT_READ action=taint_read status=OK used=false id=84
+SMRTK_ROUNDTRIP_READ armed=0 collapsed=false open=false same_print=true tab=Kit x=1125 y=243 id=86
+SMRTK_COPY action=copy from=134 lines=24 status=OK truncated=false id=87
+```
+
+⭐ **The load-bearing line is `SMRTK_DISARM ... reason=SavegameSaved`.** An armed
+hook tore itself down *because the game saved*, before the load — so a patched
+`print` cannot ride into a savegame. `armed=0` and `same_print=true` after the
+round trip confirm the global was restored, i.e. the
+**idle = zero patched vanilla functions** invariant survives a save/load.
+
+`tab=Kit`, `x=1125`, `y=243`, `collapsed=false` all round-tripped exactly, and
+`used=false` held.
+
+### ⚠️ `open=false`, and why that is a PASS rather than a miss
+
+01 predicted the panel "returns open". It returned `open=false` — because the
+owner had closed it at **id=73**, moments before saving, to run a (flawed)
+control for the flicker report below. `panel_toggle` persists
+`SavePanelState { open = false }`, so the toolkit restored the state that was
+actually in force. That is persistence working, not failing.
+
+⭐ **And the untested half is already measured elsewhere in this same sitting.**
+Step 1 saved/loaded with the panel **open** and produced
+`SMRTK_PANEL_RESTORE open=true tab=Sitting` twice on the load. So across the
+sitting the `open` field round-tripped in **both** directions:
+
+| state at save | after load | evidence |
+|---|---|---|
+| open | restored open, right tab | step 1, `PANEL_RESTORE open=true tab=Sitting` |
+| closed | restored closed, tab/x/y intact | step 8, `ROUNDTRIP_READ open=false tab=Kit x=1125 y=243` |
+
+That is stronger than the single observation 01 asked for — a persistence route
+that only ever restored "open" would pass the predicted test while being wrong.
+
+⇒ **P4 PASSES.** Recorded as PASS WITH CORRECTION to the prediction's wording:
+the predicted observation was displaced by an operator action, and the property
+is established from two legs instead of one.
+
+## ⚠️ Flicker/strobe report — REAL, MEASURED, CAUSE UNATTRIBUTED
+
+Owner reported during the sitting: strobing when hovering menu buttons, with an
+audio buzz; the same strobing on toolkit panel buttons with no audio; also on the
+main HUD bar icons; **not** in the Save Game dialog, which behaves normally.
+
+**Measured from a 12.9 s 4K/30 recording** (frames via ffmpeg, diffed in numpy):
+
+| region | signature |
+|---|---|
+| `SAVE GAME` menu row | frame-to-frame diff bimodal ~0.03 ↔ ~1.2, irregular, up to 30 Hz |
+| panel `Saves` tab button | bimodal ~0.02 ↔ ~0.48, 36 % of frames |
+| changed bbox, menu | x 180-704, y 439-521 = the row's **highlight bar** |
+| changed bbox, in-game | x 2906-3148, y 647-703 = the **tab button under the cursor** |
+| audio | continuous low buzz rising during hover; **no discrete click transients** |
+
+⇒ A **hover-highlight state oscillation** on whatever element is under the
+cursor, retriggering the vanilla rollover sound fast enough to buzz. Toolkit
+buttons strobe silently because they register no rollover FX.
+
+Not a capture artifact: tearing does not produce a clean on/off of a single
+highlight bar, and the owner hears the buzz live, which no video artifact can
+explain.
+
+### ⛔ The first control was VACUOUS — recorded because it was acted on
+
+The attending session proposed "close the panel with Ctrl-Shift-F11 and re-test";
+the strobe persisted, which looked like it exonerated the panel. **It does not.**
+`panel_toggle` closes by `T.panel:SetVisible(false)` (`71_SMRTK_Panel.lua:166`)
+and **neither deletes the panel nor stops its `SMRTKStatus` thread**, which loops
+`T.RefreshPanel(); Sleep(250)` while `window_state ~= "destroying"` (`:156-157`).
+So with the panel "closed" the object still exists and still repaints four times
+a second. The control could not have cleared the panel and its negative result
+carries no weight. (Whether a 4 Hz refresh could drive a ~30 Hz strobe is a
+separate question — it is not obviously sufficient, but the control was not
+clean, which is the point.)
+
+⇒ **Valid controls, none yet run:** (1) hover at the **main menu**, where no
+in-game interface and no panel can exist; (2) boot with TestKit + Fix Pack
+**disabled** — the true vanilla control; (3) the house sound method, a log-only
+`PlayFX` hook, to turn "a buzz" into a retrigger count (⛔ code change, needs
+`Mars.exe` closed, rule 16).
+
+⚠️ The discriminator the owner already supplied is the most interesting datum:
+**the Save Game dialog does not strobe** while the game-options menu and the HUD
+bar do. If (2) shows this is vanilla, it is a defect entry and the project's own
+business, not an 03A item. Nothing here is attributed yet.
 
 ## Outbox items raised during the sitting (for 03A / 99)
 
