@@ -49,3 +49,35 @@ how (command + output) · stopped · OWNER-ROUTED · for-07 (the slot contract, 
 ## Notes from upstream
 
 - (03A pastes 02's outbox and `SMRTK_UI_HOOKS.md` §2 here before launch)
+
+
+### 03A frozen upstream inbox, 2026-09-13
+
+(one paragraph, for every payload's inbox)
+
+P1-P4 all PASS on build 24995074; the core, the logger, the taint assert, the
+`ConsoleEnabled` arm, the ring, the clipboard and LocalStorage persistence are
+all confirmed in play, so build on them. The native console tap **and** the print
+tee both carry real output, so either is a valid capture route. Five things to
+carry: **(a)** per-object code must target `UniversalStorageDepotBase` and
+`#storable_resources`, never `StorageDepot.resource` — 01's leaf refused on every
+depot in the game; **(b)** `AsyncCheat*` infopanel entries bypass `ObjCheat` and
+never taint even in vanilla (`ClassHierarchy`, `ClipPlane`, `Gizmo`, `Inspect`,
+`Properties`, `Screenshot`), so they need no re-implementation; **(c)** `CLEAR`
+logs onto the screen it just wiped, and the fix is a per-action opt-in honoured
+by `dispatch`, never moving `T.Log` before the callback, which would empty
+`before`/`after` on every action; **(d)** `PANEL_RESTORE` logs once per
+registration and there are **three** (`InGameInterfaceCreated`, `PostLoadGame`,
+`CurrentMapChangeDone`) though only one panel results — log on actual
+create/make-visible; **(e)** `CopySince` is destroyed by the operator's next
+copy, so it must be the last command of a block, and the panel **button** form is
+immune. The owner's surface ruling and ranked fallback ladder are in ck175.
+
+Shared routes and API are in `docs/agent/reports/SMRTK_UI_HOOKS.md` ??1?3 (read all).
+Infopanel: DialogOpen ? toolkit InfopanelSection under idContent; no vanilla patch.
+Map targeting: SMRTK.AcquireClick(id, callback(pos,obj)) / ReleaseClick(id); exclusive TerminalTarget listener, armed only.
+Dock: DialogOpen on HUDClass ? appended controls; native XPopupMenu action menus, advanced pages in fixed left-side panel.
+Always-visible safety text lives on dock. Chrome display policy is in core; use screen=false for pure chrome actions.
+Registry ids: P3 pin_A/pin_B/pin_C; P4 dump_selected/watch_field. Resolve at invocation, not initial file load.
+Core/panel are frozen while payloads run; do not edit them. Report requested metadata lines; coordinator owns metadata writes.
+Each payload owns only its assigned files, never commits/removes files, and writes its numbered-claims report to docs/agent/reports/SMRTK_PN_REPORT.md (replace N with your number).

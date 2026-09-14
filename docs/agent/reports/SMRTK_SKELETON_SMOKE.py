@@ -183,6 +183,7 @@ else:
       if self.parent then for i,v in ipairs(self.parent) do if v==self then table.remove(self.parent,i); break end end end
     end
     XWindow=setmetatable({class='XWindow'},{__index=window})
+    XScrollArea=setmetatable({class='XScrollArea'},{__index=window})
     XDialog=setmetatable({class='XDialog'},{__index=window})
     XButton=setmetatable({class='XButton'},{__index=window})
     XText=setmetatable({class='XText'},{__index=window})
@@ -201,13 +202,13 @@ else:
     assert(p.status.Text:find('eligibility: unavailable (sandbox)',1,true))
     assert(SMRTK.Run('tab_World') and SMRTK.PanelState().tab=='World')
     assert(SMRTK.Run('panel_collapse') and not SMRTK.PanelState().collapsed)
-    assert(p.tabs.visible and p.page_host.visible and p.MinHeight==340)
+    assert(p.tabs.visible and p.page_host.visible and p.MinHeight==540)
     assert(SMRTK.Run('panel_collapse') and not p.tabs.visible and p.MinHeight==100)
     local ok,result=SMRTK.Run('pause'); assert(not ok and result.status=='NOT_BUILT')
     local strip=p[1]
     strip:OnMouseButtonDown(point(140,100),'L')
     strip:OnMouseButtonUp(point(180,130),'L')
-    assert(SMRTK.PanelState().x==163 and SMRTK.PanelState().y==120)
+    assert(SMRTK.PanelState().x==123 and SMRTK.PanelState().y==90)
     assert(desktop.capture==nil)
     assert(SMRTK.TogglePanel() and not p.visible and not SMRTK.PanelState().open)
     assert(SMRTK.TogglePanel() and p.visible and SMRTK.PanelState().open)
@@ -219,4 +220,4 @@ else:
     assert(SMRTK.panel~=p and SMRTK.PanelState().tab=='Kit' and SMRTK.panel.visible)
     assert(SMRTK.ArmedCount()==0 and print==original_print)
     ''')
-    print("PANEL SMOKE: PASS — registry, mouse callbacks, collapse, tabs, stubs, drag persistence, toggle, shortcut, reload reconstruction (mock X classes; no rendering claim)")
+    print("PANEL SMOKE: PASS — registry, collapse, tabs, stubs, fixed side position, toggle, shortcut, reload reconstruction (mock X classes; no rendering claim)")
