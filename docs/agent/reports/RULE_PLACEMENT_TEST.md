@@ -71,6 +71,57 @@ Nothing in `metadata.lua` or `tools/upload_preflight.py` mentions TestKit, **bec
 to**. ⇒ **The rule was written as if compliance were the protection, when structure was.** That is
 precisely why it reads as necessary and is not.
 
+## ⭐ Audit criterion, owner 2026-09-14 — rules that should not be rules at all
+
+> *"Look for rules that look like they shouldn't even be rules. Either because it's beyond what an
+> agent could even do, or something an agent would never do via its programming."*
+
+Three distinct shapes, and **they do not get the same disposition**:
+
+| shape | meaning | disposition |
+|---|---|---|
+| **(a) CANNOT** | the action is structurally impossible for the reader | **delete the rule** — e.g. Ground rule 3, TestKit upload: no remote exists |
+| **(b) WOULD NOT** | possible, but contrary to how the agent operates | ⛔ **incident check REQUIRED before cutting** — see below |
+| **(c) WRONG READER** | the actor is not the doc's audience | **move it**, do not delete — e.g. Ground rule 1: only the owner installs mods |
+
+### ⛔ (b) is the branch that can delete an EARNED rule — it needs a falsifier
+
+**The discriminator is not "would a well-behaved agent do this?" It is "has this actually
+happened?"** A rule can look exactly like something no careful agent would ever do and exist
+precisely because one did.
+
+**The worked counter-case, from this project:** *"⛔ Never `git checkout --` as a restore."* That
+reads as gratuitous — no careful agent would restore from HEAD in a falsification harness. **An
+agent here did, and it silently destroyed an uncommitted rewrite** (`HANDOFF_PROMPT.md` §6, four
+instrument failures in one session). Cutting that rule as a (b) would delete a receipt.
+
+⇒ **Falsifier, run it on every (b) candidate:**
+
+- **A recorded incident exists** → **KEEP.** The incident is the justification, and it should stay
+  attached.
+- **No incident and no guard** → **cut.**
+
+⭐⭐ **This makes the doc's rule-plus-incident habit FUNCTIONAL, not decorative.** The
+`FIX_POLICY` characterisation argued the pairing is plausibly *why* the rules stick; under this
+criterion it is stronger than that — **the receipt is the proof the rule was earned.** ⇒ The audit
+gets a mechanical first pass: **every rule carrying neither an incident nor a guard is a
+candidate.**
+
+### ⚠️ Calibration, and an instrument warning
+
+Sampled 2026-09-14 across `CLAUDE.md`, `WORKFLOW.md`, `FIX_POLICY.md` and `perma/`: two keyword
+passes for the *"never fabricate / never lie / be honest / never skip"* genre returned **one** hit
+(`perma/SMRTK_SLOTS.md:56`, *"ids, handles, session nonces and game time are variables, never
+invented literals"* — and that one is **earned**: an agent holding a nonce from a previous session
+will hardcode it).
+
+⇒ The (b) yield here looks **small**, and the criterion may be worth more **preventively** — as a
+filter on rules as they are written — than as a harvest from what exists.
+
+⛔ **But two greps do not bound a class defined by MEANING.** A (b)-shaped rule need not contain
+any of those words. **The audit must READ for this, not grep for it**, and must not report a small
+yield as a measured one.
+
 ## ⚠️ The inverse case — a habit wearing a rule's clothes
 
 The same session found the opposite failure. The owner assumed that an agent setting up a playtest

@@ -83,6 +83,18 @@ mechanics — finishes the 09-12 split, which took the protocol and left the mec
   habit, not a rule. A session that does not think of it will ask you to build a save you already
   have. ⇒ First thing into the new skill.
 
+⭐ **ADDED TO THE AUDIT BRIEF (your ask, same day):** look for rules that should not be rules at
+all — *"either because it's beyond what an agent could even do, or something an agent would never
+do via its programming."* Recorded with a falsifier, because that second half can delete an earned
+rule: **⛔ the discriminator is not "would a well-behaved agent do this?" but "has this actually
+happened?"** *"Never `git checkout --` as a restore"* reads as gratuitous, and exists because an
+agent here did it and silently destroyed an uncommitted rewrite. ⇒ **A recorded incident means
+KEEP; no incident and no guard means cut** — which gives the audit a mechanical first pass, and
+makes the house habit of pairing a rule with its incident load-bearing rather than decorative.
+⚠️ Two keyword samples found the genre nearly absent here, so the yield may be small and the
+criterion worth more as a filter on NEW rules — but a class defined by meaning cannot be grepped,
+so the audit must READ for it.
+
 ⚠️ **Also still open from the same session (asked, not yet ruled):** does `WORKFLOW`'s rule 4
 repoint to `metadata.lua` as the per-fix player-text target, or **retire**? (Recommended: retire —
 `WORKFLOW:609` already covers the release-time half, and a per-fix duty on a field nobody reads
