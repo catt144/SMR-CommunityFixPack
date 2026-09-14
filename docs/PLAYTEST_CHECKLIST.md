@@ -44,9 +44,53 @@ Test Kit helpers, save fixtures) stays in [PLAYTEST_HELP.md](PLAYTEST_HELP.md).
 
 ## Decisions waiting on you
 
-### 2026-09-14 — 179: the doc-rules architecture — ⚠️ six calls, and one REVERSES what the audit proposed
+### 2026-09-14 — 180: archive follow-ups — ⚠️ one still needs your word, two are approved work
 
-<!-- ck:179 status:open owner:yes -->
+<!-- ck:180 status:open owner:yes -->
+
+Three loose ends from the 09-14 checklist archival ([ARCHIVE_RECHECK](agent/reports/ARCHIVE_RECHECK.md)).
+
+- **⚠️ STILL YOURS — the 5 restoration candidates.** ✅ Ruled 09-14: *this seat reads each of the
+  five bodies and its live hits, gives you a one-line verdict, and you rule.* Not yet done.
+  ⭐ The sharpest: **item 34 is archived while a LIVE checklist item reads "Item 34's 'now or
+  after' is still yours"** — a live decision pointing at a body a reader can no longer see in
+  place. That is exactly the failure rule (d) could not catch, since 34 of the 35 are unnumbered.
+- **✅ APPROVED — fix the archiver, leave the 35 landed headers alone.** It drops the leading
+  date from a heading and truncates long ones (`ck139` was cut mid-word at
+  `` `Fix_SilentHitMomentFX.lu ``). Bodies are intact and findable; only the archive's header
+  text is lossy. ⛔ Do **not** rewrite the 35 — that would mean editing the append-only archive
+  for a cosmetic gain.
+- **✅ APPROVED — replace the stub pointer wording.** Every stub says *"search `ck-` and this
+  heading"*; **that search returns 0** (the archive re-levels `###`→`##` and drops the date) and
+  `ck-` is shared by 34 of the 35. Replace with the exact `## ck… -- archived …` line that
+  actually exists. Touches checklist stub text only, never the archive.
+
+### ✅ 2026-09-14 — 179 RULED: the doc-rules architecture — all six calls approved, build it
+<!-- ck:179 status:ruled owner:no -->
+
+**RULED 2026-09-14. All six calls approved as proposed**, plus two scope answers:
+
+1. ✅ **Three tiers adopted** — permanent (`CLAUDE.md`, mirrored to `AGENTS.md`) · local (folder)
+   · task (skills).
+2. ✅ **7 headers, not 16**, plus **deleting the 9 perma restatements** of the rule
+   `prompts/README.md:5` already states once for all of them.
+3. ✅ **`CLAUDE.md` gets an explicit rules list**, including *"Editing a doc? Invoke the
+   doc-editing skill first."* — **and `WORKFLOW.md`'s 10 global rules move into it.**
+4. ✅ **`STATE.md` goes to zero rules** (its own line 3: *"Kernel only: status + pointer"*; the
+   audit found 30 in it).
+5. ✅ **Build `doc-editing`, package `prompt-authoring`, set a skill byte cap.**
+6. ⛔ **DECLINED** — the 09-13 *"not yet converted into a **gate**"* wording **STAYS AS IT IS**.
+   ⛔ Do not re-ask; do not "helpfully" rephrase it in any doc.
+
+**`RULES_HEADERS` gate: ALL-CLEAR with three amendments** — 7 headers not 16 · cap **1,024 warn
+/ 2,048 hard** (14 of the 16 measured headers are under 800 B; the old 1,536 was an arbitrary
+number this seat invented, and one header missed it by a single byte) · **re-deriving the STATE
+arithmetic before writing is a STOP condition, not a note** — its figure went stale within two
+hours (12,331 → 12,504 B).
+
+**A9 scope answered:** the redundant-doc review covers **the docs this workspace's agents use
+regularly — `SMR-BugFixPack`, `SMR-BugFixPack-TestKit`, `SMR-CommunityMods`.** Not OptInPack,
+not CommunitySaveRescue, not the non-SMR repos.
 
 Full proposal: [DOC_RULES_ARCHITECTURE](agent/reports/DOC_RULES_ARCHITECTURE.md). Nothing has
 moved. Built on Codex's inventory (`968c58e`, 852 rule occurrences) — that evidence survives
@@ -114,7 +158,16 @@ in a file nobody opens is not a reminder; a line in the output every session rea
 ⛔ No agent retires this on its own judgement — it ends on your word, not on a measurement.
 
 ### ✅ 2026-09-14 — 177 RULED: retirement now covers EVERYTHING in this file, not just tests — ⚠️ one gate still yours
-<!-- ck:177 status:ruled owner:yes -->
+<!-- ck:177 status:ruled owner:no -->
+
+**✅ THE OPEN GATE IS ANSWERED, 2026-09-14: make the marker count RED — scoped to the items the
+committing change itself touches.** A commit fails only if *it* leaves a checklist item
+unmarked, so a peer is never blocked by someone else's omission. That is what turns the
+retirement rule from a habit into a loud failure.
+
+⚠️ **Owner rider: the remaining unmarked backlog still has to be gone through** — doccheck
+reports **12 need a marker** today. The gate stops NEW unmarked items; it does not clear the
+existing ones, and those are a separate pass.
 
 **Your ruling, 2026-09-14:** the archive rule in this file's own preamble —
 *"completed tests move whole to `PLAYTEST_ARCHIVE.md`"* — **is extended to every kind
