@@ -976,6 +976,70 @@ cannot re-break it.
   (*"I am ok with either you fixing it or firing up a subagent"*). Eight commits
   came out of an attendee link. ⛔ 99 must be told, not left to discover it.
 
+#### ⭐⭐ 2026-09-14 — 08b ITEMS 3, 4, 5 PASSED, AND REQUIREMENT (A) IS RE-ESTABLISHED
+
+⭐⭐ **REQUIREMENT (A) HOLDS ON THE REBUILT TREE.** 08 proved it on the OLD
+surface and 09's rebuild invalidated that verdict for changed code. Re-measured
+in play 2026-09-14: **19 unique vanilla cheat leaves dispatched, then
+`SMRTK_TAINT_READ ... used=false`.** Zero ERROR, zero REFUSED, the `SMRTK_TAINT`
+assert never fired, every record `valid_after=true`. Leaves: `CheatCleanAndFix`
+×7 · `CheatFill` ×4 · `CheatMalfunction` ×3 · `CheatEmpty` ×3 ·
+`CheatLightningStrike` ×1 · `CheatAddDust` ×1. Provenance in the same log:
+`fix_pack_present=46/46 game=403908 pack_version=11 save=SMRTK_490.savegame.sav
+sol=490`, all three mods loaded.
+⛔ **This is a 19-dispatch SAMPLE, not 08's 844, and NOT universal proof.** It
+re-establishes (A) on the current tree and nothing more. ⛔ No session may quote
+it as a global guarantee.
+
+**Item 3 — status and ownership: PASS.** The arm lifecycle was read from the log,
+not agreed to: `ARM slot_4 mutation=none once_click=true` → `FIRE clicks=1
+mutation=none object=FusionReactor(8179)` → `DISARM cleanup="click target
+released" reason="click complete"`, then a second cycle ending `DISARM clicks=0
+reason="right click"`. **Arms balance exactly 3/3 with 2 fires and zero
+survivors**, matching the chip's `armed 0`. ⇒ The right-click escape is a real
+input release, not a cosmetic one, and a read-only slot mutates nothing.
+
+**Item 5 — More: PASS.** `SMRTK_SELECTED action=selected_more category=Cheat
+method=CheatLightningStrike` — a retained More name genuinely dispatching through
+its leaf. ⛔ Still not a licence to call other names play-proven; the census
+retaining a name remains no evidence at all.
+⚖️ **The stale-selection guard is NOT hand-reachable, and that is CORRECT.** Each
+row captures its object at build time and refuses if selection moved
+(`73:257,263`), checked twice because the async thread can outlive the click. In
+play the section is simply rebuilt for the new building, so the guard is
+**defence-in-depth against the async race**, not a user-facing behaviour. ⛔ Do
+not send anyone to reproduce it by hand.
+
+**Item 4 — Selected and depots: PASS, and it caught a real defect.** Fill/Empty
+produced measured changes on three classes across BOTH `EF-102` branches:
+`StorageFuel` 25018→180000→0 · `MechanizedDepotFood` 1490000→3950000→0 ·
+`UniversalStorageDepot` ten resources →30000→0.
+
+⭐ **THE DEFECT, and it is `EF-102` landing where that fact predicted.**
+`selected_fill`/`selected_empty` carried `before=`/`after=` for `StorageFuel` and
+`UniversalStorageDepot` but **NO numbers at all** for `MechanizedDepotFood`.
+`depot_read` returned early whenever `storable_resources` was not a non-empty
+table, so `before` stayed nil and the caller then skipped `after` too. ⇒ **The
+mutation worked and only the EVIDENCE was missing** — a record that reads
+`status=OK valid_after=true` while proving nothing, which is worse than a visible
+failure. Fixed (TestKit `8e25f6b`) by falling back to the scalar chain
+`76_SMRTK_Kit.lua:175` already used for Dump — which is exactly why Dump could
+read that depot when the measurement could not. ⚠️ Needs a boot to confirm the
+numbers appear.
+
+⭐ **`EF-102` surfaced TWICE in one item** — once as the readout shape (`storage`
+is a TABLE on `StorageFuel`/`UniversalStorageDepot` and a bare SCALAR on
+`MechanizedDepotFood`) and once as this missing measurement. ⇒ **An agent parsing
+a Dump must handle both shapes**; assuming `storage` is a table breaks silently
+on the mechanized branch.
+
+⭐ **Unplanned lead for C91, recorded so it is not re-derived.** Every Dump
+carries a `modifiers` field, and it showed
+`Policy_BuildingCodesStrict percent=-30 prop=maintenance_resource_amount` on a
+live building. ⚠️ **This is NOT evidence of the C91 leak** — the policy is active,
+so its presence is correct. It is a ROUTE: dump a building, repeal Building
+Codes, dump again, and read whether the modifier survives.
+
 #### ⚖️ STILL YOURS TO ANSWER — three open design questions
 
 1. ✅ **Item 6 — ANSWERED BY THE OWNER 2026-09-14, and 08 had it wrong.** *"clean
