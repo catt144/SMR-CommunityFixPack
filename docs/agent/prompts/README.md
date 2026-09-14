@@ -48,8 +48,10 @@ exists, and a struck row is RED. A row that outlives its file is how a next sess
 - `smrtk/`: ⭐ **LIVE** (authored 2026-09-13, owner ask, checklist 175): the **SMR Tool Kit** — a TestKit panel that
   replaces the vanilla cheat menu for playtesting with untainted leaf calls (`EF-095`), one `SMRTK_` log tag, agent
   slots, triggers, save slots, a console tap + clipboard copy, and a layout stamper (`EF-099`). Kill-gated at 02;
-  **Codex builds (01, 03A fan-out, 07), Claude judges (03B) and audits (99)** — the owner's shape. 02 PASSed and 03A built;
-  next is Claude `03B_JUDGE_claude.md`. Its README is the manifest; spent payload briefs live in the close-out git grave.
+  **Codex builds (01, 03A fan-out, 07), Claude judges (03B) and audits (99)** — the owner's shape. 02 PASSed, 03A built,
+  **03B JUDGED PASS WITH FIXES 09-13** (`reports/SMRTK_JUDGE.md`); next is Codex `07_DOCS_AND_SITTING_PREP_codex.md`,
+  then owner sitting 08 and Fable audit 99 — the only three prompt files left in the folder. Its README is the manifest
+  and is the authority on link state; spent payload briefs live in the close-out git grave.
 - `fixtoggles/`: **LIVE** (authored 09-11): an on/off button per fix, Beta labels, linked buttons; link 09 researches
   versioning for a B step. Its README is the manifest; checklist 148.
 - `arming/`: the unattended-leg harness (`tools/arm_leg.ps1` reads it). Infrastructure, not a prompt.
