@@ -44,6 +44,32 @@ Test Kit helpers, save fixtures) stays in [PLAYTEST_HELP.md](PLAYTEST_HELP.md).
 
 ## Decisions waiting on you
 
+### ✅ 2026-09-14 — 178 RULED: STATE's warn cap is TEMPORARILY +25% — ⚠️ you end it, and only you
+
+<!-- ck:178 status:ruled owner:yes -->
+
+**Your ruling, 2026-09-14:** *"it does no good to keep evicting until we can fix the bleed
+of docs everywhere, inact a temporary increase of the state cap 25% more headroom to be
+removed as soon as we are fully done with the doc overhaul (basically when I say we are
+done)."*
+
+**Landed:** `STATE_WARN_BYTES` **12,288 → 15,360** (12 KiB → 15 KiB, +25%). ⛔ The **hard**
+cap stays **18,432** — unmoved, same as the 09-09 raise, because it is the backstop for
+flags nobody read.
+
+**Restore, when you say the overhaul is done:** set `STATE_WARN_TEMPORARY = False` in
+`tools/doccheck.py`. That single edit returns the warn to 12,288 and nothing else changes.
+**Falsified 2026-09-14 on the live file:** flipped to `False` → warn read 12,288 and the
+reminder line vanished; flipped back → 15,360; restored from a copy and `sha256sum -c` OK.
+
+**Why it cannot quietly become permanent:** every `doccheck` run now prints a `⏳` line
+saying the raise is temporary, who ruled it, and the one edit that ends it. The 09-09 raise
+(9 → 12 KiB) carried only a source comment reading *"REVISIT once the 1.1.0 fallout is
+closed"* — nothing ever surfaced it again, and it is still in force a month later. A note
+in a file nobody opens is not a reminder; a line in the output every session reads is.
+
+⛔ No agent retires this on its own judgement — it ends on your word, not on a measurement.
+
 ### ✅ 2026-09-14 — 177 RULED: retirement now covers EVERYTHING in this file, not just tests — ⚠️ one gate still yours
 <!-- ck:177 status:ruled owner:yes -->
 

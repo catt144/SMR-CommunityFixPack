@@ -84,7 +84,26 @@ CODE = os.path.join(REPO, "Code")
 # ⚠️ REVISIT once the 1.1.0 fallout is closed: every byte here is paid by EVERY
 # session at boot, which is the whole reason the cap exists.
 # The HARD cap is deliberately NOT moved — it is the backstop for unread flags.
-STATE_WARN_BYTES = 12 * 1024
+#
+# 2026-09-14 owner ruling: WARN TEMPORARILY RAISED 12 KiB -> 15 KiB (+25%),
+# checklist 178. Reason, in the owner's terms: "it does no good to keep evicting
+# until we can fix the bleed of docs everywhere". The doc overhaul (the 09-14
+# checklist archival, RULES_HEADERS, and whatever follows) needs STATE to absorb
+# working state while the real remedy is built; evicting against a cap during
+# that work spends owner attention on the symptom.
+# ⛔ THIS IS TEMPORARY AND EXPIRES ON THE OWNER'S WORD — "to be removed as soon
+# as we are fully done with the doc overhaul (basically when I say we are done)".
+# ⛔ RESTORE PROCEDURE, exact: set STATE_WARN_TEMPORARY = False. That returns the
+# warn to 12 * 1024 with no other edit. Do it ONLY on the owner saying the
+# overhaul is done; no agent retires this on its own judgement.
+# The temporary state PRINTS ITSELF on every doccheck run (see the STATE + STUBS
+# line) precisely so it cannot quietly become the new normal — the 09-09 raise
+# carried a "REVISIT once the 1.1.0 fallout is closed" comment that nothing ever
+# surfaced again.
+# The HARD cap is AGAIN deliberately NOT moved — same reason as 09-09.
+STATE_WARN_TEMPORARY = True          # ⛔ owner-only switch; see the block above
+STATE_WARN_BYTES = (15 if STATE_WARN_TEMPORARY else 12) * 1024
+STATE_WARN_PERMANENT_BYTES = 12 * 1024
 STATE_MAX_BYTES = 18 * 1024
 STATE_MAX_LINE_BYTES = 200
 
@@ -1203,11 +1222,18 @@ def check_state_and_stubs(out):
             red.append("%s: the stub does not say MOVED" % rel)
         if target not in text:
             red.append("%s: the stub does not point at %s" % (rel, target))
-    out.append("STATE + STUBS: STATE.md %s bytes (warn %d, hard %d, line %d); "
+    out.append("STATE + STUBS: STATE.md %s bytes (warn %d%s, hard %d, line %d); "
                "%d stubs present and pointing"
                % ("?" if n_state is None else n_state, STATE_WARN_BYTES,
+                  " TEMPORARY" if STATE_WARN_TEMPORARY else "",
                   STATE_MAX_BYTES, STATE_MAX_LINE_BYTES,
                   len([p for p in STUBS if os.path.exists(p)])))
+    if STATE_WARN_TEMPORARY:
+        out.append("  ⏳ STATE warn is TEMPORARILY raised +25%% (%d → %d) by owner "
+                   "ruling 2026-09-14, checklist 178, for the duration of the doc "
+                   "overhaul. Restore: set STATE_WARN_TEMPORARY = False in this file. "
+                   "⛔ Owner's word only — no agent retires this on its own judgement."
+                   % (STATE_WARN_PERMANENT_BYTES, STATE_WARN_BYTES))
     for line in warns:
         out.append("  warn " + line)
     for line in red:
