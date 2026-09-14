@@ -331,6 +331,28 @@ Each carries 03A's recommendation and mine. **Nothing here blocks 07;** items
 ⛔ **Nothing else is owed by you on smrtk right now.** 07 writes the docs and
 your 08 script next; 08 becomes takeable when that script lands.
 
+**⚖️ RULED BY THE OWNER, 2026-09-14 — in their words: *"item 1 ruled — extend
+before 08."*** Items **2–5 accepted as both seats recommended**; item **6 noted**
+(no decision was asked — it is the warning that 08's stamp leg is the stamper's
+first contact with the game).
+
+⇒ **Item 1: the Selected section is EXTENDED BEFORE 08.** It lists the selected
+object's own `Cheat*`/`AsyncCheat*` members the way vanilla does, called the
+untainted way P2 already uses for its 22. Build link `03C_SELECTED_EXTEND_codex.md`
+(Codex/Sol, the seat that built P2); **07 runs after it**, so the docs describe the
+shipped surface and 07's "do not write *replaces the cheat menu* until item 1 is
+ruled" inbox line is now discharged — with the extension, the qualifier it was
+guarding against is what changes. 99 absorbs the cross-vendor check on 03C rather
+than the chain growing a fourth judge link.
+
+⏳ **The condition this was ruled under (rule 5a), so a later reader can test
+whether it still holds:** ruled on 03B's **PASS WITH FIXES** with **nothing yet
+seen in play** and 07 not yet written, on the orchestrator's recommendation that
+extending costs **Codex time rather than owner time** and spares a second attended
+sitting — 08 tests one surface instead of a 22-action one that then changes. ⛔ If
+the extension turns out NOT to ride P2's proven route, the cost basis of this
+ruling is gone and it is worth re-asking rather than pressing on.
+
 ### ✅ 2026-09-13 — 174 RULED: a fired one-off leaves the prompts map entirely
 <!-- ck:174 status:ruled owner:no -->
 

@@ -54,7 +54,7 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   Owner's 2 pared files (`for-modders.md`, `install.md`) stay uncommitted = decision 47.
 - ⭐ FR-1 TEMP WORKAROUND MOD LIVE 09-11 (Steam 3799500849 / PDX 158711). **ALL FR-1 / Linux / NVIDIA work →
   `prompts/perma/LINUX_DISPATCH.md`.** Field: 3 working (one 10xx), 1 failing (GTX 1070, log requested).
-- ⭐ **`prompts/smrtk/` (ck175): 02 KILL GATE ✅ PASSED 09-13. 03A BUILT; 03B JUDGED PASS WITH FIXES 09-13; NEXT Codex 07 DOCS, then 08, 99 full.**
+- ⭐ **`prompts/smrtk/` (ck175): 02 GATE ✅ PASSED. 03A BUILT; 03B PASS WITH FIXES 09-13; item 1 RULED 09-14 extend Selected before 08 ⇒ NEXT Codex **03C**, then 07, 08, 99.**
   Verdict + corrections `reports/SMRTK_SKELETON_SITTING.md`; logs `archive/logs/smrtk02_*` (`ObjCheat` 1 in the control boot, **0** in the toolkit boot).
   ⛔ 01's leaf targeted `StorageDepot.resource`, which **no** shipped depot has — every depot is `UniversalStorageDepotBase`, discriminator `#storable_resources` (binds P2).
   ⛔ Eligibility stays `UNAVAILABLE:sandbox` (`EF-096`) — no-taint is necessary, NOT proven sufficient.
