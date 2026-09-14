@@ -801,6 +801,35 @@ Selected (it acts on the selection) and surfaces on Run; `mark` and
   to cancel appears **nowhere on screen** ⇒ hot-bar candidate: a persistent armed
   indicator naming the slot and its escape.
 
+#### ⭐⭐ 2026-09-14 — THE STAMPER MAY BE RECOMMENDED FOR REMOVAL (owner licence, given live to 09)
+
+⚖️ **Owner, 2026-09-14, spoken directly into the running 09 session:** *"The stamper is
+complex and heavy, you are allowed to recommend its removal if its never going to be able
+to do its job right, or its overly fragile."*
+
+⛔ **Recorded here because it was given verbally and exists in no file.** 09's brief on
+disk does not carry it, and `prompts/smrtk/` is 09's lane while it runs, so it could not
+be added there. ⇒ 09 folds it into its own close-out; until then **this is the only
+written copy**.
+
+⚖️ **It is a licence to RECOMMEND, not to decide.** Removing a whole feature is a
+`FIX_POLICY` §4a design call and stays the owner's. 09 reports; the owner rules.
+
+⚠️ **This does NOT contradict ck175, and nobody should read it as the chain overruling an
+owner ruling.** ck175 records the owner calling the stamper *"a game changer"* and
+approving the whole tiered list *"once we have it as a tool we have it forever"*. Rule 5a:
+a ruling carries the state it was made in — **that one was made before anyone knew the
+stamper had never placed a single object in the game, and before defect 21 showed its
+capture guard rejects every building.** The condition changed, so revisiting is legitimate.
+
+⛔ **THE CHAIN CONSEQUENCE, which the licence does not state:** **`08b` exists for nothing
+else.** Its whole job is blocks 13–15 — class 18, the three native stamps. ⇒ **If the
+stamper is removed, 08b is not "gated", it is moot and should be RETIRED, not fired.**
+Whoever acts on a removal recommendation retires 08b in the same breath, or the chain keeps
+an attended sitting on the queue for a feature that no longer exists. ⚠️ Defect 21's
+one-line fix goes in either way — it is what makes an honest evaluation possible, and it is
+too cheap to gate on the outcome.
+
 #### ⚖️ STILL YOURS TO ANSWER — three open design questions
 
 1. ✅ **Item 6 — ANSWERED BY THE OWNER 2026-09-14, and 08 had it wrong.** *"clean
