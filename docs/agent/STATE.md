@@ -54,7 +54,9 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   Owner's 2 pared files (`for-modders.md`, `install.md`) stay uncommitted = decision 47.
 - ⭐ FR-1 TEMP WORKAROUND MOD LIVE 09-11 (Steam 3799500849 / PDX 158711). **ALL FR-1 / Linux / NVIDIA work →
   `prompts/perma/LINUX_DISPATCH.md`.** Field: 3 working (one 10xx), 1 failing (GTX 1070, log requested).
-- ⭐ **`prompts/smrtk/` (ck175): 02 GATE ✅ PASSED. 03A BUILT; 03B PASS WITH FIXES 09-13; item 1 RULED + 03C + **07 ALL BUILT 09-14** ⇒ NEXT **08, the owner's attended sitting**, then 99.**
+- ⭐ **`prompts/smrtk/` (ck175): 01-07 BUILT. ⭐ 08 RAN 09-14 attended: PASS WITH CORRECTIONS.**
+  Classes 1-17 PASS; ⛔ class 18 (Stamper) BLOCKED. 25 defects, `reports/SMRTK_FULL_SITTING.md`.
+  NEXT: fix link, re-run blocks 13-15, then 99.
   Verdict + corrections `reports/SMRTK_SKELETON_SITTING.md`; logs `archive/logs/smrtk02_*` (`ObjCheat` 1 in the control boot, **0** in the toolkit boot).
   ⛔ 01's leaf targeted `StorageDepot.resource`, which **no** shipped depot has — every depot is `UniversalStorageDepotBase`, discriminator `#storable_resources` (binds P2).
   ⛔ Eligibility stays `UNAVAILABLE:sandbox` (`EF-096`) — no-taint is necessary, NOT proven sufficient.
@@ -63,7 +65,7 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   ⚠ Selected covers **106/106** source names (22 curated + 84 More, 12 async), TestKit `f093e3b`, `reports/SMRTK_03C_EXTEND.md` — desk fixtures, NOT a colony census; nothing in play.
 - ⏭ NEXT: fire `prompts/STANDDOWN_AUDIT.md` (no blocker) · `prompts/C92_ACHIEVEMENT_BUILD.md` (build+test, ⛔ ships never
   without ck172's hold lifted) · then the playtest sitting. ⛔ `SELFCHECK_PILOT` REMOVED 09-13 (`cf8d51f`).
-  Owner OWES: ck144 (a) the boot · ck151 (b) dev-report scope · ck175 sitting 08 **TAKEABLE NOW** (slots preloaded, TestKit `8a576a5`; boot).
+  Owner OWES: ck144 (a) the boot · ck151 (b) dev-report scope.
   ⛔ 08 is a SEPARATE boot from ck144 (a), not a combine — it is a clean-taint experiment. ✅ Fixture CHOSEN 09-14: `SMRTK08 Fixture Sol 490` (C92 reporter's colony,
   1.1.0.403908, `CheatsUsed` read scalar from disk against a TAINTED positive control; 4 byte copies exist). Handoff `prompts/perma/HANDOFF_ORCHESTRATOR.md` §3 LIVE.
   Desk `prompts/DLC_DEEP_CHECK.md` (`HUNT_AUDIT.md` §8). Chain `prompts/fixtoggles/` DEFERRED 09-12 (ck148, not started).

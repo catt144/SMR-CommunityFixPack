@@ -1,0 +1,300 @@
+[tap n=524 t=355098327 mark=483 source=toolkit] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=DroneHub(7447) status=OK t=355098327 id=307
+[tap n=525 t=355105643 mark=483 source=console] > *r SMRTK.Run("selected_more",SMRTK.sitting08_old,"CheatDespawn")
+[tap n=526 t=355105643 mark=483 source=toolkit] [SMRTK] SMRTK_SELECTED action=selected_more reason="selection changed; choose the action again" status=REFUSED t=355105643 id=308
+[tap n=527 t=355129748 mark=483 source=console] > *r SMRTK.sitting08_old = nil
+[tap n=528 t=355131639 mark=483 source=toolkit] [SMRTK] SMRTK_FLUSH action=flush status=OK t=355131639 id=309
+[tap n=529 t=355489020 mark=483 source=toolkit] [SMRTK] SMRTK_SECTION action=section_attach attached=false reason="no supported actions" status=OK t=355489020 id=310
+[tap n=530 t=355490540 mark=483 source=toolkit] [SMRTK] SMRTK_SECTION action=section_attach attached=false reason="no supported actions" status=OK t=355490540 id=311
+[tap n=531 t=355492892 mark=483 source=toolkit] [SMRTK] SMRTK_SECTION action=section_attach attached=false reason="no supported actions" status=OK t=355492892 id=312
+[tap n=532 t=355503599 mark=483 source=toolkit] [SMRTK] SMRTK_SECTION action=section_attach attached=false reason="no supported actions" status=OK t=355503599 id=313
+[tap n=533 t=355511534 mark=483 source=toolkit] [SMRTK] SMRTK_SECTION action=section_attach attached=false reason="no supported actions" status=OK t=355511534 id=314
+[tap n=534 t=356003068 mark=483 source=toolkit] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=OpenAirGym(8761) status=OK t=356003068 id=315
+[tap n=535 t=356004578 mark=483 source=toolkit] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=GeoscapeDome(8588) status=OK t=356004578 id=316
+[tap n=536 t=356005899 mark=483 source=toolkit] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipColonist object=Colonist(2000239871) status=OK t=356005899 id=317
+[tap n=537 t=356009970 mark=483 source=toolkit] [SMRTK] SMRTK_TAB action=tab_World page=World status=OK t=356009970 id=318
+[tap n=538 t=356085460 mark=483 source=toolkit] [SMRTK] SMRTK_ACTION action=trait_add after=true before=false object=Colonist(2000239871) status=OK trait=Genius t=356085460 id=319
+[tap n=539 t=356099630 mark=483 source=toolkit] [SMRTK] SMRTK_ACTION action=trait_remove after=false before=true object=Colonist(2000239871) status=OK trait=Genius t=356099630 id=320
+[tap n=540 t=356107203 mark=483 source=toolkit] [SMRTK] SMRTK_TAB action=tab_World page=World status=OK t=356107203 id=321
+[tap n=541 t=356108122 mark=483 source=toolkit] [SMRTK] SMRTK_TAB action=tab_World page=World status=OK t=356108122 id=322
+[tap n=542 t=356116211 mark=483 source=toolkit] [SMRTK] SMRTK_ACTION action=fix_all changed=1333 skipped=0 status=OK visited=1333 t=356116211 id=323
+[tap n=543 t=356123102 mark=483 source=toolkit] [SMRTK] SMRTK_ACTION action=complete_constructions outcome=leaf_completed scope="current map" status=OK t=356123102 id=324
+[tap n=544 t=356128939 mark=483 source=toolkit] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipColonist object=Colonist(2000239871) status=OK t=356128939 id=325
+[tap n=545 t=356144220 mark=483 source=toolkit] [SMRTK] SMRTK_ACTION action=complete_grids outcome=leaf_completed scope="current map" status=OK t=356144220 id=326
+[tap n=546 t=357038440 mark=483 source=toolkit] [SMRTK] SMRTK_TAB action=tab_Agent page=Agent status=OK t=357038440 id=327
+[tap n=547 t=357060246 mark=547 source=toolkit] [SMRTK] SMRTK_MARK action=mark label=SMRTK08_S4_ARM mark=547 status=OK t=357060246 id=328
+[tap n=548 t=357060246 mark=547 source=toolkit] [SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=46/46 game=403908 mark_action=mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack pack_version=11 read="live registry" save=SMRTK_490.savegame.sav sol=497 status=OK t=357060246 id=329
+[tap n=549 t=357060246 mark=547 source=toolkit] [SMRTK] SMRTK_ARM action=slot_4 mutation=none once_click=true ready=true status=OK t=357060246 id=330
+[tap n=550 t=357062278 mark=547 source=toolkit] [SMRTK] SMRTK_FIRE action=slot_4 armed_ms=2032 clicks=1 cursor="(349470, 188054, 10000)" mutation=none object=none status=OK t=357062278 id=331
+[tap n=551 t=357062278 mark=547 source=toolkit] [SMRTK] SMRTK_DUMP cause="click complete" clicks=1 leg=read_map_click mutation=none t=357062278 id=332
+[tap n=552 t=357062278 mark=547 source=toolkit] [SMRTK] SMRTK_DISARM action=slot_4 cleanup="click target released" clicks=1 reason="click complete" status=OK t=357062278 id=333
+[tap n=553 t=357070873 mark=553 source=toolkit] [SMRTK] SMRTK_MARK action=mark label=SMRTK08_S4_ARM mark=553 status=OK t=357070873 id=334
+[tap n=554 t=357070873 mark=553 source=toolkit] [SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=46/46 game=403908 mark_action=mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack pack_version=11 read="live registry" save=SMRTK_490.savegame.sav sol=497 status=OK t=357070873 id=335
+[tap n=555 t=357070873 mark=553 source=toolkit] [SMRTK] SMRTK_ARM action=slot_4 mutation=none once_click=true ready=true status=OK t=357070873 id=336
+[tap n=556 t=357071523 mark=553 source=toolkit] [SMRTK] SMRTK_DUMP cause="right click" clicks=0 leg=read_map_click mutation=none t=357071523 id=337
+[tap n=557 t=357071523 mark=553 source=toolkit] [SMRTK] SMRTK_DISARM action=slot_4 cleanup="click target released" clicks=0 reason="right click" status=OK t=357071523 id=338
+[tap n=558 t=357089981 mark=553 source=toolkit] [SMRTK] SMRTK_NOTE action=note status=OK text=test t=357089981 id=339
+[tap n=559 t=357092653 mark=553 source=toolkit] [SMRTK] SMRTK_NOTE action=note status=OK text="test 2 " t=357092653 id=340
+[tap n=560 t=357172548 mark=560 source=toolkit] [SMRTK] SMRTK_MARK action=mark label=SMRTK08_S5_ARM mark=560 status=OK t=357172548 id=341
+[tap n=561 t=357172548 mark=560 source=toolkit] [SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=46/46 game=403908 mark_action=mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack pack_version=11 read="live registry" save=SMRTK_490.savegame.sav sol=497 status=OK t=357172548 id=342
+[tap n=562 t=357172548 mark=560 source=toolkit] [SMRTK] SMRTK_ARM action=smrtk08_break armed_at=357172548 cadence=1000 once=true status=OK target=357177548 trigger=smrtk08_break window_ms=5000 t=357172548 id=343
+[tap n=563 t=357172548 mark=560 source=toolkit] [SMRTK] SMRTK_ARM action=run_until before=1000 factor=128000 requested=128 status=OK target=smrtk08_break t=357172548 id=344
+[tap n=564 t=357172548 mark=560 source=toolkit] [SMRTK] SMRTK_DUMP armed=run_until,smrtk08_break cadence=1000 leg=short_breakpoint now=357172548 once=true pause_owner=run_until run_until_target=smrtk08_break speed_factor=128000 speed_requested=128 target=357177548 trigger=smrtk08_break t=357172548 id=345
+[tap n=565 t=357172548 mark=560 source=toolkit] [SMRTK] SMRTK_ACTION action=slot_5 armed_count=2 run_until=smrtk08_break status=OK target=357177548 trigger=smrtk08_break t=357172548 id=346
+[tap n=566 t=357177796 mark=566 source=toolkit] [SMRTK] SMRTK_MARK action=mark label="Short breakpoint (+5000 game ms)" mark=566 status=OK t=357177796 id=347
+[tap n=567 t=357177796 mark=566 source=toolkit] [SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=46/46 game=403908 mark_action=mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack pack_version=11 read="live registry" save=SMRTK_490.savegame.sav sol=497 status=OK t=357177796 id=348
+[tap n=568 t=357177796 mark=566 source=toolkit] [SMRTK] SMRTK_TRIGGER action=smrtk08_break label="Short breakpoint (+5000 game ms)" mark=566 now=357177548 sound=true status=OK target=357177548 trigger=smrtk08_break t=357177796 id=349
+[tap n=569 t=357177796 mark=566 source=toolkit] [SMRTK] SMRTK_DISARM action=smrtk08_break reason="trigger complete" status=OK trigger=smrtk08_break t=357177796 id=350
+[tap n=570 t=357179076 mark=566 source=toolkit] [SMRTK] SMRTK_FIRE action=run_until paused=true sol=497 status=OK target=smrtk08_break t=357179076 id=351
+[tap n=571 t=357179076 mark=566 source=toolkit] [SMRTK] SMRTK_DISARM action=run_until reason="target reached" status=OK t=357179076 id=352
+[tap n=572 t=357179076 mark=566 source=toolkit] [SMRTK] SMRTK_TAB action=tab_World page=World status=OK t=357179076 id=353
+[tap n=573 t=357179076 mark=566 source=toolkit] [SMRTK] SMRTK_SPEED action=speed_normal before=0 factor=1000 requested=1 status=OK t=357179076 id=354
+[tap n=574 t=357185635 mark=566 source=toolkit] [SMRTK] SMRTK_TAB action=tab_Kit page=Kit status=OK t=357185635 id=355
+[tap n=575 t=357188262 mark=566 source=toolkit] [SMRTK] SMRTK_CLEAR action=clear status=OK t=357188262 id=356
+[tap n=576 t=357198989 mark=566 source=toolkit] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipDrone object=FlyingDrone(2000152103) status=OK t=357198989 id=357
+[tap n=577 t=357217639 mark=566 source=toolkit] [SMRTK] SMRTK_WATCH action=watch_field armed=false field=command object=FlyingDrone(2000152103) status=OK trigger=watch_selected_field t=357217639 id=358
+[tap n=578 t=357223092 mark=566 source=toolkit] [SMRTK] SMRTK_ARM action=watch_selected_field baseline=Idle cadence=1000 field=command object=FlyingDrone(2000152103) once=false status=OK trigger=watch_selected_field t=357223092 id=359
+[tap n=579 t=357226756 mark=566 source=toolkit] [SMRTK] SMRTK_DISARM action=watch_selected_field reason=manual status=OK trigger=watch_selected_field t=357226756 id=360
+[tap n=580 t=357249215 mark=566 source=toolkit] [SMRTK] SMRTK_FLUSH action=flush status=OK t=357249215 id=361
+[tap n=581 t=357515685 mark=566 source=toolkit] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=OpenFarm(6326) status=OK t=357515685 id=362
+[tap n=582 t=357517963 mark=566 source=toolkit] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=OpenFarm(6374) status=OK t=357517963 id=363
+[tap n=583 t=357523513 mark=566 source=toolkit] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=DomeMega(5470) status=OK t=357523513 id=364
+[tap n=584 t=357529637 mark=566 source=toolkit] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=DomeMega(5470) status=OK t=357529637 id=365
+[tap n=585 t=357534168 mark=566 source=toolkit] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=DomeMega(5470) status=OK t=357534168 id=366
+[tap n=586 t=357546005 mark=566 source=toolkit] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=DomeMega(5470) status=OK t=357546005 id=367
+[tap n=587 t=358626710 mark=566 source=toolkit] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=MedicalCenter(5373) status=OK t=358626710 id=368
+[tap n=588 t=358632847 mark=566 source=toolkit] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipDrone object=FlyingDrone(2000152084) status=OK t=358632847 id=369
+[tap n=589 t=358663848 mark=566 source=toolkit] [SMRTK] SMRTK_WATCH action=watch_field armed=false field=command object=FlyingDrone(2000152084) status=OK trigger=watch_selected_field t=358663848 id=370
+[tap n=590 t=358666871 mark=566 source=toolkit] [SMRTK] SMRTK_ARM action=watch_selected_field baseline=Idle cadence=1000 field=command object=FlyingDrone(2000152084) once=false status=OK trigger=watch_selected_field t=358666871 id=371
+[tap n=591 t=358674333 mark=566 source=toolkit] [SMRTK] SMRTK_TAB action=tab_World page=World status=OK t=358674333 id=372
+[tap n=592 t=358680318 mark=566 source=toolkit] [SMRTK] SMRTK_ACTION action=malfunction_all changed=740 skipped=564 status=OK visited=1305 t=358680318 id=373
+[tap n=593 t=358688872 mark=566 source=toolkit] [SMRTK] SMRTK_TRIGGER action=watch_selected_field after=PickUp before=Idle field=command label="Watch command" object=FlyingDrone(2000152084) status=OK trigger=watch_selected_field t=358688872 id=374
+[tap n=594 t=358690871 mark=566 source=toolkit] [SMRTK] SMRTK_TRIGGER action=watch_selected_field after=Deliver before=PickUp field=command label="Watch command" object=FlyingDrone(2000152084) status=OK trigger=watch_selected_field t=358690871 id=375
+[tap n=595 t=358700871 mark=566 source=toolkit] [SMRTK] SMRTK_TRIGGER action=watch_selected_field after=GoHome before=Deliver field=command label="Watch command" object=FlyingDrone(2000152084) status=OK trigger=watch_selected_field t=358700871 id=376
+[tap n=596 t=358703872 mark=566 source=toolkit] [SMRTK] SMRTK_TRIGGER action=watch_selected_field after=PickUp before=GoHome field=command label="Watch command" object=FlyingDrone(2000152084) status=OK trigger=watch_selected_field t=358703872 id=377
+[tap n=597 t=358704871 mark=566 source=toolkit] [SMRTK] SMRTK_TRIGGER action=watch_selected_field after=GoHome before=PickUp field=command label="Watch command" object=FlyingDrone(2000152084) status=OK trigger=watch_selected_field t=358704871 id=378
+[tap n=598 t=358713871 mark=566 source=toolkit] [SMRTK] SMRTK_TRIGGER action=watch_selected_field after=Idle before=GoHome field=command label="Watch command" object=FlyingDrone(2000152084) status=OK trigger=watch_selected_field t=358713871 id=379
+[tap n=599 t=358749871 mark=566 source=toolkit] [SMRTK] SMRTK_TRIGGER action=watch_selected_field after=PickUp before=Idle field=command label="Watch command" object=FlyingDrone(2000152084) status=OK trigger=watch_selected_field t=358749871 id=380
+[tap n=600 t=358750871 mark=566 source=toolkit] [SMRTK] SMRTK_TRIGGER action=watch_selected_field after=Idle before=PickUp field=command label="Watch command" object=FlyingDrone(2000152084) status=OK trigger=watch_selected_field t=358750871 id=381
+[tap n=601 t=358762929 mark=566 source=toolkit] [SMRTK] SMRTK_TAB action=tab_Kit page=Kit status=OK t=358762929 id=382
+[tap n=602 t=358768705 mark=566 source=toolkit] [SMRTK] SMRTK_DISARM action=watch_selected_field reason=manual status=OK trigger=watch_selected_field t=358768705 id=383
+[tap n=603 t=358774891 mark=566 source=toolkit] [SMRTK] SMRTK_TAB action=tab_World page=World status=OK t=358774891 id=384
+[tap n=604 t=358782655 mark=566 source=toolkit] [SMRTK] SMRTK_ACTION action=fix_all changed=1305 skipped=0 status=OK visited=1305 t=358782655 id=385
+[tap n=605 t=358821373 mark=566 source=toolkit] [SMRTK] SMRTK_TAB action=tab_Agent page=Agent status=OK t=358821373 id=386
+[tap n=606 t=358823725 mark=566 source=toolkit] [SMRTK] SMRTK_TAB action=tab_Sitting page=Sitting status=OK t=358823725 id=387
+[tap n=607 t=358828819 mark=566 source=toolkit] [SMRTK] SMRTK_TAB action=tab_Saves page=Saves status=OK t=358828819 id=388
+[tap n=608 t=358830022 mark=566 source=toolkit] [SMRTK] SMRTK_TAB action=tab_Kit page=Kit status=OK t=358830022 id=389
+[tap n=609 t=358831387 mark=566 source=toolkit] [SMRTK] SMRTK_TAB action=tab_Selected page=Selected status=OK t=358831387 id=390
+[tap n=610 t=358835279 mark=566 source=toolkit] [SMRTK] SMRTK_TAB action=tab_Saves page=Saves status=OK t=358835279 id=391
+[tap n=611 t=358835713 mark=566 source=toolkit] [SMRTK] SMRTK_TAB action=tab_World page=World status=OK t=358835713 id=392
+[tap n=612 t=358843918 mark=566 source=toolkit] [SMRTK] SMRTK_TAB action=tab_Agent page=Agent status=OK t=358843918 id=393
+[tap n=613 t=358856636 mark=613 source=toolkit] [SMRTK] SMRTK_MARK action=screenshot_mark capture="native accepted" capture_id=0001 fallback=false label="Screenshot 0001" mark=613 path=C:/Dev/SMR-ScreenCaptures/SMRTK_0001.png status=OK t=358856636 id=394
+[tap n=614 t=358856636 mark=613 source=toolkit] [SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=46/46 game=403908 mark_action=screenshot_mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack pack_version=11 read="live registry" save=SMRTK_490.savegame.sav sol=499 status=OK t=358856636 id=395
+[tap n=615 t=359103597 mark=613 source=toolkit] [SMRTK] SMRTK_TAB action=tab_Selected page=Selected status=OK t=359103597 id=396
+[tap n=616 t=359104386 mark=613 source=toolkit] [SMRTK] SMRTK_TAB action=tab_Kit page=Kit status=OK t=359104386 id=397
+[tap n=617 t=359105694 mark=613 source=toolkit] [SMRTK] SMRTK_TAB action=tab_Saves page=Saves status=OK t=359105694 id=398
+[tap n=618 t=359108326 mark=613 source=toolkit] [SMRTK] SMRTK_TAB action=tab_World page=World status=OK t=359108326 id=399
+[tap n=619 t=359111939 mark=613 source=toolkit] [SMRTK] SMRTK_TAB action=tab_Agent page=Agent status=OK t=359111939 id=400
+[tap n=620 t=359112375 mark=613 source=toolkit] [SMRTK] SMRTK_TAB action=tab_Sitting page=Sitting status=OK t=359112375 id=401
+[tap n=621 t=359115530 mark=613 source=toolkit] [SMRTK] SMRTK_TAB action=tab_Saves page=Saves status=OK t=359115530 id=402
+[tap n=622 t=359116602 mark=613 source=toolkit] [SMRTK] SMRTK_TAB action=tab_Kit page=Kit status=OK t=359116602 id=403
+[tap n=623 t=359118491 mark=613 source=toolkit] [SMRTK] SMRTK_TAB action=tab_Selected page=Selected status=OK t=359118491 id=404
+[tap n=624 t=359192403 mark=613 source=toolkit] [SMRTK] SMRTK_TAB action=tab_Kit page=Kit status=OK t=359192403 id=405
+[tap n=625 t=359193044 mark=613 source=toolkit] [SMRTK] SMRTK_TAB action=tab_Saves page=Saves status=OK t=359193044 id=406
+[tap n=626 t=359219165 mark=613 source=toolkit] [SMRTK] SMRTK_SAVE action=save_A name=SMRTK_A.sav session=1789400587:3032022245:16476155:704241777 slot=A status=OK t=359219165 id=407
+[tap n=627 t=359350112 mark=613 source=toolkit] [SMRTK] SMRTK_COPY action=copy from=613 lines=14 status=OK truncated=false t=359350112 id=408
+[tap n=628 t=359399219 mark=613 source=toolkit] [SMRTK] SMRTK_TAB action=tab_Agent page=Agent status=OK t=359399219 id=409
+[tap n=629 t=359405420 mark=629 source=toolkit] [SMRTK] SMRTK_MARK action=mark label=SMRTK08_S4_ARM mark=629 status=OK t=359405420 id=410
+[tap n=630 t=359405420 mark=629 source=toolkit] [SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=46/46 game=403908 mark_action=mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack pack_version=11 read="live registry" save=SMRTK_A.sav sol=500 status=OK t=359405420 id=411
+[tap n=631 t=359405420 mark=629 source=toolkit] [SMRTK] SMRTK_ARM action=slot_4 mutation=none once_click=true ready=true status=OK t=359405420 id=412
+[tap n=632 t=359409716 mark=629 source=toolkit] [SMRTK] SMRTK_TAB action=tab_World page=World status=OK t=359409716 id=413
+[tap n=633 t=359429009 mark=629 source=toolkit] [SMRTK] SMRTK_ARM action=quiet active_disasters=untouched on=true routes=7 status=OK t=359429009 id=414
+[tap n=634 t=359442257 mark=629 source=console] > *r SMRTK.PrintTee(true)
+[tap n=635 t=359442257 mark=629 source=toolkit] [SMRTK] SMRTK_ARM action=print_tee status=OK t=359442257 id=415
+[tap n=636 t=359446041 mark=629 source=toolkit] [SMRTK] SMRTK_TAB action=tab_Kit page=Kit status=OK t=359446041 id=416
+[tap n=637 t=359458344 mark=629 source=toolkit] [SMRTK] SMRTK_FIRE action=slot_4 armed_ms=52924 clicks=1 cursor="(304051, 396155, 10005)" mutation=none object=FlyingDrone(2000244981) status=OK t=359458344 id=417
+[tap n=638 t=359458344 mark=629 source=toolkit] [SMRTK] SMRTK_DUMP cause="click complete" clicks=1 leg=read_map_click mutation=none t=359458344 id=418
+[tap n=639 t=359458344 mark=629 source=toolkit] [SMRTK] SMRTK_DISARM action=slot_4 cleanup="click target released" clicks=1 reason="click complete" status=OK t=359458344 id=419
+[tap n=640 t=359460078 mark=629 source=toolkit] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipDrone object=FlyingDrone(2000244981) status=OK t=359460078 id=420
+[tap n=641 t=360368776 mark=629 source=toolkit] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipDrone object=FlyingDrone(2000244933) status=OK t=360368776 id=421
+[tap n=642 t=360386865 mark=629 source=toolkit] [SMRTK] SMRTK_WATCH action=watch_field armed=false field=command object=FlyingDrone(2000244933) status=OK trigger=watch_selected_field t=360386865 id=422
+[tap n=643 t=360402261 mark=629 source=toolkit] [SMRTK] SMRTK_WATCH action=watch_field armed=false field=command object=FlyingDrone(2000244933) status=OK trigger=watch_selected_field t=360402261 id=423
+[tap n=644 t=360406237 mark=629 source=toolkit] [SMRTK] SMRTK_TAB action=tab_Agent page=Agent status=OK t=360406237 id=424
+[tap n=645 t=360431311 mark=629 source=toolkit] [SMRTK] SMRTK_TAB action=tab_Kit page=Kit status=OK t=360431311 id=425
+[tap n=646 t=360437969 mark=629 source=toolkit] [SMRTK] SMRTK_WATCH action=watch_field armed=false field=command object=FlyingDrone(2000244933) status=OK trigger=watch_selected_field t=360437969 id=426
+[tap n=647 t=360448952 mark=629 source=toolkit] [SMRTK] SMRTK_ARM action=watch_selected_field baseline=Idle cadence=1000 field=command object=FlyingDrone(2000244933) once=false status=OK trigger=watch_selected_field t=360448952 id=427
+[tap n=648 t=360467881 mark=629 source=toolkit] [SMRTK] SMRTK_TAB action=tab_Agent page=Agent status=OK t=360467881 id=428
+[tap n=649 t=360470290 mark=649 source=toolkit] [SMRTK] SMRTK_MARK action=mark label=SMRTK08_S4_ARM mark=649 status=OK t=360470290 id=429
+[tap n=650 t=360470290 mark=649 source=toolkit] [SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=46/46 game=403908 mark_action=mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack pack_version=11 read="live registry" save=SMRTK_A.sav sol=501 status=OK t=360470290 id=430
+[tap n=651 t=360470290 mark=649 source=toolkit] [SMRTK] SMRTK_ARM action=slot_4 mutation=none once_click=true ready=true status=OK t=360470290 id=431
+[tap n=652 t=360475003 mark=649 source=toolkit] [SMRTK] SMRTK_CLEAR action=clear status=OK t=360475003 id=432
+[tap n=653 t=360485296 mark=649 source=toolkit] [SMRTK] SMRTK_TAB action=tab_Saves page=Saves status=OK t=360485296 id=433
+[tap n=654 t=360488506 mark=649 source=toolkit] [SMRTK] SMRTK_DISARM action=print_tee reason=SaveGameStart status=OK t=360488506 id=434
+[tap n=655 t=360488506 mark=649 source=toolkit] [SMRTK] SMRTK_DISARM action=quiet on=false reason=SaveGameStart routes=7 status=OK t=360488506 id=435
+[tap n=656 t=360488506 mark=649 source=toolkit] [SMRTK] SMRTK_DUMP cause=SaveGameStart clicks=0 leg=read_map_click mutation=none t=360488506 id=436
+[tap n=657 t=360488506 mark=649 source=toolkit] [SMRTK] SMRTK_DISARM action=slot_4 cleanup="click target released" clicks=0 reason=SaveGameStart status=OK t=360488506 id=437
+[tap n=658 t=360488506 mark=649 source=toolkit] [SMRTK] SMRTK_DISARM action=watch_selected_field reason=SaveGameStart status=OK trigger=watch_selected_field t=360488506 id=438
+[tap n=659 t=360488543 mark=649 source=toolkit] [SMRTK] SMRTK_SAVE action=save_A name=SMRTK_A.sav session=1789400587:3032022245:16476155:704241777 slot=A status=OK t=360488543 id=439
+[tap n=660 t=360501915 mark=649 source=toolkit] [SMRTK] SMRTK_TAB action=tab_World page=World status=OK t=360501915 id=440
+[tap n=661 t=360502746 mark=649 source=toolkit] [SMRTK] SMRTK_TAB action=tab_Agent page=Agent status=OK t=360502746 id=441
+[tap n=662 t=360505235 mark=662 source=toolkit] [SMRTK] SMRTK_MARK action=mark label=SMRTK08_S4_ARM mark=662 status=OK t=360505235 id=442
+[tap n=663 t=360505235 mark=662 source=toolkit] [SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=46/46 game=403908 mark_action=mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack pack_version=11 read="live registry" save=SMRTK_A.sav sol=501 status=OK t=360505235 id=443
+[tap n=664 t=360505235 mark=662 source=toolkit] [SMRTK] SMRTK_ARM action=slot_4 mutation=none once_click=true ready=true status=OK t=360505235 id=444
+[tap n=665 t=360519403 mark=662 source=toolkit] [SMRTK] SMRTK_TAB action=tab_Saves page=Saves status=OK t=360519403 id=445
+[tap n=666 t=360521953 mark=662 source=toolkit] [SMRTK] SMRTK_DUMP cause=ChangeMap clicks=0 leg=read_map_click mutation=none t=360521953 id=446
+[tap n=667 t=360521953 mark=662 source=toolkit] [SMRTK] SMRTK_DISARM action=slot_4 cleanup="click target released" clicks=0 reason=ChangeMap status=OK t=360521953 id=447
+[tap n=668 t=360521953 mark=662 source=toolkit] [SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=ChangeMap t=360521953 id=448
+[tap n=669 t=360521953 mark=662 source=toolkit] [SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=ChangeMap t=360521953 id=449
+[tap n=670 t=360521953 mark=662 source=toolkit] [SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=ChangeMap t=360521953 id=450
+[tap n=671 t=360521953 mark=662 source=toolkit] [SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=ChangeMap t=360521953 id=451
+[tap n=672 t=0 mark=662 source=toolkit] [SMRTK] SMRTK_SHORTCUT console=false key=Ctrl-Shift-F11 t=0 id=452
+[tap n=673 t=0 mark=662 source=toolkit] [SMRTK] SMRTK_SHORTCUT console=false key=Ctrl-Shift-F11 t=0 id=453
+[tap n=674 t=0 mark=662 source=toolkit] [SMRTK] SMRTK_SHORTCUT console=false key=Ctrl-Shift-F11 t=0 id=454
+[tap n=675 t=0 mark=662 source=toolkit] [SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=PreLoadGame t=0 id=455
+[tap n=676 t=360488507 mark=662 source=toolkit] [SMRTK] SMRTK_PROVENANCE actions=363 last=watch_selected_field last_id=438 present=true session=1789400587:3032022245:16476155:704241777 t=360488507 id=456
+[tap n=677 t=360488507 mark=662 source=toolkit] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=360488507 id=457
+[tap n=678 t=360488507 mark=662 source=toolkit] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipDrone object=FlyingDrone(2000244933) status=OK t=360488507 id=458
+[tap n=679 t=360488507 mark=662 source=toolkit] [SMRTK] SMRTK_DOCK action=dock_attach attached=true status=OK surface=dock+side t=360488507 id=459
+[tap n=680 t=360488507 mark=662 source=toolkit] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=360488507 id=460
+[tap n=681 t=360488512 mark=662 source=console] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[tap n=682 t=360488512 mark=662 source=console] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[tap n=683 t=360488714 mark=662 source=toolkit] [SMRTK] SMRTK_LOAD action=load_A name=SMRTK_A.sav override=false session=1789400587:3032022245:16476155:704241777 slot=A status=OK t=360488714 id=461
+[tap n=684 t=360489016 mark=662 source=toolkit] [SMRTK] SMRTK_PANEL_RESTORE open=true tab=Saves t=360489016 id=462
+[tap n=685 t=360489866 mark=662 source=toolkit] [SMRTK] SMRTK_TAB action=tab_Agent page=Agent status=OK t=360489866 id=463
+[tap n=686 t=360490015 mark=662 source=toolkit] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=360490015 id=464
+[tap n=687 t=360490017 mark=662 source=console] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[tap n=688 t=360491015 mark=662 source=toolkit] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=360491015 id=465
+[tap n=689 t=360491016 mark=662 source=console] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[tap n=690 t=360495357 mark=690 source=toolkit] [SMRTK] SMRTK_MARK action=mark label=SMRTK08_S3_CHECK mark=690 status=OK t=360495357 id=466
+[tap n=691 t=360495357 mark=690 source=toolkit] [SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=46/46 game=403908 mark_action=mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack pack_version=11 read="live registry" save=SMRTK_A.sav sol=501 status=OK t=360495357 id=467
+[tap n=692 t=360495357 mark=690 source=toolkit] [SMRTK] SMRTK_DUMP armed=none armed_count=0 attestation=expired click_owner=none current_session=1789400587:3032022245:16476155:704241777 errors=0 layout_name=fixture layout_target_armed=false layouts_held=0 leg=check_after_load map=[table] pins="A=none B=none C=none" pins_cleared=true provenance_actions=363 provenance_last=watch_selected_field provenance_present=true provenance_session=1789400587:3032022245:16476155:704241777 save_name=SMRTK_A.sav session_matches=true sitting=15 sol=501 t=360495357 id=468
+[tap n=693 t=360495357 mark=693 source=toolkit] [SMRTK] SMRTK_MARK action=mark label=SMRTK08_S3_END mark=693 status=OK t=360495357 id=469
+[tap n=694 t=360495357 mark=693 source=toolkit] [SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=46/46 game=403908 mark_action=mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack pack_version=11 read="live registry" save=SMRTK_A.sav sol=501 status=OK t=360495357 id=470
+[tap n=695 t=360495357 mark=693 source=toolkit] [SMRTK] SMRTK_ACTION action=slot_3 armed=none armed_count=0 attestation=expired click_owner=none current_session=1789400587:3032022245:16476155:704241777 errors=0 layout_name=fixture layout_target_armed=false layouts_held=0 leg=check_after_load map=[table] pins="A=none B=none C=none" pins_cleared=true provenance_actions=363 provenance_last=watch_selected_field provenance_present=true provenance_session=1789400587:3032022245:16476155:704241777 save_name=SMRTK_A.sav session_matches=true sitting=15 sol=501 status=OK t=360495357 id=471
+[tap n=696 t=360557964 mark=693 source=toolkit] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=OpenFarm(6374) status=OK t=360557964 id=472
+[tap n=697 t=360565267 mark=693 source=toolkit] [SMRTK] SMRTK_CLEAR action=clear status=OK t=360565267 id=473
+[tap n=698 t=360567382 mark=693 source=console] > *r SMRTK.sitting08_session = SMRTK.session SMRTK.session = SMRTK.session .. ":guard-control"
+[tap n=699 t=360572272 mark=693 source=toolkit] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=OpenFarm(6374) status=OK t=360572272 id=474
+[tap n=700 t=360574277 mark=693 source=console] > *r SMRTK.Run("load_A")
+[tap n=701 t=360574279 mark=693 source=toolkit] [SMRTK] SMRTK_LOAD action=load_A reason="foreign session: 1789400587:3032022245:16476155:704241777" status=REFUSED t=360574279 id=475
+[tap n=702 t=360596661 mark=693 source=toolkit] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=OpenFarm(6481) status=OK t=360596661 id=476
+[tap n=703 t=360598923 mark=693 source=console] > *r SMRTK.Run("load_override_A")
+[tap n=704 t=360598924 mark=693 source=toolkit] [SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=ChangeMap t=360598924 id=477
+[tap n=705 t=360598924 mark=693 source=toolkit] [SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=ChangeMap t=360598924 id=478
+[tap n=706 t=360598924 mark=693 source=toolkit] [SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=ChangeMap t=360598924 id=479
+[tap n=707 t=360598924 mark=693 source=toolkit] [SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=ChangeMap t=360598924 id=480
+[tap n=708 t=0 mark=693 source=toolkit] [SMRTK] SMRTK_SHORTCUT console=false key=Ctrl-Shift-F11 t=0 id=481
+[tap n=709 t=0 mark=693 source=toolkit] [SMRTK] SMRTK_SHORTCUT console=false key=Ctrl-Shift-F11 t=0 id=482
+[tap n=710 t=0 mark=693 source=toolkit] [SMRTK] SMRTK_SHORTCUT console=false key=Ctrl-Shift-F11 t=0 id=483
+[tap n=711 t=0 mark=693 source=toolkit] [SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=PreLoadGame t=0 id=484
+[tap n=712 t=360488507 mark=693 source=toolkit] [SMRTK] SMRTK_PROVENANCE actions=363 last=watch_selected_field last_id=438 present=true session=1789400587:3032022245:16476155:704241777 t=360488507 id=485
+[tap n=713 t=360488507 mark=693 source=toolkit] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=360488507 id=486
+[tap n=714 t=360488507 mark=693 source=toolkit] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipDrone object=FlyingDrone(2000244933) status=OK t=360488507 id=487
+[tap n=715 t=360488507 mark=693 source=toolkit] [SMRTK] SMRTK_DOCK action=dock_attach attached=true status=OK surface=dock+side t=360488507 id=488
+[tap n=716 t=360488507 mark=693 source=toolkit] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=360488507 id=489
+[tap n=717 t=360488512 mark=693 source=console] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[tap n=718 t=360488512 mark=693 source=console] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[tap n=719 t=360488648 mark=693 source=toolkit] [SMRTK] SMRTK_LOAD_OVERRIDE action=load_override_A name=SMRTK_A.sav override=true session=1789400587:3032022245:16476155:704241777 slot=A status=OK t=360488648 id=490
+[tap n=720 t=360488959 mark=693 source=toolkit] [SMRTK] SMRTK_PANEL_RESTORE open=true tab=Agent t=360488959 id=491
+[tap n=721 t=360489958 mark=693 source=toolkit] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=360489958 id=492
+[tap n=722 t=360489960 mark=693 source=console] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[tap n=723 t=360490958 mark=693 source=toolkit] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=360490958 id=493
+[tap n=724 t=360490959 mark=693 source=console] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[tap n=725 t=360511683 mark=693 source=toolkit] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=OpenFarm(6374) status=OK t=360511683 id=494
+[tap n=726 t=360513754 mark=693 source=console] > *r SMRTK.session = SMRTK.sitting08_session
+[tap n=727 t=360521327 mark=693 source=console] > *r SMRTK.sitting08_session = nil
+[tap n=728 t=360533737 mark=693 source=toolkit] [SMRTK] SMRTK_TAB action=tab_Agent page=Agent status=OK t=360533737 id=495
+[tap n=729 t=360537553 mark=729 source=toolkit] [SMRTK] SMRTK_MARK action=mark label=SMRTK08_S3_CHECK mark=729 status=OK t=360537553 id=496
+[tap n=730 t=360537553 mark=729 source=toolkit] [SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=46/46 game=403908 mark_action=mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack pack_version=11 read="live registry" save=SMRTK_A.sav sol=501 status=OK t=360537553 id=497
+[tap n=731 t=360537553 mark=729 source=toolkit] [SMRTK] SMRTK_DUMP armed=none armed_count=0 attestation=expired click_owner=none current_session=1789400587:3032022245:16476155:704241777 errors=0 layout_name=fixture layout_target_armed=false layouts_held=0 leg=check_after_load map=[table] pins="A=none B=none C=none" pins_cleared=true provenance_actions=363 provenance_last=watch_selected_field provenance_present=true provenance_session=1789400587:3032022245:16476155:704241777 save_name=SMRTK_A.sav session_matches=true sitting=22 sol=501 t=360537553 id=498
+[tap n=732 t=360537553 mark=732 source=toolkit] [SMRTK] SMRTK_MARK action=mark label=SMRTK08_S3_END mark=732 status=OK t=360537553 id=499
+[tap n=733 t=360537553 mark=732 source=toolkit] [SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=46/46 game=403908 mark_action=mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack pack_version=11 read="live registry" save=SMRTK_A.sav sol=501 status=OK t=360537553 id=500
+[tap n=734 t=360537553 mark=732 source=toolkit] [SMRTK] SMRTK_ACTION action=slot_3 armed=none armed_count=0 attestation=expired click_owner=none current_session=1789400587:3032022245:16476155:704241777 errors=0 layout_name=fixture layout_target_armed=false layouts_held=0 leg=check_after_load map=[table] pins="A=none B=none C=none" pins_cleared=true provenance_actions=363 provenance_last=watch_selected_field provenance_present=true provenance_session=1789400587:3032022245:16476155:704241777 save_name=SMRTK_A.sav session_matches=true sitting=22 sol=501 status=OK t=360537553 id=501
+[tap n=735 t=360634890 mark=732 source=toolkit] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=OpenFarm(6374) status=OK t=360634890 id=502
+[tap n=736 t=360638153 mark=732 source=toolkit] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=StorageMachineParts(7078) status=OK t=360638153 id=503
+[tap n=737 t=360663404 mark=732 source=toolkit] [SMRTK] SMRTK_TAB action=tab_Stamper page=Stamper status=OK t=360663404 id=504
+[tap n=738 t=360702532 mark=732 source=toolkit] [SMRTK] SMRTK_LAYOUT_NAME action=layout_name name=smrtk08_depot status=OK t=360702532 id=505
+[tap n=739 t=360702532 mark=732 source=toolkit] [SMRTK] SMRTK_CAPTURE_SKIP object=StorageMachineParts(7078) reason="template unavailable" template=StorageMachineParts t=360702532 id=506
+[tap n=740 t=360702532 mark=732 source=toolkit] [SMRTK] SMRTK_CAPTURE action=layout_capture_selected reason="no supported buildings or grid nodes in capture" status=REFUSED t=360702532 id=507
+[tap n=741 t=360713119 mark=732 source=toolkit] [SMRTK] SMRTK_LAYOUT_NAME action=layout_name name=smrtk08_depot status=OK t=360713119 id=508
+[tap n=742 t=360713119 mark=732 source=toolkit] [SMRTK] SMRTK_LAYOUT_COPY action=layout_copy reason="layout fields" status=REFUSED t=360713119 id=509
+[tap n=743 t=360729568 mark=732 source=toolkit] [SMRTK] SMRTK_LAYOUT_NAME action=layout_name name=smrtk08_depot status=OK t=360729568 id=510
+[tap n=744 t=360729568 mark=732 source=toolkit] [SMRTK] SMRTK_LAYOUT_COPY action=layout_copy reason="layout fields" status=REFUSED t=360729568 id=511
+[tap n=745 t=360929777 mark=732 source=toolkit] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=OpenFarm(6326) status=OK t=360929777 id=512
+[tap n=746 t=360932747 mark=732 source=toolkit] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=DomeMega(5446) status=OK t=360932747 id=513
+[tap n=747 t=360933807 mark=732 source=toolkit] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=OpenFarm(8370) status=OK t=360933807 id=514
+[tap n=748 t=360996067 mark=732 source=toolkit] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=OpenFarm(6481) status=OK t=360996067 id=515
+[tap n=749 t=360996614 mark=732 source=toolkit] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=ElectronicsFactory(7070) status=OK t=360996614 id=516
+[tap n=750 t=360997274 mark=732 source=toolkit] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=ElectronicsFactory(7064) status=OK t=360997274 id=517
+[tap n=751 t=360997749 mark=732 source=toolkit] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=DomeMega(5470) status=OK t=360997749 id=518
+[tap n=752 t=360999681 mark=732 source=toolkit] [SMRTK] SMRTK_TAB action=tab_World page=World status=OK t=360999681 id=519
+[tap n=753 t=361005202 mark=732 source=toolkit] [SMRTK] SMRTK_ACTION action=spawn_colonists_1 reason="spawn count mismatch; before=677 after=677" status=REFUSED t=361005202 id=520
+[tap n=754 t=361318577 mark=732 source=toolkit] [SMRTK] SMRTK_TAB action=tab_Agent page=Agent status=OK t=361318577 id=521
+[tap n=755 t=361330478 mark=732 source=toolkit] [SMRTK] SMRTK_DUMP armed=none armed_count=0 buildings=1149 colonists=682 constructions=0 depots_mechanized=13 depots_universal=77 domes=13 drone_hubs=12 drones=939 errors=0 errors_since_mark=0 grids="screen check; not enumerated here" leg=read_sitting map=[table] mark=732 mark_label=SMRTK08_S3_END rocket_detail=UniversalRocket(3212):CmdOnEarth:not-ready|UniversalRocket(2848):CmdWaitOrder:not-ready|UniversalRocket(4080):CmdOnEarth:not-ready|UniversalRocket(3217):CmdLoad:not-ready|UniversalLanderRocket(4317):CmdWaitOrder:not-ready|UniversalSupplyPod(8916):CmdWaitInOrbit:not-ready rockets=10 rockets_ready=0 sol=503 t=361330478 id=522
+[tap n=756 t=361330478 mark=732 source=toolkit] [SMRTK] SMRTK_ACTION action=slot_scratch armed=none armed_count=0 buildings=1149 colonists=682 constructions=0 depots_mechanized=13 depots_universal=77 domes=13 drone_hubs=12 drones=939 errors=0 errors_since_mark=0 grids="screen check; not enumerated here" leg=read_sitting map=[table] mark=732 mark_label=SMRTK08_S3_END rocket_detail=UniversalRocket(3212):CmdOnEarth:not-ready|UniversalRocket(2848):CmdWaitOrder:not-ready|UniversalRocket(4080):CmdOnEarth:not-ready|UniversalRocket(3217):CmdLoad:not-ready|UniversalLanderRocket(4317):CmdWaitOrder:not-ready|UniversalSupplyPod(8916):CmdWaitInOrbit:not-ready rockets=10 rockets_ready=0 sol=503 status=OK t=361330478 id=523
+[tap n=757 t=361339752 mark=732 source=toolkit] [SMRTK] SMRTK_CLEAR action=clear status=OK t=361339752 id=524
+[tap n=758 t=361365021 mark=732 source=toolkit] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=OpenFarm(6481) status=OK t=361365021 id=525
+[tap n=759 t=361366784 mark=732 source=toolkit] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=OpenFarm(6481) status=OK t=361366784 id=526
+[tap n=760 t=361375012 mark=732 source=toolkit] [SMRTK] SMRTK_TAB action=tab_World page=World status=OK t=361375012 id=527
+[tap n=761 t=361385609 mark=732 source=toolkit] [SMRTK] SMRTK_TAB action=tab_World page=World status=OK t=361385609 id=528
+[tap n=762 t=361385889 mark=732 source=toolkit] [SMRTK] SMRTK_TAB action=tab_Agent page=Agent status=OK t=361385889 id=529
+[tap n=763 t=361559236 mark=732 source=toolkit] [SMRTK] SMRTK_ARM action=trigger_rocket cadence=1000 once=true status=OK trigger=trigger_rocket t=361559236 id=530
+[tap n=764 t=361569330 mark=732 source=toolkit] [SMRTK] SMRTK_TAB action=tab_World page=World status=OK t=361569330 id=531
+[tap n=765 t=361569999 mark=732 source=toolkit] [SMRTK] SMRTK_TAB action=tab_Agent page=Agent status=OK t=361569999 id=532
+[tap n=766 t=361571689 mark=732 source=toolkit] [SMRTK] SMRTK_DUMP armed=trigger_rocket armed_count=1 buildings=1149 colonists=685 constructions=0 depots_mechanized=13 depots_universal=77 domes=13 drone_hubs=12 drones=939 errors=0 errors_since_mark=0 grids="screen check; not enumerated here" leg=read_sitting map=[table] mark=732 mark_label=SMRTK08_S3_END rocket_detail=UniversalRocket(3212):CmdOnEarth:not-ready|UniversalRocket(2848):CmdWaitOrder:not-ready|UniversalRocket(4080):CmdFlyToLocation:READY|UniversalRocket(3217):CmdLoad:not-ready|UniversalLanderRocket(4317):CmdWaitOrder:not-ready|UniversalSupplyPod(8916):CmdWaitInOrbit:not-ready rockets=11 rockets_ready=1 sol=503 t=361571689 id=533
+[tap n=767 t=361571689 mark=732 source=toolkit] [SMRTK] SMRTK_ACTION action=slot_scratch armed=trigger_rocket armed_count=1 buildings=1149 colonists=685 constructions=0 depots_mechanized=13 depots_universal=77 domes=13 drone_hubs=12 drones=939 errors=0 errors_since_mark=0 grids="screen check; not enumerated here" leg=read_sitting map=[table] mark=732 mark_label=SMRTK08_S3_END rocket_detail=UniversalRocket(3212):CmdOnEarth:not-ready|UniversalRocket(2848):CmdWaitOrder:not-ready|UniversalRocket(4080):CmdFlyToLocation:READY|UniversalRocket(3217):CmdLoad:not-ready|UniversalLanderRocket(4317):CmdWaitOrder:not-ready|UniversalSupplyPod(8916):CmdWaitInOrbit:not-ready rockets=11 rockets_ready=1 sol=503 status=OK t=361571689 id=534
+[tap n=768 t=361673491 mark=732 source=toolkit] [SMRTK] SMRTK_DUMP armed=trigger_rocket armed_count=1 buildings=1149 colonists=687 constructions=0 depots_mechanized=13 depots_universal=77 domes=13 drone_hubs=12 drones=939 errors=0 errors_since_mark=0 grids="screen check; not enumerated here" leg=read_sitting map=[table] mark=732 mark_label=SMRTK08_S3_END rocket_detail=UniversalRocket(3212):CmdOnEarth:not-ready|UniversalRocket(2848):CmdWaitOrder:not-ready|UniversalRocket(4080):CmdFlyToLocation:READY|UniversalRocket(3217):CmdLoad:not-ready|UniversalLanderRocket(4317):CmdWaitOrder:not-ready|UniversalSupplyPod(8916):CmdWaitInOrbit:not-ready rockets=11 rockets_ready=1 sol=503 t=361673491 id=535
+[tap n=769 t=361673491 mark=732 source=toolkit] [SMRTK] SMRTK_ACTION action=slot_scratch armed=trigger_rocket armed_count=1 buildings=1149 colonists=687 constructions=0 depots_mechanized=13 depots_universal=77 domes=13 drone_hubs=12 drones=939 errors=0 errors_since_mark=0 grids="screen check; not enumerated here" leg=read_sitting map=[table] mark=732 mark_label=SMRTK08_S3_END rocket_detail=UniversalRocket(3212):CmdOnEarth:not-ready|UniversalRocket(2848):CmdWaitOrder:not-ready|UniversalRocket(4080):CmdFlyToLocation:READY|UniversalRocket(3217):CmdLoad:not-ready|UniversalLanderRocket(4317):CmdWaitOrder:not-ready|UniversalSupplyPod(8916):CmdWaitInOrbit:not-ready rockets=11 rockets_ready=1 sol=503 status=OK t=361673491 id=536
+[tap n=770 t=361746906 mark=732 source=toolkit] [SMRTK] SMRTK_TAB action=tab_World page=World status=OK t=361746906 id=537
+[tap n=771 t=361764481 mark=732 source=toolkit] [SMRTK] SMRTK_ACTION action=rocket_arrive reason="select an in-flight universal rocket" status=REFUSED t=361764481 id=538
+[tap n=772 t=361796680 mark=732 source=toolkit] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=OpenFarm(6481) status=OK t=361796680 id=539
+[tap n=773 t=361805609 mark=732 source=toolkit] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=MartianUniversity(6719) status=OK t=361805609 id=540
+[tap n=774 t=361806122 mark=732 source=toolkit] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=OpenCity(5346) status=OK t=361806122 id=541
+[tap n=775 t=361817903 mark=732 source=toolkit] [SMRTK] SMRTK_ACTION action=spawn_martian_colonists_10 reason="spawn count mismatch; before=689 after=689" status=REFUSED t=361817903 id=542
+[tap n=776 t=361820065 mark=732 source=toolkit] [SMRTK] SMRTK_TAB action=tab_Agent page=Agent status=OK t=361820065 id=543
+[tap n=777 t=361830615 mark=732 source=toolkit] [SMRTK] SMRTK_DUMP armed=trigger_rocket armed_count=1 buildings=1149 colonists=701 constructions=0 depots_mechanized=13 depots_universal=77 domes=13 drone_hubs=12 drones=939 errors=0 errors_since_mark=0 grids="screen check; not enumerated here" leg=read_sitting map=[table] mark=732 mark_label=SMRTK08_S3_END rocket_detail=UniversalRocket(3212):CmdOnEarth:not-ready|UniversalRocket(2848):CmdWaitOrder:not-ready|UniversalRocket(4080):CmdFlyToLocation:READY|UniversalRocket(3217):CmdLoad:not-ready|UniversalLanderRocket(4317):CmdWaitOrder:not-ready|UniversalSupplyPod(8916):CmdWaitInOrbit:not-ready rockets=13 rockets_ready=2 sol=503 t=361830615 id=544
+[tap n=778 t=361830615 mark=732 source=toolkit] [SMRTK] SMRTK_ACTION action=slot_scratch armed=trigger_rocket armed_count=1 buildings=1149 colonists=701 constructions=0 depots_mechanized=13 depots_universal=77 domes=13 drone_hubs=12 drones=939 errors=0 errors_since_mark=0 grids="screen check; not enumerated here" leg=read_sitting map=[table] mark=732 mark_label=SMRTK08_S3_END rocket_detail=UniversalRocket(3212):CmdOnEarth:not-ready|UniversalRocket(2848):CmdWaitOrder:not-ready|UniversalRocket(4080):CmdFlyToLocation:READY|UniversalRocket(3217):CmdLoad:not-ready|UniversalLanderRocket(4317):CmdWaitOrder:not-ready|UniversalSupplyPod(8916):CmdWaitInOrbit:not-ready rockets=13 rockets_ready=2 sol=503 status=OK t=361830615 id=545
+[tap n=779 t=361849666 mark=732 source=toolkit] [SMRTK] SMRTK_CLEAR action=clear status=OK t=361849666 id=546
+[tap n=780 t=361849666 mark=732 source=toolkit] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=UniversalRocket(2848) status=OK t=361849666 id=547
+[tap n=781 t=361849666 mark=732 source=toolkit] [SMRTK] SMRTK_TAB action=tab_World page=World status=OK t=361849666 id=548
+[tap n=782 t=361849666 mark=732 source=toolkit] [SMRTK] SMRTK_ACTION action=rocket_arrive reason="select an in-flight universal rocket" status=REFUSED t=361849666 id=549
+[tap n=783 t=361849666 mark=732 source=toolkit] [SMRTK] SMRTK_TAB action=tab_Agent page=Agent status=OK t=361849666 id=550
+[tap n=784 t=361849666 mark=732 source=toolkit] [SMRTK] SMRTK_TAB action=tab_Sitting page=Sitting status=OK t=361849666 id=551
+[tap n=785 t=361849666 mark=732 source=toolkit] [SMRTK] SMRTK_TAB action=tab_World page=World status=OK t=361849666 id=552
+[tap n=786 t=361849666 mark=732 source=toolkit] [SMRTK] SMRTK_TAB action=tab_Saves page=Saves status=OK t=361849666 id=553
+[tap n=787 t=361849666 mark=732 source=toolkit] [SMRTK] SMRTK_TAB action=tab_Kit page=Kit status=OK t=361849666 id=554
+[tap n=788 t=361849666 mark=732 source=toolkit] [SMRTK] SMRTK_TAB action=tab_Selected page=Selected status=OK t=361849666 id=555
+[tap n=789 t=361849666 mark=732 source=toolkit] [SMRTK] SMRTK_TAB action=tab_Sitting page=Sitting status=OK t=361849666 id=556
+[tap n=790 t=361849666 mark=732 source=toolkit] [SMRTK] SMRTK_TAB action=tab_Agent page=Agent status=OK t=361849666 id=557
+[tap n=791 t=361849666 mark=732 source=toolkit] [SMRTK] SMRTK_TAB action=tab_World page=World status=OK t=361849666 id=558
+[tap n=792 t=361849666 mark=732 source=toolkit] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=DomeDiamond(5350) status=OK t=361849666 id=559
+[tap n=793 t=361849666 mark=732 source=toolkit] [SMRTK] SMRTK_ACTION action=spawn_colonists_10 reason="spawn count mismatch; before=701 after=701" status=REFUSED t=361849666 id=560
+[tap n=794 t=361849666 mark=732 source=toolkit] [SMRTK] SMRTK_TAB action=tab_Agent page=Agent status=OK t=361849666 id=561
+[tap n=795 t=361849666 mark=732 source=toolkit] [SMRTK] SMRTK_DUMP armed=trigger_rocket armed_count=1 buildings=1149 colonists=711 constructions=0 depots_mechanized=13 depots_universal=77 domes=13 drone_hubs=12 drones=939 errors=0 errors_since_mark=0 grids="screen check; not enumerated here" leg=read_sitting map=[table] mark=732 mark_label=SMRTK08_S3_END rocket_detail=UniversalRocket(3212):CmdOnEarth:not-ready|UniversalRocket(2848):CmdWaitOrder:not-ready|UniversalRocket(4080):CmdFlyToLocation:READY|UniversalRocket(3217):CmdLoad:not-ready|UniversalLanderRocket(4317):CmdWaitOrder:not-ready|UniversalSupplyPod(8916):CmdWaitInOrbit:not-ready rockets=13 rockets_ready=2 sol=503 t=361849666 id=562
+[tap n=796 t=361849666 mark=732 source=toolkit] [SMRTK] SMRTK_ACTION action=slot_scratch armed=trigger_rocket armed_count=1 buildings=1149 colonists=711 constructions=0 depots_mechanized=13 depots_universal=77 domes=13 drone_hubs=12 drones=939 errors=0 errors_since_mark=0 grids="screen check; not enumerated here" leg=read_sitting map=[table] mark=732 mark_label=SMRTK08_S3_END rocket_detail=UniversalRocket(3212):CmdOnEarth:not-ready|UniversalRocket(2848):CmdWaitOrder:not-ready|UniversalRocket(4080):CmdFlyToLocation:READY|UniversalRocket(3217):CmdLoad:not-ready|UniversalLanderRocket(4317):CmdWaitOrder:not-ready|UniversalSupplyPod(8916):CmdWaitInOrbit:not-ready rockets=13 rockets_ready=2 sol=503 status=OK t=361849666 id=563
+[tap n=797 t=361849666 mark=732 source=toolkit] [SMRTK] SMRTK_CLEAR action=clear status=OK t=361849666 id=564
+[tap n=798 t=361849666 mark=732 source=toolkit] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=OpenCity(5346) status=OK t=361849666 id=565
+[tap n=799 t=361849666 mark=732 source=console] > *r SelectObj(HandleToObject[4080])
+[tap n=800 t=361849666 mark=732 source=toolkit] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=UniversalRocket(4080) status=OK t=361849666 id=566
+[tap n=801 t=361852150 mark=732 source=toolkit] [SMRTK] SMRTK_TAB action=tab_World page=World status=OK t=361852150 id=567
+[tap n=802 t=361858072 mark=732 source=toolkit] [SMRTK] SMRTK_ACTION action=rocket_arrive command=CmdWaitInOrbit object=UniversalRocket(4080) outcome=travel_wait_finished skipped_time=159114 status=OK t=361858072 id=568
+[tap n=803 t=361875236 mark=803 source=toolkit] [SMRTK] SMRTK_MARK action=mark label="Next rocket landed" mark=803 status=OK t=361875236 id=569
+[tap n=804 t=361875236 mark=803 source=toolkit] [SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=46/46 game=403908 mark_action=mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack pack_version=11 read="live registry" save=SMRTK_A.sav sol=503 status=OK t=361875236 id=570
+[tap n=805 t=361875236 mark=803 source=toolkit] [SMRTK] SMRTK_TRIGGER action=trigger_rocket label="Next rocket landed" landings=4 mark=803 object=UniversalLanderRocket(3702) pause=true sound=true status=OK trigger=trigger_rocket t=361875236 id=571
+[tap n=806 t=361875236 mark=803 source=toolkit] [SMRTK] SMRTK_DISARM action=trigger_rocket reason="trigger complete" status=OK trigger=trigger_rocket t=361875236 id=572
+[tap n=807 t=361875236 mark=803 source=toolkit] [SMRTK] SMRTK_MENU action=dock_menu open=true status=OK surface=native t=361875236 id=573
+[tap n=808 t=361875236 mark=803 source=toolkit] [SMRTK] SMRTK_CLEAR action=clear status=OK t=361875236 id=574
+[tap n=809 t=361875236 mark=803 source=toolkit] [SMRTK] SMRTK_PANEL action=dock_close_panel open=false status=OK t=361875236 id=575
+[tap n=810 t=361875236 mark=803 source=console] > SMRTK.Mark("SMRTK08_END")
+[tap n=811 t=361875236 mark=811 source=toolkit] [SMRTK] SMRTK_MARK action=mark label=SMRTK08_END mark=811 status=OK t=361875236 id=576
+[tap n=812 t=361875236 mark=811 source=toolkit] [SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=46/46 game=403908 mark_action=mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack pack_version=11 read="live registry" save=SMRTK_A.sav sol=503 status=OK t=361875236 id=577
+[tap n=813 t=361875236 mark=811 source=console] 811
+[tap n=814 t=361875236 mark=811 source=console] > SMRTK.TaintRead()
+[tap n=815 t=361875236 mark=811 source=toolkit] [SMRTK] SMRTK_TAINT_READ action=taint_read status=OK used=false t=361875236 id=578
+[tap n=816 t=361875236 mark=811 source=console] true { action = taint_read, status = OK, used = false }
+[tap n=817 t=361875236 mark=811 source=toolkit] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=OpenCity(5346) status=OK t=361875236 id=579
+[tap n=818 t=361875236 mark=811 source=console] > SMRTK.Run("eligibility")
+[tap n=819 t=361875236 mark=811 source=toolkit] [SMRTK] SMRTK_ELIGIBILITY action=eligibility reason=UNAVAILABLE:sandbox status=OK t=361875236 id=580
+[tap n=820 t=361875236 mark=811 source=console] true { action = eligibility, reason = UNAVAILABLE:sandbox, status = OK }
+[tap n=821 t=361875236 mark=811 source=console] > *r local entries={} for k,v in pairs(CheatsUsed or {}) do entries[#entries+1]=tostring(k)..":"..tostring(v) end table.sort(entries) SMRTK.Log("DUMP",{cheats_used=table.concat(entries,"|"),cheats_count=#entries,arms=SMRTK.ArmedCount(),errors=SMRTK.error_count})
+[tap n=822 t=361875236 mark=811 source=toolkit] [SMRTK] SMRTK_DUMP arms=0 cheats_count=0 cheats_used="" errors=0 t=361875236 id=581
+[tap n=823 t=361875236 mark=811 source=console] > SMRTK.CopySince(SMRTK.sitting08_begin)
