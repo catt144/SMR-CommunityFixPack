@@ -937,11 +937,37 @@ nearly bought a full redesign sweep of a panel whose buttons had no labels.
 — note two labels differ from their ids), hot bar visible on every page, controls
 above the growing readouts, collapse/expand intact.
 
+⭐⭐ **DEFECT 7 IS RULED, 2026-09-14 — FONT SIZE 16, AND THE TAB ROW WRAPS.**
+Owner, once the real style was finally live: *"Drop the font to 16 is fine its
+plenty big and wrap."* ⛔ **This SUPERSEDES defect 7's original premise.** That
+premise was *shrink `ConsoleLog` while remaining LARGER than vanilla Cheats (18)*
+— which 09 reported as literally unfulfillable, `ConsoleLog` being 13 and Cheats
+18. **16 is SMALLER than vanilla Cheats**, and that is the owner's call: the
+"larger than Cheats" constraint is dropped, not satisfied. ⛔ No session may
+"restore" a larger size on the strength of the old premise.
+
+⚠️ **The verdict was only takeable at the third attempt**, and the sequence is
+the lesson: size 20 was invented to answer defect 7 → its malformed TextStyle
+blanked every caption → a file-scope re-declaration still did not register, so
+the first "verdict" would have been passed on the 13pt fallback → only after
+lazy registration (log line gone) was the real typography on screen to judge.
+⇒ ⛔ **A font verdict is worthless unless the log proves which font rendered.**
+
+⭐ **Its side effect is itself the finding:** at 20 the seven tab labels
+overflowed the 780-wide panel and clipped on both edges. That is the **THIRD**
+fixed cap to clip content once the font grew (status strip `MaxHeight`, dock chip
+`MaxWidth`, tab row `MaxHeight` + non-wrapping `HList`). ⇒ **The class, not the
+number, is the defect** — the tab row wraps now, so the next label or font change
+cannot re-break it.
+
 ⛔ **STILL OPEN, and not yours to answer:**
-- **Defect 7's readability verdict is NOT TAKEN.** The log carries
-  `SMRTK_TEXTSTYLE_FALLBACK used=ConsoleLog wanted=SMRTKControls`, so every
-  caption judged so far is the **13pt fallback**, not the intended size 20.
-  ⛔ Do not record a font verdict until that log line is gone.
+- **Item 2 (Class 2 evidence) PASSED with witnessed evidence**, not agreement:
+  `COPY flushed=true from=42 lines=5 truncated=false` scoped to `MARK mark=42`,
+  a `CLEAR`, then a NEW `TAINT_READ` after it — with records 36–41 still in the
+  file. ⇒ Clear screen clears PRESENTATION ONLY and destroys no evidence.
+- ⚠️ **Reading a toolkit log: every record appears TWICE** (file + console tap)
+  **except chrome verbs**, which appear once. `SMRTK_TAB` tallied an odd 13 for
+  exactly this reason. ⛔ Never quote a raw verb count as an action count.
 - **The command field is white-on-light until hovered** (`74:336-341` sets a
   near-white `TextColor` *and* `TextStyle="ConsoleLog"` on an `XTextEditor` whose
   dark `Background` is not painting). You called it minor and deferred it.
