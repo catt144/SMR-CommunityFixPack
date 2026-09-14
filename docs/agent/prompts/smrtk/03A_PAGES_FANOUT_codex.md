@@ -136,10 +136,30 @@ report; outbox to 03B and 99; strike your row; push the pack repo.
   is not misled — ids 9/10 are P4's persistence evidence. ⚠️ Note the **third** registration when you fix it; a map
   change is a path 02 did not exercise.
 
-  **(4) SCOPE ADDITION — an SMR icon in the game's bottom HUD bar** (owner: *"create an SMR icon that I can just click
-  to open it and click to close it"*). This is a **third vanilla-UI injection problem of the same family as your
-  spike's two**, so add it to the spike and record it in `reports/SMRTK_UI_HOOKS.md` §3; the build belongs to **P2**,
-  which already owns vanilla-UI injection. Feasibility read only, not a route: `Data/XDef/HUD.lua` has named
-  containers `idBottom` (:385) and `idLeft` (:390). Same invariants as everything else — rule 9 above all: appending a
-  button when the HUD opens is fine, replacing a vanilla HUD method is not. ⛔ If no idle-clean route exists, the
-  hotkey remains the way in and that is a **finding, not a failure** — do not force it.
+  **(4) ⭐ SUPERSEDED AND ENLARGED — the owner RE-RULED THE WHOLE SURFACE later in the 02 sitting.** What was a
+  request for an icon is now a **ranked ladder that replaces the floating panel as the default**; the ruling, the
+  three rungs and the proven/plausible/uncosted state of each are in this README's ⚖️ **THE SURFACE** block — read it
+  there, it is canonical, and all three rungs are pre-approved so you descend rather than ask. Your spike therefore
+  covers **three** techniques, not two: infopanel injection (route proven), map-click capture, and **the dock icon +
+  vanilla popout menus** (`reports/SMRTK_UI_HOOKS.md` §3). Rule 9 binds hardest on the new one — append a button when
+  the HUD opens, never patch a vanilla HUD method while idle. Three consequences the ruling creates, which are mine
+  to flag across payloads and yours to resolve:
+
+  - ⚠️ **P2 grows, and its seat may no longer fit.** P2 was sized at difficulty 4 *because the spike carried its only
+    hard part*. It now owns the per-object section **and** the entire second surface (dock icon, popouts, and
+    whatever of rungs 2–3 is needed). That is closer to a 6–7. The owner seated P2 at **Sol, high** when it was a 4;
+    if you agree it has outgrown that, say so in DEPARTURES and re-seat it — you have the licence, and the owner's
+    difficulty read was explicitly the authoring session's estimate, not a measurement.
+  - ⛔ **A popout menu cannot carry every page, and this is the likeliest way rung 1 fails LATE.** Vanilla popouts
+    are menus: excellent for World's one-shot actions and P2's per-object list. But the Agent page needs an
+    `XTextEditor` note field and stateful slot buttons, and the Kit page needs a scrolling log-tail pane — none of
+    which is a menu item. ⇒ **Decide this at the spike, not after five payloads have built against it.** A legitimate
+    outcome is a per-page split: menus for action lists, and rung 2 or rung 3 for the stateful pages. Cost that
+    before committing the ladder's rung, and say in your report which pages landed on which surface.
+  - **The status strip has no home on rung 1, and `smr-bugfixpack-51` deliberately left this undecided.** The
+    at-a-glance CLEAN/TAINTED · eligibility · armed-count · errors read is the owner's safety glance, and a popout
+    that is shut most of the time cannot show it. Requirement (B) does **not** bite — the log carries all of it
+    regardless — so this is purely the human's glanceable read. ⇒ **Requirement:** an at-a-glance safety read must
+    exist somewhere the owner can see **without opening anything**; the form is yours. Noted for your shaping:
+    a badge or colour on the dock icon is the only option that survives rungs 1 and 2 as well as 3, since rung 3's
+    panel already has the strip — but do not treat that as the decision.

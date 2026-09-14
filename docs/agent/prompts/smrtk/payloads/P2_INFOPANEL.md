@@ -19,15 +19,20 @@ Independent of P1/P3–P5.
    stub "not built" if it is not registered at load), **Pin A/B/C** (P3's pins — same).
 3. The section renders only when `SelectedObj` supports at least one action; the vanilla Cheats section is left
    exactly as it is (with the panel on, the owner should simply never need to open the Mod Manager).
-4. ⭐ **The HUD icon** (owner request from the 02 sitting, 2026-09-13: *"create an SMR icon that I can just click to
-   open it and click to close it"*). An **SMR button in the game's bottom HUD bar** that toggles the floating panel —
-   the same toggle the hotkey performs, so the panel becomes reachable without a key. It is yours because it is the
-   same vanilla-UI injection problem as job 1, and **03A's spike decides the route** (`reports/SMRTK_UI_HOOKS.md` §3);
-   build on that or its declared fallback, exactly as job 1. Feasibility read handed down, not a route:
-   `Data/XDef/HUD.lua` has named containers `idBottom` (:385) and `idLeft` (:390). Rule 9 binds hardest here —
-   appending a button when the HUD opens is fine, replacing a vanilla HUD method while idle is not. The toggle is
-   chrome, so its line follows the destination policy (03A's inbox item 1): logged, not printed to screen.
-   ⛔ If no idle-clean route exists, say so — the hotkey remains the way in and that is a **finding, not a failure**.
+4. ⭐ **THE SECOND SURFACE IS NOW YOURS TOO — read the README's ⚖️ THE SURFACE block before starting.** The owner
+   re-ruled the UI during the 02 sitting: the floating panel is **demoted**, and the preferred surface is your
+   per-object section **plus an SMR icon on the game's dock reusing vanilla's own popout menus**. Three rungs, all
+   pre-approved, descend them rather than asking; **03A's spike picks the route** (`reports/SMRTK_UI_HOOKS.md` §3) and
+   reports which rung the build landed on. Feasibility handed down, not a route: `Data/XDef/HUD.lua` has named
+   containers (`idBottom`, `idLeft`) and `HUDButtonFrame`/`HUDButtonTemplate` exist to spawn into it. Rule 9 binds
+   hardest here — append a button when the HUD opens, never patch a vanilla HUD method while idle. Surface chrome
+   follows the destination policy (03A's inbox item 1): logged, not printed to screen.
+   ⚠️ **Two things the ruling makes yours that the old brief did not:** (a) a vanilla popout is a **menu**, so the
+   Agent page's text field and the Kit page's log tail may not fit it — 03A is asked to settle the per-page split at
+   the spike, and you build to whatever it decides; (b) your difficulty was read as **4 when the spike carried your
+   only hard part** — with the second surface added that is closer to 6–7, so if 03A has not re-seated you, say so
+   rather than absorbing it. ⛔ If no idle-clean route exists for the dock icon, that is a **finding, not a failure**:
+   the ladder falls to rung 2 or 3 and the floating panel already exists.
 
 ## Scope fence
 

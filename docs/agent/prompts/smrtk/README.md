@@ -21,8 +21,29 @@ contract). Authoring mechanics: `agent/WORKFLOW.md` "Authoring a prompt" element
 > recognisably the toolkit's (`SMRTK_<Verb>`), so an agent attributes it at a glance.
 >
 > ⚖️ **SCOPE (owner, 2026-09-13):** *"I agree with all of that"* — the whole tiered list, hard items included
-> (*"once we have it as a tool we have it forever"*). Home: the TestKit mod. UI: **both** — an infopanel section for
-> per-object actions where the vanilla Cheats section sits, and a floating tabbed panel for everything else.
+> (*"once we have it as a tool we have it forever"*). Home: the TestKit mod.
+>
+> ⚖️ **THE SURFACE — RE-RULED DURING THE 02 SITTING, 2026-09-13. This supersedes the earlier "both UIs" line.**
+> *"I am not a huge fan of the panel anyway, its in my way. I would honestly much prefer a smart panal that replaces
+> the area the cheats would normally be in. And for things that don't need to be there Create a SMR Icon on the games
+> dock and just reuse the games natural popout menu system if thats possible. That would likely be safer, clearer, and
+> a better experience."* Then, unprompted, the fallback: *"Now if it turns out we cannot do that, I am ok with the
+> panel if we need it or a hybrid cheats menu along the side where I can popout and close a more adv menu."*
+> ⇒ **A RANKED LADDER, all three rungs PRE-APPROVED — descend it, never stop to ask, and report the rung you landed
+> on.** The per-object half is unchanged and always P2's.
+>   1. ⭐ **Preferred:** infopanel section where the vanilla Cheats section sits **+ an SMR icon on the game's dock
+>      reusing vanilla's own popout menus.** Route for the section is PROVEN (`Lua/X/Infopanel.lua:26-51`, watched
+>      rendering in the sitting); the dock icon is PLAUSIBLE but unverified (`Data/XDef/HUD.lua` named containers,
+>      `HUDButtonFrame`/`HUDButtonTemplate` XDefs, same injection shape as the proven `OnMsg.Shortcuts` hook).
+>   2. **Hybrid cheats menu along the side**, popping out and closing, carrying the advanced menu. ⚠️ **UNCOSTED by
+>      anyone** — a docked collapsible strip is neither a floating window nor a vanilla popout, and no source route
+>      has been read. If the spike can cost one thing beyond rung 1, cost this.
+>   3. **The floating panel as 01 built it** — acceptable *"if we need it"*, and it already exists, so the ladder
+>      can always terminate. A failed spike now costs a SURFACE, not a link.
+>
+> ⛔ **02's verdict is unaffected by this ruling** — P1–P4 measured taint, the console gate, the tap and persistence,
+> none of which depends on the panel being a floating window. The panel was the vehicle, not the thing measured, so
+> **03A may rebuild the surface freely without invalidating anything 02 established.**
 >
 > ⚖️ **SHAPE (owner, 2026-09-13):** *"3A and 3B … cross platform this as a primary / secondary with B being a judge
 > of the work done. Codex does A and Claude does B."* — the five page builds are one fan-out link whose coordinator
