@@ -122,6 +122,73 @@ filter on rules as they are written — than as a harvest from what exists.
 any of those words. **The audit must READ for this, not grep for it**, and must not report a small
 yield as a measured one.
 
+## ⭐ Three more audit requirements, owner 2026-09-14
+
+### (d) A rule that is actually just INFORMATION — a fourth shape
+
+> *"If a rule is actually just information that's useful to know but shouldn't be a rule and
+> belongs somewhere else."*
+
+| shape | test | disposition |
+|---|---|---|
+| **(d) NOT A RULE** | it requires no action of the reader — it is a fact or a lesson written in the imperative | **engine fact → `facts/EF-*`** · **lesson → pull-only reference.** Never the always-loaded set. |
+
+Worked cases from the Ground-rules teardown: rule 2 (*"both mods stay enabled"* — a rig fact),
+rule 4 (*"achievements stay ON"* — already five `EF-*` files), and the bulk of 5a, which the owner
+called *"informational info not rule info."*
+
+### ⛔ Duplicates must be found by MEANING, not by string
+
+> *"Don't have it look for just duplicate rules, because we could have duplicate rules with
+> different names that are in fact saying the same thing."*
+
+The existing inventory found **14 redundancy pairs**, and the ones verified in the `WORKFLOW`
+characterisation were **near-verbatim** (`R2` doccheck-before-commit, `R3` owner-decision
+mirroring, both against `CLAUDE.md`). ⇒ **Semantic duplication was never sought.**
+
+⛔ **Cluster by WHAT THE RULE REQUIRES OF THE READER, not by its wording or its name.** Two rules
+naming different artifacts, in different docs, under different headings, can impose the same duty.
+A hash/grep pass cannot see that; it is a read job. ⚠️ The inventory's own `count_unit` says it
+**splits** rather than merges: *"Duplicate and dead clauses separated when adjacent live duties
+differ."*
+
+### ⛔ "Every rule in the repo, and a number" — the existing 852 does NOT answer this
+
+MEASURED 2026-09-14 against `reports/RULES_HEADERS_INVENTORY.json`:
+
+| | |
+|---|---|
+| entries | **852** |
+| files covered | **22** — `CLAUDE.md`, `README`, `STATE`, the 4 monoliths, `UPLOAD_WORKFLOW`, the 14 `perma/` prompts |
+| classes | global 16 · task-local **780** · redundant 20 · doc-local 30 · dead 6 |
+| its own `count_unit` | *"Verbatim imperative occurrence or inseparable same-scope rule group… **Counts are not unique policies or atomic predicates.**"* |
+
+**Three reasons it cannot be quoted as the answer:**
+
+1. ⛔ **Wrong unit — by its own declaration.** 852 is occurrences/spans. The `WORKFLOW`
+   characterisation measured the gap directly: **10 JSON entries = 7 distinct rule-texts**
+   (R-A's paragraph counted as 4 sub-spans). *A total is not a set.*
+2. ⛔ **Wrong scope — 22 of ~618 rule-bearing files.** Never opened: `bugs/` 195 · `reports/` 197 ·
+   `facts/` 103 · `tools/*.py` 56 · non-`perma/` prompts 39 · **skills 4** ·
+   `metadata.lua`+`items.lua` 2. ⚠️ Not all carry duties — most bug entries carry evidence — but
+   some do. **Proof:** `items.lua:204`, *"a module absent from this file SHIPS ABSENT"* — a rule
+   with a player-visible consequence, living in a Lua comment. ⭐ And **the skills are the only
+   rule-carrier in this project with a cross-vendor gate**, yet they were not inventoried.
+3. ⛔ **Not deduplicated by meaning** — see above.
+
+⇒ **Report TWO numbers and say which is which: occurrences, and distinct rules after semantic
+merge.** Quoting one without the other is the defect this project already named.
+
+### ⭐⭐ Why the existing inventory could not have answered any of this
+
+**It asks "where should this rule live." It never asks "is this a rule."** Its five classes are
+all placement — global, task-local, doc-local, redundant, dead. There is no class for *cannot*,
+*would not*, *wrong reader*, or *not a rule at all*, which is why **780 of 852 landed in
+"task-local" and the pass moved on.**
+
+⇒ ⛔ **The audit must NOT inherit the 852's classifications.** Placement is the second question.
+The first is existence.
+
 ## ⚠️ The inverse case — a habit wearing a rule's clothes
 
 The same session found the opposite failure. The owner assumed that an agent setting up a playtest

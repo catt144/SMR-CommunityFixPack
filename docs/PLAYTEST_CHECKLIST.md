@@ -95,6 +95,26 @@ makes the house habit of pairing a rule with its incident load-bearing rather th
 criterion worth more as a filter on NEW rules — but a class defined by meaning cannot be grepped,
 so the audit must READ for it.
 
+⭐ **THREE MORE AUDIT REQUIREMENTS (your ask, same day).** (1) **Duplicates by MEANING, not by
+string** — two rules with different names, in different docs, can impose the same duty; the
+existing pass found 14 pairs and they were near-verbatim. (2) **Every rule in the repo, with a
+number.** (3) **A fourth shape: the "rule" that is actually just INFORMATION** — requires no action
+of the reader → engine fact to `facts/EF-*`, lesson to a pull-only doc, never the always-loaded set.
+
+⛔ **The existing 852-rule inventory does NOT answer (2), for three measured reasons.** Its own
+`count_unit` says *"Counts are not unique policies or atomic predicates"* — 852 is **occurrences**,
+and `WORKFLOW`'s 10 entries proved to be **7 distinct rules**. It covers **22 of ~618 rule-bearing
+files** — never opened: `bugs/` 195, `reports/` 197, `facts/` 103, `tools/` 56, non-perma prompts
+39, **the skills** (the only cross-vendor-gated rule carrier), and `metadata.lua`/`items.lua` —
+where `items.lua:204` carries *"a module absent from this file SHIPS ABSENT"*, a rule with a
+player-visible consequence living in a Lua comment. And it never deduplicated by meaning.
+⇒ **Report two numbers, occurrences and distinct rules, and say which is which.**
+
+⭐⭐ **Why that pass could not have answered any of this: it asks "where should this rule live",
+never "is this a rule."** All five of its classes are placement, which is why **780 of 852 landed
+in "task-local"** and it moved on. ⛔ The audit must not inherit its classifications — existence is
+the first question, placement the second.
+
 ⚠️ **Also still open from the same session (asked, not yet ruled):** does `WORKFLOW`'s rule 4
 repoint to `metadata.lua` as the per-fix player-text target, or **retire**? (Recommended: retire —
 `WORKFLOW:609` already covers the release-time half, and a per-fix duty on a field nobody reads
