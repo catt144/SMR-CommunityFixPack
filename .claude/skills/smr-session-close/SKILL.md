@@ -6,8 +6,8 @@ description: Close a session without losing anything — dump the session to a s
 # Session close — dump, then trim
 
 ⛔ **You have degraded context.** Never answer *"what did I learn?"* from memory — recall fails
-first and fails silently. **Dump first, then judge what is on the page**: that turns every cut
-into a decision instead of an omission.
+first and silently. **Dump first, then judge what is on the page**: that turns every cut into a
+decision instead of an omission.
 
 ## Mode
 
@@ -58,12 +58,24 @@ statement, never append an argument.**
 ⛔ **Expect net-flat or net-negative** — you home things elsewhere as you add. **Growth is the
 exception and needs one line of justification.**
 
-- State the delta in **`wc -c` bytes** and name the unit; `git cat-file -s` and Python `len()`
-  differ on the same file, and all three were confused here in one session.
+- State the delta in **`wc -c` bytes** and name the unit — `git cat-file -s` and `len()` differ
+  on the same file; all three were confused here in one session.
 - Trim **per section**: does this still earn its place? Rewriting instead of trimming is how a
   trim pass *grows* a file.
 
-## 4 · Finish
+## 4 · Finish — and hand over the launch line
 
 Say what was routed and where, then state **"nothing load-bearing exists only in this
-conversation"** — a checked claim listing the evidence, ⛔ never a ritual phrase.
+conversation"** — a checked claim listing the evidence, ⛔ never a ritual phrase. Report the
+§3 byte delta in the same message.
+
+⭐ **`handoff` mode ends by giving the owner the launch line, fenced and copy-pasteable** —
+they must not have to go find it:
+
+```
+task C:\Dev\SMR-BugFixPack\.claude\HANDOFF_PROMPT.md
+```
+
+⛔ Read it from the handoff's own `Fire with:` header, never from memory — another seat has a
+different path. **No handoff doc yet?** Create one in `.claude/` and make its first line its
+own `Fire with:`. **A handoff nobody can launch is not a handoff.**
