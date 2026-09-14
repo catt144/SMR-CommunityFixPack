@@ -149,9 +149,15 @@ evidence, never on conformance** — the plan is not the standard; the invariant
    function while idle. Any wrap (the `print` tee fallback, watch-a-field, quiet mode, click capture) is a **toggle,
    off by default, logged `SMRTK_ARM`/`SMRTK_DISARM`, and uninstalls to the captured original** (the `90_Loggers.lua`
    toggle pattern). Armed things **auto-disarm on save, load and map change** and log each fire.
-10. **⛔ Never write `config.BuildingInfopanelCheats`, never depend on `AreCheatsEnabled()`, never touch
-    `AccountStorage` (blacklisted anyway; achievement testing stays `EF-094`'s route).** Set `ConsoleEnabled = true`
-    directly (not `ConsoleSetEnabled`, which also shows the on-screen log — `EF-097`).
+10. **⛔ Never write `config.BuildingInfopanelCheats`, ⛔ NEVER WRITE `Platform.cheats`, never depend on
+    `AreCheatsEnabled()`, never touch `AccountStorage`** (blacklisted anyway; achievement testing stays `EF-094`'s
+    route). Set `ConsoleEnabled = true` directly (not `ConsoleSetEnabled`, which also shows the on-screen log —
+    `EF-097`). ⚠️ **Why `Platform.cheats` is now spelled out (02 sitting, 2026-09-13):** the owner's habitual console
+    route is `Platform.cheats = true` + `CheatToggleInfopanelCheats()`, a **session-global** enable that flips
+    `AreCheatsEnabled()` for the whole process. Retiring that paste is much of the point of this toolkit, so a panel
+    that sets it to make a button work has defeated its own purpose — and it makes the console gate's negative leg
+    read positive, i.e. non-discriminating. Force-open console uses `ShowConsole(true)` on the `ConsoleEnabled` arm
+    and nothing else.
 11. **⛔ TestKit only.** Nothing under the pack's `Code/`, `items.lua` or `metadata.lua` changes. No `version` edit
     anywhere. The TestKit is local-only by design and is never uploaded.
 12. **Behind a fingerprint, inherit; re-derive only what MOVED.** `EF-095`–`EF-099` are the premises; run

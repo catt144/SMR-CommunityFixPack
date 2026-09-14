@@ -20,7 +20,13 @@ re-fires Job B as its own payload (rule 4).
 1. **RunAll / run one probe** — `SMRTest.RunAll()` and a dropdown over `SMRTest.order`; verdicts coloured on the page
    from `SMRTest.last`; the probe-hygiene sweep line shown before the run button enables (WORKFLOW's hard gate).
 2. **Logger toggles** — every `SMRTest.Log.<name>` as a lit/unlit button (they already uninstall cleanly).
-3. **Log tail pane** — the ring buffer, errors highlighted, "errors since mark: N"; **Force-open console**
+3. ⛔ **Force-open console may ONLY call `ShowConsole(true)` on 01's `ConsoleEnabled` arm — it must NEVER set
+   `Platform.cheats` (rule 10), nor any other route that flips `AreCheatsEnabled()` process-wide.** Raised from the
+   02 sitting: that global paste is the owner's current workaround and retiring it is much of the point of the
+   toolkit; a button that re-introduces it defeats the tool and makes the console gate non-discriminating. If
+   `ShowConsole(true)` does not open the console on 01's arm, that is a STOP condition and a finding — never a
+   licence to widen the enable.
+   **Log tail pane** — the ring buffer, errors highlighted, "errors since mark: N"; **Force-open console**
    (`ShowConsole(true)`); **cls**.
 4. **Fingerprint** — one button and automatically on every MARK: game build (`LuaRevision`), pack `version` from the
    loaded `ModDef`, the live `fix pack present: N/N` read (`SMRFixPack.ListFixes()` — read how the pack exposes it in
