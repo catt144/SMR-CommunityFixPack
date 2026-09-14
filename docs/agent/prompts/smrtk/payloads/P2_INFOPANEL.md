@@ -19,6 +19,15 @@ Independent of P1/P3–P5.
    stub "not built" if it is not registered at load), **Pin A/B/C** (P3's pins — same).
 3. The section renders only when `SelectedObj` supports at least one action; the vanilla Cheats section is left
    exactly as it is (with the panel on, the owner should simply never need to open the Mod Manager).
+4. ⭐ **The HUD icon** (owner request from the 02 sitting, 2026-09-13: *"create an SMR icon that I can just click to
+   open it and click to close it"*). An **SMR button in the game's bottom HUD bar** that toggles the floating panel —
+   the same toggle the hotkey performs, so the panel becomes reachable without a key. It is yours because it is the
+   same vanilla-UI injection problem as job 1, and **03A's spike decides the route** (`reports/SMRTK_UI_HOOKS.md` §3);
+   build on that or its declared fallback, exactly as job 1. Feasibility read handed down, not a route:
+   `Data/XDef/HUD.lua` has named containers `idBottom` (:385) and `idLeft` (:390). Rule 9 binds hardest here —
+   appending a button when the HUD opens is fine, replacing a vanilla HUD method while idle is not. The toggle is
+   chrome, so its line follows the destination policy (03A's inbox item 1): logged, not printed to screen.
+   ⛔ If no idle-clean route exists, say so — the hotkey remains the way in and that is a **finding, not a failure**.
 
 ## Scope fence
 

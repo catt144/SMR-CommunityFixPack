@@ -185,6 +185,19 @@ needed before the tool is adopted. No achievement/account mutation was used.
 Details, departures, suggestions and gates:
 `agent/reports/SMRTK_SKELETON_PREDICTIONS.md`.
 
+**Your notes from inside the 02 sitting, 2026-09-13 — all routed, nothing owed from you.**
+Three were the same finding wearing different hats: the panel logs its own
+**chrome** (tab switches, panel moves, open/close, clear) to the screen, where it
+crowds out the evidence lines. The fix is a **destination policy** — every action
+still emits exactly one tagged line (requirement B untouched), but chrome goes to
+the log and the ring buffer only, never the screen. That also disposes of the
+clear-button line landing on the freshly cleared screen, with no ordering change
+needed. ⭐ The fourth is a **scope addition, accepted**: an **SMR icon in the
+bottom HUD bar** that opens and closes the panel without the hotkey. It is a third
+vanilla-UI injection problem, so it joins 03A's spike and P2 builds it; if no
+route exists that leaves vanilla unpatched while idle, the hotkey stays and that
+is a finding, not a failure. All four are in `03A_PAGES_FANOUT_codex.md`'s inbox.
+
 ### ✅ 2026-09-13 — 174 RULED: a fired one-off leaves the prompts map entirely
 <!-- ck:174 status:ruled owner:no -->
 

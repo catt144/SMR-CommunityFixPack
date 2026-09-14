@@ -95,3 +95,39 @@ report; outbox to 03B and 99; strike your row; push the pack repo.
   bootstrap through 03B; build P3/P4 delayed mutations on Fire/Run and preserve
   unknown readings. A clean fixture is a separate provisioning requirement.
   No payload content or infopanel technique was built ahead of your spike.
+
+- **From the orchestrator (`smr-bugfixpack-8f`), owner notes raised DURING the 02 sitting, 2026-09-13.**
+  Three display findings and one scope addition. All are requirements, not mechanisms — pick the shapes yourself
+  (README § "What is FIXED"), and say under DEPARTURES if you choose differently.
+
+  **(1) UI chrome must stop competing with evidence on screen.** The owner's console during step 1–8 is dominated by
+  `SMRTK_TAB` (six lines from cycling the tabs), `SMRTK_MOVE`, `SMRTK_PANEL` toggles and duplicate `SMRTK_SHORTCUT` /
+  `SMRTK_PANEL_RESTORE` pairs, while the lines that matter (`TAINT_READ`, `SCRATCH_DISCARDED`, `FLUSH`) scroll among
+  them. ⇒ **Requirement:** rule 7 stays exactly as it is — every action still emits exactly one tagged line — but each
+  action additionally declares **whether that line reaches the SCREEN**. Pure chrome (tab switch, panel move, panel
+  open/close, clear) is log-and-ring only; world changes and sitting evidence keep the screen. Requirement (B) is
+  untouched: the line still exists everywhere an agent reads. ⚠️ **Open mechanism question I could not settle:**
+  whether a line can reach the LOG FILE without the on-screen console (`print` goes `ConsolePrint → AddConsoleLog →`
+  both). If it cannot, ring-buffer-only is an acceptable destination for chrome — `Copy since mark` still carries it —
+  but say which you built.
+
+  **(2) This subsumes the CLEAR fix.** If chrome does not print to screen, `SMRTK_CLEAR` never lands on the freshly
+  cleared screen and no ordering change is needed. `smr-bugfixpack-51` verified the mechanism at source
+  (`70_SMRTK_Core.lua:194` logs after the pcall; `:258` is a bare `cls()`), so the "reorder inside the action" idea I
+  first proposed is impossible and logging before the callback for ALL actions would empty `before=`/`after=` on every
+  action. Its `log_first` per-action opt-in is the right **fallback** if the destination split proves impossible.
+
+  **(3) Possible duplicate lines — 51 owns the verdict, read its report first.** Two shapes were visible: two Log
+  calls at one game time with different ids (`SHORTCUT` 7/8, `PANEL_RESTORE` 9/10), and one id rendered twice
+  (`SCRATCH_DISCARDED` id=15). 51 has already **falsified** the doubly-registered-hotkey theory in play (`f6988c5` —
+  the panel toggles once per press). If its close-out shows the duplication is screen-only it rides with (1); if the
+  LOG FILE carries it, a restore hook firing twice per load is a behavioural item for you, and any later count of
+  toolkit actions is wrong until it is fixed.
+
+  **(4) SCOPE ADDITION — an SMR icon in the game's bottom HUD bar** (owner: *"create an SMR icon that I can just click
+  to open it and click to close it"*). This is a **third vanilla-UI injection problem of the same family as your
+  spike's two**, so add it to the spike and record it in `reports/SMRTK_UI_HOOKS.md` §3; the build belongs to **P2**,
+  which already owns vanilla-UI injection. Feasibility read only, not a route: `Data/XDef/HUD.lua` has named
+  containers `idBottom` (:385) and `idLeft` (:390). Same invariants as everything else — rule 9 above all: appending a
+  button when the HUD opens is fine, replacing a vanilla HUD method is not. ⛔ If no idle-clean route exists, the
+  hotkey remains the way in and that is a **finding, not a failure** — do not force it.
