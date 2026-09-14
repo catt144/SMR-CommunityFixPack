@@ -112,14 +112,13 @@ describe the 03A/03C build; sitting 08 checks the new pages in play.
 7. Agent: six prepared slots, Scratch, pins, notes, triggers and Screenshot + Mark.
 8. Saves: Save, Load and explicit Override load for slots A, B and C, with provenance.
 9. Kit: probes after the agent's preflight, loggers, console, snapshots and scalar field watches.
-10. Stamper: capture selected, rectangle or map; plan at a click; stamp; apply upgrades separately.
-11. Check the taint strip. CLEAN means no recorded cheat taint; TAINTED means
+10. Check the taint strip. CLEAN means no recorded cheat taint; TAINTED means
     the save is already tainted. Eligibility is a separate field and reads
     UNAVAILABLE:sandbox on this build. CLEAN does not prove achievements are eligible.
-12. Mark before a test action, check its result, then copy since the mark.
+11. Mark before a test action, check its result, then copy since the mark.
     Each toolkit record starts with [SMRTK] SMRTK_. The agent treats these as
     intentional test actions and never asks you to explain them.
-13. Press F9 to clear the on-screen log. The file log and toolkit ring remain.
+12. Press F9 to clear the on-screen log. The file log and toolkit ring remain.
 
 Selected offers the methods the current object supports. As built, its source
 coverage is 22 curated names plus 84 More names (72 Cheat, 12 AsyncCheat),
@@ -142,13 +141,8 @@ watches see scalar values at their cadence, miss intermediate changes and stop
 advancing while paused. Disarm quiet before using loggers from the console;
 the panel refuses conflicting quiet/DustDevils logger arms.
 
-Stamper is bounded v1 duplication. Use a new name, capture, and Plan at click
-first. Planning places zero objects. Resume before stamping; partial aborts can
-leave placed objects. Inspect dome membership and grid connections afterwards.
-Passages, suspended grids, switches and special placement families are named
-skips; a map capture can refuse its size cap. Apply captured upgrades is a
-separate action and may unlock upgrades colony-wide. Fill storages acts across
-maps; Add 10 colonists and Funding +500M are separate follow-ups.
+Fill storages acts across maps; Add 10 colonists and Funding +500M are
+separate follow-ups.
 
 The panel cannot clear an achievement or access account.dat (`EF-094`), run
 code from a string, or read vanilla's eligibility verdict (`EF-096`). An agent
