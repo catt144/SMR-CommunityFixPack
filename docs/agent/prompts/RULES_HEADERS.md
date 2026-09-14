@@ -89,16 +89,39 @@ proposal, which you may depart from with a reason:
 
 - placed immediately after the doc's H1, before any prose;
 - machine-findable by those two literal markers, so doccheck can check it;
-- **byte-capped** — proposed **1,536 B warn / 2,048 B hard**. ⚠️ The cap is the load-bearing part:
-  without it this becomes the original problem one level down. ⛔ The numbers are a proposal,
-  not a ruling — carry them to the gate.
+- **byte-capped** — ✅ **RULED 2026-09-14: 1,024 B warn / 2,048 B hard** (superseding the 1,536 proposed here, which was an arbitrary number the author invented; 14 of the 16 measured headers are under 800 B and one missed 1,536 by a single byte). ⚠️ The cap is the load-bearing part:
+  without it this becomes the original problem one level down.
 
 ⛔ **Only docs that actually constrain editing get a header.** A ceremonial empty block on every
 file teaches agents the header is noise, which is worse than no header — that is exactly how the
-`ck-` stub pointer failed on 2026-09-14 (present, obeyed-looking, and non-discriminating). Bring
-the proposed doc list to the gate with, per doc, the reason it qualifies or does not.
+`ck-` stub pointer failed on 2026-09-14 (present, obeyed-looking, and non-discriminating). The doc list is
+SETTLED by the all-clear below — seven docs, named there.
 
-### ⛔ OWNER GATE — STOP HERE AND ASK, before any rule moves
+### ✅ OWNER ALL-CLEAR GRANTED 2026-09-14 — with three amendments, checklist 179
+
+⛔ **The gate below is DISCHARGED. Read these amendments before Stage C; they override the
+text above where they differ.**
+
+1. ⭐ **SEVEN headers, not sixteen** — and **delete the 9 perma restatements** instead.
+   Measured: `prompts/README.md:5` already states *"never `git rm`; update in place"* ONCE for
+   all eleven perma prompts, and **seven of the nine restate it internally** (10 live copies).
+   Per-doc headers there would make nine permanent copies of one rule — the failure this brief
+   exists to end. The seven that survive are the docs carrying a genuinely unique rule:
+   `PLAYTEST_CHECKLIST` · `PLAYTEST_HELP` · `UPLOAD_WORKFLOW` · `FIX_POLICY` · `STATE.md` ·
+   `perma/HANDOFF_ORCHESTRATOR` · `perma/RELEASE_OUTBOX`.
+2. ✅ **Cap 1,024 warn / 2,048 hard** (see §B).
+3. ⛔ **Re-deriving the STATE arithmetic before writing is a STOP CONDITION, not a note.** The
+   banked figure (12,331 → 12,274 B, "14 B under the permanent warn") went stale **within two
+   hours** — STATE was 12,504 B the same evening, which puts the post-change file **+159 B OVER**
+   the permanent warn. If it does not land where re-derived, **stop and report**.
+
+⚠️ **Also ruled in checklist 179, and in scope for whoever resumes this:** `CLAUDE.md` gets an
+explicit rules list including *"Editing a doc? Invoke the doc-editing skill first."*, and
+**`WORKFLOW.md`'s 10 global rules move into it** — this brief does not currently move them, and
+they bind every session while sitting in a doc read only per task. **`STATE.md` goes to zero
+rules.** ⛔ The 09-13 *"converted into a **gate**"* wording is **DECLINED** — leave it alone.
+
+### ⛔ OWNER GATE — DISCHARGED 2026-09-14 (kept for the record)
 
 **Moving a rule changes where it binds, and a rule that silently stops binding is the worst
 outcome this job can produce.** A and B are analysis and land as a report; nothing in the doc
