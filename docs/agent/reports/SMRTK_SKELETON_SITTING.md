@@ -17,7 +17,8 @@ vendor scores the predictions. Pack HEAD `320d359`; TestKit HEAD `5d8d3b3`.
 - [x] Fixture survey (corrected after the owner named the real saves) + backup of both.
 - [x] Decoded both fixtures' savegame bodies; `CheatsUsed` read false against a positive control.
 - [x] Step 0 COMPLETE: clean read scored, baseline saved and verified on disk, vanilla control fired RED (`entries=1`).
-- [ ] Owner sitting, steps 1–8.
+- [x] Step 1 COMPLETE: fresh clean boot, PreLoadGame arm, hotkey both ways, `used=false`, scratch discarded.
+- [ ] Owner sitting, steps 2–8.
 - [ ] Prediction-by-prediction scoring; verdict; archived log path.
 - [ ] Outbox to 03A and 99; ck175 in plain language; strike the row; `git rm` 02.
 
@@ -369,6 +370,40 @@ are dispatched by `self[…](self)` directly (`Infopanel.lua:45-47`), bypassing
 P2 re-implements the second group through leaf calls; the first group it can
 route to the vanilla method unchanged, because there is no taint to avoid.
 
+
+## Step 1 — RESULT: fresh boot, no hand-enabled cheats, panel and taint correct
+
+Boot `Mars.exe-20260913-20.40.33`. `Platform.cheats` never set, Mod Editor never
+opened, no vanilla cheat button touched.
+
+| line | predicted (01) | |
+|---|---|---|
+| `SMRTK_CONSOLE_ARM enabled=true hook=PreLoadGame` (id=6) | same, before load completion | ✅ exact |
+| `SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11` ×6 | a registration | ✅ present (see below) |
+| `SMRTK_PANEL_RESTORE open=true tab=Sitting` | panel returns | ✅ restored unprompted after the load |
+| `SMRTK_PANEL action=panel_toggle open=false status=OK tab=Sitting` (id=12) | hotkey hides it | ✅ |
+| `SMRTK_PANEL action=panel_toggle open=true status=OK tab=Sitting` (id=13, +869 ms) | hotkey returns it | ✅ |
+| `SMRTK_TAINT_READ action=taint_read status=OK used=false` (id=14) | `used=false` | ✅ exact — the taint died with the discarded branch |
+| `SMRTK_SCRATCH_DISCARDED name=SMRTK_SCRATCH_TAINTED` (id=15) | records the owner's act | ✅ posted only after deletion was verified on disk |
+
+⭐ **The duplicated-`SHORTCUT` suspicion is now falsified in play, not just at
+source.** The pre-flight flagged that repeated `SMRTK_SHORTCUT` lines might mean
+a doubly-registered hotkey that would toggle twice per press and appear dead.
+This boot logged **six** such lines, and one keypress produced **exactly one**
+`panel_toggle`, the next keypress exactly one more. Six rebuilds against one
+singleton host, one live action — as `XShortcuts.lua:67-72`'s
+`table.clear(XShortcutsTarget.actions)` predicted.
+
+⛔ **What step 1 does NOT establish.** `console=true` appears on the shortcut
+line from the **first** boot registration onward, because the old TestKit's
+bootstrap already created `DE_Console` (01's disagreement 2). Enter working here
+shows the console is reachable; it does not attribute that to our arm. P2 is
+undecided until step 2.
+
+⚠️ `SMRTK_SCRATCH_TAINTED` confirmed absent from the saves folder before the
+discard line was posted. `EF-051` note: Steam Cloud has restored deleted saves
+before, so absence now is not a permanent guarantee — if it reappears it must be
+deleted again and never loaded.
 
 ## Outbox items raised during the sitting (for 03A / 99)
 
