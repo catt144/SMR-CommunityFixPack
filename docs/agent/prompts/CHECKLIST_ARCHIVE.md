@@ -66,6 +66,17 @@ to group 2 below — do not invent a word for it.**
 - prove the archive gained exactly the moved bytes and nothing else;
 - prove the tool **refuses** on a dirty tree and on a RED doccheck (break each on the copy).
 
+⛔ **Close the load→write race before either move.** `main()` reads the checklist at
+line 320 and writes it at line 508; `git_is_clean()` sits at line 489, between them. It
+catches a peer's *uncommitted* edit, but a peer **commit** landing in that window leaves
+the tree clean again and lets a write computed from stale bytes overwrite it. Measured
+window: well under the run's 1.55 s total, since doccheck's ~1.3 s happens *before* the
+load — call it 0.2–0.3 s. Small, but `PLAYTEST_CHECKLIST.md` is the hottest file in the
+tree and a peer filed `ck175` into it today. **Fix: `sha256` the checklist at load, re-hash
+immediately before `atomic_write`, and abort if it changed.** Falsify it — mutate the file
+mid-run on a copy and require the abort. Cheap, and it makes the tool safe to run without
+owning the tree.
+
 Then add the one thing the stub lacks: the header and marker stay, but **nothing points at
 where the body went**. Add a single line to the stub naming `archive/PLAYTEST_ARCHIVE.md`
 and the `ck` label to grep for. It is covered by the same falsification. ⛔ If adding it
