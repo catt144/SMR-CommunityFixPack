@@ -1,6 +1,6 @@
 ---
 name: smr-session-close
-description: Close a session without losing anything — dump the session to a scratch doc, trim it against written criteria, route whatever has no home, and update the handoff with a measured delta. Use when the owner says it is time to hand off, time to close, or time to get on fresh context, or when context is running low.
+description: Close a session without losing anything — dump the session to a scratch doc, trim it against written criteria, route whatever has no home, and — only if this seat owns a handoff doc — update it with a measured delta. Use when the owner says it is time to hand off, time to close, or time to get on fresh context, or when context is running low.
 ---
 
 # Session close — dump, then trim
@@ -9,14 +9,18 @@ description: Close a session without losing anything — dump the session to a s
 first and silently. **Dump first, then judge what is on the page**: that turns every cut into a
 decision instead of an omission.
 
-## Mode
+## Mode — which sections you run
 
-- **close** — any session. Route what is homeless; verify nothing is stranded.
-  ✅ **A session with no finding needs no ceremony — say so in one line and stop.**
-- **handoff** — the session owns a handoff doc. Do `close`, then §3.
+| mode | when | sections |
+|---|---|---|
+| **close** | **the common case.** Any session ending, with or without a handoff doc. | §1 · §2 · §4 |
+| **handoff** | only when this seat owns a handoff doc a successor will be fired from. | §1 · §2 · **§3** · §4 |
 
-⛔ **Both halves are THIS session's job.** A successor cannot trim — it cannot tell what you
-omitted deliberately from what you forgot, and cutting is a one-way door.
+✅ **Most sessions never need §3.** A session with no finding needs no ceremony at all — say so
+in one line and stop.
+
+⛔ **Dump and trim are both THIS session's job.** A successor cannot trim — it cannot tell what
+you omitted deliberately from what you forgot, and cutting is a one-way door.
 
 ## 1 · Dump — evidence first, memory second
 
@@ -53,7 +57,9 @@ traps that already bit, **with the receipt** · routing that cannot be inferred.
 ⭐ **If you need the why to know what a decision MEANS, it is recorded badly — fix the
 statement, never append an argument.**
 
-## 3 · Handoff mode — the ratchet
+## 3 · Handoff mode ONLY — the ratchet, and the launch line
+
+⛔ **Skip this section entirely in `close` mode.**
 
 ⛔ **Expect net-flat or net-negative** — you home things elsewhere as you add. **Growth is the
 exception and needs one line of justification.**
@@ -63,14 +69,8 @@ exception and needs one line of justification.**
 - Trim **per section**: does this still earn its place? Rewriting instead of trimming is how a
   trim pass *grows* a file.
 
-## 4 · Finish — and hand over the launch line
-
-Say what was routed and where, then state **"nothing load-bearing exists only in this
-conversation"** — a checked claim listing the evidence, ⛔ never a ritual phrase. Report the
-§3 byte delta in the same message.
-
-⭐ **`handoff` mode ends by giving the owner the launch line, fenced and copy-pasteable** —
-they must not have to go find it:
+⭐ **Then give the owner the launch line, fenced and copy-pasteable** — they must not have to go
+find it:
 
 ```
 task C:\Dev\SMR-BugFixPack\.claude\HANDOFF_PROMPT.md
@@ -79,3 +79,10 @@ task C:\Dev\SMR-BugFixPack\.claude\HANDOFF_PROMPT.md
 ⛔ Read it from the handoff's own `Fire with:` header, never from memory — another seat has a
 different path. **No handoff doc yet?** Create one in `.claude/` and make its first line its
 own `Fire with:`. **A handoff nobody can launch is not a handoff.**
+
+## 4 · Finish — every mode
+
+Say what was routed and where, then state **"nothing load-bearing exists only in this
+conversation"** — a checked claim listing the evidence, ⛔ never a ritual phrase.
+In `handoff` mode, give §3's byte delta in the same message so the owner can see the trim
+happened.
