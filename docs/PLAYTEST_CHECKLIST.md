@@ -159,12 +159,25 @@ to `CO_RUNS`. ⇒ **~75% of a 62,709 B doc, decided** — on the FIRST of four m
 attended audit has run, with three still un-audited. ⛔ Counting a session in bytes removed from
 the tree measures execution and ignores adjudication, which is the part that was hard.
 
-⚠️ **Also still open from the same session (asked, not yet ruled):** does `WORKFLOW`'s rule 4
-repoint to `metadata.lua` as the per-fix player-text target, or **retire**? (Recommended: retire —
-`WORKFLOW:609` already covers the release-time half, and a per-fix duty on a field nobody reads
-between releases is how it rotted.) And `WORKFLOW:664`'s release gate still says the uninstall
-procedure *"is published in MOD_DESCRIPTION"* — that file is frozen in the archive, and the
-procedure is on no live player surface.
+✅ **RULED 2026-09-14 — both `WORKFLOW` questions, and the audit's timing. ⛔ NOT YET EXECUTED:**
+the owner also ruled *"stay out of the tree"* while smrtk sitting 08 runs, so these are recorded
+here and the `WORKFLOW` edits are deferred until the sitting lands.
+
+- **Rule 4 → RETIRE OUTRIGHT.** No successor, no repoint. `perma/PUBLIC_SURFACE_SWEEP.md` already
+  carries the identical duty — *"run whenever a fix is added, retired, or materially re-scoped…
+  this one covers what the words say"* (2026-08-24, written against surfaces that exist).
+  ⭐ Rule 4 and that sweep are **the same duty under different names, in different docs, naming
+  different artifacts** — a live worked example of the semantic-duplicate class this item's audit
+  is being built to find, and one a string match would never have caught.
+- **`WORKFLOW:664` → RETIRE THE BLOCKER**, recording that it lapsed with the rescue tool (item 17,
+  2026-08-14). The uninstall procedure is on no live surface and ten versions shipped past it;
+  practical harm is low because the card already states the pack writes almost nothing to saves
+  and that removing it simply lets the original bugs return. ⛔ Retiring the gate is the point — a
+  release blocker that ten uploads passed unsatisfied is not a gate.
+- **The rules audit runs AFTER SMRTK and BEFORE `RULES_HEADERS` refires.** Its tagging answers
+  placement as a side effect, so it makes the header pass cheaper and may cut the seven headers
+  down; running it first avoids doing the same reading twice. ⛔ It never touches the tree during
+  a sitting.
 
 ### 2026-09-14 — 181: the monoliths get automated first, then YOU AND I audit all of them together
 
