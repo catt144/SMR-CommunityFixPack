@@ -1,83 +1,529 @@
-# RULES_HEADERS — partial inventory and stop report
+# RULES_HEADERS — inventory and owner-gate proposal
 
-SOURCE / INFERRED audit, 2026-09-14. **PARTIAL; not a migration-ready owner-gate proposal.** The commissioned task's section 6 says to stop on conflicting rules. X1 below was encountered during the main-doc read. No rule, header, kernel line, checker or prompt lifecycle has changed.
+Analysis only, 2026-09-14. No binding rule, header, kernel line, checker or prompt lifecycle has changed. The owner authorized finishing the inventory with X1 unresolved after the earlier partial stop. Migration is still awaiting explicit approval.
 
-The owner permitted reading the initially dirty working copies. Those edits subsequently landed in peer commits `f78d7a8` and `72ed20e`; this report uses the now-clean committed snapshots below. Initial preflight was at `25acafe`, rather than the task's older authored anchor. SOURCE: executed agent Codex (transcript identity); the exposed transcript does not identify a precise serving-model identifier. None is inferred. No subagents were used.
+SOURCE anchor: `86c639994044ed07b29fd869013f4b7cf286a131`. All inventoried source bytes still match this anchor. Packaging HEAD: `86c639994044ed07b29fd869013f4b7cf286a131`. Executed agent: Codex, from transcript identity; a precise serving-model identifier is not exposed and is not inferred. No subagents used.
 
+The full [inventory attachment](RULES_HEADERS_INVENTORY.json) contains every counted excerpt, file/line, source SHA-256, heading context, exclusive class, duplicate pair, dead proof, exact candidate header and simulated STATE. Quotes preserve working-source bytes; with core.autocrlf=true, anchored git comparisons normalize only CRLF to LF. Both blob and working hashes are recorded. Future moves must preserve the exact excerpt in the working tree and exact text after git line-ending normalization. Recheck source inheritance with `git diff --stat 86c639994044ed07b29fd869013f4b7cf286a131..HEAD -- CLAUDE.md docs/README.md docs/agent/STATE.md docs/agent/WORKFLOW.md docs/agent/FIX_POLICY.md docs/PLAYTEST_HELP.md docs/UPLOAD_WORKFLOW.md docs/PLAYTEST_CHECKLIST.md docs/agent/prompts/perma tools/doccheck.py`; unchanged paths need no re-read.
 
-MEASURED continuation note: packaging HEAD 2bbdbd315a74a1a5a7868fbbd883fde2701d5653. Only STATE moved after the source anchor (peer commit 2bbdbd3). Source excerpts and line numbers remain at 72ed20e; current STATE arithmetic is separately recorded below.
+## Coverage and counting
 
-## Progress
+Reviewed the scoped Markdown documents in full and the checklist preamble only (lines 1–44, before the decisions H2). tools/doccheck.py was reviewed for the byte-cap model and owner-only temporary-cap guard. Archive bodies, one-offs, chain payloads and checklist decision bodies were excluded. Nothing in the open marker-enforcement decision was adjudicated.
 
-- [x] Anchor: pull, log, status, doccheck GREEN; owner allowed read-only analysis of the dirty working copies.
+Verbatim imperative occurrence or inseparable same-scope rule group; supporting context in quote is not another rule. Counts are not unique policies or atomic predicates. Records/measurements/pointers/examples excluded. Duplicate and dead clauses separated when adjacent live duties differ.
 
-- [ ] Complete inventory CLAUDE.md — read in full; selected rules recorded, completeness not certified.
-- [ ] Complete inventory docs/README.md — read in full; selected rules recorded, completeness not certified.
-- [ ] Complete inventory docs/agent/STATE.md — read in full; selected rules recorded, completeness not certified.
-- [ ] Complete inventory docs/PLAYTEST_CHECKLIST.md — preamble read only, before decisions H2; selected editing rules recorded.
-- [ ] Complete inventory docs/agent/WORKFLOW.md — sampled inventory; exact source ranges in appendix.
-- [ ] Complete inventory docs/agent/FIX_POLICY.md.
-- [ ] Complete inventory docs/PLAYTEST_HELP.md.
-- [ ] Complete inventory docs/UPLOAD_WORKFLOW.md.
-- [ ] Complete inventory docs/agent/prompts/perma/CO_RUNS.md.
-- [ ] Complete inventory docs/agent/prompts/perma/COMBINED_SITTING.md.
-- [ ] Complete inventory docs/agent/prompts/perma/DISPATCH.md.
-- [ ] Complete inventory docs/agent/prompts/perma/DRONE_PROJECT_PROMPT.md.
-- [ ] Complete inventory docs/agent/prompts/perma/GENERAL_USE_PROMPT.md.
-- [ ] Complete inventory docs/agent/prompts/perma/HANDOFF_ORCHESTRATOR.md.
-- [ ] Complete inventory docs/agent/prompts/perma/LINUX_DISPATCH.md.
-- [ ] Complete inventory docs/agent/prompts/perma/POST_UPLOAD_CLOSE.md.
-- [ ] Complete inventory docs/agent/prompts/perma/PUBLIC_SURFACE_SWEEP.md.
-- [ ] Complete inventory docs/agent/prompts/perma/RELEASE.md.
-- [ ] Complete inventory docs/agent/prompts/perma/RELEASE_OUTBOX.md.
-- [ ] Complete inventory docs/agent/prompts/perma/SITE_AUDIT.md.
-- [ ] Complete inventory docs/agent/prompts/perma/SMRTK_SLOTS.md.
-- [ ] Complete inventory docs/agent/prompts/perma/STATE_EVICTION.md.
-- [x] Classify recorded members and reconcile the partial counts against their IDs.
-- [ ] Complete redundancy pass — R1–R5 established within sampled boundary.
-- [ ] Complete dead-rule pass — no confirmed dead occurrence; X1 unresolved.
-- [ ] Complete header spec and per-doc eligibility list — provisional below.
-- [x] Package and verify this stop report: 80 member IDs unique, class/doc tables reconciled, every excerpt byte-exact in the anchored git blob; doccheck GREEN.
-- [ ] **In progress (blocked):** owner direction to continue analysis with X1 unresolved.
-- [ ] **Blocked:** owner migration gate; remaining inventory and binding decisions pending.
-- [ ] Migrate CLAUDE.md — conditional commit-and-verify unit; blocked, eligibility not asserted.
-- [ ] Migrate docs/README.md — conditional commit-and-verify unit; blocked, eligibility not asserted.
-- [ ] Migrate docs/agent/STATE.md — conditional commit-and-verify unit; blocked, eligibility not asserted.
-- [ ] Migrate docs/PLAYTEST_CHECKLIST.md — conditional commit-and-verify unit; blocked, eligibility not asserted.
-- [ ] Migrate docs/agent/WORKFLOW.md — conditional commit-and-verify unit; blocked, eligibility not asserted.
-- [ ] Migrate docs/agent/FIX_POLICY.md — conditional commit-and-verify unit; blocked, eligibility not asserted.
-- [ ] Migrate docs/PLAYTEST_HELP.md — conditional commit-and-verify unit; blocked, eligibility not asserted.
-- [ ] Migrate docs/UPLOAD_WORKFLOW.md — conditional commit-and-verify unit; blocked, eligibility not asserted.
-- [ ] Migrate docs/agent/prompts/perma/CO_RUNS.md — conditional commit-and-verify unit; blocked, eligibility not asserted.
-- [ ] Migrate docs/agent/prompts/perma/COMBINED_SITTING.md — conditional commit-and-verify unit; blocked, eligibility not asserted.
-- [ ] Migrate docs/agent/prompts/perma/DISPATCH.md — conditional commit-and-verify unit; blocked, eligibility not asserted.
-- [ ] Migrate docs/agent/prompts/perma/DRONE_PROJECT_PROMPT.md — conditional commit-and-verify unit; blocked, eligibility not asserted.
-- [ ] Migrate docs/agent/prompts/perma/GENERAL_USE_PROMPT.md — conditional commit-and-verify unit; blocked, eligibility not asserted.
-- [ ] Migrate docs/agent/prompts/perma/HANDOFF_ORCHESTRATOR.md — conditional commit-and-verify unit; blocked, eligibility not asserted.
-- [ ] Migrate docs/agent/prompts/perma/LINUX_DISPATCH.md — conditional commit-and-verify unit; blocked, eligibility not asserted.
-- [ ] Migrate docs/agent/prompts/perma/POST_UPLOAD_CLOSE.md — conditional commit-and-verify unit; blocked, eligibility not asserted.
-- [ ] Migrate docs/agent/prompts/perma/PUBLIC_SURFACE_SWEEP.md — conditional commit-and-verify unit; blocked, eligibility not asserted.
-- [ ] Migrate docs/agent/prompts/perma/RELEASE.md — conditional commit-and-verify unit; blocked, eligibility not asserted.
-- [ ] Migrate docs/agent/prompts/perma/RELEASE_OUTBOX.md — conditional commit-and-verify unit; blocked, eligibility not asserted.
-- [ ] Migrate docs/agent/prompts/perma/SITE_AUDIT.md — conditional commit-and-verify unit; blocked, eligibility not asserted.
-- [ ] Migrate docs/agent/prompts/perma/SMRTK_SLOTS.md — conditional commit-and-verify unit; blocked, eligibility not asserted.
-- [ ] Migrate docs/agent/prompts/perma/STATE_EVICTION.md — conditional commit-and-verify unit; blocked, eligibility not asserted.
-- [ ] Land single new kernel line — blocked.
-- [ ] Implement RULES HEADERS checker, watch broken-copy failures and restore by hash — blocked.
-- [ ] Final report and per-source-commit verification — blocked.
-- [ ] Consume RULES_HEADERS prompt and map row together — blocked until the task is completed.
+Declarative content contracts such as reference-only/work-list-only constrain edits and are counted. Menu descriptions, live status, fixture predictions, observed costs, dated rulings and bare routing pointers are not new rules. Operational instructions inside procedures are task-local. This inventory is a manual scope judgment, not a grep of warning glyphs. A quotation can preserve explanatory prose without counting that prose as another imperative.
 
-## X1 — live description editing conflicts with the archive prohibition
+The definitions matter: editing this prompt and executing its task are different scopes. PUBLIC_SURFACE_SWEEP §2 says “this file” about STORE_CARD_LIVE, not about PUBLIC_SURFACE_SWEEP. FIX_POLICY §5 expressly says kept, not deleted; opt-ins moving is not grounds to delete it. A conditional cloud hold can reapply and is not called dead merely because currently lifted.
 
-SOURCE: WORKFLOW affirmatively requires editing MOD_DESCRIPTION. The map translates that name to its frozen archive file; the entry file forbids archive edits. This report quotes both, resolves neither and proposes no destination wording.
+## Counts — derived from attachment members
 
-`W12` — `docs/agent/WORKFLOW.md:153-155`
+Measurement: `python -X utf8 C:/Users/stkot/AppData/Local/Temp/rh_finish.py`, anchored at `86c639994044ed07b29fd869013f4b7cf286a131`; filter is the explicit scoped manual selections stored in attachment.rules. Portable recheck: load the attachment, Counter each member.classification, and Counter by member.file; total must equal len(rules). Source hashes and exact excerpt membership are separately verified against anchored git blobs.
+
+| Class | Occurrences |
+|---|---:|
+| doc-local | 30 |
+| task-local | 780 |
+| global | 16 |
+| redundant | 20 |
+| dead | 6 |
+| **Total** | **852** |
+
+| Document | Doc-local | Task-local | Global | Redundant | Dead | Total |
+|---|---:|---:|---:|---:|---:|---:|
+| CLAUDE.md | 0 | 4 | 2 | 2 | 0 | 8 |
+| docs/README.md | 0 | 13 | 0 | 1 | 0 | 14 |
+| docs/agent/STATE.md | 4 | 22 | 1 | 3 | 0 | 30 |
+| docs/PLAYTEST_CHECKLIST.md | 2 | 0 | 0 | 0 | 0 | 2 |
+| docs/agent/WORKFLOW.md | 0 | 123 | 10 | 0 | 0 | 133 |
+| docs/agent/FIX_POLICY.md | 1 | 100 | 0 | 0 | 0 | 101 |
+| docs/PLAYTEST_HELP.md | 1 | 71 | 0 | 2 | 0 | 74 |
+| docs/UPLOAD_WORKFLOW.md | 2 | 35 | 0 | 0 | 0 | 37 |
+| docs/agent/prompts/perma/CO_RUNS.md | 0 | 51 | 0 | 0 | 0 | 51 |
+| docs/agent/prompts/perma/COMBINED_SITTING.md | 2 | 32 | 0 | 1 | 1 | 36 |
+| docs/agent/prompts/perma/DISPATCH.md | 1 | 26 | 0 | 2 | 0 | 29 |
+| docs/agent/prompts/perma/DRONE_PROJECT_PROMPT.md | 1 | 45 | 0 | 0 | 0 | 46 |
+| docs/agent/prompts/perma/GENERAL_USE_PROMPT.md | 1 | 14 | 0 | 1 | 0 | 16 |
+| docs/agent/prompts/perma/HANDOFF_ORCHESTRATOR.md | 6 | 30 | 3 | 5 | 1 | 45 |
+| docs/agent/prompts/perma/LINUX_DISPATCH.md | 2 | 27 | 0 | 1 | 0 | 30 |
+| docs/agent/prompts/perma/POST_UPLOAD_CLOSE.md | 1 | 21 | 0 | 0 | 3 | 25 |
+| docs/agent/prompts/perma/PUBLIC_SURFACE_SWEEP.md | 0 | 65 | 0 | 0 | 1 | 66 |
+| docs/agent/prompts/perma/RELEASE.md | 1 | 31 | 0 | 1 | 0 | 33 |
+| docs/agent/prompts/perma/RELEASE_OUTBOX.md | 3 | 1 | 0 | 0 | 0 | 4 |
+| docs/agent/prompts/perma/SITE_AUDIT.md | 0 | 35 | 0 | 0 | 0 | 35 |
+| docs/agent/prompts/perma/SMRTK_SLOTS.md | 1 | 11 | 0 | 0 | 0 | 12 |
+| docs/agent/prompts/perma/STATE_EVICTION.md | 1 | 23 | 0 | 1 | 0 | 25 |
+
+## Redundancy — quoted pairs and proposed homes
+
+Only the quoted overlapping duty is proposed for removal/pointer replacement. Extra obligations in the source paragraph remain. Canonical occurrences retain their substantive class. Generic verification rails are not claimed duplicates of particular API instruments.
+
+### R1 · Mandatory STATE bootstrap
+
+Proposed canonical home: CLAUDE.md bootstrap, mirrored AGENTS.md. Keep the entry bootstrap; a rule inside STATE cannot discover itself. The map READ FIRST label and layout pointers are not extra occurrences.
+
+`CLAUDE.md:3` — CLAUDE.md:5–6
+
+> **Mandatory read, every session: `docs/agent/STATE.md`** —
+> build state, open gates, active holds.
+
+`docs/agent/prompts/perma/DISPATCH.md:32` — docs/agent/prompts/perma/DISPATCH.md:32–33
+
+> 2. **Read `docs/agent/STATE.md`** — the mandatory current-state kernel (gates,
+>    holds, counts, the active line of work). Every session reads it.
+
+### R2 · Doccheck GREEN before document commits
+
+Proposed canonical home: WORKFLOW.md rule 7. The source-generated-file procedure is separate. Task-specific gate sequences remain procedures.
+
+`docs/agent/WORKFLOW.md:103` — docs/agent/WORKFLOW.md:103–104
+
+> 7. **Run `python tools/doccheck.py` before committing doc changes** — red
+>    blocks. One-time setup: `git config core.hooksPath tools/hooks`.
+
+`CLAUDE.md:19` — CLAUDE.md:19–20
+
+> Before committing doc changes run `python tools/doccheck.py`; red blocks. Set up
+> once: `git config core.hooksPath tools/hooks`.
+
+### R3 · Owner decisions mirrored to checklist
+
+Proposed canonical home: WORKFLOW.md rule 5; existing checklist/register pointers remain. Canonical adds marker/update/regeneration duties; only the common mirroring clause is redundant.
+
+`docs/agent/WORKFLOW.md:54` — docs/agent/WORKFLOW.md:54–62
+
+> 5. **Owner-decision mirroring (R10).** Every item needing the owner's call is
+>    mirrored into `docs/PLAYTEST_CHECKLIST.md` → "Decisions waiting on you"
+>    (one line + pointer), and struck the moment it is decided. **An owner
+>    decision recorded only in an entry or a report is not considered asked.**
+>    **Changing an item's status ALSO means updating its marker.** Update the
+>    checklist's `<!-- ck:N status:... owner:... -->` marker in the same edit,
+>    including whether an action is still owed by the owner. Regenerate the
+>    owner register after editing its source; for the contained regeneration
+>    route, see "Writing in a shared tree" below.
+
+`CLAUDE.md:23-decision` — CLAUDE.md:23–25
+
+> **Owner decisions go in
+> `docs/PLAYTEST_CHECKLIST.md` → "Decisions waiting on you", never only in agent
+> docs.**
+
+`docs/README.md:95` — docs/README.md:95–96
+
+> - A **decision the owner must make** → `PLAYTEST_CHECKLIST.md` →
+>   "Decisions waiting on you". Never only in an agent doc.
+
+`docs/agent/prompts/perma/DISPATCH.md:127` — docs/agent/prompts/perma/DISPATCH.md:127–127
+
+> - A **decision the owner must make** → the checklist, never only an agent doc.
+
+`docs/agent/prompts/perma/HANDOFF_ORCHESTRATOR.md:229` — docs/agent/prompts/perma/HANDOFF_ORCHESTRATOR.md:229–230
+
+> - **Owner decisions go in `docs/PLAYTEST_CHECKLIST.md` → "Decisions waiting on you"**, never only in agent
+>   docs; `docs/WAITING_ON_YOU.md` is the generated view of them (§2a).
+
+`docs/agent/prompts/perma/STATE_EVICTION.md:105` — docs/agent/prompts/perma/STATE_EVICTION.md:105–105
+
+> - Owner-facing asks always live in the checklist, never only here or in STATE.
+
+### R4 · Handoff retirement requires the owner, even when list empty
+
+Proposed canonical home: HANDOFF_ORCHESTRATOR.md rules header. The reminder repeats 11+16; do not weaken the empty-list ask trigger or owner-only retirement.
+
+`docs/agent/prompts/perma/HANDOFF_ORCHESTRATOR.md:16` — docs/agent/prompts/perma/HANDOFF_ORCHESTRATOR.md:16–18
+
+> ✅ **What a session MAY do:** when §2's list is genuinely empty — every loose end closed or
+> homed elsewhere — **ASK the owner whether to retire it**, in one line, and carry on. Their
+> answer is the only thing that closes this file.
+
+`docs/agent/prompts/perma/HANDOFF_ORCHESTRATOR.md:20` — docs/agent/prompts/perma/HANDOFF_ORCHESTRATOR.md:20–22
+
+> ⇒ An empty list is a **prompt to ask**, never a licence to act. ⛔ Do not treat an
+> inherited "removal condition MET" note as authority; the condition being met is exactly
+> when the question gets asked, not when the deletion happens.
+
+### R5 · Restore editor-stripped comments before committing metadata/items
+
+Proposed canonical home: RELEASE.md §4 (POST_UPLOAD_CLOSE implementation). The check and prohibition match; historical counts do not become a policy.
+
+`docs/agent/prompts/perma/RELEASE.md:134` — docs/agent/prompts/perma/RELEASE.md:134–137
+
+> ⇒ **Until this step has run, NO session may commit `metadata.lua` or `items.lua` for any
+> other reason.** A commit that names either file takes its working-tree content, so an
+> unrelated edit would silently bury ~400 lines of load-bearing commentary. Check with
+> `grep -c '^\s*--' metadata.lua items.lua` — **0 means the restore is still owed.**
+
+`docs/agent/prompts/perma/HANDOFF_ORCHESTRATOR.md:193` — docs/agent/prompts/perma/HANDOFF_ORCHESTRATOR.md:193–196
+
+> 3. ⛔ **After an upload, the Mod Editor writeback STRIPS EVERY COMMENT from `metadata.lua` and `items.lua`**
+>    (v10: 319 → 0 and 51 → 0). ⛔ **No session may commit either file until `POST_UPLOAD_CLOSE.md` has restored
+>    them** — a commit naming the path takes its working-tree content and buries ~400 lines. Check:
+>    `grep -c '^\s*--' metadata.lua items.lua`; **0 means the restore is owed**.
+
+### R6 · Release spans upload and close-out
+
+Proposed canonical home: RELEASE.md opening task contract. Retain the actual §2 HOLD/continuation marker and §4/§5 steps; they implement the policy.
+
+`docs/agent/prompts/perma/RELEASE.md:14` — docs/agent/prompts/perma/RELEASE.md:14–20
+
+> > ⭐⭐ **THIS PROMPT SPANS THE OWNER'S UPLOAD — it does not end at the handoff**
+> > (owner ruling, 2026-09-13). §1 writes the words, **§2 HOLDS and waits for the
+> > owner**, then §4–§5 close out: ids written back, `metadata.lua`'s stripped
+> > comments restored, counts re-emitted, STATE updated, **outbox cleared**. The
+> > close-out is **part of this prompt's job**, never a separate errand the owner has
+> > to remember to fire. ⚠️ A different session usually resumes at §4 — §2 leaves the
+> > marker that lets it. **The release is finished at §6, not at §2.**
+
+`docs/agent/prompts/perma/RELEASE.md:86` — docs/agent/prompts/perma/RELEASE.md:86–90
+
+> ⛔⛔ **THIS IS A PAUSE, NOT AN ENDING (owner ruling, 2026-09-13).** §4 and §5 are part of
+> THIS prompt's job, not a separate errand the owner has to remember to fire. A release
+> that stops here leaves the outbox uncleared, the ids unwritten and `metadata.lua`'s
+> comments stripped — which is exactly what happened on v10 (2026-09-12), where the
+> close-out went unrun until a later session noticed the writeback sitting uncommitted.
+
+`docs/agent/prompts/perma/HANDOFF_ORCHESTRATOR.md:224` — docs/agent/prompts/perma/HANDOFF_ORCHESTRATOR.md:224–226
+
+> - ⭐ **`perma/RELEASE.md` SPANS the owner's upload and is finished at §6, not §2** — the close-out is part of
+>   its job, never a separate errand. A release that stops at "ready to upload" leaves the outbox uncleared and
+>   `metadata.lua`'s comments stripped (trap 3).
+
+### R7 · STATE holds status and pointers, no derivation
+
+Proposed canonical home: STATE.md rules header. STATE_EVICTION adds five-section placement; that specialisation is not a duplicate.
+
+`docs/agent/STATE.md:3` — docs/agent/STATE.md:3–3
+
+> Kernel only: status + pointer, never derivation.
+
+`docs/agent/prompts/perma/HANDOFF_ORCHESTRATOR.md:227` — docs/agent/prompts/perma/HANDOFF_ORCHESTRATOR.md:227–227
+
+> **`STATE.md` is a kernel: status + pointer, never derivation.**
+
+### R8 · Game/source directories read-only
+
+Proposed canonical home: DISPATCH.md §1; task-reading pointers stay. GENERAL repeats the game-only subset; LINUX repeats both directories. Version stamps, archiving, running-game checks and evidence-folder protections are separate.
+
+`docs/agent/prompts/perma/DISPATCH.md:45` — docs/agent/prompts/perma/DISPATCH.md:45–56
+
+> - **Never modify the game directory** (`A:\SteamLibrary\steamapps\common\Project
+>   Spark`) **or the source archives** (`C:\Dev\SMR-SrcArchive\`). Game source is
+>   **read-only truth** for line numbers — cite it, never edit it. ⚠️ **Every
+>   citation names its game version.** The live `ModTools\Src` is whatever build
+>   is installed (STATE names it); earlier builds are archived one tree per
+>   version under `C:\Dev\SMR-SrcArchive\` with a manifest each, and most existing
+>   entries describe an OLDER build than the live one (`EF-075`, `EF-083`). ⛔ Never
+>   "correct" an existing entry's citation to the live tree — an entry records a
+>   defect in a stated version. A build you have not archived yet ⇒ archive
+>   `ModTools\Src` FIRST (`C:\Dev\SMR-SrcArchive\README.md`). Check `Mars.exe` is
+>   NOT running (`tasklist`) before touching loadable code, in a separate step
+>   from the edit.
+
+`docs/agent/prompts/perma/GENERAL_USE_PROMPT.md:50` — docs/agent/prompts/perma/GENERAL_USE_PROMPT.md:50–51
+
+> - **Never modify the game directory** (`A:\SteamLibrary\steamapps\common\
+>   Project Spark`); `ModTools\Src` is read-only truth for line numbers.
+
+`docs/agent/prompts/perma/LINUX_DISPATCH.md:128` — docs/agent/prompts/perma/LINUX_DISPATCH.md:128–128
+
+> The game directory and the source archives are never modified (DISPATCH §1).
+
+### R9 · Combined recipe retained after a sitting
+
+Proposed canonical home: COMBINED_SITTING.md rules header. Keep strike-the-moments as a separate editing rule. Old predictions remain historical measurements, not current debt.
+
+`docs/agent/prompts/perma/COMBINED_SITTING.md:5` — docs/agent/prompts/perma/COMBINED_SITTING.md:5–6
+
+> This brief does not delete itself — PT-20 is a
+> standing per-era re-check and this is now its measured recipe
+
+`docs/agent/prompts/perma/COMBINED_SITTING.md:450` — docs/agent/prompts/perma/COMBINED_SITTING.md:450–451
+
+> **This brief does NOT delete itself** — PT-20 is a standing per-era re-check and
+> this is now its measured recipe.
+
+### R10 · No trailing comments in console snippets
+
+Proposed canonical home: PLAYTEST_HELP.md console rules. 319 also requires one-command-at-a-time authoring; retain that distinct instruction rather than delete its whole paragraph.
+
+`docs/PLAYTEST_HELP.md:253` — docs/PLAYTEST_HELP.md:253–259
+
+> - **ONE command per line** — a pasted multi-line block silently concatenates
+>   into one line and fails `not understood`. And `not understood` means the
+>   line did not COMPILE — overwhelmingly a `--` comment inside a `*r`/`*g`
+>   snippet (they splice onto one line); never write a console snippet with a
+>   trailing comment. Bare expression for simple reads; `*r`/`*g` for
+>   multi-statement snippets and assignments (an assignment is not an
+>   expression).
+
+`docs/PLAYTEST_HELP.md:312` — docs/PLAYTEST_HELP.md:312–318
+
+> - ⚠️ **NEVER put a `--` comment in a `*r` / `*g` snippet** (found the hard way
+>   2026-07-29). Those rules splice your code into a template **on one line**:
+>   `CreateRealTimeThread(function() %s end) return` (`uiConsole.lua:360`). A
+>   trailing comment therefore swallows the closing `end) return`, the chunk will
+>   not compile, no rule matches, and the console answers **`not understood`**
+>   (`console.lua:24`). The same goes for annotations like `--> nil` pasted from
+>   documentation.
+
+### R11 · Never read MarsDebug tally as retail tally
+
+Proposed canonical home: PLAYTEST_HELP.md MarsDebug section. Heading repeats the body; detailed build/lens explanation stays.
+
+`docs/PLAYTEST_HELP.md:608` — docs/PLAYTEST_HELP.md:608–624
+
+> **The debug build's `87/87` is not a better version of retail's `78 PASS / 9
+> SKIP` — it is a DIFFERENT measurement, and for at least one probe a misleading
+> one.** `TechDescriptionBuilding` SKIPs on retail (`the tech has no description
+> T`) and **PASSes on MarsDebug** (`description names Underground Medium Dome`).
+> That is not the probe improving: it is **F98** — `T(id, text)` discards the
+> replacement literal in a non-dev build (`localization.lua:250-252`) but keeps it
+> in a dev build, so `Fix_TechDescriptionBuilding` genuinely works here and is a
+> no-op in the build players use. The probe therefore reports green in the only
+> environment where the fix works and is silent in the one that matters.
+> **Quoting "87 PASS" as evidence the pack is healthy on retail would be wrong,
+> specifically about F25/F98.** Retail coverage was `78/87` in the single-mod era;
+> ⛔ **as of 2026-08-13 the suite is 94 probes and the both-mods retail read is
+> `78 PASS / 16 SKIP` (measured, log `archive/rs_r0_*`)** — the six SKIPs added
+> since the 88-probe era are the Save Rescue probes standing down because that
+> separate rescue mod is not part of your standing rig (with it loaded the same
+> run reads `84 PASS / 10 SKIP`). SKIPs enumerated BY NAME in `agent/STATE.md`
+> — the non-reporting set is known and enumerated; that is the number to quote.
+
+`docs/PLAYTEST_HELP.md:606` — docs/PLAYTEST_HELP.md:606–606
+
+> ### ⛔ NEVER read a MarsDebug tally as a retail tally
+
+### R12 · Tracker through JSON API, never HTML
+
+Proposed canonical home: PUBLIC_SURFACE_SWEEP.md §4; explicit tracker-reading pointer in STATE. Canonical preserves issue-list comment-count positive control and comments endpoint, rather than merely generic R-A verification.
+
+`docs/agent/prompts/perma/PUBLIC_SURFACE_SWEEP.md:328` — docs/agent/prompts/perma/PUBLIC_SURFACE_SWEEP.md:328–341
+
+> * ⛔⛔ **READ THE TRACKER THROUGH THE JSON API, NEVER THROUGH THE ISSUE PAGE.**
+>   ```
+>   api.github.com/repos/catt144/SMR-CommunityFixPack/issues?state=all      # state + COMMENT COUNT
+>   api.github.com/repos/catt144/SMR-CommunityFixPack/issues/<n>/comments   # the comments
+>   ```
+>   This sweep's own first run fetched issue #1's rendered HTML **three times**,
+>   once with a cache-busting URL, and got **zero comments** every time. There were
+>   three — including the posted reply and the reporter thanking us for it. On that
+>   reading it reported to the owner that a reporter had been left unanswered, and
+>   wrote that into four documents. ⭐ **The control is free and it was skipped:**
+>   the list endpoint's `comments` count. If it is non-zero and your reader shows
+>   nothing, **your reader is wrong**, not the tracker. Generalise it — a rendered
+>   page is a derived surface, and this file's whole doctrine is that derived
+>   surfaces are checked against the record, not trusted.
+
+`docs/agent/STATE.md:49` — docs/agent/STATE.md:49–49
+
+> - ⛔ Read the GitHub tracker via `api.github.com/.../issues/<n>/comments`, never the HTML page.
+
+### R13 · Read deployment API instead of stored deployed SHA
+
+Proposed canonical home: SITE_AUDIT.md §1; explicit deployment-reading pointer in STATE. 37 invokes §1; 53/60 define newest successful deployment and endpoint. This is not equated with the broader R-A rule or Actions-run SHA.
+
+`docs/agent/prompts/perma/SITE_AUDIT.md:37` — docs/agent/prompts/perma/SITE_AUDIT.md:37–39
+
+> 2. Read `docs/agent/STATE.md`. ⛔ **Its "deployed = <sha>" line is a claim with a
+>    date on it, not a reading.** Re-derive it in §1 — on 2026-08-29 that line was
+>    four days and two deploys stale, and a session repeated it twice as current.
+
+`docs/agent/STATE.md:50` — docs/agent/STATE.md:53–53
+
+> ⛔ Never quote a stored "deployed = <sha>"; read the deployments API (`perma/SITE_AUDIT.md`).
+
+### R14 · No fredware name on player surfaces/no load-order advice
+
+Proposed canonical home: SITE_AUDIT.md §4 + FIX_POLICY.md §8; player-surface pointer in STATE. Issue-reply exception in PUBLIC_SURFACE_SWEEP 314-315 must be preserved; do not expand the exception silently.
+
+`docs/agent/prompts/perma/SITE_AUDIT.md:114` — docs/agent/prompts/perma/SITE_AUDIT.md:114–115
+
+> * ⛔ Never name fredware's mod on a player surface; no load-order advice
+>   (`EF-054`, `FIX_POLICY` §8).
+
+`docs/agent/STATE.md:98` — docs/agent/STATE.md:98–98
+
+> - Never name fredware's mod on a player surface; no player load-order advice (`EF-054`, FIX_POLICY §8).
+
+## Dead instructions — command-supported referents
+
+Proof commands below are small equivalents of the executed Python presence/rg checks; they are re-run directly before packaging. File absence is scoped to the named live target, not a claim that its historical record never existed.
+
+`docs/agent/prompts/perma/POST_UPLOAD_CLOSE.md:71` — docs/agent/prompts/perma/POST_UPLOAD_CLOSE.md:71–74
+
+> - `STATE.md`: strike the ④ hold and the *NOTHING IS PUBLISHED* line — ⭐ **this is
+>   the one moment in this project's history when striking them is correct**
+>   (`H-04` exists to stop it happening early; the owner's completed upload is the
+>   word it waits for).
+
+Command: `git rev-parse HEAD; rg -n '④|NOTHING IS PUBLISHED' docs/agent/STATE.md`. Result: HEAD 86c639994044ed07b29fd869013f4b7cf286a131; rg exit 1, no matches. Remove only the vanished first-launch hold clause; the live record/count/WARN duties remain.
+
+`docs/agent/prompts/perma/POST_UPLOAD_CLOSE.md:79` — docs/agent/prompts/perma/POST_UPLOAD_CLOSE.md:79–83
+
+> - ⭐ **Hand off to the opt-in pack** (checklist 68, the owner's stated next
+>   priority). Its first session reads **that repo's own STATE** and its standing
+>   pre-upload obligation, `reports/PARKED_OPTIN_REFERENCES.md` — ~46 parked
+>   passages that restore only when that mod launches, several of them in **this**
+>   repo and on the site. ⛔ Do not scope that effort here.
+
+Command: `git rev-parse HEAD; Test-Path -LiteralPath C:/Dev/SMR-OptInPack/docs/agent/reports/PARKED_OPTIN_REFERENCES.md`. Result: HEAD 86c639994044ed07b29fd869013f4b7cf286a131; False. Remove obsolete first-launch kickoff; retain the other-repo scope boundary through the current dispatch.
+
+`docs/agent/prompts/perma/POST_UPLOAD_CLOSE.md:96-consume` — docs/agent/prompts/perma/POST_UPLOAD_CLOSE.md:3–3
+
+> `git rm` this file
+
+Command: `git rev-parse HEAD; rg -n 'instruction is retired|step below is void' docs/agent/prompts/perma/POST_UPLOAD_CLOSE.md`. Result: HEAD 86c639994044ed07b29fd869013f4b7cf286a131; source line 6 explicitly voids the self-consuming process. File exists; its self-consumption process was retired. Keep commit/push close-out.
+
+`docs/agent/prompts/perma/PUBLIC_SURFACE_SWEEP.md:27` — docs/agent/prompts/perma/PUBLIC_SURFACE_SWEEP.md:27–37
+
+> **Held follow-through, 2026-09-12 — still-needed sweep (ck156).**
+> All 46 modules reviewed; proposed F37/F43 retirement and 14 retained-claim
+> corrections are **not applied**. Read `reports/STILL_NEEDED_SWEEP.md` and exact
+> `reports/still-needed/SURFACE_PLAN.md`. **TAKEABLE WHEN:** v9 F59/F60 close-out is
+> complete and the owner has ruled on retirement/constituency and wording in
+> `docs/PLAYTEST_CHECKLIST.md` item156. Then run this whole sheet, including every
+> card copy/intro/category/count, and use RELEASE_OUTBOX's **Held after-v9** batch.
+> Do not consume it in v9 or equate this audit's report push with public publication.
+> **Update 2026-09-12:** v9 is closed and item 156 is RULED — the text to apply is
+> `reports/still-needed/WORDING_RULED.md` (owner-ruled; supersedes `SURFACE_PLAN.md`
+> where they differ), gated on `prompts/SURFACE_AUDIT_FABLE.md` reporting first.
+
+Command: `git rev-parse HEAD; Test-Path -LiteralPath docs/agent/prompts/SURFACE_AUDIT_FABLE.md`. Result: HEAD 86c639994044ed07b29fd869013f4b7cf286a131; False. Missing one-off gate; this block still claims the now-released batch unapplied. Keep live site-file owner hold (§1), not this spent batch trigger.
+
+`docs/agent/prompts/perma/HANDOFF_ORCHESTRATOR.md:89-gone` — docs/agent/prompts/perma/HANDOFF_ORCHESTRATOR.md:89–90
+
+> ③ `prompts/CHECKLIST_ARCHIVE.md` — the checklist cleanup, ruled and never run (ck176); ⚠️ its own brief
+> carries the unnumbered-items risk on its face, so read that before firing.
+
+Command: `git rev-parse HEAD; Test-Path -LiteralPath docs/agent/prompts/CHECKLIST_ARCHIVE.md`. Result: HEAD 86c639994044ed07b29fd869013f4b7cf286a131; False. Remove only the gone prompt fire/read instruction; C92 shipping hold and other queued prompts remain.
+
+`docs/agent/prompts/perma/COMBINED_SITTING.md:421` — docs/agent/prompts/perma/COMBINED_SITTING.md:422–422
+
+> STATE ② cleared and ③ (MOD_DESCRIPTION ×2(+1)) promoted to NEXT.
+
+Command: `git rev-parse HEAD; rg -n '②|③' docs/agent/STATE.md`. Result: HEAD 86c639994044ed07b29fd869013f4b7cf286a131; rg exit 1, no matches. Remove old release-state promotion, not the reusable recipe or earned checklist/status/log recording.
+
+## Header specification — approval requested
+
+Immediately after H1 and its blank separator, before prose, exactly one block on each approved Markdown document:
+
+```markdown
+<!-- RULES -->
+visible rules governing edits to this document
+<!-- /RULES -->
+```
+
+Proposed warning **1,536 B**, hard **2,048 B**. Count raw UTF-8 bytes from the first byte of the opening marker through the closing marker and its newline, including source wrapping/blank lines and CRLF bytes. Exact marker lines, one pair, ordered, nonempty visible interior. Preserve verbatim wrapping and blockquotes; allow a same-scope rule to span lines rather than rewrite it into a mandatory single-line format. This departs from the sketch to preserve meaning and source bytes.
+
+RULES HEADERS would be RED for a missing/duplicate/reversed marker pair, wrong placement, empty block, invalid UTF-8 or a listed block above 2,048 B; WARN above 1,536 B. The checker uses an explicit approved Markdown allowlist. Unlisted files receive no empty block. An unexpected marker block should be RED to prevent an unreviewed expansion of the header list. Preserve existing STATE caps, generated-file checks and owner-only temporary-cap switch.
+
+The check cannot tell whether an agent read the header, understood it, obeyed it, or whether the human inventory captured every semantic rule. It does not validate canonical pointer scope or turn prose hazards into machine gates. Task agents still read the task procedures they are executing. After approval, watch structural failures on isolated broken copies (missing/reversed/duplicate/empty/oversized/wrong position), verify warning boundary, restore by hash and run doccheck GREEN. No structural checker has been implemented during analysis.
+
+## Proposed document list
+
+| Header | Bytes | Reason |
+|---|---:|---|
+| docs/agent/FIX_POLICY.md | 568 | Explicitly protects §5 against deletion, despite opt-ins moving repos. |
+| docs/PLAYTEST_HELP.md | 455 | Reference-only content contract; tests belong in checklist. |
+| docs/PLAYTEST_CHECKLIST.md | 1692 | Work-list-only content and whole-body section retirement; preserve the open marker enforcement question verbatim. |
+| docs/UPLOAD_WORKFLOW.md | 427 | Upload-only content and backup-copy matching constraint; sweep-update duty stays in task body. |
+| docs/agent/prompts/perma/DISPATCH.md | 323 | Only corrections to instructions; no results/status/logbook. |
+| docs/agent/prompts/perma/GENERAL_USE_PROMPT.md | 387 | Only instruction corrections; same-commit lessons go to their other homes. |
+| docs/agent/prompts/perma/RELEASE.md | 84 | Reusable; do not remove after a release. Incorrect Unlike POST_UPLOAD_CLOSE comparison is excluded as stale context. |
+| docs/agent/prompts/perma/POST_UPLOAD_CLOSE.md | 371 | Reusable lifecycle; explicit voiding of its old self-consumption step. |
+| docs/agent/prompts/perma/DRONE_PROJECT_PROMPT.md | 147 | Reusable and updated in place after drone sessions. |
+| docs/agent/prompts/perma/COMBINED_SITTING.md | 180 | Standing measured recipe retained after moments taken. |
+| docs/agent/prompts/perma/HANDOFF_ORCHESTRATOR.md | 1537 | Owner-only retirement, active-only content, Linux routing, generated owner-list ban and no copied toolkit manifest. |
+| docs/agent/prompts/perma/LINUX_DISPATCH.md | 711 | Standing lifecycle, situation updates in place and explicit retirement condition. |
+| docs/agent/prompts/perma/RELEASE_OUTBOX.md | 733 | Append pending entries, clear through release, no silent deletion. |
+| docs/agent/prompts/perma/SMRTK_SLOTS.md | 99 | Standing prompt updated in place, never consumed. |
+| docs/agent/prompts/perma/STATE_EVICTION.md | 68 | H1 explicitly forbids deletion after a run. |
+| docs/agent/STATE.md | 307 | Kernel-only content, emitted build counts and protected owner-register syntax. |
+
+Exact interiors and source IDs are in attachment.headers; the STATE text there is a simulation. No header exceeds hard cap. Initial headers above warning are: docs/PLAYTEST_CHECKLIST.md (1692 B), docs/agent/prompts/perma/HANDOFF_ORCHESTRATOR.md (1537 B). These WARNs are explicitly part of the proposal; do not shorten binding wording to hide them.
+
+| No header | Reason |
+|---|---|
+| CLAUDE.md | General bootstrap/folder/source-trust procedures; no imperative specifically governs edits to this entry file. AGENTS mirror unchanged unless later separately approved cleanup. |
+| docs/README.md | Filing/search/translation procedures govern other work; no editing-only constraint on the map. |
+| docs/agent/WORKFLOW.md | General authoring/testing/release protocols govern named work across files; no editing-only rule for WORKFLOW. |
+| docs/agent/prompts/perma/CO_RUNS.md | Situational co-run procedure; evidence/save safeguards bind execution, not edits to this recipe. |
+| docs/agent/prompts/perma/PUBLIC_SURFACE_SWEEP.md | Task rules govern other surfaces and audit execution; no editing-only rule for this prompt. "This file" under §2 refers to STORE_CARD_LIVE. |
+| docs/agent/prompts/perma/SITE_AUDIT.md | Site audit execution rules; no constraint specifically on editing this audit prompt. |
+| tools/doccheck.py | Python checker model, not a Markdown document. Owner-only temporary-cap guard retained. |
+| AGENTS.md | Generated byte-identical mirror of CLAUDE; no independent editing/header migration. |
+
+## Stand-alone wording and presentation changes — separate approval
+
+These are proposals, not verbatim moves. Rejecting any leaves its existing rule and binding scope intact.
+
+### E1 · docs/agent/STATE.md
+
+Before:
+
+> ⛔ This enumeration feeds `WAITING_ON_YOU.md` — keep the
+>   literal `STILL OPEN:` and `Owner OWES: ck##` idioms, or the owner's register silently drops items.
+
+After:
+
+> Keep the literal `STILL OPEN:` and `Owner OWES: ck##` idioms when editing owner enumerations; `WAITING_ON_YOU.md` reads them.
+
+This enumeration would lose its referent in the header; preserve literal parser idioms and editing scope.
+
+### E2 · docs/agent/prompts/perma/STATE_EVICTION.md
+
+Before:
+
+> # STATE_EVICTION — standing cleanup prompt (reusable; do not delete after a run)
+
+After:
+
+> Reusable; do not delete after a run.
+
+Keep H1 as title; its parenthetical lifecycle constraint must stand alone in a header.
+
+### E3 · docs/agent/STATE.md
+
+Before:
+
+> ## Build state — `python tools/doccheck.py --emit-counts`, never hand-typed
+
+After:
+
+> Build state — `python tools/doccheck.py --emit-counts`, never hand-typed
+
+Remove only H2 syntax for the rule in the header; leave ## Build state at the count block. Keeping a second instruction-bearing H2 inside the header would violate the five-section format.
+
+## STATE byte effect — conditional on approved pointers and wording
+
+Raw-byte simulation: **12331 → 12274 B; net -57 B**. Candidate header 307 B; the one new kernel line 58 B (existing CRLF included). It reads:
+
+> - Read the rules header of any doc you are about to edit.
+
+Funding: move existing STATE-local constraints into its header, use E1/E3 only if explicitly approved, and replace precisely R12/R13/R14 task restatements with these scoped pointers:
+
+> - Tracker reads: `perma/PUBLIC_SURFACE_SWEEP.md` §4.
+> Deployment rechecks: `perma/SITE_AUDIT.md` §1.
+> - Player surfaces: `perma/SITE_AUDIT.md` §4 + `FIX_POLICY.md` §8.
+
+The simulation retains the current owner enumeration, every shipping hold, NEXT/OWES obligations, probe debt and emitted count block. It evicts duplicate policy wording, not obligations; it does not squeeze lines to fit. Without approved duplicate removals/rewording, merely moving STATE text within itself saves no bytes and markers plus kernel line add bytes; the affordable net above is not claimed for that fallback.
+
+Current checker warning is **15,360 B TEMPORARY**, permanent warning **12,288 B**, hard **18,432 B**, line cap **200 B**. ck178’s temporary raise expires only on the owner’s word; this task does not retire it. Proposed STATE is under the permanent warning by 14 B. Header-only Stage C and final Stage D arithmetic must both be re-emitted from the then-current source before writing; a peer change invalidates this snapshot.
+
+## Revert risks and unresolved scope
+
+### X1 · MOD_DESCRIPTION live edit versus archive prohibition
+
+Unresolved, already owner-authorized to flag while continuing analysis. Archived successor exists; not dead. No redirect or deletion in base header proposal.
+
+`docs/agent/WORKFLOW.md:153` — docs/agent/WORKFLOW.md:153–155
 
 > 4. One commit per fix or tight group; agent/bugs/ updated in the same commit;
 >    MOD_DESCRIPTION.md updated in the same commit as the code change it
 >    describes.
 
-`W13` — `docs/agent/WORKFLOW.md:640-649`
+`docs/agent/WORKFLOW.md:640` — docs/agent/WORKFLOW.md:640–649
 
 > - MOD_DESCRIPTION.md: delete the `[DRAFT NOTE]` markers; do NOT promise the
 >   ClassicRockets export half; sync the fix list with agent/bugs/ statuses.
@@ -90,1088 +536,331 @@ SOURCE: WORKFLOW affirmatively requires editing MOD_DESCRIPTION. The map transla
 >   stale number there is a false claim in player-facing text. Authoritative count
 >   is in `agent/STATE.md`.
 
-`C04` — `CLAUDE.md:12-13`
+`CLAUDE.md:8` — CLAUDE.md:8–15
 
+> **Folder contract** (doccheck enforces it). `docs/` root holds ONLY the six
+> human files (PLAYTEST_CHECKLIST, PLAYTEST_HELP, UPLOAD_WORKFLOW, FIELD_REPORT_REPLIES,
+> FUTURE_IDEAS, README), the BUGS/STATUS stubs, `agent/` and `archive/`. Agent material is `docs/agent/`
+> (`bugs/`, `facts/`, `reports/`, `prompts/`, STATE/WORKFLOW/FIX_POLICY);
 > `docs/archive/` is append-only, never edited. **`INDEX.md` in `bugs/`+`facts/`
 > is GENERATED — edit the entry or fact file, never the index** (line-1 banner).
+> Prompts: the map is `docs/agent/prompts/README.md`. Reusable prompts live in `prompts/perma/`
+> (ad-hoc work: `perma/DISPATCH.md`; all FR-1/Linux work: `perma/LINUX_DISPATCH.md`).
 
-`docs/README.md:33-34` identifies the frozen home:
-
->   archive/                spent. SESSION_LOG.md, PLAYTEST_ARCHIVE.md,
->                           MOD_DESCRIPTION.md (frozen), retired prompts
-
-`docs/README.md:128-129` translates the live path:
-
-> `MOD_DESCRIPTION.md` and `PLAYTEST_ARCHIVE.md` moved from `docs/` to
-> `docs/archive/` in the same change.
-
-MEASURED at `72ed20e`: `git ls-files --error-unmatch docs/MOD_DESCRIPTION.md` exited 1, reporting that the old live path is not tracked. `git ls-files -- docs/MOD_DESCRIPTION.md docs/archive/MOD_DESCRIPTION.md` returned only `docs/archive/MOD_DESCRIPTION.md`. This proves the old live path is gone and the frozen successor exists. It does **not** prove the named file is absent everywhere, so this is **not a confirmed dead rule**.
-
-Proposed eventual disposition: retire the stale live-doc edit clauses, or explicitly redirect them to an approved live-description source. A redirect is a rewording that must carry a quoted before/after at the owner gate. Neither is authorised here.
-
-Additional SOURCE flag: CLAUDE.md:8–11 omits WAITING_ON_YOU.md from its closed root folder list; docs/README.md:20–22 includes it and doccheck accepts it. These are not exact duplicates. An approved header migration must not reinstate the old incomplete list.
-
-## Boundary and counting method
-
-The list is an occurrence inventory, not a count of unique policies or warning glyphs. Each recorded member is an imperative or inseparable same-scope rule cluster. Supporting status/fact prose inside an excerpt is retained for context and does not become an additional rule. The cluster convention matters for C04 (two adjacent generated/archive prohibitions) and C08 (the three-class trust protocol); subdivide these at migration planning before giving them different homes.
-
-CLAUDE, docs/README and STATE were read in full and selected rules recorded. Their inventory completeness is **not certified**. Checklist coverage stops before the first decisions H2 (preamble lines 1–45). Its historical redesign and settled-session narratives are records, not new editing rules. WORKFLOW is sampled only: the appendix gives exact excerpt ranges. FIX_POLICY and PLAYTEST_HELP were partly read; UPLOAD_WORKFLOW was read but not classified. Perma prompts are not inventoried. tools/doccheck.py was read only for the STATE byte-check model and temporary-cap authority.
-
-Pointers and facts are excluded: pack route, observed coverage, unexercised legs, retired-prompt status and branch/save facts are not rules merely because they have warning glyphs. Current holds and reopening conditions do constrain actions. No archive body, chain payload or unrelated one-off was audited. No bug/fact index extension was needed.
-
-Canonical occurrences retain doc-local/task-local/global class; proven restatement occurrences get only redundant. Task procedure specialisations and pointers are not claimed redundant. Proposed homes are analysis, not moved bindings. No unconfirmed referent gets dead classification.
-
-## Counts — computed from recorded members
-
-| class | occurrences |
-|---|---:|
-| doc-local | 7 |
-| task-local | 59 |
-| global | 8 |
-| redundant | 6 |
-| dead | 0 |
-| **Total** | **80** |
-
-| doc | doc-local | task-local | global | redundant | dead | total | coverage |
-|---|---:|---:|---:|---:|---:|---:|---|
-| CLAUDE.md | 0 | 4 | 2 | 3 | 0 | 9 | selected rules; not certified complete |
-| docs/README.md | 1 | 19 | 0 | 3 | 0 | 23 | selected rules; not certified complete |
-| docs/agent/STATE.md | 4 | 23 | 4 | 0 | 0 | 31 | selected rules; not certified complete |
-| docs/PLAYTEST_CHECKLIST.md | 2 | 0 | 0 | 0 | 0 | 2 | preamble only |
-| docs/agent/WORKFLOW.md | 0 | 13 | 2 | 0 | 0 | 15 | sampled |
-| docs/agent/FIX_POLICY.md | — | — | — | — | — | — | not inventoried |
-| docs/PLAYTEST_HELP.md | — | — | — | — | — | — | not inventoried |
-| docs/UPLOAD_WORKFLOW.md | — | — | — | — | — | — | not inventoried |
-| docs/agent/prompts/perma/CO_RUNS.md | — | — | — | — | — | — | not inventoried |
-| docs/agent/prompts/perma/COMBINED_SITTING.md | — | — | — | — | — | — | not inventoried |
-| docs/agent/prompts/perma/DISPATCH.md | — | — | — | — | — | — | not inventoried |
-| docs/agent/prompts/perma/DRONE_PROJECT_PROMPT.md | — | — | — | — | — | — | not inventoried |
-| docs/agent/prompts/perma/GENERAL_USE_PROMPT.md | — | — | — | — | — | — | not inventoried |
-| docs/agent/prompts/perma/HANDOFF_ORCHESTRATOR.md | — | — | — | — | — | — | not inventoried |
-| docs/agent/prompts/perma/LINUX_DISPATCH.md | — | — | — | — | — | — | not inventoried |
-| docs/agent/prompts/perma/POST_UPLOAD_CLOSE.md | — | — | — | — | — | — | not inventoried |
-| docs/agent/prompts/perma/PUBLIC_SURFACE_SWEEP.md | — | — | — | — | — | — | not inventoried |
-| docs/agent/prompts/perma/RELEASE.md | — | — | — | — | — | — | not inventoried |
-| docs/agent/prompts/perma/RELEASE_OUTBOX.md | — | — | — | — | — | — | not inventoried |
-| docs/agent/prompts/perma/SITE_AUDIT.md | — | — | — | — | — | — | not inventoried |
-| docs/agent/prompts/perma/SMRTK_SLOTS.md | — | — | — | — | — | — | not inventoried |
-| docs/agent/prompts/perma/STATE_EVICTION.md | — | — | — | — | — | — | not inventoried |
-
-Dashes mean unknown, not zero. Totals reconcile to this partial list only.
-
-## Redundancy — both instances quoted
-
-### R1: Archive append-only/no-edit duty
-
-Proposed canonical home: `docs/README`. Only the archive imperative is duplicated; C04's index clause is separately scoped.
-
-`M05` — `docs/README.md:39-40`
-
-> `docs/archive/` is append-only history — spent reports, retired prompts, session
-> logs, settled decision bodies. A root **`.rgignore`** keeps it out of a *default*
-
-`C04` — `CLAUDE.md:12-13`
-
-> `docs/archive/` is append-only, never edited. **`INDEX.md` in `bugs/`+`facts/`
-> is GENERATED — edit the entry or fact file, never the index** (line-1 banner).
-
-`M18` — `docs/README.md:100-100`
+`docs/README.md:100` — docs/README.md:100–100
 
 > - **Spent** anything → `archive/`, which is append-only and never edited.
 
-### R2: Generated index no-hand-edit duty
+### X2 · Standing entry folder allowlist omits generated owner register
 
-Proposed canonical home: `generated indexes' own line-1 banners`. The broader regeneration route stays as a pointer or specialisation; do not delete its extra meaning.
+README map includes WAITING_ON_YOU; doccheck accepts it. Correcting the entry contract is a separate explicit wording decision; no header copying the incomplete list.
 
-`M09` — `docs/README.md:81-83`
+`CLAUDE.md:8` — CLAUDE.md:8–15
 
-> ⚠️ **`INDEX.md` is generated in both folders and is never hand-edited.** Edit
-> the entry or fact file; doccheck regenerates the index and fails on any
-> difference. Generated files say so on line 1.
-
-`C04` — `CLAUDE.md:12-13`
-
+> **Folder contract** (doccheck enforces it). `docs/` root holds ONLY the six
+> human files (PLAYTEST_CHECKLIST, PLAYTEST_HELP, UPLOAD_WORKFLOW, FIELD_REPORT_REPLIES,
+> FUTURE_IDEAS, README), the BUGS/STATUS stubs, `agent/` and `archive/`. Agent material is `docs/agent/`
+> (`bugs/`, `facts/`, `reports/`, `prompts/`, STATE/WORKFLOW/FIX_POLICY);
 > `docs/archive/` is append-only, never edited. **`INDEX.md` in `bugs/`+`facts/`
 > is GENERATED — edit the entry or fact file, never the index** (line-1 banner).
+> Prompts: the map is `docs/agent/prompts/README.md`. Reusable prompts live in `prompts/perma/`
+> (ad-hoc work: `perma/DISPATCH.md`; all FR-1/Linux work: `perma/LINUX_DISPATCH.md`).
 
-### R3: Doccheck before doc commits
+### X3 · Explicit-path commits versus shared-hunk exception
 
-Proposed canonical home: `WORKFLOW`. Hook setup appears in both.
+DISPATCH forbids a bare commit; WORKFLOW requires no pathspec on a concurrently edited file. Keep unresolved; future commit-rule pointer cleanup must preserve the exception.
 
-`W10` — `docs/agent/WORKFLOW.md:103-104`
+`docs/agent/prompts/perma/DISPATCH.md:72` — docs/agent/prompts/perma/DISPATCH.md:72–78
 
-> 7. **Run `python tools/doccheck.py` before committing doc changes** — red
->    blocks. One-time setup: `git config core.hooksPath tools/hooks`.
+> - **Commits:** `git add <explicit paths>`, then `git commit -F <file> -- <the
+>   same paths>`. ⛔ Never `git add -A`, a directory pathspec, or a bare `git
+>   commit`: the index is SHARED between sessions and a bare commit takes a
+>   peer's staged work with it (this has already swept a peer's staged rename).
+>   `-F` because embedded quotes split under PS 5.1. Project author config, then
+>   **push** — pushing the four project repos is standing-allowed and is not
+>   publishing. ⛔ TestKit is local-only BY DESIGN.
 
-`C05` — `CLAUDE.md:19-20`
+`docs/agent/WORKFLOW.md:930` — docs/agent/WORKFLOW.md:930–937
 
-> Before committing doc changes run `python tools/doccheck.py`; red blocks. Set up
-> once: `git config core.hooksPath tools/hooks`. Generated files (`bugs/INDEX.md`,
+> - ⛔ **A pathspec is only HALF a commit fence.** `git commit -- <paths>` protects every OTHER
+>   file, but for a path you *name* git commits that path's **working-tree** content — a peer's
+>   unstaged edits included (09-12, `cc3edf2`). On a file two sessions are inside at once, stage
+>   **your own hunks** (`git add -p`) and commit **without** a pathspec.
+>   ⚠️ It cuts both ways: on 09-13 this session's two uncommitted `STATE.md` edits were swept into
+>   a peer's commit (`bf2d75f`) seconds later. Nothing was lost, but neither commit message
+>   describes what it actually contains. **Re-check `git status` on a shared file immediately
+>   before the write, not at the top of the session** — a clean status 20 minutes old is not a fence.
 
-### R4: Owner-call mirroring to checklist
+### X4 · Reply part of shipping versus owner pull-only/no release gate
 
-Proposed canonical home: `WORKFLOW`. W06's marker, status and regeneration procedure is not duplicated by the shorter copies.
+PUBLIC_SURFACE_SWEEP 306 makes reply part of shipping; WORKFLOW 5b forbids unsolicited drafting and gating other work. Propose later pointing reporter section to 5b, with exact before/after separately approved.
 
-`W06` — `docs/agent/WORKFLOW.md:54-62`
+`docs/agent/prompts/perma/PUBLIC_SURFACE_SWEEP.md:306` — docs/agent/prompts/perma/PUBLIC_SURFACE_SWEEP.md:306–306
 
-> 5. **Owner-decision mirroring (R10).** Every item needing the owner's call is
->    mirrored into `docs/PLAYTEST_CHECKLIST.md` → "Decisions waiting on you"
->    (one line + pointer), and struck the moment it is decided. **An owner
->    decision recorded only in an entry or a report is not considered asked.**
->    **Changing an item's status ALSO means updating its marker.** Update the
->    checklist's `<!-- ck:N status:... owner:... -->` marker in the same edit,
->    including whether an action is still owed by the owner. Regenerate the
->    owner register after editing its source; for the contained regeneration
->    route, see "Writing in a shared tree" below.
+> If the fix answers an open field report, the reply is part of shipping it.
 
-`C07` — `CLAUDE.md:23-25`
+`docs/agent/WORKFLOW.md:79` — docs/agent/WORKFLOW.md:79–92
 
-> Owner decisions go in
-> `docs/PLAYTEST_CHECKLIST.md` → "Decisions waiting on you", never only in agent
-> docs.**
+> 5b. **Player replies are PULL-ONLY (R10c, owner ruling 2026-09-12, checklist
+>    165).** Rule 5's mirroring obligation ⛔ **does NOT extend to replies to player
+>    reports.** Never draft one unasked, never put one on the owner's owed list
+>    (`STATE.md`'s OWES line, a handoff's decisions table, a session summary's
+>    "waiting on you"), never raise a waiting `DRAFT` as a nudge, and never gate
+>    other work on a reply going out. A draft in `docs/FIELD_REPORT_REPLIES.md`
+>    waits indefinitely **by design**. When the owner asks for one, write it and
+>    stop — one ask, one draft, no follow-on queue. ✅ **This does not touch
+>    triage:** a player's report is evidence about a defect, and filing it into
+>    `agent/bugs/` is ordinary bug-fixing work that continues unchanged — ⛔ never
+>    cite this rule to avoid reading, filing or investigating a report. ⚖️ Condition
+>    (per 5a): the owner had fielded a day of reply questions while the project's
+>    real gate was an unrun playtest. The cost being cut is **owner attention
+>    diverted from fixing bugs**, not the replies themselves.
 
-`M16` — `docs/README.md:95-96`
+### X5 · Linux ASK/report-request playbooks versus pull-only reply policy
 
-> - A **decision the owner must make** → `PLAYTEST_CHECKLIST.md` →
->   "Decisions waiting on you". Never only in an agent doc.
+Clarify whether requested FR-1 triage authorizes a draft/log request; do not create an owed reply from old playbooks. Record both scopes, resolve neither here.
 
-### R5: Read STATE first
+`docs/agent/prompts/perma/LINUX_DISPATCH.md:56` — docs/agent/prompts/perma/LINUX_DISPATCH.md:56–58
 
-Proposed canonical home: `STATE with an entry-file bootstrap pointer`. The entry-file pointer cannot be removed: a rule inside STATE cannot discover itself.
+> - **Posts (the owner posts; no agent posts).** The original dev post and follow-up 1 are POSTED. "CURRENT DEV NOTE" (it replaces
+>   posts 2 and 3) and "PLAYER REPLY" are drafted in the dev-reply doc; whether they were posted is **unknown, so ask**. No dev
+>   response as of 09-11.
 
-`C02` — `CLAUDE.md:5-6`
+`docs/agent/prompts/perma/LINUX_DISPATCH.md:66` — docs/agent/prompts/perma/LINUX_DISPATCH.md:66–67
 
-> `docs/README.md`. **Mandatory read, every session: `docs/agent/STATE.md`** —
-> build state, open gates, active holds.
+> - (a) If there is no log yet, hand the owner the "PLAYER LOG REQUEST" block (in the dev-reply doc) to post. It has six plain steps,
+>   the dump path is `/tmp`, and one grep line prints the result.
 
-`M04` — `docs/README.md:26-26`
+`docs/agent/WORKFLOW.md:79` — docs/agent/WORKFLOW.md:79–92
 
-> READ FIRST.
+> 5b. **Player replies are PULL-ONLY (R10c, owner ruling 2026-09-12, checklist
+>    165).** Rule 5's mirroring obligation ⛔ **does NOT extend to replies to player
+>    reports.** Never draft one unasked, never put one on the owner's owed list
+>    (`STATE.md`'s OWES line, a handoff's decisions table, a session summary's
+>    "waiting on you"), never raise a waiting `DRAFT` as a nudge, and never gate
+>    other work on a reply going out. A draft in `docs/FIELD_REPORT_REPLIES.md`
+>    waits indefinitely **by design**. When the owner asks for one, write it and
+>    stop — one ask, one draft, no follow-on queue. ✅ **This does not touch
+>    triage:** a player's report is evidence about a defect, and filing it into
+>    `agent/bugs/` is ordinary bug-fixing work that continues unchanged — ⛔ never
+>    cite this rule to avoid reading, filing or investigating a report. ⚖️ Condition
+>    (per 5a): the owner had fielded a day of reply questions while the project's
+>    real gate was an unrun playtest. The cost being cut is **owner attention
+>    diverted from fixing bugs**, not the replies themselves.
 
-General R-A volatile-source verification versus the deployed-SHA/pack-prediction API instructions is **not** declared redundant: specific instruments are local specialisations. STATE_EVICTION and other perma copies need actual quoted comparisons before any proposed removal.
+### X6 · Legacy bare tested wording versus attendance labels
 
-## Dead pass
+Bare tested is closed to new work; old recipes still grant it. Keep definitions/records separate and do not silently change historic grants during header work.
 
-No confirmed dead rule within this partial boundary. X1's live path is gone but its archived successor exists. Missing original paths alone must not justify deletion. The remaining task documents may contain spent processes; they are not classified yet.
+`docs/agent/WORKFLOW.md:422` — docs/agent/WORKFLOW.md:422–426
 
-## Preliminary header specification — approval pending
+>    * ⛔ **`tested` (bare) is LEGACY and closed to new work.** The 46 entries
+>      holding it predate this rule and their attendance was never recorded —
+>      17 carry the bare word with no narrative at all — so it means "attendance
+>      unaudited", not "attended". Do not promote one without re-deriving it
+>      from the archived record; do not read one as if it were attended.
 
-Immediately after H1 and its blank separator, before prose, put visible rules between these exact markers:
+`docs/agent/prompts/perma/DRONE_PROJECT_PROMPT.md:338` — docs/agent/prompts/perma/DRONE_PROJECT_PROMPT.md:338–339
 
-```markdown
-<!-- RULES -->
-the verbatim rules governing edits to this document
-<!-- /RULES -->
-```
+> - **Do not report a module `tested`** without a playtest. Only the playtest flips
+>   that status.
 
-The interior is a schema placeholder, not proposed rule wording. Only docs with actual editing constraints qualify. No empty ceremonial block. Preserve source text and wrapping; mandatory bullets or flattening blockquotes could change presentation and require explicit before/after review. An inseparable rule can span lines. Never rewrite text merely to fit.
+`docs/agent/prompts/perma/COMBINED_SITTING.md:385` — docs/agent/prompts/perma/COMBINED_SITTING.md:385–387
 
-Proposed cap: **1,536 bytes warning / 2,048 bytes hard**, UTF-8 with CRLF normalised to LF (the STATE checker model), inclusive of markers and final newline. Equality is allowed. Whole-doc/per-line budgets still apply independently. These are approval proposals, not rulings.
+> * Not **"D13 is `tested`"** unless the dialogs were actually seen and said so —
+>   that grant is the whole point of the attended half, and `tested` still means a
+>   pass at the keyboard (WORKFLOW).
 
-Future checker: explicit approved-doc list, exactly one correctly ordered marker pair immediately after H1/blank separator, non-empty payload, warning above 1,536 and RED for missing/malformed/oversized blocks. Falsify using a broken copy, including absence, reverse/duplicate markers and threshold boundaries; restore by hash. Do not mutate shared live docs for the demonstration.
+### X7 · Release first-launch assumptions remain mixed with current procedures
 
-**The structural check cannot establish that an agent read the header.** It cannot prove inventory completeness, continued binding when a task doc is never opened, preserved meaning or absence of contradictions.
+Major/minor differs from editor version rail, not automatically a contradiction. Old ignore_files-not-in-place and cloud-ON assertions are stale claims, not proven dead rules. RELEASE comparison to reusable POST_UPLOAD_CLOSE is false context; rule remains verbatim.
 
-## Preliminary eligibility — not an approved migration list
+`docs/agent/WORKFLOW.md:609` — docs/agent/WORKFLOW.md:609–639
 
-| doc/group | outcome | reason |
-|---|---|---|
-| STATE | qualifies | Kernel content, parser idioms and generated-count rules constrain its edits. |
-| PLAYTEST_CHECKLIST | qualifies | Worklist content and whole-body retirement constrain edits; decisions below preamble remain excluded. |
-| docs/README | qualifies | Changing this map must preserve its root allowlist contract. |
-| CLAUDE | conditional | Generated AGENTS mirror must be synchronised; any standalone rewrite of the source instruction requires before/after review. |
-| WORKFLOW | pending | Much of its content governs authoring/testing/releasing other files; finish inventory before deciding what governs editing this doc. |
-| FIX_POLICY | pending | Writing a fix and editing the policy are different actions; inventory unfinished. |
-| PLAYTEST_HELP | pending | Separate test-running and snippet-authoring rules from edits to the reference. |
-| UPLOAD_WORKFLOW | likely qualifies, unconfirmed | Read step-3 backup synchronisation rule constrains editing its paste blocks; not yet classified. |
-| each perma prompt | pending individually | Instructions for doing a task alone do not qualify it for an editing header; none inventoried yet. |
-| generated indexes / WAITING_ON_YOU | no handwritten block proposed | Existing generated banners are the precedent; changes require their generator. |
-| AGENTS | no independent authoring | A CLAUDE header, if approved, arrives through mirror regeneration. |
-| archive / one-offs / chain payloads | no migration | Out of scope. |
+> - metadata.lua: bump `version_major`/`version_minor`, refresh `last_changes`.
+>   `short_description`, `optional_mod` are already in place (audit 2.1).
+>   `lua_revision` stays 350453.
+>   ⛔ **`ignore_files` is NOT already in place — owner ruling 2026-08-13
+>   (checklist 23), do it in this pass, in ALL THREE mods.** The upload packs the
+>   **entire mod folder recursively** and filters only on these patterns
+>   (`ModTools\Src\CommonLua\Classes\GedModEditor.lua:678-741`), so everything
+>   unlisted ships inside the player's download. Nothing *runs* (only `code`-listed
+>   files execute), but `CLAUDE.md` is agent instructions and does not belong on a
+>   player's disk. ⭐ 2026-09-10: `AGENTS.md` (the Codex mirror of `CLAUDE.md`)
+>   joined the list — `*AGENTS.md` sits in `metadata.lua`'s `ignore_files`, in
+>   `tools/pack_predict.py`'s own copy of that list, and in `upload_preflight.py`'s
+>   check, all three together; the predictor does NOT read `metadata.lua`, so a
+>   pattern added in one place only makes the predicted count lie.
+>   ⭐ **Re-derived per mod 2026-08-13 (`public-docs/02_QA.md`) —
+>   the three lists are NOT the same:**
+>   | mod | add |
+>   |---|---|
+>   | fix pack | `tools/` · `CLAUDE.md` · `LICENSE` · `.gitattributes` |
+>   | opt-in pack | the same four |
+>   | **save rescue** | **`LICENSE` only** — it already ships a `*CLAUDE.md`
+>     pattern the other two lack, and has no `tools/` and no `.gitattributes` |
+>   ⭐ **Copy the rescue mod's `*CLAUDE.md` line into the other two** rather than
+>   inventing a pattern. ✅ `.github/` is no longer a question — the fix pack has
+>   none since the site moved out, and neither of the others ever had one.
+>   ⚠️ **One wildcard question survives and one command settles it:** whether `*`
+>   crosses `/` decides whether `*/docs/*` filters the whole `docs/` tree or only
+>   its top level. The engine's own defaults (`*.git/*`, `*/Source/*` —
+>   `Mod.lua:255`) only make sense if it does, but `MatchWildcard` is an engine
+>   function with no Lua body. ⇒ **Pack once with `DbgPackMod`, list the archive,
+>   confirm `docs/` is absent** — do it in this same pass.
 
-Per-doc perma reasons are required at the eventual gate; the pending group above does not satisfy that deliverable.
+`docs/agent/prompts/perma/COMBINED_SITTING.md:392` — docs/agent/prompts/perma/COMBINED_SITTING.md:392–394
 
-## STATE bytes — framing-only proposal
+> * Not **"gone"** for any staged save while the `EF-051` hold stands (Steam Cloud
+>   is ON by the owner's deliberate, temporary choice): **"deleted, listing
+>   verified"**.
 
-MEASURED baseline **12191 bytes**; warning **15,360 temporary**, permanent warning **12,288**, hard **18,432**, per-line **200**. Measured at the source anchor via doccheck STATE + STUBS; ck178 is owner authority for the temporary cap. Only the owner can retire it.
+`docs/agent/prompts/perma/RELEASE.md:7` — docs/agent/prompts/perma/RELEASE.md:7–7
 
-One proposed new Rules-in-force line:
+> > ♻️ **REUSABLE — do NOT `git rm` this file.**
 
-```text
-- Read the rules header of any doc you are about to edit.
-```
+### X8 · Global class versus exactly one new kernel line
 
-The line is **58 bytes** including LF. Candidate local excerpts S01/S28/S30/S31 total **307 bytes** including LFs; unchanged text inside marker framing is **338 bytes**. Moving text within STATE saves no rule-text bytes. With no removals, net **+89 bytes**, projected STATE **12280 bytes** (temporary warning headroom **3080 bytes**, permanent warning headroom **8 bytes**). Source excerpts retain mixed-line context where applicable; actual source separators and any approved pointer require measuring the eventual diff. This is not a migration patch or an inherited final byte result.
+Header proposal does not move existing global protocols into STATE: doing so would exceed the one-new-line design. Preserve current binding homes and kernel authoring pointer; ask owner separately if global rerouting is intended. Do not pretend doc-local headers replace fix/testing/release task reads.
 
-**No offsetting eviction has been established.** This proposal does not satisfy the brief's lose-at-least-as-much-as-you-gain requirement. The temporary cap changes affordability, not permission to remove holds/rules. Complete perma comparisons before claiming a net saving. Do not compress obligations to fit.
+`docs/agent/WORKFLOW.md:872` — docs/agent/WORKFLOW.md:872–872
 
-## Binding / revert risks
+> **R-A · Verification is routed three ways. Name the kind before you verify.**
 
-- The editing-header rule does not require opening a task doc an agent is not editing. Code fixes, test launches and portal actions need existing read triggers or approved pointers; a docs-only header must not silently stop them binding.
-- A global trust rule cannot become doc-local merely by entering CLAUDE's editing header. Ordinary sessions do not edit CLAUDE; preserve mandatory discovery.
-- Keep owner holds, recovery ownership, sweep fences and open obligations reachable from the kernel. They are not spare budget bytes.
-- Preserve generated-file routing. An approved CLAUDE change requires its separate announced mirror regeneration.
-- Do not delete entire quoted blocks as redundant when their extra scope/conditions are specialised.
-- One source doc per approved migration commit; text survival and structural GREEN are independent checks. Avoid full-doc reformatting.
-- The prompt and map row remain live through the partial inventory and approval gate; consume both only on eventual completion.
-- Checklist 177's marker gate is untouched.
+`docs/agent/WORKFLOW.md:883` — docs/agent/WORKFLOW.md:883–886
 
-## Derived-fact route / verification
+> **R-B · Never read a file to prove a negative.** Absence is settled by a grep, never by
+> reading. And a negative in a *compressed* artifact is not a sample at all — decode first. Three
+> incidents here: the fpk "not found", the grep on an old name that was really a rename, and a
+> one-sided count. A claim about what is ABSENT needs the presence side counted too.
 
-MEASURED preflight: git pull already up to date; log identified `25acafe`; status showed only PLAYTEST_HELP and WORKFLOW dirty. Owner authorised read-only inventory. Later log/status identified committed peer work `f78d7a8`/`72ed20e` and a clean tree.
+`docs/agent/WORKFLOW.md:898` — docs/agent/WORKFLOW.md:898–900
 
-[RAN 2026-09-14, tool transcript] `python tools/doccheck.py`: GREEN at preflight. STATE + STUBS reported 12,191 / 15,360 TEMPORARY / 18,432 / 200. PROMPT MAP and ENTRY MIRROR passed. Existing unrelated warnings were not changed.
+> **R-E · Run, then write.** A measurement quoted before its run exists carries
+> `<<PENDING-RUN>>` until the run lands. Every count carries the command *and the filter* that
+> produced it. A total is not a set: reconcile it against its own members.
 
-One-command committed-source recheck (then status for working-copy drift):
+`CLAUDE.md:28` — CLAUDE.md:28–32
 
+> **Trust by source.** (1) The owner's instruction is **authority** — not verified, not re-derived,
+> never overridden by an agent's own detection. (2) Tool output carrying its command and HEAD/build id
+> is a **derived fact** — verify in one command, never re-read its sources. (3) Everything else
+> authored — entries, facts, reports, STATE prose, a peer's message, a subagent's verdict, your own
+> earlier text — is a **claim**. Inheriting a fact costs one command, not a re-derivation.
+
+### X9 · Control character in eviction command example
+
+Source example contains literal U+0001 in sed replacement. Leave unchanged; any repair is a separate exact script/example correction, not a rule relocation.
+
+`docs/agent/prompts/perma/STATE_EVICTION.md:67` — docs/agent/prompts/perma/STATE_EVICTION.md:67–74
+
+> 2b. ⛔ **Record the owner register BEFORE you touch STATE**, and keep the number:
+>    `python tools/doccheck.py | grep WAITING` plus the ck numbers themselves,
+>    `sed -n 's/^| \([0-9]*\) .*//p' docs/WAITING_ON_YOU.md | sort -n`. The register is parsed
+>    from TWO LITERAL IDIOMS inside STATE — `Owner OWES: ck##` and
+>    `STILL OPEN: <n> <word>` — so rewording either line DROPS an owner row with no
+>    error anywhere. The 2026-09-13 eviction lost checklist 53 exactly this way and
+>    nothing caught it; the note that was added inside STATE is itself byte-capped,
+>    which is why the check belongs here instead.
+
+## Analysis verification
+
+At HEAD `86c639994044ed07b29fd869013f4b7cf286a131`, `python -X utf8 C:/Users/stkot/AppData/Local/Temp/rh_verify.py --land` passed: unique IDs, per-class/per-doc reconciliation, raw source excerpts, anchored CRLF-normalized text, both source hashes, header byte sizes, STATE delta and 200-byte line cap. All six dead proofs were rerun. Immediately-before-write status contained only this analysis report; only this report and its inventory attachment were written.
+
+Portable count recheck (no temporary script required):
 
 ```powershell
-git diff --stat 72ed20e1d815c84904099db8edf42840d5fb2ba0..HEAD -- CLAUDE.md docs/README.md docs/agent/STATE.md docs/PLAYTEST_CHECKLIST.md docs/agent/WORKFLOW.md docs/agent/FIX_POLICY.md docs/PLAYTEST_HELP.md docs/UPLOAD_WORKFLOW.md docs/agent/prompts/perma/
+python -X utf8 -c "import json; from pathlib import Path; from collections import Counter; d=json.loads(Path('docs/agent/reports/RULES_HEADERS_INVENTORY.json').read_text(encoding='utf-8')); c=Counter(r['classification'] for r in d['rules']); assert c==d['counts']; assert len({r['id'] for r in d['rules']})==len(d['rules']); assert all(Counter(r['classification'] for r in d['rules'] if r['file']==p)==n for p,n in d['per_doc_counts'].items()); print(c,len(d['rules']))"
 ```
 
-An empty committed diff means no reread of those sources; `git status --porcelain` still detects uncommitted changes. Fingerprints of unread perma files establish a continuation anchor, not evidence that their rules were inventoried.
+`python -X utf8 tools/doccheck.py` was GREEN at the same HEAD after writing the analysis files. Existing warning text follows verbatim; repeated identical alias warnings are shown once:
 
-## Source fingerprints
-
-HEAD `72ed20e1d815c84904099db8edf42840d5fb2ba0`.
-
-| file | raw bytes | SHA-256 |
-|---|---:|---|
-| CLAUDE.md | 2506 | e93decba30b268509726eb48824ad35a76ff501bd96a50dbb4aaa755ac480ea5 |
-| docs/README.md | 7586 | 6d83d254a111dceb6cad999936f4b70907fff8eccb8587339f1bdaedeb62db41 |
-| docs/agent/STATE.md | 12191 | e822ebffba0f95d864a480e4faa7acf86f1440f9bc22b77b8fe85d8943e943ad |
-| docs/PLAYTEST_CHECKLIST.md | 613437 | f29bd2300d02da693cf0001c0a253607d9c7449f329df6317feab79926b8b166 |
-| docs/agent/WORKFLOW.md | 59724 | a737b9efbb2c6cb82849bce00ba9babf03554b89eac115f64eb2084a29a1eff0 |
-| docs/agent/FIX_POLICY.md | 50756 | 9ead24ce83a147de2eda1c6da7ade3768adb53be0b2a4c13ae795e8380fad0bf |
-| docs/PLAYTEST_HELP.md | 62709 | 6c238e134a92896c6bf202a16895da8ad79ccfc4b4882c1bc44bb899e1d5c1c7 |
-| docs/UPLOAD_WORKFLOW.md | 30307 | 96beb49c758a0ce50e27a25977283e260c95b6449324be02eacc0a81def64d87 |
-| docs/agent/prompts/perma/CO_RUNS.md | 28987 | c9972bedc06c18872a6b99e862d611835eec039d00c2e2351d2e83a2cd54f3cc |
-| docs/agent/prompts/perma/COMBINED_SITTING.md | 29429 | d3922cb4b7313bd3eef7a4a204d502e65a3c08386bfbab25961090112ecaab76 |
-| docs/agent/prompts/perma/DISPATCH.md | 10500 | 27fc6f782cebcf84f747afcfa8ec961728c6f5ba8b1ed5eb73af8d9565047169 |
-| docs/agent/prompts/perma/DRONE_PROJECT_PROMPT.md | 21392 | e4aa278724d264dfbbb523fb221aba72bf141e2be888325795795d2999392cf2 |
-| docs/agent/prompts/perma/GENERAL_USE_PROMPT.md | 4227 | bf6ceacf58d96475d47d93f2b162471718dbecee9c13a7c02e4107e9c8e71925 |
-| docs/agent/prompts/perma/HANDOFF_ORCHESTRATOR.md | 16251 | 494ebe5e685e17bfa1125b2c38b20831f7cb655ebf5a6ba8cdbc3c2c460c3e3d |
-| docs/agent/prompts/perma/LINUX_DISPATCH.md | 10752 | 6004e63d8065c2cd1debe98334e594daec9d41673cb3bbe58a9f1752607eccb0 |
-| docs/agent/prompts/perma/POST_UPLOAD_CLOSE.md | 5379 | ba484c6a732cf0884f2140ff4755f9c60477b9b40f2fa9d25264a5d9646f679a |
-| docs/agent/prompts/perma/PUBLIC_SURFACE_SWEEP.md | 24879 | 63fbbf05d8686d0f8aeaa8d7bfe7e358927923e9db2753956215fd1d97df9c79 |
-| docs/agent/prompts/perma/RELEASE.md | 10013 | 69a3a2c903f5f886dc0c5fec9a0cb19c431e9f01ae454ecdc47b0b14faf1d93f |
-| docs/agent/prompts/perma/RELEASE_OUTBOX.md | 14474 | f20fcfbc599138e5d2718d8faa26f2ac5adfa6fc402eaaa6a8e9ed25b78be06c |
-| docs/agent/prompts/perma/SITE_AUDIT.md | 9866 | 3c4357cc3f9b5fc9dfe33e7676d29e75d938850a277464ad709f99b3ee3c5f5a |
-| docs/agent/prompts/perma/SMRTK_SLOTS.md | 5438 | 42e13a73524a958bb88e242ef5e31cd4f049013e0f2159c61c1ef87fb6dcbe0a |
-| docs/agent/prompts/perma/STATE_EVICTION.md | 6504 | 614aa01a1033e5c9b7bf3a59f16fae2a3e15f9e24e86f675d19e80d8e3d9fdd9 |
-
-## Full recorded inventory — attachment within report
-
-The JSON is the full list of the partial inventory. Each member carries exact source text (including source newline escapes), file/lines, one class and proposed home. Counts above are generated from it.
-
-```json
-[
-  {
-    "id": "C01",
-    "file": "CLAUDE.md",
-    "first_line": 3,
-    "last_line": 4,
-    "classification": "task-local",
-    "proposed_home": "FIX_POLICY",
-    "reason": "No game-file modification.",
-    "verbatim": "A bug-fix mod: every fix repairs a verified defect in the game's shipped Lua,\npatched at runtime; no game files are modified. Map of the tree:"
-  },
-  {
-    "id": "C02",
-    "file": "CLAUDE.md",
-    "first_line": 5,
-    "last_line": 6,
-    "classification": "global",
-    "proposed_home": "STATE with entry-file bootstrap pointer",
-    "reason": "Mandatory kernel read; preserve bootstrap.",
-    "verbatim": "`docs/README.md`. **Mandatory read, every session: `docs/agent/STATE.md`** —\nbuild state, open gates, active holds."
-  },
-  {
-    "id": "C03",
-    "file": "CLAUDE.md",
-    "first_line": 8,
-    "last_line": 11,
-    "classification": "task-local",
-    "proposed_home": "docs/README",
-    "reason": "Folder placement; old root list omits WAITING_ON_YOU. Not an exact duplicate.",
-    "verbatim": "**Folder contract** (doccheck enforces it). `docs/` root holds ONLY the six\nhuman files (PLAYTEST_CHECKLIST, PLAYTEST_HELP, UPLOAD_WORKFLOW, FIELD_REPORT_REPLIES,\nFUTURE_IDEAS, README), the BUGS/STATUS stubs, `agent/` and `archive/`. Agent material is `docs/agent/`\n(`bugs/`, `facts/`, `reports/`, `prompts/`, STATE/WORKFLOW/FIX_POLICY);"
-  },
-  {
-    "id": "C04",
-    "file": "CLAUDE.md",
-    "first_line": 12,
-    "last_line": 13,
-    "classification": "redundant",
-    "proposed_home": "docs/README and generated indexes' banners",
-    "reason": "Archive and index editing prohibitions; R1/R2. Two prohibitions form a source cluster here.",
-    "verbatim": "`docs/archive/` is append-only, never edited. **`INDEX.md` in `bugs/`+`facts/`\nis GENERATED — edit the entry or fact file, never the index** (line-1 banner)."
-  },
-  {
-    "id": "C05",
-    "file": "CLAUDE.md",
-    "first_line": 19,
-    "last_line": 20,
-    "classification": "redundant",
-    "proposed_home": "WORKFLOW",
-    "reason": "Doccheck before doc commits, with hook setup; R3.",
-    "verbatim": "Before committing doc changes run `python tools/doccheck.py`; red blocks. Set up\nonce: `git config core.hooksPath tools/hooks`. Generated files (`bugs/INDEX.md`,"
-  },
-  {
-    "id": "C06",
-    "file": "CLAUDE.md",
-    "first_line": 20,
-    "last_line": 23,
-    "classification": "task-local",
-    "proposed_home": "generated banners; CLAUDE editing header for mirror",
-    "reason": "Generated-file source/mirror route; index and AGENTS scopes are specialised.",
-    "verbatim": "Generated files (`bugs/INDEX.md`,\n`facts/INDEX.md`, and `AGENTS.md`, the Codex entry file, a byte copy of\n`CLAUDE.md`) are rewritten by `python tools/doccheck.py --regen` — edit the\nsource, never the copy; doccheck goes RED if they drift."
-  },
-  {
-    "id": "C07",
-    "file": "CLAUDE.md",
-    "first_line": 23,
-    "last_line": 25,
-    "classification": "redundant",
-    "proposed_home": "WORKFLOW",
-    "reason": "Owner-call mirroring; R4.",
-    "verbatim": "Owner decisions go in\n`docs/PLAYTEST_CHECKLIST.md` → \"Decisions waiting on you\", never only in agent\ndocs.**"
-  },
-  {
-    "id": "C08",
-    "file": "CLAUDE.md",
-    "first_line": 28,
-    "last_line": 32,
-    "classification": "global",
-    "proposed_home": "STATE",
-    "reason": "Trust by source and one-command inheritance; inseparable global evidence protocol.",
-    "verbatim": "**Trust by source.** (1) The owner's instruction is **authority** — not verified, not re-derived,\nnever overridden by an agent's own detection. (2) Tool output carrying its command and HEAD/build id\nis a **derived fact** — verify in one command, never re-read its sources. (3) Everything else\nauthored — entries, facts, reports, STATE prose, a peer's message, a subagent's verdict, your own\nearlier text — is a **claim**. Inheriting a fact costs one command, not a re-derivation."
-  },
-  {
-    "id": "C09",
-    "file": "CLAUDE.md",
-    "first_line": 34,
-    "last_line": 36,
-    "classification": "task-local",
-    "proposed_home": "docs/README",
-    "reason": "Deliberate archive-search route; boundary facts retained as context.",
-    "verbatim": "**`docs/archive/` is hidden from a default `rg`** by a root `.rgignore` — a deliberate boundary, not\na deletion. Search it on purpose with `rg <term> docs/archive/` or `rg --no-ignore <term>`; `grep -r`\nand `git grep` always see everything. An empty default search is the boundary working."
-  },
-  {
-    "id": "M01",
-    "file": "docs/README.md",
-    "first_line": 3,
-    "last_line": 7,
-    "classification": "doc-local",
-    "proposed_home": "docs/README header",
-    "reason": "This map's root allowlist/file placement contract.",
-    "verbatim": "Restructured 2026-08-03 (DOC_RESTRUCTURE_SPEC, owner-delegated). **Human docs\nare at the root; everything an agent reads is under `agent/`; everything spent\nis under `archive/`.** `python tools/doccheck.py` enforces this map — the root\nlist below is an allowlist checked in BOTH directions, so a new file at\n`docs/` root is a red build until it is added here too."
-  },
-  {
-    "id": "M02",
-    "file": "docs/README.md",
-    "first_line": 19,
-    "last_line": 19,
-    "classification": "task-local",
-    "proposed_home": "FUTURE_IDEAS",
-    "reason": "Parking lot is not a work backlog; destination outside current read corpus.",
-    "verbatim": "  FUTURE_IDEAS.md         parking lot, NOT a backlog. Nothing in it is work"
-  },
-  {
-    "id": "M03",
-    "file": "docs/README.md",
-    "first_line": 20,
-    "last_line": 22,
-    "classification": "task-local",
-    "proposed_home": "WAITING_ON_YOU generated banner",
-    "reason": "Owner register must not be hand-edited.",
-    "verbatim": "  WAITING_ON_YOU.md       GENERATED owner register — every decision and playtest\n                          leg currently held for the owner, newest first. Never\n                          hand-edit: `python tools/doccheck.py --regen`"
-  },
-  {
-    "id": "M04",
-    "file": "docs/README.md",
-    "first_line": 26,
-    "last_line": 26,
-    "classification": "redundant",
-    "proposed_home": "STATE with entry-file bootstrap pointer",
-    "reason": "Mandatory-read restatement; R5.",
-    "verbatim": "READ FIRST."
-  },
-  {
-    "id": "M05",
-    "file": "docs/README.md",
-    "first_line": 39,
-    "last_line": 40,
-    "classification": "task-local",
-    "proposed_home": "docs/README",
-    "reason": "Append-only archive contract; canonical occurrence for R1.",
-    "verbatim": "`docs/archive/` is append-only history — spent reports, retired prompts, session\nlogs, settled decision bodies. A root **`.rgignore`** keeps it out of a *default*"
-  },
-  {
-    "id": "M06",
-    "file": "docs/README.md",
-    "first_line": 54,
-    "last_line": 56,
-    "classification": "task-local",
-    "proposed_home": "docs/README",
-    "reason": "Deliberate archive search before concluding a historical record never existed.",
-    "verbatim": "everything. If a default search comes back empty on something you are sure this\nproject once knew, that is the boundary working — re-run with one of the two forms\nabove before concluding it was never here. It is not a bug and not a missing file."
-  },
-  {
-    "id": "M07",
-    "file": "docs/README.md",
-    "first_line": 67,
-    "last_line": 69,
-    "classification": "task-local",
-    "proposed_home": "WORKFLOW",
-    "reason": "Re-derive stale prose counts before quoting; map-specific specialisation.",
-    "verbatim": "Re-derive from\n`INDEX.md` before quoting them."
-  },
-  {
-    "id": "M08",
-    "file": "docs/README.md",
-    "first_line": 78,
-    "last_line": 79,
-    "classification": "task-local",
-    "proposed_home": "docs/README",
-    "reason": "Carry engine facts across repos when appropriate; conditional, not an automatic copy mandate.",
-    "verbatim": "copies **diverge from that date**: a fact learned here should usually be carried\nacross, and one learned there will not appear here by itself."
-  },
-  {
-    "id": "M09",
-    "file": "docs/README.md",
-    "first_line": 81,
-    "last_line": 83,
-    "classification": "task-local",
-    "proposed_home": "generated indexes' banners and map routing pointer",
-    "reason": "Index no-hand-edit route; canonical for R2 in recorded corpus.",
-    "verbatim": "⚠️ **`INDEX.md` is generated in both folders and is never hand-edited.** Edit\nthe entry or fact file; doccheck regenerates the index and fails on any\ndifference. Generated files say so on line 1."
-  },
-  {
-    "id": "M10",
-    "file": "docs/README.md",
-    "first_line": 87,
-    "last_line": 87,
-    "classification": "task-local",
-    "proposed_home": "docs/README",
-    "reason": "Defects belong in bug entries.",
-    "verbatim": "- A **defect** → a new file in `agent/bugs/`. Never a report, never FUTURE_IDEAS."
-  },
-  {
-    "id": "M11",
-    "file": "docs/README.md",
-    "first_line": 88,
-    "last_line": 88,
-    "classification": "task-local",
-    "proposed_home": "docs/README",
-    "reason": "Dated engine-fact placement.",
-    "verbatim": "- An **engine fact** → a new `EF-###.md` in `agent/facts/`, with its date."
-  },
-  {
-    "id": "M12",
-    "file": "docs/README.md",
-    "first_line": 89,
-    "last_line": 90,
-    "classification": "task-local",
-    "proposed_home": "docs/README",
-    "reason": "Binding future-work rules belong in governing docs, not reports.",
-    "verbatim": "- A **rule that binds future work** → `agent/WORKFLOW.md` or `agent/FIX_POLICY.md`,\n  not buried in a report."
-  },
-  {
-    "id": "M13",
-    "file": "docs/README.md",
-    "first_line": 91,
-    "last_line": 91,
-    "classification": "task-local",
-    "proposed_home": "docs/README",
-    "reason": "Report/plan/spec/audit placement.",
-    "verbatim": "- A **report, plan, spec, audit or survey** → `agent/reports/`."
-  },
-  {
-    "id": "M14",
-    "file": "docs/README.md",
-    "first_line": 92,
-    "last_line": 93,
-    "classification": "task-local",
-    "proposed_home": "prompts/README",
-    "reason": "Prompt placement, consumption and map update; exact comparison with prompt-map home pending.",
-    "verbatim": "- A **prompt** → reusable: `agent/prompts/perma/`; one-off: the `agent/prompts/` root, deleted when consumed. Update the\n  map, `agent/prompts/README.md`, either way."
-  },
-  {
-    "id": "M15",
-    "file": "docs/README.md",
-    "first_line": 94,
-    "last_line": 94,
-    "classification": "task-local",
-    "proposed_home": "docs/README",
-    "reason": "Session-leg placement and order.",
-    "verbatim": "- A **session leg** → `archive/SESSION_LOG.md` (append-only, newest first)."
-  },
-  {
-    "id": "M16",
-    "file": "docs/README.md",
-    "first_line": 95,
-    "last_line": 96,
-    "classification": "redundant",
-    "proposed_home": "WORKFLOW",
-    "reason": "Owner-call mirroring; R4.",
-    "verbatim": "- A **decision the owner must make** → `PLAYTEST_CHECKLIST.md` →\n  \"Decisions waiting on you\". Never only in an agent doc."
-  },
-  {
-    "id": "M17",
-    "file": "docs/README.md",
-    "first_line": 97,
-    "last_line": 99,
-    "classification": "task-local",
-    "proposed_home": "WORKFLOW",
-    "reason": "Maintain player replies after an owner ask under rule 5b; this is not unsolicited-draft authority.",
-    "verbatim": "- A **reply to a player's report** (Steam, Reddit, GitHub) → `FIELD_REPORT_REPLIES.md`\n  at the root. The owner posts; agents draft, record what went up, and update a\n  draft in the same commit that changes the fact it states."
-  },
-  {
-    "id": "M18",
-    "file": "docs/README.md",
-    "first_line": 100,
-    "last_line": 100,
-    "classification": "redundant",
-    "proposed_home": "docs/README",
-    "reason": "Same-doc restatement of append-only archive contract; R1.",
-    "verbatim": "- **Spent** anything → `archive/`, which is append-only and never edited."
-  },
-  {
-    "id": "M19",
-    "file": "docs/README.md",
-    "first_line": 102,
-    "last_line": 104,
-    "classification": "task-local",
-    "proposed_home": "WORKFLOW",
-    "reason": "Entry/report claim conflict handling.",
-    "verbatim": "⚠️ **Reports are not authority.** When a report disagrees with `agent/bugs/` or\n`agent/facts/`, the entry wins — or the report is wrong and is corrected in the\nsame change that discovers it."
-  },
-  {
-    "id": "M20",
-    "file": "docs/README.md",
-    "first_line": 111,
-    "last_line": 112,
-    "classification": "task-local",
-    "proposed_home": "docs/README",
-    "reason": "Legacy paths: translate instead of editing historical records.",
-    "verbatim": "Pre-restructure\n> documents cite the old paths; translate mentally, do not edit records."
-  },
-  {
-    "id": "M21",
-    "file": "docs/README.md",
-    "first_line": 115,
-    "last_line": 117,
-    "classification": "task-local",
-    "proposed_home": "docs/README",
-    "reason": "Standing-prompt legacy-path specialisation, not redundant.",
-    "verbatim": "> 2026-09-11 (owner ask): the standing prompts moved into `agent/prompts/perma/` (DISPATCH, GENERAL_USE_PROMPT, RELEASE,\n> RELEASE_OUTBOX, POST_UPLOAD_CLOSE, PUBLIC_SURFACE_SWEEP, SITE_AUDIT, STATE_EVICTION, DRONE_PROJECT_PROMPT, COMBINED_SITTING).\n> Live references were rewritten; the archive and `metadata.lua` comments still cite `agent/prompts/<name>.md`, so translate them."
-  },
-  {
-    "id": "M22",
-    "file": "docs/README.md",
-    "first_line": 119,
-    "last_line": 121,
-    "classification": "task-local",
-    "proposed_home": "docs/README",
-    "reason": "Reply-file legacy-path specialisation, not redundant.",
-    "verbatim": "> 2026-09-11 (owner ask): `agent/reports/FIELD_REPORT_REPLIES.md` → `FIELD_REPORT_REPLIES.md` at the root, a human file (the\n> owner posts, agents draft). Live references were rewritten; the archive and the committed Codex report still cite the\n> old path, so translate them."
-  },
-  {
-    "id": "M23",
-    "file": "docs/README.md",
-    "first_line": 123,
-    "last_line": 126,
-    "classification": "task-local",
-    "proposed_home": "docs/README",
-    "reason": "Old-name interpretation and historical-record preservation; not a duplicate of a bare archive prohibition.",
-    "verbatim": "> 2026-08-17: the pack was renamed **Community Fix Pack → Relaunched Fix Pack** (display name only; the mod\n> `id` and the `[CommunityFixPack]` log tag are UNCHANGED). Earlier records use the old name — translate\n> mentally, do not edit records. The old name is still live in `agent/bugs/`, `agent/facts/EF-054.md` and\n> several reports."
-  },
-  {
-    "id": "S01",
-    "file": "docs/agent/STATE.md",
-    "first_line": 3,
-    "last_line": 3,
-    "classification": "doc-local",
-    "proposed_home": "STATE header",
-    "reason": "Kernel-only content contract.",
-    "verbatim": "Kernel only: status + pointer, never derivation."
-  },
-  {
-    "id": "S02",
-    "file": "docs/agent/STATE.md",
-    "first_line": 14,
-    "last_line": 14,
-    "classification": "task-local",
-    "proposed_home": "pack/release task doc, comparison pending",
-    "reason": "Never carry a pack size; predict it. Citation context is not another rule.",
-    "verbatim": "Never carry a pack size — predict with `tools/pack_predict.py`."
-  },
-  {
-    "id": "S03",
-    "file": "docs/agent/STATE.md",
-    "first_line": 21,
-    "last_line": 21,
-    "classification": "task-local",
-    "proposed_home": "entry/fact authoring rules",
-    "reason": "Preserve old entries' build stamps.",
-    "verbatim": "Old entries KEEP their version stamp."
-  },
-  {
-    "id": "S04",
-    "file": "docs/agent/STATE.md",
-    "first_line": 22,
-    "last_line": 22,
-    "classification": "global",
-    "proposed_home": "STATE",
-    "reason": "Runtime/source priority; branch/save fact in the excerpt is not another rule.",
-    "verbatim": "Trust runtime over source (`EF-078`). ⛔ **1.0.7 SAVES CANNOT LOAD ON 1.1.0** (`EF-079`) — the fixture library"
-  },
-  {
-    "id": "S05",
-    "file": "docs/agent/STATE.md",
-    "first_line": 23,
-    "last_line": 23,
-    "classification": "task-local",
-    "proposed_home": "playtest provisioning doc",
-    "reason": "Provision branch-correct fixtures; triage-only override.",
-    "verbatim": "  is branch-locked; a 1.1.0 leg needs a NEW colony provisioned from scratch (hours). Override is triage-only (`EF-080`)."
-  },
-  {
-    "id": "S06",
-    "file": "docs/agent/STATE.md",
-    "first_line": 24,
-    "last_line": 26,
-    "classification": "task-local",
-    "proposed_home": "F116/F117/F118 entries with STATE hold pointer",
-    "reason": "Do not promote these specific held defects without play evidence.",
-    "verbatim": "- ⛔ NEVER REPRODUCED, status HELD at `filed`/source-derived, never promote without a play leg: **F116** (repaired\n  in-body `add94b3`), **F117** (`777249d`; station recipe in `bugs/F117.md` §Control, desk 8/8, ⛔ untested in play —\n  a nil `CachedArgShape()` makes the control vacuous), **F118** (rider `0136af1`, no probe)."
-  },
-  {
-    "id": "S07",
-    "file": "docs/agent/STATE.md",
-    "first_line": 29,
-    "last_line": 29,
-    "classification": "task-local",
-    "proposed_home": "probe-kit reporting",
-    "reason": "Kit verdicts are predictions until owed boot, not measurements.",
-    "verbatim": "Kit verdicts are PREDICTIONS until then; still FAIL/ERROR by name:"
-  },
-  {
-    "id": "S08",
-    "file": "docs/agent/STATE.md",
-    "first_line": 33,
-    "last_line": 33,
-    "classification": "task-local",
-    "proposed_home": "C89 entry",
-    "reason": "Specific reopening trigger; unavailable-arm facts are not rules.",
-    "verbatim": "**Reopen C89 on a countering field report.**"
-  },
-  {
-    "id": "S09",
-    "file": "docs/agent/STATE.md",
-    "first_line": 35,
-    "last_line": 35,
-    "classification": "task-local",
-    "proposed_home": "WORKFLOW",
-    "reason": "Never re-derive a leg from implementation.",
-    "verbatim": "never re-derive a leg from the module."
-  },
-  {
-    "id": "S10",
-    "file": "docs/agent/STATE.md",
-    "first_line": 39,
-    "last_line": 40,
-    "classification": "task-local",
-    "proposed_home": "C92 brief with retained STATE hold pointer",
-    "reason": "Shipping hold, not spare kernel budget.",
-    "verbatim": "  ⭐ **ck172 RULED 09-13: build the RESTORATION, ⛔ SHIPPING HELD until the owner lifts it in words** —\n  brief `prompts/C92_ACHIEVEMENT_BUILD.md`; ck171 (scope) stays OPEN. Achievement testing = `EF-094`."
-  },
-  {
-    "id": "S11",
-    "file": "docs/agent/STATE.md",
-    "first_line": 49,
-    "last_line": 49,
-    "classification": "task-local",
-    "proposed_home": "player-report investigation route",
-    "reason": "Tracker API route.",
-    "verbatim": "- ⛔ Read the GitHub tracker via `api.github.com/.../issues/<n>/comments`, never the HTML page."
-  },
-  {
-    "id": "S12",
-    "file": "docs/agent/STATE.md",
-    "first_line": 52,
-    "last_line": 53,
-    "classification": "task-local",
-    "proposed_home": "site task docs",
-    "reason": "Owner deployment and deployed-SHA recheck protocol; exact perma comparison pending.",
-    "verbatim": "The deploy is the owner's act — `publish-site.yml` is\n  `workflow_dispatch` only. ⛔ Never quote a stored \"deployed = <sha>\"; read the deployments API (`perma/SITE_AUDIT.md`)."
-  },
-  {
-    "id": "S13",
-    "file": "docs/agent/STATE.md",
-    "first_line": 60,
-    "last_line": 60,
-    "classification": "task-local",
-    "proposed_home": "toolkit testing/provisioning doc",
-    "reason": "Do not equate untainted and achievement-eligible.",
-    "verbatim": "  ⛔ Eligibility stays `UNAVAILABLE:sandbox` (`EF-096`) — no-taint is necessary, NOT proven sufficient."
-  },
-  {
-    "id": "S14",
-    "file": "docs/agent/STATE.md",
-    "first_line": 64,
-    "last_line": 65,
-    "classification": "task-local",
-    "proposed_home": "C92 brief with retained STATE hold pointer",
-    "reason": "Hold repeated inside NEXT is contextual routing, not independently claimed redundant.",
-    "verbatim": "- ⏭ NEXT: fire `prompts/STANDDOWN_AUDIT.md` (no blocker) · `prompts/C92_ACHIEVEMENT_BUILD.md` (build+test, ⛔ ships never\n  without ck172's hold lifted) · then the playtest sitting. ⛔ `SELFCHECK_PILOT` REMOVED 09-13 (`cf8d51f`)."
-  },
-  {
-    "id": "S15",
-    "file": "docs/agent/STATE.md",
-    "first_line": 71,
-    "last_line": 71,
-    "classification": "task-local",
-    "proposed_home": "DestroyedRebuild entry",
-    "reason": "Hardening hold plus specific reopening prerequisites.",
-    "verbatim": "  ⛔ Do NOT harden `DestroyedRebuild`'s `efVisible` guard; reopen ONLY with the hex's buildings list + mod list + a save."
-  },
-  {
-    "id": "S16",
-    "file": "docs/agent/STATE.md",
-    "first_line": 75,
-    "last_line": 76,
-    "classification": "task-local",
-    "proposed_home": "release/console task docs plus retained kernel hazard pointer",
-    "reason": "Launched-game portal-API prohibition with portal order.",
-    "verbatim": "- **H-03** No script/console in a launched game may touch a portal API — the FIRST call **creates the listing**\n  (`SteamWorkshop.lua:17-22`). Safe: `DbgPackMod`, `tools/upload_preflight.py`. Paradox before Steam."
-  },
-  {
-    "id": "S17",
-    "file": "docs/agent/STATE.md",
-    "first_line": 77,
-    "last_line": 78,
-    "classification": "global",
-    "proposed_home": "STATE",
-    "reason": "Cross-document sweep evidence fence, including specialised kernel/log writing restriction.",
-    "verbatim": "- **H-05** Sweep fence: no session reads `prompts/prelaunch-sweep/SWEEP_FINDINGS.md` or the link reports to reach\n  a verdict, and neither STATE nor SESSION_LOG ever restates a link verdict — point at the ledger instead."
-  },
-  {
-    "id": "S18",
-    "file": "docs/agent/STATE.md",
-    "first_line": 79,
-    "last_line": 81,
-    "classification": "task-local",
-    "proposed_home": "rig/junction task docs plus retained kernel hazard pointer",
-    "reason": "Owner-only enable recovery and same-id swap qualification.",
-    "verbatim": "- **H-08** ⛔ Pulling a mod's junction COSTS its enable and restoring the folder does NOT buy it back (`EF-055`);\n  recovery = owner tick + restart, never an agent's. ⚠️ The cost lands when the **id vanishes**; a folder-for-\n  folder swap under the **same id KEEPS** the enable (the opt-in pack is in that state now, ck43)."
-  },
-  {
-    "id": "S19",
-    "file": "docs/agent/STATE.md",
-    "first_line": 82,
-    "last_line": 83,
-    "classification": "task-local",
-    "proposed_home": "pack/rig task docs plus retained kernel hazard pointer",
-    "reason": "No packed folder beside a live junction.",
-    "verbatim": "- **H-09** Never stage a packed folder beside a live junction — at equal version the **unpacked one WINS**,\n  silently (`Mod.lua:1770`), and the leg measures nothing."
-  },
-  {
-    "id": "S20",
-    "file": "docs/agent/STATE.md",
-    "first_line": 86,
-    "last_line": 86,
-    "classification": "global",
-    "proposed_home": "STATE",
-    "reason": "Truthful readiness/publication claims.",
-    "verbatim": "- **H-04** ⛔ Never call a FUTURE release ready, and never treat \"published\" as covering anything the owner has not done."
-  },
-  {
-    "id": "S21",
-    "file": "docs/agent/STATE.md",
-    "first_line": 87,
-    "last_line": 87,
-    "classification": "task-local",
-    "proposed_home": "release governance doc",
-    "reason": "Shipping bar is a normative definition.",
-    "verbatim": "- Ship line FROZEN (08-12): `fixed` + suite + self-checks + verified save-safety IS the bar."
-  },
-  {
-    "id": "S22",
-    "file": "docs/agent/STATE.md",
-    "first_line": 88,
-    "last_line": 90,
-    "classification": "task-local",
-    "proposed_home": "release/fix maintenance procedure",
-    "reason": "One-time gate versus major-overhaul qualification.",
-    "verbatim": "- ⛔ The gate was ONE-TIME, not a per-change tax (08-20, item 57). Post-release = patch-note-driven maintenance:\n  `items.lua` entry (doccheck MODULE SETS) + one boot `applied` log + doccheck counts. ⛔ Never quote `FIX_POLICY` §3a's per-module\n  cost for a single added fix — run B / lens sweep / audit return only for a **major overhaul**."
-  },
-  {
-    "id": "S23",
-    "file": "docs/agent/STATE.md",
-    "first_line": 91,
-    "last_line": 91,
-    "classification": "global",
-    "proposed_home": "STATE",
-    "reason": "Vendor patch assertion is unconfirmed until verified.",
-    "verbatim": "- ⚖️ A vendor patch note saying \"Fixed\" is a **CLAIM, false until we confirm it** (owner, 09-08)."
-  },
-  {
-    "id": "S24",
-    "file": "docs/agent/STATE.md",
-    "first_line": 95,
-    "last_line": 95,
-    "classification": "task-local",
-    "proposed_home": "WORKFLOW",
-    "reason": "SKIPs named individually; perma comparisons pending.",
-    "verbatim": "- ⛔ SKIPs BY NAME, never a total."
-  },
-  {
-    "id": "S25",
-    "file": "docs/agent/STATE.md",
-    "first_line": 96,
-    "last_line": 96,
-    "classification": "task-local",
-    "proposed_home": "release metadata doc",
-    "reason": "Preserve mod id and log tag through display-name change.",
-    "verbatim": "- Display name Relaunched Fix Pack; `id` + `[CommunityFixPack]` log tag KEPT (08-17)."
-  },
-  {
-    "id": "S26",
-    "file": "docs/agent/STATE.md",
-    "first_line": 97,
-    "last_line": 97,
-    "classification": "task-local",
-    "proposed_home": "public-surface task doc",
-    "reason": "Naming and load-order advice restriction; exact source comparison pending.",
-    "verbatim": "- Never name fredware's mod on a player surface; no player load-order advice (`EF-054`, FIX_POLICY §8)."
-  },
-  {
-    "id": "S27",
-    "file": "docs/agent/STATE.md",
-    "first_line": 102,
-    "last_line": 102,
-    "classification": "task-local",
-    "proposed_home": "UPLOAD_WORKFLOW",
-    "reason": "Paste backups required and current; no reopening auto-fill question.",
-    "verbatim": "  `UPLOAD_WORKFLOW` §3 paste backups stay REQUIRED every cycle. Auto-fill is CLOSED (ck155, never re-ask)."
-  },
-  {
-    "id": "S28",
-    "file": "docs/agent/STATE.md",
-    "first_line": 106,
-    "last_line": 107,
-    "classification": "doc-local",
-    "proposed_home": "STATE header",
-    "reason": "Preserve parser idioms in this enumeration.",
-    "verbatim": "This enumeration feeds `WAITING_ON_YOU.md` — keep the\n  literal `STILL OPEN:` and `Owner OWES: ck##` idioms, or the owner's register silently drops items."
-  },
-  {
-    "id": "S29",
-    "file": "docs/agent/STATE.md",
-    "first_line": 113,
-    "last_line": 113,
-    "classification": "task-local",
-    "proposed_home": "F59 entry",
-    "reason": "Repair must cover both callers; frozen-download description retained as factual context.",
-    "verbatim": "must cover both,"
-  },
-  {
-    "id": "S30",
-    "file": "docs/agent/STATE.md",
-    "first_line": 117,
-    "last_line": 117,
-    "classification": "doc-local",
-    "proposed_home": "STATE header",
-    "reason": "Generated count section is never typed.",
-    "verbatim": "Build state — `python tools/doccheck.py --emit-counts`, never hand-typed"
-  },
-  {
-    "id": "S31",
-    "file": "docs/agent/STATE.md",
-    "first_line": 125,
-    "last_line": 125,
-    "classification": "doc-local",
-    "proposed_home": "STATE header",
-    "reason": "Re-emit this document's build region after a change.",
-    "verbatim": "Re-emit after any change."
-  },
-  {
-    "id": "K01",
-    "file": "docs/PLAYTEST_CHECKLIST.md",
-    "first_line": 4,
-    "last_line": 7,
-    "classification": "doc-local",
-    "proposed_home": "checklist header",
-    "reason": "Worklist-only content; predictions and console forensics supplied in sitting.",
-    "verbatim": "live agent session alongside**. This file is the work list and nothing else:\nwhat to test, how to set it up, what each test needs. Expectations,\npredictions, pass/fail readings and console forensics are NOT written here —\nthe agent supplies them in the sitting, from each test's linked entry."
-  },
-  {
-    "id": "K02",
-    "file": "docs/PLAYTEST_CHECKLIST.md",
-    "first_line": 11,
-    "last_line": 25,
-    "classification": "doc-local",
-    "proposed_home": "checklist header",
-    "reason": "Whole-body retirement, test/decision/session distinctions and residual pointers; keep the qualifications.",
-    "verbatim": "> ⛔ **RETIREMENT RULE — owner ruling 2026-09-14, item 177. EVERY section in this\n> file retires to [archive/PLAYTEST_ARCHIVE.md](archive/PLAYTEST_ARCHIVE.md) once it\n> is settled — not tests alone.** This extends the old rule (*\"completed tests move\n> whole\"*, 44 sections as of 2026-08-01, plus the 2026-08-03 pre-redesign snapshot),\n> which covered ~1% of the file while the other 99% had no rule reaching it.\n>\n> - a **test** retires when it is completed;\n> - a **decision** retires once its marker reads `ruled` or `closed`;\n> - a **dated session record** does not belong here at all — it goes to\n>   `archive/SESSION_LOG.md`. This file is the work list, nothing else.\n>\n> The move is whole-body, leaving the heading, the marker and a pointer behind.\n> `.claude/tools/archive_settled.py` performs exactly that move over the marked set.\n> ⚠️ **An unmarked item can never become settled, so it can never retire** — the\n> marker is what makes this rule run, and neglecting it is how this file reached 54%"
-  },
-  {
-    "id": "W01",
-    "file": "docs/agent/WORKFLOW.md",
-    "first_line": 16,
-    "last_line": 19,
-    "classification": "task-local",
-    "proposed_home": "WORKFLOW",
-    "reason": "Update entry with fixes; generated-index clause is a scoped specialisation.",
-    "verbatim": "   Update the ENTRY in the same change that adds or edits a fix. **`INDEX.md`\n   is GENERATED — never hand-edit it.** A status still lives in two places, but\n   both are now inside the entry file: front-matter `status:` and the heading\n   tag. doccheck goes red if they disagree, and red on a stale INDEX."
-  },
-  {
-    "id": "W02",
-    "file": "docs/agent/WORKFLOW.md",
-    "first_line": 31,
-    "last_line": 34,
-    "classification": "task-local",
-    "proposed_home": "WORKFLOW",
-    "reason": "Human-doc execution markers.",
-    "verbatim": "1. **Execution markers (R2).** Every console line, lever or command printed in a\n   human doc carries `[RAN <date>, log <name>]` or `[NEVER RUN]`. Unmarked, a\n   never-executed snippet reads exactly like a proven one — the PT-61 near-miss\n   was a gate that would have parked a whole attended sitting."
-  },
-  {
-    "id": "W03",
-    "file": "docs/agent/WORKFLOW.md",
-    "first_line": 35,
-    "last_line": 40,
-    "classification": "task-local",
-    "proposed_home": "WORKFLOW",
-    "reason": "Per-claim and per-row provenance.",
-    "verbatim": "2. **Provenance words (R3).** Load-bearing claims in entries, specs and briefs\n   are prefixed **MEASURED / SOURCE / INFERRED / INHERITED / GUESS**, and **the\n   ROUTE sentence is tagged separately from its citations** (\"therefore the only\n   way is…\" is a different claim from the lines it cites — the project has been\n   wrong about a route while every cited line was right, twice). ⛔ **A blanket\n   verification claim over a table is banned: the tag goes per row.**"
-  },
-  {
-    "id": "W04",
-    "file": "docs/agent/WORKFLOW.md",
-    "first_line": 41,
-    "last_line": 45,
-    "classification": "task-local",
-    "proposed_home": "WORKFLOW",
-    "reason": "Takeability and owner routing.",
-    "verbatim": "3. **TAKEABLE-WHEN on routed items (R5).** Routing names the owner prompt AND\n   the precondition (\"needs a suite run\" / \"a colony with the law enacted\" /\n   \"the owner at the keyboard\"). An item whose precondition is a *situation*\n   goes to the checklist as a rider immediately, not to a prompt that will\n   forward it again."
-  },
-  {
-    "id": "W05",
-    "file": "docs/agent/WORKFLOW.md",
-    "first_line": 46,
-    "last_line": 53,
-    "classification": "task-local",
-    "proposed_home": "WORKFLOW",
-    "reason": "Archive cited logs in same commit; force ignored log additions.",
-    "verbatim": "4. **Archive load-bearing logs (R8).** If a leg's numbers will be cited by a\n   status flip, copy the log into the repo in the SAME commit. The game's\n   rotation cap is ~20 files and it has already eaten founding measurements.\n   Cannot be applied retroactively, which is the whole argument for now.\n   ⛔ **`.gitignore` line 2 is `*.log`, so the archive copy needs\n   `git add -f`** — a plain `git add` drops it SILENTLY and the commit looks\n   complete (one commit shipped with a false archive claim before this was\n   caught, 2026-08-03)."
-  },
-  {
-    "id": "W06",
-    "file": "docs/agent/WORKFLOW.md",
-    "first_line": 54,
-    "last_line": 62,
-    "classification": "task-local",
-    "proposed_home": "WORKFLOW",
-    "reason": "Canonical owner-call mirroring plus marker/regeneration specialisations; R4.",
-    "verbatim": "5. **Owner-decision mirroring (R10).** Every item needing the owner's call is\n   mirrored into `docs/PLAYTEST_CHECKLIST.md` → \"Decisions waiting on you\"\n   (one line + pointer), and struck the moment it is decided. **An owner\n   decision recorded only in an entry or a report is not considered asked.**\n   **Changing an item's status ALSO means updating its marker.** Update the\n   checklist's `<!-- ck:N status:... owner:... -->` marker in the same edit,\n   including whether an action is still owed by the owner. Regenerate the\n   owner register after editing its source; for the contained regeneration\n   route, see \"Writing in a shared tree\" below."
-  },
-  {
-    "id": "W07",
-    "file": "docs/agent/WORKFLOW.md",
-    "first_line": 63,
-    "last_line": 77,
-    "classification": "task-local",
-    "proposed_home": "WORKFLOW",
-    "reason": "Record ruling conditions; check expiry.",
-    "verbatim": "5a. **A ruling carries the state it was made in (R10b, adopted 2026-09-12,\n   checklist 161).** When you write an owner ruling down, record the CONDITION\n   it was made under beside the words — what was broken, what was being triaged,\n   which release it was steering. ⚖️ **A ruling made under a named condition\n   expires with that condition**: re-read it against today's state before\n   treating it as binding, and ⛔ **never record a later, different ruling as a\n   \"reversal\" without first checking whether the earlier one's condition still\n   holds.** Named after the miss: the 09-08 *\"we fix anything negatives, a small\n   positive I am not as concerned about\"* ruling was **triage scoped to the 1.1.0\n   recovery** — an attention-routing device for a period when the pack could do\n   active harm. Recorded without that scope (and, worse, stamped \"it generalises\n   well beyond this one case\"), it read as standing policy, and **three separate\n   documents re-derived a false contradiction with the 09-09 ask and handed it\n   back to the owner as an open question** — the exact attention drain the\n   original triage rule existed to prevent."
-  },
-  {
-    "id": "W08",
-    "file": "docs/agent/WORKFLOW.md",
-    "first_line": 79,
-    "last_line": 92,
-    "classification": "task-local",
-    "proposed_home": "WORKFLOW",
-    "reason": "Player replies pull-only; triage exemption is part of the rule.",
-    "verbatim": "5b. **Player replies are PULL-ONLY (R10c, owner ruling 2026-09-12, checklist\n   165).** Rule 5's mirroring obligation ⛔ **does NOT extend to replies to player\n   reports.** Never draft one unasked, never put one on the owner's owed list\n   (`STATE.md`'s OWES line, a handoff's decisions table, a session summary's\n   \"waiting on you\"), never raise a waiting `DRAFT` as a nudge, and never gate\n   other work on a reply going out. A draft in `docs/FIELD_REPORT_REPLIES.md`\n   waits indefinitely **by design**. When the owner asks for one, write it and\n   stop — one ask, one draft, no follow-on queue. ✅ **This does not touch\n   triage:** a player's report is evidence about a defect, and filing it into\n   `agent/bugs/` is ordinary bug-fixing work that continues unchanged — ⛔ never\n   cite this rule to avoid reading, filing or investigating a report. ⚖️ Condition\n   (per 5a): the owner had fielded a day of reply questions while the project's\n   real gate was an unrun playtest. The cost being cut is **owner attention\n   diverted from fixing bugs**, not the replies themselves."
-  },
-  {
-    "id": "W09",
-    "file": "docs/agent/WORKFLOW.md",
-    "first_line": 96,
-    "last_line": 102,
-    "classification": "task-local",
-    "proposed_home": "WORKFLOW",
-    "reason": "Status-flip edit order; not a duplicate of a short generated-output banner.",
-    "verbatim": "6. **`INDEX.md` in `agent/bugs/` and `agent/facts/` is GENERATED.** Edit the\n   entry or fact file; doccheck regenerates the index and goes red on any\n   difference, and red when front-matter `status:` and the heading tag disagree.\n   **Edit order for a status flip** (adopted 2026-08-03, standing-prompts\n   redesign O4): front-matter `status:` first — the index regenerates from\n   it — then the heading tag to match, in the same edit. A red doccheck means\n   you stopped halfway."
-  },
-  {
-    "id": "W10",
-    "file": "docs/agent/WORKFLOW.md",
-    "first_line": 103,
-    "last_line": 104,
-    "classification": "task-local",
-    "proposed_home": "WORKFLOW",
-    "reason": "Canonical doccheck-before-commit rule; R3.",
-    "verbatim": "7. **Run `python tools/doccheck.py` before committing doc changes** — red\n   blocks. One-time setup: `git config core.hooksPath tools/hooks`."
-  },
-  {
-    "id": "W11",
-    "file": "docs/agent/WORKFLOW.md",
-    "first_line": 105,
-    "last_line": 114,
-    "classification": "task-local",
-    "proposed_home": "STATE header / STATE_EVICTION, allocation pending",
-    "reason": "STATE edit/eviction procedure; cannot allocate fully without the perma read.",
-    "verbatim": "8. **STATE.md is BYTE-budgeted with an eviction rule** (owner ruling 2026-08-18,\n   checklist 42; the 2026-08-03 60-line cap is RETIRED — it was satisfied while\n   being defeated). doccheck enforces warn/hard byte caps plus a per-line cap;\n   a doccheck WARN must be copied VERBATIM into the owner report, and the owner\n   fires `agent/prompts/perma/STATE_EVICTION.md`. Format for machine efficiency and\n   safety: one fact per line, never widen or pack lines to satisfy a budget —\n   evict, don't compress. Resolved or superseded material moves to\n   `docs/archive/SESSION_LOG.md` (append-only, newest-first, `tags:` line).\n   Evict history, never obligations — open gates, holds, owner decisions and\n   the counts block stay."
-  },
-  {
-    "id": "W12",
-    "file": "docs/agent/WORKFLOW.md",
-    "first_line": 153,
-    "last_line": 155,
-    "classification": "task-local",
-    "proposed_home": "WORKFLOW, unresolved X1",
-    "reason": "Per-fix commit discipline includes editing the frozen description.",
-    "verbatim": "4. One commit per fix or tight group; agent/bugs/ updated in the same commit;\n   MOD_DESCRIPTION.md updated in the same commit as the code change it\n   describes."
-  },
-  {
-    "id": "W13",
-    "file": "docs/agent/WORKFLOW.md",
-    "first_line": 640,
-    "last_line": 649,
-    "classification": "task-local",
-    "proposed_home": "WORKFLOW, unresolved X1",
-    "reason": "Release instructions edit the frozen description; no retirement self-authorised.",
-    "verbatim": "- MOD_DESCRIPTION.md: delete the `[DRAFT NOTE]` markers; do NOT promise the\n  ClassicRockets export half; sync the fix list with agent/bugs/ statuses.\n  ⭐ **Add the \"judgment calls\" section** (owner ADOPTED the relabel proposal\n  2026-08-04: F55, F40, F73(b), F70, F97 presented as design-judgment repairs,\n  not plain bugs) — ⚠️ **its wording is OWED BY THE OWNER** and must be asked\n  for if it does not exist yet; the checklist line tracks it.\n  **Recount the probe number** quoted in the \"What we can promise, and what we\n  can't\" block — it moves whenever a wave file gains or loses a probe, and a\n  stale number there is a false claim in player-facing text. Authoritative count\n  is in `agent/STATE.md`."
-  },
-  {
-    "id": "W14",
-    "file": "docs/agent/WORKFLOW.md",
-    "first_line": 874,
-    "last_line": 875,
-    "classification": "global",
-    "proposed_home": "STATE",
-    "reason": "Volatile-external recheck; site/pack instrument instructions specialise it.",
-    "verbatim": "  Read it with a command, every time. ⛔ Never quote a stored number: it was true once, and\n  this rig auto-updated into a new game build unasked while nobody was looking."
-  },
-  {
-    "id": "W15",
-    "file": "docs/agent/WORKFLOW.md",
-    "first_line": 883,
-    "last_line": 886,
-    "classification": "global",
-    "proposed_home": "STATE",
-    "reason": "Command-based absence proof, decoded input and presence-side count.",
-    "verbatim": "**R-B · Never read a file to prove a negative.** Absence is settled by a grep, never by\nreading. And a negative in a *compressed* artifact is not a sample at all — decode first. Three\nincidents here: the fpk \"not found\", the grep on an old name that was really a rename, and a\none-sided count. A claim about what is ABSENT needs the presence side counted too."
-  }
-]
+```text
+  warn F59: the frozen index-row cell says 'fixed*', entry says 'tested-attended' (from 'tag')
+  warn F85: the frozen index-row cell says 'filed', entry says 'wontfix' (from 'tag')
+  warn C12: the frozen index-row cell says 'filed', entry says 'cand' (from 'row-evidence')
+  warn C13: the frozen index-row cell says 'filed', entry says 'cand' (from 'row-evidence')
+  warn C14: the frozen index-row cell says 'filed', entry says 'cand' (from 'row-evidence')
+  warn C15: the frozen index-row cell says 'filed', entry says 'cand' (from 'row-evidence')
+  warn C16: the frozen index-row cell says 'filed', entry says 'cand' (from 'row-evidence')
+  warn C17: the frozen index-row cell says 'filed', entry says 'cand' (from 'row-evidence')
+  warn C37: the frozen index-row cell says 'filed', entry says 'cand' (from 'row-evidence')
+  warn C35: the frozen index-row cell says 'filed', entry says 'cand' (from 'row-evidence')
+  warn C34: the frozen index-row cell says 'filed', entry says 'cand' (from 'row-evidence')
+  warn C38: the frozen index-row cell says 'filed', entry says 'cand' (from 'row-evidence')
+  warn C39: the frozen index-row cell says 'filed', entry says 'tested-unattended' (from 'tag')
+  warn F100: the frozen index-row cell says 'filed', entry says 'fixed' (from 'tag')
+  warn C43: the frozen index-row cell says 'filed', entry says 'fixed' (from 'tag')
+  warn C49: the frozen index-row cell says 'filed', entry says 'wontfix' (from 'tag')
+  warn C50: the frozen index-row cell says 'filed', entry says 'tested-attended' (from 'tag')
+  warn C51: the frozen index-row cell says 'filed', entry says 'tested-attended' (from 'tag')
+  warn C52: the frozen index-row cell says 'filed', entry says 'parked' (from 'tag')
+STATE + STUBS: STATE.md 12331 bytes (warn 15360 TEMPORARY, hard 18432, line 200); 3 stubs present and pointing
+  ⏳ STATE warn is TEMPORARILY raised +25% (12288 → 15360) by owner ruling 2026-09-14, checklist 178, for the duration of the doc overhaul. Restore: set STATE_WARN_TEMPORARY = False in this file. ⛔ Owner's word only — no agent retires this on its own judgement.
+  warn duplicate ck:144 at lines 2733, 2807 (agree)
+    smr-bug-library           3622 B  ⚠ over the 3072 B target
+    smr-orientation           3248 B  ⚠ over the 3072 B target
+  WARN UNKNOWN   76_SMRTK_Kit.lua           SMRTest.order is defined by no kit file
+  WARN UNKNOWN   76_SMRTK_Kit.lua           SMRTest.probes is defined by no kit file
+  WARN UNKNOWN   76_SMRTK_Kit.lua           SMRTest.last is defined by no kit file
 ```
 
-## Stop / next request
+## Migration units — after owner all-clear
 
-[RAN 2026-09-14, tool transcript] Final report-only doccheck: GREEN at 2bbdbd3; STATE is now 12,331 bytes. A scoped diff shows only toolkit routing/boot obligations changed, leaving the candidate local excerpts unchanged. The same framing-only +89-byte proposal would therefore yield 12,420 bytes currently, 2,940 below the temporary warning and 132 above the permanent warning. No offsetting eviction is approved.
+One commit per source doc, with only that source’s approved header/clauses and necessary approved pointers/presentation changes. Recheck status immediately before each write, use exact pathspecs for exclusively owned source files, prove each moved excerpt byte-identical somewhere in the live tree (literal git grep, or raw-byte multiline check plus literal per-line controls), and run doccheck GREEN after each. Any CLAUDE cleanup is a separately announced source+AGENTS regen commit. A global rule or task obligation must not silently become conditional on editing a particular doc.
 
+Checker/kernel land last, once approved headers exist. The new kernel rule is exactly one line; existing global protocols remain in their current binding homes per X8. The final checked report records source commits, measured caps, byte-preservation checks and watched-fail structural check. Consume RULES_HEADERS and its prompt-map row together only once the whole task is complete. No tombstones replace removed clauses.
 
-Under the commissioned task's section 6, X1 requires owner direction before proceeding. The concrete request is permission to **finish the remaining inventory while keeping X1 unresolved for the later migration gate**. This authorises analysis only, not deletion/rewording of the stale instruction. Complete per-doc inventory, redundancy/dead checks, eligibility and offsetting STATE arithmetic before seeking migration approval.
+## Live progress
+
+- [x] Anchor, scoped reads and owner-authorized continuation with X1 unresolved.
+- [x] Inventory CLAUDE.md.
+- [x] Inventory docs/README.md.
+- [x] Inventory docs/agent/STATE.md.
+- [x] Inventory docs/PLAYTEST_CHECKLIST.md — preamble only.
+- [x] Inventory docs/agent/WORKFLOW.md.
+- [x] Inventory docs/agent/FIX_POLICY.md.
+- [x] Inventory docs/PLAYTEST_HELP.md.
+- [x] Inventory docs/UPLOAD_WORKFLOW.md.
+- [x] Inventory docs/agent/prompts/perma/CO_RUNS.md.
+- [x] Inventory docs/agent/prompts/perma/COMBINED_SITTING.md.
+- [x] Inventory docs/agent/prompts/perma/DISPATCH.md.
+- [x] Inventory docs/agent/prompts/perma/DRONE_PROJECT_PROMPT.md.
+- [x] Inventory docs/agent/prompts/perma/GENERAL_USE_PROMPT.md.
+- [x] Inventory docs/agent/prompts/perma/HANDOFF_ORCHESTRATOR.md.
+- [x] Inventory docs/agent/prompts/perma/LINUX_DISPATCH.md.
+- [x] Inventory docs/agent/prompts/perma/POST_UPLOAD_CLOSE.md.
+- [x] Inventory docs/agent/prompts/perma/PUBLIC_SURFACE_SWEEP.md.
+- [x] Inventory docs/agent/prompts/perma/RELEASE.md.
+- [x] Inventory docs/agent/prompts/perma/RELEASE_OUTBOX.md.
+- [x] Inventory docs/agent/prompts/perma/SITE_AUDIT.md.
+- [x] Inventory docs/agent/prompts/perma/SMRTK_SLOTS.md.
+- [x] Inventory docs/agent/prompts/perma/STATE_EVICTION.md.
+- [x] Review tools/doccheck.py byte-cap model and owner-only temporary-cap guard.
+- [x] Classification/count reconciliation against own members.
+- [x] Redundancy pass with both instances quoted.
+- [x] Dead pass with scoped command evidence.
+- [x] Header spec, eligibility and exact byte-measured candidates.
+- [x] Package analysis report and attachment; verify anchored source bytes and doccheck.
+- [ ] **In progress / blocked waiting:** owner migration gate — shape/caps, doc list, R12–R14 pointers and E1–E3; conflicts X1–X9 remain unresolved unless separately ruled.
+- [ ] Migrate docs/agent/FIX_POLICY.md — commit and verify, owner-gated.
+- [ ] Migrate docs/PLAYTEST_HELP.md — commit and verify, owner-gated.
+- [ ] Migrate docs/PLAYTEST_CHECKLIST.md — commit and verify, owner-gated.
+- [ ] Migrate docs/UPLOAD_WORKFLOW.md — commit and verify, owner-gated.
+- [ ] Migrate docs/agent/prompts/perma/DISPATCH.md — commit and verify, owner-gated.
+- [ ] Migrate docs/agent/prompts/perma/GENERAL_USE_PROMPT.md — commit and verify, owner-gated.
+- [ ] Migrate docs/agent/prompts/perma/RELEASE.md — commit and verify, owner-gated.
+- [ ] Migrate docs/agent/prompts/perma/POST_UPLOAD_CLOSE.md — commit and verify, owner-gated.
+- [ ] Migrate docs/agent/prompts/perma/DRONE_PROJECT_PROMPT.md — commit and verify, owner-gated.
+- [ ] Migrate docs/agent/prompts/perma/COMBINED_SITTING.md — commit and verify, owner-gated.
+- [ ] Migrate docs/agent/prompts/perma/HANDOFF_ORCHESTRATOR.md — commit and verify, owner-gated.
+- [ ] Migrate docs/agent/prompts/perma/LINUX_DISPATCH.md — commit and verify, owner-gated.
+- [ ] Migrate docs/agent/prompts/perma/RELEASE_OUTBOX.md — commit and verify, owner-gated.
+- [ ] Migrate docs/agent/prompts/perma/SMRTK_SLOTS.md — commit and verify, owner-gated.
+- [ ] Migrate docs/agent/prompts/perma/STATE_EVICTION.md — commit and verify, owner-gated.
+- [ ] Migrate docs/agent/STATE.md — commit and verify, owner-gated.
+- [ ] Conditional duplicate-copy cleanup per source doc — expand units on approval; conflict clauses excluded.
+- [ ] Land the single kernel line and verify then-current STATE budget.
+- [ ] Implement RULES HEADERS, watch broken-copy failures, restore by hash, doccheck GREEN.
+- [ ] Final report with each approved source commit and verification.
+- [ ] Consume task prompt and map row in the same commit, after completion.
