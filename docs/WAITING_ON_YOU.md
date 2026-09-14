@@ -23,7 +23,7 @@ one marker settles which is right.
 | 169 | 2026-09-13 | marker | [⭐ 169 ➊ **UPLOADED — v10 IS LIVE on both portals.** ➋ **FAQ commit DISCHARGED.** ➌ accepted as shipped.](PLAYTEST_CHECKLIST.md#L441) |
 | 151 | 2026-09-11 | ⚠️ _conflict_ | [⚖️ 151: migration audit complete — **(a) and (d) CLOSED 09-12 as overtaken by events · (e) RULED 09-11 · (b) and (c) still open**](PLAYTEST_CHECKLIST.md#L1904) |
 | 133 | 2026-09-09 | ⚠️ _conflict_ | [⚖️ 133: six decisions from the self-check promise audit. **RULED IN PART 2026-09-12 — "do the reword". Four of the six fall with it; (2) and (4) are…](PLAYTEST_CHECKLIST.md#L3098) |
-| 53 | 2026-08-19 | ⚠️ _conflict_ | [⭐⭐ THE VERDICT REVIEW IS DONE: **UPHELD**. **53 RULED 09-12: pare the modder surface down, and the hardening queue shrinks with it — six rows go, one…](PLAYTEST_CHECKLIST.md#L5875) |
+| 53 | 2026-08-19 | ⚠️ _conflict_ | [⭐⭐ THE VERDICT REVIEW IS DONE: **UPHELD**. **53 RULED 09-12: pare the modder surface down, and the hardening queue shrinks with it — six rows go, one…](PLAYTEST_CHECKLIST.md#L5650) |
 
 ## Owed playtest legs
 
@@ -52,8 +52,8 @@ be trusted for these. One marker line each settles it permanently.
 - **114** 2026-09-08 — [ITEMS 114–117 OPEN: the pack-wide 1.1.0 re-verification — 10 FIX, 35 REMOVE, 35 KEEP (QA'd)](PLAYTEST_CHECKLIST.md#L4057)
 - **112** 2026-09-08 — [ITEMS 112–113 OPEN: the hotfix-1 audit says SHIP WITH CHANGES, and both changes are wording](PLAYTEST_CHECKLIST.md#L4109)
 - **111** 2026-09-08 — [ITEM 111 OPEN: F116 track salvage was repaired, and it left one judgement call](PLAYTEST_CHECKLIST.md#L4268)
-- **—** 2026-08-10 — [⭐⭐ NEW from the `corun-batch-2` SITTING (four calls, all yours)](PLAYTEST_CHECKLIST.md#L8582)
-- **—** 2026-08-05 — [⭐ NEW from the `corun-batch-1` sitting (four calls, all yours)](PLAYTEST_CHECKLIST.md#L8734)
+- **—** 2026-08-10 — [⭐⭐ NEW from the `corun-batch-2` SITTING (four calls, all yours)](PLAYTEST_CHECKLIST.md#L7097)
+- **—** 2026-08-05 — [⭐ NEW from the `corun-batch-1` sitting (four calls, all yours)](PLAYTEST_CHECKLIST.md#L7249)
 
 ## Coverage
 

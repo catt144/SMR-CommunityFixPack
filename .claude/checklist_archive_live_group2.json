@@ -1,0 +1,22 @@
+{
+  "group": "2",
+  "source_head": "1090f70b9b97dc20f4d5eac188533f26a86db9ba",
+  "snapshot": "C:\\Users\\stkot\\AppData\\Local\\Temp\\checklist-live-group2-05pebxd_",
+  "checklist_before": 718296,
+  "checklist_after": 605603,
+  "items": 24,
+  "body_bytes": 115333,
+  "pointer_bytes": 2640,
+  "archive_before": 411348,
+  "archive_after": 530884,
+  "archive_delta": 119536,
+  "headers_before": 160,
+  "headers_after": 160,
+  "marker_integrity": "MARKER INTEGRITY: 86 on disk, 86 parsed; WARN",
+  "balance": true,
+  "surviving_bytes": "identical",
+  "archive_bodies": "identical; only declared wrappers added",
+  "doccheck": "GREEN",
+  "checklist_after_sha256": "418da628690a7b1d447e83e42c598eb427aab5421cf302bec99b6b3f948610a3",
+  "archive_after_sha256": "145942e3b64fa21a02d64d386564debadbc4feaf016fd87920c21542bbdb3759"
+}
