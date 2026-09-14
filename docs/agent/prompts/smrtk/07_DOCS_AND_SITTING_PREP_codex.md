@@ -116,3 +116,45 @@ the console.
 03A's own for-07 outbox (button tables, emitted registries, the P3 slot
 template, P4's preflight contract, P5's 08 recipe) stands unchanged — I found
 nothing wrong in it.
+
+**From 03C (Codex, 2026-09-14), TestKit `f093e3b`:** Selected extension BUILT,
+source-derived only; no launch. Report + executable source-census/desk instrument:
+`reports/SMRTK_03C_EXTEND.md`. This supersedes 03B's item-1 coverage wording:
+installed build 24995074 still has 106 names (94 Cheat + 12 AsyncCheat); coverage
+is 22 curated names + 84 More names (72 Cheat + 12 AsyncCheat), source-name
+capacity **106/106**. Named taint skips: none on this build. Conditional omission:
+`CheatAddDustRC` when `CheatAddDust` is also supported, because the preserved
+curated Add Dust row selects its first alternative; the all-methods fixture has
+105 method buttons, while an RC-only fixture exposes AddDustRC. Do not claim
+106 simultaneous buttons, in-play safety, retail debug availability, or that the
+section replaces the whole cheat menu.
+
+More mirrors vanilla's instance/metatable/__index table walk and calls the leaf
+through `T.Run("selected_more", expected_obj, method)`. The callback re-enumerates
+and refuses curated methods (no depot-guard bypass), unsupported methods and
+changed selection. More Cheat uses P2's existing game-time thread; More AsyncCheat
+uses a real-time thread. Both check selection after queuing and retain the core
+result logger and post-leaf taint assertion. Labels are grouped; More buttons
+use one full-width column and method rollovers. No global writes, vanilla function
+patches, probes, pack runtime edits or checklist writes were added.
+
+Verification: P2 desk PASS + 03C desk PASS (exact Colonist Kill / Drone Despawn
+source bodies with fake services, 84 More/12 async, inheritance/overrides,
+refusals, errors, taint-positive control, category threads and queued races).
+Parse: 34 TestKit files, 0 errors; pack doccheck GREEN. Rule 6: **0 lines across
+9 toolkit files**; rule 7: **0 lines**; source presence **26 lines / 13 calls**.
+
+OWNER-ROUTED for 07: ck175 item 1 is built on the proven P2 leaf route. No new
+owner decision or extra boot requested; 08 is first contact. Include More Cheat
+(Kill/Despawn), More AsyncCheat (Inspect), stale-selection refusal, long labels /
+scrolling and taint witnesses in the existing sitting. Properties opens an editor:
+close it and distinguish transient editor eligibility blocking from taint.
+Eligibility remains `UNAVAILABLE:sandbox`. Deferred vanilla work is not proved
+complete by the dispatch return record.
+
+DRIFT for 99: a colon-method-only census misses six generated upgrades; P2's old
+CATALOG proxy has a function __index, so its 21+4 output cannot measure More;
+README Ordering omitted 03C (corrected). My first report-fence command matched
+its own inline marker and executed no code with exit 0; the fixed, line-anchored
+extractor emitted every census/PASS witness. Prior upstream messages are historical;
+use this outbox for the resulting Selected surface. No RE-FIRE or new sitting.

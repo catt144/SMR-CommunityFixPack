@@ -59,7 +59,7 @@ contract). Authoring mechanics: `agent/WORKFLOW.md` "Authoring a prompt" element
 | ~~02~~ | ~~`02_SKELETON_SITTING_owner.md`~~ | ~~Claude attending (attended)~~ | ~~✅ keyboard~~ | ✅ **RAN 2026-09-13 — P1/P2/P3/P4 all PASS, gate does NOT fire.** Verdict + corrections + both outboxes: `reports/SMRTK_SKELETON_SITTING.md`; logs `archive/logs/smrtk02_*` |
 | ~~03A~~ | ~~`03A_PAGES_FANOUT_codex.md`~~ | **Codex — Sol, xhigh or max** as coordinator; payload seats below | no | BUILT 2026-09-13; `reports/SMRTK_FANOUT_REPORT.md`; NEXT Claude 03B; no page play claim |
 | ~~03B~~ | ~~`03B_JUDGE_claude.md`~~ | ~~**Claude** (Opus)~~ | no | **JUDGED 2026-09-13 — PASS WITH FIXES.** `reports/SMRTK_JUDGE.md`; all gates re-ran identically, all 54 P1 + 21 P2 routes opened clean, idle patches zero; 1 label fix (TestKit `87f3130`); 6 items appended to ck175; no RE-FIRE |
-| 03C | `03C_SELECTED_EXTEND_codex.md` | **Codex — Sol** (the seat that built P2) | no | ⭐ **INSERTED 2026-09-14 by ck175 item 1** (*"extend before 08"*): the Selected section covers 22 of 106 members with no fallback — keep the curated 22 as a labelled top group, add a dynamically enumerated "More" group on P2's existing untainted path, and stop dropping `AsyncCheat*`. ⛔ Runs BEFORE 07 |
+| ~~03C~~ | ~~`03C_SELECTED_EXTEND_codex.md`~~ | ~~**Codex — Sol**~~ | ~~no~~ | **BUILT 2026-09-14**, TestKit `f093e3b`; `reports/SMRTK_03C_EXTEND.md`: 22 curated + 84 More names (72 Cheat + 12 AsyncCheat), 106/106 source-name capacity; conditional AddDustRC alias omission recorded. P2 + 03C desk PASS, no play claim. NEXT Codex 07 |
 | 07 | `07_DOCS_AND_SITTING_PREP_codex.md` | **Codex — Sol, high** | no | WORKFLOW + PLAYTEST_HELP + TestKit README; `perma/SMRTK_SLOTS.md` (how an agent pre-loads a sitting); predictions + 08's script. ⛔ Runs AFTER 03C, so the docs describe the shipped surface |
 | 08 | `08_FULL_SITTING_owner.md` | Claude attending (attended) | ✅ keyboard, 07 prices it | the full attended leg: every page, every button class, a stamp, a save/load round trip, a trigger firing |
 | 99 | `99_AUDIT_fable.md` | Fable | ✅ raises | terminal adversarial audit: the taint invariant re-derived against the ARCHIVED log, every action's route read for `NetSyncEvent`/`LogCheatUsed`, tag coverage, idle invariant, the 03A/03B cross-vendor split adjudicated, falsifiers RED, verdict, folder-empty gate, kickoff lines |
@@ -94,7 +94,7 @@ documented it and after the owner's sitting.
 
 ## Ordering
 
-**01 → 02 → 03A → 03B → 07 → 08 → 99, strictly.** 02 is a kill gate: nothing builds on the core until the game has
+**01 → 02 → 03A → 03B → 03C → 07 → 08 → 99, strictly.** 02 is a kill gate: nothing builds on the core until the game has
 shown the four premises (no taint · `ConsoleEnabled` route · console tap · clipboard) hold; if 02 KILLS, 99 runs its
 reduced form. Inside 03A the five payloads are parallel by construction (disjoint files, a frozen core API,
 cross-references by registry id with stubs). 03B may send a payload back to 03A (RE-FIRE) — that loop closes before 07.
