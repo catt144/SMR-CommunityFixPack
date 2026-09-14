@@ -19,8 +19,8 @@ vendor scores the predictions. Pack HEAD `320d359`; TestKit HEAD `5d8d3b3`.
 - [x] Step 0 COMPLETE: clean read scored, baseline saved and verified on disk, vanilla control fired RED (`entries=1`).
 - [x] Step 1 COMPLETE: fresh clean boot, PreLoadGame arm, hotkey both ways, `used=false`, scratch discarded.
 - [x] Step 2 COMPLETE: ⭐ **P2 PROVEN** — `discriminates=true negative=false positive=true`.
-- [~] Step 3: refused by its own guard — 01's script targets a class no shipped depot uses; corrected line issued. **P1 still undecided.**
-- [ ] Owner sitting, steps 3 retry, 4–8.
+- [x] Step 3 COMPLETE: ⭐⭐ **P1 PASSES** — leaf filled the depot, `used=false`, zero `ObjCheat` all boot.
+- [ ] Owner sitting, steps 4–8 (P3 tap/clipboard, P4 persistence).
 - [ ] Prediction-by-prediction scoring; verdict; archived log path.
 - [ ] Outbox to 03A and 99; ck175 in plain language; strike the row; `git rm` 02.
 
@@ -520,6 +520,51 @@ Verified before use: `StorageMetals`/`Concrete`/`Polymers`/`Food` each declare
 `storable_resources = {"<one>"}`; `UniversalStorageDepot` declares no override
 and inherits the eight-resource default, so the `#==1` test genuinely separates
 them.
+
+## Step 3 retry — ⭐⭐ P1 PASSES. Requirement (A) holds in play
+
+```text
+SMRTK_ACTION action=skeleton_fill after=180000 before=13000 cap=180000              object=StorageMetals(1054) resource=Metals status=OK id=37
+SMRTK_TAINT_READ action=taint_read status=OK used=false id=38
+SMRTK_ELIGIBILITY action=eligibility reason=UNAVAILABLE:sandbox status=OK id=39
+SMRTK_TAINT_READ action=taint_read status=OK used=false id=40   (later t=7550325)
+```
+
+01 predicted `SMRTK_ACTION action=skeleton_fill after=<amount> before=<amount>
+object=<Class(handle)> status=OK`, `after > before`, then `used=false` and a
+CLEAN strip. **Measured exactly**, including the `Class(handle)` rendering
+(`StorageMetals(1054)`).
+
+**The mutation was real, not a no-op:** `before=13000 → after=180000` against
+`cap=180000`. A depot that did nothing would have refused on the `before>=cap`
+guard or returned equal amounts. The toolkit filled the depot.
+
+**And `CheatsUsed` stayed empty.** `ObjCheat` appears **zero** times across this
+entire boot, so the vanilla taint route was never entered. The read was taken
+twice, at two different game times (`t=7526350` and `t=7550325`), both
+`used=false` — so this is not a sampling artefact of reading too early.
+
+### ⭐ The contrast, on one fixture, one depot, one method
+
+| | route | visible effect | `CheatsUsed` |
+|---|---|---|---|
+| step 0b | vanilla **Fill** button → `ObjCheat` → `LogCheatUsed` | depot fills | **1 row** |
+| step 3 | `SMRTK.Run` → `UniversalStorageDepotBase:CheatFill` leaf | depot fills | **0 rows** |
+
+Same colony, same `StorageMetals` depot class, same underlying leaf body. The
+only difference is the dispatch path, and the taint tracks the dispatch path
+exactly as the source trace said it would.
+
+⇒ **Requirement (A) is satisfied at the source level. P1 PASSES.** The chain's
+central premise — that every useful cheat action can be called through its leaf
+body without registering as a cheat — is now a measured fact on this build,
+not a design intention.
+
+⚠️ **What this does not claim.** Achievement eligibility remains
+`UNAVAILABLE:sandbox` and unread (`EF-096`); no-taint is necessary for
+eligibility, not proven sufficient. This is one action on one class; P2 must
+re-establish the same property per action as it builds them, and the step 3
+defect above shows the object model is where that will go wrong.
 
 ## Outbox items raised during the sitting (for 03A / 99)
 
