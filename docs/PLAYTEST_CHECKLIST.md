@@ -44,17 +44,44 @@ Test Kit helpers, save fixtures) stays in [PLAYTEST_HELP.md](PLAYTEST_HELP.md).
 
 ## Decisions waiting on you
 
+### 2026-09-14 — 181: the monoliths get automated first, then YOU AND I audit all of them together
+
+<!-- ck:181 status:open owner:yes -->
+
+**Your ruling, 2026-09-14:** *"we can automate the other monoliths as much as possible. But as a
+final pass I want a you+me session on all the monoliths as a second pass audit."*
+
+- **Automate as far as it goes — that is now the DEFAULT for monolith work, not a fallback.**
+  Characterisation, inventories, tombstone hunts and the mechanical passes are delegated:
+  subagents and Codex, adjudicated by the orchestrator seat.
+- **⚠️ THE ATTENDED SECOND PASS IS A GATE, and it is the LAST step — not an optional review.**
+  The doc overhaul does not close until you and I have sat over **all** the monoliths together.
+  ⛔ No agent declares the overhaul finished on its own judgement, and no automated pass is
+  treated as the final word on a monolith.
+- **The four this covers:** `PLAYTEST_CHECKLIST.md` · `PLAYTEST_HELP.md` · `agent/WORKFLOW.md`
+  · `agent/FIX_POLICY.md`. ⛔ Re-measure at the sitting, never quote a size from here: three of
+  the four are ungated and all four are written to by peers.
+- **Where it stands 2026-09-14:** the three never-opened docs are under automated
+  characterisation now (read-only, one agent each). The checklist's own pass ran 09-14
+  (35 items / 159,621 B out). ⇒ What the attended session audits is the OUTPUT of those
+  passes — which is exactly why it is sequenced last.
+
+⛔ **This item stays `open` until the attended session actually happens.** The automated passes
+landing does NOT discharge it; they are its input.
+
 ### 2026-09-14 — 180: archive follow-ups — ⚠️ one still needs your word, two are approved work
 
 <!-- ck:180 status:open owner:yes -->
 
 Three loose ends from the 09-14 checklist archival ([ARCHIVE_RECHECK](agent/reports/ARCHIVE_RECHECK.md)).
 
-- **⚠️ STILL YOURS — the 5 restoration candidates.** ✅ Ruled 09-14: *this seat reads each of the
-  five bodies and its live hits, gives you a one-line verdict, and you rule.* Not yet done.
-  ⭐ The sharpest: **item 34 is archived while a LIVE checklist item reads "Item 34's 'now or
-  after' is still yours"** — a live decision pointing at a body a reader can no longer see in
-  place. That is exactly the failure rule (d) could not catch, since 34 of the 35 are unnumbered.
+- **✅ DISCHARGED 2026-09-14 (`aad4021`) — the 5 restoration candidates.** Each was checked
+  against CURRENT state rather than against the archived body: **0 of 5 need restoration**, and
+  you ruled no restorations. ⭐ The sharpest one was real, and is fixed: the LIVE item reading
+  *"Item 34's 'now or after' is still yours"* had been **stale for 25 days** — true the morning
+  of 2026-08-20, false by that evening, when the close-out chain built C50/C51 and parked C52.
+  Corrected, and marked `ck:56 status:closed` (it was one of the 12 unmarked, so it could never
+  have retired). Verdicts: [ARCHIVE_RECHECK §B2](agent/reports/ARCHIVE_RECHECK.md).
 - **✅ APPROVED — fix the archiver, leave the 35 landed headers alone.** It drops the leading
   date from a heading and truncates long ones (`ck139` was cut mid-word at
   `` `Fix_SilentHitMomentFX.lu ``). Bodies are intact and findable; only the archive's header
