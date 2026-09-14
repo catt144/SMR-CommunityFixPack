@@ -38,7 +38,18 @@ rerun unchanged mechanisms.
 ## 1 · Orient
 
 `git log --oneline -10` + `git pull` in **both** repos, `git status --short`, `ListAgents`,
-then `docs/agent/STATE.md`. Authored against pack HEAD **`b937366`**.
+then `docs/agent/STATE.md`. Authored against pack HEAD `b937366`; **revised 2026-09-14 for the
+Stamper cut at pack `5bd596d` / kit `d80fb5e`** — verify against `git log`, not this line.
+
+⭐ **YOUR WORK LIST IS THE 09 REBUILD OUTBOX — items 1–10** at the end of this file. Item 11
+is struck (class 18 died with the Stamper). §4 adds three source-built changes needing native
+witnesses. Nothing else is owed.
+
+⭐ **THE FIXTURE:** `SMRTK08 Fixture Sol 490` — the clean-taint save chosen 2026-09-14 and
+recorded in `STATE.md` (C92 reporter's colony, 1.1.0.403908, four byte copies exist). ⚠️ It is
+a **clean-taint** fixture and that is load-bearing here: §2's after-taint reading on the
+rebuilt tree needs it. ⛔ Confirm the copy you load is untainted before the owner sits;
+`CheatsUsed` needs the DECODED body, and taint is a property of the lineage, not one save.
 
 ⚠️ **THE STALE-PROBE GATE BINDS — this link launches the retail game.**
 `grep -rln "TEMPORARY" Code/ ../SMR-BugFixPack-TestKit/Code/` must be **zero hits** (or every
@@ -103,7 +114,7 @@ Found something interesting out of scope: **file it, do not fix it** (rule 3).
 Stop and report if: the loaded TestKit is not the current tree (check before the owner sits,
 not after) · a fixture a changed contract needs is absent — **provision or record NOT RUN by
 name, never substitute a fake desk object** · the stale-probe sweep is not clean · taint or
-errors appear · the owner's time runs out mid-block (report the block as partial with its
+errors appear · the owner's time runs out mid-item (report that item as partial with its
 first-screen witness, never as a pass).
 
 ## 7 · What may NOT be claimed
@@ -119,7 +130,7 @@ first-screen witness, never as a pass).
 
 ## 8 · Close-out
 
-1. Report at `reports/SMRTK_08B_SURFACE.md`: changed-surface and per-block verdicts, the frozen numeric predictions
+1. Report at `reports/SMRTK_08B_SURFACE.md`: changed-surface and per-item verdicts (inbox 1–10), the frozen numeric predictions
    against actuals, every named skip, defects found, `OWNER-ROUTED` lines, and DRIFT for 99.
 2. **Force-add the boot log** — `*.log` is gitignored and 24 prior sitting logs are tracked by
    force-add under the `<tag>sitting_` convention. ⛔ 99 re-derives against the archived log,
