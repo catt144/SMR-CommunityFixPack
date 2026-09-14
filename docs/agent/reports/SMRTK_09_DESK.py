@@ -147,9 +147,13 @@ local middle=XWindow:new({Id='idMiddle'},overlay)
 local list=XWindow:new({Id='idMiddleList',LayoutMethod='HList'},middle)
 local vanilla=XWindow:new({},list)
 assert(T.Run('dock_attach',hud))
-assert(T.dock.parent==list and list[1]==vanilla and #bottom==0)
-assert(T.dock.MinHeight==52 and not T.actions.dock_menu)
-local count=#records; assert(T.Run('dock_attach',hud)); assert(#list==2)
+-- Owner ruling 2026-09-14: the right-corner Box sibling is the PRIMARY route and
+-- the chip is a wide status bar. The HList beside the game's dock is the fallback,
+-- so the vanilla row must be left untouched here.
+assert(T.dock.parent==bottom.parent and #list==1 and list[1]==vanilla and #bottom==0)
+assert(T.dock.MinHeight==30 and T.dock.smrtk_wide and not T.actions.dock_menu)
+local count=#records; local ok_again,f_again=T.Run('dock_attach',hud)
+assert(ok_again and f_again.attached==false and #list==1)
 local dock=T.dock
 dock:OnPress(); run_queued(); assert(T.panel:GetVisible())
 dock:OnPress(); run_queued(); assert(not T.panel:GetVisible())
@@ -176,11 +180,14 @@ assert(T.click_notice.visible and T.click_notice.Text:find('slot_4',1,true)
  and T.click_notice.Text:find('right-click',1,true))
 T.click_capture=nil; T.armed.slot_4=nil; T.RefreshDock()
 assert(not T.click_notice.visible)
--- Missing HList takes the scoped Box sibling fallback.
+-- Missing Box route falls back to the native HList beside the game's dock, where
+-- there is no room for the status bar, so the chip stays the compact 52 square.
 emit('DoneGame')
-list.LayoutMethod='VList'
+overlay.LayoutMethod='VList'
 local ok,f=T.Run('dock_attach',hud)
-assert(ok and f.route=='idBottom sibling' and T.dock.parent==bottom.parent and #bottom==0)
+assert(ok and f.route=='HUDMiddle/idMiddleList' and T.dock.parent==list)
+assert(T.dock.MinHeight==52 and not T.dock.smrtk_wide and #bottom==0)
+overlay.LayoutMethod='Box'
 emit('DoneGame')
 assert(T.dock==nil and T.panel==nil and T.click_notice==nil and T.ArmedCount()==0)
 -- Trigger record reacts even after the trigger itself has paused game time.
