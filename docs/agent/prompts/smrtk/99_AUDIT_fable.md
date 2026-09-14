@@ -82,3 +82,15 @@ build other than the one 02/08 ran on.
 - Model-seat drift: peer `b9501dd` updated the manifest/ck175 but the old 03A/07
   headers still said Astra. 01 aligned those two headers to Sol; payload seat
   choices are inherited from the manifest's explicit per-payload row.
+
+- **02's OUTBOX, appended by the orchestrator (`smr-bugfixpack-8f`, 2026-09-13) — verbatim from `reports/SMRTK_SKELETON_SITTING.md`.** ⚠️ 02 wrote both outboxes into its report and struck its row and consumed its prompt, but did not append them to the inboxes; chain rule 2 requires both, and a pointer is weaker than an append because this is the file you actually read. Nothing below is my wording. The full verdict, the five superseding corrections and the archived logs are in that report.
+
+  > The taint invariant is re-derivable from the archived logs alone: `ObjCheat`
+  > count 1 in the control boot, 0 in the toolkit boot. The four `LogCheatUsed` call
+  > sites were enumerated tree-wide and none is reachable from a direct leaf call.
+  > Two instrument defects on the attending side are recorded in full rather than
+  > quietly fixed — a truncated `grep | head -15` that hid the `CheatFill` override,
+  > and a proposed flicker control that could not have cleared the panel because
+  > `panel_toggle` only calls `SetVisible(false)`. The flicker itself is routed,
+  > measured and **unattributed**; the last boot carried the mod with no strobe, so
+  > it does not reproduce on mod-load alone.

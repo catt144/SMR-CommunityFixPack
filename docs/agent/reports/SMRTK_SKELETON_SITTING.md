@@ -332,8 +332,10 @@ value:
 SMRTK_BASELINE_CLEAN    (
 CheatsUsed(RainsDisasterThreads…
 SMRTK_SCRATCH_TAINTED   (
-CheatsUsedRVýúx (	CheatFill8…(RainsDisasterThreads…
+CheatsUsedRVýúx\x00(	CheatFill8…(RainsDisasterThreads…
 ```
+
+> ⚠️ **One byte in the block above is transcribed, not raw** (`smr-bugfixpack-8f`, 2026-09-13, orchestrator repair). The tainted save's excerpt carried a literal NUL, which made this whole file **binary to git** — it would not diff, and `rg` skips binary files by default, so a later session searching `reports/` for anything in here (the `UniversalStorageDepotBase` correction included) would have silently missed it. The NUL is written as the four characters `\x00` in its original position; **every other byte is untouched**, and the raw form is still in this file's own history (`git show c657e74:docs/agent/reports/SMRTK_SKELETON_SITTING.md`) and in the fixture itself.
 
 Clean carries the scalar ``; tainted carries a table (`R`, then `` =
 one entry) whose row holds the game time and the length-prefixed method name

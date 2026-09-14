@@ -163,3 +163,25 @@ report; outbox to 03B and 99; strike your row; push the pack repo.
     exist somewhere the owner can see **without opening anything**; the form is yours. Noted for your shaping:
     a badge or colour on the dock icon is the only option that survives rungs 1 and 2 as well as 3, since rung 3's
     panel already has the strip — but do not treat that as the decision.
+
+- **02's OUTBOX, appended by the orchestrator (`smr-bugfixpack-8f`, 2026-09-13) — verbatim from `reports/SMRTK_SKELETON_SITTING.md`.** ⚠️ 02 wrote both outboxes into its report and struck its row and consumed its prompt, but did not append them to the inboxes; chain rule 2 requires both, and a pointer is weaker than an append because this is the file you actually read. Nothing below is my wording. The full verdict, the five superseding corrections and the archived logs are in that report.
+
+  > P1-P4 all PASS on build 24995074; the core, the logger, the taint assert, the
+  > `ConsoleEnabled` arm, the ring, the clipboard and LocalStorage persistence are
+  > all confirmed in play, so build on them. The native console tap **and** the print
+  > tee both carry real output, so either is a valid capture route. Five things to
+  > carry: **(a)** per-object code must target `UniversalStorageDepotBase` and
+  > `#storable_resources`, never `StorageDepot.resource` — 01's leaf refused on every
+  > depot in the game; **(b)** `AsyncCheat*` infopanel entries bypass `ObjCheat` and
+  > never taint even in vanilla (`ClassHierarchy`, `ClipPlane`, `Gizmo`, `Inspect`,
+  > `Properties`, `Screenshot`), so they need no re-implementation; **(c)** `CLEAR`
+  > logs onto the screen it just wiped, and the fix is a per-action opt-in honoured
+  > by `dispatch`, never moving `T.Log` before the callback, which would empty
+  > `before`/`after` on every action; **(d)** `PANEL_RESTORE` logs once per
+  > registration and there are **three** (`InGameInterfaceCreated`, `PostLoadGame`,
+  > `CurrentMapChangeDone`) though only one panel results — log on actual
+  > create/make-visible; **(e)** `CopySince` is destroyed by the operator's next
+  > copy, so it must be the last command of a block, and the panel **button** form is
+  > immune. The owner's surface ruling and ranked fallback ladder are in ck175.
+
+  ⚠️ **Overlap, so you do not count them twice:** its **(c)** CLEAR and **(d)** PANEL_RESTORE are the same two items as my numbered notes (2) and (3) above — 02's text is the authoritative version and mine was the early flag from the owner's screen. Its **(a)** is new and build-blocking for P1/P2, **(b)** removes work, and **(e)** is procedural and matters to 07/08.
