@@ -44,6 +44,49 @@ Test Kit helpers, save fixtures) stays in [PLAYTEST_HELP.md](PLAYTEST_HELP.md).
 
 ## Decisions waiting on you
 
+### 2026-09-14 — 179: the doc-rules architecture — ⚠️ six calls, and one REVERSES what the audit proposed
+
+<!-- ck:179 status:open owner:yes -->
+
+Full proposal: [DOC_RULES_ARCHITECTURE](agent/reports/DOC_RULES_ARCHITECTURE.md). Nothing has
+moved. Built on Codex's inventory (`968c58e`, 852 rule occurrences) — that evidence survives
+intact; what changes is the shape of the migration.
+
+**Your design, 2026-09-14:** one permanent rules source kept as small as possible · per-folder
+rules seen only by an agent working there · task rules on skills, loaded when the skill is.
+
+**⭐ The reversal you should look at first.** The audit proposes **16 per-doc headers**, eleven
+of them in `prompts/perma/`. But `prompts/README.md:5` **already states that rule once for all
+of them** (*"never `git rm`; update in place"*), and **seven of the nine restate it in their own
+text** — 10 copies live. Per-doc headers would make nine of those permanent. That is the exact
+failure this effort exists to end. ⇒ **7 headers, not 16**, plus **deleting the 9 restatements**:
+a net reduction in rules rather than a reshuffle.
+
+**The six calls:**
+
+1. **Adopt the three tiers** — permanent (`CLAUDE.md`) · local (folder) · task (skills).
+2. **7 headers, not 16**, plus the 9 deletions.
+3. **`CLAUDE.md` gets an explicit rules list** (it has none today; its 8 rules sit in prose),
+   including one line: *"Editing a doc? Invoke the doc-editing skill first."* ⚠️ And move
+   `WORKFLOW.md`'s **10 global rules** into it — they bind every session but sit in a doc read
+   only per task. The audit does not move them; this is the biggest adherence win available.
+4. **`STATE.md` goes to zero rules.** Its own line 3 says *"Kernel only: status + pointer"*, and
+   the audit found **30 rules in it**. That is also why it keeps pressing its cap.
+5. **Build a `doc-editing` skill**, package `prompt-authoring`, and set a skill byte cap
+   (⚠️ both existing skills are already over doccheck's 3,072 B target).
+6. **Amend your 09-13 wording** — *"a hazard is a failure not yet converted into a gate"* should
+   read *"into a **loud** failure"*. Your own 09-14 point: nothing here is a real gate except
+   your stop button. Same substance; the current wording promises what this system cannot do.
+   Your words, so flagged rather than changed.
+
+⚠️ **Do not approve this for context savings.** Measured: the whole always-loaded surface is
+~16,000 tokens, while one undirected `rg "OnMsg"` over the shipped tree costs **~76,000**. The
+context prize is elsewhere. **This is worth doing for adherence and doc rot**, which are reasons
+enough.
+
+⛔ Independent of **177** (the marker gate, still open) and **178** (the temporary cap, which
+this does not retire).
+
 ### ✅ 2026-09-14 — 178 RULED: STATE's warn cap is TEMPORARILY +25% — ⚠️ you end it, and only you
 
 <!-- ck:178 status:ruled owner:yes -->
