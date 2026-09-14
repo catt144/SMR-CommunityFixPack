@@ -49,8 +49,9 @@ exists, and a struck row is RED. A row that outlives its file is how a next sess
   replaces the vanilla cheat menu for playtesting with untainted leaf calls (`EF-095`), one `SMRTK_` log tag, agent
   slots, triggers, save slots, a console tap + clipboard copy, and a layout stamper (`EF-099`). Kill-gated at 02;
   **Codex builds (01, 03A fan-out, 07), Claude judges (03B) and audits (99)** — the owner's shape. 02 PASSed, 03A built,
-  **03B JUDGED PASS WITH FIXES 09-13** (`reports/SMRTK_JUDGE.md`); next is Codex `07_DOCS_AND_SITTING_PREP_codex.md`,
-  then owner sitting 08 and Fable audit 99 — the only three prompt files left in the folder. Its README is the manifest
+  **03B JUDGED PASS WITH FIXES 09-13** (`reports/SMRTK_JUDGE.md`); the owner then ruled ck175 item 1 on 09-14
+  (*"extend before 08"*), so next is Codex `03C_SELECTED_EXTEND_codex.md`, **then** `07_DOCS_AND_SITTING_PREP_codex.md`,
+  then owner sitting 08 and Fable audit 99 — the only four prompt files left in the folder. Its README is the manifest
   and is the authority on link state; spent payload briefs live in the close-out git grave.
 - `fixtoggles/`: **LIVE** (authored 09-11): an on/off button per fix, Beta labels, linked buttons; link 09 researches
   versioning for a B step. Its README is the manifest; checklist 148.
