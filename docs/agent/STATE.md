@@ -64,7 +64,8 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 - ⏭ NEXT: fire `prompts/STANDDOWN_AUDIT.md` (no blocker) · `prompts/C92_ACHIEVEMENT_BUILD.md` (build+test, ⛔ ships never
   without ck172's hold lifted) · then the playtest sitting. ⛔ `SELFCHECK_PILOT` REMOVED 09-13 (`cf8d51f`).
   Owner OWES: ck144 (a) the boot · ck151 (b) dev-report scope · ck175 sitting 08 **TAKEABLE NOW** (07's script landed).
-  ⛔ 08 needs a **NEVER-CHEATED** 1.1.0 fixture ⇒ it is a SEPARATE boot from ck144 (a), not a combine. Handoff `prompts/perma/HANDOFF_ORCHESTRATOR.md` §3 LIVE.
+  ⛔ 08 is a SEPARATE boot from ck144 (a), not a combine — it is a clean-taint experiment. ✅ Fixture CHOSEN 09-14: `SMRTK08 Fixture Sol 490` (C92 reporter's colony,
+  1.1.0.403908, `CheatsUsed` read scalar from disk against a TAINTED positive control; 4 byte copies exist). Handoff `prompts/perma/HANDOFF_ORCHESTRATOR.md` §3 LIVE.
   Desk `prompts/DLC_DEEP_CHECK.md` (`HUNT_AUDIT.md` §8). Chain `prompts/fixtoggles/` DEFERRED 09-12 (ck148, not started).
 - Watches: `EF-066` subclass reach unmeasured, ck74 half-open · localisation: German only one SEEN (`EF-039`) ·
   C47 (unrun) · C48 opt-in · F02/F78/F81 organic · riders C42/F99/F80/F96-R2 · `EF-051` falsifier = stray save ·

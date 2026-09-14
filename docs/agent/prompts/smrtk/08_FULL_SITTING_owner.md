@@ -89,6 +89,39 @@ sits or record the associated leg NOT RUN; do not substitute a fake desk object.
 No warm-up before initial clean read; this is explicitly a clean experiment.
 Do not use a 1.0.7 save or an already-cheated fixture to prove no added taint.
 
+⭐ **THE FIXTURE IS CHOSEN AND MEASURED (owner + orchestrator, 2026-09-14):**
+**`SMRTK08 Fixture Sol 490.savegame.sav`**, already in the saves folder. It is a
+byte copy (sha256 `68d340ad…`) of the **C92 reporter's** Sol 490 colony —
+1.1.0.403908, `orig_lua_revision` 403908, Japan, `elapsed_sols` 490,
+`active_mods = {}`, and the `platform` table carries **no `cheats` key**.
+
+⚖️ **Why a reporter's save is allowed here, when 02 ruled "evidence, not a
+fixture":** that ruling protects the ORIGINAL. Four byte-identical copies now
+exist — `C:\Dev\SMR-C92-Evidence-20260913\`, the owner's `Downloads\`,
+`%APPDATA%\Surviving Mars\<id>\`, and this fixture copy — so the C92 record
+cannot be lost by anything this sitting does. ⛔ **Use the `SMRTK08 Fixture`
+copy only; never load the other three.** Owner instruction 2026-09-14: take an
+immediate manual save on load, before anything else.
+
+✅ **`CheatsUsed` was READ FROM DISK, both sides, before this was chosen** (route:
+`reports/SMRTK_SKELETON_SITTING.md` § "The fixtures' cheat flag IS readable"):
+positive control `Test2 I` → `CheatsUsed` is a **TABLE** holding **20** cheat
+method names (`CheatMalfunction`, `CheatFill`, `CheatDestroy`, …) = TAINTED;
+negative control `Mygame2` → **scalar**, 0 method names; subject Sol 490 →
+**scalar** (`\x03(\x11CustomSyncHandles`), 0 method names. ⚠️ **The first version
+of that decoder read the positive control as CLEAN** (short reads in the zstd
+stream; 262 KB decoded instead of ~267 MB). ⛔ **Any re-derivation must run the
+positive control and require it to read TAINTED** — without that line the
+subject's clean reading means nothing.
+
+⚠️ **Still unverified, and it is the attendee's job at prep:** whether a Sol 490
+colony actually carries the object list above (dome interior upgrade, the two
+cable/pipe patches with room, sacrificial buildings, a disposable colonist and
+drone, a universal rocket in SleepFlight). Maturity makes it likely, not certain.
+Apply the existing rule — provision what is missing before the owner sits, or
+record that leg NOT RUN by name. ⛔ It is a stranger's colony: nothing about its
+layout may be assumed from our own fixtures.
+
 Tell the owner: **"start the game; the Agent tab is loaded"** only after the
 bindings, predictions and fixture route are concrete and the gates pass.
 
