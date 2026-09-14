@@ -1,9 +1,9 @@
 <!-- GENERATED — never hand-edit; regenerate with: python tools/doccheck.py --regen -->
 <!-- split_bugs.py --write is the one-time MIGRATION from the retired pre-split doc, never a regeneration; verify: python tools/doccheck.py -->
 
-# Bug index — 225 rows, 190 entry files
+# Bug index — 226 rows, 191 entry files
 
-119 F + 13 D + 93 C. `seq` is the entry's position in the old BUGS.md file order;
+119 F + 13 D + 94 C. `seq` is the entry's position in the old BUGS.md file order;
 the row order below is the old index table's own. Generated from the front matter of
 `docs/agent/bugs/*.md` — edit an entry, not this file.
 
@@ -238,4 +238,5 @@ the row order below is the old index table's own. Generated from the front matte
 | 188 | C92 | Boundaries of Knowledge counts the hidden, unreachable UndergroundExploitation tech; repeatables retain completion and are not the blocker | cand | P2 | owner verified the clean current-patch original and all non-repeatable tech complete; read-only retail census of a copy on 1.1.0.403908 finds UndergroundExploitation the sole failed counted requirement, hidden with no normal reveal/research route; both repeatables completed once; desk controls execute shipped state and achievement bodies; no live achievement award attempted | [C92.md](C92.md) |
 | 189 | C93 | Outside Ranch produce reported stranded at the building centre: a missing entity spot makes the stockpile controller fall back to Origin, which on a non-walkable footprint drones cannot reach | cand | P2 | field report only (Steam, saYo, 2026-09-13); mechanism source-read on 1.1.0.403908; the Origin fallback MEASURED firing for a different building (MicroGHabitat) in our own archived 09-09 log; the reporter's own log and mod list are NOT held, so attribution is unresolved | [C93.md](C93.md) |
 | 190 | D14 | Clean stand-down for full-body replacements: 21 modules pin a shipped body and cannot ride a vendor fix, and bodycheck's own class-c blind spot means a vendor repair can land with every instrument we own still GREEN | cand | P2 | MEASURED on the pack 2026-09-13: 24 of 45 Fix_ modules delegate to the captured original, 21 do not; 15 carry a behaviour probe, 8 a custom test, 41 some Require gate. bodycheck is at FULL manifest coverage (132 rows, 47 stamped modules, 0 without a manifest) and states its own class-c blind spot. No module has been individually assessed | [D14.md](D14.md) |
+| 191 | C94 | Outside farms malfunction on dust-devil proximity with 100% certainty and no threshold, while the identical hazard rolls a 15% chance for drones 15 lines away in the same function | cand | P2 | field report only (Steam, HAZ, 2026-09-13, "(still)" implies recurring); mechanism SOURCE-VERIFIED on 1.1.0.403908 — the building branch of BaseDustDevil:ApplyDust calls SetMalfunction() unconditionally on proximity with no probability or threshold check, while the drone branch of the SAME function rolls dust_devil_malfunction_chance (15% default); dome immunity confirmed by two independent gates (query pre-filter + devil self-kill on dome hex entry); Open Farm's own maintenance_threshold_base is 25% lower than domed Farm's; not reproduced in play, spawn-frequency-per-Sol not measured, reporter's mod list and log not held so third-party involvement is not ruled out | [C94.md](C94.md) |
 
