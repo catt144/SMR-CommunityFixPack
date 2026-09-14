@@ -4,8 +4,8 @@ Effort: replace the game's built-in cheat menu, for playtesting, with an **SMR T
 TestKit mod: every useful cheat action called through its **leaf body** (no `CheatsUsed` taint, `EF-095`), every
 action logged under one **`SMRTK_`** tag so an agent reading a log never has to ask, a **slot engine** an agent can
 pre-load before a sitting, **triggers** (breakpoints for a game), **save/load slots**, a **console tap + clipboard
-copy**, the **TestKit on buttons**, and a **layout stamper** built on the game's own construction front door
-(`EF-099`). Authored 2026-09-13 by `smr-bugfixpack-8f` (Fable) with the owner, in one design conversation;
+copy**, the **TestKit on buttons**, and — ⛔ **CUT 2026-09-14, see the notice below** — a **layout stamper**
+built on the game's own construction front door (`EF-099`). Authored 2026-09-13 by `smr-bugfixpack-8f` (Fable) with the owner, in one design conversation;
 **reshaped the same day at the owner's direction** into a cross-vendor build/judge pair (03A Codex fan-out,
 03B Claude judge). Method: `agent/reports/CHAIN_METHOD.md` (shape D, kill-gated build; §5a fan-out for a fixed
 contract). Authoring mechanics: `agent/WORKFLOW.md` "Authoring a prompt" elements 1–9. Owner decisions: checklist **175**.
@@ -51,6 +51,29 @@ contract). Authoring mechanics: `agent/WORKFLOW.md` "Authoring a prompt" element
 > *"nearly all the work is being done by claude which makes our cross vendor checks weak … flip it to codex doing
 > most of the build"* — **every build link is Codex, every check is Claude.**
 
+## ⛔ THE STAMPER WAS CUT — owner ruling, 2026-09-14
+
+**The layout stamper is REMOVED from the toolkit.** TestKit `d80fb5e` deleted
+`Code/77_SMRTK_Stamper.lua` and `Layouts/`, plus the metadata code-list entry, the
+`"Stamper"` page id and slot 3's three dead layout fields. **The panel is seven pages, not
+eight.** Class 18 and 08b's old blocks 13–15 are **struck, not deferred**.
+
+⚖️ **The owner's words:** *"with the improvements of the whole kit and making instant
+construction easier, I think the stamper isn't as important as I originally thought …
+its complex and the most likely thing to break in the whole toolkit."* The orchestrator
+was asked for a counter-reason and found none that survived: the feature never placed one
+native object, `EF-099` records that a v1 capture **cannot** replay a connected passage
+(grouping and order are lost) and that `IsBuildableZoneQR` is a terrain filter rather than
+a footprint fit check, and a partial placement has no rollback.
+
+⇒ **The design, the v1 format and the three unsolved problems are parked in
+`docs/FUTURE_IDEAS.md` entry 5.** ⛔ That entry is **not agent-tracked**: it is on no owed
+list, in no generated queue, and **no agent raises it, costs it or counts it as
+outstanding** — the owner un-parks it, in words, or it stays parked. The body is
+recoverable at TestKit `9057fb6:Code/77_SMRTK_Stamper.lua` (that repo is local-only and
+has no remote). ⚠️ Rows below that predate this ruling are **records** and are left as
+written; where one describes stamper work, the ruling wins.
+
 ## The queue
 
 | # | file | model | owner needed? | what it drains |
@@ -63,7 +86,7 @@ contract). Authoring mechanics: `agent/WORKFLOW.md` "Authoring a prompt" element
 | ~~07~~ | ~~`07_DOCS_AND_SITTING_PREP_codex.md`~~ | ~~**Codex — Sol, high**~~ | ~~no~~ | **DOCUMENTED/PREPARED 2026-09-14**; WORKFLOW + PLAYTEST_HELP + TestKit README, `perma/SMRTK_SLOTS.md`, numbered predictions + executable dry-run counts and 08's 40-minute script. As built, no Code edit/launch. NEXT owner 08 after attendee slot/fixture preparation |
 | ~~08~~ | ~~`08_FULL_SITTING_owner.md`~~ | ~~Claude attending (attended)~~ | ~~✅ keyboard~~ | ✅ **RAN 2026-09-14 — PASS WITH CORRECTIONS.** Classes 1–17 pass, **requirement (A) PROVEN** (`cheats_count=0`, 844 records, zero TAINT); class 18 BLOCKED by defect 21. 25 defects + the design half: `reports/SMRTK_FULL_SITTING.md`, owner items consolidated into **ck183**. Prompt retired 09-14 (context spent); the unrun remainder is 08b |
 | ~~09~~ | ~~`09_ARCHITECTURE_BUILD_codex.md`~~ | ~~**Codex — Sol, xhigh**~~ | ~~no~~ | **BUILT + DESK 2026-09-14**, TestKit `d9f8fb1` + `9057fb6`; `reports/SMRTK_09_REBUILD.md`, complete 84-name trace and reproducible desk script. All25 dispositioned; font7 PARTIAL, outbound costed/held, no launch/current A claim. Changed verdicts in 08b inbox; NEXT owner 08b when surface called stable |
-| 08b | `08b_STAMP_SITTING_owner.md` | Claude attending (attended) | ✅ keyboard | **NEXT, 09 built/desk complete; owner surface-stability gate remains.** Changed-surface acceptance named in 09 inbox plus three retained native stamps/class18 and close. Still runs surface acceptance if owner removes Stamper; unchanged mechanisms not repeated |
+| 08b | `08b_SURFACE_SITTING_owner.md` | Claude attending (attended) | ✅ keyboard | **NEXT, 09 built/desk complete; owner surface-stability gate remains.** Changed-surface acceptance named in the 09 inbox, then close. ⛔ **Class 18 STRUCK — the owner CUT the Stamper 2026-09-14** (TestKit `d80fb5e`); seven pages, not eight. Unchanged mechanisms not repeated |
 | 99 | `99_AUDIT_fable.md` | Fable | ✅ raises | terminal adversarial audit: the taint invariant re-derived against the ARCHIVED log, every action's route read for `NetSyncEvent`/`LogCheatUsed`, tag coverage, idle invariant, the 03A/03B cross-vendor split adjudicated, falsifiers RED, verdict, folder-empty gate, kickoff lines |
 
 ### 03A's payloads (`payloads/`, consumed by 03A on its close-out)
@@ -111,7 +134,7 @@ cross-references by registry id with stubs). 03B may send a payload back to 03A 
 | `Code/73_SMRTK_Infopanel.lua` | P2 | the infopanel section |
 | `Code/74_SMRTK_Agent.lua` | P3 | Agent page: slots UI, pins, triggers, note, screenshot+mark |
 | `Code/75_SMRTK_Saves.lua` · `76_SMRTK_Kit.lua` | P4 | Saves page · Kit page |
-| `Code/77_SMRTK_Stamper.lua` + `Layouts/` | P5 | capture / stamp |
+| ~~`Code/77_SMRTK_Stamper.lua` + `Layouts/`~~ | ~~P5~~ | ⛔ **DELETED 2026-09-14** (TestKit `d80fb5e`) — owner ruling; see the notice at the top |
 | `Code/80_AgentSlots.lua` | P3 (template) | **agent-owned**: the slots for the NEXT sitting; rewritten per sitting, never by a build link |
 | `reports/SMRTK_UI_HOOKS.md` | 03A spike | the two shared UI-hook decisions, with rejected routes and line numbers |
 

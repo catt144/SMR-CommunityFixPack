@@ -55,10 +55,11 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 - ⭐ FR-1 TEMP WORKAROUND MOD LIVE 09-11 (Steam 3799500849 / PDX 158711). **ALL FR-1 / Linux / NVIDIA work →
   `prompts/perma/LINUX_DISPATCH.md`.** Field: 3 working (one 10xx), 1 failing (GTX 1070, log requested).
 - ⭐ **`prompts/smrtk/` (ck175): 01-07 BUILT. ⭐ 08 RAN 09-14 attended: PASS WITH CORRECTIONS.**
-  Classes 1-17 PASS; ⛔ class 18 (Stamper) BLOCKED. 25 defects, `reports/SMRTK_FULL_SITTING.md`.
+  Classes 1-17 PASS. 25 defects, `reports/SMRTK_FULL_SITTING.md`.
   ⭐ Design half + owner's ARCHITECTURE ruling (group by task, hot bar) = **ck183**; item 6 + the More trace ANSWERED 09-14.
-  NEXT: fire **`09_ARCHITECTURE_BUILD_codex.md`** (A re-layout · B defects 21+22 · C subagent trace of 84 More leaves),
-  then **08b** (blocks 13-15, ⛔ gated on 09's defect-21 fix), then 99. 08 prompt RETIRED 09-14.
+  ⭐ **09 BUILT + DESK 09-14** (re-layout, all 25 dispositioned, 84-name More trace): `reports/SMRTK_09_REBUILD.md`,
+  TestKit `d9f8fb1`+`9057fb6`; no play claim. NEXT: **08b** (changed-surface acceptance, ⚠ owner must first call the
+  surface stable), then 99. 08 + 09 prompts RETIRED 09-14.
   Verdict + corrections `reports/SMRTK_SKELETON_SITTING.md`; logs `archive/logs/smrtk02_*` (`ObjCheat` 1 in the control boot, **0** in the toolkit boot).
   ⛔ Depot class tree + what a `UniversalStorageDepotBase` guard misses = **`EF-102`**.
   ⛔ Eligibility stays `UNAVAILABLE:sandbox` (`EF-096`) — no-taint is necessary, NOT proven sufficient.

@@ -49,6 +49,19 @@ build other than the one 02/08 ran on.
 
 ## Notes from upstream
 
+- ⛔ **(orchestrator, 2026-09-14) THE STAMPER IS CUT — every Stamper leg below is VOID.**
+  The owner ruled it removed; TestKit `d80fb5e` deleted `77_SMRTK_Stamper.lua`, `Layouts/`,
+  the metadata code-list entry, the `"Stamper"` page id and slot 3's three dead layout
+  fields. The panel is **seven** pages, not eight. ⇒ Do **not** audit the Stamper, do not
+  score its absence as a regression, and do not open `SMRTK_P5_DESK.py` or P5's 19
+  falsifiers as live gates — they describe deleted code. ⚠️ **The outbox entries below are
+  RECORDS, left verbatim on purpose**; where one asks you to audit stamper/passage/partial-
+  abort behaviour or class 18, that instruction is spent. The design and its three unsolved
+  problems are parked in `docs/FUTURE_IDEAS.md` entry 5, which is **not agent-tracked** —
+  ⛔ do not raise it, cost it, or count it as outstanding. Everything else in this brief —
+  the taint invariant, tag coverage, the idle invariant, the 03A/03B adjudication — is
+  unaffected, and the requirement-(A) re-derivation is still against the ARCHIVED log.
+
 - (authoring session, reshaped 2026-09-13) 03A (Codex) built and 03B (Claude) judged; read 03B's **disagreements
   with 03A** before either report's claims, and adjudicate each on evidence — a cross-vendor split is the point of
   the pair, not noise. Also check 03A actually ran the spike BEFORE launching P2/P3 (commit order of

@@ -54,8 +54,8 @@ exists, and a struck row is RED. A row that outlives its file is how a next sess
   (*"extend before 08"*). **03C BUILT 09-14**, TestKit `f093e3b`; **07 DOCUMENTED/PREPARED 09-14**
   (`perma/SMRTK_SLOTS.md`, numbered predictions, the sitting script). ⭐ **08 RAN 2026-09-14 — PASS WITH
   CORRECTIONS**, requirement (A) PROVEN, class 18 blocked by defect 21, 25 defects and the design half in
-  `reports/SMRTK_FULL_SITTING.md` + **ck183**; its prompt is retired. So next is owner `08b_STAMP_SITTING_owner.md` (09's build/desk complete;
-  changed-surface acceptance plus retained native stamps, gated on owner surface stability),
+  `reports/SMRTK_FULL_SITTING.md` + **ck183**; its prompt is retired. So next is owner `08b_SURFACE_SITTING_owner.md` (09's build/desk complete;
+  changed-surface acceptance, gated on owner surface stability; ⛔ the Stamper was CUT 2026-09-14 and class 18 is struck),
   then Fable audit 99 — the two remaining task prompts. Its README is the manifest
   and is the authority on link state; spent payload briefs live in the close-out git grave.
 - `fixtoggles/`: **LIVE** (authored 09-11): an on/off button per fix, Beta labels, linked buttons; link 09 researches

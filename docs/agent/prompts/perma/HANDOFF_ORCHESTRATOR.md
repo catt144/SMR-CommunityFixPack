@@ -68,16 +68,20 @@ before every write; a peer commits here every few minutes.
 ⭐⭐ **EFFORT 1 — `prompts/smrtk/` (ck175), the SMR Tool Kit.** ⛔ **Its README is the manifest and is
 canonical** (queue, seats, invariants, the ranked UI ladder); the owner rulings are in **ck175** and
 **ck183**. **Nothing is restated here — only what a README cannot tell you:**
-- **`09_ARCHITECTURE_BUILD_codex.md` is RUNNING (Codex/Sol) from 09-14.** ⛔ **The whole
-  `prompts/smrtk/` folder is ITS lane while it runs** — route by message, never by editing in there.
-  Then **08b** (owner, attended) → **99** (Fable). 01, 02, 03A, 03B, 03C, 07 and 08 are consumed.
+- ✅ **09 CLOSED 09-14** (`86f0006`): re-layout built, all 25 defects dispositioned, the 84-name
+  More trace landed. The `prompts/smrtk/` lane is **free** — no session owns it. Next is **08b**
+  (owner, attended, ⚠️ gated on the owner calling the surface stable) → **99** (Fable).
+  01, 02, 03A, 03B, 03C, 07, 08 and 09 are consumed.
 - ⭐ **`ck183` IS THE SPEC 09 BUILDS TO, not a defect list** — the owner's architecture ruling: group
   by **task**, not taxonomy; anything used with other pages' work goes on a **hot bar**. Its proof is
   measured: all four triggers are on Agent, `run_until` is on World, so every "run until X" is two
   pages. 08's 25 defects are all assigned inside 09's brief.
-- ⚖️ **The owner licensed 09 to RECOMMEND the Stamper's removal** (complex, heavy, possibly too
-  fragile) — given **verbally**, so ck183 holds the only written copy. ⛔ It is a recommendation;
-  the call is the owner's. **08b survives either way** — it is the re-layout's first play contact.
+- ✅ **THE STAMPER IS CUT — owner ruled it 2026-09-14, and this is settled.** Removed from the
+  TestKit (`d80fb5e`); the panel is **seven** pages and class 18 / 08b's blocks 13–15 are struck.
+  ⛔ **Do not re-open, re-cost or re-litigate it.** The design is parked in `docs/FUTURE_IDEAS.md`
+  entry 5, which is **not agent-tracked** — the owner un-parks it in words or it stays parked, and
+  ⛔ **no mention of it belongs in STATE, DISPATCH, CLAUDE.md or any always-read doc** (owner's
+  instruction, same day). 08b is unaffected: it is the re-layout's first play contact.
 - ⛔ **Requirement (A) is PROVEN** (08: `cheats_count=0`, 844 records, zero TAINT). Never re-prove it.
   Premises `EF-095`–`EF-099`; invariants (A) nothing registers as a cheat, (B) one `SMRTK_` tag.
 

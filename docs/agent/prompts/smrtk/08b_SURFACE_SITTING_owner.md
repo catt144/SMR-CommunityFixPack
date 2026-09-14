@@ -1,12 +1,13 @@
-# smrtk 08b — changed-surface acceptance and the three native stamps
+# smrtk 08b — changed-surface acceptance
 
 Link 08b of `smrtk`. **Claude attending, owner at the keyboard.** Created 2026-09-14 by the
 orchestrator on the owner's instruction, as a self-split of 08 (README rule 4): 08's sitting
-**ran and closed** at PASS WITH CORRECTIONS, but **class 18 never ran** — blocks 13–15 were
-blocked by defect 21 — and 08's session is spent. This link carries the unrun remainder
-and the verdicts invalidated by 09's rebuild, listed in Notes from upstream. It remains
-the changed layout's first play contact if the owner removes the Stamper; omit the three
-stamp blocks in that case, not this sitting. README rules 1–22 are yours.
+**ran and closed** at PASS WITH CORRECTIONS and 08's session is spent. This link carries
+the verdicts invalidated by 09's rebuild, listed in Notes from upstream, and is **the
+re-layout's first play contact**. ⛔ **Class 18 is GONE, not deferred** — the owner ruled the
+Stamper CUT on 2026-09-14 and it was removed from the TestKit (`d80fb5e`); its old blocks
+13–15 are struck from this brief. Do not reinstate them, and do not treat the removal as a
+gap to fill. README rules 1–22 are yours.
 
 ⛔ **08 is RETIRED. Do not look for `08_FULL_SITTING_owner.md`** — it was `git rm`'d in the
 same commit that created this file. Its grave:
@@ -15,23 +16,22 @@ it produced is `reports/SMRTK_FULL_SITTING.md`, which is the record, not the pro
 
 ## 0 · ⛔ THE GATE — this link does not fire until both are true
 
-1. **09's built tree is present.** TestKit `d9f8fb1` + `9057fb6` fix defect 21 using
-   template_name or class throughout validation/capture/sort/export/upgrades; class-only
-   placed dome/interior capture passed the desk instrument. Recheck the current tree with
-   `python docs/agent/reports/SMRTK_09_DESK.py`. This supplies desk evidence, not native
-   capture. If the Stamper was removed by owner ruling, use that removal's current-tree
-   gates rather than the old Stamper fixtures; class 18 is explicitly omitted.
+1. **09's built tree is present, with the Stamper removed on top of it.** TestKit
+   `d9f8fb1` + `9057fb6` built the re-layout; `d80fb5e` cut `77_SMRTK_Stamper.lua`,
+   `Layouts/`, the metadata code-list entry, the `"Stamper"` page id and slot 3's three dead
+   layout fields. Recheck the current tree with
+   `python docs/agent/reports/SMRTK_09_DESK.py`, and expect **seven** pages, not eight.
+   ⚠️ That script predates the cut — a Stamper-specific leg failing is the cut, not a defect;
+   read what it asserts before scoring it.
 2. **The owner has said the surface is stable enough to script against.** ck183 rules a
    re-layout (task grouping + hot bar + one toggle button). ⚠️ **This brief names actions by
    FUNCTION, not by page**, precisely so a re-layout does not invalidate it — but the
    attendee must re-walk the current UI at preparation and write the actual click path into
    the script before the owner sits. ⛔ Never hand the owner a path you have not walked.
 
-09 has now built both the capture repair and the re-layout. Prepare changed-surface
-acceptance and any retained stamp blocks for the same owner-authorized boot. The Stamper
-has never placed a native object; ck183 allows a removal recommendation. Review 09's
-fragility/recovery criteria during preparation. Do not invent another sitting to settle
-the trace's 84 names or rerun unchanged mechanisms.
+09 built the re-layout; the Stamper is cut. Prepare changed-surface acceptance for one
+owner-authorized boot. Do not invent another sitting to settle the trace's 84 names or
+rerun unchanged mechanisms.
 
 ## 1 · Orient
 
@@ -48,7 +48,7 @@ record any result without it.**
 - ⭐ **Requirement (A) was PROVEN on the old surface:** `cheats_count=0`, `CheatsUsed` enumerated by
   name after every destructive action, 844 records, zero TAINT, zero ERROR, zero surviving
   arms. 09 cannot inherit that verdict for changed code. Read after-taint for changed
-  mutations and stamp blocks, and final arm ownership. Do not repeat 02's unchanged
+  mutations and final arm ownership. Do not repeat 02's unchanged
   console kill gate or claim global proof from a small sample.
 - **Classes 1–17 passed on the old tree.** Keep those historical results. Recheck only
   changed contracts and screen behavior named in the inbox below; replace their current
@@ -56,48 +56,14 @@ record any result without it.**
 - The first `RunAll()` ran. ⚠️ Whether it discharges **ck144 (a)** is **UNRULED** — do not
   assume it either way.
 
-## 3 · The job — changed-surface acceptance, retained native stamps, then close
+## 3 · The job — changed-surface acceptance, then close
 
 Prepare numbered predictions and real click paths for the changed contracts in Notes
-from upstream. Inspect the current eight-page UI before handing over a script. Score
-whether each task beats the vanilla workaround, as well as whether it dispatches.
-The native stamp blocks below retain 07's order and frozen-count witnesses; omit them
-only under an owner Stamper-removal ruling, recording the reason. Price the added surface
-acceptance honestly during preparation instead of silently reusing 08's old duration.
-
-**13. Native stamp 1: ordinary depot — 2 minutes (class 18).** First screen: surviving source
-depot and empty level target. Name `smrtk08_depot`, Capture selected, Copy layout; agent
-opens/preserves literal text. Plan at click on the new target, freeze numeric
-ready/skipped/buildings/grid prediction before placement. While paused, try Stamp at click
-there once: require REFUSED and zero mutation. Resume, re-arm and stamp at the same target
-after a fresh plan if anything changed. Require final native STAMP, owned-site completion,
-`left_sites=0`, actual stockpile/functionality and after-taint read.
-
-**14. Native stamp 2: dome/interior and upgrades — 3 minutes (class 18).** First screen:
-selected source dome with supported upgraded interior. Name `smrtk08_dome`, Capture selected.
-Plan first over the original occupied fixture: skips and zero mutation. Re-plan at empty level
-space; freeze numeric counts and PENDING_DOME interiors, then stamp at that same target while
-running. Inspect native fit, completed dome **GameInit**, each interior's actual dome
-membership and operation. Apply captured upgrades separately: check the affected new
-building's built state and colony unlock disclosure; queue success alone does not pass. Keep
-source objects unchanged.
-
-**15. Native stamp 3: flat connected grids, capture lifecycle — 3 minutes (class 18).** First
-screen: source flat connected cable/pipe patch. Name `smrtk08_grids`, Capture rectangle; first
-click sets one corner without CAPTURE, second emits it and disarms. Copy literal layout.
-Plan/stamp at fresh level space using frozen native numeric counts, and inspect **connected**
-grids supplying their scratch consumers. Include a passage/suspended/switch row only if
-present: require its named skip, not replay. Inspect Capture map on the small clean fixture
-with a fresh name `smrtk08_map`; record a cap refusal as unavailable if over-cap. Next saved,
-Copy layout and Cancel target/work exercise their distinct controls. Arm a rectangle and Save A
-then Load A once: require DISARM/no retained corners, pins cleared and Slot 3's lifecycle dump.
-This final round trip also demonstrates target cleanup; native waits may extend the priced
-block, within the save/load abort threshold.
-
-⚠️ **The separate follow-ups (Fill storages all maps, Add 10 colonists on the intended selected
-dome, Funding +500M) may be fired after base inspection** — check actual World results and
-scope, not just `STAMP_FOLLOWUP`. ⛔ They do **not** establish a complete colony duplication
-feature, and see the defect-22 warning below before believing any spawn result.
+from upstream. Inspect the current **seven**-page UI before handing over a script. Score
+whether each task beats the vanilla workaround, as well as whether it dispatches. Price
+the surface acceptance honestly during preparation instead of reusing 08's old duration —
+⛔ and never reuse 08's duration on the assumption that dropping class 18 simply subtracts
+its eight minutes.
 
 **Close:** editors/Mod Manager closed, no arms or exclusive map input retained, after-taint
 read, archive the boot log. Clear/copy and print-tee ownership checks are changed contracts;
@@ -107,20 +73,20 @@ score them where the inbox calls for them, not from the historical close-out.
 
 - **22. Spawn reports dispatch with deferred verification.** All twelve variants now
   avoid post-mutation REFUSED. A same-tick census is not an exact-count witness: wait for
-  GameInit and inspect the actual population/scope. Block 15's Add 10 follow-up uses this.
+  GameInit and inspect the actual population/scope.
 - **20. An armed click slot blocks ALL map selection by design.** 09 adds owner label/ID,
   right-click-map escape and Cancel target, visible with
-  the panel closed. ⇒ **Script rule, mandatory here:** blocks 13–15 arm click targets constantly, so
-  **select every object and configure every watch BEFORE arming anything**, and disarm before
-  the next selection.
+  the panel closed. ⇒ **Script rule, still mandatory:** any click-target slot you arm blocks
+  map selection, so **select every object and configure every watch BEFORE arming anything**,
+  and disarm before the next selection.
 - **25/23. Finish all in-transit arrivals needs no selection.** Inbound UniversalRocketBase
   only; pods/outbound/orbit waits are excluded. Script a real waiting inbound flight if
   available; compare with ultra speed. Missing fixture means NOT RUN, not inferred PASS.
 
 ## 5 · Scope fence
 
-**IN:** changed contracts listed in the inbox, retained blocks 13–15, the close-out,
-`reports/SMRTK_08B_STAMPS.md`, this link's row in
+**IN:** changed contracts listed in the inbox, the close-out,
+`reports/SMRTK_08B_SURFACE.md`, this link's row in
 `prompts/smrtk/README.md`, the boot log.
 
 **OUT:** ⛔ re-running unchanged class-1–17 mechanisms or 02's kill gate. ⛔ Building or fixing anything — you are the
@@ -132,32 +98,26 @@ Found something interesting out of scope: **file it, do not fix it** (rule 3).
 
 ## 6 · Stop conditions — permission, not failure
 
-For retained stamp blocks, stop and report if: defect 21's fix is not actually in the loaded TestKit (check before the
-owner sits, not after) · capture still answers *"no supported buildings or grid nodes"* ·
-the fixture lacks a supported dome interior with a built upgrade, or two flat connected
-cable/pipe patches with room for duplicates — **provision or record NOT RUN by name, never
-substitute a fake desk object** · a stamp mutates the SOURCE objects · the stale-probe sweep
-is not clean · the owner's time runs out mid-block (report the block as partial with its
-first-screen witness, never as a pass). Stale-probe, taint/error and time aborts also bind
-changed-surface acceptance when stamp blocks are omitted.
+Stop and report if: the loaded TestKit is not the current tree (check before the owner sits,
+not after) · a fixture a changed contract needs is absent — **provision or record NOT RUN by
+name, never substitute a fake desk object** · the stale-probe sweep is not clean · taint or
+errors appear · the owner's time runs out mid-block (report the block as partial with its
+first-screen witness, never as a pass).
 
 ## 7 · What may NOT be claimed
 
-- ⛔ **Never claim the stamper works from a queue success.** Blocks 14 and 15 say it: queue
-  success alone does not pass; the built state, dome membership and grid connection are the
-  reading.
-- ⛔ **Never claim "complete colony duplication."** v1 is flat cables and pipes with named
-  skips for passages, switches and special buildings.
+- ⛔ **Never claim a dispatch is a result.** A queue or dispatch success alone does not pass;
+  the actual built state is the reading.
 - ⛔ **Never carry 08's requirement-(A) PASS onto the rebuilt tree.** Report the current
   sampled after-taint/arm evidence and its limits; do not call it universal proof.
 - ⛔ **A mechanism-only PASS is not a pass.** 08 scored block 12 PASS while the owner would
-  rather have hit ultra speed (ck183). If a stamp block works but is unusable, **say both**,
-  and score the usability half explicitly.
+  rather have hit ultra speed (ck183). If a block works but is unusable, **say both**, and
+  score the usability half explicitly.
 - ⛔ Never state an absence from a truncated grep or a truncated log read.
 
 ## 8 · Close-out
 
-1. Report at `reports/SMRTK_08B_STAMPS.md`: changed-surface and per-block verdicts, the frozen numeric predictions
+1. Report at `reports/SMRTK_08B_SURFACE.md`: changed-surface and per-block verdicts, the frozen numeric predictions
    against actuals, every named skip, defects found, `OWNER-ROUTED` lines, and DRIFT for 99.
 2. **Force-add the boot log** — `*.log` is gitignored and 24 prior sitting logs are tracked by
    force-add under the `<tag>sitting_` convention. ⛔ 99 re-derives against the archived log,
@@ -178,7 +138,7 @@ an attended sitting, so a stale list wastes their time directly.
 ## Notes from upstream
 
 **From 08 (`reports/SMRTK_FULL_SITTING.md`, PASS WITH CORRECTIONS, 2026-09-14):** 25 defects,
-of which 21 blocks you outright and 22 makes one follow-up's log untrustworthy. 08's own
+of which 22 makes one follow-up's log untrustworthy (21 was the Stamper's and died with it). 08's own
 outbox flagged that STATE carries two refuted lines (`GhostFarmOxygen` as a FAIL, and "every
 depot is `UniversalStorageDepotBase`"), that `DomeFreeSpaceMismatch` needs triage, and that
 three attendee drifts are recorded — weigh its other readings knowing that.
@@ -261,17 +221,13 @@ as historical results, including its old-surface no-taint reading.
     captured original restored. Do not repeat a full suite to verify its relabel;
     run only sitting-required probes under the stale-probe/preflight gate. Snapshot/
     diff/fingerprint bodies remain unchanged; inspect moved controls/readout only.
-11. **Class 18 — never passed natively.** All template identity reads fixed;
-    class-only capture passed only synthetic fixtures. Native plan/count/GameInit/
-    dome membership/grid connectivity/upgrades remain owed by blocks 13–15.
-    Partial placement logs ERROR/mutated and stays incomplete; follow-ups refuse.
-    No rollback exists: use disposable save/reload, inspect effects, never repeat a
-    mutation to improve the verdict. Do not intentionally induce engine corruption
-    to prove that synthetic failure branch. Apply the report's reliability/recovery
-    and usability criteria; recommend removal on systemic supported-fixture failures.
+11. ⛔ **Class 18 — STRUCK, not owed.** The owner cut the Stamper on 2026-09-14
+    (TestKit `d80fb5e`); this item is kept only so a reader of 09's outbox does not
+    go hunting for it. Nothing about native plan/GameInit/dome membership/grid
+    connectivity is owed by anyone. The design and the three unsolved problems are
+    parked in `docs/FUTURE_IDEAS.md` entry 5, which is **not agent-tracked**.
 
-**Stamper removal does not cancel items 1–10.** Report omitted stamp blocks by owner
-ruling if applicable. Requirement (A) has no witnessed current-tree result yet;
+**The cut does not cancel items 1–10.** Requirement (A) has no witnessed current-tree result yet;
 unchanged class 3/02 console gating is not invalidated and must not be re-derived.
 Take first-screen witnesses, named NOT RUN fixtures and 3× aborts from the standing
 preparation rules. No new boot or 84-leaf sitting is imposed by this outbox.

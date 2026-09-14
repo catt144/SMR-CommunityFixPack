@@ -843,6 +843,51 @@ possible, and it is far too cheap to gate on the outcome. ⛔ A verdict of *"it 
 work"* reached without first fixing the guard that rejects every capture would not be worth
 recording.
 
+#### ✅⭐ 2026-09-14 — RULED BY YOU: THE STAMPER IS CUT
+
+⚖️ **Your words:** *"with the impovements of the whole kit and making instant construction
+easier, I think the stamper isn't as important as I originally thought. Unless you can come
+up with a good reason to not cut it, I say we just cut it, its complex and the most likely
+thing to break in the whole toolkit."*
+
+⛔ **The counter-reason was looked for and did not survive.** You asked for one, so this is
+what the search found rather than an agreement:
+
+- **The one real argument FOR keeping it** is fixture provisioning — `EF-079` branch-locks
+  the 1.0.7 save library, so every 1.1.0 leg needs a colony built from scratch in hours,
+  and **151 (c)** says outright *"Building those conditions from scratch is expensive."*
+- **It fails anyway, three ways.** ① Capture needs a source layout to read, and the
+  fixtures worth reproducing are on 1.0.7 and cannot be loaded — so there is nothing to
+  capture from, and the feature only pays back on a *second* replay we have never needed.
+  ② `EF-099`'s own correction: *"Capturing only kind and hex loses the grouping/order
+  needed to replay a connected passage"* — and the first layout 151 (c) names is **F52
+  passage**. The same correction shows `IsBuildableZoneQR` is a terrain filter, not a
+  footprint fit check. ③ A partial placement has **no rollback**; the recovery boundary is
+  a disposable save. Underneath all three: **it never placed one native object.**
+- **Your standing rule already pointed the same way** — 151 (c) takes those checks only if
+  the colony *already has* the layouts, *"otherwise SKIP THEM BY NAME"*, under ⛔ never
+  build a layout to make a check possible. Manufacturing layouts was the Stamper's job.
+
+**Done, 2026-09-14** — TestKit `d80fb5e` deleted `Code/77_SMRTK_Stamper.lua` (725 lines,
+the largest module in the toolkit) and `Layouts/`, plus the metadata code-list entry, the
+`"Stamper"` page id and slot 3's three dead layout fields. **The panel is seven pages, not
+eight.** No pack module was touched — TestKit is local-only, **0 shipped hashes**, so there
+is no player-facing surface and no release risk. 08b keeps its second job and loses only
+the class-18 half; 99 is told not to audit deleted code.
+
+⭐ **THE WORK IS ARCHIVED, NOT LOST — `docs/FUTURE_IDEAS.md` entry 5.** It carries the v1
+format contract, the design reports, the engine routes in `EF-099` (still true and still
+useful for instant construction), the three unsolved problems any revival must answer
+first, and the git coordinates to recover the body (TestKit `9057fb6`, a local-only repo
+with no remote).
+
+⛔ **IT IS NOT AGENT-TRACKED, BY YOUR INSTRUCTION.** *"Any mention of it must be in pull
+only documents, not stubs of it in things that are read always."* ⇒ It is on **no** owed
+list, generates **no** row in `WAITING_ON_YOU.md`, and is **absent from `STATE.md`,
+`CLAUDE.md`, `DISPATCH.md` and `GENERAL_USE_PROMPT.md`** — the always-read push set. ⛔ **No
+agent raises it, re-costs it, or counts it as outstanding.** You un-park it in words when
+the workload allows, or it stays parked.
+
 #### ⚖️ STILL YOURS TO ANSWER — three open design questions
 
 1. ✅ **Item 6 — ANSWERED BY THE OWNER 2026-09-14, and 08 had it wrong.** *"clean

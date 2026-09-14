@@ -119,6 +119,72 @@ in the checklist; F03/F35/F48 entries in `agent/bugs/`.
 
 ---
 
+## 5. The layout Stamper — capture a built layout and replay it — parked 2026-09-14
+
+**What.** The SMR Tool Kit's Stamper: capture a built layout (selected / rectangle /
+whole map) into a normalized Lua table, then replay it at a clicked target in the
+order the engine requires — domes → complete → interiors → complete → grids →
+complete — on the game's own construction front door. Built as smrtk payload P5,
+725 lines, removed from the TestKit 2026-09-14.
+
+**Why it is a good idea.** Fixture provisioning is this project's most expensive
+recurring cost, and it is not a one-off: `EF-079` branch-locks the 1.0.7 save
+library, so every 1.1.0 leg needs a colony built from scratch, in hours. Checklist
+**151 (c)** says it outright — *"Building those conditions from scratch is
+expensive."* A working stamper would turn a layout into data that survives a
+branch move. The owner's original read: *"This would truly be a game changer in
+setting up testing scenarios."*
+
+**Why it is parked.** Owner ruling 2026-09-14: *"with the improvements of the whole
+kit and making instant construction easier, I think the stamper isn't as important
+as I originally thought … its complex and the most likely thing to break in the
+whole toolkit."* Three measured findings agree, and a revival has to answer all
+three — they are the real content of this entry:
+
+1. ⛔ **Connected passages cannot be replayed by the v1 capture.** `EF-099`'s 03A
+   correction: *"Capturing only kind and hex loses the grouping/order needed to
+   replay a connected passage. Do not treat a cable/pipe node replay algorithm as
+   a passage replay."* Passages, suspended spans and switches shipped as **named
+   skips**. This matters because the first layout 151 (c) names is **F52 passage**.
+2. ⛔ **There is no real fit check.** `IsBuildableZoneQR` is a terrain filter
+   (`BuildableGrid.lua:310-312`); it does not enumerate existing occupants or
+   validate a rotated building's footprint. A caller needs its own obstruction test.
+3. ⛔ **A partial placement has no rollback.** Placement and GameInit are deferred,
+   interiors depend on a completed parent, grids on native group completion. The
+   recovery boundary is a disposable save.
+
+And the plain fact underneath: **it never placed one native object.** Class 18
+(smrtk blocks 13–15) was blocked by defect 21 and never ran, so there is no play
+evidence in either direction. What replaced it is cheaper and already works —
+hand-placement plus `complete_constructions` / `complete_grids` / `unlock_buildings`.
+
+**Where the material lives** (so nothing is re-researched):
+- **The v1 format contract** — `agent/reports/SMRTK_LAYOUT_FORMAT.md` (schema, hex
+  offsets, angle units, dome indices, upgrade tiers, caps, unsupported families).
+- **The design and its departures** — `agent/reports/SMRTK_P5_REPORT.md`;
+  `agent/reports/SMRTK_FANOUT_REPORT.md` carries the 03A build evidence.
+- **The fragility analysis and the removal recommendation** —
+  `agent/reports/SMRTK_09_REBUILD.md`.
+- **The engine routes, still true and still useful** — `agent/facts/EF-099.md`
+  (`PlaceConstructionSite`, `CheatCompleteAllConstructions`, the grid line placers,
+  and the corrections above). This fact is **not** stamper-specific and stays live.
+- **The code body** — TestKit `9057fb6:Code/77_SMRTK_Stamper.lua`, with the layout
+  authoring instructions at `9057fb6:Layouts/README.md`. ⚠️ The TestKit repo is
+  **local-only by design and has no remote** — that sha exists on the owner's
+  machine only.
+
+**Rough cost to revive.** Not a re-type: the body is recoverable in one command.
+The cost is the three blockers above, all of which need new source work, plus the
+play exercise class 18 never got.
+
+**To un-park.** ⛔ **The owner suggests it, in words, when the workload allows —
+nothing else.** This entry is **not agent-tracked**: it is on no owed list, it is
+not in `STATE.md`, it generates no row in `WAITING_ON_YOU.md`, and ⛔ **no agent
+raises it, proposes it, or counts it as outstanding.** Per this file's hard rule,
+its presence here is not evidence that anyone wants it built.
+
+---
+
 # ⏸️ PROPOSED for parking — awaiting the owner's yes/no
 
 Listed, not moved. Each is still live on the board until the owner answers.
