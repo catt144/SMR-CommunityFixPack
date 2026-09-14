@@ -690,6 +690,135 @@ sitting — 08 tests one surface instead of a 22-action one that then changes. �
 the extension turns out NOT to ride P2's proven route, the cost basis of this
 ruling is gone and it is worth re-asking rather than pressing on.
 
+### 2026-09-14 — 183: SMRTK 08 ran — the design half, and three questions for you
+<!-- ck:183 status:open owner:yes -->
+
+**08's verdict is PASS WITH CORRECTIONS** (classes 1–17 pass, class 18 blocked;
+`reports/SMRTK_FULL_SITTING.md`). ⭐ **Requirement (A) is PROVEN, not asserted:**
+`cheats_count=0` with `CheatsUsed` enumerated by name after every destructive
+action the toolkit offers — 844 records, zero TAINT, zero ERROR, zero surviving
+arms. The 25 defects live in that report and are a build's problem.
+
+⚠️ **This block exists because 08 routed its design findings to a REPORT only.**
+Rule 5 (R10): a decision recorded only in a report **is not considered asked**.
+Everything below is the owner-facing half, moved where it belongs.
+
+#### ⭐⭐ THE OWNER'S ARCHITECTURE RULING, 2026-09-14 — this supersedes the page split
+
+*"The buttons might make sense via category, but they do not make sense in use.
+I should not have to go from World, find a button, to Agent, click a button, and
+then to Kit and click a button and then back to World to click a button to do
+something. Related actions and items should be on one page. And if an item is
+used in conjunction with multiple items it should be on the top hot bar."*
+
+⇒ **Group by TASK, not by taxonomy.** A page holds everything one job needs, start
+to finish. Anything used *in conjunction with* other pages' work belongs on a
+**persistent hot bar**, never on a page you have to travel to.
+
+**The case that proves it, in the owner's words:** *"Like to finish a rocket
+flight the steps for that, it was so confusing I would rather just hit ultra speed
+and wait the 30 seconds."* Measured: `rocket_arrive` is registered on **World**
+(`72:260`) in a row with `complete_constructions`/`complete_grids`, but it acts on
+the **selection** — and an in-flight rocket cannot be selected by clicking
+(defect 25), so the only working route was the **console**
+(`SelectObj(HandleToObject[4080])`), with the handle coming from a Kit dump.
+Four pages and the console, beaten by **ultra speed — a button on the same World
+page**. ⇒ Two rules fall out, and they are general:
+- ⛔ **An action that operates on a selection belongs on Selected.** `rocket_arrive`
+  was filed on World because it is a "completion thing" — taxonomy beat task.
+- ⛔ **A toolkit action must beat the vanilla workaround, or it should not exist.**
+
+#### The measured tab-hop count (orchestrator, 2026-09-14) — why this is structural
+
+| process | pages, in order | distinct |
+|---|---|---|
+| Watch a selected field until it changes | SELECTED → **KIT** (`watch_field`) → **AGENT** (`trigger_field`) → **WORLD** (`run_until`) → KIT | **4** |
+| Finish a rocket flight | WORLD → (cannot select) → KIT (handle) → **console** → WORLD | **3 + console** |
+| Run until next rocket lands | AGENT (`trigger_rocket`) → WORLD (`run_until`) | 2 |
+| Short breakpoint / timed run | AGENT (`smrtk08_break`) → WORLD (`run_until`) | 2 |
+| First Lua error since mark | AGENT (`mark`) → work elsewhere → AGENT (`trigger_error`) → WORLD | 2 + return |
+| Fire a bound slot on click | AGENT (bind/arm) → map click → KIT (read) | 2 + defect 20 |
+| Screenshot + Mark mid-test | leave your work → AGENT → back | +2 every time |
+| Run probes | KIT | 1 ✅ |
+| Dump the selected object | SELECTED | 1 ✅ |
+
+⛔ **The cause is structural, not cosmetic: all four triggers are registered on
+Agent (`74`), and the only thing that consumes a trigger — `run_until` — is
+registered on World (`72`).** Every "run until X" task is therefore a two-page task
+before anything else happens; no renaming or reordering fixes it. `watch_field`
+adds a third page and two names for one feature: **"Watch selected field"** on Kit,
+**"Selected field changed"** on Agent. ⇒ **Defect 10** (arm/disarm pressable before
+a watch exists, answering `NOT_BUILT`) is that split showing through as a bug, not
+a bad affordance.
+
+✅ **The remedy already exists in our own code — this is not new machinery.**
+`73_SMRTK_Infopanel.lua:29-32` surfaces `dump_selected` (registered on Kit) and
+`pin_A/B/C` (registered on Agent) as buttons **on Selected**, i.e. actions
+registered anywhere, surfaced where the work happens. That is exactly the hot-bar
+principle, already built and working — and it is why "Dump the selected object" is
+the one agent-type task with zero hops. Apply it to the seven flows that missed it.
+
+**Highest-value single change:** one **Run** grouping holding `run_until` *and all
+four triggers* — it collapses four of the seven flows. Then `watch_field` moves to
+Selected (it acts on the selection) and surfaces on Run; `mark` and
+`screenshot_mark` go to the hot bar, since neither is ever the task itself.
+
+#### 08's surface findings — the rest of the design set
+
+- ⭐ **RULED:** *"Just open and close the panel on click, opens it next click closes
+  it."* **One SMR button toggling the whole panel; drop the popout menu.** `71`'s
+  panel already carries a fuller status strip than the dock (it includes `quiet:`).
+  Keep a compact clean/tainted colour on the button so requirement (A) stays
+  visible while the panel is closed.
+- **1. The dock inflates the HUD** — `idSMRTKDock` parents into `idBottom` at 62 px
+  with `Margins = box(8,0,0,106)`, inflating `idBottom` by ~168 px and permanently
+  pushing up MapSwitch/`idLeft` and the pinned shuttle/dome/rover row. Owner:
+  *"its broken the UI layout its kicked up all of the things that usually sit right
+  above the doc."* Fix: parent as a **sibling** of `idBottom`. Owner wants it
+  **bottom-right**.
+- **2.** `XWindow.FoldWhenHidden` defaults **false**, so hiding alone does not free
+  the space (`XWindow.lua:751`). The owner asked; the sibling fix makes it moot.
+- **4. A true dock icon IS available** (was "plausible, unverified"):
+  `HUDMiddle → idMiddleList`, an `XWindow` with `LayoutMethod = "HList"` holding the
+  vanilla `HUDButtonNoFrame` buttons. Appending costs **zero vertical space** and
+  fixes item 1 **by construction** — the natural home for the single toggle button.
+  ⚠️ Source-read only, NOT built, NOT run. Needs an image asset; text is the fallback.
+- **5.** Drop the Delete caveat from the section body (`73:181`) — *"I don't need
+  this info here"* — but **move it to the Delete button's `RolloverText`**, since
+  03B added it to make the label honest about units.
+- **7.** Size rows to their text and shrink the font. Today `selected_button`
+  hard-codes `MinWidth/MaxWidth = 146` (296 for More) at `MinHeight = 30`.
+- **8.** A disabled button is not visibly disabled — `RunAll`/`Run one` look normal
+  while `SetEnabled(false)`.
+- **9.** Kit labels do not match how the work is described; the owner could not find
+  "Run all probes".
+- **13.** Controls belong at the **top** of every page — Kit's verdict list grows
+  with every run and pushes the buttons down, so the page gets worse with use.
+- **20. ⭐ An armed click slot blocks ALL map selection, with no warning.**
+  `AcquireClick` installs a `TerminalTarget` at priority 10001 returning `"break"`.
+  Measured: slot 4 armed, the owner tried to select a drone, the click fed the slot
+  (`object=FlyingDrone(2000244981)`) and the drone was never selected. Right-click
+  to cancel appears **nowhere on screen** ⇒ hot-bar candidate: a persistent armed
+  indicator naming the slot and its escape.
+
+#### ⚖️ STILL YOURS TO ANSWER — three open design questions
+
+1. **Item 6 is UNCONFIRMED and must not be built until you say.** You wrote *"add a
+   clean button at the top of these lists, that gives me the easy quick way to
+   clean"*; 08 read that as **Clean & Fix**, asked, and the sitting overtook the
+   answer.
+2. **Where the slot engine lives** (bind, pins, note) once triggers move to Run — its
+   own page, or riding with Probes?
+3. **Defect 20's remedy shape** — cursor change, or a persistent banner?
+
+#### ⚠️ A grading gap, recorded for 99
+
+Block 12 (rocket transit) was scored **PASS** — the mechanism worked — while being
+unusable enough that the owner preferred ultra speed. 08's verdict structure had
+nowhere to record *"works, but loses to doing nothing"*. ⛔ A mechanism-only PASS is
+how a chain ships something nobody uses; 99 should treat usability failure as a
+verdict class, not a note.
+
 ### ✅ 2026-09-13 — 174 RULED: a fired one-off leaves the prompts map entirely
 <!-- ck:174 status:ruled owner:no -->
 
