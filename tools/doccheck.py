@@ -1800,7 +1800,8 @@ def check_state_counts(counts, out):
         out.append("STATE BUILD STATE: RED — %s" % exc)
         return False
     if have != want:
-        out.append("STATE BUILD STATE: RED — generated counts differ from the fenced block")
+        out.append("STATE BUILD STATE: RED — generated counts differ from the fenced "
+                   "block (a TestKit probe-count change lands here too)")
         out.append(REGEN_CURE)
         return False
     out.append("STATE BUILD STATE: fresh — regeneration reproduces the region byte for byte")
