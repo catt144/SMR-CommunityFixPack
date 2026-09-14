@@ -106,10 +106,13 @@ report; outbox to 03B and 99; strike your row; push the pack repo.
   them. ⇒ **Requirement:** rule 7 stays exactly as it is — every action still emits exactly one tagged line — but each
   action additionally declares **whether that line reaches the SCREEN**. Pure chrome (tab switch, panel move, panel
   open/close, clear) is log-and-ring only; world changes and sitting evidence keep the screen. Requirement (B) is
-  untouched: the line still exists everywhere an agent reads. ⚠️ **Open mechanism question I could not settle:**
-  whether a line can reach the LOG FILE without the on-screen console (`print` goes `ConsolePrint → AddConsoleLog →`
-  both). If it cannot, ring-buffer-only is an acceptable destination for chrome — `Copy since mark` still carries it —
-  but say which you built.
+  untouched: the line still exists everywhere an agent reads. ⭐ **The lever, read at source after
+  `smr-bugfixpack-51` pointed at it — this is cheaper than it looks.** `T.Log` (`70_SMRTK_Core.lua:50-76`) makes
+  three separate emissions per line: `append("toolkit", line)` to the ring, `ModLog(line)` to the log file (the game
+  prefixes it `[mod]`), and `ConsolePrint(line)` to the console. ⇒ **skipping the `ConsolePrint` call for chrome
+  verbs is the whole change** — one condition in one place, not per-action plumbing — and the log file still
+  carries the line through `ModLog`, so requirement (B) is untouched rather than merely argued. The requirement is
+  still yours to shape (per-verb flag, per-call argument, a chrome set); I am only recording that the lever exists.
 
   **(2) This subsumes the CLEAR fix.** If chrome does not print to screen, `SMRTK_CLEAR` never lands on the freshly
   cleared screen and no ordering change is needed. `smr-bugfixpack-51` verified the mechanism at source
@@ -117,12 +120,21 @@ report; outbox to 03B and 99; strike your row; push the pack repo.
   first proposed is impossible and logging before the callback for ALL actions would empty `before=`/`after=` on every
   action. Its `log_first` per-action opt-in is the right **fallback** if the destination split proves impossible.
 
-  **(3) Possible duplicate lines — 51 owns the verdict, read its report first.** Two shapes were visible: two Log
-  calls at one game time with different ids (`SHORTCUT` 7/8, `PANEL_RESTORE` 9/10), and one id rendered twice
-  (`SCRATCH_DISCARDED` id=15). 51 has already **falsified** the doubly-registered-hotkey theory in play (`f6988c5` —
-  the panel toggles once per press). If its close-out shows the duplication is screen-only it rides with (1); if the
-  LOG FILE carries it, a restore hook firing twice per load is a behavioural item for you, and any later count of
-  toolkit actions is wrong until it is fixed.
+  **(3) ⛔ RESOLVED — there is NO duplicated log record. This item is corrected, not open.** I raised a
+  duplicate-line suspicion from the owner's screen; `smr-bugfixpack-51` read the log FILE and settled it (`843a508`),
+  and my baseline was one emission too low. **Two lines per Log call is BY DESIGN** — `ModLog` and `ConsolePrint`
+  are separate emissions (see the lever in item 1). **The same id appearing twice is the console echoing a return
+  value**: `T.Log` ends `return line`, and a typed console expression is re-printed by `uiConsole.lua:362`, so it
+  affects console-typed `SMRTK.Log` calls only. ⭐ **Counting toolkit actions by `id` is therefore SOUND** — my
+  warning that later counts would be wrong was itself wrong; do not act on it.
+  **What IS real, and 51 carries it to you with CLEAR:** `PANEL_RESTORE` logs more than once per load because
+  `restore_panel()` is registered on **three** messages — `OnMsg.InGameInterfaceCreated`, `OnMsg.PostLoadGame` and
+  `OnMsg.CurrentMapChangeDone` (`71_SMRTK_Panel.lua:207-209`) — and a savegame load fires the first two. It is
+  **not** a second panel: `T.OpenPanel` reuses a live instance, and 51 confirmed behaviourally (one drag → one
+  `SMRTK_MOVE`, one keypress → one `panel_toggle`; two panels would have doubled both). ⇒ a **logging-precision**
+  item: log `PANEL_RESTORE` only when the panel was actually created or made visible, so an agent counting restores
+  is not misled — ids 9/10 are P4's persistence evidence. ⚠️ Note the **third** registration when you fix it; a map
+  change is a path 02 did not exercise.
 
   **(4) SCOPE ADDITION — an SMR icon in the game's bottom HUD bar** (owner: *"create an SMR icon that I can just click
   to open it and click to close it"*). This is a **third vanilla-UI injection problem of the same family as your
