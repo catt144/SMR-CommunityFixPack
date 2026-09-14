@@ -295,3 +295,67 @@ README Ordering omitted 03C (corrected). My first report-fence command matched
 its own inline marker and executed no code with exit 0; the fixed, line-anchored
 extractor emitted every census/PASS witness. Prior upstream messages are historical;
 use this outbox for the resulting Selected surface. No RE-FIRE or new sitting.
+
+### 07 documentation/preparation outbox — 2026-09-14
+
+1. WORKFLOW attribution/agent-owned slot rule, PLAYTEST_HELP operator/console
+   guidance, TestKit README/file map and `perma/SMRTK_SLOTS.md` landed. Pack
+   documentation unit `f78d7a8`, TestKit README `c886fb7` (runtime unchanged from
+   `f093e3b`). Standing prompt file and map row land together. No Code, metadata,
+   version, probe or FIX_POLICY edit; toolkit is not a fix.
+2. `reports/SMRTK_FULL_SITTING_PREDICTIONS.md` contains numbered button classes,
+   first-screen witnesses, normal/3× abort thresholds, departures/suggestions,
+   executable P5 count instrument and verbatim doccheck warnings. 08's inbox
+   holds a 40-minute full script, separate hours-scale clean 1.1.0 fixture cost,
+   and six-slot/Scratch preparation. The attendee preloads 80 before boot using
+   the standing prompt; **07 did not write sitting code or launch the game**.
+3. Desk recheck: P5's 19 falsifiers PASS. Actual registry dry-run outputs at
+   pack `f78d7a8`, TestKit `c886fb7`: placed/ready/skipped **0/1/0**, **0/2/0**,
+   **0/3/0**. These are synthetic zero-mutation plans. 08 still owes **three
+   native stamps** with numeric capture/plan forecasts frozen before placement,
+   and named native fit, GameInit, dome membership, connected grids and upgrade
+   witnesses. No report count certifies the owner's colony.
+   07 also reran 03C's fenced instrument: source 106 names, P2/03C desk PASS,
+   84 More/12 async, rule 6/7 zero; no new native evidence.
+4. 08 includes More Kill/Despawn, Async Inspect/editor retail boundary, stale
+   selection refusal, long-label scrolling, console_control with false/true
+   shortcut witnesses, custom trigger/run-until, scratch Delete/Destroy,
+   screenshot opened after capture, saves/provenance and lifecycle cleanup.
+   Foreign-session control temporarily changes/restores toolkit session only,
+   trips the real comparison once, then uses explicit Override in the same boot.
+   It does not prove process nonce regeneration. Three native load transitions
+   are priced. 17 owner console lines compile individually without execution.
+5. **Still owed, already consolidated in ck175:** 00's ConsoleSetEnabled-first
+   bootstrap inversion; 07's code fence does not authorise infrastructure edits.
+   Native console/tap core was witnessed in 02; the retained legacy auto-open
+   can show the overlay and is documented honestly, cleared by F9. Eligibility
+   remains unavailable even with CLEAN taint. Quiet must be disarmed before
+   console loggers. No newly invented owner decision or additional boot.
+6. **EF-096 corrections still routed here:** blacklist range is 1280–1441;
+   env.os is rawset to `{time=os.time}` at Mod.lua:1618 before the metatable.
+   Facts were outside 07's named scope and not edited. 03B's correction is a
+   claim to verify in one command before filing; do not "fix" working os.time.
+7. **DRIFT captured:** original manifest's grep counted comments (26) and could
+   not prove 13 calls; now keyed on the call form with actual installed path,
+   rechecked output 13. An rg absolute wildcard was rejected on Windows, and
+   a Python -c command lost quotes under PowerShell: neither ran a valid negative
+   gate. Directory + -g and literal here-string stdin reruns emitted actual
+   rule-6 **0 lines across 9 files**, rule-7 **0 lines**, positive source **26
+   presence lines / 13 calls**. One multi-hunk patch failed context validation
+   and was reapplied successfully; no failed command was counted as evidence.
+8. Console search included `docs/archive/` deliberately (archive never edited).
+   The surviving EF-097 before-load sentence describes historical owner behavior,
+   not a live recommendation. PLAYTEST_HELP's before-load workaround and old
+   vanilla-enable advice are retired; archived commands stay historical.
+9. **SUGGESTIONS:** raw More suffixes need plain effect/retail-prerequisite
+   rollovers if 08 finds confusion; geometry/state/colony-wide follow-ups are
+   difficult to explain in one sentence, suggesting affected-count previews.
+   Keep these findings alongside P5's bounded-v1 exclusions, not an unasked build.
+   The manifest/map now point at 08; STATE's historical 07 pointer is left for
+   the orchestrator because STATE was outside this link's named write fence.
+10. Late source-read correction: CopySince string labels resolve only the current
+    mark; upstream P5's older-label recipe would refuse after later marks. 08
+    now retains the numeric opening index and scores truncated ring copies as
+    partial, using the full archived boot log for the audit. Several context-
+    rejected documentation patches were reapplied; no rejected patch changed
+    a file or counted as a successful verification.

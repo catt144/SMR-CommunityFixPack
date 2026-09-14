@@ -47,12 +47,13 @@ exists, and a struck row is RED. A row that outlives its file is how a next sess
 ## Chain folders
 
 - `smrtk/`: ⭐ **LIVE** (authored 2026-09-13, owner ask, checklist 175): the **SMR Tool Kit** — a TestKit panel that
-  replaces the vanilla cheat menu for playtesting with untainted leaf calls (`EF-095`), one `SMRTK_` log tag, agent
+  supplies Selected/World playtest actions through untainted leaves (`EF-095`), one `SMRTK_` log tag, agent
   slots, triggers, save slots, a console tap + clipboard copy, and a layout stamper (`EF-099`). Kill-gated at 02;
   **Codex builds (01, 03A fan-out, 07), Claude judges (03B) and audits (99)** — the owner's shape. 02 PASSed, 03A built,
   **03B JUDGED PASS WITH FIXES 09-13** (`reports/SMRTK_JUDGE.md`); the owner then ruled ck175 item 1 on 09-14
-  (*"extend before 08"*). **03C BUILT 09-14**, TestKit `f093e3b` (`reports/SMRTK_03C_EXTEND.md`), so next is Codex
-  `07_DOCS_AND_SITTING_PREP_codex.md`, then owner sitting 08 and Fable audit 99 — the three remaining task prompts. Its README is the manifest
+  (*"extend before 08"*). **03C BUILT 09-14**, TestKit `f093e3b` (`reports/SMRTK_03C_EXTEND.md`), so next is
+  owner `08_FULL_SITTING_owner.md`, then Fable audit 99 — the two remaining task prompts. **07 DOCUMENTED/PREPARED 09-14**:
+  `perma/SMRTK_SLOTS.md`, numbered predictions and 08's 40-minute script; attendee preloads the slots before boot. Its README is the manifest
   and is the authority on link state; spent payload briefs live in the close-out git grave.
 - `fixtoggles/`: **LIVE** (authored 09-11): an on/off button per fix, Beta labels, linked buttons; link 09 researches
   versioning for a B step. Its README is the manifest; checklist 148.

@@ -304,16 +304,11 @@ both return/drop anything in `ModEnvBlacklist`). Consequences you must know:
     **`Break Element`** button (`TrackGridElement:CheatBreakElement` →
     `BreakTracks`, ungated) **does work** — use `SelectedObj:CheatBreakElement()`
     when you need to damage a specific track element.
-- ⛔ **CORRECTION 2026-08-05 to the infopanel-cheat row below:** it claims those
-  buttons "render but silently NO-OP" on retail. **They do not silently no-op —
-  they execute.** The stack proves it: the `NetSyncEvent` was delivered,
-  `procall` ran the handler, and it reached `TrackElement.lua:441` before
-  throwing. `AreCheatsEnabled()` and `Platform.cheats` are **different things**:
-  the Test Kit sets the console/cheat-enable flag every session, so dispatch
-  happens, while `Platform.cheats` is a build flag that is false at Lua load and
-  therefore never defines the dev-only functions. Accurate rule: **infopanel
-  cheat buttons DO run on retail, and any one that calls a `Platform.cheats`-
-  gated global throws.**
+- **Historical vanilla infopanel finding, 2026-08-05:** the enabled vanilla
+  wrapper reached TrackElement before throwing; a visible button did not imply
+  retail debug services existed. The toolkit now calls supported leaves directly
+  without that wrapper. ConsoleEnabled enables input, not AreCheatsEnabled or
+  Platform.cheats. Use the toolkit section; never restore the old enable paste.
 - ⚠️ **NEVER put a `--` comment in a `*r` / `*g` snippet** (found the hard way
   2026-07-29). Those rules splice your code into a template **on one line**:
   `CreateRealTimeThread(function() %s end) return` (`uiConsole.lua:360`). A
@@ -370,7 +365,7 @@ both return/drop anything in `ModEnvBlacklist`). Consequences you must know:
 | `CheatGenerateApplicants(n)` | `Lua/ApplicantsPool.lua:210` | applicant pool |
 | `CheatUpdateAllWorkplaces()` | `Lua/Cheats.lua:210` | re-run job assignment now |
 | `CheatToggleAllShifts()` | `Lua/Cheats.lua:192` | open/close every shift |
-| `CheatToggleInfopanelCheats()` | `Lua/Cheats.lua:290` | shows per-building cheat buttons — ⚠️ **on retail the buttons render but silently NO-OP** (they dispatch `NetSyncEvents.ObjCheat`, gated `AreCheatsEnabled()`, `Network.lua:218-219`; found live 2026-07-27). Either run `Platform.cheats = true` first (buttons work; set false after), or skip the panel and call the method directly on the selection: `SelectedObj:CheatMalfunction()` / `CheatAddMaintenancePnts()` / `CheatCleanAndFix()` (`Building.lua:1813-1849`). Second gotcha (2026-07-27): button presses ride the game-time sync queue (`ScheduleOfflineSyncEvent`) — they look DEAD while the game is paused and fire on unpause; the `ObjCheat <method>` console print confirms delivery |
+| `CheatToggleInfopanelCheats()` | Historical vanilla menu route (`EF-095`/`EF-097`) | Retired for toolkit playtesting. Use the SMR Tool Kit Selected section; the vanilla object wrapper records cheat taint. ConsoleEnabled does not enable that menu. |
 | `CheatMeteors("single"\|"multispawn"\|"storm", setting, pos)` | `Lua/Cheats.lua:62` | meteor strike. **AIM IT AT THE MOUSE (added 2026-07-30 — this is the form you usually want):** `pos` is the **THIRD** argument, so you cannot just append it — pass `nil` for `setting` to keep the map default. Fire at the pointer, with 3 real seconds to aim first (your mouse is over the console when you press Enter, so a bare call would strike there): `*r Sleep(3000) CheatMeteors("single", nil, GetTerrainCursorClamped())`. `GetTerrainCursorClamped()` (`CommonLua/Classes/MapData.lua:25-30`) is safer than raw `GetTerrainCursor()` — it clamps into the play area so an off-map cursor cannot hand you a bad position. To hit a SPECIFIC building instead, select it and skip the mouse: `CheatMeteors("single", nil, SelectedObj:GetPos())`. `"single"` completes cleanly; `"storm"` is the one that wedges (below). The cheat drives the disaster directly, so it fires even under the **No Disasters** rule — by design, same as `CheatTriggerUndergroundMarsquake`. ⚠️ **RE-CORRECTED 2026-07-29 (QA session):** with no explicit `pos` it can silently do NOTHING — but the mechanism recorded earlier was wrong. `GetCameraLookAtPassable` is a **file-local helper** (`local function`, `Cheats.lua:42`) — invisible from the console *by design*, which is what the `attempt to call a nil value` probe actually proved; the shipped `Cheats.lua` is byte-identical to Src (full fpk diff, see agent/facts/). The real no-op path: the helper returns nil when no passable point exists within 100m of the camera look-at, and the body is `if pos then … end` with no else. **Always pass a position**, or drive the disaster directly: `*r local d = Presets.MapSettings.Meteor["Meteor_High"] local p = GetRandomPassable(MainMap) CreateGameTimeThread(function() MeteorsDisaster(d, "storm", p) end)`. Note `"storm"` reliably WEDGES (F78) — with the pack loaded, `Fix_MeteorStormWedge` heals it automatically ~2 game hours after the storm notification expires (**measured live 2026-08-01 on the Tier-1 REORDERED heal path**: `WEDGE confirmed` → scheduler restart → released through the VANILLA end path, `MeteorStormEnded` fired and F81's handler cleared the flag, heal logging last); manual recovery remains `*g for i = 1, 10 do g_MeteorStormStop = true Sleep(4000) end` |
 | `CheatTriggerMarsquake(settings_name)` | `Lua/Marsquake.lua:223` | surface quake |
 | `CheatTriggerUndergroundMarsquake()` | `Lua/Marsquake.lua:292` | underground quake (**bypasses** the scheduler on purpose — which is what makes it a sound positive control for any "no disasters" watch; PT-11, archived) |

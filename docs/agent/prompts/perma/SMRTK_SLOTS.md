@@ -54,6 +54,9 @@ native stamp/completion requires running game time. Do not invent a fit-test fla
 Write numbered predictions **before boot**: exact SMRTK verb/action/status and
 expected fields, first-screen witness, normal time and 3× abort time. Generated
 ids, handles, session nonces and game time are variables, never invented literals.
+Preserve numeric MARK return indices for copying across later marks/screenshots;
+string CopySince accepts only the current label. A truncated ring copy cannot
+replace the complete archived boot log.
 Declare clean-fixture needs and resource provisioning cost. No-taint is necessary
 but eligibility stays `UNAVAILABLE:sandbox` on build 24995074. Toolkit lines are
 intentional and attributed; never ask the owner about one. Stop on unexpected
