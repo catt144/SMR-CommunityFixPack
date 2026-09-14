@@ -83,9 +83,29 @@ and the `ck` label to grep for. It is covered by the same falsification. ⛔ If 
 would change the byte tally the tool balances on, make the tally account for it — do not
 disable the balance check.
 
-### C · Move group 1 · D · Move group 2
+### ⛔ OWNER GATE — STOP HERE AND ASK, before any real `--apply`
+
+**Owner ruling 2026-09-13: the moves do not run without their explicit all-clear.**
+A and B land normally — they are small, reversible and safe to run alongside peers. Then
+**stop**, and hand the owner one short message carrying:
+
+- the qualifying set as re-derived: **item count and bytes, per group**, and whether it
+  reproduced the authored 35 / 159,621 B (⛔ if it did not, that is a stop in itself);
+- the falsification results from the copy — header-count invariant, byte-identical
+  surviving bodies, archive delta, the two refusals, and the sha-guard abort;
+- the predicted before/after checklist size **per move, separately**;
+- anything you would flag if you were the one reverting it later.
+
+⛔ **Do not run `--apply` against the live tree until the owner answers.** Waiting costs
+nothing: the marking commits are already landed and the analysis is already done.
+
+### C · Move group 1 · D · Move group 2 — only after the all-clear
 
 Two separate `--apply` runs, two commits, so the heuristic half can be reverted alone.
+⛔ **The commits are NOT held to the end.** Apply #1 leaves the tree dirty, and apply #2's
+own `git_is_clean()` would refuse — so group 1 must be committed before group 2 runs.
+Commit each move immediately after its run, push, and report. An uncommitted 160 KB
+rewrite of the hottest file in a five-peer checkout is the dangerous state, not the safe one.
 
 ## 2 · Read path — these files, not their folders
 
@@ -137,8 +157,8 @@ disabling a check. Anything interesting outside §1: **file it, do not fix it.**
 ## 6 · Required — a live progress list
 
 Create a todo list before starting, **one item per commit-and-verify unit**: group 1 marks ·
-group 2 marks · the copy falsification · the stub pointer · move 1 · move 2 · the consume
-commit. Mark each complete the moment it completes, keep exactly one in progress, and
+group 2 marks · the copy falsification · the sha-guard · the stub pointer · **the owner
+gate (blocked, waiting)** · move 1 · move 2 · the consume commit. Mark each complete the moment it completes, keep exactly one in progress, and
 expand a stage in place if it turns out to be more units than this brief anticipated. The
 owner reads this list to decide when to step in.
 
@@ -147,6 +167,8 @@ owner reads this list to decide when to step in.
 **Element 7 (stale-probe gate) does not apply** — no game boot, save, module or shipped Lua.
 
 ## 8 · Done when
+
+⛔ **Not done, and not startable past the OWNER GATE, without the owner's all-clear in words.**
 
 Four commits landed, group 2 revertible on its own · `doccheck GREEN` at every step ·
 `MARKER INTEGRITY` parses every new marker with no gap · the header-count invariant holds
