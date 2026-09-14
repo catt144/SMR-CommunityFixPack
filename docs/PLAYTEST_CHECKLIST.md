@@ -827,11 +827,32 @@ the **84 More names by metatable walk**, so they are *"what the object exposes"*
 nothing establishes that each still does something on 1.1.0, or that the something
 earns a button. Owner, at the sitting: *"I want a full round of checking in the games
 logic to see if the stuff migrated over is actually working and if it is, is it
-useful."* ⇒ **Sized honestly by 08: 84 names, each needing a press, an observation and
-a keep/cut judgement — a DEDICATED LINK, not a sitting step.** Output is a
-**keep / cut / needs-rollover** list so the section is pruned to what earns its place.
-⚖️ Note the dependency: this prunes the very list the ck183 re-layout arranges, so
-running it *before* the re-layout means laying out a list that is about to shrink.
+useful."*
+
+⭐⭐ **RULED BY THE OWNER, 2026-09-14 — IT IS A DESK TRACE, NOT A PLAYTEST.** *"I mean
+that not as play testing I want the next build section to answer that. Trace them and
+determine if the old imported ones work and are relevant."* ⛔ **08's sizing is
+SUPERSEDED** — it priced 84 presses and a dedicated sitting link; the owner wants the
+**84 leaf bodies READ in the 1.1.0 source** and judged there, **inside the next build
+link**, with no launch and none of the owner's hours. ⇒ Output stays a
+**keep / cut / needs-rollover** list; only the route to it changes, and it gets much
+cheaper.
+
+⚠️ **What a desk trace can and cannot settle, so the verdict is honest.** Reading the
+leaf answers *does this still exist, is its body a no-op, does it reference a system
+1.1.0 removed, and does it do anything a playtester would want* — that is the whole
+"relevant" half and most of "works". It does **not** prove runtime behaviour
+(`EF-078`: trust runtime over source). ⇒ Anything the trace cannot resolve from the body
+becomes a short named **needs-rollover** residue — never a silent keep, and never a
+claim that it was tested.
+
+⭐ **RUN IT AS A SUBAGENT LEG, CONCURRENT WITH THE BUILD (owner, 2026-09-14):** *"I feel
+like that desk trace is a good job for a sub agent while it builds."* ✅ **And it is
+structurally safe to parallelise, not merely convenient** — 03C built the More group by
+**dynamic metatable walk**, not a fixed list of 84 names, so the layout work arranges a
+*group*, never the individual entries. The prune therefore lands as a filter on the walk
+at close-out and **cannot collide with the re-layout**. ⇒ The earlier "must land before
+the layout" caution is withdrawn; it assumed a hard-coded list that does not exist.
 
 #### ⚠️ A grading gap, recorded for 99
 
