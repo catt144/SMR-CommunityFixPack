@@ -15,6 +15,7 @@ vendor scores the predictions. Pack HEAD `320d359`; TestKit HEAD `5d8d3b3`.
 - [x] Script pre-flight: every symbol and every game route the paste script uses,
       checked against the built code and against `ModTools\Src`.
 - [x] Fixture survey (corrected after the owner named the real saves) + backup of both.
+- [x] Decoded both fixtures' savegame bodies; `CheatsUsed` read false against a positive control.
 - [ ] Owner sitting, steps 0–8.
 - [ ] Prediction-by-prediction scoring; verdict; archived log path.
 - [ ] Outbox to 03A and 99; ck175 in plain language; strike the row; `git rm` 02.
@@ -195,17 +196,58 @@ single `Cheat*` call site (`91_Stress.lua:815`, `:CheatCleanAndFix(`) is a
 TestKit was already taint-free by the same discipline SMRTK is being built on —
 a useful precedent, and corroboration rather than a check on the owner's word.
 
-⛔ **`AreCheatsUsed()` is still not readable from disk** — `CheatsUsed` is a
-`GameVar` (`Network.lua:241`), so it lives in the compressed body, not the
-header. Step 0's first line remains the measured reading.
 
-⚠️ **One open item for the sitting:** both candidates are **Sol 9**, and step 3
-needs a *partly empty single-resource* depot (Metals, Concrete, Polymers — not a
-Universal Depot). A Sol 9 colony may not have one yet. If neither does, the same
-folder holds native-1.1.0 colonies deep enough to be sure — `USA Sol 76` and
-`Autosave Sol 76` (NASA, `BlankBig_02`, same four mods) — but those are test
-saves whose cheat history is not covered by the owner's statement, so they would
-need step 0 to read `used=false` before they could serve.
+## ⭐ The fixtures' cheat flag IS readable from disk — measured, both sides
+
+The earlier claim in this file — "`AreCheatsUsed()` is not readable from disk" —
+was **too weak**. `CheatsUsed` lives in the compressed body, but the body
+decodes, so the flag is readable without launching the game.
+
+**Route.** A `.savegame.sav` is a `BPUL` container: a 92-byte header, the
+plain-text `savegame_metadata` table, then records. Each compressed record is
+`ZSTD` + a 4-byte uncompressed size + 4 bytes + a raw zstd frame. Two gotchas
+cost a retry each and are worth recording: the decompressor needs
+`max_window_size=2**31`, and a record must be read to **exactly** its declared
+size — reading to the end of the slice runs into the next record's container
+header and throws `Unknown frame descriptor` mid-stream, which reads like a
+corrupt frame and is not one. Both fixtures decode fully, 226,788,852 +
+~13.9 M bytes each, in well under a second.
+
+**The reading, with its presence side.** In the persisted stream the GameVar
+key is length-prefixed (`\n` = 10 = `len("CheatsUsed")`) and the value follows:
+
+| save | bytes at the `CheatsUsed` key | reads as |
+|---|---|---|
+| `Mygame2` | `(\nCheatsUsed\x03:NG\x03(\x0bPlanetScene` | scalar, next key follows |
+| `My game` | `(\nCheatsUsed\x03(\x0fg_LastBuildItem` | scalar, next key follows |
+| `TEST 2I` | `(\nCheatsUsedZA\x01\x01V\x01…(\x10CheatMalfunction` | **table**, holding cheat method names |
+| `CORUN1` | `(\nCheatsUsedZ\xa8\x01\x01V\x01…(\x10CheatMalfunction` | **table**, holding cheat method names |
+
+A token sweep for `Cheat[A-Za-z]+` across every decoded byte says the same thing
+at a second angle. `Mygame2` and `My game` carry exactly three such tokens —
+`CheatsUsed`, `CheatsVegGrowthModifier`, `CheatUnlockAllSponsorBuilding`, the
+latter two being unrelated persisted global names that merely start with those
+letters — and **no cheat method name at all**. The project's own playtest saves
+(`TEST 2I`, `CORUN1`, `saint test`) carry the full roster: `CheatFill`,
+`CheatEmpty`, `CheatCleanAndFix`, `CheatDestroy`, `CheatMalfunction`,
+`CheatRepair`, `CheatStarve` and a dozen more — exactly the `method` strings
+`LogCheatUsed` stores (`Network.lua:242-245`). That is the presence side, so the
+absence in the fixtures is a sample, not a silence.
+
+⇒ **`Mygame2` and `My game` are cheat-free, measured independently of the
+owner's word and agreeing with it.** Step 0's `TaintRead` is now a confirmation
+of a known value rather than a gate on an unknown one. (`POST 105-DIRTY` scans
+clean by the same measure too — its name refers to the F105 leg, not to cheats.)
+
+⚠️ **What this does NOT settle: the depot.** Every one of the eleven
+single-resource depot classes (`StorageMetals` … `StorageSeeds`) plus
+`UniversalStorageDepot` and `MechanizedDepot` appears in **both** fixtures — and
+a Sol 9 colony has not built all eleven. Those hits are the template/class name
+table, not instance evidence, so this instrument cannot say whether the colony
+holds a **partly empty single-resource depot** for step 3. That stays an
+on-screen check for the owner, and it is the one remaining fitness question for
+these two saves as step-3 targets.
+
 
 ## Boot evidence already on disk (main menu only, no save loaded)
 
