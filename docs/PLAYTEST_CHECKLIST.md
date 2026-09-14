@@ -116,6 +116,14 @@ commit `CHECKLIST_MOVE_MANIFEST.md` into the repo before any of it, so the appro
 outlives the disk.
 
 
+**Execution 2026-09-13 (Codex):** the qualifying set reproduced at 35 items /
+159,621 body bytes. Group 1 markers landed in `d80fe75`; group 2 in `8988d90`.
+You approved `closed owner:no` for the date-only group in this session to retire
+more items; that records retirement under your date rule, not completed tests.
+**Still waiting on you:** the separate all-clear for the two live moves, after
+the copy evidence and per-move sizes in [CHECKLIST_ARCHIVE](agent/reports/CHECKLIST_ARCHIVE.md).
+No live bodies have moved.
+
 ### 2026-09-13 — 175 RULED: build the SMR Tool Kit (chain `prompts/smrtk/`); two sittings are yours when their scripts land
 <!-- ck:175 status:ruled owner:yes -->
 
