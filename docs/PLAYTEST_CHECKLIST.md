@@ -115,6 +115,35 @@ never "is this a rule."** All five of its classes are placement, which is why **
 in "task-local"** and it moved on. ⛔ The audit must not inherit its classifications — existence is
 the first question, placement the second.
 
+⭐⭐ **AGREED 2026-09-14 — the machinery, all five parts.** Spec:
+[RULE_PLACEMENT_TEST.md](agent/reports/RULE_PLACEMENT_TEST.md) § THE MACHINERY. ⛔ Your words: the
+marker is **mandatory or all of this is for nothing.**
+
+1. **Every rule is written `Rule: <duty>` at line start**, collected under a **`Must_Read_Header`**
+   — deliberately without the word "rule" in it. Measured: headings containing "rule(s)" appear in
+   **66 files**, `^Rule:` in **1** — which is exactly why the header must not say "rule".
+2. ⛔ **The tagging is the AUDIT'S OUTPUT, not a find-and-replace** — there is no string to find;
+   deciding which sentences are duties IS the audit. ⇒ It delivers a **tagged tree + a coverage
+   manifest**, so the number is re-derivable forever by grep and the audit never re-runs.
+3. **The gate:** an untagged rule cannot be detected mechanically, but *"a rule-bearing file changed
+   and its `^Rule:` count did not move"* can. ⭐ **Same mechanism as ck177's marker gate, which is
+   ruled but NOT BUILT** — build once, point it at both.
+4. **A rule-creation skill** — your four criteria plus seven, each earned by a case today. The
+   sharpest: ⭐⭐ **an EXPIRY condition on every rule** (*"what would make this stop being true?"*),
+   because your four are all admission tests and nothing removes a rule — which is exactly how rule
+   1 survived six weeks dead. And ⚠️ **rule 3 passes all four of your criteria** and was still
+   unnecessary, so "what stops this if not memory?" has to be asked first.
+5. **`STATE_EVICTION` gains a rule sweep** — rules with no marker, and rules whose expiry condition
+   has fired. ⛔⛔ **It may NEVER retire a rule; it ELEVATES to you and you rule.** Precedent: ck178
+   (*"no agent retires this on its own judgement"*). ⚠️ The elevation must be **ranked and small
+   with the receipt inline** — a sweep surfacing forty rules a run will be ignored.
+
+⚠️ **Two sequencing constraints:** the skill ships **with** the gate, never before it (friction on
+writing rules otherwise pushes agents to write duties as untagged prose — worse than unwritten,
+because the count then looks complete); and **`RULES_HEADERS` must be RE-READ against this before it
+fires**, not just re-fired — it was built on the 852 inventory, which answers placement, and
+existence now comes first.
+
 ⚠️ **Also still open from the same session (asked, not yet ruled):** does `WORKFLOW`'s rule 4
 repoint to `metadata.lua` as the per-fix player-text target, or **retire**? (Recommended: retire —
 `WORKFLOW:609` already covers the release-time half, and a per-fix duty on a field nobody reads

@@ -189,6 +189,98 @@ all placement — global, task-local, doc-local, redundant, dead. There is no cl
 ⇒ ⛔ **The audit must NOT inherit the 852's classifications.** Placement is the second question.
 The first is existence.
 
+## ⭐⭐ THE MACHINERY — owner-agreed 2026-09-14, all of it
+
+Four parts. ⛔ **The marker is mandatory or the rest is for nothing** (owner's words).
+
+### 1 · Every rule carries a marker, and the header does NOT say "rule"
+
+- A rule, anywhere in the repo, is written **`Rule: <the duty>`**, anchored at **line start**.
+- The section that collects rules is headed **`Must_Read_Header`** — ⛔ **deliberately without the
+  word "rule" in it**, and pointers to it name only that token.
+
+**Why the header naming is load-bearing, MEASURED 2026-09-14:** headings containing "rule(s)" appear
+in **66 files**; `^Rule:` appears in **1**. ⇒ Searching for rules by the word *rule* drowns in
+scaffolding. **The marker must be absent from everything that talks ABOUT rules.** Line-start
+anchoring also keeps quoted rules in prose (this document included) out of the count.
+
+### 2 · ⛔ The tagging is the AUDIT'S OUTPUT, not a find-and-replace
+
+There is no string to find. Deciding which sentences are duties **is** the audit. ⇒ The audit stops
+producing a report and produces **a tagged tree plus a coverage manifest**.
+
+⭐ That is strictly better than a report: a report saying "we found N rules" is stale the moment a
+peer adds one. **A tagged tree makes the number re-derivable forever** (`rg -c '^Rule:'`) and the
+audit never has to be re-run.
+
+⛔ **Two hazards it creates:**
+
+1. **FALSE CONFIDENCE — the dangerous one.** Today the project *knows* it has not audited. After
+   tagging, the grep returns a confident number that silently excludes every rule the pass missed.
+   That is this project's own *"GREEN is not correct"* failure: fresh is not right.
+   ⇒ **The pass records its own coverage, and doccheck gates THAT** — a rule-bearing file absent
+   from the reviewed list is flagged. Without it the marker manufactures confidence.
+2. **DECAY.** A rule written next week carries no marker unless something requires it — and a rule
+   whose only evidence is that it is mostly followed is a habit. See rule 1 below.
+
+### 3 · The gate — one mechanism, two consumers
+
+⛔ An **untagged** rule cannot be detected mechanically; that is the whole problem. What CAN be:
+
+> **a rule-bearing file changed, and its `^Rule:` count did not move** → WARN: *did this change add
+> a duty?*
+
+⭐ **This is the same mechanism as ck177's marker gate**, which is RULED but **not built** (no trace
+in `tools/doccheck.py`, checked 2026-09-14). **Build once, point it at two things** — which makes
+ck177 cheaper rather than more expensive.
+
+### 4 · A rule-creation skill — the owner's four criteria, plus seven
+
+**Owner's four (authority):** rules-about-rules criteria · **the owner must confirm it is a new rule,
+not something that merely sounded like a ruling** · where it goes and who needs to see it · must
+articulate the danger it solves and show it is repeatable enough to warrant a rule — **if you
+cannot, it is not rule-worthy and is likely informational** (⇒ shape **(d)**).
+
+**Added, each earned by a measured case today:**
+
+| # | requirement | the case that earned it |
+|---|---|---|
+| 5 | ⭐⭐ **An EXPIRY condition — "what would make this stop being true?"** | **Rule 1.** The four criteria above are all ADMISSION tests; nothing removes a rule. Rule 1 died when the project began reproducing field reports with the reporter's mods, and nobody noticed for six weeks **because nobody had written down what would kill it.** Admission-only is how you get a graveyard. |
+| 6 | **Ask "what stops this, if not memory?" BEFORE placement** | ⚠️ **Rule 3 passes all four owner criteria** — real danger, repeatable, clear audience — and was still unnecessary, because **structure** enforced it. The four alone would have admitted it. |
+| 7 | **A RECEIPT, not a prediction** | Criterion 4 is prospective. The (b) falsifier is retrospective: *has this actually happened?* ⚠️ **Exception that must stay allowed:** `H-03` is pre-emptive and correct. ⇒ The bar is **an incident OR a stated mechanism with its source citation** (`SteamWorkshop.lua:17-22`). "This seems risky" is neither. |
+| 8 | **Name the ENFORCER at birth** | House doctrine already says a hazard is a failure not yet converted into a gate. If the honest answer is *"the reader will remember"*, that is a known-failing enforcement and is recorded as such. Rule 1 had no enforcer, which is why its death was silent. |
+| 9 | **Born tagged** | `Rule:` + `Must_Read_Header` at creation, or the grep-derivable number decays from day one. |
+| 10 | **Quote the owner VERBATIM** | Criterion 2 guards *"he said something that sounded like a ruling."* The mirror failure is real and has a receipt: a peer corrected this seat for widening a genuine rule into *"any TestKit change REDs the tree."* Quoting makes widening visible. |
+| 11 | **Duplicate check before writing, BY DUTY not wording** | Otherwise it regenerates the semantic-merge work the audit exists to do. |
+
+⭐ **The skill and the audit are the same criteria pointed in opposite directions** — the audit
+applies them retrospectively across ~618 files, the skill prospectively to each new rule. **Write
+the criteria once; both cite them**, and the audit's output becomes the skill's worked examples.
+
+⚠️ **The skill cannot stand alone.** Friction on writing rules pushes an agent to write the duty as
+ordinary prose instead — an **untagged** rule, which is worse than an unwritten one, because the
+tagged count then looks complete. ⇒ It ships **with** the gate in §3, never before it.
+
+### 5 · `STATE_EVICTION` gains a rule sweep — and may NEVER retire a rule
+
+**Host chosen because it already is this decision.** `perma/STATE_EVICTION.md` is *"fired by the
+owner whenever doccheck WARNs on STATE.md's size, or on their own call"* — semi-regular by
+construction, and already a push/pull "what stays, what goes" pass with an owner gate.
+
+Two new sweeps per run:
+
+1. **Rules with no marker** — candidates missed by the tagging pass or added since.
+2. **Rules whose EXPIRY CONDITION has fired** (criterion 5) — the condition is written down, so this
+   is checkable rather than a judgement call.
+
+⛔⛔ **THE EVICTION MAY NOT RETIRE A RULE. It ELEVATES to the owner, who rules.** Owner ruling
+2026-09-14. ⭐ Exact house precedent: **ck178** — *"⛔ It ends on the owner's word, not on a
+measurement, and no agent retires it on its own judgement."* Same shape; this is consistent, not new.
+
+⚠️ **Bound the elevation, or it will be ignored.** Owner attention is the scarce resource. A sweep
+that surfaces forty rules per run is useless. ⇒ **Ranked, small, receipt inline, one-line
+disposition each** — the shape of ck178's self-printing line, not a wall.
+
 ## ⚠️ The inverse case — a habit wearing a rule's clothes
 
 The same session found the opposite failure. The owner assumed that an agent setting up a playtest
