@@ -79,49 +79,12 @@ end
 ''')
 print('PASS: 12 deferred spawn variants, pre-mutation refusal, repair idempotence, five speeds, world rocket dedup/class/direction/pause, exact/scattered meteor arguments')
 
-# Re-use the existing P5 independent failure fixtures, then remove the invented
-# placed-instance template_name which made their original capture checks vacuous.
-model=runpy.run_path(str(ROOT/'docs/agent/reports/SMRTK_P5_DESK.py'))
-p5=model['lua']
-p5.execute('''
-reset_world(); prohibit_mutation=false; LocalStorage.smrtk_layouts={}
-local d=object('DomeBasic',20,20)
-local h=object('Habitat',21,20)
-d.template_name=nil; h.template_name=nil
-SelectedObj=d
-local ok,f=SMRTK.Run('layout_capture_selected','class_only')
-assert(ok,f.reason); assert(f.buildings==2)
-local b=LocalStorage.smrtk_layouts.class_only.buildings
-assert(b[1].t=='DomeBasic' and b[2].t=='Habitat' and b[2].dome==1)
-drain()
-''')
-print('PASS: class-only placed dome/interior capture, sort, export, parent references; existing P5 failure fixtures retained')
-# A native placement failure after the first object must be ERROR, not REFUSED.
-p5.execute('''
-SMRTK.Action{id='partial_mutation',run=function(ctx) ctx.mutated=true; return false,'stop after mutation' end}
-local ok,f=SMRTK.Run('partial_mutation'); assert(not ok and f.status=='ERROR' and f.mutated)
-SMRTK.Action{id='preflight_refusal',run=function() return false,'preflight' end}
-local ok,f=SMRTK.Run('preflight_refusal'); assert(not ok and f.status=='REFUSED' and not f.mutated)
-reset_world(); prohibit_mutation=false; LocalStorage.smrtk_layouts={}
-local b=base('partial_native'); b.buildings={building(),building('Habitat',4,0)}
-LocalStorage.smrtk_layouts.partial_native=b
-local original=PlaceConstructionSite; local count=0
-function PlaceConstructionSite(...)
- count=count+1; if count==2 then return nil end
- return original(...)
-end
-assert(SMRTK.Arm('layout_target','stamp','partial_native'))
-assert(SMRTK.Fire('layout_target',point(20,20))); drain()
-assert(count==2 and not SMRTK.Stamper.last.complete)
-local found=false
-for _,line in ipairs(logs) do
- if line:find('SMRTK_STAMP action=layout_stamp',1,true) and line:find('mutated=true',1,true)
-  and line:find('status=ERROR',1,true) then found=true end
-end
-assert(found,'partial stamp logged REFUSED or omitted mutated evidence')
-PlaceConstructionSite=original
-''')
-print('PASS: partial native stamp remains incomplete and logs ERROR/mutated; preflight remains REFUSED')
+# ⛔ STAMPER CUT 2026-09-14 (owner ruling; TestKit d80fb5e). The P5 capture and
+# partial-stamp legs that stood here tested `77_SMRTK_Stamper.lua`, which no longer
+# exists — they loaded SMRTK_P5_DESK.py and crashed this whole instrument on import.
+# Excised so the remaining legs run. What they asserted is preserved in
+# SMRTK_09_REBUILD.md; the design is parked in docs/FUTURE_IDEAS.md entry 5.
+# Grave: git show 81d97eb~1:docs/agent/reports/SMRTK_09_DESK.py
 
 # Re-use only P2's window constructor doubles, not its obsolete menu assertions.
 import re
@@ -162,7 +125,7 @@ function IsRealTimeThread() return true end
 ''')
 for name in ('70_SMRTK_Core.lua','71_SMRTK_Panel.lua','72_SMRTK_World.lua',
              '73_SMRTK_Infopanel.lua','74_SMRTK_Agent.lua','75_SMRTK_Saves.lua',
-             '76_SMRTK_Kit.lua','77_SMRTK_Stamper.lua'):
+             '76_SMRTK_Kit.lua'):
     ui.execute((KIT/'Code'/name).read_text(encoding='utf-8-sig'))
 ui.execute('''
 local T=SMRTK
@@ -230,7 +193,7 @@ T.after_record.TRIGGER({action='trigger_sol'})
 assert(fired and disarmed)
 T.Fire,T.Disarm=original_fire,original_disarm
 ''')
-print('PASS: all eight page constructors, HUD HList and sibling fallback, dock toggle/idempotence, disabled captions, readout clear retains evidence, armed banner, teardown, paused-trigger coordination')
+print('PASS: all seven page constructors, HUD HList and sibling fallback, dock toggle/idempotence, disabled captions, readout clear retains evidence, armed banner, teardown, paused-trigger coordination')
 
 src=Path('A:/SteamLibrary/steamapps/common/Project Spark/ModTools/Src')
 names=set()

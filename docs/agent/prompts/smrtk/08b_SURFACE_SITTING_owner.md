@@ -21,8 +21,10 @@ it produced is `reports/SMRTK_FULL_SITTING.md`, which is the record, not the pro
    `Layouts/`, the metadata code-list entry, the `"Stamper"` page id and slot 3's three dead
    layout fields. Recheck the current tree with
    `python docs/agent/reports/SMRTK_09_DESK.py`, and expect **seven** pages, not eight.
-   ⚠️ That script predates the cut — a Stamper-specific leg failing is the cut, not a defect;
-   read what it asserts before scoring it.
+   ✅ That script was repaired for the cut on 2026-09-14 and **runs clean end to end** — its
+   P5/Stamper legs were excised (they loaded the deleted file and crashed the whole
+   instrument on import). All three remaining legs PASS at pack `ee7f22f` / kit `d80fb5e`.
+   ⇒ A failure now is a real finding, not the cut.
 2. **The owner has said the surface is stable enough to script against.** ck183 rules a
    re-layout (task grouping + hot bar + one toggle button). ⚠️ **This brief names actions by
    FUNCTION, not by page**, precisely so a re-layout does not invalidate it — but the
