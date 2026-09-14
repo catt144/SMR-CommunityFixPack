@@ -49,6 +49,33 @@ build other than the one 02/08 ran on.
 
 ## Notes from upstream
 
+- ⚖️ **(08b, 2026-09-14) ROUTED TO YOU BY THE OWNER — the editor hint renders
+  white. Bounded, cosmetic, and explicitly NOT worth a hunt.** Owner's words:
+  *"Maybe hand that to the audit to nail down its geniunely minor and not
+  something you need to hunt for endlessly."* ⛔ **Do not spend a sitting on it,
+  and do not let it gate your verdict.**
+  - **Symptom.** In `editor()` fields the **placeholder** draws near-white on the
+    light box and is unreadable until hovered. **Real text is correct** — `Target
+    sol` showing `491` renders dark. So it is the hint path only, not the control.
+    Seen on Run: the `command` field and `Until sol / trigger id` (`trigger_sol`).
+  - **Where.** `74_SMRTK_Agent.lua`, the `editor()` local.
+  - **What was already tried, so you do not repeat it.** (1) A dark `TextColor`
+    — this FIXED real text and did nothing for the hint, which is what proved the
+    two are separate draw paths. (2) `HintColor = RGBA(70,78,88,210)` — **no
+    observed effect** at the boot. Both are still in the file.
+  - **The source read that motivated (2).** `XTextEditor.lua:38` declares
+    `HintColor` (default `RGBA(0,0,0,128)`), consumed at `:1267`
+    `StretchText(hint, target_box, hint_font, self.HintColor)`. ⇒ On paper the
+    property is right, so either it is overridden below this control's class or
+    the hint is drawn by a different path than `:1267` for this subclass.
+  - **Lead.** Your own 03B inbox already flags this area —
+    *"Review XTextEditor171-175, 221-228 and XControl624-634. P5 nineteen cases
+    did not model editor initialization."* ⇒ Start there, and note that our
+    `Background` never painted either (the box is light in every state), which
+    suggests this control's visual props are being taken from somewhere else.
+  - ⇒ **Deliverable: one line naming the mechanism**, not a fix. A defect entry
+    or a REMOVE/KEEP verdict on the hint is enough.
+
 - ⛔ **(orchestrator, 2026-09-14) THE STAMPER IS CUT — every Stamper leg below is VOID.**
   The owner ruled it removed; TestKit `d80fb5e` deleted `77_SMRTK_Stamper.lua`, `Layouts/`,
   the metadata code-list entry, the `"Stamper"` page id and slot 3's three dead layout
