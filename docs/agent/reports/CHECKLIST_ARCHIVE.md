@@ -1,7 +1,10 @@
-# Checklist archive execution — 2026-09-13
+# Checklist archive execution — completed 2026-09-14
 
-Executed model: Codex (GPT-6). Task: `prompts/CHECKLIST_ARCHIVE.md`, checklist 176.
-Live moves are HELD pending the separate owner all-clear. The prompt remains live.
+Executed model: Codex (GPT-6), preparation and live execution. Consumed task:
+`prompts/CHECKLIST_ARCHIVE.md`, checklist 176 (brief preserved in Git at `4624ec2`).
+Both approved groups moved, verified, committed and pushed separately on 2026-09-14.
+**D4's original 16 items / 43,223 B did NOT move and remain in the checklist.**
+This completes the selected task, not the entire archival backlog.
 
 ## Progress
 
@@ -16,10 +19,12 @@ Live moves are HELD pending the separate owner all-clear. The prompt remains liv
 - [x] Stub pointer: archive path plus ck label and instruction to search this
   heading; added bytes included in the balance. Already archived stubs are skipped.
 - [x] Tool, evidence and owner-gate handover prepared; committed together after GREEN doccheck.
-- [ ] In progress: owner gate, BLOCKED waiting for the all-clear after this handover.
-- [ ] Move group 1, regenerate owner register, doccheck, commit and push.
-- [ ] Move group 2, regenerate owner register, doccheck, commit and push.
-- [ ] Consume prompt and its map row in the same commit; finish report.
+- [x] Owner gate: explicit all-clear granted 2026-09-14 for both groups.
+- [x] Group 1: `1090f70`, register regenerated, doccheck GREEN, committed and pushed.
+- [x] Group 2: `cfd97bc`, register regenerated, doccheck GREEN, committed and pushed
+  after group 1. Independently revertible.
+- [x] Consume prompt and its map row together; record all-clear in ck176 and finish
+  this report. The same commit regenerates the register and passes doccheck.
 
 ## Selection and authority
 
@@ -40,34 +45,57 @@ initial unmarked set, so it reports no such candidates once marking is complete.
 
 Owner session approval for group 2, after the distinction was explained:
 "If that gives you a more broad route to rtetire items I approve it, the more closed the better".
-The existing exclusions still apply. ARCHIVE-OLD remains report-only. The live
-move gate is separate and has not yet been answered after this evidence.
+Owner authority on 2026-09-14: **both live moves approved**. The owner was shown,
+and accepted, that marking put 16 of the 18 previously report-only ARCHIVE-OLD
+items into the selected group 2 move set. That retirement is authorised through
+group 2; the archival script itself remains unchanged from preparation and
+ARCHIVE-OLD remains report-only by design. No additional headings were selected.
 
-## Falsification and move prediction
+Checklist 176 records the discharged all-clear with `owner:no`. Its broader
+backlog stays `open`: the original D4 bodies still remain; no new owner ask was
+created by this close-out. The Sonnet archive-addendum recheck described in the
+brief is a subsequent task, not part of this execution and not claimed here.
 
-Run: `python -X utf8 .claude/tools/checklist_archive_falsify.py` from the repository
-root. It copies tracked repository bytes and the companion TestKit into a new
+## Falsification and actual moves
+
+Preparation command, executed before the live moves:
+`python -X utf8 .claude/tools/checklist_archive_falsify.py` from the repository
+root. It copied tracked repository bytes and the companion TestKit into a new
 scratch directory, initializes an independent scratch Git repository, runs the
 actual whole-repo doccheck, then executes the actual `--apply` there. It never
 applies to the live tree, never checks out a branch, and never restores via Git.
 
-The evidence JSON is `.claude/checklist_archive_falsification.json`; it records
-the source HEAD, working-byte hashes, scratch location and separate move measurements.
-The final rehearsal includes the checklist 176 handover note. MEASURED:
+The preparation evidence remains in `.claude/checklist_archive_falsification.json`.
+Its size predictions were superseded when 03B added 4,467 B at `4624ec2`.
+The table below uses each actual live run's own emitted tally, checked against
+the owner's revised expected sizes before and after applying. MEASURED:
 
 | Move | Checklist before | Checklist after | Body bytes moved | Pointer bytes added | Archive delta |
 |---|---:|---:|---:|---:|---:|
-| Group 1 | 756,905 | 713,829 | 44,288 | 1,212 | 46,310 |
-| Group 2 | 713,829 | 601,136 | 115,333 | 2,640 | 119,536 |
+| Group 1 | 761,372 | 718,296 | 44,288 | 1,212 | 46,310 |
+| Group 2 | 718,296 | 605,603 | 115,333 | 2,640 | 119,536 |
 
 Both moves keep 160 headings. Archive deltas include 2,022 / 4,203 bytes of
 entry wrappers respectively; all other added archive bytes are original bodies.
-The live checklist is still 756,905 bytes; the archive is still 365,038 bytes.
+The archive grew from 365,038 to 530,884 B. The checklist was 605,603 B immediately
+after move 2; the consume commit's ck176 receipt then brought it to 606,050 B.
+That later wording change is separate from both measured move tallies.
 
-After owner approval only, run each group separately with
-`--headers-file .claude/checklist_archive_group1.json` or
-`--headers-file .claude/checklist_archive_group2.json`; commit and push the first
-move before the second. These JSON files contain only the reviewed exact headings.
+Actual commands (each preceded by a clean status and a matching dry-run tally):
+`python -X utf8 .claude/tools/archive_settled.py --headers-file .claude/checklist_archive_group1.json --apply`
+then, after committing and pushing group 1,
+`python -X utf8 .claude/tools/archive_settled.py --headers-file .claude/checklist_archive_group2.json --apply`.
+The JSON files contain only the reviewed exact headings. The unrestricted
+default plan was never applied. Neither live run needed a SHA-guard retry.
+
+Live evidence: `.claude/checklist_archive_live_group1.json` and
+`.claude/checklist_archive_live_group2.json`, committed with their respective
+moves. The verifier is `.claude/tools/checklist_archive_live.py`; its captured
+snapshots and full command outputs are located by those evidence files.
+**For each move:** 160 headings before and after; balance True; surviving bytes
+identical; archive bodies identical with only declared wrappers added;
+`MARKER INTEGRITY: 86 on disk, 86 parsed; WARN`; doccheck GREEN. The WARN is the
+pre-existing agreeing duplicate ck144, not a parse gap. No marker failed parsing.
 
 MEASURED: dirty checklist refusal; dirty archive refusal; whole-repo RED doccheck
 refusal; an unrelated dirty README permitted with GREEN doccheck; SHA refusal
@@ -83,6 +111,12 @@ each entry header, causing its comparison to fail. Inspection located the extra
 separator in the declared wrapper; the test reader was corrected and the complete
 suite rerun. No archive-body repair or disabled check was used to make it pass.
 
+MEASURED after both live moves, before the consume note:
+`python -X utf8 .claude/tools/archive_settled.py` still reports **16 movable
+items / 43,223 B**. These are the original D4 backlog, preserved as surviving
+bytes in both move verifications. The remaining unmarked ARCHIVE-OLD bucket is
+2 items / 14,250 B; it remains report-only.
+
 ## Reversal and remaining limits
 
 34 of the 35 selected items are unnumbered: rule (d) cannot protect them at all.
@@ -93,7 +127,7 @@ search the preserved heading. Group 2 marking and movement remain separately
 revertible from group 1.
 
 The default tool plan includes already-marked backlog outside these groups.
-Use `--headers-file` with each group's exact JSON headings for these two moves;
+The execution used `--headers-file` with each group's exact JSON headings;
 it refuses missing, duplicate, excluded or already-archived selections. Do not
 apply the unrestricted default plan as part of this task.
 
@@ -108,4 +142,7 @@ is a separate step immediately after each successful live move.
 The original script and approved selection were ignored local files. The exact
 tool, helper, falsifier, selection and evidence used here are explicitly tracked
 in the preparation commit so this execution can be reviewed and reproduced.
-No broad ignore-rule change is needed.
+No broad ignore-rule change was made. During live verification `git diff --check`
+flagged a new blank line at archive EOF after group 1: this was a copied body
+terminator and was retained to preserve the required original bytes. No trimming
+or archive-history edits were made.

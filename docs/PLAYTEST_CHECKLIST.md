@@ -30,7 +30,7 @@ completed tests move whole to
 ## Decisions waiting on you
 
 ### 2026-09-13 — 176: the checklist cleanup you ruled (D4) never ran, and D4 is ~6% of the problem
-<!-- ck:176 status:open owner:yes -->
+<!-- ck:176 status:open owner:no -->
 
 **You asked 2026-09-13:** *"I thought this was supposed to be cleaned out in this
 migration. Moving all the done and stale records to an archive."* **You are right, and
@@ -116,13 +116,18 @@ commit `CHECKLIST_MOVE_MANIFEST.md` into the repo before any of it, so the appro
 outlives the disk.
 
 
-**Execution 2026-09-13 (Codex):** the qualifying set reproduced at 35 items /
-159,621 body bytes. Group 1 markers landed in `d80fe75`; group 2 in `8988d90`.
-You approved `closed owner:no` for the date-only group in this session to retire
-more items; that records retirement under your date rule, not completed tests.
-**Still waiting on you:** the separate all-clear for the two live moves, after
-the copy evidence and per-move sizes in [CHECKLIST_ARCHIVE](agent/reports/CHECKLIST_ARCHIVE.md).
-No live bodies have moved.
+**Execution 2026-09-14 (Codex): OWNER ALL-CLEAR GRANTED 2026-09-14, both groups.**
+Group 1 markers: `d80fe75`; group 2 markers: `8988d90`; preparation: `2be7c73`.
+Both moves committed and pushed separately: group 1 `1090f70` (761,372 -> 718,296 B);
+group 2 `cfd97bc` (718,296 -> 605,603 B). Each kept 160 headings, parsed all 86
+markers, balanced bytes, and passed doccheck. Original bodies and surviving bytes matched.
+You accepted that marking brought 16 of the 18 report-only ARCHIVE-OLD items into
+group 2; this was authorised retirement under your date rule, not completed tests.
+The archival script is unchanged; ARCHIVE-OLD remains report-only. **D4's original
+16 items / 43,223 B did NOT move and remain here. This is not complete archival.**
+The all-clear is discharged; the broader backlog remains open with no new owner ask.
+The task prompt and its map row are consumed together; evidence and risks:
+[CHECKLIST_ARCHIVE](agent/reports/CHECKLIST_ARCHIVE.md).
 
 ### 2026-09-13 — 175 RULED: build the SMR Tool Kit (chain `prompts/smrtk/`); two sittings are yours when their scripts land
 <!-- ck:175 status:ruled owner:yes -->
