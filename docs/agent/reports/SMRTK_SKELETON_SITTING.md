@@ -19,7 +19,8 @@ vendor scores the predictions. Pack HEAD `320d359`; TestKit HEAD `5d8d3b3`.
 - [x] Step 0 COMPLETE: clean read scored, baseline saved and verified on disk, vanilla control fired RED (`entries=1`).
 - [x] Step 1 COMPLETE: fresh clean boot, PreLoadGame arm, hotkey both ways, `used=false`, scratch discarded.
 - [x] Step 2 COMPLETE: ⭐ **P2 PROVEN** — `discriminates=true negative=false positive=true`.
-- [ ] Owner sitting, steps 3–8.
+- [~] Step 3: refused by its own guard — 01's script targets a class no shipped depot uses; corrected line issued. **P1 still undecided.**
+- [ ] Owner sitting, steps 3 retry, 4–8.
 - [ ] Prediction-by-prediction scoring; verdict; archived log path.
 - [ ] Outbox to 03A and 99; ck175 in plain language; strike the row; `git rm` 02.
 
@@ -442,6 +443,84 @@ The owner exercised the tab bar while working: `SMRTK_TAB` for
 `status=OK`, plus two `SMRTK_MOVE ... status=OK`. Every registered page
 switches and the drag persists. No page content was expected or seen.
 
+## Step 3 — ⛔ REFUSED by its own guard: 01's script targets a class no shipped depot uses
+
+```text
+SMRTK_ACTION action=skeleton_fill reason="select a single-resource depot" status=REFUSED id=32
+SMRTK_TAINT_READ action=taint_read status=OK used=false id=33
+SMRTK_ELIGIBILITY action=eligibility reason=UNAVAILABLE:sandbox status=OK id=34
+```
+
+**P1 is NOT decided and NOT failed — the leaf never ran.** No mutation occurred,
+`used=false` held, and `ObjCheat` appears **zero** times in this boot, so nothing
+touched the vanilla taint path either. The guard did exactly its job; what it
+caught is that the guard's premise is wrong.
+
+### The defect
+
+01's step-3 body tests `IsKindOf(o,"StorageDepot")` and then
+`type(o.resource)=="string"`, and calls `StorageDepot:CheatFill`
+(`StorageDepot.lua:196`) with `o["max_amount_"..o.resource]`. That is the shape
+of `StorageDepot`'s **single-resource** base body. **No shipped storage building
+instantiates that shape.**
+
+- Every storage template — `StorageMetals`, `StorageConcrete`, `StoragePolymers`,
+  `StorageFood`, … and `UniversalStorageDepot` — declares
+  `object_class = "UniversalStorageDepotBase"`.
+- `UniversalStorageDepotBase.__parents = { "StorageDepot" }`
+  (`StorageDepot.lua:329-330`), so the `IsKindOf` clause **passes**.
+- But `UniversalStorageDepotBase:GameInit` ends with
+  **`self.resource = self.storable_resources`** (`:444`) — a **table**, always.
+  So `type(o.resource)=="string"` is false for every depot in the game, and the
+  action can only ever refuse. ⇒ **01's step 3 could not have passed on any
+  fixture.**
+- The real leaf is **`UniversalStorageDepotBase:CheatFill` (`:710-730`)**, which
+  overrides the base body and walks `storable_resources`, calling
+  `AddResource` per resource. `UniversalStorageDepotBase.Fill` is aliased to it
+  (`:733`).
+
+⚠️ **Instrument defect on this session's side, stated plainly.** The pre-flight
+reported "step 3's leaf is the real leaf" after confirming `StorageDepot:CheatFill`
+and `max_amount_<resource>` exist. Both statements are true and both are
+irrelevant: existence of a method is not evidence that any shipped object *is*
+of that class. Worse, the sweep that should have found the override
+(`grep -rn "CheatFill"`) was truncated with `head -15`, and `StorageDepot.lua:710`
+sat past the cut — the tool hid the answer and the truncation was not treated as
+a partial result. A total is not a set, and a `head` is a total.
+
+### Requirement (A) is unaffected by the correction
+
+`UniversalStorageDepotBase:CheatFill` contains **0** occurrences of
+`LogCheatUsed` or `NetSyncEvent`, and the tree-wide count of `LogCheatUsed` call
+sites remains four, none of them in `StorageDepot.lua`. So the corrected leaf is
+taint-free by the same argument as the original, and P1's thesis is unchanged —
+only the object model was wrong.
+
+### ⭐ Consequence for 03A/P2 — larger than this sitting
+
+P2 builds Fill / Empty / Delete / Destroy / CleanAndFix per object. It must
+target **`UniversalStorageDepotBase`**, use `storable_resources`,
+`GetStoredAmount(res)`, `GetMaxStorage(res)` and `max_storage_per_resource`, and
+call the `:710` leaf. Anything written against `StorageDepot.resource` /
+`max_amount_<resource>` will refuse on every depot in the game while looking
+correct in review. The "single-resource vs Universal" distinction is **not** a
+class distinction in this build — both are `UniversalStorageDepotBase`, and the
+discriminator is `#storable_resources`.
+
+### Corrected script used for the retry
+
+```lua
+IsKindOf(o,"UniversalStorageDepotBase")            -- passes for every depot
+#o.storable_resources == 1                          -- single-resource vs Universal
+before = o:GetStoredAmount(); cap = o:GetMaxStorage()
+o:CheatFill()                                       -- the :710 leaf
+```
+
+Verified before use: `StorageMetals`/`Concrete`/`Polymers`/`Food` each declare
+`storable_resources = {"<one>"}`; `UniversalStorageDepot` declares no override
+and inherits the eight-resource default, so the `#==1` test genuinely separates
+them.
+
 ## Outbox items raised during the sitting (for 03A / 99)
 
 ### ⛔ The owner's cheat route sets `Platform.cheats`, and it would poison step 2
@@ -505,8 +584,12 @@ of them is worth acting on.**
 - `SHORTCUT` ×2: two shortcut rebuilds. Already falsified as harmless in step 1
   — six such lines, one keypress, one toggle.
 - `PANEL_RESTORE` ×2: **real, and an 03A item.** `restore_panel()` is registered
-  on **both** `OnMsg.InGameInterfaceCreated` and `OnMsg.PostLoadGame`
-  (`71_SMRTK_Panel.lua:207-209`), and a savegame load fires both.
+  on **three** messages — `OnMsg.InGameInterfaceCreated`, `OnMsg.PostLoadGame`
+  and `OnMsg.CurrentMapChangeDone` (`71_SMRTK_Panel.lua:207-209`). A savegame
+  load fires the first two, which is the 2 lines measured here; the map-change
+  route was never exercised by 02, so a logging fix tested only against a load
+  would cover two of three callers. (Third registration caught by
+  `smr-bugfixpack-8f`; this report first said "both", which was wrong.)
 
 ⚠️ **But it is a logging-precision finding, not a double panel.** `T.OpenPanel()`
 opens with `if T.panel and T.panel.window_state ~= "destroying" then
