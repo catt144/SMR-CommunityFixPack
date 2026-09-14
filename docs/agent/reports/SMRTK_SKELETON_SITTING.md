@@ -21,7 +21,8 @@ vendor scores the predictions. Pack HEAD `320d359`; TestKit HEAD `5d8d3b3`.
 - [x] Step 2 COMPLETE: ⭐ **P2 PROVEN** — `discriminates=true negative=false positive=true`.
 - [x] Step 3 COMPLETE: ⭐⭐ **P1 PASSES** — leaf filled the depot, `used=false`, zero `ObjCheat` all boot.
 - [x] Step 4 COMPLETE: ⭐ **P3 PASSES** on the native path; clipboard verified from Windows itself.
-- [ ] Owner sitting, steps 5–8 (tee redundancy, frame, error witness, P4 persistence).
+- [x] Step 5 COMPLETE: tee arm/fire/disarm clean, `same=true`, ⭐ P3 confirmed on both routes.
+- [ ] Owner sitting, steps 6-8 (frame/buttons, error witness, P4 persistence).
 - [ ] Prediction-by-prediction scoring; verdict; archived log path.
 - [ ] Outbox to 03A and 99; ck175 in plain language; strike the row; `git rm` 02.
 
@@ -612,6 +613,69 @@ falsifier for this leg.
 reached the tap, and the clipboard pasted it. Step 5's tee is therefore a
 *redundancy* check rather than P3's last chance, and is still worth running for
 the ARM/FIRE/DISARM machinery that step 8 depends on.
+
+## Step 5 — tee ARM/FIRE/DISARM clean; ⭐ P3 confirmed on the SECOND route too
+
+```text
+SMRTK_ARM     action=print_tee status=OK id=49
+SMRTK_FIRE    action=print_tee status=OK text=SMRTK_TEE_WITNESS_100% id=50
+SMRTK_DISARM  action=print_tee reason=manual status=OK id=54
+SMRTK_TEE_RESTORE armed=0 same=true id=55
+SMRTK_COPY action=copy from=84 lines=20 status=OK truncated=false id=56
+```
+
+01 predicted ARM, one FIRE carrying the witness text, DISARM, and a restore with
+captured-function identity intact. **Measured exactly**, and the armed counter
+moved `0 → 1 → 0` (`armed=1` at id=52 while still armed, `armed=0` at id=55).
+
+**`same=true` is the load-bearing one.** It shows the tee put the *original*
+`print` back rather than leaving a wrapper installed, which is the
+**idle = zero patched vanilla functions** invariant. Between id=52 and id=55 the
+invariant was genuinely violated (`same=false`, `armed=1`) and the teardown
+restored it.
+
+⭐ **The clipboard carries the witness on `source=print` AND `source=console`:**
+
+```text
+[tap n=89 ... source=print]   SMRTK_TEE_WITNESS_100%
+[tap n=91 ... source=console] SMRTK_TEE_WITNESS_100%
+```
+
+So one real `print` was captured independently by the **tee** and by the
+**native ConsoleLine tap**. P3 asked that at least one route carry actual print
+output and that the clipboard paste it; both routes do. 01's fallback was never
+needed as a fallback and is confirmed as redundancy.
+
+### The skipped command diagnosed itself
+
+Step 5's first pass logged no `SMRTK_DISARM` and ended `armed=1 same=false`.
+Attributed at source: `T.PrintTee(false)` routes to `T.Disarm`, and `dispatch`
+**always** calls `T.Log` before returning, so a silent disarm is impossible ⇒
+the command had not run. The ring then **proved** it: the echo record jumps from
+`> SMRTK.CopySince("tee")` (n=92) straight to
+`> SMRTK.Log("TEE_RESTORE",...)` (n=95) with no `> SMRTK.PrintTee(false)`
+between them, and that echo appears only later at n=98. The toolkit's own tap
+reconstructed the operator's command history and settled the question — an
+unplanned demonstration of what the tap is for.
+
+### ⛔ Procedural finding: `CopySince` is destroyed by the operator's next copy
+
+Step 5's first clipboard read returned 94 bytes containing the **text of the next
+command**, not the copied range, even though `SMRTK_COPY ... lines=9 status=OK`
+had succeeded. Cause: the attending agent hands over commands, the owner copies
+each one to paste it, and **each copy overwrites the clipboard**. Step 4 survived
+only because `CopySince` happened to be the last command in its block.
+
+⇒ **`CopySince` must be the final command of any block**, and 08's script must
+be written that way. ⭐ More usefully for 03A: the panel's **Copy since mark
+button** is immune, because invoking it requires no copying. The console form of
+this feature is fragile in exactly the agent-hands-over-commands workflow it
+exists to serve — a concrete argument for button-first evidence capture in P4.
+
+⭐ **Attending-session technique worth keeping:** the clipboard was read directly
+with `Get-Clipboard -Raw` from the attending session rather than pasted into an
+editor by the owner. It is faster, it removes a transcription step, and it is
+stronger evidence — it proves the text reached the real OS clipboard.
 
 ## Outbox items raised during the sitting (for 03A / 99)
 
