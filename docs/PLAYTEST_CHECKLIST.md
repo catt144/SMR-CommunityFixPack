@@ -6,10 +6,25 @@ what to test, how to set it up, what each test needs. Expectations,
 predictions, pass/fail readings and console forensics are NOT written here —
 the agent supplies them in the sitting, from each test's linked entry.
 Reference material (ground rules, console facts, the verified command table,
-Test Kit helpers, save fixtures) stays in [PLAYTEST_HELP.md](PLAYTEST_HELP.md);
-completed tests move whole to
-[PLAYTEST_ARCHIVE.md](archive/PLAYTEST_ARCHIVE.md) — 44 sections as of
-2026-08-01, plus the 2026-08-03 pre-redesign snapshot.
+Test Kit helpers, save fixtures) stays in [PLAYTEST_HELP.md](PLAYTEST_HELP.md).
+
+> ⛔ **RETIREMENT RULE — owner ruling 2026-09-14, item 177. EVERY section in this
+> file retires to [archive/PLAYTEST_ARCHIVE.md](archive/PLAYTEST_ARCHIVE.md) once it
+> is settled — not tests alone.** This extends the old rule (*"completed tests move
+> whole"*, 44 sections as of 2026-08-01, plus the 2026-08-03 pre-redesign snapshot),
+> which covered ~1% of the file while the other 99% had no rule reaching it.
+>
+> - a **test** retires when it is completed;
+> - a **decision** retires once its marker reads `ruled` or `closed`;
+> - a **dated session record** does not belong here at all — it goes to
+>   `archive/SESSION_LOG.md`. This file is the work list, nothing else.
+>
+> The move is whole-body, leaving the heading, the marker and a pointer behind.
+> `.claude/tools/archive_settled.py` performs exactly that move over the marked set.
+> ⚠️ **An unmarked item can never become settled, so it can never retire** — the
+> marker is what makes this rule run, and neglecting it is how this file reached 54%
+> unmarked before the 2026-09-14 pass. ⛔ Whether that is machine-enforced is still
+> open: see item **177**.
 
 > Redesigned 2026-08-03 (`docs/agent/prompts/PT_REDESIGN_PROMPT.md`, owner
 > design authority of the same date): tests grouped **by system, not by PT
@@ -28,6 +43,44 @@ completed tests move whole to
 > retired. Nothing here is owed from you.
 
 ## Decisions waiting on you
+
+### ✅ 2026-09-14 — 177 RULED: retirement now covers EVERYTHING in this file, not just tests — ⚠️ one gate still yours
+<!-- ck:177 status:ruled owner:yes -->
+
+**Your ruling, 2026-09-14:** the archive rule in this file's own preamble —
+*"completed tests move whole to `PLAYTEST_ARCHIVE.md`"* — **is extended to every kind
+of section here.** The preamble carries the operative text and is the only place it is
+written; you ruled against copying it into `STATE.md` or `WORKFLOW.md`, on the grounds
+that a session which never touches this file should not carry a rule about it.
+
+**Why it was needed** — `wc -c` on this file at dated commits:
+
+| 08-01 | 08-15 | 09-01 | 09-10 | 09-13 | after the 09-14 archival |
+|---:|---:|---:|---:|---:|---:|
+| 87,314 B | 187,322 B | 363,972 B | 539,297 B | 761,372 B | 606,050 B |
+
+**8.7× in six weeks**, and the 09-10 → 09-13 leg runs at ~**74 KB/day**. The 09-14
+archival removed **155,769 B — about two days of growth at that rate.** The old rule
+covered PT test sections, **~1.0%** of the file, and was honoured; `Decisions waiting
+on you` is **92.3%** and nothing reached it. **47.9%** is dated session records, kept
+in parallel with `archive/SESSION_LOG.md` (91 hits for `2026-09-12` here against 20
+there) — which is why the rule now sends those out of this file entirely.
+
+**⚠️ STILL OPEN — one gate, and without it this is a habit, not a rule.** The mover
+moves exactly the `ruled`/`closed` marked set, so an **unmarked item never retires**;
+that is how this file reached 54% unmarked. `doccheck` already computes the shortfall
+and prints it as a count (**12 today**) — it has never been allowed to fail. Prose in
+the preamble does not fix this: an agent editing by targeted string may never read it.
+
+- **(a)** Make the count RED — no commit leaves a checklist item without a status
+  marker. The check exists; only its severity changes. Your own 09-13 rule applied
+  here: *a hazard is a failure not yet converted into a gate.* Would need to fail only
+  on items the committing change itself touched, so a peer is not blocked by someone
+  else's omission.
+- **(b)** Leave it a count, and accept periodic owner-approved sweeps like 09-14's.
+
+⛔ No agent changes that severity on its own judgement — a gate that can block every
+peer's commit is yours. Recommendation if you want one: **(a)**, scoped as above.
 
 ### 2026-09-13 — 176: the checklist cleanup you ruled (D4) never ran, and D4 is ~6% of the problem
 <!-- ck:176 status:open owner:no -->
