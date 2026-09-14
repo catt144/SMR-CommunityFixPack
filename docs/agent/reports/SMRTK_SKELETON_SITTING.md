@@ -16,7 +16,7 @@ vendor scores the predictions. Pack HEAD `320d359`; TestKit HEAD `5d8d3b3`.
       checked against the built code and against `ModTools\Src`.
 - [x] Fixture survey (corrected after the owner named the real saves) + backup of both.
 - [x] Decoded both fixtures' savegame bodies; `CheatsUsed` read false against a positive control.
-- [~] Owner sitting: step 0A read CLEAN and scored; baseline saved and verified on disk; 0C control pending.
+- [x] Step 0 COMPLETE: clean read scored, baseline saved and verified on disk, vanilla control fired RED (`entries=1`).
 - [ ] Owner sitting, steps 1–8.
 - [ ] Prediction-by-prediction scoring; verdict; archived log path.
 - [ ] Outbox to 03A and 99; ck175 in plain language; strike the row; `git rm` 02.
@@ -283,6 +283,66 @@ without loading a game. Three things it does establish, and two it does not:
   (01's disagreement 2) already having created `DE_Console`. It is exactly the
   confounder step 2 exists to isolate; it is not evidence for P2.
 - Nothing here reads taint, the tap, the clipboard, or persistence.
+
+## Step 0 — RESULT: the control is established, both sides measured
+
+⭐ **This is the precondition for the whole kill gate.** P1 asks whether a leaf
+action leaves `CheatsUsed` empty; that question is only meaningful if the vanilla
+route demonstrably fills it on this exact fixture. It does.
+
+| leg | line in the archived log | predicted (01) | |
+|---|---|---|---|
+| 0a clean | `SMRTK_TAINT_READ action=taint_read status=OK used=false` (id=15) | same | ✅ exact |
+| 0a clean | `SMRTK_ELIGIBILITY action=eligibility reason=UNAVAILABLE:sandbox status=OK` (id=16) | same | ✅ exact |
+| 0a clean | `SMRTK_PLATFORM_READ cheats=nil eligibility_api=nil mod_tools=false` (id=17) | `cheats` unverified; api nil | ✅ api/mod_tools exact; `cheats` answered |
+| 0a clean | `SMRTK_SCRATCH_READ entries=0` (id=24) | — | baseline count, taken before the control |
+| 0b RED | `ObjCheat CheatFill` (vanilla's own print, `Network.lua:216`) | — | ✅ the vanilla route provably dispatched |
+| 0b RED | `SMRTK_TAINT_READ action=taint_read status=OK used=true` (id=26) | same | ✅ exact |
+| 0b RED | `SMRTK_TAINT action=taint_read before=true used=true` (id=27) | same | ✅ exact |
+| 0b RED | `SMRTK_SCRATCH_READ entries=1` (id=28) | `entries=1` | ✅ exact |
+| 0b RED | `SMRTK_TAINT action=flush before=true used=true` (id=30) | — | taint is sticky; the assert fires on every later action, as designed |
+
+**The four-step source trace is confirmed end to end in play.** `ObjCheat
+CheatFill` is printed by `NetSyncEvents.ObjCheat` only *after* its
+`AreCheatsEnabled()` gate (`Network.lua:215-216`), so its presence proves the
+gate passed and `InvokeObjCheat` ran `LogCheatUsed` before the leaf. One button
+press produced **exactly one** row — the arithmetic the trace predicted, not one
+per drone, per resource unit, or per interrupted request.
+
+⇒ **RED = `used=true`, `entries=1`. GREEN (step 3) must be `used=false` with the
+strip CLEAN after a leaf `CheatFill` through `SMRTK.Run`.** The contrast is now
+anchored on the same fixture, the same depot and the same method.
+
+### Two corrections this leg produced
+
+1. **`Platform.cheats` reads `nil`, not `false`.** This session predicted
+   `false`. Falsy either way and the gate arithmetic is unchanged, but the
+   literal is `nil` — the key is absent from the `Platform` table, matching both
+   fixtures' saved `platform` tables. 01's "unverified at authoring" is now read.
+2. **The first control attempt was unrun, not failed, and the log said so
+   before the owner did.** `SMRTK_TAINT_READ used=false` / `entries=0` with **no
+   `ObjCheat` line anywhere** distinguishes "the vanilla path never dispatched"
+   from "it dispatched and did not taint" — a distinction worth having, because
+   only the second would have been a finding. Cause: a **dome** was selected, and
+   `Infopanel.lua:26-38` builds the Cheats list from the selected object's own
+   `Cheat*` methods, so a dome has no `Fill`. Not a defect in anything.
+
+### ⭐ Measured for 03A/P2: which infopanel cheats already avoid taint in vanilla
+
+From the dome's live Cheats section, classified at source. `AsyncCheat*` entries
+are dispatched by `self[…](self)` directly (`Infopanel.lua:45-47`), bypassing
+`ObjCheat`, so they never reach `LogCheatUsed`:
+
+- **Never taint (6, all inspection-only):** `ClassHierarchy`, `ClipPlane`,
+  `Gizmo`, `Inspect`, `Properties`, `Screenshot`.
+- **Taint (16, all state-mutating):** `AddDust`, `AddMaintenancePnts`,
+  `AddPrefab`, `CleanAndFix`, `Delete`, `Destroy`, `FillConsumptionRes`,
+  `LightningStrike`, `Malfunction`, `MeteorHit`, `NoConsumption`, `QuickRefab`,
+  `SpawnChild`, `SpawnColonist`, `SpawnVisitor`, `SpawnWorker`, `Unfreeze`.
+
+P2 re-implements the second group through leaf calls; the first group it can
+route to the vanilla method unchanged, because there is no taint to avoid.
+
 
 ## Outbox items raised during the sitting (for 03A / 99)
 
