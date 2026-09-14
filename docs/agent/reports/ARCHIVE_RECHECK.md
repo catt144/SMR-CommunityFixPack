@@ -84,6 +84,41 @@ is not transported into today's queue.
 | 4 | G1-04, ck75, applied hazard / 1 | `last_changes`, `F104`; [PUBLIC_SURFACE_SWEEP:251](../prompts/perma/PUBLIC_SURFACE_SWEEP.md#L251), STATE:48 | Completed hazard receipt appends an unanswered request for two issue URLs and a pending patch-note edit. Live hits explain the subject themselves; restoration rationale is the appended C input, not those co-occurrences. |
 | 5 | G2-23, ck9/10, corun-pt15 / 2 | `CP15F15.savegame.sav`, `C46`; checklist:7864–7865 | Live rider directs the two decisions to Decisions waiting on you. This archived body supplies the ruling and still queues a build/verify without an execution receipt. Entries supply independent defect detail; that does not make the checklist handoff accurate. |
 
+## B2 · Disposition — 2026-09-14, owner ruling: NO RESTORATIONS
+
+Added by the orchestrator seat (worklist B5). This audit correctly declined to rule on
+whether any obligation **remains owed today**; that is what this section supplies. Each
+candidate was checked against current state, not against the archived body.
+
+⭐ **All five are discharged. 0 of 5 restored.** The audit's real yield was a single
+stale live line, now corrected — `PLAYTEST_CHECKLIST.md`, the 2026-08-20 C49/C50/C51
+section (now `ck:56 status:closed`).
+
+| Rank | Item | Verdict, 2026-09-14 | Evidence |
+|---:|---|---|---|
+| 1 | G2-11 ck34 | **DISCHARGED BY ACTION 2026-08-20** — all four defects dispositioned the same day; "now or after launch" was answered *before* launch | `C49` `wontfix` · `C50`+`C51` `tested-attended`, built as close-out chain links 1–2 · `C52` `parked` on the owner's ruling (`bugs/INDEX.md`) |
+| 2 | G2-24 corun-batch-2 | **DISCHARGED** — the owed wording exists and ships | `metadata.lua` `description`: *"A few of the fixes are judgment calls rather than plain repairs. Those are marked as such on the fix list, with the reasoning, rather than folded in quietly."* Deployed fix list marks them (`reports/SITE_AUDIT_0829.md`); count moved five→six with F108, the original five are inside it |
+| 3 | G2-15 ck28 | **DISCHARGED — and the answer was already live** | [`PLAYTEST_CHECKLIST.md`](../../PLAYTEST_CHECKLIST.md) item 17: *"item **28** closes with this ruling: **ship as built** (re-decide the dialog text before upload if the contingency ever fires)."* ⚠️ The audit followed its routing pointers into `D13` but never read item 17's own text — the item its own evidence named. The contingency stays armed; that is a condition, not an obligation |
+| 4 | G1-04 ck75 | **DISCHARGED, both halves** | The two missing issue numbers were captured: F104 = issue **#1**, F105 = issue **#2**, both API-verified in their entries. The pending `last_changes` edit landed 2026-08-24 (the field's own comment: *"Until now this said 'Initial release.'"*) and has been rewritten every version since |
+| 5 | G2-23 ck9/10 | **DISCHARGED as an owner obligation** | `C39` `tested-unattended` — the queued build ran · `C46` `wontfix` — the re-grade landed |
+
+⚠️ **Two riders, neither of them this seat's lane.**
+
+- **`F112` (P2, `filed`) is the live tail of candidate 5.** 1.1.0 deleted vanilla's
+  automation-law performance compensation, so the `C39` fix now creates the inverse of the
+  asymmetry it was written to remove. It is in `bugs/INDEX.md` and named 3× in the checklist,
+  but **0× in `STATE.md`**. Flagged once; the bug lane owns it.
+- **`C50`/`C51`'s modules are not in the tree today** — deleted in `2dc1dbe` (2026-09-08,
+  hotfix 2's 36-module REMOVE pass, 37 deletions / 0 additions under `Code/`) when the 1.1.0
+  baseline landed. They shipped at launch, which is what ck34 asked; their absence now is a
+  different fact.
+
+⛔ **An instrument note, because it nearly became a false verdict.** The first pass read
+`items.lua`'s comment block (*"Added 2026-08-20 (close-out chain, link 1 — C51)"*) as proof
+the modules ship today. They do not. The comment is a shared history header, not a manifest;
+the `PlaceObj` that follows it is an unrelated module. Only `test -f Code/<name>.lua` plus
+`git log --diff-filter=AD` settled it. **A comment adjacent to a record is not that record.**
+
 ## C · Complete item ledger and obligation wording
 
 MEASURED membership: **5 leading candidates + 20 review-only flags + 10 clean

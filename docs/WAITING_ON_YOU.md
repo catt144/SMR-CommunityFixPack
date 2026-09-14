@@ -24,7 +24,7 @@ one marker settles which is right.
 | 169 | 2026-09-13 | marker | [⭐ 169 ➊ **UPLOADED — v10 IS LIVE on both portals.** ➋ **FAQ commit DISCHARGED.** ➌ accepted as shipped.](PLAYTEST_CHECKLIST.md#L656) |
 | 151 | 2026-09-11 | ⚠️ _conflict_ | [⚖️ 151: migration audit complete — **(a) and (d) CLOSED 09-12 as overtaken by events · (e) RULED 09-11 · (b) and (c) still open**](PLAYTEST_CHECKLIST.md#L2119) |
 | 133 | 2026-09-09 | ⚠️ _conflict_ | [⚖️ 133: six decisions from the self-check promise audit. **RULED IN PART 2026-09-12 — "do the reword". Four of the six fall with it; (2) and (4) are…](PLAYTEST_CHECKLIST.md#L3313) |
-| 53 | 2026-08-19 | ⚠️ _conflict_ | [⭐⭐ THE VERDICT REVIEW IS DONE: **UPHELD**. **53 RULED 09-12: pare the modder surface down, and the hardening queue shrinks with it — six rows go, one…](PLAYTEST_CHECKLIST.md#L5865) |
+| 53 | 2026-08-19 | ⚠️ _conflict_ | [⭐⭐ THE VERDICT REVIEW IS DONE: **UPHELD**. **53 RULED 09-12: pare the modder surface down, and the hardening queue shrinks with it — six rows go, one…](PLAYTEST_CHECKLIST.md#L5885) |
 
 ## Owed playtest legs
 
@@ -53,12 +53,12 @@ be trusted for these. One marker line each settles it permanently.
 - **114** 2026-09-08 — [ITEMS 114–117 OPEN: the pack-wide 1.1.0 re-verification — 10 FIX, 35 REMOVE, 35 KEEP (QA'd)](PLAYTEST_CHECKLIST.md#L4272)
 - **112** 2026-09-08 — [ITEMS 112–113 OPEN: the hotfix-1 audit says SHIP WITH CHANGES, and both changes are wording](PLAYTEST_CHECKLIST.md#L4324)
 - **111** 2026-09-08 — [ITEM 111 OPEN: F116 track salvage was repaired, and it left one judgement call](PLAYTEST_CHECKLIST.md#L4483)
-- **—** 2026-08-10 — [⭐⭐ NEW from the `corun-batch-2` SITTING (four calls, all yours)](PLAYTEST_CHECKLIST.md#L7312)
-- **—** 2026-08-05 — [⭐ NEW from the `corun-batch-1` sitting (four calls, all yours)](PLAYTEST_CHECKLIST.md#L7464)
+- **—** 2026-08-10 — [⭐⭐ NEW from the `corun-batch-2` SITTING (four calls, all yours)](PLAYTEST_CHECKLIST.md#L7332)
+- **—** 2026-08-05 — [⭐ NEW from the `corun-batch-1` sitting (four calls, all yours)](PLAYTEST_CHECKLIST.md#L7484)
 
 ## Coverage
 
-**89 of 132** checklist items carry a `<!-- ck:N status:… owner:… -->` marker; **43** are inferred
+**90 of 132** checklist items carry a `<!-- ck:N status:… owner:… -->` marker; **42** are inferred
 from prose and may be wrong. This number is the one to move: every marker added
 retires a guess.
 

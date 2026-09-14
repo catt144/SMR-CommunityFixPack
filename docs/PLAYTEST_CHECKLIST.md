@@ -5768,7 +5768,8 @@ Body archived in [archive/PLAYTEST_ARCHIVE.md](archive/PLAYTEST_ARCHIVE.md); sea
 
 Body archived in [archive/PLAYTEST_ARCHIVE.md](archive/PLAYTEST_ARCHIVE.md); search `ck-` and this heading.
 
-### ⭐ 2026-08-20 — C49 is RETIRED on your word, and I measured how hard C50/C51 actually are. Item 34's "now or after" is still yours.
+### ⭐ 2026-08-20 — C49 is RETIRED on your word, and I measured how hard C50/C51 actually are. ✅ Item 34's "now or after" was ANSWERED THE SAME DAY — before launch.
+<!-- ck:56 status:closed owner:no -->
 
 56. ✅ **`C49` → `wontfix — unreachable`, done.** Your words: *"c49 wontfix -
     unreachable is right, get it off our list and retire it."* The entry keeps the
@@ -5856,6 +5857,25 @@ Body archived in [archive/PLAYTEST_ARCHIVE.md](archive/PLAYTEST_ARCHIVE.md); sea
       no judgment-call mark. ⇒ **`C50` is a plain repair, and the "five judgment
       calls" line on your store page does not move if it ships.** Correction
       recorded in `agent/bugs/C50.md`.
+
+    ⛔ **CORRECTION 2026-09-14 (B5, archive read-back disposition) — this heading
+    was STALE for 25 days.** It read *"Item 34's 'now or after' is still yours."*
+    True the morning of 2026-08-20, false by that evening: the close-out chain built
+    `C51` (link 1) and `C50` (link 2) the same day, and `C52` was parked on your
+    ruling. **All four of item 34's defects were dispositioned on 2026-08-20** —
+    `C49` `wontfix`, `C50` + `C51` `tested-attended` and shipped at launch, `C52`
+    `parked`. ⇒ Item 34's question was answered by action: **before launch.**
+    ⚠️ `C50`/`C51`'s modules are NOT in the tree today — both were deleted in
+    `2dc1dbe` (2026-09-08, hotfix 2's 36-module REMOVE pass, 37 deletions / 0
+    additions under `Code/`) when the 1.1.0 baseline landed. They shipped at launch;
+    they are gone now, and that is a different fact.
+
+    ⭐ **Your ruling 2026-09-14: no restorations.** All five leading candidates in
+    `agent/reports/ARCHIVE_RECHECK.md` are discharged — that report's "Disposition"
+    section carries the other four verdicts. The audit's real yield was this one
+    stale line. ⚠️ The marker above was added in the same pass: this section was one
+    of the 12 unmarked items, so under item **177**'s retirement rule it could never
+    retire. It counts against that separate pass, it does not clear it.
 
 ### ✅ 2026-08-20 — your two rulings are carried out. Nothing owed back; this is the receipt.
 <!-- ck:- status:closed owner:no -->
