@@ -111,6 +111,22 @@ meaning, not only path agreement. Sizes moved C92 11,588→13,439 B, DLC
 15,464→17,691 B and stand-down 7,428→8,961 B; additions are execution controls
 and falsifiers, not new job scope.
 
+Fixtoggles disposition: an exact recursive walk found the permitted manifest
+README plus 13 fireable link bodies; no support or tool input was misclassified,
+so nothing moved. The queue and on-disk members reconcile, but execution drift
+was repaired: authoring-era 45-module language became a current emitted set with
+exactly-once allocation and a duplicate/unassigned stop; dead relative report,
+policy and release paths were made current; `GENERAL_USE_PROMPT.md` and the
+dissolved `PLAYTEST_HELP.md` were replaced by current WORKFLOW/CO_RUNS/support
+contracts; discharged ck144 co-run work was removed. Attended links now carry
+both the exact TEMPORARY sweep and the current STATE probe-age/change obligation,
+without letting age override owner work. The site-writing link must stop on a
+dirty external repository. Link 99 now archives the manifest to a new append-only
+path, removes the map row and proves the live folder absent in both full and KILL
+forms; it no longer leaves a dead README in the fireable prompt tree. Checklist
+148's deferred owner choices, every prompt's unfired status and the firing freeze
+remain unchanged.
+
 ## Live progress
 
 - [IN PROGRESS - not executed] Prove the execution boundary: fresh context,

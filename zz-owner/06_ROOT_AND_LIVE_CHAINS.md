@@ -22,14 +22,14 @@ Authored against `9ae0d50`. The owner override authorizes this brief in
   cut its completed preview-art and archived-console branches, repair its dead
   routing, and preserve the still-unfired screenshot work; 15,623 B to 14,060 B,
   owner KEEP wording and preflight/lifecycle preserved.
-- [COMPLETE - pending commit] Repaired proved execution-contract drift in the
+- [COMPLETE - `4cc0d4c`] Repaired proved execution-contract drift in the
   retained C92, DLC and stand-down jobs: git/staleness starts, file-level reads,
   derived-fact falsifiers, live-progress/lifecycle controls, dynamic count
   wording, current DLC paths and the chain-authoring map description.
-- [IN PROGRESS - content read, findings listed] Audit `fixtoggles/` as a live chain: topology,
-  prompt/support classification, lifecycle, citations and evidence routing;
-  repair and verify its commit(s).
-- [PENDING - waits for fixtoggles audit] Audit the grouped
+- [COMPLETE - pending commit] Audited `fixtoggles/` as a live chain: all 13 bodies
+  are fireable prompts and its README is the permitted manifest; repaired stale
+  counts/paths/testing bindings, external-repo preflight and terminal empty-folder lifecycle.
+- [IN PROGRESS - waits for fixtoggles commit] Audit the grouped
   `smrcf-modbrowser/` + `smrcf-verify/` set and its `SMRCF_CHAIN_SET.md` entry;
   repair and verify its commit(s).
 - [PENDING - waits for SMRCF commit] Clean the three uncleaned survivors named in

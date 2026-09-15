@@ -6,24 +6,26 @@ name the reference mod; never reuse its wording) govern every sentence**. Runs a
 ## Job
 
 1. **Row text for every registered module** — a player title and a one-paragraph description, each derived from the
-   module's `agent/bugs/` entry (act on the ENTRY, not a brief), stating what the fix does in plain words. No "Fixed"
+   module's `docs/agent/bugs/` entry (act on the ENTRY, not a brief), stating what the fix does in plain words. No "Fixed"
    beyond the entry's status (owner rule 09-08). Beta rows say what "Beta" means in one line. Restart-required and
    always-on parts are said where they apply. Replace 07's placeholders.
 2. **Beta flags + per-fix defaults** as the owner ruled in ck148 (per fix) — each recorded where the spec §5 says, and
    checked by whatever tool the spec named.
-3. **`items.lua` / `metadata.lua`** consistent with the final module and option set (module-list gate (tools/doccheck.py MODULE SETS + tools/upload_preflight.py)). ⛔ Never `version` (editor/version rail (agent/prompts/perma/release_prompt.md § Release rails)).
+3. **`items.lua` / `metadata.lua`** consistent with the final module and option set (module-list gate (tools/doccheck.py MODULE SETS + tools/upload_preflight.py)). ⛔ Never `version` (editor/version rail (`docs/agent/prompts/perma/release_prompt.md` § Release rails)).
 4. **Store text** — the description gains the switches (how to reach them; that off stops a fix's behaviour but repairs
-   already made stay). `metadata.lua` `description` + `UPLOAD_WORKFLOW.md` §3 backups + `STORE_CARD_LIVE` in ONE commit,
+   already made stay). `metadata.lua` `description` + `docs/UPLOAD_WORKFLOW.md` §3 backups + `STORE_CARD_LIVE` in ONE commit,
    proven identical **by script**, not by eye (memory `store-card-backups-required-not-polish`). `last_changes` drafted
    for the release sitting.
-5. **Site source** (`C:\Dev\SMR-CommunityMods`): the fix list and FAQ ("how do I switch a fix off?", "is my save clean
+5. **Site source** (`C:\Dev\SMR-CommunityMods`): before writing, run that repository's `git log --oneline -5` and
+   `git status --short`; stop on a dirty target. Then update the fix list and FAQ ("how do I switch a fix off?", "is my save clean
    if I switch one off?" — answer honestly per `EF-002`). ⛔ Commit only; publishing is the release sitting's
    (`publish-site.yml` is workflow_dispatch).
 6. **TestKit** (`C:\Dev\SMR-BugFixPack-TestKit`, local-only by design): a switched-off module's probes SKIP by name,
    never FAIL; the census reads the switch state.
-7. **Docs:** `PLAYTEST_HELP.md` console recipes for reading/setting a switch; `FIX_POLICY` §5 final wording if 01 left
-   anything; the `[FAQ]` tags; the opt-in repo's `FUTURE_IDEAS.md` #9 marked UN-PARKED (by this chain) and checklist 88
-   marked overtaken.
+7. **Docs:** `docs/agent/FIX_POLICY.md` §5 final wording if 01 left anything; the `[FAQ]` tags; the opt-in repo's
+   `FUTURE_IDEAS.md` #9 marked UN-PARKED (by this chain) and checklist 88 marked overtaken. Do not recreate the dissolved
+   `PLAYTEST_HELP.md`. Keep general switch recipes in this chain's report, UI or site; only if TestKit needs its own
+   durable switch helper, update `docs/agent/support/SMRTK_SLOTS.md` and its support-map entry with a real consumer.
 
 ## Scope fence
 

@@ -1,11 +1,11 @@
 # fixtoggles 02 — the walking skeleton (build)
 
 Link 02 of `fixtoggles`. README binding rules 1–18 are yours. Staleness: `git log --oneline -10` + `git pull`; the spec
-(`reports/FIXTOGGLES_SPEC.md`) is your design authority, and its §0 may have re-cut this prompt — act on the spec.
+(`docs/agent/reports/FIXTOGGLES_SPEC.md`) is your design authority, and its §0 may have re-cut this prompt — act on the spec.
 
 ## Job — the smallest end-to-end proof, built desk-side, with predictions written down first
 
-1. **Predictions first.** Before any code, write `reports/FIXTOGGLES_SKELETON_PREDICTIONS.md`: for every step 03 will run,
+1. **Predictions first.** Before any code, write `docs/agent/reports/FIXTOGGLES_SKELETON_PREDICTIONS.md`: for every step 03 will run,
    the exact log lines / reads you expect and a **3× abort threshold** for time or retries (`CHAIN_METHOD` §5 D). 03 is a
    kill gate; the predictions are what it scores against.
 2. **Core** (`Code/00_Core.lua`) per spec §2: registry fields, the ONE store with deviation-only schema, the reconciler
@@ -18,7 +18,7 @@ Link 02 of `fixtoggles`. README binding rules 1–18 are yours. Staleness: `git 
    switch the converted one, persist, and be reachable by mouse AND gamepad by construction (spec §1e). Own look is
    07's job; the stub may be plain.
 5. **`items.lua` / `metadata.lua`** only as the chosen route requires (option items + `default_options` for the Mod
-   Options route — `name` == Register id == `default_options` key; module-list gate (tools/doccheck.py MODULE SETS + tools/upload_preflight.py)). ⛔ Never `version` (editor/version rail (agent/prompts/perma/release_prompt.md § Release rails)).
+   Options route — `name` == Register id == `default_options` key; module-list gate (tools/doccheck.py MODULE SETS + tools/upload_preflight.py)). ⛔ Never `version` (editor/version rail (`docs/agent/prompts/perma/release_prompt.md` § Release rails)).
 6. **Desk harness** `tools/desk_toggles.py`, registered in `tools/deskbench.py`: cold boot AND enable-path reload,
    gate on/off on the converted module, persistence round trip, deviation-only storage (change a default, an untouched
    player follows it; a touched player keeps theirs), unconverted modules unaffected. **Every assertion gets a

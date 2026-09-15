@@ -1,19 +1,20 @@
 # fixtoggles 03 — the skeleton sitting (ATTENDED · KILL GATE)
 
 Link 03 of `fixtoggles`. **Needs the owner at the keyboard** (and a game controller if they have one). README binding
-rules 1–18 are yours; the live-sitting rules of `prompts/perma/GENERAL_USE_PROMPT.md` bind too (one command per line,
-readings from the LOG FILE, cheat discipline, no live UI-internals prototyping). Staleness: `git log` + `git pull`.
+rules 1–18 are yours; `docs/agent/WORKFLOW.md` "Probe hygiene" and "Testing checklist" bind, as does
+`docs/agent/support/CO_RUNS.md` if this is an attended batch. Use one command per line, take readings from the log file,
+enforce cheat discipline, and do no live UI-internals prototyping. Staleness: `git log` + `git pull`.
 
 ## Before the owner touches anything
 
 - ⛔ **Stale-probe gate** (WORKFLOW "Probe hygiene"): `grep -rln "TEMPORARY" Code/ ../SMR-BugFixPack-TestKit/Code/` →
-  todo list; not clean ⇒ repair or stop. Every result commit carries a `PROBE SWEEP:` line.
+  todo list; not clean ⇒ repair or stop. Read the current probe-age/change obligation from `docs/agent/STATE.md` and
+  satisfy it at this next playtest when it applies; age never lets an agent refuse owner-directed work. Every result
+  commit carries a `PROBE SWEEP:` line.
 - Re-confirm the fixture AT SITTING TIME (a 1.1.0 colony; `EF-079`). Read the save's metadata header first
   (memory `savegame-metadata-is-readable`).
-- Read 02's predictions (`reports/FIXTOGGLES_SKELETON_PREDICTIONS.md`) and the script in your inbox. Every step names
+- Read 02's predictions (`docs/agent/reports/FIXTOGGLES_SKELETON_PREDICTIONS.md`) and the script in your inbox. Every step names
   its prediction and its abort threshold BEFORE it runs.
-- ⭐ Offer the owner a co-run with the owed v7 sitting (checklist 144 a) if it is still owed — one boot, their call.
-  If accepted, keep the two sets of readings separate in the record.
 
 ## The legs (priority order — a truncated sitting banks the decider first)
 
@@ -45,7 +46,7 @@ re-verified A/B; any other module.
 ## What may NOT be claimed
 
 A gamepad PASS without a controller in the owner's hands. A PASS on a step whose prediction was not written first.
-Anything about the other 44 modules.
+Anything about the other registered modules.
 
 ## Close-out
 
