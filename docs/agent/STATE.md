@@ -1,4 +1,4 @@
-# Project State — the one mandatory read
+# Project State — pull; read it when a task, a prompt or the owner calls for status
 
 ## Must_Read_Header
 <!-- RULES -->
