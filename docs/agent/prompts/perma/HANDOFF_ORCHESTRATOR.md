@@ -52,11 +52,8 @@ went divergent within a day. **Read it, then read the checklist body it links to
 
 ⚠️ **Two things the generated list cannot tell you, so they stay here:**
 
-- **144 (a), the owed boot** — ck151 (c) ruled that F52 passage / F54 hub / C83 arrival join it **only if
-  the loaded colony already has those layouts; otherwise SKIP THEM BY NAME.** ⛔ Never build a layout to
-  make a check possible. That boot also re-stamps the `RunAll()` line (`WORKFLOW.md:537`), VOID since 09-09.
-  ⚠️ **A full `RunAll()` DID run in 08b (09-14) — but under a STALE preflight attestation, and whether it
-  discharges 144 (a) is UNRULED. Both halves are ck184; ⛔ do not assume it either way.**
+- ✅ **144 (a) is DISCHARGED 09-15 (ck184 b/d)** — the RunAll ran under a same-day stamp, the play clauses
+  closed by field evidence, A3/A10 struck. ⛔ **Never rebuild it as owed from an older document.**
 - **151 (b)** is messaging, and **ck165 lets the owner defer it indefinitely — ⛔ do not raise it.**
 
 ⛔ **Never rebuild an "owed" list from an older document** — this file's did exactly that on 09-12 and
@@ -69,12 +66,10 @@ here every few minutes.
 
 ✅ **EFFORT 1 — `prompts/smrtk/` (ck175), the SMR Tool Kit — CHAIN CLOSED 09-14** (99: SHIP WITH
 CHANGES, `reports/SMRTK_AUDIT.md`; `e88bbe7`). ✅ **99's Code link (C-1/3/5/6) LANDED 09-15, TestKit
-`f5fa650`** — desk gates only, ⛔ **unwitnessed in play**. STATE's smrtk line is the summary. What is
-still open, and where it lives:
-- **Owner:** ck184 (a) refuse a stale preflight — 99's C-4 (b) is the built option · ck184 (b) does 08b's
-  `RunAll()` discharge ck144 (a) · ck183's questions (status open). ⛔ Bodies in the checklist, not here.
-- **Play:** the first slot-served sitting = the ck144 (a) boot via `perma/SMRTK_SLOTS.md` — fresh
-  preflight, 08b item 9's watch trigger, and the four `f5fa650` changes witnessed (SLOTS names them).
+`f5fa650`**, witnessed 09-15 (`reports/CK144A_CLOSEOUT_SITTING.md`; C-3 refuted, C-5 unwitnessed, both
+closed low-priority by the owner). ⚖️ **ck184 + ck183 RULED and CLOSED 09-15; ck144 (a) DISCHARGED.**
+⛔ **NOTHING from this effort is owed** — the owner asked for it closed so it stops being raised. The
+probe-maintenance names in STATE are instrument health, not this effort's.
 - ✅ **STAMPER CUT 09-14, settled.** ⛔ Never re-open or re-cost it; `FUTURE_IDEAS.md` entry 5,
   **not agent-tracked**, ⛔ **no mention in any always-read doc** (owner's instruction, same day).
 

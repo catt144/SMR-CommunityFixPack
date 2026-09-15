@@ -24,11 +24,10 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 - ⛔ NEVER REPRODUCED, status HELD at `filed`/source-derived, never promote without a play leg: **F116** (repaired
   in-body `add94b3`), **F117** (`777249d`; station recipe in `bugs/F117.md` §Control, desk 8/8, ⛔ untested in play —
   a nil `CachedArgShape()` makes the control vacuous), **F118** (rider `0136af1`, no probe).
-- 🚫 OWED — the post-upload sitting, ONE boot (ck144 a; recipes: checklist "THE SITTING RAN" block + `bugs/F117.md`):
-  A3 (F118) · A10 · A5 c2 · A9 c4/c5 · F117's station recipe · the first `RunAll()` on the probe kit (re-stamps
-  `WORKFLOW.md:537`, VOID since 09-09). ⚠️ **A full `RunAll()` DID run 09-14 in 08b — 69 PASS / 4 FAIL / 18 SKIP /
-  6 ERROR — but under a STALE preflight attestation (ck184), and ⛔ whether it discharges ck144 (a) is UNRULED.**
-  FAIL/ERROR by name: `C47OpenFarmSeedBufferShape` (Herbs 100→50), retired `LanderCargoRatchet`/`DroneUnreachableForever`/
+- ✅ **ck144 (a) DISCHARGED 09-15** (ck184 b/d; `reports/CK144A_CLOSEOUT_SITTING.md`): the first `RunAll()` on the
+  rebuilt kit ran under a SAME-DAY stamp — 69 PASS / 4 FAIL / 18 SKIP / 6 ERROR, identical to 08b, nothing regressed;
+  the play clauses (A5 c2 · A9 c4/c5 · F117 station) are closed by FIELD EVIDENCE, A3 + A10 struck. ⛔ Nothing owed.
+  ⚠️ The probe-MAINTENANCE list is instrument health, not a sitting: FAIL/ERROR by name: `C47OpenFarmSeedBufferShape` (Herbs 100→50), retired `LanderCargoRatchet`/`DroneUnreachableForever`/
   `AutoExportPriority`, `LayoutTechLock`/`AnomalyCaveInMap` (modules retired 09-12; Wave14 wrap rows :116-117, :130 too),
   `DomeFreeSpaceMismatch` (08 flagged, untriaged). ⭐ **NEWLY NAMED 09-14, and NOT regressions from 08b** (UI-only edits):
   `ClassicRockets`/`CohortHousing`/`NoHomeless` — all `nil value` on game methods (`UniversalRocket:1894`,
@@ -63,12 +62,14 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   (`cheats_count=0` after 490 dispatches; 19-leaf sample on the rebuilt tree); eligibility stays `UNAVAILABLE:sandbox`
   (`EF-096`), adjudicated by closed enumeration (5 reason handlers), ⛔ never an observed PASS. Changes C-1…C-8 in the
   report; ✅ **the Code link (C-1/3/5/6) LANDED 09-15, kit `f5fa650`**, desk gates GREEN, ⛔ unwitnessed until the first
-  sitting. C-4 (b) is ck184 (a)'s call; C-8 optional. ⛔ Stamper parked (`FUTURE_IDEAS` 5, not agent-tracked). Depot
-  tree = `EF-102`. 08b leftovers = ck184.
-- ⏭ NEXT: ⭐ **first slot-served sitting = the ck144 (a) boot** — fire `perma/SMRTK_SLOTS.md` with its recipes + 08b item 9
-  + a FRESH preflight (ck184 a/b rule the RunAll half) · fire `prompts/STANDDOWN_AUDIT.md` (no blocker) · `prompts/C92_ACHIEVEMENT_BUILD.md` (build+test, ⛔ ships never
-  without ck172's hold lifted) · then the playtest sitting. ⛔ `SELFCHECK_PILOT` REMOVED 09-13 (`cf8d51f`).
-  Owner OWES: ck144 (a) the boot · ck151 (b) dev-report scope.
+  sitting → ✅ **witnessed 09-15** (C-1, C-6, 08b item 9); C-3 REFUTED in play (white text stays, low priority by owner
+  word); C-5 unwitnessed. ⚖️ **ck184 RULED + CLOSED 09-15**: the probe-sweep GATE is an age (24 h / a warranting change,
+  satisfied at the next playtest); ⛔ **no agent or kit code refuses work or overrides the owner over it**; text chip
+  stands. ⛔ **NOTHING from the toolkit chain is owed.** Stamper parked (`FUTURE_IDEAS` 5, not agent-tracked).
+- ⏭ NEXT: fire `prompts/STANDDOWN_AUDIT.md` (no blocker) · probe maintenance at the desk (the FAIL/ERROR names above;
+  Codex leg) · `prompts/C92_ACHIEVEMENT_BUILD.md` (build+test, ⛔ ships never without ck172's hold lifted) · then the
+  playtest sitting. ⛔ `SELFCHECK_PILOT` REMOVED 09-13 (`cf8d51f`).
+  Owner OWES: ck151 (b) dev-report scope.
   ⛔ 08 is a SEPARATE boot from ck144 (a), not a combine — it is a clean-taint experiment. ✅ Fixture CHOSEN 09-14: `SMRTK08 Fixture Sol 490` (C92 reporter's colony,
   1.1.0.403908, `CheatsUsed` read scalar from disk against a TAINTED positive control; 4 byte copies exist). Handoff `prompts/perma/HANDOFF_ORCHESTRATOR.md` §3 LIVE.
   Desk `prompts/DLC_DEEP_CHECK.md` (`HUNT_AUDIT.md` §8). Chain `prompts/fixtoggles/` DEFERRED 09-12 (ck148, not started).

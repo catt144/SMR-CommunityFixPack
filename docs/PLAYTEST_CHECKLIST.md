@@ -44,9 +44,38 @@ Test Kit helpers, save fixtures) stays in [PLAYTEST_HELP.md](PLAYTEST_HELP.md).
 
 ## Decisions waiting on you
 
-### 2026-09-14 — 184: the probe preflight accepted a 5-hour-stale attestation from a different tree
+### 2026-09-14 — 184 RULED + CLOSED 09-15: the probe-sweep gate is an age, never a refusal; the ck144 (a) boot ran and is DISCHARGED; the toolkit chain has nothing hanging
 
-<!-- ck:184 status:open owner:yes -->
+<!-- ck:184 status:ruled owner:yes -->
+
+#### ⚖️ RULED 2026-09-15, in your words, and CLOSED the same day
+
+**(a) The probe-sweep gate.** *"5 hours is too short. 24 hours is the minimal. But this is just
+resolved around playtesting. The rule would be 24 hours or post change that warrants a probe
+sweep to be done on next play test. An agent may recommend a sweep outside of play testing if
+it can articulate a reason that it should be done and explain the harm. But it cannot block
+work, it cannot override the owner."* Framing: *"I prefer gate over hard rule framing."*
+⇒ A desktop sweep is fresh for **24 hours** or until a change that warrants one; a stale sweep
+is satisfied at the **next playtest**. An agent may **recommend** an earlier sweep only with a
+reason and the harm named. ⛔ **No agent, gate or kit code refuses work, an upload, a boot or a
+RunAll over a sweep's age, and none overrides the owner.** 99's C-4 (b) refusal is NOT built.
+The sitting-side wording is already in `perma/SMRTK_SLOTS.md`; the documentation agent homes the rest.
+
+**(b)** 08b's RunAll did **not** discharge ck144 (a). ✅ **The owed first RunAll then RAN 09-15
+under a same-day stamp** — `reports/CK144A_CLOSEOUT_SITTING.md`: 69 PASS / 4 FAIL / 18 SKIP /
+6 ERROR, the same names as 08b, nothing regressed. **(c)** The text status chip stands; the
+ck175 dock icon is not built and not owed.
+
+**(d) ck144 (a) is DISCHARGED.** Your ruling: fixes that fail loudly, live for weeks with
+thousands of daily players and no report, are closed by **field evidence** — A5 c2 (F70),
+A9 c4/c5 (F116) and F117's station recipe close that way, their recipes staying in the
+entries for a countering report; A3 (F118, module deleted 09-12) and A10 (optional pack-off
+boot) are **struck**. The RunAll half is (b). ⛔ **Nothing from ck144 (a) is owed to anyone.**
+
+**(e) The toolkit's last loose ends, closed by your word 09-15** (*"in my mind its good
+enough … unless it poses a real risk"* — none does): C-3 editor colour **refuted in play, low
+priority, not routed** · C-5 arm-time refusal built, **unwitnessed**, one press at any later
+sitting · C-8 was never owed · ck183 item 5 (eligibility off the strip) **confirmed**.
 
 ⭐ **MEASURED in the 08b sitting, and it is the highest-value thing that sitting
 found.** The full `RunAll()` recorded its own gate as:
@@ -70,7 +99,7 @@ field watch that can never fire), and it sits underneath the whole suite.
 6 ERROR was read under this attestation. ⛔ Do not quote that run as a clean
 baseline without saying so.
 
-**The ask — two calls, and neither is an agent's:**
+**The ask as originally put (2026-09-14) — ruled above, kept as the record:**
 1. **Should the preflight refuse a stale or mismatched attestation** (compare its
    recorded `pack=`/`kit=` against the live HEADs, and refuse rather than warn)?
    That is a behaviour change to a gate you rely on, so it is yours.
@@ -759,8 +788,8 @@ ruling is gone and it is worth re-asking rather than pressing on.
 - **Next real sitting:** the owed ck144 (a) boot is the first one the panel serves — an agent preloads the slots
   first (`perma/SMRTK_SLOTS.md`), then you sit.
 
-### 2026-09-14 — 183: SMRTK 08 ran — the design half, and three questions for you
-<!-- ck:183 status:open owner:yes -->
+### 2026-09-14 — 183 RULED: SMRTK 08 ran — the design half; every ruling below stands, item 5 confirmed 09-15 (ck184 e)
+<!-- ck:183 status:ruled owner:yes -->
 
 **08's verdict is PASS WITH CORRECTIONS** (classes 1–17 pass, class 18 blocked;
 `reports/SMRTK_FULL_SITTING.md`). ⭐ **Requirement (A) is PROVEN, not asserted:**
