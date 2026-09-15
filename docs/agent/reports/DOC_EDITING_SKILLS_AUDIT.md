@@ -62,8 +62,9 @@ R-D follows the source section but is outside the brief's specified elements
 - Complete: doc-editing (`d716d9f`); prompt-authoring with WORKFLOW source removal (`7013326`).
 - Complete: pending move 1 disposition.
 - Complete: pending move 2 disposition.
-- In progress: pending move 3 disposition.
-- Pending: size proposals; revisit criteria; final verification and consume.
+- Complete: pending move 3 disposition.
+- In progress: size report and proposals.
+- Pending: revisit criteria; final verification and consume.
 
 No new gate is selected: syntax and freshness already fail loudly; the remaining
 questions concern meaning, authority, timing or an editor's actions. Invocation
@@ -84,3 +85,10 @@ no finer model/version identifier is exposed in the transcript).
 2. PENDING: the save-selection duty needs the future playtest/fix-authoring
    destination. Its dedicated source brief remains intact; no prose was
    copied into either new skill. The local move register records the reason.
+
+3. PENDING: the warmed-up-save rider line now has a prompt-authoring
+   destination. Current register evidence says ck182 is ruled; the initiating
+   brief's claim that it remains open is stale. Its explicit PLAYTEST_HELP
+   relocation exclusion still limits this task. The dissolution task can move
+   this line with its source removal. Neither source nor destination was
+   changed for this row; the local register records the scope reason.
