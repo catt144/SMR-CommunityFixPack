@@ -74,6 +74,13 @@ The gate cannot see the tree's HEAD: re-run the sweep and rewrite the slot after
 EVERY pack or TestKit commit that precedes a boot; a stale attestation passed once
 (08b, five hours, a different tree — ck184 a).
 
+The first sitting after TestKit `f5fa650` (smrtk 99's Code link, 2026-09-15, desk-only)
+also witnesses its four changes, each a prediction: a mechanized depot's fill/empty
+record carries `before`/`after` numbers; the field editor on Selected and Run reads
+dark text on a light box; a watch on a field the object lacks is REFUSED naming the
+field, and 08b item 9's unrun leg then arms on a field it HAS and fires; no console
+log overlay appears at boot. Record each as witnessed or NOT RUN by name.
+
 Parse 80 with `python tools/parsecheck.py --dir C:/Dev/SMR-BugFixPack-TestKit/Code --quiet`;
 run `python tools/doccheck.py` GREEN. Check rule 6 using `rg -n 'NetSyncEvent|LogCheatUsed'
 C:/Dev/SMR-BugFixPack-TestKit/Code -g '7*_SMRTK*.lua' -g '80_AgentSlots.lua'`

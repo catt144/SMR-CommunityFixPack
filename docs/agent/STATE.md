@@ -62,8 +62,9 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   SMR Tool Kit is the owner's to use (TestKit-only, never uploads). Taint half of (A) measured CLEAN in 02/08/08b
   (`cheats_count=0` after 490 dispatches; 19-leaf sample on the rebuilt tree); eligibility stays `UNAVAILABLE:sandbox`
   (`EF-096`), adjudicated by closed enumeration (5 reason handlers), ⛔ never an observed PASS. Changes C-1…C-8 in the
-  report; ONE Code link (depot guard `73:58`, `76` editor colour, watch refusal, `00` bootstrap invert) takes C-1/3/5/6.
-  ⛔ Stamper parked (`FUTURE_IDEAS` 5, not agent-tracked). Depot tree = `EF-102`. Kit `2c3d05c`; 08b leftovers = ck184.
+  report; ✅ **the Code link (C-1/3/5/6) LANDED 09-15, kit `f5fa650`**, desk gates GREEN, ⛔ unwitnessed until the first
+  sitting. C-4 (b) is ck184 (a)'s call; C-8 optional. ⛔ Stamper parked (`FUTURE_IDEAS` 5, not agent-tracked). Depot
+  tree = `EF-102`. 08b leftovers = ck184.
 - ⏭ NEXT: ⭐ **first slot-served sitting = the ck144 (a) boot** — fire `perma/SMRTK_SLOTS.md` with its recipes + 08b item 9
   + a FRESH preflight (ck184 a/b rule the RunAll half) · fire `prompts/STANDDOWN_AUDIT.md` (no blocker) · `prompts/C92_ACHIEVEMENT_BUILD.md` (build+test, ⛔ ships never
   without ck172's hold lifted) · then the playtest sitting. ⛔ `SELFCHECK_PILOT` REMOVED 09-13 (`cf8d51f`).

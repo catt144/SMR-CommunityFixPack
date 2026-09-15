@@ -64,33 +64,24 @@ contradicted its own closed list for most of a day.
 
 ### 2b · The loose ends — this is why the file is still alive
 
-⚠️ **TWO efforts are live at once and they share this tree.** Re-check `git log` + `git status`
-before every write; a peer commits here every few minutes.
+⚠️ **Peers share this tree.** Re-check `git log` + `git status` before every write; a peer commits
+here every few minutes.
 
-⭐⭐ **EFFORT 1 — `prompts/smrtk/` (ck175), the SMR Tool Kit. ⭐ ONE LINK LEFT: `99_AUDIT_fable.md`.**
-Its README is the manifest; owner rulings are ck175 + ck183. 01–03C, 07, 08, 09 and 08b are all
-consumed. **Only what a README cannot tell you:**
-- ✅ **08b RAN 09-14 attended: PASS WITH CORRECTIONS** (`046ba6f`) — items 1-8+10 PASS, 9 PARTIAL
-  (the field-watch trigger is the only unrun leg). **11 defects repaired, 6 routed.**
-  `reports/SMRTK_08B_SURFACE.md`; logs `archive/logs/smrtk08b_*` — ⚠️ **FOUR boots, not one**, because
-  fixes needed relaunches. ⛔ 99 re-derives against those; a single-log read misses half.
-- ⭐ **Requirement (A) is RE-ESTABLISHED on the rebuilt tree** (08b: 19 cheat leaves, `used=false`).
-  ⛔ **A SAMPLE, not universal proof** — 08's 844-record run was the OLD surface. Never quote either as
-  a global guarantee. Invariants: (A) nothing registers as a cheat, (B) one `SMRTK_` tag.
-- ⛔ **99 carries THREE routed items and the owner asked for the third by name** — the editor hint
-  colour, the mechanized-depot readout, and the probe-picker sort (built with **no play witness**).
-  ⚠️ 99 is an ADJUDICATOR: each asks for a verdict or a named mechanism, ⛔ never "build this".
-- ⭐ **`ck184` is 08b's biggest find and is NOT 99's** — the probe preflight accepted a 5-hour-stale
-  attestation from a different tree, so a gate that asserts "swept code = running code" said CLEAN
-  over code nobody swept. Two owner calls sit there.
-- ✅ **STAMPER CUT 09-14, settled.** Panel is **seven** pages. ⛔ Never re-open or re-cost it; parked
-  in `FUTURE_IDEAS.md` entry 5, **not agent-tracked**, and ⛔ **no mention of it belongs in STATE,
-  DISPATCH, CLAUDE.md or any always-read doc** (owner's instruction, same day).
+✅ **EFFORT 1 — `prompts/smrtk/` (ck175), the SMR Tool Kit — CHAIN CLOSED 09-14** (99: SHIP WITH
+CHANGES, `reports/SMRTK_AUDIT.md`; `e88bbe7`). ✅ **99's Code link (C-1/3/5/6) LANDED 09-15, TestKit
+`f5fa650`** — desk gates only, ⛔ **unwitnessed in play**. STATE's smrtk line is the summary. What is
+still open, and where it lives:
+- **Owner:** ck184 (a) refuse a stale preflight — 99's C-4 (b) is the built option · ck184 (b) does 08b's
+  `RunAll()` discharge ck144 (a) · ck183's questions (status open). ⛔ Bodies in the checklist, not here.
+- **Play:** the first slot-served sitting = the ck144 (a) boot via `perma/SMRTK_SLOTS.md` — fresh
+  preflight, 08b item 9's watch trigger, and the four `f5fa650` changes witnessed (SLOTS names them).
+- ✅ **STAMPER CUT 09-14, settled.** ⛔ Never re-open or re-cost it; `FUTURE_IDEAS.md` entry 5,
+  **not agent-tracked**, ⛔ **no mention in any always-read doc** (owner's instruction, same day).
 
 ⭐⭐ **EFFORT 2 — the doc overhaul (ck176–ck183), owner-driven and peer-run.** `prompts/RULES_HEADERS.md`
 is its live brief: N scattered rules become local header blocks plus ONE kernel rule. ⛔ **Sequencing
-ruled by the owner: SMRTK finishes first, then RULES_HEADERS re-fires** — ⭐ that is now **one link
-away** (99), so this is the next effort to pick up. ⚠️ Its seat carries the STATE
+ruled by the owner: SMRTK finishes first, then RULES_HEADERS re-fires** — ✅ **SMRTK is finished**, so
+this is the next effort to pick up. ⚠️ Its seat carries the STATE
 policy and enforces it — **corrections SUBSTITUTE, they never stack**, and a fact fails STATE's
 admission test unless it is universal to *every* session. That is why `EF-102` exists.
 
