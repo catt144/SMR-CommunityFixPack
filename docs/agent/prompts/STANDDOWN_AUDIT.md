@@ -1,7 +1,12 @@
 # Stand-down audit — can our full-body replacements turn themselves off?
 
 One-off, authored 2026-09-13 at the owner's ask. Tool-neutral (Claude or Codex).
-`git rm` this file when it has reported. Design record: [D14](../bugs/D14.md).
+`git rm` this file and its prompt-map row when it has reported. Design record:
+[D14](../bugs/D14.md).
+
+Start with `git log --oneline -6`, `git pull`, and `git status --short`.
+The job was authored at `6fccbde`; compare its named code, TestKit, D14 and
+policy inputs through HEAD, then re-derive only groups that moved.
 
 ## 0 · Your licence
 
@@ -10,8 +15,9 @@ in §2 is a **claim** — house doctrine (`CLAUDE.md`) says authored text is a c
 including ours. Test what your conclusion rests on and overturn what is wrong;
 "the brief was wrong about X" is a better result than a tidy table.
 
-- ⭐ **Go anywhere.** The pack, the TestKit, the archived trees, the shipped packs,
-  the logs, the archive. Nothing is out of scope because this brief didn't name it.
+- ⭐ **Read anywhere relevant.** The pack, the TestKit, the archived trees, the
+  shipped packs, logs and archive are evidence sources. Write scope remains the
+  report/D14/checklist deliverable below; reading authority is not mutation authority.
 - ⭐ **Chase your own reading.** If the real exposure is a shape nobody here has
   described, report that instead and say why it matters more.
 - ⭐ **The owner's framing may be wrong too.** They said full-body replacements
@@ -34,12 +40,13 @@ Binding, and these are house process rather than limits on thinking:
 ## 1 · Orient
 
 Use the project and bindings already supplied by `CLAUDE.md` or `AGENTS.md`. Read
-`docs/agent/STATE.md`, then [D14](../bugs/D14.md). Open a **live todo list** and keep it current — the owner
+`docs/agent/STATE.md`, grep D14 in `docs/agent/bugs/INDEX.md`, then open only
+D14's needed sections. Open a **live todo list** and keep it current — the owner
 reads it to decide when to step in. Add items for your own lines of enquiry.
 
 ## 2 · What is already measured — verify anything load-bearing
 
-Pack, 2026-09-13 (`Code/Fix_*.lua`, 45 modules):
+Historical seed at `6fccbde`, 2026-09-13 (`Code/Fix_*.lua`, 45 modules):
 
 | measure | count |
 |---|---|
@@ -105,8 +112,8 @@ matter**, not that all 21 were visited.
 
 ## 5 · Worth considering, not prescribed
 
-- The TestKit already carries **97 probes**. Some may already answer (c) for some
-  modules — check before proposing new ones.
+- The TestKit already carries a broad probe set. Emit its current total and
+  inventory the relevant probes before proposing new ones.
 - A probe that serves both §3 products at once is worth more than two that serve one
   each.
 - If the honest finding is *"the desk instruments are sufficient and the runtime
@@ -128,11 +135,24 @@ Label claims SOURCE / MEASURED / INFERRED, keep a **Not opened** list, and say w
 each refutation depends on. `doccheck` GREEN before committing; commit with a
 pathspec after checking `git status` for a peer's uncommitted work.
 
+## 6a · Derived facts and falsifiers
+
+| fact | measured | falsifier |
+|---|---|---|
+| the 24/21 delegation split is only a historical seed | proxy grep recorded at `6fccbde` | re-enumerate the current registered module set, inspect each classification, and reconcile against `python tools/doccheck.py --emit-counts` |
+| bodycheck had full manifest coverage but declared a class-c blind spot | bodycheck output/source at `6fccbde` | run current `python tools/bodycheck.py` and inspect its current declared limits |
+| runtime body inspection was unavailable in the mod sandbox | named TestKit log evidence in the authoring pass | search current TestKit/log evidence with a positive control; do not infer continued absence from the old line |
+| D14 remains the design record and this prompt remains named by current status | focused bug-index and STATE reads at execution | re-run the two focused lookups; stop if status or owner authority moved |
+
 ## 7 · Live todo list — change it as you go
+
+At execution start mark item 1 `IN PROGRESS` and later items `PENDING`; keep
+exactly one unfinished commit-and-verify unit in progress and put stable results
+in its text.
 
 - [ ] 1. Orient; re-derive the delegation split properly (the grep is a proxy)
 - [ ] 2. Per-module (a)–(d) for each genuine non-delegating module
-- [ ] 3. Check the TestKit's 97 probes for existing coverage
+- [ ] 3. Emit and check the current TestKit probe set for existing coverage
 - [ ] 4. Rank by exposure; name the few that matter
 - [ ] 5. Price the ongoing per-patch cost of whatever you propose
 - [ ] 6. Your own hypotheses — add them here as you form them

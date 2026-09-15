@@ -97,6 +97,20 @@ were added. Checklist item 24 now records the completed preview floor and keeps
 the separately owner-retained screenshot follow-up honest. PROMPT MAP and
 doccheck remained GREEN; `--regen-waiting` moved only generated line anchors.
 
+Other retained root repairs: C92 keeps ck172's build/test authority and shipping
+hold; its prompt now starts from `b74a84f`, routes through bug/fact indexes,
+requires the probe sweep before tests, removes its map row on consumption and
+states falsifiers. `DLC_DEEP_CHECK.md` keeps the owner's explicit subagent
+instruction; its old source counts are now authoring facts to re-emit, two dead
+relative TRIAGE paths were repaired, and its lifecycle atomically replaces the
+root one-off/map row with a mapped `dlccheck/` chain without firing it.
+`STANDDOWN_AUDIT.md` keeps the owner-authorised question but limits write scope,
+looks D14 up through the index, labels 21/45 as the old seed instead of a current
+total and requires re-derivation. The prompt map descriptions were reviewed for
+meaning, not only path agreement. Sizes moved C92 11,588→13,439 B, DLC
+15,464→17,691 B and stand-down 7,428→8,961 B; additions are execution controls
+and falsifiers, not new job scope.
+
 ## Live progress
 
 - [IN PROGRESS - not executed] Prove the execution boundary: fresh context,

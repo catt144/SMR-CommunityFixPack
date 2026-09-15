@@ -18,13 +18,15 @@ Authored against `9ae0d50`. The owner override authorizes this brief in
   map/checklist pointers; pre-cut 17,381 B / SHA-256
   `CB23D850DA6E7B2E5EB2A0B5C6F4EC5E38A766862F64C78DC5E07F5A43C46E1A`;
   prompt map passes at five root one-offs and doccheck is GREEN.
-- [COMPLETE - pending commit] Reconciled the owner-retained capture job:
+- [COMPLETE - `a6fdf05`] Reconciled the owner-retained capture job:
   cut its completed preview-art and archived-console branches, repair its dead
   routing, and preserve the still-unfired screenshot work; 15,623 B to 14,060 B,
   owner KEEP wording and preflight/lifecycle preserved.
-- [IN PROGRESS - findings proved, not yet edited] Repair proved execution-contract drift in
-  the retained C92, DLC and stand-down jobs; update the root map and verify.
-- [PENDING - waits for root audit] Audit `fixtoggles/` as a live chain: topology,
+- [COMPLETE - pending commit] Repaired proved execution-contract drift in the
+  retained C92, DLC and stand-down jobs: git/staleness starts, file-level reads,
+  derived-fact falsifiers, live-progress/lifecycle controls, dynamic count
+  wording, current DLC paths and the chain-authoring map description.
+- [IN PROGRESS - content read, findings listed] Audit `fixtoggles/` as a live chain: topology,
   prompt/support classification, lifecycle, citations and evidence routing;
   repair and verify its commit(s).
 - [PENDING - waits for fixtoggles audit] Audit the grouped
