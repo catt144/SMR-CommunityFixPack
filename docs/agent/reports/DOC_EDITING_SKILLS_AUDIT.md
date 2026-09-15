@@ -61,8 +61,9 @@ R-D follows the source section but is outside the brief's specified elements
 - Complete: baseline, gate source/output audit, remainder classifications.
 - Complete: doc-editing (`d716d9f`); prompt-authoring with WORKFLOW source removal (`7013326`).
 - Complete: pending move 1 disposition.
-- In progress: pending move 2 disposition.
-- Pending: pending move 3; size proposals; revisit criteria; final verification and consume.
+- Complete: pending move 2 disposition.
+- In progress: pending move 3 disposition.
+- Pending: size proposals; revisit criteria; final verification and consume.
 
 No new gate is selected: syntax and freshness already fail loudly; the remaining
 questions concern meaning, authority, timing or an editor's actions. Invocation
@@ -79,3 +80,7 @@ no finer model/version identifier is exposed in the transcript).
    copying the clauses there would change their task scope. The local move
    register records this reason. The existence/timing overlap with item 1
    remains a finding to carry when the authorized destination is built.
+
+2. PENDING: the save-selection duty needs the future playtest/fix-authoring
+   destination. Its dedicated source brief remains intact; no prose was
+   copied into either new skill. The local move register records the reason.
