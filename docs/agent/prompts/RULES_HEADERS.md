@@ -193,6 +193,35 @@ file teaches agents the header is noise, which is worse than no header — that 
 `ck-` stub pointer failed on 2026-09-14 (present, obeyed-looking, and non-discriminating). The doc list is
 SETTLED by the all-clear below — seven docs, named there.
 
+#### ⭐ RESOLVED 2026-09-15 — seven is a COUNT, not a CEILING, and the trigger is uniform
+
+⛔ **This brief stopped here once already.** `reports/RULE_PLACEMENT_TEST.md` states the
+owner-agreed machinery as *"a rule, **anywhere in the repo**, is written `Rule: <the duty>`"*
+under a `Must_Read_Header`; this section says seven docs. **Both stand, and here is how.**
+
+**Owner, 2026-09-15:** *"a future doc could get a rule but when it doesn't have a header already,
+an agent authoring a rule that is probably just for that doc sees no header, so it adds the doc
+rule to the unified rule list every agent needs to know. I am fine doing the 7 but as a trade the
+skill needs to pick up the slack: if a doc gets a rule that doesn't have a header, then the header
+needs to be created."*
+
+⇒ ⭐ **The absence of a header is not neutral — it is a gradient that promotes doc-local rules into
+the kernel**, because an agent with a rule and no local home files it in the one list it knows
+exists. That is kernel inflation arriving through a gap rather than through a decision.
+
+**The rule, and it is uniform by design:** ⛔ **a doc that holds a doc-local rule gets a header —
+whoever notices first.** ck179's own wording is *"the docs carrying a genuinely unique rule"*,
+which is a **criterion**; seven is what that criterion produced against the sixteen proposed docs,
+before any census existed. So:
+- **You, at census time:** if stage A2 finds a doc-local rule in a doc outside the seven, that doc
+  earns a header. ⚠️ **List every doc you add and why, in the report's Done half.** Seven remains
+  the count as of the census, and it is not a ceiling.
+- **The rule-creation skill, thereafter:** a new rule in a headerless doc means the header is
+  created then. ⚠️ **That skill does not exist yet** — build the repo-wide WARN in stage D so the
+  gap is covered until it does.
+- ⭐ Creating a header is **filing, not an existence ruling**, so it sits in the free tier of the
+  governing block's item 4. No new authority is needed for it.
+
 ### ✅ OWNER ALL-CLEAR GRANTED 2026-09-14 — with three amendments, checklist 179
 
 ⛔ **The gate below is DISCHARGED. Read these amendments before Stage C; they override the
@@ -287,13 +316,20 @@ teaches them the rule is noise.
   status + pointer, never derivation"*, and the inventory found ~30 rule occurrences in it —
   which is also why it keeps pressing its cap. Every one leaves for its tier. Status, pointers,
   holds, owes and the counts block stay.
-- **A doccheck check** — `RULES HEADERS` — asserting, for every doc on the approved list: the
-  block exists, both markers are present and correctly ordered, and it is within cap. RED on a
-  missing or oversized block on a listed doc; that is a structural check the machine can hold.
-- ⭐ **The check also carries the style, and it must stay CHEAP — it runs on every commit:**
-  the `Rule:` marker is present at line start under a `Must_Read_Header` · **no emoji on a `Rule:`
-  line** (the owner's guideline, and a one-line regex) · the rule conforms to your stage-B2 format
-  so far as that format is machine-expressible · its surface is permitted by the tier map ·
+- **A doccheck check in TWO PARTS, with different scopes — owner ruling 2026-09-15.** ⛔ Conflating
+  them is what stopped this brief mid-flight; keep the scopes distinct when you build it.
+  1. **The header-block check**, scoped to **the approved list**, **RED**: the block exists, both
+     markers are present and correctly ordered, and it is within cap. A structural check the
+     machine can hold.
+  2. ⭐ **The rule-placement check**, scoped **REPO-WIDE**, **WARN, never RED**: a `Rule:` line
+     must sit under a `Must_Read_Header`. ⚠️ **This is the load-bearing half and it exists for one
+     failure mode:** a doc that holds no header gives an agent with a doc-local rule nowhere local
+     to put it, so the rule goes into the kernel list every session reads. **Absence of a header
+     silently promotes doc-local rules to global.** This WARN is what catches that the moment it
+     happens.
+- ⭐ **The style checks, cheap because they run on every commit:** **no emoji on a `Rule:` line**
+  (the owner's guideline, and a one-line regex) · the rule conforms to your stage-B2 format so far
+  as that format is machine-expressible · its surface is permitted by the tier map ·
   ⭐ **no two surfaces carry the same canonical rule text** — this is dedupe becoming a machine
   check, and it is the payoff the style was ruled in for.
 - ⚠️ **The check asserts ADJUDICATION, not rule-ness.** No gate can decide whether something *is*
