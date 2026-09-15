@@ -209,14 +209,3 @@ only `Platform.cheats` (`Lua/Cheats.lua:1-3`). Always type the **function call**
 the console instead. (The *console* itself is separate — the Test Kit turns it on
 with `ConsoleSetEnabled(true)` + `ReloadShortcuts()`.)
 
-## Commands cited in the archived TESTING.md that could NOT be verified — do not use
-
-| Cited as | Verdict |
-|---|---|
-| **`hr.TimeScale`** (archived TESTING.md, F02 scenario: "set game speed high (cheat/`hr.TimeScale` — verify name)") | ❌ **UNVERIFIED / does not exist.** No `hr.TimeScale` anywhere in `ModTools\Src`. Use the verified `SetGameSpeedState("ultra")` (`Lua/X/HUD.lua:528`) or `UIColony:SetGameSpeed(20)` (`Lua/Colony.lua:564`) instead. |
-| **Cheat keyboard shortcuts** (Alt-B for complete-all-constructions, Alt-Shift-A for asteroid unlock, etc., as listed in the archived CHEATS_INVENTORY.md) | ⚠️ **Real in source but NOT bound on retail** — the whole shortcut tree is behind `local cond = Platform.cheats` (`Lua/XDef/GameCheatShortcuts.generated.lua:19-20`). Type the function call in the console instead. Every command in the reference table above is a verified callable function. |
-| **`CheatStartMystery(id)`** | ⚠️ **Real (`Lua/Mysteries/Mysteries.lua:91`) but self-gated** on `Platform.cheats` (`Lua/Cheats.lua:1-3`). Use the new-game mystery pick, or the explicit `Platform.cheats` flip documented in PT-15. |
-| **"Fast-forward game time by an interval"** | ❌ No such cheat exists (confirmed in the archived CHEATS_INVENTORY.md "Not found — do not look again"). Use `SetGameSpeedState("ultra")` and wait. |
-
-Everything else prescribed in this document was verified to exist in
-`A:\SteamLibrary\steamapps\common\Project Spark\ModTools\Src` at the file:line cited.
