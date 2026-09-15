@@ -743,6 +743,22 @@ sitting — 08 tests one surface instead of a 22-action one that then changes. �
 the extension turns out NOT to ride P2's proven route, the cost basis of this
 ruling is gone and it is worth re-asking rather than pressing on.
 
+**⭐ 99 AUDITED, 2026-09-14 (Fable): SHIP WITH CHANGES — the Tool Kit is yours to use.** Plain language:
+- **Is it safe for achievements?** The toolkit never registers a cheat: three sittings read `CheatsUsed` empty after
+  every kind of action it has, and the game's own list of "why an achievement could be blocked" has five entries, of
+  which the toolkit can only ever touch that one. The game will not let a mod ASK it for the final verdict
+  (`UNAVAILABLE:sandbox` is honest, not a bug), so nobody may write "eligibility PASS". One caveat you already know:
+  the More → AsyncCheat Inspect/Properties buttons open an editor window, and achievements are blocked **while it is
+  open**; close it and the block is gone.
+- **Does every line say it is the toolkit's?** Yes — every archived toolkit line in 02, 08 and the four 08b boots.
+- **What changes before you lean on it?** Eight small items in `reports/SMRTK_AUDIT.md` §11; four are one short Code
+  link (the mechanized-depot readout, the white `command` field, a watch that arms on a missing field, the console
+  bootstrap order). None needs a boot of its own. Two docs (TestKit README, PLAYTEST_HELP steps) were corrected today.
+- **Nothing here needs your word** except what ck184 already asks (the stale preflight, the RunAll question, icon vs
+  status bar). ⛔ The Stamper stays parked and is not raised.
+- **Next real sitting:** the owed ck144 (a) boot is the first one the panel serves — an agent preloads the slots
+  first (`perma/SMRTK_SLOTS.md`), then you sit.
+
 ### 2026-09-14 — 183: SMRTK 08 ran — the design half, and three questions for you
 <!-- ck:183 status:open owner:yes -->
 

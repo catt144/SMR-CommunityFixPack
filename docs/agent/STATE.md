@@ -58,22 +58,14 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   Owner's 2 pared files (`for-modders.md`, `install.md`) stay uncommitted = decision 47.
 - ⭐ FR-1 TEMP WORKAROUND MOD LIVE 09-11 (Steam 3799500849 / PDX 158711). **ALL FR-1 / Linux / NVIDIA work →
   `prompts/perma/LINUX_DISPATCH.md`.** Field: 3 working (one 10xx), 1 failing (GTX 1070, log requested).
-- ⭐ **`prompts/smrtk/` (ck175): 01-07 BUILT. ⭐ 08 RAN 09-14 attended: PASS WITH CORRECTIONS.**
-  Classes 1-17 PASS. 25 defects, `reports/SMRTK_FULL_SITTING.md`.
-  ⭐ Design half + owner's ARCHITECTURE ruling (group by task, hot bar) = **ck183**; item 6 + the More trace ANSWERED 09-14.
-  ⭐ **09 BUILT + DESK 09-14**: `reports/SMRTK_09_REBUILD.md`, TestKit `d9f8fb1`+`9057fb6`.
-  ⭐⭐ **08b RAN 09-14 attended: PASS WITH CORRECTIONS** — items 1-8+10 PASS, 9 PARTIAL. **Requirement (A)
-  RE-ESTABLISHED on the rebuilt tree: 19 cheat leaves, `used=false`** — ⛔ a SAMPLE, not universal proof.
-  11 defects repaired (TestKit `2c3d05c`), 6 routed: `reports/SMRTK_08B_SURFACE.md`, logs `archive/logs/smrtk08b_*`.
-  ⛔ **A preflight attestation was accepted 5h STALE from a different tree** — unrouted, needs a call.
-  ⚠ Stamper CUT 09-14; toolkit is 7 pages. NEXT: **99** (Fable), the only link left. 08+09+08b prompts RETIRED.
-  Verdict + corrections `reports/SMRTK_SKELETON_SITTING.md`; logs `archive/logs/smrtk02_*` (`ObjCheat` 1 in the control boot, **0** in the toolkit boot).
-  ⛔ Depot class tree + what a `UniversalStorageDepotBase` guard misses = **`EF-102`**.
-  ⛔ Eligibility stays `UNAVAILABLE:sandbox` (`EF-096`) — no-taint is necessary, NOT proven sufficient.
-  ⭐ **Owner UI ruling 09-13: floating panel DEMOTED**, ranked ladder in ck175; 03A descends it without asking.
-  Build: dock/section + fixed advanced side panel; `reports/SMRTK_FANOUT_REPORT.md`, judge `reports/SMRTK_JUDGE.md` (TestKit `87f3130`).
-  ⚠ Selected covers **106/106** source names (22 curated + 84 More, 12 async), TestKit `f093e3b`, `reports/SMRTK_03C_EXTEND.md` — desk fixtures, NOT a colony census; nothing in play.
-- ⏭ NEXT: fire `prompts/STANDDOWN_AUDIT.md` (no blocker) · `prompts/C92_ACHIEVEMENT_BUILD.md` (build+test, ⛔ ships never
+- ⭐ **`prompts/smrtk/` CLOSED 2026-09-14 — 99 (Fable) verdict SHIP WITH CHANGES**, `reports/SMRTK_AUDIT.md`. The
+  SMR Tool Kit is the owner's to use (TestKit-only, never uploads). Taint half of (A) measured CLEAN in 02/08/08b
+  (`cheats_count=0` after 490 dispatches; 19-leaf sample on the rebuilt tree); eligibility stays `UNAVAILABLE:sandbox`
+  (`EF-096`), adjudicated by closed enumeration (5 reason handlers), ⛔ never an observed PASS. Changes C-1…C-8 in the
+  report; ONE Code link (depot guard `73:58`, `76` editor colour, watch refusal, `00` bootstrap invert) takes C-1/3/5/6.
+  ⛔ Stamper parked (`FUTURE_IDEAS` 5, not agent-tracked). Depot tree = `EF-102`. Kit `2c3d05c`; 08b leftovers = ck184.
+- ⏭ NEXT: ⭐ **first slot-served sitting = the ck144 (a) boot** — fire `perma/SMRTK_SLOTS.md` with its recipes + 08b item 9
+  + a FRESH preflight (ck184 a/b rule the RunAll half) · fire `prompts/STANDDOWN_AUDIT.md` (no blocker) · `prompts/C92_ACHIEVEMENT_BUILD.md` (build+test, ⛔ ships never
   without ck172's hold lifted) · then the playtest sitting. ⛔ `SELFCHECK_PILOT` REMOVED 09-13 (`cf8d51f`).
   Owner OWES: ck144 (a) the boot · ck151 (b) dev-report scope.
   ⛔ 08 is a SEPARATE boot from ck144 (a), not a combine — it is a clean-taint experiment. ✅ Fixture CHOSEN 09-14: `SMRTK08 Fixture Sol 490` (C92 reporter's colony,

@@ -101,17 +101,20 @@ Use the SMR Tool Kit for test setup and colony life support. These instructions
 describe the 03A/03C build; sitting 08 checks the new pages in play.
 
 1. Enable the TestKit alongside the normal test mods and load your colony.
-2. Click the SMR icon on the game's dock for its menus. Press Ctrl-Shift-F11
-   to open or close the fixed advanced side panel.
+2. Click the SMR status bar (bottom-right) or press Ctrl-Shift-F11 to open or
+   close the fixed side panel; the bar shows CLEAN/TAINTED, armed count and errors.
 3. Select an object for its SMR Tool Kit section. Use Fill or Empty on a
    depot, or another supported action. Delete removes an object; Destroy
    (blow up) follows its destruction behavior. Use scratch buildings for both.
-4. Open the page you need. Sitting: marks, copy, flush, clear, pause and status reads.
+4. Open the page you need. Sitting: taint and eligibility reads; marks, copy, clear,
+   pause and Stop disaster are in the top rows. Run: target sol, the four triggers and
+   Run until, armed in one place.
 5. Selected: curated object actions, grouped More actions, dump and pins.
 6. World: disasters, speed, run-until, repairs, supplies, people and research.
-7. Agent: six prepared slots, Scratch, pins, notes, triggers and Screenshot + Mark.
+7. Agent: six prepared slots, Scratch, notes and the pin readout.
 8. Saves: Save, Load and explicit Override load for slots A, B and C, with provenance.
-9. Kit: probes after the agent's preflight, loggers, console, snapshots and scalar field watches.
+9. Kit: probes after the agent's preflight, loggers, print tap, console, snapshots and
+   the log tail. Field watches live on Selected and Run.
 10. Check the taint strip. CLEAN means no recorded cheat taint; TAINTED means
     the save is already tainted. Eligibility is a separate field and reads
     UNAVAILABLE:sandbox on this build. CLEAN does not prove achievements are eligible.

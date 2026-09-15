@@ -8,6 +8,25 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-14 — smrtk 99: the terminal audit — SHIP WITH CHANGES; chain CLOSED
+
+Session `smr-bugfixpack-3d` (R-G: Fable 5.1 throughout). Re-derived the taint invariant from the archived logs and
+the installed source rather than the chain's prose: rule-6 grep 0 lines over 8 toolkit files with the presence side
+(26 lines / 13 calls in `CheatDef.lua`, 4 `LogCheatUsed` hits tree-wide); the 18 `NetSyncEvent("Cheat…")` entry points
+enumerated and none is a function the toolkit dispatches; every `CheatsUsed` read located by log line, including 02's
+deliberate `ObjCheat` RED and its discarded scratch save (absent from disk). Tag invariant: every archived toolkit line
+carries `[SMRTK] SMRTK_`; the saved fire counter reconciled EXACTLY (363 attempts before the save = `actions=363` on
+load) once "attempt" was read as the code defines it. Idle invariant 0 by source (two toggles, both restore); live
+cycle NOT RUN. Falsifiers RED by line (foreign session, ChangeMap/SaveGameStart disarms, TAINT fire). Adjudicated
+03A/03B: D1 closed by the owner's ruling + 03C on P2's route; D2 (`00_TestCore:519`) still open, now owned. Verified
+03B's `EF-096` corrections and amended the fact (blacklist 1280–1441, `env.os` at :1620; five achievement-reason
+handlers, not four). Routed deliverables: depot guard WORTH IT (one token, `73:58`); white text = `ConsoleLog`'s
+`TextColor -1` applied by `XFontControl:SetTextStyle` to an editor with no `TextColor` of its own (`76:292`) — real
+text, not a hint. Docs vs built: TestKit README and PLAYTEST_HELP described the pre-09 six-page surface; corrected.
+Inbox audit: 08's outbox to 99 was never appended (read from its report). Consumed 99 and the folder's prompt-map
+bullet; README table fully struck. doccheck WARN verbatim in the commit body. Kickoff: the first slot-served sitting
+is the ck144 (a) boot.
+
 ## 2026-09-13 — SMR Tool Kit designed and chained (`prompts/smrtk/`, ck175)
 
 Session `smr-bugfixpack-8f` (R-G: Opus 5 for the taint/blacklist/sandbox source reads, switched to Fable 5.1 before

@@ -61,6 +61,8 @@ Declare clean-fixture needs and resource provisioning cost. No-taint is necessar
 but eligibility stays `UNAVAILABLE:sandbox` on build 24995074. Toolkit lines are
 intentional and attributed; never ask the owner about one. Stop on unexpected
 taint, engine errors or mutation; do not rerun to obtain a preferred verdict.
+End EVERY boot with a `taint_read` and an `eligibility` dispatch, so each boot's
+negative is a sample and not an absence (smrtk 99: the 08b World boot had none).
 
 If probes are needed, run the exact desktop stale-probe sweep before trusting
 them; every hit must be declared needed or made unavailable. Preload its actual
@@ -68,6 +70,9 @@ command/output/exit/hit names, full pack/TestKit HEADs, check time and brief in
 the slot's real function. At invocation set session/sitting/game from live state,
 then use `SMRTK.ProbePreflight`; no stale or empty invented attestation. Any
 load/map change expires it. Inspect 76 for the current evidence schema.
+The gate cannot see the tree's HEAD: re-run the sweep and rewrite the slot after
+EVERY pack or TestKit commit that precedes a boot; a stale attestation passed once
+(08b, five hours, a different tree — ck184 a).
 
 Parse 80 with `python tools/parsecheck.py --dir C:/Dev/SMR-BugFixPack-TestKit/Code --quiet`;
 run `python tools/doccheck.py` GREEN. Check rule 6 using `rg -n 'NetSyncEvent|LogCheatUsed'
