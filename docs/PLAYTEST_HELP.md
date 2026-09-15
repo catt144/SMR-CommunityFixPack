@@ -209,28 +209,6 @@ only `Platform.cheats` (`Lua/Cheats.lua:1-3`). Always type the **function call**
 the console instead. (The *console* itself is separate — the Test Kit turns it on
 with `ConsoleSetEnabled(true)` + `ReloadShortcuts()`.)
 
-## Save fixtures — create these once, reuse them
-
-Make each one, then **save under the given name**. Every open test below names its
-fixture. Keep a pristine copy of each (save-as with a `-base` suffix) so a
-destructive test doesn't cost you the setup. (SAVE-C, the two-dome fixture, has
-served its tests — PT-12/13/14 are archived — and is no longer needed.)
-
-| Fixture | How to build it | Feeds |
-|---|---|---|
-| **SAVE-A — Sandbox colony** | New game, any sponsor, **default game rules** (disasters ON, meteors at least "Low"), Mars surface. Land, build one dome with ~20 colonists, a Medical Center, a Martian Express station with a short track, and a landed rocket. `MultiCheat()` + `CheatAddFunding(500000000)` to remove build gating. For PT-27/PT-28 the save also needs the **Dust In The Wind** game rule (set at new-game). | PT-10, PT-27, PT-28 |
-| ~~**SAVE-B — No-Disasters underground**~~ **RETIRED 2026-07-30** | Both consumers are done: PT-11 archived 2026-07-29 (its buildings turned out not to be needed at all), and **PT-25 never needed the underground in the first place** — its setup line was mis-specified and corrected at the keyboard: tunnels are a **surface** building and the underground build menu has none. Do not build this fixture. | — |
-| **SAVE-D — St. Elmo's Fire mystery** | Easiest: start a **new game and pick "The Power of Three / St. Elmo's Fire" (`LightsMystery`) as the mystery at setup**, then play/skip forward until Light Traps are buildable and have caught wisps. (Console alternative in PT-15.) | PT-15 |
-| **SAVE-E — Frontier save (underground elevator + asteroid)** | From a healthy mid-game colony: `UIColony:UnlockUnderground()`, `CheatRevealDarkness()`, build an **Elevator** and an **underground dome with free housing**; then `UIColony:OnDiscoveryCompleted("Asteroid", false, true)` and build/land an **Asteroid Lander** with a **MicroG Habitat** and a couple of colonists on the asteroid. `dbg_ToggleRocketInstantTravel()` when running lander tests. | PT-18 |
-| **SAVE-F — Uninstall-safety copy** | Just a save made *while the fix pack is enabled* — copy of SAVE-A after ~1 sol of play is fine. | PT-20 |
-| *(Mirror Sphere save)* | A game running the **Mirror Sphere** mystery, picked at new-game setup. | PT-30 |
-| *(Live colony)* | The long-running real colony — the standing watches, the wave-6 disaster work and the module partials all run there. (PT-54 was retired unrun 2026-08-01; the wave-6 disaster verification is now the F86 Tier-1 build's own legs.) | PT-52, PT-53, PT-42, PT-44, PT-46 tail, PT-47, PT-48, PT-35, PT-37 |
-
-Rough effort: SAVE-A ~20 min, SAVE-D ~20, SAVE-E ~30 (SAVE-B is retired). SAVE-E is
-the expensive one; do all its remaining work (PT-18) in one sitting.
-
----
-
 ## Commands cited in the archived TESTING.md that could NOT be verified — do not use
 
 | Cited as | Verdict |
