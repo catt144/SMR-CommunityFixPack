@@ -1,7 +1,8 @@
 # Doc rules architecture — proposal, 2026-09-14
 
 **Nothing has moved.** This is a design for the owner to rule on, built on the inventory in
-[RULES_HEADERS](RULES_HEADERS.md) (852 rule occurrences, Codex, `968c58e`). It does not
+[RULES_HEADERS_INVENTORY.json](RULES_HEADERS_INVENTORY.json) (852 rule occurrences, Codex,
+`968c58e`). It does not
 re-derive that inventory; it re-cuts the *migration* against a three-tier model the owner
 specified on 2026-09-14, and it reverses one part of the standing proposal.
 
@@ -73,8 +74,9 @@ neither goal 1 nor 2 for these nine files.
 | `prompts/perma/HANDOFF_ORCHESTRATOR.md` | owner-only retirement |
 | `prompts/perma/RELEASE_OUTBOX.md` | append/clear lifecycle, no silent deletion |
 
-**Seven, not sixteen** — and nine deletions alongside. ⛔ Byte counts for the seven are in
-`RULES_HEADERS.md`'s table and must be **re-emitted before writing**, not inherited.
+**Seven, not sixteen** — and nine deletions alongside. ⛔ Byte counts must be **re-emitted before
+writing**, never inherited; the sizes as built are in `reports/RULES_HEADERS.md`, and doccheck's
+`RULES HEADERS` line emits them live.
 
 ## 3 · Tier 1 — the permanent list
 

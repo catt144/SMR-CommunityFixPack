@@ -88,10 +88,12 @@ closed chain** — take it with the next TestKit link, never as its own errand.
 - **Shape: one row in the `leaves` table.** `method_for` (`73:51-53`) already hides a leaf the object
   does not carry, so it appears only on construction sites. TestKit only, 0 shipped hashes, game closed.
 
-⭐⭐ **EFFORT 2 — the doc overhaul (ck176–ck183), owner-driven and peer-run.** `prompts/RULES_HEADERS.md`
-is its live brief: N scattered rules become local header blocks plus ONE kernel rule. ⛔ **Sequencing
-ruled by the owner: SMRTK finishes first, then RULES_HEADERS re-fires** — ✅ **SMRTK is finished**, so
-this is the next effort to pick up. ⚠️ Its seat carries the STATE
+⭐⭐ **EFFORT 2 — the doc overhaul (ck176–ck183), owner-driven and peer-run.** The rules half has
+landed: scattered rules are now local header blocks plus a kernel list in `CLAUDE.md`, gated by
+doccheck's `RULES HEADERS` and `RULE PLACEMENT`, with the migration recorded in
+`reports/RULES_HEADERS.md`. ⭐ The document half is next and its live brief is
+`prompts/DOC_EDITING_SKILLS.md` — build `doc-editing` and `prompt-authoring`, but audit the
+runbook against the gates first, because most of it is already gated. ⚠️ Its seat carries the STATE
 policy and enforces it — **corrections SUBSTITUTE, they never stack**, and a fact fails STATE's
 admission test unless it is universal to *every* session. That is why `EF-102` exists.
 
@@ -160,8 +162,8 @@ bounded.
 ## 3 · Method — only what has no other home
 
 ⛔ **Two of these are WORKFLOW rules, not this file's: read them there, they are canonical and dated.**
-**Rule 5b** replies are PULL-ONLY (`WORKFLOW.md:76`) · **rule 5a** a ruling carries the state it was made in
-(`:60`). ⚖️ The **VOICE RULE** lives with the text it binds: `reports/still-needed/WORDING_RULED.md` and
+**Rule 5b** replies are PULL-ONLY · **rule 5a** a ruling carries the state it was made in — both
+numbered in `WORKFLOW.md`; find them by number, never by line. ⚖️ The **VOICE RULE** lives with the text it binds: `reports/still-needed/WORDING_RULED.md` and
 `perma/PUBLIC_SURFACE_SWEEP.md`.
 
 What is only here:
