@@ -1,5 +1,41 @@
 # RULES_HEADERS — inventory and owner-gate proposal
 
+## Final implementation continuation — 2026-09-15
+
+The owner gate described by the historical analysis below is discharged. This continuation
+supersedes the historical proposal where they differ and records the style before any corpus
+restyle is applied. Baseline: HEAD `57ca926b5bb57c302034819fddf536047d129fa9`;
+`docs/agent/STATE.md` 12,930 raw bytes, SHA-256
+`df45ad35533d57c197969eae61de929b39fb4c7294714a5507356884ebd98bbe`; push set
+42,602 B against 40,960 B. Commands: `Get-Item`, `Get-FileHash`, and
+`python tools/doccheck.py`. The pre-write tree was clean and doccheck was GREEN.
+
+### Canonical writing style — decided before application
+
+The canonical physical form is exactly one line:
+
+```text
+Rule: <present-tense imperative duty ending in a period> [A3: pass]
+```
+
+The line begins in column 1 under `## Must_Read_Header`, between literal `<!-- RULES -->`
+and `<!-- /RULES -->` markers. A duty uses an explicit action and object; prohibitions use
+`Do not`. Paths and literal commands use backticks. One line carries one independently
+violable duty. A rule line contains no emoji, bold markup, history, date, rationale, example,
+severity label, shout-case synonym such as `NEVER`, or conjunction joining separate duties.
+
+This form makes the marker, adjudication verdict, and most style constraints machine-checkable.
+It also makes duplicates converge on the duty text between `Rule: ` and ` [A3: pass]`, so exact
+deduplication is a grep/string comparison rather than a fresh prose judgement. Context, receipt,
+enforcer, expiry, source location, and any owner ask belong in the census manifest/report, not in
+the rule line; putting them in the canonical text would make identical duties drift.
+
+The header cap is measured as UTF-8 bytes after normalising line endings to LF, from and including
+`## Must_Read_Header` through and including `<!-- /RULES -->`. WARN begins above 1,024 B and RED
+above 2,048 B. This unit is stable across LF/CRLF checkouts.
+
+Executed agent: Codex (GPT-5), from the active system identity. No subagents were used.
+
 Analysis only, 2026-09-14. No binding rule, header, kernel line, checker or prompt lifecycle has changed. The owner authorized finishing the inventory with X1 unresolved after the earlier partial stop. Migration is still awaiting explicit approval.
 
 SOURCE anchor: `86c639994044ed07b29fd869013f4b7cf286a131`. All inventoried source bytes still match this anchor. Packaging HEAD: `86c639994044ed07b29fd869013f4b7cf286a131`. Executed agent: Codex, from transcript identity; a precise serving-model identifier is not exposed and is not inferred. No subagents used.
