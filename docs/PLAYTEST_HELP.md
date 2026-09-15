@@ -398,28 +398,6 @@ leg possible at all. Rationale in `TestKit/Code/00_TestCore.lua:60-80`.
    Then `FlushLogFile()`.
 5. **Disarm afterwards**: re-comment both lines.
 
-### ⛔ NEVER read a MarsDebug tally as a retail tally
-
-**The debug build's `87/87` is not a better version of retail's `78 PASS / 9
-SKIP` — it is a DIFFERENT measurement, and for at least one probe a misleading
-one.** `TechDescriptionBuilding` SKIPs on retail (`the tech has no description
-T`) and **PASSes on MarsDebug** (`description names Underground Medium Dome`).
-That is not the probe improving: it is **F98** — `T(id, text)` discards the
-replacement literal in a non-dev build (`localization.lua:250-252`) but keeps it
-in a dev build, so `Fix_TechDescriptionBuilding` genuinely works here and is a
-no-op in the build players use. The probe therefore reports green in the only
-environment where the fix works and is silent in the one that matters.
-**Quoting "87 PASS" as evidence the pack is healthy on retail would be wrong,
-specifically about F25/F98.** Retail coverage was `78/87` in the single-mod era;
-⛔ **as of 2026-08-13 the suite is 94 probes and the both-mods retail read is
-`78 PASS / 16 SKIP` (measured, log `archive/rs_r0_*`)** — the six SKIPs added
-since the 88-probe era are the Save Rescue probes standing down because that
-separate rescue mod is not part of your standing rig (with it loaded the same
-run reads `84 PASS / 10 SKIP`). SKIPs enumerated BY NAME in `agent/STATE.md`
-— the non-reporting set is known and enumerated; that is the number to quote.
-
----
-
 ## The co-run rig — how an agent-driven launch actually runs
 
 **✅ EXECUTED FOUR TIMES, 2026-08-04** (co-run #0 walking skeleton + co-run #1

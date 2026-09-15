@@ -53,6 +53,9 @@ to step in. Include the elements below in every brief for another session.
 - For a salvage or demolition check, write the cursor verdict explicitly:
   salvage targets objects rather than hexes, names the object it will remove,
   and a bare red `Salvage` means nothing under the cursor is targetable.
+- Label every probe tally with its build and enumerate SKIPs by name. Never use
+  a MarsDebug pass as retail evidence: the builds run different probe sets and
+  can produce different behavior (`EF-044`).
 
 ## Derived facts and falsifiers
 
