@@ -1,11 +1,12 @@
 # Playtest Help — setup, commands, reference
 
-Companion to [PLAYTEST_CHECKLIST.md](PLAYTEST_CHECKLIST.md), which carries
-ONLY the tests. Everything here is reference material for running them:
-ground rules, the external-validity rule, cheat discipline, console facts,
-the verified command table, Test Kit helpers, the stress harness, and the
-save-fixture recipes. Split out of the checklist 2026-07-30 so tests are
-findable there and commands are findable here.
+## Must_Read_Header
+<!-- RULES -->
+Rule: Keep this file limited to reference material for running `PLAYTEST_CHECKLIST.md` and keep tests in the checklist. [A3: pass]
+<!-- /RULES -->
+
+This companion contains setup guidance, console facts, command references,
+Test Kit helpers, stress-harness notes, and save-fixture recipes.
 
 ---
 
