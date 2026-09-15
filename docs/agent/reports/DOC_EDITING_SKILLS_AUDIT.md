@@ -63,8 +63,9 @@ R-D follows the source section but is outside the brief's specified elements
 - Complete: pending move 1 disposition.
 - Complete: pending move 2 disposition.
 - Complete: pending move 3 disposition.
-- In progress: size report and proposals.
-- Pending: revisit criteria; final verification and consume.
+- Complete: size report and proposals (checklist 186).
+- In progress: revisit criteria.
+- Pending: final verification and consume.
 
 No new gate is selected: syntax and freshness already fail loudly; the remaining
 questions concern meaning, authority, timing or an editor's actions. Invocation
@@ -92,3 +93,29 @@ no finer model/version identifier is exposed in the transcript).
    relocation exclusion still limits this task. The dissolution task can move
    this line with its source removal. Neither source nor destination was
    changed for this row; the local register records the scope reason.
+
+## E. Sizes and proposed caps
+
+MEASURED at `5245727a713afc83dd6ee330a373f429abefc97f`:
+`python tools/doccheck.py`, selecting `SKILLS:` and its following six lines.
+The implementation counts the complete LF-normalized SKILL.md, including front
+matter, although the output labels the total as bodies. Mirrors are not counted
+twice. Reconciled using `skill_names()` and `len(lf_bytes(path))` from doccheck.
+
+| Skill | Bytes |
+|---|---:|
+| doc-editing | 2461 |
+| prompt-authoring | 2912 |
+| smr-bug-library | 3622 |
+| smr-orientation | 3248 |
+| smr-session-close | 4490 |
+| Total (5 skills) | 16733 |
+
+Proposal for the owner: keep a common warning threshold of **3,072 B** and
+choose **5,120 B** as the hard limit. Both new skills fit the design target; the
+existing skills remain visible review candidates above that warning. The hard
+limit accommodates the current session-close procedure without forcing an
+unreviewed cut of obligations to restore enforcement. It is a ceiling, not a
+growth target. The later attended audit should decide whether each existing
+skill earns its space before the owner restores caps. Checklist 186 carries
+the proposal; no number or cap switch in doccheck has been changed.

@@ -28,6 +28,22 @@ Item 177 records the still-open question of mechanically enforcing checklist mar
 
 ## Decisions waiting on you
 
+### 186: choose skill caps after the documentation skills first cut
+<!-- ck:186 status:open owner:yes -->
+
+2026-09-15, requested by the documentation-skills brief: the new `doc-editing`
+and `prompt-authoring` skills fit the 3,072 B design target. Measured at
+`5245727` with `python tools/doccheck.py` (SKILLS section): doc-editing 2,461 B;
+prompt-authoring 2,912 B; smr-bug-library 3,622 B; smr-orientation 3,248 B;
+smr-session-close 4,490 B. These are complete LF-normalized SKILL.md sizes.
+
+**Proposed, not set:** common warning **3,072 B**, hard limit **5,120 B**. Keep
+pressure to review the larger existing skills while allowing the current
+session-close procedure without deleting obligations just to restore a cap.
+The later attended skills/rules audit judges the contents; the thresholds and
+restoration remain yours. Caps are still down. Evidence and revisit criteria:
+[documentation skills report](agent/reports/DOC_EDITING_SKILLS_AUDIT.md).
+
 ### 2026-09-15 — 185: two new fixes are FILED and deliberately UNAUTHORED — say when to build each
 
 <!-- ck:185 status:open owner:yes -->
