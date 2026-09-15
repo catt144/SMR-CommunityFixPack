@@ -134,6 +134,6 @@ BUILD STATE (emitted by tools/doccheck.py)
 - modules: 46 registered (46 default-active, 0 optional-gated files)
 - Code/*.lua files: 47
 - TestKit probes: 97
-- BUGS index rows: 119 F + 13 D + 98 C
+- BUGS index rows: 119 F + 13 D + 99 C
 ```
 Records citing **1.0.7.396349** (`EF-014`) predate the baseline move; INSTALLED is **1.1.0**.
