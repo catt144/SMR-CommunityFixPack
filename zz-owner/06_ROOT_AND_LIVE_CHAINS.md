@@ -26,13 +26,14 @@ Authored against `9ae0d50`. The owner override authorizes this brief in
   retained C92, DLC and stand-down jobs: git/staleness starts, file-level reads,
   derived-fact falsifiers, live-progress/lifecycle controls, dynamic count
   wording, current DLC paths and the chain-authoring map description.
-- [COMPLETE - pending commit] Audited `fixtoggles/` as a live chain: all 13 bodies
+- [COMPLETE - `eec864d`] Audited `fixtoggles/` as a live chain: all 13 bodies
   are fireable prompts and its README is the permitted manifest; repaired stale
   counts/paths/testing bindings, external-repo preflight and terminal empty-folder lifecycle.
-- [IN PROGRESS - waits for fixtoggles commit] Audit the grouped
+- [COMPLETE - pending commit] Audited the grouped
   `smrcf-modbrowser/` + `smrcf-verify/` set and its `SMRCF_CHAIN_SET.md` entry;
-  repair and verify its commit(s).
-- [PENDING - waits for SMRCF commit] Clean the three uncleaned survivors named in
+  retained the owner-authorised work while removing dead historical planning,
+  repairing C52's removed chain-A dependency and making descendant lifecycle explicit.
+- [IN PROGRESS - waits for SMRCF commit] Clean the three uncleaned survivors named in
   Commit 4; verify and commit, consuming this brief.
 
 One item per commit-and-verify unit, exactly one unfinished item in progress.

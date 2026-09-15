@@ -1,7 +1,7 @@
 # C·01 — the spec · decide what may be built, and route what is not ours
 
 **This prompt exists because a wrong call here poisons every build downstream.**
-Read `README.md`, then `STATE.md`, then `FIX_POLICY.md` (§3a, §4, §365-368),
+Read `README.md`, then `docs/agent/STATE.md`, then `docs/agent/FIX_POLICY.md` (§3a, §4),
 then this.
 
 ## 0 · Staleness check
@@ -9,8 +9,11 @@ then this.
 git log --oneline -10
 git pull
 ```
-⛔ **Gated on chain A job 2.** Without the `AsyncPopsDownloadFile` answer,
-defect 1 cannot be specced. If A is unconsumed, **stop and say so.**
+⛔ **Start only after an explicit owner unpark of C52 and after the root firing
+freeze is lifted.** The former chain-A runtime-symbol job was removed. As this
+link's first technical preflight, determine whether `AsyncPopsDownloadFile`
+exists in the runtime environment. If absent, record and drop defect 1; continue
+to adjudicate defects 2 and 3.
 
 ## 1 · 🗒 Live todo list from your first action — one item per defect.
 
@@ -35,13 +38,13 @@ where it might cut the other way.
 
 ## 3 · Job 2 — the decision each defect needs
 
-**Defect 1 (screenshots).** Two gates: does `AsyncPopsDownloadFile` exist
-(chain A), and is a **§1.5 full replacement** of a 63-line function acceptable
+**Defect 1 (screenshots).** Two gates: does `AsyncPopsDownloadFile` exist at
+runtime, and is a **§1.5 full replacement** of a 63-line function acceptable
 here? `FIX_POLICY` §365-366 requires an explicit user decision for a §1.5 on an
 R3; this is R1/R2, so the letter does not bind — but the *reason* does, and the
 pack's ~29 existing full replacements are its patch-rot exposure.
 ⇒ **Package this as an owner decision with a recommendation**, per
-`CHAIN_METHOD` §4.3, optionally with provisional go-ahead ("build, not locked,
+`docs/agent/reports/CHAIN_METHOD.md` §4.3, optionally with provisional go-ahead ("build, not locked,
 the audit reviews it").
 
 **Defect 2 (hyperlinks).** The repair is to stop suppressing a path the engine
@@ -59,7 +62,7 @@ write no fix.** Declining this is a full, successful outcome.
 
 Fill in `02_BUILD_opus.md` with only what survived, and `03_SITTING_owner.md`
 with what the owner must actually look at. **Tag every spec detail with
-provenance** — `CHAIN_METHOD` §3: *specs are authoritative on design, unreliable
+provenance** — `docs/agent/reports/CHAIN_METHOD.md` §3: *specs are authoritative on design, unreliable
 on detail*; 7 of the prompt-7-era specs had a defective supporting detail while
 all 7 shapes survived. Say plainly in the build brief: **re-verify the route even
 though the design is settled.**

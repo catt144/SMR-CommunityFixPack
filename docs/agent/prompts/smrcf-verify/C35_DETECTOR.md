@@ -2,8 +2,11 @@
 
 Paste into a fresh Claude Code session. **Written 2026-09-09** (`smrcf-bugfixpack-0e`,
 on-call) at the owner's instruction to *rewrite* chain A rather than run or delete
-it. **Start with `git log --oneline -10` · `git pull` · read `agent/STATE.md`
-(mandatory).**
+it. **Start with `git log --oneline -10` · `git pull` · `git status --short`;
+read `docs/agent/STATE.md` (mandatory), then C35 through
+`docs/agent/bugs/INDEX.md`, `docs/agent/FIX_POLICY.md`,
+`docs/agent/WORKFLOW.md` and this prompt.** Compare named inputs with this
+prompt's history and re-check moved groups before writing.
 
 > ⚖️ **WHY THIS FILE REPLACED A THREE-FILE CHAIN.** Chain A was *"one unattended
 > launch answers four questions and arms two standing detectors, owner cost
@@ -11,7 +14,7 @@ it. **Start with `git log --oneline -10` · `git pull` · read `agent/STATE.md`
 >
 > | original job | why it is gone |
 > |---|---|
-> | 1 · dust-devil marker reachability | the defect it gated is **fixed in 1.1.0 vanilla** — `facts/EF-084.md` |
+> | 1 · dust-devil marker reachability | the defect it gated is **fixed in 1.1.0 vanilla** — `docs/agent/facts/EF-084.md` |
 > | 2 · does `AsyncPopsDownloadFile` exist at runtime | serves `C52`, which is `parked` by owner ruling 2026-08-20 |
 > | 3 · is map generation drivable from Lua | existed to plan chain D, **consumed** `49e32bf` |
 > | 4 · does any save hold a Jumbo Cave | `C25` was confirmed from a field save and shipped as `F110` |
@@ -133,7 +136,7 @@ ride-along). ⚖️ **The decision is the owner's, and it belongs in
   condition no longer exists ⇒ that is an **ANSWER, not a failure**: `C35` may be
   vanilla-fixed like the dust-devil rider was. Check `EF-084` for the pattern,
   read both trees (1.1.0 live, 1.0.7 at `C:\Dev\SMR-SrcArchive\1.0.7.396349\Src`),
-  and if so file the refutation as a **`facts/` entry** and flip `C35` — do not
+  and if so file the refutation as a **`docs/agent/facts/` entry** and flip `C35` — do not
   build a detector for a defect that is gone.
 - **Watching it needs a behaviour change** ⇒ do not install it; say so.
 
@@ -157,9 +160,14 @@ doc commit. `python tools/doccheck.py` GREEN before the doc commit, and a WARN g
 of individual FILE paths (the git index is shared with several live sessions), then
 **push** the pack — pushing is standing-allowed.
 
+Before any test, run the exact TEMPORARY sweep in `docs/agent/WORKFLOW.md` and
+apply the current probe-age/change obligation from `docs/agent/STATE.md` at the
+next playtest. Probe age never lets an agent refuse owner-directed work. Keep a
+live todo list and write `PROBE SWEEP:` in each result commit.
+
 ⛔ **`git rm` this file when the job is done**, and name its grave
-(`CHAIN_METHOD.md:282`). If the folder ends empty, `smrcf-verify/` is finished and
-chain A is closed — which also discharges the last live row of
-`prompts/SMRCF_CHAIN_SET.md`, whose own rule is that it is deleted by the last
-chain of the set to close. ⚠️ Chain C (`smrcf-modbrowser/`) is **kept by owner
-ruling**, so it is NOT dead — check before concluding the set has closed.
+(`docs/agent/reports/CHAIN_METHOD.md`). If the folder ends empty, `smrcf-verify/` is finished and
+chain A is closed. Remove `smrcf-verify/` from the grouped prompt-map row and
+update `docs/agent/prompts/SMRCF_CHAIN_SET.md` in the same commit. This does not
+close the set while chain C (`smrcf-modbrowser/`) remains owner-kept and parked;
+only the last descendant deletes the grouped entry and its root map row.

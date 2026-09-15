@@ -60,14 +60,14 @@ The `declared class` values below are gate inputs, not conclusions inferred from
 | `STANDDOWN_AUDIT.md` | `prompt` | **LIVE, authored 2026-09-13** (owner ask): can full-body replacements stand down when vanilla fixes a defect? The old 21-of-45 split is an explicitly re-derived seed, not a current total; the audit tests `bodycheck`'s class-c blind spot and runtime detector options. Design record [D14](../bugs/D14.md). |
 | `DLC_DEEP_CHECK.md` | `prompt` | live one-off chain-authoring job after the fix pack is stable; re-emits the DLC inventory, writes a mapped `dlccheck/` chain, then consumes itself without firing a link |
 | `CAPTURE_SITTING.md` | `prompt` | owner ruling 09-09: KEEP ("we may get to it"); still-unfired screenshot passes A–E, with current-consumer/fixture preflight; preview-art and archived-console branches consumed |
-| `SMRCF_CHAIN_SET.md` | `prompt` | owner ruling: keep for now (it goes with `smrcf-modbrowser/` and `smrcf-verify/`) |
+| `SMRCF_CHAIN_SET.md` | `prompt` | owner ruling: keep the C35 detector plus parked C52 chain; descendants are independent and update this grouped entry as they close |
 
 ## Chain folders
 
 | chain | declared class | state |
 |---|---|---|
 | `fixtoggles/` | `live` | authored 09-11: on/off controls per fix; its README is the manifest, checklist 148 |
-| `smrcf-modbrowser/`, `smrcf-verify/` | `live` | grouped chain entry; see `SMRCF_CHAIN_SET.md` |
+| `smrcf-modbrowser/`, `smrcf-verify/` | `live` | grouped entry: C35 detector is fireable only after the root freeze; C52 stays parked until an explicit owner unpark |
 
 **New prompts:** a reusable one goes in `perma/`; a one-off goes in the root and, when consumed,
 deletes **both** itself and its row above in the commit that lands its result.

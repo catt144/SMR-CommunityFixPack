@@ -1,113 +1,88 @@
-# Chain C — `smrcf-modbrowser` · `C52`, standalone because it is complex
+# Chain C — `smrcf-modbrowser` · three C52 browser findings
 
-> ⚖️ **OWNER RULING 2026-09-09: KEEP FOR NOW.** Reviewed in the prompt-pruning
-> pass and deliberately retained while chains B and D were retired. ⛔ **Not a
-> licence to run it** — `C52` is still `parked`/frozen by the owner's 2026-08-20
-> ruling, and its gate on chain A job 2 (`AsyncPopsDownloadFile` has zero
-> definitions in all of Src) is unresolved. What earned the keep is that the three
-> **source findings below still hold and are the most reusable material in the
-> whole `SMRCF_CHAIN_SET` backlog.**
->
-> ⛔ **CORRECTION 2026-09-09 — I claimed defect 3 was "live for US" and it is
-> NOT. Recorded rather than quietly deleted.** The claim was that replacing our
-> `preview.png` without a version bump would leave existing players on the old
-> image. Re-read on 1.1.0
-> (`CommonLua/Libs/Paradox/ParadoxMods.lua:221-225`): the cache path is
-> `PdxModsScreenshotsPath .. mod.Pdx.ModID .. "_" .. mod.Pdx.PreferredVersion .. ext`
-> and the fetch is skipped only `if not io.exists(file_path)`. The key therefore
-> contains the PORTAL VERSION — and `editor/version rail (agent/prompts/perma/release_prompt.md § Release rails)` is that **every** upload bumps our
-> version (the Mod Editor save runs `version = version + 1`, and both portals force
-> that save), so the path changes on every upload and the image always refetches.
-> ⇒ **The stale-preview risk is foreclosed for us by editor/version rail (agent/prompts/perma/release_prompt.md § Release rails)**, and nothing needs
-> adding to `UPLOAD_WORKFLOW`. ⚠️ It remains a real vanilla defect for the
-> browsing case — a thumbnail replaced without any version change is cached
-> forever — which is why `C52` defect 3 still stands as filed. What was wrong was
-> only my "it applies to our own upload route" inference.
->
-> ⚠️ Staleness: written 2026-08-16 against 1.0.7 and a 74–77 module tree (now 44).
-> The `ParadoxMods.lua` / `HTMLParser` / `ModManager.lua` line numbers below are
-> **1.0.7** and MUST be re-derived against 1.1.0 before any build — both trees are
-> on disk (`ONCALL_HANDOFF` §3), so that is a cheap two-sided check now.
+> ⚖️ **OWNER RULING 2026-09-09: KEEP FOR NOW.** The owner deliberately retained
+> this chain while others were retired. ⛔ This is not permission to run it:
+> `C52` remains `parked` by the owner's 2026-08-20 ruling. Link 01 may start only
+> after the owner explicitly unparks C52 and the root firing freeze is lifted.
 
-Three defects on one path, one of them needing a **§1.5 full replacement** and
-one of them a **re-enable that may reinstate the fault it was working around**.
-Map: `agent/prompts/SMRCF_CHAIN_SET.md`. ⛔ **Gated on chain A.**
+The source findings remain useful, but their 1.0.7 line numbers and the old
+module totals are authoring evidence, not current facts. Re-derive targets by
+symbol against installed 1.1.0 before any build.
 
 ## Manifest
 
-| # | file | model | owner needed? | what it drains |
+| # | file | role | owner needed? | what it drains |
 |---|---|---|---|---|
-| 01 | `01_SPEC_fable.md` | top tier | **decision routed** | re-derives all three; decides what may be built; routes the §1.5 call |
-| 02 | `02_BUILD_opus.md` | volume tier | no | builds only what 01 approved |
-| 03 | `03_SITTING_owner.md` | volume tier | **YES — ~15 min** | the browser on screen; the only place these are observable |
-| 04 | `04_AUDIT_fable.md` | top tier | no | adversarial backward QA; empties the folder |
+| 01 | `01_SPEC_fable.md` | spec/adversary | routes a decision | re-derives all three findings, performs the runtime-symbol preflight and decides what may be built |
+| 02 | `02_BUILD_opus.md` | build | no | builds only approved repairs and their probes |
+| 03 | `03_SITTING_owner.md` | attended sitting | yes, about 15 min | observes browser-only behaviour and its falsifiers |
+| 04 | `04_AUDIT_fable.md` | terminal adversary | raises findings | audits backward, archives this manifest and empties the live folder |
 
-⚠️ Top tier on 2 of 4 is at `CHAIN_METHOD` §4.0's ceiling — justified here because
-the spec makes a call that poisons everything downstream if wrong. **The owner may
-re-route; bodies are model-neutral.**
+## The three findings to re-derive
 
-## The three defects
-
-**1 — screenshots can never download.** `WaitDownloadModScreenshots`
-(`ParadoxMods.lua:213-276`) declares `local mod_prefix` inside `if thumbnailUrl
-then` (`:222`), closes that block at `:245`, then reads `mod_prefix` at `:257` —
-a global read, therefore `nil`, therefore *"attempt to concatenate a nil value"*
-on the first image, every time. The developers' own `-- todo: this is not
-working` sits at `:247`, and again at `ModManager.lua:786`. **§4 tell 5.**
-⛔ The bug is *inside* the function, so a wrapper cannot reach it — **this is a
-§1.5 full replacement**, the pack's patch-rot exposure category, and 01 decides
-whether that is acceptable.
-⛔ **Gated on chain A job 2**: `AsyncPopsDownloadFile` (`:260`) has zero
-definitions in all of Src. If it does not exist at runtime, repairing the concat
-moves the failure one line down and the fix is pointless.
-
-**2 — description hyperlinks are disabled.** `HTMLParser`'s `A` branch returns
-inert `label [URL]` with the clickable form commented out at `:118`. **Two
-tells**: `GetRGBA(self.HyperlinkColor)` at `:109` is consumed by nothing (§4 tell
-2), and `MarkdownParser.lua:49` ships the identical line **live** (§4 tell 3).
-The consuming UI already handles `OpenUrl` (`ModsUIModDetails.lua:683`).
-⛔⛔ **Deferred is not safe.** The line may have been commented out *because it
-misbehaved* — fredware's own spec has a clause about XText's `<fallback_font>`
-mode returning font id `-1` after a successful preflight. **The shape is
-"re-enable and observe", never "uncomment it".**
-
-**3 — the thumbnail cache never revalidates.** `:221-225` keys the cache on
-`ModID` + `PreferredVersion` and skips the fetch `if not io.exists(file_path)`.
-Replace a preview without bumping the version and existing players keep the old
-image forever. **Weakest of the three** — no dev comment, no sibling, and
-arguably a deliberate simplification. 01 decides whether it clears §4 at all.
-⚠️ **Release-relevant to us either way**, and already on checklist item 34 as
-awareness.
-
-## ⚠️ What makes this chain hard, stated up front
-
-1. **First-of-kind UI work** (shared with chain B): the pack has never patched
-   Mod Manager internals.
-2. **A §1.5 replacement** of a 63-line function — every game patch can silently
-   diverge it. `WORKFLOW`'s fpk discipline exists for exactly this.
-3. **Observation requires the live browser** — Paradox Mods reachable, a mod with
-   screenshots, and eyes. `FIX_POLICY` §348-351: UI behaviour is the one class
-   where source reading gives confident answers with **no validity**.
-4. **A circularity worth noticing**: this is the screen players use to install
-   *our* mod.
-5. ⛔ **fredware's remedy is a feature reimplementation** — six spec clauses, its
-   own HTML/BBCode formatter, a runtime-discovered private font cascade. **We are
-   not doing that.** Minimal repair of located defects, or nothing.
+1. **Screenshots:** the authored 1.0.7 route put `mod_prefix` inside one block
+   and read it later, making the first image concatenate `nil`. A repair would
+   require a `FIX_POLICY` §1.5 full replacement. Before routing that decision,
+   link 01 must determine in the runtime environment whether
+   `AsyncPopsDownloadFile` exists. The old chain-A job that once owned this check
+   was removed; it is not a prerequisite. If the symbol is absent, record and
+   drop defect 1 while continuing to adjudicate 2 and 3.
+2. **Description hyperlinks:** the authored `HTMLParser` route returned inert
+   text while the sibling Markdown path used the clickable form. Treat it as
+   “re-enable and observe,” because the disabled path may have avoided an XText
+   fault; never import the reference mod's formatter or font behaviour.
+3. **Thumbnail cache:** the authored path keyed cache files by ModID and portal
+   version and skipped an existing path. This is the weakest finding and may be
+   an intentional simplification. The earlier claim that it affected this
+   pack's own preview uploads was withdrawn: the required version bump changes
+   our cache key. Keep that correction visible and do not add upload work for it.
 
 ## Binding chain rules
 
-As `smrcf-verify/README.md` §"Binding chain rules", plus:
-
-10. **`FIX_POLICY` §3a on every module**; a §1.5 replacement additionally carries
-    a byte-verified target check and goes on the fpk re-verification list.
-11. ⛔ **No behaviour beyond repair.** Restoring a disabled path is repair;
-    adding formatting, fonts or caching policy is not.
-12. **Nothing here is a release gate.** If it is not ready, it does not ship.
+1. Start every link with `git log --oneline -10`, `git pull`,
+   `git status --short`; compare named inputs with the chain authoring history
+   (`889faab` is not this older chain's origin, so use `git log -- <paths>`), and
+   re-check moved groups.
+2. Read `docs/agent/STATE.md` because this chain calls for current status, then
+   C52 through `docs/agent/bugs/INDEX.md`, `docs/agent/FIX_POLICY.md`,
+   `docs/agent/WORKFLOW.md`, this manifest and the current link's inbox.
+3. Keep a live todo list, one commit-and-verify unit per item. Recheck shared
+   paths before writing; commit exact paths. Record each drift in successor and
+   audit inboxes. Copy any doccheck warning verbatim into the close-out.
+4. A spec is design authority, not route proof. Re-verify every source/runtime
+   route before code. Tag provenance separately from a reachability claim.
+5. `FIX_POLICY` §3a binds every module. A §1.5 replacement also needs an owner
+   decision, a byte-verified shipped body, a target-shape stand-down check and
+   the current fpk re-verification route.
+6. Test-bearing links run the exact TEMPORARY sweep across pack and TestKit and
+   apply the current STATE probe-age/change obligation at the next playtest.
+   Probe age never lets an agent refuse owner-directed work.
+7. No live UI-internals prototyping. Predictions and falsifiers precede a run;
+   browser screen claims require attended eyes and re-readable screenshots.
+8. No reference-mod code, identifiers, layout values or player-facing wording.
+   No behaviour beyond repair; formatting, fonts and caching policy are out.
+9. Nothing here is a release gate. Never change C52's status or an owner hold
+   without the required evidence and authority.
+10. Each link writes its outbox, strikes its manifest row and deletes itself.
+    Terminal link 04 archives this README to the new append-only path
+    `docs/archive/prompts/smrcf-modbrowser/README.md`, removes this folder's name
+    from the grouped prompt-map row and `SMRCF_CHAIN_SET.md`, and verifies the
+    live folder is absent. Stop rather than overwrite an archive path.
 
 ## Stop conditions
 
-- Chain A found `AsyncPopsDownloadFile` absent → **defect 1 is not buildable.**
-  Record it on `C52` and drop it; the other two may still proceed.
-- The owner declines the §1.5 replacement → drop defect 1, build what is left.
-- Re-enabling hyperlinks destabilises XText in any observed state → **revert and
-  record.** The comment was a workaround and we have learned why.
+- C52 is still parked or the root firing freeze still holds: do not start 01.
+- Runtime `AsyncPopsDownloadFile` is absent: drop only finding 1 with evidence.
+- The owner declines a §1.5 replacement: drop finding 1; decide the rest.
+- A finding becomes intentional or unreachable: decline it in writing.
+- Hyperlink re-enable destabilises XText: revert and record the falsifier.
+
+## Derived facts and falsifiers — inherited by every link
+
+| fact | measured | falsifier |
+|---|---|---|
+| the live folder has this README and four fireable links | exact inventory at `eec864d` | enumerate the folder and reconcile every name with the manifest |
+| C52 is parked and this keep ruling does not unpark it | current C52 index/entry plus owner wording above | only a later owner instruction in words lifts the park |
+| no surviving C35 job provides the Async answer | exact `smrcf-verify/` inventory and detector job | search its current prompt for an executable Async deliverable |
+| the own-upload stale-preview inference was withdrawn | retained correction and current version rail | re-derive the cache key and current release upload path |
+| all three browser findings still require current derivation | authored paths predate 1.1.0 | search installed sources by symbol and enumerate reachable call sites |

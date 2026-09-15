@@ -127,6 +127,23 @@ forms; it no longer leaves a dead README in the fireable prompt tree. Checklist
 148's deferred owner choices, every prompt's unfired status and the firing freeze
 remain unchanged.
 
+Grouped SMRCF disposition: the set retains exactly the owner-kept C35 detector
+and owner-parked C52 browser chain. The root work order was pruned from four
+historical chains to those two current descendants; consumed B/D planning and a
+dead public-docs kickoff no longer masquerade as work. A blocking contradiction
+was repaired: C52 waited on chain-A job 2 for `AsyncPopsDownloadFile`, but the
+current chain-A rewrite explicitly removed that job. The descendants are now
+independent. C52 remains parked; only after an explicit owner unpark and the
+root-freeze lift may link 01 run its own runtime-symbol preflight, dropping only
+defect 1 if the symbol is absent. The C35 prompt keeps its log-only TestKit job
+and owner decision route, adds current reads/probe hygiene, and no longer claims
+that closing it closes the C52 set. The mod-browser manifest's broken reference
+to a nonexistent `smrcf-verify/README.md`, era totals and dead paths were
+replaced by local binding controls and falsifiers. Its terminal link archives
+the README, updates the grouped map/work order and proves the live folder gone.
+No prompt ran; C35 remains `cand`, C52 remains `parked`, and the firing freeze
+remains in force.
+
 ## Live progress
 
 - [IN PROGRESS - not executed] Prove the execution boundary: fresh context,

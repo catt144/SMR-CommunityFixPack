@@ -1,6 +1,6 @@
 # C·04 — terminal adversarial audit · fresh context · TRUSTS NOTHING FORWARD
 
-**You are the adversary.** Read `README.md`, then `STATE.md`, then this, then
+**You are the adversary.** Read `README.md`, then `docs/agent/STATE.md`, then this, then
 `## Notes from upstream`. Every "done" upstream is a **claim**.
 
 ## 0 · Staleness check
@@ -77,15 +77,18 @@ correction to a shipped module is allowed and must be disclosed as one.
 
 ## 6 · Close-out — the folder-empty gate
 One commit: corrections applied · `C52` in step with what actually shipped ·
-`STATE.md` extended (byte caps, doccheck-enforced; evict resolved material, never an obligation) ·
+`docs/agent/STATE.md` extended only with unresolved current state (byte caps, doccheck-enforced; evict resolved material, never an obligation) ·
 counts re-emitted by the tool · doccheck GREEN (+ `mkdocs --strict` if public
-pages moved) · `git rm` this file — **the folder must end EMPTY** · grave named ·
-push.
+pages moved) · `git rm` this file · archive `README.md` to the new path
+`docs/archive/prompts/smrcf-modbrowser/README.md` · remove this folder's name
+from the grouped prompt-map row and `docs/agent/prompts/SMRCF_CHAIN_SET.md` ·
+verify the live folder is absent · grave named · push. Stop rather than
+overwrite an existing archive path.
 
 **End the owner report with the kickoff line for the next queued chain**, and say
 in one sentence whether ④ has happened.
 
 ⭐ **If this was the LAST chain of the set to close**, delete
-`agent/prompts/SMRCF_CHAIN_SET.md` in the same commit and name its grave.
+`docs/agent/prompts/SMRCF_CHAIN_SET.md` and its one-off map row in the same commit and name its grave.
 
 ## Notes from upstream

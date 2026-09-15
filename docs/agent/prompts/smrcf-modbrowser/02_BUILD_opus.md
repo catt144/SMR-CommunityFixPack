@@ -1,6 +1,6 @@
 # C·02 — build only what 01 approved · UNATTENDED
 
-Read `README.md`, then `STATE.md`, then `FIX_POLICY.md` §3a, then this, then
+Read `README.md`, then `docs/agent/STATE.md`, then `docs/agent/FIX_POLICY.md` §3a, then this, then
 `## Notes from upstream` — 01 writes the approved spec there.
 
 ## 0 · Staleness check
@@ -16,13 +16,13 @@ build only the unblocked items.
 
 ## 2 · Job 1 — re-verify the route, even though the design is settled
 
-`CHAIN_METHOD` §2.3: **"do not re-derive the design" never means "do not verify
+`docs/agent/reports/CHAIN_METHOD.md` §2.3: **"do not re-derive the design" never means "do not verify
 the route."** Every route failure in this project sat above individually-correct
 citations. Before writing a line, confirm at `ModTools\Src` by symbol that each
 approved target is still where the spec says.
 
 ⛔ If a target has moved, **stop** — the spec's shape may survive but its detail
-did not, and that is exactly the failure mode `CHAIN_METHOD` §3 names.
+did not, and that is exactly the failure mode `docs/agent/reports/CHAIN_METHOD.md` §3 names.
 
 ## 3 · Job 2 — build
 
