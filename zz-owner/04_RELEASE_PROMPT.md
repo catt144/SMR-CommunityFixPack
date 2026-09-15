@@ -12,11 +12,11 @@ all substantive owner rulings remain in force.
 
 ## Live progress
 
-- [COMPLETE - this commit] Retire `SITE_AUDIT.md`, preserve its narrow live-site
+- [COMPLETE - `3424bbc`] Retire `SITE_AUDIT.md`, preserve its narrow live-site
   read route in support, repoint the two live consumers and verify the cut.
-- [IN PROGRESS - source read; inventory pending] Trim spent v9/v10 staging prose
-  from `RELEASE_OUTBOX.md`, preserve its ledger rules/history and verify the result.
-- [PENDING - waits for outbox commit] Replace `RELEASE.md`,
+- [COMPLETE - this commit] Trim the resolved v9/v10 `Held` block from
+  `RELEASE_OUTBOX.md`; its live ledger rules and released history remain intact.
+- [IN PROGRESS - sources read; inventory pending] Replace `RELEASE.md`,
   `PUBLIC_SURFACE_SWEEP.md` and `POST_UPLOAD_CLOSE.md` atomically with one lean
   prompt and the support it calls; dissolve reporter section 4, verify and
   commit, consuming this brief.

@@ -31,64 +31,6 @@ defines which changes have a player surface.
 
 (empty — v10's batch below cleared by `RELEASE.md` §5, 2026-09-13, upload confirmed both portals)
 
-## Held — still-needed follow-through AFTER v9, not Pending
-
-✅ **The retirement + wording batch below LANDED in v10 (2026-09-12/13)** — F37, F43
-(+F118 rider) and F31 retired, `WORDING_RULED.md`'s 12 rows applied; see *Released in
-v10* above. The rest of this section (retained-claim notes, aggregates, the still-
-uncommitted site files) is NOT re-verified here — read it as history, not a to-do.
-
-**Do not consume this section in the v9 change note/upload.** It records review
-proposals, not landed player-facing changes. Pending F59/F60 above is unchanged.
-Audit `reports/STILL_NEEDED_SWEEP.md` (2026-09-12): 46 reviewed; **2 RETIRE,
-0 REBUILD, 30 KEEP, 14 KEEP-BUT-FIX-CLAIM**. No module/public changes were applied.
-
-**✅ 2026-09-12: v9 is closed and checklist 156 is RULED** — retire F37 and F43 (+F118
-rider), frozen 1.0.7 build untouched, wording batch approved with the owner's
-corrections. ⚖️ **The text to apply is `reports/still-needed/WORDING_RULED.md`**, not
-`SURFACE_PLAN.md`, and its VOICE RULE binds. F21 STAYS (panel line, source-settled
-there); F31 and F52 are HELD. **TAKEABLE WHEN** `prompts/SURFACE_AUDIT_FABLE.md` has
-reported and the owner has ruled on anything it moved. Then run PUBLIC_SURFACE_SWEEP
-in full, apply, and turn this section into the Pending entries for v10.
-
-- **Retirement candidates:** F37 ordinary farm oxygen leak is cleared by current
-  vanilla working transition; F43 normal layout admission already has the outer
-  research/prefab gate. F118 rider follows its parent. Owner decides 1.0.7/orphan/
-  custom/race scope; no all-routes or fresh player-cure proof.
-- **Retained claim batch:** F54 dust-storm example; Saint dome/Religious scope;
-  F58 ordinary-foot cleanup/actual age tests/headline; F52 available-passage
-  headline/intro (INFERRED wording risk); F21 obsolete Comfort example -> train/
-  track statistics; F34 drones rather than colonists; F77 two-second grouping/
-  registered title; F30 obstruction-clearing constructor exemption/eligible
-  command rescue; F06 ten-sol window/title; F50 interruption rather than universal
-  long-trip impossibility; F40 dormant/historical target scope; F48 corrected
-  vanilla migration/historical latch/limited rollback; F31 insurance rather than
-  unconfirmed stopped-story account. Exact review text: `reports/still-needed/SURFACE_PLAN.md`.
-- **Aggregates:** current tree49 rows/46 modules/47 Code/21 headlines. Retirement
-  choices predict49 ->48(one) ->47(both); derive actual final counts once.
-  Current-data-hidden claim supports **two**, not three, rows (F57a and F29, not
-  subfix counting); judgment rows still3, Lake key ships, seven-machine scope true.
-  Full proposed F31+F37 headline removal gives19; headlines are not repair count.
-- ⛔ **THE SITE TREE HAS THREE UNCOMMITTED FILES WAITING ON THE OWNER** (2026-09-12):
-  `content/faq.md`, `content/for-modders.md`, `content/install.md` in
-  `C:\Dev\SMR-CommunityMods` — today's modder-doc paring, not yet ruled on. The
-  deploy of `a061665` is already held for v10, so they ride the same release, but
-  **the deploy must not go out until the owner has ruled on them**, and no agent may
-  commit or discard in that repo. Re-read `git -C C:\Dev\SMR-CommunityMods status
-  --porcelain` rather than trusting this line. Detail: `PUBLIC_SURFACE_SWEEP.md` §1.
-- **All maintained copies:** metadata description, both STORE_CARD_LIVE blocks,
-  both UPLOAD_WORKFLOW backups, complete site rows and FAQ/editorial tallies.
-  Recheck intro examples/categories, not only bullets. No live body/deploy read
-  was made by the audit; execute owner's upload -> cards -> site order on release.
-- **F46:** native suspended Station demand remained positive2500, flags restored
-  exactly. KEEP, no new row/count request; actual unloading/route cure not witnessed.
-- **Change note:** one plain line per actually changed fix, tagged appropriately;
-  a wording correction is not a new game repair or an attended witness. Existing
-  metadata version10/pdx8 writeback predates this sweep and is untouched; never
-  hand-set versions or infer upload receipt from it.
-
----
-
 ## Released — history, newest first (cleared here by RELEASE.md)
 
 ### Released in v10 (2026-09-13) — C85, C89, C88 landed; F37, F43+F118, F31 retired
