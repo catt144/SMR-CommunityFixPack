@@ -133,9 +133,26 @@ baseline without saying so.
 **Evidence:** `reports/SMRTK_08B_SURFACE.md` "Defects FOUND AND NOT REPAIRED" §1;
 raw line in `archive/logs/smrtk08b_Mars.exe-20260914-20.03.09-6a91a190.log`.
 
-### 2026-09-14 — 182: PLAYTEST_HELP has no owner-facing core — dissolve it, and one live gap to close
+### 2026-09-14 — 182 RULED + CLOSED 09-15: PLAYTEST_HELP has no owner-facing core — DISSOLVE it
 
-<!-- ck:182 status:open owner:yes -->
+<!-- ck:182 status:ruled owner:yes -->
+
+#### ⚖️ RULED — dissolve. Re-confirmed 2026-09-15 because the marker never moved
+
+> *"Haven't we decided that in about 4 different conversations at this point, including this one?"*
+
+⇒ **`docs/PLAYTEST_HELP.md` (62,965 B) is DISSOLVED, not reframed.** The split below stands as
+written: **SMRTK reference** (agent-facing, pull-only) · **the hazards and the rider-authoring line
+into `prompt-authoring`** · **launch mechanics into `perma/CO_RUNS.md`** · **cut** the command table,
+the save-fixture recipes and the archived-`TESTING.md` do-not-use list. Execution waits only on
+`prompts/DOC_EDITING_SKILLS.md` building the skill that receives the hazards; nothing else gates it.
+
+⛔ **The ruling was already in force and this item still regenerated onto `WAITING_ON_YOU.md` every
+session, so every session re-asked it.** `.claude/HANDOFF_PROMPT.md` carried it under *"Owner
+rulings in force — authority, not to be re-derived"* and, twelve lines later, called it a pending
+*"dissolution decision"*. ⇒ **A verbal ruling with no marker flip re-asks itself forever.** The
+generated queue is only as good as the last agent who remembered to move a marker, and that is the
+defect this row is now the receipt for.
 
 > ⭐ **NEW EVIDENCE 2026-09-14 (08b, walked with the owner) — the file is now
 > MEASURABLY STALE, which bears on whether it is worth keeping at all.** Its
