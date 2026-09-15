@@ -19,8 +19,8 @@ Run only on a folder holding this file and `README.md` (or in the reduced form b
 5. **Honesty rails:** no "off = vanilla save", no "Fixed" beyond status, no version gate anywhere in `Code/`, no copied
    identifier or wording from the reference mod (grep his distinctive names against our tree).
 6. **Verdict:** SHIP / SHIP WITH CHANGES / NO SHIP, in `reports/FIXTOGGLES_AUDIT.md`, and to checklist 148 in plain
-   language. ⛔ `H-04`: never call the release ready — the release is `prompts/perma/RELEASE.md`'s, with the owner.
-7. **Kickoff lines** in the owner report: the release (`prompts/perma/RELEASE.md`), and the B step — if the owner has
+   language. ⛔ `H-04`: never call the release ready — the release is `prompts/perma/release_prompt.md`'s, with the owner.
+7. **Kickoff lines** in the owner report: the release (`prompts/perma/release_prompt.md`), and the B step — if the owner has
    ruled to proceed on 09's package, the line that starts that chain; otherwise say none is queued.
 8. Consume this file and the README's queue (the README stays as the record, its table fully struck); SESSION_LOG entry;
    STATE's NEXT line updated; push.

@@ -73,17 +73,8 @@ in full.)
 
 ## Context — the short version
 
-* **The doctrine for this file is `agent/prompts/perma/PUBLIC_SURFACE_SWEEP.md` §4**:
-  promise "the next update" and never a date; assert only what has been observed;
-  name the other mod plainly when one is the cause; ⛔⛔ **read the tracker through the
-  JSON API, never through the rendered issue page**
-  (`api.github.com/repos/catt144/SMR-CommunityFixPack/issues?state=all` for state and
-  the **comment count**, `.../issues/<n>/comments` for the comments) — the comment
-  count is the free control that a 2026-08-24 sweep skipped, reporting a silence that
-  never existed.
 * **Every fact in a draft belongs to a bug entry, not to this file.** The entry is
-  the authority; cite it, do not restate it. Record an issue number in `row_status`,
-  never in a new front-matter key (`split_bugs.render_entry` drops unknown keys).
+  the authority; cite it, do not restate it.
 * **Voice** (`reports/still-needed/WORDING_RULED.md`): plain for players, precise for
   the two developers who read us, no hedging words. Say what the fix does and for whom.
 
@@ -435,5 +426,5 @@ warning but did not wait it out (`C83` §OBSERVED).
 | The 2026-09-11 C85 diagnostic draft | 2026-09-12 | SUPERSEDED by "Built for v10" reply 2 |
 | **The long C74/C77 sounds post** | 2026-09-12 | ⛔ **Cut on the owner's word, checklist 162 (b) — an ACCEPTED LOSS, not an oversight.** Whether it went up was never recorded and the owner does not remember, so it could be marked neither POSTED nor live. Its four sections and both leads live on in `agent/bugs/C74.md`; the prose is in git at `git show 5923eeb:docs/FIELD_REPORT_REPLIES.md`. ⛔ Do not reconstruct it |
 | **The C74 "still checking" follow-up** | 2026-09-12 | ⛔ **Cut on the owner's word, checklist 162 (b) — an ACCEPTED LOSS.** Its posting condition ("post only if the 09-10 post said *still checking*") became permanently unevaluable when ck144 (b) was cleared without recording what went up. Desk-only, never ear-tested, and stale on "currently in testing" since v7. Both findings survive in `agent/bugs/C74.md` — a fresh reply from them takes minutes if it is ever wanted. Prose in git at `git show 5923eeb:docs/FIELD_REPORT_REPLIES.md` |
-| The two GitHub timeline tables and the "context a fresh session needs" block | 2026-09-12 | folded into this record and into the three-line context above; the doctrine lives in `PUBLIC_SURFACE_SWEEP.md` §4 |
+| The two GitHub timeline tables and the "context a fresh session needs" block | 2026-09-12 | folded into this permanent record; no separate reporter doctrine remains |
 | The "Owed, and where it is tracked" table | 2026-09-12 | fully derivable from the status lines; see the rule at the top |

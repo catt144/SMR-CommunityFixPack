@@ -151,7 +151,7 @@ the bar for adding one is `FIX_POLICY` and it is the owner's decision.
 ## 5 · Bindings
 
 - ⛔ **Never modify the game directory** — including the `DLC/*.fpk` files.
-- ⛔ `editor/version rail (agent/prompts/perma/RELEASE.md § Release rails)` no Mod Editor, no `version` edit, **no upload**. `H-08` never pull a
+- ⛔ `editor/version rail (agent/prompts/perma/release_prompt.md § Release rails)` no Mod Editor, no `version` edit, **no upload**. `H-08` never pull a
   junction. `H-09` never stage a packed folder beside a live one.
 - ⚠️ Archive `ModTools\Src` before any game update (`C:\Dev\SMR-SrcArchive\`,
   standing rule in its README). A DLC patch overwrites the DLC source too.

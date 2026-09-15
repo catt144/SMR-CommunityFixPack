@@ -65,7 +65,6 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   (ck130). ✅ The heal itself fired in play 09-12.
 - Post-launch LIVE: F105, F107, F108 (v4), F110 (v5), hotfix 2 (v6), C74+C77+C83 (v7), F119+C86 (v8), F59 repair +
   F60 out (v9), C85+C89+C88 in / F37+F43+F118+F31 out (v10); F104 NOT OURS. ⛔ F107 field route untested.
-- GitHub tracker read route: `prompts/perma/PUBLIC_SURFACE_SWEEP.md` §4 (JSON API, including comments).
 - ✅ SITE DEPLOYED 2026-09-13 07:06Z, `d86a347`, state `success` (deployments API + live page read): **49** live rows
   (45 success + 4 question) = the card's Forty-nine, first agreement since 09-11. Live FAQ carries "Four judgment calls"
   and no longer promises the retired farm-oxygen repair. ⚖️ The deploy is the owner's act; `publish-site.yml` is
@@ -96,13 +95,13 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 
 ## Hazard pointers — moderate harm · universal reach · no machine gate
 Module lists are gated by `tools/doccheck.py` MODULE SETS + `tools/upload_preflight.py` (membership + order).
-- **H-03** Portal API mechanism and safe pack routes: `SteamWorkshop.lua:17-22`, `UPLOAD_WORKFLOW.md`, `perma/RELEASE.md`.
+- **H-03** Portal API mechanism and safe pack routes: `SteamWorkshop.lua:17-22`, `UPLOAD_WORKFLOW.md`, `perma/release_prompt.md`.
 - **H-05** Sweep-fence authority: `docs/archive/prompts/prelaunch-sweep/00_CHAIN_SPEC.md`; public pointer: `docs/README.md`.
 - **H-08** Junction-enable behavior and recovery: `EF-055`.
 - **H-09** Packed-folder/junction precedence: `EF-055`, `prompts/DLC_DEEP_CHECK.md`.
 
 ## Governing pointers (owner rulings; bodies in checklist/SESSION_LOG)
-- **H-04** Future-release and publication scope: `perma/RELEASE.md` release rails.
+- **H-04** Future-release and publication scope: `perma/release_prompt.md` release rails.
 - Shipping bar and major-overhaul costs: `FIX_POLICY.md` §3a and `WORKFLOW.md`.
 - Vendor patch-note evidence: `FIX_POLICY.md` §4.
 - Both-mods rig and attendance protocol: `WORKFLOW.md`.
@@ -113,7 +112,7 @@ Module lists are gated by `tools/doccheck.py` MODULE SETS + `tools/upload_prefli
 - State format: `prompts/perma/STATE_EVICTION.md` § Formatting.
 - Branch guards: `FIX_POLICY.md` §2a.
 - 1.0.7 service: frozen GitHub build `v5-game-1.0.7`, linked from card and site.
-- Upload page-body source and backup cycle: `perma/RELEASE.md`, `UPLOAD_WORKFLOW.md` §3.
+- Upload page-body source and backup cycle: `agent/support/RELEASE_SURFACES.md`, `UPLOAD_WORKFLOW.md` §3.
 
 ## Open owner decisions (bodies in `docs/PLAYTEST_CHECKLIST.md` → "Decisions waiting on you")
 - STILL OPEN: 53 harden now or in 1.0.1 · 47 two modder-page wordings · 152 c open · 185 C95/C96 builds · 133 two `FIX_POLICY` §2a

@@ -35,6 +35,10 @@ reads **only its first word** and deliberately tolerates that word disagreeing w
 are expected, not defects. Long cells were moved to the end of the entry body under
 `#### Frozen migration row (2026-08-03)`.
 
+**Authoring warning:** `split_bugs.render_entry` emits only `FRONT_FIELDS`; an invented
+front-matter key such as `issue:` is silently dropped on render. Put durable context in a
+supported field or the entry body, and do not repurpose `row_status` as a general field.
+
 ## 3 · Is this fact still true?
 
 `python tools/doccheck.py --emit-fingerprint` groups facts by `derived_at:` and says whether

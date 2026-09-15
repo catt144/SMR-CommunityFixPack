@@ -15,10 +15,10 @@
 > (`CommonLua/Libs/Paradox/ParadoxMods.lua:221-225`): the cache path is
 > `PdxModsScreenshotsPath .. mod.Pdx.ModID .. "_" .. mod.Pdx.PreferredVersion .. ext`
 > and the fetch is skipped only `if not io.exists(file_path)`. The key therefore
-> contains the PORTAL VERSION — and `editor/version rail (agent/prompts/perma/RELEASE.md § Release rails)` is that **every** upload bumps our
+> contains the PORTAL VERSION — and `editor/version rail (agent/prompts/perma/release_prompt.md § Release rails)` is that **every** upload bumps our
 > version (the Mod Editor save runs `version = version + 1`, and both portals force
 > that save), so the path changes on every upload and the image always refetches.
-> ⇒ **The stale-preview risk is foreclosed for us by editor/version rail (agent/prompts/perma/RELEASE.md § Release rails)**, and nothing needs
+> ⇒ **The stale-preview risk is foreclosed for us by editor/version rail (agent/prompts/perma/release_prompt.md § Release rails)**, and nothing needs
 > adding to `UPLOAD_WORKFLOW`. ⚠️ It remains a real vanilla defect for the
 > browsing case — a thumbnail replaced without any version change is cached
 > forever — which is why `C52` defect 3 still stands as filed. What was wrong was

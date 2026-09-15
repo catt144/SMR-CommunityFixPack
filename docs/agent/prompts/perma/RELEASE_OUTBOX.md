@@ -4,7 +4,7 @@
 <!-- RULES -->
 Rule: Append a filled `### Pending` entry whenever a player-facing fix is added, retired, or materially respecified. [A3: pass]
 Rule: Do not append a pending entry for a pack-internal fix that never shipped broken. [A3: pass]
-Rule: Move every pending entry under `Released in vN` and empty `Pending` only through `RELEASE.md` after upload. [A3: pass]
+Rule: Move every pending entry under `Released in vN` and empty `Pending` only through `release_prompt.md` after upload. [A3: pass]
 Rule: Do not delete a pending entry except through a release or with an explicit withdrawal reason. [A3: pass]
 <!-- /RULES -->
 
@@ -12,18 +12,18 @@ Rule: Do not delete a pending entry except through a release or with an explicit
 **since the last upload** and must appear on a player surface when the next
 version ships. It is the single answer to "what is in the next release?" — the
 `last_changes` change note, the new fix-list rows, and the store-card count word
-all come from here. `RELEASE.md` reads it, applies every entry to the surfaces,
+all come from here. `release_prompt.md` reads it, applies every entry to the surfaces,
 and **clears it** (moves the entries to *Released* below) once the upload is done.
 
-**Live tree version:** `metadata.lua` `version` — read it, never hand-set (editor/version rail (agent/prompts/perma/RELEASE.md § Release rails)).
+**Live tree version:** `metadata.lua` `version` — read it, never hand-set (editor/version rail (`release_prompt.md` § Release rails)).
 **Live count word:** whatever `metadata.lua`'s `description` currently says
 (`grep -oE '[A-Z][a-z]+(-[a-z]+)? repairs' metadata.lua` — one hit; zero is a FAIL). Each pending fix that has a
 player surface bumps it by one on release.
 
 ## How to use it
 
-`RELEASE.md` implements the lifecycle above; `PUBLIC_SURFACE_SWEEP.md` section 0.4
-defines which changes have a player surface.
+`release_prompt.md` implements the lifecycle above;
+`agent/support/RELEASE_SURFACES.md` defines which changes have a player surface.
 
 ---
 
@@ -31,7 +31,7 @@ defines which changes have a player surface.
 
 (empty — v10's batch below cleared by `RELEASE.md` §5, 2026-09-13, upload confirmed both portals)
 
-## Released — history, newest first (cleared here by RELEASE.md)
+## Released — history, newest first (cleared here by `release_prompt.md`)
 
 ### Released in v10 (2026-09-13) — C85, C89, C88 landed; F37, F43+F118, F31 retired
 - **C85 · `Fix_CloggedBuildingRelease`** (`59c8c47`) — a building clogged by a dust

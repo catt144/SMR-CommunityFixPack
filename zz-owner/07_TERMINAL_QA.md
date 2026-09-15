@@ -15,6 +15,51 @@ Earlier legs append here before consuming themselves. Every correction, departur
 unresolved citation, retained-passage reason and caught drift belongs here even
 if it was fixed in place. At authoring time the inbox is empty.
 
+### Leg 04 — release consolidation (Codex, GPT-5)
+
+- Commit manifest: `3424bbc` retired the site-audit prompt into the mapped
+  `LIVE_SITE_READ.md` reference; `e73f450` removed the resolved v9/v10 Held block
+  from the outbox; the commit consuming leg 04 atomically replaces the remaining
+  three-prompt release family.
+- Retention reasons to challenge first: `RELEASE_SURFACES.md` is consumed only by
+  `release_prompt.md` §1 and retains surface synchronization plus preflight;
+  support `POST_UPLOAD_CLOSE.md` is consumed only by §4 and retains writeback,
+  comment restoration and record closure; `LIVE_SITE_READ.md` is consumed by
+  STATE and retains only the live-deployment control and reading traps.
+- Proved cuts: the broad site audit, reporter section, spent v9/v10 staging,
+  separate close-out front door, dated update narration and duplicate release
+  checklists. The outbox's Must_Read_Header, Pending ledger and released history
+  remain; the 2026-08-23 other-mod naming ruling remains verbatim only in
+  `docs/FIELD_REPORT_REPLIES.md`; F104/F105 already retain issue identity.
+- Generated-source route: the `split_bugs.render_entry`/`FRONT_FIELDS` warning was
+  added to `.claude/skills/smr-bug-library/SKILL.md`; the `.agents` copy is a
+  regenerated mirror, not an independently edited file.
+- Deliberate LOUD exceptions in exempt `HANDOFF_ORCHESTRATOR.md`: its VOICE RULE
+  paragraph and trap 7 still cite `PUBLIC_SURFACE_SWEEP`; trap 3 still cites
+  `POST_UPLOAD_CLOSE.md`; its release-location paragraph still cites
+  `perma/RELEASE.md`. The next handoff session owns those repairs. Leg 04 did not
+  edit the exempt file.
+- Historical citations in checklist, bugs, facts, reports and archive were left
+  unchanged. Terminal QA must classify them separately from live unresolved
+  citations and verify the active prompt/chain consumers point to
+  `release_prompt.md`.
+- No release prompt was fired, no upload was performed and the firing freeze was
+  not lifted.
+
+| source passage | disposition | reason | inspected destination |
+|---|---|---|---|
+| `SITE_AUDIT.md` rails, §1 and §6 | KEEP, compacted | live-vs-committed control and paid reading traps prevent repeated failures | `support/LIVE_SITE_READ.md` Rails, Identify the live commit, Reading traps; consumer is STATE |
+| `SITE_AUDIT.md` orientation, five-page audit, health, filing and report sections | CUT | prompt ceremony and broad speculative audit are not part of the ruled read route | none |
+| `RELEASE_OUTBOX.md` resolved Held block | CUT | v9/v10 gates resolved and the block identified itself as history, not a todo | Released in v10 in the same ledger; `reports/still-needed/WORDING_RULED.md`; STATE pared-site-files line |
+| `RELEASE.md` lifecycle, rails, hold/resume and clear-after-confirmation | KEEP, compacted | load-bearing 2026-09-13 ruling and editor/version safeguards | `release_prompt.md` Release rails and §§0–6 |
+| `RELEASE.md` surface checklist | KEEP, moved and trimmed | operational detail supports §1 but is not another front door | `support/RELEASE_SURFACES.md` §§1–4; explicit consumer pointer to prompt §1 |
+| `RELEASE.md` standing reporter step | CUT | conflicts with the pull-only owner-transport ruling | none; reply source remains `FIELD_REPORT_REPLIES.md` |
+| `PUBLIC_SURFACE_SWEEP.md` site/store/metadata/gate procedure | KEEP, moved and trimmed | required to synchronize release surfaces and enforce zero-hit/preflight controls | `support/RELEASE_SURFACES.md` §§2–4 |
+| `PUBLIC_SURFACE_SWEEP.md` §4 reporter procedure | DISSOLVED | no release-time tracker reading or reply chasing survives | naming ruling verified verbatim in `FIELD_REPORT_REPLIES.md`; issue identity inspected in F104/F105; render warning moved to editable `smr-bug-library` source |
+| `PUBLIC_SURFACE_SWEEP.md` dated narration and condensed duplicate checklist | CUT | resolved history and duplicate procedure | none |
+| `POST_UPLOAD_CLOSE.md` verification, writeback/comment restore and record close | KEEP, moved and trimmed | required fresh-session resume path and high-harm serializer hazard | `support/POST_UPLOAD_CLOSE.md` §§1–3; explicit consumer pointer to prompt §4 |
+| `POST_UPLOAD_CLOSE.md` old first-upload choices, checklist ids, obsolete receipt fields and self-consume front door | CUT | resolved launch-era staging and a second fireable entry point | current three-item receipt inspected in `UPLOAD_WORKFLOW.md` §5 and retained in prompt/support |
+
 ## Live progress
 
 - [IN PROGRESS - not executed] Prove the execution boundary: fresh context,

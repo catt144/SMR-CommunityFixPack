@@ -11,7 +11,7 @@ name the reference mod; never reuse its wording) govern every sentence**. Runs a
    always-on parts are said where they apply. Replace 07's placeholders.
 2. **Beta flags + per-fix defaults** as the owner ruled in ck148 (per fix) — each recorded where the spec §5 says, and
    checked by whatever tool the spec named.
-3. **`items.lua` / `metadata.lua`** consistent with the final module and option set (module-list gate (tools/doccheck.py MODULE SETS + tools/upload_preflight.py)). ⛔ Never `version` (editor/version rail (agent/prompts/perma/RELEASE.md § Release rails)).
+3. **`items.lua` / `metadata.lua`** consistent with the final module and option set (module-list gate (tools/doccheck.py MODULE SETS + tools/upload_preflight.py)). ⛔ Never `version` (editor/version rail (agent/prompts/perma/release_prompt.md § Release rails)).
 4. **Store text** — the description gains the switches (how to reach them; that off stops a fix's behaviour but repairs
    already made stay). `metadata.lua` `description` + `UPLOAD_WORKFLOW.md` §3 backups + `STORE_CARD_LIVE` in ONE commit,
    proven identical **by script**, not by eye (memory `store-card-backups-required-not-polish`). `last_changes` drafted
