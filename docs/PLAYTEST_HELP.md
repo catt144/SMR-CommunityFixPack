@@ -10,36 +10,6 @@ Test Kit helpers, stress-harness notes, and save-fixture recipes.
 
 ---
 
-### ⚠️ Compressing a scheduler with `g_Consts` — the false-PASS trap (learned running PT-11, 2026-07-29)
-
-**Lowering a `g_Consts` interval does NOT shorten the sleep already in flight.**
-A `MapGameTimeRepeat` body computes its next interval at the END of each tick
-and then sits in `Sleep(sleep)` (`CommonLua/Core/lib.lua:1590-1592`), so the
-running thread keeps whatever interval it was handed *before* your edit.
-
-This silently invalidates any "nothing should happen" test. PT-11's defaults are
-`MarsquakeSpawnTime = 384` hours and `MarsquakeRandomTime = 96`
-(`Lua/__const.lua:1085-1094`) — **16 sols**. Waiting the prescribed 20 hours
-after setting them to 1 would have watched a thread still asleep on the old
-16-sol interval and scored it a PASS whether or not the fix worked.
-
-**Always re-arm after compressing, and prove the thread is live:**
-```
-RestartPeriodicRepeatThread("UndergroundMarsquake", CurrentMap)
-IsValidThread(CurrentMap.RepeatThreads.UndergroundMarsquake)
-```
-The restart does not bypass a fix that wraps the repeat — the wrapper lives in
-`PeriodicRepeatInfo`, which the fresh thread re-reads every loop. **Repeat the
-restart after every save/reload:** repeat threads are persistable
-(`MakeThreadPersistable`, `lib.lua:1595`), so a reload restores the old sleep.
-
-**Pair every negative result with a positive control.** A cheat that forces the
-event, run at the END, proves the map can produce it and that your detector
-actually moves. Without one, a negative test cannot distinguish "the fix worked"
-from "nothing would have happened anyway". Prefer an **objective counter** over
-eyes — e.g. `CurrentMap:MapGet("map", "CaveInRubble")` — since events at ultra
-speed are easy to miss.
-
 ### Salvage mode — how to read the cursor (observed 2026-07-30, applies to EVERY salvage test)
 
 Reported by the tester while running PT-46(c), and general to the whole map —

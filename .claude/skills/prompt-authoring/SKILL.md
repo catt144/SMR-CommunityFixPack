@@ -47,6 +47,9 @@ to step in. Include the elements below in every brief for another session.
 - Name every setup mutation and reject one that intersects the mechanism being
   measured. A no-taint claim requires an explicitly clean current-build save;
   toolkit `CLEAN` is not an achievement-eligibility verdict.
+- If a test shortens a `MapGameTimeRepeat` interval, require it to restart the
+  repeat after the change and after every reload, prove the thread is live, and
+  pair a negative result with an objective positive control.
 
 ## Derived facts and falsifiers
 
