@@ -49,6 +49,32 @@ build other than the one 02/08 ran on.
 
 ## Notes from upstream
 
+- ⚖️ **(08b, 2026-09-14) ROUTED TO YOU BY THE OWNER — the mechanized depot's
+  fill/empty records carry no numbers.** Owner: *"Leave the mechinized depot for
+  the audit."* ⛔ **The FEATURE IS NOT BROKEN** — fill and empty work; Dump read
+  `1490000 → 3950000 → 0` across the same three clicks. What is missing is the
+  **evidence**, and only on that one branch:
+  ```
+  selected_fill  after=180000 before=25018  object=StorageFuel(7454)
+  selected_fill  after=300000 before=225578 object=UniversalStorageDepot(8143)
+  selected_fill                             object=MechanizedDepotFood(7128)
+  ```
+  ⇒ Its record reads `status=OK valid_after=true` and proves nothing, which is
+  indistinguishable **in the log** from a dispatch that did nothing. That matters
+  to you specifically, because you re-derive from the archived log and did not
+  watch the screen.
+  - **Cause, already pinned.** `73_SMRTK_Infopanel.lua` `depot_read` opens with
+    `IsKindOf(obj, "StorageDepot")` and **`MechanizedDepot` is not a
+    `StorageDepot`** — see the amended **`EF-102`**, which now carries the third
+    family and whose own FIX SHAPE bullet was wrong until today.
+  - ⚠️ **A scalar fallback is ALREADY COMMITTED** (TestKit `8e25f6b`) and is
+    correct, but **unreachable**: the guard above it rejects the object first.
+    ⇒ The repair is the GUARD (`StorageDepot` → `ResourceStockpileBase`), after
+    which the committed fallback does the work. ⛔ Do not add a second fallback.
+  - ⇒ **Deliverable: a verdict on whether the readout is worth the guard change**,
+    plus a check that nothing else in the toolkit guards on `StorageDepot`. ⛔ Not
+    a blocker for your verdict, and ⛔ not worth a boot of its own.
+
 - ⚖️ **(08b, 2026-09-14) ROUTED TO YOU BY THE OWNER — the editor hint renders
   white. Bounded, cosmetic, and explicitly NOT worth a hunt.** Owner's words:
   *"Maybe hand that to the audit to nail down its geniunely minor and not
