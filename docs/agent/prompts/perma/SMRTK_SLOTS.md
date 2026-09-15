@@ -30,6 +30,14 @@ the suite entry is `SMRTest.RunAll()`. Turn every logger off when its leg ends.
 The TestKit README and the named source files, not an inherited count or table,
 define the current surface.
 
+For an attended MarsDebug `[install]` pass, fully close the game; arm
+`Code/96_AutoRunFlag.lua` and its `SMRTest_AutoRunSetupOnly = true` switch; then
+use Steam's **debugging mode for mod creators** launch choice. Expect vanilla
+modal asserts and choose **Ignore All**. At the ready colony, require
+`SMRTest.EnableIntrospection(debug)` to return `true`, then run
+`*r SMRTest.RunAll()` and `FlushLogFile()`. Disarm both lines afterward. This is
+a build-specific measurement (`EF-044`), never a substitute for retail results.
+
 ## Progress and construction
 
 Create and maintain a todo list, one item per commit-and-verify unit: fixture
