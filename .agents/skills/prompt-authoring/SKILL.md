@@ -56,6 +56,13 @@ to step in. Include the elements below in every brief for another session.
 - Label every probe tally with its build and enumerate SKIPs by name. Never use
   a MarsDebug pass as retail evidence: the builds run different probe sets and
   can produce different behavior (`EF-044`).
+- Preflight every owner-typed console line as one paste-safe line with no `--`
+  comment. Prefer a bare expression for a simple read; use `*r` for real-time or
+  multi-statement work and `*g` for game-time work that yields. Make `nil`
+  explicit, read presence from the file log, and claim absence only after exit.
+- Check console and toolkit names against the retail sandbox (`EF-096`). Do not
+  infer a value from a blank screen: `ConsolePrint` silently rejects multiple or
+  non-string arguments, and an OS display measurement requires a DPI-aware tool.
 
 ## Derived facts and falsifiers
 
