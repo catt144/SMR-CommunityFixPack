@@ -1,4 +1,4 @@
-# STATE_EVICTION — standing cleanup prompt (reusable; do not delete after a run)
+# STATE_EVICTION — standing cleanup prompt
 
 Fired by the owner whenever doccheck WARNs on STATE.md's size, or on their own
 call. One session, docs only, no code. Designed 2026-08-18 with the owner; the
