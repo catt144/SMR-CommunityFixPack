@@ -39,6 +39,12 @@ to step in. Include the elements below in every brief for another session.
     the default, so state only a required deviation such as reading immediately
     after load.
 
+## Playtest-specific instructions
+
+- For behavioral, timing, throughput, assignment-quality or player-notice claims,
+  require the result to state the fixture's scarcity, fleet, density and layout;
+  report that colony's measurement rather than generalizing from a forced setup.
+
 ## Derived facts and falsifiers
 
 For each inherited fact, give the fact, how it was measured, its HEAD or game
