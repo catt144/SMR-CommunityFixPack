@@ -1,11 +1,8 @@
-# Release — the one prompt to run for EVERY update (reusable, not self-consuming)
+# Release — the one prompt to run for EVERY update
 
 Paste this into a fresh session whenever the owner says "let's do an update / put
 out a patch / ship it." It ties together the three existing sub-prompts and is
 driven by `RELEASE_OUTBOX.md`, which it clears at the end. **Any model.**
-
-> ♻️ **REUSABLE — do NOT `git rm` this file.** Unlike `POST_UPLOAD_CLOSE.md`, this
-> is the standing entry point; it runs again next update.
 
 > ⛔ **The agent never packs, never uploads, never calls a portal** (H-03). Every
 > portal action is the owner's. The agent does the words and the repo work around
