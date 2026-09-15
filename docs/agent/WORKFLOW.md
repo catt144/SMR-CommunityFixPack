@@ -19,9 +19,10 @@
    tag. doccheck goes red if they disagree, and red on a stale INDEX.
 4. `docs/agent/FIX_POLICY.md` — how we patch. Binding for every fix.
 5. `docs/PLAYTEST_CHECKLIST.md` — the owner's live playtest queue and the
-   reporting protocol (tests ONLY, split 2026-07-30); its companion
-   `docs/PLAYTEST_HELP.md` carries the ground rules, console facts, the
-   verified command table, Test Kit helpers and save-fixture recipes.
+   reporting protocol (tests ONLY, split 2026-07-30). Supporting procedures
+   live with the task: prompt-writing hazards in the `prompt-authoring` skill,
+   toolkit preparation in `agent/prompts/perma/SMRTK_SLOTS.md`, and attended
+   launch mechanics in `agent/prompts/perma/CO_RUNS.md`.
 
 ## Binding authoring rules (adopted 2026-08-03, DOC_STRUCTURE_REVIEW → spec §7)
 
@@ -570,8 +571,8 @@ issue because we should be compatible as well."*
 
 ⚖️ **ACTIVATED 2026-08-12 by the `split-optins` terminal audit** (the twin
 clause in the new repo's WORKFLOW was activated in the same close). Single-pack
-gate reads (`81/81`-era and earlier) are history — legible via
-`PLAYTEST_HELP.md`'s era table, quotable never.
+gate reads (`81/81`-era and earlier) are history — use their archived logs when
+needed, and never quote them as current.
 
 ## Co-runs — moved 2026-09-12 (D5) to `agent/prompts/perma/CO_RUNS.md`; still binding when a batch of bugs is being tested attended.
 

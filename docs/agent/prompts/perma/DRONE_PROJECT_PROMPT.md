@@ -5,7 +5,7 @@ gates.** Paste this into a fresh session when the owner wants to work on drones.
 
 > 📁 **DOCS LAYOUT (restructured 2026-08-03) — read `docs/README.md` if unsure
 > where something lives or where a new document goes.**
-> `docs/` root = the human docs (`PLAYTEST_CHECKLIST`, `PLAYTEST_HELP`, `UPLOAD_WORKFLOW`,
+> `docs/` root = the human docs (`PLAYTEST_CHECKLIST`, `UPLOAD_WORKFLOW`,
 > `FIELD_REPORT_REPLIES`, `FUTURE_IDEAS`, `README`) plus MOVED stubs · `docs/agent/` = agent truth:
 > `STATE.md` (the mandatory read; counts live there), `agent/bugs/` (defect
 > tracker, one file per entry — **entry point `agent/bugs/INDEX.md`**),

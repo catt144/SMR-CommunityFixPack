@@ -2,7 +2,7 @@
 
 ## Must_Read_Header
 <!-- RULES -->
-Rule: Keep this file limited to playtest work items and keep reference material in `PLAYTEST_HELP.md`. [A3: pass]
+Rule: Keep this file limited to playtest work items and put reusable agent procedures in their task-specific `docs/agent/` home. [A3: pass]
 Rule: Move each completed test or settled decision body to `archive/PLAYTEST_ARCHIVE.md` while leaving its heading, marker, and pointer. [A3: pass]
 Rule: Move dated session records to `archive/SESSION_LOG.md`. [A3: pass]
 <!-- /RULES -->

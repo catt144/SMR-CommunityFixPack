@@ -110,7 +110,7 @@ STATE_MAX_LINE_BYTES = 200
 # The standing prompt is instructions, not a logbook (rule added 2026-08-04
 # after two sittings appended their lessons to it — the habit that grew the
 # old 43k-token prompt). The cap is a tripwire, not a prohibition: at the cap,
-# relocate per the prompt's own routing rule (WORKFLOW / PLAYTEST_HELP /
+# relocate per the prompt's own routing rule (WORKFLOW / task-specific prompt /
 # agent/facts/ / the entry), then trim.
 GENERAL_USE = os.path.join(DOCS, "agent", "prompts", "perma", "GENERAL_USE_PROMPT.md")
 GENERAL_USE_MAX_LINES = 220
@@ -122,7 +122,6 @@ GENERAL_USE_MAX_LINES = 220
 RULE_HEADER_DOCS = (
     "CLAUDE.md",
     "docs/PLAYTEST_CHECKLIST.md",
-    "docs/PLAYTEST_HELP.md",
     "docs/UPLOAD_WORKFLOW.md",
     "docs/agent/FIX_POLICY.md",
     "docs/agent/STATE.md",
@@ -1262,7 +1261,7 @@ def check_state_and_stubs(out):
         if n_gu > GENERAL_USE_MAX_LINES:
             red.append("GENERAL_USE_PROMPT.md is %d lines, budget is %d — it is "
                        "instructions, not a logbook; route sitting lessons per "
-                       "its own header rule (WORKFLOW / PLAYTEST_HELP / "
+                        "its own header rule (WORKFLOW / task-specific prompt / "
                        "agent/facts/ / the entry) and trim"
                        % (n_gu, GENERAL_USE_MAX_LINES))
     for path, target in sorted(STUBS.items()):

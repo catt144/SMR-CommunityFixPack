@@ -26,8 +26,8 @@ Rule: Recheck shared paths before writing; commit with a pathspec unless partial
 A bug-fix mod: every fix repairs a verified defect in the game's shipped Lua,
 patched at runtime; no game files are modified. The tree map is `docs/README.md`.
 
-**Folder contract** (enforced by doccheck). `docs/` root holds the six
-human files (PLAYTEST_CHECKLIST, PLAYTEST_HELP, UPLOAD_WORKFLOW, FIELD_REPORT_REPLIES,
+**Folder contract** (enforced by doccheck). `docs/` root holds the five
+human files (PLAYTEST_CHECKLIST, UPLOAD_WORKFLOW, FIELD_REPORT_REPLIES,
 FUTURE_IDEAS, README), the BUGS/STATUS stubs, `agent/` and `archive/`. Agent material is `docs/agent/`
 (`bugs/`, `facts/`, `reports/`, `prompts/`, STATE/WORKFLOW/FIX_POLICY);
 `docs/archive/` is append-only. `INDEX.md` in `bugs/` and `facts/` is generated from

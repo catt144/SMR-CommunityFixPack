@@ -10,7 +10,6 @@ list below is an allowlist checked in BOTH directions, so a new file at
 docs/
   PLAYTEST_CHECKLIST.md   the PT tests, the reporting protocol, and
                           "Decisions waiting on you" — the owner's file
-  PLAYTEST_HELP.md        playtest reference: console facts, commands, fixtures
   UPLOAD_WORKFLOW.md      owner's step-by-step for putting an update live:
                           pack, upload, store pages, publish the site
   FIELD_REPORT_REPLIES.md  replies to player reports (Steam, Reddit, GitHub):
@@ -104,6 +103,15 @@ difference. Generated files say so on line 1.
 same change that discovers it.
 
 ## Path translation
+
+> 2026-09-15: `docs/PLAYTEST_HELP.md` was dissolved by owner ruling ck182.
+> Prompt-writing hazards moved to the `prompt-authoring` skill; toolkit helpers
+> and the MarsDebug recipe moved to `agent/prompts/perma/SMRTK_SLOTS.md`; co-run
+> launch mechanics moved to `agent/prompts/perma/CO_RUNS.md`; F87 keeps the
+> ENABLE-PATH evidence and points to its executable TestKit leg. The command
+> table, central save recipes and archived-`TESTING.md` do-not-use list were cut.
+> Treat older references to the former file as historical citations and use the
+> owning entry, fact, skill or prompt above for current instructions.
 
 > 2026-08-03 restructure: `docs/BUGS.md` → `docs/agent/bugs/<ID>.md`;
 > `docs/STATUS.md` → `docs/agent/STATE.md`; `docs/reports/` →

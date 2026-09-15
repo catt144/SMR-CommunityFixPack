@@ -231,7 +231,8 @@ not an achievement.
   against these:**
   1. **Every owner-typed console line is pre-flighted for THREAD CONTEXT, not
      just resolution** — four `Sleep()`-carrying entry points were briefed
-     bare, and the bare console has no thread context (`PLAYTEST_HELP.md`);
+     bare, and the bare console has no thread context (the `prompt-authoring`
+     skill's playtest instructions);
      a resolution gate cannot see this. The `*r` prefix is part of the
      briefed line, never assumed.
   2. **The brief names the LOAD MECHANISM for every staged copy** —

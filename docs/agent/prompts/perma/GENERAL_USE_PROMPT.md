@@ -62,9 +62,10 @@ burned context defaulting the other way; don't.
 
 This file no longer scripts the sitting — **the agent authors that prompt at
 sitting time** from `WORKFLOW.md` ("Probe hygiene", "Testing checklist per
-fix"), `docs/PLAYTEST_HELP.md` (console facts, harness recipes) and
-`docs/PLAYTEST_CHECKLIST.md` (the queue + protocol). Standing non-sitting
-work: `agent/STATE.md` names the active chain. Drone work is
+fix"), the `prompt-authoring` skill's playtest instructions and
+`docs/PLAYTEST_CHECKLIST.md` (the queue + protocol). Use `SMRTK_SLOTS.md` or
+`CO_RUNS.md` when that mode applies. Standing non-sitting work:
+`agent/STATE.md` names the active chain. Drone work is
 `docs/agent/prompts/perma/DRONE_PROJECT_PROMPT.md`.
 
 ## End of session
