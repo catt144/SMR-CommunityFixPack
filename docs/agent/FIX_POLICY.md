@@ -1,5 +1,10 @@
 # Fix Policy — how we patch
 
+## Must_Read_Header
+<!-- RULES -->
+Rule: Keep section 5 because it defines proposals that do not belong in this pack. [A3: pass]
+<!-- /RULES -->
+
 Rules for every fix in this pack, in priority order. The goal: maximum
 compatibility with other mods and future game patches, zero edits to game files.
 
@@ -647,13 +652,13 @@ in its second line and it shipped anyway. That is the failure this rule stops.
 
 ## 5. Optional modules (`Opt_*`)
 
-> ⛔ **N/A IN THIS PACK SINCE 2026-08-12 — and kept, not deleted.** All eight
+> **N/A IN THIS PACK SINCE 2026-08-12.** All eight
 > `Opt_` modules and the whole Mod Options surface moved to the standalone
 > **Community Opt-In Pack** (`C:\Dev\SMR-OptInPack`), where this section is the
-> live spec. It stays here for three reasons: `00_Core.lua` still carries the
+> live spec. `00_Core.lua` still carries the
 > `optional`/`OptionEnabled`/`ApplyModOptions` machinery (dormant, not removed);
-> a hundred historical entries and reports cite "FIX_POLICY §5"; and **the rule
-> below is the test for what does NOT belong in this pack.** ⇒ If a proposal
+> a hundred historical entries and reports cite "FIX_POLICY §5"; and the policy
+> below is the test for what does not belong in this pack. If a proposal
 > here needs a toggle, it is not a fix — it is that mod's, and §4's
 > unintended-defect test is what decides.
 
