@@ -77,7 +77,6 @@ The `declared class` values below are gate inputs, not conclusions inferred from
 |---|---|---|
 | `fixtoggles/` | `live` | authored 09-11: on/off controls per fix; its README is the manifest, checklist 148 |
 | `smrcf-modbrowser/`, `smrcf-verify/` | `live` | grouped chain entry; see `SMRCF_CHAIN_SET.md` |
-| `arming/` | `infrastructure-migration-leg-02` | migration debt: `tools/arm_leg.ps1` infrastructure; leg 02 moves it to `tools/` |
 
 **New prompts:** a reusable one goes in `perma/`; a one-off goes in the root and, when consumed,
 deletes **both** itself and its row above in the commit that lands its result.

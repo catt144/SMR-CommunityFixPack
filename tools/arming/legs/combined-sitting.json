@@ -7,7 +7,7 @@
   "_status": "The 99_CSLandscape.lua.txt payload is parked in payloads/ and is NOT armed by this manifest - the ancestor did not include it in its default pair either. Add it here deliberately if a leg needs it.",
 
   "kit": "C:\\Dev\\SMR-BugFixPack-TestKit",
-  "park": "C:\\Dev\\SMR-BugFixPack\\docs\\agent\\prompts\\arming\\payloads",
+  "park": "C:\\Dev\\SMR-BugFixPack\\tools\\arming\\payloads",
 
   "stripPattern": "Code/9[789]_CS",
   "anchorAfter": "99_FixtureCarry.lua",

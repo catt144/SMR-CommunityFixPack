@@ -123,19 +123,13 @@ def main():
 
         def exact_migrations(prompts):
             (prompts / "perma" / "CO_RUNS.md").write_text("fixture\n", encoding="utf-8")
-            (prompts / "arming").mkdir()
             rewrite_map(
                 prompts, "| `PROMPT.md` | `prompt` |",
                 "| `PROMPT.md` | `prompt` |\n"
                 "| `CO_RUNS.md` | `support-migration-leg-03` | exact debt |")
-            rewrite_map(
-                prompts, "| `live-a/`, `live-b/` | `live` |",
-                "| `live-a/`, `live-b/` | `live` |\n"
-                "| `arming/` | `infrastructure-migration-leg-02` | exact debt |")
 
         debt = run_case(module, root, "exact migration paths", exact_migrations, True)
         joined = "\n".join(debt)
-        assert "leg 02 consumes arming/" in joined, debt
         assert "leg 03 consumes perma/CO_RUNS.md" in joined, debt
 
     assert live.read_bytes() == original

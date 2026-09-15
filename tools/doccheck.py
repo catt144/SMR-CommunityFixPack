@@ -1171,8 +1171,6 @@ PROMPT_MAP_FIXED_EXCEPTIONS = {
     ("perma", "RELEASE_OUTBOX.md"): "ledger-exception",
 }
 PROMPT_MAP_MIGRATION_ALLOWANCES = {
-    # Exact paths only. Leg 02 consumes every chain allowance.
-    ("chain", "arming"): ("infrastructure-migration-leg-02", "leg 02"),
     # Exact paths only. Leg 03 consumes both support allowances.
     ("perma", "CO_RUNS.md"): ("support-migration-leg-03", "leg 03"),
     ("perma", "SMRTK_SLOTS.md"): ("support-migration-leg-03", "leg 03"),
