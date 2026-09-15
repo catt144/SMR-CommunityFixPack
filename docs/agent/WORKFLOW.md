@@ -866,45 +866,20 @@ exist):
 
 ## Verification rails (adopted 2026-09-12, owner)
 
-Each rule answers a failure this project actually had — none is a preference.
-Cite applicable rules by tag in a brief; a leg that skips one says which and why.
-
-**R-A · Verification is routed three ways. Name the kind before you verify.**
-- **VOLATILE-external** — a game build id, a deployed sha, a portal version, `ListFixes()`.
-  Read it with a command, every time. ⛔ Never quote a stored number: it was true once, and
-  this rig auto-updated into a new game build unasked while nobody was looking.
-- **VOLATILE in-repo** — what is owed, what is next. One small read: `STATE.md`,
-  `docs/WAITING_ON_YOU.md`.
-- **DURABLE structural** — an engine behaviour, a code shape. The **fingerprint**: `derived_at:`
-  plus `python tools/doccheck.py --emit-fingerprint`. A group that HOLDS needs no re-read at
-  all; re-derive only what MOVED.
-This replaces the six scattered "never quote a stored …" lines — they were one rule, six times.
-
-**R-B · Never read a file to prove a negative.** Absence is settled by a grep, never by
-reading. And a negative in a *compressed* artifact is not a sample at all — decode first. Three
-incidents here: the fpk "not found", the grep on an old name that was really a rename, and a
-one-sided count. A claim about what is ABSENT needs the presence side counted too.
+The global verification duties R-A, R-B, R-E, and R-G now live in `CLAUDE.md`'s
+`Must_Read_Header`. The task-specific rails remain here.
 
 **R-C · Brief element 9 — the derived-facts block.** Every brief carries, per fact: the fact ·
 how it was measured · the HEAD or build id · **one command that re-checks it**. An empty
-`git diff --stat <sha>..HEAD -- <paths>` means read none of the sources. Two conditions:
-- **Every check must be scoped so it CAN fail.** A grep whose paths exclude the files holding
-  the contrary evidence proves nothing and reads as proof. Ask "what would make this vacuous?"
-  before the reader acts on it.
-- **A fix invalidates its own tests.** Re-base harm legs on the pre-fix body and re-run the
+`git diff --stat <sha>..HEAD -- <paths>` means read none of the sources. A fix invalidates its
+own tests: re-base harm legs on the pre-fix body and re-run the
   whole suite, not the leg you changed.
 Keep the phrasing bare. Firmer wording buys nothing measurable and costs ~20% more.
-
-**R-E · Run, then write.** A measurement quoted before its run exists carries
-`<<PENDING-RUN>>` until the run lands. Every count carries the command *and the filter* that
-produced it. A total is not a set: reconcile it against its own members.
 
 **R-F · Size the verification by owner-observability.** A player-visible defect is verified by
 one attended A/B in the game — the owner is the cheapest verifier of "can a player actually do
 this". An engine-internal defect is verified by desk harness plus audit, because no amount of
 watching would show it. Choose the leg by who can see the thing, not by how thorough it feels.
-
-**R-G · Record the executed model at close-out**, read from the transcript, never assumed.
 
 ### What these rails are not
 They are not a licence to re-derive everything. Zero-trust re-derivation is the terminal
@@ -921,20 +896,8 @@ could decide to load anything. R-A is how class 2 is discharged: one command, no
 
 `80_AgentSlots.lua` is agent-owned, rewritten per sitting using `prompts/perma/SMRTK_SLOTS.md`, never edited by a build link.
 
-Five or more interactive sessions work this checkout at once. These are mechanical rules about
-that, not rails — they were homed here 2026-09-13 from `prompts/perma/HANDOFF_ORCHESTRATOR.md`,
-whose own retirement trigger had fired while they still lived nowhere else.
-
-- ⛔ **All sessions share ONE git identity.** `git log --author` cannot attribute work. Identify
-  by **sha + diff**, and list your own shas when you relay.
-- ⛔ **A pathspec is only HALF a commit fence.** `git commit -- <paths>` protects every OTHER
-  file, but for a path you *name* git commits that path's **working-tree** content — a peer's
-  unstaged edits included (09-12, `cc3edf2`). On a file two sessions are inside at once, stage
-  **your own hunks** (`git add -p`) and commit **without** a pathspec.
-  ⚠️ It cuts both ways: on 09-13 this session's two uncommitted `STATE.md` edits were swept into
-  a peer's commit (`bf2d75f`) seconds later. Nothing was lost, but neither commit message
-  describes what it actually contains. **Re-check `git status` on a shared file immediately
-  before the write, not at the top of the session** — a clean status 20 minutes old is not a fence.
+Five or more interactive sessions work this checkout at once. The global identity,
+attribution, status, and hunk-staging duties now live in `CLAUDE.md`'s `Must_Read_Header`.
 - ⛔ **After a CHECKLIST-ONLY edit run `python tools/doccheck.py --regen-waiting`, NOT `--regen`.**
   `--regen` rebuilds both indices from **every entry on disk, a peer's uncommitted ones included**.
   An edit that touches **entries** as well still needs the full `--regen` — the distinction is what
