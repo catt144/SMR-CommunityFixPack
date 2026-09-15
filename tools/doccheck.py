@@ -132,6 +132,16 @@ RULE_HEADER_DOCS = (
 )
 RULE_HEADER_WARN_BYTES = 1024
 RULE_HEADER_MAX_BYTES = 2048
+# The kernel is a different animal from a doc-local header and gets its own cap.
+# Measured 2026-09-15 after the rules migration: the eight doc-local headers run
+# 112-512 B (the largest is half the warn), while CLAUDE.md carries every global
+# rule at 2033 B. One cap for both is what forced correct rules to be compressed
+# to fit -- and that compression is what broke four of them (see 396d7f2). Raised
+# by owner ruling 2026-09-15; notes and the restore condition in
+# .claude/DECISIONS.md. Doc-local headers keep 1024/2048 and are nowhere near it.
+KERNEL_HEADER_WARN_BYTES = 2560
+KERNEL_HEADER_MAX_BYTES = 3072
+KERNEL_HEADER_FILE = "CLAUDE.md"
 RULE_START = "<!-- RULES -->"
 RULE_END = "<!-- /RULES -->"
 RULE_HEADING = "## Must_Read_Header"
@@ -1982,12 +1992,15 @@ def check_rule_headers(out):
         heading, start, end = block
         required_blocks[rel] = block
         size = len("\n".join(lines[heading:end + 1]).encode("utf-8"))
-        if size > RULE_HEADER_MAX_BYTES:
+        is_kernel = rel.replace("\\", "/").endswith(KERNEL_HEADER_FILE)
+        hard = KERNEL_HEADER_MAX_BYTES if is_kernel else RULE_HEADER_MAX_BYTES
+        warn = KERNEL_HEADER_WARN_BYTES if is_kernel else RULE_HEADER_WARN_BYTES
+        if size > hard:
             out.append("RULES HEADERS: RED - %s header is %d B; hard cap is %d B"
-                       % (rel, size, RULE_HEADER_MAX_BYTES))
+                       % (rel, size, hard))
             ok = False
-        elif size > RULE_HEADER_WARN_BYTES:
-            over_warn.append("%s (%d B)" % (rel, size))
+        elif size > warn:
+            over_warn.append("%s (%d B, warn %d)" % (rel, size, warn))
         header_rule_count += sum(1 for line in lines[start + 1:end]
                                  if line.startswith("Rule:"))
 
@@ -2066,8 +2079,8 @@ def check_rule_headers(out):
         out.append("RULES HEADERS: PASS - %d required block(s), %d canonical "
                    "header rule(s)" % (len(required_blocks), header_rule_count))
     if over_warn:
-        out.append("RULES HEADERS: WARN - header exceeds %d B warning threshold: %s"
-                   % (RULE_HEADER_WARN_BYTES, ", ".join(over_warn)))
+        out.append("RULES HEADERS: WARN - header over its warning threshold: %s"
+                   % ", ".join(over_warn))
     if misplaced:
         out.append("RULE PLACEMENT: WARN - Rule line(s) outside Must_Read_Header: %s"
                    % ", ".join(misplaced))
