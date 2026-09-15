@@ -101,5 +101,4 @@ play evidence; no status promotion without witnessing the leg.
 Give the owner one line after gates pass: **"start the game; the Agent tab is loaded"**.
 Relay the slot labels, predictions path and HEADs to the attending agent; that
 agent reads/logs results and archives evidence. Do not ask the owner to paste
-commands already provisioned in slots. This standing file is updated in place,
-never consumed with git rm.
+commands already provisioned in slots.
