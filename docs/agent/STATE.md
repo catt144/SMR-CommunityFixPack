@@ -69,7 +69,7 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 - ✅ SITE DEPLOYED 2026-09-13 07:06Z, `d86a347`, state `success` (deployments API + live page read): **49** live rows
   (45 success + 4 question) = the card's Forty-nine, first agreement since 09-11. Live FAQ carries "Four judgment calls"
   and no longer promises the retired farm-oxygen repair. ⚖️ The deploy is the owner's act; `publish-site.yml` is
-  `workflow_dispatch` only. Live-deployment read route: `perma/SITE_AUDIT.md`.
+  `workflow_dispatch` only. Live-deployment read route: `agent/support/LIVE_SITE_READ.md`.
   Owner's 2 pared files (`for-modders.md`, `install.md`) stay uncommitted = decision 47.
 - ⭐ FR-1 TEMP WORKAROUND MOD LIVE 09-11 (Steam 3799500849 / PDX 158711). **ALL FR-1 / Linux / NVIDIA work →
   `prompts/perma/LINUX_DISPATCH.md`.** Field: 3 working (one 10xx), 1 failing (GTX 1070, log requested).

@@ -52,7 +52,6 @@ The `declared class` values below are gate inputs, not conclusions inferred from
 | `RELEASE_OUTBOX.md` | `ledger-exception` | the one owner-exempt ledger; `RELEASE.md` draws every player-facing change landed since the last upload |
 | `POST_UPLOAD_CLOSE.md` | `prompt` | the close-out, fired by `RELEASE.md` §4 **after** the listing exists — never before |
 | `PUBLIC_SURFACE_SWEEP.md` | `prompt` | making every player-facing surface match a shipped change |
-| `SITE_AUDIT.md` | `prompt` | auditing what the LIVE Pages site says, as opposed to what is committed |
 | `STATE_EVICTION.md` | `prompt` | when STATE is over its byte budget |
 
 ## Root — live one-offs
