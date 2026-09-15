@@ -56,6 +56,11 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   one-token repair is VACUOUS, and its playtest needs an ESA colony. **C94** stays `cand`, control retired.
   Engine properties behind them: `EF-103` (habitat is a Community, never a `Dome`) · `EF-104` (expedition
   crew is drafted colony-wide and boards by teleport; ⛔ carries ONE unexplained draft observation).
+- **C97** (P3, `cand` 09-15): the never-before-audited 1.1.0 tutorial rewrite (`TutorialsNew.lua`) — 4 stalls
+  that can strand a tutorial run + 5 flag contracts the rewrite orphaned. ⛔ **NOT OURS** (both pack modules
+  touching tutorial code proven neutral in source) and ⛔ **NO NORMAL-PLAY REACH** — `g_Tutorial` is a plain
+  global, never a GameVar, and a tutorial never continues into a colony. ⛔ Source only, NOT reproduced.
+  3 fact candidates await acceptance in the entry's last section; ⛔ do not re-audit the file to find them.
 - ⛔ `SaintBlessing`'s kit probe PASSes **vacuously** with no domed Saint — not coverage; field reports are the detector
   (ck130). ✅ The heal itself fired in play 09-12.
 - Post-launch LIVE: F105, F107, F108 (v4), F110 (v5), hotfix 2 (v6), C74+C77+C83 (v7), F119+C86 (v8), F59 repair +
@@ -129,6 +134,6 @@ BUILD STATE (emitted by tools/doccheck.py)
 - modules: 46 registered (46 default-active, 0 optional-gated files)
 - Code/*.lua files: 47
 - TestKit probes: 97
-- BUGS index rows: 119 F + 13 D + 96 C
+- BUGS index rows: 119 F + 13 D + 97 C
 ```
 Records citing **1.0.7.396349** (`EF-014`) predate the baseline move; INSTALLED is **1.1.0**.
