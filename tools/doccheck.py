@@ -125,6 +125,7 @@ RULE_HEADER_DOCS = (
     "docs/UPLOAD_WORKFLOW.md",
     "docs/agent/FIX_POLICY.md",
     "docs/agent/STATE.md",
+    "docs/agent/prompts/README.md",
     "docs/agent/prompts/perma/COMBINED_SITTING.md",
     "docs/agent/prompts/perma/HANDOFF_ORCHESTRATOR.md",
     "docs/agent/prompts/perma/RELEASE_OUTBOX.md",
@@ -1160,34 +1161,73 @@ def check_root(out):
     return False
 
 
-def prompt_map_rows(mapfile):
-    """-> ({table: {filename}}, [struck cells]) parsed out of prompts/README.md.
+PROMPT_MAP_DEFAULT_CLASSES = {
+    "perma": "prompt",
+    "root": "prompt",
+    "chain": "live",
+}
+PROMPT_MAP_FIXED_EXCEPTIONS = {
+    # Owner's one permanent supporting-ledger concession.
+    ("perma", "RELEASE_OUTBOX.md"): "ledger-exception",
+}
+PROMPT_MAP_MIGRATION_ALLOWANCES = {
+    # Exact paths only. Leg 02 consumes every chain allowance.
+    ("chain", "arming"): ("infrastructure-migration-leg-02", "leg 02"),
+    ("chain", "hotfix2"): ("closed-migration-leg-02", "leg 02"),
+    ("chain", "prelaunch-sweep"): ("closed-migration-leg-02", "leg 02"),
+    ("chain", "smrtk"): ("closed-migration-leg-02", "leg 02"),
+    ("chain", "vanillahunt"): ("closed-migration-leg-02", "leg 02"),
+    # Exact paths only. Leg 03 consumes both support allowances.
+    ("perma", "CO_RUNS.md"): ("support-migration-leg-03", "leg 03"),
+    ("perma", "SMRTK_SLOTS.md"): ("support-migration-leg-03", "leg 03"),
+    # Exact paths only. Leg 03 consumes the owner-ruled purge allowances.
+    ("perma", "COMBINED_SITTING.md"): ("purge-migration-leg-03", "leg 03"),
+    ("perma", "DISPATCH.md"): ("purge-migration-leg-03", "leg 03"),
+    ("perma", "DRONE_PROJECT_PROMPT.md"): ("purge-migration-leg-03", "leg 03"),
+}
 
-    The map is PARSED, never duplicated here — same reason as `readme_map`: a
-    second hard-coded copy would be a third thing to drift. A row's first cell
-    may name more than one file; the heading above it says which table it is in.
-    """
-    rows = {"perma": set(), "root": set()}
+
+def prompt_map_rows(mapfile):
+    """Parse map paths and declared classes, including grouped first cells."""
+    rows = {"perma": {}, "root": {}, "chain": {}}
     struck = []
+    malformed = []
     table = None
-    for line in read(mapfile):
+    for lineno, line in enumerate(read(mapfile), 1):
         if line.startswith("## "):
             table = ("perma" if "perma" in line
-                     else "root" if "Root" in line else None)
+                     else "root" if "Root" in line
+                     else "chain" if "Chain folders" in line else None)
             continue
         if table is None or not line.startswith("|"):
             continue
-        cell = line.split("|")[1].strip()
-        if "~~" in cell:
-            struck.append((table, cell))
+        cells = [cell.strip() for cell in line.split("|")[1:-1]]
+        if len(cells) < 2:
             continue
-        for name in re.findall(r"`([^`]+\.md)`", cell):
-            rows[table].add(name)
-    return rows, struck
+        name_re = r"`([^`]+/)`" if table == "chain" else r"`([^`]+\.md)`"
+        names = re.findall(name_re, cells[0])
+        if not names:
+            continue
+        if "~~" in cells[0]:
+            struck.append((table, cells[0], lineno))
+            continue
+        classes = re.findall(r"`([^`]+)`", cells[1])
+        if len(classes) != 1:
+            malformed.append("line %d %s row needs exactly one declared class"
+                             % (lineno, table))
+            continue
+        declared = classes[0]
+        for raw in names:
+            name = raw[:-1] if table == "chain" else raw
+            if name in rows[table]:
+                malformed.append("line %d repeats %s/%s" % (lineno, table, name))
+            else:
+                rows[table][name] = declared
+    return rows, struck, malformed
 
 
 def check_prompt_map(out):
-    """prompts/README.md against prompts/ — both directions, and no tombstones.
+    """Gate prompt paths, chain directories, and declared classifications.
 
     A row that outlives its file is how a next session fires spent work: on
     2026-09-13 ck170's own brief was `git rm`'d and its "NOT FIRED — for Codex"
@@ -1202,33 +1242,66 @@ def check_prompt_map(out):
         out.append("PROMPT MAP: RED  docs/agent/prompts/README.md is missing "
                    "— the one-offs have no map")
         return False
-    rows, struck = prompt_map_rows(mapfile)
+    rows, struck, malformed = prompt_map_rows(mapfile)
     disk = {
         "perma": {f for f in os.listdir(perma) if f.endswith(".md")},
         "root": {f for f in os.listdir(prompts)
                  if f.endswith(".md") and f != "README.md"},
+        # Descendants are deliberately not enumerated: mapped LIVE chains may
+        # contain their README and evidence. The map itself is the root README
+        # excluded above. Neither exception licenses a supporting root file.
+        "chain": {f for f in os.listdir(prompts)
+                  if f != "perma" and os.path.isdir(os.path.join(prompts, f))},
     }
-    red = []
+    red = ["  RED  prompts/README.md %s" % finding for finding in malformed]
     for cell in struck:
         red.append("  RED  prompts/README.md keeps a struck-through row (%s) — a "
                    "fired prompt leaves the map entirely (checklist 174)" % cell[1])
-    for table in ("perma", "root"):
-        where = "perma/" if table == "perma" else ""
-        for name in sorted(rows[table] - disk[table]):
-            red.append("  RED  prompts/README.md has a row for %s%s and the file is "
+    where = {"perma": "perma/", "root": "", "chain": ""}
+    noun = {"perma": "file", "root": "file", "chain": "directory"}
+    for table in ("perma", "root", "chain"):
+        mapped = set(rows[table])
+        for name in sorted(mapped - disk[table]):
+            suffix = "/" if table == "chain" else ""
+            red.append("  RED  prompts/README.md has a row for %s%s%s and the %s is "
                        "not there — delete the row in the commit that consumes it"
-                       % (where, name))
-        for name in sorted(disk[table] - rows[table]):
-            red.append("  RED  docs/agent/prompts/%s%s exists and the map does not "
-                       "list it — every prompt is reachable from the map"
-                       % (where, name))
+                       % (where[table], name, suffix, noun[table]))
+        for name in sorted(disk[table] - mapped):
+            suffix = "/" if table == "chain" else ""
+            red.append("  RED  docs/agent/prompts/%s%s%s exists and the map does not "
+                       "list it — every prompt or chain is reachable from the map"
+                       % (where[table], name, suffix))
+        for name, declared in sorted(rows[table].items()):
+            key = (table, name)
+            expected = PROMPT_MAP_DEFAULT_CLASSES[table]
+            if key in PROMPT_MAP_FIXED_EXCEPTIONS:
+                expected = PROMPT_MAP_FIXED_EXCEPTIONS[key]
+            if key in PROMPT_MAP_MIGRATION_ALLOWANCES:
+                expected = PROMPT_MAP_MIGRATION_ALLOWANCES[key][0]
+            if declared != expected:
+                red.append("  RED  prompts/README.md declares %s%s as `%s`; exact path "
+                           "requires `%s`" % (where[table], name, declared, expected))
     if red:
         out.extend(red)
         out.append("PROMPT MAP: RED  %d finding(s)" % len(red))
         return False
-    out.append("PROMPT MAP: PASS — %d perma + %d one-off row(s) agree with disk "
-               "in both directions; no tombstones"
-               % (len(rows["perma"]), len(rows["root"])))
+    out.append("PROMPT MAP: PASS — %d perma + %d one-off + %d chain row(s) agree "
+               "with disk in both directions; declared classes hold; live-chain "
+               "README/evidence and the map itself are permitted; no tombstones"
+               % (len(rows["perma"]), len(rows["root"]), len(rows["chain"])))
+    debts = {}
+    for key, (declared, leg) in PROMPT_MAP_MIGRATION_ALLOWANCES.items():
+        table, name = key
+        if rows[table].get(name) == declared and name in disk[table]:
+            debts.setdefault(leg, []).append((table, name))
+    if debts:
+        parts = []
+        for leg in sorted(debts):
+            names = [(("perma/" if table == "perma" else "") + name +
+                      ("/" if table == "chain" else ""))
+                     for table, name in sorted(debts[leg])]
+            parts.append("%s consumes %s" % (leg, ", ".join(names)))
+        out.append("PROMPT MAP: MIGRATION DEBT — " + "; ".join(parts))
     return True
 
 
@@ -2162,6 +2235,7 @@ def main():
     ok = flpk_selftest(out) and ok
     ok = bodycheck_selftest(out) and ok
     ok = required_selftest("ck170_selftest.py", out) and ok
+    ok = required_selftest("prompt_map_selftest.py", out) and ok
     ok = required_selftest("repair_pass_selftest.py", out) and ok
     ok = required_selftest("state_counts_selftest.py", out) and ok
     push_set_report(out)   # report-only: the budget is the owner's to act on

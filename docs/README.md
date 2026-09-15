@@ -29,6 +29,7 @@ docs/
     facts/                engine behaviour — one file per fact
     reports/              reports, plans, specs, audits, surveys
     prompts/              README.md = the map · perma/ = standing prompts · root = live one-offs
+    support/              protocols and references used by prompts, but not themselves fired
   archive/                spent. SESSION_LOG.md, PLAYTEST_ARCHIVE.md,
                           MOD_DESCRIPTION.md (frozen), retired prompts
 ```
@@ -90,6 +91,8 @@ difference. Generated files say so on line 1.
 - A **report, plan, spec, audit or survey** → `agent/reports/`.
 - A **prompt** → reusable: `agent/prompts/perma/`; one-off: the `agent/prompts/` root, deleted when consumed. Update the
   map, `agent/prompts/README.md`, either way.
+- A **supporting document used by a prompt** → `agent/support/`; keep the prompt's pointer and
+  update `agent/support/README.md` when the document lands.
 - A **session leg** → `archive/SESSION_LOG.md` (append-only, newest first).
 - A **decision the owner must make** → `PLAYTEST_CHECKLIST.md` →
   "Decisions waiting on you". Never only in an agent doc.

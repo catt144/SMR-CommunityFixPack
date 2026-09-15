@@ -57,11 +57,12 @@ commit, along with applicable migration allowances. Repair live entry points,
 including the edited `CLAUDE.md` source if it still points to DISPATCH; regenerate
 AGENTS in that commit. Do not recreate DISPATCH's task router elsewhere.
 
-The spec inherited a corpus of 8 blocks/31 rules at `0020c33`; deleting
-COMBINED_SITTING removes one block and one rule (historically 7/30 afterward).
-These are inherited measurements, not today's acceptance totals: leg 01 adds a
-contract header. Run the current corpus command below, enumerate actual members,
-and reconcile the removal against that baseline and any intervening additions.
+The spec inherited a corpus of 8 blocks/31 rules at `0020c33`. Leg 01 registers
+`docs/agent/prompts/README.md` and adds its one contract rule: **+1 block/+1 rule**,
+measured as 9/32 by the focused header check before leg 01 regeneration. Deleting
+COMBINED_SITTING therefore removes one block and one rule. These are inherited
+measurements, not today's acceptance totals: run the current corpus command below,
+enumerate actual members, and reconcile the removal against any intervening additions.
 Do not force the corpus to 30 by deleting an unrelated rule.
 
 ## Commit 2 - Purge and replace, atomically

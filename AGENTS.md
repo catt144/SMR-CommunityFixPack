@@ -29,11 +29,12 @@ patched at runtime; no game files are modified. The tree map is `docs/README.md`
 **Folder contract** (enforced by doccheck). `docs/` root holds the five
 human files (PLAYTEST_CHECKLIST, UPLOAD_WORKFLOW, FIELD_REPORT_REPLIES,
 FUTURE_IDEAS, README), the BUGS/STATUS stubs, `agent/` and `archive/`. Agent material is `docs/agent/`
-(`bugs/`, `facts/`, `reports/`, `prompts/`, STATE/WORKFLOW/FIX_POLICY);
+(`bugs/`, `facts/`, `reports/`, `prompts/`, `support/`, STATE/WORKFLOW/FIX_POLICY);
 `docs/archive/` is append-only. `INDEX.md` in `bugs/` and `facts/` is generated from
 entry and fact files (line-1 banner).
 Prompts: the map is `docs/agent/prompts/README.md`. Reusable prompts live in `prompts/perma/`
 (ad-hoc work: `perma/DISPATCH.md`; all FR-1/Linux work: `perma/LINUX_DISPATCH.md`).
+Prompt-supporting protocols and references live outside that tree in `docs/agent/support/`.
 
 > Older records cite pre-move paths and the old mod name — translate via `docs/README.md` "Path translation".
 
