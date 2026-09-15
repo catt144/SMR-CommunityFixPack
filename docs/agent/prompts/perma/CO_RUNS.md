@@ -327,9 +327,21 @@ scoping work route "needs hours of observation" items there instead of parking
 them.
 
 **The rig's capability envelope** (measured 2026-08-04, co-runs #0 and #1 —
-four launches; run procedure and cost model: `PLAYTEST_HELP.md` "The co-run
-rig". The founding spec, `CORUN_RIG_SPEC.md`, was consumed at chain close and
-survives in git — `git show 93088ba:docs/agent/prompts/corun-rig/CORUN_RIG_SPEC.md`):
+four launches. The founding spec, `CORUN_RIG_SPEC.md`, was consumed at chain
+close and survives in git —
+`git show 93088ba:docs/agent/prompts/corun-rig/CORUN_RIG_SPEC.md`):
+
+- **Launch mechanics:** with the game closed, stage the designated save copy in
+  the signed-in account's numeric save folder and load it by filename, not its
+  duplicated display name. Arm the committed probe file and metadata entry at
+  the sitting, verify both from disk, then launch with
+  `& "c:\program files (x86)\steam\steam.exe" -applaunch 3215050` and no
+  `-smrautorun`. From a real-time thread with its own watchdog, poll for the
+  pre-game menu, call `LoadGame("<COPY>.savegame.sav", {})`, set and read back
+  game speed because the save arrives paused, then allow the measured 15-second
+  settle before game-time work. Time the load from the engine's own log and the
+  cycle from shutdown; `RealTime()` deltas do not survive a loading screen
+  (`EF-045`). Disarm and remove the staged copy during the normal close-out.
 
 - **PROVEN by execution:** agent-driven Steam launch (no picker interposes;
   launch→log 1–5.2 s across four launches, no room for a human click);
