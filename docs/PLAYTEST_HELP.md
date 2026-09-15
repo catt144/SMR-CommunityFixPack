@@ -209,17 +209,6 @@ only `Platform.cheats` (`Lua/Cheats.lua:1-3`). Always type the **function call**
 the console instead. (The *console* itself is separate — the Test Kit turns it on
 with `ConsoleSetEnabled(true)` + `ReloadShortcuts()`.)
 
-### Harness quick facts (relocated 2026-08-04 from the standing prompt)
-
-- **Baseline** = the fix-pack `metadata.lua` with an **emptied `code` list** —
-  keep `default_options`; restore from a saved copy, NOT `git checkout`; never
-  `git commit -a` while that edit is in the tree.
-- **Probe-authoring:** every probe ends with an explicit `return "PASS", …`
-  (nil → silent SKIP). Stand-in probes assert the MODULE's action, never
-  vanilla bookkeeping around stubs.
-- Launch timing: a leg ≈75 s but `Mars.exe` may take minutes to appear —
-  never kill on a short timeout (25-min guard).
-
 ## Save fixtures — create these once, reuse them
 
 Make each one, then **save under the given name**. Every open test below names its
