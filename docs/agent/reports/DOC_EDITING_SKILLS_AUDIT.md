@@ -64,8 +64,9 @@ R-D follows the source section but is outside the brief's specified elements
 - Complete: pending move 2 disposition.
 - Complete: pending move 3 disposition.
 - Complete: size report and proposals (checklist 186).
-- In progress: revisit criteria.
-- Pending: final verification and consume.
+- Complete: revisit criteria.
+- In progress: final report and verification.
+- Pending: consume.
 
 No new gate is selected: syntax and freshness already fail loudly; the remaining
 questions concern meaning, authority, timing or an editor's actions. Invocation
@@ -119,3 +120,42 @@ unreviewed cut of obligations to restore enforcement. It is a ceiling, not a
 growth target. The later attended audit should decide whether each existing
 skill earns its space before the owner restores caps. Checklist 186 carries
 the proposal; no number or cap switch in doccheck has been changed.
+
+## F. Provisional skills: expiry and failure evidence
+
+These are the first cut for the later attended skills/rules audit, after the
+document work. They are not accepted permanently merely because doccheck is
+GREEN. Revisit sooner if a trace below appears; the later audit is the required
+review even if none appears. No invocation A/B was run or proposed: workers
+already instructed by overhaul briefs do not supply a useful control arm.
+
+| Trace to inspect | What it would show |
+|---|---|
+| A commit changes CLAUDE without matching AGENTS content | The mechanical mirror failed or was bypassed; review doc-editing's regeneration scope and the hook before adding more prose. |
+| A prompt is added/removed without its map row, or its row describes the previous scope | Membership failure is mechanical; stale meaning is a doc-editing review failure. Inspect both sides of the same commit. |
+| An INDEX commit differs from what that commit's sources render | Source/output inconsistency. An identical hand-written output is indistinguishable from regeneration in git; do not claim history can prove the editing method. |
+| WORKFLOW regains the packaged authoring procedure, or a moved duty remains/reappears at its old home | A duplicated or incomplete move; compare the source/destination patches. |
+| A new brief omits an applicable work-list, scope, stop, claims, lifecycle, probe-evidence, read-path or facts element | Prompt-authoring did not produce a usable brief. Compare the missing requirement with the job's actual preconditions, not merely its headings. |
+| A brief revives the probe-age refusal or a marker contradicts a settled ruling | The skills preserved syntax while losing owner authority or state; review the relevant ruling and conditions. |
+| Both skills repeat gate-enforced duties, or routinely send workers to unrelated material | Their placement/size rationale is wrong. Narrow or merge the redundant procedure at the attended audit rather than accumulate another layer. |
+
+Use `git log -p -- <source> <destination>` for each pair, starting at the skill
+build commits. Map descriptions and obligation retention still need a reader;
+git exposes their changes, it does not adjudicate semantics. A clean history
+does not prove the skills were invoked or caused the clean result.
+
+## Packaging decisions and limits
+
+The prompt skill follows the owner's current ck184 no-refusal ruling recorded
+in STATE at the audited HEAD. It retains the sweep step and evidence, but does
+not transplant element 7's obsolete instruction to refuse results. The older
+WORKFLOW Probe hygiene body still contains refusal language; broad rewriting
+of that testing protocol is outside this packaging task and remains material
+for the later rules audit. The skill's owner-authority qualification applies
+when following that source's sweep mechanism.
+
+The two new skills carry the ungated procedures identified above. The global
+source-first, status/pathspec and model-recording duties were not reauthored.
+R-D remains in WORKFLOW. Building doc-editing makes the existing kernel's
+invocation rule usable for the first time; this session read and used it after
+creation. The report was bootstrapped under the initiating build instruction.
