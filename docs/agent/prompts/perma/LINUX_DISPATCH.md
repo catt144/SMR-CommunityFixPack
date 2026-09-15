@@ -1,9 +1,8 @@
-# Linux dispatch — FR-1 (Linux/Proton + NVIDIA 580 crash) and its temporary workaround mod (standing, model-agnostic)
+# Linux dispatch — FR-1 (Linux/Proton + NVIDIA 580 crash) and its temporary workaround mod (model-agnostic)
 
 Paste into a fresh Claude Code or Codex session whenever the owner brings **anything about FR-1**: a player report (works or doesn't),
 a log excerpt, a reply from the Paradox dev, a game patch, or a request to change or retire the workaround mod. Written 2026-09-11 by
-`smr-bugfixpack-5d` at the owner's ask ("get the linux issue off your plate entirely"). ♻️ **STANDING: never `git rm` this file.**
-Update §1 in place when the situation changes, and retire the prompt only per §5. The records (FINDINGS, checklist 145) win if they
+`smr-bugfixpack-5d` at the owner's ask ("get the linux issue off your plate entirely"). The records (FINDINGS, checklist 145) win if they
 disagree with this file.
 
 ## 0 · Orient
@@ -132,6 +131,6 @@ Evidence is read-only and never edited:
 - **Where results go:** FINDINGS §12 (one bullet per field report, verbatim), checklist 145 (owner-facing), the dev-reply doc
   (posts), SESSION_LOG (the leg). Commit by explicit pathspec with doccheck GREEN, then push.
 
-## 5 · Retiring this prompt
+## 5 · Retirement condition
 
-When Paradox's fix ships and the mod is retired (P3, "fixed"), or when the owner says so. Until then it is standing.
+This work closes when Paradox's fix ships and the mod is retired (P3, "fixed"), or when the owner says so.
