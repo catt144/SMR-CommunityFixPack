@@ -144,6 +144,32 @@ the README, updates the grouped map/work order and proves the live folder gone.
 No prompt ran; C35 remains `cand`, C52 remains `parked`, and the firing freeze
 remains in force.
 
+Cleanup-pass disposition and placement answers: `RELEASE_OUTBOX.md` remains a
+perma ledger because `release_prompt.md` consumes its Pending/Released lifecycle;
+its four canonical Must_Read_Header rules and all owner rulings/entry obligations
+were retained, while decorative symbols and duplicate usage prose were cut.
+`STATE_EVICTION.md` remains fireable only when status cleanup is called for:
+doccheck detects size but does not preserve the owner-register idioms, hazard
+admission test or archive routing. It now describes STATE as pull-only, names the
+actual `Now`, `Hazard pointers`, `Governing pointers`, `Open owner decisions` and
+`Build state` sections, uses a PowerShell-safe register check and drops stale
+mandatory-boot/fresh-context decoration. `SMRTK_SLOTS.md` stays in support, not
+prompts, because sitting briefs consume its slot/probe contract and no machine
+gate supplies the mutation/refusal/handoff detail; its classification, paths and
+duplicate prose were cleaned. No rule, owner ruling or pending obligation was
+dropped, and no new canonical Rule line was created.
+
+The same positive-control detector (`python .git/codex_measure.py`, control 6/6)
+at `8b3c643` measured before edits: release outbox 10,326 B / 27 emoji; STATE
+eviction 6,466 B / 7; SMRTK slots 8,134 B / 4. The edited worktree measured
+9,983 B / 0; 6,380 B / 0; 8,025 B / 0 respectively. The SMRTK baseline differs
+from leg 06's older 8,044-byte authoring value; the current command is authority.
+There are no new owner decisions or unfiled defects from this pass. Leg 06 was
+executed by Codex (GPT-5); terminal leg 07 remains for a fresh eligible vendor.
+Leg 06's consumed brief measured 14,055 B with SHA-256
+`0102EA0D477636CA1C9F9C61C0372014BFE003329C95A0C6422EA990CD411AB8` at
+`8b3c643`; exact live-path searches found no dependent pointer before deletion.
+
 ## Live progress
 
 - [IN PROGRESS - not executed] Prove the execution boundary: fresh context,
