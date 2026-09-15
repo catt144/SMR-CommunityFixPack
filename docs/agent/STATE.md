@@ -57,9 +57,12 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 - ⭐ **`prompts/smrtk/` (ck175): 01-07 BUILT. ⭐ 08 RAN 09-14 attended: PASS WITH CORRECTIONS.**
   Classes 1-17 PASS. 25 defects, `reports/SMRTK_FULL_SITTING.md`.
   ⭐ Design half + owner's ARCHITECTURE ruling (group by task, hot bar) = **ck183**; item 6 + the More trace ANSWERED 09-14.
-  ⭐ **09 BUILT + DESK 09-14** (re-layout, all 25 dispositioned, 84-name More trace): `reports/SMRTK_09_REBUILD.md`,
-  TestKit `d9f8fb1`+`9057fb6`; no play claim. NEXT: **08b** (changed-surface acceptance, ⚠ owner must first call the
-  surface stable), then 99. 08 + 09 prompts RETIRED 09-14.
+  ⭐ **09 BUILT + DESK 09-14**: `reports/SMRTK_09_REBUILD.md`, TestKit `d9f8fb1`+`9057fb6`.
+  ⭐⭐ **08b RAN 09-14 attended: PASS WITH CORRECTIONS** — items 1-8+10 PASS, 9 PARTIAL. **Requirement (A)
+  RE-ESTABLISHED on the rebuilt tree: 19 cheat leaves, `used=false`** — ⛔ a SAMPLE, not universal proof.
+  11 defects repaired (TestKit `2c3d05c`), 6 routed: `reports/SMRTK_08B_SURFACE.md`, logs `archive/logs/smrtk08b_*`.
+  ⛔ **A preflight attestation was accepted 5h STALE from a different tree** — unrouted, needs a call.
+  ⚠ Stamper CUT 09-14; toolkit is 7 pages. NEXT: **99** (Fable), the only link left. 08+09+08b prompts RETIRED.
   Verdict + corrections `reports/SMRTK_SKELETON_SITTING.md`; logs `archive/logs/smrtk02_*` (`ObjCheat` 1 in the control boot, **0** in the toolkit boot).
   ⛔ Depot class tree + what a `UniversalStorageDepotBase` guard misses = **`EF-102`**.
   ⛔ Eligibility stays `UNAVAILABLE:sandbox` (`EF-096`) — no-taint is necessary, NOT proven sufficient.

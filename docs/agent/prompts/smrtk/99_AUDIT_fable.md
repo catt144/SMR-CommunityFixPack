@@ -49,6 +49,25 @@ build other than the one 02/08 ran on.
 
 ## Notes from upstream
 
+- ⚠️ **(08b, 2026-09-14) BUILT DURING THE SITTING, AND THE OWNER ASKED THAT YOU
+  AUDIT IT — the probe picker now sorts alphabetically.** *"Ok build it but make
+  sure its included in the audit."* TestKit `2c3d05c`, `76_SMRTK_Kit.lua`.
+  - **What changed.** The `XCombo` was fed `SMRTest.order` directly at two sites;
+    both now take `probe_items()`, a **sorted COPY**. ⛔ **`SMRTest.order` IS THE
+    RUN ORDER** and probes may depend on it — `table.sort` mutates in place, so
+    sorting the live table would silently reorder execution while every verdict
+    still looked fine.
+  - **The claim to falsify, and it is a one-command check.** `SMRTest.order` must
+    still be read **unsorted** by `orderkey` (`:37`), the hidden-verdict sweep
+    (`:325`) and the verdict rows (`:359`), with only `:328` and `:357` sorted.
+    ⇒ `grep -n "SMRTest.order\|probe_items()" Code/76_SMRTK_Kit.lua`, and confirm
+    `probe_items` copies before sorting rather than sorting `src`.
+  - ⚠️ **No play witness.** It was built after the owner's last boot, so the
+    picker has **never been opened with this code**. Its rendering is NOT RUN.
+  - ⚖️ Flagged because it is the one change this sitting made with **no play
+    evidence at all**, and because a silent run-order change is the failure mode
+    that would not show up in any verdict you read.
+
 - ⚖️ **(08b, 2026-09-14) ROUTED TO YOU BY THE OWNER — the mechanized depot's
   fill/empty records carry no numbers.** Owner: *"Leave the mechinized depot for
   the audit."* ⛔ **The FEATURE IS NOT BROKEN** — fill and empty work; Dump read

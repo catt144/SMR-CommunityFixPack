@@ -1,0 +1,525 @@
+					Render 0:00:00:007
+*** executable info
+Timestamp:     	6a91a190
+Date:          	Fri Aug 28 10:56:16 2026
+Command line:  	
+Compiler:      	195136247, 142 (VS 2019) or newer
+
+
+*** hardware info
+CPU name      	Intel(R) Core(TM) i7-14700K
+CPU MHz       	3418
+CPU cores     	20/28
+Phys. Memory   	65278 MBytes
+Memory In Use  	60%
+Disk Free      	807779 MBytes
+					Render 0:00:00:008
+
+
+*** OS info
+OS:            	Windows 11
+Version:       	10.0.26100 
+
+
+*** Debug::Init()
+
+
+					Render 0:00:00:072
+Steam initialized (AppId 3215050)
+					Render 0:00:00:076
+Drive type for game installation: SSD, savegames: SSD
+Language: English
+					Render 0:00:01:462
+*** graphics info
+GPU                            	NVIDIA GeForce RTX 4080 Feature Level: 12.1 {  DoublePrecisionFloatShaderOps: 1 OutputMergerLogicOp: 1 MinPrecisionSupport: 2 TiledResourcesTier: 4 ResourceBindingTier: 3 PSSpecifiedStencilRefSupported: 0 TypedUAVLoadAdditionalFormats: 1 ROVsSupported: 1 ConservativeRasterizationTier: 3 MaxGPUVirtualAddressBitsPerResource: 40 StandardSwizzle64KBSupported: 0 CrossNodeSharingTier: 0 CrossAdapterRowMajorTextureSupported: 0 VPAndRTArrayIndexFromAnyShaderFeedingRasterizerSupportedWithoutGSEmulation: 1 ResourceHeapTier: 2 NotZeroedPools: 1 UMA: 0 UnalignedBlockTextures: 1}
+API                            	d3d12
+GPU Driver Version             	32.0.16.1074
+GPU Driver Package Version     	610.74
+GPU Dedicated Video Memory     	16048 MB
+					Render 0:00:01:611
+
+Libs: Network, Sequences, MouseTrackWin, DumbAI, MapGen, Paradox, TriggersAndEvents, Notifications, Research, Resources, Tutorial, Objectives 
+
+					Render 0:00:01:840
+
+Platform: desktop, editor, goldmaster, paradox, pc, steam
+
+					Render 0:00:02:775
+*** audio info
+Audio Endpoint                 	Speakers (Razer Leviathan V2)
+						Lua 0:00:02:776
+Lua revision: 403908
+Assets revision: 33006
+Steam AppID: 3215050
+Build version: 1.1.0.403908
+Build branch:  Release
+						Lua 0:00:05:061
+Account storage loaded successfully in 0 ms
+						Lua 0:00:05:062
+DLC norman loaded, lua revision 403908, assets revision 33006
+						Lua 0:00:05:063
+DLC thomas loaded, lua revision 403908, assets revision 33006
+						Lua 0:00:05:066
+[mod] Loaded mod def TEMPORARY - Linux NVIDIA 580 Crash Workaround (id SMR_FR1TempWorkaround, v0.00-003) unpacked from appdata
+[mod] Loaded mod def Relaunched Fix Pack (id SMR_CommunityFixPack, v1.00-011) unpacked from appdata
+[mod] Loaded mod def Community Fix Pack — Test Kit (id SMR_CommunityFixPackTestKit, v0.00-001) unpacked from appdata
+[mod] Loaded mod def Relaunched Fix Pack: Opt-In Modules (id SMR_CommunityOptInPack, v1.00-000) unpacked from appdata
+						Lua 0:00:05:444
+[mod] [CommunityOptInPack] ClassicRockets: applied						Lua 0:00:05:445
+
+[mod] [CommunityOptInPack] AcknowledgedWarnings: applied
+[mod] [CommunityOptInPack] ResidencyControl: applied
+[mod] [CommunityOptInPack] MultipleSuns: applied
+[mod] [CommunityOptInPack] DroneOverhaul: applied
+[mod] [CommunityOptInPack] CohortHousing: applied
+						Lua 0:00:05:446
+[mod] [CommunityOptInPack] NoHomeless: self-check targets Community but Workforce declares HasFreeWorkplacesAround — authoring error, not a game update (FIX_POLICY §2)
+[mod] [CommunityOptInPack] NoHomeless: inactive (Community.HasFreeWorkplacesAround not found — expected on the FIRST load pass and NOT a game update: this check names Community while Workforce declares the method (authoring error — see the preceding line), and mod code loads before the class hierarchy is built, so the module applies cleanly on the second pass. If no 'NoHomeless: applied' line follows this one, the method is genuinely gone — without it a flagged dome could never be staffed)
+[mod] [CommunityOptInPack] DroneStatDials: applied
+[mod] [CommunityFixPack] NightShiftWork: applied
+[mod] [CommunityFixPack] WispRewards: applied
+[mod] [CommunityFixPack] TrainsToVoid: applied
+						Lua 0:00:05:447
+[mod] [CommunityFixPack] LanderEmptyLaunch: applied
+[mod] [CommunityFixPack] ShelterReflex: applied
+[mod] [CommunityFixPack] BrokenTrackSalvage: applied
+[mod] [CommunityFixPack] TrackSalvageWipe: applied
+[mod] [CommunityFixPack] LakeEntombment: applied
+[mod] [CommunityFixPack] RocketDroneChurn: applied
+[mod] [CommunityFixPack] TradeRocketFuelRefresh: applied
+[mod] [CommunityFixPack] ShuttleTransportCache: applied
+						Lua 0:00:05:448
+[mod] [CommunityFixPack] VacuumWalks: applied
+[mod] [CommunityFixPack] ArrivalDeaths: applied
+[mod] [CommunityFixPack] StaleReservations: applied
+[mod] [CommunityFixPack] CrystalMysteryHang: applied
+[mod] [CommunityFixPack] DomeOverviewHighlight: applied
+[mod] [CommunityFixPack] TrainCargoDumping: applied
+[mod] [CommunityFixPack] DestroyedTunnels: applied
+[mod] [CommunityFixPack] DustSicknessBiorobots: applied
+[mod] [CommunityFixPack] GeneForging: applied
+						Lua 0:00:05:449
+[mod] [CommunityFixPack] MirrorSphereSite: applied
+[mod] [CommunityFixPack] PayloadTemplateRefill: applied
+[mod] [CommunityFixPack] ShuttleHubOffAvailable: applied
+[mod] [CommunityFixPack] FreedHousingNotice: applied
+[mod] [CommunityFixPack] LandscapeUnitFilter: applied
+						Lua 0:00:05:450
+[mod] [CommunityFixPack] RocketInteractGuard: applied
+[mod] [CommunityFixPack] TrackConnectorPingPong: applied
+[mod] [CommunityFixPack] TrackTunnelPowerBridge: applied
+[mod] [CommunityFixPack] GraphConsumedCaption: applied
+[mod] [CommunityFixPack] TrainWaitTime: applied
+[mod] [CommunityFixPack] FounderTraitNotification: applied
+						Lua 0:00:05:451
+[mod] [CommunityFixPack] SequenceLatents: applied
+[mod] [CommunityFixPack] TrackSalvageRefund: applied
+[mod] [CommunityFixPack] DroneTransportMinors: applied
+[mod] [CommunityFixPack] ScanDowngrade: applied
+[mod] [CommunityFixPack] BombardmentSpread: applied
+[mod] [CommunityFixPack] ExtenderFlapChurn: applied
+[mod] [CommunityFixPack] SaintBlessing: applied
+[mod] [CommunityFixPack] SinkholeIndestructible: applied
+[mod] [CommunityFixPack] ExoticDepositSign: applied
+						Lua 0:00:05:452
+[mod] [CommunityFixPack] JumboCaveReinforcementWedge: applied
+[mod] [CommunityFixPack] SilentHitMomentFX: applied
+[mod] [CommunityFixPack] CloggedBuildingRelease: applied
+[mod] [CommunityFixPack] FactionDomeSizeGate: applied
+[mod] [CommunityFixPack] BuildingCodesPrefab: applied
+[mod] [CommunityFixPack] SaveSanitizer: applied
+						Lua 0:00:05:453
+[mod] [SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag-only, UI was not up) — press Enter (or Alt-Shift-C) once in a colony
+[mod] [SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[mod] [SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+[SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+						Lua 0:00:05:458
+[mod] [SMRTK] SMRTK_CORE loaded=true tee=false t=1075 id=1
+[SMRTK] SMRTK_CORE loaded=true tee=false t=1075 id=1
+						Lua 0:00:05:461
+[mod] [SMRTK] SMRTK_SLOTS armed_at_load=0 sitting=smrtk08 slots="1 console_status,2 probe_preflight,3 check_after_load,4 read_map_click,5 short_breakpoint,6 dump_selected,scratch read_sitting" trigger=smrtk08_break t=1075 id=2
+[SMRTK] SMRTK_SLOTS armed_at_load=0 sitting=smrtk08 slots="1 console_status,2 probe_preflight,3 check_after_load,4 read_map_click,5 short_breakpoint,6 dump_selected,scratch read_sitting" trigger=smrtk08_break t=1075 id=2
+						Lua 0:00:05:462
+[mod] [SMRTest][carry] fixture-carry dump available — run SMRTest.FixtureCarry()
+						Lua 0:00:06:216
+[mod] [CommunityFixPack] SaintBlessing: inactive (no dome-colonists trait presets)
+[mod] [CommunityFixPack] SinkholeIndestructible: the St. Elmo's Fire sinkhole is now indestructible, like every other mystery set-piece
+						Lua 0:00:06:301
+Reloading done in 1235 ms
+						Lua 0:00:06:304
+Available DLCs: norman(Feeding the Future),thomas(Interplanetary Codex) 
+						Lua 0:00:06:345
+[mod] [SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=DataLoading t=1075 id=3
+[SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=DataLoading t=1075 id=3
+						Lua 0:00:06:745
+[preset] Preset postprocess took 176 ms.
+						Lua 0:00:06:803
+482 / 482 particle streams loaded in 51 ms.
+						Lua 0:00:06:804
+5 / 5 particle streams loaded in 1 ms.
+						Lua 0:00:06:805
+[mod] [CommunityOptInPack] MultipleSuns: BuildingTemplates.ArtificialSun not found — build limit NOT lifted (binding fix still active)
+[mod] [CommunityFixPack] SilentHitMomentFX: registered 11 missing animation-moment preset(s)
+						Lua 0:00:06:806
+[mod] [CommunityFixPack] FactionDomeSizeGate: 7 faction dislike(s) now wait for 10 colonists in a dome
+						Lua 0:00:07:009
+[mod] [CommunityOptInPack] MultipleSuns: Artificial Sun build-once limit lifted
+						Lua 0:00:07:010
+[mod] [CommunityFixPack] SaintBlessing: the shipped code resolves the trait label itself — data left untouched; save re-base armed for 1 preset(s) of 2
+						Lua 0:00:07:099
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=1075 id=4
+						Lua 0:00:07:131
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=1075 id=5
+						Lua 0:00:07:139
+[mod] Loaded mod items for: SMR_CommunityOptInPack, SMR_CommunityFixPack, SMR_CommunityFixPackTestKit
+[mod] [CommunityOptInPack] NoHomeless: applied
+						Lua 0:00:07:880
+[PdxSDK] Started up. Took 1008
+						Lua 0:00:08:299
+[Braze] SessionStart error The server name or address could not be resolved
+
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:08:397
+[Braze] SessionStart error The server name or address could not be resolved
+
+						Lua 0:00:08:398
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:10:774
+Load Game: 
+	lua_revision: 403908 (last saved with) 
+	orig_lua_revision: 403908 (created with) 
+	assets_revision: 33006 
+
+	dlcs: norman, thomas 
+
+	mods: SMR_CommunityOptInPack, SMR_CommunityFixPack, SMR_CommunityFixPackTestKit 
+						Lua 0:00:10:781
+*** Reloading assets from folder 'BinAssets/'
+						Lua 0:00:13:655
+*** Assets reloaded in 2.9 s, read 359.3 MB, read speed 125.0 MB/s, average read 8137 bytes.
+						Lua 0:00:14:185
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=3861 id=6
+						Lua 0:00:14:678
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=3861 id=7
+						Lua 0:00:15:072
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=3861 id=8
+						Lua 0:00:15:467
+[mod] [SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=PreLoadGame t=3861 id=9
+[SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=PreLoadGame t=3861 id=9
+						Lua 0:00:18:300
+[mod] [CommunityFixPack] ExoticDepositSign: 1 Exotic Minerals deposit(s) re-signed onto the clean entity
+						Lua 0:00:18:301
+[mod] [CommunityFixPack] SilentHitMomentFX: restored 2 missing hit-moment tracker(s) on load
+						Lua 0:00:18:308
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:18:819
+game_settings:
+    sponsor: Japan
+    profile: citymayor
+    founding_faction: WorkersParty
+    rival_colonies: NewArk, Roscosmos, CNSA, SpaceY
+    mystery_random: 
+    game_rules: (none)
+more_game_settings: save_game_id: 55afqP8zZV1vEYMb, mystery: MirrorSphereMystery, coordinates: 2N176E, landing_spot: ElysiumBeta, logo: Japan
+map_conditions: altitude: -2776, temperature: -15, cold_wave: 36, dust_devils: 47, dust_storm: 0, meteors: 73
+map_resources: concrete: 254, metals: 146, precious_metals: 146, water: 109
+						Lua 0:00:18:922
+[mod] [CommunityFixPack] SaveSanitizer: F95 astrogeologist-residue pass removed 0 modifier(s), left 0 unidentified
+Game Loaded in 8149 ms
+[mod] [SMRTK] SMRTK_PROVENANCE actions=2 last=unavailable last_id=15 present=true session=1789400587:3032022245:16476155:704241777 t=352034344 id=10
+[SMRTK] SMRTK_PROVENANCE actions=2 last=unavailable last_id=15 present=true session=1789400587:3032022245:16476155:704241777 t=352034344 id=10
+						Lua 0:00:18:932
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=352034344 id=11
+						Lua 0:00:18:946
+[mod] [SMRTK] SMRTK_DOCK action=dock_attach attached=true route="idBottom sibling" status=OK surface=one-toggle+tasks t=352034344 id=12
+						Lua 0:00:18:955
+[mod] [SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (clean) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:19:100
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=352034344 id=13
+						Lua 0:00:19:860
+Game loaded on map 						Lua 0:00:19:861
+BlankBig_04 in 9203 ms
+						Lua 0:00:20:167
+[mod] [SMRTK] SMRTK_PANEL_RESTORE open=true tab=Sitting t=352034344 id=14
+						Lua 0:00:22:520
+[mod] [SMRTK] SMRTK_TAB action=tab_Run page=Run status=OK t=352034344 id=15
+						Lua 0:00:44:989
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=FusionReactor(8179) status=OK t=352034344 id=16
+						Lua 0:01:38:445
+[mod] [SMRTK] SMRTK_TAB action=tab_Sitting page=Sitting status=OK t=352034344 id=17
+						Lua 0:01:39:175
+[mod] [SMRTK] SMRTK_TAB action=tab_Selected page=Selected status=OK t=352034344 id=18
+						Lua 0:01:39:671
+[mod] [SMRTK] SMRTK_TAB action=tab_Agent page=Agent status=OK t=352034344 id=19
+						Lua 0:01:48:093
+[mod] [SMRTK] SMRTK_TAB action=tab_World page=World status=OK t=352034344 id=20
+						Lua 0:01:50:789
+[mod] [SMRTK] SMRTK_TAB action=tab_Saves page=Saves status=OK t=352034344 id=21
+						Lua 0:01:51:846
+[mod] [SMRTK] SMRTK_TAB action=tab_Kit page=Kit status=OK t=352034344 id=22
+						Lua 0:03:26:548
+[mod] [SMRTK] SMRTK_PANEL action=panel_toggle open=false status=OK tab=Kit t=352034344 id=23
+						Lua 0:03:27:412
+[mod] [SMRTK] SMRTK_PANEL action=panel_toggle open=true status=OK tab=Kit t=352034344 id=24
+						Lua 0:03:27:769
+[mod] [SMRTK] SMRTK_PANEL action=panel_toggle open=false status=OK tab=Kit t=352034344 id=25
+						Lua 0:03:28:237
+[mod] [SMRTK] SMRTK_PANEL action=panel_toggle open=true status=OK tab=Kit t=352034344 id=26
+						Lua 0:03:34:848
+[mod] [SMRTK] SMRTK_CLEAR action=clear status=OK t=352034344 id=27
+						Lua 0:03:39:398
+[mod] [SMRTK] SMRTK_TAB action=tab_Agent page=Agent status=OK t=352034344 id=28
+						Lua 0:04:02:761
+[mod] [SMRTK] SMRTK_MARK action=mark label=SMRTK08_S4_ARM mark=35 status=OK t=352034344 id=29
+[SMRTK] SMRTK_MARK action=mark label=SMRTK08_S4_ARM mark=35 status=OK t=352034344 id=29
+[mod] [SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=46/46 game=403908 mark_action=mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack pack_version=11 read="live registry" save=SMRTK_490.savegame.sav sol=490 status=OK t=352034344 id=30
+[SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=46/46 game=403908 mark_action=mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack pack_version=11 read="live registry" save=SMRTK_490.savegame.sav sol=490 status=OK t=352034344 id=30
+						Lua 0:04:02:762
+[mod] [SMRTK] SMRTK_ARM action=slot_4 mutation=none once_click=true ready=true status=OK t=352034344 id=31
+[SMRTK] SMRTK_ARM action=slot_4 mutation=none once_click=true ready=true status=OK t=352034344 id=31
+						Lua 0:04:04:639
+[mod] [SMRTK] SMRTK_FIRE action=slot_4 armed_ms=0 clicks=1 cursor="(205942, 172573, 10504)" mutation=none object=none status=OK t=352034344 id=32
+[SMRTK] SMRTK_FIRE action=slot_4 armed_ms=0 clicks=1 cursor="(205942, 172573, 10504)" mutation=none object=none status=OK t=352034344 id=32
+						Lua 0:04:04:640
+[mod] [SMRTK] SMRTK_DUMP cause="click complete" clicks=1 leg=read_map_click mutation=none t=352034344 id=33
+[SMRTK] SMRTK_DUMP cause="click complete" clicks=1 leg=read_map_click mutation=none t=352034344 id=33
+[mod] [SMRTK] SMRTK_DISARM action=slot_4 cleanup="click target released" clicks=1 reason="click complete" status=OK t=352034344 id=34
+[SMRTK] SMRTK_DISARM action=slot_4 cleanup="click target released" clicks=1 reason="click complete" status=OK t=352034344 id=34
+						Lua 0:04:19:583
+[mod] [SMRTK] SMRTK_MARK action=mark label=SMRTK08_S4_ARM mark=41 status=OK t=352034344 id=35
+[SMRTK] SMRTK_MARK action=mark label=SMRTK08_S4_ARM mark=41 status=OK t=352034344 id=35
+						Lua 0:04:19:584
+[mod] [SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=46/46 game=403908 mark_action=mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack pack_version=11 read="live registry" save=SMRTK_490.savegame.sav sol=490 status=OK t=352034344 id=36
+[SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=46/46 game=403908 mark_action=mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack pack_version=11 read="live registry" save=SMRTK_490.savegame.sav sol=490 status=OK t=352034344 id=36
+[mod] [SMRTK] SMRTK_ARM action=slot_4 mutation=none once_click=true ready=true status=OK t=352034344 id=37
+[SMRTK] SMRTK_ARM action=slot_4 mutation=none once_click=true ready=true status=OK t=352034344 id=37
+						Lua 0:04:21:863
+[mod] [SMRTK] SMRTK_PANEL action=panel_toggle open=false status=OK tab=Agent t=352034344 id=38
+						Lua 0:04:25:250
+[mod] [SMRTK] SMRTK_PANEL action=panel_toggle open=true status=OK tab=Agent t=352034344 id=39
+						Lua 0:04:58:300
+[mod] [SMRTK] SMRTK_FIRE action=slot_4 armed_ms=0 clicks=1 cursor="(204328, 161491, 10006)" mutation=none object=FusionReactor(8179) status=OK t=352034344 id=40
+[SMRTK] SMRTK_FIRE action=slot_4 armed_ms=0 clicks=1 cursor="(204328, 161491, 10006)" mutation=none object=FusionReactor(8179) status=OK t=352034344 id=40
+[mod] [SMRTK] SMRTK_DUMP cause="click complete" clicks=1 leg=read_map_click mutation=none t=352034344 id=41
+[SMRTK] SMRTK_DUMP cause="click complete" clicks=1 leg=read_map_click mutation=none t=352034344 id=41
+[mod] [SMRTK] SMRTK_DISARM action=slot_4 cleanup="click target released" clicks=1 reason="click complete" status=OK t=352034344 id=42
+[SMRTK] SMRTK_DISARM action=slot_4 cleanup="click target released" clicks=1 reason="click complete" status=OK t=352034344 id=42
+						Lua 0:05:23:644
+[mod] [SMRTK] SMRTK_MARK action=mark label=SMRTK08_S4_ARM mark=49 status=OK t=352034344 id=43
+[SMRTK] SMRTK_MARK action=mark label=SMRTK08_S4_ARM mark=49 status=OK t=352034344 id=43
+[mod] [SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=46/46 game=403908 mark_action=mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack pack_version=11 read="live registry" save=SMRTK_490.savegame.sav sol=490 status=OK t=352034344 id=44
+[SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=46/46 game=403908 mark_action=mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack pack_version=11 read="live registry" save=SMRTK_490.savegame.sav sol=490 status=OK t=352034344 id=44
+[mod] [SMRTK] SMRTK_ARM action=slot_4 mutation=none once_click=true ready=true status=OK t=352034344 id=45
+[SMRTK] SMRTK_ARM action=slot_4 mutation=none once_click=true ready=true status=OK t=352034344 id=45
+						Lua 0:05:24:243
+[mod] [SMRTK] SMRTK_DUMP cause="right click" clicks=0 leg=read_map_click mutation=none t=352034344 id=46
+[SMRTK] SMRTK_DUMP cause="right click" clicks=0 leg=read_map_click mutation=none t=352034344 id=46
+[mod] [SMRTK] SMRTK_DISARM action=slot_4 cleanup="click target released" clicks=0 reason="right click" status=OK t=352034344 id=47
+[SMRTK] SMRTK_DISARM action=slot_4 cleanup="click target released" clicks=0 reason="right click" status=OK t=352034344 id=47
+						Lua 0:05:25:509
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=FusionReactor(8179) status=OK t=352034344 id=48
+						Lua 0:06:51:972
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipResourcePile object=ResourceStockpileLR(2000288477) status=OK t=352034344 id=49
+						Lua 0:06:53:782
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipResourcePile object=ResourceStockpileLR(2000286623) status=OK t=352034344 id=50
+						Lua 0:06:58:394
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipResourcePile object=ResourceStockpileLR(2000290645) status=OK t=352034344 id=51
+						Lua 0:07:00:590
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=StorageConcrete(8614) status=OK t=352034344 id=52
+						Lua 0:07:04:179
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=StorageFood(8748) status=OK t=352034344 id=53
+						Lua 0:07:07:085
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=StorageFood(8748) status=OK t=352034344 id=54
+						Lua 0:07:13:367
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=StorageFood(8748) status=OK t=352034344 id=55
+						Lua 0:07:20:712
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=StorageFuel(7454) status=OK t=352034344 id=56
+						Lua 0:07:38:133
+[mod] [SMRTK] SMRTK_DUMP action=dump_selected active_shift=nil class=StorageFuel current_shift=nil demolishing=false destroyed=false dome=nil handle=7454 hex=117,451 malfunction=nil modifiers="{maintenance_resource_amount:{1:{amount:0,display_text:userdata: FF0000193AC70A82,id:Policy_BuildingCodesStrict,percent:-30,prop:maintenance_resource_amount},amount:0,min:0,percent:70}}" object=StorageFuel(7454) pos="(342500, 390566, 10006)" shifts=true status=OK storage={Fuel:25018} template=StorageFuel valid=true workers=nil t=352034344 id=57
+[SMRTK] SMRTK_DUMP action=dump_selected active_shift=nil class=StorageFuel current_shift=nil demolishing=false destroyed=false dome=nil handle=7454 hex=117,451 malfunction=nil modifiers="{maintenance_resource_amount:{1:{amount:0,display_text:userdata: FF0000193AC70A82,id:Policy_BuildingCodesStrict,percent:-30,prop:maintenance_resource_amount},amount:0,min:0,percent:70}}" object=StorageFuel(7454) pos="(342500, 390566, 10006)" shifts=true status=OK storage={Fuel:25018} template=StorageFuel valid=true workers=nil t=352034344 id=57
+						Lua 0:07:44:150
+[mod] [SMRTK] SMRTK_ACTION action=selected_fill after=180000 before=25018 method=CheatFill object=StorageFuel(7454) resource=Fuel resources=1 status=OK valid_after=true t=352034344 id=58
+[SMRTK] SMRTK_ACTION action=selected_fill after=180000 before=25018 method=CheatFill object=StorageFuel(7454) resource=Fuel resources=1 status=OK valid_after=true t=352034344 id=58
+						Lua 0:07:45:805
+[mod] [SMRTK] SMRTK_DUMP action=dump_selected active_shift=nil class=StorageFuel current_shift=nil demolishing=false destroyed=false dome=nil handle=7454 hex=117,451 malfunction=nil modifiers="{maintenance_resource_amount:{1:{amount:0,display_text:userdata: FF0000193AC70A82,id:Policy_BuildingCodesStrict,percent:-30,prop:maintenance_resource_amount},amount:0,min:0,percent:70}}" object=StorageFuel(7454) pos="(342500, 390566, 10006)" shifts=true status=OK storage={Fuel:180000} template=StorageFuel valid=true workers=nil t=352034344 id=59
+[SMRTK] SMRTK_DUMP action=dump_selected active_shift=nil class=StorageFuel current_shift=nil demolishing=false destroyed=false dome=nil handle=7454 hex=117,451 malfunction=nil modifiers="{maintenance_resource_amount:{1:{amount:0,display_text:userdata: FF0000193AC70A82,id:Policy_BuildingCodesStrict,percent:-30,prop:maintenance_resource_amount},amount:0,min:0,percent:70}}" object=StorageFuel(7454) pos="(342500, 390566, 10006)" shifts=true status=OK storage={Fuel:180000} template=StorageFuel valid=true workers=nil t=352034344 id=59
+						Lua 0:07:51:628
+[mod] [SMRTK] SMRTK_ACTION action=selected_empty after=0 before=180000 method=CheatEmpty object=StorageFuel(7454) resource=Fuel resources=1 status=OK valid_after=true t=352034344 id=60
+[SMRTK] SMRTK_ACTION action=selected_empty after=0 before=180000 method=CheatEmpty object=StorageFuel(7454) resource=Fuel resources=1 status=OK valid_after=true t=352034344 id=60
+						Lua 0:07:54:582
+[mod] [SMRTK] SMRTK_DUMP action=dump_selected active_shift=nil class=StorageFuel current_shift=nil demolishing=false destroyed=false dome=nil handle=7454 hex=117,451 malfunction=nil modifiers="{maintenance_resource_amount:{1:{amount:0,display_text:userdata: FF0000193AC70A82,id:Policy_BuildingCodesStrict,percent:-30,prop:maintenance_resource_amount},amount:0,min:0,percent:70}}" object=StorageFuel(7454) pos="(342500, 390566, 10006)" shifts=true status=OK storage={Fuel:0} template=StorageFuel valid=true workers=nil t=352034344 id=61
+[SMRTK] SMRTK_DUMP action=dump_selected active_shift=nil class=StorageFuel current_shift=nil demolishing=false destroyed=false dome=nil handle=7454 hex=117,451 malfunction=nil modifiers="{maintenance_resource_amount:{1:{amount:0,display_text:userdata: FF0000193AC70A82,id:Policy_BuildingCodesStrict,percent:-30,prop:maintenance_resource_amount},amount:0,min:0,percent:70}}" object=StorageFuel(7454) pos="(342500, 390566, 10006)" shifts=true status=OK storage={Fuel:0} template=StorageFuel valid=true workers=nil t=352034344 id=61
+						Lua 0:08:10:091
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=MechanizedDepotFood(7128) status=OK t=352034344 id=62
+						Lua 0:08:11:984
+[mod] [SMRTK] SMRTK_DUMP action=dump_selected active_shift=nil class=MechanizedDepotFood current_shift=nil demolishing=false destroyed=false dome=nil handle=7128 hex=79,461 malfunction=nil modifiers="{maintenance_resource_amount:{1:{amount:0,display_text:userdata: FF0000193AC70A82,id:Policy_BuildingCodesStrict,percent:-30,prop:maintenance_resource_amount},amount:0,min:0,percent:70},maintenance_threshold_base:{1:{amount:0,id:GameEffect,percent:20,prop:maintenance_threshold_base},2:{amount:0,id:GameEffect,percent:20,prop:maintenance_threshold_base},amount:0,percent:140}}" object=MechanizedDepotFood(7128) pos="(309500, 399226, 10006)" shifts=true status=OK storage=1490000 template=MechanizedDepotFood valid=true workers=nil t=352034344 id=63
+[SMRTK] SMRTK_DUMP action=dump_selected active_shift=nil class=MechanizedDepotFood current_shift=nil demolishing=false destroyed=false dome=nil handle=7128 hex=79,461 malfunction=nil modifiers="{maintenance_resource_amount:{1:{amount:0,display_text:userdata: FF0000193AC70A82,id:Policy_BuildingCodesStrict,percent:-30,prop:maintenance_resource_amount},amount:0,min:0,percent:70},maintenance_threshold_base:{1:{amount:0,id:GameEffect,percent:20,prop:maintenance_threshold_base},2:{amount:0,id:GameEffect,percent:20,prop:maintenance_threshold_base},amount:0,percent:140}}" object=MechanizedDepotFood(7128) pos="(309500, 399226, 10006)" shifts=true status=OK storage=1490000 template=MechanizedDepotFood valid=true workers=nil t=352034344 id=63
+						Lua 0:08:14:410
+[mod] [SMRTK] SMRTK_ACTION action=selected_fill method=CheatFill object=MechanizedDepotFood(7128) status=OK valid_after=true t=352034344 id=64
+[SMRTK] SMRTK_ACTION action=selected_fill method=CheatFill object=MechanizedDepotFood(7128) status=OK valid_after=true t=352034344 id=64
+						Lua 0:08:16:446
+[mod] [SMRTK] SMRTK_DUMP action=dump_selected active_shift=nil class=MechanizedDepotFood current_shift=nil demolishing=false destroyed=false dome=nil handle=7128 hex=79,461 malfunction=nil modifiers="{maintenance_resource_amount:{1:{amount:0,display_text:userdata: FF0000193AC70A82,id:Policy_BuildingCodesStrict,percent:-30,prop:maintenance_resource_amount},amount:0,min:0,percent:70},maintenance_threshold_base:{1:{amount:0,id:GameEffect,percent:20,prop:maintenance_threshold_base},2:{amount:0,id:GameEffect,percent:20,prop:maintenance_threshold_base},amount:0,percent:140}}" object=MechanizedDepotFood(7128) pos="(309500, 399226, 10006)" shifts=true status=OK storage=3950000 template=MechanizedDepotFood valid=true workers=nil t=352034344 id=65
+[SMRTK] SMRTK_DUMP action=dump_selected active_shift=nil class=MechanizedDepotFood current_shift=nil demolishing=false destroyed=false dome=nil handle=7128 hex=79,461 malfunction=nil modifiers="{maintenance_resource_amount:{1:{amount:0,display_text:userdata: FF0000193AC70A82,id:Policy_BuildingCodesStrict,percent:-30,prop:maintenance_resource_amount},amount:0,min:0,percent:70},maintenance_threshold_base:{1:{amount:0,id:GameEffect,percent:20,prop:maintenance_threshold_base},2:{amount:0,id:GameEffect,percent:20,prop:maintenance_threshold_base},amount:0,percent:140}}" object=MechanizedDepotFood(7128) pos="(309500, 399226, 10006)" shifts=true status=OK storage=3950000 template=MechanizedDepotFood valid=true workers=nil t=352034344 id=65
+						Lua 0:08:18:078
+[mod] [SMRTK] SMRTK_ACTION action=selected_empty method=CheatEmpty object=MechanizedDepotFood(7128) status=OK valid_after=true t=352034344 id=66
+[SMRTK] SMRTK_ACTION action=selected_empty method=CheatEmpty object=MechanizedDepotFood(7128) status=OK valid_after=true t=352034344 id=66
+						Lua 0:08:19:488
+[mod] [SMRTK] SMRTK_DUMP action=dump_selected active_shift=nil class=MechanizedDepotFood current_shift=nil demolishing=false destroyed=false dome=nil handle=7128 hex=79,461 malfunction=nil modifiers="{maintenance_resource_amount:{1:{amount:0,display_text:userdata: FF0000193AC70A82,id:Policy_BuildingCodesStrict,percent:-30,prop:maintenance_resource_amount},amount:0,min:0,percent:70},maintenance_threshold_base:{1:{amount:0,id:GameEffect,percent:20,prop:maintenance_threshold_base},2:{amount:0,id:GameEffect,percent:20,prop:maintenance_threshold_base},amount:0,percent:140}}" object=MechanizedDepotFood(7128) pos="(309500, 399226, 10006)" shifts=true status=OK storage=0 template=MechanizedDepotFood valid=true workers=nil t=352034344 id=67
+[SMRTK] SMRTK_DUMP action=dump_selected active_shift=nil class=MechanizedDepotFood current_shift=nil demolishing=false destroyed=false dome=nil handle=7128 hex=79,461 malfunction=nil modifiers="{maintenance_resource_amount:{1:{amount:0,display_text:userdata: FF0000193AC70A82,id:Policy_BuildingCodesStrict,percent:-30,prop:maintenance_resource_amount},amount:0,min:0,percent:70},maintenance_threshold_base:{1:{amount:0,id:GameEffect,percent:20,prop:maintenance_threshold_base},2:{amount:0,id:GameEffect,percent:20,prop:maintenance_threshold_base},amount:0,percent:140}}" object=MechanizedDepotFood(7128) pos="(309500, 399226, 10006)" shifts=true status=OK storage=0 template=MechanizedDepotFood valid=true workers=nil t=352034344 id=67
+						Lua 0:08:24:755
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=MechanizedDepotFood(7128) status=OK t=352034344 id=68
+						Lua 0:08:27:707
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=UniversalStorageDepot(8143) status=OK t=352034344 id=69
+						Lua 0:08:37:591
+[mod] [SMRTK] SMRTK_CLEAR action=clear status=OK t=352034344 id=70
+						Lua 0:08:39:046
+[mod] [SMRTK] SMRTK_DUMP action=dump_selected active_shift=nil class=UniversalStorageDepot current_shift=nil demolishing=false destroyed=false dome=nil handle=8143 hex=115,184 malfunction=nil modifiers="{maintenance_resource_amount:{1:{amount:0,display_text:userdata: FF0000193AC70A82,id:Policy_BuildingCodesStrict,percent:-30,prop:maintenance_resource_amount},amount:0,min:0,percent:70}}" object=UniversalStorageDepot(8143) pos="(207000, 159344, 10006)" shifts=true status=OK storage={Concrete:30000,Electronics:18000,Food:20000,Fuel:20000,MachineParts:23000,Metals:20608,Polymers:21970,PreciousMetals:18000,PreciousMinerals:24000,Seeds:30000} template=UniversalStorageDepot valid=true workers=nil t=352034344 id=71
+[SMRTK] SMRTK_DUMP action=dump_selected active_shift=nil class=UniversalStorageDepot current_shift=nil demolishing=false destroyed=false dome=nil handle=8143 hex=115,184 malfunction=nil modifiers="{maintenance_resource_amount:{1:{amount:0,display_text:userdata: FF0000193AC70A82,id:Policy_BuildingCodesStrict,percent:-30,prop:maintenance_resource_amount},amount:0,min:0,percent:70}}" object=UniversalStorageDepot(8143) pos="(207000, 159344, 10006)" shifts=true status=OK storage={Concrete:30000,Electronics:18000,Food:20000,Fuel:20000,MachineParts:23000,Metals:20608,Polymers:21970,PreciousMetals:18000,PreciousMinerals:24000,Seeds:30000} template=UniversalStorageDepot valid=true workers=nil t=352034344 id=71
+						Lua 0:08:40:676
+[mod] [SMRTK] SMRTK_ACTION action=selected_fill after=300000 before=225578 method=CheatFill object=UniversalStorageDepot(8143) resource=multiple resources=10 status=OK valid_after=true t=352034344 id=72
+[SMRTK] SMRTK_ACTION action=selected_fill after=300000 before=225578 method=CheatFill object=UniversalStorageDepot(8143) resource=multiple resources=10 status=OK valid_after=true t=352034344 id=72
+						Lua 0:08:42:110
+[mod] [SMRTK] SMRTK_DUMP action=dump_selected active_shift=nil class=UniversalStorageDepot current_shift=nil demolishing=false destroyed=false dome=nil handle=8143 hex=115,184 malfunction=nil modifiers="{maintenance_resource_amount:{1:{amount:0,display_text:userdata: FF0000193AC70A82,id:Policy_BuildingCodesStrict,percent:-30,prop:maintenance_resource_amount},amount:0,min:0,percent:70}}" object=UniversalStorageDepot(8143) pos="(207000, 159344, 10006)" shifts=true status=OK storage={Concrete:30000,Electronics:30000,Food:30000,Fuel:30000,MachineParts:30000,Metals:30000,Polymers:30000,PreciousMetals:30000,PreciousMinerals:30000,Seeds:30000} template=UniversalStorageDepot valid=true workers=nil t=352034344 id=73
+[SMRTK] SMRTK_DUMP action=dump_selected active_shift=nil class=UniversalStorageDepot current_shift=nil demolishing=false destroyed=false dome=nil handle=8143 hex=115,184 malfunction=nil modifiers="{maintenance_resource_amount:{1:{amount:0,display_text:userdata: FF0000193AC70A82,id:Policy_BuildingCodesStrict,percent:-30,prop:maintenance_resource_amount},amount:0,min:0,percent:70}}" object=UniversalStorageDepot(8143) pos="(207000, 159344, 10006)" shifts=true status=OK storage={Concrete:30000,Electronics:30000,Food:30000,Fuel:30000,MachineParts:30000,Metals:30000,Polymers:30000,PreciousMetals:30000,PreciousMinerals:30000,Seeds:30000} template=UniversalStorageDepot valid=true workers=nil t=352034344 id=73
+						Lua 0:08:43:594
+[mod] [SMRTK] SMRTK_ACTION action=selected_empty after=0 before=300000 method=CheatEmpty object=UniversalStorageDepot(8143) resource=multiple resources=10 status=OK valid_after=true t=352034344 id=74
+[SMRTK] SMRTK_ACTION action=selected_empty after=0 before=300000 method=CheatEmpty object=UniversalStorageDepot(8143) resource=multiple resources=10 status=OK valid_after=true t=352034344 id=74
+						Lua 0:08:48:011
+[mod] [SMRTK] SMRTK_DUMP action=dump_selected active_shift=nil class=UniversalStorageDepot current_shift=nil demolishing=false destroyed=false dome=nil handle=8143 hex=115,184 malfunction=nil modifiers="{maintenance_resource_amount:{1:{amount:0,display_text:userdata: FF0000193AC70A82,id:Policy_BuildingCodesStrict,percent:-30,prop:maintenance_resource_amount},amount:0,min:0,percent:70}}" object=UniversalStorageDepot(8143) pos="(207000, 159344, 10006)" shifts=true status=OK storage={Concrete:0,Electronics:0,Food:0,Fuel:0,MachineParts:0,Metals:0,Polymers:0,PreciousMetals:0,PreciousMinerals:0,Seeds:0} template=UniversalStorageDepot valid=true workers=nil t=352034344 id=75
+[SMRTK] SMRTK_DUMP action=dump_selected active_shift=nil class=UniversalStorageDepot current_shift=nil demolishing=false destroyed=false dome=nil handle=8143 hex=115,184 malfunction=nil modifiers="{maintenance_resource_amount:{1:{amount:0,display_text:userdata: FF0000193AC70A82,id:Policy_BuildingCodesStrict,percent:-30,prop:maintenance_resource_amount},amount:0,min:0,percent:70}}" object=UniversalStorageDepot(8143) pos="(207000, 159344, 10006)" shifts=true status=OK storage={Concrete:0,Electronics:0,Food:0,Fuel:0,MachineParts:0,Metals:0,Polymers:0,PreciousMetals:0,PreciousMinerals:0,Seeds:0} template=UniversalStorageDepot valid=true workers=nil t=352034344 id=75
+						Lua 0:09:00:023
+[mod] [SMRTK] SMRTK_COPY action=copy flushed=true from=49 lines=33 status=OK truncated=false t=352034344 id=76
+[SMRTK] SMRTK_COPY action=copy flushed=true from=49 lines=33 status=OK truncated=false t=352034344 id=76
+						Lua 0:09:32:097
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=UniversalStorageDepot(8143) status=OK t=352034344 id=77
+						Lua 0:09:34:052
+[mod] [SMRTK] SMRTK_ACTION action=selected_fill after=300000 before=0 method=CheatFill object=UniversalStorageDepot(8143) resource=multiple resources=10 status=OK valid_after=true t=352034344 id=78
+[SMRTK] SMRTK_ACTION action=selected_fill after=300000 before=0 method=CheatFill object=UniversalStorageDepot(8143) resource=multiple resources=10 status=OK valid_after=true t=352034344 id=78
+						Lua 0:10:17:611
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=DroneHub(8161) status=OK t=352034344 id=79
+						Lua 0:10:42:716
+[mod] [SMRTK] SMRTK_ACTION action=selected_clean_fix method=CheatCleanAndFix object=DroneHub(8161) status=OK valid_after=true t=352034344 id=80
+[SMRTK] SMRTK_ACTION action=selected_clean_fix method=CheatCleanAndFix object=DroneHub(8161) status=OK valid_after=true t=352034344 id=80
+						Lua 0:10:43:952
+[mod] [SMRTK] SMRTK_ACTION action=selected_malfunction method=CheatMalfunction object=DroneHub(8161) status=OK valid_after=true t=352034344 id=81
+[SMRTK] SMRTK_ACTION action=selected_malfunction method=CheatMalfunction object=DroneHub(8161) status=OK valid_after=true t=352034344 id=81
+						Lua 0:10:52:277
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=ForestationPlant(8800) status=OK t=352040162 id=82
+						Lua 0:11:01:081
+[mod] [SMRTK] SMRTK_ACTION action=selected_clean_fix method=CheatCleanAndFix object=ForestationPlant(8800) status=OK valid_after=true t=352049025 id=83
+[SMRTK] SMRTK_ACTION action=selected_clean_fix method=CheatCleanAndFix object=ForestationPlant(8800) status=OK valid_after=true t=352049025 id=83
+						Lua 0:11:01:707
+[mod] [SMRTK] SMRTK_ACTION action=selected_malfunction method=CheatMalfunction object=ForestationPlant(8800) status=OK valid_after=true t=352049650 id=84
+[SMRTK] SMRTK_ACTION action=selected_malfunction method=CheatMalfunction object=ForestationPlant(8800) status=OK valid_after=true t=352049650 id=84
+						Lua 0:11:06:218
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=MDSLaser(8160) status=OK t=352054135 id=85
+						Lua 0:11:07:692
+[mod] [SMRTK] SMRTK_ACTION action=selected_add_dust method=CheatAddDust object=MDSLaser(8160) status=OK valid_after=true t=352055640 id=86
+[SMRTK] SMRTK_ACTION action=selected_add_dust method=CheatAddDust object=MDSLaser(8160) status=OK valid_after=true t=352055640 id=86
+						Lua 0:11:10:896
+[mod] [SMRTK] SMRTK_ACTION action=selected_clean_fix method=CheatCleanAndFix object=MDSLaser(8160) status=OK valid_after=true t=352058843 id=87
+[SMRTK] SMRTK_ACTION action=selected_clean_fix method=CheatCleanAndFix object=MDSLaser(8160) status=OK valid_after=true t=352058843 id=87
+						Lua 0:11:21:253
+[mod] [SMRTK] SMRTK_ACTION action=selected_malfunction method=CheatMalfunction object=MDSLaser(8160) status=OK valid_after=true t=352069200 id=88
+[SMRTK] SMRTK_ACTION action=selected_malfunction method=CheatMalfunction object=MDSLaser(8160) status=OK valid_after=true t=352069200 id=88
+						Lua 0:11:22:109
+[mod] [SMRTK] SMRTK_ACTION action=selected_clean_fix method=CheatCleanAndFix object=MDSLaser(8160) status=OK valid_after=true t=352070056 id=89
+[SMRTK] SMRTK_ACTION action=selected_clean_fix method=CheatCleanAndFix object=MDSLaser(8160) status=OK valid_after=true t=352070056 id=89
+						Lua 0:11:34:678
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=ForestationPlant(8800) status=OK t=352082563 id=90
+						Lua 0:11:36:528
+[mod] [SMRTK] SMRTK_ACTION action=selected_clean_fix method=CheatCleanAndFix object=ForestationPlant(8800) status=OK valid_after=true t=352084464 id=91
+[SMRTK] SMRTK_ACTION action=selected_clean_fix method=CheatCleanAndFix object=ForestationPlant(8800) status=OK valid_after=true t=352084464 id=91
+						Lua 0:11:39:393
+[mod] [SMRTK] SMRTK_SELECTED action=selected_more category=Cheat method=CheatLightningStrike object=ForestationPlant(8800) status=OK valid_after=true t=352087336 id=92
+[SMRTK] SMRTK_SELECTED action=selected_more category=Cheat method=CheatLightningStrike object=ForestationPlant(8800) status=OK valid_after=true t=352087336 id=92
+						Lua 0:11:50:785
+[mod] [SMRTK] SMRTK_ACTION action=selected_clean_fix method=CheatCleanAndFix object=ForestationPlant(8800) status=OK valid_after=true t=352098730 id=93
+[SMRTK] SMRTK_ACTION action=selected_clean_fix method=CheatCleanAndFix object=ForestationPlant(8800) status=OK valid_after=true t=352098730 id=93
+						Lua 0:11:54:962
+[mod] [SMRTK] SMRTK_ACTION action=selected_clean_fix method=CheatCleanAndFix object=ForestationPlant(8800) status=OK valid_after=true t=352102907 id=94						Lua 0:11:54:963
+
+[SMRTK] SMRTK_ACTION action=selected_clean_fix method=CheatCleanAndFix object=ForestationPlant(8800) status=OK valid_after=true t=352102907 id=94
+						Lua 0:11:57:136
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=ForestationPlant(8800) status=OK t=352105017 id=95
+						Lua 0:12:19:743
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=FusionReactor(8179) status=OK t=352127675 id=96
+						Lua 0:13:24:962
+[mod] [SMRTK] SMRTK_COPY action=copy flushed=true from=49 lines=54 status=OK truncated=false t=352192910 id=97
+[SMRTK] SMRTK_COPY action=copy flushed=true from=49 lines=54 status=OK truncated=false t=352192910 id=97
+						Lua 0:13:27:123
+[mod] [SMRTK] SMRTK_CLEAR action=clear status=OK t=352195072 id=98
+						Lua 0:14:00:873
+[mod] [SMRTK] SMRTK_PIN A=FusionReactor(8179) action=pin_A status=OK t=352228821 id=99
+[SMRTK] SMRTK_PIN A=FusionReactor(8179) action=pin_A status=OK t=352228821 id=99
+						Lua 0:14:06:059
+[mod] [SMRTK] SMRTK_TAB action=tab_Selected page=Selected status=OK t=352234006 id=100
+						Lua 0:14:32:875
+[mod] [SMRTK] SMRTK_TAB action=tab_Sitting page=Sitting status=OK t=352260823 id=101
+						Lua 0:14:33:559
+[mod] [SMRTK] SMRTK_TAB action=tab_Run page=Run status=OK t=352261505 id=102
+						Lua 0:14:35:442
+[mod] [SMRTK] SMRTK_TAB action=tab_Selected page=Selected status=OK t=352263389 id=103
+						Lua 0:14:38:065
+[mod] [SMRTK] SMRTK_TAB action=tab_Agent page=Agent status=OK t=352266012 id=104
+						Lua 0:14:39:801
+[mod] [SMRTK] SMRTK_TAB action=tab_World page=World status=OK t=352267748 id=105
+						Lua 0:14:40:842
+[mod] [SMRTK] SMRTK_TAB action=tab_Saves page=Saves status=OK t=352268790 id=106
+						Lua 0:14:41:497
+[mod] [SMRTK] SMRTK_TAB action=tab_Kit page=Kit status=OK t=352269444 id=107
+						Lua 0:14:42:182
+[mod] [SMRTK] SMRTK_TAB action=tab_Saves page=Saves status=OK t=352270129 id=108
+						Lua 0:14:42:710
+[mod] [SMRTK] SMRTK_TAB action=tab_Kit page=Kit status=OK t=352270657 id=109
+						Lua 0:14:55:402
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=MDSLaser(8160) status=OK t=352283325 id=110
+						Lua 0:14:55:813
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=FusionReactor(8179) status=OK t=352283750 id=111
+						Lua 0:15:05:886
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=DroneHub(8161) status=OK t=352293785 id=112
+						Lua 0:17:21:117
+[mod] [SMRTK] SMRTK_TAB action=tab_Sitting page=Sitting status=OK t=352429065 id=113
+						Lua 0:17:22:297
+[mod] [SMRTK] SMRTK_TAINT_READ action=taint_read status=OK used=false t=352430246 id=114
+[SMRTK] SMRTK_TAINT_READ action=taint_read status=OK used=false t=352430246 id=114
+						Lua 0:17:26:689
+[mod] [SMRTK] SMRTK_COPY action=copy flushed=true from=49 lines=72 status=OK truncated=false t=352434636 id=115
+[SMRTK] SMRTK_COPY action=copy flushed=true from=49 lines=72 status=OK truncated=false t=352434636 id=115
+						Lua 0:17:57:364
+[mod] [SMRTK] SMRTK_PANEL action=panel_toggle open=false status=OK tab=Sitting t=352465311 id=116
+						Lua 0:18:10:915
+[mod] [SMRTK] SMRTK_PANEL action=panel_toggle open=true status=OK tab=Sitting t=352478864 id=117
+						Lua 0:18:12:522
+[mod] [SMRTK] SMRTK_ELIGIBILITY action=eligibility reason=UNAVAILABLE:sandbox status=OK t=352480470 id=118
+[SMRTK] SMRTK_ELIGIBILITY action=eligibility reason=UNAVAILABLE:sandbox status=OK t=352480470 id=118
+						Lua 0:18:31:712
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=DroneHub(8161) status=OK t=352499655 id=119
+						Lua 0:18:32:059
+Story bits: Triggered story bit - MedSt_CorporateWarfare						Lua 0:19:19:297
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=OpenFarm(6481) status=OK t=352547237 id=120
+						Lua 0:19:22:746
+
+
+Stopping the game threads from the Lua side with exit code 0.
+
+					Render 0:19:22:752
+
+
+Stopping the game threads after receiving WM_QUIT.
+
+					Render 0:19:23:157
+
+
+*** Debug::Done()
+Time (ms)	1163157
+
+
