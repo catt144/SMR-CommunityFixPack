@@ -28,6 +28,44 @@ Item 177 records the still-open question of mechanically enforcing checklist mar
 
 ## Decisions waiting on you
 
+### 2026-09-15 — 185: two new fixes are FILED and deliberately UNAUTHORED — say when to build each
+
+<!-- ck:185 status:open owner:yes -->
+
+⚖️ **You ruled both of these on 2026-09-15 and both rulings are recorded here because an
+agent-doc-only record is not considered asked (rule 5 / R10).** Each entry carries the evidence,
+the controls and the reasoning; ⛔ this item is the decision, not a retelling.
+
+**Both are `filed`, both have their repair NOT written, on your instruction** (*"file it as a fix
+that needs playtesting then. Don't author the fix yet"*). Nothing is owed until you say build.
+
+**(a) [C95](agent/bugs/C95.md) — the game takes Naturalist Habitat residents on expeditions
+without asking and cannot bring them home.** ⭐ **Reproduced in play with you at the keyboard**,
+2026-09-15: two residents taken, neither returned, both re-homed into a dome; one rode the rail
+back unaided, proving the habitat was reachable the whole time. A returnee who picks up a job
+elsewhere never comes back, so a habitat drains one resident per expedition, silently.
+⚖️ **You ruled the repair shape:** exclude habitat residents from the expedition draft, rather
+than teach the return path about habitats. ⚖️ **And its classification, settled with you:** an
+**oversight bug solved by a judgment call** — it ships in the **main pack with the judgment-call
+mark** and its reasoning on the fix list, ⛔ **not** as an opt-in module. Precedent is C89.
+⛔ **Scope, load-bearing:** nothing becomes ineligible — you can still move a resident into a dome,
+and still hand-pick them for an asteroid lander (verified). It subtracts from one automatic picker.
+
+**(b) [C96](agent/bugs/C96.md) — a rover's own subclass never satisfies a requirement for its
+base class**, so an RC Seeker is refused where an RC Commander is asked for. ⛔ **The obvious
+one-token repair is VACUOUS** — a rover registers only under its leaf class, so the Commander list
+never held a Seeker for the filter to discard; a real repair must widen the source list too.
+⚠️ **Its playtest needs an ESA colony or the leg is vacuous** (the Seeker is sponsor-locked), and
+`EF-079` branch-locks the fixture library, so cost that before scheduling it. The unlocked
+`RCSolar` variant may be a cheaper fixture and is worth checking first.
+
+**What is actually waiting on you, and they are independent:**
+1. **Authorize (a)'s build?** Desk work plus a playtest; the repair control is written in the entry.
+2. **Authorize (b)'s build, and accept its fixture cost?** Or park it until an ESA colony exists
+   for another reason.
+3. **Anything to change in (a)'s public wording** before it reaches the fix list? The line drafted
+   from your own words is in the entry.
+
 ### 2026-09-14 — 184 RULED + CLOSED 09-15: the probe-sweep gate is an age, never a refusal; the ck144 (a) boot ran and is DISCHARGED; the toolkit chain has nothing hanging
 
 <!-- ck:184 status:ruled owner:yes -->
