@@ -1,6 +1,9 @@
 # Development Workflow
 
-## Reading path for a new session
+## Reading path when status matters
+
+⛔ Not a session-start ritual. An agent does not check current work unless a task, a prompt
+or the owner calls for it (owner ruling 2026-09-15). Read these when status is the question.
 
 1. `docs/agent/STATE.md` — current state: authoritative build counts, open
    owner decisions, next gates (`CLAUDE.md`, auto-loaded, points here; `AGENTS.md`

@@ -10,9 +10,10 @@ game's shipped Lua, patched at runtime; no game files are modified.
 
 ## 1 · Where the project stands
 
-- **`docs/agent/STATE.md` is the one mandatory read** — kernel only, status plus pointer.
-  Its `⏭ NEXT`, `🚫 OWED` and `## Hazards` lines bind you. It is byte-capped so reading it
-  whole is cheap.
+- ⛔ **Status is PULL.** Do not check current work unless a task, a prompt or the owner calls
+  for it (owner ruling 2026-09-15). Opening a session is not such a call.
+- **`docs/agent/STATE.md`** — kernel status plus pointers, byte-capped. When status IS the
+  question, this is the read, and its `NEXT`, `OWED` and `## Hazards` lines bind you.
 - **`docs/WAITING_ON_YOU.md`** — GENERATED register of what is held for the **owner**.
   Read it before asking the owner anything; never edit it.
 - **Never hand-type a count.** `python tools/doccheck.py --emit-counts` prints them.
