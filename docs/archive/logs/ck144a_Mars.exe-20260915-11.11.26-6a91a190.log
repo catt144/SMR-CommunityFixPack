@@ -1,0 +1,756 @@
+					Render 0:00:00:007
+*** executable info
+Timestamp:     	6a91a190
+Date:          	Fri Aug 28 10:56:16 2026
+Command line:  	
+Compiler:      	195136247, 142 (VS 2019) or newer
+
+
+*** hardware info
+CPU name      	Intel(R) Core(TM) i7-14700K
+CPU MHz       	3418
+CPU cores     	20/28
+Phys. Memory   	65278 MBytes
+Memory In Use  	57%
+Disk Free      	803359 MBytes
+
+
+*** OS info
+OS:            	Windows 11
+Version:       	10.0.26100 
+
+
+*** Debug::Init()
+
+
+					Render 0:00:00:079
+Steam initialized (AppId 3215050)
+					Render 0:00:00:082
+Drive type for game installation: SSD, savegames: SSD
+Language: English
+					Render 0:00:01:465
+*** graphics info
+GPU                            	NVIDIA GeForce RTX 4080 Feature Level: 12.1 {  DoublePrecisionFloatShaderOps: 1 OutputMergerLogicOp: 1 MinPrecisionSupport: 2 TiledResourcesTier: 4 ResourceBindingTier: 3 PSSpecifiedStencilRefSupported: 0 TypedUAVLoadAdditionalFormats: 1 ROVsSupported: 1 ConservativeRasterizationTier: 3 MaxGPUVirtualAddressBitsPerResource: 40 StandardSwizzle64KBSupported: 0 CrossNodeSharingTier: 0 CrossAdapterRowMajorTextureSupported: 0 VPAndRTArrayIndexFromAnyShaderFeedingRasterizerSupportedWithoutGSEmulation: 1 ResourceHeapTier: 2 NotZeroedPools: 1 UMA: 0 UnalignedBlockTextures: 1}
+API                            	d3d12
+GPU Driver Version             	32.0.16.1074
+GPU Driver Package Version     	610.74
+GPU Dedicated Video Memory     	16048 MB
+					Render 0:00:01:612
+
+Libs: Network, Sequences, MouseTrackWin, DumbAI, MapGen, Paradox, TriggersAndEvents, Notifications, Research, Resources, Tutorial, Objectives 
+
+					Render 0:00:01:840
+
+Platform: desktop, editor, goldmaster, paradox, pc, steam
+
+					Render 0:00:02:785
+*** audio info
+Audio Endpoint                 	Speakers (Razer Leviathan V2)
+						Lua 0:00:02:786
+Lua revision: 403908
+Assets revision: 33006
+Steam AppID: 3215050
+Build version: 1.1.0.403908
+Build branch:  Release
+						Lua 0:00:16:290
+Account storage loaded successfully in 1 ms
+						Lua 0:00:16:291
+DLC norman loaded, lua revision 403908, assets revision 33006
+DLC thomas loaded, lua revision 403908, assets revision 33006
+						Lua 0:00:16:294
+[mod] Loaded mod def Community Fix Pack — Test Kit (id SMR_CommunityFixPackTestKit, v0.00-001) unpacked from appdata
+[mod] Loaded mod def TEMPORARY - Linux NVIDIA 580 Crash Workaround (id SMR_FR1TempWorkaround, v0.00-003) unpacked from appdata
+[mod] Loaded mod def Relaunched Fix Pack: Opt-In Modules (id SMR_CommunityOptInPack, v1.00-000) unpacked from appdata
+[mod] Loaded mod def Relaunched Fix Pack (id SMR_CommunityFixPack, v1.00-011) unpacked from appdata
+						Lua 0:00:16:681
+[mod] [CommunityOptInPack] ClassicRockets: applied
+[mod] [CommunityOptInPack] AcknowledgedWarnings: applied
+[mod] [CommunityOptInPack] ResidencyControl: applied
+[mod] [CommunityOptInPack] MultipleSuns: applied
+[mod] [CommunityOptInPack] DroneOverhaul: applied
+[mod] [CommunityOptInPack] CohortHousing: applied
+						Lua 0:00:16:682
+[mod] [CommunityOptInPack] NoHomeless: self-check targets Community but Workforce declares HasFreeWorkplacesAround — authoring error, not a game update (FIX_POLICY §2)
+[mod] [CommunityOptInPack] NoHomeless: inactive (Community.HasFreeWorkplacesAround not found — expected on the FIRST load pass and NOT a game update: this check names Community while Workforce declares the method (authoring error — see the preceding line), and mod code loads before the class hierarchy is built, so the module applies cleanly on the second pass. If no 'NoHomeless: applied' line follows this one, the method is genuinely gone — without it a flagged dome could never be staffed)
+[mod] [CommunityOptInPack] DroneStatDials: applied
+[mod] [CommunityFixPack] NightShiftWork: applied
+[mod] [CommunityFixPack] WispRewards: applied
+[mod] [CommunityFixPack] TrainsToVoid: applied
+[mod] [CommunityFixPack] LanderEmptyLaunch: applied
+[mod] [CommunityFixPack] ShelterReflex: applied
+						Lua 0:00:16:683
+[mod] [CommunityFixPack] BrokenTrackSalvage: applied
+[mod] [CommunityFixPack] TrackSalvageWipe: applied
+[mod] [CommunityFixPack] LakeEntombment: applied
+[mod] [CommunityFixPack] RocketDroneChurn: applied
+[mod] [CommunityFixPack] TradeRocketFuelRefresh: applied
+[mod] [CommunityFixPack] ShuttleTransportCache: applied
+[mod] [CommunityFixPack] VacuumWalks: applied
+[mod] [CommunityFixPack] ArrivalDeaths: applied
+						Lua 0:00:16:684
+[mod] [CommunityFixPack] StaleReservations: applied
+[mod] [CommunityFixPack] CrystalMysteryHang: applied
+[mod] [CommunityFixPack] DomeOverviewHighlight: applied
+[mod] [CommunityFixPack] TrainCargoDumping: applied
+[mod] [CommunityFixPack] DestroyedTunnels: applied
+[mod] [CommunityFixPack] DustSicknessBiorobots: applied
+[mod] [CommunityFixPack] GeneForging: applied
+[mod] [CommunityFixPack] MirrorSphereSite: applied
+[mod] [CommunityFixPack] PayloadTemplateRefill: applied
+[mod] [CommunityFixPack] ShuttleHubOffAvailable: applied
+						Lua 0:00:16:685
+[mod] [CommunityFixPack] FreedHousingNotice: applied
+[mod] [CommunityFixPack] LandscapeUnitFilter: applied
+						Lua 0:00:16:686
+[mod] [CommunityFixPack] RocketInteractGuard: applied
+[mod] [CommunityFixPack] TrackConnectorPingPong: applied
+[mod] [CommunityFixPack] TrackTunnelPowerBridge: applied
+[mod] [CommunityFixPack] GraphConsumedCaption: applied
+[mod] [CommunityFixPack] TrainWaitTime: applied
+[mod] [CommunityFixPack] FounderTraitNotification: applied
+[mod] [CommunityFixPack] SequenceLatents: applied
+[mod] [CommunityFixPack] TrackSalvageRefund: applied
+[mod] [CommunityFixPack] DroneTransportMinors: applied
+						Lua 0:00:16:687
+[mod] [CommunityFixPack] ScanDowngrade: applied
+[mod] [CommunityFixPack] BombardmentSpread: applied
+[mod] [CommunityFixPack] ExtenderFlapChurn: applied
+[mod] [CommunityFixPack] SaintBlessing: applied
+[mod] [CommunityFixPack] SinkholeIndestructible: applied
+[mod] [CommunityFixPack] ExoticDepositSign: applied
+[mod] [CommunityFixPack] JumboCaveReinforcementWedge: applied
+[mod] [CommunityFixPack] SilentHitMomentFX: applied
+						Lua 0:00:16:688
+[mod] [CommunityFixPack] CloggedBuildingRelease: applied
+[mod] [CommunityFixPack] FactionDomeSizeGate: applied
+[mod] [CommunityFixPack] BuildingCodesPrefab: applied
+[mod] [CommunityFixPack] SaveSanitizer: applied
+						Lua 0:00:16:689
+[mod] [SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+[mod] [SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[mod] [SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+[SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+						Lua 0:00:16:694
+[mod] [SMRTK] SMRTK_CORE loaded=true tee=false t=12294 id=1
+[SMRTK] SMRTK_CORE loaded=true tee=false t=12294 id=1
+						Lua 0:00:16:696
+[mod] [SMRTK] SMRTK_SLOTS armed_at_load=0 sitting=ck144a_close_20260915 slots="1 console_status,2 probe_preflight,3 check_after_load,4 read_map_click,5 short_breakpoint,6 dump_selected,scratch read_sitting" trigger=smrtk08_break t=12294 id=2
+[SMRTK] SMRTK_SLOTS armed_at_load=0 sitting=ck144a_close_20260915 slots="1 console_status,2 probe_preflight,3 check_after_load,4 read_map_click,5 short_breakpoint,6 dump_selected,scratch read_sitting" trigger=smrtk08_break t=12294 id=2
+						Lua 0:00:16:697
+[mod] [SMRTest][carry] fixture-carry dump available — run SMRTest.FixtureCarry()
+						Lua 0:00:17:454
+[mod] [CommunityFixPack] SaintBlessing: inactive (no dome-colonists trait presets)
+[mod] [CommunityFixPack] SinkholeIndestructible: the St. Elmo's Fire sinkhole is now indestructible, like every other mystery set-piece
+						Lua 0:00:17:541
+Reloading done in 1247 ms
+						Lua 0:00:17:542
+Available DLCs: norman(Feeding the Future),thomas(Interplanetary Codex) 
+						Lua 0:00:17:586
+[mod] [SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=DataLoading t=12294 id=3
+[SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=DataLoading t=12294 id=3
+						Lua 0:00:17:971
+[preset] Preset postprocess took 164 ms.
+						Lua 0:00:18:017
+482 / 482 particle streams loaded in 40 ms.
+						Lua 0:00:18:018
+5 / 5 particle streams loaded in 1 ms.
+						Lua 0:00:18:019
+[mod] [CommunityOptInPack] MultipleSuns: BuildingTemplates.ArtificialSun not found — build limit NOT lifted (binding fix still active)
+[mod] [CommunityFixPack] SilentHitMomentFX: registered 11 missing animation-moment preset(s)
+[mod] [CommunityFixPack] FactionDomeSizeGate: 7 faction dislike(s) now wait for 10 colonists in a dome
+						Lua 0:00:18:223
+[mod] [CommunityOptInPack] MultipleSuns: Artificial Sun build-once limit lifted
+[mod] [CommunityFixPack] SaintBlessing: the shipped code resolves the trait label itself — data left untouched; save re-base armed for 1 preset(s) of 2
+						Lua 0:00:18:312
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=12294 id=4
+						Lua 0:00:18:344
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=12294 id=5
+						Lua 0:00:18:354
+[mod] Loaded mod items for: SMR_CommunityOptInPack, SMR_CommunityFixPack, SMR_CommunityFixPackTestKit
+[mod] [CommunityOptInPack] NoHomeless: applied
+						Lua 0:00:19:357
+[PdxSDK] Started up. Took 1272
+						Lua 0:00:19:766
+[Braze] SessionStart error The server name or address could not be resolved
+
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+						Lua 0:00:19:767
+[Braze] Failed to init
+						Lua 0:00:19:865
+[Braze] SessionStart error The server name or address could not be resolved
+
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:47:260
+Load Game: 
+	lua_revision: 403908 (last saved with) 
+	orig_lua_revision: 403908 (created with) 
+	assets_revision: 33006 
+
+	dlcs: norman, thomas 
+
+	mods: SMR_CommunityOptInPack, SMR_CommunityFixPack, SMR_CommunityFixPackTestKit 
+						Lua 0:00:47:270
+*** Reloading assets from folder 'BinAssets/'
+						Lua 0:00:50:314
+*** Assets reloaded in 3.0 s, read 359.3 MB, read speed 118.0 MB/s, average read 8137 bytes.
+						Lua 0:00:50:827
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=40081 id=6
+						Lua 0:00:51:305
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=40081 id=7
+						Lua 0:00:51:744
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=40081 id=8
+						Lua 0:00:52:154
+[mod] [SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=PreLoadGame t=40081 id=9
+[SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=PreLoadGame t=40081 id=9
+						Lua 0:00:55:078
+[mod] [CommunityFixPack] ExoticDepositSign: 1 Exotic Minerals deposit(s) re-signed onto the clean entity
+						Lua 0:00:55:079
+[mod] [CommunityFixPack] SilentHitMomentFX: restored 2 missing hit-moment tracker(s) on load
+						Lua 0:00:55:087
+[mod] [SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:55:640
+game_settings:
+    sponsor: Japan
+    profile: citymayor
+    founding_faction: WorkersParty
+    rival_colonies: SpaceY, CNSA, NewArk, Roscosmos
+    mystery_random: 
+    game_rules: (none)
+more_game_settings: save_game_id: 55afqP8zZV1vEYMb, mystery: MirrorSphereMystery, coordinates: 2N176E, landing_spot: ElysiumBeta, logo: Japan
+map_conditions: altitude: -2776, temperature: -15, cold_wave: 36, dust_devils: 47, dust_storm: 0, meteors: 73
+map_resources: concrete: 254, metals: 146, precious_metals: 146, water: 109
+						Lua 0:00:55:747
+[mod] [CommunityFixPack] SaveSanitizer: F95 astrogeologist-residue pass removed 0 modifier(s), left 0 unidentified
+Game Loaded in 8488 ms
+[mod] [SMRTK] SMRTK_PROVENANCE actions=2 last=unavailable last_id=15 present=true session=1789400587:3032022245:16476155:704241777 t=352034344 id=10
+[SMRTK] SMRTK_PROVENANCE actions=2 last=unavailable last_id=15 present=true session=1789400587:3032022245:16476155:704241777 t=352034344 id=10
+						Lua 0:00:55:758
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=352034344 id=11
+						Lua 0:00:55:773
+[mod] [SMRTK] SMRTK_DOCK action=dock_attach attached=true route="idBottom sibling" status=OK surface=one-toggle+tasks t=352034344 id=12
+						Lua 0:00:55:783
+[mod] [SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:55:935
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=352034344 id=13
+						Lua 0:00:56:424
+Game loaded on map BlankBig_04 in 9288 ms
+						Lua 0:00:56:728
+[mod] [SMRTK] SMRTK_PANEL_RESTORE open=true tab=Kit t=352034344 id=14
+						Lua 0:01:00:208
+[mod] [SMRTK] SMRTK_PANEL action=panel_toggle open=false status=OK tab=Kit t=352034344 id=15
+						Lua 0:01:00:547
+[mod] [SMRTK] SMRTK_PANEL action=panel_toggle open=true status=OK tab=Kit t=352034344 id=16
+						Lua 0:01:05:144
+[mod] [SMRTK] SMRTK_TAB action=tab_Sitting page=Sitting status=OK t=352034344 id=17
+						Lua 0:01:05:822
+[mod] [SMRTK] SMRTK_TAB action=tab_Run page=Run status=OK t=352034344 id=18
+						Lua 0:01:30:345
+[mod] [SMRTK] SMRTK_TAB action=tab_Sitting page=Sitting status=OK t=352034344 id=19
+						Lua 0:01:31:424
+[mod] [SMRTK] SMRTK_TAB action=tab_Selected page=Selected status=OK t=352034344 id=20
+						Lua 0:01:32:073
+[mod] [SMRTK] SMRTK_TAB action=tab_Agent page=Agent status=OK t=352034344 id=21
+						Lua 0:01:38:112
+[mod] [SMRTK] SMRTK_MARK action=mark label=SMRTK08_S1_BEGIN mark=28 status=OK t=352034344 id=22
+[SMRTK] SMRTK_MARK action=mark label=SMRTK08_S1_BEGIN mark=28 status=OK t=352034344 id=22
+[mod] [SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=46/46 game=403908 mark_action=mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack pack_version=11 read="live registry" save=SMRTK_490.savegame.sav sol=490 status=OK t=352034344 id=23
+[SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=46/46 game=403908 mark_action=mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack pack_version=11 read="live registry" save=SMRTK_490.savegame.sav sol=490 status=OK t=352034344 id=23
+						Lua 0:01:38:122
+[mod] [SMRTK] SMRTK_SHORTCUT console=false key=Ctrl-Shift-F11 t=352034344 id=24
+						Lua 0:01:38:133
+[mod] [SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=control t=352034344 id=25
+[SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=control t=352034344 id=25
+						Lua 0:01:38:143
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=352034344 id=26
+						Lua 0:01:38:152
+[mod] [SMRTK] SMRTK_CONSOLE_CONTROL action=console_control discriminates=true negative=false positive=true status=OK t=352034344 id=27
+[SMRTK] SMRTK_CONSOLE_CONTROL action=console_control discriminates=true negative=false positive=true status=OK t=352034344 id=27
+[mod] [SMRTK] SMRTK_TAINT_READ action=taint_read status=OK used=false t=352034344 id=28
+[SMRTK] SMRTK_TAINT_READ action=taint_read status=OK used=false t=352034344 id=28
+[mod] [SMRTK] SMRTK_ELIGIBILITY action=eligibility reason=UNAVAILABLE:sandbox status=OK t=352034344 id=29
+[SMRTK] SMRTK_ELIGIBILITY action=eligibility reason=UNAVAILABLE:sandbox status=OK t=352034344 id=29
+[mod] [SMRTK] SMRTK_DUMP armed=none armed_count=0 buildings=1147 console_discriminates=true console_enabled=true console_negative=false console_positive=true console_status=OK eligibility_reason=UNAVAILABLE:sandbox eligibility_status=OK errors=0 game=403908 leg=console_and_status map=[table] platform_cheats=nil session=1789485102:3116536010:1097757753:302990843 sitting=1 sol=490 taint_status=OK taint_used=false t=352034344 id=30
+[SMRTK] SMRTK_DUMP armed=none armed_count=0 buildings=1147 console_discriminates=true console_enabled=true console_negative=false console_positive=true console_status=OK eligibility_reason=UNAVAILABLE:sandbox eligibility_status=OK errors=0 game=403908 leg=console_and_status map=[table] platform_cheats=nil session=1789485102:3116536010:1097757753:302990843 sitting=1 sol=490 taint_status=OK taint_used=false t=352034344 id=30
+[mod] [SMRTK] SMRTK_MARK action=mark label=SMRTK08_S1_END mark=37 status=OK t=352034344 id=31
+[SMRTK] SMRTK_MARK action=mark label=SMRTK08_S1_END mark=37 status=OK t=352034344 id=31
+[mod] [SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=46/46 game=403908 mark_action=mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack pack_version=11 read="live registry" save=SMRTK_490.savegame.sav sol=490 status=OK t=352034344 id=32
+[SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=46/46 game=403908 mark_action=mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack pack_version=11 read="live registry" save=SMRTK_490.savegame.sav sol=490 status=OK t=352034344 id=32
+[mod] [SMRTK] SMRTK_ACTION action=slot_1 discriminates=true eligibility=UNAVAILABLE:sandbox status=OK taint=false t=352034344 id=33
+[SMRTK] SMRTK_ACTION action=slot_1 discriminates=true eligibility=UNAVAILABLE:sandbox status=OK taint=false t=352034344 id=33
+						Lua 0:01:42:485
+[mod] [SMRTK] SMRTK_MARK action=mark label=SMRTK08_S2_PREFLIGHT mark=40 status=OK t=352034344 id=34
+[SMRTK] SMRTK_MARK action=mark label=SMRTK08_S2_PREFLIGHT mark=40 status=OK t=352034344 id=34
+[mod] [SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=46/46 game=403908 mark_action=mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack pack_version=11 read="live registry" save=SMRTK_490.savegame.sav sol=490 status=OK t=352034344 id=35
+[SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=46/46 game=403908 mark_action=mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack pack_version=11 read="live registry" save=SMRTK_490.savegame.sav sol=490 status=OK t=352034344 id=35
+[mod] [SMRTK] SMRTK_PROBE_PREFLIGHT action=probe_preflight brief="ck144 (a) close-out sitting 2026-09-15: first RunAll on the rebuilt kit after smrtk 99; 47 pack Code files + 33 TestKit Code files swept, zero stale probes" clean=true evidence="" exit=1 hits=0 pack_head=819526fe0faef0692a0b7dee719830921a3b89e8 sitting=1 status=OK testkit_head=f5fa650cfa79edb24f059ee4a75a3b49f61d3973 t=352034344 id=36
+[SMRTK] SMRTK_PROBE_PREFLIGHT action=probe_preflight brief="ck144 (a) close-out sitting 2026-09-15: first RunAll on the rebuilt kit after smrtk 99; 47 pack Code files + 33 TestKit Code files swept, zero stale probes" clean=true evidence="" exit=1 hits=0 pack_head=819526fe0faef0692a0b7dee719830921a3b89e8 sitting=1 status=OK testkit_head=f5fa650cfa79edb24f059ee4a75a3b49f61d3973 t=352034344 id=36
+[mod] [SMRTK] SMRTK_DUMP checked_at=2026-09-15T15:08:24Z game=403908 hits=0 leg=probe_preflight pack_head=819526fe0faef0692a0b7dee719830921a3b89e8 reason=nil session=1789485102:3116536010:1097757753:302990843 sitting=1 status=OK testkit_head=f5fa650cfa79edb24f059ee4a75a3b49f61d3973 t=352034344 id=37
+[SMRTK] SMRTK_DUMP checked_at=2026-09-15T15:08:24Z game=403908 hits=0 leg=probe_preflight pack_head=819526fe0faef0692a0b7dee719830921a3b89e8 reason=nil session=1789485102:3116536010:1097757753:302990843 sitting=1 status=OK testkit_head=f5fa650cfa79edb24f059ee4a75a3b49f61d3973 t=352034344 id=37
+[mod] [SMRTK] SMRTK_ACTION action=slot_2 clean=true hits=0 pack_head=819526fe0faef0692a0b7dee719830921a3b89e8 sitting=1 status=OK testkit_head=f5fa650cfa79edb24f059ee4a75a3b49f61d3973 t=352034344 id=38
+[SMRTK] SMRTK_ACTION action=slot_2 clean=true hits=0 pack_head=819526fe0faef0692a0b7dee719830921a3b89e8 sitting=1 status=OK testkit_head=f5fa650cfa79edb24f059ee4a75a3b49f61d3973 t=352034344 id=38
+						Lua 0:01:47:248
+[mod] [SMRTK] SMRTK_TAB action=tab_Kit page=Kit status=OK t=352034344 id=39
+						Lua 0:01:50:166
+[mod] [SMRTest] ---- RunAll (all probes) ----
+[SMRTest] ---- RunAll (all probes) ----
+[mod] [SMRTest] fix pack present: 46/46 fixes active
+[SMRTest] fix pack present: 46/46 fixes active
+[mod] [SMRTest] opt-in pack present: 8/8 modules active
+[SMRTest] opt-in pack present: 8/8 modules active
+[mod] [SMRTest] save-rescue NOT loaded — its probes SKIP (a separate cleanup mod, absent by design)
+[SMRTest] save-rescue NOT loaded — its probes SKIP (a separate cleanup mod, absent by design)
+						Lua 0:01:50:167
+[mod] [SMRTest] PASS  CaveInsNoDisasters       [retired] condition true with NoDisasters off, false with it on — vanilla honours the rule (R-18 confirmed)
+[SMRTest] PASS  CaveInsNoDisasters       [retired] condition true with NoDisasters off, false with it on — vanilla honours the rule (R-18 confirmed)
+[mod] [SMRTest] PASS  MeteorFrequency          [retired] 'Meteors' is a map repeat and the old global thread func is gone (R-9 premise confirmed; cadence itself is unmeasured and needs a sitting)
+[SMRTest] PASS  MeteorFrequency          [retired] 'Meteors' is a map repeat and the old global thread func is gone (R-9 premise confirmed; cadence itself is unmeasured and needs a sitting)
+[mod] [SMRTest] PASS  UpgradeModifierLeak      [retired] modifier turned off by the shipped code (R-5 confirmed)
+[SMRTest] PASS  UpgradeModifierLeak      [retired] modifier turned off by the shipped code (R-5 confirmed)
+[mod] [SMRTest] PASS  NightShiftWork           [behavior] hours 0 and 1 send shift-3 colonists to work
+[SMRTest] PASS  NightShiftWork           [behavior] hours 0 and 1 send shift-3 colonists to work
+[mod] [SMRTest] PASS  WispPower                [behavior] 3 wisps -> 3000 power units
+[SMRTest] PASS  WispPower                [behavior] 3 wisps -> 3000 power units
+[mod] [SMRTest] PASS  WispResearch             [behavior] no double grant; notification says 300 for 3 wisps
+[SMRTest] PASS  WispResearch             [behavior] no double grant; notification says 300 for 3 wisps
+[mod] [SMRTest] PASS  TouristApplicants        [retired] 1-star 168 < 2-star 322 over 400 rolls
+[SMRTest] PASS  TouristApplicants        [retired] 1-star 168 < 2-star 322 over 400 rolls
+[mod] [SMRTest] SKIP  FactionFundingCheck      [retired] returned 0 without error, but this cannot discriminate: the engine tolerates pairs(nil), so fixed and unfixed give the same answer (not evidence)
+[SMRTest] SKIP  FactionFundingCheck      [retired] returned 0 without error, but this cannot discriminate: the engine tolerates pairs(nil), so fixed and unfixed give the same answer (not evidence)
+[mod] [SMRTest] SKIP  TrainsToVoid             [install] introspection unavailable (retail sandbox)
+[SMRTest] SKIP  TrainsToVoid             [install] introspection unavailable (retail sandbox)
+[mod] [SMRTest] PASS  LanderEmptyLaunch        [behavior] empty flight blocked, loaded flight still ready (1.1.0 body :535-559 driven; fixture past the :554 automode gate)
+[SMRTest] PASS  LanderEmptyLaunch        [behavior] empty flight blocked, loaded flight still ready (1.1.0 body :535-559 driven; fixture past the :554 automode gate)
+[mod] [SMRTest] ERROR LanderCargoRatchet       [retired] Lua/UniversalRocket.lua:2039: attempt to call a nil value (method 'GetAutoModeThresholds')
+[SMRTest] ERROR LanderCargoRatchet       [retired] Lua/UniversalRocket.lua:2039: attempt to call a nil value (method 'GetAutoModeThresholds')
+[mod] [SMRTest] PASS  LanderReturnFuel         [retired] parked lander keeps 3500 fuel requested by the shipped code (R-25 confirmed)
+[SMRTest] PASS  LanderReturnFuel         [retired] parked lander keeps 3500 fuel requested by the shipped code (R-25 confirmed)
+[mod] [SMRTest] SKIP  ShelterReflex            [install] Idle wrapper unverified (introspection unavailable (retail sandbox))
+[SMRTest] SKIP  ShelterReflex            [install] Idle wrapper unverified (introspection unavailable (retail sandbox))
+						Lua 0:01:50:171
+[mod] [SMRTest] F45: 0 track repair site(s); 0 with a non-numeric node_idx (track unsalvageable)
+[SMRTest] F45: 0 track repair site(s); 0 with a non-numeric node_idx (track unsalvageable)
+[mod] [SMRTest] SKIP  BrokenTrackSalvage       [install] introspection unavailable (retail sandbox)
+[SMRTest] SKIP  BrokenTrackSalvage       [install] introspection unavailable (retail sandbox)
+[mod] [SMRTest] SKIP  TrackSalvageWipe         [install] introspection unavailable (retail sandbox)
+[SMRTest] SKIP  TrackSalvageWipe         [install] introspection unavailable (retail sandbox)
+						Lua 0:01:50:173
+[mod] [SMRTest] SKIP  LakeEntombment           [install] introspection unavailable (retail sandbox)
+						Lua 0:01:50:174
+[SMRTest] SKIP  LakeEntombment           [install] introspection unavailable (retail sandbox)
+[mod] [SMRTest] SKIP  GhostFarmOxygen          [install] introspection unavailable (retail sandbox)
+[SMRTest] SKIP  GhostFarmOxygen          [install] introspection unavailable (retail sandbox)
+[mod] [SMRTest] PASS  RocketDroneChurn         [behavior] steady-state refresh keeps the drones; new requests still reconnect
+[SMRTest] PASS  RocketDroneChurn         [behavior] steady-state refresh keeps the drones; new requests still reconnect
+						Lua 0:01:50:175
+[mod] [SMRTest] PASS  ShuttleTransportCache    [behavior] verdict recomputed when shuttle availability flips, and still cached while it does not
+[SMRTest] PASS  ShuttleTransportCache    [behavior] verdict recomputed when shuttle availability flips, and still cached while it does not
+[mod] [SMRTest] PASS  VacuumWalks              [behavior] vacuum move uses the passage route; breathable maps unchanged
+[SMRTest] PASS  VacuumWalks              [behavior] vacuum move uses the passage route; breathable maps unchanged
+[mod] [SMRTest] PASS  ArrivalDeaths            [behavior] the impassable drop spot was snapped to a walkable one; could not read Arrive's source (SMRTest:no-introspection) (0 colonist(s) currently walking between domes)
+[SMRTest] PASS  ArrivalDeaths            [behavior] the impassable drop spot was snapped to a walkable one; could not read Arrive's source (SMRTest:no-introspection) (0 colonist(s) currently walking between domes)
+[mod] [SMRTest] PASS  ArrivalDeathsChooseDomeArg [behavior] the colonist is accepted; the old traits-table call still throws (Lua/Filter.lua:116: attempt to index a nil value (local 'obj_attributes'))
+[SMRTest] PASS  ArrivalDeathsChooseDomeArg [behavior] the colonist is accepted; the old traits-table call still throws (Lua/Filter.lua:116: attempt to index a nil value (local 'obj_attributes'))
+[mod] [SMRTest] ERROR DroneUnreachableForever  [retired] Lua/Units/Drone.lua:926: attempt to call a nil value (method 'MarkUnreachable')
+[SMRTest] ERROR DroneUnreachableForever  [retired] Lua/Units/Drone.lua:926: attempt to call a nil value (method 'MarkUnreachable')
+[mod] [SMRTest] F58: 2 residence(s) hold 3 reserved slot(s); 3 are clearly stale
+[SMRTest] F58: 2 residence(s) hold 3 reserved slot(s); 3 are clearly stale
+[mod] [SMRTest] PASS  StaleReservations        [behavior] reservation timestamped for the daily sweep (3 reserved slot(s) in this save, 3 clearly stale)
+[SMRTest] PASS  StaleReservations        [behavior] reservation timestamped for the daily sweep (3 reserved slot(s) in this save, 3 clearly stale)
+[mod] [SMRTest] PASS  CrystalMysteryHang       [install] CrystalFlyAway handler registered (current mystery: MirrorSphereMystery)
+[SMRTest] PASS  CrystalMysteryHang       [install] CrystalFlyAway handler registered (current mystery: MirrorSphereMystery)
+[mod] [SMRTest] PASS  TouristSatisfaction      [retired] Colonist.UpdateSatisfaction does not exist — the Satisfaction stat was deleted, so F09 cannot occur (R-3 confirmed in-game)
+[SMRTest] PASS  TouristSatisfaction      [retired] Colonist.UpdateSatisfaction does not exist — the Satisfaction stat was deleted, so F09 cannot occur (R-3 confirmed in-game)
+[mod] [SMRTest] PASS  TrainPlatformWedge       [retired] stale passenger removed and ticket discarded
+[SMRTest] PASS  TrainPlatformWedge       [retired] stale passenger removed and ticket discarded
+[mod] [SMRTest] PASS  CommandCenterNumbers     [retired] all 11 Command Center resources resolve through vanilla's parameterised GetAvailable (R-19 confirmed)
+[SMRTest] PASS  CommandCenterNumbers     [retired] all 11 Command Center resources resolve through vanilla's parameterised GetAvailable (R-19 confirmed)
+[mod] [SMRTest] PASS  DomeOverviewHighlight    [behavior] low stat rendered as <red>20</red>
+[SMRTest] PASS  DomeOverviewHighlight    [behavior] low stat rendered as <red>20</red>
+[mod] [SMRTest] PASS  PayloadTemplateRefill    [behavior] template prefills a fresh payload (20), a confirmed payload keeps an emptied row empty, and a cancelled prompt neither stamps nor locks the template (20)
+[SMRTest] PASS  PayloadTemplateRefill    [behavior] template prefills a fresh payload (20), a confirmed payload keeps an emptied row empty, and a cancelled prompt neither stamps nor locks the template (20)
+[mod] [SMRTest] ERROR ClassicRockets           [behavior] Lua/UniversalRocket.lua:1894: attempt to call a nil value (method 'IsSpecialAutomode')
+[SMRTest] ERROR ClassicRockets           [behavior] Lua/UniversalRocket.lua:1894: attempt to call a nil value (method 'IsSpecialAutomode')
+[mod] [CommunityFixPack] SaveSanitizer: restored the Frictionless Composites buff on the WindTurbine label (+100% electricity_production)
+[mod] [CommunityFixPack] SaveSanitizer: restored the Frictionless Composites buff on the WindTurbine_Large label (+100% electricity_production)
+[mod] [SMRTest] PASS  SaveSanitizerTurbineBuff [behavior] all three turbine labels at 100%, unchanged by a second run
+[SMRTest] PASS  SaveSanitizerTurbineBuff [behavior] all three turbine labels at 100%, unchanged by a second run
+[mod] [SMRTest] PASS  LandscapeUnitFilter      [behavior] boarding unit skipped, ordinary unit reported exactly once
+						Lua 0:01:50:176
+[SMRTest] PASS  LandscapeUnitFilter      [behavior] boarding unit skipped, ordinary unit reported exactly once
+[mod] [SMRTest] PASS  SmallLandscapeSites      [retired] 1-, 2- and 10-hex sites each return every destination without raising — vanilla bounds-checks (R-6 confirmed; removal restores vanilla's 10, which our clamp cut to 5)
+[SMRTest] PASS  SmallLandscapeSites      [retired] 1-, 2- and 10-hex sites each return every destination without raising — vanilla bounds-checks (R-6 confirmed; removal restores vanilla's 10, which our clamp cut to 5)
+[mod] [SMRTest] FAIL  DomeFreeSpaceMismatch    [behavior] a residence whose power is out counts as zero free space — the dome reads as full for births and immigration while ChooseResidence keeps assigning colonists into it
+[SMRTest] FAIL  DomeFreeSpaceMismatch    [behavior] a residence whose power is out counts as zero free space — the dome reads as full for births and immigration while ChooseResidence keeps assigning colonists into it
+[mod] [SMRTest] PASS  FreedHousingNotice       [behavior] vacated home offers the bed to the dome's homeless once the caller's operation has finished, not inside it; a residence with no free slot does not
+[SMRTest] PASS  FreedHousingNotice       [behavior] vacated home offers the bed to the dome's homeless once the caller's operation has finished, not inside it; a residence with no free slot does not
+[mod] [SMRTest] PASS  ShuttleHubOffAvailable   [behavior] player-disabled hub not counted; working and self-lifting-suspended hubs still are
+[SMRTest] PASS  ShuttleHubOffAvailable   [behavior] player-disabled hub not counted; working and self-lifting-suspended hubs still are
+[mod] [SMRTest] PASS  AsteroidLanderAvailable  [retired] unloading, waiting-maintenance and idle landers on the pad all count, an off-world one does not — the predicate ignores `command` by construction (R-11 confirmed)
+[SMRTest] PASS  AsteroidLanderAvailable  [retired] unloading, waiting-maintenance and idle landers on the pad all count, an off-world one does not — the predicate ignores `command` by construction (R-11 confirmed)
+[mod] [SMRTest] ERROR AutoExportPriority       [retired] Lua/UniversalRocket.lua:2039: attempt to call a nil value (method 'GetAutoModeThresholds')
+[SMRTest] ERROR AutoExportPriority       [retired] Lua/UniversalRocket.lua:2039: attempt to call a nil value (method 'GetAutoModeThresholds')
+[mod] [SMRTest] PASS  MirrorSphereSite         [behavior] finished site locked out, unfinished site still workable
+[SMRTest] PASS  MirrorSphereSite         [behavior] finished site locked out, unfinished site still workable
+[mod] [SMRTest] PASS  GeneForging              [behavior] ladder holds: neither -> nil, GeneSelection -> 100, GeneForging -> 50, both -> 150
+[SMRTest] PASS  GeneForging              [behavior] ladder holds: neither -> nil, GeneSelection -> 100, GeneForging -> 50, both -> 150
+[mod] [SMRTest] PASS  DustSicknessDamage       [retired] DailyUpdate never consults Random and deals a flat 10 — F17's only intent tell (the dead `5 + Random(param)` line) is gone, so flat damage is the stated design (R-15 confirmed)
+[SMRTest] PASS  DustSicknessDamage       [retired] DailyUpdate never consults Random and deals a flat 10 — F17's only intent tell (the dead `5 + Random(param)` line) is gone, so flat damage is the stated design (R-15 confirmed)
+[mod] [SMRTest] PASS  DustSicknessBiorobots    [behavior] all 4 infection effects filter Biorobots out
+[SMRTest] PASS  DustSicknessBiorobots    [behavior] all 4 infection effects filter Biorobots out
+[mod] [SMRTest] PASS  DestroyedTunnels         [behavior] ruined tunnels skipped, intact tunnel still registered
+[SMRTest] PASS  DestroyedTunnels         [behavior] ruined tunnels skipped, intact tunnel still registered
+[mod] [SMRTest] PASS  TrainCargoDumping        [behavior] switched-off station refused, accepting station served, undeliverable cargo still dropped, and a storable-but-undemanded resource neither throws nor unloads (F114 input)
+[SMRTest] PASS  TrainCargoDumping        [behavior] switched-off station refused, accepting station served, undeliverable cargo still dropped, and a storable-but-undemanded resource neither throws nor unloads (F114 input)
+[mod] [SMRTest] PASS  RocketInteractGuard      [behavior] load orders on a UniversalTradeRocket are refused; ordinary depots still accept them
+[SMRTest] PASS  RocketInteractGuard      [behavior] load orders on a UniversalTradeRocket are refused; ordinary depots still accept them
+[mod] [SMRTest] PASS  TrackConnectorPingPong   [behavior] a live neighbour keeps its connector hex on an UNFORCED claim but loses it on a FORCED one (vanilla 1.1.0's save-load behaviour); an abandoned element is still cleared; a dying building schedules its neighbours' reclaim
+[SMRTest] PASS  TrackConnectorPingPong   [behavior] a live neighbour keeps its connector hex on an UNFORCED claim but loses it on a FORCED one (vanilla 1.1.0's save-load behaviour); an abandoned element is still cleared; a dying building schedules its neighbours' reclaim
+[mod] [SMRTest] PASS  TrackTunnelPowerBridge   [behavior] bridges only the short track whose stations really are on different grids
+[SMRTest] PASS  TrackTunnelPowerBridge   [behavior] bridges only the short track whose stations really are on different grids
+[mod] [SMRTest] PASS  GridGlobalStorage        [retired] GetGridGlobalStorage does not exist — the ratio-summing global that carried F22 is gone, and the per-dome ScriptFunc_DomesGridStorage replacement is present (R-12 confirmed in-game)
+[SMRTest] PASS  GridGlobalStorage        [retired] GetGridGlobalStorage does not exist — the ratio-summing global that carried F22 is gone, and the per-dome ScriptFunc_DomesGridStorage replacement is present (R-12 confirmed in-game)
+[mod] [SMRTest] PASS  LastTransmissionStorage  [retired] all 6 storage conditions carry a Condition naming their own resource (R-13 confirmed)
+						Lua 0:01:50:177
+[SMRTest] PASS  LastTransmissionStorage  [retired] all 6 storage conditions carry a Condition naming their own resource (R-13 confirmed)
+[mod] [SMRTest] PASS  TrainWaitTime            [behavior] station keeps the 90000 wait; the travel clock restarts at boarding (0)
+[SMRTest] PASS  TrainWaitTime            [behavior] station keeps the 90000 wait; the travel clock restarts at boarding (0)
+[mod] [SMRTest] PASS  GraphConsumedCaption     [behavior] MachineParts caption reports 10, matching the plotted consumption+maintenance
+[SMRTest] PASS  GraphConsumedCaption     [behavior] MachineParts caption reports 10, matching the plotted consumption+maintenance
+[mod] [SMRTest] SKIP  MoraleComfortTooltip     [retired] the tooltip builder asked about Comfort and read the stand-in's 75 (high mark 70) — a stat tooltip reading its stat, not evidence of the phantom row; R-29 needs a screen check
+[SMRTest] SKIP  MoraleComfortTooltip     [retired] the tooltip builder asked about Comfort and read the stand-in's 75 (high mark 70) — a stat tooltip reading its stat, not evidence of the phantom row; R-29 needs a screen check
+[mod] [SMRTest] PASS  StorageRateModifiers     [retired] rates reached the element (7777/8888), UpdateStorage ran 1 time(s) — R-31 confirmed
+[SMRTest] PASS  StorageRateModifiers     [retired] rates reached the element (7777/8888), UpdateStorage ran 1 time(s) — R-31 confirmed
+[mod] [SMRTest] PASS  SequenceLatents          [behavior] 2 of 2 latent sequence paths behave as written
+[SMRTest] PASS  SequenceLatents          [behavior] 2 of 2 latent sequence paths behave as written
+[mod] [SMRTest] PASS  FounderTraitNotification [behavior] Founder gaining Glutton (Negative) raises the notification
+[SMRTest] PASS  FounderTraitNotification [behavior] Founder gaining Glutton (Negative) raises the notification
+[mod] [SMRTest] SKIP  IndependenceTerraforming [retired] the tech no longer modifies SpecialProjectResourcesModifier
+[SMRTest] SKIP  IndependenceTerraforming [retired] the tech no longer modifies SpecialProjectResourcesModifier
+[mod] [SMRTest] PASS  TrackSalvageRefund       [behavior] three groups refund 300 Metals (was one group's 100); single-group and unstamped tracks unchanged; partial salvage returns the destroyed elements' share
+[SMRTest] PASS  TrackSalvageRefund       [behavior] three groups refund 300 Metals (was one group's 100); single-group and unstamped tracks unchanged; partial salvage returns the destroyed elements' share
+[mod] [SMRTest] FAIL  LayoutTechLock           [behavior] fix 'LayoutTechLock' not registered
+[SMRTest] FAIL  LayoutTechLock           [behavior] fix 'LayoutTechLock' not registered
+[mod] [SMRTest] PASS  TrainMinors              [retired] GetTrainsOnRoute and TrackBase:CanAddVehicle both present — the cap is the route's station count and a stale max_vehicles is display-only (R-34 premise confirmed; the x/max display refresh is the known cosmetic cost, unmeasured here)
+[SMRTest] PASS  TrainMinors              [retired] GetTrainsOnRoute and TrackBase:CanAddVehicle both present — the cap is the route's station count and a stale max_vehicles is display-only (R-34 premise confirmed; the x/max display refresh is the known cosmetic cost, unmeasured here)
+[mod] [SMRTest] SKIP  DroneTransportMinors     [behavior] the shipped handler did not drop the changed map's entries — probe setup no longer matches
+[SMRTest] SKIP  DroneTransportMinors     [behavior] the shipped handler did not drop the changed map's entries — probe setup no longer matches
+[mod] [SMRTest] FAIL  AnomalyCaveInMap         [behavior] TriggerCaveIn(false, pos) raised (Lua/Buildings/CaveInRubble.lua:109: attempt to index a boolean value (local 'map')) — CaveInRubble.lua:101 calls map:MapFindNearest with no check, and UndergroundMap is a GameVar defaulting to false, which eight scenario call sites pass in unconditionally
+[SMRTest] FAIL  AnomalyCaveInMap         [behavior] TriggerCaveIn(false, pos) raised (Lua/Buildings/CaveInRubble.lua:109: attempt to index a boolean value (local 'map')) — CaveInRubble.lua:101 calls map:MapFindNearest with no check, and UndergroundMap is a GameVar defaulting to false, which eight scenario call sites pass in unconditionally
+[mod] [SMRTest] SKIP  TechDescriptionBuilding  [retired] the tech in Techs has no Description T
+[SMRTest] SKIP  TechDescriptionBuilding  [retired] the tech in Techs has no Description T
+[mod] [SMRTest] PASS  BombardmentSpread        [behavior] 20 of 20 per-missile directions deviate from the volley direction
+[SMRTest] PASS  BombardmentSpread        [behavior] 20 of 20 per-missile directions deviate from the volley direction
+[mod] [SMRTest] PASS  MeteorStormWedge         [retired] 'MeteorStorm' is a map repeat and the old global thread func is gone (R-10 premise confirmed; the unbounded-storm residual R-10 names is NOT measured here and needs a sitting)
+[SMRTest] PASS  MeteorStormWedge         [retired] 'MeteorStorm' is a map repeat and the old global thread func is gone (R-10 premise confirmed; the unbounded-storm residual R-10 names is NOT measured here and needs a sitting)
+[mod] [SMRTest] PASS  RainsDeadlock            [retired] rains run through RainsDisasterRepeatCycle and RainsDisasterLoop is gone — no untimed WaitMsg to deadlock on, and vanilla migrates old saves itself via SavegameFixups.RainsDisasterLoopToRepeat2 (R-14 confirmed)
+[SMRTest] PASS  RainsDeadlock            [retired] rains run through RainsDisasterRepeatCycle and RainsDisasterLoop is gone — no untimed WaitMsg to deadlock on, and vanilla migrates old saves itself via SavegameFixups.RainsDisasterLoopToRepeat2 (R-14 confirmed)
+[mod] [SMRTest] PASS  UpdateReport             [behavior] healthy registry clean; 4 rot shapes flagged, 4 healthy shapes ignored
+[SMRTest] PASS  UpdateReport             [behavior] healthy registry clean; 4 rot shapes flagged, 4 healthy shapes ignored
+						Lua 0:01:50:178
+[mod] [SMRTest] PASS  TrackShellLeak           [behavior] mass salvage deletes the emptied track, and zero shells survive in the loaded save
+[SMRTest] PASS  TrackShellLeak           [behavior] mass salvage deletes the emptied track, and zero shells survive in the loaded save
+						Lua 0:01:50:179
+[mod] [SMRTest] PASS  SaintBlessing            [behavior] a Saint's blessing files under TraitReligious, and all 4 dome Saint(s) carry it
+[SMRTest] PASS  SaintBlessing            [behavior] a Saint's blessing files under TraitReligious, and all 4 dome Saint(s) carry it
+[mod] [SMRTest] PASS  DustDevilsDescrMap       [retired] the descriptor follows MainMap in both directions, and MainMap's own disabled setting still wins (R-22 confirmed)
+[SMRTest] PASS  DustDevilsDescrMap       [retired] the descriptor follows MainMap in both directions, and MainMap's own disabled setting still wins (R-22 confirmed)
+[mod] [SMRTest] PASS  AsteroidVisitPrecedence  [retired] non-landers and supply pods are refused whatever their command, and a genuine lander still qualifies (R-11 confirmed on the over-broad half)
+[SMRTest] PASS  AsteroidVisitPrecedence  [retired] non-landers and supply pods are refused whatever their command, and a genuine lander still qualifies (R-11 confirmed on the over-broad half)
+[mod] [SMRTest] PASS  AstrogeologistExtractors [retired] profile pays extractors label-wide (2 effect(s)), carries no per-building append, and this save holds no leftover +10% modifier (F-5 confirmed, residue clear)
+[SMRTest] PASS  AstrogeologistExtractors [retired] profile pays extractors label-wide (2 effect(s)), carries no per-building append, and this save holds no leftover +10% modifier (F-5 confirmed, residue clear)
+[mod] [SMRTest] PASS  SinkholeIndestructible   [behavior] Sinkhole is indestructible on the class and the template; 0 instance(s) inspected, none overriding
+[SMRTest] PASS  SinkholeIndestructible   [behavior] Sinkhole is indestructible on the class and the template; 0 instance(s) inspected, none overriding
+						Lua 0:01:50:180
+[mod] [SMRTest] PASS  DustStormBreakMapFilter  [retired] a surface storm over an underground-only fragment breaks nothing, while the same fragment asked for its own map does break — vanilla filters connectors by map (R-23 confirmed)
+[SMRTest] PASS  DustStormBreakMapFilter  [retired] a surface storm over an underground-only fragment breaks nothing, while the same fragment asked for its own map does break — vanilla filters connectors by map (R-23 confirmed)
+[mod] [SMRTest] PASS  DustDevilSpawnGate       [retired] 'DustDevils' is a map repeat and the old global thread func is gone, and the staged g_DustDevilsState var is present (R-21 premise confirmed; the authored count RANGE is not measured here — that needs a sitting watching wave sizes)
+[SMRTest] PASS  DustDevilSpawnGate       [retired] 'DustDevils' is a map repeat and the old global thread func is gone, and the staged g_DustDevilsState var is present (R-21 premise confirmed; the authored count RANGE is not measured here — that needs a sitting watching wave sizes)
+[mod] [SMRTest] FAIL  C47OpenFarmSeedBufferShape [behavior] Vegetation 'Herbs' (displayed as 'Herbs') costs 50 seeds per hex, not 100 — C47's per-tick arithmetic is derived from this table
+[SMRTest] FAIL  C47OpenFarmSeedBufferShape [behavior] Vegetation 'Herbs' (displayed as 'Herbs') costs 50 seeds per hex, not 100 — C47's per-tick arithmetic is derived from this table
+[mod] [SMRTest] PASS  LocalizedUIText          [retired] the terraforming heading id 914616772802 resolves in English (R-27 confirmed)
+[SMRTest] PASS  LocalizedUIText          [retired] the terraforming heading id 914616772802 resolves in English (R-27 confirmed)
+[mod] [SMRTest] SKIP  SpaceYDroneCapBullet     [retired] the SpaceY effect string carries no literal to read (T shape changed)
+[SMRTest] SKIP  SpaceYDroneCapBullet     [retired] the SpaceY effect string carries no literal to read (T shape changed)
+[mod] [SMRTest] SMRTEST-DISPATCH ClassNonInheritableMembers = { UNREADABLE } — the copy-skip set could not be read
+[SMRTest] SMRTEST-DISPATCH ClassNonInheritableMembers = { UNREADABLE } — the copy-skip set could not be read
+[mod] [SMRTest] SMRTEST-DISPATCH the sweep reports which classes DO NOT REACH a wrap. It does NOT report which of them are ever instantiated — a hit is a reach gap, NOT a broken fix.
+[SMRTest] SMRTEST-DISPATCH the sweep reports which classes DO NOT REACH a wrap. It does NOT report which of them are ever instantiated — a hit is a reach gap, NOT a broken fix.
+						Lua 0:01:50:191
+[mod] [SMRTest] SMRTEST-DISPATCH 90_SaveSanitizer               LabelContainer.SetLabelModifier                            link=copy  desc=46    reach=1     UNREACHED=0    (own-copy 0)  MULTI=45 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH 90_SaveSanitizer               LabelContainer.SetLabelModifier                            link=copy  desc=46    reach=1     UNREACHED=0    (own-copy 0)  MULTI=45 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_ArrivalDeaths              Colonist.Idle                                              link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_ArrivalDeaths              Colonist.Idle                                              link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_ArrivalDeaths              Colonist.OnArrival                                         link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_ArrivalDeaths              Colonist.OnArrival                                         link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_ArrivalDeaths              Colonist.Arrive                                            link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_ArrivalDeaths              Colonist.Arrive                                            link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_BombardmentSpread          BaseMeteor.HitsDome                                        link=copy  desc=7     reach=6     UNREACHED=0    (own-copy 0)  MULTI=1 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_BombardmentSpread          BaseMeteor.HitsDome                                        link=copy  desc=7     reach=6     UNREACHED=0    (own-copy 0)  MULTI=1 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_BombardmentSpread          BaseMeteor.GetTimeToImpact                                 link=copy  desc=7     reach=6     UNREACHED=0    (own-copy 0)  MULTI=1 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_BombardmentSpread          BaseMeteor.GetTimeToImpact                                 link=copy  desc=7     reach=6     UNREACHED=0    (own-copy 0)  MULTI=1 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_BrokenTrackSalvage         TrackBase.BreakTrackElement                                link=copy  desc=1     reach=1     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_BrokenTrackSalvage         TrackBase.BreakTrackElement                                link=copy  desc=1     reach=1     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_CrystalMysteryHang         Crystal.ComposeProc                                        link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_CrystalMysteryHang         Crystal.ComposeProc                                        link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_DestroyedTunnels           TunnelBase.AddPFTunnel                                     link=copy  desc=4     reach=1     UNREACHED=0    (own-copy 0)  MULTI=3 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_DestroyedTunnels           TunnelBase.AddPFTunnel                                     link=copy  desc=4     reach=1     UNREACHED=0    (own-copy 0)  MULTI=3 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_DestroyedTunnels           TunnelBase.RemovePFTunnel                                  link=copy  desc=4     reach=1     UNREACHED=0    (own-copy 0)  MULTI=3 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_DestroyedTunnels           TunnelBase.RemovePFTunnel                                  link=copy  desc=4     reach=1     UNREACHED=0    (own-copy 0)  MULTI=3 (unreached 0)
+						Lua 0:01:50:192
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_DomeFreeSpaceMismatch      Dome.RefreshFreeLivingSpaces                               link=copy  desc=30    reach=29    UNREACHED=0    (own-copy 0)  MULTI=1 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_DomeFreeSpaceMismatch      Dome.RefreshFreeLivingSpaces                               link=copy  desc=30    reach=29    UNREACHED=0    (own-copy 0)  MULTI=1 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_DomeOverviewHighlight      Community.UICommandCenterStatUpdate                        link=?     desc=35    reach=0     UNREACHED=0    (own-copy 0)  MULTI=35 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_DomeOverviewHighlight      Community.UICommandCenterStatUpdate                        link=?     desc=35    reach=0     UNREACHED=0    (own-copy 0)  MULTI=35 (unreached 0)
+						Lua 0:01:50:193
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_DroneTransportMinors       DroneControl.UpdateRocketsInternal                         link=?     desc=46    reach=0     UNREACHED=0    (own-copy 0)  MULTI=46 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_DroneTransportMinors       DroneControl.UpdateRocketsInternal                         link=?     desc=46    reach=0     UNREACHED=0    (own-copy 0)  MULTI=46 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_FreedHousingNotice         Colonist.SetResidence                                      link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_FreedHousingNotice         Colonist.SetResidence                                      link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_FreedHousingNotice         Residence.CheckHomeForHomeless                             link=?     desc=25    reach=0     UNREACHED=0    (own-copy 0)  MULTI=25 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_FreedHousingNotice         Residence.CheckHomeForHomeless                             link=?     desc=25    reach=0     UNREACHED=0    (own-copy 0)  MULTI=25 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_FreedHousingNotice         Residence.GetFreeSpace                                     link=?     desc=25    reach=0     UNREACHED=0    (own-copy 0)  MULTI=25 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_FreedHousingNotice         Residence.GetFreeSpace                                     link=?     desc=25    reach=0     UNREACHED=0    (own-copy 0)  MULTI=25 (unreached 0)
+						Lua 0:01:50:197
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_GhostFarmOxygen            Building.SetDome                                           link=chain desc=630   reach=91    UNREACHED=0    (own-copy 0)  MULTI=539 (unreached 40)
+[SMRTest] SMRTEST-DISPATCH Fix_GhostFarmOxygen            Building.SetDome                                           link=chain desc=630   reach=91    UNREACHED=0    (own-copy 0)  MULTI=539 (unreached 40)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_GhostFarmOxygen            FarmBase.ApplyOxygenProductionMod                          link=copy  desc=16    reach=10    UNREACHED=6    (own-copy 6) [FarmFungalBase, FarmInsect, FarmInsectBase, FungalFarm, FungalFarmBase, FungalFarm_Asteroid]  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_GhostFarmOxygen            FarmBase.ApplyOxygenProductionMod                          link=copy  desc=16    reach=10    UNREACHED=6    (own-copy 6) [FarmFungalBase, FarmInsect, FarmInsectBase, FungalFarm, FungalFarmBase, FungalFarm_Asteroid]  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_GraphConsumedCaption       City.GetColonyStatsButtons                                 link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_GraphConsumedCaption       City.GetColonyStatsButtons                                 link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_GraphConsumedCaption       ResourceOverview.GetConsumedByMaintenanceYesterday         link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_GraphConsumedCaption       ResourceOverview.GetConsumedByMaintenanceYesterday         link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_GraphConsumedCaption       ResourceOverview.GetConsumedByConsumptionYesterday         link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_GraphConsumedCaption       ResourceOverview.GetConsumedByConsumptionYesterday         link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_GraphConsumedCaption       ResourceOverview.GetProducedYesterday                      link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_GraphConsumedCaption       ResourceOverview.GetProducedYesterday                      link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_JumboCaveReinforcementWedge ConstructionSite.TestBlockerClearenceProgress              link=copy  desc=13    reach=7     UNREACHED=1    (own-copy 1) [ConstructionGroupLeader]  MULTI=5 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_JumboCaveReinforcementWedge ConstructionSite.TestBlockerClearenceProgress              link=copy  desc=13    reach=7     UNREACHED=1    (own-copy 1) [ConstructionGroupLeader]  MULTI=5 (unreached 0)
+						Lua 0:01:50:198
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_LakeEntombment             LandscapeLake.PlacePrefab                                  link=copy  desc=4     reach=4     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_LakeEntombment             LandscapeLake.PlacePrefab                                  link=copy  desc=4     reach=4     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_LakeEntombment             Unit.ExitImpassable                                        link=chain desc=43    reach=0     UNREACHED=1    (own-copy 1) [Firefly]  MULTI=42 (unreached 16)
+[SMRTest] SMRTEST-DISPATCH Fix_LakeEntombment             Unit.ExitImpassable                                        link=chain desc=43    reach=0     UNREACHED=1    (own-copy 1) [Firefly]  MULTI=42 (unreached 16)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_LanderEmptyLaunch          UniversalRocketBase.IsCargoReady                           link=copy  desc=10    reach=10    UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_LanderEmptyLaunch          UniversalRocketBase.IsCargoReady                           link=copy  desc=10    reach=10    UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_LanderEmptyLaunch          UniversalRocketBase.CheckAutoDepart                        link=copy  desc=10    reach=10    UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_LanderEmptyLaunch          UniversalRocketBase.CheckAutoDepart                        link=copy  desc=10    reach=10    UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_LanderEmptyLaunch          UniversalRocketBase.IsSpecialAutomode                      link=copy  desc=10    reach=10    UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_LanderEmptyLaunch          UniversalRocketBase.IsSpecialAutomode                      link=copy  desc=10    reach=10    UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+						Lua 0:01:50:199
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_LanderEmptyLaunch          UniversalRocketBase.IsPlayerControlled                     link=copy  desc=10    reach=10    UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_LanderEmptyLaunch          UniversalRocketBase.IsPlayerControlled                     link=copy  desc=10    reach=10    UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_LanderEmptyLaunch          AutoMode.IsAutoModeEnabled                                 link=?     desc=21    reach=0     UNREACHED=0    (own-copy 0)  MULTI=21 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_LanderEmptyLaunch          AutoMode.IsAutoModeEnabled                                 link=?     desc=21    reach=0     UNREACHED=0    (own-copy 0)  MULTI=21 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_LayoutTechLock             LayoutConstructionController.Activate                      link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_LayoutTechLock             LayoutConstructionController.Activate                      link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_MirrorSphereSite           MirrorSphereBuildingBase.StartAction                       link=copy  desc=1     reach=1     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_MirrorSphereSite           MirrorSphereBuildingBase.StartAction                       link=copy  desc=1     reach=1     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_NightShiftWork             Colonist.ShouldLeaveForWork                                link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_NightShiftWork             Colonist.ShouldLeaveForWork                                link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_PayloadTemplateRefill      CargoRequestNew.RetrieveRequests                           link=copy  desc=1     reach=1     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_PayloadTemplateRefill      CargoRequestNew.RetrieveRequests                           link=copy  desc=1     reach=1     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_PayloadTemplateRefill      CargoRequestNew.Apply                                      link=copy  desc=1     reach=0     UNREACHED=1    (own-copy 1) [SpaceElevatorCargoRequest]  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_PayloadTemplateRefill      CargoRequestNew.Apply                                      link=copy  desc=1     reach=0     UNREACHED=1    (own-copy 1) [SpaceElevatorCargoRequest]  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_PayloadTemplateRefill      CargoRequestNew.SetRequest                                 link=copy  desc=1     reach=1     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_PayloadTemplateRefill      CargoRequestNew.SetRequest                                 link=copy  desc=1     reach=1     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_PayloadTemplateRefill      CargoRequestNew.PromptRocketCargoIssue                     link=copy  desc=1     reach=1     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_PayloadTemplateRefill      CargoRequestNew.PromptRocketCargoIssue                     link=copy  desc=1     reach=1     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_PayloadTemplateRefill      CargoRequestNew.GetCargoList                               link=copy  desc=1     reach=1     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_PayloadTemplateRefill      CargoRequestNew.GetCargoList                               link=copy  desc=1     reach=1     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_RocketDroneChurn           CargoTransporterNew.UpdateCargoResourceRequests            link=?     desc=13    reach=0     UNREACHED=0    (own-copy 0)  MULTI=13 (unreached 13)
+[SMRTest] SMRTEST-DISPATCH Fix_RocketDroneChurn           CargoTransporterNew.UpdateCargoResourceRequests            link=?     desc=13    reach=0     UNREACHED=0    (own-copy 0)  MULTI=13 (unreached 13)
+						Lua 0:01:50:200
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_RocketDroneChurn           CargoTransporterNew.AddCargoDemandRequest                  link=?     desc=13    reach=0     UNREACHED=0    (own-copy 0)  MULTI=13 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_RocketDroneChurn           CargoTransporterNew.AddCargoDemandRequest                  link=?     desc=13    reach=0     UNREACHED=0    (own-copy 0)  MULTI=13 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_RocketDroneChurn           CargoTransporterNew.AddCargoSupplyRequest                  link=?     desc=13    reach=0     UNREACHED=0    (own-copy 0)  MULTI=13 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_RocketDroneChurn           CargoTransporterNew.AddCargoSupplyRequest                  link=?     desc=13    reach=0     UNREACHED=0    (own-copy 0)  MULTI=13 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_RocketInteractGuard        RCTransport.CanInteractWithObject                          link=copy  desc=4     reach=0     UNREACHED=2    (own-copy 2) [RCConstructor, RCConstructorBase]  MULTI=2 (unreached 2)
+[SMRTest] SMRTEST-DISPATCH Fix_RocketInteractGuard        RCTransport.CanInteractWithObject                          link=copy  desc=4     reach=0     UNREACHED=2    (own-copy 2) [RCConstructor, RCConstructorBase]  MULTI=2 (unreached 2)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_RocketInteractGuard        RCTransport.InteractWithObject                             link=copy  desc=4     reach=0     UNREACHED=2    (own-copy 2) [RCConstructor, RCConstructorBase]  MULTI=2 (unreached 2)
+[SMRTest] SMRTEST-DISPATCH Fix_RocketInteractGuard        RCTransport.InteractWithObject                             link=copy  desc=4     reach=0     UNREACHED=2    (own-copy 2) [RCConstructor, RCConstructorBase]  MULTI=2 (unreached 2)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_SaintBlessing              TraitPreset.AddDomeColonistsModifier                       link=?     desc=1     reach=0     UNREACHED=0    (own-copy 0)  MULTI=1 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_SaintBlessing              TraitPreset.AddDomeColonistsModifier                       link=?     desc=1     reach=0     UNREACHED=0    (own-copy 0)  MULTI=1 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_SaintBlessing              LabelContainer.SetLabelModifier                            link=copy  desc=46    reach=1     UNREACHED=0    (own-copy 0)  MULTI=45 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_SaintBlessing              LabelContainer.SetLabelModifier                            link=copy  desc=46    reach=1     UNREACHED=0    (own-copy 0)  MULTI=45 (unreached 0)
+						Lua 0:01:50:204
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_ShuttleHubOffAvailable     BaseBuilding.GetWorkNotPermittedReason                     link=copy  desc=691   reach=6     UNREACHED=0    (own-copy 0)  MULTI=685 (unreached 633)
+[SMRTest] SMRTEST-DISPATCH Fix_ShuttleHubOffAvailable     BaseBuilding.GetWorkNotPermittedReason                     link=copy  desc=691   reach=6     UNREACHED=0    (own-copy 0)  MULTI=685 (unreached 633)
+						Lua 0:01:50:207
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_ShuttleHubOffAvailable     BaseBuilding.GetWorkNotPossibleReason                      link=copy  desc=691   reach=5     UNREACHED=1    (own-copy 1) [UpgradeConsumption]  MULTI=685 (unreached 633)
+[SMRTest] SMRTEST-DISPATCH Fix_ShuttleHubOffAvailable     BaseBuilding.GetWorkNotPossibleReason                      link=copy  desc=691   reach=5     UNREACHED=1    (own-copy 1) [UpgradeConsumption]  MULTI=685 (unreached 633)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_StaleReservations          Residence.ReserveResidence                                 link=?     desc=25    reach=0     UNREACHED=0    (own-copy 0)  MULTI=25 (unreached 4)
+[SMRTest] SMRTEST-DISPATCH Fix_StaleReservations          Residence.ReserveResidence                                 link=?     desc=25    reach=0     UNREACHED=0    (own-copy 0)  MULTI=25 (unreached 4)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_StaleReservations          Residence.CancelResidenceReservation                       link=?     desc=25    reach=0     UNREACHED=0    (own-copy 0)  MULTI=25 (unreached 4)
+[SMRTest] SMRTEST-DISPATCH Fix_StaleReservations          Residence.CancelResidenceReservation                       link=?     desc=25    reach=0     UNREACHED=0    (own-copy 0)  MULTI=25 (unreached 4)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_TrackConnectorPingPong     TrackConnectedObjBase.CreateConnectorElements              link=?     desc=6     reach=0     UNREACHED=0    (own-copy 0)  MULTI=6 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_TrackConnectorPingPong     TrackConnectedObjBase.CreateConnectorElements              link=?     desc=6     reach=0     UNREACHED=0    (own-copy 0)  MULTI=6 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_TrackConnectorPingPong     TrackConnectedObjBase.Done                                 link=?     desc=6     reach=0     UNREACHED=0    (own-copy 0)  MULTI=6 (unreached 6)
+[SMRTest] SMRTEST-DISPATCH Fix_TrackConnectorPingPong     TrackConnectedObjBase.Done                                 link=?     desc=6     reach=0     UNREACHED=0    (own-copy 0)  MULTI=6 (unreached 6)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_TrackSalvageRefund         TrackBase.GetRefundResources                               link=copy  desc=1     reach=1     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_TrackSalvageRefund         TrackBase.GetRefundResources                               link=copy  desc=1     reach=1     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_TrackSalvageRefund         TrackGridElement.Demolish                                  link=?     desc=1     reach=0     UNREACHED=0    (own-copy 0)  MULTI=1 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_TrackSalvageRefund         TrackGridElement.Demolish                                  link=?     desc=1     reach=0     UNREACHED=0    (own-copy 0)  MULTI=1 (unreached 0)
+						Lua 0:01:50:211
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_TrackSalvageRefund         Building.CalcRefundAmount                                  link=chain desc=630   reach=91    UNREACHED=0    (own-copy 0)  MULTI=539 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_TrackSalvageRefund         Building.CalcRefundAmount                                  link=chain desc=630   reach=91    UNREACHED=0    (own-copy 0)  MULTI=539 (unreached 0)
+						Lua 0:01:50:215
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_TrackSalvageRefund         Building.AddRefundResource                                 link=chain desc=630   reach=91    UNREACHED=0    (own-copy 0)  MULTI=539 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_TrackSalvageRefund         Building.AddRefundResource                                 link=chain desc=630   reach=91    UNREACHED=0    (own-copy 0)  MULTI=539 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_TrackSalvageRefund         ConstructionGroupLeader.Complete                           link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_TrackSalvageRefund         ConstructionGroupLeader.Complete                           link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+						Lua 0:01:50:216
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_TrackSalvageRefund         ConstructionSite.MarkSpentResources                        link=copy  desc=13    reach=8     UNREACHED=0    (own-copy 0)  MULTI=5 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_TrackSalvageRefund         ConstructionSite.MarkSpentResources                        link=copy  desc=13    reach=8     UNREACHED=0    (own-copy 0)  MULTI=5 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_TrackSalvageWipe           TrackGridElement.DemolishAndSplitTrack                     link=?     desc=1     reach=0     UNREACHED=0    (own-copy 0)  MULTI=1 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_TrackSalvageWipe           TrackGridElement.DemolishAndSplitTrack                     link=?     desc=1     reach=0     UNREACHED=0    (own-copy 0)  MULTI=1 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_TrackTunnelPowerBridge     TrackBase.ConnectToGrids                                   link=copy  desc=1     reach=1     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_TrackTunnelPowerBridge     TrackBase.ConnectToGrids                                   link=copy  desc=1     reach=1     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_TrackTunnelPowerBridge     TrackBase.GetStartStation                                  link=copy  desc=1     reach=1     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_TrackTunnelPowerBridge     TrackBase.GetStartStation                                  link=copy  desc=1     reach=1     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_TrackTunnelPowerBridge     TrackBase.GetEndStation                                    link=copy  desc=1     reach=1     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_TrackTunnelPowerBridge     TrackBase.GetEndStation                                    link=copy  desc=1     reach=1     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_TrackTunnelPowerBridge     TrackBase.Done                                             link=copy  desc=1     reach=1     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_TrackTunnelPowerBridge     TrackBase.Done                                             link=copy  desc=1     reach=1     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_TrackTunnelPowerBridge     TrackBase.DisconnectFromGrids                              link=copy  desc=1     reach=1     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_TrackTunnelPowerBridge     TrackBase.DisconnectFromGrids                              link=copy  desc=1     reach=1     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_TrainCargoDumping          Train.UnloadAll                                            link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_TrainCargoDumping          Train.UnloadAll                                            link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_TrainWaitTime              TransportStatistics.AddSpentTime                           link=?     desc=7     reach=0     UNREACHED=0    (own-copy 0)  MULTI=7 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_TrainWaitTime              TransportStatistics.AddSpentTime                           link=?     desc=7     reach=0     UNREACHED=0    (own-copy 0)  MULTI=7 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_TrainWaitTime              Colonist.BoardVehicle                                      link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_TrainWaitTime              Colonist.BoardVehicle                                      link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_TrainWaitTime              Colonist.ExitVehicle                                       link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_TrainWaitTime              Colonist.ExitVehicle                                       link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+						Lua 0:01:50:220
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_TrainsToVoid               Building.OnDemolish                                        link=chain desc=630   reach=89    UNREACHED=2    (own-copy 2) [AsteroidCatcher, AsteroidCatcherBase]  MULTI=539 (unreached 62)
+[SMRTest] SMRTEST-DISPATCH Fix_TrainsToVoid               Building.OnDemolish                                        link=chain desc=630   reach=89    UNREACHED=2    (own-copy 2) [AsteroidCatcher, AsteroidCatcherBase]  MULTI=539 (unreached 62)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_TrainsToVoid               Train.DestroySilent                                        link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_TrainsToVoid               Train.DestroySilent                                        link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_VacuumWalks                Colonist.TryToEmigrateToDome                               link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_VacuumWalks                Colonist.TryToEmigrateToDome                               link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_VacuumWalks                Colonist.DiscardTransportTicket                            link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_VacuumWalks                Colonist.DiscardTransportTicket                            link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_VacuumWalks                Colonist.ClearTransportRequest                             link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_VacuumWalks                Colonist.ClearTransportRequest                             link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH TOTAL targets=72 clean=64 with-unreached=8 missing=0 | descendants=4459 reach=499 UNREACHED=16 | MULTI-PARENT=3944 (of which unreached=1415, reported separately, NOT folded into either verdict)
+[SMRTest] SMRTEST-DISPATCH TOTAL targets=72 clean=64 with-unreached=8 missing=0 | descendants=4459 reach=499 UNREACHED=16 | MULTI-PARENT=3944 (of which unreached=1415, reported separately, NOT folded into either verdict)
+[mod] [SMRTest] PASS  DispatchReach            [behavior] swept 72 declared targets over 4459 descendants: 64 targets clean, 8 with unreached descendants (16 single-parent-path classes do not reach their wrap; a further 1415 multi-parent-path classes do not, reported separately). ⛔ UNREACHED is a reach gap, NOT a broken-fix count — instantiation is not measured. Detail: SMRTEST-DISPATCH lines.
+[SMRTest] PASS  DispatchReach            [behavior] swept 72 declared targets over 4459 descendants: 64 targets clean, 8 with unreached descendants (16 single-parent-path classes do not reach their wrap; a further 1415 multi-parent-path classes do not, reported separately). ⛔ UNREACHED is a reach gap, NOT a broken-fix count — instantiation is not measured. Detail: SMRTEST-DISPATCH lines.
+[mod] [SMRTest] SMRTEST-F105GUARD LandscapeConstructionSite: unguarded-state call ok=true
+[SMRTest] SMRTEST-F105GUARD LandscapeConstructionSite: unguarded-state call ok=true
+[mod] [SMRTest] SMRTEST-F105GUARD ClearWasteRockConstructionSite: unguarded-state call ok=true
+[SMRTest] SMRTEST-F105GUARD ClearWasteRockConstructionSite: unguarded-state call ok=true
+[mod] [SMRTest] SMRTEST-F105GUARD TerrainPaintConstructionSite: unguarded-state call ok=true
+[SMRTest] SMRTEST-F105GUARD TerrainPaintConstructionSite: unguarded-state call ok=true
+[mod] [SMRTest] SMRTEST-F107WIDE ConstructionSite: ungathered-state call ok=true
+[SMRTest] SMRTEST-F107WIDE ConstructionSite: ungathered-state call ok=true
+[mod] [SMRTest] SMRTEST-F107WIDE ConstructionSite: gathered-state call ok=true set_to=90 start_cost=50
+[SMRTest] SMRTEST-F107WIDE ConstructionSite: gathered-state call ok=true set_to=90 start_cost=50
+[mod] [SMRTest] PASS  LandscapeCostGuard       [retired] guard reached and still delegating on LandscapeConstructionSite, ClearWasteRockConstructionSite, TerrainPaintConstructionSite, ConstructionSite (clause 3, ordinary site). ⛔ mechanism + guard only — the field route (a levelling site on a real map plus a *_Construction cost tech) is NOT tested here. The F107 widening to ordinary construction sites IS now covered at the mechanism level: on ConstructionSite itself the guard returns in the ungathered state where vanilla raises at :670, and delegates identically (SetAmount 90, start cost 50) in the gathered state where vanilla succeeds.
+[SMRTest] PASS  LandscapeCostGuard       [retired] guard reached and still delegating on LandscapeConstructionSite, ClearWasteRockConstructionSite, TerrainPaintConstructionSite, ConstructionSite (clause 3, ordinary site). ⛔ mechanism + guard only — the field route (a levelling site on a real map plus a *_Construction cost tech) is NOT tested here. The F107 widening to ordinary construction sites IS now covered at the mechanism level: on ConstructionSite itself the guard returns in the ungathered state where vanilla raises at :670, and delegates identically (SetAmount 90, start cost 50) in the gathered state where vanilla succeeds.
+[mod] [SMRTest] PASS  CloggedBuildingRelease   [behavior] the stuck end state (exceptional_circumstances + reason 789863173059, shipped Duration 0) is released, and all five refusals hold: story bit running, follow-up armed, story-bit popup pending, a different reason id, not disabled. ⛔ predicate only — no building was clogged or released by this probe, and nothing here proves a storm produces the state (checklist 158 A/B does that)
+[SMRTest] PASS  CloggedBuildingRelease   [behavior] the stuck end state (exceptional_circumstances + reason 789863173059, shipped Duration 0) is released, and all five refusals hold: story bit running, follow-up armed, story-bit popup pending, a different reason id, not disabled. ⛔ predicate only — no building was clogged or released by this probe, and nothing here proves a storm produces the state (checklist 158 A/B does that)
+						Lua 0:01:50:221
+[mod] [SMRTest] PASS  FactionDomeSizeGate      [behavior] ⚖️ judgment call: 7 of 7 faction dislikes now wait for ten colonists in a dome (CollectiveHomeless, CollectiveUnemployment, NewSolHomeless, NewSolUnemployment, ProsperityUnemployment, UtopiaHomeless, UtopiaUnemployment); each refuses a dome of 3 with 1 idle/homeless colonist and still fires on a dome of 10, and both Justice Movement dislikes behave exactly as they shipped. ⛔ evals only — no faction was seated and no approval recalc ran here (checklist 158's A/B does that)
+[SMRTest] PASS  FactionDomeSizeGate      [behavior] ⚖️ judgment call: 7 of 7 faction dislikes now wait for ten colonists in a dome (CollectiveHomeless, CollectiveUnemployment, NewSolHomeless, NewSolUnemployment, ProsperityUnemployment, UtopiaHomeless, UtopiaUnemployment); each refuses a dome of 3 with 1 idle/homeless colonist and still fires on a dome of 10, and both Justice Movement dislikes behave exactly as they shipped. ⛔ evals only — no faction was seated and no approval recalc ran here (checklist 158's A/B does that)
+[mod] [SMRTest] PASS  BuildingCodesPrefab      [behavior] a prefab building receives the maintenance change for Policy_BuildingCodesLax +50% and Policy_BuildingCodesStrict -30%, each under the LAW'S OWN id and at the law's own parameter value, and a non-maintenance building receives none. ⛔ applier only — no ConstructionComplete was posted and no real building was touched; and ⛔ buildings already standing cannot be repaired at all (from_prefab is not stored on a finished building), so this fix reaches only buildings completed after it is installed
+[SMRTest] PASS  BuildingCodesPrefab      [behavior] a prefab building receives the maintenance change for Policy_BuildingCodesLax +50% and Policy_BuildingCodesStrict -30%, each under the LAW'S OWN id and at the law's own parameter value, and a non-maintenance building receives none. ⛔ applier only — no ConstructionComplete was posted and no real building was touched; and ⛔ buildings already standing cannot be repaired at all (from_prefab is not stored on a finished building), so this fix reaches only buildings completed after it is installed
+[mod] [SMRTest] PASS  AcknowledgedWarnings     [behavior] dismissal stamps listed buildings, blocks their re-adds, skips the id-wide window; recovery re-arms
+[SMRTest] PASS  AcknowledgedWarnings     [behavior] dismissal stamps listed buildings, blocks their re-adds, skips the id-wide window; recovery re-arms
+[mod] [SMRTest] PASS  ResidencyControl         [behavior] closed dome refused to resettlers and arrivals; tourists and the safety fallback untouched
+[SMRTest] PASS  ResidencyControl         [behavior] closed dome refused to resettlers and arrivals; tourists and the safety fallback untouched
+[mod] [SMRTest] PASS  MultipleSuns             [behavior] build limit lifted; panel picks up whichever Artificial Sun is actually in range
+[SMRTest] PASS  MultipleSuns             [behavior] build limit lifted; panel picks up whichever Artificial Sun is actually in range
+[mod] [SMRTest] ERROR CohortHousing            [behavior] Lua/Units/Colonist.lua:3268: attempt to call a nil value (method 'GetRadius')
+[SMRTest] ERROR CohortHousing            [behavior] Lua/Units/Colonist.lua:3268: attempt to call a nil value (method 'GetRadius')
+[mod] [SMRTest] ERROR NoHomeless               [behavior] Lua/Units/Colonist.lua:3268: attempt to call a nil value (method 'GetRadius')
+[SMRTest] ERROR NoHomeless               [behavior] Lua/Units/Colonist.lua:3268: attempt to call a nil value (method 'GetRadius')
+						Lua 0:01:50:229
+[mod] [SMRTest] PASS  DroneStatDials           [behavior] 2x/+1 landed as label modifiers (move_speed +100, carry +1 over probe-forced base 2) and base removed both by id; account carry dial OFF BASE on entry (const 4 vs base 2) — set it to base before any human baseline read
+[SMRTest] PASS  DroneStatDials           [behavior] 2x/+1 landed as label modifiers (move_speed +100, carry +1 over probe-forced base 2) and base removed both by id; account carry dial OFF BASE on entry (const 4 vs base 2) — set it to base before any human baseline read
+[mod] [SMRTest] PASS  OptionsMenuOptIn         [behavior] default_options + 7 toggles + 2 D09 dials present, names match the opt-in registry, bridge helpers installed
+[SMRTest] PASS  OptionsMenuOptIn         [behavior] default_options + 7 toggles + 2 D09 dials present, names match the opt-in registry, bridge helpers installed
+[mod] [SMRTest] PASS  OptionsMenuFixPack       [behavior] fix pack declares no default_options and no option items, and none of the 8 moved ids is in its registry
+[SMRTest] PASS  OptionsMenuFixPack       [behavior] fix pack declares no default_options and no option items, and none of the 8 moved ids is in its registry
+[mod] [SMRTest] SKIP  SaveRescueCleanPass      [behavior] save-rescue mod not installed (separate mod — not a failure)
+[SMRTest] SKIP  SaveRescueCleanPass      [behavior] save-rescue mod not installed (separate mod — not a failure)
+[mod] [SMRTest] SKIP  SaveRescueStandDown      [behavior] save-rescue mod not installed (separate mod — not a failure)
+[SMRTest] SKIP  SaveRescueStandDown      [behavior] save-rescue mod not installed (separate mod — not a failure)
+[mod] [SMRTest] SKIP  SaveRescueIdempotent     [behavior] save-rescue mod not installed (separate mod — not a failure)
+[SMRTest] SKIP  SaveRescueIdempotent     [behavior] save-rescue mod not installed (separate mod — not a failure)
+[mod] [SMRTest] SKIP  SaveRescueHealBounds     [behavior] save-rescue mod not installed (separate mod — not a failure)
+[SMRTest] SKIP  SaveRescueHealBounds     [behavior] save-rescue mod not installed (separate mod — not a failure)
+[mod] [SMRTest] SKIP  SaveRescueSelfClean      [behavior] save-rescue mod not installed (separate mod — not a failure)
+[SMRTest] SKIP  SaveRescueSelfClean      [behavior] save-rescue mod not installed (separate mod — not a failure)
+[mod] [SMRTest] SKIP  SaveRescueResidueTable   [behavior] save-rescue mod not installed (separate mod — not a failure)
+[SMRTest] SKIP  SaveRescueResidueTable   [behavior] save-rescue mod not installed (separate mod — not a failure)
+[mod] [SMRTest] ---- 69 PASS, 4 FAIL, 18 SKIP, 6 ERROR ----
+[SMRTest] ---- 69 PASS, 4 FAIL, 18 SKIP, 6 ERROR ----
+[mod] [SMRTK] SMRTK_RUNALL action=run_all counts={ERROR:6,FAIL:4,PASS:69,SKIP:18} preflight="DESKTOP sweep CLEAN: 2026-09-15T15:08:24Z pack=819526fe0faef0692a0b7dee719830921a3b89e8 kit=f5fa650cfa79edb24f059ee4a75a3b49f61d3973" status=OK t=352034344 id=40
+[SMRTK] SMRTK_RUNALL action=run_all counts={ERROR:6,FAIL:4,PASS:69,SKIP:18} preflight="DESKTOP sweep CLEAN: 2026-09-15T15:08:24Z pack=819526fe0faef0692a0b7dee719830921a3b89e8 kit=f5fa650cfa79edb24f059ee4a75a3b49f61d3973" status=OK t=352034344 id=40
+						Lua 0:02:01:516
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=MechanizedDepotFood(7128) status=OK t=352034344 id=41
+						Lua 0:02:06:491
+[mod] [SMRTK] SMRTK_ACTION action=selected_fill after=4000000 before=1497117 method=CheatFill object=MechanizedDepotFood(7128) resource=Food resources=1 status=OK valid_after=true t=352034344 id=42
+[SMRTK] SMRTK_ACTION action=selected_fill after=4000000 before=1497117 method=CheatFill object=MechanizedDepotFood(7128) resource=Food resources=1 status=OK valid_after=true t=352034344 id=42
+						Lua 0:02:08:111
+[mod] [SMRTK] SMRTK_ACTION action=selected_empty after=0 before=4000000 method=CheatEmpty object=MechanizedDepotFood(7128) resource=Food resources=1 status=OK valid_after=true t=352034344 id=43
+[SMRTK] SMRTK_ACTION action=selected_empty after=0 before=4000000 method=CheatEmpty object=MechanizedDepotFood(7128) resource=Food resources=1 status=OK valid_after=true t=352034344 id=43
+						Lua 0:02:23:551
+[mod] [SMRTK] SMRTK_TAB action=tab_Run page=Run status=OK t=352034344 id=44
+						Lua 0:03:11:773
+[mod] [SMRTK] SMRTK_WATCH action=watch_field armed=false field=bogus object=MechanizedDepotFood(7128) status=OK trigger=watch_selected_field t=352034344 id=45
+[SMRTK] SMRTK_WATCH action=watch_field armed=false field=bogus object=MechanizedDepotFood(7128) status=OK trigger=watch_selected_field t=352034344 id=45
+						Lua 0:03:44:370
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=Spacebar(6173) status=OK t=352034344 id=46
+						Lua 0:04:02:348
+[mod] [SMRTK] SMRTK_WATCH action=watch_field armed=false field=working object=Spacebar(6173) status=OK trigger=watch_selected_field t=352034344 id=47
+[SMRTK] SMRTK_WATCH action=watch_field armed=false field=working object=Spacebar(6173) status=OK trigger=watch_selected_field t=352034344 id=47
+						Lua 0:04:04:197
+[mod] [SMRTK] SMRTK_ARM action=watch_selected_field baseline=false cadence=1000 field=working object=Spacebar(6173) once=false status=OK trigger=watch_selected_field t=352034344 id=48
+[SMRTK] SMRTK_ARM action=watch_selected_field baseline=false cadence=1000 field=working object=Spacebar(6173) once=false status=OK trigger=watch_selected_field t=352034344 id=48
+						Lua 0:04:21:546
+[mod] [SMRTK] SMRTK_TRIGGER action=watch_selected_field after=true before=false field=working label="Watch working" object=Spacebar(6173) status=OK trigger=watch_selected_field t=352050344 id=49
+[SMRTK] SMRTK_TRIGGER action=watch_selected_field after=true before=false field=working label="Watch working" object=Spacebar(6173) status=OK trigger=watch_selected_field t=352050344 id=49
+						Lua 0:04:30:662
+[mod] [SMRTK] SMRTK_TAB action=tab_Sitting page=Sitting status=OK t=352059459 id=50
+						Lua 0:04:31:611
+[mod] [SMRTK] SMRTK_TAINT_READ action=taint_read status=OK used=false t=352060408 id=51
+[SMRTK] SMRTK_TAINT_READ action=taint_read status=OK used=false t=352060408 id=51
+						Lua 0:04:32:196
+[mod] [SMRTK] SMRTK_ELIGIBILITY action=eligibility reason=UNAVAILABLE:sandbox status=OK t=352060994 id=52
+[SMRTK] SMRTK_ELIGIBILITY action=eligibility reason=UNAVAILABLE:sandbox status=OK t=352060994 id=52
+						Lua 0:04:37:292
+[mod] [SMRTK] SMRTK_TAB action=tab_Run page=Run status=OK t=352066087 id=53
+						Lua 0:04:37:692
+[mod] [SMRTK] SMRTK_TAB action=tab_Selected page=Selected status=OK t=352066487 id=54
+						Lua 0:04:38:192
+[mod] [SMRTK] SMRTK_TAB action=tab_Run page=Run status=OK t=352066989 id=55						Lua 0:04:38:193
+
+						Lua 0:06:03:005
+[mod] [SMRTK] SMRTK_COPY action=copy flushed=true from=40 lines=206 status=OK truncated=false t=352151802 id=56
+[SMRTK] SMRTK_COPY action=copy flushed=true from=40 lines=206 status=OK truncated=false t=352151802 id=56
+						Lua 0:06:05:105
+
+
+Stopping the game threads from the Lua side with exit code 0.
+
+					Render 0:06:05:110
+
+
+Stopping the game threads after receiving WM_QUIT.
+
+					Render 0:06:05:479
+
+
+*** Debug::Done()
+Time (ms)	365479
+
+
