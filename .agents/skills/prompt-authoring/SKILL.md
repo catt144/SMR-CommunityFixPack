@@ -44,6 +44,9 @@ to step in. Include the elements below in every brief for another session.
 - For behavioral, timing, throughput, assignment-quality or player-notice claims,
   require the result to state the fixture's scarcity, fleet, density and layout;
   report that colony's measurement rather than generalizing from a forced setup.
+- Name every setup mutation and reject one that intersects the mechanism being
+  measured. A no-taint claim requires an explicitly clean current-build save;
+  toolkit `CLEAN` is not an achievement-eligibility verdict.
 
 ## Derived facts and falsifiers
 
