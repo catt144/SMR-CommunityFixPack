@@ -94,20 +94,22 @@ disarm, to settle `EF-104`'s unexplained draft observation (three idle unemploye
 while three employed were taken). ⛔ **Design, trigger and the cheaper first step are in `EF-104` — do
 not restate them here.** Take it with the same TestKit link as the quick-build row above.
 
-⭐⭐ **EFFORT 2 — the doc overhaul (ck176–ck183), owner-driven and peer-run.** The rules half has
-landed: scattered rules are now local header blocks plus a kernel list in `CLAUDE.md`, gated by
-doccheck's `RULES HEADERS` and `RULE PLACEMENT`, with the migration recorded in
-`reports/RULES_HEADERS.md`. ⭐ The document half is next and its live brief is
-`prompts/DOC_EDITING_SKILLS.md` — build `doc-editing` and `prompt-authoring`, but audit the
-runbook against the gates first, because most of it is already gated. ⚠️ Its seat carries the STATE
-policy and enforces it — **corrections SUBSTITUTE, they never stack**, and a fact fails STATE's
-admission test unless it is universal to *every* session. That is why `EF-102` exists.
+✅ **EFFORT 2 — the doc overhaul (ck176–ck183) — BOTH HALVES LANDED 2026-09-15.** The rules half:
+scattered rules became local header blocks plus a kernel list in `CLAUDE.md`, gated by doccheck's
+`RULES HEADERS` and `RULE PLACEMENT` (`reports/RULES_HEADERS.md`). The document half: `doc-editing`
+(`d716d9f`) and `prompt-authoring` (`7013326`) built, brief and its map row consumed (`d685f86`),
+record `reports/DOC_EDITING_SKILLS_AUDIT.md`. ⛔ **Its brief is DELETED — `prompts/DOC_EDITING_SKILLS.md`
+no longer exists, so do not follow an older document's pointer to it.**
+- ⚠️ **The one loose end it could not discharge:** three documentation moves stay **PENDING** because
+  the **fix-authoring destination does not exist and this task had no authority to create it**. ⛔ Body
+  in that report's Deferred moves and `.claude/PENDING_MOVES.md` — read it there, it is not retold here.
 
 ⭐ **OTHER PROMPTS READY TO FIRE, when neither effort is eating the attention.**
 ① `prompts/STANDDOWN_AUDIT.md` — no blocker, fire any time; a 21-module sweep, good Codex fan-out.
 ② `prompts/C92_ACHIEVEMENT_BUILD.md` — build + test, ⛔ **SHIPPING HELD by ck172 until the owner lifts
-it in words**. ③ the owed **ck144 (a)** boot (§2a). ④ `prompts/DLC_DEEP_CHECK.md` — desk, unclaimed,
-bounded.
+it in words**. ③ `prompts/DLC_DEEP_CHECK.md` — desk, unclaimed, bounded.
+⛔ **ck144 (a) was listed here as owed until 09-15 and is NOT — §2a discharged it.** The line is gone on
+purpose; a fourth item citing it is an older copy of this file.
 
 ⛔ **The blocks below are POINTERS. The entry, brief or checklist item is the record — read it there.**
 
@@ -176,6 +178,12 @@ What is only here:
 
 - **Delegate heavy reads; keep the conclusion.** Review peers at **SURFACE level** and **escalate rather
   than deep-check** — a high-context session is at *higher* hallucination risk than a fresh one.
+  ⚠️ Reading a peer's live files *to describe their work in your own* is deep-checking by another name:
+  `git log --stat` is the surface read, and it is usually enough.
+- ⚠️ **A STATE correction SUBSTITUTES, it never stacks** — replace the wrong line, do not append a
+  qualifier beside it. Kept here because it is the half with no other home: its companion admission test
+  (is this fact universal to *every* session?) is a ruled owner decision living in
+  `perma/STATE_EVICTION.md` § Hazards admission test, and `EF-102` exists because a fact can fail it.
 - **Chain:** Astra fans out → Astra re-verifies its own subagents → orchestrator sniff test → a cross-vendor
   Claude agent **only if the sniff test fails**. Hunts, broad diffs and heavy coordination go to **Astra
   (Codex)**; builds to a Claude session.
