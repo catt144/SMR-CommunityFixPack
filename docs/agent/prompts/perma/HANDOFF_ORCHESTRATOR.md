@@ -1,16 +1,17 @@
 # Handoff — session → next session (model-agnostic)
 
+## Must_Read_Header
+<!-- RULES -->
+Rule: Do not retire, archive, gut, or delete this file without the owner's explicit instruction. [A3: pass]
+<!-- /RULES -->
+
 > ⭐ **LIVE.** `DISPATCH.md` is the route table for ad-hoc work and `docs/WAITING_ON_YOU.md` is the
 > owner's generated queue — this file carries the **loose ends** those two cannot hold.
 
-## ⛔ THIS FILE IS THE OWNER'S TO RETIRE — NO SESSION MAY RETIRE IT
+## Retirement authority
 
-⛔ **Never retire, archive, gut or `git rm` this file on your own judgement** — however finished the
-list looks, and however clearly an inherited note says the removal condition is met. It was retired
-unilaterally on 2026-09-13 and the owner reversed it the same day: *"I am overriding the retirement
-for a moment, we have too many loose ends."* ✅ **When §2 is genuinely empty, ASK in one line and carry
-on.** An empty list is a prompt to ask, never a licence to act; the question was last asked 09-13 and
-the answer was **no, keep it**.
+The owner is the sole retirement authority. Section 2 becoming genuinely empty is the trigger for
+asking once; the last answer, on 2026-09-13, was to keep the file because too many loose ends remained.
 
 ⛔ **THIS IS A WORKING DOCUMENT, NOT A SESSION LOG.** History lives in `docs/archive/SESSION_LOG.md`.
 **If you close something here, DELETE its block** — and prefer a pointer to a retelling: anything the
