@@ -50,6 +50,9 @@ to step in. Include the elements below in every brief for another session.
 - If a test shortens a `MapGameTimeRepeat` interval, require it to restart the
   repeat after the change and after every reload, prove the thread is live, and
   pair a negative result with an objective positive control.
+- For a salvage or demolition check, write the cursor verdict explicitly:
+  salvage targets objects rather than hexes, names the object it will remove,
+  and a bare red `Salvage` means nothing under the cursor is targetable.
 
 ## Derived facts and falsifiers
 
