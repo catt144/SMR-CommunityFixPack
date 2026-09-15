@@ -1,8 +1,8 @@
 -- SMR Community Fix Pack — Test Kit :: COMBINED SITTING harness. TEMPORARY
 --
--- Declared by: docs/agent/prompts/perma/COMBINED_SITTING.md (the ONE attended sitting:
--- PT-20 redo state-3 + D13 attended after-sweep + F102's minute). Predictions
--- are in that brief §4, committed BEFORE the first launch.
+-- Historical payload for the completed PT-20 redo state-3 + D13 attended
+-- after-sweep + F102 minute. Results live in D13, F102 and the archived PT-20
+-- record; a future run needs a fresh brief and predictions.
 --
 -- Probe hygiene rule 5: this file lives in TestKit Code/ only while a launch is
 -- happening; it and its metadata.lua line die in the commit that records the

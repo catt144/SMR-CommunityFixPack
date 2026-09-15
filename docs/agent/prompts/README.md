@@ -45,9 +45,8 @@ The `declared class` values below are gate inputs, not conclusions inferred from
 
 | prompt | declared class | use it for |
 |---|---|---|
-| `DISPATCH.md` | `purge-migration-leg-03` | migration debt: owner-ruled purge; leg 03 removes it and repairs live entry points |
 | `LINUX_DISPATCH.md` | `prompt` | **FR-1**: the Linux/NVIDIA 580 crash and the TEMPORARY workaround mod; every report, feedback item or patch |
-| `HANDOFF_ORCHESTRATOR.md` | `prompt` | ⭐ **LIVE — the owner OVERRODE its retirement 2026-09-13** ("too many loose ends"). It carries the loose ends `DISPATCH.md` and `WAITING_ON_YOU.md` cannot hold. ⛔ **No session may retire it**; when its §2 list is empty a session may **ASK** the owner and nothing more. |
+| `HANDOFF_ORCHESTRATOR.md` | `prompt` | ⭐ **LIVE — the owner OVERRODE its retirement 2026-09-13** ("too many loose ends"). It carries loose ends not held by `WAITING_ON_YOU.md`. ⛔ **No session may retire it**; when its §2 list is empty a session may **ASK** the owner and nothing more. |
 | `GENERAL_USE_PROMPT.md` | `prompt` | ⭐ **RESCOPED 2026-09-13, owner ask.** Minimal catch-all for ad-hoc questions and player-report triage; playtest sittings are now agent-authored at sitting time from `WORKFLOW.md`, the `prompt-authoring` skill and `PLAYTEST_CHECKLIST.md`, not scripted here |
 | `RELEASE.md` | `prompt` | an update, end to end; uses `RELEASE_OUTBOX.md` (the staged-changes ledger) and `POST_UPLOAD_CLOSE.md` (the close-out) |
 | `RELEASE_OUTBOX.md` | `ledger-exception` | the one owner-exempt ledger; `RELEASE.md` draws every player-facing change landed since the last upload |
@@ -55,8 +54,6 @@ The `declared class` values below are gate inputs, not conclusions inferred from
 | `PUBLIC_SURFACE_SWEEP.md` | `prompt` | making every player-facing surface match a shipped change |
 | `SITE_AUDIT.md` | `prompt` | auditing what the LIVE Pages site says, as opposed to what is committed |
 | `STATE_EVICTION.md` | `prompt` | when STATE is over its byte budget |
-| `DRONE_PROJECT_PROMPT.md` | `purge-migration-leg-03` | migration debt: owner-ruled purge in leg 03 |
-| `COMBINED_SITTING.md` | `purge-migration-leg-03` | migration debt: owner-ruled purge in leg 03; its required header leaves with it |
 | `CO_RUNS.md` | `support-migration-leg-03` | migration debt: supporting co-run protocol; leg 03 moves it to `docs/agent/support/` |
 | `SMRTK_SLOTS.md` | `support-migration-leg-03` | migration debt: TestKit slot reference; leg 03 moves it to `docs/agent/support/` |
 

@@ -249,8 +249,7 @@ of the **replacement body** in both trees, or a run **in the game**.
 
 - **The trees:** `C:\Dev\SMR-SrcArchive\{1.0.7.396349,1.1.0.403908}\Src` + a
   `MANIFEST.sha256` each; that folder's `README.md` carries the archive rule and
-  the 1.0.7 recovery route. ⚠️ Outside the repo — `perma/DISPATCH.md` §1 is the
-  only other pointer.
+  the 1.0.7 recovery route.
 - **The diff artefacts:** `reports/vanillahunt/` — `INVENTORY*.tsv`, `FILES.tsv`,
   `NOROWS.tsv`, `PRESETS*.tsv`, `CALLERS*.tsv`, the seam reports, `HUNT_AUDIT.md`.
   All tracked in git (~21 MB), so they are durable, not scratch.

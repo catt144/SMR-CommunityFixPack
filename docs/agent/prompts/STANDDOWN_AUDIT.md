@@ -33,8 +33,8 @@ Binding, and these are house process rather than limits on thinking:
 
 ## 1 · Orient
 
-`perma/DISPATCH.md` §0–§1 is the orientation and bindings. Read `docs/agent/STATE.md`,
-then [D14](../bugs/D14.md). Open a **live todo list** and keep it current — the owner
+Use the project and bindings already supplied by `CLAUDE.md` or `AGENTS.md`. Read
+`docs/agent/STATE.md`, then [D14](../bugs/D14.md). Open a **live todo list** and keep it current — the owner
 reads it to decide when to step in. Add items for your own lines of enquiry.
 
 ## 2 · What is already measured — verify anything load-bearing

@@ -126,7 +126,6 @@ RULE_HEADER_DOCS = (
     "docs/agent/FIX_POLICY.md",
     "docs/agent/STATE.md",
     "docs/agent/prompts/README.md",
-    "docs/agent/prompts/perma/COMBINED_SITTING.md",
     "docs/agent/prompts/perma/HANDOFF_ORCHESTRATOR.md",
     "docs/agent/prompts/perma/RELEASE_OUTBOX.md",
 )
@@ -731,8 +730,6 @@ PUSH_SET = [
     ("docs/agent/STATE.md", lambda: STATE),
     ("prompts/perma/GENERAL_USE_PROMPT.md",
      lambda: os.path.join(DOCS, "agent", "prompts", "perma", "GENERAL_USE_PROMPT.md")),
-    ("prompts/perma/DISPATCH.md",
-     lambda: os.path.join(DOCS, "agent", "prompts", "perma", "DISPATCH.md")),
     # Claude's own memory index: outside the repo, per-machine, and absent for
     # any other vendor — reported when present, never required.
     ("MEMORY.md (Claude, outside the repo)",
@@ -1174,10 +1171,6 @@ PROMPT_MAP_MIGRATION_ALLOWANCES = {
     # Exact paths only. Leg 03 consumes both support allowances.
     ("perma", "CO_RUNS.md"): ("support-migration-leg-03", "leg 03"),
     ("perma", "SMRTK_SLOTS.md"): ("support-migration-leg-03", "leg 03"),
-    # Exact paths only. Leg 03 consumes the owner-ruled purge allowances.
-    ("perma", "COMBINED_SITTING.md"): ("purge-migration-leg-03", "leg 03"),
-    ("perma", "DISPATCH.md"): ("purge-migration-leg-03", "leg 03"),
-    ("perma", "DRONE_PROJECT_PROMPT.md"): ("purge-migration-leg-03", "leg 03"),
 }
 
 
