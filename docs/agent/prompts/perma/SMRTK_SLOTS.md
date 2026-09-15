@@ -70,9 +70,16 @@ command/output/exit/hit names, full pack/TestKit HEADs, check time and brief in
 the slot's real function. At invocation set session/sitting/game from live state,
 then use `SMRTK.ProbePreflight`; no stale or empty invented attestation. Any
 load/map change expires it. Inspect 76 for the current evidence schema.
-The gate cannot see the tree's HEAD: re-run the sweep and rewrite the slot after
-EVERY pack or TestKit commit that precedes a boot; a stale attestation passed once
-(08b, five hours, a different tree — ck184 a).
+The gate cannot see the tree's HEAD, so the sweep's own freshness is what keeps the
+stamp honest. A desktop sweep is fresh for 24 hours, or until a change that warrants
+one: something since the last sweep touched a probe, a module a probe reads, or the
+kit's registration. A stale sweep is satisfied at the next playtest, owed there before
+the probes run in it and never owed between sittings. An agent may recommend a sweep
+outside playtesting only if it can give the reason and name the harm; recommending is
+all it may do. No agent, gate or kit code refuses a boot, a RunAll, an upload or any
+other work over a sweep's age, and none overrides the owner (ck184 a, ruled 2026-09-15;
+the owner's framing is a gate, not a hard rule). A stale attestation did pass once —
+08b, five hours, a different tree — and the 24 hours is calibrated against it.
 
 The first sitting after TestKit `f5fa650` (smrtk 99's Code link, 2026-09-15, desk-only)
 also witnesses its four changes, each a prediction: a mechanized depot's fill/empty
