@@ -24,8 +24,8 @@ or the owner calls for it (owner ruling 2026-09-15). Read these when status is t
 5. `docs/PLAYTEST_CHECKLIST.md` — the owner's live playtest queue and the
    reporting protocol (tests ONLY, split 2026-07-30). Supporting procedures
    live with the task: prompt-writing hazards in the `prompt-authoring` skill,
-   toolkit preparation in `agent/prompts/perma/SMRTK_SLOTS.md`, and attended
-   launch mechanics in `agent/prompts/perma/CO_RUNS.md`.
+   toolkit preparation in `agent/support/SMRTK_SLOTS.md`, and attended launch
+   mechanics in `agent/support/CO_RUNS.md`.
 
 ## Binding authoring rules (adopted 2026-08-03, DOC_STRUCTURE_REVIEW → spec §7)
 
@@ -576,7 +576,7 @@ clause in the new repo's WORKFLOW was activated in the same close). Single-pack
 gate reads (`81/81`-era and earlier) are history — use their archived logs when
 needed, and never quote them as current.
 
-## Co-runs — moved 2026-09-12 (D5) to `agent/prompts/perma/CO_RUNS.md`; still binding when a batch of bugs is being tested attended.
+## Co-runs — moved 2026-09-12 (D5) to `agent/support/CO_RUNS.md`; still binding when a batch of bugs is being tested attended.
 
 ## Sign-off tiers — standing policy for every leg (adopted 2026-08-04, owner; stayed here when Co-runs moved out)
 
@@ -820,7 +820,7 @@ could decide to load anything. R-A is how class 2 is discharged: one command, no
 
 ## Writing in a shared tree (traps, each one cost a real error)
 
-`80_AgentSlots.lua` is agent-owned, rewritten per sitting using `prompts/perma/SMRTK_SLOTS.md`, never edited by a build link.
+`80_AgentSlots.lua` is agent-owned, rewritten per sitting using `agent/support/SMRTK_SLOTS.md`, never edited by a build link.
 
 Five or more interactive sessions work this checkout at once. The global identity,
 attribution, status, and hunk-staging duties now live in `CLAUDE.md`'s `Must_Read_Header`.

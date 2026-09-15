@@ -112,8 +112,8 @@ same change that discovers it.
 
 > 2026-09-15: `docs/PLAYTEST_HELP.md` was dissolved by owner ruling ck182.
 > Prompt-writing hazards moved to the `prompt-authoring` skill; toolkit helpers
-> and the MarsDebug recipe moved to `agent/prompts/perma/SMRTK_SLOTS.md`; co-run
-> launch mechanics moved to `agent/prompts/perma/CO_RUNS.md`; F87 keeps the
+> and the MarsDebug recipe moved to `agent/support/SMRTK_SLOTS.md`; co-run
+> launch mechanics moved to `agent/support/CO_RUNS.md`; F87 keeps the
 > ENABLE-PATH evidence and points to its executable TestKit leg. The command
 > table, central save recipes and archived-`TESTING.md` do-not-use list were cut.
 > Treat older references to the former file as historical citations and use the

@@ -111,27 +111,6 @@ def main():
                      p, "| `ONE.md`, `TWO.md` | `prompt` |",
                      "| ~~`ONE.md`, `TWO.md`~~ | `prompt` |"), False)
 
-        def wrong_location_borrow(prompts):
-            (prompts / "CO_RUNS.md").write_text("fixture\n", encoding="utf-8")
-            rewrite_map(
-                prompts, "| `ONE.md`, `TWO.md` | `prompt` |",
-                "| `ONE.md`, `TWO.md` | `prompt` |\n"
-                "| `CO_RUNS.md` | `support-migration-leg-03` | wrong location |")
-
-        run_case(module, root, "unrelated path cannot borrow migration",
-                 wrong_location_borrow, False)
-
-        def exact_migrations(prompts):
-            (prompts / "perma" / "CO_RUNS.md").write_text("fixture\n", encoding="utf-8")
-            rewrite_map(
-                prompts, "| `PROMPT.md` | `prompt` |",
-                "| `PROMPT.md` | `prompt` |\n"
-                "| `CO_RUNS.md` | `support-migration-leg-03` | exact debt |")
-
-        debt = run_case(module, root, "exact migration paths", exact_migrations, True)
-        joined = "\n".join(debt)
-        assert "leg 03 consumes perma/CO_RUNS.md" in joined, debt
-
     assert live.read_bytes() == original
     print("UNCHANGED live doccheck SHA256 " + hashlib.sha256(original).hexdigest())
 

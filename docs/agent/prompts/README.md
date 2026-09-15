@@ -54,8 +54,6 @@ The `declared class` values below are gate inputs, not conclusions inferred from
 | `PUBLIC_SURFACE_SWEEP.md` | `prompt` | making every player-facing surface match a shipped change |
 | `SITE_AUDIT.md` | `prompt` | auditing what the LIVE Pages site says, as opposed to what is committed |
 | `STATE_EVICTION.md` | `prompt` | when STATE is over its byte budget |
-| `CO_RUNS.md` | `support-migration-leg-03` | migration debt: supporting co-run protocol; leg 03 moves it to `docs/agent/support/` |
-| `SMRTK_SLOTS.md` | `support-migration-leg-03` | migration debt: TestKit slot reference; leg 03 moves it to `docs/agent/support/` |
 
 ## Root — live one-offs
 

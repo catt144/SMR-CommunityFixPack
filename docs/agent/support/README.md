@@ -7,3 +7,5 @@ they consume; this map is updated when a supporting document lands.
 | file | purpose |
 |---|---|
 | `README.md` | this purpose and destination map |
+| `CO_RUNS.md` | binding situational protocol for co-runs: route, prepare, conduct and close attended experiment legs |
+| `SMRTK_SLOTS.md` | pull-only TestKit slot-construction and sitting-handoff reference |
