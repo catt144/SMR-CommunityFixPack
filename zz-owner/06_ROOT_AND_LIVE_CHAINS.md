@@ -14,14 +14,15 @@ Authored against `9ae0d50`. The owner override authorizes this brief in
 
 ## Live progress
 
-- [COMPLETE - pending commit] `HOTFIX2_SITTING.md` consumed with its stale
+- [COMPLETE - `638db00`] `HOTFIX2_SITTING.md` consumed with its stale
   map/checklist pointers; pre-cut 17,381 B / SHA-256
   `CB23D850DA6E7B2E5EB2A0B5C6F4EC5E38A766862F64C78DC5E07F5A43C46E1A`;
   prompt map passes at five root one-offs and doccheck is GREEN.
-- [IN PROGRESS - audited, not yet edited] Reconcile the owner-retained capture job:
+- [COMPLETE - pending commit] Reconciled the owner-retained capture job:
   cut its completed preview-art and archived-console branches, repair its dead
-  routing, and preserve the still-unfired screenshot work.
-- [PENDING - waits for capture repair] Repair proved execution-contract drift in
+  routing, and preserve the still-unfired screenshot work; 15,623 B to 14,060 B,
+  owner KEEP wording and preflight/lifecycle preserved.
+- [IN PROGRESS - findings proved, not yet edited] Repair proved execution-contract drift in
   the retained C92, DLC and stand-down jobs; update the root map and verify.
 - [PENDING - waits for root audit] Audit `fixtoggles/` as a live chain: topology,
   prompt/support classification, lifecycle, citations and evidence routing;

@@ -84,6 +84,19 @@ After deletion the old path is absent; PROMPT MAP reports five root one-offs.
 map and checklist pointer were removed/corrected, `--regen-waiting` reproduced
 the owner register, and doccheck is GREEN.
 
+Capture retention/cuts: owner KEEP authority and its condition remain verbatim.
+The live A–E screenshot/observation queue remains because its current F13/F14/
+F19 subjects and F102 capture subject survive in the bug index. The 1.0.7
+fixture prose remains only as a falsifiable preflight, not a ready-fixture claim.
+Pass G was cut because final preview assets and the shipped root preview are
+present; Pass F was cut because its `ListFixes()` consumer is now only archived.
+Dead D13/hotfix scheduling and deleted public-docs output routing were removed.
+The prompt fell from 15,623 B to 14,060 B; current read paths, git start,
+progress/lifecycle, derived-fact falsifiers and current probe-hygiene routing
+were added. Checklist item 24 now records the completed preview floor and keeps
+the separately owner-retained screenshot follow-up honest. PROMPT MAP and
+doccheck remained GREEN; `--regen-waiting` moved only generated line anchors.
+
 ## Live progress
 
 - [IN PROGRESS - not executed] Prove the execution boundary: fresh context,

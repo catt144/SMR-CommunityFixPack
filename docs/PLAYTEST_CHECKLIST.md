@@ -7756,8 +7756,9 @@ Body archived in [archive/PLAYTEST_ARCHIVE.md](archive/PLAYTEST_ARCHIVE.md); sea
 
 The `public-docs` chain's design prompt is done and **you cleared every item it
 routed, in one sitting.** Full reasoning: `agent/reports/PUBLIC_DOCS_DESIGN.md`.
-⭐ **Nothing in this section is owed by you any more** — it stays here rather
-than moving to the archive only because item 24's artifact is not built yet.
+⭐ **Nothing in this section is owed by you any more.** Item 24 now records the
+completed preview floor and points at the separately owner-retained screenshot
+follow-up; this section remains the owner-decision record.
 
 22. ~~**⚖️ The "judgment calls" wording — DRAFTED, so you approve rather than
     compose.**~~ ✅✅ **DECIDED 2026-08-13: the five bullets SHIP as drafted
@@ -7946,13 +7947,13 @@ than moving to the archive only because item 24's artifact is not built yet.
     I will record it; I would just rather you chose it than inherited it.
 
 24. ~~**⚖️ Preview art ×2 (×3 if the rescue tool publishes)**~~ ✅ **DECIDED
-    2026-08-13, your ruling: BUILD A PLAIN TREATMENT NOW AS A FLOOR.** An agent
-    produces a simple, clean text-on-image preview for each mod inside the size
-    limits, so **launch can never be blocked on art**. ⭐ It is explicitly a
-    floor, not a ceiling — replacing it later costs nothing and touches nothing
-    else. **Queued as agent work; nothing owed by you.** ⚠️ It is the one item
-    here with no artifact yet, which is why this section has not moved to the
-    archive. The reasoning as it stood:
+    2026-08-13, your ruling: BUILD A PLAIN TREATMENT NOW AS A FLOOR; DONE
+    2026-08-14.** Final fix-pack and opt-in art lives under
+    `agent/reports/preview_art/`; the selected fix-pack image shipped as root
+    `preview.png` (`RELEASE_PORTAL_PREP.md`). It remains a floor, not a ceiling.
+    The separate screenshot sitting is still owner-retained (2026-09-09: "we
+    may get to it"), but it no longer carries preview-art work. The reasoning as
+    it stood:
     Routed NOW
     because it is the only launch item with no ceiling. Everything else in
     the public-docs plan is agent hours or a decision from you; the preview
@@ -7965,20 +7966,10 @@ than moving to the archive only because item 24's artifact is not built yet.
     not a technical one. The reason it is on your list today rather than at
     launch is simply that the other three items have known endings and this one
     does not.
-    ⭐⭐ **CORRECTED BY YOU 2026-08-13, and it improves the plan: the art needs
-    the game open, so it cannot run beside D13 and it does not belong on its
-    own.** A text-on-image preview wants a backdrop, and a backdrop is a
-    screenshot — so **the art and the screenshots are now ONE sitting**, and the
-    brief for it exists and is fireable:
-    ⇒ **`agent/prompts/CAPTURE_SITTING.md`** — every shot with its framing note,
-    ordered so the whole set costs **two game restarts, not one per pair**,
-    with the `EF-056` autosave rule at the top and the preview-art backdrops as
-    its Pass G. ⛔ **Do not fire it while the D13 chain is live** — that leg
-    needs the game too.
-    ⚖️ **One thing for whoever schedules it:** `STATE.md` already plans ② ONE
-    combined sitting (PT-20 redo + D13 after-sweep + F102's minute). **Most of
-    the capture list should ride that sitting rather than be a second one** —
-    the brief says which passes fold in and which may need their own save.
+    ⭐⭐ **OVERTAKEN AFTER THE 2026-08-13 PLAN:** the preview floor was produced
+    without a game capture, and the D13/hotfix sittings closed. The retained
+    `agent/prompts/CAPTURE_SITTING.md` now owns only the still-unfired screenshot
+    work and revalidates current consumers and fixtures before a launch.
 
 25. ~~**⚖️ How one of our own research files talks about real modders**~~
     ✅✅ **DECIDED 2026-08-13, your ruling: BOTH EDITS — ✅ DONE the same

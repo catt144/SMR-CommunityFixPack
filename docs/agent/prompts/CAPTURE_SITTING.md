@@ -1,16 +1,13 @@
-# One-off brief — the capture sitting (screenshots + preview-art backdrops)
+# One-off brief — the retained screenshot sitting
 
 > ⚖️ **OWNER RULING 2026-09-09: KEEP — *"we may get to it."*** Reviewed in the
-> prompt-pruning pass and retained. ✅ **It is UNFIRED**, not spent: the only image
-> in the repo is `preview.png`, there is no screenshot set anywhere, and
-> `PLAYTEST_CHECKLIST` item 24 still lists it as "exists and is fireable", folded
-> into the one combined sitting.
+> prompt-pruning pass and retained. ✅ **It is UNFIRED**, not spent. The
+> preview-art floor was completed separately and already shipped; that consumed
+> Pass G, not the owner's instruction to keep the remaining screenshot job.
 >
-> ✅ **Its own blocking gate is now SATISFIED.** The header below says "DO NOT RUN
-> WHILE THE D13 CHAIN IS LIVE … fire this when `agent/prompts/d13-rescue/` is
-> empty" — that folder no longer exists at all, so the D13 constraint is
-> discharged. What gates it now instead: STATE defers ALL in-play controls to ONE
-> sitting AFTER hotfix-2 link 99 (owner, 2026-09-08).
+> ✅ The old D13 and hotfix-2 scheduling gates are discharged. They are history,
+> not current prerequisites. The prompts firing freeze and the owner's scheduling
+> word are the only gates this file adds before its own preflight.
 >
 > ⚠️ **It needs an era pass before it is fired, and the reason is not cosmetic.**
 > This was written 2026-08-13 for game 1.0.7. `EF-079`: **1.0.7 saves cannot load
@@ -21,16 +18,44 @@
 > written: the store card now describes a 1.1.0 + DLC build, so the shots would
 > want retaking regardless of this brief's age.
 
-**Authored 2026-08-13. ⛔ DO NOT RUN WHILE THE D13 CHAIN IS LIVE** — it needs the
-game, and so does D13's verification leg. Fire this when
-`agent/prompts/d13-rescue/` is empty (or its remaining prompts need no game).
+**Authored 2026-08-13; retained by owner ruling at `edf1fdf`.** At execution,
+start with `git log --oneline -6`, `git pull`, and `git status --short`; compare
+the current surfaces and entries with `edf1fdf..HEAD` before trusting a shot.
 
-**Owner-attended, in game, ONE sitting.** Everything here is a capture; nothing
-is a test and nothing has a pass/fail. Full reasoning and each shot's job:
-`agent/reports/PUBLIC_DOCS_DESIGN.md` §8B.
+**Owner-attended, in game, ONE sitting.** Most of the work is capture; Pass C's
+toggle observation and Pass E's render observation are measurements and follow
+the testing rails below. Full reasoning and each shot's original job:
+`docs/agent/reports/PUBLIC_DOCS_DESIGN.md` §8B.
 
 ⚠️ **Delete this file when consumed** (one-off convention), and record what was
 captured — by file name — wherever the images land.
+
+## Execution progress — initialise when the owner schedules the sitting
+
+Before any action, mark the first row `IN PROGRESS` and the others `PENDING`;
+keep exactly one unfinished row in progress and put each reading in its row.
+
+- Revalidate current player surfaces, existing image assets and every required
+  fixture; drop shots already satisfied or no longer consumed anywhere.
+- Run the remaining A–E capture/observation queue, with each dropped shot named.
+- Record file names and readings, update current consumers, delete this prompt
+  and its prompt-map row in the same commit.
+
+Read path: this file; `docs/agent/reports/PUBLIC_DOCS_DESIGN.md` §8B as historical
+design; `docs/agent/bugs/INDEX.md` before the named F13/F14/F19/F102 passages;
+`docs/agent/facts/INDEX.md` before EF-056 and EF-079; `docs/agent/WORKFLOW.md` "Probe
+hygiene" and "Testing checklist per fix"; current `metadata.lua`,
+`store_screenshots/`, and the current site source only if a shot still has that
+consumer. Read STATE only to check current scheduling/probe-age status.
+
+## Derived facts and falsifiers
+
+| fact | measured | falsifier |
+|---|---|---|
+| the owner retained this unfired screenshot job | owner ruling recorded at `edf1fdf` and in the prompt map | a later owner ruling; an agent does not infer one from age |
+| 1.0.7 fixtures cannot simply be reused on the installed 1.1.0 branch | EF-079, whose 1.1.0 build fingerprint held at the 2026-09-15 audit | `python tools/doccheck.py --emit-fingerprint`; re-derive if the group moved |
+| F13, F14 and F19 remain live fix-pack subjects; F102 remains a named capture subject | focused bug-index lookup at `638db00` | re-run `rg -n 'F13|F14|F19|F102' docs/agent/bugs/INDEX.md` and inspect only moved entries |
+| preview art is already complete, so Pass G is consumed | `preview.png` plus final assets under `docs/agent/reports/preview_art/`, with release receipt in `docs/agent/reports/RELEASE_PORTAL_PREP.md` | inventory those paths and the current release receipt before restoring any art work |
 
 ---
 
@@ -44,13 +69,15 @@ captured — by file name — wherever the images land.
 2. ⚠️ **The rig has CHEATS ENABLED.** No shot below should depend on a cheated
    state — but if a colony has to be posed with one, **say so beside the image**
    so a caption never implies otherwise.
-3. ⛔ **PT-00 stale-probe sweep** if the TestKit is loaded, per the standing rule.
+3. ⛔ **Probe hygiene before the session.** Run WORKFLOW's exact stale-probe
+   sweep across the pack and TestKit whether or not the TestKit will be loaded.
+   Check STATE's current age/change gate; the owner may override scheduling, but
+   an agent does not silently turn an old stamp into current evidence. Record the
+   sweep in any commit that records a measurement.
 4. ⭐ **Check the save fixtures FIRST and re-route anything whose state does not
    already exist.** ⛔ **Do not ask the owner to BUILD colony state for a
    screenshot** — drop or substitute the shot instead, and record which.
-   ⚠️ **AMENDED 2026-08-13 (`public-docs/02_QA.md`): the original list named only
-   Passes D, E and G, and it was short by three.** The full set of shots that
-   need state the save may not have:
+   The remaining shots that need state the save may not have are:
 
    | shot | state it needs |
    |---|---|
@@ -59,13 +86,12 @@ captured — by file name — wherever the images land.
    | `optin-nohomeless-on` | a dome that actually has jobseekers in it (was already flagged inline; it belongs here) |
    | `multiplesuns` (D) | two Artificial Suns built |
    | `F102-signs` (E) | an asteroid with subsurface Exotic Minerals |
-   | Pass G | a photogenic vista |
 
    `F13` needs nothing — any Command Center will do — which is why it is the
    pair to rely on if `F14`'s fixture is missing.
 
-   ⭐⭐ **THE FIXTURE CHECK RAN 2026-08-13 (`public-docs/05_BUILD_SITE.md`, job 5),
-   from the save directory itself — not from prose.** Method: every
+   ⭐⭐ **THE FIXTURE CHECK RAN 2026-08-13 from the save directory itself — not
+   from prose.** Method: every
    `*.savegame.sav` in `…\Saved Games\Surviving Mars Relaunched\<id>\` read at
    its plain-text metadata header (`displayname`, `elapsed_sols`, `loaded_maps`,
    `active_mods`); 90 files, all readable without launching the game. What it
@@ -79,10 +105,9 @@ captured — by file name — wherever the images land.
    | `F14-before`/`after` | ⚠️ **UNKNOWABLE from outside the game** | check it in Pass A before spending the restart; if no dome shows low stats, fall back to the `F13` pair as the brief already says |
    | `F19-after` | ✅ any campaign save has the history — the directory holds 30+ saves at 285–336 sols | proceed |
    | `multiplesuns` (D) | ⚠️ **UNKNOWABLE, and it is the one shot that would cost real colony-building** — a second sun has to be *built*. `D04`'s PT-50/PT-55 legs (2026-07-27 / 07-30) did build one, but no save from those dates in this directory is identifiable as carrying it | check once, early. ⛔ If a second sun is not already standing, **drop the shot** rather than asking for one — it is a store-card nicety, not a claim anything rests on |
-   | Pass G | ✅ any | proceed |
 
    ⚠️ **What this check does NOT establish.** Metadata carries maps, sols, mods
-   and timestamps — nothing about colony contents. Three of the six fixtures are
+   and timestamps — nothing about colony contents. Several fixtures are
    therefore still open at the keyboard, which is exactly why they are written
    above as *checks with a drop rule* rather than as shots.
 
@@ -151,99 +176,34 @@ limit) is visible immediately in the build menu.
 
 | shot | frame |
 |---|---|
-| `F102-signs` | three subsurface Exotic Minerals deposit signs rendering. ⭐ The owner's 2026-08-12 negative-repro leg already staged this exact scene — **reuse that recipe** (`agent/bugs/F102.md`) |
+| `F102-signs` | three subsurface Exotic Minerals deposit signs rendering. ⭐ The owner's 2026-08-12 negative-repro leg already staged this exact scene — **reuse that recipe** (`docs/agent/bugs/F102.md`) |
 
 ⛔ **This is NOT a before/after.** The "before" is a hard freeze on hardware we
 do not own. The caption may say the signs render; it may **never** imply we
 photographed a cure.
 
-## Pass F — console, PC only
+## Consumed branches — do not run
 
-⛔⛔ **REWRITTEN 2026-08-13 (`02_QA.md`): THIS IS A CHECK FIRST AND A CAPTURE
-SECOND, because we are not sure there is anything to photograph.**
-
-`ListFixes()` does not return a list — it writes lines through the pack's logger,
-which goes `ModLog` → `ModPrint` → `DebugPrint`. **Nothing in the game's Lua
-routes `DebugPrint` into the visible console log** (the console's own text comes
-from a different engine call). Both are engine functions with no readable body,
-so this cannot be settled from source in either direction — but it means the
-shot may come back empty, and a claim on two of our surfaces rests on it.
-
-**Do this, in order:**
-
-1. Open the console, type `SMRFixPack.ListFixes()`, and **look at the screen.**
-2. **If lines appear** → capture `listfixes-pack`, then `SMROptInPack.ListFixes()`
-   as `listfixes-optin`. Proceed as originally planned.
-3. **If nothing appears** → ⛔ **do not hunt for a workaround and do not stage a
-   substitute.** Record "no visible output" and move on. The shot is dropped and
-   two sentences change instead (below).
-
-⇒ **What rides on the answer.** `MOD_DESCRIPTION.md:487-488` tells players
-*"console: `SMRFixPack.ListFixes()` shows them and their status"*, and design
-report §8B plans this image as the evaluator's proof-of-liveness. ⛔ **If nothing
-appears on screen, neither ships as written** — the pack still logs what it did,
-but "shows you" would be false, and it is a claim a curious player checks in
-thirty seconds.
-
-| shot | frame |
-|---|---|
-| `listfixes-pack` | `SMRFixPack.ListFixes()` output — **only if step 1 showed something** |
-| `listfixes-optin` | `SMROptInPack.ListFixes()` output — same condition |
-
-⚖️ **Site only — never a store card.** On a card this tells a 15-second scroller
-"you will need a developer console", and tells console players about something
-they cannot reach. On the site it is the answer to a question the reader arrived
-with. (Design report §8B.)
-
-## ⭐ Pass G — preview-art backdrops (NEW — this is checklist item 24)
-
-The owner ruled a **plain text-on-image preview as a FLOOR**, so launch can never
-be blocked on art. That needs backdrops, and backdrops need the game — which is
-why this rides the same sitting rather than its own.
-
-**Capture 4–6 wide, clean, uncluttered vistas.** Framing notes:
-
-* **Leave dead space** — a third of the frame with nothing important in it, for
-  the mod name to sit over. Off-centre compositions beat centred ones.
-* **Highest resolution available**; downscaling is free, upscaling is not.
-  ⚠️ The size limits (**Paradox Mods ≤ 2 MB · Steam ≤ 1 MB**) apply to the
-  *finished* preview, not the capture — do not compress at capture time.
-* **Two moods if the sitting allows:** one wide daylight colony vista, one
-  night/dusk shot. Different mods can then get visibly different previews from
-  one sitting.
-* ⛔ **No UI, no cursor, no notifications** in frame. Hide the HUD.
-* **Three previews are needed** (fix pack · opt-in pack · save rescue), so
-  capture more than three — the floor is replaceable and the cheapest time to
-  get options is while the game is already open.
-
----
-
-## ⚖️ One scheduling question for whoever fires this
-
-`STATE.md` already plans **② ONE combined sitting** — PT-20 redo + the D13
-after-sweep + F102's minute. **This brief is a second sitting, and it probably
-should not be.**
-
-**Recommendation:** fold **Passes A–D, F** into that combined sitting — they are
-UI shots that ride whatever colony is loaded and cost minutes. **Passes E and G**
-may need their own save state and can be split off if the combined sitting is
-already long. ⭐ Decide it when the combined sitting is scheduled, and say which
-way it went. The owner's time is the scarce resource; two sittings where one
-would do is the failure mode to avoid.
+Pass F protected a `ListFixes()` sentence that now exists only in
+`docs/archive/MOD_DESCRIPTION.md`; no current player surface consumes that shot.
+Pass G asked for preview-art backdrops, but final preview art already exists under
+`docs/agent/reports/preview_art/` and the root `preview.png` shipped. Both branches
+were cut by the 2026-09-15 prompt-content audit; their history remains in git.
 
 ## Close
 
 * Record every captured file **by name**, and every shot **dropped** and why.
   ⛔ A silently missing shot reads as "we got everything" when we did not.
 * ⛔ **THE SHOT NAMES IN THIS BRIEF ARE INTERNAL AND MUST NOT BECOME CAPTIONS**
-  (added 2026-08-13, `02_QA.md`). `F13-before`, `F102-signs`, `listfixes-pack`
+  (added 2026-08-13, `02_QA.md`). `F13-before` and `F102-signs`
   are filing labels. Chain rule 4 bars `F##` ids, file names and function names
   from anything a player reads, and a caption lifted from a filename is the
   easiest way for one to slip through onto a store card.
-* Record the Pass C toggle observation and the Pass F visibility answer — both
-  settle standing claims and neither produces an image on its own.
+* Record the Pass C toggle observation; it settles a standing claim without
+  producing an image on its own.
 * ⛔ **Re-list the autosave folder by name** and confirm nothing went missing
   (`EF-056`).
-* Route the images to the public-docs chain (`03_BUILD_STORE` / `04_BUILD_SITE`)
-  and strike the capture line in `PLAYTEST_CHECKLIST.md`.
+* Put retained captures in `store_screenshots/`; identify any site-only file in
+  the close-out. Update only current consumers—never the deleted public-docs
+  chain—and correct the capture item in `PLAYTEST_CHECKLIST.md`.
 * Delete this file in the same commit.
