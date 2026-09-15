@@ -127,10 +127,11 @@ def regen_cases(m, root):
     print("RESTORED STATE fixture SHA256", digest)
 
 
-def main():
-    live = ROOT / "tools/doccheck.py"
+def check_doccheck(live):
     original = live.read_bytes()
-    source = original.decode("utf-8-sig")
+    # Mutations use LF needles. Normalize only the executable scratch source;
+    # keep the original bytes for the no-write check below (including CRLF/BOM).
+    source = original.decode("utf-8-sig").replace("\r\n", "\n")
     with tempfile.TemporaryDirectory(prefix="state-counts-") as directory:
         root = Path(directory)
         scratch = root / "doccheck.py"
@@ -141,7 +142,7 @@ def main():
             ("region replacement", source.replace("    return result\n", "    return data\n"), region_cases),
             ("regen write", source.replace("    if state_before != state_after:", "    if False:"), regen_cases),
         ):
-            assert mutant != source
+            assert mutant != source, label + " mutation did not match source"
             broken = load_copy(scratch, mutant)
             try:
                 cases(broken, root / "regen")
@@ -154,6 +155,23 @@ def main():
         regen_cases(restored, root / "regen")
         assert scratch.read_bytes() == source.encode()
         print("RESTORED doccheck copy SHA256", hashlib.sha256(scratch.read_bytes()).hexdigest())
+    assert live.read_bytes() == original
+    print("UNCHANGED input doccheck SHA256", hashlib.sha256(original).hexdigest())
+
+
+def main():
+    live = ROOT / "tools/doccheck.py"
+    original = live.read_bytes()
+    check_doccheck(live)
+    # Exercise the whole instrument with both checkout formats, even when the
+    # developer's working tree happens to use LF. Never rewrite the live tool.
+    with tempfile.TemporaryDirectory(prefix="state-counts-checkout-") as directory:
+        checkout = Path(directory) / "doccheck.py"
+        lf = original.replace(b"\r\n", b"\n")
+        for label, ending in (("LF", b"\n"), ("CRLF", b"\r\n")):
+            checkout.write_bytes(lf.replace(b"\n", ending))
+            check_doccheck(checkout)
+            print("PASS doccheck checkout:", label)
     assert live.read_bytes() == original
     print("UNCHANGED live doccheck SHA256", hashlib.sha256(original).hexdigest())
 
