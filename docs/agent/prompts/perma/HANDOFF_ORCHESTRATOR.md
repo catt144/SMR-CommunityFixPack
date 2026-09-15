@@ -88,6 +88,12 @@ closed chain** — take it with the next TestKit link, never as its own errand.
 - **Shape: one row in the `leaves` table.** `method_for` (`73:51-53`) already hides a leaf the object
   does not carry, so it appears only on construction sites. TestKit only, 0 shipped hashes, game closed.
 
+⭐ **SECOND TestKit ask, DEFERRED by the owner 2026-09-15 (*"lets save that"*) — a crew-trace slot.**
+A log-only wrapper on `CargoTransporter.GatherAvailableColonists`, armed from a slot and restored on
+disarm, to settle `EF-104`'s unexplained draft observation (three idle unemployed colonists passed over
+while three employed were taken). ⛔ **Design, trigger and the cheaper first step are in `EF-104` — do
+not restate them here.** Take it with the same TestKit link as the quick-build row above.
+
 ⭐⭐ **EFFORT 2 — the doc overhaul (ck176–ck183), owner-driven and peer-run.** The rules half has
 landed: scattered rules are now local header blocks plus a kernel list in `CLAUDE.md`, gated by
 doccheck's `RULES HEADERS` and `RULE PLACEMENT`, with the migration recorded in
