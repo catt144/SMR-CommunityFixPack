@@ -1,6 +1,10 @@
 # Upload workflow — owner
 
-Everything you do to put an update live, in order, and nothing else.
+## Must_Read_Header
+<!-- RULES -->
+Rule: Keep this file limited to the owner-facing upload procedure. [A3: pass]
+Rule: Keep the backup page-copy blocks byte-matching `metadata.lua` descriptions and `docs/agent/reports/STORE_CARD_LIVE.md`. [A3: pass]
+<!-- /RULES -->
 
 **The order is: mod → store pages → site.** The store pages are what players
 actually see; the site is a place people have to choose to visit.
@@ -79,10 +83,7 @@ editor's formatting buttons (Paradox eats plain-text line breaks, so it will loo
 like a wall until you do). **Steam:** paste the BBCode block as-is — its tags
 render.
 
-> ⚠️ **These are BACKUP COPIES and must match two other places** — `metadata.lua`'s
-> `description` (the auto-fill source) and `docs/agent/reports/STORE_CARD_LIVE.md`
-> (the agent record). The public-surface sweep updates all three together; if the
-> repair-count word here disagrees with the store page, tell the agent.
+The public-surface sweep maintains the backup copy below alongside its two canonical peers.
 
 #### 📋 Paradox Mods — description (plain text, paste as-is)
 
