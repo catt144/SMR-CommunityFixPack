@@ -7,16 +7,28 @@ in the invoking task. This tool is not a fix; it never ships.
 ## Read and scope
 
 Read `docs/agent/STATE.md`, the sitting brief and upstream notes, WORKFLOW's
-Cheats on playtest saves/Writing in a shared tree sections, PLAYTEST_HELP's
-toolkit/console sections, and the TestKit README. Inspect 70's dispatch and
-74's Bind/Trigger APIs plus the current `80_AgentSlots.lua`; a prior binding is
-a claim, not today's sitting. Read the installed source for every new mutation
-leaf; inherit matching build identity with `python tools/doccheck.py --emit-fingerprint`.
+Cheats on playtest saves/Writing in a shared tree sections, the prompt-authoring
+skill's playtest instructions, `EF-096` for sandbox reach, and the TestKit README.
+Inspect 70's dispatch and 74's Bind/Trigger APIs plus the current
+`80_AgentSlots.lua`; a prior binding is a claim, not today's sitting. Read the
+installed source for every new mutation leaf; inherit matching build identity
+with `python tools/doccheck.py --emit-fingerprint`.
 
 IN: sitting-owned `Code/80_AgentSlots.lua`, its predictions and the brief's
 handoff. OUT: pack runtime/version/metadata, toolkit build files, portal APIs,
 achievement/account state, live UI prototyping. Route defects to the brief's
 report and fixing link. Never touch a peer's unstaged work. No delegation needed.
+
+## Pull-only helper reference
+
+Resolve these against the current TestKit source before use: logger state and
+toggles are `SMRTest.Loggers()` plus `SMRTest.Log.{Meteors,DroneChurn,AutoCargo,
+CargoReady,WorkShift}(true|false)`; one-shot reports are
+`SMRTest.Report{BrokenTrack,Reservations,Trains}()`; the deterministic dispatch
+harness exposes `SMRTest.Stress.{Targets,Break,Report,Compare,HealAll,Stop}`; and
+the suite entry is `SMRTest.RunAll()`. Turn every logger off when its leg ends.
+The TestKit README and the named source files, not an inherited count or table,
+define the current surface.
 
 ## Progress and construction
 
