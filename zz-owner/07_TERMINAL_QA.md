@@ -60,6 +60,30 @@ if it was fixed in place. At authoring time the inbox is empty.
 | `POST_UPLOAD_CLOSE.md` verification, writeback/comment restore and record close | KEEP, moved and trimmed | required fresh-session resume path and high-harm serializer hazard | `support/POST_UPLOAD_CLOSE.md` §§1–3; explicit consumer pointer to prompt §4 |
 | `POST_UPLOAD_CLOSE.md` old first-upload choices, checklist ids, obsolete receipt fields and self-consume front door | CUT | resolved launch-era staging and a second fireable entry point | current three-item receipt inspected in `UPLOAD_WORKFLOW.md` §5 and retained in prompt/support |
 
+### Leg 06 — root disposition ledger (before edits)
+
+| root prompt | fired/job start | result consumer | binding authority | embedded support | disposition before edit |
+|---|---|---|---|---|---|
+| `C92_ACHIEVEMENT_BUILD.md` | not fired; owner-authorised build begins from the brief after the firing freeze | module, `items.lua`, C92 build report, bug/checklist updates | ck172: build and test; shipping held until the owner lifts it in words | C92 placement/investigation and EF-093/EF-094 evidence are explicit read inputs | KEEP; repair only execution-contract drift |
+| `CAPTURE_SITTING.md` | not fired; owner-attended capture job after a current-fixture preflight | captured files and the current release surfaces | owner 2026-09-09: KEEP, "we may get to it" | large dated fixture and framing reference embedded in the job | KEEP; cut the completed preview-art branch, the archived-only console-claim branch and dead chain routing without reversing the ruling |
+| `DLC_DEEP_CHECK.md` | not fired; authors a `dlccheck/` chain after its current prerequisites are checked | new mapped chain plus terminal audit | owner framing and explicit subagent instruction in the prompt | source inventory and fan-out protocol belong to this one chain-authoring job | KEEP; make its self-consumption/map transition explicit and repair current read paths |
+| `HOTFIX2_SITTING.md` | fired in parts; remaining ck144 clauses are now closed | checklist/bug entries and archived sitting logs already hold the readings | current STATE says ck144 discharged and nothing from the toolkit chain is owed | obsolete recipes duplicate or conflict with current entry/checklist evidence | CUT; delete prompt and live map row, correct the stale checklist pointer; historical citations remain |
+| `SMRCF_CHAIN_SET.md` | grouped entry for the surviving C35 detector and owner-parked C52 chain | C35/C52 entries and each chain's close-out | owner KEEP ruling for the grouped set; C52 remains parked | historical rows and reusable method prose are mixed into the work order | KEEP pending Commit 3; prune and repair only after both descendant topologies are judged |
+| `STANDDOWN_AUDIT.md` | not fired; current STATE names it NEXT | stand-down report, D14 and any owner checklist decision | owner-authorised investigation | seed measurements are job inputs, explicitly claims to re-derive | KEEP; repair execution anchor and current-count wording without changing the question |
+
+Root drift caught before edits: the map calls the consumed hotfix recipes owed;
+the capture prompt says preview art does not exist although final art is on disk
+and shipped, and sends output to a deleted public-docs chain; its console branch
+protects a sentence that survives only in archived `MOD_DESCRIPTION.md`.
+
+Hotfix purge evidence: before deletion the prompt was 17,381 bytes, SHA-256
+`CB23D850DA6E7B2E5EB2A0B5C6F4EC5E38A766862F64C78DC5E07F5A43C46E1A`.
+After deletion the old path is absent; PROMPT MAP reports five root one-offs.
+`git grep` leaves only three historical `SESSION_LOG` citations; explicit
+`.claude/` + `zz-owner/` search leaves only leg 06/07 audit evidence. The live
+map and checklist pointer were removed/corrected, `--regen-waiting` reproduced
+the owner register, and doccheck is GREEN.
+
 ## Live progress
 
 - [IN PROGRESS - not executed] Prove the execution boundary: fresh context,

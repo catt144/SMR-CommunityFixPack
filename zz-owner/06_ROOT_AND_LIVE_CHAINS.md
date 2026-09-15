@@ -3,23 +3,34 @@
 Audit the six root prompts and the live `fixtoggles/`, `smrcf-modbrowser/` and
 `smrcf-verify/` folders against the prompt-content contract. This is the half the
 overhaul has not examined: expect findings, prove each disposition and do not
-assume the job is cosmetic. Execute after legs 02 through 05 land. Produce the
-commits below and execute no prompt found in the target set.
+assume the job is cosmetic. Execute after leg 04 lands. Produce the commits
+below and execute no prompt found in the target set.
+
+⭐ **Leg 05 was folded into this brief by owner instruction, 2026-09-15.** Its cleanup
+pass is Commit 4 below; there is no separate 05 and the chain is six legs.
 
 Authored against `9ae0d50`. The owner override authorizes this brief in
 `C:\Dev\SMR-BugFixPack\zz-owner`; it does not lift the firing freeze.
 
 ## Live progress
 
-- [IN PROGRESS - not executed] Inventory and audit all six root one-offs;
-  preserve owner-retained prompts, resolve only evidence-supported findings,
-  update the map and verify the root commit(s).
+- [COMPLETE - pending commit] `HOTFIX2_SITTING.md` consumed with its stale
+  map/checklist pointers; pre-cut 17,381 B / SHA-256
+  `CB23D850DA6E7B2E5EB2A0B5C6F4EC5E38A766862F64C78DC5E07F5A43C46E1A`;
+  prompt map passes at five root one-offs and doccheck is GREEN.
+- [IN PROGRESS - audited, not yet edited] Reconcile the owner-retained capture job:
+  cut its completed preview-art and archived-console branches, repair its dead
+  routing, and preserve the still-unfired screenshot work.
+- [PENDING - waits for capture repair] Repair proved execution-contract drift in
+  the retained C92, DLC and stand-down jobs; update the root map and verify.
 - [PENDING - waits for root audit] Audit `fixtoggles/` as a live chain: topology,
   prompt/support classification, lifecycle, citations and evidence routing;
   repair and verify its commit(s).
 - [PENDING - waits for fixtoggles audit] Audit the grouped
   `smrcf-modbrowser/` + `smrcf-verify/` set and its `SMRCF_CHAIN_SET.md` entry;
-  repair and verify its commit(s), consuming this brief.
+  repair and verify its commit(s).
+- [PENDING - waits for SMRCF commit] Clean the three uncleaned survivors named in
+  Commit 4; verify and commit, consuming this brief.
 
 One item per commit-and-verify unit, exactly one unfinished item in progress.
 Split an item as soon as a finding creates a separate atomic commit; do not carry
@@ -130,6 +141,43 @@ with a falsifiable job and no shipped diagnostic code. Supporting research or
 protocol material moves out of prompts if it is not itself fired. Preserve
 historical evidence without rewriting records. A parked defect stays parked
 unless owner authority says otherwise.
+
+## Commit 4 - The cleanup pass (folded-in leg 05)
+
+Owner: *"Clean them up, trim any fat, cut the emojis."* ⚠️ **Scope is "what this chain
+left behind", not "perma"** — the original leg 05 said perma only, and that scope has a
+blind spot: `SMRTK_SLOTS.md` now lives in `support/` and was moved **verbatim**, so a
+perma-only pass would miss the one file nobody has cleaned.
+
+Measured at `7c23e3c` with a detector carrying a positive control. ⛔ Re-emit before acting:
+
+| file | B | emoji | why it is here |
+|---|---:|---:|---|
+| `docs/agent/prompts/perma/RELEASE_OUTBOX.md` | 10,326 | 27 | content trimmed by leg 04, never de-decorated |
+| `docs/agent/prompts/perma/STATE_EVICTION.md` | 6,466 | 7 | untouched by the whole chain - last commit `8430faf`, before it began |
+| `docs/agent/support/SMRTK_SLOTS.md` | 8,044 | 4 | moved verbatim by leg 03 |
+
+⛔ **Not in scope, and do not touch them:** `GENERAL_USE_PROMPT.md` (211 B, 0 emoji) and
+`release_prompt.md` (4,495 B, 2 emoji) were written by this chain; the four other
+`support/` files are new and already at 0 emoji. ⛔ `HANDOFF_ORCHESTRATOR.md` and
+`LINUX_DISPATCH.md` are owner-exempt - never edited, not even to repair a citation.
+
+⚠️ **`STATE_EVICTION.md` is stale beyond decoration.** Its boundary section lists five
+STATE sections and names *"Rules in force"*; `STATE.md` has no such section - it has
+`Governing pointers`, and its rules moved to `CLAUDE.md` in the 2026-09-15 migration.
+Read `docs/agent/STATE.md`'s actual headings and reconcile. ⚠️ It also still describes
+STATE as byte-budgeted for eviction while STATE's own heading now reads *"pull; read it
+when a task, a prompt or the owner calls for status"* - check that the procedure still
+describes the file it governs.
+
+⚠️ `RELEASE_OUTBOX.md` keeps its four canonical rules and its `Must_Read_Header`. Emoji
+inside a canonical `Rule:` line is already gated; decoration around the rules is not.
+⛔ Trimming may not drop a rule, an owner ruling, or a pending entry's obligation.
+
+Apply the placement question from `docs/agent/reports/RULE_PLACEMENT_TEST.md` to any
+passage you keep, and record the answer. CUT is the default; retention needs a reason.
+Report before/after bytes and emoji counts per file, each with the command that emitted
+them.
 
 ## Evidence and scope
 

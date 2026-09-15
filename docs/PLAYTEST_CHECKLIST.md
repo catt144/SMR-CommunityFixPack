@@ -4247,7 +4247,7 @@ Body archived in [archive/PLAYTEST_ARCHIVE.md](archive/PLAYTEST_ARCHIVE.md); sea
 >
 > ⛔ Not clearance (`H-04`). `100_DOCSWEEP` is now the ONLY thing between the tree and the upload; it fires next.
 
-### ✅ CLOSED 2026-09-09 — the brief that produced the block above, kept for its recipes: `agent/prompts/HOTFIX2_SITTING.md`. Two tiers, and the second is designed to be stopped partway.
+### ✅ CLOSED 2026-09-09 — the brief that produced the block above was consumed 2026-09-15 after ck184 discharged the remaining play clauses. The historical two-tier plan stays below.
 <!-- ck:- status:closed owner:no -->
 
 > **Every in-play control the chain owes you is in one file**, one boot, on
