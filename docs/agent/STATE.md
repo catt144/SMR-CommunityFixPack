@@ -73,7 +73,7 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   Owner's 2 pared files (`for-modders.md`, `install.md`) stay uncommitted = decision 47.
 - ⭐ FR-1 TEMP WORKAROUND MOD LIVE 09-11 (Steam 3799500849 / PDX 158711). **ALL FR-1 / Linux / NVIDIA work →
   `prompts/perma/LINUX_DISPATCH.md`.** Field: 3 working (one 10xx), 1 failing (GTX 1070, log requested).
-- ⭐ **`prompts/smrtk/` CLOSED 2026-09-14 — 99 (Fable) verdict SHIP WITH CHANGES**, `reports/SMRTK_AUDIT.md`. The
+- ⭐ **`docs/archive/prompts/smrtk/` CLOSED 2026-09-14 — 99 (Fable) verdict SHIP WITH CHANGES**, `reports/SMRTK_AUDIT.md`. The
   SMR Tool Kit is the owner's to use (TestKit-only, never uploads). Taint half of (A) measured CLEAN in 02/08/08b
   (`cheats_count=0` after 490 dispatches; 19-leaf sample on the rebuilt tree); eligibility stays `UNAVAILABLE:sandbox`
   (`EF-096`), adjudicated by closed enumeration (5 reason handlers), not an observed PASS. Changes C-1…C-8 in the
@@ -97,7 +97,7 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
 ## Hazard pointers — moderate harm · universal reach · no machine gate
 Module lists are gated by `tools/doccheck.py` MODULE SETS + `tools/upload_preflight.py` (membership + order).
 - **H-03** Portal API mechanism and safe pack routes: `SteamWorkshop.lua:17-22`, `UPLOAD_WORKFLOW.md`, `perma/RELEASE.md`.
-- **H-05** Sweep-fence authority: `prompts/prelaunch-sweep/00_CHAIN_SPEC.md`; public pointer: `prompts/README.md`.
+- **H-05** Sweep-fence authority: `docs/archive/prompts/prelaunch-sweep/00_CHAIN_SPEC.md`; public pointer: `docs/README.md`.
 - **H-08** Junction-enable behavior and recovery: `EF-055`.
 - **H-09** Packed-folder/junction precedence: `EF-055`, `prompts/DLC_DEEP_CHECK.md`.
 

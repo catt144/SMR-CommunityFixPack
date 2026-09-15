@@ -4,7 +4,7 @@ Paste into a fresh Claude Code session. Written **2026-09-08**, to fire **after
 the current fix pack is patched, pushed and stable** (owner instruction).
 **Start with `git log --oneline -15` + `git pull`.** Read `docs/agent/STATE.md`
 (mandatory), `docs/agent/FIX_POLICY.md`, `docs/agent/reports/CHAIN_METHOD.md`,
-and **`prompts/vanillahunt/README.md` §7 + link 03's "For dlccheck" section of
+and **`docs/archive/prompts/vanillahunt/README.md` §7 + link 03's "For dlccheck" section of
 `reports/vanillahunt/TRIAGE.md`** — the two efforts overlap by design. *(The
 brief `VANILLA_DIFF_HUNT.md` was consumed into that chain on 2026-09-10; its
 §2 taxonomy, §4 finding contract and §7 subagent rules now live in that README
@@ -79,7 +79,7 @@ them rather than around a file-by-file read of `norman/`:
    `Lua/Buildings/FungalFarm.lua` *and* a DLC `FungalFarmBase`), so **a name
    match is not a DLC dependency.** ⛔ Enumerate which references genuinely
    require DLC content and which do not — this is exactly the
-   absence/presence discipline in `prompts/vanillahunt/README.md` §2, and getting it wrong
+   absence/presence discipline in `docs/archive/prompts/vanillahunt/README.md` §2, and getting it wrong
    in either direction is easy.
 3. ⭐ **Presets and data, which is where DLC QC is worst and where our
    instruments are weakest.** `CropPreset`, `Meal`, `Resource`, `LawDef`,
@@ -95,7 +95,7 @@ the new economy touches an existing system is a seam:
 
 - ⭐ **new-game start under Linux/Proton (added 2026-09-10, owner).** Players
   report every new game crashing since the update, in a thread titled with the
-  DLC's name (`prompts/vanillahunt/README.md` §2b, FR-1). Read that chain's
+  DLC's name (`docs/archive/prompts/vanillahunt/README.md` §2b, FR-1). Read that chain's
   **FR-1** and **FR-1(b)** results in `reports/vanillahunt/TRIAGE.md` before
   starting: the DLC code that runs at new game (map setup, starting resources,
   `thomas`'s sponsor, preset injection) is the DLC half of that surface, and
@@ -137,7 +137,7 @@ and make every step earn its place. ⛔ Do not propose "play the DLC and see".
 
 ## 4 · What a finding must contain
 
-As `prompts/vanillahunt/README.md` §3 — route re-derived, file:line, who reaches it,
+As `docs/archive/prompts/vanillahunt/README.md` §3 — route re-derived, file:line, who reaches it,
 **a falsifier**, severity in player terms — plus one more that is specific here:
 
 ⭐ **Does it affect players who do NOT own the DLC?** That single question sorts

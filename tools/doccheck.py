@@ -1173,10 +1173,6 @@ PROMPT_MAP_FIXED_EXCEPTIONS = {
 PROMPT_MAP_MIGRATION_ALLOWANCES = {
     # Exact paths only. Leg 02 consumes every chain allowance.
     ("chain", "arming"): ("infrastructure-migration-leg-02", "leg 02"),
-    ("chain", "hotfix2"): ("closed-migration-leg-02", "leg 02"),
-    ("chain", "prelaunch-sweep"): ("closed-migration-leg-02", "leg 02"),
-    ("chain", "smrtk"): ("closed-migration-leg-02", "leg 02"),
-    ("chain", "vanillahunt"): ("closed-migration-leg-02", "leg 02"),
     # Exact paths only. Leg 03 consumes both support allowances.
     ("perma", "CO_RUNS.md"): ("support-migration-leg-03", "leg 03"),
     ("perma", "SMRTK_SLOTS.md"): ("support-migration-leg-03", "leg 03"),

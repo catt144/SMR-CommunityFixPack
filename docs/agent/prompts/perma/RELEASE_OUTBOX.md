@@ -185,7 +185,7 @@ in full, apply, and turn this section into the Pending entries for v10.
 
 ### Released in v6 (2026-09-09) — hotfix 2, the game-1.1.0 patch
 - Nothing passed through *Pending*: the whole release was a chain
-  (`prompts/hotfix2/README.md`, every commit by link) and its text link (06)
+  (`docs/archive/prompts/hotfix2/README.md`, every commit by link) and its text link (06)
   wrote the surfaces directly, then link 100 re-swept them after the audit.
 - **36 modules DELETED** — game 1.1.0 repairs those defects itself; 36 fix-list
   entries removed (`SMR-CommunityMods` `7cef4f3`), count word Eighty-two →

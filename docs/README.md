@@ -28,10 +28,10 @@ docs/
     bugs/                 defect truth — one file per entry
     facts/                engine behaviour — one file per fact
     reports/              reports, plans, specs, audits, surveys
-    prompts/              README.md = the map · perma/ = standing prompts · root = live one-offs
+    prompts/              README.md = the map · perma/ = standing prompts · root = live one-offs · live chains only
     support/              protocols and references used by prompts, but not themselves fired
   archive/                spent. SESSION_LOG.md, PLAYTEST_ARCHIVE.md,
-                          MOD_DESCRIPTION.md (frozen), retired prompts
+                          MOD_DESCRIPTION.md (frozen), retired prompts and closed prompt chains
 ```
 
 ## The archive boundary
@@ -54,6 +54,9 @@ rg --no-ignore <term>       live + archive in one pass
 everything. If a default search comes back empty on something you are sure this
 project once knew, that is the boundary working — re-run with one of the two forms
 above before concluding it was never here. It is not a bug and not a missing file.
+
+Closed prompt chains live under `archive/prompts/`. The pre-launch sweep's H-05
+fence remains authoritative at `archive/prompts/prelaunch-sweep/00_CHAIN_SPEC.md`.
 
 ## The two split folders
 

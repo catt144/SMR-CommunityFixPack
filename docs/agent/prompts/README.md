@@ -78,10 +78,6 @@ The `declared class` values below are gate inputs, not conclusions inferred from
 | `fixtoggles/` | `live` | authored 09-11: on/off controls per fix; its README is the manifest, checklist 148 |
 | `smrcf-modbrowser/`, `smrcf-verify/` | `live` | grouped chain entry; see `SMRCF_CHAIN_SET.md` |
 | `arming/` | `infrastructure-migration-leg-02` | migration debt: `tools/arm_leg.ps1` infrastructure; leg 02 moves it to `tools/` |
-| `hotfix2/` | `closed-migration-leg-02` | migration debt: v6 shipped 09-09; leg 02 archives it |
-| `vanillahunt/` | `closed-migration-leg-02` | migration debt: closed 09-10; leg 02 archives it |
-| `prelaunch-sweep/` | `closed-migration-leg-02` | migration debt: done 08-20; leg 02 archives it and preserves the H-05 fence |
-| `smrtk/` | `closed-migration-leg-02` | migration debt: closed 09-14 and previously unmapped; leg 02 archives it |
 
 **New prompts:** a reusable one goes in `perma/`; a one-off goes in the root and, when consumed,
 deletes **both** itself and its row above in the commit that lands its result.
