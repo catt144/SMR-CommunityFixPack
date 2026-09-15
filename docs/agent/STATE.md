@@ -49,6 +49,13 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   stockpile controller fall back to `Origin`. NOT ours; ⛔ cause UNRESOLVED, needs the reporter's log line +
   mod list (pull-only, owner's call). **D14** + `prompts/STANDDOWN_AUDIT.md`: 21 of 45 modules replace a body
   and cannot ride a vendor fix; the gap is bodycheck's own class-c blind spot.
+- ⭐ **TWO NEW FIXES `filed` 09-15, repairs DELIBERATELY UNAUTHORED until the owner says build (ck185).**
+  **C95** habitat residents are drafted for expeditions and cannot be returned home — ⭐ REPRODUCED IN PLAY;
+  repair = exclude them from the draft; ⚖️ classed an **oversight bug solved by a judgment call**, main pack
+  **with the mark**, ⛔ not opt-in. **C96** a rover subclass never satisfies its base class — ⛔ the obvious
+  one-token repair is VACUOUS, and its playtest needs an ESA colony. **C94** stays `cand`, control retired.
+  Engine properties behind them: `EF-103` (habitat is a Community, never a `Dome`) · `EF-104` (expedition
+  crew is drafted colony-wide and boards by teleport; ⛔ carries ONE unexplained draft observation).
 - ⛔ `SaintBlessing`'s kit probe PASSes **vacuously** with no domed Saint — not coverage; field reports are the detector
   (ck130). ✅ The heal itself fired in play 09-12.
 - Post-launch LIVE: F105, F107, F108 (v4), F110 (v5), hotfix 2 (v6), C74+C77+C83 (v7), F119+C86 (v8), F59 repair +
@@ -104,7 +111,7 @@ Module lists are gated by `tools/doccheck.py` MODULE SETS + `tools/upload_prefli
 - Upload page-body source and backup cycle: `perma/RELEASE.md`, `UPLOAD_WORKFLOW.md` §3.
 
 ## Open owner decisions (bodies in `docs/PLAYTEST_CHECKLIST.md` → "Decisions waiting on you")
-- STILL OPEN: 53 harden now or in 1.0.1 · 47 two modder-page wordings · 152 c open · 133 two `FIX_POLICY` §2a
+- STILL OPEN: 53 harden now or in 1.0.1 · 47 two modder-page wordings · 152 c open · 185 C95/C96 builds · 133 two `FIX_POLICY` §2a
   lines (2 UNKNOWN-status policy, 4 `LuaRevision` label). `WAITING_ON_YOU.md` parses the literal `STILL OPEN:` and
   `Owner OWES: ck##` idioms.
 - **53**: RULED 09-12 to pare the modder surface, so the hardening queue shrinks with it; rec 1.0.1.
