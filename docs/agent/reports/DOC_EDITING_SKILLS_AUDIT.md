@@ -65,8 +65,8 @@ R-D follows the source section but is outside the brief's specified elements
 - Complete: pending move 3 disposition.
 - Complete: size report and proposals (checklist 186).
 - Complete: revisit criteria.
-- In progress: final report and verification.
-- Pending: consume.
+- Complete: final report and verification.
+- In progress: consume the initiating brief and its map row together.
 
 No new gate is selected: syntax and freshness already fail loudly; the remaining
 questions concern meaning, authority, timing or an editor's actions. Invocation
@@ -159,3 +159,25 @@ source-first, status/pathspec and model-recording duties were not reauthored.
 R-D remains in WORKFLOW. Building doc-editing makes the existing kernel's
 invocation rule usable for the first time; this session read and used it after
 creation. The report was bootstrapped under the initiating build instruction.
+
+## Final verification
+
+MEASURED at `5676aa47d86da344a18768d8454155dff7310f36`:
+`python tools/doccheck.py` reported `doccheck: GREEN`, `PROMPT MAP: PASS`, and
+`SKILLS: 5 skill(s), 16733 B of bodies, mirrored to .agents/skills/`.
+Both new skills passed the skill-creator `scripts/quick_validate.py` on creation.
+The configured hook also reported GREEN for every commit in this work.
+
+`git diff --exit-code f7db0fd -- tools/doccheck.py docs/PLAYTEST_HELP.md .claude/skills/smr-bug-library/SKILL.md .claude/skills/smr-orientation/SKILL.md .claude/skills/smr-session-close/SKILL.md`
+exited 0: cap implementation, dissolution source and existing skills are unchanged.
+The source/destination review checked WORKFLOW's removed bodies, retained R-D,
+replacement pointers and the prompt skill's operating elements. The transcript's
+scoped `rg` absence check exited 1 for the former authoring-body headings in
+WORKFLOW, with positive destination and pointer assertions alongside it.
+
+Commit units: gate audit `85a91a9`; doc-editing `d716d9f`; prompt-authoring and
+source removal `7013326`; deferred-move records `b87267a`, `f6cebdc`, `5245727`;
+sizes and owner proposal `475f67c`; revisit criteria `5676aa4`.
+Deferred moves retain their reasons in the local move register and section D.
+No claim is made that the whole documentation overhaul or later attended audit
+is complete. The remaining action for this brief is its paired consumption.
