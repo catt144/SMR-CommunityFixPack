@@ -55,6 +55,8 @@ went divergent within a day. **Read it, then read the checklist body it links to
 - **144 (a), the owed boot** — ck151 (c) ruled that F52 passage / F54 hub / C83 arrival join it **only if
   the loaded colony already has those layouts; otherwise SKIP THEM BY NAME.** ⛔ Never build a layout to
   make a check possible. That boot also re-stamps the `RunAll()` line (`WORKFLOW.md:537`), VOID since 09-09.
+  ⚠️ **A full `RunAll()` DID run in 08b (09-14) — but under a STALE preflight attestation, and whether it
+  discharges 144 (a) is UNRULED. Both halves are ck184; ⛔ do not assume it either way.**
 - **151 (b)** is messaging, and **ck165 lets the owner defer it indefinitely — ⛔ do not raise it.**
 
 ⛔ **Never rebuild an "owed" list from an older document** — this file's did exactly that on 09-12 and
@@ -65,29 +67,30 @@ contradicted its own closed list for most of a day.
 ⚠️ **TWO efforts are live at once and they share this tree.** Re-check `git log` + `git status`
 before every write; a peer commits here every few minutes.
 
-⭐⭐ **EFFORT 1 — `prompts/smrtk/` (ck175), the SMR Tool Kit.** ⛔ **Its README is the manifest and is
-canonical** (queue, seats, invariants, the ranked UI ladder); the owner rulings are in **ck175** and
-**ck183**. **Nothing is restated here — only what a README cannot tell you:**
-- ✅ **09 CLOSED 09-14** (`86f0006`): re-layout built, all 25 defects dispositioned, the 84-name
-  More trace landed. The `prompts/smrtk/` lane is **free** — no session owns it. Next is **08b**
-  (owner, attended, ⚠️ gated on the owner calling the surface stable) → **99** (Fable).
-  01, 02, 03A, 03B, 03C, 07, 08 and 09 are consumed.
-- ⭐ **`ck183` IS THE SPEC 09 BUILDS TO, not a defect list** — the owner's architecture ruling: group
-  by **task**, not taxonomy; anything used with other pages' work goes on a **hot bar**. Its proof is
-  measured: all four triggers are on Agent, `run_until` is on World, so every "run until X" is two
-  pages. 08's 25 defects are all assigned inside 09's brief.
-- ✅ **THE STAMPER IS CUT — owner ruled it 2026-09-14, and this is settled.** Removed from the
-  TestKit (`d80fb5e`); the panel is **seven** pages and class 18 / 08b's blocks 13–15 are struck.
-  ⛔ **Do not re-open, re-cost or re-litigate it.** The design is parked in `docs/FUTURE_IDEAS.md`
-  entry 5, which is **not agent-tracked** — the owner un-parks it in words or it stays parked, and
-  ⛔ **no mention of it belongs in STATE, DISPATCH, CLAUDE.md or any always-read doc** (owner's
-  instruction, same day). 08b is unaffected: it is the re-layout's first play contact.
-- ⛔ **Requirement (A) is PROVEN** (08: `cheats_count=0`, 844 records, zero TAINT). Never re-prove it.
-  Premises `EF-095`–`EF-099`; invariants (A) nothing registers as a cheat, (B) one `SMRTK_` tag.
+⭐⭐ **EFFORT 1 — `prompts/smrtk/` (ck175), the SMR Tool Kit. ⭐ ONE LINK LEFT: `99_AUDIT_fable.md`.**
+Its README is the manifest; owner rulings are ck175 + ck183. 01–03C, 07, 08, 09 and 08b are all
+consumed. **Only what a README cannot tell you:**
+- ✅ **08b RAN 09-14 attended: PASS WITH CORRECTIONS** (`046ba6f`) — items 1-8+10 PASS, 9 PARTIAL
+  (the field-watch trigger is the only unrun leg). **11 defects repaired, 6 routed.**
+  `reports/SMRTK_08B_SURFACE.md`; logs `archive/logs/smrtk08b_*` — ⚠️ **FOUR boots, not one**, because
+  fixes needed relaunches. ⛔ 99 re-derives against those; a single-log read misses half.
+- ⭐ **Requirement (A) is RE-ESTABLISHED on the rebuilt tree** (08b: 19 cheat leaves, `used=false`).
+  ⛔ **A SAMPLE, not universal proof** — 08's 844-record run was the OLD surface. Never quote either as
+  a global guarantee. Invariants: (A) nothing registers as a cheat, (B) one `SMRTK_` tag.
+- ⛔ **99 carries THREE routed items and the owner asked for the third by name** — the editor hint
+  colour, the mechanized-depot readout, and the probe-picker sort (built with **no play witness**).
+  ⚠️ 99 is an ADJUDICATOR: each asks for a verdict or a named mechanism, ⛔ never "build this".
+- ⭐ **`ck184` is 08b's biggest find and is NOT 99's** — the probe preflight accepted a 5-hour-stale
+  attestation from a different tree, so a gate that asserts "swept code = running code" said CLEAN
+  over code nobody swept. Two owner calls sit there.
+- ✅ **STAMPER CUT 09-14, settled.** Panel is **seven** pages. ⛔ Never re-open or re-cost it; parked
+  in `FUTURE_IDEAS.md` entry 5, **not agent-tracked**, and ⛔ **no mention of it belongs in STATE,
+  DISPATCH, CLAUDE.md or any always-read doc** (owner's instruction, same day).
 
 ⭐⭐ **EFFORT 2 — the doc overhaul (ck176–ck183), owner-driven and peer-run.** `prompts/RULES_HEADERS.md`
 is its live brief: N scattered rules become local header blocks plus ONE kernel rule. ⛔ **Sequencing
-ruled by the owner: SMRTK finishes first, then RULES_HEADERS re-fires.** ⚠️ Its seat carries the STATE
+ruled by the owner: SMRTK finishes first, then RULES_HEADERS re-fires** — ⭐ that is now **one link
+away** (99), so this is the next effort to pick up. ⚠️ Its seat carries the STATE
 policy and enforces it — **corrections SUBSTITUTE, they never stack**, and a fact fails STATE's
 admission test unless it is universal to *every* session. That is why `EF-102` exists.
 
@@ -112,15 +115,14 @@ bounded.
   repairs a defect without touching the body we pinned and every instrument reads GREEN.
 - **ck173** — `FIX_POLICY` §2a is factually wrong in one half, raised 09-13, **unruled**; body in the
   checklist. Reason 1 survives and is the real rule.
-- **Facts filed 09-13/14, inherit them rather than re-derive:** `EF-093` (vanilla re-seeds
-  lockable-preset state every load) · `EF-094` (achievement state; ⛔ no mod and no retail console can
-  clear a flag — the console **is** the mod sandbox) · `EF-095`–`EF-099` (the smrtk premises) ·
-  `EF-100`/`EF-101` (the shader source tree ships readable) · ⭐ **`EF-102` (09-14) — the depot class
-  tree forks into two SIBLING branches**, so an `IsKindOf(o, "UniversalStorageDepotBase")` guard misses
-  5 shipped classes, and `#storable_resources` discriminates one branch only. Summaries in
-  `facts/INDEX.md`; ⛔ grep it, never read it whole.
+- **Facts filed 09-13/14 — inherit, never re-derive:** `EF-093` · `EF-094` (⛔ no mod and no retail
+  console can clear an achievement flag — the console **is** the mod sandbox) · `EF-095`–`EF-099`
+  (smrtk premises) · `EF-100`/`EF-101` · `EF-102` (the depot class tree).
+  ⛔ **Read the fact, not this line** — `EF-102` was AMENDED 09-14 after its own FIX SHAPE bullet
+  caused a failed repair, and this file carried the superseded "two branches" wording for a day.
+  Summaries in `facts/INDEX.md`; ⛔ grep it, never read it whole.
 - **C91** — open candidate: vanilla leaks the Building Codes maintenance modifier on repeal.
-  Dev-report material.
+  ⭐ **08b found a read route** (Dump exposes the modifier on a live building) — body in ck183.
 - **Migration residuals, in the entries (09-12) — the list nobody would reconstruct:** **F51** PARTIAL,
   leg re-filed **UNRUN** · **F53** PARTIAL, no fresh 1.1.0 evidence · **F59** repaired, **A1 expedition
   half UNTESTED** · **F73** PARTIAL, organic benefit unverified · **F80** `investigating`, causation
@@ -135,8 +137,8 @@ bounded.
   the C92 placement/icon investigation · the ck170 doc overhaul pass · `GATE_WIRING` (adjudicated PASS).
   09-14: **`CHECKLIST_ARCHIVE.md` FIRED and consumed** (`41116e3`) — the settled backlog moved, ⛔ those
   bodies now live in `docs/archive/PLAYTEST_ARCHIVE.md` behind the `.rgignore`, so a grep that used to
-  hit comes back empty · smrtk **01, 02, 03A, 03B, 03C, 07, 08** (08 retired on spent context, **not**
-  on failure — it closed at PASS WITH CORRECTIONS). ⛔ Never re-run a passed kill gate to "check".
+  hit comes back empty · every smrtk link except 99 (listed once in §2b, not restated here).
+  ⛔ Never re-run a passed kill gate to "check".
 
 ### 2c · Watch list, not tasks
 
@@ -168,6 +170,15 @@ What is only here:
 - **Chain:** Astra fans out → Astra re-verifies its own subagents → orchestrator sniff test → a cross-vendor
   Claude agent **only if the sniff test fails**. Hunts, broad diffs and heavy coordination go to **Astra
   (Codex)**; builds to a Claude session.
+- ⭐⭐ **A SURFACE CANNOT BE DESIGN-JUDGED WHILE A RENDER BUG IS LIVE (08b, 09-14).** The owner called
+  the toolkit "a mess" and was about to commission a redesign sweep; **one** unresolved TextStyle had
+  blanked *every* button caption while every plain label rendered. Three of the "design" complaints
+  were that bug, and three more were one shared defect class (a fixed cap that clips once content
+  grows). ⇒ **When a surface is reported as broadly wrong, look for a single render/registration
+  fault before scoping a redesign** — compare what renders against what does not, and find the one
+  code path they differ on. Generalisation: ⛔ **a verdict on rendered output is worthless unless the
+  log proves which code rendered it** — the first font verdict here would have been passed on a
+  fallback font, and only a log line disappearing showed the real one was on screen.
 - ⭐ **When you refute a claim, say what your refutation depends on.** The C90/C89 "everlasting flag"
   refutation holds *only while no module is `optional`* — the `fixtoggles` chain would end that. A
   refutation without its condition is a trap for the next reader. (The general form is rule 5a.)

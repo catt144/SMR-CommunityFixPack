@@ -44,9 +44,62 @@ Test Kit helpers, save fixtures) stays in [PLAYTEST_HELP.md](PLAYTEST_HELP.md).
 
 ## Decisions waiting on you
 
+### 2026-09-14 — 184: the probe preflight accepted a 5-hour-stale attestation from a different tree
+
+<!-- ck:184 status:open owner:yes -->
+
+⭐ **MEASURED in the 08b sitting, and it is the highest-value thing that sitting
+found.** The full `RunAll()` recorded its own gate as:
+
+```
+preflight="DESKTOP sweep CLEAN: 2026-09-14T15:20:31Z pack=3ae67dea… kit=c886fb70…"
+```
+
+⛔ **The tree that was actually running was TestKit `8e25f6b` — several commits
+later — and the sweep was ~5 hours old.** The gate whose entire job is to assert
+"the swept code is the running code" passed a sweep of *different* code, and said
+CLEAN while doing it.
+
+⚠️ **Why this is worse than one bad run.** Every probe verdict rides on that
+attestation. A stale one does not produce a visible failure — it produces a
+**confident green** over a tree nobody swept. That is the same silent-success
+shape as the other two defects 08b found (a depot record that proves nothing, a
+field watch that can never fire), and it sits underneath the whole suite.
+
+⇒ **It also weakens 08b's own probe result** — 69 PASS / 4 FAIL / 18 SKIP /
+6 ERROR was read under this attestation. ⛔ Do not quote that run as a clean
+baseline without saying so.
+
+**The ask — two calls, and neither is an agent's:**
+1. **Should the preflight refuse a stale or mismatched attestation** (compare its
+   recorded `pack=`/`kit=` against the live HEADs, and refuse rather than warn)?
+   That is a behaviour change to a gate you rely on, so it is yours.
+2. **Does the 08b `RunAll()` discharge ck144 (a)'s owed first `RunAll()`?** 08b is
+   explicit that this is UNRULED, and the stale attestation is a reason for
+   caution. ⛔ No session may assume it either way — STATE records it as *run,
+   under a stale attestation*.
+
+**Evidence:** `reports/SMRTK_08B_SURFACE.md` "Defects FOUND AND NOT REPAIRED" §1;
+raw line in `archive/logs/smrtk08b_Mars.exe-20260914-20.03.09-6a91a190.log`.
+
 ### 2026-09-14 — 182: PLAYTEST_HELP has no owner-facing core — dissolve it, and one live gap to close
 
 <!-- ck:182 status:open owner:yes -->
+
+> ⭐ **NEW EVIDENCE 2026-09-14 (08b, walked with the owner) — the file is now
+> MEASURABLY STALE, which bears on whether it is worth keeping at all.** Its
+> toolkit section describes *"the 03A/03C build; sitting 08 checks the new pages
+> in play"* and walks **six** pages. The real surface after 09's re-layout and the
+> Stamper cut is **seven**: Sitting · Run · Selected · Slots & notes · World ·
+> Saves · Probes & logs. ⚠️ **It has no `Run` page at all** — the page that now
+> holds every trigger and `run_until` — and two tab LABELS differ from their ids
+> (`Agent` renders as "Slots & notes", `Kit` as "Probes & logs"), which is exactly
+> the kind of mismatch that wastes a sitting's first ten minutes.
+> ⛔ **NOT corrected by 08b, deliberately:** its scope fence bars the checklist and
+> a rewrite would pre-empt YOUR dissolve/keep call here. ⇒ **If you dissolve it,
+> this cost disappears. If you keep it, it needs a re-walk, not a patch** — and
+> the walk was already done once in 08b, so it is cheap now and gets dearer the
+> longer the surface moves.
 
 From the 09-14 design session with you. Full derivation:
 [RULE_PLACEMENT_TEST.md](agent/reports/RULE_PLACEMENT_TEST.md) ·
