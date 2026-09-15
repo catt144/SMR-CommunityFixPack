@@ -1,10 +1,14 @@
 # The ONE combined sitting — PT-20 redo (state 3) + D13 attended after-sweep + F102's minute
 
+## Must_Read_Header
+<!-- RULES -->
+Rule: Strike each scheduled moment as it is taken. [A3: pass]
+<!-- /RULES -->
+
 ## ✅✅✅ IT RAN 2026-08-14. ALL THREE MOMENTS PASSED; D13 IS `tested`.
 
-⛔ **The moments below are TAKEN.** This brief does not delete itself — PT-20 is a
-standing per-era re-check and this is now its measured recipe — but nothing in it
-is owed. **Results:** `agent/bugs/D13.md` (the 2026-08-14 block) ·
+⛔ **The moments below are TAKEN.** PT-20 is a standing per-era re-check and this
+is now its measured recipe, but nothing in it is owed. **Results:** `agent/bugs/D13.md` (the 2026-08-14 block) ·
 `agent/bugs/F102.md` · the PT-20 block in `PLAYTEST_CHECKLIST.md` ·
 `archive/SESSION_LOG.md` 2026-08-14. **Logs:** `archive/cs_c1_*` · `cs_a1_*` ·
 `cs_b1void_*` · `cs_b1_*` · `cs_b2_*` · `cs_zrestore_*` (+ prep `archive/csprep_*`).
@@ -447,5 +451,4 @@ staged save exists — which for cell `b2` is also the typo check on the name th
 owner typed into the in-game save dialog. If `D13SWEEP` is missing, **list the
 directory and re-arm with the real name**; do not guess.
 
-**This brief does NOT delete itself** — PT-20 is a standing per-era re-check and
-this is now its measured recipe. Strike the moments as they are taken.
+PT-20 is a standing per-era re-check and this is now its measured recipe.
