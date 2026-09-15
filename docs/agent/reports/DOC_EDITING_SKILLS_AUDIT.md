@@ -66,7 +66,7 @@ R-D follows the source section but is outside the brief's specified elements
 - Complete: size report and proposals (checklist 186).
 - Complete: revisit criteria.
 - Complete: final report and verification.
-- In progress: consume the initiating brief and its map row together.
+- Complete: initiating brief and map row consumed together in the final commit.
 
 No new gate is selected: syntax and freshness already fail loudly; the remaining
 questions concern meaning, authority, timing or an editor's actions. Invocation
@@ -180,4 +180,5 @@ source removal `7013326`; deferred-move records `b87267a`, `f6cebdc`, `5245727`;
 sizes and owner proposal `475f67c`; revisit criteria `5676aa4`.
 Deferred moves retain their reasons in the local move register and section D.
 No claim is made that the whole documentation overhaul or later attended audit
-is complete. The remaining action for this brief is its paired consumption.
+is complete. The initiating brief and its map row are removed together in the
+commit that finishes this record; the configured hook verifies that final tree.
