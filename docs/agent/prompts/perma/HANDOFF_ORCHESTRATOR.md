@@ -74,6 +74,20 @@ probe-maintenance names in STATE are instrument health, not this effort's.
 - ✅ **STAMPER CUT 09-14, settled.** ⛔ Never re-open or re-cost it; `FUTURE_IDEAS.md` entry 5,
   **not agent-tracked**, ⛔ **no mention in any always-read doc** (owner's instruction, same day).
 
+⭐ **OWNER REQUEST 2026-09-15, NOT SCHEDULED — the quick-build button is missing from Selected.**
+Owner's words: *"I am missing the quick build button in the tool menu, that is something I frequently
+use, it only build the thing I am focused on via the cheat."* ⚠️ **A new ask, not a reopening of the
+closed chain** — take it with the next TestKit link, never as its own errand.
+- **The gap, MEASURED.** `73_SMRTK_Infopanel.lua:11-27` lists 15 Selected leaves and **none completes
+  a construction**. The colony-wide one exists on World (`72:276`, `complete_constructions` →
+  `CheatCompleteAllConstructions`), so the kit has the all-at-once form and not the focused one.
+- **The leaf to call:** `ConstructionSite:CheatDeliverResources(skip_group)`
+  (`Lua/Buildings/ConstructionSite.lua:2042`) — sets `supplied = true`, zeroes every outstanding
+  construction request, calls `StartConstructionPhase()`. ⭐ It delegates to the `ConstructionGroupLeader`
+  for a grouped build (`:2043-2048`), so multi-part sites come out right for free.
+- **Shape: one row in the `leaves` table.** `method_for` (`73:51-53`) already hides a leaf the object
+  does not carry, so it appears only on construction sites. TestKit only, 0 shipped hashes, game closed.
+
 ⭐⭐ **EFFORT 2 — the doc overhaul (ck176–ck183), owner-driven and peer-run.** `prompts/RULES_HEADERS.md`
 is its live brief: N scattered rules become local header blocks plus ONE kernel rule. ⛔ **Sequencing
 ruled by the owner: SMRTK finishes first, then RULES_HEADERS re-fires** — ✅ **SMRTK is finished**, so
