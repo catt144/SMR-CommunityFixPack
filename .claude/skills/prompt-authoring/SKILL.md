@@ -35,6 +35,9 @@ to step in. Include the elements below in every brief for another session.
    whole-folder read.
 9. Supply the derived-facts block below. It is the brief's element 9 and R-C,
    with one statement of the procedure.
+10. For a one-off check, never write "play for a while first": a warmed-up save is
+    the default, so state only a required deviation such as reading immediately
+    after load.
 
 ## Derived facts and falsifiers
 
