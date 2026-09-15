@@ -59,9 +59,10 @@ R-D follows the source section but is outside the brief's specified elements
 ## Progress and unresolved scope
 
 - Complete: baseline, gate source/output audit, remainder classifications.
-- In progress: resolve packaging boundary before building either skill.
-- Pending: doc-editing; prompt-authoring; pending move 1; pending move 2;
-  pending move 3; size proposals; revisit criteria; final verification and consume.
+- Complete: doc-editing (`d716d9f`); prompt-authoring with WORKFLOW source removal (`7013326`).
+- Complete: pending move 1 disposition.
+- In progress: pending move 2 disposition.
+- Pending: pending move 3; size proposals; revisit criteria; final verification and consume.
 
 No new gate is selected: syntax and freshness already fail loudly; the remaining
 questions concern meaning, authority, timing or an editor's actions. Invocation
@@ -69,3 +70,12 @@ is not verified. Skills can guide a reader; they do not prove they were read.
 
 Executed model: GPT-6 (the model identity supplied in this session's instructions;
 no finer model/version identifier is exposed in the transcript).
+
+## D. Deferred moves
+
+1. PENDING: commit granularity and same-commit bug-entry timing remain in
+   WORKFLOW Per-fix discipline item 4. The fix-authoring destination was not
+   created by this task. Neither new documentation skill is that destination;
+   copying the clauses there would change their task scope. The local move
+   register records this reason. The existence/timing overlap with item 1
+   remains a finding to carry when the authorized destination is built.
