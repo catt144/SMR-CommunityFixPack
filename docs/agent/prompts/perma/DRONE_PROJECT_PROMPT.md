@@ -2,8 +2,6 @@
 
 **Written 2026-07-31 late, after the research sitting that answered all four
 gates.** Paste this into a fresh session when the owner wants to work on drones.
-**This prompt is RE-RUNNABLE — it does NOT delete itself.** Update it in place at
-the end of every drone session.
 
 > 📁 **DOCS LAYOUT (restructured 2026-08-03) — read `docs/README.md` if unsure
 > where something lives or where a new document goes.**
