@@ -741,80 +741,8 @@ still go to `main` directly**, or reason 2 above bites.
 
 ## Authoring a prompt / job brief — required elements
 
-Every brief written for another session (`*_PROMPT.md`, `*_BRIEF.md`,
-`*_REVIEW.md`) must include these. They are not optional polish; each one exists
-because its absence cost this project something.
-
-**1. A live progress list — REQUIRED, and required to stay current.**
-
-The owner reads the session's todo list to decide **when to step in** — whether
-there is time to start a playtest, whether to wait, whether a job is nearly
-done. A list that is created and then not maintained is worse than no list,
-because it actively misleads that decision.
-
-So every brief must instruct the agent to:
-
-- **Create a todo list covering the whole job before starting.**
-- **⚠️ GRANULARITY: one item per commit-and-verify unit — this is the rule that
-  actually matters.** If a stage produces its own commit, or its own
-  verification run, it is its own item. Never bundle several of those behind one
-  checkbox. *Observed failure, Phase 4, 2026-07-31:* the list carried
-  `S6a-d: Require migration in 4 waves` as a **single** item covering four
-  waves, four commits and four legs — so the owner saw the list at S4 and the
-  next time it moved it read "final phase", with no signal across the longest
-  stretch of the job. Per-item discipline cannot fix a list that is coarser than
-  the work.
-- **If a stage turns out to contain more units than the brief anticipated,
-  expand it in the list at that moment** — do not carry one checkbox through
-  work you have already discovered is four things.
-- **Mark each item complete the moment it completes** — before starting the
-  next one, never as a batch at the end. "I'll tidy the list later" is the
-  failure mode.
-- Keep **exactly one item in progress** at a time.
-- **Rewrite the list when reality diverges** — if a stage splits, grows, or
-  turns out unnecessary, the list changes. A stale item is a wrong answer to
-  the owner's question.
-- Put **useful state in the item text** where it is short and stable (which
-  stage, what the last verification read), so the list answers "where are we"
-  without the owner reading the transcript.
-
-**2. `git log` + `git pull` first**, and a named commit to check staleness
-against — briefs go stale the moment another session commits.
-
-**3. An explicit scope fence** — what is in, what is out, and what to do with
-something interesting found out of scope (**file it, do not fix it**).
-
-**4. Stop conditions** — the situations where reporting beats pushing through,
-stated as permission, not as failure.
-
-**5. What may NOT be claimed** — for any brief that ends in a verdict or a
-certification. An agent that cannot cite evidence for a claim must say the
-narrower true thing instead.
-
-**6. Whether the brief deletes itself.** One-off jobs delete their brief on
-completion (precedent: the popup audit). Re-runnable ones say plainly that they
-do not. ⛔ **Deleting the brief means the file AND its row in
-`prompts/README.md`, in the same commit** — that map lists LIVE prompts only
-(owner ruling 2026-09-13, checklist 174), and doccheck's PROMPT MAP gate now
-fails a commit that moves only one of the two. *Observed failure 2026-09-13:*
-the ck170 brief's whole instruction was "`git rm` this file when it has fired",
-so `14dcaa9` did exactly that and left a "NOT FIRED — for Codex" row standing
-over spent work, pointing the next session at a job already done.
-
-**7. The stale-probe gate — for any brief that runs or records a test.** The
-brief must instruct: run the probe sweep (the hard gate above) BEFORE testing,
-put the sweep line in the todo list, and refuse to record results without it.
-A brief that omits this is non-compliant; add the gate before running it.
-
-**8. The read path, declared** (adopted 2026-08-03, standing-prompts redesign
-O1). Name the files the job requires — file granularity, not folders — and the
-index (`agent/bugs/INDEX.md` / `agent/facts/INDEX.md`) that finds more. "Read
-the whole folder" is not a read path: every stale reading instruction the
-restructure report catalogued was a folder-granularity one, and a brief that
-names its files is one whose staleness the next session can check against git.
-
-**9. The derived-facts block (R-C).** Follow R-C under "Verification rails":
-each inherited fact carries its measurement, HEAD/build and a falsifiable re-check.
+Use the `prompt-authoring` skill for a brief written for another session.
+Its body carries the required elements and the R-C derived-facts procedure.
 
 **R-D · Self-split, authoring-side.** Depth is the cost: the same unit of work runs several
 times more expensive deep in a session than early in one. So legs are **packed at authoring**
@@ -869,12 +797,7 @@ exist):
 The global verification duties R-A, R-B, R-E, and R-G now live in `CLAUDE.md`'s
 `Must_Read_Header`. The task-specific rails remain here.
 
-**R-C · Brief element 9 — the derived-facts block.** Every brief carries, per fact: the fact ·
-how it was measured · the HEAD or build id · **one command that re-checks it**. An empty
-`git diff --stat <sha>..HEAD -- <paths>` means read none of the sources. A fix invalidates its
-own tests: re-base harm legs on the pre-fix body and re-run the
-  whole suite, not the leg you changed.
-Keep the phrasing bare. Firmer wording buys nothing measurable and costs ~20% more.
+R-C (brief element 9) lives in the `prompt-authoring` skill.
 
 **R-F · Size the verification by owner-observability.** A player-visible defect is verified by
 one attended A/B in the game — the owner is the cheapest verifier of "can a player actually do
