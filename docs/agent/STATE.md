@@ -26,9 +26,13 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   a nil `CachedArgShape()` makes the control vacuous), **F118** (rider `0136af1`, no probe).
 - 🚫 OWED — the post-upload sitting, ONE boot (ck144 a; recipes: checklist "THE SITTING RAN" block + `bugs/F117.md`):
   A3 (F118) · A10 · A5 c2 · A9 c4/c5 · F117's station recipe · the first `RunAll()` on the probe kit (re-stamps
-  `WORKFLOW.md:537`, VOID since 09-09). ⛔ Kit verdicts are PREDICTIONS until then; still FAIL/ERROR by name:
-  `C47OpenFarmSeedBufferShape` (Herbs 100→50), retired `LanderCargoRatchet`/`DroneUnreachableForever`/`AutoExportPriority`,
-  `LayoutTechLock`/`AnomalyCaveInMap` (modules retired 09-12; Wave14 wrap rows :116-117, :130 too).
+  `WORKFLOW.md:537`, VOID since 09-09). ⚠️ **A full RunAll DID run in 08b** (69/4/18/6 = 97) but under a
+  **STALE preflight** — ⛔ whether it discharges ck144 (a) is UNRULED = **ck184 (a)+(b)**; do not assume either way.
+  Still FAIL/ERROR by name: `C47OpenFarmSeedBufferShape` (Herbs 100→50), retired `LanderCargoRatchet`/
+  `DroneUnreachableForever`/`AutoExportPriority`, `LayoutTechLock`/`AnomalyCaveInMap` (modules retired 09-12;
+  Wave14 wrap rows :116-117, :130 too), `DomeFreeSpaceMismatch` (08, untriaged), and ⭐ **NEW 09-14, not previously
+  named: `ClassicRockets`/`CohortHousing`/`NoHomeless`** — all `nil value` on game methods (1.1.0 drift shape);
+  ⛔ no baseline exists to prove them pre-existing.
 - ⛔ **C89's B2 panel leg was NOT RUN, by owner ruling** — one unmeasured link (`CountDome` 0 leaves the panel clear, vanilla
   path). **Reopen C89 on a countering field report.** C85's `(daily)` arm and C88's same-type compare (structurally
   impossible — every supplyable prefab is `require_prefab`) are unavailable, not owed. Gate evidence: each entry's

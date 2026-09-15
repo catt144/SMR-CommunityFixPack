@@ -44,6 +44,52 @@ Test Kit helpers, save fixtures) stays in [PLAYTEST_HELP.md](PLAYTEST_HELP.md).
 
 ## Decisions waiting on you
 
+### 2026-09-14 — 184: three things 08b left with no owner-facing home
+<!-- ck:184 status:open owner:yes -->
+
+Filed by the 08b close-out lookback. ⛔ **Each of these existed only in
+`reports/SMRTK_08B_SURFACE.md` or a session transcript**, and rule 5 (R10) is
+explicit that a decision recorded only in a report **is not considered asked**.
+None is urgent; all three are yours.
+
+#### ⭐⭐ (a) THE PROBE PREFLIGHT ACCEPTED A 5-HOUR-STALE ATTESTATION — the highest-value find of the sitting
+
+The full probe suite ran 2026-09-14 and recorded its own gate as:
+```
+preflight="DESKTOP sweep CLEAN: 2026-09-14T15:20:31Z pack=3ae67dea… kit=c886fb70…"
+```
+⛔ The tree actually running was TestKit **`8e25f6b`** — `c886fb70` is **several
+commits earlier**, and the sweep was **~5 hours old**. ⇒ **The gate whose entire
+job is asserting that the sweep matches the code passed a sweep of different
+code.** That silently weakens every probe verdict riding on it, including the
+69 PASS from that run.
+
+⚠️ **Deliberately UNROUTED.** It is not 99's to decide (99 adjudicates, it does
+not own the gate's design) and the attendee did not fix it unasked. **The ask:**
+should the preflight refuse a stale or tree-mismatched attestation, and who
+builds that? ⛔ Until then, ⛔ **no probe verdict from that run should be quoted
+as gated.**
+
+#### (b) DOES THAT `RunAll()` DISCHARGE ck144 (a)?
+
+STATE's owed list names *"the first `RunAll()` on the probe kit (re-stamps
+`WORKFLOW.md:537`, VOID since 09-09)"*. **A full RunAll DID run** in 08b —
+69 PASS / 4 FAIL / 18 SKIP / 6 ERROR = 97, matching the registered count — but
+08b's brief says explicitly that whether it discharges ck144 (a) is **UNRULED**,
+and **(a) above is a strong reason for caution**: it ran under a stale gate.
+⚖️ ⛔ **The attendee did NOT decide this either way.** Recorded as *run, under a
+stale attestation*. The call is yours.
+
+#### (c) THE DOCK IS A TEXT CHIP, AND ck175 ASKED FOR AN ICON
+
+ck175 records your words: *"Create a SMR Icon on the games dock and just reuse
+the games natural popout menu system if thats possible."* 09 built a **text**
+button and never flagged the departure. 08b then widened it into a status bar
+carrying taint / armed / errors / quiet, on your 09-14 ruling.
+⇒ **With the status on it, a text bar may now be the better answer** — but that
+is a design call, not the attendee's. ⛔ Recorded so the departure is not lost;
+⛔ no session may "restore" an icon on the strength of ck175 without your word.
+
 ### 2026-09-14 — 182: PLAYTEST_HELP has no owner-facing core — dissolve it, and one live gap to close
 
 <!-- ck:182 status:open owner:yes -->
