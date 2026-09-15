@@ -1,30 +1,14 @@
 # Manual Playtest Checklist — Relaunched Fix Pack
 
-**Who this is for:** the project owner, playing the real retail game **with a
-live agent session alongside**. This file is the work list and nothing else:
-what to test, how to set it up, what each test needs. Expectations,
-predictions, pass/fail readings and console forensics are NOT written here —
-the agent supplies them in the sitting, from each test's linked entry.
-Reference material (ground rules, console facts, the verified command table,
-Test Kit helpers, save fixtures) stays in [PLAYTEST_HELP.md](PLAYTEST_HELP.md).
+## Must_Read_Header
+<!-- RULES -->
+Rule: Keep this file limited to playtest work items and keep reference material in `PLAYTEST_HELP.md`. [A3: pass]
+Rule: Move each completed test or settled decision body to `archive/PLAYTEST_ARCHIVE.md` while leaving its heading, marker, and pointer. [A3: pass]
+Rule: Move dated session records to `archive/SESSION_LOG.md`. [A3: pass]
+<!-- /RULES -->
 
-> ⛔ **RETIREMENT RULE — owner ruling 2026-09-14, item 177. EVERY section in this
-> file retires to [archive/PLAYTEST_ARCHIVE.md](archive/PLAYTEST_ARCHIVE.md) once it
-> is settled — not tests alone.** This extends the old rule (*"completed tests move
-> whole"*, 44 sections as of 2026-08-01, plus the 2026-08-03 pre-redesign snapshot),
-> which covered ~1% of the file while the other 99% had no rule reaching it.
->
-> - a **test** retires when it is completed;
-> - a **decision** retires once its marker reads `ruled` or `closed`;
-> - a **dated session record** does not belong here at all — it goes to
->   `archive/SESSION_LOG.md`. This file is the work list, nothing else.
->
-> The move is whole-body, leaving the heading, the marker and a pointer behind.
-> `.claude/tools/archive_settled.py` performs exactly that move over the marked set.
-> ⚠️ **An unmarked item can never become settled, so it can never retire** — the
-> marker is what makes this rule run, and neglecting it is how this file reached 54%
-> unmarked before the 2026-09-14 pass. ⛔ Whether that is machine-enforced is still
-> open: see item **177**.
+This is the owner's work list for tests run in the retail game with a live agent session.
+Item 177 records the still-open question of mechanically enforcing checklist markers.
 
 > Redesigned 2026-08-03 (`docs/agent/prompts/PT_REDESIGN_PROMPT.md`, owner
 > design authority of the same date): tests grouped **by system, not by PT
