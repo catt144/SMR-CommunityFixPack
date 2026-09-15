@@ -10,12 +10,11 @@ freeze and substantive owner rulings remain in force.
 
 ## Live progress
 
-- [IN PROGRESS - doccheck GREEN, commit pending] Purge COMBINED_SITTING,
-  DRONE_PROJECT_PROMPT and DISPATCH; reconcile required headers, map and live
-  consumers; verify and commit.
-- [PENDING - waits for purge commit] Purge and replace GENERAL_USE_PROMPT in one
-  commit; carry the cheap triage method into the source bug-library skill,
-  regenerate its mirror, verify and commit.
+- [COMPLETE - d70d76e] Purged COMBINED_SITTING, DRONE_PROJECT_PROMPT and
+  DISPATCH; reconciled required headers, map and live consumers; doccheck GREEN.
+- [IN PROGRESS - two-line body and skill mirror verified GREEN; commit pending]
+  Purge and replace GENERAL_USE_PROMPT in one commit; carry the cheap triage
+  method into the source bug-library skill, regenerate its mirror, verify and commit.
 - [PENDING - waits for replacement commit] Move SMRTK_SLOTS verbatim and move/trim
   CO_RUNS into support; reconcile live pointers, verify and commit; consume this brief.
 

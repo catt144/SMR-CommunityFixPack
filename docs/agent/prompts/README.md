@@ -47,7 +47,7 @@ The `declared class` values below are gate inputs, not conclusions inferred from
 |---|---|---|
 | `LINUX_DISPATCH.md` | `prompt` | **FR-1**: the Linux/NVIDIA 580 crash and the TEMPORARY workaround mod; every report, feedback item or patch |
 | `HANDOFF_ORCHESTRATOR.md` | `prompt` | ⭐ **LIVE — the owner OVERRODE its retirement 2026-09-13** ("too many loose ends"). It carries loose ends not held by `WAITING_ON_YOU.md`. ⛔ **No session may retire it**; when its §2 list is empty a session may **ASK** the owner and nothing more. |
-| `GENERAL_USE_PROMPT.md` | `prompt` | ⭐ **RESCOPED 2026-09-13, owner ask.** Minimal catch-all for ad-hoc questions and player-report triage; playtest sittings are now agent-authored at sitting time from `WORKFLOW.md`, the `prompt-authoring` skill and `PLAYTEST_CHECKLIST.md`, not scripted here |
+| `GENERAL_USE_PROMPT.md` | `prompt` | Minimal idle orientation for a session opened before the owner is ready to give it a task |
 | `RELEASE.md` | `prompt` | an update, end to end; uses `RELEASE_OUTBOX.md` (the staged-changes ledger) and `POST_UPLOAD_CLOSE.md` (the close-out) |
 | `RELEASE_OUTBOX.md` | `ledger-exception` | the one owner-exempt ledger; `RELEASE.md` draws every player-facing change landed since the last upload |
 | `POST_UPLOAD_CLOSE.md` | `prompt` | the close-out, fired by `RELEASE.md` §4 **after** the listing exists — never before |

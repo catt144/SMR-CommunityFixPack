@@ -10,6 +10,7 @@ facts in `docs/agent/facts/` (`EF-NNN`). Both carry a **generated** `INDEX.md`.
 
 ## 1 · Reading — cheapest first, stop when you have the answer
 
+0. **Ours-or-vanilla check:** `rg -l -F -- <keyword> Code/` searches this pack's runtime code first; hits inspect ours, while an empty literal search is only a cheap vanilla lead and does not rule out aliases or indirect effects.
 1. **`docs/agent/bugs/INDEX.md`** — 222 rows of ~229 chars. One row usually answers "is this
    known, and what is its status". Read the row, not the entry.
 2. **The entry's own section, by heading** (`### Control`, `### Repair`, `### Attended
