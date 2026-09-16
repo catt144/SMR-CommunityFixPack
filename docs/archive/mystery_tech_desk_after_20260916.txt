@@ -1,0 +1,184 @@
+Migrated discovery of	0	special techs
+CONTROL migrated breakthrough PrefabCompression
+Migrated discovery of	1	special techs
+Migrated discovery of	1	special techs
+Migrated discovery of	0	special techs
+Migrated discovery of	0	special techs
+Migrated discovery of	0	special techs
+Migrated discovery of	0	special techs
+Migrated discovery of	0	special techs
+Migrated discovery of	0	special techs
+Migrated discovery of	0	special techs
+Migrated discovery of	0	special techs
+Migrated discovery of	0	special techs
+Migrated discovery of	0	special techs
+Migrated discovery of	0	special techs
+Migrated discovery of	0	special techs
+Migrated discovery of	0	special techs
+Migrated discovery of	0	special techs
+Migrated discovery of	0	special techs
+Migrated discovery of	0	special techs
+COMMAND python tools/desk_mystery_tech_migration.py
+HEAD aa5fbfbfafc79754b02264bac6ea411334aaf0eb
+MODULE Code/Fix_MysteryTechMigration.lua
+==============================================================================
+Mystery tech availability: synthetic state, shipped decisions
+==============================================================================
+lua: Lua 5.5 | lupa 2.8
+
+SOURCE CommonLua/Features/LockablePreset.lua:1-536 sha256=993bdf37255d005af31f30f5d531c392b8f0de5316de63740f4aa6ad563f7625
+REGISTRY Data/Tech.lua sha256=7033a4b9330ab73eebf302347d063364c883ba229665884af52049bf5276efc9
+REGISTRY group=Mysteries presets 55
+SOURCE 1.1.0 CommonLua/Libs/Research/Research.lua:8-10 sha256=dc904ebbcef8a1720753109a0b29f14d1d51addfc6cfa11b215e3ec34c5ad80f
+SOURCE 1.1.0 CommonLua/Libs/Research/Research.lua:12-14 sha256=80d3d666e71f0de08fcb15e907afe202a5344712ea4990d515003965765bfc88
+SOURCE 1.1.0 CommonLua/Libs/Research/Research.lua:23-29 sha256=76f1fa31c3c096226487fe26be0007d9d597cef687c7f1fd010b50d765265a9e
+SOURCE 1.1.0 CommonLua/Libs/Research/Research.lua:31-38 sha256=d7dcf0060384a327b6e40e6ab9511e91754986768886e823105ca809a62d195c
+SOURCE 1.1.0 CommonLua/Libs/Research/Research.lua:40-44 sha256=6969fd4eb54c54880863317a575259ddea03ff5ae1399bcfdf4df78ddec5b4ad
+SOURCE 1.1.0 CommonLua/Libs/Research/Research.lua:46-49 sha256=cb7158cb399c87548e85bcfcc1fe077cd05dd6eaa0c73c62d8fb23b06d430b45
+SOURCE 1.1.0 CommonLua/Libs/Research/Research.lua:51-54 sha256=2b12f5ad9b1d279729ce23aa8c1c51258e6eb17e9eef9e54372212ae75a8321f
+SOURCE 1.1.0 CommonLua/Libs/Research/Research.lua:147-159 sha256=2e218ab60ebae9e837fb727523da1599a9bf7d65b3d704af48c4ed95c219d2e1
+SOURCE 1.1.0 CommonLua/Libs/Research/Research.lua:161-164 sha256=42be02eddcb3df21691284539cc17abd63412c4dc8e0deb3da6a869d2ff9e7b4
+SOURCE 1.1.0 Lua/TechTree.lua:434-436 sha256=cc9b78b02225f4e6884ebbded93b612c22ca4833085b20b9e8c8c22308432b2e
+SOURCE 1.1.0 Lua/TechTree.lua:443-474 sha256=f3891c426758b32f4131e2784feb8c66fb526ea531754f823db842012a4cf08d
+SOURCE 1.1.0 Lua/TechTree.lua:476-478 sha256=8166474379bec340bb0ebf4e1121b39a09c8733b87df2f1e89f942b18eaf8b73
+SOURCE 1.1.0 Lua/TechTree.lua:591-595 sha256=f9964658f24ba19446ca21297d0d4b2a29c4a2a1d8550f8ae7bbf5670fa943e4
+SOURCE 1.1.0 Lua/TechTree.lua:1537-1540 sha256=f4bc929c69d2d3f4986f1d7f0c27a770865ef1999b9e9cfbf20f4e339d7c9e7e
+SOURCE 1.1.0 Lua/TechTree.lua:868-874 sha256=58ec74366788a8e5b99635e06f7ff5a34aa80bd6bf377357de0a1f2bab1b10e0
+SOURCE 1.1.0 Lua/TechTree.lua:892-900 sha256=0f10d7ef1f2978d8495140d4612acfed76c74791180d1d03b4cf3cc6b3c7bb36
+SOURCE 1.1.0 Lua/TechTree.lua:876-878 sha256=4f41c62d8dc0acfce9a910f3d182a101fe369572868477dc6bcf1e20ca812a40
+SOURCE 1.1.0 Lua/TechTree.lua:1200-1240 sha256=2a5387318307ba1e8344a54e45f5e66d3ab44adb8df5b4013c0af23b3be6b8ac
+SOURCE 1.1.0 Lua/TechTree.lua:182-192 sha256=d7350f5413e575df2187b38546db78599c5dbd418fc13ef856995b83a6ffd591
+SOURCE 1.1.0 Lua/TechTree.lua:1275-1282 sha256=4891ddecfac03c634f7db993e58dfd0e07c92dd8bc099b23835ac62a28e8a33a
+SOURCE 1.1.0 Lua/TechTree.lua:1486-1502 sha256=6df74c576e1c5a9aba231fbb704ab83e71abb012344f8bca253eb91510417b79
+SOURCE 1.1.0 Lua/TechTree.lua:1298-1313 sha256=aaab58a814e8b81fb54047a536ae6bba702f0e2464616c73ddbe023774490265
+SOURCE 1.1.0 CommonLua/X/XPresetMap.lua:635-641 sha256=1176ad032a0dcd962d577cf84ea50b31f929fb1585a3a14faac350109e94760f
+SOURCE 1.1.0 Lua/Tech.lua:504-507 sha256=daa4020b9a39fd0a371b2916413dbd0c107d3f5b051c80625415101554ac5267
+SOURCE 1.1.0 Lua/Tech.lua:468-470 sha256=983562acb12451d116779c3d5f75bc405a977d29dd95cac2fc0974a154017f2d
+SOURCE 1.1.0 Lua/Tech.lua:519-521 sha256=1d04dd76c6c3cb23498ce844f50d4ad4104375085bb40f6473eac5153f81eeb5
+SOURCE 1.1.0 Lua/Research.lua:140-142 sha256=9cfc270cfb1f491f4d09dae58cfccb18f3a187e536df2ca6c40dc8a16b28ea98
+SOURCE 1.1.0 Lua/Research.lua:146-148 sha256=1234c8e1ba2465c572df3d1e9393d4efde2abeeac37314126020ee3503ae107a
+SOURCE 1.1.0 Lua/Research.lua:89-91 sha256=751d1cf09011f06a62c43f5f9cce0de5dd9287e21189f4a6e644213cf13222b7
+SOURCE 1.1.0 Lua/Research.lua:161-163 sha256=5cc9ef413fe805a9b57531a86952e2637629ee125deb51c0dde90df8b522b2c0
+SOURCE 1.1.0 Lua/Research.lua:150-159 sha256=03135d3e1a86bb9c42fdde328d3ad045280d0544c110e150423ce65866593a11
+SOURCE 1.1.0 Lua/Research.lua:373-374 sha256=e5933f15a14dd8e73d252a32d318189418ab8582e794acf625d966e338e33338
+SOURCE 1.1.0 Lua/Research.lua:225-227 sha256=8c7715a479c8653d8f551e4113f5286d680cdcbfe21bf211e11eb7e64f94fb27
+SOURCE 1.1.0 Lua/Research.lua:255-257 sha256=b63aa661b658f3c585dc8793def836d2176345c90aeaa344d2b26567c816644c
+SOURCE 1.1.0 Lua/Research.lua:251-253 sha256=8ae98f6dccbb589c5278616da9dc6ea6c59094fe7d64284947e2e41cb7faa9f4
+SOURCE 1.1.0 Lua/Mysteries/Mystery.lua:65-75 sha256=e715cb6818d1ed45fd4305ef7c4ea167fd3c5ddb97bd7e802dda53ddbe433de0
+SOURCE 1.1.0 Lua/Sequences/SA_Gameplay.lua:1196-1215 sha256=ec5a2f4533ac7527d029dbb16b4ea7260b4619f8ebde9eb0d0a80d23878e41c9
+SOURCE 1.1.0 Lua/Sequences/SA_Gameplay.lua:822-854 sha256=978f5fb6f9f351fb6e320673ac94ef0c764f9a3a7d5b15bea4859165e2d975d1
+SOURCE 1.1.0 Lua/Sequences/SA_Gameplay.lua:871-882 sha256=10b95fa833d6fb29b08eadf7aacc8fe8721b96e0ceea67eebf25e74c4fa45802
+SOURCE 1.0.7 Lua/Research.lua:668-682 sha256=661656a11a812ad5dfd4ea93580ae51d6ec5ad63e0a9270c763e25f37ecbae8f
+  PASS  before reveal the entire cure family is hidden
+  PASS  before reveal every Mysteries preset is hidden
+  PASS  reveal makes chain head visible and purchasable
+  PASS  reveal also discovers and notifies the colony's Mystery_8 node (shipped listener)
+  PASS  normal research opens final cure
+  PASS  final cure completes and invokes its crop effect
+  PASS  zero points means visible but unaffordable
+  PASS  medical advances all intermediates without tech points
+  PASS  medical advancement leaves final cure requiring a point
+  PASS  Field=Special does not block the completed cure wait
+  PASS  legacy field comes from Mysteries, not editor Field
+  PASS  migration loses legacy revealed cure despite sufficient points
+  PASS  post-load prerequisite sweep cannot reopen that family
+  PASS  a remaining medical advancement can reopen the migrated chain
+  PASS  positive control: the same migrator restores a breakthrough
+  PASS  positive control: a BuriedWonders chain is migrated by vanilla, at its final node, entrance still hidden
+MODULE sha256=c53e5dd03b6b0c2a9188f79cd922e8b0974c174fc2f78ac7b770a8460f3d69b5
+  PASS  module registers under the audited id
+  PASS  cold-menu apply succeeds with no game or presets
+  PASS  enable-path apply also succeeds with presets present
+  PASS  already converted save recovers its research entrance on load
+  PASS  recovery reaches the shipped mystery listener: Mystery_8 discovered and notified
+  PASS  repair grants no points, research or scenario completion
+  PASS  second load is idempotent
+  PASS  vanilla next-load processing preserves recovery with fix disabled
+  PASS  recovered save reaches final research and releases existing wait
+  PASS  completed chain remains untouched
+  PASS  no mutation: fresh unrevealed colony
+  PASS  no mutation: legacy undiscovered cure
+  PASS  no mutation: zero discovery marker
+  PASS  no mutation: foreign saved field
+  PASS  no mutation: reveal mapping pointing outside the family
+  PASS  no mutation: explicit veto
+  PASS  no mutation: inactive registry
+  PASS  no mutation: uninitialised lockable-preset owner
+  PASS  no mutation: legacy id absent from the current registry
+  PASS  a changed reveal mapping inside the family is followed, not the old entrance
+  PASS  the colony mystery id is not consulted: the legacy marker alone restores
+  PASS  partial progress is preserved without an extra reveal
+  PASS  new preset initialisation cannot re-hide an early recovery
+  PASS  first load in vanilla handler order recovers the entrance
+  PASS  first load leaves every other Mysteries preset hidden except the Mystery_8 node
+  PASS  a legacy RESEARCHED cure is unresearched and hidden by conversion
+  PASS  that colony recovers its entrance too
+  PASS  vanilla or external recovery stands the repair down
+LEGACY 1.0.7 Data/TechPreset.lua group=Mysteries count=17 ids=['AlienDiggersDestruction', 'AlienDiggersDetection', 'Anti-Sphere Shield', 'BlackCubesDisposal', 'BlackCubesNegation', 'CrystallineFrequencyJamming', 'DefenseTower', 'DreamSimulation', 'IonStormPrediction', 'NumberSixTracing', 'Purpose of the Spheres', 'SolExploration', 'StElmosFire', 'WildfireCure', 'WilloftheWisp', 'Xeno-Terraforming', 'XenoExtraction']Migrated discovery of	0	special techs
+Migrated discovery of	0	special techs
+Migrated discovery of	0	special techs
+Migrated discovery of	0	special techs
+Migrated discovery of	0	special techs
+Migrated discovery of	0	special techs
+Migrated discovery of	0	special techs
+Migrated discovery of	0	special techs
+Migrated discovery of	0	special techs
+Migrated discovery of	0	special techs
+Migrated discovery of	0	special techs
+Migrated discovery of	0	special techs
+Migrated discovery of	0	special techs
+Migrated discovery of	0	special techs
+Migrated discovery of	0	special techs
+Migrated discovery of	0	special techs
+Migrated discovery of	0	special techs
+Migrated discovery of	0	special techs
+
+LEGACY chained=3 ['AlienDiggersDestruction', 'AlienDiggersDetection', 'WildfireCure'] single=14
+  PASS  class defect: migration hides legacy AlienDiggersDestruction
+  PASS  class recovery: AlienDiggersDestruction entrance AlienDiggersDestruction_1 restored, rest hidden, nothing spent
+  PASS  class defect: migration hides legacy AlienDiggersDetection
+  PASS  class recovery: AlienDiggersDetection entrance AlienDiggersDetection_1 restored, rest hidden, nothing spent
+  PASS  class defect: migration hides legacy Anti-Sphere Shield
+  PASS  class recovery: Anti-Sphere Shield entrance Anti-Sphere Shield restored, rest hidden, nothing spent
+  PASS  class defect: migration hides legacy BlackCubesDisposal
+  PASS  class recovery: BlackCubesDisposal entrance BlackCubesDisposal restored, rest hidden, nothing spent
+  PASS  class defect: migration hides legacy BlackCubesNegation
+  PASS  class recovery: BlackCubesNegation entrance BlackCubesNegation restored, rest hidden, nothing spent
+  PASS  class defect: migration hides legacy CrystallineFrequencyJamming
+  PASS  class recovery: CrystallineFrequencyJamming entrance CrystallineFrequencyJamming restored, rest hidden, nothing spent
+  PASS  class defect: migration hides legacy DefenseTower
+  PASS  class recovery: DefenseTower entrance DefenseTower restored, rest hidden, nothing spent
+  PASS  class defect: migration hides legacy DreamSimulation
+  PASS  class recovery: DreamSimulation entrance DreamSimulation restored, rest hidden, nothing spent
+  PASS  class defect: migration hides legacy IonStormPrediction
+  PASS  class recovery: IonStormPrediction entrance IonStormPrediction restored, rest hidden, nothing spent
+  PASS  class defect: migration hides legacy NumberSixTracing
+  PASS  class recovery: NumberSixTracing entrance NumberSixTracing restored, rest hidden, nothing spent
+  PASS  class defect: migration hides legacy Purpose of the Spheres
+  PASS  class recovery: Purpose of the Spheres entrance Purpose of the Spheres restored, rest hidden, nothing spent
+  PASS  class defect: migration hides legacy SolExploration
+  PASS  class recovery: SolExploration entrance SolExploration restored, rest hidden, nothing spent
+  PASS  class defect: migration hides legacy StElmosFire
+  PASS  class recovery: StElmosFire entrance StElmosFire restored, rest hidden, nothing spent
+  PASS  class defect: migration hides legacy WildfireCure
+  PASS  class recovery: WildfireCure entrance WildfireCure_1 restored, rest hidden, nothing spent
+  PASS  class defect: migration hides legacy WilloftheWisp
+  PASS  class recovery: WilloftheWisp entrance WilloftheWisp restored, rest hidden, nothing spent
+  PASS  class defect: migration hides legacy Xeno-Terraforming
+  PASS  class recovery: Xeno-Terraforming entrance Xeno-Terraforming restored, rest hidden, nothing spent
+  PASS  class defect: migration hides legacy XenoExtraction
+  PASS  class recovery: XenoExtraction entrance XenoExtraction restored, rest hidden, nothing spent
+  PASS  two legacy markers restore two entrances in one load
+  PASS  changed lock semantics decline the behaviour probe
+  PASS  unknown/throwing lock semantics decline
+  PASS  missing modern research API declines
+  PASS  missing reveal remapping declines
+SOURCE 1.1.0 CommonLua/SavegameMetadata.lua:122-189 sha256=e444a6b665a99272261560d95903a521b5bb9028a11e8910a5064136571dfb58
+SOURCE 1.1.0 CommonLua/SavegameMetadata.lua:344-392 sha256=a77de4175609f716612b17be0311db0cb4793c87a50968aa4f5e5b2ccbd4b774
+SOURCE 1.1.0 CommonLua/SavegameMetadata.lua:85-110 sha256=8e26ba1e6b34d67576ea2a46aadcdf4817d0dda6d5c43d27ed3ee49c9ce3dc33
+  PASS  Steam retail blocks the archived legacy save revision
+  PASS  non-Steam retail permits explicitly accepting Load anyway
+
+==============================================================================
+85 of 85 demands held
+ALL DEMANDS HELD

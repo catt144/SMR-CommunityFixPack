@@ -14,7 +14,8 @@ completed. Shipped sources were read only; archived sources were read only.
 
 ## What was built and how an affected save recovers
 
-**SOURCE + MEASURED:** [Fix_WildfireCureMigration.lua](../../../Code/Fix_WildfireCureMigration.lua)
+**SOURCE + MEASURED:** [Fix_MysteryTechMigration.lua](../../../Code/Fix_MysteryTechMigration.lua)
+(built as `Fix_WildfireCureMigration.lua`; renamed and widened by the audit below)
 adds a synchronous PostLoadGame recovery. A Wildfire colony must have positive
 legacy `tech_status.WildfireCure.discovered`, field `Mysteries`, and a fully
 hidden current cure family. The handler restores `WildfireCure_1`, the same
@@ -79,7 +80,7 @@ availability harness exercises that path as a positive control for migration.
 
 ## Verification and fixture limits
 
-`python tools/desk_wildfire_cure.py` — **37/37 demands held**; the total is the
+`python tools/desk_wildfire_cure.py` (since renamed `tools/desk_mystery_tech_migration.py`) — **37/37 demands held**; the total is the
 sum of the named PASS members in
 [after evidence](../../archive/wildfire_cure_desk_after_20260916.txt).
 [Before evidence](../../archive/wildfire_cure_desk_before_20260916.txt) preserves
@@ -127,3 +128,55 @@ identified by diff and left outside this task's commits.
 Executed model declaration: Codex / GPT-6, as supplied by the session
 instructions. A more specific serving-model identifier is not exposed in this
 transcript. No sub-agents were used.
+
+## Cross-vendor audit — 2026-09-16, fired on Fable (`prompts/F120_AUDIT.md`, consumed)
+
+**Verdict: SHIP WITH CHANGES.** The mechanism, the platform reach and the
+repair contract held under re-derivation; the fix was too narrow by its own
+logic. Changes made, all desk-exercised, none retail-exercised:
+
+1. **Widened from the cure to the whole `Mysteries` field.** The converter drops
+   the field, not one tech; the archived 1.0.7 registry has **17** techs there
+   (`LEGACY` line of the harness), the harness hides and recovers every one.
+   Entrance = `MysteryTechRevealRemapping[id] or id`; the colony-mystery gate was
+   dropped because `DefenseTower` has no `Mystery` preset property.
+2. **Module renamed** `Code/Fix_WildfireCureMigration.lua` →
+   `Code/Fix_MysteryTechMigration.lua`, id `MysteryTechMigration`; `items.lua`
+   and `metadata.lua` follow, same position. `SRC:`/`DEFECT:` pin unchanged.
+3. **Harness renamed and widened** to `tools/desk_mystery_tech_migration.py`,
+   **85/85** ([evidence](../../archive/mystery_tech_desk_after_20260916.txt));
+   `SMR_DESK_MODULE` lets a scratch variant be required to fail. Two
+   one-guard-reverted variants each failed exactly one named leg.
+4. **Entry amended** with the class, the completed-research case, the reach
+   verdict, and the listeners the unlock reaches (`Mystery.lua:65` discovers and
+   notifies `Mystery_N`), which the original contract did not mention.
+5. **Release ledger:** `RELEASE_OUTBOX.md` had no Pending row for F120 despite
+   its header rule; one was added.
+
+**Reach (the owner's direction B):** public Steam builds went 1.0.7 → 1.1.0 with
+nothing between (Steam news API, app 3215050, read 2026-09-16); the floor is
+402200 and 1.0.7 saves are 396349 (EF-080). A Steam reporter's legacy colony is
+refused before conversion, so **the fix does not answer Jäger's report**, which
+stays open. Candidates for a fresh 1.1.0 colony that no desk leg can settle:
+the reveal sits three game-hours plus a random delay after the infection
+message (`Mystery 8.generated.lua:141-148`), the chain lives in the tree's
+SPECIAL section, and `Unknown = true` nodes render unnamed only while locked.
+
+| Negative result (audit) | Basis |
+|---|---|
+| The repair contract's "no-op" claims are false somewhere | **MEASURED refuted:** all nine no-op legs, the first-load ordering leg and the disabled-fix persistence leg held on the widened body |
+| `LockablePresetsInitialized` is unset on a first legacy load, so the fix declines forever | **SOURCE refuted:** 1.0.7 stored it as a GameVar (`LockablePreset.lua:350-351`, archived); the 1.1.0 fixup `LockablePresetStatesToOwners` (`:783-798`) moves it onto the player before `PostLoadGame` (`CommonLua/Savegame.lua:808-811`) |
+| Mystery techs were auto-discovered at colony start in 1.0.7, so every legacy save carries markers | **SOURCE refuted:** the field is `discoverable = false` (`Data/TechFieldPreset.lua:286-291`, archived); `InitResearch` discovers only discoverable fields |
+| The other remapped chains (buried wonders) share the hole | **MEASURED refuted:** their field is `BuriedWonders`, preserved; the converter unlocks the final node directly, entrance still hidden. A shortcut in the player's favour; not filed |
+| A public Steam build between 402200 and 403908 lets Steam saves reach the converter | **INHERITED refuted (feed, not sampled):** no such build in the Steam news feed; first 1.1.0 boot 2026-09-08 read 403908 |
+| C69 / C79 / C92 / C97 share this defect | **SOURCE not reproduced:** different consumers; nothing new added to those entries |
+| The recovery re-applies the reveal's popup and cost boost | **SOURCE, true and accepted:** neither is re-applied; the converter does the same for sibling groups |
+
+Retail was not launched: a Steam retail load of a legacy save needs the
+old-save block overridden, which EF-080 rules unattributable, and no 1.0.7
+save with a revealed mystery tech exists on this machine (the `Saved Games`
+folder holds 1.1.0-era saves only, listed in the audit transcript). The
+reporter was not contacted.
+
+Executed model declaration: Claude Fable 5.1 (`claude-fable-5-1`), as reported
+by the session environment. No sub-agents were used.

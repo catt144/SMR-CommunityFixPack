@@ -21,7 +21,16 @@ player surface bumps it by one on release.
 
 ## Pending — goes out with the next upload
 
-(empty — v10's batch below cleared by `RELEASE.md` §5, 2026-09-13, upload confirmed both portals)
+- **F120 · `Fix_MysteryTechMigration`** (`d004494` built as `Fix_WildfireCureMigration`;
+  widened + renamed by the cross-vendor audit 2026-09-16) — a colony carried over from
+  1.0.7 lost every mystery technology it had already been offered: the game's save
+  converter keeps discovered breakthroughs and event research but drops the whole
+  Mysteries group, so the Wildfire cure chain (and the other sixteen mystery
+  technologies) stayed hidden while the storyline kept waiting for them. The offered
+  node or chain entrance comes back on the next load. `fixed`, desk-controlled
+  (85/85), retail unexercised; reaches only saves loaded past the old-save gate
+  (non-Steam, or Load anyway), so it does **not** answer the Steam report that
+  prompted it. Count **+1** on release.
 
 ## Released — history, newest first (cleared here by `release_prompt.md`)
 

@@ -67,8 +67,8 @@ return {
 		'CodeFileName', "Code/Fix_TradeRocketFuelRefresh.lua",
 	}),
 	PlaceObj('ModItemCode', {
-		'name', "Fix_WildfireCureMigration",
-		'CodeFileName', "Code/Fix_WildfireCureMigration.lua",
+		'name', "Fix_MysteryTechMigration",
+		'CodeFileName', "Code/Fix_MysteryTechMigration.lua",
 	}),
 	PlaceObj('ModItemCode', {
 		'name', "Fix_ShuttleTransportCache",

@@ -28,6 +28,21 @@ Item 177 records the still-open question of mechanically enforcing checklist mar
 
 ## Decisions waiting on you
 
+### 2026-09-16 — 187: F120 was WIDENED by the cross-vendor audit — ships that way unless you say otherwise
+<!-- ck:187 status:open owner:no -->
+
+The audit you asked for (`prompts/F120_AUDIT.md`, fired on Fable, consumed) answered your
+question: **yes, it missed something.** The converter drops the whole Mysteries field, so
+the same hole covers **all 17** mystery technologies a 1.0.7 colony could have been
+offered, not only the Wildfire cure, and the other sixteen have no medical-building
+rescue. Verdict **SHIP WITH CHANGES**; the changes were made under the brief's licence:
+the module is now `Code/Fix_MysteryTechMigration.lua`, restoring every legacy mystery
+discovery's entrance, desk-exercised 85/85. **Nothing is owed from you**: it goes out
+widened in the next upload unless you say "narrow it back to Wildfire". ⚠️ Still true and
+unchanged: it does **not** reach Jäger's Steam report (a Steam legacy save is refused
+before the converter runs), so that report stays open. Record: [F120](agent/bugs/F120.md),
+[audit section](agent/reports/WILDFIRE_CURE_RESEARCH.md#cross-vendor-audit--2026-09-16-fired-on-fable-promptsf120_auditmd-consumed).
+
 ### 2026-09-16 — A successful fix includes recovery of affected saves
 <!-- ck:- status:closed owner:no -->
 
