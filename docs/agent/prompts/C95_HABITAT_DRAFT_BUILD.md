@@ -155,6 +155,54 @@ caller is the problem to solve, and a body copy may turn out to be the honest an
 ⭐ **Say which shape you chose and what it costs**, and check what the choice does to the "Not
 enough Colonists" status and to `colonist_summon_fail` (`RocketExpedition.lua:498`).
 
+### ⭐ The owner's shape — ONE predicate, and do not touch the scorer at all
+
+⚖️ **Owner, 2026-09-16, and this is the structure to build to:** *"we could probably get away from
+actually modifying the priority system at all… find the point immediately before the game starts
+scoring candidates"*, with the exemption behind a single named predicate rather than an inline test.
+
+⭐ **Adopt the single-predicate structure.** One function — `IsAutoPickerExempt(colonist)` or
+similar — that today answers exactly one question. One place to read, one place to change, and a
+door left open without inventing anything to hold it open.
+
+⛔ **But two of the pieces in the owner's sketch have no substrate on this build, MEASURED
+2026-09-16:**
+
+| sketched | reality |
+|---|---|
+| `IsKindOf(colonist.residence, "NaturalistHabitat")` | ⛔ **misses the Micro-G habitat entirely.** The hierarchy is `NaturalistHabitat` → `NaturalHabitatBase` → `MicroGHabitatBase` (`NaturalHabitat.lua:1-3`) and `MicroGHabitat` → `MicroGHabitatBase`. **`MicroGHabitatBase` is the one test that covers both**, and it is what vanilla's own `IsSuitableWorkplace` uses |
+| `dome:HasTag("AutoPickerExempt")` | ⛔ **there is no tag system.** `grep -rn "HasTag" <Src>/Lua` returns nothing on game objects; `tags` exists only on mod definitions and resource definitions |
+| `colonist:GetDome()` | ⛔ **no such method.** `dome` is a plain field, and `MicroGHabitatBase` parents `Community`, never `Dome` (`MicroGHabitat.lua:3-4`, `EF-103`) — so `colonist.dome` is **false** for exactly the residents this fix is about. The dome branch could never fire |
+
+⇒ **The predicate's whole body is `IsKindOf(colonist.residence, "MicroGHabitatBase")`.** Keep the
+named function; drop the dome half.
+
+⭐ **Three ways to realise "don't touch the scorer", cheapest first. Price them in this order and
+say why you landed where you did.**
+
+1. **Swap the pool around the original** — the purest form of the owner's idea. Wrap
+   `CargoTransporter.GatherAvailableColonists`; before delegating, put a filtered copy in
+   `self.city.labels.Colonist` **and in each connected city's** (`GetConnectedCitiesForColonists`
+   contributes to the same pool); call the original; restore. ✅ The priority system is untouched,
+   fall-through and fill behave exactly as vanilla, no body is copied.
+   ⚠️ **Its safety rests on one property: nothing between the label read (`:240`) and the returned
+   list (`:292`) yields**, so no other thread can observe the swapped label. ⭐ That held when
+   checked on 1.1.0.403908 — no `Sleep`, no `WaitMsg`, no thread creation on the path, and
+   `ValidateBuilding` / `FilterColonistsByTrait` are pure reads. ⛔ **Re-prove it, do not inherit
+   it**, and restore under `pcall` so an error cannot leave a colony's label filtered.
+2. **Wrap `FilterColonistsByTrait`, scoped to the expedition caller** — acts per bucket inside the
+   gather, so fall-through still works. ⚠️ Five call sites across three gathers (above); the
+   scoping is the whole difficulty.
+3. **Copy the body** with `if not IsAutoPickerExempt(unit) then … end` in the bucketing loop —
+   literally the owner's line. ✅ Most readable, no shared-state trickery. ⚠️ A full-body
+   replacement is the most clash-prone shape the pack ships and carries the `D14` stand-down
+   question; `FIX_POLICY` §1 wants the least invasive thing that works, so it is the fallback,
+   not the opening bid.
+
+⛔ **What is NOT an option:** removing habitat residents from `city.labels.Colonist` persistently.
+That label drives population, UI, migration and birth/death — it is the colony's census, not a
+draft queue.
+
 ---
 
 ## 4 · What the fix must NOT do
@@ -280,6 +328,9 @@ row **in the same commit**. ⛔ No tombstone row, no struck-through line.
 | The draft walks unemployed+idle → unemployed+busy → **employed+idle** → employed+busy, so habitat residents are the FIRST pick | `CargoTransporter.lua:259-282` read in full | same | read those lines; a reordered `ipairs({…})` list changes which bucket backfills |
 | A short crew makes `Load` retry forever, and expeditions take that path | `CargoTransporter.lua:196-199` + `:124-130`, and `RocketExpedition.lua:536` passing no `quick_load`/`transfer_available` | same | ⭐ this is what makes post-filtering a hang; if `Load` gains a retry cap or the call gains a flag, re-price §3 |
 | `FilterColonistsByTrait` is a global with five call sites across three gathers | `grep -rn "FilterColonistsByTrait" <Src>/Lua <Src>/CommonLua <Src>/DLC` | same | re-run that grep; a different count changes whether the per-bucket seam can be scoped |
+| Both habitats reach `MicroGHabitatBase`, so one `IsKindOf` covers them; `NaturalistHabitat` alone does not | `__parents` chain: `NaturalistHabitat` → `NaturalHabitatBase` → `MicroGHabitatBase`; `MicroGHabitat` → `MicroGHabitatBase` | same | `grep -rn "DefineClass.NaturalHabitatBase" -A3 <Src>/Lua` — a reparent breaks the single test |
+| There is no tag system and no `GetDome()`; `colonist.dome` is false for a habitat resident | `grep -rn "HasTag" <Src>/Lua` and `grep -rn "function .*:GetDome(" <Src>` both empty; `MicroGHabitatBase` parents `Community` | same | re-run both greps. ⛔ A hit does not revive the dome branch — `EF-103` is why it cannot fire |
+| Nothing yields between the gather's label read and its return, so a pool swap is atomic | no `Sleep`/`WaitMsg`/thread creation in `CargoTransporter.lua:220-292`; callees on the path are pure reads | same | ⭐ re-prove before relying on it: grep that range again and check any callee added since |
 | The space elevator carries a SECOND copy of the same four-bucket sort, plus a liveness guard the expedition copy lacks | `CargoTransporterNew.lua:235-287` vs `CargoTransporter.lua:237-292` | same | diff the two bodies; ⛔ it is a different class and §4 forbids reaching it |
 | `SMRTest.Log.CrewDraft` exists and is the reach control | TestKit `acafc74`, built 2026-09-16 | TestKit HEAD at authoring | `git -C C:/Dev/SMR-BugFixPack-TestKit log --oneline -- Code/90_Loggers.lua`; ⛔ it was **never run in play** — treat its output as unwitnessed until a sitting sees it |
 | Module and fix counts are not inputs to this job | no acceptance clause depends on a stored total | — | if the build adds a module, emit the number with `python tools/doccheck.py --emit-counts` rather than writing one here |
