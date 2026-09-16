@@ -118,6 +118,22 @@ the save before reading a result, and arm a trace on the gather that actually ru
   terraforming parameters and resources, i.e. ordinary play.
 
 ⇒ **Play toward `BrineDeposit` or `ColdResistantBacteria`** rather than scanning for luck.
+
+⭐ **Rivals cannot take that anomaly.** They do contest anomalies (`AIContestAnomaly`), but the
+contestable pool is `not item.scanned_by and not item.custom_id`
+(`Lua/RivalColonies.lua:738-746`), and the story-bit effect creates its anomaly with
+`custom_id = self.id`. **A story-bit anomaly is excluded from rival contest by construction**, so
+a rival-heavy fixture does not endanger this leg — only the random-roll anomalies, which are not
+the ones this test needs.
+
+**Fixture identity, MEASURED so it is not re-derived at setup time:**
+the sponsor shown as **"Europe"** in Mission Setup is preset **`id = "ESA"`**
+(`Data/MissionSponsorPreset.lua:542,569`), which is what the Seeker's
+`verifier = sponsor == "ESA"` requires · the mystery shown as **"Wildfire"** is
+**`Mystery 8` / `TheMarsBug`** (`Data/Scenario/Mystery 8.lua:4-5`, class
+`Lua/Mysteries/TheMarsBug.lua:1`), and `mystery_id` is set from the setup choice at colony
+creation (`Lua/Mysteries/Mysteries.lua:41-43`) — so a colony created with Wildfire selected needs
+**no `CheatStartMystery`** to be running it.
 ⚠️ **This corrects a claim made in session:** a per-anomaly odds figure was quoted as though it
 governed a whole playthrough, which it does not — the owner's report that every playthrough
 produces a Commander expedition is correct, and the story-bit path is why.

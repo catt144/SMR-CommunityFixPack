@@ -40,6 +40,38 @@ and Codex sessions both commit here, several at once, and **Codex is invisible t
 
 ## 0 · START HERE — orient, then ASK
 
+### Tech points, for provisioning a fixture when research-all would destroy the reading
+
+```
+*r for i=1,20 do UIPlayer:AddResearchPoints(UIPlayer.TechPointCost) end print(UIPlayer.TechPoints)
+```
+
+Each pass pays the current price, so that is exactly 20 points; change the count for more.
+⛔ **`Player:CanResearch` returns `nil` for a broke player even on an `enabled` tech**
+(`Lua/TechTree.lua:868-874`) — grant first, or a healthy node reads as a defect. Derivation and
+the TestKit ask that should replace this line are in §2b's third TestKit ask.
+
+### LIVE 2026-09-16 — one ESA/Wildfire colony carries BOTH open legs
+
+The owner is provisioning a new colony (Mission Setup: sponsor **Europe**, mystery **Wildfire**,
+290% challenge, rivals x3) and **both outstanding investigations run on it**:
+
+- **The Seeker — [C96](../../bugs/C96.md).** Repair BUILT and desk-verified 2026-09-16, ⛔ **never
+  run in a game**. Fixture requirements, the guaranteed route to a Commander-requiring anomaly, and
+  the acceptance legs are in [its build report](../../reports/C96_ROVER_SUBCLASS_BUILD.md) —
+  ⛔ do not restate or re-derive them here. ⚖️ **ck185 (b) stays the owner's**: whether it ships.
+- **The mystery — the Wildfire cure reveal.** Its plan is [checklist 188](../../../PLAYTEST_CHECKLIST.md);
+  a peer authored it and the owner has authorised running it.
+
+⭐ **They do not conflict, and that was checked rather than assumed** — the evidence is in the C96
+report's fixture section, including why a mystery cannot preset an anomaly's rover requirement and
+why rivals cannot take the anomaly this test needs. ⛔ **Do not re-raise a conflict between them
+without naming a story bit that actually presets one.**
+
+⚠️ **The owner cheats buildings, funding and supplies freely on this fixture and that is fine** —
+neither reading depends on how the colony got there. The two things that must stay true: **own no
+RC Commander** (a Commander makes the C96 leg vacuous) and **no research-all**.
+
 ⛔ **`perma/DISPATCH.md` NO LONGER EXISTS** — the prompts overhaul deleted it 2026-09-15/16. Orient
 from the **`smr-orientation` skill** plus `docs/agent/STATE.md` (now a short pull-only status file,
 not a mandatory read) and `docs/WAITING_ON_YOU.md`. Bindings live in `CLAUDE.md` and document-local
@@ -52,13 +84,13 @@ take.** Do not execute anything else.
 ⛔ **The two auto-firing tasks this section carried on 2026-09-16 are DONE. Do not re-run them, and
 do not restore the auto-start instruction from an older copy of this file.**
 
-### The TestKit link — built, and still unrun
+### The TestKit link — two rows still unrun
 
-TestKit `acafc74`, three rows on one link: `SMRTest.Log.DroneDrop` (C98), `SMRTest.Log.CrewDraft`
-(`EF-104`) and the Selected-page **Quick build** leaf. ⛔ All three are **BUILT AND UNRUN** — §2b
-carries what is left, which is a sitting, not another link. ⭐ The C95 sitting is the natural place
-for the `CrewDraft` row; [checklist 189](../../../PLAYTEST_CHECKLIST.md) carries
-the acceptance recipe and links the C95 build report.
+TestKit `acafc74`, three rows on one link. ✅ **`SMRTest.Log.CrewDraft` HAS NOW RUN** — it carried
+the C95 acceptance sitting on 2026-09-16 and C95 closed `tested-attended`. ⛔ **Still BUILT AND
+UNRUN: `SMRTest.Log.DroneDrop` (C98) and the Selected-page Quick build leaf.** Each needs a witness
+in play and neither is closed by another link. ⭐ Both ride any ordinary colony, so the new
+ESA/Wildfire fixture above will do.
 
 ---
 
@@ -183,10 +215,11 @@ built only because it rode the same link as C98's probe, not as an errand of its
 trigger, the cheaper first step and the arm-before-assignment warning are in `EF-104` — do not
 restate them here.**
 
-⚠️ **THE THREE UNRUN ROWS ARE ONE SITTING, NOT THREE.** Arm `DroneDrop` and play normally; arm
-`CrewDraft` **before** an expedition is assigned; press **Quick build** on a construction site. ⛔ None
-of them is closed by another link — each needs a witness in play.
-- ⭐ **One extra step, free, while `CrewDraft` is armed:** deliberately **under-supply** an expedition
+⚠️ **TWO UNRUN ROWS, ONE SITTING.** Arm `DroneDrop` and play normally; press **Quick build** on a
+construction site. ⛔ Neither is closed by another link — each needs a witness in play.
+(`CrewDraft` ran with C95 on 09-16; the row below is what it still owes.)
+- ⛔ **STILL OWED, and explicitly NOT run at the C95 sitting** (its report says so): arm `CrewDraft`
+  and deliberately **under-supply** an expedition
   (demand a specialisation nobody has) and **read the rocket's panel**. ⛔ Body and both discriminators
   are in [`EF-104`](../../facts/EF-104.md) — an unguarded `#crew` on a nil return means "Not enough
   Colonists" may never be reached, and a blank panel on a waiting rocket is the tell. The owner's
@@ -215,10 +248,11 @@ purpose; a fourth item citing it is an older copy of this file.
   stays OPEN**. Brief `prompts/C92_ACHIEVEMENT_BUILD.md`; evidence closed out. ⛔ **Three claims are
   WITHDRAWN — do not reason from them:** a ≈44% water bonus, a "never-drawn" icon, unremovable residue.
   Seat/prerequisite/art are **design choices to be made**, not intent to be restored.
-- **C93** — filed `cand`; Outside Ranch produce stranded at the centre, ⛔ **cause UNRESOLVED and it is
-  not ours**. The owner's "outdated mod" reading is leading but unproven — our own 09-09 log shows the
-  same fallback in vanilla. Needs the reporter's log line + mod list ⇒ **PULL-ONLY (ck165): the ask is
-  the owner's call, nothing is drafted and nothing is owed.**
+- **C93** — ⭐ **RESOLVED AND REPAIRED 2026-09-16**, superseding this file's old "cause UNRESOLVED,
+  not ours" line: Open Domes changes the ranch to a six-anchor entity and strands three piles.
+  `Fix_OpenPastureStockpiles` is built and the harm was reproduced on the owner's save first.
+  ⛔ **PLAY VALIDATION IS QUEUED, not done** — that is the one live obligation; the entry holds
+  everything else. ⛔ The old reporter-log/mod-list ask is moot and must not be revived.
 - **D14 / stand-down** — brief `prompts/STANDDOWN_AUDIT.md` holds it. ⛔ The gap is **not** "did the body
   change" (`bodycheck` answers that at the desk) but its declared **class-c** blind spot: a vendor
   repairs a defect without touching the body we pinned and every instrument reads GREEN.
