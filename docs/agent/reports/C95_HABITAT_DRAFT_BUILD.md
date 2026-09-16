@@ -1,10 +1,10 @@
 # C95 habitat expedition draft — build record, 2026-09-16
 
-**Built, desk-verified; game acceptance remains open.** Owner authority is
+**Built, desk-verified and tested-attended on the live 1.1.0 receiver.** Owner authority is
 [checklist 185](../../PLAYTEST_CHECKLIST.md), which lifts C95's build/test hold
 and retains C96's hold. Repair: main-pack judgment call, excluding habitat
 residents from automatic expedition drafting. Release remains a separate task.
-The owner has a prepared save; none was provisioned or modified here.
+The owner supplied the prepared save used by the attended rerun.
 
 Baseline `00259ea6d12b6fabfa6773a6de727b33fb21d4cd`; desk run at
 `7c29ecf0d09591a7b10ae9b107477f373fe6b116` plus this change. That intervening
@@ -13,13 +13,18 @@ commit changed STATE, the handoff and session archive, not this task's inputs
 Executed model disclosed by this transcript: **GPT-6 / Codex**; no more specific
 model identifier is exposed. No delegated agents were used.
 
+Re-point session: code `4ec3e32`, desk suite `b055210`, executed model
+**GPT-5 / Codex**; no delegated agents were used.
+
 ## Implementation and cost
 
 **SOURCE:** [Fix_HabitatExpeditionDraft.lua](../../../Code/Fix_HabitatExpeditionDraft.lua)
 registers `HabitatExpeditionDraft`, with all captured/installed method pairs in
-its `Require` block, and is present in both load manifests. It chains the original
-`CargoTransporter.GatherAvailableColonists`, immediately delegates foreign
-receivers, and swaps `FilterColonistsByTrait` only during an expedition gather.
+its `Require` block, and is present in both load manifests. It chains both shipped
+gathers: legacy `CargoTransporter` guarded to `RocketExpeditionBase`, and
+`CargoTransporterNew` guarded to `UniversalRocketBase` in Expedition type. Either
+receiver can install if the other is absent. Foreign receivers delegate before field
+inspection, and `FilterColonistsByTrait` is swapped only during an expedition gather.
 The named predicate is `IsKindOf(unit.residence, "MicroGHabitatBase")`.
 Every bucket is filtered before vanilla trait selection, preserving priority,
 specialisation, soft-trait relaxation, and filling from subsequent buckets.
@@ -56,15 +61,16 @@ beside its total, and asserts the caller counts. Its filters are literal
 | Direct inheritors | **3** = RocketBase + RocketExpeditionBase + LanderRocketBase |
 | Transitive named DefineClass inheritors | **25**, complete membership printed by the same command; closure starts at CargoTransporter and includes every parsed parent edge, excluding the root itself |
 
-**SOURCE:** RocketExpedition's override explicitly calls the base table field
+**SOURCE:** RocketExpedition's override explicitly calls the legacy base table field
 (`RocketExpedition.lua:497`). Lander overrides the gather with its own passenger
-list; CargoTransporterNew is independent. The new receiver guard excludes other
-CargoTransporter inheritors even if a later caller reaches the base gather.
+list. Universal rockets inherit `CargoTransporterNew` and enter expedition behavior
+by `RocketType`; the New guard excludes elevators and other transport modes.
 These are counts of decoded shipped Lua declarations, not runtime mod classes.
 
-**SOURCE:** no yield occurs along the shipped gather path: the gather,
-GetConnectedCitiesForColonists, ValidateBuilding, the trait filter and its local
-callbacks, table.copy/ifilter/iappend/union/subtraction/table_add were read.
+**SOURCE:** no yield occurs along either shipped gather path: both gathers,
+GetConnectedCitiesForColonists, GetConnectedCities, GetCityLabelWithConnected,
+is_colonist_reachable, ValidateBuilding, IsDead, CanChangeCommand/IsTransported,
+the trait filter and its local callbacks, and the array helpers were read.
 The harness rejects `Sleep`, `WaitMsg`, `WaitWakeup` and thread-creation calls in
 its extracted bodies. `table.get`, `IsValid`, `IsKindOf` and primitive array
 operations are synchronous engine primitives. `table.copy` can invoke a custom
@@ -88,14 +94,14 @@ the fill request. The pre-fix picker takes both habitat residents; the repaired
 picker returns the full ordinary crew in order. There is no real colony, fleet,
 density, physical layout or departure in this measurement.
 
-The same run covers player-chosen lander passengers; elevator selection; foreign
-receiver delegation; absent residence; genuine predicate error; hard specialisation
-and soft traits; transient-destructor exclusion; connected-city candidates;
+The extended run covers both receiver contrasts; the New passenger-request and
+connected-label branches; New liveness filtering; player-chosen lander passengers;
+elevator selection; foreign receiver delegation; absent residence; genuine predicate
+error; hard specialisation and soft traits; transient-destructor exclusion;
 restoration by function identity on success, shortage and injected picker error;
-return tuples including trailing nil; dependency refusal; and a desk-only removal
-control. A deliberately wrong post-filter implementation returns a short crew
-on the very fixture the repaired picker fills. This falsifier depends on habitat
-residents actually leading the vanilla selection, asserted before applying the fix.
+return tuples including trailing nil; common and one-receiver-only dependency paths;
+and a desk-only removal control. Post-filter mutants for both receiver bodies return a
+short crew on fixtures the repaired picker fills.
 
 **MEASURED:** `python tools/bodycheck.py --module HabitatExpeditionDraft --all`
 matches the pinned body and defect expression. `python tools/doccheck.py` passed
@@ -123,20 +129,25 @@ no matches; doccheck independently reports the same).
 - **SOURCE:** stale C95 wording still called the defect unreproduced and the
   build unauthorized, despite its reproduction and later owner ruling. Current
   title/status/evidence and acceptance wording were reconciled with that record.
+- **MEASURED:** the first build targeted only the legacy receiver and was inert for
+  `UniversalZeusRocket`. The re-point retains that hook and adds `CargoTransporterNew`;
+  this corrects the earlier report's statement that the New gather was independent.
+- **MEASURED:** the first extended `CrewDraft` logger collapsed a three-value return
+  through Lua `and/or` and raised a formatting popup. TestKit `7b57b8a` assigns the
+  tuple through an explicit branch; the accepted rerun is clean.
 
-## Game acceptance — still open
+## Game acceptance — core passed attended
 
-[Checklist 189](../../PLAYTEST_CHECKLIST.md) carries the full remaining recipe.
-Save contents and launch permission were requested during the build; no answer
-had arrived when this report was written. No game was launched. `CrewDraft`
-exists at TestKit commit `acafc74` (`git -C ../SMR-BugFixPack-TestKit log -1
---oneline -- Code/90_Loggers.lua`); it was not armed here.
+[Checklist 189](../../PLAYTEST_CHECKLIST.md) records the attended pass. On game
+1.1.0.403908 build `6a91a190`, repo `733bed2`, TestKit `7b57b8a`, the New trace
+showed all five Naturalist Habitat residents in the eligible pre-fix pool and none
+in the returned 5/5 ordinary crew. The owner witnessed departure and habitat
+occupancy **5 → 5**. The archived whole log has zero error-shaped lines:
+[`c95_repoint_Mars.exe-20260916-12.45.56-6a91a190.log`](../../archive/logs/c95_repoint_Mars.exe-20260916-12.45.56-6a91a190.log).
 
-Pending: clean boot and main-menu enable; prepared-save draft/fill/departure;
-lander and elevator behavior in play; full-process removal/load; and the free
-EF-104 under-supply panel reading. No `applied` log, exit status, save-removal
-result, UI result or attended pass is claimed. Source and desk evidence cannot
-promote this to `tested-attended`.
+**OWNER RULING:** lander/elevator player-choice coverage remains desk-verified and
+will not be playtested absent a reported issue. **UNRUN / NOT CLAIMED:** Micro-G,
+live pack removal/load, and deliberate-shortage UI behavior.
 
 **MEASURED:** checklist membership comparison using `tools.doccheck.checklist_items()`
 against the captured pre-edit headers at `7c29ecf` gives **145 → 146**:

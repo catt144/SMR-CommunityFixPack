@@ -1,0 +1,451 @@
+					Render 0:00:00:007
+*** executable info
+Timestamp:     	6a91a190
+Date:          	Fri Aug 28 10:56:16 2026
+Command line:  	
+Compiler:      	195136247, 142 (VS 2019) or newer
+
+
+*** hardware info
+CPU name      	Intel(R) Core(TM) i7-14700K
+CPU MHz       	3418
+CPU cores     	20/28
+Phys. Memory   	65278 MBytes
+Memory In Use  	57%
+Disk Free      	807588 MBytes
+
+
+*** OS info
+OS:            	Windows 11
+Version:       	10.0.26100 
+
+
+*** Debug::Init()
+
+
+					Render 0:00:00:081
+Steam initialized (AppId 3215050)
+					Render 0:00:00:084
+Drive type for game installation: SSD, savegames: SSD
+					Render 0:00:00:085
+Language: English
+					Render 0:00:01:427
+*** graphics info
+GPU                            	NVIDIA GeForce RTX 4080 Feature Level: 12.1 {  DoublePrecisionFloatShaderOps: 1 OutputMergerLogicOp: 1 MinPrecisionSupport: 2 TiledResourcesTier: 4 ResourceBindingTier: 3 PSSpecifiedStencilRefSupported: 0 TypedUAVLoadAdditionalFormats: 1 ROVsSupported: 1 ConservativeRasterizationTier: 3 MaxGPUVirtualAddressBitsPerResource: 40 StandardSwizzle64KBSupported: 0 CrossNodeSharingTier: 0 CrossAdapterRowMajorTextureSupported: 0 VPAndRTArrayIndexFromAnyShaderFeedingRasterizerSupportedWithoutGSEmulation: 1 ResourceHeapTier: 2 NotZeroedPools: 1 UMA: 0 UnalignedBlockTextures: 1}
+API                            	d3d12
+GPU Driver Version             	32.0.16.1074
+GPU Driver Package Version     	610.74
+GPU Dedicated Video Memory     	16048 MB
+					Render 0:00:01:576
+
+Libs: Network, Sequences, MouseTrackWin, DumbAI, MapGen, Paradox, TriggersAndEvents, Notifications, Research, Resources, Tutorial, Objectives 
+
+					Render 0:00:01:812
+
+Platform: desktop, editor, goldmaster, paradox, pc, steam
+
+					Render 0:00:02:745
+*** audio info
+Audio Endpoint                 	Speakers (Razer Leviathan V2)
+						Lua 0:00:02:746
+Lua revision: 403908
+Assets revision: 33006
+Steam AppID: 3215050
+Build version: 1.1.0.403908
+Build branch:  Release
+						Lua 0:00:16:249
+Account storage loaded successfully in 1 ms
+DLC norman loaded, lua revision 403908, assets revision 33006
+DLC thomas loaded, lua revision 403908, assets revision 33006
+						Lua 0:00:16:253
+[mod] Loaded mod def Relaunched Fix Pack: Opt-In Modules (id SMR_CommunityOptInPack, v1.00-000) unpacked from appdata
+[mod] Loaded mod def TEMPORARY - Linux NVIDIA 580 Crash Workaround (id SMR_FR1TempWorkaround, v0.00-003) unpacked from appdata
+[mod] Loaded mod def Relaunched Fix Pack (id SMR_CommunityFixPack, v1.00-011) unpacked from appdata
+[mod] Loaded mod def Community Fix Pack — Test Kit (id SMR_CommunityFixPackTestKit, v0.00-001) unpacked from appdata
+						Lua 0:00:16:649
+[mod] [CommunityOptInPack] ClassicRockets: applied
+[mod] [CommunityOptInPack] AcknowledgedWarnings: applied
+[mod] [CommunityOptInPack] ResidencyControl: inactive (opt-in module, off by default — enable it in Options → Mod Options)
+[mod] [CommunityOptInPack] MultipleSuns: applied
+						Lua 0:00:16:650
+[mod] [CommunityOptInPack] DroneOverhaul: applied
+[mod] [CommunityOptInPack] CohortHousing: inactive (opt-in module, off by default — enable it in Options → Mod Options)
+[mod] [CommunityOptInPack] NoHomeless: inactive (opt-in module, off by default — enable it in Options → Mod Options)
+[mod] [CommunityOptInPack] DroneStatDials: applied
+						Lua 0:00:16:651
+[mod] [CommunityFixPack] NightShiftWork: applied
+[mod] [CommunityFixPack] WispRewards: applied
+[mod] [CommunityFixPack] TrainsToVoid: applied
+[mod] [CommunityFixPack] LanderEmptyLaunch: applied
+[mod] [CommunityFixPack] ShelterReflex: applied
+[mod] [CommunityFixPack] BrokenTrackSalvage: applied
+[mod] [CommunityFixPack] TrackSalvageWipe: applied
+[mod] [CommunityFixPack] LakeEntombment: applied
+						Lua 0:00:16:652
+[mod] [CommunityFixPack] RocketDroneChurn: applied
+[mod] [CommunityFixPack] TradeRocketFuelRefresh: applied
+[mod] [CommunityFixPack] ShuttleTransportCache: applied
+[mod] [CommunityFixPack] VacuumWalks: applied
+[mod] [CommunityFixPack] ArrivalDeaths: applied
+[mod] [CommunityFixPack] StaleReservations: applied
+[mod] [CommunityFixPack] CrystalMysteryHang: applied
+[mod] [CommunityFixPack] DomeOverviewHighlight: applied
+						Lua 0:00:16:653
+[mod] [CommunityFixPack] TrainCargoDumping: applied
+[mod] [CommunityFixPack] DestroyedTunnels: applied
+[mod] [CommunityFixPack] DustSicknessBiorobots: applied
+[mod] [CommunityFixPack] GeneForging: applied
+[mod] [CommunityFixPack] MirrorSphereSite: applied
+[mod] [CommunityFixPack] PayloadTemplateRefill: applied
+[mod] [CommunityFixPack] ShuttleHubOffAvailable: applied
+[mod] [CommunityFixPack] FreedHousingNotice: applied
+[mod] [CommunityFixPack] LandscapeUnitFilter: applied
+						Lua 0:00:16:654
+[mod] [CommunityFixPack] RocketInteractGuard: applied
+						Lua 0:00:16:655
+[mod] [CommunityFixPack] TrackConnectorPingPong: applied
+[mod] [CommunityFixPack] TrackTunnelPowerBridge: applied
+[mod] [CommunityFixPack] GraphConsumedCaption: applied
+[mod] [CommunityFixPack] TrainWaitTime: applied
+[mod] [CommunityFixPack] FounderTraitNotification: applied
+[mod] [CommunityFixPack] SequenceLatents: applied
+[mod] [CommunityFixPack] TrackSalvageRefund: applied
+[mod] [CommunityFixPack] DroneTransportMinors: applied
+[mod] [CommunityFixPack] ScanDowngrade: applied
+						Lua 0:00:16:656
+[mod] [CommunityFixPack] BombardmentSpread: applied
+[mod] [CommunityFixPack] ExtenderFlapChurn: applied
+[mod] [CommunityFixPack] SaintBlessing: applied
+[mod] [CommunityFixPack] SinkholeIndestructible: applied
+[mod] [CommunityFixPack] ExoticDepositSign: applied
+[mod] [CommunityFixPack] JumboCaveReinforcementWedge: applied
+[mod] [CommunityFixPack] SilentHitMomentFX: applied
+						Lua 0:00:16:657
+[mod] [CommunityFixPack] CloggedBuildingRelease: applied
+[mod] [CommunityFixPack] FactionDomeSizeGate: applied
+[mod] [CommunityFixPack] BuildingCodesPrefab: applied
+[mod] [CommunityFixPack] HabitatExpeditionDraft: applied
+[mod] [CommunityFixPack] OpenPastureStockpiles: applied
+[mod] [CommunityFixPack] RoverSubclassManifest: applied
+						Lua 0:00:16:658
+[mod] [CommunityFixPack] SaveSanitizer: applied
+[mod] [SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+[mod] [SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[mod] [SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+[SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+						Lua 0:00:16:663
+[mod] [SMRTK] SMRTK_CORE loaded=true tee=false t=12294 id=1
+[SMRTK] SMRTK_CORE loaded=true tee=false t=12294 id=1
+						Lua 0:00:16:666
+[mod] [SMRTK] SMRTK_SLOTS armed_at_load=0 sitting=ck144a_close_20260915 slots="1 console_status,2 probe_preflight,3 check_after_load,4 read_map_click,5 short_breakpoint,6 dump_selected,scratch read_sitting" trigger=smrtk08_break t=12294 id=2
+[SMRTK] SMRTK_SLOTS armed_at_load=0 sitting=ck144a_close_20260915 slots="1 console_status,2 probe_preflight,3 check_after_load,4 read_map_click,5 short_breakpoint,6 dump_selected,scratch read_sitting" trigger=smrtk08_break t=12294 id=2
+						Lua 0:00:16:667
+[mod] [SMRTest][carry] fixture-carry dump available — run SMRTest.FixtureCarry()
+						Lua 0:00:17:455
+[mod] [CommunityFixPack] SaintBlessing: inactive (no dome-colonists trait presets)
+[mod] [CommunityFixPack] SinkholeIndestructible: the St. Elmo's Fire sinkhole is now indestructible, like every other mystery set-piece
+						Lua 0:00:17:548
+Reloading done in 1295 ms
+						Lua 0:00:17:549
+Available DLCs: norman(Feeding the Future),thomas(Interplanetary Codex) 
+						Lua 0:00:17:594
+[mod] [SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=DataLoading t=12294 id=3
+[SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=DataLoading t=12294 id=3
+						Lua 0:00:17:983
+[preset] Preset postprocess took 157 ms.
+						Lua 0:00:18:029
+482 / 482 particle streams loaded in 40 ms.
+						Lua 0:00:18:030
+5 / 5 particle streams loaded in 1 ms.
+						Lua 0:00:18:031
+[mod] [CommunityOptInPack] MultipleSuns: BuildingTemplates.ArtificialSun not found — build limit NOT lifted (binding fix still active)
+[mod] [CommunityFixPack] SilentHitMomentFX: registered 11 missing animation-moment preset(s)
+[mod] [CommunityFixPack] FactionDomeSizeGate: 7 faction dislike(s) now wait for 10 colonists in a dome
+						Lua 0:00:18:236
+[mod] [CommunityOptInPack] MultipleSuns: Artificial Sun build-once limit lifted
+[mod] [CommunityFixPack] SaintBlessing: the shipped code resolves the trait label itself — data left untouched; save re-base armed for 1 preset(s) of 2
+						Lua 0:00:18:333
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=12294 id=4
+						Lua 0:00:18:364
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=12294 id=5
+						Lua 0:00:18:373
+[mod] Loaded mod items for: SMR_CommunityOptInPack, SMR_CommunityFixPack, SMR_CommunityFixPackTestKit
+						Lua 0:00:19:282
+[PdxSDK] Started up. Took 1184
+						Lua 0:00:19:682
+[Braze] SessionStart error The server name or address could not be resolved
+
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:19:781
+[Braze] SessionStart error The server name or address could not be resolved
+
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:38:629
+Load Game: 
+	lua_revision: 403908 (last saved with) 
+	orig_lua_revision: 403908 (created with) 
+	assets_revision: 33006 
+
+	dlcs: norman, thomas 
+
+	mods: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack, SMR_CommunityOptInPack 
+						Lua 0:00:38:632
+*** Reloading assets from folder 'BinAssets/'
+						Lua 0:00:40:458
+*** Assets reloaded in 1.8 s, read 359.3 MB, read speed 196.8 MB/s, average read 8138 bytes.
+						Lua 0:00:40:976
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=31527 id=6
+						Lua 0:00:41:353
+[mod] [SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=PreLoadGame t=31527 id=7
+[SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=PreLoadGame t=31527 id=7
+						Lua 0:00:43:379
+[mod] [CommunityFixPack] SilentHitMomentFX: restored 4 missing hit-moment tracker(s) on load
+						Lua 0:00:43:380
+[mod] [SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:43:392
+game_settings:
+    sponsor: NASA
+    profile: rocketscientist
+    founding_faction: AssemblyOfPlanets
+    rival_colonies: ESA, CNSA, IMM
+    mystery_random: 
+    game_rules: (none)
+more_game_settings: save_game_id: lD1jaGcMJOxaiFcU, mystery: none, coordinates: 16N120E, landing_spot: , logo: USA
+map_conditions: altitude: -3122, temperature: -25, cold_wave: 61, dust_devils: 44, dust_storm: 123, meteors: 109
+map_resources: concrete: 109, 						Lua 0:00:43:393
+metals: 176, precious_metals: 176, water: 212
+						Lua 0:00:43:409
+[mod] [CommunityFixPack] SaveSanitizer: F95 astrogeologist-residue pass removed 0 modifier(s), left 0 unidentified
+Game Loaded in 4781 ms
+[mod] [SMRTK] SMRTK_PROVENANCE actions=194 last=section_attach last_id=431 present=true session=1789490760:3122193787:1699922885:920687565 t=45596901 id=8
+[SMRTK] SMRTK_PROVENANCE actions=194 last=section_attach last_id=431 present=true session=1789490760:3122193787:1699922885:920687565 t=45596901 id=8
+						Lua 0:00:43:419
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=45596901 id=9
+						Lua 0:00:43:431
+[mod] [SMRTK] SMRTK_DOCK action=dock_attach attached=true route="idBottom sibling" status=OK surface=one-toggle+tasks t=45596901 id=10
+[mod] [SMRTK] SMRTK_TAINT action=dock_attach before=true used=true t=45596901 id=11
+[SMRTK] SMRTK_TAINT action=dock_attach before=true used=true t=45596901 id=11
+						Lua 0:00:43:437
+[mod] [SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:43:551
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=45596901 id=12
+						Lua 0:00:44:052
+Game loaded on map BlankBig_02 in 5545 ms
+						Lua 0:00:44:359
+[mod] [SMRTK] SMRTK_PANEL_RESTORE open=true tab=Kit t=45596901 id=13
+						Lua 0:00:47:336
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=NaturalistHabitat(2692) status=OK t=45596901 id=14
+[mod] [SMRTK] SMRTK_TAINT action=section_attach before=true used=true t=45596901 id=15
+[SMRTK] SMRTK_TAINT action=section_attach before=true used=true t=45596901 id=15
+						Lua 0:02:21:695
+[mod] [SMRTK] SMRTK_TAB action=tab_Kit page=Kit status=OK t=45596901 id=16
+[mod] [SMRTK] SMRTK_TAINT action=tab_Kit before=true used=true t=45596901 id=17
+[SMRTK] SMRTK_TAINT action=tab_Kit before=true used=true t=45596901 id=17
+						Lua 0:02:23:165
+[mod] [SMRTK] SMRTK_TAB action=tab_Saves page=Saves status=OK t=45596901 id=18
+[mod] [SMRTK] SMRTK_TAINT action=tab_Saves before=true used=true t=45596901 id=19
+[SMRTK] SMRTK_TAINT action=tab_Saves before=true used=true t=45596901 id=19
+						Lua 0:02:23:884
+[mod] [SMRTK] SMRTK_TAB action=tab_Kit page=Kit status=OK t=45596901 id=20
+[mod] [SMRTK] SMRTK_TAINT action=tab_Kit before=true used=true t=45596901 id=21
+[SMRTK] SMRTK_TAINT action=tab_Kit before=true used=true t=45596901 id=21
+						Lua 0:02:26:150
+[mod] [SMRTest] CrewDraft wrapping 15 class(es): CargoTransporter, CargoTransporterNew, SpaceElevator, SpaceElevatorBase, UniversalArkPod, UniversalDragonRocket, UniversalDropPod, UniversalLanderRocket, UniversalRefugeeRocket, UniversalRocket, UniversalRocketBase, UniversalSupplyPod, UniversalSupplyPodBase, UniversalTradeRocket, UniversalZeusRocket
+[SMRTest] CrewDraft wrapping 15 class(es): CargoTransporter, CargoTransporterNew, SpaceElevator, SpaceElevatorBase, UniversalArkPod, UniversalDragonRocket, UniversalDropPod, UniversalLanderRocket, UniversalRefugeeRocket, UniversalRocket, UniversalRocketBase, UniversalSupplyPod, UniversalSupplyPodBase, UniversalTradeRocket, UniversalZeusRocket
+[mod] [SMRTest] logger CrewDraft ON
+[SMRTest] logger CrewDraft ON
+[mod] [SMRTK] SMRTK_ARM action=logger_CrewDraft enabled=true logger=CrewDraft status=OK t=45596901 id=22
+[SMRTK] SMRTK_ARM action=logger_CrewDraft enabled=true logger=CrewDraft status=OK t=45596901 id=22
+[mod] [SMRTK] SMRTK_TAINT action=logger_CrewDraft before=true used=true t=45596901 id=23
+[SMRTK] SMRTK_TAINT action=logger_CrewDraft before=true used=true t=45596901 id=23
+						Lua 0:02:27:917
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=UniversalZeusRocket(1053) status=OK t=45596901 id=24						Lua 0:02:27:918
+
+[mod] [SMRTK] SMRTK_TAINT action=section_attach before=true used=true t=45596901 id=25
+[SMRTK] SMRTK_TAINT action=section_attach before=true used=true t=45596901 id=25
+						Lua 0:02:37:932
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=UniversalZeusRocket(1053) status=OK t=45596901 id=26
+[mod] [SMRTK] SMRTK_TAINT action=section_attach before=true used=true t=45596901 id=27
+[SMRTK] SMRTK_TAINT action=section_attach before=true used=true t=45596901 id=27
+						Lua 0:02:37:954
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=UniversalZeusRocket(1053) status=OK t=45596901 id=28
+[mod] [SMRTK] SMRTK_TAINT action=section_attach before=true used=true t=45596901 id=29
+[SMRTK] SMRTK_TAINT action=section_attach before=true used=true t=45596901 id=29
+						Lua 0:02:45:780
+[mod] [SMRTest] GatherAvailableColonists[new] UniversalZeusRocket(1053) amount=5 label=any_specialization -> Colonist | quick_load=nil transfer_available=nil
+[SMRTest] GatherAvailableColonists[new] UniversalZeusRocket(1053) amount=5 label=any_specialization -> Colonist | quick_load=nil transfer_available=nil
+[mod] [SMRTest]   source=city labels pool=170 (of which 0 via connected cities) | pre-filter dropped=18 | liveness rejected=0 | buckets idle+unemployed=0 busy+unemployed=30 idle+employed=0 busy+employed=122
+[SMRTest]   source=city labels pool=170 (of which 0 via connected cities) | pre-filter dropped=18 | liveness rejected=0 | buckets idle+unemployed=0 busy+unemployed=30 idle+employed=0 busy+employed=122
+[mod] [SMRTest]   dropped by the thread_running_destructors pre-filter — 18 listed of 18
+[SMRTest]   dropped by the thread_running_destructors pre-filter — 18 listed of 18
+[mod] [SMRTest]     Colonist(2000001011) command=VisitService workplace=ScienceInstitute destructors=YES dome=DomeBasic residence=SmartHome_Small same_city=yes unfavored=none
+[SMRTest]     Colonist(2000001011) command=VisitService workplace=ScienceInstitute destructors=YES dome=DomeBasic residence=SmartHome_Small same_city=yes unfavored=none
+[mod] [SMRTest]     Colonist(2000001023) command=Work workplace=Diner destructors=YES dome=DomeMedium residence=SmartApartmentsCCP1 same_city=yes unfavored=none
+[SMRTest]     Colonist(2000001023) command=Work workplace=Diner destructors=YES dome=DomeMedium residence=SmartApartmentsCCP1 same_city=yes unfavored=none
+[mod] [SMRTest]     Colonist(2000001067) command=Work workplace=MegaMall destructors=YES dome=DomeMega residence=SmartApartmentsCCP1 same_city=yes unfavored=none
+[SMRTest]     Colonist(2000001067) command=Work workplace=MegaMall destructors=YES dome=DomeMega residence=SmartApartmentsCCP1 same_city=yes unfavored=none
+[mod] [SMRTest]     Colonist(2000001079) command=WorkCycle workplace=BioroboticsWorkshop destructors=YES dome=DomeMedium residence=SmartApartmentsCCP1 same_city=yes unfavored=none
+[SMRTest]     Colonist(2000001079) command=WorkCycle workplace=BioroboticsWorkshop destructors=YES dome=DomeMedium residence=SmartApartmentsCCP1 same_city=yes unfavored=none
+[mod] [SMRTest]     Colonist(2000001086) command=WorkCycle workplace=BioroboticsWorkshop destructors=YES dome=DomeMedium residence=SmartApartmentsCCP1 same_city=yes unfavored=none
+[SMRTest]     Colonist(2000001086) command=WorkCycle workplace=BioroboticsWorkshop destructors=YES dome=DomeMedium residence=SmartApartmentsCCP1 same_city=yes unfavored=none
+[mod] [SMRTest]     Colonist(2000001335) command=VisitService workplace=Spacebar_Small destructors=YES dome=DomeBasic residence=SmartApartmentsCCP1 same_city=yes unfavored=none
+[SMRTest]     Colonist(2000001335) command=VisitService workplace=Spacebar_Small destructors=YES dome=DomeBasic residence=SmartApartmentsCCP1 same_city=yes unfavored=none
+[mod] [SMRTest]     Colonist(2000001487) command=VisitService workplace=ScienceInstitute destructors=YES dome=DomeMedium residence=SmartApartmentsCCP1 same_city=yes unfavored=none
+[SMRTest]     Colonist(2000001487) command=VisitService workplace=ScienceInstitute destructors=YES dome=DomeMedium residence=SmartApartmentsCCP1 same_city=yes unfavored=none
+[mod] [SMRTest]     Colonist(2000001488) command=VisitService workplace=ScienceInstitute destructors=YES dome=DomeMedium residence=SmartApartmentsCCP1 same_city=yes unfavored=none
+[SMRTest]     Colonist(2000001488) command=VisitService workplace=ScienceInstitute destructors=YES dome=DomeMedium residence=SmartApartmentsCCP1 same_city=yes unfavored=none
+[mod] [SMRTest]     Colonist(2000001495) command=WorkCycle workplace=BioroboticsWorkshop destructors=YES dome=DomeMedium residence=SmartApartmentsCCP1 same_city=yes unfavored=none
+[SMRTest]     Colonist(2000001495) command=WorkCycle workplace=BioroboticsWorkshop destructors=YES dome=DomeMedium residence=SmartApartmentsCCP1 same_city=yes unfavored=none
+[mod] [SMRTest]     Colonist(2000001547) command=Rest workplace=CasinoComplex destructors=YES dome=DomeMega residence=SmartApartmentsCCP1 same_city=yes unfavored=none
+[SMRTest]     Colonist(2000001547) command=Rest workplace=CasinoComplex destructors=YES dome=DomeMega residence=SmartApartmentsCCP1 same_city=yes unfavored=none
+[mod] [SMRTest]     Colonist(2000001558) command=Work workplace=LowGAmusementPark destructors=YES dome=DomeMedium residence=SmartApartmentsCCP1 same_city=yes unfavored=none
+[SMRTest]     Colonist(2000001558) command=Work workplace=LowGAmusementPark destructors=YES dome=DomeMedium residence=SmartApartmentsCCP1 same_city=yes unfavored=none
+[mod] [SMRTest]     Colonist(2000001590) command=WorkCycle workplace=Spacebar destructors=YES dome=DomeMega residence=SmartApartmentsCCP1 same_city=yes unfavored=none
+[SMRTest]     Colonist(2000001590) command=WorkCycle workplace=Spacebar destructors=YES dome=DomeMega residence=SmartApartmentsCCP1 same_city=yes unfavored=none
+[mod] [SMRTest]     Colonist(2000001629) command=VisitService workplace=LowGAmusementPark destructors=YES dome=DomeMedium residence=SmartApartmentsCCP1 same_city=yes unfavored=none
+[SMRTest]     Colonist(2000001629) command=VisitService workplace=LowGAmusementPark destructors=YES dome=DomeMedium residence=SmartApartmentsCCP1 same_city=yes unfavored=none
+[mod] [SMRTest]     Colonist(2000001709) command=WorkCycle workplace=BioroboticsWorkshop destructors=YES dome=DomeMedium residence=SmartApartmentsCCP1 same_city=yes unfavored=none
+[SMRTest]     Colonist(2000001709) command=WorkCycle workplace=BioroboticsWorkshop destructors=YES dome=DomeMedium residence=SmartApartmentsCCP1 same_city=yes unfavored=none
+[mod] [SMRTest]     Colonist(2000001823) command=WorkCycle workplace=ArtWorkshop destructors=YES dome=DomeMega residence=SmartApartmentsCCP1 same_city=yes unfavored=none
+[SMRTest]     Colonist(2000001823) command=WorkCycle workplace=ArtWorkshop destructors=YES dome=DomeMega residence=SmartApartmentsCCP1 same_city=yes unfavored=none
+[mod] [SMRTest]     Colonist(2000001860) command=WorkCycle workplace=ArtWorkshop destructors=YES dome=DomeMega residence=SmartApartmentsCCP1 same_city=yes unfavored=none
+[SMRTest]     Colonist(2000001860) command=WorkCycle workplace=ArtWorkshop destructors=YES dome=DomeMega residence=SmartApartmentsCCP1 same_city=yes unfavored=none
+[mod] [SMRTest]     Colonist(2000001865) command=VisitService workplace=LowGAmusementPark destructors=YES dome=DomeMedium residence=SmartApartmentsCCP1 same_city=yes unfavored=none
+[SMRTest]     Colonist(2000001865) command=VisitService workplace=LowGAmusementPark destructors=YES dome=DomeMedium residence=SmartApartmentsCCP1 same_city=yes unfavored=none
+[mod] [SMRTest]     Colonist(2000002044) command=VisitService workplace=LowGAmusementPark destructors=YES dome=DomeMedium residence=SmartApartmentsCCP1 same_city=yes unfavored=none
+[SMRTest]     Colonist(2000002044) command=VisitService workplace=LowGAmusementPark destructors=YES dome=DomeMedium residence=SmartApartmentsCCP1 same_city=yes unfavored=none
+[mod] [SMRTest]   rejected by IsDead / CanChangeCommand — 0 listed of 0
+[SMRTest]   rejected by IsDead / CanChangeCommand — 0 listed of 0
+[mod] [SMRTest]   bucket 1 idle+unemployed — 0 listed of 0
+[SMRTest]   bucket 1 idle+unemployed — 0 listed of 0
+						Lua 0:02:45:781
+[mod] [SMRTest]   bucket 2 busy+unemployed — 30 listed of 30
+[SMRTest]   bucket 2 busy+unemployed — 30 listed of 30
+[mod] [SMRTest]     Colonist(2000001000) command=VisitService workplace=false destructors=no dome=DomeMega residence=SmartApartmentsCCP1 same_city=yes unfavored=Senior
+[SMRTest]     Colonist(2000001000) command=VisitService workplace=false destructors=no dome=DomeMega residence=SmartApartmentsCCP1 same_city=yes unfavored=Senior
+[mod] [SMRTest]     Colonist(2000001009) command=VisitService workplace=false destructors=no dome=DomeMega residence=SmartApartmentsCCP1 same_city=yes unfavored=Senior
+[SMRTest]     Colonist(2000001009) command=VisitService workplace=false destructors=no dome=DomeMega residence=SmartApartmentsCCP1 same_city=yes unfavored=Senior
+[mod] [SMRTest]     Colonist(2000001010) command=VisitService workplace=false destructors=no dome=DomeMega residence=SmartApartmentsCCP1 same_city=yes unfavored=Senior
+[SMRTest]     Colonist(2000001010) command=VisitService workplace=false destructors=no dome=DomeMega residence=SmartApartmentsCCP1 same_city=yes unfavored=Senior
+[mod] [SMRTest]     Colonist(2000001022) command=VisitService workplace=false destructors=no dome=DomeMedium residence=SmartApartmentsCCP1 same_city=yes unfavored=Senior
+[SMRTest]     Colonist(2000001022) command=VisitService workplace=false destructors=no dome=DomeMedium residence=SmartApartmentsCCP1 same_city=yes unfavored=Senior
+[mod] [SMRTest]     Colonist(2000001024) command=VisitService workplace=false destructors=no dome=DomeMedium residence=SmartApartmentsCCP1 same_city=yes unfavored=Senior
+[SMRTest]     Colonist(2000001024) command=VisitService workplace=false destructors=no dome=DomeMedium residence=SmartApartmentsCCP1 same_city=yes unfavored=Senior
+[mod] [SMRTest]     Colonist(2000001462) command=VisitService workplace=false destructors=no dome=DomeBasic residence=SmartApartmentsCCP1 same_city=yes unfavored=none
+[SMRTest]     Colonist(2000001462) command=VisitService workplace=false destructors=no dome=DomeBasic residence=SmartApartmentsCCP1 same_city=yes unfavored=none
+[mod] [SMRTest]     Colonist(2000001463) command=Roam workplace=false destructors=no dome=DomeMega residence=SmartApartmentsCCP1 same_city=yes unfavored=Senior
+[SMRTest]     Colonist(2000001463) command=Roam workplace=false destructors=no dome=DomeMega residence=SmartApartmentsCCP1 same_city=yes unfavored=Senior
+[mod] [SMRTest]     Colonist(2000001472) command=VisitService workplace=false destructors=no dome=DomeBasic residence=SmartApartmentsCCP1 same_city=yes unfavored=none
+[SMRTest]     Colonist(2000001472) command=VisitService workplace=false destructors=no dome=DomeBasic residence=SmartApartmentsCCP1 same_city=yes unfavored=none
+[mod] [SMRTest]     Colonist(2000001483) command=Rest workplace=false destructors=no dome=DomeBasic residence=SmartApartmentsCCP1 same_city=yes unfavored=Senior
+[SMRTest]     Colonist(2000001483) command=Rest workplace=false destructors=no dome=DomeBasic residence=SmartApartmentsCCP1 same_city=yes unfavored=Senior
+[mod] [SMRTest]     Colonist(2000001489) command=Roam workplace=false destructors=no dome=DomeMedium residence=SmartApartmentsCCP1 same_city=yes unfavored=Senior
+[SMRTest]     Colonist(2000001489) command=Roam workplace=false destructors=no dome=DomeMedium residence=SmartApartmentsCCP1 same_city=yes unfavored=Senior
+[mod] [SMRTest]     Colonist(2000001494) command=Roam workplace=false destructors=no dome=DomeMedium residence=SmartApartmentsCCP1 same_city=yes unfavored=Senior
+[SMRTest]     Colonist(2000001494) command=Roam workplace=false destructors=no dome=DomeMedium residence=SmartApartmentsCCP1 same_city=yes unfavored=Senior
+[mod] [SMRTest]     Colonist(2000001502) command=Roam workplace=false destructors=no dome=NaturalistHabitat residence=NaturalistHabitat same_city=yes unfavored=none
+[SMRTest]     Colonist(2000001502) command=Roam workplace=false destructors=no dome=NaturalistHabitat residence=NaturalistHabitat same_city=yes unfavored=none
+[mod] [SMRTest]     Colonist(2000001707) command=VisitService workplace=false destructors=no dome=DomeMedium residence=SmartApartmentsCCP1 same_city=yes unfavored=Senior
+[SMRTest]     Colonist(2000001707) command=VisitService workplace=false destructors=no dome=DomeMedium residence=SmartApartmentsCCP1 same_city=yes unfavored=Senior
+[mod] [SMRTest]     Colonist(2000001713) command=Roam workplace=false destructors=no dome=DomeMega residence=SmartApartmentsCCP1 same_city=yes unfavored=Senior
+[SMRTest]     Colonist(2000001713) command=Roam workplace=false destructors=no dome=DomeMega residence=SmartApartmentsCCP1 same_city=yes unfavored=Senior
+[mod] [SMRTest]     Colonist(2000001714) command=VisitService workplace=false destructors=no dome=DomeMega residence=SmartApartmentsCCP1 same_city=yes unfavored=Senior
+[SMRTest]     Colonist(2000001714) command=VisitService workplace=false destructors=no dome=DomeMega residence=SmartApartmentsCCP1 same_city=yes unfavored=Senior
+[mod] [SMRTest]     Colonist(2000002081) command=VisitService workplace=false destructors=no dome=DomeBasic residence=SmartApartmentsCCP1 same_city=yes unfavored=none
+[SMRTest]     Colonist(2000002081) command=VisitService workplace=false destructors=no dome=DomeBasic residence=SmartApartmentsCCP1 same_city=yes unfavored=none
+[mod] [SMRTest]     Colonist(2000002097) command=Roam workplace=false destructors=no dome=NaturalistHabitat residence=NaturalistHabitat same_city=yes unfavored=none
+[SMRTest]     Colonist(2000002097) command=Roam workplace=false destructors=no dome=NaturalistHabitat residence=NaturalistHabitat same_city=yes unfavored=none
+[mod] [SMRTest]     Colonist(2000002122) command=Roam workplace=false destructors=no dome=NaturalistHabitat residence=NaturalistHabitat same_city=yes unfavored=none
+[SMRTest]     Colonist(2000002122) command=Roam workplace=false destructors=no dome=NaturalistHabitat residence=NaturalistHabitat same_city=yes unfavored=none
+[mod] [SMRTest]     Colonist(2000002165) command=Roam workplace=false destructors=no dome=NaturalistHabitat residence=NaturalistHabitat same_city=yes unfavored=none
+[SMRTest]     Colonist(2000002165) command=Roam workplace=false destructors=no dome=NaturalistHabitat residence=NaturalistHabitat same_city=yes unfavored=none
+[mod] [SMRTest]     Colonist(2000002200) command=Roam workplace=false destructors=no dome=NaturalistHabitat residence=NaturalistHabitat same_city=yes unfavored=none
+[SMRTest]     Colonist(2000002200) command=Roam workplace=false destructors=no dome=NaturalistHabitat residence=NaturalistHabitat same_city=yes unfavored=none
+[mod] [SMRTest]     Colonist(2000002249) command=VisitService workplace=false destructors=no dome=DomeMedium residence=SmartApartmentsCCP1 same_city=yes unfavored=Child
+[SMRTest]     Colonist(2000002249) command=VisitService workplace=false destructors=no dome=DomeMedium residence=SmartApartmentsCCP1 same_city=yes unfavored=Child
+[mod] [SMRTest]     Colonist(2000002268) command=VisitService workplace=false destructors=no dome=DomeMega residence=SmartApartmentsCCP1 same_city=yes unfavored=Child
+[SMRTest]     Colonist(2000002268) command=VisitService workplace=false destructors=no dome=DomeMega residence=SmartApartmentsCCP1 same_city=yes unfavored=Child
+[mod] [SMRTest]     Colonist(2000002310) command=Roam workplace=false destructors=no dome=DomeMedium residence=SmartApartmentsCCP1 same_city=yes unfavored=Child
+[SMRTest]     Colonist(2000002310) command=Roam workplace=false destructors=no dome=DomeMedium residence=SmartApartmentsCCP1 same_city=yes unfavored=Child
+[mod] [SMRTest]     Colonist(2000002318) command=VisitService workplace=false destructors=no dome=DomeMega residence=SmartApartmentsCCP1 same_city=yes unfavored=Child
+[SMRTest]     Colonist(2000002318) command=VisitService workplace=false destructors=no dome=DomeMega residence=SmartApartmentsCCP1 same_city=yes unfavored=Child
+[mod] [SMRTest]     Colonist(2000002324) command=VisitService workplace=false destructors=no dome=DomeMega residence=SmartApartmentsCCP1 same_city=yes unfavored=Child
+[SMRTest]     Colonist(2000002324) command=VisitService workplace=false destructors=no dome=DomeMega residence=SmartApartmentsCCP1 same_city=yes unfavored=Child
+[mod] [SMRTest]     Colonist(2000002325) command=Rest workplace=false destructors=no dome=DomeMega residence=SmartApartmentsCCP1 same_city=yes unfavored=Child
+[SMRTest]     Colonist(2000002325) command=Rest workplace=false destructors=no dome=DomeMega residence=SmartApartmentsCCP1 same_city=yes unfavored=Child
+[mod] [SMRTest]     Colonist(2000002326) command=VisitService workplace=false destructors=no dome=DomeMedium residence=SmartApartmentsCCP1 same_city=yes unfavored=Child
+[SMRTest]     Colonist(2000002326) command=VisitService workplace=false destructors=no dome=DomeMedium residence=SmartApartmentsCCP1 same_city=yes unfavored=Child
+[mod] [SMRTest]     Colonist(2000002539) command=VisitService workplace=false destructors=no dome=DomeMega residence=SmartApartmentsCCP1 same_city=yes unfavored=Child
+[SMRTest]     Colonist(2000002539) command=VisitService workplace=false destructors=no dome=DomeMega residence=SmartApartmentsCCP1 same_city=yes unfavored=Child
+[mod] [SMRTest]     Colonist(2000002548) command=Rest workplace=false destructors=no dome=DomeMega residence=SmartApartmentsCCP1 same_city=yes unfavored=Child
+[SMRTest]     Colonist(2000002548) command=Rest workplace=false destructors=no dome=DomeMega residence=SmartApartmentsCCP1 same_city=yes unfavored=Child
+[mod] [SMRTest]     Colonist(2000002550) command=Rest workplace=false destructors=no dome=DomeMedium residence=SmartApartmentsCCP1 same_city=yes unfavored=Child
+[SMRTest]     Colonist(2000002550) command=Rest workplace=false destructors=no dome=DomeMedium residence=SmartApartmentsCCP1 same_city=yes unfavored=Child
+						Lua 0:02:45:782
+[mod] [SMRTest]   RETURNED 5 of 5 asked
+[SMRTest]   RETURNED 5 of 5 asked
+[mod] [SMRTest]     taken 1 from bucket busy+unemployed: Colonist(2000001462) command=VisitService workplace=false destructors=no dome=DomeBasic residence=SmartApartmentsCCP1 same_city=yes unfavored=none
+[SMRTest]     taken 1 from bucket busy+unemployed: Colonist(2000001462) command=VisitService workplace=false destructors=no dome=DomeBasic residence=SmartApartmentsCCP1 same_city=yes unfavored=none
+[mod] [SMRTest]     taken 2 from bucket busy+unemployed: Colonist(2000001472) command=VisitService workplace=false destructors=no dome=DomeBasic residence=SmartApartmentsCCP1 same_city=yes unfavored=none
+[SMRTest]     taken 2 from bucket busy+unemployed: Colonist(2000001472) command=VisitService workplace=false destructors=no dome=DomeBasic residence=SmartApartmentsCCP1 same_city=yes unfavored=none
+[mod] [SMRTest]     taken 3 from bucket busy+unemployed: Colonist(2000002081) command=VisitService workplace=false destructors=no dome=DomeBasic residence=SmartApartmentsCCP1 same_city=yes unfavored=none
+[SMRTest]     taken 3 from bucket busy+unemployed: Colonist(2000002081) command=VisitService workplace=false destructors=no dome=DomeBasic residence=SmartApartmentsCCP1 same_city=yes unfavored=none
+[mod] [SMRTest]     taken 4 from bucket busy+unemployed: Colonist(2000001000) command=VisitService workplace=false destructors=no dome=DomeMega residence=SmartApartmentsCCP1 same_city=yes unfavored=Senior
+[SMRTest]     taken 4 from bucket busy+unemployed: Colonist(2000001000) command=VisitService workplace=false destructors=no dome=DomeMega residence=SmartApartmentsCCP1 same_city=yes unfavored=Senior
+[mod] [SMRTest]     taken 5 from bucket busy+unemployed: Colonist(2000001009) command=VisitService workplace=false destructors=no dome=DomeMega residence=SmartApartmentsCCP1 same_city=yes unfavored=Senior
+[SMRTest]     taken 5 from bucket busy+unemployed: Colonist(2000001009) command=VisitService workplace=false destructors=no dome=DomeMega residence=SmartApartmentsCCP1 same_city=yes unfavored=Senior
+						Lua 0:03:04:742
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=NaturalistHabitat(2692) status=OK t=45675757 id=30
+						Lua 0:03:04:743
+[mod] [SMRTK] SMRTK_TAINT action=section_attach before=true used=true t=45675757 id=31
+[SMRTK] SMRTK_TAINT action=section_attach before=true used=true t=45675757 id=31
+						Lua 0:03:06:492
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipColonist object=Colonist(2000001502) status=OK t=45681016 id=32
+[mod] [SMRTK] SMRTK_TAINT action=section_attach before=true used=true t=45681016 id=33
+[SMRTK] SMRTK_TAINT action=section_attach before=true used=true t=45681016 id=33
+						Lua 0:03:07:335
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipColonist object=Colonist(2000002097) status=OK t=45683539 id=34
+[mod] [SMRTK] SMRTK_TAINT action=section_attach before=true used=true t=45683539 id=35
+[SMRTK] SMRTK_TAINT action=section_attach before=true used=true t=45683539 id=35
+						Lua 0:03:07:843
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipColonist object=Colonist(2000002122) status=OK t=45685060 id=36
+[mod] [SMRTK] SMRTK_TAINT action=section_attach before=true used=true t=45685060 id=37
+[SMRTK] SMRTK_TAINT action=section_attach before=true used=true t=45685060 id=37
+						Lua 0:03:08:619
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipColonist object=Colonist(2000002165) status=OK t=45687394 id=38
+[mod] [SMRTK] SMRTK_TAINT action=section_attach before=true used=true t=45687394 id=39
+[SMRTK] SMRTK_TAINT action=section_attach before=true used=true t=45687394 id=39
+						Lua 0:03:09:083
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipColonist object=Colonist(2000002200) status=OK t=45688786 id=40
+[mod] [SMRTK] SMRTK_TAINT action=section_attach before=true used=true t=45688786 id=41
+[SMRTK] SMRTK_TAINT action=section_attach before=true used=true t=45688786 id=41
+						Lua 0:03:11:644
+[mod] [SMRTK] SMRTK_COPY action=copy flushed=true from=0 lines=109 status=OK truncated=false t=45696487 id=42
+[SMRTK] SMRTK_COPY action=copy flushed=true from=0 lines=109 status=OK truncated=false t=45696487 id=42
+[mod] [SMRTK] SMRTK_TAINT action=copy before=true used=true t=45696487 id=43
+[SMRTK] SMRTK_TAINT action=copy before=true used=true t=45696487 id=43
+						Lua 0:04:58:298
+[mod] [SMRTest] logger CrewDraft OFF
+[SMRTest] logger CrewDraft OFF
+[mod] [SMRTK] SMRTK_DISARM action=logger_CrewDraft enabled=false logger=CrewDraft reason=ChangeMap status=OK t=46008202 id=44
+[SMRTK] SMRTK_DISARM action=logger_CrewDraft enabled=false logger=CrewDraft reason=ChangeMap status=OK t=46008202 id=44
+[mod] [SMRTK] SMRTK_TAINT action=logger_CrewDraft before=true used=true t=46008202 id=45
+[SMRTK] SMRTK_TAINT action=logger_CrewDraft before=true used=true t=46008202 id=45
+[mod] [SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=ChangeMap t=46008202 id=46
+[SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=ChangeMap t=46008202 id=46
+						Lua 0:04:58:313
+[mod] [SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=ChangeMap t=46008202 id=47
+[SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=ChangeMap t=46008202 id=47
+						Lua 0:05:00:791
+[mod] [SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:05:00:801
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=1304 id=48

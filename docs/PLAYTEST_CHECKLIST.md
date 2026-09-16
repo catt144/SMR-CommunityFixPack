@@ -148,60 +148,31 @@ Screenshots to `C:\Dev\SMR-ScreenCaptures\`, then `python tools/store_screenshot
 lines and their output go in the entry. ⛔ Whatever it shows, **do not ask the reporter for a save**
 (ruling 2026-09-15).
 
-### 2026-09-16 — 189: C95 built — test the prepared habitat expedition save
-<!-- ck:189 status:open owner:yes -->
+### 2026-09-16 — 189 CLOSED: C95 re-point passed attended; optional transports stay desk-only
+<!-- ck:189 status:closed owner:no -->
 
-⛔⛔ **RUN 2026-09-16, AND IT FAILED — the fix never engaged. 189 is NOT satisfied and
-nothing is owed from you right now; the work is ours.** You cold-booted, armed
-`Logger CrewDraft`, crewed an expedition and launched it. The logger wraps **the same
-function the fix hooks**, and it printed nothing at all — so that function was never
-called. Your rocket is a `UniversalZeusRocket`, and 1.1.0 runs expeditions through
-`CargoTransporterNew`, which the fix does not touch; the same defect sits unguarded there.
-⇒ The repair is sound but pointed at the legacy path. It is **re-pointed, not rewritten**:
-brief [`C95_REPOINT_BUILD.md`](agent/prompts/C95_REPOINT_BUILD.md), evidence
-[sitting report](agent/reports/C95_SITTING_20260916.md). ⛔ **Do not ship
-`HabitatExpeditionDraft` as a repair until a live trace shows it firing.** Your fixture is
-still set up, so the re-run is short. Two legs stayed unwitnessed either way: the **Micro-G**
-habitat (your save has a Naturalist only) and the lander/elevator player-choice leg.
+**MEASURED with you at the keyboard:** clean boot, `HabitatExpeditionDraft: applied`,
+and `CrewDraft` armed before assignment. The live trace fired on
+`UniversalZeusRocket(1053)` through `CargoTransporterNew`: all **5** Naturalist
+Habitat residents were present in the eligible pre-fix busy/unemployed bucket,
+none appeared in the returned crew, and the picker filled **5/5** from ordinary
+dome residents. You pinned the habitat residents and read **5 before → 5 after**;
+the expedition departed. Whole-log scan: **0 error-shaped lines**. Evidence:
+[sitting report](agent/reports/C95_SITTING_20260916.md) ·
+[archived log](archive/logs/c95_repoint_Mars.exe-20260916-12.45.56-6a91a190.log).
 
-**Bug:** the automatic expedition draft takes habitat residents and may fail to
-return them home. The authorized main-pack judgment call is built and passes
-the [desk checks](agent/reports/C95_HABITAT_DRAFT_BUILD.md); game acceptance is open.
+**Your ruling after the pass:** *"we will mark those as desk verified and not play
+tested and we won't be playtesting unless we get a reported issue. We have too many
+other things on deck right now."* Condition: the save has neither an asteroid lander
+nor a space elevator available, and the core automatic-draft repair just passed.
+⇒ The lander/elevator player-choice controls remain **desk-verified, not playtested**;
+they reopen only on a reported issue. Nothing from that pair is owed to you.
 
-**Requirements:** your existing prepared save. Tell the agent its habitat types,
-available expedition/crew, lander and elevator availability, and when to launch.
-No new fixture has been provisioned. Record scarcity, rocket fleet, colony density
-and layout before measuring. Name every setup action; do not reassign employment
-colony-wide for this test, because that can change the draft's transient filter.
-
-**Setup:** cold boot the built pack, verify `HabitatExpeditionDraft: applied`, and
-review the whole log for errors. Check the main-menu enable path too. Arm the
-TestKit's Kit-page **CrewDraft** logger **before** assigning the expedition.
-
-#### Measure moments
-
-- **Draft and fill:** the trace must show habitat candidates present in the
-  eligible pre-fix priority pool, absent from the returned crew, and the requested
-  crew filled from ordinary colonists. Observe departure. A colony with enough
-  eligible ordinary candidates must not stall. Include both habitat types where
-  the save supports them; otherwise retain the missing live leg explicitly.
-- **Player choice:** select a habitat resident for the asteroid lander and verify
-  they still travel. Check the elevator's ordinary passenger selection as well.
-- **Fail safe / restore:** desk checks already cover absent residence, a genuine
-  predicate exception, and forced picker failure with the global restored. Do
-  not inject faults into the live colony; record desk evidence separately.
-- **Removal:** save with the fix, disable the pack in Mod Manager, fully restart
-  and reload; verify vanilla drafting returns and the save behaves normally.
-  Restore the normal mod configuration afterward. A per-fix toggle is not this test.
-- **EF-104 free reading:** deliberately request a specialisation the colony lacks,
-  then read the waiting rocket's panel and correlate `CrewDraft` and thread-error
-  logs. Record whether “Not enough Colonists” appears or the panel stays blank.
-  Do not repair that separate path in this sitting.
-
-**Good to have:** a settled-colony trace explaining the earlier passed-over habitat
-residents, without changing jobs immediately beforehand. No fix is claimed for
-ordinary habitat emigration or residents already away. Release remains separate;
-ck185's C96 hold is unchanged.
+**Declared limits, not hidden passes:** this fixture has no Micro-G habitat; live
+pack-removal/load and the deliberate-shortage EF-104 panel reading were not run.
+Desk evidence covers both habitat classes, lander/elevator non-interference, exact
+global restoration, scarcity and removal of the wrapper. C95 is `tested-attended`
+for its player-visible automatic-draft repair; release remains separate.
 
 ### 2026-09-16 — 188: habitat residents walk out on their own. Defect, or the cost of the building?
 <!-- ck:188 status:open owner:yes -->
