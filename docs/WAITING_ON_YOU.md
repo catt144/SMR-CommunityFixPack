@@ -7,7 +7,7 @@ Everything this project is currently holding for the owner, newest first. Genera
 editing this file does nothing; change the checklist item (or its marker) and re-run
 `python tools/doccheck.py --regen`.
 
-## Decisions (15)
+## Decisions (16)
 
 `marker` = your own recorded word · `_inferred_` = read off STATE, a claim ·
 ⚠️ `_conflict_` = STATE lists it as owed but the checklist header reads settled;
@@ -30,32 +30,22 @@ one marker settles which is right.
 | 173 | 2026-09-13 | marker | [173: FIX_POLICY §2a's version-detector ban is factually wrong in one half](PLAYTEST_CHECKLIST.md#L1038) |
 | 171 | 2026-09-13 | marker | [171: C92 — achievement repair or full technology restoration](PLAYTEST_CHECKLIST.md#L1060) |
 | 169 | 2026-09-13 | marker | [⭐ 169 ➊ **UPLOADED — v10 IS LIVE on both portals.** ➋ **FAQ commit DISCHARGED.** ➌ accepted as shipped.](PLAYTEST_CHECKLIST.md#L1092) |
+| 136 | 2026-09-10 | marker | [136: three player reports are now priority surfaces in the vanilla diff hunt. Two asks; neither needs the keyboard.](PLAYTEST_CHECKLIST.md#L2079) |
 
 ## Owed playtest legs
 
 _STATE records no OWED line._
 
-## Needs a marker to settle (12)
+## Needs a marker to settle (0)
 
 The header's prose and STATE's open-decisions section disagree, so no row above can
 be trusted for these. One marker line each settles it permanently.
 
-- **157** 2026-09-12 — [⏸ 157 — **OFF YOUR OWED LIST 2026-09-12 under the pull-only ruling (165).** Both calls are messaging, not…](PLAYTEST_CHECKLIST.md#L1410)
-- **157** 2026-09-12 — [157 (the original ask): new Steam report, "Prosperity for Mars angry about unemployment with 0 unemployed"…](PLAYTEST_CHECKLIST.md#L1412)
-- **148** 2026-09-11 — [⏳ 148 DEFERRED 09-12 (you said **skip**; the chain is NOT started) — an on/off button for every fix…](PLAYTEST_CHECKLIST.md#L1615)
-- **145** 2026-09-11 — [145: FR-1 cache probe v2 covers all 18 RAYS records; test normal loading first.](PLAYTEST_CHECKLIST.md#L1662)
-- **136** 2026-09-10 — [136: three player reports are now priority surfaces in the vanilla diff hunt. Two asks; neither needs the…](PLAYTEST_CHECKLIST.md#L2073)
-- **125** 2026-09-09 — [ITEM 125 OPEN: the first checks the 1.0.7 tree makes possible were run — one real finding, one bounded…](PLAYTEST_CHECKLIST.md#L2933)
-- **118** 2026-09-08 — [ITEM 118: how 1.0.7 players get served — Steam's branch feature is OFF, so it is one manual route](PLAYTEST_CHECKLIST.md#L2983)
-- **114** 2026-09-08 — [ITEMS 114–117 OPEN: the pack-wide 1.1.0 re-verification — 10 FIX, 35 REMOVE, 35 KEEP (QA'd)](PLAYTEST_CHECKLIST.md#L3026)
-- **112** 2026-09-08 — [ITEMS 112–113 OPEN: the hotfix-1 audit says SHIP WITH CHANGES, and both changes are wording](PLAYTEST_CHECKLIST.md#L3078)
-- **111** 2026-09-08 — [ITEM 111 OPEN: F116 track salvage was repaired, and it left one judgement call](PLAYTEST_CHECKLIST.md#L3237)
-- **—** 2026-08-10 — [⭐⭐ NEW from the `corun-batch-2` SITTING (four calls, all yours)](PLAYTEST_CHECKLIST.md#L5133)
-- **—** 2026-08-05 — [⭐ NEW from the `corun-batch-1` sitting (four calls, all yours)](PLAYTEST_CHECKLIST.md#L5285)
+_None._
 
 ## Coverage
 
-**113 of 152** checklist items carry a `<!-- ck:N status:… owner:… -->` marker; **39** are inferred
+**152 of 152** checklist items carry a `<!-- ck:N status:… owner:… -->` marker; **0** are inferred
 from prose and may be wrong. This number is the one to move: every marker added
 retires a guess.
 

@@ -1350,6 +1350,7 @@ Body archived in [archive/PLAYTEST_ARCHIVE.md](archive/PLAYTEST_ARCHIVE.md) unde
 > separate"** → 133 (5) re-opens as its own decision and stays on this list.
 
 ### ✅ 2026-09-12 — 161 CLARIFIED BY YOU: the 09-08 "we don't chase small positives" rule was **triage for the 1.1.0 emergency**, not standing policy — and it expired with the emergency. There was never a contradiction. **Nothing is owed from you; three documents stop asking.**
+<!-- ck:161 status:ruled owner:no -->
 
 > **Your words (2026-09-12), on why the 09-08 ruling and the 09-09 "Leave ck126 in" never fought
 > each other** — the 09-08 ruling was made
@@ -1408,8 +1409,10 @@ Body archived in [archive/PLAYTEST_ARCHIVE.md](archive/PLAYTEST_ARCHIVE.md) unde
 Body archived in [archive/PLAYTEST_ARCHIVE.md](archive/PLAYTEST_ARCHIVE.md) under the heading "## ck159 -- archived 2026-09-16 (was checklist status:ruled):" followed by this heading.
 
 ### ⏸ 2026-09-12 — 157 — **OFF YOUR OWED LIST 2026-09-12 under the pull-only ruling (165).** Both calls are messaging, not fixing: (a) the reporter reply is a **draft waiting in `docs/FIELD_REPORT_REPLIES.md`, pulled when you want it** · (b) the developer note is **yours to route whenever** — ⚠️ worth knowing it carries more weight than an ordinary reply, because two Paradox developers plan hotfixes from our fix list, but it is still not owed and no agent will raise it again. ⛔ **The triage underneath this item stands and is unaffected.** Original ask kept below.
+<!-- ck:157 status:closed owner:no -->
 
 ### 2026-09-12 — 157 (the original ask): new Steam report, "Prosperity for Mars angry about unemployment with 0 unemployed" — triaged, not ours. **Your pushback checked out: it is an oversight, and the developers' own fix exists in one faction out of five. Three decisions: (a) post the reporter reply, (b) hand it to the developers, (c) carry a judgment-call fix ourselves. Recommendations: (a) yes, (b) yes, (c) not yet — wait for their answer.**
+<!-- ck:157 status:closed owner:no -->
 
 > **What your pushback found (added later the same day):**
 > - **Five factions** carry the identical "dome with 10 % unemployed" dislike (Prosperity, Mars Democratic Party,
@@ -1516,6 +1519,7 @@ Body archived in [archive/PLAYTEST_ARCHIVE.md](archive/PLAYTEST_ARCHIVE.md) unde
 Body archived in [archive/PLAYTEST_ARCHIVE.md](archive/PLAYTEST_ARCHIVE.md) under the heading "## ck150 -- archived 2026-09-16 (was checklist status:closed):" followed by this heading.
 
 ### ✅ 2026-09-11 — 149 RAN: F119 and C86 are both TESTED-ATTENDED (you at the keyboard). **Nothing to decide here; the upload is your separate action (`agent/prompts/perma/RELEASE.md`).** The original steps are kept below.
+<!-- ck:149 status:ruled owner:no -->
 
 > ✅ **What ran (09-11):** the boot check passed — both modules `applied`, no mod errors. Then more than the
 > throwaway route asked for: an A/B on a real reproduction. With the fix switched off for one rocket,
@@ -1613,6 +1617,7 @@ Body archived in [archive/PLAYTEST_ARCHIVE.md](archive/PLAYTEST_ARCHIVE.md) unde
 > Wildfire mystery or a real pre-stuck save.
 
 ### ⏳ 2026-09-11 — 148 DEFERRED 09-12 (you said **skip**; the chain is NOT started) — an on/off button for every fix. **Decisions: (a) how console players reach the buttons, (b) whether this counts as a "major overhaul" for the release gate, (c) accept that the first prompt re-checks how the chain was cut. Recommendations: (a) our own panel, proven on a controller before it is built out, falling back to the game's built-in Mod Options page; (b) no extra sweep — the chain's own final audit and its two sittings are the gate; (c) yes.**
+<!-- ck:148 status:deferred owner:no -->
 
 > ⏳ **Deferred 2026-09-12, not closed.** You said skip. All three calls (a), (b) and (c) stay open exactly as
 > written; nothing was fired and `docs/agent/prompts/fixtoggles/01_SPEC_fable.md` has not been started.
@@ -1660,6 +1665,7 @@ Body archived in [archive/PLAYTEST_ARCHIVE.md](archive/PLAYTEST_ARCHIVE.md) unde
 Body archived in [archive/PLAYTEST_ARCHIVE.md](archive/PLAYTEST_ARCHIVE.md) under the heading "## ck147 -- archived 2026-09-16 (was checklist status:closed):" followed by this heading.
 
 ### 2026-09-11 — 145: FR-1 cache probe v2 covers all 18 RAYS records; test normal loading first.
+<!-- ck:145 status:ruled owner:no -->
 
 > ✅ **P1 RAN 2026-09-11: "That pakd mod is working" (you).** Checked here: the archive you packed (02:43, 100,411 B) holds the
 > code and all 18 shaders byte for byte as the current build; only its `metadata.lua` is the earlier one, from before the store
@@ -2071,6 +2077,7 @@ Body archived in [archive/PLAYTEST_ARCHIVE.md](archive/PLAYTEST_ARCHIVE.md) unde
 Body archived in [archive/PLAYTEST_ARCHIVE.md](archive/PLAYTEST_ARCHIVE.md) under the heading "## ck137 -- archived 2026-09-16 (was checklist status:closed):" followed by this heading.
 
 ### 2026-09-10 — 136: three player reports are now priority surfaces in the vanilla diff hunt. Two asks; neither needs the keyboard.
+<!-- ck:136 status:open owner:yes -->
 
 > **What changed:** the vanillahunt chain README §2b now makes three Steam
 > reports the first rows every reader reads: **FR-1** every new game crashing
@@ -2200,6 +2207,7 @@ Body archived in [archive/PLAYTEST_ARCHIVE.md](archive/PLAYTEST_ARCHIVE.md) unde
 Body archived in [archive/PLAYTEST_ARCHIVE.md](archive/PLAYTEST_ARCHIVE.md) under the heading "## ck134 -- archived 2026-09-16 (was checklist status:closed):" followed by this heading.
 
 ### ✅ 2026-09-09 — HOTFIX 2 IS LIVE AS v6 ON BOTH STORES, AND THE SITE IS PUBLISHED. This is the receipt; nothing is owed from you tonight.
+<!-- ck:- status:closed owner:no -->
 
 > **What is live, from your screenshots and what I could read myself:**
 > * **Paradox Mods** — updated 2026-09-09 23:27, MOD VER. **5**, suggested game
@@ -2297,6 +2305,7 @@ Body archived in [archive/PLAYTEST_ARCHIVE.md](archive/PLAYTEST_ARCHIVE.md); sea
 >    use either way.
 
 ### 🎮 2026-09-09 — THE SITTING RAN. Tier 1 is complete and green; what it still owes is below.
+<!-- ck:- status:closed owner:no -->
 
 > **You were at the keyboard 16:55–18:10. Tier 1 finished, four of twelve Tier 2
 > rows ran, and the two bugs that actually reached players were both observed
@@ -2466,6 +2475,7 @@ Body archived in [archive/PLAYTEST_ARCHIVE.md](archive/PLAYTEST_ARCHIVE.md); sea
 Body archived in [archive/PLAYTEST_ARCHIVE.md](archive/PLAYTEST_ARCHIVE.md) under the heading "## ck- -- archived 2026-09-16 (was checklist status:closed):" followed by this heading.
 
 ### 2026-09-09 — 131: the F117 fix has LANDED. It is the last code in hotfix 2. One small question for you, and one thing the sitting now owes.
+<!-- ck:131 status:closed owner:no -->
 
 > **What landed** (three commits, all pushed): `777249d` the F117 repair,
 > `0136af1` the two riders, `cb6415f` a hook the Test Kit reads. Plus one probe
@@ -2508,6 +2518,7 @@ Body archived in [archive/PLAYTEST_ARCHIVE.md](archive/PLAYTEST_ARCHIVE.md) unde
 > session will add it — otherwise it goes away and only the transcript remains.**
 
 ### ✅ 2026-09-09 — RULED: all three of link 99's calls, plus one new one (130). Every gate on the doc sweep is now satisfied. ✅ **Nothing is owed from you until the sitting.**
+<!-- ck:- status:ruled owner:no -->
 
 > **126 — the F95 residue pass STAYS IN.** Your words: *"Leave ck126 in."*
 > ⚖️ This **supersedes the 09-08 ruling (ck120)** that had the cleanup OFF; the
@@ -2594,6 +2605,7 @@ Body archived in [archive/PLAYTEST_ARCHIVE.md](archive/PLAYTEST_ARCHIVE.md) unde
 > **stub** colonist and dome, which exercises the path with no save at all.
 
 ### ⚖️ 2026-09-09 — LINK 99 IS DONE. VERDICT: **SHIP WITH CHANGES.** Three calls (127–129) — ✅ **ALL THREE RULED**, see the block above; the first is the reason for the verdict, and it is a real bug the pack already ships.
+<!-- ck:- status:closed owner:no -->
 
 > **The audit in one line.** Every code change in this patch re-derived against the shipped 1.1.0 code holds up;
 > the instruments were made to fail on purpose and did; the store text matches its backups to the byte. **The
@@ -2638,6 +2650,7 @@ Body archived in [archive/PLAYTEST_ARCHIVE.md](archive/PLAYTEST_ARCHIVE.md) unde
 > needed?" console read you already have on the list.
 
 ### ✅ 2026-09-09 — RULED AND DONE: you raised the `STATE.md` byte cap to 12 KiB, and item 126 is now IN it. Nothing owed; this is the receipt.
+<!-- ck:- status:ruled owner:no -->
 
 > **Your words:** *"I don't want things missing from state.md that we need to
 > know. increase state.md cap by 10%."* → then, once I measured what 10% actually
@@ -2677,6 +2690,7 @@ Body archived in [archive/PLAYTEST_ARCHIVE.md](archive/PLAYTEST_ARCHIVE.md) unde
 Body archived in [archive/PLAYTEST_ARCHIVE.md](archive/PLAYTEST_ARCHIVE.md) under the heading "## ck126 -- archived 2026-09-16 (was checklist status:ruled):" followed by this heading.
 
 ### ⭐ 2026-09-09 — LINK 07 IS DONE: the Test Kit now tells the truth about this build, and it can CHECK the 36 removals. ✅ **Nothing is owed from you now. One thing to read before you run the suite: the expected census below.**
+<!-- ck:- status:closed owner:no -->
 
 > **What was wrong, in one line.** About 40 of the kit's 100 probes described a pack that no longer exists, so a
 > suite run would have printed a wall of FAILs with **zero regressions in it** — the exact thing that trains a
@@ -2726,6 +2740,7 @@ Body archived in [archive/PLAYTEST_ARCHIVE.md](archive/PLAYTEST_ARCHIVE.md) unde
 > evidence when this sitting prints PASS for them.
 
 ### ⭐ 2026-09-09 — LINK 06 IS DONE: the store card and the site now describe the pack that actually ships. ✅ **Nothing is owed from you — but ONE thing must happen at the sitting, and it is easy to miss.**
+<!-- ck:- status:closed owner:no -->
 
 > **What changed, in one line.** Link 02 deleted 36 of the 80 fixes because game 1.1.0 repairs those bugs itself.
 > That made a lot of live public text false: **11 of the 20 bullets on your store card**, three of its four
@@ -2778,6 +2793,7 @@ Body archived in [archive/PLAYTEST_ARCHIVE.md](archive/PLAYTEST_ARCHIVE.md) unde
 > call, no site publish, and `version` is untouched — all four are yours.
 
 ### ⭐ 2026-09-08 — LINK 03 IS DONE: three repairs. ✅ **THEIR CONTROLS ARE DEFERRED TO ONE SITTING AFTER THE CHAIN, ON YOUR CALL. Nothing is owed from you now.**
+<!-- ck:- status:closed owner:no -->
 
 > ⚖️ **RULED 2026-09-08 (owner): the sitting happens AFTER the chain, not now.** Your words: *"Can the sitting be
 > done after the chain. I want to insure everything is green on this side and then we can check the live side?"*
@@ -2843,6 +2859,7 @@ Body archived in [archive/PLAYTEST_ARCHIVE.md](archive/PLAYTEST_ARCHIVE.md) unde
 >   handles that case deliberately, and colonists are re-homed by themselves once life support is back.*
 
 ### ⭐ 2026-09-08 — LINK 04 IS DONE: two re-copies (F-6, F-7) and the F116 edit you ruled (111 + 119). ✅ **Nothing is owed from you now; three in-play checks JOIN the post-99 sitting above.**
+<!-- ck:- status:closed owner:no -->
 
 > **What was built** (`3f8394b` rocket refuel · `177c7b2` Edit Payload · `fc318c7` track salvage). Nothing here has
 > run in a game. Every change is derived from source, cross-checked against BOTH shipped trees now that the 1.0.7
@@ -2875,6 +2892,7 @@ Body archived in [archive/PLAYTEST_ARCHIVE.md](archive/PLAYTEST_ARCHIVE.md) unde
 > word, and a SHIP from 99 is still not clearance for the upload sitting (`H-04`).
 
 ### ⭐ 2026-09-09 — LINK 04b IS DONE: the three fixes you ruled back in (123) are RE-ARMED on their 1.1.0 bodies, gates kept. ✅ **Nothing is owed from you now; three in-play checks and one 1-minute console read JOIN the post-99 sitting above.**
+<!-- ck:- status:closed owner:no -->
 
 > **What was built** (`799f145` landscaping · `3d4c933` train unloading · `7a401f1` vacuum walks). Nothing here has
 > run in a game. Each module now carries the game's **1.1.0** function body with our one-line correction re-applied,
@@ -2931,6 +2949,7 @@ Body archived in [archive/PLAYTEST_ARCHIVE.md](archive/PLAYTEST_ARCHIVE.md) unde
 >   line accepts it — re-enabled for 1.1.0.* ⛔ This one may not be worded as a confirmed 1.1.0 bug (row 10).
 
 ### 2026-09-09 — ITEM 125 OPEN: the first checks the 1.0.7 tree makes possible were run — one real finding, one bounded reading pass to decide on, before 05 fires
+<!-- ck:125 status:closed owner:no -->
 
 > You asked what else the archived 1.0.7 tree lets us check before link 05. I ran three things nobody could run
 > while the tree was gone. ⛔ Nothing here changes a module; everything is filed, not fixed.
@@ -2981,6 +3000,7 @@ Body archived in [archive/PLAYTEST_ARCHIVE.md](archive/PLAYTEST_ARCHIVE.md) unde
 Body archived in [archive/PLAYTEST_ARCHIVE.md](archive/PLAYTEST_ARCHIVE.md) under the heading "## ck98 -- archived 2026-09-16 (was checklist status:ruled):" followed by this heading.
 
 ### 2026-09-08 — ITEM 118: how 1.0.7 players get served — Steam's branch feature is OFF, so it is one manual route
+<!-- ck:118 status:ruled owner:no -->
 
 > ⚖️ **YOUR PLAN (2026-09-08):** serve 1.0.7 players a frozen build rather than carrying them in the live
 > pack — Steam's own per-branch delivery if it existed, a GitHub Releases download for Paradox, and a line on
@@ -3024,6 +3044,7 @@ Body archived in [archive/PLAYTEST_ARCHIVE.md](archive/PLAYTEST_ARCHIVE.md) unde
 > 1.0.7 player who is deleted-and-updated under has a manual road back, one they must notice and walk.
 
 ### 2026-09-08 — ITEMS 114–117 OPEN: the pack-wide 1.1.0 re-verification — 10 FIX, 35 REMOVE, 35 KEEP (QA'd)
+<!-- ck:- status:closed owner:no -->
 
 > **The verdict, one line.** Every one of the 80 modules was opened against the shipped 1.1.0 body it wraps,
 > replaces or patches (`docs/agent/reports/PACK_1_1_0_REVERIFICATION.md`). **35 modules do nothing useful on
@@ -3076,6 +3097,7 @@ Body archived in [archive/PLAYTEST_ARCHIVE.md](archive/PLAYTEST_ARCHIVE.md) unde
 > owed under decision 99.
 
 ### 2026-09-08 — ITEMS 112–113 OPEN: the hotfix-1 audit says SHIP WITH CHANGES, and both changes are wording
+<!-- ck:- status:closed owner:no -->
 
 > **The verdict, one line.** A fresh session audited every one of the six changes against the shipped 1.1.0
 > source and the boot log (`docs/agent/reports/HOTFIX_1_AUDIT.md`). **The code is clean: nothing to fix, nothing
@@ -3235,6 +3257,7 @@ Body archived in [archive/PLAYTEST_ARCHIVE.md](archive/PLAYTEST_ARCHIVE.md) unde
 > you.**
 
 ### 2026-09-08 — ITEM 111 OPEN: F116 track salvage was repaired, and it left one judgement call
+<!-- ck:111 status:ruled owner:no -->
 
 > **What happened, in three lines.** `Fix_TrackSalvageWipe` full-body-replaces the salvage/split function with
 > a 1.0.7 copy. 1.1.0 added a step our copy does not have: it revalidates each track element's `node_idx`
@@ -3335,6 +3358,7 @@ Body archived in [archive/PLAYTEST_ARCHIVE.md](archive/PLAYTEST_ARCHIVE.md) unde
 > reason the patch notes do not claim 1.1.0 compatibility.
 
 ### 2026-09-08 — ITEMS 98–101: the game shipped **1.1.0 + the first DLC**, and the rig auto-updated. **99, 100 and 101 all CLOSED 09-12 as overtaken; 98's rig half stays open (⛔ Steam = ONE branch at a time).**
+<!-- ck:- status:closed owner:no -->
 
 > *Services & Science* (1.1.0, Steam build 24995074) and the paid DLC *Feeding the Future* both
 > landed 2026-09-08. Full reading: `docs/agent/reports/GAME_1_1_0_IMPACT.md`; facts `EF-075`
@@ -3602,6 +3626,7 @@ Body archived in [archive/PLAYTEST_ARCHIVE.md](archive/PLAYTEST_ARCHIVE.md) unde
      the opt-in pack (item 68), which was the named next effort before today.
 
 ### ✅ 2026-09-01 — ITEMS 89–97 **OFFLOADED to the opt-in repo 2026-09-12 (ck167).** Item **88 STAYS** — it is a fix-pack feature. **Nothing here is owed from you.**
+<!-- ck:- status:closed owner:no -->
 
 > ⭐ **Your ruling:** *"Can we fully offload anything opt-in related to its repo, and just retain
 > anything that's fact based that could be useful — and rehome those facts where they should be?"*
@@ -3635,6 +3660,7 @@ Body archived in [archive/PLAYTEST_ARCHIVE.md](archive/PLAYTEST_ARCHIVE.md) unde
 Body archived in [archive/PLAYTEST_ARCHIVE.md](archive/PLAYTEST_ARCHIVE.md) under the heading "## ck87 -- archived 2026-09-16 (was checklist status:ruled):" followed by this heading.
 
 ### ✅ 2026-08-31 — ITEMS 83–86: **84 and 85 OFFLOADED to the opt-in repo 2026-09-12 (ck167). 83 and 86 STAY — they bind the fix pack, not that mod.**
+<!-- ck:- status:ruled owner:no -->
 
 > Raised by the opt-in mod's readiness pass (its repo, `docs/agent/reports/READINESS_REVIEW_0831.md`).
 > **84** (three unpaired wrap sites in its `Code/`) and **85** (its preview art) are that mod's launch
@@ -3671,6 +3697,7 @@ Body archived in [archive/PLAYTEST_ARCHIVE.md](archive/PLAYTEST_ARCHIVE.md) unde
 Body archived in [archive/PLAYTEST_ARCHIVE.md](archive/PLAYTEST_ARCHIVE.md) under the heading "## ck82 -- archived 2026-09-16 (was checklist status:closed):" followed by this heading.
 
 ### ✅ 2026-08-29 — ITEM 81 DONE, you ran it 18:44Z and the site is fully deployed. ITEM 80 WITHDRAWN IN FULL, both halves. Nothing is owed on the site or either store.
+<!-- ck:- status:closed owner:no -->
 
 81. ✅ **DONE — deployed `fcb2aa9`, status `success`, 2026-08-29T18:44:14Z.**
     Verified on three controls: the deployments API, the live index page (now
@@ -3711,6 +3738,7 @@ Body archived in [archive/PLAYTEST_ARCHIVE.md](archive/PLAYTEST_ARCHIVE.md) unde
     ⇒ **item 79 is DONE** (see below), and nothing is owed on either store.
 
 ### ✅ 2026-08-24 — ITEM 79 IS DONE. You ran it on 08-24 and again on 08-28; verified 2026-08-29 against the deployments API. The original text is kept below as the record.
+<!-- ck:79 status:closed owner:no -->
 
 79. ✅ **DONE — deployed `7f4bb78`, status `success`, 2026-08-28T22:25:18Z, carrying
     81 fix-list entries.** The gap this item was written against is closed. ⚠️ One
@@ -3743,6 +3771,7 @@ Body archived in [archive/PLAYTEST_ARCHIVE.md](archive/PLAYTEST_ARCHIVE.md) unde
     </details>
 
 ### ⛔ 2026-08-24 — ITEM 78 IS WITHDRAWN. I asked you to decide something you had already done, on a tool reading that was wrong. Both reporters are answered. Nothing is owed.
+<!-- ck:78 status:closed owner:no -->
 
 78. ⛔ **WITHDRAWN — the finding was false and the fault was mine.** I reported
     that issue #1 was closed with **zero comments** and that Keelai had been left
@@ -3826,6 +3855,7 @@ Body archived in [archive/PLAYTEST_ARCHIVE.md](archive/PLAYTEST_ARCHIVE.md) unde
 Body archived in [archive/PLAYTEST_ARCHIVE.md](archive/PLAYTEST_ARCHIVE.md); search `ck-` and this heading.
 
 ### ⭐⭐ 2026-08-20 — THE AUDIT IS DONE. VERDICT: SHIP. The repo's active work ends here; the upload sitting is yours whenever you want it.
+<!-- ck:- status:closed owner:no -->
 
 66. ⭐⭐ **SHIP.** Both fixes go in 1.0.0; the tag is moved onto this ruling's
     commit and now stands on **your attended sitting** (plus your one-time
@@ -3957,6 +3987,7 @@ Body archived in [archive/PLAYTEST_ARCHIVE.md](archive/PLAYTEST_ARCHIVE.md); sea
     scoped it further — that's its own repo's job.
 
 ### ✅✅ 2026-08-20 — YOUR SITTING IS DONE AND BOTH FIXES WORK. Nothing here is owed from you; this is the receipt.
+<!-- ck:- status:closed owner:no -->
 
 63. ⭐⭐ **You saw both fixes working, in two languages.** Every reading passed:
 
@@ -4024,6 +4055,7 @@ Body archived in [archive/PLAYTEST_ARCHIVE.md](archive/PLAYTEST_ARCHIVE.md); sea
     yours whenever you want it.
 
 ### ⛔⛔ 2026-08-20 — the sitting's prep found a real defect in `C50` (RULED: fix it). Kept as the record of the call.
+<!-- ck:- status:closed owner:no -->
 
 61. ⛔⛔ **The thing I found, and it needs your word before the sitting.** `C50`
     was recorded — twice now, and by me — as touching **pre-game screens only**.
@@ -4161,6 +4193,7 @@ Body archived in [archive/PLAYTEST_ARCHIVE.md](archive/PLAYTEST_ARCHIVE.md); sea
     not.
 
 ### ⚠️ 2026-08-20 — THE PAGES AND THE RELEASE SHEET ARE CAUGHT UP (link 3 done). One small thing wants your word, and the next link is the one that needs your hands.
+<!-- ck:- status:closed owner:no -->
 
 60. ⭐ **What moved, in one breath.** The site's fix list now has entries for both
     new fixes; the md5 you were told to checksum your download against is gone and
@@ -4382,6 +4415,7 @@ Body archived in [archive/PLAYTEST_ARCHIVE.md](archive/PLAYTEST_ARCHIVE.md); sea
     "only compatible" filter would otherwise never see the pack.
 
 ### ✅ 2026-08-19 — THE RELEASE CHECK IS DONE. You ran both acts; the gate scored **10 of 10**. Nothing below is owed from you — item 52 is kept as the record of what was run.
+<!-- ck:52 status:closed owner:no -->
 
 > ⭐⭐ **DONE 2026-08-19, attended, both acts.** Both core fixes proven (fix ②
 > needed a real `Reloading done in 1358 ms`), archive rebuilt (**80 files, 80
@@ -4627,6 +4661,7 @@ Body archived in [archive/PLAYTEST_ARCHIVE.md](archive/PLAYTEST_ARCHIVE.md); sea
 Body archived in [archive/PLAYTEST_ARCHIVE.md](archive/PLAYTEST_ARCHIVE.md); search `ck-` and this heading.
 
 ### ✅ 2026-08-15 — the 54 MB leftover is DELETED (was: one word from you)
+<!-- ck:- status:closed owner:no -->
 
 32. ✅ **RULED + DONE 2026-08-15: DELETED.** Your word: *"You can delete that
     save."* Removed and verified absent; the save directory now holds **77
@@ -4681,6 +4716,7 @@ Body archived in [archive/PLAYTEST_ARCHIVE.md](archive/PLAYTEST_ARCHIVE.md); sea
 Body archived in [archive/PLAYTEST_ARCHIVE.md](archive/PLAYTEST_ARCHIVE.md); search `ck-` and this heading.
 
 ### ⭐⭐ NEW 2026-08-12 — THE SAVE-RESCUE ARTIFACT: three calls, and the derivation is done
+<!-- ck:- status:ruled owner:no -->
 
 The D13 chain's first prompt has finished the hard agent-side part — the
 authoritative exposed-set derivation over BOTH shipped mods, from source, no
@@ -4837,6 +4873,7 @@ deleted when the chain closes).
 Body archived in [archive/PLAYTEST_ARCHIVE.md](archive/PLAYTEST_ARCHIVE.md); search `ck-` and this heading.
 
 ### ✅✅ 2026-08-13 — public documentation, part 2: ALL FOUR DECIDED, same day
+<!-- ck:- status:ruled owner:no -->
 
 The `public-docs` chain's design prompt is done and **you cleared every item it
 routed, in one sitting.** Full reasoning: `agent/reports/PUBLIC_DOCS_DESIGN.md`.
@@ -5131,6 +5168,7 @@ Body archived in [archive/PLAYTEST_ARCHIVE.md](archive/PLAYTEST_ARCHIVE.md); sea
 Body archived in [archive/PLAYTEST_ARCHIVE.md](archive/PLAYTEST_ARCHIVE.md); search `ck-` and this heading.
 
 ### ⭐⭐ NEW 2026-08-10 — from the `corun-batch-2` SITTING (four calls, all yours)
+<!-- ck:- status:ruled owner:no -->
 
 **Cost, stated honestly: the brief promised 33–36 attended minutes and it took
 about 75.** All seven legs ran and nothing was cut. The overrun is ours and it
@@ -5283,6 +5321,7 @@ during the bombardment window (a rocket departure hitting an invalid station
 position) — filed as `C45`, one occurrence, nothing owed from you.
 
 ### ⭐ NEW 2026-08-05 — from the `corun-batch-1` sitting (four calls, all yours)
+<!-- ck:- status:ruled owner:no -->
 
 **Cost: the brief promised ~24 attended minutes and the sitting ran about two
 hours — but you ruled that this one is not scored against the estimate**, since
