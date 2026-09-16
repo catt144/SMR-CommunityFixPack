@@ -120,6 +120,19 @@ lines and their output go in the entry. ⛔ Whatever it shows, **do not ask the 
 ### 2026-09-16 — 189: C95 built — test the prepared habitat expedition save
 <!-- ck:189 status:open owner:yes -->
 
+⛔⛔ **RUN 2026-09-16, AND IT FAILED — the fix never engaged. 189 is NOT satisfied and
+nothing is owed from you right now; the work is ours.** You cold-booted, armed
+`Logger CrewDraft`, crewed an expedition and launched it. The logger wraps **the same
+function the fix hooks**, and it printed nothing at all — so that function was never
+called. Your rocket is a `UniversalZeusRocket`, and 1.1.0 runs expeditions through
+`CargoTransporterNew`, which the fix does not touch; the same defect sits unguarded there.
+⇒ The repair is sound but pointed at the legacy path. It is **re-pointed, not rewritten**:
+brief [`C95_REPOINT_BUILD.md`](agent/prompts/C95_REPOINT_BUILD.md), evidence
+[sitting report](agent/reports/C95_SITTING_20260916.md). ⛔ **Do not ship
+`HabitatExpeditionDraft` as a repair until a live trace shows it firing.** Your fixture is
+still set up, so the re-run is short. Two legs stayed unwitnessed either way: the **Micro-G**
+habitat (your save has a Naturalist only) and the lander/elevator player-choice leg.
+
 **Bug:** the automatic expedition draft takes habitat residents and may fail to
 return them home. The authorized main-pack judgment call is built and passes
 the [desk checks](agent/reports/C95_HABITAT_DRAFT_BUILD.md); game acceptance is open.
