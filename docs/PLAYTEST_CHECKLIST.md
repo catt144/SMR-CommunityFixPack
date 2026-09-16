@@ -28,6 +28,11 @@ Item 177 records the still-open question of mechanically enforcing checklist mar
 
 ## Decisions waiting on you
 
+### 2026-09-16 — Wildfire investigation authorised during prompt teardown
+<!-- ck:- status:closed owner:no -->
+
+Owner ruling archived in [Wildfire investigation override](archive/PLAYTEST_ARCHIVE.md#wildfire-investigation-override-2026-09-16).
+
 ### 2026-09-15 — Complete STATE admission door installed
 <!-- ck:- status:closed owner:no -->
 

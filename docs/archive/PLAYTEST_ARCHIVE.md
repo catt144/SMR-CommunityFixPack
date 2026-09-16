@@ -8037,3 +8037,16 @@ The owner also requested correcting doccheck's stale "mandatory read"
 diagnostic: STATE is pull-only. The corresponding docs-map description is
 corrected with it. No owner action is owed. The operative door is in the
 prompt; execution evidence is in `docs/agent/reports/STATE_DOOR_APPLICATION.md`.
+
+## Wildfire investigation override 2026-09-16
+
+While the prompts-folder freeze was being torn down, the owner invoked
+`WILDFIRE_CURE_RESEARCH.md`. Asked whether that lifted the freeze for this
+investigation, the owner replied:
+
+> Yes its being tore down now, if you run into any friction in the tree in the mean time, you have a direct owner over ride
+
+This authorises the Wildfire investigation to proceed during the teardown,
+including resolving tree-policy friction under this direct instruction. The
+brief's cause-and-fix scope and evidence requirements remain the work to do.
+No further owner action is owed for this authorisation.
