@@ -149,3 +149,5 @@ the Seeker loads and the rocket launches · the cargo panel shows the Commander 
 (this is the half the desk found) · a colony holding both keeps taking the Commander · an
 anomaly wanting a Seeker still refuses a Commander · removal leg: disable the pack, restart,
 reload, vanilla refusal returns and the save is intact.
+
+Executed model for the build and close-out session: **Claude Opus 5 (1M context)**. No delegated agents were used.

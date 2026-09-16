@@ -51,10 +51,29 @@ Each pass pays the current price, so that is exactly 20 points; change the count
 (`Lua/TechTree.lua:868-874`) — grant first, or a healthy node reads as a defect. Derivation and
 the TestKit ask that should replace this line are in §2b's third TestKit ask.
 
+**Companion check — is anything "special" already revealed?** `Breakthroughs`, `Mysteries` and
+`Storybits` are one section; everything else is Main (`TechGroupToSection`, `Lua/TechTree.lua:9-15`),
+so researching the whole Main tree cannot reveal a mystery tech. This enumerates the exceptions:
+
+```
+*r for id,t in pairs(Techs) do if TechGroupToSection(t.group) ~= "Main" and GetTechState(id, UIPlayer) ~= "hidden" then print(id, t.group, GetTechState(id, UIPlayer)) end end
+```
+
+⭐ A lone `Breakthroughs Breakthroughs locked` row is the **inert group placeholder**
+(`CanBeResearched = false`, `Data/Tech.lua:516-525`), not a reveal. Anything else is.
+
 ### LIVE 2026-09-16 — one ESA/Wildfire colony carries BOTH open legs
 
 The owner is provisioning a new colony (Mission Setup: sponsor **Europe**, mystery **Wildfire**,
-290% challenge, rivals x3) and **both outstanding investigations run on it**:
+290% challenge, rivals x3) and **both outstanding investigations run on it**.
+⭐ **Fixture state VERIFIED 2026-09-16 before handoff:** the Main tree is researched out, tech
+points are **0**, and the check above printed only the inert placeholder — so the SPECIAL section
+is pristine and the mystery baseline is clean. ⛔ Take the mystery leg's first screenshots **at 0
+points**: a broke player is a realistic player, and the balance cannot change what the tree draws
+(`CanResearchSim` drives only click behaviour and rollover text, `XDef/XTechNode.generated.lua:297,343,358`).
+⚠️ The tree does **not** auto-centre on open — that code returns early
+(`XDef/XTechTree.generated.lua:862-873`) — so a saved scroll position is part of what the
+"visible without panning" reading measures.
 
 - **The Seeker — [C96](../../bugs/C96.md).** Repair BUILT and desk-verified 2026-09-16, ⛔ **never
   run in a game**. Fixture requirements, the guaranteed route to a Commander-requiring anomaly, and
