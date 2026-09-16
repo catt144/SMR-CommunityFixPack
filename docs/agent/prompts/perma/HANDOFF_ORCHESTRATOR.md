@@ -307,10 +307,6 @@ purpose; a fourth item citing it is an older copy of this file.
   (`RocketForeignAid.lua:75-85`) sets `launch_after_unload = true`, so departure is gated on the unload
   finishing and unplaceable cargo strands the rocket; their warnings showed **Low Storage**.
   ⇒ **If they reply, file it as a lead.**
-- **Hardening rows 1 + 2 — DEPRIORITISED by ck53, not closed.** A non-table `SMRFixPack_Disabled` either
-  passes the `or {}` adoption (`00_Core.lua:13`) so every id reads nil and **the modder's veto is silently
-  ignored**, or throws and **kills the whole pack, log-only**. Row 2 is the same shape for
-  `SMRFixPack_Optional` (`:17`, read at `:57`). ⚠️ A plain `type(x) == "table"` guard is **not** enough alone.
 - **C89 reopens only on a countering field report** — its B2 panel leg was not run, by owner ruling.
 
 ---

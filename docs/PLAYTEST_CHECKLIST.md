@@ -4339,7 +4339,8 @@ Body archived in [archive/PLAYTEST_ARCHIVE.md](archive/PLAYTEST_ARCHIVE.md); sea
 
 Body archived in [archive/PLAYTEST_ARCHIVE.md](archive/PLAYTEST_ARCHIVE.md); search `ck-` and this heading.
 
-### ⚖️ 2026-09-09 — 133: six decisions from the self-check promise audit. **RULED IN PART 2026-09-12 — "do the reword". Four of the six fall with it; (2) and (4) are still yours, and they are one doc line each.**
+### ✅ 2026-09-09 — 133: six decisions from the self-check promise audit. **RULED IN PART 2026-09-12 — "do the reword". Four of the six fall with it; (2) and (4) were RULED the same day (ck166 a + b) and landed in `FIX_POLICY` §2a (i) + (ii). CLOSED 2026-09-16 — nothing is owed from you.**
+<!-- ck:133 status:ruled owner:no -->
 
 > ⚖️ **Your ruling, 2026-09-12: "do the reword."** It reverses your 09-09 ruling on item
 > **112** — that item carries the reversal, the three candidate sentences and the one that
@@ -6911,7 +6912,20 @@ Body archived in [archive/PLAYTEST_ARCHIVE.md](archive/PLAYTEST_ARCHIVE.md); sea
 
 Body archived in [archive/PLAYTEST_ARCHIVE.md](archive/PLAYTEST_ARCHIVE.md); search `ck-` and this heading.
 
-### ⭐⭐ 2026-08-19 — THE VERDICT REVIEW IS DONE: **UPHELD**. **53 RULED 09-12: pare the modder surface down, and the hardening queue shrinks with it — six rows go, one survives and needs your word.**
+### ⭐⭐ 2026-08-19 — THE VERDICT REVIEW IS DONE: **UPHELD**. **53 RULED 09-12: pare the modder surface down, and the hardening queue shrinks with it. ✅ CLOSED 2026-09-16: row 3 was built 09-12 (ck168, shipped v10) and rows 1 + 2 were built 09-16 on your word. Nothing is owed from you.**
+<!-- ck:53 status:closed owner:no -->
+
+> ✅ **Your word, 2026-09-16, on rows 1 + 2:** *"If you can easily enact C without needing any
+> play testing i am fine with that"* — option C was "build them", against leaving them on the watch
+> list or marking them won't-fix. Built as a desk-only change in `Code/00_Core.lua`, **not
+> playtested, by that condition**: a non-table `SMRFixPack_Disabled`, `SMRFixPack_Optional` or
+> `SMRFixPack` is replaced with an empty table and named in the log; `SMRFixPack`'s four
+> sub-tables are refilled when missing or mistyped; every veto and override read goes through a
+> `pcall`, so a throwing `__index` no longer takes a module down. ⚖️ **One departure from the
+> audit's closing form:** it named `rawget`; the `pcall` closes the same throwing case while
+> keeping a metatable default working, which `rawget` would have silently dropped. Control:
+> `python tools/desk_ck53_hostile_globals.py` — 13/13 on the new core, and on the pre-fix core all
+> 8 hostile cases FAIL while the 5 controls PASS. No public row: nothing a player sees changes.
 
 54. ⭐⭐ **I tried to break the audit's upload verdict and could not.** A second,
     independent session ruled on it as your design required — not by trusting
@@ -6968,7 +6982,8 @@ Body archived in [archive/PLAYTEST_ARCHIVE.md](archive/PLAYTEST_ARCHIVE.md); sea
     ⚖️ **The queue, row by row.** Canonical list: `agent/reports/99_TERMINAL_AUDIT.md` §6; line
     numbers below re-read against today's `Code/`, because hotfix 2 moved them.
 
-    * **Rows 1 and 2 — DEPRIORITISED BY THIS RULING. Not fixed, not closed.** Their entire
+    * ✅ **Rows 1 and 2 — BUILT 2026-09-16 on your word (see the top of this item).** Kept as
+      written on 09-12 below. **Rows 1 and 2 — DEPRIORITISED BY THIS RULING. Not fixed, not closed.** Their entire
       exposure is a third party writing a hostile value into our globals, which is exactly the
       surface the ruling shrinks. ⚠️ **Written down so a future session can find it rather than
       re-derive it:** `SMRFixPack_Disabled = "yes"` passes the `or {}` adoption at
@@ -6980,7 +6995,8 @@ Body archived in [archive/PLAYTEST_ARCHIVE.md](archive/PLAYTEST_ARCHIVE.md); sea
       never type-normalised. The closing forms are derived in the audit's §6 and still apply if
       the row is ever taken — including its finding that a plain `type(x) == "table"` guard is
       **not** enough on its own.
-    * ⛔ **Row 3 — STILL OPEN, and INDEPENDENT of this ruling. It needs its own word from you.**
+    * ✅ **Row 3 — BUILT 2026-09-12 (ck168, `5665ee2`), shipped in v10:** a per-colonist `pcall`
+      in the daily sweep. Kept as written before that: ⛔ **Row 3 — STILL OPEN, and INDEPENDENT of this ruling. It needs its own word from you.**
       `Code/Fix_StaleReservations.lua:120-159` walks every Residence's reservation list on
       `OnMsg.NewDay` with no per-item `pcall`. **Its trigger is save corruption, not another
       mod**, so paring the modder surface does nothing for it: a throw mid-sweep abandons the rest

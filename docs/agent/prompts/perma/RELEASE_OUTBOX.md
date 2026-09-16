@@ -25,6 +25,11 @@ F120's row, added 2026-09-16 by the audit, was **WITHDRAWN** the same day on the
 owner's ruling: no platform the pack serves can reach its repaired state; module
 held in `tools/held/`, checklist 187. That withdrawal remains in force.
 
+Also built, no public row or count change: `Code/00_Core.lua` hardening rows 1 + 2 (checklist 53,
+2026-09-16) — non-table pre-load globals are replaced and logged, veto reads are `pcall`'d. Desk
+control `tools/desk_ck53_hostile_globals.py`; not playtested, by the owner's condition. The shipped
+Code changed, so the next upload carries it; do not look for a fix-list row.
+
 ## Released — history, newest first (cleared here by `release_prompt.md`)
 
 ### Released in v11 (2026-09-16) — C93, C95, C96 landed

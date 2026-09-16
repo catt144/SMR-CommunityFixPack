@@ -39,7 +39,7 @@ def main():
          '\t\tlocal ok, err = true, nil -- scratch: callback removed',
          'Sinkhole intact: exact ordered writes and status'),
         ('veto removed', 'Code/00_Core.lua',
-         '\t\tif type(disabled) == "table" and disabled[id] then return end',
+         '\t\tif read_flag(rawget(_G, "SMRFixPack_Disabled"), id) then return end',
          '\t\t-- scratch: veto removed', 'Sinkhole veto stops the pass'),
         ('heal removed', 'Code/00_Core.lua',
          '\tfunction ctx.heal()\n',

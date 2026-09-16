@@ -17,21 +17,38 @@
 -- target is declared in the Fix_*.lua module that owns it.
 -- SRC: none registry only -- 00_Core patches no shipped body; it registers, gates and reports
 
-SMRFixPack_Disabled = rawget(_G, "SMRFixPack_Disabled") or {}
+-- Hardening rows 1 + 2 (checklist 53, built 2026-09-16): these three globals are
+-- adopted from whatever another mod left in _G, so a value that is not a table is
+-- replaced and named in the log. Before, `SMRFixPack_Disabled = true` threw on the
+-- first Register and took the whole pack down, and `= "yes"` silently vetoed nothing.
+local rejected_globals = {}
+local function adopt_table(name)
+	local v = rawget(_G, name)
+	if v ~= nil and type(v) ~= "table" then
+		rejected_globals[#rejected_globals + 1] = name .. " (" .. type(v) .. ")"
+		v = nil
+	end
+	return v
+end
+
+SMRFixPack_Disabled = adopt_table("SMRFixPack_Disabled") or {}
 
 -- Pre-load override surface for the optional modules (kept for other mods and
 -- power users; regular players use Options → Mod Options — see OptionEnabled).
-SMRFixPack_Optional = rawget(_G, "SMRFixPack_Optional") or {}
+SMRFixPack_Optional = adopt_table("SMRFixPack_Optional") or {}
 
-SMRFixPack = rawget(_G, "SMRFixPack") or {
+SMRFixPack = adopt_table("SMRFixPack") or {
 	fixes = {},        -- id -> { title, status, detail, installed, update_suspect }
 	order = {},        -- registration order, for ListFixes()
 	defs = {},         -- id -> the Register def (for Mod Options reconciliation)
 	data_edited = {},  -- id -> true once a DataPatch pass edited shipped data in
 	                   -- THIS PROCESS; see DataPatch's ever_changed seed
 }
-SMRFixPack.defs = SMRFixPack.defs or {}
-SMRFixPack.data_edited = SMRFixPack.data_edited or {}
+-- Refilled rather than trusted: an adopted table may be a shim or a fork's copy
+-- that lacks, or mistypes, any of them.
+for _, k in ipairs({ "fixes", "order", "defs", "data_edited" }) do
+	if type(SMRFixPack[k]) ~= "table" then SMRFixPack[k] = {} end
+end
 
 -- The one true logger — Phase 4 (audit C2) hoisted the copy previously cloned
 -- in 11 fix files; migrated call sites alias it (`local log = SMRFixPack.Log`).
@@ -44,6 +61,21 @@ function SMRFixPack.Log(fmt, ...)
 	if rawget(_G, "ModLog") then ModLog((msg:gsub("%%", "%%%%"))) else print(msg) end
 end
 local log = SMRFixPack.Log
+for _, what in ipairs(rejected_globals) do
+	log("ignored %s: it must be a table keyed by fix id, so an empty one is used", what)
+end
+
+-- Reads one key from a veto/override table another mod supplied. A non-table
+-- reads nil, and so does a table whose __index throws — the pcall keeps a
+-- metatable default working, which a plain rawget would silently drop.
+-- Returns value, err (err only when the read threw).
+local function index_key(t, key) return t[key] end
+local function read_flag(t, key)
+	if type(t) ~= "table" then return nil end
+	local ok, v = pcall(index_key, t, key)
+	if ok then return v end
+	return nil, v
+end
 
 -- Is a fix currently active? Optional modules' wrappers consult this at CALL
 -- time, so a Mod Options toggle takes effect live in both directions — the
@@ -61,7 +93,7 @@ end
 --     (Mod.lua:2128-2131; values rawset directly onto the object, :679-683,
 --     so plain indexing is the intended read).
 function SMRFixPack.OptionEnabled(id)
-	if SMRFixPack_Optional[id] then return true end
+	if read_flag(rawget(_G, "SMRFixPack_Optional"), id) then return true end
 	local opts = CurrentModOptions
 	return type(opts) == "table" and opts[id] and true or false
 end
@@ -238,8 +270,7 @@ function SMRFixPack.WhenActive(id, fn)
 	return function(...)
 		local f = SMRFixPack.fixes[id]
 		if not (f and f.status == "active") then return end
-		local disabled = rawget(_G, "SMRFixPack_Disabled")
-		if type(disabled) == "table" and disabled[id] then return end
+		if read_flag(rawget(_G, "SMRFixPack_Disabled"), id) then return end
 		return fn(...)
 	end
 end
@@ -372,8 +403,7 @@ function SMRFixPack.DataPatch(id, opts)
 		-- ClassesBuilt handler has fired in this Lua load".
 		if not ctx.classes_built then return end
 		if ctx.patched then return end
-		local disabled = rawget(_G, "SMRFixPack_Disabled")
-		if type(disabled) == "table" and disabled[id] then return end
+		if read_flag(rawget(_G, "SMRFixPack_Disabled"), id) then return end
 		-- The passes now run from a message handler, and Msg calls handlers
 		-- through `procall` (cthreads.lua:20) — a throw there would be swallowed
 		-- and the fix would keep reporting `active` while having done nothing.
@@ -516,7 +546,11 @@ function SMRFixPack.Register(id, def)
 		SMRFixPack.order[#SMRFixPack.order + 1] = id
 	end
 
-	if SMRFixPack_Disabled[id] then
+	local vetoed, veto_err = read_flag(rawget(_G, "SMRFixPack_Disabled"), id)
+	if veto_err then
+		log("%s: SMRFixPack_Disabled could not be read (%s), so it does not veto this fix", id, tostring(veto_err))
+	end
+	if vetoed then
 		entry.status = "disabled"
 		log("%s: disabled by user/mod setting", id)
 		return

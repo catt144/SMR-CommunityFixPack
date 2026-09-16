@@ -320,6 +320,11 @@ def main():
         end
     ''')
     core = db.read(Path(db.REPO) / "Code/00_Core.lua").splitlines()
+    # WhenActive reads the veto through 00_Core's local read_flag (ck53 rows 1+2,
+    # 2026-09-16); load index_key..read_flag verbatim and export read_flag.
+    lo = next(i for i, l in enumerate(core) if l.startswith("local function index_key("))
+    (_, hi), = db.find_bodies(core, r"^local function read_flag\(")
+    db.load_at(rt, '\n'.join(core[lo:hi+1]) + "\n_G.read_flag = read_flag", "=Code/00_Core.lua", lo+1)
     for name in ("Require", "WhenActive"):
         hits = db.find_bodies(core, rf"^function SMRFixPack.{name}\(")
         assert len(hits) == 1

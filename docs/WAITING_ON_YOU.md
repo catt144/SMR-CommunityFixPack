@@ -7,7 +7,7 @@ Everything this project is currently holding for the owner, newest first. Genera
 editing this file does nothing; change the checklist item (or its marker) and re-run
 `python tools/doccheck.py --regen`.
 
-## Decisions (18)
+## Decisions (16)
 
 `marker` = your own recorded word · `_inferred_` = read off STATE, a claim ·
 ⚠️ `_conflict_` = STATE lists it as owed but the checklist header reads settled;
@@ -31,8 +31,6 @@ one marker settles which is right.
 | 171 | 2026-09-13 | marker | [171: C92 — achievement repair or full technology restoration](PLAYTEST_CHECKLIST.md#L1633) |
 | 169 | 2026-09-13 | marker | [⭐ 169 ➊ **UPLOADED — v10 IS LIVE on both portals.** ➋ **FAQ commit DISCHARGED.** ➌ accepted as shipped.](PLAYTEST_CHECKLIST.md#L1685) |
 | 151 | 2026-09-11 | ⚠️ _conflict_ | [⚖️ 151: migration audit complete — **(a) and (d) CLOSED 09-12 as overtaken by events · (e) RULED 09-11 · (b) and (c) still open**](PLAYTEST_CHECKLIST.md#L3148) |
-| 133 | 2026-09-09 | ⚠️ _conflict_ | [⚖️ 133: six decisions from the self-check promise audit. **RULED IN PART 2026-09-12 — "do the reword". Four of the six fall with it; (2) and (4) are…](PLAYTEST_CHECKLIST.md#L4342) |
-| 53 | 2026-08-19 | ⚠️ _conflict_ | [⭐⭐ THE VERDICT REVIEW IS DONE: **UPHELD**. **53 RULED 09-12: pare the modder surface down, and the hardening queue shrinks with it — six rows go, one…](PLAYTEST_CHECKLIST.md#L6914) |
 
 ## Owed playtest legs
 
@@ -48,17 +46,17 @@ be trusted for these. One marker line each settles it permanently.
 - **148** 2026-09-11 — [⏳ 148 DEFERRED 09-12 (you said **skip**; the chain is NOT started) — an on/off button for every fix…](PLAYTEST_CHECKLIST.md#L3392)
 - **145** 2026-09-11 — [145: FR-1 cache probe v2 covers all 18 RAYS records; test normal loading first.](PLAYTEST_CHECKLIST.md#L3491)
 - **136** 2026-09-10 — [136: three player reports are now priority surfaces in the vanilla diff hunt. Two asks; neither needs the…](PLAYTEST_CHECKLIST.md#L4053)
-- **125** 2026-09-09 — [ITEM 125 OPEN: the first checks the 1.0.7 tree makes possible were run — one real finding, one bounded…](PLAYTEST_CHECKLIST.md#L5100)
-- **118** 2026-09-08 — [ITEM 118: how 1.0.7 players get served — Steam's branch feature is OFF, so it is one manual route](PLAYTEST_CHECKLIST.md#L5258)
-- **114** 2026-09-08 — [ITEMS 114–117 OPEN: the pack-wide 1.1.0 re-verification — 10 FIX, 35 REMOVE, 35 KEEP (QA'd)](PLAYTEST_CHECKLIST.md#L5301)
-- **112** 2026-09-08 — [ITEMS 112–113 OPEN: the hotfix-1 audit says SHIP WITH CHANGES, and both changes are wording](PLAYTEST_CHECKLIST.md#L5353)
-- **111** 2026-09-08 — [ITEM 111 OPEN: F116 track salvage was repaired, and it left one judgement call](PLAYTEST_CHECKLIST.md#L5512)
-- **—** 2026-08-10 — [⭐⭐ NEW from the `corun-batch-2` SITTING (four calls, all yours)](PLAYTEST_CHECKLIST.md#L8352)
-- **—** 2026-08-05 — [⭐ NEW from the `corun-batch-1` sitting (four calls, all yours)](PLAYTEST_CHECKLIST.md#L8504)
+- **125** 2026-09-09 — [ITEM 125 OPEN: the first checks the 1.0.7 tree makes possible were run — one real finding, one bounded…](PLAYTEST_CHECKLIST.md#L5101)
+- **118** 2026-09-08 — [ITEM 118: how 1.0.7 players get served — Steam's branch feature is OFF, so it is one manual route](PLAYTEST_CHECKLIST.md#L5259)
+- **114** 2026-09-08 — [ITEMS 114–117 OPEN: the pack-wide 1.1.0 re-verification — 10 FIX, 35 REMOVE, 35 KEEP (QA'd)](PLAYTEST_CHECKLIST.md#L5302)
+- **112** 2026-09-08 — [ITEMS 112–113 OPEN: the hotfix-1 audit says SHIP WITH CHANGES, and both changes are wording](PLAYTEST_CHECKLIST.md#L5354)
+- **111** 2026-09-08 — [ITEM 111 OPEN: F116 track salvage was repaired, and it left one judgement call](PLAYTEST_CHECKLIST.md#L5513)
+- **—** 2026-08-10 — [⭐⭐ NEW from the `corun-batch-2` SITTING (four calls, all yours)](PLAYTEST_CHECKLIST.md#L8368)
+- **—** 2026-08-05 — [⭐ NEW from the `corun-batch-1` sitting (four calls, all yours)](PLAYTEST_CHECKLIST.md#L8520)
 
 ## Coverage
 
-**108 of 150** checklist items carry a `<!-- ck:N status:… owner:… -->` marker; **42** are inferred
+**110 of 150** checklist items carry a `<!-- ck:N status:… owner:… -->` marker; **40** are inferred
 from prose and may be wrong. This number is the one to move: every marker added
 retires a guess.
 
