@@ -1,0 +1,21 @@
+COMMAND: python tools/desk_c96_rover_subclass.py --module-ref 76bf141
+HEAD: fe5a2e85b1f4a176f4860b63eac48630c01bf0b1
+MODULE SHA256: 7c49e9c4ceb3ce269ddc26ccfa54453e2f908080b0abc82ea63299449c48d37e
+BUILD: 24995074 lupa Lua 5.4
+SOURCE CargoTransporter       ListAvailableRovers:418  leaf-compare + leaf-label source list PRESENT
+SOURCE CargoTransporterNew    ListAvailableRovers:472  leaf-compare + leaf-label source list PRESENT
+SOURCE BaseRover:AddToCityLabels registers Unit + Rover + the LEAF class, and nothing walks __parents — the source-list gate
+SOURCE RCSensor + RCSolar derive RCRover; AttackRover does NOT (hostile-rover leg)
+Traceback (most recent call last):
+  File "C:\Dev\SMR-BugFixPack\tools\desk_c96_rover_subclass.py", line 453, in <module>
+    main()
+    ~~~~^^
+  File "C:\Dev\SMR-BugFixPack\tools\desk_c96_rover_subclass.py", line 293, in main
+    leg('%s %s class registry accepts the Seeker after class build' % (cls, phase),
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        gather(loaded, cls, 'RCRover', 1, [('RCSensor', 10)]) == ['RCSensor'])
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Dev\SMR-BugFixPack\tools\desk_c96_rover_subclass.py", line 288, in leg
+    assert ok, 'LEG FAILED: ' + name
+           ^^
+AssertionError: LEG FAILED: CargoTransporter cold class registry accepts the Seeker after class build

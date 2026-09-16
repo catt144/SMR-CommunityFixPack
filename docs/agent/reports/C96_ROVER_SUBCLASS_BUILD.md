@@ -1,118 +1,150 @@
-# C96 build — rover requests accept a rover's own subclass
+# C96 repair: class-definition installation, availability, and native rover cargo
 
-**Authored 2026-09-16** on the owner's instruction (*"Go ahead and author the fix"*), which
-**lifted their own 2026-09-15 ruling** that the repair wait for a playtest reproduction
-(*"file it as a fix that needs playtesting then. Don't author the fix yet"*). ⛔ The lift is
-the owner's, not an agent's reading of an expired gate. Game acceptance is still UNRUN.
+Updated 2026-09-16. **The original repair failed its attended test. The revised repair is
+now desk-verified; its live launch, return and removal acceptance remain UNRUN.**
+Module: `Code/Fix_RoverSubclassManifest.lua`. Suite: `tools/desk_c96_rover_subclass.py`.
+Entry: [C96](../bugs/C96.md). Live work: [C96_LIVE_FAILURE](../prompts/C96_LIVE_FAILURE.md).
 
-Module `Code/Fix_RoverSubclassManifest.lua`, registered as `RoverSubclassManifest`.
-Desk suite `tools/desk_c96_rover_subclass.py`. Entry [C96](../bugs/C96.md).
+## Authority and scope
 
-## What the repair does
+Owner instruction in this diagnosis session: "You are clear to handle this in any way explore
+or look at any file, rewirte any part of it you want". Condition: the owner was juggling other
+work and expressly removed restrictions from the agent-authored brief. This authorizes choosing
+and implementing the repair without another design-approval stop. Recorded at checklist 185.
+The prior v11 ship ruling remains recorded; no release or publication is performed here.
 
-Both gates, both receivers, and nothing else.
+## Cause and the earlier false refutation
 
-| gate | shipped body | what the module does |
-|---|---|---|
-| source list | `self.city.labels[class]` (`CargoTransporter.lua:428`) · `GetCityLabelWithConnected(self.city, class)` (`CargoTransporterNew.lua:481`) | calls the **shipped lister once per descendant class**, so each subclass is fetched from its own label |
-| leaf compare | `unit.class == class` (`:425` / `:479`) | satisfied untouched — each call passes a subclass its **own** name |
+**SOURCE**, installed 1.1.0.403908, Steam build 24995074: mod code loads before class construction
+(`CommonLua/Core/autorun.lua:434`). `DefineClass` puts definitions into named globals
+(`Core/classes.lua:71-73`); `g_Classes` is empty on first load (`:35-45`) or still holds old built
+tables on reload. The build clears those old tables (`:1354-1363`) and rebuilds from the
+separate definitions (`:1329-1335`, `:1436-1439`).
 
-⭐ **The shipped availability filter is reused verbatim** (drones, `CanBeControlled`, `holder`,
-`IsIdle`). Nothing is reimplemented, so the module cannot drift from a copy we maintain.
+The old module's `install` selected `g_Classes[class_name]`. It silently skipped a missing
+cold-boot entry, or patched an old table that was then cleared. `Require` checked the named
+class definition, so it could pass while the installer targeted a different table. Its cargo
+hook used the named class global and did not have this installation error.
 
-⭐ **It widens ONLY on shortfall.** `GatherAvailableRovers` runs vanilla first and returns its
-result untouched whenever the request is already satisfiable; the widened retry is kept only
-when it is strictly longer. A colony holding the exact rover keeps vanilla's nearest-first
-pick and the module is invisible. **Directional by construction**: a subclass satisfies a
-request for its base, never the reverse.
+**MEASURED desk falsifier:** separate the definition globals from the empty/old built registry
+at module apply, then build from the definitions. The old module returns no rover; the old
+shared-table fixture returns a Seeker. The revised installer takes `CargoTransporter` and
+`CargoTransporterNew` directly, and passes both loading phases on both receivers.
+[Initial failing run](../../archive/c96_registry_before_20260916.txt).
 
-⭐ **The cargo line is credited to the REQUESTED class.** `CargoTransporterNew:LoadRovers`
-credits `AddCargoAmount(rover.class, 1)` (`:444`) and `AddCargoAmount` is a guarded no-op when
-no line exists for that exact id (`:87`). A Seeker loaded against an `RCRover` line would
-credit nothing, leaving `requested - amount` short (`:1837`) and the rocket still asking for a
-rover it already carries. The remap fires only when the exact line is absent **and** a base
-line exists — a combination vanilla never produces, since vanilla only ever loads exact-class
-rovers.
+**The earlier live identity check did not prove that a hook was installed.** Comparing
+`r.GatherAvailableRovers` with `g_Classes.CargoTransporterNew.GatherAvailableRovers` establishes
+current dispatch identity, not the function's origin. Both can be vanilla. The brief's F4
+measurement survives, but its "patched" interpretation and R1 refutation are withdrawn.
+The separate closure-origin console check was prepared but has no observed result in this
+session; the loading-order cause is established by source and the failing desk control.
 
-**No object field, GameVar, thread, migration or saved callback is added.** The widen flag is
-a weak-keyed module local, so nothing reaches a save. **MEASURED:** all four hooked bodies are
-free of `Sleep` / `WaitMsg` / `WaitWakeup` / thread creation — asserted by the desk suite, so
-a future shipped body that starts yielding fails the run rather than passing silently.
+## Current repair
 
-## The C95 lesson, applied
-
-⛔ This module hooks **both** `CargoTransporter` and `CargoTransporterNew`. Hooking only the
-legacy pair is exactly how `Fix_HabitatExpeditionDraft` shipped inert
-([C95 sitting](C95_SITTING_20260916.md)): 1.1.0 expeditions run through `UniversalRocketBase`,
-which carries `CargoTransporterNew` and neither legacy class. Both implementations carry both
-gates identically, so both are repaired.
-
-## Desk suite — 22 legs, and it is falsifiable
-
-`python tools/desk_c96_rover_subclass.py` runs the **shipped bodies** against synthetic
-fixtures, before and after the module applies. Harm legs are based on the pre-fix body.
-
-Source-premise assertions (these fail if the defect is ever fixed upstream): both listers
-still carry the leaf compare **and** the leaf-label source list · `BaseRover:AddToCityLabels`
-still registers `Unit` + `Rover` + the leaf class with nothing walking `__parents` ·
-`RCSensor` and `RCSolar` still derive `RCRover` · `AttackRover` still does not.
-
-Behaviour legs, run for **each** receiver: vanilla refuses a Seeker for an `RCRover` request ·
-the fix accepts it · a satisfiable request keeps vanilla's pick unchanged · a base does not
-satisfy a request for its subclass · `AttackRover` is never offered · `RCSolar` is accepted ·
-an unfillable request stays empty · a two-rover request fills from both nearest-first · a
-non-rover class is never widened. Plus three cargo-credit legs and a no-throw leg.
-
-⭐ **Falsified with three mutants**, each failing exactly its intended leg:
-
-| mutant | leg that failed |
+| Surface | Implementation and bound |
 |---|---|
-| never widen | `fixed accepts the Seeker` |
-| widen unconditionally (drop the shortfall gate) | `satisfiable request keeps vanilla pick` |
-| drop the cargo-credit remap | `fixed credits the RCRover line` |
+| Installation | Patch the named class definitions before the engine builds descendants. |
+| Available rover lists | Call the shipped lister by each descendant's own name. Reuse its drone, holder, control and idle predicates. Direct UI calls now see the same eligible subclasses. |
+| Gather preference | First run the shipped gather with exact-class listing; keep that result if it fills the request. Only a shortfall admits subclasses. The temporary exact-only flag is restored after the protected call. |
+| Mixed manifests | Reserve the rovers selected for stricter requested classes before offering them to a base request. A Seeker cannot satisfy both a Seeker line and a Commander line in one manifest. Recursion follows strict ancestry only. |
+| Total availability | Wrap `GetTotalCargoAvailable`; for rover cargo, add the shipped count for each descendant. Connected-city counting remains shipped behavior. Non-rover types pass through. |
+| Busy warning | Preserve any shipped warning; if the exact-label busy check missed a subclass, compare total and eligible subclass counts and return the shipped busy-rover translation. Both warning receivers are covered. |
+| Loaded cargo | Move the fulfilled portion of the base request to the actual leaf cargo line, then call shipped `AddCargoAmount` on that leaf. No fictitious Commander amount is created. |
 
-**LIMIT, declared:** no game boot, real colony, pathing, UI, launch readiness or save
-serialization is measured. Label membership and idleness are stated by the fixture.
+**SOURCE:** list/gather gates are in `Lua/Buildings/CargoTransporter.lua:394-432` and
+`Lua/CargoTransporterNew.lua:448-486`. Gate 3 is the local `get_city_cargo_available` plus
+`GetTotalCargoAvailable` in `Lua/Cargo.lua:72-101`. The warnings are
+`CargoTransporter:GetPayloadWarning` and `CargoTransporterNew:GetNonResourceCargoWarning`.
+Function hashes in the module pin every wrapped body.
 
-## Two corrections this build made to the entry
+**SOURCE correction to the original cargo analysis:** native `UnloadRovers` reads
+`self.cargo[rover.class]` and decrements it before spawning residual cargo
+(`Lua/CargoTransporterNew.lua:670-705`). The original repair instead credited `RCRover` for an
+actual `RCSensor`; making its gather live would expose a missing cargo entry and an extra
+Commander on unloading. `ForceUnloadRemainingCargo` makes the same leaf-key assumption
+(`:1159-1190`). The new accounting keeps the physical and recorded class identical.
+For a single substitution, `RCRover requested=1 amount=0` becomes `requested=0 amount=0`, and
+`RCSensor requested=1 amount=1` is added. **The loaded manifest should therefore show a
+satisfied Seeker line, rather than pretend that a Commander is aboard.** Launch still must
+satisfy the original Commander-requiring anomaly.
 
-1. ⭐ **The "one thing to read" is SETTLED and benign on the legacy path.** C96 flagged an
-   unread risk: whether any bookkeeping re-checks the loaded rover by exact class. Both load
-   loops simply append what the gather returns without re-checking
-   (`CargoTransporter.lua:175-182`, `CargoTransporterNew.lua:146-153`), and the one place a
-   class is read back takes it from the loaded object itself
-   (`RocketExpedition.lua:844`). ⛔ **But the New path had a second, unflagged half** — the
-   `AddCargoAmount` keying above — which this module repairs.
-2. **Citation drift.** C96 attributes the leaf-only label registration to `BaseRover:GameInit`.
-   `GameInit` does no label work at all (`BaseRover.lua:102-117`); the registration is
-   `BaseRover:AddToCityLabels` (`:123-127`), which also adds `Unit` and `Rover`. The substance
-   is unchanged — nothing walks `__parents`.
+## Design choice and removal
 
-## ⛔ SUPERSEDED IN PART — tested in a game 2026-09-16, and the repair is INERT
+The owner's "let it be both" idea is applied at cargo queries rather than by changing the
+city's permanent label membership. **SOURCE:** `LabelContainer:AddToLabel` also starts label
+effects and reactions (`CommonLua/LabelContainer.lua:37-65`), and its game extension applies
+modifiers (`Lua/LabelContainer.lua:17-27`). `CityObject:AddToCityLabels` is reached through
+GameInit/map transfer and a named fixup; this review did not prove that every normal load
+rebuilds labels. The brief's no-persistence expectation is not established evidence.
+No exhaustive consumer audit is claimed or needed to recommend a membership mutation here,
+because no membership mutation is being recommended or built.
 
-⛔ **"Not reproduced in play, and not tested in a game" below is now false in its second half.**
-It was tested, on the owner's ESA/Wildfire fixture, and it failed: a Seeker-only colony still could not
-send a Commander-requiring expedition, and `GatherAvailableRovers("RCRover", 1)` returned **0** with the
-Seeker idle and every hook confirmed installed on the class the live rocket dispatches through.
-**MEASURED:** a third gate this build never covered — the availability count reaching
-`#city.labels[class]` through a file-local function. ⚠️ The 22 desk legs and three mutants all passed
-while the module was inert; that gap is itself a work item.
-⇒ [`prompts/C96_LIVE_FAILURE.md`](../prompts/C96_LIVE_FAILURE.md) carries the measurements, the four
-refuted diagnoses and the work list. ⛔ Do not plan from the acceptance section below without it.
+The shipped `RCRoverAndChildren` label supplies an inclusive Commander pool, but does not by
+itself change the lister's exact-class predicate, and is specific to that family. Calling the
+shipped lister separately by leaf class preserves all its eligibility checks and handles other
+shipped rover subclasses with the same mechanism. Summing native leaf counts repairs the
+file-local availability gate through its existing global entry point.
 
-## What is NOT claimed
+**SOURCE / design bound:** no label, class identity, GameVar, thread, callback or custom saved
+field is added. Request/amount changes use only native cargo fields. Removing the pack returns
+unloaded base-class requests to vanilla matching; already-loaded substituted cargo remains a
+native Seeker record. **MEASURED at the desk:** the unmodified accounting/spawn phase of native
+`UnloadRovers` returns the Seeker without spawning a Commander. **UNRUN:** actual save
+serialization, reload, animations and removal in retail. This is not a live save-safety verdict.
 
-- ⛔ **Not reproduced in play, and not tested in a game.** The defect is source-verified on
-  both trees and the repair is desk-verified only.
-- ⛔ The ESA fixture the entry asks for has not been provisioned; the acceptance legs in
-  checklist 185 (b) are unrun.
-- ⛔ Nothing here says the repair ships. `ck185` (b) remains the owner's.
+## Current diagnosis: live evidence
 
-## Acceptance, when it runs
+**MEASURED**, owner attended, retail `1.1.0.403908` (`6a91a190` suffix), repo `76bf141`:
+`RCSensor list: 1 | city same: true | connected label: 1`, at `Lua 1:32:00:078`.
+The exact-class lister can see and accept this Seeker. The prior empty Commander gather and
+availability readings are inherited from the same sitting, not rerun by this line.
 
-⭐ **The reach lesson from C95 applies to the test as much as the build:** the fixture's
-expedition rocket must be the one the player actually uses. Name the concrete rocket class in
-the save before reading a result, and arm a trace on the gather that actually runs.
+[RAN 2026-09-16, log Mars.exe-20260916-12.57.40-6a91a190.log]
+
+```lua
+*r local r = MainCity.labels.AllRockets[1] local l = r:ListAvailableRovers("RCSensor") print("RCSensor list:", l and #l or -1, "| city same:", r.city == MainCity, "| connected label:", #(GetCityLabelWithConnected(r.city, "RCSensor") or {}))
+```
+
+The line was parsed with `luaparser` and checked for one-line/no-comment paste safety.
+[Retail log snapshot](../../archive/logs/c96_diagnosis_A_Mars.exe-20260916-12.57.40-6a91a190.log).
+This is a snapshot of a running session, not a whole-session absence/error claim.
+**MEASURED PROBE SWEEP:** `rg -n -F TEMPORARY Code/ ../SMR-BugFixPack-TestKit/Code/` returned
+no matches, corroborated by `python tools/doccheck.py --emit-fingerprint` at `76bf141`.
+
+## Regression suite
+
+**MEASURED:** `python tools/desk_c96_rover_subclass.py`, checked parent HEAD `d1f262b`, installed Steam
+build `24995074`, Lupa Lua 5.4: **55 legs pass**. The emitted TOTAL is reconciled against the
+named PASS members in [the archived run](../../archive/c96_repair_checked_20260916.txt), which
+also records the tested module SHA256 and the passing module-scoped bodycheck. The warning
+body pin was emitted with bodycheck normalization after an initial raw hash retained trailing
+whitespace; no shipped source changed. Harm legs run against unpatched shipped bodies.
+The engine shims supply coordinates and fixture states, not actual pathing or serialization;
+the shipped drone filters, connected-label query, cargo availability/status and warning bodies
+are extracted rather than replaced with permissive stubs.
+
+**MEASURED falsifier:** `python tools/desk_c96_rover_subclass.py --module-ref 76bf141` fails
+`CargoTransporter cold class registry accepts the Seeker after class build`.
+[Old-module failure](../../archive/c96_old_module_falsifier_20260916.txt).
+The earlier suite aliased definitions and built classes, and omitted the total-availability,
+warning and unload-accounting paths. Its old cargo-credit leg positively required the unsafe
+base-class amount. That leg now requires an actual leaf record and a transferred request.
+The original build's 22-leg/three-mutant claims are historical; the current run above is the
+reproducible verification for this repair.
+
+## Remaining live acceptance
+
+TAKEABLE-WHEN: restart retail with the repaired tree, reload the attended ESA/Wildfire fixture,
+and confirm there is still a Seeker and no Commander. Re-run the read-only availability/gather
+check, then launch the Commander-requiring expedition. Record the satisfied actual-Seeker
+cargo line and successful launch. Check return for the same rover and no extra Commander.
+An exact Commander must retain preference when one is available; reverse subclass matching
+must still fail. A live removal/reload leg remains unrun until observed.
+The brief stays live while the registered repair lacks live acceptance.
+
+## Inherited fixture derivation
+
+The following derivation is inherited from the original build, not re-derived this session.
 
 ### The fixture is cheaper than a random anomaly hunt — MEASURED 2026-09-16
 
@@ -156,10 +188,6 @@ contains **0** `CreatePlanetaryAnomaly` and **0** `required_rover`. Starting it 
 rover requirement, so a co-run investigation that starts that mystery does not confound this
 test. ⛔ Do not re-raise a conflict here without naming a story bit that actually presets one.
 
-Legs: an anomaly expedition requiring an RC Commander, a colony holding **only** a Seeker →
-the Seeker loads and the rocket launches · the cargo panel shows the Commander line satisfied
-(this is the half the desk found) · a colony holding both keeps taking the Commander · an
-anomaly wanting a Seeker still refuses a Commander · removal leg: disable the pack, restart,
-reload, vanilla refusal returns and the save is intact.
 
-Executed model for the build and close-out session: **Claude Opus 5 (1M context)**. No delegated agents were used.
+Executed model for this diagnosis and repair: **GPT-6** (session developer identity).
+No delegated agents. The original build and fixture derivation were recorded as Claude Opus 5.

@@ -1,0 +1,69 @@
+COMMAND: python -X utf8 tools/bodycheck.py --module RoverSubclassManifest --all
+OK            Fix_RoverSubclassManifest.lua:51
+              target  Lua/Buildings/CargoTransporter.lua CargoTransporter:ListAvailableRovers
+              body matches the pin (Lua/Buildings/CargoTransporter.lua:418-432)
+OK            Fix_RoverSubclassManifest.lua:52
+              target  Lua/Buildings/CargoTransporter.lua CargoTransporter:ListAvailableRovers
+              defect expression still shipped
+OK            Fix_RoverSubclassManifest.lua:53
+              target  Lua/Buildings/CargoTransporter.lua CargoTransporter:GatherAvailableRovers
+              body matches the pin (Lua/Buildings/CargoTransporter.lua:394-416)
+OK            Fix_RoverSubclassManifest.lua:54
+              target  Lua/Buildings/CargoTransporter.lua CargoTransporter:GatherAvailableRovers
+              defect expression still shipped
+OK            Fix_RoverSubclassManifest.lua:55
+              target  Lua/CargoTransporterNew.lua CargoTransporterNew:ListAvailableRovers
+              body matches the pin (Lua/CargoTransporterNew.lua:472-486)
+OK            Fix_RoverSubclassManifest.lua:56
+              target  Lua/CargoTransporterNew.lua CargoTransporterNew:ListAvailableRovers
+              defect expression still shipped
+OK            Fix_RoverSubclassManifest.lua:57
+              target  Lua/CargoTransporterNew.lua CargoTransporterNew:GatherAvailableRovers
+              body matches the pin (Lua/CargoTransporterNew.lua:448-470)
+OK            Fix_RoverSubclassManifest.lua:58
+              target  Lua/CargoTransporterNew.lua CargoTransporterNew:GatherAvailableRovers
+              defect expression still shipped
+OK            Fix_RoverSubclassManifest.lua:59
+              target  Lua/CargoTransporterNew.lua CargoTransporterNew:AddCargoAmount
+              body matches the pin (Lua/CargoTransporterNew.lua:86-90)
+OK            Fix_RoverSubclassManifest.lua:60
+              target  Lua/CargoTransporterNew.lua CargoTransporterNew:AddCargoAmount
+              defect expression still shipped
+OK            Fix_RoverSubclassManifest.lua:61
+              target  Lua/Cargo.lua GetTotalCargoAvailable
+              body matches the pin (Lua/Cargo.lua:88-101)
+OK            Fix_RoverSubclassManifest.lua:62
+              target  Lua/Cargo.lua GetTotalCargoAvailable
+              defect expression still shipped
+OK            Fix_RoverSubclassManifest.lua:63
+              target  Lua/Buildings/CargoTransporter.lua CargoTransporter:GetPayloadWarning
+              body matches the pin (Lua/Buildings/CargoTransporter.lua:1400-1444)
+OK            Fix_RoverSubclassManifest.lua:64
+              target  Lua/Buildings/CargoTransporter.lua CargoTransporter:GetPayloadWarning
+              defect expression still shipped
+OK            Fix_RoverSubclassManifest.lua:65
+              target  Lua/CargoTransporterNew.lua CargoTransporterNew:GetNonResourceCargoWarning
+              body matches the pin (Lua/CargoTransporterNew.lua:1849-1896)
+OK            Fix_RoverSubclassManifest.lua:66
+              target  Lua/CargoTransporterNew.lua CargoTransporterNew:GetNonResourceCargoWarning
+              defect expression still shipped
+==============================================================================
+16 manifest row(s) over 1 stamped module(s); 0 module(s) carry no manifest.
+  16 OK
+A GREEN here is NOT a clearance: it sees a changed body, a vanished defect
+and a vanished target. It does NOT see semantics moving under a wrapper
+(class c), and it sees nothing at all for a NO-DEFECT or NO-MANIFEST module.
+
+COMMAND: python tools/desk_c96_rover_subclass.py
+COMMAND: python tools/desk_c96_rover_subclass.py
+HEAD: d1f262bd5aabce1f1bbabeb4c90721f9a780ec7e
+MODULE SHA256: 49e2c44eaf9c41dea1f3ef2f3527b33fdd4eb15912be44ec3c00b9d74e840b17
+BUILD: 24995074 lupa Lua 5.4
+SOURCE CargoTransporter       ListAvailableRovers:418  leaf-compare + leaf-label source list PRESENT
+SOURCE CargoTransporterNew    ListAvailableRovers:472  leaf-compare + leaf-label source list PRESENT
+SOURCE BaseRover:AddToCityLabels registers Unit + Rover + the LEAF class, and nothing walks __parents — the source-list gate
+SOURCE RCSensor + RCSolar derive RCRover; AttackRover does NOT (hostile-rover leg)
+PASS: CargoTransporter cold class registry accepts the Seeker after class build; CargoTransporter reload class registry accepts the Seeker after class build; CargoTransporter vanilla refuses a Seeker for an RCRover request; CargoTransporter fixed accepts the Seeker; CargoTransporter satisfiable request keeps vanilla pick (nearest RCRover, NOT the nearer Seeker); CargoTransporter base does NOT satisfy a Seeker request; CargoTransporter AttackRover is never offered for an RCRover request; CargoTransporter RCSolar also satisfies an RCRover request; CargoTransporter unfillable request still returns empty; CargoTransporter a 2-rover request fills from both, nearest first; CargoTransporter a non-rover class is not widened; CargoTransporterNew cold class registry accepts the Seeker after class build; CargoTransporterNew reload class registry accepts the Seeker after class build; CargoTransporterNew vanilla refuses a Seeker for an RCRover request; CargoTransporterNew fixed accepts the Seeker; CargoTransporterNew satisfiable request keeps vanilla pick (nearest RCRover, NOT the nearer Seeker); CargoTransporterNew base does NOT satisfy a Seeker request; CargoTransporterNew AttackRover is never offered for an RCRover request; CargoTransporterNew RCSolar also satisfies an RCRover request; CargoTransporterNew unfillable request still returns empty; CargoTransporterNew a 2-rover request fills from both, nearest first; CargoTransporterNew a non-rover class is not widened; vanilla credits NOTHING when a Seeker is loaded against an RCRover line; fixed records actual Seeker cargo for a Commander request; fulfilled request transfers to the actual leaf without inventing cargo; fixed still credits the exact line when one exists; an already satisfied leaf line can fulfill the remaining ancestor request; native unload after removal returns the Seeker without spawning a Commander; CargoTransporter vanilla total availability excludes the Seeker; CargoTransporter fixed total availability includes the Seeker; CargoTransporter vanilla warning refuses the expedition; CargoTransporter fixed warning clears for idle Seeker; CargoTransporter direct UI lister includes the Seeker; CargoTransporter busy Seeker is reported busy and cannot gather; CargoTransporter quick load still forwards its busy-rover allowance; CargoTransporter held Seeker is unavailable; CargoTransporter charging drone blocks its Seeker through the shipped filter; CargoTransporter idle attached drone permits its Seeker through the shipped filter; CargoTransporter native label membership was not changed; CargoTransporterNew vanilla total availability excludes the Seeker; CargoTransporterNew fixed total availability includes the Seeker; CargoTransporterNew vanilla warning refuses the expedition; CargoTransporterNew fixed warning clears for idle Seeker; CargoTransporterNew direct UI lister includes the Seeker; CargoTransporterNew busy Seeker is reported busy and cannot gather; CargoTransporterNew quick load still forwards its busy-rover allowance; CargoTransporterNew held Seeker is unavailable; CargoTransporterNew charging drone blocks its Seeker through the shipped filter; CargoTransporterNew idle attached drone permits its Seeker through the shipped filter; CargoTransporterNew native label membership was not changed; resource and prefab availability retain shipped rules; connected-city subclass counts and gathered candidates agree; one Seeker cannot fill both a Commander and a Seeker manifest line; more-specific requests reserve the Seeker while the Solar fills the base line; no shipped error() path was taken in any leg
+TOTAL: 55 legs; reconciled against the PASS member list above
+LIMIT: no game boot, real colony, pathing, UI, launch readiness or save serialization measured. Label membership and idleness are stated by the fixture.
+

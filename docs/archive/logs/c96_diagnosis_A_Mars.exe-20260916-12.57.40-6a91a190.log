@@ -1,0 +1,1020 @@
+					Render 0:00:00:007
+*** executable info
+Timestamp:     	6a91a190
+Date:          	Fri Aug 28 10:56:16 2026
+Command line:  	
+Compiler:      	195136247, 142 (VS 2019) or newer
+
+
+*** hardware info
+CPU name      	Intel(R) Core(TM) i7-14700K
+CPU MHz       	3418
+CPU cores     	20/28
+Phys. Memory   	65278 MBytes
+Memory In Use  	57%
+Disk Free      	807597 MBytes
+
+
+*** OS info
+OS:            	Windows 11
+Version:       	10.0.26100 
+
+
+*** Debug::Init()
+
+
+					Render 0:00:00:078
+Steam initialized (AppId 3215050)
+					Render 0:00:00:084
+Drive type for game installation: SSD, savegames: SSD
+					Render 0:00:00:085
+Language: English
+					Render 0:00:01:455
+*** graphics info
+GPU                            	NVIDIA GeForce RTX 4080 Feature Level: 12.1 {  DoublePrecisionFloatShaderOps: 1 OutputMergerLogicOp: 1 MinPrecisionSupport: 2 TiledResourcesTier: 4 ResourceBindingTier: 3 PSSpecifiedStencilRefSupported: 0 TypedUAVLoadAdditionalFormats: 1 ROVsSupported: 1 ConservativeRasterizationTier: 3 MaxGPUVirtualAddressBitsPerResource: 40 StandardSwizzle64KBSupported: 0 CrossNodeSharingTier: 0 CrossAdapterRowMajorTextureSupported: 0 VPAndRTArrayIndexFromAnyShaderFeedingRasterizerSupportedWithoutGSEmulation: 1 ResourceHeapTier: 2 NotZeroedPools: 1 UMA: 0 UnalignedBlockTextures: 1}
+API                            	d3d12
+GPU Driver Version             	32.0.16.1074
+GPU Driver Package Version     	610.74
+GPU Dedicated Video Memory     	16048 MB
+					Render 0:00:01:601
+
+Libs: Network, Sequences, MouseTrackWin, DumbAI, MapGen, Paradox, TriggersAndEvents, Notifications, Research, Resources, Tutorial, Objectives 
+
+					Render 0:00:01:836
+
+Platform: desktop, editor, goldmaster, paradox, pc, steam
+
+					Render 0:00:02:786
+*** audio info
+Audio Endpoint                 	Speakers (Razer Leviathan V2)
+						Lua 0:00:02:787
+Lua revision: 403908
+Assets revision: 33006
+Steam AppID: 3215050
+Build version: 1.1.0.403908
+Build branch:  Release
+						Lua 0:00:04:884
+Account storage loaded successfully in 2 ms
+DLC norman loaded, lua revision 403908, assets revision 33006
+DLC thomas loaded, lua revision 403908, assets revision 33006
+						Lua 0:00:04:888
+[mod] Loaded mod def Community Fix Pack — Test Kit (id SMR_CommunityFixPackTestKit, v0.00-001) unpacked from appdata
+[mod] Loaded mod def TEMPORARY - Linux NVIDIA 580 Crash Workaround (id SMR_FR1TempWorkaround, v0.00-003) unpacked from appdata
+[mod] Loaded mod def Relaunched Fix Pack: Opt-In Modules (id SMR_CommunityOptInPack, v1.00-000) unpacked from appdata
+[mod] Loaded mod def Relaunched Fix Pack (id SMR_CommunityFixPack, v1.00-011) unpacked from appdata
+						Lua 0:00:05:275
+[mod] [CommunityOptInPack] ClassicRockets: applied
+						Lua 0:00:05:276
+[mod] [CommunityOptInPack] AcknowledgedWarnings: applied
+[mod] [CommunityOptInPack] ResidencyControl: inactive (opt-in module, off by default — enable it in Options → Mod Options)
+[mod] [CommunityOptInPack] MultipleSuns: applied
+[mod] [CommunityOptInPack] DroneOverhaul: applied
+[mod] [CommunityOptInPack] CohortHousing: inactive (opt-in module, off by default — enable it in Options → Mod Options)
+						Lua 0:00:05:277
+[mod] [CommunityOptInPack] NoHomeless: inactive (opt-in module, off by default — enable it in Options → Mod Options)
+[mod] [CommunityOptInPack] DroneStatDials: applied
+[mod] [CommunityFixPack] NightShiftWork: applied
+[mod] [CommunityFixPack] WispRewards: applied
+[mod] [CommunityFixPack] TrainsToVoid: applied
+						Lua 0:00:05:278
+[mod] [CommunityFixPack] LanderEmptyLaunch: applied
+[mod] [CommunityFixPack] ShelterReflex: applied
+[mod] [CommunityFixPack] BrokenTrackSalvage: applied
+[mod] [CommunityFixPack] TrackSalvageWipe: applied
+[mod] [CommunityFixPack] LakeEntombment: applied
+[mod] [CommunityFixPack] RocketDroneChurn: applied
+[mod] [CommunityFixPack] TradeRocketFuelRefresh: applied
+[mod] [CommunityFixPack] ShuttleTransportCache: applied
+[mod] [CommunityFixPack] VacuumWalks: applied
+						Lua 0:00:05:279
+[mod] [CommunityFixPack] ArrivalDeaths: applied
+[mod] [CommunityFixPack] StaleReservations: applied
+[mod] [CommunityFixPack] CrystalMysteryHang: applied
+[mod] [CommunityFixPack] DomeOverviewHighlight: applied
+[mod] [CommunityFixPack] TrainCargoDumping: applied
+[mod] [CommunityFixPack] DestroyedTunnels: applied
+[mod] [CommunityFixPack] DustSicknessBiorobots: applied
+[mod] [CommunityFixPack] GeneForging: applied
+[mod] [CommunityFixPack] MirrorSphereSite: applied
+						Lua 0:00:05:280
+[mod] [CommunityFixPack] PayloadTemplateRefill: applied
+[mod] [CommunityFixPack] ShuttleHubOffAvailable: applied
+[mod] [CommunityFixPack] FreedHousingNotice: applied
+[mod] [CommunityFixPack] LandscapeUnitFilter: applied
+						Lua 0:00:05:281
+[mod] [CommunityFixPack] RocketInteractGuard: applied
+[mod] [CommunityFixPack] TrackConnectorPingPong: applied
+[mod] [CommunityFixPack] TrackTunnelPowerBridge: applied
+[mod] [CommunityFixPack] GraphConsumedCaption: applied
+[mod] [CommunityFixPack] TrainWaitTime: applied
+						Lua 0:00:05:282
+[mod] [CommunityFixPack] FounderTraitNotification: applied
+[mod] [CommunityFixPack] SequenceLatents: applied
+[mod] [CommunityFixPack] TrackSalvageRefund: applied
+[mod] [CommunityFixPack] DroneTransportMinors: applied
+[mod] [CommunityFixPack] ScanDowngrade: applied
+[mod] [CommunityFixPack] BombardmentSpread: applied
+[mod] [CommunityFixPack] ExtenderFlapChurn: applied
+[mod] [CommunityFixPack] SaintBlessing: applied
+[mod] [CommunityFixPack] SinkholeIndestructible: applied
+						Lua 0:00:05:283
+[mod] [CommunityFixPack] ExoticDepositSign: applied
+[mod] [CommunityFixPack] JumboCaveReinforcementWedge: applied
+[mod] [CommunityFixPack] SilentHitMomentFX: applied
+[mod] [CommunityFixPack] CloggedBuildingRelease: applied
+[mod] [CommunityFixPack] FactionDomeSizeGate: applied
+[mod] [CommunityFixPack] BuildingCodesPrefab: applied
+						Lua 0:00:05:284
+[mod] [CommunityFixPack] HabitatExpeditionDraft: applied
+[mod] [CommunityFixPack] OpenPastureStockpiles: applied
+[mod] [CommunityFixPack] RoverSubclassManifest: applied
+[mod] [CommunityFixPack] SaveSanitizer: applied
+[mod] [SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:05:285
+[mod] [SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[mod] [SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+[SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+						Lua 0:00:05:290
+[mod] [SMRTK] SMRTK_CORE loaded=true tee=false t=884 id=1
+[SMRTK] SMRTK_CORE loaded=true tee=false t=884 id=1
+						Lua 0:00:05:293
+[mod] [SMRTK] SMRTK_SLOTS armed_at_load=0 sitting=ck144a_close_20260915 slots="1 console_status,2 probe_preflight,3 check_after_load,4 read_map_click,5 short_breakpoint,6 dump_selected,scratch read_sitting" trigger=smrtk08_break t=884 id=2
+[SMRTK] SMRTK_SLOTS armed_at_load=0 sitting=ck144a_close_20260915 slots="1 console_status,2 probe_preflight,3 check_after_load,4 read_map_click,5 short_breakpoint,6 dump_selected,scratch read_sitting" trigger=smrtk08_break t=884 id=2
+						Lua 0:00:05:295
+[mod] [SMRTest][carry] fixture-carry dump available — run SMRTest.FixtureCarry()
+						Lua 0:00:06:059
+[mod] [CommunityFixPack] SaintBlessing: inactive (no dome-colonists trait presets)
+[mod] [CommunityFixPack] SinkholeIndestructible: the St. Elmo's Fire sinkhole is now indestructible, like every other mystery set-piece
+						Lua 0:00:06:148
+Reloading done in 1260 ms
+						Lua 0:00:06:149
+Available DLCs: norman(Feeding the Future),thomas(Interplanetary Codex) 
+						Lua 0:00:06:196
+[mod] [SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=DataLoading t=884 id=3
+[SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=DataLoading t=884 id=3
+						Lua 0:00:06:576
+[preset] Preset postprocess took 153 ms.
+						Lua 0:00:06:621
+482 / 482 particle streams loaded in 38 ms.
+5 / 5 particle streams loaded in 0 ms.
+						Lua 0:00:06:623
+[mod] [CommunityOptInPack] MultipleSuns: BuildingTemplates.ArtificialSun not found — build limit NOT lifted (binding fix still active)
+[mod] [CommunityFixPack] SilentHitMomentFX: registered 11 missing animation-moment preset(s)
+[mod] [CommunityFixPack] FactionDomeSizeGate: 7 faction dislike(s) now wait for 10 colonists in a dome
+						Lua 0:00:06:836
+[mod] [CommunityOptInPack] MultipleSuns: Artificial Sun build-once limit lifted
+[mod] [CommunityFixPack] SaintBlessing: the shipped code resolves the trait label itself — data left untouched; save re-base armed for 1 preset(s) of 2
+						Lua 0:00:06:931
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=884 id=4
+						Lua 0:00:06:963
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=884 id=5
+						Lua 0:00:06:972
+[mod] Loaded mod items for: SMR_CommunityOptInPack, SMR_CommunityFixPack, SMR_CommunityFixPackTestKit
+						Lua 0:00:07:773
+[PdxSDK] Started up. Took 1080
+						Lua 0:00:08:181
+[Braze] SessionStart error The server name or address could not be resolved
+
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+						Lua 0:00:08:182
+
+[Braze] Failed to init
+						Lua 0:00:08:283
+[Braze] SessionStart error The server name or address could not be resolved
+
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:09:105
+Game Seed:  hlhEWFDE 8150354970089163666 
+						Lua 0:00:09:127
+[mod] [SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=ChangeMap t=0 id=6
+[SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=ChangeMap t=0 id=6
+						Lua 0:00:09:132
+*** Reloading assets from folder 'BinAssets/'
+						Lua 0:00:11:002
+*** Assets reloaded in 1.9 s, read 359.3 MB, read speed 192.1 MB/s, average read 8137 bytes.
+						Lua 0:00:11:577
+[mod] [SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=PreNewMap t=0 id=7
+[SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=PreNewMap t=0 id=7
+						Lua 0:00:11:580
+MapLoadRandom:  -5682469493768252280 
+						Lua 0:00:12:509
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=0 id=8
+						Lua 0:00:12:817
+Map (slot 1) changed to "PreGame" in 3691 ms.
+						Lua 0:00:14:167
+[mod] [SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:14:177
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=0 id=9
+						Lua 0:07:03:003
+[mod] [SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=ChangeMap t=0 id=10
+[SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=ChangeMap t=0 id=10
+						Lua 0:07:03:592
+[mod] [SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=PreNewMap t=0 id=11
+[SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=PreNewMap t=0 id=11
+						Lua 0:07:03:751
+game_settings:
+						Lua 0:07:03:752
+    sponsor: ESA
+    profile: astrogeologist
+    founding_faction: EnlightenmentInitiative
+    rival_colonies: NASA, NewArk, Brazil
+    mystery_random: 
+    game_rules: (none)
+more_game_settings: save_game_id: TPhQBRtQ63FbdL_I, mystery: TheMarsBug, coordinates: 19N177E, landing_spot: , logo: Europe
+map_conditions: altitude: -2891, temperature: -57, cold_wave: 145, dust_devils: 46, dust_storm: 0, meteors: 36
+map_resources: concrete: 255, metals: 103, precious_metals: 103, water: 138
+						Lua 0:07:03:755
+[mod] [SMRTK] SMRTK_DOCK action=dock_attach attached=true route="idBottom sibling" status=OK surface=one-toggle+tasks t=0 id=12
+[mod] [SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:07:03:756
+[SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+[mod] [SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:07:03:763
+MapLoadRandom:  2982228422989129794 
+						Lua 0:07:04:263
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=0 id=13						Lua 0:07:04:264
+
+						Lua 0:07:04:720
+Map (slot 1) changed to "BlankBigHeartCMix_03" in 1717 ms.
+						Lua 0:07:07:191
+[mod] [SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=ChangeMap t=0 id=14
+[SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=ChangeMap t=0 id=14
+						Lua 0:07:07:680
+[mod] [SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=PreNewMap t=0 id=15
+[SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=PreNewMap t=0 id=15
+						Lua 0:07:07:753
+MapLoadRandom:  303254585692935171 
+						Lua 0:07:08:360
+Map (slot 2) changed to "BlankUnderground_03" in 1169 ms.
+						Lua 0:07:11:587
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=0 id=16
+						Lua 0:07:13:297
+starting sector selected: F6
+						Lua 0:07:13:395
+Stop sequence Mystery 8 - Init : Finished						Lua 0:07:13:707
+[mod] [SMRTK] SMRTK_PANEL_RESTORE open=true tab=Kit t=309 id=17
+[mod] [SMRTK] SMRTK_DOCK action=dock_attach attached=true route="idBottom sibling" status=OK surface=one-toggle+tasks t=309 id=18
+						Lua 0:07:14:705
+[mod] [SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:07:14:716
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=309 id=19
+						Lua 0:09:01:308
+[mod] [SMRTK] SMRTK_PANEL action=panel_toggle open=false status=OK tab=Kit t=2643 id=20
+						Lua 0:09:24:849
+[mod] [SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=ChangeMap t=22729 id=21
+[SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=ChangeMap t=22729 id=21
+						Lua 0:09:24:861
+[mod] [SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=ChangeMap t=22729 id=22
+[SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=ChangeMap t=22729 id=22
+						Lua 0:09:27:314
+Game Seed:  api7kPYl 4405196814747460805 
+						Lua 0:09:27:332
+[mod] [SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=ChangeMap t=0 id=23
+[SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=ChangeMap t=0 id=23
+						Lua 0:09:27:758
+[mod] [SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=PreNewMap t=0 id=24
+[SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=PreNewMap t=0 id=24
+						Lua 0:09:27:763
+MapLoadRandom:  2153558663848891686 
+						Lua 0:09:28:656
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=0 id=25
+						Lua 0:09:28:671
+[mod] [SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:09:28:681
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=0 id=26
+						Lua 0:09:28:971
+Map (slot 1) changed to "PreGame" in 1640 ms.
+						Lua 0:09:30:343
+[mod] [SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:09:30:354
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=0 id=27
+						Lua 0:11:25:972
+[mod] [SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=ChangeMap t=0 id=28
+[SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=ChangeMap t=0 id=28
+						Lua 0:11:26:553
+[mod] [SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=PreNewMap t=0 id=29
+[SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=PreNewMap t=0 id=29
+						Lua 0:11:26:752
+game_settings:
+    sponsor: ESA
+    profile: astrogeologist
+    founding_faction: EnlightenmentInitiative
+    rival_colonies: NASA, SpaceY, Brazil
+    mystery_random: 
+    game_rules: (none)
+more_game_settings: save_game_id: QCyT8BuDEddh869L, mystery: TheMarsBug, coordinates: 11S135E, landing_spot: , logo: Europe
+map_conditions: altitude: 1379, temperature: -15, cold_wave: 36, dust_devils: 83, dust_storm: 74, meteors: 109
+map_resources: concrete: 146, metals: 146, precious_metals: 146, water: 73
+						Lua 0:11:26:756
+[mod] [SMRTK] SMRTK_DOCK action=dock_attach attached=true route="idBottom sibling" status=OK surface=one-toggle+tasks t=0 id=30
+[mod] [SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+[mod] [SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:11:26:764
+MapLoadRandom:  7069562351115102387 
+						Lua 0:11:27:306
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=0 id=31
+						Lua 0:11:27:666
+Map (slot 1) changed to "BlankBig_04" in 1694 ms.
+						Lua 0:11:29:890
+[mod] [SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=ChangeMap t=0 id=32
+[SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=ChangeMap t=0 id=32
+						Lua 0:11:30:348
+[mod] [SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=PreNewMap t=0 id=33
+[SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=PreNewMap t=0 id=33
+						Lua 0:11:30:418
+MapLoadRandom:  2162293057892193534 
+						Lua 0:11:31:025
+Map (slot 2) changed to "BlankUnderground_02" in 1136 ms.
+						Lua 0:11:33:558
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=0 id=34
+						Lua 0:11:35:712
+starting sector selected: E1
+						Lua 0:11:35:805
+Stop sequence Mystery 8 - Init : Finished						Lua 0:11:36:139
+[mod] [SMRTK] SMRTK_DOCK action=dock_attach attached=true route="idBottom sibling" status=OK surface=one-toggle+tasks t=302 id=35
+						Lua 0:11:37:136
+[mod] [SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:11:37:147
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=302 id=36
+						Lua 0:13:10:309
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=false reason="no supported actions" status=OK t=52145 id=37
+						Lua 0:13:46:016
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=false reason="no supported actions" status=OK t=87853 id=38
+						Lua 0:14:04:007
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=ConstructionSite(1053) status=OK t=105841 id=39
+						Lua 0:14:11:092
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=false reason="no supported actions" status=OK t=112931 id=40
+						Lua 0:14:16:644
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=false reason="no supported actions" status=OK t=118484 id=41
+						Lua 0:14:19:918
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=false reason="no supported actions" status=OK t=121758 id=42
+						Lua 0:14:21:210
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=false reason="no supported actions" status=OK t=123049 id=43
+						Lua 0:14:24:093
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=false reason="no supported actions" status=OK t=125933 id=44
+						Lua 0:14:26:014
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=false reason="no supported actions" status=OK t=127853 id=45
+						Lua 0:14:27:233
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=false reason="no supported actions" status=OK t=129071 id=46
+						Lua 0:14:29:698
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=false reason="no supported actions" status=OK t=131536 id=47
+						Lua 0:14:33:367
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=false reason="no supported actions" status=OK t=135207 id=48
+						Lua 0:14:39:475
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=false reason="no supported actions" status=OK t=141315 id=49
+						Lua 0:14:44:023
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=UniversalStorageDepot(1054) status=OK t=145856 id=50
+						Lua 0:14:46:931
+[mod] [SMRTK] SMRTK_PANEL action=panel_toggle open=true status=OK tab=Kit t=148772 id=51
+						Lua 0:14:49:324
+[mod] [SMRTK] SMRTK_TAB action=tab_World page=World status=OK t=151164 id=52
+						Lua 0:14:53:325
+[mod] [SMRTK] SMRTK_ACTION action=fill_storages count=12 status=OK t=155157 id=53
+[SMRTK] SMRTK_ACTION action=fill_storages count=12 status=OK t=155157 id=53
+						Lua 0:14:54:529
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=DroneHub(1055) status=OK t=156363 id=54
+						Lua 0:14:57:734
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=false reason="no supported actions" status=OK t=159573 id=55
+						Lua 0:14:59:360
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=ConstructionSite(1065) status=OK t=161198 id=56
+						Lua 0:16:18:853
+0 1000 352
+						Lua 0:16:27:569
+13
+						Lua 0:17:46:058
+12 1600 369
+						Lua 0:17:48:451
+32
+						Lua 0:17:52:965
+52
+						Lua 0:18:26:427
+72
+						Lua 0:18:29:230
+92
+						Lua 0:18:34:580
+112
+						Lua 0:18:36:422
+132
+						Lua 0:18:37:812
+152
+						Lua 0:18:39:123
+172
+						Lua 0:26:34:254
+[mod] [SMRTK] SMRTK_PANEL action=panel_toggle open=false status=OK tab=World t=253052 id=57
+						Lua 0:26:38:007
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=false reason="no supported actions" status=OK t=271797 id=58
+						Lua 0:27:04:615
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=WindTurbine_Diffuser(1079) status=OK t=404827 id=59
+						Lua 0:27:11:511
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=false reason="no supported actions" status=OK t=439322 id=60
+						Lua 0:27:27:031
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=false reason="no supported actions" status=OK t=494362 id=61
+						Lua 0:27:30:433
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=false reason="no supported actions" status=OK t=511372 id=62
+						Lua 0:27:35:230
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=false reason="no supported actions" status=OK t=535362 id=63
+						Lua 0:27:37:953
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=false reason="no supported actions" status=OK t=548972 id=64
+						Lua 0:27:45:658
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=false reason="no supported actions" status=OK t=587497 id=65
+						Lua 0:27:55:454
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=false reason="no supported actions" status=OK t=636467 id=66
+						Lua 0:28:00:158
+Story bits: Triggered story bit - PowerSurge						Lua 0:28:02:459
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=false reason="no supported actions" status=OK t=671477 id=67
+						Lua 0:28:09:997
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=false reason="no supported actions" status=OK t=709192 id=68
+						Lua 0:28:51:113
+Story bits: Reply selected - Shut down <number_of_buildings> power producers for <?> Sols						Lua 0:29:35:544
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=false reason="no supported actions" status=OK t=932232 id=69
+						Lua 0:29:45:638
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipAnomaly object=SubsurfaceAnomaly_complete(2000000193) status=OK t=982757 id=70
+						Lua 0:29:51:138
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipAnomaly object=SubsurfaceAnomaly_complete(2000000194) status=OK t=1010262 id=71
+						Lua 0:30:12:016
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=false reason="no supported actions" status=OK t=1114652 id=72
+						Lua 0:30:16:485
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipRover object=ExplorerRover(2000000262) status=OK t=1136987 id=73
+						Lua 0:30:17:957
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=ConstructionSite(1219) status=OK t=1144337 id=74
+						Lua 0:30:18:797
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipRover object=RCTerraformer(2000000294) status=OK t=1148547 id=75
+						Lua 0:30:22:354
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=false reason="no supported actions" status=OK t=1166347 id=76
+						Lua 0:30:28:611
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=UndergroundPassage(1004) status=OK t=1197617 id=77
+						Lua 0:30:35:585
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=false reason="no supported actions" status=OK t=1232447 id=78
+						Lua 0:30:45:780
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=false reason="no supported actions" status=OK t=1283467 id=79
+						Lua 0:30:53:243
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipSubsurfaceDeposit object=SubsurfaceDepositWater(2000000249) status=OK t=1320787 id=80
+						Lua 0:31:00:354
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipSubsurfaceDeposit object=SubsurfaceDepositWater(2000000249) status=OK t=1356347 id=81
+						Lua 0:31:04:559
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=false reason="no supported actions" status=OK t=1377367 id=82
+						Lua 0:31:13:622
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=false reason="no supported actions" status=OK t=1422682 id=83
+						Lua 0:31:27:072
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=false reason="no supported actions" status=OK t=1489932 id=84
+						Lua 0:31:40:651
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=false reason="no supported actions" status=OK t=1557817 id=85
+						Lua 0:31:52:560
+[mod] [SMRTK] SMRTK_PANEL action=panel_toggle open=true status=OK tab=World t=1617382 id=86
+						Lua 0:31:56:531
+[mod] [SMRTK] SMRTK_ACTION action=complete_constructions outcome=leaf_completed scope="current map" status=OK t=1636967 id=87
+[SMRTK] SMRTK_ACTION action=complete_constructions outcome=leaf_completed scope="current map" status=OK t=1636967 id=87
+
+!!! Quick Build !!!
+						Lua 0:31:59:977
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=DroneHubExtender(1174) status=OK t=1652207 id=88
+						Lua 0:32:05:534
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=DroneHub(1055) status=OK t=1679977 id=89
+						Lua 0:32:06:101
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=StirlingGenerator(1066) status=OK t=1682852 id=90
+						Lua 0:32:17:189
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=false reason="no supported actions" status=OK t=1738322 id=91
+						Lua 0:32:28:924
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=false reason="no supported actions" status=OK t=1796987 id=92
+						Lua 0:32:39:192
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=false reason="no supported actions" status=OK t=1848327 id=93
+						Lua 0:32:43:810
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=ConstructionSite(1295) status=OK t=1871397 id=94
+						Lua 0:32:47:687
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=DomeMega(1248) status=OK t=1890767 id=95
+						Lua 0:32:49:741
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=TriboelectricScrubber(1296) status=OK t=1901057 id=96
+						Lua 0:32:56:561
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=false reason="no supported actions" status=OK t=1935182 id=97
+						Lua 0:33:02:478
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=false reason="no supported actions" status=OK t=1964762 id=98
+						Lua 0:33:28:248
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=false reason="no supported actions" status=OK t=2093597 id=99
+						Lua 0:33:41:292
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=false reason="no supported actions" status=OK t=2158802 id=100
+						Lua 0:33:44:672
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=DomeMega(1248) status=OK t=2175672 id=101
+						Lua 0:33:45:215
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=ConstructionSite(1411) status=OK t=2178422 id=102
+						Lua 0:33:46:375
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=DomeMega(1248) status=OK t=2184212 id=103
+						Lua 0:33:55:815
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=false reason="no supported actions" status=OK t=2231442 id=104
+						Lua 0:34:00:072
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=false reason="no supported actions" status=OK t=2252722 id=105
+						Lua 0:34:03:911
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=false reason="no supported actions" status=OK t=2271917 id=106
+						Lua 0:34:06:712
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=false reason="no supported actions" status=OK t=2285927 id=107
+						Lua 0:34:09:462
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=false reason="no supported actions" status=OK t=2299667 id=108
+						Lua 0:34:11:526
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=false reason="no supported actions" status=OK t=2309997 id=109
+						Lua 0:34:16:729
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=false reason="no supported actions" status=OK t=2336007 id=110
+						Lua 0:34:32:674
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=false reason="no supported actions" status=OK t=2415737 id=111
+						Lua 0:34:35:442
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=ConstructionSite(1418) status=OK t=2429567 id=112
+						Lua 0:34:36:284
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=SensorTower(1419) status=OK t=2433752 id=113
+						Lua 0:34:39:486
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=false reason="no supported actions" status=OK t=2449792 id=114						Lua 0:34:39:487
+
+						Lua 0:35:04:318
+[mod] [SMRTK] SMRTK_ACTION action=fill_storages count=13 status=OK t=2573912 id=115						Lua 0:35:04:319
+
+[SMRTK] SMRTK_ACTION action=fill_storages count=13 status=OK t=2573912 id=115
+						Lua 0:35:07:353
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=StirlingGenerator(1066) status=OK t=2589117 id=116
+						Lua 0:35:11:795
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=UniversalRocket(1050) status=OK t=2611267 id=117
+						Lua 0:35:24:228
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=DomeMega(1248) status=OK t=2632087 id=118
+						Lua 0:35:27:789
+[mod] [SMRTK] SMRTK_ACTION action=complete_constructions outcome=leaf_completed scope="current map" status=OK t=2649572 id=119
+[SMRTK] SMRTK_ACTION action=complete_constructions outcome=leaf_completed scope="current map" status=OK t=2649572 id=119
+
+!!! Quick Build !!!
+						Lua 0:35:31:860
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=false reason="no supported actions" status=OK t=2670272 id=120						Lua 0:35:31:861
+
+						Lua 0:35:38:639
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=ConstructionSite(1438) status=OK t=2704162 id=121
+						Lua 0:35:56:610
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=DomeMega(1248) status=OK t=2793997 id=122
+						Lua 0:35:59:126
+Breakthroughs Breakthroughs locked
+						Lua 0:36:38:685
+[mod] [SMRTK] SMRTK_ACTION action=rocket_arrive changed=1 landing="native policy; orbit/landing waits unchanged" outcome=inbound_transit_skip_requested skipped_time=370145 status=OK visited=2 t=3004422 id=123
+[SMRTK] SMRTK_ACTION action=rocket_arrive changed=1 landing="native policy; orbit/landing waits unchanged" outcome=inbound_transit_skip_requested skipped_time=370145 status=OK visited=2 t=3004422 id=123
+						Lua 0:36:40:385
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=false reason="no supported actions" status=OK t=3012892 id=124
+						Lua 0:37:49:435
+[mod] [SMRTK] SMRTK_PANEL action=panel_toggle open=false status=OK tab=World t=3316792 id=125
+						Lua 0:39:43:496
+[mod] [SMRTK] SMRTK_PANEL action=panel_toggle open=true status=OK tab=World t=3883967 id=126
+						Lua 0:39:45:497
+[mod] [SMRTK] SMRTK_CLEAR action=clear status=OK t=3893967 id=127
+						Lua 0:39:47:074
+[mod] [SMRTK] SMRTK_PANEL action=panel_toggle open=false status=OK tab=World t=3901852 id=128
+						Lua 0:39:49:981
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipRover object=ExplorerRover(2000000262) status=OK t=3916362 id=129
+						Lua 0:40:07:051
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipWasteRockSite object=WasteRockDumpHuge(1294) status=OK t=3996490 id=130
+						Lua 0:40:09:534
+[mod] [SMRTK] SMRTK_ACTION action=selected_empty after=0 before=0 method=CheatEmpty object=WasteRockDumpHuge(1294) resource=WasteRock resources=1 status=OK valid_after=true t=3998975 id=131
+[SMRTK] SMRTK_ACTION action=selected_empty after=0 before=0 method=CheatEmpty object=WasteRockDumpHuge(1294) resource=WasteRock resources=1 status=OK valid_after=true t=3998975 id=131
+						Lua 0:40:21:188
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=false reason="no supported actions" status=OK t=4010628 id=132
+						Lua 0:40:27:383
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=false reason="no supported actions" status=OK t=4016828 id=133
+						Lua 0:40:31:719
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=ConstructionSite(1441) status=OK t=4021158 id=134
+						Lua 0:41:18:503
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipRover object=RCTerraformer(2000000294) status=OK t=4127940 id=135
+						Lua 0:41:20:566
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipRover object=RCSensor(2000000261) status=OK t=4138210 id=136
+						Lua 0:42:09:182
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipRover object=RCSensor(2000000261) status=OK t=4156765 id=137
+						Lua 0:43:27:505
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=MOXIE(1250) status=OK t=4548120 id=138
+						Lua 0:43:33:894
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=false reason="no supported actions" status=OK t=4580090 id=139
+						Lua 0:44:52:419
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=ConstructionSite(1441) status=OK t=4972700 id=140
+						Lua 0:44:57:979
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=StorageConcrete(1057) status=OK t=5000495 id=141
+						Lua 0:44:59:791
+[mod] [SMRTK] SMRTK_ACTION action=selected_fill after=180000 before=0 method=CheatFill object=StorageConcrete(1057) resource=Concrete resources=1 status=OK valid_after=true t=5009575 id=142
+[SMRTK] SMRTK_ACTION action=selected_fill after=180000 before=0 method=CheatFill object=StorageConcrete(1057) resource=Concrete resources=1 status=OK valid_after=true t=5009575 id=142
+						Lua 0:45:01:957
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=MOXIE(1470) status=OK t=5020380 id=143
+						Lua 0:45:07:340
+Stop sequence MarsAnomalies - Scientific Find : FinishedStop sequence list MarsAnomalies						Lua 0:45:20:976
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=UniversalRocket(1051) status=OK t=5102325 id=144
+						Lua 0:45:29:476
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=false reason="no supported actions" status=OK t=5144895 id=145
+						Lua 0:45:36:981
+[mod] [SMRTK] SMRTK_PANEL action=panel_toggle open=true status=OK tab=World t=5182445 id=146
+						Lua 0:45:38:345
+[mod] [SMRTK] SMRTK_ACTION action=complete_constructions outcome=leaf_completed scope="current map" status=OK t=5189100 id=147
+[SMRTK] SMRTK_ACTION action=complete_constructions outcome=leaf_completed scope="current map" status=OK t=5189100 id=147
+
+!!! Quick Build !!!
+						Lua 0:45:43:253
+[mod] [SMRTK] SMRTK_PANEL action=panel_toggle open=false status=OK tab=World t=5211365 id=148						Lua 0:45:43:254
+
+						Lua 0:45:47:798
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipRover object=ExplorerRover(2000000262) status=OK t=5234065 id=149
+						Lua 0:45:52:641
+[mod] [SMRTK] SMRTK_SELECTED action=selected_more category=Cheat method=CheatRepair object=ExplorerRover(2000000262) status=OK valid_after=true t=5258295 id=150
+[SMRTK] SMRTK_SELECTED action=selected_more category=Cheat method=CheatRepair object=ExplorerRover(2000000262) status=OK valid_after=true t=5258295 id=150
+						Lua 0:45:55:415
+Stop sequence MarsAnomalies - Crust Fault : FinishedStop sequence list MarsAnomalies						Lua 0:46:01:882
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipRover object=RCSensor(2000000261) status=OK t=5299590 id=151
+						Lua 0:46:12:208
+[mod] [SMRTK] SMRTK_SELECTED action=selected_more category=Cheat method=CheatRepair object=RCSensor(2000000261) status=OK valid_after=true t=5351275 id=152
+[SMRTK] SMRTK_SELECTED action=selected_more category=Cheat method=CheatRepair object=RCSensor(2000000261) status=OK valid_after=true t=5351275 id=152
+						Lua 0:49:32:724
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=DomeMega(1248) status=OK t=6216895 id=153
+						Lua 0:49:44:048
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=DomeMega(1248) status=OK t=6270980 id=154
+						Lua 0:49:46:710
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipAnomaly object=SubsurfaceAnomaly_complete(2000000730) status=OK t=6284320 id=155
+						Lua 0:49:50:040
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipAnomaly object=SubsurfaceAnomaly_complete(2000000730) status=OK t=6300975 id=156
+						Lua 0:50:14:223
+Stop sequence MarsAnomalies - Curiosity : FinishedStop sequence list MarsAnomalies						Lua 0:50:31:845
+Events: Triggered event - TheRedKitchen
+						Lua 0:50:36:907
+Events: Choice selected in TheRedKitchen - They cook with what they have.
+						Lua 0:52:06:962
+[mod] [SMRTK] SMRTK_PANEL action=panel_toggle open=true status=OK tab=World t=6554445 id=157
+						Lua 0:52:09:890
+[mod] [SMRTK] SMRTK_ACTION action=rocket_arrive changed=1 landing="native policy; orbit/landing waits unchanged" outcome=inbound_transit_skip_requested skipped_time=694705 status=OK visited=2 t=6569080 id=158
+[SMRTK] SMRTK_ACTION action=rocket_arrive changed=1 landing="native policy; orbit/landing waits unchanged" outcome=inbound_transit_skip_requested skipped_time=694705 status=OK visited=2 t=6569080 id=158
+						Lua 0:52:11:690
+[mod] [SMRTK] SMRTK_PANEL action=panel_toggle open=false status=OK tab=World t=6578080 id=159
+						Lua 0:52:12:744
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=false reason="no supported actions" status=OK t=6583315 id=160
+						Lua 0:52:44:861
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=false reason="no supported actions" status=OK t=6743910 id=161
+						Lua 0:53:00:047
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=ConstructionSite(1480) status=OK t=6819830 id=162
+						Lua 0:53:16:841
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=false reason="no supported actions" status=OK t=6903820 id=163
+						Lua 0:53:29:029
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=false reason="no supported actions" status=OK t=6964765 id=164
+						Lua 0:53:33:407
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=false reason="no supported actions" status=OK t=6986645 id=165
+						Lua 0:53:37:383
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=false reason="no supported actions" status=OK t=7006535 id=166
+						Lua 0:53:46:024
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=false reason="no supported actions" status=OK t=7049735 id=167
+						Lua 0:53:49:133
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=false reason="no supported actions" status=OK t=7065280 id=168
+						Lua 0:53:54:662
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=StorageFood(1487) status=OK t=7092910 id=169
+						Lua 0:53:56:093
+[mod] [SMRTK] SMRTK_ACTION action=selected_fill after=180000 before=3000 method=CheatFill object=StorageFood(1487) resource=Food resources=1 status=OK valid_after=true t=7100085 id=170
+[SMRTK] SMRTK_ACTION action=selected_fill after=180000 before=3000 method=CheatFill object=StorageFood(1487) resource=Food resources=1 status=OK valid_after=true t=7100085 id=170
+						Lua 0:53:56:610
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=OpenPasture(1481) status=OK t=7102620 id=171
+						Lua 0:54:17:623
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=OpenPasture(1481) status=OK t=7205050 id=172
+						Lua 0:54:20:760
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=OpenPasture(1481) status=OK t=7220750 id=173
+						Lua 0:54:40:061
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=false reason="no supported actions" status=OK t=7317285 id=174
+						Lua 0:54:43:761
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=DomeMega(1248) status=OK t=7335760 id=175
+						Lua 0:54:43:969
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=ConstructionSite(1488) status=OK t=7336810 id=176
+						Lua 0:55:07:549
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=MartianUniversity(1489) status=OK t=7454640 id=177
+						Lua 0:55:15:232
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=DomeMega(1248) status=OK t=7493115 id=178
+						Lua 0:55:17:646
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=MartianUniversity(1489) status=OK t=7505185 id=179
+						Lua 0:56:23:515
+C96Test RCRover -21 74
+						Lua 0:56:50:937
+Stop sequence GenericAnomalies - Rare Resource - Tellurium : FinishedStop sequence list GenericAnomalies						Lua 0:57:01:501
+RCSensor
+						Lua 0:57:33:125
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=UniversalRocket(1050) status=OK t=7971570 id=180
+						Lua 0:57:38:406
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=UniversalRocket(1050) status=OK t=7997980 id=181
+						Lua 0:57:39:692
+UniversalRocket
+						Lua 0:58:23:421
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=false reason="no supported actions" status=OK t=8223115 id=182
+						Lua 0:58:35:762
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=false reason="no supported actions" status=OK t=8284805 id=183
+						Lua 0:58:49:687
+[mod] [SMRTK] SMRTK_PANEL action=panel_toggle open=true status=OK tab=World t=8354465 id=184
+						Lua 0:58:50:886
+[mod] [SMRTK] SMRTK_CLEAR action=clear status=OK t=8360455 id=185
+						Lua 0:58:52:443
+[mod] [SMRTK] SMRTK_PANEL action=panel_toggle open=false status=OK tab=World t=8368240 id=186
+						Lua 0:58:55:630
+RoverSubclassManifest active: true
+						Lua 0:59:03:121
+C96Test RCRover 10 80
+						Lua 0:59:22:820
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipAnomaly object=SubsurfaceAnomaly_complete(2000000882) status=OK t=8511265 id=187
+						Lua 0:59:29:898
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipRover object=ExplorerRover(2000000262) status=OK t=8546650 id=188
+						Lua 0:59:32:774
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipRover object=ExplorerRover(2000000262) status=OK t=8561025 id=189
+						Lua 0:59:36:571
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipEffectDeposit object=ResearchEffectDeposit(2000000255) status=OK t=8580015 id=190
+						Lua 1:00:17:983
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipEffectDeposit object=ResearchEffectDeposit(2000000255) status=OK t=8787080 id=191
+						Lua 1:00:21:958
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipRover object=RCSensor(2000000261) status=OK t=8806900 id=192
+						Lua 1:00:34:837
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipColonist object=Colonist(2000000630) status=OK t=8864325 id=193						Lua 1:00:34:838
+
+						Lua 1:00:37:485
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=OpenPasture(1481) status=OK t=8877540 id=194
+						Lua 1:00:40:093
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=DomeMega(1248) status=OK t=8890590 id=195
+						Lua 1:00:40:798
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=MartianUniversity(1489) status=OK t=8894125 id=196
+						Lua 1:00:51:913
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=DomeMega(1248) status=OK t=8949690 id=197
+						Lua 1:00:55:544
+[mod] [SMRTK] SMRTK_PANEL action=panel_toggle open=true status=OK tab=World t=8967900 id=198
+						Lua 1:01:10:504
+[mod] [SMRTK] SMRTK_TAB action=tab_Selected page=Selected status=OK t=9042695 id=199
+						Lua 1:01:12:630
+[mod] [SMRTK] SMRTK_TAB action=tab_World page=World status=OK t=9053325 id=200
+						Lua 1:01:39:473
+[mod] [SMRTK] SMRTK_PANEL action=panel_toggle open=false status=OK tab=World t=9187540 id=201
+						Lua 1:02:06:366
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipEffectDeposit object=BeautyEffectDeposit(2000000229) status=OK t=9321995 id=202
+						Lua 1:02:20:175
+[mod] [SMRTK] SMRTK_PANEL action=panel_toggle open=true status=OK tab=World t=9346685 id=203
+						Lua 1:02:21:491
+[mod] [SMRTK] SMRTK_TAB action=tab_Sitting page=Sitting status=OK t=9353260 id=204
+						Lua 1:02:22:218
+[mod] [SMRTK] SMRTK_TAB action=tab_World page=World status=OK t=9356885 id=205
+						Lua 1:02:24:319
+[mod] [SMRTK] SMRTK_ACTION action=rocket_arrive changed=1 landing="native policy; orbit/landing waits unchanged" outcome=inbound_transit_skip_requested skipped_time=712755 status=OK visited=2 t=9367405 id=206
+[SMRTK] SMRTK_ACTION action=rocket_arrive changed=1 landing="native policy; orbit/landing waits unchanged" outcome=inbound_transit_skip_requested skipped_time=712755 status=OK visited=2 t=9367405 id=206
+						Lua 1:02:26:182
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipEffectDeposit object=BeautyEffectDeposit(2000000229) status=OK t=9376710 id=207
+						Lua 1:02:27:541
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=false reason="no supported actions" status=OK t=9383475 id=208
+						Lua 1:02:31:224
+[mod] [SMRTK] SMRTK_PANEL action=panel_toggle open=false status=OK tab=World t=9401935 id=209
+						Lua 1:03:32:088
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=UniversalRocket(1050) status=OK t=9623280 id=210
+						Lua 1:03:32:097
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=UniversalRocket(1050) status=OK t=9623280 id=211
+						Lua 1:03:35:662
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipRover object=RCSensor(2000000261) status=OK t=9641155 id=212
+						Lua 1:03:40:227
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=UniversalRocket(1050) status=OK t=9663970 id=213						Lua 1:03:40:228
+
+						Lua 1:03:51:477
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=DroneHub(1055) status=OK t=9720240 id=214
+						Lua 1:03:55:926
+[mod] [SMRTK] SMRTK_ACTION action=selected_spawn_drone method=CheatSpawnDrone object=DroneHub(1055) status=OK valid_after=true t=9742560 id=215
+[SMRTK] SMRTK_ACTION action=selected_spawn_drone method=CheatSpawnDrone object=DroneHub(1055) status=OK valid_after=true t=9742560 id=215
+						Lua 1:03:56:101
+[mod] [SMRTK] SMRTK_ACTION action=selected_spawn_drone method=CheatSpawnDrone object=DroneHub(1055) status=OK valid_after=true t=9743425 id=216
+[SMRTK] SMRTK_ACTION action=selected_spawn_drone method=CheatSpawnDrone object=DroneHub(1055) status=OK valid_after=true t=9743425 id=216
+						Lua 1:03:56:268
+[mod] [SMRTK] SMRTK_ACTION action=selected_spawn_drone method=CheatSpawnDrone object=DroneHub(1055) status=OK valid_after=true t=9744270 id=217
+[SMRTK] SMRTK_ACTION action=selected_spawn_drone method=CheatSpawnDrone object=DroneHub(1055) status=OK valid_after=true t=9744270 id=217
+						Lua 1:03:56:420
+[mod] [SMRTK] SMRTK_ACTION action=selected_spawn_drone method=CheatSpawnDrone object=DroneHub(1055) status=OK valid_after=true t=9745025 id=218
+[SMRTK] SMRTK_ACTION action=selected_spawn_drone method=CheatSpawnDrone object=DroneHub(1055) status=OK valid_after=true t=9745025 id=218
+						Lua 1:03:56:568
+[mod] [SMRTK] SMRTK_ACTION action=selected_spawn_drone method=CheatSpawnDrone object=DroneHub(1055) status=OK valid_after=true t=9745760 id=219
+[SMRTK] SMRTK_ACTION action=selected_spawn_drone method=CheatSpawnDrone object=DroneHub(1055) status=OK valid_after=true t=9745760 id=219
+						Lua 1:03:57:796
+[mod] [SMRTK] SMRTK_ACTION action=selected_spawn_drone method=CheatSpawnDrone object=DroneHub(1055) status=OK valid_after=true t=9751905 id=220
+[SMRTK] SMRTK_ACTION action=selected_spawn_drone method=CheatSpawnDrone object=DroneHub(1055) status=OK valid_after=true t=9751905 id=220
+						Lua 1:03:57:956
+[mod] [SMRTK] SMRTK_ACTION action=selected_spawn_drone method=CheatSpawnDrone object=DroneHub(1055) status=OK valid_after=true t=9752710 id=221
+[SMRTK] SMRTK_ACTION action=selected_spawn_drone method=CheatSpawnDrone object=DroneHub(1055) status=OK valid_after=true t=9752710 id=221
+						Lua 1:03:58:129
+[mod] [SMRTK] SMRTK_ACTION action=selected_spawn_drone method=CheatSpawnDrone object=DroneHub(1055) status=OK valid_after=true t=9753575 id=222
+[SMRTK] SMRTK_ACTION action=selected_spawn_drone method=CheatSpawnDrone object=DroneHub(1055) status=OK valid_after=true t=9753575 id=222
+						Lua 1:03:58:279
+[mod] [SMRTK] SMRTK_ACTION action=selected_spawn_drone method=CheatSpawnDrone object=DroneHub(1055) status=OK valid_after=true t=9754325 id=223
+[SMRTK] SMRTK_ACTION action=selected_spawn_drone method=CheatSpawnDrone object=DroneHub(1055) status=OK valid_after=true t=9754325 id=223
+						Lua 1:03:58:429
+[mod] [SMRTK] SMRTK_ACTION action=selected_spawn_drone method=CheatSpawnDrone object=DroneHub(1055) status=OK valid_after=true t=9755075 id=224
+[SMRTK] SMRTK_ACTION action=selected_spawn_drone method=CheatSpawnDrone object=DroneHub(1055) status=OK valid_after=true t=9755075 id=224
+						Lua 1:03:58:582
+[mod] [SMRTK] SMRTK_ACTION action=selected_spawn_drone method=CheatSpawnDrone object=DroneHub(1055) status=OK valid_after=true t=9755830 id=225
+[SMRTK] SMRTK_ACTION action=selected_spawn_drone method=CheatSpawnDrone object=DroneHub(1055) status=OK valid_after=true t=9755830 id=225
+						Lua 1:03:58:743
+[mod] [SMRTK] SMRTK_ACTION action=selected_spawn_drone method=CheatSpawnDrone object=DroneHub(1055) status=OK valid_after=true t=9756645 id=226
+[SMRTK] SMRTK_ACTION action=selected_spawn_drone method=CheatSpawnDrone object=DroneHub(1055) status=OK valid_after=true t=9756645 id=226
+						Lua 1:03:58:904
+[mod] [SMRTK] SMRTK_ACTION action=selected_spawn_drone method=CheatSpawnDrone object=DroneHub(1055) status=OK valid_after=true t=9757445 id=227
+[SMRTK] SMRTK_ACTION action=selected_spawn_drone method=CheatSpawnDrone object=DroneHub(1055) status=OK valid_after=true t=9757445 id=227
+						Lua 1:03:59:068
+[mod] [SMRTK] SMRTK_ACTION action=selected_spawn_drone method=CheatSpawnDrone object=DroneHub(1055) status=OK valid_after=true t=9758270 id=228
+[SMRTK] SMRTK_ACTION action=selected_spawn_drone method=CheatSpawnDrone object=DroneHub(1055) status=OK valid_after=true t=9758270 id=228
+						Lua 1:03:59:213
+[mod] [SMRTK] SMRTK_ACTION action=selected_spawn_drone method=CheatSpawnDrone object=DroneHub(1055) status=OK valid_after=true t=9758990 id=229
+[SMRTK] SMRTK_ACTION action=selected_spawn_drone method=CheatSpawnDrone object=DroneHub(1055) status=OK valid_after=true t=9758990 id=229
+						Lua 1:03:59:376
+[mod] [SMRTK] SMRTK_ACTION action=selected_spawn_drone method=CheatSpawnDrone object=DroneHub(1055) status=OK valid_after=true t=9759810 id=230						Lua 1:03:59:377
+
+[SMRTK] SMRTK_ACTION action=selected_spawn_drone method=CheatSpawnDrone object=DroneHub(1055) status=OK valid_after=true t=9759810 id=230
+						Lua 1:03:59:544
+[mod] [SMRTK] SMRTK_ACTION action=selected_spawn_drone method=CheatSpawnDrone object=DroneHub(1055) status=OK valid_after=true t=9760640 id=231
+[SMRTK] SMRTK_ACTION action=selected_spawn_drone method=CheatSpawnDrone object=DroneHub(1055) status=OK valid_after=true t=9760640 id=231
+						Lua 1:03:59:693
+[mod] [SMRTK] SMRTK_ACTION action=selected_spawn_drone method=CheatSpawnDrone object=DroneHub(1055) status=OK valid_after=true t=9761395 id=232
+[SMRTK] SMRTK_ACTION action=selected_spawn_drone method=CheatSpawnDrone object=DroneHub(1055) status=OK valid_after=true t=9761395 id=232
+						Lua 1:03:59:835
+[mod] [SMRTK] SMRTK_ACTION action=selected_spawn_drone method=CheatSpawnDrone object=DroneHub(1055) status=OK valid_after=true t=9762100 id=233
+[SMRTK] SMRTK_ACTION action=selected_spawn_drone method=CheatSpawnDrone object=DroneHub(1055) status=OK valid_after=true t=9762100 id=233
+						Lua 1:03:59:996
+[mod] [SMRTK] SMRTK_ACTION action=selected_spawn_drone method=CheatSpawnDrone object=DroneHub(1055) status=OK valid_after=true t=9762905 id=234
+[SMRTK] SMRTK_ACTION action=selected_spawn_drone method=CheatSpawnDrone object=DroneHub(1055) status=OK valid_after=true t=9762905 id=234
+						Lua 1:04:00:146
+[mod] [SMRTK] SMRTK_ACTION action=selected_spawn_drone method=CheatSpawnDrone object=DroneHub(1055) status=OK valid_after=true t=9763660 id=235
+[SMRTK] SMRTK_ACTION action=selected_spawn_drone method=CheatSpawnDrone object=DroneHub(1055) status=OK valid_after=true t=9763660 id=235
+						Lua 1:04:00:304
+[mod] [SMRTK] SMRTK_ACTION action=selected_spawn_drone method=CheatSpawnDrone object=DroneHub(1055) status=OK valid_after=true t=9764440 id=236
+[SMRTK] SMRTK_ACTION action=selected_spawn_drone method=CheatSpawnDrone object=DroneHub(1055) status=OK valid_after=true t=9764440 id=236
+						Lua 1:04:00:448
+[mod] [SMRTK] SMRTK_ACTION action=selected_spawn_drone method=CheatSpawnDrone object=DroneHub(1055) status=OK valid_after=true t=9765160 id=237
+[SMRTK] SMRTK_ACTION action=selected_spawn_drone method=CheatSpawnDrone object=DroneHub(1055) status=OK valid_after=true t=9765160 id=237
+						Lua 1:04:00:598
+[mod] [SMRTK] SMRTK_ACTION action=selected_spawn_drone method=CheatSpawnDrone object=DroneHub(1055) status=OK valid_after=true t=9765915 id=238
+[SMRTK] SMRTK_ACTION action=selected_spawn_drone method=CheatSpawnDrone object=DroneHub(1055) status=OK valid_after=true t=9765915 id=238
+						Lua 1:04:00:771
+[mod] [SMRTK] SMRTK_ACTION action=selected_spawn_drone method=CheatSpawnDrone object=DroneHub(1055) status=OK valid_after=true t=9766785 id=239
+[SMRTK] SMRTK_ACTION action=selected_spawn_drone method=CheatSpawnDrone object=DroneHub(1055) status=OK valid_after=true t=9766785 id=239
+						Lua 1:04:00:955
+[mod] [SMRTK] SMRTK_ACTION action=selected_spawn_drone method=CheatSpawnDrone object=DroneHub(1055) status=OK valid_after=true t=9767705 id=240
+[SMRTK] SMRTK_ACTION action=selected_spawn_drone method=CheatSpawnDrone object=DroneHub(1055) status=OK valid_after=true t=9767705 id=240
+						Lua 1:04:01:109
+[mod] [SMRTK] SMRTK_ACTION action=selected_spawn_drone method=CheatSpawnDrone object=DroneHub(1055) status=OK valid_after=true t=9768470 id=241
+[SMRTK] SMRTK_ACTION action=selected_spawn_drone method=CheatSpawnDrone object=DroneHub(1055) status=OK valid_after=true t=9768470 id=241
+						Lua 1:04:01:288
+[mod] [SMRTK] SMRTK_ACTION action=selected_spawn_drone method=CheatSpawnDrone object=DroneHub(1055) status=OK valid_after=true t=9769370 id=242
+[SMRTK] SMRTK_ACTION action=selected_spawn_drone method=CheatSpawnDrone object=DroneHub(1055) status=OK valid_after=true t=9769370 id=242
+						Lua 1:04:01:451
+[mod] [SMRTK] SMRTK_ACTION action=selected_spawn_drone method=CheatSpawnDrone object=DroneHub(1055) status=OK valid_after=true t=9770185 id=243
+[SMRTK] SMRTK_ACTION action=selected_spawn_drone method=CheatSpawnDrone object=DroneHub(1055) status=OK valid_after=true t=9770185 id=243
+						Lua 1:04:01:615
+[mod] [SMRTK] SMRTK_ACTION action=selected_spawn_drone method=CheatSpawnDrone object=DroneHub(1055) status=OK valid_after=true t=9771000 id=244
+[SMRTK] SMRTK_ACTION action=selected_spawn_drone method=CheatSpawnDrone object=DroneHub(1055) status=OK valid_after=true t=9771000 id=244
+						Lua 1:04:01:843
+[mod] [SMRTK] SMRTK_ACTION action=selected_spawn_drone method=CheatSpawnDrone object=DroneHub(1055) status=OK valid_after=true t=9772140 id=245
+[SMRTK] SMRTK_ACTION action=selected_spawn_drone method=CheatSpawnDrone object=DroneHub(1055) status=OK valid_after=true t=9772140 id=245
+						Lua 1:04:02:053
+[mod] [SMRTK] SMRTK_ACTION action=selected_spawn_drone method=CheatSpawnDrone object=DroneHub(1055) status=OK valid_after=true t=9773195 id=246
+[SMRTK] SMRTK_ACTION action=selected_spawn_drone method=CheatSpawnDrone object=DroneHub(1055) status=OK valid_after=true t=9773195 id=246
+						Lua 1:04:02:223
+[mod] [SMRTK] SMRTK_ACTION action=selected_spawn_drone method=CheatSpawnDrone object=DroneHub(1055) status=OK valid_after=true t=9774035 id=247
+[SMRTK] SMRTK_ACTION action=selected_spawn_drone method=CheatSpawnDrone object=DroneHub(1055) status=OK valid_after=true t=9774035 id=247
+						Lua 1:04:02:379
+[mod] [SMRTK] SMRTK_ACTION action=selected_spawn_drone method=CheatSpawnDrone object=DroneHub(1055) status=OK valid_after=true t=9774825 id=248
+[SMRTK] SMRTK_ACTION action=selected_spawn_drone method=CheatSpawnDrone object=DroneHub(1055) status=OK valid_after=true t=9774825 id=248
+						Lua 1:04:03:740
+[mod] [SMRTK] SMRTK_PANEL action=panel_toggle open=true status=OK tab=World t=9781635 id=249
+						Lua 1:04:04:090
+[mod] [SMRTK] SMRTK_PANEL action=panel_toggle open=false status=OK tab=World t=9783385 id=250
+						Lua 1:04:05:068
+[mod] [SMRTK] SMRTK_PANEL action=panel_toggle open=true status=OK tab=World t=9788270 id=251
+						Lua 1:04:06:407
+[mod] [SMRTK] SMRTK_CLEAR action=clear status=OK t=9794960 id=252
+						Lua 1:04:09:437
+[mod] [SMRTK] SMRTK_PANEL action=panel_toggle open=false status=OK tab=World t=9810110 id=253
+						Lua 1:04:10:658
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=UniversalRocket(1050) status=OK t=9816125 id=254
+						Lua 1:04:25:552
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipRover object=RCSensor(2000000261) status=OK t=9890615 id=255
+						Lua 1:05:37:406
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=UniversalRocket(1050) status=OK t=10154285 id=256
+						Lua 1:05:46:964
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=UniversalRocket(1051) status=OK t=10202065 id=257
+						Lua 1:07:27:570
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=UniversalRocket(1050) status=OK t=10705120 id=258
+						Lua 1:07:35:333
+[mod] [SMRTK] SMRTK_PANEL action=panel_toggle open=true status=OK tab=World t=10744015 id=259
+						Lua 1:07:39:228
+[mod] [SMRTK] SMRTK_MARK action=screenshot_mark capture="native accepted" capture_id=0011 fallback=false label="Screenshot 0011" mark=309 path=C:/Dev/SMR-ScreenCaptures/SMRTK_0011.png status=OK t=10763495 id=260
+[SMRTK] SMRTK_MARK action=screenshot_mark capture="native accepted" capture_id=0011 fallback=false label="Screenshot 0011" mark=309 path=C:/Dev/SMR-ScreenCaptures/SMRTK_0011.png status=OK t=10763495 id=260
+[mod] [SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=49/49 game=403908 mark_action=screenshot_mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack pack_version=11 read="live registry" save=unavailable sol=16 status=OK t=10763495 id=261
+[SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=49/49 game=403908 mark_action=screenshot_mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack pack_version=11 read="live registry" save=unavailable sol=16 status=OK t=10763495 id=261
+						Lua 1:09:20:466
+Stop sequence GenericAnomalies - Rare Resource - Chromium : FinishedStop sequence list GenericAnomalies						Lua 1:11:59:603
+UniversalRocket avail: 0
+UniversalRocket avail: 0
+						Lua 1:12:05:221
+#labels.RCRover 0 #labels.RCSensor 1 CargoAvailable 0
+						Lua 1:12:08:839
+[mod] [SMRTK] SMRTK_COPY action=copy flushed=true from=309 lines=7 status=OK truncated=false t=11904174 id=262
+[SMRTK] SMRTK_COPY action=copy flushed=true from=309 lines=7 status=OK truncated=false t=11904174 id=262
+						Lua 1:14:08:467
+UniversalRocket gathered: 0
+						Lua 1:14:08:468
+UniversalRocket gathered: 0
+						Lua 1:14:13:971
+RCSensor idle true controllable true holder false command Idle
+						Lua 1:14:20:070
+[mod] [SMRTK] SMRTK_COPY action=copy flushed=true from=309 lines=13 status=OK truncated=false t=11965624 id=263
+[SMRTK] SMRTK_COPY action=copy flushed=true from=309 lines=13 status=OK truncated=false t=11965624 id=263
+						Lua 1:16:26:569
+rocket uses patched fn: true | rocket class has own copy: true | descendants: 13
+						Lua 1:16:31:074
+[mod] [SMRTK] SMRTK_COPY action=copy flushed=true from=309 lines=16 status=OK truncated=false t=12093737 id=264
+[SMRTK] SMRTK_COPY action=copy flushed=true from=309 lines=16 status=OK truncated=false t=12093737 id=264
+						Lua 1:17:13:424
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=LandingPad(1439) status=OK t=12136082 id=265
+						Lua 1:17:13:909
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipRover object=RCSensor(2000000261) status=OK t=12136566 id=266
+						Lua 1:17:19:391
+Initializing ged app: GedInspector
+						Lua 1:17:19:394
+[ged] Opened GedInspector with class nil, id 4320371366467595302
+[mod] [SMRTK] SMRTK_SELECTED action=selected_more category=AsyncCheat method=AsyncCheatInspect object=RCSensor(2000000261) status=OK valid_after=true t=12142045 id=267
+[SMRTK] SMRTK_SELECTED action=selected_more category=AsyncCheat method=AsyncCheatInspect object=RCSensor(2000000261) status=OK valid_after=true t=12142045 id=267
+						Lua 1:18:15:960
+[ged] Closed GedInspector with id 4320371366467595302
+						Lua 1:18:19:580
+lister patched: true | RCRover is rover: true | descendants: 2
+   desc RCSensor true 1
+   desc RCSolar true 0
+						Lua 1:18:25:649
+[mod] [SMRTK] SMRTK_COPY action=copy flushed=true from=309 lines=24 status=OK truncated=false t=12208311 id=268
+[SMRTK] SMRTK_COPY action=copy flushed=true from=309 lines=24 status=OK truncated=false t=12208311 id=268
+						Lua 1:19:03:380
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipRover object=RCSensor(2000000261) status=OK t=12246038 id=269
+						Lua 1:19:08:397
+Initializing ged app: GedInspector
+						Lua 1:19:08:398
+[ged] Opened GedInspector with class nil, id 2758380641774287509
+[mod] [SMRTK] SMRTK_SELECTED action=selected_more category=AsyncCheat method=AsyncCheatInspect object=RCSensor(2000000261) status=OK valid_after=true t=12251053 id=270
+[SMRTK] SMRTK_SELECTED action=selected_more category=AsyncCheat method=AsyncCheatInspect object=RCSensor(2000000261) status=OK valid_after=true t=12251053 id=270
+						Lua 1:19:09:789
+[mod] [SMRTK] SMRTK_SELECTED action=selected_more category=AsyncCheat method=AsyncCheatProperties object=RCSensor(2000000261) status=OK valid_after=true t=12252451 id=271
+[SMRTK] SMRTK_SELECTED action=selected_more category=AsyncCheat method=AsyncCheatProperties object=RCSensor(2000000261) status=OK valid_after=true t=12252451 id=271
+						Lua 1:19:11:829
+[ged] Opened GedObjectEditor with class nil, id 6073173211780220958
+						Lua 1:20:57:461
+AllowSetForegroundWindow failed for process 78024
+						Lua 1:20:57:480
+[ged] Opened GedArtSpecEditor with class EntitySpec, id 518113666219310971
+						Lua 1:21:01:960
+[ged] Closed GedArtSpecEditor with id 518113666219310971
+						Lua 1:22:41:960
+[ged] Closed GedObjectEditor with id 6073173211780220958
+						Lua 1:23:14:428
+Initializing ged app: GedInspector
+						Lua 1:23:14:429
+[ged] Opened GedInspector with class nil, id 1831540467248996827
+[mod] [SMRTK] SMRTK_SELECTED action=selected_more category=AsyncCheat method=AsyncCheatInspect object=RCSensor(2000000261) status=OK valid_after=true t=12497090 id=272
+[SMRTK] SMRTK_SELECTED action=selected_more category=AsyncCheat method=AsyncCheatInspect object=RCSensor(2000000261) status=OK valid_after=true t=12497090 id=272
+						Lua 1:23:16:205
+[mod] [SMRTK] SMRTK_SELECTED action=selected_more category=AsyncCheat method=AsyncCheatProperties object=RCSensor(2000000261) status=OK valid_after=true t=12498868 id=273
+[SMRTK] SMRTK_SELECTED action=selected_more category=AsyncCheat method=AsyncCheatProperties object=RCSensor(2000000261) status=OK valid_after=true t=12498868 id=273
+						Lua 1:23:18:131
+[ged] Opened GedObjectEditor with class nil, id 6583354620513501048
+						Lua 1:26:05:960
+[ged] Closed GedObjectEditor with id 6583354620513501048
+						Lua 1:26:06:959
+[ged] Closed GedInspector with id 2758380641774287509
+						Lua 1:26:07:456
+[mod] [SMRTK] SMRTK_CLEAR action=clear status=OK t=12670119 id=274
+						Lua 1:26:10:145
+[mod] [SMRTK] SMRTK_PANEL action=panel_toggle open=false status=OK tab=World t=12672807 id=275
+						Lua 1:26:20:256
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=UniversalRocket(1050) status=OK t=12682901 id=276
+						Lua 1:26:21:532
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=UniversalRocket(1050) status=OK t=12684186 id=277
+						Lua 1:26:39:159
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=UniversalRocket(1050) status=OK t=12701806 id=278
+						Lua 1:28:11:186
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=OpenPasture(1481) status=OK t=12793838 id=279
+						Lua 1:28:14:286
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=DomeMega(1248) status=OK t=12796937 id=280
+						Lua 1:28:14:633
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=MartianUniversity(1489) status=OK t=12797287 id=281
+						Lua 1:28:18:705
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=UniversalRocket(1050) status=OK t=12801350 id=282
+						Lua 1:28:21:528
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=UniversalRocket(1050) status=OK t=12804176 id=283
+						Lua 1:28:25:758
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=DomeMega(1248) status=OK t=12808405 id=284
+						Lua 1:28:25:971
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=SmartApartmentsCCP1(1474) status=OK t=12808622 id=285
+						Lua 1:28:26:467
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=SmartApartmentsCCP1(1475) status=OK t=12809122 id=286
+						Lua 1:28:26:868
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=SmartApartmentsCCP1(1476) status=OK t=12809522 id=287
+						Lua 1:32:00:078
+RCSensor list: 1 | city same: true | connected label: 1
+						Lua 1:32:03:998
+[mod] [SMRTK] SMRTK_PANEL action=panel_toggle open=true status=OK tab=World t=12819654 id=288
+						Lua 1:32:04:983
+[mod] [SMRTK] SMRTK_COPY action=copy flushed=true from=309 lines=48 status=OK truncated=false t=12820636 id=289
+[SMRTK] SMRTK_COPY action=copy flushed=true from=309 lines=48 status=OK truncated=false t=12820636 id=289
+						Lua 1:32:20:894
+[mod] [SMRTK] SMRTK_PANEL action=panel_toggle open=false status=OK tab=World t=12836550 id=290

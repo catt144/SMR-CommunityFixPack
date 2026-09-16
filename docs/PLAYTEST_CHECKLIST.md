@@ -263,7 +263,7 @@ The later attended skills/rules audit judges the contents; the thresholds and
 restoration remain yours. Caps are still down. Evidence and revisit criteria:
 [documentation skills report](agent/reports/DOC_EDITING_SKILLS_AUDIT.md).
 
-### 2026-09-15 — 185: two new fixes are FILED and deliberately UNAUTHORED — say when to build each
+### 2026-09-15 — 185: C95 built; C96 repaired after live failure — attended retest pending
 
 <!-- ck:185 status:ruled owner:yes -->
 
@@ -281,12 +281,9 @@ but the release itself goes through the normal release path, not that brief.
 below; the lift is yours, not an agent deciding the gate had lapsed. **BUILT the same day:**
 `Code/Fix_RoverSubclassManifest.lua`, 22 desk legs falsified with three mutants,
 [build report](agent/reports/C96_ROVER_SUBCLASS_BUILD.md).
-⛔ **NOT reproduced in play and NOT tested in a game** — the ESA fixture is still unprovisioned,
-so **this item stays OPEN for the two calls that are still yours**: whether to provision that
-fixture and test it, and whether it ships. ⭐ Worth knowing before you decide: the build found
-that C96's own scoping would have produced a **dead module** — it named the legacy transporter
-only, and 1.1.0 expeditions use the other one, which is exactly how C95 failed its sitting. The
-repair covers both, and it also repairs a cargo-accounting half the entry had not spotted.
+**The original desk pass preceded the live test; the live test subsequently FAILED.** The ESA
+fixture is provisioned. The module attempts both transporter paths and cargo accounting, but
+those design claims do not establish that it works. Current diagnosis follows the ship ruling.
 
 ⚖️⭐ **BOTH REMAINING CALLS RULED 2026-09-16 — C96 SHIPS IN v11, and the fixture is being
 provisioned now.** Your words, asked whether C96's module should ride v11 or be pulled because it had
@@ -295,6 +292,26 @@ planned fixes."* ⇒ `Fix_RoverSubclassManifest` stays registered (`items.lua`, 
 `Fix_OpenPastureStockpiles` ships with it (its validation is **191**). ⛔ **This closes (b)'s "whether it
 ships" call; it does NOT assert either fix has been witnessed in play** — both are under test today and
 the acceptance legs stay owed at **191** and in the C96 build report. A ship decision is not a test result.
+
+**C96 follow-up, 2026-09-16:** its original repair failed on the Seeker-only ESA/Wildfire
+fixture. The exact-name probe then returned `RCSensor list: 1 | city same: true | connected label: 1`.
+The cause was the installer targeting old/empty built-class tables instead of the definitions
+used by the next class build. The earlier function-equality check had been misinterpreted.
+
+**Owner authority in this session:** "You are clear to handle this in any way explore or look
+at any file, rewirte any part of it you want". Condition: you were juggling multiple tasks and
+explicitly removed restrictions from the agent-authored C96 brief. Design and implementation
+may proceed without another approval stop. The earlier v11 ship ruling remains recorded.
+
+**Repaired at the desk:** install on definitions; include subclasses in availability and busy
+warnings; reserve stricter manifest requests; record a loaded Seeker as Seeker cargo. The
+fulfilled Commander request transfers to that Seeker line, so native return/unload handling
+cannot spawn an extra Commander. Native city labels stay intact. **MEASURED:** 55 legs pass;
+the old module fails the new loading-order regression. [Evidence](agent/reports/C96_ROVER_SUBCLASS_BUILD.md).
+**TAKEABLE-WHEN:** restart retail and reload this fixture. The remaining owner action is the
+attended expedition launch/return check, including the satisfied actual-Seeker cargo line and
+no extra Commander on return. This revision's live acceptance and removal/reload leg remain
+UNRUN. The module stays registered and the task brief stays live.
 
 ⛔ **(b)'s ORIGINAL TEXT, kept because the ruling above amends it rather than replacing the
 record:** C96 was still open and nothing about it was authorised by the C95 lift.
