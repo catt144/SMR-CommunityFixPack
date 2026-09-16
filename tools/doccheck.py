@@ -242,6 +242,47 @@ def all_rows(model):
     return rows
 
 
+BUGS_ARCHIVE = os.path.join(DOCS, "archive", "bugs")
+
+
+def archived_numbers():
+    """-> (seqs, rows) claimed by entries retired into docs/archive/bugs/.
+
+    An archived entry keeps its original `seq`/`row` verbatim, so the numbers it
+    vacated in the live library are ACCOUNTED FOR rather than lost. That is what
+    lets the live numbering carry gaps without renumbering every surviving entry
+    each time something is archived -- the pre-archive rule was 1..N contiguous,
+    which made one retirement cost a rewrite of every file above it.
+    """
+    seqs, rows = set(), set()
+    if not os.path.isdir(BUGS_ARCHIVE):
+        return seqs, rows
+    for name in sorted(os.listdir(BUGS_ARCHIVE)):
+        if not name.endswith(".md"):
+            continue
+        text = "\n".join(read(os.path.join(BUGS_ARCHIVE, name)))
+        for mo in re.finditer(r"^seq: (\d+)\s*$", text, re.M):
+            seqs.add(int(mo.group(1)))
+        for mo in re.finditer(r"^row: (\d+)\s*$", text, re.M):
+            rows.add(int(mo.group(1)))
+        for mo in re.finditer(r'"row":\s*(\d+)', text):
+            rows.add(int(mo.group(1)))
+    return seqs, rows
+
+
+def gap_report(kind, live, archived, red):
+    """Duplicates stay RED. A hole is RED only if the archive does not own it."""
+    if not live:
+        return []
+    top = max(live)
+    holes = [n for n in range(1, top + 1) if n not in live]
+    orphaned = [n for n in holes if n not in archived]
+    if orphaned:
+        red.append("%s gap(s) with nothing in docs/archive/bugs/ to account "
+                   "for them: %r" % (kind, orphaned))
+    return holes
+
+
 def check_entries(model, out):
     """Front-matter validation + the row<->tag check on its new surface.
 
@@ -321,22 +362,44 @@ def check_entries(model, out):
                          "(from %r)"
                          % (row["id"], word, row["status"], row["status_source"]))
 
+    arch_seq, arch_row = archived_numbers()
+
     dup_seq = {k: v for k, v in seqs.items() if len(v) > 1}
     if dup_seq:
         red.append("duplicate seq: %r" % dup_seq)
-    if sorted(seqs) != list(range(1, len(model["entries"]) + 1)):
-        red.append("seq is not 1..%d contiguous" % len(model["entries"]))
+    seq_holes = gap_report("seq", set(seqs), arch_seq, red)
+
     dup_row = {k: v for k, v in rows.items() if len(v) > 1}
     if dup_row:
         red.append("duplicate index row numbers: %r" % dup_row)
-    if sorted(rows) != list(range(1, len(rows) + 1)):
-        red.append("index row numbers are not 1..%d contiguous" % len(rows))
+    row_holes = gap_report("index row", set(rows), arch_row, red)
+
+    # A number reused by both the live library and the archive is the one way
+    # an archived entry can still be silently overwritten.
+    clash_seq = sorted(set(seqs) & arch_seq)
+    if clash_seq:
+        red.append("seq claimed by both a live entry and docs/archive/bugs/: %r"
+                   % clash_seq)
+    clash_row = sorted(set(rows) & arch_row)
+    if clash_row:
+        red.append("index row claimed by both a live entry and "
+                   "docs/archive/bugs/: %r" % clash_row)
 
     out.append("ENTRIES: %d files (%d grouped), %d preserved index rows, "
                "%d heading tags compared"
                % (len(model["entries"]),
                   len([e for e in model["entries"] if e["kind"] == "grouped"]),
                   len(rows), tagged))
+    if seq_holes or row_holes or arch_seq or arch_row:
+        loose = len([n for n in seq_holes if n not in arch_seq]) + \
+                len([n for n in row_holes if n not in arch_row])
+        out.append("  ARCHIVED: %d seq + %d row number(s) held by "
+                   "docs/archive/bugs/; live numbering carries %d seq + %d row "
+                   "gap(s), %s"
+                   % (len(arch_seq), len(arch_row), len(seq_holes),
+                      len(row_holes),
+                      "all accounted for" if not loose
+                      else "%d NOT accounted for (RED above)" % loose))
     out.append("  status derived from: %s"
                % ", ".join("%s x%d" % (k, v) for k, v in sorted(sources.items())))
     for line in red:

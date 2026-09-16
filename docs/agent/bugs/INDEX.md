@@ -1,15 +1,12 @@
 <!-- GENERATED — never hand-edit; regenerate with: python tools/doccheck.py --regen -->
 <!-- split_bugs.py --write is the one-time MIGRATION from the retired pre-split doc, never a regeneration; verify: python tools/doccheck.py -->
 
-# Bug index — 231 rows, 196 entry files
+# Bug index — 193 rows, 193 entry files
 
-119 F + 13 D + 99 C. `seq` is the entry's position in the old BUGS.md file order;
+119 F + 13 D + 61 C. `seq` is the entry's position in the old BUGS.md file order;
 the row order below is the old index table's own. Generated from the front matter of
 `docs/agent/bugs/*.md` — edit an entry, not this file.
 
-- `C03-C11.md` is a **grouped** entry: C03–C11 share one body, and their rows link to it. Per-ID anchors inside it do not exist and are not invented.
-- `C12-C38.md` is a **grouped** entry: C12–C38 share one body, and their rows link to it. Per-ID anchors inside it do not exist and are not invented.
-- C02: index row with no entry text anywhere in BUGS.md (verified 2026-08-03); recorded in `_notes.md`.
 
 | seq | id | title | status | priority | evidence | entry |
 |----|----|-------|--------|----------|----------|-------|
@@ -123,44 +120,6 @@ the row order below is the old index table's own. Generated from the front matte
 | 101 | F96 | The St. Elmo's Fire sinkhole is the **only** mystery set-piece in the game a meteor can destroy | fixed | P3 | SOURCE-VERIFIED | [F96.md](F96.md) |
 | 102 | F97 | The dust-devil scheduler multiplies its wave COUNT by `spawn_chance`, a probability — so `count_max` is unreachable below 100% and the count can be 0 while `count_min` is 1 | tested | P3 | SOURCE-VERIFIED | [F97.md](F97.md) |
 | 103 | F98 | **OUR OWN DEFECT:** `Fix_TechDescriptionBuilding` (F25) is a **no-op in retail** — it re-uses the shipped translation id, and the engine discards a re-used id's literal at `T()` construction | filed | P3 | SOURCE-VERIFIED | [F98.md](F98.md) |
-| 111 | C01 | `BreakthroughOrder` reshuffled on every map load | cand | ? | cand | [C01.md](C01.md) |
-|  | C02 | Cave-ins reported on asteroids — no Src code path found | cand | ? | cand | NO ENTRY TEXT (verified prompt 1, 2026-08-03) |
-| 112 | C03 | Research screen softlock; research progress can exceed 100% | cand | ? | cand | grouped → [C03-C11.md](C03-C11.md) |
-|  | C04 | Surface dust storms damage underground pipes (cross-map leak) | closed | ? | **CLOSED — promoted** | grouped → [C03-C11.md](C03-C11.md) |
-|  | C05 | Colonists repeatedly visit already-satisfied interest buildings | cand | ? | cand | grouped → [C03-C11.md](C03-C11.md) |
-|  | C06 | Colonist assigned to multiple workplaces simultaneously | cand | ? | cand | grouped → [C03-C11.md](C03-C11.md) |
-|  | C07 | Manual workplace assignment immediately discarded | cand | ? | cand | grouped → [C03-C11.md](C03-C11.md) |
-|  | C08 | Rare-metal extractor smokes forever after refab | cand | ? | cand | grouped → [C03-C11.md](C03-C11.md) |
-|  | C09 | Deterministic freeze near 90% breathable atmosphere | cand | ? | cand | grouped → [C03-C11.md](C03-C11.md) |
-|  | C10 | Last War mystery freezes at 54%; permanently blocks ALL imports | cand | ? | cand | grouped → [C03-C11.md](C03-C11.md) |
-|  | C11 | Game stops saving entirely (auto + manual) | cand | ? | cand | grouped → [C03-C11.md](C03-C11.md) |
-| 113 | C12 | Support Struts ignore Easy Maintenance game rule | cand | ? | cand | grouped → [C12-C38.md](C12-C38.md) |
-|  | C13 | Three FollowUp storybits mis-categorized, never fire | cand | ? | cand | grouped → [C12-C38.md](C12-C38.md) |
-|  | C14 | Fhtagn! option 2 cowards ALL colonists, not religious | cand | ? | cand | grouped → [C12-C38.md](C12-C38.md) |
-|  | C15 | Dust Sickness: Deaths morale penalty never applied | cand | ? | cand | grouped → [C12-C38.md](C12-C38.md) |
-|  | C16 | Flying drones malfunctioning mid-air stuck "flying" | cand | ? | cand | grouped → [C12-C38.md](C12-C38.md) |
-|  | C17 | The Man From Mars follow-up rewards nothing | cand | ? | cand | grouped → [C12-C38.md](C12-C38.md) |
-|  | C18 | XenoExtraction tech skips now-native ex-DLC extractors | closed | ? | **✅ CLOSED — `wontfix` (intent)** | grouped → [C12-C38.md](C12-C38.md) |
-|  | C19 | `AreDomesConnectedWithPassage` has no distance term | closed | ? | **✅ CLOSED — declined, no defect in Relaunched** | grouped → [C12-C38.md](C12-C38.md) |
-|  | C20 | Philosopher's Stone sector count stalls while paused | cand | ? | cand | grouped → [C12-C38.md](C12-C38.md) |
-|  | C21 | St. Elmo sinkholes destructible by meteors (soft-lock) | cand | ? | cand | grouped → [C12-C38.md](C12-C38.md) |
-|  | C22 | Saint trait dome-morale blessing never worked (label mismatch) | closed | ? | **CLOSED — promoted** | grouped → [C12-C38.md](C12-C38.md) |
-|  | C23 | Dust devils: 3 scheduler defects (chance-as-count, CurrentMap read, DustStormsDisabled gap) | cand | ? | **PARTLY promoted — 3 subjects, 3 answers** | grouped → [C12-C38.md](C12-C38.md) |
-|  | C24 | Precedence bug: ordinary rockets count as asteroid landers (empty selection screen) | closed | ? | **CLOSED — promoted** | grouped → [C12-C38.md](C12-C38.md) |
-|  | C25 | Jumbo Cave reinforcements stuck on unreachable waste rock | closed | ? | **CLOSED — promoted** | grouped → [C12-C38.md](C12-C38.md) |
-|  | C26 | Malfunctioned buildings stuck in perpetual maintenance | closed | ? | **✅ CLOSED — `wontfix`, not reachable on current-build saves** | grouped → [C12-C38.md](C12-C38.md) |
-|  | C27 | Signal Boosters never extend Drone Hub Extender radius | closed | ? | **✅ CLOSED — no defect in Relaunched** | grouped → [C12-C38.md](C12-C38.md) |
-|  | C28 | Transport Optimization tech never applied to RC Transport | closed | ? | **✅ CLOSED — no defect in Relaunched** | grouped → [C12-C38.md](C12-C38.md) |
-|  | C29 | Children-only buildings admit all age groups | closed | ? | **✅ CLOSED — no defect in Relaunched** | grouped → [C12-C38.md](C12-C38.md) |
-|  | C30 | Supply-pod reward pins stuck on HUD | closed | ? | **✅ CLOSED — no defect in Relaunched** | grouped → [C12-C38.md](C12-C38.md) |
-|  | C31 | Meteor storms broken in 1.0.7.396349 (mechanism unknown) | cand | ? | cand | grouped → [C12-C38.md](C12-C38.md) |
-|  | C36 | "Inner Light" mystery does not complete for some players | filed | ? | **✅ SOLVED — not a new defect** | grouped → [C12-C38.md](C12-C38.md) |
-|  | C37 | Planetary anomalies don't pull colonists up the elevator — blocks a purely-underground colony | cand | ? | cand | grouped → [C12-C38.md](C12-C38.md) |
-|  | C35 | Edit Payload confirmed while units are on the cargo ramp tears down the rocket's command-centre connection **with no wait**, where the takeoff path doing the same thing waits | cand | ? | cand | grouped → [C12-C38.md](C12-C38.md) |
-|  | C32 | Buildings drop out of `ShiftsBuilding` label — stuck on last workshift forever | cand | ? | cand | grouped → [C12-C38.md](C12-C38.md) |
-|  | C33 | Whole-track demolition leaks an undeletable invisible TrackBase shell — OUR F44 path reproduces it | closed | ? | **CLOSED — promoted** | grouped → [C12-C38.md](C12-C38.md) |
-|  | C34 | Stale-ACTIVE rain: `g_RainDisaster` set, main_thread dead — reads disaster-active forever | cand | ? | cand | grouped → [C12-C38.md](C12-C38.md) |
-|  | C38 | Astrogeologist's "Extractor production +10%" misses 2 of the 12 buildable extractors | cand | ? | cand | grouped → [C12-C38.md](C12-C38.md) |
 | 114 | C39 | `Policy_Automation_ServiceAutomation` cuts `max_workers` by **label** while its performance compensation keys on **class** — the four Workshops are on the label and outside the class | tested-unattended | ? | **OBSERVED** | [C39.md](C39.md) |
 | 115 | C40 | "Crowded Living" grants **+3 residence capacity that is added and removed live with the Ministry of Culture's `working` flag**, and every removal EVICTS the tail residents colony-wide | filed | ? | cand | [C40.md](C40.md) |
 | 116 | C41 | Depot resource picker fails to APPEAR at all (OG witness) — F76's unrefuted residue | filed | ? | cand | [C41.md](C41.md) |

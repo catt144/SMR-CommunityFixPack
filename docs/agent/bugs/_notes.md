@@ -1,8 +1,7 @@
 ---
 kind: "notes"
 source: "docs/BUGS.md, split 2026-08-03 by tools/split_bugs.py"
-orphan_rows:
-  - {"row": 112, "id": "C02", "title": "Cave-ins reported on asteroids — no Src code path found", "status": "cand", "status_source": "row-evidence", "priority": "?", "evidence": "cand", "row_status": "runtime-check", "note": "NO ENTRY TEXT (verified prompt 1, 2026-08-03)"}
+orphan_rows: []
 ---
 # BUGS.md residue — everything that belonged to no entry
 
@@ -16,9 +15,11 @@ left between them), and the “Not yet swept” backlog.
 The index table it also held is *not* here — `INDEX.md` replaces it, and
 every cell of all 151 rows is preserved verbatim in entry front matter.
 
-**C02 has an index row and no entry text anywhere in BUGS.md** (verified
-twice, 2026-08-03): it keeps an INDEX row pointing at nothing rather than
-getting an invented entry. Its row is in this file's front matter.
+**C02 had an index row and no entry text anywhere in BUGS.md** (verified
+twice, 2026-08-03): it kept an INDEX row pointing at nothing rather than
+getting an invented entry. ⭐ **ARCHIVED 2026-09-16** with the rest of the
+1.0.7-era candidate block — the row is preserved verbatim in
+`docs/archive/bugs/C02_orphan_row.md`, and `orphan_rows` is now empty.
 
 ---
 
