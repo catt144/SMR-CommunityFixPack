@@ -10920,3 +10920,16 @@ Three corrections worth their own line, each already homed:
 Filed `C100` from the owner's own observation that a habitat resident who gets home leaves
 again — a second, continuous drain with the emigration scorer's jobless override as its
 mechanism; defect-or-design is ck188 and unruled.
+
+
+## 2026-09-16 — v11 release (`smr-bugfixpack-15`), executed on Claude Opus 5 (1M context)
+
+Record only; the release lives in `RELEASE_OUTBOX.md` *Released in v11*. Words `e2df30a`, site
+`74a336e` (SMR-CommunityMods), close-out in the commit carrying this line.
+
+C93, C95 (judgment call) and C96 shipped; count Forty-nine → Fifty-two, headliners 20 → 21,
+judgment calls four → five. The site home page still said "three judgment calls" from before
+v10 and was corrected. The `UPLOAD_WORKFLOW.md` change-note backup still carried v9's note.
+Owner said "uploaded"; Steam changelog and body read back the release; writeback `version`
+11 → 14, `pdx_version` "9" → "10", comments restored. Site NOT published at close; Paradox
+page version not stated.

@@ -9,7 +9,6 @@ What may enter this file: the admission door in `agent/prompts/perma/STATE_EVICT
 ## Now
 - Current version 1.1.0.403908 + DLC
 - Previous version 1.0.7 w/ tree archived at `C:\Dev\SMR-SrcArchive\1.0.7.396349\Src` (`EF-083`)
-- NEXT: v11 UPLOAD OWED → then release_prompt.md §4 close-out
 
 ## Open owner decisions (bodies in `docs/PLAYTEST_CHECKLIST.md` → "Decisions waiting on you")
 - Owner OWES: ck151 (b) dev-report scope.

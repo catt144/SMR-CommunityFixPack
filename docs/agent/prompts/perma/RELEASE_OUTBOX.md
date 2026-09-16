@@ -21,7 +21,32 @@ player surface bumps it by one on release.
 
 ## Pending — goes out with the next upload
 
-### Pending — C95 habitat expedition draft (2026-09-16)
+F120's row, added 2026-09-16 by the audit, was **WITHDRAWN** the same day on the
+owner's ruling: no platform the pack serves can reach its repaired state; module
+held in `tools/held/`, checklist 187. That withdrawal remains in force.
+
+## Released — history, newest first (cleared here by `release_prompt.md`)
+
+### Released in v11 (2026-09-16) — C93, C95, C96 landed
+- **Card:** count word **Forty-nine → Fifty-two** (site `^??? ` rows = 52, section tally sums);
+  headliners 20 → 21 (C93's ranch bullet); judgment calls four → **five** (C95) in `faq.md`,
+  the fix-list marker and `index.md` (which had still said three). Site commit `74a336e`, words
+  commit `e2df30a`.
+- **Shipped `last_changes` is the owner's box text**, not the tree draft: it names the RC Generator
+  as covered (desk-covered by the suite; never flown) and drops the "one way only" clause. Kept as
+  shipped, as at v9.
+- **Cleared on the owner's word ("uploaded", 2026-09-16) plus READ evidence:** Steam changelog
+  newest entry "Update: Sep 16 @ 2:27pm" carries the shipped note; live Steam body reads
+  "Fifty-two repairs" (0 "Forty-nine"). Tree writeback `version` 11 → **14** (three saves),
+  `pdx_version` "9" → **"10"**, `code_hash`/`saved` rewritten; comments stripped in both files and
+  restored in the close-out commit. ⚠️ **Receipt gaps at close:** the Paradox page version was
+  not stated; and the **site was NOT published** — newest `Publish docs site` run is `d86a347`
+  (2026-09-13) and the live fix list read 49 entries with no ranch row at 17:30 local, so the
+  card's Fifty-two disagrees with the page it links until the owner runs the workflow.
+
+The three staged entries, moved here verbatim:
+
+#### C95 habitat expedition draft (staged 2026-09-16)
 
 - **C95 · `Fix_HabitatExpeditionDraft`**, main-pack **judgment call**, authorized
   by ck185. ✅ **`tested-attended` 2026-09-16**: the automatic-draft repair passed with the
@@ -35,7 +60,7 @@ player surface bumps it by one on release.
   Release pass derives the public count from its actual row set. No version bump,
   store edit, upload or publication was performed by this build.
 
-### Pending — C93 Outside Ranch stockpiles under Open Domes (2026-09-16)
+#### C93 Outside Ranch stockpiles under Open Domes (staged 2026-09-16)
 
 - **C93 · `Fix_OpenPastureStockpiles`**, main pack, **plain repair** — the entry records no
   judgment call. Ship ruled by the owner 2026-09-16 (recorded in ck185: *"Both of those, and
@@ -55,7 +80,7 @@ player surface bumps it by one on release.
 - No public-copy draft exists. Authority: [C93](../../bugs/C93.md) and
   [the build report](../../reports/C93_RANCH_OPEN_DOMES_BUILD.md).
 
-### Pending — C96 RC Seeker and other rover subclasses on expeditions (2026-09-16)
+#### C96 RC Seeker and other rover subclasses on expeditions (staged 2026-09-16)
 
 - **C96 · `Fix_RoverSubclassManifest`**, main pack, **plain repair** — the entry records no
   judgment call. Ship ruled by the owner 2026-09-16, ck185 (b).
@@ -75,12 +100,6 @@ player surface bumps it by one on release.
   that removing the pack mid-expedition was tested.
 - No public-copy draft exists. Authority: [C96](../../bugs/C96.md) and
   [the build report](../../reports/C96_ROVER_SUBCLASS_BUILD.md).
-
-F120's row, added 2026-09-16 by the audit, was **WITHDRAWN** the same day on the
-owner's ruling: no platform the pack serves can reach its repaired state; module
-held in `tools/held/`, checklist 187. That withdrawal remains in force.
-
-## Released — history, newest first (cleared here by `release_prompt.md`)
 
 ### Released in v10 (2026-09-13) — C85, C89, C88 landed; F37, F43+F118, F31 retired
 - **C85 · `Fix_CloggedBuildingRelease`** (`59c8c47`) — a building clogged by a dust

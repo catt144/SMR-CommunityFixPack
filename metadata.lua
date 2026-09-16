@@ -243,7 +243,7 @@ return PlaceObj('ModDef', {
 	-- C93's reload recovery (a ranch built after the law is NOT claimed tested), C96's Seeker flight
 	-- (the RC Generator is not named), C95's automatic draft (tagged a judgment call, the fifth).
 	-- The count sentence is re-derived: fix list 49 → 52.
-	'last_changes', "Three new fixes, all watched working in a running colony on 1.1.0:\n\n-Outside Ranch under Open Domes — NEW. Once the law passed, an Outside Ranch left three of its nine stockpiles where drones could not reach them, so part of its output was never collected. The ranch now keeps the model with all nine stockpile spots, so it keeps its closed look under Open Domes; nothing else about the law changes. A ranch already affected in your save recovers its stranded piles when you load it.\n\n-RC Seeker on expeditions — NEW. An expedition asking for an RC Commander refused an RC Seeker, although the Seeker is a Commander model, and the same went for every rover model built on another one. A rover model now fills a request for the rover it is built on (one way only), and the cargo panel shows the rover actually loaded.\n\n-Habitat residents on expeditions — NEW, and a judgment call. The automatic expedition crew draft took Naturalist and Micro-G habitat residents, and they came back to a dome instead of home. The draft now leaves them at home; you can still send them yourself. Residents already away come back the old way.\n\nThe fix list goes from forty-nine to fifty-two.",
+	'last_changes', "Three new fixes, all tested in a real game on 1.1.0:\n\n-Outside Ranch under Open Domes — NEW.\nThe problem: after you passed the Open Domes law, three of an Outside Ranch's nine stockpiles ended up where drones couldn't reach them. Whatever piled up there was never collected.\nThe fix: the ranch now keeps its roof under Open Domes, so drones can reach all nine stockpiles. Everything else about Open Domes works as before.\nAlready affected? Just load your save. The stuck stockpiles are put back where drones can reach them.\n\n-RC Seeker on expeditions — NEW.\nThe problem: some expeditions ask for an RC Commander. If your only rover was an RC Seeker, you got \"Not enough Rovers\", even though the Seeker is a kind of Commander.\nThe fix: the Seeker now counts as a Commander, and so do other specialised rovers like the RC Generator.\n\n\n-Naturalist Habitat residents on expeditions — NEW, and a judgment call.\nThe problem: when the game picked an expedition crew for you, it could take people living in a Naturalist Habitat. When they got back, they moved into a regular dome instead of going home.\nThe fix: the automatic crew pick now leaves Naturalist Habitat residents out. If you want one of them on an expedition, move them into a dome first.\nGood to know: anyone already away when you update will still come back to a regular dome.\n\n\nThe fix list goes from forty-nine to fifty-two.",
 	-- the packer includes EVERYTHING recursively minus this list (Mod.lua:250-256,
 	-- GedModEditor.lua:716-732) — without the extra patterns docs/, README.md,
 	-- .gitignore and .claude/ all ship inside the .hpk. LICENSE ships on purpose.
@@ -331,8 +331,12 @@ return PlaceObj('ModDef', {
 	-- 2026-09-13 (v10, C85 + C88 + C89 landed, F37/F43+F118/F31 retired): version 10 → 11,
 	-- `pdx_version` "8" → "9". Both portals ran this sitting (owner's word). Writeback
 	-- committed STRIPPED again by the forced save; restored here (POST_UPLOAD_CLOSE).
+	-- 2026-09-16 (v11, C93 + C95 + C96 landed): version 11 → 14 (three saves this sitting — ck71:
+	-- never chase the gap), `pdx_version` "9" → "10". Both portals ran (owner's word). Stripped by
+	-- the forced save and restored in the close-out, before any other commit. The shipped
+	-- `last_changes` is the owner's box text as uploaded; it differs from the tree's draft and is kept.
 	'version_major', 1,
-	'version', 11,
+	'version', 14,
 	'lua_revision', 350453,
 	'saved_with_revision', 403908,
 	-- saves made with the pack load fine without it (FIX_POLICY §3), so don't
@@ -423,8 +427,8 @@ return PlaceObj('ModDef', {
 	-- after a sitting is the EXPECTED state, not a mistake by whoever worked last.
 	-- ⚠️ `saved_with_revision` now sits further up, beside `lua_revision`, because
 	-- `SaveDef` writes the fields in its own order; it is the same editor bookkeeping.
-	'saved', 1789271380,
-	'code_hash', 4039348116336871338,
+	'saved', 1789594014,
+	'code_hash', 216745312259862005,
 	-- ⭐ ADDED 2026-09-10 (owner: the card should point players at pictures of the two
 	-- skins) — the store GALLERY. Both uploaders read screenshot1..5: the Mod Editor copies
 	-- each to TmpData/ModUpload/Screenshots as `ModScreenshot_<name>` (GedModEditor.lua:
@@ -440,7 +444,7 @@ return PlaceObj('ModDef', {
 	'screenshot2', "Mod/SMR_CommunityFixPack/store_screenshots/2_rare_metals_hammer_skin.jpg",
 	'screenshot3', "Mod/SMR_CommunityFixPack/store_screenshots/3_moxie_skins.jpg",
 	'pdx_id', 156049,
-	'pdx_version', "9",
+	'pdx_version', "10",
 	'steam_id', "3787202810",
 	'TagGameplay', true,
 })
