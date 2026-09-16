@@ -23,6 +23,13 @@ only route lived in one agent's private memory; an agent of any vendor now
 gets the cure from the instrument that failed. Plus the ENTRY MIRROR check
 (AGENTS.md == CLAUDE.md, bytes), copied from the Subathon repo's doccheck.
 
+v5 (2026-09-16, owner-forwarded report): the EOL section. Tools that write LF
+leave a CRLF working-tree file mixed, git under core.autocrlf stays silent, and
+a reader that splits on the file's dominant ending loses the minority lines —
+the archive tool refused every run for a day while doccheck stayed GREEN.
+Report-only; `--fix-eol [PATH ...]` normalises each mixed file to its own
+dominant ending, a change git does not even see.
+
     python tools/doccheck.py                 # check; exit 1 on any red
     python tools/doccheck.py --regen         # rewrite the generated files, then check
     python tools/doccheck.py --emit-counts   # + the pasteable counts block
@@ -2208,6 +2215,126 @@ def check_rule_headers(out):
     return ok
 
 
+# ---------------------------------------------------------------------------
+# Line endings (v5, 2026-09-16)
+#
+# This clone runs core.autocrlf=true: blobs are LF, checkouts are CRLF. Any tool
+# that writes LF (the agent Write/Edit tools, heredocs, most Python) leaves the
+# working-tree file MIXED, and git normalises both forms to the same blob, so
+# `git status` and `git diff` show nothing. A reader that picks the file's
+# dominant ending and splits on it then drops every minority line's marker —
+# `.claude/tools/archive_settled.py` lost its `### ` headers that way and its
+# header-count invariant refused every run, while this checker stayed GREEN.
+#
+# The instrument is git's own `ls-files --eol`: its `w/mixed` column is the
+# working-tree verdict and it honours `-text` attributes, so binary and pinned
+# files never appear. The parser has a positive control below because a gate
+# whose failure path prints as a clean SKIP is a dead gate (the STATE ADMISSION
+# lesson, SEAT_WORKLIST V8 item 1).
+#
+# Report-only by this seat's choice, not the owner's: 51 tracked files were
+# mixed the day it landed and three sessions were live in the tree, so a RED
+# would have refused every peer's commit at once. Promoting it is the owner's
+# word, after a quiet-tree `--fix-eol`.
+
+_EOL_CONTROL = (
+    "i/lf    w/mixed attr/                 \tdocs/x.md\n"
+    "i/lf    w/crlf  attr/                 \tdocs/y.md\n"
+    "i/-text w/-text attr/-text            \tdocs/archive/logs/z.log.raw\n"
+    "i/lf    w/lf    attr/text eol=lf      \tdocs/agent/STATE.md\n"
+)
+
+
+def _eol_parse(text):
+    """Return [(worktree_kind, path)] for every row of `git ls-files --eol`."""
+    rows = []
+    for line in text.splitlines():
+        head, tab, path = line.partition("\t")
+        if not tab:
+            continue
+        w = next((p[2:] for p in head.split() if p.startswith("w/")), "")
+        rows.append((w, path.replace("\\", "/")))
+    return rows
+
+
+def _eol_counts(rel):
+    with open(os.path.join(REPO, rel), "rb") as fh:
+        data = fh.read()
+    crlf = data.count(b"\r\n")
+    lf = data.count(b"\n") - crlf
+    return crlf, lf
+
+
+def _eol_is_raw_evidence(rel):
+    """Archived game logs are raw output whose mixed endings ARE the record:
+    the game writes them that way, the archive is append-only, and some carry
+    sha256 manifests over those exact bytes. Never listed, never rewritten. On
+    the day this landed they were 126 of the 181 mixed tracked files."""
+    return rel.startswith("docs/archive/") and rel.endswith((".log", ".raw"))
+
+
+def _eol_mixed():
+    """Every tracked file git reports as w/mixed, minus raw archived evidence,
+    or None if git did not answer."""
+    try:
+        text = subprocess.check_output(["git", "ls-files", "--eol"], cwd=REPO,
+                                       text=True, encoding="utf-8", errors="replace")
+    except (OSError, subprocess.CalledProcessError):
+        return None
+    return [path for kind, path in _eol_parse(text)
+            if kind == "mixed" and not _eol_is_raw_evidence(path)]
+
+
+def eol_report(out):
+    """Report-only. Never gates — see the block above for why, and who may change that."""
+    control = [k for k, _ in _eol_parse(_EOL_CONTROL)]
+    if control != ["mixed", "crlf", "-text", "lf"]:
+        out.append("EOL: RED  the ls-files --eol parser failed its positive control (%r) — "
+                   "this run says nothing about line endings" % (control,))
+        return False
+    mixed = _eol_mixed()
+    if mixed is None:
+        out.append("EOL: not checked (git ls-files --eol did not run) — this run says "
+                   "nothing about line endings")
+        return True
+    if not mixed:
+        out.append("EOL: every tracked text file has one line ending in the working tree")
+        return True
+    out.append("EOL: %d tracked file(s) MIXED in the working tree (report-only) — a "
+               "dominant-ending reader drops the minority lines; normalise with "
+               "`python tools/doccheck.py --fix-eol [PATH ...]` on a quiet tree"
+               % len(mixed))
+    for rel in sorted(mixed, key=lambda r: -min(_eol_counts(r))):
+        crlf, lf = _eol_counts(rel)
+        out.append("  WARN %-58s crlf=%d lf=%d" % (rel, crlf, lf))
+    return True
+
+
+def eol_fix(paths, out):
+    """--fix-eol: rewrite each mixed file to its own dominant ending. Git sees no
+    change (both forms normalise to the same blob), so this never touches history;
+    it only makes the working tree say one thing. With PATHs, only those files."""
+    mixed = _eol_mixed()
+    if mixed is None:
+        out.append("FIX-EOL: git ls-files --eol did not run; nothing rewritten")
+        return
+    targets = mixed if not paths else [p.replace("\\", "/") for p in paths]
+    for rel in targets:
+        if rel not in mixed:
+            out.append("FIX-EOL: %s is not mixed; left alone" % rel)
+            continue
+        crlf, lf = _eol_counts(rel)
+        with open(os.path.join(REPO, rel), "rb") as fh:
+            data = fh.read()
+        norm = data.replace(b"\r\n", b"\n")
+        if crlf >= lf:
+            norm = norm.replace(b"\n", b"\r\n")
+        with open(os.path.join(REPO, rel), "wb") as fh:
+            fh.write(norm)
+        out.append("FIX-EOL: %s -> %s (was crlf=%d lf=%d)"
+                   % (rel, "CRLF" if crlf >= lf else "LF", crlf, lf))
+
+
 def main():
     ap = argparse.ArgumentParser(description="SMR-BugFixPack doc structure check")
     ap.add_argument("--regen", "--regen-index", action="store_true", dest="regen",
@@ -2224,6 +2351,11 @@ def main():
                     help="rewrite ONLY docs/WAITING_ON_YOU.md (a pure function of the "
                          "checklist's markers and STATE.md), then run the checks — the "
                          "contained cure for the RED a checklist edit causes")
+    ap.add_argument("--fix-eol", nargs="*", metavar="PATH", dest="fix_eol",
+                    help="normalise each MIXED tracked file to its own dominant line "
+                         "ending (all of them, or only the PATHs given), then run the "
+                         "checks. Invisible to git; run it on a quiet tree because a "
+                         "peer's pending edit on a rewritten file will refuse")
     ap.add_argument("--emit-counts", action="store_true",
                     help="also print verified on-demand build counts")
     ap.add_argument("--emit-fingerprint", action="store_true",
@@ -2254,6 +2386,8 @@ def main():
             regen(out)
         elif args.regen_waiting:
             regen_waiting(out)
+        if args.fix_eol is not None:
+            eol_fix(args.fix_eol, out)
         model = sb.load_from_dir()
         ok = check_entries(model, out)
         ok = check_index(model, out) and ok
@@ -2288,6 +2422,7 @@ def main():
     push_set_report(out)   # report-only: the budget is the owner's to act on
     testkit_tree(out)  # report-only by owner decision (2026-08-04) — never gates
     alias_gate(out)    # report-only, same standing as testkit_tree
+    ok = eol_report(out) and ok   # report-only on mixed files; RED only if its own control fails
 
     if args.verify_split:
         try:
