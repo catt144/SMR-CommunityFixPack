@@ -8142,3 +8142,1653 @@ marker, which the release prompt's opening check reads. The v5 to v11 blocks
 moved there verbatim. The withdrawn F120 note left Pending; the core hardening
 note stays, because it was built after v11 and ships with the next upload. No
 further owner action is owed.
+
+---
+
+## ck189 -- archived 2026-09-16 (was checklist status:closed): 2026-09-16 — 189 CLOSED: C95 re-point passed attended; optional transports stay desk-only
+
+
+**MEASURED with you at the keyboard:** clean boot, `HabitatExpeditionDraft: applied`,
+and `CrewDraft` armed before assignment. The live trace fired on
+`UniversalZeusRocket(1053)` through `CargoTransporterNew`: all **5** Naturalist
+Habitat residents were present in the eligible pre-fix busy/unemployed bucket,
+none appeared in the returned crew, and the picker filled **5/5** from ordinary
+dome residents. You pinned the habitat residents and read **5 before → 5 after**;
+the expedition departed. Whole-log scan: **0 error-shaped lines**. Evidence:
+[sitting report](agent/reports/C95_SITTING_20260916.md) ·
+[archived log](archive/logs/c95_repoint_Mars.exe-20260916-12.45.56-6a91a190.log).
+
+**Your ruling after the pass:** *"we will mark those as desk verified and not play
+tested and we won't be playtesting unless we get a reported issue. We have too many
+other things on deck right now."* Condition: the save has neither an asteroid lander
+nor a space elevator available, and the core automatic-draft repair just passed.
+⇒ The lander/elevator player-choice controls remain **desk-verified, not playtested**;
+they reopen only on a reported issue. Nothing from that pair is owed to you.
+
+**Declared limits, not hidden passes:** this fixture has no Micro-G habitat; live
+pack-removal/load and the deliberate-shortage EF-104 panel reading were not run.
+Desk evidence covers both habitat classes, lander/elevator non-interference, exact
+global restoration, scarcity and removal of the wrapper. C95 is `tested-attended`
+for its player-visible automatic-draft repair; release remains separate.
+
+
+---
+
+## ck187 -- archived 2026-09-16 (was checklist status:ruled): ✅ 2026-09-16 — 187 RULED: F120 is PULLED from the ship set — built, audited, held
+
+
+Your words: *"Pull it from the ship set, the only relatively minor use we get is the evidence
+you gather."* Your reasoning, recorded: the fix repairs only a colony started on 1.0.7 and
+loaded past the old-save gate; Steam (about 75% of subscribers) refuses that load, console
+cannot do it, and only a PC copy bought from the Paradox store could — a fix nobody you can
+name will use, and untestable here because your copy is Steam. The audit that preceded the
+ruling had widened it from the cure to all 17 legacy mystery technologies (85/85 desk) and
+settled that it never reached Jäger's Steam report, which stays open.
+
+**Done the same sitting:** module moved to `tools/held/Fix_MysteryTechMigration.lua`
+(excluded from the pack, registered nowhere), F120 parked, release-ledger row withdrawn,
+handoff updated. **Reopen condition:** a report of a lost mystery technology on a
+carried-over 1.0.7 colony from a platform that offers Load anyway — one commit from live.
+You also questioned whether two frontier models on the investigation and the audit were
+worth it for this reach; the lesson (check who can reach the affected state before building)
+is recorded in memory, not as policy. Record: [F120](agent/bugs/F120.md),
+[audit section](agent/reports/WILDFIRE_CURE_RESEARCH.md#cross-vendor-audit--2026-09-16-fired-on-fable-promptsf120_auditmd-consumed).
+
+
+---
+
+## ck178 -- archived 2026-09-16 (was checklist status:ruled): ✅ 2026-09-14 — 178 RULED: STATE's warn cap is TEMPORARILY +25% — ⚠️ you end it, and only you
+
+
+**Your ruling, 2026-09-14:** *"it does no good to keep evicting until we can fix the bleed
+of docs everywhere, inact a temporary increase of the state cap 25% more headroom to be
+removed as soon as we are fully done with the doc overhaul (basically when I say we are
+done)."*
+
+**Landed:** `STATE_WARN_BYTES` **12,288 → 15,360** (12 KiB → 15 KiB, +25%). ⛔ The **hard**
+cap stays **18,432** — unmoved, same as the 09-09 raise, because it is the backstop for
+flags nobody read.
+
+**Restore, when you say the overhaul is done:** set `STATE_WARN_TEMPORARY = False` in
+`tools/doccheck.py`. That single edit returns the warn to 12,288 and nothing else changes.
+**Falsified 2026-09-14 on the live file:** flipped to `False` → warn read 12,288 and the
+reminder line vanished; flipped back → 15,360; restored from a copy and `sha256sum -c` OK.
+
+**Why it cannot quietly become permanent:** every `doccheck` run now prints a `⏳` line
+saying the raise is temporary, who ruled it, and the one edit that ends it. The 09-09 raise
+(9 → 12 KiB) carried only a source comment reading *"REVISIT once the 1.1.0 fallout is
+closed"* — nothing ever surfaced it again, and it is still in force a month later. A note
+in a file nobody opens is not a reminder; a line in the output every session reads is.
+
+⛔ No agent retires this on its own judgement — it ends on your word, not on a measurement.
+
+
+---
+
+## ck177 -- archived 2026-09-16 (was checklist status:ruled): ✅ 2026-09-14 — 177 RULED: retirement now covers EVERYTHING in this file, not just tests — ⚠️ one gate still yours
+
+
+**✅ THE OPEN GATE IS ANSWERED, 2026-09-14: make the marker count RED — scoped to the items the
+committing change itself touches.** A commit fails only if *it* leaves a checklist item
+unmarked, so a peer is never blocked by someone else's omission. That is what turns the
+retirement rule from a habit into a loud failure.
+
+⚠️ **Owner rider: the remaining unmarked backlog still has to be gone through** — doccheck
+reports **12 need a marker** today. The gate stops NEW unmarked items; it does not clear the
+existing ones, and those are a separate pass.
+
+**Your ruling, 2026-09-14:** the archive rule in this file's own preamble —
+*"completed tests move whole to `PLAYTEST_ARCHIVE.md`"* — **is extended to every kind
+of section here.** The preamble carries the operative text and is the only place it is
+written; you ruled against copying it into `STATE.md` or `WORKFLOW.md`, on the grounds
+that a session which never touches this file should not carry a rule about it.
+
+**Why it was needed** — `wc -c` on this file at dated commits:
+
+| 08-01 | 08-15 | 09-01 | 09-10 | 09-13 | after the 09-14 archival |
+|---:|---:|---:|---:|---:|---:|
+| 87,314 B | 187,322 B | 363,972 B | 539,297 B | 761,372 B | 606,050 B |
+
+**8.7× in six weeks**, and the 09-10 → 09-13 leg runs at ~**74 KB/day**. The 09-14
+archival removed **155,769 B — about two days of growth at that rate.** The old rule
+covered PT test sections, **~1.0%** of the file, and was honoured; `Decisions waiting
+on you` is **92.3%** and nothing reached it. **47.9%** is dated session records, kept
+in parallel with `archive/SESSION_LOG.md` (91 hits for `2026-09-12` here against 20
+there) — which is why the rule now sends those out of this file entirely.
+
+**⚠️ STILL OPEN — one gate, and without it this is a habit, not a rule.** The mover
+moves exactly the `ruled`/`closed` marked set, so an **unmarked item never retires**;
+that is how this file reached 54% unmarked. `doccheck` already computes the shortfall
+and prints it as a count (**12 today**) — it has never been allowed to fail. Prose in
+the preamble does not fix this: an agent editing by targeted string may never read it.
+
+- **(a)** Make the count RED — no commit leaves a checklist item without a status
+  marker. The check exists; only its severity changes. Your own 09-13 rule applied
+  here: *a hazard is a failure not yet converted into a gate.* Would need to fail only
+  on items the committing change itself touched, so a peer is not blocked by someone
+  else's omission.
+- **(b)** Leave it a count, and accept periodic owner-approved sweeps like 09-14's.
+
+⛔ No agent changes that severity on its own judgement — a gate that can block every
+peer's commit is yours. Recommendation if you want one: **(a)**, scoped as above.
+
+
+---
+
+## ck174 -- archived 2026-09-16 (was checklist status:ruled): ✅ 2026-09-13 — 174 RULED: a fired one-off leaves the prompts map entirely
+
+
+**Owner ruling, 2026-09-13**, on finding ck170's brief `git rm`'d with its
+"NOT FIRED — for Codex" row still standing in `agent/prompts/README.md`:
+
+- **(a)** Firing a one-off deletes **the file and its row, in the same commit**.
+  No tombstones: the map lists LIVE prompts only. Graves come from
+  `git log --diff-filter=D -- docs/agent/prompts/`.
+- **(b)** The obligation is a **machine gate**, not a habit — doccheck's
+  **PROMPT MAP** holds both directions (every prompt file has a row, every row
+  names a file that exists, a struck-through row is RED). Nobody has to remember.
+- **(c)** The 13 struck rows and the removal-prose blocks are **purged**, not
+  relocated: 10 of 13 already pointed at a `reports/` file, and the other three
+  (`SITTING_158`, the `C85`/`C88`/`C89` build trio, `SITE_ALIGNMENT_AUDIT`) were
+  checked to be recorded in checklist 158, the three entries' §Attended check,
+  `perma/PUBLIC_SURFACE_SWEEP.md` §"When a fix is RETIRED" and STATE's site line
+  before their rows were removed. `README.md` 12,659 → 4,959 B.
+
+Why it mattered: the row is what a next session reads to decide what to fire, so
+a row outliving its file points at spent work. Measured first: **13 of 14**
+post-reorg consumptions did update the row, so this was a first failure and not a
+pattern — but compliance was one agent's habit absorbed by another's cleanup
+commit, which is not a rule. Falsifiers: the gate was shown RED on a row without
+a file, a file without a row, a struck row, a dropped `perma/` row, **and on the
+real HEAD README**, then restored to `sha256 27a5e29c…`.
+
+
+---
+
+## ck170 -- archived 2026-09-16 (was checklist status:ruled): ✅ 2026-09-13 — 170 RULED: marker semantics, LF byte accounting, and reading routes
+
+
+**Owner ruling, 2026-09-13, after the documentation-overhaul audit:**
+- **(a)** Keep `open`, `ruled`, `closed`, `deferred`; a partial ruling is `open`
+  with `owner:yes`. Decision status and owner action are independent. Unknown or
+  malformed markers fail doccheck; duplicate numbers warn when status and owner
+  agree, fail when they disagree. Preserve existing checklist numbering.
+- **(b)** Normalize line endings to LF before byte accounting; caps and content stay.
+- **(c)** Cite R-A…R-G where the applicable work fires, use targeted index lookup,
+  and home R-D in WORKFLOW's brief-authoring section, outside working-leg instructions.
+
+Implementation and falsifiers: [CK170_AND_FINGERPRINTS](agent/reports/CK170_AND_FINGERPRINTS.md).
+The original audit questions below are retained as the condition of this ruling.
+
+> [The audit](agent/reports/DOC_OVERHAUL_AUDIT.md) is complete, report-only. It found owner actions that disappear while doccheck stays GREEN, fingerprints that overstate what they verify, and a nested-directory reader bug behind the v10 pack-count discrepancy. Existing markers and rulings were left untouched.
+>
+> **Your policy calls:**
+>
+> - **(a) Marker vocabulary:** keep the existing words or add a partial-ruling status? **Recommendation:** keep the words, use `open` while a decision remains unresolved, and let `owner:yes` independently retain an outstanding action. Reconcile existing entries to recorded rulings in the follow-up.
+> - **(b) Byte accounting:** measure normalized LF bytes, keeping the current caps? **Recommendation: yes.** Identical content can currently pass with LF and fail with CRLF.
+> - **(c) Reading routes:** connect adopted R-A…R-G to actual authoring/working routes and replace mandatory full-index scans with targeted lookup? **Recommendation: yes.** Keep the author-only depth rule out of working-leg instructions and resolve inheritance versus re-derivation explicitly.
+>
+> Ordinary tool repairs are recommendations in the report, not changes made by this audit. **D4 is not being re-asked:** its original membership remains the scope; the current script cannot execute it and should not be applied. No old owner decision was reopened here.
+
+
+---
+
+## ck168 -- archived 2026-09-16 (was checklist status:ruled): ✅ 2026-09-12 — 168 RULED BY YOU (batch 2): **98 → baseline moves to 1.1.0 · hardening row 3 → BUILT into v10 · 151 (c) → the three cheap checks join the owed boot.** ✅ **151 (b) came back as a question and is answered below; CLOSED 2026-09-16 — send nothing (ruling recorded at item 151).**
+
+
+> **(a) 98 — THE BASELINE MOVES TO 1.1.0. 1.0.7 is history.** ⛔ No branch install, no re-download.
+> ⚠️ **The item's own framing was out of date and that is why it looked harder than it is:** it said a
+> branch install was *"the only way to tell '1.1.0 changed this' from 'we were wrong'"*. That stopped
+> being true when `C:\Dev\SMR-SrcArchive.0.7.396349\Src` was archived — **four such questions were
+> settled from it on 2026-09-12 alone** (Station's paren, `Tracks.lua`'s body, `Residence`'s parents,
+> Farm's removed parent). What the archive cannot give is a **runnable** 1.0.7, and the price of one is
+> steep: Steam serves **one branch at a time**, so the 1.1.0 install goes away while switched, and
+> `EF-079` means the entire fixture library is branch-locked anyway.
+> ✅ **This also aligns the records with a ruling you already made:** ck151 (e), *1.0.7 STAYS FROZEN,
+> work targets 1.1.0*. 1.0.7 players keep the frozen `v5-game-1.0.7` GitHub build (ck118).
+> ⇒ **Every re-verification is now a 1.1.0 derivation.** ⛔ Existing entries are NOT re-pointed — an
+> entry records a defect in the version it names, and re-writing old citations to the live tree is
+> forbidden. New work cites 1.1.0; old work keeps its version stamp.
+>
+> **(b) Hardening row 3 — BUILT, and it ships in v10.** `Code/Fix_StaleReservations.lua`'s `OnMsg.NewDay`
+> sweep now runs **one `pcall` PER COLONIST**. Before, a single throw abandoned every remaining Residence
+> for that sol — and every sol after — while `ListFixes()` still reported the module `active`.
+> - ⛔ **Per colonist, not per residence:** a residence-level guard would still abandon the rest of that
+>   residence's list on one bad slot.
+> - A raise is **logged with the residence handle and slot**, and a **separate summary line** says the
+>   sweep did not complete — deliberately not folded into the "released N" line, because *"nothing was
+>   stale"* and *"this sol's sweep was incomplete"* must never read the same in a log.
+> - Donor shape is our own F48 pass in `90_SaveSanitizer.lua` — not a new pattern.
+> - ⚠️ **Honest limit, recorded in the module:** per `EF-008`, `pcall` catches a genuine runtime error but
+>   **not an `assert()` in shipped code**, because asserts do not unwind in this engine. This bounds the
+>   throw case, which is what the audit raised. It cannot bound that one.
+> - ✅ **Checked, not assumed:** `parsecheck` 50/50 clean · `desk_f59_expedition.py` **23/23 demands held**
+>   after the change · the three TestKit probes that cover this module key on the **wrap pairs** and the
+>   `SMRFixPack_reserved_at` field, not on the log text, so none is invalidated. ⛔ No public fix-list row
+>   changes — this is a hardening, not a new repair.
+>
+> **(c) 151 (c) — F52 passage / F54 hub / C83 arrival JOIN the owed 144 (a) boot.** ⚠️ They are cheap
+> **only if the colony you load already has those layouts** — a passage, a shuttle hub, an arrival route.
+> ⛔ If it does not, **skip them by name and say so**; do not build the layouts to make the checks
+> possible. F59's expedition check is **not** joining — it needs full housing, a competing homeless
+> neighbour and a housed crew member, which is a provisioning job, not an addition to a boot.
+>
+> **(d) ⏳ 151 (b) — your question: "Are we completely finished with our migration passes and checks?
+> Nothing outstanding?" NO. Five residuals and one unswept case, read from the entries:**
+>
+> | | what is outstanding |
+> |---|---|
+> | [F51](agent/bugs/F51.md) | 1.1.0 **PARTIAL** — stale cache desk-controlled, the permanent migration-block claim **not established**; its leg is re-filed **UNRUN** |
+> | [F53](agent/bugs/F53.md) | **PARTIAL** — no fresh 1.1.0 game evidence |
+> | [F59](agent/bugs/F59.md) | repaired 09-11, but the **A1 expedition half is UNTESTED** |
+> | [F73](agent/bugs/F73.md) | **PARTIAL** — retained wrapper 10/10 at the desk, organic benefit unverified |
+> | [F80](agent/bugs/F80.md) | still `investigating` — buildability and July incident causation **unproved** |
+> | [F54](agent/bugs/F54.md) | never swept |
+> | ✅ F60 · C83 | done — retired, and `tested-attended` |
+>
+> ⭐ **What that means for the decision, stated plainly:** the recommended scope was **written knowing
+> this** — it offers F80's evidence as *"a candidate explanation, not a solved incident"* and names
+> F59/F60 as **our maintenance findings** rather than game defects. So sending it does not overstate
+> anything. But *"we are finished"* is not true, and if the covering note said so it would be wrong.
+> ❓ **Still your call, and ck165 gives you a third option:** send the recommended scope · send nothing ·
+> or **defer it as pull-only messaging** and ask for it whenever you want it. ⛔ No agent will raise it.
+
+
+---
+
+## ck167 -- archived 2026-09-16 (was checklist status:ruled): ✅ 2026-09-12 — 167 RULED BY YOU: **the opt-in mod's decisions move to the opt-in mod's repo.** Eleven items off your list; three stay because they bind the fix pack. **Nothing is owed from you.**
+
+
+> **Your words:** *"Can we fully offload anything opt-in related to its repo, and just retain anything
+> that's fact based that could be useful, like engine facts etc, and just rehome those facts where
+> they should be?"*
+>
+> **Done.** Items **84, 85, 89, 90, 91, 92, 93, 94, 95, 96, 97** now live in
+> `C:\Dev\SMR-OptInPack\docs\DECISIONS_OWED.md`, **reproduced verbatim** — nothing deleted, nothing
+> re-summarised. The four source reports were already in that repo, so only the decisions needed
+> moving. ⛔ They are that mod's launch obligations and it is not launching.
+>
+> ⭐ **Three did NOT move, because they bind the fix pack rather than that mod** — and this is the
+> "retain anything useful to us" half of your ruling:
+>
+> | item | why it stayed |
+> |---|---|
+> | **83** | the **Test Kit is SHARED**, so those edits land in our tree. ⏸ Not owed and not urgent, but two of its five proposals (a `RunAll` owner filter, a `PACK_ID` on the enable-path leg) would improve the kit **for us** regardless of that mod |
+> | **86** | `EF-###` ids are allocated **by this repo** — a rule about OUR facts index. ⚠️ **Already in force**, resolved 08-31: a fact learned there is filed here first, then mirrored. Nothing owed |
+> | **88** | `FUTURE_IDEAS.md` #9 is a **fix-pack feature** (per-fix player toggles), parked there only by analogy. ⭐ Overtaken: it is what checklist **148**'s `fixtoggles/` chain builds, so it rises or falls with 148 |
+>
+> ✅ **On the facts half — checked, not assumed, and the answer is that nothing was stranded.** Every
+> engine fact those items cite (`EF-023`, `EF-059`, `EF-069`, `EF-072`) is **already in this repo's
+> `agent/facts/INDEX.md`**, which is the canonical home for both repos — that is exactly what item 86
+> above enforces. So the offload rehomed no facts because there were none to rehome, and item 86 is
+> the reason why.
+>
+> ⚠️ **One thing recorded on the way out, because it is what would most mislead whoever opens that
+> file next:** all eleven were written 2026-08-31 / 09-01, **before 1.1.0 + the first DLC shipped on
+> 09-08**, and **none has been re-verified since**. The new file says so at the top and tells its
+> reader to re-check every citation against the live tree first. This project has already been bitten
+> by exactly that: line numbers moved, modules were deleted, and some defects vanilla fixed itself.
+
+
+---
+
+## ck166 -- archived 2026-09-16 (was checklist status:ruled): ✅ 2026-09-12 — 166 RULED BY YOU (batch 1 of the decision sweep): **133 (2) as a hybrid · 133 (4) label-only · 135 into hotfix 3.** All three landed the same session. **Nothing is owed from you.**
+
+
+> **(a) 133 (2) — an UNKNOWN probe answer DECLINES, and an exception is PROPOSED, never taken.**
+> Your steer: *"Is a hybrid possible — do decline as a plan, but allow an agent to propose an
+> exception if we ever find a need for one."* ⭐ **Yes, and it is the better rule than either option
+> I offered**, because it keeps the safe default absolute while leaving a door that only you can
+> open. Written into `agent/FIX_POLICY.md` **§2a (i)**:
+> - Decline is the standing plan. Only a literal `true` applies — a throw, a `nil`, or any other
+>   value declines. ⚠️ This is **already what the code does** (`Code/00_Core.lua:156-167`); the
+>   ruling makes the existing behaviour binding so a future module cannot quietly choose otherwise.
+> - An agent that finds a real case **PROPOSES** it as a checklist item — naming the module, the
+>   probe, and why declining is the worse outcome there. ⛔ **An agent never self-authorises one.**
+> - **No exception exists today**, and if one is ever granted it is named in that module's wording.
+>
+> **(b) 133 (4) — `LuaRevision` is allowed as an OBSERVATION LABEL, never as a guard.** Written into
+> §2a **(ii)**. It may record **which build a reading was taken on**, in an entry, a report, a log
+> line or a probe's output. ⛔ It may not gate whether a fix applies — that stays a behaviour probe,
+> and **decision 118 is not weakened by a word.** The line is *describing* a build versus *deciding*
+> on one. ⚠️ Worth keeping in view: `lua_revision` is **350453 on BOTH branches** (`EF-077`), so it
+> could not separate them even if it were allowed to try — which is precisely why it is a label.
+>
+> ⇒ **133 is now fully closed.** (1), (3), (5) and (6) fell with the reword and the 73 closure;
+> (2) and (4) are these. ⚠️ One loose thread it leaves, unchanged and still only a recommendation:
+> `agent/prompts/SELFCHECK_PILOT.md` was authored for 133 (1), never fired, and was unreachable —
+> ✅ **REMOVED 2026-09-13 on the owner's word.** Recoverable with
+> `git log --diff-filter=D -- docs/agent/prompts/SELFCHECK_PILOT.md`.
+>
+> **(c) 135 — take the `luafn.py` delimiter fix in hotfix 3.** Small standalone change to a **desk
+> tool**, not shipped code; measured to change **0 shipped hashes**, so nothing re-pins and no module
+> is affected. Its blocker discharged when vanillahunt closed on 09-10. ⛔ It is **not** part of v10
+> and must not be smuggled into that pass — it waits for the hotfix-3 batch, where 135 is now the
+> only item left after 137/138/140/141/142 closed with 163 (a).
+
+
+---
+
+## ck164 -- archived 2026-09-16 (was checklist status:ruled): ✅ 2026-09-12 — 164 RULED BY YOU: **KEEP** — "fine as long as we are sure it won't cause issues." **The condition was checked, not assumed; it holds, and the check closed a gap.** Nothing further is owed.
+
+
+> **What was checked, because "are we sure" deserved a real answer rather than a restatement.**
+>
+> **1. The pass's shape, read from the CODE, not its comments.** One-shot per save (`F48_FLAG` on
+> `UIColony`, gated at `:499`) · every call `pcall`'d **per track**, so a raise costs that track and is
+> logged by name · it counts an **effect**, not an execution — a track counts as repaired only if its
+> connection total or duplicate-`node_idx` count actually moved, so a healthy save logs a plain zero ·
+> it declines cleanly, with a log line, if a game update moves `ProcessTrackElements`/`ResolveMap` · and
+> it does **not** hand-assign `track.start_el`/`end_el`, which the shipped fixup does. Every one of those
+> is in the executable body, not only in the header prose.
+>
+> **2. ⭐ A real gap, found and closed by the check.** PT-37's do-no-harm measurement (2026-08-05, you at
+> the keyboard, on a copy of your own save) was taken against the **1.0.7** tree — and the function the
+> pass actually calls is `ProcessTrackElements` in `Tracks.lua`, which **was not pinned by anything**.
+> The manifest pinned only the fixup that was *supposed* to call it. So the safety evidence rested on a
+> body nothing was watching. **It has moved:** 1.0.7 `:807-990` (184 lines) vs 1.1.0 `:807-988` (182).
+>
+> **3. The change is in our favour, which is what settles your condition.** 1.0.7 asserted that every
+> element share one `is_construction_site` state (*"we only support all built or all under
+> construction"*). 1.1.0 replaces that with `assert(el.track_obj == track)` plus a comment saying a
+> **mix** of built track and construction sites is now supported, and reads `is_construction_site` per
+> element at the visuals step. ⇒ 1.1.0 is **strictly more tolerant** of exactly the messy track PT-37's
+> case B was written about. The failure path is **byte-identical** in both trees —
+> `if not OrderTrackElements(map, elements, start_element) then return end` — an early return *before*
+> `start_el`/`end_el` are touched.
+>
+> ⇒ **`Tracks.lua ProcessTrackElements` is now pinned** in the module, with **no `DEFECT:` line** on
+> purpose: we patch nothing there and claim no bug in it. The pin exists so the next game patch that
+> moves it flips `BODY-CHANGED` and forces a read, instead of silently invalidating the measurement the
+> ship decision rests on. `bodycheck`: 126 OK, 0 NO-MANIFEST.
+>
+> ⚠️ **The one residual, stated rather than smoothed** — unchanged by today and already on the record
+> from the 2026-08-11 SHIP decision: `assert` does not unwind in this engine ([EF-008](agent/facts/EF-008.md)),
+> so a failure *inside* `OrderTrackElements` reports and continues rather than raising, and `pcall`
+> cannot catch what never raises. PT-37 case B measured the one route the original block was written
+> about and found the walk **succeeds** there. What was never established — then or now — is that the
+> assert is unreachable by *every* route. **Keeping the pass does not change that risk; retiring it
+> would not reduce it either**, since the same call shape is what the repair is made of.
+>
+> **The original ask is kept below as the reasoning you ruled on.**
+
+> Surfaced by your 163 (d) ruling within minutes of the manifest lines going in, which is precisely
+> what you bought them for. **Nothing was changed except the stale sentence; no pass was touched.**
+>
+> **What the machine-readable line found.** `90_SaveSanitizer.lua`'s header asserted *"F48 STAYS.
+> The paren is still misplaced upstream."* It is not. Vanilla repaired it in 1.1.0 — verified on both
+> sides, which is the standard this project now holds itself to:
+>
+> | tree | `SavegameFixups.A_StationConnectorElements3` |
+> |---|---|
+> | **1.0.7** archive, `Station.lua:1346` | `ProcessTrackElements(ResolveMap(track, track.elements))` — the misplaced paren |
+> | **1.1.0** live, `Station.lua:1504` | `ProcessTrackElements(ResolveMap(track), track.elements)` — **corrected** |
+>
+> `ResolveMap` takes one argument, so on 1.0.7 `track.elements` was silently swallowed and
+> `ProcessTrackElements` received `nil` — the migration re-ordered nothing, ever.
+>
+> ⭐ **But the upstream fix cannot heal a single existing save, and this is the part that decides it.**
+> Savegame fixups run **once per save and never again**: `FixupSavegame` skips any fixup already in
+> `AppliedSavegameFixups` (`CommonLua/SavegameFixup.lua:33-39`). The corrected function **kept the same
+> name** — `A_StationConnectorElements3` is still the only one of its family in the tree, there is no
+> `…Elements4`. So on any save where the broken version already ran, that key is set, vanilla's
+> repaired body is skipped forever, and the track elements stay unordered. **Our pass is the only
+> thing that repairs them.**
+>
+> **Reach, stated plainly:** a player on a **pre-1.1.0 save**, **off Steam**. 1.1.0 blocks old saves on
+> Steam and only warns elsewhere (`config.OldSavegameBehavior`), so off-Steam players can "Load anyway".
+> ⇒ **Exactly the same reach as the F35 pass in the same module, which you already ruled stays.**
+>
+> ❓ **Your call:**
+> - ⭐ **KEEP (recommended).** Nothing about the pass was wrong — only the sentence explaining it, which
+>   is now corrected in place. Retiring it would strand the one group of players it exists for, and
+>   they are the same group F35 serves.
+> - **RETIRE.** Defensible only if you want the sanitizer to carry nothing that depends on pre-1.1.0
+>   saves — but then F35 goes with it, and that reverses item 126.
+>
+> ⚠️ **Left deliberately noisy until you rule:** the module's `DEFECT:` line for F48 now reports
+> **`DEFECT-GONE`** on every `bodycheck` run, because the expression genuinely is gone. That is the
+> honest state and it does **not** turn doccheck red (doccheck gates on bodycheck's selftest only).
+> ⛔ Whoever reads that verdict next: **do not "repair" it by rewriting the regex** — the manifest says
+> so in place, and this item is why.
+
+
+---
+
+## ck163 -- archived 2026-09-16 (was checklist status:ruled): ✅ 2026-09-12 — 163 RULED BY YOU: **all four — (a) accept · (b) yes · (c) confirm · (d) yes.** Items 137/138/140/141/142 CLOSE with (a); **(b) RAN AND FOUND NOTHING** (`reports/PINNED_PARENTS_PASS.md`); (d) is BUILT and surfaced a new call (**164**). **Nothing is owed from you here.**
+
+
+> ✅ **RULED BY YOU 2026-09-12 — all four: (a) accept · (b) yes · (c) confirm · (d) yes.**
+> **Nothing is owed from you here.** The original ask is kept below as the reasoning you ruled on.
+>
+> **(a) ACCEPTED — the four-group disposition stands, and it CLOSES items 137, 138, 140, 141 and 142.**
+> All five are stamped closed and name this ruling. Group A (C63, C66, C82) stay candidates as
+> **organic riders only** — ⛔ never provision a colony for them. Group B (C64, C67, C75, C78, C79)
+> need no action ever, absent a field report. Group C (C58, C68, C69, C76, C80) and the 12 P3s of
+> group D are source-only. ⛔ **A disposition, not a dismissal:** every entry stays and any field
+> report naming one reopens it instantly.
+> ⭐ **Done on the back of it:** [C80](agent/bugs/C80.md)'s status flip, which the disposition flagged
+> as owed and unowned — its entry said REFUTED while its index row still said `cand`.
+>
+> **(b) ✅ YES — COMMISSIONED, RUN AND FINISHED THE SAME DAY. Nothing found; nothing owed.**
+> Report: `agent/reports/PINNED_PARENTS_PASS.md`. **All seven rows resolved, no defect filed, no `Code/`
+> change, no game launched.** ⛔ **Option (ii) is NOT triggered** — §1b's own rule is *"do it only if (i)
+> finds anything"*, and (i) found nothing. Option (iii) stays recommended against.
+> - **`Unit` + `BaseBuilding` gaining `ReactionObject`** — the two the report flagged hardest, being the
+>   base classes of every colonist and every building: **12 methods, zero collisions** with our 83 hooked
+>   names, and it defines no `Init`/`GameInit`/`Done`, so it never enters the composition chain.
+> - **`WaterExtractor` + `ContinuousOps`** clean · **`Farm` losing `InteriorAmbientLife`** clean (deleted
+>   tree-wide, provided two decorative methods, we touch neither) · **`Fireflies`** clean and strictly
+>   additive.
+> - **`Residence`** — the row the report left ⚠️ UNSETTLED, and our biggest exposure (4 Residence hooks +
+>   6 `Building` hooks): **resolved.** `Building` moved from a transitive ancestor to a direct parent and
+>   the stats parent was swapped — but `Building` is in the ancestry in **both** trees, and our four
+>   Residence methods are defined on `Residence` itself. **Re-composed, not re-scoped.**
+> - ⛔ **The `Station` row was a FALSE POSITIVE**, wrong in both halves: the class is not new (it is in
+>   1.0.7 at `:7`, moved to `:9`) and its parent is not `Door` (it is `BuildingEntityClass`; the `Door`
+>   classes are two different, also pre-existing, blocks nearby). **A pure line-shift artefact.**
+>
+> ⭐ **The useful output is about the instrument, not the game.** The classifier reports blocks that merely
+> *moved* as new, and attributes `__parents` across adjacent blocks. So the `TABLE-HUNK` list `treediff` is
+> meant to grow (`HUNT_AUDIT` §8 item 2) **must compare content between trees, not position**, or it will
+> spend reader attention on rows containing no change at all.
+> ⚠️ **And the cost estimate was wrong in your favour:** priced at one desk session, it took about fifteen
+> tool calls, because the decisive question is a **set intersection, not a reading task**. ⛔ Do not budget
+> the next pass of this kind as a reading pass.
+>
+> **(c) CONFIRMED — and nothing further added to the after-patch step.** `bodycheck` + `sigcheck` on
+> every patch (binding, `WORKFLOW.md:156`); `treediff` + `presetdiff` on trigger, never retired. The
+> archive-first step keeps its ⭐⭐: copy `ModTools\Src` **before** an update or a Steam branch switch.
+>
+> **(d) YES — DONE THE SAME DAY, and it paid for itself on the first run.** Both modules now carry
+> machine-readable manifests; `bodycheck` reports **0 modules with no manifest** where it reported 2.
+> `00_Core.lua` took a one-line `SRC: none` declaration (it is the registry and patches nothing).
+> ⭐⭐ **`90_SaveSanitizer.lua`'s new pins immediately surfaced a second stale claim — exactly the
+> failure you bought these lines to catch.** Its header asserted *"F48 STAYS. The paren is still
+> misplaced upstream."* **Vanilla repaired that paren in 1.1.0.** Verified both sides: the 1.0.7
+> archive (`Station.lua:1346`) carries the broken `ProcessTrackElements(ResolveMap(track,
+> track.elements))`; live 1.1.0 (`:1504`) carries the corrected
+> `ProcessTrackElements(ResolveMap(track), track.elements)`. The prose is corrected in place and the
+> `DEFECT:` line is deliberately left to report **DEFECT-GONE** on every run until you rule.
+> ⇒ **That is a new decision for you: checklist 164.** ⛔ The pass is **not** thereby dead — it
+> repairs saves the broken migration already ran on.
+
+> Full reasoning: `agent/reports/VANILLA_DIFF_DISPOSITION.md`. **(a) is the one that saves you
+> time — it retires items 137, 138, 140, 141 and 142 in one go. (b) is a yes/no on a desk
+> session. (c) and (d) are one word each. Nothing here needs you to play.**
+>
+> **(a) The 25 source-only candidates — rule them as GROUPS, not one by one. Recommendation:
+> accept the four-group disposition below, which CLOSES items 137/138/140/141/142.** Those five
+> items are five different phrasings of "provision a fixture or leave it source-only", each
+> already carrying its own rider. The terminal audit re-derived all 12 P2s at the cost of a chain
+> link and **zero became fixes**, so the expensive work is done and only the decision is missing.
+>   - **A — worth a look, but only if you are already there (C63, C66, C82):** the only three with
+>     a plain player-visible loss on an ordinary route. Keep as candidates and attach as *organic
+>     riders* — "if you happen to have an RC Transport carrying two resources, click to dump one".
+>     ⛔ Never provision a colony for them. Cost: **zero extra play time.**
+>   - **B — the player BENEFITS (C64, C67, C75, C78, C79):** every "loss" turned out to be an
+>     unearned gain or freedom. No action ever, absent a field report. Cost: zero.
+>   - **C — weakened or refuted (C58, C68, C69, C76, C80):** no fixture. ⚠️ **C80 is REFUTED in
+>     its own entry but its status still reads `cand`** — a status flip is owed (I left it alone;
+>     that brief was read-only). Cost: zero.
+>   - **D — the 12 P3s (C56, C57, C59–C62, C65, C70–C73, C81):** source-only, and no re-derivation
+>     pass either. Cost: zero.
+>   - ⛔ This is a disposition, **not a dismissal**: every entry stays, and a field report naming
+>     any of them reopens it instantly.
+>
+> **(b) One bounded desk session on the blind spot that touches US. Recommendation: YES, take it.**
+> The chain left ≥1,281 changed hunks that no instrument lists (I reproduced that number
+> independently today — it had rested on a script that was never committed). Most of it is not
+> worth reading. But I measured the part that is: **29 of the 51 shipped files our pack pins carry
+> such hunks, and `bodycheck` cannot see one of them by construction.** Eight have a known
+> mechanism and are real — e.g. `Unit` and `BaseBuilding` (the base classes of every colonist and
+> every building) each gained a new parent in 1.1.0, and a Farm parent was removed. Whether any of
+> that changes our behaviour is **unread**. Cost: **one desk session, no game, no play time.**
+> ⛔ I filed no defect and am not claiming one — this is an unexamined overlap, not a bug report.
+> The alternative (read all 1,281) is several sessions and I recommend against it.
+>
+> **(c) The instruments' schedule. Recommendation: `bodycheck` + `sigcheck` run on EVERY patch
+> (now binding in `WORKFLOW.md`); `treediff` + `presetdiff` run ON TRIGGER only, never retired.**
+> Your store card now publishes *"Every game patch is read against the pack as well"* — that was
+> true in practice but rested on a track record, and no procedure named the tools. It does now.
+> ⭐ The step that actually matters is free and irreversible if missed: **archive `ModTools\Src`
+> BEFORE any game update or Steam branch switch** (~48 MB). When Steam auto-updated on 09-08 it
+> overwrote the tree unasked and we only got it back because the old branch happened to still be
+> offered. Do you want anything else added to the after-patch step?
+>
+> **(d) Two modules ship without the header that says what they correct.** `00_Core.lua` is the
+> registry and patches nothing — a one-line declaration closes it, no real exposure.
+> ⚠️ `90_SaveSanitizer.lua` is the real one: its header prose already names the shipped defects it
+> depends on, and one of its three passes was retired earlier precisely because the game fixed the
+> bug itself — caught by a human re-reading that prose, which is the expensive way. Recommendation:
+> **give it the machine-readable lines** so the next one is caught in five seconds. Cost: minutes.
+> ⛔ Not done — the brief was read-only.
+
+
+---
+
+## ck160 -- archived 2026-09-16 (was checklist status:ruled): ✅ 2026-09-12 — 160 RULED BY YOU: **(b) — let it ride with v10.** This is ordinary release-lane work, not a separate decision. **Nothing is owed from you; the original ask is kept below.**
+
+
+> **Your ruling (2026-09-12).** The store-status line is release-lane work like the five counts beside
+> it — one commit, one pass, the whole page correct at once, rather than an agent making a one-line
+> edit today and the same page being edited again next week.
+>
+> **Where it lands, and it is already staged.** All six wrong `README.md` claims — the store-status
+> line included — are in `agent/prompts/perma/RELEASE_OUTBOX.md:122-138`, inside the v10 batch notes,
+> with the "⛔ do NOT hand-copy these numbers, re-derive at apply time" instruction on the five counts.
+> `README.md` is also `PUBLIC_SURFACE_SWEEP.md` **§3b** now, so it is on a list and cannot rot unseen
+> again. ⚠️ **The `:9` line is the one of the six that needs no re-derivation** — v9 is live on both
+> stores today and v10 will be by the time the pass runs — so it cannot go stale in the meantime.
+>
+> ⛔ **Nothing further is owed here and no agent should re-ask this.** The only remaining trigger is
+> the v10 release pass itself, which is gated on checklist **158**.
+
+> **The original ask, kept as the reasoning you ruled on. The problem, in one sentence.** `README.md` — the page anyone who clicks through from a
+> Steam or Paradox comment lands on first — has never been swept, and line 9 still reads:
+>
+> > **Status: version 1.0.0 — prepared for first release, not yet on a store.**
+>
+> v9 has been live on both stores since 2026-09-12. A reporter who reads that line concludes
+> the thing they are running is not the released build; **one of the two Paradox developers
+> reading our fix list could conclude the same.**
+>
+> **Five other claims on that page are also wrong, and those are counts** — module count,
+> judgment-call count, tracked findings, probe count, and the "against game version 1.0.7.396349"
+> line. ⛔ Agents are **not** touching those: counts have a re-derivation protocol that belongs
+> to the release lane, and they are now filed in `agent/prompts/perma/RELEASE_OUTBOX.md` under
+> the v10 notes so the single v10 count pass picks them up. `README.md` is also now a numbered
+> surface in `PUBLIC_SURFACE_SWEEP.md` (§3b), which is why it had rotted — it was on no list.
+>
+> ❓ **Your call, and it is only about line 9:**
+>
+> **(a) Fix it now, on its own, before v10.** ✅ **Recommended.** It is not a count, so it needs
+> no re-derivation and cannot go stale between now and the upload. It is one sentence of pure
+> factual error on the most-visited page we have, it costs an agent about a minute, and every
+> day it stands is a day a reporter or a developer can be misled about what they are running.
+> The five counts still wait for v10; nothing about this pre-empts that pass.
+>
+> **(b) Let it ride with the v10 sweep.** One commit instead of two, and the whole page becomes
+> correct at once. The cost is that the wrong sentence stays up for however long v10 takes, and
+> v10 is currently gated behind a play sitting (**158**) that needs 20–30 minutes of your time.
+>
+> ⚠️ Say **(a)** and an agent can do it unattended the moment you answer; nothing else on the
+> page gets touched.
+
+
+---
+
+## ck154 -- archived 2026-09-16 (was checklist status:ruled): ✅ 2026-09-11 — 154 RULED 09-12: sweep only, the safest version. **Build prompt: `agent/prompts/C85_C88_BUILD.md` (with C88). Nothing else owed here; the attended check comes back as its own item when built.**
+
+
+> **Build prompt: `agent/prompts/CLOGGED_BUILD.md` (fireable). Entry: [C85](agent/bugs/C85.md).** This is the
+> one where a Rare Metals Extractor or Polymer factory goes dead with "Clogged after a Dust Storm." and the only
+> way out is demolish and rebuild — two Steam players, and a third report since.
+>
+> **What we now know (it was worth the dig):** the game's own code has a built-in safety net for exactly this —
+> when an event switches a building off it can set a timer that switches it back on, and two other events in the
+> game use it. This one doesn't set the timer. And if the popup's answer is ever lost, the event marks itself
+> *finished* and never fires again, so the building is stranded permanently rather than just delayed. That
+> matches "never recovered" far better than our original guess did. We also killed one theory: the player
+> cannot close that popup with Escape, so that isn't the route.
+>
+> **Decision (a): sweep only, or sweep + timer as well?** **Recommendation: sweep only.**
+> - The **sweep** notices a building stuck with that exact reason and switches it back on, with two safety
+>   interlocks so it never touches one that is legitimately waiting. It writes nothing new into your save, and
+>   crucially **it rescues saves that are already broken** — which is where both reporters are.
+> - The **timer** version patches the event so future clogs heal themselves. It cannot help anyone already
+>   stuck, it edits shipped game data, and it puts a visible countdown on the building — a UI change, which is
+>   your call, not an agent's.
+>
+> If you don't rule, the prompt builds the sweep alone and says so in the commit. **Nothing here needs the
+> keyboard.**
+>
+> **Decision (b): do you want the in-game A/B in the same sitting as 144 a?** It's minutes and works on any
+> 1.1.0 colony at any sol — no dust storm needed. Select a producer, paste one line to force the stuck state,
+> and check it stays dead with the fix off and clears with it on. ⭐ The "fix off" leg is worth having on its
+> own: **it tests the entry's core claim — that nothing in the game ever clears this — which has never been
+> checked in a real game.** Full recipe in the prompt's §4.
+
+
+---
+
+## ck153 -- archived 2026-09-16 (was checklist status:ruled): ✅ 2026-09-11 — 153 RULED 09-12: the Reddit "160% productivity" thread is NOT a bug — **post the reply: yes.** The draft is approved; posting is yours whenever you want it.
+
+
+> **What you ruled (2026-09-12):** post it, as recommended. The draft in `FIELD_REPORT_REPLIES.md` is now
+> `DRAFT`, gate discharged — nothing is holding it but the click. Tell the next session when it goes up and it
+> is recorded in "What was actually posted".
+
+> **Checked end to end against both game versions; no defect filed.** A Russia player can't get 3 extractors to
+> 160 Performance and blames the update for amplification and fuel "no longer adding to it". **That's a mix-up
+> between two different numbers, not a regression** — Amplify and Fueled Extractor boost *Production*, and never
+> touched *Performance*, in either version. I also diffed every number that does feed Performance (traits,
+> specialist penalties, the lot): **all identical, and the update actually made this goal easier twice over** —
+> the old "Extractor AI pins a staffed extractor at 50" bug is now fixed in the game itself (which is why our own
+> fix for it was deleted in hotfix 2), and heavy workload went from +20 to +25.
+>
+> **Decision: post the reply or not.** Recommendation: **post it** — it's a player who can actually finish the
+> goal with the right advice, and the thread's one comment is pointing them toward filing a bug report that
+> would go nowhere. Draft is in `FIELD_REPORT_REPLIES.md`. Nothing here needs the keyboard.
+>
+> ⚠️ **One correction landed in our own records:** `F108.md` credited its completed 3/3 run partly to the
+> "Amplify upgrade". Amplify cannot affect Performance, so that attribution was wrong and is now corrected in
+> the entry. The run itself and its result stand. It matters because that line was a candidate to repeat to
+> Paradox.
+
+
+---
+
+## ck150 -- archived 2026-09-16 (was checklist status:closed): ✅ 2026-09-11 — 150 CLOSED 09-12: all three decided. **(a) you posted the developer reply · (b) built as option 1 with the law's own id · (c) retire, ruled by item 156.**
+
+
+> **(a) CLOSED 2026-09-12 — done, not owed.** You posted the reply to `ivanassen` in the Building Codes thread
+> and used **the majority of A+B**: the sources paragraph *and* the line naming AI-assisted research and code
+> review. There is no API for a Steam comment, so it is recorded as **owner-stated, 2026-09-12** (no posting
+> timestamp given) in `FIELD_REPORT_REPLIES.md` — the draft is marked POSTED and the Steam table carries the row.
+
+> **Update 2026-09-12:** (c) is RULED by item 156 (retire). (b): you said "build it" — the build prompt
+> `agent/prompts/C85_C88_BUILD.md` carries **option 1** (both laws apply to prefab buildings, as the developer
+> will ship) and **the law's own id** on the modifier (so it becomes a no-op the day their patch lands, and
+> repeal cleans it up). Both are the recommendations; if you want the other shape, edit the override slot at
+> the top of that prompt before firing it. (a) is still yours: the reply draft in `FIELD_REPORT_REPLIES.md`.
+
+> Their post (#7, `ivanassen [developer]`): excluding prefabs is wrong and will be fixed in their next patch, so include it
+> in the mod until then. They are merging the pack's fixes into the game, and they couldn't reproduce the farm-oxygen fix.
+> They asked where we collect our bugs. The reply draft is in `FIELD_REPORT_REPLIES.md`, "Reply to the developer".
+>
+> - **(a) The "where do you collect" line.** A: sources only (player reports, reading the game's Lua, testing), plus an
+>   offer of repro steps. B: A plus one line saying we use AI-assisted research and code review. **Recommendation: A**;
+>   B if you want the method named. Both are true; don't reword either toward "all by hand".
+> - **(b) Prefabs ([C88](agent/bugs/C88.md)).** 1: both laws follow their text, so prefab buildings get Lax's +50% and
+>   Strict's −30% like any new building. This matches the developer's words and what they'll ship. 2: repair only
+>   Strict's missing −30%. **Recommendation: 1.** Either way the fix switches itself off once their patch is installed.
+>   Building it is a separate step after you pick.
+> - **(c) Farm oxygen ([F37](agent/bugs/F37.md)).** The developer is right: in 1.1.0 a farm only gives its dome oxygen
+>   while it is working, and destroying or salvaging it turns that off before it leaves the dome, so the old leak can't
+>   happen any more. Our fix is harmless but no longer does anything useful, and the fix list still claims the bug.
+>   **Recommendation: remove it in the next update** (F60 is already a removal candidate).
+
+
+---
+
+## ck146 -- archived 2026-09-16 (was checklist status:ruled): ✅ 2026-09-11 — 146 RULED + BUILT: the Wildfire cure rocket can get stuck on the pad for good. **You ruled: build it, out today. Built `2c68bb1` (`Fix_TradeRocketFuelRefresh`), desk-verified, staged for release as a Beta candidate — your check is item 149.** The original ask is kept below.
+
+
+> Two players on Reddit (one PC, one PS5): the cargo rocket Earth sends for the Wildfire cure sits loaded on the pad,
+> shows "20 fuel to unload", and never leaves. **Cause (read from the game's code, not yet reproduced):** the rocket
+> works out its fuel need once, when it lands. If the fuel cost changes while it waits — researching **Advanced Martian
+> Engines** (−20, exactly the reported number), or, new in this update, the **Fuel Conservation** law, which also shifts
+> every time the Ministry of Technology stops or starts working — the game updates *your* rockets but not Earth's. Earth's
+> rocket is left with fuel it can't unload (or short of fuel no drone will bring), and the mystery waits for it forever.
+> There is no button a player can use. The bug is older than 1.1.0; the new laws just add ways to hit it. Our pack neither
+> causes nor fixes it today. Full record: [F119](agent/bugs/F119.md).
+>
+> **The fix:** when a fuel cost changes, update Earth's landed rockets the way the game already updates yours, and
+> un-stick an already-stuck rocket when the save loads. It would carry a Beta label until tested in play.
+> A reply for the Reddit thread is ready in `FIELD_REPORT_REPLIES.md` — post it or not, your call.
+
+
+---
+
+## ck144 -- archived 2026-09-16 (was checklist status:closed): ✅ 2026-09-10 — 144 CLOSED 09-12: **(b) cleared by you.** Two small asks around the v7 upload; neither blocked it.
+
+
+> **Closed 2026-09-12 on your word: (b) is cleared.** You did not say which way — whether the long sounds post
+> went up, or what it said — and nothing has been inferred from that. The two drafts that were gated on it
+> (`HELD on ck144 (b)` in `FIELD_REPORT_REPLIES.md`: the long sounds post and its "still checking" follow-up) are
+> marked **SUPERSEDED** there with the reason, because their gate can no longer be evaluated and the follow-up's
+> "currently in testing" wording has gone stale across v7, v8 and v9. ⚠️ **Say the word if you want the follow-up
+> back as a live draft** — its two leads are recorded in `agent/bugs/C74.md` either way.
+> **(a)** was already discharged here as a decision (below); the boot it names is tracked in `agent/STATE.md`'s
+> OWED line, not in this item.
+
+> **(a) The v6 check you still owe** (one boot: a handful of hotfix-2 checks plus the first
+> full run of the test kit — STATE's "OWED" line). **Decision: run it on your first v7 boot, or
+> later. Recommendation: first v7 boot — one sitting covers both versions.**
+>
+> **(b) The Steam sounds thread:** did you post the long reply (restored / silent on purpose /
+> can't fix or haven't nailed down / still checking), and which version? If it says "still
+> checking", two small leads (a Drone Hub effect, one misspelled animation name) are owed a
+> check and a follow-up post. Just say which you posted; the next free session does the rest.
+>
+> ✅ **Update 09-10 late: both leads are checked — neither is something players are missing.**
+> The Drone Hub effect is never triggered by anything in the game; the misspelled sound is a
+> duplicate of a loop that is already playing. A short follow-up post is ready in
+> `FIELD_REPORT_REPLIES.md` — post it only if your reply said "still checking".
+>
+> ✅ **Answered 2026-09-12 — half of it.** The **C74 and C83 replies did go up** with the v7
+> update (your word; there is no API for a Steam comment, so it is recorded as owner-stated in
+> `FIELD_REPORT_REPLIES.md` → "What was actually posted" → the Steam table). **The long sounds
+> post is still unanswered** — this item stays open for that half only. If your post said "still
+> checking", the short follow-up is ready (`FIELD_REPORT_REPLIES.md`, marked `HELD on ck144 (b)`);
+> if it did not, say so and the item closes with nothing owed. ⚠️ Either way the post's
+> "currently in testing" wording has gone stale: v7, v8 and v9 have all shipped since.
+
+
+---
+
+## ck143 -- archived 2026-09-16 (was checklist status:closed): ✅ 2026-09-10 — 143 CLOSED: **FIX BUILT + TESTED-ATTENDED** — new arrivals no longer fall back into a switched-off, quarantined dome ([C83](agent/bugs/C83.md)).
+
+
+Original question, kept as asked: new arrivals with nowhere to live get sent into a switched-off, quarantined dome with no life support, and suffocate. You reproduced it. **Decision: fix it for hotfix 3, or file and watch. Recommendation: fix it — colonists die, and the game already does the right thing in its elevator case.**
+
+> **What you saw (2026-09-10, thank you):** two domes in walking range of the pad, the
+> nearer one switched off, quarantined and unconnected. The rocket's colonists split — some
+> into the working dome, the rest walked into the dead one — and the game raised
+> Suffocation!.
+>
+> **Why:** each arriving colonist first looks for a working, open, supplied dome in walking
+> range **with free housing**. When the working dome fills up, the rest fall back to "the
+> nearest dome" — and that fallback never checks power, life support or quarantine. The
+> game's own code does check it when the fallback dome is across an elevator, so this looks
+> like an oversight. Once inside a quarantined dome, the game won't let them leave for a
+> better one.
+>
+> **Our pack doesn't touch this today:** our arrival fix only redirects colonists sent to a
+> dome they *can't walk to*. Yours was walkable.
+>
+> **The fix does:** send the overflow to the nearest dome that is actually **working, open
+> and supplied** —
+> they arrive homeless but alive, and move into housing when it appears — and only fall back
+> to any dome at all when no working one is in reach. The build first checks everyone else
+> who uses the same "nearest dome" rule, so the change only lands where it should.
+>
+> **Attended receipt (2026-09-10):** an ordinary landing used only safe routes and stayed
+> silent. In the forced overflow leg, every arrival entered the working dome, nobody used the
+> disabled station or dead Fuller #1, the repair logged one actual reroute, and nobody moved
+> into the bad dome during the following sol. The archived log has 0 Lua errors.
+>
+> **For the reporter**, if you want to reply: *Confirmed, reproduced, and fixed for the next
+> Relaunched Fix Pack update. When new colonists
+> can't find free housing in a working dome within walking distance, the game sends the rest
+> to the nearest dome of any kind — even one that is off, quarantined and has no life support.
+> The repair redirects that overflow into the nearest powered, open and supplied dome, where
+> they can wait homeless rather than suffocating. Until the update ships, keep free housing in a
+> working dome near where you land, or don't leave a dead dome as the closest one to the
+> landing site.*
+
+
+---
+
+## ck144 -- archived 2026-09-16 (was checklist status:closed): ✅ 2026-09-10 — 144 CLOSED: C83's homeless follow-through found a distinct intentional override, not another fix ([C84](agent/bugs/C84.md)). No decision is owed.
+
+
+Later homeless resettlement can consider a switched-on, accepting dome without life support,
+but only the player's must-have filter (or direct forced-dome order) can make it beat the live
+home C83 chose. The shipped 1.1.0 score comment explicitly preserves that override so players
+can force colonists into an unpowered dome. C84 records it `wontfix — intentional`; C83 stays
+arrival-only. The attended C83 leg watched the arrivals for one sol; nobody moved into the bad dome.
+
+
+---
+
+## ck142 -- archived 2026-09-16 (was checklist status:closed): ✅ 2026-09-10 — 142 — **CLOSED 2026-09-12 by your ruling of item 163 (a)**, which dispositioned all 25 source-only candidates as four groups rather than one by one: the 12 P2s land in the four groups; **no hotfix-3 list is named**, which is what the recommendation asked for. **Nothing is owed from you; the original ask is kept below as the reasoning.** ⛔ A disposition, not a dismissal — a field report naming any candidate reopens it instantly.: the vanillahunt terminal audit re-derived every P2 candidate — which of these, if any, go to a hotfix-3 candidate list? **Decision: name any entry you want on a hotfix-3 candidate list, or accept "file and watch" for all. Recommendation: none today; take C66 and C82 as cheap organic looks and leave the rest.**
+
+
+> Full verdicts: [HUNT_AUDIT.md](agent/reports/vanillahunt/HUNT_AUDIT.md) §3 (each entry
+> also carries a dated `99 terminal audit` stamp). Of the 12 P2 entries re-derived from the
+> two trees: 6 hold, 5 are weakened, 1 is refuted; 04's R08311 rejection stands. Per entry:
+> - [C82](agent/bugs/C82.md) — NEW, found by the audit, one read only, both trees: after The
+>   Incident's "Stop all Fusion Reactors" reply the reactors are never re-enabled. **Verify
+>   first, then decide:** it rides the ck140 Incident fixture with one extra reload. If it
+>   reproduces it is the one real loss on this list.
+> - [C66](agent/bugs/C66.md) — holds: group-All ground unload dumps everything. Piles are
+>   recoverable. **Cheap organic look** next time an RC Transport carries two resource
+>   groups; watch, no hotfix slot unless it bites you.
+> - [C63](agent/bugs/C63.md) — holds: a faction disaster runs forever after its faction loses
+>   every seat, and its card is hidden. Needs the ck137 politics fixture. Watch.
+> - [C69](agent/bugs/C69.md) — the AI mystery's intensified phase is now one burst; the cause
+>   is the instant-research model, not the dropped branch — nothing to patch. Leave.
+> - [C64](agent/bugs/C64.md), [C75](agent/bugs/C75.md), [C78](agent/bugs/C78.md),
+>   [C67](agent/bugs/C67.md), [C79](agent/bugs/C79.md) — hold, but every one is an UNEARNED
+>   GAIN for the player (permanent approval, free construction, +10 % extractors, extra meals,
+>   a small RP refund). ✅ **The 09-08/09-09 "tension" this item used to hand you is
+>   DISSOLVED — item 161, 2026-09-12:** the 09-08 rule was triage scoped to the 1.1.0
+>   recovery and expired with it, and the 09-09 ask was never a reversal. **No rule
+>   excludes these; each is now an ordinary cost call.** Recommendation unchanged —
+>   leave, because a minor win does not pay for a fixture — but that is **pricing, and
+>   revisitable**, not a category ban.
+> - [C58](agent/bugs/C58.md) (4 % of a reserved portion; depot half impossible),
+>   [C76](agent/bugs/C76.md) (no visible effect — 1.1.0 has no per-tech price),
+>   [C68](agent/bugs/C68.md) (trigger unreachable as written) — weakened. Leave.
+> - [C80](agent/bugs/C80.md) — REFUTED (the destroyed elevator evicts its traveller first).
+>   Nothing to do; the entry keeps the refutation.
+> - The 12 P3s (C56, C57, C59–C62, C65, C70–C73, C81) were not re-derived; unchanged, watch.
+>
+> **TAKEABLE WHEN** you want a hotfix-3 candidate list at all; otherwise nothing is owed.
+> FR-1/2/3 stay open — the Linux sitting (136) outranks every source read for FR-1.
+
+
+---
+
+## ck141 -- archived 2026-09-16 (was checklist status:closed): ✅ 2026-09-10 — 141 — **CLOSED 2026-09-12 by your ruling of item 163 (a)**, which dispositioned all 25 source-only candidates as four groups rather than one by one: C79/C80/C81/C62 are dispositioned — C80 **REFUTED** (status flipped today), the rest source-only. **Nothing is owed from you; the original ask is kept below as the reasoning.** ⛔ A disposition, not a dismissal — a field report naming any candidate reopens it instantly. rider: vanillahunt 04 left three functional candidates and two profiling reads; none is a release gate. **Decision: take only a naturally available 1.1 fixture, or leave them source-only. Recommendation: prioritize C79; take C80 only on a disposable elevator save, and leave the profiling reads until a large colony already exists.**
+
+
+> **TAKEABLE WHEN** a fresh 1.1 colony naturally reaches the named surface;
+> never convert the branch-locked 1.0.7 campaign. [C79](agent/bugs/C79.md):
+> immediately after an authored `SA_RevealTech` event, record the target's
+> required/remaining points and all boosts (Mystery 10's 3,000 or Wildfire's
+> 90,000 are strong discriminators). [C80](agent/bugs/C80.md): on a disposable
+> save, order a traveler into an elevator and finish demolition during entry;
+> record the log and traveler command/location. [C81](agent/bugs/C81.md): only
+> with an attributable profiler and a large fragmented grid, compare the three
+> per-second visibility scans with a counterfactual. [C62](agent/bugs/C62.md):
+> only if Hostage Situation naturally reaches its detonation with neighboring
+> buildings, profile the unused allocation. Apply each entry's vacuity test.
+>
+> [C78](agent/bugs/C78.md) is **not owner-takeable on this Steam install**:
+> Steam blocks 1.0.7 saves before its Astrogeologist migration route. It needs
+> a supported non-Steam old-save tester; do not override or convert the owner's
+> campaign to manufacture it.
+
+
+---
+
+## ck140 -- archived 2026-09-16 (was checklist status:closed): ✅ 2026-09-10 — 140 — **CLOSED 2026-09-12 by your ruling of item 163 (a)**, which dispositioned all 25 source-only candidates as four groups rather than one by one: C75 + C76 need no fixture; C75 is a group B **player benefit**. **Nothing is owed from you; the original ask is kept below as the reasoning.** ⛔ A disposition, not a dismissal — a field report naming any candidate reopens it instantly. rider: The Incident can answer two source-only candidates in one fresh fixture. **Decision: test it only if a fresh 1.1 colony naturally has two working Fusion Reactors, or leave both candidates source-only. Recommendation: fold the two reads together; neither is a release gate.**
+
+
+> **TAKEABLE WHEN** the fresh colony lacks Eternal Fusion and reaches The
+> Incident during a dust storm; never convert the branch-locked 1.0.7 campaign.
+> Save before answering. For [C75](agent/bugs/C75.md), take emergency shutdown,
+> reach the no-explosion aftermath, and before researching the revealed tech
+> record the Fusion Reactor build-menu entry and a pre-placed site's state. If
+> convenient, reload for the explosion branch as the control. For
+> [C76](agent/bugs/C76.md), record the revealed The Incident tech's research
+> cost on the 10,000-RP no-explosion path and the 5,000-RP explosion path before
+> any boosts. Apply each entry's vacuity/falsifier; skip the fixture if it does
+> not arise naturally.
+
+
+---
+
+## ck138 -- archived 2026-09-16 (was checklist status:closed): ✅ 2026-09-10 — 138 — **CLOSED 2026-09-12 by your ruling of item 163 (a)**, which dispositioned all 25 source-only candidates as four groups rather than one by one: the eight caller-seam candidates are dispositioned; **C66 stays a group A organic rider**, never provisioned for. **Nothing is owed from you; the original ask is kept below as the reasoning.** ⛔ A disposition, not a dismissal — a field report naming any candidate reopens it instantly. rider: eight caller-seam candidates need fresh 1.1 fixtures; none is a release gate. **Decision: take only the naturally available fixture(s), or leave the candidates source-only. Recommendation: prioritize C66 and fold C67/C68 together if a food-service fixture is already available.**
+
+
+> **TAKEABLE WHEN** a fresh 1.1 colony naturally has the named surface; never
+> convert the branch-locked 1.0.7 campaign. [C66](agent/bugs/C66.md): RC
+> Transport carrying resources from two displayed groups—choose one group's
+> ground-unload **All** and record every resource. [C67](agent/bugs/C67.md) /
+> [C68](agent/bugs/C68.md): hold a meal reservation across a workshift or a
+> genuine failed service entry; record service Food, reservation/capacity and
+> hunger without sacrificing a colonist. [C69](agent/bugs/C69.md): begin Number
+> Six Tracing and time **En Garde** / the intensifier against research start and
+> completion. [C70](agent/bugs/C70.md): with an older large tank present,
+> destroy only the newly designated St. Elmo tank before 80% and identify the
+> rebound target. [C71](agent/bugs/C71.md): on the unlucky first-Dredger close-
+> inspection branch, record the scanning Explorer's status when the popup says
+> it malfunctioned. [C72](agent/bugs/C72.md) / [C73](agent/bugs/C73.md) are
+> profiler-only: attribute the Basics tutorial 40/50 ms callbacks or the Food
+> infobar's discarded availability query against an otherwise identical
+> counterfactual. Apply each entry's vacuity/falsifier; skip what cannot be
+> reached naturally.
+
+
+---
+
+## ck137 -- archived 2026-09-16 (was checklist status:closed): ✅ 2026-09-10 — 137 — **CLOSED 2026-09-12 by your ruling of item 163 (a)**, which dispositioned all 25 source-only candidates as four groups rather than one by one: the three politics candidates stay source-only; no colony is provisioned for them. **Nothing is owed from you; the original ask is kept below as the reasoning.** ⛔ A disposition, not a dismissal — a field report naming any candidate reopens it instantly. rider: three vanilla politics candidates need a fresh 1.1 colony, never the branch-locked campaign. **Decision: provision one politics fixture when convenient, or leave all three source-only. Recommendation: provision only if the ordinary play setup can cover them together.**
+
+
+> **TAKEABLE WHEN** a fresh 1.1 sponsor-faction colony has active politics and
+> can naturally reach faction opportunities, a timed faction disaster and the
+> first Earth Council availability. One fixture can answer [C63](agent/bugs/C63.md),
+> [C64](agent/bugs/C64.md) and [C65](agent/bugs/C65.md); none is a release gate.
+> Do not use or convert a 1.0.7 campaign save.
+>
+> Record: (1) whether an active faction can fall to zero seats while retaining
+> a timed Radicalization/Renegades disaster, and whether it stops at its cap;
+> (2) whether a completed Faction Opportunity's approval explanation disappears
+> after 15 sols with no new active opportunity; (3) whether `EarthCouncilIntro`
+> appears at first Council availability. The agent supplies counters and the
+> one-seat / active-opportunity / manual-popup controls during the sitting.
+> Skip a leg as vacuous if its precise state cannot be reached naturally.
+
+
+---
+
+## ck- -- archived 2026-09-16 (was checklist status:closed): ✅ CLOSED 2026-09-09 — the brief that produced the block above was consumed 2026-09-15 after ck184 discharged the remaining play clauses. The historical two-tier plan stays below.
+
+
+> **Every in-play control the chain owes you is in one file**, one boot, on
+> `BlankBig_02` — links 03, 04, 04b, 07, 08 and 99a, plus the F95 line you just
+> ruled in and 131's two new rows. Paste it into a fresh session with you at the
+> keyboard.
+>
+> * **Tier 1 (~25 min, no colony setup)** — boot, the census, `SMRTest.RunAll()`.
+>   ⛔ **This is the one I would not upload without.** It catches a module that
+>   silently switched itself off, and it is the **first machine check the project
+>   has ever had on "vanilla fixed it"** for the 36 removals: a `retired` probe
+>   that FAILs means a removal was **wrong and players lost a fix**.
+>   ⛔ **No boot of this 44-module pack exists.** Predicted 44 applied / 0
+>   inactive — computed, never measured, and **any `inactive` line is a finding**.
+> * **Tier 2 (~60–75 min)** — twelve controls, **ordered by value, not by link
+>   number**. Rows 1 and 2 are the two bugs that actually reached players (F114
+>   trains, F115 landscaping). If you only get through three, do 1, 2 and 3 —
+>   row 3 is a **one-minute console read** that decides whether F46 can be
+>   retired.
+>
+> ✅ **Stopping partway is planned for, not a failure.** §5 makes every row
+> `PASS` / `FAIL` / **`NOT RUN`** with no fourth option, and the session files the
+> unrun rows back into this page as one "what the sitting still owes" block. The
+> brief does **not** delete itself while anything is unrun.
+>
+> ✅ **All four preconditions verified 2026-09-09:** stale-probe sweep CLEAN
+> (zero hits), the force-inactive leg DISARMED, the enable-path leg DISARMED, the
+> autorun harness inert. Nothing to untick except **Passage Network**.
+>
+> ⛔ **Row 12 (Saint's blessing) is shelved by your own ruling 130 — do not
+> attempt it**, and the suite's PASS for it is vacuous, not coverage.
+> ⛔ A clean sitting is still not clearance (`H-04`), and `100_DOCSWEEP` must run
+> before the upload either way.
+
+
+---
+
+## ck126 -- archived 2026-09-16 (was checklist status:ruled): ✅ 2026-09-09 — ITEM 126 RULED: **KEEP THE PASS IN** (see the ruling block at the top of this section). Left below as the reasoning you ruled on; link 08 wrote a pass that cleans up after **us**, and it changes what "remove the save sanitizer" means
+
+
+> **What we left behind.** One of the 36 modules link 02 deleted,
+> `Fix_AstrogeologistExtractors`, did its job by adding two +10% extractor
+> bonuses to the Astrogeologist commander profile. Those bonuses were written
+> **into the savegame**, not just into memory — so deleting the module did not
+> take them back. On 1.1.0 the game pays that bonus differently, and one of the
+> two buildings (the Micro-G Auto Water Extractor) is now collecting **+30%
+> water where the game intends +20%**. It is a bonus in the player's favour, so
+> nothing is broken and nothing is lost — but it is a number we put there and
+> the game did not.
+>
+> **What I did.** Added a pass to `90_SaveSanitizer` that finds those two
+> entries and removes them on load. No new file, nothing about the shipped file
+> list changes. ⛔ **It has never run in a game** — this is a written pass, not
+> a repaired save, and I am not claiming otherwise.
+>
+> **⚖️ THE DECISION (this is the part that needs you).** On 2026-09-08 you were
+> asked (item 117) whether to keep `90_SaveSanitizer` at all. That question was
+> **entirely about players loading old 1.0.7 saves**, which only happens off
+> Steam — so "Steam-only in practice ⇒ remove it" was a reasonable answer.
+> **That is no longer the whole question.** This new pass has nothing to do with
+> 1.0.7 saves: it cleans **1.1.0 saves that were played with our pack**, and
+> those exist on every platform, Steam included. ⇒ removing the sanitizer now
+> means *"leave a number we put in players' saves in there permanently"*.
+> **I am not resolving this for you.** If you already leaned "remove it" on the
+> platform question, this is the reason to look again.
+>
+> **What you will see, at the post-99 sitting (no action now).** Load a save and
+> read the log for `SaveSanitizer: F95`:
+>
+> | the line says | it means |
+> |---|---|
+> | `removed 0 modifier(s), left 0 unidentified` | this save was already clean — most saves, and every save that was not an **Astrogeologist** colony |
+> | `removed 2 …` plus a per-label line naming the label | this save carried our leftovers and they are now gone |
+> | `LEFT n modifier(s) … ALONE` | ⚠️ something on that label looks like ours but I could not positively identify it, so I did not touch it. **Tell me if you see this line** — it most likely means another mod owns that entry, and removing someone else's is the one mistake here with no undo. |
+>
+> **Cross-check:** the Test Kit's `AstrogeologistExtractors` probe answers the
+> same question independently — it FAILs if the loaded save still carries the
+> leftovers. Probe PASS + a `removed 0` line = the save was genuinely clean.
+> Probe FAIL + a `LEFT … ALONE` line = the near-miss case in the table above.
+>
+> **One thing I could not settle, recorded so it is not lost.** The game's own
+> migration for this profile (`RefreshAstrogeologistExtractorBonus`) only
+> matches old bonuses worth **20%**, and the 1.0.7 profile we have archived on
+> disk pays **10%**. If those are the only two versions, that migration cleans
+> nothing on a 1.0.7 save and vanilla leaves ten stale entries of its own. I
+> cannot prove it — there were probably game versions between the two we hold,
+> and the 20% may belong to one of those. It is **vanilla's residue, not ours**,
+> and I did not touch it. Handed to the terminal audit (99) as a finding.
+
+
+---
+
+## ck124 -- archived 2026-09-16 (was checklist status:ruled): ✅ 2026-09-08 — ITEM 124 RULED: `StaleReservations` is FIXED, not removed. This was the last thing blocking chain link 03.
+
+
+> ⚖️ **124 — RULED: FIX.** Owner, verbatim: *"fix is the ruling."* ⇒ `Fix_StaleReservations` **stays** and gains
+> the exemption clause; it does not go to a deletion sweep. **Link 03 is now unblocked in full** — all three of
+> its modules are actionable and it can run as a single pass instead of stopping halfway.
+>
+> **What was wrong, and it is a real player loss — which is why FIX rather than REMOVE fits the 120 rule.**
+> 1.1.0 added a legitimate long hold: boarding an expedition rocket saves `expedition_residence` before
+> `SetDome(false)` clears the residence (`Colonist:EnterTransporter`, `Colonist.lua:5025-5031`) and reserves it
+> back through `CanReserveResidence`/`ReserveResidence` (`:5003-5008`). Our 5-sol `NewDay` sweep cancels that
+> real hold ⇒ **crew returning from a long expedition lose their home.** The lock is 3,600,000 ms while a one-way
+> expedition is 1,440,000–3,000,000, so the window is ordinary, not exotic.
+> ✅ Re-checked against the shipped 1.1.0 tree before recommending it, rather than taken from the brief:
+> `expedition_residence` is live with 20 hits tree-wide, and both cited bodies read as described.
+>
+> **The repair is one clause** — skip colonists whose `expedition_residence` is truthy.
+>
+> ⚠️ **One honesty requirement that rides with it, and link 03 is told to put it in the module header.** 1.1.0
+> bounds the ordinary shuttle-wait case this module was written for (F58) at one sol, so what the sweep still
+> covers is **committed-shuttle limbo and the walk path** — NOT "F58 is still shipped". The re-verification
+> report overstates this; the QA (§0.4) corrects it. The narrowed premise gets stated plainly rather than the
+> module keeping its old claim.
+>
+> **Control this owes you (~5 min, batch it with 03's Saint control):** send an expedition, wait past 5 sols,
+> and confirm the returning crew keep their residence with the pack on.
+>
+> ✅ **Nothing else in 03 needs a ruling from you.** Its other save-cleanup half — the `SaintBlessing` re-base —
+> looks like the F-5 cleanup you ruled OFF under 120, but it is the opposite case and rule 120 already answers
+> it: F-5's residue was an unearned **bonus**, whereas here vanilla's one-shot fixup already ran with our wrong
+> value and will not re-run, so the Saint blesses **nobody** — a **loss**, so it gets repaired.
+
+
+---
+
+## ck82 -- archived 2026-09-16 (was checklist status:closed): ✅ 2026-08-30 — ITEM 82 CLOSED: F110 live on both stores in v5, site deployed, delivered Steam pack verified. Nothing owed.
+
+
+82. ✅ **SHIPPED — v5, both portals, 2026-08-30.** You packed and uploaded Paradox
+    then Steam; you told me the store pages look good. The tree now reads `version 5`
+    (up one from 4); `pdx_id`/`steam_id` unchanged and written back (Paradox rev
+    `pdx_version` "4"). The release words are live: the card count moved
+    **Eighty-one → Eighty-two repairs** on both store bodies, F110's change note is
+    the version's changelog entry, and a headliner bullet ("A Jumbo Cave mystery
+    could get stuck clearing waste rock and never complete") is on the card.
+
+    ✅ **SITE DEPLOYED** — you ran Publish; newest run `ce3a3779` (== site HEAD),
+    status success, **82** live fix-list entries. The store "Eighty-two" now matches
+    the page it links to; count constraint closed.
+
+    ✅ **Both questions answered 08-30.** **(1) Auto-fill did NOT deliver a clean
+    page** — you pasted the `UPLOAD_WORKFLOW.md` §3 backup by hand. So after two
+    upload cycles the auto-fill path has never once stood on its own: the §3 paste
+    backups are the real delivery mechanism, **required and kept current**, not an
+    optional fallback. You're treating the pasted plain text as a placeholder and
+    will apply the headings/bold formatting later — cosmetic, no rush.
+    **(2) No required-game-version field** was offered on either page — nothing to
+    set, nothing owed.
+
+    ✅ **DELIVERED PACK VERIFIED** (§0.5(f)) — your subscribed Steam copy downloaded
+    to `steamapps/workshop/content/**3215050**/3787202810/ModContent.fpk` (Relaunched
+    is app 3215050, not 464920). Read with `tools/pack_list.py`: **85 entries**
+    (== `pack_predict`), **83 byte-identical** to the tree; the only 2 that differ are
+    `metadata.lua` + `items.lua` (the forced-save comment strip, same as v4's 84/82).
+    Extracted `metadata.lua` confirms `version 5`, count word **"Eighty-two repairs"**,
+    the F110 change note, and `Fix_JumboCaveReinforcementWedge` in the code list.
+    **md5 `a1cbaad6294382068250ef390037f239`, 401,188 B.** First delivered md5 this
+    project has ever computed from a real portal artifact.
+
+<details><summary>the attended-fix receipt (08-30, for the record)</summary>
+
+    ✅ You decided to fix it, the module was written, and the attended A/B passed: on
+    the re-loaded still-stuck `International Mars Mission Sol 84` the module's own
+    control line fired —
+    `[CommunityFixPack] JumboCaveReinforcementWedge: force-cleared 1 unreachable waste rock(s) …`
+    — and the mystery auto-completed. Confound ruled out: your material cheat only
+    supplied build resources (needed to *build*, not to *clear*) and you didn't
+    finish-construct; the clearing is the fix's, by its own log line. `F110` flipped
+    to `fixed`; log archived (`archive/f110_attended_…16.41.16.log`). One same-day
+    hiccup handled: the first build required `Cities` at menu time and self-disabled
+    (the dialog you saw) — Require trimmed, applied clean on the next boot.
+
+</details>
+
+<details><summary>original decision text (for the record)</summary>
+
+**Confirmed, first time ever.** A Reddit reporter's save (you bought the
+    Interplanetary Codex pass to load it) reproduced the month-old Jumbo Cave
+    wedge on our exact build. Console read while stuck: a `JumboCaveReinforcementStructure`
+    site down to its last waste rock, that rock a `WasteRockObstructor` the drones
+    can't path to (in 2 drones' `unreachable_buildings`), site never clears, mystery
+    soft-locks. Permanence witnessed (the unreachable flag reset on load, then
+    rebuilt after ~1-2 min of run). Filed as **`F110`**; C25 is closed-promoted.
+
+    **The decision is yours — three parts, and none is urgent:**
+    - **Fix or leave?** It's a genuine soft-lock with no player recourse, which
+      `FIX_POLICY` normally favours fixing — but it's niche (needs a Jumbo Cave
+      *and* the geometry to strand a rock). **Rec: fix, in a future patch, not a
+      hotfix.**
+    - **Shape?** fredware's known repair is *reactive* (wrap the vanilla approach,
+      act after a failure). A *proactive* shape would need the finer root cause
+      first — WHY `Rocks_04` is unreachable (terrain vs a cleared pile vs an
+      adjacent obstacle), which I did **not** measure. **Rec: characterise the
+      geometry on the loaded save before choosing a shape.**
+    - **Timing?** Post-launch = patch-note maintenance (your ruling); this rides a
+      future patch, not its own cycle. No gate re-run for one added fix.
+
+    ⇒ **Say the word and I'll (a) take the geometry read off the still-loaded save,
+    then (b) bring you an A/B fix proposal.** Nothing is owed until you decide.
+
+</details>
+
+
+---
+
+## ck76 -- archived 2026-09-16 (was checklist status:closed): ✅ 2026-08-24 — F107 IS REPAIRED. **76 CLOSED 09-12 as overtaken — the module was deleted by `2dc1dbe`, so there is nothing left to revert. Nothing is owed from you.**
+
+
+76. ✅ **BUILT on your item-74 (a), same session — `Fix_LandscapeCostRefresh`
+    now installs ONE chained wrap on `ConstructionSite` instead of three on the
+    landscape leaves.** `prev` is the real function (`ConstructionSite` is the
+    only class in the tree that declares `RefreshConstructionResources`,
+    `ConstructionSite.lua:665`), so the delegation half is live code again.
+    → [agent/bugs/F107.md](agent/bugs/F107.md) (`built`) · `Code/Fix_LandscapeCostRefresh.lua`
+    * **The `Require` block already named the pair we now install on**, which is
+      what `FIX_POLICY` §2 asks for — so the three F107 rows are **deleted** from
+      `tools/harvest_wrap_targets.py`'s allowlist rather than kept. `WRAP CHECK:
+      0 wrap site(s) outside Require, 5 allowlisted`. doccheck **GREEN**.
+    * **The widening was re-verified at Src by this session, independently**, not
+      taken on the audit's word: `GatherConstructionResources` creates
+      `construction_resources` and `construction_costs_at_start` together
+      (`:639-640`), both class defaults are `false` (`:13`, `:32`), so the only
+      ordinary-site state where the widened guard fires is the ungathered one —
+      where vanilla's own body raises at `:670`. Same verdict: it can only ever
+      prevent an error. That derivation is now in the module header.
+    * **The header's refuted F106 premise and the banned `classes.lua:986-988`
+      citation are gone**, replaced by the measured file-load ordering; the
+      `Track.lua:651` "only writer" precision is in too.
+    ✅ **VERIFIED ON THE RIG 2026-08-24, unattended — F107 is `fixed`, not
+    `built`.** You launched; the TestKit autorun harness did the rest (boot ->
+    generate a map -> start a colony -> all 100 probes -> quit itself). Log
+    `docs/archive/f107_Mars.exe-20260824-13.07.00.log`.
+    * **Suite `76 PASS / 0 FAIL / 24 SKIP / 0 ERROR` of 100**, gate `78/78
+      applied`, `[SMRAUTO] BEGIN..END` clean. The previous leg was `75/1/24/0`
+      and that single FAIL was this probe.
+    * ⭐ **Clause 1 stayed PASS on all three leaves** — that is the half that
+      mattered. A repair that traded one defect for another would show clause 1
+      broken, and nothing else in the suite checks it.
+    * ⭐ **The dispatch sweep agreed independently of the probe**: the three
+      leaves went from `UNREACHED=3 (own-copy 3)` — unreached because the module
+      had overwritten them itself — to `UNREACHED=0`, reach 5 -> 8. Sweep total
+      `clean=97` -> **`98`**. That is the inheritance mechanism measured without
+      reference to the probe's verdict.
+    * ⭐ **The widening you ruled in is no longer a reading.** Clause 3 ran on
+      `ConstructionSite` itself: ungathered `ok=true` (where vanilla raises at
+      `:670`), gathered `ok=true set_to=90 start_cost=50` (delegated identically
+      to vanilla). Two static derivations had agreed on that; now it has run.
+    * **Zero unexplained error lines.** The `Flight.lua:465/:479` asserts in the
+      log are the known synthetic-map ones, present in the control leg too.
+    ⛔ **Still NOT established, and no run so far touches it:** the field route —
+    a levelling site on a real map plus a `*_Construction` cost tech. F105 has
+    never been reproduced end to end. That is unchanged by this leg and rides
+    your next organic sitting if you want it.
+    ❓ **One thing still open: I read your "I'd take (a)" as the ruling and
+    built it.** If that was a leaning rather than a decision, say so — it is one
+    `git revert`, though the tree is now measured green on it.
+    ✅ **CLOSED 2026-09-12 as overtaken — there is nothing left to revert.** On
+    your "if it's overtaken close it". `Code/Fix_LandscapeCostRefresh.lua` was
+    **deleted** by `2dc1dbe` (hotfix 2 link 02, 2026-09-08) under the item-98
+    DELETE ruling — verified in that commit's own name-status (`D
+    Code/Fix_LandscapeCostRefresh.lua`) and by the file's absence from `Code/`
+    today. Whether the item-74 (a) build was a ruling or a leaning no longer
+    changes any byte we ship.
+
+74. ✅ **MEASURED AND ANSWERED 2026-08-24 — and the answer is the opposite of
+    the question. It cost you nothing: the run was unattended.**
+    **The good news first: nothing was broken by the mechanism I was worried
+    about.** I filed F106 saying that most of our ~60 fixes might be silent
+    no-ops, because the game copies inherited methods into each subclass before
+    our code could patch them. **That was wrong, and it is now measured wrong.**
+    Our fixes are applied *earlier* in the boot than I believed — before the game
+    builds its classes, not after — so the game copies **our** patched version
+    down into every subclass. `Fix_SmallLandscapeSites` (F33) is fine and always
+    was; the sweep checked all **105** wrap targets and 97 of them reach every
+    subclass. → [agent/bugs/F106.md](agent/bugs/F106.md) (closed, refuted) ·
+    report [agent/reports/F106_DISPATCH_SWEEP.md](agent/reports/F106_DISPATCH_SWEEP.md)
+    · log `agent`-side `docs/archive/f106_Mars.exe-20260824-02.32.27.log`
+    · suite `75 PASS / 1 FAIL / 24 SKIP / 0 ERROR` of 100, gate `78/78 applied`.
+
+    ⛔ **The bad news, and the only thing here that needs you: the same run found
+    a real defect in the F105 module you ruled on yesterday.**
+    `Fix_LandscapeCostRefresh` was written to "check, then hand off to the
+    game's own code". Because of the same early-apply timing, the hand-off
+    captured **nothing** — it holds a nil where the game's function should be. In
+    practice: **the crash you asked me to fix IS fixed** (the check fires and
+    returns, which is the whole repair), but the hand-off half is dead code that
+    would throw an error *inside our own file* if anything ever reached it.
+    Nothing shipped is affected — this module is not on the live listings yet —
+    but it is **the one module the queued 1.0.x upload exists to deliver**.
+    → [agent/bugs/F107.md](agent/bugs/F107.md) (measured, not derived)
+
+    ❓ **Your call — one question, three options.**
+    * **(a) Repair it before the upload** *(my recommendation)*. The repair is
+      small and, ironically, it is the shape **you** were originally offered on
+      item 72: **one wrap on `ConstructionSite`** instead of three on the leaf
+      classes. It is now measured to reach all 13 relevant classes. One module
+      touched, one boot log to confirm, then the upload goes as planned.
+      ⚠️ It widens the guard to ordinary construction sites too — harmless by
+      construction, but it is a behaviour surface and that is why I am asking
+      rather than deciding. (Audit-checked 08-24: in the one state where the
+      widened guard changes anything, the game's own code would have crashed —
+      so the widening can only ever prevent an error, never cause one.)
+    * **(b) Upload as-is, repair in the next patch.** Defensible: the reported
+      crash really is fixed and the dead branch is unreachable on shipped data.
+      The cost is that the pack carries a latent error in its own file, and
+      `EF-065`(a) means any such error names **us** in the player's popup — the
+      exact misattribution F104 and F105 were both about.
+    * **(c) Repair it with the minimal change** — keep the three installs, just
+      take the game's function from the class that actually declares it. Smallest
+      diff, no behaviour-surface change, but it leaves the shape that caused the
+      bug in place.
+    ✅ **RULED (a) and BUILT 2026-08-24 — receipt is item 76 above.**
+    ⛔ (Historic:) the chain that found it was forbidden from writing fix code,
+    deliberately, so that the finding and the fix stayed separate decisions.
+
+    ⚠️ **One thing this run canNOT tell you, and no run so far can.** The sweep
+    lists which subclasses do not receive one of our patches; it does **not**
+    say which of those subclasses ever actually exist in a game. So the "audit"
+    half of this item is **not complete and is not closed** — what is closed is
+    the alarm that the mechanism was breaking everything.
+    For the record, the leftovers it did find are the *old* known question
+    (`EF-066`): 8 targets where a subclass writes its own version of the method
+    we patched, so it keeps the game's behaviour instead of ours. That is
+    under-coverage, never new harm. The largest is
+    `Fix_ShuttleHubOffAvailable`, whose wrap on `BaseBuilding` is overridden by
+    `Building` and so misses ~578 building classes; also
+    `Fix_GhostFarmOxygen`'s wrap misses residences, research labs, training
+    buildings and water reclamation spires. **None of these is new, none is a
+    regression, and none needs you now** — they are per-fix coverage questions
+    for the opt-in-era maintenance window, exactly where `EF-066` always put
+    them.
+
+
+---
+
+## ck50 -- archived 2026-09-16 (was checklist status:ruled): ✅ 2026-08-19 — two calls from the last sweep link. **50 RULED + APPLIED 09-12 (soften the chain-vs-copy promise) · 51 CLOSED 09-12 as overtaken, with the unrun leg re-filed as a takeable. Nothing is owed from you.**
+
+
+50. ✅ **RULED 2026-09-12 — soften it. APPLIED the same session, words only.** Your word. The
+    sentence that promised an outcome for other mods now says what the code does, and the README's
+    half-sentence says the same thing:
+
+    * **`Code/00_Core.lua:4-7`** (was `:4-5`) — the design goal now reads
+      *"Mod-compatible where the bug allows: a fix chains the original where the defect can be
+      hooked, so another mod that hooks the same function keeps working; where the defect sits
+      mid-function it copies a corrected body instead (FIX_POLICY §1.5), and those are the ones
+      most likely to clash."* The old sentence was true at the chaining sites and false at the
+      copying ones; the new one describes both, so it stays true whatever the split is.
+      ⚠️ **The 66 / 42-chain / 24-copy count in this item is the 2026-08-19 number, taken at 80
+      modules. Hotfix 2 removed 36 and re-copied 10; nobody has re-derived the split since, and
+      this ruling did not.** Do not quote 42/24 as current.
+    * **`README.md`, "For modders"** — *"chain rather than clobber"* → *"chain the original where
+      the bug can be hooked and copy a corrected body where it cannot"*.
+    * ⛔ **`metadata.lua` untouched.** The store card already carries the honest version (it was
+      rewritten for hotfix 2): *"It hooks the game's functions and calls the original where it can
+      … Where a bug sits in the middle of a function and cannot be hooked, the fix copies the
+      corrected body instead — those are the ones most likely to clash."* Nothing to change there,
+      and no upload is triggered by this.
+    * ⛔ **No code behaviour changed** — comment and documentation text only; `parsecheck` 50/50,
+      doccheck GREEN.
+
+    ⚠️ **The veto-snippet rider below is NOT part of this ruling and is still open.** The README's
+    *"setting a fix's identifier in that global table"* still reads as an invitation to write a
+    list, and its example still names **`DustDevilSpawnGate`, a module `2dc1dbe` deleted** — the
+    site's `for-modders` page was re-pointed at a live id by hotfix-2 link 100, and this README was
+    missed. One word plus one half-sentence; say the word and it goes in with the next doc pass.
+    *(The original finding is kept below.)*
+
+    ⚠️ **Two sentences we publish promise other mods more than the code delivers.
+    Your call on the wording; nothing else changes.**
+
+    **What we say.** The README's "For modders" section says the pack will
+    *"chain rather than clobber"*, and the top of `Code/00_Core.lua` — which ships
+    inside the mod, so a curious modder reads it — says fixes *"prefer
+    wrapping/chaining originals over replacement, **so other mods that hook the
+    same functions keep working**."*
+
+    **What the code does.** I counted it, mechanically, for the first time: of the
+    66 places the pack patches something, **42 chain** (they call the original, so
+    another mod's version of that function still runs) and **24 replace it
+    outright** (they don't, so it doesn't). That is 11 of the 16 global functions
+    and 13 of the 50 class methods.
+
+    ⛔ **This is not a rule being broken.** Our own house rules explicitly allow a
+    full replacement when the bug sits mid-function and can't be hooked, and they
+    already warn that those are *"the fixes most likely to clash with other
+    mods."* Every replacement I sampled carries the header the rule demands,
+    naming the game file and lines it was copied from. These are deliberate,
+    documented decisions and **I am not proposing to change any of them.**
+
+    ⭐ **What is new is the number.** The rule says "keep the list short" and
+    nobody had ever counted the list. 24 is the count. Whether 24 is short is your
+    judgement, not mine.
+
+    ⇒ **The decision is only about the two sentences.** The first ("chain rather
+    than clobber") describes a preference as if it were a practice. The second is
+    the one that actually matters, because it promises an **outcome for other
+    mods** — and that outcome is true at 42 sites and false at 24.
+    **Recommendation:** soften the `00_Core.lua` sentence to say the pack chains
+    *where it can* and copies a corrected body where the bug can't be hooked. It
+    costs one line, it is true, and it is the sentence a modder quotes back at us
+    if something clashes. ℹ️ Same visit could carry the veto-snippet wording note
+    below.
+
+    ⚠️ **A smaller one riding along, same file.** The README says to disable a fix
+    by *"setting a fix's identifier in that global table."* Read literally that
+    invites `SMRFixPack_Disabled = {"DustDevilSpawnGate"}` — a **list** — which is
+    a perfectly valid table, throws nothing, logs nothing, and **does not disable
+    anything.** The person walks away believing they turned a fix off. The example
+    directly under that sentence is correct; the sentence above it is what misleads.
+    One clarifying half-sentence fixes it.
+
+51. ✅ **THE TIMING DECISION IS CLOSED 2026-09-12 as overtaken — but ⚠️ THE LEG
+    ITSELF WAS NEVER RUN, and it is re-filed so it cannot be lost.** On your
+    "if it's overtaken close it". Every blocker this item names is gone, and I
+    checked each rather than quoting the list: **run B ran 2026-08-19 and scored
+    10 of 10** (item 52's block, "run B scored **10/10**"), **the pack launched
+    2026-08-20** (item 71, both portal ids committed), and **the opt-in tick is
+    done** (item 105, 09-08, 9 modules applying). There is no ordering left to
+    decide, so the *"when"* has nothing to answer.
+    ⛔ **What is NOT closed is the measurement.** No session has ever watched two
+    independently-written patches stacked on one function. ⚠️ **Ordinary play is
+    coverage-by-default, not this leg** — both mods have been loaded together for
+    months (the 08-12 both-mods-loaded rule), which is why nothing has *broken*,
+    but nobody has ever measured the stacked function. Re-filed as a takeable:
+    **"Rider — the both-packs stacked leg"** under *Cross-cutting*, at the end of
+    this file. *(The original reasoning is kept below.)*
+
+    ⚠️ **There is one test worth running that I could not run, and my
+    recommendation is to run it AFTER launch, not before. Your call on the timing.**
+
+    **The test.** Every claim this pack makes about getting along with other mods
+    is derived from reading code. Nothing has ever been *watched* — no second mod
+    has ever been in the process while we measured anything. The one second mod we
+    can legitimately use is **our own opt-in pack**, which patches two of the same
+    functions the fix pack patches. A single unattended run with both loaded would
+    be the only time this project ever sees two independently-written patches
+    stacked on one function.
+
+    **Why I did not run it.** The opt-in pack is currently switched off in your
+    account, and putting a mod's folder back does **not** switch it back on — that
+    takes you ticking it in the Mod Manager and restarting. That is a cost only you
+    can pay, and spending it unattended is the one thing our own hazard list says
+    never to do.
+
+    ⇒ ⛔ **Recommendation: don't do it yet.** The final release test ("run B")
+    needs the opt-in **off**, and it is the gate. This compatibility test is
+    information, not a gate — by your own ruling. Turning the opt-in on now means
+    turning it off again before run B, for a result that cannot block the launch
+    either way. **Cleanest order: run B first, launch, then this.**
+    ℹ️ Nothing owed today. The tick itself is still owed whenever you next open the
+    Mod Manager (that is item 43); this just says what it would buy.
+
+
+---
+
+## ck47 -- archived 2026-09-16 (was checklist status:ruled): ⛔⛔ 2026-08-19 — the upload would have shipped one fix missing, on Steam. **47 RULED + APPLIED 09-12, both halves — and a third defect was found in the same snippet. Nothing is owed from you.**
+
+
+46. ⛔⛔ **A fix would have vanished from the Steam release, and the check that
+    was supposed to catch it said "pass".** ⇒ **Nothing to do — it is fixed and
+    pushed.** This is the "what happened" you asked to always get.
+
+    **What happened, in plain words.** The mod carries two lists of its own code
+    files. One is the list the game reads to decide what to load; the other is
+    the list the in-game Mod Editor keeps. They are supposed to be identical.
+    When the automation-law fix was built on the 15th it went into the first list
+    and nobody added it to the second. **The Mod Editor rebuilds the first list
+    from the second every time it saves** — and *uploading* forces a save. On
+    Steam that save happens **before** the mod is packed, so Steam would have
+    received a mod that simply does not contain the automation-law fix. Paradox's
+    very first upload would have escaped, because its save happens afterwards —
+    but that save still rewrites the folder on your disk, so the Steam upload
+    that follows, and every future update to either store, would have shipped
+    without it.
+
+    **Why it wasn't caught.** `tools/upload_preflight.py` has a guard for exactly
+    this. It counted the words "ModItemCode" in the file — and one of those words
+    is in the **comment at the top of the file explaining the guard**. 75 real
+    entries plus one comment made 76, which matched, so it printed PASS. Two
+    mistakes cancelling each other out. The guard now reads the actual entries
+    and checks their order too, and I proved it by putting the fault back (it
+    fails, and names the file that would have gone missing) and by scrambling the
+    order (it fails, and says so).
+
+    ⚠️ **The same broken arithmetic was reporting a *phantom* problem on the
+    Opt-In pack**, whose list is in fact correct. That is fixed by the same
+    change. And the Save Rescue mod has **no** editor list at all — probably fine
+    for a different reason, but I did not verify it and it is not this chain's
+    repo to touch. Worth one look before it ever uploads.
+
+47. ✅ **RULED 2026-09-12 — "fix this". APPLIED the same session, words only, and the
+    ruled paring in item 53 was applied to the same text in the same pass.** Your word on both
+    halves. The store card was already right (it was rewritten for hotfix 2), so it was the
+    reference the other two surfaces were made to match — and `metadata.lua` is untouched, so
+    **no upload is triggered by this**.
+
+    * **(a) the strict-globals form — done.** `README.md` published
+      `SMRFixPack_Disabled = SMRFixPack_Disabled or {}`; it now publishes the same
+      `rawget(_G, "SMRFixPack_Disabled") or {}` the pack's own `00_Core.lua:13` uses. The site's
+      page had the same defect and is fixed too.
+    * **(b) load order — done.** Both pages now say it in the card's words: *"Before the pack
+      loads" means your mod has to load first.* The site's *"it does not matter whether yours or
+      ours is created first"* sentence is gone, and so is the ⛔ box that said we could not tell
+      you how to load first — the requirement is now stated plainly instead.
+    * ⛔ **A third defect, not in the original item, and the worst of the three: the example named
+      a fix that does not exist.** `DustDevilSpawnGate` was deleted by `2dc1dbe` in hotfix 2, so a
+      modder following the published instruction today vetoed nothing at all. Both pages now use
+      **`LakeEntombment`** (`Code/Fix_LakeEntombment.lua:41` registers it), which is the id the
+      store card already used.
+    * ⚠️ **Two site pages that pointed at deleted sections were repaired in the same pass**
+      (`content/faq.md`, `content/install.md`): they promised *"the part of it we cannot tell you
+      how to do"* and *"what we have not yet confirmed about it"*, and both of those sections were
+      cut by the item-53 paring.
+    * ⛔ **The site edits are in the OTHER repo (`SMR-CommunityMods`), uncommitted.** They are
+      staged on disk in a clean tree for you to review and push with the next site publish.
+
+    *(The original finding is kept below.)*
+
+    ⚖️ **Two wording calls on the modder page — your call, ten minutes, and
+    neither blocks launch.** Both are on `README.md` and the site's
+    "For modders" page, which say the same thing in the same words.
+
+    **(a) The example code we publish trips the game's own strict-globals
+    check.** We tell a modder to write
+    `SMRFixPack_Disabled = SMRFixPack_Disabled or {}`. Reading a name that does
+    not exist yet is exactly what the game complains about — and our own code
+    never does it: every place the pack reads that table it uses the safe form,
+    `rawget(_G, "SMRFixPack_Disabled")`. The snippet still *works*; the cost is a
+    line in the log, and I could not establish whether the retail build even
+    prints it (the one time we have seen it was a debug build). **Suggested:
+    publish the safe form, since it is the same one line our code already uses.**
+
+    **(b) The page tells a modder the load order does not matter, and it does.**
+    It says it *"does not matter whether yours or ours is created first — only
+    that the values are set before our code runs."* Both halves are true, but
+    together they require the modder's mod to load **before** this one — which is
+    the player's enable order, with no priority field and no way to ask for a
+    position. **Suggested: say that plainly on the modder page.** ⚠️ This is a
+    *modder*-facing page, so it does not touch your standing rule that players
+    never get load-order advice.
+
+
+---
+
+## ck41 -- archived 2026-09-16 (was checklist status:ruled): ✅ 2026-08-18 — SWEEP CHAIN, LINK 4 REPORTED. **41 RULED + BUILT 09-12: the stand-down box names the fixes and stops blaming the game. Nothing is owed from you.**
+
+
+41. ✅ **RULED + BUILT 2026-09-12 — the box names the fixes, and it no longer blames the game for
+    our own failures.** Your word: *"same shape as 39"*. Both halves went in as one text change,
+    **7 lines in `Code/00_Core.lua`**, in the same thread as 39. ⛔ No new module, `items.lua` and
+    `metadata.lua` untouched, apply path untouched.
+
+    **(1) Readable names.** The list now maps each suspect id through
+    `SMRFixPack.fixes[id].title` — the same plain-English title the fix list uses — and falls back
+    to the id if a title is ever missing. The **log line keeps the ids**, so the diagnostic is
+    unchanged. Titles go one per line behind a `·` bullet rather than comma-joined.
+    ✅ **Route-checked, because this is the console surface:** the game's message box puts its
+    description inside an `XScrollArea` with a scrollbar and RightThumbUp/Down gamepad bindings
+    (`Lua/XDef/StdMessageDialog.generated.lua:166-209`), so a long list scrolls on a controller.
+    Titles average 69 characters, so no cap was added.
+
+    **(2) The wording.** Old: *"…found that the game code they patch has changed — usually after a
+    game update — and switched themselves off for safety … if the game was recently updated, check
+    for a new version."* New, in full:
+
+    > **%d of this pack's fixes did not recognise the game code they repair, and switched
+    > themselves off. A fix that switches itself off does nothing at all: the game behaves as it
+    > would without it.**
+    >
+    > **Most often a game update has moved what the fix was written for. It can also be a fault in
+    > this pack, or another mod changing the same code. Whichever it is, the repair comes in a new
+    > version of the Relaunched Fix Pack.**
+    >
+    > **Switched off:**
+    > **· <the fix titles, one per line>**
+
+    It names our own fault and another mod as live possibilities instead of pointing at Paradox,
+    and it tells the player what a switched-off fix actually costs them. The "check for a new
+    version" advice survives, because it is still where the repair arrives.
+
+    ⛔ **CORRECTION: "this box has never once appeared in any of the 57 recorded sessions" is no
+    longer true.** It fired on the 1.1.0 boots of 2026-09-08 — `update report:` lines in six
+    archived logs, up to **14** ids in one — and you asked to be exempted from it that same day
+    (items 107–108). ⇒ Both defects this item describes have been in front of a player: the
+    internal ids were on screen, and the message blamed a game update for a set that included
+    modules our own re-verification had not yet re-seamed. ⚠️ **The new text has not been seen in
+    play** — no boot since the change — so it is `built`, nothing stronger; the cheap check is one
+    boot with any fix inactive. *(The original finding is kept below.)*
+
+    ⭐ **Link 4 — lens 4 of 8, "player experience".** The question: **what does a
+    player actually SEE and READ?** The answer should be *nothing*, and it very
+    nearly is — the pack raises **no** notification, popup, banner or voice line
+    of its own. Everything it can put on screen is a box the game already owns.
+
+    **But there is one place the mod speaks in its own voice**, and it is the box
+    you saw at the upload sitting: the message that appears when a fix has stood
+    itself down after a game update. **Two things about its wording need you,
+    because it is the mod's only voice — and on Xbox and PlayStation it is the
+    only thing a player can ever see from us at all** (no log, no console there).
+
+    * **It lists our internal file names, not the fixes.** It would say
+      *"Switched off: AstrogeologistExtractors, SaintBlessing"*. Those names
+      appear on **no page a player can reach** — not the mod page, not the fix
+      list, not the FAQ. Meanwhile every one of the 75 modules already carries a
+      plain-English title in the same style the fix list uses ("Command Center
+      graph captions count maintenance, like the bars do"). We have the readable
+      version and print the unreadable one. *(Same trap as the Bottomless Pit
+      building that actually displays as "Experiment 1: Big Drop".)*
+    * **If one of our fixes crashes, the box blames the game.** The message is
+      one sentence covering every reason a fix switched off, and it says the game
+      code "has changed — usually after a game update" and tells the player to go
+      look for a newer version of our mod. That is right when a patch really did
+      move something. It is **wrong** when the cause was a bug in **our** code or
+      a clash with another mod — we would be pointing at Paradox for our own
+      mistake and sending the player after a version that does not exist.
+
+    ⛔ **Neither can happen today** — this box has never once appeared in any of
+    the 57 recorded sessions, and no fix has ever crashed in one. This is about
+    what it would say on the day it does.
+
+    **Recommendation: fix both, in the terminal audit, as one small text change**
+    — print the readable titles, and say "switched themselves off" without
+    blaming a game update unless we actually detected one. It is words only, in a
+    box no player has yet seen, so the risk of touching it is about as low as a
+    code change gets. Say the word and it goes in the audit's list.
+
+    **Nothing else needs you.** A third finding — our log never writes a line when
+    a fix *recovers*, so 56 of 57 recorded logs end up saying a module is switched
+    off when it is actually working — is a plain repair with no decision in it,
+    and it is routed to the audit. Three other things were checked and came back
+    clean: the mod-page claim that *every* fix inspects the game's code first is
+    true for all 75 (checked one by one); the "five judgment calls" count matches
+    on every surface; and the box's plumbing was traced through the game's own
+    code for the first time and works.
+
+    ⭐⭐ **The bigger question — and it is a real one.** Your chain has a cap of
+    **five** links, and I am the fourth. **Four of the eight lenses would still be
+    unasked**, and each of the remaining three owns a job with a track record:
+    the "does the mod promise anything it doesn't deliver" lens (we have found
+    that class of mistake **four** times now, most recently this session); the
+    "packed install" lens, which covers the fact that **the mod has never once
+    been loaded the way a player will load it**; and the "another mod is
+    installed too" lens, which link 1 explicitly left 15 unchecked items for.
+
+    **Recommendation: raise the cap to 8 and let the rotation finish.** Your own
+    spec says stopping because you hit the cap and calling it "we found
+    everything" is the worst thing this design can do — so I am saying plainly
+    that I do **not** think one more link closes it. Each link is unattended and
+    costs you only the moment you spend kicking it off.
+
+
+---
+
+## ck39 -- archived 2026-09-16 (was checklist status:ruled): ✅ 2026-08-18 — SWEEP CHAIN, LINK 2 REPORTED. **39 RULED + BUILT 09-12: the stand-down box shows once per session. Nothing is owed from you.**
+
+
+39. ✅ **RULED + BUILT 2026-09-12 — the box shows once per session; the log line still writes every
+    time.** Your word: *"this can be fixed if its cheap, but its also minor."* It was cheap — **4
+    lines in `Code/00_Core.lua`**, inside the C1 report thread only. A flag on the `SMRFixPack`
+    table (which is deliberately preserved across a Lua reload, `:19`) is checked after the log
+    line and set before the box opens. ⛔ No new module, `items.lua` and `metadata.lua` untouched,
+    and the `DataPatch` / `run_apply` / apply-verdict seam is not touched — this is the reporting
+    surface, not the apply path.
+
+    ⛔ **CORRECTION, and it matters more than the fix.** This item said the dialog *"has never once
+    appeared in any of the 58 logs we have archived"*, and item 41 said the same. **That is no
+    longer true, and the re-fire this item predicted has been OBSERVED — twice, in real sessions:**
+    * `archive/logs/first110_*.log` (2026-09-08, the first 1.1.0 boot): **two** `Reloading done`
+      events, each followed by its own `update report: 11 fix(es) deactivated…` line.
+    * `archive/sit0817_MarsDebug*.log` (2026-08-17, your upload sitting): the same shape.
+
+    On 2026-09-08 you asked to be exempted from that very box (items 107–108), so it was on screen,
+    naming up to **14** internal module ids. ⇒ The re-fire is measured, not predicted. ⚠️ **What is
+    still unexercised is the FIX**: nobody has booted the game since this change, so the guard
+    itself has no in-play evidence and no status word above `built`. *(The original is kept below.)*
+
+    ⭐ **Link 2 — lens 2 of 8, "lifecycle & idempotency".** The question: **what
+    happens the second time our code runs in one session?** The game re-runs every
+    mod's scripts whenever you close the Mod Manager after changing anything — so
+    "the second time" is not a corner case, it is what happens to any player who
+    turns on a second mod.
+
+    ⛔ **It found a real one, and it was already sitting in your own logs.** Two
+    archived sessions — both ones where you took a Mod-Manager tick — show the
+    pack loading **twice**. Comparing the two halves of those sessions gives the
+    same answer in both, and it is the *entire* difference between them:
+    **four modules switch themselves off the second time, each giving a reason
+    that is not true** — *"the shipped presets are already correct"*, *"the
+    shipped tech already matches its own param1"*, and two more like it. The data
+    **is** correct, because those four modules corrected it the first time round
+    and the correction survived the reload. What did not survive was each module's
+    memory of having made it.
+
+    **Why it matters, and it is not the wording.** Three of our *save-repair*
+    passes only run while their module reads "on". So a player with an older save
+    who happens to have visited the Mod Manager that session silently does not get
+    the Astrogeologist extractor bonus applied to their existing colony, does not
+    get the Independent Terraforming discount corrected from 10% to the 20% it
+    advertises, and does not get their dome Saints' blessing re-filed. Nothing
+    errors, nothing is shown, it just quietly doesn't happen.
+
+    ✅ **Fixed in `Code/00_Core.lua`.** The "have I already changed this data?"
+    memory now lives for the whole session instead of for one script load.
+    ⛔ `metadata.lua` untouched, no module added or removed, every count unchanged
+    — this is still 1.0.0.
+
+    ✅ **It is a relative of the two defects from your upload sitting, but not the
+    same one, and the good news is that your dialog cannot fire from it** — all
+    four of these stand-downs are the flavour the code marks "harmless", so no
+    player sees a "check for a new version" box because of it.
+
+    **Proven, not asserted:** I built a harness (`tools/l2_reload_sim.py`) that
+    runs the pack's own shipped code twice in one process. Before proving anything
+    it has to earn trust, so first it reproduces your two archived sessions
+    exactly — all five of their first-load lines, word for word, and all four of
+    the false second-load lines. Then: with the fix in, the four false lines are
+    gone and all four modules stay on. And a control in the other direction — if a
+    future game patch genuinely fixed this data itself, all four still correctly
+    say "already correct". ⛔ **This is not a launch.** It runs our real code
+    against a stand-in for the game.
+
+    ❓ **The one call for you (it can wait, and "leave it" is a fine answer).**
+    Our "some fixes switched themselves off" dialog is created fresh each time the
+    game reloads scripts. So if that dialog ever *does* have something to say,
+    a player who opens the Mod Manager again gets shown it **again**. The code's
+    own comment calls it "a one-time dialog", so today it doesn't do what it says.
+    **Recommendation: show the box at most once per session, keep writing the line
+    to the log every time** — that keeps the diagnostic and drops the repeat.
+    ⚠️ I did **not** just do it: it changes what a player sees, in a release
+    candidate, and it is a judgment call about what the pack *should* do rather
+    than a defect. Also worth knowing: that dialog has **never once appeared** in
+    any of the 58 logs we have archived.
+
+    ⛔ **What link 2 did NOT look at.** Nothing was run in a game — so the fix
+    above, and both of the 08-17 fixes, still have not executed inside Surviving
+    Mars even once. I have written down the shape of the single unattended run
+    that would verify all three at the same time, but I did not build it. Also
+    untouched: a third-and-later reload, whether a reload can happen mid-colony,
+    the TestKit's own behaviour, save footprint and uninstall, what a player sees,
+    failure containment, packed-vs-unpacked, and any other mod. **Two lenses of
+    eight. The chain has not converged.**
+
