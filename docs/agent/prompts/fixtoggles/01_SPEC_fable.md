@@ -1,7 +1,7 @@
 # fixtoggles 01 — the spec (re-validate the cut, re-derive the routes, write the contract)
 
 You are link 01 of the `fixtoggles` chain. Read `README.md` in this folder first: its binding rules 1–18 are yours.
-**Staleness anchor:** the chain was authored on top of `dc31795` plus its own authoring commit; run `git log --oneline -10`
+**Staleness anchor:** the chain was authored at `889faab`; run `git log --oneline -10`
 and `git pull`, and read everything that landed since before trusting any line below.
 
 ## Job 0 — re-validate the chain itself (CHAIN_METHOD §4.0)
@@ -35,10 +35,12 @@ Sections, all required. Tag every load-bearing claim MEASURED / SOURCE (file:lin
   `SMRFixPack_Disabled` and the stand-down dialog (`UpdateSuspects`) do alongside a player switch; the log lines a
   switch writes (the sitting reads them); how a registered-but-not-yet-converted module is shown and refused (so a
   half-converted tree is never mistaken for switchable).
-- **§3 The 45-row disposition table** — one row per registered module: live-gate / undo / next-load / split
+- **§3 The current registered-module disposition table** — emit the registered set from the current tree and reconcile
+  it to `items.lua`/`metadata.lua`; one row per member: live-gate / undo / next-load / split
   (always-on part named); what off→save→on does to the save (§7); link group; Beta candidate + proposed default; the
-  player-facing title (a draft; 08 finalises). Assign each row to 02/04/05/06/06b exactly as the README splits them, or
-  re-split with a reason.
+  player-facing title (a draft; 08 finalises). Treat the README and 04–06b lists as the `889faab` authoring snapshot:
+  assign each current row to 02/04/05/06/06b, or re-split with a reason. Every current module exactly once; stop on an
+  unassigned or duplicate member.
 - **§4 Linked buttons.** Define what "linked" means to a player (one switch for the group? turning A off forces B off
   with a shown reason?). Enumerate TRUE dependencies with evidence (a module whose correctness needs another active),
   and separately the shared-target clusters that are NOT dependencies under a per-call gate (prove the `Colonist:Idle`
@@ -90,7 +92,7 @@ this file; push.
 
 ## Notes from upstream
 
-- From the authoring session (`smr-bugfixpack-24`, 2026-09-11): the research is `reports/FIXTOGGLES_RESEARCH_2026-09-11.md`.
+- From the authoring session (`smr-bugfixpack-24`, 2026-09-11): the research is `docs/agent/reports/FIXTOGGLES_RESEARCH_2026-09-11.md`.
   Two tensions are yours to carry, not resolve silently: `FIX_POLICY` §5's "needs a toggle ⇒ not a fix" (overridden by
   the owner's ask — reword it) and §2a's "no version detector" (UNTOUCHED; B step). The reference mod's version
   dropdown is display-only and its "Reset" means all-off — do not inherit either. The peer session `smr-bugfixpack-0d`

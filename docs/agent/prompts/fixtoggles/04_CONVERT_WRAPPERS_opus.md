@@ -1,7 +1,7 @@
 # fixtoggles 04 — convert the wrapper and handler modules
 
 Link 04 of `fixtoggles`. README binding rules 1–18 are yours. Runs only after a 03 **PASS** (or PASS WITH CORRECTIONS).
-Staleness: `git log` + `git pull`; the spec (`reports/FIXTOGGLES_SPEC.md`, as corrected by 03) is the contract.
+Staleness: `git log` + `git pull`; the spec (`docs/agent/reports/FIXTOGGLES_SPEC.md`, as corrected by 03) is the contract.
 
 ## The set (the research report's shape a/d rows; the spec §3 table is authoritative if it re-split them)
 

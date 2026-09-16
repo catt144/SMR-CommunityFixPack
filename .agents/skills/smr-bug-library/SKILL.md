@@ -10,6 +10,7 @@ facts in `docs/agent/facts/` (`EF-NNN`). Both carry a **generated** `INDEX.md`.
 
 ## 1 · Reading — cheapest first, stop when you have the answer
 
+0. **Ours-or-vanilla check:** `rg -l -F -- <keyword> Code/` searches this pack's runtime code first; hits inspect ours, while an empty literal search is only a cheap vanilla lead and does not rule out aliases or indirect effects.
 1. **`docs/agent/bugs/INDEX.md`** — 222 rows of ~229 chars. One row usually answers "is this
    known, and what is its status". Read the row, not the entry.
 2. **The entry's own section, by heading** (`### Control`, `### Repair`, `### Attended
@@ -33,6 +34,10 @@ reads **only its first word** and deliberately tolerates that word disagreeing w
 `status` — a status that has advanced must be free to leave it behind, so those `warn` lines
 are expected, not defects. Long cells were moved to the end of the entry body under
 `#### Frozen migration row (2026-08-03)`.
+
+**Authoring warning:** `split_bugs.render_entry` emits only `FRONT_FIELDS`; an invented
+front-matter key such as `issue:` is silently dropped on render. Put durable context in a
+supported field or the entry body, and do not repurpose `row_status` as a general field.
 
 ## 3 · Is this fact still true?
 

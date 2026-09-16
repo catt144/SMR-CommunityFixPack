@@ -7,7 +7,7 @@ buttons first, and then we can swing back around to the versioning as a B step i
 ## Questions to answer, each with evidence (MEASURED / SOURCE file:line / INFERRED)
 
 1. **The version model.** The owner likes a game-version selector (fredware's panel has one). The research found his
-   is **display-only** and runs his 1.0.7 fixes on 1.1.0 (`reports/FIXTOGGLES_RESEARCH_2026-09-11.md` §2). Lay out the
+   is **display-only** and runs his 1.0.7 fixes on 1.1.0 (`docs/agent/reports/FIXTOGGLES_RESEARCH_2026-09-11.md` §2). Lay out the
    options — (a) detect the running game (`LuaRevision`/`BuildVersion`, `EF-078`, `EF-085`) with the per-module probes
    kept as the hard guard and the dropdown as a view filter; (b) a player-picked target; (c) probes only, no selector —
    against `FIX_POLICY` §2a (decision 118, *"DO NOT BUILD A GAME-VERSION DETECTOR"*, and its two reasons) and checklist

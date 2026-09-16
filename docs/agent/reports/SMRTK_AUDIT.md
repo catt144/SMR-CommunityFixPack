@@ -1,5 +1,8 @@
 # smrtk 99 — the terminal adversarial audit
 
+For the later owner disposition and witnessed results, see
+[Post-audit closeout](#post-audit-closeout--2026-09-15) below.
+
 2026-09-14. Link 99 of `prompts/smrtk/`, executed on **Fable 5.1** (R-G), session
 `smr-bugfixpack-3d`, fresh context. Audited at pack `459bbe4` (HEAD when the reads
 closed) and TestKit `2c3d05c`; game build **24995074** (1.1.0.403908). No game ran
@@ -333,3 +336,31 @@ The `trigger_sol` field's colour after `174a601`.
   before the toolkit was.
 - Started the write-up before the owner's read-only hold; everything was drafted in
   the scratchpad and landed only after the all-clear.
+
+## Post-audit closeout — 2026-09-15
+
+This is the outcome after the September 14 audit, transferred from STATE at
+`19c6954`; it does not change what the audit itself observed. The closed chain
+is archived at `docs/archive/prompts/smrtk/`. Its verdict was SHIP WITH CHANGES
+(Fable): owner use of the TestKit only, never an upload.
+
+The historical requirement-(A) record remains: taint measured clean in
+02/08/08b (`cheats_count=0` after 490 dispatches; the rebuilt-tree sample had
+19 leaves). Eligibility remained `UNAVAILABLE:sandbox` (EF-096), adjudicated
+by enumeration of five reason handlers, not an observed eligibility PASS.
+These figures are inherited audit evidence, not measurements rerun during
+the STATE move; the evidence and its scope remain in §§3–4 above.
+
+The C-1/C-3/C-5/C-6 code changes landed September 15 at TestKit `f5fa650`,
+with desktop gates GREEN. [CK144A_CLOSEOUT_SITTING](CK144A_CLOSEOUT_SITTING.md)
+records the later game evidence: C-1 and C-6 witnessed; 08b item 9's watch
+trigger witnessed; C-3 refuted (text stayed white), low priority by the owner;
+C-5 built but unwitnessed because configure, rather than arm, was exercised.
+The remaining changes retain their evidence in the audit's C-1–C-8 list.
+
+Checklist **184(a–e)** holds the owner's final disposition. The sweep-age
+gate is 24 hours or a change warranting a sweep, satisfied at the next
+playtest. No agent or kit code refuses work or overrides the owner over it.
+The text status chip stands. Nothing from the toolkit chain is owed; C-5 can
+be witnessed at a later sitting without creating a dedicated leg. The Stamper
+is parked in `docs/FUTURE_IDEAS.md` §5, not agent-tracked work.

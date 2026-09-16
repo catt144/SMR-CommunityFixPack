@@ -7,7 +7,7 @@
 #     -> c48-brake/C48B_ARM.ps1 -> c48-pairing/C48P_ARM.ps1
 #
 # Three generations rediscovered the same rules from graves. The rules, and why
-# each exists, are in docs/agent/prompts/arming/README.md. The short version:
+# each exists, are in tools/arming/README.md. The short version:
 #
 #   C11  arming is a FILE, never an inline one-liner (an inline edit's quoting
 #        was mangled once and the game launched UNARMED).

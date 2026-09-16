@@ -125,7 +125,7 @@ RULE_HEADER_DOCS = (
     "docs/UPLOAD_WORKFLOW.md",
     "docs/agent/FIX_POLICY.md",
     "docs/agent/STATE.md",
-    "docs/agent/prompts/perma/COMBINED_SITTING.md",
+    "docs/agent/prompts/README.md",
     "docs/agent/prompts/perma/HANDOFF_ORCHESTRATOR.md",
     "docs/agent/prompts/perma/RELEASE_OUTBOX.md",
 )
@@ -730,8 +730,6 @@ PUSH_SET = [
     ("docs/agent/STATE.md", lambda: STATE),
     ("prompts/perma/GENERAL_USE_PROMPT.md",
      lambda: os.path.join(DOCS, "agent", "prompts", "perma", "GENERAL_USE_PROMPT.md")),
-    ("prompts/perma/DISPATCH.md",
-     lambda: os.path.join(DOCS, "agent", "prompts", "perma", "DISPATCH.md")),
     # Claude's own memory index: outside the repo, per-machine, and absent for
     # any other vendor — reported when present, never required.
     ("MEMORY.md (Claude, outside the repo)",
@@ -948,12 +946,9 @@ def check_skills(out):
 
 
 def regen(out):
-    """Rewrite generated files/regions; validate STATE before any file write."""
+    """Rewrite generated files; STATE remains a hand-authored input."""
     sb, sf = splitter(), facts_splitter()
     model = sb.load_from_dir()
-    with open(STATE, "rb") as fh:
-        state_before = fh.read()
-    state_after = state_counts_bytes(state_before, recount(model, []))
     sb.write_lines(os.path.join(BUGS_DIR, "INDEX.md"),
                    sb.render_index(model))
     sb.write_lines(os.path.join(FACTS_DIR, "INDEX.md"),
@@ -963,13 +958,10 @@ def regen(out):
     with open(AGENTS_MD, "wb") as fh:
         fh.write(data)
     regen_skills()
-    if state_before != state_after:
-        with open(STATE, "wb") as fh:
-            fh.write(state_after)
     items = checklist_items()
     sb.write_lines(WAITING_MD, render_waiting(classify_items(items) if items else items))
     out.append("REGEN: wrote docs/agent/bugs/INDEX.md, docs/agent/facts/INDEX.md, "
-               "docs/WAITING_ON_YOU.md, STATE.md's BUILD STATE region, "
+               "docs/WAITING_ON_YOU.md, "
                "the .agents/skills/ mirror and AGENTS.md "
                "(byte copy of CLAUDE.md) — "
                "the checks below read the result")
@@ -1160,34 +1152,60 @@ def check_root(out):
     return False
 
 
-def prompt_map_rows(mapfile):
-    """-> ({table: {filename}}, [struck cells]) parsed out of prompts/README.md.
+PROMPT_MAP_DEFAULT_CLASSES = {
+    "perma": "prompt",
+    "root": "prompt",
+    "chain": "live",
+}
+PROMPT_MAP_FIXED_EXCEPTIONS = {
+    # Owner's one permanent supporting-ledger concession.
+    ("perma", "RELEASE_OUTBOX.md"): "ledger-exception",
+}
+PROMPT_MAP_MIGRATION_ALLOWANCES = {
+}
 
-    The map is PARSED, never duplicated here — same reason as `readme_map`: a
-    second hard-coded copy would be a third thing to drift. A row's first cell
-    may name more than one file; the heading above it says which table it is in.
-    """
-    rows = {"perma": set(), "root": set()}
+
+def prompt_map_rows(mapfile):
+    """Parse map paths and declared classes, including grouped first cells."""
+    rows = {"perma": {}, "root": {}, "chain": {}}
     struck = []
+    malformed = []
     table = None
-    for line in read(mapfile):
+    for lineno, line in enumerate(read(mapfile), 1):
         if line.startswith("## "):
             table = ("perma" if "perma" in line
-                     else "root" if "Root" in line else None)
+                     else "root" if "Root" in line
+                     else "chain" if "Chain folders" in line else None)
             continue
         if table is None or not line.startswith("|"):
             continue
-        cell = line.split("|")[1].strip()
-        if "~~" in cell:
-            struck.append((table, cell))
+        cells = [cell.strip() for cell in line.split("|")[1:-1]]
+        if len(cells) < 2:
             continue
-        for name in re.findall(r"`([^`]+\.md)`", cell):
-            rows[table].add(name)
-    return rows, struck
+        name_re = r"`([^`]+/)`" if table == "chain" else r"`([^`]+\.md)`"
+        names = re.findall(name_re, cells[0])
+        if not names:
+            continue
+        if "~~" in cells[0]:
+            struck.append((table, cells[0], lineno))
+            continue
+        classes = re.findall(r"`([^`]+)`", cells[1])
+        if len(classes) != 1:
+            malformed.append("line %d %s row needs exactly one declared class"
+                             % (lineno, table))
+            continue
+        declared = classes[0]
+        for raw in names:
+            name = raw[:-1] if table == "chain" else raw
+            if name in rows[table]:
+                malformed.append("line %d repeats %s/%s" % (lineno, table, name))
+            else:
+                rows[table][name] = declared
+    return rows, struck, malformed
 
 
 def check_prompt_map(out):
-    """prompts/README.md against prompts/ — both directions, and no tombstones.
+    """Gate prompt paths, chain directories, and declared classifications.
 
     A row that outlives its file is how a next session fires spent work: on
     2026-09-13 ck170's own brief was `git rm`'d and its "NOT FIRED — for Codex"
@@ -1202,33 +1220,66 @@ def check_prompt_map(out):
         out.append("PROMPT MAP: RED  docs/agent/prompts/README.md is missing "
                    "— the one-offs have no map")
         return False
-    rows, struck = prompt_map_rows(mapfile)
+    rows, struck, malformed = prompt_map_rows(mapfile)
     disk = {
         "perma": {f for f in os.listdir(perma) if f.endswith(".md")},
         "root": {f for f in os.listdir(prompts)
                  if f.endswith(".md") and f != "README.md"},
+        # Descendants are deliberately not enumerated: mapped LIVE chains may
+        # contain their README and evidence. The map itself is the root README
+        # excluded above. Neither exception licenses a supporting root file.
+        "chain": {f for f in os.listdir(prompts)
+                  if f != "perma" and os.path.isdir(os.path.join(prompts, f))},
     }
-    red = []
+    red = ["  RED  prompts/README.md %s" % finding for finding in malformed]
     for cell in struck:
         red.append("  RED  prompts/README.md keeps a struck-through row (%s) — a "
                    "fired prompt leaves the map entirely (checklist 174)" % cell[1])
-    for table in ("perma", "root"):
-        where = "perma/" if table == "perma" else ""
-        for name in sorted(rows[table] - disk[table]):
-            red.append("  RED  prompts/README.md has a row for %s%s and the file is "
+    where = {"perma": "perma/", "root": "", "chain": ""}
+    noun = {"perma": "file", "root": "file", "chain": "directory"}
+    for table in ("perma", "root", "chain"):
+        mapped = set(rows[table])
+        for name in sorted(mapped - disk[table]):
+            suffix = "/" if table == "chain" else ""
+            red.append("  RED  prompts/README.md has a row for %s%s%s and the %s is "
                        "not there — delete the row in the commit that consumes it"
-                       % (where, name))
-        for name in sorted(disk[table] - rows[table]):
-            red.append("  RED  docs/agent/prompts/%s%s exists and the map does not "
-                       "list it — every prompt is reachable from the map"
-                       % (where, name))
+                       % (where[table], name, suffix, noun[table]))
+        for name in sorted(disk[table] - mapped):
+            suffix = "/" if table == "chain" else ""
+            red.append("  RED  docs/agent/prompts/%s%s%s exists and the map does not "
+                       "list it — every prompt or chain is reachable from the map"
+                       % (where[table], name, suffix))
+        for name, declared in sorted(rows[table].items()):
+            key = (table, name)
+            expected = PROMPT_MAP_DEFAULT_CLASSES[table]
+            if key in PROMPT_MAP_FIXED_EXCEPTIONS:
+                expected = PROMPT_MAP_FIXED_EXCEPTIONS[key]
+            if key in PROMPT_MAP_MIGRATION_ALLOWANCES:
+                expected = PROMPT_MAP_MIGRATION_ALLOWANCES[key][0]
+            if declared != expected:
+                red.append("  RED  prompts/README.md declares %s%s as `%s`; exact path "
+                           "requires `%s`" % (where[table], name, declared, expected))
     if red:
         out.extend(red)
         out.append("PROMPT MAP: RED  %d finding(s)" % len(red))
         return False
-    out.append("PROMPT MAP: PASS — %d perma + %d one-off row(s) agree with disk "
-               "in both directions; no tombstones"
-               % (len(rows["perma"]), len(rows["root"])))
+    out.append("PROMPT MAP: PASS — %d perma + %d one-off + %d chain row(s) agree "
+               "with disk in both directions; declared classes hold; live-chain "
+               "README/evidence and the map itself are permitted; no tombstones"
+               % (len(rows["perma"]), len(rows["root"]), len(rows["chain"])))
+    debts = {}
+    for key, (declared, leg) in PROMPT_MAP_MIGRATION_ALLOWANCES.items():
+        table, name = key
+        if rows[table].get(name) == declared and name in disk[table]:
+            debts.setdefault(leg, []).append((table, name))
+    if debts:
+        parts = []
+        for leg in sorted(debts):
+            names = [(("perma/" if table == "perma" else "") + name +
+                      ("/" if table == "chain" else ""))
+                     for table, name in sorted(debts[leg])]
+            parts.append("%s consumes %s" % (leg, ", ".join(names)))
+        out.append("PROMPT MAP: MIGRATION DEBT — " + "; ".join(parts))
     return True
 
 
@@ -1237,7 +1288,7 @@ def check_state_and_stubs(out):
     red = []
     warns = []
     if not os.path.exists(STATE):
-        red.append("docs/agent/STATE.md is missing — it is the mandatory read")
+        red.append("docs/agent/STATE.md is missing — restore the pull-only status file")
         n_state = None
     else:
         raw = lf_bytes(STATE)
@@ -1833,66 +1884,8 @@ def parse_gate(out):
     return ok
 
 
-class StateCountsError(ValueError):
-    """An ambiguous or oversized generated region must never be rewritten."""
-
-
-def state_counts_bytes(data, counts):
-    """Replace only the contents between STATE's existing bare ``` fences.
-
-    Exactly one stable BUILD STATE first line must immediately follow an opening
-    fence. Missing/duplicate markers, missing/duplicate (unbalanced) fences or
-    a non-bare region fence raise StateCountsError, before regen writes anything.
-    Other balanced code blocks are allowed. Preserve all surrounding raw bytes,
-    including both fences; use the marker's LF/CRLF ending inside the region.
-    """
-    lines = data.splitlines(keepends=True)
-    plain = [line.rstrip(b"\r\n") for line in lines]
-    marker = b"BUILD STATE (emitted by tools/doccheck.py)"
-    markers = [i for i, line in enumerate(plain) if line == marker]
-    if len(markers) != 1:
-        raise StateCountsError("expected exactly one BUILD STATE first line, found %d"
-                               % len(markers))
-    fences = [i for i, line in enumerate(plain) if re.fullmatch(rb"```[^`]*", line)]
-    if len(fences) % 2:
-        raise StateCountsError("missing or duplicated code fence (unbalanced fences)")
-    first = markers[0]
-    pairs = list(zip(fences[::2], fences[1::2]))
-    region = [(a, b) for a, b in pairs if a == first - 1 and b > first]
-    if len(region) != 1 or any(plain[i] != b"```" for i in region[0]):
-        raise StateCountsError("BUILD STATE needs its own opening and closing bare ``` fences")
-    start, end = sum(map(len, lines[:first])), sum(map(len, lines[:region[0][1]]))
-    ending = b"\r\n" if lines[first].endswith(b"\r\n") else b"\n"
-    block = counts_block(counts).encode("utf-8").replace(b"\n", ending) + ending
-    result = data[:start] + block + data[end:]
-    normalized = result.replace(b"\r\n", b"\n")
-    if len(normalized) > STATE_MAX_BYTES:
-        raise StateCountsError("regenerated STATE exceeds hard cap %d" % STATE_MAX_BYTES)
-    if any(len(line) > STATE_MAX_LINE_BYTES for line in normalized.split(b"\n")):
-        raise StateCountsError("regenerated STATE exceeds per-line cap %d" % STATE_MAX_LINE_BYTES)
-    return result
-
-
-def check_state_counts(counts, out):
-    """Generated-region freshness, with the same regen cure as the indices."""
-    try:
-        with open(STATE, "rb") as fh:
-            have = fh.read()
-        want = state_counts_bytes(have, counts)
-    except (OSError, StateCountsError) as exc:
-        out.append("STATE BUILD STATE: RED — %s" % exc)
-        return False
-    if have != want:
-        out.append("STATE BUILD STATE: RED — generated counts differ from the fenced "
-                   "block (a TestKit probe-count change lands here too)")
-        out.append(REGEN_CURE)
-        return False
-    out.append("STATE BUILD STATE: fresh — regeneration reproduces the region byte for byte")
-    return True
-
-
 def counts_block(counts):
-    """A STATE-ready block; commit bodies may paste it verbatim."""
+    """On-demand build counts; verified runs may be quoted in commit bodies."""
     lines = [
         "BUILD STATE (emitted by tools/doccheck.py)",
         "- modules: %d registered (%d default-active, %d optional-gated files)"
@@ -2093,7 +2086,7 @@ def main():
     ap.add_argument("--regen", "--regen-index", action="store_true", dest="regen",
                     help="rewrite every GENERATED file from its source first — "
                          "docs/agent/bugs/INDEX.md, docs/agent/facts/INDEX.md, "
-                         "docs/WAITING_ON_YOU.md, STATE.md's BUILD STATE region, "
+                         "docs/WAITING_ON_YOU.md, "
                          "the .agents/skills/ mirror and "
                          "AGENTS.md (byte copy of CLAUDE.md) — then run the checks. "
                          "--regen-index is an ALIAS, not a narrower form: it writes "
@@ -2105,7 +2098,7 @@ def main():
                          "checklist's markers and STATE.md), then run the checks — the "
                          "contained cure for the RED a checklist edit causes")
     ap.add_argument("--emit-counts", action="store_true",
-                    help="also print the STATE-ready counts block")
+                    help="also print verified on-demand build counts")
     ap.add_argument("--emit-fingerprint", action="store_true",
                     help="also print, per derived_at group, whether the facts "
                          "still describe what is installed/checked out — the "
@@ -2140,7 +2133,7 @@ def main():
         facts = sf.load_from_dir()
         ok = check_facts(facts, out) and ok
         ok = check_facts_index(facts, out) and ok
-    except (sb.SplitError, StateCountsError, OSError) as exc:
+    except (sb.SplitError, OSError) as exc:
         print("doccheck: RED — %s" % exc)
         return 1
     ok = check_root(out) and ok
@@ -2152,7 +2145,6 @@ def main():
     ok = check_marker_integrity(out) and ok
     ok = check_skills(out) and ok
     counts = recount(model, out)
-    ok = check_state_counts(counts, out) and ok
     ok = temporary_sweep(out) and ok
     ok = load_order(out) and ok
     ok = wrap_targets_check(out) and ok
@@ -2162,8 +2154,9 @@ def main():
     ok = flpk_selftest(out) and ok
     ok = bodycheck_selftest(out) and ok
     ok = required_selftest("ck170_selftest.py", out) and ok
+    ok = required_selftest("prompt_map_selftest.py", out) and ok
     ok = required_selftest("repair_pass_selftest.py", out) and ok
-    ok = required_selftest("state_counts_selftest.py", out) and ok
+    ok = required_selftest("counts_selftest.py", out) and ok
     push_set_report(out)   # report-only: the budget is the owner's to act on
     testkit_tree(out)  # report-only by owner decision (2026-08-04) — never gates
     alias_gate(out)    # report-only, same standing as testkit_tree

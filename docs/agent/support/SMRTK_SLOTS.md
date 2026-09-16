@@ -1,14 +1,15 @@
 # SMRTK slots — preload a sitting
 
-Standing prompt, authored by smrtk 07 on 2026-09-14. Home: local TestKit
-`C:\Dev\SMR-BugFixPack-TestKit`. Use before a sitting, with its brief supplied
-in the invoking task. This tool is not a fix; it never ships.
+Pull-only supporting reference, authored by smrtk 07 on 2026-09-14. Home: local
+TestKit `C:\Dev\SMR-BugFixPack-TestKit`. Use only when a sitting brief calls for
+preloaded slots. This tool is not a fix and never ships.
 
 ## Read and scope
 
-Read `docs/agent/STATE.md`, the sitting brief and upstream notes, WORKFLOW's
-Cheats on playtest saves/Writing in a shared tree sections, the prompt-authoring
-skill's playtest instructions, `EF-096` for sandbox reach, and the TestKit README.
+Read `docs/agent/STATE.md`, the sitting brief and upstream notes, the Cheats on
+playtest saves/Writing in a shared tree sections of `docs/agent/WORKFLOW.md`, the prompt-authoring
+skill's playtest instructions, `docs/agent/facts/EF-096.md` for sandbox reach,
+and the TestKit README.
 Inspect 70's dispatch and 74's Bind/Trigger APIs plus the current
 `80_AgentSlots.lua`; a prior binding is a claim, not today's sitting. Read the
 installed source for every new mutation leaf; inherit matching build identity
@@ -17,7 +18,7 @@ with `python tools/doccheck.py --emit-fingerprint`.
 IN: sitting-owned `Code/80_AgentSlots.lua`, its predictions and the brief's
 handoff. OUT: pack runtime/version/metadata, toolkit build files, portal APIs,
 achievement/account state, live UI prototyping. Route defects to the brief's
-report and fixing link. Never touch a peer's unstaged work. No delegation needed.
+report and fixing link. Never touch a peer's unstaged work.
 
 ## Pull-only helper reference
 
@@ -27,8 +28,6 @@ CargoReady,WorkShift}(true|false)`; one-shot reports are
 `SMRTest.Report{BrokenTrack,Reservations,Trains}()`; the deterministic dispatch
 harness exposes `SMRTest.Stress.{Targets,Break,Report,Compare,HealAll,Stop}`; and
 the suite entry is `SMRTest.RunAll()`. Turn every logger off when its leg ends.
-The TestKit README and the named source files, not an inherited count or table,
-define the current surface.
 
 For an attended MarsDebug `[install]` pass, fully close the game; arm
 `Code/96_AutoRunFlag.lua` and its `SMRTest_AutoRunSetupOnly = true` switch; then
@@ -49,7 +48,7 @@ running, finish independent document preparation and wait for the game to close.
 Rewrite 80 for this sitting using real `SMRTK.Bind(n, label, fn, opts)` functions,
 slots 1–6 and optional `SMRTK.BindScratch`. No strings compiled at runtime, load-
 time mutation, automatic arms or detached mutation threads. Every leg follows
-**MARK → set up → act → DUMP → MARK**. Validate fixture/map/selection/pins before
+**MARK, set up, act, DUMP, MARK**. Validate fixture/map/selection/pins before
 mutation; a refusal must be `false, reason`, not a success-shaped no-op. Give each
 slot a plain label and named prediction. More than six legs can share a slot
 only through an explicit documented stage; do not silently overwrite bindings.
@@ -98,8 +97,8 @@ the probes run in it and never owed between sittings. An agent may recommend a s
 outside playtesting only if it can give the reason and name the harm; recommending is
 all it may do. No agent, gate or kit code refuses a boot, a RunAll, an upload or any
 other work over a sweep's age, and none overrides the owner (ck184 a, ruled 2026-09-15;
-the owner's framing is a gate, not a hard rule). A stale attestation did pass once —
-08b, five hours, a different tree — and the 24 hours is calibrated against it.
+the owner's framing is a gate, not a hard rule). The 24-hour window is calibrated
+against an 08b attestation that passed after five hours against a different tree.
 
 The first sitting after TestKit `f5fa650` (smrtk 99's Code link, 2026-09-15, desk-only)
 also witnesses its four changes, each a prediction: a mechanized depot's fill/empty

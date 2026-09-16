@@ -1,10 +1,22 @@
 # C92 — restore the technology (BUILD + TEST; ⛔ SHIPPING IS HELD)
 
 One-off, reshaped 2026-09-13 on the owner's direction. Tool-neutral (Claude or Codex).
-`git rm` this file when it has reported. Defect truth: [C92](../bugs/C92.md).
+`git rm` this file and its prompt-map row when it has reported. Defect truth: [C92](../bugs/C92.md).
 Evidence: [C92_PLACEMENT.md](../reports/C92_PLACEMENT.md) (current),
 [C92_INVESTIGATION.md](../reports/C92_INVESTIGATION.md) "Addendum 2026-09-13",
 and [`EF-093`](../facts/EF-093.md) (the self-healing residue seam).
+
+Execution starts with `git log --oneline -6`, `git pull`, and
+`git status --short`. The owner reshaped the job at `b74a84f`; compare
+`b74a84f..HEAD` across the named bug/fact/report inputs and re-check only groups
+that moved. Before any test, run WORKFLOW's exact stale-probe sweep across the
+pack and TestKit and record its result in every measurement commit.
+
+Read path: `docs/agent/bugs/INDEX.md` before C92; C92's current Control/Repair
+passages; `docs/agent/facts/INDEX.md` before EF-093 and EF-094; the two reports
+linked above; `docs/agent/FIX_POLICY.md` §§2a/3a; `docs/agent/WORKFLOW.md` "Probe
+hygiene" and "Testing checklist per fix"; this brief. Read STATE only for
+current scheduling/hold status.
 
 ## 0 · ⛔ THE HOLD — read before anything else
 
@@ -182,7 +194,20 @@ Label claims SOURCE / MEASURED / INFERRED, keep a **Not opened** list, say what 
 refutation depends on. `doccheck` GREEN before committing; commit with a pathspec
 after checking `git status` for a peer's uncommitted work.
 
+## 7a · Derived facts and falsifiers
+
+| fact | measured | falsifier |
+|---|---|---|
+| ck172 authorises build/test and holds shipping | owner ruling in checklist 172 and the retained brief at `b74a84f` | a later owner ruling; no source or test result lifts the hold |
+| the reachability/residue design inputs are C92, EF-093 and EF-094 | focused index/entry/report reads at the reshaping commit | compare `b74a84f..HEAD` for those exact paths and re-read moved sections |
+| the installed branch at authoring was 1.1.0 and old saves were branch-locked | build-derived fact group named by EF-079/EF-093/EF-094 | `python tools/doccheck.py --emit-fingerprint`; re-derive any moved group before testing |
+| module/list counts are not design inputs to this job | no acceptance clause depends on a stored total | if implementation adds/removes a module, use `python tools/doccheck.py --emit-counts` rather than writing a number here |
+
 ## 8 · Live todo list — change it as you go
+
+At execution start mark item 1 `IN PROGRESS` and all later items `PENDING`;
+thereafter keep exactly one unfinished commit-and-verify unit in progress and
+put stable results in its text.
 
 - [ ] 1. Orient; confirm the hold is understood and nothing ships
 - [ ] 2. Seat / prerequisite / art / `Condition` — decide each, justify as a choice

@@ -2,10 +2,12 @@
 
 Paste into a fresh Claude Code session. Written **2026-09-08**, to fire **after
 the current fix pack is patched, pushed and stable** (owner instruction).
-**Start with `git log --oneline -15` + `git pull`.** Read `docs/agent/STATE.md`
+**Start with `git log --oneline -15`, `git pull`, and `git status --short`.**
+The last content/path alignment before this audit is `7c23e3c`; compare its
+named inputs with HEAD and re-check moved groups. Read `docs/agent/STATE.md`
 (mandatory), `docs/agent/FIX_POLICY.md`, `docs/agent/reports/CHAIN_METHOD.md`,
-and **`prompts/vanillahunt/README.md` §7 + link 03's "For dlccheck" section of
-`reports/vanillahunt/TRIAGE.md`** — the two efforts overlap by design. *(The
+and **`docs/archive/prompts/vanillahunt/README.md` §7 + link 03's "For dlccheck" section of
+`docs/agent/reports/vanillahunt/TRIAGE.md`** — the two efforts overlap by design. *(The
 brief `VANILLA_DIFF_HUNT.md` was consumed into that chain on 2026-09-10; its
 §2 taxonomy, §4 finding contract and §7 subagent rules now live in that README
 as §2, §3 and §4. ⛔ Fire this brief only after that chain's 99 has run — its
@@ -22,7 +24,8 @@ inherit rather than redo.)*
 > DLC's function count, and state its budget up front.
 
 > 🎯 **YOUR JOB IS TO AUTHOR A CHAIN, NOT TO RUN THE CHECK.** Handoff brief in
-> the shape of `HOTFIX_2_HANDOFF.md`. Decompose into `prompts/dlccheck/` with a
+> the shape of `HOTFIX_2_HANDOFF.md`. Decompose into
+> `docs/agent/prompts/dlccheck/` with a
 > terminal audit. ⛔ 17k lines of new content will not fit one context.
 
 > ⚖️ **THE THESIS, in the owner's words:** *"when they add a core new feature
@@ -30,7 +33,12 @@ inherit rather than redo.)*
 > ⇒ Assume the new content is **under-tested**, and assume nobody checked what
 > it does to the game a player already had.
 
-## 0 · What is on disk RIGHT NOW — no preconditions, this is all readable today
+## 0 · Authoring inventory — re-emit before using it
+
+The figures below were measured for the 2026-09-08 authoring pass. They are not
+current acceptance totals. Re-walk both DLC trees with a PowerShell-safe Python
+file/line inventory, pair the output with `git rev-parse HEAD` and the installed
+game build, and enumerate every member so each total reconciles.
 
 ⭐ **There are TWO DLCs, not one.** Both are installed (`appmanifest_3215050.acf`
 lists `dlcappid` **3889420** and **3889430**), both ship as `.fpk` in
@@ -79,7 +87,7 @@ them rather than around a file-by-file read of `norman/`:
    `Lua/Buildings/FungalFarm.lua` *and* a DLC `FungalFarmBase`), so **a name
    match is not a DLC dependency.** ⛔ Enumerate which references genuinely
    require DLC content and which do not — this is exactly the
-   absence/presence discipline in `prompts/vanillahunt/README.md` §2, and getting it wrong
+   absence/presence discipline in `docs/archive/prompts/vanillahunt/README.md` §2, and getting it wrong
    in either direction is easy.
 3. ⭐ **Presets and data, which is where DLC QC is worst and where our
    instruments are weakest.** `CropPreset`, `Meal`, `Resource`, `LawDef`,
@@ -95,8 +103,8 @@ the new economy touches an existing system is a seam:
 
 - ⭐ **new-game start under Linux/Proton (added 2026-09-10, owner).** Players
   report every new game crashing since the update, in a thread titled with the
-  DLC's name (`prompts/vanillahunt/README.md` §2b, FR-1). Read that chain's
-  **FR-1** and **FR-1(b)** results in `reports/vanillahunt/TRIAGE.md` before
+  DLC's name (`docs/archive/prompts/vanillahunt/README.md` §2b, FR-1). Read that chain's
+  **FR-1** and **FR-1(b)** results in `docs/agent/reports/vanillahunt/TRIAGE.md` before
   starting: the DLC code that runs at new game (map setup, starting resources,
   `thomas`'s sponsor, preset injection) is the DLC half of that surface, and
   the one the base-game chain was fenced out of. ⚠️ **Re-ranked the same day:
@@ -137,7 +145,7 @@ and make every step earn its place. ⛔ Do not propose "play the DLC and see".
 
 ## 4 · What a finding must contain
 
-As `prompts/vanillahunt/README.md` §3 — route re-derived, file:line, who reaches it,
+As `docs/archive/prompts/vanillahunt/README.md` §3 — route re-derived, file:line, who reaches it,
 **a falsifier**, severity in player terms — plus one more that is specific here:
 
 ⭐ **Does it affect players who do NOT own the DLC?** That single question sorts
@@ -151,7 +159,7 @@ the bar for adding one is `FIX_POLICY` and it is the owner's decision.
 ## 5 · Bindings
 
 - ⛔ **Never modify the game directory** — including the `DLC/*.fpk` files.
-- ⛔ `editor/version rail (agent/prompts/perma/RELEASE.md § Release rails)` no Mod Editor, no `version` edit, **no upload**. `H-08` never pull a
+- ⛔ `editor/version rail (docs/agent/prompts/perma/release_prompt.md § Release rails)` no Mod Editor, no `version` edit, **no upload**. `H-08` never pull a
   junction. `H-09` never stage a packed folder beside a live one.
 - ⚠️ Archive `ModTools\Src` before any game update (`C:\Dev\SMR-SrcArchive\`,
   standing rule in its README). A DLC patch overwrites the DLC source too.
@@ -162,7 +170,7 @@ the bar for adding one is `FIX_POLICY` and it is the owner's decision.
 
 ## 6 · Your deliverable
 
-`prompts/dlccheck/` — a chain per `CHAIN_METHOD.md`, README manifest, inbox and
+`docs/agent/prompts/dlccheck/` — a chain per `CHAIN_METHOD.md`, README manifest, inbox and
 outbox per link, terminal adversarial audit. Size each link to one context and
 **split up front** rather than mid-link.
 
@@ -186,6 +194,31 @@ name sweep and an `OnMsg` count on 2026-09-08 — a shallow instrument, of exact
 the kind this project keeps getting caught by. **Re-derive it before building on
 it**, and if the DLC turns out to patch base behaviour more than it appears to,
 say so loudly: the chain is then shaped wrong and should be rebuilt.
+
+## 6a · Live progress and lifecycle
+
+At execution start mark the first row `IN PROGRESS`, later rows `PENDING`, and
+keep exactly one unfinished commit-and-verify unit in progress:
+
+- Re-emit the source inventory/build identity; reconcile the completed
+  vanillahunt handoff and current source availability.
+- Author the mapped `dlccheck/` manifest and links, including the probe-sweep
+  gate before its scripted play leg and this prompt's explicit subagent design.
+- Run doccheck, add the new chain map row, and in the same commit delete this
+  root prompt and its root map row. Do not fire any new chain link.
+
+The root one-off is consumed when that mapped, self-contained chain lands—not
+when the DLC audit itself finishes. If a prerequisite or owner decision is
+missing, stop and keep this prompt/map row rather than leaving a half-transition.
+
+## 6b · Derived facts and falsifiers
+
+| fact | measured | falsifier |
+|---|---|---|
+| the prior vanillahunt chain is closed and its DLC handoff survives | archived manifest plus the named TRIAGE section at `7c23e3c` | compare those exact paths from `7c23e3c..HEAD`; re-read moved passages |
+| both DLC source trees and their old file/line totals were present at authoring | 2026-09-08 inventory embedded in §0 | re-run §0's enumerated Python walk and record installed build identity |
+| the large `norman` read warrants subagent fan-out while `thomas` does not | owner instruction plus the re-emitted inventory | if the re-walk materially changes the split, record the departure and re-cut before authoring links |
+| no target prompt may fire while the overhaul freeze remains | current prompt-map Must_Read_Header | a later owner ruling in words; this chain-authoring job cannot lift it |
 
 ## 7 · ⭐ USE SUBAGENTS — this effort is big enough to warrant it (owner instruction)
 

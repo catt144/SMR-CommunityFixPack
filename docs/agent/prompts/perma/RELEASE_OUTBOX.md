@@ -4,103 +4,37 @@
 <!-- RULES -->
 Rule: Append a filled `### Pending` entry whenever a player-facing fix is added, retired, or materially respecified. [A3: pass]
 Rule: Do not append a pending entry for a pack-internal fix that never shipped broken. [A3: pass]
-Rule: Move every pending entry under `Released in vN` and empty `Pending` only through `RELEASE.md` after upload. [A3: pass]
+Rule: Move every pending entry under `Released in vN` and empty `Pending` only through `release_prompt.md` after upload. [A3: pass]
 Rule: Do not delete a pending entry except through a release or with an explicit withdrawal reason. [A3: pass]
 <!-- /RULES -->
 
-**What this is.** A running ledger of every change that has landed in the tree
-**since the last upload** and must appear on a player surface when the next
-version ships. It is the single answer to "what is in the next release?" — the
-`last_changes` change note, the new fix-list rows, and the store-card count word
-all come from here. `RELEASE.md` reads it, applies every entry to the surfaces,
-and **clears it** (moves the entries to *Released* below) once the upload is done.
+This ledger tracks every player-facing tree change since the last upload.
+`docs/agent/prompts/perma/release_prompt.md` derives `last_changes`, fix-list
+rows and the store-card count from it, then moves Pending entries to Released
+after upload. `docs/agent/support/RELEASE_SURFACES.md` defines which changes
+have a player surface.
 
-**Live tree version:** `metadata.lua` `version` — read it, never hand-set (editor/version rail (agent/prompts/perma/RELEASE.md § Release rails)).
+**Live tree version:** `metadata.lua` `version` — read it, never hand-set (editor/version rail (`docs/agent/prompts/perma/release_prompt.md` § Release rails)).
 **Live count word:** whatever `metadata.lua`'s `description` currently says
 (`grep -oE '[A-Z][a-z]+(-[a-z]+)? repairs' metadata.lua` — one hit; zero is a FAIL). Each pending fix that has a
 player surface bumps it by one on release.
-
-## How to use it
-
-`RELEASE.md` implements the lifecycle above; `PUBLIC_SURFACE_SWEEP.md` section 0.4
-defines which changes have a player surface.
-
----
 
 ## Pending — goes out with the next upload
 
 (empty — v10's batch below cleared by `RELEASE.md` §5, 2026-09-13, upload confirmed both portals)
 
-## Held — still-needed follow-through AFTER v9, not Pending
-
-✅ **The retirement + wording batch below LANDED in v10 (2026-09-12/13)** — F37, F43
-(+F118 rider) and F31 retired, `WORDING_RULED.md`'s 12 rows applied; see *Released in
-v10* above. The rest of this section (retained-claim notes, aggregates, the still-
-uncommitted site files) is NOT re-verified here — read it as history, not a to-do.
-
-**Do not consume this section in the v9 change note/upload.** It records review
-proposals, not landed player-facing changes. Pending F59/F60 above is unchanged.
-Audit `reports/STILL_NEEDED_SWEEP.md` (2026-09-12): 46 reviewed; **2 RETIRE,
-0 REBUILD, 30 KEEP, 14 KEEP-BUT-FIX-CLAIM**. No module/public changes were applied.
-
-**✅ 2026-09-12: v9 is closed and checklist 156 is RULED** — retire F37 and F43 (+F118
-rider), frozen 1.0.7 build untouched, wording batch approved with the owner's
-corrections. ⚖️ **The text to apply is `reports/still-needed/WORDING_RULED.md`**, not
-`SURFACE_PLAN.md`, and its VOICE RULE binds. F21 STAYS (panel line, source-settled
-there); F31 and F52 are HELD. **TAKEABLE WHEN** `prompts/SURFACE_AUDIT_FABLE.md` has
-reported and the owner has ruled on anything it moved. Then run PUBLIC_SURFACE_SWEEP
-in full, apply, and turn this section into the Pending entries for v10.
-
-- **Retirement candidates:** F37 ordinary farm oxygen leak is cleared by current
-  vanilla working transition; F43 normal layout admission already has the outer
-  research/prefab gate. F118 rider follows its parent. Owner decides 1.0.7/orphan/
-  custom/race scope; no all-routes or fresh player-cure proof.
-- **Retained claim batch:** F54 dust-storm example; Saint dome/Religious scope;
-  F58 ordinary-foot cleanup/actual age tests/headline; F52 available-passage
-  headline/intro (INFERRED wording risk); F21 obsolete Comfort example -> train/
-  track statistics; F34 drones rather than colonists; F77 two-second grouping/
-  registered title; F30 obstruction-clearing constructor exemption/eligible
-  command rescue; F06 ten-sol window/title; F50 interruption rather than universal
-  long-trip impossibility; F40 dormant/historical target scope; F48 corrected
-  vanilla migration/historical latch/limited rollback; F31 insurance rather than
-  unconfirmed stopped-story account. Exact review text: `reports/still-needed/SURFACE_PLAN.md`.
-- **Aggregates:** current tree49 rows/46 modules/47 Code/21 headlines. Retirement
-  choices predict49 ->48(one) ->47(both); derive actual final counts once.
-  Current-data-hidden claim supports **two**, not three, rows (F57a and F29, not
-  subfix counting); judgment rows still3, Lake key ships, seven-machine scope true.
-  Full proposed F31+F37 headline removal gives19; headlines are not repair count.
-- ⛔ **THE SITE TREE HAS THREE UNCOMMITTED FILES WAITING ON THE OWNER** (2026-09-12):
-  `content/faq.md`, `content/for-modders.md`, `content/install.md` in
-  `C:\Dev\SMR-CommunityMods` — today's modder-doc paring, not yet ruled on. The
-  deploy of `a061665` is already held for v10, so they ride the same release, but
-  **the deploy must not go out until the owner has ruled on them**, and no agent may
-  commit or discard in that repo. Re-read `git -C C:\Dev\SMR-CommunityMods status
-  --porcelain` rather than trusting this line. Detail: `PUBLIC_SURFACE_SWEEP.md` §1.
-- **All maintained copies:** metadata description, both STORE_CARD_LIVE blocks,
-  both UPLOAD_WORKFLOW backups, complete site rows and FAQ/editorial tallies.
-  Recheck intro examples/categories, not only bullets. No live body/deploy read
-  was made by the audit; execute owner's upload -> cards -> site order on release.
-- **F46:** native suspended Station demand remained positive2500, flags restored
-  exactly. KEEP, no new row/count request; actual unloading/route cure not witnessed.
-- **Change note:** one plain line per actually changed fix, tagged appropriately;
-  a wording correction is not a new game repair or an attended witness. Existing
-  metadata version10/pdx8 writeback predates this sweep and is untouched; never
-  hand-set versions or infer upload receipt from it.
-
----
-
-## Released — history, newest first (cleared here by RELEASE.md)
+## Released — history, newest first (cleared here by `release_prompt.md`)
 
 ### Released in v10 (2026-09-13) — C85, C89, C88 landed; F37, F43+F118, F31 retired
 - **C85 · `Fix_CloggedBuildingRelease`** (`59c8c47`) — a building clogged by a dust
   storm never restarted on its own; it now switches back on, on load and once a
   day, and one already stuck in a save recovers on next load. `fixed`,
   desk-controlled; the attended A/B ran checklist 158. Count **+1**.
-- **C89 · `Fix_FactionDomeSizeGate`** (`98d0461`) ⚖️ **judgment call** — all five
+- **C89 · `Fix_FactionDomeSizeGate`** (`98d0461`), **judgment call** — all five
   factions now use the same ten-colonist rule before disliking a dome's
   unemployment or homelessness (four of five previously counted any dome,
   however small). `cand`/desk-controlled; owner's own A/B is checklist 158, B2's
-  panel leg NOT run by ruling. Count **+1**; judgment-call count three → **four**.
+  panel leg NOT run by ruling. Count **+1**; judgment-call count three to **four**.
 - **C88 · `Fix_BuildingCodesPrefab`** (`4dc5073`) — Building Codes now applies its
   maintenance change to buildings deployed from prefabs too, for buildings
   completed after this update (a Paradox developer asked us to carry this until
@@ -114,11 +48,11 @@ in full, apply, and turn this section into the Pending entries for v10.
 - Also built, no public row/count change: `Fix_StaleReservations` per-colonist
   `pcall` hardening (queue row 3, ck168); C90's apply-success guards in
   `Fix_SaintBlessing` + `Fix_SinkholeIndestructible` (`reports/C90_GUARDS_BUILD.md`).
-- Card: count word **Forty-nine** stays; headliners 21 → **20**; judgment calls
-  three → **four**; 5 card copies byte-checked; `README.md`'s six stale claims
+- Card: count word **Forty-nine** stays; headliners 21 to **20**; judgment calls
+  three to **four**; 5 card copies byte-checked; `README.md`'s six stale claims
   fixed (§3b, checklist 160).
-- ⚠️ **Cleared on the owner's word this sitting** (both portals ran): tree
-  writeback `version` 10 → **11**, `pdx_version` "8" → **"9"**. Steam subscribed
+- **Cleared on the owner's word this sitting** (both portals ran): tree
+  writeback `version` 10 to **11**, `pdx_version` "8" to **"9"**. Steam subscribed
   archive re-read: `ModContent.fpk` **371,327 B** md5 `bef42a2d5405e06444b7e6efdf28cf38`
   at 00:25 local 09-13, `pack_list.py` counts **56** entries against `pack_predict.py`'s
   **54** — 2 extra non-Code doc entries (`smr-bug-library/SKILL.md`,
@@ -135,16 +69,16 @@ in full, apply, and turn this section into the Pending entries for v10.
   `tested-attended` 2026-09-11 for the manual-assign half only (checklist 152); the
   expedition half is code-only and the change note says so. Count unchanged.
 - **F60 · `Fix_DomeFreeSpaceMismatch`** (`9bc4360`) — RETIRED and deleted: 1.1.0's
-  admission gate no longer reads the tally it corrected. Count 50 → 49; site row gone
-  (`SMR-CommunityMods` `a061665`, ⚠️ still UNDEPLOYED — owner holds the deploy for v10).
+  admission gate no longer reads the tally it corrected. Count 50 to 49; site row gone
+  (`SMR-CommunityMods` `a061665`, still UNDEPLOYED — owner holds the deploy for v10).
 - Card: count word **Forty-nine** ×5; `last_changes` = the owner's list shape, header +
   one REPAIRED / RETIRED bullet each (shipped text differs from the tree's draft by the
   owner's box edits — em-dashes, no space after the bullet dash — kept as shipped).
-- ⚠️ **Cleared on READ evidence, not the owner's word** (receipts owed, checklist 155):
+- **Cleared on READ evidence, not the owner's word** (receipts owed, checklist 155):
   Steam changelog newest entry "Update: Sep 11 @ 9:11pm" (Pacific) carries this note
   verbatim; live body "Forty-nine repairs"; workshop pack **337,653 B** md5
-  `222b0f60d00319516c1bcc7beeb97491` at 00:25 local 09-12; tree writeback `version` 8 →
-  **10** (two saves in the sitting), `pdx_version` "7" → "8", committed stripped inside
+  `222b0f60d00319516c1bcc7beeb97491` at 00:25 local 09-12; tree writeback `version` 8 to
+  **10** (two saves in the sitting), `pdx_version` "7" to "8", committed stripped inside
   `1583dcd` and restored by merge in the close-out. The Paradox page is unread.
 
 ### Released in v8 (2026-09-11) — F119 and C86
@@ -153,13 +87,13 @@ in full, apply, and turn this section into the Pending entries for v10.
   live trip cost changed and could sit on the pad forever; the request is refreshed
   on the pad and a pre-stuck rocket is healed on load. `tested-attended` 2026-09-11
   (checklist 149: fix-off reproduced the reported "20 fuel to unload", the load heal
-  and the fix-on leg both left). Count 48 → 49.
+  and the fix-on leg both left). Count 48 to 49.
 - **C86 · `Fix_ScanDowngrade`** (`5ca9a0f`) — an Advanced Orbital Probe fired
   without Adapted Probes no longer knocks a deep-scanned neighbour back to
-  "Scanned". `tested-attended` 2026-09-11. Count 49 → 50.
+  "Scanned". `tested-attended` 2026-09-11. Count 49 to 50.
 - Card: count word **Fifty**, F119 headliner added; `last_changes` = the two-line
   note plus "watched working on 1.1.0". Judgment-call count unchanged (three).
-- ⚠️ **Cleared on READ evidence, not the owner's word** (the session holding the
+- **Cleared on READ evidence, not the owner's word** (the session holding the
   v8 close-out ended without running it; closed by the v9 release session, which
   asked for the receipt in checklist 155): the Steam changelog's newest entry,
   "Update: Sep 11 @ 1:50pm", carries this exact note; the live Steam body says
@@ -172,11 +106,11 @@ in full, apply, and turn this section into the Pending entries for v10.
   restored on seven units: Rare Metals Extractor hammer, classic MOXIE, both
   Water Extractor pumps, Shuttle Hub shuttles, RC Driller, RC Dozer, The
   Excavator. Cosmetic only; the drill Rare Metals skin and the white (CP3) MOXIE
-  are silent by design. Metatron deliberately out. Count 46 → 47.
+  are silent by design. Metatron deliberately out. Count 46 to 47.
 - **C83 · `ArrivalDeaths` extended** — arriving colonists no longer overflow into
   a switched-off, quarantined or unsupplied dome when a working, open, supplied
   dome is reachable. C84 (player-forced homeless move) stays intentional. Count
-  47 → 48.
+  47 to 48.
 - Card: count word **Forty-eight**, C83 headliner, the owner's "SEVEN MACHINES
   THAT WORKED IN SILENCE" section, three gallery screenshots via
   `screenshot1..3` (description 6,206 chars). `last_changes` = v7's three-line
@@ -185,18 +119,18 @@ in full, apply, and turn this section into the Pending entries for v10.
 
 ### Released in v6 (2026-09-09) — hotfix 2, the game-1.1.0 patch
 - Nothing passed through *Pending*: the whole release was a chain
-  (`prompts/hotfix2/README.md`, every commit by link) and its text link (06)
+  (`docs/archive/prompts/hotfix2/README.md`, every commit by link) and its text link (06)
   wrote the surfaces directly, then link 100 re-swept them after the audit.
 - **36 modules DELETED** — game 1.1.0 repairs those defects itself; 36 fix-list
-  entries removed (`SMR-CommunityMods` `7cef4f3`), count word Eighty-two →
-  **Forty-six**, "Under the hood" four → three, judgment calls six → three.
+  entries removed (`SMR-CommunityMods` `7cef4f3`), count word Eighty-two to
+  **Forty-six**, "Under the hood" four to three, judgment calls six to three.
 - **Repaired or re-copied on 1.1.0 bodies:** F114 `TrainCargoDumping`, F115
   `LandscapeUnitFilter`, F116 track salvage, F117 `ArrivalDeaths` (`777249d`),
   F118 rider, `SaintBlessing`, `StaleReservations`, `ShelterReflex` half (b),
   `RocketDroneChurn`, `PayloadTemplateRefill`, `VacuumWalks`; the F95 residue
   pass in `90_SaveSanitizer` (ck126). `last_changes` rewritten wholesale as v6's
   note (five bullets, the last a disclaimer — nothing watched in a running
-  colony on 1.1.0). ⛔ No "Fixed" anywhere; every "works again" is a claim
+  colony on 1.1.0). No "Fixed" anywhere; every "works again" is a claim
   until the post-upload sitting.
 - New on the card: the "Still playing on game version 1.0.7?" section pointing
   at the frozen v5 build (`v5-game-1.0.7`, ck118).
@@ -205,7 +139,7 @@ in full, apply, and turn this section into the Pending entries for v10.
 - **F110 · `Fix_JumboCaveReinforcementWedge`** — a Jumbo Cave mystery could get
   stuck forever clearing waste rock the drones could not reach, so the
   Reinforcement never built and the mystery never completed. Fix-list row in
-  *Story & mysteries*; headliner bullet added; count word Eighty-one → Eighty-two;
+  *Story & mysteries*; headliner bullet added; count word Eighty-one to Eighty-two;
   `last_changes` rewritten as v5's change note. Not a judgment call.
 
 *(The v4 release and earlier predate this ledger.)*

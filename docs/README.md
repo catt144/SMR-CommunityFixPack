@@ -22,15 +22,16 @@ docs/
   README.md               this map
   BUGS.md · STATUS.md     3-line stubs pointing at where they went
   agent/
-    STATE.md              READ FIRST. Current-state kernel, byte-budgeted (doccheck)
+    STATE.md              Pull-only current status, byte-budgeted (doccheck)
     WORKFLOW.md           process rules — commits, probe hygiene, todo discipline
     FIX_POLICY.md         what may be built, and how
     bugs/                 defect truth — one file per entry
     facts/                engine behaviour — one file per fact
     reports/              reports, plans, specs, audits, surveys
-    prompts/              README.md = the map · perma/ = standing prompts · root = live one-offs
+    prompts/              README.md = the map · perma/ = standing prompts · root = live one-offs · live chains only
+    support/              protocols and references used by prompts, but not themselves fired
   archive/                spent. SESSION_LOG.md, PLAYTEST_ARCHIVE.md,
-                          MOD_DESCRIPTION.md (frozen), retired prompts
+                          MOD_DESCRIPTION.md (frozen), retired prompts and closed prompt chains
 ```
 
 ## The archive boundary
@@ -53,6 +54,9 @@ rg --no-ignore <term>       live + archive in one pass
 everything. If a default search comes back empty on something you are sure this
 project once knew, that is the boundary working — re-run with one of the two forms
 above before concluding it was never here. It is not a bug and not a missing file.
+
+Closed prompt chains live under `archive/prompts/`. The pre-launch sweep's H-05
+fence remains authoritative at `archive/prompts/prelaunch-sweep/00_CHAIN_SPEC.md`.
 
 ## The two split folders
 
@@ -90,6 +94,8 @@ difference. Generated files say so on line 1.
 - A **report, plan, spec, audit or survey** → `agent/reports/`.
 - A **prompt** → reusable: `agent/prompts/perma/`; one-off: the `agent/prompts/` root, deleted when consumed. Update the
   map, `agent/prompts/README.md`, either way.
+- A **supporting document used by a prompt** → `agent/support/`; keep the prompt's pointer and
+  update `agent/support/README.md` when the document lands.
 - A **session leg** → `archive/SESSION_LOG.md` (append-only, newest first).
 - A **decision the owner must make** → `PLAYTEST_CHECKLIST.md` →
   "Decisions waiting on you". Never only in an agent doc.
@@ -106,8 +112,8 @@ same change that discovers it.
 
 > 2026-09-15: `docs/PLAYTEST_HELP.md` was dissolved by owner ruling ck182.
 > Prompt-writing hazards moved to the `prompt-authoring` skill; toolkit helpers
-> and the MarsDebug recipe moved to `agent/prompts/perma/SMRTK_SLOTS.md`; co-run
-> launch mechanics moved to `agent/prompts/perma/CO_RUNS.md`; F87 keeps the
+> and the MarsDebug recipe moved to `agent/support/SMRTK_SLOTS.md`; co-run
+> launch mechanics moved to `agent/support/CO_RUNS.md`; F87 keeps the
 > ENABLE-PATH evidence and points to its executable TestKit leg. The command
 > table, central save recipes and archived-`TESTING.md` do-not-use list were cut.
 > Treat older references to the former file as historical citations and use the

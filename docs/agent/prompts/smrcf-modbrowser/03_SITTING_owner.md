@@ -1,7 +1,7 @@
 # C·03 — the browser sitting · ⚠️ OWNER AT THE KEYBOARD · ~15 min
 
 **The only place these defects are observable at all.** Read `README.md`, then
-`STATE.md`, then this, then `## Notes from upstream` — 02 fills in §2.
+`docs/agent/STATE.md`, then this, then `## Notes from upstream` — 02 fills in §2.
 
 ## 0 · Staleness check
 ```
@@ -31,6 +31,10 @@ git pull
 
 ## 3 · Rules for the sitting
 
+0. Run the exact TEMPORARY sweep from `docs/agent/WORKFLOW.md` and apply the
+   current probe-age/change obligation in `docs/agent/STATE.md`; age never lets
+   an agent refuse owner-directed work. Every result commit carries a
+   `PROBE SWEEP:` line.
 1. ⭐⭐ **Relay every owner verbatim through the log-note primitive as spoken.**
    A transcript-only quote is unreadable to the audit forever.
 2. **Judge by the log, flushed** — but here the *screen is also evidence*, and it

@@ -6,9 +6,9 @@ a JSON manifest in `legs/`; the Lua it installs lives in `payloads/`.
 
 ```
 python -c ""                                   # nothing to install
-powershell -File tools\arm_leg.ps1 -Manifest docs\agent\prompts\arming\legs\c48-brake.json -Mode arm
+powershell -File tools\arm_leg.ps1 -Manifest tools\arming\legs\c48-brake.json -Mode arm
 #   ... launch the game, let the payload run, copy the log AFTER the process exits ...
-powershell -File tools\arm_leg.ps1 -Manifest docs\agent\prompts\arming\legs\c48-brake.json -Mode disarm
+powershell -File tools\arm_leg.ps1 -Manifest tools\arming\legs\c48-brake.json -Mode disarm
 powershell -File tools\arm_leg.ps1 -SelfTest  # 20 legs, the falsifier
 ```
 

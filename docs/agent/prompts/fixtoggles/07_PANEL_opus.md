@@ -18,8 +18,8 @@ Build the surface ck148(a) ruled, on the route 03 proved, to the spec §6 visual
   shows nothing for it.
 - All new player-visible strings are `Untranslated(...)` (`FIX_POLICY` §6); layout from relative sizes, not fixed pixels.
 
-⛔ **No live UI-internals prototyping in a play session** (PLAYTEST_HELP ground rule 5): build desk-side from the shipped
-UI sources; the in-game verification is 11's.
+⛔ **No live UI-internals prototyping in a play session:** for this job, build desk-side from the shipped UI sources;
+the in-game verification is 11's.
 
 ## Scope fence
 

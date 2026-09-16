@@ -17,8 +17,7 @@ predictions; 11 runs them with the owner.
    - (e) linked buttons: each declared link both directions.
 3. **Predictions first**, written into 11 before it runs: numbered, with the exact log lines and abort thresholds.
 4. **Fixture:** a 1.1.0 colony (`EF-079`); name the subject-finder instrument per moment; re-confirm at sitting time.
-5. **Coordination:** if checklist 144 (a) (the owed v7 sitting) is still owed, offer the owner a co-run.
-6. Rewrite `11_SITTING_owner.md`'s body with the script (fenced copy-paste lines, one command per line, where each runs,
+5. Rewrite `11_SITTING_owner.md`'s body with the script (fenced copy-paste lines, one command per line, where each runs,
    the echo contract, a first-screen witness per leg — memory `owner-typed-markers-need-copy-paste`).
 
 ## Scope fence

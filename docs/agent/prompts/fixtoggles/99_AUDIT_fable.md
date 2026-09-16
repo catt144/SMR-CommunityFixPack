@@ -18,18 +18,20 @@ Run only on a folder holding this file and `README.md` (or in the reduced form b
 4. **The owner's bar:** is every fix switchable? If not, is each exclusion's reason written, true and routed?
 5. **Honesty rails:** no "off = vanilla save", no "Fixed" beyond status, no version gate anywhere in `Code/`, no copied
    identifier or wording from the reference mod (grep his distinctive names against our tree).
-6. **Verdict:** SHIP / SHIP WITH CHANGES / NO SHIP, in `reports/FIXTOGGLES_AUDIT.md`, and to checklist 148 in plain
-   language. ⛔ `H-04`: never call the release ready — the release is `prompts/perma/RELEASE.md`'s, with the owner.
-7. **Kickoff lines** in the owner report: the release (`prompts/perma/RELEASE.md`), and the B step — if the owner has
+6. **Verdict:** SHIP / SHIP WITH CHANGES / NO SHIP, in `docs/agent/reports/FIXTOGGLES_AUDIT.md`, and to checklist 148 in plain
+   language. ⛔ `H-04`: never call the release ready — the release is `docs/agent/prompts/perma/release_prompt.md`'s, with the owner.
+7. **Kickoff lines** in the owner report: the release (`docs/agent/prompts/perma/release_prompt.md`), and the B step — if the owner has
    ruled to proceed on 09's package, the line that starts that chain; otherwise say none is queued.
-8. Consume this file and the README's queue (the README stays as the record, its table fully struck); SESSION_LOG entry;
-   STATE's NEXT line updated; push.
+8. Consume this file; update SESSION_LOG and STATE's NEXT line. Archive `README.md` to the new path
+   `docs/archive/prompts/fixtoggles/README.md`, remove the `fixtoggles/` row from the root prompt map, and verify the live
+   folder no longer exists before pushing. Stop rather than overwrite an existing archive path.
 
 ## Reduced form — if 03 KILLED the chain
 
-Post-mortem appended to `agent/reports/CHAIN_METHOD.md` §3 (a row: failure · instance · countermeasure); the
+Post-mortem appended to `docs/agent/reports/CHAIN_METHOD.md` §3 (a row: failure · instance · countermeasure); the
 respec-or-abandon decision routed to checklist 148 with a recommendation; every unconsumed prompt `git rm`'d with its
-grave (`git show <sha>:<path>`) named in the README; 09 may still run if unconsumed — say so.
+grave (`git show <sha>:<path>`) named in the README; 09 may still run if unconsumed — say so. After that disposition,
+perform the same README archive, prompt-map removal and empty-folder verification as full-form step 8.
 
 ## What may NOT be claimed
 
@@ -38,7 +40,7 @@ Anything you did not re-derive or re-read yourself. "Release ready" (`H-04`).
 ## Notes from upstream
 
 - From the authoring session (`smr-bugfixpack-24`, 2026-09-11): the evidence base is
-  `reports/FIXTOGGLES_RESEARCH_2026-09-11.md` — its `[R]` rows are research-agent reads the author did NOT re-open; check
+  `docs/agent/reports/FIXTOGGLES_RESEARCH_2026-09-11.md` — its `[R]` rows are research-agent reads the author did NOT re-open; check
   that 01 re-derived them rather than inherited them. The chain was cut by an Opus session against `CHAIN_METHOD` §4.0's
   recommendation that a 6+ chain be cut by the top tier; 01's job 0 was the mitigation — audit whether it actually
   re-validated or rubber-stamped.
