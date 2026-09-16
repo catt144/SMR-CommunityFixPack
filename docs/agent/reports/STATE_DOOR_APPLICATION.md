@@ -153,8 +153,27 @@ protected exception: the parser still needs ck53, ck133 and ck151.
 
 ## Execution and verification
 
-Audit and destination review complete; STATE unchanged during this phase.
-Existing-home cuts and new-home cuts are pending separate commits.
+Audit and destination review committed as `f5302ce`, with STATE unchanged.
+The existing-home cut removes the verified duplicates in the table, including
+the entire Hazard and Governing pointer sections, and rewrites the version
+pair. The exact owner-debt sentence now sits beside the protected enumeration.
+The release, site, FR-1 and toolkit blocks await their new destination passages.
+
+At `f5302ce` plus that STATE patch, normalized STATE measures 4,038 B (command:
+`len(Path('docs/agent/STATE.md').read_bytes().replace(b'\r\n', b'\n'))`).
+This intermediate size is attribution only. doccheck is GREEN, WAITING is
+byte-identical to `19c6954`, and its decision members remain exactly
+53, 133, 151, 169, 171, 172, 173, 175, 178, 180, 181, 182, 183, 184, 185, 186.
+The STATE parser still yields 47, 53, 133, 151, 152. Command/filter: import
+`tools/doccheck.py`, call `state_owed_numbers()`, and select `classify_items`
+rows where `status in MARKER_STATUSES` and `owner`, just as `render_waiting`
+does. The enumerated sets reconcile to five parser IDs and sixteen rows.
+
+The generated-block conflict was also falsified in memory before any cut:
+remove its heading/fenced region from baseline input, call
+`state_counts_bytes(candidate, {})`, and require the exact error
+`expected exactly one BUILD STATE first line, found 0`. It fired. No file was
+modified by that experiment; the intact block remains unchanged.
 
 Verification plan: compare complete WAITING bytes and parsed owner-ID sets to
 the baseline, preserve the exact STILL OPEN block, verify the version pair,
