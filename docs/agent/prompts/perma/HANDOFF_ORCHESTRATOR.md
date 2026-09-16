@@ -153,6 +153,29 @@ for the converter's Mysteries omission, **no** for [C69](../../bugs/C69.md), [C7
 of every surviving entry — archived entries keep their numbers and the gate reads them back.
 ⛔ **Never reuse an archived number**; doccheck goes RED on one claimed by both sides.
 
+⭐⭐ **THIRD TestKit ask — 2026-09-16, NOT STARTED and NOT INVESTIGATED (owner's instruction:
+*"Don't investigate it now just add it as a note to do in the future"*).** Two fixture-setup
+leaves, for provisioning a test colony when research-all is off the table because it would
+destroy the very reading the sitting is taking:
+
+1. **Grant N tech points.** ⭐ The console route is already MEASURED — build the leaf around it
+   rather than re-deriving it. `UIPlayer:AddResearchPoints(n)` is the shipped accumulator,
+   explicitly bound on the player (`AppendClass.Player`, `Lua/TechTree.lua:727-733`, with
+   `AddResearchPoints = TechPointObj.AddResearchPoints`); it accrues into
+   `AccumulatedResearchPoints` and converts in a `while` loop at the current `TechPointCost`
+   (`TechTree.lua:692-706`), so the cost curve is honoured and nothing is bypassed. Granting
+   exactly N without doing the arithmetic:
+   `for i=1,N do UIPlayer:AddResearchPoints(UIPlayer.TechPointCost) end` — each pass pays the
+   current price, so one point per iteration. First point is 1000 research, rising ~10% every
+   4 (`TechTree.lua:684-690`).
+   - ⛔ **THE TRAP, and it will read as a defect if missed:** `Player:CanResearch` opens with
+     `if self.TechPoints < const.TechPointResearchCost then return end`
+     (`TechTree.lua:868-874`). **A broke player gets `nil` from `CanResearch` even for an
+     `enabled` tech.** Any leg that prints `CanResearch` must grant points first or read the
+     `GetTechState` column instead. This bit the Wildfire Leg A recipe on 09-16.
+2. **A breakthroughs picker.** Owner's ask, ⛔ **no design work done and none authorised** —
+   scope it with them before building.
+
 ⭐ **SECOND TestKit ask — the crew trace. ✅ BUILT 2026-09-16, TestKit `acafc74`, UNRUN.**
 `SMRTest.Log.CrewDraft`, a Kit-page arm/disarm button, to settle `EF-104`'s unexplained draft
 observation. ⚖️ The owner's 2026-09-15 deferral (*"lets save that"*) **stands as written** — it was
