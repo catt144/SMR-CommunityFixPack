@@ -42,6 +42,10 @@ repair contains only vanilla ranch and pile objects on vanilla anchors. If the m
 removed, the closed ranch visual can persist until vanilla next changes its open-air state;
 there is no executable mod residue and no resource mutation to undo.
 
+## ✅ Attended in-game result — 2026-09-16
+
+⚖️ Owner's words: *"c93 tested i re loaded it and watched it end to end no food stuck"*. **MEASURED in the file log:** `OpenPastureStockpiles: applied`, then on load `restored 2 open ranch(es), explicitly reattached 6 pile(s)` and `restored 4 open ranch(es), explicitly reattached 12 pile(s)` (`Mars.exe-20260916-16.47.23-6a91a190.log`, repeated on reload in `16.57.56`). Every restore reattached exactly three piles per ranch — the stranded set. The owner reloaded the affected save and watched drones clear the ranches with no food left stuck; the closed ranch visual is the declared tradeoff. ⛔ **Not claimed:** checklist 191's Leg B (a new ranch built after Open Domes) was not stated, and no numeric per-pile reconciliation was read — the acceptance rests on the owner's attended observation. The `16.57.56` log also carries 7,218 `HGE::l_HasSpot: The object given has no entity` lines on `UnpersistedMissingClass` objects in vanilla drone approach code. That run loaded the reporter's save past `LoadGame error: missing mods` with twelve third-party mods absent; ⚖️ **owner attribution 2026-09-16: those mods' missing classes, not ours** — not investigated.
+
 ## Verification completed
 
 Against the installed 1.1.0.403908 source archive for build 24995074:

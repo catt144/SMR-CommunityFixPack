@@ -48,9 +48,10 @@ player surface bumps it by one on release.
   created, moved or lost.
 - ⚠️ **State the visible tradeoff publicly:** under Open Domes an Outside Ranch keeps its
   closed look. Atmosphere, consumption and every other effect of the law are unchanged.
-- ⛔ **Verification — do not overstate in public copy:** the harm was reproduced on the
-  owner's save; the repair is **source- and desk-verified only**. Its in-game validation is
-  checklist **191, still open**. Do not describe it as watched working in a running colony.
+- ✅ **Verification — `tested-attended` 2026-09-16:** the owner reloaded an affected save and
+  watched the repair end to end — stranded piles reattached, drones cleared them, no food stuck
+  (checklist 191 CLOSED). It may be described as watched working in a running colony. ⛔ Do not
+  claim a newly built ranch was tested (not stated).
 - No public-copy draft exists. Authority: [C93](../../bugs/C93.md) and
   [the build report](../../reports/C93_RANCH_OPEN_DOMES_BUILD.md).
 

@@ -28,8 +28,10 @@ Item 177 records the still-open question of mechanically enforcing checklist mar
 
 ## Decisions waiting on you
 
-### 2026-09-16 — 191: C93 repair validation — affected ranch plus a ranch built after Open Domes
-<!-- ck:191 status:open owner:yes -->
+### 2026-09-16 — 191 CLOSED: C93 passed attended — affected save reloaded, no food stuck
+<!-- ck:191 status:closed owner:no -->
+
+✅⚖️ **CLOSED 2026-09-16 on your word:** *"c93 tested i re loaded it and watched it end to end no food stuck"*. **MEASURED:** `OpenPastureStockpiles: applied`, then on load `restored 2 open ranch(es), explicitly reattached 6 pile(s)` and `restored 4 open ranch(es), explicitly reattached 12 pile(s)` (`Mars.exe-20260916-16.47.23-6a91a190.log`, repeated on reload in `16.57.56`). C93 is `tested-attended`. ⛔ Declared limits, not hidden passes: Leg B (a newly built ranch) was not stated and no numeric pile reconciliation was read; the acceptance rests on your attended watch. The HasSpot flood in the reload log is the reporter save's twelve missing mods, by your attribution — not ours, not investigated.
 
 **Why:** the owner identified the missing timing condition: Outside Ranches work before the
 Open Domes law and fail after it. Source now joins that timing to the ranch's entity swap, and
