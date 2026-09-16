@@ -105,18 +105,16 @@ metadata entry and probe files back from disk and refuses an unarmed launch.
 ## Owner-led deviations
 
 An owner override is a course change, not a variance to manage. Owner ruling,
-2026-08-05:
+2026-08-05, after a multi-day playtest in which every single reply ended with
+the elapsed time, the author's quoted estimate, and a nudge back to the list:
 
-> "My time is valuable and is a major concern. But if I decide to over ride and
-> follow a lead, a session shouldn't remind me nearly every message that we
-> should get back on track. Which makes trouble shooting hard when I am trying
-> to keep track of what I have sent to it to check and what I have not."
+> "Which makes trouble shooting hard when I am trying to keep track of what I
+> have sent to it to check and what I have not."
 
-State the plan's position once when the deviation starts, then stop reminding.
-Resume that discussion only when the lead closes, the owner asks, or the sitting
-is ending. During the deviation, the session maintains the live ledger of what
-the owner has checked and what remains. Treat the lead as first-class work to
-instrument and witness.
+Never append that tail. State the plan's position once when the deviation
+starts, then stop until the lead closes, the owner asks, or the sitting ends.
+Keep the ledger of what the owner has checked and what remains. The lead is
+first-class work: instrument and witness it.
 
 Do not issue a stop order while a time-sensitive gate remains open; take the
 reading first or establish the gate's timeout. Mark UI-dependent instructions
