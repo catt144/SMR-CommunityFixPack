@@ -4,9 +4,12 @@
 ⛔ Start with `git log --oneline -10` and `git pull`. Every specific below is dated to that
 commit; if a cited file moved, the record wins and this brief is stale.
 
-> ⛔ **FIRING FREEZE.** `prompts/README.md` carries the owner's 2026-09-15 freeze on this folder.
-> **Do not fire this brief until the owner lifts it in words.** No agent lifts, narrows or
-> excepts it — not even for this.
+> ⚠️ **Check the folder's firing state before you start — do not trust this line, read it:**
+> `grep -c "FIRING FREEZE" docs/agent/prompts/README.md`. A hit means the owner's 2026-09-15
+> freeze on this folder is still standing and **nothing here may be fired**; zero means it was
+> torn down and you are clear. ⛔ No agent lifts, narrows or excepts that freeze — not even for
+> this brief. (Authored while it stood; the owner ordered the teardown the same day, so it is
+> expected to be gone. The command is the authority, not this parenthesis.)
 
 ---
 
