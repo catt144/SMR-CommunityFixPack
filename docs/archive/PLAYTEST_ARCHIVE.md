@@ -8015,3 +8015,25 @@ instructions are corrected in the same change. The protected owner-register
 idioms remain in STATE. No further owner action is owed for this change.
 
 Evidence and disposition: `docs/agent/reports/STATE_DOOR_APPLICATION.md`.
+
+
+## STATE admission door installation 2026-09-15
+
+Condition: STATE cleanup and removal of its mandatory generated-count copy
+were complete at `07b7ca6`, but the reusable eviction prompt still carried
+only a three-part test scoped to Hazards. The complete September 15 rulings
+lived in gitignored `.claude/DECISIONS.md`.
+
+The owner requested, under the same scope override, that the completed door
+be written into `docs/agent/prompts/perma/STATE_EVICTION.md` as its durable
+home. It applies to every section: HARM names a victim with a moderate floor;
+REACH asks whose job and who needs to know, both everyone, with self-consuming
+chain work excluded by construction; GATE cites an existing machine check
+instead of restating its duty; VOLATILITY refuses settled records. The tests
+are AND-ed, never OR-ed: one failure is enough. The prompt preserves the
+owner's verbatim reach and volatility words and the complete operational test.
+
+The owner also requested correcting doccheck's stale "mandatory read"
+diagnostic: STATE is pull-only. The corresponding docs-map description is
+corrected with it. No owner action is owed. The operative door is in the
+prompt; execution evidence is in `docs/agent/reports/STATE_DOOR_APPLICATION.md`.

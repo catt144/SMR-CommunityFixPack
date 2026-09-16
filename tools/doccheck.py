@@ -1288,7 +1288,7 @@ def check_state_and_stubs(out):
     red = []
     warns = []
     if not os.path.exists(STATE):
-        red.append("docs/agent/STATE.md is missing — it is the mandatory read")
+        red.append("docs/agent/STATE.md is missing — restore the pull-only status file")
         n_state = None
     else:
         raw = lf_bytes(STATE)

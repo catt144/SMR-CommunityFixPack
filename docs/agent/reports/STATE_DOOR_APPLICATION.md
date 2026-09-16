@@ -253,7 +253,35 @@ checklist/archive. Missing later outcomes are homed in task-specific reports,
 not a general intake or replacement STATE.
 
 Suggestions retained from the destination review: the stale FR-1 field tally
-in LINUX_DISPATCH/checklist 145 belongs to that task. Installing the complete
-admission door in STATE_EVICTION or tooling is a separate change; this leg
-applied the door by hand and repairs only the count-copy instructions there.
+in LINUX_DISPATCH/checklist 145 belongs to that task.
+
+## Follow-up: the complete door's durable home
+
+After `07b7ca6`, the owner explicitly requested installation in
+`docs/agent/prompts/perma/STATE_EVICTION.md` under the same override. That
+reusable prompt now contains the complete four-part door for every section,
+the owner's verbatim reach/volatility words, the AND requirement and the
+self-consuming-chain exclusion. Its procedure and refusal routing agree with
+the door; its map describes the complete cleanup job. The local ignored
+DECISIONS file is provenance, not a dependency for a future reader.
+
+Doccheck's missing-STATE diagnostic and the docs map now describe pull-only
+status. This changes the diagnostic text, not the missing-file failure. The
+door remains a prose judgment procedure, not a new automated admission gate.
+The settled instruction is recorded in the checklist and its append-only
+archive body. At `07b7ca6` plus the installation patch,
+`python tools/doccheck.py --regen-waiting` is GREEN. A `python -` comparison
+of the prompt's quoted blocks with the first owner quote under each named
+DECISIONS heading confirmed verbatim agreement. The same check extracted
+the numbered test labels and found exactly HARM, REACH, GATE and VOLATILITY,
+then asserted whole-file scope, AND-ing and the chain exclusion.
+
+A temporary missing-STATE path supplied to `check_state_and_stubs()` still
+returned failure with the corrected diagnostic. Comparing `tools/doccheck.py`
+to `git show 07b7ca6:tools/doccheck.py` after that literal replacement proved
+no other checker code changed. Scoped `rg -n` found no old three-part,
+Hazards-only, UNIVERSALITY or mandatory-read wording in the prompt/checker.
+WAITING differs only in line anchors and coverage; its owner rows and STATE
+are unchanged. The archive's previous content remains an unchanged prefix.
+
 Executed model: GPT-6, as exposed in this transcript.

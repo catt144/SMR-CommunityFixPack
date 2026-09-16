@@ -28,6 +28,11 @@ Item 177 records the still-open question of mechanically enforcing checklist mar
 
 ## Decisions waiting on you
 
+### 2026-09-15 — Complete STATE admission door installed
+<!-- ck:- status:closed owner:no -->
+
+Body archived in [STATE admission door installation](archive/PLAYTEST_ARCHIVE.md#state-admission-door-installation-2026-09-15).
+
 ### 2026-09-15 — STATE cleanup scope override
 <!-- ck:- status:closed owner:no -->
 
