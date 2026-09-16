@@ -8050,3 +8050,17 @@ This authorises the Wildfire investigation to proceed during the teardown,
 including resolving tree-policy friction under this direct instruction. The
 brief's cause-and-fix scope and evidence requirements remain the work to do.
 No further owner action is owed for this authorisation.
+
+## Affected-save recovery requirement 2026-09-16
+
+During the Wildfire cause-and-fix investigation, after a legacy migration
+failure was identified, the owner stated:
+
+> One quick follow up, if we cannot figure out a way to unstick a save via some method when we fix a bug, that is by definition a failure.
+
+A successful bug fix must include a way to recover an already affected save.
+Preventing the trigger in future games alone does not meet this requirement.
+The method may be built into the fix or another demonstrated recovery route;
+if no recovery method can be established, report the fix as incomplete rather
+than successful. F120 is the current application. No further decision is owed
+from the owner on this requirement.

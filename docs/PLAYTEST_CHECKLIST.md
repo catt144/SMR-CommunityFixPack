@@ -28,6 +28,11 @@ Item 177 records the still-open question of mechanically enforcing checklist mar
 
 ## Decisions waiting on you
 
+### 2026-09-16 — A successful fix includes recovery of affected saves
+<!-- ck:- status:closed owner:no -->
+
+Owner requirement archived in [Affected-save recovery requirement](archive/PLAYTEST_ARCHIVE.md#affected-save-recovery-requirement-2026-09-16). Applies to F120 and future bug fixes; prevention alone does not satisfy it.
+
 ### 2026-09-16 — Wildfire investigation authorised during prompt teardown
 <!-- ck:- status:closed owner:no -->
 
