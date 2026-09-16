@@ -39,8 +39,10 @@ held in `tools/held/`, checklist 187. That withdrawal remains in force.
   newest entry "Update: Sep 16 @ 2:27pm" carries the shipped note; live Steam body reads
   "Fifty-two repairs" (0 "Forty-nine"). Tree writeback `version` 11 → **14** (three saves),
   `pdx_version` "9" → **"10"**, `code_hash`/`saved` rewritten; comments stripped in both files and
-  restored in the close-out commit. ⚠️ **Receipt gaps at close:** the Paradox page version was
-  not stated; and the **site was NOT published** — newest `Publish docs site` run is `d86a347`
+  restored in the close-out commit. **Paradox page shows v13** (owner, 2026-09-16; Steam shows no
+  version) — one below the tree's 14, consistent with `VersionDisplayName` being sent before
+  Paradox's own save bumps it (`ParadoxMods.lua:156`, `:173`). ⚠️ **Receipt gap at close:** the
+  **site was NOT published** — newest `Publish docs site` run is `d86a347`
   (2026-09-13) and the live fix list read 49 entries with no ranch row at 17:30 local, so the
   card's Fifty-two disagrees with the page it links until the owner runs the workflow.
 
