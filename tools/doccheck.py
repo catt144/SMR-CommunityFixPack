@@ -1283,6 +1283,70 @@ def check_prompt_map(out):
     return True
 
 
+STATE_DOOR = "docs/agent/prompts/perma/STATE_EVICTION.md"
+
+
+def state_added_lines():
+    """Lines the working tree adds to STATE.md relative to HEAD.
+
+    Returns (lines, note). `note` is set when the comparison could not be made
+    and the caller must say so rather than imply a clean result.
+    """
+    import subprocess, difflib
+    if not os.path.exists(STATE):
+        return [], "STATE.md is absent"
+    # Only subprocess failures are recoverable here. A NameError or a typo must
+    # raise: a broad except turns a coding error into a silent, permanent SKIP,
+    # which is how this gate shipped dead on its first run.
+    try:
+        head = subprocess.check_output(
+            ["git", "show", "HEAD:docs/agent/STATE.md"],
+            cwd=REPO, stderr=subprocess.PIPE)
+    except (OSError, subprocess.CalledProcessError):
+        cur = lf_bytes(STATE).decode("utf-8", "replace").split("\n")
+        return [l for l in cur if l.strip()], "no HEAD copy to compare against"
+    old = head.replace(b"\r\n", b"\n").decode("utf-8", "replace").split("\n")
+    new = lf_bytes(STATE).decode("utf-8", "replace").split("\n")
+    added = []
+    for tag, _, _, j1, j2 in difflib.SequenceMatcher(None, old, new).get_opcodes():
+        if tag in ("insert", "replace"):
+            added.extend(l for l in new[j1:j2] if l.strip())
+    return added, None
+
+
+def check_state_admission(out):
+    """Put the admission door in front of anyone adding a line to STATE.
+
+    This gate CANNOT judge a line - no machine can answer "whose job is this".
+    It makes the judgement unavoidable at the moment of the write by printing
+    the added lines beside the four questions. A PASS here is not approval.
+    """
+    added, note = state_added_lines()
+    if note:
+        out.append("STATE ADMISSION: SKIPPED - %s (no judgement made)" % note)
+        return True
+    if not added:
+        out.append("STATE ADMISSION: no lines added; door is %s" % STATE_DOOR)
+        return True
+
+    out.append("STATE ADMISSION: %d line(s) added - ANSWER THE DOOR BEFORE COMMITTING"
+               % len(added))
+    for line in added[:12]:
+        out.append("    + %s" % line.strip()[:96])
+    if len(added) > 12:
+        out.append("    + ... %d more" % (len(added) - 12))
+    out.append("  1 HARM        name the victim; a mechanism is not one; floor moderate")
+    out.append("  2 REACH       (a) whose job is this?  (b) who needs to know?")
+    out.append("                both must answer EVERYONE; self-consuming chain work")
+    out.append("                never passes (b), by construction")
+    out.append("  3 GATE        a machine catches it -> cite the gate, don't restate it")
+    out.append("  4 VOLATILITY  can its state still change? settled means record, not state")
+    out.append("  AND-ed, never OR-ed: one failure is enough. Full text: %s" % STATE_DOOR)
+    out.append("  This gate cannot judge a line. It only makes you answer. "
+               "A PASS is not approval.")
+    return True
+
+
 def check_state_and_stubs(out):
     """STATE.md's byte budget (checklist 42), and the three stubs spec §3e requires."""
     red = []
@@ -2141,6 +2205,7 @@ def main():
     ok = check_entry_mirror(out) and ok
     ok = check_rule_headers(out) and ok
     ok = check_state_and_stubs(out) and ok
+    ok = check_state_admission(out) and ok
     ok = check_waiting(out) and ok
     ok = check_marker_integrity(out) and ok
     ok = check_skills(out) and ok

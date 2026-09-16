@@ -2,7 +2,8 @@
 
 ## Must_Read_Header
 <!-- RULES -->
-This file contains current status and pointers. Binding duties live in `CLAUDE.md`, document-local headers, and task documents.
+This file contains current status only. Binding duties live in `CLAUDE.md`, document-local headers, and task documents.
+What may enter this file: the admission door in `agent/prompts/perma/STATE_EVICTION.md`, gated by doccheck STATE ADMISSION.
 <!-- /RULES -->
 
 ## Now
@@ -10,7 +11,7 @@ This file contains current status and pointers. Binding duties live in `CLAUDE.m
 - Previous version 1.0.7 w/ tree archived at `C:\Dev\SMR-SrcArchive\1.0.7.396349\Src` (`EF-083`)
 
 ## Open owner decisions (bodies in `docs/PLAYTEST_CHECKLIST.md` → "Decisions waiting on you")
-  Owner OWES: ck151 (b) dev-report scope.
+- Owner OWES: ck151 (b) dev-report scope.
 - STILL OPEN: 53 harden now or in 1.0.1 · 47 two modder-page wordings · 152 c open · 185 C95/C96 builds · 133 two `FIX_POLICY` §2a
   lines (2 UNKNOWN-status policy, 4 `LuaRevision` label). `WAITING_ON_YOU.md` parses the literal `STILL OPEN:` and
   `Owner OWES: ck##` idioms.
