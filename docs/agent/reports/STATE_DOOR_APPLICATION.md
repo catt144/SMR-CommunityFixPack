@@ -154,10 +154,42 @@ protected exception: the parser still needs ck53, ck133 and ck151.
 ## Execution and verification
 
 Audit and destination review committed as `f5302ce`, with STATE unchanged.
-The existing-home cut removes the verified duplicates in the table, including
+Existing-home cut `ddf5750` removes the verified duplicates in the table, including
 the entire Hazard and Governing pointer sections, and rewrites the version
 pair. The exact owner-debt sentence now sits beside the protected enumeration.
-The release, site, FR-1 and toolkit blocks await their new destination passages.
+The new-home cut supplies the remaining passages and removes the corresponding
+source blocks in the same commit:
+
+- [V10_RELEASE_RECORD](V10_RELEASE_RECORD.md): the release/artifact, post-launch
+  history and deployment passages are exact quoted transcriptions of baseline
+  lines 13–20 and 64–70, with historical scope and evidence links.
+- [FR1_LINUX_FINDINGS](FR1_LINUX_FINDINGS_2026-09-10.md), September 15 update:
+  “The GTX 1070 hardware works with the temporary workaround; the reported
+  failure was user error,” plus the owner's words and historical portal IDs.
+- [SMRTK_AUDIT](SMRTK_AUDIT.md), Post-audit closeout: “C-5 built but unwitnessed,”
+  the later witnessed/refuted outcomes, age-gate condition, owner authority,
+  text chip and no owed chain work. The original audit evidence stays dated.
+
+Each destination was written, reopened and checked before its source block
+was removed. No finding needed an arbitrary intake home. Homeless content
+dropped: zero; the refused count block has an identified home but an unresolved
+machine requirement. The table traces the removed content and its conditions.
+
+At `ddf5750` plus the new-home patch, STATE measures **1,102 LF bytes** versus
+the baseline's 11,739, delta **−10,637**. Same `read_bytes`/CRLF-normalization
+command as below; the final normalized SHA-256 is
+`f3d815a615a527ae7e7d2b46b91039d882fdd2efbb3062a89825390efe848c87`.
+The result is the disposition, not the reduction: only the version pair is
+admitted status. The title/header/separators remain structural; the exact
+owner-register sentences remain by the brief's scope protection; the generated
+count section remains refused/blocked by its existing machine requirement.
+
+Final checks on that patch: doccheck GREEN; complete WAITING bytes, owner-ID
+sets and the generated count region unchanged; exact owner-shaped Now block;
+no changes in checklist, prompts, game code or doccheck. The new V10 quotes
+were compared directly to the baseline source intervals. The FR-1/toolkit
+conditions were checked by exact retained phrases and by reading the resulting
+passages. No generated file was manually rewritten.
 
 At `f5302ce` plus that STATE patch, normalized STATE measures 4,038 B (command:
 `len(Path('docs/agent/STATE.md').read_bytes().replace(b'\r\n', b'\n'))`).

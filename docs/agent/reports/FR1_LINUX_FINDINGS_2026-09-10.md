@@ -1,5 +1,8 @@
 # FR-1 — Linux/NVIDIA 580 world-load crash: what is established (2026-09-10)
 
+The GTX 1070 field report's later owner-confirmed result is in
+[the September 15 update](#13--2026-09-15--gtx-1070-field-report-resolved-by-the-owner).
+
 Owner ran the bench (Alienware m15 R4, RTX 3070 Laptop, Mint 22.2 / X11 / kernel
 7.0.0-31, Proton Hotfix `hotfix-20260828`); `smr-bugfixpack-f0` read the evidence
 and the two source trees. The owner's first report is verbatim beside this file
@@ -389,3 +392,17 @@ ask). It is Q2's path with no marker and no reload. Steps are in checklist 145 P
   observed for several minutes": the log shows ~77 s between `BlankBigTerraceCMix_20` loading (25497.0) and the quit (25574.4). (4)
   The owner's cold boot into a colony and the Low/Ultra runs were separate launches. Each launch overwrites Steam's log, so only this
   run is measured; those stay owner-witnessed.
+
+## 13 · 2026-09-15 — GTX 1070 field report resolved by the owner
+
+**Owner-reported, not a new bench run.** The owner said: “that live thread is
+closed, the user responded that it was working and it was user error.” The
+GTX 1070 hardware works with the temporary workaround; the reported failure
+was user error. The earlier dated field tally and pending-log hypotheses in
+§12 describe the report before this response, not an outstanding failure.
+
+Source: the owner's September 15 FR-1 ruling, transcribed in STATE at
+`27ad676` and verified still present at `19c6954`. The temporary workaround
+was reported live September 11 at Steam **3799500849** / PDX **158711**.
+These are historical release identifiers, not a new portal check. The work
+route remains `docs/agent/prompts/perma/LINUX_DISPATCH.md`.
