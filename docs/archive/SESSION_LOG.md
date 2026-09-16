@@ -10895,3 +10895,28 @@ F73 partial PASS (57139f5), F14 T reader (3f1abb4), F52 message (77fdb72),
 AutoRun `wait_for` timeout (d2636b7), Meteors logger global swap (42d9f43).
 **The A/B pair must be re-run** — with the fakes finally visible, several probes
 that "passed" or SKIPped were not testing what they claimed.
+
+## 2026-09-16 — habitat draft session (`smr-bugfixpack-a0`), executed on Claude Opus 5 (1M context)
+
+Record only; the work itself lives in its entries, facts and the brief. Commits `0a844c8`,
+`e933cb7`, `9e2d5db`, `01eb453`, `235bd3e`, `2569946`, `f57879c`, `1753a67`, `00259ea`, plus
+TestKit `acafc74`.
+
+Fired from the orchestrator handoff's two auto-start tasks. Built the C98 drop probe, the
+`EF-104` crew trace and the Selected-page Quick build leaf on one TestKit link — all three
+unrun. Authored, then twice corrected, then rewrote the C95 fix brief when the owner lifted
+ck185's C95 half and fired it.
+
+Three corrections worth their own line, each already homed:
+- Filtering the draft's returned crew hangs the rocket forever rather than shortening it
+  (`EF-104`, brief §3d). The brief had called that shape safe.
+- The 1.1.0 residency flags cannot carry the exemption predicate — two of the three are
+  player-toggled dome policies, so a dome with connected work switched off would be exempted
+  silently (`EF-103`).
+- "Failure is visible" on an unfillable manifest is itself unverified: the line that sets
+  `colonist_summon_fail` dereferences a nil on exactly that path, byte-identical since 1.0.7
+  (`EF-104`, with the discriminator).
+
+Filed `C100` from the owner's own observation that a habitat resident who gets home leaves
+again — a second, continuous drain with the emigration scorer's jobless override as its
+mechanism; defect-or-design is ck188 and unruled.

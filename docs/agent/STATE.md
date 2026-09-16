@@ -12,6 +12,6 @@ What may enter this file: the admission door in `agent/prompts/perma/STATE_EVICT
 
 ## Open owner decisions (bodies in `docs/PLAYTEST_CHECKLIST.md` → "Decisions waiting on you")
 - Owner OWES: ck151 (b) dev-report scope.
-- STILL OPEN: 53 harden now or in 1.0.1 · 47 two modder-page wordings · 152 c open · 185 C95/C96 builds · 133 two `FIX_POLICY` §2a
+- STILL OPEN: 53 harden now or in 1.0.1 · 47 two modder-page wordings · 152 c open · 185 C96 build only · 133 two `FIX_POLICY` §2a
   lines (2 UNKNOWN-status policy, 4 `LuaRevision` label). `WAITING_ON_YOU.md` parses the literal `STILL OPEN:` and
   `Owner OWES: ck##` idioms.

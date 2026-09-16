@@ -49,19 +49,33 @@ todo list**.
 **Unless the owner's message names a task, a pasted handoff means ORIENT — summarise and ASK what to
 take.** Do not execute anything else.
 
-✅ **The two auto-firing tasks this section carried on 2026-09-16 are BOTH DONE. ⛔ Do not re-run
-them, and do not restore the auto-start instruction from an older copy of this file.**
+⛔ **The two auto-firing tasks this section carried on 2026-09-16 are DONE. Do not re-run them, and
+do not restore the auto-start instruction from an older copy of this file.**
 
-- **§0a, the TestKit link** → TestKit `acafc74`, three rows on one link: `SMRTest.Log.DroneDrop`
-  (C98), `SMRTest.Log.CrewDraft` (`EF-104`) and the Selected-page **Quick build** leaf.
-  ⛔ All three are **BUILT AND UNRUN** — §2b carries what is left, which is a sitting, not a link.
-- **§0b, the C95 fix brief** → [`prompts/C95_HABITAT_DRAFT_BUILD.md`](../C95_HABITAT_DRAFT_BUILD.md).
-  ⭐ **AUTHORISED and REWRITTEN 2026-09-16** — the owner lifted [ck185](../../../PLAYTEST_CHECKLIST.md)'s
-  **C95 half** the same day and has the test save ready; ⛔ **C96's half stays open**, and the release
-  is still the release prompt's job. ⛔ The brief is the record — design, the two shapes that do not
-  work, and the acceptance legs are all in it, not here. ⚠️ It also **corrects the instruction that
-  commissioned it**: this section used to demand the rail-sweep-vs-`CanVisit` gate be settled first;
-  C95 had already ruled it **moot** for this shape. ⛔ Do not reinstate that clause.
+### ⛔⛔ LIVE RIGHT NOW — the C95 build is FIRED and RUNNING (2026-09-16)
+
+The owner fired [`prompts/C95_HABITAT_DRAFT_BUILD.md`](../C95_HABITAT_DRAFT_BUILD.md) and has the
+test save open. ⛔ **Stay out of its lane:** do not touch `Code/`, C95, `items.lua`, or that brief;
+do not start a second C95 anything. ⭐ **Consume its result, not its working state** — when it
+reports, it `git rm`s itself **and its `prompts/README.md` row** in the same commit, and that
+removal is how you know it finished.
+
+⚖️ The owner lifted [ck185](../../../PLAYTEST_CHECKLIST.md)'s **C95 half** the same day (*"I want to
+fire it and then we can test it"*). ⛔ **C96's half stays OPEN** — nothing about C96 is authorised.
+⛔ The release itself is still the release prompt's job, not that brief's.
+
+⛔ **The brief is the record.** The design the owner worked out with it, the two shapes that do NOT
+work and why, and the acceptance legs are all in it — none of it is restated here. ⚠️ It also
+**corrects the instruction that commissioned it**: this section used to demand the
+rail-sweep-vs-`CanVisit` gate be settled first, and C95 had already ruled that gate **moot** for this
+shape. ⛔ Do not reinstate that clause.
+
+### The TestKit link — built, and still unrun
+
+TestKit `acafc74`, three rows on one link: `SMRTest.Log.DroneDrop` (C98), `SMRTest.Log.CrewDraft`
+(`EF-104`) and the Selected-page **Quick build** leaf. ⛔ All three are **BUILT AND UNRUN** — §2b
+carries what is left, which is a sitting, not another link. ⭐ The C95 sitting is the natural place
+for the `CrewDraft` row, since that brief arms it as its own reach control.
 
 ---
 
@@ -331,6 +345,13 @@ gaps on purpose, so a citation of "trap 5" still resolves.
    must not fall. A new item is `### <date> — <n>: <title>` + its `<!-- ck:n ... -->` marker, sub-headings
    `####`. ⛔ And **never `git checkout --` the file to recover** — the owner blocked exactly that, which
    would have taken 132 lines of unrelated work back to HEAD.
+12. ⛔ **A `(` ANYWHERE ON `STATE.md`'s `STILL OPEN:` LINE SILENTLY DROPS EVERY ID AFTER IT** from the
+   owner's generated register. `doccheck.py:584` captures with `STILL OPEN:(.*?)(?:\(|$)` — the first
+   bracket ends the match. Hit 09-16: adding a parenthetical to item 185 removed **133** from
+   `WAITING_ON_YOU.md` while doccheck stayed GREEN and the file still read correctly to a human.
+   ⇒ **Keep that line bracket-free, and check the waiting count before and after any STATE edit** —
+   `doccheck | grep WAITING:` must not fall. Same silent-boundary family as trap 11: the gate asserts
+   the render matches its source, never that the source still says what you think.
 
 ---
 
