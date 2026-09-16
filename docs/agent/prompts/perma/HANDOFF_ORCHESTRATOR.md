@@ -172,9 +172,19 @@ cannot be dismantled — ⭐ **links [C42](../../bugs/C42.md)'s stale-container 
 symptom for the first time**), and [C93](../../bugs/C93.md)'s second report, which exposed a
 **post-build** `CreateStockpiles` entry point at save load that the entry had never recorded.
 
-⭐ **The Wildfire cure investigation is LIVE and a peer is on it** — brief
-`prompts/WILDFIRE_CURE_RESEARCH.md`, owner override recorded (`fae8c9d`), desk tooling in flight.
-⛔ **Do not start a second one.** ⚠️ The owner's open question, unanswered: is the cause a **class**
+✅ **The Wildfire cure investigation LANDED 2026-09-16 — cause found and fix built: `F120`**
+(`80c9ebc` filed + reproduced, `d004494` the fix `Code/Fix_WildfireCureMigration.lua`). Legacy
+`Research:AddTech` stored `field='Mysteries'`; the tech-point converter preserves only
+BuriedWonders/Storybits/Breakthroughs, so a cure revealed before conversion stays hidden. The fix
+restores that one entrance on `PostLoadGame`, additively, in a Wildfire colony only.
+⛔ **Do not start a second investigation.**
+
+⚠️⚠️ **F120 DOES NOT COVER THE REPORTER'S CASE, by its own header:** *"This does not explain a fresh
+Steam colony's missing cure."* Reach is platform-conditional — retail Steam blocks pre-402200 saves,
+non-Steam retail offers Load anyway. ⇒ **The original Steam report may still be unexplained.**
+⭐ **OWNER SIGNAL 2026-09-15 night: multiple reporters are waiting to see something ship, and the
+owner wants a release-worthy outcome soon.** F120 is the candidate; whether it answers the person who
+reported it is the open question, and `bugs/F120.md` holds the reporter/evidence distinction. ⚠️ The owner's open question, unanswered: is the cause a **class**
 spanning [C69](../../bugs/C69.md) (the dead "In Progress" research state), [C79](../../bugs/C79.md)
 (`ChangeResearchCost` ignores its own `points` argument and always boosts 20%) and
 [C92](../../bugs/C92.md)? Established and load-bearing: the mystery chain rewiring is **complete**
