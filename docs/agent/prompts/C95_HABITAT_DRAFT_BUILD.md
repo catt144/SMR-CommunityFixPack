@@ -177,6 +177,36 @@ door left open without inventing anything to hold it open.
 ⇒ **The predicate's whole body is `IsKindOf(colonist.residence, "MicroGHabitatBase")`.** Keep the
 named function; drop the dome half.
 
+#### ⛔ And do NOT key the predicate on 1.1.0's residency FLAGS. They were tried and they are a trap.
+
+⭐ The idea is attractive and it was pursued on the owner's prompt 2026-09-16: 1.1.0 moved
+`allow_work_in_connected` / `allow_service_in_connected` up onto `Community` and added
+`can_be_safety_dome`, and the shipped comment names the very concept this fix needs —
+*"residence-only communities (habitats) can't, so they opt out"* (`Community.lua:18`). Exactly one
+class opts out of all three. It reads like the game's own vocabulary for "exempt".
+
+⛔ **The 1.0.7 control kills it.** `grep -rn "allow_work_in_connected" <1.0.7>/Lua` shows both
+connected-domes flags already existed **on `Dome`**, as **player-toggleable policies**
+(`Dome.lua:849`, `:883` call `TogglePolicy`; `accept_colonists` too, `Community.lua:147`). ⇒ **A
+predicate keyed on them exempts any dome whose player has switched connected work off** — a silent,
+colony-wide loss of expedition crew caused by an unrelated UI toggle. ⛔ That is a worse defect than
+the one being fixed.
+
+⚠️ `can_be_safety_dome` **is** new in 1.1.0 and is **not** toggleable, so it alone survives the
+control — but it means "can shelter homeless colonists", not "is exempt from the draft". Keying on it
+would be a coincidence of extension, not a statement of meaning, and the next patch that shelters
+differently would silently change who gets drafted.
+
+⇒ ⭐ **Use the class test. It is what vanilla's own employment carve-out uses** (`Workplace.lua:1453`),
+so the pack and the game answer "is this a habitat resident?" the same way. **The flags are the
+REASONING, not the predicate** — the habitat opts out of connected work, connected service and
+shelter duty, and the draft is the last hole in that isolation. ⭐ That is the fix-list sentence;
+it is not the `if`.
+
+⚠️ One genuine idiom worth borrowing though: **`residence.parent_dome or residence`** is 1.1.0's own
+way of saying "the colonist's home community, dome or habitat" (`Colonist.lua:5051`, `:5069`). Prefer
+it over anything invented.
+
 ⭐ **Three ways to realise "don't touch the scorer", cheapest first. Price them in this order and
 say why you landed where you did.**
 
