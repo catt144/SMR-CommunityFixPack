@@ -11828,3 +11828,29 @@ warn STATE.md is 12991 bytes, warn threshold is 12288 — copy this line VERBATI
     own 237 built-in save repairs; the other 13 are unchecked for interference.
     And nobody has ever actually walked an uninstall, let alone a reinstall.
 
+## Checklist archival answers 2026-09-16
+
+During the checklist archival, the owner was shown the items still held and the rules that
+exist only inside items about to be archived, and answered:
+
+> 1.1.0 is the baseline so 104 is moot
+
+Item 104 (a Test Kit-only force-load of 1.0.7 saves, inside items 98-101) is moot; those items
+take no open question into their marker.
+
+> Steam's per-branch Workshop delivery is off for this game, and "Revert to this version" pushes that version to every subscriber. My recommendation is to make this a fact entry. Agreed
+
+Filed as `docs/agent/facts/EF-105.md` from checklist item 118.
+
+> Purge this honestly, I feel like chain method handles this A future two-fix change should be a two-link chain.
+
+The two-link-chain sentence in the SHIP audit item is not homed anywhere; it leaves with that
+item's body, and `docs/agent/reports/CHAIN_METHOD.md` governs chain shape.
+
+> This can be archive its a pull fact why do we need to keep holding it, the only thing that ever acts on it is if we get another report
+> Items 133 and 162 hold the trigger to reopen if more false-blame reports arrive.
+
+Items 133 and 162 are cleared to archive; the reopen trigger is pulled from the archive when a
+report arrives. The owner also asked for context on "a wording decision comes to you with its
+evidence beside it" (item 22b, 2026-08-13); that one is not yet ruled. No owner action is owed
+by this record.

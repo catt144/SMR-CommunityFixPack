@@ -175,6 +175,11 @@ leaves? If a working resident also walks out, C100's mechanism is wrong and the 
 
 Body archived in [archive/PLAYTEST_ARCHIVE.md](archive/PLAYTEST_ARCHIVE.md) under the heading "## ck187 -- archived 2026-09-16 (was checklist status:ruled):" followed by this heading.
 
+### 2026-09-16 — Checklist archival: four answers on held items
+<!-- ck:- status:closed owner:no -->
+
+Owner ruling archived in [Checklist archival answers](archive/PLAYTEST_ARCHIVE.md#checklist-archival-answers-2026-09-16). Steam's branch-delivery finding is now `agent/facts/EF-105.md`.
+
 ### 2026-09-16 — A release empties the outbox into the archive
 <!-- ck:- status:closed owner:no -->
 
