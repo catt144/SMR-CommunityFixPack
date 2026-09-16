@@ -10,15 +10,19 @@ HEAD `15a9b8e` and game 1.1.0.403908 build `6a91a190`; find this file's own comm
 `git log -1 --format=%h -- docs/agent/prompts/C95_REPOINT_BUILD.md` and re-derive only the
 inputs in §5 that moved.
 
-⛔ **The existing module is NOT broken and is NOT to be rewritten.** It is desk-verified and
-attached to the wrong receiver. Your job is to move it, not to redesign it.
+⛔ **This is a BUILD brief, not an investigation.** The existing module is not broken and is
+not to be rewritten: it is desk-verified and attached to the wrong receiver. Your job is to
+extend it to the right one. Every design question it once left open — which receivers to
+cover, whether the lander is in — is **decided in §2 with its evidence**; do not reopen them.
+The one genuine unknown is the no-yield property on the new path (§3), and that is a check
+inside the build, not a research task.
 
 ## 0 · How to work this
 
 Open a live progress list before touching anything, one item per commit-and-verify unit,
-exactly one in progress. Minimum shape: orient and staleness · §2 decision · §3 build ·
-§4 desk suite extended · re-run the sitting with the owner · entry, report and checklist
-close-out.
+exactly one in progress. Minimum shape: orient and staleness · §3 build (including the
+no-yield re-check) · §4 desk suite extended · re-run the sitting with the owner · entry,
+report and checklist close-out. ⛔ §2 is settled input, not a work item.
 
 ## 1 · What was measured, and what it means
 
@@ -37,24 +41,40 @@ re-derive it. The three load-bearing facts:
    carries the same four-bucket structure and the same per-bucket
    `FilterColonistsByTrait` call at `:272`, with no residence exclusion.
 
-## 2 · The decision you must make and justify — ⛔ not assume
+## 2 · Receiver coverage — DECIDED; one bounded check if you disagree
 
-**Which receivers does the repair cover?** Three candidate answers; pick one, state the
-evidence, and record it in the entry:
+⭐ **Cover BOTH receivers: `CargoTransporterNew` (the live path) and the existing
+`CargoTransporter` hook (kept).** This is a decision, not a question to reopen — the
+research behind it was done on 2026-09-16 and is recorded here so you do not repeat it.
 
-- **New only.** Simplest. Correct if the legacy path is unreachable in 1.1.0.
-- ⭐ **Both** (leading candidate). The legacy body still ships and `RocketExpeditionBase`
-  still exists; a save, a DLC path or a modded rocket could still reach it. Costs one extra
-  hook of a design that is already written.
-- **A shared filter applied at both call sites.** Least duplication, widest blast radius.
+**Why the New path is the live one, MEASURED on 1.1.0.403908:**
 
-⛔ **Settle reachability by evidence, not by taste.** Ask specifically: can any rocket in a
-live 1.1.0 colony still be a `RocketExpeditionBase`, and does `LanderRocketBase`'s own
-gather (`Lua/Buildings/LanderRocket.lua:1149`, filter calls at `:1171` and `:1182`) need the
-same treatment or is it the deliberate player-choice path the owner wants left alone?
-⭐ **The owner's design intent is explicit and unchanged: the AUTOMATIC draft leaves habitat
-residents at home; deliberate player selection must keep working.** Any receiver you add
-must respect that line.
+- `GetRocketClass()` returns `sponsor.rocket_class or "UniversalRocket"`
+  (`Lua/Buildings/RocketUtilities.lua:430-434`), and the **only** shipped sponsor override
+  anywhere in the tree is `rocket_class = "UniversalDragonRocket"` — itself
+  `object_class = "UniversalRocketBase"`. Every route to a player rocket lands on the new
+  path.
+- `g_RocketTypes` is commented **"type to label"** (`Lua/UniversalRocket.lua:2-14`): the
+  entry `["Expedition"] = "RocketExpedition"` names a **city label**, not a class. A
+  Universal rocket in expedition mode never becomes a `RocketExpeditionBase`.
+
+**Why the legacy hook is KEPT anyway:** the `RocketExpedition` template still ships
+(`Lua/BuildingTemplate/RocketExpedition.generated.lua`, `object_class =
+"RocketExpeditionBase"`), so an old save may still hold legacy rocket instances. Retiring
+the hook would require **proving a negative about save migration** — more expensive than
+keeping a hook whose design is already written and desk-covered. ⛔ Do not spend the session
+proving legacy rockets extinct.
+
+⚠️ **The one bounded check, if you want it:** rockets can `ChangeClass`
+(`convert_supply_pod`, `rocket:ChangeClass(rocket_class or "UniversalSupplyPod")`) — if that
+conversion demonstrably rewrites every legacy rocket on load, say so and the legacy hook
+becomes optional. That is a nice-to-know, **not a blocker**.
+
+⛔ **`LanderRocketBase` is OUT.** Its own gather (`Lua/Buildings/LanderRocket.lua:1149`,
+filters at `:1171` and `:1182`) is the **deliberate player-choice** path, and the owner's
+design intent is explicit and unchanged: **the AUTOMATIC draft leaves habitat residents at
+home; deliberate player selection must keep working.** Filtering the lander would take away
+player agency and fail checklist 189's own player-choice leg.
 
 ## 3 · The build
 
@@ -98,6 +118,9 @@ and run the whole suite, not only the new legs.
 | Universal rocket parents exclude both legacy classes | `sed -n '28,42p' Lua/UniversalRocket.lua` | read the parent list |
 | the Universal rocket runs expeditions by type | `grep -n "Expedition" Lua/UniversalRocket.lua` (`:6`, `:1688`, `:1729`) | read those lines |
 | the New gather repeats the defect | `sed -n '235,280p' Lua/CargoTransporterNew.lua` (`:272`) | read the body |
+| every player rocket resolves to UniversalRocket | `sed -n '430,434p' Lua/Buildings/RocketUtilities.lua`; `grep -rhn "rocket_class" <Src>` | find a shipped sponsor naming a non-Universal rocket |
+| `g_RocketTypes` maps type to LABEL, not class | `sed -n '2,14p' Lua/UniversalRocket.lua` | read the comment and the table |
+| the legacy expedition template still ships | `grep -m1 object_class Lua/BuildingTemplate/RocketExpedition.generated.lua` | read it |
 | the module is deployed and matches the repo | `diff` of the appdata mod copy against `Code/` | re-run the diff |
 
 ⛔ Volatile values — log paths, error counts, doccheck numbers — are read with a command
