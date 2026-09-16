@@ -210,8 +210,39 @@ is proposed here.
 
 ## Execution record
 
-Audit complete; STATE is unchanged at this report's initial commit.
-Authorized correction and final verification: pending.
+Audit commit: `ed37e11`. Authorized correction commit: `27ad676`.
+The correction changes only STATE: the GTX 1070 field sentence, both pilot
+removal clauses, and the duplicated navigation lines. The open ck133 subitems
+survive. No other status or owner condition was changed.
+
+Concurrent work outside this lane landed in `ea5166d` and `ccb7462`.
+Attribution uses `git show --stat ed37e11` and `git show --stat 27ad676`,
+not the aggregate baseline-to-HEAD diff or the shared author identity.
+
+At correction HEAD `27ad67607e48751b486fc9e849d32261ee13a46e`,
+the normalized file measured **12,774 → 12,479 bytes**, a delta of **−295**.
+This is an attribution measurement, not the success criterion. Command:
+`python -` with `subprocess.check_output(['git','show', ref + ':docs/agent/STATE.md']).replace(b'\r\n', b'\n')`
+for each of `ref = 'f72dc20'` and `ref = '27ad676'`, then `len()` and subtraction.
+The patch's normalized SHA-256 is
+`8a3425d5e91760d53267c4a9103c748a856c1891c0d01cef5358bc42893f3187`.
+
+Verification at the correction commit: doccheck GREEN; WAITING byte-identical
+to baseline; the 16 decision-row members and five parsed STATE owner IDs
+listed above are unchanged; the Build state section is byte-identical.
+The report's Python blocks passed and its disposition ranges cover baseline
+lines 1–95 exactly once. The fixed-string `rg -n -F` absence check used
+`SELFCHECK_PILOT`, `Defect truth`, and the former Authoring line as its patterns
+and `docs/agent/STATE.md` as its only input. It returned no matches after the
+patch (baseline pilot occurrences: 86 and 123).
+The companion presence grep for `GTX 1070 confirmed working` and
+`(2) and (4) still open.` returned those exact passages at new lines 72 and 121.
+
+The stale FR-1 narrative also remains in checklist item 145. That body's
+correction is outside this brief's scope; its next authorized editor should
+apply the same owner ruling. This report preserves the routing issue without
+changing the checklist or manufacturing a new decision. The other flagged
+closure candidates remain in the disposition table for the owner review.
 
 Departures: measure encoded bytes rather than the brief's character totals;
 do not call the marker-only switch immediately safe; preserve ruling-backed
