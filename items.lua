@@ -244,6 +244,10 @@ return {
 		'CodeFileName', "Code/Fix_OpenPastureStockpiles.lua",
 	}),
 	PlaceObj('ModItemCode', {
+		'name', "Fix_RoverSubclassManifest",
+		'CodeFileName', "Code/Fix_RoverSubclassManifest.lua",
+	}),
+	PlaceObj('ModItemCode', {
 		'name', "90_SaveSanitizer",
 		'CodeFileName', "Code/90_SaveSanitizer.lua",
 	}),

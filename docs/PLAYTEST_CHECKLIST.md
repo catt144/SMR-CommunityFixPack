@@ -305,8 +305,20 @@ for the duration of the picker call**, which is what keeps the lander and the sp
 it. ⛔ **Build and test only** — the shipping *shape* was already ruled (main pack, with the mark),
 but the release itself goes through the normal release path, not that brief.
 
-⛔ **(b) C96 IS STILL OPEN and this item stays open for it.** Nothing about C96 is authorised by the
-C95 lift.
+⚖️⭐ **RULED IN PART AGAIN 2026-09-16 — (b) C96's REPAIR IS NOW AUTHORED, on your word:
+*"Go ahead and author the fix"*.** ⛔ That **lifted your own 09-15 playtest-first hold** quoted
+below; the lift is yours, not an agent deciding the gate had lapsed. **BUILT the same day:**
+`Code/Fix_RoverSubclassManifest.lua`, 22 desk legs falsified with three mutants,
+[build report](agent/reports/C96_ROVER_SUBCLASS_BUILD.md).
+⛔ **NOT reproduced in play and NOT tested in a game** — the ESA fixture is still unprovisioned,
+so **this item stays OPEN for the two calls that are still yours**: whether to provision that
+fixture and test it, and whether it ships. ⭐ Worth knowing before you decide: the build found
+that C96's own scoping would have produced a **dead module** — it named the legacy transporter
+only, and 1.1.0 expeditions use the other one, which is exactly how C95 failed its sitting. The
+repair covers both, and it also repairs a cargo-accounting half the entry had not spotted.
+
+⛔ **(b)'s ORIGINAL TEXT, kept because the ruling above amends it rather than replacing the
+record:** C96 was still open and nothing about it was authorised by the C95 lift.
 
 ⚖️ **You ruled both of these on 2026-09-15 and both rulings are recorded here because an
 agent-doc-only record is not considered asked (rule 5 / R10).** Each entry carries the evidence,

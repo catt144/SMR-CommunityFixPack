@@ -386,6 +386,7 @@ return PlaceObj('ModDef', {
 		"Code/Fix_BuildingCodesPrefab.lua",
 		"Code/Fix_HabitatExpeditionDraft.lua",
 		"Code/Fix_OpenPastureStockpiles.lua",
+		"Code/Fix_RoverSubclassManifest.lua",
 		"Code/90_SaveSanitizer.lua",
 	},
 	-- ⭐⭐ WRITTEN BY THE UPLOADS, 2026-08-20 — THESE ARE HOW EVERY FUTURE UPDATE
