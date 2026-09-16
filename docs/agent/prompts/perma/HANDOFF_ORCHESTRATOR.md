@@ -62,34 +62,12 @@ so researching the whole Main tree cannot reveal a mystery tech. This enumerates
 ⭐ A lone `Breakthroughs Breakthroughs locked` row is the **inert group placeholder**
 (`CanBeResearched = false`, `Data/Tech.lua:516-525`), not a reveal. Anything else is.
 
-### LIVE 2026-09-16 — one ESA/Wildfire colony carries BOTH open legs
+### Orient
 
-The owner is provisioning a new colony (Mission Setup: sponsor **Europe**, mystery **Wildfire**,
-290% challenge, rivals x3) and **both outstanding investigations run on it**.
-⭐ **Fixture state VERIFIED 2026-09-16 before handoff:** the Main tree is researched out, tech
-points are **0**, and the check above printed only the inert placeholder — so the SPECIAL section
-is pristine and the mystery baseline is clean. ⛔ Take the mystery leg's first screenshots **at 0
-points**: a broke player is a realistic player, and the balance cannot change what the tree draws
-(`CanResearchSim` drives only click behaviour and rollover text, `XDef/XTechNode.generated.lua:297,343,358`).
-⚠️ The tree does **not** auto-centre on open — that code returns early
-(`XDef/XTechTree.generated.lua:862-873`) — so a saved scroll position is part of what the
-"visible without panning" reading measures.
-
-- **The Seeker — [C96](../../bugs/C96.md).** Repair BUILT and desk-verified 2026-09-16, ⛔ **never
-  run in a game**. Fixture requirements, the guaranteed route to a Commander-requiring anomaly, and
-  the acceptance legs are in [its build report](../../reports/C96_ROVER_SUBCLASS_BUILD.md) —
-  ⛔ do not restate or re-derive them here. ⚖️ **ck185 (b) stays the owner's**: whether it ships.
-- **The mystery — the Wildfire cure reveal.** Its plan is [checklist 188](../../../PLAYTEST_CHECKLIST.md);
-  a peer authored it and the owner has authorised running it.
-
-⭐ **They do not conflict, and that was checked rather than assumed** — the evidence is in the C96
-report's fixture section, including why a mystery cannot preset an anomaly's rover requirement and
-why rivals cannot take the anomaly this test needs. ⛔ **Do not re-raise a conflict between them
-without naming a story bit that actually presets one.**
-
-⚠️ **The owner cheats buildings, funding and supplies freely on this fixture and that is fine** —
-neither reading depends on how the colony got there. The two things that must stay true: **own no
-RC Commander** (a Commander makes the C96 leg vacuous) and **no research-all**.
+⭐ The 2026-09-16 ESA/Wildfire fixture has served both of its legs: C96 is `tested-attended` and
+shipped in v11; checklist 188's Wildfire rider ran both legs. Their fixture recipes live in the
+[C96 build report](../../reports/C96_ROVER_SUBCLASS_BUILD.md) ("Recreate the attended anomaly") and
+the [Wildfire report](../../reports/WILDFIRE_CURE_RESEARCH.md).
 
 ⛔ **`perma/DISPATCH.md` NO LONGER EXISTS** — the prompts overhaul deleted it 2026-09-15/16. Orient
 from the **`smr-orientation` skill** plus `docs/agent/STATE.md` (now a short pull-only status file,
@@ -190,11 +168,14 @@ or a control recipe from C97 until that report is applied** — four of the ten 
 code fence attributed to the wrong function **with an inverted truth condition**. The entry now warns
 about itself at the top. ⭐ Applying it is a bounded desk job; the report is the work list.
 
-⭐ **Three defects filed 2026-09-15/16 from field reports, all NOT reproduced:**
-[C98](../../bugs/C98.md) (drone drop — §0a's probe settles it), [C99](../../bugs/C99.md) (hub passage
-cannot be dismantled — ⭐ **links [C42](../../bugs/C42.md)'s stale-container mechanism to a field
-symptom for the first time**), and [C93](../../bugs/C93.md)'s second report, which exposed a
-**post-build** `CreateStockpiles` entry point at save load that the entry had never recorded.
+⭐ **Field-report defects still open, NOT reproduced:** [C98](../../bugs/C98.md) (drone drop — §0a's
+probe settles it) and [C99](../../bugs/C99.md) (hub passage cannot be dismantled — ⭐ **links
+[C42](../../bugs/C42.md)'s stale-container mechanism to a field symptom for the first time**). C99 is
+Jäger's comment #8, untouched since it was filed 2026-09-15: the blocking wait in
+`PassageBase:OnDemolish` is source-verified, the sticking clause of `WouldStrandHubColonists` is not
+isolated, and the route is ours (source plus a TestKit container read), never the reporter's save.
+[C93](../../bugs/C93.md) is repaired, shipped in v11 and `tested-attended`; its second report's
+post-build `CreateStockpiles` entry point stays recorded in the entry.
 
 ✅ **The Wildfire cure investigation LANDED, was AUDITED, and was PULLED FROM THE SHIP SET 2026-09-16
 (owner ruling, checklist 187): `F120`.** The audit widened the fix to all 17 legacy mystery technologies
@@ -205,12 +186,14 @@ nowhere. ⛔ **Do not start a second investigation and do not re-register it wit
 ⛔ The record is [`bugs/F120.md`](../../bugs/F120.md) and the audit section of
 `reports/WILDFIRE_CURE_RESEARCH.md` — nothing about them is restated here.
 
-⚠️⚠️ **Jäger's Steam report is unexplained and OPEN.** Settled: public Steam builds went 1.0.7 → 1.1.0 with
-nothing between, Steam refuses a 1.0.7 save before the converter runs, all eleven cure nodes are named
-"Wildfire Cure", and the desk has no cause left to test. What remains is a live 1.1.0 Wildfire colony run
-through the reveal — a playtest, not a desk job, and not booked. The class question is answered: **yes**
-for the converter's Mysteries omission, **no** for [C69](../../bugs/C69.md), [C79](../../bugs/C79.md) and
-[C92](../../bugs/C92.md) — different consumers, nothing new found there.
+⚠️ **The Wildfire "no cure to research" report — the fresh 1.1.0 path is HEALTHY.** Checklist 188 ran
+both legs 2026-09-16: reveal, visibility, chain and full resolution all observed, and the one
+unbounded player gate is scanning the mystery's surface anomaly — the best-supported explanation for
+the report. Record: [Wildfire report](../../reports/WILDFIRE_CURE_RESEARCH.md), Leg A and Leg B.
+⚖️ **The attribution is disputed and the question is the owner's (checklist 188):** the records name
+Jäger, but his comment #8 is C99. Replies are pull-only. The class question stays answered: **yes**
+for the converter's Mysteries omission, **no** for [C69](../../bugs/C69.md), [C79](../../bugs/C79.md)
+and [C92](../../bugs/C92.md).
 
 ✅ **The 1.0.7-era candidate block is ARCHIVED 2026-09-16** (`481bbd7`, owner ruling): 38 rows to
 `docs/archive/bugs/`, candidates 59 → 34, the unprioritised bucket now empty. ⭐ **doccheck's

@@ -68,8 +68,23 @@ Owner ruling archived in [C93 diagnosis scope](archive/PLAYTEST_ARCHIVE.md#c93-d
 The ranch result is in [C93's diagnosis report](agent/reports/C93_RANCH_ORIGIN_DIAGNOSIS.md);
 no further in-game diagnostic window is owed for this fired brief.
 
-### 2026-09-16 — 188: PLAYTEST RIDER, ready to run — does a FRESH 1.1.0 Wildfire colony show a researchable cure?
+### 2026-09-16 — 188: Wildfire rider RAN — the fresh 1.1.0 path is healthy; one attribution question for you
 <!-- ck:188 status:open owner:yes -->
+
+✅ **RAN 2026-09-16, both legs, with you at the keyboard — no defect in the fresh 1.1.0 path.**
+**Leg A:** the scenario's own reveal enabled `WildfireCure_1` from a 0-point baseline, the node was on
+screen when you opened the tree, and the eleven-node chain opened link by link. The `14,580` on its
+tooltip is a 20% research refund, not a price. **Leg B:** the organic chain ran to
+`MysteryEnd "resolved"` — infection on Sol 33, cure revealed on Sol 53 against a predicted Sol 48-53
+window. The only unbounded player gate is scanning the mystery's surface anomaly. Full record:
+[Wildfire report](agent/reports/WILDFIRE_CURE_RESEARCH.md), Leg A and Leg B. A reply to the reporter
+is pull-only — yours to request.
+
+⚖️ **ONE QUESTION — whose report was this?** This item and F120 name Jäger (the brief at `03023c4`:
+*"Same reporter as C99, different bug"*). On 2026-09-16 you showed Jäger's comment #8, which is C99's
+tunnel bug, and said *"jager was completely different"*. Either Jäger also posted a Wildfire comment,
+or another player did and the name is wrong in F120, the Wildfire report, this item and the handoff.
+Say which and the attribution is corrected or confirmed; this item then closes.
 
 ⚖️ **This is the only route left to Jäger's report.** F120 is pulled (187) and could never have
 explained it; the desk is exhausted. What is left is a live look, and it is cheap. **Take it at the
