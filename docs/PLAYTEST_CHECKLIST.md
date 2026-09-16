@@ -28,6 +28,13 @@ Item 177 records the still-open question of mechanically enforcing checklist mar
 
 ## Decisions waiting on you
 
+### ✅ 2026-09-16 — 190 RULED: C93 diagnosis excludes the mall-mod targets
+<!-- ck:190 status:ruled owner:no -->
+
+Owner ruling archived in [C93 diagnosis scope](archive/PLAYTEST_ARCHIVE.md#c93-diagnosis-scope-2026-09-16).
+The ranch result is in [C93's diagnosis report](agent/reports/C93_RANCH_ORIGIN_DIAGNOSIS.md);
+no further in-game diagnostic window is owed for this fired brief.
+
 ### 2026-09-16 — 188: PLAYTEST RIDER, ready to run — does a FRESH 1.1.0 Wildfire colony show a researchable cure?
 <!-- ck:188 status:open owner:yes -->
 

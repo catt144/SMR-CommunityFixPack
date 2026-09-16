@@ -8080,3 +8080,22 @@ of the `prompt-authoring` skill, in one wording:
 The reach question — which platforms can reach the state, and whether the cause
 produces the reporter's case — is the quiet side of the same rule and rides
 inside it. No further owner action is owed.
+
+## C93 diagnosis scope 2026-09-16
+
+Condition: the first C93 probe found that the save's repeated entity-less drone
+approach targets were MegaMalls, while the owner knew the colony carried a mod
+related to malls. Those targets were not the Outside Ranch or its piles.
+
+The owner instructed:
+
+> Stopped you, ignore the megamall, I think they had a mod related to malls and
+> thats the broken part there, the ranch only unloads resources after a build
+> phase, does the probe need to run during that phase?
+
+The investigation excluded the MegaMall noise, filed no mall defect, and replaced
+the probe with a ranch-only pile-placement and pickup reading spanning a production
+cycle. That reading identified three Origin piles whose pickup approaches fail and
+six real-spot piles whose pickup approaches succeed. The ruling is scoped to this
+diagnostic separation; it does not classify vanilla MegaMall behavior. No further
+owner action is owed for the scope decision.
