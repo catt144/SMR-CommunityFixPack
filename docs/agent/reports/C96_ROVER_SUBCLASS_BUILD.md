@@ -102,6 +102,32 @@ serialization is measured. Label membership and idleness are stated by the fixtu
 expedition rocket must be the one the player actually uses. Name the concrete rocket class in
 the save before reading a result, and arm a trace on the gather that actually runs.
 
+### The fixture is cheaper than a random anomaly hunt — MEASURED 2026-09-16
+
+⭐ **A Commander-requiring anomaly is guaranteed by construction, not rolled for.** There are
+**two** sources of an anomaly's requirements and only one is random:
+
+- **Random:** `PlanetaryAnomaly:InitRequirements` (`Lua/Buildings/PlanetaryAnomaly.lua:229-252`)
+  — a rover requirement at all is a 25% roll, then `table.rand` over
+  `GetAvailableResupplyRovers()`. Per-anomaly odds of drawing `RCRover` specifically are low.
+- ⭐ **Deterministic:** the `CreatePlanetaryAnomaly` story-bit effect sets `required_rover`
+  outright (`Lua/ClassDefs/ClassDef-Effects.generated.lua:483-500`). Shipped users:
+  **`BrineDeposit.lua:74` and `ColdResistantBacteria.lua:62` both specify `"RCRover"`**
+  (`RedMars_2:44` and `TreasureHunt_2:10` use `RCTransport`; `WindsOfChange_0:11` uses
+  `ExplorerRover`). Neither RCRover bit contains any `Mystery` reference — they are gated on
+  terraforming parameters and resources, i.e. ordinary play.
+
+⇒ **Play toward `BrineDeposit` or `ColdResistantBacteria`** rather than scanning for luck.
+⚠️ **This corrects a claim made in session:** a per-anomaly odds figure was quoted as though it
+governed a whole playthrough, which it does not — the owner's report that every playthrough
+produces a Commander expedition is correct, and the story-bit path is why.
+
+⭐ **A mystery does NOT interfere with this leg.** `if self.requirements then return end
+-- preinitialized by story bit` (`:230`) is real, but **MEASURED**: `Mystery 8` (`TheMarsBug`)
+contains **0** `CreatePlanetaryAnomaly` and **0** `required_rover`. Starting it cannot preset a
+rover requirement, so a co-run investigation that starts that mystery does not confound this
+test. ⛔ Do not re-raise a conflict here without naming a story bit that actually presets one.
+
 Legs: an anomaly expedition requiring an RC Commander, a colony holding **only** a Seeker →
 the Seeker loads and the rocket launches · the cargo panel shows the Commander line satisfied
 (this is the half the desk found) · a colony holding both keeps taking the Commander · an
