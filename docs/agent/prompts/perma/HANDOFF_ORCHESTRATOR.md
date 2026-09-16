@@ -38,10 +38,11 @@ and Codex sessions both commit here, several at once, and **Codex is invisible t
 ⛔ **FR-1 is NOT on this handoff.** Every Linux / NVIDIA 580 / workaround-mod item is in
 `prompts/perma/LINUX_DISPATCH.md`. The temp workaround mod is LIVE (Steam 3799500849 / Paradox 158711).
 
-## 0 · START HERE — this handoff carries a first task that EXECUTES
+## 0 · START HERE — this handoff carries TWO tasks that EXECUTE
 
-⭐⭐ **OWNER INSTRUCTION 2026-09-16: the task in §0a starts automatically when this handoff is fired.**
-It is the one exception to the orient-and-ask default below, and the owner set it deliberately.
+⭐⭐ **OWNER INSTRUCTION 2026-09-16: §0a then §0b start automatically when this handoff is fired, in
+that order and without stopping to ask between them.** They are the deliberate exception to the
+orient-and-ask default below, which resumes once both are done.
 
 ⛔ **`perma/DISPATCH.md` NO LONGER EXISTS** — the prompts overhaul deleted it 2026-09-15/16. Orient
 from the **`smr-orientation` skill** plus `docs/agent/STATE.md` (now a short pull-only status file,
@@ -49,8 +50,8 @@ not a mandatory read) and `docs/WAITING_ON_YOU.md`. Bindings live in `CLAUDE.md`
 `Must_Read_Header` blocks. Add `ListAgents` (peers edit this tree concurrently) and open a **live
 todo list**.
 
-**After §0a, the default returns: unless the owner's message names a task, a pasted handoff means
-ORIENT — summarise and ASK what to take.** Do not execute anything else.
+**After §0a and §0b, the default returns: unless the owner's message names a task, a pasted handoff
+means ORIENT — summarise and ASK what to take.** Do not execute anything else.
 
 ### 0a · FIRST TASK, auto-start — the C98 drop probe
 
@@ -66,6 +67,40 @@ only, log-only, 0 shipped hashes, **no booked sitting**.
 
 ⭐ **Take it with the other two TestKit items rather than as its own errand** — the quick-build row
 and the deferred crew-trace slot, both in §2b. One link, three rows.
+
+### 0b · SECOND TASK, auto-start — author the C95 fix prompt, straight after §0a
+
+⭐⭐ **OWNER INSTRUCTION 2026-09-16: go straight into this when §0a is done. Do not stop to ask.**
+
+**Author a fix prompt for [C95](../../bugs/C95.md)** — the Naturalist/MicroG habitat residents who are
+drafted for expeditions and never returned home. Use the **`prompt-authoring` skill**; the brief is
+the deliverable.
+
+⛔ **AUTHOR THE PROMPT, DO NOT AUTHOR THE FIX.** C95 carries the owner's standing *"do not author
+it"*, and **[ck185](../../../PLAYTEST_CHECKLIST.md) is still open** — it asks the owner to say when
+to build each of C95/C96. Writing the brief prepares that work; it does not start it, and the brief
+itself must carry the hold. ⛔ Nothing ships without the owner lifting it in words.
+
+**What is already settled and must be inherited, not re-derived** (read C95 for the bodies — do not
+restate them in the brief):
+
+- ⭐ **REPRODUCED IN PLAY**, owner at the keyboard, 2026-09-15 — this is one of the very few entries
+  that is not source-only. Two habitat residents taken, neither returned, both re-homed into a dome;
+  one later walked back unaided, proving the habitat was reachable the whole time.
+- ⚖️ **The repair shape is the OWNER'S CHOICE and is not open for redesign:** *exclude habitat
+  residents from the EXPEDITION draft* — ⛔ **NOT** a widening of the return path.
+- ⚖️ Classed an **oversight bug solved by a judgment call** → **main pack, with the mark**,
+  ⛔ **not opt-in**.
+- ⛔ **SCOPE: expeditions only.** The asteroid lander gathers from a player-chosen passenger list and
+  is not an auto-draft.
+- ⚠️ **Still unisolated, and the brief must say so:** which gate excluded the habitat — the rail
+  sweep or `CanVisit` capacity. A fix written without settling that risks repairing the wrong gate.
+- Engine properties behind it: [`EF-103`](../../facts/EF-103.md) (a habitat is a Community, never a
+  `Dome`) and [`EF-104`](../../facts/EF-104.md) (expedition crew is drafted colony-wide and boards by
+  teleport; ⛔ carries one unexplained draft observation).
+
+⚠️ **`EF-104`'s crew-trace slot (§2b) is the instrument that would settle the gate question** — the
+brief should say whether it needs that first, rather than assuming either way.
 
 ---
 
