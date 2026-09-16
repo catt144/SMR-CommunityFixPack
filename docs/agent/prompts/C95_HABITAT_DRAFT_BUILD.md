@@ -118,12 +118,42 @@ installs on or captures from** — the F107 rule, `FIX_POLICY` §1. And prefer t
 technique that works (`FIX_POLICY` §1): filtering a pool the original returns is smaller than
 replacing the body.
 
-⚠️ **One shape question the builder owns, and it is not trivial.** Filtering *after* the original
-returns is safe but wasteful in the failure case: the original may already have returned a short
-list and set `colonist_summon_fail` off a population that included habitat residents. Filtering
-the *pool* the original reads means reaching inside a body you do not own. ⭐ **Say which you
-chose and what it costs**, and check what the choice does to the "Not enough Colonists" status
-the player is shown.
+### ⛔⛔ Filtering the RETURNED LIST hangs the rocket forever. Do not do it.
+
+⚠️ **CORRECTED 2026-09-16 on the owner's question — an earlier draft of this brief called
+post-filtering "safe but wasteful". It is neither, and the sort order is why.**
+
+Habitat residents are unemployed **and** idle, so they land in **bucket 1**, the draft's *first*
+pick (`CargoTransporter.lua:259-282`; the walk order is unemployed+idle → unemployed+busy →
+**employed+idle** → employed+busy, and `idle` means literally `command == "Idle" or "Abandoned"`,
+so a resting colonist counts as busy). Then:
+
+- `GatherAvailableCargo` returns **`false`** when `#new_crew < count` (`CargoTransporter.lua:196-199`);
+- `Load` loops `while not succeed do Sleep(1000)` **forever** (`:124-130`);
+- expeditions call `CargoTransporter.Load(self, manifest)` with **no** `quick_load` and no
+  `transfer_available` (`RocketExpedition.lua:536`), so that retry loop **is live**.
+
+⇒ Strip habitat residents *after* the gather returns and the crew is short on **every retry**,
+because the unmodified original re-picks the same bucket-1 residents each time. **The rocket waits
+forever on "Not enough Colonists" while the colony is full of eligible colonists.** ⛔ That is the
+exact stall C95 judged negligible — post-filtering does not risk it, it **manufactures** it, every
+time, and a player would read it as this pack hanging their expedition.
+
+⚠️ **This is NOT a re-raise of the ruled stall risk** (§2 item 6). The owner's ruling was about
+removing five candidates from a large pool and it stands untouched. This is one implementation
+shape being unusable.
+
+**So the filter must act on the POOL, before the buckets are walked.** ⭐ One seam worth pricing
+first: `FilterColonistsByTrait` is a **global** (`Lua/CargoTransporterNew.lua:197`) that the gather
+calls **once per bucket** (`CargoTransporter.lua:278`), so filtering there lets the gather fall
+through to the next bucket and fill the crew properly. ⛔ **But count its callers before reaching
+for it — there are five, across three different gathers**, including the lander
+(`LanderRocket.lua:1171`, `:1182`) and the space elevator (`CargoTransporterNew.lua:272`), so a
+bare global wrap reaches into **both** of the scopes §4 forbids. Scoping it to the expedition
+caller is the problem to solve, and a body copy may turn out to be the honest answer instead.
+
+⭐ **Say which shape you chose and what it costs**, and check what the choice does to the "Not
+enough Colonists" status and to `colonist_summon_fail` (`RocketExpedition.lua:498`).
 
 ---
 
@@ -179,6 +209,11 @@ on `EF-104` rather than losing it here.
 - ⭐ **The negative leg, and it is the one that catches a too-wide hook:** a **player-chosen
   asteroid-lander passenger list containing a habitat resident still carries them.** A fix that
   fails this has reached past its scope.
+- ⭐⭐ **The fill leg, and it is the one that catches the post-filter shape (§3).** An expedition
+  asking for N crew, in a colony holding N eligible non-habitat colonists, **departs with N** —
+  the draft falls through to the next bucket and fills. ⛔ A rocket that sits on "Not enough
+  Colonists" here is the §3 hang, not a scarcity result: check the colony before blaming the
+  fixture.
 - **Trade / supply / colony-transfer drafts are untouched** — the space elevator's
   `CargoTransporterNew` path is a different class; show it is unaffected rather than assuming.
 - **Fail-safe leg:** with the predicate made unevaluable (a colonist with no `residence`, a
@@ -242,6 +277,10 @@ row **in the same commit**. ⛔ No tombstone row, no struck-through line.
 | `RocketBase` parents `CargoTransporter`, so every rocket inherits the base gather | `grep` of `__parents` across `Lua`/`DLC` | same | `grep -rn '"CargoTransporter"' <Src>/Lua <Src>/DLC \| grep parents` — a new parent list changes the scope argument |
 | `CargoTransporter:Load` has exactly two call sites, so the base gather is expedition-only in practice | `grep -rn "CargoTransporter\.Load\|self:Load(" <Src>/Lua <Src>/DLC` | same | the same grep returning a third site. ⛔ **INFERRED — re-run it and count inheritors before hooking** |
 | `RocketExpeditionBase` calls the base gather by explicit table read, not inheritance | `RocketExpedition.lua:496-497` | same | reading those two lines; a change to `self:` dispatch breaks the easy hook |
+| The draft walks unemployed+idle → unemployed+busy → **employed+idle** → employed+busy, so habitat residents are the FIRST pick | `CargoTransporter.lua:259-282` read in full | same | read those lines; a reordered `ipairs({…})` list changes which bucket backfills |
+| A short crew makes `Load` retry forever, and expeditions take that path | `CargoTransporter.lua:196-199` + `:124-130`, and `RocketExpedition.lua:536` passing no `quick_load`/`transfer_available` | same | ⭐ this is what makes post-filtering a hang; if `Load` gains a retry cap or the call gains a flag, re-price §3 |
+| `FilterColonistsByTrait` is a global with five call sites across three gathers | `grep -rn "FilterColonistsByTrait" <Src>/Lua <Src>/CommonLua <Src>/DLC` | same | re-run that grep; a different count changes whether the per-bucket seam can be scoped |
+| The space elevator carries a SECOND copy of the same four-bucket sort, plus a liveness guard the expedition copy lacks | `CargoTransporterNew.lua:235-287` vs `CargoTransporter.lua:237-292` | same | diff the two bodies; ⛔ it is a different class and §4 forbids reaching it |
 | `SMRTest.Log.CrewDraft` exists and is the reach control | TestKit `acafc74`, built 2026-09-16 | TestKit HEAD at authoring | `git -C C:/Dev/SMR-BugFixPack-TestKit log --oneline -- Code/90_Loggers.lua`; ⛔ it was **never run in play** — treat its output as unwitnessed until a sitting sees it |
 | Module and fix counts are not inputs to this job | no acceptance clause depends on a stored total | — | if the build adds a module, emit the number with `python tools/doccheck.py --emit-counts` rather than writing one here |
 
