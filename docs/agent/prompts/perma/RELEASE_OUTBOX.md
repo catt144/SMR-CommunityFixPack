@@ -21,7 +21,21 @@ player surface bumps it by one on release.
 
 ## Pending — goes out with the next upload
 
-(empty — F120's row, added 2026-09-16 by the audit, WITHDRAWN the same day on the owner's ruling: pulled from the ship set because no platform the pack serves can reach the state it repairs; module held in `tools/held/`, checklist 187. v10's batch below cleared by `RELEASE.md` §5, 2026-09-13, upload confirmed both portals)
+### Pending — C95 habitat expedition draft (2026-09-16)
+
+- **C95 · `Fix_HabitatExpeditionDraft`**, main-pack **judgment call**, authorized
+  by ck185. Built and desk-verified; game acceptance remains open at ck189.
+- Automatic expedition drafts leave Naturalist and Micro-G habitat residents
+  at home; deliberate player transfers and lander passenger choices remain.
+  Forward-only: residents already away are not rescued.
+- Fix-list row, judgment-call reasoning and FAQ are drafted in
+  [the build report](../../reports/C95_HABITAT_DRAFT_BUILD.md#public-copy-draft--for-the-release-pass).
+  Release pass derives the public count from its actual row set. No version bump,
+  store edit, upload or publication was performed by this build.
+
+F120's row, added 2026-09-16 by the audit, was **WITHDRAWN** the same day on the
+owner's ruling: no platform the pack serves can reach its repaired state; module
+held in `tools/held/`, checklist 187. That withdrawal remains in force.
 
 ## Released — history, newest first (cleared here by `release_prompt.md`)
 

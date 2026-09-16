@@ -236,6 +236,10 @@ return {
 		'CodeFileName', "Code/Fix_BuildingCodesPrefab.lua",
 	}),
 	PlaceObj('ModItemCode', {
+		'name', "Fix_HabitatExpeditionDraft",
+		'CodeFileName', "Code/Fix_HabitatExpeditionDraft.lua",
+	}),
+	PlaceObj('ModItemCode', {
 		'name', "90_SaveSanitizer",
 		'CodeFileName', "Code/90_SaveSanitizer.lua",
 	}),

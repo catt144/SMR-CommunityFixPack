@@ -52,30 +52,13 @@ take.** Do not execute anything else.
 ⛔ **The two auto-firing tasks this section carried on 2026-09-16 are DONE. Do not re-run them, and
 do not restore the auto-start instruction from an older copy of this file.**
 
-### ⛔⛔ LIVE RIGHT NOW — the C95 build is FIRED and RUNNING (2026-09-16)
-
-The owner fired [`prompts/C95_HABITAT_DRAFT_BUILD.md`](../C95_HABITAT_DRAFT_BUILD.md) and has the
-test save open. ⛔ **Stay out of its lane:** do not touch `Code/`, C95, `items.lua`, or that brief;
-do not start a second C95 anything. ⭐ **Consume its result, not its working state** — when it
-reports, it `git rm`s itself **and its `prompts/README.md` row** in the same commit, and that
-removal is how you know it finished.
-
-⚖️ The owner lifted [ck185](../../../PLAYTEST_CHECKLIST.md)'s **C95 half** the same day (*"I want to
-fire it and then we can test it"*). ⛔ **C96's half stays OPEN** — nothing about C96 is authorised.
-⛔ The release itself is still the release prompt's job, not that brief's.
-
-⛔ **The brief is the record.** The design the owner worked out with it, the two shapes that do NOT
-work and why, and the acceptance legs are all in it — none of it is restated here. ⚠️ It also
-**corrects the instruction that commissioned it**: this section used to demand the
-rail-sweep-vs-`CanVisit` gate be settled first, and C95 had already ruled that gate **moot** for this
-shape. ⛔ Do not reinstate that clause.
-
 ### The TestKit link — built, and still unrun
 
 TestKit `acafc74`, three rows on one link: `SMRTest.Log.DroneDrop` (C98), `SMRTest.Log.CrewDraft`
 (`EF-104`) and the Selected-page **Quick build** leaf. ⛔ All three are **BUILT AND UNRUN** — §2b
 carries what is left, which is a sitting, not another link. ⭐ The C95 sitting is the natural place
-for the `CrewDraft` row, since that brief arms it as its own reach control.
+for the `CrewDraft` row; [checklist 189](../../../PLAYTEST_CHECKLIST.md) carries
+the acceptance recipe and links the C95 build report.
 
 ---
 

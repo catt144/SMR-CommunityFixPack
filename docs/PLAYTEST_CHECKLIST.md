@@ -28,6 +28,48 @@ Item 177 records the still-open question of mechanically enforcing checklist mar
 
 ## Decisions waiting on you
 
+### 2026-09-16 — 189: C95 built — test the prepared habitat expedition save
+<!-- ck:189 status:open owner:yes -->
+
+**Bug:** the automatic expedition draft takes habitat residents and may fail to
+return them home. The authorized main-pack judgment call is built and passes
+the [desk checks](agent/reports/C95_HABITAT_DRAFT_BUILD.md); game acceptance is open.
+
+**Requirements:** your existing prepared save. Tell the agent its habitat types,
+available expedition/crew, lander and elevator availability, and when to launch.
+No new fixture has been provisioned. Record scarcity, rocket fleet, colony density
+and layout before measuring. Name every setup action; do not reassign employment
+colony-wide for this test, because that can change the draft's transient filter.
+
+**Setup:** cold boot the built pack, verify `HabitatExpeditionDraft: applied`, and
+review the whole log for errors. Check the main-menu enable path too. Arm the
+TestKit's Kit-page **CrewDraft** logger **before** assigning the expedition.
+
+#### Measure moments
+
+- **Draft and fill:** the trace must show habitat candidates present in the
+  eligible pre-fix priority pool, absent from the returned crew, and the requested
+  crew filled from ordinary colonists. Observe departure. A colony with enough
+  eligible ordinary candidates must not stall. Include both habitat types where
+  the save supports them; otherwise retain the missing live leg explicitly.
+- **Player choice:** select a habitat resident for the asteroid lander and verify
+  they still travel. Check the elevator's ordinary passenger selection as well.
+- **Fail safe / restore:** desk checks already cover absent residence, a genuine
+  predicate exception, and forced picker failure with the global restored. Do
+  not inject faults into the live colony; record desk evidence separately.
+- **Removal:** save with the fix, disable the pack in Mod Manager, fully restart
+  and reload; verify vanilla drafting returns and the save behaves normally.
+  Restore the normal mod configuration afterward. A per-fix toggle is not this test.
+- **EF-104 free reading:** deliberately request a specialisation the colony lacks,
+  then read the waiting rocket's panel and correlate `CrewDraft` and thread-error
+  logs. Record whether “Not enough Colonists” appears or the panel stays blank.
+  Do not repair that separate path in this sitting.
+
+**Good to have:** a settled-colony trace explaining the earlier passed-over habitat
+residents, without changing jobs immediately beforehand. No fix is claimed for
+ordinary habitat emigration or residents already away. Release remains separate;
+ck185's C96 hold is unchanged.
+
 ### 2026-09-16 — 188: habitat residents walk out on their own. Defect, or the cost of the building?
 <!-- ck:188 status:open owner:yes -->
 
@@ -123,8 +165,8 @@ restoration remain yours. Caps are still down. Evidence and revisit criteria:
 
 ✅⚖️ **RULED IN PART 2026-09-16 — (a) C95 is AUTHORISED to build and test.** Your words: *"can you
 rewrite the c95 build I want to fire it and then we can test it, already have the test ready in a
-save."* The brief is [`prompts/C95_HABITAT_DRAFT_BUILD.md`](agent/prompts/C95_HABITAT_DRAFT_BUILD.md),
-rewritten the same day to be fireable and carrying the design you worked out with it — the predicate
+save."* The build is now recorded in [the C95 report](agent/reports/C95_HABITAT_DRAFT_BUILD.md),
+with the game acceptance recipe at **189**. It carries the design you worked out — the predicate
 keys on `MicroGHabitatBase` (covers both habitats), and the hook wraps the per-bucket filter **only
 for the duration of the picker call**, which is what keeps the lander and the space elevator out of
 it. ⛔ **Build and test only** — the shipping *shape* was already ruled (main pack, with the mark),
@@ -162,7 +204,7 @@ never held a Seeker for the filter to discard; a real repair must widen the sour
 `RCSolar` variant may be a cheaper fixture and is worth checking first.
 
 **What is actually waiting on you, and they are independent:**
-1. **Authorize (a)'s build?** Desk work plus a playtest; the repair control is written in the entry.
+1. **(a)'s build is authorized and complete; its game acceptance is item 189.**
 2. **Authorize (b)'s build, and accept its fixture cost?** Or park it until an ESA colony exists
    for another reason.
 3. **Anything to change in (a)'s public wording** before it reaches the fix list? The line drafted
