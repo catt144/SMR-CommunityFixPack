@@ -5,8 +5,23 @@
 Rule: Do not retire, archive, gut, or delete this file without the owner's explicit instruction. [A3: pass]
 <!-- /RULES -->
 
-> ⭐ **LIVE.** `DISPATCH.md` is the route table for ad-hoc work and `docs/WAITING_ON_YOU.md` is the
-> owner's generated queue — this file carries the **loose ends** those two cannot hold.
+> ⭐ **LIVE.** `docs/WAITING_ON_YOU.md` is the owner's generated queue — this file carries the
+> **loose ends** it cannot hold.
+
+⛔⛔ **THE 2026-09-15/16 PROMPTS OVERHAUL MOVED OR DELETED FILES THIS DOCUMENT STILL NAMES BELOW.**
+Not every citation further down has been rewritten. Translate before following any of them:
+
+| this file says | reality |
+|---|---|
+| `perma/DISPATCH.md` | **DELETED.** Orient from the `smr-orientation` skill + `STATE.md` + `WAITING_ON_YOU.md` |
+| `perma/PUBLIC_SURFACE_SWEEP.md` | **DELETED**, no successor found |
+| `perma/RELEASE.md` | → `perma/release_prompt.md` |
+| `POST_UPLOAD_CLOSE.md` | → `agent/support/POST_UPLOAD_CLOSE.md` |
+| `perma/SITE_AUDIT.md` | → `agent/support/LIVE_SITE_READ.md` |
+| `perma/CO_RUNS.md` · `perma/SMRTK_SLOTS.md` | → `agent/support/` |
+
+⛔ **`prompts/README.md` is the gated map and it is the authority** — a row there beats any pointer
+in this file. The firing freeze that stood on 2026-09-15 was **LIFTED** on the owner's word (`7d63900`).
 
 ## Retirement authority
 
@@ -23,13 +38,34 @@ and Codex sessions both commit here, several at once, and **Codex is invisible t
 ⛔ **FR-1 is NOT on this handoff.** Every Linux / NVIDIA 580 / workaround-mod item is in
 `prompts/perma/LINUX_DISPATCH.md`. The temp workaround mod is LIVE (Steam 3799500849 / Paradox 158711).
 
-## 0 · Orient, then ask
+## 0 · START HERE — this handoff carries a first task that EXECUTES
 
-⛔ **`perma/DISPATCH.md` §0–§1 is the orientation and the bindings — follow it, it is not repeated here.**
-Add `ListAgents` (peers edit this tree concurrently) and open a **live todo list**.
+⭐⭐ **OWNER INSTRUCTION 2026-09-16: the task in §0a starts automatically when this handoff is fired.**
+It is the one exception to the orient-and-ask default below, and the owner set it deliberately.
 
-**Unless the owner's message names a task, a pasted handoff means ORIENT: summarise and ASK what to take.**
-Do not execute.
+⛔ **`perma/DISPATCH.md` NO LONGER EXISTS** — the prompts overhaul deleted it 2026-09-15/16. Orient
+from the **`smr-orientation` skill** plus `docs/agent/STATE.md` (now a short pull-only status file,
+not a mandatory read) and `docs/WAITING_ON_YOU.md`. Bindings live in `CLAUDE.md` and document-local
+`Must_Read_Header` blocks. Add `ListAgents` (peers edit this tree concurrently) and open a **live
+todo list**.
+
+**After §0a, the default returns: unless the owner's message names a task, a pasted handoff means
+ORIENT — summarise and ASK what to take.** Do not execute anything else.
+
+### 0a · FIRST TASK, auto-start — the C98 drop probe
+
+**Build a log-only wrapper on `Drone:DropCarriedResource` and ride it on the next TestKit link.**
+⛔ **The design, the discriminator table and the two desk questions are in
+[`bugs/C98.md`](../../bugs/C98.md) § "How to settle this WITHOUT reproducing it" — read it there, it
+is not restated here.**
+
+Why it is first: the owner judged the scenario too hard to engineer in a playtest, and a desk audit
+**cannot** close it (`GetPassablePointNearby` is a C export). The wrapper needs **no reproduction** —
+it fires on every carried-resource drop, so ordinary play yields a population in minutes. TestKit
+only, log-only, 0 shipped hashes, **no booked sitting**.
+
+⭐ **Take it with the other two TestKit items rather than as its own errand** — the quick-build row
+and the deferred crew-trace slot, both in §2b. One link, three rows.
 
 ---
 
@@ -87,6 +123,34 @@ closed chain** — take it with the next TestKit link, never as its own errand.
   for a grouped build (`:2043-2048`), so multi-part sites come out right for free.
 - **Shape: one row in the `leaves` table.** `method_for` (`73:51-53`) already hides a leaf the object
   does not carry, so it appears only on construction sites. TestKit only, 0 shipped hashes, game closed.
+
+⛔⛔ **OWED 2026-09-16 — [C97](../../bugs/C97.md) carries TEN KNOWN ERRORS and they are NOT corrected.**
+An Opus re-check found them; everything is preserved in
+[`reports/C97_RECHECK.md`](../../reports/C97_RECHECK.md) with line citations. ⛔ **Do not write a fix
+or a control recipe from C97 until that report is applied** — four of the ten propagate, including a
+code fence attributed to the wrong function **with an inverted truth condition**. The entry now warns
+about itself at the top. ⭐ Applying it is a bounded desk job; the report is the work list.
+
+⭐ **Three defects filed 2026-09-15/16 from field reports, all NOT reproduced:**
+[C98](../../bugs/C98.md) (drone drop — §0a's probe settles it), [C99](../../bugs/C99.md) (hub passage
+cannot be dismantled — ⭐ **links [C42](../../bugs/C42.md)'s stale-container mechanism to a field
+symptom for the first time**), and [C93](../../bugs/C93.md)'s second report, which exposed a
+**post-build** `CreateStockpiles` entry point at save load that the entry had never recorded.
+
+⭐ **The Wildfire cure investigation is LIVE and a peer is on it** — brief
+`prompts/WILDFIRE_CURE_RESEARCH.md`, owner override recorded (`fae8c9d`), desk tooling in flight.
+⛔ **Do not start a second one.** ⚠️ The owner's open question, unanswered: is the cause a **class**
+spanning [C69](../../bugs/C69.md) (the dead "In Progress" research state), [C79](../../bugs/C79.md)
+(`ChangeResearchCost` ignores its own `points` argument and always boosts 20%) and
+[C92](../../bugs/C92.md)? Established and load-bearing: the mystery chain rewiring is **complete**
+(5 chained families = 5 remapping entries), and the dead "In Progress" state is used **exactly once**
+tree-wide — so mysteries are *not* broadly broken through that seam.
+
+✅ **The 1.0.7-era candidate block is ARCHIVED 2026-09-16** (`481bbd7`, owner ruling): 38 rows to
+`docs/archive/bugs/`, candidates 59 → 34, the unprioritised bucket now empty. ⭐ **doccheck's
+`seq`/`row` contiguity rule was replaced by gap-accounting** so archiving no longer costs a renumber
+of every surviving entry — archived entries keep their numbers and the gate reads them back.
+⛔ **Never reuse an archived number**; doccheck goes RED on one claimed by both sides.
 
 ⭐ **SECOND TestKit ask, DEFERRED by the owner 2026-09-15 (*"lets save that"*) — a crew-trace slot.**
 A log-only wrapper on `CargoTransporter.GatherAvailableColonists`, armed from a slot and restored on
