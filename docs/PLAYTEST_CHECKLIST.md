@@ -28,6 +28,37 @@ Item 177 records the still-open question of mechanically enforcing checklist mar
 
 ## Decisions waiting on you
 
+### 2026-09-16 — 191: C93 repair validation — affected ranch plus a ranch built after Open Domes
+<!-- ck:191 status:open owner:yes -->
+
+**Why:** the owner identified the missing timing condition: Outside Ranches work before the
+Open Domes law and fail after it. Source now joins that timing to the ranch's entity swap, and
+`Fix_OpenPastureStockpiles` is built to keep the nine-anchor entity and recover existing piles.
+The build is desk-verified only; this is its one required attended window.
+
+**Requirements:** the already-affected save used for C93 diagnosis, with Open Domes active;
+enough space/resources to construct one additional Outside Ranch; one completed production
+cycle. The temporary reader is agent-side. Do not share the window with an unrelated invasive
+probe.
+
+**Leg A — affected save:**
+
+1. Load the affected save with the new module active. The log must say
+   `OpenPastureStockpiles: applied` and report the restored ranch count.
+2. Confirm each ranch remains functional with nine unique pile objects, all attached to named
+   `Resourcepile1`–`Resourcepile9` spots and zero at `Origin`.
+3. Reconcile the previously stranded ranch's total and per-resource amounts before/after the
+   repair read. No Food, Meat or other output may disappear.
+4. Let drones collect the formerly stranded output, then save/reload. All nine anchors must
+   remain valid and no centre pile may return.
+
+**Leg B — prevention:** while Open Domes remains active, construct a new Outside Ranch, let it
+complete a production cycle, and confirm the same nine-named/zero-Origin shape with successful
+drone pickup. The closed ranch visual is the repair's declared tradeoff, not a failure.
+
+**Pass:** both legs, resource reconciliation exact, zero C93/module Lua errors. **Status ceiling
+before this runs:** `fixed`; this item alone can grant `tested-attended`.
+
 ### ✅ 2026-09-16 — 190 RULED: C93 diagnosis excludes the mall-mod targets
 <!-- ck:190 status:ruled owner:no -->
 

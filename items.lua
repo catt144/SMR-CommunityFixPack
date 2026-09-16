@@ -240,6 +240,10 @@ return {
 		'CodeFileName', "Code/Fix_HabitatExpeditionDraft.lua",
 	}),
 	PlaceObj('ModItemCode', {
+		'name', "Fix_OpenPastureStockpiles",
+		'CodeFileName', "Code/Fix_OpenPastureStockpiles.lua",
+	}),
+	PlaceObj('ModItemCode', {
 		'name', "90_SaveSanitizer",
 		'CodeFileName', "Code/90_SaveSanitizer.lua",
 	}),
