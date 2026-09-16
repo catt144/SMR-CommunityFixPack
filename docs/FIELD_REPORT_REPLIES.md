@@ -30,6 +30,14 @@ treating it as binding): the owner had **fielded a load of reply questions in a 
 the project's actual gate was an unrun playtest. The cost being cut is **owner attention diverted
 from fixing bugs**, not the replies themselves.
 
+⛔ **DEVELOPER REPORTS ARE THE SAME CLASS — owner ruling, 2026-09-16 (checklist 151 (b)).** *"dev
+reports are only on request by the devs so that belongs in field_report_replies which is pull
+only"*. A report written for the game's developers is **sent only when the developers ask for
+one**. Until then it is never owed, never on a list, and never raised; the report stays in
+`agent/reports/` as the record. Today that is
+[`MIGRATION_DEV_REPORT.md`](agent/reports/MIGRATION_DEV_REPORT.md) — unsent, and if it is ever
+asked for, the covering note must not claim the migration passes are finished (checklist 168 (d)).
+
 ---
 
 **For you (the owner):** each section below is a reply drafted for a player's report

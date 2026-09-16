@@ -127,7 +127,8 @@ went divergent within a day. **Read it, then read the checklist body it links to
 
 - ✅ **144 (a) is DISCHARGED 09-15 (ck184 b/d)** — the RunAll ran under a same-day stamp, the play clauses
   closed by field evidence, A3/A10 struck. ⛔ **Never rebuild it as owed from an older document.**
-- **151 (b)** is messaging, and **ck165 lets the owner defer it indefinitely — ⛔ do not raise it.**
+- ✅ **151 (b) is CLOSED 09-16: send nothing.** Developer reports go out only on the developers'
+  request and are pull-only messaging (`FIELD_REPORT_REPLIES.md`). ⛔ **Never rebuild it as owed.**
 
 ⛔ **Never rebuild an "owed" list from an older document** — this file's did exactly that on 09-12 and
 contradicted its own closed list for most of a day.

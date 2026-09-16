@@ -1759,7 +1759,7 @@ The original audit questions below are retained as the condition of this ruling.
 
 </details>
 
-### ✅ 2026-09-12 — 168 RULED BY YOU (batch 2): **98 → baseline moves to 1.1.0 · hardening row 3 → BUILT into v10 · 151 (c) → the three cheap checks join the owed boot.** ⏳ **151 (b) came back as a question and is answered below — the call is still yours.**
+### ✅ 2026-09-12 — 168 RULED BY YOU (batch 2): **98 → baseline moves to 1.1.0 · hardening row 3 → BUILT into v10 · 151 (c) → the three cheap checks join the owed boot.** ✅ **151 (b) came back as a question and is answered below; CLOSED 2026-09-16 — send nothing (ruling recorded at item 151).**
 <!-- ck:168 status:ruled owner:no -->
 
 > **(a) 98 — THE BASELINE MOVES TO 1.1.0. 1.0.7 is history.** ⛔ No branch install, no re-download.
@@ -3145,7 +3145,16 @@ warn STATE.md is 12991 bytes, warn threshold is 12288 — copy this line VERBATI
 > Required owner-facing warning, verbatim from `doccheck` after this session's one STATE line (item 132 is yours):
 > `warn STATE.md is 13240 bytes, warn threshold is 12288 — copy this line VERBATIM into the owner report; the owner fires agent/prompts/perma/STATE_EVICTION.md`
 
-### ⚖️ 2026-09-11 — 151: migration audit complete — **(a) and (d) CLOSED 09-12 as overtaken by events · (e) RULED 09-11 · (b) and (c) still open**
+### ✅ 2026-09-11 — 151: migration audit complete — **(a) and (d) CLOSED 09-12 as overtaken by events · (e) RULED 09-11 · (c) RULED 09-12 at item 168 · (b) CLOSED 2026-09-16: send nothing. Nothing is owed from you.**
+<!-- ck:151 status:closed owner:no -->
+
+> ✅ **(b) — your ruling, 2026-09-16:** *"do nothing dev reports are only on request by the devs so
+> that belongs in field_report_replies which is pull only"*. The
+> [developer report](agent/reports/MIGRATION_DEV_REPORT.md) is **not sent** and is not owed. A
+> developer report goes out only when the developers ask for one; it is messaging, so it lives under
+> `FIELD_REPORT_REPLIES.md`'s pull-only rule (ck165) and no agent raises it. The report itself stays
+> as the record. ⚖️ If they do ask, 168 (d)'s caveat still applies: the migration passes are not
+> finished, so a covering note must not say they are.
 
 > **Closed 2026-09-12 on your "use your best judgement, close it if everything is shipped", after checking that
 > it is.** Three reads, none of them a quote:
