@@ -85,29 +85,24 @@ The owner ran a full production cycle in the same ranch and flushed again. Same 
 normally), and the failure is entirely on the **collection** side. The error rate scales with
 the attempt rate, and the drones are visibly massed at the footprint edge.
 
-⭐ **`SMRTK_0010.png` is the most informative of the three, and two readings follow directly
-from it.** The produce crates stand **on a rendered stockpile platform** in the middle of the
-grass, ringed by grazing animals, while the drones sit in a line on the walkway **outside the
-fence**:
+Two readings follow directly from that close-up, and together they are the reason this brief
+gates its fix:
 
-- **The pile object is healthy.** It has its `ResourcePlatform` entity — you can see it under
-  the crates — so the pile is *not* the thing throwing `has no entity`. That matches the
-  desk (`ResourceStockpile.lua:109`) and it is now visually confirmed.
-- **The failure the player sees is pure reachability**: the pile is inside a footprint the
-  drones cannot enter, and they queue at its edge.
+- **The pile object is healthy.** The crates stand on a rendered `ResourcePlatform` — visible
+  under them — so the pile is *not* the thing throwing `has no entity`. That matches the desk
+  (`ResourceStockpile.lua:109`) and is now visually confirmed.
+- **What the player sees is pure reachability.** The pile sits inside a footprint the drones
+  cannot enter — `OpenPastureBase` declares no `efWalkable` (C93), so the centre is enclosed
+  — and they queue at its edge.
 
-⇒ ⚠️ **Treat this as possibly TWO defects, and make Leg A decide which you are fixing:**
-(i) a pile placed where drones cannot path — the symptom the reporters describe, and the one
+⇒ ⚠️ **So treat this as possibly TWO defects, and make Leg A decide which you are fixing:**
+(i) a pile placed where drones cannot path — the symptom both reporters describe and the one
 the owner can see; and (ii) an entity-less object throwing on the approach path — the 6472
-log lines. They may be one story or two, and a guard that silences (ii) does **not**
-necessarily move (i). ⛔ **Do not ship a fix that quiets the log while the crates stay put.**
-
-⚠️ **This raises the odds that the centre pile and the throw are the same story, and it does
-not prove it.** A pile attached at `Origin` sits exactly there, and `OpenPastureBase`
-declares no `efWalkable` (C93), so the footprint is solid and the centre is enclosed — but a
-pile is a `ResourceStockpileBase` and **carries an entity**, so a pile alone does not explain
-a `has no entity` throw. Leg A still has to name the object, and §5 step 5 still has to read
-`GetAttachSpot()`. ⛔ Do not write the tidy version of this until both return.
+log lines. A pile attached at `Origin` would sit exactly where this one sits, which is why
+they may well be one story; but a pile carries an entity, so (i) alone cannot produce (ii).
+⛔ **Do not ship a fix that quiets the log while the crates stay put**, and do not write the
+tidy single-cause version until Leg A names the object and §5 step 5 has read
+`GetAttachSpot()`.
 
 ## 2 · The mechanism as traced, and the one hole in it
 
