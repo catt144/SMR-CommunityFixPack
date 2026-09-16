@@ -25,7 +25,7 @@ git diff -- metadata.lua items.lua
 ```
 
 The writeback should expose the new version/id fields. Compare them with STATE,
-Released history and the owner's receipt. When readable, the newest Steam change
+the outbox's `Last released` line and the owner's receipt. When readable, the newest Steam change
 note is another receipt. A handoff sentence alone is not proof of an upload.
 
 Count leading comment lines in both files before any commit. Zero means the editor
@@ -47,7 +47,8 @@ does not move with this post-upload commit.
 ## 3 · Finish the records
 
 - Update STATE with what is live and remove the one-line UPLOAD OWED marker.
-- Move each outbox Pending entry under `Released in v<N>`, newest first, and leave
+- Append each outbox Pending entry to `docs/archive/RELEASE_HISTORY.md` under
+  `### Released in v<N> (date)`, set the outbox's `Last released` line, and leave
   Pending empty. Do this only after owner confirmation.
 - Update any release status whose existing policy is satisfied; do not infer play
   evidence from publication.

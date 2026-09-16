@@ -30,7 +30,7 @@ docs/
     reports/              reports, plans, specs, audits, surveys
     prompts/              README.md = the map · perma/ = standing prompts · root = live one-offs · live chains only
     support/              protocols and references used by prompts, but not themselves fired
-  archive/                spent. SESSION_LOG.md, PLAYTEST_ARCHIVE.md,
+  archive/                spent. SESSION_LOG.md, PLAYTEST_ARCHIVE.md, RELEASE_HISTORY.md,
                           MOD_DESCRIPTION.md (frozen), retired prompts and closed prompt chains
 ```
 

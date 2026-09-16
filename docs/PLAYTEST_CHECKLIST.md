@@ -239,6 +239,11 @@ worth it for this reach; the lesson (check who can reach the affected state befo
 is recorded in memory, not as policy. Record: [F120](agent/bugs/F120.md),
 [audit section](agent/reports/WILDFIRE_CURE_RESEARCH.md#cross-vendor-audit--2026-09-16-fired-on-fable-promptsf120_auditmd-consumed).
 
+### 2026-09-16 — A release empties the outbox into the archive
+<!-- ck:- status:closed owner:no -->
+
+Owner ruling archived in [Release closes empty the outbox](archive/PLAYTEST_ARCHIVE.md#release-closes-empty-the-outbox-2026-09-16). Release history now lives in `archive/RELEASE_HISTORY.md`.
+
 ### 2026-09-16 — The tree is LF, and a mixed line ending is RED
 <!-- ck:- status:closed owner:no -->
 

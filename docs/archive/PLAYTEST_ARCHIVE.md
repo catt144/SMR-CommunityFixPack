@@ -8123,3 +8123,22 @@ doccheck's EOL section is RED on a mixed file, with `--fix-eol` as the cure. The
 shared generator writes LF. The archive tool splits on LF and strips a trailing CR,
 proved on a rebuilt incident: the old tool refused, the new one produced the same
 plan as on a clean file. No further owner action is owed.
+
+## Release closes empty the outbox 2026-09-16
+
+After running the release prompt, the owner found `RELEASE_OUTBOX.md` still
+holding every past release and asked:
+
+> I just ran the release.md why is it holding things, should part of releases closing be to purge archive its work, the outbox should empty with it sends it out
+
+Told that the close step moved entries under a Released heading inside the same
+file and nothing ever removed them, the owner ruled:
+
+> Do it and it already ran some do its cleanup for it this time
+
+Landed the same day. A release close appends its entries to
+`docs/archive/RELEASE_HISTORY.md` and sets the outbox's one-line `Last released`
+marker, which the release prompt's opening check reads. The v5 to v11 blocks
+moved there verbatim. The withdrawn F120 note left Pending; the core hardening
+note stays, because it was built after v11 and ships with the next upload. No
+further owner action is owed.

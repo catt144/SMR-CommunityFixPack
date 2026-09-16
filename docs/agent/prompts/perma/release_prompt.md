@@ -29,7 +29,7 @@ at the handoff.
    one unfinished item is in progress.
 4. Run `python tools/doccheck.py --emit-counts`; carry no stored count.
 5. Check whether the preceding upload is already closed. A tree version ahead of
-   STATE, an upload absent from Released history, or zero comment lines in
+   STATE, an upload newer than the outbox's `Last released` line, or zero comment lines in
    `metadata.lua`/`items.lua` means close-out may still be owed. Resolve that
    release through §4 before preparing another one.
 
@@ -81,9 +81,10 @@ fields, no session may commit either file for another reason.
 
 ## 5 · Clear the outbox only after confirmation
 
-Only after the owner confirms the upload and §4 verifies it, move every Pending
-entry under `Released in v<N>` and leave Pending empty. This prevents a change
-shipping twice. Never clear the outbox at "ready to upload".
+Only after the owner confirms the upload and §4 verifies it, append every Pending
+entry to `docs/archive/RELEASE_HISTORY.md` under `### Released in v<N> (date)`,
+set the outbox's `Last released` line to v<N>, and leave Pending empty. The outbox
+holds only what has not shipped; this prevents a change shipping twice. Never clear the outbox at "ready to upload".
 
 ## 6 · Finish
 
