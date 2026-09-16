@@ -263,7 +263,7 @@ The later attended skills/rules audit judges the contents; the thresholds and
 restoration remain yours. Caps are still down. Evidence and revisit criteria:
 [documentation skills report](agent/reports/DOC_EDITING_SKILLS_AUDIT.md).
 
-### 2026-09-15 — 185: C95 built; C96 launch passed — final return tally pending
+### 2026-09-15 — 185: C95 built; C96 passed attended — launch and return
 
 <!-- ck:185 status:ruled owner:yes -->
 
@@ -311,10 +311,15 @@ the old module fails the new loading-order regression. [Evidence](agent/reports/
 **Attended result at `efebdf7`, retail 1.1.0.403908:** rocket `1051` launched toward an anomaly
 requiring Commander with the original Seeker `2000000261` aboard. The cargo line correctly
 recorded Seeker 1/1 and Commander 0/0. Your return observation: "Done and its still a seeker
-and looks correct". **Remaining:** the prepared read-only return tally will check the same
-Seeker is unheld and no extra Commander appeared. It has no observed output yet; do not repeat
-the completed launch. Live removal/reload remains explicitly unclaimed. The brief stays live
-for that final tally and evidence close-out. Your solar-panel variant question is also answered:
+and looks correct".
+
+✅⚖️ **ACCEPTED ATTENDED 2026-09-16 on your return count — no rerun, your ruling.** Your words:
+*"I am not re running a test ... the rocket came back I had a seek when it came out, I only ever
+had one seeker and I had zero while it was gone."* ⇒ one Seeker before, none while away, the same
+single Seeker back — no duplicate. **C96 is `tested-attended`.** ⛔ The prepared numeric
+`C96 RETURN` probe was never run (no such line in any 2026-09-16 log); the acceptance rests on your
+attended count, not a probe figure, and you declined the rerun. The C96 brief is consumed. Live
+pack removal/reload stays unclaimed. Your solar-panel variant question is also answered:
 RC Generator (`RCSolar`) is covered and desk-verified on both receivers, but has not flown here.
 
 ⛔ **(b)'s ORIGINAL TEXT, kept because the ruling above amends it rather than replacing the

@@ -67,11 +67,11 @@ player surface bumps it by one on release.
   way only — an expedition asking for a Seeker still refuses a plain Commander — and a colony
   that owns the exact rover keeps the game's own choice. When the only matching rover is
   busy, the panel now says "Rovers are busy" instead of showing no warning.
-- ⛔ **Verification — say exactly this much:** watched **launching** in a running colony on
-  1.1.0 on 2026-09-16 with the Seeker aboard (cargo Seeker 1/1, Commander 0/0), and the owner
-  saw it return as a Seeker. The final return tally was still being read when this entry was
-  written — check [the live brief](../C96_LIVE_FAILURE.md) and C96's status before the release
-  pass. Removing the pack mid-expedition was **not** tested.
+- ✅ **Verification — `tested-attended` 2026-09-16:** watched in a running colony on 1.1.0 —
+  the expedition launched with the Seeker aboard (cargo Seeker 1/1, Commander 0/0) and came back
+  with the same single Seeker; the owner counted one before, none while away, one after. It
+  may be described as watched working. ⛔ Do not claim the RC Generator was flown (desk only) or
+  that removing the pack mid-expedition was tested.
 - No public-copy draft exists. Authority: [C96](../../bugs/C96.md) and
   [the build report](../../reports/C96_ROVER_SUBCLASS_BUILD.md).
 

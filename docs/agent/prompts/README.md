@@ -44,7 +44,6 @@ The `declared class` values below are gate inputs, not conclusions inferred from
 | `STANDDOWN_AUDIT.md` | `prompt` | **LIVE, authored 2026-09-13** (owner ask): can full-body replacements stand down when vanilla fixes a defect? The old 21-of-45 split is an explicitly re-derived seed, not a current total; the audit tests `bodycheck`'s class-c blind spot and runtime detector options. Design record [D14](../bugs/D14.md). |
 | `DLC_DEEP_CHECK.md` | `prompt` | live one-off chain-authoring job after the fix pack is stable; re-emits the DLC inventory, writes a mapped `dlccheck/` chain, then consumes itself without firing a link |
 | `CAPTURE_SITTING.md` | `prompt` | owner ruling 09-09: KEEP ("we may get to it"); still-unfired screenshot passes A–E, with current-consumer/fixture preflight; preview-art and archived-console branches consumed |
-| `C96_LIVE_FAILURE.md` | `prompt` | LIVE, executing: repair committed at efebdf7; Commander-required expedition launched with the original Seeker, owner reports correct return. Final read-only return/no-extra-Commander tally and evidence close-out remain. Generator covered at desk; live removal/reload unclaimed. Owner permits autonomous design/implementation. |
 | `SMRCF_CHAIN_SET.md` | `prompt` | owner ruling: keep the C35 detector plus parked C52 chain; descendants are independent and update this grouped entry as they close |
 
 ## Chain folders

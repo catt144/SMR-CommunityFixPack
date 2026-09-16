@@ -5,7 +5,7 @@ the original Seeker aboard at `efebdf7`. The owner reports it returned still a S
 looking correct.** The numeric return/no-extra-Commander check is pending; live removal/reload
 remains untested. The original repair's attended failure is preserved below.
 Module: `Code/Fix_RoverSubclassManifest.lua`. Suite: `tools/desk_c96_rover_subclass.py`.
-Entry: [C96](../bugs/C96.md). Remaining check: [live brief](../prompts/C96_LIVE_FAILURE.md).
+Entry: [C96](../bugs/C96.md). ✅ Accepted attended 2026-09-16 on the owner's return count; the live brief is consumed.
 
 ## Authority and scope
 
@@ -147,11 +147,13 @@ destination `rover_type = RCRover`, carrying `RCSensor 2000000261 holder true Wa
 This joins the actual Seeker to the original Commander-required destination.
 At `Lua 0:03:56:214`, TestKit then attached its rover panel to that same `RCSensor(2000000261)`.
 **OWNER OBSERVED after the requested return:** "Done and its still a seeker and looks correct".
-The numeric return/no-extra-Commander check is pending. These readings are preserved in the
+**ATTENDED RETURN, 2026-09-16 — owner's count, accepted:** "I only ever had one seeker and I had zero while it was gone" and "I had a seek[er] when it came out". The same single Seeker
+returned; no duplicate. ⛔ The numeric probe below was **never run** (no `C96 RETURN` line in any
+2026-09-16 log) and the owner declined a rerun, so no probe figure is claimed. The departure readings are preserved in the
 [flight and return-observation snapshot](../../archive/logs/c96_flight_return_observation_Mars.exe-20260916-14.56.04-6a91a190.log).
 This is a running-session snapshot, not a whole-log absence/error verdict.
 
-[PREPARED and parsed with `luaparser`; no observed output yet]
+[PREPARED and parsed with `luaparser`; NEVER RUN — superseded by the owner's attended count above]
 
 ```lua
 *r print("C96 RETURN", "Commanders", #(MainCity.labels.RCRover or {}), "Seekers", #(MainCity.labels.RCSensor or {})) for _, v in ipairs(MainCity.labels.RCSensor or {}) do print("C96 returned", v.handle, v.class, "held", not not v.holder, "command", v.command) end
