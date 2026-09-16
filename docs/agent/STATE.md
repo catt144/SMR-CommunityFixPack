@@ -8,8 +8,6 @@ This file contains current status and pointers. Binding duties live in `CLAUDE.m
 Eviction procedure: `agent/prompts/perma/STATE_EVICTION.md` (byte-budgeted by doccheck; owner ruling, checklist 42).
 History newest-first in `docs/archive/SESSION_LOG.md`; pre-eviction STATE graves: `git show 541e626:docs/agent/STATE.md`
 (post-v10, 09-13) · `git show 1aafdbf:docs/agent/STATE.md` (hotfix 2, 09-09) · `git show 3ef6fcb:docs/agent/STATE.md` (08-18).
-Defect truth `agent/bugs/INDEX.md` · facts `agent/facts/INDEX.md` · doc map `docs/README.md`.
-Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/reports/CHAIN_METHOD.md`.
 
 ## Now
 - ⭐ **v10 IS LIVE on both portals** (2026-09-13, owner's word): `pdx_id` **156049**, `steam_id` **3787202810**,
@@ -71,7 +69,7 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   `workflow_dispatch` only. Live-deployment read route: `agent/support/LIVE_SITE_READ.md`.
   Owner's 2 pared files (`for-modders.md`, `install.md`) stay uncommitted = decision 47.
 - ⭐ FR-1 TEMP WORKAROUND MOD LIVE 09-11 (Steam 3799500849 / PDX 158711). **ALL FR-1 / Linux / NVIDIA work →
-  `prompts/perma/LINUX_DISPATCH.md`.** Field: 3 working (one 10xx), 1 failing (GTX 1070, log requested).
+  `prompts/perma/LINUX_DISPATCH.md`.** Field: GTX 1070 confirmed working; the reported failure was user error (owner, 09-15).
 - ⭐ **`docs/archive/prompts/smrtk/` CLOSED 2026-09-14 — 99 (Fable) verdict SHIP WITH CHANGES**, `reports/SMRTK_AUDIT.md`. The
   SMR Tool Kit is the owner's to use (TestKit-only, never uploads). Taint half of (A) measured CLEAN in 02/08/08b
   (`cheats_count=0` after 490 dispatches; 19-leaf sample on the rebuilt tree); eligibility stays `UNAVAILABLE:sandbox`
@@ -83,7 +81,7 @@ Authoring `agent/WORKFLOW.md` · code `agent/FIX_POLICY.md` · chains `agent/rep
   stands. ⛔ **NOTHING from the toolkit chain is owed.** Stamper parked (`FUTURE_IDEAS` 5, not agent-tracked).
 - ⏭ NEXT: `prompts/STANDDOWN_AUDIT.md` (no blocker) · probe maintenance at the desk (the FAIL/ERROR names above;
   Codex leg) · `prompts/C92_ACHIEVEMENT_BUILD.md` (build+test; ck172's shipping hold remains) · then the
-  playtest sitting. ⛔ `SELFCHECK_PILOT` REMOVED 09-13 (`cf8d51f`).
+  playtest sitting.
   Owner OWES: ck151 (b) dev-report scope.
   08 is a separate clean-taint boot from ck144 (a). ✅ Fixture CHOSEN 09-14: `SMRTK08 Fixture Sol 490` (C92 reporter's colony,
   1.1.0.403908, `CheatsUsed` read scalar from disk against a TAINTED positive control; 4 byte copies exist). Handoff `prompts/perma/HANDOFF_ORCHESTRATOR.md` §3 LIVE.
@@ -120,7 +118,7 @@ Module lists are gated by `tools/doccheck.py` MODULE SETS + `tools/upload_prefli
   `Owner OWES: ck##` idioms.
 - **53**: RULED 09-12 to pare the modder surface, so the hardening queue shrinks with it; rec 1.0.1.
 - **47**: the owner's 2 pared site files ride on it.
-- **133**: `prompts/SELFCHECK_PILOT.md` ✅ REMOVED 2026-09-13 (owner's word); (2) and (4) still open.
+- **133**: (2) and (4) still open.
 - **151 (b)** dev-report scope (ck165 permits indefinite deferral) · **151 (c)** open. F59 re-derived 09-11: the expedition
   claim CONFIRMED **+ a 2nd caller** (manual Set Residence on a full home OVERFILLS it, both branches); both branches
   are in the repair scope, and the frozen `v5-game-1.0.7` download ships the same body with no version gate.
