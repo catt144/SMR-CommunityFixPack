@@ -166,6 +166,11 @@ restate them here.**
 ⚠️ **THE THREE UNRUN ROWS ARE ONE SITTING, NOT THREE.** Arm `DroneDrop` and play normally; arm
 `CrewDraft` **before** an expedition is assigned; press **Quick build** on a construction site. ⛔ None
 of them is closed by another link — each needs a witness in play.
+- ⭐ **One extra step, free, while `CrewDraft` is armed:** deliberately **under-supply** an expedition
+  (demand a specialisation nobody has) and **read the rocket's panel**. ⛔ Body and both discriminators
+  are in [`EF-104`](../../facts/EF-104.md) — an unguarded `#crew` on a nil return means "Not enough
+  Colonists" may never be reached, and a blank panel on a waiting rocket is the tell. The owner's
+  1.0.7 recollection cannot settle it.
 
 ✅ **EFFORT 2 — the doc overhaul (ck176–ck183) — BOTH HALVES LANDED 2026-09-15.** The rules half:
 scattered rules became local header blocks plus a kernel list in `CLAUDE.md`, gated by doccheck's
