@@ -55,13 +55,13 @@ them, and do not restore the auto-start instruction from an older copy of this f
 - **§0a, the TestKit link** → TestKit `acafc74`, three rows on one link: `SMRTest.Log.DroneDrop`
   (C98), `SMRTest.Log.CrewDraft` (`EF-104`) and the Selected-page **Quick build** leaf.
   ⛔ All three are **BUILT AND UNRUN** — §2b carries what is left, which is a sitting, not a link.
-- **§0b, the C95 fix brief** → [`prompts/C95_HABITAT_DRAFT_BUILD.md`](../C95_HABITAT_DRAFT_BUILD.md),
-  with its map row. ⛔ **NOT FIRED and NOT AUTHORISED**: [ck185](../../../PLAYTEST_CHECKLIST.md) must
-  be lifted in words first, and the brief carries that hold itself. ⚠️ **The brief CORRECTS the
-  instruction that commissioned it** — this section used to say the unisolated rail-sweep-vs-`CanVisit`
-  gate had to be settled first; C95 had already ruled it **moot** for this repair shape, and the crew
-  trace is the fix's **reach control**, not its prerequisite. ⛔ The correction lives in the brief §5
-  and on C95; do not reinstate the old clause.
+- **§0b, the C95 fix brief** → [`prompts/C95_HABITAT_DRAFT_BUILD.md`](../C95_HABITAT_DRAFT_BUILD.md).
+  ⭐ **AUTHORISED and REWRITTEN 2026-09-16** — the owner lifted [ck185](../../../PLAYTEST_CHECKLIST.md)'s
+  **C95 half** the same day and has the test save ready; ⛔ **C96's half stays open**, and the release
+  is still the release prompt's job. ⛔ The brief is the record — design, the two shapes that do not
+  work, and the acceptance legs are all in it, not here. ⚠️ It also **corrects the instruction that
+  commissioned it**: this section used to demand the rail-sweep-vs-`CanVisit` gate be settled first;
+  C95 had already ruled it **moot** for this shape. ⛔ Do not reinstate that clause.
 
 ---
 

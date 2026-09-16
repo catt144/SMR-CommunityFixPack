@@ -121,12 +121,25 @@ restoration remain yours. Caps are still down. Evidence and revisit criteria:
 
 <!-- ck:185 status:open owner:yes -->
 
+✅⚖️ **RULED IN PART 2026-09-16 — (a) C95 is AUTHORISED to build and test.** Your words: *"can you
+rewrite the c95 build I want to fire it and then we can test it, already have the test ready in a
+save."* The brief is [`prompts/C95_HABITAT_DRAFT_BUILD.md`](agent/prompts/C95_HABITAT_DRAFT_BUILD.md),
+rewritten the same day to be fireable and carrying the design you worked out with it — the predicate
+keys on `MicroGHabitatBase` (covers both habitats), and the hook wraps the per-bucket filter **only
+for the duration of the picker call**, which is what keeps the lander and the space elevator out of
+it. ⛔ **Build and test only** — the shipping *shape* was already ruled (main pack, with the mark),
+but the release itself goes through the normal release path, not that brief.
+
+⛔ **(b) C96 IS STILL OPEN and this item stays open for it.** Nothing about C96 is authorised by the
+C95 lift.
+
 ⚖️ **You ruled both of these on 2026-09-15 and both rulings are recorded here because an
 agent-doc-only record is not considered asked (rule 5 / R10).** Each entry carries the evidence,
 the controls and the reasoning; ⛔ this item is the decision, not a retelling.
 
-**Both are `filed`, both have their repair NOT written, on your instruction** (*"file it as a fix
-that needs playtesting then. Don't author the fix yet"*). Nothing is owed until you say build.
+**Both were `filed` with their repair NOT written, on your instruction** (*"file it as a fix
+that needs playtesting then. Don't author the fix yet"*) — ⭐ **superseded for C95 by the 09-16
+ruling above; it still stands for C96.**
 
 **(a) [C95](agent/bugs/C95.md) — the game takes Naturalist Habitat residents on expeditions
 without asking and cannot bring them home.** ⭐ **Reproduced in play with you at the keyboard**,

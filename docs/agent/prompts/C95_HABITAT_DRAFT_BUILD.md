@@ -1,392 +1,307 @@
-# C95 — stop the expedition draft taking habitat residents (BUILD; ⛔ NOT AUTHORISED YET)
+# C95 — stop the expedition draft taking habitat residents (BUILD + TEST)
 
-One-off, authored 2026-09-16. Tool-neutral (Claude or Codex). `git rm` this file **and its
+One-off, authored 2026-09-16, **rewritten the same day when the owner lifted the hold and asked for
+it to be fireable.** Tool-neutral (Claude or Codex). `git rm` this file **and its
 `prompts/README.md` row** in the commit that lands its result. Defect truth: [C95](../bugs/C95.md).
 
-⛔⛔ **DO NOT FIRE THIS BRIEF UNTIL THE OWNER SAYS SO IN WORDS.** See §0. It was written so the
-work is ready the moment they do; writing it did not start it.
+⭐ **The owner has a test save ready.** ⛔ Do not provision a fixture and do not ask them to build
+one — ask what is in the save they have, and design the legs around it.
 
 **Execution starts with** `git log --oneline -8`, `git pull`, `git status --short`, `ListAgents`.
-The authoring commit for this brief is the one that added it — `git log --oneline -1 --
-docs/agent/prompts/C95_HABITAT_DRAFT_BUILD.md`. Compare `<that sha>..HEAD` across the read path
-below and re-check only the groups that moved; an empty `git diff --stat` for a path means it
-does not need reading.
+The authoring commit is the one that last rewrote this file —
+`git log --oneline -1 -- docs/agent/prompts/C95_HABITAT_DRAFT_BUILD.md`. Compare `<that sha>..HEAD`
+across the read path and re-check only the groups that moved; an empty `git diff --stat` for a path
+means it does not need reading.
 
-**Read path, by file.** `docs/agent/bugs/INDEX.md` (grep it for the ids you need — ⛔ never read
-it whole), then [C95](../bugs/C95.md) in full; `docs/agent/facts/INDEX.md`, then
-[`EF-103`](../facts/EF-103.md) and [`EF-104`](../facts/EF-104.md); `docs/agent/FIX_POLICY.md`
-§§1, 2, 2a, 2b, 3a, 4, 6; `docs/agent/WORKFLOW.md` "Probe hygiene" and "Testing checklist per
-fix"; this brief. `docs/agent/STATE.md` only for current hold/scheduling status.
-⛔ **Do not read C96 into this job** — it is a separate defect that happens to share the hold.
+**Read path, by file.** `docs/agent/bugs/INDEX.md` (grep it — ⛔ never read it whole), then
+[C95](../bugs/C95.md) in full; `docs/agent/facts/INDEX.md`, then [`EF-103`](../facts/EF-103.md) and
+[`EF-104`](../facts/EF-104.md); `docs/agent/FIX_POLICY.md` §§1, 2, 2a, 2b, 3a, 4, 6;
+`docs/agent/WORKFLOW.md` "Probe hygiene" and "Testing checklist per fix"; this brief.
+`docs/agent/STATE.md` only for scheduling status.
+⛔ **Out of the read path on purpose:** C96 (a separate defect sharing the old hold) and
+[C100](../bugs/C100.md) (habitat residents leaving of their own accord — a different drain,
+unruled, [ck188](../../PLAYTEST_CHECKLIST.md)). Neither is this job.
 
 ---
 
-## 0 · ⛔ THE HOLD — read before anything else
+## 0 · Authorisation — what is lifted and what is not
 
-⚖️ **Owner, 2026-09-15:** *"do not author it yet."* That standing instruction is recorded on C95
-itself and is why this is a brief and not a module.
+⚖️ **Owner, 2026-09-16:** *"can you rewrite the c95 build I want to fire it and then we can test it,
+already have the test ready in a save."*
 
-⚖️ **Checklist [185](../../PLAYTEST_CHECKLIST.md) is OPEN** and asks the owner to say when to
-build each of C95 and C96. ⛔ **Until the owner lifts it in words, nothing in §§3–7 may be
-started.** Reading, orienting and asking questions are always allowed; writing `Code/` is not.
+✅ **BUILD and TEST are authorised.** The standing *"do not author it yet"* on C95 is lifted, and
+[ck185](../../PLAYTEST_CHECKLIST.md)'s C95 half with it.
 
-⚠️ **This brief's existence is not the lift.** A future session that finds this file has found
-prepared work, not permission. ⛔ Do not read "the brief exists, so it must be time" — check
-`docs/WAITING_ON_YOU.md` and the checklist body for 185 before doing anything else.
+⛔ **ck185's C96 half is UNTOUCHED and still open.** Do not build C96 off the back of this.
+
+⚖️ **Shipping shape was already ruled and is not yours to revisit:** main pack, with the
+judgment-call mark and the reasoning on the fix list (C95's classification section). ⛔ The **release
+itself** — version bump, upload, store text — is the release prompt's job and not this brief's. Land
+the module and the evidence; do not push it out.
 
 ---
 
 ## 1 · Your licence
 
 Everything below is a **claim**, including the confident parts — house doctrine (`CLAUDE.md`).
-⭐ **Assume there is an error in here and go looking for it.** One is already documented: this
-brief corrects the handoff that commissioned it (§5).
+⭐ **Assume there is an error in here and go looking for it.** This brief has already been wrong
+twice in one day: it called the post-filter shape "safe" when it hangs the game, and it proposed a
+flag-based predicate that would have misfired on player-toggled domes. Both corrections are folded
+in below; the third one is yours to find.
 
-- ⭐ **Question the engineering freely.** If the routing in §3 is wrong, refuting it is a better
-  outcome than implementing it.
+- ⭐ **Question the engineering freely.** If §3 is wrong, refuting it beats implementing it.
 - ⛔ **Do NOT question the repair SHAPE.** §2 is the owner's ruling, argued by both seats and
-  converged. Re-litigating it is out of scope; so is re-routing it to the opt-in pack.
-- ⛔ This brief authorises a **build and desk tests**. It does not authorise a release, a save
-  edit, a version bump, or launching the game without asking the owner.
+  converged. Re-litigating it is out of scope, as is re-routing it to the opt-in pack.
 - ⛔ **Shared tree.** Peers edit concurrently and **Codex is invisible to `ListAgents`**.
   `git log` / `git status` before any write; commit with a pathspec — ⚠️ which protects every
   *other* file but commits the working-tree content of any path you name.
 - ⛔ A new `Code/*.lua` module **must** be added to `items.lua` or it ships absent.
   ⛔ Never open the Mod Editor; never hand-set `version`.
+- ⛔ Do not launch the game without asking the owner first — ⭐ but note they are expecting a test
+  this session and have the save ready, so ask early rather than at the end.
 
 ---
 
 ## 2 · Settled, inherited, NOT open for redesign
 
-⛔ **Read the bodies in [C95](../bugs/C95.md); they are not restated here.** What follows is only
-the list of things you must not re-derive or re-argue.
+⛔ **Read the bodies in [C95](../bugs/C95.md); they are not restated here.** This is only the list of
+what you must not re-derive or re-argue.
 
-1. ⭐ **REPRODUCED IN PLAY** 2026-09-15, owner at the keyboard. This is one of very few entries
-   that is not source-only.
-2. ⚖️ **The repair is to exclude habitat residents from the EXPEDITION draft** — ⛔ **NOT** a
-   widening of the return path. Owner's choice, with their reasoning on the entry.
-3. ⚖️ **An oversight bug solved by a judgment call** → **main pack, with the judgment-call mark
-   and the reasoning on the fix list.** ⛔ Not opt-in. The store card states no number by design,
-   so only the fix list and FAQ move.
-4. ⛔ **SCOPE: expeditions only.** The asteroid lander draws from a player-filled passenger list
-   and is not an auto-draft — a hook on the expedition gather cannot reach it, and must not.
-5. ⭐ **The predicate is vanilla's own:** `IsKindOf(unit.residence, "MicroGHabitatBase")`, the
-   same test `IsSuitableWorkplace` already uses to keep habitat residents out of the colony's
-   labour pool. ⛔ Key on `residence`, **not** `dome`. C95 carries why.
-6. ⚖️ **The stall risk is CONSIDERED AND JUDGED NEGLIGIBLE**, with its reasons on the entry, and
-   a stall is visible rather than silent. ⛔ **Do not re-raise it as a new finding.** If you find
-   evidence that changes the judgment, that is a report to the owner, not a redesign.
-7. ⚖️ **The scope sentence is load-bearing for the public copy:** nothing is being made
-   ineligible; the change is **subtractive on one automatic picker**, not additive on player
-   capability. The owner's publishable framing is on the entry — lead with it.
+1. ⭐ **REPRODUCED IN PLAY** 2026-09-15, owner at the keyboard.
+2. ⚖️ **Exclude habitat residents from the EXPEDITION draft** — ⛔ **NOT** a return-path widening.
+3. ⚖️ **An oversight bug solved by a judgment call** → main pack, marked, reasoning on the fix list.
+   ⛔ Not opt-in. The store card states no number by design, so only the fix list and FAQ move.
+4. ⛔ **SCOPE: expeditions only.** The asteroid lander draws from a player-filled passenger list.
+5. ⭐ **The predicate is vanilla's own:** `IsKindOf(unit.residence, "MicroGHabitatBase")` — the same
+   test `IsSuitableWorkplace` (`Workplace.lua:1453`) already uses to keep habitat residents out of
+   the colony labour pool. ⛔ Key on `residence`, **never** `dome`.
+6. ⚖️ **The stall risk is CONSIDERED AND JUDGED NEGLIGIBLE**, with its reasons on the entry.
+   ⛔ Do not re-raise it. New evidence is a report to the owner, not a redesign.
+7. ⚖️ **The scope sentence is load-bearing for the public copy:** nothing is made ineligible; the
+   change is **subtractive on one automatic picker**. The owner's publishable framing is on C95 —
+   lead the fix-list row with it.
 
 ---
 
-## 3 · The one real engineering decision — where the hook goes
+## 3 · The build — the owner's own design, and why it is the lead option
 
-⭐ This is the job's actual difficulty, and it is a **caller-and-inheritor question**, not a
-design question.
+⭐⭐ **The owner designed this on 2026-09-16 and it is the route to build.** It beats what this brief
+originally proposed, because it solves the scoping problem that made the per-bucket seam look
+unusable.
 
-**What was derived at authoring** (game 1.1.0.403908, `ModTools\Src`; re-verify per §7a):
+### 3a · The predicate
 
-- `CargoTransporter:GatherAvailableColonists` (`Lua/Buildings/CargoTransporter.lua:237`) is the
-  colony-wide auto-draft. ⛔ `RocketBase` itself parents `CargoTransporter`
-  (`Lua/Buildings/RocketBase.lua:2`), so **every rocket inherits it** — the class is not, on its
-  own, an expedition scope.
-- **Three implementations exist** and `EF-104` lists them. The lander
-  (`LanderRocketBase:GatherAvailableColonists`, `LanderRocket.lua:1149`) **overrides** it with the
-  player-filled list and never delegates to the base; `CargoTransporterNew` is a different class
-  used by the space elevator.
-- `CargoTransporter:Load` has exactly **two** call sites in the tree —
-  `LanderRocket.lua:306` and `RocketExpedition.lua:536`. ⇒ **INFERRED, and this is the load-bearing
-  inference of the whole job:** the only live route into the base gather is the expedition one,
-  because the lander overrides it at line 196's dynamic dispatch.
-- `RocketExpeditionBase:GatherAvailableColonists` (`RocketExpedition.lua:496-497`) does not
-  inherit the body — it calls `CargoTransporter.GatherAvailableColonists(self, …)` **explicitly**,
-  a table-field read at call time.
+One named helper, one line in it:
 
-⚠️ **THE FLATTENING HAZARD, and it decides the hook.** Classes are flattened at build time, so a
-runtime wrap of a parent class never fires for a leaf that holds its own copy. That makes
-`RocketExpeditionBase` — the semantically perfect target — the *hard* one, and
-`CargoTransporter.GatherAvailableColonists` — reached by an explicit table read — the *easy* one.
-⛔ **Do not take the easy one on this brief's word.** The claim that it is expedition-scoped rests
-on two call sites and one override; **count the callers and every inheritor yourself** before you
-install anything, and say in the report what your count was and how you took it.
+```lua
+IsKindOf(unit.residence, "MicroGHabitatBase")
+```
 
-⚠️ **Whichever you hook, the module's `Require` block must name every `(class, method)` pair it
-installs on or captures from** — the F107 rule, `FIX_POLICY` §1. And prefer the least invasive
-technique that works (`FIX_POLICY` §1): filtering a pool the original returns is smaller than
-replacing the body.
+⭐ Keep it behind a named function even though it is one line — one place to read, one place to
+change, and a door left open without inventing anything to hold it open.
 
-### ⛔⛔ Filtering the RETURNED LIST hangs the rocket forever. Do not do it.
+⚠️ **Not `NaturalistHabitat`.** The two habitats are siblings: `NaturalistHabitat` →
+`NaturalHabitatBase` → `MicroGHabitatBase`, and `MicroGHabitat` → `MicroGHabitatBase`. Keying on the
+leaf silently misses the Micro-G habitat and ships a half-fix. ⭐ `IsKindOf` is a pure type test — it
+pulls in **no** behaviour from the base class, so using the base costs nothing.
 
-⚠️ **CORRECTED 2026-09-16 on the owner's question — an earlier draft of this brief called
-post-filtering "safe but wasteful". It is neither, and the sort order is why.**
+⚠️ **`residence` is readable at pick time.** It is only cleared at boarding
+(`Colonist:EnterTransporter` → `SetDome(false)`), which runs after the gather has returned.
+⭐ A `residence and …` guard is unnecessary: the picker itself passes a `false` workplace to
+`IsKindOf` on every unemployed colonist, so the false case is proven safe every draft.
 
-Habitat residents are unemployed **and** idle, so they land in **bucket 1**, the draft's *first*
-pick (`CargoTransporter.lua:259-282`; the walk order is unemployed+idle → unemployed+busy →
-**employed+idle** → employed+busy, and `idle` means literally `command == "Idle" or "Abandoned"`,
-so a resting colonist counts as busy). Then:
+⛔ **Do NOT key on 1.1.0's residency flags** (`allow_work_in_connected`, `allow_service_in_connected`,
+`accept_colonists`). They look like the game's own vocabulary for "exempt" — the shipped comment even
+says *"residence-only communities (habitats) … opt out"* — but the 1.0.7 tree shows they are
+**player-toggleable dome policies** (`Dome.lua:849`, `:883`, `Community.lua:147`). A predicate keyed
+on them exempts **any dome whose player switched connected work off**: silent, colony-wide, and worse
+than the bug. Body in `EF-103`. ⭐ The flags are the **fix-list reasoning**, not the `if`.
 
-- `GatherAvailableCargo` returns **`false`** when `#new_crew < count` (`CargoTransporter.lua:196-199`);
-- `Load` loops `while not succeed do Sleep(1000)` **forever** (`:124-130`);
-- expeditions call `CargoTransporter.Load(self, manifest)` with **no** `quick_load` and no
-  `transfer_available` (`RocketExpedition.lua:536`), so that retry loop **is live**.
+### 3b · The hook — wrap the per-bucket filter, scoped to the picker call
 
-⇒ Strip habitat residents *after* the gather returns and the crew is short on **every retry**,
-because the unmodified original re-picks the same bucket-1 residents each time. **The rocket waits
-forever on "Not enough Colonists" while the colony is full of eligible colonists.** ⛔ That is the
-exact stall C95 judged negligible — post-filtering does not risk it, it **manufactures** it, every
-time, and a player would read it as this pack hanging their expedition.
+`CargoTransporter:GatherAvailableColonists` (`CargoTransporter.lua:237-292`) calls the global
+`FilterColonistsByTrait` **once per priority bucket** (`:278`). Filtering there strips habitat
+residents *inside* the picker, so the draft falls through to the next bucket and **fills the crew
+normally**.
 
-⚠️ **This is NOT a re-raise of the ruled stall risk** (§2 item 6). The owner's ruling was about
-removing five candidates from a large pool and it stands untouched. This is one implementation
-shape being unusable.
+The scoping is the owner's insight: **swap the global only for the duration of the picker call**, from
+a wrapper on `CargoTransporter.GatherAvailableColonists`. Outside that window the global is vanilla,
+so the lander (`LanderRocket.lua:1171`, `:1182`) and the space elevator
+(`CargoTransporterNew.lua:272`) — the other three of its five call sites — never see it.
 
-**So the filter must act on the POOL, before the buckets are walked.** ⭐ One seam worth pricing
-first: `FilterColonistsByTrait` is a **global** (`Lua/CargoTransporterNew.lua:197`) that the gather
-calls **once per bucket** (`CargoTransporter.lua:278`), so filtering there lets the gather fall
-through to the next bucket and fill the crew properly. ⛔ **But count its callers before reaching
-for it — there are five, across three different gathers**, including the lander
-(`LanderRocket.lua:1171`, `:1182`) and the space elevator (`CargoTransporterNew.lua:272`), so a
-bare global wrap reaches into **both** of the scopes §4 forbids. Scoping it to the expedition
-caller is the problem to solve, and a body copy may turn out to be the honest answer instead.
+⚠️ **Three things that decide whether it survives contact:**
 
-⭐ **Say which shape you chose and what it costs**, and check what the choice does to the "Not
-enough Colonists" status and to `colonist_summon_fail` (`RocketExpedition.lua:498`).
+1. ⛔ **Restore on the error path.** If the original throws and the swap is not put back, the global
+   stays wrapped **permanently**, and from then on the lander and elevator filter habitat residents
+   too — silently, with nothing to report it. `pcall` and restore on both paths.
+2. ⭐ **The swap is observationally atomic, and that is load-bearing.** Nothing between the label
+   read (`:240`) and the returned list (`:292`) yields — no `Sleep`, no `WaitMsg`, no thread
+   creation, and the callees are pure reads. ⛔ **Re-prove that; do not inherit it from this brief.**
+3. ⚠️ **Plain assignment, not `rawset`.** Mod code runs in a sandboxed env where `rawset(_G, k, v)`
+   writes a shadow only this mod sees, so the shipped picker would keep calling the real function.
+   Plain `FilterColonistsByTrait = wrapper` goes through `ModEnvMeta.__newindex` and reaches the real
+   global. ⭐ Comment the line, or someone will "fix" it into a no-op.
 
-### ⭐ The owner's shape — ONE predicate, and do not touch the scorer at all
+⚠️ **Verify the wrapper fires at all.** `RocketExpeditionBase:GatherAvailableColonists`
+(`RocketExpedition.lua:496-497`) calls `CargoTransporter.GatherAvailableColonists(self, …)` by
+**explicit table read**, so swapping that field intercepts it whatever the leaf rocket class was
+flattened into. ⛔ But `RocketBase` itself parents `CargoTransporter`, so the class alone is not an
+expedition scope — the scope rests on `CargoTransporter:Load` having only two call sites (the lander,
+which overrides the gather, and the expedition). **Re-count callers and inheritors yourself and put
+the count in the report.**
 
-⚖️ **Owner, 2026-09-16, and this is the structure to build to:** *"we could probably get away from
-actually modifying the priority system at all… find the point immediately before the game starts
-scoring candidates"*, with the exemption behind a single named predicate rather than an inline test.
+### 3c · The two fallbacks, and when to reach for them
 
-⭐ **Adopt the single-predicate structure.** One function — `IsAutoPickerExempt(colonist)` or
-similar — that today answers exactly one question. One place to read, one place to change, and a
-door left open without inventing anything to hold it open.
+⛔ Only if 3b fails a check above.
 
-⛔ **But two of the pieces in the owner's sketch have no substrate on this build, MEASURED
-2026-09-16:**
+- **Swap the pool instead.** Replace `city.labels.Colonist` (and each connected city's) with a
+  filtered copy for the duration of the call. Same atomicity requirement, more surface.
+- **Copy the body** and put `if not IsAutoPickerExempt(unit) then … end` around the bucketing loop.
+  ⭐ Semantically the cleanest placement — habitat residents never enter a bucket at all. ⚠️ But a
+  full-body replacement is the most clash-prone shape the pack ships and carries the `D14` stand-down
+  question; `FIX_POLICY` §1 wants the least invasive thing that works.
 
-| sketched | reality |
-|---|---|
-| `IsKindOf(colonist.residence, "NaturalistHabitat")` | ⛔ **misses the Micro-G habitat entirely.** The hierarchy is `NaturalistHabitat` → `NaturalHabitatBase` → `MicroGHabitatBase` (`NaturalHabitat.lua:1-3`) and `MicroGHabitat` → `MicroGHabitatBase`. **`MicroGHabitatBase` is the one test that covers both**, and it is what vanilla's own `IsSuitableWorkplace` uses |
-| `dome:HasTag("AutoPickerExempt")` | ⛔ **there is no tag system.** `grep -rn "HasTag" <Src>/Lua` returns nothing on game objects; `tags` exists only on mod definitions and resource definitions |
-| `colonist:GetDome()` | ⛔ **no such method.** `dome` is a plain field, and `MicroGHabitatBase` parents `Community`, never `Dome` (`MicroGHabitat.lua:3-4`, `EF-103`) — so `colonist.dome` is **false** for exactly the residents this fix is about. The dome branch could never fire |
+### 3d · ⛔ What will NOT work — do not rediscover this
 
-⇒ **The predicate's whole body is `IsKindOf(colonist.residence, "MicroGHabitatBase")`.** Keep the
-named function; drop the dome half.
-
-#### ⛔ And do NOT key the predicate on 1.1.0's residency FLAGS. They were tried and they are a trap.
-
-⭐ The idea is attractive and it was pursued on the owner's prompt 2026-09-16: 1.1.0 moved
-`allow_work_in_connected` / `allow_service_in_connected` up onto `Community` and added
-`can_be_safety_dome`, and the shipped comment names the very concept this fix needs —
-*"residence-only communities (habitats) can't, so they opt out"* (`Community.lua:18`). Exactly one
-class opts out of all three. It reads like the game's own vocabulary for "exempt".
-
-⛔ **The 1.0.7 control kills it.** `grep -rn "allow_work_in_connected" <1.0.7>/Lua` shows both
-connected-domes flags already existed **on `Dome`**, as **player-toggleable policies**
-(`Dome.lua:849`, `:883` call `TogglePolicy`; `accept_colonists` too, `Community.lua:147`). ⇒ **A
-predicate keyed on them exempts any dome whose player has switched connected work off** — a silent,
-colony-wide loss of expedition crew caused by an unrelated UI toggle. ⛔ That is a worse defect than
-the one being fixed.
-
-⚠️ `can_be_safety_dome` **is** new in 1.1.0 and is **not** toggleable, so it alone survives the
-control — but it means "can shelter homeless colonists", not "is exempt from the draft". Keying on it
-would be a coincidence of extension, not a statement of meaning, and the next patch that shelters
-differently would silently change who gets drafted.
-
-⇒ ⭐ **Use the class test. It is what vanilla's own employment carve-out uses** (`Workplace.lua:1453`),
-so the pack and the game answer "is this a habitat resident?" the same way. **The flags are the
-REASONING, not the predicate** — the habitat opts out of connected work, connected service and
-shelter duty, and the draft is the last hole in that isolation. ⭐ That is the fix-list sentence;
-it is not the `if`.
-
-⚠️ One genuine idiom worth borrowing though: **`residence.parent_dome or residence`** is 1.1.0's own
-way of saying "the colonist's home community, dome or habitat" (`Colonist.lua:5051`, `:5069`). Prefer
-it over anything invented.
-
-⭐ **Three ways to realise "don't touch the scorer", cheapest first. Price them in this order and
-say why you landed where you did.**
-
-1. **Swap the pool around the original** — the purest form of the owner's idea. Wrap
-   `CargoTransporter.GatherAvailableColonists`; before delegating, put a filtered copy in
-   `self.city.labels.Colonist` **and in each connected city's** (`GetConnectedCitiesForColonists`
-   contributes to the same pool); call the original; restore. ✅ The priority system is untouched,
-   fall-through and fill behave exactly as vanilla, no body is copied.
-   ⚠️ **Its safety rests on one property: nothing between the label read (`:240`) and the returned
-   list (`:292`) yields**, so no other thread can observe the swapped label. ⭐ That held when
-   checked on 1.1.0.403908 — no `Sleep`, no `WaitMsg`, no thread creation on the path, and
-   `ValidateBuilding` / `FilterColonistsByTrait` are pure reads. ⛔ **Re-prove it, do not inherit
-   it**, and restore under `pcall` so an error cannot leave a colony's label filtered.
-2. **Wrap `FilterColonistsByTrait`, scoped to the expedition caller** — acts per bucket inside the
-   gather, so fall-through still works. ⚠️ Five call sites across three gathers (above); the
-   scoping is the whole difficulty.
-3. **Copy the body** with `if not IsAutoPickerExempt(unit) then … end` in the bucketing loop —
-   literally the owner's line. ✅ Most readable, no shared-state trickery. ⚠️ A full-body
-   replacement is the most clash-prone shape the pack ships and carries the `D14` stand-down
-   question; `FIX_POLICY` §1 wants the least invasive thing that works, so it is the fallback,
-   not the opening bid.
-
-⛔ **What is NOT an option:** removing habitat residents from `city.labels.Colonist` persistently.
-That label drives population, UI, migration and birth/death — it is the colony's census, not a
-draft queue.
+**Filtering the list the picker returns.** Habitat residents are bucket 1, the first pick;
+`GatherAvailableCargo` returns `false` on a short crew (`:196-199`); `Load` then loops
+`while not succeed do Sleep(1000)` **forever** (`:124-130`), and expeditions reach `Load` with neither
+`quick_load` nor `transfer_available`. ⇒ the unmodified original re-picks the same residents every
+second and **the rocket waits on "Not enough Colonists" permanently in a colony full of eligible
+people.** ⛔ That is the stall C95 judged negligible — this shape does not risk it, it manufactures it.
 
 ---
 
 ## 4 · What the fix must NOT do
 
-- ⛔ **No migration and no save fix-up.** The repair is **forward-only**: it changes who is
-  eligible for a *future* draft. A habitat resident already away when a rocket lands still comes
-  home by the old path and is still re-homed. Claim nothing more.
-- ⛔ **No reach into the asteroid lander.** If your hook can affect a player-chosen passenger
-  list, it is the wrong hook.
-- ⛔ **No repair of the return path.** The owner declined it explicitly.
+- ⛔ **No migration, no save fix-up.** Forward-only: it changes who is eligible for a *future* draft.
+  A habitat resident already away still comes home by the old path and is still re-homed. Claim
+  nothing more.
+- ⛔ **No reach into the asteroid lander.** If the hook can touch a player-chosen passenger list, it
+  is the wrong hook.
+- ⛔ **No reach into trade / supply / colony transfer.** `CargoTransporterNew` is a different class.
+- ⛔ **No repair of the return path.** The owner declined it.
 - ⛔ **No loud failure.** `FIX_POLICY` §2: if the predicate cannot be evaluated, vanilla behaviour
-  must survive unchanged and silently.
-- ⛔ **No status promotion without a witness.** Do not move C95 to a shipped status on a desk
-  result.
+  survives unchanged and silently.
+- ⛔ **Nothing from [C100](../bugs/C100.md).** Habitat residents walking out on their own is a
+  separate, unruled defect ([ck188](../../PLAYTEST_CHECKLIST.md)). Finding more about it does not
+  authorise touching it.
 
 ---
 
-## 5 · ⚠️ A correction to the handoff that commissioned this brief
+## 5 · Acceptance
 
-The 2026-09-16 handoff (`perma/HANDOFF_ORCHESTRATOR.md` §0b) says the unisolated gate — rail
-sweep vs `CanVisit` capacity — is *"still unisolated, and the brief must say so… A fix written
-without settling that risks repairing the wrong gate,"* and asks whether this job needs
-`EF-104`'s crew-trace instrument first.
+⭐ **The owner has the save.** Ask what is in it before designing around it; do not provision.
 
-⛔ **That is wrong, and C95 already ruled it wrong** in "Two things a future session must not get
-wrong", item 1: **the gate is MOOT for this repair and is not a reason to delay.** A fix that
-stops habitat residents being drafted at all means **neither gate is ever reached**. The gate
-matters only to a return-path repair, which the owner declined.
-
-⇒ **The answer to the handoff's question is NO: this job does not need the crew trace first.**
-
-⭐ **But arm it anyway, for a different reason.** `SMRTest.Log.CrewDraft` (TestKit `acafc74`,
-built 2026-09-16, **unrun**) prints the pool the shipped draft walked, the pre-filter's
-casualties, both unemployed buckets and every colonist returned with the bucket they came from.
-⇒ **It is the reach control for this fix**: armed before and after, it shows on one line whether
-the habitat residents left the pool and whether anyone else did. ⛔ Read its design in `EF-104`;
-⚠️ it must be armed **before** the expedition is assigned, because the gather runs once.
-
-⚠️ `EF-104` also carries **one unexplained draft observation** (three idle+unemployed colonists
-passed over while three employed were taken). ⛔ **That is not a blocker for this job either**,
-and it is not this job's to settle — but if your testing produces a line that explains it, put it
-on `EF-104` rather than losing it here.
-
----
-
-## 6 · Acceptance
-
-- **The predicate fires on both habitat classes.** Naturalist and Micro-G both descend from
-  `MicroGHabitatBase`; prove one test covers both rather than assuming it.
-- **An expedition draft in a colony with habitat residents takes none of them**, and the reach
-  control (§5) shows them absent from the returned list while the rest of the pool is unchanged.
-- ⭐ **The negative leg, and it is the one that catches a too-wide hook:** a **player-chosen
-  asteroid-lander passenger list containing a habitat resident still carries them.** A fix that
-  fails this has reached past its scope.
-- ⭐⭐ **The fill leg, and it is the one that catches the post-filter shape (§3).** An expedition
-  asking for N crew, in a colony holding N eligible non-habitat colonists, **departs with N** —
-  the draft falls through to the next bucket and fills. ⛔ A rocket that sits on "Not enough
-  Colonists" here is the §3 hang, not a scarcity result: check the colony before blaming the
+- **Both habitat classes.** Naturalist and Micro-G both reach `MicroGHabitatBase` — prove one test
+  covers both rather than assuming it.
+- **The draft takes none of them.** With `SMRTest.Log.CrewDraft` armed (TestKit `acafc74`, a Kit-page
+  arm/disarm button — ⚠️ arm it **before** the expedition is assigned, the gather runs once), the log
+  shows the habitat residents absent from the returned list and the rest of the pool unchanged.
+- ⭐⭐ **THE FILL LEG — the one that catches every wrong shape.** An expedition asking for N crew, in
+  a colony holding N eligible non-habitat colonists, **departs with N**. ⛔ A rocket sitting on "Not
+  enough Colonists" here is §3d's hang, not a scarcity result — check the colony before blaming the
   fixture.
-- **Trade / supply / colony-transfer drafts are untouched** — the space elevator's
-  `CargoTransporterNew` path is a different class; show it is unaffected rather than assuming.
-- **Fail-safe leg:** with the predicate made unevaluable (a colonist with no `residence`, a
-  missing class), vanilla behaviour survives and nothing is logged loudly.
-- **Removal leg:** with the module removed, the next load behaves exactly as vanilla.
-- **A clean boot:** the module's `applied` line present, no error-shaped lines, exit 0.
-- ⚠️ **A FIX INVALIDATES ITS OWN TESTS.** Base any harm leg on the **pre-fix** body and re-run the
-  **whole** suite, not only the changed leg.
+- ⭐ **THE LANDER NEGATIVE LEG — the one that catches a too-wide hook.** A player-chosen asteroid
+  lander passenger list containing a habitat resident **still carries them**.
+- **The elevator leg.** Trade / supply / colony transfer drafts are untouched — show it, don't assume.
+- **Fail-safe leg.** With the predicate made unevaluable (a colonist with no `residence`), vanilla
+  behaviour survives and nothing is logged loudly.
+- **Removal leg.** With the module removed, the next load behaves exactly as vanilla.
+- **Restore leg** (specific to 3b): force an error inside the picker and prove the global came back.
+- **Clean boot:** `applied` line present, no error-shaped lines, exit 0.
 
-⚠️ Any behavioural or assignment-quality claim must state the fixture's scarcity, fleet, density
-and layout, and report **that colony's** measurement rather than generalising from a forced setup.
-⛔ Name every setup mutation; reject one that intersects the draft itself (⚠️ a colony-wide
-employment reassignment is exactly such a mutation — it is `EF-104`'s leading hypothesis for the
-unexplained observation).
+⚠️ **A FIX INVALIDATES ITS OWN TESTS.** Base every harm leg on the **pre-fix** body and re-run the
+**whole** suite, not only the changed leg.
+
+⚠️ Any behavioural or assignment-quality claim must state the fixture's scarcity, fleet, density and
+layout and report **that colony's** measurement. ⛔ Name every setup mutation; reject one that
+intersects the draft — ⚠️ a colony-wide employment reassignment is exactly such a mutation, and is
+`EF-104`'s leading hypothesis for its unexplained observation.
+
+⭐ **One free reading while you are in there, and it is not this fix's job to repair.** Under-supply
+an expedition deliberately and **read the rocket's panel**. `EF-104` records that the line setting
+`colonist_summon_fail` dereferences a nil on exactly that path, byte-identical since 1.0.7; "Not
+enough Colonists" showing proves it executed, a blank panel on a waiting rocket is the tell. ⛔ Report
+it, do not fix it here.
 
 ---
 
-## 7 · Deliverable and stop conditions
+## 6 · Deliverable and stop conditions
 
 **Deliverable.** Module in `Code/`, registered via `SMRFixPack.Register`, gated via
-`SMRFixPack.Require` with every `(class, method)` pair it touches. `items.lua` updated. Build
-report at `docs/agent/reports/C95_HABITAT_DRAFT_BUILD.md` carrying the caller/inheritor count and
-how it was taken, the hook choice and its cost, and everything that did not work. C95's front
-matter **and** its body heading tag updated together — ⛔ a status flip must hit both or doccheck
-goes RED, and a status change belongs in the title too, because `INDEX.md` renders title + status
-and nothing else.
+`SMRFixPack.Require` naming every `(class, method)` pair it installs on or captures from.
+`items.lua` updated. Build report at `docs/agent/reports/C95_HABITAT_DRAFT_BUILD.md` carrying the
+caller/inheritor count and how it was taken, the hook choice and its cost, the restore proof, and
+everything that did not work.
 
-Label every claim **SOURCE / MEASURED / INFERRED**, keep a **Not opened** list, and say what each
+C95's front matter **and** body heading tag updated together — ⛔ a status flip must hit both or
+doccheck goes RED, and a status change belongs in the **title** too, because `INDEX.md` renders title
++ status and nothing else. ⛔ Do not promote past what was witnessed.
+
+Label every claim **SOURCE / MEASURED / INFERRED**, keep a **Not opened** list, say what each
 refutation depends on. `python tools/doccheck.py` GREEN before committing; commit with a pathspec
 after re-checking `git status` for a peer's uncommitted work.
 
-**Owner-facing.** Put the playtest recipe on `docs/PLAYTEST_CHECKLIST.md` with its `ck` marker
-(⛔ `### <date> — <n>: <title>` plus the marker comment; sub-headings are `####` — an `##` heading
-silently closes "Decisions waiting on you" and orphans every item below it). Draft the fix-list
-row and its judgment-call reasoning from the owner's own wording on C95. ⛔ Then **STOP**: nothing
-ships until the owner lifts the hold in words.
+**Owner-facing.** Playtest recipe on `docs/PLAYTEST_CHECKLIST.md` with its `ck` marker (⛔ `### <date>
+— <n>: <title>` plus the marker comment; sub-headings `####` — an `##` heading silently closes
+"Decisions waiting on you" and orphans every item below it; verify with the item count, not the gate
+colour). Fix-list row and its judgment-call reasoning drafted from the owner's own wording on C95.
 
 **Stop conditions — permission to report rather than push on.** Stop and report if: the
-caller/inheritor count contradicts §3's inference; no hook can be expedition-scoped without
-reaching the lander; the predicate cannot be evaluated where the draft runs; the fix would need a
-migration to be useful; or testing produces evidence that the stall risk is real after all. ⛔ In
-each case the finding is the deliverable — do not improvise a different repair shape.
+caller/inheritor count contradicts §3b; something on the picker's path yields, so the swap is not
+atomic; no hook can be expedition-scoped without reaching the lander; the predicate cannot be
+evaluated where the draft runs; or the fill leg fails.
 
-**What may NOT be claimed.** ⛔ Not "habitat residents can no longer go on expeditions" — the
-player can still send them by hand. ⛔ Not "colonists already away are rescued" — the repair is
-forward-only. ⛔ Not "confirmed live" on a desk result. Where the evidence will not carry the
-claim, **write the narrower true statement.**
+**What may NOT be claimed.** ⛔ Not "habitat residents can no longer go on expeditions" — the player
+can still send them by hand. ⛔ Not "colonists already away are rescued" — forward-only. ⛔ Not
+"confirmed live" on a desk result. Where the evidence will not carry the claim, **write the narrower
+true statement.**
 
-**Lifecycle.** This is a one-off. When it reports, `git rm` it and delete its `prompts/README.md`
-row **in the same commit**. ⛔ No tombstone row, no struck-through line.
+**Lifecycle.** One-off. When it reports, `git rm` it and delete its `prompts/README.md` row **in the
+same commit**. ⛔ No tombstone row.
 
 ---
 
-## 7a · Derived facts and falsifiers
+## 7 · Derived facts and falsifiers
 
 | fact | how it was measured | at | falsifier |
 |---|---|---|---|
-| The repair shape, classification, scope and public framing are the owner's rulings | owner's own words quoted on C95, 2026-09-15 | C95 at this brief's authoring commit | a later owner ruling. ⛔ No source read and no test result overrides it |
-| The gate (rail sweep vs `CanVisit`) is moot for this repair | C95 "Two things a future session must not get wrong" item 1 | same | a change of repair shape to a return-path widening — which the owner declined |
-| `IsKindOf(unit.residence, "MicroGHabitatBase")` is vanilla's own habitat predicate | `IsSuitableWorkplace`, `Lua/Buildings/Workplace.lua:1446-1462`, quoted on C95 | game 1.1.0.403908 build 24995074 | `grep -n "MicroGHabitatBase" <Src>/Lua/Buildings/Workplace.lua` — no hit means the branch moved; re-read before keying on it |
-| `RocketBase` parents `CargoTransporter`, so every rocket inherits the base gather | `grep` of `__parents` across `Lua`/`DLC` | same | `grep -rn '"CargoTransporter"' <Src>/Lua <Src>/DLC \| grep parents` — a new parent list changes the scope argument |
-| `CargoTransporter:Load` has exactly two call sites, so the base gather is expedition-only in practice | `grep -rn "CargoTransporter\.Load\|self:Load(" <Src>/Lua <Src>/DLC` | same | the same grep returning a third site. ⛔ **INFERRED — re-run it and count inheritors before hooking** |
-| `RocketExpeditionBase` calls the base gather by explicit table read, not inheritance | `RocketExpedition.lua:496-497` | same | reading those two lines; a change to `self:` dispatch breaks the easy hook |
-| The draft walks unemployed+idle → unemployed+busy → **employed+idle** → employed+busy, so habitat residents are the FIRST pick | `CargoTransporter.lua:259-282` read in full | same | read those lines; a reordered `ipairs({…})` list changes which bucket backfills |
-| A short crew makes `Load` retry forever, and expeditions take that path | `CargoTransporter.lua:196-199` + `:124-130`, and `RocketExpedition.lua:536` passing no `quick_load`/`transfer_available` | same | ⭐ this is what makes post-filtering a hang; if `Load` gains a retry cap or the call gains a flag, re-price §3 |
-| `FilterColonistsByTrait` is a global with five call sites across three gathers | `grep -rn "FilterColonistsByTrait" <Src>/Lua <Src>/CommonLua <Src>/DLC` | same | re-run that grep; a different count changes whether the per-bucket seam can be scoped |
-| Both habitats reach `MicroGHabitatBase`, so one `IsKindOf` covers them; `NaturalistHabitat` alone does not | `__parents` chain: `NaturalistHabitat` → `NaturalHabitatBase` → `MicroGHabitatBase`; `MicroGHabitat` → `MicroGHabitatBase` | same | `grep -rn "DefineClass.NaturalHabitatBase" -A3 <Src>/Lua` — a reparent breaks the single test |
-| There is no tag system and no `GetDome()`; `colonist.dome` is false for a habitat resident | `grep -rn "HasTag" <Src>/Lua` and `grep -rn "function .*:GetDome(" <Src>` both empty; `MicroGHabitatBase` parents `Community` | same | re-run both greps. ⛔ A hit does not revive the dome branch — `EF-103` is why it cannot fire |
-| Nothing yields between the gather's label read and its return, so a pool swap is atomic | no `Sleep`/`WaitMsg`/thread creation in `CargoTransporter.lua:220-292`; callees on the path are pure reads | same | ⭐ re-prove before relying on it: grep that range again and check any callee added since |
-| The space elevator carries a SECOND copy of the same four-bucket sort, plus a liveness guard the expedition copy lacks | `CargoTransporterNew.lua:235-287` vs `CargoTransporter.lua:237-292` | same | diff the two bodies; ⛔ it is a different class and §4 forbids reaching it |
-| `SMRTest.Log.CrewDraft` exists and is the reach control | TestKit `acafc74`, built 2026-09-16 | TestKit HEAD at authoring | `git -C C:/Dev/SMR-BugFixPack-TestKit log --oneline -- Code/90_Loggers.lua`; ⛔ it was **never run in play** — treat its output as unwitnessed until a sitting sees it |
-| Module and fix counts are not inputs to this job | no acceptance clause depends on a stored total | — | if the build adds a module, emit the number with `python tools/doccheck.py --emit-counts` rather than writing one here |
+| Build + test authorised; C96's half of ck185 still open | owner's words, 2026-09-16, recorded on the checklist | this rewrite's commit | a later owner ruling. ⛔ No source read overrides it |
+| Repair shape, classification, scope and public framing are the owner's | their own words quoted on C95, 2026-09-15 | C95 at this commit | a later owner ruling |
+| `IsKindOf(unit.residence, "MicroGHabitatBase")` is vanilla's own habitat predicate | `IsSuitableWorkplace`, `Workplace.lua:1446-1462` | game 1.1.0.403908 build 24995074 | `grep -n "MicroGHabitatBase" <Src>/Lua/Buildings/Workplace.lua` |
+| Both habitats reach `MicroGHabitatBase`; the leaf class alone does not cover both | `__parents` chain in `NaturalHabitat.lua:1-2` and `BuildingTemplate/MicroGHabitat.generated.lua:5` | same | `grep -rn "DefineClass.NaturalHabitatBase" -A3 <Src>/Lua` |
+| The connected-domes flags are player-toggleable policies, so unusable as a predicate | 1.0.7 tree: `Dome.lua:849`, `:883`, `Community.lua:147` → `TogglePolicy` | 1.0.7.396349 archive | re-grep both trees; body in `EF-103` |
+| `FilterColonistsByTrait` is a global called once per bucket, with 5 sites across 3 gathers | `grep -rn "FilterColonistsByTrait" <Src>/Lua <Src>/CommonLua <Src>/DLC` | 1.1.0.403908 | re-run the grep; a different count changes the scoping argument |
+| `RocketExpeditionBase` calls the base gather by explicit table read | `RocketExpedition.lua:496-497` | same | read those two lines; a change to `self:` dispatch breaks the hook |
+| `CargoTransporter:Load` has two call sites, so the base gather is expedition-only in practice | `grep -rn "CargoTransporter\.Load\|self:Load(" <Src>/Lua <Src>/DLC` | same | ⛔ **INFERRED — re-count before hooking** |
+| Nothing yields on the picker's path, so a scoped swap is atomic | no `Sleep`/`WaitMsg`/thread creation in `CargoTransporter.lua:220-292`; callees are pure reads | same | ⭐ re-grep that range and check any callee added since |
+| A short crew is a permanent wait, not a smaller crew | `CargoTransporter.lua:196-199` + `:124-130`, `RocketExpedition.lua:536` | same | if `Load` gains a retry cap, re-price §3d |
+| `SMRTest.Log.CrewDraft` is the reach control | TestKit `acafc74` | TestKit HEAD | `git -C C:/Dev/SMR-BugFixPack-TestKit log --oneline -- Code/90_Loggers.lua`; ⛔ **never run in play** — treat its output as unwitnessed until this sitting |
+| Module and fix counts are not inputs to this job | no acceptance clause depends on a stored total | — | emit with `python tools/doccheck.py --emit-counts` rather than writing a number |
 
-⚠️ The installed build is a durable structural fact group: run
-`python tools/doccheck.py --emit-fingerprint` and re-derive only the groups that moved. ⛔ Many
+⚠️ Run `python tools/doccheck.py --emit-fingerprint` and re-derive only the groups that moved. ⛔ Many
 older citations point into a tree the 1.1.0 auto-update overwrote.
 
 ---
 
 ## 8 · Live todo list — change it as you go
 
-At execution start mark item 1 `IN PROGRESS` and every later item `PENDING`; thereafter keep
-**exactly one** unfinished commit-and-verify unit in progress, expand a stage as soon as it
-splits, mark each unit complete when it finishes, and rewrite the list when reality changes.
-⛔ Do not carry several commits behind one checkbox or update the list only at the end. Put stable
-results in the item text — the owner reads this list to decide when to step in.
+Mark item 1 `IN PROGRESS` and the rest `PENDING`; thereafter keep **exactly one** unfinished
+commit-and-verify unit in progress, expand a stage as soon as it splits, mark each complete when it
+finishes, and rewrite the list when reality changes. ⛔ Never carry several commits behind one
+checkbox or update the list only at the end. Put stable results in the item text — the owner reads
+this list to decide when to step in.
 
-- [ ] 1. Orient; ⛔ **confirm the owner has lifted ck185 in words** — if not, STOP here and say so
-- [ ] 2. Re-derive §3's caller and inheritor counts yourself; record the count and the command
-- [ ] 3. Choose the hook and the filter shape; justify both, including what the shape costs
-- [ ] 4. Probe sweep per `WORKFLOW.md` "Probe hygiene", recorded in the measurement commit
-- [ ] 5. Module + `items.lua` + `Require` block; clean boot witnessed
-- [ ] 6. Acceptance §6: habitat legs, the **lander negative leg**, the elevator leg
-- [ ] 7. Fail-safe and removal legs, both re-based on the pre-fix body
-- [ ] 8. Build report; C95 front matter + heading tag + title updated together
-- [ ] 9. Checklist recipe with its `ck` marker; fix-list row drafted from the owner's wording
-- [ ] 10. ⛔ **STOP** — report, and ship nothing until the owner lifts the hold
-- [ ] 11. Your own findings, including everything that did not work
+- [ ] 1. Orient; ask the owner what is in the test save before designing the legs
+- [ ] 2. Re-derive §3b's caller and inheritor counts; record the count and the command
+- [ ] 3. Prove the no-yield property on the picker's path; record how
+- [ ] 4. Build the predicate + the scoped wrap, with the `pcall` restore
+- [ ] 5. Probe sweep per `WORKFLOW.md` "Probe hygiene", recorded in the measurement commit
+- [ ] 6. `items.lua` + `Require` block; clean boot witnessed
+- [ ] 7. Owner sitting: `CrewDraft` armed, the **fill leg**, the **lander negative leg**
+- [ ] 8. Elevator leg, fail-safe leg, removal leg, restore leg — re-based on the pre-fix body
+- [ ] 9. Free reading: under-supply an expedition, read the panel, report (⛔ do not fix)
+- [ ] 10. Build report; C95 front matter + heading tag + title updated together
+- [ ] 11. Checklist recipe with its `ck` marker; fix-list row drafted from the owner's wording
+- [ ] 12. Your own findings, including everything that did not work
