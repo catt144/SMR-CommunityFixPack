@@ -189,3 +189,103 @@ can reach the affected state before building, not after.
 
 Executed model declaration: Claude Fable 5.1 (`claude-fable-5-1`), as reported
 by the session environment. No sub-agents were used.
+
+## Leg A of checklist 188 — RUN ATTENDED 2026-09-16: the fresh 1.1.0 path is HEALTHY
+
+⭐ **Jäger's report is not explained by a failed reveal, an off-screen node, or a broken chain.**
+Run with the owner at the keyboard on their live ESA/Wildfire colony, game 1.1.0.403908,
+`mystery_id = TheMarsBug`, Main tree researched out, **0 tech points** at the baseline read.
+
+⛔ **Not yet mirrored into `PLAYTEST_CHECKLIST.md` item 188** — a peer session held uncommitted
+edits to that file at the time of writing. The marker update is owed.
+
+**MEASURED, in order.**
+
+| leg | command / action | result |
+|---|---|---|
+| baseline | `print(UIColony.mystery_id, GetTechState("WildfireCure_1", UIPlayer), UIPlayer.TechPoints)` | `TheMarsBug hidden 0` |
+| reveal | `SA_RevealTech.SAExec{tech = "WildfireCure", cost = 90000}` — the scenario's own call (`Lua/Scenario/Mystery 8.generated.lua:145`) | no error |
+| read-back | the eleven-node `GetTechState` loop | `WildfireCure_1 enabled`, the other **ten** `hidden` |
+| visibility | opened the tech tree | ⭐ the node was **on screen with no panning**, in the MYSTERIES cluster; the owner zoomed only to photograph it |
+| chain | 20 tech points granted, then each node clicked in turn | every link opened as its predecessor was taken, through to the final `WildfireCure` |
+
+⭐ **The `.SAExec` form in the checklist is correct even though the scenario uses `:SARun`** —
+`SA_RevealTech:SAExec` reads only `self.tech` and `self.cost`, which the dot-call table supplies
+(`Lua/Sequences/SA_Gameplay.lua:1196-1215`). `MysteryTechRevealRemapping.WildfireCure =
+"WildfireCure_1"` (`:1187-1194`) is why the reveal lands on `_1` and not on the parent node.
+
+### Two claims made during the sitting and WITHDRAWN — ⛔ do not reason from them
+
+- ⛔ **"The tooltip's `14,580` is a price the game charges instead of the scenario's 90,000."**
+  **FALSE.** It is a **discount**, not a price. `TFormat.TechDiscountRollover` renders only for a
+  boosted, unresearched tech, and its number is `MulDivRound(UIPlayer.TechPointCost, percent, 100)`
+  (`Lua/TechTree.lua:1630-1645`). **MEASURED in play: `TechPointCost` = 72,900, boost = 20%,
+  20% of 72,900 = 14,580 exactly.**
+- ⛔ **"`ChangeResearchCost` discarding its `points` argument is a candidate defect."**
+  **WITHDRAWN.** 1.0.7 did `status.cost = points` (archived tree `Lua/Research.lua:353-360`); 1.1.0
+  replaces it with `BoostTech(tech_id, 20)` (`Lua/Research.lua:225-227`). Per-tech research prices no
+  longer exist — `Research:TechCost()` returns `0` — so there is nothing for the argument to set, and
+  the shim converts the intent into a working discount that is **displayed and actually paid**.
+
+### How the 1.1.0 research economy actually works — inherit this, it was expensive to establish
+
+- Research points accumulate toward the **next tech point**; the tree header renders
+  `<AccumulatedResearchPoints>/<TechPointCost>` (`Lua/XDef/XTechTree.generated.lua:557`), and the game
+  states it outright at `Lua/ResourceOverview.lua:412`.
+- **Every tech costs the same flat `const.TechPointResearchCost` tech points and completes
+  instantly** — `UIResearch` subtracts the point and calls `ResearchTech` on the next line
+  (`Lua/TechTree.lua:1210-1213`). ⇒ ⛔ **A chain researched back-to-back with banked points is NOT a
+  missing lock.** There is no research-over-time left to pace it.
+- A boost pays out as a **refund of research progress after the purchase**:
+  `if IsTechDiscounted(tech_id) then self:AddResearchPoints(GetTechDiscountAmount(tech_id)) end`
+  (`Lua/TechTree.lua:1222-1225`), which `TryGainTechPoint` may convert on the spot. The queue preview
+  mirrors the same arithmetic (`Player:AdvanceSimResearch`, `:913-937`).
+- ⭐ **The cure is eleven tech points.** The nodes chain `WildfireCure_1 → _2 → … → _10 →
+  WildfireCure` by `To` links (`Data/Tech.lua:6790-6890`), and the scenario waits on the **final**
+  node before lifting the building locks (`Mystery 8.generated.lua:180-196`). At 72,900 research per
+  point and rising, ⇒ **a player may experience the cure as unaffordable rather than unavailable** —
+  that distinction belongs in any reply.
+
+### What Leg A does NOT establish
+
+- ⛔ **Not proof the node is visible for every player.** The tech tree does **not** auto-centre on
+  open — that path returns early (`Lua/XDef/XTechTree.generated.lua:862-873`) — so it restores a
+  saved scroll position. This was one player, one saved position, one resolution.
+- ⛔ **The scenario payoff was not observed.** Because the reveal was force-called, the Trigger
+  sequence is still parked at an earlier gate, so `RemoveBuildingLock("StorageMysteryResource")`,
+  the Mechanized Depot unlock and the infection stop did not fire. Expected on a forced fixture.
+- ⛔ **The organic trigger chain is untested.** That is Leg B, and §Leg B below names the gate that
+  makes it worth running.
+
+## Leg B — the organic chain, and the gate that makes it worth running
+
+⭐ **The sharper target than "timing".** Mapped from `Lua/Scenario/Mystery 8.generated.lua:38-148`.
+The Trigger sequence is `autostart`, so it is already running on any Wildfire colony:
+
+1. **Blocks until ≥100 colonists** — `while not (CountObjectsByLabel(UIColony, "Colonist") >= 100)`, polled ~5 s.
+2. Sleep `3750000 + rand(3750000)`.
+3. `Msg("MysteryBegin")`, sleep `30000 + rand(60000)`.
+4. **Spawns a surface anomaly** — `SA_SpawnAnomaly`, outside domes, within 25000 of a Building,
+   `scan_msg = "Mystery8_AnomalyAnalyzed"`.
+5. ⛔⛔ **`WaitMsg("Mystery8_AnomalyAnalyzed")` — BLOCKS FOREVER until a rover scans that anomaly.**
+   ⇒ **A player who never scans it never gets the cure revealed at all.** This is the strongest
+   candidate for Jäger's report that any leg has produced, and it is not a defect.
+6. **Popup "Anomaly Analyzed"** must be dismissed.
+7. Sleep `3600000 + rand(3600000)`; three colonists gain **Infected**.
+8. **Popup "Wildfire: Infection!"** must be dismissed.
+9. Starts `Rocket To Earth` and `Earth Infected Timeout`; sleep `10800000 + rand(3600000)`.
+10. **`SA_RevealTech{tech = "WildfireCure", cost = 90000}`** — the same call Leg A made by hand.
+
+⇒ Three player-dependent gates: the colonist count, **the anomaly scan**, and two dismissable popups.
+Everything else is a timed sleep.
+
+**Progress probe** — reads which sequences are live, so the run is measured rather than watched
+(`GetSequenceListPlayer`, `CommonLua/Libs/Sequences/SequenceListPlayer.lua:589`; scenario id
+`"Mystery 8"`, `Lua/Mysteries/TheMarsBug.lua:4`):
+
+```
+*r local p = GetSequenceListPlayer("Mystery 8") for _, n in ipairs{"Trigger","Init","Contaminated Lab","Infection Trait Spread","Rocket To Earth","Earth Infected Timeout","Cannot Be Prevented"} do print(n, p and p:IsSequenceRunning(n) and "RUNNING" or "-") end
+```
+
+⛔ **Leg B must start from a save taken BEFORE the Leg A reveal** — the owner took one. ⚠️ Read
+`const.HourDuration` and `const.DayDuration` in-game rather than converting the sleeps by hand.
