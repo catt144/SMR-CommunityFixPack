@@ -38,11 +38,7 @@ and Codex sessions both commit here, several at once, and **Codex is invisible t
 ⛔ **FR-1 is NOT on this handoff.** Every Linux / NVIDIA 580 / workaround-mod item is in
 `prompts/perma/LINUX_DISPATCH.md`. The temp workaround mod is LIVE (Steam 3799500849 / Paradox 158711).
 
-## 0 · START HERE — this handoff carries TWO tasks that EXECUTE
-
-⭐⭐ **OWNER INSTRUCTION 2026-09-16: §0a then §0b start automatically when this handoff is fired, in
-that order and without stopping to ask between them.** They are the deliberate exception to the
-orient-and-ask default below, which resumes once both are done.
+## 0 · START HERE — orient, then ASK
 
 ⛔ **`perma/DISPATCH.md` NO LONGER EXISTS** — the prompts overhaul deleted it 2026-09-15/16. Orient
 from the **`smr-orientation` skill** plus `docs/agent/STATE.md` (now a short pull-only status file,
@@ -50,57 +46,22 @@ not a mandatory read) and `docs/WAITING_ON_YOU.md`. Bindings live in `CLAUDE.md`
 `Must_Read_Header` blocks. Add `ListAgents` (peers edit this tree concurrently) and open a **live
 todo list**.
 
-**After §0a and §0b, the default returns: unless the owner's message names a task, a pasted handoff
-means ORIENT — summarise and ASK what to take.** Do not execute anything else.
+**Unless the owner's message names a task, a pasted handoff means ORIENT — summarise and ASK what to
+take.** Do not execute anything else.
 
-### 0a · FIRST TASK, auto-start — the C98 drop probe
+✅ **The two auto-firing tasks this section carried on 2026-09-16 are BOTH DONE. ⛔ Do not re-run
+them, and do not restore the auto-start instruction from an older copy of this file.**
 
-**Build a log-only wrapper on `Drone:DropCarriedResource` and ride it on the next TestKit link.**
-⛔ **The design, the discriminator table and the two desk questions are in
-[`bugs/C98.md`](../../bugs/C98.md) § "How to settle this WITHOUT reproducing it" — read it there, it
-is not restated here.**
-
-Why it is first: the owner judged the scenario too hard to engineer in a playtest, and a desk audit
-**cannot** close it (`GetPassablePointNearby` is a C export). The wrapper needs **no reproduction** —
-it fires on every carried-resource drop, so ordinary play yields a population in minutes. TestKit
-only, log-only, 0 shipped hashes, **no booked sitting**.
-
-⭐ **Take it with the other two TestKit items rather than as its own errand** — the quick-build row
-and the deferred crew-trace slot, both in §2b. One link, three rows.
-
-### 0b · SECOND TASK, auto-start — author the C95 fix prompt, straight after §0a
-
-⭐⭐ **OWNER INSTRUCTION 2026-09-16: go straight into this when §0a is done. Do not stop to ask.**
-
-**Author a fix prompt for [C95](../../bugs/C95.md)** — the Naturalist/MicroG habitat residents who are
-drafted for expeditions and never returned home. Use the **`prompt-authoring` skill**; the brief is
-the deliverable.
-
-⛔ **AUTHOR THE PROMPT, DO NOT AUTHOR THE FIX.** C95 carries the owner's standing *"do not author
-it"*, and **[ck185](../../../PLAYTEST_CHECKLIST.md) is still open** — it asks the owner to say when
-to build each of C95/C96. Writing the brief prepares that work; it does not start it, and the brief
-itself must carry the hold. ⛔ Nothing ships without the owner lifting it in words.
-
-**What is already settled and must be inherited, not re-derived** (read C95 for the bodies — do not
-restate them in the brief):
-
-- ⭐ **REPRODUCED IN PLAY**, owner at the keyboard, 2026-09-15 — this is one of the very few entries
-  that is not source-only. Two habitat residents taken, neither returned, both re-homed into a dome;
-  one later walked back unaided, proving the habitat was reachable the whole time.
-- ⚖️ **The repair shape is the OWNER'S CHOICE and is not open for redesign:** *exclude habitat
-  residents from the EXPEDITION draft* — ⛔ **NOT** a widening of the return path.
-- ⚖️ Classed an **oversight bug solved by a judgment call** → **main pack, with the mark**,
-  ⛔ **not opt-in**.
-- ⛔ **SCOPE: expeditions only.** The asteroid lander gathers from a player-chosen passenger list and
-  is not an auto-draft.
-- ⚠️ **Still unisolated, and the brief must say so:** which gate excluded the habitat — the rail
-  sweep or `CanVisit` capacity. A fix written without settling that risks repairing the wrong gate.
-- Engine properties behind it: [`EF-103`](../../facts/EF-103.md) (a habitat is a Community, never a
-  `Dome`) and [`EF-104`](../../facts/EF-104.md) (expedition crew is drafted colony-wide and boards by
-  teleport; ⛔ carries one unexplained draft observation).
-
-⚠️ **`EF-104`'s crew-trace slot (§2b) is the instrument that would settle the gate question** — the
-brief should say whether it needs that first, rather than assuming either way.
+- **§0a, the TestKit link** → TestKit `acafc74`, three rows on one link: `SMRTest.Log.DroneDrop`
+  (C98), `SMRTest.Log.CrewDraft` (`EF-104`) and the Selected-page **Quick build** leaf.
+  ⛔ All three are **BUILT AND UNRUN** — §2b carries what is left, which is a sitting, not a link.
+- **§0b, the C95 fix brief** → [`prompts/C95_HABITAT_DRAFT_BUILD.md`](../C95_HABITAT_DRAFT_BUILD.md),
+  with its map row. ⛔ **NOT FIRED and NOT AUTHORISED**: [ck185](../../../PLAYTEST_CHECKLIST.md) must
+  be lifted in words first, and the brief carries that hold itself. ⚠️ **The brief CORRECTS the
+  instruction that commissioned it** — this section used to say the unisolated rail-sweep-vs-`CanVisit`
+  gate had to be settled first; C95 had already ruled it **moot** for this repair shape, and the crew
+  trace is the fix's **reach control**, not its prerequisite. ⛔ The correction lives in the brief §5
+  and on C95; do not reinstate the old clause.
 
 ---
 
@@ -145,19 +106,20 @@ probe-maintenance names in STATE are instrument health, not this effort's.
 - ✅ **STAMPER CUT 09-14, settled.** ⛔ Never re-open or re-cost it; `FUTURE_IDEAS.md` entry 5,
   **not agent-tracked**, ⛔ **no mention in any always-read doc** (owner's instruction, same day).
 
-⭐ **OWNER REQUEST 2026-09-15, NOT SCHEDULED — the quick-build button is missing from Selected.**
+⭐ **OWNER REQUEST 2026-09-15 — the quick-build button. ✅ BUILT 2026-09-16, TestKit `acafc74`, UNRUN.**
 Owner's words: *"I am missing the quick build button in the tool menu, that is something I frequently
-use, it only build the thing I am focused on via the cheat."* ⚠️ **A new ask, not a reopening of the
-closed chain** — take it with the next TestKit link, never as its own errand.
-- **The gap, MEASURED.** `73_SMRTK_Infopanel.lua:11-27` lists 15 Selected leaves and **none completes
-  a construction**. The colony-wide one exists on World (`72:276`, `complete_constructions` →
-  `CheatCompleteAllConstructions`), so the kit has the all-at-once form and not the focused one.
-- **The leaf to call:** `ConstructionSite:CheatDeliverResources(skip_group)`
-  (`Lua/Buildings/ConstructionSite.lua:2042`) — sets `supplied = true`, zeroes every outstanding
-  construction request, calls `StartConstructionPhase()`. ⭐ It delegates to the `ConstructionGroupLeader`
-  for a grouped build (`:2043-2048`), so multi-part sites come out right for free.
-- **Shape: one row in the `leaves` table.** `method_for` (`73:51-53`) already hides a leaf the object
-  does not carry, so it appears only on construction sites. TestKit only, 0 shipped hashes, game closed.
+use, it only build the thing I am focused on via the cheat."* Shipped as the Selected-page **Quick
+build** leaf; ⛔ the reasoning is in the leaf's own comment block (`73_SMRTK_Infopanel.lua`), not here.
+- ⚠️ **ONE CORRECTION TO THIS FILE'S OWN PLAN, and it changed the build.** The line above used to name
+  `ConstructionSite:CheatDeliverResources` as the leaf to call. **It is the wrong one:** that body
+  (`ConstructionSite.lua:2042`) sets `supplied = true`, zeroes the outstanding requests and calls
+  `StartConstructionPhase()` — it PAYS for the build and starts it, and drones still spend the build
+  points. The owner asked for the focused twin of the colony-wide button, whose per-site body is
+  `site:Complete("quick_build")` (`Cheats.lua:84-97`). ⇒ **the leaf calls that instead.**
+  `CheatDeliverResources` was already reachable under More with its own rollover and stays there.
+- ⚠️ It is **not** a `leaves` row either: those dispatch as `obj[method](obj)` with no argument, and
+  this body takes one. It is a first-class `T.Action`, which is also what let it resolve the
+  construction group leader before completing — a click can land on any member of a grouped site.
 
 ⛔⛔ **OWED 2026-09-16 — [C97](../../bugs/C97.md) carries TEN KNOWN ERRORS and they are NOT corrected.**
 An Opus re-check found them; everything is preserved in
@@ -192,11 +154,16 @@ runs. ⇒ **Jäger's Steam report is unexplained and open.** The owner's class q
 of every surviving entry — archived entries keep their numbers and the gate reads them back.
 ⛔ **Never reuse an archived number**; doccheck goes RED on one claimed by both sides.
 
-⭐ **SECOND TestKit ask, DEFERRED by the owner 2026-09-15 (*"lets save that"*) — a crew-trace slot.**
-A log-only wrapper on `CargoTransporter.GatherAvailableColonists`, armed from a slot and restored on
-disarm, to settle `EF-104`'s unexplained draft observation (three idle unemployed colonists passed over
-while three employed were taken). ⛔ **Design, trigger and the cheaper first step are in `EF-104` — do
-not restate them here.** Take it with the same TestKit link as the quick-build row above.
+⭐ **SECOND TestKit ask — the crew trace. ✅ BUILT 2026-09-16, TestKit `acafc74`, UNRUN.**
+`SMRTest.Log.CrewDraft`, a Kit-page arm/disarm button, to settle `EF-104`'s unexplained draft
+observation. ⚖️ The owner's 2026-09-15 deferral (*"lets save that"*) **stands as written** — it was
+built only because it rode the same link as C98's probe, not as an errand of its own. ⛔ **Design,
+trigger, the cheaper first step and the arm-before-assignment warning are in `EF-104` — do not
+restate them here.**
+
+⚠️ **THE THREE UNRUN ROWS ARE ONE SITTING, NOT THREE.** Arm `DroneDrop` and play normally; arm
+`CrewDraft` **before** an expedition is assigned; press **Quick build** on a construction site. ⛔ None
+of them is closed by another link — each needs a witness in play.
 
 ✅ **EFFORT 2 — the doc overhaul (ck176–ck183) — BOTH HALVES LANDED 2026-09-15.** The rules half:
 scattered rules became local header blocks plus a kernel list in `CLAUDE.md`, gated by doccheck's
