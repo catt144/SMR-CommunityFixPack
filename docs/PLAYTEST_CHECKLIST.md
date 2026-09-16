@@ -28,6 +28,88 @@ Item 177 records the still-open question of mechanically enforcing checklist mar
 
 ## Decisions waiting on you
 
+### 2026-09-16 — 188: PLAYTEST RIDER, ready to run — does a FRESH 1.1.0 Wildfire colony show a researchable cure?
+<!-- ck:188 status:open owner:yes -->
+
+⚖️ **This is the only route left to Jäger's report.** F120 is pulled (187) and could never have
+explained it; the desk is exhausted. What is left is a live look, and it is cheap. **Take it at the
+next sitting, or say drop it and the report closes as unexplained.**
+
+**The question:** on a colony started on 1.1.0, does the shipped reveal put a cure node in the tech
+tree that a player can find and buy? If yes, the reporter's cause is finding it, not having it, and
+the answer is a reply. If no, we have a live defect worth building against.
+
+⭐ **The lead the audit found, and the reason the look matters.** The tree has two sections, MAIN and
+SPECIAL. The SPECIAL button centres on a hidden spacer tech at MapPos **(2366, 4480)**. Breakthroughs
+occupy y **1920-4480**; the mystery techs are a separate band at y **4736-6272**, and the cure chain
+runs at y **5504**, x **3846 → 5474**. So SPECIAL lands you on the breakthroughs with the cure row
+about **1000 below and 1500-3100 to the right**. Whether it is on screen is a function of zoom and
+resolution — ⛔ **source cannot answer it and neither can the desk.** (`Lua/TechTree.lua:1-14`,
+`Lua/XDef/XTechTree.generated.lua:715-748`, MapPos measured from `Data/Tech.lua`.)
+
+⭐ **Two things that may make this a one-line reply instead of a fix.** The tree has a **search**:
+`Ctrl-F`, fuzzy over name and description (`XTechTree.generated.lua:827-843`). All **eleven** chain
+nodes are named **"Wildfire Cure"** with the same icon, so a search must find it. And the reveal
+raises a **TechDiscovered notification** for non-breakthrough techs (`Lua/Research.lua:854-859`).
+
+#### Leg A — five minutes, any save, settles the main question
+
+⚠️ **Do this on a scratch copy.** `CheatStartMystery` writes `FinishedMysteries` into `account.dat`
+if a mystery is already running, and cheats taint the save lineage.
+
+1. Open the console (SMRTK **Kit** page → **Open console**).
+2. Read where you stand — paste as one line:
+
+```
+print(UIColony.mystery_id, GetTechState("WildfireCure_1", UIPlayer), UIPlayer.TechPoints)
+```
+
+3. Only if `mystery_id` is not already `TheMarsBug`:
+
+```
+CheatStartMystery("TheMarsBug")
+```
+
+4. Run **the exact line the scenario runs** (`Mystery 8.generated.lua:145`):
+
+```
+SA_RevealTech.SAExec{tech = "WildfireCure", cost = 90000}
+```
+
+5. Read back all eleven nodes:
+
+```
+for i = 0, 10 do local id = i == 0 and "WildfireCure" or ("WildfireCure_" .. i) print(id, GetTechState(id, UIPlayer), UIPlayer:CanResearch(id)) end
+```
+
+**First-screen witness:** line `WildfireCure_1` reads `enabled` and `true` (with a tech point spare);
+the other ten read `hidden`.
+
+6. ⭐ **The measurement.** Open the tech tree, click **SPECIAL**, and **do not pan or zoom**.
+   **Screenshot what is on screen.** Then press `Ctrl-F`, type `Wildfire`, and screenshot again.
+
+**What each outcome means**
+- Node reads `enabled` **and** is visible after clicking SPECIAL without panning ⇒ the fresh path is
+  healthy; the reporter's problem is elsewhere (stage, or they looked before the reveal).
+- Node reads `enabled` but is **off screen** until you pan ⇒ ⭐ **that is very likely the report**, and
+  the deliverable is a reply ("SPECIAL section, scroll right/down, or Ctrl-F Wildfire"), not a fix.
+- Node does **not** read `enabled` ⇒ a live defect the desk missed. File it and stop; that is a new
+  entry, not F120.
+
+#### Leg B — only if Leg A comes back healthy, and only if you want it
+
+Play the mystery to its own reveal instead of calling it. The Trigger gates are, in order
+(`Mystery 8.generated.lua:38-148`): **100 colonists** (`CheatSpawnNColonists(100)`; stand in a dome or
+it scatters them outside), ~1-2 Sols, **an anomaly that must be scanned by a rover**, a message, 5-10
+Sols, the Infected trait, then ~3-4 hours to the reveal. Cheat past the colonist gate, then play at
+speed. ⛔ This tests the **timing** story only; Leg A already tested the reveal itself.
+
+#### Recording
+
+Screenshots to `C:\Dev\SMR-ScreenCaptures\`, then `python tools/store_screenshots.py`. The console
+lines and their output go in the entry. ⛔ Whatever it shows, **do not ask the reporter for a save**
+(ruling 2026-09-15).
+
 ### 2026-09-16 — 189: C95 built — test the prepared habitat expedition save
 <!-- ck:189 status:open owner:yes -->
 
