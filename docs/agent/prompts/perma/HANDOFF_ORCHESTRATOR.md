@@ -105,16 +105,6 @@ ESA/Wildfire fixture above will do.
 
 ---
 
-## 1 · Where v10 landed — ⛔ `STATE.md` carries all of it; nothing is re-derived here
-
-✅ **Discharged, and must not reappear on any owed list:** ck158 (the attended gate) · the three retirements
-· C90 (`153d180`+`e5f1947`) · the STATE eviction **and** its cap revert to `18 * 1024` (`c820c7f`).
-⚠️ **STATE's WARN threshold is TEMPORARILY raised for the doc overhaul (ck178)** — doccheck prints it as
-`warn 15360 TEMPORARY`. ⛔ Read the live number from doccheck, never from a document, and do not treat the
-headroom as permanent.
-
----
-
 ## 2 · What is open
 
 ### 2a · Owner
@@ -123,13 +113,6 @@ headroom as permanent.
 markers by `doccheck --regen` and is the only list that can be trusted — a hand-kept copy in this file
 went divergent within a day. **Read it, then read the checklist body it links to.**
 
-⚠️ **Two things the generated list cannot tell you, so they stay here:**
-
-- ✅ **144 (a) is DISCHARGED 09-15 (ck184 b/d)** — the RunAll ran under a same-day stamp, the play clauses
-  closed by field evidence, A3/A10 struck. ⛔ **Never rebuild it as owed from an older document.**
-- ✅ **151 (b) is CLOSED 09-16: send nothing.** Developer reports go out only on the developers'
-  request and are pull-only messaging (`FIELD_REPORT_REPLIES.md`). ⛔ **Never rebuild it as owed.**
-
 ⛔ **Never rebuild an "owed" list from an older document** — this file's did exactly that on 09-12 and
 contradicted its own closed list for most of a day.
 
@@ -137,15 +120,6 @@ contradicted its own closed list for most of a day.
 
 ⚠️ **Peers share this tree.** Re-check `git log` + `git status` before every write; a peer commits
 here every few minutes.
-
-✅ **EFFORT 1 — `prompts/smrtk/` (ck175), the SMR Tool Kit — CHAIN CLOSED 09-14** (99: SHIP WITH
-CHANGES, `reports/SMRTK_AUDIT.md`; `e88bbe7`). ✅ **99's Code link (C-1/3/5/6) LANDED 09-15, TestKit
-`f5fa650`**, witnessed 09-15 (`reports/CK144A_CLOSEOUT_SITTING.md`; C-3 refuted, C-5 unwitnessed, both
-closed low-priority by the owner). ⚖️ **ck184 + ck183 RULED and CLOSED 09-15; ck144 (a) DISCHARGED.**
-⛔ **NOTHING from this effort is owed** — the owner asked for it closed so it stops being raised. The
-probe-maintenance names in STATE are instrument health, not this effort's.
-- ✅ **STAMPER CUT 09-14, settled.** ⛔ Never re-open or re-cost it; `FUTURE_IDEAS.md` entry 5,
-  **not agent-tracked**, ⛔ **no mention in any always-read doc** (owner's instruction, same day).
 
 ⭐ **OWNER REQUEST 2026-09-15 — the quick-build button. ✅ BUILT 2026-09-16, TestKit `acafc74`, UNRUN.**
 Owner's words: *"I am missing the quick build button in the tool menu, that is something I frequently
@@ -177,15 +151,6 @@ Jäger's comment #8, untouched since it was filed 2026-09-15: the blocking wait 
 isolated, and the route is ours (source plus a TestKit container read), never the reporter's save.
 [C93](../../bugs/C93.md) is repaired, shipped in v11 and `tested-attended`; its second report's
 post-build `CreateStockpiles` entry point stays recorded in the entry.
-
-✅ **The Wildfire cure investigation LANDED, was AUDITED, and was PULLED FROM THE SHIP SET 2026-09-16
-(owner ruling, checklist 187): `F120`.** The audit widened the fix to all 17 legacy mystery technologies
-(85/85 desk); the owner then pulled it because it repairs only a colony started on 1.0.7 and loaded past
-the old-save gate, which Steam and console refuse, so no platform the pack serves can reach it and it
-cannot be tested on a Steam copy. Module held at `tools/held/Fix_MysteryTechMigration.lua`, registered
-nowhere. ⛔ **Do not start a second investigation and do not re-register it without the owner's word.**
-⛔ The record is [`bugs/F120.md`](../../bugs/F120.md) and the audit section of
-`reports/WILDFIRE_CURE_RESEARCH.md` — nothing about them is restated here.
 
 ⚠️ **The Wildfire "no cure to research" report — the fresh 1.1.0 path is HEALTHY.** Checklist 188 ran
 both legs 2026-09-16: reveal, visibility, chain and full resolution all observed, and the one
@@ -242,22 +207,14 @@ construction site. ⛔ Neither is closed by another link — each needs a witnes
   Colonists" may never be reached, and a blank panel on a waiting rocket is the tell. The owner's
   1.0.7 recollection cannot settle it.
 
-✅ **EFFORT 2 — the doc overhaul (ck176–ck183) — BOTH HALVES LANDED 2026-09-15.** The rules half:
-scattered rules became local header blocks plus a kernel list in `CLAUDE.md`, gated by doccheck's
-`RULES HEADERS` and `RULE PLACEMENT` (`reports/RULES_HEADERS.md`). The document half: `doc-editing`
-(`d716d9f`) and `prompt-authoring` (`7013326`) built, brief and its map row consumed (`d685f86`),
-record `reports/DOC_EDITING_SKILLS_AUDIT.md`. ⛔ **Its brief is DELETED — `prompts/DOC_EDITING_SKILLS.md`
-no longer exists, so do not follow an older document's pointer to it.**
-- ⚠️ **The one loose end it could not discharge:** three documentation moves stay **PENDING** because
-  the **fix-authoring destination does not exist and this task had no authority to create it**. ⛔ Body
-  in that report's Deferred moves and `.claude/PENDING_MOVES.md` — read it there, it is not retold here.
+⚠️ **Doc overhaul loose end:** three documentation moves stay **PENDING** because the **fix-authoring
+destination does not exist and no task has had authority to create it**. Body in
+`reports/DOC_EDITING_SKILLS_AUDIT.md` (Deferred moves) and `.claude/PENDING_MOVES.md`.
 
-⭐ **OTHER PROMPTS READY TO FIRE, when neither effort is eating the attention.**
+⭐ **OTHER PROMPTS READY TO FIRE.**
 ① `prompts/STANDDOWN_AUDIT.md` — no blocker, fire any time; a 21-module sweep, good Codex fan-out.
 ② `prompts/C92_ACHIEVEMENT_BUILD.md` — build + test, ⛔ **SHIPPING HELD by ck172 until the owner lifts
 it in words**. ③ `prompts/DLC_DEEP_CHECK.md` — desk, unclaimed, bounded.
-⛔ **ck144 (a) was listed here as owed until 09-15 and is NOT — §2a discharged it.** The line is gone on
-purpose; a fourth item citing it is an older copy of this file.
 
 ⛔ **The blocks below are POINTERS. The entry, brief or checklist item is the record — read it there.**
 
@@ -265,11 +222,6 @@ purpose; a fourth item citing it is an older copy of this file.
   stays OPEN**. Brief `prompts/C92_ACHIEVEMENT_BUILD.md`; evidence closed out. ⛔ **Three claims are
   WITHDRAWN — do not reason from them:** a ≈44% water bonus, a "never-drawn" icon, unremovable residue.
   Seat/prerequisite/art are **design choices to be made**, not intent to be restored.
-- **C93** — ⭐ **RESOLVED AND REPAIRED 2026-09-16**, superseding this file's old "cause UNRESOLVED,
-  not ours" line: Open Domes changes the ranch to a six-anchor entity and strands three piles.
-  `Fix_OpenPastureStockpiles` is built and the harm was reproduced on the owner's save first.
-  ⛔ **PLAY VALIDATION IS QUEUED, not done** — that is the one live obligation; the entry holds
-  everything else. ⛔ The old reporter-log/mod-list ask is moot and must not be revived.
 - **D14 / stand-down** — brief `prompts/STANDDOWN_AUDIT.md` holds it. ⛔ The gap is **not** "did the body
   change" (`bodycheck` answers that at the desk) but its declared **class-c** blind spot: a vendor
   repairs a defect without touching the body we pinned and every instrument reads GREEN.
@@ -282,7 +234,7 @@ purpose; a fourth item citing it is an older copy of this file.
   caused a failed repair, and this file carried the superseded "two branches" wording for a day.
   Summaries in `facts/INDEX.md`; ⛔ grep it, never read it whole.
 - **C91** — open candidate: vanilla leaks the Building Codes maintenance modifier on repeal.
-  ⭐ **08b found a read route** (Dump exposes the modifier on a live building) — body in ck183.
+  ⭐ A read route exists (Dump exposes the modifier on a live building) — body in [C91](../../bugs/C91.md).
 - **Migration residuals, in the entries (09-12) — the list nobody would reconstruct:** **F51** PARTIAL,
   leg re-filed **UNRUN** · **F53** PARTIAL, no fresh 1.1.0 evidence · **F59** repaired, **A1 expedition
   half UNTESTED** · **F73** PARTIAL, organic benefit unverified · **F80** `investigating`, causation
@@ -291,14 +243,8 @@ purpose; a fourth item citing it is an older copy of this file.
   not POSITION** — the position classifier's failures are in `reports/PINNED_PARENTS_PASS.md`.
 - **83 (SHARED TestKit)** — a `RunAll` owner filter and a `PACK_ID` on the enable-path leg improve the
   kit **for us**, regardless of the opt-in mod.
-- **Hotfix 3 — 135 only** (ck166): take the `luafn.py` delimiter fix. Desk tool, **0 shipped hashes**.
+- **Hotfix 3 — 135 only**: take the `luafn.py` delimiter fix. Desk tool, **0 shipped hashes**.
   ⛔ Do not re-derive the old table or the expired-triage "tension"; both are gone on purpose (ck161).
-- ✅ **Closed, do not reopen.** 09-13: `SELFCHECK_PILOT.md` REMOVED on the owner's word (`cf8d51f`) ·
-  the C92 placement/icon investigation · the ck170 doc overhaul pass · `GATE_WIRING` (adjudicated PASS).
-  09-14: **`CHECKLIST_ARCHIVE.md` FIRED and consumed** (`41116e3`) — the settled backlog moved, ⛔ those
-  bodies now live in `docs/archive/PLAYTEST_ARCHIVE.md` behind the `.rgignore`, so a grep that used to
-  hit comes back empty · every smrtk link except 99 (listed once in §2b, not restated here).
-  ⛔ Never re-run a passed kill gate to "check".
 
 ### 2c · Watch list, not tasks
 
@@ -400,10 +346,11 @@ gaps on purpose, so a citation of "trap 5" still resolves.
    would have taken 132 lines of unrelated work back to HEAD.
 12. ⛔ **A `(` ANYWHERE ON `STATE.md`'s `STILL OPEN:` LINE SILENTLY DROPS EVERY ID AFTER IT** from the
    owner's generated register. `doccheck.py:584` captures with `STILL OPEN:(.*?)(?:\(|$)` — the first
-   bracket ends the match. Hit 09-16: adding a parenthetical to item 185 removed **133** from
+   bracket ends the match. Hit 09-16: adding a parenthetical to one item silently dropped a later item from
    `WAITING_ON_YOU.md` while doccheck stayed GREEN and the file still read correctly to a human.
    ⇒ **Keep that line bracket-free, and check the waiting count before and after any STATE edit** —
-   `doccheck | grep WAITING:` must not fall. Same silent-boundary family as trap 11: the gate asserts
+   `doccheck | grep WAITING:` must not fall. ⚠️ The same line also counts **any bare 2–3 digit number followed by a lowercase word**
+   as owed, so an all-clear must read `none` with no digits. Same silent-boundary family as trap 11: the gate asserts
    the render matches its source, never that the source still says what you think.
 
 ---
@@ -419,5 +366,5 @@ Only the things those two do not already say:
   not there.** ⛔ Read its live byte number from `doccheck`, never from a document.
 - **Owner decisions go in `docs/PLAYTEST_CHECKLIST.md` → "Decisions waiting on you"**, never only in agent
   docs; `docs/WAITING_ON_YOU.md` is the generated view of them (§2a).
-- ⭐ **`EF-###` ids are allocated by THIS repo** for both repos (ck167/86). The opt-in mod's own decisions
-  live in **`C:\Dev\SMR-OptInPack\docs\DECISIONS_OWED.md`** (moved 09-12, ck167).
+- ⭐ **`EF-###` ids are allocated by THIS repo** for both repos. The opt-in mod's own decisions
+  live in **`C:\Dev\SMR-OptInPack\docs\DECISIONS_OWED.md`** (moved 09-12).
