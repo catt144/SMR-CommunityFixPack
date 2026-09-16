@@ -72,18 +72,23 @@ The owner ran a full production cycle in the same ranch and flushed again. Same 
   Ostrich, `errors since mark: 3543`.
 - ⭐ **The produce crates are visible as a stack in the dead centre of the pasture**, inside
   the fenced footprint, in both screenshots.
-- ⭐ **The owner's zoomed shot shows drones clustered on the pasture wall**, several carrying
-  cargo, pressed against the barrier — *"the drones are actively trying to get into it to
-  collect resources."*
+- ⭐ **`SMRTK_0010.png` (11:37, Screenshot + Mark, so it is in the records)** is the close-up
+  and the best single image of the defect: the crate stack on its platform in the middle of
+  the grass, animals grazing around it, and **a line of drones queued along the outside of
+  the pasture wall** — the owner's words, *"the drones are actively trying to get into it to
+  collect resources."* Taken after a fresh MARK, it reads `errors since mark: 126`, so the
+  throw is still firing at a steady rate while nothing moves.
+- ⭐ **Stored Resources held at 81/2,000 (Food 46, Meat 35) across `SMRTK_0009` and
+  `SMRTK_0010`** — the ranch is not being emptied at all between the two captures.
 
 ⇒ Two facts the first sample could not give you: **production itself works** (the ranch fills
 normally), and the failure is entirely on the **collection** side. The error rate scales with
 the attempt rate, and the drones are visibly massed at the footprint edge.
 
-⭐ **A third, close-up shot (owner, same session) is the most informative of the three.** The
-produce crates are standing **on a rendered stockpile platform** in the middle of the grass,
-ringed by grazing animals, while the drones sit in a line on the walkway **outside the
-fence**. Two readings follow directly:
+⭐ **`SMRTK_0010.png` is the most informative of the three, and two readings follow directly
+from it.** The produce crates stand **on a rendered stockpile platform** in the middle of the
+grass, ringed by grazing animals, while the drones sit in a line on the walkway **outside the
+fence**:
 
 - **The pile object is healthy.** It has its `ResourcePlatform` entity — you can see it under
   the crates — so the pile is *not* the thing throwing `has no entity`. That matches the
