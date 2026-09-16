@@ -109,7 +109,7 @@ scope exception, not a claim that the paragraph passes the door.
 | 112 | Wrong legacy download / release/support role / release artifact / service may change | Cut. Checklist 169 legacy paragraph: “1.0.7 players keep the frozen v5-game-1.0.7 GitHub build (ck118)”; ck118 records the GitHub release/site tab/card route. |
 | 113 | Stale portal body / release role / parity/preflight / settled procedure | Cut locator. RELEASE_SURFACES §3 lists card, metadata and UPLOAD_WORKFLOW backups that “must move together”; UPLOAD_WORKFLOW header requires byte matching. |
 | 114–119 | Owner obligations / owner-routing role / WAITING generator / unresolved | Protected: leave the complete Open owner decisions section and STILL OPEN continuation unchanged. Retain its separator. |
-| 120–127 | Next command can emit counts / build/release roles / mandatory generated-region gate / mutable | Refused by reach, but blocked by an existing gate. Proposed home is `python tools/doccheck.py --emit-counts`; see the concrete conflict below. No generated content is hand-edited. |
+| 120–127 | Next command can emit counts / build/release roles / former generated-region gate / mutable | Refused by reach. Cut under the owner's subsequent scope override, including the mandatory-copy gate; verified home is `python tools/doccheck.py --emit-counts`. Count derivation and consistency checks remain. |
 | 128 | Wrong historical citation branch / fact readers / fingerprint / settled qualifier | Cut duplicate. EF-075 explicitly distinguishes current installation from EF-014's historical stated version and forbids renumbering old citations. |
 
 ### Destination details that a topic match would miss
@@ -136,20 +136,26 @@ scope exception, not a claim that the paragraph passes the door.
   will remain historical; the new dated closeout passage supplies the outcome,
   including the prohibition on refusing work over sweep age.
 
-## Concrete gate conflict, not admission by default
+## Generated-copy conflict and owner-authorized resolution
 
-`tools/doccheck.py:state_counts_bytes` raises `StateCountsError` unless STATE
+At `5e9fe61`, `tools/doccheck.py:state_counts_bytes` raised `StateCountsError` unless STATE
 contains exactly one `BUILD STATE (emitted by tools/doccheck.py)` marker.
-`check_state_counts` treats that error as RED. The count block has a pull-only
-home in the tool's `--emit-counts` output, but deleting it while retaining the
-existing gate cannot pass the required check.
+`check_state_counts` treated that error as RED. The count block had a pull-only
+home in the tool's `--emit-counts` output, but deleting it while retaining that
+gate could not pass the required check.
 
-Proposed resolution for the owner: remove the mandatory STATE copy and its
-requirement, preserving count derivation and the underlying membership checks.
-That changes an existing machine obligation; this sweep does not silently
-retire it. The block is recorded as refused/blocked, not as passing the door
-and not as homeless. The owner-register source is a different, expressly
-protected exception: the parser still needs ck53, ck133 and ck151.
+After the agent proposed removing the copy and its requirement, the owner
+explicitly authorized all prompt-scope tasks and anything that makes doccheck
+RED. The full words and triggering condition are in the
+[settled checklist record](../../PLAYTEST_CHECKLIST.md#2026-09-15--state-cleanup-scope-override)
+and its linked archive body. This removes the mandatory STATE count region,
+its validator, regeneration writes and obsolete region tests. `--emit-counts`
+still derives current counts and withholds the verified block on RED;
+underlying consistency checks remain. Workflow, checklist count lookup and
+STATE_EVICTION count-copy instructions now use the on-demand command.
+
+The owner-register source is a different, expressly protected exception:
+the parser still needs ck53, ck133 and ck151. Its literal idioms stay intact.
 
 ## Execution and verification
 
@@ -172,19 +178,19 @@ source blocks in the same commit:
 
 Each destination was written, reopened and checked before its source block
 was removed. No finding needed an arbitrary intake home. Homeless content
-dropped: zero; the refused count block has an identified home but an unresolved
-machine requirement. The table traces the removed content and its conditions.
+dropped: zero. The refused count block's machine requirement is now removed
+under the explicit override. The table traces removed content and conditions.
 
-At `ddf5750` plus the new-home patch, STATE measures **1,102 LF bytes** versus
+At `5e9fe61`, before the scope override, STATE measured **1,102 LF bytes** versus
 the baseline's 11,739, delta **−10,637**. Same `read_bytes`/CRLF-normalization
-command as below; the final normalized SHA-256 is
+command as below; that intermediate normalized SHA-256 is
 `f3d815a615a527ae7e7d2b46b91039d882fdd2efbb3062a89825390efe848c87`.
 The result is the disposition, not the reduction: only the version pair is
 admitted status. The title/header/separators remain structural; the exact
-owner-register sentences remain by the brief's scope protection; the generated
-count section remains refused/blocked by its existing machine requirement.
+owner-register sentences remain by the brief's scope protection. The generated
+count section was still refused/blocked at that checkpoint; it is now cut.
 
-Final checks on that patch: doccheck GREEN; complete WAITING bytes, owner-ID
+Checks on that earlier patch: doccheck GREEN; complete WAITING bytes, owner-ID
 sets and the generated count region unchanged; exact owner-shaped Now block;
 no changes in checklist, prompts, game code or doccheck. The new V10 quotes
 were compared directly to the baseline source intervals. The FR-1/toolkit
@@ -205,19 +211,49 @@ The generated-block conflict was also falsified in memory before any cut:
 remove its heading/fenced region from baseline input, call
 `state_counts_bytes(candidate, {})`, and require the exact error
 `expected exactly one BUILD STATE first line, found 0`. It fired. No file was
-modified by that experiment; the intact block remains unchanged.
+modified by that experiment; the block was unchanged until the scope override.
 
-Verification plan: compare complete WAITING bytes and parsed owner-ID sets to
-the baseline, preserve the exact STILL OPEN block, verify the version pair,
-check every removed interval against the matrix, run doccheck and review the
-diff for unique conditions. No new game, site or portal observation is claimed.
+The earlier cuts compared complete WAITING bytes and parsed owner-ID sets to
+the baseline, preserved the exact STILL OPEN block and verified the version
+pair. Removed intervals were checked against the matrix, and the diff was
+reviewed for unique conditions. No new game, site or portal observation is claimed.
+
+### Scope-override verification
+
+At `5e9fe61` plus this patch, `python tools/counts_selftest.py` passes. Its
+temporary fixtures exercise changing module/probe/entry membership, optional
+modules, absent TestKit, the CLI's GREEN/RED output contract, and regeneration
+with LF/CRLF STATE lacking any generated-count marker. Deliberately broken
+scratch copies fail for wrong optional membership, a STATE write during
+regeneration, and emitting the verified block on RED; restored controls pass.
+The live checker is unchanged by those tests.
+
+`python tools/doccheck.py --regen --emit-counts` is GREEN. Generated changes
+are confined to WAITING's checklist line links and coverage after the settled
+override record was added. The STATE parser IDs and WAITING owner IDs remain
+the exact five and sixteen members enumerated above, using the same import,
+`state_owed_numbers()` and classified-row filter. The version and owner-debt
+text are byte-identical to `5e9fe61` after LF normalization; only the count
+section and its separator are removed. The archive's previous bytes remain
+an unchanged prefix.
+
+Command/filter: `python -`, `Path('docs/agent/STATE.md').read_bytes()` with
+CRLF normalized to LF, compared with `git show HEAD:docs/agent/STATE.md` at
+`5e9fe61`. Measured result: **1,102 → 827 LF bytes**, delta **−275**;
+normalized SHA-256 `72386b33c7eec662fac816ef8de3f6212c798d6a2de88b47502cbbed7289b5e3`.
+Only the owner-shaped version pair is admitted status; structural text and
+the expressly protected owner-register source are the other survivors.
+The generated-copy conflict is resolved, with no further owner action needed.
 
 Departures: correct the probe membership from eight to ten; the baseline hazard
 paths are already updated, though the content still fails the owner's test.
-The checklist body and prompts remain out of scope. Missing later outcomes
-are homed in task-specific reports, not a general intake or replacement STATE.
+The subsequent owner override extends scope to the necessary doccheck change,
+its tests and count-location instructions; the ruling is recorded in the
+checklist/archive. Missing later outcomes are homed in task-specific reports,
+not a general intake or replacement STATE.
 
-Suggestions: settle the mandatory generated-copy conflict separately; update
-the stale FR-1 field tally in LINUX_DISPATCH/checklist 145 when those surfaces
-are authorized. Installing the admission door in STATE_EVICTION or tooling
-remains unadopted. Executed model: GPT-6, as exposed in this transcript.
+Suggestions retained from the destination review: the stale FR-1 field tally
+in LINUX_DISPATCH/checklist 145 belongs to that task. Installing the complete
+admission door in STATE_EVICTION or tooling is a separate change; this leg
+applied the door by hand and repairs only the count-copy instructions there.
+Executed model: GPT-6, as exposed in this transcript.

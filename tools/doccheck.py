@@ -946,12 +946,9 @@ def check_skills(out):
 
 
 def regen(out):
-    """Rewrite generated files/regions; validate STATE before any file write."""
+    """Rewrite generated files; STATE remains a hand-authored input."""
     sb, sf = splitter(), facts_splitter()
     model = sb.load_from_dir()
-    with open(STATE, "rb") as fh:
-        state_before = fh.read()
-    state_after = state_counts_bytes(state_before, recount(model, []))
     sb.write_lines(os.path.join(BUGS_DIR, "INDEX.md"),
                    sb.render_index(model))
     sb.write_lines(os.path.join(FACTS_DIR, "INDEX.md"),
@@ -961,13 +958,10 @@ def regen(out):
     with open(AGENTS_MD, "wb") as fh:
         fh.write(data)
     regen_skills()
-    if state_before != state_after:
-        with open(STATE, "wb") as fh:
-            fh.write(state_after)
     items = checklist_items()
     sb.write_lines(WAITING_MD, render_waiting(classify_items(items) if items else items))
     out.append("REGEN: wrote docs/agent/bugs/INDEX.md, docs/agent/facts/INDEX.md, "
-               "docs/WAITING_ON_YOU.md, STATE.md's BUILD STATE region, "
+               "docs/WAITING_ON_YOU.md, "
                "the .agents/skills/ mirror and AGENTS.md "
                "(byte copy of CLAUDE.md) — "
                "the checks below read the result")
@@ -1890,66 +1884,8 @@ def parse_gate(out):
     return ok
 
 
-class StateCountsError(ValueError):
-    """An ambiguous or oversized generated region must never be rewritten."""
-
-
-def state_counts_bytes(data, counts):
-    """Replace only the contents between STATE's existing bare ``` fences.
-
-    Exactly one stable BUILD STATE first line must immediately follow an opening
-    fence. Missing/duplicate markers, missing/duplicate (unbalanced) fences or
-    a non-bare region fence raise StateCountsError, before regen writes anything.
-    Other balanced code blocks are allowed. Preserve all surrounding raw bytes,
-    including both fences; use the marker's LF/CRLF ending inside the region.
-    """
-    lines = data.splitlines(keepends=True)
-    plain = [line.rstrip(b"\r\n") for line in lines]
-    marker = b"BUILD STATE (emitted by tools/doccheck.py)"
-    markers = [i for i, line in enumerate(plain) if line == marker]
-    if len(markers) != 1:
-        raise StateCountsError("expected exactly one BUILD STATE first line, found %d"
-                               % len(markers))
-    fences = [i for i, line in enumerate(plain) if re.fullmatch(rb"```[^`]*", line)]
-    if len(fences) % 2:
-        raise StateCountsError("missing or duplicated code fence (unbalanced fences)")
-    first = markers[0]
-    pairs = list(zip(fences[::2], fences[1::2]))
-    region = [(a, b) for a, b in pairs if a == first - 1 and b > first]
-    if len(region) != 1 or any(plain[i] != b"```" for i in region[0]):
-        raise StateCountsError("BUILD STATE needs its own opening and closing bare ``` fences")
-    start, end = sum(map(len, lines[:first])), sum(map(len, lines[:region[0][1]]))
-    ending = b"\r\n" if lines[first].endswith(b"\r\n") else b"\n"
-    block = counts_block(counts).encode("utf-8").replace(b"\n", ending) + ending
-    result = data[:start] + block + data[end:]
-    normalized = result.replace(b"\r\n", b"\n")
-    if len(normalized) > STATE_MAX_BYTES:
-        raise StateCountsError("regenerated STATE exceeds hard cap %d" % STATE_MAX_BYTES)
-    if any(len(line) > STATE_MAX_LINE_BYTES for line in normalized.split(b"\n")):
-        raise StateCountsError("regenerated STATE exceeds per-line cap %d" % STATE_MAX_LINE_BYTES)
-    return result
-
-
-def check_state_counts(counts, out):
-    """Generated-region freshness, with the same regen cure as the indices."""
-    try:
-        with open(STATE, "rb") as fh:
-            have = fh.read()
-        want = state_counts_bytes(have, counts)
-    except (OSError, StateCountsError) as exc:
-        out.append("STATE BUILD STATE: RED — %s" % exc)
-        return False
-    if have != want:
-        out.append("STATE BUILD STATE: RED — generated counts differ from the fenced "
-                   "block (a TestKit probe-count change lands here too)")
-        out.append(REGEN_CURE)
-        return False
-    out.append("STATE BUILD STATE: fresh — regeneration reproduces the region byte for byte")
-    return True
-
-
 def counts_block(counts):
-    """A STATE-ready block; commit bodies may paste it verbatim."""
+    """On-demand build counts; verified runs may be quoted in commit bodies."""
     lines = [
         "BUILD STATE (emitted by tools/doccheck.py)",
         "- modules: %d registered (%d default-active, %d optional-gated files)"
@@ -2150,7 +2086,7 @@ def main():
     ap.add_argument("--regen", "--regen-index", action="store_true", dest="regen",
                     help="rewrite every GENERATED file from its source first — "
                          "docs/agent/bugs/INDEX.md, docs/agent/facts/INDEX.md, "
-                         "docs/WAITING_ON_YOU.md, STATE.md's BUILD STATE region, "
+                         "docs/WAITING_ON_YOU.md, "
                          "the .agents/skills/ mirror and "
                          "AGENTS.md (byte copy of CLAUDE.md) — then run the checks. "
                          "--regen-index is an ALIAS, not a narrower form: it writes "
@@ -2162,7 +2098,7 @@ def main():
                          "checklist's markers and STATE.md), then run the checks — the "
                          "contained cure for the RED a checklist edit causes")
     ap.add_argument("--emit-counts", action="store_true",
-                    help="also print the STATE-ready counts block")
+                    help="also print verified on-demand build counts")
     ap.add_argument("--emit-fingerprint", action="store_true",
                     help="also print, per derived_at group, whether the facts "
                          "still describe what is installed/checked out — the "
@@ -2197,7 +2133,7 @@ def main():
         facts = sf.load_from_dir()
         ok = check_facts(facts, out) and ok
         ok = check_facts_index(facts, out) and ok
-    except (sb.SplitError, StateCountsError, OSError) as exc:
+    except (sb.SplitError, OSError) as exc:
         print("doccheck: RED — %s" % exc)
         return 1
     ok = check_root(out) and ok
@@ -2209,7 +2145,6 @@ def main():
     ok = check_marker_integrity(out) and ok
     ok = check_skills(out) and ok
     counts = recount(model, out)
-    ok = check_state_counts(counts, out) and ok
     ok = temporary_sweep(out) and ok
     ok = load_order(out) and ok
     ok = wrap_targets_check(out) and ok
@@ -2221,7 +2156,7 @@ def main():
     ok = required_selftest("ck170_selftest.py", out) and ok
     ok = required_selftest("prompt_map_selftest.py", out) and ok
     ok = required_selftest("repair_pass_selftest.py", out) and ok
-    ok = required_selftest("state_counts_selftest.py", out) and ok
+    ok = required_selftest("counts_selftest.py", out) and ok
     push_set_report(out)   # report-only: the budget is the owner's to act on
     testkit_tree(out)  # report-only by owner decision (2026-08-04) — never gates
     alias_gate(out)    # report-only, same standing as testkit_tree

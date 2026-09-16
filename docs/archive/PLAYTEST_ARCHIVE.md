@@ -7991,3 +7991,27 @@ since co-runs ARE attended, a co-run pass you witness can earn `tested`
 exactly as a sitting does — F11's watch was denied only by a fixture gap,
 not by the format.
 
+
+
+## STATE cleanup scope override — 2026-09-15
+
+Condition: briefs `zz-owner/08_STATE.md` and `zz-owner/09_STATE_DOOR.md` were
+removing content that failed the owner's STATE admission tests. The agent
+stopped at a generated count block: it failed reach, but doccheck required
+its presence and regeneration would restore it. The agent proposed removing
+that stored copy and its requirement while retaining on-demand counts and
+the underlying consistency checks, then asked for authorization.
+
+Owner, verbatim:
+
+> You have an owner override to do any and all tasks related to the scope of your prompt, that is extended to anything that makes docu check go red
+
+This authorizes completing the STATE cleanup and related doccheck repairs,
+including removal of the mandatory count copy, its regeneration code and
+obsolete region tests. Verified counts remain available through
+`python tools/doccheck.py --emit-counts`; count derivation, membership checks
+and withholding the verified block on RED remain. Related count-location
+instructions are corrected in the same change. The protected owner-register
+idioms remain in STATE. No further owner action is owed for this change.
+
+Evidence and disposition: `docs/agent/reports/STATE_DOOR_APPLICATION.md`.

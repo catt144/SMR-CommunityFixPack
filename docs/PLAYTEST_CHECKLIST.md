@@ -28,6 +28,11 @@ Item 177 records the still-open question of mechanically enforcing checklist mar
 
 ## Decisions waiting on you
 
+### 2026-09-15 — STATE cleanup scope override
+<!-- ck:- status:closed owner:no -->
+
+Body archived in [STATE cleanup scope override](archive/PLAYTEST_ARCHIVE.md#state-cleanup-scope-override--2026-09-15).
+
 ### 186: choose skill caps after the documentation skills first cut
 <!-- ck:186 status:open owner:yes -->
 
@@ -8356,7 +8361,7 @@ keyboard is what earns a fix `tested` in `agent/bugs/`.
    `[CommunityFixPack]` error/inactive/deactivation line, any `[LUA ERROR]`
    naming pack code, any engine error you did not see vanilla,
    `SMRFixPack.ListFixes()` reading `active` for every default fix (count per
-   `agent/STATE.md`; opt-ins read `inactive` unless you enabled them — and
+   `python tools/doccheck.py --emit-counts`; opt-ins read `inactive` unless you enabled them — and
    Mod Options survive a Mod-Manager disable, so read the list, never assume).
    ⛔ **Every unexplained line is reported verbatim with its age** — "not
    caused by our leg" is an attribution verdict, never a dismissal; every

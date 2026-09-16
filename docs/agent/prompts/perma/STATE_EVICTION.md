@@ -19,7 +19,7 @@ budget — if content doesn't fit, evict, don't compress.
 
 ## The boundary — what earns push (stays in STATE)
 
-STATE is a kernel: **status + pointer, never derivation.** Five sections only:
+STATE is a kernel: **status + pointer, never derivation.** Its status categories are:
 
 1. **Now** — current position and next action. No supersession chains: if a
    sentence needs "superseded by", the superseded half is history — evict it.
@@ -31,7 +31,10 @@ STATE is a kernel: **status + pointer, never derivation.** Five sections only:
    `docs/agent/WORKFLOW.md`; STATE keeps only the current pointer.
 4. **Open owner decisions** — item numbers + five-word gists; bodies live in
    `docs/PLAYTEST_CHECKLIST.md` "Decisions waiting on you".
-5. **Build state** — the `--emit-counts` block, verbatim, never hand-typed.
+
+Pull build counts with `python tools/doccheck.py --emit-counts` when needed;
+they are no longer stored in STATE (owner's scope override, 2026-09-15,
+[checklist record](../../../PLAYTEST_CHECKLIST.md#2026-09-15--state-cleanup-scope-override)).
 
 ### Hazards admission test (owner ruling 2026-09-13)
 
@@ -88,8 +91,7 @@ Everything else is pull: `docs/archive/SESSION_LOG.md` (history),
    pull/read-path notice and exact current section headings.
 5. Verify: `python tools/doccheck.py` GREEN (it enforces the warn/hard byte
    caps and the per-line cap); every hazard passes the admission test; no
-   "superseded" chains remain; open decisions match the checklist; the
-   emitted block is byte-identical to `--emit-counts` output. Then
+   "superseded" chains remain; open decisions match the checklist. Then
    `python tools/doccheck.py --regen-waiting` and diff the register against step
    2b: **no ck number may disappear.** One that does is an owner row you deleted —
    restore the idiom, do not "fix" the register. A row whose status flips to
