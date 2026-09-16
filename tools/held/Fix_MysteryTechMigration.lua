@@ -1,5 +1,14 @@
 -- F120: restore mystery tech discoveries lost during tech-point conversion.
 --
+-- HELD, NOT SHIPPED (owner ruling 2026-09-16, checklist 187). Registered in
+-- neither items.lua nor metadata.lua; tools/ is excluded from the pack. The
+-- state it repairs exists only in a colony started on 1.0.7 and loaded past
+-- the old-save gate, which Steam and console refuse, so no platform the pack
+-- serves can reach it and it cannot be tested on the owner's Steam copy.
+-- Reopen on a report of a lost mystery technology on a carried-over 1.0.7
+-- colony from a platform that offers Load anyway; re-register, re-run
+-- tools/desk_mystery_tech_migration.py, and restore the RELEASE_OUTBOX row.
+--
 -- Legacy Research:AddTech stored field='Mysteries' for every mystery
 -- technology. That field is not discoverable (1.0.7 Data/TechFieldPreset.lua),
 -- so a positive legacy `discovered` marker came only from a scenario's

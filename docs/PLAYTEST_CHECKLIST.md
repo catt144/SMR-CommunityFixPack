@@ -28,19 +28,24 @@ Item 177 records the still-open question of mechanically enforcing checklist mar
 
 ## Decisions waiting on you
 
-### 2026-09-16 — 187: F120 was WIDENED by the cross-vendor audit — ships that way unless you say otherwise
-<!-- ck:187 status:open owner:no -->
+### ✅ 2026-09-16 — 187 RULED: F120 is PULLED from the ship set — built, audited, held
+<!-- ck:187 status:ruled owner:no -->
 
-The audit you asked for (`prompts/F120_AUDIT.md`, fired on Fable, consumed) answered your
-question: **yes, it missed something.** The converter drops the whole Mysteries field, so
-the same hole covers **all 17** mystery technologies a 1.0.7 colony could have been
-offered, not only the Wildfire cure, and the other sixteen have no medical-building
-rescue. Verdict **SHIP WITH CHANGES**; the changes were made under the brief's licence:
-the module is now `Code/Fix_MysteryTechMigration.lua`, restoring every legacy mystery
-discovery's entrance, desk-exercised 85/85. **Nothing is owed from you**: it goes out
-widened in the next upload unless you say "narrow it back to Wildfire". ⚠️ Still true and
-unchanged: it does **not** reach Jäger's Steam report (a Steam legacy save is refused
-before the converter runs), so that report stays open. Record: [F120](agent/bugs/F120.md),
+Your words: *"Pull it from the ship set, the only relatively minor use we get is the evidence
+you gather."* Your reasoning, recorded: the fix repairs only a colony started on 1.0.7 and
+loaded past the old-save gate; Steam (about 75% of subscribers) refuses that load, console
+cannot do it, and only a PC copy bought from the Paradox store could — a fix nobody you can
+name will use, and untestable here because your copy is Steam. The audit that preceded the
+ruling had widened it from the cure to all 17 legacy mystery technologies (85/85 desk) and
+settled that it never reached Jäger's Steam report, which stays open.
+
+**Done the same sitting:** module moved to `tools/held/Fix_MysteryTechMigration.lua`
+(excluded from the pack, registered nowhere), F120 parked, release-ledger row withdrawn,
+handoff updated. **Reopen condition:** a report of a lost mystery technology on a
+carried-over 1.0.7 colony from a platform that offers Load anyway — one commit from live.
+You also questioned whether two frontier models on the investigation and the audit were
+worth it for this reach; the lesson (check who can reach the affected state before building)
+is recorded in memory, not as policy. Record: [F120](agent/bugs/F120.md),
 [audit section](agent/reports/WILDFIRE_CURE_RESEARCH.md#cross-vendor-audit--2026-09-16-fired-on-fable-promptsf120_auditmd-consumed).
 
 ### 2026-09-16 — A successful fix includes recovery of affected saves

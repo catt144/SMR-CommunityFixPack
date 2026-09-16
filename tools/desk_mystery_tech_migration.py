@@ -9,6 +9,8 @@ The Wildfire legs are the 2026-09-16 investigation's; the class legs were added
 by the cross-vendor audit the same day and cover every mystery technology the
 1.0.7 registry placed in the Mysteries field. SMR_DESK_MODULE overrides the
 module under test so a scratch variant can be required to FAIL named legs.
+The module is HELD, not shipped (owner ruling 2026-09-16, checklist 187): it
+lives in tools/held/ and is registered nowhere.
 """
 import hashlib
 import os
@@ -19,7 +21,7 @@ from pathlib import Path
 
 import deskbench as db
 
-MODULE = os.environ.get("SMR_DESK_MODULE", "Code/Fix_MysteryTechMigration.lua")
+MODULE = os.environ.get("SMR_DESK_MODULE", "tools/held/Fix_MysteryTechMigration.lua")
 FIX_ID = "MysteryTechMigration"
 
 

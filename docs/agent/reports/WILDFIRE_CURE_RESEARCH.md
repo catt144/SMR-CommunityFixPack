@@ -14,7 +14,7 @@ completed. Shipped sources were read only; archived sources were read only.
 
 ## What was built and how an affected save recovers
 
-**SOURCE + MEASURED:** [Fix_MysteryTechMigration.lua](../../../Code/Fix_MysteryTechMigration.lua)
+**SOURCE + MEASURED:** [Fix_MysteryTechMigration.lua](../../../tools/held/Fix_MysteryTechMigration.lua)
 (built as `Fix_WildfireCureMigration.lua`; renamed and widened by the audit below)
 adds a synchronous PostLoadGame recovery. A Wildfire colony must have positive
 legacy `tech_status.WildfireCure.discovered`, field `Mysteries`, and a fully
@@ -177,6 +177,15 @@ old-save block overridden, which EF-080 rules unattributable, and no 1.0.7
 save with a revealed mystery tech exists on this machine (the `Saved Games`
 folder holds 1.1.0-era saves only, listed in the audit transcript). The
 reporter was not contacted.
+
+**Owner ruling after the audit, same day: PULLED FROM THE SHIP SET** (checklist
+187). The owner's reach figures decide it: about three quarters of subscribers
+are on Steam, which refuses the 1.0.7 load before the converter runs; console
+cannot do it; only a PC copy from the Paradox store could reach the repaired
+state, and the owner's Steam copy cannot test it. The module moved to
+`tools/held/`, unregistered; the harness still runs against it. The retained
+value is the evidence above. Lesson for triage, recorded in memory: measure who
+can reach the affected state before building, not after.
 
 Executed model declaration: Claude Fable 5.1 (`claude-fable-5-1`), as reported
 by the session environment. No sub-agents were used.

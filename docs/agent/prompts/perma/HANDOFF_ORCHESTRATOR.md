@@ -134,19 +134,21 @@ cannot be dismantled — ⭐ **links [C42](../../bugs/C42.md)'s stale-container 
 symptom for the first time**), and [C93](../../bugs/C93.md)'s second report, which exposed a
 **post-build** `CreateStockpiles` entry point at save load that the entry had never recorded.
 
-✅ **The Wildfire cure investigation LANDED 2026-09-16 and was AUDITED the same day: `F120`.**
-Cause found (`80c9ebc`), fix built (`d004494`), cross-vendor audit fired on Fable and consumed, verdict
-**SHIP WITH CHANGES**, changes made. The converter drops the whole `Mysteries` field, so the fix was
-widened from the cure to **all 17** legacy mystery technologies and renamed
-`Code/Fix_MysteryTechMigration.lua` (85/85 desk, checklist 187). ⛔ **Do not start a second
-investigation.** ⛔ The record is [`bugs/F120.md`](../../bugs/F120.md) and the audit section of
+✅ **The Wildfire cure investigation LANDED, was AUDITED, and was PULLED FROM THE SHIP SET 2026-09-16
+(owner ruling, checklist 187): `F120`.** The audit widened the fix to all 17 legacy mystery technologies
+(85/85 desk); the owner then pulled it because it repairs only a colony started on 1.0.7 and loaded past
+the old-save gate, which Steam and console refuse, so no platform the pack serves can reach it and it
+cannot be tested on a Steam copy. Module held at `tools/held/Fix_MysteryTechMigration.lua`, registered
+nowhere. ⛔ **Do not start a second investigation and do not re-register it without the owner's word.**
+⛔ The record is [`bugs/F120.md`](../../bugs/F120.md) and the audit section of
 `reports/WILDFIRE_CURE_RESEARCH.md` — nothing about them is restated here.
 
-⚠️⚠️ **F120 STILL DOES NOT COVER THE REPORTER'S CASE, now settled rather than suspected:** public Steam
-builds went 1.0.7 → 1.1.0 with nothing between, and Steam refuses a 1.0.7 save before the converter
-runs. ⇒ **Jäger's Steam report is unexplained and open.** The owner's class question is answered:
-**yes** for the converter's Mysteries omission (17 techs, one fix), **no** for [C69](../../bugs/C69.md),
-[C79](../../bugs/C79.md) and [C92](../../bugs/C92.md) — different consumers, nothing new found there.
+⚠️⚠️ **Jäger's Steam report is unexplained and OPEN.** Settled: public Steam builds went 1.0.7 → 1.1.0 with
+nothing between, Steam refuses a 1.0.7 save before the converter runs, all eleven cure nodes are named
+"Wildfire Cure", and the desk has no cause left to test. What remains is a live 1.1.0 Wildfire colony run
+through the reveal — a playtest, not a desk job, and not booked. The class question is answered: **yes**
+for the converter's Mysteries omission, **no** for [C69](../../bugs/C69.md), [C79](../../bugs/C79.md) and
+[C92](../../bugs/C92.md) — different consumers, nothing new found there.
 
 ✅ **The 1.0.7-era candidate block is ARCHIVED 2026-09-16** (`481bbd7`, owner ruling): 38 rows to
 `docs/archive/bugs/`, candidates 59 → 34, the unprioritised bucket now empty. ⭐ **doccheck's
