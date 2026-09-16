@@ -130,4 +130,3 @@ inherits the old total.
 | no link has been consumed and checklist 148 is deferred with (a)–(c) still open | git history, queue bodies and focused checklist read at `4cc0d4c` | `git log --diff-filter=D -- docs/agent/prompts/fixtoggles/` plus the current checklist 148 passage |
 | the authoring allocation covered the old registered set, not necessarily HEAD | `889faab` research/spec split | `python tools/doccheck.py --emit-counts` plus exact `items.lua`/`metadata.lua` enumeration; link 01 reconciles every member |
 | 1.0.7 fixtures are branch-locked and the chain targets the installed branch first | EF-079 and the chain's authoring basis | `python tools/doccheck.py --emit-fingerprint`; re-derive if that build group moved |
-| the firing freeze covers every link in this folder | root prompt-map Must_Read_Header | only a later owner ruling in words lifts it; no link or audit verdict can |

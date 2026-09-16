@@ -12,8 +12,8 @@ D and their old dependencies are consumed; their graves remain in git.
 
 | descendant | current job | authority and start condition | close-out |
 |---|---|---|---|
-| `smrcf-verify/` | one fireable `C35_DETECTOR.md`; build a permanent, log-only TestKit detector for the still-`cand` C35 | owner retained the rewritten detector; it may run only after the root firing freeze is lifted | delete its prompt, remove its name from the grouped map row and update this file; do not claim the set closed while C52 remains |
-| `smrcf-modbrowser/` | README plus four fireable links for the three C52 browser findings | owner retained it but C52 remains `parked`; link 01 may start only after an explicit owner unpark and the root firing freeze is lifted | terminal link archives its README, empties the folder and removes its name from the grouped map row |
+| `smrcf-verify/` | one fireable `C35_DETECTOR.md`; build a permanent, log-only TestKit detector for the still-`cand` C35 | owner retained the rewritten detector; no further start condition | delete its prompt, remove its name from the grouped map row and update this file; do not claim the set closed while C52 remains |
+| `smrcf-modbrowser/` | README plus four fireable links for the three C52 browser findings | owner retained it but C52 remains `parked`; link 01 may start only after an explicit owner unpark | terminal link archives its README, empties the folder and removes its name from the grouped map row |
 
 The descendants are independent. The C35 detector no longer answers whether
 `AsyncPopsDownloadFile` exists; that removed job cannot gate C52. If the owner
@@ -31,8 +31,8 @@ decide defects 2 or 3.
 3. Keep a live todo list, one commit-and-verify unit per item. Recheck shared
    paths before writing; use exact pathspec commits. A doccheck warning is copied
    verbatim into the close-out.
-4. Do not execute either descendant while the root firing freeze holds. Do not
-   lift C52's `parked` status, alter an owner hold or infer a release gate.
+4. Do not lift C52's `parked` status, alter an owner hold or infer a release
+   gate.
 5. Test-bearing work follows `docs/agent/WORKFLOW.md` probe hygiene: run the
    exact TEMPORARY sweep and apply the current STATE age/change obligation at
    the next playtest. Probe age never lets an agent refuse owner-directed work.

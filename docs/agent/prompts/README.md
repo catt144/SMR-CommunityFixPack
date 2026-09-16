@@ -1,21 +1,5 @@
 # prompts/ — the map (reorganised 2026-09-11, owner ask)
 
-> ## ⛔⛔ FIRING FREEZE — owner ruling, 2026-09-15. Read before you fire anything here.
->
-> > *"the prompts folder is rot, and its deep rot. It needs the same treatment as the other docs
-> > we are doing. And all other work is on hold until its done. No prompts in the prompts folder
-> > are allowed to fire until its done"*
->
-> **No prompt in `docs/agent/prompts/` may be fired** — `perma/`, the root one-offs, and the chain
-> folders alike — until the prompts overhaul is finished and the owner lifts this in words.
-> ⛔ **No agent lifts it, narrows it, or grants itself an exception.** If a job seems to need a
-> prompt from here, the answer is to ask the owner, not to fire it.
->
-> **Not covered by this freeze:** triaging a player report into `docs/agent/bugs/`, reading any
-> file here as a record, and work driven by a task document outside this folder.
->
-> The overhaul's own brief is the one thing that runs, and it does not live here.
-
 ## Must_Read_Header
 <!-- RULES -->
 Rule: Keep `docs/agent/prompts/` to mapped prompts, its README map, mapped live-chain evidence and README files, and the owner-exempt `RELEASE_OUTBOX.md` ledger; put supporting documents in `docs/agent/support/`. [A3: pass]

@@ -6,8 +6,8 @@
 > Pass G, not the owner's instruction to keep the remaining screenshot job.
 >
 > ✅ The old D13 and hotfix-2 scheduling gates are discharged. They are history,
-> not current prerequisites. The prompts firing freeze and the owner's scheduling
-> word are the only gates this file adds before its own preflight.
+> not current prerequisites. The owner's scheduling word is the only gate this
+> file adds before its own preflight.
 >
 > ⚠️ **It needs an era pass before it is fired, and the reason is not cosmetic.**
 > This was written 2026-08-13 for game 1.0.7. `EF-079`: **1.0.7 saves cannot load

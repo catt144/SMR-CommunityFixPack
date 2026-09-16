@@ -3,7 +3,7 @@
 > ⚖️ **OWNER RULING 2026-09-09: KEEP FOR NOW.** The owner deliberately retained
 > this chain while others were retired. ⛔ This is not permission to run it:
 > `C52` remains `parked` by the owner's 2026-08-20 ruling. Link 01 may start only
-> after the owner explicitly unparks C52 and the root firing freeze is lifted.
+> after the owner explicitly unparks C52.
 
 The source findings remain useful, but their 1.0.7 line numbers and the old
 module totals are authoring evidence, not current facts. Re-derive targets by
@@ -71,7 +71,7 @@ symbol against installed 1.1.0 before any build.
 
 ## Stop conditions
 
-- C52 is still parked or the root firing freeze still holds: do not start 01.
+- C52 is still parked: do not start 01.
 - Runtime `AsyncPopsDownloadFile` is absent: drop only finding 1 with evidence.
 - The owner declines a §1.5 replacement: drop finding 1; decide the rest.
 - A finding becomes intentional or unreachable: decline it in writing.
