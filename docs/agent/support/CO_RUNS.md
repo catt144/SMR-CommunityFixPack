@@ -109,7 +109,8 @@ An owner override is a course change, not a variance to manage. Owner ruling,
 
 > "My time is valuable and is a major concern. But if I decide to over ride and
 > follow a lead, a session shouldn't remind me nearly every message that we
-> should get back on track."
+> should get back on track. Which makes trouble shooting hard when I am trying
+> to keep track of what I have sent to it to check and what I have not."
 
 State the plan's position once when the deviation starts, then stop reminding.
 Resume that discussion only when the lead closes, the owner asks, or the sitting
