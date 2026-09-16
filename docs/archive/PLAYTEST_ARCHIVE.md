@@ -8099,3 +8099,27 @@ cycle. That reading identified three Origin piles whose pickup approaches fail a
 six real-spot piles whose pickup approaches succeed. The ruling is scoped to this
 diagnostic separation; it does not classify vanilla MegaMall behavior. No further
 owner action is owed for the scope decision.
+
+## LF tree and RED mixed line endings 2026-09-16
+
+A peer found `.claude/tools/archive_settled.py` dead for a day: checklist item 189
+landed 25 LF lines in a CRLF file, the tool split on CRLF, lost headers, and its
+header-count invariant refused every run while doccheck stayed GREEN. The cause
+was this clone checking text out as CRLF while most writing tools write LF, and
+git hiding the mix because both forms store as one blob. Asked what the real issue
+was, the owner said:
+
+> Whats the real issue and is it fixed, i don't want it to continue to happen
+
+Offered three layers (an LF tree, a RED gate on mixed files, readers that tolerate
+mixed input), the owner ruled:
+
+> lets do all 3
+
+Landed the same day. `.gitattributes` carries `* text=auto eol=lf` and the clone's
+local `core.autocrlf` is false; every tracked text file was converted to LF and
+proved identical to its stored blob, archived game logs excepted as raw evidence.
+doccheck's EOL section is RED on a mixed file, with `--fix-eol` as the cure. The
+shared generator writes LF. The archive tool splits on LF and strips a trailing CR,
+proved on a rebuilt incident: the old tool refused, the new one produced the same
+plan as on a clean file. No further owner action is owed.

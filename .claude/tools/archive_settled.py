@@ -75,23 +75,29 @@ except ImportError:
 def load_lines(path):
     """-> (raw_bytes, eol_bytes, [line_bytes...], [offset_of_each_line...]).
 
-    offsets has one extra trailing entry = len(raw_bytes), so offsets[i+1] -
-    offsets[i] - len(eol) == len(lines[i]) for every line but (possibly) the
-    last, and raw_bytes[offsets[i]:offsets[i+1]] always reproduces line i
-    plus its original trailing eol (or nothing, for a last line with none).
+    Lines split on LF, with one trailing CR stripped per line, so a file with
+    MIXED endings keeps every line. The old loader split on CRLF whenever the
+    file held any: a lone-LF line then glued onto its neighbour, its `### `
+    header vanished, and the header-count invariant refused every run
+    (2026-09-16). eol_bytes is the DOMINANT ending, used only for the bytes this
+    tool writes. offsets has one extra trailing entry = len(raw_bytes), and
+    raw_bytes[offsets[i]:offsets[i+1]] always reproduces line i plus its own
+    original ending (or nothing, for a last line with none).
     """
     with open(path, "rb") as fh:
         raw = fh.read()
-    eol = b"\r\n" if b"\r\n" in raw else b"\n"
-    lines = raw.split(eol)
-    offsets = [0] * (len(lines) + 1)
+    crlf = raw.count(b"\r\n")
+    eol = b"\r\n" if crlf > raw.count(b"\n") - crlf else b"\n"
+    parts = raw.split(b"\n")
+    lines = [p[:-1] if p.endswith(b"\r") else p for p in parts]
+    offsets = [0] * (len(parts) + 1)
     pos = 0
-    for i, l in enumerate(lines):
+    for i, p in enumerate(parts):
         offsets[i] = pos
-        pos += len(l)
-        if i < len(lines) - 1:
-            pos += len(eol)
-    offsets[len(lines)] = pos
+        pos += len(p)
+        if i < len(parts) - 1:
+            pos += 1
+    offsets[len(parts)] = pos
     assert offsets[-1] == len(raw), "line-offset bookkeeping is broken"
     return raw, eol, lines, offsets
 
@@ -319,6 +325,13 @@ def main():
     ap.add_argument("--headers-file", help="JSON list of exact reviewed headings; refuse missing/ineligible members")
     args = ap.parse_args()
 
+    # A piped Windows console is cp1252; doccheck output carries non-ASCII, and
+    # printing it crashed the RED refusal itself (2026-09-16).
+    try:
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    except (AttributeError, OSError):
+        pass
+
     if not os.path.exists("tools/doccheck.py"):
         print("RED  run this from the repo root (tools/doccheck.py not found here).")
         return 2
@@ -447,7 +460,7 @@ def main():
 
     # header-count invariant, checked either way
     header_count_before = sum(1 for l in lines_b if l.startswith(b"### "))
-    header_count_after = sum(1 for l in new_checklist.split(eol) if l.startswith(b"### "))
+    header_count_after = sum(1 for l in new_checklist.split(b"\n") if l.startswith(b"### "))
     if header_count_after != header_count_before:
         print("RED  header-count invariant failed -- refusing.")
         return 1

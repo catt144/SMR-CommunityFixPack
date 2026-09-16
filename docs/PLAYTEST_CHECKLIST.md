@@ -239,6 +239,11 @@ worth it for this reach; the lesson (check who can reach the affected state befo
 is recorded in memory, not as policy. Record: [F120](agent/bugs/F120.md),
 [audit section](agent/reports/WILDFIRE_CURE_RESEARCH.md#cross-vendor-audit--2026-09-16-fired-on-fable-promptsf120_auditmd-consumed).
 
+### 2026-09-16 — The tree is LF, and a mixed line ending is RED
+<!-- ck:- status:closed owner:no -->
+
+Owner ruling archived in [LF tree and RED mixed line endings](archive/PLAYTEST_ARCHIVE.md#lf-tree-and-red-mixed-line-endings-2026-09-16). Landed in `.gitattributes`, `tools/doccheck.py`'s EOL section, `tools/split_bugs.py` and `.claude/tools/archive_settled.py`.
+
 ### 2026-09-16 — Do not build a fix for a version players cannot play
 <!-- ck:- status:closed owner:no -->
 

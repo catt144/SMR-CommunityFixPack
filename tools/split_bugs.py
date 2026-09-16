@@ -732,7 +732,9 @@ def write_all(model, out):
 
 
 def write_lines(path, lines):
-    with open(path, "w", encoding="utf-8") as fh:
+    # newline="\n": the tree is LF (2026-09-16). Text mode on Windows would
+    # write CRLF, turning every generated file whole-CRLF on each regen.
+    with open(path, "w", encoding="utf-8", newline="\n") as fh:
         fh.write("\n".join(lines) + "\n")
 
 

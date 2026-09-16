@@ -27,8 +27,8 @@ v5 (2026-09-16, owner-forwarded report): the EOL section. Tools that write LF
 leave a CRLF working-tree file mixed, git under core.autocrlf stays silent, and
 a reader that splits on the file's dominant ending loses the minority lines —
 the archive tool refused every run for a day while doccheck stayed GREEN.
-Report-only; `--fix-eol [PATH ...]` normalises each mixed file to its own
-dominant ending, a change git does not even see.
+The tree went LF the same day (`* text=auto eol=lf`): a mixed file is now RED,
+and `--fix-eol [PATH ...]` converts CRLF to LF, a change git does not see.
 
     python tools/doccheck.py                 # check; exit 1 on any red
     python tools/doccheck.py --regen         # rewrite the generated files, then check
@@ -2216,123 +2216,158 @@ def check_rule_headers(out):
 
 
 # ---------------------------------------------------------------------------
-# Line endings (v5, 2026-09-16)
+# Line endings (v5, 2026-09-16; RED since the LF tree landed the same day)
 #
-# This clone runs core.autocrlf=true: blobs are LF, checkouts are CRLF. Any tool
-# that writes LF (the agent Write/Edit tools, heredocs, most Python) leaves the
-# working-tree file MIXED, and git normalises both forms to the same blob, so
-# `git status` and `git diff` show nothing. A reader that picks the file's
-# dominant ending and splits on it then drops every minority line's marker —
-# `.claude/tools/archive_settled.py` lost its `### ` headers that way and its
-# header-count invariant refused every run, while this checker stayed GREEN.
+# The tree is LF: `.gitattributes` carries `* text=auto eol=lf`, which outranks
+# core.autocrlf. Before that the clone checked out CRLF, so any tool that wrote
+# LF left files MIXED, git normalised both forms to one blob and showed nothing,
+# and a reader that split on a file's dominant ending dropped the minority
+# lines. `.claude/tools/archive_settled.py` lost its `### ` headers that way and
+# refused every run for a day while this checker stayed GREEN.
 #
-# The instrument is git's own `ls-files --eol`: its `w/mixed` column is the
-# working-tree verdict and it honours `-text` attributes, so binary and pinned
-# files never appear. The parser has a positive control below because a gate
-# whose failure path prints as a clean SKIP is a dead gate (the STATE ADMISSION
-# lesson, SEAT_WORKLIST V8 item 1).
+# A MIXED file is RED (owner ruling 2026-09-16). A whole-CRLF file is listed but
+# not RED: every line agrees, so no reader splits it wrong, yet the next LF write
+# into it makes it mixed. `--fix-eol` converts both kinds to LF; git sees no
+# change because the stored blob is already LF.
 #
-# Report-only by this seat's choice, not the owner's: 51 tracked files were
-# mixed the day it landed and three sessions were live in the tree, so a RED
-# would have refused every peer's commit at once. Promoting it is the owner's
-# word, after a quiet-tree `--fix-eol`.
+# The instrument is git's own `ls-files --eol`, which reads the working tree;
+# binary and `-text` files never qualify. Archived game logs are exempt: their
+# mixed endings are the only raw copy of what the game wrote. The parser has a
+# positive control, because a gate whose failure path prints as a clean SKIP is
+# a dead gate (the STATE ADMISSION lesson, SEAT_WORKLIST V8 item 1).
 
 _EOL_CONTROL = (
-    "i/lf    w/mixed attr/                 \tdocs/x.md\n"
-    "i/lf    w/crlf  attr/                 \tdocs/y.md\n"
+    "i/lf    w/mixed attr/text=auto eol=lf \tdocs/x.md\n"
+    "i/lf    w/crlf  attr/text=auto eol=lf \tdocs/y.md\n"
     "i/-text w/-text attr/-text            \tdocs/archive/logs/z.log.raw\n"
     "i/lf    w/lf    attr/text eol=lf      \tdocs/agent/STATE.md\n"
 )
 
 
 def _eol_parse(text):
-    """Return [(worktree_kind, path)] for every row of `git ls-files --eol`."""
+    """Return [(index_kind, worktree_kind, attr, path)] for `git ls-files --eol`."""
     rows = []
     for line in text.splitlines():
         head, tab, path = line.partition("\t")
         if not tab:
             continue
-        w = next((p[2:] for p in head.split() if p.startswith("w/")), "")
-        rows.append((w, path.replace("\\", "/")))
+        parts = head.split()
+        i = next((p[2:] for p in parts if p.startswith("i/")), "")
+        w = next((p[2:] for p in parts if p.startswith("w/")), "")
+        attr = head.split("attr/", 1)[1].strip() if "attr/" in head else ""
+        rows.append((i, w, attr, path.replace("\\", "/")))
     return rows
+
+
+def _eol_is_raw_evidence(rel):
+    """Archived game logs are raw output whose mixed endings ARE the record: the
+    game writes them that way and the archive is append-only. Never listed, never
+    rewritten. On the day this landed they were 129 of the tree's mixed files."""
+    return rel.startswith("docs/archive/") and rel.endswith((".log", ".raw"))
 
 
 def _eol_counts(rel):
     with open(os.path.join(REPO, rel), "rb") as fh:
         data = fh.read()
     crlf = data.count(b"\r\n")
-    lf = data.count(b"\n") - crlf
-    return crlf, lf
+    return crlf, data.count(b"\n") - crlf
 
 
-def _eol_is_raw_evidence(rel):
-    """Archived game logs are raw output whose mixed endings ARE the record:
-    the game writes them that way, the archive is append-only, and some carry
-    sha256 manifests over those exact bytes. Never listed, never rewritten. On
-    the day this landed they were 126 of the 181 mixed tracked files."""
-    return rel.startswith("docs/archive/") and rel.endswith((".log", ".raw"))
-
-
-def _eol_mixed():
-    """Every tracked file git reports as w/mixed, minus raw archived evidence,
-    or None if git did not answer."""
+def _eol_rows():
+    """[(worktree_kind, path)] for every tracked TEXT file that is not raw
+    archived evidence, or None if git did not answer."""
     try:
         text = subprocess.check_output(["git", "ls-files", "--eol"], cwd=REPO,
                                        text=True, encoding="utf-8", errors="replace")
     except (OSError, subprocess.CalledProcessError):
         return None
-    return [path for kind, path in _eol_parse(text)
-            if kind == "mixed" and not _eol_is_raw_evidence(path)]
+    return [(w, path) for i, w, attr, path in _eol_parse(text)
+            if i != "-text" and "-text" not in attr.split()
+            and not _eol_is_raw_evidence(path)]
 
 
 def eol_report(out):
-    """Report-only. Never gates — see the block above for why, and who may change that."""
-    control = [k for k, _ in _eol_parse(_EOL_CONTROL)]
+    """RED on a mixed tracked text file, or on a failed parser control."""
+    control = [w for _, w, _, _ in _eol_parse(_EOL_CONTROL)]
     if control != ["mixed", "crlf", "-text", "lf"]:
         out.append("EOL: RED  the ls-files --eol parser failed its positive control (%r) — "
                    "this run says nothing about line endings" % (control,))
         return False
-    mixed = _eol_mixed()
-    if mixed is None:
+    rows = _eol_rows()
+    if rows is None:
         out.append("EOL: not checked (git ls-files --eol did not run) — this run says "
                    "nothing about line endings")
         return True
-    if not mixed:
-        out.append("EOL: every tracked text file has one line ending in the working tree")
+    mixed = sorted(p for w, p in rows if w == "mixed")
+    crlf = sorted(p for w, p in rows if w == "crlf")
+    if not mixed and not crlf:
+        out.append("EOL: PASS — every tracked text file is LF in the working tree")
         return True
-    out.append("EOL: %d tracked file(s) MIXED in the working tree (report-only) — a "
-               "dominant-ending reader drops the minority lines; normalise with "
-               "`python tools/doccheck.py --fix-eol [PATH ...]` on a quiet tree"
-               % len(mixed))
-    for rel in sorted(mixed, key=lambda r: -min(_eol_counts(r))):
-        crlf, lf = _eol_counts(rel)
-        out.append("  WARN %-58s crlf=%d lf=%d" % (rel, crlf, lf))
-    return True
+    if mixed:
+        out.append("EOL: RED  %d tracked file(s) MIXED — a reader that splits on one "
+                   "ending drops the other's lines. Cure: `python tools/doccheck.py "
+                   "--fix-eol` (git sees no change)" % len(mixed))
+        for rel in mixed:
+            c, l = _eol_counts(rel)
+            out.append("  RED  %-58s crlf=%d lf=%d" % (rel, c, l))
+    if crlf:
+        out.append("EOL: %d tracked file(s) whole-CRLF in an LF tree — not RED, every "
+                   "line agrees; the next LF write makes one mixed. `--fix-eol` converts "
+                   "them" % len(crlf))
+        for rel in crlf[:10]:
+            out.append("  WARN " + rel)
+        if len(crlf) > 10:
+            out.append("  WARN ... and %d more" % (len(crlf) - 10))
+    return not mixed
 
 
 def eol_fix(paths, out):
-    """--fix-eol: rewrite each mixed file to its own dominant ending. Git sees no
-    change (both forms normalise to the same blob), so this never touches history;
-    it only makes the working tree say one thing. With PATHs, only those files."""
-    mixed = _eol_mixed()
-    if mixed is None:
+    """--fix-eol: convert CRLF to LF in every tracked text file that carries any
+    (mixed or whole-CRLF), or only in the PATHs given. The stored blob is already
+    LF, so git sees no content change; this only makes the working tree agree."""
+    rows = _eol_rows()
+    if rows is None:
         out.append("FIX-EOL: git ls-files --eol did not run; nothing rewritten")
         return
-    targets = mixed if not paths else [p.replace("\\", "/") for p in paths]
+    fixable = set(p for w, p in rows if w in ("mixed", "crlf"))
+    targets = sorted(fixable) if not paths else [p.replace("\\", "/") for p in paths]
     for rel in targets:
-        if rel not in mixed:
-            out.append("FIX-EOL: %s is not mixed; left alone" % rel)
+        if rel not in fixable:
+            out.append("FIX-EOL: %s has no CRLF to convert, or is binary, -text or an "
+                       "archived log; left alone" % rel)
             continue
-        crlf, lf = _eol_counts(rel)
+        c, l = _eol_counts(rel)
         with open(os.path.join(REPO, rel), "rb") as fh:
             data = fh.read()
-        norm = data.replace(b"\r\n", b"\n")
-        if crlf >= lf:
-            norm = norm.replace(b"\n", b"\r\n")
         with open(os.path.join(REPO, rel), "wb") as fh:
-            fh.write(norm)
-        out.append("FIX-EOL: %s -> %s (was crlf=%d lf=%d)"
-                   % (rel, "CRLF" if crlf >= lf else "LF", crlf, lf))
+            fh.write(data.replace(b"\r\n", b"\n"))
+        out.append("FIX-EOL: %s -> LF (was crlf=%d lf=%d)" % (rel, c, l))
+    done = [t for t in targets if t in fixable]
+    if not done:
+        return
+    # A converted file keeps the index's old stat size, so `git status` lists it
+    # modified with an empty diff. `git add --renormalize` refreshes that record,
+    # but it would also STAGE a peer's pending edit on the shared index, so it runs
+    # only on files whose bytes now equal the stored blob exactly.
+    try:
+        worktree = subprocess.check_output(
+            ["git", "hash-object", "--no-filters", "--stdin-paths"], cwd=REPO,
+            input=("\n".join(done) + "\n").encode("utf-8")).decode().split()
+        staged = {}
+        listing = subprocess.check_output(["git", "ls-files", "-s", "--"] + done, cwd=REPO)
+        for line in listing.decode("utf-8", "replace").splitlines():
+            meta, _, p = line.partition("\t")
+            staged[p] = meta.split()[1]
+        clean = [p for p, h in zip(done, worktree) if staged.get(p) == h]
+        if clean:
+            subprocess.run(["git", "add", "--renormalize", "--"] + clean,
+                           cwd=REPO, check=True, capture_output=True)
+        for p in sorted(set(done) - set(clean)):
+            out.append("FIX-EOL: %s carries an uncommitted edit; converted, index left "
+                       "alone" % p)
+    except (OSError, subprocess.CalledProcessError) as exc:
+        out.append("FIX-EOL: index refresh failed (%s); `git status` may list the "
+                   "converted files with an empty diff" % exc)
 
 
 def main():
@@ -2352,10 +2387,9 @@ def main():
                          "checklist's markers and STATE.md), then run the checks — the "
                          "contained cure for the RED a checklist edit causes")
     ap.add_argument("--fix-eol", nargs="*", metavar="PATH", dest="fix_eol",
-                    help="normalise each MIXED tracked file to its own dominant line "
-                         "ending (all of them, or only the PATHs given), then run the "
-                         "checks. Invisible to git; run it on a quiet tree because a "
-                         "peer's pending edit on a rewritten file will refuse")
+                    help="convert CRLF to LF in every tracked text file that has any "
+                         "(mixed or whole-CRLF), or only the PATHs given, then run the "
+                         "checks. The blob is already LF, so git sees no change")
     ap.add_argument("--emit-counts", action="store_true",
                     help="also print verified on-demand build counts")
     ap.add_argument("--emit-fingerprint", action="store_true",
@@ -2422,7 +2456,7 @@ def main():
     push_set_report(out)   # report-only: the budget is the owner's to act on
     testkit_tree(out)  # report-only by owner decision (2026-08-04) — never gates
     alias_gate(out)    # report-only, same standing as testkit_tree
-    ok = eol_report(out) and ok   # report-only on mixed files; RED only if its own control fails
+    ok = eol_report(out) and ok   # RED on a mixed file or a failed parser control
 
     if args.verify_split:
         try:
