@@ -59,7 +59,9 @@ def main():
     rt.execute(ENGINE_SHIMS)
     rt.execute('''
         ancestors = {}; CargoTransporter = {}; RocketExpeditionBase = {}
-        LanderRocketBase = {}; CargoTransporterNew = {}; MicroGHabitatBase = {}
+        LanderRocketBase = {}; CargoTransporterNew = {}; UniversalRocketBase = {}
+        MicroGHabitatBase = {}; Colonist = {}
+        g_RocketTypes = {Expedition='RocketExpedition'}
         local function derives(name, target)
             if name == target then return true end
             for _, parent in ipairs(ancestors[name]) do
@@ -86,7 +88,9 @@ def main():
                     if c.method then val = val and val[c.method] end
                     if c.path then val = table.get(_G, table.unpack(c.path)) end
                     local kind = c.kind or ((c.method or c.global) and 'function' or 'table')
-                    if type(val) ~= kind then return 'missing dependency' end
+                    if kind == 'any' and val == nil or kind ~= 'any' and type(val) ~= kind then
+                        return 'missing dependency'
+                    end
                 end
             end,
         }
@@ -100,6 +104,11 @@ def main():
     sources.extend([
         ('CommonLua/Core/types.lua', r'^\s+function table.iappend\('),
         ('Lua/Buildings/Workplace.lua', '^function ValidateBuilding'),
+        ('Lua/City.lua', '^function GetConnectedCities'),
+        ('Lua/City.lua', '^function GetCityLabelWithConnected'),
+        ('Lua/Units/Colonist.lua', '^function Colonist:IsDying'),
+        ('Lua/Units/Colonist.lua', '^function Colonist:CanChangeCommand'),
+        ('Lua/Units/Colonist.lua', '^function Colonist:IsTransported'),
         ('Lua/Buildings/CargoTransporter.lua', '^function GetConnectedCitiesForColonists'),
         ('Lua/Buildings/CargoTransporter.lua', '^function CargoTransporter:GatherAvailableColonists'),
         ('Lua/Buildings/RocketExpedition.lua', '^function RocketExpeditionBase:GatherAvailableColonists'),
@@ -117,14 +126,20 @@ def main():
                                  '^local function is_colonist_reachable'])
     load_at(rt, text, '=' + rel, first)
     assert not re.search(r'\b(Sleep|WaitMsg|WaitWakeup|Create\w*Thread)\s*\(', text)
+    # Gather was compiled as its own extracted body, so expose its shipped file-local
+    # callback as a harness global without rewriting the callback body.
+    reach, first, last = body(rel, '^local function is_colonist_reachable')
+    load_at(rt, reach.replace('local function ', 'function ', 1), '=' + rel, first)
     rt.execute('''
         function assert(ok) if not ok then loud = loud + 1 end return ok end
-        function GetCityLabelWithConnected(city) return city.labels.Colonist end
-        function GetConnectedCities() return {} end
+        empty_table = {}
+        table.icopy = function(t)
+            local out={}; for i=1,#t do out[i]=t[i] end; return out
+        end
         function unit(id, home, command, workplace, traits)
             return {id=id, residence=home, command=command or 'Idle', workplace=workplace,
-                traits=traits or {}, IsDead=function() return false end,
-                CanChangeCommand=function() return true end}
+                traits=traits or {}, IsDead=function(self) return self.dead end,
+                CanChangeCommand=function(self) return not self.blocked end}
         end
         nat = {class='NaturalistHabitat'}; micro = {class='MicroGHabitat'}
         dome = {class='Dome', allow_work_in_connected=false}
@@ -134,13 +149,18 @@ def main():
         c=unit('idle',home); d=unit('busy',home,'Rest')
         e=unit('employed',home,'Idle',job); f=unit('busy employed',home,'Work',job)
         city={labels={Colonist={a,b,c,d,e,f},Elevator={}}}
+        for _,u in ipairs(city.labels.Colonist) do u.city=city end
         rocket=setmetatable({class='RocketExpedition', city=city},{__index=RocketExpeditionBase})
         vanilla=CargoTransporter.GatherAvailableColonists; base_filter=FilterColonistsByTrait
+        new_vanilla=CargoTransporterNew.GatherAvailableColonists
+        universal=setmetatable({class='UniversalRocketBase', RocketType=g_RocketTypes.Expedition,
+            city=city, cargo_request_passengers={}},{__index=CargoTransporterNew})
         function ids(list)
             local out={}; for _,u in ipairs(list) do out[#out+1]=u.id end
             return table.concat(out, ',')
         end
         check(ids(rocket:GatherAvailableColonists(4))=='naturalist,micro,idle,busy','vanilla control')
+        check(ids(universal:GatherAvailableColonists(4))=='naturalist,micro,idle,busy','new vanilla control')
     ''')
     # Model the actual split environment: writes must reach the shipped global.
     rt.execute('''
@@ -151,6 +171,7 @@ def main():
     rt.execute('''
         check(registered.apply()==nil, 'apply')
         check(ids(rocket:GatherAvailableColonists(4))=='idle,busy,employed,busy employed','fill all buckets')
+        check(ids(universal:GatherAvailableColonists(4))=='idle,busy,employed,busy employed','new fill all buckets')
         check(FilterColonistsByTrait==base_filter,'success restores exact global')
         check(#city.labels.Colonist==6 and city.labels.Colonist[1]==a,'pool never mutated')
         local lander=setmetatable({cargo_passengers={a,b}}, {__index=LanderRocketBase})
@@ -163,6 +184,11 @@ def main():
         city.labels.Colonist={homeless,c}
         check(ids(rocket:GatherAvailableColonists(2))=='homeless,idle','nil residence is normal')
         city.labels.Colonist={a,b,c,d,e,f}
+        universal.cargo_request_passengers={a,b,c,d,e,f}
+        local request_ids=ids(universal:GatherAvailableColonists(4))
+        check(request_ids=='idle,busy,employed,busy employed',
+            'new cargo request pool branch: '..request_ids)
+        universal.cargo_request_passengers={}
         local real_kind=IsKindOf
         IsKindOf=function(obj, class)
             if class=='MicroGHabitatBase' then local absent=nil; return absent.fail end
@@ -177,9 +203,16 @@ def main():
         check(ids(rocket:GatherAvailableColonists(2))=='idle,employed','transient pre-filter preserved')
         d.thread_running_destructors=nil; c.traits={}; d.traits={}
         city.labels.Colonist={a,b}; local other={labels={Colonist={c,d,e,f}}}
+        for _,u in ipairs(other.labels.Colonist) do u.city=other end
         city.labels.Elevator={{other={city=other}}}
         check(ids(rocket:GatherAvailableColonists(4))=='idle,busy,employed,busy employed','connected city fill')
+        check(ids(universal:GatherAvailableColonists(4))=='idle,busy,employed,busy employed',
+            'new GetCityLabelWithConnected branch')
         city.labels.Elevator={}; city.labels.Colonist={a,b,c,d,e,f}
+        for _,u in ipairs(city.labels.Colonist) do u.city=city end
+        c.dead=true; d.blocked=true
+        check(ids(universal:GatherAvailableColonists(2))=='employed,busy employed','new liveness filters')
+        c.dead=nil; d.blocked=nil
         -- Force a genuine error in the called filter; the retry observes restoration.
         local calls=0
         local faulty=function(pool,...)
@@ -191,30 +224,52 @@ def main():
         check(ids(rocket:GatherAvailableColonists(2))=='naturalist,micro','error fallback vanilla')
         check(FilterColonistsByTrait==faulty and calls==2,'error restoration and read-only retry')
         FilterColonistsByTrait=base_filter
+        calls=0
+        FilterColonistsByTrait=faulty
+        check(ids(universal:GatherAvailableColonists(2))=='naturalist,micro','new error fallback vanilla')
+        check(FilterColonistsByTrait==faulty and calls==2,'new error restoration and read-only retry')
+        FilterColonistsByTrait=base_filter
         -- Falsifier: the rejected post-filter shape loses otherwise available crew.
         local bad=vanilla(rocket,4)
         for i=#bad,1,-1 do if bad[i]==a or bad[i]==b then table.remove(bad,i) end end
         check(#bad<4,'post-filter mutant must fail fill')
         check(#rocket:GatherAvailableColonists(4)==4,'actual fix fills same fixture')
+        local new_bad=new_vanilla(universal,4)
+        for i=#new_bad,1,-1 do if new_bad[i]==a or new_bad[i]==b then table.remove(new_bad,i) end end
+        check(#new_bad<4,'new post-filter mutant must fail fill')
+        check(#universal:GatherAvailableColonists(4)==4,'new fix fills same fixture')
         -- Calling the base directly isolates restoration from the known #nil caller defect.
         check(CargoTransporter.GatherAvailableColonists(rocket,20)==nil,'scarcity unchanged')
+        check(CargoTransporterNew.GatherAvailableColonists(universal,20)==nil,'new scarcity unchanged')
         check(FilterColonistsByTrait==base_filter,'nil return restores')
         CargoTransporter.GatherAvailableColonists=vanilla
+        CargoTransporterNew.GatherAvailableColonists=new_vanilla
         check(ids(rocket:GatherAvailableColonists(2))=='naturalist,micro','desk removal control')
+        check(ids(universal:GatherAvailableColonists(2))=='naturalist,micro','new desk removal control')
         -- Preserve complete return tuples, including trailing nil, through pcall.
         CargoTransporter.GatherAvailableColonists=function() return nil, false, 'tail', nil end
         check(registered.apply()==nil,'tuple apply')
         local tuple=table.pack(CargoTransporter.GatherAvailableColonists(rocket))
         check(tuple.n==4 and tuple[1]==nil and tuple[2]==false and tuple[3]=='tail', 'tuple preservation')
         CargoTransporter.GatherAvailableColonists=vanilla
+        CargoTransporterNew.GatherAvailableColonists=new_vanilla
         MicroGHabitatBase=nil
         check(registered.apply()=='missing dependency','Require declines absent class')
         check(CargoTransporter.GatherAvailableColonists==vanilla,'decline leaves original installed')
+        MicroGHabitatBase={}
+        CargoTransporter=nil; RocketExpeditionBase=nil
+        check(registered.apply()==nil,'new-only receiver applies')
+        check(ids(universal:GatherAvailableColonists(2))=='idle,busy','new-only receiver filters')
+        CargoTransporter={GatherAvailableColonists=vanilla}; RocketExpeditionBase={}
+        CargoTransporterNew=nil; UniversalRocketBase=nil
+        check(registered.apply()==nil,'legacy-only receiver applies')
+        check(ids(rocket:GatherAvailableColonists(2))=='idle,busy','legacy-only receiver filters')
         check(loud==0,'no loud error/assert calls')
     ''')
-    print('PASS: vanilla contrast; both habitats; full crew across buckets; lander; elevator; foreign receiver;')
-    print('      nil residence; predicate error; traits; transient filter; connected city; exact restore;')
-    print('      error fallback; post-filter mutant rejected; scarcity; desk removal; tuples; Require; silence.')
+    print('PASS: both receiver contrasts; both habitats; full crew across buckets; lander; elevator; foreign receiver;')
+    print('      New request/connected/liveness branches; nil residence; predicate error; traits; transient filter;')
+    print('      exact restore/error fallback; post-filter mutants rejected; scarcity; desk removal; tuples;')
+    print('      common/one-receiver Require behavior; no-yield source scan; silence.')
     print('LIMIT: no game boot, colony departure, UI, save removal or engine concurrency measured.')
 
 
