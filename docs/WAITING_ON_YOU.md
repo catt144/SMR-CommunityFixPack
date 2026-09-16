@@ -16,22 +16,22 @@ one marker settles which is right.
 | # | date | from | the ask |
 |---|---|---|---|
 | 188 | 2026-09-16 | marker | [188: habitat residents walk out on their own. Defect, or the cost of the building?](PLAYTEST_CHECKLIST.md#L31) |
-| 186 | — | marker | [186: choose skill caps after the documentation skills first cut](PLAYTEST_CHECKLIST.md#L99) |
-| 185 | 2026-09-15 | marker | [185: two new fixes are FILED and deliberately UNAUTHORED — say when to build each](PLAYTEST_CHECKLIST.md#L115) |
-| 184 | 2026-09-14 | marker | [184 RULED + CLOSED 09-15: the probe-sweep gate is an age, never a refusal; the ck144 (a) boot ran and is DISCHARGED; the toolkit chain has nothing…](PLAYTEST_CHECKLIST.md#L153) |
-| 182 | 2026-09-14 | marker | [182 RULED + CLOSED 09-15: PLAYTEST_HELP has no owner-facing core — DISSOLVE it](PLAYTEST_CHECKLIST.md#L220) |
-| 181 | 2026-09-14 | marker | [181: the monoliths get automated first, then YOU AND I audit all of them together](PLAYTEST_CHECKLIST.md#L387) |
-| 180 | 2026-09-14 | marker | [180: archive follow-ups — ⚠️ one still needs your word, two are approved work](PLAYTEST_CHECKLIST.md#L412) |
-| 178 | 2026-09-14 | marker | [✅ 178 RULED: STATE's warn cap is TEMPORARILY +25% — ⚠️ you end it, and only you](PLAYTEST_CHECKLIST.md#L501) |
-| 175 | 2026-09-13 | marker | [175 RULED: build the SMR Tool Kit (chain `prompts/smrtk/`); two sittings are yours when their scripts land](PLAYTEST_CHECKLIST.md#L687) |
-| 183 | 2026-09-14 | marker | [183 RULED: SMRTK 08 ran — the design half; every ruling below stands, item 5 confirmed 09-15 (ck184 e)](PLAYTEST_CHECKLIST.md#L914) |
-| 172 | 2026-09-13 | marker | [172: C92 direction RULED — build the restoration, shipping HELD](PLAYTEST_CHECKLIST.md#L1352) |
-| 173 | 2026-09-13 | marker | [173: FIX_POLICY §2a's version-detector ban is factually wrong in one half](PLAYTEST_CHECKLIST.md#L1376) |
-| 171 | 2026-09-13 | marker | [171: C92 — achievement repair or full technology restoration](PLAYTEST_CHECKLIST.md#L1398) |
-| 169 | 2026-09-13 | marker | [⭐ 169 ➊ **UPLOADED — v10 IS LIVE on both portals.** ➋ **FAQ commit DISCHARGED.** ➌ accepted as shipped.](PLAYTEST_CHECKLIST.md#L1450) |
-| 151 | 2026-09-11 | ⚠️ _conflict_ | [⚖️ 151: migration audit complete — **(a) and (d) CLOSED 09-12 as overtaken by events · (e) RULED 09-11 · (b) and (c) still open**](PLAYTEST_CHECKLIST.md#L2913) |
-| 133 | 2026-09-09 | ⚠️ _conflict_ | [⚖️ 133: six decisions from the self-check promise audit. **RULED IN PART 2026-09-12 — "do the reword". Four of the six fall with it; (2) and (4) are…](PLAYTEST_CHECKLIST.md#L4107) |
-| 53 | 2026-08-19 | ⚠️ _conflict_ | [⭐⭐ THE VERDICT REVIEW IS DONE: **UPHELD**. **53 RULED 09-12: pare the modder surface down, and the hardening queue shrinks with it — six rows go, one…](PLAYTEST_CHECKLIST.md#L6679) |
+| 186 | — | marker | [186: choose skill caps after the documentation skills first cut](PLAYTEST_CHECKLIST.md#L104) |
+| 185 | 2026-09-15 | marker | [185: two new fixes are FILED and deliberately UNAUTHORED — say when to build each](PLAYTEST_CHECKLIST.md#L120) |
+| 184 | 2026-09-14 | marker | [184 RULED + CLOSED 09-15: the probe-sweep gate is an age, never a refusal; the ck144 (a) boot ran and is DISCHARGED; the toolkit chain has nothing…](PLAYTEST_CHECKLIST.md#L158) |
+| 182 | 2026-09-14 | marker | [182 RULED + CLOSED 09-15: PLAYTEST_HELP has no owner-facing core — DISSOLVE it](PLAYTEST_CHECKLIST.md#L225) |
+| 181 | 2026-09-14 | marker | [181: the monoliths get automated first, then YOU AND I audit all of them together](PLAYTEST_CHECKLIST.md#L392) |
+| 180 | 2026-09-14 | marker | [180: archive follow-ups — ⚠️ one still needs your word, two are approved work](PLAYTEST_CHECKLIST.md#L417) |
+| 178 | 2026-09-14 | marker | [✅ 178 RULED: STATE's warn cap is TEMPORARILY +25% — ⚠️ you end it, and only you](PLAYTEST_CHECKLIST.md#L506) |
+| 175 | 2026-09-13 | marker | [175 RULED: build the SMR Tool Kit (chain `prompts/smrtk/`); two sittings are yours when their scripts land](PLAYTEST_CHECKLIST.md#L692) |
+| 183 | 2026-09-14 | marker | [183 RULED: SMRTK 08 ran — the design half; every ruling below stands, item 5 confirmed 09-15 (ck184 e)](PLAYTEST_CHECKLIST.md#L919) |
+| 172 | 2026-09-13 | marker | [172: C92 direction RULED — build the restoration, shipping HELD](PLAYTEST_CHECKLIST.md#L1357) |
+| 173 | 2026-09-13 | marker | [173: FIX_POLICY §2a's version-detector ban is factually wrong in one half](PLAYTEST_CHECKLIST.md#L1381) |
+| 171 | 2026-09-13 | marker | [171: C92 — achievement repair or full technology restoration](PLAYTEST_CHECKLIST.md#L1403) |
+| 169 | 2026-09-13 | marker | [⭐ 169 ➊ **UPLOADED — v10 IS LIVE on both portals.** ➋ **FAQ commit DISCHARGED.** ➌ accepted as shipped.](PLAYTEST_CHECKLIST.md#L1455) |
+| 151 | 2026-09-11 | ⚠️ _conflict_ | [⚖️ 151: migration audit complete — **(a) and (d) CLOSED 09-12 as overtaken by events · (e) RULED 09-11 · (b) and (c) still open**](PLAYTEST_CHECKLIST.md#L2918) |
+| 133 | 2026-09-09 | ⚠️ _conflict_ | [⚖️ 133: six decisions from the self-check promise audit. **RULED IN PART 2026-09-12 — "do the reword". Four of the six fall with it; (2) and (4) are…](PLAYTEST_CHECKLIST.md#L4112) |
+| 53 | 2026-08-19 | ⚠️ _conflict_ | [⭐⭐ THE VERDICT REVIEW IS DONE: **UPHELD**. **53 RULED 09-12: pare the modder surface down, and the hardening queue shrinks with it — six rows go, one…](PLAYTEST_CHECKLIST.md#L6684) |
 
 ## Owed playtest legs
 
@@ -42,22 +42,22 @@ _STATE records no OWED line._
 The header's prose and STATE's open-decisions section disagree, so no row above can
 be trusted for these. One marker line each settles it permanently.
 
-- **157** 2026-09-12 — [⏸ 157 — **OFF YOUR OWED LIST 2026-09-12 under the pull-only ruling (165).** Both calls are messaging, not…](PLAYTEST_CHECKLIST.md#L2461)
-- **157** 2026-09-12 — [157 (the original ask): new Steam report, "Prosperity for Mars angry about unemployment with 0 unemployed"…](PLAYTEST_CHECKLIST.md#L2463)
-- **148** 2026-09-11 — [⏳ 148 DEFERRED 09-12 (you said **skip**; the chain is NOT started) — an on/off button for every fix…](PLAYTEST_CHECKLIST.md#L3157)
-- **145** 2026-09-11 — [145: FR-1 cache probe v2 covers all 18 RAYS records; test normal loading first.](PLAYTEST_CHECKLIST.md#L3256)
-- **136** 2026-09-10 — [136: three player reports are now priority surfaces in the vanilla diff hunt. Two asks; neither needs the…](PLAYTEST_CHECKLIST.md#L3818)
-- **125** 2026-09-09 — [ITEM 125 OPEN: the first checks the 1.0.7 tree makes possible were run — one real finding, one bounded…](PLAYTEST_CHECKLIST.md#L4865)
-- **118** 2026-09-08 — [ITEM 118: how 1.0.7 players get served — Steam's branch feature is OFF, so it is one manual route](PLAYTEST_CHECKLIST.md#L5023)
-- **114** 2026-09-08 — [ITEMS 114–117 OPEN: the pack-wide 1.1.0 re-verification — 10 FIX, 35 REMOVE, 35 KEEP (QA'd)](PLAYTEST_CHECKLIST.md#L5066)
-- **112** 2026-09-08 — [ITEMS 112–113 OPEN: the hotfix-1 audit says SHIP WITH CHANGES, and both changes are wording](PLAYTEST_CHECKLIST.md#L5118)
-- **111** 2026-09-08 — [ITEM 111 OPEN: F116 track salvage was repaired, and it left one judgement call](PLAYTEST_CHECKLIST.md#L5277)
-- **—** 2026-08-10 — [⭐⭐ NEW from the `corun-batch-2` SITTING (four calls, all yours)](PLAYTEST_CHECKLIST.md#L8117)
-- **—** 2026-08-05 — [⭐ NEW from the `corun-batch-1` sitting (four calls, all yours)](PLAYTEST_CHECKLIST.md#L8269)
+- **157** 2026-09-12 — [⏸ 157 — **OFF YOUR OWED LIST 2026-09-12 under the pull-only ruling (165).** Both calls are messaging, not…](PLAYTEST_CHECKLIST.md#L2466)
+- **157** 2026-09-12 — [157 (the original ask): new Steam report, "Prosperity for Mars angry about unemployment with 0 unemployed"…](PLAYTEST_CHECKLIST.md#L2468)
+- **148** 2026-09-11 — [⏳ 148 DEFERRED 09-12 (you said **skip**; the chain is NOT started) — an on/off button for every fix…](PLAYTEST_CHECKLIST.md#L3162)
+- **145** 2026-09-11 — [145: FR-1 cache probe v2 covers all 18 RAYS records; test normal loading first.](PLAYTEST_CHECKLIST.md#L3261)
+- **136** 2026-09-10 — [136: three player reports are now priority surfaces in the vanilla diff hunt. Two asks; neither needs the…](PLAYTEST_CHECKLIST.md#L3823)
+- **125** 2026-09-09 — [ITEM 125 OPEN: the first checks the 1.0.7 tree makes possible were run — one real finding, one bounded…](PLAYTEST_CHECKLIST.md#L4870)
+- **118** 2026-09-08 — [ITEM 118: how 1.0.7 players get served — Steam's branch feature is OFF, so it is one manual route](PLAYTEST_CHECKLIST.md#L5028)
+- **114** 2026-09-08 — [ITEMS 114–117 OPEN: the pack-wide 1.1.0 re-verification — 10 FIX, 35 REMOVE, 35 KEEP (QA'd)](PLAYTEST_CHECKLIST.md#L5071)
+- **112** 2026-09-08 — [ITEMS 112–113 OPEN: the hotfix-1 audit says SHIP WITH CHANGES, and both changes are wording](PLAYTEST_CHECKLIST.md#L5123)
+- **111** 2026-09-08 — [ITEM 111 OPEN: F116 track salvage was repaired, and it left one judgement call](PLAYTEST_CHECKLIST.md#L5282)
+- **—** 2026-08-10 — [⭐⭐ NEW from the `corun-batch-2` SITTING (four calls, all yours)](PLAYTEST_CHECKLIST.md#L8122)
+- **—** 2026-08-05 — [⭐ NEW from the `corun-batch-1` sitting (four calls, all yours)](PLAYTEST_CHECKLIST.md#L8274)
 
 ## Coverage
 
-**102 of 144** checklist items carry a `<!-- ck:N status:… owner:… -->` marker; **42** are inferred
+**103 of 145** checklist items carry a `<!-- ck:N status:… owner:… -->` marker; **42** are inferred
 from prose and may be wrong. This number is the one to move: every marker added
 retires a guess.
 

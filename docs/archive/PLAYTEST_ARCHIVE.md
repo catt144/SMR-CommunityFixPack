@@ -8064,3 +8064,19 @@ The method may be built into the fix or another demonstrated recovery route;
 if no recovery method can be established, report the fix as incomplete rather
 than successful. F120 is the current application. No further decision is owed
 from the owner on this requirement.
+
+## Do not build a fix for a version players cannot play 2026-09-16
+
+After the Wildfire cure investigation (F120) built a repair for a defect that
+exists only in a colony carried from 1.0.7 into 1.1.0, the owner ruled:
+
+> do not build a fix for a patch a player cannot play. 1.0.7 cannot load except on a very few installs not steam and not console. this was a fix designed for player that force update there save from 1.0.7 to 1.1.0
+
+Landed the same day as a header rule in `docs/agent/FIX_POLICY.md` and as item 11
+of the `prompt-authoring` skill, in one wording:
+
+> Rule: Do not build a fix for a version players cannot play; a defect that lives only in a save Steam and console cannot load stops before the build brief. [A3: pass]
+
+The reach question — which platforms can reach the state, and whether the cause
+produces the reporter's case — is the quiet side of the same rule and rides
+inside it. No further owner action is owed.

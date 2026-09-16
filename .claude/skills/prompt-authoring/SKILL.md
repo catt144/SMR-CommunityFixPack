@@ -38,6 +38,9 @@ to step in. Include the elements below in every brief for another session.
 10. For a one-off check, never write "play for a while first": a warmed-up save is
     the default, so state only a required deviation such as reading immediately
     after load.
+11. Do not author a build brief for a version players cannot play: a defect
+    that lives only in a save Steam and console cannot load stops before the
+    brief and goes to the owner.
 
 ## Playtest-specific instructions
 

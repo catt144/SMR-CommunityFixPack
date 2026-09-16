@@ -3,6 +3,7 @@
 ## Must_Read_Header
 <!-- RULES -->
 Rule: Keep section 5 because it defines proposals that do not belong in this pack. [A3: pass]
+Rule: Do not build a fix for a version players cannot play; a defect that lives only in a save Steam and console cannot load stops before the build brief. [A3: pass]
 <!-- /RULES -->
 
 Rules for every fix in this pack, in priority order. The goal: maximum
