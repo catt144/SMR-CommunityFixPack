@@ -295,10 +295,25 @@ def git_is_clean():
 # only the small dated header line + separator around them are new text.
 # --------------------------------------------------------------------------
 
-def archive_entry_bytes(it, body_bytes, eol, today):
+def full_heading(it):
+    """The checklist heading exactly as written, minus its `###` level.
+
+    ck180 (approved 2026-09-14): the archive heading used to go through
+    doccheck._ask(), a register helper that drops the date, strips brackets and
+    pipes, and cuts at 200 characters. `ck139` was cut mid-word. The archive is
+    append-only, so a lossy heading can never be corrected after the fact.
+    """
+    return re.sub(r"^#+\s*", "", it["header"]).strip()
+
+
+def archive_heading_prefix(it, today):
     label = "ck%s" % it["num"] if it["num"] is not None else "ck-"
-    header_line = ("## %s -- archived %s (was checklist status:%s): %s"
-                   % (label, today, it["marker"]["status"], doccheck._ask(it["header"], 200)))
+    return "## %s -- archived %s (was checklist status:%s): " % (
+        label, today, it["marker"]["status"])
+
+
+def archive_entry_bytes(it, body_bytes, eol, today):
+    header_line = archive_heading_prefix(it, today) + full_heading(it)
     prefix = eol.join([b"", b"---", b"", header_line.encode("utf-8"), b""]) + eol
     # body_bytes already ends with its own trailing eol (it runs up to, not
     # including, the next header/section line), so no extra eol is added
@@ -306,11 +321,34 @@ def archive_entry_bytes(it, body_bytes, eol, today):
     return prefix + body_bytes
 
 
-def stub_pointer_bytes(it, eol):
-    label = "ck%s" % it["num"] if it["num"] is not None else "ck-"
-    return (eol + ("Body archived in [archive/PLAYTEST_ARCHIVE.md]"
-                   "(archive/PLAYTEST_ARCHIVE.md); search `%s` and this heading."
-                   % label).encode("utf-8") + eol + eol)
+def stub_pointer_bytes(it, eol, today):
+    """ck180 (approved 2026-09-14): the old pointer said "search `ck-` and this
+    heading", which found nothing -- the archive heading had lost its date, and
+    `ck-` is shared by most unnumbered items. The pointer now quotes the exact
+    prefix of the archive heading, which is followed by this item's heading
+    verbatim, so one search for that prefix plus the heading lands on the body."""
+    text = ('Body archived in [archive/PLAYTEST_ARCHIVE.md]'
+            '(archive/PLAYTEST_ARCHIVE.md) under the heading "%s" followed by '
+            'this heading.' % archive_heading_prefix(it, today).rstrip())
+    return eol + text.encode("utf-8") + eol + eol
+
+
+STUB_MAX_BYTES = 800
+
+
+def is_pointer_stub(body):
+    """True for a body that is only a pointer into the archive.
+
+    The tool used to recognise its own stubs byte for byte, which missed every
+    stub written by hand in other wording ("Owner ruling archived in [...]") and
+    would have archived the pointer itself, leaving a pointer to a pointer. It
+    also would have stopped recognising its own 35 stubs the moment the pointer
+    wording changed. A false KEEP here costs only bytes; a false MOVE archives a
+    stub, so the test is deliberately loose.
+    """
+    text = body.strip()
+    return (len(text.encode("utf-8")) <= STUB_MAX_BYTES
+            and "archive/PLAYTEST_ARCHIVE.md" in text)
 
 
 # --------------------------------------------------------------------------
@@ -375,7 +413,7 @@ def main():
         body_bytes_n = len(slice_bytes(raw, offsets, it["body_start"], it["stop_idx"]))
         status_label = it["marker"]["status"] if it["marker"] else "unmarked"
 
-        if body.encode("utf-8") == stub_pointer_bytes(it, eol):
+        if is_pointer_stub(body):
             rows.append((it["num"], status_label, body_bytes_n, "KEEP-archived"))
             continue
 
@@ -441,7 +479,7 @@ def main():
     for it in items:
         if it["body_start"] in move_by_start:
             new_checklist_parts.append(raw[cursor:offsets[it["body_start"]]])
-            new_checklist_parts.append(stub_pointer_bytes(it, eol))
+            new_checklist_parts.append(stub_pointer_bytes(it, eol, today))
             body_bytes = slice_bytes(raw, offsets, it["body_start"], it["stop_idx"])
             archive_addendum.append(archive_entry_bytes(it, body_bytes, eol, today))
             cursor = offsets[it["stop_idx"]]
@@ -449,7 +487,7 @@ def main():
     new_checklist = b"".join(new_checklist_parts)
     addendum_bytes = b"".join(archive_addendum)
 
-    pointer_bytes = sum(len(stub_pointer_bytes(it, eol)) for it, _ in move_items)
+    pointer_bytes = sum(len(stub_pointer_bytes(it, eol, today)) for it, _ in move_items)
     live_after_predicted = live_before - archived_bytes + pointer_bytes
     balances = (len(new_checklist) == live_after_predicted)
 

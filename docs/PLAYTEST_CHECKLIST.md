@@ -654,7 +654,10 @@ Three loose ends from the 09-14 checklist archival ([ARCHIVE_RECHECK](agent/repo
   of 2026-08-20, false by that evening, when the close-out chain built C50/C51 and parked C52.
   Corrected, and marked `ck:56 status:closed` (it was one of the 12 unmarked, so it could never
   have retired). Verdicts: [ARCHIVE_RECHECK §B2](agent/reports/ARCHIVE_RECHECK.md).
-- **✅ APPROVED — fix the archiver, leave the 35 landed headers alone.** It drops the leading
+- **✅ DISCHARGED 2026-09-16 — the archiver is fixed; the 35 landed headers are left alone.**
+  New archive headings carry the checklist heading whole, date included, and each new stub
+  quotes the exact archive heading it points at; a trial apply found all 18 bodies that way.
+  The 35 older stubs keep the old wording, which is the next bullet. It drops the leading
   date from a heading and truncates long ones (`ck139` was cut mid-word at
   `` `Fix_SilentHitMomentFX.lu ``). Bodies are intact and findable; only the archive's header
   text is lossy. ⛔ Do **not** rewrite the 35 — that would mean editing the append-only archive
