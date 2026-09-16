@@ -24,7 +24,9 @@ player surface bumps it by one on release.
 ### Pending — C95 habitat expedition draft (2026-09-16)
 
 - **C95 · `Fix_HabitatExpeditionDraft`**, main-pack **judgment call**, authorized
-  by ck185. Built and desk-verified; game acceptance remains open at ck189.
+  by ck185. ✅ **`tested-attended` 2026-09-16**: the automatic-draft repair passed with the
+  owner watching (ck189 CLOSED). The lander and space-elevator player-choice controls stay
+  **desk-verified, not playtested**, by the owner's ruling recorded in ck189.
 - Automatic expedition drafts leave Naturalist and Micro-G habitat residents
   at home; deliberate player transfers and lander passenger choices remain.
   Forward-only: residents already away are not rescued.
@@ -32,6 +34,46 @@ player surface bumps it by one on release.
   [the build report](../../reports/C95_HABITAT_DRAFT_BUILD.md#public-copy-draft--for-the-release-pass).
   Release pass derives the public count from its actual row set. No version bump,
   store edit, upload or publication was performed by this build.
+
+### Pending — C93 Outside Ranch stockpiles under Open Domes (2026-09-16)
+
+- **C93 · `Fix_OpenPastureStockpiles`**, main pack, **plain repair** — the entry records no
+  judgment call. Ship ruled by the owner 2026-09-16 (recorded in ck185: *"Both of those, and
+  both of the ones we are setting up to test right now are the planned fixes"*).
+- **What players saw:** once the Open Domes law passes, an Outside Ranch left three of its
+  nine stockpiles where drones could not reach them, so that share of its output was never
+  collected. The ranch works normally before the law.
+- **What changes:** the Outside Ranch keeps the model that has all nine stockpile spots, and
+  a ranch already affected in a save recovers its stranded piles on load. No resource is
+  created, moved or lost.
+- ⚠️ **State the visible tradeoff publicly:** under Open Domes an Outside Ranch keeps its
+  closed look. Atmosphere, consumption and every other effect of the law are unchanged.
+- ⛔ **Verification — do not overstate in public copy:** the harm was reproduced on the
+  owner's save; the repair is **source- and desk-verified only**. Its in-game validation is
+  checklist **191, still open**. Do not describe it as watched working in a running colony.
+- No public-copy draft exists. Authority: [C93](../../bugs/C93.md) and
+  [the build report](../../reports/C93_RANCH_OPEN_DOMES_BUILD.md).
+
+### Pending — C96 RC Seeker and other rover subclasses on expeditions (2026-09-16)
+
+- **C96 · `Fix_RoverSubclassManifest`**, main pack, **plain repair** — the entry records no
+  judgment call. Ship ruled by the owner 2026-09-16, ck185 (b).
+- **What players saw:** an expedition asking for an RC Commander refused an RC Seeker with
+  "Not enough Rovers", although the Seeker is a Commander model. A Europe colony whose only
+  rover was a Seeker could never send that expedition. The same refusal applied to every RC
+  rover model built on another one.
+- **What changes:** a rover model now fills a request for the rover type it is built on, and
+  the cargo panel shows the rover actually loaded (for example *Seeker 1/1*). It works one
+  way only — an expedition asking for a Seeker still refuses a plain Commander — and a colony
+  that owns the exact rover keeps the game's own choice. When the only matching rover is
+  busy, the panel now says "Rovers are busy" instead of showing no warning.
+- ⛔ **Verification — say exactly this much:** watched **launching** in a running colony on
+  1.1.0 on 2026-09-16 with the Seeker aboard (cargo Seeker 1/1, Commander 0/0), and the owner
+  saw it return as a Seeker. The final return tally was still being read when this entry was
+  written — check [the live brief](../C96_LIVE_FAILURE.md) and C96's status before the release
+  pass. Removing the pack mid-expedition was **not** tested.
+- No public-copy draft exists. Authority: [C96](../../bugs/C96.md) and
+  [the build report](../../reports/C96_ROVER_SUBCLASS_BUILD.md).
 
 F120's row, added 2026-09-16 by the audit, was **WITHDRAWN** the same day on the
 owner's ruling: no platform the pack serves can reach its repaired state; module
