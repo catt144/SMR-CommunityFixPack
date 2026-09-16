@@ -88,6 +88,18 @@ serialization is measured. Label membership and idleness are stated by the fixtu
    `BaseRover:AddToCityLabels` (`:123-127`), which also adds `Unit` and `Rover`. The substance
    is unchanged — nothing walks `__parents`.
 
+## ⛔ SUPERSEDED IN PART — tested in a game 2026-09-16, and the repair is INERT
+
+⛔ **"Not reproduced in play, and not tested in a game" below is now false in its second half.**
+It was tested, on the owner's ESA/Wildfire fixture, and it failed: a Seeker-only colony still could not
+send a Commander-requiring expedition, and `GatherAvailableRovers("RCRover", 1)` returned **0** with the
+Seeker idle and every hook confirmed installed on the class the live rocket dispatches through.
+**MEASURED:** a third gate this build never covered — the availability count reaching
+`#city.labels[class]` through a file-local function. ⚠️ The 22 desk legs and three mutants all passed
+while the module was inert; that gap is itself a work item.
+⇒ [`prompts/C96_LIVE_FAILURE.md`](../prompts/C96_LIVE_FAILURE.md) carries the measurements, the four
+refuted diagnoses and the work list. ⛔ Do not plan from the acceptance section below without it.
+
 ## What is NOT claimed
 
 - ⛔ **Not reproduced in play, and not tested in a game.** The defect is source-verified on
