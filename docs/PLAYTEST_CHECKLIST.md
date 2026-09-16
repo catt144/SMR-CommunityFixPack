@@ -28,6 +28,34 @@ Item 177 records the still-open question of mechanically enforcing checklist mar
 
 ## Decisions waiting on you
 
+### 2026-09-16 — 188: habitat residents walk out on their own. Defect, or the cost of the building?
+<!-- ck:188 status:open owner:yes -->
+
+**Your observation, from your own C95 sitting:** Dermot rode the rail back into the Naturalist
+Habitat and then **left again a few hours later** for `Fuller #1`, once he had an apartment and a
+job there — *"which from my understanding is not what people living in habitats are supposed to
+want to do."*
+
+**What the source says, filed as [C100](agent/bugs/C100.md).** The emigration scorer runs for every
+colonist on a heavy-update tick. It normally needs a destination to beat the current community's
+score — but there is an override: a colonist with **no job** moves to the first reachable community
+offering a free apartment **and** a free job, with **no score margin required**. And a habitat
+forbids connected work by design, so its residents are structurally jobless. ⇒ **the habitat's
+defining rule is what supplies the trigger that empties it.**
+
+**The question, and only you can answer it.** Habitat residency is explicitly score-gated and
+re-evaluated in vanilla, so the game does contemplate people moving out. Is this an oversight —
+the same shape as C95, where one system's deliberate rule is not honoured by another — or is it
+the intended price of a building that cuts its residents off from the colony?
+
+⛔ **Nothing is authored and nothing is classified until you say.** ⚠️ This does **not** change
+C95's ruled repair; that one stops the expedition draft and is unaffected either way. If you rule
+it a defect, C100 rises from P3 and needs its own shape decision.
+
+⭐ **One cheap thing to watch next time you are in that colony, before ruling:** does a habitat
+resident **with** a job (an outside workplace near the habitat) stay put while a jobless one
+leaves? If a working resident also walks out, C100's mechanism is wrong and the entry says so.
+
 ### ✅ 2026-09-16 — 187 RULED: F120 is PULLED from the ship set — built, audited, held
 <!-- ck:187 status:ruled owner:no -->
 
