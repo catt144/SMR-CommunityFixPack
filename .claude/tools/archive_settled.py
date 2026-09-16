@@ -391,6 +391,11 @@ def main():
     ap.add_argument("--apply", action="store_true",
                      help="perform the move (default is dry run / report only)")
     ap.add_argument("--headers-file", help="JSON list of exact reviewed headings; refuse missing/ineligible members")
+    ap.add_argument("--procedure-reviewed", metavar="FILE",
+                    help="JSON list of exact headings whose procedure-bearing hold (rule c) a "
+                         "read of the body has cleared: every block is a ruling list or a "
+                         "record of a run, or its procedure already lives elsewhere. Every "
+                         "heading must match an item, or the run refuses.")
     args = ap.parse_args()
 
     # A piped Windows console is cp1252; doccheck output carries non-ASCII, and
@@ -437,6 +442,23 @@ def main():
         selected = set(selection)
     d_details = []
     c_details = []
+    reviewed = set()
+    if args.procedure_reviewed:
+        with open(args.procedure_reviewed, encoding="utf-8") as fh:
+            reviewed_list = json.load(fh)
+        if (not isinstance(reviewed_list, list) or not reviewed_list
+                or any(not isinstance(h, str) for h in reviewed_list)
+                or len(set(reviewed_list)) != len(reviewed_list)):
+            print("RED  --procedure-reviewed must be a nonempty JSON list of unique headings.")
+            return 1
+        reviewed = set(reviewed_list)
+        unknown = reviewed - {it["header"] for it in items}
+        if unknown:
+            print("RED  --procedure-reviewed names heading(s) that match no item -- refusing:")
+            for heading in sorted(unknown):
+                print(heading)
+            return 1
+    reviewed_cleared = []
 
     for it in items:
         body = body_text(raw, offsets, eol, it["body_start"], it["stop_idx"])
@@ -477,6 +499,10 @@ def main():
         elif hit_b:
             excl_b += 1
             decision = "KEEP-b"
+        elif proc and it["header"] in reviewed:
+            reviewed_cleared.append((it["num"], why, body_bytes_n))
+            decision = "MOVE"
+            move_items.append((it, body_bytes_n))
         elif proc:
             excl_c += 1
             c_details.append((it["num"], why, body_bytes_n))
@@ -571,6 +597,10 @@ def main():
             print("  ck%-4s %s (%d B)" % (num if num is not None else "-", why, n))
     else:
         print("  (none)")
+    if reviewed:
+        print("Rule (c) cleared by --procedure-reviewed (moving): %d" % len(reviewed_cleared))
+        for num, why, n in reviewed_cleared:
+            print("  ck%-4s %s (%d B)" % (num if num is not None else "-", why, n))
     print()
     print("ARCHIVE-OLD (report-only; unmarked, no header number, prose not "
           "closed-looking, dated before %s): %d items, %d B"
