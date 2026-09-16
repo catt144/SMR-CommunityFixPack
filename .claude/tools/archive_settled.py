@@ -391,6 +391,11 @@ def main():
     ap.add_argument("--apply", action="store_true",
                      help="perform the move (default is dry run / report only)")
     ap.add_argument("--headers-file", help="JSON list of exact reviewed headings; refuse missing/ineligible members")
+    ap.add_argument("--citation-cleared", metavar="FILE",
+                    help="JSON list of exact headings whose citation hold (rule d) is lifted: "
+                         "the citing prompt uses the item as evidence and follows the stub "
+                         "into the archive (owner ruling 2026-09-16). Every heading must match "
+                         "an item, or the run refuses.")
     ap.add_argument("--procedure-reviewed", metavar="FILE",
                     help="JSON list of exact headings whose procedure-bearing hold (rule c) a "
                          "read of the body has cleared: every block is a ruling list or a "
@@ -459,6 +464,23 @@ def main():
                 print(heading)
             return 1
     reviewed_cleared = []
+    cite_cleared = set()
+    cite_moved = []
+    if args.citation_cleared:
+        with open(args.citation_cleared, encoding="utf-8") as fh:
+            cite_list = json.load(fh)
+        if (not isinstance(cite_list, list) or not cite_list
+                or any(not isinstance(h, str) for h in cite_list)
+                or len(set(cite_list)) != len(cite_list)):
+            print("RED  --citation-cleared must be a nonempty JSON list of unique headings.")
+            return 1
+        cite_cleared = set(cite_list)
+        unknown = cite_cleared - {it["header"] for it in items}
+        if unknown:
+            print("RED  --citation-cleared names heading(s) that match no item -- refusing:")
+            for heading in sorted(unknown):
+                print(heading)
+            return 1
 
     for it in items:
         body = body_text(raw, offsets, eol, it["body_start"], it["stop_idx"])
@@ -488,6 +510,9 @@ def main():
         proc, why = is_procedure_bearing(body)
 
         hit_d = cited_by_number(it.get("num"), num_blob)
+        if hit_d and it["header"] in cite_cleared:
+            hit_d = False
+            cite_moved.append((it["num"], body_bytes_n))
 
         if hit_a:
             excl_a += 1
@@ -597,6 +622,10 @@ def main():
             print("  ck%-4s %s (%d B)" % (num if num is not None else "-", why, n))
     else:
         print("  (none)")
+    if cite_cleared:
+        print("Rule (d) lifted by --citation-cleared: %d" % len(cite_moved))
+        for num, n in cite_moved:
+            print("  ck%-4s (%d B)" % (num if num is not None else "-", n))
     if reviewed:
         print("Rule (c) cleared by --procedure-reviewed (moving): %d" % len(reviewed_cleared))
         for num, why, n in reviewed_cleared:

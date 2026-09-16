@@ -15072,3 +15072,17 @@ evaporated and it had to be built live.
    the next unattended chain, which verifies both against a live boot.
    → `agent/bugs/F100.md`.
 
+## Citations do not hold evidence 2026-09-16
+
+Shown that checklist item 145 (the FR-1 Linux crash work, 26 KB of appended bench legs) survived
+three archival runs because `LINUX_DISPATCH.md` cites "checklist 145" as the lane's record, and
+asked whether that prompt could be edited, the owner said:
+
+> Its evidence, that prompt can pull from an archive thats insane that even in a live doc
+
+A prompt citing a checklist item as evidence does not keep the body in the live checklist; the
+prompt follows the stub into the archive. Applied the same day to 145, and to 161, which the
+orchestrator handoff cites only as provenance. Items whose citation is a live hold or pending
+work stay (172, the C92 shipping hold; 53, the next upload's hardening note). The no-edit ruling
+on `LINUX_DISPATCH.md` is unchanged; its lines telling agents to write FR-1 results into
+checklist 145 still stand. No owner action is owed.
