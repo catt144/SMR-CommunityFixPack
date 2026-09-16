@@ -265,7 +265,7 @@ restoration remain yours. Caps are still down. Evidence and revisit criteria:
 
 ### 2026-09-15 — 185: two new fixes are FILED and deliberately UNAUTHORED — say when to build each
 
-<!-- ck:185 status:open owner:yes -->
+<!-- ck:185 status:ruled owner:yes -->
 
 ✅⚖️ **RULED IN PART 2026-09-16 — (a) C95 is AUTHORISED to build and test.** Your words: *"can you
 rewrite the c95 build I want to fire it and then we can test it, already have the test ready in a
@@ -287,6 +287,14 @@ fixture and test it, and whether it ships. ⭐ Worth knowing before you decide: 
 that C96's own scoping would have produced a **dead module** — it named the legacy transporter
 only, and 1.1.0 expeditions use the other one, which is exactly how C95 failed its sitting. The
 repair covers both, and it also repairs a cargo-accounting half the entry had not spotted.
+
+⚖️⭐ **BOTH REMAINING CALLS RULED 2026-09-16 — C96 SHIPS IN v11, and the fixture is being
+provisioned now.** Your words, asked whether C96's module should ride v11 or be pulled because it had
+never run in a game: *"Both of those, and both of the ones we are setting up to test right now are the
+planned fixes."* ⇒ `Fix_RoverSubclassManifest` stays registered (`items.lua`, `Code/`), and C93's
+`Fix_OpenPastureStockpiles` ships with it (its validation is **191**). ⛔ **This closes (b)'s "whether it
+ships" call; it does NOT assert either fix has been witnessed in play** — both are under test today and
+the acceptance legs stay owed at **191** and in the C96 build report. A ship decision is not a test result.
 
 ⛔ **(b)'s ORIGINAL TEXT, kept because the ruling above amends it rather than replacing the
 record:** C96 was still open and nothing about it was authorised by the C95 lift.
