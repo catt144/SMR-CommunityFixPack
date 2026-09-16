@@ -116,14 +116,6 @@ Module lists are gated by `tools/doccheck.py` MODULE SETS + `tools/upload_prefli
 - STILL OPEN: 53 harden now or in 1.0.1 · 47 two modder-page wordings · 152 c open · 185 C95/C96 builds · 133 two `FIX_POLICY` §2a
   lines (2 UNKNOWN-status policy, 4 `LuaRevision` label). `WAITING_ON_YOU.md` parses the literal `STILL OPEN:` and
   `Owner OWES: ck##` idioms.
-- **53**: RULED 09-12 to pare the modder surface, so the hardening queue shrinks with it; rec 1.0.1.
-- **47**: the owner's 2 pared site files ride on it.
-- **133**: (2) and (4) still open.
-- **151 (b)** dev-report scope (ck165 permits indefinite deferral) · **151 (c)** open. F59 re-derived 09-11: the expedition
-  claim CONFIRMED **+ a 2nd caller** (manual Set Residence on a full home OVERFILLS it, both branches); both branches
-  are in the repair scope, and the frozen `v5-game-1.0.7` download ships the same body with no version gate.
-- **152 (c)** open (A1 source-derived, A2 `tested-attended`, (e) swept with v10).
-- **169 ➋** DISCHARGED 09-13 — `faq.md` committed as `d86a347`; the site deploy itself is still the owner's act.
 
 ## Build state — emitted by `python tools/doccheck.py --emit-counts`
 ```
