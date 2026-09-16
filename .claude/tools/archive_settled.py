@@ -195,12 +195,42 @@ def number_citation_blob():
     return chr(10).join(blob)
 
 
+# A number counts as a citation only when it is NAMED as a checklist item.
+# The first version matched any standalone token, so a commit hash (`153d180`),
+# a count ("40 sols", "59 -> 34"), a bug id (C98, F73) or a file name
+# (`73_SMRTK_Infopanel.lua`) pinned an unrelated item: on 2026-09-16 six of the
+# nine remaining pins, 32,863 B, were such coincidences.
+_NAMED_CK_RE = re.compile(r"(?<![A-Za-z])ck\*{0,2}(\d+)", re.I)
+_NAMED_WORD_RE = re.compile(
+    r"\b(?:checklist|items?|decisions?)\*{0,2}\s+\*{0,2}"
+    r"(\d+(?:\*{0,2}\s*(?:/|,|–|-|\+|&|and)\s*\*{0,2}\d+)*)", re.I)
+_HASH_RE = re.compile(r"(?<![\w&])#(\d+)\b")
+# STATE's owner-register idioms list bare item numbers; WAITING_ON_YOU parses them.
+_IDIOM_LINE_RE = re.compile(r"STILL OPEN:|Owner OWES:")
+_BARE_NUM_RE = re.compile(r"(?<![\w.§])(\d+)(?![\w.])")
+_cited_cache = {}
+
+
+def cited_numbers(blob):
+    if blob in _cited_cache:
+        return _cited_cache[blob]
+    found = set(_NAMED_CK_RE.findall(blob)) | set(_HASH_RE.findall(blob))
+    for run in _NAMED_WORD_RE.findall(blob):
+        found.update(re.findall(r"\d+", run))
+    for line in blob.split("\n"):
+        if _IDIOM_LINE_RE.search(line):
+            found.update(_BARE_NUM_RE.findall(line))
+    found = {n.lstrip("0") or "0" for n in found}
+    _cited_cache[blob] = found
+    return found
+
+
 def cited_by_number(num, blob):
-    """True if this decision number appears as a standalone token."""
+    """True if this decision number is cited AS a checklist item (see above)."""
     num = str(num) if num is not None else ''
     if not num or not num.isdigit():
         return False
-    return re.search(r'(?<![\d.])(?:ck)?\*{0,2}' + num + r'\*{0,2}(?![\d])', blob) is not None
+    return (num.lstrip("0") or "0") in cited_numbers(blob)
 
 
 def rule_a_matches(items, quotes):
