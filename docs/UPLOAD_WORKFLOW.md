@@ -90,7 +90,7 @@ The public-surface sweep maintains the backup copy below alongside its two canon
 ```
 Bug fixes for Surviving Mars: Relaunched.
 
-Forty-nine repairs, each one written up on the fix list with what you would
+Fifty-two repairs, each one written up on the fix list with what you would
 have seen and what was actually wrong. Every one targets something the game's
 own code gets wrong — the code says one thing, does another, and the fix makes
 it do what it says. It fixes bugs; it does not rebalance the game. Preferences
@@ -122,6 +122,7 @@ SOME OF WHAT IT FIXES
 · A bed that fell vacant sat empty while colonists were homeless.
 · Night-shift colonists never came back to work after midnight.
 · A building clogged by a dust storm never started again.
+· An Outside Ranch under Open Domes left food where drones could not reach it.
 · Building an artificial lake buried the rover that built it.
 · Drone Hubs paralysed themselves every time an Extender flickered.
 · Salvaging one piece of track deleted the whole line, and its trains with it.
@@ -227,7 +228,7 @@ https://github.com/catt144/SMR-CommunityFixPack
 ```
 Bug fixes for [i]Surviving Mars: Relaunched[/i].
 
-[b]Forty-nine repairs[/b], each one written up on the fix list with what you would have seen and what was actually wrong. Every one targets something the game's own code gets wrong — the code says one thing, does another, and the fix makes it do what it says. It fixes bugs; it does not rebalance the game. Preferences and features are deliberately not in it.
+[b]Fifty-two repairs[/b], each one written up on the fix list with what you would have seen and what was actually wrong. Every one targets something the game's own code gets wrong — the code says one thing, does another, and the fix makes it do what it says. It fixes bugs; it does not rebalance the game. Preferences and features are deliberately not in it.
 
 Some of them you could hardly miss: an entire train line and every train on it deleted by salvaging a single hex, colonists suffocating on a walk between two domes, an artificial lake burying the rover that was building it.
 
@@ -244,6 +245,7 @@ And [b]two[/b] of them repair things you cannot see at all today: real defects t
 [*]A bed that fell vacant sat empty while colonists were homeless.
 [*]Night-shift colonists never came back to work after midnight.
 [*]A building clogged by a dust storm never started again.
+[*]An Outside Ranch under Open Domes left food where drones could not reach it.
 [*]Building an artificial lake buried the rover that built it.
 [*]Drone Hubs paralysed themselves every time an Extender flickered.
 [*]Salvaging one piece of track deleted the whole line, and its trains with it.
@@ -309,10 +311,15 @@ Usually auto-fills. If it is missing under **CHANGELOG** (Paradox) or **Change
 Notes** (Steam), paste this:
 
 ```
-Housing and migration fixes, reviewed against the 1.1.0 patch:
+Three new fixes, all watched working in a running colony on 1.1.0:
 
-- Freed housing notice - REPAIRED. Assigning a colonist to a residence that was already full could leave that home with more residents than it has beds, and fail to evict the colonist it displaced. That was this pack's own doing, not the game's. The notice now waits until the move that freed the bed has finished. Watched working in a running colony on 1.1.0. The same repair should also stop a colonist boarding an expedition from losing the home held for their return; that half is checked in the code only.
-- Dome housing total - RETIRED. 1.1.0 changed how a dome decides whether it has room, and it no longer uses the total this fix corrected. Rather than leave it adjusting a number that no longer feeds the decision, the fix has been removed. The fix list drops from fifty to forty-nine.
+-Outside Ranch under Open Domes — NEW. Once the law passed, an Outside Ranch left three of its nine stockpiles where drones could not reach them, so part of its output was never collected. The ranch now keeps the model with all nine stockpile spots, so it keeps its closed look under Open Domes; nothing else about the law changes. A ranch already affected in your save recovers its stranded piles when you load it.
+
+-RC Seeker on expeditions — NEW. An expedition asking for an RC Commander refused an RC Seeker, although the Seeker is a Commander model, and the same went for every rover model built on another one. A rover model now fills a request for the rover it is built on (one way only), and the cargo panel shows the rover actually loaded.
+
+-Habitat residents on expeditions — NEW, and a judgment call. The automatic expedition crew draft took Naturalist and Micro-G habitat residents, and they came back to a dome instead of home. The draft now leaves them at home; you can still send them yourself. Residents already away come back the old way.
+
+The fix list goes from forty-nine to fifty-two.
 ```
 
 #### 📋 Short summary (only if it also came out blank)

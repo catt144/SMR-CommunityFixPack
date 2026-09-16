@@ -135,7 +135,7 @@ back at Paradox. ⛔ Do not paste the same block on both.
 ```
 Bug fixes for Surviving Mars: Relaunched.
 
-Forty-nine repairs, each one written up on the fix list with what you would
+Fifty-two repairs, each one written up on the fix list with what you would
 have seen and what was actually wrong. Every one targets something the game's
 own code gets wrong — the code says one thing, does another, and the fix makes
 it do what it says. It fixes bugs; it does not rebalance the game. Preferences
@@ -167,6 +167,7 @@ SOME OF WHAT IT FIXES
 · A bed that fell vacant sat empty while colonists were homeless.
 · Night-shift colonists never came back to work after midnight.
 · A building clogged by a dust storm never started again.
+· An Outside Ranch under Open Domes left food where drones could not reach it.
 · Building an artificial lake buried the rover that built it.
 · Drone Hubs paralysed themselves every time an Extender flickered.
 · Salvaging one piece of track deleted the whole line, and its trains with it.
@@ -278,7 +279,7 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=3787202810
 ```
 Bug fixes for [i]Surviving Mars: Relaunched[/i].
 
-[b]Forty-nine repairs[/b], each one written up on the fix list with what you would have seen and what was actually wrong. Every one targets something the game's own code gets wrong — the code says one thing, does another, and the fix makes it do what it says. It fixes bugs; it does not rebalance the game. Preferences and features are deliberately not in it.
+[b]Fifty-two repairs[/b], each one written up on the fix list with what you would have seen and what was actually wrong. Every one targets something the game's own code gets wrong — the code says one thing, does another, and the fix makes it do what it says. It fixes bugs; it does not rebalance the game. Preferences and features are deliberately not in it.
 
 Some of them you could hardly miss: an entire train line and every train on it deleted by salvaging a single hex, colonists suffocating on a walk between two domes, an artificial lake burying the rover that was building it.
 
@@ -295,6 +296,7 @@ And [b]two[/b] of them repair things you cannot see at all today: real defects t
 [*]A bed that fell vacant sat empty while colonists were homeless.
 [*]Night-shift colonists never came back to work after midnight.
 [*]A building clogged by a dust storm never started again.
+[*]An Outside Ranch under Open Domes left food where drones could not reach it.
 [*]Building an artificial lake buried the rover that built it.
 [*]Drone Hubs paralysed themselves every time an Extender flickered.
 [*]Salvaging one piece of track deleted the whole line, and its trains with it.
@@ -606,6 +608,22 @@ by the by-design Paradox cross-link paragraph and footer. Length 6,383 → **6,2
 **Twelve fix-list rows re-worded** from `reports/still-needed/WORDING_RULED.md` (items 1, 2, 3, 5,
 6, 7, 8, 9, 10, 11, 12, 14; item 4 F52 held, item 13 F31 is the retirement). ⛔ Those are **not**
 in `last_changes`: a wording correction is not a game repair (outbox, Held §Change note).
+
+## ⭐ 2026-09-16 — v11 words (`release_prompt.md` §1): count 49 → 52, one headliner (C93)
+
+**Count: Forty-nine → Fifty-two.** C93 (Outside Ranch under Open Domes), C95 (habitat residents
+and automatic expedition drafts, judgment call) and C96 (rover subclasses on expeditions) land;
+nothing retires. Derived from `SMR-CommunityMods` `content/fix-list.md`: `^??? ` rows = **52**,
+section tally 2+15+4+6+9+6+6+2+2 = 52.
+
+**Headliners 20 → 21.** ON: **C93**, *"An Outside Ranch under Open Domes left food where drones
+could not reach it."* — two independent player reports and food visibly stranded, the bar C85
+cleared. C96 has one report and stays in the tail; C95 is a judgment call whose row belongs on the
+fix list, as C89 did.
+
+**Judgment calls four → five** for C95: `content/faq.md` (three places), the fix-list
+`??? question` marker (`^??? .*judgment call\*"$` = **5**), and `content/index.md`, which still
+said **three** after v10 and now says five. The card's judgment-call sentence states no number.
 
 ## Provenance of the headliners
 
