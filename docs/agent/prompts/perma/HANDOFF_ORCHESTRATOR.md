@@ -103,6 +103,20 @@ take.** Do not execute anything else.
 ⛔ **The two auto-firing tasks this section carried on 2026-09-16 are DONE. Do not re-run them, and
 do not restore the auto-start instruction from an older copy of this file.**
 
+### TestKit loose end — `Fill all storages` aborts on any rocket (noted 2026-09-16, NOT FIXED)
+
+⚠️ **Owner's instruction: note it, do not fix it now.** `fill_storages`
+(`Code/72_SMRTK_World.lua:311-316`) sweeps `MechanizedDepot` + `StorageDepot`, and `MapForEach`
+matches descendants — **every rocket is a `StorageDepot`** (`UniversalStorageDepotBase →
+StorageDepot`, `Lua/Buildings/StorageDepot.lua:329-330`). The rocket's `CheatFill` override then
+throws at `Lua/UniversalRocket.lua:1621`, `self.demand[cargo_id]:AddAmount(...)`, because a cargo
+line can exist with no matching demand request. There is no per-object `pcall`, so **the first
+rocket aborts the whole sweep and the remaining depots are never filled**. MEASURED live
+2026-09-16 (`SMRTK_ERROR ... action=fill_storages status=ERROR`).
+⇒ Fix is in the TestKit repo (clean at `7b57b8a`): exclude rockets and wrap the per-object call.
+⛔ **The vanilla `CheatFill` bug is cheat-only and fails the reach test** — no player can hit it,
+so it is NOT fix-pack material and no entry was filed.
+
 ### The TestKit link — two rows still unrun
 
 TestKit `acafc74`, three rows on one link. ✅ **`SMRTest.Log.CrewDraft` HAS NOW RUN** — it carried

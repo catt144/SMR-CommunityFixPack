@@ -289,3 +289,63 @@ Everything else is a timed sleep.
 
 ⛔ **Leg B must start from a save taken BEFORE the Leg A reveal** — the owner took one. ⚠️ Read
 `const.HourDuration` and `const.DayDuration` in-game rather than converting the sleeps by hand.
+
+## Leg B — RAN TO COMPLETION 2026-09-16: the organic chain resolves the whole mystery on 1.1.0
+
+⭐⭐ **The Wildfire mystery was played from its own trigger chain to `MysteryEnd "resolved"` on a
+colony started on 1.1.0.** Not the reveal alone — the entire mystery, including the cure exports and
+the epilogue. ⛔ **Jäger's report has no defect behind it on this path.**
+
+**Measured timeline, from the in-game Mystery Log and the sequence trail in
+`Mars.exe-20260916-14.56.04-6a91a190.log`:**
+
+| Sol | event | gate type |
+|---|---|---|
+| — | colony crossed **100 colonists** (74 → 106 by rocket) | player |
+| — | surface anomaly spawned, `scan_msg = Mystery8_AnomalyAnalyzed` | automatic |
+| — | **rover scanned it**; `Contaminated Lab` went RUNNING | ⛔ **player — blocks forever** |
+| 33 | three colonists gained **Infected**; mystery log opened | automatic |
+| 38 | a rocket carried the infection to **Earth** | automatic (parallel) |
+| 46 | Earth spreading uncontrollably; level **Endemic** | automatic |
+| **53** | ⭐ **`SA_RevealTech` fired — `WildfireCure_1` enabled** | automatic |
+| 53 | cure chain researched (11 flat tech points) | player |
+| — | `Grant Wonder Tech` finished; `Trade Rockets` + `Trade Rockets Funding` finished | automatic |
+
+⭐ **The reveal landed at Sol 53 against a predicted window of Sol 48-53**, derived before the run
+from `Sleep(10800000 + InteractionRand(3600000))` at `sol = 720000`. The prediction held.
+
+**Sequence trail proving resolution** (`Stop sequence Mystery 8 - …`): `Trigger : Finished` ·
+`Grant Wonder Tech : Finished` · `Infection Level Update`, `Enedmice Effect`, `Epidemic Effect`,
+`Pandemic Effect`, **`Doomsday Epilogue`** all *manually stopped* — that cleanup block only runs
+after the "Epilogue: Wildfire Eradicated!" message sets `_EarthCured` — and
+`Trade Rockets : Finished`, which requires the `while _InfectionLevel > 0` export loop to have
+drained to zero.
+
+### The mechanics this run established — inherit, do not re-derive
+
+- **Three player-dependent gates, and only one can strand a playthrough:** the 100-colonist count,
+  ⛔ **`WaitMsg("Mystery8_AnomalyAnalyzed")` — an unbounded wait on a rover scanning one surface
+  anomaly** — and two dismissable popups. ⇒ **A player who never scans that anomaly never sees the
+  cure, with no error and no notification.** That is the best-supported explanation this
+  investigation has produced for a "the cure never appeared" report, and it is not a defect.
+- **The reveal is not silent.** `NotifyTechDiscovered` posts a `TechDiscovered` notification for any
+  tech outside the Breakthroughs group (`Lua/Research.lua:854-859`); `WildfireCure_1` is
+  `group = "Mysteries"`, so it qualifies.
+- **Infection level bands** (`Mystery 8.generated.lua:470-500`): Contained <25 · Endemic 25-49 ·
+  Epidemic 50-74 · Pandemic 75-99 · **Doomsday ≥100**. Climb is one step per Sol
+  (`:520-535`): **+3/Sol** under 25, **+2/Sol** to 50, **+1/Sol** above.
+  ⛔ **Doomsday is a real fail state**: `if _Doomsday == 1 then SA_ExitSequence:SARun() end` runs
+  *before* the "Wildfire: The Cure" payoff (`:205-216`), so reaching 100 first forfeits the
+  Curetato crop and the permanent colonist cure.
+- **The export loop:** each `CureRocket` wants **60,000 MysteryResource** and each delivery that
+  reaches Earth subtracts **20** from the infection level (`:822-836`); the loop is sequential.
+- ⚠️ **Curetato is soil-only.** `FarmClass = "Farm"` (`Data/CropPreset.lua:106-127`) filtered by
+  `IsKindOf(self, crop.FarmClass)` (`Lua/Buildings/Farm.lua:734-735`). The **Automated Farm** is
+  `AutomatedFarm → AutomatedFarmBase → FarmBase` with `hydroponic = true` and is **not** a `Farm`
+  descendant, so it never offers the crop — by design, not a defect. Hydroponic, Fungal and Open
+  Farm are likewise separate branches.
+- ⭐ **Where the 1.1.0 rewrite actually bites.** One Farm yields **10 Cure per 5 Sols**
+  (`GrowthTime = 3600000`, `OutputResources = 10000`), so a single Farm needs ~30 Sols per rocket
+  while the meter climbs ~60 — it loses ground. The research half became flat tech points, but the
+  **farming half kept its 1.0.7 rates**, so the surviving difficulty is production throughput, not
+  research. ⇒ A colony needs roughly three Farms on Curetato for the loop to converge.
