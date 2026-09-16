@@ -178,7 +178,7 @@ Body archived in [archive/PLAYTEST_ARCHIVE.md](archive/PLAYTEST_ARCHIVE.md) unde
 ### 2026-09-16 — Checklist archival: four answers on held items
 <!-- ck:- status:closed owner:no -->
 
-Owner ruling archived in [Checklist archival answers](archive/PLAYTEST_ARCHIVE.md#checklist-archival-answers-2026-09-16). Steam's branch-delivery finding is now `agent/facts/EF-105.md`.
+Owner ruling archived in [Checklist archival answers](archive/PLAYTEST_ARCHIVE.md#checklist-archival-answers-2026-09-16). Steam's branch-delivery finding is now `agent/facts/EF-105.md`. Item 22b's wording-evidence rule was then cut: [Wording-evidence rule cut](archive/PLAYTEST_ARCHIVE.md#wording-evidence-rule-cut-2026-09-16).
 
 ### 2026-09-16 — A release empties the outbox into the archive
 <!-- ck:- status:closed owner:no -->

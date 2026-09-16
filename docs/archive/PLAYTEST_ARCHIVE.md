@@ -11854,3 +11854,15 @@ Items 133 and 162 are cleared to archive; the reopen trigger is pulled from the 
 report arrives. The owner also asked for context on "a wording decision comes to you with its
 evidence beside it" (item 22b, 2026-08-13); that one is not yet ruled. No owner action is owed
 by this record.
+
+## Wording-evidence rule cut 2026-09-16
+
+Given the context of item 22b's rule (2026-08-13: "From now on a wording decision comes to you with
+its evidence beside it"), which lives only in that checklist item and in an archived chain, the owner
+ruled:
+
+> Cut it this is an examply of a rule adding to a library of to many rules because this rule gets violated frequently so its not doing its job
+
+The rule is not homed anywhere and leaves with its item's body. The owner's stated reason is the test:
+a rule that is violated frequently is not doing its job, and keeping it only adds to the rule count.
+No owner action is owed.
