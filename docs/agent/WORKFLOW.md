@@ -621,9 +621,20 @@ say what the owner reads afterwards. Owner-facing record of the decision:
   files execute), but `CLAUDE.md` is agent instructions and does not belong on a
   player's disk. ⭐ 2026-09-10: `AGENTS.md` (the Codex mirror of `CLAUDE.md`)
   joined the list — `*AGENTS.md` sits in `metadata.lua`'s `ignore_files`, in
-  `tools/pack_predict.py`'s own copy of that list, and in `upload_preflight.py`'s
-  check, all three together; the predictor does NOT read `metadata.lua`, so a
-  pattern added in one place only makes the predicted count lie.
+  `tools/pack_predict.py`'s literal `IGNORE` copy of that list, and in
+  `upload_preflight.py`'s check, all three together. doccheck's **PACK IGNORE
+  PARITY** gate fails when the predictor's copy and `metadata.lua` disagree, so
+  a pattern added in one place turns the gate RED rather than making the
+  predicted count lie. `upload_preflight.py`'s pack guards read the live list.
+  ⛔ **2026-09-16 — the packer walks through junctions and symlinks.** A junction
+  to the user's Claude projects folder sat in the mod folder outside every
+  pattern; ~1.2 GB of private session transcripts entered the pack list, and
+  the pack failed only on size — silently, since `DbgPackMod` ignores the error
+  and opens `explorer ""`. `upload_preflight.py` now FAILs on a link whose
+  contents would pack, on any packed file other than `Code/*.lua`,
+  `metadata.lua`, `items.lua`, `LICENSE` and the preview image, and on a pack
+  over 5 MB (falsified 2026-09-16 on scratch copies, one leg per guard).
+  **Never put a link inside the mod folder unless an ignore pattern covers it.**
   ⭐ **Re-derived per mod 2026-08-13 (`public-docs/02_QA.md`) —
   the three lists are NOT the same:**
   | mod | add |

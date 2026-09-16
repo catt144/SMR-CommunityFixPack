@@ -280,6 +280,9 @@ return PlaceObj('ModDef', {
 		"*.rgignore",
 		"*.gitattributes",
 		"*/store_screenshots/*",
+		-- 2026-09-16: the owner's private folder holds junctions to Claude session
+		-- transcripts; the packer walks through junctions. Never ship it.
+		"*/zz-owner/*",
 	},
 	'id', "SMR_CommunityFixPack",
 	'author', "catt144",
