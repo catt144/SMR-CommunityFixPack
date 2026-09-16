@@ -21,12 +21,14 @@ the false R1 refutation from the original version of this prompt.
 Open a progress list before execution, one item per commit-and-verify unit, exactly one in
 progress. Update it when reality changes. Current remaining units:
 
-1. Verify/commit the repaired module, suite and records if not already committed.
-2. Restart retail, reload the ESA/Wildfire fixture, and prove loading plus launch of the
-   Commander-requiring expedition. The satisfied cargo line now names the actual Seeker.
-3. Check return without an extra Commander; run the removal/reload leg or explicitly leave it
-   unclaimed. Record the observed acceptance in C96, its report and checklist 185, run doccheck,
-   then consume this brief only when the registered repair is proven in play.
+1. DONE: repair and desk evidence committed at `efebdf7`.
+2. DONE: retail restarted; rocket `1051` launched to an anomaly requiring `RCRover` with
+   `RCSensor 2000000261` aboard. Actual cargo was Seeker 1/1, Commander 0/0. The owner reports
+   return still a Seeker and looking correct. Log and exact lines are in the report.
+3. IN PROGRESS: read the final prepared return tally after the owner flushes it; expect the
+   same Seeker unheld, with no extra Commander. No output observed yet. Leave live removal/reload
+   explicitly unclaimed. Record acceptance in C96, report and checklist 185, run doccheck, then
+   consume this brief. Preserve checklist 185's independent C95 public-wording question.
 
 ## 2 - Read path and current facts
 

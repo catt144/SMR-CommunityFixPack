@@ -1,9 +1,11 @@
 # C96 repair: class-definition installation, availability, and native rover cargo
 
-Updated 2026-09-16. **The original repair failed its attended test. The revised repair is
-now desk-verified; its live launch, return and removal acceptance remain UNRUN.**
+Updated 2026-09-16. **The revised repair launched the Commander-required expedition with
+the original Seeker aboard at `efebdf7`. The owner reports it returned still a Seeker and
+looking correct.** The numeric return/no-extra-Commander check is pending; live removal/reload
+remains untested. The original repair's attended failure is preserved below.
 Module: `Code/Fix_RoverSubclassManifest.lua`. Suite: `tools/desk_c96_rover_subclass.py`.
-Entry: [C96](../bugs/C96.md). Live work: [C96_LIVE_FAILURE](../prompts/C96_LIVE_FAILURE.md).
+Entry: [C96](../bugs/C96.md). Remaining check: [live brief](../prompts/C96_LIVE_FAILURE.md).
 
 ## Authority and scope
 
@@ -111,7 +113,61 @@ This is a snapshot of a running session, not a whole-session absence/error claim
 **MEASURED PROBE SWEEP:** `rg -n -F TEMPORARY Code/ ../SMR-BugFixPack-TestKit/Code/` returned
 no matches, corroborated by `python tools/doccheck.py --emit-fingerprint` at `76bf141`.
 
+## Repaired retail run, 2026-09-16
+
+**MEASURED**, owner attended, code commit `efebdf791d417bd811312ca26ef572a7f91d356e`,
+retail `1.1.0.403908`, Steam build `24995074`, log
+`Mars.exe-20260916-14.56.04-6a91a190.log`. Retail was restarted and the ESA/Wildfire
+fixture reloaded; startup logged `RoverSubclassManifest: applied`. This is the existing
+instrumented fixture with TestKit and OptInPack enabled, not a mod-free control. This
+retest used read-only console lines and ordinary expedition controls; the earlier fixture
+provisioning remains as described below. The preflight TEMPORARY sweep was clean at this HEAD.
+
+[RAN 2026-09-16, same retail log, Lua 0:01:21:517-520]
+
+```lua
+*r print("C96 RETEST", "Commanders", #(MainCity.labels.RCRover or {}), "Seekers", #(MainCity.labels.RCSensor or {})) for _, r in ipairs(MainCity.labels.AllRockets) do local l = r:GatherAvailableRovers("RCRover", 1) print("C96 rocket", r.handle, r.command, "gather", #l, "available", GetTotalCargoAvailable(r.city, CargoType.Rover, "RCRover")) for key, item in pairs(r.cargo or {}) do if key == "RCRover" or key == "RCSensor" then print("C96 cargo", r.handle, key, "requested", item.requested, "amount", item.amount) end end end
+```
+
+The exact leaf-label counts were **Commanders 0, Seekers 1**. Rocket `1051` was already
+in `CmdTakeOff`, recording `RCSensor requested 1 amount 1` and `RCRover requested 0 amount 0`.
+Total Commander-compatible availability was 1. Its gather returned 0 because the Seeker was
+already held aboard, as the next line establishes; this is not the original gather failure.
+The owner reported: "flushed the rocket just took off". Rocket `1050` also appeared in the
+snapshot but is not the successful expedition identified here.
+
+[RAN 2026-09-16, same retail log, Lua 0:02:54:418]
+
+```lua
+*r for _, r in ipairs(MainCity.labels.AllRockets) do if r.handle == 1051 then local a, d = r.arrival_loc, r.departure_loc print("C96 flight", r.handle, r.command, r.RocketType, "to", r:GetArrivalLocType(), "from", r:GetDepartureLocType(), "to wants", a and a.requirements and a.requirements.rover_type or "none", "from wants", d and d.requirements and d.requirements.rover_type or "none") for _, v in ipairs(r.transported_rovers or {}) do print("C96 aboard", v.class, v.handle, "holder", v.holder == r, v.command) end end end
+```
+
+Output identified `1051 CmdFlyToLocation RocketExpedition`, from `our_colony` to `anomaly`,
+destination `rover_type = RCRover`, carrying `RCSensor 2000000261 holder true WaitToAppear`.
+This joins the actual Seeker to the original Commander-required destination.
+At `Lua 0:03:56:214`, TestKit then attached its rover panel to that same `RCSensor(2000000261)`.
+**OWNER OBSERVED after the requested return:** "Done and its still a seeker and looks correct".
+The numeric return/no-extra-Commander check is pending. These readings are preserved in the
+[flight and return-observation snapshot](../../archive/logs/c96_flight_return_observation_Mars.exe-20260916-14.56.04-6a91a190.log).
+This is a running-session snapshot, not a whole-log absence/error verdict.
+
+[PREPARED and parsed with `luaparser`; no observed output yet]
+
+```lua
+*r print("C96 RETURN", "Commanders", #(MainCity.labels.RCRover or {}), "Seekers", #(MainCity.labels.RCSensor or {})) for _, v in ipairs(MainCity.labels.RCSensor or {}) do print("C96 returned", v.handle, v.class, "held", not not v.holder, "command", v.command) end
+```
+
 ## Regression suite
+
+**Generator coverage, checked 2026-09-16 at `efebdf7`:** the solar-panel rover is the
+RC Generator, `RCSolar` (`Lua/Units/RCSolar.lua:3-15`), which inherits `RCRover`.
+The archived suite below explicitly passes `RCSolar also satisfies an RCRover request`
+for both transporter receivers, plus the mixed-manifest leg reserving the Seeker while
+the Solar fills the base request. The fix uses ancestry rather than a Seeker-specific exception.
+Generator flight/return is not independently playtested.
+**Fixture correction:** the earlier C96 entry called this rover sponsor-unlocked. The shipped
+`Data/Cargo.lua:65-71` instead has `locked = true` and `verifier = sponsor == "CNSA"`.
+Use China for an ordinary Generator fixture; it is not an unlocked substitute for ESA.
 
 **MEASURED:** `python tools/desk_c96_rover_subclass.py`, checked parent HEAD `d1f262b`, installed Steam
 build `24995074`, Lupa Lua 5.4: **55 legs pass**. The emitted TOTAL is reconciled against the
@@ -134,13 +190,12 @@ reproducible verification for this repair.
 
 ## Remaining live acceptance
 
-TAKEABLE-WHEN: restart retail with the repaired tree, reload the attended ESA/Wildfire fixture,
-and confirm there is still a Seeker and no Commander. Re-run the read-only availability/gather
-check, then launch the Commander-requiring expedition. Record the satisfied actual-Seeker
-cargo line and successful launch. Check return for the same rover and no extra Commander.
-An exact Commander must retain preference when one is available; reverse subclass matching
-must still fail. A live removal/reload leg remains unrun until observed.
-The brief stays live while the registered repair lacks live acceptance.
+Launch is proven and the owner's return observation is recorded above; do not repeat those
+steps. The remaining check is the prepared numeric return line: expect no Commander, the
+original Seeker `2000000261`, and no holder. Once flushed, preserve that snapshot, record the
+bounded attended verdict, and consume the brief. Exact-Commander preference, reverse matching,
+Generator substitution and mixed manifests remain desk-verified without independent retail
+verdicts. Live removal/reload stays explicitly unclaimed, as the brief permits.
 
 ## Inherited fixture derivation
 
@@ -188,6 +243,25 @@ contains **0** `CreatePlanetaryAnomaly` and **0** `required_rover`. Starting it 
 rover requirement, so a co-run investigation that starts that mystery does not confound this
 test. ⛔ Do not re-raise a conflict here without naming a story bit that actually presets one.
 
+
+### Recreate the attended anomaly
+
+Retained from the live brief's measured fixture instructions; not re-derived here.
+Use Europe (`ESA`), Wildfire (`Mystery 8` / `TheMarsBug`), at least one Seeker and no
+Commander. Any expedition-capable player rocket can be retyped for this mission; the
+successful retest used `1051`, while the original fixture named `1050`.
+The following line mutates the fixture by creating an anomaly with the shipped preset
+requirements shape (`Lua/ClassDefs/ClassDef-Effects.generated.lua:483-520`).
+
+```lua
+*r local lat, long = GenerateMarsScreenPoI("anomaly") local a = PlaceObjectIn("PlanetaryAnomaly", MainMap, {custom_id = "C96Test", display_name = Untranslated("C96 SEEKER TEST"), init_name = false, reward = "research", latitude = lat, longitude = long, requirements = {rover_type = "RCRover"}}) print(a.custom_id, a.requirements.rover_type, a.latitude, a.longitude)
+```
+
+`reward = "research"` avoids a breakthrough popup or story-bit reward; omit it for the
+shipped roll. `requirement_type = false` matches shipped story-bit anomalies. The custom
+ID excludes rival contest. It registers immediately in the planetary view, opened by
+`*r OpenPlanetaryView()`; the surface sector map does not show planetary anomalies.
+The organic alternatives remain `BrineDeposit` and `ColdResistantBacteria` above.
 
 Executed model for this diagnosis and repair: **GPT-6** (session developer identity).
 No delegated agents. The original build and fixture derivation were recorded as Claude Opus 5.
