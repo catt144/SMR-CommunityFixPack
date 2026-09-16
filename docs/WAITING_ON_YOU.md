@@ -30,7 +30,7 @@ one marker settles which is right.
 | 173 | 2026-09-13 | marker | [173: FIX_POLICY §2a's version-detector ban is factually wrong in one half](PLAYTEST_CHECKLIST.md#L1038) |
 | 171 | 2026-09-13 | marker | [171: C92 — achievement repair or full technology restoration](PLAYTEST_CHECKLIST.md#L1060) |
 | 169 | 2026-09-13 | marker | [⭐ 169 ➊ **UPLOADED — v10 IS LIVE on both portals.** ➋ **FAQ commit DISCHARGED.** ➌ accepted as shipped.](PLAYTEST_CHECKLIST.md#L1092) |
-| 136 | 2026-09-10 | marker | [136: three player reports are now priority surfaces in the vanilla diff hunt. Two asks; neither needs the keyboard.](PLAYTEST_CHECKLIST.md#L2079) |
+| 136 | 2026-09-10 | marker | [136: three player reports are now priority surfaces in the vanilla diff hunt. Two asks; neither needs the keyboard.](PLAYTEST_CHECKLIST.md#L1773) |
 
 ## Owed playtest legs
 
