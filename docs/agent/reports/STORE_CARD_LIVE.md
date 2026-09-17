@@ -691,6 +691,36 @@ save file or a log"*, and the comment clause is conditional — *"If this page h
 direct sentence would mean the owner hand-pasting a Paradox-specific body at every upload, on top
 of the styling pass. Left alone at v12 as not worth a per-release manual step.
 
+## ⭐ 2026-09-17 (afternoon) — v12 LIVE: read back from Steam, not inferred from the tree
+
+Owner's word was *"uploaded"*. Everything below is READ from the storefront on 2026-09-17, so it is
+evidence rather than a handoff claim. Page `3787202810`, 111,423 bytes fetched.
+
+- **Count word live: "Fifty-three repairs"** — 1 hit, and **0** hits for "Fifty-two".
+- **Headline bullets live: 14**, counted as `<li>` elements between the *Some of what it fixes* and
+  *Seven machines* headings. The cut is real on the page, not just in the tree: "Domes Overview
+  stopped marking" returns **0**.
+- **The FEATURED section is live** — "expedition crews come home" present.
+- **The tail sentence is gone** — "a good deal more" returns **0**.
+- **The 1.0.7 section is last** — its heading index sits after *For modders* (68,746 > 67,298).
+- **Change note posted** as the newest entry, *"Update: Sep 17 @ 11:26am"*, carrying "One repair
+  reworked, one added" and C102's "has not been watched in a real game yet".
+
+⛔ **The train sentence is absent from the POSTED changelog too** ("comes home by train" returns 0 on
+the changelog page). That independently confirms the edit happened in the Mod Editor box before the
+upload, not afterwards in the tree, and that the storefront half of the outbox's disclosure ruling is
+genuinely missing rather than merely uncommitted. See `metadata.lua`'s `last_changes` comment.
+
+**Tree writeback:** `version` 14 → **16** (two saves), `pdx_version` "10" → **"11"**, `code_hash` and
+`saved` rewritten. Comments stripped from both shipped files (389 and 52 lines) and restored from
+`16445b6`, keeping every written-back value.
+
+⚠️ **NOT verified, and not claimed:** the Paradox page version was not stated by the owner, and the
+Paradox body was not read back. **The site is NOT published** — newest `publish-site.yml` run is #11
+(2026-09-16, `74a336e`, which is v11's fix list), so the live card says Fifty-three while the
+deployed fix list still shows 52 rows and still marks the habitat row a judgment call. Same gap as
+the v11 close; it clears when the owner runs the workflow (`UPLOAD_WORKFLOW.md` §4).
+
 ## Provenance of the headliners
 
 ⛔ **Not invented for the card.** Every bullet is a compressed form of an entry

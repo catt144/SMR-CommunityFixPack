@@ -271,7 +271,22 @@ return PlaceObj('ModDef', {
 	-- ⚠️ The first entry says the v11 restriction is GONE on purpose. v11's CHANGELOG told players
 	-- that habitat residents are left out of automatic crews; a player who read it and then saw one
 	-- drafted would read this version as having broken it back.
-	'last_changes', "One repair reworked, one added.\n\n-Naturalist Habitat residents on expeditions — CHANGED, and watched working in a real game on 1.1.0.\nThe last version kept habitat residents out of the automatic expedition crew. That restriction is gone: they can be picked like anyone else, and they come back to their own habitat. If the habitat is too far from the landing site to walk, they are set down at its door, the same way the rocket picked them up. If that home can no longer be used, they go to the nearest dome that is working and has air.\nNot watched yet: a crew that comes home by train.\n\n-A returning crew whose home is gone — NEW.\nThe problem: if their home was demolished or switched off while they were away, the game could walk them into a dome that was switched off, quarantined or without air.\nThe fix: it now picks the nearest dome that is working and has air, even if every home in it is taken. If nothing safe can be reached, the game decides as it always did.\nThis one has not been watched in a real game yet — a colony where it triggers is hard to set up on purpose. It reuses the same working-dome test as the fix for new arrivals off a rocket.\n\nThe fix list goes from fifty-two to fifty-three.",
+	-- ⭐ SHIPPED TEXT IS THE OWNER'S BOX TEXT, not the tree draft — the third time, after v9 and v11
+	-- (`RELEASE_HISTORY.md`, v11: *"Kept as shipped, as at v9."*). The line *"Not watched yet: a crew
+	-- that comes home by train."* is present at `16445b6` and absent from the v12 writeback; the
+	-- serializer strips comments and rewrites values, it does not delete a sentence from the middle
+	-- of a field, so it was edited in the Mod Editor box at the upload sitting. Kept as shipped: this
+	-- file records what posted, never what was drafted. Drafted text: `git show 16445b6:metadata.lua`.
+	-- ⚠️ One consequence, reported to the owner at close-out 2026-09-17 rather than repaired.
+	-- `RELEASE_OUTBOX.md` ruled that the public words must say plainly that NEITHER the train return
+	-- nor the live C102 reroute was watched in play. C102's sentence survived; C95's train sentence
+	-- did not, so the storefront change note carries only half of that disclosure. The other half is
+	-- still public on the fix list (`content/fix-list.md`, the habitat row's "Worth knowing"), which
+	-- is where a reader is sent for detail — but it is no longer where the ruling put it.
+	-- ⛔ Do not "repair" this string in place. `last_changes` is a PER-VERSION changelog entry that
+	-- is already posted to both portals; rewriting it does not edit the posted entry, it posts a
+	-- duplicate under the next version (see the three consequences above).
+	'last_changes', "One repair reworked, one added.\n\n-Naturalist Habitat residents on expeditions — CHANGED, and watched working in a real game on 1.1.0.\nThe last version kept habitat residents out of the automatic expedition crew. That restriction is gone: they can be picked like anyone else, and they come back to their own habitat. If the habitat is too far from the landing site to walk, they are set down at its door, the same way the rocket picked them up. If that home can no longer be used, they go to the nearest dome that is working and has air.\n\n-A returning crew whose home is gone — NEW.\nThe problem: if their home was demolished or switched off while they were away, the game could walk them into a dome that was switched off, quarantined or without air.\nThe fix: it now picks the nearest dome that is working and has air, even if every home in it is taken. If nothing safe can be reached, the game decides as it always did.\nThis one has not been watched in a real game yet — a colony where it triggers is hard to set up on purpose. It reuses the same working-dome test as the fix for new arrivals off a rocket.\n\nThe fix list goes from fifty-two to fifty-three.",
 	-- the packer includes EVERYTHING recursively minus this list (Mod.lua:250-256,
 	-- GedModEditor.lua:716-732) — without the extra patterns docs/, README.md,
 	-- .gitignore and .claude/ all ship inside the .hpk. LICENSE ships on purpose.
@@ -369,7 +384,7 @@ return PlaceObj('ModDef', {
 	-- the forced save and restored in the close-out, before any other commit. The shipped
 	-- `last_changes` is the owner's box text as uploaded; it differs from the tree's draft and is kept.
 	'version_major', 1,
-	'version', 14,
+	'version', 16,
 	'lua_revision', 350453,
 	'saved_with_revision', 403908,
 	-- saves made with the pack load fine without it (FIX_POLICY §3), so don't
@@ -461,8 +476,8 @@ return PlaceObj('ModDef', {
 	-- after a sitting is the EXPECTED state, not a mistake by whoever worked last.
 	-- ⚠️ `saved_with_revision` now sits further up, beside `lua_revision`, because
 	-- `SaveDef` writes the fields in its own order; it is the same editor bookkeeping.
-	'saved', 1789594014,
-	'code_hash', 216745312259862005,
+	'saved', 1789669587,
+	'code_hash', 6544064762724264816,
 	-- ⭐ ADDED 2026-09-10 (owner: the card should point players at pictures of the two
 	-- skins) — the store GALLERY. Both uploaders read screenshot1..5: the Mod Editor copies
 	-- each to TmpData/ModUpload/Screenshots as `ModScreenshot_<name>` (GedModEditor.lua:
@@ -478,7 +493,7 @@ return PlaceObj('ModDef', {
 	'screenshot2', "Mod/SMR_CommunityFixPack/store_screenshots/2_rare_metals_hammer_skin.jpg",
 	'screenshot3', "Mod/SMR_CommunityFixPack/store_screenshots/3_moxie_skins.jpg",
 	'pdx_id', 156049,
-	'pdx_version', "10",
+	'pdx_version', "11",
 	'steam_id', "3787202810",
 	'TagGameplay', true,
 })

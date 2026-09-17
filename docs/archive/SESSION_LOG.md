@@ -8,6 +8,40 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-17 — v12 released: C95 reworked into a repair, C102 landed, the card cut to 14 headliners
+
+Session `smr-bugfixpack-63` (Opus 5, 1M context, throughout). Ran `release_prompt.md` end to end from a bare
+path invocation — prepare, hold, owner upload, close. The batch was the outbox's C95/C102 entry plus the
+owner's store-card task; the `00_Core` hardening shipped with no player surface, as its entry said. Count
+**Fifty-two → Fifty-three**, re-derived from the site list (`^??? ` rows = 53, section tally
+2+16+4+6+9+6+6+2+2 sums), never carried. C95's row turned from a judgment call into a plain repair and C102
+landed as a new row, so judgment calls went five → **four** across `faq.md` (three places, including the "in
+four of them the code is not wrong at all" sub-count, now three of four), the fix-list marker and `index.md`.
+The owner's store-card task executed in full: headliners **21 → 14**, a FEATURED section for C95 from their
+approved draft including the gotcha paragraph, the "… and a good deal more" tail sentence cut, the 1.0.7
+section moved to the very bottom. All four card copies were moved by ONE set of transforms that asserted 21
+bullets before and 14 after in each copy, so they could not drift apart under the edit.
+
+Two things the byte-compare found that the brief did not predict. `STORE_CARD_LIVE.md`'s plain block was never
+byte-equal to `UPLOAD_WORKFLOW.md`'s — it carries a Paradox-specific FOUND A BUG section and a trailing Steam
+link. The owner's reason is recorded (*"users have no comment or discussion section on paradox"*), with the
+correction that the Paradox page shows the NEUTRAL body regardless, because `description` auto-fills both
+storefronts from `metadata.lua`; so that block is a better rendering of the page, not a record of it, and its
+wording must never be pushed into the shipped string, where it would be false on Steam. Second,
+`tools/upload_preflight.py` prints the description 138 chars long (6,689 against the real 6,551): its parser
+unescapes `\"` but leaves each `\n` as two characters. Both recorded in that report's v12 section.
+
+Close-out: writeback `version` 14 → **16** (two saves), `pdx_version` "10" → **"11"**, `code_hash` and `saved`
+rewritten; comments stripped from both shipped files (389 and 52 lines) and restored from `16445b6` with every
+written-back value kept, verified by asserting the commentary matches the pre-upload tree exactly and every
+scalar matches the writeback. The shipped `last_changes` is again the owner's box text rather than the tree
+draft — the third time, after v9 and v11 — and the line *"Not watched yet: a crew that comes home by train."*
+was deleted there. Kept as shipped; that half of the outbox's own disclosure ruling now lives only on the
+fix-list row, not on the storefront. First close to use the `RELEASE_HISTORY.md` append route. ⛔ Left
+unverified and NOT claimed: the Paradox page version was not stated, and the site is **not published** — the
+newest `publish-site.yml` run is #11 (2026-09-16, `74a336e`, v11's fix list), so the card reads Fifty-three
+while the deployed fix list still shows 52 rows and still marks the habitat row a judgment call.
+
 ## 2026-09-14 — smrtk 99: the terminal audit — SHIP WITH CHANGES; chain CLOSED
 
 Session `smr-bugfixpack-3d` (R-G: Fable 5.1 throughout). Re-derived the taint invariant from the archived logs and
