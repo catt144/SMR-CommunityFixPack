@@ -2,7 +2,7 @@
 
 Paste into a fresh Claude Code or Codex session whenever the owner brings **anything about FR-1**: a player report (works or doesn't),
 a log excerpt, a reply from the Paradox dev, a game patch, or a request to change or retire the workaround mod. Written 2026-09-11 by
-`smr-bugfixpack-5d` at the owner's ask ("get the linux issue off your plate entirely"). The records (FINDINGS, checklist 145) win if they
+`smr-bugfixpack-5d` at the owner's ask ("get the linux issue off your plate entirely"). The records (FINDINGS) win if they
 disagree with this file.
 
 ## 0 · Orient
@@ -74,7 +74,7 @@ given, marked player-stated. Nothing else.
     **on the same thread** (the third `:`-separated field of a Proton log line is the thread id). Then run
     `python C:\Dev\SMR-FR1-TempMod-2026-09-11\tools\identify_dump_names.py <hash>`, after its `--selftest`.
     - **A cached compute program, NOT replaced:** a new crasher on that setup. Record it (a FINDINGS bullet) and put the option to
-      the owner in checklist 145: extend the overlay with a no-op for that record. The owner decides. It needs new root-matched
+      the owner as a new checklist item: extend the overlay with a no-op for that record. The owner decides. It needs new root-matched
       records built and validated; Astra's `build_v2.py` / `cache_records.py` in `C:\Dev\SMR-FR1-CacheRoute-V2-2026-09-11\` did
       that. The owner's rule: the orchestrator briefs and Astra builds, unless the owner asks directly.
     - **NOT a cached compute program:** a graphics or runtime-compiled shader, for which no mod fix is known. Report it to the
@@ -126,9 +126,9 @@ Evidence is read-only and never edited:
   source copy from it after any owner upload.
 - **Read-only:** the evidence folders. The game directory and the source archives are never modified (DISPATCH §1).
 - **Say which kind of claim a line is:** MEASURED (a log or dump you read), owner-stated, player-stated, or INFERRED.
-- **Scope decisions are the owner's:** extending the overlay, retiring the mod, or changing its behaviour. They go in checklist 145,
+- **Scope decisions are the owner's:** extending the overlay, retiring the mod, or changing its behaviour. Each goes to the owner as a new checklist item,
   never only here.
-- **Where results go:** FINDINGS §12 (one bullet per field report, verbatim), checklist 145 (owner-facing), the dev-reply doc
+- **Where results go:** FINDINGS §12 (one bullet per field report, verbatim), the dev-reply doc
   (posts), SESSION_LOG (the leg). Commit by explicit pathspec with doccheck GREEN, then push.
 
 ## 5 · Retirement condition
