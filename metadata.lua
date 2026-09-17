@@ -283,6 +283,8 @@ return PlaceObj('ModDef', {
 		-- 2026-09-16: the owner's private folder holds junctions to Claude session
 		-- transcripts; the packer walks through junctions. Never ship it.
 		"*/zz-owner/*",
+		-- 2026-09-17: junctions to the owner's save folders plus reporter saves.
+		"*/saves/*",
 	},
 	'id', "SMR_CommunityFixPack",
 	'author', "catt144",

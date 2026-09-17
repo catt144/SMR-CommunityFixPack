@@ -14,6 +14,13 @@ Process rules for this repo. Code rules are `FIX_POLICY.md`; the global duties a
   `MANIFEST.sha256`; that folder's README holds the archive rule.
 - Mod install point: `%AppData%\Surviving Mars Relaunched\Mods\SMR-BugFixPack`, a junction into the
   dev repo, so the checked-out tree is the running mod.
+- Saves: `saves/` in the repo, git-ignored and pack-ignored (`*/saves/*`). `saves/game` is a junction
+  to `C:\Users\stkot\Saved Games\Surviving Mars Relaunched\76561198020568696`, the only folder the
+  game lists. `saves/backup` is a junction to `%APPDATA%\Surviving Mars\76561198020568696`, which the
+  game does not list, so a save there is invisible in the load screen. `saves/reporters/` is a real
+  folder for saves players send; copy one into `saves/game` to load it and keep the original. Both
+  junctions reach the owner's real saves: never `Remove-Item -Recurse` on `saves/` or a junction,
+  because PowerShell 5.1 deletes through it; remove a link with `cmd /c rmdir saves\game`.
 - TestKit, never shipped and local-only by decision: `C:\Dev\SMR-BugFixPack-TestKit`. Its README is
   the agent home for what the kit is, its probes and the SMR Tool Kit; sitting slots are
   `support/SMRTK_SLOTS.md`.

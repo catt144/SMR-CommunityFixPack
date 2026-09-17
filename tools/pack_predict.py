@@ -53,6 +53,7 @@ IGNORE = [
     "*.gitattributes",
     "*/store_screenshots/*",
     "*/zz-owner/*",
+    "*/saves/*",
 ]
 
 # the engine hands paths with forward slashes and the content_path prefix
