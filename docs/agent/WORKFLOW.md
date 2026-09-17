@@ -100,97 +100,37 @@ replacement body in both trees, or a run in the game.
 Artefacts: `reports/vanillahunt/` (tracked) and `reports/VANILLA_DIFF_DISPOSITION.md`. All four tools
 carry `--selftest`; doccheck gates only `bodycheck --selftest`.
 
-## ⛔ Probe hygiene — HARD GATE before ANY testing (owner, 2026-08-01)
+## Probe hygiene (owner, 2026-08-01)
 
-**No test session — attended or unattended — starts, and NO result is
-recorded, until the stale-probe sweep has run and reported clean.** Stale
-probes are how false facts got recorded: leftover instrumentation logs, hooks
-messages, creates threads, and contaminates both the measurement and the log
-it is read from (the 2026-07-31 probes were still armed days after their
-questions were answered).
-
-**The sweep (mechanical, one command):**
+No test session starts and no result is recorded until the stale-probe sweep has run clean:
 
 ```
 grep -rln "TEMPORARY" Code/ ../SMR-BugFixPack-TestKit/Code/
 ```
 
-**CLEAN =** zero hits, **or** every hit is a probe that THIS session's test
-design explicitly declares it needs — named in the brief and in the todo
-list. Anything else: the session repairs first (delete the file + its
-metadata/items lines, commit) or stops and reports.
+CLEAN is zero hits, or every hit is a probe that this session's brief and todo list declare it
+needs. Anything else: repair first (delete the file and its `metadata.lua` line, commit) or stop
+and report. Stale probes are how false facts got recorded.
 
-**The rules that make this work:**
-
-1. **Every temporary probe/experiment file MUST carry the literal word
-   `TEMPORARY` in its header comment** — that is what the sweep greps for.
-   A temp probe without the marker is itself a defect: file it on sight.
-2. **A probe is STALE the moment its answer is recorded.** Deletion belongs
-   in the SAME commit that records the answer (docs-never-lag, applied to
-   instrumentation).
-3. **The sweep result is part of the record:** every commit that flips a
-   agent/bugs/ status, records a MEASURED fact, or reports a PASS/FAIL carries a
-   `PROBE SWEEP:` line — either `clean` or `armed: <files>, declared by
-   <test>`. **A result commit without that line is invalid and gets
-   re-verified before anything builds on it.**
-4. Both repos are in scope (the pack AND the TestKit) — the
-   `GetPriorityForRequest` experiment that seeded agent/facts/ lived in the
-   PACK's code list.
-5. ⛔ **A PROBE FILE IS PRESENT IN `Code/` ONLY WHILE ITS RUN IS ACTUALLY
-   HAPPENING** (owner decision, 2026-08-04 — *"I want to do whatever is safest,
-   I do not want to get back into the situations where armed probes start
-   giving us false problems or issues"*). **Placing the file and running are the
-   same act; deleting it and recording the answer are the same commit.** There
-   is no state in between, and therefore no armed probe can outlive the sitting
-   that needed it.
-
-   **What made this a decision rather than an observation.** `doccheck.py`'s
-   `temporary_sweep()` (`tools/doccheck.py:501-517`) implements only the FIRST
-   half of the CLEAN definition above — any marker in `Code/` is red, no
-   declared-probe exception — and `tools/hooks/pre-commit` blocks on red. So a
-   session may legitimately declare a probe but **cannot commit anything while
-   it is armed**, which collides with the co-run rule that all prep is committed
-   before the owner sits down. Found by co-run #0 (2026-08-04), the first job to
-   arm a probe since doccheck landed. **The tool was NOT loosened, deliberately:
-   a hatch a hurried session can open without saying so re-creates the
-   2026-07-31 incident exactly.** ⛔ **`--no-verify` is not an alternative** —
-   the hook documents its meaning as *"the docs are inconsistent, I know"*,
-   which is a false statement when the only red is a declared probe.
-
-   **How prep works under this rule, and it costs nothing.** Everything else
-   commits normally and early: the staged save copy, the measure-moments list,
-   the entry and checklist edits, and **the probe's source itself as a fenced
-   code block in the session's own brief or spec**. Docs are not swept (the
-   sweep walks `Code/` and TestKit `Code/` only), and a probe parked in a doc is
-   **inert by construction** — the mod loads only files listed in
-   `metadata.lua` `code`, all of which live under `Code/`, so a file that is not
-   there cannot arm anything, log anything, or contaminate a measurement. At the
-   sitting: write the file into `Code/`, add its metadata line, parse sweep,
-   run. Then delete both in the commit that records the answer, per rule 2.
-
-   **If the sitting slips, nothing is stranded and nothing is armed** — which is
-   the whole point.
-
-   ⚖️ **In force. The owner-requested recheck RAN 2026-08-04 (corun-rig prompt
-   4) and the rule STANDS as written.** The diagnosis re-verified from primary
-   sources (`temporary_sweep()` really has no conditional path,
-   `tools/doccheck.py:501-517`; the hook really blocks on red; the CLEAN clause
-   reads as quoted). The one claim the diagnosis had left unverified is now
-   SOURCE-verified: **`ModDef:LoadCode` executes only the files listed in
-   `metadata.lua` `code`** — both of its loops iterate `ipairs(self.code)`,
-   no directory is scanned (`Mod.lua:490-521`) — so a parked probe is inert by
-   construction in the strong form, not merely the outside-`Code/` form. The
-   feared cost does not exist: the parse sweep is location-independent
-   (measured GREEN on a parked path during co-run #1 prep), and the declined
-   one-time override measured what any hatch would buy — **0.4 s of machine
-   time and zero owner time** — against a red doccheck in the history and a
-   live disarm deadline. No hatch is recommended; none was built.
-   Two things the rule does NOT say, so nobody reads them into it: it does not
-   ban long-lived instrumentation (that belongs in `90_Loggers.lua` behind an
-   explicit toggle, permanent and non-`TEMPORARY` by design — the file exists
-   and is the established home), and it does not excuse skipping the parse
-   sweep — which runs at the sitting, on the real file, before the launch,
-   exactly as before.
+- Every temporary probe carries the literal word `TEMPORARY` in its header comment; that is what the
+  sweep greps for. One without the marker is a defect: file it on sight.
+- A probe is stale the moment its answer is recorded. Delete it in the commit that records the
+  answer.
+- Every commit that flips an entry status, records a MEASURED fact or reports a PASS/FAIL carries a
+  `PROBE SWEEP:` line, `clean` or `armed: <files>, declared by <test>`. A result commit without one
+  is re-verified before anything builds on it.
+- A probe file is in `Code/` only while its run is actually happening (owner, 2026-08-04): placing
+  and running are one act, deleting and recording are one commit. Until the sitting, park the
+  probe's source as a fenced block in the brief, where it is inert: the mod loads only the files
+  in `metadata.lua` `code` (`Mod.lua:490-521`). doccheck's `temporary_sweep()` is red on any marker
+  in `Code/` and the hook blocks on red; `--no-verify` is not an alternative. Long-lived
+  instrumentation belongs in the TestKit's `90_Loggers.lua` behind a toggle, never marked
+  `TEMPORARY`.
+- A sweep is fresh for 24 hours, or until a change touches a probe, a module a probe reads, or the
+  kit's registration. A stale sweep is owed at the next playtest before its probes run, never
+  between sittings. No agent, gate or kit code refuses a boot, a suite run, an upload or any other
+  work over a sweep's age, and none overrides the owner (ck184, 2026-09-15: a gate, not a hard
+  rule).
 
 ## Testing checklist per fix
 
