@@ -79,14 +79,6 @@ When do we sit the attended monolith audit that closes the doc overhaul?
 - Your answer also ends 178, STATE's temporary +25% warn cap.
 Home: `docs/archive/PLAYTEST_ARCHIVE.md`
 
-### ck173 · opened 2026-09-17
-How should FIX_POLICY §2a's version-detector ban change, if at all?
-- Its reason 2 is false: runtime `LuaRevision` is 403908 on 1.1.0 and the FR-1 temporary mod
-  already guards on it (EF-094).
-- Options: behaviour-test whenever the guarded thing is inspectable and a version label only where
-  it is not; record FR-1 as a named exception; or leave it.
-Home: `docs/agent/FIX_POLICY.md`, `docs/archive/PLAYTEST_ARCHIVE.md`
-
 ### ck172 · opened 2026-09-17
 Does C92 (restore the technology) ever ship?
 - Build option B proceeds; no release, outbox entry or public row until you lift the hold in words.

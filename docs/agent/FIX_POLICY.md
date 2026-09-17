@@ -104,7 +104,7 @@ runs under `pcall`; an error deactivates only that fix.
   engine globals, built classes, `(class, method)` pairs. A per-game global is a runtime
   condition: `rawget(_G, "Cities")` plus a `type(...) == "table"` guard inside the handler.
 
-## 2a. Branch guards — the `probe` IS the guard, and there is no version check
+## 2a. Branch guards — the `probe` IS the guard; a version label only where nothing is inspectable
 
 Binding on every module that carries a body, expression or data shape taken from one game
 branch. Nothing stops a build reaching a player on the other branch: the pack installs and
@@ -122,12 +122,16 @@ applied over the other's is F114 in reverse.
 - A probe is only for a target shown synchronous and side-effect-free on a stub, from its
   shipped body. Otherwise the module keeps a `test` naming a discriminating shape (a class
   that exists on one branch only, a global that moved): still the thing, never the label.
-- Do not build a game-version detector. It is a label check, and the rule is check the
-  thing, not its label (the rule behind the F115 gate; EF-078 records what a label check cost).
-- `LuaRevision` may be an observation label recording which build a reading was taken on, in
-  an entry, a report, a log line or a probe's output. It never gates whether a fix applies.
-- A session that "improves" this section into a version check is reverting a ruling, not
-  tidying. Checklist ck173 holds the owner's open question on narrowing it.
+- Use a behaviour test whenever the guarded thing is inspectable. A version check there is a
+  label check, and the rule is check the thing, not its label (the F115 gate; EF-078 records
+  what a label check cost).
+- A version label may gate only what cannot be inspected, such as pinned binary assets: the FR-1
+  temporary mod goes inert on the runtime `LuaRevision` and assets revision (EF-094). Read the
+  runtime values; the mod metadata's `lua_revision` is 350453 on both branches (EF-077).
+- Otherwise `LuaRevision` is an observation label recording which build a reading was taken on,
+  in an entry, a report, a log line or a probe's output, and never gates whether a fix applies.
+- A session that widens this into a version check for an inspectable target is reverting a
+  ruling, not tidying.
 
 ## 2b. The pinned-defect manifest — a module states what it corrects, or it does not ship
 
@@ -205,10 +209,9 @@ not a purity bar.
    with the save-rescue tooling (D13). A harmful residual is never simply accepted; it is
    accepted paired with its remedy.
 
-**The gate is per-site.** Every exposed site gets its own recorded disposition: repaired
+**Disposition is per-site.** Every exposed site gets its own recorded disposition: repaired
 in-pack where a layer 3 or layer 2 route exists, handed to the cleaner where one provably does
-not. A site with no disposition blocks release; a site with one does not, whichever way it
-went. No site is deferred to the cleaner in advance: a hand-off is a valid disposition only
+not. No site is deferred to the cleaner in advance: a hand-off is a valid disposition only
 after the in-pack attempt was made and the route proven absent, never as a prediction or a
 reason to descope. The authoritative exposed set and every disposition:
 `reports/D13_EXPOSED_SET.md` §7, derived over both shipped trees, never an inherited count. A
@@ -385,8 +388,8 @@ module's own maps.
 
 - One fix per `Code/Fix_*.lua` file; the file name matches the Register id; every file is
   listed explicitly in `metadata.lua` `code`.
-- `00_Core.lua` loads first: the `code` list order is the intra-mod load order, ours to set
-  (doccheck enforces it). Inter-mod order is the player's enable order (EF-054), with no
+- `00_Core.lua` loads first: the `code` list order is the intra-mod load order, ours to set.
+  Inter-mod order is the player's enable order (EF-054), with no
   priority field and no way to request a position. We prefer to load first, for deference
   not precedence: first is innermost, so we patch the vanilla we verified and every later mod
   wraps us. Never build on it: nothing breaks at any position, and there is deliberately no
