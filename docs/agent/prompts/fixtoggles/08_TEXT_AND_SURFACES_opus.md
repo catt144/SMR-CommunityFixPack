@@ -25,7 +25,7 @@ name the reference mod; never reuse its wording) govern every sentence**. Runs a
 7. **Docs:** `docs/agent/FIX_POLICY.md` §5 final wording if 01 left anything; the `[FAQ]` tags; the opt-in repo's
    `FUTURE_IDEAS.md` #9 marked UN-PARKED (by this chain) and checklist 88 marked overtaken. Do not recreate the dissolved
    `PLAYTEST_HELP.md`. Keep general switch recipes in this chain's report, UI or site; only if TestKit needs its own
-   durable switch helper, update `docs/agent/support/SMRTK_SLOTS.md` and its support-map entry with a real consumer.
+   durable switch helper, update `tools/SMRTK.md` with a real consumer.
 
 ## Scope fence
 
