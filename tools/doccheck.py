@@ -30,6 +30,14 @@ the archive tool refused every run for a day while doccheck stayed GREEN.
 The tree went LF the same day (`* text=auto eol=lf`): a mixed file is now RED,
 and `--fix-eol [PATH ...]` converts CRLF to LF, a change git does not see.
 
+v6 (2026-09-17, ck204): the TOOL CATALOG section. tools/README.md routes the 65
+tools/*.py, and a hand-kept list of 65 rows is a list that goes stale — so its
+rows are GENERATED, on the same contract as bugs/INDEX.md: RED only on drift,
+cured by --regen, never by hand. A row's text is the script's OWN header, copied
+mechanically, so the catalog can never become a second, divergent account of
+what a tool does. Every tools/*.py gets a row, with no exempt class: an exemption
+list is the same stale hand-kept list wearing a smaller hat.
+
     python tools/doccheck.py                 # check; exit 1 on any red
     python tools/doccheck.py --regen         # rewrite the generated files, then check
     python tools/doccheck.py --emit-counts   # + the pasteable counts block
@@ -41,6 +49,7 @@ the 2026-08-03 QA session that hand-ran these checks. Do not "simplify" them.
 
 import argparse
 import ast
+import glob
 import os
 import re
 import subprocess
@@ -1034,6 +1043,7 @@ def regen(out):
     with open(AGENTS_MD, "wb") as fh:
         fh.write(data)
     regen_skills()
+    regen_tools(out)
     out.append("REGEN: wrote docs/agent/bugs/INDEX.md, docs/agent/facts/INDEX.md, "
                "the .agents/skills/ mirror and AGENTS.md "
                "(byte copy of CLAUDE.md) — "
@@ -2390,6 +2400,262 @@ def check_rule_headers(out):
 # positive control, because a gate whose failure path prints as a clean SKIP is
 # a dead gate (the STATE ADMISSION lesson, SEAT_WORKLIST V8 item 1).
 
+# ---------------------------------------------------------------------------
+# TOOL CATALOG — tools/README.md's rows are GENERATED (ck204, 2026-09-17)
+#
+# The prose in tools/README.md is hand-authored and this gate never touches it.
+# The rows between the two markers are rebuilt from disk by --regen and diffed
+# here, exactly as bugs/INDEX.md is. Three properties are load-bearing:
+#
+#   1. The row SET is `glob(tools/*.py)`, so the catalog cannot silently omit a
+#      script and cannot list one that is gone. No exempt class: a declared
+#      exemption is the hand-kept list this design exists to delete.
+#   2. The row TEXT is the script's own header, copied. The catalog therefore
+#      points at the header instead of restating it — a wrong row is fixed in
+#      the script, which is the only place that can be authoritative.
+#   3. A peer who adds a script and has never heard of this gate gets a RED that
+#      `--regen` cures, never one that needs TOOL_GROUPS edited first: an
+#      unclassified script renders under a "Ungrouped" heading that names the
+#      constant to edit. Grouping is an improvement, never a precondition.
+TOOLS_DIR = os.path.join(REPO, "tools")
+TOOLS_README = os.path.join(TOOLS_DIR, "README.md")
+TOOLS_BEGIN = ("<!-- GENERATED TOOL ROWS — never hand-edit; regenerate with: "
+               "python tools/doccheck.py --regen -->")
+TOOLS_END = "<!-- END GENERATED TOOL ROWS -->"
+
+# Declared data, not a filename heuristic. A prefix rule would put
+# `desk_*` and `l8_*` in the right place and `blocking_analysis.py`,
+# `seam_coverage.py` and `logscan.py` nowhere, and would silently reclassify a
+# script on rename. Order here is the order the catalog renders in.
+TOOL_GROUPS = (
+    ("Repo gates, and the falsifiers that keep them honest",
+     "The pre-commit hook runs `doccheck.py`; the four `*_selftest.py` are "
+     "required BY it, so a gate whose falsifier stops firing is itself RED.",
+     ("doccheck.py", "parsecheck.py", "ck170_selftest.py", "counts_selftest.py",
+      "prompt_map_selftest.py", "repair_pass_selftest.py")),
+    ("Source-diff instruments — after a game patch",
+     "Run order, trigger rule and — this is the part that matters — what their "
+     "output does and does not license: `docs/agent/WORKFLOW.md`, \"After a "
+     "game patch\". Read it before you quote a verdict from any of these.",
+     ("flpk_extract.py", "bodycheck.py", "sigcheck.py", "treediff.py",
+      "presetdiff.py")),
+    ("Reading the shipped game by hand",
+     "When a diff says something moved and you need the body itself.",
+     ("luafn.py", "pack_list.py")),
+    ("Desk bench — shipped Lua under a real interpreter, no game",
+     "`deskbench.py` is the harness; every `desk_*.py` is one investigation's "
+     "control, kept because a control is re-runnable evidence. A stub for a "
+     "function that can REFUSE is a behaviour change, not a shim.",
+     ("deskbench.py", "c90_scratch_verify.py",
+      "desk_c104_political_animal.py", "desk_c105_water_reclamation.py",
+      "desk_c74_hit_moment_fx.py", "desk_c83_arrivals.py",
+      "desk_c85_clogged.py", "desk_c86_scan_downgrade.py",
+      "desk_c88_prefab.py", "desk_c89_faction_gate.py",
+      "desk_c90_datapatch.py", "desk_c92_achievement.py",
+      "desk_c93_open_pasture.py", "desk_c95_habitat_draft.py",
+      "desk_c95_return_home.py", "desk_c96_rover_subclass.py",
+      "desk_caller_seam.py", "desk_ck53_hostile_globals.py",
+      "desk_f117_argshape.py", "desk_f117_kitprobe.py", "desk_f117_recipe.py",
+      "desk_f119_trade_fuel.py", "desk_f59_expedition.py",
+      "desk_f59_interact.py", "desk_migration_cluster.py",
+      "desk_migration_observations.py", "desk_mystery_tech_migration.py",
+      "desk_probes_f67_f59.py", "desk_progress_seam.py", "desk_seam_food.py",
+      "desk_shelter_reflex.py")),
+    ("Censuses over our own tree — the pre-launch sweep",
+     "The L-series, one census per question the launch sweep had to answer.",
+     ("l2_reload_sim.py", "l3_save_footprint.py", "l4_player_surfaces.py",
+      "l5_containment.py", "l6_promise_map.py", "l6_reachability.py",
+      "l7_env_map.py", "l8_deference_map.py", "l8_hostile_input.py")),
+    ("Pack-shape audits and chain bookkeeping",
+     "What the pack declares, writes and blocks, and what prior work left open.",
+     ("aliascheck.py", "audit_preset_fields.py", "blocking_analysis.py",
+      "harvest_wrap_targets.py", "fact_provenance.py", "seam_coverage.py")),
+    ("Evidence from a run",
+     "⛔ Module counts come from `logscan.py`, never a hand-grep, and a log "
+     "copied while the game is RUNNING is a partial log.",
+     ("logscan.py",)),
+    ("Release and upload",
+     "`docs/UPLOAD_WORKFLOW.md` owns the procedure; these are its local gates.",
+     ("upload_preflight.py", "pack_predict.py", "store_screenshots.py")),
+    ("One-shot document migrations — already fired",
+     "⛔ Never re-run these. They re-execute a migration from a pre-split "
+     "document that is now a stub; `--regen` is what rebuilds an index.",
+     ("split_bugs.py", "split_facts.py")),
+)
+TOOLS_UNGROUPED = ("Ungrouped",
+                   "New since the last grouping pass. Give each a home in "
+                   "`TOOL_GROUPS` in `tools/doccheck.py` — but the row is "
+                   "already correct, so this is tidying, not a defect.")
+
+
+def tool_scripts():
+    """Every tools/*.py on disk, by basename. The catalog's row set."""
+    return sorted(os.path.basename(p)
+                  for p in glob.glob(os.path.join(TOOLS_DIR, "*.py")))
+
+
+def tool_header_line(name):
+    """The script's own opening sentence(s), from its docstring or `#` header.
+
+    Trap: a header's FIRST LINE is usually a fragment ("L6 — promise vs" …), so
+    this reads the whole first paragraph and then cuts on sentence boundaries,
+    taking a second sentence when the first is too short to route on. Purely
+    mechanical: nothing here decides what a tool does, it only copies the claim
+    the tool makes about itself.
+    """
+    with open(os.path.join(TOOLS_DIR, name), encoding="utf-8") as fh:
+        lines = fh.read().replace("\r\n", "\n").split("\n")
+    i = 0
+    while i < len(lines) and (lines[i].startswith("#!")
+                              or lines[i].startswith("# -*-")
+                              or not lines[i].strip()):
+        i += 1
+    para = []
+    if i < len(lines) and lines[i].lstrip()[:3] in ('"""', "'''"):
+        quote = lines[i].lstrip()[:3]
+        for ln in [lines[i].lstrip()[3:]] + lines[i + 1:]:
+            if quote in ln:
+                para.append(ln.split(quote)[0])
+                break
+            if not ln.strip():
+                break
+            para.append(ln)
+    elif i < len(lines) and lines[i].lstrip().startswith("#"):
+        for ln in lines[i:]:
+            if not ln.strip().startswith("#"):
+                break
+            stripped = ln.strip().lstrip("#").strip()
+            if not stripped:
+                break
+            para.append(stripped)
+    text = re.sub(r"\s+", " ", " ".join(x.strip() for x in para)).strip()
+    out = ""
+    for piece in re.split(r"(?<=[.?!])\s+", text):
+        out = (out + " " + piece).strip() if out else piece
+        if len(out) >= 45:
+            break
+    if not out:
+        out = "*(no header — give this script an opening docstring)*"
+    return out.replace("|", r"\|")
+
+
+def render_tool_rows():
+    """The generated region, marker lines included. Pure function of disk."""
+    on_disk = tool_scripts()
+    placed, body = set(), []
+    for title, blurb, names in TOOL_GROUPS:
+        rows = [n for n in names if n in on_disk]
+        placed.update(rows)
+        if not rows:
+            continue
+        body += ["", "### %s" % title, "", blurb, "",
+                 "| script | what its own header says |", "|---|---|"]
+        body += ["| [`%s`](%s) | %s |" % (n, n, tool_header_line(n))
+                 for n in rows]
+    rest = [n for n in on_disk if n not in placed]
+    if rest:
+        title, blurb = TOOLS_UNGROUPED
+        body += ["", "### %s" % title, "", blurb, "",
+                 "| script | what its own header says |", "|---|---|"]
+        body += ["| [`%s`](%s) | %s |" % (n, n, tool_header_line(n))
+                 for n in rest]
+    head = ("*%d scripts, every `tools/*.py` on disk. This block is GENERATED: "
+            "a row's text is copied from the script's own header, so a wrong "
+            "row is repaired in the script, never here.*" % len(on_disk))
+    return [TOOLS_BEGIN, "", head] + body + ["", TOOLS_END]
+
+
+def _tools_region(lines):
+    """(start, end) index of the marker lines, or None if either is missing."""
+    try:
+        return lines.index(TOOLS_BEGIN), lines.index(TOOLS_END)
+    except ValueError:
+        return None
+
+
+def regen_tools(out):
+    """Splice fresh rows into tools/README.md; leave every other line alone."""
+    if not os.path.exists(TOOLS_README):
+        out.append("REGEN: tools/README.md is missing — its PROSE is "
+                   "hand-authored, so --regen cannot create it; only its rows "
+                   "are generated")
+        return
+    with open(TOOLS_README, encoding="utf-8") as fh:
+        lines = fh.read().replace("\r\n", "\n").split("\n")
+    span = _tools_region(lines)
+    if span is None:
+        out.append("REGEN: tools/README.md has no generated-rows markers — "
+                   "left untouched")
+        return
+    start, end = span
+    new = lines[:start] + render_tool_rows() + lines[end + 1:]
+    with open(TOOLS_README, "w", encoding="utf-8", newline="\n") as fh:
+        fh.write("\n".join(new))
+    out.append("REGEN: wrote tools/README.md's generated tool rows (%d scripts)"
+               % len(tool_scripts()))
+
+
+def check_tools_catalog(out):
+    """The catalog lists every tools/*.py, and every row matches its header."""
+    on_disk = tool_scripts()
+    # The one condition under which there is nothing to check, stated exactly
+    # rather than as "no scripts found": this checker IS a tools/*.py, so in any
+    # real checkout it is always one of its own rows. A disposable fixture that
+    # exec()s a copy of this file from a scratch directory is not a checkout,
+    # and must not be RED for owning no catalog. This line cannot print in the
+    # repo -- if it ever does, doccheck is not running from tools/.
+    if "doccheck.py" not in on_disk:
+        out.append("TOOL CATALOG: not applicable — this checker is not running "
+                   "from a tools/ directory (%d script(s) beside it)"
+                   % len(on_disk))
+        return True
+    if not os.path.exists(TOOLS_README):
+        out.append("TOOL CATALOG: RED  tools/README.md is missing (%d scripts "
+                   "have nowhere to be routed from)" % len(on_disk))
+        return False
+    with open(TOOLS_README, encoding="utf-8") as fh:
+        lines = fh.read().replace("\r\n", "\n").split("\n")
+    span = _tools_region(lines)
+    if span is None:
+        out.append("TOOL CATALOG: RED  tools/README.md is missing one or both "
+                   "generated-rows markers; restore them around the tool "
+                   "tables, then regenerate:")
+        out.append("    %s" % TOOLS_BEGIN)
+        out.append("    %s" % TOOLS_END)
+        out.append(REGEN_CURE)
+        return False
+    start, end = span
+    have, want = lines[start:end + 1], render_tool_rows()
+    if have != want:
+        out.append("TOOL CATALOG: RED  the generated rows in tools/README.md "
+                   "differ from the tools on disk (%d row-block lines, %d "
+                   "regenerated, %d scripts)"
+                   % (len(have), len(want), len(on_disk)))
+        for n, (a, b) in enumerate(zip(have, want), start + 1):
+            if a != b:
+                out.append("  RED  first difference at line %d:" % n)
+                out.append("    on disk:     %r" % a[:100])
+                out.append("    regenerated: %r" % b[:100])
+                break
+        out.append(REGEN_CURE)
+        return False
+    declared = [n for _, _, names in TOOL_GROUPS for n in names]
+    stale = sorted(set(declared) - set(on_disk))
+    ungrouped = sorted(set(on_disk) - set(declared))
+    out.append("TOOL CATALOG: %d script(s) on disk, %d row(s) rendered, both "
+               "directions reconciled against glob(tools/*.py)"
+               % (len(on_disk), len(on_disk)))
+    if stale:
+        out.append("  note  TOOL_GROUPS names %d script(s) no longer on disk "
+                   "(dropped from the rows, harmless): %s"
+                   % (len(stale), ", ".join(stale)))
+    if ungrouped:
+        out.append("  note  %d script(s) rendered under \"Ungrouped\"; giving "
+                   "them a group in TOOL_GROUPS is tidying, not a fix: %s"
+                   % (len(ungrouped), ", ".join(ungrouped)))
+    return True
+
+
 _EOL_CONTROL = (
     "i/lf    w/mixed attr/text=auto eol=lf \tdocs/x.md\n"
     "i/lf    w/crlf  attr/text=auto eol=lf \tdocs/y.md\n"
@@ -2529,7 +2795,8 @@ def main():
     ap.add_argument("--regen", "--regen-index", action="store_true", dest="regen",
                     help="rewrite every GENERATED file from its source first — "
                          "docs/agent/bugs/INDEX.md, docs/agent/facts/INDEX.md, "
-                         "the .agents/skills/ mirror and "
+                         "the .agents/skills/ mirror, tools/README.md's tool "
+                         "rows and "
                          "AGENTS.md (byte copy of CLAUDE.md) — then run the checks. "
                          "--regen-index is an ALIAS, not a narrower form: it writes "
                          "all of the above. The indices are built from every entry "
@@ -2580,6 +2847,7 @@ def main():
     ok = check_root(out) and ok
     ok = check_checklist(out) and ok
     ok = check_prompt_map(out) and ok
+    ok = check_tools_catalog(out) and ok
     ok = check_entry_mirror(out) and ok
     ok = check_rule_headers(out) and ok
     ok = check_state_and_stubs(out) and ok
