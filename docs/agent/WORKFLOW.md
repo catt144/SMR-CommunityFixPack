@@ -276,7 +276,7 @@ Remove it in the commit that changes the tagged behaviour.
 
 ## Verification rails
 
-The global duties are in `CLAUDE.md`; R-C is in the `prompt-authoring` skill. R-F: size the
+The global duties are in `CLAUDE.md`; facts with falsifiers are in the `prompt-authoring` skill. R-F: size the
 verification by owner-observability. A player-visible defect is verified by one attended A/B in the
 game, the owner being the cheapest verifier of "can a player actually do this"; an engine-internal
 defect by desk harness plus audit, because watching would show nothing. Build legs inherit behind a

@@ -1,23 +1,13 @@
 # Co-runs — attended experiment legs with the labor inverted
 
-Moved out of `docs/agent/WORKFLOW.md` on 2026-09-12 by owner decision D5: a
-situational procedure does not belong in the standing-rules document. This
-protocol is still binding when a co-run applies. The sign-off tiers remain in
-`WORKFLOW.md` because they bind every leg, not only co-runs.
+Binding when a co-run applies. The sign-off tiers that bind every leg are in `WORKFLOW.md`.
 
-## Authority and objective
+## Objective
 
-Adopted 2026-08-04 by the owner. A co-run splits an attended leg along the
+A co-run splits an attended leg along the
 actual skill line: the agent performs preparation, launch driving, save staging,
 scenario scripting, amplification and log reads; the owner attends only the
 named moments that genuinely need eyes, hands or judgment.
-
-> "As much that can be optimized while not reducing quality it probably the
-> better framing of it. Keep a good balance of quality and minimal time
-> investment as there is only one of me."
-
-> "This whole method isn't to take me completely out of the loop, its to take
-> my time commitment to a more reasonable level and streamline."
 
 The owner's time is the objective to minimise; evidence quality is the binding
 constraint. Do not replace an organic observation with a forced path, an
@@ -45,7 +35,9 @@ Use the cheapest mode that preserves the requested evidence:
 3. **Attended playtest:** the evidence is continuous human play, feel, severity
    or a `tested` grant.
 4. **Organic-only:** reachability, organic upgrades and naturally arising
-   symptoms remain TAKEABLE WHEN riders; never rig them into a different claim.
+   symptoms go to the checklist's `## Run` as `When …` items; never rig them into
+   a different claim. Those items are purged at 30 days old, so an organic test
+   that did not arise in time is gone, not waiting.
 
 Forcing an upstream condition is allowed when the path under test remains
 organic. Every result names what was forced. Forcing the measured path proves
@@ -59,7 +51,8 @@ the forcing, not the game.
   scripts as text and a measure-moments list giving each owner action, its
   instrument and exact verdict words. Temporary probes enter `Code/` only for
   the sitting and leave in the result commit.
-- Use a designated copy of a provisioned save, never the campaign file. Loading
+- Use a designated copy of a provisioned save, never the campaign file; reach
+  saves through the repo's `saves/game`, `saves/backup` and `saves/reporters`. Loading
   a copy still runs that campaign's autosave: before any such load, byte-copy
   every autosave and inventory it by name (`EF-056`). Name the exact load route
   for each staged copy; duplicate display names are not a route.
@@ -84,9 +77,8 @@ the forcing, not the game.
   live check or a durable archived result.
 - If a measure crosses a save, take its before-reading immediately before that
   save in the same call. If a popup is answered, record its named target before
-  answering. State-transition and effect verdicts also follow `WORKFLOW.md` R4
-  and R7: round-trip persistence and an effect read, not merely a successful
-  call.
+  answering. A state-transition or effect verdict needs round-trip persistence
+  and an effect read, not merely a successful call.
 - Prove save liveness with on-disk size/mtime and load-back, not only
   `Savegame.ListForTag`. Read mid-session logs for presence only; absence claims
   wait for the archived post-exit log (`EF-047`).
@@ -104,14 +96,9 @@ metadata entry and probe files back from disk and refuses an unarmed launch.
 
 ## Owner-led deviations
 
-An owner override is a course change, not a variance to manage. Owner ruling,
-2026-08-05, after a multi-day playtest in which every single reply ended with
-the elapsed time, the author's quoted estimate, and a nudge back to the list:
-
-> "Which makes trouble shooting hard when I am trying to keep track of what I
-> have sent to it to check and what I have not."
-
-Never append that tail. State the plan's position once when the deviation
+An owner override is a course change, not a variance to manage. Never end a
+reply with elapsed time, the quoted estimate or a nudge back to the list: it
+makes it hard for the owner to track what they have sent to check. State the plan's position once when the deviation
 starts, then stop until the lead closes, the owner asks, or the sitting ends.
 Keep the ledger of what the owner has checked and what remains. The lead is
 first-class work: instrument and witness it.
