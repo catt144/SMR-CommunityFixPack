@@ -1,7 +1,8 @@
 # STATE_EVICTION — pull-only cleanup job
 
-Use when a task, prompt or the owner calls for STATE cleanup, or when doccheck
-warns on its size. One session, docs only, no code or playtests. This is a
+Use when a task, prompt or the owner calls for STATE cleanup, when doccheck
+warns on its size, or when doccheck reports a checklist item 30 days old (run
+only the checklist sweep below for that). One session, docs only, no code or playtests. This is a
 reusable prompt: keep it after execution. Designed 2026-08-18 with the owner;
 the complete admission door below was ruled on 2026-09-15. This revision was
 authored against `07b7ca6`; check changed sources before inheriting its facts.
@@ -106,6 +107,25 @@ Pull build counts with `python tools/doccheck.py --emit-counts` when needed;
 they are no longer stored in STATE (owner's scope override, 2026-09-15,
 [checklist record](../../../PLAYTEST_CHECKLIST.md#2026-09-15--state-cleanup-scope-override)).
 
+## Checklist sweep — items 30 days old
+
+Owner ruling 2026-09-16: an item in `docs/PLAYTEST_CHECKLIST.md` that is 30 days
+old by its `opened` date is purged or archived. Age runs from the opened date,
+never from the last edit: rereading an item, re-checking it with the owner or
+rewording it is not an update and buys no time. doccheck pins each opened date
+to the one the id entered git with and reports the aged ids.
+
+1. `git pull --ff-only`, then run `python tools/doccheck.py` and list every
+   `is N days old` id.
+2. For each: if what the item says exists in a `Home:` path or in
+   `docs/archive/PLAYTEST_ARCHIVE.md`, delete the item. Otherwise append it
+   verbatim to `PLAYTEST_ARCHIVE.md` as `## <id> -- aged out <today> (opened
+   <date>)`, then delete it.
+3. Never extend, re-date or re-file an aged ask under a new id. If the owner
+   still wants it, the owner says so in their own words, and it enters as a new
+   item that names the old id in its first bullet.
+4. doccheck GREEN; commit with a pathspec naming each id and where it went; push.
+
 ## Scope and stopping conditions
 
 Review the whole STATE file and the destination passages needed for its cuts.
@@ -136,16 +156,6 @@ suite, not only the formerly failing check.
    `docs/archive/SESSION_LOG.md` to match its voice.
 2. Note the current HEAD sha — it becomes the grave:
    `git show <sha>:docs/agent/STATE.md` is the full pre-eviction file, forever.
-2b. **Record the owner register BEFORE you touch STATE**, and keep the count and
-   IDs. Run `python tools/doccheck.py --regen-waiting`, record its `WAITING:`
-   line, then emit the IDs in PowerShell:
-   `(Select-String -Path docs/WAITING_ON_YOU.md -Pattern '^\|\s+\d+\s').Line | ForEach-Object { if ($_ -match '^\|\s*(\d+)\s') { $Matches[1] } } | Sort-Object {[int]$_}`.
-   The register is parsed
-   from TWO LITERAL IDIOMS inside STATE — `Owner OWES: ck##` and
-   `STILL OPEN: <n> <word>` — so rewording either line DROPS an owner row with no
-   error anywhere. The 2026-09-13 eviction lost checklist 53 exactly this way and
-   nothing caught it; the note that was added inside STATE is itself byte-capped,
-   which is why the check belongs here instead.
 3. Judge every line under all four tests; record each refusal's verified home
    and every survivor's basis. Preserve conditions and open obligations.
    Prepend ONE SESSION_LOG entry (below the preamble; archive entries are
@@ -162,11 +172,7 @@ suite, not only the formerly failing check.
 5. Verify: `python tools/doccheck.py` GREEN (it enforces the warn/hard byte
    caps and the per-line cap); every retained status line in every section
    passes all four tests; structural/parser exceptions are identified; no
-   "superseded" chains remain; open decisions match the checklist. Then
-   `python tools/doccheck.py --regen-waiting` and diff the register against step
-   2b: **no ck number may disappear.** One that does is an owner row you deleted —
-   restore the idiom, do not "fix" the register. A row whose status flips to
-   `_conflict_` is fine; a row that vanishes is not.
+   "superseded" chains remain; open decisions match the checklist.
 6. Measure the clean file in bytes and put the before/after numbers in the
    report to the owner.
 7. Commit (boring subject — the sweep fence may be live) and push.

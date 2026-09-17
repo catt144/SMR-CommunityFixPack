@@ -34,7 +34,7 @@ The `declared class` values below are gate inputs, not conclusions inferred from
 | `GENERAL_USE_PROMPT.md` | `prompt` | Minimal idle orientation for a session opened before the owner is ready to give it a task |
 | `release_prompt.md` | `prompt` | the complete release lifecycle: prepare surfaces, HOLD for the owner's upload, then resume—often fresh—to verify and close |
 | `RELEASE_OUTBOX.md` | `ledger-exception` | the one owner-exempt ledger; `release_prompt.md` derives the batch from Pending and clears it into `docs/archive/RELEASE_HISTORY.md` only after confirmed upload |
-| `STATE_EVICTION.md` | `prompt` | requested STATE cleanup or a size warning; apply the complete four-part admission door to every section and verify refused content's homes |
+| `STATE_EVICTION.md` | `prompt` | requested STATE cleanup or a size warning; apply the complete four-part admission door to every section and verify refused content's homes; also the checklist sweep that purges or archives items 30 days old |
 
 ## Root — live one-offs
 

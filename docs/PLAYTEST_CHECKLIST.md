@@ -3,88 +3,116 @@
 ## Must_Read_Header
 <!-- RULES -->
 Rule: Admit an item only when its next action is the owner's: a ruling in words, or a test only the owner can run. [A3: pass]
-Rule: Hold the ask in at most eight lines and link its evidence, recipe and reasoning in a pull-only home. [A3: pass]
-Rule: Delete an item in the commit that records the owner's action; keep no closed stubs, rulings or history here. [A3: pass]
-Rule: Record the owner's ruling where the role that obeys it reads it, and its evidence in `docs/archive/`. [A3: pass]
+Rule: Write each item as `### ck<n> · opened <date>`, its ask, at most six bullet lines and a `Home:` line. [A3: pass]
+Rule: Never change an item's opened date; at 30 days old it is purged or archived, however recently it was touched. [A3: pass]
+Rule: Delete an item in the commit that records the owner's action on it. [A3: pass]
 <!-- /RULES -->
 
-What is waiting on your word or your hands, and nothing else. doccheck enforces the shape: 600 lines,
-120 characters a line, only the sections below, eight lines an item. Old bodies are in
-`docs/archive/PLAYTEST_ARCHIVE.md` under `## ck<number>`; where each old item went is
-`docs/archive/CHECKLIST_PURGE_LEDGER.md`.
+What waits on your word or your hands, and nothing else. doccheck enforces the format and the age;
+the sweep in `docs/agent/prompts/perma/STATE_EVICTION.md` clears what ages out. Old bodies are in
+`docs/archive/PLAYTEST_ARCHIVE.md` under `## ck<number>`.
 
 ## Decide
 
-### 188 — Wildfire: whose report was it, and take the live look or drop it
-- F120, the Wildfire report and the handoff name Jäger, but his comment #8 is C99's tunnel bug and
-  you said "jager was completely different". Say who reported Wildfire; the agent then corrects or
-  confirms the name in F120, the report and the handoff.
-- The live look is the only route left to that report: on a 1.1.0 colony, does SPECIAL in the tech
-  tree show the cure node without panning, and does Ctrl-F "Wildfire" find it? Five minutes, any
-  save, on a scratch copy. Recipe: archive `## ck188`, Leg A. Take it at a sitting, or say drop and
-  the report closes as unexplained.
+### ck188a · opened 2026-09-17
+Who reported Wildfire, and do you take the five-minute live look or drop it?
+- F120, the report and the handoff name Jäger, but his comment #8 is C99's tunnel bug and you said
+  "jager was completely different". Your answer corrects or confirms the name in all three.
+- The look: on a 1.1.0 colony, does SPECIAL show the cure node without panning, and does Ctrl-F
+  "Wildfire" find it? Any save, scratch copy, recipe Leg A. Drop it and the report closes unexplained.
+Home: `docs/agent/bugs/F120.md`, `docs/archive/PLAYTEST_ARCHIVE.md`
 
-### 188 — Habitat residents walk out on their own: defect, or the price of the building?
-- Your C95 sitting: Dermot rode back into the Naturalist Habitat, then left for Fuller #1 once he
-  had a job and an apartment there. Source says the jobless-override in the emigration scorer is
-  what empties a habitat, because habitats forbid connected work by design.
-- Before ruling, one cheap watch next time you are in that colony: does a habitat resident WITH a
-  job stay put while a jobless one leaves? If a working resident also leaves, C100's mechanism is
-  wrong. Nothing is authored or classified until you say. Entry: `docs/agent/bugs/C100.md`.
+### ck188b · opened 2026-09-17
+Habitat residents walk out on their own: a defect, or the price of the building?
+- In your C95 sitting Dermot left the Naturalist Habitat for Fuller #1 once he had a job there;
+  source blames the emigration scorer's jobless override, since habitats forbid connected work.
+- A cheap watch first: does a resident WITH a job stay while a jobless one leaves? If a working
+  resident also leaves, C100's mechanism is wrong. Nothing is authored until you say.
+Home: `docs/agent/bugs/C100.md`
 
-### 186 — Skill caps: pick the numbers
-- Proposed, not set: warn 3,072 B, hard 5,120 B. Sizes move; read them from
-  `python tools/doccheck.py` (SKILLS section), never from here. Caps stay down until you pick.
-  Note the largest skill would sit close to the proposed hard cap.
+### ck186 · opened 2026-09-17
+What numbers do the skill caps get?
+- Proposed, not set: warn 3,072 B, hard 5,120 B. Read current sizes from doccheck's SKILLS section.
+- The largest skill would sit close to the proposed hard cap. Caps stay down until you pick.
+Home: `docs/archive/PLAYTEST_ARCHIVE.md`
 
-### 181 — The attended monolith audit is the last gate of the doc overhaul
-- Your ruling 09-14: automate the monoliths as far as it goes, then a you-and-me second pass over
-  all of them. Left to sit over: `docs/agent/WORKFLOW.md` and `docs/agent/FIX_POLICY.md`
-  (PLAYTEST_HELP was dissolved; this checklist was rebuilt 09-16). No agent closes the overhaul alone.
-- 178 rides on it: STATE's warn cap is +25% until you say the overhaul is done. Then an agent sets
-  `STATE_WARN_TEMPORARY = False` in `tools/doccheck.py`; nothing else changes.
-
-### 173 — FIX_POLICY §2a's version-detector ban is wrong in one half
-- Reason 2 ("unbuildable from the mod's own fields") is false: the runtime `LuaRevision` is 403908
-  on 1.1.0, and the shipped FR-1 temporary mod already guards on it (EF-094).
-- Your call: narrow §2a to "behaviour-test whenever the guarded thing is inspectable; a version
-  label only where it is not", record FR-1 as a named exception, or leave it as is.
-
-### 172 and 171 — C92 (restore the technology): shipping is HELD until you lift it in words
-- Build option B proceeds (`docs/agent/prompts/C92_ACHIEVEMENT_BUILD.md`); no release, no outbox
-  entry, no public row until you say so. Knowledge is an accepted deliverable even if it never ships.
-- The test route needs your hands: move `account.dat` aside, test, move it back (EF-094). It resets
-  your account options until restored, which is why it is your call.
-- 171's scope question is overtaken by B; the only residual is whether it ever ships.
-
-### 136 — FR-3 (frame skip and stutter): spend a profiling sitting, or not?
-- Its own gate ("decide after link 99") has fired. A profiler session on a large colony would settle
-  FR-3 and decide C60 and C81 in the same sitting; a source read cannot measure frame time.
-
-### 148 — Fix toggles: deferred on your "skip"
-- Nothing runs until you say start: fire `docs/agent/prompts/fixtoggles/01_SPEC_fable.md`. Two
-  sittings are yours (link 03 about 30 minutes; link 11 longer). The three calls, (a) console
-  players, (b) release gate, (c) who cut the chain, stay open as written in archive `## ck148`.
-
-### 183 — SMR Tool Kit design calls still yours
+### ck183a · opened 2026-09-17
+Which SMR Tool Kit design calls do you make?
 - Where the slot engine lives once triggers move to Run: its own page, or riding with Probes.
 - Defect 20's remedy: a cursor change, or a persistent banner.
-- The cut Stamper is un-parked only in your words; it sits in FUTURE_IDEAS, on no list.
+- The cut Stamper is un-parked only in your words; it sits in FUTURE_IDEAS.
+Home: `docs/archive/PLAYTEST_ARCHIVE.md`
 
-### 169 — The site deploy is your act
-- Firing `workflow_dispatch` on the site repo is yours whenever its content changes.
+### ck181 · opened 2026-09-17
+When do we sit the attended monolith audit that closes the doc overhaul?
+- Your ruling 09-14: automate first, then a you-and-me pass over `WORKFLOW.md` and `FIX_POLICY.md`.
+  No agent closes the overhaul alone.
+- Your answer also ends 178, STATE's temporary +25% warn cap.
+Home: `docs/archive/PLAYTEST_ARCHIVE.md`
+
+### ck173 · opened 2026-09-17
+How should FIX_POLICY §2a's version-detector ban change, if at all?
+- Its reason 2 is false: runtime `LuaRevision` is 403908 on 1.1.0 and the FR-1 temporary mod
+  already guards on it (EF-094).
+- Options: behaviour-test whenever the guarded thing is inspectable and a version label only where
+  it is not; record FR-1 as a named exception; or leave it.
+Home: `docs/agent/FIX_POLICY.md`, `docs/archive/PLAYTEST_ARCHIVE.md`
+
+### ck172 · opened 2026-09-17
+Does C92 (restore the technology) ever ship?
+- Build option B proceeds; no release, outbox entry or public row until you lift the hold in words.
+- The test needs your hands: move `account.dat` aside, test, move it back (EF-094); it resets your
+  account options until restored. 171's scope question is overtaken by B.
+Home: `docs/agent/prompts/C92_ACHIEVEMENT_BUILD.md`, `docs/archive/PLAYTEST_ARCHIVE.md`
+
+### ck148 · opened 2026-09-17
+Do the fix toggles start, and how do you answer their three open calls?
+- Deferred on your "skip". Start means firing `01_SPEC_fable.md`; links 03 (about 30 minutes) and
+  11 (longer) are your sittings.
+- The calls: (a) console players, (b) release gate, (c) who cut the chain.
+Home: `docs/agent/prompts/fixtoggles/01_SPEC_fable.md`, `docs/archive/PLAYTEST_ARCHIVE.md`
+
+### ck136 · opened 2026-09-17
+Do you spend a profiling sitting on FR-3 (frame skip and stutter)?
+- Its gate ("decide after link 99") has fired. One profiler session on a large colony would settle
+  FR-3 and decide C60 and C81; a source read cannot measure frame time.
+Home: `docs/archive/PLAYTEST_ARCHIVE.md`
 
 ## Run
 
-- SMRTK: confirm 09's new menu layout and positioning in play once; one boot to confirm the
-  `MechanizedDepotFood` before/after numbers print (archive `## ck183`).
-- F80 (trains): the moment colonists queue at a platform forever or walk past a working station,
-  open the agent session BEFORE adding trains; adding trains destroys the evidence.
-  `docs/agent/bugs/F80.md`.
-- F21 (trains, optional): two reads on any working line re-earn `tested`; skipping costs nothing.
-- C40, C42, F99 (colonists and domes): each entry carries its own recipe and takeable condition.
-- F16 (PT-30) and F06 (mysteries): procedures live in the entries.
-- F76 / C41: the workaround command is in `docs/agent/bugs/F76.md`.
-- C56 to C61 (food seams): each entry carries a TAKEABLE line.
-- Both-packs stacked leg: information only, never a release gate (your ruling 08-19); after 53 pared
-  the compatibility surface it may be vacuous. Take it only if you want the number.
+### ck183b · opened 2026-09-17
+When you next boot with SMRTK, confirm 09's menu layout and the `MechanizedDepotFood` numbers print.
+Home: `docs/archive/PLAYTEST_ARCHIVE.md`
+
+### ck169 · opened 2026-09-17
+When the site's content changes, fire `workflow_dispatch` on the site repo.
+Home: `docs/UPLOAD_WORKFLOW.md`
+
+### ck192 · opened 2026-09-17
+When colonists queue at a platform forever or walk past a working station, call an agent first.
+- Adding trains destroys the evidence.
+Home: `docs/agent/bugs/F80.md`
+
+### ck193 · opened 2026-09-17
+When you are near any working train line, take the two reads that re-earn F21's `tested` (optional).
+Home: `docs/agent/bugs/F21.md`
+
+### ck194 · opened 2026-09-17
+When a colony meets an entry's takeable condition, run its recipe: C40, C42, F99.
+Home: `docs/agent/bugs/C40.md`, `docs/agent/bugs/C42.md`, `docs/agent/bugs/F99.md`
+
+### ck195 · opened 2026-09-17
+When you reach a finished Mirror Sphere site or Mystery 10's epilogue, run the entry's procedure.
+Home: `docs/agent/bugs/F16.md`, `docs/agent/bugs/F06.md`
+
+### ck196 · opened 2026-09-17
+When a depot click-load picks the wrong depot again, use the workaround command in F76.
+Home: `docs/agent/bugs/F76.md`, `docs/agent/bugs/C41.md`
+
+### ck197 · opened 2026-09-17
+When a food seam's TAKEABLE line comes true (C56 to C61), run that entry's read.
+Home: `docs/agent/bugs/C56.md`
+
+### ck198 · opened 2026-09-17
+When you want the number, take the both-packs stacked leg; information only, never a release gate.
+Home: `docs/archive/PLAYTEST_ARCHIVE.md`
