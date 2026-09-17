@@ -28,6 +28,9 @@ Code changed, so the next upload carries it; do not look for a fix-list row.
 
 ### Pending — C95 return-home repair and C102 safe expedition fallback (2026-09-17)
 
+⛔ **Hold: C95 is being rebuilt at the owner's 2026-09-17 ruling** (`docs/agent/prompts/C95_PLACE_HOME_BUILD.md`).
+The C95 row below describes the build being replaced and is rewritten by that job.
+
 **Hold for the remaining qualification gates in ck200 before upload.** C95 has retail
 unattended draft/return/save-reload evidence. Rail, ordinary UI mission, cold removal,
 main-menu enable and a positive live C102 reroute remain open. Build evidence and

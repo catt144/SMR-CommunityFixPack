@@ -19,39 +19,19 @@ NVIDIA 580, the temporary workaround mod) is not on this handoff: see
 
 ## 0 · Start here
 
-### First task on this firing — the C95 sitting, gates 1 and 2
+### C95 is being rebuilt; the release waits on it
 
-**Owner's instruction, 2026-09-17: when this handoff is fired, start with this. Do not orient-and-ask
-first.** Open a live todo list, run `ListAgents`, check `git log`/`git status`, then walk the owner
-through two gates from [C95_RETURN_HOME_BUILD.md](../../reports/C95_RETURN_HOME_BUILD.md#owner-sitting-remaining-release-gates)
-(recorded as ck200 in [PLAYTEST_CHECKLIST.md](../../../PLAYTEST_CHECKLIST.md)):
-
-1. **UI expedition.** On a copy of a save with an inhabited habitat, with the pack enabled, run the
-   report's `C95 START` line with the habitat selected. Have the owner send a normal crewed expedition
-   through the UI, then run `C95 WITNESS` on departure and after return. Pass: at least one habitat
-   resident was aboard, and on return is physically inside the same habitat, with the original
-   residence and no new dome job. If nobody from the habitat was drafted, the gate is not covered.
-2. **Cold removal, then enable.** Disable the pack in Mod Manager, exit fully, restart, load the
-   `C95MID.savegame.sav` test slot and run `C95 COLD`. The first-screen witness must show the pack
-   global false; watch resident 2000001502 travel. Then re-enable at the main menu and check the module
-   is active on another return.
+The 2026-09-17 sitting on the reporter's own save stopped at gate 1: the draft's route gate left an
+expedition at 0/6. The owner ruled a rebuild (placement home, route gate retired), recorded in
+[C95](../../bugs/C95.md). The build is [C95_PLACE_HOME_BUILD.md](../C95_PLACE_HOME_BUILD.md), for
+Astra. After it lands, walk the owner through the sitting it writes into ck200, then raise in prose:
+gates 3 and 4 (rail, live C102) need hours of provisioning; recommend, **not ruled**, waiving them and
+saying plainly in the release words that those paths were not watched. Then
+[release_prompt.md](release_prompt.md) from [RELEASE_OUTBOX.md](RELEASE_OUTBOX.md).
 
 The owner reads nothing back from the log: they paste a line and say "flushed", and you read
-`%APPDATA%\Surviving Mars Relaunched\logs\Mars.exe-*.log` (newest) yourself.
-
-**After both gates, raise these in prose, with the recommendation:**
-- ck200 policies (a) and (b): with no route home, is there still no automatic crew? With no safe dome
-  anywhere, does the game's own choice stand? Both answers keep the current behaviour; recommend
-  keeping both.
-- Gates 3 (rail return) and 4 (live C102 reroute) each need a colony provisioned for hours.
-  Recommendation, **not ruled**: waive them. A train return uses the same selection code as the walking
-  return, and C102 reuses C83's safety predicate, which the owner has already watched. Say plainly in
-  the release words that those two paths were not watched, and let field reports close them.
-- Then the release: [release_prompt.md](release_prompt.md), from the staged outbox entry in
-  [RELEASE_OUTBOX.md](RELEASE_OUTBOX.md). It runs through the owner's upload to the close-out; the
-  core hardening from checklist 53 rides the same upload with no public row.
-
-### Every other firing
+`%APPDATA%\Surviving Mars Relaunched\logs\Mars.exe-*.log` (newest) yourself. Saves are reachable at
+`saves/game` in this repo (WORKFLOW Layout).
 
 Unless the owner's message names a task, a pasted handoff means orient, summarise and ask. Orient from
 the `smr-orientation` skill; `docs/agent/STATE.md` and `docs/WAITING_ON_YOU.md` are pull-only.

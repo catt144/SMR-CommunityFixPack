@@ -14,6 +14,13 @@ the sweep in `docs/agent/prompts/perma/STATE_EVICTION.md` clears what ages out. 
 
 ## Decide
 
+### ck203 · opened 2026-09-17
+C83 sent the reporter's botanists to a habitat that refuses them (C106): pursue it or drop it?
+- They lived, homeless inside or beside the habitat; without C83 they would have walked to a dead dome.
+- Needs a colony whose only live communities are habitats that refuse the arrivals. You called it niche.
+- Also in C106: C83's one log line prints `table: …` and a blank destination. That is cheap to fix on its own.
+Home: `docs/agent/bugs/C106.md`
+
 ### ck201 · opened 2026-09-17
 Political Animal can't be earned on 1.1.0 (C104): build a fix, send the devs a report, or neither?
 - For everyone: Night Shift Compensations and Right to Rest each block the other, and both count.
@@ -112,14 +119,13 @@ When you next play a colony with a staffed Water Reclamation spire, one read set
 Home: `docs/agent/bugs/C105.md`
 
 ### ck200 · opened 2026-09-16
-When the next session opens, run the UI-expedition and cold-removal gates first (09-17).
-- UI expedition: witness a drafted habitat resident physically home, with no new dome job. v11's verdict does not carry.
+When the C95 rebuild lands, run the sitting it writes here. The policy question is answerable now.
+- The UI-expedition and cold-removal gates wait for the rebuild (your 09-17 ruling); it rewrites this item.
 - Provision a distant inhabited habitat with rail to the pad. The current fixture has none; this needs provisioning.
 - Provision a live reachable dome beyond the nearest; switch the nearest off and watch a returnee reach the live dome.
-- Cold restart, pack disabled, on `C95MID.savegame.sav`: watch 2000001502; then test re-enabling at the main menu.
-- No returnable homes still means no automatic crew. Retain that? What if no safe dome exists? Both policies stay open.
+- Open: with no safe dome anywhere, does the game's own choice stand? Recommended: keep it.
 - The reporter's actual pack version is still unknown; ask it if you want their reported departure explained.
-Home: `docs/agent/reports/C95_RETURN_HOME_BUILD.md`, `docs/agent/bugs/C95.md`, `docs/agent/bugs/C102.md`
+Home: `docs/agent/prompts/C95_PLACE_HOME_BUILD.md`, `docs/agent/bugs/C95.md`, `docs/agent/bugs/C102.md`
 
 ### ck183b · opened 2026-09-17
 When you next boot with SMRTK, confirm 09's menu layout and the `MechanizedDepotFood` numbers print.
