@@ -1,0 +1,51 @@
+-- TEMPORARY C95 unshipped prototype, game 1.1.0.403908.
+-- Layer 3: synchronous selector input and residence-before-employment ordering.
+-- No object fields, game-time threads, saved functions or body replacements.
+-- Does not retire the shipped draft filter; the test driver selects its subject.
+C95Home = {}
+
+function C95Home.Install()
+    local original = Colonist.GetExpeditionReturnDome
+    function Colonist:GetExpeditionReturnDome(domes, ...)
+        local home = self.expedition_residence
+        if not IsKindOf(home, "MicroGHabitatBase") then
+            return original(self, domes, ...)
+        end
+        if IsValid(home) and self.reserved_residence == home
+            and not table.find(domes, home) and home.ui_working
+            and home.accept_colonists and home:HasLifeSupport()
+            and home:CanVisit(self) and home:CanReserveResidence(self) then
+            -- Same command dispatcher that the receivers invoke. Restrict the
+            -- station query to the actual arrival origin and connected stations;
+            -- do not authorize the dispatcher's extended walking search.
+            local origin = self.appear_location or self.holder
+            local walk = IsValid(origin) and IsInWalkingDist(home, origin:GetPos(), self.city)
+            local first, last
+            if not walk and IsValid(origin) and IsSameMap(origin, home) then
+                first, last = GetTransportRoute(origin, home, true, false)
+            end
+            if walk or first and last then
+                local extended = {}
+                for i, candidate in ipairs(domes) do extended[i] = candidate end
+                extended[#extended + 1] = home
+                return original(self, extended, ...)
+            end
+        end
+        return original(self, domes, ...)
+    end
+
+    local original_work = Colonist.UpdateWorkplace
+    function Colonist:UpdateWorkplace(...)
+        local home = self.reserved_residence
+        if IsKindOf(home, "MicroGHabitatBase") and IsValid(home)
+            and self.dome == home and not IsValid(self.residence) then
+            -- SetDome calls UpdateWorkplace before UpdateResidence. Give the
+            -- real housing allocator its turn first so the shipped job picker
+            -- sees the habitat. Respect its suitability/forced-home checks.
+            self:UpdateResidence()
+        end
+        return original_work(self, ...)
+    end
+end
+
+C95Home.Install()

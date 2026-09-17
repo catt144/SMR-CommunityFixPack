@@ -1,0 +1,19 @@
+{
+  "leg": "c95-explore",
+  "_what": "Unshipped habitat return exploration. Use C95EXPLORE copy only; suspend autosaves before load.",
+  "kit": "C:\\Dev\\SMR-BugFixPack-TestKit",
+  "park": "C:\\Dev\\SMR-BugFixPack\\tools\\arming\\payloads",
+  "stripPattern": "Code/9[78]_C95",
+  "anchorAfter": "99_FixtureCarry.lua",
+  "bootSymbol": "C95Explore.Boot",
+  "symbolNamespace": "C95Explore",
+  "permanent": ["Code/99_FixtureCarry.lua"],
+  "mustNotBeListed": ["Code/96_AutoRunFlag.lua", "Code/97_ForceInactive.lua"],
+  "mustNotBeListedWhy": "No competing autorun or forced inactive modules.",
+  "bannedPatterns": ["SaveGame\\s*\\(", "SetResidence\\s*\\("],
+  "requiredPresent": ["C95EXPLORE.savegame.sav", "config.AutosaveSuspended = true"],
+  "payloads": [
+    {"src": "97_C95Home.lua.txt", "dst": "97_C95Home.lua", "selfDrives": false},
+    {"src": "98_C95Explore.lua.txt", "dst": "98_C95Explore.lua", "selfDrives": true}
+  ]
+}
