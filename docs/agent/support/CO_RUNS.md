@@ -98,8 +98,9 @@ metadata entry and probe files back from disk and refuses an unarmed launch.
 
 An owner override is a course change, not a variance to manage. Never end a
 reply with elapsed time, the quoted estimate or a nudge back to the list: it
-makes it hard for the owner to track what they have sent to check. State the plan's position once when the deviation
-starts, then stop until the lead closes, the owner asks, or the sitting ends.
+makes it hard for the owner to track what they have sent to check. State the
+plan's position once when the deviation starts, then stop until the lead closes,
+the owner asks, or the sitting ends.
 Keep the ledger of what the owner has checked and what remains. The lead is
 first-class work: instrument and witness it.
 
