@@ -19,15 +19,13 @@ NVIDIA 580, the temporary workaround mod) is not on this handoff: see
 
 ## 0 · Start here
 
-### C95 is being rebuilt; the release waits on it
+### C95 is cleared; the release is next
 
-The 2026-09-17 sitting on the reporter's own save stopped at gate 1: the draft's route gate left an
-expedition at 0/6. The owner ruled a rebuild (placement home, route gate retired), recorded in
-[C95](../../bugs/C95.md). The build brief is consumed; its report is
-[C95_PLACE_HOME_BUILD.md](../../reports/C95_PLACE_HOME_BUILD.md). After it lands, walk the owner through the sitting it writes into ck200, then raise in prose:
-gates 3 and 4 (rail, live C102) need hours of provisioning; recommend, **not ruled**, waiving them and
-saying plainly in the release words that those paths were not watched. Then
-[release_prompt.md](release_prompt.md) from [RELEASE_OUTBOX.md](RELEASE_OUTBOX.md).
+2026-09-17: the owner watched the three legs and granted `tested-attended`, and waived the train
+return and the live C102 reroute. The release runs from [release_prompt.md](release_prompt.md) on the
+Pending entry in [RELEASE_OUTBOX.md](RELEASE_OUTBOX.md), which carries the owner's asks: C95 is the
+featured fix with its one gotcha, and the 21-line fix list gets a truth pass plus about six cuts to
+make room.
 
 The owner reads nothing back from the log: they paste a line and say "flushed", and you read
 `%APPDATA%\Surviving Mars Relaunched\logs\Mars.exe-*.log` (newest) yourself. Saves are reachable at

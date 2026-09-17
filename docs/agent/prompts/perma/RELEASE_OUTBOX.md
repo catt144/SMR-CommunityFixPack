@@ -28,11 +28,20 @@ Code changed, so the next upload carries it; do not look for a fix-list row.
 
 ### Pending — C95 return-home repair and C102 safe expedition fallback (2026-09-17)
 
-**Hold for the remaining gates in ck200 before upload.** C95 was rebuilt at the owner's 2026-09-17
-ruling (`8b1c296`) and has retail unattended evidence on the reporter's own save: far residents
-placed home, in-range residents walked, Earth arrivals untouched, mid-return save/reload. Open: the
-ordinary UI mission, pack-disabled cold restart, main-menu enable, rail and a positive live C102
-reroute. Evidence and scope: `docs/agent/reports/C95_PLACE_HOME_BUILD.md`.
+⭐ **Cleared to ship, 2026-09-17.** The owner watched three legs: an ordinary UI expedition home on
+the reporter's own save, a far-pad return on their rail colony, and a pack-disabled full restart
+mid-return. C95 is `tested-attended`; 0 Lua errors. ⚖️ **Waived by the owner the same day:** a train
+return and a positive live C102 reroute — *"waive it, its working and much better than our previous
+builds"* — so the public words must say plainly that neither was watched in play. Evidence and
+scope: `docs/agent/reports/C95_PLACE_HOME_BUILD.md`, entries C95 and C102.
+
+⚖️ **Owner's ask for this release: C95 is the FEATURED fix.** Short, plain: what it does, and the one
+gotcha, in the owner's own framing — if every dome is off and only habitats are live, and those
+habitats refuse the colonist, a returnee still walks to the nearest dome and dies. Say it is the
+game's own safety system, which the pack does not override; overriding it would be a rewrite we are
+not doing. (The related arrival-side case is C106, filed, not fixed.) The featured section is new,
+so the fix list makes room for it: the owner asked for about six of the weakest headline lines to
+come out, and a truth pass over all 21 rides with it.
 
 C95 replaces its existing marked judgment-call row with a repair:
 
@@ -50,7 +59,8 @@ route; only a returnee holding a habitat expedition reservation and outside walk
 to the habitat's entrance at their native walk order, and native entry takes them in. New arrivals,
 migrants and covert-ops recruits are never moved. Cross-map homes are not admitted. Housing is
 restored before employment on rejoin. C102 reuses the existing arrival safety rule. No safe
-destination anywhere still preserves the game's assignment; that policy is unresolved. Update C95's
+destination anywhere still preserves the game's assignment. ⚖️ **RULED 2026-09-17: that stands** —
+with no safe dome anywhere the game's own choice is kept. Update C95's
 old exclusion/judgment-call wording wherever the release prompt finds it. No version, store page,
 public site or upload changed in this job.
 

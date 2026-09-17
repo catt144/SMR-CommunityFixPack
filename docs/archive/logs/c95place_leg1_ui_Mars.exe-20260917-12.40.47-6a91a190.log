@@ -1,0 +1,535 @@
+					Render 0:00:00:009
+*** executable info
+Timestamp:     	6a91a190
+Date:          	Fri Aug 28 10:56:16 2026
+Command line:  	
+Compiler:      	195136247, 142 (VS 2019) or newer
+
+
+*** hardware info
+CPU name      	Intel(R) Core(TM) i7-14700K
+CPU MHz       	3418
+CPU cores     	20/28
+Phys. Memory   	65278 MBytes
+Memory In Use  	56%
+Disk Free      	805914 MBytes
+
+
+*** OS info
+OS:            	Windows 11
+Version:       	10.0.26100 
+
+
+*** Debug::Init()
+
+
+					Render 0:00:00:104
+Steam initialized (AppId 3215050)
+					Render 0:00:00:108
+Drive type for game installation: SSD, savegames: SSD
+Language: English
+					Render 0:00:02:163
+*** graphics info
+GPU                            	NVIDIA GeForce RTX 4080 Feature Level: 12.1 {  DoublePrecisionFloatShaderOps: 1 OutputMergerLogicOp: 1 MinPrecisionSupport: 2 TiledResourcesTier: 4 ResourceBindingTier: 3 PSSpecifiedStencilRefSupported: 0 TypedUAVLoadAdditionalFormats: 1 ROVsSupported: 1 ConservativeRasterizationTier: 3 MaxGPUVirtualAddressBitsPerResource: 40 StandardSwizzle64KBSupported: 0 CrossNodeSharingTier: 0 CrossAdapterRowMajorTextureSupported: 0 VPAndRTArrayIndexFromAnyShaderFeedingRasterizerSupportedWithoutGSEmulation: 1 ResourceHeapTier: 2 NotZeroedPools: 1 UMA: 0 UnalignedBlockTextures: 1}
+API                            	d3d12
+GPU Driver Version             	32.0.16.1074
+GPU Driver Package Version     	610.74
+GPU Dedicated Video Memory     	16048 MB
+					Render 0:00:02:322
+
+Libs: Network, Sequences, MouseTrackWin, DumbAI, MapGen, Paradox, TriggersAndEvents, Notifications, Research, Resources, Tutorial, Objectives 
+
+					Render 0:00:02:572
+
+Platform: desktop, editor, goldmaster, paradox, pc, steam
+
+					Render 0:00:03:569
+*** audio info
+Audio Endpoint                 	Speakers (Razer Leviathan V2)
+						Lua 0:00:03:570
+Lua revision: 403908
+Assets revision: 33006
+Steam AppID: 3215050
+Build version: 1.1.0.403908
+Build branch:  Release
+						Lua 0:00:14:015
+Account storage loaded successfully in 1 ms
+						Lua 0:00:14:024
+DLC norman loaded, lua revision 403908, assets revision 33006
+DLC thomas loaded, lua revision 403908, assets revision 33006
+						Lua 0:00:14:046
+[mod] Loaded mod def TEMPORARY - Linux NVIDIA 580 Crash Workaround (id SMR_FR1TempWorkaround, v0.00-003) unpacked from appdata
+[mod] Loaded mod def Relaunched Fix Pack (id SMR_CommunityFixPack, v1.00-014) unpacked from appdata
+[mod] Loaded mod def Relaunched Fix Pack: Opt-In Modules (id SMR_CommunityOptInPack, v1.00-000) unpacked from appdata
+[mod] Loaded mod def Community Fix Pack — Test Kit (id SMR_CommunityFixPackTestKit, v0.00-001) unpacked from appdata
+						Lua 0:00:14:438
+[mod] [CommunityOptInPack] ClassicRockets: applied
+[mod] [CommunityOptInPack] AcknowledgedWarnings: applied
+						Lua 0:00:14:443
+[mod] [CommunityOptInPack] ResidencyControl: inactive (opt-in module, off by default — enable it in Options → Mod Options)
+						Lua 0:00:14:448
+[mod] [CommunityOptInPack] MultipleSuns: applied
+						Lua 0:00:14:452
+[mod] [CommunityOptInPack] DroneOverhaul: applied
+						Lua 0:00:14:456
+[mod] [CommunityOptInPack] CohortHousing: inactive (opt-in module, off by default — enable it in Options → Mod Options)
+						Lua 0:00:14:460
+[mod] [CommunityOptInPack] NoHomeless: inactive (opt-in module, off by default — enable it in Options → Mod Options)
+						Lua 0:00:14:461
+[mod] [CommunityOptInPack] DroneStatDials: applied
+[mod] [CommunityFixPack] NightShiftWork: applied
+[mod] [CommunityFixPack] WispRewards: applied
+[mod] [CommunityFixPack] TrainsToVoid: applied
+[mod] [CommunityFixPack] LanderEmptyLaunch: applied
+						Lua 0:00:14:462
+[mod] [CommunityFixPack] ShelterReflex: applied
+[mod] [CommunityFixPack] BrokenTrackSalvage: applied
+[mod] [CommunityFixPack] TrackSalvageWipe: applied
+[mod] [CommunityFixPack] LakeEntombment: applied
+[mod] [CommunityFixPack] RocketDroneChurn: applied
+[mod] [CommunityFixPack] TradeRocketFuelRefresh: applied
+[mod] [CommunityFixPack] ShuttleTransportCache: applied
+						Lua 0:00:14:463
+[mod] [CommunityFixPack] VacuumWalks: applied
+[mod] [CommunityFixPack] ArrivalDeaths: applied
+[mod] [CommunityFixPack] StaleReservations: applied
+[mod] [CommunityFixPack] CrystalMysteryHang: applied
+[mod] [CommunityFixPack] DomeOverviewHighlight: applied
+[mod] [CommunityFixPack] TrainCargoDumping: applied
+[mod] [CommunityFixPack] DestroyedTunnels: applied
+[mod] [CommunityFixPack] DustSicknessBiorobots: applied
+						Lua 0:00:14:464
+[mod] [CommunityFixPack] GeneForging: applied
+[mod] [CommunityFixPack] MirrorSphereSite: applied
+[mod] [CommunityFixPack] PayloadTemplateRefill: applied
+[mod] [CommunityFixPack] ShuttleHubOffAvailable: applied
+[mod] [CommunityFixPack] FreedHousingNotice: applied
+[mod] [CommunityFixPack] LandscapeUnitFilter: applied
+						Lua 0:00:14:465
+[mod] [CommunityFixPack] RocketInteractGuard: applied
+[mod] [CommunityFixPack] TrackConnectorPingPong: applied
+[mod] [CommunityFixPack] TrackTunnelPowerBridge: applied
+[mod] [CommunityFixPack] GraphConsumedCaption: applied
+[mod] [CommunityFixPack] TrainWaitTime: applied
+						Lua 0:00:14:466
+[mod] [CommunityFixPack] FounderTraitNotification: applied
+[mod] [CommunityFixPack] SequenceLatents: applied
+[mod] [CommunityFixPack] TrackSalvageRefund: applied
+[mod] [CommunityFixPack] DroneTransportMinors: applied
+[mod] [CommunityFixPack] ScanDowngrade: applied
+[mod] [CommunityFixPack] BombardmentSpread: applied
+[mod] [CommunityFixPack] ExtenderFlapChurn: applied
+[mod] [CommunityFixPack] SaintBlessing: applied
+[mod] [CommunityFixPack] SinkholeIndestructible: applied
+						Lua 0:00:14:467
+[mod] [CommunityFixPack] ExoticDepositSign: applied
+[mod] [CommunityFixPack] JumboCaveReinforcementWedge: applied
+[mod] [CommunityFixPack] SilentHitMomentFX: applied
+[mod] [CommunityFixPack] CloggedBuildingRelease: applied
+[mod] [CommunityFixPack] FactionDomeSizeGate: applied
+[mod] [CommunityFixPack] BuildingCodesPrefab: applied
+						Lua 0:00:14:468
+[mod] [CommunityFixPack] HabitatExpeditionReturn: applied
+[mod] [CommunityFixPack] HabitatExpeditionDraft: applied
+[mod] [CommunityFixPack] OpenPastureStockpiles: applied
+[mod] [CommunityFixPack] RoverSubclassManifest: applied
+[mod] [CommunityFixPack] SaveSanitizer: applied
+						Lua 0:00:14:469
+[mod] [SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+[mod] [SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[mod] [SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+[SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+						Lua 0:00:14:475
+[mod] [SMRTK] SMRTK_CORE loaded=true tee=false t=9231 id=1
+[SMRTK] SMRTK_CORE loaded=true tee=false t=9231 id=1
+						Lua 0:00:14:478
+[mod] [SMRTK] SMRTK_SLOTS armed_at_load=0 sitting=ck144a_close_20260915 slots="1 console_status,2 probe_preflight,3 check_after_load,4 read_map_click,5 short_breakpoint,6 dump_selected,scratch read_sitting" trigger=smrtk08_break t=9231 id=2
+[SMRTK] SMRTK_SLOTS armed_at_load=0 sitting=ck144a_close_20260915 slots="1 console_status,2 probe_preflight,3 check_after_load,4 read_map_click,5 short_breakpoint,6 dump_selected,scratch read_sitting" trigger=smrtk08_break t=9231 id=2
+						Lua 0:00:14:479
+[mod] [SMRTest][carry] fixture-carry dump available — run SMRTest.FixtureCarry()
+						Lua 0:00:15:237
+[mod] [CommunityFixPack] SaintBlessing: inactive (no dome-colonists trait presets)
+[mod] [CommunityFixPack] SinkholeIndestructible: the St. Elmo's Fire sinkhole is now indestructible, like every other mystery set-piece
+						Lua 0:00:15:329
+Reloading done in 1283 ms
+						Lua 0:00:15:332
+Available DLCs: norman(Feeding the Future),thomas(Interplanetary Codex) 
+						Lua 0:00:15:380
+[mod] [SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=DataLoading t=9231 id=3
+[SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=DataLoading t=9231 id=3
+						Lua 0:00:15:849
+[preset] Preset postprocess took 239 ms.
+						Lua 0:00:15:908
+482 / 482 particle streams loaded in 53 ms.
+						Lua 0:00:15:909
+5 / 5 particle streams loaded in 1 ms.
+						Lua 0:00:15:911
+[mod] [CommunityOptInPack] MultipleSuns: BuildingTemplates.ArtificialSun not found — build limit NOT lifted (binding fix still active)
+[mod] [CommunityFixPack] SilentHitMomentFX: registered 11 missing animation-moment preset(s)
+[mod] [CommunityFixPack] FactionDomeSizeGate: 7 faction dislike(s) now wait for 10 colonists in a dome
+						Lua 0:00:16:149
+[mod] [CommunityOptInPack] MultipleSuns: Artificial Sun build-once limit lifted
+[mod] [CommunityFixPack] SaintBlessing: the shipped code resolves the trait label itself — data left untouched; save re-base armed for 1 preset(s) of 2
+						Lua 0:00:16:237
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=9231 id=4
+						Lua 0:00:16:269
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=9231 id=5
+						Lua 0:00:16:278
+[mod] Loaded mod items for: SMR_CommunityOptInPack, SMR_CommunityFixPack, SMR_CommunityFixPackTestKit
+						Lua 0:00:17:287
+[PdxSDK] Started up. Took 1275
+						Lua 0:00:17:697
+[Braze] SessionStart error The server name or address could not be resolved
+
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:17:833
+[Braze] SessionStart error The server name or address could not be resolved
+
+						Lua 0:00:17:834
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:01:01:831
+Load Game: 
+	lua_revision: 403908 (last saved with) 
+	orig_lua_revision: 403908 (created with) 
+	assets_revision: 33006 
+
+	dlcs: norman, thomas 
+						Lua 0:01:01:836
+*** Reloading assets from folder 'BinAssets/'
+						Lua 0:01:04:982
+*** Assets reloaded in 3.1 s, read 359.3 MB, read speed 114.2 MB/s, average read 8137 bytes.
+						Lua 0:01:05:487
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=53664 id=6
+						Lua 0:01:05:936
+[mod] [SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=PreLoadGame t=53664 id=7
+[SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=PreLoadGame t=53664 id=7
+						Lua 0:01:08:061
+[mod] [CommunityFixPack] SilentHitMomentFX: restored 1 missing hit-moment tracker(s) on load
+						Lua 0:01:08:062
+[mod] [SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:01:08:078
+game_settings:
+    sponsor: Brazil
+    profile: rocketscientist
+    founding_faction: UnitedColonistFront
+    rival_colonies: ESA, CNSA, NASA
+    mystery_random: 
+    game_rules: (none)
+more_game_settings: save_game_id: 1vKB6k9pvxPA8o3P, mystery: UnitedEarthMystery, coordinates: 11N177E, landing_spot: , logo: ColonizationEffort
+						Lua 0:01:08:079
+map_conditions: altitude: -2545, temperature: -36, cold_wave: 91, dust_devils: 49, dust_storm: 0, meteors: 37
+map_resources: concrete: 255, metals: 146, precious_metals: 146, water: 146
+						Lua 0:01:08:164
+[mod] [CommunityFixPack] SaveSanitizer: F95 astrogeologist-residue pass removed 0 modifier(s), left 0 unidentified
+[mod] [CommunityFixPack] SaveSanitizer: F48 station-connector pass repaired 0 of 0 track(s) walked (0 raised)
+Game Loaded in 6334 ms
+						Lua 0:01:08:165
+[mod] [SMRTK] SMRTK_PROVENANCE actions=unavailable last=unavailable present=false session=unavailable t=30713748 id=8
+[SMRTK] SMRTK_PROVENANCE actions=unavailable last=unavailable present=false session=unavailable t=30713748 id=8
+						Lua 0:01:08:175
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=30713748 id=9
+						Lua 0:01:08:187
+[mod] [SMRTK] SMRTK_DOCK action=dock_attach attached=true route="idBottom sibling" status=OK surface=one-toggle+tasks t=30713748 id=10
+						Lua 0:01:08:191
+[mod] [SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:01:08:300
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=30713748 id=11
+						Lua 0:01:08:891
+Game loaded on map BlankBig_02 in 7180 ms
+						Lua 0:03:05:381
+Load Game: 
+	lua_revision: 403908 (last saved with) 
+	orig_lua_revision: 403908 (created with) 
+	assets_revision: 33006 
+						Lua 0:03:05:382
+
+	dlcs: norman, thomas 
+[mod] [SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=ChangeMap t=30713748 id=12
+[SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=ChangeMap t=30713748 id=12
+						Lua 0:03:05:395
+[mod] [SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=ChangeMap t=30713748 id=13
+[SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=ChangeMap t=30713748 id=13
+						Lua 0:03:05:915
+[mod] [SMRTK] SMRTK_SHORTCUT console=false key=Ctrl-Shift-F11 t=5 id=14
+						Lua 0:03:06:317
+[mod] [SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=PreLoadGame t=10 id=15
+[SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=PreLoadGame t=10 id=15
+						Lua 0:03:08:481
+[mod] [CommunityFixPack] SilentHitMomentFX: restored 1 missing hit-moment tracker(s) on load
+						Lua 0:03:08:482
+[mod] [SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:03:08:497
+game_settings:
+    sponsor: Brazil
+    profile: rocketscientist
+    founding_faction: UnitedColonistFront
+    rival_colonies: ESA, CNSA, NASA
+    mystery_random: 
+    game_rules: (none)
+more_game_settings: save_game_id: 1vKB6k9pvxPA8o3P, mystery: UnitedEarthMystery, coordinates: 11N177E, landing_spot: , logo: ColonizationEffort
+map_conditions: altitude: -2545, temperature: -36, cold_wave: 91, dust_devils: 49, dust_storm: 0, meteors: 37
+map_resources: concrete: 255, metals: 146, precious_metals: 146, water: 146
+						Lua 0:03:08:584
+[mod] [CommunityFixPack] SaveSanitizer: F95 astrogeologist-residue pass removed 0 modifier(s), left 0 unidentified
+[mod] [CommunityFixPack] SaveSanitizer: F48 station-connector pass repaired 0 of 0 track(s) walked (0 raised)
+Game Loaded in 3203 ms
+[mod] [SMRTK] SMRTK_PROVENANCE actions=unavailable last=unavailable present=false session=unavailable t=30713748 id=16
+[SMRTK] SMRTK_PROVENANCE actions=unavailable last=unavailable present=false session=unavailable t=30713748 id=16
+						Lua 0:03:08:594
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=30713748 id=17
+						Lua 0:03:08:608
+[mod] [SMRTK] SMRTK_DOCK action=dock_attach attached=true route="idBottom sibling" status=OK surface=one-toggle+tasks t=30713748 id=18
+						Lua 0:03:08:610
+[mod] [SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:03:08:722
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=30713748 id=19
+						Lua 0:03:08:936
+Game loaded on map BlankBig_02 in 3672 ms
+						Lua 0:03:10:244
+[mod] [SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:03:10:254
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=30713748 id=20
+						Lua 0:03:21:311
+Load Game: 
+	lua_revision: 403908 (last saved with) 
+	orig_lua_revision: 403908 (created with) 
+	assets_revision: 33006 
+
+	dlcs: norman, thomas 
+[mod] [SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=ChangeMap t=30713748 id=21
+[SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=ChangeMap t=30713748 id=21
+						Lua 0:03:21:323
+[mod] [SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=ChangeMap t=30713748 id=22
+[SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=ChangeMap t=30713748 id=22
+						Lua 0:03:21:826
+[mod] [SMRTK] SMRTK_SHORTCUT console=false key=Ctrl-Shift-F11 t=5 id=23
+						Lua 0:03:22:205
+[mod] [SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=PreLoadGame t=10 id=24
+[SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=PreLoadGame t=10 id=24
+						Lua 0:03:24:309
+[mod] [CommunityFixPack] SilentHitMomentFX: restored 1 missing hit-moment tracker(s) on load
+						Lua 0:03:24:310
+[mod] [SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:03:24:324
+game_settings:
+    sponsor: Brazil
+    profile: rocketscientist
+    founding_faction: UnitedColonistFront
+    rival_colonies: ESA, CNSA, NASA
+    mystery_random: 
+    game_rules: (none)
+more_game_settings: save_game_id: 1vKB6k9pvxPA8o3P, mystery: UnitedEarthMystery, coordinates: 11N177E, landing_spot: , logo: ColonizationEffort
+map_conditions: altitude: -2545, temperature: -36, cold_wave: 91, dust_devils: 49, dust_storm: 0, meteors: 37
+map_resources: concrete: 255, metals: 146, precious_metals: 146, water: 146
+						Lua 0:03:24:413
+[mod] [CommunityFixPack] SaveSanitizer: F95 astrogeologist-residue pass removed 0 modifier(s), left 0 unidentified
+[mod] [CommunityFixPack] SaveSanitizer: F48 station-connector pass repaired 0 of 0 track(s) walked (0 raised)
+Game Loaded in 3102 ms
+[mod] [SMRTK] SMRTK_PROVENANCE actions=unavailable last=unavailable present=false session=unavailable t=30713748 id=25
+[SMRTK] SMRTK_PROVENANCE actions=unavailable last=unavailable present=false session=unavailable t=30713748 id=25
+						Lua 0:03:24:423
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=30713748 id=26
+						Lua 0:03:24:437
+[mod] [SMRTK] SMRTK_DOCK action=dock_attach attached=true route="idBottom sibling" status=OK surface=one-toggle+tasks t=30713748 id=27
+						Lua 0:03:24:439
+[mod] [SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:03:24:555
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=30713748 id=28
+						Lua 0:03:24:772
+Game loaded on map BlankBig_02 in 3569 ms
+						Lua 0:03:26:078
+[mod] [SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:03:26:088
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=30713748 id=29
+						Lua 0:20:46:064
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=UniversalRocket(1061) status=OK t=30713748 id=30
+						Lua 0:20:47:881
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=NaturalistHabitat(2669) status=OK t=30713748 id=31
+						Lua 0:21:01:978
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=NaturalistHabitat(2673) status=OK t=30713748 id=32
+						Lua 0:21:08:719
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=NaturalistHabitat(2096) status=OK t=30713748 id=33
+						Lua 0:21:17:409
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=NaturalistHabitat(2351) status=OK t=30713748 id=34
+						Lua 0:21:25:557
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=NaturalistHabitat(2351) status=OK t=30713748 id=35
+						Lua 0:21:30:733
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=NaturalistHabitat(2673) status=OK t=30713748 id=36
+						Lua 0:21:32:324
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=NaturalistHabitat(2096) status=OK t=30713748 id=37
+						Lua 0:21:39:690
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=UniversalRocket(1061) status=OK t=30713748 id=38
+						Lua 0:22:15:862
+[mod] [SMRTK] SMRTK_PANEL action=panel_toggle open=true status=OK tab=World t=30715231 id=39
+						Lua 0:22:20:264
+[mod] [SMRTK] SMRTK_ACTION action=rocket_arrive changed=2 landing="native policy; orbit/landing waits unchanged" outcome=inbound_transit_skip_requested skipped_time=973486 status=OK visited=5 t=30719635 id=40
+[SMRTK] SMRTK_ACTION action=rocket_arrive changed=2 landing="native policy; orbit/landing waits unchanged" outcome=inbound_transit_skip_requested skipped_time=973486 status=OK visited=5 t=30719635 id=40
+						Lua 0:22:21:521
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=LandingPad(1594) status=OK t=30720887 id=41
+						Lua 0:22:21:891
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=StorageFuel(1305) status=OK t=30721256 id=42
+						Lua 0:22:23:224
+[mod] [SMRTK] SMRTK_ACTION action=selected_fill after=180000 before=0 method=CheatFill object=StorageFuel(1305) resource=Fuel resources=1 status=OK valid_after=true t=30722593 id=43
+[SMRTK] SMRTK_ACTION action=selected_fill after=180000 before=0 method=CheatFill object=StorageFuel(1305) resource=Fuel resources=1 status=OK valid_after=true t=30722593 id=43
+						Lua 0:22:46:203
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=false reason="no supported actions" status=OK t=30744831 id=44
+						Lua 0:22:50:582
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=StorageFood(2676) status=OK t=30749211 id=45
+						Lua 0:22:51:745
+[mod] [SMRTK] SMRTK_ACTION action=selected_fill after=180000 before=0 method=CheatFill object=StorageFood(2676) resource=Food resources=1 status=OK valid_after=true t=30750380 id=46
+[SMRTK] SMRTK_ACTION action=selected_fill after=180000 before=0 method=CheatFill object=StorageFood(2676) resource=Food resources=1 status=OK valid_after=true t=30750380 id=46
+						Lua 0:22:54:395
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=false reason="no supported actions" status=OK t=30753027 id=47
+						Lua 0:23:10:811
+[mod] [SMRTK] SMRTK_PANEL action=panel_toggle open=false status=OK tab=World t=30807962 id=48
+						Lua 0:23:36:897
+C95 START 1.1.0.403908 true NaturalistHabitat 5
+C95 RESIDENT 2000000934 Roam 2096
+C95 RESIDENT 2000000935 Roam 2096
+C95 RESIDENT 2000001919 Roam 2096
+C95 RESIDENT 2000001921 Roam 2096
+C95 RESIDENT 2000002942 Rest 2096
+						Lua 0:23:52:889
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=UniversalRocket(1061) status=OK t=30987697 id=49
+						Lua 0:23:56:066
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=LandingPad(2670) status=OK t=31003652 id=50
+						Lua 0:24:03:949
+C95 WITNESS 2000000934 WorkCycle false 2096 2665 PreciousMetalsExtractor
+C95 WITNESS 2000000935 Roam false 2096 2096 PreciousMetalsExtractor
+C95 WITNESS 2000001919 Roam false 2096 2096 MetalsExtractor
+C95 WITNESS 2000001921 Roam false 2096 2096 MetalsExtractor
+C95 WITNESS 2000002942 WaitToAppear 2096 false 1061 false
+						Lua 0:24:16:237
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=NaturalistHabitat(2351) status=OK t=31104487 id=51
+						Lua 0:24:17:219
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=NaturalistHabitat(2096) status=OK t=31109382 id=52
+						Lua 0:24:18:416
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=NaturalistHabitat(2673) status=OK t=31115357 id=53
+						Lua 0:24:20:549
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=NaturalistHabitat(2669) status=OK t=31126027 id=54
+						Lua 0:24:24:559
+[mod] [SMRTK] SMRTK_PANEL action=panel_toggle open=true status=OK tab=World t=31146147 id=55
+						Lua 0:24:26:918
+[mod] [SMRTK] SMRTK_COPY action=copy flushed=true from=0 lines=80 status=OK truncated=false t=31157932 id=56
+[SMRTK] SMRTK_COPY action=copy flushed=true from=0 lines=80 status=OK truncated=false t=31157932 id=56
+						Lua 0:24:27:931
+[mod] [SMRTK] SMRTK_MARK action=screenshot_mark capture="native accepted" capture_id=0014 fallback=false label="Screenshot 0014" mark=82 path=C:/Dev/SMR-ScreenCaptures/SMRTK_0014.png status=OK t=31163002 id=57
+[SMRTK] SMRTK_MARK action=screenshot_mark capture="native accepted" capture_id=0014 fallback=false label="Screenshot 0014" mark=82 path=C:/Dev/SMR-ScreenCaptures/SMRTK_0014.png status=OK t=31163002 id=57
+[mod] [SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=50/50 game=403908 mark_action=screenshot_mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack pack_version=14 read="live registry" save=BUG.savegame.sav sol=44 status=OK t=31163002 id=58
+[SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=50/50 game=403908 mark_action=screenshot_mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack pack_version=14 read="live registry" save=BUG.savegame.sav sol=44 status=OK t=31163002 id=58
+						Lua 0:25:09:796
+[mod] [SMRTK] SMRTK_PANEL action=panel_toggle open=false status=OK tab=World t=31372327 id=59
+						Lua 0:25:14:110
+[mod] [SMRTK] SMRTK_PANEL action=panel_toggle open=true status=OK tab=World t=31393902 id=60
+						Lua 0:25:15:277
+[mod] [SMRTK] SMRTK_CLEAR action=clear status=OK t=31399727 id=61
+						Lua 0:25:16:282
+[mod] [SMRTK] SMRTK_PANEL action=panel_toggle open=false status=OK tab=World t=31404757 id=62
+						Lua 0:25:17:333
+Story bits: Triggered story bit - MysteryRocket						Lua 0:25:19:707
+[mod] [SMRTK] SMRTK_PANEL action=panel_toggle open=true status=OK tab=World t=31421882 id=63
+						Lua 0:25:21:065
+[mod] [SMRTK] SMRTK_SPEED action=speed_ultra before=5000 factor=128000 requested=128 status=OK t=31428677 id=64
+[SMRTK] SMRTK_SPEED action=speed_ultra before=5000 factor=128000 requested=128 status=OK t=31428677 id=64
+						Lua 0:25:22:185
+[mod] [SMRTK] SMRTK_SPEED action=speed_ultra before=128000 factor=128000 requested=128 status=OK t=31571781 id=65
+[SMRTK] SMRTK_SPEED action=speed_ultra before=128000 factor=128000 requested=128 status=OK t=31571781 id=65
+						Lua 0:25:25:094
+Story bits: Reply selected - Observe the rocket for a Sol or two and land it afterwards						Lua 0:25:26:141
+[mod] [SMRTK] SMRTK_SPEED action=speed_fast before=128000 factor=5000 requested=5 status=OK t=31784261 id=66
+[SMRTK] SMRTK_SPEED action=speed_fast before=128000 factor=5000 requested=5 status=OK t=31784261 id=66
+						Lua 0:25:27:416
+[mod] [SMRTK] SMRTK_PANEL action=panel_toggle open=false status=OK tab=World t=31790636 id=67
+						Lua 0:25:31:924
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=false reason="no supported actions" status=OK t=31813131 id=68
+						Lua 0:25:59:488
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=NaturalistHabitat(2669) status=OK t=31950931 id=69
+						Lua 0:26:00:687
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=NaturalistHabitat(2673) status=OK t=31956931 id=70
+						Lua 0:26:06:651
+C95 WITNESS 2000000934 Roam false 2096 2096 PreciousMetalsExtractor
+C95 WITNESS 2000000935 WorkCycle false 2096 2665 PreciousMetalsExtractor
+C95 WITNESS 2000001919 WorkCycle false 2096 2088 MetalsExtractor
+C95 WITNESS 2000001921 WorkCycle false 2096 2088 MetalsExtractor
+C95 WITNESS 2000002942 Rest false 2096 2096 false
+						Lua 0:26:08:545
+[mod] [SMRTK] SMRTK_PANEL action=panel_toggle open=true status=OK tab=World t=31996281 id=71
+						Lua 0:26:09:867
+[mod] [SMRTK] SMRTK_COPY action=copy flushed=true from=82 lines=21 status=OK truncated=false t=32002886 id=72
+[SMRTK] SMRTK_COPY action=copy flushed=true from=82 lines=21 status=OK truncated=false t=32002886 id=72
+						Lua 0:27:11:503
+[mod] [SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=ChangeMap t=32266701 id=73
+[SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=ChangeMap t=32266701 id=73
+						Lua 0:27:11:516
+[mod] [SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=ChangeMap t=32266701 id=74
+[SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=ChangeMap t=32266701 id=74
+						Lua 0:27:13:997
+[mod] [SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:27:14:007
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=1308 id=75
+						Lua 0:27:18:888
+[mod] [CommunityOptInPack] ClassicRockets: applied
+						Lua 0:27:18:889
+[mod] [CommunityOptInPack] AcknowledgedWarnings: applied
+[mod] [CommunityOptInPack] ResidencyControl: inactive (opt-in module, off by default — enable it in Options → Mod Options)
+[mod] [CommunityOptInPack] MultipleSuns: applied
+[mod] [CommunityOptInPack] DroneOverhaul: applied
+[mod] [CommunityOptInPack] CohortHousing: inactive (opt-in module, off by default — enable it in Options → Mod Options)
+						Lua 0:27:18:890
+[mod] [CommunityOptInPack] NoHomeless: inactive (opt-in module, off by default — enable it in Options → Mod Options)
+[mod] [CommunityOptInPack] DroneStatDials: applied
+[mod] [SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+[mod] [SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[mod] [SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+[SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+						Lua 0:27:18:895
+[mod] [SMRTK] SMRTK_CORE loaded=true tee=false t=5417 id=76
+[SMRTK] SMRTK_CORE loaded=true tee=false t=5417 id=76
+						Lua 0:27:18:898
+[mod] [SMRTK] SMRTK_SLOTS armed_at_load=0 sitting=ck144a_close_20260915 slots="1 console_status,2 probe_preflight,3 check_after_load,4 read_map_click,5 short_breakpoint,6 dump_selected,scratch read_sitting" trigger=smrtk08_break t=5417 id=77
+[SMRTK] SMRTK_SLOTS armed_at_load=0 sitting=ck144a_close_20260915 slots="1 console_status,2 probe_preflight,3 check_after_load,4 read_map_click,5 short_breakpoint,6 dump_selected,scratch read_sitting" trigger=smrtk08_break t=5417 id=77
+						Lua 0:27:18:900
+[mod] [SMRTest][carry] fixture-carry dump available — run SMRTest.FixtureCarry()
+						Lua 0:27:19:765
+[mod] [CommunityOptInPack] MultipleSuns: Artificial Sun build-once limit lifted
+						Lua 0:27:19:887
+Reloading done in 1516 ms
+						Lua 0:27:19:987
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=5417 id=78						Lua 0:27:19:988
+
+						Lua 0:27:20:006
+[mod] Loaded mod items for: SMR_CommunityOptInPack, SMR_CommunityFixPackTestKit
+						Lua 0:27:22:606
+
+
+Stopping the game threads from the Lua side with exit code 0.
+
+					Render 0:27:22:613
+
+
+Stopping the game threads after receiving WM_QUIT.
+
+					Render 0:27:22:962
+
+
+*** Debug::Done()
+Time (ms)	1642962
+
+
