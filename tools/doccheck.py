@@ -128,7 +128,6 @@ GENERAL_USE_MAX_LINES = 220
 # from this list never licenses a Rule: line outside a Must_Read_Header.
 RULE_HEADER_DOCS = (
     "CLAUDE.md",
-    "docs/PLAYTEST_CHECKLIST.md",
     "docs/UPLOAD_WORKFLOW.md",
     "docs/agent/FIX_POLICY.md",
     "docs/agent/STATE.md",
@@ -156,7 +155,6 @@ RULE_DUTY_RE = re.compile(r"^Rule: (.+) \[A3: pass\]$")
 RULE_EMOJI_RE = re.compile("[\u2600-\u27bf\ufe0f\U0001f000-\U0001faff]")
 RULE_FORBIDDEN = {
     "AGENTS.md",  # generated mirror of CLAUDE.md, not a second surface
-    "docs/WAITING_ON_YOU.md",
     "docs/agent/bugs/INDEX.md",
     "docs/agent/facts/INDEX.md",
 }
@@ -478,7 +476,14 @@ def check_entry_mirror(out):
 
 
 # ---------------------------------------------------------------------------
-# docs/WAITING_ON_YOU.md — the generated owner register
+# docs/WAITING_ON_YOU.md — the generated owner register. RETIRED 2026-09-16:
+# the owner purged docs/PLAYTEST_CHECKLIST.md (zz-owner/CHECKLIST_PURGE_PROMPT.md)
+# and keeps the live list in zz-owner/playtest_checklist.md, a plain gitignored
+# file with no markers, so the register has no source any more. main() no
+# longer calls check_waiting or check_marker_integrity, --regen no longer writes
+# the register and --regen-waiting is gone. The functions stay only because
+# ck170_selftest.py, repair_pass_selftest.py and counts_selftest.py exercise
+# them on disk copies. The history below is kept as written.
 #
 # The owner's own account of the problem: they opened PLAYTEST_CHECKLIST.md to
 # find where three playtest items stood, found "a spaghetti doc", and closed it
@@ -1028,10 +1033,7 @@ def regen(out):
     with open(AGENTS_MD, "wb") as fh:
         fh.write(data)
     regen_skills()
-    items = checklist_items()
-    sb.write_lines(WAITING_MD, render_waiting(classify_items(items) if items else items))
     out.append("REGEN: wrote docs/agent/bugs/INDEX.md, docs/agent/facts/INDEX.md, "
-               "docs/WAITING_ON_YOU.md, "
                "the .agents/skills/ mirror and AGENTS.md "
                "(byte copy of CLAUDE.md) — "
                "the checks below read the result")
@@ -2375,17 +2377,11 @@ def main():
     ap.add_argument("--regen", "--regen-index", action="store_true", dest="regen",
                     help="rewrite every GENERATED file from its source first — "
                          "docs/agent/bugs/INDEX.md, docs/agent/facts/INDEX.md, "
-                         "docs/WAITING_ON_YOU.md, "
                          "the .agents/skills/ mirror and "
                          "AGENTS.md (byte copy of CLAUDE.md) — then run the checks. "
                          "--regen-index is an ALIAS, not a narrower form: it writes "
                          "all of the above. The indices are built from every entry "
-                         "ON DISK, a peer's uncommitted ones included — after a "
-                         "checklist-only edit prefer --regen-waiting")
-    ap.add_argument("--regen-waiting", action="store_true", dest="regen_waiting",
-                    help="rewrite ONLY docs/WAITING_ON_YOU.md (a pure function of the "
-                         "checklist's markers and STATE.md), then run the checks — the "
-                         "contained cure for the RED a checklist edit causes")
+                         "ON DISK, a peer's uncommitted ones included")
     ap.add_argument("--fix-eol", nargs="*", metavar="PATH", dest="fix_eol",
                     help="convert CRLF to LF in every tracked text file that has any "
                          "(mixed or whole-CRLF), or only the PATHs given, then run the "
@@ -2418,8 +2414,6 @@ def main():
     try:
         if args.regen:
             regen(out)
-        elif args.regen_waiting:
-            regen_waiting(out)
         if args.fix_eol is not None:
             eol_fix(args.fix_eol, out)
         model = sb.load_from_dir()
@@ -2437,8 +2431,6 @@ def main():
     ok = check_rule_headers(out) and ok
     ok = check_state_and_stubs(out) and ok
     ok = check_state_admission(out) and ok
-    ok = check_waiting(out) and ok
-    ok = check_marker_integrity(out) and ok
     ok = check_skills(out) and ok
     counts = recount(model, out)
     ok = temporary_sweep(out) and ok

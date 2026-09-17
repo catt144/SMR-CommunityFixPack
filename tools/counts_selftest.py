@@ -63,8 +63,6 @@ def regen_cases(m, root):
                                write_lines=write_lines)
     m.splitter = m.facts_splitter = lambda: sb
     m.regen_skills = lambda: None
-    m.checklist_items = lambda: []
-    m.render_waiting = lambda items: ["waiting"]
     Path(m.CLAUDE_MD).write_bytes(b"entry\r\n")
     state = Path(m.STATE)
     for ending in (b"\n", b"\r\n"):
@@ -76,7 +74,6 @@ def regen_cases(m, root):
         m.regen([])
         assert snapshots == {p: p.read_bytes() for p in root.rglob("*") if p.is_file()}
         assert Path(m.AGENTS_MD).read_bytes() == Path(m.CLAUDE_MD).read_bytes()
-        assert Path(m.WAITING_MD).read_bytes() == b"waiting\n"
         for directory in (m.BUGS_DIR, m.FACTS_DIR):
             assert (Path(directory) / "INDEX.md").read_bytes() == b"index\n"
 

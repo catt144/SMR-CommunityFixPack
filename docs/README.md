@@ -8,17 +8,12 @@ list below is an allowlist checked in BOTH directions, so a new file at
 
 ```
 docs/
-  PLAYTEST_CHECKLIST.md   the PT tests, the reporting protocol, and
-                          "Decisions waiting on you" — the owner's file
   UPLOAD_WORKFLOW.md      owner's step-by-step for putting an update live:
                           pack, upload, store pages, publish the site
   FIELD_REPORT_REPLIES.md  replies to player reports (Steam, Reddit, GitHub):
                           drafts the owner posts, and the record of what went
                           up — agents draft them and keep them current
   FUTURE_IDEAS.md         parking lot, NOT a backlog. Nothing in it is work
-  WAITING_ON_YOU.md       GENERATED owner register — every decision and playtest
-                          leg currently held for the owner, newest first. Never
-                          hand-edit: `python tools/doccheck.py --regen`
   README.md               this map
   BUGS.md · STATUS.md     3-line stubs pointing at where they went
   agent/
@@ -97,8 +92,9 @@ difference. Generated files say so on line 1.
 - A **supporting document used by a prompt** → `agent/support/`; keep the prompt's pointer and
   update `agent/support/README.md` when the document lands.
 - A **session leg** → `archive/SESSION_LOG.md` (append-only, newest first).
-- A **decision the owner must make** → `PLAYTEST_CHECKLIST.md` →
-  "Decisions waiting on you". Never only in an agent doc.
+- A **decision the owner must make** → `zz-owner/playtest_checklist.md`, the owner's local
+  gitignored list (purged 2026-09-16 from `PLAYTEST_CHECKLIST.md`; old bodies are in
+  `archive/PLAYTEST_ARCHIVE.md` under `## ck<n>`). Never only in an agent doc.
 - A **reply to a player's report** (Steam, Reddit, GitHub) → `FIELD_REPORT_REPLIES.md`
   at the root. The owner posts; agents draft, record what went up, and update a
   draft in the same commit that changes the fact it states.

@@ -14,8 +14,8 @@ game's shipped Lua, patched at runtime; no game files are modified.
   for it (owner ruling 2026-09-15). Opening a session is not such a call.
 - **`docs/agent/STATE.md`** — kernel status plus pointers, byte-capped. When status IS the
   question, this is the read, and its `NEXT`, `OWED` and `## Hazards` lines bind you.
-- **`docs/WAITING_ON_YOU.md`** — GENERATED register of what is held for the **owner**.
-  Read it before asking the owner anything; never edit it.
+- **`zz-owner/playtest_checklist.md`** — the owner's live list (local, gitignored; may be
+  absent on another machine). Read it before asking the owner anything.
 - **Never hand-type a count.** `python tools/doccheck.py --emit-counts` prints them.
 
 ## 2 · Where things live
