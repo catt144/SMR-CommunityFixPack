@@ -26,8 +26,10 @@ rules and the failure behind each one.
 1. **A tool's output is a claim until the tool is falsified.** Three instrument
    defects turned up in a single session here — a pack parser, an extraction
    script and a grep dedupe — each producing confident, wrong numbers. That is
-   why the gates carry `--selftest` and why `doccheck.py` runs four of them as
-   required checks: a falsifier that stops firing is itself the finding.
+   why the gates carry `--selftest` and why `doccheck.py` runs several of them
+   as gated checks: a falsifier that stops firing is itself the finding. Which
+   ones are gated is what `doccheck.py` prints — read its `SELFTEST:` lines
+   rather than a count written down here.
 2. **Scope a command so that contrary evidence could make it fail.** An empty
    result proves nothing until the same question has a positive control, and a
    negative search over compressed input (an `.fpk`, a `.zip`) is not a sample

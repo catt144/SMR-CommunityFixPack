@@ -104,8 +104,12 @@ replacement body in both trees, or a run in the game.
   is a practice (`luafn.find_bodies` over both archives plus our `Code/`), never a name proxy.
 - A clean run over every module is not evidence that every fix still works.
 
-Artefacts: `reports/vanillahunt/` (tracked) and `reports/VANILLA_DIFF_DISPOSITION.md`. All four tools
-carry `--selftest`; doccheck gates only `bodycheck --selftest`.
+Artefacts: `reports/vanillahunt/` (tracked) and `reports/VANILLA_DIFF_DISPOSITION.md`.
+
+Each instrument's own header defines its flags, its verdicts and what each verdict obliges;
+`tools/README.md` routes to them, and to every other script in `tools/`. Which `--selftest` runs are
+gated is what `python tools/doccheck.py` prints — read its `SELFTEST:` lines. What the output above
+licenses is decided here, not there.
 
 ## Probe hygiene (owner, 2026-08-01)
 
