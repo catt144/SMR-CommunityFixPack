@@ -26,6 +26,31 @@ Built, no public row or count change: `Code/00_Core.lua` hardening rows 1 + 2 (c
 control `tools/desk_ck53_hostile_globals.py`; not playtested, by the owner's condition. The shipped
 Code changed, so the next upload carries it; do not look for a fix-list row.
 
+### Pending — C95 return-home repair and C102 safe expedition fallback (2026-09-17)
+
+**Hold for the remaining qualification gates in ck200 before upload.** C95 has retail
+unattended draft/return/save-reload evidence. Rail, ordinary UI mission, cold removal,
+main-menu enable and a positive live C102 reroute remain open. Build evidence and
+scope: `docs/agent/reports/C95_RETURN_HOME_BUILD.md`.
+
+C95 replaces its existing marked judgment-call row with a repair:
+
+> Habitat residents can join expeditions and return to their own habitat. Automatic
+> crews include them when the rocket has a walking or train route home. If that home
+> can no longer be used on return, they go to the nearest safe reachable dome.
+
+C102 is a new public row:
+
+> Expedition returnees whose home is unavailable avoid switched-off or lifeless domes
+> when a safe reachable dome is available, even if its housing is full.
+
+Developer detail: per-colonist selection occurs before fallback housing reservations;
+C95 restores housing before employment on habitat rejoin. C102 reuses the existing
+arrival safety rule. Native travel remains unchanged. No safe destination anywhere
+still preserves the game's assignment; that policy is unresolved. Update C95's old
+exclusion/judgment-call wording wherever the release prompt finds it. No version,
+store page, public site or upload changed in this job.
+
 ## Last released
 
 **v11** (2026-09-16). Its entry and every earlier release are in

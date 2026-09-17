@@ -1,0 +1,73 @@
+-- TEMPORARY C95 registered draft and mid-return save/reload driver.
+-- Only C95BUILD input and C95MID output; no owner saves or housing edited.
+-- Monitoring/saving is real-time: no test frame below a saved game-time yield.
+C95Save = {}
+local function say(s)
+    ModLog("[C95SAVE] " .. tostring(s):gsub("%%", "%%%%"))
+    if FlushLogFile then FlushLogFile() end
+end
+local function state(u, label)
+    say(label .. " unit="..u.handle.." command="..tostring(u.command)
+        .." home="..tostring(u.residence and u.residence.handle)
+        .." holder="..tostring(u.holder and u.holder.handle)
+        .." workplace="..tostring(u.workplace and u.workplace.class))
+end
+local function wait_until(test, ms)
+    local limit=RealTime()+ms
+    while not test() and RealTime()<limit do Sleep(50) end
+    return test()
+end
+function C95Save.Run()
+    local err=LoadGame("C95BUILD.savegame.sav", {})
+    if err then say("LOADERR "..tostring(err)); return end
+    Pause("C95Save")
+    local rocket,home=HandleToObject[1053],HandleToObject[2692]
+    say("BUILD "..tostring(BuildVersion).." full="..tostring(home:GetFreeSpace()==0).." distance="..HexAxialDistance(rocket,home))
+    rocket:ChangeRocketType(g_RocketTypes.Expedition)
+    local crew=rocket:GatherAvailableColonists(5)
+    local unit
+    for _,u in ipairs(crew) do
+        say("DRAFT unit="..u.handle.." home="..tostring(u.residence and u.residence.handle))
+        if u.residence==home then unit=unit or u end
+    end
+    if not unit then say("SKIP no habitat resident in real draft"); return end
+    state(unit,"DRAFTED")
+    local boarded=false
+    CreateGameTimeThread(function() rocket:LoadPassengers(crew); boarded=true end)
+    Resume("C95Save"); SetGameSpeed(3)
+    if not wait_until(function() return boarded and unit.disappeared end,30000) then say("STOP boarding timeout"); return end
+    state(unit,"BOARDED")
+    local unloaded=false
+    CreateGameTimeThread(function() rocket:UnloadPassengers(); unloaded=true end)
+    if not wait_until(function() return unloaded and unit.command=="TransportByFoot" and not unit.holder end,30000) then say("SKIP no clean mid-return save window"); return end
+    Pause("C95Save")
+    state(unit,"MIDRETURN")
+    local handle=unit.handle
+    local saveerr,name=SaveGame("C95MID.savegame.sav", {savename="C95MID.savegame.sav",silent=true,no_screenshot=true})
+    say("SAVE err="..tostring(saveerr).." name="..tostring(name))
+    if saveerr then return end
+    Resume("C95Save")
+    err=LoadGame("C95MID.savegame.sav", {})
+    say("RELOAD err="..tostring(err))
+    if err then return end
+    unit=HandleToObject[handle]; home=HandleToObject[2692]
+    Resume("C95Save"); SetGameSpeed(3)
+    state(unit,"RELOADED")
+    local arrived=wait_until(function() return unit.holder==home and unit.residence==home end,90000)
+    state(unit,arrived and "HOME_AFTER_RELOAD" or "TIMEOUT_AFTER_RELOAD")
+    say("PACK "..tostring(SMRFixPack and SMRFixPack.IsActive("HabitatExpeditionReturn")))
+end
+function C95Save.Boot()
+    CreateRealTimeThread(function()
+        Sleep(1)
+        config.AutosaveSuspended = true
+        if not wait_until(function() return GetPreGameMainMenu() end,180000) then say("TIMEOUT menu"); quit(); return end
+        Sleep(1000)
+        local ok,err=sprocall(C95Save.Run)
+        say("DONE ok="..tostring(ok).." err="..tostring(err))
+        Resume("C95Save")
+        Sleep(2000)
+        quit()
+    end)
+end
+C95Save.Boot()

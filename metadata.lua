@@ -401,6 +401,7 @@ return PlaceObj('ModDef', {
 		"Code/Fix_CloggedBuildingRelease.lua",
 		"Code/Fix_FactionDomeSizeGate.lua",
 		"Code/Fix_BuildingCodesPrefab.lua",
+		"Code/Fix_HabitatExpeditionReturn.lua",
 		"Code/Fix_HabitatExpeditionDraft.lua",
 		"Code/Fix_OpenPastureStockpiles.lua",
 		"Code/Fix_RoverSubclassManifest.lua",

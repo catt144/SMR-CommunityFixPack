@@ -1,0 +1,35 @@
+{
+  "leg": "c102-return",
+  "_what": "Dead nearest dome; only setup mutation is SetUIWorking(false). Positive leg needs a live reachable alternative.",
+  "kit": "C:\\Dev\\SMR-BugFixPack-TestKit",
+  "park": "C:\\Dev\\SMR-BugFixPack\\tools\\arming\\payloads",
+  "stripPattern": "Code/98_C102",
+  "anchorAfter": "99_FixtureCarry.lua",
+  "bootSymbol": "C102Return.Boot",
+  "symbolNamespace": "C102Return",
+  "permanent": [
+    "Code/99_FixtureCarry.lua"
+  ],
+  "mustNotBeListed": [
+    "Code/96_AutoRunFlag.lua",
+    "Code/97_ForceInactive.lua",
+    "Code/97_C95Home.lua"
+  ],
+  "mustNotBeListedWhy": "No home prototype, competing autorun or forced inactive modules.",
+  "bannedPatterns": [
+    "SaveGame\\s*\\(",
+    "SetResidence\\s*\\("
+  ],
+  "requiredPresent": [
+    "C95BUILD.savegame.sav",
+    "config.AutosaveSuspended = true",
+    "near:SetUIWorking(false)"
+  ],
+  "payloads": [
+    {
+      "src": "98_C102Return.lua.txt",
+      "dst": "98_C102Return.lua",
+      "selfDrives": true
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "leg": "c95-save",
+  "_what": "Real gather, native receivers, mid-return save/reload. Only writes our C95MID slot.",
+  "kit": "C:\\Dev\\SMR-BugFixPack-TestKit",
+  "park": "C:\\Dev\\SMR-BugFixPack\\tools\\arming\\payloads",
+  "stripPattern": "Code/9[78]_C95",
+  "anchorAfter": "99_FixtureCarry.lua",
+  "bootSymbol": "C95Save.Boot",
+  "symbolNamespace": "C95Save",
+  "permanent": [
+    "Code/99_FixtureCarry.lua"
+  ],
+  "mustNotBeListed": [
+    "Code/96_AutoRunFlag.lua",
+    "Code/97_ForceInactive.lua",
+    "Code/97_C95Home.lua"
+  ],
+  "mustNotBeListedWhy": "No home prototype, competing autorun or forced inactive modules.",
+  "bannedPatterns": [
+    "SetResidence\\s*\\("
+  ],
+  "requiredPresent": [
+    "C95BUILD.savegame.sav",
+    "C95MID.savegame.sav",
+    "config.AutosaveSuspended = true"
+  ],
+  "payloads": [
+    {
+      "src": "98_C95Save.lua.txt",
+      "dst": "98_C95Save.lua",
+      "selfDrives": true
+    }
+  ]
+}

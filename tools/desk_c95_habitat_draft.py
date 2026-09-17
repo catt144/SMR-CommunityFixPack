@@ -82,6 +82,8 @@ def main():
         function check(ok, msg) if not ok then native_error(msg, 2) end end
         SMRFixPack = {
             Register = function(id, spec) registered = spec end,
+            IsActive = function() return return_active ~= false end,
+            HabitatExpeditionReturn = {CanReturnHome=function(u,h,r) return h.returnable end},
             Require = function(id, spec)
                 for _, c in ipairs(spec) do
                     local val = c.class and _G[c.class] or c.global and _G[c.global]
@@ -166,10 +168,19 @@ def main():
     rt.execute('''
         modenv=setmetatable({}, {__index=_G, __newindex=function(_,k,v) _G[k]=v end})
     ''')
+    rt.globals().module_source = MODULE.read_text(encoding='utf-8')
     rt.eval('function(src) return load(src, "@Code/Fix_HabitatExpeditionDraft.lua", "t", modenv) end')(
         MODULE.read_text(encoding='utf-8'))()
     rt.execute('''
         check(registered.apply()==nil, 'apply')
+        local once=CargoTransporter.GatherAvailableColonists
+        check(registered.apply()==nil and CargoTransporter.GatherAvailableColonists==once,'idempotent apply')
+        nat.returnable=true
+        check(ids(rocket:GatherAvailableColonists(2))=='naturalist,idle','conditional legacy admits returnable only')
+        check(ids(universal:GatherAvailableColonists(2))=='naturalist,idle','conditional new admits returnable only')
+        return_active=false
+        check(ids(universal:GatherAvailableColonists(2))=='idle,busy','return veto retains exclusion')
+        return_active=true; nat.returnable=false
         check(ids(rocket:GatherAvailableColonists(4))=='idle,busy,employed,busy employed','fill all buckets')
         check(ids(universal:GatherAvailableColonists(4))=='idle,busy,employed,busy employed','new fill all buckets')
         check(FilterColonistsByTrait==base_filter,'success restores exact global')
@@ -248,11 +259,13 @@ def main():
         check(ids(universal:GatherAvailableColonists(2))=='naturalist,micro','new desk removal control')
         -- Preserve complete return tuples, including trailing nil, through pcall.
         CargoTransporter.GatherAvailableColonists=function() return nil, false, 'tail', nil end
+        load(module_source, '@draft', 't', modenv)()
         check(registered.apply()==nil,'tuple apply')
         local tuple=table.pack(CargoTransporter.GatherAvailableColonists(rocket))
         check(tuple.n==4 and tuple[1]==nil and tuple[2]==false and tuple[3]=='tail', 'tuple preservation')
         CargoTransporter.GatherAvailableColonists=vanilla
         CargoTransporterNew.GatherAvailableColonists=new_vanilla
+        load(module_source, '@draft', 't', modenv)()
         MicroGHabitatBase=nil
         check(registered.apply()=='missing dependency','Require declines absent class')
         check(CargoTransporter.GatherAvailableColonists==vanilla,'decline leaves original installed')
@@ -262,6 +275,7 @@ def main():
         check(ids(universal:GatherAvailableColonists(2))=='idle,busy','new-only receiver filters')
         CargoTransporter={GatherAvailableColonists=vanilla}; RocketExpeditionBase={}
         CargoTransporterNew=nil; UniversalRocketBase=nil
+        load(module_source, '@draft', 't', modenv)()
         check(registered.apply()==nil,'legacy-only receiver applies')
         check(ids(rocket:GatherAvailableColonists(2))=='idle,busy','legacy-only receiver filters')
         check(loud==0,'no loud error/assert calls')

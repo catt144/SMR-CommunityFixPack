@@ -24,15 +24,6 @@ Which of these WORKFLOW rules retire, each lapsed on the evidence but with no wo
   entries and reports still use the markers, so the rule may just need its scope reworded.
 Home: `docs/agent/WORKFLOW.md`
 
-### ck200 · opened 2026-09-16
-Qualify C95's return-home design to replace v11's exclusion?
-- Small-wrapper retail A/B: original resident returned home; control assigned a dome. Unshipped, no full rewrite.
-- Controlled boarding/unloading only. Mission, rail, all-habitat and mid-return removal gates remain; sitting in report.
-- The reporter still cannot crew under v11. Their reported departure implies it was inactive; pack version unknown.
-- Ask their version if you want that settled. C102's shape is ruled (nearest safe dome) and not yet built.
-- Until then v11 leaves an all-habitat colony unable to crew: leave it, or draft residents when nobody else can go?
-Home: `docs/agent/reports/C95_RETURN_HOME_EXPLORATION.md`, `docs/agent/bugs/C95.md`, `docs/agent/bugs/C102.md`
-
 ### ck188a · opened 2026-09-17
 Who reported Wildfire, and do you take the five-minute live look or drop it?
 - F120, the report and the handoff name Jäger, but his comment #8 is C99's tunnel bug and you said
@@ -100,6 +91,16 @@ Do you spend a profiling sitting on FR-3 (frame skip and stutter)?
 Home: `docs/archive/PLAYTEST_ARCHIVE.md`
 
 ## Run
+
+### ck200 · opened 2026-09-16
+When ready to qualify C95/C102, run the build report's sitting; these gates remain before release.
+- UI expedition: witness a drafted habitat resident physically home, with no new dome job. v11's verdict does not carry.
+- Provision a distant inhabited habitat with rail to the pad. The current fixture has none; this needs provisioning.
+- Provision a live reachable dome beyond the nearest; switch the nearest off and watch a returnee reach the live dome.
+- Cold restart, pack disabled, on `C95MID.savegame.sav`: watch 2000001502; then test re-enabling at the main menu.
+- No returnable homes still means no automatic crew. Retain that? What if no safe dome exists? Both policies stay open.
+- The reporter's actual pack version is still unknown; ask it if you want their reported departure explained.
+Home: `docs/agent/reports/C95_RETURN_HOME_BUILD.md`, `docs/agent/bugs/C95.md`, `docs/agent/bugs/C102.md`
 
 ### ck183b · opened 2026-09-17
 When you next boot with SMRTK, confirm 09's menu layout and the `MechanizedDepotFood` numbers print.

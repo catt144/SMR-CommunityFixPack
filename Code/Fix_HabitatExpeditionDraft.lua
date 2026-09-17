@@ -1,8 +1,9 @@
--- C95: judgment call -- leave habitat residents out of the automatic expedition
--- draft. The owner chose this repair over widening expedition-return homing.
+-- C95: draft habitat residents only when their home is returnable from this
+-- rocket. The registered return repair supplies the same admission predicate.
+-- v11 archive: docs/archive/code/Fix_HabitatExpeditionDraft.v11-4ec3e32.lua.txt
 -- Naturalist and Micro-G habitats both inherit MicroGHabitatBase; residence,
 -- not dome or player-toggleable community policies, identifies their residents.
--- See docs/agent/bugs/C95.md and reports/C95_HABITAT_DRAFT_BUILD.md.
+-- See docs/agent/bugs/C95.md and reports/C95_RETURN_HOME_BUILD.md.
 --
 -- Layer 3 (FIX_POLICY 3a): filter synchronous inputs, retain the shipped picker.
 -- No object fields, GameVars, threads, migration or saved callbacks are added.
@@ -28,14 +29,19 @@
 -- SRC: Lua/CargoTransporterNew.lua CargoTransporterNew:GatherAvailableColonists sha256=3b6ce91eaba5a7dddf26ee798cb66d584b7bdcf8e7dad50446babe82fd0e834a
 -- DEFECT: FilterColonistsByTrait\(pool,\s*label,\s*amount\s*-\s*#list\)
 
-local function IsAutoPickerExempt(unit)
-	return IsKindOf(unit.residence, "MicroGHabitatBase")
+local installed = false
+
+local function IsAutoPickerExempt(unit, rocket)
+	if not IsKindOf(unit.residence, "MicroGHabitatBase") then return false end
+	local repair = SMRFixPack.HabitatExpeditionReturn
+	return not (SMRFixPack.IsActive("HabitatExpeditionReturn") and repair
+		and repair.CanReturnHome(unit, unit.residence, rocket))
 end
 
-local function eligible_pool(pool)
+local function eligible_pool(pool, rocket)
 	local eligible = {}
 	for _, unit in ipairs(pool) do
-		if not IsAutoPickerExempt(unit) then
+		if not IsAutoPickerExempt(unit, rocket) then
 			eligible[#eligible + 1] = unit
 		end
 	end
@@ -56,7 +62,7 @@ local function wrap_gather(orig, is_automatic_expedition)
 		-- Plain assignment reaches the real global through ModEnvMeta.__newindex.
 		-- rawset(_G, ...) would only shadow it in this mod's sandbox.
 		FilterColonistsByTrait = function(pool, ...)
-			local ok, eligible = pcall(eligible_pool, pool)
+			local ok, eligible = pcall(eligible_pool, pool, self)
 			return filter(ok and eligible or pool, ...)
 		end
 		local result = pack(pcall(orig, self, ...))
@@ -67,8 +73,9 @@ local function wrap_gather(orig, is_automatic_expedition)
 end
 
 SMRFixPack.Register("HabitatExpeditionDraft", {
-	title = "Judgment call: expeditions leave habitat residents out of the automatic draft",
+	title = "Expeditions draft habitat residents when they have a return route home",
 	apply = function()
+		if installed then return end
 		local err = SMRFixPack.Require("HabitatExpeditionDraft", {
 			{ class = "MicroGHabitatBase" },
 			{ global = "IsKindOf" },
@@ -77,7 +84,7 @@ SMRFixPack.Register("HabitatExpeditionDraft", {
 		})
 		if err then return err end
 
-		local installed, legacy_err, new_err
+		local patched, legacy_err, new_err
 		if type(CargoTransporter) == "table" then
 			legacy_err = SMRFixPack.Require("HabitatExpeditionDraft", {
 				{ class = "CargoTransporter", method = "GatherAvailableColonists" },
@@ -88,7 +95,7 @@ SMRFixPack.Register("HabitatExpeditionDraft", {
 				CargoTransporter.GatherAvailableColonists = wrap_gather(orig, function(self)
 					return IsKindOf(self, "RocketExpeditionBase")
 				end)
-				installed = true
+				patched = true
 			end
 		end
 
@@ -104,12 +111,13 @@ SMRFixPack.Register("HabitatExpeditionDraft", {
 					return IsKindOf(self, "UniversalRocketBase")
 						and self.RocketType == g_RocketTypes.Expedition
 				end)
-				installed = true
+				patched = true
 			end
 		end
 
-		if not installed then
+		if not patched then
 			return legacy_err or new_err or "no supported expedition gather receiver found"
 		end
+		installed = true
 	end,
 })

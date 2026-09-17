@@ -1,3 +1,10 @@
+-- SRC: Lua/Units/Colonist.lua Colonist:GetExpeditionReturnDome sha256=a62a04b7b2b23029783b61be38e5b30abfc02565ec5129692fc5b7518ac7b481
+-- SRC: Lua/_GameUtils.lua GetDomesReachableByColonists sha256=12b50cef18bb5af0d504dd663a5f71b4af3706adab775178881d8ac446609986
+-- DEFECT: community\.can_be_safety_dome and safety_dist > dist
+-- SRC: Lua/CargoTransporterNew.lua CargoTransporterNew:UnloadPassengers sha256=6e2e8553aa69322dae5a2b517669236bb9fe9daed8e9c8ad15b4a030ef55cd51
+-- DEFECT: ChooseDome\(unit,\s*domes,\s*safety_dome
+-- SRC: Lua/Buildings/RocketBase.lua RocketBase:Disembark sha256=47e85e84d3b0cdeddd937fa4210d9f1862ea3d9256ba02f868b43fcab8e71758
+-- DEFECT: ChooseDome\(unit,\s*domes,\s*safety_dome
 -- F53: Newly arrived colonists set off for a dome they cannot reach and die on
 -- the way — or land inside terrain they cannot walk out of.
 -- F86 Tier-2 REWRITE (2026-08-01, spec `docs/reports/SAVE_SAFETY_REDESIGN.md`
@@ -195,9 +202,17 @@
 -- DEFECT: return community and community\.accept_colonists and community\.ui_working and community:HasLifeSupport\(\)
 --   C83: the safety_dome fallback omits this shipped welcoming rule
 
+-- C102 extends the same welcoming rule to the synchronous expedition selector,
+-- before either receiver reserves a fallback residence. A valid welcoming home
+-- retains priority; otherwise choose the nearest welcoming reachable dome even
+-- if its housing is full. No welcoming dome: preserve vanilla and log once.
+-- Layer 3 for this additional hook; the receiver and travel bodies stay native.
+local installed = false
+
 SMRFixPack.Register("ArrivalDeaths", {
 	title = "Arriving colonists avoid unreachable or uninhabitable domes and impassable ground",
 	apply = function()
+		if installed then return end
 		local err = SMRFixPack.Require("ArrivalDeaths", {
 			{ class = "Colonist", method = "Idle" },
 			{ class = "Colonist", method = "OnArrival" },
@@ -365,6 +380,47 @@ SMRFixPack.Register("ArrivalDeaths", {
 			return colonist.traits.Tourist or dome:CanAcceptNewColonists()
 		end
 
+		-- Optional on older shapes: the arrival repair remains available when
+		-- expedition homing is absent. Neither rocket receiver is required.
+		if type(C.GetExpeditionReturnDome) == "function" then
+			local return_err = SMRFixPack.Require("ArrivalDeaths", {
+				{ class = "Colonist", method = "GetExpeditionReturnDome" },
+				{ path = { "table", "unpack" }, kind = "function" },
+			})
+			if not return_err then
+				local original_return = C.GetExpeditionReturnDome
+				local no_safe_logged = false
+				local function pack(...) return { n = select("#", ...), ... } end
+				function C:GetExpeditionReturnDome(domes, ...)
+					local result = pack(original_return(self, domes, ...))
+					if IsValid(result[1]) and is_welcoming_arrival_dome(result[1], self) then
+						return table.unpack(result, 1, result.n)
+					end
+					local origin = self.appear_location or self.holder
+					if IsValid(origin) and origin:IsValidPos() and self.city then
+						local candidates, _, distances = GetDomesReachableByColonists(self.city, origin:GetPos())
+						local nearest, nearest_dist
+						for _, candidate in ipairs(candidates) do
+							local dist = distances[candidate]
+							if IsKindOf(candidate, "Dome") and is_welcoming_arrival_dome(candidate, self)
+								and dist and (not nearest_dist or dist < nearest_dist) then
+								nearest, nearest_dist = candidate, dist
+								end
+						end
+						if nearest then
+							result[1], result.n = nearest, Max(result.n, 1)
+							return table.unpack(result, 1, result.n)
+						end
+						if not no_safe_logged then
+							no_safe_logged = true
+							SMRFixPack.Log("ArrivalDeaths: C102 found no welcoming return dome; preserving vanilla assignment")
+						end
+					end
+					return table.unpack(result, 1, result.n)
+				end
+			end
+		end
+
 		local c83_reroute_logged = false
 
 		-- (b)/(c) do not send an arrival to a dome it cannot reach or survive in
@@ -440,5 +496,6 @@ SMRFixPack.Register("ArrivalDeaths", {
 			end
 			return orig_idle(self, ...)
 		end
+		installed = true
 	end,
 })

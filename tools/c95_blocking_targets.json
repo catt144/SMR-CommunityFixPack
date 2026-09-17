@@ -1,0 +1,58 @@
+[
+  [
+    "C95/C102 build",
+    "GetExpeditionReturnDome"
+  ],
+  [
+    "C95/C102 build",
+    "UpdateWorkplace"
+  ],
+  [
+    "C95/C102 build",
+    "UpdateResidence"
+  ],
+  [
+    "C95/C102 build",
+    "SetResidence"
+  ],
+  [
+    "C95/C102 build",
+    "CanReserveResidence"
+  ],
+  [
+    "C95/C102 build",
+    "CanVisit"
+  ],
+  [
+    "C95/C102 build",
+    "IsSuitable"
+  ],
+  [
+    "C95/C102 build",
+    "HasLifeSupport"
+  ],
+  [
+    "C95/C102 build",
+    "CanAcceptNewColonists"
+  ],
+  [
+    "C95/C102 build",
+    "IsInWalkingDist"
+  ],
+  [
+    "C95/C102 build",
+    "GetTransportRoute"
+  ],
+  [
+    "C95/C102 build",
+    "GetDomesReachableByColonists"
+  ],
+  [
+    "C95/C102 build",
+    "GatherAvailableColonists"
+  ],
+  [
+    "C95/C102 build",
+    "FilterColonistsByTrait"
+  ]
+]

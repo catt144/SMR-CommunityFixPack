@@ -1,0 +1,112 @@
+-- TEMPORARY C95 registered-module retail driver. Explicit copy; autosaves suspended.
+-- Controlled boarding/unloading uses real native receivers; no mission flight.
+-- Never saves, assigns residences, teleports subjects or alters housing/network.
+C95Build = {}
+local function say(s)
+    ModLog("[C95BUILD] " .. tostring(s):gsub("%%", "%%%%"))
+    if FlushLogFile then FlushLogFile() end
+end
+function C95Build.Census()
+    say("BUILD " .. tostring(BuildVersion) .. " revision=" .. tostring(LuaRevision))
+    say("GAME day=" .. tostring(UIColony.day) .. " id=" .. tostring(g_PlaythroughId))
+    for _, city in ipairs(Cities) do
+        for _, community in ipairs(city.labels.Community) do
+            if IsKindOf(community, "MicroGHabitatBase") then
+                say("HAB class=" .. community.class .. " handle=" .. community.handle .. " residents=" .. #community.colonists)
+                for _, unit in ipairs(community.colonists) do
+                    say("RESIDENT handle=" .. unit.handle .. " command=" .. tostring(unit.command) .. " home=" .. tostring(unit.residence and unit.residence.handle))
+                end
+            end
+        end
+        for _, rocket in ipairs(city.labels.UniversalRocketBase or empty_table) do
+            say("ROCKET class=" .. rocket.class .. " handle=" .. rocket.handle .. " command=" .. tostring(rocket.command) .. " type=" .. tostring(rocket.RocketType))
+        end
+    end
+end
+function C95Build.RoundTrip()
+    local rocket = HandleToObject[1053]
+    local home = HandleToObject[2692]
+    if not IsValid(rocket) or not IsValid(home) or #home.colonists == 0 then
+        say("STOP fixture unavailable"); return
+    end
+    say("MODULE return=" .. tostring(SMRFixPack.IsActive("HabitatExpeditionReturn")) .. " draft=" .. tostring(SMRFixPack.IsActive("HabitatExpeditionDraft")) .. " arrival=" .. tostring(SMRFixPack.IsActive("ArrivalDeaths")))
+    say("LAYOUT home_full=" .. tostring(home:GetFreeSpace()==0))
+    for _,d in ipairs(rocket.city.labels.Dome) do local walk,dist=IsInWalkingDist(d,rocket:GetPos(),rocket.city); say("DOME handle="..d.handle.." walk="..tostring(walk).." dist="..tostring(dist).." on="..tostring(d.ui_working).." support="..tostring(d:HasLifeSupport())) end
+    local unit = home.colonists[1]
+    say("BEFORE unit=" .. unit.handle .. " home=" .. home.handle .. " residence=" .. tostring(unit.residence and unit.residence.handle)
+        .. " rocket=" .. rocket.class .. "(" .. rocket.handle .. ")")
+    local s1,s2 = GetTransportRoute(rocket, home, true, false)
+    say("ROUTE walk=" .. tostring(IsInWalkingDist(home,rocket:GetPos(),unit.city)) .. " stations=" .. tostring(s1 and s1.handle) .. "," .. tostring(s2 and s2.handle)
+        .. " distance=" .. tostring(HexAxialDistance(rocket,home)))
+    rocket:ChangeRocketType(g_RocketTypes.Expedition)
+    rocket:LoadPassengers({unit})
+    local deadline = GameTime() + 30000
+    while not unit.disappeared and GameTime() < deadline do Sleep(100) end
+    say("BOARDED disappeared=" .. tostring(unit.disappeared) .. " reserved=" .. tostring(unit.reserved_residence and unit.reserved_residence.handle)
+        .. " expedition_home=" .. tostring(unit.expedition_residence and unit.expedition_residence.handle)
+        .. " holder=" .. tostring(unit.holder and unit.holder.handle))
+    if not unit.disappeared or unit.expedition_residence ~= home or unit.reserved_residence ~= home then
+        say("STOP boarding failed"); return
+    end
+    local domes = GetDomesReachableByColonists(rocket.city,rocket:GetPos())
+    say("SELECT original_list_contains_home=" .. tostring(not not table.find(domes,home))
+        .. " chosen=" .. tostring(unit:GetExpeditionReturnDome(domes) and unit:GetExpeditionReturnDome(domes).handle))
+    -- Execute the receiver on its real rocket, at its unchanged landing pad.
+    -- Flight/scanning/draft selection are outside this controlled mechanism leg.
+    CreateGameTimeThread(function() rocket:UnloadPassengers(); say("UNLOAD finished") end)
+    local finish = GameTime() + 8 * const.HourDuration
+    local previous
+    while GameTime() < finish do
+        local state = tostring(unit.command) .. " holder=" .. tostring(unit.holder and unit.holder.class)
+            .. " residence=" .. tostring(unit.residence and unit.residence.handle)
+            .. " dome=" .. tostring(unit.dome and unit.dome.handle)
+            .. " ticket=" .. tostring(unit.transport_ticket and unit.transport_ticket.reason)
+            .. " workplace=" .. tostring(unit.workplace and unit.workplace.class)
+        if state ~= previous then say("TRANSIT " .. state); previous=state end
+        if unit.residence == home and unit.holder == home then
+            say("HOME unit=" .. unit.handle .. " residence=" .. home.handle .. " holder=" .. home.handle)
+            Sleep(const.HourDuration)
+            say("SOAK residence=" .. tostring(unit.residence and unit.residence.handle) .. " dome=" .. tostring(unit.dome and unit.dome.handle)
+                .. " workplace=" .. tostring(unit.workplace and unit.workplace.class))
+            return
+        end
+        if unit:IsDying() then say("STOP subject dying"); return end
+        Sleep(1000)
+    end
+    say("TIMEOUT physical home arrival")
+end
+function C95Build.Boot()
+    CreateRealTimeThread(function()
+        Sleep(1)
+        config.AutosaveSuspended = true
+        local deadline = RealTime() + 180000
+        while not GetPreGameMainMenu() do
+            if RealTime() > deadline then say("TIMEOUT menu"); quit(); return end
+            Sleep(500)
+        end
+        Sleep(1000)
+        local err = LoadGame("C95BUILD.savegame.sav", {})
+        if err then say("LOADERR " .. tostring(err)); quit(); return end
+        Pause("C95Build")
+        say("LOAD OK autosave_suspended=" .. tostring(config.AutosaveSuspended))
+        local ok, result = pcall(C95Build.Census)
+        say("CENSUS ok=" .. tostring(ok) .. " result=" .. tostring(result))
+        if ok then
+            local done = false
+            CreateGameTimeThread(function()
+                local ran, why = sprocall(C95Build.RoundTrip)
+                say("ROUNDTRIP ok=" .. tostring(ran) .. " result=" .. tostring(why))
+                done = true
+            end)
+            Resume("C95Build")
+            SetGameSpeed(3)
+            local stop = RealTime() + 240000
+            while not done and RealTime() < stop do Sleep(500) end
+            if not done then say("TIMEOUT driver") end
+        end
+        say("DONE")
+        Sleep(1000)
+        quit()
+    end)
+end
+C95Build.Boot()

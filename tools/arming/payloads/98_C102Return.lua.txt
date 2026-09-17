@@ -1,0 +1,67 @@
+-- TEMPORARY C102 retail return fixture. Only setup mutation: switch nearest dome off.
+-- Native boarding/unloading, no home assignment, teleportation or network changes.
+C102Return = {}
+local function say(s)
+    ModLog("[C102RETURN] " .. tostring(s):gsub("%%", "%%%%"))
+    if FlushLogFile then FlushLogFile() end
+end
+function C102Return.Run()
+    local rocket=HandleToObject[1053]
+    local near=HandleToObject[1076]
+    local home=HandleToObject[2692]
+    say("BUILD "..tostring(BuildVersion).." habitat_distance="..HexAxialDistance(rocket,home).." habitat_full="..tostring(home:GetFreeSpace()==0))
+    for _,d in ipairs(rocket.city.labels.Dome) do
+        local walk,dist=IsInWalkingDist(d,rocket:GetPos(),rocket.city)
+        local a,b=GetTransportRoute(rocket,d,true,false)
+        say("LAYOUT dome="..d.handle.." walk="..tostring(walk).." dist="..tostring(dist).." rail="..tostring(not not(a and b)))
+    end
+    local unit=near.labels.Colonist[1]
+    if not IsValid(unit) or not IsValid(unit.residence) then say("SKIP no ordinary resident"); return end
+    rocket:ChangeRocketType(g_RocketTypes.Expedition)
+    rocket:LoadPassengers({unit})
+    local deadline=GameTime()+30000
+    while not unit.disappeared and GameTime()<deadline do Sleep(100) end
+    if not unit.disappeared then say("STOP boarding failed"); return end
+    near:SetUIWorking(false)
+    say("SETUP switched_off="..near.handle.." home="..tostring(unit.expedition_residence and unit.expedition_residence.handle))
+    local domes,safety,distances=GetDomesReachableByColonists(rocket.city,rocket:GetPos())
+    local safe_count=0
+    for _,d in ipairs(domes) do
+        say("CANDIDATE "..d.handle.." distance="..tostring(distances[d]).." working="..tostring(d.ui_working).." support="..tostring(d:HasLifeSupport()))
+        if IsKindOf(d,"Dome") and d.accept_colonists and d.ui_working and d:HasLifeSupport() then safe_count=safe_count+1 end
+    end
+    say("SELECTION safety="..tostring(safety and safety.handle).." safe_count="..safe_count.." selected="..tostring(unit:GetExpeditionReturnDome(domes) and unit:GetExpeditionReturnDome(domes).handle))
+    if safe_count==0 then say("SKIP positive C102: no reachable live alternative in fixture"); return end
+    local target=unit:GetExpeditionReturnDome(domes)
+    if target==near or not target then say("FAIL unsafe selection"); return end
+    CreateGameTimeThread(function() rocket:UnloadPassengers() end)
+    deadline=GameTime()+8*const.HourDuration
+    while GameTime()<deadline do
+        if unit.dome==target and unit.holder then
+            say("ARRIVED unit="..unit.handle.." dome="..target.handle.." holder="..unit.holder.class); return
+        end
+        if unit:IsDying() then say("FAIL dying"); return end
+        Sleep(1000)
+    end
+    say("TIMEOUT arrival")
+end
+function C102Return.Boot()
+    CreateRealTimeThread(function()
+        Sleep(1)
+        config.AutosaveSuspended = true
+        local deadline=RealTime()+180000
+        while not GetPreGameMainMenu() and RealTime()<deadline do Sleep(500) end
+        if not GetPreGameMainMenu() then say("TIMEOUT menu"); quit(); return end
+        local err=LoadGame("C95BUILD.savegame.sav", {})
+        if err then say("LOADERR "..tostring(err)); quit(); return end
+        local done=false
+        CreateGameTimeThread(function() local ok,why=sprocall(C102Return.Run); say("DONE ok="..tostring(ok).." why="..tostring(why)); done=true end)
+        SetGameSpeed(3)
+        deadline=RealTime()+240000
+        while not done and RealTime()<deadline do Sleep(500) end
+        if not done then say("TIMEOUT driver") end
+        Sleep(1000)
+        quit()
+    end)
+end
+C102Return.Boot()
