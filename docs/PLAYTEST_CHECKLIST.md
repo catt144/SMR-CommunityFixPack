@@ -111,13 +111,14 @@ When you next play a colony with a staffed Water Reclamation spire, one read set
 Home: `docs/agent/bugs/C105.md`
 
 ### ck200 · opened 2026-09-16
-When the C95 rebuild lands, run the sitting it writes here. The policy question is answerable now.
-- The UI-expedition and cold-removal gates wait for the rebuild (your 09-17 ruling); it rewrites this item.
+When you next play, run the C95 rebuild's two short legs; lines and witnesses are in the report's "Owner sitting".
+- UI expedition crewed from habitat 2096 on a copy of BUG.savegame.sav: watch its resident land back inside.
+- Pack disabled, full restart, load C95PLACEMID: watch the returnees finish home with no error.
 - Provision a distant inhabited habitat with rail to the pad. The current fixture has none; this needs provisioning.
 - Provision a live reachable dome beyond the nearest; switch the nearest off and watch a returnee reach the live dome.
 - Open: with no safe dome anywhere, does the game's own choice stand? Recommended: keep it.
 - The reporter's actual pack version is still unknown; ask it if you want their reported departure explained.
-Home: `docs/agent/prompts/C95_PLACE_HOME_BUILD.md`, `docs/agent/bugs/C95.md`, `docs/agent/bugs/C102.md`
+Home: `docs/agent/reports/C95_PLACE_HOME_BUILD.md`, `docs/agent/bugs/C95.md`, `docs/agent/bugs/C102.md`
 
 ### ck183b · opened 2026-09-17
 When you next boot with SMRTK, confirm 09's menu layout and the `MechanizedDepotFood` numbers print.

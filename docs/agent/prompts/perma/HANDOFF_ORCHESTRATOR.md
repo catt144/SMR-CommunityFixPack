@@ -23,8 +23,8 @@ NVIDIA 580, the temporary workaround mod) is not on this handoff: see
 
 The 2026-09-17 sitting on the reporter's own save stopped at gate 1: the draft's route gate left an
 expedition at 0/6. The owner ruled a rebuild (placement home, route gate retired), recorded in
-[C95](../../bugs/C95.md). The build is [C95_PLACE_HOME_BUILD.md](../C95_PLACE_HOME_BUILD.md), for
-Astra. After it lands, walk the owner through the sitting it writes into ck200, then raise in prose:
+[C95](../../bugs/C95.md). The build brief is consumed; its report is
+[C95_PLACE_HOME_BUILD.md](../../reports/C95_PLACE_HOME_BUILD.md). After it lands, walk the owner through the sitting it writes into ck200, then raise in prose:
 gates 3 and 4 (rail, live C102) need hours of provisioning; recommend, **not ruled**, waiving them and
 saying plainly in the release words that those paths were not watched. Then
 [release_prompt.md](release_prompt.md) from [RELEASE_OUTBOX.md](RELEASE_OUTBOX.md).
