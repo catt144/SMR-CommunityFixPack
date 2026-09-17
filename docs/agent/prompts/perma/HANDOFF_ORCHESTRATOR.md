@@ -67,36 +67,26 @@ rule. That line has not been run, although its route through the preset was read
 
 TestKit builds go to Astra unless the owner asks a Claude session directly.
 
-- **`Fill all storages` aborts on the first rocket.** Owner, 2026-09-16: note it, do not fix it now.
-  `fill_storages` (`Code/72_SMRTK_World.lua:311-316`) sweeps `MechanizedDepot` and `StorageDepot`, and
-  every rocket is a `StorageDepot` (`Lua/Buildings/StorageDepot.lua:329-330`). The rocket's `CheatFill`
-  throws at `Lua/UniversalRocket.lua:1621` when a cargo line has no demand request, and there is no
-  per-object `pcall`, so the remaining depots are never filled (measured live, `SMRTK_ERROR ...
-  action=fill_storages`). Fix: exclude rockets and wrap the per-object call. The vanilla `CheatFill`
-  throw is cheat-only, so it fails the reach test and has no entry.
-- **`Open all domes` only makes the glass transparent** (noted 2026-09-17, not fixed, no owner ruling).
-  The leaf (`Code/72_SMRTK_World.lua:383`) calls the Lua `OpenAllDomes()` (`Lua/Buildings/Dome.lua:4034`).
-  That is the view passage and demolish modes use, and the domes close again. The owner's test showed
-  exactly that. The game's own cheat of the same name (`Data/CheatDef.lua:1036-1052`) is what actually
-  opens the domes. Either call the cheat or rename the leaf; recorded also in [C103](../../bugs/C103.md).
-- **Unrun rows from TestKit `acafc74`.** Each needs a witness in play; any ordinary colony will do.
-  Arm `SMRTest.Log.DroneDrop` (C98) and play normally. Press the Selected-page **Quick build** leaf on a
-  construction site. Its design reasoning, including why it calls `site:Complete("quick_build")` and not
-  `CheatDeliverResources`, is in the leaf's comment block in `73_SMRTK_Infopanel.lua`. Arm
+- **Four World leaves await a witness in play** — built 2026-09-17 on owner rulings, kit `82d4577`,
+  reasoning in each leaf's comment block. `fill_storages` now excludes `UniversalRocketBase` and
+  `pcall`s each `CheatFill`; `open_domes` and `close_domes` inline the game's Terraforming cheat
+  bodies, so the law is enacted and the state is real (see [C103](../../bugs/C103.md), whose control
+  this unblocks). ⚠️ One thing to watch on the open leaf: `Dome:UpdateOpenCloseState` applies the
+  visual open only `if not GetOpenAirBuildings(self:GetMap())` (`Dome.lua:1770-1780`) — glass staying
+  shut while the law reads active is that gate, and is itself a finding.
+- **Unrun rows from TestKit `acafc74`.** Arm `SMRTest.Log.DroneDrop` (C98) and play normally. Arm
   `SMRTest.Log.CrewDraft` and deliberately under-supply an expedition (demand a specialisation nobody
-  has), then read the rocket's panel. The body and discriminators are in [EF-104](../../facts/EF-104.md).
-  The owner's 2026-09-15 deferral of the crew trace as an errand of its own still stands.
-- **Owner's third ask, 2026-09-16 — not started, not investigated** (*"Don't investigate it now just
-  add it as a note to do in the future"*). (1) A leaf that grants N tech points, built on the route
-  above: `AddResearchPoints` is bound on the player (`Lua/TechTree.lua:727-733`), and converts at the
-  current `TechPointCost` in a loop (`:692-706`), so the cost curve is honoured. The first point costs
-  1000 research, rising about 10% every 4 (`:684-690`). (2) A breakthroughs picker: no design work is
-  done or authorised; scope it with the owner first.
-- **Shared-kit improvements (item 83):** a `RunAll` owner filter and a `PACK_ID` on the enable-path leg.
+  has), then read the rocket's panel; body and discriminators in [EF-104](../../facts/EF-104.md). The
+  owner's 2026-09-15 deferral of the crew trace as an errand of its own still stands.
+- **Shared-kit improvements (item 83):** a `RunAll` owner filter — `SMRTest.RunAll(kind_filter)` has no
+  owner arm, and the cost is the data, not the filter: `owner` is set on 2 of 98 registrations, so
+  populating it comes first. The `PACK_ID` half is **done** (`98_EnablePathLeg.lua:54`); what is left
+  there is hoisting the literal `"SMR_CommunityFixPack"`, which 4 kit files still hardcode.
 - **Stale desk tools in this repo, found 2026-09-16:** `tools/l2_reload_sim.py` crashes on the deleted
   `Fix_LastTransmissionStorage.lua`, and `tools/l8_hostile_input.py` loads deleted modules. For the
   hostile-globals rows, use `tools/desk_ck53_hostile_globals.py` instead. `tools/l6_reachability.py`
-  needs `PYTHONIOENCODING=utf-8` on this console.
+  needs `PYTHONIOENCODING=utf-8` on this console. ⚠️ ck204's catalog ([tools/README.md](../../../../tools/README.md))
+  now lists all three among its 65 rows with no health column, so it presents them as available.
 
 ## 2 · What is open
 
