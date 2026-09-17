@@ -221,134 +221,37 @@ Single-pack gate reads predate the split and are never quoted as current.
 
 The tiers say what the owner reads afterwards; a status word still needs the attendance it names.
 
-## Release steps
+## Release
 
-- Owner tasks first: preview image (PDX ≤2 MB / Steam ≤1 MB), screenshots,
-  portal rules check for console publishing (`docs/archive/AUDIT_FINDINGS.md` plan 2.5).
-- metadata.lua: bump `version_major`/`version_minor`, refresh `last_changes`.
-  `short_description`, `optional_mod` are already in place (audit 2.1).
-  `lua_revision` stays 350453.
-  ⛔ **`ignore_files` is NOT already in place — owner ruling 2026-08-13
-  (checklist 23), do it in this pass, in ALL THREE mods.** The upload packs the
-  **entire mod folder recursively** and filters only on these patterns
-  (`ModTools\Src\CommonLua\Classes\GedModEditor.lua:678-741`), so everything
-  unlisted ships inside the player's download. Nothing *runs* (only `code`-listed
-  files execute), but `CLAUDE.md` is agent instructions and does not belong on a
-  player's disk. ⭐ 2026-09-10: `AGENTS.md` (the Codex mirror of `CLAUDE.md`)
-  joined the list — `*AGENTS.md` sits in `metadata.lua`'s `ignore_files`, in
-  `tools/pack_predict.py`'s literal `IGNORE` copy of that list, and in
-  `upload_preflight.py`'s check, all three together. doccheck's **PACK IGNORE
-  PARITY** gate fails when the predictor's copy and `metadata.lua` disagree, so
-  a pattern added in one place turns the gate RED rather than making the
-  predicted count lie. `upload_preflight.py`'s pack guards read the live list.
-  ⛔ **2026-09-16 — the packer walks through junctions and symlinks.** A junction
-  to the user's Claude projects folder sat in the mod folder outside every
-  pattern; ~1.2 GB of private session transcripts entered the pack list, and
-  the pack failed only on size — silently, since `DbgPackMod` ignores the error
-  and opens `explorer ""`. `upload_preflight.py` now FAILs on a link whose
-  contents would pack, on any packed file other than `Code/*.lua`,
-  `metadata.lua`, `items.lua`, `LICENSE` and the preview image, and on a pack
-  over 5 MB (falsified 2026-09-16 on scratch copies, one leg per guard).
-  **Never put a link inside the mod folder unless an ignore pattern covers it.**
-  ⭐ **Re-derived per mod 2026-08-13 (`public-docs/02_QA.md`) —
-  the three lists are NOT the same:**
-  | mod | add |
-  |---|---|
-  | fix pack | `tools/` · `CLAUDE.md` · `LICENSE` · `.gitattributes` |
-  | opt-in pack | the same four |
-  | **save rescue** | **`LICENSE` only** — it already ships a `*CLAUDE.md`
-    pattern the other two lack, and has no `tools/` and no `.gitattributes` |
-  ⭐ **Copy the rescue mod's `*CLAUDE.md` line into the other two** rather than
-  inventing a pattern. ✅ `.github/` is no longer a question — the fix pack has
-  none since the site moved out, and neither of the others ever had one.
-  ⚠️ **One wildcard question survives and one command settles it:** whether `*`
-  crosses `/` decides whether `*/docs/*` filters the whole `docs/` tree or only
-  its top level. The engine's own defaults (`*.git/*`, `*/Source/*` —
-  `Mod.lua:255`) only make sense if it does, but `MatchWildcard` is an engine
-  function with no Lua body. ⇒ **Pack once with `DbgPackMod`, list the archive,
-  confirm `docs/` is absent** — do it in this same pass.
-- MOD_DESCRIPTION.md: delete the `[DRAFT NOTE]` markers; do NOT promise the
-  ClassicRockets export half; sync the fix list with agent/bugs/ statuses.
-  ⭐ **Add the "judgment calls" section** (owner ADOPTED the relabel proposal
-  2026-08-04: F55, F40, F73(b), F70, F97 presented as design-judgment repairs,
-  not plain bugs) — ⚠️ **its wording is OWED BY THE OWNER** and must be asked
-  for if it does not exist yet; the checklist line tracks it.
-  **Recount the probe number** quoted in the "What we can promise, and what we
-  can't" block — it moves whenever a wave file gains or loses a probe, and a
-  stale number there is a false claim in player-facing text. Authoritative count
-  is in `agent/STATE.md`.
-- **Drone overhaul, if it has shipped by then:** its design-drift disclaimer is
-  MANDATORY (owner requirement — spec in `docs/archive/DRONE_RESEARCH_BRIEF.md`). Do not
-  publish the module without it.
-- Upload via the in-game Mod Editor (Paradox Mods / Steam Workshop). The
-  editor round-trip is SAFE since audit 2.2: items.lua carries one
-  `ModItemCode` per Code/ file in metadata order, so SaveDef regenerates the
-  same `code` list. If a Code/ file is ever added/removed/reordered, update
-  BOTH metadata.lua `code` AND items.lua in the same commit, same order.
-- The TestKit must NOT be uploaded.
-- Credit ChoGGi (Fix Bugs) + LukeH (Martian Express) as prior art — and the
-  prior-art survey (`docs/agent/reports/PRIOR_ART_SURVEY.md`) backs the save-safety claim in
-  player-facing text.
+`prompts/perma/release_prompt.md` owns the lifecycle; `support/RELEASE_SURFACES.md` and
+`support/POST_UPLOAD_CLOSE.md` are its procedures; the owner uploads through
+`docs/UPLOAD_WORKFLOW.md`. Standing facts with no other home:
 
-## Release marking — tags, not branches (adopted 2026-08-17)
+- The upload packs the whole mod folder, junctions and symlinks included, filtered only by
+  `metadata.lua` `ignore_files` (`GedModEditor.lua:678-741`). Never put a link inside the mod folder
+  unless a pattern covers it. `tools/upload_preflight.py` fails on a link whose contents would pack,
+  on any packed file outside `Code/*.lua`, `metadata.lua`, `items.lua`, `LICENSE` and the preview
+  image, and on a pack over 5 MB; doccheck's PACK IGNORE PARITY gate keeps `pack_predict.py`'s copy
+  of the list equal to `metadata.lua`'s.
+- `items.lua` carries one `ModItemCode` per `Code/` file in `metadata.lua` order, so the editor
+  round-trip regenerates the same code list; add, remove or reorder in both, same commit.
+- The TestKit is never uploaded.
+- Prior art: ChoGGi (Fix Bugs) and LukeH (Martian Express), `reports/PRIOR_ART_SURVEY.md`, which
+  also backs the save-safety claim in player-facing text.
 
-**What is live on the portal is a fixed point in history, so it is marked with a
-TAG.** `main` is *latest verified work*; the tag is *what shipped*. Main sitting
-ahead of the published version is the NORMAL state of a mod repo — the reference
-mod we surveyed publishes from tags and runs seven versions ahead on `main`.
+## Release marking (2026-08-17)
 
-⛔ **No standing `testing`/`published` branch, and the reasons are specific to
-this repo — re-read them before anyone proposes one again:**
-
-1. **The junction makes the checked-out tree the running mod.**
-   `%AppData%\Surviving Mars Relaunched\Mods\SMR-BugFixPack` is a directory
-   junction into the dev repo, so whatever is checked out is what the game
-   loads. Every gate reading this project treats as load-bearing (`75/75`, the
-   suite counts, the SKIP set BY NAME) would silently become "…on whichever
-   branch was last checked out."
-2. **The truth-bearing documents are rewritten in place, not appended.**
-   `STATE.md` has hard byte caps with an eviction rule; `bugs/INDEX.md` and
-   `facts/INDEX.md` are GENERATED. Parallel long-lived branches means every
-   merge conflicts on exactly those files, and a badly-resolved `INDEX.md`
-   merge is a red doccheck at best and a wrong index at worst.
-3. **Uploading is manual** (in-game Mod Editor / portal, no CI), so "main holds
-   unshipped code" only bites if you upload carelessly — and tagging at upload
-   removes that.
-
-**At upload, per mod:**
-
-```
-git tag -a fixpack-v<major>.<minor>.<version> -m "uploaded <portal> <date>"
-git push origin <tag>
-```
-
-- Tag names: `fixpack-`, `optin-`, `rescue-` + the version `PackVersion` reads,
-  which is `version_major.version_minor.version` from `metadata.lua`.
-- ⛔ **The tag and `metadata.lua` must agree.** A tag whose version does not
-  match the tree it points at is worse than no tag.
-- Record portal version → commit sha on the ④ sheet
-  (`agent/reports/RELEASE_PORTAL_PREP.md`) in the same pass.
-
-**To reproduce what a player is running** — never disturb `main`:
-
-```
-git worktree add ../SMR-FixPack-shipped fixpack-v1.0.0
-```
-…then point the junction at that worktree for the investigation and put it back
-afterwards. ⚠️ While it is pointed there, **the rig is running the shipped code,
-not `main`** — no suite reading taken in that window describes current work.
-
-**Hotfix path**, created the day it is needed and not before:
-
-```
-git checkout -b hotfix/fixpack-1.0.1 fixpack-v1.0.0
-```
-…fix, ship, tag, merge back to `main`.
-
-⚖️ **When a short-lived branch IS justified:** a single chain producing code
-nobody is sure about (a `FIX_POLICY` §1.5 full replacement is the standing
-example). Branch per chain, code only, merged within days — ⛔ **doc changes
-still go to `main` directly**, or reason 2 above bites.
+What is live on the portal is marked with an annotated tag per mod, `fixpack-`/`optin-`/`rescue-`
+plus `version_major.version_minor.version` from `metadata.lua`, pushed at upload; the tag and
+`metadata.lua` must agree, and the portal version is recorded against the sha in
+`reports/RELEASE_PORTAL_PREP.md`. `main` is latest verified work and normally runs ahead of what
+shipped. No standing `testing` or `published` branch: the junction makes the checked-out tree the
+running mod, and STATE and both generated indexes are rewritten in place, so long-lived branches
+conflict on exactly those files and silently change what the rig loads. To reproduce what a player
+runs, `git worktree add ../SMR-FixPack-shipped <tag>` and point the junction there for the
+investigation; while it is pointed there no suite reading describes current work. A hotfix branch
+is cut from the tag the day it is needed. A short-lived code-only branch per chain is justified for
+code nobody is sure about; doc changes still go to `main` directly.
 
 ## Authoring a prompt / job brief — required elements
 
