@@ -134,261 +134,92 @@ and report. Stale probes are how false facts got recorded.
 
 ## Testing checklist per fix
 
-**Leg-design rules (adopted 2026-08-04, from the first campaign sittings —
-relocated here from the standing prompt, which is instructions, not a
-logbook):**
-- **An "objective counter" is only objective if it can FAIL, and it needs a
-  liveness witness beside it.** PT-62's loop check counted a delivery the
-  flagged dome was *required* to receive, so it could not fail; F11's `nil`
-  reading only meant something because `#units` and `holder` were read in the
-  same breath, ruling out an empty list and a call that never fired.
-- ⛔ **A probe must reach the code the way PRODUCTION reaches it, and must not
-  compute its expectation with the fix's own logic** (adopted 2026-08-24,
-  f106-dispatch Pass E — two independent false-greens of the same family).
-  A probe that indexes the table the fix patched cannot fail on a broken
-  dispatch: the F33 probe called `GetClosestDests` straight off the patched
-  base-class table and printed PASS from 2026-07 through the day F106 named
-  the module a suspected no-op (TestKit `e896243`). A probe that derives its
-  expected number with the patched arithmetic passes over the defect by
-  construction (the C50 probe, TestKit `8feaf59`). So: dispatch through the
-  production route (an instance-shaped table carrying the built class as its
-  metatable resolves identically, with zero map footprint), and compute
-  expectations independently — vanilla's algorithm or hand-derived constants.
-  Corollary for guard probes: also assert the guard still DELEGATES
-  (`LandscapeCostGuard` clause 2 — the clause that found F107; clause 1 alone
-  passes for a wrapper that swallows every call). The F33 probe's repair is
-  what turned F106 from a standing derivation into a one-boot reversal: a
-  probe that can fail is the difference between a derivation and an answer.
-- **When a test's trigger is a selection you cannot steer, delete the lottery:**
-  invoke the shipped call site directly on a chosen target and settle the
-  selection half by reconstructing the pool and reading it (F11's
-  `SetCommand("EnterTransporter", …)` is verbatim the shipped caller's body —
-  an unrunnable rider became a five-minute answer costing zero expeditions).
-- ⛔ **A negative result must state the CONDITION it sampled, not just the
-  count** (adopted 2026-08-04, co-run #1 correction C10). "Absence under N
-  cycles is a rate bound" holds only if the condition the claim needs was
-  actually present in those N cycles; absence of a never-sampled condition is
-  not a negative result at all. The breach that earned this: a pre-registered
-  corner-slam prediction was recorded REFUTED, with a confident false reason,
-  when its y-axis condition had never been sampled — one 64 s re-run sampled
-  it and confirmed the prediction to the pixel. The rate-bound rule is about
-  counts; this one is about conditions; a verdict needs both.
-- **Gates on owner actions DETECT the condition; they never ask for a typed
-  token as the primary signal** (co-run #1, found by the owner). Run 1's brief
-  told the owner to type a gate the code did not contain — the run proceeded
-  without them and only the owner noticed. Run 2 polled until the condition
-  itself held (cursor actually reading out of range) and could neither be
-  mis-documented nor missed. Typed gates still work as a convenience
-  (`GATE 1 RELEASED by owner`); they are one more thing to keep in sync.
+Leg-design rules:
 
-1. Load a save (or new game) where the bug reproduces; confirm reproduction
-   with the mod disabled.
-2. Enable mod; confirm fixed behavior.
-3. Confirm no error spam in the log (`%AppData%\Surviving Mars Relaunched\logs`).
-4. Save with mod enabled → **disable the pack in the MOD MANAGER** → load: game
-   must not break (PT-20 shape; FIX_POLICY §3).
-   ⛔ **NOT a Mod Options toggle, ever.** A toggled-off module still has its
-   hooks installed and its env present, so a captured frame resolves
-   `SMRFixPack`, reads inactive and no-ops — **the load reads clean by
-   construction whether or not the module leaks.** `Opt_DroneOverhaul` leaked at
-   98 errors/session with its own toggle OFF; that is how F86 Site 2 was found.
-   A Mod-Manager disable takes effect only after a FULL PROCESS RESTART; without
-   one the pack is still loaded and the reading is a mixed state (PT-20 redo,
-   2026-08-14; D13's four-states rule). The earlier 98-vs-98 comparison was taken
-   without a restart and is superseded. `EF-002`.
-5. Set the entry's status in `agent/bugs/<ID>.md` — front matter AND heading
-   tag — per the checklist's reporting protocol. Not INDEX.md.
-   ⚖️ **Which word (owner ruling 2026-08-15, checklist 26b):**
-   * **`tested-attended`** — the owner was at the keyboard when it was
-     confirmed. The strongest word the project has; it is what a
-     troubleshooting session is entitled to lean on, because it carries both
-     agent instrumentation and human eyes.
-   * **`tested-unattended`** — confirmed by real launches with nobody watching.
-     Full weight for anything an instrument can read; ⛔ **never for a screen
-     event** — "the flag read false" is a measurement, "the popup visibly
-     paused" is not, and no unattended leg may claim the second.
-   * ⛔ **`tested` (bare) is LEGACY and closed to new work.** The 46 entries
-     holding it predate this rule and their attendance was never recorded —
-     17 carry the bare word with no narrative at all — so it means "attendance
-     unaudited", not "attended". Do not promote one without re-deriving it
-     from the archived record; do not read one as if it were attended.
+- An objective counter is only objective if it can fail, and it needs a liveness witness beside it.
+- A probe reaches the code the way production does and computes its expectation independently
+  (vanilla's algorithm or hand-derived constants), never with the fix's own logic. A guard probe
+  also asserts that the guard still delegates.
+- When the trigger is a selection you cannot steer, delete the lottery: invoke the shipped call site
+  directly on a chosen target and settle the selection half by reconstructing the pool.
+- A negative result states the condition it sampled, not just the count. Absence of a never-sampled
+  condition is not a negative result.
+- A gate on an owner action detects the condition; a typed token is a convenience, never the
+  primary signal.
 
-The TestKit's `SMRTest.RunAll()` A/B pair (baseline vs full pack) is the
-regression harness; run it as pre-flight when STATUS says one is owed.
+Steps:
 
-### ⛔ Log review: NEVER silently discount a line (owner rule, 2026-08-01)
+1. Load a save or new game where the bug reproduces; confirm reproduction with the pack disabled.
+2. Enable the pack; confirm the fix.
+3. Confirm no error spam in `%AppData%\Surviving Mars Relaunched\logs`.
+4. Save with the pack enabled, disable it in the Mod Manager, restart the process, load: the game
+   must not break (PT-20 shape; `FIX_POLICY.md` §3). A Mod-Manager disable takes effect only after
+   a full process restart; without one the pack is still loaded and the reading is a mixed state
+   (PT-20 redo, 2026-08-14; D13's four-states rule). Never a Mod Options toggle: a toggled-off
+   module keeps its hooks and reads clean by construction (`EF-002`).
+5. Set the entry's status, front matter and heading tag together. `tested-attended`: the owner was
+   at the keyboard. `tested-unattended`: real launches with nobody watching; full weight for what an
+   instrument can read, never for a screen event. Bare `tested` is legacy and closed to new work
+   (owner, 2026-08-15): it means attendance unaudited, so never promote one without re-deriving it
+   from the archived record and never read it as attended.
 
-**Two facts about how legs actually run, and they change what a log is** (full
-reasoning: `BUG_LIST_AUDIT.md` §10.6f(i); the same session provisioning is why
-our test colonies are heavily loaded before any agent starts):
+The TestKit's `SMRTest.RunAll()` A/B pair (pack disabled, then enabled) is the regression harness.
 
-- **The owner does not close or refresh a game session unless a leg calls for
-  it**, so a flushed log typically covers **1–6 hours of continuous play**.
-- **The owner reviews the errors WITH the agent** and pushes back when a line
-  does not fit the test. That has happened rarely — and **every time it has, it
-  turned up a VANILLA defect that was not on our list.** The practice has paid
-  for itself; it is not ceremony.
+### Log review (owner, 2026-08-01)
 
-**The rule, and it is the whole point:**
+A flushed log covers hours of continuous play, and the owner reviews the errors with the agent;
+every time they have pushed back it turned up a vanilla defect. "Not caused by our leg" is an
+attribution verdict, never a reason to stop looking: report every unexplained line with its age and
+let the owner decide, and stop and say so when something is out of the ordinary. Old logs hold
+evidence no leg was designed to collect; mining them for `[LUA ERROR]` is cheap.
 
-> **"Not caused by our leg" is an ATTRIBUTION verdict, never a reason to stop
-> looking.** Locating an error in time answers *"did we cause this?"* — it does
-> **not** answer *"what is it, then?"* Collapsing those two is how a discovery
-> gets thrown away.
+### Cheats on playtest saves (owner, 2026-08-12)
 
-**So: report every unexplained line, state its age, and let the owner decide.**
-Do not reason privately that a line is hours older than the leg and therefore
-irrelevant, and do not summarise it away as noise. If something is out of the
-ordinary, **stop and say so** before continuing the leg.
+Playtest colonies are oversized and under-industrialised, so `CheatFill` on food and maintenance is
+life support for the fixture and cheat markers are the normal condition.
 
-**Why this works, stated precisely.** The agent writes its predictions before
-the run (PT-58's P1–P7 shape) and so knows what it *should* see and why; the
-owner independently reviews everything the agent saw and does not know what to
-expect. **Anything outside the prediction is signal by construction** — and the
-one party able to recognise it is the one being asked not to file it away
-quietly. A log that only ever confirms the prediction has been read for the
-prediction, not read.
+- Count them, name them, attribute the reason, and ask for it once.
+- A cheat is a confound only where the reading intersects what it changed; name the intersection or
+  state there is none.
+- A leg that needs a no-cheat run declares it in its brief and preps a resource-rich save in
+  advance; it may not ask the owner to stop cheating on a colony that needs it.
+- Toolkit `[SMRTK] SMRTK_<Verb>` records are intentional test actions: never ask the owner about
+  one. A vanilla `ObjCheat`/`Cheat` marker in a new log is worth one attribution question. Taint
+  and eligibility are `EF-095`/`EF-096`; no-taint never proves eligibility.
 
-**Corollary worth acting on:** since the logs span hours of ordinary play, **old
-logs hold evidence no leg was designed to collect.** Mining them for `[LUA
-ERROR]` of any origin is cheap and has a track record.
+### Both mods loaded (owner, 2026-08-12)
 
-### ⛔ Cheats on playtest saves are the NORMAL condition, not a deviation (owner rule, 2026-08-12)
+The rig's baseline is the fix pack and the opt-in pack both enabled; a gate read shows two
+registries, in the player's enable order (`EF-054`).
 
-**Adopted mid-sitting during `corun-pt60`, in the owner's own words, after a leg
-flagged six `ObjCheat CheatFill` markers as if they needed defending:**
+- Every "the pack" claim names which pack. An opt-in line in a fix-pack log is expected background,
+  attributed, never flagged as foreign.
+- A loaded opt-in module is a confound only where the reading intersects what it changes; name the
+  intersection or state there is none.
+- A leg that needs the opt-in mod off declares it in its brief and budgets a full process restart for
+  the disable; the re-enable is handed back to the owner.
+- The standing configuration is the compatibility soak: cross-mod interference is a named class in
+  whole-log reviews, and a hit routes to both repos' records.
 
-> *"We really need a standing rule that these saves are play testing saves with
-> colonies that are over sized and underindustrialized. They cannot support
-> themselves so cheats are needed to keep the colonies alive and functional. So
-> filling food, and maintance materials are needed for the game to run without
-> all the colonists dieing or buildings breaking. And unless a chain truely
-> needs a no cheat setup we will continue to have to use it, and we will need to
-> prep a save with alot of reasouces if we need a no cheat run"*
+Single-pack gate reads predate the split and are never quoted as current.
 
-**What binds, for every future leg:**
+## Co-runs
 
-1. **The baseline expectation is that cheats WILL appear in a playtest log.**
-   Every save in the owner's folder is a heavily-loaded test colony built to
-   exercise defects, not a balanced economy — it cannot feed or maintain itself.
-   `CheatFill` on food and maintenance resources is **life support for the
-   fixture**, and without it the colony dies or its buildings break, which
-   destroys the very state the leg was provisioned to read.
-2. **Still count them, still name them, still put the reason in the log** —
-   the reporting duty is unchanged (`git`-archived logs are the record). What
-   changes is the FRAMING: a cheat marker is **attributed**, not excused, and
-   **⛔ ask for the reason ONCE.** (`corun-batch-2`'s own ledger records that
-   the cheat disclosure took three asks; that is the failure mode this rule
-   retires.)
-3. **⛔ A cheat is only a confound if the reading intersects what it changed,
-   and the agent must NAME the intersection or state there is none.** "Cheats
-   were used" is not by itself a caveat on a verdict — e.g. filled storages do
-   not touch track shells, dome-Saint modifiers, colony `label_modifiers` or a
-   field on `DroneControl`, so PT-60's P8/P9 readings were unaffected and said
-   so.
-4. **A leg that genuinely needs a no-cheat run must DECLARE it in its brief and
-   PREP a resource-rich save in advance.** It cannot be improvised on an
-   existing playtest save, and it may not be satisfied by asking the owner to
-   stop using cheats on a colony that needs them to survive. Provisioning that
-   save is prep-side work with a stated cost, like any other fixture.
+`support/CO_RUNS.md`, binding when a batch of bugs is tested attended.
 
-**Why this is a rule and not a note:** the owner has now justified the same
-practice across multiple sittings, and every re-ask spends the one resource the
-co-run model exists to protect. See also the standing fixture rule — playtest
-saves are PROVISIONED before an agent ever reads them, so their state is never
-"fresh".
+## Sign-off tiers (owner, 2026-08-04)
 
-**SMR Tool Kit attribution — 2026-09-14 (smrtk 07, as built).** Use the
-TestKit's Selected section and World controls in place of vanilla's cheat menu
-for playtesting. Selected exposes supported curated and More methods; it does
-not reproduce the entire vanilla menu. `[SMRTK] SMRTK_<Verb>` records are
-intentional test actions, attributed by construction: **never ask the owner
-about one**. Count and name them, and name any intersection with the mechanism
-being measured. A vanilla `ObjCheat`/`Cheat` marker in a **new** log is now the
-exception worth one attribution question; do not reopen old disclosures.
-The taint strip detects a tainted save (`EF-095`). Its separate eligibility
-field is `UNAVAILABLE:sandbox` on build 24995074 (`EF-096`); absence of taint
-never proves eligibility OK. Normal life-support provisioning remains allowed;
-a no-taint experiment must still declare and provision its clean fixture.
-The advanced pages are built, with their first attended checks assigned to 08.
+- Tier A, witness: the owner's eyes add information the log cannot carry; they attend the measure
+  moment.
+- Tier B, evidence card: log-demonstrable; the owner reads a one-screen card (scenario, forced or
+  organic, the raw before/after log lines, run conditions, the one-sentence falsifier) and OKs it.
+  Hands-only: the owner does the named act, then reads the card as Tier B.
+- Tier C, delegated: mechanically self-verifying (the probe-suite class); ships on the suite
+  verdict with a one-line digest per batch; the owner keeps the veto.
+- A demotion from a designed Tier A is stated on the card and applies to the next instance, never
+  silently.
 
-### ⛔ BOTH MODS LOADED is the rig's NORMAL condition (owner rule 2026-08-12 — ⚖️ ACTIVE since the `split-optins` terminal audit, same date)
-
-**The owner's words, given while the `split-optins` chain was authored:**
-*"Once we get it seperated I will keep the opt ins loaded in as they make
-testing easier. So the agents should be aware of that, and it shouldn't be an
-issue because we should be compatible as well."*
-
-**What binds, for every leg after the split chain closes:**
-
-1. **The baseline rig configuration is BOTH mods enabled** — the fix pack AND
-   the standalone opt-in mod. A gate read shows two registries. ⭐ **MEASURED
-   BASELINE (cell a2, 2026-08-12, audit-recounted from
-   `archive/spa2_Mars.exe-20260812-18.44.24.log`): `fix pack present: 74/74` ·
-   `opt-in pack present: 8/8` · suite ~~`78/0/10/0 of 88`~~ ⭐ **RE-MEASURED
-   2026-08-13 (`archive/rs_r0_*`): `78 PASS / 0 FAIL / 16 SKIP / 0 ERROR` of
-   94** — the six new SKIPs are the Save Rescue probes standing down (that
-   separate rescue mod is NOT a standing rig mod; with it loaded the same run
-   reads `84/0/10/0`, `rs_r1_*`), SKIPs BY NAME in `agent/STATE.md`; load order
-   `1:SMR_CommunityFixPackTestKit 2:SMR_CommunityFixPack
-   3:SMR_CommunityOptInPack` (enable order, `EF-054` — opt-in wrappers sit
-   OUTERMOST).** Every "the pack" claim names WHICH pack. An opt-in-mod line
-   in a fix-pack leg's log is expected background: attributed, never flagged
-   as foreign.
-   ⛔ **THAT SUITE BASELINE IS VOID as of 2026-09-09 (`100_DOCSWEEP`).** It was
-   measured on the 74-module pack against game 1.0.7; the pack is now 44
-   modules, the kit is a different 94-probe set rebuilt for 1.1.0 (32 of them
-   `retired`), and the game is 1.1.0. The new baseline is the next attended
-   `SMRTest.RunAll()` after the hotfix-2 upload, which re-stamps this line —
-   none is written here.
-2. **Same confound rule as cheats:** a loaded opt-in module is only a confound
-   where the reading intersects what it changes (D09 dials touch drone
-   speed/carry; NoHomeless/CohortHousing move colonists; MultipleSuns touches
-   build limits) — **name the intersection or state there is none.** "The
-   opt-in mod was loaded" is not by itself a caveat.
-3. **A leg that genuinely needs the opt-in mod OFF must DECLARE it in its
-   brief** — and budget the toggle honestly: a Mod-Manager disable takes
-   effect only after a FULL PROCESS RESTART (D13's four-states rule), and the
-   re-enable is handed back to the owner like any pack re-enable.
-4. **The standing configuration is also the compatibility soak.** The owner's
-   ordinary testing IS continuous both-mods exposure; any cross-mod
-   interference that survives the split chain's matrix will surface here
-   first — whole-log reviews watch for it as a named class, and a hit routes
-   to BOTH repos' records.
-
-⚖️ **ACTIVATED 2026-08-12 by the `split-optins` terminal audit** (the twin
-clause in the new repo's WORKFLOW was activated in the same close). Single-pack
-gate reads (`81/81`-era and earlier) are history — use their archived logs when
-needed, and never quote them as current.
-
-## Co-runs — moved 2026-09-12 (D5) to `agent/support/CO_RUNS.md`; still binding when a batch of bugs is being tested attended.
-
-## Sign-off tiers — standing policy for every leg (adopted 2026-08-04, owner; stayed here when Co-runs moved out)
-
-**Sign-off tiers: ✅ ADOPTED 2026-08-04 (owner, in their own hand on the
-checklist — `----Approved` on the tiers item; integrated by the unattended-1
-terminal audit).** Standing policy for every leg from here on:
-
-- **Tier A — WITNESS.** The owner's eyes genuinely add information the log
-  cannot carry; they attend the measure moment. Unchanged from before.
-- **Tier B — EVIDENCE CARD.** Log-demonstrable; the owner quick-reads a
-  one-screen card — scenario, forced-vs-organic, the raw before/after log
-  lines, run conditions, the one-sentence falsifier — and OKs it. Sub-class
-  **HANDS-ONLY**: a leg needing the owner's hands (a click, a cursor park)
-  but not their eyes — they do the named act, then read the card as Tier B.
-- **Tier C — DELEGATED.** Mechanically self-verifying (the probe-suite
-  class): ships on the suite verdict; the owner gets a one-line digest per
-  batch and keeps the veto.
-- **Visible demotion:** when a designed-A item's card turns out strictly
-  stronger than the eyes, the demotion is stated ON the card and applies to
-  the NEXT instance — never silently.
-
-⛔ **What adoption does NOT carry, in the item's own words:** *"`tested` still
-means a pass at the keyboard per WORKFLOW, and no already-granted status is
-reclassified."* Neither moves. ⚠️ The tiers are a *sign-off* axis, not this
-routing axis: the triage above says who is present during a leg; the tiers
-say what the owner reads afterwards. Owner-facing record of the decision:
-`PLAYTEST_CHECKLIST.md` "Decisions waiting on you", 2026-08-04.
+The tiers say what the owner reads afterwards; a status word still needs the attendance it names.
 
 ## Release steps
 
