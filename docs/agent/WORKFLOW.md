@@ -410,8 +410,10 @@ logbook):**
    `SMRFixPack`, reads inactive and no-ops — **the load reads clean by
    construction whether or not the module leaks.** `Opt_DroneOverhaul` leaked at
    98 errors/session with its own toggle OFF; that is how F86 Site 2 was found.
-   Mod-Manager-disable is measured equivalent to a real uninstall (PT-20: 98 vs
-   98 on the same save). `agent/facts/`, "OFF" IS THREE DIFFERENT THINGS.
+   A Mod-Manager disable takes effect only after a FULL PROCESS RESTART; without
+   one the pack is still loaded and the reading is a mixed state (PT-20 redo,
+   2026-08-14; D13's four-states rule). The earlier 98-vs-98 comparison was taken
+   without a restart and is superseded. `EF-002`.
 5. Set the entry's status in `agent/bugs/<ID>.md` — front matter AND heading
    tag — per the checklist's reporting protocol. Not INDEX.md.
    ⚖️ **Which word (owner ruling 2026-08-15, checklist 26b):**
@@ -674,25 +676,6 @@ say what the owner reads afterwards. Owner-facing record of the decision:
 - Credit ChoGGi (Fix Bugs) + LukeH (Martian Express) as prior art — and the
   prior-art survey (`docs/agent/reports/PRIOR_ART_SURVEY.md`) backs the save-safety claim in
   player-facing text.
-- **Save-exit gates (owner, 2026-07-31 — release blockers alongside the fpk
-  diff):**
-  1. the **uninstall procedure** is published in MOD_DESCRIPTION ("update,
-     load, save, then uninstall", backup-first) and is true (latched heal +
-     rains migration shipped and verified);
-  2. the **standalone save-rescue artifact** (`agent/bugs/` **D13**) is built and
-     tested, ready to publish (the only console-viable remedy). ⛔ Its spec is
-     GATED on Tier 1/2 landing and verifying — scoped against their measured
-     output, never today's leak set. ⚠️ **A second shipped artifact doubles
-     this checklist**: it needs its OWN metadata, preview image, description,
-     PDX portal pass and console cert, plus a version-skew statement (which
-     pack versions' residue it handles) and proof its own residue is zero —
-     budget the release window accordingly;
-  3. the **residual disclosure** (inert layer-2 residue; irreversible-history
-     class) appears wherever save-cleanliness is claimed;
-  4. after EVERY game update, alongside the fpk extraction diff, **re-run the
-     five-shape exposure enumeration** (class-method / table-slot / global
-     assignment / preset-field / own-thread) — a live game means persisted-body
-     version skew is a standing failure mode, not a launch-time one.
 
 ## Release marking — tags, not branches (adopted 2026-08-17)
 

@@ -14,7 +14,7 @@ The preamble that opened the old file is `_preamble.md`.
 | id | summary | verified | updated | lines | fact |
 |----|---------|----------|---------|-------|------|
 | EF-001 | Mod code loads BEFORE the classes are built. | 2026-07-28 | 2026-08-01 | 27 | [EF-001.md](EF-001.md) |
-| EF-002 | "OFF" IS THREE DIFFERENT THINGS, and only ONE of them touches the save | 2026-08-01 | 2026-08-02 | 56 | [EF-002.md](EF-002.md) |
+| EF-002 | "OFF" IS THREE DIFFERENT THINGS, and only ONE of them touches the save | 2026-08-01 | 2026-09-16 | 59 | [EF-002.md](EF-002.md) |
 | EF-003 | `g_Consts` is a **GameVar** (`Lua\Modifiers.lua:427`) and does not | — | 2026-09-08 | 9 | [EF-003.md](EF-003.md) |
 | EF-004 | `CurrentModOptions` is PER-MOD-ENV | 2026-07-29 | 2026-07-29 | 8 | [EF-004.md](EF-004.md) |
 | EF-005 | Engine Lua tolerates `#nil`/`next(nil)`/`ipairs(false)` (verified from working code | — | 2026-07-29 | 4 | [EF-005.md](EF-005.md) |

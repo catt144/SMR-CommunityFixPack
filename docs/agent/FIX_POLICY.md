@@ -705,9 +705,10 @@ module's own maps — byte-identical in all three.
   `Opt_DroneOverhaul` leaked into saves at 98 errors per session **with its own
   toggle OFF**, which is how F86 Site 2 was found. Never infer save-cleanliness
   from a toggle, in a claim or in a test — an uninstall question is only answered
-  by Mod-Manager-disable or removal (measured equivalent, PT-20: 98 vs 98 on the
-  same save). The three switches and what each one actually removes:
-  `agent/facts/`, "OFF" IS THREE DIFFERENT THINGS.
+  by removal, or by a Mod-Manager disable followed by a FULL PROCESS RESTART;
+  without the restart the pack is still loaded and the reading is a mixed state
+  (PT-20 redo, 2026-08-14, superseding the earlier 98-vs-98 comparison; D13's
+  four-states rule). The switches and what each one removes: `EF-002`.
 
 ## 6. Engine semantics that bind every fix
 
