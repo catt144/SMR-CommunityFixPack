@@ -128,6 +128,7 @@ GENERAL_USE_MAX_LINES = 220
 # from this list never licenses a Rule: line outside a Must_Read_Header.
 RULE_HEADER_DOCS = (
     "CLAUDE.md",
+    "docs/PLAYTEST_CHECKLIST.md",
     "docs/UPLOAD_WORKFLOW.md",
     "docs/agent/FIX_POLICY.md",
     "docs/agent/STATE.md",
@@ -478,8 +479,8 @@ def check_entry_mirror(out):
 # ---------------------------------------------------------------------------
 # docs/WAITING_ON_YOU.md — the generated owner register. RETIRED 2026-09-16:
 # the owner purged docs/PLAYTEST_CHECKLIST.md (zz-owner/CHECKLIST_PURGE_PROMPT.md)
-# and keeps the live list in zz-owner/playtest_checklist.md, a plain gitignored
-# file with no markers, so the register has no source any more. main() no
+# and rebuilt it the same night as a plain list with no markers (see
+# check_checklist), so the register has no source any more. main() no
 # longer calls check_waiting or check_marker_integrity, --regen no longer writes
 # the register and --regen-waiting is gone. The functions stay only because
 # ck170_selftest.py, repair_pass_selftest.py and counts_selftest.py exercise
@@ -1221,6 +1222,69 @@ def check_root(out):
         out.append("  RED  the README map declares docs/%s and it is not there" % name)
     out.append("ROOT: RED  %d undeclared, %d declared-but-absent"
                % (len(extra), len(missing)))
+    return False
+
+
+# Owner ruling 2026-09-16: the checklist was purged to the archive for becoming an
+# agent journal, then rebuilt as the owner's list only, with an entrance gate in
+# its Must_Read_Header. This check enforces the shape the gate can be measured by;
+# the owner deletes the file again if it becomes a journal.
+CHECKLIST_MAX_LINES = 600
+CHECKLIST_MAX_WIDTH = 120
+CHECKLIST_ITEM_MAX_LINES = 8
+CHECKLIST_SECTIONS = ("## Must_Read_Header", "## Decide", "## Run")
+
+
+def checklist_shape(lines):
+    """-> list of violations of the checklist's entrance-gate shape."""
+    bad = []
+    if len(lines) > CHECKLIST_MAX_LINES:
+        bad.append("%d lines, cap %d" % (len(lines), CHECKLIST_MAX_LINES))
+    in_rules = False
+    item, item_lines = None, 0
+    bullet_item = False
+    for n, line in enumerate(lines, 1):
+        if line == RULE_START:
+            in_rules = True
+            continue
+        if line == RULE_END:
+            in_rules = False
+            continue
+        if in_rules:
+            continue
+        if len(line) > CHECKLIST_MAX_WIDTH:
+            bad.append("line %d is %d characters, cap %d" % (n, len(line), CHECKLIST_MAX_WIDTH))
+        if "<!--" in line or "<details" in line.lower():
+            bad.append("line %d hides text in a comment or <details>" % n)
+        if line.startswith("## ") and line.rstrip() not in CHECKLIST_SECTIONS:
+            bad.append("line %d: section %r is not one of %s"
+                       % (n, line.rstrip(), ", ".join(CHECKLIST_SECTIONS)))
+        if line.startswith("#"):
+            item, item_lines = (n if line.startswith("### ") else None), 0
+            bullet_item = False
+        elif line.startswith("- ") and (item is None or bullet_item):
+            # A top-level bullet outside a ### item is an item of its own.
+            item, item_lines, bullet_item = n, 1, True
+        elif item and line.strip():
+            item_lines += 1
+            if item_lines == CHECKLIST_ITEM_MAX_LINES + 1:
+                bad.append("item at line %d runs past %d lines" % (item, CHECKLIST_ITEM_MAX_LINES))
+    return bad
+
+
+def check_checklist(out):
+    if not os.path.exists(CHECKLIST):
+        out.append("CHECKLIST: RED  docs/PLAYTEST_CHECKLIST.md is missing")
+        return False
+    lines = read(CHECKLIST)
+    bad = checklist_shape(lines)
+    if not bad:
+        out.append("CHECKLIST: PASS — %d lines, entrance-gate shape holds" % len(lines))
+        return True
+    for b in bad:
+        out.append("  RED  " + b)
+    out.append("CHECKLIST: RED  %d shape violation(s); the gate is the file's Must_Read_Header"
+               % len(bad))
     return False
 
 
@@ -2426,6 +2490,7 @@ def main():
         print("doccheck: RED — %s" % exc)
         return 1
     ok = check_root(out) and ok
+    ok = check_checklist(out) and ok
     ok = check_prompt_map(out) and ok
     ok = check_entry_mirror(out) and ok
     ok = check_rule_headers(out) and ok

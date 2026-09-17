@@ -26,7 +26,7 @@ Read each destination's actual passage, including subitems. Match the finding, n
 its topic or an "already filed" pointer. Search by meaning and identifier; check archive
 and ignored paths explicitly before concluding an expected record is missing.
 
-- Owner calls: `zz-owner/playtest_checklist.md` (local, gitignored). Add the question to the
+- Owner calls: `docs/PLAYTEST_CHECKLIST.md`, through its entrance gate. Add the question to the
   matching item, or create one; keep independently answerable parts, ruling conditions and
   pull-only scope. Evidence goes to a pull-only home first, linked from the item.
 - Defects/facts: the appropriate entry in `docs/agent/bugs/` or `facts/`.
