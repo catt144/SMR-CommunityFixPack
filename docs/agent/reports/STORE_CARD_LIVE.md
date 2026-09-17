@@ -135,7 +135,7 @@ back at Paradox. ⛔ Do not paste the same block on both.
 ```
 Bug fixes for Surviving Mars: Relaunched.
 
-Fifty-two repairs, each one written up on the fix list with what you would
+Fifty-three repairs, each one written up on the fix list with what you would
 have seen and what was actually wrong. Every one targets something the game's
 own code gets wrong — the code says one thing, does another, and the fix makes
 it do what it says. It fixes bugs; it does not rebalance the game. Preferences
@@ -158,32 +158,38 @@ the shipped numbers happen to hide, which another mod, a game patch or a DLC
 could walk straight into.
 
 
+FEATURED: EXPEDITION CREWS COME HOME
+
+Colonists living in habitats can join expeditions again, and they come back to
+the habitat they left. If their habitat is too far from the landing site to
+walk, they are set down at its door, the same way the rocket picked them up. If
+the habitat is gone or unusable, they go to the nearest dome that is working and
+has air.
+
+One gotcha. If every dome is switched off and only habitats are alive, and those
+habitats refuse the colonist through their filters, the colonist still walks to
+the nearest dome and dies there. That is the game's own safety system choosing
+where a homeless colonist goes, and this mod does not override it. Changing it
+would mean rewriting how the game houses colonists, which is not what a bug-fix
+mod should do.
+
+
 SOME OF WHAT IT FIXES
 
 · Colonists walked across the surface between domes and suffocated.
 · Rocket loads of new arrivals died on their way to a dome.
 · New arrivals moved into a dome that was switched off, quarantined or without air.
-· Beds stayed reserved for colonists who were never going to take them.
 · A bed that fell vacant sat empty while colonists were homeless.
 · Night-shift colonists never came back to work after midnight.
 · A building clogged by a dust storm never started again.
 · An Outside Ranch under Open Domes left food where drones could not reach it.
 · Building an artificial lake buried the rover that built it.
-· Drone Hubs paralysed themselves every time an Extender flickered.
 · Salvaging one piece of track deleted the whole line, and its trains with it.
 · Demolishing a station permanently deleted the trains parked there.
 · Meteor-damaged track could not be salvaged at all.
-· Two train buildings fought over the same connector hex forever.
-· A destroyed tunnel still worked as a shortcut.
 · Automatic rockets and landers took off with nothing aboard.
-· An Earth-sent Trade rocket, most often the Wildfire mystery's cure rocket, could get stuck on the landing pad forever.
 · A Jumbo Cave mystery could get stuck clearing waste rock and never complete.
 · The Philosopher's Stone mystery hung one step from the end.
-· The Gene Forging research did nothing at all.
-· The Domes Overview stopped marking domes in trouble.
-
-… and a good deal more, including quieter repairs to drones, shuttles, domes,
-rockets, research, storylines and the interface.
 
 The full list — every fix, what you would have seen, and what was actually
 wrong — is here:
@@ -205,13 +211,6 @@ quiet, check its skin before you blame the fix:
 
 Select the building and press Change Skin (the paintbrush on its panel) to
 switch. The screenshots on this page show which skin is which.
-
-
-STILL PLAYING ON GAME VERSION 1.0.7?
-
-This pack tracks the current version of the game. If you stayed on 1.0.7, there
-is a separate frozen build for it, with instructions:
-https://catt144.github.io/SMR-CommunityMods/legacy-1-0-7/
 
 
 HOW IT WORKS
@@ -270,6 +269,13 @@ https://github.com/catt144/SMR-CommunityFixPack
 
 Also on the Steam Workshop:
 https://steamcommunity.com/sharedfiles/filedetails/?id=3787202810
+
+
+STILL PLAYING ON GAME VERSION 1.0.7?
+
+This pack tracks the current version of the game. If you stayed on 1.0.7, there
+is a separate frozen build for it, with instructions:
+https://catt144.github.io/SMR-CommunityMods/legacy-1-0-7/
 ```
 
 ## ═══ STEAM WORKSHOP — BBCode; fall back to the plain block if tags render literally ═══
@@ -279,7 +285,7 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=3787202810
 ```
 Bug fixes for [i]Surviving Mars: Relaunched[/i].
 
-[b]Fifty-two repairs[/b], each one written up on the fix list with what you would have seen and what was actually wrong. Every one targets something the game's own code gets wrong — the code says one thing, does another, and the fix makes it do what it says. It fixes bugs; it does not rebalance the game. Preferences and features are deliberately not in it.
+[b]Fifty-three repairs[/b], each one written up on the fix list with what you would have seen and what was actually wrong. Every one targets something the game's own code gets wrong — the code says one thing, does another, and the fix makes it do what it says. It fixes bugs; it does not rebalance the game. Preferences and features are deliberately not in it.
 
 Some of them you could hardly miss: an entire train line and every train on it deleted by salvaging a single hex, colonists suffocating on a walk between two domes, an artificial lake burying the rover that was building it.
 
@@ -287,31 +293,28 @@ More of them you would never have blamed on a bug, because the game looked perfe
 
 And [b]two[/b] of them repair things you cannot see at all today: real defects that the shipped numbers happen to hide, which another mod, a game patch or a DLC could walk straight into.
 
+[h2]Featured: expedition crews come home[/h2]
+Colonists living in habitats can join expeditions again, and they come back to the habitat they left. If their habitat is too far from the landing site to walk, they are set down at its door, the same way the rocket picked them up. If the habitat is gone or unusable, they go to the nearest dome that is working and has air.
+
+[b]One gotcha.[/b] If every dome is switched off and only habitats are alive, and those habitats refuse the colonist through their filters, the colonist still walks to the nearest dome and dies there. That is the game's own safety system choosing where a homeless colonist goes, and this mod does not override it. Changing it would mean rewriting how the game houses colonists, which is not what a bug-fix mod should do.
+
 [h2]Some of what it fixes[/h2]
 [list]
 [*]Colonists walked across the surface between domes and suffocated.
 [*]Rocket loads of new arrivals died on their way to a dome.
 [*]New arrivals moved into a dome that was switched off, quarantined or without air.
-[*]Beds stayed reserved for colonists who were never going to take them.
 [*]A bed that fell vacant sat empty while colonists were homeless.
 [*]Night-shift colonists never came back to work after midnight.
 [*]A building clogged by a dust storm never started again.
 [*]An Outside Ranch under Open Domes left food where drones could not reach it.
 [*]Building an artificial lake buried the rover that built it.
-[*]Drone Hubs paralysed themselves every time an Extender flickered.
 [*]Salvaging one piece of track deleted the whole line, and its trains with it.
 [*]Demolishing a station permanently deleted the trains parked there.
 [*]Meteor-damaged track could not be salvaged at all.
-[*]Two train buildings fought over the same connector hex forever.
-[*]A destroyed tunnel still worked as a shortcut.
 [*]Automatic rockets and landers took off with nothing aboard.
-[*]An Earth-sent Trade rocket, most often the Wildfire mystery's cure rocket, could get stuck on the landing pad forever.
 [*]A Jumbo Cave mystery could get stuck clearing waste rock and never complete.
 [*]The Philosopher's Stone mystery hung one step from the end.
-[*]The Gene Forging research did nothing at all.
-[*]The Domes Overview stopped marking domes in trouble.
 [/list]
-… and a good deal more, including quieter repairs to drones, shuttles, domes, rockets, research, storylines and the interface.
 
 [b]The full list[/b] — every fix, what you would have seen, and what was actually wrong:
 [url=https://catt144.github.io/SMR-CommunityMods/fix-list/]the complete fix list[/url]
@@ -325,9 +328,6 @@ Two of them also have a skin that is [b]silent by design[/b], so if one of these
 [*][b]MOXIE[/b] — the double-pump skin thumps and puffs; the blocky one is silent.
 [/list]
 Select the building and press [b]Change Skin[/b] (the paintbrush on its panel) to switch. The screenshots on this page show which skin is which.
-
-[h2]Still playing on game version 1.0.7?[/h2]
-This pack tracks the current version of the game. If you stayed on 1.0.7, there is a separate frozen build for it, with instructions: [url=https://catt144.github.io/SMR-CommunityMods/legacy-1-0-7/]Playing on 1.0.7[/url]
 
 [h2]How it works[/h2]
 [list]
@@ -354,6 +354,9 @@ The id is the key, not a list entry — a plain list looks valid and switches of
 
 [b]Source, and the reasoning behind every fix:[/b] [url=https://github.com/catt144/SMR-CommunityFixPack]github.com/catt144/SMR-CommunityFixPack[/url]
 [url=https://mods.paradoxplaza.com/mods/156049/Any]Also on Paradox Mods[/url]
+
+[h2]Still playing on game version 1.0.7?[/h2]
+This pack tracks the current version of the game. If you stayed on 1.0.7, there is a separate frozen build for it, with instructions: [url=https://catt144.github.io/SMR-CommunityMods/legacy-1-0-7/]Playing on 1.0.7[/url]
 ```
 
 ## ⭐ 2026-08-24 — one headliner added, and why it qualifies
@@ -625,6 +628,55 @@ fix list, as C89 did.
 `??? question` marker (`^??? .*judgment call\*"$` = **5**), and `content/index.md`, which still
 said **three** after v10 and now says five. The card's judgment-call sentence states no number.
 
+## ⭐ 2026-09-17 — v12 words (`release_prompt.md` §1): count 52 → 53, headliners 21 → 14, a FEATURED section
+
+**Count: Fifty-two → Fifty-three.** C102 (a returning crew whose home is gone) lands as a new row,
+and C95's existing row turns from a judgment call into a plain repair; nothing retires. Derived
+from `SMR-CommunityMods` `content/fix-list.md`: `^??? ` rows = **53**, section tally
+2+16+4+6+9+6+6+2+2 = 53.
+
+**⚖️ Headliners 21 → 14 — the owner's task, decided 2026-09-17**, not a count that drifted. Seven
+bullets cut, each with its reason recorded in `RELEASE_OUTBOX.md`: the stale-reservation premise
+narrowed on 1.1.0 by the module's own header; "paralysed" outran the Drone Hub symptom; the
+destroyed tunnel needed a reload and nobody noticed it; Gene Forging was provable only by console
+read; the connector-hex line was already covered by the two salvage lines; the Domes Overview tint
+carries a known PT-09 regression; and the Trade rocket line the owner judged long and only alright.
+⛔ The surviving 14 were verified true the same day — each has a module in `Code/` registered in
+`metadata.lua`'s code list, none rests on a retired, parked or opt-in fix. Do not re-QA or reword
+them.
+
+**⚖️ A FEATURED section for C95**, above the headline list, from the owner's approved draft. The
+gotcha paragraph ships as written: with every dome switched off and only filter-refusing habitats
+alive, the colonist still walks to the nearest dome and dies there, and the card names that as the
+game's own safety system rather than a gap in the pack. Owner: *"Explain that its a safety system
+that we cannot over ride (I know we likely could but thats a massive rewrite and I am not)."*
+[C106](../bugs/C106.md) is the filed, unfixed arrival-side sibling and is deliberately not on the card.
+
+**⚖️ Two more cuts, same ruling.** The *"… and a good deal more"* tail sentence is GONE — the
+heading already says "some", and the full list is linked. The 1.0.7 section MOVED to the very
+bottom, after FOR MODDERS.
+
+**Judgment calls five → four** as C95 leaves the class: `content/faq.md` (three places, including
+the "in four of them the game's code is not wrong at all" sub-count, now **three** of four), the
+fix-list `??? question` marker (`^??? .*judgment call` = **4**), and `content/index.md`. The card's
+judgment-call sentence still states no number, which is why the store has never drifted on it.
+
+**Length 6,376 → 6,551 chars** (+175; 6,431 → 6,597 UTF-8 bytes) — a small increment over a body
+that demonstrably went through the upload path at v11, which is the only length data point worth
+anything here. ⚠️ `tools/upload_preflight.py` prints **6,689 chars** for the same string and is not
+contradicting this: its parser unescapes `\"` and `\\` but leaves each `\n` as two characters, so
+it reads the literal, not the body. 6,695 escaped − 6 quote escapes = 6,689. Compare like with
+like before quoting either number.
+
+⚠️ **Drift found, not introduced, 2026-09-17.** This file's PARADOX plain block is not byte-equal to
+`docs/UPLOAD_WORKFLOW.md`'s. It keeps an older, Paradox-specific FOUND A BUG section ("This page has
+no comment section…") and a trailing Steam Workshop link, while the workflow copy and the shipped
+`metadata.lua` string are portal-neutral and agree byte for byte. v12's edits were applied to each
+block in place, so the divergence is exactly what it was and no wording was silently overwritten.
+The two BBCode blocks are byte-identical. ⚖️ Unresolved: it needs an owner ruling on which body this
+file is meant to record — the portal-neutral string that actually ships, or a Paradox-specific
+rendering of it.
+
 ## Provenance of the headliners
 
 ⛔ **Not invented for the card.** Every bullet is a compressed form of an entry
@@ -635,5 +687,6 @@ newest — the SpaceY description and the three untranslated strings — are the
 
 ⚠️ **Selection bias is deliberate and worth naming:** these are the loudest
 consequences (crashes, freezes, deaths, permanent losses), not a representative
-sample. The *"and a good deal more"* line exists so the card does not imply the
-list is exhaustive, and the link is what makes the claim checkable.
+sample. The *"and a good deal more"* line used to carry that caveat; v12 cut it on
+the owner's ruling, so the heading word *"some"* and the fix-list link are now the
+only things keeping the card from implying the list is exhaustive.

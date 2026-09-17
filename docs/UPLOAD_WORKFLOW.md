@@ -90,7 +90,7 @@ The public-surface sweep maintains the backup copy below alongside its two canon
 ```
 Bug fixes for Surviving Mars: Relaunched.
 
-Fifty-two repairs, each one written up on the fix list with what you would
+Fifty-three repairs, each one written up on the fix list with what you would
 have seen and what was actually wrong. Every one targets something the game's
 own code gets wrong — the code says one thing, does another, and the fix makes
 it do what it says. It fixes bugs; it does not rebalance the game. Preferences
@@ -113,32 +113,38 @@ the shipped numbers happen to hide, which another mod, a game patch or a DLC
 could walk straight into.
 
 
+FEATURED: EXPEDITION CREWS COME HOME
+
+Colonists living in habitats can join expeditions again, and they come back to
+the habitat they left. If their habitat is too far from the landing site to
+walk, they are set down at its door, the same way the rocket picked them up. If
+the habitat is gone or unusable, they go to the nearest dome that is working and
+has air.
+
+One gotcha. If every dome is switched off and only habitats are alive, and those
+habitats refuse the colonist through their filters, the colonist still walks to
+the nearest dome and dies there. That is the game's own safety system choosing
+where a homeless colonist goes, and this mod does not override it. Changing it
+would mean rewriting how the game houses colonists, which is not what a bug-fix
+mod should do.
+
+
 SOME OF WHAT IT FIXES
 
 · Colonists walked across the surface between domes and suffocated.
 · Rocket loads of new arrivals died on their way to a dome.
 · New arrivals moved into a dome that was switched off, quarantined or without air.
-· Beds stayed reserved for colonists who were never going to take them.
 · A bed that fell vacant sat empty while colonists were homeless.
 · Night-shift colonists never came back to work after midnight.
 · A building clogged by a dust storm never started again.
 · An Outside Ranch under Open Domes left food where drones could not reach it.
 · Building an artificial lake buried the rover that built it.
-· Drone Hubs paralysed themselves every time an Extender flickered.
 · Salvaging one piece of track deleted the whole line, and its trains with it.
 · Demolishing a station permanently deleted the trains parked there.
 · Meteor-damaged track could not be salvaged at all.
-· Two train buildings fought over the same connector hex forever.
-· A destroyed tunnel still worked as a shortcut.
 · Automatic rockets and landers took off with nothing aboard.
-· An Earth-sent Trade rocket, most often the Wildfire mystery's cure rocket, could get stuck on the landing pad forever.
 · A Jumbo Cave mystery could get stuck clearing waste rock and never complete.
 · The Philosopher's Stone mystery hung one step from the end.
-· The Gene Forging research did nothing at all.
-· The Domes Overview stopped marking domes in trouble.
-
-… and a good deal more, including quieter repairs to drones, shuttles, domes,
-rockets, research, storylines and the interface.
 
 The full list — every fix, what you would have seen, and what was actually
 wrong — is here:
@@ -160,13 +166,6 @@ quiet, check its skin before you blame the fix:
 
 Select the building and press Change Skin (the paintbrush on its panel) to
 switch. The screenshots on this page show which skin is which.
-
-
-STILL PLAYING ON GAME VERSION 1.0.7?
-
-This pack tracks the current version of the game. If you stayed on 1.0.7, there
-is a separate frozen build for it, with instructions:
-https://catt144.github.io/SMR-CommunityMods/legacy-1-0-7/
 
 
 HOW IT WORKS
@@ -221,6 +220,13 @@ nothing. "Before the pack loads" means your mod has to load first.
 
 Source, and the reasoning behind every fix:
 https://github.com/catt144/SMR-CommunityFixPack
+
+
+STILL PLAYING ON GAME VERSION 1.0.7?
+
+This pack tracks the current version of the game. If you stayed on 1.0.7, there
+is a separate frozen build for it, with instructions:
+https://catt144.github.io/SMR-CommunityMods/legacy-1-0-7/
 ```
 
 #### 📋 Steam Workshop — description (BBCode, paste as-is)
@@ -228,7 +234,7 @@ https://github.com/catt144/SMR-CommunityFixPack
 ```
 Bug fixes for [i]Surviving Mars: Relaunched[/i].
 
-[b]Fifty-two repairs[/b], each one written up on the fix list with what you would have seen and what was actually wrong. Every one targets something the game's own code gets wrong — the code says one thing, does another, and the fix makes it do what it says. It fixes bugs; it does not rebalance the game. Preferences and features are deliberately not in it.
+[b]Fifty-three repairs[/b], each one written up on the fix list with what you would have seen and what was actually wrong. Every one targets something the game's own code gets wrong — the code says one thing, does another, and the fix makes it do what it says. It fixes bugs; it does not rebalance the game. Preferences and features are deliberately not in it.
 
 Some of them you could hardly miss: an entire train line and every train on it deleted by salvaging a single hex, colonists suffocating on a walk between two domes, an artificial lake burying the rover that was building it.
 
@@ -236,31 +242,28 @@ More of them you would never have blamed on a bug, because the game looked perfe
 
 And [b]two[/b] of them repair things you cannot see at all today: real defects that the shipped numbers happen to hide, which another mod, a game patch or a DLC could walk straight into.
 
+[h2]Featured: expedition crews come home[/h2]
+Colonists living in habitats can join expeditions again, and they come back to the habitat they left. If their habitat is too far from the landing site to walk, they are set down at its door, the same way the rocket picked them up. If the habitat is gone or unusable, they go to the nearest dome that is working and has air.
+
+[b]One gotcha.[/b] If every dome is switched off and only habitats are alive, and those habitats refuse the colonist through their filters, the colonist still walks to the nearest dome and dies there. That is the game's own safety system choosing where a homeless colonist goes, and this mod does not override it. Changing it would mean rewriting how the game houses colonists, which is not what a bug-fix mod should do.
+
 [h2]Some of what it fixes[/h2]
 [list]
 [*]Colonists walked across the surface between domes and suffocated.
 [*]Rocket loads of new arrivals died on their way to a dome.
 [*]New arrivals moved into a dome that was switched off, quarantined or without air.
-[*]Beds stayed reserved for colonists who were never going to take them.
 [*]A bed that fell vacant sat empty while colonists were homeless.
 [*]Night-shift colonists never came back to work after midnight.
 [*]A building clogged by a dust storm never started again.
 [*]An Outside Ranch under Open Domes left food where drones could not reach it.
 [*]Building an artificial lake buried the rover that built it.
-[*]Drone Hubs paralysed themselves every time an Extender flickered.
 [*]Salvaging one piece of track deleted the whole line, and its trains with it.
 [*]Demolishing a station permanently deleted the trains parked there.
 [*]Meteor-damaged track could not be salvaged at all.
-[*]Two train buildings fought over the same connector hex forever.
-[*]A destroyed tunnel still worked as a shortcut.
 [*]Automatic rockets and landers took off with nothing aboard.
-[*]An Earth-sent Trade rocket, most often the Wildfire mystery's cure rocket, could get stuck on the landing pad forever.
 [*]A Jumbo Cave mystery could get stuck clearing waste rock and never complete.
 [*]The Philosopher's Stone mystery hung one step from the end.
-[*]The Gene Forging research did nothing at all.
-[*]The Domes Overview stopped marking domes in trouble.
 [/list]
-… and a good deal more, including quieter repairs to drones, shuttles, domes, rockets, research, storylines and the interface.
 
 [b]The full list[/b] — every fix, what you would have seen, and what was actually wrong:
 [url=https://catt144.github.io/SMR-CommunityMods/fix-list/]the complete fix list[/url]
@@ -274,9 +277,6 @@ Two of them also have a skin that is [b]silent by design[/b], so if one of these
 [*][b]MOXIE[/b] — the double-pump skin thumps and puffs; the blocky one is silent.
 [/list]
 Select the building and press [b]Change Skin[/b] (the paintbrush on its panel) to switch. The screenshots on this page show which skin is which.
-
-[h2]Still playing on game version 1.0.7?[/h2]
-This pack tracks the current version of the game. If you stayed on 1.0.7, there is a separate frozen build for it, with instructions: [url=https://catt144.github.io/SMR-CommunityMods/legacy-1-0-7/]Playing on 1.0.7[/url]
 
 [h2]How it works[/h2]
 [list]
@@ -303,6 +303,9 @@ The id is the key, not a list entry — a plain list looks valid and switches of
 
 [b]Source, and the reasoning behind every fix:[/b] [url=https://github.com/catt144/SMR-CommunityFixPack]github.com/catt144/SMR-CommunityFixPack[/url]
 [url=https://mods.paradoxplaza.com/mods/156049/Any]Also on Paradox Mods[/url]
+
+[h2]Still playing on game version 1.0.7?[/h2]
+This pack tracks the current version of the game. If you stayed on 1.0.7, there is a separate frozen build for it, with instructions: [url=https://catt144.github.io/SMR-CommunityMods/legacy-1-0-7/]Playing on 1.0.7[/url]
 ```
 
 #### 📋 Change note (both stores — Paradox CHANGELOG / Steam Change Notes)
@@ -311,15 +314,13 @@ Usually auto-fills. If it is missing under **CHANGELOG** (Paradox) or **Change
 Notes** (Steam), paste this:
 
 ```
-Three new fixes, all watched working in a running colony on 1.1.0:
+One repair reworked, one added.
 
--Outside Ranch under Open Domes — NEW. Once the law passed, an Outside Ranch left three of its nine stockpiles where drones could not reach them, so part of its output was never collected. The ranch now keeps the model with all nine stockpile spots, so it keeps its closed look under Open Domes; nothing else about the law changes. A ranch already affected in your save recovers its stranded piles when you load it.
+-Habitat residents on expeditions — CHANGED, and watched working in a running colony on 1.1.0. The last version kept habitat residents out of the automatic expedition crew; that restriction is gone. They can be picked like anyone else, and they come back to their own habitat. If the habitat is too far from the landing site to walk, they are set down at its door, the same way the rocket picked them up. If that home can no longer be used, they go to the nearest dome that is working and has air. A crew that comes home by train has not been watched.
 
--RC Seeker on expeditions — NEW. An expedition asking for an RC Commander refused an RC Seeker, although the Seeker is a Commander model, and the same went for every rover model built on another one. A rover model now fills a request for the rover it is built on (one way only), and the cargo panel shows the rover actually loaded.
+-A returning crew whose home is gone — NEW. If their home was demolished or switched off while they were away, the game could walk them into a dome that was switched off, quarantined or without air. It now picks the nearest dome that is working and has air, even if every home in it is taken; if nothing safe can be reached, the game decides as it always did. This one has not been watched in a running colony yet — it reuses the same working-dome test as the fix for new arrivals off a rocket.
 
--Habitat residents on expeditions — NEW, and a judgment call. The automatic expedition crew draft took Naturalist and Micro-G habitat residents, and they came back to a dome instead of home. The draft now leaves them at home; you can still send them yourself. Residents already away come back the old way.
-
-The fix list goes from forty-nine to fifty-two.
+The fix list goes from fifty-two to fifty-three.
 ```
 
 #### 📋 Short summary (only if it also came out blank)

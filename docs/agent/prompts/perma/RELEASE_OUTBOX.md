@@ -35,7 +35,12 @@ return and a positive live C102 reroute — *"waive it, its working and much bet
 builds"* — so the public words must say plainly that neither was watched in play. Evidence and
 scope: `docs/agent/reports/C95_PLACE_HOME_BUILD.md`, entries C95 and C102.
 
-### ⚖️ Owner's store-card task for this release (2026-09-17, decided — not yet executed)
+### ⚖️ Owner's store-card task for this release (2026-09-17, decided — EXECUTED)
+
+⭐ **Executed 2026-09-17**, in the v12 prepare commit: all four card copies, the shipped
+`description` and `last_changes`, and the site (fix list 52 → 53, judgment calls 5 → 4). The ruling
+below is kept verbatim as decided — it is what §5 appends to `RELEASE_HISTORY.md` after the upload,
+and it is no longer work to be done.
 
 Every change below lands in **all four copies together**, which a 2026-09-17 check found byte-identical:
 `docs/UPLOAD_WORKFLOW.md` plain (`:116-141`) and BBCode (`:239-263`),
