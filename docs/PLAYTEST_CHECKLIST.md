@@ -14,6 +14,16 @@ the sweep in `docs/agent/prompts/perma/STATE_EVICTION.md` clears what ages out. 
 
 ## Decide
 
+### ck201 · opened 2026-09-17
+Political Animal can't be earned on 1.1.0 (C104): build a fix, send the devs a report, or neither?
+- For everyone: Night Shift Compensations and Right to Rest each block the other, and both count.
+  Norman owners also have Secondary Produce vs GMO. A Politician can never enact Efficient Assembly.
+- All three are new in 1.1.0. The devs edited this very achievement check in the same patch.
+- Cheapest fix: stop counting one law of each pair, plus Efficient Assembly. Which half is your call.
+- On PlayStation, Xbox and the Microsoft Store any mod blocks achievements, so a fix only helps Steam.
+- Your C92 ruling (build and test, shipping held) was for C92. Say whether it covers this too.
+Home: `docs/agent/bugs/C104.md`
+
 ### ck199 · opened 2026-09-16
 Which of these WORKFLOW rules retire, each lapsed on the evidence but with no word of yours retiring it?
 - Tag every upload per mod (Release marking, 08-17): the only tags are `fixpack-v1.0.0` and
@@ -91,6 +101,15 @@ Do you spend a profiling sitting on FR-3 (frame skip and stutter)?
 Home: `docs/archive/PLAYTEST_ARCHIVE.md`
 
 ## Run
+
+### ck202 · opened 2026-09-17
+When you next play a colony with a staffed Water Reclamation spire, one read settles C105.
+- The code says the upgrade keeps the saving, but at 50%; a well-staffed spire can reach 70%.
+- On any colony with a staffed spire, SMRTK-dump the spire and its dome, build the upgrade (granting
+  `JumboCaveUpgrades` is fine), and dump both again.
+- Not a bug if the spire then reads performance 100 and the dome's reclamation modifier reads -50.
+- Invalid if another staffed spire shares the dome, or if the spire was already at 100 or less.
+Home: `docs/agent/bugs/C105.md`
 
 ### ck200 · opened 2026-09-16
 When the next session opens, run the UI-expedition and cold-removal gates first (09-17).
