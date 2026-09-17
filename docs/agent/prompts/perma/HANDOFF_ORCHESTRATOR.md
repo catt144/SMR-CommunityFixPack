@@ -19,17 +19,18 @@ NVIDIA 580, the temporary workaround mod) is not on this handoff: see
 
 ## 0 · Start here
 
-### The v12 release is in flight
+### The v12 release is closed
 
-2026-09-17: C95 is `tested-attended` and C102's live reroute and the train return are waived by the
-owner, so the release words were prepared and the owner went to the Mod Editor. Where it stands and
-what is owed is `docs/agent/STATE.md` plus the Pending entry in [RELEASE_OUTBOX.md](RELEASE_OUTBOX.md);
-read those rather than a retelling here, and do not republish another session's sequence.
-[release_prompt.md](release_prompt.md) owns the rest, §4 onward.
+2026-09-17: v12 is live on both stores and closed out. The writeback is kept (`version` 16,
+`pdx_version` "11"), the stripped comments are restored in `metadata.lua` and `items.lua`, Pending is
+empty and `Last released` reads v12. ✅ The trap-3 writeback hold that stood here earlier is
+**discharged** — both files are committed and restored; nothing is held back.
+[release_prompt.md](release_prompt.md) owns a release end to end and has nothing owed from it here.
 
-⛔ **`metadata.lua` and `items.lua` are comment-stripped on disk right now** (`grep -c '^\s*--'`
-gives 0 on both) and `version` reads 16 against 14 at `HEAD`: the Mod Editor writeback of trap 3.
-Nothing may commit either file until `agent/support/POST_UPLOAD_CLOSE.md` has restored them.
+⛔ **The site is NOT published**, which is the one thing v12 still needs. The newest
+`publish-site.yml` run is #11 (2026-09-16, `74a336e`, v11's fix list), so the live store card reads
+"Fifty-three repairs" while the deployed fix list still shows 52 rows and still marks the habitat row
+a judgment call. Publishing is the owner's act, not an agent's: `docs/UPLOAD_WORKFLOW.md` §4.
 
 The owner reads nothing back from the log: they paste a line and say "flushed", and you read
 `%APPDATA%\Surviving Mars Relaunched\logs\Mars.exe-*.log` (newest) yourself. Saves are reachable at
