@@ -25,14 +25,13 @@ Which of these WORKFLOW rules retire, each lapsed on the evidence but with no wo
 Home: `docs/agent/WORKFLOW.md`
 
 ### ck200 · opened 2026-09-16
-The C95 reporter's whole colony lives in habitats: what should an expedition do when nobody else can go?
-- Their words (in C95): 0 colonists outside habitats, a crew of 7 went anyway, and on return they
-  walked to a closed dome and suffocated. On v11 that crew cannot be drafted, so our fix was not
-  running for them; their pack version settles why, if you want it asked.
-- Once v11 runs for them no expedition can ever crew. Your stall ruling rested on domes of
-  hundreds; this colony has none. Keep it, or fall back to residents when nobody else qualifies?
-- The suffocation is C102: the return path uses the dead-dome fallback we repaired for arrivals only.
-Home: `docs/agent/bugs/C95.md`, `docs/agent/bugs/C102.md`
+Qualify C95's return-home design to replace v11's exclusion? What should happen when home is unavailable?
+- Small-wrapper retail A/B: original resident returned home; control assigned a dome. Unshipped, no full rewrite.
+- Controlled boarding/unloading only. Mission, rail, all-habitat and mid-return removal gates remain; sitting in report.
+- Home destroyed, closed or unreachable: wait aboard, safe shelter, or require a return route before departure?
+- The reporter still cannot crew under v11. Their reported departure implies it was inactive; pack version unknown.
+- Ask their version if you want that settled. C102 remains open for other returnees and unavailable homes.
+Home: `docs/agent/reports/C95_RETURN_HOME_EXPLORATION.md`, `docs/agent/bugs/C95.md`, `docs/agent/bugs/C102.md`
 
 ### ck188a · opened 2026-09-17
 Who reported Wildfire, and do you take the five-minute live look or drop it?
