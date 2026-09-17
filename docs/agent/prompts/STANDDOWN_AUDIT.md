@@ -34,8 +34,8 @@ Binding, and these are house process rather than limits on thinking:
   pathspec.
 - ⛔ **Negative-evidence discipline** (`EF-088`): a "not found" needs its presence
   control counted through the same instrument.
-- ⛔ **Marker obligation** if you move a checklist item's status; a checklist-only
-  edit regenerates with `--regen-waiting`, not `--regen`.
+- A checklist item is deleted in the commit that records the owner's action on it (its
+  header rule); a checklist-only edit needs no `--regen`.
 
 ## 1 · Orient
 

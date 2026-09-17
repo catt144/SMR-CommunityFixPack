@@ -25,7 +25,7 @@ work that continues exactly as before**. The pack exists because players tell us
 pull-only is the **messaging** — writing and chasing the reply. ⛔ Never use this rule to justify
 not filing, not reading, or not investigating a report.
 
-⚖️ **The condition it was ruled under** (authoring rule 5a — record the state, re-read it before
+⚖️ **The condition it was ruled under** (WORKFLOW, Records and rulings — record the state, re-read it before
 treating it as binding): the owner had **fielded a load of reply questions in a single day** while
 the project's actual gate was an unrun playtest. The cost being cut is **owner attention diverted
 from fixing bugs**, not the replies themselves.
