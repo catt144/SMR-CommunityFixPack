@@ -31,6 +31,7 @@ Qualify C95's return-home design to replace v11's exclusion? What should happen 
 - Home destroyed, closed or unreachable: wait aboard, safe shelter, or require a return route before departure?
 - The reporter still cannot crew under v11. Their reported departure implies it was inactive; pack version unknown.
 - Ask their version if you want that settled. C102 remains open for other returnees and unavailable homes.
+- Until then v11 leaves an all-habitat colony unable to crew: leave it, or draft residents when nobody else can go?
 Home: `docs/agent/reports/C95_RETURN_HOME_EXPLORATION.md`, `docs/agent/bugs/C95.md`, `docs/agent/bugs/C102.md`
 
 ### ck188a · opened 2026-09-17
