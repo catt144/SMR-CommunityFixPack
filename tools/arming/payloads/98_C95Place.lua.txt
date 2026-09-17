@@ -1,0 +1,237 @@
+-- TEMPORARY C95 place-home rebuild driver, game 1.1.0.403908.
+-- Input: our C95PLACE copy of the reporter's BUG save. Output: our C95PLACEMID slot only.
+-- Real GatherAvailableColonists, native LoadPassengers/UnloadPassengers receivers and the
+-- native return body. Earth arrivals land through the same receiver's GenerateArrivals.
+-- A receiver test, not a flown mission. No housing, filter or position is edited here.
+-- Observer: an outermost, synchronous, log-only Colonist.SetCommand wrapper that records
+-- whether each walk order moved its colonist. Monitoring and saving run in real time.
+C95Place = {}
+local function say(s)
+    ModLog("[C95PLACE] " .. tostring(s):gsub("%%", "%%%%"))
+    if FlushLogFile then FlushLogFile() end
+end
+local function h(o) return o and o.handle end
+local function wait_until(test, ms)
+    local limit = RealTime() + ms
+    while not test() and RealTime() < limit do Sleep(50) end
+    return test()
+end
+local crew_role, arrival_set = {}, {}
+local function pack(...) return { n = select("#", ...), ... } end
+local function state(u, label)
+    local home = u.residence or u.reserved_residence
+    say(label .. " unit=" .. tostring(h(u)) .. " role=" .. tostring(crew_role[u] or (arrival_set[u] and "arrival") or "other")
+        .. " command=" .. tostring(u.command) .. " residence=" .. tostring(h(u.residence))
+        .. " reserved=" .. tostring(h(u.reserved_residence)) .. " holder=" .. tostring(h(u.holder))
+        .. " dome=" .. tostring(h(u.dome)) .. " workplace=" .. tostring(u.workplace and u.workplace.class)
+        .. " exp_home=" .. tostring(h(u.expedition_residence)) .. " arriving=" .. tostring(not not u.arriving))
+end
+local seen = 0
+local function observer(inner)
+    return function(self, command, dest, ...)
+        seen = seen + 1
+        if seen <= 5 then say("SEEN " .. tostring(command) .. " unit=" .. tostring(h(self))) end
+        if command ~= "TransportByFoot" then return inner(self, command, dest, ...) end
+        local before = self:IsValidPos() and self:GetPos()
+        local r = pack(inner(self, command, dest, ...))
+        local after = self:IsValidPos() and self:GetPos()
+        local ok, moved = pcall(function() return before:Dist2D(after) end)
+        moved = ok and moved or ("unmeasured same=" .. tostring(before == after))
+        say("WALKORDER unit=" .. tostring(h(self)) .. " role=" .. tostring(crew_role[self] or (arrival_set[self] and "arrival") or "other")
+            .. " dest=" .. tostring(h(dest)) .. " dest_class=" .. tostring(dest and dest.class)
+            .. " arriving=" .. tostring(not not self.arriving) .. " moved=" .. tostring(moved))
+        return table.unpack(r, 1, r.n)
+    end
+end
+function C95Place.Observe()
+    -- built classes carry flattened copies; the global classdef is not what instances read
+    local registry = rawget(_G, "g_Classes") or empty_table
+    local names = { "Colonist" }
+    local lister = rawget(_G, "ClassDescendantsList")
+    for _, name in ipairs(lister and lister("Colonist") or empty_table) do names[#names + 1] = name end
+    local count = 0
+    for _, name in ipairs(names) do
+        local cls = registry[name]
+        if type(cls) == "table" and type(rawget(cls, "SetCommand")) == "function" then
+            cls.SetCommand = observer(cls.SetCommand)
+            count = count + 1
+        end
+    end
+    say("OBSERVER classes=" .. count .. " global_is_built=" .. tostring(registry.Colonist == Colonist))
+end
+function C95Place.Run()
+    local err = LoadGame("C95PLACE.savegame.sav", {})
+    if err then say("LOADERR " .. tostring(err)); return end
+    Pause("C95Place")
+    local rocket = HandleToObject[1061]
+    say("BUILD " .. tostring(BuildVersion) .. " lua=" .. tostring(LuaRevision)
+        .. " return=" .. tostring(SMRFixPack.IsActive("HabitatExpeditionReturn"))
+        .. " draft=" .. tostring(SMRFixPack.IsActive("HabitatExpeditionDraft"))
+        .. " arrivals=" .. tostring(SMRFixPack.IsActive("ArrivalDeaths"))
+        .. " rocket=" .. tostring(rocket and rocket.class) .. " command=" .. tostring(rocket and rocket.command)
+        .. " type=" .. tostring(rocket and rocket.RocketType) .. " pos=" .. tostring(rocket and rocket:IsValidPos()))
+    if not (IsKindOf(rocket, "UniversalRocketBase") and rocket:IsValidPos()) then say("SKIP no landed universal rocket 1061"); return end
+    local city = rocket.city
+    local far, near = {}, {}
+    local habitats = {}
+    for _, c in ipairs(city.labels.Community or empty_table) do
+        if IsKindOf(c, "MicroGHabitatBase") then habitats[#habitats + 1] = c end
+    end
+    say("HABITATS " .. #habitats)
+    for _, hab in ipairs(habitats) do
+        local walk, walk_dist, too_far = IsInWalkingDist(hab, rocket:GetPos(), city)
+        say("WALKDIST " .. hab.handle .. " walk=" .. tostring(walk) .. " dist=" .. tostring(walk_dist) .. " straight_line_over_cap=" .. tostring(too_far))
+        say("HABITAT " .. hab.handle .. " class=" .. hab.class .. " walk=" .. tostring(walk)
+            .. " hexes=" .. HexAxialDistance(rocket, hab) .. " residents=" .. #hab.colonists
+            .. " free=" .. hab:GetFreeSpace() .. " working=" .. tostring(hab.ui_working)
+            .. " accept=" .. tostring(hab.accept_colonists) .. " life=" .. tostring(hab:HasLifeSupport())
+            .. " resfilter=" .. tostring(hab.filter_residents))
+        for _, c in ipairs(hab.colonists) do
+            say("RESIDENT " .. c.handle .. " home=" .. hab.handle .. " spec=" .. tostring(c.specialist)
+                .. " command=" .. tostring(c.command) .. " suitable=" .. tostring(hab:IsSuitable(c))
+                .. " trait_filter=" .. tostring(TraitFilterColonist(hab.traits_filter, c.traits)))
+            if walk then near[c] = hab else far[c] = hab end
+        end
+    end
+    local domes = GetDomesReachableByColonists(city, rocket:GetPos())
+    for _, d in ipairs(domes) do say("REACHABLE " .. d.handle .. " class=" .. d.class) end
+    rocket:ChangeRocketType(g_RocketTypes.Expedition)
+    local pool = GetCityLabelWithConnected(city, "Colonist")
+    local crew, has_far, has_near
+    for n = #pool, 1, -1 do
+        local list = rocket:GatherAvailableColonists(n)
+        if list then
+            has_far, has_near = false, false
+            for _, u in ipairs(list) do
+                has_far = has_far or far[u] ~= nil
+                has_near = has_near or near[u] ~= nil
+            end
+            if has_far and has_near or has_far and not crew then crew = list end
+            if has_far and has_near then break end
+        end
+    end
+    for _, u in ipairs(pool) do say("POOL " .. u.handle .. " command=" .. tostring(u.command) .. " home=" .. tostring(h(u.residence)) .. " far=" .. tostring(far[u] ~= nil) .. " near=" .. tostring(near[u] ~= nil)) end
+    if not crew then say("SKIP real draft never took a far-habitat resident pool=" .. #pool); return end
+    -- far residents unload first, in-range residents last, so one is still walking at the save
+    local ordered = {}
+    C95Place.tracked = ordered
+    for _, u in ipairs(crew) do if far[u] then ordered[#ordered + 1] = u; crew_role[u] = "far" end end
+    for _, u in ipairs(crew) do if not far[u] and not near[u] then ordered[#ordered + 1] = u; crew_role[u] = "crew" end end
+    for _, u in ipairs(crew) do if near[u] then ordered[#ordered + 1] = u; crew_role[u] = "near" end end
+    say("DRAFT size=" .. #ordered .. " pool=" .. #pool .. " far=" .. tostring(has_far) .. " near=" .. tostring(has_near))
+    for _, u in ipairs(ordered) do state(u, "DRAFTED") end
+    C95Place.Observe()
+    local boarded = false
+    CreateGameTimeThread(function() rocket:LoadPassengers(ordered); boarded = true end)
+    Resume("C95Place"); SetGameSpeed(3)
+    if not wait_until(function()
+        if not boarded then return false end
+        for _, u in ipairs(ordered) do if not u.disappeared then return false end end
+        return true
+    end, 60000) then say("STOP boarding timeout"); return end
+    Pause("C95Place")
+    for _, u in ipairs(ordered) do state(u, "BOARDED") end
+    local apps = {}
+    for i = 1, 3 do apps[i] = GenerateColonistData(city) end
+    rocket.cargo = rocket.cargo or {}
+    rocket.cargo.Passengers = { class = "Passengers", amount = #apps, applicants_data = apps }
+    local unloaded = false
+    C95Place.polling = true
+    CreateRealTimeThread(function()
+        local last = {}
+        while C95Place.polling do
+            for _, a in ipairs(rocket.disembarking or empty_table) do
+                if not arrival_set[a] then arrival_set[a] = true; C95Place.tracked[#C95Place.tracked + 1] = a end
+            end
+            for _, u in ipairs(C95Place.tracked) do
+                local key = tostring(u.command) .. "/" .. tostring(h(u.holder))
+                if IsValid(u) and last[u] ~= key then
+                    last[u] = key
+                    local home = far[u] or near[u] or u.emigration_dome
+                    local rkt = HandleToObject[1061]
+                    say("TRACK unit=" .. u.handle .. " role=" .. tostring(crew_role[u] or (arrival_set[u] and "arrival"))
+                        .. " command=" .. tostring(u.command) .. " holder=" .. tostring(h(u.holder)) .. " dest=" .. tostring(h(home))
+                        .. " dest_class=" .. tostring(home and home.class) .. " valid=" .. tostring(u:IsValidPos())
+                        .. " to_rocket=" .. tostring(u:IsValidPos() and rkt and HexAxialDistance(u, rkt))
+                        .. " to_dest=" .. tostring(u:IsValidPos() and home and HexAxialDistance(u, home)) .. " t=" .. GameTime())
+                end
+            end
+            Sleep(20)
+        end
+    end)
+    CreateGameTimeThread(function() rocket:UnloadPassengers(); unloaded = true end)
+    Resume("C95Place"); SetGameSpeed(1)
+    local walker
+    if not wait_until(function()
+        if not unloaded then return false end
+        for _, u in ipairs(ordered) do
+            if near[u] and u.command == "TransportByFoot" and not u.holder then walker = u; return true end
+        end
+        return false
+    end, 120000) then
+        say("SKIP no in-range walker at unload end; no mid-return save")
+    end
+    say("OBSERVED calls=" .. seen)
+    Pause("C95Place")
+    for _, u in ipairs(ordered) do state(u, "UNLOADED") end
+    for _, a in ipairs(rocket.disembarking or empty_table) do arrival_set[a] = true; state(a, "ARRIVAL") end
+    local handles, arrivals = {}, {}
+    for _, u in ipairs(ordered) do handles[#handles + 1] = { u.handle, crew_role[u], far[u] or near[u] } end
+    for a in pairs(arrival_set) do arrivals[#arrivals + 1] = a.handle end
+    if walker then
+        local saveerr, name = SaveGame("C95PLACEMID.savegame.sav", { savename = "C95PLACEMID.savegame.sav", silent = true, no_screenshot = true })
+        say("SAVE err=" .. tostring(saveerr) .. " name=" .. tostring(name) .. " walker=" .. walker.handle)
+        if saveerr then return end
+        Resume("C95Place")
+        err = LoadGame("C95PLACEMID.savegame.sav", {})
+        say("RELOAD err=" .. tostring(err))
+        if err then return end
+        Pause("C95Place")
+    end
+    crew_role, arrival_set = {}, {}
+    local units = {}
+    for _, e in ipairs(handles) do
+        local u = HandleToObject[e[1]]
+        if u then crew_role[u] = e[2]; units[#units + 1] = { u, e[3] and HandleToObject[e[3].handle] } end
+    end
+    for _, ah in ipairs(arrivals) do local a = HandleToObject[ah]; if a then arrival_set[a] = true end end
+    for _, e in ipairs(units) do state(e[1], "RELOADED") end
+    local tracked = {}
+    for _, e in ipairs(units) do tracked[#tracked + 1] = e[1]; far[e[1]] = e[2] end
+    for a in pairs(arrival_set) do tracked[#tracked + 1] = a end
+    C95Place.tracked = tracked
+    Resume("C95Place"); SetGameSpeed(3)
+    local home_ok = wait_until(function()
+        for _, e in ipairs(units) do
+            local u, home = e[1], e[2]
+            if home and crew_role[u] ~= "crew" and not (u.holder == home and u.residence == home) then return false end
+        end
+        return true
+    end, 180000)
+    say("HOMECOMING all_far_and_near_home=" .. tostring(home_ok))
+    Sleep(20000)
+    Pause("C95Place")
+    for _, e in ipairs(units) do
+        local u, home = e[1], e[2]
+        state(u, "FINAL")
+        say("FINALHOME unit=" .. u.handle .. " role=" .. tostring(crew_role[u]) .. " home=" .. tostring(h(home))
+            .. " in_home=" .. tostring(home and u.holder == home) .. " resident=" .. tostring(home and u.residence == home))
+    end
+    for a in pairs(arrival_set) do state(a, "FINAL") end
+    C95Place.polling = false
+    say("PACK return=" .. tostring(SMRFixPack and SMRFixPack.IsActive("HabitatExpeditionReturn")))
+end
+function C95Place.Boot()
+    CreateRealTimeThread(function()
+        Sleep(1)
+        config.AutosaveSuspended = true
+        if not wait_until(function() return GetPreGameMainMenu() end, 180000) then say("TIMEOUT menu"); quit(); return end
+        Sleep(1000)
+        local ok, err = sprocall(C95Place.Run)
+        say("DONE ok=" .. tostring(ok) .. " err=" .. tostring(err))
+        Resume("C95Place")
+        Sleep(2000)
+        quit()
+    end)
+end
+C95Place.Boot()

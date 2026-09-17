@@ -1,0 +1,37 @@
+{
+  "leg": "c95-place",
+  "_what": "C95 place-home rebuild: real draft, native receivers, Earth arrivals in the same unload, mid-return save/reload. Reads only C95PLACE (a copy of BUG) and writes only C95PLACEMID.",
+  "kit": "C:\\Dev\\SMR-BugFixPack-TestKit",
+  "park": "C:\\Dev\\SMR-BugFixPack\\tools\\arming\\payloads",
+  "stripPattern": "Code/9[78]_C95",
+  "anchorAfter": "99_FixtureCarry.lua",
+  "bootSymbol": "C95Place.Boot",
+  "symbolNamespace": "C95Place",
+  "permanent": [
+    "Code/99_FixtureCarry.lua"
+  ],
+  "mustNotBeListed": [
+    "Code/96_AutoRunFlag.lua",
+    "Code/97_ForceInactive.lua",
+    "Code/97_C95Home.lua"
+  ],
+  "mustNotBeListedWhy": "No home prototype, competing autorun or forced inactive modules.",
+  "bannedPatterns": [
+    "SetResidence\\s*\\(",
+    "SetPos\\s*\\(",
+    "filter_residents\\s*=",
+    "traits_filter\\s*="
+  ],
+  "requiredPresent": [
+    "C95PLACE.savegame.sav",
+    "C95PLACEMID.savegame.sav",
+    "config.AutosaveSuspended = true"
+  ],
+  "payloads": [
+    {
+      "src": "98_C95Place.lua.txt",
+      "dst": "98_C95Place.lua",
+      "selfDrives": true
+    }
+  ]
+}

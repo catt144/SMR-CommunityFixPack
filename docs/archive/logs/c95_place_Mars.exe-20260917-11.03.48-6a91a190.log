@@ -1,0 +1,591 @@
+					Render 0:00:00:007
+*** executable info
+					Render 0:00:00:008
+Timestamp:     	6a91a190
+Date:          	Fri Aug 28 10:56:16 2026
+Command line:  	
+Compiler:      	195136247, 142 (VS 2019) or newer
+
+
+*** hardware info
+CPU name      	Intel(R) Core(TM) i7-14700K
+CPU MHz       	3418
+CPU cores     	20/28
+Phys. Memory   	65278 MBytes
+Memory In Use  	56%
+Disk Free      	806116 MBytes
+
+
+*** OS info
+OS:            	Windows 11
+Version:       	10.0.26100 
+
+
+*** Debug::Init()
+
+
+					Render 0:00:00:107
+Steam initialized (AppId 3215050)
+					Render 0:00:00:110
+Drive type for game installation: SSD, savegames: SSD
+					Render 0:00:00:111
+Language: English
+					Render 0:00:01:533
+*** graphics info
+GPU                            	NVIDIA GeForce RTX 4080 Feature Level: 12.1 {  DoublePrecisionFloatShaderOps: 1 OutputMergerLogicOp: 1 MinPrecisionSupport: 2 TiledResourcesTier: 4 ResourceBindingTier: 3 PSSpecifiedStencilRefSupported: 0 TypedUAVLoadAdditionalFormats: 1 ROVsSupported: 1 ConservativeRasterizationTier: 3 MaxGPUVirtualAddressBitsPerResource: 40 StandardSwizzle64KBSupported: 0 CrossNodeSharingTier: 0 CrossAdapterRowMajorTextureSupported: 0 VPAndRTArrayIndexFromAnyShaderFeedingRasterizerSupportedWithoutGSEmulation: 1 ResourceHeapTier: 2 NotZeroedPools: 1 UMA: 0 UnalignedBlockTextures: 1}
+API                            	d3d12
+GPU Driver Version             	32.0.16.1074
+GPU Driver Package Version     	610.74
+GPU Dedicated Video Memory     	16048 MB
+					Render 0:00:01:682
+
+Libs: Network, Sequences, MouseTrackWin, DumbAI, MapGen, Paradox, TriggersAndEvents, Notifications, Research, Resources, Tutorial, Objectives 
+
+					Render 0:00:01:917
+
+Platform: desktop, editor, goldmaster, paradox, pc, steam
+
+					Render 0:00:02:878
+*** audio info
+Audio Endpoint                 	Speakers (Razer Leviathan V2)
+						Lua 0:00:02:879
+Lua revision: 403908
+Assets revision: 33006
+Steam AppID: 3215050
+Build version: 1.1.0.403908
+Build branch:  Release
+						Lua 0:00:16:381
+Account storage loaded successfully in 1 ms
+						Lua 0:00:16:383
+DLC norman loaded, lua revision 403908, assets revision 33006
+DLC thomas loaded, lua revision 403908, assets revision 33006
+						Lua 0:00:16:387
+[mod] Loaded mod def Community Fix Pack — Test Kit (id SMR_CommunityFixPackTestKit, v0.00-001) unpacked from appdata
+[mod] Loaded mod def Relaunched Fix Pack (id SMR_CommunityFixPack, v1.00-014) unpacked from appdata
+[mod] Loaded mod def Relaunched Fix Pack: Opt-In Modules (id SMR_CommunityOptInPack, v1.00-000) unpacked from appdata
+[mod] Loaded mod def TEMPORARY - Linux NVIDIA 580 Crash Workaround (id SMR_FR1TempWorkaround, v0.00-003) unpacked from appdata
+						Lua 0:00:16:769
+[mod] [CommunityOptInPack] ClassicRockets: applied
+[mod] [CommunityOptInPack] AcknowledgedWarnings: applied
+[mod] [CommunityOptInPack] ResidencyControl: inactive (opt-in module, off by default — enable it in Options → Mod Options)
+[mod] [CommunityOptInPack] MultipleSuns: applied
+[mod] [CommunityOptInPack] DroneOverhaul: applied
+						Lua 0:00:16:770
+[mod] [CommunityOptInPack] CohortHousing: inactive (opt-in module, off by default — enable it in Options → Mod Options)
+[mod] [CommunityOptInPack] NoHomeless: inactive (opt-in module, off by default — enable it in Options → Mod Options)
+[mod] [CommunityOptInPack] DroneStatDials: applied
+[mod] [CommunityFixPack] NightShiftWork: applied
+						Lua 0:00:16:771
+[mod] [CommunityFixPack] WispRewards: applied
+[mod] [CommunityFixPack] TrainsToVoid: applied
+[mod] [CommunityFixPack] LanderEmptyLaunch: applied
+[mod] [CommunityFixPack] ShelterReflex: applied
+[mod] [CommunityFixPack] BrokenTrackSalvage: applied
+[mod] [CommunityFixPack] TrackSalvageWipe: applied
+[mod] [CommunityFixPack] LakeEntombment: applied
+[mod] [CommunityFixPack] RocketDroneChurn: applied
+						Lua 0:00:16:772
+[mod] [CommunityFixPack] TradeRocketFuelRefresh: applied
+[mod] [CommunityFixPack] ShuttleTransportCache: applied
+[mod] [CommunityFixPack] VacuumWalks: applied
+[mod] [CommunityFixPack] ArrivalDeaths: applied
+[mod] [CommunityFixPack] StaleReservations: applied
+[mod] [CommunityFixPack] CrystalMysteryHang: applied
+[mod] [CommunityFixPack] DomeOverviewHighlight: applied
+[mod] [CommunityFixPack] TrainCargoDumping: applied
+						Lua 0:00:16:773
+[mod] [CommunityFixPack] DestroyedTunnels: applied
+[mod] [CommunityFixPack] DustSicknessBiorobots: applied
+[mod] [CommunityFixPack] GeneForging: applied
+[mod] [CommunityFixPack] MirrorSphereSite: applied
+[mod] [CommunityFixPack] PayloadTemplateRefill: applied
+[mod] [CommunityFixPack] ShuttleHubOffAvailable: applied
+[mod] [CommunityFixPack] FreedHousingNotice: applied
+[mod] [CommunityFixPack] LandscapeUnitFilter: applied
+						Lua 0:00:16:774
+[mod] [CommunityFixPack] RocketInteractGuard: applied
+[mod] [CommunityFixPack] TrackConnectorPingPong: applied
+						Lua 0:00:16:775
+[mod] [CommunityFixPack] TrackTunnelPowerBridge: applied
+[mod] [CommunityFixPack] GraphConsumedCaption: applied
+[mod] [CommunityFixPack] TrainWaitTime: applied
+[mod] [CommunityFixPack] FounderTraitNotification: applied
+[mod] [CommunityFixPack] SequenceLatents: applied
+[mod] [CommunityFixPack] TrackSalvageRefund: applied
+[mod] [CommunityFixPack] DroneTransportMinors: applied
+[mod] [CommunityFixPack] ScanDowngrade: applied
+						Lua 0:00:16:776
+[mod] [CommunityFixPack] BombardmentSpread: applied
+[mod] [CommunityFixPack] ExtenderFlapChurn: applied
+[mod] [CommunityFixPack] SaintBlessing: applied
+[mod] [CommunityFixPack] SinkholeIndestructible: applied
+[mod] [CommunityFixPack] ExoticDepositSign: applied
+[mod] [CommunityFixPack] JumboCaveReinforcementWedge: applied
+[mod] [CommunityFixPack] SilentHitMomentFX: applied
+[mod] [CommunityFixPack] CloggedBuildingRelease: applied
+						Lua 0:00:16:777
+[mod] [CommunityFixPack] FactionDomeSizeGate: applied
+[mod] [CommunityFixPack] BuildingCodesPrefab: applied
+[mod] [CommunityFixPack] HabitatExpeditionReturn: applied
+[mod] [CommunityFixPack] HabitatExpeditionDraft: applied
+[mod] [CommunityFixPack] OpenPastureStockpiles: applied
+						Lua 0:00:16:778
+[mod] [CommunityFixPack] RoverSubclassManifest: applied
+[mod] [CommunityFixPack] SaveSanitizer: applied
+[mod] [SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+[mod] [SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[mod] [SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+[SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+						Lua 0:00:16:783
+[mod] [SMRTK] SMRTK_CORE loaded=true tee=false t=12295 id=1
+[SMRTK] SMRTK_CORE loaded=true tee=false t=12295 id=1
+						Lua 0:00:16:786
+[mod] [SMRTK] SMRTK_SLOTS armed_at_load=0 sitting=ck144a_close_20260915 slots="1 console_status,2 probe_preflight,3 check_after_load,4 read_map_click,5 short_breakpoint,6 dump_selected,scratch read_sitting" trigger=smrtk08_break t=12295 id=2
+[SMRTK] SMRTK_SLOTS armed_at_load=0 sitting=ck144a_close_20260915 slots="1 console_status,2 probe_preflight,3 check_after_load,4 read_map_click,5 short_breakpoint,6 dump_selected,scratch read_sitting" trigger=smrtk08_break t=12295 id=2
+						Lua 0:00:16:787
+[mod] [SMRTest][carry] fixture-carry dump available — run SMRTest.FixtureCarry()
+						Lua 0:00:17:591
+[mod] [CommunityFixPack] SaintBlessing: inactive (no dome-colonists trait presets)
+[mod] [CommunityFixPack] SinkholeIndestructible: the St. Elmo's Fire sinkhole is now indestructible, like every other mystery set-piece
+						Lua 0:00:17:685
+Reloading done in 1297 ms
+						Lua 0:00:17:687
+Available DLCs: norman(Feeding the Future),thomas(Interplanetary Codex) 
+						Lua 0:00:17:734
+[mod] [SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=DataLoading t=12295 id=3
+[SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=DataLoading t=12295 id=3
+						Lua 0:00:18:147
+[preset] Preset postprocess took 161 ms.
+						Lua 0:00:18:208
+482 / 482 particle streams loaded in 54 ms.
+						Lua 0:00:18:209
+5 / 5 particle streams loaded in 1 ms.
+						Lua 0:00:18:210
+[mod] [CommunityOptInPack] MultipleSuns: BuildingTemplates.ArtificialSun not found — build limit NOT lifted (binding fix still active)
+[mod] [CommunityFixPack] SilentHitMomentFX: registered 11 missing animation-moment preset(s)
+						Lua 0:00:18:211
+[mod] [CommunityFixPack] FactionDomeSizeGate: 7 faction dislike(s) now wait for 10 colonists in a dome
+						Lua 0:00:18:428
+[mod] [CommunityOptInPack] MultipleSuns: Artificial Sun build-once limit lifted
+[mod] [CommunityFixPack] SaintBlessing: the shipped code resolves the trait label itself — data left untouched; save re-base armed for 1 preset(s) of 2
+						Lua 0:00:18:518
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=12295 id=4
+						Lua 0:00:18:551
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=12295 id=5
+						Lua 0:00:18:563
+[mod] Loaded mod items for: SMR_CommunityOptInPack, SMR_CommunityFixPack, SMR_CommunityFixPackTestKit
+						Lua 0:00:19:336
+[PdxSDK] Started up. Took 1058
+						Lua 0:00:19:688
+Load Game: 
+	lua_revision: 403908 (last saved with) 
+	orig_lua_revision: 403908 (created with) 
+	assets_revision: 33006 
+
+	dlcs: norman, thomas 
+						Lua 0:00:19:694
+*** Reloading assets from folder 'BinAssets/'
+						Lua 0:00:22:321
+*** Assets reloaded in 2.6 s, read 359.3 MB, read speed 136.8 MB/s, average read 8137 bytes.
+						Lua 0:00:22:819
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=12536 id=6
+						Lua 0:00:23:194
+[mod] [SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=PreLoadGame t=12536 id=7
+[SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=PreLoadGame t=12536 id=7
+						Lua 0:00:25:335
+[mod] [CommunityFixPack] SilentHitMomentFX: restored 1 missing hit-moment tracker(s) on load						Lua 0:00:25:336
+
+[mod] [SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:25:352
+game_settings:
+    sponsor: Brazil
+    profile: rocketscientist
+    founding_faction: UnitedColonistFront
+    rival_colonies: NASA, ESA, CNSA
+    mystery_random: 
+    game_rules: (none)
+more_game_settings: save_game_id: 1vKB6k9pvxPA8o3P, mystery: UnitedEarthMystery, coordinates: 11N177E, landing_spot: , logo: ColonizationEffort
+map_conditions: altitude: -2545, temperature: -36, cold_wave: 91, dust_devils: 49, dust_storm: 0, meteors: 37
+map_resources: concrete: 255, metals: 146, precious_metals: 146, water: 146
+						Lua 0:00:25:438
+[mod] [CommunityFixPack] SaveSanitizer: F95 astrogeologist-residue pass removed 0 modifier(s), left 0 unidentified
+[mod] [CommunityFixPack] SaveSanitizer: F48 station-connector pass repaired 0 of 0 track(s) walked (0 raised)
+Game Loaded in 5750 ms
+[mod] [SMRTK] SMRTK_PROVENANCE actions=unavailable last=unavailable present=false session=unavailable t=30713748 id=8
+[SMRTK] SMRTK_PROVENANCE actions=unavailable last=unavailable present=false session=unavailable t=30713748 id=8
+						Lua 0:00:25:449
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=30713748 id=9
+						Lua 0:00:25:461
+[mod] [SMRTK] SMRTK_DOCK action=dock_attach attached=true route="idBottom sibling" status=OK surface=one-toggle+tasks t=30713748 id=10
+						Lua 0:00:25:465
+[mod] [SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:25:575
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=30713748 id=11
+						Lua 0:00:26:227
+Game loaded on map BlankBig_02 in 6659 ms
+[mod] [C95PLACE] BUILD 1.1.0.403908 lua=403908 return=true draft=true arrivals=true rocket=UniversalRocket command=CmdWaitOrder type=SupplyRocket pos=true
+[mod] [C95PLACE] HABITATS 4
+[mod] [C95PLACE] WALKDIST 2096 walk=false dist=46400 straight_line_over_cap=nil
+[mod] [C95PLACE] HABITAT 2096 class=NaturalistHabitat walk=false hexes=37 residents=3 free=2 working=true accept=true life=true resfilter=Everyone
+						Lua 0:00:26:228
+[mod] [C95PLACE] RESIDENT 2000000934 home=2096 spec=geologist command=TransportByFoot suitable=true trait_filter=1
+[mod] [C95PLACE] RESIDENT 2000000935 home=2096 spec=geologist command=TransportByFoot suitable=true trait_filter=1
+[mod] [C95PLACE] RESIDENT 2000001919 home=2096 spec=geologist command=TransportByFoot suitable=true trait_filter=1
+[mod] [C95PLACE] WALKDIST 2351 walk=false dist=40231 straight_line_over_cap=true
+[mod] [C95PLACE] HABITAT 2351 class=NaturalistHabitat walk=false hexes=46 residents=0 free=5 working=true accept=true life=true resfilter=Everyone
+[mod] [C95PLACE] WALKDIST 2669 walk=true dist=30400 straight_line_over_cap=nil
+[mod] [C95PLACE] HABITAT 2669 class=NaturalistHabitat walk=true hexes=21 residents=4 free=1 working=true accept=true life=true resfilter=Everyone
+[mod] [C95PLACE] RESIDENT 2000001921 home=2669 spec=geologist command=Rest suitable=true trait_filter=1
+[mod] [C95PLACE] RESIDENT 2000001922 home=2669 spec=geologist command=WorkCycle suitable=true trait_filter=1
+[mod] [C95PLACE] RESIDENT 2000001923 home=2669 spec=geologist command=Rest suitable=true trait_filter=1
+[mod] [C95PLACE] RESIDENT 2000001920 home=2669 spec=geologist command=TransportByFoot suitable=true trait_filter=1
+[mod] [C95PLACE] WALKDIST 2673 walk=true dist=40000 straight_line_over_cap=nil
+[mod] [C95PLACE] HABITAT 2673 class=NaturalistHabitat walk=true hexes=30 residents=3 free=2 working=true accept=true life=true resfilter=Everyone
+[mod] [C95PLACE] RESIDENT 2000000931 home=2673 spec=geologist command=TransportByFoot suitable=true trait_filter=1
+[mod] [C95PLACE] RESIDENT 2000000932 home=2673 spec=geologist command=TransportByFoot suitable=true trait_filter=1
+[mod] [C95PLACE] RESIDENT 2000000933 home=2673 spec=geologist command=TransportByFoot suitable=true trait_filter=1
+[mod] [C95PLACE] REACHABLE 2669 class=NaturalistHabitat
+[mod] [C95PLACE] REACHABLE 2673 class=NaturalistHabitat
+[mod] [C95PLACE] POOL 2000000931 command=TransportByFoot home=2673 far=false near=true
+[mod] [C95PLACE] POOL 2000000932 command=TransportByFoot home=2673 far=false near=true
+[mod] [C95PLACE] POOL 2000000933 command=TransportByFoot home=2673 far=false near=true
+[mod] [C95PLACE] POOL 2000000934 command=TransportByFoot home=2096 far=true near=false
+[mod] [C95PLACE] POOL 2000000935 command=TransportByFoot home=2096 far=true near=false
+[mod] [C95PLACE] POOL 2000001919 command=TransportByFoot home=2096 far=true near=false
+[mod] [C95PLACE] POOL 2000001920 command=TransportByFoot home=2669 far=false near=true
+[mod] [C95PLACE] POOL 2000001921 command=Rest home=2669 far=false near=true
+[mod] [C95PLACE] POOL 2000001922 command=WorkCycle home=2669 far=false near=true
+[mod] [C95PLACE] POOL 2000001923 command=Rest home=2669 far=false near=true
+[mod] [C95PLACE] DRAFT size=10 pool=10 far=true near=true
+[mod] [C95PLACE] DRAFTED unit=2000000934 role=far command=TransportByFoot residence=2096 reserved=false holder=false dome=2096 workplace=MetalsExtractor exp_home=false arriving=false
+[mod] [C95PLACE] DRAFTED unit=2000000935 role=far command=TransportByFoot residence=2096 reserved=false holder=false dome=2096 workplace=PreciousMetalsExtractor exp_home=false arriving=false
+[mod] [C95PLACE] DRAFTED unit=2000001919 role=far command=TransportByFoot residence=2096 reserved=false holder=false dome=2096 workplace=MetalsExtractor exp_home=false arriving=false
+[mod] [C95PLACE] DRAFTED unit=2000000931 role=near command=TransportByFoot residence=2673 reserved=false holder=false dome=2673 workplace=MetalsExtractor exp_home=false arriving=false
+[mod] [C95PLACE] DRAFTED unit=2000000932 role=near command=TransportByFoot residence=2673 reserved=false holder=false dome=2673 workplace=MetalsExtractor exp_home=false arriving=false
+[mod] [C95PLACE] DRAFTED unit=2000000933 role=near command=TransportByFoot residence=2673 reserved=false holder=false dome=2673 workplace=MetalsExtractor exp_home=false arriving=false
+[mod] [C95PLACE] DRAFTED unit=2000001920 role=near command=TransportByFoot residence=2669 reserved=false holder=false dome=2669 workplace=PreciousMetalsExtractor exp_home=false arriving=false
+[mod] [C95PLACE] DRAFTED unit=2000001921 role=near command=Rest residence=2669 reserved=false holder=2669 dome=2669 workplace=PreciousMetalsExtractor exp_home=false arriving=false
+[mod] [C95PLACE] DRAFTED unit=2000001922 role=near command=WorkCycle residence=2669 reserved=false holder=2665 dome=2669 workplace=PreciousMetalsExtractor exp_home=false arriving=false
+[mod] [C95PLACE] DRAFTED unit=2000001923 role=near command=Rest residence=2669 reserved=false holder=2669 dome=2669 workplace=PreciousMetalsExtractor exp_home=false arriving=false
+						Lua 0:00:26:231
+[mod] [C95PLACE] OBSERVER classes=1 global_is_built=true
+[mod] [C95PLACE] SEEN EnterTransporter unit=2000000934
+[mod] [C95PLACE] SEEN EnterTransporter unit=2000000935
+[mod] [C95PLACE] SEEN EnterTransporter unit=2000001919
+[mod] [C95PLACE] SEEN EnterTransporter unit=2000000931
+[mod] [C95PLACE] SEEN EnterTransporter unit=2000000932
+						Lua 0:00:26:633
+[Braze] SessionStart error The server name or address could not be resolved
+
+						Lua 0:00:26:634
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:26:740
+[Braze] SessionStart error The server name or address could not be resolved
+
+						Lua 0:00:26:741
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:26:825
+[mod] [C95PLACE] BOARDED unit=2000000934 role=far command=WaitToAppear residence=false reserved=2096 holder=1061 dome=false workplace=false exp_home=2096 arriving=false
+[mod] [C95PLACE] BOARDED unit=2000000935 role=far command=WaitToAppear residence=false reserved=2096 holder=1061 dome=false workplace=false exp_home=2096 arriving=false
+[mod] [C95PLACE] BOARDED unit=2000001919 role=far command=WaitToAppear residence=false reserved=2096 holder=1061 dome=false workplace=false exp_home=2096 arriving=false
+[mod] [C95PLACE] BOARDED unit=2000000931 role=near command=WaitToAppear residence=false reserved=2673 holder=1061 dome=false workplace=false exp_home=2673 arriving=false
+[mod] [C95PLACE] BOARDED unit=2000000932 role=near command=WaitToAppear residence=false reserved=2673 holder=1061 dome=false workplace=false exp_home=2673 arriving=false
+[mod] [C95PLACE] BOARDED unit=2000000933 role=near command=WaitToAppear residence=false reserved=2673 holder=1061 dome=false workplace=false exp_home=2673 arriving=false
+[mod] [C95PLACE] BOARDED unit=2000001920 role=near command=WaitToAppear residence=false reserved=2669 holder=1061 dome=false workplace=false exp_home=2669 arriving=false
+[mod] [C95PLACE] BOARDED unit=2000001921 role=near command=WaitToAppear residence=false reserved=2669 holder=1061 dome=false workplace=false exp_home=2669 arriving=false						Lua 0:00:26:826
+
+[mod] [C95PLACE] BOARDED unit=2000001922 role=near command=WaitToAppear residence=false reserved=2669 holder=1061 dome=false workplace=false exp_home=2669 arriving=false
+[mod] [C95PLACE] BOARDED unit=2000001923 role=near command=WaitToAppear residence=false reserved=2669 holder=1061 dome=false workplace=false exp_home=2669 arriving=false
+[mod] [C95PLACE] TRACK unit=2000000934 role=far command=WaitToAppear holder=1061 dest=2096 dest_class=NaturalistHabitat valid=false to_rocket=false to_dest=false t=30715542
+[mod] [C95PLACE] TRACK unit=2000000935 role=far command=WaitToAppear holder=1061 dest=2096 dest_class=NaturalistHabitat valid=false to_rocket=false to_dest=false t=30715542
+[mod] [C95PLACE] TRACK unit=2000001919 role=far command=WaitToAppear holder=1061 dest=2096 dest_class=NaturalistHabitat valid=false to_rocket=false to_dest=false t=30715542
+[mod] [C95PLACE] TRACK unit=2000000931 role=near command=WaitToAppear holder=1061 dest=2673 dest_class=NaturalistHabitat valid=false to_rocket=false to_dest=false t=30715542
+[mod] [C95PLACE] TRACK unit=2000000932 role=near command=WaitToAppear holder=1061 dest=2673 dest_class=NaturalistHabitat valid=false to_rocket=false to_dest=false t=30715542
+[mod] [C95PLACE] TRACK unit=2000000933 role=near command=WaitToAppear holder=1061 dest=2673 dest_class=NaturalistHabitat valid=false to_rocket=false to_dest=false t=30715542
+[mod] [C95PLACE] TRACK unit=2000001920 role=near command=WaitToAppear holder=1061 dest=2669 dest_class=NaturalistHabitat valid=false to_rocket=false to_dest=false t=30715542
+[mod] [C95PLACE] TRACK unit=2000001921 role=near command=WaitToAppear holder=1061 dest=2669 dest_class=NaturalistHabitat valid=false to_rocket=false to_dest=false t=30715542
+[mod] [C95PLACE] TRACK unit=2000001922 role=near command=WaitToAppear holder=1061 dest=2669 dest_class=NaturalistHabitat valid=false to_rocket=false to_dest=false t=30715542
+[mod] [C95PLACE] TRACK unit=2000001923 role=near command=WaitToAppear holder=1061 dest=2669 dest_class=NaturalistHabitat valid=false to_rocket=false to_dest=false t=30715542
+						Lua 0:00:26:845
+[mod] [C95PLACE] TRACK unit=2000002869 role=arrival command=Start holder=false dest=2729 dest_class=DomeMedium valid=false to_rocket=false to_dest=false t=30715563
+						Lua 0:00:27:093
+[mod] [CommunityFixPack] ArrivalDeaths: C83 rerouted table: 000001ED831DA0F8 from Novo #1 to 
+						Lua 0:00:27:105
+[mod] [C95PLACE] TRACK unit=2000002869 role=arrival command=Arrive holder=false dest=false dest_class=false valid=true to_rocket=4 to_dest=false t=30715822
+						Lua 0:00:28:065
+[mod] [C95PLACE] TRACK unit=2000002870 role=arrival command=Start holder=false dest=2729 dest_class=DomeMedium valid=false to_rocket=false to_dest=false t=30716783
+						Lua 0:00:28:585
+[mod] [C95PLACE] TRACK unit=2000002870 role=arrival command=Arrive holder=false dest=false dest_class=false valid=true to_rocket=4 to_dest=false t=30717303
+						Lua 0:00:29:345
+[mod] [C95PLACE] TRACK unit=2000002871 role=arrival command=Start holder=false dest=2729 dest_class=DomeMedium valid=false to_rocket=false to_dest=false t=30718063
+						Lua 0:00:30:085
+[mod] [C95PLACE] TRACK unit=2000002871 role=arrival command=Arrive holder=false dest=false dest_class=false valid=true to_rocket=4 to_dest=false t=30718803
+						Lua 0:00:35:105
+[mod] [C95PLACE] TRACK unit=2000002869 role=arrival command=TransportByFoot holder=false dest=2669 dest_class=NaturalistHabitat valid=true to_rocket=4 to_dest=20 t=30723823
+						Lua 0:00:36:585
+[mod] [C95PLACE] TRACK unit=2000002870 role=arrival command=TransportByFoot holder=false dest=2669 dest_class=NaturalistHabitat valid=true to_rocket=4 to_dest=20 t=30725303
+						Lua 0:00:38:085
+[mod] [C95PLACE] TRACK unit=2000000934 role=far command=ReturnFromExpedition holder=false dest=2096 dest_class=NaturalistHabitat valid=true to_rocket=4 to_dest=36 t=30726802
+[mod] [C95PLACE] TRACK unit=2000002871 role=arrival command=TransportByFoot holder=false dest=2669 dest_class=NaturalistHabitat valid=true to_rocket=4 to_dest=20 t=30726802
+						Lua 0:00:38:806
+[mod] [C95PLACE] TRACK unit=2000000935 role=far command=ReturnFromExpedition holder=false dest=2096 dest_class=NaturalistHabitat valid=true to_rocket=4 to_dest=36 t=30727523
+						Lua 0:00:39:385
+[mod] [C95PLACE] TRACK unit=2000001919 role=far command=ReturnFromExpedition holder=false dest=2096 dest_class=NaturalistHabitat valid=true to_rocket=4 to_dest=36 t=30728102
+						Lua 0:00:40:045
+[mod] [C95PLACE] TRACK unit=2000000931 role=near command=ReturnFromExpedition holder=false dest=2673 dest_class=NaturalistHabitat valid=true to_rocket=4 to_dest=29 t=30728763
+						Lua 0:00:40:807
+[mod] [C95PLACE] TRACK unit=2000000932 role=near command=ReturnFromExpedition holder=false dest=2673 dest_class=NaturalistHabitat valid=true to_rocket=4 to_dest=29 t=30729523
+						Lua 0:00:41:485
+[mod] [C95PLACE] TRACK unit=2000000933 role=near command=ReturnFromExpedition holder=false dest=2673 dest_class=NaturalistHabitat valid=true to_rocket=4 to_dest=29 t=30730203
+						Lua 0:00:42:185
+[mod] [C95PLACE] TRACK unit=2000001920 role=near command=ReturnFromExpedition holder=false dest=2669 dest_class=NaturalistHabitat valid=true to_rocket=4 to_dest=20 t=30730903
+						Lua 0:00:42:985
+[mod] [C95PLACE] TRACK unit=2000001921 role=near command=ReturnFromExpedition holder=false dest=2669 dest_class=NaturalistHabitat valid=true to_rocket=4 to_dest=20 t=30731703
+						Lua 0:00:43:725
+[mod] [C95PLACE] TRACK unit=2000001922 role=near command=ReturnFromExpedition holder=false dest=2669 dest_class=NaturalistHabitat valid=true to_rocket=4 to_dest=20 t=30732442
+						Lua 0:00:44:305
+[mod] [C95PLACE] TRACK unit=2000001923 role=near command=ReturnFromExpedition holder=false dest=2669 dest_class=NaturalistHabitat valid=true to_rocket=4 to_dest=20 t=30733023
+						Lua 0:00:46:086
+[mod] [C95PLACE] TRACK unit=2000000934 role=far command=TransportByFoot holder=2096 dest=2096 dest_class=NaturalistHabitat valid=true to_rocket=38 to_dest=1 t=30734803
+						Lua 0:00:46:806
+[mod] [C95PLACE] TRACK unit=2000000935 role=far command=TransportByFoot holder=2096 dest=2096 dest_class=NaturalistHabitat valid=true to_rocket=38 to_dest=1 t=30735523
+						Lua 0:00:47:385
+[mod] [C95PLACE] TRACK unit=2000001919 role=far command=TransportByFoot holder=2096 dest=2096 dest_class=NaturalistHabitat valid=true to_rocket=38 to_dest=1 t=30736103
+						Lua 0:00:47:785
+[mod] [C95PLACE] TRACK unit=2000000934 role=far command=Roam holder=2096 dest=2096 dest_class=NaturalistHabitat valid=true to_rocket=38 to_dest=1 t=30736503
+						Lua 0:00:48:046
+[mod] [C95PLACE] TRACK unit=2000000931 role=near command=TransportByFoot holder=false dest=2673 dest_class=NaturalistHabitat valid=true to_rocket=4 to_dest=29 t=30736762
+						Lua 0:00:48:506
+[mod] [C95PLACE] TRACK unit=2000000935 role=far command=Roam holder=2096 dest=2096 dest_class=NaturalistHabitat valid=true to_rocket=38 to_dest=1 t=30737222
+						Lua 0:00:48:806
+[mod] [C95PLACE] TRACK unit=2000000932 role=near command=TransportByFoot holder=false dest=2673 dest_class=NaturalistHabitat valid=true to_rocket=4 to_dest=29 t=30737523
+						Lua 0:00:49:085
+[mod] [C95PLACE] TRACK unit=2000001919 role=far command=Roam holder=2096 dest=2096 dest_class=NaturalistHabitat valid=true to_rocket=38 to_dest=1 t=30737803
+						Lua 0:00:49:485
+[mod] [C95PLACE] TRACK unit=2000000933 role=near command=TransportByFoot holder=false dest=2673 dest_class=NaturalistHabitat valid=true to_rocket=4 to_dest=29 t=30738203
+						Lua 0:00:50:185
+[mod] [C95PLACE] TRACK unit=2000001920 role=near command=TransportByFoot holder=false dest=2669 dest_class=NaturalistHabitat valid=true to_rocket=4 to_dest=20 t=30738903
+						Lua 0:00:50:965
+[mod] [C95PLACE] TRACK unit=2000001921 role=near command=TransportByFoot holder=false dest=2669 dest_class=NaturalistHabitat valid=true to_rocket=4 to_dest=20 t=30739683
+						Lua 0:00:51:725
+[mod] [C95PLACE] TRACK unit=2000001922 role=near command=TransportByFoot holder=false dest=2669 dest_class=NaturalistHabitat valid=true to_rocket=4 to_dest=20 t=30740443
+						Lua 0:00:52:305
+[mod] [C95PLACE] TRACK unit=2000001923 role=near command=TransportByFoot holder=false dest=2669 dest_class=NaturalistHabitat valid=true to_rocket=4 to_dest=20 t=30741022						Lua 0:00:52:306
+
+						Lua 0:00:54:276
+[mod] [C95PLACE] OBSERVED calls=55
+[mod] [C95PLACE] UNLOADED unit=2000000934 role=far command=Roam residence=2096 reserved=false holder=2096 dome=2096 workplace=MetalsExtractor exp_home=false arriving=false
+[mod] [C95PLACE] UNLOADED unit=2000000935 role=far command=Roam residence=2096 reserved=false holder=2096 dome=2096 workplace=PreciousMetalsExtractor exp_home=false arriving=false
+[mod] [C95PLACE] UNLOADED unit=2000001919 role=far command=Roam residence=2096 reserved=false holder=2096 dome=2096 workplace=MetalsExtractor exp_home=false arriving=false
+[mod] [C95PLACE] UNLOADED unit=2000000931 role=near command=TransportByFoot residence=2673 reserved=false holder=false dome=2673 workplace=PreciousMetalsExtractor exp_home=false arriving=false
+[mod] [C95PLACE] UNLOADED unit=2000000932 role=near command=TransportByFoot residence=2673 reserved=false holder=false dome=2673 workplace=MetalsExtractor exp_home=false arriving=false
+[mod] [C95PLACE] UNLOADED unit=2000000933 role=near command=TransportByFoot residence=2673 reserved=false holder=false dome=2673 workplace=MetalsExtractor exp_home=false arriving=false
+[mod] [C95PLACE] UNLOADED unit=2000001920 role=near command=TransportByFoot residence=2669 reserved=false holder=false dome=2669 workplace=PreciousMetalsExtractor exp_home=false arriving=false
+[mod] [C95PLACE] UNLOADED unit=2000001921 role=near command=TransportByFoot residence=2669 reserved=false holder=false dome=2669 workplace=PreciousMetalsExtractor exp_home=false arriving=false
+[mod] [C95PLACE] UNLOADED unit=2000001922 role=near command=TransportByFoot residence=2669 reserved=false holder=false dome=2669 workplace=PreciousMetalsExtractor exp_home=false arriving=false
+[mod] [C95PLACE] UNLOADED unit=2000001923 role=near command=TransportByFoot residence=2669 reserved=false holder=false dome=2669 workplace=PreciousMetalsExtractor exp_home=false arriving=false
+[mod] [C95PLACE] UNLOADED unit=2000002869 role=arrival command=TransportByFoot residence=false reserved=false holder=false dome=2669 workplace=false exp_home=false arriving=false
+[mod] [C95PLACE] UNLOADED unit=2000002870 role=arrival command=TransportByFoot residence=false reserved=false holder=false dome=2669 workplace=false exp_home=false arriving=false
+[mod] [C95PLACE] UNLOADED unit=2000002871 role=arrival command=TransportByFoot residence=false reserved=false holder=false dome=2669 workplace=false exp_home=false arriving=false
+						Lua 0:00:54:843
+[mod] [C95PLACE] SAVE err=false name=C95PLACEMID.savegame.sav walker=2000000931
+						Lua 0:00:54:954
+Load Game: 
+	lua_revision: 403908 (last saved with) 
+	orig_lua_revision: 403908 (created with) 
+	assets_revision: 33006 
+
+	dlcs: norman, thomas 
+
+	mods: SMR_CommunityOptInPack, SMR_CommunityFixPack, SMR_CommunityFixPackTestKit 
+[mod] [SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=ChangeMap t=30742993 id=12
+[SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=ChangeMap t=30742993 id=12
+						Lua 0:00:54:966
+[mod] [SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=ChangeMap t=30742993 id=13
+[SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=ChangeMap t=30742993 id=13
+						Lua 0:00:55:461
+[mod] [SMRTK] SMRTK_SHORTCUT console=false key=Ctrl-Shift-F11 t=0 id=14
+						Lua 0:00:55:842
+[mod] [SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=PreLoadGame t=0 id=15
+[SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=PreLoadGame t=0 id=15
+						Lua 0:00:57:998
+[mod] [CommunityFixPack] SilentHitMomentFX: restored 1 missing hit-moment tracker(s) on load
+						Lua 0:00:57:999
+[mod] [SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:58:012
+game_settings:
+						Lua 0:00:58:013
+    sponsor: Brazil
+    profile: rocketscientist
+    founding_faction: UnitedColonistFront
+    rival_colonies: NASA, ESA, CNSA
+    mystery_random: 
+    game_rules: (none)
+more_game_settings: save_game_id: 1vKB6k9pvxPA8o3P, mystery: UnitedEarthMystery, coordinates: 11N177E, landing_spot: , logo: ColonizationEffort
+map_conditions: altitude: -2545, temperature: -36, cold_wave: 91, dust_devils: 49, dust_storm: 0, meteors: 37
+map_resources: concrete: 255, metals: 146, precious_metals: 146, water: 146
+						Lua 0:00:58:100
+[mod] [CommunityFixPack] SaveSanitizer: F95 astrogeologist-residue pass removed 0 modifier(s), left 0 unidentified
+Game Loaded in 3146 ms
+[mod] [SMRTK] SMRTK_PROVENANCE actions=1 last=unavailable last_id=11 present=true session=1789657445:3288874950:393644455:15359445 t=30742993 id=16
+[SMRTK] SMRTK_PROVENANCE actions=1 last=unavailable last_id=11 present=true session=1789657445:3288874950:393644455:15359445 t=30742993 id=16
+						Lua 0:00:58:110
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=30742993 id=17
+						Lua 0:00:58:123
+[mod] [SMRTK] SMRTK_DOCK action=dock_attach attached=true route="idBottom sibling" status=OK surface=one-toggle+tasks t=30742993 id=18
+						Lua 0:00:58:125
+[mod] [SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:58:239
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=30742993 id=19
+						Lua 0:00:58:508
+Game loaded on map BlankBig_02 in 3665 ms
+[mod] [C95PLACE] RELOAD err=nil
+[mod] [C95PLACE] RELOADED unit=2000000934 role=far command=Roam residence=2096 reserved=false holder=2096 dome=2096 workplace=MetalsExtractor exp_home=false arriving=false
+[mod] [C95PLACE] RELOADED unit=2000000935 role=far command=Roam residence=2096 reserved=false holder=2096 dome=2096 workplace=PreciousMetalsExtractor exp_home=false arriving=false
+[mod] [C95PLACE] RELOADED unit=2000001919 role=far command=Roam residence=2096 reserved=false holder=2096 dome=2096 workplace=MetalsExtractor exp_home=false arriving=false
+[mod] [C95PLACE] RELOADED unit=2000000931 role=near command=TransportByFoot residence=2673 reserved=false holder=false dome=2673 workplace=PreciousMetalsExtractor exp_home=false arriving=false
+[mod] [C95PLACE] RELOADED unit=2000000932 role=near command=TransportByFoot residence=2673 reserved=false holder=false dome=2673 workplace=MetalsExtractor exp_home=false arriving=false
+[mod] [C95PLACE] RELOADED unit=2000000933 role=near command=TransportByFoot residence=2673 reserved=false holder=false dome=2673 workplace=MetalsExtractor exp_home=false arriving=false
+[mod] [C95PLACE] RELOADED unit=2000001920 role=near command=TransportByFoot residence=2669 reserved=false holder=false dome=2669 workplace=PreciousMetalsExtractor exp_home=false arriving=false
+[mod] [C95PLACE] RELOADED unit=2000001921 role=near command=TransportByFoot residence=2669 reserved=false holder=false dome=2669 workplace=PreciousMetalsExtractor exp_home=false arriving=false
+[mod] [C95PLACE] RELOADED unit=2000001922 role=near command=TransportByFoot residence=2669 reserved=false holder=false dome=2669 workplace=PreciousMetalsExtractor exp_home=false arriving=false
+[mod] [C95PLACE] RELOADED unit=2000001923 role=near command=TransportByFoot residence=2669 reserved=false holder=false dome=2669 workplace=PreciousMetalsExtractor exp_home=false arriving=false
+[mod] [C95PLACE] RELOADED unit=2000002869 role=arrival command=TransportByFoot residence=false reserved=false holder=false dome=2669 workplace=false exp_home=false arriving=false
+[mod] [C95PLACE] RELOADED unit=2000002870 role=arrival command=TransportByFoot residence=false reserved=false holder=false dome=2669 workplace=false exp_home=false arriving=false
+[mod] [C95PLACE] RELOADED unit=2000002871 role=arrival command=TransportByFoot residence=false reserved=false holder=false dome=2669 workplace=false exp_home=false arriving=false
+						Lua 0:00:58:524
+[mod] [C95PLACE] TRACK unit=2000000934 role=far command=Roam holder=2096 dest=2096 dest_class=NaturalistHabitat valid=true to_rocket=38 to_dest=1 t=30743290
+[mod] [C95PLACE] TRACK unit=2000000935 role=far command=Roam holder=2096 dest=2096 dest_class=NaturalistHabitat valid=true to_rocket=38 to_dest=1 t=30743290
+[mod] [C95PLACE] TRACK unit=2000001919 role=far command=Roam holder=2096 dest=2096 dest_class=NaturalistHabitat valid=true to_rocket=38 to_dest=1 t=30743290
+[mod] [C95PLACE] TRACK unit=2000000931 role=near command=TransportByFoot holder=false dest=2673 dest_class=NaturalistHabitat valid=true to_rocket=4 to_dest=26 t=30743290
+[mod] [C95PLACE] TRACK unit=2000000932 role=near command=TransportByFoot holder=false dest=2673 dest_class=NaturalistHabitat valid=true to_rocket=4 to_dest=26 t=30743290
+[mod] [C95PLACE] TRACK unit=2000000933 role=near command=TransportByFoot holder=false dest=2673 dest_class=NaturalistHabitat valid=true to_rocket=4 to_dest=26 t=30743290
+[mod] [C95PLACE] TRACK unit=2000001920 role=near command=TransportByFoot holder=false dest=2669 dest_class=NaturalistHabitat valid=true to_rocket=3 to_dest=18 t=30743290
+[mod] [C95PLACE] TRACK unit=2000001921 role=near command=TransportByFoot holder=false dest=2669 dest_class=NaturalistHabitat valid=true to_rocket=3 to_dest=18 t=30743290
+[mod] [C95PLACE] TRACK unit=2000001922 role=near command=TransportByFoot holder=false dest=2669 dest_class=NaturalistHabitat valid=true to_rocket=4 to_dest=19 t=30743290
+[mod] [C95PLACE] TRACK unit=2000001923 role=near command=TransportByFoot holder=false dest=2669 dest_class=NaturalistHabitat valid=true to_rocket=4 to_dest=19 t=30743290
+[mod] [C95PLACE] TRACK unit=2000002869 role=arrival command=TransportByFoot holder=false dest=2669 dest_class=NaturalistHabitat valid=true to_rocket=10 to_dest=11 t=30743290
+[mod] [C95PLACE] TRACK unit=2000002870 role=arrival command=TransportByFoot holder=false dest=2669 dest_class=NaturalistHabitat valid=true to_rocket=9 to_dest=12 t=30743290
+[mod] [C95PLACE] TRACK unit=2000002871 role=arrival command=TransportByFoot holder=false dest=2669 dest_class=NaturalistHabitat valid=true to_rocket=7 to_dest=14 t=30743290
+						Lua 0:00:59:808
+[mod] [SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:59:820
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=30747142 id=20
+						Lua 0:01:06:444
+[mod] [C95PLACE] TRACK unit=2000002869 role=arrival command=TransportByFoot holder=2669 dest=2669 dest_class=NaturalistHabitat valid=true to_rocket=21 to_dest=1 t=30767050
+						Lua 0:01:06:946
+[mod] [C95PLACE] TRACK unit=2000002870 role=arrival command=TransportByFoot holder=2669 dest=2669 dest_class=NaturalistHabitat valid=true to_rocket=21 to_dest=1 t=30768553
+						Lua 0:01:07:025
+[mod] [C95PLACE] TRACK unit=2000002869 role=arrival command=Rest holder=2669 dest=false dest_class=false valid=true to_rocket=21 to_dest=false t=30768793
+						Lua 0:01:07:444
+[mod] [C95PLACE] TRACK unit=2000002871 role=arrival command=TransportByFoot holder=2669 dest=2669 dest_class=NaturalistHabitat valid=true to_rocket=21 to_dest=1 t=30770053
+						Lua 0:01:07:504
+[mod] [C95PLACE] TRACK unit=2000002870 role=arrival command=Rest holder=2669 dest=false dest_class=false valid=true to_rocket=21 to_dest=false t=30770233
+						Lua 0:01:07:585
+[mod] [C95PLACE] TRACK unit=2000002869 role=arrival command=Rest holder=false dest=false dest_class=false valid=true to_rocket=21 to_dest=false t=30770473
+						Lua 0:01:08:004
+[mod] [C95PLACE] TRACK unit=2000002871 role=arrival command=Rest holder=2669 dest=false dest_class=false valid=true to_rocket=21 to_dest=false t=30771733
+						Lua 0:01:08:085
+[mod] [C95PLACE] TRACK unit=2000002870 role=arrival command=Rest holder=false dest=false dest_class=false valid=true to_rocket=21 to_dest=false t=30771973
+						Lua 0:01:08:585
+[mod] [C95PLACE] TRACK unit=2000002871 role=arrival command=Rest holder=false dest=false dest_class=false valid=true to_rocket=21 to_dest=false t=30773473
+						Lua 0:01:11:484
+[mod] [C95PLACE] TRACK unit=2000001920 role=near command=TransportByFoot holder=2669 dest=2669 dest_class=NaturalistHabitat valid=true to_rocket=21 to_dest=1 t=30782173
+						Lua 0:01:11:744
+[mod] [C95PLACE] TRACK unit=2000001921 role=near command=TransportByFoot holder=2669 dest=2669 dest_class=NaturalistHabitat valid=true to_rocket=21 to_dest=1 t=30782953
+						Lua 0:01:11:984
+[mod] [C95PLACE] TRACK unit=2000001922 role=near command=TransportByFoot holder=2669 dest=2669 dest_class=NaturalistHabitat valid=true to_rocket=21 to_dest=1 t=30783673
+						Lua 0:01:12:044
+[mod] [C95PLACE] TRACK unit=2000001920 role=near command=Roam holder=2669 dest=2669 dest_class=NaturalistHabitat valid=true to_rocket=21 to_dest=1 t=30783850
+						Lua 0:01:12:185
+[mod] [C95PLACE] TRACK unit=2000001923 role=near command=TransportByFoot holder=2669 dest=2669 dest_class=NaturalistHabitat valid=true to_rocket=21 to_dest=1 t=30784273
+						Lua 0:01:12:305
+[mod] [C95PLACE] TRACK unit=2000001921 role=near command=Roam holder=2669 dest=2669 dest_class=NaturalistHabitat valid=true to_rocket=21 to_dest=1 t=30784633
+						Lua 0:01:12:564
+[mod] [C95PLACE] TRACK unit=2000001922 role=near command=Rest holder=2669 dest=2669 dest_class=NaturalistHabitat valid=false to_rocket=false to_dest=false t=30785410
+						Lua 0:01:12:744
+[mod] [C95PLACE] TRACK unit=2000001923 role=near command=Roam holder=2669 dest=2669 dest_class=NaturalistHabitat valid=true to_rocket=21 to_dest=1 t=30785953
+						Lua 0:01:14:244
+[mod] [C95PLACE] TRACK unit=2000000931 role=near command=TransportByFoot holder=2673 dest=2673 dest_class=NaturalistHabitat valid=true to_rocket=29 to_dest=1 t=30790450
+						Lua 0:01:14:504
+[mod] [C95PLACE] TRACK unit=2000000932 role=near command=TransportByFoot holder=2673 dest=2673 dest_class=NaturalistHabitat valid=true to_rocket=29 to_dest=1 t=30791233
+						Lua 0:01:14:725
+[mod] [C95PLACE] TRACK unit=2000000933 role=near command=TransportByFoot holder=2673 dest=2673 dest_class=NaturalistHabitat valid=true to_rocket=29 to_dest=1 t=30791893
+						Lua 0:01:14:757
+[mod] [C95PLACE] HOMECOMING all_far_and_near_home=true
+						Lua 0:01:14:824
+[mod] [C95PLACE] TRACK unit=2000000931 role=near command=Roam holder=2673 dest=2673 dest_class=NaturalistHabitat valid=true to_rocket=29 to_dest=1 t=30792193
+						Lua 0:01:15:064
+[mod] [C95PLACE] TRACK unit=2000000932 role=near command=Roam holder=2673 dest=2673 dest_class=NaturalistHabitat valid=true to_rocket=29 to_dest=1 t=30792913
+						Lua 0:01:15:304
+[mod] [C95PLACE] TRACK unit=2000000933 role=near command=Roam holder=2673 dest=2673 dest_class=NaturalistHabitat valid=true to_rocket=29 to_dest=1 t=30793633
+						Lua 0:01:17:586
+[mod] [C95PLACE] TRACK unit=2000002869 role=arrival command=Roam holder=false dest=false dest_class=false valid=true to_rocket=21 to_dest=false t=30800473
+						Lua 0:01:18:085
+[mod] [C95PLACE] TRACK unit=2000002870 role=arrival command=Roam holder=false dest=false dest_class=false valid=true to_rocket=21 to_dest=false t=30801973
+						Lua 0:01:18:424
+[mod] [C95PLACE] TRACK unit=2000002869 role=arrival command=Transport holder=false dest=2770 dest_class=DomeHexa valid=true to_rocket=21 to_dest=41 t=30802993
+						Lua 0:01:18:585
+[mod] [C95PLACE] TRACK unit=2000002871 role=arrival command=Roam holder=false dest=false dest_class=false valid=true to_rocket=21 to_dest=false t=30803473
+						Lua 0:01:28:424
+[mod] [C95PLACE] TRACK unit=2000002870 role=arrival command=Transport holder=false dest=2770 dest_class=DomeHexa valid=true to_rocket=21 to_dest=41 t=30832993
+						Lua 0:01:34:757
+[mod] [C95PLACE] FINAL unit=2000000934 role=far command=Roam residence=2096 reserved=false holder=2096 dome=2096 workplace=MetalsExtractor exp_home=false arriving=false
+[mod] [C95PLACE] FINALHOME unit=2000000934 role=far home=2096 in_home=true resident=true
+[mod] [C95PLACE] FINAL unit=2000000935 role=far command=Roam residence=2096 reserved=false holder=2096 dome=2096 workplace=PreciousMetalsExtractor exp_home=false arriving=false
+[mod] [C95PLACE] FINALHOME unit=2000000935 role=far home=2096 in_home=true resident=true
+[mod] [C95PLACE] FINAL unit=2000001919 role=far command=Roam residence=2096 reserved=false holder=2096 dome=2096 workplace=MetalsExtractor exp_home=false arriving=false
+[mod] [C95PLACE] FINALHOME unit=2000001919 role=far home=2096 in_home=true resident=true
+[mod] [C95PLACE] FINAL unit=2000000931 role=near command=Roam residence=2673 reserved=false holder=2673 dome=2673 workplace=PreciousMetalsExtractor exp_home=false arriving=false
+[mod] [C95PLACE] FINALHOME unit=2000000931 role=near home=2673 in_home=true resident=true
+[mod] [C95PLACE] FINAL unit=2000000932 role=near command=Roam residence=2673 reserved=false holder=2673 dome=2673 workplace=MetalsExtractor exp_home=false arriving=false
+[mod] [C95PLACE] FINALHOME unit=2000000932 role=near home=2673 in_home=true resident=true
+[mod] [C95PLACE] FINAL unit=2000000933 role=near command=Roam residence=2673 reserved=false holder=2673 dome=2673 workplace=MetalsExtractor exp_home=false arriving=false
+[mod] [C95PLACE] FINALHOME unit=2000000933 role=near home=2673 in_home=true resident=true
+[mod] [C95PLACE] FINAL unit=2000001920 role=near command=Roam residence=2669 reserved=false holder=2669 dome=2669 workplace=PreciousMetalsExtractor exp_home=false arriving=false
+[mod] [C95PLACE] FINALHOME unit=2000001920 role=near home=2669 in_home=true resident=true
+[mod] [C95PLACE] FINAL unit=2000001921 role=near command=Roam residence=2669 reserved=false holder=2669 dome=2669 workplace=PreciousMetalsExtractor exp_home=false arriving=false
+[mod] [C95PLACE] FINALHOME unit=2000001921 role=near home=2669 in_home=true resident=true
+[mod] [C95PLACE] FINAL unit=2000001922 role=near command=Rest residence=2669 reserved=false holder=2669 dome=2669 workplace=PreciousMetalsExtractor exp_home=false arriving=false
+[mod] [C95PLACE] FINALHOME unit=2000001922 role=near home=2669 in_home=true resident=true
+[mod] [C95PLACE] FINAL unit=2000001923 role=near command=Roam residence=2669 reserved=false holder=2669 dome=2669 workplace=PreciousMetalsExtractor exp_home=false arriving=false
+[mod] [C95PLACE] FINALHOME unit=2000001923 role=near home=2669 in_home=true resident=true
+[mod] [C95PLACE] FINAL unit=2000002869 role=arrival command=Transport residence=false reserved=false holder=false dome=2669 workplace=false exp_home=false arriving=false
+[mod] [C95PLACE] FINALHOME unit=2000002869 role=nil home=nil in_home=nil resident=nil
+[mod] [C95PLACE] FINAL unit=2000002870 role=arrival command=Transport residence=false reserved=false holder=false dome=2669 workplace=false exp_home=false arriving=false
+[mod] [C95PLACE] FINALHOME unit=2000002870 role=nil home=nil in_home=nil resident=nil
+[mod] [C95PLACE] FINAL unit=2000002871 role=arrival command=Roam residence=false reserved=false holder=false dome=2669 workplace=false exp_home=false arriving=false
+[mod] [C95PLACE] FINALHOME unit=2000002871 role=nil home=nil in_home=nil resident=nil
+[mod] [C95PLACE] FINAL unit=2000002870 role=arrival command=Transport residence=false reserved=false holder=false dome=2669 workplace=false exp_home=false arriving=false
+[mod] [C95PLACE] FINAL unit=2000002871 role=arrival command=Roam residence=false reserved=false holder=false dome=2669 workplace=false exp_home=false arriving=false
+[mod] [C95PLACE] FINAL unit=2000002869 role=arrival command=Transport residence=false reserved=false holder=false dome=2669 workplace=false exp_home=false arriving=false
+[mod] [C95PLACE] PACK return=true
+[mod] [C95PLACE] DONE ok=true err=nil
+						Lua 0:01:36:757
+
+
+Stopping the game threads from the Lua side with exit code 0.
+
+					Render 0:01:36:758
+
+
+Stopping the game threads after receiving WM_QUIT.
+
+					Render 0:01:37:031
+
+
+*** Debug::Done()
+Time (ms)	97031
+
+
