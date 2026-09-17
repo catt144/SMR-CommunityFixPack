@@ -14,6 +14,16 @@ the sweep in `docs/agent/prompts/perma/STATE_EVICTION.md` clears what ages out. 
 
 ## Decide
 
+### ck199 · opened 2026-09-16
+Which of these WORKFLOW rules retire, each lapsed on the evidence but with no word of yours retiring it?
+- Tag every upload per mod (Release marking, 08-17): the only tags are `fixpack-v1.0.0` and
+  `v5-game-1.0.7`, and v11 is live.
+- The `[FAQ]` tag convention (08-01): it collected material for an FAQ the site now has.
+- Credit ChoGGi and LukeH as prior art (Release): no store card, site page or `metadata.lua` does.
+- Execution markers on console lines in human docs (08-03): those docs carry no console lines now;
+  entries and reports still use the markers, so the rule may just need its scope reworded.
+Home: `docs/agent/WORKFLOW.md`
+
 ### ck188a · opened 2026-09-17
 Who reported Wildfire, and do you take the five-minute live look or drop it?
 - F120, the report and the handoff name Jäger, but his comment #8 is C99's tunnel bug and you said

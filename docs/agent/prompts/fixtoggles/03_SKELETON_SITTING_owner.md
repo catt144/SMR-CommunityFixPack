@@ -27,8 +27,8 @@ enforce cheat discipline, and do no live UI-internals prototyping. Staleness: `g
    check.
 5. **Gamepad:** reach a row, switch it, apply, leave — with a controller if the owner has one. No controller ⇒ record
    UNSAMPLED (never PASS) and route it to 11 as a TAKEABLE-WHEN.
-6. Relay every owner verbatim through the harness note primitive (`*.Note(...)`) the moment it is spoken (WORKFLOW
-   "Attended-sitting classes from `corun-pt15`", item 3).
+6. Relay every owner verbatim through the harness note primitive (`*.Note(...)`) the moment it is spoken
+   (`docs/agent/support/CO_RUNS.md`, "Owner-led deviations").
 
 ## Verdict — one of three, written into the checklist (148) and 99's inbox
 

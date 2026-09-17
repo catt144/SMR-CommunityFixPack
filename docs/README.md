@@ -20,7 +20,7 @@ docs/
   BUGS.md · STATUS.md     3-line stubs pointing at where they went
   agent/
     STATE.md              Pull-only current status, byte-budgeted (doccheck)
-    WORKFLOW.md           process rules — commits, probe hygiene, todo discipline
+    WORKFLOW.md           process rules — layout, patches, probe hygiene, testing, release
     FIX_POLICY.md         what may be built, and how
     bugs/                 defect truth — one file per entry
     facts/                engine behaviour — one file per fact

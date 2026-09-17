@@ -7,7 +7,7 @@ preloaded slots. This tool is not a fix and never ships.
 ## Read and scope
 
 Read `docs/agent/STATE.md`, the sitting brief and upstream notes, the Cheats on
-playtest saves/Writing in a shared tree sections of `docs/agent/WORKFLOW.md`, the prompt-authoring
+playtest saves section of `docs/agent/WORKFLOW.md`, `CLAUDE.md`'s header, the prompt-authoring
 skill's playtest instructions, `docs/agent/facts/EF-096.md` for sandbox reach,
 and the TestKit README.
 Inspect 70's dispatch and 74's Bind/Trigger APIs plus the current
@@ -113,7 +113,7 @@ C:/Dev/SMR-BugFixPack-TestKit/Code -g '7*_SMRTK*.lua' -g '80_AgentSlots.lua'`
 and rule 7 using `rg -n '^\s*print\('` on those same files: zero matched lines,
 rg exit 1; errors are not a negative gate. Include a positive installed-source
 control. Recheck diff/status, stage exact paths and commit with `-F` plus pathspec
-(shared hunks follow WORKFLOW). TestKit has no remote; push pack docs if changed.
+(shared hunks follow `CLAUDE.md`'s header). TestKit has no remote; push pack docs if changed.
 Quote doccheck WARNs verbatim in the handoff. Keep predictions separate from
 play evidence; no status promotion without witnessing the leg.
 
