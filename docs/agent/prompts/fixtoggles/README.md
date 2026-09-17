@@ -108,7 +108,7 @@ inherits the old total.
 16. **⛔ Never move a status you did not witness.** A desk harness is not the game; a source read is never `tested`.
 17. **Bindings in force:** `editor/version rail (docs/agent/prompts/perma/release_prompt.md § Release rails)` (no Mod Editor, no `version` edit, no upload), `H-03`, `H-04`, `H-08`, `H-09`,
     `module-list gate (tools/doccheck.py MODULE SETS + tools/upload_preflight.py)` (every module or option item change updates `items.lua`). Owner decisions go to `docs/PLAYTEST_CHECKLIST.md`
-    → "Decisions waiting on you" (append to **148** or take the next free number AT THAT MOMENT), never only here.
+    under `## Decide`, in that file's format (append to **ck148** or open a new item), never only here.
 18. **A doccheck WARN goes verbatim into your summary.** STATE is pull-only but this chain calls for current status;
     when a link changes it, measure the current `STATE + STUBS` line and use
     `docs/agent/prompts/perma/STATE_EVICTION.md`, never a stored size.

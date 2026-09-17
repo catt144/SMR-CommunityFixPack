@@ -65,8 +65,8 @@ only when another STATE line moves is still state; a line that never moves is
 not. Passing volatility alone does not admit it.
 
 For admitted content, keep governing pointers to one dated line linked to the
-ruling's body; open owner decisions use item numbers and five-word gists, with
-bodies in `docs/PLAYTEST_CHECKLIST.md` under "Decisions waiting on you".
+ruling's body; open owner decisions use item ids and five-word gists, with
+the ask itself in `docs/PLAYTEST_CHECKLIST.md` under `## Decide`, in that file's format.
 These formats do not exempt either category from the door.
 
 ### Authority preserved here

@@ -125,7 +125,7 @@ confirm. That is a rare combination that may never occur organically.
 watching indefinitely at no cost, or spend ~10 attended minutes trying to trigger
 it deliberately (the old chain B sitting carried exactly that 10-minute
 ride-along). ⚖️ **The decision is the owner's, and it belongs in
-`docs/PLAYTEST_CHECKLIST.md` → "Decisions waiting on you"**, not only here.
+`docs/PLAYTEST_CHECKLIST.md` under `## Decide`**, in that file's format, not only here.
 
 ## 6 · Stop conditions — reporting beats pushing through
 
