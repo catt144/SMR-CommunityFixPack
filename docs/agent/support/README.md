@@ -7,6 +7,7 @@ they consume; this map is updated when a supporting document lands.
 | file | purpose |
 |---|---|
 | `README.md` | this purpose and destination map |
+| `CHAIN_METHOD.md` | how to build a multi-session effort as a self-consuming chain of briefs: shape, difficulty tags, folder, links, terminal QA |
 | `CO_RUNS.md` | binding situational protocol for co-runs: route, prepare, conduct and close attended experiment legs |
 | `LIVE_SITE_READ.md` | read-only route for identifying the newest successful Pages deployment and checking live content without publishing |
 | `POST_UPLOAD_CLOSE.md` | non-fireable procedure for verifying an owner-confirmed upload, preserving writeback and restoring stripped comments |

@@ -5,7 +5,7 @@ the current fix pack is patched, pushed and stable** (owner instruction).
 **Start with `git log --oneline -15`, `git pull`, and `git status --short`.**
 The last content/path alignment before this audit is `7c23e3c`; compare its
 named inputs with HEAD and re-check moved groups. Read `docs/agent/STATE.md`
-(mandatory), `docs/agent/FIX_POLICY.md`, `docs/agent/reports/CHAIN_METHOD.md`,
+(mandatory), `docs/agent/FIX_POLICY.md`, `docs/agent/support/CHAIN_METHOD.md`,
 and **`docs/archive/prompts/vanillahunt/README.md` §7 + link 03's "For dlccheck" section of
 `docs/agent/reports/vanillahunt/TRIAGE.md`** — the two efforts overlap by design. *(The
 brief `VANILLA_DIFF_HUNT.md` was consumed into that chain on 2026-09-10; its

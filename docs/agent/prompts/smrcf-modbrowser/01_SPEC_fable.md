@@ -44,7 +44,7 @@ here? `FIX_POLICY` §4 (the R3 bullet) requires an explicit owner decision for a
 R3; this is R1/R2, so the letter does not bind — but the *reason* does, and the
 pack's ~29 existing full replacements are its patch-rot exposure.
 ⇒ **Package this as an owner decision with a recommendation**, per
-`docs/agent/reports/CHAIN_METHOD.md` §4.3, optionally with provisional go-ahead ("build, not locked,
+`docs/archive/CHAIN_METHOD_PLAYBOOK_2026-08-03.md` §4.3, optionally with provisional go-ahead ("build, not locked,
 the audit reviews it").
 
 **Defect 2 (hyperlinks).** The repair is to stop suppressing a path the engine
@@ -62,7 +62,7 @@ write no fix.** Declining this is a full, successful outcome.
 
 Fill in `02_BUILD_opus.md` with only what survived, and `03_SITTING_owner.md`
 with what the owner must actually look at. **Tag every spec detail with
-provenance** — `docs/agent/reports/CHAIN_METHOD.md` §3: *specs are authoritative on design, unreliable
+provenance** — `docs/archive/CHAIN_METHOD_PLAYBOOK_2026-08-03.md` §3: *specs are authoritative on design, unreliable
 on detail*; 7 of the prompt-7-era specs had a defective supporting detail while
 all 7 shapes survived. Say plainly in the build brief: **re-verify the route even
 though the design is settled.**

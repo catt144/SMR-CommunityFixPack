@@ -2,7 +2,7 @@
 
 Effort: give players an **on/off button for every fix** in the Relaunched Fix Pack, a **Beta** label for fixes
 shipped before full testing, and **linked buttons** where fixes depend on each other. Authored 2026-09-11 by
-`smr-bugfixpack-24` at the owner's ask. Method: `docs/agent/reports/CHAIN_METHOD.md`. Authoring mechanics:
+`smr-bugfixpack-24` at the owner's ask. Method: `docs/agent/support/CHAIN_METHOD.md`. Authoring mechanics:
 the `prompt-authoring` skill and `docs/agent/WORKFLOW.md`. Evidence base:
 **`docs/agent/reports/FIXTOGGLES_RESEARCH_2026-09-11.md`**
 (read its provenance tags first). Owner decisions: checklist **148**.

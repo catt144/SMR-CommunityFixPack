@@ -28,7 +28,8 @@ Run only on a folder holding this file and `README.md` (or in the reduced form b
 
 ## Reduced form — if 03 KILLED the chain
 
-Post-mortem appended to `docs/agent/reports/CHAIN_METHOD.md` §3 (a row: failure · instance · countermeasure); the
+Post-mortem appended at the END of `docs/archive/CHAIN_METHOD_PLAYBOOK_2026-08-03.md` (the archive is append-only), in its §3
+row shape: failure · instance · countermeasure; the
 respec-or-abandon decision routed to checklist 148 with a recommendation; every unconsumed prompt `git rm`'d with its
 grave (`git show <sha>:<path>`) named in the README; 09 may still run if unconsumed — say so. After that disposition,
 perform the same README archive, prompt-map removal and empty-folder verification as full-form step 8.

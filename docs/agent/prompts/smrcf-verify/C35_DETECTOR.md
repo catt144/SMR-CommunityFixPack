@@ -166,7 +166,7 @@ next playtest. Probe age never lets an agent refuse owner-directed work. Keep a
 live todo list and write `PROBE SWEEP:` in each result commit.
 
 ⛔ **`git rm` this file when the job is done**, and name its grave
-(`docs/agent/reports/CHAIN_METHOD.md`). If the folder ends empty, `smrcf-verify/` is finished and
+(`docs/agent/support/CHAIN_METHOD.md`). If the folder ends empty, `smrcf-verify/` is finished and
 chain A is closed. Remove `smrcf-verify/` from the grouped prompt-map row and
 update `docs/agent/prompts/SMRCF_CHAIN_SET.md` in the same commit. This does not
 close the set while chain C (`smrcf-modbrowser/`) remains owner-kept and parked;

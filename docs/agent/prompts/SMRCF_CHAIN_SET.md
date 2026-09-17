@@ -5,7 +5,7 @@
 > not fire either descendant and does not unpark `C52`.
 
 This is a work-order front door, not reusable chain-authoring guidance. The
-general method is `docs/agent/reports/CHAIN_METHOD.md`. Historical chains B and
+general method is `docs/agent/support/CHAIN_METHOD.md`. Historical chains B and
 D and their old dependencies are consumed; their graves remain in git.
 
 ## Current set

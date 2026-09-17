@@ -29,7 +29,7 @@ Use the cheapest mode that preserves the requested evidence:
 
 1. **Unattended:** every result is log-readable on a staged copy. Its ceiling is
    mechanism/probe evidence, never `tested` or organic-witnessed. Author and
-   close unattended chains through `docs/agent/reports/CHAIN_METHOD.md`.
+   close unattended chains through `docs/agent/support/CHAIN_METHOD.md`.
 2. **Co-run:** setup and objective reads are scriptable, but named moments need
    human eyes, hands or judgment. Batch every ready rider and free console read.
 3. **Attended playtest:** the evidence is continuous human play, feel, severity

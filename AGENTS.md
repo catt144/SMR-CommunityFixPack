@@ -41,7 +41,7 @@ Prompt-supporting protocols and references live outside that tree in `docs/agent
 Hook setup is `git config core.hooksPath tools/hooks`. `python tools/doccheck.py --regen`
 rewrites `bugs/INDEX.md`, `facts/INDEX.md`, `AGENTS.md`, and other generated mirrors.
 Authoring: `docs/agent/WORKFLOW.md` · code: `docs/agent/FIX_POLICY.md` · efforts over
-about two sessions: `docs/agent/reports/CHAIN_METHOD.md`.
+about two sessions: `docs/agent/support/CHAIN_METHOD.md`.
 
 The three trust classes are authority, derived fact, and authored claim; their duties are in the
 header above. The open owner decision about the third class remains open.

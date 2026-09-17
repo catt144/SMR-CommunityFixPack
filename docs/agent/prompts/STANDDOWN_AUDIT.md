@@ -120,7 +120,7 @@ matter**, not that all 21 were visited.
   decline is the only real gap"* — or the reverse — say that; it changes what gets
   built next.
 - ⚠️ Watch the cost side: a probe set that must run on every game patch has an
-  ongoing price in owner time. Price it. `docs/agent/reports/CHAIN_METHOD.md` applies
+  ongoing price in owner time. Price it. `docs/agent/support/CHAIN_METHOD.md` applies
   if this turns out to be more than ~2 sessions of work.
 
 ## 6 · Deliverable
