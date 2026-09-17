@@ -5,9 +5,10 @@
 Rule: Do not retire, archive, gut, or delete this file without the owner's explicit instruction. [A3: pass]
 <!-- /RULES -->
 
-This file carries the loose ends that the generated owner queue, `docs/WAITING_ON_YOU.md`, cannot
-hold. It is a working document, not a session log: when you close something here, delete its block,
-and prefer a link to a retelling. Verify every specific against `git log` and the tree; Claude and
+This file carries the loose ends that the owner's list, `docs/PLAYTEST_CHECKLIST.md`, cannot hold —
+its entrance gate admits an item only when the next action is the owner's, which is most of why the
+rest needs a home. It is a working document, not a session log: when you close something here,
+delete its block, and prefer a link to a retelling. Verify every specific against `git log` and the tree; Claude and
 Codex sessions both commit here, and Codex is invisible to `ListAgents`.
 
 The owner is the sole retirement authority. Section 2 becoming empty is the trigger for asking once;
@@ -37,7 +38,7 @@ The owner reads nothing back from the log: they paste a line and say "flushed", 
 `saves/game` in this repo (WORKFLOW Layout).
 
 Unless the owner's message names a task, a pasted handoff means orient, summarise and ask. Orient from
-the `smr-orientation` skill; `docs/agent/STATE.md` and `docs/WAITING_ON_YOU.md` are pull-only.
+the `smr-orientation` skill; `docs/agent/STATE.md` and `docs/PLAYTEST_CHECKLIST.md` are pull-only.
 
 ### Fixture helpers
 
@@ -99,7 +100,7 @@ TestKit builds go to Astra unless the owner asks a Claude session directly.
 
 ## 2 · What is open
 
-The owner's queue is generated: read `docs/WAITING_ON_YOU.md`, then the checklist item it links to.
+The owner's queue is `docs/PLAYTEST_CHECKLIST.md`: read the item itself.
 Never keep an owner list here, and never rebuild an owed list from an older document.
 
 ### Agent work
