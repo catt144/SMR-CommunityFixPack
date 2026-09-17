@@ -93,7 +93,7 @@ Home: `docs/archive/PLAYTEST_ARCHIVE.md`
 ## Run
 
 ### ck200 · opened 2026-09-16
-When ready to qualify C95/C102, run the build report's sitting; these gates remain before release.
+When the next session opens, run the UI-expedition and cold-removal gates first (09-17).
 - UI expedition: witness a drafted habitat resident physically home, with no new dome job. v11's verdict does not carry.
 - Provision a distant inhabited habitat with rail to the pad. The current fixture has none; this needs provisioning.
 - Provision a live reachable dome beyond the nearest; switch the nearest off and watch a returnee reach the live dome.

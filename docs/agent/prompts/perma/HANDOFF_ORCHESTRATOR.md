@@ -5,366 +5,198 @@
 Rule: Do not retire, archive, gut, or delete this file without the owner's explicit instruction. [A3: pass]
 <!-- /RULES -->
 
-> ⭐ **LIVE.** `docs/WAITING_ON_YOU.md` is the owner's generated queue — this file carries the
-> **loose ends** it cannot hold.
+This file carries the loose ends that the generated owner queue, `docs/WAITING_ON_YOU.md`, cannot
+hold. It is a working document, not a session log: when you close something here, delete its block,
+and prefer a link to a retelling. Verify every specific against `git log` and the tree; Claude and
+Codex sessions both commit here, and Codex is invisible to `ListAgents`.
 
-⛔⛔ **THE 2026-09-15/16 PROMPTS OVERHAUL MOVED OR DELETED FILES THIS DOCUMENT STILL NAMES BELOW.**
-Not every citation further down has been rewritten. Translate before following any of them:
+The owner is the sole retirement authority. Section 2 becoming empty is the trigger for asking once;
+on 2026-09-13 the answer was to keep the file.
 
-| this file says | reality |
-|---|---|
-| `perma/DISPATCH.md` | **DELETED.** Orient from the `smr-orientation` skill + `STATE.md` + `WAITING_ON_YOU.md` |
-| `perma/PUBLIC_SURFACE_SWEEP.md` | **DELETED**, no successor found |
-| `perma/RELEASE.md` | → `perma/release_prompt.md` |
-| `POST_UPLOAD_CLOSE.md` | → `agent/support/POST_UPLOAD_CLOSE.md` |
-| `perma/SITE_AUDIT.md` | → `agent/support/LIVE_SITE_READ.md` |
-| `perma/CO_RUNS.md` · `perma/SMRTK_SLOTS.md` | → `agent/support/` |
+The gated map is [prompts/README.md](../README.md); a row there beats any pointer here. FR-1 (Linux,
+NVIDIA 580, the temporary workaround mod) is not on this handoff: see
+[LINUX_DISPATCH.md](LINUX_DISPATCH.md).
 
-⛔ **`prompts/README.md` is the gated map and it is the authority** — a row there beats any pointer
-in this file. The firing freeze that stood on 2026-09-15 was **LIFTED** on the owner's word (`7d63900`).
+## 0 · Start here
 
-## Retirement authority
+### First task on this firing — the C95 sitting, gates 1 and 2
 
-The owner is the sole retirement authority. Section 2 becoming genuinely empty is the trigger for
-asking once; the last answer, on 2026-09-13, was to keep the file because too many loose ends remained.
+**Owner's instruction, 2026-09-17: when this handoff is fired, start with this. Do not orient-and-ask
+first.** Open a live todo list, run `ListAgents`, check `git log`/`git status`, then walk the owner
+through two gates from [C95_RETURN_HOME_BUILD.md](../../reports/C95_RETURN_HOME_BUILD.md#owner-sitting-remaining-release-gates)
+(recorded as ck200 in [PLAYTEST_CHECKLIST.md](../../../PLAYTEST_CHECKLIST.md)):
 
-⛔ **THIS IS A WORKING DOCUMENT, NOT A SESSION LOG.** History lives in `docs/archive/SESSION_LOG.md`.
-**If you close something here, DELETE its block** — and prefer a pointer to a retelling: anything the
-entry, brief or checklist already holds belongs there, not here.
+1. **UI expedition.** On a copy of a save with an inhabited habitat, with the pack enabled, run the
+   report's `C95 START` line with the habitat selected. Have the owner send a normal crewed expedition
+   through the UI, then run `C95 WITNESS` on departure and after return. Pass: at least one habitat
+   resident was aboard, and on return is physically inside the same habitat, with the original
+   residence and no new dome job. If nobody from the habitat was drafted, the gate is not covered.
+2. **Cold removal, then enable.** Disable the pack in Mod Manager, exit fully, restart, load the
+   `C95MID.savegame.sav` test slot and run `C95 COLD`. The first-screen witness must show the pack
+   global false; watch resident 2000001502 travel. Then re-enable at the main menu and check the module
+   is active on another return.
 
-⛔ **Verify every specific against `git log` and the tree — the records win, this file is a pointer.** Claude
-and Codex sessions both commit here, several at once, and **Codex is invisible to `ListAgents`**.
+The owner reads nothing back from the log: they paste a line and say "flushed", and you read
+`%APPDATA%\Surviving Mars Relaunched\logs\Mars.exe-*.log` (newest) yourself.
 
-⛔ **FR-1 is NOT on this handoff.** Every Linux / NVIDIA 580 / workaround-mod item is in
-`prompts/perma/LINUX_DISPATCH.md`. The temp workaround mod is LIVE (Steam 3799500849 / Paradox 158711).
+**After both gates, raise these in prose, with the recommendation:**
+- ck200 policies (a) and (b): with no route home, is there still no automatic crew? With no safe dome
+  anywhere, does the game's own choice stand? Both answers keep the current behaviour; recommend
+  keeping both.
+- Gates 3 (rail return) and 4 (live C102 reroute) each need a colony provisioned for hours.
+  Recommendation, **not ruled**: waive them. A train return uses the same selection code as the walking
+  return, and C102 reuses C83's safety predicate, which the owner has already watched. Say plainly in
+  the release words that those two paths were not watched, and let field reports close them.
+- Then the release: [release_prompt.md](release_prompt.md), from the staged outbox entry in
+  [RELEASE_OUTBOX.md](RELEASE_OUTBOX.md). It runs through the owner's upload to the close-out; the
+  core hardening from checklist 53 rides the same upload with no public row.
 
-## 0 · START HERE — orient, then ASK
+### Every other firing
 
-### Tech points, for provisioning a fixture when research-all would destroy the reading
+Unless the owner's message names a task, a pasted handoff means orient, summarise and ask. Orient from
+the `smr-orientation` skill; `docs/agent/STATE.md` and `docs/WAITING_ON_YOU.md` are pull-only.
+
+### Fixture helpers
+
+Grant exactly 20 tech points without researching anything (each pass pays the current price):
 
 ```
 *r for i=1,20 do UIPlayer:AddResearchPoints(UIPlayer.TechPointCost) end print(UIPlayer.TechPoints)
 ```
 
-Each pass pays the current price, so that is exactly 20 points; change the count for more.
-⛔ **`Player:CanResearch` returns `nil` for a broke player even on an `enabled` tech**
-(`Lua/TechTree.lua:868-874`) — grant first, or a healthy node reads as a defect. Derivation and
-the TestKit ask that should replace this line are in §2b's third TestKit ask.
+`Player:CanResearch` returns `nil` for a player with no tech points, even on an `enabled` tech
+(`Lua/TechTree.lua:868-874`): grant first, or a healthy node reads as a defect.
 
-**Companion check — is anything "special" already revealed?** `Breakthroughs`, `Mysteries` and
-`Storybits` are one section; everything else is Main (`TechGroupToSection`, `Lua/TechTree.lua:9-15`),
-so researching the whole Main tree cannot reveal a mystery tech. This enumerates the exceptions:
+List anything outside the Main tree that is already revealed. A lone `Breakthroughs Breakthroughs
+locked` row is the inert group placeholder (`Data/Tech.lua:516-525`), not a reveal:
 
 ```
 *r for id,t in pairs(Techs) do if TechGroupToSection(t.group) ~= "Main" and GetTechState(id, UIPlayer) ~= "hidden" then print(id, t.group, GetTechState(id, UIPlayer)) end end
 ```
 
-⭐ A lone `Breakthroughs Breakthroughs locked` row is the **inert group placeholder**
-(`CanBeResearched = false`, `Data/Tech.lua:516-525`), not a reveal. Anything else is.
+To open the domes for real, use the game's cheat, not SMRTK's leaf (see §1):
+`*r Presets.CheatDef.Terraforming.OpenAllDomes:run()`. It sets terraforming to 100% and enacts Open
+Domes, which cannot be undone cleanly, so use a scratch copy. It skips the law under the No Politics
+rule. That line has not been run, although its route through the preset was read.
 
-### Orient
+## 1 · TestKit loose ends (repo `C:\Dev\SMR-BugFixPack-TestKit`)
 
-⭐ The 2026-09-16 ESA/Wildfire fixture has served both of its legs: C96 is `tested-attended` and
-shipped in v11; checklist 188's Wildfire rider ran both legs. Their fixture recipes live in the
-[C96 build report](../../reports/C96_ROVER_SUBCLASS_BUILD.md) ("Recreate the attended anomaly") and
-the [Wildfire report](../../reports/WILDFIRE_CURE_RESEARCH.md).
+TestKit builds go to Astra unless the owner asks a Claude session directly.
 
-⛔ **`perma/DISPATCH.md` NO LONGER EXISTS** — the prompts overhaul deleted it 2026-09-15/16. Orient
-from the **`smr-orientation` skill** plus `docs/agent/STATE.md` (now a short pull-only status file,
-not a mandatory read) and `docs/WAITING_ON_YOU.md`. Bindings live in `CLAUDE.md` and document-local
-`Must_Read_Header` blocks. Add `ListAgents` (peers edit this tree concurrently) and open a **live
-todo list**.
-
-**Unless the owner's message names a task, a pasted handoff means ORIENT — summarise and ASK what to
-take.** Do not execute anything else.
-
-⛔ **The two auto-firing tasks this section carried on 2026-09-16 are DONE. Do not re-run them, and
-do not restore the auto-start instruction from an older copy of this file.**
-
-### TestKit loose end — `Fill all storages` aborts on any rocket (noted 2026-09-16, NOT FIXED)
-
-⚠️ **Owner's instruction: note it, do not fix it now.** `fill_storages`
-(`Code/72_SMRTK_World.lua:311-316`) sweeps `MechanizedDepot` + `StorageDepot`, and `MapForEach`
-matches descendants — **every rocket is a `StorageDepot`** (`UniversalStorageDepotBase →
-StorageDepot`, `Lua/Buildings/StorageDepot.lua:329-330`). The rocket's `CheatFill` override then
-throws at `Lua/UniversalRocket.lua:1621`, `self.demand[cargo_id]:AddAmount(...)`, because a cargo
-line can exist with no matching demand request. There is no per-object `pcall`, so **the first
-rocket aborts the whole sweep and the remaining depots are never filled**. MEASURED live
-2026-09-16 (`SMRTK_ERROR ... action=fill_storages status=ERROR`).
-⇒ Fix is in the TestKit repo (clean at `7b57b8a`): exclude rockets and wrap the per-object call.
-⛔ **The vanilla `CheatFill` bug is cheat-only and fails the reach test** — no player can hit it,
-so it is NOT fix-pack material and no entry was filed.
-
-### The TestKit link — two rows still unrun
-
-TestKit `acafc74`, three rows on one link. ✅ **`SMRTest.Log.CrewDraft` HAS NOW RUN** — it carried
-the C95 acceptance sitting on 2026-09-16 and C95 closed `tested-attended`. ⛔ **Still BUILT AND
-UNRUN: `SMRTest.Log.DroneDrop` (C98) and the Selected-page Quick build leaf.** Each needs a witness
-in play and neither is closed by another link. ⭐ Both ride any ordinary colony, so the new
-ESA/Wildfire fixture above will do.
-
----
+- **`Fill all storages` aborts on the first rocket.** Owner, 2026-09-16: note it, do not fix it now.
+  `fill_storages` (`Code/72_SMRTK_World.lua:311-316`) sweeps `MechanizedDepot` and `StorageDepot`, and
+  every rocket is a `StorageDepot` (`Lua/Buildings/StorageDepot.lua:329-330`). The rocket's `CheatFill`
+  throws at `Lua/UniversalRocket.lua:1621` when a cargo line has no demand request, and there is no
+  per-object `pcall`, so the remaining depots are never filled (measured live, `SMRTK_ERROR ...
+  action=fill_storages`). Fix: exclude rockets and wrap the per-object call. The vanilla `CheatFill`
+  throw is cheat-only, so it fails the reach test and has no entry.
+- **`Open all domes` only makes the glass transparent** (noted 2026-09-17, not fixed, no owner ruling).
+  The leaf (`Code/72_SMRTK_World.lua:383`) calls the Lua `OpenAllDomes()` (`Lua/Buildings/Dome.lua:4034`).
+  That is the view passage and demolish modes use, and the domes close again. The owner's test showed
+  exactly that. The game's own cheat of the same name (`Data/CheatDef.lua:1036-1052`) is what actually
+  opens the domes. Either call the cheat or rename the leaf; recorded also in [C103](../../bugs/C103.md).
+- **Unrun rows from TestKit `acafc74`.** Each needs a witness in play; any ordinary colony will do.
+  Arm `SMRTest.Log.DroneDrop` (C98) and play normally. Press the Selected-page **Quick build** leaf on a
+  construction site. Its design reasoning, including why it calls `site:Complete("quick_build")` and not
+  `CheatDeliverResources`, is in the leaf's comment block in `73_SMRTK_Infopanel.lua`. Arm
+  `SMRTest.Log.CrewDraft` and deliberately under-supply an expedition (demand a specialisation nobody
+  has), then read the rocket's panel. The body and discriminators are in [EF-104](../../facts/EF-104.md).
+  The owner's 2026-09-15 deferral of the crew trace as an errand of its own still stands.
+- **Owner's third ask, 2026-09-16 — not started, not investigated** (*"Don't investigate it now just
+  add it as a note to do in the future"*). (1) A leaf that grants N tech points, built on the route
+  above: `AddResearchPoints` is bound on the player (`Lua/TechTree.lua:727-733`), and converts at the
+  current `TechPointCost` in a loop (`:692-706`), so the cost curve is honoured. The first point costs
+  1000 research, rising about 10% every 4 (`:684-690`). (2) A breakthroughs picker: no design work is
+  done or authorised; scope it with the owner first.
+- **Shared-kit improvements (item 83):** a `RunAll` owner filter and a `PACK_ID` on the enable-path leg.
+- **Stale desk tools in this repo, found 2026-09-16:** `tools/l2_reload_sim.py` crashes on the deleted
+  `Fix_LastTransmissionStorage.lua`, and `tools/l8_hostile_input.py` loads deleted modules. For the
+  hostile-globals rows, use `tools/desk_ck53_hostile_globals.py` instead. `tools/l6_reachability.py`
+  needs `PYTHONIOENCODING=utf-8` on this console.
 
 ## 2 · What is open
 
-### 2a · Owner
+The owner's queue is generated: read `docs/WAITING_ON_YOU.md`, then the checklist item it links to.
+Never keep an owner list here, and never rebuild an owed list from an older document.
 
-⛔ **Do NOT maintain an owner list here.** `docs/WAITING_ON_YOU.md` is **generated** from the checklist
-markers by `doccheck --regen` and is the only list that can be trusted — a hand-kept copy in this file
-went divergent within a day. **Read it, then read the checklist body it links to.**
+### Agent work
 
-⛔ **Never rebuild an "owed" list from an older document** — this file's did exactly that on 09-12 and
-contradicted its own closed list for most of a day.
+- **[C97](../../bugs/C97.md) carries ten known errors, not corrected.** They are preserved with
+  citations in [C97_RECHECK.md](../../reports/C97_RECHECK.md). Do not write a fix or a control recipe from
+  C97 until that report is applied; four of the ten propagate, including a code fence attributed to the
+  wrong function with an inverted truth condition. It is a bounded desk job, and the report is the work list.
+- **Field reports open and not reproduced:** [C98](../../bugs/C98.md) (drone drop; the `DroneDrop`
+  probe above settles it), [C99](../../bugs/C99.md) (a hub passage cannot be dismantled; it links C42's
+  stale-container mechanism to a field symptom; the route is source plus a TestKit container read, never
+  the reporter's save), and [C103](../../bugs/C103.md) (Open Domes stops passages on dome tree hexes).
+  C103 was filed 2026-09-17 on the owner's word to look later; its unrun control is in the entry.
+- **Migration residuals, in the entries:** F51 partial, with its leg unrun · F53 partial, no fresh
+  1.1.0 evidence · F59's expedition half untested · F73 partial, organic benefit unverified · F80
+  `investigating`, causation unproved · F54 never swept.
+- **Hotfix 3 is item 135 only:** the `luafn.py` body-delimiter fix for one-line functions. It is a
+  desk tool that changes no shipped hash. `find_bodies` still over-spans a one-line `local function`.
+- **`treediff` should grow a `TABLE-HUNK` list** (`HUNT_AUDIT` §8 item 2). Compare content between trees,
+  not position: see [PINNED_PARENTS_PASS.md](../../reports/PINNED_PARENTS_PASS.md).
+- **Doc overhaul:** three documentation moves stay pending because the fix-authoring destination does
+  not exist and no task has had authority to create it. Body in
+  [DOC_EDITING_SKILLS_AUDIT.md](../../reports/DOC_EDITING_SKILLS_AUDIT.md) (Deferred moves) and
+  `.claude/PENDING_MOVES.md`.
+- **Prompts ready to fire** are listed in [prompts/README.md](../README.md). The C92 build's shipping
+  hold lives in checklist ck172, and the stand-down audit's class-c blind spot is stated in its brief.
 
-### 2b · The loose ends — this is why the file is still alive
+### Watch list, not tasks
 
-⚠️ **Peers share this tree.** Re-check `git log` + `git status` before every write; a peer commits
-here every few minutes.
+- **Foreign Aid Rocket report** (Steam, wgtiii, 2026-09-12): stuck "Unloading cargo" with 2 Food for 40
+  sols. Not ours and not filed; the owner messaged the reporter. Lead, so it is not re-derived:
+  `LeaveForever` (`RocketForeignAid.lua:75-85`) sets `launch_after_unload = true`, so departure waits for
+  the unload, and cargo that cannot be placed strands the rocket; their warnings showed Low Storage.
+  If they reply, file it as a lead.
+- **C89 reopens only on a countering field report**; its B2 panel leg was not run, by owner ruling.
 
-⭐ **OWNER REQUEST 2026-09-15 — the quick-build button. ✅ BUILT 2026-09-16, TestKit `acafc74`, UNRUN.**
-Owner's words: *"I am missing the quick build button in the tool menu, that is something I frequently
-use, it only build the thing I am focused on via the cheat."* Shipped as the Selected-page **Quick
-build** leaf; ⛔ the reasoning is in the leaf's own comment block (`73_SMRTK_Infopanel.lua`), not here.
-- ⚠️ **ONE CORRECTION TO THIS FILE'S OWN PLAN, and it changed the build.** The line above used to name
-  `ConstructionSite:CheatDeliverResources` as the leaf to call. **It is the wrong one:** that body
-  (`ConstructionSite.lua:2042`) sets `supplied = true`, zeroes the outstanding requests and calls
-  `StartConstructionPhase()` — it PAYS for the build and starts it, and drones still spend the build
-  points. The owner asked for the focused twin of the colony-wide button, whose per-site body is
-  `site:Complete("quick_build")` (`Cheats.lua:84-97`). ⇒ **the leaf calls that instead.**
-  `CheatDeliverResources` was already reachable under More with its own rollover and stays there.
-- ⚠️ It is **not** a `leaves` row either: those dispatch as `obj[method](obj)` with no argument, and
-  this body takes one. It is a first-class `T.Action`, which is also what let it resolve the
-  construction group leader before completing — a click can land on any member of a grouped site.
+## 3 · Method with no other home
 
-⛔⛔ **OWED 2026-09-16 — [C97](../../bugs/C97.md) carries TEN KNOWN ERRORS and they are NOT corrected.**
-An Opus re-check found them; everything is preserved in
-[`reports/C97_RECHECK.md`](../../reports/C97_RECHECK.md) with line citations. ⛔ **Do not write a fix
-or a control recipe from C97 until that report is applied** — four of the ten propagate, including a
-code fence attributed to the wrong function **with an inverted truth condition**. The entry now warns
-about itself at the top. ⭐ Applying it is a bounded desk job; the report is the work list.
+- Delegate heavy reads and keep the conclusion. Review peers at surface level (`git log --stat`) and
+  escalate rather than deep-check; a high-context session carries more hallucination risk than a fresh one.
+- A STATE correction substitutes; it never stacks a qualifier beside the wrong line. Its admission test
+  is in [STATE_EVICTION.md](STATE_EVICTION.md).
+- Chain: Astra fans out and re-verifies its own subagents; the orchestrator sniff-tests; a cross-vendor
+  Claude agent runs only if the sniff test fails. Hunts, broad diffs and heavy coordination go to Astra.
+- Before scoping a redesign of a surface reported as broadly wrong, look for a single render or
+  registration fault. On 2026-09-14 one unresolved TextStyle blanked every button caption in the toolkit.
+  A verdict on rendered output is worthless unless the log proves which code rendered it.
+- When you refute a claim, state what the refutation depends on. The C90/C89 "everlasting flag"
+  refutation holds only while no module is `optional`.
+- A game label is not a diagnosis. On 2026-09-16 "Blocking objects" covered three unrelated passage
+  refusals, and the tinted tree was a bystander (C103). Read the refusal reason, and check a cursor-based
+  console read against the on-screen label before trusting it.
 
-⭐ **Field-report defects still open, NOT reproduced:** [C98](../../bugs/C98.md) (drone drop — §0a's
-probe settles it) and [C99](../../bugs/C99.md) (hub passage cannot be dismantled — ⭐ **links
-[C42](../../bugs/C42.md)'s stale-container mechanism to a field symptom for the first time**). C99 is
-Jäger's comment #8, untouched since it was filed 2026-09-15: the blocking wait in
-`PassageBase:OnDemolish` is source-verified, the sticking clause of `WouldStrandHubColonists` is not
-isolated, and the route is ours (source plus a TestKit container read), never the reporter's save.
-[C93](../../bugs/C93.md) is repaired, shipped in v11 and `tested-attended`; its second report's
-post-build `CreateStockpiles` entry point stays recorded in the entry.
+## 4 · Traps that have each cost this project a real error
 
-⚠️ **The Wildfire "no cure to research" report — the fresh 1.1.0 path is HEALTHY.** Checklist 188 ran
-both legs 2026-09-16: reveal, visibility, chain and full resolution all observed, and the one
-unbounded player gate is scanning the mystery's surface anomaly — the best-supported explanation for
-the report. Record: [Wildfire report](../../reports/WILDFIRE_CURE_RESEARCH.md), Leg A and Leg B.
-⚖️ **The attribution is disputed and the question is the owner's (checklist 188):** the records name
-Jäger, but his comment #8 is C99. Replies are pull-only. The class question stays answered: **yes**
-for the converter's Mysteries omission, **no** for [C69](../../bugs/C69.md), [C79](../../bugs/C79.md)
-and [C92](../../bugs/C92.md).
+Numbering keeps its old gaps so a citation of "trap 5" still resolves. The shared-tree rules (recheck before
+writing, commit with a pathspec, attribute by sha and diff) are header rules in `CLAUDE.md`. Trap 11 is gone: the checklist's own
+format gate now fails a stray heading.
 
-✅ **The 1.0.7-era candidate block is ARCHIVED 2026-09-16** (`481bbd7`, owner ruling): 38 rows to
-`docs/archive/bugs/`, candidates 59 → 34, the unprioritised bucket now empty. ⭐ **doccheck's
-`seq`/`row` contiguity rule was replaced by gap-accounting** so archiving no longer costs a renumber
-of every surviving entry — archived entries keep their numbers and the gate reads them back.
-⛔ **Never reuse an archived number**; doccheck goes RED on one claimed by both sides.
+3. **After an upload, the Mod Editor writeback strips every comment from `metadata.lua` and `items.lua`.**
+   No session may commit either file until `agent/support/POST_UPLOAD_CLOSE.md` has restored them. Check
+   `grep -c '^\s*--' metadata.lua items.lua`; 0 means the restore is owed.
+4. **Never state an absence from a truncated grep.** A claim that something is nowhere needs the
+   presence side counted.
+5. **A grep count is not a finding; check where each hit landed.**
+6. **A status flip must hit both the front matter and the body's heading tag**, and a retirement also
+   belongs in the title, because `INDEX.md` renders only title and status.
+7. **A retirement orphans a promise; a new fix falsifies one.** Grep the public drafts whenever a fix is
+   dropped or changes meaning.
+8. **Never discard or overwrite a file you did not write without reading it first.**
+9. **Bash heredocs eat one backslash level.** Anything carrying a backslash goes through `Write`, using
+   the absolute scratchpad path.
+10. **One stray NUL makes a doc binary, and `rg` skips binary files by default.** Detect with `file <p>`;
+    repair by transcribing the byte as `\x00` and disclosing it beside the block.
+12. **`STATE.md`'s `STILL OPEN:` line is parsed, and doccheck stays GREEN when it misparses.** A `(`
+    ends the capture and drops every later id. Any bare 2–3 digit number followed by a lowercase word
+    counts as owed, so an all-clear must read `none` with no digits. Check `doccheck | grep WAITING:`
+    before and after any STATE edit.
 
-⭐⭐ **THIRD TestKit ask — 2026-09-16, NOT STARTED and NOT INVESTIGATED (owner's instruction:
-*"Don't investigate it now just add it as a note to do in the future"*).** Two fixture-setup
-leaves, for provisioning a test colony when research-all is off the table because it would
-destroy the very reading the sitting is taking:
+## 5 · Where things live that the maps do not say
 
-1. **Grant N tech points.** ⭐ The console route is already MEASURED — build the leaf around it
-   rather than re-deriving it. `UIPlayer:AddResearchPoints(n)` is the shipped accumulator,
-   explicitly bound on the player (`AppendClass.Player`, `Lua/TechTree.lua:727-733`, with
-   `AddResearchPoints = TechPointObj.AddResearchPoints`); it accrues into
-   `AccumulatedResearchPoints` and converts in a `while` loop at the current `TechPointCost`
-   (`TechTree.lua:692-706`), so the cost curve is honoured and nothing is bypassed. Granting
-   exactly N without doing the arithmetic:
-   `for i=1,N do UIPlayer:AddResearchPoints(UIPlayer.TechPointCost) end` — each pass pays the
-   current price, so one point per iteration. First point is 1000 research, rising ~10% every
-   4 (`TechTree.lua:684-690`).
-   - ⛔ **THE TRAP, and it will read as a defect if missed:** `Player:CanResearch` opens with
-     `if self.TechPoints < const.TechPointResearchCost then return end`
-     (`TechTree.lua:868-874`). **A broke player gets `nil` from `CanResearch` even for an
-     `enabled` tech.** Any leg that prints `CanResearch` must grant points first or read the
-     `GetTechState` column instead. This bit the Wildfire Leg A recipe on 09-16.
-2. **A breakthroughs picker.** Owner's ask, ⛔ **no design work done and none authorised** —
-   scope it with them before building.
-
-⭐ **SECOND TestKit ask — the crew trace. ✅ BUILT 2026-09-16, TestKit `acafc74`, UNRUN.**
-`SMRTest.Log.CrewDraft`, a Kit-page arm/disarm button, to settle `EF-104`'s unexplained draft
-observation. ⚖️ The owner's 2026-09-15 deferral (*"lets save that"*) **stands as written** — it was
-built only because it rode the same link as C98's probe, not as an errand of its own. ⛔ **Design,
-trigger, the cheaper first step and the arm-before-assignment warning are in `EF-104` — do not
-restate them here.**
-
-⚠️ **TWO UNRUN ROWS, ONE SITTING.** Arm `DroneDrop` and play normally; press **Quick build** on a
-construction site. ⛔ Neither is closed by another link — each needs a witness in play.
-(`CrewDraft` ran with C95 on 09-16; the row below is what it still owes.)
-- ⛔ **STILL OWED, and explicitly NOT run at the C95 sitting** (its report says so): arm `CrewDraft`
-  and deliberately **under-supply** an expedition
-  (demand a specialisation nobody has) and **read the rocket's panel**. ⛔ Body and both discriminators
-  are in [`EF-104`](../../facts/EF-104.md) — an unguarded `#crew` on a nil return means "Not enough
-  Colonists" may never be reached, and a blank panel on a waiting rocket is the tell. The owner's
-  1.0.7 recollection cannot settle it.
-
-⚠️ **Doc overhaul loose end:** three documentation moves stay **PENDING** because the **fix-authoring
-destination does not exist and no task has had authority to create it**. Body in
-`reports/DOC_EDITING_SKILLS_AUDIT.md` (Deferred moves) and `.claude/PENDING_MOVES.md`.
-
-⭐ **OTHER PROMPTS READY TO FIRE.**
-① `prompts/STANDDOWN_AUDIT.md` — no blocker, fire any time; a 21-module sweep, good Codex fan-out.
-② `prompts/C92_ACHIEVEMENT_BUILD.md` — build + test, ⛔ **SHIPPING HELD by ck172 until the owner lifts
-it in words**. ③ `prompts/DLC_DEEP_CHECK.md` — desk, unclaimed, bounded.
-
-⛔ **The blocks below are POINTERS. The entry, brief or checklist item is the record — read it there.**
-
-- **C92** — ck172 ruled *build it, shipping HELD until the owner lifts it in words*; **ck171 (scope)
-  stays OPEN**. Brief `prompts/C92_ACHIEVEMENT_BUILD.md`; evidence closed out. ⛔ **Three claims are
-  WITHDRAWN — do not reason from them:** a ≈44% water bonus, a "never-drawn" icon, unremovable residue.
-  Seat/prerequisite/art are **design choices to be made**, not intent to be restored.
-- **D14 / stand-down** — brief `prompts/STANDDOWN_AUDIT.md` holds it. ⛔ The gap is **not** "did the body
-  change" (`bodycheck` answers that at the desk) but its declared **class-c** blind spot: a vendor
-  repairs a defect without touching the body we pinned and every instrument reads GREEN.
-- **ck173** — `FIX_POLICY` §2a is factually wrong in one half, raised 09-13, **unruled**; body in the
-  checklist. Reason 1 survives and is the real rule.
-- **Facts filed 09-13/14 — inherit, never re-derive:** `EF-093` · `EF-094` (⛔ no mod and no retail
-  console can clear an achievement flag — the console **is** the mod sandbox) · `EF-095`–`EF-099`
-  (smrtk premises) · `EF-100`/`EF-101` · `EF-102` (the depot class tree).
-  ⛔ **Read the fact, not this line** — `EF-102` was AMENDED 09-14 after its own FIX SHAPE bullet
-  caused a failed repair, and this file carried the superseded "two branches" wording for a day.
-  Summaries in `facts/INDEX.md`; ⛔ grep it, never read it whole.
-- **C91** — open candidate: vanilla leaks the Building Codes maintenance modifier on repeal.
-  ⭐ A read route exists (Dump exposes the modifier on a live building) — body in [C91](../../bugs/C91.md).
-- **Migration residuals, in the entries (09-12) — the list nobody would reconstruct:** **F51** PARTIAL,
-  leg re-filed **UNRUN** · **F53** PARTIAL, no fresh 1.1.0 evidence · **F59** repaired, **A1 expedition
-  half UNTESTED** · **F73** PARTIAL, organic benefit unverified · **F80** `investigating`, causation
-  unproved · **F54** never swept.
-- **`treediff` gains a `TABLE-HUNK` list** (`HUNT_AUDIT` §8 item 2). ⭐ **Compare CONTENT between trees,
-  not POSITION** — the position classifier's failures are in `reports/PINNED_PARENTS_PASS.md`.
-- **83 (SHARED TestKit)** — a `RunAll` owner filter and a `PACK_ID` on the enable-path leg improve the
-  kit **for us**, regardless of the opt-in mod.
-- **Hotfix 3 — 135 only**: take the `luafn.py` delimiter fix. Desk tool, **0 shipped hashes**.
-  ⛔ Do not re-derive the old table or the expired-triage "tension"; both are gone on purpose (ck161).
-
-### 2c · Watch list, not tasks
-
-- ⏳ **The Foreign Aid Rocket report** (Steam, wgtiii, 09-12): stuck "Unloading cargo", 2 Food, 40 sols.
-  ⛔ **NOT ours and NOT filed** — the owner messaged the reporter and is waiting. F119 cannot touch it
-  (that is `FuelResourceAmount` on **trade** rockets). Lead, so it is not re-derived: `LeaveForever`
-  (`RocketForeignAid.lua:75-85`) sets `launch_after_unload = true`, so departure is gated on the unload
-  finishing and unplaceable cargo strands the rocket; their warnings showed **Low Storage**.
-  ⇒ **If they reply, file it as a lead.**
-- **C89 reopens only on a countering field report** — its B2 panel leg was not run, by owner ruling.
-
----
-
-## 3 · Method — only what has no other home
-
-⛔ **Two of these are WORKFLOW rules, not this file's: read them there, they are canonical and dated.**
-**Rule 5b** replies are PULL-ONLY · **rule 5a** a ruling carries the state it was made in — both
-numbered in `WORKFLOW.md`; find them by number, never by line. ⚖️ The **VOICE RULE** lives with the text it binds: `reports/still-needed/WORDING_RULED.md` and
-`perma/PUBLIC_SURFACE_SWEEP.md`.
-
-What is only here:
-
-- **Delegate heavy reads; keep the conclusion.** Review peers at **SURFACE level** and **escalate rather
-  than deep-check** — a high-context session is at *higher* hallucination risk than a fresh one.
-  ⚠️ Reading a peer's live files *to describe their work in your own* is deep-checking by another name:
-  `git log --stat` is the surface read, and it is usually enough.
-- ⚠️ **A STATE correction SUBSTITUTES, it never stacks** — replace the wrong line, do not append a
-  qualifier beside it. Kept here because it is the half with no other home: its companion admission test
-  (is this fact universal to *every* session?) is a ruled owner decision living in
-  `perma/STATE_EVICTION.md` § Hazards admission test, and `EF-102` exists because a fact can fail it.
-- **Chain:** Astra fans out → Astra re-verifies its own subagents → orchestrator sniff test → a cross-vendor
-  Claude agent **only if the sniff test fails**. Hunts, broad diffs and heavy coordination go to **Astra
-  (Codex)**; builds to a Claude session.
-- ⭐⭐ **A SURFACE CANNOT BE DESIGN-JUDGED WHILE A RENDER BUG IS LIVE (08b, 09-14).** The owner called
-  the toolkit "a mess" and was about to commission a redesign sweep; **one** unresolved TextStyle had
-  blanked *every* button caption while every plain label rendered. Three of the "design" complaints
-  were that bug, and three more were one shared defect class (a fixed cap that clips once content
-  grows). ⇒ **When a surface is reported as broadly wrong, look for a single render/registration
-  fault before scoping a redesign** — compare what renders against what does not, and find the one
-  code path they differ on. Generalisation: ⛔ **a verdict on rendered output is worthless unless the
-  log proves which code rendered it** — the first font verdict here would have been passed on a
-  fallback font, and only a log line disappearing showed the real one was on screen.
-- ⭐ **When you refute a claim, say what your refutation depends on.** The C90/C89 "everlasting flag"
-  refutation holds *only while no module is `optional`* — the `fixtoggles` chain would end that. A
-  refutation without its condition is a trap for the next reader. (The general form is rule 5a.)
-
----
-
-## 4 · Marker rule — homed in WORKFLOW
-
-The mandatory marker-update rule now lives in `agent/WORKFLOW.md` rule 5, beside owner-decision mirroring.
-Its regeneration route lives there under "Writing in a shared tree". Read those canonical homes rather
-than copying this handoff's retired instructions or recorded counts.
-
-⭐ **Archiving a checklist body that `STATE.md` cites by number is a silent failure, not a tidy-up** —
-`docs/archive/` sits behind an `.rgignore`, so a default `rg` would never surface the body again.
-
----
-
-## 5 · Traps that have each cost this project a real error
-
-✅ **HOMED 2026-09-13, and the duplicate copies are now GONE from here** — the one-git-identity trap, the
-pathspec-is-half-a-fence trap and the `--regen-waiting` rule live in `agent/WORKFLOW.md` § "Writing in a
-shared tree". Read them there; this list carries only what has no other home. Numbering keeps its old
-gaps on purpose, so a citation of "trap 5" still resolves.
-
-3. ⛔ **After an upload, the Mod Editor writeback STRIPS EVERY COMMENT from `metadata.lua` and `items.lua`**
-   (v10: 319 → 0 and 51 → 0). ⛔ **No session may commit either file until `POST_UPLOAD_CLOSE.md` has restored
-   them** — a commit naming the path takes its working-tree content and buries ~400 lines. Check:
-   `grep -c '^\s*--' metadata.lua items.lua`; **0 means the restore is owed**.
-4. ⛔ **Never state an absence from a truncated grep.** `| head -5` is not an enumeration. A claim that
-   something is *nowhere* needs the presence side counted.
-5. ⛔ **A grep COUNT is not a finding — check where each hit LANDED.** On 09-12 a count of retired-fix bullets
-   in `STORE_CARD_LIVE.md` looked like two stale paste blocks; the hits were in the changelog prose that
-   *documents the removal*. Both paste blocks were correct.
-6. ⛔ **A status flip must hit BOTH the front matter and the body's heading tag** — doccheck goes RED on one
-   without the other. ⚠️ A retirement also belongs in the **title**, because `INDEX.md` renders title + status
-   and nothing else — otherwise the index reads a retired fix as live (the F60 precedent).
-7. ⚠️ **A retirement orphans a promise; a new fix falsifies one.** `PUBLIC_SURFACE_SWEEP` §1 only ever taught
-   the second direction, so 40 module deletions went unswept and `faq.md` promised a save repair the pack no
-   longer did. The check now exists in that file — **use it, and grep the drafts whenever a fix is dropped.**
-8. ⛔ **Never discard or overwrite a file you did not write without reading it first.**
-9. ⚠️ **Quoted bash heredocs still eat one backslash level** — use the `Write` tool for scripts carrying
-   escapes or regexes, and the absolute scratchpad path (`$TMPDIR` is not set in this shell). ⚠️ **Re-triggered
-   09-13 by a session that had already read this trap** — the no-op even reported success. Written down is
-   not applied: anything with a backslash goes through `Write`.
-10. ⛔ **ONE stray NUL makes a doc BINARY and `rg` SKIPS binary files by default** — it looks normal in an
-   editor while being invisible to every default search. Hit 09-13: a pasted savegame excerpt hid a whole
-   report, build-blocking correction included. Same silent-boundary family as `docs/archive/`'s `.rgignore`.
-   Detect `file <p>`; repair by transcribing the byte as `\x00` **and disclosing it beside the block**.
-11. ⛔⛔ **AN `##` HEADING IN `PLAYTEST_CHECKLIST.md` CLOSES "Decisions waiting on you" AND ORPHANS EVERY
-   ITEM BELOW IT — and doccheck stays GREEN through the whole thing.** Hit 09-14: one H2 appended mid-file
-   dropped the section from **134 items to 8** (exactly the items above the insertion point) and silently
-   cut 22 lines from `WAITING_ON_YOU.md`. **`WAITING: fresh` only asserts the render matches its source,
-   never that the source is intact.** ⇒ **Verify a checklist edit against the ITEM COUNT, not the gate
-   colour:** `doccheck | grep WAITING:` and `.claude/tools/archive_settled.py | sed -n 3p` must agree and
-   must not fall. A new item is `### <date> — <n>: <title>` + its `<!-- ck:n ... -->` marker, sub-headings
-   `####`. ⛔ And **never `git checkout --` the file to recover** — the owner blocked exactly that, which
-   would have taken 132 lines of unrelated work back to HEAD.
-12. ⛔ **A `(` ANYWHERE ON `STATE.md`'s `STILL OPEN:` LINE SILENTLY DROPS EVERY ID AFTER IT** from the
-   owner's generated register. `doccheck.py:584` captures with `STILL OPEN:(.*?)(?:\(|$)` — the first
-   bracket ends the match. Hit 09-16: adding a parenthetical to one item silently dropped a later item from
-   `WAITING_ON_YOU.md` while doccheck stayed GREEN and the file still read correctly to a human.
-   ⇒ **Keep that line bracket-free, and check the waiting count before and after any STATE edit** —
-   `doccheck | grep WAITING:` must not fall. ⚠️ The same line also counts **any bare 2–3 digit number followed by a lowercase word**
-   as owed, so an all-clear must read `none` with no digits. Same silent-boundary family as trap 11: the gate asserts
-   the render matches its source, never that the source still says what you think.
-
----
-
-## 6 · Where things live — ⛔ the map is `docs/README.md` and `prompts/README.md`
-
-Only the things those two do not already say:
-
-- ⭐ **`perma/RELEASE.md` SPANS the owner's upload and is finished at §6, not §2** — the close-out is part of
-  its job, never a separate errand. A release that stops at "ready to upload" leaves the outbox uncleared and
-  `metadata.lua`'s comments stripped (trap 3).
-- **`STATE.md` is a kernel: status + pointer, never derivation.** ⇒ **Put closed rulings in the checklist,
-  not there.** ⛔ Read its live byte number from `doccheck`, never from a document.
-- **Owner decisions go in `docs/PLAYTEST_CHECKLIST.md` → "Decisions waiting on you"**, never only in agent
-  docs; `docs/WAITING_ON_YOU.md` is the generated view of them (§2a).
-- ⭐ **`EF-###` ids are allocated by THIS repo** for both repos. The opt-in mod's own decisions
-  live in **`C:\Dev\SMR-OptInPack\docs\DECISIONS_OWED.md`** (moved 09-12).
+- `EF-###` ids are allocated by this repo for both this pack and the opt-in mod (ck167, ck86).
+- The opt-in mod's own decisions live in `C:\Dev\SMR-OptInPack\docs\DECISIONS_OWED.md` (moved 2026-09-12).
