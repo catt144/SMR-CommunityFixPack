@@ -668,14 +668,28 @@ contradicting this: its parser unescapes `\"` and `\\` but leaves each `\n` as t
 it reads the literal, not the body. 6,695 escaped − 6 quote escapes = 6,689. Compare like with
 like before quoting either number.
 
-⚠️ **Drift found, not introduced, 2026-09-17.** This file's PARADOX plain block is not byte-equal to
-`docs/UPLOAD_WORKFLOW.md`'s. It keeps an older, Paradox-specific FOUND A BUG section ("This page has
-no comment section…") and a trailing Steam Workshop link, while the workflow copy and the shipped
-`metadata.lua` string are portal-neutral and agree byte for byte. v12's edits were applied to each
-block in place, so the divergence is exactly what it was and no wording was silently overwritten.
-The two BBCode blocks are byte-identical. ⚖️ Unresolved: it needs an owner ruling on which body this
-file is meant to record — the portal-neutral string that actually ships, or a Paradox-specific
-rendering of it.
+⚖️ **RULED 2026-09-17 — the divergence is deliberate, not rot.** This file's PARADOX plain block is
+not byte-equal to `docs/UPLOAD_WORKFLOW.md`'s: it keeps a Paradox-specific FOUND A BUG section
+("This page has no comment section…") and a trailing Steam Workshop link, where the workflow copy
+and the shipped `metadata.lua` string are portal-neutral and agree byte for byte. The owner's
+reason: *"users have no comment or discussion section on paradox, github is the only way they can
+reach out to us."* The two BBCode blocks are byte-identical, and v12's edits were applied to each
+block in place, so the divergence is exactly what it was.
+
+⛔ **But the Paradox page does not show this block — it shows the NEUTRAL one.** `description`
+auto-fills BOTH storefronts from `metadata.lua` (`ParadoxMods.lua:34`), and §3's paste backup is
+the neutral plain block, used only when the auto-fill comes out blank. So the Paradox-specific
+wording here has never been what a Paradox reader sees; it is a better rendering of that page,
+not a record of it. ⚠️ Do not "sync" this block to the workflow copy on that basis, and do not
+push its wording into `metadata.lua`: "This page has no comment section" would be flatly FALSE on
+Steam, which is fed by the same string.
+
+The neutral body is what covers both, and it already handles the owner's point without naming a
+portal: the tracker is introduced as *"the route for everyone, and the only one that can carry a
+save file or a log"*, and the comment clause is conditional — *"If this page has a comment section"*
+— so on Paradox it simply resolves to nothing. ⚖️ Open, cheap, and NOT owed: giving Paradox the
+direct sentence would mean the owner hand-pasting a Paradox-specific body at every upload, on top
+of the styling pass. Left alone at v12 as not worth a per-release manual step.
 
 ## Provenance of the headliners
 
