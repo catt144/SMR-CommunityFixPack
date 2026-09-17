@@ -28,8 +28,10 @@ For an added, retired or materially respecified fix:
 3. Recount fix-list members from the file and reconcile the section counts to the
    total. A zero-hit count is a failure, not an empty success.
 4. Update judgment-call wording in `content/index.md` and `content/faq.md` when
-   applicable, and check the site repository's `README.md` status and emitted
-   counts.
+   applicable, and check the fix pack repo's own `README.md` — the GitHub front
+   page reporters and the developers land on — for stale status and emitted
+   counts. Not the site repository's: this step exists because that front page
+   is the one nothing else sweeps.
 
 Committing the site repository does not deploy it. Deployment is the owner's act.
 

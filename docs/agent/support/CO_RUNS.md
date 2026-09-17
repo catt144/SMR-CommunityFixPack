@@ -96,9 +96,14 @@ metadata entry and probe files back from disk and refuses an unarmed launch.
 
 ## Owner-led deviations
 
-An owner override is a course change, not a variance to manage. Never end a
-reply with elapsed time, the quoted estimate or a nudge back to the list: it
-makes it hard for the owner to track what they have sent to check. State the
+An owner override is a course change, not a variance to manage (owner,
+2026-08-05): *"My time is valuable and is a major concern. But if I decide to
+over ride and follow a lead, a session shouldn't remind me nearly every message
+that we should get back on track. Which makes trouble shooting hard when I am
+trying to keep track of what I have sent to it to check and what I have not."*
+
+Never end a reply with elapsed time, the quoted estimate or a nudge back to the
+list: it makes it hard for the owner to track what they have sent to check. State the
 plan's position once when the deviation starts, then stop until the lead closes,
 the owner asks, or the sitting ends.
 Keep the ledger of what the owner has checked and what remains. The lead is
@@ -128,8 +133,23 @@ harness note primitive when spoken so the archived evidence retains it.
 The rig has proven agent-driven Steam launch, filename-based staged loads from a
 real-time thread, speed set/read-back, scripted state reads, amplification loops,
 multi-launch sittings, log flush/read, and a save/list/load-back round trip.
-Recover old cell mechanics from their cited archived briefs; do not infer them
-from this summary.
+
+**Launch mechanics** (measured 2026-08-04 over four launches): with the game
+closed, stage the designated save copy in the signed-in account's numeric save
+folder and load it by filename, not its duplicated display name. Arm the
+committed probe file and metadata entry at the sitting, verify both from disk,
+then launch with `& "c:\program files (x86)\steam\steam.exe" -applaunch 3215050`
+and no `-smrautorun`. From a real-time thread with its own watchdog, poll for the
+pre-game menu, call `LoadGame("<COPY>.savegame.sav", {})`, set and read back game
+speed because the save arrives paused, then allow the measured 15-second settle
+before game-time work. Time the load from the engine's own log and the cycle from
+shutdown; `RealTime()` deltas do not survive a loading screen (`EF-045`). Disarm
+and remove the staged copy during the normal close-out.
+
+Anything older than this summary is recovered from the founding spec, which was
+consumed at chain close and survives only in git:
+`git show 93088ba:docs/agent/prompts/corun-rig/CORUN_RIG_SPEC.md`. Do not infer a
+mechanism from this summary.
 
 Still unproven: the watchdog firing under a real wedge. Deliberately outside the
 envelope: Mod-Manager/main-menu automation, unattended MarsDebug (modal asserts
