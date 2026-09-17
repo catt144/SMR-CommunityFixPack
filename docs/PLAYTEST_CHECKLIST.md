@@ -14,16 +14,6 @@ the sweep in `docs/agent/prompts/perma/STATE_EVICTION.md` clears what ages out. 
 
 ## Decide
 
-### ck204 · opened 2026-09-17
-Where do the tooling docs live, and who builds them?
-- Plan: `tools/README.md` becomes the catalog of the 65 scripts; WORKFLOW keeps when/why plus a
-  pointer; the TestKit and SMRTK agent docs move out of the kit's README, which is in no git repo.
-- Your calls: (a) kit docs public in this repo, or a new private kit repo (recommended: it is
-  backup and history the kit has never had); (b) should doccheck fail when a `tools/*.py` is
-  unlisted; (c) this seat builds it, or a brief goes out.
-- Nothing is built yet. WORKFLOW still carries the after-a-patch source-diff section.
-Home: `docs/agent/WORKFLOW.md`
-
 ### ck203 · opened 2026-09-17
 C83 sent the reporter's botanists to a habitat that refuses them (C106): pursue it or drop it?
 - They lived, homeless inside or beside the habitat; without C83 they would have walked to a dead dome.
