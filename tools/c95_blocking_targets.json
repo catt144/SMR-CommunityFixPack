@@ -54,5 +54,29 @@
   [
     "C95/C102 build",
     "FilterColonistsByTrait"
+  ],
+  [
+    "C95 place-home rebuild",
+    "SetCommand"
+  ],
+  [
+    "C95 place-home rebuild",
+    "GetEntrancePoints"
+  ],
+  [
+    "C95 place-home rebuild",
+    "Random"
+  ],
+  [
+    "C95 place-home rebuild",
+    "IsSameMap"
+  ],
+  [
+    "C95 place-home rebuild",
+    "IsValid"
+  ],
+  [
+    "C95 place-home rebuild",
+    "ReturnFromExpedition_TransportDestination"
   ]
 ]

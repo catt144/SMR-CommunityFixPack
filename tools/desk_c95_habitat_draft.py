@@ -6,6 +6,7 @@ IsKindOf (ancestry parsed from shipped declarations). ObjModified is inert.
 No pathing, transport, scheduling, UI or save serialization is measured here.
 Synthetic fixtures state bucket membership explicitly; they are not a colony.
 """
+import os
 import pathlib
 import re
 import subprocess
@@ -14,7 +15,11 @@ from deskbench import ENGINE_SHIMS, REPO, SRC_LIVE, body, load_at, span
 from lupa.lua54 import LuaRuntime
 
 ROOT = pathlib.Path(SRC_LIVE)
-MODULE = pathlib.Path(REPO, 'Code/Fix_HabitatExpeditionDraft.lua')
+# C95_DRAFT_MODULE=<path> loads a scratch variant, so falsification can require FAILs.
+MODULE = pathlib.Path(os.environ.get('C95_DRAFT_MODULE') or pathlib.Path(REPO, 'Code/Fix_HabitatExpeditionDraft.lua'))
+# The route-gated build this rebuild replaces: the harm control for the gate.
+PRIOR = subprocess.check_output(['git', 'show', '39f5fa9:Code/Fix_HabitatExpeditionDraft.lua'],
+                                text=True, encoding='utf-8')
 
 
 def source_audit():
@@ -83,7 +88,6 @@ def main():
         SMRFixPack = {
             Register = function(id, spec) registered = spec end,
             IsActive = function() return return_active ~= false end,
-            HabitatExpeditionReturn = {CanReturnHome=function(u,h,r) return h.returnable end},
             Require = function(id, spec)
                 for _, c in ipairs(spec) do
                     local val = c.class and _G[c.class] or c.global and _G[c.global]
@@ -169,18 +173,31 @@ def main():
         modenv=setmetatable({}, {__index=_G, __newindex=function(_,k,v) _G[k]=v end})
     ''')
     rt.globals().module_source = MODULE.read_text(encoding='utf-8')
+    rt.globals().prior_source = PRIOR
+    # Pre-fix harm control: the route gate held back a resident whose home had no route.
+    rt.execute('''
+        SMRFixPack.HabitatExpeditionReturn = {CanReturnHome=function(u,h,r) return h.returnable end}
+        load(prior_source, '@prior', 't', modenv)()
+        check(registered.apply()==nil, 'prior apply')
+        nat.returnable=false; micro.returnable=false
+        check(ids(universal:GatherAvailableColonists(2))=='idle,busy', 'pre-fix gate holds back no-route residents')
+        check(ids(rocket:GatherAvailableColonists(2))=='idle,busy', 'pre-fix legacy gate holds back no-route residents')
+        CargoTransporter.GatherAvailableColonists=vanilla
+        CargoTransporterNew.GatherAvailableColonists=new_vanilla
+        SMRFixPack.HabitatExpeditionReturn=nil
+    ''')
     rt.eval('function(src) return load(src, "@Code/Fix_HabitatExpeditionDraft.lua", "t", modenv) end')(
         MODULE.read_text(encoding='utf-8'))()
     rt.execute('''
         check(registered.apply()==nil, 'apply')
         local once=CargoTransporter.GatherAvailableColonists
         check(registered.apply()==nil and CargoTransporter.GatherAvailableColonists==once,'idempotent apply')
-        nat.returnable=true
-        check(ids(rocket:GatherAvailableColonists(2))=='naturalist,idle','conditional legacy admits returnable only')
-        check(ids(universal:GatherAvailableColonists(2))=='naturalist,idle','conditional new admits returnable only')
+        -- nat/micro.returnable is still false: no route home no longer matters.
+        check(ids(rocket:GatherAvailableColonists(2))=='naturalist,micro','draft takes residents with no route home')
+        check(ids(universal:GatherAvailableColonists(2))=='naturalist,micro','new draft takes residents with no route home')
+        check(FilterColonistsByTrait==base_filter,'active repair restores exact global')
         return_active=false
         check(ids(universal:GatherAvailableColonists(2))=='idle,busy','return veto retains exclusion')
-        return_active=true; nat.returnable=false
         check(ids(rocket:GatherAvailableColonists(4))=='idle,busy,employed,busy employed','fill all buckets')
         check(ids(universal:GatherAvailableColonists(4))=='idle,busy,employed,busy employed','new fill all buckets')
         check(FilterColonistsByTrait==base_filter,'success restores exact global')
@@ -278,9 +295,12 @@ def main():
         load(module_source, '@draft', 't', modenv)()
         check(registered.apply()==nil,'legacy-only receiver applies')
         check(ids(rocket:GatherAvailableColonists(2))=='idle,busy','legacy-only receiver filters')
+        return_active=true
+        check(ids(rocket:GatherAvailableColonists(2))=='naturalist,micro','legacy-only receiver drafts with repair active')
         check(loud==0,'no loud error/assert calls')
     ''')
-    print('PASS: both receiver contrasts; both habitats; full crew across buckets; lander; elevator; foreign receiver;')
+    print('PASS: pre-fix route gate harm; residents without a route drafted while the return repair is active;')
+    print('      exclusion kept when it is inactive; both receiver contrasts; both habitats; full crew across buckets; lander; elevator; foreign receiver;')
     print('      New request/connected/liveness branches; nil residence; predicate error; traits; transient filter;')
     print('      exact restore/error fallback; post-filter mutants rejected; scarcity; desk removal; tuples;')
     print('      common/one-receiver Require behavior; no-yield source scan; silence.')

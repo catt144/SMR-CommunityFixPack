@@ -1,5 +1,6 @@
--- C95: draft habitat residents only when their home is returnable from this
--- rocket. The registered return repair supplies the same admission predicate.
+-- C95: habitat residents are drafted like anyone while the return repair is
+-- active; it brings them home. Only if that repair is inactive are they
+-- excluded from the automatic draft, as in v11.
 -- v11 archive: docs/archive/code/Fix_HabitatExpeditionDraft.v11-4ec3e32.lua.txt
 -- Naturalist and Micro-G habitats both inherit MicroGHabitatBase; residence,
 -- not dome or player-toggleable community policies, identifies their residents.
@@ -31,17 +32,15 @@
 
 local installed = false
 
-local function IsAutoPickerExempt(unit, rocket)
-	if not IsKindOf(unit.residence, "MicroGHabitatBase") then return false end
-	local repair = SMRFixPack.HabitatExpeditionReturn
-	return not (SMRFixPack.IsActive("HabitatExpeditionReturn") and repair
-		and repair.CanReturnHome(unit, unit.residence, rocket))
+local function IsAutoPickerExempt(unit)
+	return IsKindOf(unit.residence, "MicroGHabitatBase")
 end
 
-local function eligible_pool(pool, rocket)
+local function eligible_pool(pool)
+	if SMRFixPack.IsActive("HabitatExpeditionReturn") then return pool end
 	local eligible = {}
 	for _, unit in ipairs(pool) do
-		if not IsAutoPickerExempt(unit, rocket) then
+		if not IsAutoPickerExempt(unit) then
 			eligible[#eligible + 1] = unit
 		end
 	end
@@ -62,7 +61,7 @@ local function wrap_gather(orig, is_automatic_expedition)
 		-- Plain assignment reaches the real global through ModEnvMeta.__newindex.
 		-- rawset(_G, ...) would only shadow it in this mod's sandbox.
 		FilterColonistsByTrait = function(pool, ...)
-			local ok, eligible = pcall(eligible_pool, pool, self)
+			local ok, eligible = pcall(eligible_pool, pool)
 			return filter(ok and eligible or pool, ...)
 		end
 		local result = pack(pcall(orig, self, ...))
@@ -73,7 +72,7 @@ local function wrap_gather(orig, is_automatic_expedition)
 end
 
 SMRFixPack.Register("HabitatExpeditionDraft", {
-	title = "Expeditions draft habitat residents when they have a return route home",
+	title = "Expeditions draft habitat residents only when they can be brought home",
 	apply = function()
 		if installed then return end
 		local err = SMRFixPack.Require("HabitatExpeditionDraft", {
