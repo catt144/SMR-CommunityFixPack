@@ -68,9 +68,11 @@ nothing has changed and the module stays shelved.
    must still be a COMBINED method, and `XPauseLayer` must still exist. The
    module's own `SMRFixPack.Require` gate already tests all three and stands
    down on its own if a patch moved them, so a wrong guess fails safe.
-2. Recreate the probe from §7 into `TestKit Code/59_Probes_Wave10.lua` (or a
-   current wave file). It needs no fixtures and no save — it drives the
-   module's exposed `clear_pause_flag` directly.
+2. Recreate the probe from §7 into **any current TestKit wave file**. It needs no
+   fixtures and no save — it drives the module's exposed `clear_pause_flag`
+   directly. ⛔ Its original host `59_Probes_Wave10.lua` was **deleted 2026-09-17**
+   once C39's probe left it registering nothing; §7 below is the restore source,
+   exactly as this record has always said, and nothing was lost with the file.
 3. `python tools/doccheck.py --emit-counts` and update STATE's build-state block
    (module and probe counts each go back up by one).
 4. Re-run the suite for a new gate baseline; the expected delta is **+1 PASS**
