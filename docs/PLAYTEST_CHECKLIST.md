@@ -24,6 +24,16 @@ Which of these WORKFLOW rules retire, each lapsed on the evidence but with no wo
   entries and reports still use the markers, so the rule may just need its scope reworded.
 Home: `docs/agent/WORKFLOW.md`
 
+### ck200 · opened 2026-09-16
+The C95 reporter's whole colony lives in habitats: what should an expedition do when nobody else can go?
+- Their words (in C95): 0 colonists outside habitats, a crew of 7 went anyway, and on return they
+  walked to a closed dome and suffocated. On v11 that crew cannot be drafted, so our fix was not
+  running for them; their pack version settles why, if you want it asked.
+- Once v11 runs for them no expedition can ever crew. Your stall ruling rested on domes of
+  hundreds; this colony has none. Keep it, or fall back to residents when nobody else qualifies?
+- The suffocation is C102: the return path uses the dead-dome fallback we repaired for arrivals only.
+Home: `docs/agent/bugs/C95.md`, `docs/agent/bugs/C102.md`
+
 ### ck188a · opened 2026-09-17
 Who reported Wildfire, and do you take the five-minute live look or drop it?
 - F120, the report and the handoff name Jäger, but his comment #8 is C99's tunnel bug and you said
@@ -34,10 +44,12 @@ Home: `docs/agent/bugs/F120.md`, `docs/archive/PLAYTEST_ARCHIVE.md`
 
 ### ck188b · opened 2026-09-17
 Habitat residents walk out on their own: a defect, or the price of the building?
-- In your C95 sitting Dermot left the Naturalist Habitat for Fuller #1 once he had a job there;
-  source blames the emigration scorer's jobless override, since habitats forbid connected work.
-- A cheap watch first: does a resident WITH a job stay while a jobless one leaves? If a working
-  resident also leaves, C100's mechanism is wrong. Nothing is authored until you say.
+- Measured 09-16 on your habitat beside DomeMega: five jobless residents never leave. The habitat
+  copied 8 of the dome's workplaces onto its own list when built; a free slot in any of them counts
+  as work at home, though no resident can ever be hired there (EF-107).
+- So the drain is real only for a habitat with no free listed slot, such as Dermot's remote one.
+- Adding the guard the dome's own sweep has would drain every habitat built beside a dome.
+  Nothing is authored until you say.
 Home: `docs/agent/bugs/C100.md`
 
 ### ck186 · opened 2026-09-17
