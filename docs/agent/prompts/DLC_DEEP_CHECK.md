@@ -5,7 +5,9 @@ deep-check the DLC's own new code and the base-game changes made to accommodate 
 `git rm`'d with its prompt-map row in the commit that lands the mapped chain. Fire only after
 `docs/archive/prompts/vanillahunt/README.md`'s link 99 has run — satisfied: its report,
 `docs/agent/reports/vanillahunt/HUNT_AUDIT.md` §8, carries this job's kickoff line and the base-game
-seam handoff this job inherits.
+seam handoff this job inherits. That kickoff also names `HUNT_AUDIT.md` §1.4 and §4.3 as reads:
+§4.3 records that a base change made through `__parents` or a table field is invisible to both row
+readers, which is exactly how the additive premise below could be wrong and still re-confirm.
 
 ## Start
 
@@ -40,8 +42,11 @@ the job-shaped links — the inventory re-emit, the scripted play leg, the termi
 - `thomas` is small enough to read in full — do not let it fall off the end behind `norman`.
 - The DLC's own Lua reads as almost entirely additive: new classes, and only four `OnMsg` hooks in the
   whole of `norman/Code`. That is an authoring-pass sweep, not settled — the chain's shape rests on it,
-  so re-derive it before building on it, and if DLC code turns out to patch base behaviour more than it
-  appears to, say so and rebuild the chain shape.
+  so re-derive it before building on it with an instrument that can see a `__parents` or table-field
+  change, and if DLC code turns out to patch base behaviour more than it appears to, say so and
+  rebuild the chain shape. Two of the four hooks are `GatherLawTraitWeights` and
+  `PersistGatherPermanents`; weight save/load hardest, since a save-breaking DLC bug is the worst
+  class for a player.
 - The thesis, standing: a new core feature ships under-tested, and nobody checked what it does to an
   existing player's game. Assume that here.
 - The old-meets-new breakage is mostly NOT inside the DLC folder. It sits in the base-game changes
@@ -85,8 +90,8 @@ split. Keep judgement central: ruling on the additive premise, designing the pla
 are not fan-out work, and no subagent writes to a shared file. A subagent's return is evidence, never a
 verdict alone — file:line, what the new content does, which existing system it touches, the route
 re-derived, who reaches it, the falsifier, and the do-players-without-the-DLC question. "Looks fine"
-without a route is the shallow-instrument failure this job exists to catch. `Explore` locates code, it
-does not judge it — use a judgement-capable agent for the review itself.
+without a route is the shallow-instrument failure this job exists to catch. An agent that only locates code
+cannot judge it — use a judgement-capable agent for the review itself.
 
 Unlike the vanilla diff, this content has no catalogue of known defects to seed as controls. Derive two
 or three real positives by hand before fanning out, use them as the calibration, and report the hit
