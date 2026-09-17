@@ -39,6 +39,9 @@ judgement, and cut every line a named skill or the worker's own judgement alread
 - **Stops**, at most three, as permission to report instead of pushing on.
 - **Do not claim:** the claim the evidence cannot carry, and the narrower true one to write instead.
 - **Lifecycle:** a one-off is deleted when fired; a perma prompt stays.
+- **Difficulty tag** in the filename: `_low` (light-to-moderate reasoning on a settled plan; never an
+  investigation), `_medium`, `_high`, or `_fanout_level_<x>` (1–10) for subagent control. It is the
+  owner's routing hint, not a gate: a brief never names a model or checks which one runs it.
 - **Name skills, do not restate them:** `doc-editing`, `smr-bug-library`; house rules are `CLAUDE.md`.
 
 ## Shapes that fail
