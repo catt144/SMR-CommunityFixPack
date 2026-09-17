@@ -249,6 +249,22 @@ def main():
     check("five more refresh cycles leave the same numbers (no drift, no loss)",
           rt.eval("dome.water_consumption == 5000 and farm.water_consumption == 2500 and spires[1].performance == 100"), g.AGAIN)
 
+    # C2. the dome-own half is a FIXED amount (WaterReclamation.lua:57-60): a later rise in the
+    # dome's own water use erodes it until the spire next recalculates (review lead, 2026-09-17)
+    rt.execute('''
+        RISE = ObjectModifier:new({ target = dome, prop = "water_consumption", amount = 0, percent = 25 })
+        STALE = reading(spires[1])
+        spires[1]:SetWorking(false); spires[1]:SetWorking(true)
+        FRESH = reading(spires[1])
+        RISE:Remove()
+    ''')
+    print("  dome +25%, no recalc: " + g.STALE)
+    print("  after a working-state refresh: " + g.FRESH)
+    check("STALENESS: a +25% rise in the dome's own water leaves its saving at 40% (12500 -> 7500) until a recalc; the farm keeps 50%",
+          "dome_water=7500 " in g.STALE and "farm_water=2500" in g.STALE, g.STALE)
+    check("the next recalculation restores 50% on the dome's own water (12500 -> 6250)",
+          "dome_water=6250 " in g.FRESH, g.FRESH)
+
     # D. a second, still-staffed spire in the same dome: best performance wins
     rt.execute('''
         build_world(140, 2, 2)
