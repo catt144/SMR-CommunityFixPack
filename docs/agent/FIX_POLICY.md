@@ -6,786 +6,396 @@ Rule: Keep section 5 because it defines proposals that do not belong in this pac
 Rule: Do not build a fix for a version players cannot play; a defect that lives only in a save Steam and console cannot load stops before the build brief. [A3: pass]
 <!-- /RULES -->
 
-Rules for every fix in this pack, in priority order. The goal: maximum
-compatibility with other mods and future game patches, zero edits to game files.
+Rules for every fix in this pack, in priority order. Goal: maximum compatibility with other
+mods and future game patches, zero edits to game files. Bare ids are `agent/bugs/` entries
+(F##, D##) and `agent/facts/` (EF-###); read the entry only when the rule's reason is not enough.
 
 ## 1. Choose the least invasive technique that works
 
-Ranked from most to least preferred:
+Ranked from most to least preferred. Take the first that repairs the defect.
 
-1. **Data/preset patch** — mutate the preset field in place (e.g.
-   `TraitPresets.DustSickness.daily_update_func = ...`,
-   `TechDef.X[i].Amount = -20`). Do it in `OnMsg.ClassesPostprocess` (presets built)
-   or at code load if the object already exists. Most compatible: other mods see the
-   corrected data.
-2. **Additive handler** — a new `OnMsg.<X>` alongside the broken one (OnMsg is
-   additive; a dead original handler can stay). Used when the original can't fire at
-   all (F23).
-3. **Registry/table surgery** — adjust the stored entry another system reads
-   (e.g. wrap slot FUNC of `PeriodicRepeatInfo["UndergroundMarsquake"]`). Leaves the
-   scheduling machinery and any other wrappers intact.
-4. **Wrap (chain) the original function** —
-   ```lua
-   local orig = Colonist.BoardVehicle
-   function Colonist:BoardVehicle(...)
-       local r1, r2 = orig(self, ...)
-       if self.transport_ticket then self.transport_ticket.start_wait = GameTime() end
-       return r1, r2
-   end
-   ```
-   Always capture at apply time, always call `orig`, always pass through returns.
-   If another mod wrapped first, we chain onto theirs — and vice versa.
+1. **Data/preset patch** — mutate the preset field in place, in `OnMsg.ClassesPostprocess`
+   or at code load if the object already exists. Other mods see the corrected data.
+2. **Additive handler** — a new `OnMsg.<X>` beside the broken one, when the original cannot
+   fire at all (F23). OnMsg is additive; a dead original handler can stay.
+3. **Registry/table surgery** — change the stored entry another system reads (a
+   `PeriodicRepeatInfo` slot, for example) and leave the machinery and other wrappers intact.
+4. **Wrap (chain) the original** — capture `orig` at apply time, always call it, always pass
+   every return through. If another mod wrapped first, chain onto theirs.
+   - A post-hook enumerates the wrapped function's CALLERS, not its callees. For each caller
+     ask: does it keep using the state my hook just published? A hook that acts on freed
+     capacity is the dangerous shape, because the enclosing operation usually freed it for
+     itself. Such a caller needs a guard keyed on its own state, not a later cleanup pass (F59).
+   - Work deferred into a game-time thread rides in the player's save (EF-019). Deferral is
+     allowed but is a §3a decision. The thread body has zero upvalues and takes its state as
+     thread arguments, and the orphan gate `if not SMRFixPack then return end` is the FIRST
+     statement after its only yield, before any vanilla state is touched. Never rely on the
+     engine's `__unpersisted_function__` fallback in place of the gate.
 
-   **⛔ A POST-HOOK MUST ENUMERATE THE WRAPPED FUNCTION'S CALLERS, NOT ITS
-   CALLEES (rule added 2026-09-11, the F59 lesson).** "Hook one level up so the
-   work runs when the operation is FINISHED" is only true if the wrapped
-   function IS the operation. `Fix_FreedHousingNotice` moved its hook from
-   `Residence:RemoveResident` up to `Colonist:SetResidence` — correctly noting
-   that `SetResidence` is `RemoveResident`'s only caller — and shipped a harm
-   anyway, because `SetResidence` has **11** shipped callers and two of them
-   (`Colonist:EnterTransporter`'s boarding sequence, `Residence:ColonistInteract`'s
-   kick-then-assign) call it as a MIDDLE step and still need the slot it frees.
-   So: list every caller of the method you wrap, and for each one ask **"does
-   this caller keep using the state my hook just published?"** A hook that acts
-   on freed capacity is the dangerous shape — the enclosing operation usually
-   freed it ON PURPOSE, for itself. When a caller does, the hook needs a guard
-   keyed on that caller's own state, not a later cleanup pass.
-
-   **⛔ ANY WORK YOU DEFER INTO A GAME-TIME THREAD RIDES IN THE PLAYER'S SAVE
-   (rule added 2026-09-11, from F59's repair).** `CreateGameTimeThread` threads are
-   persisted by default — `OnMsg.PersistSave` serialises every thread carrying
-   `threadPersist` together with its sleep state (`CommonLua/Core/cthreads.lua:481-524`);
-   only REAL-time threads must opt in via `MakeThreadPersistable`. So deferral is a
-   legitimate technique (it is what repairs F59) but it is a §3a decision, not a free
-   one: a save taken while the thread sleeps captures a thread pointing at OUR
-   function. Two rules follow. (1) **Give the thread body zero upvalues** and pass its
-   state as thread arguments, so nothing of ours is dragged in by value. (2) **Put the
-   orphan gate — `if not SMRFixPack then return end` — as the FIRST statement after
-   the only yield**, before any vanilla state is touched, so a load without the mod
-   returns harmlessly. Both are in `Fix_FreedHousingNotice`; the precedent is
-   `Fix_ExtenderFlapChurn:97`. The engine's fallback is benign either way
-   (`__unpersisted_function__`, `CommonLua/Core/persist.lua:52-54`, asserts without
-   unwinding per `EF-008`), but do not rely on it in place of the gate.
-
-   **4b. Global-function replacement** (its own technique, between 4 and 5 in
-   preference; numbered 4b so existing §1.4/§1.5 citations stay valid) —
-   assigning `_G[name] = replacement` for an existing global. Works because
-   `ModEnvMeta.__newindex` rawsets non-blacklisted existing names into the
-   real `_G`, and generated closures (script conditions, sequence code)
-   resolve the name at call time (agent/facts/). Rules: plain assignment,
-   NOT `rawset(_G, ...)` (that writes only the mod's own env); read the name
-   back with `rawget(_G, name)` in apply() to confirm the write landed (F22
-   does); prefer a chained wrapper (capture `orig`, delegate) over a body
-   copy whenever the defect is hookable.
-   **⚠️ Prefer a wrapper over a body copy even when both work — it degrades
-   gracefully and a copy does not** (recorded 2026-07-31 by the F86 layer-3
-   sweep). If a future game patch fixes the vanilla bug, a chained wrapper
-   becomes a harmless no-op, whereas a §1.5 copy silently reinstates the old
-   body's shape and can *undo the official fix*. Two shapes make a wrapper
-   sufficient more often than it looks:
-   * **the fix only needs to widen a result** — vanilla returns `true`/nil and
-     you need `true` in more cases, so `local r = orig(...) if r then return r
-     end return <extra case>` leaves every existing path identical **by
-     construction**, which is stronger than a hand-verified byte-copy
-     (`Colonist:ShouldLeaveForWork`, F04);
-   * **the broken original is a verified no-op** — then a post-wrapper doing the
-     correct work is enough (`Building:StopUpgradeModifiers` iterates a
-     string-keyed table with `ipairs`, F03).
-   Also check whether the shipped function **already takes the parameter you
-   need**: `LandscapeConstructionSiteBase:GetClosestDests(drone, top_count)`
-   accepts the bound its only caller never passes, so clamping it in a wrapper
-   fixes F33 with zero copied logic.
-
-5. **Full replacement** — only when the defect is mid-function and unhookable
-   (F04, F09, F11, F12...). Rules:
-   - Copy the shipped body **byte-identical except the minimal fix**, marked with
-     `-- FIX:` comments on changed lines only.
-   - Header comment must name source file + lines + game version the copy came from
-     (the pinned build number, e.g. `1.0.7.396349` — not a date).
-   - These are the fixes most likely to clash with other mods and rot on game
-     patches — keep the list short and re-verify each game update (the fpk
-     extraction diff is a release gate, WORKFLOW.md).
-   - **"Reconstruction" sub-category:** a replacement whose body is NOT a
-     byte-copy — the original is rebuilt from its observable contract (a
-     file-local was inlined, a helper re-derived; F03/F04/F09 are of this
-     kind). Allowed only when a byte-copy is impossible (file-local upvalues,
-     generated code); the header must SAY it is a reconstruction and name
-     what was re-derived, because the extraction-diff re-verify cannot
-     compare it byte-for-byte — it needs a behavioral re-check instead.
+   **4b. Global-function replacement** — between 4 and 5 in preference. Assign
+   `_G[name] = replacement` (EF-017); never `rawset(_G, ...)`, which writes only the mod's own
+   env (EF-009). Read the name back with `rawget(_G, name)` in apply() to confirm the write landed.
+   - Prefer a chained wrapper over a body copy whenever the defect is hookable, even when both
+     work: when a game patch fixes the bug a wrapper becomes a no-op, while a copy reinstates
+     the old body and undoes the official fix. Two shapes make a wrapper sufficient more often
+     than it looks: widening a result (`local r = orig(...) if r then return r end return <extra>`
+     keeps every existing path identical by construction, F04), and a broken original that is
+     a verified no-op, where a post-wrapper does the work (F03).
+   - Check whether the shipped function already takes the parameter you need; clamp it in a
+     wrapper instead of copying (F33).
+5. **Full replacement** — only when the defect is mid-function and unhookable.
+   - Copy the shipped body byte-identical except the minimal fix; `-- FIX:` comments on the
+     changed lines only.
+   - The header names the source file, lines and the pinned game build number (not a date).
+   - Keep the list short; every replacement is re-verified on each game update (the extraction
+     diff is a release gate, WORKFLOW).
+   - A **reconstruction** (a body rebuilt from its observable contract, not a byte-copy) is
+     allowed only when a byte-copy is impossible: file-local upvalues, generated code. Its
+     header says it is a reconstruction and names what was re-derived, because its re-verify
+     must be behavioural, not a byte diff.
 
 ## 2. Fail safe, never loud
 
-Every fix goes through `SMRFixPack.Register(id, {title, apply})` (Code/00_Core.lua):
+Every fix goes through `SMRFixPack.Register(id, {title, apply})` (`Code/00_Core.lua`). `apply`
+runs under `pcall`; an error deactivates only that fix.
 
-- `apply` runs under `pcall`; an error deactivates only that fix.
-- Before patching, sanity-check the target still looks like the bug (function
-  exists, table layout as expected). If not — the game likely hotfixed it —
-  **return a string** (reason) instead of patching. Never assume; never error.
-- **Self-check on the DECLARING class** (the F64 lesson): mod code runs before
-  classes are flattened, so a classdef exposes only members it declares
-  ITSELF — checking an inherited method on a subclass finds nil and silently
-  deactivates the fix. Verify where the method is declared in Src and check
-  that class.
-- ⛔ **EVERY `(class, method)` PAIR A MODULE INSTALLS ON OR CAPTURES FROM MUST
-  APPEAR IN THAT MODULE'S OWN `Require` BLOCK (the F107 rule, adopted
-  2026-08-24).** `Require` validates what the author DECLARES, never what the
-  module WRAPS, and the two diverged silently: `Fix_LandscapeCostRefresh`
-  required `ConstructionSite.RefreshConstructionResources` (the declaring
-  class) plus the three leaves' gatherers, then captured
-  `local prev = <leaf>.RefreshConstructionResources` — a pair it never
-  declared — and `prev` was nil on every boot (F107). Had the installed pair
-  been in the block, the `{class, method}` check would have FAILED at apply
-  time and `find_declaring_ancestor` (`00_Core.lua:132-137`) would have named
-  the authoring error, with no game launch needed. Corollary for captures:
-  take the original from the class that DECLARES the method (mind the F64
-  lesson above — the classdef you install on and the classdef that declares
-  the method are different tables at apply time). Statically enforced for the
-  shape that can produce a nil `prev`: `python tools/harvest_wrap_targets.py
-  --check`, run by doccheck, goes RED on a capture-AND-install site whose pair
-  is absent from its module's Require block (a full replacement with no
-  capture is outside the check and guards existence with the inline
-  sanity-check this section already requires). Pre-rule sites verified benign
-  at Src 2026-08-24 are allowlisted in the tool with their citations; F107's
-  three rows were allowlisted as a FILED DEFECT and LEFT with its repair the
-  same day (checklist 74(a), 2026-08-24) — the repaired module installs on the
-  pair its `Require` block already named, so it needs no exemption. That is the
-  intended lifecycle for an allowlist entry carrying a defect id: a receipt for
-  an open case, never a permanent waiver.
-- ⛔ **NO `apply()` MAY ASSUME A COLD BOOT (the F87 rule, 2026-07-31).** A mod is
-  never auto-enabled: the player ticks it at the main menu of a process that is
-  already running, the engine does an **in-place reload**
-  (`ModsReloadItems` → `ReloadLua`, `Mod.lua:2145`), and our code loads with the
-  **presets ALREADY loaded and the classes NOT yet built**. That is **every
-  player's first run**, and it is the opposite of the cold boot every A/B leg we
-  have ever run measures. Two binding consequences:
-  * **Apply-time code may not CONSTRUCT a class or preset object** — no
-    `Class:new{…}`, no `PlaceObj`, no class-table method call. Mod code always
-    loads before flattening, so `Class.new` is nil; on a cold boot the pass
-    usually returned early for lack of presets and hid it. `type(X) == "table"`
-    does NOT prove a class is built — an unflattened classdef is a table too.
-    Test what you are about to use (`type(X.new) == "function"`), and prefer
-    `PlaceObj("Class", {…})`, which fails soft where `:new` throws.
-  * **`OnMsg.DataLoaded` alone is NOT a sufficient trigger** — it does not fire
-    on the enable path, so a fix hung off it is silently dead for that entire
-    session. Use `SMRFixPack.DataPatch` (preset patches with the latch/heal
-    contract) or `SMRFixPack.OnDataReady` (everything else); both fire on
-    `ClassesBuilt` / `ModsReloaded` too, and both require the callback to be
-    idempotent. The F87 sweep found three sites that had this bug.
-  **Both paths must be tested** — a cold boot AND a run where the pack is
-  enabled from the main menu. The second one is why F87 shipped.
-- ⛔ **EVERY WRAPPER MUST BE INERT FOR A FOREIGN OBJECT BEFORE IT TOUCHES ONE**
-  (adopted 2026-08-03, spec §7). A wrapper on a shared method is called for
-  every object of every class that inherits it, including objects another mod
-  created and objects our defect has nothing to do with. Decide "is this mine?"
-  and hand the call straight to the original **before** reading a field,
-  allocating, or logging — a wrapper that inspects first is already a behaviour
-  change for everyone else, and it is the shape §4a bars us from shipping.
-- Respect `SMRFixPack_Disabled["<id>"]` so users/other mods can veto single fixes.
-- **Every `OnMsg` handler must re-check BOTH the registry status AND the veto
-  itself** (the A1 lesson, audit 2026-07-29): handlers are installed at file
-  scope unconditionally — Register's veto only skips apply() — so a handler
-  that mutates state without re-checking `SMRFixPack_Disabled[id]` (and,
-  where it heals status, without refusing to overwrite `"disabled"`) defeats
-  the veto. Donor pattern: Fix_LastTransmissionStorage's patch() prologue.
-- If the target can legitimately be absent before `DataLoaded` (presets,
-  templates), track a `data_loaded` flag and only latch `inactive` after it
-  has fired — before that, absence just means "not loaded yet" (the F75
-  false-inactive lesson); after it, silence means reporting `active` forever
-  on a target a future update removed (the B3 lesson). **On the enable path
-  that flag can only come from the engine's own `DataLoaded` global**
-  (`Dlc.lua:51/:663`, declared under `FirstLoad` so it survives a Lua reload) —
-  the message never arrives. Both shared runners do this for you.
-- ⛔ **NEVER `Require` A PER-GAME RUNTIME GLOBAL AT APPLY TIME (the F110 rule,
-  2026-08-30).** `apply()`/`Require` run at the MENU, before any game is loaded,
-  so a game-scoped global — `Cities`, `UIColony`, `UICity`, `MainCity`, a map
-  object — is legitimately nil there. Putting one in the `Require` block makes
-  the self-check read it as "game code changed" and SAFE-DISABLE the fix on every
-  boot (`JumboCaveReinforcementWedge: inactive (Cities not found …)`, seen live
-  before the fix). `Require` is only for what a game UPDATE could remove and that
-  is present at apply time: engine globals, built classes, `(class, method)`
-  pairs. A per-game global is a RUNTIME condition — `rawget(_G, "Cities")` +
-  a `type(...) == "table"` guard inside the OnMsg handler, never a Require entry.
+- Before patching, sanity-check the target still looks like the bug (function exists, table
+  layout as expected). If not, return a reason string instead of patching. Never assume, never
+  error.
+- Self-check on the DECLARING class. Mod code runs before classes are flattened, so a classdef
+  exposes only members it declares itself; an inherited method checked on a subclass reads nil
+  and silently deactivates the fix (F64). Verify where Src declares the method.
+- Every `(class, method)` pair a module installs on or captures from appears in that module's
+  own `Require` block, and a capture takes the original from the class that DECLARES the
+  method. `Require` validates only what is declared, so an undeclared capture is a nil `prev`
+  on every boot (F107). `tools/harvest_wrap_targets.py --check`, run by doccheck, goes RED on a
+  capture-and-install site whose pair is missing; a full replacement with no capture is
+  outside the check and relies on the inline sanity-check above. An allowlist entry there that
+  carries a defect id is a receipt for an open case, never a permanent waiver.
+- No `apply()` may assume a cold boot. Enabling the pack at the main menu is an in-place
+  reload with presets already loaded and classes not yet built, and it is every player's first
+  run (EF-025). So:
+  - Apply-time code never constructs a class or preset object: no `Class:new{...}`, no
+    `PlaceObj`, no class-table method call. `type(X) == "table"` does not prove a class is
+    built; test `type(X.new) == "function"`, and prefer `PlaceObj("Class", {...})`, which
+    fails soft where `:new` throws.
+  - `OnMsg.DataLoaded` alone is not a trigger; it does not fire on the enable path. Use
+    `SMRFixPack.DataPatch` for preset patches and `SMRFixPack.OnDataReady` for everything else.
+    Both fire on `ClassesBuilt` / `ModsReloaded` too, so the callback must be idempotent.
+  - Test both paths: a cold boot AND a run where the pack is enabled from the main menu (F87).
+- Every wrapper is inert for a foreign object before it touches one. A wrapper on a shared
+  method runs for every object of every class that inherits it, other mods' objects included.
+  Decide "is this mine?" and hand the call to `orig` before reading a field, allocating or
+  logging; a wrapper that inspects first is already a behaviour change for everyone else (§4a).
+- Respect `SMRFixPack_Disabled["<id>"]`, the per-fix veto for users and other mods.
+- Every `OnMsg` handler re-checks BOTH the registry status AND the veto itself (the A1 rule).
+  Handlers install at file scope unconditionally and Register's veto only skips `apply()`,
+  so a handler that mutates state without re-reading `SMRFixPack_Disabled[id]` defeats the
+  veto. A handler that heals status never overwrites `"disabled"`.
+- A target that can legitimately be absent before `DataLoaded` (presets, templates): track a
+  `data_loaded` flag and latch `inactive` only after it fired. Before, absence means "not
+  loaded yet" (F75); after, silence means reporting `active` forever on a removed target. On
+  the enable path the flag can come only from the engine's `DataLoaded` global, because the
+  message never arrives. Both shared runners do this for you.
+- Never `Require` a per-game runtime global at apply time. `apply()` runs at the menu, so
+  `Cities`, `UIColony`, `UICity`, `MainCity` or a map object is legitimately nil there, and
+  the self-check would read it as "game code changed" and disable the fix on every boot
+  (F110). `Require` is for what a game update could remove and that exists at apply time:
+  engine globals, built classes, `(class, method)` pairs. A per-game global is a runtime
+  condition: `rawget(_G, "Cities")` plus a `type(...) == "table"` guard inside the handler.
 
 ## 2a. Branch guards — the `probe` IS the guard, and there is no version check
 
-Adopted 2026-09-08 (hotfix2 link 01, decision 118). Binding on every module that
-carries a body, expression or data shape taken from one game branch.
+Binding on every module that carries a body, expression or data shape taken from one game
+branch. Nothing stops a build reaching a player on the other branch: the pack installs and
+loads on 1.0.7 and 1.1.0 alike with no warning (EF-077), and a body copied from one branch
+applied over the other's is F114 in reverse.
 
-**Two clarifications adopted 2026-09-12 (owner ruling, checklist 166).**
-
-**(i) An UNKNOWN probe answer DECLINES — and an exception needs the owner's word,
-not an agent's judgement.** A probe that does not return a clear yes is not a
-maybe: only a literal `true` applies. This is already what the code does
-(`Code/00_Core.lua:156-167` — a throw, a `nil`, or any other value declines), and
-it is now policy so a future module cannot quietly choose otherwise.
-✅ **A hybrid, at the owner's direction:** decline is the standing plan, but an
-agent that finds a real case for applying on UNKNOWN may **PROPOSE** the exception
-— as a checklist item, naming the module, the probe, and why declining is the
-worse outcome there. ⛔ **An agent never self-authorises one**, and no exception
-exists today. If one is ever granted, it is named in that module's wording.
-
-**(ii) `LuaRevision` may be an OBSERVATION LABEL, never a guard.** It may be used
-to record **which build a reading was taken on** — in an entry, a report, a log
-line or a probe's output. ⛔ It may **NOT** gate whether a fix applies: that stays
-a behaviour probe, per the rule below, and this clarification does not weaken
-decision 118 by a word. The distinction is *describing* a build versus *deciding*
-on one. ⚠️ And note the trap that makes it a label and not a guard in the first
-place: `lua_revision` is **350453 on BOTH branches** (`EF-077`), so it could not
-separate them even if it were allowed to try.
-
-**The problem.** Nothing stops a build reaching a player on the *other* branch.
-Our `lua_revision` is 350453 and 1.1.0's `ModMinLuaRevision` and
-`ModRequiredLuaRevision` are BOTH 350453 (`EF-077`), so `ModDef:IsObsolete()` is
-false on 1.0.7 and on 1.1.0 alike: the pack installs and loads on either, with no
-warning of any kind. A module carrying a 1.1.0 function body that lands on a
-1.0.7 function is **F114 in reverse** — our copy applied over a body that does
-not match it.
-
-⛔ **DO NOT BUILD A GAME-VERSION DETECTOR.** Two independent reasons, and each is
-sufficient:
-1. It would be a **label check**, and this project's rule is *check the thing,
-   not its label* — the rule that made the F115 gate correct, and whose violation
-   made the desk audit wrong by 5 (`EF-078`).
-2. It is **unbuildable from the mod's own fields anyway**: `lua_revision`,
-   `ModMinLuaRevision` and `ModRequiredLuaRevision` are all 350453 on both
-   branches (`EF-077`) — which is precisely why nothing warns a 1.0.7 player.
-   There is no field to read.
-
-✅ **THE PER-MODULE `probe` IS THE BRANCH GUARD** (`00_Core.lua`, `Require`'s
-`{ probe = fn, reason = ... }` form). A probe that confirms the body shape its
-module was written for **necessarily declines on the branch that has the other
-shape** — per module, at apply time, with no version arithmetic anywhere and
-nothing global to keep in sync. The `MultiResourceDepotBase` test in
-`Fix_TrainCargoDumping` and the `Landscapes`-global test in
-`Fix_LandscapeUnitFilter` are the same idea reached by hand; the probe form is
-that idea made callable, error-trapped and fail-closed.
-
-⚠️ A probe is only for a target shown **synchronous and side-effect-free on a
-stub** from its shipped body. Where that cannot be shown, the module keeps a
-`test` naming a discriminating *shape* (a class that exists on one branch only,
-a global that moved) — still the thing, never the label. ⛔ A future session that
-finds this section and wants to "improve" it into a version check is reverting a
-ruling, not tidying.
+- The per-module `probe` (`Require`'s `{ probe = fn, reason = ... }` form, `00_Core.lua`) is
+  the branch guard. A probe that confirms the body shape its module was written for declines
+  on the branch with the other shape, per module, at apply time, with nothing global to sync.
+- An UNKNOWN probe answer declines. Only a literal `true` applies; a throw, `nil` or any other
+  value declines. An agent that finds a real case for applying on UNKNOWN may PROPOSE an
+  exception as a checklist item naming the module, the probe and why declining is the worse
+  outcome; it never self-authorises one. No exception exists today; a granted one is named in
+  that module's wording.
+- A probe is only for a target shown synchronous and side-effect-free on a stub, from its
+  shipped body. Otherwise the module keeps a `test` naming a discriminating shape (a class
+  that exists on one branch only, a global that moved): still the thing, never the label.
+- Do not build a game-version detector. It is a label check, and the rule is check the
+  thing, not its label (the rule behind the F115 gate; EF-078 records what a label check cost).
+- `LuaRevision` may be an observation label recording which build a reading was taken on, in
+  an entry, a report, a log line or a probe's output. It never gates whether a fix applies.
+- A session that "improves" this section into a version check is reverting a ruling, not
+  tidying. Checklist ck173 holds the owner's open question on narrowing it.
 
 ## 2b. The pinned-defect manifest — a module states what it corrects, or it does not ship
 
-Adopted 2026-09-08 (hotfix2 link 01, report `PACK_1_1_0_REVERIFICATION` §4 items
-2–3; owner acceptance, checklist 116). Checked by `python tools/bodycheck.py`.
+A module that cannot state the shipped expression it corrects cannot be re-verified and does
+not ship. `Require` sees existence, `sigcheck.py` sees arity, a name sweep sees names; a
+function that still exists with the same arity and no longer has the bug is invisible to all
+three, and the manifest is the discriminator. Checked by `python tools/bodycheck.py`, whose
+header is the machine half of this grammar.
 
-⚖️ **THE RULE.** *A module that cannot state the shipped expression it corrects
-cannot be re-verified, and should not ship.* The 1.1.0 audit found 32 modules
-whose defect the developers had fixed themselves **while every self-check
-passed** — `Require` sees existence, `sigcheck.py` sees arity, a name sweep sees
-names, and a function that still exists, still takes the same arguments and no
-longer has the bug is invisible to all three. The manifest is the discriminator
-that makes "vanilla fixed it" a five-second question.
-
-Two machine-readable lines in the module's header block:
+Two comment lines in the module's header block:
 
 ```lua
 -- SRC: Lua/Units/Train.lua Train:UnloadAll sha256=<hash of the shipped body at pin time>
 -- DEFECT: <the literal shipped expression this module corrects, as a regex>
 ```
 
-* `<path>` is slash-separated, relative to `ModTools/Src`.
-* `<selector>` carries no spaces: `Class:Method` (the separator is a hint — both
-  declaration forms and `Class.Method = function(` are matched), a bare
-  `Name` for a global or `local function`, or `L<first>-<last>` for a literal
-  line span where there is no function to name (data tables, generated files).
-* The body runs from the declaration line to the first bare `end` at the same
-  indentation — `tools/luafn.py:find_bodies`, which `bodycheck.py` **imports**,
-  so there is never a second extractor to disagree with. Before hashing, line
-  endings are normalised and trailing whitespace is stripped per line; leading
-  indentation and comments are kept.
-* `-- SRC: none <reason>` declares a module with no hashable target (a data
-  patch, an additive handler). It is a *declaration*, not an omission, and the
-  tool counts it separately from `NO-MANIFEST`.
-* `-- DEFECT:` is searched in the body of the `SRC:` line **above it** — that
-  precision is the point; a tree-wide grep could match anywhere. A **`DataPatch`
-  module** has no body to search, so it declares `SRC: none` and states its
-  defect against the shipped DATA with the scoped form:
-  `-- DEFECT@Data/TraitPreset.lua: modify_trait\s*=\s*"Religious"`.
-* A module may carry several `SRC:` lines; each `DEFECT:` binds to the nearest
-  one above it.
-* Regexes are Python `re`, one line (they live in a Lua comment). Shipped Lua
-  indents with **tabs** — write `\s+`, never a literal space.
-
-⛔ **STATE THE DEFECT, NEVER THE PHRASING.** A regex pinned to incidental syntax
-reports `DEFECT-GONE` on a pure refactor — a FALSE "vanilla fixed it", which is
-the direction that **retires a live fix** (R-15 nearly went that way on a
-rename). Worked example, and it is why this paragraph exists: F46's 1.0.7
-phrasing was `station.demand[res]:GetTargetAmount()`; 1.1.0 hoisted it to
-`local demand = station.demand and station.demand[res]` /
-`demand:GetTargetAmount()` (`Train.lua:794-795`) with the defect untouched. The
-right expression is the one that states the fault —
-`Min\(carried,\s*station_cap\)`, the unload computed from the cap alone. Both
-cases are locked into `bodycheck.py --selftest` as fixtures.
-
-⚠️ **A DEFECT THAT IS AN ABSENCE CANNOT BE STATED DIRECTLY.** A regex matches
-what is present; a missing guard is not. State instead the expression that is
-*wrong because* the guard is missing, and accept the known limit: if vanilla
-adds the guard elsewhere, `DEFECT-GONE` will not fire. That module is watched for
-class (b) only, and its row should say so.
-
-⚠️ **`bodycheck.py` GREEN IS NOT A CLEARANCE.** It sees a changed body (class b),
-a vanished defect (class d) and a vanished target (class e). It does **not** see
-semantics moving under a wrapper (class c — F111, F112, F-1, F-2, F-3, F-5), and
-nothing this project owns does. A `DEFECT-GONE` is a REMOVE **candidate**, never
-a verdict: read the replacement body before retiring anything.
-
-📍 **The full trust table for all four source-diff instruments — and the rule for
-what a session may claim on their output alone — lives in `WORKFLOW.md` →
-"After a game patch — the source-diff instruments".** That is the canonical
-copy and the binding after-every-patch procedure; this paragraph is the
-authoring-time warning only. Disposition record:
-`reports/VANILLA_DIFF_DISPOSITION.md`.
+- `<path>` is slash-separated, relative to `ModTools/Src`.
+- `<selector>` carries no spaces: `Class:Method` (the separator is a hint; both declaration
+  forms and `Class.Method = function(` match), a bare `Name` for a global or `local function`,
+  or `L<first>-<last>` for a literal line span where there is no function to name.
+- The body runs from the declaration line to the first bare `end` at the same indentation
+  (`tools/luafn.py:find_bodies`, which bodycheck imports). Before hashing, line endings are
+  normalised and trailing whitespace stripped per line; indentation and comments are kept.
+- `-- SRC: none <reason>` declares a module with no hashable target (a data patch, an
+  additive handler). It is a declaration, counted apart from `NO-MANIFEST`.
+- `-- DEFECT:` is searched in the body of the `SRC:` line above it. A `DataPatch` module has
+  no body, so it declares `SRC: none` and states its defect against the shipped data with
+  the scoped form `-- DEFECT@Data/TraitPreset.lua: modify_trait\s*=\s*"Religious"`.
+- A module may carry several `SRC:` lines; each `DEFECT:` binds to the nearest one above it.
+- Regexes are Python `re`, one line. Shipped Lua indents with tabs: write `\s+`, never a
+  literal space.
+- State the defect, never the phrasing. A regex pinned to incidental syntax reports
+  `DEFECT-GONE` on a pure refactor, a false "vanilla fixed it", which is the direction that
+  retires a live fix. Write the expression that states the fault: for F46 that is
+  `Min\(carried,\s*station_cap\)`, not the accessor 1.1.0 hoisted around it. Both cases are
+  `bodycheck.py --selftest` fixtures.
+- A defect that is an absence cannot be stated directly. State the expression that is wrong
+  because the guard is missing, and accept that a guard added elsewhere will not fire
+  `DEFECT-GONE`; that module is watched for class (b) only, and its row says so.
+- `bodycheck.py` GREEN is not a clearance. It sees a changed body (class b), a vanished defect
+  (class d) and a vanished target (class e); it does not see semantics moving under a wrapper
+  (class c), and nothing this project owns does. A `DEFECT-GONE` is a REMOVE candidate, never
+  a verdict: read the replacement body before retiring anything.
+- The trust table for all four source-diff instruments and the binding after-every-patch
+  procedure: `WORKFLOW.md`, "After a game patch — the source-diff instruments". Disposition
+  record: `reports/VANILLA_DIFF_DISPOSITION.md`.
 
 ## 3. Savegame discipline
 
-- No new persisted classes or GameVars unless unavoidable; if needed, name them
-  `SMRFixPack_*` and tolerate their absence (loading a save made with the mod,
-  after the mod is removed, must not break).
-- Fixes must be sane on existing saves. If a bug left corrupt state behind
-  (e.g. F03's leaked modifiers), the cleanup is a **separate, clearly marked
-  one-shot `OnMsg.LoadGame` sweep**, conservative by default.
+- No new persisted classes or GameVars unless unavoidable. If needed, name them
+  `SMRFixPack_*` and tolerate their absence: a save made with the mod must load after the mod
+  is removed.
+- Fixes are sane on existing saves. Cleanup of state a bug left behind (F03's leaked
+  modifiers) is a separate, clearly marked one-shot `OnMsg.LoadGame` sweep, conservative by
+  default.
 - Never break saves for players who later disable the mod.
-- **Exit hygiene (owner, 2026-07-31): the pack ships with its exit paved.**
-  Two standing deliverables, both ready BEFORE launch: a player-facing
-  **uninstall procedure** ("update, load, save, then uninstall" — backed by
-  the latched heal + migration passes, which clear our threads out of the
-  save), and the **standalone save-rescue artifact** for saves that already
-  lost the pack (the only console-viable remedy). Record + spec gate + open
-  design question: **`agent/bugs/D13.md`**; plan: `F86_EXECUTION_PLAN.md` Phase 5.
-  ⛔ The artifact is **specced only after Tiers 1+2 land and verify** — its
-  target list is their output, never today's leak set. `[FAQ]`
+- The pack ships with its exit paved: a player-facing uninstall procedure (update, load, save,
+  then uninstall; backed by the latched heal and migration passes, which clear our threads out
+  of the save) and the standalone save-rescue artifact for saves that already lost the pack,
+  the only console-viable remedy. Record and spec: D13. `[FAQ]`
 
-### 3a. SAVE SAFETY — design so the save carries as little of us as possible, and the exit cleans the rest (HARD RULE, owner, 2026-07-31; framing set by the owner 2026-08-01)
+### 3a. Save safety — the save carries as little of us as possible, and the exit cleans the rest
 
-**The stance (owner, 2026-08-01, verbatim):** *"we now know mod left overs are
-an accepted fact, we will try to be above the normal but its not a lockout …
-We just need to make sure our uninstall methods address them late."* By-value
-thread serialisation is **documented, intentional engine design**
-(`LuaSavegame.md.html`, quoted in agent/facts/) and the community's norm is to
-accept and silence it (`PRIOR_ART_SURVEY.md`). This pack aims **above that
-norm** — an engineered exit, not accidental residue — so §3a is a **design
-discipline that minimises what the exit path must clean**, not a purity bar.
+By-value thread serialisation is documented, intentional engine design (EF-027), and mod
+leftovers are an accepted fact of this engine. This pack aims above that norm with an
+engineered exit, so §3a is a design discipline that minimises what the exit path must clean,
+not a purity bar.
 
-**⭐ THE THREE-TIER ETHOS (owner, 2026-08-01 — this is the goal §3a serves, and
-it supersedes any "leave no trace" framing left elsewhere in the docs).** The
-original game's own code spells the mechanism out; leftovers are an accepted
-fact of modding this engine, not a failure. So we aim, **in this order**:
+**The three-tier ethos, in order.** It supersedes any "leave no trace" framing elsewhere.
+1. Leave no trace: prefer a shape that puts nothing of ours in the save at all; the layer
+   ordering below exists to reach it.
+2. Leave non-harmful trace: where something must persist, make it inert — named, bounded,
+   disclosed, and incapable of doing anything after removal. An accepted residual.
+3. Leave harmful trace only when 1 and 2 are both unreachable, and then fix it from outside
+   with the save-rescue tooling (D13). A harmful residual is never simply accepted; it is
+   accepted paired with its remedy.
 
-> 1. **Leave no trace.** Prefer a shape that puts nothing of ours in the save
->    at all — that is what the layer 3 → 2 → 1 ordering below exists to reach.
-> 2. **Leave non-harmful trace.** Where something must persist, make it
->    **inert**: named, bounded, disclosed, and incapable of doing anything
->    after removal. An accepted residual.
-> 3. **Leave harmful trace only when 1 and 2 are both unreachable** — and then
->    **fix it from outside**, with the uninstall/save-rescue tooling (**D13**)
->    that **ships at launch, alongside the pack**. A harmful residual is never
->    simply accepted; it is accepted *paired with its remedy*.
+**The gate is per-site.** Every exposed site gets its own recorded disposition: repaired
+in-pack where a layer 3 or layer 2 route exists, handed to the cleaner where one provably does
+not. A site with no disposition blocks release; a site with one does not, whichever way it
+went. No site is deferred to the cleaner in advance: a hand-off is a valid disposition only
+after the in-pack attempt was made and the route proven absent, never as a prediction or a
+reason to descope. The authoritative exposed set and every disposition:
+`reports/D13_EXPOSED_SET.md` §7, derived over both shipped trees, never an inherited count. A
+new capturable site is dispositioned there.
 
-**⚖️ THE RELEASE GATE IS PER-SITE, NOT BLANKET (owner decision, 2026-08-01).**
-There is no rule that all residue must be repaired in-pack before release, and
-no rule that the cleaner excuses leaving it. **Every exposed site gets its own
-recorded disposition:** repaired in-pack where a layer 3 or layer 2 route
-exists, handed to the cleaner where one provably does not. **A complete
-per-site disposition — every site, each with its call and the reason — is
-required before release.** A site with no recorded disposition blocks release
-by default; a site *with* one does not, whichever way it went.
+**The mechanism (EF-023).** A save serialises by value everything reachable from the persisted
+graph. A mod function enters a save iff (a) its frame sits below a `Sleep`/`WaitMsg`/
+`WaitWakeup` on a blocked game-time thread, (b) it is held in a live local or upvalue of any
+captured frame, engine frames included, or (c) it is stored in persisted state (object fields,
+GameVar contents, notification closures). Synchronous code that stores no function values is
+safe by construction; real-time threads, class tables, presets, `OnMsg` registrations and UI
+windows are safe. A captured orphan is not env-dead: it resolves every vanilla global and loses
+only mod-created names, so an all-vanilla body keeps executing after uninstall, bounded if it
+self-limits, forever if it loops. Every design answers: if this body is captured anyway, does
+it die, expire or run forever, and would anyone notice?
 
-**⛔ BUILD FIRST, DISPOSITION AFTER — the cleaner is NOT a scoping escape hatch
-(owner, 2026-08-01, verbatim):** *"We will build everything now, regardless of
-whether the cleaner exists now because we won't launch till it does. It doesn't
-make sense to build a cleaner until we know everything it needs to clean and
-how."* Two rules follow, and they bind:
+**The orphan gate.** Every mod-owned thread body opens each wake with
+`if not SMRFixPack then return end` and resets any vanilla state it set BEFORE its first
+mod-created-name touch, so an orphan exits cleanly at a point we chose: zero errors, zero
+half-done work. Long loops re-check the gate after every yield. The global-lookup helper
+discipline stays underneath as the backstop: anything that slips past a gate dies rather than
+running forever. Loud death is the backstop, not the failure mechanism.
 
-> - **No site may be deferred to the cleaner in advance.** Build everything the
->   layer ordering allows, **now**, without waiting on D13 and without counting
->   on it. A cleaner hand-off is only a valid disposition **after** the in-pack
->   attempt has been made and the route proven absent — never as a prediction,
->   and never as a reason to descope.
-> - **The cleaner is specced LAST, by construction.** Its target list is the
->   *output* of the build work: what remains once every reachable repair has
->   landed. That is why D13's spec is gated — not because it is low priority,
->   but because designing it earlier would mean designing against a residual set
->   we had not finished changing.
+**Choose the remedy in this order, 3 → 2 → 1. The ordering is binding.**
 
-**Sequence, therefore:** build every reachable repair → the residue that
-survives *is* the cleaner's target list → spec and build D13 against it →
-launch. **Launch waits for D13; D13 does not wait for launch.**
+1. **Layer 3 — patch a synchronous input, keep vanilla's body.** The pack then has no body in
+   the save at all. Where a defect can be repaired by changing what a shipped function reads
+   rather than what it does, do that. Scope the wrapper by the narrowest thing that actually
+   separates the call sites, and enumerate every caller before choosing the key: an argument
+   is not automatically enough when two threads pass the same descriptor. `CurrentThread()` is
+   available and global game-time threads are parked in a global of their own name, so
+   `CurrentThread() == rawget(_G, "<Name>")` is a precise key where one is needed.
+2. **Layer 2 — no mod code after a call that can block.** Do all work before the call, then
+   `return orig(...)`; whether or not the frame is serialised, nothing is left to execute after
+   removal. Post-work that is genuinely needed moves out of the command body into a message
+   or periodic hook. This needs no engine guarantee; the earlier "tail calls remove our frame"
+   claim is unobservable in this sandbox and is not re-derived or re-tested. Accepted
+   residual: an inert serialised function that executes nothing.
+3. **Layer 1 — `OnMsg.SaveGameStart` tear-down / `SaveGameDone` rebuild**, for what layers 3
+   and 2 cannot reach (mods get this hook, EF-024). Build it last, only for what survives the
+   other two layers; every module using it needs its own A/B plus a long-interval soak. The
+   trap: autosaves take the same `DoSaveGame` path about once a sol, so a tear-down that
+   restarts a loop resets a long timer before it can expire. Re-arm from a persisted deadline,
+   never restart blind.
 
-Where dispositions are recorded: sites repaired in-pack are dispositioned by
-the tier that repairs them (Tier 2 = chain prompt 5); the **complete
-pre-release table is a D13 deliverable**, since D13 is what carries whatever
-the pack could not.
-
-⚠️ **And the table is built against D13's OWN derivation of the exposed set,
-not against any count recorded in these docs** (owner, 2026-08-01). Every
-figure on record is an open lower bound from a grep proven blind to
-slot/global/preset assignments, and the builds have since changed the set —
-so "every exposed site" can only be enumerated by re-deriving it at that
-point. See the D13 entry in `agent/bugs/` for the requirement and the list of
-places its result must correct.
-
-**The mechanism, as finally established (measured + twice-adjudicated — this
-opening states the CURRENT truth; earlier drafts' "empty `_ENV`" claim is
-dead):** a savegame serialises **by value** everything reachable from the
-persisted graph at write time. A mod function enters a save iff: **(a)** its
-frame sits below a `Sleep`/`WaitMsg`/`WaitWakeup` on a blocked **game-time**
-thread; **(b)** it is held in a live local/upvalue of ANY captured frame —
-engine frames included (`Fix_CaveInsNoDisasters` is capturable this way,
-inert because layer-2-shaped); or **(c)** it is stored in persisted state
-(object fields, GameVar contents, notification closures). Purely synchronous
-code that stores no function values is safe by construction; real-time
-threads are never persisted; class tables, presets, `OnMsg` registrations and
-UI windows are safe. And a captured orphan is NOT env-dead: its fallback env
-falls through to real `_G`, so it resolves every vanilla global and loses
-only mod-created names — a body touching `SMRFixPack.*` dies at that touch,
-an all-vanilla body **keeps executing after uninstall** (bounded if it
-self-limits, forever if it loops). `Fix_MeteorFrequency` killed a colony's
-meteors permanently this way; `Opt_DroneOverhaul` leaked with its toggle OFF.
-Every design must answer: *if this body is captured anyway, does it die,
-expire, or run forever — and would anyone notice?*
-(`F86_ADJUDICATION.md` §3.1/§5.1/§8; `agent/facts/`.)
-
-**⛔ THE ORPHAN GATE (owner, 2026-07-31) — loud death is the BACKSTOP, not the
-failure mechanism.** An orphan that dies at its first mod-name lookup dies at
-an *accidental* point — wherever a logging call happens to sit — and can die
-mid-work (`StormWedgeHeal` could strand `g_MeteorStormStop=true`). The designed
-failure is:
-
-> **Every mod-owned thread body opens each wake with an explicit orphan gate —
-> `if not SMRFixPack then return end` — and resets any vanilla state it set
-> BEFORE its first mod-created-name touch.** Reading a nil global is safe (only
-> indexing/calling it throws), so the gate exits cleanly in an orphan: zero
-> errors, zero half-done work, at a point we chose. Long loops re-check the
-> gate after every yield. The global-lookup helper discipline stays underneath
-> as the backstop: anything that slips past a gate still dies rather than
-> running forever. (This supersedes the earlier "die loudly is the safer
-> failure" framing — that loudness was an accident of the disproven by-name
-> persistence belief, retroactively useful, never designed.)
-
-**Choose the remedy in this order — 3 → 2 → 1. The ordering is binding.**
-
-1. **Layer 3 — patch a synchronous input, keep vanilla's body.** ⭐ Best: the
-   pack has no body in the save at all and the problem disappears for that
-   module. Where a defect can be repaired by changing what a shipped function
-   *reads* rather than replacing what it *does*, do that.
-   ⚠️ **Scope the wrapper by the narrowest thing that actually separates the
-   call sites, and enumerate every caller before choosing the key.** Keying on
-   an argument is not automatically enough: `GetDisasterWarningTime` is called
-   with the *same* meteor descriptor by both the `Meteors` and `MeteorStorm`
-   threads, so a descriptor-keyed wrapper would silently change storm warning
-   timing. `CurrentThread()` is available (not blacklisted) and global
-   game-time threads are parked in a global of their own name, so
-   `CurrentThread() == rawget(_G, "<Name>")` is a precise key where one is
-   needed.
-2. **Layer 2 — no mod code after a call that can block.** Do all work
-   **before** the call, then `return orig(...)`. Then whether or not the frame
-   is serialised, there is nothing left to execute after removal. This needs no
-   engine guarantee, which is why it replaced the earlier "tail calls remove
-   our frame" justification — that claim is **unobservable in this sandbox and
-   must not be re-derived or re-tested** (a tail call has nothing after it, so
-   a vanished frame and a surviving frame produce identical silence). Wrappers
-   that genuinely need post-work must move it out of the command body into a
-   message or periodic hook.
-   *Residual, accepted:* an inert serialised function may sit in a save as dead
-   weight; it executes nothing and no read available to us can see it.
-3. **Layer 1 — `OnMsg.SaveGameStart` tear-down / `SaveGameDone` rebuild**, for
-   what layers 3 and 2 cannot reach. Mods **do** get this hook (only
-   `PersistSave` / `PersistLoad` / `PersistGatherPermanents` are blacklisted).
-   **Build it last, and only for what survives the other two layers; every
-   module that uses it needs its own A/B plus a long-interval soak.**
-   ⚠️ **THE TRAP:** autosaves are the same `DoSaveGame` path and fire roughly
-   once a sol, so a tear-down that *restarts* a loop would reset a 35–115 h
-   meteor timer before it could ever expire — recreating PT-01's
-   permanent-silence signature out of our own code. **Re-arm from a persisted
-   deadline, never restart blind.**
-
-**This binds new fixes as well as repairs.** Anything that replaces a blocking
-body, wraps a command method, or creates its own game-time thread must state in
-its header which layer it is on and why. Full analysis, the exposure list
-(~~**13** after two same-day membership corrections — `DroneUnreachableForever`
-in, `TrainCargoDumping` out, compliant `CaveInsNoDisasters` counted;
-**re-derived 2026-08-01 by the five-shape Phase-1 enumeration, which confirmed
-the 13 and classified one additional inert route-(c) preset-field site** —
-`Fix_LastTransmissionStorage`'s `Condition.eval`, disclosed-no-build,
-adjudication §4.4~~ ⛔ **SUPERSEDED 2026-08-13 — the authoritative figure is
-`agent/reports/D13_EXPOSED_SET.md`: 27 sites over BOTH shipped trees = 12
-capturable-code + 15 persisted-data. The "13+1" was an open lower bound over
-capturable CODE in the fix pack only; the like-for-like number is 12, and §4.1
-there reconciles the difference row by row in both directions. The 15
-persisted-data sites were never on any exposure list at all — the historical
-enumeration key was a key for code, not for state**) and the per-module
-disposition: **`agent/reports/D13_EXPOSED_SET.md` §7** (complete, every site
-called), with the older analysis at
-`docs/agent/reports/SAVE_SAFETY_REDESIGN.md` and `agent/bugs/F86.md`.
+This binds new fixes as well as repairs. Anything that replaces a blocking body, wraps a
+command method, or creates its own game-time thread states in its header which layer it is on
+and why. Background: `reports/SAVE_SAFETY_REDESIGN.md`, F86.
 
 ## 4. Only fix proven, reachable, UNINTENDED defects
 
-> **AMENDED AND ADOPTED 2026-08-01.** This section replaces the three-sentence
-> "Only fix proven defects" rule with the reachability audit's drafted
-> amendment, applied verbatim from `REACHABILITY_AUDIT.md` §4. **Authority:**
-> the owner's blanket pre-clearance of 2026-08-01 (recorded in the project
-> chain's manifest, `docs/agent/prompts/project/README.md` — consumed with the
-> chain on 2026-08-03 and now in git history only), which clears the approval step for work
-> items derived from the audit-and-adjudication conversation — this adoption
-> named among them. **The blocker that held it back is gone:** the draft
-> contradicted itself while F49(a) shipped a no-op R4 rider against the new
-> "R4 does not ship" line; that guard was **stripped from `Fix_TrainMinors`
-> on 2026-08-01** (`agent/bugs/F49.md`; A/B code-gate leg ran clear), so the rule and the
-> shipped code now agree. **Live consequence on adoption:** F29 and F57(a) are
-> R3 defects fixed by §1.5 method replacements — the combination the R3 bullet
-> below now makes conditional on an explicit owner decision. Both entries
-> already anticipated this; the decision is routed and owed, not assumed
-> either way.
+Every fix links to an `agent/bugs/` entry with file:line evidence, a recorded reachability
+tier and a positive intent statement. Before a fix ships:
 
-Every fix links to an `agent/bugs/` entry with file:line evidence, **a recorded
-reachability tier, and a positive intent statement**. Before a fix ships:
+- **Intent first.** State why the shipped behaviour is unintended, citing at least one hard
+  tell: (1) player-reported harm; (2) dead code or dead validation — a computed value
+  discarded, a guard that cannot fire, a message nothing emits; (3) sibling contradiction —
+  the same author wrote it correctly elsewhere; (4) self-contradiction within one function or
+  preset; (5) an explicit dev comment. No tell → the defect claim is a hypothesis and needs a
+  keyboard observation before any fix is written. UI and affordance behaviours (hit-testing,
+  cursor feedback, input modes, whether two things are separately addressable) are hypotheses
+  by default: source reading has no validity there (F49). A behaviour found intentional is
+  tier **I**: record it, close it, write no fix.
+- **Then reachability.** Enumerate every call site of the defective function in Src;
+  eliminate the ones that cannot execute the defective body (class chain, guards, early
+  returns, template data); for each survivor name the concrete player action that produces
+  the precondition. Record the tier: R1 live · R2 conditional · R3 latent-by-data · R4
+  unreachable · U unknown, naming the observation that would settle it.
+- **Symmetry of proof.** Every tier states its evidence; an unenumerated R1/R2 is as unproven
+  as an unstated R4, and more dangerous, because "keep, it's live" is never revisited. Every
+  lettered sub-item of a bundled fix is a separate audit subject.
+- R1/R2 ship normally. R3 ships only as a §1.1–§1.4 patch; an R3 §1.5 replacement needs an
+  explicit owner decision (F24). R4 does not ship: record it `wontfix — unreachable` with the
+  search that proved it. U ships only with the settling observation queued as a playtest item.
+- A `tested` status proves reachability only if the playtest reached the state by playing.
+  Console surgery, `g_Consts` compression or `Cheat*` calls prove the fix, not the path; a
+  state producible only by console or debug injection is evidence for R4.
+- Re-check `git log` between assembling a verdict and recording it; playtest evidence lands
+  continuously.
+- No balance changes, no improvements, no opinions; those belong in other mods. When intent
+  is ambiguous, prefer the reading proven by sibling code in the same file.
 
-- **Intent first.** State why the shipped behaviour is unintended, citing
-  at least one hard tell: (1) player-reported harm; (2) dead code / dead
-  validation — a computed value discarded, a guard that cannot fire, a
-  message nothing emits; (3) sibling contradiction — the same author wrote
-  it correctly elsewhere; (4) self-contradiction within one function or
-  preset; (5) an explicit dev comment. **No tell → the defect claim is a
-  hypothesis, and it needs a keyboard observation before any fix is
-  written.** UI/affordance behaviours — anything whose wrongness lives in
-  hit-testing, cursor feedback, input modes, or whether two things are
-  separately addressable — are in this class BY DEFAULT: source reading
-  gives confident answers with no validity there (the F49(c) lesson). A
-  behaviour found intentional is tier **I**: record it, close it, write no
-  fix.
-- **Then reachability.** Enumerate every call site of the defective
-  function in Src; eliminate the ones that cannot execute the defective
-  body (class chain, guards, early returns, template data); for each
-  survivor name the concrete player action that produces the precondition.
-  Record the tier: R1 live · R2 conditional · R3 latent-by-data · R4
-  unreachable · U unknown (naming the observation that would settle it).
-- **Symmetry of proof.** Every tier states its evidence — an unenumerated
-  R1/R2 is exactly as unproven as an unstated R4, and more dangerous,
-  because "keep, it's live" is the verdict nobody revisits. **Every
-  lettered sub-item of a bundled fix is a separate audit subject**;
-  enumerating one item proves nothing about its siblings.
-- R1/R2 ship normally. **R3 ships only as a §1.1–§1.4 patch**; an R3 §1.5
-  full replacement needs an explicit user decision (the F24 lesson). **R4
-  does not ship**; record it `wontfix — unreachable` with the search that
-  proved it. **U ships only with the settling observation queued** as a
-  playtest item.
-- A `tested` status proves reachability only if the playtest reached the
-  state **by playing**; console surgery, `g_Consts` compression or `Cheat*`
-  calls prove the fix, not the path. A state producible **only by
-  console/debug injection is evidence for R4** (the PT-46 track lesson).
-- **Evidence freshness:** re-check `git log` between assembling a verdict
-  and recording it — playtest evidence lands continuously, and this
-  project has now twice been burned by writing against a stale snapshot.
-- No balance changes, no "improvements", no opinions — those belong in
-  other mods. When intent is ambiguous, prefer the reading proven by
-  sibling code in the same file (the F07/F08/F02 pattern).
+## 4a. Scope: vanilla only
 
-## 4a. SCOPE — vanilla only. This pack never fixes other mods' problems. (HARD RULE, user, 2026-07-30)
+- Fix a defect only when a player could be harmed by it, now or after a game patch or DLC.
+  Invisible, latent or unreported harm counts; "no player has complained" does not.
+- Never fix or work around a defect another mod causes, or one whose only beneficiary is
+  another mod. Only an owner one-off override, for something the owner asked for, changes
+  this: ask explicitly and get an explicit yes for that one case, never inferred, never from
+  precedent, never carried to a second case. An existing shipped fix is not precedent.
 
-**Stated by the project owner, verbatim:** *"This mod does not fix bugs caused
-from other mods. No agent should assume it does at any point going forward. The
-only way that should be able to be changed is if an agent specifically asks me
-to override as a one-off for something I specifically ask for."*
+The test is who benefits, not how visible the problem is:
 
-### The test is WHO BENEFITS — not how visible the problem is
+1. **Barred: a bug caused by another mod.** Never fix it, never work around it, never add a
+   compatibility shim. If one is reported, record it and say whose it is.
+2. **Barred: a vanilla bug reachable only from mod code.** No shipped caller anywhere, so
+   lighting it up needs new calling code that only a mod can supply. Tier R4: record it
+   `wontfix` with the search that proved no shipped caller exists (F28).
+3. **Not barred: shipped code that runs in ordinary play whose defective branch is
+   unreachable only because of data.** A patch, a DLC or new content can expose it without
+   anyone touching a mod. Tier R3: a real fix (F29, F27, F31, F43).
 
-Owner's clarification, same day: *"I don't want to fix things for other possible
-mods. But if it's game code that could cause real problems for users now or in
-the future even if they can't expressly see the issue, that is a real fix."*
-
-**Ask one question: could a PLAYER be harmed by this — now, or after a future
-game patch or DLC?**
-
-- **Yes → it is a real fix. Ship it.** Invisibility is irrelevant. Latent is
-  irrelevant. "No player has complained" is irrelevant. Silent corruption, a
-  wrong number nobody has noticed yet, a branch that is benign only because
-  today's shipped data happens to be benign — all of these are real fixes,
-  because the harm lands on players the moment the data or the build moves.
-- **No, the only conceivable beneficiary is another mod → do not ship it.**
-
-**BARRED:**
-
-1. **A bug caused by another mod.** Not ours. Never fix it, never work around
-   it, never add a compatibility shim for it. If one is reported, record it and
-   say whose it is.
-2. **A vanilla bug reachable ONLY from mod code** — no shipped caller anywhere,
-   so lighting it up needs **new calling code**, which only a mod can supply.
-   Record it `wontfix` with the search that proved no shipped caller exists.
-   *(This is tier **R4**. F28 is the worked example: `Research:ReplaceTech` has
-   zero callers in all of Src.)*
-
-**NOT BARRED — these are real fixes, ship them:**
-
-3. **Shipped code that executes in ordinary play but whose defective branch is
-   currently unreachable because of DATA.** The game runs the code; only the
-   values keep it harmless. A patch, a DLC, or new story content can expose it
-   without anyone touching a mod. *(Tier **R3**. F29's two items are the worked
-   example — both execute live in every Dredgers playthrough and are benign only
-   because the shipped presets pass default sampling parameters and
-   already-ordered timings. F27, F31 and F43 are the same shape.)*
-
-**The R4/R3 boundary is the whole rule:** R4 needs new *code* to become live —
-mod territory, barred. R3 needs new *data* — which ships with patches and DLC,
-so it is player territory, allowed.
-
-**"For modder benefit" is no longer a valid reason to ship anything** — but do
-not read a fix's own header or BUGS entry as authority on whether it is
-mod-facing. **F29 described itself as a "mod-facing bundle" with "No shipped
-user", and both claims were false** — the reachability audit found four live
-shipped callers. Judge by enumeration, never by the entry's self-description
-(the F49(c) lesson, applied to provenance).
-
-**Override procedure — the ONLY one.** An agent that believes a specific case
-warrants an exception must **ask the owner explicitly and get an explicit yes,
-for that one case**. It is never inferred, never assumed from precedent, and
-never carried forward to a second case. An existing shipped fix is NOT
-precedent — one (F28) already violated this rule and was retired under it.
-
-**Why this exists.** The pack shipped `Fix_ReplaceTechCount` (F28) against a
-function with **zero callers in all of Src** — a 37-line copy of a shipped
-method, carrying per-game-update re-verification cost forever, for a code path
-no player can reach. It was not an accident: the entry said "No vanilla caller"
-in its second line and it shipped anyway. That is the failure this rule stops.
+R4 needs new code to become live: mod territory, barred. R3 needs new data, which ships with
+patches and DLC: player territory, allowed. "For modder benefit" is never a reason to ship,
+and a fix's own header or entry is not authority on whether it is mod-facing: judge by caller
+enumeration, never by self-description (F29 called itself mod-facing and had four live callers).
 
 ## 5. Optional modules (`Opt_*`)
 
-> **N/A IN THIS PACK SINCE 2026-08-12.** All eight
-> `Opt_` modules and the whole Mod Options surface moved to the standalone
-> **Community Opt-In Pack** (`C:\Dev\SMR-OptInPack`), where this section is the
-> live spec. `00_Core.lua` still carries the
-> `optional`/`OptionEnabled`/`ApplyModOptions` machinery (dormant, not removed);
-> a hundred historical entries and reports cite "FIX_POLICY §5"; and the policy
-> below is the test for what does not belong in this pack. If a proposal
-> here needs a toggle, it is not a fix — it is that mod's, and §4's
-> unintended-defect test is what decides.
+Not in this pack since 2026-08-12. All `Opt_` modules and the whole Mod Options surface live
+in the standalone Community Opt-In Pack (`C:\Dev\SMR-OptInPack`), where this section is the
+live spec; `00_Core.lua` keeps the `optional`/`OptionEnabled`/`ApplyModOptions` machinery
+dormant. Here it is the test for what does not belong: a proposal that needs a toggle is not
+a fix, it is that mod's, and §4's unintended-defect test decides.
 
-Not bug fixes: opt-in behavior changes, off by default, one Mod Options
-toggle each (`ModItemOptionToggle.name` == the Register id == the
-`default_options` key — all three are load-bearing).
+An optional module is an opt-in behaviour change, off by default, with one Mod Options toggle:
+`ModItemOptionToggle.name` == the Register id == the `default_options` key, all three
+load-bearing. A module may instead expose `ModItemOptionChoice` dials (D09): then the option
+names are not the Register id, the module registers without `optional` and reconciles itself
+from `CurrentModOptions` on ApplyModOptions, CityStart and PostLoadGame, its base position is
+byte-vanilla (module-owned modifiers removed by id, stale ones in loaded saves included), and
+the choice strings are byte-identical across items.lua, metadata `default_options` and the
+module's own maps.
 
-**Dial addendum (D09):** a module may instead expose `ModItemOptionChoice`
-dials. Then the option names are NOT the Register id, the module registers
-WITHOUT `optional` (00_Core's boolean reconciler must not manage it), and it
-reconciles itself from `CurrentModOptions` on ApplyModOptions + CityStart +
-PostLoadGame. The dial's base position must be byte-vanilla (module-owned
-modifiers removed by id, including stale ones in loaded saves); choice
-strings are load-bearing across items.lua / metadata `default_options` / the
-module's own maps — byte-identical in all three.
-
-- **Install pattern (mandatory — the A2 lesson, audit 2026-07-29):** hooks on
-  class methods are installed at FILE SCOPE (classdef time, so they propagate
-  through class flattening) and gate per call on `SMRFixPack.IsActive(id)`.
-  An apply()-time install runs AFTER flattening on a first mid-session enable
-  and is invisible to derived classes until restart. Donor:
-  Opt_DroneOverhaul. Wraps that resolve at call time (a global function, a
-  UI-template Init) may stay in apply() — say so in the header.
-- Guard each file-scope install with the same existence checks apply() uses,
-  so a missing target degrades to apply()'s reason string instead of erroring
-  at classdef time.
-- `apply()` keeps only self-checks and the opt-in check; it returns the same
-  reason strings whether or not the hooks installed.
-- `on_activate` / `on_deactivate` (both optional) run after a LIVE toggle
-  flip only — use them exclusively for STATE that is not a call path (e.g.
-  MultipleSuns' template flag); call-path behavior must come from the
-  per-call gate, never from these hooks. They must be idempotent; failures
-  are logged by the reconciler (B1 fix), not swallowed.
-- Header must state the real toggle semantics (both directions, including
-  the first mid-session enable) — and be updated when they change.
-- Savegame footprint per §3; a module OFF must be byte-for-byte vanilla
-  **behavior**.
-  ⚠️ **AND THAT IS ALL IT MEANS — "off" says NOTHING about the save (added
-  2026-08-01, after this bullet's neighbourly placement next to "savegame
-  footprint" helped breed a false claim twice).** An optional module's hooks are
-  installed at file scope / classdef time and only *gate* per call, so a module
-  the player has switched off is still fully installed and still capturable:
-  `Opt_DroneOverhaul` leaked into saves at 98 errors per session **with its own
-  toggle OFF**, which is how F86 Site 2 was found. Never infer save-cleanliness
-  from a toggle, in a claim or in a test — an uninstall question is only answered
-  by removal, or by a Mod-Manager disable followed by a FULL PROCESS RESTART;
-  without the restart the pack is still loaded and the reading is a mixed state
-  (PT-20 redo, 2026-08-14, superseding the earlier 98-vs-98 comparison; D13's
-  four-states rule). The switches and what each one removes: `EF-002`.
+- Hooks on class methods are installed at FILE SCOPE (classdef time, so they propagate through
+  flattening) and gate per call on `SMRFixPack.IsActive(id)`; an apply()-time install is
+  invisible to derived classes until restart. A wrap that resolves at call time (a global
+  function, a UI-template Init) may stay in apply(); the header says so.
+- Each file-scope install carries the same existence checks apply() uses, so a missing target
+  degrades to apply()'s reason string instead of erroring at classdef time.
+- apply() keeps only self-checks and the opt-in check, and returns the same reason strings
+  whether or not the hooks installed.
+- `on_activate` / `on_deactivate` run after a LIVE toggle flip only. Use them for state that is
+  not a call path; call-path behaviour comes from the per-call gate. They are idempotent, and
+  the reconciler logs their failures.
+- The header states the real toggle semantics in both directions, including the first
+  mid-session enable, and is updated when they change.
+- Savegame footprint per §3, and a module OFF is byte-for-byte vanilla BEHAVIOUR. That is all
+  "off" means: file-scope hooks stay installed and capturable with the toggle off, so never
+  infer save-cleanliness from a toggle, in a claim or a test. An uninstall question is answered
+  only by a Mod-Manager disable followed by a full process restart, or by removal; a disable
+  followed only by a return to the main menu measures a mixed state, with the code live and
+  the mod's persisted permanent already gone (PT-20 redo, 2026-08-14; the switches: EF-002).
 
 ## 6. Engine semantics that bind every fix
 
-- **`error()` and `assert()` in mod code REPORT AND CONTINUE** — they do not
-  unwind (agent/facts/). Never use them for control flow or guards; use
-  early returns and reason strings. `pcall` still catches genuine runtime
-  errors.
-- **Localization stance:** a T value is a TABLE **in dev — in retail it is often
-  a light userdata** (`Untranslated(s)` → `T{s, untranslated = true}`). Copied
-  shipped bodies keep their `T(id, ...)` calls byte-identical; NEW player-visible
-  strings from this pack use `Untranslated("...")` — the pack ships no loc tables
-  today, and a raw Lua string where the UI expects a T value renders wrong or
-  crashes (the F14 probe lesson). Log/console text stays plain strings.
-  ⛔ **AND NEVER RE-USE A SHIPPED TRANSLATION ID TO CHANGE TEXT — IT IS A NO-OP
-  IN RETAIL** (added 2026-08-02; this is not a style preference, it is why one of
-  our shipped fixes never worked). `T(id, text)` returns `LocIdToLightUserdata(id)`
-  and **discards your literal** whenever `TranslationTable[id]` exists, which in a
-  retail build is always — English included, since English is a loaded table like
-  every other language. `Fix_TechDescriptionBuilding` did exactly this and has
-  never changed anything (**`agent/bugs/F98.md`**; F25 demoted, and **no longer citable as
-  localisation precedent**).
-  ⭐ **To ADD to existing localized text at zero cost in any language, concatenate:
-  `shipped_T .. Untranslated("…")`** — supported on the retail userdata form and
-  used by shipped code (`Workplace.lua:293`). Concat cannot *delete*, so
-  correcting a wrong sentence still means replacing the whole string.
-  Full mechanism, all four routes, and the queued live control: `agent/facts/`,
-  "RE-USING A SHIPPED TRANSLATION ID …". ⭐ **Owner decision 2026-08-02: the pack
-  WILL ship its own `ModItemLocTable` translations, post-release** — at which
-  point this bullet is revisited, not before.
-- **Logging:** every ModLog call escapes `%` (`msg:gsub("%%", "%%%%")`) —
-  ModLog's print path formats the message a second time (00_Core.lua:24-30).
+- `error()` and `assert()` in mod code report and continue; they do not unwind (EF-008).
+  Never use them for control flow or guards; use early returns and reason strings. `pcall`
+  still catches genuine runtime errors.
+- Localisation: a T value is a table in dev and often a light userdata in retail. Copied
+  shipped bodies keep their `T(id, ...)` calls byte-identical. New player-visible strings use
+  `Untranslated("...")`; a raw Lua string where the UI expects a T value renders wrong or
+  crashes (F14). Log and console text stays plain strings.
+  - Never re-use a shipped translation id to change text: `T(id, text)` discards the literal
+    whenever the id is in the loaded table, which in retail is always (EF-039, F98). F25 is not
+    citable as localisation precedent.
+  - To add to existing localised text, concatenate `shipped_T .. Untranslated("...")`; concat
+    cannot delete, so correcting a wrong sentence still means replacing the whole string.
+  - Owner decision: the pack will ship its own `ModItemLocTable` translations post-release, and
+    this bullet is revisited then, not before.
+- Logging goes through `SMRFixPack.Log`, which escapes `%` for ModLog's second format pass; a
+  direct `ModLog` call must escape it itself (`msg:gsub("%%", "%%%%")`).
 
 ## 7. Console platforms (Xbox / PlayStation / MS Store)
 
-- No developer console, no file access, no companion-mod path: the per-fix
-  `SMRFixPack_Disabled` veto and every log/console surface (`ListFixes()`,
-  reason strings, "report this log") are **invisible on console**. Fail-safe
-  behavior must therefore never DEPEND on the player seeing a message —
-  self-deactivation must be safe silently.
-- Mod Options is the one universal surface (gamepad-native) — anything a
-  console player must be able to steer goes there or nowhere.
-- Any enabled mod blocks ALL achievements on **exactly** `Platform.playstation`,
-  `Platform.xbox` and `Platform.windows_store` — `DoModsBlockAchievements()`,
-  `CommonLua/Classes/Achievement.lua:61-63`, consumed at `:77` (`"mods loaded"`)
-  and `Lua/UI/SaveLoad.lua:102`. ⚠️ **Say "Steam and other PC versions", NOT
-  "PC"** — the Microsoft Store (Game Pass) IS a PC platform and IS blocked; this
-  line said "not on Steam/PC" until 2026-08-16 and that wording would have
-  misled a Game Pass player. The public pages already say it correctly
-  (`content/faq.md`, `content/install.md`). A storefront disclosure, not a code
-  concern, but never write player-facing text that contradicts it.
-  ⭐ **We cannot cause it and cannot ever cause it:** the pack touches none of
-  the five blockers (modding tools active · a game rule with
-  `DisableAchievements` · cheats used/enabled · tutorial active · mods-loaded on
-  the three platforms above), and `UnableToUnlockAchievementReasons` is on
-  `ModMsgBlacklist` (`CommonLua/Classes/Mod.lua:1439`) so mod code cannot
-  subscribe to it at all. The savegame's `blocking_achievements` flag comes only
-  from game rules (`CommonLua/UI/SaveLoadUI.lua:442`), never from mods.
+- No developer console, no file access, no companion-mod path: the `SMRFixPack_Disabled`
+  veto and every log or console surface (`ListFixes()`, reason strings, "report this log") are
+  invisible on console. Fail-safe behaviour never depends on the player seeing a message;
+  self-deactivation is safe silently.
+- Mod Options is the one universal, gamepad-native surface; anything a console player must be
+  able to steer goes there or nowhere.
+- Any enabled mod blocks all achievements on exactly PlayStation, Xbox and the Microsoft
+  Store, and the pack can neither cause nor avoid it (EF-106). Player-facing text says
+  "Steam and other PC versions", never "PC": Game Pass is a PC platform and IS blocked. Never
+  write text that contradicts that disclosure.
 
 ## 8. Release hygiene
 
-- One fix per `Code/Fix_*.lua` file; file name matches the Register id; every
-  file listed explicitly in `metadata.lua` `code`.
-- `00_Core.lua` must load first (list order in metadata controls load order).
-  ⚠️ That is INTRA-mod order and is ours to set. **INTER-mod order is not**
-  (`EF-054`): it is the player's enable order, decided before a line of our Lua
-  runs, with no priority field and no way to request a position.
-  ⚖️ **We PREFER to load first, and the reason is deference, not precedence**
-  (owner, 2026-08-16): first = innermost = we patch the vanilla we verified,
-  every later mod wraps us, and a mod that replaces the function outright wins
-  cleanly. Loading last would wrap another mod's implementation and apply a
-  vanilla-derived fix to code we never inspected. ⛔ **Never build on it** — the
-  deference is already structural (call-through wrappers + `EF-054`
-  order-independence), nothing breaks at any position, and there is deliberately
-  no player-facing load-order instruction: the Mod Manager's visible list is a
-  cosmetic title sort, so a player could not verify following one. Owner ruling
-  the same day: note it, watch for a real conflict, create no new problems.
-- Before release: verify each target against the shipping `Packs\Lua.fpk`
-  (see WORKFLOW.md), test each fix in-game, update agent/bugs/ statuses, credit
-  prior art (ChoGGi's Fix Bugs mod documented several of these bug families
-  for the original game).
+- One fix per `Code/Fix_*.lua` file; the file name matches the Register id; every file is
+  listed explicitly in `metadata.lua` `code`.
+- `00_Core.lua` loads first: the `code` list order is the intra-mod load order, ours to set
+  (doccheck enforces it). Inter-mod order is the player's enable order (EF-054), with no
+  priority field and no way to request a position. We prefer to load first, for deference
+  not precedence: first is innermost, so we patch the vanilla we verified and every later mod
+  wraps us. Never build on it: nothing breaks at any position, and there is deliberately no
+  player-facing load-order instruction, because the Mod Manager's list is a cosmetic sort a
+  player could not verify following. Note it, watch for a real conflict, create no new problems.
+- Before release: verify each target against the shipping `Packs\Lua.fpk` (WORKFLOW), test
+  each fix in-game, update `agent/bugs/` statuses, and credit prior art (ChoGGi's Fix Bugs mod
+  documented several of these bug families for the original game).
