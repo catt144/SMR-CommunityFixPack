@@ -19,13 +19,17 @@ NVIDIA 580, the temporary workaround mod) is not on this handoff: see
 
 ## 0 · Start here
 
-### C95 is cleared; the release is next
+### The v12 release is in flight
 
-2026-09-17: the owner watched the three legs and granted `tested-attended`, and waived the train
-return and the live C102 reroute. The release runs from [release_prompt.md](release_prompt.md) on the
-Pending entry in [RELEASE_OUTBOX.md](RELEASE_OUTBOX.md), which carries the owner's asks: C95 is the
-featured fix with its one gotcha, and the 21-line fix list gets a truth pass plus about six cuts to
-make room.
+2026-09-17: C95 is `tested-attended` and C102's live reroute and the train return are waived by the
+owner, so the release words were prepared and the owner went to the Mod Editor. Where it stands and
+what is owed is `docs/agent/STATE.md` plus the Pending entry in [RELEASE_OUTBOX.md](RELEASE_OUTBOX.md);
+read those rather than a retelling here, and do not republish another session's sequence.
+[release_prompt.md](release_prompt.md) owns the rest, §4 onward.
+
+⛔ **`metadata.lua` and `items.lua` are comment-stripped on disk right now** (`grep -c '^\s*--'`
+gives 0 on both) and `version` reads 16 against 14 at `HEAD`: the Mod Editor writeback of trap 3.
+Nothing may commit either file until `agent/support/POST_UPLOAD_CLOSE.md` has restored them.
 
 The owner reads nothing back from the log: they paste a line and say "flushed", and you read
 `%APPDATA%\Surviving Mars Relaunched\logs\Mars.exe-*.log` (newest) yourself. Saves are reachable at
