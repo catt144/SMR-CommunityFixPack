@@ -253,90 +253,24 @@ investigation; while it is pointed there no suite reading describes current work
 is cut from the tag the day it is needed. A short-lived code-only branch per chain is justified for
 code nobody is sure about; doc changes still go to `main` directly.
 
-## Authoring a prompt / job brief — required elements
+## Authoring a prompt
 
-Use the `prompt-authoring` skill for a brief written for another session.
-Its body carries the required elements and the R-C derived-facts procedure.
+Use the `prompt-authoring` skill. R-D, self-split: depth is the cost, so legs are packed at
+authoring to roughly `filesize/4 × 1.7` and about 75% fill, never to the edge of a window; a retry
+is a fresh fire, not a continuation; working legs are blinded to the budget. Attended sittings are
+indivisible and exempt.
 
-**R-D · Self-split, authoring-side.** Depth is the cost: the same unit of work runs several
-times more expensive deep in a session than early in one. So legs are **packed at authoring**
-to roughly `filesize/4 × 1.7` and ~75% fill, never pushed to the edge of a window, and a retry
-is a fresh fire rather than a continuation. Working legs are **blinded** to this — an agent
-that feels a budget cuts the corner you cannot see. Attended sittings are exempt: they are
-indivisible and run to their natural end.
+## `[FAQ]` tag
 
-## `[FAQ]` — the tag for "a player will ask about this"
+Behaviour a player could mistake for a bug, or a question the design deliberately answers "no" to,
+is marked with the literal `[FAQ]` on the entry that already explains it, never in a new doc;
+`grep -rn "\[FAQ\]" docs/ Code/` collects them. A tag is a bookmark, not work and not a promise.
+Remove it in the commit that changes the tagged behaviour.
 
-Owner intends to write an FAQ doc at some point. Rather than start one early
-(and rather than let the material scatter), **tag the source of truth in place**
-with the literal marker `[FAQ]` and collect it later:
+## Verification rails
 
-```
-grep -rn "\[FAQ\]" docs/ Code/
-```
-
-Rules that keep the tag worth having:
-
-- Put it on the **entry that already explains the thing** — an `agent/bugs/` entry, a
-  parked item, a module header. Never create a doc just to hold a tag.
-- Tag **behaviour a player could reasonably mistake for a bug**, or a question
-  the design deliberately answers "no" to. Not every quirk.
-- A `[FAQ]` tag is **not work and not a promise** — it is a bookmark. Writing
-  the FAQ is a launch-time task, and tagging things is not progress toward it.
-- If the tagged behaviour is later changed or fixed, **remove the tag** in the
-  same commit, or the FAQ inherits a stale answer.
-
-Currently tagged (re-derived from `grep -rn "\[FAQ\]" docs/ Code/` on
-2026-08-01 — the previous list named a tag in `MOD_DESCRIPTION.md` that did not
-exist):
-
-- D01's parked-rocket activation limitation — `agent/bugs/` D01 entry +
-  `FUTURE_IDEAS.md` entry 2.
-- The save-repair framework's honest limits — `FUTURE_IDEAS.md` entry 4.
-- "Put the mod back" as advice for a damaged save, and its F88 caveat —
-  `agent/bugs/` F88 entry.
-- The uninstall procedure and the standalone save-rescue artifact —
-  `agent/bugs/` D13 + `FIX_POLICY.md` §3a + `F86_EXECUTION_PLAN.md` Phase 5.
-- **Why we make a fuss about the savegame footprint at all** — the documented
-  engine behaviour (mod code is serialised into saves by design) and the
-  community norm we deliberately exceed: `MOD_DESCRIPTION.md`, added
-  2026-08-01 from `PRIOR_ART_SURVEY.md` §1/§2/§4.
-- **The no-precedent uninstall claim** — `MOD_DESCRIPTION.md`, added
-  2026-08-01 but **written conditionally and marked do-not-publish until F86
-  Tier 1 lands and verifies** (`PRIOR_ART_SURVEY.md` §6). A tag on a claim
-  that is not yet true has to say so.
-
-## Verification rails (adopted 2026-09-12, owner)
-
-The global verification duties R-A, R-B, R-E, and R-G now live in `CLAUDE.md`'s
-`Must_Read_Header`. The task-specific rails remain here.
-
-R-C (brief element 9) lives in the `prompt-authoring` skill.
-
-**R-F · Size the verification by owner-observability.** A player-visible defect is verified by
-one attended A/B in the game — the owner is the cheapest verifier of "can a player actually do
-this". An engine-internal defect is verified by desk harness plus audit, because no amount of
-watching would show it. Choose the leg by who can see the thing, not by how thorough it feels.
-
-### What these rails are not
-They are not a licence to re-derive everything. Zero-trust re-derivation is the terminal
-audit's job and no one else's: build legs **inherit** behind a fingerprint and re-derive only
-what moved. A mechanism that is skeptical everywhere is the known failure mode — 26 chains
-bought 4 real catches, all of them adversarial measurement, and a 45-seat review pilot bought
-none. Cheap trusting workers, one expensive skeptic, triggered rather than constant.
-
-### Trust by source
-The three classes are stated once, in `CLAUDE.md`, because every agent needs them before it
-could decide to load anything. R-A is how class 2 is discharged: one command, not a re-read.
-
-## Writing in a shared tree (traps, each one cost a real error)
-
-`80_AgentSlots.lua` is agent-owned, rewritten per sitting using `agent/support/SMRTK_SLOTS.md`, never edited by a build link.
-
-Five or more interactive sessions work this checkout at once. The global identity,
-attribution, status, and hunk-staging duties now live in `CLAUDE.md`'s `Must_Read_Header`.
-- ⛔ **After a CHECKLIST-ONLY edit run `python tools/doccheck.py --regen-waiting`, NOT `--regen`.**
-  `--regen` rebuilds both indices from **every entry on disk, a peer's uncommitted ones included**.
-  An edit that touches **entries** as well still needs the full `--regen` — the distinction is what
-  you changed, not a preference. Before any `--regen`, check `git status docs/agent/bugs/` for
-  foreign ` M`/`??`.
+The global duties are in `CLAUDE.md`; R-C is in the `prompt-authoring` skill. R-F: size the
+verification by owner-observability. A player-visible defect is verified by one attended A/B in the
+game, the owner being the cheapest verifier of "can a player actually do this"; an engine-internal
+defect by desk harness plus audit, because watching would show nothing. Build legs inherit behind a
+fingerprint and re-derive only what moved; zero-trust re-derivation is the terminal audit's job.
