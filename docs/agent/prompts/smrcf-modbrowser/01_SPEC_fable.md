@@ -40,7 +40,7 @@ where it might cut the other way.
 
 **Defect 1 (screenshots).** Two gates: does `AsyncPopsDownloadFile` exist at
 runtime, and is a **§1.5 full replacement** of a 63-line function acceptable
-here? `FIX_POLICY` §365-366 requires an explicit user decision for a §1.5 on an
+here? `FIX_POLICY` §4 (the R3 bullet) requires an explicit owner decision for a §1.5 on an
 R3; this is R1/R2, so the letter does not bind — but the *reason* does, and the
 pack's ~29 existing full replacements are its patch-rot exposure.
 ⇒ **Package this as an owner decision with a recommendation**, per

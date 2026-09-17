@@ -214,16 +214,12 @@ reason to descope. The authoritative exposed set and every disposition:
 `reports/D13_EXPOSED_SET.md` §7, derived over both shipped trees, never an inherited count. A
 new capturable site is dispositioned there.
 
-**The mechanism (EF-023).** A save serialises by value everything reachable from the persisted
-graph. A mod function enters a save iff (a) its frame sits below a `Sleep`/`WaitMsg`/
-`WaitWakeup` on a blocked game-time thread, (b) it is held in a live local or upvalue of any
-captured frame, engine frames included, or (c) it is stored in persisted state (object fields,
-GameVar contents, notification closures). Synchronous code that stores no function values is
-safe by construction; real-time threads, class tables, presets, `OnMsg` registrations and UI
-windows are safe. A captured orphan is not env-dead: it resolves every vanilla global and loses
-only mod-created names, so an all-vanilla body keeps executing after uninstall, bounded if it
-self-limits, forever if it loops. Every design answers: if this body is captured anyway, does
-it die, expire or run forever, and would anyone notice?
+**The mechanism (EF-023).** A mod function enters a save iff (a) its frame sits below a yield
+on a blocked game-time thread, (b) it is held in a live local or upvalue of any captured frame,
+or (c) it is stored in persisted state; synchronous code that stores no function values is safe
+by construction. A captured orphan is not env-dead: an all-vanilla body keeps executing after
+uninstall, bounded if it self-limits, forever if it loops. Every design answers: if this body
+is captured anyway, does it die, expire or run forever, and would anyone notice?
 
 **The orphan gate.** Every mod-owned thread body opens each wake with
 `if not SMRFixPack then return end` and resets any vanilla state it set BEFORE its first
