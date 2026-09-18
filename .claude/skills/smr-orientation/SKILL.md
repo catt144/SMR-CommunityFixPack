@@ -14,7 +14,8 @@ game's shipped Lua, patched at runtime; no game files are modified.
   for it (owner ruling 2026-09-15). Opening a session is not such a call.
 - **`docs/agent/STATE.md`** — kernel status plus pointers, byte-capped. When status IS the
   question, this is the read, and its `NEXT`, `OWED` and `## Hazards` lines bind you.
-- **`docs/PLAYTEST_CHECKLIST.md`** — what waits on the owner. Read it before asking the owner anything.
+- **`docs/PLAYTEST_CHECKLIST.md`** — the owner's list. Pull it only when a task or the owner calls
+  for it; file a new ask there through its entrance gate.
 - **Never hand-type a count.** `python tools/doccheck.py --emit-counts` prints them.
 
 ## 2 · Where things live

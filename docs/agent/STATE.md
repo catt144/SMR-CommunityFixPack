@@ -10,6 +10,6 @@ What may enter this file: the admission door in `agent/prompts/perma/STATE_EVICT
 - Current version 1.1.0.403908 + DLC
 - Previous version 1.0.7 w/ tree archived at `C:\Dev\SMR-SrcArchive\1.0.7.396349\Src` (`EF-083`)
 
-## Open owner decisions (bodies in `docs/PLAYTEST_CHECKLIST.md` → "Decisions waiting on you")
+## Open owner decisions (bodies in `docs/PLAYTEST_CHECKLIST.md` → `## Decide`)
 - Owner OWES: none.
 - STILL OPEN: none. `WAITING_ON_YOU.md` parses the literal `STILL OPEN:` and `Owner OWES: ck##` idioms.
