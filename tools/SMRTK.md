@@ -182,7 +182,27 @@ Partial record, 2026-09-18 (the opt-in train-tests sitting, TestKit `8c69aff`–
 `f5fa650`). **Field editor: NOT MET, from two owner screenshots only, not a log.** The Selected
 page's box showed the `command` hint as white text on a light box. Depot fill/empty `before`/`after`,
 the missing-field refusal and the boot overlay: NOT RUN. All four stay owed for a deliberate
-sitting.
+sitting. Owner's words 2026-09-18, not a boot witness: *"nothing showing when i click things like it is
+now"* — consistent with no overlay at boot; the item stays owed.
+
+📌 **Still owed, from the 2026-09-17/18 maintenance round** (TestKit `82d4577`, `382c667`, `6b7edad`,
+desk-only; the reasoning is in each leaf's comment block). **Record each as witnessed or NOT RUN, by name.**
+
+- `open_domes` returns `terraforming = N parameter(s) set to 100%` and `law = Policy_OpenDomes
+  activated`, and the domes open. ⚠️ Glass that stays shut while `law` reads activated is
+  `Dome:UpdateOpenCloseState`'s `GetOpenAirBuildings` gate (`Dome.lua:1770-1780`) — a finding, not a
+  dead leaf. During an active cold wave, *"It's too cold"* charges should stop ([EF-108](../docs/agent/facts/EF-108.md);
+  how soon is untraced).
+- `close_domes` returns the law deactivated and every parameter reduced by 10 points.
+- `fill_storages` on a colony with a rocket returns `filled`, `skipped_rockets` of at least 1 and
+  `failed`, and does not abort.
+- Quick build on a pipe or cable run, and on a dome, where two presses may be needed. The leaf's comment
+  block in `73_SMRTK_Infopanel.lua` says why each differs from the colony-wide cheat.
+- **Verbose** lights green and shows the on-screen log, and its own press shows a `verbose=on` line;
+  opening the console lights it too; `[_]` at the right end of the top row still shows whole.
+
+Witnessed 2026-09-17, owner's words: `breakthroughs_reveal_all`, the tech point leaves, and Quick build
+on an ordinary construction site.
 
 ## Probe preflight
 

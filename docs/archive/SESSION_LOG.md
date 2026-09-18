@@ -10967,3 +10967,29 @@ v10 and was corrected. The `UPLOAD_WORKFLOW.md` change-note backup still carried
 Owner said "uploaded"; Steam changelog and body read back the release; writeback `version`
 11 → 14, `pdx_version` "9" → "10", comments restored. Site NOT published at close; Paradox
 page version not stated.
+
+
+## 2026-09-17/18 — TestKit maintenance round (`smr-bugfixpack-ec`), executed on Claude Opus 5 (1M context)
+
+Record only. TestKit `82d4577`, `faa7279`, `125f741`, `382c667`, `6b7edad` and the close-out comment
+commit; pack `feb4c1d`, `ac4e4d3`, `a92cc62` and the commit carrying this line. What is still owed is
+`tools/SMRTK.md` "Still owed" and the orchestrator handoff §1.
+
+Built on owner rulings: `open_domes` / `close_domes` inline the game's Terraforming cheat bodies,
+because the Lua `OpenAllDomes()` only changes the glass (`Dome:IsOpen` is "is the glass invisible");
+`fill_storages` excludes `UniversalRocketBase` and `pcall`s each fill; `breakthroughs_reveal_all`; a
+top-row Verbose button over the game's existing on-screen log. Owner witnessed the breakthroughs leaf,
+the tech point leaves and Quick build on a construction site.
+
+Repaired: a probe returning no verdict now reports ERROR, not an empty SKIP, retiring the README's
+per-file audit recipe. The scanner written to check that change first reported 38 phantom failures —
+it counted `for`/`while` and their own `do` as two openers — and was falsified against a fixture pair
+before its zero was trusted. Quick build had never been drawn: `T.SelectedActions` renders only three
+lists, and a standalone `T.Action` is in none of them. Wave 10 deleted; C39's no-vanilla-half reason
+homed on `C39.md`. Filed `EF-108` (cold-wave sanity).
+
+Claims made and withdrawn in-session, with their basis: the kit's missing remote was raised twice as
+owed — it is settled local-only (`.claude/DECISIONS.md`, ck204); `ck86` was called dangling — it is
+archived inside `## ck83` (items 83–86); the "Tool Kit ? Selected" title was called a missing font
+glyph — it is a literal `?` in source; `GainTechPoint` was called a free point unlike the console
+recipe — both advance the tech-point cost curve identically (`TechTree.lua:659-664, 720-724`).

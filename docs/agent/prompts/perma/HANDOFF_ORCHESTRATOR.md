@@ -67,13 +67,21 @@ rule. That line has not been run, although its route through the preset was read
 
 TestKit builds go to Astra unless the owner asks a Claude session directly.
 
-- **Four World leaves await a witness in play** — built 2026-09-17 on owner rulings, kit `82d4577`,
-  reasoning in each leaf's comment block. `fill_storages` now excludes `UniversalRocketBase` and
-  `pcall`s each `CheatFill`; `open_domes` and `close_domes` inline the game's Terraforming cheat
-  bodies, so the law is enacted and the state is real (see [C103](../../bugs/C103.md), whose control
-  this unblocks). ⚠️ One thing to watch on the open leaf: `Dome:UpdateOpenCloseState` applies the
-  visual open only `if not GetOpenAirBuildings(self:GetMap())` (`Dome.lua:1770-1780`) — glass staying
-  shut while the law reads active is that gate, and is itself a finding.
+- **SMRTK witnesses owed.** The list, with each prediction, is [tools/SMRTK.md](../../../../tools/SMRTK.md)
+  "Still owed": the World leaves from kit `82d4577` (`open_domes` is what makes [C103](../../bugs/C103.md)'s
+  control runnable), Quick build on a pipe run and on a dome, and the Verbose button. Record results there.
+- **Probe buttons refuse without an agent's stamp — owner deferred 2026-09-18 (*"Don't build it now"*).**
+  `run_all` and `run_probe` (`Code/76_SMRTK_Kit.lua:102-119`) call `hygiene()` (`:55-63`), which refuses
+  until `probe_preflight` is fed two full 40-character HEADs and a desktop grep's exact output, and any
+  load expires it. That is kit code refusing a `RunAll`, which ck184 (2026-09-15, restated in
+  `tools/SMRTK.md` "Probe preflight") rules out; the gate was built 2026-09-13 (kit `96c9f1a`) and never
+  reconciled. Proposed: keep the stamp, drop the refusal — buttons always enabled, and an unprovisioned
+  run marked "not attested" on its verdict rows. Until then the owner's route is `*r SMRTest.RunAll()` at
+  the console (`*r` because wave 6's probes yield), and the Kit page's verdict rows read `SMRTest.last`,
+  so results show without the log.
+- **The Selected section title reads "Tool Kit ? Selected" — owner deferred 2026-09-18.** It is a literal
+  `?` in source (`Code/73_SMRTK_Infopanel.lua:440`, `Untranslated("Tool Kit ? Selected")`), not a missing
+  font glyph as first reported; most likely a separator lost to an encoding pass. One-character fix.
 - **Unrun rows from TestKit `acafc74`.** Arm `SMRTest.Log.DroneDrop` (C98) and play normally. Arm
   `SMRTest.Log.CrewDraft` and deliberately under-supply an expedition (demand a specialisation nobody
   has), then read the rocket's panel; body and discriminators in [EF-104](../../facts/EF-104.md). The
@@ -148,7 +156,10 @@ Never keep an owner list here, and never rebuild an owed list from an older docu
 
 Numbering keeps its old gaps so a citation of "trap 5" still resolves. The shared-tree rules (recheck before
 writing, commit with a pathspec, attribute by sha and diff) are header rules in `CLAUDE.md`. Trap 11 is gone: the checklist's own
-format gate now fails a stray heading.
+format gate now fails a stray heading. Trap 12 is gone too: the `STILL OPEN:` parser it guarded retired
+with the WAITING register on 2026-09-16 (`tools/doccheck.py:480-486`), so its check,
+`doccheck | grep WAITING:`, prints nothing on any tree. `docs/agent/STATE.md`'s open-decisions lines still
+name that register and are owed a substitution under [STATE_EVICTION.md](STATE_EVICTION.md).
 
 3. **After an upload, the Mod Editor writeback strips every comment from `metadata.lua` and `items.lua`.**
    No session may commit either file until `agent/support/POST_UPLOAD_CLOSE.md` has restored them. Check
@@ -165,10 +176,6 @@ format gate now fails a stray heading.
    the absolute scratchpad path.
 10. **One stray NUL makes a doc binary, and `rg` skips binary files by default.** Detect with `file <p>`;
     repair by transcribing the byte as `\x00` and disclosing it beside the block.
-12. **`STATE.md`'s `STILL OPEN:` line is parsed, and doccheck stays GREEN when it misparses.** A `(`
-    ends the capture and drops every later id. Any bare 2–3 digit number followed by a lowercase word
-    counts as owed, so an all-clear must read `none` with no digits. Check `doccheck | grep WAITING:`
-    before and after any STATE edit.
 
 ## 5 · Where things live that the maps do not say
 
