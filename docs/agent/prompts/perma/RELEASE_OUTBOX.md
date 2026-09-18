@@ -25,8 +25,9 @@ player surface bumps it by one on release.
 
 **Hold for C107's in-game control before upload.** The build is desk-tested only
 (`tools/desk_c107_dry_farming.py`, 23 checks, 10 falsifying variants). The first build went
-`error` on the owner's first boot (2026-09-18) and was corrected; the correction, the TestKit probe
-`DryFarmingFarms` and the control in `docs/agent/bugs/C107.md` have not run in a game.
+`error` on the owner's first boot (2026-09-18) and was corrected. The correction then passed in
+game: clean boot, and the kit probe PASS on new research and across a save/reload. Still owed: the
+load heal on a save that researched Dry Farming before the fix (C107 "In game").
 Source of the report: a Steam comment, 2026-09-18.
 
 C107 is a new public row:
