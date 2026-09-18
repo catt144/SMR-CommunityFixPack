@@ -9,7 +9,7 @@ Preserve evidence and next steps within the session's scope.
 
 ## Recover
 
-Record HEAD and `git status --short`. Review the conversation, diffs, working files and
+Record HEAD, `git status --short` and the executed model, read from the transcript. Review the conversation, diffs, working files and
 relevant report sections in full. Identify commits by sha and diff, not the shared author.
 If context is partial, start from the task and STATE's live pointers; state that limit.
 
