@@ -25,6 +25,14 @@ purpose and its actual destination passages, not a topic match or a fresh GREEN.
 
 ## When the edit writes, moves or keeps a rule
 
+⚖️ **The test carries the owner's authority** (owner, 2026-09-17): *"before we run
+into an issue with a rule cannot be purged by an agent, I authored the rules test
+so it carries my authority."* Applying it is executing their decision, not making
+one, so a rule the test disposes of is purged without coming back for a ruling.
+The delegation is to the **test**, not to your judgement: a rule goes because the
+test disposes of it, never because it reads as unnecessary, and the evidence goes
+in the commit message. Where the test does not decide, keep the rule and ask.
+
 One question decides it — not "is this important?", which is why the doc grew:
 
 **What actually stops this, if not the reader's memory?**
