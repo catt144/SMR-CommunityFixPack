@@ -105,7 +105,7 @@ a duplicate does not revoke its source ruling or erase an open obligation.
 
 Pull build counts with `python tools/doccheck.py --emit-counts` when needed;
 they are no longer stored in STATE (owner's scope override, 2026-09-15,
-[checklist record](../../../PLAYTEST_CHECKLIST.md#2026-09-15--state-cleanup-scope-override)).
+[archived ruling](../../../archive/PLAYTEST_ARCHIVE.md#state-cleanup-scope-override--2026-09-15)).
 
 ## Checklist sweep — items 30 days old
 
