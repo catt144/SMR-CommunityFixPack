@@ -23,6 +23,8 @@ mklink /J "%AppData%\Surviving Mars Relaunched\Mods\SMR-BugFixPack-TestKit" C:\D
 
 Enable it in the Mod Manager alongside whichever packs the leg needs. Open the
 console with Enter / Alt-Shift-C, or the toolkit with Ctrl-Shift-F11.
+Each pack's own junction and its console status line (`SMRFixPack.ListFixes()` /
+`SMROptInPack.ListFixes()`) are in that repo's `docs/agent/WORKFLOW.md`, "Install for testing".
 
 ## What it provides
 
