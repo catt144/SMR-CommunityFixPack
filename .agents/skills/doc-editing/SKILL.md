@@ -23,6 +23,32 @@ purpose and its actual destination passages, not a topic match or a fresh GREEN.
 - If the question requires historical evidence, use smr-orientation's archive
   search route. A default search excludes the archive deliberately.
 
+## When the edit writes, moves or keeps a rule
+
+One question decides it — not "is this important?", which is why the doc grew:
+
+**What actually stops this, if not the reader's memory?**
+
+| answer | disposition |
+|---|---|
+| Structure — the reader cannot perform the action at all | delete the rule |
+| A guard — a machine already catches it | a one-line pointer to the gate |
+| Nothing, and it has been violated in practice | it was never a rule; it is a wish |
+| Nothing, and it binds exactly one job | that job's skill or brief |
+| Already a recorded fact with a canonical home | delete the prose, keep the fact |
+| Nothing, binds every session, no guard is possible | the always-loaded set, which stays very short |
+
+Four shapes that should not be rules at all: **CANNOT**, structurally impossible
+for the reader, delete · **WOULD NOT**, possible but contrary to how an agent
+operates — an incident check is required before cutting, because this branch can
+delete an earned rule · **WRONG READER**, the actor is not this doc's audience,
+move it rather than delete · **NOT A RULE**, information written in the
+imperative, which becomes an engine fact or a pull-only lesson and never joins
+the always-loaded set.
+
+Find duplicates by meaning, not by string. The worked reasoning, the owner's
+wording and the calibration warning are in `reports/RULE_PLACEMENT_TEST.md`.
+
 ## Keep regeneration within the edit
 
 The full `python tools/doccheck.py --regen` reads every entry on disk, including peers' unfinished work.
