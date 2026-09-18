@@ -25,9 +25,9 @@ controls stay visible when the body collapses.
 
 | tab (page id) | controls |
 |---|---|
-| Sitting | Read taint, Read eligibility; MARK, Flush + copy, Clear screen, Screenshot + Mark, Stop disaster; the speed ladder and Cancel target stay in the top rows |
+| Sitting | Read taint, Read eligibility; MARK, Flush + copy, Clear screen, Verbose, Screenshot + Mark, Stop disaster; the speed ladder and Cancel target stay in the top rows. **Verbose** shows or hides the game's on-screen console log, which every result line already reaches through `ConsolePrint`; it lights green while that log is visible and reads the real state, so opening the console lights it too. Off at boot on purpose (EF-097) |
 | Run | target sol, the four triggers (sol, first Lua error, selected field, next rocket), Run until / cancel, shared field watch |
-| Selected | curated methods, grouped More Cheat / AsyncCheat methods, field watch, colonist traits, dump and pins |
+| Selected | curated methods led by Quick build on a construction site, grouped More Cheat / AsyncCheat methods, field watch, colonist traits, dump and pins |
 | Slots & notes (`Agent`) | six numbered slots plus Scratch, note, pin A/B/C readout |
 | World | disasters and cursor-armed meteors, quiet, fix / malfunction all, completion, rocket transit skip, supplies, people, research, domes |
 | Saves | Save / Load / Override load A/B/C; process session and loaded provenance |
