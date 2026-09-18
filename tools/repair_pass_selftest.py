@@ -6,9 +6,11 @@ Each demand is paired with a control and rerun against a reverted scratch copy.
 """
 import hashlib
 from pathlib import Path
+import shutil
 import sys
 import tempfile
 import types
+from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools"))
@@ -20,26 +22,6 @@ def load_copy(path, source):
     module.__file__ = str(path)
     exec(compile(source, str(path), "exec"), module.__dict__)
     return module
-
-
-def marker_cases(module, demand=None):
-    control = ["<!-- ck:1 status:closed owner:no -->"]
-    out = []
-    module.marker_integrity(control, out)
-    assert not any("warn " in x or "; WARN" in x for x in out), out
-    demands = (
-        (["<!-- ck:2 status:part-ruled owner:yes -->"],
-         ("1 on disk, 0 parsed; RED", "line 1: unparsed", "unknown status part-ruled")),
-        (["<!-- ck:3 status:bogus owner:yes -->"],
-         ("1 on disk, 1 parsed; RED", "unknown status bogus")),
-        (control + control, ("duplicate ck:1 at lines 1, 2",)),
-        (["<!-- ck:oops status:closed owner:no -->"], ("line 1: unparsed",)),
-    )
-    selected = demands if demand is None else (demands[demand],)
-    for lines, needles in selected:
-        out = []
-        module.marker_integrity(lines, out)
-        assert all(any(n in x for x in out) for n in needles), out
 
 
 def fingerprint_cases(module):
@@ -92,30 +74,88 @@ def parity_cases(module, root):
             path.write_bytes(content)
 
 
+def compile_cases(module, root):
+    """TOOLS COMPILE over a scratch copy of every live tools/*.py.
+
+    Control: the clean copy passes. Demand: a syntax error planted at the end
+    of one copy goes RED and names that file and line.
+    """
+    tools = root / "compile-tools"
+    shutil.rmtree(tools, ignore_errors=True)
+    tools.mkdir()
+    for path in sorted((ROOT / "tools").glob("*.py")):
+        shutil.copyfile(path, tools / path.name)
+    original_dir = module.TOOLS_DIR
+    module.TOOLS_DIR = str(tools)
+    try:
+        out = []
+        assert module.tools_compile(out), out
+        assert out[0].startswith("TOOLS COMPILE: PASS"), out
+        print("CONTROL " + out[0])
+        planted = tools / "pack_list.py"
+        good = planted.read_bytes()
+        assert good.endswith(b"\n")
+        line = good.count(b"\n") + 1
+        planted.write_bytes(good + b"def broken(:\n")
+        out = []
+        assert not module.tools_compile(out), out
+        assert out[0].startswith("TOOLS COMPILE: RED"), out
+        assert any("tools/pack_list.py:%d:" % line in x for x in out), out
+        print("PLANTED " + out[0] + " | " + out[1].strip())
+        planted.write_bytes(good)
+        out = []
+        assert module.tools_compile(out), out
+        print("RESTORED " + out[0])
+    finally:
+        module.TOOLS_DIR = original_dir
+
+
+def flpk_cases(module, root):
+    """FLPK SELFTEST: present passes; absent, unspawnable or failing is RED."""
+    tree = root / "flpk-tree"
+    tool = tree / "tools" / "flpk_extract.py"
+    tool.parent.mkdir(parents=True, exist_ok=True)
+    live = (ROOT / "tools" / "flpk_extract.py").read_bytes()
+    tool.write_bytes(live)
+    original_repo = module.REPO
+    module.REPO = str(tree)
+    try:
+        out = []
+        assert module.flpk_selftest(out), out
+        print("CONTROL " + out[0])
+        tool.unlink()
+        out = []
+        assert not module.flpk_selftest(out), out
+        assert out[0].startswith("FLPK SELFTEST: RED") and "absent" in out[0], out
+        print("ABSENT " + out[0])
+        tool.write_bytes(live)
+        with patch.object(module.subprocess, "run", side_effect=OSError("spawn refused")):
+            out = []
+            assert not module.flpk_selftest(out), out
+        assert out[0].startswith("FLPK SELFTEST: RED") and "could not run" in out[0], out
+        print("UNSPAWNABLE " + out[0])
+        tool.write_bytes(b"import sys\nsys.exit(1)\n")
+        out = []
+        assert not module.flpk_selftest(out), out
+        assert out[0].startswith("FLPK SELFTEST: RED") and "FAILED" in out[0], out
+        print("FAILING " + out[0][:60])
+        tool.write_bytes(live)
+        out = []
+        assert module.flpk_selftest(out), out
+        print("RESTORED " + out[0])
+    finally:
+        module.REPO = original_repo
+
+
 def main():
     source = (ROOT / "tools/doccheck.py").read_text(encoding="utf-8-sig")
     digest = hashlib.sha256(source.encode()).hexdigest()
     with tempfile.TemporaryDirectory(prefix="smr-repair-") as directory:
-        scratch = Path(directory) / "doccheck.py"
+        root = Path(directory)
+        scratch = root / "doccheck.py"
         fixed = load_copy(scratch, source)
-        marker_cases(fixed)
         fingerprint_cases(fixed)
-        print("PASS A1/A2 controls and all demands on repaired copy")
-        # Revert integrity reporting to its pre-repair silence.
-        a1 = source.index("def marker_integrity(")
-        end = source.index("def check_marker_integrity(", a1)
-        mutant = source[:a1] + (
-            'def marker_integrity(lines, out):\n'
-            '    pass\n\n\n'
-        ) + source[end:]
-        broken = load_copy(scratch, mutant)
-        for demand in range(4):
-            try:
-                marker_cases(broken, demand)
-            except AssertionError:
-                print("PASS A1 reverted scratch demand %d: control passes, demand FAILS" % demand)
-            else:
-                raise AssertionError("A1 mutant survived")
+        print("PASS A2 control and demands on repaired copy")
         start = source.index('            elif re.search(r"\\bbuild')
         end = source.index('\n                verdict =', start)
         mutant = source[:start] + '            elif build in bare:' + source[end:]
@@ -129,10 +169,9 @@ def main():
             raise AssertionError("A2 mutant survived")
         # Restore and run the WHOLE check, then hash the restored scratch copy.
         restored = load_copy(scratch, source)
-        marker_cases(restored)
         fingerprint_cases(restored)
         if hasattr(restored, "pack_ignore_parity"):
-            parity_cases(restored, Path(directory))
+            parity_cases(restored, root)
             # Prove a missing parity gate cannot satisfy either drift demand.
             start = source.index("def pack_ignore_parity(")
             end = source.index("def main():", start)
@@ -143,15 +182,58 @@ def main():
             ) + source[end:]
             broken = load_copy(scratch, mutant)
             try:
-                parity_cases(broken, Path(directory))
+                parity_cases(broken, root)
             except AssertionError:
                 print("PASS B2 reverted scratch: control passes, drift demand FAILS")
             else:
                 raise AssertionError("B2 mutant survived")
             restored = load_copy(scratch, source)
-            marker_cases(restored)
             fingerprint_cases(restored)
-            parity_cases(restored, Path(directory))
+            parity_cases(restored, root)
+        # C1: every tools/*.py byte-compiles. A gate that always passes must
+        # not satisfy the planted-error demand.
+        compile_cases(restored, root)
+        start = source.index("def tools_compile(")
+        end = source.index("def counts_block(", start)
+        mutant = source[:start] + (
+            'def tools_compile(out):\n'
+            '    out.append("TOOLS COMPILE: PASS (mutant)")\n'
+            '    return True\n\n\n'
+        ) + source[end:]
+        try:
+            compile_cases(load_copy(scratch, mutant), root)
+        except AssertionError:
+            print("PASS C1 reverted scratch: clean control passes, planted error FAILS")
+        else:
+            raise AssertionError("C1 mutant survived")
+        # C2: the FLPK gate cannot vanish green. Each mutant is the pre-fix
+        # body of one branch ("not checked", passing).
+        restored = load_copy(scratch, source)
+        flpk_cases(restored, root)
+        for label, needle, replacement in (
+            ("absent",
+             '        out.append("FLPK SELFTEST: RED — tools/flpk_extract.py is absent "\n'
+             '                   "(pack_list.py imports its parser)")\n'
+             '        return False\n',
+             '        out.append("FLPK SELFTEST: not checked (tools/flpk_extract.py absent)")\n'
+             '        return True\n'),
+            ("unspawnable",
+             '        out.append("FLPK SELFTEST: RED — could not run (%s)" % exc)\n'
+             '        return False\n',
+             '        out.append("FLPK SELFTEST: not checked (%s)" % exc)\n'
+             '        return True\n'),
+        ):
+            assert source.count(needle) == 1, label + " mutation is ambiguous"
+            try:
+                flpk_cases(load_copy(scratch, source.replace(needle, replacement)), root)
+            except AssertionError:
+                print("PASS C2 reverted scratch (%s): control passes, demand FAILS" % label)
+            else:
+                raise AssertionError("C2 %s mutant survived" % label)
+        restored = load_copy(scratch, source)
+        fingerprint_cases(restored)
+        compile_cases(restored, root)
+        flpk_cases(restored, root)
         assert hashlib.sha256(scratch.read_bytes()).hexdigest() == digest
         print("RESTORED doccheck.py SHA256 " + digest)
     assert (ROOT / "tools/doccheck.py").read_text(encoding="utf-8-sig") == source

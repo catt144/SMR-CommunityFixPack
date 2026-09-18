@@ -7,34 +7,6 @@ import tempfile
 from repair_pass_selftest import ROOT, load_copy
 
 
-def marker_cases(m, root):
-    path = root / "checklist.md"
-    m.CHECKLIST = str(path)
-    good = b"<!-- ck:1 status:closed owner:no -->\n"
-    path.write_bytes(good)
-    assert m.check_marker_integrity([])
-    for label, broken in (
-        ("unknown", good.replace(b"closed", b"bogus")),
-        ("hyphenated", good.replace(b"closed", b"part-ruled")),
-        ("malformed", good.replace(b"ck:1", b"ck:oops")),
-        ("unterminated", good.replace(b" -->", b"")),
-        ("status disagreement", good + good.replace(b"closed", b"open")),
-        ("owner disagreement", good + good.replace(b"owner:no", b"owner:yes")),
-    ):
-        path.write_bytes(broken)
-        out = []
-        assert not m.check_marker_integrity(out), (label, out)
-        assert any("; RED" in x for x in out), out
-        print("PASS marker broken copy FAILS: " + label)
-    path.write_bytes(good + good)
-    out = []
-    assert m.check_marker_integrity(out) and any("(agree)" in x for x in out), out
-    path.write_bytes(good)
-    assert m.check_marker_integrity([])
-    assert path.read_bytes() == good
-    print("RESTORED checklist SHA256 " + hashlib.sha256(path.read_bytes()).hexdigest())
-
-
 def byte_cases(m, root):
     path = root / "STATE.md"
     m.STATE = str(path)
@@ -137,7 +109,6 @@ def main():
         root = Path(directory)
         scratch = root / "doccheck.py"
         m = load_copy(scratch, source)
-        marker_cases(m, root)
         byte_cases(m, root)
         skill_cases(m, root)
         owner_cases(m)
@@ -162,7 +133,6 @@ def main():
         else:
             raise AssertionError("raw-byte mutant survived")
         restored = load_copy(scratch, source)
-        marker_cases(restored, root)
         byte_cases(restored, root)
         skill_cases(restored, root)
         owner_cases(restored)

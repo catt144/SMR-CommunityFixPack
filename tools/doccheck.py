@@ -55,6 +55,7 @@ import re
 import subprocess
 import sys
 import time
+import warnings
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TESTKIT = os.environ.get("SMR_TESTKIT", r"C:\Dev\SMR-BugFixPack-TestKit")
@@ -490,10 +491,10 @@ def check_entry_mirror(out):
 # the owner purged docs/PLAYTEST_CHECKLIST.md (zz-owner/CHECKLIST_PURGE_PROMPT.md)
 # and rebuilt it the same night as a plain list with no markers (see
 # check_checklist), so the register has no source any more. main() no
-# longer calls check_waiting or check_marker_integrity, --regen no longer writes
-# the register and --regen-waiting is gone. The functions stay only because
-# ck170_selftest.py, repair_pass_selftest.py and counts_selftest.py exercise
-# them on disk copies. The history below is kept as written.
+# longer calls check_waiting, --regen no longer writes the register and
+# --regen-waiting is gone. The functions stay only because ck170_selftest.py
+# and counts_selftest.py exercise them on disk copies. The history below is
+# kept as written.
 #
 # The owner's own account of the problem: they opened PLAYTEST_CHECKLIST.md to
 # find where three playtest items stood, found "a spaghetti doc", and closed it
@@ -527,48 +528,6 @@ CK_SECTION = "## Decisions waiting on you"
 MARKER_RE = re.compile(r"<!--\s*ck:(\d+|-)\s+status:([a-z]+)\s+owner:(yes|no)\s*-->")
 MARKER_STATUSES = ("open", "ruled", "closed", "deferred")
 
-
-def marker_integrity(lines, out):
-    """Report disk syntax independently of register selection and semantics."""
-    found = parsed = 0
-    issues, warnings, numbers = [], [], {}
-    text = "\n".join(lines)
-    for hit in re.finditer(r"<!--\s*ck:(?:(?!-->).)*(?:-->|$)", text, re.S):
-        comment = hit.group()
-        line = text.count("\n", 0, hit.start()) + 1
-        found += 1
-        match = MARKER_RE.fullmatch(comment)
-        if match:
-            parsed += 1
-        else:
-            issues.append("line %d: unparsed %s" % (line, comment))
-        status = re.search(r"\bstatus:([^\s>]+)", comment)
-        if status and status.group(1) not in MARKER_STATUSES:
-            issues.append("line %d: unknown status %s" % (line, status.group(1)))
-        ck = re.match(r"<!--\s*ck:(\d+)\b", comment)
-        if ck:
-            numbers.setdefault(int(ck.group(1)), []).append(
-                (line, match.groups()[1:] if match else None))
-    for ck, entries in sorted(numbers.items()):
-        if len(entries) > 1:
-            agree = len({state for _, state in entries}) == 1
-            target = warnings if agree else issues
-            target.append("duplicate ck:%d at lines %s (%s)" %
-                          (ck, ", ".join(str(line) for line, _ in entries),
-                           "agree" if agree else "disagree"))
-    out.append("MARKER INTEGRITY: %d on disk, %d parsed; %s" %
-               (found, parsed, "RED" if issues else "WARN" if warnings else "clean"))
-    out.extend("  warn " + issue for issue in warnings)
-    out.extend("  RED  " + issue for issue in issues)
-    return not issues
-
-
-def check_marker_integrity(out):
-    if not os.path.exists(CHECKLIST):
-        out.append("MARKER INTEGRITY: not checked (checklist missing)")
-        return True
-    with open(CHECKLIST, encoding="utf-8", errors="replace") as fh:
-        return marker_integrity(fh.read().splitlines(), out)
 
 # The prose fallback, inherited verbatim in behaviour from the 2026-09-12 move
 # dry-run so the two never disagree about what a header says.
@@ -2076,27 +2035,34 @@ def flpk_selftest(out):
     all from a parser bug a 40-line fixture catches. Needs no game tree: the
     arenas are built in memory, so there is no "cannot run" case.
     ⇒ An instrument whose output is used to SKIP evidence gets a fixture.
+
+    Absent or unspawnable is RED, not "not checked": `pack_list.py` imports
+    the parser, and a gate that passes when its tool is gone can vanish
+    without ever going red. Only a spawn failure is caught, so a coding error
+    here raises.
     """
-    tool = os.path.join(os.path.dirname(os.path.abspath(__file__)), "flpk_extract.py")
+    tool = os.path.join(REPO, "tools", "flpk_extract.py")
     if not os.path.isfile(tool):
-        out.append("FLPK SELFTEST: not checked (tools/flpk_extract.py absent)")
-        return True
+        out.append("FLPK SELFTEST: RED — tools/flpk_extract.py is absent "
+                   "(pack_list.py imports its parser)")
+        return False
     try:
         p = subprocess.run([sys.executable, tool, "--selftest"],
                            capture_output=True, text=True, encoding="utf-8",
                            errors="replace", timeout=60)
-    except Exception as exc:                  # a tool bug must report, not crash
-        out.append("FLPK SELFTEST: not checked (%s)" % exc)
-        return True
+    except (OSError, subprocess.SubprocessError) as exc:
+        out.append("FLPK SELFTEST: RED — could not run (%s)" % exc)
+        return False
     if p.returncode == 0:
         out.append("FLPK SELFTEST: PASS (nested + shallow; the pack reader "
                    "owns every descendant span)")
         return True
-    out.append("  RED  flpk_extract --selftest FAILED -- every pack listing, "
-               "entry count and alias claim read through this parser is "
-               "untrustworthy until it is green. Full output:")
-    for line in (p.stdout or "").splitlines() + (p.stderr or "").splitlines():
-        out.append("         %s" % line)
+    out.append("FLPK SELFTEST: RED — flpk_extract --selftest FAILED (exit %d) "
+               "-- every pack listing, entry count and alias claim read through "
+               "this parser is untrustworthy until it is green. Full output:"
+               % p.returncode)
+    out.extend("         " + line for stream in (p.stdout, p.stderr)
+               for line in (stream or "").splitlines())
     return False
 
 
@@ -2180,6 +2146,43 @@ def parse_gate(out):
                 out.append("  RED  %s" % line)
             ok = False
     return ok
+
+
+def tools_compile(out):
+    """Every tools/*.py must byte-compile.
+
+    Nothing else here compiles the tools: a script with a syntax error left
+    doccheck GREEN, and the first to notice was whoever ran it next. Compiled
+    in memory with `compile()`, so no `.pyc` lands in the tree; warnings are
+    not failures. Falsifier: `repair_pass_selftest.py` (a planted syntax
+    error in a scratch copy of the tools goes RED; the clean copy passes).
+    """
+    names = tool_scripts()
+    bad = []
+    for name in names:
+        path = os.path.join(TOOLS_DIR, name)
+        try:
+            with open(path, "rb") as fh:
+                source = fh.read()
+        except OSError as exc:
+            bad.append("tools/%s: unreadable (%s)" % (name, exc))
+            continue
+        try:
+            with warnings.catch_warnings():
+                warnings.simplefilter("ignore")
+                compile(source, path, "exec", dont_inherit=True)
+        except SyntaxError as exc:
+            bad.append("tools/%s:%s: %s: %s" % (name, exc.lineno,
+                                                 type(exc).__name__, exc.msg))
+        except ValueError as exc:        # null bytes, on older interpreters
+            bad.append("tools/%s: %s" % (name, exc))
+    if not bad:
+        out.append("TOOLS COMPILE: PASS (%d tools/*.py byte-compile)" % len(names))
+        return True
+    out.append("TOOLS COMPILE: RED — %d of %d tools/*.py do not compile"
+               % (len(bad), len(names)))
+    out.extend("  RED  " + line for line in bad)
+    return False
 
 
 def counts_block(counts):
@@ -2858,6 +2861,7 @@ def main():
     ok = load_order(out) and ok
     ok = wrap_targets_check(out) and ok
     ok = parse_gate(out) and ok
+    ok = tools_compile(out) and ok
     ok = module_set_agreement(out) and ok
     ok = pack_ignore_parity(out) and ok
     ok = flpk_selftest(out) and ok

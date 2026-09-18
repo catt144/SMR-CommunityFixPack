@@ -84,8 +84,8 @@ def cli_cases(m, root):
     m.splitter = m.facts_splitter = lambda: sb
     for name in ("check_entries", "check_index", "check_facts", "check_facts_index",
                  "check_root", "check_checklist", "check_prompt_map", "check_entry_mirror", "check_rule_headers",
-                 "check_state_and_stubs", "check_waiting", "check_marker_integrity", "check_skills",
-                 "temporary_sweep", "load_order", "wrap_targets_check", "parse_gate",
+                 "check_state_and_stubs", "check_waiting", "check_skills",
+                 "temporary_sweep", "load_order", "wrap_targets_check", "parse_gate", "tools_compile",
                  "pack_ignore_parity", "flpk_selftest", "bodycheck_selftest", "required_selftest"):
         setattr(m, name, lambda *args: True)
     for name in ("push_set_report", "testkit_tree", "alias_gate"):
