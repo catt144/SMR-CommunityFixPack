@@ -42,9 +42,6 @@ judgement, and cut every line a named skill or the worker's own judgement alread
 - **Difficulty tag** in the filename: `_low` (light-to-moderate reasoning with good instructions: a
   settled plan, or a simple, well-specified investigation), `_medium`, `_high`, or `_fanout_level_<x>` (1–10) for subagent control. It is the
   owner's routing hint, not a gate: a brief never names a model or checks which one runs it.
-- **Delegable parts:** mark which parts of the job a subagent can take. A subagent's brief is its
-  task alone: it does not run the repo's gates or commit; the controlling agent runs doccheck,
-  regenerates and commits. A task that changes a gate covers that gate only.
 - **Name skills, do not restate them:** `doc-editing`, `smr-bug-library`; house rules are `CLAUDE.md`.
 
 ## Shapes that fail

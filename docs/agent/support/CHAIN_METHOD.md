@@ -43,7 +43,6 @@ fresh-context adversary whose job is to disbelieve it.**
      dependent their work is, and how much judgement the synthesis needs. Every agent can spawn
      subagents, but not every agent organises, tasks and manages them equally well; the level is
      what the owner routes on.
-   - The link that runs a fan-out picks each subagent's tier and effort by `CLAUDE.md`'s subagent rules.
    - A fan-out brief is tool-neutral ("a judgement-capable subagent", no vendor tool names), and its
      coordination is git-visible: it commits its plan and each subagent's verbatim report as it goes,
      under `reports/<chain>/agents/`, marks unrun subagents NOT RUN, and a resumed run continues from

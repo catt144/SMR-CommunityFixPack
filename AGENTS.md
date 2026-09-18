@@ -15,9 +15,7 @@ Rule: Run a measurement before reporting it; mark `<<PENDING-RUN>>` any figure w
 Rule: Record every count with its command and filter and reconcile each total against its members. [A3: pass]
 Rule: Attribute shared-tree work by commit and diff rather than author identity. [A3: pass]
 Rule: Recheck shared paths before writing; commit with a pathspec unless partial hunks of a peer-shared file are staged, which a pathspec would discard. [A3: pass]
-Rule: Delegate work to a subagent when that costs less than doing it in your own context. [A3: pass]
-Rule: Give each subagent the lowest model tier that can do its task, and tier 3 only when a lower tier's result would need redoing. [A3: pass]
-Rule: Set each subagent's effort explicitly; going above your own tier or a tier's effort cap needs the owner's approval, asked with a justification. [A3: pass]
+Rule: Delegate work to a subagent when that costs less than doing it in your own context, and invoke the `subagents` skill before launching one. [A3: pass]
 <!-- /RULES -->
 
 A bug-fix mod: every fix repairs a verified defect in the game's shipped Lua,
@@ -42,13 +40,6 @@ about two sessions: `docs/agent/support/CHAIN_METHOD.md`.
 
 The three trust classes are authority, derived fact, and authored claim; their duties are in the
 header above. The open owner decision about the third class remains open.
-
-**Model tiers** for the subagent rules: 1 = Sonnet / Codex Terra · 2 = Opus / Codex Sol ·
-3 = Fable / Codex Astra. Tier 1 reasons less deeply; with good instructions it handles doc work,
-pre-planned builds and simple investigation. Tier 2 is for work that needs depth. Haiku and Codex
-Luna are unused: too light in reasoning, with far less context than the 1M of tiers 1-3. Effort
-caps: tier 1 xhigh · tier 2 high · tier 3 high. On this machine, Claude Code sets effort through
-the `tier<N>-<effort>` types in `.claude/agents/`; a bare model choice inherits the session's effort.
 
 **`docs/archive/` is hidden from a default `rg`** by a root `.rgignore` — a deliberate boundary, not
 a deletion. Explicit archive searches use `rg <term> docs/archive/` or `rg --no-ignore <term>`;
