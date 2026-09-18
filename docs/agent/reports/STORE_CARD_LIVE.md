@@ -135,7 +135,7 @@ back at Paradox. ⛔ Do not paste the same block on both.
 ```
 Bug fixes for Surviving Mars: Relaunched.
 
-Fifty-three repairs, each one written up on the fix list with what you would
+Fifty-four repairs, each one written up on the fix list with what you would
 have seen and what was actually wrong. Every one targets something the game's
 own code gets wrong — the code says one thing, does another, and the fix makes
 it do what it says. It fixes bugs; it does not rebalance the game. Preferences
@@ -285,7 +285,7 @@ https://catt144.github.io/SMR-CommunityMods/legacy-1-0-7/
 ```
 Bug fixes for [i]Surviving Mars: Relaunched[/i].
 
-[b]Fifty-three repairs[/b], each one written up on the fix list with what you would have seen and what was actually wrong. Every one targets something the game's own code gets wrong — the code says one thing, does another, and the fix makes it do what it says. It fixes bugs; it does not rebalance the game. Preferences and features are deliberately not in it.
+[b]Fifty-four repairs[/b], each one written up on the fix list with what you would have seen and what was actually wrong. Every one targets something the game's own code gets wrong — the code says one thing, does another, and the fix makes it do what it says. It fixes bugs; it does not rebalance the game. Preferences and features are deliberately not in it.
 
 Some of them you could hardly miss: an entire train line and every train on it deleted by salvaging a single hex, colonists suffocating on a walk between two domes, an artificial lake burying the rover that was building it.
 
@@ -720,6 +720,18 @@ Paradox body was not read back. **The site is NOT published** — newest `publis
 (2026-09-16, `74a336e`, which is v11's fix list), so the live card says Fifty-three while the
 deployed fix list still shows 52 rows and still marks the habitat row a judgment call. Same gap as
 the v11 close; it clears when the owner runs the workflow (`UPLOAD_WORKFLOW.md` §4).
+
+## ⭐ 2026-09-18 — v13 words (`release_prompt.md` §1): count 53 → 54, headliners unchanged
+
+**Count: Fifty-three → Fifty-four.** C107 (Dry Farming reaches the four Feeding the Future plant
+farms) lands as a new row under *Buildings & economy*; nothing retires. Derived from
+`SMR-CommunityMods` `content/fix-list.md`: `^??? ` rows = **54**, section tally
+2+16+4+7+9+6+6+2+2 = 54. Body copies moved together: `Fifty-four repairs` = 1 (`metadata.lua`) +
+2 (this file) + 2 (`UPLOAD_WORKFLOW.md` §3), and 0 body hits left for Fifty-three.
+
+Headliners stay at the owner's 14; C107 is a P3 water figure, not a loud consequence. Judgment
+calls stay at four: C107's Fungal/Insect exclusion follows the base game's own curation and is
+written as a "Worth knowing" note, not as a judgment call.
 
 ## Provenance of the headliners
 

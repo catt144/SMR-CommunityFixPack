@@ -90,7 +90,7 @@ The public-surface sweep maintains the backup copy below alongside its two canon
 ```
 Bug fixes for Surviving Mars: Relaunched.
 
-Fifty-three repairs, each one written up on the fix list with what you would
+Fifty-four repairs, each one written up on the fix list with what you would
 have seen and what was actually wrong. Every one targets something the game's
 own code gets wrong — the code says one thing, does another, and the fix makes
 it do what it says. It fixes bugs; it does not rebalance the game. Preferences
@@ -234,7 +234,7 @@ https://catt144.github.io/SMR-CommunityMods/legacy-1-0-7/
 ```
 Bug fixes for [i]Surviving Mars: Relaunched[/i].
 
-[b]Fifty-three repairs[/b], each one written up on the fix list with what you would have seen and what was actually wrong. Every one targets something the game's own code gets wrong — the code says one thing, does another, and the fix makes it do what it says. It fixes bugs; it does not rebalance the game. Preferences and features are deliberately not in it.
+[b]Fifty-four repairs[/b], each one written up on the fix list with what you would have seen and what was actually wrong. Every one targets something the game's own code gets wrong — the code says one thing, does another, and the fix makes it do what it says. It fixes bugs; it does not rebalance the game. Preferences and features are deliberately not in it.
 
 Some of them you could hardly miss: an entire train line and every train on it deleted by salvaging a single hex, colonists suffocating on a walk between two domes, an artificial lake burying the rover that was building it.
 
@@ -314,13 +314,13 @@ Usually auto-fills. If it is missing under **CHANGELOG** (Paradox) or **Change
 Notes** (Steam), paste this:
 
 ```
-One repair reworked, one added.
+One repair added.
 
--Habitat residents on expeditions — CHANGED, and watched working in a running colony on 1.1.0. The last version kept habitat residents out of the automatic expedition crew; that restriction is gone. They can be picked like anyone else, and they come back to their own habitat. If the habitat is too far from the landing site to walk, they are set down at its door, the same way the rocket picked them up. If that home can no longer be used, they go to the nearest dome that is working and has air. A crew that comes home by train has not been watched.
+-Dry Farming on the Feeding the Future farms — NEW, and checked in a running game on 1.1.0.
+The problem: the Dry Farming breakthrough cut crop water on the base game's farms only. Small Farms, Underground Farms, Small Underground Farms and Automated Farms used as much water as before.
+The fix: those four farms now get the same cut, and a save that already researched Dry Farming gets it when you load it. Fungal and Insect Farms still get none, as the base game leaves its Fungal Farm out on purpose.
 
--A returning crew whose home is gone — NEW. If their home was demolished or switched off while they were away, the game could walk them into a dome that was switched off, quarantined or without air. It now picks the nearest dome that is working and has air, even if every home in it is taken; if nothing safe can be reached, the game decides as it always did. This one has not been watched in a running colony yet — it reuses the same working-dome test as the fix for new arrivals off a rocket.
-
-The fix list goes from fifty-two to fifty-three.
+The fix list goes from fifty-three to fifty-four.
 ```
 
 #### 📋 Short summary (only if it also came out blank)

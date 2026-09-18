@@ -14,7 +14,7 @@ mod-compatible way, against game version **1.1.0.403908**. Players still on
 
 ## What it fixes
 
-**46 fix modules** (47 files in `Code/`), covering disasters and weather,
+**51 fix modules** (52 files in `Code/`), covering disasters and weather,
 colonists and domes, drones and logistics, buildings and economy, trains,
 rockets and asteroids, story sequences, and the numbers on your screen. Several
 of them also repair damage already sitting in your save when you load it. Four
@@ -24,7 +24,7 @@ the mod page, with the reasoning.
 The full player-facing list, one entry per fix, lives on the companion docs
 site: [the fix list](https://catt144.github.io/SMR-CommunityMods/fix-list/).
 The engineering tracker behind it is in this tree:
-[docs/agent/bugs/INDEX.md](docs/agent/bugs/INDEX.md) — 222 tracked findings,
+[docs/agent/bugs/INDEX.md](docs/agent/bugs/INDEX.md) — 202 tracked findings,
 ranging from verified-and-fixed to open candidates.
 
 ## For players
