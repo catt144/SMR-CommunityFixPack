@@ -45,7 +45,7 @@ brief is a claim about a tree that has since moved.
 
 ## ⭐ One kit, three mods — a leg that quotes one line describes a third of the rig
 
-The eight `Opt_` modules live in `SMR-OptInPack`; a third mod, `SMR-CommunitySaveRescue`,
+The `Opt_` modules live in `SMR-OptInPack` (count: its `python tools/doccheck.py --emit-counts`); a third mod, `SMR-CommunitySaveRescue`,
 cleans up after both. **The kit is not forked** — it serves all three, and a probe
 change is made once, in it.
 
