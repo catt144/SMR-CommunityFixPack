@@ -50,9 +50,28 @@
 -- from the DataPatch pass, which runs after the classes are built.
 --
 -- Guards, all in the pass, all fail closed:
---   * DLC absent: an entry is appended only for a label whose BuildingTemplate
---     exists. Without Feeding the Future no template exists, nothing is appended,
---     nothing reaches a save, and the module stays active and idle.
+--   * DLC absent: an entry is appended only for a label whose template preset AND
+--     building class both exist. Without Feeding the Future neither exists,
+--     nothing is appended, nothing reaches a save, and the module stays active and
+--     idle. Absence is NEVER final: the pass latches `patched` only once all four
+--     were seen, so a template that arrives on a later trigger is still paid.
+--   * ⛔ WHERE A TEMPLATE IS READ, corrected 2026-09-18 after the first in-game boot
+--     (log Mars.exe-20260918-17.51.56). The build read `BuildingTemplates`, and
+--     that map is wrong for this twice over (1.1.0.403908):
+--       - it is rebuilt only at ClassesBuilt and on DataChanged by
+--         SetupBuildingTemplateTables (Lua/Buildings/Building.lua:2674-2692). On a
+--         cold boot ClassesBuilt precedes LoadData, so at DataLoaded the map holds
+--         no preset at all; it fills on the DataChanged that Dlc.lua posts from a
+--         thread after DataLoaded (CommonLua/Dlc.lua:715-717 -> :686-690 -> :683).
+--         The first pass therefore read "DLC absent" and latched it final;
+--       - its values are proxies, `setmetatable({ template_name = id },
+--         g_Classes[id])` (Building.lua:2680), so `.id` is nil. The DataChanged
+--         re-fire then threw "table index is nil" on `labels[template.id]`.
+--     Now: existence comes from the preset map BuildingTemplates_Raw, which
+--     Preset:Register fills as each preset file loads (CommonLua/Preset.lua:
+--     573-580, the BuildingTemplate GlobalMap, Building.lua:2556), so it is
+--     complete at DataLoaded; the labels come from g_Classes[label], the class a
+--     placed building IS (the proxy's own metatable), keyed by the label looked up.
 --   * Shape: the shipped Farm / HydroponicFarm / OpenFarm water_consumption
 --     entries must be present and agree on one negative Percent with Amount 0 and
 --     no Stackable; otherwise the pass latches instead of guessing the number.
@@ -102,33 +121,30 @@ local owned = {}
 -- stop all pass work, and registry status is written only after apply returns).
 local self_check_passed = false
 
--- Every label a building made from `template` joins in its own city
+-- Every label a building of class `cls` (named `label`) joins in its own city
 -- (Building:AddToCityLabels / SetCustomLabels / ApplyCustomLabels /
--- SetBuildMenuCategoryLabels, Lua/Buildings/Building.lua:394-460): its id, its
--- object_class, the object class's default_label, label1..label5 and its build
--- category. The top-level parent category is not added; no shipped build category
--- is a farm label.
-local function template_labels(template)
-	local labels = {}
-	labels[template.id] = true
-	local oc = template.object_class
-	if type(oc) == "string" and oc ~= "" then
-		labels[oc] = true
-		local classes = rawget(_G, "g_Classes")
-		local cls = type(classes) == "table" and classes[oc]
-		if type(cls) == "table" and type(cls.default_label) == "string" then
-			labels[cls.default_label] = true
-		end
+-- SetBuildMenuCategoryLabels, Lua/Buildings/Building.lua:394-460): its class name,
+-- its object_class, its default_label, label1..label5 and its build category, all
+-- read off the class as the building reads them off itself. The top-level parent
+-- category is not added; no shipped build category is a farm label.
+-- Keyed by the label that was looked up, never by a field of the object, and every
+-- value is type-checked before it becomes a key, so nothing here can throw.
+local function building_labels(label, cls)
+	local labels = { [label] = true }
+	local function add(v)
+		if type(v) == "string" and v ~= "" then labels[v] = true end
 	end
+	add(cls.object_class)
+	add(cls.default_label)
 	for _, prop_id in ipairs(BuildingCustomLabelProps) do
-		local label = template[prop_id]
-		if type(label) == "string" and label ~= "" then labels[label] = true end
+		if type(prop_id) == "string" then add(cls[prop_id]) end
 	end
-	if type(template.build_category) == "string" and template.build_category ~= "" then
-		labels[template.build_category] = true
-	end
+	add(cls.build_category)
 	return labels
 end
+
+-- Logged once per Lua load, however many triggers find the DLC absent.
+local said_absent = false
 
 -- §2a PROBE. Calls the SHIPPED Effect_ModifyLabel:OnApplyEffect
 -- (Lua/MarsGameEffects.lua:257-287) of the shipped Farm entry on a stub colony.
@@ -171,18 +187,22 @@ local patch = SMRFixPack.DataPatch(FIX_ID, {
 				"Techs." .. TECH_ID .. " not found")
 			return
 		end
-		local templates = rawget(_G, "BuildingTemplates")
-		if type(templates) ~= "table" then
+		-- NOT BuildingTemplates: see "WHERE A TEMPLATE IS READ" in the header.
+		local presets = rawget(_G, "BuildingTemplates_Raw")
+		local classes = rawget(_G, "g_Classes")
+		if type(presets) ~= "table" or type(classes) ~= "table" then
 			ctx.patched = true
-			ctx.latch("BuildingTemplates not found (game update changed it?)",
-				"BuildingTemplates not found")
+			ctx.latch("BuildingTemplates_Raw / g_Classes not found (game update changed it?)",
+				"BuildingTemplates_Raw / g_Classes not found")
 			return
 		end
 
-		-- Index the tech's water entries by label.
+		-- Index the tech's water entries by label. A malformed entry with no
+		-- string Label is skipped, never used as a key.
 		local water = {}
 		for _, effect in ipairs(tech) do
-			if IsKindOf(effect, "Effect_ModifyLabel") and effect.Prop == PROP then
+			if IsKindOf(effect, "Effect_ModifyLabel") and effect.Prop == PROP
+					and type(effect.Label) == "string" then
 				water[effect.Label] = water[effect.Label] or effect
 			end
 		end
@@ -221,8 +241,8 @@ local patch = SMRFixPack.DataPatch(FIX_ID, {
 
 		local present, changed, adopted, reached = 0, 0, 0, {}
 		for _, label in ipairs(TARGETS) do
-			local template = templates[label]
-			if type(template) == "table" then
+			local cls = classes[label]
+			if type(presets[label]) == "table" and type(cls) == "table" then
 				present = present + 1
 				if water[label] then
 					-- an earlier pass in this process, another mod, or the game
@@ -230,7 +250,7 @@ local patch = SMRFixPack.DataPatch(FIX_ID, {
 					adopted = adopted + 1
 				else
 					local via
-					for l in pairs(template_labels(template)) do
+					for l in pairs(building_labels(label, cls)) do
 						if paid[l] then via = l break end
 					end
 					if via then
@@ -250,12 +270,20 @@ local patch = SMRFixPack.DataPatch(FIX_ID, {
 				end
 			end
 		end
-		ctx.patched = true
+		-- ⛔ Final only once every target was seen. A missing one may still arrive
+		-- on a later trigger, and every pass is idempotent (adopt), so re-running
+		-- costs a few table reads. This is the fault the first boot hit: an early
+		-- "absent" latched final and the templates that arrived later were never paid.
+		local complete = present == #TARGETS
+		if complete then ctx.patched = true end
 
 		if present == 0 then
-			-- Feeding the Future is not loaded. Not a game change and not "already
-			-- fixed": there is simply nothing to pay. Stay active and idle.
-			log("%s: none of the four Feeding the Future plant farms is loaded; nothing to add", FIX_ID)
+			-- Feeding the Future is not loaded (yet). Not a game change and not
+			-- "already fixed": nothing to pay. Stay active and idle.
+			if not said_absent then
+				said_absent = true
+				log("%s: none of the four Feeding the Future plant farms is loaded; nothing to add", FIX_ID)
+			end
 			return
 		end
 		if #reached > 0 then
@@ -265,15 +293,16 @@ local patch = SMRFixPack.DataPatch(FIX_ID, {
 		if changed > 0 then
 			ctx.ever_changed = true
 			ctx.heal()
-			log("%s: added %d water entr(y/ies) at %d%% to %s (%d adopted, %d of 4 farms loaded)",
-				FIX_ID, changed, percent, TECH_ID, adopted, present)
+			log("%s: added %d water entr(y/ies) at %s%% to %s (%d adopted, %d of 4 farms loaded)",
+				FIX_ID, changed, tostring(percent), TECH_ID, adopted, present)
 		elseif ctx.ever_changed then
 			-- the DataChanged(false) re-fire or a Lua reload finding our own
 			-- entries is SUCCESS (the B3 lesson)
 			return
-		else
+		elseif complete then
 			ctx.latch(TECH_ID .. " already reaches every Feeding the Future plant farm", nil, "benign")
 		end
+		-- else: some templates still missing and nothing to add yet; not final.
 	end,
 })
 

@@ -191,7 +191,7 @@ New since the last grouping pass. Give each a home in `TOOL_GROUPS` in `tools/do
 
 | script | what its own header says |
 |---|---|
-| [`desk_c107_dry_farming.py`](desk_c107_dry_farming.py) | C107 Dry Farming reaches the four Feeding the Future plant farms: the module through the REAL core, over the shipped DryFarming preset and farm templates. |
+| [`desk_c107_dry_farming.py`](desk_c107_dry_farming.py) | C107 Dry Farming reaches the four Feeding the Future plant farms: the module through the REAL core, over the shipped DryFarming preset, the shipped farm templates and the shipped BuildingTemplates builder, in the engine's load order. |
 
 <!-- END GENERATED TOOL ROWS -->
 
