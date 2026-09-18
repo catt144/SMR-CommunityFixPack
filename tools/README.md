@@ -55,7 +55,7 @@ comments is written by `python tools/doccheck.py --regen` and checked by
 
 <!-- GENERATED TOOL ROWS — never hand-edit; regenerate with: python tools/doccheck.py --regen -->
 
-*65 scripts, every `tools/*.py` on disk. This block is GENERATED: a row's text is copied from the script's own header, so a wrong row is repaired in the script, never here.*
+*66 scripts, every `tools/*.py` on disk. This block is GENERATED: a row's text is copied from the script's own header, so a wrong row is repaired in the script, never here.*
 
 ### Repo gates, and the falsifiers that keep them honest
 
@@ -184,6 +184,14 @@ What the pack declares, writes and blocks, and what prior work left open.
 |---|---|
 | [`split_bugs.py`](split_bugs.py) | split_bugs.py — docs/BUGS.md -> docs/agent/bugs/ (DOC_RESTRUCTURE_SPEC §3a, as amended by the ROUTE (a) decision in the docs-restructure chain's prompt 2). |
 | [`split_facts.py`](split_facts.py) | split_facts.py — docs/agent/ENGINE_FACTS.md -> docs/agent/facts/ (DOC_RESTRUCTURE_SPEC §3b, executed by the docs-restructure chain's prompt 3). |
+
+### Ungrouped
+
+New since the last grouping pass. Give each a home in `TOOL_GROUPS` in `tools/doccheck.py` — but the row is already correct, so this is tidying, not a defect.
+
+| script | what its own header says |
+|---|---|
+| [`desk_c107_dry_farming.py`](desk_c107_dry_farming.py) | C107 Dry Farming reaches the four Feeding the Future plant farms: the module through the REAL core, over the shipped DryFarming preset and farm templates. |
 
 <!-- END GENERATED TOOL ROWS -->
 

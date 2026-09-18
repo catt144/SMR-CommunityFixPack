@@ -251,6 +251,12 @@ return {
 		'name', "Fix_RoverSubclassManifest",
 		'CodeFileName', "Code/Fix_RoverSubclassManifest.lua",
 	}),
+	-- Added 2026-09-18 (C107, post-release maintenance — Steam field report), same
+	-- rule as above: hand-written, in metadata.lua's `code` position.
+	PlaceObj('ModItemCode', {
+		'name', "Fix_DryFarmingFarms",
+		'CodeFileName', "Code/Fix_DryFarmingFarms.lua",
+	}),
 	PlaceObj('ModItemCode', {
 		'name', "90_SaveSanitizer",
 		'CodeFileName', "Code/90_SaveSanitizer.lua",
