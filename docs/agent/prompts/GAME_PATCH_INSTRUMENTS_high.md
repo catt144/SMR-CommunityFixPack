@@ -12,6 +12,12 @@ diff means the facts below hold.
 - 1.0.7 → 1.1.0 was major. Its deep sweep proved its worth and was expensive in tokens; the next
   patch may not justify one. The surface sweep exists to make that call cheaply.
 - The save-exposure re-check (W42) is one check inside it, not a separate decision.
+- **The prompt runs in this repo first, always.** At patch time this is the critical space:
+  players cannot turn off individual fix modules. Anything relevant to the opt-in pack goes into
+  an **outbox in the fork**, in a `gamepatch/` folder under its perma prompts with a README. Any
+  general agent there reads that README and acts on the outbox when the owner asks, with no
+  specific prompt needed. The build brief creates the folder; your sketch says what the outbox
+  must carry for that to work.
 - The owner wants desk tools **and** in-game TestKit items (slots, probes, run in the style of the
   full probe sweep with the game booted) that make the sweep cheap. This brief is the design; a
   separate brief builds what is chosen. **You write no `Code/`, TestKit code or perma prompt.**
@@ -82,7 +88,8 @@ In game:
    test that would settle it.
 4. **What cannot be instrumented**, stated plainly: that is where the irreducible risk sits.
 5. **A sketch of `GAME_PATCH_PROMPT.md`**: steps, and the order in which to drop things when
-   budget runs out. Just the sketch; the coordinator briefs the build.
+   budget runs out, plus what one outbox entry for the opt-in pack must contain so an agent there
+   can act on it cold. Just the sketch; the coordinator briefs the build.
 6. **Asks for the owner** and **out-of-scope findings**, each as a short list.
 
 Any scratch scripts you write stay out of `tools/`; describe them in the report.
