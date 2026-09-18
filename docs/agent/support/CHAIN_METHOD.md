@@ -27,9 +27,9 @@ fresh-context adversary whose job is to disbelieve it.**
 2. **Difficulty, not models.** The owner chooses every model; nothing in a chain names one. The
    authoring agent tags each link's filename with the reasoning it needs. The tag is a routing hint,
    not a gate: a link never checks or refuses the model it runs on.
-   - `_low`: light-to-moderate reasoning on a settled plan: a pre-planned build, doc work, a records
-     close-out, a scripted leg. Models at this tier reason but do not dig far, so a link that
-     investigates is never `_low`. No link is sized for a no-reasoning model; none is used.
+   - `_low`: light-to-moderate reasoning with good instructions: a pre-planned build, doc work, a
+     records close-out, a scripted leg, or a simple, well-specified investigation. Models at this
+     tier reason but do not dig far. No link is sized for a no-reasoning model; none is used.
    - `_medium`: real judgement, but inside a settled design (a spec-guided build, a leg with
      predictions), or a bounded investigation. An investigation whose answer steers a design is
      `_high`.
@@ -43,10 +43,7 @@ fresh-context adversary whose job is to disbelieve it.**
      dependent their work is, and how much judgement the synthesis needs. Every agent can spawn
      subagents, but not every agent organises, tasks and manages them equally well; the level is
      what the owner routes on.
-   - The link that runs a fan-out picks each subagent's model for its task: a light-to-moderate model
-     for work on a settled plan (doc work, a pre-planned build, a scripted read), a deep-reasoning
-     model for anything that investigates or needs judgement. An investigating subagent never gets
-     the lighter model.
+   - The link that runs a fan-out picks each subagent's tier and effort by `CLAUDE.md`'s subagent rules.
    - A fan-out brief is tool-neutral ("a judgement-capable subagent", no vendor tool names), and its
      coordination is git-visible: it commits its plan and each subagent's verbatim report as it goes,
      under `reports/<chain>/agents/`, marks unrun subagents NOT RUN, and a resumed run continues from
