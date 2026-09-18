@@ -23,15 +23,15 @@ object's infopanel, and the Selected page is its fallback.
 Seven pages, grouped by task. Tabs share a scrolling body; status and evidence
 controls stay visible when the body collapses.
 
-| page | controls |
+| tab (page id) | controls |
 |---|---|
 | Sitting | Read taint, Read eligibility; MARK, Flush + copy, Clear screen, Screenshot + Mark, Stop disaster; the speed ladder and Cancel target stay in the top rows |
 | Run | target sol, the four triggers (sol, first Lua error, selected field, next rocket), Run until / cancel, shared field watch |
 | Selected | curated methods, grouped More Cheat / AsyncCheat methods, field watch, colonist traits, dump and pins |
-| Agent | six numbered slots plus Scratch, note, pin A/B/C readout |
+| Slots & notes (`Agent`) | six numbered slots plus Scratch, note, pin A/B/C readout |
 | World | disasters and cursor-armed meteors, quiet, fix / malfunction all, completion, rocket transit skip, supplies, people, research, domes |
 | Saves | Save / Load / Override load A/B/C; process session and loaded provenance |
-| Kit | gated probes (alphabetical picker), logger toggles, print tap, console, fingerprint, snapshot / diff, log tail |
+| Probes & logs (`Kit`) | gated probes (alphabetical picker), logger toggles, print tap, console, fingerprint, snapshot / diff, log tail |
 
 Selected has source-name capacity **106/106**: 22 curated names and 84 More names
 (72 `Cheat`, 12 `AsyncCheat`). ⛔ **That is not 106 simultaneous buttons and not a
@@ -212,7 +212,7 @@ commit with `-F` plus a pathspec (shared hunks follow `CLAUDE.md`'s header). The
 TestKit has no remote; push pack docs if they changed. Quote doccheck WARNs
 verbatim in the handoff.
 
-Then give the owner **one line**: *"start the game; the Agent tab is loaded"*.
+Then give the owner **one line**: *"start the game; the Slots & notes tab is loaded"*.
 Relay the slot labels, the predictions path and both HEADs to the attending agent;
 that agent reads and logs results and archives evidence. ⛔ **Do not ask the owner
 to paste commands already provisioned in slots.**
