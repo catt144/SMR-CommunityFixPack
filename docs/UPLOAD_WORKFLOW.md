@@ -90,7 +90,7 @@ The public-surface sweep maintains the backup copy below alongside its two canon
 ```
 Bug fixes for Surviving Mars: Relaunched.
 
-Fifty-four repairs, each one written up on the fix list with what you would
+Fifty-five repairs, each one written up on the fix list with what you would
 have seen and what was actually wrong. Every one targets something the game's
 own code gets wrong — the code says one thing, does another, and the fix makes
 it do what it says. It fixes bugs; it does not rebalance the game. Preferences
@@ -234,7 +234,7 @@ https://catt144.github.io/SMR-CommunityMods/legacy-1-0-7/
 ```
 Bug fixes for [i]Surviving Mars: Relaunched[/i].
 
-[b]Fifty-four repairs[/b], each one written up on the fix list with what you would have seen and what was actually wrong. Every one targets something the game's own code gets wrong — the code says one thing, does another, and the fix makes it do what it says. It fixes bugs; it does not rebalance the game. Preferences and features are deliberately not in it.
+[b]Fifty-five repairs[/b], each one written up on the fix list with what you would have seen and what was actually wrong. Every one targets something the game's own code gets wrong — the code says one thing, does another, and the fix makes it do what it says. It fixes bugs; it does not rebalance the game. Preferences and features are deliberately not in it.
 
 Some of them you could hardly miss: an entire train line and every train on it deleted by salvaging a single hex, colonists suffocating on a walk between two domes, an artificial lake burying the rover that was building it.
 
@@ -316,11 +316,11 @@ Notes** (Steam), paste this:
 ```
 One repair added.
 
--Dry Farming on the Feeding the Future farms — NEW, and checked in a running game on 1.1.0.
-The problem: the Dry Farming breakthrough cut crop water on the base game's farms only. Small Farms, Underground Farms, Small Underground Farms and Automated Farms used as much water as before.
-The fix: those four farms now get the same cut, and a save that already researched Dry Farming gets it when you load it. Fungal and Insect Farms still get none, as the base game leaves its Fungal Farm out on purpose.
+-Wildfire cure — NEW. It loads cleanly in a running game; the cure itself has not been watched yet.
+The problem: once the Wildfire cure was found, infected colonists never went to a medical building for it, so the mystery could not finish. The 1.1.0 game pays a dome's medical care to its colonists at home, so under a Medical Center they never fell ill enough to be sent.
+The fix: once the cure is found, an infected colonist's daily outing is a visit to a medical building, where they are cured.
 
-The fix list goes from fifty-three to fifty-four.
+The fix list goes from fifty-four to fifty-five.
 ```
 
 #### 📋 Short summary (only if it also came out blank)

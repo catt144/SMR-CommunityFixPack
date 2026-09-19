@@ -135,7 +135,7 @@ back at Paradox. ⛔ Do not paste the same block on both.
 ```
 Bug fixes for Surviving Mars: Relaunched.
 
-Fifty-four repairs, each one written up on the fix list with what you would
+Fifty-five repairs, each one written up on the fix list with what you would
 have seen and what was actually wrong. Every one targets something the game's
 own code gets wrong — the code says one thing, does another, and the fix makes
 it do what it says. It fixes bugs; it does not rebalance the game. Preferences
@@ -285,7 +285,7 @@ https://catt144.github.io/SMR-CommunityMods/legacy-1-0-7/
 ```
 Bug fixes for [i]Surviving Mars: Relaunched[/i].
 
-[b]Fifty-four repairs[/b], each one written up on the fix list with what you would have seen and what was actually wrong. Every one targets something the game's own code gets wrong — the code says one thing, does another, and the fix makes it do what it says. It fixes bugs; it does not rebalance the game. Preferences and features are deliberately not in it.
+[b]Fifty-five repairs[/b], each one written up on the fix list with what you would have seen and what was actually wrong. Every one targets something the game's own code gets wrong — the code says one thing, does another, and the fix makes it do what it says. It fixes bugs; it does not rebalance the game. Preferences and features are deliberately not in it.
 
 Some of them you could hardly miss: an entire train line and every train on it deleted by salvaging a single hex, colonists suffocating on a walk between two domes, an artificial lake burying the rover that was building it.
 
@@ -747,6 +747,20 @@ rewritten; comments restored from `94c19d3`.
 **Paradox page shows v16** (owner, 2026-09-18), one below the tree's 17, as at v11.
 ⚠️ **NOT verified, and not claimed:** the Paradox body was not read back. **The site is NOT published** — newest `Publish docs site` run is #12 (`c5ac193`, v12's
 fix list), so the live card says Fifty-four while the deployed fix list shows 53 rows.
+
+## ⭐ 2026-09-19 — v14 words (`release_prompt.md` §1): count 54 → 55, headliners unchanged
+
+**Count: Fifty-four → Fifty-five.** C108 (the Wildfire cure reaches infected colonists served from
+home) lands as a new row at the top of *Story & mysteries*; nothing retires. Derived from
+`SMR-CommunityMods` `content/fix-list.md` (`92c853f`): `grep -c '^??? '` = **55**, section tally
+4+9+2+7+7+16+2+6+2 = 55. Body copies moved together: `Fifty-five repairs` = 1 (`metadata.lua`) +
+2 (this file) + 2 (`UPLOAD_WORKFLOW.md` §3), and 0 body hits left for `Fifty-four repairs` in the
+three files' body lines.
+
+Headliners stay at the owner's 14: the Wildfire stall is a mystery that cannot end, worked around by
+the reporter, not a loud consequence on the card's bar. Judgment calls stay at four. The change note
+says plainly that the pack loads cleanly in game but the cure itself has not been watched (the owner
+skipped that check on 2026-09-18), rather than "checked in a running game".
 
 ## Provenance of the headliners
 
