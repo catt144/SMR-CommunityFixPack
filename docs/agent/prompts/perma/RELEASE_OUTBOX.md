@@ -23,11 +23,12 @@ player surface bumps it by one on release.
 
 ### Pending — C108 Infected colonists visit a medical building once the Wildfire cure is found (2026-09-18)
 
-**Hold: one boot owed.** Built and desk-verified only (`tools/desk_c108_wildfire_cure.py`, 20 of 20
-demands, 7 falsifying variants, and the unfixed pack fails the cure demand); nothing has run in
-game. C107's first build went `error` on its first boot, so the minimum before upload is one
-clean boot logging `WildfireCureVisit: applied` with no FAILED line. The attended check in C108
-"Control" needs a Wildfire save at the cure stage and is the owner's call.
+**No hold: the boot is done.** Desk harness `tools/desk_c108_wildfire_cure.py` (20 of 20 demands,
+7 falsifying variants; the unfixed pack fails the cure demand). The owner's boot on 2026-09-18
+(`Mars.exe-20260918-23.44.18-6a91a190.log` :144) logged `WildfireCureVisit: applied`, and logscan
+read 52 of 52 modules applied with no error-shaped line (C108 "In game"). The cure itself has not
+been watched in game; that attended check needs a Wildfire save at the cure stage and is the
+owner's call.
 Source of the report: r/SurvivingMars, 2026-09-18.
 
 C108 is a new public row:
