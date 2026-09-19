@@ -187,6 +187,20 @@ HOW IT WORKS
 
 ```
 
+**To paste it into Paradox with the formatting already applied:**
+
+1. In a terminal in this repo, run:
+   ```
+   python tools/paradox_card.py
+   ```
+2. A page opens in your browser. Press **Ctrl+A**, then **Ctrl+C**.
+3. In the Paradox editor, select the whole description and paste over it.
+
+The heading, the bold section titles and the line breaks come across. The tool reads
+the block above every time it runs, so it needs no update when the text changes. Keep
+section titles in capitals so they come out bold, and keep this block under its
+heading, which is how the tool finds it.
+
 #### 📋 Steam Workshop — description (BBCode, paste as-is)
 
 ```
