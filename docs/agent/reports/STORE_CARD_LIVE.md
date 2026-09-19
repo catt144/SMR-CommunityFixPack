@@ -239,7 +239,7 @@ HOW IT WORKS
 ⚠️ Same words. Only try this after the plain version is safely in place.
 
 ```
-Bug fixes for [i]Surviving Mars: Relaunched[/i].
+[h2]Bug fixes for [i]Surviving Mars: Relaunched[/i].[/h2]
 
 [b]Fifty-five repairs[/b], each one written up on the fix list with what you would have seen and what was actually wrong. Every one targets something the game's own code gets wrong — the code says one thing, does another, and the fix makes it do what it says. It fixes bugs; it does not rebalance the game. Preferences and features are deliberately not in it.
 
