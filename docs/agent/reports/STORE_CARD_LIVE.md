@@ -228,18 +228,14 @@ HOW IT WORKS
   quietly.
 
 
-FOUND A BUG, OR ONE THIS PACK DID NOT FIX?
+BUGS, QUESTIONS AND MODDING
 
-Tell us on the report page. It works from a browser on any device, Xbox and
-PlayStation included, and needs no account. It files your report for you, and
-it is the one place a save file or a log can reach us: attach it there and only
-we can open it. On console there is nothing to attach, and a plain description
-in your own words is genuinely useful. If this page has a comment section, that
-works too.
-https://catt144.github.io/SMR-CommunityMods/report/
-
-Modders: compatibility, switching off a single fix, and the source are here:
-https://catt144.github.io/SMR-CommunityMods/for-modders/
+Found a bug, or one this pack did not fix? Want the details behind a fix, or to
+know how the pack gets along with your own mod? It is all on the pack's site.
+Bugs can be reported there from a browser on any device, Xbox and PlayStation
+included, with no account needed, and a save or a log can be attached
+privately. If this page has a comment section, that works too.
+https://catt144.github.io/SMR-CommunityMods/
 
 Also on the Steam Workshop:
 https://steamcommunity.com/sharedfiles/filedetails/?id=3787202810
@@ -311,10 +307,8 @@ Select the building and press [b]Change Skin[/b] (the paintbrush on its panel) t
 [*]A few fixes are judgment calls rather than plain repairs. Those are marked on the fix list, with the reasoning.
 [/list]
 
-[h2]Found a bug, or one this pack did not fix?[/h2]
-Tell us on the [url=https://catt144.github.io/SMR-CommunityMods/report/]report page[/url]. It works from a browser on any device, Xbox and PlayStation included, and needs no account. It files your report for you, and it is the one place a save file or a log can reach us: attach it there and only we can open it. A plain description is genuinely useful too, and the comments below work as well.
-
-Modders: compatibility, switching off a single fix, and the source are on the [url=https://catt144.github.io/SMR-CommunityMods/for-modders/]For modders[/url] page.
+[h2]Bugs, questions and modding[/h2]
+Found a bug, or one this pack did not fix? Want the details behind a fix, or to know how the pack gets along with your own mod? It is all on [url=https://catt144.github.io/SMR-CommunityMods/]the pack's site[/url]. Bugs can be reported there from a browser on any device, Xbox and PlayStation included, with no account needed, and a save or a log can be attached privately. The comments below work as well.
 [url=https://mods.paradoxplaza.com/mods/156049/Any]Also on Paradox Mods[/url]
 
 [h2]Still playing on game version 1.0.7?[/h2]
@@ -753,20 +747,25 @@ itself has not been watched yet." — the owner removed it in the Mod Editor box
 Wildfire row. ⚠️ **NOT verified, and not claimed:** the Paradox page version was not stated and the
 Paradox body was not read back.
 
-## ⭐ 2026-09-19 — FOUND A BUG + FOR MODDERS collapsed to one paragraph and two site pointers (owner brief)
+## ⭐ 2026-09-19 — FOUND A BUG + FOR MODDERS collapsed to one general section and one site link (owner brief)
 
 Owner: *"one paragraph that covers everything and one pointer to the site. And a pointer for
-modders there as well and completely cut the modders section from our store page."* Applied to all
+modders there as well and completely cut the modders section from our store page,"* then, on the
+first draft: *"just pointing them to the main page would be better and then they can click the tabs
+... make it more general like a report a bug want more details about some of the fixes or modding
+compatibility."* The section is now BUGS, QUESTIONS AND MODDING, one paragraph, one link to the
+site's front page. Applied to all
 four copies — `metadata.lua` (the shipped, portal-neutral string), both §3 paste backups in
 `docs/UPLOAD_WORKFLOW.md`, and both blocks above. The shipped string still equals the workflow's
-Paradox block byte for byte, and the two BBCode blocks are still identical. Shipped body: **5,559**
+Paradox block byte for byte, and the two BBCode blocks are still identical. Shipped body: **5,367**
 chars decoded, down from the v14 body.
 
 **Why the routes changed:** the site gained *Report a problem* (`SMR-CommunityMods` commit
 `9b292b8`): a form that files an issue on `catt144/SMR-CommunityMods` with no account, and takes a
 save privately through a Cloudflare Worker and a private R2 bucket. GitHub itself refuses saves (the
 25 MB limit; saves measure 27–56 MB and are already compressed). The card therefore points at
-`/report/` and no longer at `SMR-CommunityFixPack/issues`. The FOR MODDERS body (the veto snippet
+the site's front page, whose tabs reach *Report a problem*, and no longer at
+`SMR-CommunityFixPack/issues`. The FOR MODDERS body (the veto snippet
 and the source link) is now only the site's `for-modders/` page, which links the source repo.
 
 ⚖️ **The 2026-09-17 ruling above, on the deliberate Paradox divergence, loses its premise.** Its
@@ -775,7 +774,7 @@ Paradox players too, with no account. So the Paradox record block here no longer
 Paradox-only paragraph. The one divergence left is the trailing *"Also on the Steam Workshop"*
 cross-link, the counterpart of the BBCode block's *"Also on Paradox Mods"*.
 
-⛔ **These words ship at the next upload, and `/report/` must be live first.** It is not published
-as of this note, because the site publish is the owner's run. An upload before that publish ships a
-card whose report link 404s. The old tracker still takes issues, and its links in the repo README and
+⛔ **These words ship at the next upload, and the site's *Report a problem* tab must be published
+first.** It is not published as of this note, because the site publish is the owner's run. An upload
+before that publish ships a card promising a report form the site does not show yet. The old tracker still takes issues, and its links in the repo README and
 `FIELD_REPORT_REPLIES.md` are unchanged.

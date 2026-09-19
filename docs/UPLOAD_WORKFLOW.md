@@ -183,18 +183,14 @@ HOW IT WORKS
   quietly.
 
 
-FOUND A BUG, OR ONE THIS PACK DID NOT FIX?
+BUGS, QUESTIONS AND MODDING
 
-Tell us on the report page. It works from a browser on any device, Xbox and
-PlayStation included, and needs no account. It files your report for you, and
-it is the one place a save file or a log can reach us: attach it there and only
-we can open it. On console there is nothing to attach, and a plain description
-in your own words is genuinely useful. If this page has a comment section, that
-works too.
-https://catt144.github.io/SMR-CommunityMods/report/
-
-Modders: compatibility, switching off a single fix, and the source are here:
-https://catt144.github.io/SMR-CommunityMods/for-modders/
+Found a bug, or one this pack did not fix? Want the details behind a fix, or to
+know how the pack gets along with your own mod? It is all on the pack's site.
+Bugs can be reported there from a browser on any device, Xbox and PlayStation
+included, with no account needed, and a save or a log can be attached
+privately. If this page has a comment section, that works too.
+https://catt144.github.io/SMR-CommunityMods/
 
 
 STILL PLAYING ON GAME VERSION 1.0.7?
@@ -261,10 +257,8 @@ Select the building and press [b]Change Skin[/b] (the paintbrush on its panel) t
 [*]A few fixes are judgment calls rather than plain repairs. Those are marked on the fix list, with the reasoning.
 [/list]
 
-[h2]Found a bug, or one this pack did not fix?[/h2]
-Tell us on the [url=https://catt144.github.io/SMR-CommunityMods/report/]report page[/url]. It works from a browser on any device, Xbox and PlayStation included, and needs no account. It files your report for you, and it is the one place a save file or a log can reach us: attach it there and only we can open it. A plain description is genuinely useful too, and the comments below work as well.
-
-Modders: compatibility, switching off a single fix, and the source are on the [url=https://catt144.github.io/SMR-CommunityMods/for-modders/]For modders[/url] page.
+[h2]Bugs, questions and modding[/h2]
+Found a bug, or one this pack did not fix? Want the details behind a fix, or to know how the pack gets along with your own mod? It is all on [url=https://catt144.github.io/SMR-CommunityMods/]the pack's site[/url]. Bugs can be reported there from a browser on any device, Xbox and PlayStation included, with no account needed, and a save or a log can be attached privately. The comments below work as well.
 [url=https://mods.paradoxplaza.com/mods/156049/Any]Also on Paradox Mods[/url]
 
 [h2]Still playing on game version 1.0.7?[/h2]
