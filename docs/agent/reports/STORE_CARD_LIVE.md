@@ -761,7 +761,18 @@ Paradox players too, with no account. So the Paradox record block here no longer
 Paradox-only paragraph. The one divergence left is the trailing *"Also on the Steam Workshop"*
 cross-link, the counterpart of the BBCode block's *"Also on Paradox Mods"*.
 
-⛔ **These words ship at the next upload, and the site's *Report a problem* tab must be published
-first.** It is not published as of this note, because the site publish is the owner's run. An upload
-before that publish ships a card promising a report form the site does not show yet. The old tracker still takes issues, and its links in the repo README and
-`FIELD_REPORT_REPLIES.md` are unchanged.
+These words ship at the next upload. The site's report page, now titled *Bug reports & problems*, is
+published: site run #17, `beaee47`, 2026-09-19. The old tracker still takes issues, and its links in
+the repo README and `FIELD_REPORT_REPLIES.md` are unchanged; the form is in
+[REPORT_FORM.md](REPORT_FORM.md).
+
+**Why Paradox loses the formatting, read on 1.1.0.403908 (archived tree).** The game uploads one
+string, `mod.description`, to both stores (`CommonLua/Libs/Paradox/ParadoxMods.lua:155`,
+`CommonLua/Platforms/steam/SteamWorkshop.lua:110`), and Paradox descriptions are HTML: the game
+renders them through `ParseHTML` (`CommonLua/Libs/Paradox/ParadoxModManager.lua:19-21`). So plain text
+arrives on Paradox with no heading, no bold and no line breaks. A string in HTML would suit Paradox
+and show raw tags on Steam, so the shipped string stays plain. The formatting is now one paste:
+`tools/paradox_card.py` opens the workflow's Paradox block in the owner's format (the title as a
+heading, bold ALL-CAPS section lines, the block's own line breaks, no font). The owner tested the paste
+on the Paradox editor, 2026-09-19: *"That is perfect."* The steps are under that block in
+`docs/UPLOAD_WORKFLOW.md` §3.

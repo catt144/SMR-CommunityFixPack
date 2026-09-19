@@ -101,6 +101,14 @@ Home: `docs/archive/PLAYTEST_ARCHIVE.md`
 
 ## Run
 
+### ck205 · opened 2026-09-19
+When you next have the site open, send one test report from its *Bug reports & problems* page.
+- Pick both dropdowns, write a line, and attach a small `.txt` or `.log`.
+- Pass: the page shows an issue link, the issue on `SMR-CommunityMods` carries the report-type
+  label and a file code, and Discord pings.
+- Only you can run it: the Worker refuses any origin but the published site. Then delete the issue.
+Home: `docs/agent/reports/REPORT_FORM.md`
+
 ### ck202 · opened 2026-09-17
 When you next play a colony with a staffed Water Reclamation spire, one read settles C105.
 - The code says the upgrade keeps the saving, but at 50%; a well-staffed spire can reach 70%.

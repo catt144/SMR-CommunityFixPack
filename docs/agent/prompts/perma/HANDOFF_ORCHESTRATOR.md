@@ -123,6 +123,11 @@ Never keep an owner list here, and never rebuild an owed list from an older docu
   and removed itself. The owner will bring the orchestrator back to check its result. Check it at surface level: the entry's
   control, the reach tier, and, if it built, a harness that FAILs the unfixed body in cold-boot order
   ([EF-109](../../facts/EF-109.md)). Delete this block once checked.
+- **Site report form, live since 2026-09-19.** Reports now go to `SMR-CommunityMods` issues through a
+  Cloudflare Worker. The route, the secrets and the token renewal are in
+  [REPORT_FORM.md](../../reports/REPORT_FORM.md); the owner's browser test is ck205. Nobody has asked for
+  it yet, but this repo's `README.md` and `FIELD_REPORT_REPLIES.md` still send people to the old
+  `SMR-CommunityFixPack/issues`.
 - **Prompts ready to fire** are listed in [prompts/README.md](../README.md). The C92 build's shipping
   hold lives in checklist ck172, and the stand-down audit's class-c blind spot is stated in its brief.
 
