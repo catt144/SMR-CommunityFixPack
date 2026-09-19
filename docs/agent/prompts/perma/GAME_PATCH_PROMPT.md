@@ -2,7 +2,7 @@
 
 A reusable job: keep it after each run. Fire it when a new game build is on disk (Steam `buildid` in
 `appmanifest_3215050.acf` differs from the newest `C:\Dev\SMR-SrcArchive\` version) or the owner asks.
-Built 2026-09-19 by `GAME_PATCH_BUILD_high.md` from `reports/GAME_PATCH_INSTRUMENTS.md`; check
+Built 2026-09-19 from `reports/GAME_PATCH_INSTRUMENTS.md` (build record `reports/GAME_PATCH_BUILD_20260919.md`); check
 `git log -- tools/patchcheck.py docs/agent/prompts/perma/GAME_PATCH_PROMPT.md` before inheriting its facts.
 
 ## Decided (owner, 2026-09-18/19): not yours to reopen

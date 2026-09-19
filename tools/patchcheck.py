@@ -2,7 +2,7 @@
 """After a game patch: one desk command that says none / scoped / full, and why.
 
 Built 2026-09-19 from `docs/agent/reports/GAME_PATCH_INSTRUMENTS.md` (the design
-and its 1.0.7 -> 1.1.0 backtest) under `prompts/GAME_PATCH_BUILD_high.md`. The
+and its 1.0.7 -> 1.1.0 backtest); build record `reports/GAME_PATCH_BUILD_20260919.md`. The
 job prompt that runs it is `docs/agent/prompts/perma/GAME_PATCH_PROMPT.md`.
 
     python tools/patchcheck.py                       # newest older archive -> live install, Code/
@@ -343,6 +343,11 @@ def harvest(path):
     bare = set()
     for f, a, b in RE_CITE_BARE.findall(raw):
         bare.add((f, int(a), int(b) if b else int(a)))
+    # Calls to a name the module binds itself are KEPT: a module-local copy of a
+    # vanilla file-local (PayloadTemplateRefill's resolve_loc_cargo_template) is
+    # the stale-copy FIX signal, and a filter on locals loses it (measured
+    # 2026-09-19: §3.1 SIGCALL FIX 3 -> 2). The price is a false match such as
+    # CloggedBuildingRelease's `local setter`; a D2 read settles those.
     return dict(pins=pins, reqs=reqs, cites=cites, bare=bare, calls=call_names(code))
 
 
