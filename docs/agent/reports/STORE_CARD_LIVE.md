@@ -268,7 +268,10 @@ And [b]two[/b] of them repair things you cannot see at all today: real defects t
 [/list]
 
 [h2]Bugs, questions and modding[/h2]
-Found a bug, or one this pack did not fix? Want the details behind a fix, or to know how the pack gets along with your own mod? It is all on [url=https://catt144.github.io/SMR-CommunityMods/]the pack's site[/url]. Bugs can be reported there from a browser, with no account needed, and a save or a log can be attached privately. The comments below work as well. Still on game version 1.0.7? A frozen build for it is there too.
+Found a bug, or one this pack did not fix? Want the details behind a fix, or to know how the pack gets along with your own mod? It is all on the pack's site. Bugs can be reported there from a browser, with no account needed, and a save or a log can be attached privately. The comments below work as well. Still on game version 1.0.7? A frozen build for it is there too.
+
+[b][url=https://catt144.github.io/SMR-CommunityMods/]» Open the pack's site: bug reports, fix details, modding[/url][/b]
+
 [url=https://mods.paradoxplaza.com/mods/156049/Any]Also on Paradox Mods[/url]
 
 [h2]Featured: expedition crews come home[/h2]
