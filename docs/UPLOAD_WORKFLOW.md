@@ -187,9 +187,9 @@ BUGS, QUESTIONS AND MODDING
 
 Found a bug, or one this pack did not fix? Want the details behind a fix, or to
 know how the pack gets along with your own mod? It is all on the pack's site.
-Bugs can be reported there from a browser on any device, Xbox and PlayStation
-included, with no account needed, and a save or a log can be attached
-privately. If this page has a comment section, that works too.
+Bugs can be reported there from a browser, with no account needed, and a save
+or a log can be attached privately. If this page has a comment section, that
+works too.
 https://catt144.github.io/SMR-CommunityMods/
 
 
@@ -258,7 +258,7 @@ Select the building and press [b]Change Skin[/b] (the paintbrush on its panel) t
 [/list]
 
 [h2]Bugs, questions and modding[/h2]
-Found a bug, or one this pack did not fix? Want the details behind a fix, or to know how the pack gets along with your own mod? It is all on [url=https://catt144.github.io/SMR-CommunityMods/]the pack's site[/url]. Bugs can be reported there from a browser on any device, Xbox and PlayStation included, with no account needed, and a save or a log can be attached privately. The comments below work as well.
+Found a bug, or one this pack did not fix? Want the details behind a fix, or to know how the pack gets along with your own mod? It is all on [url=https://catt144.github.io/SMR-CommunityMods/]the pack's site[/url]. Bugs can be reported there from a browser, with no account needed, and a save or a log can be attached privately. The comments below work as well.
 [url=https://mods.paradoxplaza.com/mods/156049/Any]Also on Paradox Mods[/url]
 
 [h2]Still playing on game version 1.0.7?[/h2]
