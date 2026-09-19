@@ -78,10 +78,11 @@ which is the part the fill never carries. Go to step 4.
 
 The automatic fill did not work. Paste the matching block below by hand — these
 are your backup copies, kept current every sweep, so you never have to leave this
-page. **Paradox:** paste the plain block, then re-apply headings/bold with the
-editor's formatting buttons (Paradox eats plain-text line breaks, so it will look
-like a wall until you do). **Steam:** paste the BBCode block as-is — its tags
-render.
+page. **Paradox:** run `python tools/paradox_card.py`, which opens the block below
+already formatted in your browser; press Ctrl+A and Ctrl+C there, then paste over
+the Paradox description. (Paradox stores the description as HTML, so the plain block
+pasted directly arrives as one wall of text.) **Steam:** paste the BBCode block
+as-is — its tags render.
 
 The public-surface sweep maintains the backup copy below alongside its two canonical peers.
 
@@ -273,9 +274,11 @@ is step 5's "anything that looked wrong", not the auto-fill question.
 ### Either way: the styling pass
 
 The fill gives you plain text — correct, but no headings or bold, and **the formatting
-never survives an upload** (owner, 2026-09-12). So this pass runs every time: paste the
-matching styled block above and apply the headings with the editor buttons, on **both**
-Steam and Paradox.
+never survives an upload** (owner, 2026-09-12). So this pass runs every time, on
+**both** stores. **Steam:** paste the BBCode block above. **Paradox:** run
+`python tools/paradox_card.py`, then Ctrl+A and Ctrl+C in the browser page it opens,
+and paste over the description. The headings, bold and list come across with the
+paste, so there is nothing to apply by hand.
 
 ⚠️ Cosmetic, and the owner calls it minor — the auto-fill gives the page something
 until the cleanup lands. Skip it whenever you like; the page is still correct without
