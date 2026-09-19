@@ -123,6 +123,11 @@ Never keep an owner list here, and never rebuild an owed list from an older docu
   not exist and no task has had authority to create it. Body in
   [DOC_EDITING_SKILLS_AUDIT.md](../../reports/DOC_EDITING_SKILLS_AUDIT.md) (Deferred moves) and
   `.claude/PENDING_MOVES.md`.
+- **Wildfire cure, awaiting a check (2026-09-18).** The owner is firing
+  [WILDFIRE_CURE_INVESTIGATION_high.md](../WILDFIRE_CURE_INVESTIGATION_high.md) in another session
+  and will bring the orchestrator back to check its result. Check it at surface level: the entry's
+  control, the reach tier, and, if it built, a harness that FAILs the unfixed body in cold-boot order
+  ([EF-109](../../facts/EF-109.md)). Delete this block once checked.
 - **Prompts ready to fire** are listed in [prompts/README.md](../README.md). The C92 build's shipping
   hold lives in checklist ck172, and the stand-down audit's class-c blind spot is stated in its brief.
 
