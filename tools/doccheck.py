@@ -2440,8 +2440,8 @@ TOOL_GROUPS = (
      "Run order, trigger rule and — this is the part that matters — what their "
      "output does and does not license: `docs/agent/WORKFLOW.md`, \"After a "
      "game patch\". Read it before you quote a verdict from any of these.",
-     ("flpk_extract.py", "bodycheck.py", "sigcheck.py", "treediff.py",
-      "presetdiff.py")),
+     ("patchcheck.py", "patchcheck_selftest.py", "flpk_extract.py",
+      "bodycheck.py", "sigcheck.py", "treediff.py", "presetdiff.py")),
     ("Reading the shipped game by hand",
      "When a diff says something moved and you need the body itself.",
      ("luafn.py", "pack_list.py")),

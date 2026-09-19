@@ -55,7 +55,7 @@ comments is written by `python tools/doccheck.py --regen` and checked by
 
 <!-- GENERATED TOOL ROWS — never hand-edit; regenerate with: python tools/doccheck.py --regen -->
 
-*68 scripts, every `tools/*.py` on disk. This block is GENERATED: a row's text is copied from the script's own header, so a wrong row is repaired in the script, never here.*
+*70 scripts, every `tools/*.py` on disk. This block is GENERATED: a row's text is copied from the script's own header, so a wrong row is repaired in the script, never here.*
 
 ### Repo gates, and the falsifiers that keep them honest
 
@@ -76,6 +76,8 @@ Run order, trigger rule and — this is the part that matters — what their out
 
 | script | what its own header says |
 |---|---|
+| [`patchcheck.py`](patchcheck.py) | After a game patch: one desk command that says none / scoped / full, and why. |
+| [`patchcheck_selftest.py`](patchcheck_selftest.py) | Regression test for patchcheck.py: it must reproduce the 1.0.7 -> 1.1.0 backtest. |
 | [`flpk_extract.py`](flpk_extract.py) | FLPK (Surviving Mars: Relaunched .fpk) extractor, v2. |
 | [`bodycheck.py`](bodycheck.py) | Is the shipped code each module patches still the code it was pinned to? |
 | [`sigcheck.py`](sigcheck.py) | Compare every function this pack replaces against the SHIPPED signature. |
