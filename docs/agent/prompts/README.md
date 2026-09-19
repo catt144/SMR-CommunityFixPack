@@ -35,6 +35,7 @@ The `declared class` values below are gate inputs, not conclusions inferred from
 | `release_prompt.md` | `prompt` | the complete release lifecycle: prepare surfaces, HOLD for the owner's upload, then resume—often fresh—to verify and close |
 | `RELEASE_OUTBOX.md` | `ledger-exception` | the one owner-exempt ledger; `release_prompt.md` derives the batch from Pending and clears it into `docs/archive/RELEASE_HISTORY.md` only after confirmed upload |
 | `STATE_EVICTION.md` | `prompt` | requested STATE cleanup or a size warning; apply the complete four-part admission door to every section and verify refused content's homes; also the checklist sweep that purges or archives items 30 days old |
+| `GAME_PATCH_PROMPT.md` | `prompt` | a new game build is on disk: `tools/patchcheck.py` sweeps both packs to a none/scoped/full verdict, then reads, in-game legs, FIX/REMOVE prompts, the opt-in `gamepatch/` outbox entry and a limits review |
 
 ## Root — live one-offs
 

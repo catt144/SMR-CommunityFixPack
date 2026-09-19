@@ -79,10 +79,11 @@ invisible to the runtime self-checks.
 0. Archive first. Copy `ModTools\Src` to `C:\Dev\SMR-SrcArchive\<version>\Src` with its
    `MANIFEST.sha256` before the update lands, and whenever an unarchived version is on disk. Steam
    updates and branch switches overwrite the tree in place and unasked (`EF-075`).
-1. Re-extract `Packs\Lua.fpk` (`tools/flpk_extract.py`) and diff it against the new Src tree.
-2. `python tools/bodycheck.py` (pinned body, defect expression, target: classes b, d, e), then
-   `python tools/sigcheck.py` (arity, class a). Each tool's header defines its verdicts and what
-   each one obliges; write the REMOVE/FIX prompts from the table.
+1. Fire `prompts/perma/GAME_PATCH_PROMPT.md`. Its sweep is `python tools/patchcheck.py` (fpk
+   parity, the one-hop dependency hash over pins, `Require` targets and citations, call signatures,
+   save-exposed sites, the none/scoped/full verdict), with `python tools/bodycheck.py` for the
+   defect expressions and `python tools/sigcheck.py` for arity. Each tool's header defines its
+   verdicts and what each one obliges; write the REMOVE/FIX prompts from the table.
 3. `tools/treediff.py` and `tools/presetdiff.py` run on trigger only: the patch notes name a system
    we fix, a `DLC_DEEP_CHECK` chain is running, or a changed body cannot be explained by hand from
    the two trees. They emit about 25k rows; never run them "to stay current".
@@ -95,8 +96,9 @@ preset field exists in one tree and not the other. "Vanilla fixed it", "this fix
 replacement body in both trees, or a run in the game.
 
 - `bodycheck.py` cannot see class c, semantics moving under a wrapper whose target body is
-  byte-identical (6 of the 10 FIX rows in the 1.1.0 re-verification), anything outside the pinned
-  body, or a defect that is an absence. A regex pinned to phrasing yields a false `DEFECT-GONE`, the
+  byte-identical (six class-c instances in the 1.1.0 response, four of them FIX rows), anything
+  outside the pinned body, or a defect that is an absence. Every FIX row the pinned body misses
+  (F-1, F-2, F-4, F-5), `patchcheck.py`'s `Require` hash catches. A regex pinned to phrasing yields a false `DEFECT-GONE`, the
   direction that retires a live fix; a `DEFECT-GONE` is a REMOVE candidate, never a verdict.
 - `treediff.py` misses anonymous `function(` literals and hunks outside every row span;
   `presetdiff.py` reads generated files only and cannot tell `REINDEX-SWAP` from a real change.

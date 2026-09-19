@@ -91,8 +91,10 @@ body is a signal, not noise. sha256 of the utf-8 of that.
 
 ⚠️ WHAT IT CANNOT DECIDE, AND MUST NOT BE READ AS DECIDING. A GREEN here is not
 a clearance. It sees classes (b), (d) and (e). It does NOT see class (c) --
-semantics moving under a wrapper while the body it wraps is untouched (F111,
-F112, F-1, F-2, F-3, F-5) -- and nothing this project owns sees that. It cannot
+semantics moving under a wrapper while the body it wraps is untouched: six
+class-c instances in the 1.1.0 response (F111, F112, F-1, F-2, F-3, F-5), four
+of them FIX rows. `patchcheck.py` hashes the `Require` targets too, and caught
+every FIX row the pinned body missed (F-1, F-2, F-4, F-5). It cannot
 see a defect whose expression the module never stated: a NO-DEFECT module is
 unwatched, which is the whole point of counting them. And a DEFECT-GONE is a
 REMOVE *candidate*, never a verdict -- read the replacement before retiring
