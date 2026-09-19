@@ -230,42 +230,16 @@ HOW IT WORKS
 
 FOUND A BUG, OR ONE THIS PACK DID NOT FIX?
 
-Reports are read and acted on, and a save file where it reliably happens is
-worth more than any description of it.
+Tell us on the report page. It works from a browser on any device, Xbox and
+PlayStation included, and needs no account. It files your report for you, and
+it is the one place a save file or a log can reach us: attach it there and only
+we can open it. On console there is nothing to attach, and a plain description
+in your own words is genuinely useful. If this page has a comment section, that
+works too.
+https://catt144.github.io/SMR-CommunityMods/report/
 
-· Issue tracker — the route for everyone, and the only one that can carry a
-  save file or a log:
-  https://github.com/catt144/SMR-CommunityFixPack/issues
-  It needs a free GitHub account and works from a browser on any device.
-
-· On Steam you can also just use the comments on the mod's page.
-
-This page has no comment section, so if you installed from Paradox Mods —
-which includes every Xbox and PlayStation player — the tracker is the route.
-On console there is nothing to attach in the first place, and a plain
-description in your own words is genuinely useful.
-
-
-FOR MODDERS
-
-The pack is built to share the game with your mod rather than take it over. It
-hooks the game's functions and calls the original where it can, so another mod
-that touches the same function keeps working. Where a bug sits in the middle of
-a function and cannot be hooked, the fix copies the corrected body instead —
-those are the ones most likely to clash, and each one names in its source the
-game file and lines it came from.
-
-Any single fix can be switched off from another mod, without touching this one.
-Set the fix's id as a key on the veto table before the pack loads:
-
-    SMRFixPack_Disabled = rawget(_G, "SMRFixPack_Disabled") or {}
-    SMRFixPack_Disabled["LakeEntombment"] = true
-
-The id is the key, not a list entry — a plain list looks valid and switches off
-nothing. "Before the pack loads" means your mod has to load first.
-
-Source, and the reasoning behind every fix:
-https://github.com/catt144/SMR-CommunityFixPack
+Modders: compatibility, switching off a single fix, and the source are here:
+https://catt144.github.io/SMR-CommunityMods/for-modders/
 
 Also on the Steam Workshop:
 https://steamcommunity.com/sharedfiles/filedetails/?id=3787202810
@@ -338,21 +312,9 @@ Select the building and press [b]Change Skin[/b] (the paintbrush on its panel) t
 [/list]
 
 [h2]Found a bug, or one this pack did not fix?[/h2]
-Reports are read and acted on, and a save file where it reliably happens is worth more than any description of it.
-[list]
-[*][b]The comments below[/b] — easiest if you are on Steam, and no extra account needed.
-[*][b]The issue tracker[/b] — [url=https://github.com/catt144/SMR-CommunityFixPack/issues]github.com/catt144/SMR-CommunityFixPack/issues[/url]. Comment sections cannot carry files, so this is the only place a save or a log can actually reach us. Free GitHub account, works from any browser.
-[/list]
+Tell us on the [url=https://catt144.github.io/SMR-CommunityMods/report/]report page[/url]. It works from a browser on any device, Xbox and PlayStation included, and needs no account. It files your report for you, and it is the one place a save file or a log can reach us: attach it there and only we can open it. A plain description is genuinely useful too, and the comments below work as well.
 
-[h2]For modders[/h2]
-The pack is built to share the game with your mod rather than take it over. It hooks the game's functions and calls the original where it can, so another mod that touches the same function keeps working. Where a bug sits in the middle of a function and cannot be hooked, the fix copies the corrected body instead — those are the ones most likely to clash, and each one names in its source the game file and lines it came from.
-
-Any single fix can be switched off from another mod, without touching this one. Set the fix's id as a key on the veto table before the pack loads:
-[code]SMRFixPack_Disabled = rawget(_G, "SMRFixPack_Disabled") or {}
-SMRFixPack_Disabled["LakeEntombment"] = true[/code]
-The id is the key, not a list entry — a plain list looks valid and switches off nothing. "Before the pack loads" means your mod has to load first.
-
-[b]Source, and the reasoning behind every fix:[/b] [url=https://github.com/catt144/SMR-CommunityFixPack]github.com/catt144/SMR-CommunityFixPack[/url]
+Modders: compatibility, switching off a single fix, and the source are on the [url=https://catt144.github.io/SMR-CommunityMods/for-modders/]For modders[/url] page.
 [url=https://mods.paradoxplaza.com/mods/156049/Any]Also on Paradox Mods[/url]
 
 [h2]Still playing on game version 1.0.7?[/h2]
@@ -790,3 +752,30 @@ itself has not been watched yet." — the owner removed it in the Mod Editor box
 **Site published:** run #14 (`92c853f`) completed with success; the deployed fix list serves the
 Wildfire row. ⚠️ **NOT verified, and not claimed:** the Paradox page version was not stated and the
 Paradox body was not read back.
+
+## ⭐ 2026-09-19 — FOUND A BUG + FOR MODDERS collapsed to one paragraph and two site pointers (owner brief)
+
+Owner: *"one paragraph that covers everything and one pointer to the site. And a pointer for
+modders there as well and completely cut the modders section from our store page."* Applied to all
+four copies — `metadata.lua` (the shipped, portal-neutral string), both §3 paste backups in
+`docs/UPLOAD_WORKFLOW.md`, and both blocks above. The shipped string still equals the workflow's
+Paradox block byte for byte, and the two BBCode blocks are still identical. Shipped body: **5,559**
+chars decoded, down from the v14 body.
+
+**Why the routes changed:** the site gained *Report a problem* (`SMR-CommunityMods` commit
+`9b292b8`): a form that files an issue on `catt144/SMR-CommunityMods` with no account, and takes a
+save privately through a Cloudflare Worker and a private R2 bucket. GitHub itself refuses saves (the
+25 MB limit; saves measure 27–56 MB and are already compressed). The card therefore points at
+`/report/` and no longer at `SMR-CommunityFixPack/issues`. The FOR MODDERS body (the veto snippet
+and the source link) is now only the site's `for-modders/` page, which links the source repo.
+
+⚖️ **The 2026-09-17 ruling above, on the deliberate Paradox divergence, loses its premise.** Its
+reason was *"github is the only way they can reach out to us"*; the form is now that route for
+Paradox players too, with no account. So the Paradox record block here no longer carries a
+Paradox-only paragraph. The one divergence left is the trailing *"Also on the Steam Workshop"*
+cross-link, the counterpart of the BBCode block's *"Also on Paradox Mods"*.
+
+⛔ **These words ship at the next upload, and `/report/` must be live first.** It is not published
+as of this note, because the site publish is the owner's run. An upload before that publish ships a
+card whose report link 404s. The old tracker still takes issues, and its links in the repo README and
+`FIELD_REPORT_REPLIES.md` are unchanged.

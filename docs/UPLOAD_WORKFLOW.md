@@ -185,41 +185,16 @@ HOW IT WORKS
 
 FOUND A BUG, OR ONE THIS PACK DID NOT FIX?
 
-Reports are read and acted on, and a save file where it reliably happens is
-worth more than any description of it.
+Tell us on the report page. It works from a browser on any device, Xbox and
+PlayStation included, and needs no account. It files your report for you, and
+it is the one place a save file or a log can reach us: attach it there and only
+we can open it. On console there is nothing to attach, and a plain description
+in your own words is genuinely useful. If this page has a comment section, that
+works too.
+https://catt144.github.io/SMR-CommunityMods/report/
 
-· Issue tracker — the route for everyone, and the only one that can carry a
-  save file or a log:
-  https://github.com/catt144/SMR-CommunityFixPack/issues
-  It needs a free GitHub account and works from a browser on any device.
-
-· If this page has a comment section, that works too for anything you can
-  describe in words. Only the tracker can carry a file.
-
-On console — every Xbox and PlayStation player — there is nothing to attach in
-the first place, and a plain description in your own words is genuinely useful.
-
-
-FOR MODDERS
-
-The pack is built to share the game with your mod rather than take it over. It
-hooks the game's functions and calls the original where it can, so another mod
-that touches the same function keeps working. Where a bug sits in the middle of
-a function and cannot be hooked, the fix copies the corrected body instead —
-those are the ones most likely to clash, and each one names in its source the
-game file and lines it came from.
-
-Any single fix can be switched off from another mod, without touching this one.
-Set the fix's id as a key on the veto table before the pack loads:
-
-    SMRFixPack_Disabled = rawget(_G, "SMRFixPack_Disabled") or {}
-    SMRFixPack_Disabled["LakeEntombment"] = true
-
-The id is the key, not a list entry — a plain list looks valid and switches off
-nothing. "Before the pack loads" means your mod has to load first.
-
-Source, and the reasoning behind every fix:
-https://github.com/catt144/SMR-CommunityFixPack
+Modders: compatibility, switching off a single fix, and the source are here:
+https://catt144.github.io/SMR-CommunityMods/for-modders/
 
 
 STILL PLAYING ON GAME VERSION 1.0.7?
@@ -287,21 +262,9 @@ Select the building and press [b]Change Skin[/b] (the paintbrush on its panel) t
 [/list]
 
 [h2]Found a bug, or one this pack did not fix?[/h2]
-Reports are read and acted on, and a save file where it reliably happens is worth more than any description of it.
-[list]
-[*][b]The comments below[/b] — easiest if you are on Steam, and no extra account needed.
-[*][b]The issue tracker[/b] — [url=https://github.com/catt144/SMR-CommunityFixPack/issues]github.com/catt144/SMR-CommunityFixPack/issues[/url]. Comment sections cannot carry files, so this is the only place a save or a log can actually reach us. Free GitHub account, works from any browser.
-[/list]
+Tell us on the [url=https://catt144.github.io/SMR-CommunityMods/report/]report page[/url]. It works from a browser on any device, Xbox and PlayStation included, and needs no account. It files your report for you, and it is the one place a save file or a log can reach us: attach it there and only we can open it. A plain description is genuinely useful too, and the comments below work as well.
 
-[h2]For modders[/h2]
-The pack is built to share the game with your mod rather than take it over. It hooks the game's functions and calls the original where it can, so another mod that touches the same function keeps working. Where a bug sits in the middle of a function and cannot be hooked, the fix copies the corrected body instead — those are the ones most likely to clash, and each one names in its source the game file and lines it came from.
-
-Any single fix can be switched off from another mod, without touching this one. Set the fix's id as a key on the veto table before the pack loads:
-[code]SMRFixPack_Disabled = rawget(_G, "SMRFixPack_Disabled") or {}
-SMRFixPack_Disabled["LakeEntombment"] = true[/code]
-The id is the key, not a list entry — a plain list looks valid and switches off nothing. "Before the pack loads" means your mod has to load first.
-
-[b]Source, and the reasoning behind every fix:[/b] [url=https://github.com/catt144/SMR-CommunityFixPack]github.com/catt144/SMR-CommunityFixPack[/url]
+Modders: compatibility, switching off a single fix, and the source are on the [url=https://catt144.github.io/SMR-CommunityMods/for-modders/]For modders[/url] page.
 [url=https://mods.paradoxplaza.com/mods/156049/Any]Also on Paradox Mods[/url]
 
 [h2]Still playing on game version 1.0.7?[/h2]
