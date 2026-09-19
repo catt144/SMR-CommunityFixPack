@@ -744,8 +744,8 @@ unedited this time.
 **Tree writeback:** `version` 16 → **17**, `pdx_version` "11" → **"12"**, `code_hash` and `saved`
 rewritten; comments restored from `94c19d3`.
 
-⚠️ **NOT verified, and not claimed:** the Paradox page version was not stated and its body was not
-read back. **The site is NOT published** — newest `Publish docs site` run is #12 (`c5ac193`, v12's
+**Paradox page shows v16** (owner, 2026-09-18), one below the tree's 17, as at v11.
+⚠️ **NOT verified, and not claimed:** the Paradox body was not read back. **The site is NOT published** — newest `Publish docs site` run is #12 (`c5ac193`, v12's
 fix list), so the live card says Fifty-four while the deployed fix list shows 53 rows.
 
 ## Provenance of the headliners

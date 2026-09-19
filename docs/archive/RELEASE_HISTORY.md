@@ -355,3 +355,10 @@ building joins only its own class label, so the norman farm templates were never
 Four `Effect_ModifyLabel` entries are appended at data load, copying the shipped percent,
 and saves that researched the tech earlier are healed once on load. No version, store page,
 public site or upload changed in this job.
+
+#### Addendum to v13 (2026-09-18, after close-out `c307253`)
+
+**Paradox page shows v16** (owner, 2026-09-18) — one below the tree's written-back 17, the same
+pattern as v11 (page v13, tree 14), consistent with `VersionDisplayName` being sent before the
+forced save bumps `version`. This settles the "Paradox page version was not stated" line above; the
+site line stands.
