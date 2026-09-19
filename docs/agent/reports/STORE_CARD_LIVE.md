@@ -157,23 +157,6 @@ And two of them repair things you cannot see at all today: real defects that
 the shipped numbers happen to hide, which another mod, a game patch or a DLC
 could walk straight into.
 
-
-FEATURED: EXPEDITION CREWS COME HOME
-
-Colonists living in habitats can join expeditions again, and they come back to
-the habitat they left. If their habitat is too far from the landing site to
-walk, they are set down at its door, the same way the rocket picked them up. If
-the habitat is gone or unusable, they go to the nearest dome that is working and
-has air.
-
-One gotcha. If every dome is switched off and only habitats are alive, and those
-habitats refuse the colonist through their filters, the colonist still walks to
-the nearest dome and dies there. That is the game's own safety system choosing
-where a homeless colonist goes, and this mod does not override it. Changing it
-would mean rewriting how the game houses colonists, which is not what a bug-fix
-mod should do.
-
-
 SOME OF WHAT IT FIXES
 
 · Colonists walked across the surface between domes and suffocated.
@@ -191,12 +174,34 @@ SOME OF WHAT IT FIXES
 · A Jumbo Cave mystery could get stuck clearing waste rock and never complete.
 · The Philosopher's Stone mystery hung one step from the end.
 
-The full list — every fix, what you would have seen, and what was actually
-wrong — is here:
-https://catt144.github.io/SMR-CommunityMods/fix-list/
+BUGS, QUESTIONS AND MODDING
 
+Found a bug, or one this pack did not fix? Want the details behind a fix, or to
+know how the pack gets along with your own mod? It is all on the pack's site.
+Bugs can be reported there from a browser, with no account needed, and a save
+or a log can be attached privately. If this page has a comment section, that
+works too. Still on game version 1.0.7? A frozen build for it is there too.
+https://catt144.github.io/SMR-CommunityMods/
 
-SEVEN MACHINES THAT WORKED IN SILENCE
+Also on the Steam Workshop:
+https://steamcommunity.com/sharedfiles/filedetails/?id=3787202810
+
+FEATURED: EXPEDITION CREWS COME HOME
+
+Colonists living in habitats can join expeditions again, and they come back to
+the habitat they left. If their habitat is too far from the landing site to
+walk, they are set down at its door, the same way the rocket picked them up. If
+the habitat is gone or unusable, they go to the nearest dome that is working and
+has air.
+
+One gotcha. If every dome is switched off and only habitats are alive, and those
+habitats refuse the colonist through their filters, the colonist still walks to
+the nearest dome and dies there. That is the game's own safety system choosing
+where a homeless colonist goes, and this mod does not override it. Changing it
+would mean rewriting how the game houses colonists, which is not what a bug-fix
+mod should do.
+
+FEATURED: SEVEN MACHINES THAT WORKED IN SILENCE
 
 The Rare Metals Extractor's hammer, the MOXIE, the Water Extractor, Shuttle Hub
 shuttles, the RC Driller, the RC Dozer and The Excavator all had sounds or
@@ -227,18 +232,6 @@ HOW IT WORKS
   marked as such on the fix list, with the reasoning, rather than folded in
   quietly.
 
-
-BUGS, QUESTIONS AND MODDING
-
-Found a bug, or one this pack did not fix? Want the details behind a fix, or to
-know how the pack gets along with your own mod? It is all on the pack's site.
-Bugs can be reported there from a browser, with no account needed, and a save
-or a log can be attached privately. If this page has a comment section, that
-works too. Still on game version 1.0.7? A frozen build for it is there too.
-https://catt144.github.io/SMR-CommunityMods/
-
-Also on the Steam Workshop:
-https://steamcommunity.com/sharedfiles/filedetails/?id=3787202810
 ```
 
 ## ═══ STEAM WORKSHOP — BBCode; fall back to the plain block if tags render literally ═══
@@ -255,11 +248,6 @@ Some of them you could hardly miss: an entire train line and every train on it d
 More of them you would never have blamed on a bug, because the game looked perfectly normal while the arithmetic underneath it was wrong — a reward for freeing the wisps that paid about a thousandth of what its own message promised, a researched breakthrough the game restored to only one of the three wind turbine types it covers, a track refund that paid a stub's worth of Metals however long the line was, a train travel-time figure that counted the platform wait twice.
 
 And [b]two[/b] of them repair things you cannot see at all today: real defects that the shipped numbers happen to hide, which another mod, a game patch or a DLC could walk straight into.
-
-[h2]Featured: expedition crews come home[/h2]
-Colonists living in habitats can join expeditions again, and they come back to the habitat they left. If their habitat is too far from the landing site to walk, they are set down at its door, the same way the rocket picked them up. If the habitat is gone or unusable, they go to the nearest dome that is working and has air.
-
-[b]One gotcha.[/b] If every dome is switched off and only habitats are alive, and those habitats refuse the colonist through their filters, the colonist still walks to the nearest dome and dies there. That is the game's own safety system choosing where a homeless colonist goes, and this mod does not override it. Changing it would mean rewriting how the game houses colonists, which is not what a bug-fix mod should do.
 
 [h2]Some of what it fixes[/h2]
 [list]
@@ -279,10 +267,16 @@ Colonists living in habitats can join expeditions again, and they come back to t
 [*]The Philosopher's Stone mystery hung one step from the end.
 [/list]
 
-[b]The full list[/b] — every fix, what you would have seen, and what was actually wrong:
-[url=https://catt144.github.io/SMR-CommunityMods/fix-list/]the complete fix list[/url]
+[h2]Bugs, questions and modding[/h2]
+Found a bug, or one this pack did not fix? Want the details behind a fix, or to know how the pack gets along with your own mod? It is all on [url=https://catt144.github.io/SMR-CommunityMods/]the pack's site[/url]. Bugs can be reported there from a browser, with no account needed, and a save or a log can be attached privately. The comments below work as well. Still on game version 1.0.7? A frozen build for it is there too.
+[url=https://mods.paradoxplaza.com/mods/156049/Any]Also on Paradox Mods[/url]
 
-[h2]Seven machines that worked in silence[/h2]
+[h2]Featured: expedition crews come home[/h2]
+Colonists living in habitats can join expeditions again, and they come back to the habitat they left. If their habitat is too far from the landing site to walk, they are set down at its door, the same way the rocket picked them up. If the habitat is gone or unusable, they go to the nearest dome that is working and has air.
+
+[b]One gotcha.[/b] If every dome is switched off and only habitats are alive, and those habitats refuse the colonist through their filters, the colonist still walks to the nearest dome and dies there. That is the game's own safety system choosing where a homeless colonist goes, and this mod does not override it. Changing it would mean rewriting how the game houses colonists, which is not what a bug-fix mod should do.
+
+[h2]Featured: seven machines that worked in silence[/h2]
 The Rare Metals Extractor's hammer, the MOXIE, the Water Extractor, Shuttle Hub shuttles, the RC Driller, the RC Dozer and The Excavator all had sounds or effects made for them that never played. They play now.
 
 Two of them also have a skin that is [b]silent by design[/b], so if one of these stays quiet, check its skin before you blame the fix:
@@ -299,10 +293,6 @@ Select the building and press [b]Change Skin[/b] (the paintbrush on its panel) t
 [*][b]It stands down instead of guessing.[/b] Every fix checks the game's code before it touches anything, and switches itself off if what it was written for has been renamed, removed or reshaped. Every game patch is read against the pack as well, and the fixes it changed are updated or retired.
 [*]A few fixes are judgment calls rather than plain repairs. Those are marked on the fix list, with the reasoning.
 [/list]
-
-[h2]Bugs, questions and modding[/h2]
-Found a bug, or one this pack did not fix? Want the details behind a fix, or to know how the pack gets along with your own mod? It is all on [url=https://catt144.github.io/SMR-CommunityMods/]the pack's site[/url]. Bugs can be reported there from a browser, with no account needed, and a save or a log can be attached privately. The comments below work as well. Still on game version 1.0.7? A frozen build for it is there too.
-[url=https://mods.paradoxplaza.com/mods/156049/Any]Also on Paradox Mods[/url]
 ```
 
 ## ⭐ 2026-08-24 — one headliner added, and why it qualifies
@@ -748,7 +738,10 @@ site's front page. Applied to all
 four copies — `metadata.lua` (the shipped, portal-neutral string), both §3 paste backups in
 `docs/UPLOAD_WORKFLOW.md`, and both blocks above. The shipped string still equals the workflow's
 Paradox block byte for byte, and the two BBCode blocks are still identical. The STILL PLAYING ON GAME VERSION 1.0.7? section is folded into that paragraph as one sentence
-(owner, same day), so the card now ends on it. Shipped body: **5,155**
+(owner, same day). The owner then re-ordered the Paradox block by hand, mirrored into every
+copy: SOME OF WHAT IT FIXES, BUGS QUESTIONS AND MODDING, the two FEATURED sections (the silent
+machines now titled FEATURED too), HOW IT WORKS last; the fix-list URL is gone, since the site
+link reaches it; sections sit one blank line apart. Shipped body: **5,015**
 chars decoded, down from the v14 body.
 
 **Why the routes changed:** the site gained *Report a problem* (`SMR-CommunityMods` commit
