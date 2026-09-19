@@ -11008,3 +11008,15 @@ dropped, so v11 and v12 walked past it. Committed on the owner's word after the 
 snippet were rechecked against `Code/`. Owner said "uploaded"; Steam body and changelog read back
 v13; writeback `version` 16 → 17, `pdx_version` "11" → "12", comments restored. Site NOT published at
 close; Paradox page version not stated.
+
+
+## 2026-09-19 — v14 release (`release_prompt.md`), executed on Claude Sonnet 5
+
+Words `f7f6ffc`, site `92c853f` (SMR-CommunityMods), close-out in the commit carrying this line.
+
+C108 (Wildfire cure) shipped; count Fifty-four → Fifty-five, headliners and judgment calls unchanged.
+README front-page counts set to the emitted 52 modules / 53 files / 203 findings. Owner said
+"uploaded"; Steam body and changelog read back v14; writeback `version` 17 → 19 (two bumps, kept),
+`pdx_version` "12" → "13", comments restored from `f7f6ffc`. The owner edited the change note in the
+Mod Editor box (the "not watched yet" sentence is gone); kept as shipped. Site run #14 published
+with the Wildfire row live. Paradox page version not stated, body not read back.

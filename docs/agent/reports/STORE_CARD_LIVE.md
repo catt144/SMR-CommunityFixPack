@@ -775,3 +775,18 @@ consequences (crashes, freezes, deaths, permanent losses), not a representative
 sample. The *"and a good deal more"* line used to carry that caveat; v12 cut it on
 the owner's ruling, so the heading word *"some"* and the fix-list link are now the
 only things keeping the card from implying the list is exhaustive.
+
+## ⭐ 2026-09-19 — v14 LIVE: read back from Steam, not inferred from the tree
+
+Owner's word was *"uploaded"*. Read from the storefront on 2026-09-19: page `3787202810`, 107,716
+bytes fetched. **Count word live: "Fifty-five repairs"** — 1 hit, **0** for "Fifty-four". Change note
+posted as the newest entry, *"Update: Sep 19 @ 7:35am"*, carrying the Wildfire text and "fifty-four to
+fifty-five". It does **not** carry the drafted sentence "It loads cleanly in a running game; the cure
+itself has not been watched yet." — the owner removed it in the Mod Editor box (third time after v11/v12).
+
+**Tree writeback:** `version` 17 → **19** (two bumps this time), `pdx_version` "12" → **"13"**,
+`code_hash` and `saved` rewritten; comments restored from `f7f6ffc`.
+
+**Site published:** run #14 (`92c853f`) completed with success; the deployed fix list serves the
+Wildfire row. ⚠️ **NOT verified, and not claimed:** the Paradox page version was not stated and the
+Paradox body was not read back.

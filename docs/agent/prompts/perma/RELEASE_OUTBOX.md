@@ -21,27 +21,7 @@ player surface bumps it by one on release.
 
 ## Pending — goes out with the next upload
 
-### Pending — C108 Infected colonists visit a medical building once the Wildfire cure is found (2026-09-18)
-
-**No hold: the boot is done.** Desk harness `tools/desk_c108_wildfire_cure.py` (20 of 20 demands,
-7 falsifying variants; the unfixed pack fails the cure demand). The owner's boot on 2026-09-18
-(`Mars.exe-20260918-23.44.18-6a91a190.log` :144) logged `WildfireCureVisit: applied`, and logscan
-read 52 of 52 modules applied with no error-shaped line (C108 "In game"). The cure itself has not
-been watched in game; the owner skipped that check for now (2026-09-18).
-Source of the report: r/SurvivingMars, 2026-09-18.
-
-C108 is a new public row:
-
-> Once the Wildfire cure is found, infected colonists now go to a medical building and are cured.
-> Colonists whose dome's medical care kept them healthy never went, so the mystery could not finish.
-
-Developer detail: 1.1.0 pays each serviced category's stats at home on rest
-(`ApplyResidenceAdditiveStats`), medical included, so under a Medical Center an infected colonist
-never drops below the 70 Health that sends them to `MedicalBuilding:Service`, the only place the
-cure runs. The pack wraps `PickInterest` so that an infected colonist's daily interest is
-`needMedical` while vaccination is on. This needs no DLC.
-
 ## Last released
 
-**v13** (2026-09-18). Its entry and every earlier release are in
+**v14** (2026-09-19). Its entry and every earlier release are in
 `docs/archive/RELEASE_HISTORY.md`, oldest first.

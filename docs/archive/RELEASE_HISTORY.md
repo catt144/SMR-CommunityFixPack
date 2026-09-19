@@ -362,3 +362,44 @@ public site or upload changed in this job.
 pattern as v11 (page v13, tree 14), consistent with `VersionDisplayName` being sent before the
 forced save bumps `version`. This settles the "Paradox page version was not stated" line above; the
 site line stands.
+
+### Released in v14 (2026-09-19) — C108 landed
+
+- **Card:** count word **Fifty-four → Fifty-five** (site `^??? ` rows = 55, section tally
+  4+9+2+7+7+16+2+6+2 sums); headliners unchanged at 14; judgment calls unchanged at four. Words
+  commit `f7f6ffc`, site commit `92c853f` (the Wildfire row, top of *Story & mysteries*).
+- **Shipped `last_changes` is the owner's box text, not the tree draft:** the sentence "It loads
+  cleanly in a running game; the cure itself has not been watched yet." was removed in the Mod Editor
+  box (present at `f7f6ffc`, absent from the writeback and from Steam's note). Kept as shipped, as at
+  v9, v11 and v12. The public note therefore carries no "not watched" disclosure; the fix list row
+  does not claim an in-game cure either.
+- **Cleared on the owner's word ("uploaded", 2026-09-19) plus evidence:** writeback `version`
+  17 → **19** (two bumps, not the one of v13; kept as written, never normalised), `pdx_version`
+  "12" → **"13"**, `code_hash` and `saved` rewritten; comments stripped from both files (0 left) and
+  restored from `f7f6ffc` with every written-back value kept. Steam read back 2026-09-19: body says
+  "Fifty-five repairs" (1 hit, 0 for Fifty-four), newest change note *"Update: Sep 19 @ 7:35am"*
+  carries the v14 text.
+- ⛔ **Not verified at close, and not claimed:** the Paradox page version was not stated and its body
+  was not read back. Site: `Publish docs site` run #14 (`92c853f`) completed with success, and the
+  deployed fix list serves the Wildfire row (1 hit for its title, read 2026-09-19).
+
+### Pending — C108 Infected colonists visit a medical building once the Wildfire cure is found (2026-09-18)
+
+**No hold: the boot is done.** Desk harness `tools/desk_c108_wildfire_cure.py` (20 of 20 demands,
+7 falsifying variants; the unfixed pack fails the cure demand). The owner's boot on 2026-09-18
+(`Mars.exe-20260918-23.44.18-6a91a190.log` :144) logged `WildfireCureVisit: applied`, and logscan
+read 52 of 52 modules applied with no error-shaped line (C108 "In game"). The cure itself has not
+been watched in game; the owner skipped that check for now (2026-09-18).
+Source of the report: r/SurvivingMars, 2026-09-18.
+
+C108 is a new public row:
+
+> Once the Wildfire cure is found, infected colonists now go to a medical building and are cured.
+> Colonists whose dome's medical care kept them healthy never went, so the mystery could not finish.
+
+Developer detail: 1.1.0 pays each serviced category's stats at home on rest
+(`ApplyResidenceAdditiveStats`), medical included, so under a Medical Center an infected colonist
+never drops below the 70 Health that sends them to `MedicalBuilding:Service`, the only place the
+cure runs. The pack wraps `PickInterest` so that an infected colonist's daily interest is
+`needMedical` while vaccination is on. This needs no DLC.
+

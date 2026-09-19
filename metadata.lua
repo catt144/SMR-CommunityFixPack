@@ -291,7 +291,12 @@ return PlaceObj('ModDef', {
 	-- (owner, 2026-09-18) but nobody has watched an infected colonist visit a medical building,
 	-- and the owner skipped that check, so the note says so plainly rather than "checked in a
 	-- running game". Count re-derived: `grep -c '^??? ' content/fix-list.md` = 55.
-	'last_changes', "One repair added.\n\n-Wildfire cure — NEW. It loads cleanly in a running game; the cure itself has not been watched yet.\nThe problem: once the Wildfire cure was found, infected colonists never went to a medical building for it, so the mystery could not finish. The 1.1.0 game pays a dome's medical care to its colonists at home, so under a Medical Center they never fell ill enough to be sent.\nThe fix: once the cure is found, an infected colonist's daily outing is a visit to a medical building, where they are cured.\n\nThe fix list goes from fifty-four to fifty-five.",
+	-- ⭐ SHIPPED TEXT IS THE OWNER'S BOX TEXT (v14), not the tree draft — as at v9, v11 and v12. The sentence
+	-- "It loads cleanly in a running game; the cure itself has not been watched yet." is present at
+	-- `f7f6ffc` and absent from the v14 writeback (Steam's Sep 19 @ 7:35am note reads without it), so it
+	-- was edited in the Mod Editor box at the upload sitting. Kept as shipped: this file records what
+	-- posted, never what was drafted. Drafted text: `git show f7f6ffc:metadata.lua`.
+	'last_changes', "One repair added.\n\n-Wildfire cure — NEW.\nThe problem: once the Wildfire cure was found, infected colonists never went to a medical building for it, so the mystery could not finish. The 1.1.0 game pays a dome's medical care to its colonists at home, so under a Medical Center they never fell ill enough to be sent.\nThe fix: once the cure is found, an infected colonist's daily outing is a visit to a medical building, where they are cured.\n\nThe fix list goes from fifty-four to fifty-five.",
 	-- the packer includes EVERYTHING recursively minus this list (Mod.lua:250-256,
 	-- GedModEditor.lua:716-732) — without the extra patterns docs/, README.md,
 	-- .gitignore and .claude/ all ship inside the .hpk. LICENSE ships on purpose.
@@ -389,7 +394,7 @@ return PlaceObj('ModDef', {
 	-- the forced save and restored in the close-out, before any other commit. The shipped
 	-- `last_changes` is the owner's box text as uploaded; it differs from the tree's draft and is kept.
 	'version_major', 1,
-	'version', 17,
+	'version', 19,
 	'lua_revision', 350453,
 	'saved_with_revision', 403908,
 	-- saves made with the pack load fine without it (FIX_POLICY §3), so don't
@@ -483,8 +488,8 @@ return PlaceObj('ModDef', {
 	-- after a sitting is the EXPECTED state, not a mistake by whoever worked last.
 	-- ⚠️ `saved_with_revision` now sits further up, beside `lua_revision`, because
 	-- `SaveDef` writes the fields in its own order; it is the same editor bookkeeping.
-	'saved', 1789778097,
-	'code_hash', -9130252745530578025,
+	'saved', 1789828496,
+	'code_hash', 4714832864413695284,
 	-- ⭐ ADDED 2026-09-10 (owner: the card should point players at pictures of the two
 	-- skins) — the store GALLERY. Both uploaders read screenshot1..5: the Mod Editor copies
 	-- each to TmpData/ModUpload/Screenshots as `ModScreenshot_<name>` (GedModEditor.lua:
@@ -500,7 +505,7 @@ return PlaceObj('ModDef', {
 	'screenshot2', "Mod/SMR_CommunityFixPack/store_screenshots/2_rare_metals_hammer_skin.jpg",
 	'screenshot3', "Mod/SMR_CommunityFixPack/store_screenshots/3_moxie_skins.jpg",
 	'pdx_id', 156049,
-	'pdx_version', "12",
+	'pdx_version', "13",
 	'steam_id', "3787202810",
 	'TagGameplay', true,
 })
