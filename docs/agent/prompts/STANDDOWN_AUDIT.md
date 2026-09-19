@@ -84,7 +84,7 @@ that actually delivers "we stand down cleanly", and it works in installs we neve
 
 The desk class-c detector is settled and out of scope: it is `GAME_PATCH_INSTRUMENTS.md`'s
 D1 (hash everything a module names, one hop out; 10/10 FIX on the 1.1.0 backtest), built
-by `GAME_PATCH_BUILD_high.md`. Use its one-hop limits (that report's §4) to rank exposure:
+by `tools/patchcheck.py`. Use its one-hop limits (that report's §4) to rank exposure:
 a module whose class-c case lies outside what it names is where a runtime decline matters most.
 
 ## 4 · Per-module disposition — the deliverable
