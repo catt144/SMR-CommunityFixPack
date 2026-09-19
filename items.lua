@@ -257,6 +257,12 @@ return {
 		'name', "Fix_DryFarmingFarms",
 		'CodeFileName', "Code/Fix_DryFarmingFarms.lua",
 	}),
+	-- Added 2026-09-18 (C108, post-release maintenance — reddit field report), same
+	-- rule as above: hand-written, in metadata.lua's `code` position.
+	PlaceObj('ModItemCode', {
+		'name', "Fix_WildfireCureVisit",
+		'CodeFileName', "Code/Fix_WildfireCureVisit.lua",
+	}),
 	PlaceObj('ModItemCode', {
 		'name', "90_SaveSanitizer",
 		'CodeFileName', "Code/90_SaveSanitizer.lua",
