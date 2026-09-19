@@ -234,18 +234,11 @@ Found a bug, or one this pack did not fix? Want the details behind a fix, or to
 know how the pack gets along with your own mod? It is all on the pack's site.
 Bugs can be reported there from a browser, with no account needed, and a save
 or a log can be attached privately. If this page has a comment section, that
-works too.
+works too. Still on game version 1.0.7? A frozen build for it is there too.
 https://catt144.github.io/SMR-CommunityMods/
 
 Also on the Steam Workshop:
 https://steamcommunity.com/sharedfiles/filedetails/?id=3787202810
-
-
-STILL PLAYING ON GAME VERSION 1.0.7?
-
-This pack tracks the current version of the game. If you stayed on 1.0.7, there
-is a separate frozen build for it, with instructions:
-https://catt144.github.io/SMR-CommunityMods/legacy-1-0-7/
 ```
 
 ## ═══ STEAM WORKSHOP — BBCode; fall back to the plain block if tags render literally ═══
@@ -308,11 +301,8 @@ Select the building and press [b]Change Skin[/b] (the paintbrush on its panel) t
 [/list]
 
 [h2]Bugs, questions and modding[/h2]
-Found a bug, or one this pack did not fix? Want the details behind a fix, or to know how the pack gets along with your own mod? It is all on [url=https://catt144.github.io/SMR-CommunityMods/]the pack's site[/url]. Bugs can be reported there from a browser, with no account needed, and a save or a log can be attached privately. The comments below work as well.
+Found a bug, or one this pack did not fix? Want the details behind a fix, or to know how the pack gets along with your own mod? It is all on [url=https://catt144.github.io/SMR-CommunityMods/]the pack's site[/url]. Bugs can be reported there from a browser, with no account needed, and a save or a log can be attached privately. The comments below work as well. Still on game version 1.0.7? A frozen build for it is there too.
 [url=https://mods.paradoxplaza.com/mods/156049/Any]Also on Paradox Mods[/url]
-
-[h2]Still playing on game version 1.0.7?[/h2]
-This pack tracks the current version of the game. If you stayed on 1.0.7, there is a separate frozen build for it, with instructions: [url=https://catt144.github.io/SMR-CommunityMods/legacy-1-0-7/]Playing on 1.0.7[/url]
 ```
 
 ## ⭐ 2026-08-24 — one headliner added, and why it qualifies
@@ -757,7 +747,8 @@ compatibility."* The section is now BUGS, QUESTIONS AND MODDING, one paragraph, 
 site's front page. Applied to all
 four copies — `metadata.lua` (the shipped, portal-neutral string), both §3 paste backups in
 `docs/UPLOAD_WORKFLOW.md`, and both blocks above. The shipped string still equals the workflow's
-Paradox block byte for byte, and the two BBCode blocks are still identical. Shipped body: **5,322**
+Paradox block byte for byte, and the two BBCode blocks are still identical. The STILL PLAYING ON GAME VERSION 1.0.7? section is folded into that paragraph as one sentence
+(owner, same day), so the card now ends on it. Shipped body: **5,155**
 chars decoded, down from the v14 body.
 
 **Why the routes changed:** the site gained *Report a problem* (`SMR-CommunityMods` commit
