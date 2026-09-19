@@ -277,8 +277,8 @@ The fill gives you plain text — correct, but no headings or bold, and **the fo
 never survives an upload** (owner, 2026-09-12). So this pass runs every time, on
 **both** stores. **Steam:** paste the BBCode block above. **Paradox:** run
 `python tools/paradox_card.py`, then Ctrl+A and Ctrl+C in the browser page it opens,
-and paste over the description. The headings, bold and list come across with the
-paste, so there is nothing to apply by hand.
+and paste over the description. The top heading, the bold section titles and the
+line breaks come across with the paste, so there is nothing to apply by hand.
 
 ⚠️ Cosmetic, and the owner calls it minor — the auto-fill gives the page something
 until the cleanup lands. Skip it whenever you like; the page is still correct without
