@@ -27,8 +27,7 @@ player surface bumps it by one on release.
 7 falsifying variants; the unfixed pack fails the cure demand). The owner's boot on 2026-09-18
 (`Mars.exe-20260918-23.44.18-6a91a190.log` :144) logged `WildfireCureVisit: applied`, and logscan
 read 52 of 52 modules applied with no error-shaped line (C108 "In game"). The cure itself has not
-been watched in game; that attended check needs a Wildfire save at the cure stage and is the
-owner's call.
+been watched in game; the owner skipped that check for now (2026-09-18).
 Source of the report: r/SurvivingMars, 2026-09-18.
 
 C108 is a new public row:
