@@ -20,18 +20,13 @@ NVIDIA 580, the temporary workaround mod) is not on this handoff: see
 
 ## 0 · Start here
 
-### The v12 release is closed
+### Releases
 
-2026-09-17: v12 is live on both stores and closed out. The writeback is kept (`version` 16,
-`pdx_version` "11"), the stripped comments are restored in `metadata.lua` and `items.lua`, Pending is
-empty and `Last released` reads v12. ✅ The trap-3 writeback hold that stood here earlier is
-**discharged** — both files are committed and restored; nothing is held back.
-[release_prompt.md](release_prompt.md) owns a release end to end and has nothing owed from it here.
-
-⛔ **The site is NOT published**, which is the one thing v12 still needs. The newest
-`publish-site.yml` run is #11 (2026-09-16, `74a336e`, v11's fix list), so the live store card reads
-"Fifty-three repairs" while the deployed fix list still shows 52 rows and still marks the habitat row
-a judgment call. Publishing is the owner's act, not an agent's: `docs/UPLOAD_WORKFLOW.md` §4.
+[release_prompt.md](release_prompt.md) owns a release end to end, and this file holds nothing for it.
+Where one stands is in [RELEASE_OUTBOX.md](RELEASE_OUTBOX.md) (`Last released`, `Pending`); another
+session may be mid-release, so never commit `metadata.lua` or `items.lua` you did not change. Whether
+the site is published is a volatile external value: read the `publish-site.yml` runs before claiming
+it. Publishing is the owner's act (`docs/UPLOAD_WORKFLOW.md` §4).
 
 The owner reads nothing back from the log: they paste a line and say "flushed", and you read
 `%APPDATA%\Surviving Mars Relaunched\logs\Mars.exe-*.log` (newest) yourself. Saves are reachable at
