@@ -389,7 +389,7 @@ return PlaceObj('ModDef', {
 	-- the forced save and restored in the close-out, before any other commit. The shipped
 	-- `last_changes` is the owner's box text as uploaded; it differs from the tree's draft and is kept.
 	'version_major', 1,
-	'version', 16,
+	'version', 17,
 	'lua_revision', 350453,
 	'saved_with_revision', 403908,
 	-- saves made with the pack load fine without it (FIX_POLICY §3), so don't
@@ -482,8 +482,8 @@ return PlaceObj('ModDef', {
 	-- after a sitting is the EXPECTED state, not a mistake by whoever worked last.
 	-- ⚠️ `saved_with_revision` now sits further up, beside `lua_revision`, because
 	-- `SaveDef` writes the fields in its own order; it is the same editor bookkeeping.
-	'saved', 1789669587,
-	'code_hash', 6544064762724264816,
+	'saved', 1789778097,
+	'code_hash', -9130252745530578025,
 	-- ⭐ ADDED 2026-09-10 (owner: the card should point players at pictures of the two
 	-- skins) — the store GALLERY. Both uploaders read screenshot1..5: the Mod Editor copies
 	-- each to TmpData/ModUpload/Screenshots as `ModScreenshot_<name>` (GedModEditor.lua:
@@ -499,7 +499,7 @@ return PlaceObj('ModDef', {
 	'screenshot2', "Mod/SMR_CommunityFixPack/store_screenshots/2_rare_metals_hammer_skin.jpg",
 	'screenshot3', "Mod/SMR_CommunityFixPack/store_screenshots/3_moxie_skins.jpg",
 	'pdx_id', 156049,
-	'pdx_version', "11",
+	'pdx_version', "12",
 	'steam_id', "3787202810",
 	'TagGameplay', true,
 })

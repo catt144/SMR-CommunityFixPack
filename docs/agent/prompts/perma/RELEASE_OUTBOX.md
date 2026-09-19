@@ -21,28 +21,7 @@ player surface bumps it by one on release.
 
 ## Pending — goes out with the next upload
 
-### Pending — C107 Dry Farming reaches the Feeding the Future plant farms (2026-09-18)
-
-**No hold: C107's in-game legs are done.** Desk harness `tools/desk_c107_dry_farming.py` (23
-checks, 10 falsifying variants). The first build went `error` on the owner's first boot
-(2026-09-18) and was corrected. The correction then passed in game: clean boot, and the kit probe
-PASS on new research, across a save/reload, and after the load heal on a save that researched Dry
-Farming before the fix (C107 "In game").
-Source of the report: a Steam comment, 2026-09-18.
-
-C107 is a new public row:
-
-> The Dry Farming breakthrough now halves crop water on the Feeding the Future farms too:
-> Small Farm, Underground Farm, Small Underground Farm and Automated Farm. Fungal and
-> Insect Farms stay excluded, as the base game excludes Fungal Farms.
-
-Developer detail: `Techs.DryFarming` pays three class labels (`Data/Tech.lua:787-801`); a
-building joins only its own class label, so the norman farm templates were never reached.
-Four `Effect_ModifyLabel` entries are appended at data load, copying the shipped percent,
-and saves that researched the tech earlier are healed once on load. No version, store page,
-public site or upload changed in this job.
-
 ## Last released
 
-**v12** (2026-09-17). Its entry and every earlier release are in
+**v13** (2026-09-18). Its entry and every earlier release are in
 `docs/archive/RELEASE_HISTORY.md`, oldest first.

@@ -733,6 +733,21 @@ Headliners stay at the owner's 14; C107 is a P3 water figure, not a loud consequ
 calls stay at four: C107's Fungal/Insect exclusion follows the base game's own curation and is
 written as a "Worth knowing" note, not as a judgment call.
 
+## ⭐ 2026-09-18 (evening) — v13 LIVE: read back from Steam, not inferred from the tree
+
+Owner's word was *"uploaded"*. Read from the storefront on 2026-09-18: page `3787202810`, 111,558
+bytes fetched. **Count word live: "Fifty-four repairs"** — 1 hit, **0** for "Fifty-three". Change
+note posted as the newest entry, *"Update: Sep 18 @ 5:35pm"*, carrying "Dry Farming on the Feeding
+the Future farms", "checked in a running game" and "fifty-three to fifty-four" — the tree draft,
+unedited this time.
+
+**Tree writeback:** `version` 16 → **17**, `pdx_version` "11" → **"12"**, `code_hash` and `saved`
+rewritten; comments restored from `94c19d3`.
+
+⚠️ **NOT verified, and not claimed:** the Paradox page version was not stated and its body was not
+read back. **The site is NOT published** — newest `Publish docs site` run is #12 (`c5ac193`, v12's
+fix list), so the live card says Fifty-four while the deployed fix list shows 53 rows.
+
 ## Provenance of the headliners
 
 ⛔ **Not invented for the card.** Every bullet is a compressed form of an entry

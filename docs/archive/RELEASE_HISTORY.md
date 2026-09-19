@@ -317,3 +317,41 @@ destination anywhere still preserves the game's assignment. ⚖️ **RULED 2026-
 with no safe dome anywhere the game's own choice is kept. Update C95's
 old exclusion/judgment-call wording wherever the release prompt finds it. No version, store page,
 public site or upload changed in this job.
+
+### Released in v13 (2026-09-18) — C107 landed
+
+- **Card:** count word **Fifty-three → Fifty-four** (site `^??? ` rows = 54, section tally
+  2+16+4+7+9+6+6+2+2 sums); headliners unchanged at 14; judgment calls unchanged at four. Words
+  commit `ad3614b`, site commits `f3661e2` (fix-list row) and `b45b873` (the owner's 09-12 item-53
+  modder-page paring, stranded uncommitted for six days and committed on the owner's word).
+- **Shipped `last_changes` is the tree draft**, unedited in the Mod Editor box this time.
+- **Cleared on the owner's word ("uploaded", 2026-09-18) plus evidence:** writeback `version`
+  16 → **17** (one save), `pdx_version` "11" → **"12"**, `code_hash` and `saved` rewritten; comments
+  stripped from both files and restored from `94c19d3` with every written-back value kept. Steam
+  read back 2026-09-18: body says "Fifty-four repairs" (0 hits for Fifty-three), newest change note
+  *"Update: Sep 18 @ 5:35pm"* carries the v13 text.
+- ⛔ **Not verified at close, and not claimed:** the Paradox page version was not stated, and the
+  site is **NOT published** — the newest `Publish docs site` run is #12 (2026-09-17, `c5ac193`, v12's
+  fix list), so the deployed fix list has 53 rows and the modder page still shows the old veto
+  snippet.
+
+### Pending — C107 Dry Farming reaches the Feeding the Future plant farms (2026-09-18)
+
+**No hold: C107's in-game legs are done.** Desk harness `tools/desk_c107_dry_farming.py` (23
+checks, 10 falsifying variants). The first build went `error` on the owner's first boot
+(2026-09-18) and was corrected. The correction then passed in game: clean boot, and the kit probe
+PASS on new research, across a save/reload, and after the load heal on a save that researched Dry
+Farming before the fix (C107 "In game").
+Source of the report: a Steam comment, 2026-09-18.
+
+C107 is a new public row:
+
+> The Dry Farming breakthrough now halves crop water on the Feeding the Future farms too:
+> Small Farm, Underground Farm, Small Underground Farm and Automated Farm. Fungal and
+> Insect Farms stay excluded, as the base game excludes Fungal Farms.
+
+Developer detail: `Techs.DryFarming` pays three class labels (`Data/Tech.lua:787-801`); a
+building joins only its own class label, so the norman farm templates were never reached.
+Four `Effect_ModifyLabel` entries are appended at data load, copying the shipped percent,
+and saves that researched the tech earlier are healed once on load. No version, store page,
+public site or upload changed in this job.

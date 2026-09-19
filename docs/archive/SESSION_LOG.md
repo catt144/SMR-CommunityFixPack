@@ -10993,3 +10993,18 @@ owed — it is settled local-only (`.claude/DECISIONS.md`, ck204); `ck86` was ca
 archived inside `## ck83` (items 83–86); the "Tool Kit ? Selected" title was called a missing font
 glyph — it is a literal `?` in source; `GainTechPoint` was called a free point unlike the console
 recipe — both advance the tech-point cost curve identically (`TechTree.lua:659-664, 720-724`).
+
+
+## 2026-09-18 — v13 release (`release_prompt.md`), executed on Claude Opus 5 (1M context)
+
+Words `ad3614b`, STATE marker `94c19d3`, site `f3661e2` + `b45b873` (SMR-CommunityMods), close-out in
+the commit carrying this line.
+
+C107 shipped; count Fifty-three → Fifty-four, headliners and judgment calls unchanged. README's front
+page counts were stale (46 modules / 222 findings) and set to the emitted 51 / 202. Found in the site
+tree: `for-modders.md` and `install.md` uncommitted since 2026-09-12 — the owner's item-53 paring,
+staged "for the owner to review" (`bef5e81`), whose only record (`5c21f36`) the 09-15/16 purges
+dropped, so v11 and v12 walked past it. Committed on the owner's word after the id rule and veto
+snippet were rechecked against `Code/`. Owner said "uploaded"; Steam body and changelog read back
+v13; writeback `version` 16 → 17, `pdx_version` "11" → "12", comments restored. Site NOT published at
+close; Paradox page version not stated.
