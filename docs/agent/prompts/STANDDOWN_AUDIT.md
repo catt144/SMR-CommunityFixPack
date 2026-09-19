@@ -78,14 +78,14 @@ Also established, and cheap to re-check:
 **Which modules can a vendor fix land under without any instrument we own noticing —
 and what would it take for each to stand itself down?**
 
-Two distinct products, and a module may need either, both or neither:
+The product is **a runtime decline for the player**: a behaviour probe that lets the
+module refuse to install when the defect is gone, per `FIX_POLICY` §2a. This is the part
+that actually delivers "we stand down cleanly", and it works in installs we never see.
 
-1. **A class-c detector for us** — something that turns a vendor repair into a signal
-   at the desk, after a patch, without a launch if possible.
-2. **A runtime decline for the player** — a behaviour probe that lets the module
-   refuse to install when the defect is gone, per `FIX_POLICY` §2a. This is the part
-   that actually delivers "we stand down cleanly", and it works in installs we never
-   see.
+The desk class-c detector is settled and out of scope: it is `GAME_PATCH_INSTRUMENTS.md`'s
+D1 (hash everything a module names, one hop out; 10/10 FIX on the 1.1.0 backtest), built
+by `GAME_PATCH_BUILD_high.md`. Use its one-hop limits (that report's §4) to rank exposure:
+a module whose class-c case lies outside what it names is where a runtime decline matters most.
 
 ## 4 · Per-module disposition — the deliverable
 
@@ -114,8 +114,8 @@ matter**, not that all 21 were visited.
 
 - The TestKit already carries a broad probe set. Emit its current total and
   inventory the relevant probes before proposing new ones.
-- A probe that serves both §3 products at once is worth more than two that serve one
-  each.
+- A decline probe the post-patch suite A/B can also read (the report's G3) is worth more
+  than one that serves the player alone.
 - If the honest finding is *"the desk instruments are sufficient and the runtime
   decline is the only real gap"* — or the reverse — say that; it changes what gets
   built next.
