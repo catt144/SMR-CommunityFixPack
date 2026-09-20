@@ -196,6 +196,16 @@ desk-only; the reasoning is in each leaf's comment block). **Record each as witn
 - `close_domes` returns the law deactivated and every parameter reduced by 10 points.
 - `fill_storages` on a colony with a rocket returns `filled`, `skipped_rockets` of at least 1 and
   `failed`, and does not abort.
+- **Group actions on a box-drag selection** (added 2026-09-20 on the owner's ask, kit `3abab0a`).
+  Box-drag many units of one class; the Selected page then shows a `Group: <class> x<n>` section
+  instead of the per-object leaves. Press **Group read** first: it mutates nothing and returns the
+  member count, a `by_command` tally and the battery range. Then the mutating ones, each shown only
+  when a member supports it: Delete all, Drain batteries, Recharge batteries, Malfunction all,
+  Repair all, Dust all, Clean all. Expect `failed = 0`, and `skipped` above 0 only where a member
+  genuinely lacks the call. Delete clears the selection on purpose (the wrapper asserts on a group
+  of one). ⚠️ Recharge re-commands a drone left in `NoBattery`; if a drained drone stays down after
+  it, that is the finding. Reassign, Salvage, Priority and On/Off are vanilla's own buttons on the
+  multi-select panel and were deliberately not duplicated.
 - `empty_storages` (**added 2026-09-20 on the owner's ask**, World page, beside Fill all storages)
   returns `emptied`, `skipped_rockets` and `failed = 0`, and the depots read empty. It is the fill
   leaf mirrored: same sweep, same rocket exclusion, same per-object `pcall`. ⚠️ The rocket exclusion
