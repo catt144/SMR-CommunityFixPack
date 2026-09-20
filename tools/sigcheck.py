@@ -16,6 +16,7 @@ by 5. Check the THING, not its label.
 
     python tools/sigcheck.py                    # compare against the live source
     python tools/sigcheck.py --src <path>       # point at another ModTools/Src
+    python tools/sigcheck.py --code <path>      # check another pack's Code/ instead of ours
     python tools/sigcheck.py --all              # include matches, not just problems
     python tools/sigcheck.py --coverage         # sites carrying no SRC: pin of their own
     python tools/sigcheck.py --selftest         # the falsifier
@@ -91,6 +92,17 @@ DEF_METHOD = re.compile(r"^\s*function\s+([A-Za-z_][\w.]*)\s*([:.])\s*([A-Za-z_]
 DEF_GLOBAL = re.compile(r"^\s*function\s+([A-Za-z_]\w*)\s*\(([^)]*)\)")
 # `local C = Colonist` / `local C = rawget(_G, "Colonist")`
 ALIAS = re.compile(r"^\s*local\s+([A-Za-z_]\w*)\s*=\s*(?:rawget\s*\(\s*_G\s*,\s*[\"']([\w]+)[\"']\s*\)|([A-Z][\w]*))\s*$")
+
+# `local a, b` (bare forward declaration, one or more names, no initialiser
+# required). Lua's `function a(...)` is sugar for `a = function(...)` against
+# WHATEVER `a` already is in scope -- if `a` was forward-declared local (the
+# shape Opt_MultipleSuns.lua:114 uses: `local lift_build_limit,
+# restore_build_limit` above, `function lift_build_limit(...)` below), the
+# later `function a(...)` line assigns the LOCAL, not a global, even though it
+# is textually identical to a real global replacement's `function Name(...)`.
+# Missing this made a helper that was never a game global at all read as
+# "we replace a global the shipped tree doesn't declare" -> a false ABSENT.
+LOCAL_DECL = re.compile(r"^\s*local\s+((?:[A-Za-z_]\w*\s*,\s*)*[A-Za-z_]\w*)\b")
 
 # `SMRFixPack.SetGlobal("Name", <expr>` -- the pack's only sanctioned route to a
 # global replacement (FIX_POLICY §1.4b), and invisible to DEF_GLOBAL above.
@@ -175,12 +187,16 @@ def scan_pack(code=None):
             continue
         path = os.path.join(code, fn)
         aliases = {}
+        locals_declared = set()
         with open(path, "r", encoding="utf-8", errors="replace") as fh:
             lines = fh.readlines()
         for line in lines:
             m = ALIAS.match(line)
             if m:
                 aliases[m.group(1)] = m.group(2) or m.group(3)
+            m = LOCAL_DECL.match(line)
+            if m:
+                locals_declared.update(x.strip() for x in m.group(1).split(","))
         for n, line in enumerate(lines, 1):
             m = DEF_METHOD.match(line)
             if m:
@@ -192,7 +208,7 @@ def scan_pack(code=None):
             m = DEF_GLOBAL.match(line)
             if m:
                 name, ps = m.groups()
-                if name in OURS or name.startswith("OnMsg"):
+                if name in OURS or name.startswith("OnMsg") or name in locals_declared:
                     continue
                 sites.append((fn, n, None, name, params(ps), "declaration"))
                 continue
@@ -221,6 +237,10 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--src", default=DEFAULT_SRC)
+    ap.add_argument("--code", default=CODE,
+                    help="the pack whose replacement sites to scan (default: "
+                         "this pack's own Code/); point it at another pack's "
+                         "Code/ to run the same check there")
     ap.add_argument("--all", action="store_true", help="also print OK rows")
     ap.add_argument("--coverage", action="store_true",
                     help="list replacement sites carrying no SRC: pin of their own function")
@@ -234,9 +254,12 @@ def main():
     if not os.path.isdir(a.src):
         print("source tree not found: %s" % a.src)
         return 2
+    if not os.path.isdir(a.code):
+        print("pack Code/ not found: %s" % a.code)
+        return 2
 
     shipped = scan_source(a.src)
-    sites = scan_pack()
+    sites = scan_pack(a.code)
 
     counts = {"MISMATCH": 0, "ABSENT": 0, "MULTI": 0, "UNRESOLVED": 0, "OK": 0}
     rows = []
@@ -303,7 +326,7 @@ def main():
         if note:
             print("            %s" % note)
 
-    gaps = coverage()
+    gaps = coverage(a.code)
     if a.coverage:
         print("=" * 78)
         print("MANIFEST COVERAGE -- replacement sites with no SRC: pin of their")
@@ -421,6 +444,28 @@ SELFTEST_MODULE = '''\
 	SMRFixPack.SetGlobal("GetTable", SomeTable.field, "not a function literal")
 '''
 
+# A-5 fixture: the forward-declared-local shape from
+# Opt_MultipleSuns.lua:114 (`local lift_build_limit, restore_build_limit`
+# above, plain `function lift_build_limit(...)` below). Neither name is ever a
+# game global -- `function X(...)` here is sugar for reassigning the LOCAL --
+# so neither should become a replacement site at all, false ABSENT or
+# otherwise. `DeliberatelyMissingGlobal` carries no prior `local` line, so it
+# is a real global-shaped site and must still go ABSENT against a shipped
+# tree that never declares it.
+SELFTEST_LOCALFN = '''\
+-- fixture: forward-declared locals, defined further down via `function`
+local lift_build_limit, restore_build_limit
+
+function lift_build_limit(a, b)
+end
+
+function restore_build_limit()
+end
+
+function DeliberatelyMissingGlobal(x, y)
+end
+'''
+
 # coverage fixtures: one site pinned by its own SRC:, three that are not, for
 # each of the three ways a manifest can fail to name a function.
 SELFTEST_PINNED = '''\
@@ -458,6 +503,8 @@ def selftest():
         fh.write(SELFTEST_MODULE)
     with open(os.path.join(code, "Fix_SelftestPinned.lua"), "w", encoding="utf-8") as fh:
         fh.write(SELFTEST_PINNED)
+    with open(os.path.join(code, "Fix_SelftestLocalFn.lua"), "w", encoding="utf-8") as fh:
+        fh.write(SELFTEST_LOCALFN)
 
     sites = {s[3]: s for s in scan_pack(code)}
 
@@ -526,12 +573,29 @@ def selftest():
     check("SetGlobal sites are covered by the gap check too",
           "TriggerCaveIn" in gaps and "GetTable" in gaps, repr(sorted(gaps)))
 
+    print("A-5 forward-declared local vs. a real global (Opt_MultipleSuns.lua:114's shape)")
+    # 10. `local lift_build_limit, restore_build_limit` above, plain
+    #     `function lift_build_limit(...)` below -- Lua sugar for reassigning
+    #     the LOCAL. Neither name is a game global; before the fix both were
+    #     misread as global replacement sites and reported a false ABSENT.
+    check("a forward-declared local's `function X(...)` is not a site at all",
+          "lift_build_limit" not in sites and "restore_build_limit" not in sites,
+          repr({k: v for k, v in sites.items()
+                if k in ("lift_build_limit", "restore_build_limit")}))
+    # 11. THE CONVERSE LEG. A plain `function X(...)` with no prior `local X`
+    #     is still a real global-shaped site, and a genuinely missing one
+    #     must still go ABSENT -- the fix narrows the false positive, it does
+    #     not blind the tool to an actual absence.
+    check("an undeclared name's `function X(...)` still goes ABSENT",
+          got.get("DeliberatelyMissingGlobal") == "ABSENT", repr(got))
+
     print("=" * 78)
     if fails:
         print("SELFTEST FAILED: %s" % ", ".join(fails))
         return 1
-    print("selftest: 9 leg(s) pass. This falsifies the A-4 RESOLUTION only --")
-    print("it says nothing about whether an OK row's BODY is still correct.")
+    print("selftest: 11 leg(s) pass. This falsifies the A-4 RESOLUTION and the")
+    print("A-5 forward-declared-local parse only -- it says nothing about")
+    print("whether an OK row's BODY is still correct.")
     return 0
 
 

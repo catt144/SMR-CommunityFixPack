@@ -107,21 +107,18 @@ CODE = os.path.join(REPO, "Code")
 # until we can fix the bleed of docs everywhere". The doc overhaul (the 09-14
 # checklist archival, RULES_HEADERS, and whatever follows) needs STATE to absorb
 # working state while the real remedy is built; evicting against a cap during
-# that work spends owner attention on the symptom.
-# ⛔ THIS IS TEMPORARY AND EXPIRES ON THE OWNER'S WORD — "to be removed as soon
-# as we are fully done with the doc overhaul (basically when I say we are done)".
-# ⛔ RESTORE PROCEDURE, exact: set STATE_WARN_TEMPORARY = False. That returns the
-# warn to 12 * 1024 with no other edit. Do it ONLY on the owner saying the
-# overhaul is done; no agent retires this on its own judgement.
-# The temporary state PRINTS ITSELF on every doccheck run (see the STATE + STUBS
-# line) precisely so it cannot quietly become the new normal — the 09-09 raise
-# carried a "REVISIT once the 1.1.0 fallout is closed" comment that nothing ever
-# surfaced again.
-# The HARD cap is AGAIN deliberately NOT moved — same reason as 09-09.
-STATE_WARN_TEMPORARY = True          # ⛔ owner-only switch; see the block above
-STATE_WARN_BYTES = (15 if STATE_WARN_TEMPORARY else 12) * 1024
-STATE_WARN_PERMANENT_BYTES = 12 * 1024
-STATE_MAX_BYTES = 18 * 1024
+# that work spends owner attention on the symptom. That temporary raise ran
+# until the 2026-09-20 ruling below ended it.
+#
+# 2026-09-20 owner ruling: THE TEMPORARY RAISE IS RETIRED, not just switched
+# off — final numbers are warn 2 KiB, hard 4 KiB, 60 lines. STATE.md sits
+# around 730 B today, well inside the new warn. The STATE_WARN_TEMPORARY
+# switch and its self-printing notice (the one that made the 09-14 raise
+# impossible to quietly keep) are removed entirely along with the raise they
+# guarded; nothing is left to re-enable.
+STATE_WARN_BYTES = 2 * 1024
+STATE_MAX_BYTES = 4 * 1024
+STATE_MAX_LINES = 60
 STATE_MAX_LINE_BYTES = 200
 
 # The standing prompt is instructions, not a logbook (rule added 2026-08-04
@@ -492,9 +489,16 @@ def check_entry_mirror(out):
 # and rebuilt it the same night as a plain list with no markers (see
 # check_checklist), so the register has no source any more. main() no
 # longer calls check_waiting, --regen no longer writes the register and
-# --regen-waiting is gone. The functions stay only because ck170_selftest.py
-# and counts_selftest.py exercise them on disk copies. The history below is
-# kept as written.
+# --regen-waiting is gone. The history below is kept as written.
+#
+# 2026-09-20: render_waiting/regen_waiting/check_waiting/WAITING_MD are REMOVED
+# — grepping every caller found only tools/ck170_selftest.py's owner_cases leg
+# (itself exercising the retired register, removed alongside) and each
+# other; nothing live called any of the three. CHECKLIST and CK_SECTION stay:
+# checklist_items() (which uses CK_SECTION) is a live dependency of the
+# tracked `.claude/tools/archive_settled.py`, which locates the checklist's
+# "## Decisions waiting on you" section the same way doccheck does so the two
+# can never quietly disagree about where an item's body starts and ends.
 #
 # The owner's own account of the problem: they opened PLAYTEST_CHECKLIST.md to
 # find where three playtest items stood, found "a spaghetti doc", and closed it
@@ -521,7 +525,6 @@ def check_entry_mirror(out):
 # row is the owner's own word, an inferred row is a claim, and the register never
 # blurs the two. Markers land item by item and the coverage line is what moves.
 
-WAITING_MD = os.path.join(DOCS, "WAITING_ON_YOU.md")
 CHECKLIST = os.path.join(DOCS, "PLAYTEST_CHECKLIST.md")
 CK_SECTION = "## Decisions waiting on you"
 
@@ -691,73 +694,6 @@ def _ask(header, limit=150):
     return text
 
 
-def render_waiting(items):
-    """-> the full docs/WAITING_ON_YOU.md as lines. Pure function of its sources."""
-    L = ["<!-- GENERATED — never hand-edit; regenerate with: python tools/doccheck.py --regen -->",
-         "<!-- Source: docs/PLAYTEST_CHECKLIST.md markers (+ prose fallback) and docs/agent/STATE.md -->",
-         "",
-         "# Waiting on you",
-         "",
-         "Everything this project is currently holding for the owner, newest first. Generated —",
-         "editing this file does nothing; change the checklist item (or its marker) and re-run",
-         "`python tools/doccheck.py --regen`.",
-         ""]
-
-    if items is None:
-        L += ["> ⚠️ `docs/PLAYTEST_CHECKLIST.md` has no `%s` section — nothing to read." % CK_SECTION, ""]
-        items = []
-
-    waiting = [i for i in items if i["status"] in MARKER_STATUSES and i["owner"]]
-    ambiguous = [i for i in items if i["status"] == "ambiguous"]
-
-    L += ["## Decisions (%d)" % len(waiting), "",
-          "`marker` = your own recorded word · `_inferred_` = read off STATE, a claim ·",
-          "⚠️ `_conflict_` = STATE lists it as owed but the checklist header reads settled;",
-          "one marker settles which is right.", ""]
-    if waiting:
-        L += ["| # | date | from | the ask |", "|---|---|---|---|"]
-        for item in waiting:
-            num = str(item["num"]) if item["num"] else "—"
-            flag = ("marker" if item["source"] == "marker"
-                    else "⚠️ _conflict_" if item.get("conflict") else "_inferred_")
-            note = " ⏳" if item["status"] == "deferred" else ""
-            L.append("| %s | %s | %s | [%s](PLAYTEST_CHECKLIST.md#L%d)%s |"
-                     % (num, item["date"] or "—", flag, _ask(item["header"]),
-                        item["line"], note))
-    else:
-        L.append("_Nothing open._")
-    L.append("")
-
-    owed = state_owed_lines()
-    L += ["## Owed playtest legs", ""]
-    if owed:
-        L += ["From `docs/agent/STATE.md`, verbatim:", "", "```"] + \
-             [x.rstrip() for x in owed] + ["```"]
-    else:
-        L.append("_STATE records no OWED line._")
-    L.append("")
-
-    L += ["## Needs a marker to settle (%d)" % len(ambiguous), "",
-          "The header's prose and STATE's open-decisions section disagree, so no row above can",
-          "be trusted for these. One marker line each settles it permanently.", ""]
-    if ambiguous:
-        for item in ambiguous:
-            num = str(item["num"]) if item["num"] else "—"
-            L.append("- **%s** %s — [%s](PLAYTEST_CHECKLIST.md#L%d)"
-                     % (num, item["date"] or "", _ask(item["header"], 110), item["line"]))
-    else:
-        L.append("_None._")
-    L.append("")
-
-    marked = len([i for i in items if i["source"] == "marker"])
-    L += ["## Coverage", "",
-          "**%d of %d** checklist items carry a `<!-- ck:N status:… owner:… -->` marker; "
-          "**%d** are inferred" % (marked, len(items), len(items) - marked),
-          "from prose and may be wrong. This number is the one to move: every marker added",
-          "retires a guess.", ""]
-    return L
-
-
 # ---------------------------------------------------------------------------
 # The push set, and the durable-fact fingerprints.
 #
@@ -769,40 +705,76 @@ def render_waiting(items):
 # how a doc system starts destroying its own record; so the budget is on this
 # SET, as one number, and on nothing else.
 
-PUSH_SET = [
-    ("CLAUDE.md", lambda: CLAUDE_MD),
-    ("docs/agent/STATE.md", lambda: STATE),
-    ("prompts/perma/GENERAL_USE_PROMPT.md",
-     lambda: os.path.join(DOCS, "agent", "prompts", "perma", "GENERAL_USE_PROMPT.md")),
-    # Claude's own memory index: outside the repo, per-machine, and absent for
-    # any other vendor — reported when present, never required.
-    ("MEMORY.md (Claude, outside the repo)",
-     lambda: os.environ.get("SMR_MEMORY", os.path.join(
-         os.path.expanduser("~"), ".claude", "projects",
-         "c--Dev-SMR-BugFixPack", "memory", "MEMORY.md"))),
-]
-PUSH_BUDGET = 40 * 1024
-PUSH_CHARS_PER_TOKEN = 2.17     # measured on this tree's own documents
-
-
 def lf_bytes(path):
     """Content bytes for budgets, independent of LF/CRLF checkout (ck170)."""
     with open(path, "rb") as fh:
         return fh.read().replace(b"\r\n", b"\n")
 
 
+def _file_size_or_none(path):
+    """Size in LF-normalised bytes, or None if the path is absent."""
+    return len(lf_bytes(path)) if os.path.exists(path) else None
+
+
+def skill_description_bytes():
+    """Total bytes of every skill's frontmatter `description:` line.
+
+    The description (not the body) is what a session reads to decide whether
+    to invoke a skill, so — unlike the skill BODY, which is PULL, loaded only
+    on invoke (see SKILL_WARN/SKILL_HARD below) — descriptions are pushed into
+    every session and belong in this budget, not that one.
+    """
+    if not os.path.isdir(SKILLS_DIR):
+        return None
+    total = 0
+    for name in skill_names():
+        text = lf_bytes(os.path.join(SKILLS_DIR, name, "SKILL.md")).decode("utf-8", "replace")
+        lines = text.split("\n")
+        if not lines or lines[0].strip() != "---":
+            continue
+        try:
+            end = lines[1:].index("---") + 1
+        except ValueError:
+            end = len(lines)
+        for ln in lines[1:end]:
+            if ln.startswith("description:"):
+                total += len(ln[len("description:"):].strip().encode("utf-8"))
+                break
+    return total
+
+
+# PUSH_SET entries resolve to a byte count directly (or None if the item is
+# absent), not to a path — skill_description_bytes has no single backing file.
+PUSH_SET = [
+    ("CLAUDE.md", lambda: _file_size_or_none(CLAUDE_MD)),
+    ("docs/agent/STATE.md", lambda: _file_size_or_none(STATE)),
+    ("prompts/perma/GENERAL_USE_PROMPT.md",
+     lambda: _file_size_or_none(os.path.join(
+         DOCS, "agent", "prompts", "perma", "GENERAL_USE_PROMPT.md"))),
+    # Claude's own memory index: outside the repo, per-machine, and absent for
+    # any other vendor — reported when present, never required.
+    ("MEMORY.md (Claude, outside the repo)",
+     lambda: _file_size_or_none(os.environ.get("SMR_MEMORY", os.path.join(
+         os.path.expanduser("~"), ".claude", "projects",
+         "c--Dev-SMR-BugFixPack", "memory", "MEMORY.md")))),
+    ("skill descriptions (.claude/skills/*/SKILL.md front matter)",
+     skill_description_bytes),
+]
+PUSH_BUDGET = 40 * 1024
+PUSH_CHARS_PER_TOKEN = 2.17     # measured on this tree's own documents
+
+
 def push_set_report(out):
     """Report the auto-loaded set as ONE number. Report-only; never gates."""
     rows, total, missing = [], 0, 0
-    for label, resolve in PUSH_SET:
-        path = resolve()
-        if os.path.exists(path):
-            size = len(lf_bytes(path))
-            total += size
-            rows.append("    %-38s %7d B" % (label, size))
-        else:
+    for label, size_of in PUSH_SET:
+        size = size_of()
+        if size is None:
             missing += 1
             rows.append("    %-38s   absent" % label)
+        else:
+            total += size
+            rows.append("    %-38s %7d B" % (label, size))
     out.append("PUSH SET: %d B in %d file(s) ≈ %dk tokens (budget %d B)%s"
                % (total, len(PUSH_SET) - missing, round(total / PUSH_CHARS_PER_TOKEN / 1000),
                   PUSH_BUDGET, "" if total <= PUSH_BUDGET else "  ⚠ OVER"))
@@ -909,17 +881,16 @@ def emit_fingerprints(out):
 
 SKILLS_DIR = os.path.join(REPO, ".claude", "skills")
 CODEX_SKILLS_DIR = os.path.join(REPO, ".agents", "skills")
-# ⏳ SKILL CAPS ARE TORN DOWN — owner ruling 2026-09-14, while the skill set is
-# being BUILT. Rationale: a skill body is PULL (loaded only on invoke), and this
-# file's own PUSH_SET comment says the budget belongs on the push set "as one
-# number, and on nothing else" — a per-file body cap was capping the wrong class.
-# ⛔ REBUILD PROCEDURE, exact: set SKILL_CAPS_DOWN = False. That restores the warn
-# at SKILL_WARN and the RED at SKILL_HARD. ⛔ Owner's word only; no agent restores
-# this on its own judgement, and no agent picks the new numbers alone.
-# The values below are the PRE-TEARDOWN figures, kept as the rebuild anchor.
-SKILL_CAPS_DOWN = True          # ⛔ owner-only switch; see the block above
-SKILL_WARN = 3 * 1024           # the design target (inactive while caps are down)
-SKILL_HARD = 4 * 1024           # RED above this   (inactive while caps are down)
+# Skill caps were torn down 2026-09-14 while the skill set was being built
+# (rationale: a skill body is PULL, loaded only on invoke, and this file's own
+# PUSH_SET comment says the budget belongs on the push set "as one number, and
+# on nothing else" — a per-file body cap was capping the wrong class).
+# 2026-09-20 owner ruling: THE TEARDOWN ENDS. Final numbers — warn 7 KiB,
+# hard 12 KiB. Skill bodies run ~3.1-5.7 KiB today, inside the new warn. The
+# SKILL_CAPS_DOWN switch and its self-printing notice are removed entirely
+# along with the teardown they guarded; gating is back on unconditionally.
+SKILL_WARN = 7 * 1024
+SKILL_HARD = 12 * 1024
 
 
 def skill_names():
@@ -943,7 +914,7 @@ def regen_skills():
 
 
 def check_skills(out):
-    """Both vendors' copies identical; body sizes reported (see SKILL_CAPS_DOWN)."""
+    """Both vendors' copies identical; body sizes gated at SKILL_WARN/SKILL_HARD."""
     names = skill_names()
     if not names:
         out.append("SKILLS: none")
@@ -967,24 +938,17 @@ def check_skills(out):
                                "instructions" % name)
                     out.append(REGEN_CURE)
                     ok = False
-        if not SKILL_CAPS_DOWN:
-            if size > SKILL_HARD:
-                out.append("SKILLS: RED  %s is %d B, hard cap %d — a skill this long "
-                           "is a document; move the body into docs/ and point at it"
-                           % (name, size, SKILL_HARD))
-                ok = False
-            elif size > SKILL_WARN:
-                note = "  ⚠ over the %d B target" % SKILL_WARN
+        if size > SKILL_HARD:
+            out.append("SKILLS: RED  %s is %d B, hard cap %d — a skill this long "
+                       "is a document; move the body into docs/ and point at it"
+                       % (name, size, SKILL_HARD))
+            ok = False
+        elif size > SKILL_WARN:
+            note = "  ⚠ over the %d B target" % SKILL_WARN
         total += size
         rows.append("    %-24s %5d B%s" % (name, size, note))
     out.append("SKILLS: %d skill(s), %d B of bodies, mirrored to .agents/skills/"
                % (len(names), total))
-    if SKILL_CAPS_DOWN:
-        out.append("  ⏳ SKILL CAPS ARE DOWN (were warn %d / hard %d) by owner ruling "
-                   "2026-09-14, while the skill set is being built. Bodies are PULL, so "
-                   "size here is reported, not gated. Restore: SKILL_CAPS_DOWN = False in "
-                   "tools/doccheck.py. ⛔ Owner's word only — and the new numbers are the "
-                   "owner's to pick." % (SKILL_WARN, SKILL_HARD))
     out.extend(rows)
     return ok
 
@@ -1007,56 +971,6 @@ def regen(out):
                "the .agents/skills/ mirror and AGENTS.md "
                "(byte copy of CLAUDE.md) — "
                "the checks below read the result")
-
-
-def regen_waiting(out):
-    """--regen-waiting: rewrite ONLY docs/WAITING_ON_YOU.md.
-
-    The register is a pure function of docs/PLAYTEST_CHECKLIST.md's markers and
-    docs/agent/STATE.md, so it can be rebuilt without touching anything else.
-    That matters: a full --regen rebuilds bugs/INDEX.md and facts/INDEX.md from
-    every entry ON DISK, a sibling session's uncommitted ones included, so a
-    checklist edit should never have to reach for it. The checklist is the
-    busiest file in this repo; this is the flag to use after editing it.
-    """
-    items = checklist_items()
-    splitter().write_lines(WAITING_MD,
-                           render_waiting(classify_items(items) if items else items))
-    out.append("REGEN: wrote docs/WAITING_ON_YOU.md only — bugs/INDEX.md, "
-               "facts/INDEX.md, AGENTS.md and the skills mirror were NOT touched")
-
-
-def check_waiting(out):
-    """docs/WAITING_ON_YOU.md must be exactly what its sources render right now.
-
-    Same standing as the two INDEXes: a generated file that has drifted from its
-    source is a file that lies, and the owner reads this one to decide what to do
-    next, so it is RED and not a warn.
-    """
-    if not os.path.exists(WAITING_MD):
-        out.append("WAITING: RED  docs/WAITING_ON_YOU.md is missing")
-        out.append(REGEN_CURE)
-        return False
-    items = checklist_items()
-    want = render_waiting(classify_items(items) if items else items)
-    have = open(WAITING_MD, encoding="utf-8", errors="replace").read().split("\n")
-    if have and have[-1] == "":
-        have = have[:-1]
-    if have != want:
-        first = next((i for i in range(max(len(have), len(want)))
-                      if (have[i:i + 1] or [None]) != (want[i:i + 1] or [None])), 0)
-        out.append("WAITING: RED  docs/WAITING_ON_YOU.md is stale — first differs at "
-                   "line %d" % (first + 1))
-        out.append(REGEN_CURE)
-        return False
-    total = len(items or [])
-    marked = len([i for i in (items or []) if i["source"] == "marker"])
-    waiting = len([i for i in (items or [])
-                   if i["status"] in ("open", "deferred") and i["owner"]])
-    amb = len([i for i in (items or []) if i["status"] == "ambiguous"])
-    out.append("WAITING: fresh — %d checklist items, %d marked, %d waiting on the owner, "
-               "%d need a marker" % (total, marked, waiting, amb))
-    return True
 
 
 def facts_splitter():
@@ -1559,6 +1473,12 @@ def check_state_and_stubs(out):
                          "this line VERBATIM into the owner report; the owner "
                          "fires agent/prompts/perma/STATE_EVICTION.md"
                          % (n_state, STATE_WARN_BYTES))
+        n_state_lines = len(raw.splitlines())
+        if n_state_lines > STATE_MAX_LINES:
+            red.append("STATE.md is %d lines, cap is %d — run "
+                       "agent/prompts/perma/STATE_EVICTION.md; a line that "
+                       "cannot change any more has no state left to hold"
+                       % (n_state_lines, STATE_MAX_LINES))
         for i, ln in enumerate(raw.split(b"\n"), 1):
             if len(ln) > STATE_MAX_LINE_BYTES:
                 red.append("STATE.md line %d is %d bytes, per-line cap is %d — "
@@ -1587,18 +1507,11 @@ def check_state_and_stubs(out):
             red.append("%s: the stub does not say MOVED" % rel)
         if target not in text:
             red.append("%s: the stub does not point at %s" % (rel, target))
-    out.append("STATE + STUBS: STATE.md %s bytes (warn %d%s, hard %d, line %d); "
+    out.append("STATE + STUBS: STATE.md %s bytes (warn %d, hard %d, line %d); "
                "%d stubs present and pointing"
                % ("?" if n_state is None else n_state, STATE_WARN_BYTES,
-                  " TEMPORARY" if STATE_WARN_TEMPORARY else "",
                   STATE_MAX_BYTES, STATE_MAX_LINE_BYTES,
                   len([p for p in STUBS if os.path.exists(p)])))
-    if STATE_WARN_TEMPORARY:
-        out.append("  ⏳ STATE warn is TEMPORARILY raised +25%% (%d → %d) by owner "
-                   "ruling 2026-09-14, checklist 178, for the duration of the doc "
-                   "overhaul. Restore: set STATE_WARN_TEMPORARY = False in this file. "
-                   "⛔ Owner's word only — no agent retires this on its own judgement."
-                   % (STATE_WARN_PERMANENT_BYTES, STATE_WARN_BYTES))
     for line in warns:
         out.append("  warn " + line)
     for line in red:

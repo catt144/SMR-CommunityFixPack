@@ -12,7 +12,7 @@ def byte_cases(m, root):
     m.STATE = str(path)
     m.STUBS = {}
     m.GENERAL_USE = str(root / "absent.md")
-    m.PUSH_SET = [("fixture", lambda: str(path))]
+    m.PUSH_SET = [("fixture", lambda: m._file_size_or_none(str(path)))]
     m.STATE_MAX_BYTES, m.STATE_WARN_BYTES, m.STATE_MAX_LINE_BYTES = 12, 10, 5
     m.PUSH_BUDGET = 12
     good = b"abcde\nabcde\n"
@@ -47,10 +47,6 @@ def skill_cases(m, root):
     m.SKILLS_DIR = str(root / "skills")
     m.CODEX_SKILLS_DIR = str(root / "mirror")
     m.SKILL_HARD, m.SKILL_WARN = 12, 10
-    # ⏳ The live caps are TORN DOWN (owner 2026-09-14, SKILL_CAPS_DOWN). The cap
-    # MACHINERY is still falsified here so that rebuilding it inherits a proven gate
-    # rather than an untested one. The teardown itself is falsified at the end.
-    m.SKILL_CAPS_DOWN = False
     paths = [Path(base) / "fixture/SKILL.md"
              for base in (m.SKILLS_DIR, m.CODEX_SKILLS_DIR)]
     good = b"abcde\nabcde\n"
@@ -73,32 +69,19 @@ def skill_cases(m, root):
     assert not m.check_skills([])  # mirror identity is still RAW bytes
     paths[1].write_bytes(good)
     assert m.check_skills([])
-    # the teardown's own positive control: with caps DOWN an oversize skill PASSES,
-    # and with them UP the same bytes FAIL. Proves the switch does what it claims.
+    # the size gate itself: oversize bytes against the test cap FAIL. (Until
+    # 2026-09-20 this was gated by SKILL_CAPS_DOWN, torn down 09-14 while the
+    # skill set was being built; the teardown ended by owner ruling and the
+    # switch is gone, so the gate is unconditional now.)
     for p in paths:
         p.write_bytes(good * 2)          # 24 B against the 12 B test cap
-    m.SKILL_CAPS_DOWN = True
-    assert m.check_skills([]), "caps down should not gate on size"
-    m.SKILL_CAPS_DOWN = False
-    assert not m.check_skills([]), "caps up should gate on size"
+    assert not m.check_skills([]), "size cap should gate"
     for p in paths:
         p.write_bytes(good)
     for p in paths:
         assert p.read_bytes() == good
     print("PASS skill cap FAILS both endings; raw mirror mismatch FAILS")
     print("RESTORED skill copies SHA256 " + hashlib.sha256(good).hexdigest())
-
-
-def owner_cases(m):
-    m.state_owed_lines = lambda: []
-    for status in m.MARKER_STATUSES:
-        for owner in (False, True):
-            item = dict(status=status, owner=owner, num=999, date="2026-09-13",
-                        source="marker", header="### fixture", line=1)
-            rendered = m.render_waiting([item])
-            assert any(x.startswith("| 999 |") for x in rendered) == owner, rendered
-    item.update(status="ambiguous", source="inferred", owner=True)
-    assert not any(x.startswith("| 999 |") for x in m.render_waiting([item]))
 
 
 def main():
@@ -111,16 +94,6 @@ def main():
         m = load_copy(scratch, source)
         byte_cases(m, root)
         skill_cases(m, root)
-        owner_cases(m)
-        mutant = source.replace('waiting = [i for i in items if i["status"] in MARKER_STATUSES and i["owner"]]',
-                                'waiting = [i for i in items if i["status"] == "open" and i["owner"]]')
-        assert mutant != source
-        try:
-            owner_cases(load_copy(scratch, mutant))
-        except AssertionError:
-            print("PASS status-filter instrument mutant FAILS owner-action independence")
-        else:
-            raise AssertionError("owner-action mutant survived")
         # Falsify the measuring instrument itself: raw-byte counting must lose
         # LF/CRLF equivalence. The unchanged LF control still passes.
         mutant = source.replace('.replace(b"\\r\\n", b"\\n")', '')
@@ -135,7 +108,6 @@ def main():
         restored = load_copy(scratch, source)
         byte_cases(restored, root)
         skill_cases(restored, root)
-        owner_cases(restored)
         assert scratch.read_bytes() == source.encode()
         print("RESTORED doccheck copy SHA256 " + hashlib.sha256(scratch.read_bytes()).hexdigest())
     assert live.read_bytes() == original
