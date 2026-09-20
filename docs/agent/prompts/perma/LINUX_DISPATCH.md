@@ -8,7 +8,7 @@ disagree with this file.
 ## 0 · Orient
 
 `git pull` · `git log --oneline -10` · `git status --short` · `ListAgents` · `docs/agent/STATE.md` (mandatory) ·
-`prompts/perma/DISPATCH.md` §1–§3 (bindings, judgment rules, filing). Open a **live todo list**, one item per task, updated
+the `smr-orientation`, `rule-placement` and `smr-bug-library` skills (bindings, judgment rules, filing). Open a **live todo list**, one item per task, updated
 immediately. Then read, in this order:
 1. `reports/FR1_LINUX_FINDINGS_2026-09-10.md` **§11–§12**: the measured record, the field reports and the field tally.
 2. `PLAYTEST_CHECKLIST.md` item **145**: the owner-facing state.

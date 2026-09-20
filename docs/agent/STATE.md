@@ -12,4 +12,4 @@ What may enter this file: the admission door in `agent/prompts/perma/STATE_EVICT
 
 ## Open owner decisions (bodies in `docs/PLAYTEST_CHECKLIST.md` → `## Decide`)
 - Owner OWES: none.
-- STILL OPEN: none. `WAITING_ON_YOU.md` parses the literal `STILL OPEN:` and `Owner OWES: ck##` idioms.
+- STILL OPEN: none. `tools/doccheck.py` parses the literal `STILL OPEN:` and `Owner OWES: ck##` idioms.

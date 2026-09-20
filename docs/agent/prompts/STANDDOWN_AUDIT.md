@@ -126,8 +126,8 @@ matter**, not that all 21 were visited.
 ## 6 · Deliverable
 
 A report at `docs/agent/reports/STANDDOWN_AUDIT.md`, and — if anything needs an owner
-ruling — a decision block in `docs/PLAYTEST_CHECKLIST.md` → "Decisions waiting on
-you" with its marker. Update [D14](../bugs/D14.md) with what the audit settles;
+ruling — a new `### ck<n> · opened <date>` item under `docs/PLAYTEST_CHECKLIST.md`'s
+`## Decide` section, in its Must_Read_Header format. Update [D14](../bugs/D14.md) with what the audit settles;
 leave it `cand` unless the evidence moves it, and if it moves, change the front
 matter **and** the body heading tag.
 

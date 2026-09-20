@@ -299,6 +299,11 @@ does not think of it will ask the owner to build a save they already have.
 habit, in either direction. ⇒ **A rule needs the "what stops this" answer BEFORE it is written**,
 and the answer "the reader will remember" is the one that never holds.
 
+⛔ **SETTLED 2026-09-18, the opposite of what the drift above pointed toward — owner ruling:**
+*"agents check saves only when the owner asks — most of the time they are wrong anyway."* The habit
+this section found is not promoted into a rule; agent-initiated scanning of the owner's saves is cut
+outright, not homed.
+
 ## Scope note
 
 ⛔ This is a placement test, not a licence to delete. Every disposition above moves a rule to a
