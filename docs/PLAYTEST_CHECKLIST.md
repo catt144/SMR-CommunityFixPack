@@ -104,7 +104,7 @@ Home: `docs/archive/PLAYTEST_ARCHIVE.md`
 ### ck206 · opened 2026-09-20
 When you next sit with the train hub, judge the centreline entry, loading and mirrored exit.
 - Restart with the current dev hub and TestKit; use the current owner fixture. Slots & notes is prepared.
-- Pause starts at 30 m, park at 13 m; both need your eye. Slot 6 selects pause/park, 2/5 tune inward/outward.
+- Pause trial is 45 m, park 13 m; both need your eye. Slot 6 selects pause/park, 2/5 tune inward/outward.
 - First watch arrival, loading and straight exit at normal, fast and fastest; then 60°/120°/reverse via slot 3.
 - Check the outside queue and parked-plus-crossing save/reload; slot 4 watches a crossing, re-arm after autosave.
 - Check cold start without Stirling supply. Desktop checks only so far; build 4 and textures wait.
