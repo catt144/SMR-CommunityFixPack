@@ -102,12 +102,12 @@ Home: `docs/archive/PLAYTEST_ARCHIVE.md`
 ## Run
 
 ### ck206 · opened 2026-09-20
-When you next sit with the train hub, judge build-3b movement and its parked position.
-- Use the newest owner manual save; older saves have an obsolete mesh. Slots & notes is prepared.
-- Start at 20 m; pause and use slot 2 inward / 5 outward if the parked train needs adjustment.
-- Slot 3 cycles straight, 60°, 120° and reverse departures. Judge the centre pivot and portal joins.
-- Watch two trains and the outside queue for contact; slot 4 pauses at a crossing, re-arm after autosave.
-- Unattended departures and a parked-plus-crossing save/reload passed. Visual acceptance remains yours; build 4 waits.
+When you next sit with the train hub, judge the centreline entry, loading and mirrored exit.
+- Restart with the current dev hub and TestKit; use the current owner fixture. Slots & notes is prepared.
+- Pause starts at 30 m, park at 13 m; both need your eye. Slot 6 selects pause/park, 2/5 tune inward/outward.
+- First watch arrival, loading and straight exit at normal, fast and fastest; then 60°/120°/reverse via slot 3.
+- Check the outside queue and parked-plus-crossing save/reload; slot 4 watches a crossing, re-arm after autosave.
+- Check cold start without Stirling supply. Desktop checks only so far; build 4 and textures wait.
 Home: `docs/agent/reports/TRAIN_HUB_3B_SITTING_20260920.md`
 
 ### ck205 · opened 2026-09-19
