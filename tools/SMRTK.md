@@ -196,6 +196,13 @@ desk-only; the reasoning is in each leaf's comment block). **Record each as witn
 - `close_domes` returns the law deactivated and every parameter reduced by 10 points.
 - `fill_storages` on a colony with a rocket returns `filled`, `skipped_rockets` of at least 1 and
   `failed`, and does not abort.
+- `empty_storages` (**added 2026-09-20 on the owner's ask**, World page, beside Fill all storages)
+  returns `emptied`, `skipped_rockets` and `failed = 0`, and the depots read empty. It is the fill
+  leaf mirrored: same sweep, same rocket exclusion, same per-object `pcall`. ⚠️ The rocket exclusion
+  here is **precautionary, not measured** — rockets do not override `CheatEmpty`, so they would run
+  `UniversalStorageDepotBase.ClearAllResources`, which guards the supply side and then indexes
+  `self.demand[resource]` unguarded (`StorageDepot.lua:735-751`, 1.1.0.403908): the same nil-demand
+  shape that aborted the fill sweep. A `failed` above 0 names a depot class that still throws.
 - Quick build on a pipe or cable run, and on a dome, where two presses may be needed. The leaf's comment
   block in `73_SMRTK_Infopanel.lua` says why each differs from the colony-wide cheat.
 - **Verbose** lights green and shows the on-screen log, and its own press shows a `verbose=on` line;
