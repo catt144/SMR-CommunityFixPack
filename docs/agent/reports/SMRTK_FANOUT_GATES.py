@@ -16,7 +16,8 @@ ap = argparse.ArgumentParser(description=__doc__)
 ap.add_argument("files", nargs="*")
 ap.add_argument("--presence", action="store_true")
 ap.add_argument("--ordered", action="store_true")
-ap.add_argument("--evidence", type=Path)
+ap.add_argument("--evidence", type=Path,
+                 default=ROOT / "scratch" / "smrtk_gate_evidence.md")
 args = ap.parse_args()
 output = []
 failed = False

@@ -75,6 +75,7 @@ REGEN_CURE = ("  → regenerate with `python tools/doccheck.py --regen` (never b
               "hand; never `split_bugs.py --write` / `split_facts.py --write`, "
               "which re-run the one-time migration from the retired pre-split doc)")
 CODE = os.path.join(REPO, "Code")
+SCRATCH = os.path.join(REPO, "scratch")
 
 # 2026-08-18 owner ruling (checklist 42): STATE.md is budgeted in BYTES, not
 # lines. The 60-line budget was satisfied while being defeated — single lines
@@ -1737,6 +1738,48 @@ def testkit_tree(out):
     return True
 
 
+def scratch_report(out):
+    """REPORT-ONLY, same standing as testkit_tree() and alias_gate() — never
+    gates. Owner decision, 2026-09-21: `scratch/` is the git-ignored home for
+    agent/subagent working files, built because loose working files kept
+    landing in the repo's PARENT folder instead — 24 of them deleted in one
+    day (commit-message files, tool evidence written outside the repo so it
+    would not be committed, read-only subagent deliverables, a redirect that
+    created a file named `null`). Nothing swept that folder and nothing
+    listed it; these two lines are the listing.
+    """
+    if os.path.isdir(SCRATCH):
+        names = [n for n in os.listdir(SCRATCH)
+                 if n != "README.md" and os.path.isfile(os.path.join(SCRATCH, n))]
+    else:
+        names = []
+    if not names:
+        out.append("SCRATCH: empty")
+    else:
+        oldest = min(os.path.getmtime(os.path.join(SCRATCH, n)) for n in names)
+        age_days = int((time.time() - oldest) // 86400)
+        out.append("SCRATCH: %d file(s), oldest is %d day(s) old"
+                   % (len(names), age_days))
+
+    # The mess this folder replaces landed one level up, not inside the repo —
+    # so the second half of the report looks at REPO's own parent folder.
+    parent = os.path.dirname(REPO)
+    try:
+        loose = sorted(n for n in os.listdir(parent)
+                       if os.path.isfile(os.path.join(parent, n)))
+    except OSError as exc:
+        out.append("PARENT FILES (%s): not checked (%s)" % (parent, exc))
+        return True
+    if not loose:
+        out.append("PARENT FILES (%s): none" % parent)
+    else:
+        shown = ", ".join(loose[:10])
+        more = "" if len(loose) <= 10 else " (+%d more)" % (len(loose) - 10)
+        out.append("PARENT FILES (%s): %d loose file(s) — %s%s"
+                   % (parent, len(loose), shown, more))
+    return True
+
+
 # ---------------------------------------------------------------------------
 # Load-order constraints (sweep chain link 1, lens L1, 2026-08-17)
 #
@@ -2786,6 +2829,7 @@ def main():
     push_set_report(out)   # report-only: the budget is the owner's to act on
     testkit_tree(out)  # report-only by owner decision (2026-08-04) — never gates
     alias_gate(out)    # report-only, same standing as testkit_tree
+    scratch_report(out)  # report-only, same standing as testkit_tree
     ok = eol_report(out) and ok   # RED on a mixed file or a failed parser control
 
     if args.verify_split:

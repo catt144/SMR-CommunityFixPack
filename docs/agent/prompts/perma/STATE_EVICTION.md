@@ -126,6 +126,21 @@ to the one the id entered git with and reports the aged ids.
    item that names the old id in its first bullet.
 4. doccheck GREEN; commit with a pathspec naming each id and where it went; push.
 
+## Scratch sweep — files 14 days old
+
+Owner decision, 2026-09-21: `scratch/` is the git-ignored home for agent and
+subagent working files; nothing else sweeps it, so this prompt does, every run.
+
+1. Run `python tools/doccheck.py` and read its `SCRATCH:` line for the current
+   count and the oldest file's age.
+2. Delete every file directly under `scratch/` whose mtime is 14 days old or
+   older; never delete `README.md`. Sum the bytes reclaimed as you go.
+3. Report what was deleted — each name and its size — and the total bytes
+   reclaimed, or report there was nothing to sweep.
+4. Read the same run's `PARENT FILES` line and report every name it lists.
+   Never delete there: that folder holds the owner's other projects, and
+   removing anything from it is the owner's call, not this prompt's.
+
 ## Scope and stopping conditions
 
 Review the whole STATE file and the destination passages needed for its cuts.
@@ -154,9 +169,12 @@ suite, not only the formerly failing check.
 1. Start with `git log` and `git pull --ff-only`; resolve a stale baseline before
    editing. Read `docs/agent/STATE.md` whole. Read the newest entry in
    `docs/archive/SESSION_LOG.md` to match its voice.
-2. Note the current HEAD sha — it becomes the grave:
+2. Run the scratch sweep (below). It is independent of STATE's content and
+   needs no commit — `scratch/` is git-ignored — so it runs every time this
+   procedure runs, not only when named separately.
+3. Note the current HEAD sha — it becomes the grave:
    `git show <sha>:docs/agent/STATE.md` is the full pre-eviction file, forever.
-3. Judge every line under all four tests; record each refusal's verified home
+4. Judge every line under all four tests; record each refusal's verified home
    and every survivor's basis. Preserve conditions and open obligations.
    Prepend ONE SESSION_LOG entry (below the preamble; archive entries are
    never edited): a digest of each closed effort being evicted — a few lines
@@ -166,16 +184,16 @@ suite, not only the formerly failing check.
    being closed alone is not a destination.** For sweep-chain findings,
    never restate link verdicts here; point at the chain's own
    findings ledger (forbidden to links) and reports.
-4. Rewrite STATE.md to the admitted status. Keep its `Must_Read_Header`,
+5. Rewrite STATE.md to the admitted status. Keep its `Must_Read_Header`,
    pull/read-path notice and protected owner-register idioms. Record the grave
    in the eviction report; remove empty section headings with their content.
-5. Verify: `python tools/doccheck.py` GREEN (it enforces the warn/hard byte
+6. Verify: `python tools/doccheck.py` GREEN (it enforces the warn/hard byte
    caps and the per-line cap); every retained status line in every section
    passes all four tests; structural/parser exceptions are identified; no
    "superseded" chains remain; open decisions match the checklist.
-6. Measure the clean file in bytes and put the before/after numbers in the
+7. Measure the clean file in bytes and put the before/after numbers in the
    report to the owner.
-7. Commit (boring subject — the sweep fence may be live) and push.
+8. Commit (boring subject — the sweep fence may be live) and push.
 
 Report what left, its verified homes, what stayed and why. Do not claim "STATE
 is clean" or "GREEN therefore admitted": doccheck checks structure and bytes,
