@@ -98,6 +98,15 @@ nothing.
 carrying a per-file expected count, so a drifted file fails loudly instead of being half-edited;
 every file matched. A second such run in the fix pack caught a real drift (below).
 
+Reconciling those 46 against the commits, because they do not add up on their face:
+
+| | count | how to re-derive |
+|---|---|---|
+| substitutions written | 46 | the two script runs' own totals |
+| of those, in **git-ignored** files | 5 | `.claude/settings.json` (2), `.claude/agents/doc-surgeon.md` (1), `local/retired-modules/README.md` (2) — on disk, no commit |
+| therefore tracked | 41 | `C:` occurrences removed by `f2ec95d` (28) + `9f2c201` (13) |
+| `B:` occurrences added | 39 | 2 fewer, because `hub_oracle.py`'s three literal paths collapsed into one `_TRAIN_ASSETS` line feeding three `os.path.join` calls |
+
 **17 remain in the moved trees, by class:**
 
 | # | what | why it stays | whose |
@@ -128,6 +137,13 @@ live prompts, three live delivery/forwarding reports, `tools/patchcheck.py`'s us
 Records were left as records: dated reports, `_before`/`BEFORE` snapshots, the A/B evidence
 artefacts, the decisions log, `mkmarkers.py`'s dated comment. `MOVE_AUDIT_high.md`'s references to
 the `__MOVED_` originals are correct as written and untouched.
+
+Same reconciliation as above: of those 38, **3 are in `.claude/HANDOFF_PROMPT.md`, which is
+git-ignored here too** — on disk, carrying no commit. So `411fdf0` adds 35 `B:` occurrences and
+removes 37 `C:` ones; the extra 2 removed are the move table inside `MOVE_OPTIN_high.md`, deleted
+with the file. A count of `B:\Dev\SMR` across this repo reads 7 higher than 38 because
+`.claude/DECISIONS.md` (5) and two further lines in `.claude/HANDOFF_PROMPT.md` were written by the
+sessions that authored the move briefs, not by this pass.
 
 - `moved_to:` is **not read by `doccheck.py`** (checked), so repointing it is informational only.
 - `EF-071.md` is **mirrored between the two repos**; both copies were repointed and remain
