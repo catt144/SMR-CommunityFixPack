@@ -2,8 +2,10 @@
 
 **One-off, first pass of the tree move.** You are the doc orchestrator of the move. Fire from a fresh
 session rooted at `C:\Dev\SMR-BugFixPack` (this prompt lives in the fix pack on purpose: the tree you
-are moving would otherwise shift under you mid-job). An audit seat grades this work afterwards
-against `MOVE_OPTIN_AUDIT_high.md`; you do not grade yourself. Delete this file and its
+are moving would otherwise shift under you mid-job). You do not grade yourself: ONE audit grades the
+whole move after its last pass (`MOVE_AUDIT_high.md`; owner, 2026-09-21), by which time the train
+seat has been working in these trees for a while. **So your report is the only witness of the moment
+of the move** — write it to `docs/agent/reports/MOVE_OPTIN_20260921.md`. Delete this file and its
 `prompts/README.md` row in the commit that lands the result.
 
 Start: `git pull` in both repos; `git log -1 --format=%h -- docs/agent/prompts/MOVE_OPTIN_high.md` is
@@ -66,12 +68,13 @@ this tree. They are evidence, not configuration.
 ## End state
 
 1. **Nothing is deleted this pass.** Copy each tree to its destination, verify, then rename the
-   original to `<name>__MOVED_20260921` in place. The owner deletes the originals after the audit
-   passes; say so in your report.
+   original to `<name>__MOVED_20260921` in place. The owner deletes the originals after the
+   whole-move audit passes; say so in your report.
 2. **Proof of an intact copy**, per tree: file count and total bytes before and after, `git fsck`
    clean, `git status -sb` matching the pre-move state (the train seat's in-progress files stay dirty
-   — list them, do not commit them), HEAD sha identical, remotes unchanged, and every tag still
-   resolving (`hub-model-final-untextured`, `hub-centre-lights-20260921`).
+   — list them with a sha256 each, do not commit them: the audit cannot re-observe a dirty set that
+   has since been worked on), HEAD sha identical and written down, remotes unchanged, and every tag
+   still resolving (`hub-model-final-untextured`, `hub-centre-lights-20260921`).
 3. **The environment variables do most of the work.** `doccheck.py:66` and
    `sync_from_fixpack.py:51,333,337-338` already read `SMR_TESTKIT`, `SMR_FIXPACK`, `SMR_SRCARCHIVE`
    and `SMR_TRAINASSETS`. Prefer extending that pattern over hard-coding a new absolute path
@@ -120,6 +123,6 @@ introduced.
 
 ## Do not claim
 
-That the move is complete: an audit seat grades it and the symlinks are not yours. That no reference
+That the move is complete: the whole-move audit grades it and the symlinks are not yours. That no reference
 to the old path remains — count both sides and give the number that is left, by class, naming which
 belong to the other seat. That the game or the mod works: nothing here launches either.
