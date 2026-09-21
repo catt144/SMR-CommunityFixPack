@@ -1,8 +1,8 @@
 {
   "leg": "c95-build",
   "_what": "Registered C95 nearby-full receiver test. Uses only our C95BUILD copy; no prototype.",
-  "kit": "C:\\Dev\\SMR-BugFixPack-TestKit",
-  "park": "C:\\Dev\\SMR-BugFixPack\\tools\\arming\\payloads",
+  "kit": "B:\\Dev\\SMR\\SMR-BugFixPack-TestKit",
+  "park": "B:\\Dev\\SMR\\SMR-BugFixPack\\tools\\arming\\payloads",
   "stripPattern": "Code/9[78]_C95",
   "anchorAfter": "99_FixtureCarry.lua",
   "bootSymbol": "C95Build.Boot",

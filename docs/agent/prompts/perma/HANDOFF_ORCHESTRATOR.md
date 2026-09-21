@@ -58,7 +58,7 @@ To open the domes for real, use the game's cheat, not SMRTK's leaf (see §1):
 Domes, which cannot be undone cleanly, so use a scratch copy. It skips the law under the No Politics
 rule. That line has not been run, although its route through the preset was read.
 
-## 1 · TestKit loose ends (repo `C:\Dev\SMR-BugFixPack-TestKit`)
+## 1 · TestKit loose ends (repo `B:\Dev\SMR\SMR-BugFixPack-TestKit`)
 
 TestKit builds go to Astra unless the owner asks a Claude session directly.
 

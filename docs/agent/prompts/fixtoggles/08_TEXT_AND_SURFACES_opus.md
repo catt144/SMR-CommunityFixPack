@@ -20,7 +20,7 @@ name the reference mod; never reuse its wording) govern every sentence**. Runs a
    `git status --short`; stop on a dirty target. Then update the fix list and FAQ ("how do I switch a fix off?", "is my save clean
    if I switch one off?" — answer honestly per `EF-002`). ⛔ Commit only; publishing is the release sitting's
    (`publish-site.yml` is workflow_dispatch).
-6. **TestKit** (`C:\Dev\SMR-BugFixPack-TestKit`, local-only by design): a switched-off module's probes SKIP by name,
+6. **TestKit** (`B:\Dev\SMR\SMR-BugFixPack-TestKit`, local-only by design): a switched-off module's probes SKIP by name,
    never FAIL; the census reads the switch state.
 7. **Docs:** `docs/agent/FIX_POLICY.md` §5 final wording if 01 left anything; the `[FAQ]` tags; the opt-in repo's
    `FUTURE_IDEAS.md` #9 marked UN-PARKED (by this chain) and checklist 88 marked overtaken. Do not recreate the dissolved

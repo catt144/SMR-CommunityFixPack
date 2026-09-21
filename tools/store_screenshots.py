@@ -15,7 +15,9 @@ import sys
 
 from PIL import Image
 
-SRC = r"C:\Dev\SMR-ScreenCaptures\c74_skins"
+# The capture folder is this repo's sibling; a sibling-relative path survives a tree move.
+SRC = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))),
+                   "SMR-ScreenCaptures", "c74_skins")
 OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "store_screenshots")
 LIMIT = 1_000_000  # Steam's cap is 1 MiB; keep a margin
 

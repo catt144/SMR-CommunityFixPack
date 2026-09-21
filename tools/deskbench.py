@@ -69,7 +69,9 @@ if TOOLS not in sys.path:
     sys.path.insert(0, TOOLS)
 from luafn import read_lines, find_bodies, SRC as SRC_LIVE  # noqa: E402
 
-TESTKIT = os.environ.get("SMR_TESTKIT", r"C:\Dev\SMR-BugFixPack-TestKit")
+# The TestKit is this repo's sibling; a sibling-relative default survives a tree move.
+TESTKIT = os.environ.get("SMR_TESTKIT", os.path.join(os.path.dirname(REPO),
+                                                     "SMR-BugFixPack-TestKit"))
 # SMR_SRCARCHIVE is the archive ROOT, as in patchcheck.py and the fork's sync; the 1.0.7 tree is
 # derived from it here, so one variable means one thing everywhere it is read.
 SRC_ARCHIVE = os.path.join(

@@ -9,7 +9,7 @@ The probe harness — `SMRTest.RunAll`, verdict semantics, the ways a probe lies
 is [`TESTKIT.md`](TESTKIT.md). The unattended arming harness is
 [`arming/README.md`](arming/README.md).
 
-It lives in `C:\Dev\SMR-BugFixPack-TestKit`, a separate repo with **no remote,
+It lives in `B:\Dev\SMR\SMR-BugFixPack-TestKit`, a separate repo with **no remote,
 local-only by design and settled**. Never raise a push there as owed. A pack lane
 does not commit in it.
 
@@ -242,10 +242,10 @@ sweep's age, and none overrides the owner — a gate, not a hard rule.
 ## Gates, then the one line to the owner
 
 ```
-python tools/parsecheck.py --dir C:/Dev/SMR-BugFixPack-TestKit/Code --quiet
+python tools/parsecheck.py --dir B:/Dev/SMR/SMR-BugFixPack-TestKit/Code --quiet
 python tools/doccheck.py
-rg -n 'NetSyncEvent|LogCheatUsed' C:/Dev/SMR-BugFixPack-TestKit/Code -g '7*_SMRTK*.lua' -g '80_AgentSlots.lua'
-rg -n '^\s*print\(' C:/Dev/SMR-BugFixPack-TestKit/Code -g '7*_SMRTK*.lua' -g '80_AgentSlots.lua'
+rg -n 'NetSyncEvent|LogCheatUsed' B:/Dev/SMR/SMR-BugFixPack-TestKit/Code -g '7*_SMRTK*.lua' -g '80_AgentSlots.lua'
+rg -n '^\s*print\(' B:/Dev/SMR/SMR-BugFixPack-TestKit/Code -g '7*_SMRTK*.lua' -g '80_AgentSlots.lua'
 ```
 
 doccheck GREEN; both `rg` runs zero matched lines, exit 1. ⛔ **An error is not a

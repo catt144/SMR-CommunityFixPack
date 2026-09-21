@@ -59,7 +59,10 @@ import os
 import re
 import sys
 
-TESTKIT = os.environ.get("SMR_TESTKIT", r"C:\Dev\SMR-BugFixPack-TestKit")
+# The TestKit is this repo's sibling; a sibling-relative default survives a tree move.
+TESTKIT = os.environ.get("SMR_TESTKIT", os.path.join(
+    os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))),
+    "SMR-BugFixPack-TestKit"))
 CORE = "00_TestCore.lua"
 
 

@@ -6,7 +6,7 @@ Process rules for this repo. Code rules are `FIX_POLICY.md`; the global duties a
 
 ## Layout
 
-- Dev repo: `C:\Dev\SMR-BugFixPack`, git-versioned, canonical.
+- Dev repo: `B:\Dev\SMR\SMR-BugFixPack`, git-versioned, canonical.
 - Game install: `A:\SteamLibrary\steamapps\common\Project Spark` ("Project Spark" is the Steam
   folder name). Shipped Lua source, read-only: `<game>\ModTools\Src` (`Lua\`, `CommonLua\`, `Data\`,
   `DLC\`). Nothing under the game folder is ever modified.
@@ -21,7 +21,7 @@ Process rules for this repo. Code rules are `FIX_POLICY.md`; the global duties a
   folder for saves players send; copy one into `saves/game` to load it and keep the original. Both
   junctions reach the owner's real saves: never `Remove-Item -Recurse` on `saves/` or a junction,
   because PowerShell 5.1 deletes through it; remove a link with `cmd /c rmdir saves\game`.
-- TestKit, never shipped and local-only by decision: `C:\Dev\SMR-BugFixPack-TestKit`. Its README is
+- TestKit, never shipped and local-only by decision: `B:\Dev\SMR\SMR-BugFixPack-TestKit`. Its README is
   the kit's own build-state document; the durable pack-side view is `tools/TESTKIT.md`, and the
   SMR Tool Kit plus its sitting slots are `tools/SMRTK.md`.
 - Sibling mods: the opt-in pack `B:\Dev\SMR\SMR-OptInPack` (its own docs) and the save-rescue tool
@@ -33,7 +33,7 @@ Process rules for this repo. Code rules are `FIX_POLICY.md`; the global duties a
 ```powershell
 New-Item -ItemType Directory -Force "$env:APPDATA\Surviving Mars Relaunched\Mods" | Out-Null
 New-Item -ItemType Junction -Path "$env:APPDATA\Surviving Mars Relaunched\Mods\SMR-BugFixPack" `
-  -Target "C:\Dev\SMR-BugFixPack"
+  -Target "B:\Dev\SMR\SMR-BugFixPack"
 ```
 
 Enable "Relaunched Fix Pack" in the game's Mod Manager; restart the game after editing Lua. The

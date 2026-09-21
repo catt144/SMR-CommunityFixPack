@@ -103,7 +103,7 @@ never aliased — one instance had been committed and was live in history.
 - ⚠️ **A log copied while the game is RUNNING is a PARTIAL log.** Re-copy after
   the process exits before quoting any count or rate — this produced two wrong
   counts on 2026-09-08 (a "1" that was 6; a "30" that was 157).
-- The kit is `C:\Dev\SMR-BugFixPack-TestKit`, **local-only with no remote, by
+- The kit is `B:\Dev\SMR\SMR-BugFixPack-TestKit`, **local-only with no remote, by
   design and settled** — never raise a push there as owed.
 
 ## Writing a new leg

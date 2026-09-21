@@ -1,7 +1,7 @@
 {
   "leg": "stillneeded-f46",
-  "kit": "C:\\Dev\\SMR-BugFixPack-TestKit",
-  "park": "C:\\Dev\\SMR-BugFixPack\\docs\\agent\\reports\\still-needed",
+  "kit": "B:\\Dev\\SMR\\SMR-BugFixPack-TestKit",
+  "park": "B:\\Dev\\SMR\\SMR-BugFixPack\\docs\\agent\\reports\\still-needed",
   "stripPattern": "Code/97_StillNeededF46",
   "bootSymbol": "SN46.Boot",
   "symbolNamespace": "SN46",

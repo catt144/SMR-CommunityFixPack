@@ -1,8 +1,8 @@
 {
   "leg": "c95-save",
   "_what": "Real gather, native receivers, mid-return save/reload. Only writes our C95MID slot.",
-  "kit": "C:\\Dev\\SMR-BugFixPack-TestKit",
-  "park": "C:\\Dev\\SMR-BugFixPack\\tools\\arming\\payloads",
+  "kit": "B:\\Dev\\SMR\\SMR-BugFixPack-TestKit",
+  "park": "B:\\Dev\\SMR\\SMR-BugFixPack\\tools\\arming\\payloads",
   "stripPattern": "Code/9[78]_C95",
   "anchorAfter": "99_FixtureCarry.lua",
   "bootSymbol": "C95Save.Boot",

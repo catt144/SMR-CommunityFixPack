@@ -5,8 +5,8 @@
   "_grave": "git show 49e32bf:docs/agent/prompts/c48-pairing/C48P_ARM.ps1.txt",
   "_note": "Its 97_C47Common.lua.txt was byte-identical (sha256 a9ffc646...) to c48-brake's copy and is now shared from payloads/ rather than duplicated.",
 
-  "kit": "C:\\Dev\\SMR-BugFixPack-TestKit",
-  "park": "C:\\Dev\\SMR-BugFixPack\\tools\\arming\\payloads",
+  "kit": "B:\\Dev\\SMR\\SMR-BugFixPack-TestKit",
+  "park": "B:\\Dev\\SMR\\SMR-BugFixPack\\tools\\arming\\payloads",
 
   "stripPattern": "Code/9[78]_C4[78]",
   "anchorAfter": "99_FixtureCarry.lua",

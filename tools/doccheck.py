@@ -58,7 +58,9 @@ import time
 import warnings
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-TESTKIT = os.environ.get("SMR_TESTKIT", r"C:\Dev\SMR-BugFixPack-TestKit")
+# The TestKit is this repo's sibling; a sibling-relative default survives a tree move.
+TESTKIT = os.environ.get("SMR_TESTKIT", os.path.join(os.path.dirname(REPO),
+                                                     "SMR-BugFixPack-TestKit"))
 
 DOCS = os.path.join(REPO, "docs")
 BUGS = os.path.join(DOCS, "BUGS.md")                  # a stub since 2026-08-03
@@ -745,6 +747,15 @@ def skill_description_bytes():
     return total
 
 
+def _memory_project_key(repo):
+    r"""Claude keys its per-project memory by the absolute path with every
+    separator run replaced by a dash and the drive letter lowercased:
+    B:\Dev\SMR\SMR-BugFixPack becomes b--Dev-SMR-SMR-BugFixPack."""
+    drive, rest = os.path.splitdrive(os.path.abspath(repo))
+    parts = [q for q in rest.replace("\\", "/").split("/") if q]
+    return drive[:1].lower() + "--" + "-".join(parts)
+
+
 # PUSH_SET entries resolve to a byte count directly (or None if the item is
 # absent), not to a path — skill_description_bytes has no single backing file.
 PUSH_SET = [
@@ -754,11 +765,12 @@ PUSH_SET = [
      lambda: _file_size_or_none(os.path.join(
          DOCS, "agent", "prompts", "perma", "GENERAL_USE_PROMPT.md"))),
     # Claude's own memory index: outside the repo, per-machine, and absent for
-    # any other vendor — reported when present, never required.
+    # any other vendor — reported when present, never required. The project key
+    # is derived from REPO, not spelled, so a tree move carries it (2026-09-21).
     ("MEMORY.md (Claude, outside the repo)",
      lambda: _file_size_or_none(os.environ.get("SMR_MEMORY", os.path.join(
          os.path.expanduser("~"), ".claude", "projects",
-         "c--Dev-SMR-BugFixPack", "memory", "MEMORY.md")))),
+         _memory_project_key(REPO), "memory", "MEMORY.md")))),
     ("skill descriptions (.claude/skills/*/SKILL.md front matter)",
      skill_description_bytes),
 ]

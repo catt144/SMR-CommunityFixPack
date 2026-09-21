@@ -1,8 +1,8 @@
 {
   "leg": "c92-read",
   "_what": "Read-only census of the supplied Sol 490 save. RAN 2026-09-13 (r2). Back up every autosave before staging C92READ.savegame.sav. No achievement or research mutations.",
-  "kit": "C:\\Dev\\SMR-BugFixPack-TestKit",
-  "park": "C:\\Dev\\SMR-BugFixPack\\tools\\arming\\payloads",
+  "kit": "B:\\Dev\\SMR\\SMR-BugFixPack-TestKit",
+  "park": "B:\\Dev\\SMR\\SMR-BugFixPack\\tools\\arming\\payloads",
   "stripPattern": "Code/98_C92Read",
   "anchorAfter": "99_FixtureCarry.lua",
   "bootSymbol": "C92Read.Boot",
