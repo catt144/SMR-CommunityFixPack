@@ -1,0 +1,141 @@
+# Move the fix pack, the TestKit and the captures to `B:\Dev\SMR`
+
+**One-off, second pass of the tree move.** You are the doc orchestrator of this pass. There is no
+audit of your pass alone: ONE audit grades the whole move at the end (`MOVE_AUDIT_high.md`, owner
+2026-09-21), long after the trees you touch have been worked in. **Your report is the only witness of
+the moment of this move** — write it to `docs/agent/reports/MOVE_FIXPACK_20260921.md`. Delete this
+file and its `prompts/README.md` row in the commit that lands it.
+
+Start: `git pull`; `git log -1 --format=%h -- docs/agent/prompts/MOVE_FIXPACK_high.md` is the
+authoring sha, and `git diff --stat <sha>..HEAD -- tools/ docs/README.md` empty means the facts below
+still hold. Put the work list in your todo tool before the first write, one item per
+commit-and-verify unit, and keep it current — the owner reads it to decide when to step in.
+
+## ⛔ You are rooted in the tree you are moving. That is new, and it drives the order.
+
+Pass one kept the mover outside the moving tree. This prompt cannot: it lives in the fix pack. So:
+
+- **Windows will not rename a directory that is a live process's working directory.** Your session
+  holds `C:\Dev\SMR-BugFixPack`. Test it rather than assuming; if the rename is refused, the fix
+  pack's own rename is a fenced block the owner runs after this session ends. The TestKit and the
+  captures are not your cwd and you rename those yourself.
+- **The moment a copy verifies, the tree at `B:` is the live one.** Every later edit, commit and push
+  happens THERE. Do not edit, pull or commit in `C:\Dev\SMR-BugFixPack` again, including this
+  prompt's own deletion and your report. Say in your report which commits landed in which tree.
+
+## Decided by the owner, 2026-09-21 — build it, do not reopen it
+
+All SMR content moves to `B:\Dev\SMR`; only a REPO sits at that root. **One exception is cleared:
+`SMR-ScreenCaptures`**, the owner's capture drop folder, because it is a shared tool's folder that
+the TestKit writes to. This pass moves exactly three trees:
+
+```
+C:\Dev\SMR-BugFixPack          ->  B:\Dev\SMR\SMR-BugFixPack
+C:\Dev\SMR-BugFixPack-TestKit  ->  B:\Dev\SMR\SMR-BugFixPack-TestKit
+C:\Dev\SMR-ScreenCaptures      ->  B:\Dev\SMR\SMR-ScreenCaptures
+```
+
+**Why these three together, not one at a time:** `doccheck.py:61`, `aliascheck.py:62` and
+`deskbench.py:72` each default to the TestKit at a hard-coded `C:\Dev` sibling, and the TestKit's
+capture path is hard-coded at `Code/74_SMRTK_Agent.lua:109`. Splitting them leaves a repointed tree
+pointing at one that has not moved.
+
+Still on `C:` after this pass, and none of your business: `SMR-SrcArchive`, `workshop_fpk_archive`,
+the FR-1 folders, `SMR-CommunityMods`, `SMR-CommunitySaveRescue`. `SMR-OptInPack` and `SMR-Assets`
+moved in pass one — read its report (`docs/agent/reports/MOVE_OPTIN_20260921.md`) before you start,
+and do not redo what it already did to this tree's pointers.
+
+## ⛔ The saves symlinks — the one way to do real damage here
+
+`saves/backup` and `saves/game` in the fix pack are symlinks to the owner's live save folders,
+**1.8 GB and 668 MB** (`du -sh --dereference saves/game saves/backup`). Their targets are under
+`C:\Users\stkot\` and do not move, so they need no repointing — they only need to arrive as
+*symlinks*. A copy that dereferences them balloons a 195 MB tree to about 2.7 GB and replaces the
+links with stale copies of the owner's saves, which then silently diverge from the real ones. Agents
+do not touch the owner's saves (owner, 2026-09-18). **Proof required:** after the copy, `ls -l saves`
+shows two links with identical targets, and `du -sh` of the new tree is about 195 MB, not gigabytes.
+
+## The boundary — another seat's work is in these trees
+
+- **TestKit `Code/80_AgentSlots.lua` is dirty with the TRAIN seat's live sitting** (rewritten
+  2026-09-20, 172 insertions / 683 deletions; it now reads "train hub centre/transition prototype").
+  Carry it across uncommitted, hash it, and leave it. ⛔ Never commit it, never `git restore` it
+  (the 2026-08-03 orphan lesson; doccheck says so every run).
+- **The TestKit has no remote.** `git -C <testkit> remote -v` is empty, so a botched copy has nothing
+  to restore from. It gets the strictest copy proof of the three.
+- **In `%APPDATA%\Surviving Mars Relaunched\Mods\` exactly two of the six entries are yours**:
+  `SMR-BugFixPack` and `SMR-BugFixPack-TestKit`. `SMR-OptInPack`, `SMR-TrainHubDev` and
+  `SMR-TrainHubPrototype` are the train seat's; `SMR_FR1TempWorkaround` is a real folder and FR-1's.
+- **`.claude/` is the coordinator seat's.** Repoint literal path strings there and nothing else; its
+  prose and its rulings are not yours to rewrite. Four files hold `C:\Dev` (`HANDOFF_PROMPT.md` 4
+  hits, `IMPLEMENT_PROMPT.md` 5, `FRESH_SESSION_PROMPT.md` 3, `CHECKLIST_MARKERS_REVIEW.md` 2), plus
+  one under `.claude/briefs/` and four permission entries in `.claude/settings.json`. List what you
+  changed, line by line, for that seat to check.
+
+## End state
+
+1. **Nothing is deleted this pass.** Copy, verify, then rename each original to
+   `<name>__MOVED_20260921` in place. The owner deletes originals after the whole-move audit.
+2. **Git-ignored material is load-bearing here and a `git clone` loses all of it.** On disk today:
+   `local/` 56 MB (866 files, its README a tracked gate), `.claude/` 3.4 MB, `zz-owner/` 156 KB,
+   `scratch/` 16 KB. Use a filesystem copy, or a clone plus every ignored path, and prove which.
+3. **Proof of an intact copy, per tree**: file count and total bytes before and after, `git fsck`
+   clean, HEAD sha identical and written into your report (fix pack `26b86e7` main, TestKit `3abab0a`
+   master, both measured 09-21 — re-derive, do not trust these), remotes unchanged, and the dirty set
+   listed with a sha256 per file. The audit cannot re-observe any of it. `SMR-ScreenCaptures` is not
+   a repo (1.1 GB): it gets counts and a hash sample instead.
+4. **The hard-coded roots repointed, in the NEW trees.** `doccheck.py:61`, `aliascheck.py:62`,
+   `deskbench.py:72` (TestKit default), `doccheck.py:759` (`SMR_MEMORY`, whose default points at the
+   Claude memory store that moves in item 6), `tools/store_screenshots.py:18`, TestKit
+   `Code/74_SMRTK_Agent.lua:109`, the three command lines in `tools/SMRTK.md`, and `docs/README.md`'s
+   "Outside the repo" block (only the entries that actually moved — `SMR-SrcArchive`,
+   `workshop_fpk_archive` and the FR-1 folders stay on `C:`). Prefer the existing environment-variable
+   pattern over a new absolute default; a sibling-relative default is also yours to choose.
+5. **Records stay records.** 106 tracked files carry a `C:\Dev` path and 104 of them are under
+   `docs/agent/reports/` — source-line citations in `still-needed/*.json`, past commands, evidence of
+   where something was read. ⛔ Rewriting those is the defect, not the fix. Repoint LIVE pointers
+   only, and give the count you changed against the count you left.
+6. **The Claude memory store follows the tree, or this seat starts empty.** The store is keyed by
+   root path: `%USERPROFILE%\.claude\projects\c--Dev-SMR-BugFixPack` (77 memory files, 229 KB;
+   663 MB with session transcripts) becomes `b--Dev-SMR-SMR-BugFixPack` (name derived from the
+   pattern, not observed — confirm it on the first session at the new root and say so). **Copy, never
+   move**, and do not edit a memory file: several name `C:\Dev` and are records.
+7. **The two mod symlinks recreated and proven.** If they are wrong the fix pack silently ceases to
+   exist for the game. Create them if you can (a directory symlink may need elevation — hand the
+   owner a fenced block if so) and prove each by reading a file THROUGH the link, not by listing it.
+8. **doccheck GREEN, run from the new fix pack root**, with its selftests, PACK IGNORE PARITY, the
+   LOCAL gate and the TestKit parse pass, plus the new `PARENT FILES` reading now that the parent is
+   `B:\Dev\SMR`.
+9. **One fenced copy-paste block for the owner**: the `setx` environment block (`SMR_TESTKIT` and
+   `SMR_FIXPACK` to the new roots, `SMR_SRCARCHIVE` still on `C:`, `SMR_TRAINASSETS` as pass one left
+   it), plus any rename or symlink step you could not run yourself. Say which lines you already ran.
+
+If budget runs out, drop in this order: the `.claude/` strings, then prose in reports, then the
+`docs/README.md` polish. Never drop the copy verification, the saves proof, the memory store, the
+symlinks or the owner's block.
+
+## Your call
+
+How you copy and how you prove it faithful, as long as the proof is a command's output. Whether the
+three trees are one commit-and-verify unit or three. Whether the TestKit default becomes an
+environment variable or a sibling-relative path. Whether the memory store's session transcripts come
+across with it or only `memory/`, given the 663 MB — decide and say why.
+
+## Scope
+
+In: the three trees, their paths, their gates, the two mod symlinks, the memory store, the owner's
+block, your report.
+Out: every tree still on `C:`, `SMR-Shared`, FR-1, the Mod Editor, the game, the opt-in pack, and the
+train seat's files listed above.
+
+## Stops — report instead of pushing on
+
+A copy's count, bytes, HEAD or symlink shape does not match and you cannot show why · the rename of
+your own root is refused and you have no safe alternative · doccheck REDs at the new root for a
+reason that is not a path you introduced.
+
+## Do not claim
+
+That the move is complete: the whole-move audit grades it. That no reference to the old path remains
+— count both sides and give what is left, by class, separating records from live pointers. That the
+mod loads: nothing here launches the game, and a resolving symlink is not a loaded mod.
