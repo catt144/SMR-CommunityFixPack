@@ -69,7 +69,11 @@ of past runs: rewriting them would be the defect.
    ping that doccheck is green. Were all three in the first pass's report, and were the paths right?
 7. **Nothing resolves by accident.** Anything that still works only because an old root, a `__MOVED_`
    original or a stale variable is still on disk. The owner deletes the originals on your pass, so
-   say plainly, per original, whether it is safe to delete.
+   say plainly, per original, whether it is safe to delete. ⚠️ **A faithful copy is not the same as
+   safe to delete.** Check each moved tree for a remote, and where there is none, say that deleting
+   the original takes redundancy to zero and name what would be lost. `SMR-Assets` (504 MB, five
+   tags) and the TestKit both have no remote. That is deliberate and owned elsewhere — report the
+   consequence for the delete decision and do not propose a remote, a backup or a policy.
 8. **The root rule.** `B:\Dev\SMR` holds repos and nothing else, with ONE exception the owner cleared
    on 2026-09-21: `B:\Dev\SMR\SMR-ScreenCaptures`, their capture drop folder, shared because the
    TestKit writes to it. Check that the TestKit and `tools/store_screenshots.py` both write THERE —
