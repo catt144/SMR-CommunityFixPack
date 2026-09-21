@@ -17,7 +17,7 @@ release front door.
 
 ## 2 · Site and repository surfaces
 
-Work in `C:\Dev\SMR-CommunityMods` only after reading its status. Do not overwrite,
+Work in `B:\Dev\SMR\SMR-CommunityMods` only after reading its status. Do not overwrite,
 stash or commit another person's dirty file.
 
 For an added, retired or materially respecified fix:

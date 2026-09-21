@@ -16,7 +16,7 @@ name the reference mod; never reuse its wording) govern every sentence**. Runs a
    already made stay). `metadata.lua` `description` + `docs/UPLOAD_WORKFLOW.md` §3 backups + `STORE_CARD_LIVE` in ONE commit,
    proven identical **by script**, not by eye (memory `store-card-backups-required-not-polish`). `last_changes` drafted
    for the release sitting.
-5. **Site source** (`C:\Dev\SMR-CommunityMods`): before writing, run that repository's `git log --oneline -5` and
+5. **Site source** (`B:\Dev\SMR\SMR-CommunityMods`): before writing, run that repository's `git log --oneline -5` and
    `git status --short`; stop on a dirty target. Then update the fix list and FAQ ("how do I switch a fix off?", "is my save clean
    if I switch one off?" — answer honestly per `EF-002`). ⛔ Commit only; publishing is the release sitting's
    (`publish-site.yml` is workflow_dispatch).

@@ -125,7 +125,7 @@ from sigcheck import params                        # THE parameter reader
 
 VERSION = "treediff.py v1.2 (2026-09-10, indented orphans covered; NOROWS)"
 
-ARCHIVE = r"C:\Dev\SMR-SrcArchive"
+ARCHIVE = r"B:\Dev\SMR\SMR-Shared\SMR-SrcArchive"
 DEFAULT_OLD = os.path.join(ARCHIVE, "1.0.7.396349", "Src")
 DEFAULT_NEW = os.path.join(ARCHIVE, "1.1.0.403908", "Src")
 

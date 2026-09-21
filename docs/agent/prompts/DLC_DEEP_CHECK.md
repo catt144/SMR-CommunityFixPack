@@ -102,7 +102,7 @@ rate in the chain's output — a fan-out that cannot be falsified is not evidenc
 Never modify the game directory, including the DLC `.fpk` files. Editor/version rail
 (`docs/agent/prompts/perma/release_prompt.md` § Release rails): no Mod Editor, no `version` edit, no
 upload. `H-08`: never pull a junction. `H-09`: never stage a packed folder beside a live one. Archive
-`ModTools\Src` before any game update (`C:\Dev\SMR-SrcArchive\`, standing rule in its README) — a DLC
+`ModTools\Src` before any game update (`B:\Dev\SMR\SMR-Shared\SMR-SrcArchive\`, standing rule in its README) — a DLC
 patch overwrites the DLC source too. Explicit file paths on every `git add`; never `add -A`, never a
 directory pathspec.
 

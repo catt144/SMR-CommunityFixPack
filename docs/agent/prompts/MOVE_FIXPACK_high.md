@@ -158,7 +158,7 @@ one. The TestKit and `SMR-ScreenCaptures` hold no reparse points at all (same sw
    Claude memory store that moves in item 6), `tools/store_screenshots.py:18`, TestKit
    `Code/74_SMRTK_Agent.lua:109`, the three command lines in `tools/SMRTK.md`, and `docs/README.md`'s
    "Outside the repo" block (every entry, at whatever address it actually has by then: the shared
-   trees are in `SMR-Shared`, the FR-1 folders are still on `C:`). ⚠️ **The in-code defaults are the
+   trees are in `SMR-Shared`, the FR-1 folders are in the local-only `SMR-FR1`). ⚠️ **The in-code defaults are the
    load-bearing part: pass one found that NONE of the five `SMR_*` variables is actually set on this
    machine**, so every script has been resolving through its default and the owner's `setx` block is
    a belt, not the braces. A sibling-relative default is the one that never breaks on the next move.
@@ -198,7 +198,7 @@ one. The TestKit and `SMR-ScreenCaptures` hold no reparse points at all (same sw
    LOCAL gate and the TestKit parse pass, plus the new `PARENT FILES` reading now that the parent is
    `B:\Dev\SMR`.
 9. **One fenced copy-paste block for the owner**: the `setx` environment block (`SMR_TESTKIT` and
-   `SMR_FIXPACK` to the new roots, `SMR_SRCARCHIVE` still on `C:`, `SMR_TRAINASSETS` as pass one left
+   `SMR_FIXPACK` to the new roots, `SMR_SRCARCHIVE` already at `B:\Dev\SMR\SMR-Shared\SMR-SrcArchive` by `MOVE_REST_20260921.md`, `SMR_TRAINASSETS` as pass one left
    it), plus any rename or symlink step you could not run yourself. Say which lines you already ran.
 
 10. **⚠️ Sweep the FORK too — your three trees are all over it.** Measured 09-21 in

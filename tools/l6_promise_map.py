@@ -29,7 +29,7 @@ import sys
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CODE = os.path.join(ROOT, "Code")
 BUGS = os.path.join(ROOT, "docs", "agent", "bugs")
-SITE = os.path.join(os.path.dirname(ROOT), "SMR-CommunityMods", "content")
+SITE = os.path.join(r"B:\Dev\SMR\SMR-CommunityMods", "content")
 
 
 def read(path):

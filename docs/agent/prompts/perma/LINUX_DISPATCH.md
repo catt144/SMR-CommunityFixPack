@@ -33,7 +33,7 @@ validation), `reports/FR1_OPTIONS_2026-09-10.md`, `EF-088` (the shader cache), `
   **3799500849** (public), Paradox Mods **158711**. It is **not in the fix pack and has no GitHub repo** (owner ruling, ck145).
   - **MASTER copy:** the owner's Windows Mods folder, `%APPDATA%\Surviving Mars Relaunched\Mods\SMR_FR1TempWorkaround`. It holds the
     listing ids and is at `version` 3 after the upload saves.
-  - **Source copy** (outside git, synced from the master) plus tools: `C:\Dev\SMR-FR1-TempMod-2026-09-11\`.
+  - **Source copy** (in the local-only `SMR-FR1` repo, synced from the master) plus tools: `B:\Dev\SMR\SMR-FR1\SMR-FR1-TempMod-2026-09-11\`.
 - **What its code does.** It gates on PC + `d3d12` + NVIDIA vendor `4318` + exactly `LuaRevision` 403908 / `AssetsRevision` 33006.
   - If a gate fails, it logs `[FR1 Temp Workaround] INACTIVE: <why>`. A game update gives "…version has changed… Please uninstall
     it."
@@ -72,10 +72,10 @@ given, marked player-stated. Nothing else.
   - **Any other `INACTIVE`:** quote it and investigate.
   - **`ACTIVE …` plus a crash:** find the `Dumping blob to …/<hash>.spv` line nearest before `handle_syscall_fault code=c0000005`
     **on the same thread** (the third `:`-separated field of a Proton log line is the thread id). Then run
-    `python C:\Dev\SMR-FR1-TempMod-2026-09-11\tools\identify_dump_names.py <hash>`, after its `--selftest`.
+    `python B:\Dev\SMR\SMR-FR1\SMR-FR1-TempMod-2026-09-11\tools\identify_dump_names.py <hash>`, after its `--selftest`.
     - **A cached compute program, NOT replaced:** a new crasher on that setup. Record it (a FINDINGS bullet) and put the option to
       the owner as a new checklist item: extend the overlay with a no-op for that record. The owner decides. It needs new root-matched
-      records built and validated; Astra's `build_v2.py` / `cache_records.py` in `C:\Dev\SMR-FR1-CacheRoute-V2-2026-09-11\` did
+      records built and validated; Astra's `build_v2.py` / `cache_records.py` in `B:\Dev\SMR\SMR-FR1\SMR-FR1-CacheRoute-V2-2026-09-11\` did
       that. The owner's rule: the orchestrator briefs and Astra builds, unless the owner asks directly.
     - **NOT a cached compute program:** a graphics or runtime-compiled shader, for which no mod fix is known. Report it to the
       owner, and to the dev with the owner's OK.
@@ -100,14 +100,14 @@ the owner posts it.
 together. Verify the match: the description must equal the Paradox block once whitespace is normalised. Leave the code unchanged
 unless the owner asks; the shipped code is the P1-tested bytes.
 
-## 3 · Tools and evidence (outside git unless stated)
+## 3 · Tools and evidence (in the local-only `SMR-FR1` repo unless stated)
 
 | what | where |
 |---|---|
-| desk harness (21 cases; Astra's mocks + the real `DlcMountFolder`) | `C:\Dev\SMR-FR1-TempMod-2026-09-11\tools\tempmod_harness.py` |
+| desk harness (21 cases; Astra's mocks + the real `DlcMountFolder`) | `B:\Dev\SMR\SMR-FR1\SMR-FR1-TempMod-2026-09-11\tools\tempmod_harness.py` |
 | dump name → shader (FNV-1 of the DXBC) | `…\tools\identify_dump_names.py` (`--selftest` first) |
 | preview card generator | `…\tools\make_preview.py` |
-| dump classifier (needs the `.dxil` files) | `C:\Dev\SMR-FR1-CacheRoute-V2-2026-09-11\classify_dump.py` |
+| dump classifier (needs the `.dxil` files) | `B:\Dev\SMR\SMR-FR1\SMR-FR1-CacheRoute-V2-2026-09-11\classify_dump.py` |
 | list or reconcile a `.fpk` (in the repo) | `tools/pack_list.py <fpk> --tree <mod folder>` |
 | Steam item status (public API, read-only) | POST `https://api.steampowered.com/ISteamRemoteStorage/GetPublishedFileDetails/v1/`, body `itemcount=1&publishedfileids[0]=3799500849` |
 
@@ -115,15 +115,15 @@ unless the owner asks; the shipped code is the P1-tested bytes.
 captures and Astra's first round were deleted 2026-09-20 on the owner's ruling, the field thread
 having closed as user error with no further report. Reopening FR-1 means a fresh round on the Mint
 rig, not a re-read: the findings, analysis and decisions in this repo are what survived, and
-`C:\Dev\SMR-FR1-DevPackage\` still holds what went to the Paradox devs.
+`B:\Dev\SMR\SMR-FR1\SMR-FR1-DevPackage\` still holds what went to the Paradox devs.
 Still on disk, as tools rather than evidence, until the workaround mod is retired:
-`C:\Dev\SMR-FR1-TempMod-2026-09-11\` and `C:\Dev\SMR-FR1-CacheRoute-V2-2026-09-11\` (§3's table
+`B:\Dev\SMR\SMR-FR1\SMR-FR1-TempMod-2026-09-11\` and `B:\Dev\SMR\SMR-FR1\SMR-FR1-CacheRoute-V2-2026-09-11\` (§3's table
 runs scripts from both).
 
 ## 4 · Bindings
 
 - **The owner posts and uploads.** No agent posts, uploads or touches a portal API (H-03), and no agent opens the Mod Editor.
-- **The mod lives outside git.** It never goes into `Code/` or the fix pack. The Windows Mods-folder copy is the master; re-sync the
+- **The mod lives in its own local-only repo, `B:\Dev\SMR\SMR-FR1` (no remote).** It never goes into `Code/` or the fix pack. The Windows Mods-folder copy is the master; re-sync the
   source copy from it after any owner upload.
 - **Read-only:** the evidence folders. The game directory and the source archives are never modified (DISPATCH §1).
 - **Say which kind of claim a line is:** MEASURED (a log or dump you read), owner-stated, player-stated, or INFERRED.

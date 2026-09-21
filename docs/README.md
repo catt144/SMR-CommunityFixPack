@@ -120,15 +120,28 @@ tree (`local/` above, or the tree itself). These are the exceptions — things
 every SMR mod uses, so no one tree owns them:
 
 - `C:\Dev\SMR-BugFixPack-TestKit` — shared test kit, its own repo.
-- `C:\Dev\SMR-SrcArchive` — both archived game trees plus `MANIFEST.sha256`.
-- `C:\Dev\workshop_fpk_archive` — six third-party Workshop mods by Steam id, prior-art reference.
+- `B:\Dev\SMR\SMR-Shared` — one shared repo, pull-only, for long-term material both mods
+  reference; local-only, no remote. It holds `SMR-SrcArchive\` (both archived game trees plus
+  `MANIFEST.sha256`) and `workshop_fpk_archive\` (six third-party Workshop mods by Steam id,
+  prior-art reference).
 - `C:\Dev\SMR-ScreenCaptures` — the owner's screenshot drop folder.
-- `C:\Dev\SMR-FR1-TempMod-2026-09-11` and `C:\Dev\SMR-FR1-CacheRoute-V2-2026-09-11` — the
-  FR-1 workaround mod's source copy and its desk tools, run by `perma/LINUX_DISPATCH.md`;
-  they go when that mod is retired.
-- `C:\Dev\SMR-FR1-DevPackage` — what went to the Paradox devs.
+- `B:\Dev\SMR\SMR-FR1` — the FR-1 workaround mod as its own local-only repo (no remote):
+  `SMR-FR1-TempMod-2026-09-11\` and `SMR-FR1-CacheRoute-V2-2026-09-11\` (the source copy and
+  its desk tools, run by `perma/LINUX_DISPATCH.md`; they go when that mod is retired),
+  `SMR-FR1-DevPackage\` and its `.zip` (what went to the Paradox devs).
 
 ## Path translation
+
+> 2026-09-21 (owner ask): the trees that sat directly under `C:\Dev` moved under `B:\Dev\SMR`, keeping
+> their own names. `C:\Dev\SMR-SrcArchive` and `C:\Dev\workshop_fpk_archive` →
+> `B:\Dev\SMR\SMR-Shared\<same name>` (one repo); the three `C:\Dev\SMR-FR1-*` folders and
+> `SMR-FR1-DevPackage.zip` → `B:\Dev\SMR\SMR-FR1\<same name>` (one local-only repo);
+> `C:\Dev\SMR-CommunityMods` and `C:\Dev\SMR-CommunitySaveRescue` → `B:\Dev\SMR\<same name>`; and,
+> in the first pass, `C:\Dev\SMR-OptInPack` and `C:\Dev\SMR-Assets` → `B:\Dev\SMR\<same name>`.
+> Live pointers were rewritten. Source-line citations in `agent/reports/`, `agent/bugs/`, `agent/facts/`,
+> the archive and the `Code/Fix_*.lua` comments still name the `C:\Dev` path: translate them, the build
+> named beside the path is what finds the file. The `<name>__MOVED_20260921` originals stay in `C:\Dev`
+> until the owner deletes them.
 
 > 2026-09-15: `docs/PLAYTEST_HELP.md` was dissolved by owner ruling ck182.
 > Prompt-writing hazards moved to the `prompt-authoring` skill; toolkit helpers

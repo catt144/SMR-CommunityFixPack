@@ -70,7 +70,7 @@ if TOOLS not in sys.path:
 from luafn import read_lines, find_bodies, SRC as SRC_LIVE  # noqa: E402
 
 TESTKIT = os.environ.get("SMR_TESTKIT", r"C:\Dev\SMR-BugFixPack-TestKit")
-SRC_ARCHIVE = os.environ.get("SMR_SRC_ARCHIVE", r"C:\Dev\SMR-SrcArchive\1.0.7.396349\Src")
+SRC_ARCHIVE = os.environ.get("SMR_SRC_ARCHIVE", r"B:\Dev\SMR\SMR-Shared\SMR-SrcArchive\1.0.7.396349\Src")
 TREES = {"1.1.0": SRC_LIVE, "1.0.7": SRC_ARCHIVE}
 
 # probe messages carry em dashes; a cp1252 console would print them as '?'

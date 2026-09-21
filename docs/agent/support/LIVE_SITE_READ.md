@@ -11,7 +11,7 @@ public until the owner runs the workflow.
    owner's act. Report that a deployment is owed.
 2. Never treat editing store strings as a correction to a live store page.
    `metadata.lua` ships inside the mod and only an owner upload changes the live
-   listing. Site content in `C:\Dev\SMR-CommunityMods\content\` is ordinary
+   listing. Site content in `B:\Dev\SMR\SMR-CommunityMods\content\` is ordinary
    editable work, but any edit remains undeployed until the owner publishes it.
 
 ## Identify the live commit

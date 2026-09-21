@@ -1,7 +1,7 @@
 # GAME_PATCH_PROMPT — triage a game patch against both packs
 
 A reusable job: keep it after each run. Fire it when a new game build is on disk (Steam `buildid` in
-`appmanifest_3215050.acf` differs from the newest `C:\Dev\SMR-SrcArchive\` version) or the owner asks.
+`appmanifest_3215050.acf` differs from the newest `B:\Dev\SMR\SMR-Shared\SMR-SrcArchive\` version) or the owner asks.
 Built 2026-09-19 from `reports/GAME_PATCH_INSTRUMENTS.md` (build record `reports/GAME_PATCH_BUILD_20260919.md`); check
 `git log -- tools/patchcheck.py docs/agent/prompts/perma/GAME_PATCH_PROMPT.md` before inheriting its facts.
 
@@ -29,7 +29,7 @@ step cost), marked as it lands. The 1.1.0 response recorded no cost; this list i
 ## Steps, in order
 
 1. **Archive.** If `patchcheck` says `A NOT archived`, copy the live `ModTools\Src` to
-   `C:\Dev\SMR-SrcArchive\<BuildVersion>\Src`, write its `MANIFEST.sha256` by the archive README's
+   `B:\Dev\SMR\SMR-Shared\SMR-SrcArchive\<BuildVersion>\Src`, write its `MANIFEST.sha256` by the archive README's
    recipe, and add the README row. Stop the job until this is done: nothing downstream is valid
    without the old tree (`EF-075`).
 2. **Sweep.** `python tools/patchcheck_selftest.py` (GREEN, ~20 s), then

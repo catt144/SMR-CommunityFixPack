@@ -361,7 +361,7 @@ The agent writes the rest down.
 folder holds these numbers and is the master; the agent's source copy is synced from it. Any later update goes out from that folder.
 
 **This is a separate mod, not the fix pack:** `SMR_FR1TempWorkaround`, "TEMPORARY - Linux NVIDIA 580 Crash Workaround".
-It sits in your Windows Mods folder; its source copy is in `C:\Dev\SMR-FR1-TempMod-2026-09-11\`. Checklist item **145** has
+It sits in your Windows Mods folder; its source copy is in `B:\Dev\SMR\SMR-FR1\SMR-FR1-TempMod-2026-09-11\`. Checklist item **145** has
 the background.
 
 > ✅ **P1 passed, and the page is ready as written** (you, 09-11). The packed mod works, including a cold boot straight into a

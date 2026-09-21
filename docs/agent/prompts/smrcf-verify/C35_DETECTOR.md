@@ -135,7 +135,7 @@ ride-along). ⚖️ **The decision is the owner's, and it belongs in
 - **`InterruptDrones` has changed shape on 1.1.0** such that the `Embark`
   condition no longer exists ⇒ that is an **ANSWER, not a failure**: `C35` may be
   vanilla-fixed like the dust-devil rider was. Check `EF-084` for the pattern,
-  read both trees (1.1.0 live, 1.0.7 at `C:\Dev\SMR-SrcArchive\1.0.7.396349\Src`),
+  read both trees (1.1.0 live, 1.0.7 at `B:\Dev\SMR\SMR-Shared\SMR-SrcArchive\1.0.7.396349\Src`),
   and if so file the refutation as a **`docs/agent/facts/` entry** and flip `C35` — do not
   build a detector for a defect that is gone.
 - **Watching it needs a behaviour change** ⇒ do not install it; say so.
