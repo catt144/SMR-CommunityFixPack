@@ -94,9 +94,7 @@ source and the Workshop corpus into a new `SMR-Shared`, the FR-1 folders into a 
 both community repos — precisely so your repoint happens once. By the time you run, **the fix pack,
 the TestKit and `SMR-ScreenCaptures` are the only things left on `C:`.** Read each earlier report
 (`docs/agent/reports/MOVE_*`) and derive every tree's CURRENT address from disk rather than from this
-list. `SMR-OptInPack` and `SMR-Assets`
-moved in pass one — read its report (`docs/agent/reports/MOVE_OPTIN_20260921.md`) before you start,
-and do not redo what it already did to this tree's pointers.
+list, and do not redo what an earlier pass already did to this tree's pointers.
 
 ## ⛔ Four junctions inside the fix pack — the one way to do real damage here
 
@@ -136,10 +134,14 @@ one. The TestKit and `SMR-ScreenCaptures` hold no reparse points at all (same sw
   `SMR-BugFixPack` and `SMR-BugFixPack-TestKit`. `SMR-OptInPack`, `SMR-TrainHubDev` and
   `SMR-TrainHubPrototype` are the train seat's; `SMR_FR1TempWorkaround` is a real folder and FR-1's.
 - **`.claude/` is the coordinator seat's.** Repoint literal path strings there and nothing else; its
-  prose and its rulings are not yours to rewrite. Four files hold `C:\Dev` (`HANDOFF_PROMPT.md` 4
-  hits, `IMPLEMENT_PROMPT.md` 5, `FRESH_SESSION_PROMPT.md` 3, `CHECKLIST_MARKERS_REVIEW.md` 2), plus
-  one under `.claude/briefs/` and four permission entries in `.claude/settings.json`. List what you
-  changed, line by line, for that seat to check.
+  prose and its rulings are not yours to rewrite. The folder was purged on 09-21, so find its
+  `C:\Dev` strings with a fresh grep rather than a list — `settings.json`'s permission entries and
+  `HANDOFF_PROMPT.md`'s `Fire with:` line are the live ones. ⛔ **Do not follow
+  `zz-owner/all-claude-memory` when you grep**: it is a junction into every Claude project on the
+  machine. The last pass reported 31,255 `C:\Dev` hits here; with `--exclude-dir` on both
+  `zz-owner` junctions, `saves` and `.git`, the tree holds 2,649, and `zz-owner/` itself 13
+  (`grep -rIoE 'C:[\\/]+Dev' … | wc -l`, 09-21). List
+  what you changed, line by line, for that seat to check.
 
 ## End state
 

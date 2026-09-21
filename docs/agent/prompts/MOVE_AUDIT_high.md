@@ -53,7 +53,9 @@ of past runs: rewriting them would be the defect.
    selftests, PACK IGNORE PARITY and the LOCAL gate. The pack predictor still excludes `local/` and
    `scratch/`.
 3. **The path sweep, counted both ways.** Grep every moved tree for every OLD root and report what is
-   left BY CLASS, naming who owns each survivor. A survivor inside the other seat's boundary is
+   left BY CLASS, naming who owns each survivor. ⛔ **Exclude junctions from every count** (`grep
+   --exclude-dir`): `zz-owner/all-claude-memory` walks into every Claude project on the machine, and
+   following it turned one pass's 2,649 real hits into a reported 31,255. A survivor inside the other seat's boundary is
    expected; a survivor in prose, a `docs/` map, `.claude/settings.json` or a script a mover owned is
    a finding, and so is a record that was rewritten when it should have been left as a record. Tools
    outside git count: the TestKit hard-codes its capture folder in `Code/74_SMRTK_Agent.lua` with a
