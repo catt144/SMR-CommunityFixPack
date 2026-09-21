@@ -89,11 +89,12 @@ capture path is hard-coded at `Code/74_SMRTK_Agent.lua:109`. Splitting them leav
 pointing at one that has not moved.
 
 ⚠️ **Passes before yours have already moved things you point at.** The opt-in pack and `SMR-Assets`
-went first; `MOVE_SHARED_high.md` then put the archived game source and the Workshop corpus into
-`B:\Dev\SMR\SMR-Shared`, precisely so your repoint happens once. Read each earlier report
+went first; `MOVE_REST_high.md` then moved **every remaining tree but yours** — the archived game
+source and the Workshop corpus into a new `SMR-Shared`, the FR-1 folders into a new `SMR-FR1`, and
+both community repos — precisely so your repoint happens once. By the time you run, **the fix pack,
+the TestKit and `SMR-ScreenCaptures` are the only things left on `C:`.** Read each earlier report
 (`docs/agent/reports/MOVE_*`) and derive every tree's CURRENT address from disk rather than from this
-list. Still on `C:` and none of your business: the FR-1 folders, `SMR-CommunityMods`,
-`SMR-CommunitySaveRescue`. `SMR-OptInPack` and `SMR-Assets`
+list. `SMR-OptInPack` and `SMR-Assets`
 moved in pass one — read its report (`docs/agent/reports/MOVE_OPTIN_20260921.md`) before you start,
 and do not redo what it already did to this tree's pointers.
 
