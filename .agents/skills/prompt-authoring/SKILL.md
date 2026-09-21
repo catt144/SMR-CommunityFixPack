@@ -62,7 +62,9 @@ judgement, and cut every line a named skill or the worker's own judgement alread
 
 - Include the probe sweep before testing (WORKFLOW, Probe hygiene). Its age is a trigger satisfied
   at the next playtest (ck184), never a reason to refuse work.
-- Before asking the owner to build a fixture, have the worker look for an existing save that has it.
+- A worker reads the owner's saves only when the owner asks. Before a fixture is built, ask the
+  owner whether one already exists; never scan their save folder to find out (owner, 2026-09-18:
+  "most of the time they are wrong anyway").
 - A warmed-up save is the default; state only a deviation, such as reading immediately after load.
 - Behaviour, timing, throughput and player-notice claims state the fixture's scarcity, fleet,
   density and layout, and report that colony, not a generalisation.
