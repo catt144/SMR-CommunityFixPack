@@ -70,8 +70,10 @@ of past runs: rewriting them would be the defect.
 7. **Nothing resolves by accident.** Anything that still works only because an old root, a `__MOVED_`
    original or a stale variable is still on disk. The owner deletes the originals on your pass, so
    say plainly, per original, whether it is safe to delete.
-8. **The root rule.** `B:\Dev\SMR` holds repos and nothing else, unless the owner's register names an
-   exception.
+8. **The root rule.** `B:\Dev\SMR` holds repos and nothing else, with ONE exception the owner cleared
+   on 2026-09-21: `B:\Dev\SMR\SMR-ScreenCaptures`, their capture drop folder, shared because the
+   TestKit writes to it. Check that the TestKit and `tools/store_screenshots.py` both write THERE —
+   a capture landing in `AppData/` is the kit's silent fallback, and it is the finding.
 
 ## Your call
 
