@@ -46,10 +46,22 @@ oversight, and raising it is a repeat offence.
    own sha256 manifest at the new location** — that is a real integrity check rather than a count.
    Find it first: there is no `MANIFEST.sha256` at the archive's top level, so locate what actually
    covers each build tree, and where nothing does, hash both sides yourself and compare.
-4. **Live consumers repointed, in BOTH packs.** ⛔ Re-derive the list; two recorded lists disagree
-   and neither is authoritative. The owner's register names `patchcheck`, `treediff`, `presetdiff`
-   and `bodycheck`; a 09-21 grep of `tools/` returned `deskbench.py`, `patchcheck.py`, `treediff.py`,
-   `l6_promise_map.py` and `TESTKIT.md`. Grep both repos and reconcile what you find against both.
+4. **Live consumers repointed — in the DONOR, not in both copies.** ⛔ Re-derive the list; two
+   recorded lists disagree and neither is authoritative. The owner's register names `patchcheck`,
+   `treediff`, `presetdiff` and `bodycheck`; a 09-21 grep of `tools/` returned `deskbench.py`,
+   `patchcheck.py`, `treediff.py`, `l6_promise_map.py` and `TESTKIT.md`. Grep both repos and
+   reconcile what you find against both.
+   ⚠️ **`tools/` is shared, and the fix pack is the donor.** The fork keeps a ledger of which tools
+   are adapted, not ported or local-only (`TOOLS_ADAPTED`, `TOOLS_NOT_PORTED`, `TOOLS_LOCAL_ONLY` in
+   its `tools/sync_from_fixpack.py`). ⛔ **Do not hand-edit the fork's copy of a mirrored tool** — it
+   reads as undeclared drift on the next sync and may overwrite a deliberate adaptation. Change the
+   fix pack's copy, then say in your report that a sync pass is OWED. The fork's
+   `prompts/perma/KNOWLEDGE_SYNC_PASS.md` carries it across on the owner's yes; it is the owner's to
+   fire and not yours to run.
+   **One fork file IS yours**, because it is the fork's own and mirrored from nothing:
+   `tools/sync_from_fixpack.py:333`, whose `SRC_ARCHIVE` default is `C:\Dev\SMR-SrcArchive`. Repoint
+   it in the same pass — it degrades loudly rather than silently (the script prints a SKIPPED line
+   naming the missing donor path), but a knowledge route that skips is still a broken one.
 5. **⚠️ The environment variable has two spellings in the tree.** `doccheck.py` reads
    `SMR_SRCARCHIVE`; `deskbench.py:12` documents `SMR_SRC_ARCHIVE`. Establish which each consumer
    actually reads before you rely on either, and remember pass one's finding: **none of the five

@@ -93,7 +93,13 @@ of past runs: rewriting them would be the defect.
    present: `local/` with its tracked README gate, `.claude/`, `zz-owner/`. Each moved tree's Claude
    memory store exists under the new root's derived name and holds its memories. `core.hooksPath` is
    relative, or absolute to the tree it sits in — never to a `__MOVED_` original, which would mean
-   the hooks silently stopped gating commits.
+   the hooks silently stopped gating commits. ⭐ **The route between the two packs still resolves:**
+   the fork's `tools/sync_from_fixpack.py` reads `SMR_FIXPACK`, `SMR_SRCARCHIVE`, `SMR_TESTKIT` and
+   `SMR_TRAINASSETS`, each with an in-code default and none of those variables set on this machine.
+   Run it and read its output — a donor it cannot find makes it SKIP, so the two packs quietly stop
+   exchanging tools and facts while every other gate stays green. Check too that no mover hand-edited
+   the fork's copy of a mirrored tool instead of the donor's: that is drift the ledger did not
+   declare, and it surfaces as an undeclared difference in the same run.
 
 ## Your call
 

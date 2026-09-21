@@ -161,6 +161,14 @@ one. The TestKit and `SMR-ScreenCaptures` hold no reparse points at all (same sw
    load-bearing part: pass one found that NONE of the five `SMR_*` variables is actually set on this
    machine**, so every script has been resolving through its default and the owner's `setx` block is
    a belt, not the braces. A sibling-relative default is the one that never breaks on the next move.
+   ⚠️ **`tools/` is shared and this repo is the donor.** ⛔ Do not hand-edit the fork's copy of a
+   mirrored tool: it keeps a ledger of which are adapted, not ported or local-only, and an ad-hoc
+   edit reads as undeclared drift or overwrites a deliberate adaptation. Change the copy here, then
+   report that a sync pass is OWED — the fork's `prompts/perma/KNOWLEDGE_SYNC_PASS.md` carries it on
+   the owner's yes and is theirs to fire. **But two defaults in the fork's own
+   `tools/sync_from_fixpack.py` are yours and break on THIS move**: line 51's `SMR_FIXPACK` donor
+   default and line 337's `SMR_TESTKIT`, both still `C:\Dev\...` on 09-21. Left alone the fork can no
+   longer find this repo and every future knowledge sync skips — loudly, but skipped all the same.
 5. **Records stay records, and an absolute-path count is not a work list.** 106 tracked files carry a
    `C:\Dev` path and 104 of them are under `docs/agent/reports/` — source-line citations in
    `still-needed/*.json`, past commands, evidence of where something was read. ⛔ Rewriting those is
