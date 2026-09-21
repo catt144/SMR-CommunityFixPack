@@ -22,6 +22,18 @@ Pass one kept the mover outside the moving tree. This prompt cannot: it lives in
 - **The moment a copy verifies, the tree at `B:` is the live one.** Every later edit, commit and push
   happens THERE. Do not edit, pull or commit in `C:\Dev\SMR-BugFixPack` again, including this
   prompt's own deletion and your report. Say in your report which commits landed in which tree.
+- **Other sessions are rooted in this tree too**, and both trees share one remote, so work can land
+  in the copy that is about to be abandoned and two trees can race to push `main`. Run `ListAgents`
+  and `git log --oneline origin/main..` in both trees at the switch; if a peer is live in the old
+  tree, that is a stop — the owner closes it. Re-check immediately before the rename.
+- **`core.hooksPath` is absolute on this machine**: `git config --local core.hooksPath` reads
+  `c:\Dev\SMR-BugFixPack\tools\hooks` (09-21), and `.git/config` travels with a filesystem copy. So
+  the new tree would run the OLD tree's hooks, and run none at all once the original is renamed —
+  silently, with doccheck no longer gating a commit. Set it to the relative `tools/hooks` that
+  `CLAUDE.md` documents, in BOTH new repos, and prove a hook fires from the new root.
+- **This prompt deletes itself, and it lives in the tree you are moving.** Keep what you still need
+  before the old tree is renamed; a re-read of `C:\Dev\SMR-BugFixPack\docs\agent\prompts\...` will
+  fail afterwards, and you may be mid-job with the file already deleted.
 
 ## Decided by the owner, 2026-09-21 — build it, do not reopen it
 
@@ -95,7 +107,9 @@ shows two links with identical targets, and `du -sh` of the new tree is about 19
    `docs/agent/reports/` — source-line citations in `still-needed/*.json`, past commands, evidence of
    where something was read. ⛔ Rewriting those is the defect, not the fix. Repoint LIVE pointers
    only, and give the count you changed against the count you left.
-6. **The Claude memory store follows the tree, or this seat starts empty.** The store is keyed by
+6. **The Claude memory store follows the tree, or this seat starts empty — and this is one of your
+   LAST steps**, because your own session writes into it while you work and an early copy loses
+   whatever you write afterwards. The store is keyed by
    root path: `%USERPROFILE%\.claude\projects\c--Dev-SMR-BugFixPack` (77 memory files, 229 KB;
    663 MB with session transcripts) becomes `b--Dev-SMR-SMR-BugFixPack` (name derived from the
    pattern, not observed — confirm it on the first session at the new root and say so). **Copy, never
@@ -130,9 +144,14 @@ train seat's files listed above.
 
 ## Stops — report instead of pushing on
 
-A copy's count, bytes, HEAD or symlink shape does not match and you cannot show why · the rename of
-your own root is refused and you have no safe alternative · doccheck REDs at the new root for a
-reason that is not a path you introduced.
+A copy's count, bytes, HEAD or symlink shape does not match and you cannot show why · another session
+is live in the old tree at the switch, or an unpushed commit exists in a tree you are about to
+abandon · doccheck REDs at the new root for a reason that is not a path you introduced.
+
+Measured 09-21 and NOT dangers, so do not spend the budget re-deriving them: `B:` is a fixed internal
+NTFS volume (`Win32_LogicalDisk` DriveType 3, no `subst`), so the mod's symlink target survives a
+reboot; and the longest path in the tree is 118 characters against a 260 limit, with the new root
+only 8 characters longer.
 
 ## Do not claim
 
