@@ -71,9 +71,8 @@ These formats do not exempt either category from the door.
 
 ### Authority preserved here
 
-The source is the gitignored `.claude/DECISIONS.md`, 2026-09-15 entries
-"THE STATE ADMISSION TEST, COMPLETE" and "THE VOLATILITY TEST". This prompt
-holds the durable door; executing it does not require that local file.
+Ruled 2026-09-15. This prompt is the door's only home; the owner's words are
+kept here, and no other file holds them.
 The owner's words are preserved verbatim:
 
 > "This shoud also be part of the admintions test if its a job it should be asked Whose job if it
