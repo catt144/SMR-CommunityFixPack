@@ -11,14 +11,25 @@ authoring sha, and `git diff --stat <sha>..HEAD -- tools/ docs/README.md` empty 
 still hold. Put the work list in your todo tool before the first write, one item per
 commit-and-verify unit, and keep it current — the owner reads it to decide when to step in.
 
-## ⛔ You are rooted in the tree you are moving. That is new, and it drives the order.
+## Where you run from, and what it does and does not fix
 
-Pass one kept the mover outside the moving tree. This prompt cannot: it lives in the fix pack. So:
+**Root this session at `B:\Dev\SMR\SMR-OptInPack`** (owner, 2026-09-21) and fire this file by its
+absolute path in the fix pack. That tree moved in pass one and is standardised on this repo, so the
+same rules and skills load, and you sit outside every tree you move — which is what makes the final
+rename yours to run instead of the owner's. Do not copy this prompt into that repo: its own prompt
+map would reject an unmapped file. Write nothing into it beyond what a session unavoidably writes.
 
-- **Windows will not rename a directory that is a live process's working directory.** Your session
-  holds `C:\Dev\SMR-BugFixPack`. Test it rather than assuming; if the rename is refused, the fix
-  pack's own rename is a fenced block the owner runs after this session ends. The TestKit and the
-  captures are not your cwd and you rename those yourself.
+**The one cost: you will not have the fix pack's memory store** (77 memories keyed to
+`C:\Dev\SMR-BugFixPack`; the fork's store holds 8, about train hub work). Everything from it that
+bears on this job is in "Measured on this machine" below. Do not go hunting for the rest.
+
+**If you are instead rooted in the fix pack itself**, two things change and both are traps. Windows
+will not rename a directory that is a live process's working directory, so the fix pack's own rename
+becomes a fenced block for the owner to run after your session ends. And this prompt deletes itself
+per its lifecycle while living in the tree you are moving, so a later re-read of its path fails.
+
+Either way:
+
 - **The moment a copy verifies, the tree at `B:` is the live one.** Every later edit, commit and push
   happens THERE. Do not edit, pull or commit in `C:\Dev\SMR-BugFixPack` again, including this
   prompt's own deletion and your report. Say in your report which commits landed in which tree.
@@ -31,9 +42,32 @@ Pass one kept the mover outside the moving tree. This prompt cannot: it lives in
   the new tree would run the OLD tree's hooks, and run none at all once the original is renamed —
   silently, with doccheck no longer gating a commit. Set it to the relative `tools/hooks` that
   `CLAUDE.md` documents, in BOTH new repos, and prove a hook fires from the new root.
-- **This prompt deletes itself, and it lives in the tree you are moving.** Keep what you still need
-  before the old tree is renamed; a re-read of `C:\Dev\SMR-BugFixPack\docs\agent\prompts\...` will
-  fail afterwards, and you may be mid-job with the file already deleted.
+## Measured on this machine — these are the memory-store facts that bear on this job
+
+Each is silent when it bites, which is why they are here rather than left to be re-derived.
+
+- ⛔ **Never `git checkout --` or `git restore` as a restore.** It restores to HEAD and has silently
+  destroyed an uncommitted rewrite in this tree. The TestKit's dirty file is exactly that exposure:
+  restore from a copy and sha256 it instead.
+- **Commit with `git commit -F <msg> -- <paths>`.** The index is shared with peer sessions; on 09-21
+  a peer had 22 unrelated files modified here mid-job. A bare `git commit -a` would have taken them.
+- **A heredoc to Python or the shell eats backslashes**, so a Windows path written that way is
+  silently wrong. Write scripts with the editor tool and re-read the path you wrote.
+- **The tree is LF and a mixed file turns doccheck RED.** Python text mode writes CRLF on Windows —
+  pass `newline="\n"`; `tools/doccheck.py --fix-eol` repairs it.
+- **PowerShell 5.1 mangles commit-message quoting and writes UTF-8 with a BOM**, and
+  `Compress-Archive` writes backslash paths. Prefer the Bash tool for git and for archives.
+- **An empty `rg` is not proof of absence here**: a root `.rgignore` hides `docs/archive/`. Confirm
+  with `grep -r` or `rg --no-ignore` before claiming a path no longer appears anywhere.
+
+## Before you copy anything
+
+The fix pack tree must be CLEAN and pass one's repoint of this tree must have landed — on 09-21 the
+pass-one mover was still rewriting `C:\Dev\SMR-OptInPack` to `B:\Dev\SMR\SMR-OptInPack` across 22
+files here (`D01`-`D12` `moved_to` front matter, `items.lua`, `tools/patchcheck.py`, the maps,
+`WORKFLOW.md`, `FIX_POLICY.md`). Copying over that leaves a peer's uncommitted work inside a tree
+they can no longer reach. `git status` clean in all three trees except the TestKit's one known dirty
+file, or stop.
 
 ## Decided by the owner, 2026-09-21 — build it, do not reopen it
 
