@@ -88,8 +88,12 @@ C:\Dev\SMR-ScreenCaptures      ->  B:\Dev\SMR\SMR-ScreenCaptures
 capture path is hard-coded at `Code/74_SMRTK_Agent.lua:109`. Splitting them leaves a repointed tree
 pointing at one that has not moved.
 
-Still on `C:` after this pass, and none of your business: `SMR-SrcArchive`, `workshop_fpk_archive`,
-the FR-1 folders, `SMR-CommunityMods`, `SMR-CommunitySaveRescue`. `SMR-OptInPack` and `SMR-Assets`
+⚠️ **Passes before yours have already moved things you point at.** The opt-in pack and `SMR-Assets`
+went first; `MOVE_SHARED_high.md` then put the archived game source and the Workshop corpus into
+`B:\Dev\SMR\SMR-Shared`, precisely so your repoint happens once. Read each earlier report
+(`docs/agent/reports/MOVE_*`) and derive every tree's CURRENT address from disk rather than from this
+list. Still on `C:` and none of your business: the FR-1 folders, `SMR-CommunityMods`,
+`SMR-CommunitySaveRescue`. `SMR-OptInPack` and `SMR-Assets`
 moved in pass one — read its report (`docs/agent/reports/MOVE_OPTIN_20260921.md`) before you start,
 and do not redo what it already did to this tree's pointers.
 
@@ -152,8 +156,8 @@ one. The TestKit and `SMR-ScreenCaptures` hold no reparse points at all (same sw
    `deskbench.py:72` (TestKit default), `doccheck.py:759` (`SMR_MEMORY`, whose default points at the
    Claude memory store that moves in item 6), `tools/store_screenshots.py:18`, TestKit
    `Code/74_SMRTK_Agent.lua:109`, the three command lines in `tools/SMRTK.md`, and `docs/README.md`'s
-   "Outside the repo" block (only the entries that actually moved — `SMR-SrcArchive`,
-   `workshop_fpk_archive` and the FR-1 folders stay on `C:`). ⚠️ **The in-code defaults are the
+   "Outside the repo" block (every entry, at whatever address it actually has by then: the shared
+   trees are in `SMR-Shared`, the FR-1 folders are still on `C:`). ⚠️ **The in-code defaults are the
    load-bearing part: pass one found that NONE of the five `SMR_*` variables is actually set on this
    machine**, so every script has been resolving through its default and the owner's `setx` block is
    a belt, not the braces. A sibling-relative default is the one that never breaks on the next move.
