@@ -7,7 +7,7 @@ job prompt that runs it is `docs/agent/prompts/perma/GAME_PATCH_PROMPT.md`.
 
     python tools/patchcheck.py                       # newest older archive -> live install, Code/
     python tools/patchcheck.py --old 1.1.0.403908    # 1.1.0 -> 1.1.0: must say none
-    python tools/patchcheck.py --code C:\\Dev\\SMR-OptInPack\\Code
+    python tools/patchcheck.py --code B:\\Dev\\SMR\\SMR-OptInPack\\Code
     python tools/patchcheck_selftest.py              # the regression test; run it first
 
 It emits ONE block and every count in it. Paste the block; never retype a count.

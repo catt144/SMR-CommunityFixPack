@@ -33,7 +33,7 @@ step cost), marked as it lands. The 1.1.0 response recorded no cost; this list i
    recipe, and add the README row. Stop the job until this is done: nothing downstream is valid
    without the old tree (`EF-075`).
 2. **Sweep.** `python tools/patchcheck_selftest.py` (GREEN, ~20 s), then
-   `python tools/patchcheck.py --code Code --code C:\Dev\SMR-OptInPack\Code > <scratchpad>\patchcheck.txt`
+   `python tools/patchcheck.py --code Code --code B:\Dev\SMR\SMR-OptInPack\Code > <scratchpad>\patchcheck.txt`
    (defaults: newest older archive → the live install). Also `python tools/bodycheck.py` for the
    `DEFECT-GONE` candidates D1 does not look for. Open the run report
    `docs/agent/reports/GAMEPATCH_<BuildVersion>_<date>.md` and paste the patchcheck block verbatim.
@@ -59,7 +59,7 @@ step cost), marked as it lands. The 1.1.0 response recorded no cost; this list i
    patch" says the instruments license, shaped by `prompt-authoring`. A found defect is filed (`smr-bug-library`),
    not fixed here. Put a deep-sweep decision and its cost line in the checklist.
 8. **The opt-in outbox entry.** Write
-   `C:\Dev\SMR-OptInPack\docs\agent\prompts\perma\gamepatch\<BuildVersion>_<date>.md` in the format
+   `B:\Dev\SMR\SMR-OptInPack\docs\agent\prompts\perma\gamepatch\<BuildVersion>_<date>.md` in the format
    of that folder's README, **even when nothing is flagged**. Copy the opt-in section of the block
    verbatim; never interpret an opt-in row. Commit it in the fork with a pathspec.
 9. **Limits review.** In the run report, record |M|, T, B, D3 and the verdict next to what the reads

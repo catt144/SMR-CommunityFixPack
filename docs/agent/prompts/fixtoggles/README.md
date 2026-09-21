@@ -119,7 +119,7 @@ inherits the old total.
 (from 02 onward; 01 writes it) · `Code/00_Core.lua` · `docs/agent/FIX_POLICY.md` §2, §3a, §5, §7, §8 · `docs/agent/facts/EF-002.md`,
 `docs/agent/facts/EF-004.md`, `docs/agent/facts/EF-058.md` · `docs/PLAYTEST_CHECKLIST.md` item 148 · your own prompt's inbox. Game source: 1.1.0 at
 `A:\SteamLibrary\steamapps\common\Project Spark\ModTools\Src` (read-only); 1.0.7 archive at
-`C:\Dev\SMR-SrcArchive\1.0.7.396349\Src`. Working model of the Mod Options route: `C:\Dev\SMR-OptInPack` (`items.lua`,
+`C:\Dev\SMR-SrcArchive\1.0.7.396349\Src`. Working model of the Mod Options route: `B:\Dev\SMR\SMR-OptInPack` (`items.lua`,
 `metadata.lua`, `Code/00_Core.lua`).
 
 ## Derived facts and falsifiers — inherited by every link

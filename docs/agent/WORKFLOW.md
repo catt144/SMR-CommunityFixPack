@@ -24,7 +24,7 @@ Process rules for this repo. Code rules are `FIX_POLICY.md`; the global duties a
 - TestKit, never shipped and local-only by decision: `C:\Dev\SMR-BugFixPack-TestKit`. Its README is
   the kit's own build-state document; the durable pack-side view is `tools/TESTKIT.md`, and the
   SMR Tool Kit plus its sitting slots are `tools/SMRTK.md`.
-- Sibling mods: the opt-in pack `C:\Dev\SMR-OptInPack` (its own docs) and the save-rescue tool
+- Sibling mods: the opt-in pack `B:\Dev\SMR\SMR-OptInPack` (its own docs) and the save-rescue tool
   `C:\Dev\SMR-CommunitySaveRescue` (design and status in `bugs/D13.md`; unpublished, held as a
   contingency).
 

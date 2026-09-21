@@ -16,7 +16,7 @@ this product; nothing was carried across from that frozen file.
 audit 2026-08-14). Nothing was re-authored. What is added: the holes rendered as
 `>>> FILL-IN <<<` markers, and the instruction for each beside it below.
 
-⛔ **The mod itself lives in `C:\Dev\SMR-OptInPack`.** This file is the paste
+⛔ **The mod itself lives in `B:\Dev\SMR\SMR-OptInPack`.** This file is the paste
 source; its `metadata.lua` strings are a separate, already-applied thing (see the
 portal-prep sheet). ⛔ **Not published. Rule 5.**
 

@@ -318,7 +318,7 @@ enumeration, never by self-description (F29 called itself mod-facing and had fou
 ## 5. Optional modules (`Opt_*`)
 
 Not in this pack since 2026-08-12. All `Opt_` modules and the whole Mod Options surface live
-in the standalone Community Opt-In Pack (`C:\Dev\SMR-OptInPack`), where this section is the
+in the standalone Community Opt-In Pack (`B:\Dev\SMR\SMR-OptInPack`), where this section is the
 live spec; `00_Core.lua` keeps the `optional`/`OptionEnabled`/`ApplyModOptions` machinery
 dormant. Here it is the test for what does not belong: a proposal that needs a toggle is not
 a fix, it is that mod's, and §4's unintended-defect test decides.

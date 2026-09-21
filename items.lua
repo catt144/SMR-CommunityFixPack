@@ -3,7 +3,7 @@
 -- ⛔ THIS PACK HAS NO MOD OPTIONS (2026-08-12, the opt-in split). Every
 -- ModItemOptionToggle and ModItemOptionChoice, and the eight Opt_ modules they
 -- steered, moved to the standalone Community Opt-In Pack
--- (C:\Dev\SMR-OptInPack). metadata.lua consequently has no `default_options`
+-- (B:\Dev\SMR\SMR-OptInPack). metadata.lua consequently has no `default_options`
 -- field, so the pack no longer lists in Options → Mod Options at all — that is
 -- the intended post-split shape, and the TestKit's OptionsMenuFixPack probe
 -- asserts it. The rules that governed those entries (toggle name == Register

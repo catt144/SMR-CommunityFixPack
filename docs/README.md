@@ -63,7 +63,7 @@ grouped** (`C03-C11.md`, `C12-C38.md` — several candidates share one body, and
 the file name states what it holds). `INDEX.md` is **generated** and carries
 all 160 index rows. ⚠️ **Nine of the `D` entries are TOMBSTONES** (D01–D07, D09,
 D12, since 2026-08-12): their modules moved to the Community Opt-In Pack and so
-did their records — `C:\Dev\SMR-OptInPack\docs\agent\bugs\`. The stubs stay
+did their records — `B:\Dev\SMR\SMR-OptInPack\docs\agent\bugs\`. The stubs stay
 because `INDEX.md` is generated from contiguous `seq`, and because hundreds of
 references resolve through them. *(These counts are prose, and doccheck does not
 check prose — they read 116/151 until 2026-08-12, an era stale. Re-derive from

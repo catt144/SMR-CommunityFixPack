@@ -40,7 +40,7 @@ good ideas — this is not a rejection bin.
 *"We shoud move anything thats possible opt ins to only the opt in future ideas
 doc … want this folder reserved for only bug related items."* Anything
 feature/preference-shaped — i.e. anything that would ship as an opt-in module —
-parks in `C:\Dev\SMR-OptInPack\docs\FUTURE_IDEAS.md` instead. Six entries moved
+parks in `B:\Dev\SMR\SMR-OptInPack\docs\FUTURE_IDEAS.md` instead. Six entries moved
 there that day (ledger below the parked items).
 
 ## What NEVER belongs here

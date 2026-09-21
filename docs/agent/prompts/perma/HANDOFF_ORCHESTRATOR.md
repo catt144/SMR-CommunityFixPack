@@ -189,4 +189,4 @@ name that register and are owed a substitution under [STATE_EVICTION.md](STATE_E
 ## 5 · Where things live that the maps do not say
 
 - `EF-###` ids are allocated by this repo for both this pack and the opt-in mod (ck167, ck86).
-- The opt-in mod's own decisions live in `C:\Dev\SMR-OptInPack\docs\DECISIONS_OWED.md` (moved 2026-09-12).
+- The opt-in mod's own decisions live in `B:\Dev\SMR\SMR-OptInPack\docs\DECISIONS_OWED.md` (moved 2026-09-12).

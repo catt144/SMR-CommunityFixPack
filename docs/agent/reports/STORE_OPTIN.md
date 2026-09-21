@@ -4,11 +4,11 @@
 same voice and the same sitting as `STORE_FIXPACK.md`. Design:
 `PUBLIC_DOCS_DESIGN.md`. Raw material: `docs/archive/MOD_DESCRIPTION.md`
 (FROZEN — its "Optional modules" section is *split out*, never edited) plus the
-eight modules' own headers in `C:\Dev\SMR-OptInPack\Code\`.
+eight modules' own headers in `B:\Dev\SMR\SMR-OptInPack\Code\`.
 
 ⛔ **The mod this describes lives in another repo.** This file is the chain's
 deliverable and the audit target; **release prep copies the player text into
-`C:\Dev\SMR-OptInPack` and into that mod's `metadata.lua`.** Nothing here edits
+`B:\Dev\SMR\SMR-OptInPack` and into that mod's `metadata.lua`.** Nothing here edits
 the other repo.
 
 ⛔ **Everything between the two `═══ PLAYER TEXT ═══` rules is player-facing** and
@@ -342,7 +342,7 @@ genuinely useful.
 
 ### Owed elsewhere
 
-* The player text above is copied into `C:\Dev\SMR-OptInPack` at release prep,
+* The player text above is copied into `B:\Dev\SMR\SMR-OptInPack` at release prep,
   and its `metadata.lua` `description` / `short_description` replaced with the
   strings drafted in `STORE_METADATA_STRINGS.md`.
 * ✅ ~~`Opt_DroneOverhaul.lua`'s header still names the old *"Options → Mod
