@@ -111,13 +111,14 @@ unless the owner asks; the shipped code is the P1-tested bytes.
 | list or reconcile a `.fpk` (in the repo) | `tools/pack_list.py <fpk> --tree <mod folder>` |
 | Steam item status (public API, read-only) | POST `https://api.steampowered.com/ISteamRemoteStorage/GetPublishedFileDetails/v1/`, body `itemcount=1&publishedfileids[0]=3799500849` |
 
-Evidence is read-only and never edited:
-- `C:\Dev\SMR-FR1-Evidence\`: the original bench.
-- `C:\Dev\fr1-mm-complete\`: legs A/B/D/E.
-- `C:\Dev\fr1-cache\fr1-cache\`: C1/N1.
-- `C:\Dev\Success\`: C2/Q2/R2 and `fr1-packed-proof`.
-- `C:\Dev\SMR-FR1-CacheRoute-2026-09-10\` and `…-V2-2026-09-11\`: Astra's rounds.
-- `C:\Dev\SMR-FR1-Options-2026-09-10\`.
+**The raw evidence is gone** — the benches, both cache-leg sets, the driver and shader-cache
+captures and Astra's first round were deleted 2026-09-20 on the owner's ruling, the field thread
+having closed as user error with no further report. Reopening FR-1 means a fresh round on the Mint
+rig, not a re-read: the findings, analysis and decisions in this repo are what survived, and
+`C:\Dev\SMR-FR1-DevPackage\` still holds what went to the Paradox devs.
+Still on disk, as tools rather than evidence, until the workaround mod is retired:
+`C:\Dev\SMR-FR1-TempMod-2026-09-11\` and `C:\Dev\SMR-FR1-CacheRoute-V2-2026-09-11\` (§3's table
+runs scripts from both).
 
 ## 4 · Bindings
 
