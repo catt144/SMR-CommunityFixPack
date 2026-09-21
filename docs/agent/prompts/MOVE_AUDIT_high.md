@@ -51,7 +51,9 @@ of past runs: rewriting them would be the defect.
    carries it. A tree that was not a repo gets counts and hashes against its original instead.
 2. **Every tree works where it now lives.** doccheck GREEN from each new root that has one, with its
    selftests, PACK IGNORE PARITY and the LOCAL gate. The pack predictor still excludes `local/` and
-   `scratch/`.
+   `scratch/`. A GREEN that carries a `not found` or `not checked` leg did not run that leg: the
+   fork's doccheck stayed GREEN on 09-21 while its TestKit legs read `TestKit not found`, because
+   its `doccheck.py:66` default waits on the owed sync pass. Name each such leg and whose it is.
 3. **The path sweep, counted both ways.** Grep every moved tree for every OLD root and report what is
    left BY CLASS, naming who owns each survivor. ⛔ **Exclude junctions from every count** (`grep
    --exclude-dir`): `zz-owner/all-claude-memory` walks into every Claude project on the machine, and
@@ -77,7 +79,14 @@ of past runs: rewriting them would be the defect.
    safe to delete.** Check each moved tree for a remote, and where there is none, say that deleting
    the original takes redundancy to zero and name what would be lost. `SMR-Assets` (504 MB, five
    tags) and the TestKit both have no remote. That is deliberate and owned elsewhere — report the
-   consequence for the delete decision and do not propose a remote, a backup or a policy.
+   consequence for the delete decision and do not propose a remote, a backup or a policy. The
+   originals include each moved tree's OLD Claude memory store key (for the fix pack,
+   `~\.claude\projects\c--Dev-SMR-BugFixPack`, 699 MB with transcripts), kept for you and owed a
+   verdict like any `__MOVED_` folder. **A held original is a finding too:** `C:\Dev\SMR-BugFixPack`
+   would not rename because nine orphaned `tail -f | grep` log watchers from dead agent sessions
+   (the oldest from 08-11) had their working directory inside it. In Git Bash,
+   `readlink /proc/*/cwd` lists every MSYS process's working directory, which a command-line search
+   cannot see. Anything still running inside an original blocks its deletion.
 8. **The root rule.** `B:\Dev\SMR` holds repos and nothing else, with ONE exception the owner cleared
    on 2026-09-21: `B:\Dev\SMR\SMR-ScreenCaptures`, their capture drop folder, shared because the
    TestKit writes to it. Check that the TestKit and `tools/store_screenshots.py` both write THERE —
@@ -92,7 +101,11 @@ of past runs: rewriting them would be the defect.
    at the store's NEW location, not the old one. Then every entry in
    `%APPDATA%\Surviving Mars Relaunched\Mods\` (six on 09-21 after the three train links were
    recreated: five junctions and one real folder, `SMR_FR1TempWorkaround`, which the owner ruled on
-   09-21 stays a real folder — not a finding): resolve each target and read a file THROUGH it. A mod whose junction dangles does
+   09-21 stays a real folder — not a finding): resolve each target and read a file THROUGH it,
+   **choosing a file whose bytes differ between the moved tree and its original**. A read of an
+   identical file proves nothing: until pass two recreated it, the fix pack's mod junction still
+   pointed at the unrenamed `C:` tree, and the game loaded the stale copy with no error. Any file
+   changed by a post-move commit will do. A mod whose junction dangles does
    not exist for the game, and only the owner launching it proves the mod actually loads.
 10. **What a filesystem copy loses quietly.** The git-ignored material a clone would have dropped is
    present: `local/` with its tracked README gate, `.claude/`, `zz-owner/`. Each moved tree's Claude
@@ -108,7 +121,7 @@ of past runs: rewriting them would be the defect.
 
 ## Your call
 
-Where to look beyond the eight above; the inventory is a lead, not a fence. If the real risk is a
+Where to look beyond the ten above; the inventory is a lead, not a fence. If the real risk is a
 shape nobody here described, report that instead and say why it matters more. Rank findings by what
 breaks first and for whom.
 

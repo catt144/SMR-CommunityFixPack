@@ -199,6 +199,14 @@ The first two lines should print nothing and `69b4bbc`. Anything else means work
 abandoned tree after the copy, and it needs carrying across before the rename. Renaming the parent does
 not touch the four junctions inside it or their targets. Do **not** delete through it.
 
+**Done later on 09-21 by the post-move coordinator seat, at the owner's request.** Before the rename,
+`status --porcelain` printed nothing and `log -1` printed `69b4bbc`. The holder was nine orphaned
+MSYS log watchers from dead agent sessions (`tail -f` / `grep --line-buffered` on game logs, the
+oldest from 08-11, plus one looping `bash` from 09-15). `readlink /proc/*/cwd` in Git Bash showed
+their working directory was inside the tree. They were stopped, and the rename succeeded:
+`C:\Dev\SMR-BugFixPack__MOVED_20260921` exists, `C:\Dev\SMR-BugFixPack` does not, and its `saves`
+lists `backup`, `game` and `reporters`.
+
 ## 8 · doccheck
 
 - **Fix pack, run from `B:\Dev\SMR\SMR-BugFixPack`: `doccheck: GREEN`**, with every selftest passing,
