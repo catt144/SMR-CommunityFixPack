@@ -28,3 +28,9 @@ saves/
 # The eviction prompt sweeps files older than 14 days (STATE_EVICTION.md).
 scratch/*
 !scratch/README.md
+
+# Durable in-tree material that must not ship or be committed (large
+# binaries, logs, evidence a report links to). Never swept, unlike scratch/
+# above. Owner decision, 2026-09-21 (local/README.md is the entry gate).
+local/*
+!local/README.md

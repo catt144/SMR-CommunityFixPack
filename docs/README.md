@@ -95,6 +95,12 @@ difference. Generated files say so on line 1.
 - A **supporting document used by a prompt** → `agent/support/`; keep the prompt's pointer and
   update `agent/support/README.md` when the document lands.
 - A **session leg** → `archive/SESSION_LOG.md` (append-only, newest first).
+- **Working files** (agent/subagent scratch, never cited) → `scratch/` at the repo root
+  (git-ignored, swept at 14 days by the eviction prompt).
+- **Durable material that must not be committed** (large binaries, logs, evidence a
+  report links to) → `local/` at the repo root (git-ignored, never swept, entry-gated
+  by `local/README.md` — see "Outside the repo" below for what belongs OUTSIDE the
+  repo entirely instead).
 - A **decision the owner must make** → `PLAYTEST_CHECKLIST.md`, if it passes that file's
   entrance gate; old bodies are in `archive/PLAYTEST_ARCHIVE.md` under `## ck<n>`. The ruling,
   once made, goes to the doc of the role that obeys it, never only to an agent's memory.
@@ -106,6 +112,21 @@ difference. Generated files say so on line 1.
 ⚠️ **Reports are not authority.** When a report disagrees with `agent/bugs/` or
 `agent/facts/`, the entry wins — or the report is wrong and is corrected in the
 same change that discovers it.
+
+## Outside the repo
+
+Owner decision, 2026-09-21: material that belongs to ONE tree lives IN that
+tree (`local/` above, or the tree itself). These are the exceptions — things
+every SMR mod uses, so no one tree owns them:
+
+- `C:\Dev\SMR-BugFixPack-TestKit` — shared test kit, its own repo.
+- `C:\Dev\SMR-SrcArchive` — both archived game trees plus `MANIFEST.sha256`.
+- `C:\Dev\workshop_fpk_archive` — six third-party Workshop mods by Steam id, prior-art reference.
+- `C:\Dev\SMR-ScreenCaptures` — the owner's screenshot drop folder.
+- `C:\Dev\SMR-FR1-TempMod-2026-09-11` and `C:\Dev\SMR-FR1-CacheRoute-V2-2026-09-11` — the
+  FR-1 workaround mod's source copy and its desk tools, run by `perma/LINUX_DISPATCH.md`;
+  they go when that mod is retired.
+- `C:\Dev\SMR-FR1-DevPackage` — what went to the Paradox devs.
 
 ## Path translation
 

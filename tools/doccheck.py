@@ -76,6 +76,7 @@ REGEN_CURE = ("  → regenerate with `python tools/doccheck.py --regen` (never b
               "which re-run the one-time migration from the retired pre-split doc)")
 CODE = os.path.join(REPO, "Code")
 SCRATCH = os.path.join(REPO, "scratch")
+LOCAL = os.path.join(REPO, "local")
 
 # 2026-08-18 owner ruling (checklist 42): STATE.md is budgeted in BYTES, not
 # lines. The 60-line budget was satisfied while being defeated — single lines
@@ -2192,6 +2193,75 @@ def pack_ignore_parity(out):
     return True
 
 
+def local_readme_rows(path):
+    """Folder names (without trailing slash) declared as rows of local/README.md's
+    gate table, keyed to the line each first appears on."""
+    rows = []
+    with open(path, encoding="utf-8-sig") as fh:
+        for lineno, line in enumerate(fh, 1):
+            if not line.startswith("|"):
+                continue
+            cells = [c.strip() for c in line.split("|")[1:-1]]
+            if not cells:
+                continue
+            m = re.match(r"`([^`]+)/`", cells[0])
+            if m:
+                rows.append((m.group(1), lineno))
+    return rows
+
+
+def check_local(out):
+    """LOCAL: gate `local/` the way PROMPT MAP gates prompts — both directions,
+    and unlike SCRATCH (report-only) this one CAN go RED. Owner ruling,
+    2026-09-21: `local/` is the git-ignored home for durable in-tree material
+    that must not be committed; `local/README.md` is the entry gate — one row
+    per subfolder, naming what it holds, what cites it, and the condition that
+    ends it. No row, no folder; a row naming a folder not on disk is equally RED.
+    """
+    readme = os.path.join(LOCAL, "README.md")
+    if not os.path.isfile(readme):
+        out.append("LOCAL: RED  local/README.md is missing — the entry gate itself is gone")
+        return False
+    rows = local_readme_rows(readme)
+    red = []
+    seen = {}
+    for name, lineno in rows:
+        if name in seen:
+            red.append("  RED  local/README.md repeats a row for %s/ (lines %d and %d)"
+                       % (name, seen[name], lineno))
+        else:
+            seen[name] = lineno
+    disk = {n for n in os.listdir(LOCAL)
+            if n != "README.md" and os.path.isdir(os.path.join(LOCAL, n))}
+    mapped = set(seen)
+    for name in sorted(mapped - disk):
+        red.append("  RED  local/README.md has a row for %s/ and the folder is not "
+                   "there — delete the row in the commit that consumes it" % name)
+    for name in sorted(disk - mapped):
+        red.append("  RED  local/%s/ exists and local/README.md does not list it — "
+                   "no row, no folder" % name)
+    total_bytes = 0
+    file_count = 0
+    for dirpath, _dirnames, filenames in os.walk(LOCAL):
+        for fn in filenames:
+            try:
+                total_bytes += os.path.getsize(os.path.join(dirpath, fn))
+                file_count += 1
+            except OSError:
+                pass
+    size_line = ("LOCAL SIZE: %d file(s), %.1f MB under local/"
+                % (file_count, total_bytes / (1024.0 * 1024.0)))
+    if red:
+        out.extend(red)
+        out.append("LOCAL: RED  %d finding(s)" % len(red))
+        out.append(size_line)
+        return False
+    out.append("LOCAL: PASS — %d row(s) agree with disk in both directions"
+               % len(rows))
+    out.append(size_line)
+    return True
+
+
 def _rule_text(rel):
     """Read one Markdown file with line endings normalized for byte checks."""
     with open(os.path.join(REPO, *rel.split("/")), encoding="utf-8-sig",
@@ -2820,6 +2890,7 @@ def main():
     ok = tools_compile(out) and ok
     ok = module_set_agreement(out) and ok
     ok = pack_ignore_parity(out) and ok
+    ok = check_local(out) and ok
     ok = flpk_selftest(out) and ok
     ok = bodycheck_selftest(out) and ok
     ok = required_selftest("ck170_selftest.py", out) and ok

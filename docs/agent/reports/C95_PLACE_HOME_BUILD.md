@@ -165,7 +165,7 @@ This is a retail `Mars.exe` receiver test, not a flown mission, archived as
 - **Logscan.** `python -X utf8 tools/logscan.py <archived log>`: 50 of 50 pack modules applied,
   0 error-shaped lines.
 
-**Instrument history (runs 1 to 4, not archived; kept in `C:\Dev\SMR-C95PlaceScratch\`).**
+**Instrument history (runs 1 to 4, not archived; kept in `local/c95-place/`).**
 
 1. The census read a label that does not exist and skipped.
 2. The observer wrapper logged only after the original call. The original deletes the calling
@@ -175,7 +175,7 @@ This is a retail `Mars.exe` receiver test, not a flown mission, archived as
 
 Results of runs 2 to 4 agree with run 5.
 
-**Save folder.** `C:\Dev\SMR-C95PlaceScratch\save-inventory-before.json`: 41 of 43 members are
+**Save folder.** `local/c95-place/save-inventory-before.json`: 41 of 43 members are
 unchanged by sha256. New members are exactly `C95PLACE` and `C95PLACEMID`. `account.dat` and
 `account.dat.bak` were rewritten by the game's own launches and exits, which this brief did not
 anticipate. No owner save was written.

@@ -151,7 +151,7 @@ these values' semantics were not reverse-engineered.
 
 Scratch review artifacts (copyrighted assets are not committed):
 
-- `C:\Dev\C92-placement-scratch\icons\focused_orphans_laws.jpg`: unused names, law variants and live controls.
+- `../../../../local/c92-placement/icons/focused_orphans_laws.jpg`: unused names, law variants and live controls.
 - `...\sheet_01.jpg` through `...\sheet_09.jpg`: complete current research-image contact sheets, plus selected law/Thomas controls.
 - `...\original_comparison.jpg`: original/relaunched side-by-side comparison viewed in this investigation.
 - `...\industry_hitech_01.jpg` and `...\industry_hitech_02.jpg`: all explicit Industry/Hi-Tech image owners, obsolete flags, and six unreferenced comparison candidates.

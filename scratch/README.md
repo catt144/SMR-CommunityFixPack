@@ -13,3 +13,7 @@ repo is durable. Put evidence a report depends on under `docs/` instead.
 
 The eviction prompt (`docs/agent/prompts/perma/STATE_EVICTION.md`) sweeps
 files here older than 14 days. `README.md` itself is never swept.
+
+Durable material that must not be committed — the case above is a *working*
+file, not durable evidence — belongs in `../local/` instead, which is never
+swept and is entry-gated by `local/README.md`.

@@ -338,6 +338,9 @@ return PlaceObj('ModDef', {
 		"*/zz-owner/*",
 		-- 2026-09-17: junctions to the owner's save folders plus reporter saves.
 		"*/saves/*",
+		-- 2026-09-21: durable in-tree material that must not ship (owner
+		-- ruling on where non-repo material lives; local/README.md is the gate).
+		"*/local/*",
 	},
 	'id', "SMR_CommunityFixPack",
 	'author', "catt144",

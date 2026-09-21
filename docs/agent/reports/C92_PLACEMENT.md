@@ -109,9 +109,9 @@ not substitute for the current Relaunched census.
 restoration, the law glyph or the retired Closed Loop Extraction picture are
 reviewable substitutes; neither is proven intended artwork. A new commission
 is not established as necessary. See the local
-[unused-art/law contact sheet](C:/Dev/C92-placement-scratch/icons/focused_orphans_laws.jpg),
-[Industry/Hi-Tech sheet 1](C:/Dev/C92-placement-scratch/icons/industry_hitech_01.jpg)
-and [sheet 2](C:/Dev/C92-placement-scratch/icons/industry_hitech_02.jpg).
+[unused-art/law contact sheet](../../../local/c92-placement/icons/focused_orphans_laws.jpg),
+[Industry/Hi-Tech sheet 1](../../../local/c92-placement/icons/industry_hitech_01.jpg)
+and [sheet 2](../../../local/c92-placement/icons/industry_hitech_02.jpg).
 The full [icon report](c92-placement/ICON_HUNT.md) records provenance and bounds.
 
 ## Q3 — authored data and actual production scope

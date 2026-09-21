@@ -86,7 +86,8 @@ def cli_cases(m, root):
                  "check_root", "check_checklist", "check_prompt_map", "check_entry_mirror", "check_rule_headers",
                  "check_state_and_stubs", "check_waiting", "check_skills",
                  "temporary_sweep", "load_order", "wrap_targets_check", "parse_gate", "tools_compile",
-                 "pack_ignore_parity", "flpk_selftest", "bodycheck_selftest", "required_selftest"):
+                 "pack_ignore_parity", "check_local", "flpk_selftest", "bodycheck_selftest",
+                 "required_selftest"):
         setattr(m, name, lambda *args: True)
     for name in ("push_set_report", "testkit_tree", "alias_gate"):
         setattr(m, name, lambda out: None)
