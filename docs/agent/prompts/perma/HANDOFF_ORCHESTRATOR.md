@@ -123,6 +123,10 @@ Never keep an owner list here, and never rebuild an owed list from an older docu
   and removed itself. The owner will bring the orchestrator back to check its result. Check it at surface level: the entry's
   control, the reach tier, and, if it built, a harness that FAILs the unfixed body in cold-boot order
   ([EF-109](../../facts/EF-109.md)). Delete this block once checked.
+- **Drone "minimum safety state", owner deciding 2026-09-20.** The source read, the `rfSuspended`
+  lever, what it cannot stop and the cheaper alternatives are in
+  [DRONE_TASK_LEVERS.md](../../reports/DRONE_TASK_LEVERS.md). Nothing is built, and the owner stopped
+  it on cost; they will say what they need to observe. Do not build from that report without their word.
 - **Site report form, live since 2026-09-19.** Reports now go to `SMR-CommunityMods` issues through a
   Cloudflare Worker. The route, the secrets and the token renewal are in
   [REPORT_FORM.md](../../reports/REPORT_FORM.md); the owner's browser test is ck205. Nobody has asked for
