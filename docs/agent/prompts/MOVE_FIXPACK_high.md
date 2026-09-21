@@ -49,8 +49,9 @@ Each is silent when it bites, which is why they are here rather than left to be 
 - ⛔ **Never `git checkout --` or `git restore` as a restore.** It restores to HEAD and has silently
   destroyed an uncommitted rewrite in this tree. The TestKit's dirty file is exactly that exposure:
   restore from a copy and sha256 it instead.
-- **Commit with `git commit -F <msg> -- <paths>`.** The index is shared with peer sessions; on 09-21
-  a peer had 22 unrelated files modified here mid-job. A bare `git commit -a` would have taken them.
+- **Commit with `git commit -F <msg> -- <paths>`.** The index is shared with any other session; on
+  09-21 another session had 22 unrelated files modified here mid-job, and a bare `git commit -a`
+  would have swept them into an unrelated commit.
 - **A heredoc to Python or the shell eats backslashes**, so a Windows path written that way is
   silently wrong. Write scripts with the editor tool and re-read the path you wrote.
 - **The tree is LF and a mixed file turns doccheck RED.** Python text mode writes CRLF on Windows —
@@ -62,12 +63,13 @@ Each is silent when it bites, which is why they are here rather than left to be 
 
 ## Before you copy anything
 
-The fix pack tree must be CLEAN and pass one's repoint of this tree must have landed — on 09-21 the
-pass-one mover was still rewriting `C:\Dev\SMR-OptInPack` to `B:\Dev\SMR\SMR-OptInPack` across 22
-files here (`D01`-`D12` `moved_to` front matter, `items.lua`, `tools/patchcheck.py`, the maps,
-`WORKFLOW.md`, `FIX_POLICY.md`). Copying over that leaves a peer's uncommitted work inside a tree
-they can no longer reach. `git status` clean in all three trees except the TestKit's one known dirty
-file, or stop.
+**The owner closes every session in the moving tree and has its work committed before a move fires**
+— that is how pass one was run, and they do the same here. So this is a verification, not a warning:
+confirm it, and if it does not hold, stop rather than repairing it yourself. `git status` clean in
+all three trees, except the TestKit's one known dirty file. `git log --oneline origin/main..` empty
+in the fix pack, because an unpushed commit in a tree about to be abandoned is the thing that gets
+lost. Pass one landed at `411fdf0` and repointed this tree's opt-in pointers already; its report is
+`docs/agent/reports/MOVE_OPTIN_20260921.md` and you read it before starting.
 
 ## Decided by the owner, 2026-09-21 — build it, do not reopen it
 
