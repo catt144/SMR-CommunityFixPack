@@ -74,13 +74,22 @@ of past runs: rewriting them would be the defect.
    on 2026-09-21: `B:\Dev\SMR\SMR-ScreenCaptures`, their capture drop folder, shared because the
    TestKit writes to it. Check that the TestKit and `tools/store_screenshots.py` both write THERE —
    a capture landing in `AppData/` is the kit's silent fallback, and it is the finding.
-9. **What a filesystem copy loses quietly** (pass two's shapes, from `MOVE_FIXPACK_high.md`). The fix
-   pack's `saves/backup` and `saves/game` must be SYMLINKS at the new root, targets unchanged — real
-   folders there are stale copies of the owner's live saves, and the tree's size gives it away. The
-   git-ignored material a clone would have dropped is present: `local/` with its tracked README gate,
-   `.claude/`, `zz-owner/`. Each moved tree's Claude memory store exists under the new root's derived
-   name and holds its memories. Every `%APPDATA%\Surviving Mars Relaunched\Mods\` symlink resolves —
-   read a file THROUGH each one; six entries existed on 09-21, five links and one real folder.
+9. **Every junction, counted both ways** — the check nothing else makes, because Git Bash `ls -l`
+   misreports a junction as a symlink and a dangling junction fails silently rather than loudly.
+   Sweep each moved tree with `cmd /c dir /A:L /S /B` (it does not follow them) and classify each hit
+   with PowerShell `LinkType`. The fix pack held four on 09-21 — `saves/game`, `saves/backup`,
+   `zz-owner/all-claude-memory`, `zz-owner/claude-memory` — and the TestKit and `SMR-ScreenCaptures`
+   held none. A real folder where a junction belongs is a finding: for `saves/*` it is a stale copy
+   of the owner's live saves, and the tree's size gives it away. `zz-owner/claude-memory` must point
+   at the store's NEW location, not the old one. Then every entry in
+   `%APPDATA%\Surviving Mars Relaunched\Mods\` (six on 09-21: four junctions, one symbolic link, one
+   real folder): resolve each target and read a file THROUGH it. A mod whose junction dangles does
+   not exist for the game, and only the owner launching it proves the mod actually loads.
+10. **What a filesystem copy loses quietly.** The git-ignored material a clone would have dropped is
+   present: `local/` with its tracked README gate, `.claude/`, `zz-owner/`. Each moved tree's Claude
+   memory store exists under the new root's derived name and holds its memories. `core.hooksPath` is
+   relative, or absolute to the tree it sits in — never to a `__MOVED_` original, which would mean
+   the hooks silently stopped gating commits.
 
 ## Your call
 

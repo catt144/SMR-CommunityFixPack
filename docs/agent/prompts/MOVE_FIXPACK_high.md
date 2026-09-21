@@ -93,15 +93,31 @@ the FR-1 folders, `SMR-CommunityMods`, `SMR-CommunitySaveRescue`. `SMR-OptInPack
 moved in pass one — read its report (`docs/agent/reports/MOVE_OPTIN_20260921.md`) before you start,
 and do not redo what it already did to this tree's pointers.
 
-## ⛔ The saves symlinks — the one way to do real damage here
+## ⛔ Four junctions inside the fix pack — the one way to do real damage here
 
-`saves/backup` and `saves/game` in the fix pack are symlinks to the owner's live save folders,
-**1.8 GB and 668 MB** (`du -sh --dereference saves/game saves/backup`). Their targets are under
-`C:\Users\stkot\` and do not move, so they need no repointing — they only need to arrive as
-*symlinks*. A copy that dereferences them balloons a 195 MB tree to about 2.7 GB and replaces the
-links with stale copies of the owner's saves, which then silently diverge from the real ones. Agents
-do not touch the owner's saves (owner, 2026-09-18). **Proof required:** after the copy, `ls -l saves`
-shows two links with identical targets, and `du -sh` of the new tree is about 195 MB, not gigabytes.
+They are **junctions**, not symlinks, and `ls -l` in Git Bash misreports them as symlinks. Classify
+with PowerShell `LinkType`, and enumerate with `cmd /c dir /A:L /S /B <tree>`, which does not follow
+them. Measured 2026-09-21 — re-derive, and treat any junction not in this list as a finding:
+
+| junction | target | what a following copy pulls in |
+|---|---|---|
+| `saves/game` | the owner's live save folder | 1.8 GB |
+| `saves/backup` | the owner's save backup folder | 668 MB |
+| `zz-owner/all-claude-memory` | `C:\Users\stkot\.claude\projects` | **every Claude project on this machine** |
+| `zz-owner/claude-memory` | this project's `memory\` | 229 KB |
+
+**`robocopy` follows junctions by default.** An unguarded copy turns a 195 MB tree into many
+gigabytes, replaces the owner's live saves with stale duplicates that silently diverge from the real
+ones — and agents do not touch the owner's saves (owner, 2026-09-18) — and rakes every unrelated
+Claude project on the machine into a git repo. Exclude them from the bulk copy (`/XJ`) and recreate
+each one deliberately, or prove your copy tool preserved them as junctions.
+
+**Proof required:** after the copy, the `dir /A:L /S /B` sweep of the new tree lists the same four,
+each `LinkType` is `Junction` with the same target, and the new tree measures about 195 MB.
+
+`saves/*` and `all-claude-memory` keep their targets, which do not move. ⚠️ **`zz-owner/claude-memory`
+must be repointed** to the store's new location from item 6, or the moved tree quietly reads the old
+one. The TestKit and `SMR-ScreenCaptures` hold no reparse points at all (same sweep, 09-21).
 
 ## The boundary — another seat's work is in these trees
 
@@ -150,9 +166,14 @@ shows two links with identical targets, and `du -sh` of the new tree is about 19
    663 MB with session transcripts) becomes `b--Dev-SMR-SMR-BugFixPack` (name derived from the
    pattern, not observed — confirm it on the first session at the new root and say so). **Copy, never
    move**, and do not edit a memory file: several name `C:\Dev` and are records.
-7. **The two mod symlinks recreated and proven.** If they are wrong the fix pack silently ceases to
-   exist for the game. Create them if you can (a directory symlink may need elevation — hand the
-   owner a fenced block if so) and prove each by reading a file THROUGH the link, not by listing it.
+7. **The two mod junctions recreated and proven.** `%APPDATA%\Surviving Mars Relaunched\Mods\`
+   held six entries on 09-21: `SMR-BugFixPack` and `SMR-BugFixPack-TestKit` are **yours**, both
+   junctions to `C:\Dev`; `SMR-OptInPack` and `SMR-TrainHubPrototype` are junctions and
+   `SMR-TrainHubDev` a true symbolic link, all three the train seat's; `SMR_FR1TempWorkaround` is a
+   real folder and FR-1's. If yours are wrong the fix pack silently ceases to exist for the game.
+   `mklink /J` needs no elevation, so recreate them yourself and prove each by reading a file THROUGH
+   the junction. ⚠️ Delete the stale one first: a junction whose target is renamed keeps pointing at
+   the dead path rather than failing. Report the state of the other four; do not touch them.
 8. **doccheck GREEN, run from the new fix pack root**, with its selftests, PACK IGNORE PARITY, the
    LOCAL gate and the TestKit parse pass, plus the new `PARENT FILES` reading now that the parent is
    `B:\Dev\SMR`.
