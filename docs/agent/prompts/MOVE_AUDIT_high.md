@@ -74,6 +74,13 @@ of past runs: rewriting them would be the defect.
    on 2026-09-21: `B:\Dev\SMR\SMR-ScreenCaptures`, their capture drop folder, shared because the
    TestKit writes to it. Check that the TestKit and `tools/store_screenshots.py` both write THERE —
    a capture landing in `AppData/` is the kit's silent fallback, and it is the finding.
+9. **What a filesystem copy loses quietly** (pass two's shapes, from `MOVE_FIXPACK_high.md`). The fix
+   pack's `saves/backup` and `saves/game` must be SYMLINKS at the new root, targets unchanged — real
+   folders there are stale copies of the owner's live saves, and the tree's size gives it away. The
+   git-ignored material a clone would have dropped is present: `local/` with its tracked README gate,
+   `.claude/`, `zz-owner/`. Each moved tree's Claude memory store exists under the new root's derived
+   name and holds its memories. Every `%APPDATA%\Surviving Mars Relaunched\Mods\` symlink resolves —
+   read a file THROUGH each one; six entries existed on 09-21, five links and one real folder.
 
 ## Your call
 
