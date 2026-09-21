@@ -153,19 +153,26 @@ one. The TestKit and `SMR-ScreenCaptures` hold no reparse points at all (same sw
    Claude memory store that moves in item 6), `tools/store_screenshots.py:18`, TestKit
    `Code/74_SMRTK_Agent.lua:109`, the three command lines in `tools/SMRTK.md`, and `docs/README.md`'s
    "Outside the repo" block (only the entries that actually moved — `SMR-SrcArchive`,
-   `workshop_fpk_archive` and the FR-1 folders stay on `C:`). Prefer the existing environment-variable
-   pattern over a new absolute default; a sibling-relative default is also yours to choose.
-5. **Records stay records.** 106 tracked files carry a `C:\Dev` path and 104 of them are under
-   `docs/agent/reports/` — source-line citations in `still-needed/*.json`, past commands, evidence of
-   where something was read. ⛔ Rewriting those is the defect, not the fix. Repoint LIVE pointers
-   only, and give the count you changed against the count you left.
+   `workshop_fpk_archive` and the FR-1 folders stay on `C:`). ⚠️ **The in-code defaults are the
+   load-bearing part: pass one found that NONE of the five `SMR_*` variables is actually set on this
+   machine**, so every script has been resolving through its default and the owner's `setx` block is
+   a belt, not the braces. A sibling-relative default is the one that never breaks on the next move.
+5. **Records stay records, and an absolute-path count is not a work list.** 106 tracked files carry a
+   `C:\Dev` path and 104 of them are under `docs/agent/reports/` — source-line citations in
+   `still-needed/*.json`, past commands, evidence of where something was read. ⛔ Rewriting those is
+   the defect, not the fix. Pass one is the warning: of its 183 references only 63 named a tree that
+   was moving, so obeying its inventory's "134 prose references" literally would have pointed 120
+   correct ones at nothing. Filter to references that name a tree in YOUR three, then split live
+   pointers from records, and give the count you changed against the count you left.
 6. **The Claude memory store follows the tree, or this seat starts empty — and this is one of your
    LAST steps**, because your own session writes into it while you work and an early copy loses
    whatever you write afterwards. The store is keyed by
    root path: `%USERPROFILE%\.claude\projects\c--Dev-SMR-BugFixPack` (77 memory files, 229 KB;
-   663 MB with session transcripts) becomes `b--Dev-SMR-SMR-BugFixPack` (name derived from the
-   pattern, not observed — confirm it on the first session at the new root and say so). **Copy, never
-   move**, and do not edit a memory file: several name `C:\Dev` and are records.
+   663 MB with session transcripts) becomes **`b--Dev-SMR-SMR-BugFixPack`** — the doubled `SMR` is
+   correct, because the rule reproduces the whole destination path and the destination is
+   `B:\Dev\SMR\SMR-BugFixPack`. Pass one applied that rule and its output is the witness; still
+   confirm it on the first session at the new root and say so. **Copy, never move**, and do not edit
+   a memory file: several name `C:\Dev` and are records.
 7. **The two mod junctions recreated and proven.** `%APPDATA%\Surviving Mars Relaunched\Mods\`
    held six entries on 09-21: `SMR-BugFixPack` and `SMR-BugFixPack-TestKit` are **yours**, both
    junctions to `C:\Dev`; `SMR-OptInPack` and `SMR-TrainHubPrototype` are junctions and
