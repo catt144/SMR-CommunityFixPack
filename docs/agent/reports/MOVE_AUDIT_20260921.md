@@ -364,3 +364,50 @@ Each finding was cleared with its own check before the ruling.
 | 6 | **Accepted.** The first-pass report declared both edits, and each is a correct path change. Nothing is to be undone. | — |
 
 The deletion verdicts stay the owner's call.
+
+## Recheck, 2026-09-21 — PASS
+
+Rechecked after coordinator commit `8ca7d9a`, without repairing any tree. **PASS:** findings 1–4
+clear their original failure signatures, and the adjudications of findings 5 and 6 are accepted on
+fresh evidence. This verdict grades the six findings only. It does not claim that the game loads the
+mods, that the owner-only verification import ran, or that any held original should be deleted.
+
+### Six-finding recheck
+
+| # | command rerun | result | recheck verdict |
+|---|---|---|---|
+| 1 | `python tools/pack_predict.py B:\Dev\SMR\SMR-BugFixPack --json`; `rg -n 'scratch|local' tools/pack_predict.py metadata.lua`; fix-pack doccheck | Predictor reports 57 packed files and **0** under `scratch/` or `local/`. Both ignore lists contain `*/scratch/*`; PACK IGNORE PARITY passes at 19 filters and doccheck is GREEN. | **Fixed; holds.** |
+| 2 | Original broad `rg -n --hidden --no-ignore --glob '!**/.git/**' 'C:[\\/]+Dev[\\/]+SMR-' B:\Dev\SMR\SMR-FR1`, then the exact moved-root regex over the five named scripts | The broad command still reports 107 lines: retained JSON evidence and older FR-1 inputs deliberately left by the ruling. The exact four-root family from the finding reports **0** hits in the five scripts. All seven distinct B: targets used by the nine replacements exist. Commit `0ab8d4a` changes exactly those nine literals. | **Fixed; holds.** The broad command is not an absence test because its preserved evidence side is expected. |
+| 3 | Process/User/Machine `SMR_*` enumeration; fork `python tools/doccheck.py`; `python tools/sync_from_fixpack.py --tools`; SHA-256 compare of `SMRTK.md` and `TESTKIT.md` to the donor | No `SMR_*` variable is set. Fork doccheck reads the B: TestKit, counts 98 probes, parses 33 kit files, reports the known dirty kit file, and is GREEN. Both mirrored docs are byte-identical and the two DRIFT lines are gone. The six adapted-tool `RECHECK` lines remain, as the coordinator said, outside the move fix. | **Fixed for the move; holds.** |
+| 4 | `rg -n 'C:[\\/]+Dev[\\/]+SMR-' CLAUDE.md docs/PROVENANCE.md` in CommunitySaveRescue | **0** hits; `5d653a1` is the three-line repoint and origin advertises that same `main`. | **Fixed; holds.** |
+| 5 | Recursive file counts, `Test-Path`/SHA-256 on both OptIn stores, eight-file memory listing, and a relative-path/hash comparison of old to new | Old store remains 94 files with no `memory/`; new store is 105 files with exactly eight memory files. Every one of the old store's 94 relative paths exists byte-identically in the new store; the new store has 11 extras: the eight memory files and three session transcripts. | **Ruling accepted.** No content loss is present. The untouched witness was lost and cannot be recreated, but that is an evidence loss, not a surviving move defect. |
+| 6 | `git diff-tree --no-commit-id --name-status -r f2ec95d -- tools/devmods tools/prototypes`; first-pass report read; current JSON targets resolved | The same two declared `park`-only edits appear. `MOVE_OPTIN_20260921.md:275-278` explicitly discloses them and says the first-pass end state assigned them to that mover. Both current `park` values resolve to the existing B: tests directory. | **Ruling accepted.** The edits are declared and correct; nothing should be undone. |
+
+### Delete verdicts after recheck
+
+The criterion is unchanged: **No** means deletion would reduce some preserved, non-remote material
+to one local copy or remove the only full-tree rollback copy. All thirteen held filesystem
+originals still exist, no MSYS process has a working directory inside one, and the local-only repos
+still have no remote. The fixes did not add redundancy.
+
+| held original | safe to delete now? | rechecked consequence |
+|---|---|---|
+| `SMR-OptInPack__MOVED_20260921` | **No** | B: is now at `ba713c5`, two commits ahead of remote `main` at `4a5fd9b`; its five tags are still local-only, and ignored material would also lose its second copy |
+| `SMR-Assets__MOVED_20260921` | **No** | no remote; the 504 MB repository, history and five tags would fall to one copy |
+| `SMR-SrcArchive__MOVED_20260921` | **No** | `SMR-Shared` still has no remote; the archive would fall to one copy |
+| `workshop_fpk_archive__MOVED_20260921` | **No** | same local-only Shared repo |
+| `SMR-FR1-TempMod-2026-09-11__MOVED_20260921` | **No** | `SMR-FR1` still has no remote; move-fix commit `0ab8d4a` exists only in the B: repo |
+| `SMR-FR1-CacheRoute-V2-2026-09-11__MOVED_20260921` | **No** | same local-only FR1 repo |
+| `SMR-FR1-DevPackage__MOVED_20260921` | **No** | same local-only FR1 repo |
+| `SMR-FR1-DevPackage.zip__MOVED_20260921` | **No** | same local-only FR1 repo |
+| `SMR-CommunityMods__MOVED_20260921` | **Yes, for repository recovery** | clean tree, no tags, and origin `main` equals local `beaee47` |
+| `SMR-CommunitySaveRescue__MOVED_20260921` | **Yes, for repository recovery** | clean tree, no tags, and origin `main` equals fixed local `5d653a1` |
+| `SMR-BugFixPack__MOVED_20260921` | **No as a full-tree rollback** | tracked history through coordinator `8ca7d9a` and both tags are remote, but load-bearing ignored material is not; deletion leaves current ignored content single-copy |
+| `SMR-BugFixPack-TestKit__MOVED_20260921` | **No** | no remote; repository/history and the preserved dirty file would fall to one copy |
+| `SMR-ScreenCaptures__MOVED_20260921` | **No** | not a repo; the 81-file capture set would fall to one copy |
+| old opt-in Claude key `c--Dev-SMR-OptInPack` | **No** | all 94 surviving files are byte-identical in the new store and the missing eight memory files survive there, but deletion would reduce the complete 105-file new store to one local copy |
+| old fix-pack Claude key `c--Dev-SMR-BugFixPack` | **No** | no remote; deletion would reduce the witnessed store to the one live new-key copy |
+
+**Final recheck call: PASS.** The coordinator's four fixes hold, both adjudications are accepted,
+and no unresolved item remains among the audit's six findings. The per-original delete decisions
+above remain separate from that grade and remain the owner's call.
