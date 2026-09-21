@@ -9,7 +9,7 @@ shared half; the harnesses beside it (`tools/desk_*.py`) carry the demands.
 
     python tools/deskbench.py                 # run every desk_*.py, summarise
     python tools/desk_f117_argshape.py        # or any one harness on its own
-    SMR_TESTKIT=<path> SMR_SRC_ARCHIVE=<path>  # override the two local-only trees
+    SMR_TESTKIT=<path> SMR_SRCARCHIVE=<archive root>  # override the two local-only trees
 
 What every harness here does, and why it is trusted exactly as far as it is:
 
@@ -70,7 +70,10 @@ if TOOLS not in sys.path:
 from luafn import read_lines, find_bodies, SRC as SRC_LIVE  # noqa: E402
 
 TESTKIT = os.environ.get("SMR_TESTKIT", r"C:\Dev\SMR-BugFixPack-TestKit")
-SRC_ARCHIVE = os.environ.get("SMR_SRC_ARCHIVE", r"B:\Dev\SMR\SMR-Shared\SMR-SrcArchive\1.0.7.396349\Src")
+# SMR_SRCARCHIVE is the archive ROOT, as in patchcheck.py and the fork's sync; the 1.0.7 tree is
+# derived from it here, so one variable means one thing everywhere it is read.
+SRC_ARCHIVE = os.path.join(
+    os.environ.get("SMR_SRCARCHIVE", r"B:\Dev\SMR\SMR-Shared\SMR-SrcArchive"), "1.0.7.396349", "Src")
 TREES = {"1.1.0": SRC_LIVE, "1.0.7": SRC_ARCHIVE}
 
 # probe messages carry em dashes; a cp1252 console would print them as '?'

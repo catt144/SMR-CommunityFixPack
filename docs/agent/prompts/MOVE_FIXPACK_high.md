@@ -162,8 +162,9 @@ one. The TestKit and `SMR-ScreenCaptures` hold no reparse points at all (same sw
    "Outside the repo" block (every entry, at whatever address it actually has by then: the shared
    trees are in `SMR-Shared`, the FR-1 folders are in the local-only `SMR-FR1`). ⚠️ **The in-code defaults are the
    load-bearing part: pass one found that NONE of the five `SMR_*` variables is actually set on this
-   machine**, so every script has been resolving through its default and the owner's `setx` block is
-   a belt, not the braces. A sibling-relative default is the one that never breaks on the next move.
+   machine**, so every script has been resolving through its default. ⛔ **The owner ruled on 09-21 to
+   keep it that way: no `setx`.** The in-code default IS the configuration, so repoint the defaults
+   and set no variable. A sibling-relative default is the one that never breaks on the next move.
    ⚠️ **`tools/` is shared and this repo is the donor.** ⛔ Do not hand-edit the fork's copy of a
    mirrored tool: it keeps a ledger of which are adapted, not ported or local-only, and an ad-hoc
    edit reads as undeclared drift or overwrites a deliberate adaptation. Change the copy here, then
@@ -190,18 +191,19 @@ one. The TestKit and `SMR-ScreenCaptures` hold no reparse points at all (same sw
    a memory file: several name `C:\Dev` and are records.
 7. **The two mod junctions recreated and proven.** `%APPDATA%\Surviving Mars Relaunched\Mods\`
    held six entries on 09-21: `SMR-BugFixPack` and `SMR-BugFixPack-TestKit` are **yours**, both
-   junctions to `C:\Dev`; `SMR-OptInPack` and `SMR-TrainHubPrototype` are junctions and
-   `SMR-TrainHubDev` a true symbolic link, all three the train seat's; `SMR_FR1TempWorkaround` is a
-   real folder and FR-1's. If yours are wrong the fix pack silently ceases to exist for the game.
+   junctions to `C:\Dev`; `SMR-OptInPack`, `SMR-TrainHubDev` and `SMR-TrainHubPrototype` are
+   junctions to `B:` (all three recreated 09-21 after pass one) and the train seat's;
+   `SMR_FR1TempWorkaround` is a real folder, FR-1's, **left a real folder by owner ruling 09-21** —
+   do not convert it. If yours are wrong the fix pack silently ceases to exist for the game.
    `mklink /J` needs no elevation, so recreate them yourself and prove each by reading a file THROUGH
    the junction. ⚠️ Delete the stale one first: a junction whose target is renamed keeps pointing at
    the dead path rather than failing. Report the state of the other four; do not touch them.
 8. **doccheck GREEN, run from the new fix pack root**, with its selftests, PACK IGNORE PARITY, the
    LOCAL gate and the TestKit parse pass, plus the new `PARENT FILES` reading now that the parent is
    `B:\Dev\SMR`.
-9. **One fenced copy-paste block for the owner**: the `setx` environment block (`SMR_TESTKIT` and
-   `SMR_FIXPACK` to the new roots, `SMR_SRCARCHIVE` already at `B:\Dev\SMR\SMR-Shared\SMR-SrcArchive` by `MOVE_REST_20260921.md`, `SMR_TRAINASSETS` as pass one left
-   it), plus any rename or symlink step you could not run yourself. Say which lines you already ran.
+9. **A fenced copy-paste block for the owner ONLY if a step needs their hands** — a rename or junction
+   you could not run yourself — saying which lines you already ran. ⛔ No `setx` block (item 4). Prove
+   instead that no `SMR_*` variable is set and every repointed default resolves to a path that exists.
 
 10. **⚠️ Sweep the FORK too — your three trees are all over it.** Measured 09-21 in
    `B:\Dev\SMR\SMR-OptInPack`: **29 files name `C:\Dev\SMR-BugFixPack` or the TestKit** and 13 name

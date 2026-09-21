@@ -69,7 +69,7 @@ from luafn import read_lines                                   # noqa: E402
 from treediff import declarations, tree_files, bucket, bare_name  # noqa: E402
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-ARCHIVE = os.environ.get("SMR_SRC_ARCHIVE", r"B:\Dev\SMR\SMR-Shared\SMR-SrcArchive")
+ARCHIVE = os.environ.get("SMR_SRCARCHIVE", r"B:\Dev\SMR\SMR-Shared\SMR-SrcArchive")
 ACF = os.environ.get("SMR_ACF", r"A:\SteamLibrary\steamapps\appmanifest_3215050.acf")
 INSTALL = os.environ.get("SMR_INSTALL", r"A:\SteamLibrary\steamapps\common\Project Spark")
 APPID = "3215050"

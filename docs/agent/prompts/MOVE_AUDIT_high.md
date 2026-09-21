@@ -60,9 +60,11 @@ of past runs: rewriting them would be the defect.
    a finding, and so is a record that was rewritten when it should have been left as a record. Tools
    outside git count: the TestKit hard-codes its capture folder in `Code/74_SMRTK_Agent.lua` with a
    silent fallback to `AppData/`.
-4. **The environment block the owner was given.** Does the final block set every variable to a root
-   that exists, does it run as pasted, and are the variables set in THIS session (`echo`), which
-   tells you whether the owner has run it?
+4. **The in-code defaults are the configuration** — the owner ruled on 09-21 that no `SMR_*` variable
+   is set, so a default that points at a dead path breaks silently with nothing to override it.
+   Confirm no `SMR_*` variable is set in THIS session (`echo`), then resolve every default in both
+   repos' `tools/` and show each points at a path that exists. `SMR_SRCARCHIVE` is the ONE name for
+   the archive ROOT in both repos (unified 09-21); a tool still reading `SMR_SRC_ARCHIVE` is a finding.
 5. **The untouched boundary.** Over each MOVER's commits only, `git diff` for `tools/devmods/**` and
    `tools/prototypes/**` is empty of content changes. The train seat's own later commits there are
    theirs and expected.
@@ -88,8 +90,9 @@ of past runs: rewriting them would be the defect.
    held none. A real folder where a junction belongs is a finding: for `saves/*` it is a stale copy
    of the owner's live saves, and the tree's size gives it away. `zz-owner/claude-memory` must point
    at the store's NEW location, not the old one. Then every entry in
-   `%APPDATA%\Surviving Mars Relaunched\Mods\` (six on 09-21: four junctions, one symbolic link, one
-   real folder): resolve each target and read a file THROUGH it. A mod whose junction dangles does
+   `%APPDATA%\Surviving Mars Relaunched\Mods\` (six on 09-21 after the three train links were
+   recreated: five junctions and one real folder, `SMR_FR1TempWorkaround`, which the owner ruled on
+   09-21 stays a real folder — not a finding): resolve each target and read a file THROUGH it. A mod whose junction dangles does
    not exist for the game, and only the owner launching it proves the mod actually loads.
 10. **What a filesystem copy loses quietly.** The git-ignored material a clone would have dropped is
    present: `local/` with its tracked README gate, `.claude/`, `zz-owner/`. Each moved tree's Claude
