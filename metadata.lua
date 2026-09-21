@@ -341,6 +341,8 @@ return PlaceObj('ModDef', {
 		-- 2026-09-21: durable in-tree material that must not ship (owner
 		-- ruling on where non-repo material lives; local/README.md is the gate).
 		"*/local/*",
+		-- 2026-09-21: agent/subagent working space, git-ignored, swept at 14 days.
+		"*/scratch/*",
 	},
 	'id', "SMR_CommunityFixPack",
 	'author', "catt144",
@@ -501,7 +503,7 @@ return PlaceObj('ModDef', {
 	-- page (SteamWorkshop.lua:43-81). Caps: Steam 1 MB each (SteamWorkshop.lua:85, :101),
 	-- Paradox 2 MB (ParadoxMods.lua:87, :101) — the owner's ~2 MB PNGs would fail, so
 	-- `tools/store_screenshots.py` re-encodes them (~350 KB JPEGs) from the marked-up
-	-- originals in C:\Dev\SMR-ScreenCaptures\c74_skins. `Mod/`-prefixed like 'image', so
+	-- originals in <parent>\SMR-ScreenCaptures\c74_skins. `Mod/`-prefixed like 'image', so
 	-- FixRelativePaths skips them (Mod.lua:579) and the mod stays CLEAN; `ignore_files`
 	-- keeps store_screenshots/ OUT of the player's pack (`tools/pack_predict.py` shows it).
 	'screenshot1', "Mod/SMR_CommunityFixPack/store_screenshots/1_rare_metals_drill_skin.jpg",

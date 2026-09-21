@@ -55,6 +55,7 @@ IGNORE = [
     "*/zz-owner/*",
     "*/saves/*",
     "*/local/*",
+    "*/scratch/*",
 ]
 
 # the engine hands paths with forward slashes and the content_path prefix

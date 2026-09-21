@@ -349,3 +349,18 @@ full-tree rollback copy. It does not propose a remote, backup or policy.
 The move preserved bytes and history, but the live result is **not operationally complete** and its
 held originals are **not generally safe to delete**. The useful outcome of this audit is therefore
 FAIL.
+
+## Coordinator adjudication, 2026-09-21 (added after the audit, for its recheck)
+
+Each finding was cleared with its own check before the ruling.
+
+| # | ruling | where |
+|---|---|---|
+| 1 | **Fixed.** `*/scratch/*` added to `metadata.lua` `ignore_files` and `pack_predict.py`. The predictor packs 57 files, 0 from `scratch/` or `local/`; PACK IGNORE PARITY reads 19 filters. This gap predates the move: `scratch/` was homed on 09-21 and only the fork got the filter. The `metadata.lua` comment's captures path is now sibling-relative too. | fix pack, this commit |
+| 2 | **Fixed**: the nine literals, each checked to exist at its new target. Literals for FR-1 inputs that were already gone before the move are left alone. | `SMR-FR1` `0ab8d4a` (no remote) |
+| 3 | **Fixed for the move.** The fork's `doccheck.py` takes the donor's sibling-relative TestKit default, and `SMRTK.md`/`TESTKIT.md` are byte copies of the donor. The fork's doccheck now runs the TestKit probe count, parse and tree legs; both DRIFT lines are gone. `RECHECK` on six adapted tools remains, and it belongs to the full knowledge sync pass, not the move. | fork `4a5fd9b` |
+| 4 | **Fixed**: the three lines; 0 old-root hits remain in the repo. | `SMR-CommunitySaveRescue` `5d653a1` |
+| 5 | **Accepted, no loss.** The old store's directory changed at 12:38 on 09-21; the actor is unknown. The new store holds exactly eight memory files, matching the eight missing from the old one, so the content survives there. Only the untouched witness copy is gone, and it cannot be restored. | — |
+| 6 | **Accepted.** The first-pass report declared both edits, and each is a correct path change. Nothing is to be undone. | — |
+
+The deletion verdicts stay the owner's call.
