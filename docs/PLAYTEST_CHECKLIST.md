@@ -101,15 +101,6 @@ Home: `docs/archive/PLAYTEST_ARCHIVE.md`
 
 ## Run
 
-### ck206 · opened 2026-09-20
-When you next sit with the train hub, judge the siding entry/rejoin and the shorter hub loading stop.
-- Restart with the current dev hub and TestKit; use the current owner fixture. Slots & notes is prepared.
-- Slot 1 reads tunables; 6 selects pause/park/siding/entry/rejoins/dwell, 2/5 adjust. Positions need your eye.
-- First watch arrival, loading and straight exit at normal, fast and fastest; then 60°/120°/reverse via slot 3.
-- Check the outside queue and parked-plus-crossing save/reload; slot 4 watches a crossing, re-arm after autosave.
-- Time hub 6 s versus vanilla 12 s per command; check cold start without Stirling supply. Build 4/textures wait.
-Home: `docs/agent/reports/TRAIN_HUB_3B_SITTING_20260920.md`
-
 ### ck205 · opened 2026-09-19
 When you next have the site open, send one test report from its *Bug reports & problems* page.
 - Pick both dropdowns, write a line, and attach a small `.txt` or `.log`.
