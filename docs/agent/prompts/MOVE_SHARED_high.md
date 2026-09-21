@@ -73,6 +73,9 @@ oversight, and raising it is a repeat offence.
    defect. Instead add the archive's new root to `docs/README.md`'s **Path translation** block
    (line 131 on 09-21) and to the fork's equivalent, so a reader can translate an old citation.
    Repoint the "Outside the repo" map entries in both packs, which ARE live pointers.
+   ⚠️ **Sweep the fork as well as this repo**: 49 references there named `C:\Dev\SMR-SrcArchive` on
+   09-21. Split live from records the same way, and remember that editing the fork's `CLAUDE.md`
+   drifts its `AGENTS.md` and REDs that tree, so edit and `--regen` in one commit.
 7. **Prove the tools still work, not that the strings changed.** Run at least `treediff.py` and
    `patchcheck.py` against the archive at its new home and show their output.
 8. **doccheck GREEN in both packs**, with selftests, and `TOOLS COMPILE` passing after your edits.

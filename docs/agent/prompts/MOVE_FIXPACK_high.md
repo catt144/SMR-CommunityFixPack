@@ -200,9 +200,20 @@ one. The TestKit and `SMR-ScreenCaptures` hold no reparse points at all (same sw
    `SMR_FIXPACK` to the new roots, `SMR_SRCARCHIVE` still on `C:`, `SMR_TRAINASSETS` as pass one left
    it), plus any rename or symlink step you could not run yourself. Say which lines you already ran.
 
+10. **⚠️ Sweep the FORK too — your three trees are all over it.** Measured 09-21 in
+   `B:\Dev\SMR\SMR-OptInPack`: **29 files name `C:\Dev\SMR-BugFixPack` or the TestKit** and 13 name
+   `SMR-ScreenCaptures`. Among them are live ones nothing else will catch — its `CLAUDE.md` and
+   `AGENTS.md`, two `.claude/skills/` bodies with their `.agents/skills/` mirrors, its
+   `docs/README.md` map, and four files under `tools/`. Run
+   `grep -rIlE 'C:[\\/]+Dev[\\/]+SMR-(BugFixPack|ScreenCaptures)'` there, split live pointers from
+   records, and repoint only the live ones. ⛔ `docs/archive/` is append-only and holds 10 of them.
+   Two rules bite in that repo: a mirrored tool changes in the donor and never there (item 4), and
+   **editing its `CLAUDE.md` drifts `AGENTS.md` and REDs the tree**, so edit and `--regen` in the
+   same commit, exactly as here.
+
 If budget runs out, drop in this order: the `.claude/` strings, then prose in reports, then the
 `docs/README.md` polish. Never drop the copy verification, the saves proof, the memory store, the
-symlinks or the owner's block.
+junctions, the fork's live pointers or the owner's block.
 
 ## Your call
 
@@ -213,9 +224,10 @@ across with it or only `memory/`, given the 663 MB — decide and say why.
 
 ## Scope
 
-In: the three trees, their paths, their gates, the two mod symlinks, the memory store, the owner's
-block, your report.
-Out: every tree still on `C:`, `SMR-Shared`, FR-1, the Mod Editor, the game, the opt-in pack, and the
+In: the three trees, their paths, their gates, the two mod junctions, the memory store, the fork's
+live pointers AT those three trees, the owner's block, your report.
+Out: every tree still on `C:`, `SMR-Shared`, FR-1, the Mod Editor, the game, the opt-in pack's own
+mod content and anything there not pointing at a tree you moved, and the
 train seat's files listed above.
 
 ## Stops — report instead of pushing on
