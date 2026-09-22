@@ -12,7 +12,10 @@ mods and future game patches, zero edits to game files. Bare ids are `agent/bugs
 
 ## 1. Choose the least invasive technique that works
 
-Ranked from most to least preferred. Take the first that repairs the defect.
+Ranked from most to least preferred. Take the first that repairs the defect. Before routing a
+fix through any shipped function, read its whole body and list every side effect — unmounts,
+resets, flag writes, ignored return values — not just the one that helps; a route claim covers
+every effect the call has, and each one that matters to the route needs its line cited.
 
 1. **Data/preset patch** — mutate the preset field in place, in `OnMsg.ClassesPostprocess`
    or at code load if the object already exists. Other mods see the corrected data.
@@ -266,16 +269,27 @@ tier and a positive intent statement. Before a fix ships:
   tell: (1) player-reported harm; (2) dead code or dead validation — a computed value
   discarded, a guard that cannot fire, a message nothing emits; (3) sibling contradiction —
   the same author wrote it correctly elsewhere; (4) self-contradiction within one function or
-  preset; (5) an explicit dev comment. No tell → the defect claim is a hypothesis and needs a
-  keyboard observation before any fix is written. UI and affordance behaviours (hit-testing,
+  preset; (5) an explicit dev comment; (6) code contradicting its own player-facing text —
+  deliberate in code is not the same as intended by design, so the mismatch is the finding:
+  report it and ask, never rule it intended on the developers' behalf (C88). No tell → the
+  defect claim is a hypothesis and needs a keyboard observation before any fix is written; a
+  missing evidence artefact (an unfetched screenshot, an unread log) keeps the verdict at
+  unverified rather than filled in with a story, and the observation logs the subject's
+  identity on the same line as its reading (`researched=…` beside the dump), never left for
+  the reader to assume. UI and affordance behaviours (hit-testing,
   cursor feedback, input modes, whether two things are separately addressable) are hypotheses
   by default: source reading has no validity there (F49). A behaviour found intentional is
   tier **I**: record it, close it, write no fix.
 - **Then reachability.** Enumerate every call site of the defective function in Src;
   eliminate the ones that cannot execute the defective body (class chain, guards, early
   returns, template data); for each survivor name the concrete player action that produces
-  the precondition. Record the tier: R1 live · R2 conditional · R3 latent-by-data · R4
-  unreachable · U unknown, naming the observation that would settle it.
+  the precondition. A call-site count for a METHOD is incomplete until the declaring class's
+  subclasses are counted too — every subclass inherits the method, so grep `__parents` for
+  inheritors before trusting a "one caller" claim (F-8). Dead-coded routes are common in this
+  codebase as well: an XDef action compiled behind `local cond = false` has a real call site a
+  player can never reach, so walk the concrete steps a player takes to the precondition, not
+  just the mechanism's existence in Src. Record the tier: R1 live · R2 conditional · R3
+  latent-by-data · R4 unreachable · U unknown, naming the observation that would settle it.
 - **Symmetry of proof.** Every tier states its evidence; an unenumerated R1/R2 is as unproven
   as an unstated R4, and more dangerous, because "keep, it's live" is never revisited. Every
   lettered sub-item of a bundled fix is a separate audit subject.

@@ -20,7 +20,10 @@ Process rules for this repo. Code rules are `FIX_POLICY.md`; the global duties a
   game does not list, so a save there is invisible in the load screen. `saves/reporters/` is a real
   folder for saves players send; copy one into `saves/game` to load it and keep the original. Both
   junctions reach the owner's real saves: never `Remove-Item -Recurse` on `saves/` or a junction,
-  because PowerShell 5.1 deletes through it; remove a link with `cmd /c rmdir saves\game`.
+  because PowerShell 5.1 deletes through it; remove a link with `cmd /c rmdir saves\game`. Read a
+  save only when the owner asks — never scan or pick one on your own initiative to find a fixture.
+  Owner, 2026-09-18: "I think agents should stop checking saves all together, And only check saves
+  when I ask. Most of the time they are wrong anyway."
 - TestKit, never shipped and local-only by decision: `B:\Dev\SMR\SMR-BugFixPack-TestKit`. Its README is
   the kit's own build-state document; the durable pack-side view is `tools/TESTKIT.md`, and the
   SMR Tool Kit plus its sitting slots are `tools/SMRTK.md`.
@@ -49,6 +52,11 @@ error).
    file breaks the whole pack at load.
 4. One commit per fix or tight group, with its entry and, when the change has a player surface, its
    `prompts/perma/RELEASE_OUTBOX.md` Pending entry in the same commit.
+5. A fix invalidates its own tests: after changing a module's behaviour or timing, grep for every
+   probe or harness that covers it and run the WHOLE suite, not just the legs the brief names,
+   re-basing any harm-asserting leg on the pre-fix body extracted from git (`git show <sha>:path`,
+   never retyped). Before an attended leg runs, trace its trigger to the shipped body and ask what
+   would make it vacuous.
 
 ## Records and rulings
 
@@ -185,6 +193,16 @@ every time they have pushed back it turned up a vanilla defect. "Not caused by o
 attribution verdict, never a reason to stop looking: report every unexplained line with its age and
 let the owner decide, and stop and say so when something is out of the ordinary. Old logs hold
 evidence no leg was designed to collect; mining them for `[LUA ERROR]` is cheap.
+
+The limit (owner, 2026-09-16): "don't diagnose a problem that's not ours." When the log itself
+assigns the cause to someone else — a missing-mods load, third-party mods absent from the stack —
+report the line once with that evidence and stop; this does not license dismissing a line whose
+cause is unclear.
+
+Read a GitHub issue or other tracker through `api.github.com`, never its rendered page: a fetch of
+the rendered page has silently returned zero comments when there were three. The issue list
+endpoint's `comments` count is the free control — a non-zero count with a reader showing nothing
+means the reader is wrong.
 
 ### Cheats on playtest saves (owner, 2026-08-12)
 

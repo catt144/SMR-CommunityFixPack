@@ -122,6 +122,18 @@ runs scripts from both).
 
 ## 4 · Bindings
 
+- **The test rig is a real second machine, never a VM** — the owner's RTX 3070
+  laptop (Alienware m15 R4), Linux Mint 22.2 Cinnamon (X11), Ampere dGPU + iGPU
+  hybrid; a VM on the main Windows rig cannot reach NVIDIA's Linux driver, so a
+  no-crash there proves nothing. The game is D3D12-only on PC, so
+  `PROTON_USE_WINED3D` never changes its path. Several Proton versions are kept
+  installed, so a version-control run is possible; record driver, kernel and
+  Proton version at every sitting. Same-machine controls: the iGPU (Graphics
+  Adapter option), the 1.0.7 Steam branch, and a supplied no-mod save. Check the
+  game log's adapter line — the PRIME profile (`prime-select query`) can put the
+  game on the iGPU, making a "works" result vacuous. Keep Steam Cloud off for
+  the game on the laptop (`EF-051`). Useful capture: `PROTON_LOG=1` plus
+  `VKD3D_SHADER_DUMP_PATH=<empty dir>`.
 - **The owner posts and uploads.** No agent posts, uploads or touches a portal API (H-03), and no agent opens the Mod Editor.
 - **The mod lives in its own local-only repo, `B:\Dev\SMR\SMR-FR1` (no remote).** It never goes into `Code/` or the fix pack. The Windows Mods-folder copy is the master; re-sync the
   source copy from it after any owner upload.

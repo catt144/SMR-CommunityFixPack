@@ -167,6 +167,49 @@ Never keep an owner list here, and never rebuild an owed list from an older docu
 - A game label is not a diagnosis. On 2026-09-16 "Blocking objects" covered three unrelated passage
   refusals, and the tinted tree was a bystander (C103). Read the refusal reason, and check a cursor-based
   console read against the on-screen label before trusting it.
+- Brief cross-vendor work as numbered falsifiable claims, disagreements first: a short FIXED list
+  (owner requirements, safety rails) and everything else DEFAULT, so a builder may depart from a
+  default with a stated reason and must report DEPARTURES and SUGGESTIONS. Judge on evidence, not
+  conformance, and never put the same vendor on both sides of a check.
+- In design work, do not fire a forced-choice widget mid-conversation; give findings and a
+  recommendation, then end with a plain prose question, saving AskUserQuestion for a genuine fork
+  once the owner is ready to choose. List tools or features by seat — tester vs agent — and mark
+  cost honestly.
+- After heavy investigation or design work, QA it in a fresh-session one-off prompt, not inside the
+  session that produced it — accumulated context builds confirmation pressure. State each claim with
+  its evidence and status (proven-live / static-only / disproved), and tell the reviewer not to trust
+  the summary.
+- A handoff or prompt doc pasted with no further instruction means orient, summarise where things
+  stand, and ask which item to take — never execute or commit its work items, even one the doc names
+  as first. The owner has stopped mid-work for this: *"just supposed to be an orientation."*
+- Before carrying a shipped fix's leftover play clause as owed, ask whether its failure would be
+  loud and visible to players and how long it has shipped silently; if so, propose closing it by
+  field evidence — *"unless it poses a real risk."* Quiet failures (silent mis-scoring, corruption
+  without a throw) do not qualify.
+- Owner-pasted example code pictures intent, not a draft — *"I generally do not write it carefully
+  or cleanly"* — so judge whether the approach works and flag a defect only when it changes the
+  design or outcome, never typos, spacing, naming or harmless redundancy. Lead a load-bearing
+  correction with what it changes, not its line.
+- Public surfaces are not equal reach: the owner ranks Steam's store page far above Paradox's, and
+  both far above this repo's site or README — *"most people just subscribe to a mod, they rarely do
+  deep reading for a game mod."* Price a public-surface fix by that reach before recommending
+  urgency; the exception is the two Paradox developers, who read the repo, so a `file:line` citation
+  to them earns accuracy on its own.
+- Do not price an ordinary post-release change against the project's one-time pre-release
+  verification cost — that cost is the release gate amortised across launch, and reciting it inflates
+  a cheap change. Post-release is patch-note-driven maintenance: read the notes, adjust what a patch
+  invalidates, add fixes for new bugs; reserve multi-day tests and sweep chains for a major overhaul.
+- Never re-measure context economics here; the sister Subathon Timer repo already did, folded into
+  `CLAUDE.md`'s header rules. This repo's own plan is `.claude/BLUEPRINT.md` — read it, never the
+  sister tree — and `/clear` is for consulting work only, never for work that creates rails.
+- When a state doc's byte cap warns repeatedly, check whether the file is growing or being suppressed
+  by plotting size across commits; a flat line pinned at the cap means the cap is too small. Raise the
+  warn, never the hard backstop, size headroom in lines at the file's own density, and let the owner
+  pick the number; never quote a stored byte figure, re-derive it.
+- Consume another seat's gate signal but never republish its state: *"the gate I was blocked on is
+  clear"* is mine to say; another chain's sha, verdict, title, sequence or status summary is not,
+  however brief — the standing `git log` anchor is how that leak happens. Before writing a status
+  line, ask whether it is this seat's lane or a sign for someone else's chain.
 
 ## 4 · Traps that have each cost this project a real error
 

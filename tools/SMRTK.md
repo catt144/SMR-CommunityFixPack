@@ -41,6 +41,12 @@ suffix labels. Editor/debug-dependent actions may be unavailable on retail. An o
 selection or an active mechanized-depot animation refuses the affected action.
 Delete and Destroy differ; test them on sacrificial objects.
 
+⛔ **A registered leaf is not a rendered button.** Selected and World build their
+rows only from explicit lists (`leaves`, `more_methods`, `companions` on
+Selected; a hand-written button-row table on World); an action registered
+outside those lists still runs from the console but draws no control. A new
+leaf is not done when it is registered — it is done when a row renders it.
+
 ⛔ **No achievement reset, runtime string compiler, arbitrary file reader or
 vanilla eligibility verdict is available to this mod** (`EF-094`, `EF-096`).
 

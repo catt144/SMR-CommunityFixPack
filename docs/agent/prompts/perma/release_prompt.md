@@ -31,7 +31,10 @@ at the handoff.
 5. Check whether the preceding upload is already closed. A tree version ahead of
    STATE, an upload newer than the outbox's `Last released` line, or zero comment lines in
    `metadata.lua`/`items.lua` means close-out may still be owed. Resolve that
-   release through §4 before preparing another one.
+   release through §4 before preparing another one. Before any "what is live" claim, also curl
+   the Steam changelog page (`steamcommunity.com/sharedfiles/filedetails/changelog/3787202810`);
+   its newest `Update:` entry is the control, since the Paradox page is JavaScript-only and
+   unreadable.
 
 ## 1 · Derive the batch and prepare every required surface
 

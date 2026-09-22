@@ -66,6 +66,10 @@ the forcing, not the game.
   preflighted for thread context as well as symbol resolution; the
   `prompt-authoring` skill's playtest instructions own the paste-safe `*r`/`*g`
   forms. Never assume a bare console supplies a yielding thread.
+- Give each owner leg a first-screen witness, stated in advance, so a mistyped
+  marker or line reads as a no-op rather than a false pass. Build
+  marker-driven instruments fail-closed, and read the log's `Command line:`
+  before trusting any other line in it.
 - Give every subject a locating instrument and confirm it still exists at
   sitting time. A completion counter names its liveness witness. Mid-chain
   readers and helpers obey the same witness and type checks as the main leg.

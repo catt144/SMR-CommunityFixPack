@@ -106,6 +106,13 @@ the two disagree is itself the finding, not a flaky probe.
 All three produced a *confident* wrong verdict in this project. The second and
 third are repaired and stay listed because the failure shape recurs.
 
+⭐ **Read where the throw landed, and read the probe's own title, before trusting
+its verdict.** Reaching deep into shipped code on an ERROR can be proof the call
+still delegates — the opposite of what the message says — and a probe's title
+sometimes states outright that its PASS condition needs a screen check. A
+suite-wide `FAIL`/`ERROR` sweep can be the instrument, not a regression;
+challenge before filing.
+
 1. **A probe whose `run` falls off the end returns nil, and `SMRTest.Run` turns
    nil into SKIP with an empty message** (`00_TestCore.lua`). It reads as a
    deliberate skip, not a missing verdict, and it silently cost wave 6 its entire

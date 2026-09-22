@@ -52,6 +52,10 @@ live here because posting is the owner's action; update a draft in the same comm
 that changes the fact it states. Moved here from `agent/reports/` on 2026-09-11
 (owner ask); older records cite the old path.
 
+**Any steps handed to a player** — a log request, an install step — are numbered
+clicks with no placeholders, one copy-paste line, a tiny expected output, and an
+undo step; players are not agents.
+
 ## The status line — read this before adding or cutting a draft
 
 Every draft carries **one line under its title, before its quote block**:

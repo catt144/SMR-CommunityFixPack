@@ -43,10 +43,20 @@ The card body has maintained copies that must move together:
 - `metadata.lua`'s portal-neutral `description`;
 - the Paradox and Steam backup blocks in `docs/UPLOAD_WORKFLOW.md` §3.
 
+The UPLOAD_WORKFLOW §3 backups are the real delivery path, not a fallback: auto-fill from
+`metadata.lua` was tested on the v5 upload (2026-08-30) and did not come out clean, so the owner
+pasted the backup by hand. Only their styling (headings/bold re-applied in the editor) is
+polish — never call the backups themselves optional.
+
 The section order is the owner's (2026-09-19): intro, SOME OF WHAT IT FIXES,
 BUGS, QUESTIONS AND MODDING, then every featured section, and HOW IT WORKS last.
 A newly featured item gets its own `FEATURED:` section placed after BUGS, QUESTIONS
 AND MODDING, so the route to the site stays high on the page.
+
+Public text is plain enough for players and precise enough for the two Paradox developers who
+plan hotfixes from the fix list; it never carries a developer-style hedge ("unverified", "no
+guarantees", "not witnessed"). Scope belongs in the bug entry (`agent/bugs/<ID>.md`), not on the
+row.
 
 Update the count word, headliners and judgment-call claim in every applicable
 copy. Before editing, count the repair-word matches in each file; afterward require
