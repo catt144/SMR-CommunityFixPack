@@ -35,6 +35,45 @@ rules and the failure behind each one.
    negative search over compressed input (an `.fpk`, a `.zip`) is not a sample
    at all until the bytes are decoded.
 
+## ⛔ Hazards on this rig, every one of them silent
+
+The shell here is not verbatim, and its failures do not announce themselves. Each was measured in
+this repo. (Mixed line endings are the exception: doccheck's EOL gate catches those, RED, with a
+`--fix-eol` cure.)
+
+1. **Quoted heredocs strip one backslash level**, repeatedly, even while patching a correct script,
+   and the botched edit reports success. A heredoc may carry prose, never code with a backslash:
+   write scripts with an editor tool.
+2. **`git commit -m` splits on embedded quotes under PowerShell 5.1** and git reads the fragments
+   as pathspecs. Use `git commit -F <file>`.
+3. **PowerShell 5.1 `Get-Content`/`Set-Content` corrupt no-BOM UTF-8**: reads decode as ANSI,
+   writes add a BOM. Use an editor tool, or `[System.IO.File]` with `UTF8Encoding($false)`.
+4. **`grep -c` exits 1 on zero matches and breaks an `&&` chain.** Read controls in their own call.
+5. **`cd ""` returns 0**, so `cd "$TMPDIR"` is a silent no-op and the command runs in the repo. Use
+   an absolute scratch path, and `pwd` before any `mkdir` or `git init`.
+6. **`Compress-Archive` writes backslash entry names**, which Linux unzip turns into one file with
+   backslashes in its name. Build zips with Python `zipfile`, then list `namelist()`.
+7. **After rewriting line endings, `git status` lists files modified with an EMPTY diff** (stale
+   index stat). `git add --renormalize` clears it, but only where `hash-object --no-filters` equals
+   the index blob, or it stages a peer's pending edit. Python text mode writes CRLF here: pass
+   `newline="\n"` or write bytes.
+8. **`$'\r'` is not ANSI-C quoting in the Bash tool's sh**: `grep -c $'\r'` returns 0 on a 100%
+   CRLF file. Count the bytes in Python.
+9. **`rg` with explicit directory args returned nothing for a phrase `grep -r` found in 7 files.**
+   Cause undiagnosed; confirm any absence with `grep -rn`.
+10. **Git Bash `ls -l` shows an NTFS junction as a symlink.** Classify with PowerShell
+   `(Get-Item x).LinkType`; enumerate with `cmd /c dir /A:L /S /B <tree>`, which does not follow
+   them.
+11. **`grep -r` and `robocopy` walk INTO junctions** — one junction to every Claude project turned
+   2,649 real hits into 31,255. Use `--exclude-dir` per junction, and `/XJ` on any bulk copy.
+12. ⛔ **`git checkout -- <path>` is not a restore.** It restores to HEAD, not to the state you
+   started from, and it silently destroyed an uncommitted rewrite here. Copy the file aside before
+   any temporary edit, restore from the copy, and `sha256sum` both to prove the restore landed; a
+   harness that breaks a file to watch a gate fire does the same and prints the hash, as
+   `ck170_selftest.py` does. On a path a peer is mid-write on, it discards their work too.
+
+When a command's fidelity matters, use a tool that writes bytes, and verify afterwards.
+
 ## ⭐ The rows below are GENERATED
 
 The prose in this file is hand-authored. Everything between the two marker

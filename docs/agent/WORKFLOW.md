@@ -2,7 +2,7 @@
 
 Process rules for this repo. Code rules are `FIX_POLICY.md`; the global duties are `CLAUDE.md`'s
 `Must_Read_Header`; orientation, filing, prompt writing and session close are the skills in
-`.claude/skills/`. Situational procedures live in `support/`; the map is `docs/README.md`.
+`.claude/skills/`, mirrored for Codex in `.agents/skills/`. Situational procedures live in `support/`; the map is `docs/README.md`.
 
 ## Layout
 
@@ -24,6 +24,14 @@ Process rules for this repo. Code rules are `FIX_POLICY.md`; the global duties a
   save only when the owner asks — never scan or pick one on your own initiative to find a fixture.
   Owner, 2026-09-18: "I think agents should stop checking saves all together, And only check saves
   when I ask. Most of the time they are wrong anyway."
+- Push after committing, in the same session, without asking — every project repo with a remote.
+  Pushing a repo is not publishing a mod; store uploads and the site stay the owner's act. ⛔ Three
+  trees are local-only by design and are never raised as an owed item, a durability gap or a risk
+  note, and never given a proposed remote or backup: the **TestKit**, which has never had one;
+  **`.claude/`**, where invisibility is the product, since tracked material is a sign every session
+  reads and a fresh seat will relitigate a settled plan; and **`SMR-Assets`** while its model is in
+  prototyping, which is the train seat's call to end. State a no-remote consequence only where a
+  deletion is being decided.
 - TestKit, never shipped and local-only by decision: `B:\Dev\SMR\SMR-BugFixPack-TestKit`. Its README is
   the kit's own build-state document; the durable pack-side view is `tools/TESTKIT.md`, and the
   SMR Tool Kit plus its sitting slots are `tools/SMRTK.md`.

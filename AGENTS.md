@@ -12,7 +12,7 @@ Rule: Verify durable structural facts by fingerprint and rederive only groups th
 Rule: Cite a game source line with the build it was read on, from that build's archived tree. [A3: pass]
 Rule: Scope every verification command so contrary evidence could make it fail; to prove absence, grep decoded inputs and count the presence side. [A3: pass]
 Rule: Run a measurement before reporting it; mark `<<PENDING-RUN>>` any figure written before its command ran. [A3: pass]
-Rule: Record every count with its command and filter and reconcile each total against its members. [A3: pass]
+Rule: Record every count with its command and filter, reconcile each total against its members and against a second line in the same artifact, and report a difference by name rather than as a number. [A3: pass]
 Rule: Attribute shared-tree work by commit and diff rather than author identity. [A3: pass]
 Rule: Recheck shared paths before writing; commit with a pathspec unless partial hunks of a peer-shared file are staged, which a pathspec would discard. [A3: pass]
 Rule: Delegate work to a subagent when that costs less than doing it in your own context, and invoke the `subagents` skill before launching one. [A3: pass]
