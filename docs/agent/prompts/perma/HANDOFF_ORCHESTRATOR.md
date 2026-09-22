@@ -152,6 +152,13 @@ Never keep an owner list here, and never rebuild an owed list from an older docu
   is in [STATE_EVICTION.md](STATE_EVICTION.md).
 - Chain: Astra fans out and re-verifies its own subagents; the orchestrator sniff-tests; a cross-vendor
   Claude agent runs only if the sniff test fails. Hunts, broad diffs and heavy coordination go to Astra.
+  A vacuous control looks like success and never triggers that escalation, so a builder's re-verify
+  must revert the guard in a scratch copy and require the leg to FAIL.
+- Never implement and judge your own brief (owner, 2026-09-13: *"I would rather you not be the
+  implementor and judge"*). Analyse, write the brief with a definition of done per phase, and
+  adjudicate the output against the diff, not the report. A build that needs extending goes back to
+  its builder as a brief. An explicit owner ask to build wins: build it, say in one line that it
+  departs, and mark the builder's brief held.
 - Before scoping a redesign of a surface reported as broadly wrong, look for a single render or
   registration fault. On 2026-09-14 one unresolved TextStyle blanked every button caption in the toolkit.
   A verdict on rendered output is worthless unless the log proves which code rendered it.

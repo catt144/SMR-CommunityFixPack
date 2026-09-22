@@ -35,7 +35,9 @@ judgement, and cut every line a named skill or the worker's own judgement alread
 - **Facts only where the worker would re-derive them**, each with how it was measured and one
   command that could falsify it. For more records point at the bugs/facts `INDEX.md`.
 - **Scope** in two lines, in and out; for an investigation, scope is the question, not the files.
-  An out-of-scope finding goes in the report, not an edit.
+  An out-of-scope finding goes in the report, not an edit. Write a fence as behaviour ("comment
+  lines only, no Lua logic"), never as a count ("two lines"): a miscounted fence stops the worker
+  at a line the brief got wrong.
 - **Stops**, at most three, as permission to report instead of pushing on.
 - **Do not claim:** the claim the evidence cannot carry, and the narrower true one to write instead.
 - **Lifecycle:** a one-off is deleted when fired; a perma prompt stays.
