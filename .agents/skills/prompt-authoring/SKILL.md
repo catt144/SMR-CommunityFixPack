@@ -41,7 +41,11 @@ judgement, and cut every line a named skill or the worker's own judgement alread
 - **Lifecycle:** a one-off is deleted when fired; a perma prompt stays.
 - **Difficulty tag** in the filename: `_low` (light-to-moderate reasoning with good instructions: a
   settled plan, or a simple, well-specified investigation), `_medium`, `_high`, or `_fanout_level_<x>` (1–10) for subagent control. It is the
-  owner's routing hint, not a gate: a brief never names a model or checks which one runs it.
+  owner's routing hint, not a gate: a brief never names a model or checks which one runs it. The
+  owner reads a light tag as Opus at low or medium effort, or Sonnet at high or xhigh, so the brief
+  states the reasoning the work needs and never suggests a model or effort.
+- **Unattended work is execute + audit**, on different models the owner picks, for a single item
+  as much as a chain: no unattended result enters the record unaudited.
 - **Name skills, do not restate them:** `doc-editing`, `smr-bug-library`; house rules are `CLAUDE.md`.
 
 ## Shapes that fail
