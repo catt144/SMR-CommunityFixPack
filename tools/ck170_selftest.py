@@ -47,6 +47,8 @@ def skill_cases(m, root):
     m.SKILLS_DIR = str(root / "skills")
     m.CODEX_SKILLS_DIR = str(root / "mirror")
     m.SKILL_HARD, m.SKILL_WARN = 12, 10
+    m.IMPORTED_SKILLS = ()   # user-level imports are machine-global; the fixture
+                             # tests mirror identity and the caps, not imports
     paths = [Path(base) / "fixture/SKILL.md"
              for base in (m.SKILLS_DIR, m.CODEX_SKILLS_DIR)]
     good = b"abcde\nabcde\n"

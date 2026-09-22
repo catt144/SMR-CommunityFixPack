@@ -907,6 +907,20 @@ SKILL_WARN = 7 * 1024
 SKILL_HARD = 12 * 1024
 
 
+# A user-level skill loads in every project for Claude but is invisible to
+# Codex, which reads only .agents/skills/ in-repo. Each name below is mirrored
+# from the owner's user-level copy, which stays canonical; the in-repo copy is
+# generated, exactly as AGENTS.md is a byte copy of CLAUDE.md.
+USER_SKILLS_DIR = os.path.join(os.path.expanduser("~"), ".claude", "skills")
+IMPORTED_SKILLS = ("rule-placement",)
+
+
+def imported_skill_src(name):
+    """-> the user-level canonical path for an imported skill, or None."""
+    path = os.path.join(USER_SKILLS_DIR, name, "SKILL.md")
+    return path if os.path.isfile(path) else None
+
+
 def skill_names():
     """-> sorted skill folder names that actually hold a SKILL.md."""
     if not os.path.isdir(SKILLS_DIR):
@@ -922,6 +936,17 @@ def regen_skills():
         if not os.path.isdir(dst_dir):
             os.makedirs(dst_dir)
         with open(os.path.join(SKILLS_DIR, name, "SKILL.md"), "rb") as fh:
+            data = fh.read()
+        with open(os.path.join(dst_dir, "SKILL.md"), "wb") as fh:
+            fh.write(data)
+    for name in IMPORTED_SKILLS:
+        src = imported_skill_src(name)
+        if not src:          # another machine: leave the committed copy alone
+            continue
+        dst_dir = os.path.join(CODEX_SKILLS_DIR, name)
+        if not os.path.isdir(dst_dir):
+            os.makedirs(dst_dir)
+        with open(src, "rb") as fh:
             data = fh.read()
         with open(os.path.join(dst_dir, "SKILL.md"), "wb") as fh:
             fh.write(data)
@@ -961,8 +986,35 @@ def check_skills(out):
             note = "  ⚠ over the %d B target" % SKILL_WARN
         total += size
         rows.append("    %-24s %5d B%s" % (name, size, note))
+    imported = 0
+    for name in IMPORTED_SKILLS:
+        dst = os.path.join(CODEX_SKILLS_DIR, name, "SKILL.md")
+        if not os.path.exists(dst):
+            if not imported_skill_src(name):
+                continue     # neither copy here: not this tree's concern
+            out.append("SKILLS: RED  .agents/skills/%s/SKILL.md is missing — this "
+                       "user-level skill reaches Codex only through the in-repo copy"
+                       % name)
+            out.append(REGEN_CURE)
+            ok = False
+            continue
+        imported += 1
+        size = len(lf_bytes(dst))
+        src = imported_skill_src(name)
+        if not src:
+            rows.append("    %-24s %5d B  imported, canonical copy not on this machine"
+                        % (name, size))
+        else:
+            with open(src, "rb") as a, open(dst, "rb") as b:
+                if a.read() != b.read():
+                    out.append("SKILLS: RED  %s differs from the owner's user-level "
+                               "copy, which is canonical" % name)
+                    out.append(REGEN_CURE)
+                    ok = False
+            rows.append("    %-24s %5d B  imported from ~/.claude/skills/" % (name, size))
+        total += size
     out.append("SKILLS: %d skill(s), %d B of bodies, mirrored to .agents/skills/"
-               % (len(names), total))
+               % (len(names) + imported, total))
     out.extend(rows)
     return ok
 

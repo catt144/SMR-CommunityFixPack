@@ -25,8 +25,7 @@ Apply the placement criteria, exceptions and calibration before writing,
 moving, retaining or removing rules: the `rule-placement` skill states them
 compactly, and `docs/agent/reports/RULE_PLACEMENT_TEST.md` §§ "The question",
 "Audit criterion" and "Calibration" hold the same test with its worked
-reasoning — the only copy a session without that skill can reach. The report's
-historical implementation plans are not new duties.
+reasoning. The report's historical implementation plans are not new duties.
 
 The owner delegates removal authority to this test: execute decided
 dispositions without another ruling and record evidence in the commit
