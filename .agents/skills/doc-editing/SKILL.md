@@ -1,79 +1,80 @@
 ---
 name: doc-editing
-description: Edit Relaunched Fix Pack documentation while preserving owner decisions, obligations and meaning across source documents, maps and generated views. Use before a documentation edit here.
+description: Create, edit, move or retire Relaunched Fix Pack documentation while preserving decisions, obligations and rules headers. Use before any documentation change here.
 ---
 
 # Documentation edits
 
-Check the meaning that doccheck cannot check. Work from the document's existing
-purpose and its actual destination passages, not a topic match or a fresh GREEN.
+Verify meaning in actual passages; matching headings and passing doccheck
+do not prove preservation.
 
-## Before changing the text
+## Scope and authority
 
-- Identify the reader and the action this passage supports. Use `docs/README.md`
-  for placement; do not move a rule to a new home without existing authority.
-- Identify any owner decision the edit creates, settles or changes. Preserve its
-  wording and the condition under which it was made. A checklist item still
-  there must still be owed by the owner; delete it once the owner has acted.
-- When trimming or retiring a passage, separate settled evidence from remaining
-  obligations. Follow the destination's local retirement rule; verify the full
-  obligation survives at its home before cutting. A matching heading is not proof.
-- To shrink a document, make deletion the default: each surviving line needs a
-  reason, a home, or a slot under a stated cap. Do not defend cuts line by line.
-- If the question requires historical evidence, use smr-orientation's archive
-  search route. A default search excludes the archive deliberately.
+- Read the document's `Must_Read_Header`; maintain it for new or edited
+  documents, consistent with audience, scope and body.
+- Identify the reader and supported action. Use `docs/README.md` for placement;
+  relocate rules only with existing authority.
+- Preserve owner decisions verbatim with their conditions, where the role
+  that obeys them reads them. The checklist holds outstanding owner asks,
+  never rulings; remove completed asks.
+- For historical evidence, use smr-orientation's archive search route.
 
-## When the edit writes, moves or keeps a rule
+## Rules
 
-⚖️ **The test carries the owner's authority** (owner, 2026-09-17): *"before we run
-into an issue with a rule cannot be purged by an agent, I authored the rules test
-so it carries my authority."* Applying it is executing their decision, not making
-one, so a rule the test disposes of is purged without coming back for a ruling.
-The delegation is to the **test**, not to your judgement: a rule goes because the
-test disposes of it, never because it reads as unnecessary, and the evidence goes
-in the commit message. Where the test does not decide, keep the rule and ask.
+Apply the placement criteria, exceptions and calibration before writing,
+moving, retaining or removing rules: the `rule-placement` skill states them
+compactly, and `docs/agent/reports/RULE_PLACEMENT_TEST.md` §§ "The question",
+"Audit criterion" and "Calibration" hold the same test with its worked
+reasoning — the only copy a session without that skill can reach. The report's
+historical implementation plans are not new duties.
 
-One question decides it — not "is this important?", which is why the doc grew:
+The owner delegates removal authority to this test: execute decided
+dispositions without another ruling and record evidence in the commit
+message. Apparent uselessness alone is insufficient. Where the test does
+not decide, preserve the rule and ask.
 
-**What actually stops this, if not the reader's memory?**
+Find duplicates by meaning. When excluding a category, state what the
+exclusion must not cover in every copy.
 
-| answer | disposition |
-|---|---|
-| Structure — the reader cannot perform the action at all | delete the rule |
-| A guard — a machine already catches it | a one-line pointer to the gate |
-| Nothing, and it has been violated in practice | it was never a rule; it is a wish |
-| Nothing, and it binds exactly one job | that job's skill or brief |
-| Already a recorded fact with a canonical home | delete the prose, keep the fact |
-| Nothing, binds every session, no guard is possible | the always-loaded set, which stays very short |
+## Reader and trimming
 
-Four shapes that should not be rules at all: **CANNOT**, structurally impossible
-for the reader, delete · **WOULD NOT**, possible but contrary to how an agent
-operates — an incident check is required before cutting, because this branch can
-delete an earned rule · **WRONG READER**, the actor is not this doc's audience,
-move it rather than delete · **NOT A RULE**, information written in the
-imperative, which becomes an engine fact or a pull-only lesson and never joins
-the always-loaded set.
+- Agent-only documents may favor machine-checkable structure over prose.
+  Optimize for fewer errors and lower context cost; document count is
+  unconstrained. Translate for the owner on demand.
+- Anything the owner reads, including handoffs, needs readable structure
+  and useful links; avoid emoji-dense emphasis.
+- Default to deletion within preservation and authority requirements.
+  Surviving lines need a purpose, home or slot under a stated cap.
+  Do not defend every cut.
 
-Find duplicates by meaning, not by string. The worked reasoning, the owner's
-wording and the calibration warning are in `reports/RULE_PLACEMENT_TEST.md`.
+## Moves and cuts
 
-## Keep regeneration within the edit
+Separate settled evidence from open obligations; follow the destination's
+retirement rule. Before cutting, compare source diffs with actual destination
+passages: full obligations and conditions must survive. Remove relocated
+instructions from the source in the same change.
 
-The full `python tools/doccheck.py --regen` reads every entry on disk, including peers' unfinished work.
-Before choosing it, inspect changes under both `docs/agent/bugs/` and
-`docs/agent/facts/` and compare them with your edit's inputs. Review the resulting
-diff: fresh generated output can still contain work outside your change.
+Retiring a rule repo-wide is decided by tense, not by file type: a
+present-tense statement in a report, an entry's prose or a `row_status:` line
+still instructs its reader. Re-run the grep afterwards and justify each
+remaining hit.
 
-## Review meaning after the edit
+Parked or cut items belong only in pull-only documents, marked not
+agent-tracked. Search doccheck's `PUSH_SET` and remove every mention,
+including tombstones.
 
-- For a revised prompt, compare its `prompts/README.md` description with the
-  resulting purpose, scope and lifecycle. Filename agreement does not establish
-  that the row still describes the job.
-- For an owner ruling, check its condition and body together, and that it lands
-  where the role that obeys it reads it; the checklist keeps no rulings.
-- For a move or a cut, inspect the destination passage and the source diff
-  together. Preserve open work and conditions; remove the moved instruction
-  from its source in the same change. Do not substitute a size target for this
-  check, or restore temporarily suspended caps without the owner's ruling.
+Size targets never override preservation; restore suspended caps only
+on the owner's ruling.
 
-This skill supplies judgment checks. It does not verify that an agent invoked it.
+## Verification
+
+Before `python tools/doccheck.py --regen`, compare changes in both
+`docs/agent/bugs/` and `docs/agent/facts/` with this edit's inputs.
+Regeneration includes peers' unfinished entries; review generated diffs
+for unrelated changes.
+
+Check preserved decisions, conditions, obligations, header/body agreement
+and required homes. For revised prompts, check purpose, scope and lifecycle
+against `docs/agent/prompts/README.md`.
+
+This skill checks judgment, not its own invocation.
