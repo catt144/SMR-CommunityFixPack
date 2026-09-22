@@ -194,6 +194,28 @@ Steps:
 
 The TestKit's `SMRTest.RunAll()` A/B pair (pack disabled, then enabled) is the regression harness.
 
+### Fixtures, mutations and owner-typed lines
+
+- Before building a fixture, ask the owner whether one already exists. A warmed-up save is the
+  default; state only a deviation, such as reading immediately after load.
+- A behaviour, timing, throughput or player-notice claim states the fixture's scarcity, fleet,
+  density and layout, and reports that colony rather than a generalisation.
+- Name every setup mutation, and reject one that intersects the mechanism being measured. A
+  no-taint claim needs a clean current-build save; the toolkit's `CLEAN` is not an achievement
+  verdict.
+- A shortened `MapGameTimeRepeat` is restarted after the change and after every reload, and proven
+  live. Pair a negative result with a positive control.
+- Salvage targets objects, not hexes: a bare red `Salvage` means nothing under the cursor is
+  targetable.
+- Label probe tallies with their build and name each SKIP. A MarsDebug pass is not retail evidence
+  (`EF-044`), and console and toolkit names are checked against the retail sandbox (`EF-096`).
+  `ConsolePrint` silently rejects multiple or non-string arguments, and an OS display measurement
+  needs a DPI-aware tool.
+- An owner-typed console line is one paste-safe line with no `--` comment: a bare expression for a
+  read, `*r` for real-time or multi-statement work, `*g` for game-time work that yields. Make `nil`
+  explicit, read presence from the file log, and claim absence only after exit. An attended leg
+  carries more duties (`support/CO_RUNS.md`).
+
 ### Log review (owner, 2026-08-01)
 
 A flushed log covers hours of continuous play, and the owner reviews the errors with the agent;
