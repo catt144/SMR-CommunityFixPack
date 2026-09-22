@@ -1,65 +1,80 @@
 ---
 name: smr-orientation
-description: Orient at the start of a session in the Relaunched Fix Pack repo — where the project stands, where things live, how to search the archive on purpose, and which numbers must be emitted rather than typed. Use when starting work here, picking up a handoff, or before quoting a count, build id, or status.
+description: Start work or resume a handoff in the Relaunched Fix Pack repo; locate documents, search archives and verify counts, builds or status without loading current work unasked.
 ---
 
-# Orientation — Relaunched Fix Pack
+# Orientation: Relaunched Fix Pack
 
-A bug-fix mod for *Surviving Mars: Relaunched*. Every fix repairs a verified defect in the
-game's shipped Lua, patched at runtime; no game files are modified.
+A bug-fix mod for Surviving Mars: Relaunched. Fixes repair verified shipped-Lua
+defects at runtime; game files stay unchanged.
 
-## 1 · Where the project stands
+## Must_Read_Header
 
-- ⛔ **Status is PULL.** Do not check current work unless a task, a prompt or the owner calls
-  for it (owner ruling 2026-09-15). Opening a session is not such a call.
-- **`docs/agent/STATE.md`** — kernel status plus pointers, byte-capped. When status IS the
-  question, this is the read, and its `NEXT`, `OWED` and `## Hazards` lines bind you.
-- **`docs/PLAYTEST_CHECKLIST.md`** — the owner's list. Pull it only when a task or the owner calls
-  for it; file a new ask there through its entrance gate.
-- **Never hand-type a count.** `python tools/doccheck.py --emit-counts` prints them.
+Status is pull-only (owner, 2026-09-15). Session start does not authorize reading
+current work. Read `docs/agent/STATE.md` only when a task, prompt or owner calls
+for status; its `NEXT`, `OWED` and `## Hazards` bind you. Read
+`docs/PLAYTEST_CHECKLIST.md` only when the task or owner calls for it; new owner
+asks must pass its entrance gate.
 
-## 2 · Where things live
+## Map and generated files
 
-`docs/README.md` is the map and `doccheck` enforces it.
+`docs/README.md` is the doccheck-enforced map.
 
-| | |
+| Material | Home |
 |---|---|
-| defect truth | `docs/agent/bugs/` — one file per entry, **generated** `INDEX.md` |
-| engine behaviour | `docs/agent/facts/` — `EF-NNN`, **generated** `INDEX.md` |
-| process · code rules | `docs/agent/WORKFLOW.md` · `docs/agent/FIX_POLICY.md` |
-| prompts | `docs/agent/prompts/` — `perma/` standing, root = live one-offs |
-| human docs | `docs/` root only — never add a file there without the map row |
+| Defects / engine facts | `docs/agent/bugs/` / `docs/agent/facts/`; generated `INDEX.md` in each |
+| Process / code rules | `docs/agent/WORKFLOW.md` / `docs/agent/FIX_POLICY.md` |
+| Prompts | `docs/agent/prompts/`; `perma/` standing, root live one-offs |
+| Human docs | `docs/` root; add no file without its map row |
 
-A `GENERATED` banner means **edit the source, never the file**:
-`python tools/doccheck.py --regen`. doccheck is RED if a generated file drifted.
+Emit counts with `python tools/doccheck.py --emit-counts`; never hand-type them.
+A `GENERATED` banner means edit the source, never the generated file. Regenerate
+with `python tools/doccheck.py --regen`, following doc-editing's shared-input
+check; doccheck rejects drift. Edit `CLAUDE.md`; `AGENTS.md` is its generated
+byte copy.
 
-## 3 · The archive boundary
+## Archive searches
 
-`docs/archive/` is append-only history, kept **out of a default ripgrep** by a root
-`.rgignore` so ordinary searches return only live hits. A boundary, not a deletion —
-search it on purpose when *"we may already have learned this in an archived report"*:
+`docs/archive/` is append-only and excluded from default ripgrep by `.rgignore`.
+For historical evidence, use `rg <term> docs/archive/` (archive only) or
+`rg --no-ignore <term>` (live and archive). An empty default search cannot prove
+an archived record is missing. `grep -r`, `git grep` and `git log` ignore
+`.rgignore`.
 
-```
-rg <term> docs/archive/     the archive alone — naming the path defeats the filter
-rg --no-ignore <term>       live + archive in one pass
-```
+## Evidence and citations
 
-`grep -r`, `git grep` and `git log` ignore `.rgignore` entirely. A default search coming
-back empty is the boundary working, not a missing file.
+Facts' `derived_at` names their SHA or game build. Run
+`python tools/doccheck.py --emit-fingerprint` to route checks: `HOLDS` matches
+build identity, not claim validity, scope or dependencies; `MOVED` requires a
+new baseline for current claims. Follow smr-bug-library's "Checking facts".
+Never assume live `ModTools/Src` still matches an old citation.
 
-## 4 · Before trusting a line citation
+## Harness, peers and commits
 
-Facts carry `derived_at:` — the sha or **game build** they were derived against.
-`python tools/doccheck.py --emit-fingerprint` says which groups still describe what is
-installed. A group that HOLDS needs no re-read; re-derive only what MOVED. This bites here:
-the game auto-updated to 1.1.0 unasked and overwrote `ModTools\Src`, so many facts cite line
-numbers in a tree no longer on disk.
+Read `tools/README.md`, "Hazards on this rig", before shell or git scripting.
+Use exact paths and `git commit -F <msgfile> -- <paths>`, never `-a`.
+Doccheck must be GREEN; the commit hook enforces it. For peer-shared paths,
+including staged hunks, first follow `docs/agent/WORKFLOW.md`, "Committing in a
+shared tree": a pathspec does not isolate edits within a file.
 
-## 5 · Harness, peers, commits
+- Recheck `git status` and `git log` before shared writes, and
+  `git log --oneline -4` immediately before committing. Peers move HEAD without
+  a pull; an empty `git log HEAD..origin/main` proves nothing about their work.
+  Attribute work by SHA and diff, never author: the git identity is shared.
+- Before allocating an EF id, check existing filenames and uncommitted work.
+  Prefer a dated observation in the relevant existing entry over a new id;
+  directory order alone does not establish the next free number.
+- Claude's `ListAgents` does not show Codex sessions. For foreign uncommitted
+  work with no visible owner, ask the owner rather than wait on an unreachable
+  peer. A quiet run may be awaiting the owner; do not assume it is stuck.
+  Check foreign `??` files before treating a one-off as unclaimed, and make
+  your own run git-visible.
+- Message overlapping peers before editing their entries, STATE or checklist
+  items, and before either commits a shared file. Report what actually landed
+  with your own SHAs: your commit may discharge work a peer was holding.
+  Check your transcript before accepting a peer's attribution of a commit to you.
 
-`CLAUDE.md` is the edited entry file; `AGENTS.md` is a **generated byte copy** for Codex —
-never edit it. Both vendors work this tree, sometimes at once: re-check `git log` and
-`git status` before a shared write, and identify a peer's work by sha and diff, never by
-author (there is one git identity). Stage exact paths and commit with a pathspec —
-`git commit -F <msgfile> -- <paths>` — never `-a`, never a bare `-m` (PowerShell 5.1 splits
-`-m` on embedded quotes). doccheck must be GREEN; a hook enforces it.
+Before executing a brief, check relevant records for prior owner rulings:
+its bug entry, chain README row and, when the task calls for it, checklist.
+Follow the later owner instruction and surface any tension rather than silently
+resolving it; a brief can omit a ruling.

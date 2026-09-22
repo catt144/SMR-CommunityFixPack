@@ -2,7 +2,8 @@
 
 Process rules for this repo. Code rules are `FIX_POLICY.md`; the global duties are `CLAUDE.md`'s
 `Must_Read_Header`; orientation, filing, prompt writing and session close are the skills in
-`.claude/skills/`, mirrored for Codex in `.agents/skills/`. Situational procedures live in `support/`; the map is `docs/README.md`.
+`.claude/skills/`, mirrored for Codex in `.agents/skills/`. Situational procedures live in
+`support/`; the map is `docs/README.md`.
 
 ## Layout
 
@@ -50,6 +51,35 @@ New-Item -ItemType Junction -Path "$env:APPDATA\Surviving Mars Relaunched\Mods\S
 Enable "Relaunched Fix Pack" in the game's Mod Manager; restart the game after editing Lua. The
 console line `SMRFixPack.ListFixes()` prints each fix's status (active / inactive+reason / disabled /
 error).
+
+## Committing in a shared tree
+
+Several Claude and Codex sessions work this checkout at once, so fact numbering, checklist numbers
+and the staging index are shared scarce surfaces. The rules are the `smr-orientation`
+skill, "Harness, peers and commits"; the mechanics are here.
+
+- **Nothing sits staged.** `git add`/`rm`/`mv` go in the same command as the commit. A staged
+  rename left for twenty minutes went out under a peer's bare commit. Name individual file paths:
+  even a scoped `git add -A <dir>` swept a peer's file created between one session's `status` and
+  its `add`. An unexpected `LF will be replaced by CRLF` warning naming a file you never touched is
+  a collision alarm.
+- **A pathspec is only half a fence.** `git commit -F msg -- <path>` protects every OTHER file, but
+  for a path you name it commits the working tree, a peer's unstaged edits included. The tell is
+  mechanical: `git status --short` shows ` M` on a path you are about to name. Then stage only your
+  own hunks (`git add -p`), check `git diff --cached --name-only` is exactly yours, and commit
+  WITHOUT a pathspec.
+- **When the peer's hunks are already staged (`MM`)**, neither route fences it: the work tree holds
+  both sets, the index holds theirs. Build the commit outside the shared index —
+  `GIT_INDEX_FILE=<tmp> git read-tree HEAD`, `git update-index --add --remove -- <your paths>` (a
+  rename is the old path removed plus the new path added); for the shared file take
+  `git show HEAD:<P>` and patch in only your hunk (`git diff -- <P>` yields exactly yours while
+  theirs are staged), then `git hash-object -w --path <P> <file>` → `git update-index --cacheinfo`;
+  `git write-tree`, `git commit-tree -p HEAD -F msg`, check `git diff-tree -M --stat HEAD <tree>`,
+  and `git update-ref refs/heads/main <new> <old>`. Resync the real index with
+  `git reset -q -- <your paths>` and `git apply --cached <your hunk>`. The pre-commit hook does not
+  run on `commit-tree`, so run doccheck yourself.
+- If `pull --rebase` refuses over a stranger's unstaged file, never stash or touch it: push if the
+  remote is unchanged, else wait and re-pull.
 
 ## Per-fix discipline
 
