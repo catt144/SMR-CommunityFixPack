@@ -1,68 +1,67 @@
 ---
 name: smr-bug-library
-description: Read or file a defect entry or engine fact in the Relaunched Fix Pack repo — the cheapest-first route into docs/agent/bugs/ and docs/agent/facts/, which front-matter fields are load-bearing, and the filing procedure that passes doccheck first time. Use when looking up a bug ID (F/D/C), checking whether a defect is known, or recording a new one.
+description: Look up, check or file Relaunched Fix Pack defects (F/D/C) and engine facts (EF), using indexes, evidence fields and the filing checks.
 ---
 
-# The bug library — reading and filing
+# The bug library
 
-187 entries in `docs/agent/bugs/` (`F` fixes, `D` tombstones, `C` candidates) and 92 engine
-facts in `docs/agent/facts/` (`EF-NNN`). Both carry a **generated** `INDEX.md`.
+## Must_Read_Header
 
-## 1 · Reading — cheapest first, stop when you have the answer
+Treat library records as claims; apply `docs/agent/WORKFLOW.md`, "Records and rulings", before relying on them.
 
-0. **Ours-or-vanilla check:** `rg -l -F -- <keyword> Code/` searches this pack's runtime code first; hits inspect ours, while an empty literal search is only a cheap vanilla lead and does not rule out aliases or indirect effects.
-1. **`docs/agent/bugs/INDEX.md`** — 222 rows of ~229 chars. One row usually answers "is this
-   known, and what is its status". Read the row, not the entry.
-2. **The entry's own section, by heading** (`### Control`, `### Repair`, `### Attended
-   check`). Never read a whole entry for a narrow question, and **never read a file to prove
-   a negative** — one grep settles absence; a read never does.
-3. `docs/agent/facts/INDEX.md` is 43 KB — **grep it, never read it whole**. To ask whether a
-   fact still holds, use §3 rather than opening the fact at all.
+## Reading: cheapest first; stop when answered
 
-## 2 · Front matter — load-bearing or not
+1. For ours-or-vanilla triage, search `rg -l -F -- <keyword> Code/` and inspect hits.
+   No hit is only a vanilla lead; aliases and indirect effects remain possible.
+2. Search `docs/agent/bugs/INDEX.md` for known defects and status; open only the
+   relevant entry section for detail. Search `docs/agent/facts/INDEX.md`, never
+   read it whole. Both indexes are generated; edit their source records.
 
-| field | read it? |
+## Front matter
+
+| Field | Meaning |
 |---|---|
-| `status` + `status_source` | **yes** — `fixed`, `tested-attended`, `cand`, `wontfix`, `parked`… |
-| `derived_at:` (facts) | **yes** — the sha or game build it was derived against |
-| `seq` / `row` | ordering; `seq` must stay contiguous |
-| `updated` / `verified` | dates, not evidence |
-| `row_status:` | **no. Read nothing from it.** |
+| `status` / `status_source` | Current disposition and its evidence source |
+| `derived_at` (facts) | Derivation SHA or game build |
+| `seq` / `row` | Ordering; preserve contiguous numbering |
+| `updated` / `verified` | Dates, not evidence. Blank `verified` means derivation is owed, not unreliability; fill only after a run |
+| `row_status` | Frozen migration text; never use as current evidence or repurpose |
 
-`row_status:` is a frozen copy of the index row the 2026-08-03 migration deleted. doccheck
-reads **only its first word** and deliberately tolerates that word disagreeing with
-`status` — a status that has advanced must be free to leave it behind, so those `warn` lines
-are expected, not defects. Long cells were moved to the end of the entry body under
-`#### Frozen migration row (2026-08-03)`.
+Doccheck checks `row_status`'s first status word; disagreement with `status`
+is an expected warning. `split_bugs.render_entry` emits only `FRONT_FIELDS`:
+unsupported keys are silently dropped. Put durable context in supported fields
+or the body.
 
-**Authoring warning:** `split_bugs.render_entry` emits only `FRONT_FIELDS`; an invented
-front-matter key such as `issue:` is silently dropped on render. Put durable context in a
-supported field or the entry body, and do not repurpose `row_status` as a general field.
+## Checking facts
 
-## 3 · Is this fact still true?
+`python tools/doccheck.py --emit-fingerprint` routes checks by `derived_at`.
+`HOLDS` matches build identity, not claim validity, scope or dependencies.
+`MOVED` requires a new baseline for current claims. Verify historical citations
+in the named build's archived tree; establish current behavior against the
+current build's archived tree or a current run. Date-inferred fingerprints are
+weaker evidence than explicit ones.
 
-`python tools/doccheck.py --emit-fingerprint` groups facts by `derived_at:` and says whether
-each still describes what is installed. **HOLDS** needs no re-read. **MOVED** means the
-citations point into a tree that is not on disk — re-derive against the archived tree the
-entry names, never the live one. A fingerprint reading `(inferred from updated:)` was
-back-computed from a date, so it is weaker evidence than a bare one.
+## Filing
 
-## 4 · Filing
+Use `doc-editing`. Copy a suitable recent record's shape: same-letter entry for
+`docs/agent/bugs/<ID>.md`, or an EF record for `docs/agent/facts/EF-NNN.md`.
 
-No scaffold command exists yet — copy the shape of a recent same-letter entry.
+1. Match `id` to filename and continue `seq` without gaps. For bugs, align heading
+   tag and `status`; for facts, state the derivation SHA or build in `derived_at`.
+2. State the control that would falsify the claim.
+3. Price harm in a named game phase, evaluating early-game constraints: limited
+   domes, no factories, mostly 1x speed and no headroom. For a threshold or guard,
+   ask the owner which regime it protects; do not infer it.
+4. Before making a reporter's save decisive, record what shipped source settles,
+   what a live TestKit probe could establish, and whether an existing measurement
+   recipe can be extended. Only if all fail is a save a conditional ask, never
+   drafted or put on an owed list. Logs also burden reporters, though less than
+   saves. Our own fixtures follow WORKFLOW's "Fixtures, mutations and owner-typed lines".
+5. Apply doc-editing's regeneration check to both bugs and facts, including peers'
+   unfinished entries. Run `python tools/doccheck.py --regen`, review generated
+   diffs, then `python tools/doccheck.py` until GREEN.
+6. Commit only this edit's paths: `git add <exact paths>` then
+   `git commit -F <msgfile> -- <same paths>`. Never `-a`.
 
-1. New `docs/agent/bugs/<ID>.md`: `id` matches the filename, `seq` continues without a gap,
-   heading tag and `status` agree.
-2. State the **control** — what would falsify the claim — not just the story. A cause without
-   a control is a plausible story; this project files controls.
-3. `python tools/doccheck.py --regen`, then `python tools/doccheck.py` until GREEN. `--regen`
-   builds `INDEX.md` from **every entry on disk**, a peer's uncommitted ones included — check
-   `git status docs/agent/bugs/` first and commit only your own paths.
-4. `git add <exact paths>` then `git commit -F <msgfile> -- <same paths>`. Never `-a`.
-
-## 5 · What you may not do
-
-Never move an entry's status to record your own opinion — a status word is evidence about
-what was *tested*, and `tested-attended` means the owner watched it in the game. Never
-bulk-upgrade a legacy bare `tested`. "Vanilla fixed it" is a claim: trace the replacement
-body before acting on it, because a rename reads as a deletion.
+Status changes require evidence, not opinion. `tested-attended` means the owner
+watched in-game; never bulk-upgrade legacy bare `tested`.

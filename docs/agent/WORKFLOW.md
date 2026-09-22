@@ -79,7 +79,33 @@ error).
   `git add -f` (`.gitignore` drops `*.log` silently). The game keeps about 20 log files.
 - A ruling is recorded with the condition it was made under; re-read it against today's state before
   treating it as binding, and never record a later ruling as a reversal without checking whether the
-  earlier condition still holds.
+  earlier condition still holds. A rule expires with the condition it was made under.
+- ⛔ **This project's own records are claims.** It has falsified its own confidently recorded facts
+  repeatedly — the save hook, class tables, `debug.getinfo`, Wakeup, and three sections labelled
+  RE-VERIFIED that one measurement overturned. So, before relying on one:
+  - **Re-derive the route, not just the citations.** Twice in one week every cited line was correct
+    and the reasoning above them was not. "The only route" and "already proven feasible" are the
+    least-verified sentences on a page. Never label a conclusion RE-VERIFIED when any link in its
+    chain is inherited, and say whether a label means source-verifiable or measured.
+  - **Read a report's "not opened" list before trusting its conclusion.** A QA row listed two
+    unopened artefacts, and both were where the answer lived.
+  - **A zero-hit grep for an old NAME cannot establish that a FEATURE was removed.** 1.1.0's
+    "deleted" low-Food and maintenance warnings were replaced under new ids. Search the tree for
+    the capability — notification presets, UI strings, voiced lines — and treat a fixup that still
+    references the old thing as evidence it moved. Ask whether the conclusion makes sense for what
+    the developers were building.
+  - **"Vanilla fixed it" needs the replacement traced:** open the replacement body, say what it
+    does, name any residual way it could still be wrong, grep where a vanished name went, and
+    record which rows were traced rather than quoted. A rename reads as a deletion.
+  - **Prose is testable by reading; a number or an absence is not.** Re-reading says what a record
+    says, re-running says whether it is true. Re-run a figure or a "none/only", and check its
+    instrument still exists. Commit the script with the number, or state that the figure is
+    unreproducible.
+  - **A peer's finding and your own assertion are both claims**, hardest checked before either is
+    relayed into an audit. "Several sessions agree" is not independent when they inherited each
+    other; when correcting a record, split it by disposition, because a site that recorded a true
+    prediction stays as written.
+  - **Before appending to a shared entry, read the sections above your insertion point.**
 - Player replies are pull-only (owner, 2026-09-12): never drafted unasked, never on an owed list,
   never raised as a nudge, never a gate on other work. A draft in `docs/FIELD_REPORT_REPLIES.md`
   waits by design; when the owner asks, write one and stop. Triage of the report into `bugs/`
