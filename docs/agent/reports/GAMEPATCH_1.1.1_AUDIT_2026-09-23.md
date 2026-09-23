@@ -169,6 +169,18 @@ keeps `orig_lua_revision = 403908` while an ordinary 1.1.1 save rewrites `lua_re
 pre-1.1.1 fixture on 1.1.1 spends it on the next write; the peer-authored playtest plan says
 to copy fixtures first.
 
+**Why `orig_lua_revision` is rejected, not overlooked** (raised by a peer after reading the
+table above). It persists the colony's origin through every resave, so it would reach the
+player who updated, saved once without the pack and only then noticed a stranded building.
+But it reaches too far: a colony started on 1.1.0 keeps `orig_lua_revision = 403908` for the
+rest of its life, and a *new* BuildingClogged event firing on 1.1.1 inside that colony writes
+the same saved fields as an old stranded one, with the vendor's Duration thread live and no
+inspectable handle. Keyed on the origin, the load sweep would release that healthy building
+and cut the one-hour disable short — the exact harm the provenance condition exists to
+prevent. No saved field separates "stranded before 1.1.1" from "healthy 1.1.1 timer" once the
+save has been rewritten, so `lua_revision < 405907` is the widest safe reach, and the
+under-heal named below is the price of it.
+
 **Healthy 1.1.1 events stay vanilla-owned; the legacy fixture heals.** desk-MEASURED
 (`desk_c85_clogged.py`, 32/32): the native Duration thread built from the archived
 `SetBuildingEnabledState:__exec` (`ClassDef-Effects.generated.lua:2772-2790`) survives a
