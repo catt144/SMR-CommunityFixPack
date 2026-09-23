@@ -299,3 +299,47 @@ repair sites from the ordering before any `node_idx` check runs. A non-numeric
 `node_idx` on a repair site therefore blocks nothing. The orchestrator seat drew the
 wrong conclusion from that wording once during this run before checking the source; the
 next reader will too.
+
+### Phase 2b · Vacuum migration (F125) — PASS, 2026-09-23
+
+Log `Mars.exe-20260923-13.59.45-6aad2d75.log`. Fixture: Tesla #1, Sacagawea #1 and
+Fuller #1 on a non-terraformed colony.
+
+Preconditions read before testing, so the repair was known to be eligible rather than
+assumed — every decline condition at `Fix_VacuumWalks.lua:157-173` cleared:
+
+```
+breathable false   walkcap 40000   ignore 120000   domes 3
+1 2 101421 passage          (Tesla-Sacagawea: none)
+1 3 118769 passage          (Tesla-Fuller: none)
+2 3  17348 passage true     (Sacagawea-Fuller: usable)
+```
+
+Sacagawea–Fuller at 17348 sits inside the 40000 walk cap with a passage, in vacuum, and
+`walkcap + 1 < ignore` holds. That is the exact band where the defect lives: in vacuum
+the shipped code compares against `ColonistMaxDomeWalkDist` instead of
+`ColonistMinDistToIgnorePassage`, so a colonist who should take the passage crosses the
+surface.
+
+| site | route | result |
+|---|---|---|
+| `TryToEmigrateToDome` (F52's original site) | Fuller ↔ Sacagawea, direct | **passage** |
+| `MigrateStep` (new in 1.1.1) | Fuller → Tesla, intermediate hop | **passage**, then train to Tesla |
+
+**The second site was proven live before it was run.** A shuttle or train leg never
+produces the walk result the repair arms on, so a migration that left by shuttle would
+have looked like a pass while testing nothing. `GetNextMigrationLeg` was queried
+read-only first and returned `kind walk · dome Sacagawea #1 · final false` — walk, and
+non-final, which is the only shape `MigrateStep` arms for. The vendor's own ordering is
+why: `Colonist.lua:3617-3619` adds walkable domes *before* the shuttle fill "so directly
+walkable domes keep the more specific arrival mode", and nodes are write-once.
+
+The colonist also completed Fuller → Sacagawea → train → Tesla without stalling at the
+intermediate dome. That matters beyond F52: the retired module installed the 1.1.0
+`TryToEmigrateToDome` body, which erased 1.1.1's task-retarget, `BookShuttleRide` and
+`migration_dest` machinery. An arrival by train continuation is direct evidence the
+rebase composed with that machinery instead of replacing it.
+
+**Not run:** the cancel-mid-route control and the explicit no-passage fallback. The
+no-passage path is exercised incidentally — Tesla has no passage to either dome and
+routed correctly — but neither was run as a deliberate control, so both remain owed.
