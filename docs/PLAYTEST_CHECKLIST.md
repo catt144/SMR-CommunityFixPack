@@ -111,15 +111,6 @@ Home: `docs/archive/PLAYTEST_ARCHIVE.md`
 
 ## Run
 
-### ck208 · opened 2026-09-23
-When you're ready, run the unattended 1.1.1 A/B: Fix Pack off, then on; keep TestKit on for both.
-- Copy-paste for each leg: `& "C:\Program Files (x86)\Steam\steam.exe" -applaunch 3215050 -smrautorun`
-- Let each leg quit itself before saying it is done; do not copy or inspect the log while the game is running.
-- Acceptance: boot census, `DispatchReach`, and `SMRTest.RunAll()` finish with no error-shaped line.
-- The on-leg also settles whether Open Pasture's repaired entity makes its module decline.
-- Tell the agent when each leg has exited; it will locate the finished log and run `python tools/logscan.py <log>`.
-Home: `docs/agent/reports/GAMEPATCH_1.1.1.405907_2026-09-23.md`
-
 ### ck205 · opened 2026-09-19
 When you next have the site open, send one test report from its *Bug reports & problems* page.
 - Pick both dropdowns, write a line, and attach a small `.txt` or `.log`.

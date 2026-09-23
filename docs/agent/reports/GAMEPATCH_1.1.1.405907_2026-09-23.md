@@ -1,8 +1,9 @@
 # Game patch 1.1.1.405907 — both-pack triage (2026-09-23)
 
 Run from `docs/agent/prompts/perma/GAME_PATCH_PROMPT.md` against the archived
-1.1.0.403908 and 1.1.1.405907 source trees. This is a source audit, not an in-game
-test; no module status moves from these reads.
+1.1.0.403908 and 1.1.1.405907 source trees, followed by the owner's unattended
+retail A/B on 2026-09-23. The verdict table remains a source-audit result; the retail
+legs add the explicitly bounded measurements in section 4.
 
 ## 0 · Work list
 
@@ -19,8 +20,8 @@ tool, so this report carries the same nine-item live list.
   tokens: ~24,000 (estimate)
 - [x] 5. Apply patch-note additions.
   tokens: ~200 (estimate)
-- [ ] 6. Write the owner launch line for the unattended in-game A/B pair and logscan.
-  tokens: ~1,000 so far (estimate; launch and logscan pending owner)
+- [x] 6. Write the owner launch line for the unattended in-game A/B pair and logscan.
+  tokens: ~3,000 (estimate)
 - [x] 7. File findings and write the combined FIX / REMOVE prompts.
   tokens: ~10,000 (estimate)
 - [x] 8. Write and commit the opt-in outbox entry.
@@ -290,7 +291,7 @@ module.
 | `Fix_LandscapeUnitFilter` | KEEP | `LandscapeForEachUnit` still constructs a filter but passes the raw callback. |
 | `Fix_MirrorSphereSite` | REMOVE | `IsActionEnabled` now rejects real `max_progress` while same-action cancellation remains available. |
 | `Fix_NightShiftWork` | REMOVE | `ShouldLeaveForWork` now uses a modular-day window that covers midnight. |
-| `Fix_OpenPastureStockpiles` | REMOVE | Native adds a comprehensive pool rebuild and old-save fixup; live entity spots 7–9 remain the owner A/B gate. |
+| `Fix_OpenPastureStockpiles` | REMOVE | Native adds a comprehensive pool rebuild and old-save fixup; the retail on-leg cleared the live asset gate when the module declined because the entity mismatch is gone. |
 | `Fix_PayloadTemplateRefill` | KEEP | The zero-row template fallback remains unchanged. |
 | `Fix_RocketDroneChurn` | KEEP | Cargo refresh still disconnects/reconnects the rocket unconditionally. |
 | `Fix_RocketInteractGuard` | KEEP | The Universal trade/refugee class omission remains; target changes concern Elevator validity. |
@@ -324,30 +325,61 @@ silently moved to another count.
 
 The source reads filed five patch-induced pack defects: F121 through F125. F122 and
 F123 are removed with their obsolete modules; F121, F124, and F125 require code repair.
-All are source-read, not playtested.
+All five were source-read at filing. The retail on-leg additionally measured F123's
+pack-on arithmetic as 100 against its own live parameter 50; that probe's pack-off
+branch short-circuited at “fix pack not loaded,” so the removal brief still owns the
+focused post-deletion A/B.
 
 ## 4 · In-game A/B
 
-Owner run pending as checklist ck208: TestKit on for both legs, Fix Pack off first and
-on second. Each unattended run performs the boot census, `DispatchReach`, and
-`SMRTest.RunAll()`, then quits. Do not copy the log until the process has exited; scan
-each finished log with `python tools/logscan.py <path>`.
+Both unattended legs completed `SMRTest.RunAll()`, printed `[SMRAUTO] END` and
+`[SMRAUTO] done`, and quit. No `Mars`/`MarsDebug` process remained before either log
+was read.
 
-```powershell
-& "C:\Program Files (x86)\Steam\steam.exe" -applaunch 3215050 -smrautorun
-```
+| leg | finished log | loaded mod items | TestKit result |
+|---|---|---|---|
+| Fix Pack off | `Mars.exe-20260923-10.37.07-6aad2d75.log` | TestKit only | 31 PASS, 36 FAIL, 26 SKIP, 5 ERROR |
+| Fix Pack on | `Mars.exe-20260923-10.39.06-6aad2d75.log` | TestKit, Fix Pack, Opt-In Pack, Train Hub dev | 61 PASS, 11 FAIL, 23 SKIP, 3 ERROR |
 
-The on-leg must also show whether `Fix_OpenPastureStockpiles` declines on the repaired
-entity assets. Until both logs are scanned, no retail compatibility or clean-boot claim
-is made.
+The totals were read with `Get-Content <log> | Where-Object { $_ -match
+'^\[SMRTest\] ---- \d+ PASS' }`. Each leg totals 98 probes, and each plain summary
+agrees with the immediately preceding `[mod]` copy in the same log. The extra Opt-In
+and Train Hub mods on the on-leg mean this is not a single-variable A/B. The two
+completed legs are still valid observations of their named configurations, but they do
+not support a blanket pack-only comparison.
+
+`python tools/logscan.py <log>` reported 6 error-shaped lines off and 46 on. The off
+count is the three current-build retired probes (`LanderCargoRatchet`,
+`DroneUnreachableForever`, `AutoExportPriority`), each printed twice; the suite's two
+additional rawget errors are real `ERROR` results but do not match logscan's
+error-shaped filter. The on count reconciles by name and age as follows, all from the
+2026-09-23 current-build leg: 36 lines are twelve synthetic Opt-In object-destruction
+throws, each present as the engine error plus two SMRTK copies; 6 are the same three
+retired-probe failures printed twice; 2 are the deliberately caught old-call exception
+quoted in the passing `ArrivalDeathsChooseDomeArg` result; 1 is the Fix Pack's caught
+`TradeRocketFuelRefresh` behaviour-probe decline; and 1 is an uncaught
+`ArtSpecEditor.lua:573` boot error. The member counts sum to logscan's 46-line total.
+Neither leg meets ck208's zero-error acceptance condition, so no clean-boot or retail
+compatibility claim is made.
+
+The on-leg did settle the remaining audit gate. Its boot census saw 52 Fix Pack modules,
+46 applied and 6 inactive (46 + 6 = 52), and `OpenPastureStockpiles` declined at log
+line 135 because “the Outside Ranch entity variants no longer have the nine-versus-six
+stockpile mismatch.” That live result clears the module for the REMOVE brief. The same
+leg also reproduced F123 (`GeneForging` 100, expected 50) and exposed the expected
+active/removal and stale-probe work; it is evidence for the follow-up prompts, not a
+release pass.
 
 ## 5 · Prompts, filings and opt-in outbox
 
 - FIX brief: `docs/agent/prompts/GAMEPATCH_1_1_1_FIX_fanout_level_3.md` for F121,
   F124, and F125.
 - REMOVE brief: `docs/agent/prompts/GAMEPATCH_1_1_1_REMOVE_medium.md` for the fifteen
-  native replacements, with explicit Open Pasture and trade-rocket migration gates.
+  native replacements, with the cleared Open Pasture evidence and the still-open
+  trade-rocket migration gate explicit.
 - Findings filed: `docs/agent/bugs/F121.md` through `F125.md`.
+- F123's evidence now includes the bounded pack-on retail measurement; its focused
+  pack-off/post-removal control remains in the REMOVE brief.
 - Opt-in outbox: `docs/agent/prompts/perma/gamepatch/1.1.1.405907_2026-09-23.md`
   in the opt-in fork, committed as `d372c1f`. Its patchcheck section was compared
   line-for-line with the captured block, and the fork's doccheck was GREEN.
@@ -364,8 +396,8 @@ necessary because action rows included modules with no patchcheck row. T did not
 owner in checklist ck207: retain 12 modules / 1,000 declarations, provisionally.
 
 The recommended deep-sweep decision is to stop at the completed all-module and
-flagged-system seam read, finish the named repairs/removals, and run the A/B before any
-broader tree-wide investigation. A broader sweep is estimated at 2–3 focused agent
+flagged-system seam read, finish the named repairs/removals, and clear their focused
+verification before any broader tree-wide investigation. A broader sweep is estimated at 2–3 focused agent
 sessions plus another owner A/B; that cost is an estimate, not a measured duration.
 
 ## 7 · Named limits
@@ -387,6 +419,8 @@ now measured once but remains provisional until the owner rules on checklist ck2
 - The patchcheck block in section 1 compares line-for-line with the captured scratch
   output after newline normalization. The verdict-table filter remeasured 34 KEEP,
   3 FIX, and 15 REMOVE and reconciled them to the patchcheck module total.
-- Shared archive commit: `75eeb0a`. Opt-in outbox commit: `d372c1f`. The fix-pack
-  runtime A/B remains pending checklist ck208, so this report makes no clean-boot or
-  in-game compatibility claim.
+- Shared archive commit: `75eeb0a`. Opt-in outbox commit: `d372c1f`.
+- The owner A/B completed and checklist ck208 was removed in the commit recording its
+  result. Both autoruns reached `[SMRAUTO] done`, but neither met the zero-error gate;
+  section 4 records the exact failures and the mismatched on-leg mod set. No clean-boot,
+  release-readiness, or general in-game compatibility claim is made.

@@ -27,7 +27,7 @@ archived tree. Line numbers are leads and must be re-derived.
 | `Fix_GraphConsumedCaption.lua` | Native caption now sums consumption plus maintenance at `ColonyControlCenter.lua:184`. |
 | `Fix_MirrorSphereSite.lua` | `IsActionEnabled` rejects `progress >= max_progress` while cancellation remains available. |
 | `Fix_NightShiftWork.lua` | `ShouldLeaveForWork` uses the modular day window at `Colonist.lua:2396-2403`. |
-| `Fix_OpenPastureStockpiles.lua` | New `RebuildPastureStockpilePool` and `MoveOpenPasturePilesOffOrigin2` migrate old piles; remove only after the 1.1.1 boot confirms the open entity really carries spots 7–9 and our guard declines. |
+| `Fix_OpenPastureStockpiles.lua` | New `RebuildPastureStockpilePool` and `MoveOpenPasturePilesOffOrigin2` migrate old piles. Gate cleared 2026-09-23: the retail on-leg logged this module inactive because the Outside Ranch entity variants no longer have the nine-versus-six mismatch. |
 | `Fix_SinkholeIndestructible.lua` | Both Sinkhole class and preset now declare `indestructible = true`; the destruction consumer is unchanged. |
 | `Fix_TradeRocketFuelRefresh.lua` | Landed rockets now refresh on fuel changes, and newly added `SavegameFixups.ZZZ_UpdateRefuelRequests` covers already-landed non-player upgrade saves at `RocketCompatibility.lua:1139-1144`. |
 | `Fix_TrainCargoDumping.lua` | Rewritten `Train:UnloadAll` checks resource enablement and preserves assignments at `Train.lua:787-831`. |
@@ -49,9 +49,10 @@ and consumer before deleting.
 - Let generated counts come from their commands. Reconcile `items.lua`, metadata
   ignore/load lists, source files, registrations, TestKit probe inventory, and any
   shipped-feature list by name.
-- Treat the Open Pasture live asset check as a per-module gate: if spots 7–9 are still
-  absent or its module applies on a clean 1.1.1 boot, keep that module and return it as
-  FIX with evidence; continue the other removals.
+- Preserve the completed Open Pasture gate evidence when removing it: retail log
+  `Mars.exe-20260923-10.39.06-6aad2d75.log:135` records the module declining because
+  the entity mismatch is gone. Recheck the archived native migration before deletion;
+  a contrary current-build reading returns this module as FIX without blocking the rest.
 - Verify the new rocket save fixup is newly enrolled for an upgrading 1.1.0 save, not
   merely present as a never-run function. If that cannot be established, retain only a
   narrow load migration and return this module as FIX; do not keep the duplicate
@@ -68,7 +69,7 @@ commit-and-verify unit in progress.
 - [ ] 1. Orient; revalidate all fifteen native replacements and two migration gates
 - [ ] 2. Remove active conflicts F122/F123; run their focused controls
 - [ ] 3. Remove native-body replacements and reconcile all registrations/lists
-- [ ] 4. Resolve Open Pasture asset gate and trade-rocket upgrade-migration gate
+- [ ] 4. Preserve the cleared Open Pasture evidence; resolve the trade-rocket migration gate
 - [ ] 5. Remove or retire corresponding desk/TestKit probes without losing controls
 - [ ] 6. Update entries/report/checklist and measure all affected generated counts
 - [ ] 7. Independent audit, parse/body/patch checks, doccheck, and owner boot recipe
@@ -89,7 +90,7 @@ authorize deleting that module and does not erase progress on the others.
 Do not claim the vendor fixed an original defect merely because the old expression is
 gone, or that a module was harmless merely because its guard should decline. Supported
 claims name the replacement and consumer on archived 1.1.1.405907, then distinguish
-desk measurement from the owner's pending retail A/B.
+desk measurement from the bounded results of the owner's completed retail run.
 
 Completion requires focused controls, parse and module-list agreement,
 `python tools/bodycheck.py --selftest`, current bodycheck, patchcheck selftest,
