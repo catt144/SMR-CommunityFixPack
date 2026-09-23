@@ -16,7 +16,11 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import deskbench as db  # noqa: E402
 
-MODULE = os.path.join(db.REPO, "Code", "Fix_TradeRocketFuelRefresh.lua")
+HISTORICAL_REV = "16ff1aa"
+MODULE_REL = "Code/Fix_TradeRocketFuelRefresh.lua"
+# The live ModTools extraction moved to 1.1.1; this harness preserves 1.1.0 evidence.
+db.TREES["1.1.0"] = os.path.join(os.environ.get(
+    "SMR_SRCARCHIVE", r"B:\Dev\SMR\SMR-Shared\SMR-SrcArchive"), "1.1.0.403908", "Src")
 
 PRELUDE = db.ENGINE_SHIMS + r'''
 -- table.copy is the engine helper used by CargoTransporterNew.lua:1436.
@@ -160,13 +164,14 @@ def make_runtime(apply):
     # The desk loads declarations directly, so mirror that one inheritance edge.
     rt.execute("UniversalRocketBase.GetCargoResourcesStatus = CargoTransporterNew.GetCargoResourcesStatus")
     rt.globals().APPLY_MODULE = apply
-    db.load_at(rt, db.read(MODULE), "=Code/Fix_TradeRocketFuelRefresh.lua", 1)
+    db.load_at(rt, db.git_show(db.REPO, HISTORICAL_REV, MODULE_REL),
+               "=%s:%s" % (HISTORICAL_REV, MODULE_REL), 1)
     rt.execute(ROCKET_FACTORY)
     return rt, spans
 
 
 def main():
-    bench = db.Bench("F119 trade fuel -- shipped request/status bodies and module")
+    bench = db.Bench("F119 historical 1.1.0 / 16ff1aa trade-fuel controls")
     check = bench.check
 
     vanilla, spans = make_runtime(False)

@@ -1,14 +1,25 @@
 #!/usr/bin/env python3
 """Migration audit controls, 2026-09-11. No engine or colony execution.
 
-Extract live shipped bodies and load whole pack modules. Require is deliberately
+Extract pinned 1.1.1 shipped bodies and load whole pack modules. Require is deliberately
 stubbed: these tests measure runtime branches, NOT install/branch-guard safety.
 Geometry, engine validity, transport availability and task creation are fixtures;
 they cannot establish that a real colony reaches the supplied state.
 """
+import contextlib
+import io
 import subprocess
+import sys
 from pathlib import Path
 import deskbench as db
+
+
+# Do not inherit deskbench's historical "1.1.0" label: that alias currently
+# points at the live source checkout and silently moved to 1.1.1.  This cluster
+# now exercises the exact shipped build that the rebased migration fixes target.
+SOURCE_TREE = '1.1.1.405907'
+SOURCE_ROOT = r'B:\Dev\SMR\SMR-Shared\SMR-SrcArchive\1.1.1.405907\Src'
+db.TREES[SOURCE_TREE] = SOURCE_ROOT
 
 # The last commit that carried the PRE-REPAIR Fix_FreedHousingNotice wrapper
 # (the synchronous CheckHomeForHomeless call inside Colonist:SetResidence).
@@ -45,7 +56,7 @@ def runtime():
 
 
 def shipped(rt, rel, pattern):
-    text, start, _ = db.body(rel, pattern)
+    text, start, _ = db.body(rel, pattern, tree=SOURCE_TREE)
     db.load_at(rt, text, '=' + rel, start)
 
 
@@ -136,7 +147,8 @@ def main():
     # is_identical is file-local: load its extracted body with the cache function.
     src, start, _ = db.span('Lua/Units/Colonist.lua',
                            [r'^local function is_identical\(',
-                            r'^function FindTransportationModeToCommunity\('])
+                            r'^function FindTransportationModeToCommunity\('],
+                           tree=SOURCE_TREE)
     db.load_at(rt, src, '=Lua/Units/Colonist.lua', start)
     shipped(rt, 'Lua/Units/Colonist.lua', r'^function FindTransportationModeToCommunity_BeforeTrains\(')
     shipped(rt, 'Lua/Units/Colonist.lua', r'^function GetTransportationModeToCommunity\(')
@@ -156,13 +168,23 @@ def main():
     ''')
     bench.check('F51 patch recomputes both false-to-true and true-to-false', rt.eval('c == "shuttle" and d == false'))
     shipped(rt, 'Lua/Units/Colonist.lua', r'^function Colonist:TryToEmigrateToDome\(')
+    shipped(rt, 'Lua/Units/Colonist.lua', r'^function Colonist:BookShuttleRide\(')
+    shipped(rt, 'Lua/Passage.lua', r'^function AreDomesConnectedWithPassage\(')
+    rt.execute('''
+        passage_connectivity_checks=0
+        local shipped_connected=AreDomesConnectedWithPassage
+        AreDomesConnectedWithPassage=function(...)
+            passage_connectivity_checks=passage_connectivity_checks+1
+            return shipped_connected(...)
+        end
+    ''')
     rt.execute('''
         HasShuttleLandingSlots = function() return true end
         IsTransportAvailableBetween = function() return true end
         CreateColonistTransportTask = function(c) c.transport_task={}; tasks=tasks+1; return true end
         IsLRTransportAvailable = function() return true end
         dest.ReserveResidence = function() end
-        unit = {CanWork=function() return false end}
+        unit = {CanWork=function() return false end, BookShuttleRide=Colonist.BookShuttleRide}
         tasks=0
         Colonist.TryToEmigrateToDome(unit, origin, dest, false, nil)
     ''')
@@ -172,6 +194,7 @@ def main():
         breathable=false; passage={1,2,3}; lookups=0
         GetAtmosphereBreathable=function() return breathable end
         GetDomesPassagePath=function() lookups=lookups+1; return passage end
+        origin.dome_network={[dest]=true}
         unit.GetMap=function() return {} end
         unit.ClearTransportRequest=function(self) self.transport_task=nil end
         unit.DiscardTransportTicket=function() end
@@ -183,10 +206,11 @@ def main():
     module(rt, 'VacuumWalks')
     rt.execute('Colonist.TryToEmigrateToDome(unit, origin, dest, "walk", 300)')
     bench.check('F52 patch uses available passage', rt.eval('lookups == 1 and unit.chosen_path == passage'))
-    rt.execute('passage=nil; Colonist.TryToEmigrateToDome(unit, origin, dest, "walk", 300)')
+    rt.execute('passage=nil; origin.dome_network[dest]=nil; Colonist.TryToEmigrateToDome(unit, origin, dest, "walk", 300)')
     bench.check('F52 no-passage control remains an outside walk', rt.eval('unit.chosen_path == nil'))
-    rt.execute('breathable=true; lookups=0; Colonist.TryToEmigrateToDome(unit, origin, dest, "walk", 300)')
-    bench.check('F52 breathable control unchanged', rt.eval('lookups == 0'))
+    rt.execute('breathable=true; passage={1,2,3}; origin.dome_network[dest]=true; lookups=0; passage_connectivity_checks=0; Colonist.TryToEmigrateToDome(unit, origin, dest, "walk", 300)')
+    bench.check('F52 breathable control unchanged',
+                rt.eval('lookups == 0 and passage_connectivity_checks == 0'))
 
     rt = runtime()
     shipped(rt, 'Lua/Buildings/ShuttleHub.lua', r'^function IsLRTransportAvailable\(')
@@ -248,5 +272,49 @@ def main():
     return bench.finish()
 
 
+def selftest():
+    """Prove the breathable fixture detects removal of VacuumWalks' guard."""
+    production = Path(db.REPO) / 'Code/Fix_VacuumWalks.lua'
+    before = production.read_bytes()
+    source, chunk = module_text('VacuumWalks')
+    guard = 'or GetAtmosphereBreathable(self:GetMap()) then'
+    if source.count(guard) != 1:
+        print('FAIL selftest: expected exactly one atmosphere guard, found %d'
+              % source.count(guard))
+        return 1
+    mutant = source.replace(guard, 'then')
+    live_module_text = module_text
+
+    def scratch_module_text(name, rev=None):
+        if name == 'VacuumWalks' and rev is None:
+            return mutant, 'scratch:VacuumWalks-without-breathable-guard'
+        return live_module_text(name, rev)
+
+    output = io.StringIO()
+    globals()['module_text'] = scratch_module_text
+    try:
+        with contextlib.redirect_stdout(output):
+            code = main()
+    finally:
+        globals()['module_text'] = live_module_text
+
+    failed = [line.strip() for line in output.getvalue().splitlines()
+              if line.startswith('  FAIL  ')]
+    expected = ['FAIL  F52 breathable control unchanged']
+    unchanged = production.read_bytes() == before
+    if code != 1 or failed != expected or not unchanged:
+        print('FAIL selftest: exit=%d failures=%r production_unchanged=%s'
+              % (code, failed, unchanged))
+        print(output.getvalue(), end='')
+        return 1
+    print('PASS selftest: atmosphere-guard removal fails exactly the breathable control; production bytes unchanged')
+    return 0
+
+
 if __name__ == '__main__':
-    raise SystemExit(main())
+    if len(sys.argv) == 1:
+        raise SystemExit(main())
+    if sys.argv[1:] == ['--selftest']:
+        raise SystemExit(selftest())
+    print('usage: python tools/desk_migration_cluster.py [--selftest]')
+    raise SystemExit(2)

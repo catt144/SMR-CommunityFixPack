@@ -113,6 +113,10 @@ end
 -- DEFECT: UpdateUplinkRequesters
 --   called on EVERY working transition, in both directions, and the helper is
 --   a full disconnect/reconnect
+-- SRC: Lua/Buildings/DroneHubExtender.lua DroneHubExtenderBase:UpdateUplinkRequesters sha256=7242b96ced3d75acb15b880d1da5e695ecda96a729930d4083284acfd16fc68f
+--   Archived 1.1.1.405907:109-112; the installed wrapper's declaration, unchanged
+--   from 1.1.0.403908, now has its own dependency pin.
+-- DEFECT: self:DisconnectTaskRequesters\(\)\s+self:ConnectTaskRequesters\(\)
 
 SMRFixPack.Register("ExtenderFlapChurn", {
 	title = "Extender power flickers no longer tear down and rebuild the whole hub (fleet-wide Idle churn)",

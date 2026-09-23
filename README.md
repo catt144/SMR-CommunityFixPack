@@ -4,7 +4,9 @@ A bug-fix mod for Surviving Mars: Relaunched. Almost every fix repairs a
 **defect verified in the game's own shipped Lua** — the code says one thing,
 does another, and the fix makes it do what it says. No rebalancing, no
 features, no game files modified: everything is patched at runtime, in a
-mod-compatible way, against game version **1.1.0.403908**. Players still on
+mod-compatible way. This checkout targets game version **1.1.1.405907**; its
+patch response is awaiting the separate audit and owner play checks recorded in
+[the build report](docs/agent/reports/GAMEPATCH_1.1.1_BUILD_2026-09-23.md). Players still on
 **1.0.7.396349** are served by a separate frozen build, tagged
 [`v5-game-1.0.7`](https://github.com/catt144/SMR-CommunityFixPack/releases/tag/v5-game-1.0.7).
 
@@ -14,17 +16,17 @@ mod-compatible way, against game version **1.1.0.403908**. Players still on
 
 ## What it fixes
 
-**52 fix modules** (53 files in `Code/`), covering disasters and weather,
+The surviving fix modules cover disasters and weather,
 colonists and domes, drones and logistics, buildings and economy, trains,
 rockets and asteroids, story sequences, and the numbers on your screen. Several
-of them also repair damage already sitting in your save when you load it. Four
-fixes are judgment calls rather than plain repairs — each one is disclosed on
+of them also repair damage already sitting in your save when you load it. The
+judgment calls among the fixes are each disclosed on
 the mod page, with the reasoning.
 
 The full player-facing list, one entry per fix, lives on the companion docs
 site: [the fix list](https://catt144.github.io/SMR-CommunityMods/fix-list/).
 The engineering tracker behind it is in this tree:
-[docs/agent/bugs/INDEX.md](docs/agent/bugs/INDEX.md) — 203 tracked findings,
+[docs/agent/bugs/INDEX.md](docs/agent/bugs/INDEX.md), with tracked findings
 ranging from verified-and-fixed to open candidates.
 
 ## For players
@@ -56,7 +58,7 @@ game does not unlock achievements on Xbox, PlayStation or the Microsoft Store.
 That is the game's own rule and it applies to every mod; Steam and other PC
 versions are unaffected.
 
-Before anything ships, an automated suite of **97 checks** is run against the
+Before anything ships, the automated probe suite is run against the
 game with the pack installed and without it.
 
 ## Reporting a bug

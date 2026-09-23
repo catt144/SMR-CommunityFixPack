@@ -94,7 +94,7 @@ comments is written by `python tools/doccheck.py --regen` and checked by
 
 <!-- GENERATED TOOL ROWS — never hand-edit; regenerate with: python tools/doccheck.py --regen -->
 
-*71 scripts, every `tools/*.py` on disk. This block is GENERATED: a row's text is copied from the script's own header, so a wrong row is repaired in the script, never here.*
+*75 scripts, every `tools/*.py` on disk. This block is GENERATED: a row's text is copied from the script's own header, so a wrong row is repaired in the script, never here.*
 
 ### Repo gates, and the falsifiers that keep them honest
 
@@ -234,6 +234,10 @@ New since the last grouping pass. Give each a home in `TOOL_GROUPS` in `tools/do
 |---|---|
 | [`desk_c107_dry_farming.py`](desk_c107_dry_farming.py) | C107 Dry Farming reaches the four Feeding the Future plant farms: the module through the REAL core, over the shipped DryFarming preset, the shipped farm templates and the shipped BuildingTemplates builder, in the engine's load order. |
 | [`desk_c108_wildfire_cure.py`](desk_c108_wildfire_cure.py) | C108 Wildfire cure: the shipped 1.1.0 at-home service payment keeps an infected colonist above the medical-visit threshold, and the module sends them anyway. |
+| [`desk_f124_track.py`](desk_f124_track.py) | F124 track rebase: archived split/repair bodies, refunds, shells and branch decline. |
+| [`desk_f125_vacuum.py`](desk_f125_vacuum.py) | F125/F52 composable migration controls on archived 1.1.1.405907 Lua. |
+| [`desk_gamepatch_retirements.py`](desk_gamepatch_retirements.py) | 1.1.1 retirement source controls and active pack-on/pack-off desk controls. |
+| [`gamepatch_111_census.py`](gamepatch_111_census.py) | Reconcile the 1.1.1 build response by name, including companion probe removal. |
 | [`paradox_card.py`](paradox_card.py) | Open the Paradox store description as a formatted page, ready to copy. |
 | [`replacecheck.py`](replacecheck.py) | Which modules redefine a shipped declaration outright, and which delegate to a captured original they actually call? |
 

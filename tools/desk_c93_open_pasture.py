@@ -12,6 +12,10 @@ from pathlib import Path
 import deskbench as db
 
 
+HISTORICAL_REV = "16ff1aa"
+MODULE_REL = "Code/Fix_OpenPastureStockpiles.lua"
+
+
 PRELUDE = db.ENGINE_SHIMS + r'''
 empty_table = {}
 SMRFixPack_Disabled = {}
@@ -127,16 +131,15 @@ def runtime(open_has_extra=False, veto=False):
     rt.globals().OPEN_HAS_EXTRA = open_has_extra
     if veto:
         rt.execute('SMRFixPack_Disabled.OpenPastureStockpiles = true')
-    db.load_at(rt, db.read(Path(db.REPO) / "Code/Fix_OpenPastureStockpiles.lua"),
-               "=Code/Fix_OpenPastureStockpiles.lua")
+    db.load_at(rt, db.git_show(db.REPO, HISTORICAL_REV, MODULE_REL),
+               "=%s:%s" % (HISTORICAL_REV, MODULE_REL))
     return rt
 
 
 def main():
     print("COMMAND python tools/desk_c93_open_pasture.py")
-    print("HEAD " + subprocess.check_output(
-        ["git", "rev-parse", "HEAD"], cwd=db.REPO, text=True).strip())
-    bench = db.Bench("C93 production module desk controls; engine objects are fixtures")
+    print("HISTORICAL MODULE " + HISTORICAL_REV + ":" + MODULE_REL)
+    bench = db.Bench("C93 historical module desk controls; engine objects are fixtures")
 
     rt = runtime()
     check = bench.check

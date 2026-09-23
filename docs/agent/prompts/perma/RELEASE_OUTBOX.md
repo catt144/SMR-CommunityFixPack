@@ -21,6 +21,25 @@ player surface bumps it by one on release.
 
 ## Pending — goes out with the next upload
 
+### Pending — game 1.1.1 response (2026-09-23)
+
+- Track salvage retains the vendor's repair-site ownership and indexing changes
+  while preserving curved/short-track salvage, refunds and whole-track cleanup.
+- Vacuum migration retains the vendor's direct and multi-leg routing; both
+  passage decisions are repaired. Legacy clogged-building recovery becomes
+  load-only and accepts only saves written before 1.1.1. Already-resaved ambiguous
+  state remains untouched so a healthy native timer is not cut short.
+- Retire `BrokenTrackSalvage`, `BuildingCodesPrefab`, `DestroyedTunnels`,
+  `DomeOverviewHighlight`, `FounderTraitNotification`, `GeneForging`,
+  `GraphConsumedCaption`, `MirrorSphereSite`, `NightShiftWork`,
+  `OpenPastureStockpiles`, `SinkholeIndestructible`, `TradeRocketFuelRefresh`,
+  `TrainCargoDumping`, `TrainWaitTime`, `TrainsToVoid` and `WispRewards`.
+- Evidence and limits: [build report](../../reports/GAMEPATCH_1.1.1_BUILD_2026-09-23.md).
+  Desk/source results do not replace the separate owner audit or retail legs.
+- Release surfaces are pending the release job: reconcile the site fix list,
+  store-card copies, description/count word and change notes from the retired
+  names and surviving modules. This build does not change a version or publish.
+
 ## Last released
 
 **v14** (2026-09-19). Its entry and every earlier release are in

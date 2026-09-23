@@ -16,35 +16,26 @@ So no-op stubs remove nothing the shipped body uses to DECIDE. The one field tha
 does decide -- exceptional_circumstances_maintenance, read at :474 -- is set per
 fixture, never stubbed, and leg (h) exercises both of its values.
 
-⭐ FALSIFIED 2026-09-12 against guard-reverted copies of the module, because a
-harness that cannot fail is not a falsifier and the builder's own control switch
-(APPLY_MODULE) is not independent. Each row below is one replacement made in a
-scratch copy of Code/Fix_CloggedBuildingRelease.lua, with MODULE pointed at it;
-the named leg(s) must FAIL. Re-run this whenever a guard moves.
-
-    reverted (1 hit each, verbatim)                      -> must fail
-    "and not clogged_popup_running(building)"  -> "and true"      (b)
-    "and not fix_after_storm_pending(building)" -> "and true"     (c), (c3)
-    "and not a_storybit_popup_is_pending()"    -> "and true"      (e3)
-    "return TGetID(reason) == CLOGGED_REASON_ID" -> "return true" (d)
-    "local gone = shipped_defect_gone()"      -> "local gone = nil"
-                                                  (g), (g2), (g3), (g4)
-    "building:Setexceptional_circumstances(false)" -> "local _ = building"
-                                 (a), (b2), (c2), (e2), (f), (h)
-
-⚠️ ONE reversion is EXPECTED to change nothing, and that is a finding, not a gap:
-reverting the sweep's whole-pass early-out ("if a_storybit_popup_is_pending() then
-return end" -> "if false then ...") fails no leg, because should_release checks the
-same thing per building. The early-out is an optimisation and the module says so.
-Leg (e3) exists because the two sites otherwise mask each other through OnMsg.
+Run `python tools/desk_c85_clogged.py --selftest` for the scratch-mutant
+controls. The full suite is run against each guard-reverted module; a mutant
+must fail. The historical F121 module is extracted from git 16ff1aa, not
+retyped. All game bodies come from archived build 1.1.1.405907. No engine,
+save file, thread persistence or retail localization userdata is exercised.
 """
+import contextlib
+import io
 import os
+from pathlib import Path
 import sys
+import tempfile
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import deskbench as db  # noqa: E402
 
 MODULE = os.path.join(db.REPO, "Code", "Fix_CloggedBuildingRelease.lua")
+BUILD = "1.1.1.405907"
+db.TREES[BUILD] = os.path.join(os.environ.get("SMR_SRCARCHIVE",
+    r"B:\Dev\SMR\SMR-Shared\SMR-SrcArchive"), BUILD, "Src")
 CLOGGED = 789863173059
 FOLLOW_UP = "BuildingClogged_1_FixAfterStorm"
 
@@ -115,6 +106,7 @@ function SMRFixPack.WhenActive(id, fn)
 	end
 end
 OnMsg = {}
+LEGACY_META = { lua_revision = 403908 }
 
 -- The shipped story bit's activation effect, as the preset loads it
 -- (Data/StoryBit/BuildingClogged.lua:4-8): a Reason and NO Duration.
@@ -144,12 +136,12 @@ end
 '''
 
 
-def make_runtime(apply=True, duration=0, reason_id=CLOGGED, drop_setter=False):
+def make_runtime(apply=True, duration=3600000, reason_id=CLOGGED, drop_setter=False, module_text=None):
     rt = db.lua_runtime()
     rt.execute("CLOGGED_ID = %d" % CLOGGED)
     rt.execute(PRELUDE)
     body, lo, hi = db.body("Lua/Buildings/BaseBuilding.lua",
-                           r"^function BaseBuilding:Setexceptional_circumstances")
+                           r"^function BaseBuilding:Setexceptional_circumstances", tree=BUILD)
     if drop_setter:
         # A shape-drift leg: the setter stops clearing the two saved fields, so
         # the behaviour probe must decline. Not the shipped body -- deliberately.
@@ -159,7 +151,7 @@ def make_runtime(apply=True, duration=0, reason_id=CLOGGED, drop_setter=False):
     rt.execute("StoryBits.BuildingClogged.ActivationEffects[1].Duration = %d" % duration)
     rt.execute("StoryBits.BuildingClogged.ActivationEffects[1].Reason = { %d, 'r' }" % reason_id)
     rt.globals().APPLY_MODULE = apply
-    db.load_at(rt, db.read(MODULE), "=Code/Fix_CloggedBuildingRelease.lua", 1)
+    db.load_at(rt, module_text if module_text is not None else db.read(MODULE), "=Code/Fix_CloggedBuildingRelease.lua", 1)
     return rt, lo, hi
 
 
@@ -180,7 +172,7 @@ def main():
     # ---- (a) the stuck building is released --------------------------------
     rt.execute('''
 	STUCK = building(true, CLOGGED_ID)
-	OnMsg.LoadGame()
+	OnMsg.LoadGame(LEGACY_META)
 	''')
     g = rt.globals()
     check("(a) a building stuck with the clogged reason is released",
@@ -198,7 +190,7 @@ def main():
 	RUNNING = building(true, CLOGGED_ID)
 	OTHER = building(true, CLOGGED_ID)
 	g_StoryBitActive[1] = { id = "BuildingClogged", object = RUNNING }
-	OnMsg.LoadGame()
+	OnMsg.LoadGame(LEGACY_META)
 	''')
     g2 = rt2.globals()
     check("(b) a building whose BuildingClogged is still running is untouched",
@@ -212,7 +204,7 @@ def main():
 	WAITING = building(true, CLOGGED_ID)
 	OTHER = building(true, CLOGGED_ID)
 	g_StoryBitStates["%s"] = { id = "%s", object = WAITING }
-	OnMsg.LoadGame()
+	OnMsg.LoadGame(LEGACY_META)
 	''' % (FOLLOW_UP, FOLLOW_UP))
     g3 = rt3.globals()
     check("(c) a building with the fix-after-storm follow-up armed is untouched",
@@ -224,7 +216,7 @@ def main():
     rt3b.execute('''
 	ANY = building(true, CLOGGED_ID)
 	g_StoryBitStates["%s"] = { id = "%s", object = false }
-	OnMsg.LoadGame()
+	OnMsg.LoadGame(LEGACY_META)
 	''' % (FOLLOW_UP, FOLLOW_UP))
     check("(c3) a follow-up armed with NO object stands the sweep down (fail closed)",
           rt3b.globals().ANY["exceptional_circumstances"] is True)
@@ -235,7 +227,7 @@ def main():
 	LAW = building(true, 374137718365)          -- LawEffectTurnOffBuildings
 	ELECTRONICS = building(false, 149427596640) -- the drones reply's end state
 	PLAIN = building(true, false)               -- disabled, no reason at all
-	OnMsg.LoadGame()
+	OnMsg.LoadGame(LEGACY_META)
 	''')
     g4 = rt4.globals()
     check("(d) a law-disabled building (different reason id) is untouched",
@@ -251,7 +243,7 @@ def main():
     rt5.execute('''
 	QUEUED = building(true, CLOGGED_ID)
 	g_PopupQueue[1] = { is_storybit = true, title = "Building Clogged" }
-	OnMsg.LoadGame()
+	OnMsg.LoadGame(LEGACY_META)
 	''')
     check("(e) a queued or open story-bit popup stands the whole pass down",
           rt5.globals().QUEUED["exceptional_circumstances"] is True)
@@ -260,7 +252,7 @@ def main():
     rt5b.execute('''
 	OK = building(true, CLOGGED_ID)
 	g_PopupQueue[1] = { title = "some other popup" }
-	OnMsg.LoadGame()
+	OnMsg.LoadGame(LEGACY_META)
 	''')
     check("(e2) a non-story-bit popup does NOT stand the sweep down",
           rt5b.globals().OK["exceptional_circumstances"] is False)
@@ -280,40 +272,79 @@ def main():
     check("(e3) the exposed predicate itself refuses while a story-bit popup is pending",
           g5c.BEFORE is True and g5c.DURING is False)
 
-    # ---- (f) the daily pass reaches the same end state --------------------
+    # ---- (f) no daily/live repair -----------------------------------------
     rt6, _, _ = make_runtime()
     rt6.execute('''
-	MIDSESSION = building(true, CLOGGED_ID)
-	OnMsg.NewDay(7)
-	''')
-    check("(f) the daily pass releases a mid-session loss with no load",
-          rt6.globals().MIDSESSION["exceptional_circumstances"] is False)
+        MIDSESSION = building(true, CLOGGED_ID)
+        if OnMsg.NewDay then OnMsg.NewDay(7) end
+    ''')
+    check("(f) no NewDay handler; live timed state remains vanilla-owned",
+          rt6.globals().OnMsg["NewDay"] is None
+          and rt6.globals().MIDSESSION["exceptional_circumstances"] is True)
 
-    # ---- (g) simulated post-patch vanilla: the module stands down ---------
-    rt7, _, _ = make_runtime(duration=2160000)
+    # ---- (g) upgrade repair, saved provenance and native timer -------------
+    rt7, _, _ = make_runtime()
     rt7.execute('''
-	STILL_STUCK = building(true, CLOGGED_ID)
-	OnMsg.LoadGame()
-	''')
-    g7 = rt7.globals()
-    check("(g) a Duration on the shipped effect latches the module inactive",
-          g7.SMRFixPack["fixes"]["CloggedBuildingRelease"]["status"] == "inactive")
-    check("(g2) ... and it touches nothing in that pass",
-          g7.STILL_STUCK["exceptional_circumstances"] is True)
-    check("(g3) ... and says RETIRE candidate in the log, for logscan",
-          any("RETIRE candidate" in str(v) for v in dict(g7.LOG).values()))
+        OLD = building(true, CLOGGED_ID)
+        OnMsg.LoadGame(LEGACY_META)
+        OnMsg.LoadGame(LEGACY_META)
+    ''')
+    check("(g) current positive Duration does not block legacy repair; idempotent",
+          rt7.globals().OLD["exceptional_circumstances"] is False
+          and rt7.globals().OLD["updated_working"] == 1)
+    for metadata in ("nil", "{}", "{lua_revision='403908'}", "{lua_revision=0}",
+                     "{lua_revision=405907}", "{lua_revision=999999}"):
+        guarded, _, _ = make_runtime()
+        guarded.execute("HEALTHY = building(true, CLOGGED_ID) OnMsg.LoadGame(" + metadata + ")")
+        check("(g2) current/future/unknown save provenance untouched: " + metadata,
+              guarded.globals().HEALTHY["updated_working"] == 0)
 
-    rt7b, _, _ = make_runtime(reason_id=111222333444)
-    rt7b.execute('OTHER_REASON = building(true, CLOGGED_ID) OnMsg.LoadGame()')
-    check("(g4) a changed shipped reason id also latches inactive, and releases nothing",
-          rt7b.globals().SMRFixPack["fixes"]["CloggedBuildingRelease"]["status"] == "inactive"
-          and rt7b.globals().OTHER_REASON["exceptional_circumstances"] is True)
+    native, _, _ = make_runtime()
+    native.execute('''
+        SetBuildingEnabledState = {}
+        function CreateGameTimeThread(fn, ...)
+            NATIVE_THREAD = coroutine.create(fn)
+            local ok, err = coroutine.resume(NATIVE_THREAD, ...)
+            assert(ok, err)
+            return NATIVE_THREAD
+        end
+        Sleep = coroutine.yield
+        function IsValid(b) return b.valid ~= false end
+        -- OnScreenTimer is false in the archived BuildingClogged preset.
+        function AddEventOnScreenNotification() error("unexpected timer UI") end
+        function RemoveEventOnScreenNotification() error("unexpected timer UI") end
+    ''')
+    effect, effect_lo, _ = db.body("Lua/ClassDefs/ClassDef-Effects.generated.lua",
+        r"^function SetBuildingEnabledState:__exec", tree=BUILD)
+    db.load_at(native, effect, "=Lua/ClassDefs/ClassDef-Effects.generated.lua", effect_lo)
+    native.execute('''
+        LIVE = building(false, false)
+        local effect = { Enabled=false, OnScreenTimer=false,
+            Reason={CLOGGED_ID,"clogged"}, ResolveValue=function() return 3600000 end }
+        SetBuildingEnabledState.__exec(effect, nil, LIVE)
+        assert(LIVE.exceptional_circumstances == true)
+        OnMsg.LoadGame({lua_revision=405907})
+    ''')
+    check("(g3) native Duration thread remains responsible after a current-save load",
+          native.globals().LIVE["exceptional_circumstances"] is True
+          and native.globals().LIVE["updated_working"] == 1)
+    native.execute("assert(coroutine.resume(NATIVE_THREAD))")
+    check("(g4) native timer itself eventually releases the building",
+          native.globals().LIVE["exceptional_circumstances"] is False
+          and native.globals().LIVE["updated_working"] == 2)
+
+    old_module = db.git_show(db.REPO, "16ff1aa", "Code/Fix_CloggedBuildingRelease.lua")
+    before, _, _ = make_runtime(module_text=old_module)
+    before.execute("OLD = building(true, CLOGGED_ID) OnMsg.LoadGame(LEGACY_META)")
+    check("(g5) pre-fix pack reproduces F121 on the same positive-Duration fixture",
+          before.globals().OLD["exceptional_circumstances"] is True
+          and before.globals().SMRFixPack["fixes"]["CloggedBuildingRelease"]["status"] == "inactive")
 
     # ---- (h) the maintenance field decides, and is never stubbed away -----
     rt8, _, _ = make_runtime()
     rt8.execute('''
 	WITH_MAINT = building(true, CLOGGED_ID, true)
-	OnMsg.LoadGame()
+	OnMsg.LoadGame(LEGACY_META)
 	''')
     g8 = rt8.globals()
     check("(h) a coexisting maintenance state is released but keeps its reason field "
@@ -326,7 +357,7 @@ def main():
     rt9, _, _ = make_runtime(apply=False)
     rt9.execute('''
 	NEVER = building(true, CLOGGED_ID)
-	OnMsg.LoadGame()
+	OnMsg.LoadGame(LEGACY_META)
 	''')
     check("(i) NEGATIVE -- a module registered but never applied releases nothing",
           rt9.globals().NEVER["exceptional_circumstances"] is True)
@@ -336,18 +367,79 @@ def main():
     rt10.execute('''
 	VETOED = building(true, CLOGGED_ID)
 	SMRFixPack_Disabled["CloggedBuildingRelease"] = true
-	OnMsg.LoadGame()
+	OnMsg.LoadGame(LEGACY_META)
 	''')
     check("(j) NEGATIVE -- a mid-session veto stops the sweep (FIX_POLICY §2, A1)",
           rt10.globals().VETOED["exceptional_circumstances"] is True)
 
+    # Exercise the actual retail probe, including an unrelated live popup.
+    kit, _, _ = make_runtime()
+    kit.execute('''
+        SMRTest = { probes = {} }
+        function SMRTest.Register(id, def) SMRTest.probes[id] = def end
+        function SMRTest.FixMissing(id)
+            if SMRFixPack.fixes[id].status ~= "active" then return "FAIL", "inactive" end
+        end
+        function SMRTest.WithGlobals(values, fn)
+            local old = {}
+            for k,v in pairs(values) do old[k] = _G[k] _G[k] = v end
+            local ok, a, b = pcall(fn)
+            for k in pairs(values) do _G[k] = old[k] end
+            if not ok then error(a) end
+            return a,b
+        end
+        g_PopupQueue = {{is_storybit=true}}
+    ''')
+    db.load_at(kit, db.read(os.path.join(db.TESTKIT, "Code", "66_Probes_Wave15.lua")),
+               "=TestKit/Code/66_Probes_Wave15.lua")
+    status, detail = kit.eval("SMRTest.probes.CloggedBuildingRelease.run")()
+    check("(k) actual TestKit probe measures predicates independent of ambient popup", status == "PASS", detail)
+    check("(k2) TestKit restores the live popup table",
+          kit.eval("g_PopupQueue[1].is_storybit") is True)
+
     return bench.finish(
-        "ALL DEMANDS HELD -- the shipped setter clears the stuck pair; the module "
-        "releases only buildings carrying THIS reason id with no story bit running, "
-        "no follow-up armed and no story-bit popup pending, and stands down when "
-        "the shipped effect gains a Duration or changes its reason."
+        "Legacy-only release held; current saved timers, live events, unrelated "
+        "reasons and event interlocks remain vanilla-owned. SOURCE=" + BUILD
     )
 
 
+def selftest():
+    global MODULE
+    production = MODULE
+    original = Path(production).read_bytes()
+    variants = {
+        "running-story": ("and not clogged_popup_running(building)", "and true"),
+        "follow-up": ("and not fix_after_storm_pending(building)", "and true"),
+        "popup": ("and not a_storybit_popup_is_pending()", "and true"),
+        "exact-reason": ("return TGetID(reason) == CLOGGED_REASON_ID", "return true"),
+        "save-provenance": ('if not accepts_save(metadata) then return end',
+                            'if false then return end'),
+        "cure": ("building:Setexceptional_circumstances(false)", "local _ = building"),
+    }
+    ok = True
+    try:
+        with tempfile.TemporaryDirectory(prefix="smr-f121-") as tmp:
+            for name, (old, new) in variants.items():
+                text = original.decode("utf-8")
+                if text.count(old) != 1:
+                    raise AssertionError((name, text.count(old)))
+                MODULE = str(Path(tmp) / (name + ".lua"))
+                Path(MODULE).write_bytes(text.replace(old, new).encode("utf-8"))
+                output = io.StringIO()
+                with contextlib.redirect_stdout(output):
+                    result = main()
+                detected = result != 0
+                ok = ok and detected
+                print(("PASS" if detected else "FAIL") + " mutant " + name)
+                for line in output.getvalue().splitlines():
+                    if "FAIL" in line:
+                        print("  " + line.strip())
+    finally:
+        MODULE = production
+    unchanged = Path(production).read_bytes() == original
+    print("production module unchanged=" + str(unchanged))
+    return 0 if ok and unchanged else 1
+
+
 if __name__ == "__main__":
-    sys.exit(main())
+    sys.exit(selftest() if "--selftest" in sys.argv else main())

@@ -111,6 +111,22 @@ Home: `docs/archive/PLAYTEST_ARCHIVE.md`
 
 ## Run
 
+### ck209 · opened 2026-09-23
+When the 1.1.1 build is committed, run the separate Claude audit before release work.
+- Judge the result diff against archived 1.1.1.405907, including the report's departures and limits.
+- Internal reviews are complete build checks; the owner's different-vendor audit is still owed.
+Home: `docs/agent/reports/GAMEPATCH_1.1.1_BUILD_2026-09-23.md`
+
+### ck210 · opened 2026-09-23
+When the audit is complete, run the focused 1.1.1 retail checks on owner-selected fixtures.
+- Full-restart pack-off/on legs, pack alone plus TestKit; also main-menu enable. Record every error.
+- Curved/short track salvage with a repair site spanning the split: survivors, refunds and shells.
+- Direct/intermediate vacuum routes; breathable/no-passage controls; reservations, shuttle/train continuation, cancel.
+- A pre-1.1.1 clogged save heals once; a healthy 1.1.1 timed event survives reload and expires natively.
+- F122 empty-dome display, F123 actual chance function in both legs, F126 no removed Founder notification.
+- Save with the repaired pack, remove it, fully restart and load; inspect routing and track state.
+Home: `docs/agent/reports/GAMEPATCH_1.1.1_BUILD_2026-09-23.md`
+
 ### ck205 · opened 2026-09-19
 When you next have the site open, send one test report from its *Bug reports & problems* page.
 - Pick both dropdowns, write a line, and attach a small `.txt` or `.log`.
@@ -141,17 +157,13 @@ When colonists queue at a platform forever or walk past a working station, call 
 - Adding trains destroys the evidence.
 Home: `docs/agent/bugs/F80.md`
 
-### ck193 · opened 2026-09-17
-When you are near any working train line, take the two reads that re-earn F21's `tested` (optional).
-Home: `docs/agent/bugs/F21.md`
-
 ### ck194 · opened 2026-09-17
 When a colony meets an entry's takeable condition, run its recipe: C40, C42, F99.
 Home: `docs/agent/bugs/C40.md`, `docs/agent/bugs/C42.md`, `docs/agent/bugs/F99.md`
 
 ### ck195 · opened 2026-09-17
-When you reach a finished Mirror Sphere site or Mystery 10's epilogue, run the entry's procedure.
-Home: `docs/agent/bugs/F16.md`, `docs/agent/bugs/F06.md`
+When you reach Mystery 10's epilogue, run the entry's procedure.
+Home: `docs/agent/bugs/F06.md`
 
 ### ck196 · opened 2026-09-17
 When a depot click-load picks the wrong depot again, use the workaround command in F76.

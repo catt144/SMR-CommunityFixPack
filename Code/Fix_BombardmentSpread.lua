@@ -37,12 +37,16 @@
 -- handles the case and is kept.
 
 -- MANIFEST (FIX_POLICY §2b) -- machine-read by `python tools/bodycheck.py`.
--- Pinned 2026-09-08 against shipped game 1.1.0.403908. ⛔ These are CLAIMS about
+-- Pinned 2026-09-23 against archived game 1.1.1.405907. These are CLAIMS about
 -- the shipped tree, not a clearance: re-pin them deliberately when a target moves,
 -- never to silence a BODY-CHANGED.
--- SRC: Lua/Bombardment.lua WaitBombard sha256=9003e12935d12d42405c5a17aa5c0d24d22ef40bdd34c8a47a1144c4ce105d43
---   (Lua/Bombardment.lua:55-154 at pin time)
--- DEFECT: spawn_dir\s*=\s*GenerateDir\(dir,\s*angle\)\s+local\s+spawn_pos\s*=\s*dest_pos\s*\+\s*SetLen\(dir,
+-- SRC: Lua/Bombardment.lua WaitBombard sha256=5d6cc845c046982b8c3fe718d990809b5254cca358a86bddcec5e7133004ccb5
+--   (Lua/Bombardment.lua:52-150 at pin time)
+-- DEFECT: local\s+spawn_dir\s*=\s*GenerateDir\(\)[\s\S]*?while\s+count\s*>\s*0\s+do[\s\S]*?SetLen\(spawn_dir,\s*travel_dist\)
+-- SOURCE 1.1.1: the vendor deleted the unused per-missile jitter; the direction
+-- is still drawn before the loop and reused by every missile. Phase A's read
+-- is confirmed. Behaviour stays as built, including its extra random draws;
+-- this pin describes current native reuse, not the old discarded-local spelling.
 
 SMRFixPack.Register("BombardmentSpread", {
 	title = "Bombardment missiles come in from spread directions instead of in parallel",

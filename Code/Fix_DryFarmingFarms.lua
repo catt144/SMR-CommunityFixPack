@@ -2,12 +2,15 @@
 -- the four Feeding the Future plant farms are never reduced.
 --
 -- SRC: none -- a Tech preset patch plus a load-time heal through vanilla's own OnApplyEffect -- no function body of ours replaces a shipped one
--- DEFECT@Data/Tech.lua: id\s*=\s*"DryFarming",(?:(?!\bid\s*=\s*"|"(?:FarmSmall|FarmSmallUnderground|FarmUnderground|AutomatedFarm|AllFarms)")[\s\S])*?"water_consumption"(?:(?!\bid\s*=\s*"|"(?:FarmSmall|FarmSmallUnderground|FarmUnderground|AutomatedFarm|AllFarms)")[\s\S])*?\n\}\)
+-- DEFECT@Data/Tech.lua: id\s*=\s*"DryFarming",(?:(?!\bid\s*=\s*"|"(?:FarmSmallUnderground|FarmUnderground|AutomatedFarm|AllFarms)")[\s\S])*?"water_consumption"(?:(?!\bid\s*=\s*"|"(?:FarmSmallUnderground|FarmUnderground|AutomatedFarm|AllFarms)")[\s\S])*?\n\}\)
 --
 -- The DEFECT line states an ABSENCE (FIX_POLICY §2b): from DryFarming's `id` to the
 -- close of its preset, the tech modifies water_consumption and names none of the
--- labels the four DLC plant farms join. It goes DEFECT-GONE if Data/Tech.lua gains
--- one of those labels in that preset. A repair shipped anywhere else (the norman
+-- labels the three still-unpaid DLC plant farms join on archived 1.1.1.405907.
+-- The vendor added FarmSmall (Data/Tech.lua:793); the runtime adoption guard
+-- already avoids double payment. It goes DEFECT-GONE if the preset gains one
+-- of the remaining labels, requiring a fresh partial-repair read. A repair
+-- shipped anywhere else (the norman
 -- presets, a template label) is invisible to it; the pass below catches both of
 -- those routes at runtime instead (adopt, and the already-reached guard).
 --

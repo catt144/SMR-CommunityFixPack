@@ -27,28 +27,12 @@ return {
 		'CodeFileName', "Code/00_Core.lua",
 	}),
 	PlaceObj('ModItemCode', {
-		'name', "Fix_NightShiftWork",
-		'CodeFileName', "Code/Fix_NightShiftWork.lua",
-	}),
-	PlaceObj('ModItemCode', {
-		'name', "Fix_WispRewards",
-		'CodeFileName', "Code/Fix_WispRewards.lua",
-	}),
-	PlaceObj('ModItemCode', {
-		'name', "Fix_TrainsToVoid",
-		'CodeFileName', "Code/Fix_TrainsToVoid.lua",
-	}),
-	PlaceObj('ModItemCode', {
 		'name', "Fix_LanderEmptyLaunch",
 		'CodeFileName', "Code/Fix_LanderEmptyLaunch.lua",
 	}),
 	PlaceObj('ModItemCode', {
 		'name', "Fix_ShelterReflex",
 		'CodeFileName', "Code/Fix_ShelterReflex.lua",
-	}),
-	PlaceObj('ModItemCode', {
-		'name', "Fix_BrokenTrackSalvage",
-		'CodeFileName', "Code/Fix_BrokenTrackSalvage.lua",
 	}),
 	PlaceObj('ModItemCode', {
 		'name', "Fix_TrackSalvageWipe",
@@ -61,10 +45,6 @@ return {
 	PlaceObj('ModItemCode', {
 		'name', "Fix_RocketDroneChurn",
 		'CodeFileName', "Code/Fix_RocketDroneChurn.lua",
-	}),
-	PlaceObj('ModItemCode', {
-		'name', "Fix_TradeRocketFuelRefresh",
-		'CodeFileName', "Code/Fix_TradeRocketFuelRefresh.lua",
 	}),
 	PlaceObj('ModItemCode', {
 		'name', "Fix_ShuttleTransportCache",
@@ -87,28 +67,8 @@ return {
 		'CodeFileName', "Code/Fix_CrystalMysteryHang.lua",
 	}),
 	PlaceObj('ModItemCode', {
-		'name', "Fix_DomeOverviewHighlight",
-		'CodeFileName', "Code/Fix_DomeOverviewHighlight.lua",
-	}),
-	PlaceObj('ModItemCode', {
-		'name', "Fix_TrainCargoDumping",
-		'CodeFileName', "Code/Fix_TrainCargoDumping.lua",
-	}),
-	PlaceObj('ModItemCode', {
-		'name', "Fix_DestroyedTunnels",
-		'CodeFileName', "Code/Fix_DestroyedTunnels.lua",
-	}),
-	PlaceObj('ModItemCode', {
 		'name', "Fix_DustSicknessBiorobots",
 		'CodeFileName', "Code/Fix_DustSicknessBiorobots.lua",
-	}),
-	PlaceObj('ModItemCode', {
-		'name', "Fix_GeneForging",
-		'CodeFileName', "Code/Fix_GeneForging.lua",
-	}),
-	PlaceObj('ModItemCode', {
-		'name', "Fix_MirrorSphereSite",
-		'CodeFileName', "Code/Fix_MirrorSphereSite.lua",
 	}),
 	PlaceObj('ModItemCode', {
 		'name', "Fix_PayloadTemplateRefill",
@@ -139,18 +99,6 @@ return {
 		'CodeFileName', "Code/Fix_TrackTunnelPowerBridge.lua",
 	}),
 	PlaceObj('ModItemCode', {
-		'name', "Fix_GraphConsumedCaption",
-		'CodeFileName', "Code/Fix_GraphConsumedCaption.lua",
-	}),
-	PlaceObj('ModItemCode', {
-		'name', "Fix_TrainWaitTime",
-		'CodeFileName', "Code/Fix_TrainWaitTime.lua",
-	}),
-	PlaceObj('ModItemCode', {
-		'name', "Fix_FounderTraitNotification",
-		'CodeFileName', "Code/Fix_FounderTraitNotification.lua",
-	}),
-	PlaceObj('ModItemCode', {
 		'name', "Fix_SequenceLatents",
 		'CodeFileName', "Code/Fix_SequenceLatents.lua",
 	}),
@@ -177,10 +125,6 @@ return {
 	PlaceObj('ModItemCode', {
 		'name', "Fix_SaintBlessing",
 		'CodeFileName', "Code/Fix_SaintBlessing.lua",
-	}),
-	PlaceObj('ModItemCode', {
-		'name', "Fix_SinkholeIndestructible",
-		'CodeFileName', "Code/Fix_SinkholeIndestructible.lua",
 	}),
 	PlaceObj('ModItemCode', {
 		'name', "Fix_ExoticDepositSign",
@@ -232,20 +176,12 @@ return {
 	-- 150 (b) option 1; a Paradox developer asked us to carry it until their patch),
 	-- same rule as above.
 	PlaceObj('ModItemCode', {
-		'name', "Fix_BuildingCodesPrefab",
-		'CodeFileName', "Code/Fix_BuildingCodesPrefab.lua",
-	}),
-	PlaceObj('ModItemCode', {
 		'name', "Fix_HabitatExpeditionReturn",
 		'CodeFileName', "Code/Fix_HabitatExpeditionReturn.lua",
 	}),
 	PlaceObj('ModItemCode', {
 		'name', "Fix_HabitatExpeditionDraft",
 		'CodeFileName', "Code/Fix_HabitatExpeditionDraft.lua",
-	}),
-	PlaceObj('ModItemCode', {
-		'name', "Fix_OpenPastureStockpiles",
-		'CodeFileName', "Code/Fix_OpenPastureStockpiles.lua",
 	}),
 	PlaceObj('ModItemCode', {
 		'name', "Fix_RoverSubclassManifest",

@@ -10,13 +10,19 @@ fixtures; no class flattening, colony load or save healing is simulated.
 The write proxies preserve first-pass values but not rawget after a write;
 these are fresh-preset first-pass controls, not idempotency/reload tests.
 """
+import os
 import re
 import subprocess
 from pathlib import Path
 import deskbench as db
 
+# Retired-module controls intentionally retain their 1.1.0 source side too.
+db.TREES['1.1.0'] = os.path.join(os.environ.get(
+    'SMR_SRCARCHIVE', r'B:\Dev\SMR\SMR-Shared\SMR-SrcArchive'), '1.1.0.403908', 'Src')
+
 # Last pre-guard bodies: keep every original harm/stop demand executable.
 C90_HARMFUL_REV = 'fb3751a'
+RETIRED_SINKHOLE_REV = '16ff1aa'
 
 
 PRELUDE = db.ENGINE_SHIMS + r'''
@@ -138,7 +144,7 @@ def saint(tree, missing=None, veto=False, rev=None):
     return rt, before
 
 
-def sinkhole(missing=None, veto=False, rev=None):
+def sinkhole(missing=None, veto=False, rev=RETIRED_SINKHOLE_REV):
     rt = runtime()
     rel = 'Lua/BuildingTemplate/Sinkhole.generated.lua'
     db.load_at(rt, db.read(Path(db.TREES['1.1.0']) / rel), '=' + rel)
@@ -211,7 +217,7 @@ def historical_main():
 
 
 def live_main():
-    bench = db.Bench('C90 live guards: declined apply cannot write, arm, or heal')
+    bench = db.Bench('C90 current Saint guards and historical 16ff1aa Sinkhole guards')
     for tree in ('1.0.7', '1.1.0'):
         expected = ['Saint.modify_trait=TraitReligious'] if tree == '1.0.7' else []
         for missing in (None, 'GetTraitLabel', 'TraitPreset.AddDomeColonistsModifier',
@@ -243,20 +249,20 @@ def live_main():
     for missing in (None, 'class', 'DestroyBuildingImmediate'):
         rt, before = sinkhole(missing)
         after = entry(rt, 'SinkholeIndestructible').status
-        bench.check('live Sinkhole %s: exact ordered writes and status' % (missing or 'intact'),
+        bench.check('historical Sinkhole %s: exact ordered writes and status' % (missing or 'intact'),
                     before == after == ('inactive' if missing else 'active')
                     and writes(rt) == ([] if missing else expected)
                     and (not missing or len(rt.globals().LOGS) == 1),
                     '%s -> %s; %s' % (before, after, writes(rt)))
         if missing == 'DestroyBuildingImmediate':
-            bench.check('live Sinkhole preserves failed self-check in UpdateSuspects',
+            bench.check('historical Sinkhole preserves failed self-check in UpdateSuspects',
                         entry(rt, 'SinkholeIndestructible').update_suspect is not None
                         and len(rt.eval('SMRFixPack.UpdateSuspects()')) == 1)
     rt, before = sinkhole(veto=True)
-    bench.check('live Sinkhole veto stops the pass',
+    bench.check('historical Sinkhole veto stops the pass',
                 before == entry(rt, 'SinkholeIndestructible').status == 'disabled'
                 and writes(rt) == [])
-    return bench.finish('ALL LIVE GUARDS HELD -- desk evidence; ships unexercised in play.')
+    return bench.finish('ALL CURRENT-SAINT / HISTORICAL-16ff1aa-SINKHOLE GUARDS HELD -- desk evidence; ships unexercised in play.')
 
 
 def main():

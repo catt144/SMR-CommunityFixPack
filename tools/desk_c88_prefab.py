@@ -59,7 +59,11 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import deskbench as db  # noqa: E402
 
-MODULE = os.path.join(db.REPO, "Code", "Fix_BuildingCodesPrefab.lua")
+HISTORICAL_REV = "16ff1aa"
+MODULE_REL = "Code/Fix_BuildingCodesPrefab.lua"
+# The live ModTools extraction moved to 1.1.1; these are 1.1.0 historical controls.
+db.TREES["1.1.0"] = os.path.join(os.environ.get(
+    "SMR_SRCARCHIVE", r"B:\Dev\SMR\SMR-Shared\SMR-SrcArchive"), "1.1.0.403908", "Src")
 LAW_FILE = "Data/LawDef/LawDef-Efficiency.lua"
 LAWS = ("Policy_BuildingCodesLax", "Policy_BuildingCodesStrict")
 EXPECTED = {"Policy_BuildingCodesLax": 50, "Policy_BuildingCodesStrict": -30}
@@ -301,7 +305,8 @@ def make_runtime(apply=True, active=("Policy_BuildingCodesStrict",),
     if not at_menu_for_probe:
         rt.execute("ActiveLaws = {}")      # a game already loaded: probe cannot discriminate
     rt.globals().APPLY_MODULE = apply
-    db.load_at(rt, db.read(MODULE), "=Code/Fix_BuildingCodesPrefab.lua", 1)
+    db.load_at(rt, db.git_show(db.REPO, HISTORICAL_REV, MODULE_REL),
+               "=%s:%s" % (HISTORICAL_REV, MODULE_REL), 1)
     rt.execute("LawDefs = SAVED_LAWDEFS")
     rt.eval("FIRE_DATA_READY")()
     rt.eval("FIRE_DATA_READY")()           # idempotent: it may fire several times
@@ -313,7 +318,7 @@ def make_runtime(apply=True, active=("Policy_BuildingCodesStrict",),
 
 
 def main():
-    bench = db.Bench("C88 Building Codes vs prefabs -- shipped LawDef handlers and module")
+    bench = db.Bench("C88 historical 1.1.0 / 16ff1aa Building Codes controls")
     check = bench.check
 
     for law_id in LAWS:

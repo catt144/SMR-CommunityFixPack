@@ -128,17 +128,18 @@ def main():
     print('All 8 scratch variants failed as required; %d/%d C90 demands falsified.'
           % (len(demands & covered), len(demands)))
 
-    # A removed production guard must resurrect the measured harm on the live body.
+    # A removed guard must resurrect harm on its selected current or historical body.
     for module, required in (
         ('SaintBlessing', '1.1.0 live Saint does not arm save re-base after decline'),
-        ('SinkholeIndestructible', 'live Sinkhole DestroyBuildingImmediate: exact ordered writes and status'),
+        ('SinkholeIndestructible', 'historical Sinkhole DestroyBuildingImmediate: exact ordered writes and status'),
     ):
-        source, chunk = original_c90_module_text(module)
+        historical_rev = c90.RETIRED_SINKHOLE_REV if module == 'SinkholeIndestructible' else None
+        source, chunk = original_c90_module_text(module, historical_rev)
         old = '\t\tif not self_check_passed then return end'
         assert source.count(old) == 1
 
         def c90_module_text(name, rev=None):
-            if name == module and rev is None:
+            if name == module and rev == historical_rev:
                 return source.replace(old, '\t\t-- scratch: apply-success guard removed'), chunk
             return original_c90_module_text(name, rev)
 
@@ -146,10 +147,12 @@ def main():
             code, output = run(c90.live_main)
         failed = demand_labels(output, '  FAIL  ')
         assert code == 1 and required in failed, (module, code, output)
-        print('EXPECTED FAIL: live %s apply-success guard removed (exit %d)' % (module, code))
+        scope = ('historical 16ff1aa Sinkhole' if module == 'SinkholeIndestructible'
+                 else 'current Saint')
+        print('EXPECTED FAIL: %s apply-success guard removed (exit %d)' % (scope, code))
         for label in sorted(failed):
             print('  ' + label)
-    print('Both live guard removals resurrected the measured bypass as required.')
+    print('Current Saint and historical 16ff1aa Sinkhole guard removals resurrected the measured bypass as required.')
     return 0
 
 
