@@ -36,6 +36,16 @@ player surface bumps it by one on release.
   `TrainCargoDumping`, `TrainWaitTime`, `TrainsToVoid` and `WispRewards`.
 - Evidence and limits: [build report](../../reports/GAMEPATCH_1.1.1_BUILD_2026-09-23.md).
   Desk/source results do not replace the separate owner audit or retail legs.
+- **Known issue for the patch notes, owner's ruling 2026-09-23 — document, do not fix.**
+  Player-facing wording: *if your Outside Ranch still looks closed after terraforming
+  opens your domes, salvage it and rebuild it once; it will come back open.* Affects only
+  colonies that ran an earlier pack with Open Domes already enacted — the retired
+  `OpenPastureStockpiles` deliberately held those ranches on the closed entity, and
+  nothing reopens them once it is gone. It is cosmetic: all nine stockpile anchors exist
+  on either entity, so no resources strand. New ranches are unaffected. Evidence:
+  [playtest plan](../../reports/PLAYTEST_PLAN_1.1.1_2026-09-23.md), "FINDING — removal
+  residue". Not fixed because the remedy is new code on an otherwise fully playtested
+  build, against a one-time cosmetic issue with a trivial workaround.
 - Release surfaces are pending the release job: reconcile the site fix list,
   store-card copies, description/count word and change notes from the retired
   names and surviving modules. This build does not change a version or publish.
