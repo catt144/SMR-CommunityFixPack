@@ -8,12 +8,14 @@ uploads, repacks, opens the Mod Editor or calls a portal.
 
 Do not begin until the owner confirms the upload. The current receipt asks only:
 
-1. the version shown on the Paradox page;
-2. anything that looked wrong on either store;
-3. whether the site published.
+1. anything that looked wrong on either store;
+2. whether the site published.
 
 Description auto-fill and the formatting paste are settled and are not asked per
-release.
+release. Neither is a store page's version number: the owner ruled on 2026-09-23
+that those numbers tick on a bare editor save as well as on an upload, so they
+track nothing. `metadata.lua`'s `version` is the only version tracked, and the
+Steam changelog confirms the upload.
 
 ## 1 · Verify from the tree
 
@@ -24,9 +26,10 @@ In a fresh session, run `git log --oneline -10`, `git pull`, and
 git diff -- metadata.lua items.lua
 ```
 
-The writeback should expose the new version/id fields. Compare them with STATE,
-the outbox's `Last released` line and the owner's receipt. When readable, the newest Steam change
-note is another receipt. A handoff sentence alone is not proof of an upload.
+The writeback should expose the new version/id fields. Compare them with STATE and
+the outbox's `Last released` line. The newest `Update:` entry on the Steam changelog
+is the upload's confirmation; read it every time. A handoff sentence alone is not
+proof of an upload.
 
 Count leading comment lines in both files before any commit. Zero means the editor
 serializer stripped them and restoration is owed. A zero-hit command never proves
@@ -58,5 +61,5 @@ does not move with this post-upload commit.
   Report counts only from that run and copy any warning verbatim.
 
 Commit the writeback, restored comments and record changes with exact pathspecs.
-Report the store versions, live count, site status and empty Pending ledger. Do not
-claim a portal result the owner did not confirm.
+Report what the Steam change note confirms, the live count, site status and the
+empty Pending ledger. Do not claim a portal result the owner did not confirm.

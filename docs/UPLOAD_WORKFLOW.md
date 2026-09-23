@@ -309,13 +309,18 @@ Give it a minute, then check the fix list page shows the new entry.
 
 ## 5 · Tell the agent
 
-Three things, and then you are done:
+Two things, and then you are done:
 
-1. The **version number the Paradox page shows** (Steam shows none — confirmed 2026-09-10).
-2. Anything that **looked wrong** on either page.
-3. Whether the **site published**.
+1. Anything that **looked wrong** on either page.
+2. Whether the **site published**.
 
 The agent writes the rest down.
+
+> ⛔ **Page version numbers are no longer tracked, and agents must not ask for one.**
+> Owner ruling, **2026-09-23**: the number on a store page ticks up on a bare save
+> press as well as on an upload, so it tracks nothing worth tracking. The project
+> tracks its own `version` inside `metadata.lua`, and confirms that an upload landed
+> from the Steam changelog.
 
 > ⛔ **Agents: two questions are ANSWERED — never ask them again.** The owner ruled
 > this on **2026-09-12** (checklist 155) after being asked once too often:

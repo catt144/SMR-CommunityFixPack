@@ -17,6 +17,11 @@ at the handoff.
   as descriptions, `last_changes` and the gated code list, are ordinary work.
 - A zero-hit verification is a failure. Record the expected presence count before
   an edit and require the post-edit command to find the expected members.
+- Do not track, report or ask for the version number either store page shows.
+  Owner ruling, 2026-09-23: those numbers tick on a bare editor save as well as on
+  an upload, so they track nothing. `metadata.lua`'s `version` is the only version
+  this project tracks, and the newest `Update:` entry on the Steam changelog is
+  what confirms an upload happened.
 
 ## 0 · Orient and expose the full lifecycle
 
@@ -66,10 +71,10 @@ This is a pause, not completion. Wait for the owner's confirmation.
 
 ## 3 · Owner upload
 
-The owner follows `docs/UPLOAD_WORKFLOW.md`. The current receipt is only: the
-Paradox page version, anything that looked wrong on either store, and whether the
-site published. The description auto-fill and formatting paste are settled facts,
-not questions to ask again.
+The owner follows `docs/UPLOAD_WORKFLOW.md`. The current receipt is only: anything
+that looked wrong on either store, and whether the site published. The description
+auto-fill and formatting paste are settled facts, not questions to ask again, and
+neither is a store page's version number (Release rails).
 
 ## 4 · Resume, often in a fresh session
 
@@ -92,6 +97,6 @@ holds only what has not shipped; this prevents a change shipping twice. Never cl
 ## 6 · Finish
 
 Re-emit counts, finish the release records, remove the STATE marker, run doccheck,
-and commit the close-out with exact paths. Report what each store shows, the live
-count, site status and that Pending is empty. Do not claim a release step the owner
-did not confirm.
+and commit the close-out with exact paths. Report what the Steam change note
+confirms, the live count, site status and that Pending is empty. Do not claim a
+release step the owner did not confirm.

@@ -482,3 +482,20 @@ heading; the *One known issue after this update* section and the Outside Ranch a
 the dust-storm clog row serves its rewritten body. `install.md`'s load-repair list serves the new
 wording and `index.md`'s coverage sentence serves the shortened one. Store card and site now agree
 at thirty-eight.
+
+**Paradox page shows v19** (owner, 2026-09-23), against the tree's written-back `version` 20 and
+`pdx_version` "14" — three different numbers for one upload. This settles the "the Paradox page
+version was not stated" line in the v15 block above, and it is the **last** release to carry that
+line at all.
+
+⚖️ **Owner ruling, 2026-09-23 — stop tracking per-store version numbers.** *"because of the way the
+V's tick up because of just single save presses or uploads, and other issues, we aren't going to
+track what v is on each site anymore. We only track our V number internally and check the steam
+version to confirm upload."* A store page's number moves on a bare editor save as well as on an
+upload, so it never measured what the releases were using it for. From v16 on: `metadata.lua`'s
+`version` is the only version this project tracks, and the newest `Update:` entry on the Steam
+changelog is what confirms an upload landed. The receipt drops to two items — anything that looked
+wrong on either store, and whether the site published. Carried into
+`release_prompt.md` (Release rails, §3, §6), `support/POST_UPLOAD_CLOSE.md` (preconditions, §1, §3)
+and `UPLOAD_WORKFLOW.md` §5. Earlier blocks in this file keep their page-version lines: they record
+what was true when written.
