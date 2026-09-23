@@ -7,8 +7,12 @@ What may enter this file: the admission door in `agent/prompts/perma/STATE_EVICT
 <!-- /RULES -->
 
 ## Now
-- Current version 1.1.0.403908 + DLC
-- Previous version 1.0.7 w/ tree archived at `B:\Dev\SMR\SMR-Shared\SMR-SrcArchive\1.0.7.396349\Src` (`EF-083`)
+- Current version 1.1.1.405907 + DLC (read: `python tools/gamepatch_111_census.py --live-source`)
+- Previous version 1.1.0.403908 w/ tree archived at `B:\Dev\SMR\SMR-Shared\SMR-SrcArchive\1.1.0.403908\Src`
+- 1.0.7.396349 tree archived alongside it (`EF-083`); still served by the frozen v5 build
+
+## Next
+- v15 UPLOAD OWED -> then `agent/prompts/perma/release_prompt.md` §4 close-out
 
 ## Open owner decisions (bodies in `docs/PLAYTEST_CHECKLIST.md` → `## Decide`)
 - Owner OWES: none.
