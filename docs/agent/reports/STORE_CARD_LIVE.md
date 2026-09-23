@@ -135,7 +135,7 @@ back at Paradox. ⛔ Do not paste the same block on both.
 ```
 Bug fixes for Surviving Mars: Relaunched.
 
-Fifty-five repairs, each one written up on the fix list with what you would
+Thirty-eight repairs, each one written up on the fix list with what you would
 have seen and what was actually wrong. Every one targets something the game's
 own code gets wrong — the code says one thing, does another, and the fix makes
 it do what it says. It fixes bugs; it does not rebalance the game. Preferences
@@ -146,12 +146,11 @@ deleted by salvaging a single hex, colonists suffocating on a walk between two
 domes, an artificial lake burying the rover that was building it.
 
 More of them you would never have blamed on a bug, because the game looked
-perfectly normal while the arithmetic underneath it was wrong — a reward for
-freeing the wisps that paid about a thousandth of what its own message promised,
-a researched breakthrough the game restored to only one of the three wind
-turbine types it covers, a track refund that paid a stub's worth of Metals
-however long the line was, a train travel-time figure that counted the platform
-wait twice.
+perfectly normal while the arithmetic underneath it was wrong — a researched
+breakthrough the game restored to only one of the three wind turbine types it
+covers, a track refund that paid a stub's worth of Metals however long the line
+was, a water saving a technology promised that four of the farms it names never
+received.
 
 And two of them repair things you cannot see at all today: real defects that
 the shipped numbers happen to hide, which another mod, a game patch or a DLC
@@ -163,13 +162,8 @@ SOME OF WHAT IT FIXES
 · Rocket loads of new arrivals died on their way to a dome.
 · New arrivals moved into a dome that was switched off, quarantined or without air.
 · A bed that fell vacant sat empty while colonists were homeless.
-· Night-shift colonists never came back to work after midnight.
-· A building clogged by a dust storm never started again.
-· An Outside Ranch under Open Domes left food where drones could not reach it.
 · Building an artificial lake buried the rover that built it.
 · Salvaging one piece of track deleted the whole line, and its trains with it.
-· Demolishing a station permanently deleted the trains parked there.
-· Meteor-damaged track could not be salvaged at all.
 · Automatic rockets and landers took off with nothing aboard.
 · A Jumbo Cave mystery could get stuck clearing waste rock and never complete.
 · The Philosopher's Stone mystery hung one step from the end.
@@ -241,11 +235,11 @@ HOW IT WORKS
 ```
 [h2]Bug fixes for [i]Surviving Mars: Relaunched[/i].[/h2]
 
-[b]Fifty-five repairs[/b], each one written up on the fix list with what you would have seen and what was actually wrong. Every one targets something the game's own code gets wrong — the code says one thing, does another, and the fix makes it do what it says. It fixes bugs; it does not rebalance the game. Preferences and features are deliberately not in it.
+[b]Thirty-eight repairs[/b], each one written up on the fix list with what you would have seen and what was actually wrong. Every one targets something the game's own code gets wrong — the code says one thing, does another, and the fix makes it do what it says. It fixes bugs; it does not rebalance the game. Preferences and features are deliberately not in it.
 
 Some of them you could hardly miss: an entire train line and every train on it deleted by salvaging a single hex, colonists suffocating on a walk between two domes, an artificial lake burying the rover that was building it.
 
-More of them you would never have blamed on a bug, because the game looked perfectly normal while the arithmetic underneath it was wrong — a reward for freeing the wisps that paid about a thousandth of what its own message promised, a researched breakthrough the game restored to only one of the three wind turbine types it covers, a track refund that paid a stub's worth of Metals however long the line was, a train travel-time figure that counted the platform wait twice.
+More of them you would never have blamed on a bug, because the game looked perfectly normal while the arithmetic underneath it was wrong — a researched breakthrough the game restored to only one of the three wind turbine types it covers, a track refund that paid a stub's worth of Metals however long the line was, a water saving a technology promised that four of the farms it names never received.
 
 And [b]two[/b] of them repair things you cannot see at all today: real defects that the shipped numbers happen to hide, which another mod, a game patch or a DLC could walk straight into.
 
@@ -255,13 +249,8 @@ And [b]two[/b] of them repair things you cannot see at all today: real defects t
 [*]Rocket loads of new arrivals died on their way to a dome.
 [*]New arrivals moved into a dome that was switched off, quarantined or without air.
 [*]A bed that fell vacant sat empty while colonists were homeless.
-[*]Night-shift colonists never came back to work after midnight.
-[*]A building clogged by a dust storm never started again.
-[*]An Outside Ranch under Open Domes left food where drones could not reach it.
 [*]Building an artificial lake buried the rover that built it.
 [*]Salvaging one piece of track deleted the whole line, and its trains with it.
-[*]Demolishing a station permanently deleted the trains parked there.
-[*]Meteor-damaged track could not be salvaged at all.
 [*]Automatic rockets and landers took off with nothing aboard.
 [*]A Jumbo Cave mystery could get stuck clearing waste rock and never complete.
 [*]The Philosopher's Stone mystery hung one step from the end.
@@ -776,3 +765,36 @@ and show raw tags on Steam, so the shipped string stays plain. The formatting is
 heading, bold ALL-CAPS section lines, the block's own line breaks, no font). The owner tested the paste
 on the Paradox editor, 2026-09-19: *"That is perfect."* The steps are under that block in
 `docs/UPLOAD_WORKFLOW.md` §3.
+
+## ⭐ 2026-09-23 — v15 words (`release_prompt.md` §1): count 55 → 38, headliners 14 → 9
+
+**Count: Fifty-five → Thirty-eight.** The 1.1.1 patch repaired sixteen of the pack's fixes at
+source, so those modules are retired and the rows they backed leave the fix list. Re-derived from
+the file, never by arithmetic on 55: `grep -c '^??? ' content/fix-list.md` = **38**, and the
+sections reconcile to it — 2 (Disasters & weather) + 13 (Colonists & domes) + 4 (Drones & logistics)
++ 4 (Buildings & economy) + 5 (Trains) + 5 (Rockets & asteroids) + 3 (Story & mysteries) + 2 (Under
+the hood) = 38. Seventeen rows were removed, not sixteen: `Fix_WispRewards` backed two of them (the
+free-wisp power and the double batch research). *The text and numbers on your screen* loses both its
+rows and the whole section goes with it. Judgment calls unchanged at **four**
+(`grep -c '^??? question'`). Body copies moved together: `Thirty-eight repairs` = 1 (`metadata.lua`)
++ 2 (this file) + 2 (`UPLOAD_WORKFLOW.md` §3) = 5, and 0 body hits left for `Fifty-five repairs` —
+the two that remain in this file are the v13/v14 log entries above, which record what those versions
+shipped.
+
+**Headliners 14 → 9.** Five bullets went with their fixes: night-shift colonists, the Outside Ranch
+under Open Domes, station demolition deleting trains, meteor-damaged track, and the dust-storm clog.
+The clog bullet went although its row survives — the repair is now a rescue for saves written before
+1.1.1, so listing it under *SOME OF WHAT IT FIXES* would read as a live repair. **Nothing was added
+to replace them.** This batch adds no fix, and the provenance rule above allows a bullet only as a
+compressed form of a row already on the audited fix list; promoting a surviving row to headliner
+would be a new selection, which is not this release's work.
+
+**Two prose examples were replaced, not just deleted**, because both named retired fixes: the wisp
+reward and the train travel-time double count. Their replacement is the Dry Farming water saving that
+four named farms never received — a surviving row, and the same kind of example (the game looks
+normal while the arithmetic underneath is wrong).
+
+**Shipped body shrank.** `python tools/upload_preflight.py` reports `description` at **4,709**
+chars (it counts the stored Lua string, where each `\n` escape is two characters); as
+the store renders it that is 4,620. Either way it is well below the 5,342 the v6 upload was accepted at, so
+the known acceptance ceiling is untouched. `last_changes` is 734 rendered chars.

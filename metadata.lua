@@ -111,7 +111,7 @@ return PlaceObj('ModDef', {
 	-- list is linked); and the 1.0.7 section MOVED to the very bottom, after FOR MODDERS.
 	-- Net length 6,376 → **6,551** (+175) — a small increment over a body that demonstrably went
 	-- through the upload path at v11, which is the only length data point that matters here.
-	'description', "Bug fixes for Surviving Mars: Relaunched.\n\nFifty-five repairs, each one written up on the fix list with what you would\nhave seen and what was actually wrong. Every one targets something the game's\nown code gets wrong — the code says one thing, does another, and the fix makes\nit do what it says. It fixes bugs; it does not rebalance the game. Preferences\nand features are deliberately not in it.\n\nSome of them you could hardly miss: an entire train line and every train on it\ndeleted by salvaging a single hex, colonists suffocating on a walk between two\ndomes, an artificial lake burying the rover that was building it.\n\nMore of them you would never have blamed on a bug, because the game looked\nperfectly normal while the arithmetic underneath it was wrong — a reward for\nfreeing the wisps that paid about a thousandth of what its own message promised,\na researched breakthrough the game restored to only one of the three wind\nturbine types it covers, a track refund that paid a stub's worth of Metals\nhowever long the line was, a train travel-time figure that counted the platform\nwait twice.\n\nAnd two of them repair things you cannot see at all today: real defects that\nthe shipped numbers happen to hide, which another mod, a game patch or a DLC\ncould walk straight into.\n\nSOME OF WHAT IT FIXES\n\n· Colonists walked across the surface between domes and suffocated.\n· Rocket loads of new arrivals died on their way to a dome.\n· New arrivals moved into a dome that was switched off, quarantined or without air.\n· A bed that fell vacant sat empty while colonists were homeless.\n· Night-shift colonists never came back to work after midnight.\n· A building clogged by a dust storm never started again.\n· An Outside Ranch under Open Domes left food where drones could not reach it.\n· Building an artificial lake buried the rover that built it.\n· Salvaging one piece of track deleted the whole line, and its trains with it.\n· Demolishing a station permanently deleted the trains parked there.\n· Meteor-damaged track could not be salvaged at all.\n· Automatic rockets and landers took off with nothing aboard.\n· A Jumbo Cave mystery could get stuck clearing waste rock and never complete.\n· The Philosopher's Stone mystery hung one step from the end.\n\nBUGS, QUESTIONS AND MODDING\n\nFound a bug, or one this pack did not fix? Want the details behind a fix, or to\nknow how the pack gets along with your own mod? It is all on the pack's site.\nBugs can be reported there from a browser, with no account needed, and a save\nor a log can be attached privately. If this page has a comment section, that\nworks too. Still on game version 1.0.7? A frozen build for it is there too.\nhttps://catt144.github.io/SMR-CommunityMods/\n\nFEATURED: EXPEDITION CREWS COME HOME\n\nColonists living in habitats can join expeditions again, and they come back to\nthe habitat they left. If their habitat is too far from the landing site to\nwalk, they are set down at its door, the same way the rocket picked them up. If\nthe habitat is gone or unusable, they go to the nearest dome that is working and\nhas air.\n\nOne gotcha. If every dome is switched off and only habitats are alive, and those\nhabitats refuse the colonist through their filters, the colonist still walks to\nthe nearest dome and dies there. That is the game's own safety system choosing\nwhere a homeless colonist goes, and this mod does not override it. Changing it\nwould mean rewriting how the game houses colonists, which is not what a bug-fix\nmod should do.\n\nFEATURED: SEVEN MACHINES THAT WORKED IN SILENCE\n\nThe Rare Metals Extractor's hammer, the MOXIE, the Water Extractor, Shuttle Hub\nshuttles, the RC Driller, the RC Dozer and The Excavator all had sounds or\neffects made for them that never played. They play now.\n\nTwo of them also have a skin that is silent by design, so if one of these stays\nquiet, check its skin before you blame the fix:\n· Rare Metals Extractor — the hammer strikes and puffs steam; the drill never\n  strikes. NASA, SpaceY, BlueSun, Brazil, Roscosmos, Japan and ISRO colonies\n  get the drill by default.\n· MOXIE — the double-pump skin thumps and puffs; the blocky one is silent.\n\nSelect the building and press Change Skin (the paintbrush on its panel) to\nswitch. The screenshots on this page show which skin is which.\n\n\nHOW IT WORKS\n\n· No game files are modified. The pack wraps the game's own code while it runs.\n· Safe to add to a save you have already played. It writes almost nothing into\n  your savegame, and removing it simply lets the original bugs come back.\n· Every fix checks the game's code before it touches anything, and stands down\n  by itself if what it was written for has been renamed, removed or reshaped.\n  A fix that stands down does nothing at all — it never guesses. Every game\n  patch is read against the pack as well, and the fixes it changed are updated\n  or retired.\n· A few of the fixes are judgment calls rather than plain repairs. Those are\n  marked as such on the fix list, with the reasoning, rather than folded in\n  quietly.\n",
+	'description', "Bug fixes for Surviving Mars: Relaunched.\n\nThirty-eight repairs, each one written up on the fix list with what you would\nhave seen and what was actually wrong. Every one targets something the game's\nown code gets wrong — the code says one thing, does another, and the fix makes\nit do what it says. It fixes bugs; it does not rebalance the game. Preferences\nand features are deliberately not in it.\n\nSome of them you could hardly miss: an entire train line and every train on it\ndeleted by salvaging a single hex, colonists suffocating on a walk between two\ndomes, an artificial lake burying the rover that was building it.\n\nMore of them you would never have blamed on a bug, because the game looked\nperfectly normal while the arithmetic underneath it was wrong — a researched\nbreakthrough the game restored to only one of the three wind turbine types it\ncovers, a track refund that paid a stub's worth of Metals however long the line\nwas, a water saving a technology promised that four of the farms it names never\nreceived.\n\nAnd two of them repair things you cannot see at all today: real defects that\nthe shipped numbers happen to hide, which another mod, a game patch or a DLC\ncould walk straight into.\n\nSOME OF WHAT IT FIXES\n\n· Colonists walked across the surface between domes and suffocated.\n· Rocket loads of new arrivals died on their way to a dome.\n· New arrivals moved into a dome that was switched off, quarantined or without air.\n· A bed that fell vacant sat empty while colonists were homeless.\n· Building an artificial lake buried the rover that built it.\n· Salvaging one piece of track deleted the whole line, and its trains with it.\n· Automatic rockets and landers took off with nothing aboard.\n· A Jumbo Cave mystery could get stuck clearing waste rock and never complete.\n· The Philosopher's Stone mystery hung one step from the end.\n\nBUGS, QUESTIONS AND MODDING\n\nFound a bug, or one this pack did not fix? Want the details behind a fix, or to\nknow how the pack gets along with your own mod? It is all on the pack's site.\nBugs can be reported there from a browser, with no account needed, and a save\nor a log can be attached privately. If this page has a comment section, that\nworks too. Still on game version 1.0.7? A frozen build for it is there too.\nhttps://catt144.github.io/SMR-CommunityMods/\n\nFEATURED: EXPEDITION CREWS COME HOME\n\nColonists living in habitats can join expeditions again, and they come back to\nthe habitat they left. If their habitat is too far from the landing site to\nwalk, they are set down at its door, the same way the rocket picked them up. If\nthe habitat is gone or unusable, they go to the nearest dome that is working and\nhas air.\n\nOne gotcha. If every dome is switched off and only habitats are alive, and those\nhabitats refuse the colonist through their filters, the colonist still walks to\nthe nearest dome and dies there. That is the game's own safety system choosing\nwhere a homeless colonist goes, and this mod does not override it. Changing it\nwould mean rewriting how the game houses colonists, which is not what a bug-fix\nmod should do.\n\nFEATURED: SEVEN MACHINES THAT WORKED IN SILENCE\n\nThe Rare Metals Extractor's hammer, the MOXIE, the Water Extractor, Shuttle Hub\nshuttles, the RC Driller, the RC Dozer and The Excavator all had sounds or\neffects made for them that never played. They play now.\n\nTwo of them also have a skin that is silent by design, so if one of these stays\nquiet, check its skin before you blame the fix:\n· Rare Metals Extractor — the hammer strikes and puffs steam; the drill never\n  strikes. NASA, SpaceY, BlueSun, Brazil, Roscosmos, Japan and ISRO colonies\n  get the drill by default.\n· MOXIE — the double-pump skin thumps and puffs; the blocky one is silent.\n\nSelect the building and press Change Skin (the paintbrush on its panel) to\nswitch. The screenshots on this page show which skin is which.\n\n\nHOW IT WORKS\n\n· No game files are modified. The pack wraps the game's own code while it runs.\n· Safe to add to a save you have already played. It writes almost nothing into\n  your savegame, and removing it simply lets the original bugs come back.\n· Every fix checks the game's code before it touches anything, and stands down\n  by itself if what it was written for has been renamed, removed or reshaped.\n  A fix that stands down does nothing at all — it never guesses. Every game\n  patch is read against the pack as well, and the fixes it changed are updated\n  or retired.\n· A few of the fixes are judgment calls rather than plain repairs. Those are\n  marked as such on the fix list, with the reasoning, rather than folded in\n  quietly.\n",
 	'short_description', "Bug fixes for Surviving Mars: Relaunched — it repairs defects verified in the game's own code rather than rebalancing the game, and it is safe to add to a save you have already played.",
 	-- ⭐ ADDED 2026-08-17 AT THE UPLOAD SITTING (④ step 1). Without it the
 	-- Paradox Mods upload is HARD-REJECTED before it packs anything —
@@ -131,172 +131,67 @@ return PlaceObj('ModDef', {
 	-- ⛔ The copy at docs/agent/reports/preview_art/ is the RECORD and stays;
 	-- this root copy is what ships (packaging 79 → 80).
 	'image', "Mod/SMR_CommunityFixPack/preview.png",
-	-- ⚠️ `last_changes` no longer quotes a fix COUNT, on purpose: every previous
-	-- wording carried one and it drifted every time a fix was retired or added
-	-- (68 -> 66 after F24/F28 went `wontfix`, 67 after F83). If launch prep puts
-	-- a number back, recount it from `python tools/doccheck.py --emit-counts`
-	-- in the same commit — never from this comment.
-	-- ⚖️ 2026-08-15 (unattended-3 audit): "Five of the fixes are judgment calls"
-	-- → "Six", because the F85 distress-popup flip shipped as a design-judgment
-	-- tweak. ⛔ REVERTED TO **FIVE** the same day (owner ruling, checklist 31):
-	-- F85's module was REMOVED — the popup it paused is dead-coded out of the
-	-- retail build, so the fix could never fire for a player. The count is
-	-- settled as FIVE consistently across card, this string, site FAQ and fix
-	-- list; the removed module is preserved verbatim with a re-arm trigger in
-	-- docs/agent/reports/SHELVED_F85_DISTRESS_PAUSE.md, and re-applying it puts
-	-- this number BACK to six. Reasoning: STORE_FIXPACK.md notes, F85.md.
-	-- ⛔ SUPERSEDED 2026-08-28 — THE COUNT IS **SIX** AGAIN, for a different
-	-- reason: F108 (Extractor AI staffed-performance) shipped as a judgment
-	-- call. F85 is still `wontfix` and still out; the two movements are
-	-- unrelated and the "settled as FIVE" sentence above is now FALSE. Measured
-	-- 2026-08-29 off the DEPLOYED site: fix-list marks six entries
-	-- `judgment call`, FAQ names the same six, and this string states no number
-	-- at all ("A few of the fixes"), which is why the store never drifted.
-	-- ⇒ recount from the fix list, never from this block. Audit:
-	-- docs/agent/reports/SITE_AUDIT_0829.md.
-	-- ⛔ CORRECTED 2026-08-14 (release-3 prompt 1): this field STILL carried the
-	-- dead working title "Community Opt-In Pack" that the comment ten lines above
-	-- says was corrected — the 08-13 pass fixed `description` and missed this
-	-- string. A player told to look for that name would find nothing on any
-	-- store. Licence: the owner's standing 22b word ("change any wordings to
-	-- their accurate versions"); text-only, no behaviour, no version bump.
-	-- ⭐ REWRITTEN 2026-08-24 for the first patch. Until now this said
-	-- "Initial release.", which is what the 1.0.0 upload shipped and what both
-	-- live listings still show. ⚠️ It is the CHANGELOG a player reads on the
-	-- store, so it must describe THIS version, not the pack. Player's words, no
-	-- fix ids, no counts (counts drift, see the comment above `last_changes`).
+	-- ══ `last_changes` — what this field IS, and the standing rules for writing it ══
+	-- Per-version drafting history for v6-v14 is NOT kept here any more: it lives in
+	-- `docs/archive/RELEASE_HISTORY.md` (what each release shipped) and
+	-- `docs/agent/reports/STORE_CARD_LIVE.md` (the words, and what was read back live).
+	-- This block was rewritten wholesale 2026-09-23 for v15; the one it replaced still
+	-- gated on a fix module this release deletes, and on a stale body-replacement count.
+	--
 	-- ⛔ IT IS NOT A DESCRIPTION — it is the PER-VERSION CHANGE-NOTE ENTRY on BOTH
 	-- storefronts, sent automatically at upload and archived there forever:
 	--   Paradox  `ChangeLog = last_changes`   (`ParadoxMods.lua:151`)  -> CHANGELOG panel
 	--   Steam    `change_note = last_changes` (`SteamWorkshop.lua:114`) -> Change Notes tab
-	-- ⇒ three consequences. (1) REWRITE IT BEFORE EVERY upload or the next one
-	-- posts a duplicate entry under a new version. (2) Keep it TERSE — the field
-	-- is `lines = 3` (`Mod.lua:254`) and the house style on both stores is a
-	-- dashed line or two, not a paragraph. (3) It is HISTORICAL: it describes the
-	-- version it ships with, forever, so never write it in the present tense of
-	-- the pack as a whole.
-	-- ⛔ F107 is deliberately absent: it was a defect in our own fix for F105,
-	-- found and repaired before either ever reached a player, so naming it on a
-	-- store page would describe a problem nobody could have had.
-	-- Licence for this edit: the owner's standing 22b word ("change any wordings
-	-- to their accurate versions"); text-only, no behaviour. The editor/version
-	-- rail (`release_prompt.md § Release rails`), reworded 2026-08-24, puts hand edits
-	-- to this string squarely in scope and leaves the version bump to the
-	-- owner's sitting. Reference: docs/agent/prompts/perma/release_prompt.md.
-	-- ⭐ REWRITTEN 2026-09-08 for the 1.1.0 hotfix (HOTFIX_1_APPLY). The v5 text
-	-- above described the F110 Jumbo Cave fix and would post a duplicate CHANGELOG
-	-- entry if left alone. This version's change is a COMPATIBILITY pass, so the
-	-- note leads with the two things a player actually saw break.
-	-- ⛔ WRITTEN AHEAD OF THE PROOF. At the time of writing the F114/F115 gates
-	-- were desk-verified only — no boot log yet. The owner's rule of 2026-09-08 is
-	-- that a "Fixed" line is a CLAIM until confirmed, and that binds OUR notes too:
-	-- do not upload this string until a 1.1.0 boot reads the predicted 17 inactive /
-	-- 14 named with ZERO Fix_TrainCargoDumping.lua:89 and ZERO
-	-- Fix_LandscapeUnitFilter.lua:63 lines (checklist, the 109/110 block).
-	-- ⚠️ The third line is not hedging for its own sake: 17 of the pack's 22
-	-- full-body replacements have never been diffed against 1.1.0, and no instrument
-	-- we own bounds body divergence — the name sweep sees names, sigcheck sees
-	-- arity, the runtime self-checks see existence, and F114 was invisible to all
-	-- three. Claiming 1.1.0 compatibility outright would be the exact "Fixed is a
-	-- claim" error, aimed at our own players.
-	-- ⛔ No fix ids, no counts, no load-order advice, no other mod named (EF-054,
-	-- FIX_POLICY §8). Licence: the owner's standing 22b word; text-only, no
-	-- behaviour. The editor/version rail (`release_prompt.md § Release rails`) leaves
-	-- the version bump to the upload sitting.
-	-- ⭐⭐ REWRITTEN WHOLESALE 2026-09-09 for hotfix 2 (`prompts/hotfix2/06_TEXT.md`).
-	-- ⛔ NOT APPENDED — the hotfix-1 text above it is a CHANGELOG entry that was
-	-- already posted to both stores, so keeping any of it would post a duplicate.
-	-- ✅ ck113 (ruled 2026-09-08) IS honoured rather than sidestepped: the track-
-	-- salvage clause reads "updated for the new game code", never "brought in line
-	-- with". ⚠️ It now describes THIS version's F116 work (ck111 + ck119), not
-	-- hotfix 1's, and it is capped at "matching the base game" — link 04's ceiling,
-	-- because F116 was never reproduced.
-	-- ⛔ NO "FIXED" ANYWHERE, and the last bullet says why in the player's words:
-	-- nothing in this version has been watched in a running colony on 1.1.0. Every
-	-- in-play control from links 03 and 04 was still owed when this was written
-	-- (owner rule 2026-09-08: a note that says "Fixed" is a CLAIM, false until we
-	-- confirm it ourselves). ⛔ It also does NOT claim 1.1.0 compatibility outright:
-	-- 17 of the 22 full-body replacements have never been diffed against 1.1.0.
-	-- ⚠️ Three player-visible LOSSES are stated rather than dropped quietly, which
-	-- is why bullet 2 exists: the retired asteroid-habitat hold (F-3 half (a)), the
-	-- train count that stops refreshing after a salvage (F49 `TrainMinors`), and the
-	-- stranded Astrogeologist +10% — written as PERMANENT in an existing save, never
-	-- as self-clearing, because it is (link 02). A new game is clean.
-	-- ⛔ NOTHING is said about F12 `LowStorageWarning` beyond the blanket removal
-	-- sentence, and that is deliberate: an earlier draft would have told players
-	-- they now get no low-Food warning at all. That is FALSE — 1.1.0 REPLACED both
-	-- warnings (`StarvingColonists`, `MaintenanceStuckBuildings`). Checklist 121 is
-	-- withdrawn; do not resurrect the loss claim.
-	-- ⚠️ Five bullets, not three. `lines = 3` (`Mod.lua:254`) is the Ged text-box
-	-- HEIGHT and truncates nothing; this version retires ~36 fixes and repairs or
-	-- re-enables eight, and compressing that into two dashed lines would have cost
-	-- the three loss statements above. Terseness loses to disclosure here.
-	-- ⭐ REWRITTEN WHOLESALE 2026-09-10 for v7 (`RELEASE.md` step 1, from `RELEASE_OUTBOX.md`).
-	-- ⛔ NOT APPENDED — the hotfix-2 note above was posted to both stores at v6. Two entries,
-	-- both `tested-attended` on 1.1.0.403908, so unlike v6's note this one MAY say they were
-	-- watched working: C83 (arrival fallback dome, `bugs/C83.md`) and C74+C77 (seven units'
-	-- animation-moment FX, `bugs/C74.md`, `C77.md`). The skin sentence is REQUIRED by the
-	-- outbox: the drill extractor and white MOXIE stay silent by design, and a player who
-	-- hears nothing on those must not read it as the fix failing. Metatron is out of scope
-	-- and deliberately unnamed. No "Fixed", no fix ids, no counts.
-	-- ⭐ REWRITTEN 2026-09-11 for v8 (F119 + C86, both `tested-attended`); posted to both stores
-	-- by the v8 upload the same afternoon. ⭐ REWRITTEN AGAIN 2026-09-11 (night) for v9
-	-- (`RELEASE.md` step 1, from `RELEASE_OUTBOX.md`): the F59 repair, named as the pack's OWN
-	-- side effect and not a game bug — the manual-assign half watched in play on 1.1.0, the
-	-- expedition half stated as code-only — and the F60 retirement with the count drop said
-	-- plainly. The v8 note is gone from here by design (this field is per-version; the
-	-- outbox's *Released in v8* block keeps it).
-	-- ⭐ REWRITTEN 2026-09-12 for v10 (`RELEASE.md` step 1, from `RELEASE_OUTBOX.md`'s three
-	-- Pending entries + the Held retirement batch). All three additions are `tested-attended`
-	-- 2026-09-12 in the ck158 sitting (one boot, owner's word per leg), so this note MAY say
-	-- they were watched working. Four bullets: C85, C88, C89 (tagged a judgment call, the
-	-- fourth — `faq.md` and the fix list move with it), then the three retirements in one
-	-- line. ⛔ The wording pass (`reports/still-needed/WORDING_RULED.md`, 12 rows re-worded)
-	-- is NOT in here: a wording correction is not a game repair (outbox, Held §Change note).
-	-- ⛔ Nor is the `Fix_StaleReservations` pcall hardening or C90's apply-success guards —
-	-- no player-visible behaviour, no count. Count word UNCHANGED at Forty-nine: −3 retired,
-	-- +3 added, re-derived from `grep -c '^??? ' content/fix-list.md` = 49, not carried.
-	-- ⭐ REWRITTEN 2026-09-16 for v11 (`release_prompt.md` §1). All three additions are
-	-- `tested-attended` 2026-09-16, so the note MAY say watched working — scoped to what was watched:
-	-- C93's reload recovery (a ranch built after the law is NOT claimed tested), C96's Seeker flight
-	-- (the RC Generator is not named), C95's automatic draft (tagged a judgment call, the fifth).
-	-- The count sentence is re-derived: fix list 49 → 52.
-	-- ⭐ REWRITTEN 2026-09-17 for v12 (`release_prompt.md` §1). ⛔ NOT APPENDED — the v11 note above
-	-- was posted to both stores at v11 and keeping any of it would post a duplicate. Two entries, and
-	-- they are NOT equally proven, so this note deliberately does not put them under one "all tested"
-	-- banner the way v11's could: C95 is `tested-attended` 2026-09-17 (three legs, owner at the
-	-- keyboard, 0 Lua errors) and MAY say watched working; C102 is desk-only and says plainly that it
-	-- has not been. ⚖️ Both of the owner's 2026-09-17 waivers are stated rather than dropped quietly:
-	-- the train return (C95) and the positive live reroute (C102).
-	-- ⚠️ The first entry says the v11 restriction is GONE on purpose. v11's CHANGELOG told players
-	-- that habitat residents are left out of automatic crews; a player who read it and then saw one
-	-- drafted would read this version as having broken it back.
-	-- ⭐ SHIPPED TEXT IS THE OWNER'S BOX TEXT, not the tree draft — the third time, after v9 and v11
-	-- (`RELEASE_HISTORY.md`, v11: *"Kept as shipped, as at v9."*). The line *"Not watched yet: a crew
-	-- that comes home by train."* is present at `16445b6` and absent from the v12 writeback; the
-	-- serializer strips comments and rewrites values, it does not delete a sentence from the middle
-	-- of a field, so it was edited in the Mod Editor box at the upload sitting. Kept as shipped: this
-	-- file records what posted, never what was drafted. Drafted text: `git show 16445b6:metadata.lua`.
-	-- ⚠️ One consequence, reported to the owner at close-out 2026-09-17 rather than repaired.
-	-- `RELEASE_OUTBOX.md` ruled that the public words must say plainly that NEITHER the train return
-	-- nor the live C102 reroute was watched in play. C102's sentence survived; C95's train sentence
-	-- did not, so the storefront change note carries only half of that disclosure. The other half is
-	-- still public on the fix list (`content/fix-list.md`, the habitat row's "Worth knowing"), which
-	-- is where a reader is sent for detail — but it is no longer where the ruling put it.
-	-- ⛔ Do not "repair" this string in place. `last_changes` is a PER-VERSION changelog entry that
-	-- is already posted to both portals; rewriting it does not edit the posted entry, it posts a
-	-- duplicate under the next version (see the three consequences above).
-	-- ⭐ REWRITTEN 2026-09-19 for v14 (`release_prompt.md` §1). ⛔ NOT APPENDED — v13's note is
-	-- posted on both stores. One entry, C108 (Wildfire cure). The pack booted clean in game
-	-- (owner, 2026-09-18) but nobody has watched an infected colonist visit a medical building,
-	-- and the owner skipped that check, so the note says so plainly rather than "checked in a
-	-- running game". Count re-derived: `grep -c '^??? ' content/fix-list.md` = 55.
-	-- ⭐ SHIPPED TEXT IS THE OWNER'S BOX TEXT (v14), not the tree draft — as at v9, v11 and v12. The sentence
-	-- "It loads cleanly in a running game; the cure itself has not been watched yet." is present at
-	-- `f7f6ffc` and absent from the v14 writeback (Steam's Sep 19 @ 7:35am note reads without it), so it
-	-- was edited in the Mod Editor box at the upload sitting. Kept as shipped: this file records what
-	-- posted, never what was drafted. Drafted text: `git show f7f6ffc:metadata.lua`.
-	'last_changes', "One repair added.\n\n-Wildfire cure — NEW.\nThe problem: once the Wildfire cure was found, infected colonists never went to a medical building for it, so the mystery could not finish. The 1.1.0 game pays a dome's medical care to its colonists at home, so under a Medical Center they never fell ill enough to be sent.\nThe fix: once the cure is found, an infected colonist's daily outing is a visit to a medical building, where they are cured.\n\nThe fix list goes from fifty-four to fifty-five.",
+	-- ⇒ three consequences. (1) REWRITE IT WHOLESALE BEFORE EVERY upload, never append,
+	-- or the next upload posts a duplicate entry under a new version. (2) Keep it TERSE
+	-- — the house style on both stores is a dashed line or two. `lines = 3`
+	-- (`Mod.lua:254`) is the Ged text-box HEIGHT and truncates nothing, so more bullets
+	-- are allowed where disclosure needs them: terseness loses to disclosure, never the
+	-- other way round. (3) It is HISTORICAL — it describes the version it ships with,
+	-- forever, so never write it in the present tense of the pack as a whole.
+	-- ⛔ DO NOT "REPAIR" THIS STRING IN PLACE after an upload. Rewriting it does not
+	-- edit the entry already posted; it posts a duplicate under the next version.
+	--
+	-- Standing content rules:
+	-- ⛔ No fix ids, no module names, no load-order advice, no other mod named
+	--   (EF-054, FIX_POLICY §8).
+	-- ⛔ No carried count. The one number this note may state is the fix-list total, and
+	--   it is RE-DERIVED in the same commit with `grep -c '^??? ' content/fix-list.md`
+	--   — never carried, never arithmetic on a previous total. The judgment-call count
+	--   is recounted the same way (`grep -c '^??? question'`), never from a comment.
+	-- ⛔ A note that says "Fixed" is a CLAIM, false until we have confirmed it ourselves
+	--   (owner rule 2026-09-08). Say what was watched; say plainly what was not.
+	-- ⚠ Player-visible LOSSES are STATED, not dropped quietly — a retirement, a
+	--   narrowed fix or a known issue belongs in the note the player actually reads.
+	-- ⛔ A defect in one of OUR OWN fixes, found and repaired before it ever reached a
+	--   player, is deliberately ABSENT: naming it would describe a problem nobody had.
+	--   (Ruled for F107.)
+	-- ⛔ Do NOT resurrect the withdrawn low-Food-warning loss claim: 1.1.0 REPLACED both
+	--   warnings (`StarvingColonists`, `MaintenanceStuckBuildings`), so telling players
+	--   they now get none is FALSE.
+	-- Licence for editing this string: the owner's standing 22b word ("change any
+	-- wordings to their accurate versions"); text-only, no behaviour. The editor/version
+	-- rail (`release_prompt.md § Release rails`) leaves the version bump to the upload
+	-- sitting — never hand-set a version field here.
+	--
+	-- ⭐ SHIPPED TEXT IS THE OWNER'S BOX TEXT, not the tree draft — v9, v11, v12 and v14
+	-- all differ from what was drafted here, because the owner edits the Ged box at the
+	-- upload sitting. The serializer strips comments and rewrites values; it does not
+	-- delete a sentence from the middle of a field. So after an upload this file records
+	-- WHAT POSTED, never what was drafted; the draft is in the pre-upload commit.
+	--
+	-- ⭐ WRITTEN 2026-09-23 for v15 (`release_prompt.md` §1, from `RELEASE_OUTBOX.md`).
+	-- The owner's framing (2026-09-23) leads with the vendor rather than the subtraction:
+	-- the 1.1.1 patch repaired these bugs, so the pack stops carrying its own versions.
+	-- The number is FIX-LIST ROWS removed, re-derived from the file (55 -> 38, seventeen),
+	-- not the sixteen retired modules — module names are not public, and one module can
+	-- hold one row, two, or none. Track salvage and the vacuum walk MAY say they were
+	-- watched working (retail, owner at the keyboard, 2026-09-23, phases 2a/2b); the
+	-- clogged-building rescue may NOT — its repair path is unexercised, so the note states
+	-- its new scope and claims nothing about having watched it. The Outside Ranch line is
+	-- the owner's ruled wording, carried because the retirement leaves that residue and
+	-- the owner ruled it documented rather than fixed.
+	'last_changes', "The 1.1.1 patch fixed a lot of what this pack was fixing.\n\n-The developers repaired seventeen of the bugs on the fix list in the 1.1.1 patch, so the pack's own versions of those are removed and the game's fixes do the work.\n-Track salvage and the vacuum walk between domes are rebuilt on the new game code, and both were watched working on it.\n-The dust-storm clog repair now only rescues a building already stranded in a save from before 1.1.1; the game handles the rest itself.\n-Known issue: if your Outside Ranch still looks closed after terraforming opens your domes, salvage it and rebuild it once and it will come back open. Appearance only — nothing you produced is stranded.\n\nThe fix list goes from fifty-five to thirty-eight.",
 	-- the packer includes EVERYTHING recursively minus this list (Mod.lua:250-256,
 	-- GedModEditor.lua:716-732) — without the extra patterns docs/, README.md,
 	-- .gitignore and .claude/ all ship inside the .hpk. LICENSE ships on purpose.

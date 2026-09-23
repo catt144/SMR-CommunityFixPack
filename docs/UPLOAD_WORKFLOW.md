@@ -91,7 +91,7 @@ The public-surface sweep maintains the backup copy below alongside its two canon
 ```
 Bug fixes for Surviving Mars: Relaunched.
 
-Fifty-five repairs, each one written up on the fix list with what you would
+Thirty-eight repairs, each one written up on the fix list with what you would
 have seen and what was actually wrong. Every one targets something the game's
 own code gets wrong — the code says one thing, does another, and the fix makes
 it do what it says. It fixes bugs; it does not rebalance the game. Preferences
@@ -102,12 +102,11 @@ deleted by salvaging a single hex, colonists suffocating on a walk between two
 domes, an artificial lake burying the rover that was building it.
 
 More of them you would never have blamed on a bug, because the game looked
-perfectly normal while the arithmetic underneath it was wrong — a reward for
-freeing the wisps that paid about a thousandth of what its own message promised,
-a researched breakthrough the game restored to only one of the three wind
-turbine types it covers, a track refund that paid a stub's worth of Metals
-however long the line was, a train travel-time figure that counted the platform
-wait twice.
+perfectly normal while the arithmetic underneath it was wrong — a researched
+breakthrough the game restored to only one of the three wind turbine types it
+covers, a track refund that paid a stub's worth of Metals however long the line
+was, a water saving a technology promised that four of the farms it names never
+received.
 
 And two of them repair things you cannot see at all today: real defects that
 the shipped numbers happen to hide, which another mod, a game patch or a DLC
@@ -119,13 +118,8 @@ SOME OF WHAT IT FIXES
 · Rocket loads of new arrivals died on their way to a dome.
 · New arrivals moved into a dome that was switched off, quarantined or without air.
 · A bed that fell vacant sat empty while colonists were homeless.
-· Night-shift colonists never came back to work after midnight.
-· A building clogged by a dust storm never started again.
-· An Outside Ranch under Open Domes left food where drones could not reach it.
 · Building an artificial lake buried the rover that built it.
 · Salvaging one piece of track deleted the whole line, and its trains with it.
-· Demolishing a station permanently deleted the trains parked there.
-· Meteor-damaged track could not be salvaged at all.
 · Automatic rockets and landers took off with nothing aboard.
 · A Jumbo Cave mystery could get stuck clearing waste rock and never complete.
 · The Philosopher's Stone mystery hung one step from the end.
@@ -206,11 +200,11 @@ heading, which is how the tool finds it.
 ```
 [h2]Bug fixes for [i]Surviving Mars: Relaunched[/i].[/h2]
 
-[b]Fifty-five repairs[/b], each one written up on the fix list with what you would have seen and what was actually wrong. Every one targets something the game's own code gets wrong — the code says one thing, does another, and the fix makes it do what it says. It fixes bugs; it does not rebalance the game. Preferences and features are deliberately not in it.
+[b]Thirty-eight repairs[/b], each one written up on the fix list with what you would have seen and what was actually wrong. Every one targets something the game's own code gets wrong — the code says one thing, does another, and the fix makes it do what it says. It fixes bugs; it does not rebalance the game. Preferences and features are deliberately not in it.
 
 Some of them you could hardly miss: an entire train line and every train on it deleted by salvaging a single hex, colonists suffocating on a walk between two domes, an artificial lake burying the rover that was building it.
 
-More of them you would never have blamed on a bug, because the game looked perfectly normal while the arithmetic underneath it was wrong — a reward for freeing the wisps that paid about a thousandth of what its own message promised, a researched breakthrough the game restored to only one of the three wind turbine types it covers, a track refund that paid a stub's worth of Metals however long the line was, a train travel-time figure that counted the platform wait twice.
+More of them you would never have blamed on a bug, because the game looked perfectly normal while the arithmetic underneath it was wrong — a researched breakthrough the game restored to only one of the three wind turbine types it covers, a track refund that paid a stub's worth of Metals however long the line was, a water saving a technology promised that four of the farms it names never received.
 
 And [b]two[/b] of them repair things you cannot see at all today: real defects that the shipped numbers happen to hide, which another mod, a game patch or a DLC could walk straight into.
 
@@ -220,13 +214,8 @@ And [b]two[/b] of them repair things you cannot see at all today: real defects t
 [*]Rocket loads of new arrivals died on their way to a dome.
 [*]New arrivals moved into a dome that was switched off, quarantined or without air.
 [*]A bed that fell vacant sat empty while colonists were homeless.
-[*]Night-shift colonists never came back to work after midnight.
-[*]A building clogged by a dust storm never started again.
-[*]An Outside Ranch under Open Domes left food where drones could not reach it.
 [*]Building an artificial lake buried the rover that built it.
 [*]Salvaging one piece of track deleted the whole line, and its trains with it.
-[*]Demolishing a station permanently deleted the trains parked there.
-[*]Meteor-damaged track could not be salvaged at all.
 [*]Automatic rockets and landers took off with nothing aboard.
 [*]A Jumbo Cave mystery could get stuck clearing waste rock and never complete.
 [*]The Philosopher's Stone mystery hung one step from the end.

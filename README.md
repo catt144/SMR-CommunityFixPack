@@ -4,10 +4,12 @@ A bug-fix mod for Surviving Mars: Relaunched. Almost every fix repairs a
 **defect verified in the game's own shipped Lua** — the code says one thing,
 does another, and the fix makes it do what it says. No rebalancing, no
 features, no game files modified: everything is patched at runtime, in a
-mod-compatible way. This checkout targets game version **1.1.1.405907**; its
-patch response is awaiting the separate audit and owner play checks recorded in
-[the build report](docs/agent/reports/GAMEPATCH_1.1.1_BUILD_2026-09-23.md). Players still on
-**1.0.7.396349** are served by a separate frozen build, tagged
+mod-compatible way. This checkout targets game version **1.1.1.405907**. The
+1.1.1 patch repaired sixteen of the pack's fixes at source, so those modules are
+retired and three more were rebased on the new code:
+[the build report](docs/agent/reports/GAMEPATCH_1.1.1_BUILD_2026-09-23.md) and
+[the playtest plan](docs/agent/reports/PLAYTEST_PLAN_1.1.1_2026-09-23.md) hold the
+evidence and the limits. Players still on **1.0.7.396349** are served by a separate frozen build, tagged
 [`v5-game-1.0.7`](https://github.com/catt144/SMR-CommunityFixPack/releases/tag/v5-game-1.0.7).
 
 **Status: live on both stores** —
@@ -16,12 +18,11 @@ patch response is awaiting the separate audit and owner play checks recorded in
 
 ## What it fixes
 
-The surviving fix modules cover disasters and weather,
-colonists and domes, drones and logistics, buildings and economy, trains,
-rockets and asteroids, story sequences, and the numbers on your screen. Several
-of them also repair damage already sitting in your save when you load it. The
-judgment calls among the fixes are each disclosed on
-the mod page, with the reasoning.
+The surviving fix modules cover disasters and weather, colonists and domes,
+drones and logistics, buildings and economy, trains, rockets and asteroids, and
+story sequences. Several of them also repair damage already sitting in your save
+when you load it. The judgment calls among the fixes are each disclosed on the
+mod page, with the reasoning.
 
 The full player-facing list, one entry per fix, lives on the companion docs
 site: [the fix list](https://catt144.github.io/SMR-CommunityMods/fix-list/).
