@@ -98,22 +98,15 @@ Never keep an owner list here, and never rebuild an owed list from an older docu
 
 ### Agent work
 
-- **Game 1.1.1 is answered in code and playtested; the release is prepared and not fired.**
-  Three rebases and sixteen retirements shipped as `45578d4`, audited on a second vendor
-  (`e3a1613`), then playtested through phase 3 by the owner. Next action: fire
-  [release_prompt.md](release_prompt.md) on a fresh seat; it reads the batch from
-  [RELEASE_OUTBOX.md](RELEASE_OUTBOX.md) `Pending`, which carries the retirement list, the
-  owner's change-note framing (lead with the vendor, not the subtraction), the ranch
-  known-issue wording, and the trap that the player-facing count maps to
-  `content/fix-list.md` rows **by meaning** and is re-derived, never computed. Retail
-  evidence and everything deliberately not run are in
-  [PLAYTEST_PLAN_1.1.1_2026-09-23.md](../../reports/PLAYTEST_PLAN_1.1.1_2026-09-23.md);
-  its "Parked" section is owner-ruled low risk and **not agent-tracked**. Delete this
-  block once the release closes.
-- **One filing decision is open from that work.** The `Fix_OpenPastureStockpiles` removal
-  residue is homed in [C93](../../bugs/C93.md) and carried to players in the outbox, but
-  has no entry of its own, so it is not findable as a live defect from the bug index. The
-  owner ruled it documented rather than fixed; whether it also earns an `F` id is unasked.
+- **One filing decision is open from the 1.1.1 release (v15, closed 2026-09-23).** Deleting
+  `Fix_OpenPastureStockpiles` leaves a ranch it had pinned to the closed entity closed
+  forever, because vanilla swaps entities only when the Open Domes law *changes* state.
+  It is cosmetic — both entities carry all nine anchors — and the owner ruled it
+  documented rather than fixed, so it ships as a known issue (salvage and rebuild once).
+  The mechanism, the old-object-versus-new-object discriminator and the reason a load-time
+  sweep was refused are in [C93](../../bugs/C93.md); it has **no entry of its own**, so it
+  is not findable as a live defect from the bug index. Whether it earns an `F` id was
+  never asked. Close it by filing or by an owner ruling that C93 suffices.
 - **[C97](../../bugs/C97.md) carries ten known errors, not corrected.** They are preserved with
   citations in [C97_RECHECK.md](../../reports/C97_RECHECK.md). Do not write a fix or a control recipe from
   C97 until that report is applied; four of the ten propagate, including a code fence attributed to the
