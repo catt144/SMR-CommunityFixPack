@@ -254,3 +254,48 @@ phase 1 sessions were attended, so `SMRTest` did not run in them and the probe e
 is the two autorun legs alone. The on-leg carried Opt-In, so its error counts are not
 comparable to the off-leg's. Nothing here exercises the track or vacuum rebases, which
 are phase 2.
+
+### Phase 2a · Track salvage (F124) — PASS, 2026-09-23
+
+Log `Mars.exe-20260923-13.59.45-6aad2d75.log`. Fixture built with the TestKit World
+page's meteor leaf (the real vendor path — `Lua/Meteors.lua:718` is the only caller of
+`BreakTrackElement`), not `CheatBreakTrack`, so the strike could be placed deliberately.
+Running it also witnesses a World leaf owed in `tools/SMRTK.md` "Still owed".
+
+| step | `SMRTest.ReportBrokenTrack()` |
+|---|---|
+| baseline | 0 site(s); 0 non-numeric `node_idx` |
+| after meteor | 8 site(s); 8 non-numeric `node_idx` |
+| after salvage, repairs complete | 0 site(s); 0 non-numeric `node_idx` |
+
+`tracks 11 · elements 141 · orphaned elements 0`. **No error-shaped lines** across the
+whole operation.
+
+The salvage was taken on an undamaged element inside the damaged run, so the split
+separated repair sites onto both resulting tracks — the only geometry that reaches the
+vendor's rehome block (`TrackElement.lua:598-614`, *"repair sites are not in
+all_elements, so follow each surviving broken element to its new track"*). Salvaging a
+damaged segment directly short-circuits at `Fix_TrackSalvageWipe.lua:52-54` and never
+exercises it.
+
+What the result proves, in order of strength:
+
+1. **`orphaned elements 0`** — the split's safeguard loop assigned every element to a
+   track. This is the failure that would sit silently in a save rather than throw.
+2. **8 → 0 repair sites, completed by drones** — each site followed its damaged element
+   onto the correct new track *and* kept a working construction group. A site that lost
+   its `repair_cgs` entry would stall at a non-zero count forever; the count reached zero.
+3. **Drones left the salvaged stretches alone** while repairing the damaged ones, which
+   is the correct split of intent between removal and repair.
+4. **The retirement of `Fix_BrokenTrackSalvage` is validated in retail.** That module
+   existed only to stamp `node_idx` at break time. The entire cycle — meteor, split,
+   rehome, repair, completion — ran without it.
+
+⚠️ **The TestKit's F45 message is stale on 1.1.1 and should be reworded.** It prints
+"N with a non-numeric node_idx (track unsalvageable)", but the detector counts repair
+sites (`is_construction_site and IsValid(el.broken)`), and both the vendor body
+(`TrackElement.lua:485-487`) and the rebase (`Fix_TrackSalvageWipe.lua:67-69`) exclude
+repair sites from the ordering before any `node_idx` check runs. A non-numeric
+`node_idx` on a repair site therefore blocks nothing. The orchestrator seat drew the
+wrong conclusion from that wording once during this run before checking the source; the
+next reader will too.
