@@ -98,15 +98,6 @@ Never keep an owner list here, and never rebuild an owed list from an older docu
 
 ### Agent work
 
-- **One filing decision is open from the 1.1.1 release (v15, closed 2026-09-23).** Deleting
-  `Fix_OpenPastureStockpiles` leaves a ranch it had pinned to the closed entity closed
-  forever, because vanilla swaps entities only when the Open Domes law *changes* state.
-  It is cosmetic — both entities carry all nine anchors — and the owner ruled it
-  documented rather than fixed, so it ships as a known issue (salvage and rebuild once).
-  The mechanism, the old-object-versus-new-object discriminator and the reason a load-time
-  sweep was refused are in [C93](../../bugs/C93.md); it has **no entry of its own**, so it
-  is not findable as a live defect from the bug index. Whether it earns an `F` id was
-  never asked. Close it by filing or by an owner ruling that C93 suffices.
 - **[C97](../../bugs/C97.md) carries ten known errors, not corrected.** They are preserved with
   citations in [C97_RECHECK.md](../../reports/C97_RECHECK.md). Do not write a fix or a control recipe from
   C97 until that report is applied; four of the ten propagate, including a code fence attributed to the
