@@ -361,9 +361,28 @@ Resourcepile8 112 112
 Resourcepile9 113 113
 ```
 
-All three spots resolve to real ranges; none returns `-1`. The Outside Ranch open entity
-does carry spots 7–9, so the asset half of the Open Pasture gate holds and retiring
-`Fix_OpenPastureStockpiles` was safe. This closes the one correction the audit raised
+All three spots resolve to real ranges; none returns `-1`.
+
+**The control was then shown able to fail**, because the whole reading rests on
+`GetSpotRange` being capable of returning `-1`:
+
+```
+bogus spot        -1 -1            GetSpotRange("OpenPasture_Open","idle","Resourcepile99")
+closed 7..9      109 110 111 111   OpenPasture, the known-good nine-anchor reference
+```
+
+(The closed line prints four numbers because only the last call in a Lua argument list
+expands both return values: 7 → 109, 8 → 110, 9 → 111,111.)
+
+So the Outside Ranch open entity does carry spots 7–9, where the deleted module's own
+probe *required* them to be **absent** from `OpenPasture_Open`. The vendor repaired the
+asset; the asset half of the Open Pasture gate holds and retiring
+`Fix_OpenPastureStockpiles` was safe.
+
+Note for a future reader: the live ranch may still render closed, as the owner observed.
+That is irrelevant to this gate. `GetSpotRange` reads the entity definition, not a live
+object, and a ranch only swaps to the `_Open` skin once the Open Domes law runs
+`SetOpenAirBuildings`. This closes the one correction the audit raised
 (`GAMEPATCH_1.1.1_AUDIT_2026-09-23.md`, C93), which had found the retail decline proved
 the entity changed at *one or more* of the three rather than that all three exist.
 
