@@ -60,6 +60,34 @@ What this settles, with no attention from you: all sixteen retirements load clea
 module is orphaned or double-registered, the module census reads 36, and the probe suite
 runs. If this is clean, the retirements are done being a ship risk.
 
+## Two different "old saves" — do not conflate them
+
+Phases 1 and 4 move on different axes, and only one of them is ship-blocking.
+
+| axis | what varies | where |
+|---|---|---|
+| **Pack version** | a save written with the old 52-module pack, loaded with the new 36-module pack, **both on game 1.1.1** | Phase 1, ship-blocking |
+| **Game version** | a save written on game **1.1.0**, loaded on 1.1.1 — what F121's provenance condition keys on | Phase 4, post-ship |
+
+**A 1.1.0 save does load on 1.1.1.** The only revision gate refuses a save whose
+`required_lua_revision` *exceeds* the running game's (`CommonLua/Savegame.lua:228-230`,
+`:970`), and `config.SavegameRequiredLuaRevision` is **402200 on both builds**
+(`Lua/Config/config.lua:179`, identical in the archived 1.1.0.403908 and 1.1.1.405907
+trees). 1.1.1 did not raise the bar, so the block is forward-only: a 1.1.1 save will not
+open on 1.1.0, but the reverse is fine.
+
+⚠️ **But each pre-1.1.1 save is a one-shot fixture.** Loading it converts it — the save
+metadata is rewritten with the current revision on the next write
+(`CommonLua/Savegame.lua:775`), which is the very thing F121's provenance condition
+keys on (`Code/Fix_CloggedBuildingRelease.lua:97-98`, `lua_revision < 405907`).
+**Copy the file before loading it**, or the fixture is spent and cannot be re-run.
+
+Measured by the audit seat on 2026-09-23, reading five of the owner's saves as bytes:
+1.1.1 saves carry `lua_revision 405907` with `orig_lua_revision 403908`; the 09-17
+`C95*` saves carry `403908`. So the pre-1.1.1 fixtures in `saves/game/` are real and the
+discriminator is live — candidates run 09-11 to 09-20, including `F119stuck` and the
+`C95*` set.
+
 ## Phase 1 · The one test that cannot be skipped — ~10 minutes
 
 **Load a save made with the old pack under the new pack.** Every existing user performs
@@ -67,8 +95,9 @@ this the moment they update, automatically, without choosing to. Sixteen modules
 just disappeared from under their saves. It is the highest-blast-radius path in the
 release and it has never been exercised.
 
-`saves/game/` holds fixtures written with the old pack, including `Autosave Sol 493`
-(today, 12:35) and `Autosave Sol 31(2)` (today, 11:42).
+`saves/game/` holds fixtures written with the old pack on game 1.1.1, including
+`Autosave Sol 493` (today, 12:35) and `Autosave Sol 31(2)` (today, 11:42). These are the
+pack-axis fixtures; they are already 1.1.1 and do not need copying for this phase.
 
 Load it, let it run a few sols, and watch for errors and for track or routing state that
 looks wrong. Then do the reverse — save with the repaired pack, remove the pack, restart
@@ -105,12 +134,22 @@ Each is a single observation. Do them in whatever game state phase 2 leaves you 
 logged it declining — so it cannot harm a current player. It only acts when loading a
 save written before 1.1.1 that carries a stuck building. Testing it properly needs a
 pre-1.1.1 fixture with that exact state, which is slow to construct and narrow in reach.
+**Copy any candidate fixture before loading it** (see "Two different old saves"): the
+first load spends it, and this is the one phase where that matters.
 
-Its builder also made the departure with the largest unexamined surface: it added a
-saved-provenance condition resting on `CommonLua/Savegame.lua:775` rewriting the saved
-revision, and **no save file was inspected**. That is worth resolving — but it is a
-desk question about save metadata, not a reason to hold a release that fixes silent save
-damage for everyone.
+Its builder made the departure with the largest unexamined surface: a saved-provenance
+condition resting on `CommonLua/Savegame.lua:775` rewriting the saved revision, with **no
+save file inspected**. The audit seat inspected five on 2026-09-23 and the condition
+holds. `orig_lua_revision` is **not** a usable alternative key: it records the colony's
+origin, not the event's, so a fresh `BuildingClogged` firing on 1.1.1 inside a colony
+started on 1.1.0 writes the same saved fields as a genuinely stranded one, and keying on
+origin would release it and cut the vendor's one-hour disable short. `lua_revision <
+405907` is the widest safe reach.
+
+Its real-world reach is narrower than that suggests, which is the other reason this is
+post-ship: **with the pack present at the first 1.1.1 load, a stranded building is healed
+on that load, before the rewrite.** The under-heal only bites a player who updated, saved
+once *without* the pack, and noticed afterwards.
 
 Also here: the thirteen benign retirements' individual behaviours, which revert to
 vendor code and have their desk controls.
