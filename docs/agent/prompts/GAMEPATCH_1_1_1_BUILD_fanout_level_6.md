@@ -6,7 +6,9 @@ coordinator reconciles `items.lua`, `metadata.lua`, the module lists, the TestKi
 inventory and the generated counts **once**, against the final state, instead of twice
 against two intermediate ones.
 
-The dispositions are settled and are not reopened here. The source audit is
+The dispositions are settled as the default, and are not reopened on preference — but
+they are claims, and a read that contradicts one wins. See "Questioning the record".
+The source audit is
 `docs/agent/reports/GAMEPATCH_1.1.1.405907_2026-09-23.md`; the adjudication that
 corrected it is `docs/agent/reports/GAMEPATCH_1.1.1_ADJUDICATION_2026-09-23.md`; the
 severity ranking is `docs/agent/reports/FULL_BODY_PRIORITY_2026-09-23.md`. Re-derived
@@ -31,6 +33,34 @@ End state: a pack with no retired module loaded, registered, probed or named as
 shipped; three rebased modules that preserve their still-needed behaviour without
 overwriting the vendor's 1.1.1 work; every generated count reconciled once; and a build
 report that separates what was measured from what is still owed to play.
+
+## Questioning the record
+
+The owner's instruction, 2026-09-23: **you are allowed to question this.** The whole
+1.1.1 response — source audit, retail A/B, adjudication, ranking and this brief — was
+produced in a single day. That pace buys speed by spending review depth, and the owner
+would rather hear a challenge than have you build over a mistake.
+
+So: the three reports and this brief are authored claims, not authority. Only the
+owner's decisions are authority. Where your own read contradicts a premise here, your
+read wins and the record is what changes. Route it by consequence:
+
+- **Unsafe** — a deletion or rebase would be wrong if the premise is wrong: stop that
+  unit and report (stop 2 below). Continue the others.
+- **Wrong but not unsafe** — a disposition, a priority, a scope: do the rest of the job,
+  and flag it by name with the evidence. Do not silently build over it, and do not
+  silently follow it either.
+- **A wrong detail** — a line number, a mis-stated reason, a premise that names the
+  wrong consumer: correct it in the record as you go and say you did.
+
+Reopen on evidence, never on taste. A cleaner shape you would have chosen is a
+SUGGESTION, not a defect.
+
+The thinnest places, so you know where to look hardest: the 33 KEEP rows got a
+surface-level pass only, and a KEEP is a this-patch judgement rather than a standing
+clearance; the severity ranking rests on one seat's reads; the completed retail A/B was
+not single-variable and neither leg met its own zero-error acceptance, so anything
+resting on it is bounded; and F126 was filed at P3 on the day, which the owner may raise.
 
 ## Delegation
 
@@ -60,6 +90,10 @@ commits; the units below hold the reading and the module bodies.
   on 1.1.0) and `Colonist:MigrateStep` (:2155, which does not exist on 1.1.0), plus 15
   call sites tree-wide. Re-derive those spans, then hand the span. A unit that reads
   `Colonist.lua` whole has made the job harder, not safer.
+- **Tell every unit it may question its premise**, on the terms above — the units doing
+  the reads are the ones positioned to find what the audits missed. Ask each for its
+  challenges alongside its result, and carry them up rather than absorbing them: a
+  challenge you overrule is still reported, with your reason.
 - Clear each result with one check aimed at what it rests on, rather than redoing it. A
   subagent's account of machinery outside its own task — why a gate went red, what an
   exit code meant — is the weak part; diagnose that yourself.
