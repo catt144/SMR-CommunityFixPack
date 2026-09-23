@@ -404,3 +404,46 @@ body). To close it in retail, grant tech points with the handoff's fixture and r
 GeneForging on a scratch copy, then re-read.
 
 **F122 and F126** are visual and produce no log output; record them from observation.
+
+### FINDING — removal residue from `Fix_OpenPastureStockpiles`, 2026-09-23
+
+Discovered in retail during phase 3, on a colony with Open Domes enacted. **Not filed as
+an entry yet; this is the evidence record.**
+
+Observed, in order:
+
+| step | result |
+|---|---|
+| Ranch under Open Domes, new pack | renders **closed** |
+| `print(OpenAirBuildings)` | `true` — the law *is* enacted |
+| `r:GetEntity()` | `OpenPasture` (closed) |
+| `r.open_air` / `r:GetCurrentSkin()` | `true` / `OpenPasture_Open` — both say open |
+| forced `r:ChangeSkin("OpenPasture_Open", palette)` | **opens** — state is recoverable |
+| destroy and rebuild the ranch | **opens** correctly |
+
+An old ranch stays shut; a newly built one opens. That is the discriminator, and it rules
+out a vanilla 1.1.1 defect: a ranch placed now takes `OpenAirBuilding:OnPlace`, which
+applies the open skin, while the pre-existing object is never revisited.
+
+**Mechanism (inference, not measured).** Vanilla swaps entities only when
+`SetOpenAirBuildings` fires on the law *changing* state, and it early-returns when the
+flag already matches (`OpenAirBuilding.lua:109-111`). Loading a save whose law is already
+enacted therefore never re-fires the swap. Under vanilla that is harmless, because the
+ranch was opened when the law passed and stays open. It was closed here only because
+`Fix_OpenPastureStockpiles` forced the closed entity for both sides — C93 records that as
+its *"declared tradeoff"*. Delete the module and nothing ever reopens what it pinned shut.
+
+**Impact.** Cosmetic only: the closed entity carries spots 7–9 (109/110/111), so all nine
+anchors exist and no pile strands — the old module's tradeoff still holds after its
+removal. But it is permanent on affected saves and not self-correcting; a player cannot
+clear it without rebuilding the ranch or toggling the law. Bounded to saves that ran the
+old module with Open Domes enacted. New ranches are unaffected.
+
+**Why it matters beyond the cosmetics.** Both the build report and the audit state that
+removal residue was recorded for every changed exposed site. This is removal residue that
+neither caught, on a module whose retirement was already the one correction the audit
+raised (C93/ck211). The gap is in the method, not only in this module.
+
+**Not claimed:** no numeric pile reconciliation was read on the reopened ranch, and the
+mechanism above is an inference from source plus the new-versus-old discriminator, not a
+traced load sequence.
