@@ -111,23 +111,6 @@ Home: `docs/archive/PLAYTEST_ARCHIVE.md`
 
 ## Run
 
-### ck210 · opened 2026-09-23
-When the audit is clear, run these triaged retail checks; ship after phase 3, while the old build still reverts fixes.
-- Phase 0, unattended: two autorun legs, single-variable (pack the only difference), then `logscan.py` each log.
-- Phase 1, ~10 min: load an old-pack save under the new pack; then save new, remove pack, full restart, load.
-- Phase 2, hands-on: curved/short salvage with a repair site spanning the split; direct + intermediate vacuum routes.
-- Phase 3, seconds each: F123 returns 50 not 100; F122 empty dome not red; F126 no founder notification.
-- Phase 4, post-ship: F121's pre-1.1.1 clogged fixture; it is inactive on 1.1.1 and harms no current player.
-Home: `docs/agent/reports/PLAYTEST_PLAN_1.1.1_2026-09-23.md`
-
-### ck211 · opened 2026-09-23
-When a 1.1.1 colony is open, read the three Outside Ranch spots that decide whether retiring C93's fix was safe.
-- Console: `GetSpotRange("OpenPasture_Open", "idle", "Resourcepile7")`, then the same for spots 8 and 9.
-- A first value of `-1` means that spot is still missing from the open entity.
-- The 2026-09-23 retail decline proved the entity changed at one or more of the three, not that all three exist.
-- All three present: the retirement stands. Any `-1`: reopen C93 as FIX; nothing native re-homes piles at runtime.
-Home: `docs/agent/bugs/C93.md`
-
 ### ck205 · opened 2026-09-19
 When you next have the site open, send one test report from its *Bug reports & problems* page.
 - Pick both dropdowns, write a line, and attach a small `.txt` or `.log`.

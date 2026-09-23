@@ -447,3 +447,41 @@ raised (C93/ck211). The gap is in the method, not only in this module.
 **Not claimed:** no numeric pile reconciliation was read on the reopened ranch, and the
 mechanism above is an inference from source plus the new-versus-old discriminator, not a
 traced load sequence.
+
+## Parked — owner's ruling 2026-09-23, NOT agent-tracked
+
+The owner read the un-run legs below as **low risk** and ruled that they be recorded here
+rather than held on the checklist: *"those can be recorded that we didn't run them in a
+pull only source but they aren't going to stay in the task list permanently."*
+
+⛔ **Not agent-tracked.** No session opens these from a status read, adds them to a task
+list, or treats them as owed work. They are here so a later reader knows what this
+playtest did *not* establish. Only the owner reopens one.
+
+| not run | why it reads low risk |
+|---|---|
+| **F122** — empty dome overview not red | Module deleted; behaviour reverts to the vendor body, which gates red on `#colonists > 0`. Loud and cosmetic if wrong. |
+| **F126** — no founder-trait notification | Vendor deleted the `FounderGainsTrait` preset itself, so there is nothing left to fire. |
+| **F123 retail** — GeneForging returns 50 not 100 | The retail read was vacuous (neither technology researched). Rests on the audit's two-sided desk control. Needs the tech researched on a scratch copy. |
+| **F125 cancel-mid-route** | The rebase is input-only wrappers; cancellation stays in the native body. |
+| **F125 no-passage fallback** | Exercised incidentally — Tesla has no passage to either dome and routed correctly — but never run as a deliberate control. |
+| **Reopened ranch pile reconciliation** | No numeric count read. Both entities carry nine anchors, so stranding is not the risk. |
+| **F121 repair path** (was phase 4) | Inactive on 1.1.1, so it cannot touch a current player. Needs a pre-1.1.1 save holding an actually stranded building; the owner's saves were read for revision fields only. |
+
+## Desk hygiene found during the playtest — not blocking, no owner action
+
+- **TestKit F45 message is wrong on 1.1.1.** `SMRTest.ReportBrokenTrack` prints
+  "N with a non-numeric node_idx (track unsalvageable)". The count is of repair sites,
+  which both the vendor body (`TrackElement.lua:485-487`) and the rebase
+  (`Fix_TrackSalvageWipe.lua:67-69`) exclude from the ordering before any `node_idx`
+  check, so it blocks nothing. This seat drew the wrong conclusion from that wording
+  before reading the source; the next reader will too.
+- **`tools/logscan.py` under-reports.** It matched only the `[nil index]` shape and missed
+  `FactionDomeSizeGate`'s `rawget` error, reporting 6 error-shaped lines where the probe
+  summary said 4 ERROR. The probe summary is authoritative.
+- **`metadata.lua:194`** cites `Fix_TrainCargoDumping.lua:89`, a file this release deleted.
+  It is a comment in a shipped file.
+- **The ranch residue finding above has no bug entry**, so it is not reachable from the
+  bug index — only from this report and the outbox note.
+- **`tools/SMRTK.md` "Still owed"** can retire its World-leaf row: the meteor leaf was run
+  in retail on 2026-09-23 and produced the phase 2a fixture.
