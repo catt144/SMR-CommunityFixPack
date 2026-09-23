@@ -14,6 +14,16 @@ the sweep in `docs/agent/prompts/perma/STATE_EVICTION.md` clears what ages out. 
 
 ## Decide
 
+### ck207 · opened 2026-09-23
+For future patches, adopt 12 flagged modules / 1,000 changed declarations and stop this deep sweep here?
+- This patch routed FULL at M=43, T=315, B=0, D3=0; its reads found 3 FIX, 15 REMOVE and 34 KEEP.
+- Proposed limits: keep 12 modules and 1,000 declarations. The module limit correctly forced the full read;
+  this patch did not exercise the declaration limit independently.
+- Proposed depth: no broader tree-wide sweep now. Every module and each flagged system seam was read;
+  finish the named FIX/REMOVE work and A/B first.
+- A broader sweep is estimated at 2–3 focused agent sessions plus another owner A/B; this is not measured.
+Home: `docs/agent/reports/GAMEPATCH_1.1.1.405907_2026-09-23.md`
+
 ### ck203 · opened 2026-09-17
 C83 sent the reporter's botanists to a habitat that refuses them (C106): pursue it or drop it?
 - They lived, homeless inside or beside the habitat; without C83 they would have walked to a dead dome.
@@ -100,6 +110,15 @@ Do you spend a profiling sitting on FR-3 (frame skip and stutter)?
 Home: `docs/archive/PLAYTEST_ARCHIVE.md`
 
 ## Run
+
+### ck208 · opened 2026-09-23
+When you're ready, run the unattended 1.1.1 A/B: Fix Pack off, then on; keep TestKit on for both.
+- Copy-paste for each leg: `& "C:\Program Files (x86)\Steam\steam.exe" -applaunch 3215050 -smrautorun`
+- Let each leg quit itself before saying it is done; do not copy or inspect the log while the game is running.
+- Acceptance: boot census, `DispatchReach`, and `SMRTest.RunAll()` finish with no error-shaped line.
+- The on-leg also settles whether Open Pasture's repaired entity makes its module decline.
+- Tell the agent when each leg has exited; it will locate the finished log and run `python tools/logscan.py <log>`.
+Home: `docs/agent/reports/GAMEPATCH_1.1.1.405907_2026-09-23.md`
 
 ### ck205 · opened 2026-09-19
 When you next have the site open, send one test report from its *Bug reports & problems* page.

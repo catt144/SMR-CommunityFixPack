@@ -365,13 +365,12 @@ def pin(src, path, selector):
 # anybody trusts a run.
 # --------------------------------------------------------------------------- #
 
-# Every game-side case below is a real event in the 1.0.7 -> 1.1.0 update, not a
-# contrivance. ⚠️ ONE HONEST LIMIT, stated rather than papered over: the 1.0.7
-# tree is GONE from disk (EF-075), so no true 1.0.7-vs-1.1.0 body pair exists to
-# hash. BODY-CHANGED is therefore exercised on (i) a real body edit in our own
-# tree -- F116's in-body repair at add94b3, a genuine "the body under the pin
-# moved" event -- and (ii) a hash negative control. The MECHANISM is proven; a
-# game-side 1.0.7 pair is not available to prove it on.
+# The RED game-side cases below are real events from the 1.0.7 -> 1.1.0 update.
+# The OK row is deliberately only a patch-stable positive control for a matching
+# pin and a matching scoped expression: a future game patch is allowed to repair
+# the gameplay defect that happened to be present when this self-test was built.
+# BODY-CHANGED is also exercised on a real body edit in our own tree -- F116's
+# in-body repair at add94b3 -- plus a hash negative control.
 
 FIXTURES = {
     # 1. DEFECT-GONE, real, game-side: one of the 32. 1.1.0 deleted the Food and
@@ -388,14 +387,14 @@ FIXTURES = {
     "Fix_SelftestTargetAbsent.lua": [
         "-- SRC: Lua/Units/Colonist.lua Colonist:UpdateSatisfaction sha256=%(zero)s",
     ],
-    # 3. OK control, real: the live body pinned to its own hash, with a defect
-    #    expression that IS still shipped (F46 is not fixed in 1.1.0 -- the
-    #    unload is still computed from the station cap alone, with no
-    #    IsResourceEnabled check anywhere). Without this row a tool that
-    #    returned RED on everything would also "pass".
+    # 3. OK control: the live body pinned to its own hash, with an expression
+    #    matching the selected declaration itself. The selector already proves
+    #    that declaration exists, so this stays a positive regex control across
+    #    patches without asserting that a historical gameplay defect remains.
+    #    Without this row a tool that returned RED on everything would "pass".
     "Fix_SelftestOk.lua": [
         "-- SRC: Lua/Units/Train.lua Train:UnloadAll sha256=%(train_sha)s",
-        "-- DEFECT: Min\\(carried,\\s*station_cap\\)",
+        "-- DEFECT: ^function\\s+Train[:.]UnloadAll\\(",
     ],
     # 3b. THE REFACTOR TRAP, kept as a fixture because writing this file walked
     #     straight into it. F46's 1.0.7 phrasing was
