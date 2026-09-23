@@ -118,11 +118,6 @@ Never keep an owner list here, and never rebuild an owed list from an older docu
   not exist and no task has had authority to create it. Body in
   [DOC_EDITING_SKILLS_AUDIT.md](../../reports/DOC_EDITING_SKILLS_AUDIT.md) (Deferred moves) and
   `.claude/PENDING_MOVES.md`.
-- **Wildfire cure, awaiting a check (2026-09-18).** The owner fired the one-off
-  `WILDFIRE_CURE_INVESTIGATION_high.md` in another session; it landed as [C108](../../bugs/C108.md)
-  and removed itself. The owner will bring the orchestrator back to check its result. Check it at surface level: the entry's
-  control, the reach tier, and, if it built, a harness that FAILs the unfixed body in cold-boot order
-  ([EF-109](../../facts/EF-109.md)). Delete this block once checked.
 - **Drone "minimum safety state", owner deciding 2026-09-20.** The source read, the `rfSuspended`
   lever, what it cannot stop and the cheaper alternatives are in
   [DRONE_TASK_LEVERS.md](../../reports/DRONE_TASK_LEVERS.md). Nothing is built, and the owner stopped
