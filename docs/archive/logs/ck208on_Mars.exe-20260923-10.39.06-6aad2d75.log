@@ -1,0 +1,991 @@
+					Render 0:00:00:006
+*** executable info
+Timestamp:     	6aad2d75
+Date:          	Fri Sep 18 08:24:21 2026
+Command line:  	-smrautorun
+Compiler:      	195136247, 142 (VS 2019) or newer
+
+
+*** hardware info
+CPU name      	Intel(R) Core(TM) i7-14700K
+CPU MHz       	3418
+CPU cores     	20/28
+Phys. Memory   	65278 MBytes
+Memory In Use  	44%
+Disk Free      	1219191 MBytes
+
+
+*** OS info
+OS:            	Windows 11
+Version:       	10.0.26100 
+
+
+*** Debug::Init()
+
+
+					Render 0:00:00:099
+Steam initialized (AppId 3215050)
+					Render 0:00:00:102
+Drive type for game installation: SSD, savegames: SSD
+Language: English
+					Render 0:00:01:441
+*** graphics info
+GPU                            	NVIDIA GeForce RTX 4080 Feature Level: 12.1 {  DoublePrecisionFloatShaderOps: 1 OutputMergerLogicOp: 1 MinPrecisionSupport: 2 TiledResourcesTier: 4 ResourceBindingTier: 3 PSSpecifiedStencilRefSupported: 0 TypedUAVLoadAdditionalFormats: 1 ROVsSupported: 1 ConservativeRasterizationTier: 3 MaxGPUVirtualAddressBitsPerResource: 40 StandardSwizzle64KBSupported: 0 CrossNodeSharingTier: 0 CrossAdapterRowMajorTextureSupported: 0 VPAndRTArrayIndexFromAnyShaderFeedingRasterizerSupportedWithoutGSEmulation: 1 ResourceHeapTier: 2 NotZeroedPools: 1 UMA: 0 UnalignedBlockTextures: 1}
+API                            	d3d12
+GPU Driver Version             	32.0.16.1074
+GPU Driver Package Version     	610.74
+GPU Dedicated Video Memory     	16048 MB
+					Render 0:00:01:582
+
+Libs: Network, Sequences, MouseTrackWin, DumbAI, MapGen, Paradox, TriggersAndEvents, Notifications, Research, Resources, Tutorial, Objectives 
+
+					Render 0:00:01:805
+
+Platform: desktop, editor, goldmaster, paradox, pc, steam
+
+					Render 0:00:02:817
+*** audio info
+Audio Endpoint                 	Speakers (Razer Leviathan V2)
+Lua revision: 405907
+Assets revision: 33225
+Steam AppID: 3215050
+Build version: 1.1.1.405907
+Build branch:  Release
+						Lua 0:00:16:322
+Account storage loaded successfully in 2 ms
+DLC norman loaded, lua revision 405907, assets revision 33225
+DLC thomas loaded, lua revision 405907, assets revision 33225
+						Lua 0:00:16:326
+[mod] Loaded mod def DEV ONLY - Train Hub Prototype (id SMR_TrainHubPrototype_20260918, v0.00-002) unpacked from appdata
+[mod] Loaded mod def Relaunched Fix Pack: Opt-In Modules (id SMR_CommunityOptInPack, v1.00-000) unpacked from appdata
+[mod] Loaded mod def TEMPORARY - Linux NVIDIA 580 Crash Workaround (id SMR_FR1TempWorkaround, v0.00-003) unpacked from appdata
+[mod] Loaded mod def Relaunched Fix Pack (id SMR_CommunityFixPack, v1.00-019) unpacked from appdata
+[mod] Loaded mod def DEV ONLY - Train Hub (Module B build) (id SMR_TrainHubDev_20260918, v0.00-044) unpacked from appdata
+[mod] Loaded mod def Community Fix Pack — Test Kit (id SMR_CommunityFixPackTestKit, v0.00-001) unpacked from appdata
+						Lua 0:00:16:712
+[mod] [SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+[mod] [SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[mod] [SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+[SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+						Lua 0:00:16:718
+[mod] [SMRTK] SMRTK_CORE loaded=true tee=false t=12293 id=1
+[SMRTK] SMRTK_CORE loaded=true tee=false t=12293 id=1
+						Lua 0:00:16:721
+[mod] [SMRTK] SMRTK_SLOTS armed_at_load=0 predictions="TRAIN_HUB_BUILD_20260918.md: centre/transition prototype" sitting=train_hub_move slots="1 traffic/power,2 inward,3 departure,4 crossing watch,5 outward,6 select tunable,scratch boot" t=12293 id=2
+[SMRTK] SMRTK_SLOTS armed_at_load=0 predictions="TRAIN_HUB_BUILD_20260918.md: centre/transition prototype" sitting=train_hub_move slots="1 traffic/power,2 inward,3 departure,4 crossing watch,5 outward,6 select tunable,scratch boot" t=12293 id=2
+						Lua 0:00:16:722
+[mod] [SMRTest][carry] fixture-carry dump available — run SMRTest.FixtureCarry()
+[mod] [CommunityFixPack] NightShiftWork: applied
+[mod] [CommunityFixPack] WispRewards: applied
+						Lua 0:00:16:723
+[mod] [CommunityFixPack] TrainsToVoid: applied
+[mod] [CommunityFixPack] LanderEmptyLaunch: applied
+[mod] [CommunityFixPack] ShelterReflex: applied
+[mod] [CommunityFixPack] BrokenTrackSalvage: applied
+[mod] [CommunityFixPack] TrackSalvageWipe: applied
+[mod] [CommunityFixPack] LakeEntombment: applied
+[mod] [CommunityFixPack] RocketDroneChurn: applied
+[mod] [CommunityFixPack] TradeRocketFuelRefresh: behaviour probe declined (threw: Lua/UniversalRocket.lua:1923: attempt to call a nil value (method 'IsRocketLanded'))
+[mod] [CommunityFixPack] TradeRocketFuelRefresh: inactive (non-player fuel changes already refresh cargo requests (F119 repaired by the game?))
+[mod] [CommunityFixPack] ShuttleTransportCache: applied
+						Lua 0:00:16:724
+[mod] [CommunityFixPack] VacuumWalks: applied
+[mod] [CommunityFixPack] ArrivalDeaths: applied
+[mod] [CommunityFixPack] StaleReservations: applied
+[mod] [CommunityFixPack] CrystalMysteryHang: applied
+[mod] [CommunityFixPack] DomeOverviewHighlight: applied
+[mod] [CommunityFixPack] TrainCargoDumping: inactive (the shipped Train:UnloadAll does not survive a storable resource with no demand request — this copy is written for game 1.1.0 and stands down on a different body)
+[mod] [CommunityFixPack] DestroyedTunnels: applied
+[mod] [CommunityFixPack] DustSicknessBiorobots: applied
+[mod] [CommunityFixPack] GeneForging: applied
+						Lua 0:00:16:725
+[mod] [CommunityFixPack] MirrorSphereSite: applied
+[mod] [CommunityFixPack] PayloadTemplateRefill: applied
+[mod] [CommunityFixPack] ShuttleHubOffAvailable: applied
+[mod] [CommunityFixPack] FreedHousingNotice: applied
+[mod] [CommunityFixPack] LandscapeUnitFilter: applied
+						Lua 0:00:16:726
+[mod] [CommunityFixPack] RocketInteractGuard: applied
+[mod] [CommunityFixPack] TrackConnectorPingPong: applied
+[mod] [CommunityFixPack] TrackTunnelPowerBridge: applied
+[mod] [CommunityFixPack] GraphConsumedCaption: applied
+[mod] [CommunityFixPack] TrainWaitTime: applied
+[mod] [CommunityFixPack] FounderTraitNotification: applied
+						Lua 0:00:16:727
+[mod] [CommunityFixPack] SequenceLatents: applied
+[mod] [CommunityFixPack] TrackSalvageRefund: applied
+[mod] [CommunityFixPack] DroneTransportMinors: applied
+[mod] [CommunityFixPack] ScanDowngrade: applied
+[mod] [CommunityFixPack] BombardmentSpread: applied
+[mod] [CommunityFixPack] ExtenderFlapChurn: applied
+[mod] [CommunityFixPack] SaintBlessing: applied
+[mod] [CommunityFixPack] SinkholeIndestructible: applied
+[mod] [CommunityFixPack] ExoticDepositSign: applied
+						Lua 0:00:16:728
+[mod] [CommunityFixPack] JumboCaveReinforcementWedge: applied
+[mod] [CommunityFixPack] SilentHitMomentFX: applied
+[mod] [CommunityFixPack] CloggedBuildingRelease: applied
+[mod] [CommunityFixPack] FactionDomeSizeGate: applied
+[mod] [CommunityFixPack] BuildingCodesPrefab: applied
+[mod] [CommunityFixPack] HabitatExpeditionReturn: applied						Lua 0:00:16:729
+
+[mod] [CommunityFixPack] HabitatExpeditionDraft: applied
+[mod] [CommunityFixPack] OpenPastureStockpiles: inactive (the Outside Ranch entity variants no longer have the nine-versus-six stockpile mismatch)
+[mod] [CommunityFixPack] RoverSubclassManifest: applied
+[mod] [CommunityFixPack] DryFarmingFarms: applied
+[mod] [CommunityFixPack] WildfireCureVisit: applied
+[mod] [CommunityFixPack] SaveSanitizer: applied
+						Lua 0:00:16:730
+[mod] [CommunityOptInPack] AcknowledgedWarnings: applied
+[mod] [CommunityOptInPack] ResidencyControl: inactive (opt-in module, off by default — enable it in Options → Mod Options)
+[mod] [CommunityOptInPack] MultipleSuns: applied
+[mod] [CommunityOptInPack] DroneStatDials: applied
+						Lua 0:00:16:731
+[TrainHubDev] hub classes loaded: six-connector hub, built-in drone controller, maintenance reserve
+						Lua 0:00:16:732
+[TrainHubDev] train export floor loaded (standing + transient holds)
+						Lua 0:00:17:475
+[mod] [CommunityFixPack] SaintBlessing: inactive (no dome-colonists trait presets)
+[mod] [CommunityFixPack] SinkholeIndestructible: inactive (the shipped Sinkhole is already indestructible — already correct, RETIRE candidate)
+						Lua 0:00:17:563
+Reloading done in 1237 ms
+						Lua 0:00:17:564
+Available DLCs: norman(Feeding the Future),thomas(Interplanetary Codex) 
+						Lua 0:00:17:608
+[mod] [SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=DataLoading t=12293 id=3
+[SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=DataLoading t=12293 id=3
+						Lua 0:00:17:990
+[preset] Preset postprocess took 153 ms.
+						Lua 0:00:18:037
+482 / 482 particle streams loaded in 40 ms.
+5 / 5 particle streams loaded in 0 ms.
+						Lua 0:00:18:039
+[mod] [CommunityFixPack] SilentHitMomentFX: registered 11 missing animation-moment preset(s)
+[mod] [CommunityFixPack] FactionDomeSizeGate: 7 faction dislike(s) now wait for 10 colonists in a dome
+[mod] [CommunityFixPack] BuildingCodesPrefab: inactive (the Building Codes handlers no longer skip prefab buildings (C88 repaired by the game?) — already correct, RETIRE candidate)
+[mod] [CommunityFixPack] DryFarmingFarms: left 1 farm(s) alone because DryFarming already reaches them (FarmUnderground via Farm)
+[mod] [CommunityFixPack] DryFarmingFarms: added 2 water entr(y/ies) at -50% to DryFarming (1 adopted, 4 of 4 farms loaded)
+[mod] [CommunityOptInPack] MultipleSuns: BuildingTemplates.ArtificialSun not found — build limit NOT lifted (binding fix still active)
+						Lua 0:00:18:241
+[mod] [CommunityFixPack] SaintBlessing: the shipped code resolves the trait label itself — data left untouched; save re-base armed for 1 preset(s) of 2
+[mod] [CommunityFixPack] SinkholeIndestructible: inactive (the shipped Sinkhole is already indestructible — already correct, RETIRE candidate)
+[mod] [CommunityFixPack] DryFarmingFarms: left 1 farm(s) alone because DryFarming already reaches them (FarmUnderground via Farm)
+[mod] [CommunityOptInPack] MultipleSuns: Artificial Sun build-once limit lifted
+						Lua 0:00:18:329
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=12293 id=4
+						Lua 0:00:18:339
+[mod] [SMRAUTO] armed (cmdline -smrautorun)
+[SMRAUTO] armed (cmdline -smrautorun)
+[mod] [SMRAUTO] ShowStartGamePopup neutered for the unattended run
+[SMRAUTO] ShowStartGamePopup neutered for the unattended run
+						Lua 0:00:18:361
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=12293 id=5
+						Lua 0:00:18:373
+[LUA ERROR] CommonLua/Editor/ArtSpecEditor.lua:573: attempt to call a nil value (global 'EntitySpecPathToEntity')
+  CommonLua/Editor/ArtSpecEditor.lua(573):  method OnPresetPostLoad
+  CommonLua/Preset.lua(541):  upvalue f1
+  CommonLua/Core/classes.lua(170):  method PostLoad
+  CommonLua/Modding/ModItem.lua(2518):   <>
+  [C](-1):  global sprocall
+  CommonLua/Modding/Mod.lua(666):   <>
+  CommonLua/Modding/Mod.lua(740):   <>
+  CommonLua/Modding/Mod.lua(664):  method LoadItems
+  CommonLua/Modding/Mod.lua(2185):  global ContinueModsReloadItems
+  CommonLua/Dlc.lua(603):  global LoadDlcs
+  CommonLua/Core/autorun.lua(447):  local StartupSequence
+  CommonLua/Core/autorun.lua(516):   <>
+        --- end of stack
+Locals:
+	                self |   object EntitySpec 'SMROptInTrainHub6'
+[mod] Loaded mod items for: SMR_CommunityFixPackTestKit, SMR_CommunityFixPack, SMR_CommunityOptInPack, SMR_TrainHubDev_20260918
+						Lua 0:00:18:617
+[mod] [CommunityFixPack] SaintBlessing: the shipped code resolves the trait label itself — data left untouched; save re-base armed for 1 preset(s) of 2
+[mod] [CommunityFixPack] SinkholeIndestructible: inactive (the shipped Sinkhole is already indestructible — already correct, RETIRE candidate)
+						Lua 0:00:18:618
+[mod] [CommunityFixPack] DryFarmingFarms: left 1 farm(s) alone because DryFarming already reaches them (FarmUnderground via Farm)
+						Lua 0:00:18:711
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=12293 id=6						Lua 0:00:18:712
+
+						Lua 0:00:19:187
+[PdxSDK] Started up. Took 1081
+[mod] [CommunityFixPack] update report: 1 fix(es) deactivated over a game-code change: TrainCargoDumping
+						Lua 0:00:19:589
+[Braze] SessionStart error The server name or address could not be resolved
+
+						Lua 0:00:19:590
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:19:776
+[Braze] SessionStart error The server name or address could not be resolved
+
+						Lua 0:00:19:777
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:21:202
+Game Seed:  YjItalw5 -1352592000915014372 
+						Lua 0:00:21:235
+[mod] [SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=ChangeMap t=0 id=7
+[SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=ChangeMap t=0 id=7
+						Lua 0:00:21:242
+*** Reloading assets from folder 'BinAssets/'
+						Lua 0:00:23:002
+*** Assets reloaded in 1.8 s, read 359.0 MB, read speed 204.0 MB/s, average read 8137 bytes.
+						Lua 0:00:24:872
+[mod] [SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=PreNewMap t=0 id=8
+[SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=PreNewMap t=0 id=8
+						Lua 0:00:25:064
+game_settings:
+    sponsor: IMM
+    profile: rocketscientist
+    founding_faction: MarsDemocraticParty
+    rival_colonies: Brazil, ISRO, SpaceY
+    mystery_random: MarsgateMystery
+    game_rules: (none)
+more_game_settings: save_game_id: false, mystery: random, coordinates: 30S173E, landing_spot: , logo: IMM
+map_conditions: altitude: 1494, temperature: -15, cold_wave: 36, dust_devils: 84, dust_storm: 36, meteors: 73
+map_resources: concrete: 109, metals: 139, precious_metals: 139, water: 182
+						Lua 0:00:25:068
+[mod] [SMRTK] SMRTK_DOCK action=dock_attach attached=true route="idBottom sibling" status=OK surface=one-toggle+tasks t=0 id=9
+						Lua 0:00:25:069
+[mod] [SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+[mod] [SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:25:080
+MapLoadRandom:  -1550452290326562504 
+						Lua 0:00:25:633
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=0 id=10
+						Lua 0:00:26:184
+Map (slot 1) changed to "BlankBigTerraceCMix_20" in 4950 ms.
+						Lua 0:00:29:534
+[mod] [SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=ChangeMap t=0 id=11
+[SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=ChangeMap t=0 id=11
+						Lua 0:00:30:437
+[mod] [SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=PreNewMap t=0 id=12
+[SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=PreNewMap t=0 id=12
+						Lua 0:00:30:501
+MapLoadRandom:  -5231033669309636297 
+						Lua 0:00:31:121
+Map (slot 2) changed to "BlankUnderground_01" in 1588 ms.
+						Lua 0:00:33:387
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=0 id=13
+						Lua 0:00:35:261
+starting sector selected: H1
+						Lua 0:00:35:349
+[mod] [CommunityFixPack] CloggedBuildingRelease: inactive (BuildingClogged now re-enables the building itself after 3600000ms — already correct, RETIRE candidate)
+						Lua 0:00:35:541
+[mod] [SMRTK] SMRTK_PANEL_RESTORE open=true tab=Kit t=309 id=14
+[mod] [SMRTK] SMRTK_DOCK action=dock_attach attached=true route="idBottom sibling" status=OK surface=one-toggle+tasks t=309 id=15
+						Lua 0:00:36:539
+[mod] [SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:36:551
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=1307 id=16
+						Lua 0:01:05:230
+[mod] [SMRAUTO] BEGIN
+[SMRAUTO] BEGIN
+[mod] [SMRTest] ---- RunAll (all probes) ----
+						Lua 0:01:05:231
+[SMRTest] ---- RunAll (all probes) ----
+[mod] [SMRTest] fix pack present: 46/52 fixes active
+[SMRTest] fix pack present: 46/52 fixes active
+[mod] [SMRTest] opt-in pack present: 3/4 modules active
+[SMRTest] opt-in pack present: 3/4 modules active
+[mod] [SMRTest] save-rescue NOT loaded — its probes SKIP (a separate cleanup mod, absent by design)
+[SMRTest] save-rescue NOT loaded — its probes SKIP (a separate cleanup mod, absent by design)
+[mod] [SMRTest] PASS  CaveInsNoDisasters       [retired] condition true with NoDisasters off, false with it on — vanilla honours the rule (R-18 confirmed)
+[SMRTest] PASS  CaveInsNoDisasters       [retired] condition true with NoDisasters off, false with it on — vanilla honours the rule (R-18 confirmed)
+[mod] [SMRTest] PASS  MeteorFrequency          [retired] 'Meteors' is a map repeat and the old global thread func is gone (R-9 premise confirmed; cadence itself is unmeasured and needs a sitting)
+[SMRTest] PASS  MeteorFrequency          [retired] 'Meteors' is a map repeat and the old global thread func is gone (R-9 premise confirmed; cadence itself is unmeasured and needs a sitting)
+[mod] [SMRTest] PASS  UpgradeModifierLeak      [retired] modifier turned off by the shipped code (R-5 confirmed)
+[SMRTest] PASS  UpgradeModifierLeak      [retired] modifier turned off by the shipped code (R-5 confirmed)
+[mod] [SMRTest] PASS  NightShiftWork           [behavior] hours 0 and 1 send shift-3 colonists to work
+[SMRTest] PASS  NightShiftWork           [behavior] hours 0 and 1 send shift-3 colonists to work
+[mod] [SMRTest] PASS  WispPower                [behavior] 3 wisps -> 3000 power units
+[SMRTest] PASS  WispPower                [behavior] 3 wisps -> 3000 power units
+[mod] [SMRTest] PASS  WispResearch             [behavior] no double grant; notification says 300 for 3 wisps
+[SMRTest] PASS  WispResearch             [behavior] no double grant; notification says 300 for 3 wisps
+[mod] [SMRTest] PASS  TouristApplicants        [retired] 1-star 163 < 2-star 328 over 400 rolls
+[SMRTest] PASS  TouristApplicants        [retired] 1-star 163 < 2-star 328 over 400 rolls
+[mod] [SMRTest] SKIP  FactionFundingCheck      [retired] returned 0 without error, but this cannot discriminate: the engine tolerates pairs(nil), so fixed and unfixed give the same answer (not evidence)
+[SMRTest] SKIP  FactionFundingCheck      [retired] returned 0 without error, but this cannot discriminate: the engine tolerates pairs(nil), so fixed and unfixed give the same answer (not evidence)
+[mod] [SMRTest] SKIP  TrainsToVoid             [install] introspection unavailable (retail sandbox)
+[SMRTest] SKIP  TrainsToVoid             [install] introspection unavailable (retail sandbox)
+[mod] [SMRTest] PASS  LanderEmptyLaunch        [behavior] empty flight blocked, loaded flight still ready (1.1.0 body :535-559 driven; fixture past the :554 automode gate)
+[SMRTest] PASS  LanderEmptyLaunch        [behavior] empty flight blocked, loaded flight still ready (1.1.0 body :535-559 driven; fixture past the :554 automode gate)
+[mod] [SMRTest] ERROR LanderCargoRatchet       [retired] Lua/UniversalRocket.lua:2045: attempt to call a nil value (method 'GetAutoModeThresholds')
+[SMRTest] ERROR LanderCargoRatchet       [retired] Lua/UniversalRocket.lua:2045: attempt to call a nil value (method 'GetAutoModeThresholds')
+						Lua 0:01:05:232
+[mod] [SMRTest] PASS  LanderReturnFuel         [retired] parked lander keeps 3500 fuel requested by the shipped code (R-25 confirmed)
+[SMRTest] PASS  LanderReturnFuel         [retired] parked lander keeps 3500 fuel requested by the shipped code (R-25 confirmed)
+[mod] [SMRTest] SKIP  ShelterReflex            [install] Idle wrapper unverified (introspection unavailable (retail sandbox))
+[SMRTest] SKIP  ShelterReflex            [install] Idle wrapper unverified (introspection unavailable (retail sandbox))
+[mod] [SMRTest] F45: 0 track repair site(s); 0 with a non-numeric node_idx (track unsalvageable)
+[SMRTest] F45: 0 track repair site(s); 0 with a non-numeric node_idx (track unsalvageable)
+[mod] [SMRTest] SKIP  BrokenTrackSalvage       [install] introspection unavailable (retail sandbox)
+[SMRTest] SKIP  BrokenTrackSalvage       [install] introspection unavailable (retail sandbox)
+[mod] [SMRTest] SKIP  TrackSalvageWipe         [install] introspection unavailable (retail sandbox)
+[SMRTest] SKIP  TrackSalvageWipe         [install] introspection unavailable (retail sandbox)
+						Lua 0:01:05:233
+[mod] [SMRTest] SKIP  LakeEntombment           [install] introspection unavailable (retail sandbox)
+[SMRTest] SKIP  LakeEntombment           [install] introspection unavailable (retail sandbox)
+[mod] [SMRTest] SKIP  GhostFarmOxygen          [install] introspection unavailable (retail sandbox)
+[SMRTest] SKIP  GhostFarmOxygen          [install] introspection unavailable (retail sandbox)
+[mod] [SMRTest] PASS  RocketDroneChurn         [behavior] steady-state refresh keeps the drones; new requests still reconnect
+[SMRTest] PASS  RocketDroneChurn         [behavior] steady-state refresh keeps the drones; new requests still reconnect
+[mod] [SMRTest] PASS  ShuttleTransportCache    [behavior] verdict recomputed when shuttle availability flips, and still cached while it does not
+[SMRTest] PASS  ShuttleTransportCache    [behavior] verdict recomputed when shuttle availability flips, and still cached while it does not
+[mod] [SMRTest] PASS  VacuumWalks              [behavior] vacuum move uses the passage route; breathable maps unchanged
+[SMRTest] PASS  VacuumWalks              [behavior] vacuum move uses the passage route; breathable maps unchanged
+[mod] [SMRTest] PASS  ArrivalDeaths            [behavior] the impassable drop spot was snapped to a walkable one; could not read Arrive's source (SMRTest:no-introspection) (0 colonist(s) currently walking between domes)
+[SMRTest] PASS  ArrivalDeaths            [behavior] the impassable drop spot was snapped to a walkable one; could not read Arrive's source (SMRTest:no-introspection) (0 colonist(s) currently walking between domes)
+[mod] [SMRTest] PASS  ArrivalDeathsChooseDomeArg [behavior] the colonist is accepted; the old traits-table call still throws (Lua/Filter.lua:116: attempt to index a nil value (local 'obj_attributes'))
+[SMRTest] PASS  ArrivalDeathsChooseDomeArg [behavior] the colonist is accepted; the old traits-table call still throws (Lua/Filter.lua:116: attempt to index a nil value (local 'obj_attributes'))
+[mod] [SMRTest] ERROR DroneUnreachableForever  [retired] Lua/Units/Drone.lua:929: attempt to call a nil value (method 'MarkUnreachable')
+[SMRTest] ERROR DroneUnreachableForever  [retired] Lua/Units/Drone.lua:929: attempt to call a nil value (method 'MarkUnreachable')
+[mod] [SMRTest] F58: 0 residence(s) hold 0 reserved slot(s); 0 are clearly stale
+[SMRTest] F58: 0 residence(s) hold 0 reserved slot(s); 0 are clearly stale
+[mod] [SMRTest] PASS  StaleReservations        [behavior] reservation timestamped for the daily sweep (0 reserved slot(s) in this save, 0 clearly stale)
+[SMRTest] PASS  StaleReservations        [behavior] reservation timestamped for the daily sweep (0 reserved slot(s) in this save, 0 clearly stale)
+						Lua 0:01:05:234
+[mod] [SMRTest] PASS  CrystalMysteryHang       [install] CrystalFlyAway handler registered (current mystery: MarsgateMystery)
+[SMRTest] PASS  CrystalMysteryHang       [install] CrystalFlyAway handler registered (current mystery: MarsgateMystery)
+[mod] [SMRTest] PASS  TouristSatisfaction      [retired] Colonist.UpdateSatisfaction does not exist — the Satisfaction stat was deleted, so F09 cannot occur (R-3 confirmed in-game)
+[SMRTest] PASS  TouristSatisfaction      [retired] Colonist.UpdateSatisfaction does not exist — the Satisfaction stat was deleted, so F09 cannot occur (R-3 confirmed in-game)
+[mod] [SMRTest] PASS  TrainPlatformWedge       [retired] stale passenger removed and ticket discarded
+[SMRTest] PASS  TrainPlatformWedge       [retired] stale passenger removed and ticket discarded
+[mod] [SMRTest] PASS  CommandCenterNumbers     [retired] all 11 Command Center resources resolve through vanilla's parameterised GetAvailable (R-19 confirmed)
+[SMRTest] PASS  CommandCenterNumbers     [retired] all 11 Command Center resources resolve through vanilla's parameterised GetAvailable (R-19 confirmed)
+[mod] [SMRTest] PASS  DomeOverviewHighlight    [behavior] low stat rendered as <red>20</red>
+[SMRTest] PASS  DomeOverviewHighlight    [behavior] low stat rendered as <red>20</red>
+[mod] [SMRTest] PASS  PayloadTemplateRefill    [behavior] template prefills a fresh payload (20), a confirmed payload keeps an emptied row empty, and a cancelled prompt neither stamps nor locks the template (20)
+[SMRTest] PASS  PayloadTemplateRefill    [behavior] template prefills a fresh payload (20), a confirmed payload keeps an emptied row empty, and a cancelled prompt neither stamps nor locks the template (20)
+[mod] [SMRTest] SKIP  ClassicRockets           [behavior] opt-in mod not installed or module not present
+[SMRTest] SKIP  ClassicRockets           [behavior] opt-in mod not installed or module not present
+[mod] [CommunityFixPack] SaveSanitizer: restored the Frictionless Composites buff on the WindTurbine label (+100% electricity_production)
+[mod] [CommunityFixPack] SaveSanitizer: restored the Frictionless Composites buff on the WindTurbine_Large label (+100% electricity_production)
+[mod] [SMRTest] PASS  SaveSanitizerTurbineBuff [behavior] all three turbine labels at 100%, unchanged by a second run
+[SMRTest] PASS  SaveSanitizerTurbineBuff [behavior] all three turbine labels at 100%, unchanged by a second run
+[mod] [SMRTest] PASS  LandscapeUnitFilter      [behavior] boarding unit skipped, ordinary unit reported exactly once
+[SMRTest] PASS  LandscapeUnitFilter      [behavior] boarding unit skipped, ordinary unit reported exactly once
+[mod] [SMRTest] PASS  SmallLandscapeSites      [retired] 1-, 2- and 10-hex sites each return every destination without raising — vanilla bounds-checks (R-6 confirmed; removal restores vanilla's 10, which our clamp cut to 5)
+[SMRTest] PASS  SmallLandscapeSites      [retired] 1-, 2- and 10-hex sites each return every destination without raising — vanilla bounds-checks (R-6 confirmed; removal restores vanilla's 10, which our clamp cut to 5)
+[mod] [SMRTest] FAIL  DomeFreeSpaceMismatch    [behavior] a residence whose power is out counts as zero free space — the dome reads as full for births and immigration while ChooseResidence keeps assigning colonists into it
+[SMRTest] FAIL  DomeFreeSpaceMismatch    [behavior] a residence whose power is out counts as zero free space — the dome reads as full for births and immigration while ChooseResidence keeps assigning colonists into it
+[mod] [SMRTest] PASS  FreedHousingNotice       [behavior] vacated home offers the bed to the dome's homeless once the caller's operation has finished, not inside it; a residence with no free slot does not
+[SMRTest] PASS  FreedHousingNotice       [behavior] vacated home offers the bed to the dome's homeless once the caller's operation has finished, not inside it; a residence with no free slot does not
+[mod] [SMRTest] PASS  ShuttleHubOffAvailable   [behavior] player-disabled hub not counted; working and self-lifting-suspended hubs still are
+[SMRTest] PASS  ShuttleHubOffAvailable   [behavior] player-disabled hub not counted; working and self-lifting-suspended hubs still are
+[mod] [SMRTest] PASS  AsteroidLanderAvailable  [retired] unloading, waiting-maintenance and idle landers on the pad all count, an off-world one does not — the predicate ignores `command` by construction (R-11 confirmed)
+[SMRTest] PASS  AsteroidLanderAvailable  [retired] unloading, waiting-maintenance and idle landers on the pad all count, an off-world one does not — the predicate ignores `command` by construction (R-11 confirmed)
+[mod] [SMRTest] ERROR AutoExportPriority       [retired] Lua/UniversalRocket.lua:2045: attempt to call a nil value (method 'GetAutoModeThresholds')
+[SMRTest] ERROR AutoExportPriority       [retired] Lua/UniversalRocket.lua:2045: attempt to call a nil value (method 'GetAutoModeThresholds')
+[mod] [SMRTest] PASS  MirrorSphereSite         [behavior] finished site locked out, unfinished site still workable
+[SMRTest] PASS  MirrorSphereSite         [behavior] finished site locked out, unfinished site still workable
+[mod] [SMRTest] FAIL  GeneForging              [behavior] Gene Forging alone gives 100, expected its own param1 50 — researching Gene Forging still changes nothing (F41)
+[SMRTest] FAIL  GeneForging              [behavior] Gene Forging alone gives 100, expected its own param1 50 — researching Gene Forging still changes nothing (F41)
+[mod] [SMRTest] PASS  DustSicknessDamage       [retired] DailyUpdate never consults Random and deals a flat 10 — F17's only intent tell (the dead `5 + Random(param)` line) is gone, so flat damage is the stated design (R-15 confirmed)
+[SMRTest] PASS  DustSicknessDamage       [retired] DailyUpdate never consults Random and deals a flat 10 — F17's only intent tell (the dead `5 + Random(param)` line) is gone, so flat damage is the stated design (R-15 confirmed)
+[mod] [SMRTest] PASS  DustSicknessBiorobots    [behavior] all 4 infection effects filter Biorobots out
+[SMRTest] PASS  DustSicknessBiorobots    [behavior] all 4 infection effects filter Biorobots out
+[mod] [SMRTest] PASS  DestroyedTunnels         [behavior] ruined tunnels skipped, intact tunnel still registered
+[SMRTest] PASS  DestroyedTunnels         [behavior] ruined tunnels skipped, intact tunnel still registered
+[mod] [SMRTest] FAIL  TrainCargoDumping        [behavior] a station that ACCEPTS WasteRock received nothing (5000 still aboard)
+						Lua 0:01:05:235
+[SMRTest] FAIL  TrainCargoDumping        [behavior] a station that ACCEPTS WasteRock received nothing (5000 still aboard)
+[mod] [SMRTest] PASS  RocketInteractGuard      [behavior] load orders on a UniversalTradeRocket are refused; ordinary depots still accept them
+[SMRTest] PASS  RocketInteractGuard      [behavior] load orders on a UniversalTradeRocket are refused; ordinary depots still accept them
+[mod] [SMRTest] PASS  TrackConnectorPingPong   [behavior] a live neighbour keeps its connector hex on an UNFORCED claim but loses it on a FORCED one (vanilla 1.1.0's save-load behaviour); an abandoned element is still cleared; a dying building schedules its neighbours' reclaim
+[SMRTest] PASS  TrackConnectorPingPong   [behavior] a live neighbour keeps its connector hex on an UNFORCED claim but loses it on a FORCED one (vanilla 1.1.0's save-load behaviour); an abandoned element is still cleared; a dying building schedules its neighbours' reclaim
+[mod] [SMRTest] PASS  TrackTunnelPowerBridge   [behavior] bridges only the short track whose stations really are on different grids
+[SMRTest] PASS  TrackTunnelPowerBridge   [behavior] bridges only the short track whose stations really are on different grids
+[mod] [SMRTest] PASS  GridGlobalStorage        [retired] GetGridGlobalStorage does not exist — the ratio-summing global that carried F22 is gone, and the per-dome ScriptFunc_DomesGridStorage replacement is present (R-12 confirmed in-game)
+[SMRTest] PASS  GridGlobalStorage        [retired] GetGridGlobalStorage does not exist — the ratio-summing global that carried F22 is gone, and the per-dome ScriptFunc_DomesGridStorage replacement is present (R-12 confirmed in-game)
+[mod] [SMRTest] PASS  LastTransmissionStorage  [retired] all 6 storage conditions carry a Condition naming their own resource (R-13 confirmed)
+[SMRTest] PASS  LastTransmissionStorage  [retired] all 6 storage conditions carry a Condition naming their own resource (R-13 confirmed)
+[mod] [SMRTest] PASS  TrainWaitTime            [behavior] station keeps the 90000 wait; the travel clock restarts at boarding (0)
+[SMRTest] PASS  TrainWaitTime            [behavior] station keeps the 90000 wait; the travel clock restarts at boarding (0)
+[mod] [SMRTest] PASS  GraphConsumedCaption     [behavior] MachineParts caption reports 10, matching the plotted consumption+maintenance
+[SMRTest] PASS  GraphConsumedCaption     [behavior] MachineParts caption reports 10, matching the plotted consumption+maintenance
+[mod] [SMRTest] SKIP  MoraleComfortTooltip     [retired] the tooltip builder asked about Comfort and read the stand-in's 75 (high mark 70) — a stat tooltip reading its stat, not evidence of the phantom row; R-29 needs a screen check
+[SMRTest] SKIP  MoraleComfortTooltip     [retired] the tooltip builder asked about Comfort and read the stand-in's 75 (high mark 70) — a stat tooltip reading its stat, not evidence of the phantom row; R-29 needs a screen check
+[mod] [SMRTest] PASS  StorageRateModifiers     [retired] rates reached the element (7777/8888), UpdateStorage ran 1 time(s) — R-31 confirmed
+[SMRTest] PASS  StorageRateModifiers     [retired] rates reached the element (7777/8888), UpdateStorage ran 1 time(s) — R-31 confirmed
+[mod] [SMRTest] PASS  SequenceLatents          [behavior] 2 of 2 latent sequence paths behave as written
+[SMRTest] PASS  SequenceLatents          [behavior] 2 of 2 latent sequence paths behave as written
+						Lua 0:01:05:236
+[mod] [SMRTest] PASS  FounderTraitNotification [behavior] Founder gaining Sexy (Positive) raises the notification
+[SMRTest] PASS  FounderTraitNotification [behavior] Founder gaining Sexy (Positive) raises the notification
+[mod] [SMRTest] SKIP  IndependenceTerraforming [retired] the tech no longer modifies SpecialProjectResourcesModifier
+[SMRTest] SKIP  IndependenceTerraforming [retired] the tech no longer modifies SpecialProjectResourcesModifier
+[mod] [SMRTest] PASS  TrackSalvageRefund       [behavior] three groups refund 300 Metals (was one group's 100); single-group and unstamped tracks unchanged; partial salvage returns the destroyed elements' share
+[SMRTest] PASS  TrackSalvageRefund       [behavior] three groups refund 300 Metals (was one group's 100); single-group and unstamped tracks unchanged; partial salvage returns the destroyed elements' share
+[mod] [SMRTest] FAIL  LayoutTechLock           [behavior] fix 'LayoutTechLock' not registered
+[SMRTest] FAIL  LayoutTechLock           [behavior] fix 'LayoutTechLock' not registered
+[mod] [SMRTest] PASS  TrainMinors              [retired] GetTrainsOnRoute and TrackBase:CanAddVehicle both present — the cap is the route's station count and a stale max_vehicles is display-only (R-34 premise confirmed; the x/max display refresh is the known cosmetic cost, unmeasured here)
+[SMRTest] PASS  TrainMinors              [retired] GetTrainsOnRoute and TrackBase:CanAddVehicle both present — the cap is the route's station count and a stale max_vehicles is display-only (R-34 premise confirmed; the x/max display refresh is the known cosmetic cost, unmeasured here)
+[mod] [SMRTest] SKIP  DroneTransportMinors     [behavior] the shipped handler did not drop the changed map's entries — probe setup no longer matches
+[SMRTest] SKIP  DroneTransportMinors     [behavior] the shipped handler did not drop the changed map's entries — probe setup no longer matches
+[mod] [SMRTest] FAIL  AnomalyCaveInMap         [behavior] the call did not raise, but SMRFixPack.AnomalyCaveInMap.IsUsableMap is not installed — the refusal did not come from the fix
+[SMRTest] FAIL  AnomalyCaveInMap         [behavior] the call did not raise, but SMRFixPack.AnomalyCaveInMap.IsUsableMap is not installed — the refusal did not come from the fix
+[mod] [SMRTest] SKIP  TechDescriptionBuilding  [retired] the tech in Techs has no Description T
+[SMRTest] SKIP  TechDescriptionBuilding  [retired] the tech in Techs has no Description T
+[mod] [SMRTest] PASS  BombardmentSpread        [behavior] 20 of 20 per-missile directions deviate from the volley direction
+[SMRTest] PASS  BombardmentSpread        [behavior] 20 of 20 per-missile directions deviate from the volley direction
+[mod] [SMRTest] PASS  MeteorStormWedge         [retired] 'MeteorStorm' is a map repeat and the old global thread func is gone (R-10 premise confirmed; the unbounded-storm residual R-10 names is NOT measured here and needs a sitting)
+[SMRTest] PASS  MeteorStormWedge         [retired] 'MeteorStorm' is a map repeat and the old global thread func is gone (R-10 premise confirmed; the unbounded-storm residual R-10 names is NOT measured here and needs a sitting)
+[mod] [SMRTest] PASS  RainsDeadlock            [retired] rains run through RainsDisasterRepeatCycle and RainsDisasterLoop is gone — no untimed WaitMsg to deadlock on, and vanilla migrates old saves itself via SavegameFixups.RainsDisasterLoopToRepeat2 (R-14 confirmed)
+[SMRTest] PASS  RainsDeadlock            [retired] rains run through RainsDisasterRepeatCycle and RainsDisasterLoop is gone — no untimed WaitMsg to deadlock on, and vanilla migrates old saves itself via SavegameFixups.RainsDisasterLoopToRepeat2 (R-14 confirmed)
+[mod] [SMRTest] FAIL  UpdateReport             [behavior] healthy build reports suspects: TrainCargoDumping
+[SMRTest] FAIL  UpdateReport             [behavior] healthy build reports suspects: TrainCargoDumping
+[mod] [SMRTest] PASS  TrackShellLeak           [behavior] mass salvage deletes the emptied track, and zero shells survive in the loaded save
+[SMRTest] PASS  TrackShellLeak           [behavior] mass salvage deletes the emptied track, and zero shells survive in the loaded save
+[mod] [SMRTest] PASS  SaintBlessing            [behavior] a Saint's blessing files under TraitReligious (no Saint in a dome in this save, so the re-base half had nothing to read)
+[SMRTest] PASS  SaintBlessing            [behavior] a Saint's blessing files under TraitReligious (no Saint in a dome in this save, so the re-base half had nothing to read)
+[mod] [SMRTest] PASS  DustDevilsDescrMap       [retired] the descriptor follows MainMap in both directions, and MainMap's own disabled setting still wins (R-22 confirmed)
+[SMRTest] PASS  DustDevilsDescrMap       [retired] the descriptor follows MainMap in both directions, and MainMap's own disabled setting still wins (R-22 confirmed)
+[mod] [SMRTest] PASS  AsteroidVisitPrecedence  [retired] non-landers and supply pods are refused whatever their command, and a genuine lander still qualifies (R-11 confirmed on the over-broad half)
+[SMRTest] PASS  AsteroidVisitPrecedence  [retired] non-landers and supply pods are refused whatever their command, and a genuine lander still qualifies (R-11 confirmed on the over-broad half)
+[mod] [SMRTest] PASS  AstrogeologistExtractors [retired] profile pays extractors label-wide (2 effect(s)), carries no per-building append, and this save holds no leftover +10% modifier (F-5 confirmed, residue clear)
+[SMRTest] PASS  AstrogeologistExtractors [retired] profile pays extractors label-wide (2 effect(s)), carries no per-building append, and this save holds no leftover +10% modifier (F-5 confirmed, residue clear)
+[mod] [SMRTest] FAIL  SinkholeIndestructible   [behavior] fix 'SinkholeIndestructible' is inactive — the shipped Sinkhole is already indestructible
+[SMRTest] FAIL  SinkholeIndestructible   [behavior] fix 'SinkholeIndestructible' is inactive — the shipped Sinkhole is already indestructible
+						Lua 0:01:05:237
+[mod] [SMRTest] PASS  DustStormBreakMapFilter  [retired] a surface storm over an underground-only fragment breaks nothing, while the same fragment asked for its own map does break — vanilla filters connectors by map (R-23 confirmed)
+[SMRTest] PASS  DustStormBreakMapFilter  [retired] a surface storm over an underground-only fragment breaks nothing, while the same fragment asked for its own map does break — vanilla filters connectors by map (R-23 confirmed)
+[mod] [SMRTest] PASS  DustDevilSpawnGate       [retired] 'DustDevils' is a map repeat and the old global thread func is gone, and the staged g_DustDevilsState var is present (R-21 premise confirmed; the authored count RANGE is not measured here — that needs a sitting watching wave sizes)
+[SMRTest] PASS  DustDevilSpawnGate       [retired] 'DustDevils' is a map repeat and the old global thread func is gone, and the staged g_DustDevilsState var is present (R-21 premise confirmed; the authored count RANGE is not measured here — that needs a sitting watching wave sizes)
+[mod] [SMRTest] FAIL  C47OpenFarmSeedBufferShape [behavior] Vegetation 'Herbs' (displayed as 'Herbs') costs 50 seeds per hex, not 100 — C47's per-tick arithmetic is derived from this table
+[SMRTest] FAIL  C47OpenFarmSeedBufferShape [behavior] Vegetation 'Herbs' (displayed as 'Herbs') costs 50 seeds per hex, not 100 — C47's per-tick arithmetic is derived from this table
+[mod] [SMRTest] PASS  LocalizedUIText          [retired] the terraforming heading id 914616772802 resolves in English (R-27 confirmed)
+[SMRTest] PASS  LocalizedUIText          [retired] the terraforming heading id 914616772802 resolves in English (R-27 confirmed)
+[mod] [SMRTest] SKIP  SpaceYDroneCapBullet     [retired] the SpaceY effect string carries no literal to read (T shape changed)
+[SMRTest] SKIP  SpaceYDroneCapBullet     [retired] the SpaceY effect string carries no literal to read (T shape changed)
+[mod] [SMRTest] SMRTEST-DISPATCH ClassNonInheritableMembers = { UNREADABLE } — the copy-skip set could not be read
+[SMRTest] SMRTEST-DISPATCH ClassNonInheritableMembers = { UNREADABLE } — the copy-skip set could not be read
+[mod] [SMRTest] SMRTEST-DISPATCH the sweep reports which classes DO NOT REACH a wrap. It does NOT report which of them are ever instantiated — a hit is a reach gap, NOT a broken fix.
+[SMRTest] SMRTEST-DISPATCH the sweep reports which classes DO NOT REACH a wrap. It does NOT report which of them are ever instantiated — a hit is a reach gap, NOT a broken fix.
+						Lua 0:01:05:249
+[mod] [SMRTest] SMRTEST-DISPATCH 90_SaveSanitizer               LabelContainer.SetLabelModifier                            link=copy  desc=49    reach=1     UNREACHED=0    (own-copy 0)  MULTI=48 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH 90_SaveSanitizer               LabelContainer.SetLabelModifier                            link=copy  desc=49    reach=1     UNREACHED=0    (own-copy 0)  MULTI=48 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_ArrivalDeaths              Colonist.Idle                                              link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_ArrivalDeaths              Colonist.Idle                                              link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_ArrivalDeaths              Colonist.OnArrival                                         link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_ArrivalDeaths              Colonist.OnArrival                                         link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_ArrivalDeaths              Colonist.Arrive                                            link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_ArrivalDeaths              Colonist.Arrive                                            link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_BombardmentSpread          BaseMeteor.HitsDome                                        link=copy  desc=7     reach=6     UNREACHED=0    (own-copy 0)  MULTI=1 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_BombardmentSpread          BaseMeteor.HitsDome                                        link=copy  desc=7     reach=6     UNREACHED=0    (own-copy 0)  MULTI=1 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_BombardmentSpread          BaseMeteor.GetTimeToImpact                                 link=copy  desc=7     reach=6     UNREACHED=0    (own-copy 0)  MULTI=1 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_BombardmentSpread          BaseMeteor.GetTimeToImpact                                 link=copy  desc=7     reach=6     UNREACHED=0    (own-copy 0)  MULTI=1 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_BrokenTrackSalvage         TrackBase.BreakTrackElement                                link=copy  desc=1     reach=1     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_BrokenTrackSalvage         TrackBase.BreakTrackElement                                link=copy  desc=1     reach=1     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_CrystalMysteryHang         Crystal.ComposeProc                                        link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_CrystalMysteryHang         Crystal.ComposeProc                                        link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_DestroyedTunnels           TunnelBase.AddPFTunnel                                     link=copy  desc=4     reach=1     UNREACHED=0    (own-copy 0)  MULTI=3 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_DestroyedTunnels           TunnelBase.AddPFTunnel                                     link=copy  desc=4     reach=1     UNREACHED=0    (own-copy 0)  MULTI=3 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_DestroyedTunnels           TunnelBase.RemovePFTunnel                                  link=copy  desc=4     reach=1     UNREACHED=0    (own-copy 0)  MULTI=3 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_DestroyedTunnels           TunnelBase.RemovePFTunnel                                  link=copy  desc=4     reach=1     UNREACHED=0    (own-copy 0)  MULTI=3 (unreached 0)
+						Lua 0:01:05:250
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_DomeFreeSpaceMismatch      Dome.RefreshFreeLivingSpaces                               link=copy  desc=30    reach=29    UNREACHED=0    (own-copy 0)  MULTI=1 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_DomeFreeSpaceMismatch      Dome.RefreshFreeLivingSpaces                               link=copy  desc=30    reach=29    UNREACHED=0    (own-copy 0)  MULTI=1 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_DomeOverviewHighlight      Community.UICommandCenterStatUpdate                        link=?     desc=35    reach=0     UNREACHED=0    (own-copy 0)  MULTI=35 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_DomeOverviewHighlight      Community.UICommandCenterStatUpdate                        link=?     desc=35    reach=0     UNREACHED=0    (own-copy 0)  MULTI=35 (unreached 0)
+						Lua 0:01:05:251
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_DroneTransportMinors       DroneControl.UpdateRocketsInternal                         link=?     desc=49    reach=0     UNREACHED=0    (own-copy 0)  MULTI=49 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_DroneTransportMinors       DroneControl.UpdateRocketsInternal                         link=?     desc=49    reach=0     UNREACHED=0    (own-copy 0)  MULTI=49 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_FreedHousingNotice         Colonist.SetResidence                                      link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_FreedHousingNotice         Colonist.SetResidence                                      link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_FreedHousingNotice         Residence.CheckHomeForHomeless                             link=?     desc=25    reach=0     UNREACHED=0    (own-copy 0)  MULTI=25 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_FreedHousingNotice         Residence.CheckHomeForHomeless                             link=?     desc=25    reach=0     UNREACHED=0    (own-copy 0)  MULTI=25 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_FreedHousingNotice         Residence.GetFreeSpace                                     link=?     desc=25    reach=0     UNREACHED=0    (own-copy 0)  MULTI=25 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_FreedHousingNotice         Residence.GetFreeSpace                                     link=?     desc=25    reach=0     UNREACHED=0    (own-copy 0)  MULTI=25 (unreached 0)
+						Lua 0:01:05:257
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_GhostFarmOxygen            Building.SetDome                                           link=chain desc=633   reach=91    UNREACHED=0    (own-copy 0)  MULTI=542 (unreached 40)
+[SMRTest] SMRTEST-DISPATCH Fix_GhostFarmOxygen            Building.SetDome                                           link=chain desc=633   reach=91    UNREACHED=0    (own-copy 0)  MULTI=542 (unreached 40)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_GhostFarmOxygen            FarmBase.ApplyOxygenProductionMod                          link=copy  desc=16    reach=10    UNREACHED=6    (own-copy 6) [FarmFungalBase, FarmInsect, FarmInsectBase, FungalFarm, FungalFarmBase, FungalFarm_Asteroid]  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_GhostFarmOxygen            FarmBase.ApplyOxygenProductionMod                          link=copy  desc=16    reach=10    UNREACHED=6    (own-copy 6) [FarmFungalBase, FarmInsect, FarmInsectBase, FungalFarm, FungalFarmBase, FungalFarm_Asteroid]  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_GraphConsumedCaption       City.GetColonyStatsButtons                                 link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_GraphConsumedCaption       City.GetColonyStatsButtons                                 link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_GraphConsumedCaption       ResourceOverview.GetConsumedByMaintenanceYesterday         link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_GraphConsumedCaption       ResourceOverview.GetConsumedByMaintenanceYesterday         link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_GraphConsumedCaption       ResourceOverview.GetConsumedByConsumptionYesterday         link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_GraphConsumedCaption       ResourceOverview.GetConsumedByConsumptionYesterday         link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_GraphConsumedCaption       ResourceOverview.GetProducedYesterday                      link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_GraphConsumedCaption       ResourceOverview.GetProducedYesterday                      link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_JumboCaveReinforcementWedge ConstructionSite.TestBlockerClearenceProgress              link=copy  desc=13    reach=7     UNREACHED=1    (own-copy 1) [ConstructionGroupLeader]  MULTI=5 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_JumboCaveReinforcementWedge ConstructionSite.TestBlockerClearenceProgress              link=copy  desc=13    reach=7     UNREACHED=1    (own-copy 1) [ConstructionGroupLeader]  MULTI=5 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_LakeEntombment             LandscapeLake.PlacePrefab                                  link=copy  desc=4     reach=4     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_LakeEntombment             LandscapeLake.PlacePrefab                                  link=copy  desc=4     reach=4     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+						Lua 0:01:05:258
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_LakeEntombment             Unit.ExitImpassable                                        link=chain desc=43    reach=0     UNREACHED=1    (own-copy 1) [Firefly]  MULTI=42 (unreached 16)
+[SMRTest] SMRTEST-DISPATCH Fix_LakeEntombment             Unit.ExitImpassable                                        link=chain desc=43    reach=0     UNREACHED=1    (own-copy 1) [Firefly]  MULTI=42 (unreached 16)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_LanderEmptyLaunch          UniversalRocketBase.IsCargoReady                           link=copy  desc=10    reach=10    UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_LanderEmptyLaunch          UniversalRocketBase.IsCargoReady                           link=copy  desc=10    reach=10    UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_LanderEmptyLaunch          UniversalRocketBase.CheckAutoDepart                        link=copy  desc=10    reach=10    UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_LanderEmptyLaunch          UniversalRocketBase.CheckAutoDepart                        link=copy  desc=10    reach=10    UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_LanderEmptyLaunch          UniversalRocketBase.IsSpecialAutomode                      link=copy  desc=10    reach=10    UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_LanderEmptyLaunch          UniversalRocketBase.IsSpecialAutomode                      link=copy  desc=10    reach=10    UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+						Lua 0:01:05:259
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_LanderEmptyLaunch          UniversalRocketBase.IsPlayerControlled                     link=copy  desc=10    reach=10    UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_LanderEmptyLaunch          UniversalRocketBase.IsPlayerControlled                     link=copy  desc=10    reach=10    UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_LanderEmptyLaunch          AutoMode.IsAutoModeEnabled                                 link=?     desc=21    reach=0     UNREACHED=0    (own-copy 0)  MULTI=21 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_LanderEmptyLaunch          AutoMode.IsAutoModeEnabled                                 link=?     desc=21    reach=0     UNREACHED=0    (own-copy 0)  MULTI=21 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_LayoutTechLock             LayoutConstructionController.Activate                      link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_LayoutTechLock             LayoutConstructionController.Activate                      link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_MirrorSphereSite           MirrorSphereBuildingBase.StartAction                       link=copy  desc=1     reach=1     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_MirrorSphereSite           MirrorSphereBuildingBase.StartAction                       link=copy  desc=1     reach=1     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_NightShiftWork             Colonist.ShouldLeaveForWork                                link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_NightShiftWork             Colonist.ShouldLeaveForWork                                link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_PayloadTemplateRefill      CargoRequestNew.RetrieveRequests                           link=copy  desc=1     reach=1     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_PayloadTemplateRefill      CargoRequestNew.RetrieveRequests                           link=copy  desc=1     reach=1     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_PayloadTemplateRefill      CargoRequestNew.Apply                                      link=copy  desc=1     reach=0     UNREACHED=1    (own-copy 1) [SpaceElevatorCargoRequest]  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_PayloadTemplateRefill      CargoRequestNew.Apply                                      link=copy  desc=1     reach=0     UNREACHED=1    (own-copy 1) [SpaceElevatorCargoRequest]  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_PayloadTemplateRefill      CargoRequestNew.SetRequest                                 link=copy  desc=1     reach=1     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_PayloadTemplateRefill      CargoRequestNew.SetRequest                                 link=copy  desc=1     reach=1     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_PayloadTemplateRefill      CargoRequestNew.PromptRocketCargoIssue                     link=copy  desc=1     reach=1     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_PayloadTemplateRefill      CargoRequestNew.PromptRocketCargoIssue                     link=copy  desc=1     reach=1     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_PayloadTemplateRefill      CargoRequestNew.GetCargoList                               link=copy  desc=1     reach=1     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_PayloadTemplateRefill      CargoRequestNew.GetCargoList                               link=copy  desc=1     reach=1     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_RocketDroneChurn           CargoTransporterNew.UpdateCargoResourceRequests            link=?     desc=13    reach=0     UNREACHED=0    (own-copy 0)  MULTI=13 (unreached 13)
+[SMRTest] SMRTEST-DISPATCH Fix_RocketDroneChurn           CargoTransporterNew.UpdateCargoResourceRequests            link=?     desc=13    reach=0     UNREACHED=0    (own-copy 0)  MULTI=13 (unreached 13)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_RocketDroneChurn           CargoTransporterNew.AddCargoDemandRequest                  link=?     desc=13    reach=0     UNREACHED=0    (own-copy 0)  MULTI=13 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_RocketDroneChurn           CargoTransporterNew.AddCargoDemandRequest                  link=?     desc=13    reach=0     UNREACHED=0    (own-copy 0)  MULTI=13 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_RocketDroneChurn           CargoTransporterNew.AddCargoSupplyRequest                  link=?     desc=13    reach=0     UNREACHED=0    (own-copy 0)  MULTI=13 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_RocketDroneChurn           CargoTransporterNew.AddCargoSupplyRequest                  link=?     desc=13    reach=0     UNREACHED=0    (own-copy 0)  MULTI=13 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_RocketInteractGuard        RCTransport.CanInteractWithObject                          link=copy  desc=4     reach=0     UNREACHED=2    (own-copy 2) [RCConstructor, RCConstructorBase]  MULTI=2 (unreached 2)
+[SMRTest] SMRTEST-DISPATCH Fix_RocketInteractGuard        RCTransport.CanInteractWithObject                          link=copy  desc=4     reach=0     UNREACHED=2    (own-copy 2) [RCConstructor, RCConstructorBase]  MULTI=2 (unreached 2)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_RocketInteractGuard        RCTransport.InteractWithObject                             link=copy  desc=4     reach=0     UNREACHED=2    (own-copy 2) [RCConstructor, RCConstructorBase]  MULTI=2 (unreached 2)
+[SMRTest] SMRTEST-DISPATCH Fix_RocketInteractGuard        RCTransport.InteractWithObject                             link=copy  desc=4     reach=0     UNREACHED=2    (own-copy 2) [RCConstructor, RCConstructorBase]  MULTI=2 (unreached 2)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_SaintBlessing              TraitPreset.AddDomeColonistsModifier                       link=?     desc=1     reach=0     UNREACHED=0    (own-copy 0)  MULTI=1 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_SaintBlessing              TraitPreset.AddDomeColonistsModifier                       link=?     desc=1     reach=0     UNREACHED=0    (own-copy 0)  MULTI=1 (unreached 0)
+						Lua 0:01:05:260
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_SaintBlessing              LabelContainer.SetLabelModifier                            link=copy  desc=49    reach=1     UNREACHED=0    (own-copy 0)  MULTI=48 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_SaintBlessing              LabelContainer.SetLabelModifier                            link=copy  desc=49    reach=1     UNREACHED=0    (own-copy 0)  MULTI=48 (unreached 0)
+						Lua 0:01:05:262
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_ShuttleHubOffAvailable     BaseBuilding.GetWorkNotPermittedReason                     link=copy  desc=694   reach=6     UNREACHED=0    (own-copy 0)  MULTI=688 (unreached 636)
+[SMRTest] SMRTEST-DISPATCH Fix_ShuttleHubOffAvailable     BaseBuilding.GetWorkNotPermittedReason                     link=copy  desc=694   reach=6     UNREACHED=0    (own-copy 0)  MULTI=688 (unreached 636)
+						Lua 0:01:05:264
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_ShuttleHubOffAvailable     BaseBuilding.GetWorkNotPossibleReason                      link=copy  desc=694   reach=5     UNREACHED=1    (own-copy 1) [UpgradeConsumption]  MULTI=688 (unreached 636)
+[SMRTest] SMRTEST-DISPATCH Fix_ShuttleHubOffAvailable     BaseBuilding.GetWorkNotPossibleReason                      link=copy  desc=694   reach=5     UNREACHED=1    (own-copy 1) [UpgradeConsumption]  MULTI=688 (unreached 636)
+						Lua 0:01:05:265
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_StaleReservations          Residence.ReserveResidence                                 link=?     desc=25    reach=0     UNREACHED=0    (own-copy 0)  MULTI=25 (unreached 4)
+[SMRTest] SMRTEST-DISPATCH Fix_StaleReservations          Residence.ReserveResidence                                 link=?     desc=25    reach=0     UNREACHED=0    (own-copy 0)  MULTI=25 (unreached 4)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_StaleReservations          Residence.CancelResidenceReservation                       link=?     desc=25    reach=0     UNREACHED=0    (own-copy 0)  MULTI=25 (unreached 4)
+[SMRTest] SMRTEST-DISPATCH Fix_StaleReservations          Residence.CancelResidenceReservation                       link=?     desc=25    reach=0     UNREACHED=0    (own-copy 0)  MULTI=25 (unreached 4)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_TrackConnectorPingPong     TrackConnectedObjBase.CreateConnectorElements              link=?     desc=9     reach=0     UNREACHED=0    (own-copy 0)  MULTI=9 (unreached 3)
+[SMRTest] SMRTEST-DISPATCH Fix_TrackConnectorPingPong     TrackConnectedObjBase.CreateConnectorElements              link=?     desc=9     reach=0     UNREACHED=0    (own-copy 0)  MULTI=9 (unreached 3)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_TrackConnectorPingPong     TrackConnectedObjBase.Done                                 link=?     desc=9     reach=0     UNREACHED=0    (own-copy 0)  MULTI=9 (unreached 9)
+[SMRTest] SMRTEST-DISPATCH Fix_TrackConnectorPingPong     TrackConnectedObjBase.Done                                 link=?     desc=9     reach=0     UNREACHED=0    (own-copy 0)  MULTI=9 (unreached 9)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_TrackSalvageRefund         TrackBase.GetRefundResources                               link=copy  desc=1     reach=1     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_TrackSalvageRefund         TrackBase.GetRefundResources                               link=copy  desc=1     reach=1     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_TrackSalvageRefund         TrackGridElement.Demolish                                  link=?     desc=1     reach=0     UNREACHED=0    (own-copy 0)  MULTI=1 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_TrackSalvageRefund         TrackGridElement.Demolish                                  link=?     desc=1     reach=0     UNREACHED=0    (own-copy 0)  MULTI=1 (unreached 0)
+						Lua 0:01:05:270
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_TrackSalvageRefund         Building.CalcRefundAmount                                  link=chain desc=633   reach=91    UNREACHED=0    (own-copy 0)  MULTI=542 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_TrackSalvageRefund         Building.CalcRefundAmount                                  link=chain desc=633   reach=91    UNREACHED=0    (own-copy 0)  MULTI=542 (unreached 0)
+						Lua 0:01:05:275
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_TrackSalvageRefund         Building.AddRefundResource                                 link=chain desc=633   reach=91    UNREACHED=0    (own-copy 0)  MULTI=542 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_TrackSalvageRefund         Building.AddRefundResource                                 link=chain desc=633   reach=91    UNREACHED=0    (own-copy 0)  MULTI=542 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_TrackSalvageRefund         ConstructionGroupLeader.Complete                           link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_TrackSalvageRefund         ConstructionGroupLeader.Complete                           link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_TrackSalvageRefund         ConstructionSite.MarkSpentResources                        link=copy  desc=13    reach=8     UNREACHED=0    (own-copy 0)  MULTI=5 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_TrackSalvageRefund         ConstructionSite.MarkSpentResources                        link=copy  desc=13    reach=8     UNREACHED=0    (own-copy 0)  MULTI=5 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_TrackSalvageWipe           TrackGridElement.DemolishAndSplitTrack                     link=?     desc=1     reach=0     UNREACHED=0    (own-copy 0)  MULTI=1 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_TrackSalvageWipe           TrackGridElement.DemolishAndSplitTrack                     link=?     desc=1     reach=0     UNREACHED=0    (own-copy 0)  MULTI=1 (unreached 0)
+						Lua 0:01:05:276
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_TrackTunnelPowerBridge     TrackBase.ConnectToGrids                                   link=copy  desc=1     reach=1     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_TrackTunnelPowerBridge     TrackBase.ConnectToGrids                                   link=copy  desc=1     reach=1     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_TrackTunnelPowerBridge     TrackBase.GetStartStation                                  link=copy  desc=1     reach=1     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_TrackTunnelPowerBridge     TrackBase.GetStartStation                                  link=copy  desc=1     reach=1     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_TrackTunnelPowerBridge     TrackBase.GetEndStation                                    link=copy  desc=1     reach=1     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_TrackTunnelPowerBridge     TrackBase.GetEndStation                                    link=copy  desc=1     reach=1     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_TrackTunnelPowerBridge     TrackBase.Done                                             link=copy  desc=1     reach=1     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_TrackTunnelPowerBridge     TrackBase.Done                                             link=copy  desc=1     reach=1     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_TrackTunnelPowerBridge     TrackBase.DisconnectFromGrids                              link=copy  desc=1     reach=1     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_TrackTunnelPowerBridge     TrackBase.DisconnectFromGrids                              link=copy  desc=1     reach=1     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_TrainCargoDumping          Train.UnloadAll                                            link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_TrainCargoDumping          Train.UnloadAll                                            link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_TrainWaitTime              TransportStatistics.AddSpentTime                           link=?     desc=10    reach=0     UNREACHED=0    (own-copy 0)  MULTI=10 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_TrainWaitTime              TransportStatistics.AddSpentTime                           link=?     desc=10    reach=0     UNREACHED=0    (own-copy 0)  MULTI=10 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_TrainWaitTime              Colonist.BoardVehicle                                      link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_TrainWaitTime              Colonist.BoardVehicle                                      link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_TrainWaitTime              Colonist.ExitVehicle                                       link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_TrainWaitTime              Colonist.ExitVehicle                                       link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+						Lua 0:01:05:281
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_TrainsToVoid               Building.OnDemolish                                        link=chain desc=633   reach=89    UNREACHED=2    (own-copy 2) [AsteroidCatcher, AsteroidCatcherBase]  MULTI=542 (unreached 62)
+[SMRTest] SMRTEST-DISPATCH Fix_TrainsToVoid               Building.OnDemolish                                        link=chain desc=633   reach=89    UNREACHED=2    (own-copy 2) [AsteroidCatcher, AsteroidCatcherBase]  MULTI=542 (unreached 62)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_TrainsToVoid               Train.DestroySilent                                        link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_TrainsToVoid               Train.DestroySilent                                        link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_VacuumWalks                Colonist.TryToEmigrateToDome                               link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_VacuumWalks                Colonist.TryToEmigrateToDome                               link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_VacuumWalks                Colonist.DiscardTransportTicket                            link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_VacuumWalks                Colonist.DiscardTransportTicket                            link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH Fix_VacuumWalks                Colonist.ClearTransportRequest                             link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[SMRTest] SMRTEST-DISPATCH Fix_VacuumWalks                Colonist.ClearTransportRequest                             link=?     desc=0     reach=0     UNREACHED=0    (own-copy 0)  MULTI=0 (unreached 0)
+[mod] [SMRTest] SMRTEST-DISPATCH TOTAL targets=72 clean=64 with-unreached=8 missing=0 | descendants=4495 reach=499 UNREACHED=16 | MULTI-PARENT=3980 (of which unreached=1427, reported separately, NOT folded into either verdict)
+[SMRTest] SMRTEST-DISPATCH TOTAL targets=72 clean=64 with-unreached=8 missing=0 | descendants=4495 reach=499 UNREACHED=16 | MULTI-PARENT=3980 (of which unreached=1427, reported separately, NOT folded into either verdict)
+[mod] [SMRTest] PASS  DispatchReach            [behavior] swept 72 declared targets over 4495 descendants: 64 targets clean, 8 with unreached descendants (16 single-parent-path classes do not reach their wrap; a further 1427 multi-parent-path classes do not, reported separately). ⛔ UNREACHED is a reach gap, NOT a broken-fix count — instantiation is not measured. Detail: SMRTEST-DISPATCH lines.
+[SMRTest] PASS  DispatchReach            [behavior] swept 72 declared targets over 4495 descendants: 64 targets clean, 8 with unreached descendants (16 single-parent-path classes do not reach their wrap; a further 1427 multi-parent-path classes do not, reported separately). ⛔ UNREACHED is a reach gap, NOT a broken-fix count — instantiation is not measured. Detail: SMRTEST-DISPATCH lines.
+[mod] [SMRTest] SMRTEST-F105GUARD LandscapeConstructionSite: unguarded-state call ok=true
+[SMRTest] SMRTEST-F105GUARD LandscapeConstructionSite: unguarded-state call ok=true
+[mod] [SMRTest] SMRTEST-F105GUARD ClearWasteRockConstructionSite: unguarded-state call ok=true
+[SMRTest] SMRTEST-F105GUARD ClearWasteRockConstructionSite: unguarded-state call ok=true
+[mod] [SMRTest] SMRTEST-F105GUARD TerrainPaintConstructionSite: unguarded-state call ok=true
+[SMRTest] SMRTEST-F105GUARD TerrainPaintConstructionSite: unguarded-state call ok=true
+[mod] [SMRTest] SMRTEST-F107WIDE ConstructionSite: ungathered-state call ok=true
+[SMRTest] SMRTEST-F107WIDE ConstructionSite: ungathered-state call ok=true
+[mod] [SMRTest] SMRTEST-F107WIDE ConstructionSite: gathered-state call ok=true set_to=90 start_cost=50
+[SMRTest] SMRTEST-F107WIDE ConstructionSite: gathered-state call ok=true set_to=90 start_cost=50
+[mod] [SMRTest] PASS  LandscapeCostGuard       [retired] guard reached and still delegating on LandscapeConstructionSite, ClearWasteRockConstructionSite, TerrainPaintConstructionSite, ConstructionSite (clause 3, ordinary site). ⛔ mechanism + guard only — the field route (a levelling site on a real map plus a *_Construction cost tech) is NOT tested here. The F107 widening to ordinary construction sites IS now covered at the mechanism level: on ConstructionSite itself the guard returns in the ungathered state where vanilla raises at :670, and delegates identically (SetAmount 90, start cost 50) in the gathered state where vanilla succeeds.
+[SMRTest] PASS  LandscapeCostGuard       [retired] guard reached and still delegating on LandscapeConstructionSite, ClearWasteRockConstructionSite, TerrainPaintConstructionSite, ConstructionSite (clause 3, ordinary site). ⛔ mechanism + guard only — the field route (a levelling site on a real map plus a *_Construction cost tech) is NOT tested here. The F107 widening to ordinary construction sites IS now covered at the mechanism level: on ConstructionSite itself the guard returns in the ungathered state where vanilla raises at :670, and delegates identically (SetAmount 90, start cost 50) in the gathered state where vanilla succeeds.
+[mod] [SMRTest] FAIL  CloggedBuildingRelease   [behavior] fix 'CloggedBuildingRelease' is inactive — BuildingClogged now re-enables the building itself after 3600000ms
+[SMRTest] FAIL  CloggedBuildingRelease   [behavior] fix 'CloggedBuildingRelease' is inactive — BuildingClogged now re-enables the building itself after 3600000ms
+						Lua 0:01:05:282
+[mod] [SMRTest] PASS  FactionDomeSizeGate      [behavior] ⚖️ judgment call: 7 of 7 faction dislikes now wait for ten colonists in a dome (CollectiveHomeless, CollectiveUnemployment, NewSolHomeless, NewSolUnemployment, ProsperityUnemployment, UtopiaHomeless, UtopiaUnemployment); each refuses a dome of 3 with 1 idle/homeless colonist and still fires on a dome of 10, and both Justice Movement dislikes behave exactly as they shipped. ⛔ evals only — no faction was seated and no approval recalc ran here (checklist 158's A/B does that)
+[SMRTest] PASS  FactionDomeSizeGate      [behavior] ⚖️ judgment call: 7 of 7 faction dislikes now wait for ten colonists in a dome (CollectiveHomeless, CollectiveUnemployment, NewSolHomeless, NewSolUnemployment, ProsperityUnemployment, UtopiaHomeless, UtopiaUnemployment); each refuses a dome of 3 with 1 idle/homeless colonist and still fires on a dome of 10, and both Justice Movement dislikes behave exactly as they shipped. ⛔ evals only — no faction was seated and no approval recalc ran here (checklist 158's A/B does that)
+[mod] [SMRTest] SKIP  BuildingCodesPrefab      [behavior] the module stood itself down: the Building Codes handlers no longer skip prefab buildings (C88 repaired by the game?) — C88 is a RETIRE candidate
+[SMRTest] SKIP  BuildingCodesPrefab      [behavior] the module stood itself down: the Building Codes handlers no longer skip prefab buildings (C88 repaired by the game?) — C88 is a RETIRE candidate
+[mod] [SMRTest] FAIL  DryFarmingFarms          [behavior] Dry Farming carries no water entry for FarmUnderground — the tech promises every crop and this farm is still unpaid
+[SMRTest] FAIL  DryFarmingFarms          [behavior] Dry Farming carries no water entry for FarmUnderground — the tech promises every crop and this farm is still unpaid
+[mod] [SMRTest] PASS  AcknowledgedWarnings     [behavior] all eight routed ids stamp listed buildings, block re-adds, skip the id-wide window, and re-arm on recovery
+[SMRTest] PASS  AcknowledgedWarnings     [behavior] all eight routed ids stamp listed buildings, block re-adds, skip the id-wide window, and re-arm on recovery
+[mod] [SMRTest] SKIP  ResidencyControl         [behavior] opt-in module is inactive (expected — opt-in module, off by default — enable it in Options → Mod Options)
+[SMRTest] SKIP  ResidencyControl         [behavior] opt-in module is inactive (expected — opt-in module, off by default — enable it in Options → Mod Options)
+[LUA ERROR] Lua/Heater.lua:16: attempt to call a nil value (method 'ApplyHeat')
+  Lua/Heater.lua(16):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(211):  field Done
+  Mod/SMR_CommunityFixPackTestKit/Code/60_Probes_Opt.lua(246):   <>
+  [C](-1):  global pcall
+  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(278):  upvalue with_globals
+  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(292):  upvalue WithGlobals
+  Mod/SMR_CommunityFixPackTestKit/Code/60_Probes_Opt.lua(240):   <>
+  [C](-1):  global pcall
+  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(424):  field Run
+  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(510):   <>
+  [C](-1):  global pcall
+  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(243):   <>
+  [C](-1):  global sprocall
+  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(158):  upvalue step
+  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(299):  field Flow
+  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(324):   <>
+        --- end of stack
+Locals:
+	                self |   object SMRTestRemovedSun
+	            done_map |  boolean false
+[mod] [SMRTK] SMRTK_ERROR kind=lua message="Lua/Heater.lua:16: attempt to call a nil value (method 'ApplyHeat')" stack="  Lua/Heater.lua(16):   <>\n  [C](-1):  global procall\n  CommonLua/Core/classes.lua(211):  field Done\n  Mod/SMR_CommunityFixPackTestKit/Code/60_Probes_Opt.lua(246):   <>\n  [C](-1):  global pcall\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(278):  upvalue with_globals\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(292):  upvalue WithGlobals\n  Mod/SMR_CommunityFixPackTestKit/Code/60_Probes_Opt.lua(240):   <>\n  [C](-1):  global pcall\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(424):  field Run\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(510):   <>\n  [C](-1):  global pcall\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(243):   <>\n  [C](-1):  global sprocall\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(158):  upvalue step\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(299):  field Flow\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(324):   <>\n        --- end of stack" t=29997 id=17
+[SMRTK] SMRTK_ERROR kind=lua message="Lua/Heater.lua:16: attempt to call a nil value (method 'ApplyHeat')" stack="  Lua/Heater.lua(16):   <>\n  [C](-1):  global procall\n  CommonLua/Core/classes.lua(211):  field Done\n  Mod/SMR_CommunityFixPackTestKit/Code/60_Probes_Opt.lua(246):   <>\n  [C](-1):  global pcall\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(278):  upvalue with_globals\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(292):  upvalue WithGlobals\n  Mod/SMR_CommunityFixPackTestKit/Code/60_Probes_Opt.lua(240):   <>\n  [C](-1):  global pcall\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(424):  field Run\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(510):   <>\n  [C](-1):  global pcall\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(243):   <>\n  [C](-1):  global sprocall\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(158):  upvalue step\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(299):  field Flow\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(324):   <>\n        --- end of stack" t=29997 id=17
+[LUA ERROR] Lua/ElectricityGrid.lua:311: attempt to call a nil value (method 'DeleteElectricity')
+  Lua/ElectricityGrid.lua(311):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(211):  field Done
+  Mod/SMR_CommunityFixPackTestKit/Code/60_Probes_Opt.lua(246):   <>
+  [C](-1):  global pcall
+  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(278):  upvalue with_globals
+  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(292):  upvalue WithGlobals
+  Mod/SMR_CommunityFixPackTestKit/Code/60_Probes_Opt.lua(240):   <>
+  [C](-1):  global pcall
+  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(424):  field Run
+  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(510):   <>
+  [C](-1):  global pcall
+  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(243):   <>
+  [C](-1):  global sprocall
+  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(158):  upvalue step
+  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(299):  field Flow
+  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(324):   <>
+        --- end of stack
+Locals:
+	                self |   object SMRTestRemovedSun
+	            done_map |  boolean false
+[mod] [SMRTK] SMRTK_ERROR kind=lua message="Lua/ElectricityGrid.lua:311: attempt to call a nil value (method 'DeleteElectricity')" stack="  Lua/ElectricityGrid.lua(311):   <>\n  [C](-1):  global procall\n  CommonLua/Core/classes.lua(211):  field Done\n  Mod/SMR_CommunityFixPackTestKit/Code/60_Probes_Opt.lua(246):   <>\n  [C](-1):  global pcall\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(278):  upvalue with_globals\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(292):  upvalue WithGlobals\n  Mod/SMR_CommunityFixPackTestKit/Code/60_Probes_Opt.lua(240):   <>\n  [C](-1):  global pcall\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(424):  field Run\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(510):   <>\n  [C](-1):  global pcall\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(243):   <>\n  [C](-1):  global sprocall\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(158):  upvalue step\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(299):  field Flow\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(324):   <>\n        --- end of stack" t=29997 id=18
+[SMRTK] SMRTK_ERROR kind=lua message="Lua/ElectricityGrid.lua:311: attempt to call a nil value (method 'DeleteElectricity')" stack="  Lua/ElectricityGrid.lua(311):   <>\n  [C](-1):  global procall\n  CommonLua/Core/classes.lua(211):  field Done\n  Mod/SMR_CommunityFixPackTestKit/Code/60_Probes_Opt.lua(246):   <>\n  [C](-1):  global pcall\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(278):  upvalue with_globals\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(292):  upvalue WithGlobals\n  Mod/SMR_CommunityFixPackTestKit/Code/60_Probes_Opt.lua(240):   <>\n  [C](-1):  global pcall\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(424):  field Run\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(510):   <>\n  [C](-1):  global pcall\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(243):   <>\n  [C](-1):  global sprocall\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(158):  upvalue step\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(299):  field Flow\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(324):   <>\n        --- end of stack" t=29997 id=18
+[LUA ERROR] Lua/LifeSupportGrid.lua:292: attempt to call a nil value (method 'DeleteLifeSupport')
+  Lua/LifeSupportGrid.lua(292):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(211):  field Done
+  Mod/SMR_CommunityFixPackTestKit/Code/60_Probes_Opt.lua(246):   <>
+  [C](-1):  global pcall
+  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(278):  upvalue with_globals
+  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(292):  upvalue WithGlobals
+  Mod/SMR_CommunityFixPackTestKit/Code/60_Probes_Opt.lua(240):   <>
+  [C](-1):  global pcall
+  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(424):  field Run
+  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(510):   <>
+  [C](-1):  global pcall
+  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(243):   <>
+  [C](-1):  global sprocall
+  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(158):  upvalue step
+  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(299):  field Flow
+  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(324):   <>
+        --- end of stack
+Locals:
+	                self |   object SMRTestRemovedSun
+	            done_map |  boolean false
+[mod] [SMRTK] SMRTK_ERROR kind=lua message="Lua/LifeSupportGrid.lua:292: attempt to call a nil value (method 'DeleteLifeSupport')" stack="  Lua/LifeSupportGrid.lua(292):   <>\n  [C](-1):  global procall\n  CommonLua/Core/classes.lua(211):  field Done\n  Mod/SMR_CommunityFixPackTestKit/Code/60_Probes_Opt.lua(246):   <>\n  [C](-1):  global pcall\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(278):  upvalue with_globals\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(292):  upvalue WithGlobals\n  Mod/SMR_CommunityFixPackTestKit/Code/60_Probes_Opt.lua(240):   <>\n  [C](-1):  global pcall\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(424):  field Run\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(510):   <>\n  [C](-1):  global pcall\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(243):   <>\n  [C](-1):  global sprocall\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(158):  upvalue step\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(299):  field Flow\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(324):   <>\n        --- end of stack" t=29997 id=19
+[SMRTK] SMRTK_ERROR kind=lua message="Lua/LifeSupportGrid.lua:292: attempt to call a nil value (method 'DeleteLifeSupport')" stack="  Lua/LifeSupportGrid.lua(292):   <>\n  [C](-1):  global procall\n  CommonLua/Core/classes.lua(211):  field Done\n  Mod/SMR_CommunityFixPackTestKit/Code/60_Probes_Opt.lua(246):   <>\n  [C](-1):  global pcall\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(278):  upvalue with_globals\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(292):  upvalue WithGlobals\n  Mod/SMR_CommunityFixPackTestKit/Code/60_Probes_Opt.lua(240):   <>\n  [C](-1):  global pcall\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(424):  field Run\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(510):   <>\n  [C](-1):  global pcall\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(243):   <>\n  [C](-1):  global sprocall\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(158):  upvalue step\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(299):  field Flow\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(324):   <>\n        --- end of stack" t=29997 id=19
+[LUA ERROR] Lua/Buildings/Building.lua:531: attempt to call a nil value (method 'Gossip')
+  Lua/Buildings/Building.lua(531):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(211):  field Done
+  Mod/SMR_CommunityFixPackTestKit/Code/60_Probes_Opt.lua(246):   <>
+  [C](-1):  global pcall
+  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(278):  upvalue with_globals
+  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(292):  upvalue WithGlobals
+  Mod/SMR_CommunityFixPackTestKit/Code/60_Probes_Opt.lua(240):   <>
+  [C](-1):  global pcall
+  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(424):  field Run
+  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(510):   <>
+  [C](-1):  global pcall
+  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(243):   <>
+  [C](-1):  global sprocall
+  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(158):  upvalue step
+  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(299):  field Flow
+  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(324):   <>
+        --- end of stack
+Locals:
+	                self |   object SMRTestRemovedSun
+	            done_map |  boolean false
+[mod] [SMRTK] SMRTK_ERROR kind=lua message="Lua/Buildings/Building.lua:531: attempt to call a nil value (method 'Gossip')" stack="  Lua/Buildings/Building.lua(531):   <>\n  [C](-1):  global procall\n  CommonLua/Core/classes.lua(211):  field Done\n  Mod/SMR_CommunityFixPackTestKit/Code/60_Probes_Opt.lua(246):   <>\n  [C](-1):  global pcall\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(278):  upvalue with_globals\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(292):  upvalue WithGlobals\n  Mod/SMR_CommunityFixPackTestKit/Code/60_Probes_Opt.lua(240):   <>\n  [C](-1):  global pcall\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(424):  field Run\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(510):   <>\n  [C](-1):  global pcall\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(243):   <>\n  [C](-1):  global sprocall\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(158):  upvalue step\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(299):  field Flow\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(324):   <>\n        --- end of stack" t=29997 id=20
+[SMRTK] SMRTK_ERROR kind=lua message="Lua/Buildings/Building.lua:531: attempt to call a nil value (method 'Gossip')" stack="  Lua/Buildings/Building.lua(531):   <>\n  [C](-1):  global procall\n  CommonLua/Core/classes.lua(211):  field Done\n  Mod/SMR_CommunityFixPackTestKit/Code/60_Probes_Opt.lua(246):   <>\n  [C](-1):  global pcall\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(278):  upvalue with_globals\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(292):  upvalue WithGlobals\n  Mod/SMR_CommunityFixPackTestKit/Code/60_Probes_Opt.lua(240):   <>\n  [C](-1):  global pcall\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(424):  field Run\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(510):   <>\n  [C](-1):  global pcall\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(243):   <>\n  [C](-1):  global sprocall\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(158):  upvalue step\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(299):  field Flow\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(324):   <>\n        --- end of stack" t=29997 id=20
+[LUA ERROR] Lua/RevealDarkness.lua:192: attempt to call a nil value (method 'GetMap')
+  Lua/RevealDarkness.lua(192):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(211):  field Done
+  Mod/SMR_CommunityFixPackTestKit/Code/60_Probes_Opt.lua(246):   <>
+  [C](-1):  global pcall
+  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(278):  upvalue with_globals
+  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(292):  upvalue WithGlobals
+  Mod/SMR_CommunityFixPackTestKit/Code/60_Probes_Opt.lua(240):   <>
+  [C](-1):  global pcall
+  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(424):  field Run
+  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(510):   <>
+  [C](-1):  global pcall
+  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(243):   <>
+  [C](-1):  global sprocall
+  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(158):  upvalue step
+  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(299):  field Flow
+  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(324):   <>
+        --- end of stack
+Locals:
+	                self |   object SMRTestRemovedSun
+	            done_map |  boolean false
+[mod] [SMRTK] SMRTK_ERROR kind=lua message="Lua/RevealDarkness.lua:192: attempt to call a nil value (method 'GetMap')" stack="  Lua/RevealDarkness.lua(192):   <>\n  [C](-1):  global procall\n  CommonLua/Core/classes.lua(211):  field Done\n  Mod/SMR_CommunityFixPackTestKit/Code/60_Probes_Opt.lua(246):   <>\n  [C](-1):  global pcall\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(278):  upvalue with_globals\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(292):  upvalue WithGlobals\n  Mod/SMR_CommunityFixPackTestKit/Code/60_Probes_Opt.lua(240):   <>\n  [C](-1):  global pcall\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(424):  field Run\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(510):   <>\n  [C](-1):  global pcall\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(243):   <>\n  [C](-1):  global sprocall\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(158):  upvalue step\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(299):  field Flow\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(324):   <>\n        --- end of stack" t=29997 id=21
+[SMRTK] SMRTK_ERROR kind=lua message="Lua/RevealDarkness.lua:192: attempt to call a nil value (method 'GetMap')" stack="  Lua/RevealDarkness.lua(192):   <>\n  [C](-1):  global procall\n  CommonLua/Core/classes.lua(211):  field Done\n  Mod/SMR_CommunityFixPackTestKit/Code/60_Probes_Opt.lua(246):   <>\n  [C](-1):  global pcall\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(278):  upvalue with_globals\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(292):  upvalue WithGlobals\n  Mod/SMR_CommunityFixPackTestKit/Code/60_Probes_Opt.lua(240):   <>\n  [C](-1):  global pcall\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(424):  field Run\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(510):   <>\n  [C](-1):  global pcall\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(243):   <>\n  [C](-1):  global sprocall\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(158):  upvalue step\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(299):  field Flow\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(324):   <>\n        --- end of stack" t=29997 id=21
+[LUA ERROR] Lua/CityObject.lua:37: attempt to call a nil value (method 'AutoRemoveFromCityLabels')
+  Lua/CityObject.lua(37):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(211):  field Done
+  Mod/SMR_CommunityFixPackTestKit/Code/60_Probes_Opt.lua(246):   <>
+  [C](-1):  global pcall
+  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(278):  upvalue with_globals
+  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(292):  upvalue WithGlobals
+  Mod/SMR_CommunityFixPackTestKit/Code/60_Probes_Opt.lua(240):   <>
+  [C](-1):  global pcall
+  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(424):  field Run
+  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(510):   <>
+  [C](-1):  global pcall
+  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(243):   <>
+  [C](-1):  global sprocall
+  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(158):  upvalue step
+  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(299):  field Flow
+  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(324):   <>
+        --- end of stack
+Locals:
+	                self |   object SMRTestRemovedSun
+	            done_map |  boolean false
+						Lua 0:01:05:283
+[mod] [SMRTK] SMRTK_ERROR kind=lua message="Lua/CityObject.lua:37: attempt to call a nil value (method 'AutoRemoveFromCityLabels')" stack="  Lua/CityObject.lua(37):   <>\n  [C](-1):  global procall\n  CommonLua/Core/classes.lua(211):  field Done\n  Mod/SMR_CommunityFixPackTestKit/Code/60_Probes_Opt.lua(246):   <>\n  [C](-1):  global pcall\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(278):  upvalue with_globals\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(292):  upvalue WithGlobals\n  Mod/SMR_CommunityFixPackTestKit/Code/60_Probes_Opt.lua(240):   <>\n  [C](-1):  global pcall\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(424):  field Run\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(510):   <>\n  [C](-1):  global pcall\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(243):   <>\n  [C](-1):  global sprocall\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(158):  upvalue step\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(299):  field Flow\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(324):   <>\n        --- end of stack" t=29997 id=22
+[SMRTK] SMRTK_ERROR kind=lua message="Lua/CityObject.lua:37: attempt to call a nil value (method 'AutoRemoveFromCityLabels')" stack="  Lua/CityObject.lua(37):   <>\n  [C](-1):  global procall\n  CommonLua/Core/classes.lua(211):  field Done\n  Mod/SMR_CommunityFixPackTestKit/Code/60_Probes_Opt.lua(246):   <>\n  [C](-1):  global pcall\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(278):  upvalue with_globals\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(292):  upvalue WithGlobals\n  Mod/SMR_CommunityFixPackTestKit/Code/60_Probes_Opt.lua(240):   <>\n  [C](-1):  global pcall\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(424):  field Run\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(510):   <>\n  [C](-1):  global pcall\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(243):   <>\n  [C](-1):  global sprocall\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(158):  upvalue step\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(299):  field Flow\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(324):   <>\n        --- end of stack" t=29997 id=22
+[LUA ERROR] Lua/PinnableObject.lua:161: attempt to call a nil value (method 'IsPinned')
+  Lua/PinnableObject.lua(161):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(211):  field Done
+  Mod/SMR_CommunityFixPackTestKit/Code/60_Probes_Opt.lua(246):   <>
+  [C](-1):  global pcall
+  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(278):  upvalue with_globals
+  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(292):  upvalue WithGlobals
+  Mod/SMR_CommunityFixPackTestKit/Code/60_Probes_Opt.lua(240):   <>
+  [C](-1):  global pcall
+  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(424):  field Run
+  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(510):   <>
+  [C](-1):  global pcall
+  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(243):   <>
+  [C](-1):  global sprocall
+  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(158):  upvalue step
+  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(299):  field Flow
+  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(324):   <>
+        --- end of stack
+Locals:
+	                self |   object SMRTestRemovedSun
+[mod] [SMRTK] SMRTK_ERROR kind=lua message="Lua/PinnableObject.lua:161: attempt to call a nil value (method 'IsPinned')" stack="  Lua/PinnableObject.lua(161):   <>\n  [C](-1):  global procall\n  CommonLua/Core/classes.lua(211):  field Done\n  Mod/SMR_CommunityFixPackTestKit/Code/60_Probes_Opt.lua(246):   <>\n  [C](-1):  global pcall\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(278):  upvalue with_globals\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(292):  upvalue WithGlobals\n  Mod/SMR_CommunityFixPackTestKit/Code/60_Probes_Opt.lua(240):   <>\n  [C](-1):  global pcall\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(424):  field Run\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(510):   <>\n  [C](-1):  global pcall\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(243):   <>\n  [C](-1):  global sprocall\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(158):  upvalue step\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(299):  field Flow\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(324):   <>\n        --- end of stack" t=29997 id=23
+[SMRTK] SMRTK_ERROR kind=lua message="Lua/PinnableObject.lua:161: attempt to call a nil value (method 'IsPinned')" stack="  Lua/PinnableObject.lua(161):   <>\n  [C](-1):  global procall\n  CommonLua/Core/classes.lua(211):  field Done\n  Mod/SMR_CommunityFixPackTestKit/Code/60_Probes_Opt.lua(246):   <>\n  [C](-1):  global pcall\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(278):  upvalue with_globals\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(292):  upvalue WithGlobals\n  Mod/SMR_CommunityFixPackTestKit/Code/60_Probes_Opt.lua(240):   <>\n  [C](-1):  global pcall\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(424):  field Run\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(510):   <>\n  [C](-1):  global pcall\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(243):   <>\n  [C](-1):  global sprocall\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(158):  upvalue step\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(299):  field Flow\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(324):   <>\n        --- end of stack" t=29997 id=23
+[LUA ERROR] Lua/GridObject.lua:105: attempt to call a nil value (method 'RemoveFromGrids')
+  Lua/GridObject.lua(105):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(211):  field Done
+  Mod/SMR_CommunityFixPackTestKit/Code/60_Probes_Opt.lua(246):   <>
+  [C](-1):  global pcall
+  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(278):  upvalue with_globals
+  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(292):  upvalue WithGlobals
+  Mod/SMR_CommunityFixPackTestKit/Code/60_Probes_Opt.lua(240):   <>
+  [C](-1):  global pcall
+  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(424):  field Run
+  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(510):   <>
+  [C](-1):  global pcall
+  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(243):   <>
+  [C](-1):  global sprocall
+  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(158):  upvalue step
+  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(299):  field Flow
+  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(324):   <>
+        --- end of stack
+Locals:
+	                self |   object SMRTestRemovedSun
+	            done_map |  boolean false
+[mod] [SMRTK] SMRTK_ERROR kind=lua message="Lua/GridObject.lua:105: attempt to call a nil value (method 'RemoveFromGrids')" stack="  Lua/GridObject.lua(105):   <>\n  [C](-1):  global procall\n  CommonLua/Core/classes.lua(211):  field Done\n  Mod/SMR_CommunityFixPackTestKit/Code/60_Probes_Opt.lua(246):   <>\n  [C](-1):  global pcall\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(278):  upvalue with_globals\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(292):  upvalue WithGlobals\n  Mod/SMR_CommunityFixPackTestKit/Code/60_Probes_Opt.lua(240):   <>\n  [C](-1):  global pcall\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(424):  field Run\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(510):   <>\n  [C](-1):  global pcall\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(243):   <>\n  [C](-1):  global sprocall\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(158):  upvalue step\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(299):  field Flow\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(324):   <>\n        --- end of stack" t=29997 id=24
+[SMRTK] SMRTK_ERROR kind=lua message="Lua/GridObject.lua:105: attempt to call a nil value (method 'RemoveFromGrids')" stack="  Lua/GridObject.lua(105):   <>\n  [C](-1):  global procall\n  CommonLua/Core/classes.lua(211):  field Done\n  Mod/SMR_CommunityFixPackTestKit/Code/60_Probes_Opt.lua(246):   <>\n  [C](-1):  global pcall\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(278):  upvalue with_globals\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(292):  upvalue WithGlobals\n  Mod/SMR_CommunityFixPackTestKit/Code/60_Probes_Opt.lua(240):   <>\n  [C](-1):  global pcall\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(424):  field Run\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(510):   <>\n  [C](-1):  global pcall\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(243):   <>\n  [C](-1):  global sprocall\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(158):  upvalue step\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(299):  field Flow\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(324):   <>\n        --- end of stack" t=29997 id=24
+[LUA ERROR] CommonLua/Classes/AutoAttach.lua:183: attempt to call a nil value (method 'SetDetachedMode')
+  CommonLua/Classes/AutoAttach.lua(183):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(211):  field Done
+  Mod/SMR_CommunityFixPackTestKit/Code/60_Probes_Opt.lua(246):   <>
+  [C](-1):  global pcall
+  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(278):  upvalue with_globals
+  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(292):  upvalue WithGlobals
+  Mod/SMR_CommunityFixPackTestKit/Code/60_Probes_Opt.lua(240):   <>
+  [C](-1):  global pcall
+  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(424):  field Run
+  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(510):   <>
+  [C](-1):  global pcall
+  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(243):   <>
+  [C](-1):  global sprocall
+  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(158):  upvalue step
+  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(299):  field Flow
+  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(324):   <>
+        --- end of stack
+Locals:
+	                self |   object SMRTestRemovedSun
+	            done_map |  boolean false
+[mod] [SMRTK] SMRTK_ERROR kind=lua message="CommonLua/Classes/AutoAttach.lua:183: attempt to call a nil value (method 'SetDetachedMode')" stack="  CommonLua/Classes/AutoAttach.lua(183):   <>\n  [C](-1):  global procall\n  CommonLua/Core/classes.lua(211):  field Done\n  Mod/SMR_CommunityFixPackTestKit/Code/60_Probes_Opt.lua(246):   <>\n  [C](-1):  global pcall\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(278):  upvalue with_globals\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(292):  upvalue WithGlobals\n  Mod/SMR_CommunityFixPackTestKit/Code/60_Probes_Opt.lua(240):   <>\n  [C](-1):  global pcall\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(424):  field Run\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(510):   <>\n  [C](-1):  global pcall\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(243):   <>\n  [C](-1):  global sprocall\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(158):  upvalue step\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(299):  field Flow\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(324):   <>\n        --- end of stack" t=29997 id=25
+[SMRTK] SMRTK_ERROR kind=lua message="CommonLua/Classes/AutoAttach.lua:183: attempt to call a nil value (method 'SetDetachedMode')" stack="  CommonLua/Classes/AutoAttach.lua(183):   <>\n  [C](-1):  global procall\n  CommonLua/Core/classes.lua(211):  field Done\n  Mod/SMR_CommunityFixPackTestKit/Code/60_Probes_Opt.lua(246):   <>\n  [C](-1):  global pcall\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(278):  upvalue with_globals\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(292):  upvalue WithGlobals\n  Mod/SMR_CommunityFixPackTestKit/Code/60_Probes_Opt.lua(240):   <>\n  [C](-1):  global pcall\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(424):  field Run\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(510):   <>\n  [C](-1):  global pcall\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(243):   <>\n  [C](-1):  global sprocall\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(158):  upvalue step\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(299):  field Flow\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(324):   <>\n        --- end of stack" t=29997 id=25
+[LUA ERROR] CommonLua/TaskRequest.lua:92: attempt to call a nil value (method 'CleanCommandCentersRequests')
+  CommonLua/TaskRequest.lua(92):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(211):  field Done
+  Mod/SMR_CommunityFixPackTestKit/Code/60_Probes_Opt.lua(246):   <>
+  [C](-1):  global pcall
+  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(278):  upvalue with_globals
+  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(292):  upvalue WithGlobals
+  Mod/SMR_CommunityFixPackTestKit/Code/60_Probes_Opt.lua(240):   <>
+  [C](-1):  global pcall
+  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(424):  field Run
+  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(510):   <>
+  [C](-1):  global pcall
+  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(243):   <>
+  [C](-1):  global sprocall
+  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(158):  upvalue step
+  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(299):  field Flow
+  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(324):   <>
+        --- end of stack
+Locals:
+	                self |   object SMRTestRemovedSun
+	            done_map |  boolean false
+[mod] [SMRTK] SMRTK_ERROR kind=lua message="CommonLua/TaskRequest.lua:92: attempt to call a nil value (method 'CleanCommandCentersRequests')" stack="  CommonLua/TaskRequest.lua(92):   <>\n  [C](-1):  global procall\n  CommonLua/Core/classes.lua(211):  field Done\n  Mod/SMR_CommunityFixPackTestKit/Code/60_Probes_Opt.lua(246):   <>\n  [C](-1):  global pcall\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(278):  upvalue with_globals\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(292):  upvalue WithGlobals\n  Mod/SMR_CommunityFixPackTestKit/Code/60_Probes_Opt.lua(240):   <>\n  [C](-1):  global pcall\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(424):  field Run\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(510):   <>\n  [C](-1):  global pcall\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(243):   <>\n  [C](-1):  global sprocall\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(158):  upvalue step\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(299):  field Flow\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(324):   <>\n        --- end of stack" t=29997 id=26
+[SMRTK] SMRTK_ERROR kind=lua message="CommonLua/TaskRequest.lua:92: attempt to call a nil value (method 'CleanCommandCentersRequests')" stack="  CommonLua/TaskRequest.lua(92):   <>\n  [C](-1):  global procall\n  CommonLua/Core/classes.lua(211):  field Done\n  Mod/SMR_CommunityFixPackTestKit/Code/60_Probes_Opt.lua(246):   <>\n  [C](-1):  global pcall\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(278):  upvalue with_globals\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(292):  upvalue WithGlobals\n  Mod/SMR_CommunityFixPackTestKit/Code/60_Probes_Opt.lua(240):   <>\n  [C](-1):  global pcall\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(424):  field Run\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(510):   <>\n  [C](-1):  global pcall\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(243):   <>\n  [C](-1):  global sprocall\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(158):  upvalue step\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(299):  field Flow\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(324):   <>\n        --- end of stack" t=29997 id=26
+[LUA ERROR] Lua/Buildings/Holder.lua:8: attempt to call a nil value (method 'KickUnitsFromHolder')
+  Lua/Buildings/Holder.lua(8):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(211):  field Done
+  Mod/SMR_CommunityFixPackTestKit/Code/60_Probes_Opt.lua(246):   <>
+  [C](-1):  global pcall
+  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(278):  upvalue with_globals
+  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(292):  upvalue WithGlobals
+  Mod/SMR_CommunityFixPackTestKit/Code/60_Probes_Opt.lua(240):   <>
+  [C](-1):  global pcall
+  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(424):  field Run
+  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(510):   <>
+  [C](-1):  global pcall
+  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(243):   <>
+  [C](-1):  global sprocall
+  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(158):  upvalue step
+  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(299):  field Flow
+  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(324):   <>
+        --- end of stack
+Locals:
+	                self |   object SMRTestRemovedSun
+	            done_map |  boolean false
+[mod] [SMRTK] SMRTK_ERROR kind=lua message="Lua/Buildings/Holder.lua:8: attempt to call a nil value (method 'KickUnitsFromHolder')" stack="  Lua/Buildings/Holder.lua(8):   <>\n  [C](-1):  global procall\n  CommonLua/Core/classes.lua(211):  field Done\n  Mod/SMR_CommunityFixPackTestKit/Code/60_Probes_Opt.lua(246):   <>\n  [C](-1):  global pcall\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(278):  upvalue with_globals\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(292):  upvalue WithGlobals\n  Mod/SMR_CommunityFixPackTestKit/Code/60_Probes_Opt.lua(240):   <>\n  [C](-1):  global pcall\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(424):  field Run\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(510):   <>\n  [C](-1):  global pcall\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(243):   <>\n  [C](-1):  global sprocall\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(158):  upvalue step\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(299):  field Flow\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(324):   <>\n        --- end of stack" t=29997 id=27
+[SMRTK] SMRTK_ERROR kind=lua message="Lua/Buildings/Holder.lua:8: attempt to call a nil value (method 'KickUnitsFromHolder')" stack="  Lua/Buildings/Holder.lua(8):   <>\n  [C](-1):  global procall\n  CommonLua/Core/classes.lua(211):  field Done\n  Mod/SMR_CommunityFixPackTestKit/Code/60_Probes_Opt.lua(246):   <>\n  [C](-1):  global pcall\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(278):  upvalue with_globals\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(292):  upvalue WithGlobals\n  Mod/SMR_CommunityFixPackTestKit/Code/60_Probes_Opt.lua(240):   <>\n  [C](-1):  global pcall\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(424):  field Run\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(510):   <>\n  [C](-1):  global pcall\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(243):   <>\n  [C](-1):  global sprocall\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(158):  upvalue step\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(299):  field Flow\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(324):   <>\n        --- end of stack" t=29997 id=27
+[LUA ERROR] CommonLua/TaskRequest.lua:89: attempt to call a nil value (method 'SetRequestsSource')
+  CommonLua/TaskRequest.lua(89):   <>
+  [C](-1):  global procall
+  CommonLua/Core/classes.lua(211):  field Done
+  Mod/SMR_CommunityFixPackTestKit/Code/60_Probes_Opt.lua(269):   <>
+  [C](-1):  global pcall
+  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(424):  field Run
+  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(510):   <>
+  [C](-1):  global pcall
+  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(243):   <>
+  [C](-1):  global sprocall
+  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(158):  upvalue step
+  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(299):  field Flow
+  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(324):   <>
+        --- end of stack
+Locals:
+	                self |   object SMRTestMapSun
+	            done_map |  boolean true
+[mod] [SMRTK] SMRTK_ERROR kind=lua message="CommonLua/TaskRequest.lua:89: attempt to call a nil value (method 'SetRequestsSource')" stack="  CommonLua/TaskRequest.lua(89):   <>\n  [C](-1):  global procall\n  CommonLua/Core/classes.lua(211):  field Done\n  Mod/SMR_CommunityFixPackTestKit/Code/60_Probes_Opt.lua(269):   <>\n  [C](-1):  global pcall\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(424):  field Run\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(510):   <>\n  [C](-1):  global pcall\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(243):   <>\n  [C](-1):  global sprocall\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(158):  upvalue step\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(299):  field Flow\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(324):   <>\n        --- end of stack" t=29997 id=28
+[SMRTK] SMRTK_ERROR kind=lua message="CommonLua/TaskRequest.lua:89: attempt to call a nil value (method 'SetRequestsSource')" stack="  CommonLua/TaskRequest.lua(89):   <>\n  [C](-1):  global procall\n  CommonLua/Core/classes.lua(211):  field Done\n  Mod/SMR_CommunityFixPackTestKit/Code/60_Probes_Opt.lua(269):   <>\n  [C](-1):  global pcall\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(424):  field Run\n  Mod/SMR_CommunityFixPackTestKit/Code/00_TestCore.lua(510):   <>\n  [C](-1):  global pcall\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(243):   <>\n  [C](-1):  global sprocall\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(158):  upvalue step\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(299):  field Flow\n  Mod/SMR_CommunityFixPackTestKit/Code/95_AutoRun.lua(324):   <>\n        --- end of stack" t=29997 id=28
+[mod] [SMRTest] PASS  MultipleSuns             [behavior] build limit lifted; panels bind to any sun and relink to a survivor on removal
+[SMRTest] PASS  MultipleSuns             [behavior] build limit lifted; panels bind to any sun and relink to a survivor on removal
+[mod] [SMRTest] SKIP  CohortHousing            [behavior] opt-in mod not installed or module not present
+[SMRTest] SKIP  CohortHousing            [behavior] opt-in mod not installed or module not present
+[mod] [SMRTest] SKIP  NoHomeless               [behavior] opt-in mod not installed or module not present
+[SMRTest] SKIP  NoHomeless               [behavior] opt-in mod not installed or module not present
+[mod] [SMRTest] PASS  DroneStatDials           [behavior] 2x/+1 landed as label modifiers (move_speed +100, carry +1 over probe-forced base 1) and base removed both by id; account carry dial OFF BASE on entry (const 3 vs base 1) — set it to base before any human baseline read
+[SMRTest] PASS  DroneStatDials           [behavior] 2x/+1 landed as label modifiers (move_speed +100, carry +1 over probe-forced base 1) and base removed both by id; account carry dial OFF BASE on entry (const 3 vs base 1) — set it to base before any human baseline read
+[mod] [SMRTest] FAIL  OptionsMenuOptIn         [behavior] ClassicRockets is not in the opt-in registry — its toggle would do nothing
+[SMRTest] FAIL  OptionsMenuOptIn         [behavior] ClassicRockets is not in the opt-in registry — its toggle would do nothing
+[mod] [SMRTest] PASS  OptionsMenuFixPack       [behavior] fix pack declares no default_options and no option items, and none of the 8 moved ids is in its registry
+						Lua 0:01:05:284
+[SMRTest] PASS  OptionsMenuFixPack       [behavior] fix pack declares no default_options and no option items, and none of the 8 moved ids is in its registry
+[mod] [SMRTest] SKIP  SaveRescueCleanPass      [behavior] save-rescue mod not installed (separate mod — not a failure)
+[SMRTest] SKIP  SaveRescueCleanPass      [behavior] save-rescue mod not installed (separate mod — not a failure)
+[mod] [SMRTest] SKIP  SaveRescueStandDown      [behavior] save-rescue mod not installed (separate mod — not a failure)
+[SMRTest] SKIP  SaveRescueStandDown      [behavior] save-rescue mod not installed (separate mod — not a failure)
+[mod] [SMRTest] SKIP  SaveRescueIdempotent     [behavior] save-rescue mod not installed (separate mod — not a failure)
+[SMRTest] SKIP  SaveRescueIdempotent     [behavior] save-rescue mod not installed (separate mod — not a failure)
+[mod] [SMRTest] SKIP  SaveRescueHealBounds     [behavior] save-rescue mod not installed (separate mod — not a failure)
+[SMRTest] SKIP  SaveRescueHealBounds     [behavior] save-rescue mod not installed (separate mod — not a failure)
+[mod] [SMRTest] SKIP  SaveRescueSelfClean      [behavior] save-rescue mod not installed (separate mod — not a failure)
+[SMRTest] SKIP  SaveRescueSelfClean      [behavior] save-rescue mod not installed (separate mod — not a failure)
+[mod] [SMRTest] SKIP  SaveRescueResidueTable   [behavior] save-rescue mod not installed (separate mod — not a failure)
+[SMRTest] SKIP  SaveRescueResidueTable   [behavior] save-rescue mod not installed (separate mod — not a failure)
+[mod] [SMRTest] ---- 61 PASS, 11 FAIL, 23 SKIP, 3 ERROR ----
+[SMRTest] ---- 61 PASS, 11 FAIL, 23 SKIP, 3 ERROR ----
+[mod] [SMRAUTO] END
+[SMRAUTO] END
+[mod] [SMRAUTO] done
+[SMRAUTO] done
+[mod] Error in mod Community Fix Pack — Test Kit (id SMR_CommunityFixPackTestKit, v0.00-001) from appdata
+						Lua 0:01:08:230
+
+
+Stopping the game threads from the Lua side with exit code 0.
+
+					Render 0:01:08:238
+
+
+Stopping the game threads after receiving WM_QUIT.
+
+					Render 0:01:08:511
+
+
+*** Debug::Done()
+Time (ms)	68511
+
+
