@@ -3,7 +3,11 @@
 One-off adjudication brief. The 1.1.1 game-patch triage landed as `c7266f0`
 ("Game patch: triage 1.1.1 and queue follow-up work"): one report, five filings
 (F121–F125), two follow-up briefs, a checklist pair, and a `bodycheck.py` self-test
-change. It has not been adjudicated. This brief is that adjudication.
+change. `d45655c` ("Record 1.1.1 retail audit legs") then folded in the owner's
+completed retail A/B: it cleared the Open Pasture gate, upgraded F123 to a measured
+pack-on result, removed the spent checklist leg, and renumbered the surviving limits
+item to **ck207**. Neither commit has been adjudicated. This brief is that
+adjudication, and `d45655c` is in its scope exactly as `c7266f0` is.
 
 The owner has settled the ordering (2026-09-23): **full-body replacements are the
 critical path and go first.** Phase A produces and commits a full-body priority report
@@ -11,14 +15,14 @@ and messages the orchestrator before Phase B touches anything else. Do not reord
 phases, and do not fold Phase A's findings into a single combined report at the end —
 the owner is waiting on Phase A to start work while Phase B is still running.
 
-This brief was authored from `c7266f0`. Start with `git log --oneline -3`, `git pull`,
+This brief was authored from `d45655c`. Start with `git log --oneline -3`, `git pull`,
 and `git status --short`; if HEAD has moved, re-derive every line number and SHA below
 before use. All cited line numbers are leads and must be re-derived with `rg -n` or
 `grep -n`. Invoke `doc-editing` before record edits and `smr-bug-library` for any
 status or evidence change. Apply `CLAUDE.md`, `docs/agent/WORKFLOW.md`, and
 `docs/agent/FIX_POLICY.md`.
 
-`c7266f0` was produced by one seat and this audit must run on another: execution and
+Both commits were produced by one seat and this audit must run on another: execution and
 audit use different owner-selected seats, and no unattended result enters the record
 unaudited. You are adjudicating another seat's work — judge it on the diff and the
 archived source, never on its report's own summary of itself.
@@ -26,12 +30,12 @@ archived source, never on its report's own summary of itself.
 ## Authority and outcome
 
 This brief authorizes: reading, measuring, two new reports, and corrections to the
-records `c7266f0` wrote where a claim is wrong. It does **not** authorize code changes,
-firing either follow-up brief, deleting modules, or launching the game.
+records those two commits wrote where a claim is wrong. It does **not** authorize
+code changes, firing either follow-up brief, deleting modules, or launching the game.
 
 End state: the owner knows, in rank order and with evidence, which full-body
-replacement work to start first; and every load-bearing claim in `c7266f0` has been
-confirmed, corrected, or marked unproven.
+replacement work to start first; and every load-bearing claim in `c7266f0` and
+`d45655c` has been confirmed, corrected, or marked unproven.
 
 ## Phase A — the full-body priority report (blocking, lands first)
 
@@ -52,7 +56,7 @@ Seed result: **12 full-body of 52 modules** (51 `Code/Fix_*.lua` + `90_SaveSanit
 `00_Core.lua` is framework, not a module). Split 12 full-body · 17 delegating wrappers ·
 22 guards/hooks/data/migrations.
 
-| module | 1.1.1 verdict in `c7266f0` | filing |
+| module | 1.1.1 verdict as landed | filing |
 |---|---|---|
 | `Fix_TrackSalvageWipe` | FIX | F124 |
 | `Fix_VacuumWalks` | FIX | F125 |
@@ -127,17 +131,29 @@ Do not wait for a reply. Continue straight into Phase B.
 
 ## Phase B — the rest of the adjudication
 
-Judge `c7266f0` on the diff and the archived 1.1.1.405907 tree. Depth by consequence:
+Judge `c7266f0` and `d45655c` on the diff and the archived 1.1.1.405907 tree, with
+depth set by consequence:
 
 - **The five filings.** Each `evidence:` field is a claim about archived source. Confirm
   or correct F121–F125 against that tree. A wrong filing is corrected in the entry under
   `smr-bug-library`, not merely noted.
 - **The fifteen REMOVE premises.** Each names a native replacement. A disappearance or
   rename is not proof: trace the replacement body and its consumer. Two rows carry
-  explicit gates — Open Pasture's spots 7–9 and whether
-  `SavegameFixups.ZZZ_UpdateRefuelRequests` is genuinely *enrolled* for an upgrading
-  1.1.0 save rather than merely present. Say for each gate whether it can be settled at
-  the desk or truly needs the owner's A/B (checklist ck207).
+  explicit gates. Open Pasture's is recorded as **cleared** by `d45655c` on the retail
+  on-leg (the module declined because the entity mismatch is gone, retail log
+  `Mars.exe-20260923-10.39.06-6aad2d75.log:135`) — test that clearance against the
+  A/B's own stated limits below before accepting it. The trade-rocket gate is still
+  open: decide whether `SavegameFixups.ZZZ_UpdateRefuelRequests` is genuinely
+  *enrolled* for an upgrading 1.1.0 save rather than merely present, and whether that
+  can be settled at the desk.
+- **The retail A/B itself**, which `d45655c` folded into the record. Its own report
+  states two limits: the on-leg carried Opt-In and Train Hub mods the off-leg did not,
+  so it is **not a single-variable A/B**, and neither leg met the zero-error acceptance
+  condition the spent checklist leg set. Those limits bound every claim drawn from that
+  run — including the cleared Open Pasture gate and F123's measured pack-on result,
+  whose pack-off leg short-circuited at "fix pack not loaded" rather than calling the
+  vanilla function. Say plainly which retail-derived claims survive the limits, which
+  need a focused re-run, and whether any record overstates what the legs showed.
 - **The three FIX premises**, including whether F121's retained load-only half survives
   a whole-tree search for a shipped 1.1.1 migration clearing reason `789863173059`.
 - **The thirty-four KEEP verdicts**, at surface level, with any full-body row among them
@@ -149,16 +165,16 @@ Judge `c7266f0` on the diff and the archived 1.1.1.405907 tree. Depth by consequ
   whether it still fails a tool that returns RED on everything — run
   `python tools/bodycheck.py --selftest` and a deliberately broken variant in a scratch
   copy. A control that cannot fail is worth nothing.
-- **The report's two unfinished rows**: the opt-in outbox entry marked `<<PENDING-RUN>>`
-  and the A/B launch line. Say what is owed and to whom; do not write the opt-in entry
-  from here.
-- **ck206 and ck207** as the owner will read them: does ck206 state the limits decision
-  with the evidence actually behind it, and does ck207's acceptance line let the owner
-  tell a pass from a fail without an agent present?
+- **The report's unfinished row**: the opt-in outbox entry marked `<<PENDING-RUN>>`.
+  Say what is owed and to whom; do not write the opt-in entry from here.
+- **ck207** (the limits decision, renumbered by `d45655c`) as the owner will read it:
+  does it state the 12-module / 1,000-declaration proposal with the evidence actually
+  behind it, and is its "stop the deep sweep here" recommendation still sound now that
+  the A/B has run and returned bounded results?
 
 Write `docs/agent/reports/GAMEPATCH_1.1.1_ADJUDICATION_2026-09-23.md`: per area, the
 verdict (confirmed / corrected / unproven), the evidence, and what the owner must decide.
-Corrections to `c7266f0`'s records land in those records in the same change.
+Corrections to those records land in those records in the same change.
 
 ## Live work list
 
@@ -171,15 +187,15 @@ commit-and-verify unit in progress, and add discoveries rather than hiding them.
 - [ ] 4. Phase A report written, doccheck green, exact paths committed
 - [ ] 5. `SendMessage` to `smr-bugfixpack-83` sent — Phase A is not done until this lands
 - [ ] 6. F121–F125 evidence confirmed or corrected in the entries
-- [ ] 7. REMOVE premises, both gates, FIX premises, KEEP surface pass
-- [ ] 8. Briefs, bodycheck self-test, unfinished rows, ck206/ck207
+- [ ] 7. REMOVE premises, the cleared and open gates, FIX premises, KEEP surface pass
+- [ ] 8. Briefs, retail A/B limits, bodycheck self-test, opt-in outbox, ck207
 - [ ] 9. Phase B report committed; this prompt and its map row deleted
 
 ## Scope and stops
 
-In scope: `c7266f0`'s twelve touched paths, the pack's module bodies as evidence, the
-archived 1.1.0.403908 and 1.1.1.405907 trees, two new reports, and corrections to the
-records `c7266f0` wrote.
+In scope: the paths touched by `c7266f0` and `d45655c`, the pack's module bodies as
+evidence, the archived 1.1.0.403908 and 1.1.1.405907 trees, two new reports, and corrections to the
+records those two commits wrote.
 
 Out of scope: code changes to any module, firing either follow-up brief, deleting or
 rebasing anything, release and store surfaces, shipped game files, and launching the
