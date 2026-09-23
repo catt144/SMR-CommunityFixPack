@@ -118,14 +118,13 @@ When the 1.1.1 build is committed, run the separate Claude audit before release 
 Home: `docs/agent/reports/GAMEPATCH_1.1.1_BUILD_2026-09-23.md`
 
 ### ck210 · opened 2026-09-23
-When the audit is complete, run the focused 1.1.1 retail checks on owner-selected fixtures.
-- Full-restart pack-off/on legs, pack alone plus TestKit; also main-menu enable. Record every error.
-- Curved/short track salvage with a repair site spanning the split: survivors, refunds and shells.
-- Direct/intermediate vacuum routes; breathable/no-passage controls; reservations, shuttle/train continuation, cancel.
-- A pre-1.1.1 clogged save heals once; a healthy 1.1.1 timed event survives reload and expires natively.
-- F122 empty-dome display, F123 actual chance function in both legs, F126 no removed Founder notification.
-- Save with the repaired pack, remove it, fully restart and load; inspect routing and track state.
-Home: `docs/agent/reports/GAMEPATCH_1.1.1_BUILD_2026-09-23.md`
+When the audit is clear, run these triaged retail checks; ship after phase 3, while the old build still reverts fixes.
+- Phase 0, unattended: two autorun legs, single-variable (pack the only difference), then `logscan.py` each log.
+- Phase 1, ~10 min: load an old-pack save under the new pack; then save new, remove pack, full restart, load.
+- Phase 2, hands-on: curved/short salvage with a repair site spanning the split; direct + intermediate vacuum routes.
+- Phase 3, seconds each: F123 returns 50 not 100; F122 empty dome not red; F126 no founder notification.
+- Phase 4, post-ship: F121's pre-1.1.1 clogged fixture; it is inactive on 1.1.1 and harms no current player.
+Home: `docs/agent/reports/PLAYTEST_PLAN_1.1.1_2026-09-23.md`
 
 ### ck205 · opened 2026-09-19
 When you next have the site open, send one test report from its *Bug reports & problems* page.

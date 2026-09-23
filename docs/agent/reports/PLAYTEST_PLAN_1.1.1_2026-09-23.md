@@ -1,0 +1,129 @@
+# 1.1.1 playtest plan — triaged for exposure, not coverage
+
+## Must_Read_Header
+<!-- RULES -->
+Rule: Ship-blocking is phases 1–3 only; phase 4 is post-ship unless a phase 1–3 result implicates it. [A3: pass]
+Rule: Run the unattended legs single-variable — the pack is the only difference between them. [A3: pass]
+<!-- /RULES -->
+
+Audience: the owner, at the controls. Ordered so the build can ship after phase 3.
+
+## Why this is triaged rather than exhaustive
+
+Every hour of testing is an hour thousands of users run the **current** build on game
+1.1.1, and that build is not inert. It ships full-body replacements that cannot stand
+themselves down:
+
+| shipping now | harm while we test |
+|---|---|
+| `Fix_TrackSalvageWipe` (F124) | Overwrites 1.1.1's repair-site rehome and `repair_cgs` rebuild. **Silent and permanent in the save** — no error, no report, damage accumulates. |
+| `Fix_GeneForging` (F123) | Double-pays the technology. Measured in retail: returns 100 against a live parameter of 50. Wrong gameplay every birth. |
+| `Fix_VacuumWalks` (F125) | Overwrites the multi-leg migration state machine. Silent. |
+| `Fix_DomeOverviewHighlight` (F122) | Marks an empty dome red. Loud, cosmetic. |
+| `Fix_FounderTraitNotification` (F126) | Builds an unknown notification id from the base class. |
+
+So delay is not neutral, and the plan is sized to **de-risk shipping**, not to reach full
+coverage. Coverage continues after release.
+
+## The risk asymmetry that shapes it
+
+Sixteen retirements sound like more risk than three rebases. They are not:
+
+- **A deletion reverts to vendor code**, which the vendor ships and tests. Its realistic
+  failure is a dangling reference — a load error, a lost registration, an orphaned probe
+  — and that is caught wholesale by one clean boot, not by testing sixteen behaviours
+  one at a time.
+- **A rebase is new code** written this session against a body that moved. That is where
+  a regression would actually come from.
+
+Hands-on time therefore goes to the rebases and to save compatibility. The retirements
+ride on the boot census and their desk controls.
+
+## Phase 0 · Unattended — costs you nothing but the launch
+
+Two autorun legs, then walk away. Each performs the boot census, `DispatchReach` and
+`SMRTest.RunAll()` across the current 83 probes, then quits itself.
+
+```powershell
+& "C:\Program Files (x86)\Steam\steam.exe" -applaunch 3215050 -smrautorun
+```
+
+**Run it single-variable this time.** The 2026-09-23 A/B could not be read cleanly
+because the on-leg also carried the Opt-In pack and the Train Hub dev mod while the
+off-leg did not. Keep TestKit on for both legs and change **only** the fix pack between
+them; disable every other mod for both.
+
+Let each leg quit itself before touching anything, then scan each finished log with
+`python tools/logscan.py <log>`.
+
+What this settles, with no attention from you: all sixteen retirements load clean, no
+module is orphaned or double-registered, the module census reads 36, and the probe suite
+runs. If this is clean, the retirements are done being a ship risk.
+
+## Phase 1 · The one test that cannot be skipped — ~10 minutes
+
+**Load a save made with the old pack under the new pack.** Every existing user performs
+this the moment they update, automatically, without choosing to. Sixteen modules have
+just disappeared from under their saves. It is the highest-blast-radius path in the
+release and it has never been exercised.
+
+`saves/game/` holds fixtures written with the old pack, including `Autosave Sol 493`
+(today, 12:35) and `Autosave Sol 31(2)` (today, 11:42).
+
+Load it, let it run a few sols, and watch for errors and for track or routing state that
+looks wrong. Then do the reverse — save with the repaired pack, remove the pack, restart
+fully and load — which is what a user who unsubscribes will do.
+
+## Phase 2 · The two rebases — the irreducible hands-on work
+
+This is new code and the only place a real regression is likely.
+
+**Track salvage (F124).** Curved and short track salvage with a **live repair site
+spanning the split** — the vendor semantics the rebase had to preserve. Check survivors,
+refunds and shells. This one matters most: its failure mode is silent and lands in the
+save.
+
+**Vacuum migration (F125).** A direct final leg and an intermediate leg, with breathable
+and no-passage controls. Check reservations and shuttle/train continuation, and cancel
+a migration mid-route.
+
+## Phase 3 · Sixty-second confirmations
+
+Each is a single observation. Do them in whatever game state phase 2 leaves you in.
+
+- **F123** — call the chance function with only Gene Forging researched. It must return
+  the live parameter (50), not 100. One console line, and it is the defect with measured
+  retail evidence against the current build.
+- **F122** — open an empty dome's overview. The zero average must not be red.
+- **F126** — no founder-trait notification appears where the removed one used to.
+
+**After phase 3 the build can ship.**
+
+## Phase 4 · Post-ship, or earlier only if implicated
+
+**F121, the legacy clogged migration.** It is *inactive on 1.1.1* — the retail on-leg
+logged it declining — so it cannot harm a current player. It only acts when loading a
+save written before 1.1.1 that carries a stuck building. Testing it properly needs a
+pre-1.1.1 fixture with that exact state, which is slow to construct and narrow in reach.
+
+Its builder also made the departure with the largest unexamined surface: it added a
+saved-provenance condition resting on `CommonLua/Savegame.lua:775` rewriting the saved
+revision, and **no save file was inspected**. That is worth resolving — but it is a
+desk question about save metadata, not a reason to hold a release that fixes silent save
+damage for everyone.
+
+Also here: the thirteen benign retirements' individual behaviours, which revert to
+vendor code and have their desk controls.
+
+## What would stop the ship
+
+Phase 0 showing a load error, a module census other than 36, or a probe regression.
+Phase 1 showing errors or wrong state on an old-pack save. Phase 2 showing lost vendor
+semantics — survivors, refunds, `repair_cgs` or routing wrong. Anything else is a
+finding to file, not a hold.
+
+## Claim limits
+
+Passing these phases supports "no regression observed on the paths played", not "tested".
+The unattended legs are desk-MEASURED on their own configuration. Nothing here inspects
+a save file's stored fields, so F121's provenance condition stays unproven either way.
