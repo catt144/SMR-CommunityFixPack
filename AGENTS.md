@@ -31,6 +31,11 @@ Prompts: the map is `docs/agent/prompts/README.md`. Reusable prompts live in `pr
 all FR-1/Linux work uses `perma/LINUX_DISPATCH.md`.
 Prompt-supporting protocols and references live outside that tree in `docs/agent/support/`.
 
+**Where things are on this rig** (the owner's Windows machine; Linux/Proton paths differ).
+Game install `A:\SteamLibrary\steamapps\common\Project Spark` — the folder is **not** named for the game.
+Logs `%APPDATA%\Surviving Mars Relaunched\logs\Mars.exe-*.log`, newest wins. Saves are in-tree
+junctions: `saves/game` is the play history, `saves/backup` a decoy (EF-110).
+
 > Older records cite pre-move paths and the old mod name — translate via `docs/README.md` "Path translation".
 
 Hook setup is `git config core.hooksPath tools/hooks`. `python tools/doccheck.py --regen`
