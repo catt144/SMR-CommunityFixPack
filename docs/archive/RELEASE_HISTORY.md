@@ -473,3 +473,12 @@ cure runs. The pack wraps `PickInterest` so that an infected colonist's daily in
 - Release surfaces are pending the release job: reconcile the site fix list,
   store-card copies, description/count word and change notes from the retired
   names and surviving modules. This build does not change a version or publish.
+
+**The site published** (owner, 2026-09-23), settling the "THE SITE IS NOT PUBLISHED" line in the v15
+block above. Read back past cache the same day: the deployed fix list serves **38** rows (34
+`success` + 4 `question` details blocks, so judgment calls are four there too), **0** hits for any of
+the five sampled retired row titles and **0** for the removed *The text and numbers on your screen*
+heading; the *One known issue after this update* section and the Outside Ranch advice are live, and
+the dust-storm clog row serves its rewritten body. `install.md`'s load-repair list serves the new
+wording and `index.md`'s coverage sentence serves the shortened one. Store card and site now agree
+at thirty-eight.
