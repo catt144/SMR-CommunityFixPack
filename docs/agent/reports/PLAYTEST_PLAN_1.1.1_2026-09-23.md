@@ -76,11 +76,13 @@ Phases 1 and 4 move on different axes, and only one of them is ship-blocking.
 trees). 1.1.1 did not raise the bar, so the block is forward-only: a 1.1.1 save will not
 open on 1.1.0, but the reverse is fine.
 
-⚠️ **But each pre-1.1.1 save is a one-shot fixture.** Loading it converts it — the save
-metadata is rewritten with the current revision on the next write
-(`CommonLua/Savegame.lua:775`), which is the very thing F121's provenance condition
-keys on (`Code/Fix_CloggedBuildingRelease.lua:97-98`, `lua_revision < 405907`).
-**Copy the file before loading it**, or the fixture is spent and cannot be re-run.
+**Loading a pre-1.1.1 save does not spend it** — corrected 2026-09-23 by observation,
+after this plan first said to copy every fixture before loading. The revision F121 keys
+on (`Code/Fix_CloggedBuildingRelease.lua:97-98`, `lua_revision < 405907`) is rewritten on
+the next **write** (`CommonLua/Savegame.lua:775`), and the game writes manual saves and
+autosaves as new files. `Japan Sol 490` is byte-unchanged at 2026-09-18 18:37 after being
+loaded and played. ⚠️ The real rule is narrower: **do not save over a 1.1.0 file you want
+to keep.** Supply is not tight either — 60 saves in `saves/game/` predate 2026-09-23.
 
 Measured by the audit seat on 2026-09-23, reading five of the owner's saves as bytes:
 1.1.1 saves carry `lua_revision 405907` with `orig_lua_revision 403908`; the 09-17
@@ -95,9 +97,10 @@ this the moment they update, automatically, without choosing to. Sixteen modules
 just disappeared from under their saves. It is the highest-blast-radius path in the
 release and it has never been exercised.
 
-`saves/game/` holds fixtures written with the old pack on game 1.1.1, including
-`Autosave Sol 493` (today, 12:35) and `Autosave Sol 31(2)` (today, 11:42). These are the
-pack-axis fixtures; they are already 1.1.1 and do not need copying for this phase.
+A **1.1.0-era** save is the better fixture: it exercises both axes at once, which is the
+real user path — someone who last played before the patch and updates both game and pack.
+`Japan Sol 490` (2026-09-18) was used. Avoid `Autosave Sol 493`: the owner reports an
+Opt-In test asset live in that colony, which would confound the reading.
 
 Load it, let it run a few sols, and watch for errors and for track or routing state that
 looks wrong. Then do the reverse — save with the repaired pack, remove the pack, restart
@@ -134,8 +137,8 @@ Each is a single observation. Do them in whatever game state phase 2 leaves you 
 logged it declining — so it cannot harm a current player. It only acts when loading a
 save written before 1.1.1 that carries a stuck building. Testing it properly needs a
 pre-1.1.1 fixture with that exact state, which is slow to construct and narrow in reach.
-**Copy any candidate fixture before loading it** (see "Two different old saves"): the
-first load spends it, and this is the one phase where that matters.
+Pick a fixture from the 60 pre-2026-09-23 saves and simply avoid saving over it; loading
+does not spend it (see "Two different old saves").
 
 Its builder made the departure with the largest unexamined surface: a saved-provenance
 condition resting on `CommonLua/Savegame.lua:775` rewriting the saved revision, with **no
@@ -166,3 +169,88 @@ finding to file, not a hold.
 Passing these phases supports "no regression observed on the paths played", not "tested".
 The unattended legs are desk-MEASURED on their own configuration. Nothing here inspects
 a save file's stored fields, so F121's provenance condition stays unproven either way.
+
+## Results — phases 0 and 1, run 2026-09-23
+
+Recorded from the owner's runs. Every figure here is from a named log; nothing is
+estimated.
+
+### Phase 0 · unattended, both legs
+
+| leg | log | mods actually mounted | probes |
+|---|---|---|---|
+| off | `Mars.exe-20260923-13.21.34` | TestKit only — single-variable | 25 PASS · 30 FAIL · 24 SKIP · 4 ERROR = 83 |
+| on | `Mars.exe-20260923-13.36.18` | TestKit + fix pack + Opt-In | 54 PASS · 6 FAIL · 20 SKIP · 3 ERROR = 83 |
+
+The off leg is genuinely single-variable: only `SMR_CommunityFixPackTestKit` has a
+`Loaded mod items for` line, so the Train Hub and Opt-In packs that spoiled the
+2026-09-23 10:39 A/B were inert. The on leg carried Opt-In by the owner's choice, so the
+two legs are not single-variable *against each other*; the on-leg comparison below is
+instead against the pre-build on-leg (`ck208on_…10.39.06`), which also had Opt-In.
+
+**Census: 36 modules seen, applied 36.** `SaintBlessing` reads inactive at `:130` and
+ends active at `:147`; a first-pass read would have said 35/1.
+
+**No new failures.** All six on-leg FAILs — `DomeFreeSpaceMismatch`, `LayoutTechLock`,
+`AnomalyCaveInMap`, `C47OpenFarmSeedBufferShape`, `DryFarmingFarms`, `OptionsMenuOptIn`
+— were already failing on the pre-build on-leg, which had eleven. Five cleared:
+`GeneForging`, `CloggedBuildingRelease`, `SinkholeIndestructible`, `TrainCargoDumping`,
+`UpdateReport`. **`GeneForging` clearing is retail evidence that F123 is repaired.**
+
+Probe delta reconciles exactly: 98 → 83 is 15 probes retired, and −7 PASS −5 FAIL
+−3 SKIP −0 ERROR = −15.
+
+All four off-leg ERRORs (`LanderCargoRatchet`, `DroneUnreachableForever`,
+`AutoExportPriority`, `FactionDomeSizeGate`) are pre-existing. `BuildingCodesPrefab`
+dropped out because its module and probe were retired together. ⚠️ `logscan` matched
+only the `[nil index]` shape and missed `FactionDomeSizeGate`'s `rawget` error, so it
+reported 6 error-shaped lines where the probe summary says 4 ERROR; the summary is
+authoritative.
+
+The on leg's 44 error-shaped lines are dominated by synthetic Opt-In object-destruction
+errors, all raised from `60_Probes_Opt.lua:246`. They are the likely source of the
+game's on-screen mod warning the owner saw, and they appear only because Opt-In was on.
+
+### Phase 1 · both halves, attended
+
+| half | log | result |
+|---|---|---|
+| 1.1.0 save + new pack | `Mars.exe-20260923-13.42.02` | **0 error-shaped lines**; 36/36 applied |
+| new-pack save, pack removed | `Mars.exe-20260923-13.51.55` | **0 error-shaped lines**; 0 `[CommunityFixPack]` lines |
+
+Fixture: `Japan Sol 490` (2026-09-18 18:37), a genuine 1.1.0-era save. The owner ran
+several sols, saved anew, reloaded and ran more, on both halves. Colony
+`save_game_id: 55afqP8zZV1vEYMb` throughout.
+
+No retired module leaves residue: a grep of all sixteen names over the with-pack log
+returns three hits, all false positives — two are the game's own `MirrorSphereMystery`
+in the save header, one is a vendor fixup name.
+
+**The 1.1.0 fixture bought two gates that a 1.1.1 save could not.** The load applied 28
+vendor savegame fixups, among them:
+
+- **`ZZZ_UpdateRefuelRequests`** — the trade-rocket enrolment gate, previously settled
+  only at the desk from `CommonLua/SavegameFixup.lua:24-48`. It is now **observed
+  running in retail on a real 1.1.0 save**, so `Fix_TradeRocketFuelRefresh`'s removal
+  premise is no longer desk-only.
+- **`MoveOpenPasturePilesOffOrigin2`** — the Open Pasture migration half.
+
+`CloggedBuildingRelease` reports `applied`, which is installation, not a heal: this
+colony carries no stranded building, so **F121's repair path remains unexercised** and
+phase 4 still needs a 1.1.0 save with an actually stuck building.
+
+### Fixture supply — correcting this plan's own caution
+
+Loading a save does **not** spend it; only writing over it does, and the game writes
+autosaves and manual saves as new files. `Japan Sol 490` is byte-unchanged at its
+original 2026-09-18 18:37 after being loaded. `saves/game/` holds **60** saves written
+before 2026-09-23 against 3 after, so pre-1.1.1 fixtures are plentiful. The rule is
+narrower than "copy the fixture first": do not *save over* a 1.1.0 file you want to keep.
+
+### Claim limits on these results
+
+Phases 0 and 1 support "no regression observed on the paths run", not "tested". The
+phase 1 sessions were attended, so `SMRTest` did not run in them and the probe evidence
+is the two autorun legs alone. The on-leg carried Opt-In, so its error counts are not
+comparable to the off-leg's. Nothing here exercises the track or vacuum rebases, which
+are phase 2.
