@@ -267,7 +267,9 @@ are phase 2.
 Log `Mars.exe-20260923-13.59.45-6aad2d75.log`. Fixture built with the TestKit World
 page's meteor leaf (the real vendor path — `Lua/Meteors.lua:718` is the only caller of
 `BreakTrackElement`), not `CheatBreakTrack`, so the strike could be placed deliberately.
-Running it also witnesses a World leaf owed in `tools/SMRTK.md` "Still owed".
+(Correction: this report first said the run also discharged a `tools/SMRTK.md` "Still
+owed" World leaf. It did not — the meteor leaf is a documented World capability,
+`tools/SMRTK.md:32`, and is not on any owed list.)
 
 | step | `SMRTest.ReportBrokenTrack()` |
 |---|---|
@@ -483,5 +485,8 @@ playtest did *not* establish. Only the owner reopens one.
   It is a comment in a shipped file.
 - **The ranch residue finding above has no bug entry**, so it is not reachable from the
   bug index — only from this report and the outbox note.
-- **`tools/SMRTK.md` "Still owed"** can retire its World-leaf row: the meteor leaf was run
-  in retail on 2026-09-23 and produced the phase 2a fixture.
+- **`tools/SMRTK.md` "Still owed" is unchanged by this session.** The meteor leaf used for
+  the phase 2a fixture is not an owed witness. The owner did press **Quick build** three
+  times (`!!! Quick Build !!!` in the log), and a Quick build row is owed at
+  `tools/SMRTK.md:222` for *a pipe or cable run, and a dome* — but what was built here was
+  not recorded, so no row can be marked witnessed. Open, not claimed.
