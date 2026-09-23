@@ -52,6 +52,14 @@ commits; the units below hold the reading and the module bodies.
   inventory yourself, once, in step 6. No subagent writes a shared file.
 - **No subagent runs a writing git command, the hooks, or doccheck.** You regenerate,
   gate and commit. Ask each unit for what its commands printed and for what it did not do.
+- **Give each unit spans, not whole files.** The working sets differ by two orders of
+  magnitude and naive reads are the only real context risk here. The track unit's entire
+  set — both `TrackElement.lua` versions, all three modules, the entry — is about 138 KB.
+  F125's looks like 430 KB only because `Colonist.lua` is 6,031 lines on 1.1.1 and 5,689
+  on 1.1.0; its actual targets are `Colonist:TryToEmigrateToDome` (:1894 on 1.1.1, :1886
+  on 1.1.0) and `Colonist:MigrateStep` (:2155, which does not exist on 1.1.0), plus 15
+  call sites tree-wide. Re-derive those spans, then hand the span. A unit that reads
+  `Colonist.lua` whole has made the job harder, not safer.
 - Clear each result with one check aimed at what it rests on, rather than redoing it. A
   subagent's account of machinery outside its own task — why a gate went red, what an
   exit code meant — is the weak part; diagnose that yourself.
