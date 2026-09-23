@@ -53,6 +53,16 @@ player surface bumps it by one on release.
   class this very release retired sixteen of. That cost is paid forever to spare a
   one-time salvage and rebuild. A future session proposing to "just add the sweep later"
   should read this clause first.
+- **Change-note framing, owner's ruling 2026-09-23.** Lead with the vendor, not with the
+  subtraction: *"the devs fixed X number of fixes in the 1.1.1 patch, so we are removing
+  our versions of these from the pack."* The count of retired **modules** is 16 and the
+  pack is 36 modules, but neither is the player-facing number: `content/fix-list.md`
+  entries carry no module names or F/C ids, so the retired set maps to fix-list rows **by
+  meaning**, one module possibly touching one row, none, or a shared one. Re-derive every
+  count with `grep -c '^??? '` after the rows are edited; never compute it as 55 minus
+  anything. Also rewrite `metadata.lua`'s historical note block rather than patching it:
+  it still cites `Fix_TrainCargoDumping.lua:89`, a file this release deletes, and "22
+  full-body replacements", a figure two releases stale.
 - Release surfaces are pending the release job: reconcile the site fix list,
   store-card copies, description/count word and change notes from the retired
   names and surviving modules. This build does not change a version or publish.
