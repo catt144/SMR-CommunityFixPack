@@ -195,7 +195,14 @@ ends active at `:147`; a first-pass read would have said 35/1.
 `AnomalyCaveInMap`, `C47OpenFarmSeedBufferShape`, `DryFarmingFarms`, `OptionsMenuOptIn`
 — were already failing on the pre-build on-leg, which had eleven. Five cleared:
 `GeneForging`, `CloggedBuildingRelease`, `SinkholeIndestructible`, `TrainCargoDumping`,
-`UpdateReport`. **`GeneForging` clearing is retail evidence that F123 is repaired.**
+`UpdateReport`.
+
+⚠️ **Correction, 2026-09-23.** This plan first read `GeneForging` leaving the FAIL list
+as retail evidence that F123 was repaired. That was wrong. The `GeneForging` probe was
+**deleted with its module** — it is absent from the TestKit and did not run on the
+post-build leg. Its disappearance is an absence of evidence, not a pass. The same
+caution applies to any of the five cleared names whose probe retired with its module;
+only a name whose probe still exists and now passes is evidence.
 
 Probe delta reconciles exactly: 98 → 83 is 15 probes retired, and −7 PASS −5 FAIL
 −3 SKIP −0 ERROR = −15.
@@ -343,3 +350,38 @@ rebase composed with that machinery instead of replacing it.
 **Not run:** the cancel-mid-route control and the explicit no-passage fallback. The
 no-passage path is exercised incidentally — Tesla has no passage to either dome and
 routed correctly — but neither was run as a deliberate control, so both remain owed.
+
+### Phase 3 and ck211, 2026-09-23
+
+**ck211 — CLOSED, gate confirmed.** Log `Mars.exe-20260923-13.59.45`:
+
+```
+Resourcepile7 111 111
+Resourcepile8 112 112
+Resourcepile9 113 113
+```
+
+All three spots resolve to real ranges; none returns `-1`. The Outside Ranch open entity
+does carry spots 7–9, so the asset half of the Open Pasture gate holds and retiring
+`Fix_OpenPastureStockpiles` was safe. This closes the one correction the audit raised
+(`GAMEPATCH_1.1.1_AUDIT_2026-09-23.md`, C93), which had found the retail decline proved
+the entity changed at *one or more* of the three rather than that all three exist.
+
+**F123 — retail confirmation NOT achieved; desk evidence stands.**
+
+```
+GeneSelection false GeneForging false chance 0 forging param1 50
+```
+
+Neither technology is researched in that colony, so `chance 0` is correct and trivial:
+the retired module only ever added its bonus *when researched*, so an unresearched state
+returns 0 with or without the defect. The read confirms the live function is the vanilla
+body with `param1 = 50`, and nothing more.
+
+The decisive retail leg — GeneForging researched, expecting 50 rather than 100 — remains
+unrun. What supports F123 is the audit seat's two-sided desk control
+(`GAMEPATCH_1.1.1_AUDIT_2026-09-23.md` §6, pack-off leg calling the archived native
+body). To close it in retail, grant tech points with the handoff's fixture and research
+GeneForging on a scratch copy, then re-read.
+
+**F122 and F126** are visual and produce no log output; record them from observation.
