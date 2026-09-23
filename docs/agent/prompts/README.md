@@ -47,6 +47,7 @@ The `declared class` values below are gate inputs, not conclusions inferred from
 | `SMRCF_CHAIN_SET.md` | `prompt` | owner ruling: keep the C35 detector plus parked C52 chain; descendants are independent and update this grouped entry as they close |
 | `GAMEPATCH_1_1_1_FIX_fanout_level_3.md` | `prompt` | 1.1.1 follow-up: repair the three surviving modules (legacy Clogged migration, track-salvage rebase, vacuum/multi-leg migration rebase), with independent integration audit |
 | `GAMEPATCH_1_1_1_REMOVE_medium.md` | `prompt` | 1.1.1 follow-up: retire the fifteen modules replaced by native fixes, gated on the Open Pasture asset and trade-rocket upgrade migration controls |
+| `GAMEPATCH_1_1_1_ADJUDICATION_high.md` | `prompt` | **LIVE, authored 2026-09-23** (owner ask): adjudicate the 1.1.1 triage `c7266f0` on a different seat than produced it. Phase A lands a full-body-replacement priority report and messages `smr-bugfixpack-83` before Phase B audits the filings, the REMOVE/FIX premises, both gates and the briefs. Both follow-up briefs wait on Phase A's track-pair verdict. |
 
 ## Chain folders
 
