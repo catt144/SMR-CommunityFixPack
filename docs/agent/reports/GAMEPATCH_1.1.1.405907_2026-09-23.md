@@ -5,6 +5,11 @@ Run from `docs/agent/prompts/perma/GAME_PATCH_PROMPT.md` against the archived
 retail A/B on 2026-09-23. The verdict table remains a source-audit result; the retail
 legs add the explicitly bounded measurements in section 4.
 
+**Adjudicated 2026-09-23 on a second seat** (`FULL_BODY_PRIORITY_2026-09-23.md`,
+`GAMEPATCH_1.1.1_ADJUDICATION_2026-09-23.md`). Two rows in section 3 were corrected by
+that adjudication and say so in place; the verdict totals below were re-measured after
+the correction. Everything else in this report was confirmed or is marked unproven there.
+
 ## 0 · Work list
 
 The prompt requires a todo tool before the first write. This session exposes no todo
@@ -267,7 +272,7 @@ module.
 | `90_SaveSanitizer` | KEEP | Its three legacy/save repairs remain valid; modifier display changes do not alter their structural matches. |
 | `Fix_ArrivalDeaths` | KEEP | Arrival, safe-dome, and expedition-return defects remain; changed colonist code is elsewhere. |
 | `Fix_BombardmentSpread` | KEEP | Vanilla still launches one shared direction for the volley; the per-missile spread remains absent. |
-| `Fix_BrokenTrackSalvage` | REMOVE | Native split logic now excludes repair sites from the physical sort and rehomes them through the broken element. |
+| `Fix_BrokenTrackSalvage` | REMOVE | Native split logic now excludes repair sites from the physical sort and rehomes them through the broken element. Adjudicated 2026-09-23: that body runs in a shipping pack only after F124 rebases `Fix_TrackSalvageWipe`, so this row is one unit with F124 and is owned by the FIX brief. |
 | `Fix_BuildingCodesPrefab` | REMOVE | Both Building Codes handlers removed the prefab exit and apply their modifiers to prefab completions. |
 | `Fix_CloggedBuildingRelease` | FIX | Native Duration prevents new losses, but our stand-down abandons already-stranded 1.1.0 saves (F121). |
 | `Fix_CrystalMysteryHang` | KEEP | Fresh play is fixed, but a restored old thread can still be waiting on the former message; retain legacy rescue. |
@@ -279,7 +284,7 @@ module.
 | `Fix_ExoticDepositSign` | KEEP | The class still names the suspect precious-minerals sign; the changed extraction body is unrelated. |
 | `Fix_ExtenderFlapChurn` | KEEP | The unchanged work-state handler still triggers a full disconnect/reconnect rebuild. |
 | `Fix_FactionDomeSizeGate` | KEEP | All seven target percentage evaluations remain unguarded; patch data changes are elsewhere. |
-| `Fix_FounderTraitNotification` | KEEP | The broken shipped handler was deleted, but no working Founder notification replaced it. |
+| `Fix_FounderTraitNotification` | REMOVE | Corrected 2026-09-23 (was KEEP). 1.1.1 deleted the dead handler and the `FounderGainsTrait` notification preset itself (`Data/NotificationPreset.lua`, 0 hits in the 1.1.1 tree against 2 files in 1.1.0), so the vendor removed the feature; our additive handler now adds a notification under an id with no preset, which `AddNotification` builds from the base class (F126). |
 | `Fix_FreedHousingNotice` | KEEP | Residence release still does not promptly recheck homelessness; relevant bodies remain compatible. |
 | `Fix_GeneForging` | REMOVE | Native now adds Gene Forging; our delegating wrapper adds it a second time (F123). |
 | `Fix_GraphConsumedCaption` | REMOVE | Native caption now sums consumption and maintenance, matching the plotted series. |
@@ -317,14 +322,18 @@ module.
 | `Fix_WildfireCureVisit` | KEEP | Cure, at-home Health payment, and random interest choice remain; visit changes are unrelated. |
 | `Fix_WispRewards` | REMOVE | Native removes the duplicate batch research grant and scales free-mode power by 1,000. |
 
-Measured verdict totals from the table: **34 KEEP + 3 FIX + 15 REMOVE = 52**. Command
-and filter: `(rg '^\| .* \| KEEP \|' $p | Measure-Object).Count`, repeated for FIX
+Measured verdict totals from the table: **33 KEEP + 3 FIX + 16 REMOVE = 52**
+(re-measured 2026-09-23 after the `Fix_FounderTraitNotification` correction; the
+original read was 34 / 3 / 15). Command and filter:
+`(rg '^\| .* \| KEEP \|' $p | Measure-Object).Count`, repeated for FIX
 and REMOVE; their sum reconciles to the patchcheck module total. The Open Pasture
 REMOVE is conditional on the live entity-spot control; it is named rather than
 silently moved to another count.
 
 The source reads filed five patch-induced pack defects: F121 through F125. F122 and
 F123 are removed with their obsolete modules; F121, F124, and F125 require code repair.
+The adjudication filed a sixth, F126, from the corrected `Fix_FounderTraitNotification`
+row.
 All five were source-read at filing. The retail on-leg additionally measured F123's
 pack-on arithmetic as 100 against its own live parameter 50; that probe's pack-off
 branch short-circuited at “fix pack not loaded,” so the removal brief still owns the

@@ -19,7 +19,7 @@ archived tree. Line numbers are leads and must be re-derived.
 
 | module | native replacement / removal condition |
 |---|---|
-| `Fix_BrokenTrackSalvage.lua` | `TrackElement.lua:484-489,598-614` excludes and rehomes repair sites, including old unstamped saves. |
+| `Fix_FounderTraitNotification.lua` | Added 2026-09-23 by the adjudication (F126): 1.1.1 deleted the dead handler and the `FounderGainsTrait` preset itself (`Data/NotificationPreset.lua`, 0 hits); `AddNotification` builds an unknown id from the base class (`CommonLua/Libs/Notifications/Notifications.lua:32-48`). The vendor removed the feature; there is nothing to preserve and no saved state. |
 | `Fix_BuildingCodesPrefab.lua` | Both law handlers dropped `from_prefab` and the early return at `LawDef-Efficiency.lua:700-710,902-912`. |
 | `Fix_DestroyedTunnels.lua` | `TunnelBase:AddPFTunnel` now rejects either destroyed half at `Tunnel.lua:193-205`. |
 | `Fix_DomeOverviewHighlight.lua` | Native body writes the computed label and protects empty domes; F122 records the active regression caused by retaining ours. |
@@ -34,6 +34,12 @@ archived tree. Line numbers are leads and must be re-derived.
 | `Fix_TrainsToVoid.lua` | Station demolition now calls `train:DestroySilent("station", bld)` directly. |
 | `Fix_TrainWaitTime.lua` | Boarding explicitly resets `transport_ticket.start_wait` at `ColonistTransport.lua:624`. |
 | `Fix_WispRewards.lua` | Native removed the batch research grant and scales free-mode power by 1000 at `Fireflies.lua:712-738`. |
+
+Adjudicated 2026-09-23: `Fix_BrokenTrackSalvage` left this set. It is retired inside the
+FIX brief's F124 unit, because the vanilla split body its premise named does not run in a
+shipping pack until `Fix_TrackSalvageWipe` is rebased, and its `:35` pin would otherwise
+read BODY-CHANGED for as long as the file existed
+(`docs/agent/reports/FULL_BODY_PRIORITY_2026-09-23.md` §3). The set is still fifteen.
 
 Durable evidence and limits are in
 `docs/agent/reports/GAMEPATCH_1.1.1.405907_2026-09-23.md`. Patchcheck/bodycheck rows
@@ -56,7 +62,11 @@ and consumer before deleting.
 - Verify the new rocket save fixup is newly enrolled for an upgrading 1.1.0 save, not
   merely present as a never-run function. If that cannot be established, retain only a
   narrow load migration and return this module as FIX; do not keep the duplicate
-  modifier wrapper.
+  modifier wrapper. Adjudicated 2026-09-23 at the desk: `FixupSavegame`
+  (`CommonLua/SavegameFixup.lua:24-48`, called from `CommonLua/Savegame.lua:809`) runs
+  every `SavegameFixups` entry absent from the save's `AppliedSavegameFixups`, and that
+  table is pre-filled only for a new game (`:10-16`), so a fixup new in 1.1.1 runs once on
+  any older save's first load. The runtime check is confirmatory, not the deciding read.
 - For F122 and F123, add focused pack-on/pack-off controls that prove deletion restores
   native behavior. For benign stand-down removals, a load/registration census plus the
   native behavior control is sufficient.

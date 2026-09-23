@@ -1,9 +1,9 @@
 <!-- GENERATED — never hand-edit; regenerate with: python tools/doccheck.py --regen -->
 <!-- split_bugs.py --write is the one-time MIGRATION from the retired pre-split doc, never a regeneration; verify: python tools/doccheck.py -->
 
-# Bug index — 208 rows, 208 entry files
+# Bug index — 209 rows, 209 entry files
 
-125 F + 13 D + 70 C. `seq` is the entry's position in the old BUGS.md file order;
+126 F + 13 D + 70 C. `seq` is the entry's position in the old BUGS.md file order;
 the row order below is the old index table's own. Generated from the front matter of
 `docs/agent/bugs/*.md` — edit an entry, not this file.
 
@@ -218,4 +218,5 @@ the row order below is the old index table's own. Generated from the front matte
 | 209 | F123 | OUR OWN DEFECT, 1.1.1-INDUCED — Fix_GeneForging adds the Gene Forging bonus after vanilla 1.1.1 already adds it, paying the technology twice | filed | P2 | source-read on archived 1.1.1.405907 plus MEASURED-unattended pack-on retail probe: GetRareTraitChance gives 100 against Gene Forging's live param1 50; pack-off probe short-circuited at fix pack not loaded | [F123.md](F123.md) |
 | 210 | F124 | OUR OWN DEFECT, 1.1.1-INDUCED — Fix_TrackSalvageWipe replaces the new repair-site split/rehome logic with its 1.1.0 body | filed | P2 | source-read across archived 1.1.0.403908 and 1.1.1.405907: the current full replacement omits 1.1.1's repair-site exclusion, rehome, repair_cgs rebuild, and ProcessAllElements semantics | [F124.md](F124.md) |
 | 211 | F125 | OUR OWN DEFECT, 1.1.1-INDUCED — Fix_VacuumWalks overwrites 1.1.1's multi-leg migration state machine and leaves its new vacuum passage decision unfixed | filed | P2 | source-read across archived 1.1.0.403908 and 1.1.1.405907: TryToEmigrateToDome was rewritten for multi-leg migration and MigrateStep adds a second bad vacuum threshold; the module installs the old body and repairs only the first site | [F125.md](F125.md) |
+| 212 | F126 | OUR OWN DEFECT, 1.1.1-INDUCED — Fix_FounderTraitNotification keeps adding a FounderGainsTrait notification after 1.1.1 deleted that preset, so the vendor's removal of the feature is undone with a base-class notification | filed | P3 | source-read on archived 1.1.1.405907: the dead OnMsg.ColonistAddTrait handler and the FounderGainsTrait NotificationPreset are both gone (0 files in the 1.1.1 tree against 2 in 1.1.0); AddNotification builds an unknown id from the base class (CommonLua/Libs/Notifications/Notifications.lua:32-48); the retail on-leg probe PASS ran through stubbed AddNotification/FindNotification, so the live notification is unobserved | [F126.md](F126.md) |
 

@@ -25,8 +25,8 @@ from archived build 1.1.1.405907 and must be re-derived with `rg -n` before use.
 
 | module / filing | settled defect | falsifying read |
 |---|---|---|
-| `Fix_CloggedBuildingRelease` / F121 | Vanilla's new one-hour Duration prevents new C85 cases, but no decoded 1.1.1 migration clears a building already saved with reason `789863173059`; our `shipped_defect_gone()` exits before its load sweep. | Search the whole decoded 1.1.1 tree for that reason and saved state. A shipped migration that clears it cancels the retained load half. |
-| `Fix_TrackSalvageWipe` / F124 | The current full replacement loses the new repair-site exclusion, correct-array removal, repair-site rehome/`repair_cgs` rebuild, and repair-aware `ProcessAllElements` semantics at `TrackElement.lua:484-487,517-524,598-614,628-631`. F44 itself remains. | Compare the complete installed replacement with the current archived body. If all four semantics already survive, F124 is wrong. |
+| `Fix_CloggedBuildingRelease` / F121 | Vanilla's new one-hour Duration prevents new C85 cases, but no decoded 1.1.1 migration clears a building already saved with reason `789863173059`; our `shipped_defect_gone()` exits before its load sweep. | Search the whole decoded 1.1.1 tree for that reason and saved state. A shipped migration that clears it cancels the retained load half. The adjudication ran it 2026-09-23: one hit, `Data/StoryBit/BuildingClogged.lua:8`, no fixup, and the Duration thread is created only at firing (`ClassDef-Effects.generated.lua:2772-2790`). |
+| `Fix_TrackSalvageWipe` / F124 | The current full replacement loses the new repair-site exclusion, correct-array removal, repair-site rehome/`repair_cgs` rebuild, and repair-aware `ProcessAllElements` semantics at `TrackElement.lua:484-488,519-525,598-614,628-632`. F44 itself remains. Adjudication 2026-09-23: this unit also retires `Fix_BrokenTrackSalvage` (its REMOVE premise holds only once this rebase runs, and its `:35` pin on the same body would otherwise stay BODY-CHANGED) and re-reads `Fix_TrackSalvageRefund`'s `Demolish` wrapper (`:195-250`) against the rebased body. | Compare the complete installed replacement with the current archived body. If all four semantics already survive, F124 is wrong. |
 | `Fix_VacuumWalks` / F125 | The old-body replacement erases 1.1.1's multi-leg task logic in `TryToEmigrateToDome` and does not repair the new duplicate threshold in `MigrateStep`. F52 itself remains. | Trace both passage decisions and every caller. If the second site is unreachable in vacuum, record that and do not patch it speculatively. |
 
 The durable source read is
@@ -45,7 +45,10 @@ bodycheck are routers, never dispositions.
    reapply only the marked F44/F91/F116 changes. Prefer a smaller composable shape if
    it actually preserves behavior; do not force a full replacement merely to minimize
    the diff. Exercise curved/short salvage, a live repair site spanning a split,
-   `repair_cgs`, survivor arrays, refunds, shells, and `skip_track_process`.
+   `repair_cgs`, survivor arrays, refunds, shells, and `skip_track_process`. In the same
+   change, delete `Fix_BrokenTrackSalvage` with its registrations and probes (preserve
+   F45's evidence in its entry), and re-verify `Fix_TrackSalvageRefund`'s `Demolish`
+   wrapper against the rebased split body.
 3. **Vacuum migration rebase.** Preserve the complete 1.1.1 direct and multi-leg
    migration state machine. Repair only proven vacuum passage thresholds. Cover a
    direct final leg and an intermediate leg, breathable controls, reservations,
@@ -74,9 +77,9 @@ commit-and-verify unit in progress; add discoveries rather than hiding them.
 ## Scope, stops, and claim limits
 
 In scope: the three modules, their existing desk/TestKit coverage, registrations,
-F121/F124/F125, one build report, and owner-only checklist legs. Out of scope: the
-fifteen REMOVE modules, unrelated fixes, release/version/store work, game files, and a
-game launch.
+F121/F124/F125, the retirement of `Fix_BrokenTrackSalvage` inside the F124 unit, one
+build report, and owner-only checklist legs. Out of scope: the REMOVE brief's modules,
+unrelated fixes, release/version/store work, game files, and a game launch.
 
 Report instead of continuing only if: (1) a newer game build lands; (2) a load-bearing
 owner ruling conflicts with this authority; or (3) a shared target has unresolved peer

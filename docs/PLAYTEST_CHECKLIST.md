@@ -16,11 +16,11 @@ the sweep in `docs/agent/prompts/perma/STATE_EVICTION.md` clears what ages out. 
 
 ### ck207 · opened 2026-09-23
 For future patches, adopt 12 flagged modules / 1,000 changed declarations and stop this deep sweep here?
-- This patch routed FULL at M=43, T=315, B=0, D3=0; its reads found 3 FIX, 15 REMOVE and 34 KEEP.
-- Proposed limits: keep 12 modules and 1,000 declarations. The module limit correctly forced the full read;
-  this patch did not exercise the declaration limit independently.
-- Proposed depth: no broader tree-wide sweep now. Every module and each flagged system seam was read;
-  finish the named FIX/REMOVE work and A/B first.
+- Routed FULL at M=43, T=315, B=0, D3=0; reads found 3 FIX, 15 REMOVE, 34 KEEP (adjudicated 2026-09-23: 3/16/33).
+- Limits: keep 12 modules / 1,000 declarations. The module limit forced the full read, and that read was needed:
+  `Fix_OpenPastureStockpiles` (REMOVE) had no patchcheck row at all. The declaration limit went unexercised.
+- Depth: no tree-wide sweep now; finish the FIX/REMOVE work first. The 2026-09-23 A/B ran but was not
+  single-variable and failed its error gate, so a focused re-run after that work is the gate, not that run.
 - A broader sweep is estimated at 2–3 focused agent sessions plus another owner A/B; this is not measured.
 Home: `docs/agent/reports/GAMEPATCH_1.1.1.405907_2026-09-23.md`
 
