@@ -21,7 +21,7 @@ themselves; this report says which.
 |---|---|---|
 | F121–F125 | **confirmed**, all five | an "Adjudicated 2026-09-23" paragraph in each entry names what was checked |
 | REMOVE premises (15) | 14 **confirmed**; `Fix_BrokenTrackSalvage` **corrected** to one unit with F124 | row moved to the FIX brief; `Fix_FounderTraitNotification` added to REMOVE (F126) |
-| Open Pasture gate | **confirmed** cleared, within the A/B's limits | none |
+| Open Pasture gate | **confirmed** cleared, within the A/B's limits — **narrowed 2026-09-23 by the build audit** (§3): Lua and fixup half confirmed, asset half **unproven** | ck211: read the three spots in-game |
 | trade-rocket gate | **settled at the desk**: the new fixup is enrolled | REMOVE brief clause annotated; runtime check is confirmatory |
 | retail A/B | **confirmed as bounded**; one record gap corrected | logs archived; which claims survive is §4 |
 | FIX premises (3) | **confirmed**, incl. F121's load-only half | FIX brief annotated |
@@ -81,6 +81,17 @@ extra mod does — a grep for `pasture`, `ranch` or `OpenAir` over the Train Hub
 `Code/` finds one comment line about `Train:TransferCargo`, and over the Opt-In pack's `Code/`
 one comment in `00_Core.lua`; the Train Hub mod's `Entities/` holds hub entities only. The
 native migration was re-read (§2): present, absent on 1.1.0, enrolled by the fixup mechanism.
+
+**Corrected 2026-09-23 by the build audit (`GAMEPATCH_1.1.1_AUDIT_2026-09-23.md` §5): the
+clearance above is narrower than written.** The probe it rests on
+(`16ff1aa:Code/Fix_OpenPastureStockpiles.lua:132-148`) returns `false` at the first of
+`Resourcepile7..9` whose closed-entity range is missing or whose open-entity range exists, so
+the retail decline proves that `OpenPasture_Open` differs from the nine-versus-six shape at
+one or more of those spots, not that all three were added. The Lua tree cannot show entity
+spots (`_EntityData.generated.lua` is byte-identical across the two builds), and nothing
+native re-homes piles at runtime: `RebuildPastureStockpilePool` (`Animals.lua:1382-1560`) runs
+only from the two save fixups (`:1569-1583`). The Lua and save-migration half of the gate
+stands; the asset half is UNPROVEN until the three spots are read in-game (ck211).
 
 **Trade rocket — settled at the desk.** `FixupSavegame` (`CommonLua/SavegameFixup.lua:24-48`,
 called from `CommonLua/Savegame.lua:809` on load) iterates every `SavegameFixups` entry in
