@@ -403,3 +403,73 @@ never drops below the 70 Health that sends them to `MedicalBuilding:Service`, th
 cure runs. The pack wraps `PickInterest` so that an infected colonist's daily interest is
 `needMedical` while vaccination is on. This needs no DLC.
 
+### Released in v15 (2026-09-23) — the 1.1.1 patch takes seventeen rows
+
+- **Card:** count word **Fifty-five → Thirty-eight** (site `^??? ` rows = 38, section tally
+  2+13+4+4+5+5+3+2 sums); headliners **14 → 9**; judgment calls unchanged at four. Seventeen rows
+  left the list against sixteen retired modules, because `Fix_WispRewards` backed both wisp rows.
+  *The text and numbers on your screen* lost both its rows and the section went with them. Words
+  commit `a431638`, site commit `ee270dc`.
+- **Shipped `last_changes` IS the tree draft this time**, byte for byte — unlike v9, v11, v12 and
+  v14, the owner did not edit the Ged box, so no disclosure was lost between draft and post. The
+  `description`, `short_description` and `title` are unchanged from the draft as well.
+- **Cleared on the owner's word ("uploaded", 2026-09-23) plus evidence:** writeback `version`
+  19 → **20** (one bump), `saved_with_revision` 403908 → **405907**, `pdx_version` "13" → **"14"**,
+  `code_hash` and `saved` rewritten; comments stripped from both files (0 left in each) and restored
+  from `9cd60f0` with every written-back value kept — the whole diff against that commit is those
+  five fields and nothing else. Steam read back 2026-09-23: body says "Thirty-eight repairs" (1 hit,
+  **0** for "Fifty-five repairs"), none of the five removed headliner bullets appear, and the newest
+  change note *"Update: Sep 23 @ 12:49pm"* carries the v15 text.
+- ⛔ **Not verified at close, and not claimed:** the Paradox page version was not stated and its
+  body was not read back.
+- ⛔ **THE SITE IS NOT PUBLISHED.** Read 2026-09-23 past cache: the deployed fix list still serves
+  three of the retired row titles and has **0** hits for the new known-issue section, so it is still
+  v14's build. `ee270dc` is pushed and waiting; the owner still owes the **Publish docs site**
+  workflow run (`UPLOAD_WORKFLOW.md` §4). Until then the store card says thirty-eight repairs while
+  the site lists fifty-five.
+
+### Pending — game 1.1.1 response (2026-09-23)
+
+- Track salvage retains the vendor's repair-site ownership and indexing changes
+  while preserving curved/short-track salvage, refunds and whole-track cleanup.
+- Vacuum migration retains the vendor's direct and multi-leg routing; both
+  passage decisions are repaired. Legacy clogged-building recovery becomes
+  load-only and accepts only saves written before 1.1.1. Already-resaved ambiguous
+  state remains untouched so a healthy native timer is not cut short.
+- Retire `BrokenTrackSalvage`, `BuildingCodesPrefab`, `DestroyedTunnels`,
+  `DomeOverviewHighlight`, `FounderTraitNotification`, `GeneForging`,
+  `GraphConsumedCaption`, `MirrorSphereSite`, `NightShiftWork`,
+  `OpenPastureStockpiles`, `SinkholeIndestructible`, `TradeRocketFuelRefresh`,
+  `TrainCargoDumping`, `TrainWaitTime`, `TrainsToVoid` and `WispRewards`.
+- Evidence and limits: [build report](../../reports/GAMEPATCH_1.1.1_BUILD_2026-09-23.md).
+  Desk/source results do not replace the separate owner audit or retail legs.
+- **Known issue for the patch notes, owner's ruling 2026-09-23 — document, do not fix.**
+  Player-facing wording: *if your Outside Ranch still looks closed after terraforming
+  opens your domes, salvage it and rebuild it once; it will come back open.* Affects only
+  colonies that ran an earlier pack with Open Domes already enacted — the retired
+  `OpenPastureStockpiles` deliberately held those ranches on the closed entity, and
+  nothing reopens them once it is gone. It is cosmetic: all nine stockpile anchors exist
+  on either entity, so no resources strand. New ranches are unaffected. Evidence:
+  [playtest plan](../../reports/PLAYTEST_PLAN_1.1.1_2026-09-23.md), "FINDING — removal
+  residue". **Not fixed, and the reason is permanence, not effort** (owner, 2026-09-23):
+  the only remedy is a load-time sweep, and a load-time sweep can never be retired,
+  because no date exists by which every affected save has provably loaded once — a player
+  may update today or return in six months, and the sweep must be present on *their*
+  first post-update load. So it is not a small temporary fix but a permanent module,
+  carried and re-verified against every future game patch, doing entity swaps — the same
+  class this very release retired sixteen of. That cost is paid forever to spare a
+  one-time salvage and rebuild. A future session proposing to "just add the sweep later"
+  should read this clause first.
+- **Change-note framing, owner's ruling 2026-09-23.** Lead with the vendor, not with the
+  subtraction: *"the devs fixed X number of fixes in the 1.1.1 patch, so we are removing
+  our versions of these from the pack."* The count of retired **modules** is 16 and the
+  pack is 36 modules, but neither is the player-facing number: `content/fix-list.md`
+  entries carry no module names or F/C ids, so the retired set maps to fix-list rows **by
+  meaning**, one module possibly touching one row, none, or a shared one. Re-derive every
+  count with `grep -c '^??? '` after the rows are edited; never compute it as 55 minus
+  anything. Also rewrite `metadata.lua`'s historical note block rather than patching it:
+  it still cites `Fix_TrainCargoDumping.lua:89`, a file this release deletes, and "22
+  full-body replacements", a figure two releases stale.
+- Release surfaces are pending the release job: reconcile the site fix list,
+  store-card copies, description/count word and change notes from the retired
+  names and surviving modules. This build does not change a version or publish.

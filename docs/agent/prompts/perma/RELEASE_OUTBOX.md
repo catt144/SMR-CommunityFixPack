@@ -21,53 +21,7 @@ player surface bumps it by one on release.
 
 ## Pending — goes out with the next upload
 
-### Pending — game 1.1.1 response (2026-09-23)
-
-- Track salvage retains the vendor's repair-site ownership and indexing changes
-  while preserving curved/short-track salvage, refunds and whole-track cleanup.
-- Vacuum migration retains the vendor's direct and multi-leg routing; both
-  passage decisions are repaired. Legacy clogged-building recovery becomes
-  load-only and accepts only saves written before 1.1.1. Already-resaved ambiguous
-  state remains untouched so a healthy native timer is not cut short.
-- Retire `BrokenTrackSalvage`, `BuildingCodesPrefab`, `DestroyedTunnels`,
-  `DomeOverviewHighlight`, `FounderTraitNotification`, `GeneForging`,
-  `GraphConsumedCaption`, `MirrorSphereSite`, `NightShiftWork`,
-  `OpenPastureStockpiles`, `SinkholeIndestructible`, `TradeRocketFuelRefresh`,
-  `TrainCargoDumping`, `TrainWaitTime`, `TrainsToVoid` and `WispRewards`.
-- Evidence and limits: [build report](../../reports/GAMEPATCH_1.1.1_BUILD_2026-09-23.md).
-  Desk/source results do not replace the separate owner audit or retail legs.
-- **Known issue for the patch notes, owner's ruling 2026-09-23 — document, do not fix.**
-  Player-facing wording: *if your Outside Ranch still looks closed after terraforming
-  opens your domes, salvage it and rebuild it once; it will come back open.* Affects only
-  colonies that ran an earlier pack with Open Domes already enacted — the retired
-  `OpenPastureStockpiles` deliberately held those ranches on the closed entity, and
-  nothing reopens them once it is gone. It is cosmetic: all nine stockpile anchors exist
-  on either entity, so no resources strand. New ranches are unaffected. Evidence:
-  [playtest plan](../../reports/PLAYTEST_PLAN_1.1.1_2026-09-23.md), "FINDING — removal
-  residue". **Not fixed, and the reason is permanence, not effort** (owner, 2026-09-23):
-  the only remedy is a load-time sweep, and a load-time sweep can never be retired,
-  because no date exists by which every affected save has provably loaded once — a player
-  may update today or return in six months, and the sweep must be present on *their*
-  first post-update load. So it is not a small temporary fix but a permanent module,
-  carried and re-verified against every future game patch, doing entity swaps — the same
-  class this very release retired sixteen of. That cost is paid forever to spare a
-  one-time salvage and rebuild. A future session proposing to "just add the sweep later"
-  should read this clause first.
-- **Change-note framing, owner's ruling 2026-09-23.** Lead with the vendor, not with the
-  subtraction: *"the devs fixed X number of fixes in the 1.1.1 patch, so we are removing
-  our versions of these from the pack."* The count of retired **modules** is 16 and the
-  pack is 36 modules, but neither is the player-facing number: `content/fix-list.md`
-  entries carry no module names or F/C ids, so the retired set maps to fix-list rows **by
-  meaning**, one module possibly touching one row, none, or a shared one. Re-derive every
-  count with `grep -c '^??? '` after the rows are edited; never compute it as 55 minus
-  anything. Also rewrite `metadata.lua`'s historical note block rather than patching it:
-  it still cites `Fix_TrainCargoDumping.lua:89`, a file this release deletes, and "22
-  full-body replacements", a figure two releases stale.
-- Release surfaces are pending the release job: reconcile the site fix list,
-  store-card copies, description/count word and change notes from the retired
-  names and surviving modules. This build does not change a version or publish.
-
 ## Last released
 
-**v14** (2026-09-19). Its entry and every earlier release are in
+**v15** (2026-09-23). Its entry and every earlier release are in
 `docs/archive/RELEASE_HISTORY.md`, oldest first.

@@ -8,6 +8,50 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-23 — v15 released: game 1.1.1 takes seventeen rows off the fix list
+
+Ran `release_prompt.md` end to end from a bare path invocation — prepare, hold, owner upload, close. The
+batch was the outbox's single 1.1.1-response entry. The count moved **Fifty-five → Thirty-eight**, and the
+counting trap the outbox warned about is real: sixteen modules retired but **seventeen** fix-list rows went,
+because `Fix_WispRewards` backed both wisp rows. Everything was re-derived from the file after the edits
+(`grep -c '^??? ' content/fix-list.md` = 38, sections 2+13+4+4+5+5+3+2 summing), never as 55 minus anything.
+*The text and numbers on your screen* lost both its rows, so the section went too; judgment calls held at four.
+
+Three things the surface pass turned up that the outbox did not name. The dust-storm clog row had to be
+rewritten rather than removed — 1.1.1 runs the timer natively, so the pack's fix survives only as a rescue for
+saves written before 1.1.1, and the old row promised a daily repair that no longer happens. `install.md`'s
+load-repair list named two repairs that had just retired (destroyed tunnels, unsalvageable damaged track), so
+it was promising work the pack no longer does. And the headliner bullets fell **14 → 9** with nothing promoted
+to replace them: the provenance rule only allows a bullet that compresses a row already on the audited list,
+and this batch adds no fix, so filling the gap would have been a new editorial selection rather than release
+work. The clog bullet went as well, although its row survives, because listing a legacy save-rescue under
+*SOME OF WHAT IT FIXES* reads as a live repair.
+
+`metadata.lua`'s historical note block above `last_changes` was rewritten wholesale on the outbox's
+instruction rather than patched. It had accumulated nine per-version drafting narratives and was gating on
+`Fix_TrainCargoDumping.lua:89`, a file this very release deletes. Every standing rule survived the rewrite —
+per-version changelog on both portals, rewrite wholesale and never append, no ids or module names, no carried
+count, "Fixed" is a claim, losses stated plainly, the F107 rule, the withdrawn low-Food loss claim, the 22b
+licence, and shipped-text-is-the-owner's-box-text — and the drafting history was left where it already lives,
+in `RELEASE_HISTORY.md` and `STORE_CARD_LIVE.md`.
+
+Close-out: writeback `version` 19 → **20** (one save, not two), `saved_with_revision` 403908 → **405907**,
+`pdx_version` "13" → **"14"**, `code_hash` and `saved` rewritten; comments stripped from both shipped files
+(312 and 56 lines, 0 left in each) and restored from `9cd60f0` with every written-back value kept — the whole
+diff against that commit is those five scalars and nothing else. The shipped `last_changes` **is** the tree
+draft byte for byte, and so are `description`, `short_description` and `title`: unlike v9, v11, v12 and v14
+the owner did not edit the Ged box, so no disclosure was lost between draft and post. Steam read back the same day: body says "Thirty-eight repairs" (1 hit, 0 for
+"Fifty-five repairs"), none of the five removed headliner bullets appear, and the newest change note
+*"Update: Sep 23 @ 12:49pm"* carries the v15 text. ⛔ Left unverified and NOT claimed: the Paradox page
+version was not stated and its body was not read back. ⛔ The site is **not published** — read past cache on
+2026-09-23, the deployed fix list still serves three retired row titles and has zero hits for the new
+known-issue section, so the store card says thirty-eight repairs while the site still lists fifty-five.
+`ee270dc` is pushed and waiting on the owner's **Publish docs site** run.
+
+Also corrected in passing: STATE still said the current game version was 1.1.0.403908, false since the patch.
+Measured `live game=1.1.1.405907; Steam build=25390750` and advanced the three version lines, naming the
+command that reads them.
+
 ## 2026-09-17 — v12 released: C95 reworked into a repair, C102 landed, the card cut to 14 headliners
 
 Session `smr-bugfixpack-63` (Opus 5, 1M context, throughout). Ran `release_prompt.md` end to end from a bare
