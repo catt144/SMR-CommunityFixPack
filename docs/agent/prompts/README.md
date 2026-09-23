@@ -45,6 +45,7 @@ The `declared class` values below are gate inputs, not conclusions inferred from
 | `STANDDOWN_AUDIT.md` | `prompt` | **LIVE, authored 2026-09-13** (owner ask): can full-body replacements stand down when vanilla fixes a defect? The old 21-of-45 split is an explicitly re-derived seed, not a current total; scoped 2026-09-19 to the runtime decline for players (the desk class-c detector is `tools/patchcheck.py`'s D1). Design record [D14](../bugs/D14.md). |
 | `DLC_DEEP_CHECK.md` | `prompt` | live one-off chain-authoring job after the fix pack is stable; re-emits the DLC inventory, writes a mapped `dlccheck/` chain, then consumes itself without firing a link |
 | `SMRCF_CHAIN_SET.md` | `prompt` | owner ruling: keep the C35 detector plus parked C52 chain; descendants are independent and update this grouped entry as they close |
+| `GAMEPATCH_1_1_1_FIX_AUDIT_high.md` | `prompt` | **LIVE, authored 2026-09-23, NOT YET FIRED**: audits the 1.1.1 build on a different vendor than built it. Written at `16ff1aa` before the build existed, so its questions come from the archived source rather than the builder's report; three fill-at-firing lines carry the commit range, the reported departures and any changed dispositions. Judges on evidence, not conformance — including against this repo's own 2026-09-23 reports. |
 
 ## Chain folders
 
