@@ -44,8 +44,15 @@ player surface bumps it by one on release.
   nothing reopens them once it is gone. It is cosmetic: all nine stockpile anchors exist
   on either entity, so no resources strand. New ranches are unaffected. Evidence:
   [playtest plan](../../reports/PLAYTEST_PLAN_1.1.1_2026-09-23.md), "FINDING — removal
-  residue". Not fixed because the remedy is new code on an otherwise fully playtested
-  build, against a one-time cosmetic issue with a trivial workaround.
+  residue". **Not fixed, and the reason is permanence, not effort** (owner, 2026-09-23):
+  the only remedy is a load-time sweep, and a load-time sweep can never be retired,
+  because no date exists by which every affected save has provably loaded once — a player
+  may update today or return in six months, and the sweep must be present on *their*
+  first post-update load. So it is not a small temporary fix but a permanent module,
+  carried and re-verified against every future game patch, doing entity swaps — the same
+  class this very release retired sixteen of. That cost is paid forever to spare a
+  one-time salvage and rebuild. A future session proposing to "just add the sweep later"
+  should read this clause first.
 - Release surfaces are pending the release job: reconcile the site fix list,
   store-card copies, description/count word and change notes from the retired
   names and surviving modules. This build does not change a version or publish.
