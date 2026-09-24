@@ -141,6 +141,14 @@ When colonists queue at a platform forever or walk past a working station, call 
 - Adding trains destroys the evidence.
 Home: `docs/agent/bugs/F80.md`
 
+### ck212 · opened 2026-09-24
+When you resume the train hub smoke, read the stalled save first, then test a fresh save/reload.
+- Opt-In commit 3a0faff fixes the hub dwell hook displacing the native waiter's save mapping.
+- Restart the process first. Keep the old stalled save; the cause of the train lock-up is still open.
+- The agent gives one read at a time and reads the log: Sweep, Routes, Status, then hub jobs and track state.
+- Confirm a completed repair and train motion; a toolkit SAVE OK line alone did not prove a clean save.
+Home: `docs/agent/reports/TRAIN_HUB_AUDIT_HANDOFF_20260924.md`
+
 ### ck194 · opened 2026-09-17
 When a colony meets an entry's takeable condition, run its recipe: C40, C42, F99.
 Home: `docs/agent/bugs/C40.md`, `docs/agent/bugs/C42.md`, `docs/agent/bugs/F99.md`
