@@ -1,0 +1,784 @@
+					Render 0:00:00:006
+*** executable info
+Timestamp:     	6aad2d75
+Date:          	Fri Sep 18 08:24:21 2026
+Command line:  	
+Compiler:      	195136247, 142 (VS 2019) or newer
+
+
+*** hardware info
+CPU name      	Intel(R) Core(TM) i7-14700K
+CPU MHz       	3418
+CPU cores     	20/28
+Phys. Memory   	65278 MBytes
+Memory In Use  	39%
+					Render 0:00:00:007
+Disk Free      	1227553 MBytes
+
+
+*** OS info
+OS:            	Windows 11
+Version:       	10.0.26100 
+
+
+*** Debug::Init()
+
+
+					Render 0:00:00:103
+Steam initialized (AppId 3215050)
+					Render 0:00:00:107
+Drive type for game installation: SSD, savegames: SSD
+Language: English
+					Render 0:00:01:437
+*** graphics info
+GPU                            	NVIDIA GeForce RTX 4080 Feature Level: 12.1 {  DoublePrecisionFloatShaderOps: 1 OutputMergerLogicOp: 1 MinPrecisionSupport: 2 TiledResourcesTier: 4 ResourceBindingTier: 3 PSSpecifiedStencilRefSupported: 0 TypedUAVLoadAdditionalFormats: 1 ROVsSupported: 1 ConservativeRasterizationTier: 3 MaxGPUVirtualAddressBitsPerResource: 40 StandardSwizzle64KBSupported: 0 CrossNodeSharingTier: 0 CrossAdapterRowMajorTextureSupported: 0 VPAndRTArrayIndexFromAnyShaderFeedingRasterizerSupportedWithoutGSEmulation: 1 ResourceHeapTier: 2 NotZeroedPools: 1 UMA: 0 UnalignedBlockTextures: 1}
+API                            	d3d12
+GPU Driver Version             	32.0.16.1074
+GPU Driver Package Version     	610.74
+GPU Dedicated Video Memory     	16048 MB
+					Render 0:00:01:592
+
+Libs: Network, Sequences, MouseTrackWin, DumbAI, MapGen, Paradox, TriggersAndEvents, Notifications, Research, Resources, Tutorial, Objectives 
+
+					Render 0:00:01:830
+
+Platform: desktop, editor, goldmaster, paradox, pc, steam
+
+					Render 0:00:02:870
+*** audio info
+Audio Endpoint                 	Speakers (Razer Leviathan V2)
+						Lua 0:00:02:871
+Lua revision: 405907
+Assets revision: 33225
+						Lua 0:00:02:872
+Steam AppID: 3215050
+Build version: 1.1.1.405907
+Build branch:  Release
+						Lua 0:00:14:236
+Account storage loaded successfully in 2 ms
+DLC norman loaded, lua revision 405907, assets revision 33225
+						Lua 0:00:14:237
+DLC thomas loaded, lua revision 405907, assets revision 33225
+						Lua 0:00:14:241
+[mod] Loaded mod def Relaunched Fix Pack: Opt-In Modules (id SMR_CommunityOptInPack, v1.00-000) unpacked from appdata
+[mod] Loaded mod def DEV ONLY - Train Hub (Module B build) (id SMR_TrainHubDev_20260918, v0.00-049) unpacked from appdata
+[mod] Loaded mod def DEV ONLY - Train Hub Prototype (id SMR_TrainHubPrototype_20260918, v0.00-002) unpacked from appdata
+[mod] Loaded mod def Community Fix Pack — Test Kit (id SMR_CommunityFixPackTestKit, v0.00-001) unpacked from appdata
+[mod] Loaded mod def DEV ONLY - Rail Shaft (cross-map train tunnel prototype) (id SMR_RailShaftDev_20260923, v0.00-001) unpacked from appdata
+[mod] Loaded mod def TEMPORARY - Linux NVIDIA 580 Crash Workaround (id SMR_FR1TempWorkaround, v0.00-003) unpacked from appdata
+[mod] Loaded mod def Relaunched Fix Pack (id SMR_CommunityFixPack, v1.00-020) unpacked from appdata
+						Lua 0:00:14:633
+[mod] [SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+[mod] [SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[mod] [SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+[SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+						Lua 0:00:14:638
+[mod] [SMRTK] SMRTK_CORE loaded=true tee=false t=10153 id=1
+[SMRTK] SMRTK_CORE loaded=true tee=false t=10153 id=1
+						Lua 0:00:14:641
+[mod] [SMRTK] SMRTK_SLOTS armed_at_load=0 predictions="TRAIN_HUB_BUILD_20260918.md: centre/transition prototype" sitting=train_hub_move slots="1 traffic/power,2 inward,3 departure,4 crossing watch,5 outward,6 select tunable,scratch boot" t=10153 id=2
+[SMRTK] SMRTK_SLOTS armed_at_load=0 predictions="TRAIN_HUB_BUILD_20260918.md: centre/transition prototype" sitting=train_hub_move slots="1 traffic/power,2 inward,3 departure,4 crossing watch,5 outward,6 select tunable,scratch boot" t=10153 id=2
+						Lua 0:00:14:642
+[mod] [SMRTest][carry] fixture-carry dump available — run SMRTest.FixtureCarry()
+						Lua 0:00:14:644
+[TrainHubDev] hub classes loaded: six-connector hub, built-in drone controller, maintenance reserve
+						Lua 0:00:14:645
+[TrainHubDev] train export floor loaded (standing + transient holds)
+						Lua 0:00:14:646
+[mod] [CommunityFixPack] LanderEmptyLaunch: applied
+[mod] [CommunityFixPack] ShelterReflex: applied
+[mod] [CommunityFixPack] TrackSalvageWipe: applied
+[mod] [CommunityFixPack] LakeEntombment: applied
+[mod] [CommunityFixPack] RocketDroneChurn: applied
+						Lua 0:00:14:647
+[mod] [CommunityFixPack] ShuttleTransportCache: applied
+[mod] [CommunityFixPack] VacuumWalks: applied
+[mod] [CommunityFixPack] ArrivalDeaths: applied
+[mod] [CommunityFixPack] StaleReservations: applied
+[mod] [CommunityFixPack] CrystalMysteryHang: applied
+[mod] [CommunityFixPack] DustSicknessBiorobots: applied
+						Lua 0:00:14:648
+[mod] [CommunityFixPack] PayloadTemplateRefill: applied
+[mod] [CommunityFixPack] ShuttleHubOffAvailable: applied
+[mod] [CommunityFixPack] FreedHousingNotice: applied
+[mod] [CommunityFixPack] LandscapeUnitFilter: applied
+						Lua 0:00:14:649
+[mod] [CommunityFixPack] RocketInteractGuard: applied
+[mod] [CommunityFixPack] TrackConnectorPingPong: applied
+[mod] [CommunityFixPack] TrackTunnelPowerBridge: applied
+						Lua 0:00:14:650
+[mod] [CommunityFixPack] SequenceLatents: applied
+[mod] [CommunityFixPack] TrackSalvageRefund: applied
+[mod] [CommunityFixPack] DroneTransportMinors: applied
+[mod] [CommunityFixPack] ScanDowngrade: applied
+[mod] [CommunityFixPack] BombardmentSpread: applied
+[mod] [CommunityFixPack] ExtenderFlapChurn: applied
+[mod] [CommunityFixPack] SaintBlessing: applied
+						Lua 0:00:14:651
+[mod] [CommunityFixPack] ExoticDepositSign: applied
+[mod] [CommunityFixPack] JumboCaveReinforcementWedge: applied
+[mod] [CommunityFixPack] SilentHitMomentFX: applied
+[mod] [CommunityFixPack] CloggedBuildingRelease: applied
+[mod] [CommunityFixPack] FactionDomeSizeGate: applied
+						Lua 0:00:14:652
+[mod] [CommunityFixPack] HabitatExpeditionReturn: applied
+[mod] [CommunityFixPack] HabitatExpeditionDraft: applied
+[mod] [CommunityFixPack] RoverSubclassManifest: applied
+[mod] [CommunityFixPack] DryFarmingFarms: applied
+[mod] [CommunityFixPack] WildfireCureVisit: applied
+						Lua 0:00:14:653
+[mod] [CommunityFixPack] SaveSanitizer: applied
+[mod] [CommunityOptInPack] AcknowledgedWarnings: applied
+[mod] [CommunityOptInPack] ResidencyControl: inactive (opt-in module, off by default — enable it in Options → Mod Options)
+[mod] [CommunityOptInPack] MultipleSuns: applied
+[mod] [CommunityOptInPack] DroneStatDials: applied
+						Lua 0:00:14:654
+[RailShaftDev] loaded: cross-map train tunnel prototype. UNVERIFIED IN GAME.
+						Lua 0:00:15:364
+[TrainHubDev] save guard: native waiter snapshot; legacy hub load mapping retained
+						Lua 0:00:15:437
+[mod] [CommunityFixPack] SaintBlessing: inactive (no dome-colonists trait presets)
+						Lua 0:00:15:527
+Reloading done in 1286 ms
+						Lua 0:00:15:529
+Available DLCs: norman(Feeding the Future),thomas(Interplanetary Codex) 
+						Lua 0:00:15:573
+[mod] [SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=DataLoading t=10153 id=3
+[SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=DataLoading t=10153 id=3
+						Lua 0:00:15:953
+[preset] Preset postprocess took 158 ms.
+						Lua 0:00:16:002
+482 / 482 particle streams loaded in 42 ms.
+						Lua 0:00:16:003
+5 / 5 particle streams loaded in 1 ms.
+						Lua 0:00:16:004
+[mod] [CommunityFixPack] SilentHitMomentFX: registered 11 missing animation-moment preset(s)
+						Lua 0:00:16:005
+[mod] [CommunityFixPack] FactionDomeSizeGate: 7 faction dislike(s) now wait for 10 colonists in a dome
+[mod] [CommunityFixPack] DryFarmingFarms: left 1 farm(s) alone because DryFarming already reaches them (FarmUnderground via Farm)
+[mod] [CommunityFixPack] DryFarmingFarms: added 2 water entr(y/ies) at -50% to DryFarming (1 adopted, 4 of 4 farms loaded)
+[mod] [CommunityOptInPack] MultipleSuns: BuildingTemplates.ArtificialSun not found — build limit NOT lifted (binding fix still active)
+						Lua 0:00:16:230
+[mod] [CommunityFixPack] SaintBlessing: the shipped code resolves the trait label itself — data left untouched; save re-base armed for 1 preset(s) of 2
+[mod] [CommunityFixPack] DryFarmingFarms: left 1 farm(s) alone because DryFarming already reaches them (FarmUnderground via Farm)
+[mod] [CommunityOptInPack] MultipleSuns: Artificial Sun build-once limit lifted
+						Lua 0:00:16:326
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=10153 id=4
+						Lua 0:00:16:351
+[LUA ERROR] CommonLua/Editor/ArtSpecEditor.lua:573: attempt to call a nil value (global 'EntitySpecPathToEntity')
+  CommonLua/Editor/ArtSpecEditor.lua(573):  method OnPresetPostLoad
+  CommonLua/Preset.lua(541):  upvalue f1
+  CommonLua/Core/classes.lua(170):  method PostLoad
+  CommonLua/Modding/ModItem.lua(2518):   <>
+  [C](-1):  global sprocall
+  CommonLua/Modding/Mod.lua(666):   <>
+  CommonLua/Modding/Mod.lua(740):   <>
+  CommonLua/Modding/Mod.lua(664):  method LoadItems
+  CommonLua/Modding/Mod.lua(2185):  global ContinueModsReloadItems
+  CommonLua/Dlc.lua(603):  global LoadDlcs
+  CommonLua/Core/autorun.lua(447):  local StartupSequence
+  CommonLua/Core/autorun.lua(516):   <>
+        --- end of stack
+Locals:
+	                self |   object EntitySpec 'SMROptInTrainHub6'
+						Lua 0:00:16:362
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=10153 id=5
+						Lua 0:00:16:371
+[mod] Loaded mod items for: SMR_CommunityFixPackTestKit, SMR_TrainHubDev_20260918, SMR_CommunityFixPack, SMR_CommunityOptInPack, SMR_RailShaftDev_20260923
+						Lua 0:00:16:623
+[mod] [CommunityFixPack] SaintBlessing: the shipped code resolves the trait label itself — data left untouched; save re-base armed for 1 preset(s) of 2
+						Lua 0:00:16:624
+[mod] [CommunityFixPack] DryFarmingFarms: left 1 farm(s) alone because DryFarming already reaches them (FarmUnderground via Farm)
+						Lua 0:00:16:722
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=10153 id=6
+						Lua 0:00:17:213
+[PdxSDK] Started up. Took 1122
+						Lua 0:00:17:622
+[Braze] SessionStart error The server name or address could not be resolved
+
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:17:802
+[Braze] SessionStart error The server name or address could not be resolved
+
+						Lua 0:00:17:803
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:24:483
+Load Game: 
+	lua_revision: 403908 (last saved with) 
+	orig_lua_revision: 403908 (created with) 
+	assets_revision: 33006 
+
+	dlcs: norman, thomas 
+
+	mods: WUoPQ6R, W7hDysd, PquXTU, eoJkQuu, F7XeoeH, K76CAwD, iooW34Y, SMR_CommunityFixPack, GUreSMy, geLeQMy, QT4sR7W, dwAWmXz, kU4CYvP, iaTFkGp, Ad7YoNt, mSTRrs 
+						Lua 0:00:24:491
+*** Reloading assets from folder 'BinAssets/'
+						Lua 0:00:26:200
+*** Assets reloaded in 1.7 s, read 359.0 MB, read speed 210.1 MB/s, average read 8138 bytes.
+						Lua 0:00:27:119
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=17307 id=7
+						Lua 0:00:27:900
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=17307 id=8
+						Lua 0:00:28:693
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=17307 id=9
+						Lua 0:00:29:461
+
+Load anyway : The following mods are missing or outdated:
+
+<color em>Affordable Shopping - Not Everybody Buys
+Dome and Extractor Range Extend
+Dune Radio
+Endless FM
+Luxus-Apartment THE TARDIS
+Mega Dome 2
+Passage Network
+RemoveForestationLimit
+Smart Graduates
+Start With The Domes You Want
+Start with all Breakthroughs
+AutoMatic Factory Upgrades
+Nurseries Limit Births</color>
+
+Some features may not work. 
+
+						Lua 0:00:29:473
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=17307 id=10
+						Lua 0:00:32:749
+[mod] [SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=PreLoadGame t=17307 id=11
+[SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=PreLoadGame t=17307 id=11
+						Lua 0:00:33:427
+Unpersist missing permanent: ApartmentsBase:NewBuildingTemplate_2 | Fallback permanent: class ApartmentsBase
+						Lua 0:00:33:493
+Unpersist missing permanent: Mod/mSTRrs | Fallback permanent: table: 000001AA00057460 [7]
+Unpersist missing permanent: DomeMega:NewBuildingTemplate | Fallback permanent: class DomeMega
+						Lua 0:00:33:519
+Unpersist missing permanent: Preset:NotificationPreset.5xSun_Status | Fallback permanent: NotificationPreset "BreakthroughDiscovered": 000001AA08841558
+						Lua 0:00:33:520
+[mod] Savegame references Mod Affordable Shopping - Not Everybody Buys (id WUoPQ6R, v1.05-023) which is not present
+[mod] Savegame references Mod Dome and Extractor Range Extend (id W7hDysd, v0.00-016) which is not present
+[mod] Savegame references Mod Dune Radio (id PquXTU, v1.02-026) which is not present
+[mod] Savegame references Mod Endless FM (id eoJkQuu, v0.00-009) which is not present
+[mod] Savegame references Mod Luxus-Apartment THE TARDIS (id F7XeoeH, v0.00-012) which is not present
+[mod] Savegame references Mod Mega Dome 2 (id K76CAwD, v0.00-030) which is not present
+[mod] Savegame references Mod Passage Network (id iooW34Y, v1.00-038) which is not present
+[mod] This savegame tries to load Mod Relaunched Fix Pack (id SMR_CommunityFixPack, v1.00-019), which is loaded with a different version 1.00-020
+[mod] Savegame references Mod RemoveForestationLimit (id GUreSMy, v1.04-013) which is not present
+[mod] Savegame references Mod Smart Graduates (id geLeQMy, v1.01-074) which is not present
+[mod] Savegame references Mod Start With The Domes You Want (id QT4sR7W, v0.00-099) which is not present
+[mod] Savegame references Mod Start with all Breakthroughs (id dwAWmXz, v0.00-127) which is not present
+[mod] Savegame references Mod Stellaris Radio (id kU4CYvP, v1.01-017) which is not present
+[mod] Savegame references Mod 5xSun - AutoRefill (id iaTFkGp, v0.00-031) which is not present
+[mod] Savegame references Mod AutoMatic Factory Upgrades (id Ad7YoNt, v1.06-083) which is not present
+[mod] Savegame references Mod Nurseries Limit Births (id mSTRrs, v1.01-014) which is not present
+						Lua 0:00:35:101
+[mod] [SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:35:106
+[mod] [CommunityFixPack] ExoticDepositSign: 1 Exotic Minerals deposit(s) re-signed onto the clean entity
+						Lua 0:00:35:107
+[mod] [CommunityFixPack] SilentHitMomentFX: restored 34 missing hit-moment tracker(s) on load
+						Lua 0:00:35:112
+[RailShaftDev] UniversalTunnel allowed underground = true (DisabledInEnvironment is a GameVar: this is
+[RailShaftDev]   written into the save, and stays there if this mod is removed -- throwaway saves only)
+[RailShaftDev] ready. SMRRailShaft.Status() for where things stand.
+						Lua 0:00:35:126
+Applied 28 savegame fixup(s) in 14 ms: AAA_SetLRManagerMap, AgronomistFarmCropGrowth, CleanStaleRoverDamagedNotificationObjects, ConstructionSiteFlightMarks, CureSmallCropTechLock, CureUndergroundCropTechLock, FixDustGeneratorThrowTimes, FixFoodServiceMealsServedByShift, HospitalExoticMineralTreatment, KickWorkersFromTurnedOffDomes, MarkUnavoidableSupplyDrains, MoveOpenPasturePilesOffOrigin2, PipesAtBuildableLevelSteps, PoliticalAnimalAchievement2, RemarkJumboCaves, RemoveBreathableAtmosphereAirConsumptionModifier, ResetPlanetSceneCameraState, RespawnUnreachableBottomlessPitAnomalies, ResupplyCutoffLocksDelicacies, SplitDailyCountersByShift, ZZZZ_FixLeakedRocketReservations, ZZZ_DestroyTradeRocketsWithUnplacedLandingSite, ZZZ_FactionTaskDomeCompletableInAnyDome, ZZZ_HungerLocksFoodImport, ZZZ_RebuildElevatorResourceModeRegistration, ZZZ_ReviveElevatorSharedDepots, ZZZ_UpdateRefuelRequests, Zzz_RestartStalledMaintenanceDemand
+						Lua 0:00:35:293
+game_settings:
+    sponsor: ESA
+    profile: Spelunker
+    founding_faction: EnlightenmentInitiative
+    rival_colonies: BlueSun, AssemblyOfPlanets, NewArk
+    mystery_random: 
+    game_rules: DiscoverBreakthroughs
+more_game_settings: save_game_id: Do4kjJyQJSxICWkK, mystery: MirrorSphereMystery, coordinates: 2N176E, landing_spot: ElysiumBeta, logo: Europe
+map_conditions: altitude: -2776, temperature: -15, cold_wave: 36, dust_devils: 47, dust_storm: 0, meteors: 73
+map_resources: concrete: 254, metals: 146, precious_metals: 146, water: 109
+						Lua 0:00:35:386
+[mod] [CommunityFixPack] SaveSanitizer: F95 astrogeologist-residue pass removed 0 modifier(s), left 0 unidentified
+						Lua 0:00:35:393
+Game Loaded in 10911 ms
+[mod] [SMRTK] SMRTK_PROVENANCE actions=unavailable last=unavailable present=false session=unavailable t=89403444 id=12
+[SMRTK] SMRTK_PROVENANCE actions=unavailable last=unavailable present=false session=unavailable t=89403444 id=12
+						Lua 0:00:35:404
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=89403444 id=13
+						Lua 0:00:35:417
+[mod] [SMRTK] SMRTK_DOCK action=dock_attach attached=true route="idBottom sibling" status=OK surface=one-toggle+tasks t=89403444 id=14
+						Lua 0:00:35:424
+[mod] [SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:35:562
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=89403444 id=15
+						Lua 0:00:35:968
+Game loaded on map 						Lua 0:00:35:969
+BlankBig_04 in 11611 ms
+						Lua 0:00:41:683
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipColonist object=Colonist(2000016222) status=OK t=89409449 id=16
+						Lua 0:00:43:260
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=StirlingGenerator(12467) status=OK t=89411023 id=17
+						Lua 0:00:43:603
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipColonist object=Colonist(2000016222) status=OK t=89411371 id=18
+						Lua 0:01:15:526
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=DomeBasic(12016) status=OK t=89443293 id=19
+						Lua 0:01:18:243
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipColonist object=Colonist(2000016222) status=OK t=89446013 id=20
+						Lua 0:01:21:129
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipColonist object=Colonist(2000018285) status=OK t=89448901 id=21
+						Lua 0:01:28:991
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipShuttle object=CargoShuttle(2000028473) status=OK t=89475853 id=22
+						Lua 0:02:00:132
+[mod] [SMRTK] SMRTK_PANEL action=panel_toggle open=true status=OK tab=World t=89627240 id=23
+						Lua 0:02:01:196
+[mod] [SMRTK] SMRTK_COPY action=copy flushed=true from=0 lines=40 status=OK truncated=false t=89628306 id=24
+[SMRTK] SMRTK_COPY action=copy flushed=true from=0 lines=40 status=OK truncated=false t=89628306 id=24
+						Lua 0:04:06:705
+[mod] [SMRTK] SMRTK_ERROR kind=thread message="[string \"CreateRealTimeThread(function() local g=MainM...\"]:1: attempt to call a nil value (global 'MapForEach')" thread="thread: 000001AA10B67888" t=89753815 id=25
+[SMRTK] SMRTK_ERROR kind=thread message="[string \"CreateRealTimeThread(function() local g=MainM...\"]:1: attempt to call a nil value (global 'MapForEach')" thread="thread: 000001AA10B67888" t=89753815 id=25
+[LUA ERROR] [string "CreateRealTimeThread(function() local g=MainM..."]:1: attempt to call a nil value (global 'MapForEach')
+  [string "CreateRealTimeThread(function() local g=MainM..."](1):   <>
+        --- end of stack
+Locals:
+	                   g | userdata 0x000001AA09D74D98 #56
+	                real |    table 0x000001AA10B671C8 #0
+	                 add | function 0x000001AA10B67A28
+[mod] [SMRTK] SMRTK_ERROR kind=lua message="[string \"CreateRealTimeThread(function() local g=MainM...\"]:1: attempt to call a nil value (global 'MapForEach')" stack="  [string \"CreateRealTimeThread(function() local g=MainM...\"](1):   <>\n        --- end of stack" t=89753815 id=26
+[SMRTK] SMRTK_ERROR kind=lua message="[string \"CreateRealTimeThread(function() local g=MainM...\"]:1: attempt to call a nil value (global 'MapForEach')" stack="  [string \"CreateRealTimeThread(function() local g=MainM...\"](1):   <>\n        --- end of stack" t=89753815 id=26
+						Lua 0:04:14:123
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=DomeMedium(3911) status=OK t=89761221 id=27
+						Lua 0:04:15:966
+[mod] [SMRTK] SMRTK_ERROR kind=thread message="[string \"CreateRealTimeThread(function() local g=MainM...\"]:1: attempt to call a nil value (global 'MapForEach')" thread="thread: 000001AA11018D50" t=89763076 id=28
+[SMRTK] SMRTK_ERROR kind=thread message="[string \"CreateRealTimeThread(function() local g=MainM...\"]:1: attempt to call a nil value (global 'MapForEach')" thread="thread: 000001AA11018D50" t=89763076 id=28
+[LUA ERROR] [string "CreateRealTimeThread(function() local g=MainM..."]:1: attempt to call a nil value (global 'MapForEach')
+  [string "CreateRealTimeThread(function() local g=MainM..."](1):   <>
+        --- end of stack
+Locals:
+	                   g | userdata 0x000001AA09D74D98 #56
+	                real |    table 0x000001AA11015980 #0
+	                 add | function 0x000001AA11015B48
+						Lua 0:04:15:967
+[mod] [SMRTK] SMRTK_ERROR kind=lua message="[string \"CreateRealTimeThread(function() local g=MainM...\"]:1: attempt to call a nil value (global 'MapForEach')" stack="  [string \"CreateRealTimeThread(function() local g=MainM...\"](1):   <>\n        --- end of stack" t=89763076 id=29
+[SMRTK] SMRTK_ERROR kind=lua message="[string \"CreateRealTimeThread(function() local g=MainM...\"]:1: attempt to call a nil value (global 'MapForEach')" stack="  [string \"CreateRealTimeThread(function() local g=MainM...\"](1):   <>\n        --- end of stack" t=89763076 id=29
+						Lua 0:04:22:593
+[mod] [SMRTK] SMRTK_ERROR kind=thread message="[string \"CreateRealTimeThread(function() local functio...\"]:1: attempt to call a nil value (global 'MapForEach')" thread="thread: 000001AA112A8E88" t=89769703 id=30
+[SMRTK] SMRTK_ERROR kind=thread message="[string \"CreateRealTimeThread(function() local functio...\"]:1: attempt to call a nil value (global 'MapForEach')" thread="thread: 000001AA112A8E88" t=89769703 id=30
+[LUA ERROR] [string "CreateRealTimeThread(function() local functio..."]:1: attempt to call a nil value (global 'MapForEach')
+  [string "CreateRealTimeThread(function() local functio..."](1):   <>
+        --- end of stack
+Locals:
+	                  nm | function 0x000001AA112A9988
+[mod] [SMRTK] SMRTK_ERROR kind=lua message="[string \"CreateRealTimeThread(function() local functio...\"]:1: attempt to call a nil value (global 'MapForEach')" stack="  [string \"CreateRealTimeThread(function() local functio...\"](1):   <>\n        --- end of stack" t=89769703 id=31
+[SMRTK] SMRTK_ERROR kind=lua message="[string \"CreateRealTimeThread(function() local functio...\"]:1: attempt to call a nil value (global 'MapForEach')" stack="  [string \"CreateRealTimeThread(function() local functio...\"](1):   <>\n        --- end of stack" t=89769703 id=31
+						Lua 0:04:32:670
+[mod] [SMRTK] SMRTK_COPY action=copy flushed=true from=0 lines=51 status=OK truncated=false t=89779778 id=32
+[SMRTK] SMRTK_COPY action=copy flushed=true from=0 lines=51 status=OK truncated=false t=89779778 id=32
+						Lua 0:05:44:875
+SMRNET Brussels#1896 -> Prague#2564 count 1 real 1 ok
+SMRNET Brussels#1896 -> Strasbourg#3277 count 1 real 1 ok
+SMRNET Brussels#1896 -> Amsterdam#3867 count 1 real 1 ok
+SMRNET Brussels#1896 -> Tallinn#3871 count 1 real 1 ok
+SMRNET Brussels#1896 -> berlin#3913 count 1 real 1 ok
+SMRNET Brussels#1896 -> Paris#3911 count 1 real 1 ok
+SMRNET Brussels#1896 -> London#4053 count 1 real 1 ok
+SMRNET Brussels#1896 -> Bern#3274 count 1 real 1 ok
+SMRNET Brussels#1896 neighbours 8 network 11 passages 16
+SMRNET Prague#2564 -> Brussels#1896 count 1 real 1 ok
+SMRNET Prague#2564 neighbours 1 network 11 passages 16
+SMRNET Bern#3274 -> Brussels#1896 count 1 real 1 ok
+SMRNET Bern#3274 -> London#4053 count 1 real 1 ok
+						Lua 0:05:44:876
+SMRNET Bern#3274 neighbours 2 network 11 passages 16
+SMRNET Strasbourg#3277 -> Brussels#1896 count 1 real 1 ok
+SMRNET Strasbourg#3277 -> Amsterdam#3867 count 1 real 1 ok
+SMRNET Strasbourg#3277 -> Tallinn#3871 count 1 real 1 ok
+SMRNET Strasbourg#3277 neighbours 3 network 11 passages 16
+SMRNET Amsterdam#3867 -> Brussels#1896 count 1 real 1 ok
+SMRNET Amsterdam#3867 -> Strasbourg#3277 count 1 real 1 ok
+SMRNET Amsterdam#3867 -> Tallinn#3871 count 1 real 1 ok
+SMRNET Amsterdam#3867 neighbours 3 network 11 passages 16
+SMRNET Tallinn#3871 -> Brussels#1896 count 1 real 1 ok
+SMRNET Tallinn#3871 -> Strasbourg#3277 count 1 real 1 ok
+SMRNET Tallinn#3871 -> Amsterdam#3867 count 1 real 1 ok
+SMRNET Tallinn#3871 neighbours 3 network 11 passages 16
+SMRNET Paris#3911 -> Brussels#1896 count 1 real 1 ok
+SMRNET Paris#3911 -> berlin#3913 count 1 real 1 ok
+SMRNET Paris#3911 neighbours 2 network 11 passages 16
+SMRNET berlin#3913 -> Brussels#1896 count 1 real 1 ok
+SMRNET berlin#3913 -> Paris#3911 count 1 real 1 ok
+SMRNET berlin#3913 -> Paracelsus #1#11739 count 1 real 1 ok
+SMRNET berlin#3913 -> Planck #1#12016 count 1 real 1 ok
+SMRNET berlin#3913 neighbours 4 network 11 passages 16
+SMRNET London#4053 -> Brussels#1896 count 1 real 1 ok
+SMRNET London#4053 -> Bern#3274 count 1 real 1 ok
+SMRNET London#4053 neighbours 2 network 11 passages 16
+SMRNET Paracelsus #1#11739 -> berlin#3913 count 1 real 1 ok
+SMRNET Paracelsus #1#11739 neighbours 1 network 11 passages 16
+SMRNET Planck #1#12016 -> berlin#3913 count 1 real 1 ok
+SMRNET Planck #1#12016 neighbours 1 network 11 passages 16
+						Lua 0:05:51:580
+SMRCOL 2000009332 cmd Rest home Brussels#1896 in false holder PassageHub hub Passage Hub#2692 fails 0 outside_start false walk true access - emig false task - reserved false
+SMRCOL 2000009339 cmd Rest home Brussels#1896 in false holder PassageHub hub Passage Hub#4113 fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000009344 cmd Rest home Brussels#1896 in false holder - hub - fails 0 outside_start false walk - access - emig false task - reserved false
+SMRCOL 2000009346 cmd VisitService home Brussels#1896 in false holder - hub - fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000009353 cmd VisitService home Brussels#1896 in false holder - hub - fails 0 outside_start false walk - access - emig false task - reserved false
+SMRCOL 2000009356 cmd BoardVehicle home Brussels#1896 in false holder Train hub - fails 0 outside_start false walk - access true emig false task - reserved false
+SMRCOL 2000009586 cmd WaitForTransport home Brussels#1896 in false holder StationBig hub - fails 0 outside_start false walk - access - emig false task - reserved false
+SMRCOL 2000010296 cmd Rest home Brussels#1896 in false holder PassageHub hub Passage Hub#1908 fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000010306 cmd Transport home Brussels#1896 in false holder - hub - fails 0 outside_start 89588802 walk true access - emig false task Brussels#1896 reserved false
+SMRCOL 2000010316 cmd Rest home Brussels#1896 in false holder - hub - fails 0 outside_start 89811611 walk - access true emig false task - reserved false
+SMRCOL 2000010327 cmd Rest home Brussels#1896 in false holder PassageHub hub Passage Hub#2692 fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000010330 cmd Rest home Brussels#1896 in false holder PassageHub hub Passage Hub#4113 fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000010341 cmd VisitService home Brussels#1896 in false holder PassageHub hub Passage Hub#2692 fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000010348 cmd BoardVehicle home Brussels#1896 in false holder Train hub - fails 0 outside_start false walk - access - emig false task - reserved false
+SMRCOL 2000010352 cmd Rest home Brussels#1896 in false holder PassageHub hub Passage Hub#2692 fails 0 outside_start false walk true access - emig false task - reserved false
+SMRCOL 2000010357 cmd WaitForTransport home Brussels#1896 in false holder StationBig hub - fails 0 outside_start false walk - access true emig false task - reserved false
+SMRCOL 2000010378 cmd Rest home Brussels#1896 in false holder PassageHub hub Passage Hub#2692 fails 0 outside_start false walk true access - emig false task - reserved false
+						Lua 0:05:51:581
+SMRCOL 2000010384 cmd WaitForTransport home Brussels#1896 in false holder StationBig hub - fails 0 outside_start false walk - access true emig false task - reserved false
+SMRCOL 2000010387 cmd Rest home Brussels#1896 in false holder PassageHub hub Passage Hub#2692 fails 0 outside_start false walk true access - emig false task - reserved false
+SMRCOL 2000010395 cmd VisitService home Brussels#1896 in false holder - hub - fails 0 outside_start false walk true access - emig false task - reserved false
+SMRCOL 2000010435 cmd Rest home Brussels#1896 in false holder PassageHub hub Passage Hub#1908 fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000010480 cmd Rest home Brussels#1896 in false holder - hub - fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000010594 cmd GoToDome home Brussels#1896 in false holder PassageHub hub Passage Hub#4113 fails 0 outside_start false walk true access - emig false task - reserved false
+SMRCOL 2000010602 cmd BoardVehicle home Brussels#1896 in false holder Train hub - fails 0 outside_start false walk - access - emig false task - reserved false
+SMRCOL 2000010759 cmd BoardVehicle home Brussels#1896 in false holder Train hub - fails 0 outside_start false walk - access true emig false task - reserved false
+SMRCOL 2000010794 cmd Rest home Brussels#1896 in false holder - hub - fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000011032 cmd Rest home Brussels#1896 in false holder - hub - fails 0 outside_start false walk - access true emig false task - reserved false
+SMRCOL 2000011064 cmd Rest home Brussels#1896 in false holder PassageHub hub Passage Hub#2692 fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000011092 cmd VisitService home Brussels#1896 in false holder PassageHub hub Passage Hub#2692 fails 0 outside_start false walk true access - emig false task - reserved false
+SMRCOL 2000011099 cmd WorkCycle home Brussels#1896 in false holder DroneFactory hub - fails 0 outside_start false walk - access true emig false task - reserved false
+SMRCOL 2000011174 cmd Rest home Brussels#1896 in false holder PassageHub hub Passage Hub#1908 fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000011261 cmd Rest home Brussels#1896 in false holder - hub - fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000011357 cmd BoardVehicle home Brussels#1896 in false holder Train hub - fails 0 outside_start false walk - access - emig false task - reserved false
+SMRCOL 2000011448 cmd BoardVehicle home Brussels#1896 in false holder Train hub - fails 0 outside_start false walk - access - emig false task - reserved false
+SMRCOL 2000011480 cmd BoardVehicle home Brussels#1896 in false holder Train hub - fails 0 outside_start false walk - access true emig false task - reserved false
+SMRCOL 2000011548 cmd BoardVehicle home Brussels#1896 in false holder Train hub - fails 0 outside_start false walk - access true emig false task - reserved false
+SMRCOL 2000011697 cmd Work home Brussels#1896 in false holder PassageHub hub Passage Hub#2692 fails 0 outside_start false walk true access true emig false task - reserved false
+						Lua 0:05:51:582
+SMRCOL 2000011702 cmd BoardVehicle home Brussels#1896 in false holder Train hub - fails 0 outside_start false walk - access - emig false task - reserved false
+SMRCOL 2000011710 cmd VisitService home Brussels#1896 in false holder - hub - fails 0 outside_start false walk - access true emig false task - reserved false
+SMRCOL 2000011711 cmd Rest home Brussels#1896 in false holder - hub - fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000011714 cmd WorkCycle home Brussels#1896 in false holder PolymerPlant hub - fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000011715 cmd VisitService home Brussels#1896 in false holder - hub - fails 0 outside_start false walk - access - emig false task - reserved false
+SMRCOL 2000011724 cmd Rest home Brussels#1896 in false holder PassageHub hub Passage Hub#2692 fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000011725 cmd BoardVehicle home Brussels#1896 in false holder Train hub - fails 0 outside_start false walk - access - emig false task - reserved false
+SMRCOL 2000011726 cmd Work home Brussels#1896 in false holder - hub - fails 0 outside_start 89853714 walk - access - emig false task - reserved false
+SMRCOL 2000011728 cmd WaitForTransport home Brussels#1896 in false holder StationBig hub - fails 0 outside_start false walk - access true emig false task - reserved false
+SMRCOL 2000011734 cmd Rest home Brussels#1896 in false holder PassageHub hub Passage Hub#2692 fails 0 outside_start false walk true access - emig false task - reserved false
+SMRCOL 2000011736 cmd BoardVehicle home Brussels#1896 in false holder Train hub - fails 0 outside_start false walk - access - emig false task - reserved false
+SMRCOL 2000011739 cmd WaitForTransport home Brussels#1896 in false holder StationBig hub - fails 0 outside_start false walk - access true emig false task - reserved false
+SMRCOL 2000011740 cmd WorkCycle home Brussels#1896 in false holder FoodProcessingPlant hub - fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000011741 cmd Rest home Brussels#1896 in false holder PassageHub hub Passage Hub#1908 fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000011745 cmd WorkCycle home Brussels#1896 in false holder PolymerPlant hub - fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000011785 cmd Rest home Brussels#1896 in false holder PassageHub hub Passage Hub#2026 fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000011975 cmd WorkCycle home Brussels#1896 in false holder PolymerPlant hub - fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000012124 cmd Rest home Brussels#1896 in false holder - hub - fails 0 outside_start false walk - access true emig false task - reserved false
+						Lua 0:05:51:583
+SMRCOL 2000012251 cmd BoardVehicle home Brussels#1896 in false holder Train hub - fails 0 outside_start false walk - access - emig false task - reserved false
+SMRCOL 2000012409 cmd Rest home Brussels#1896 in false holder - hub - fails 0 outside_start false walk - access true emig false task - reserved false
+SMRCOL 2000012606 cmd Rest home Brussels#1896 in false holder PassageHub hub Passage Hub#2692 fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000012610 cmd Rest home Brussels#1896 in false holder PassageHub hub Passage Hub#1908 fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000012671 cmd WorkCycle home Brussels#1896 in false holder LowGLab hub - fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000012674 cmd GoToStation home Brussels#1896 in false holder - hub - fails 0 outside_start 89858279 walk - access true emig false task - reserved false
+SMRCOL 2000012736 cmd Work home Brussels#1896 in false holder PassageHub hub Passage Hub#1908 fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000012741 cmd Rest home Brussels#1896 in false holder PassageHub hub Passage Hub#1908 fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000012742 cmd Rest home Brussels#1896 in false holder PassageHub hub Passage Hub#2692 fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000012748 cmd WaitForTransport home Brussels#1896 in false holder StationBig hub - fails 0 outside_start false walk - access - emig false task - reserved false
+SMRCOL 2000012750 cmd Rest home Brussels#1896 in false holder PassageHub hub Passage Hub#2692 fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000012753 cmd Work home Brussels#1896 in false holder PassageHub hub Passage Hub#2692 fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000012754 cmd Rest home Brussels#1896 in false holder - hub - fails 0 outside_start false walk - access true emig false task - reserved false
+SMRCOL 2000012755 cmd BoardVehicle home Brussels#1896 in false holder Train hub - fails 0 outside_start false walk - access - emig false task - reserved false
+SMRCOL 2000012759 cmd WaitForTransport home Brussels#1896 in false holder StationBig hub - fails 0 outside_start false walk - access true emig false task - reserved false
+SMRCOL 2000012762 cmd VisitService home Brussels#1896 in false holder - hub - fails 0 outside_start 89856499 walk - access true emig false task - reserved false
+SMRCOL 2000012765 cmd WaitForTransport home Brussels#1896 in false holder StationBig hub - fails 0 outside_start false walk - access true emig false task - reserved false
+SMRCOL 2000012788 cmd Rest home Brussels#1896 in false holder - hub - fails 0 outside_start false walk - access true emig false task - reserved false
+SMRCOL 2000012833 cmd BoardVehicle home Brussels#1896 in false holder Train hub - fails 0 outside_start false walk - access true emig false task - reserved false
+SMRCOL 2000012928 cmd WaitForTransport home Brussels#1896 in false holder StationBig hub - fails 0 outside_start false walk - access true emig false task - reserved false
+SMRCOL 2000012948 cmd VisitService home Brussels#1896 in false holder PassageHub hub Passage Hub#2026 fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000013015 cmd Rest home Brussels#1896 in false holder PassageHub hub Passage Hub#4113 fails 0 outside_start false walk true access - emig false task - reserved false
+						Lua 0:05:51:584
+SMRCOL 2000013092 cmd Transport home Brussels#1896 in Planck #1#12016 holder - hub - fails 0 outside_start false walk true access - emig false task Brussels#1896 reserved false
+SMRCOL 2000013374 cmd BoardVehicle home Brussels#1896 in false holder Train hub - fails 0 outside_start false walk - access - emig false task - reserved false
+SMRCOL 2000013425 cmd Rest home Brussels#1896 in false holder - hub - fails 0 outside_start false walk - access true emig false task - reserved false
+SMRCOL 2000013548 cmd WaitForTransport home Brussels#1896 in false holder StationBig hub - fails 0 outside_start false walk - access true emig false task - reserved false
+SMRCOL 2000013675 cmd WorkCycle home Brussels#1896 in false holder MetalsExtractor hub Passage Hub#2692 fails 0 outside_start false walk - access true emig false task - reserved false
+SMRCOL 2000013733 cmd WaitForTransport home Brussels#1896 in false holder StationBig hub - fails 0 outside_start false walk - access true emig false task - reserved false
+SMRCOL 2000013768 cmd WaitForTransport home Brussels#1896 in false holder StationBig hub - fails 0 outside_start false walk - access true emig false task - reserved false
+SMRCOL 2000013811 cmd WaitForTransport home Brussels#1896 in false holder StationBig hub - fails 0 outside_start false walk - access - emig false task - reserved false
+SMRCOL 2000013889 cmd Transport home Brussels#1896 in false holder - hub - fails 0 outside_start 89567978 walk - access - emig false task Brussels#1896 reserved false
+SMRCOL 2000014093 cmd Work home Brussels#1896 in false holder - hub - fails 0 outside_start 89853177 walk - access true emig false task - reserved false
+SMRCOL 2000014114 cmd Rest home Brussels#1896 in false holder PassageHub hub Passage Hub#2026 fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000014140 cmd Rest home Brussels#1896 in false holder PassageHub hub Passage Hub#1908 fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000014175 cmd BoardVehicle home Brussels#1896 in false holder Train hub - fails 0 outside_start false walk - access - emig false task - reserved false
+SMRCOL 2000014225 cmd Work home Brussels#1896 in false holder PassageHub hub Passage Hub#2692 fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000014227 cmd WorkCycle home Brussels#1896 in false holder FoodProcessingPlant hub - fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000014247 cmd GoToDome home Brussels#1896 in false holder - hub - fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000014265 cmd Rest home Brussels#1896 in false holder - hub - fails 0 outside_start false walk true access - emig false task - reserved false
+SMRCOL 2000014266 cmd Work home Brussels#1896 in false holder PassageHub hub Passage Hub#2026 fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000014301 cmd Rest home Brussels#1896 in false holder PassageHub hub Passage Hub#2692 fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000014304 cmd BoardVehicle home Brussels#1896 in false holder Train hub - fails 0 outside_start false walk - access true emig false task - reserved false
+SMRCOL 2000014620 cmd Work home Brussels#1896 in false holder PassageHub hub Passage Hub#1908 fails 0 outside_start false walk true access - emig false task - reserved false
+						Lua 0:05:51:585
+SMRCOL 2000014621 cmd Rest home Brussels#1896 in false holder - hub - fails 0 outside_start 89795760 walk true access true emig false task - reserved false
+SMRCOL 2000014659 cmd Rest home Brussels#1896 in false holder - hub - fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000014669 cmd Transport home Brussels#1896 in false holder - hub - fails 0 outside_start 89807410 walk - access - emig false task Brussels#1896 reserved false
+SMRCOL 2000014704 cmd BoardVehicle home Brussels#1896 in false holder Train hub - fails 0 outside_start false walk - access - emig false task - reserved false
+SMRCOL 2000014705 cmd BoardVehicle home Brussels#1896 in false holder Train hub - fails 0 outside_start false walk - access - emig false task - reserved false
+SMRCOL 2000014774 cmd BoardVehicle home Brussels#1896 in false holder Train hub - fails 0 outside_start false walk - access true emig false task - reserved false
+SMRCOL 2000014804 cmd VisitService home Brussels#1896 in false holder - hub - fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000014823 cmd BoardVehicle home Brussels#1896 in false holder Train hub - fails 0 outside_start false walk - access true emig false task - reserved false
+SMRCOL 2000014884 cmd Rest home Brussels#1896 in false holder - hub - fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000014888 cmd Rest home Brussels#1896 in false holder PassageHub hub Passage Hub#2692 fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000014969 cmd Rest home Brussels#1896 in false holder PassageHub hub Passage Hub#2692 fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000015084 cmd BoardVehicle home Brussels#1896 in false holder Train hub - fails 0 outside_start false walk - access - emig false task - reserved false
+SMRCOL 2000015097 cmd WaitForTransport home Brussels#1896 in false holder StationBig hub - fails 0 outside_start false walk - access - emig false task - reserved false
+SMRCOL 2000015163 cmd WaitForTransport home Brussels#1896 in false holder StationBig hub - fails 0 outside_start false walk - access true emig false task - reserved false
+SMRCOL 2000015182 cmd BoardVehicle home Brussels#1896 in false holder Train hub - fails 0 outside_start false walk - access - emig false task - reserved false
+SMRCOL 2000015183 cmd VisitService home Brussels#1896 in false holder PassageHub hub Passage Hub#2692 fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000015323 cmd Rest home Brussels#1896 in false holder - hub - fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000015508 cmd VisitService home Brussels#1896 in false holder - hub - fails 0 outside_start false walk - access true emig false task - reserved false
+SMRCOL 2000015698 cmd Rest home Brussels#1896 in false holder - hub - fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000015863 cmd WaitForTransport home Brussels#1896 in false holder StationBig hub - fails 0 outside_start false walk - access true emig false task - reserved false
+						Lua 0:05:51:586
+SMRCOL 2000015974 cmd Rest home Brussels#1896 in false holder - hub - fails 0 outside_start false walk - access true emig false task - reserved false
+SMRCOL 2000016009 cmd Rest home Brussels#1896 in false holder - hub - fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000016172 cmd VisitService home Brussels#1896 in false holder PassageHub hub Passage Hub#2026 fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000016219 cmd Rest home Brussels#1896 in false holder PassageHub hub Passage Hub#1908 fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000016415 cmd WaitForTransport home Brussels#1896 in false holder StationBig hub - fails 0 outside_start false walk - access true emig false task - reserved false
+SMRCOL 2000016475 cmd VisitService home Brussels#1896 in false holder - hub - fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000016481 cmd Work home Brussels#1896 in false holder - hub - fails 0 outside_start 89853714 walk - access true emig false task - reserved false
+SMRCOL 2000016505 cmd Rest home Brussels#1896 in false holder PassageHub hub Passage Hub#2692 fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000016639 cmd Rest home Brussels#1896 in false holder PassageHub hub Passage Hub#2692 fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000016652 cmd BoardVehicle home Brussels#1896 in false holder Train hub - fails 0 outside_start false walk - access - emig false task - reserved false
+SMRCOL 2000016653 cmd VisitService home Brussels#1896 in false holder PassageHub hub Passage Hub#2692 fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000016662 cmd BoardVehicle home Brussels#1896 in false holder Train hub - fails 0 outside_start false walk - access - emig false task - reserved false
+SMRCOL 2000016704 cmd WaitForTransport home Brussels#1896 in false holder StationBig hub - fails 0 outside_start false walk - access true emig false task - reserved false
+SMRCOL 2000016830 cmd WorkCycle home Brussels#1896 in false holder PreciousMetalsExtractor hub - fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000016832 cmd WorkCycle home Brussels#1896 in false holder FoodProcessingPlant hub - fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000017043 cmd WaitForTransport home Brussels#1896 in false holder StationBig hub - fails 0 outside_start false walk - access true emig false task - reserved false
+SMRCOL 2000017176 cmd Rest home Brussels#1896 in false holder PassageHub hub Passage Hub#2692 fails 0 outside_start false walk true access - emig false task - reserved false
+SMRCOL 2000017177 cmd Transport home Brussels#1896 in false holder - hub - fails 0 outside_start 89573466 walk true access - emig false task Brussels#1896 reserved false
+SMRCOL 2000017265 cmd Work home Brussels#1896 in false holder - hub - fails 0 outside_start 89853714 walk - access true emig false task - reserved false
+SMRCOL 2000017541 cmd WaitForTransport home Brussels#1896 in false holder StationBig hub - fails 0 outside_start false walk - access true emig false task - reserved false
+SMRCOL 2000017824 cmd Rest home Brussels#1896 in false holder PassageHub hub Passage Hub#2692 fails 0 outside_start false walk true access true emig false task - reserved false
+						Lua 0:05:51:587
+SMRCOL 2000018030 cmd Transport home Brussels#1896 in false holder - hub - fails 0 outside_start 89622502 walk - access - emig false task Brussels#1896 reserved false
+SMRCOL 2000018049 cmd WaitForTransport home Brussels#1896 in false holder StationBig hub - fails 0 outside_start false walk - access true emig false task - reserved false
+SMRCOL 2000018055 cmd WaitForTransport home Brussels#1896 in false holder StationBig hub - fails 0 outside_start false walk - access - emig false task - reserved false
+SMRCOL 2000018086 cmd WorkCycle home Brussels#1896 in false holder PolymerPlant hub - fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000018172 cmd BoardVehicle home Brussels#1896 in false holder Train hub - fails 0 outside_start false walk - access true emig false task - reserved false
+SMRCOL 2000018175 cmd Work home Brussels#1896 in false holder PassageHub hub Passage Hub#2026 fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000018181 cmd Rest home Brussels#1896 in false holder - hub - fails 0 outside_start false walk - access true emig false task - reserved false
+SMRCOL 2000018183 cmd BoardVehicle home Brussels#1896 in false holder Train hub - fails 0 outside_start false walk - access true emig false task - reserved false
+SMRCOL 2000018185 cmd BoardVehicle home Brussels#1896 in false holder Train hub - fails 0 outside_start false walk - access true emig false task - reserved false
+SMRCOL 2000018194 cmd GoToStation home Brussels#1896 in false holder - hub - fails 0 outside_start 89858504 walk - access true emig false task - reserved false
+SMRCOL 2000018197 cmd VisitService home Brussels#1896 in false holder PassageHub hub Passage Hub#2692 fails 0 outside_start false walk true access - emig false task - reserved false
+SMRCOL 2000018199 cmd VisitService home Brussels#1896 in false holder - hub - fails 0 outside_start 89843461 walk - access true emig false task - reserved false
+SMRCOL 2000018202 cmd BoardVehicle home Brussels#1896 in false holder Train hub - fails 0 outside_start false walk - access - emig false task - reserved false
+SMRCOL 2000018204 cmd BoardVehicle home Brussels#1896 in false holder Train hub - fails 0 outside_start false walk - access true emig false task - reserved false
+SMRCOL 2000018412 cmd Work home Brussels#1896 in false holder - hub - fails 0 outside_start 89853714 walk - access true emig false task - reserved false
+SMRCOL 2000018859 cmd Work home Brussels#1896 in false holder PolymerPlant hub - fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000018959 cmd WaitForTransport home Brussels#1896 in false holder StationBig hub - fails 0 outside_start false walk - access true emig false task - reserved false
+SMRCOL 2000019117 cmd BoardVehicle home Brussels#1896 in false holder Train hub - fails 0 outside_start false walk - access - emig false task - reserved false
+SMRCOL 2000019119 cmd GoToStation home Brussels#1896 in false holder - hub - fails 0 outside_start 89830361 walk - access true emig false task - reserved false
+SMRCOL 2000019198 cmd GoToStation home Brussels#1896 in false holder - hub - fails 0 outside_start 89826489 walk - access true emig false task - reserved false
+SMRCOL 2000019224 cmd Transport home Brussels#1896 in Paracelsus #1#11739 holder - hub - fails 0 outside_start false walk true access - emig false task Brussels#1896 reserved false
+						Lua 0:05:51:588
+SMRCOL 2000019225 cmd Transport home Brussels#1896 in false holder - hub - fails 0 outside_start 89569633 walk true access true emig false task Brussels#1896 reserved false
+SMRCOL 2000019253 cmd Rest home Brussels#1896 in false holder - hub - fails 0 outside_start false walk true access - emig false task - reserved false
+SMRCOL 2000019264 cmd WorkCycle home Brussels#1896 in false holder FoodProcessingPlant hub - fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000019324 cmd WaitForTransport home Brussels#1896 in false holder StationBig hub - fails 0 outside_start false walk - access true emig false task - reserved false
+SMRCOL 2000019626 cmd GoToStation home Brussels#1896 in false holder - hub - fails 0 outside_start 89839561 walk - access true emig false task - reserved false
+SMRCOL 2000019630 cmd WaitForTransport home Brussels#1896 in false holder StationBig hub - fails 0 outside_start false walk - access true emig false task - reserved false
+SMRCOL 2000019779 cmd Rest home Brussels#1896 in false holder PassageHub hub Passage Hub#2692 fails 0 outside_start false walk true access - emig false task - reserved false
+SMRCOL 2000019802 cmd Work home Brussels#1896 in false holder PassageHub hub Passage Hub#2692 fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000019830 cmd Rest home Brussels#1896 in false holder - hub - fails 0 outside_start false walk - access true emig false task - reserved false
+SMRCOL 2000019970 cmd WaitForTransport home Brussels#1896 in false holder StationBig hub - fails 0 outside_start false walk - access true emig false task - reserved false
+SMRCOL 2000019981 cmd Rest home Brussels#1896 in false holder PassageHub hub Passage Hub#2026 fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000020007 cmd WorkCycle home Brussels#1896 in false holder PolymerPlant hub - fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000020225 cmd Work home Brussels#1896 in false holder - hub - fails 0 outside_start 89853711 walk - access true emig false task - reserved false
+SMRCOL 2000020263 cmd Rest home Brussels#1896 in false holder PassageHub hub Passage Hub#2692 fails 0 outside_start false walk true access - emig false task - reserved false
+SMRCOL 2000020381 cmd WaitForTransport home Brussels#1896 in false holder StationBig hub - fails 0 outside_start false walk - access true emig false task - reserved false
+SMRCOL 2000020410 cmd WaitForTransport home Brussels#1896 in false holder StationBig hub - fails 0 outside_start false walk - access true emig false task - reserved false
+SMRCOL 2000020899 cmd BoardVehicle home Brussels#1896 in false holder Train hub - fails 0 outside_start false walk - access - emig false task - reserved false
+SMRCOL 2000020910 cmd WorkCycle home Brussels#1896 in false holder PolymerPlant hub - fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000021091 cmd Rest home Brussels#1896 in false holder - hub - fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000021111 cmd WaitForTransport home Brussels#1896 in false holder StationBig hub - fails 0 outside_start false walk - access - emig false task - reserved false
+SMRCOL 2000021134 cmd Rest home Brussels#1896 in false holder PassageHub hub Passage Hub#2026 fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000021135 cmd WaitForTransport home Brussels#1896 in false holder StationBig hub - fails 0 outside_start false walk - access true emig false task - reserved false
+						Lua 0:05:51:589
+SMRCOL 2000021387 cmd VisitService home Brussels#1896 in false holder - hub - fails 0 outside_start false walk - access true emig false task - reserved false
+SMRCOL 2000021530 cmd Rest home Brussels#1896 in false holder - hub - fails 0 outside_start false walk true access - emig false task - reserved false
+SMRCOL 2000021583 cmd BoardVehicle home Brussels#1896 in false holder Train hub - fails 0 outside_start false walk - access true emig false task - reserved false
+SMRCOL 2000021587 cmd WaitForTransport home Brussels#1896 in false holder StationBig hub - fails 0 outside_start false walk - access - emig false task - reserved false
+SMRCOL 2000021716 cmd BoardVehicle home Brussels#1896 in false holder Train hub - fails 0 outside_start false walk - access - emig false task - reserved false
+SMRCOL 2000021749 cmd Rest home Brussels#1896 in false holder - hub - fails 0 outside_start false walk true access - emig false task - reserved false
+SMRCOL 2000021780 cmd BoardVehicle home Brussels#1896 in false holder Train hub - fails 0 outside_start false walk - access true emig false task - reserved false
+SMRCOL 2000021870 cmd BoardVehicle home Brussels#1896 in false holder Train hub - fails 0 outside_start false walk - access - emig false task - reserved false
+SMRCOL 2000021871 cmd Rest home Brussels#1896 in false holder - hub - fails 0 outside_start 89787542 walk true access - emig false task - reserved false
+SMRCOL 2000021922 cmd BoardVehicle home Brussels#1896 in false holder Train hub - fails 0 outside_start false walk - access true emig false task - reserved false
+SMRCOL 2000021923 cmd Rest home Brussels#1896 in false holder PassageHub hub Passage Hub#2692 fails 0 outside_start false walk true access - emig false task - reserved false
+SMRCOL 2000021926 cmd WaitForTransport home Brussels#1896 in false holder StationBig hub - fails 0 outside_start false walk - access true emig false task - reserved false
+SMRCOL 2000021985 cmd Rest home Brussels#1896 in false holder PassageHub hub Passage Hub#2692 fails 0 outside_start false walk true access - emig false task - reserved false
+SMRCOL 2000021991 cmd Rest home Brussels#1896 in false holder - hub - fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000022272 cmd BoardVehicle home Brussels#1896 in false holder Train hub - fails 0 outside_start false walk - access true emig false task - reserved false
+SMRCOL 2000022486 cmd Rest home Brussels#1896 in false holder PassageHub hub Passage Hub#2692 fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000022524 cmd Transport home Brussels#1896 in false holder - hub Passage Hub#2692 fails 0 outside_start false walk true access - emig false task Brussels#1896 reserved false
+SMRCOL 2000022558 cmd Rest home Brussels#1896 in false holder PassageHub hub Passage Hub#2692 fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000022759 cmd Work home Brussels#1896 in false holder - hub - fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000022769 cmd Rest home Brussels#1896 in false holder - hub - fails 0 outside_start false walk - access true emig false task - reserved false
+						Lua 0:05:51:590
+SMRCOL 2000023008 cmd BoardVehicle home Brussels#1896 in false holder Train hub - fails 0 outside_start false walk - access - emig false task - reserved false
+SMRCOL 2000023102 cmd Rest home Brussels#1896 in false holder PassageHub hub Passage Hub#2026 fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000023172 cmd Rest home Brussels#1896 in false holder - hub - fails 0 outside_start false walk - access true emig false task - reserved false
+SMRCOL 2000023173 cmd BoardVehicle home Brussels#1896 in false holder Train hub - fails 0 outside_start false walk - access - emig false task - reserved false
+SMRCOL 2000023215 cmd VisitService home Brussels#1896 in false holder PassageHub hub Passage Hub#2692 fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000023346 cmd Rest home Brussels#1896 in false holder - hub - fails 0 outside_start false walk - access true emig false task - reserved false
+SMRCOL 2000023389 cmd VisitService home Brussels#1896 in false holder PassageHub hub Passage Hub#2026 fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000023599 cmd Rest home Brussels#1896 in false holder - hub - fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000023607 cmd BoardVehicle home Brussels#1896 in false holder Train hub - fails 0 outside_start false walk - access true emig false task - reserved false
+SMRCOL 2000023642 cmd WaitForTransport home Brussels#1896 in false holder StationBig hub - fails 0 outside_start false walk - access true emig false task - reserved false
+SMRCOL 2000023725 cmd Rest home Brussels#1896 in false holder PassageHub hub Passage Hub#2692 fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000023726 cmd Rest home Brussels#1896 in false holder PassageHub hub Passage Hub#4113 fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000023756 cmd VisitService home Brussels#1896 in false holder - hub - fails 0 outside_start false walk - access - emig false task - reserved false
+SMRCOL 2000023758 cmd WaitForTransport home Brussels#1896 in false holder StationBig hub - fails 0 outside_start false walk - access true emig false task - reserved false
+SMRCOL 2000023797 cmd WorkCycle home Brussels#1896 in false holder PreciousMetalsExtractor hub - fails 0 outside_start false walk - access true emig false task - reserved false
+SMRCOL 2000023827 cmd BoardVehicle home Brussels#1896 in false holder Train hub - fails 0 outside_start false walk - access true emig false task - reserved false
+SMRCOL 2000023927 cmd Rest home Brussels#1896 in false holder PassageHub hub Passage Hub#1908 fails 0 outside_start false walk true access - emig false task - reserved false
+SMRCOL 2000024184 cmd Rest home Brussels#1896 in false holder PassageHub hub Passage Hub#1908 fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000024543 cmd VisitService home Brussels#1896 in false holder - hub - fails 0 outside_start false walk - access - emig false task - reserved false
+SMRCOL 2000024677 cmd Work home Brussels#1896 in false holder PassageHub hub Passage Hub#2026 fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000024761 cmd GoToStation home Brussels#1896 in false holder - hub - fails 0 outside_start 89829873 walk - access true emig false task - reserved false
+SMRCOL 2000024789 cmd Rest home Brussels#1896 in false holder PassageHub hub Passage Hub#2692 fails 0 outside_start false walk true access true emig false task - reserved false
+						Lua 0:05:51:591
+SMRCOL 2000024790 cmd GoToDome home Brussels#1896 in false holder - hub - fails 0 outside_start false walk - access true emig false task - reserved false
+SMRCOL 2000024838 cmd Work home Brussels#1896 in false holder - hub - fails 0 outside_start 89853177 walk - access true emig false task - reserved false
+SMRCOL 2000024989 cmd Work home Brussels#1896 in false holder PassageHub hub Passage Hub#2026 fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000024991 cmd Rest home Brussels#1896 in false holder PassageHub hub Passage Hub#2026 fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000025085 cmd VisitService home Brussels#1896 in false holder - hub - fails 0 outside_start false walk true access - emig false task - reserved false
+SMRCOL 2000025207 cmd GoToStation home Brussels#1896 in false holder - hub - fails 0 outside_start 89830998 walk - access true emig false task - reserved false
+SMRCOL 2000025210 cmd Work home Brussels#1896 in false holder PassageHub hub Passage Hub#2026 fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000025314 cmd VisitService home Brussels#1896 in false holder PassageHub hub Passage Hub#2692 fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000025341 cmd GoToDome home Brussels#1896 in false holder - hub - fails 0 outside_start false walk - access true emig false task - reserved false
+SMRCOL 2000025392 cmd GoToDome home Brussels#1896 in false holder PassageHub hub Passage Hub#2692 fails 0 outside_start false walk true access - emig false task - reserved false
+SMRCOL 2000025997 cmd VisitService home Brussels#1896 in false holder - hub - fails 0 outside_start 89854417 walk - access - emig false task - reserved false
+SMRCOL 2000026029 cmd VisitService home Brussels#1896 in false holder - hub - fails 0 outside_start false walk - access true emig false task - reserved false
+SMRCOL 2000026173 cmd BoardVehicle home Brussels#1896 in false holder Train hub - fails 0 outside_start false walk - access - emig false task - reserved false
+SMRCOL 2000026216 cmd Rest home Brussels#1896 in false holder PassageHub hub Passage Hub#2692 fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000026224 cmd GoToDome home Brussels#1896 in false holder PassageHub hub Passage Hub#2692 fails 0 outside_start false walk true access - emig false task - reserved false
+SMRCOL 2000026369 cmd GoToDome home Brussels#1896 in false holder PassageHub hub Passage Hub#2692 fails 0 outside_start false walk true access - emig false task - reserved false
+SMRCOL 2000026408 cmd VisitService home Brussels#1896 in false holder - hub - fails 0 outside_start false walk - access - emig false task - reserved false
+SMRCOL 2000026421 cmd VisitService home Brussels#1896 in false holder - hub - fails 0 outside_start 89854413 walk - access true emig false task - reserved false
+SMRCOL 2000026427 cmd WaitForTransport home Brussels#1896 in false holder StationBig hub - fails 0 outside_start false walk - access - emig false task - reserved false
+SMRCOL 2000026470 cmd WaitForTransport home Brussels#1896 in false holder StationBig hub - fails 0 outside_start false walk - access - emig false task - reserved false
+SMRCOL 2000026647 cmd Work home Brussels#1896 in false holder - hub - fails 0 outside_start false walk true access - emig false task - reserved false
+SMRCOL 2000026695 cmd Rest home Brussels#1896 in false holder - hub - fails 0 outside_start false walk true access - emig false task - reserved false
+SMRCOL 2000026724 cmd WaitForTransport home Brussels#1896 in false holder StationBig hub - fails 0 outside_start false walk - access - emig false task - reserved false
+						Lua 0:05:51:592
+SMRCOL 2000026725 cmd BoardVehicle home Brussels#1896 in false holder Train hub - fails 0 outside_start false walk - access - emig false task - reserved false
+SMRCOL 2000027948 cmd VisitService home Brussels#1896 in false holder - hub - fails 0 outside_start 89853794 walk - access true emig false task - reserved false
+SMRCOL 2000027995 cmd Rest home Brussels#1896 in false holder PassageHub hub Passage Hub#2026 fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000027999 cmd Rest home Brussels#1896 in false holder PassageHub hub Passage Hub#2692 fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000028009 cmd WaitForTransport home Brussels#1896 in false holder StationBig hub - fails 0 outside_start false walk - access - emig false task - reserved false
+SMRCOL 2000028036 cmd WaitForTransport home Brussels#1896 in false holder StationBig hub - fails 0 outside_start false walk - access - emig false task - reserved false
+SMRCOL 2000028037 cmd GoToDome home Brussels#1896 in false holder PassageHub hub Passage Hub#2692 fails 0 outside_start false walk true access - emig false task - reserved false
+SMRCOL 2000028143 cmd Rest home Brussels#1896 in false holder PassageHub hub Passage Hub#2026 fails 0 outside_start false walk true access true emig false task - reserved false
+SMRCOL 2000028283 cmd BoardVehicle home Brussels#1896 in false holder Train hub - fails 0 outside_start false walk - access - emig false task - reserved false
+SMRCOL 2000028287 cmd BoardVehicle home Brussels#1896 in false holder Train hub - fails 0 outside_start false walk - access - emig false task - reserved false
+SMRCOL 2000028311 cmd Transport home Brussels#1896 in false holder - hub - fails 0 outside_start 89848229 walk true access true emig false task Brussels#1896 reserved false
+SMRCOL 2000028312 cmd VisitService home Brussels#1896 in false holder - hub - fails 0 outside_start 89854417 walk - access - emig false task - reserved false
+SMRCOL 2000028364 cmd VisitService home Brussels#1896 in false holder - hub - fails 0 outside_start 89854413 walk - access true emig false task - reserved false
+SMRCOL 2000028365 cmd WaitForTransport home Brussels#1896 in false holder StationBig hub - fails 0 outside_start false walk - access - emig false task - reserved false
+SMRCOL 2000028366 cmd BoardVehicle home Brussels#1896 in false holder Train hub - fails 0 outside_start false walk - access - emig false task - reserved false
+SMRCOL 2000028421 cmd WaitForTransport home Brussels#1896 in false holder StationBig hub - fails 0 outside_start false walk - access - emig false task - reserved false
+SMRCOL 2000028446 cmd Rest home Brussels#1896 in false holder - hub - fails 0 outside_start false walk - access true emig false task - reserved false
+						Lua 0:05:54:509
+[mod] [SMRTK] SMRTK_CLEAR action=clear status=OK t=89861620 id=33
+						Lua 0:05:54:972
+[mod] [SMRTK] SMRTK_COPY action=copy flushed=true from=0 lines=300 status=OK truncated=true t=89862083 id=34
+[SMRTK] SMRTK_COPY action=copy flushed=true from=0 lines=300 status=OK truncated=true t=89862083 id=34
+						Lua 0:06:58:374
+[mod] [SMRTK] SMRTK_PANEL action=panel_toggle open=false status=OK tab=World t=89925484 id=35
+						Lua 0:07:08:503
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=DomeMedium(3274) status=OK t=89935601 id=36
+						Lua 0:07:09:075
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=ScienceInstitute(14360) status=OK t=89936170 id=37
+						Lua 0:07:10:011
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=ScienceInstitute(14366) status=OK t=89937106 id=38
+						Lua 0:07:10:830
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=DomeMedium(3274) status=OK t=89937929 id=39
+						Lua 0:07:11:899
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=NetworkNode(14344) status=OK t=89938999 id=40
+						Lua 0:07:31:056
+SMRPOP Brussels#1896 residents 858 inside 608 exposed 17 entity DomeGeoscape working true accept true
+SMRPOP Prague#2564 residents 0 inside 0 exposed 0 entity DomeMedium working true accept true
+SMRPOP Bern#3274 residents 0 inside 0 exposed 0 entity DomeMedium working true accept true
+SMRPOP Strasbourg#3277 residents 0 inside 0 exposed 0 entity DomeOval working true accept true
+SMRPOP Amsterdam#3867 residents 0 inside 0 exposed 0 entity DomeMedium working true accept true
+SMRPOP Tallinn#3871 residents 0 inside 0 exposed 0 entity DomeMega working true accept true
+SMRPOP Paris#3911 residents 0 inside 0 exposed 0 entity DomeMedium working true accept true
+SMRPOP berlin#3913 residents 0 inside 0 exposed 0 entity DomeMedium working true accept true
+SMRPOP London#4053 residents 0 inside 0 exposed 0 entity DomeMedium working true accept true
+SMRPOP Paracelsus #1#11739 residents 0 inside 0 exposed 0 entity DomeBasic working true accept true
+SMRPOP Planck #1#12016 residents 0 inside 0 exposed 0 entity DomeBasic working true accept true
+SMRHUB Passage Hub#1908 units 1 domes 2 working true ui true
+SMRHUB Passage Hub#2026 units 11 domes 4 working true ui true
+SMRHUB Passage Hub#2692 units 81 domes 3 working true ui true
+SMRHUB Passage Hub#4113 units 1 domes 3 working true ui true
+SMRHUB Passage Hub#11714 units 0 domes 2 working true ui true
+SMRHUB Passage Hub#11985 units 0 domes 2 working true ui true
+SMRPOP total 858
+						Lua 0:07:33:671
+[mod] [SMRTK] SMRTK_PANEL action=panel_toggle open=true status=OK tab=World t=89960780 id=41
+						Lua 0:07:34:685
+[mod] [SMRTK] SMRTK_MARK action=mark label=MARK mark=388 status=OK t=89961796 id=42
+[SMRTK] SMRTK_MARK action=mark label=MARK mark=388 status=OK t=89961796 id=42
+[mod] [SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=36/36 game=405907 mark_action=mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923,SMR_TrainHubDev_20260918 pack_version=20 read="live registry" save="New Horizons 2 83.savegame.sav" sol=126 status=OK t=89961796 id=43
+[SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=36/36 game=405907 mark_action=mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923,SMR_TrainHubDev_20260918 pack_version=20 read="live registry" save="New Horizons 2 83.savegame.sav" sol=126 status=OK t=89961796 id=43
+						Lua 0:07:35:429
+[mod] [SMRTK] SMRTK_COPY action=copy flushed=true from=388 lines=2 status=OK truncated=false t=89962540 id=44
+[SMRTK] SMRTK_COPY action=copy flushed=true from=388 lines=2 status=OK truncated=false t=89962540 id=44
+						Lua 0:08:02:338
+SMRPOP Brussels#1896 residents 858 inside 650 exposed 20 entity DomeGeoscape working true accept true
+SMRPOP Prague#2564 residents 0 inside 0 exposed 0 entity DomeMedium working true accept true
+SMRPOP Bern#3274 residents 0 inside 0 exposed 0 entity DomeMedium working true accept true
+SMRPOP Strasbourg#3277 residents 0 inside 0 exposed 0 entity DomeOval working true accept true
+SMRPOP Amsterdam#3867 residents 0 inside 0 exposed 0 entity DomeMedium working true accept true
+SMRPOP Tallinn#3871 residents 0 inside 0 exposed 0 entity DomeMega working true accept true
+SMRPOP Paris#3911 residents 0 inside 0 exposed 0 entity DomeMedium working true accept true
+SMRPOP berlin#3913 residents 0 inside 0 exposed 0 entity DomeMedium working true accept true
+SMRPOP London#4053 residents 0 inside 0 exposed 0 entity DomeMedium working true accept true
+SMRPOP Paracelsus #1#11739 residents 0 inside 0 exposed 0 entity DomeBasic working true accept true
+SMRPOP Planck #1#12016 residents 0 inside 0 exposed 0 entity DomeBasic working true accept true
+SMRHUB Passage Hub#1908 units 0 domes 2 working true ui true
+SMRHUB Passage Hub#2026 units 2 domes 4 working true ui true
+SMRHUB Passage Hub#2692 units 59 domes 3 working true ui true
+SMRHUB Passage Hub#4113 units 1 domes 3 working true ui true
+SMRHUB Passage Hub#11714 units 0 domes 2 working true ui true
+SMRHUB Passage Hub#11985 units 0 domes 2 working true ui true
+SMRPOP total 858
+						Lua 0:08:04:225
+[mod] [SMRTK] SMRTK_COPY action=copy flushed=true from=388 lines=22 status=OK truncated=false t=89991335 id=45
+[SMRTK] SMRTK_COPY action=copy flushed=true from=388 lines=22 status=OK truncated=false t=89991335 id=45
+						Lua 0:08:25:908
+
+
+Stopping the game threads from the Lua side with exit code 0.
+
+					Render 0:08:25:913
+
+
+Stopping the game threads after receiving WM_QUIT.
+
+					Render 0:08:26:304
+
+
+*** Debug::Done()
+Time (ms)	506304
+
+
