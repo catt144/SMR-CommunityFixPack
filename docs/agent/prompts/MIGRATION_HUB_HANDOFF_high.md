@@ -69,16 +69,21 @@ so more hub crossings) and its residue hypothesis is refuted. Overturn only on e
    `PLAYTEST_PLAN_1.1.1_2026-09-23.md`.
 7. **Site-form issues 2 and 3** (the "switched itself off" dialog naming the vacuum-walk fix).
    **Corrected 2026-09-24: the Dome-global hypothesis is not refuted.** `SMRDOME` was read in game,
-   after the class rebuild, and in both runs the pack's code loaded before Passage Network's (ON:95
-   before ON:136). If Passage Network loads first, its stray `function Dome()` is the live global
+   after the class rebuild, and in the mods-on run the pack's code ran before Passage Network's (ON:95
+   before ON:136; queue at ON:186); the mods-off run did not load it. If Passage Network loads first, its stray `function Dome()` is the live global
    when VacuumWalks' `has_110_helpers` runs, so the fix declines and flags itself; VacuumWalks is
    the only module that reads `Dome` at load. Code load order is the enable order
    (`Mod.lua:1907-1994`, `ModManager.lua:35-37`, archived 1.1.1.405907). Owner sitting pending:
    turn the pack and Passage Network off, enable Passage Network first, then the pack. Expect
    `VacuumWalks: inactive (the shipped emigration code has no work-slot reservation or shuttle
    landing slots; …)` and the dialog; `applied` refutes it. Range-changing mods tripping the
-   threshold-gap test remain the second lead. The general question is out to Codex as the
-   load-order cross-check (`680c279`).
+   threshold-gap test remain the second lead. Codex's load-order cross-check
+   ([LOAD_ORDER_CROSSCHECK_2026-09-24.md](../reports/LOAD_ORDER_CROSSCHECK_2026-09-24.md), `4361a55`)
+   reproduced the decline on the desk in both orders and names the narrow repair: look up the
+   retained `Dome` declaration through `ProcessClassdefChildren` (`CommonLua/Core/classes.lua:1265`,
+   1.1.1.405907) instead of the transient global. Its load-order levers (saved-order promotion,
+   metadata bootstrap) are not in any release: the owner will ship a load-order change with fixes
+   only if its route is low risk with minimal testing (2026-09-24).
 8. **Owner's side idea, not filed:** a foreign-mod probe kit that on load checks class globals
    are tables, lists which mod replaced which pack target, and dumps residue like the `SMRNET`
    line. Route to `docs/FUTURE_IDEAS.md` if the owner wants it kept.

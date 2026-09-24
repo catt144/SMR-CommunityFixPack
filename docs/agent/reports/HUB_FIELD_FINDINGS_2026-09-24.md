@@ -139,5 +139,6 @@ re-checked the first and third against the raw log and the archived 1.1.1.405907
 - **`SMRDOME` (§5) and the startup dialog.** The read shows `Dome` is a table in game, after the
   class rebuild. It does not show what `Dome` was while mod code ran. On a rig where Passage
   Network's code runs before the pack's, VacuumWalks' load-time check (`Code/Fix_VacuumWalks.lua`,
-  `has_110_helpers`) would see the stray function and decline with the dialog. In both runs here the
-  pack loaded first (ON:95 before ON:136). Hypothesis, pending the owner's reversed-order sitting.
+  `has_110_helpers`) would see the stray function and decline with the dialog. In the mods-on run the
+  pack's code ran before Passage Network's (ON:95 before ON:136; queue at ON:186), though not first
+  overall; the mods-off run did not load Passage Network. Hypothesis, pending the owner's reversed-order sitting.
