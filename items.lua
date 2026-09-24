@@ -63,6 +63,10 @@ return {
 		'CodeFileName', "Code/Fix_PassageStaleHolder.lua",
 	}),
 	PlaceObj('ModItemCode', {
+		'name', "Fix_PassageHubSalvageDrain",
+		'CodeFileName', "Code/Fix_PassageHubSalvageDrain.lua",
+	}),
+	PlaceObj('ModItemCode', {
 		'name', "Fix_RescueReturnText",
 		'CodeFileName', "Code/Fix_RescueReturnText.lua",
 	}),
