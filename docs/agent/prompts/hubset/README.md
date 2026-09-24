@@ -30,6 +30,9 @@ report the disagreement.
   done." No link changes load order or the VacuumWalks load-time guard.
 - **Sittings:** "One sitting only." 07 is the chain's only attended link. No link may add another;
   anything only the game can answer becomes a slot reading in 07.
+- **Second pass, 2026-09-24, after 06B:** "If you can write up test code that can prove it and I can
+  easily check it in game without fishing for circumstances then we can do another pass". 07B is that
+  pass and the only exception to "One sitting only".
 - **Sittings are preloaded:** "all these commands are things that could have been done in slots";
   "smrtk has a build in 128x game speed for fire watch and fire after x in game time." The owner
   clicks SMRTK slots; waits are triggers or `Run until` at top speed (06 carries the details).
@@ -49,6 +52,7 @@ report the disagreement.
 | ~~06~~ | ~~`06_SITTING_PREP_medium.md`~~ | ~~medium~~ | ~~no~~ | ~~predictions, fixtures and the script for 07~~ |
 | ~~07~~ | ~~`07_VERIFY_SITTING_owner.md`~~ | ~~attended~~ | ~~✅ keyboard~~ | ~~every member in the real game, fix on and off~~ |
 | ~~06B~~ | ~~`06B_SITTING_FINDINGS_high.md`~~ | ~~high~~ | ~~no (feeds the owner's decision)~~ | ~~desk answers to 07's three open questions: C111's missed text, C114's non-reproduction, C117's unsampled watch~~ |
+| 07B | `07B_VERIFY_PASS2_owner.md` | attended | ✅ keyboard | owner-approved second pass: C111, C114 and C117 each staged by a slot, fix on and off |
 | 99 | `99_AUDIT_high.md` | high | ✅ raises | adversarial audit of the branch; SHIP / SHIP WITH CHANGES / NO SHIP; on SHIP and the owner's go, the merge and the records |
 
 ## Ordering
@@ -61,7 +65,7 @@ report the disagreement.
   closed in `be69f7d`; 05's inbox says why).
 - **05 after 04 and after 02 and 03.** It is last among the builds because its design needs 04's
   on-hub test (owner's order).
-- **06 after 05; 07 after 06; 06B after 07** (owner, 2026-09-24: answer 07's open questions before the drop, hold or re-fix calls); **99 last**, on a folder holding only 99 and this README.
+- **06 after 05; 07 after 06; 06B after 07** (owner, 2026-09-24: answer 07's open questions before the drop, hold or re-fix calls); **07B after 06B** (the owner's second pass); **99 last**, on a folder holding only 99 and this README.
 - If a link finds a member cannot be built safely, it stops and routes the facts to the owner, per the
   ruling above. The chain continues with the other members only on the owner's word.
 
