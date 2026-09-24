@@ -235,3 +235,15 @@ would make it shippable). Then the close-out below. Open a live todo list before
 - **Drift for 99:** `MIGRATION_AUDIT_2026-09-24_D_hubs.md:75,110,351` still says `LeadIn → OnEnterUnit →
   SetHolder(el)` for passage elements, which `Passage.lua:819` contradicts. This is the premise
   03 flagged for C42, repeated in the audit's field-lifetime table. It is not corrected here.
+
+### From the chain author, 2026-09-24: check of 04, one overstatement
+
+04's test stands, and 05 may build on it. One SOURCE claim in the note is too strong: "`hub.units` is
+exactly `holder == hub`". On a hub-to-dome crossing, the destructor's else branch
+(`Lua/Passage.lua:1230-1235`, archived 1.1.1) calls `SetHolder()` (which does run `OnExitHolder`) only
+when `passage_hub` is valid. It then sets `unit.holder = nil` directly, bypassing `OnExitHolder`. A unit
+that holds the hub without the marker therefore leaves a stale entry in `hub.units` with `holder ~= hub`.
+Whether any path sets `holder == hub` without `passage_hub` is unverified; the plain `LeadIn` into the
+hub via `WaypointsObj:OnEnterUnit` is the lead. Consequences: `OnHubNow` never reads `hub.units`, so it
+is unaffected. Do not use `hub.units` as a membership source in 05. The retired log's far-away `units`
+rows may be stale list entries rather than colonists in flight; R1 and R2 in 07 decide which.
