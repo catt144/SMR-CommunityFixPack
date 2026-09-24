@@ -75,6 +75,14 @@ The context's gitStatus block is a staleable snapshot.
 - Tests and playtests: apply `docs/agent/WORKFLOW.md`'s test-design and
   execution requirements; include applicable fixture constraints, controls
   and completion evidence in the brief.
+- Attended sittings: preload the work into SMRTK slots and triggers
+  (`tools/SMRTK.md`) and advance time with Run until at top speed. The owner
+  clicks; they do not type. A hand-typed console line, a wait measured in
+  owner minutes, or a watch for an on-screen state each needs a stated reason
+  no slot can do it. Owner time is the cost being minimised.
 
 Before handoff, read as the worker: decision, outcome, scope, stops and
-completion evidence must stand without this conversation.
+completion evidence must stand without this conversation. Read an attended
+brief again from the owner's seat: where they see each reading, what they
+click, how long it takes. A step resting on one unit's infopanel among
+hundreds, or on real minutes of watching, fails that read.

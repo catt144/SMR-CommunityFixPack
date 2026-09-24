@@ -222,6 +222,9 @@ and report. Stale probes are how false facts got recorded.
 Leg-design rules:
 
 - An objective counter is only objective if it can fail, and it needs a liveness witness beside it.
+- A prediction names the result that would refute it, and its author confirms the instrument can
+  produce that result. A disjunction one branch of which the data always satisfies is not a
+  prediction.
 - A probe reaches the code the way production does and computes its expectation independently
   (vanilla's algorithm or hand-derived constants), never with the fix's own logic. A guard probe
   also asserts that the guard still delegates.
@@ -264,10 +267,14 @@ The TestKit's `SMRTest.RunAll()` A/B pair (pack disabled, then enabled) is the r
 - Salvage targets objects, not hexes: a bare red `Salvage` means nothing under the cursor is
   targetable.
 - Label probe tallies with their build and name each SKIP. A MarsDebug pass is not retail evidence
-  (`EF-044`), and console and toolkit names are checked against the retail sandbox (`EF-096`).
+  (`EF-044`), and a console or toolkit name is verified by counting its call shape in the archived
+  tree for the current build (bare `Name(` against `:Name(`): `EF-096` records what the sandbox lets
+  through, not whether a name is a global, and a stub run passes by defining the global it tests.
   `ConsolePrint` silently rejects multiple or non-string arguments, and an OS display measurement
   needs a DPI-aware tool.
-- An owner-typed console line is one paste-safe line with no `--` comment: a bare expression for a
+- An attended sitting is preloaded into SMRTK slots and triggers (`tools/SMRTK.md`); an owner-typed
+  console line is the exception and carries a stated reason. When one is warranted it is one
+  paste-safe line with no `--` comment: a bare expression for a
   read, `*r` for real-time or multi-statement work, `*g` for game-time work that yields. Make `nil`
   explicit, read presence from the file log, and claim absence only after exit. An attended leg
   carries more duties (`support/CO_RUNS.md`).

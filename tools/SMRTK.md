@@ -90,7 +90,8 @@ logger conflict**: disarm Quiet before invoking console loggers.
 
 # Preloading a sitting — `80_AgentSlots.lua`
 
-**Pull-only.** Use this half only when a sitting brief calls for preloaded slots.
+**Pull-only.** An attended sitting is preloaded, so read this half when authoring or
+running one; a brief that asks the owner to type instead states why no slot can do it.
 `80_AgentSlots.lua` is agent-owned, rewritten for the next sitting, and **never
 edited by a build link.** None of it is a fix and none of it ships.
 
