@@ -116,3 +116,37 @@ sections, with their corrections.
   follows `Passage.lua:819`, and the whole desk harness passed again. The earlier 04 archive-log
   links in this inbox use `../../archive/`; from this folder the correct route is
   `../../../archive/`. The linked evidence still exists at `docs/archive/logs/`.
+
+### From hubset 04, 2026-09-24 — on-hub test derived from source (desk)
+
+- **The test:** [ON_HUB_TEST_2026-09-24.md](../../reports/hubset/ON_HUB_TEST_2026-09-24.md). `OnHubNow(unit, hub)` =
+  a live hub and **(A)** in flight on a connected passage (`traversing_passage` valid, cross-checked
+  against that passage's `traversing_colonists`, and the passage in `hub.connected_passages` or
+  `draining_passages`) **or (B)** standing on the hub (not traversing; `holder == hub` or
+  `passage_hub == hub`; and `HexGridGetObject(object_hex_grid, WorldToHex(unit), "PassageHub") == hub`).
+  Each input has an archived-1.1.1.405907 citation and a fail-closed case. The test is SOURCE, not
+  measured: it becomes measured only when 07 runs readings R1-R7. It uses no map query, no
+  file-local helper and no blocking body, so no stop fired.
+- **Source facts that change earlier readings:** `hub.units` is exactly `holder == hub`
+  (`Unit.lua:805-822`, `Holder.lua:27-41`). Passage elements never become holders (`Passage.lua:819`).
+  So a hub-to-dome traverser keeps `holder == hub` across the whole passage and its ramp. That likely
+  explains the retired log's far-away `units` rows (INFERRED; R2 checks it). Traversal cannot be
+  interrupted, because `SetCommand` waits for running destructors (`CommandObject.lua:363-367`). But
+  `Colonist:SetCommand` calls `HasLocalAccess` at `ColonistTransport.lua:416` on the caller's
+  thread, so C114's wrapper is reached mid-passage and needs branch A.
+- **Dome hexes:** guard 3 need not cover them. B reads only hub identity. Native access already
+  handles a holder-less colonist on a dome hex.
+- **Routed finding (05, 99, owner):** a stale `holder == hub` makes `IsUnitInDome` false even inside
+  a dome, because `IsObjInDome(holder)` reads `hub.parent_dome`, and a hub has none
+  (`Dome.lua:111-114`, :159-161). `Dome:OnEnterUnit` is empty (`Dome.lua:1850`), so entering a dome by
+  `Dome_Entrance` keeps the hub holder. It also keeps `UpdateOutside` sheltered, so clearing
+  C116's marker alone does not restore the timer for such a colonist. Reach is INFERRED: it needs an
+  overland walk off the hub (R2, R6). 05 decides whether its C116 module drops a hub holder that
+  fails `OnHubNow`, and says so either way.
+- **For 06:** R1-R7 in the note are the slot readings, each with its object, field, expected and
+  refuting value. Their API shapes are counted in the note. R3 and R5 want triggers
+  (`traversing_passage` becoming false). R4 and R6 need a colonist dumped on a hub: fire a worker
+  who just arrived there.
+- **Drift for 99:** `MIGRATION_AUDIT_2026-09-24_D_hubs.md:75,110,351` still says `LeadIn → OnEnterUnit →
+  SetHolder(el)` for passage elements, which `Passage.lua:819` contradicts. This is the premise
+  03 flagged for C42, repeated in the audit's field-lifetime table. It is not corrected here.
