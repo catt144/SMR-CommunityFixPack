@@ -83,7 +83,9 @@ so more hub crossings) and its residue hypothesis is refuted. Overturn only on e
    retained `Dome` declaration through `ProcessClassdefChildren` (`CommonLua/Core/classes.lua:1265`,
    1.1.1.405907) instead of the transient global. Its load-order levers (saved-order promotion,
    metadata bootstrap) are not in any release: the owner will ship a load-order change with fixes
-   only if its route is low risk with minimal testing (2026-09-24).
+   only if its route is low risk with minimal testing (2026-09-24). Owner, 2026-09-24: "For the load order we
+   will decide how and what we implement after the fixes are done." Nothing on load order before
+   the hub set is built.
 8. **Owner's side idea, not filed:** a foreign-mod probe kit that on load checks class globals
    are tables, lists which mod replaced which pack target, and dumps residue like the `SMRNET`
    line. Route to `docs/FUTURE_IDEAS.md` if the owner wants it kept.
