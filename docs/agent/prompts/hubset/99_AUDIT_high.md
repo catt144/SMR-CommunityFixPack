@@ -363,3 +363,43 @@ watched no fix work.
 - **Owner observation, A6:** "multiple colonist on the screen with o2 readings". Captured as SMRTK
   screenshots 0074-0076 (`SMR-ScreenCaptures`); unexamined. The followed subjects had `open_seen=false`.
 - **A3b was NOT RUN in both segments**, so the relocation subject never existed on this fixture.
+
+### From hubset 06B, 2026-09-24 — desk answers before the owner's decision
+
+- **Report and receipt:** [06B findings](../../reports/HUBSET_06B_SITTING_FINDINGS_2026-09-24.md),
+  [exact commands and outputs](../../../archive/logs/hubset06b_desk_source_2026-09-24.txt).
+  Code and desk controls committed and pushed on `hubset` as **`e5fc0c6`** (parent `7cf48a2`).
+  Main's parent for this close-out is `c9b6e3d`; TestKit stays `66288da`, untouched.
+- **C111 — cause found on the desk; exact live attribution INFERRED.** The old guard rejected
+  `emigration_dome=false`, which is the archived class/reset default (`Colonist.lua:106,329`,
+  build 1.1.1.405907). A displayed home destination did not prove that guard passed. The extended
+  `desk_c111_rescue_text.py --module-revision 7cf48a2` reproduces T 4333 on inherited/explicit false
+  and a hit on synthetic nil. The one-guard repair accepts false; the current suite passes and
+  `--without-fix` fails. The original desk fixture omitted this class default. The sitting never
+  recorded the field or instance method identity; the report preserves that limit. The wording
+  remains unapproved. No new play, no entry status change, at most fixed-pending-play evidence.
+- **C114 — 07's exact native branch remains UNKNOWN (06B stop 1).** Its poll recorded no booking
+  and a safe end, not the synchronous access call. Home-community access is conditional, not an
+  automatic consequence of having a home. New `desk_c114_sitting_findings.py` shows native false /
+  fixed true on source-derived distant hub fixtures, and native true with a nearby connected
+  community. Reporter false-access readings and 07's hub dump support conditional reach, but no
+  reporter line records every physical-hex/topology input together. Audit that reach and routing
+  inference; do not turn the desk composition into a measured reconstruction. The exact missing
+  branch reading is in the report, with no second sitting proposed. C114 code is unchanged.
+- **C117 — timebase diagnosis supported, still desk-verified and unobserved in play.** Both watches
+  lasted 90,368 game ms; constant factor 128000 and the archived countdown imply about 640,000 game
+  ms before demolition. The factor was logged at arm; the countdown was not directly measured.
+  No other traced 07 watch shares that demolition-timebase blind spot, so this finding voids no
+  additional C115 P2, C116 P6 or R1-R6 HELD reading. Their original limits still apply.
+- **Additional C117 sampling limitation:** a busy spoke at salvage toggle can empty during the
+  countdown. The existing snapshot is at the first poll seeing `hub_draining`, potentially later
+  than entry. A corrected instrument would need an actual boundary witness as well as a compatible
+  bounded timeout. This is described only; no corrected slot was built or preloaded.
+- **Validation:** C111 current/old/absent controls, C114 new/existing controls, C117 existing
+  controls, C111 pins, parsecheck and the declared-VOID 07 rehearsal ran; hubset doccheck and hook
+  were GREEN. The receipt reconciles the harness totals with their named demands.
+- **Owner choices remain open:** keep, drop or hold each member with the report's stated ship
+  implications. One release and one sitting remain the rulings. No C42/F127/P3 work was added.
+  This result is unaudited: only after this link's independent audit, add the dated report pointer
+  to C111, C114 and C117. Their entries were intentionally not updated by 06B. Nothing was merged
+  to main's Code, metadata or items, and no release surface was changed.

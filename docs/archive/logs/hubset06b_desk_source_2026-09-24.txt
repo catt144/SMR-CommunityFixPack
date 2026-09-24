@@ -1,0 +1,963 @@
+hubset 06B command receipt — 2026-09-24
+
+Inputs: main c9b6e3d; hubset 7cf48a2 plus the exact changes committed as e5fc0c6;
+TestKit 66288da; archived game source 1.1.1.405907.
+All commands below were run. Source/log commands are PowerShell; Python tests run
+from the named cwd. Expected failing C111 controls are labeled by revision/absence.
+These are desk and source results, not a game session or an independent audit.
+
+=== C111-old ===
+CWD: B:/Dev/SMR/SMR-BugFixPack-hubset
+COMMAND: python tools/desk_c111_rescue_text.py --module-revision 7cf48a2
+EXIT: 1
+MODULE 7cf48a2
+PASS shipped own-home command uses new-Dome ID 4333
+PASS shipped class default resolves missing instance emigration_dome to false
+PASS shipped relocation names the destination
+PASS module applies against shipped command
+OBS inherited_false_tid=4333 explicit_false_tid=4333 synthetic_nil_returning=True
+FAIL own-home ride says returning with native destination hyperlink
+FAIL explicit false, synthetic nil and home-valued rescue all say returning
+PASS dreaming keeps the native non-4333 result
+PASS own-home hyperlink names and selects home
+PASS real relocation retains its destination text and link
+PASS walk, stale emigration and non-rescue tasks remain native
+FAIL reloaded live task still shows returning
+
+=== c111_fixed ===
+CWD: B:/Dev/SMR/SMR-BugFixPack-hubset
+COMMAND: python tools/desk_c111_rescue_text.py
+EXIT: 0
+MODULE working-tree
+PASS shipped own-home command uses new-Dome ID 4333
+PASS shipped class default resolves missing instance emigration_dome to false
+PASS shipped relocation names the destination
+PASS module applies against shipped command
+OBS inherited_false_tid=None explicit_false_tid=None synthetic_nil_returning=True
+PASS own-home ride says returning with native destination hyperlink
+PASS explicit false, synthetic nil and home-valued rescue all say returning
+PASS dreaming keeps the native non-4333 result
+PASS own-home hyperlink names and selects home
+PASS real relocation retains its destination text and link
+PASS walk, stale emigration and non-rescue tasks remain native
+PASS reloaded live task still shows returning
+
+=== c111_absent ===
+CWD: B:/Dev/SMR/SMR-BugFixPack-hubset
+COMMAND: python tools/desk_c111_rescue_text.py --without-fix
+EXIT: 1
+MODULE absent
+PASS shipped own-home command uses new-Dome ID 4333
+PASS shipped class default resolves missing instance emigration_dome to false
+PASS shipped relocation names the destination
+OBS inherited_false_tid=4333 explicit_false_tid=4333 synthetic_nil_returning=False
+FAIL own-home ride says returning with native destination hyperlink
+FAIL explicit false, synthetic nil and home-valued rescue all say returning
+PASS dreaming keeps the native non-4333 result
+PASS own-home hyperlink names and selects home
+PASS real relocation retains its destination text and link
+PASS walk, stale emigration and non-rescue tasks remain native
+
+=== c111_pins ===
+CWD: B:/Dev/SMR/SMR-BugFixPack-hubset
+COMMAND: python tools/bodycheck.py --src B:/Dev/SMR/SMR-Shared/SMR-SrcArchive/1.1.1.405907/Src --module RescueReturnText --all
+EXIT: 0
+OK            Fix_RescueReturnText.lua:20
+              target  Lua/Units/Colonist.lua Colonist:Getui_command
+              body matches the pin (Lua/Units/Colonist.lua:4672-4716)
+OK            Fix_RescueReturnText.lua:21
+              target  Lua/Units/Colonist.lua Colonist:Getui_command
+              defect expression still shipped
+OK            Fix_RescueReturnText.lua:23
+              target  Lua/Units/Colonist.lua L4647-4649
+              body matches the pin (Lua/Units/Colonist.lua:4647-4649)
+OK            Fix_RescueReturnText.lua:24
+              target  Lua/Units/Colonist.lua L4647-4649
+              defect expression still shipped
+==============================================================================
+4 manifest row(s) over 1 stamped module(s); 0 module(s) carry no manifest.
+  4 OK
+A GREEN here is NOT a clearance: it sees a changed body, a vanished defect
+and a vanished target. It does NOT see semantics moving under a wrapper
+(class c), and it sees nothing at all for a NO-DEFECT or NO-MANIFEST module.
+
+=== rehearsal ===
+CWD: B:/Dev/SMR/SMR-BugFixPack-hubset
+COMMAND: python tools/desk_hubset07_rehearsal.py
+EXIT: 0
+PASS P1   hubset  as-predicted       expected=HELD        got=HELD
+PASS P1   hubset  scratch            expected=REFUTED     got=REFUTED
+PASS P2   hubset  as-predicted       expected=HELD        got=HELD
+PASS P2   hubset  scratch            expected=REFUTED     got=REFUTED
+PASS P1   main    as-predicted       expected=HELD        got=HELD
+PASS P1   main    scratch            expected=REFUTED     got=REFUTED
+PASS P2   main    as-predicted       expected=HELD        got=HELD
+PASS P2   main    scratch            expected=REFUTED     got=REFUTED
+PASS P3   hubset  as-predicted       expected=HELD        got=HELD
+PASS P3   hubset  scratch            expected=REFUTED     got=REFUTED
+PASS P4   hubset  as-predicted       expected=HELD        got=HELD
+PASS P4   hubset  scratch            expected=REFUTED     got=REFUTED
+PASS P3   main    as-predicted       expected=HELD        got=HELD
+PASS P3   main    scratch            expected=REFUTED     got=REFUTED
+PASS P4   main    as-predicted       expected=HELD        got=HELD
+PASS P4   main    scratch            expected=REFUTED     got=REFUTED
+PASS P5   hubset  as-predicted       expected=HELD        got=HELD
+PASS P5   hubset  scratch            expected=REFUTED     got=REFUTED
+PASS P5   main    as-predicted       expected=HELD        got=HELD
+PASS P5   main    scratch            expected=REFUTED     got=REFUTED
+PASS P6   hubset  as-predicted       expected=HELD        got=HELD
+PASS P6   hubset  scratch            expected=REFUTED     got=REFUTED
+PASS R4   main    as-predicted       expected=HELD        got=HELD
+PASS R4   main    scratch            expected=REFUTED     got=REFUTED
+PASS R5   hubset  as-predicted       expected=HELD        got=HELD
+PASS R5   hubset  scratch            expected=REFUTED     got=REFUTED
+PASS R5   hubset  scratch-flag       expected=REFUTED     got=REFUTED
+PASS R6   hubset  as-predicted       expected=HELD        got=HELD
+PASS R6   main    scratch            expected=REFUTED     got=REFUTED
+PASS R3   any     first-poll-silent  expected=false       got=false
+PASS R3   any     as-predicted       expected=HELD        got=HELD
+PASS R3   any     scratch            expected=REFUTED     got=REFUTED
+PASS P7   hubset  as-predicted       expected=HELD        got=HELD
+PASS P7   hubset  scratch            expected=REFUTED     got=REFUTED
+PASS P7   main    as-predicted       expected=HELD        got=HELD
+PASS P7   main    scratch            expected=REFUTED     got=REFUTED
+PASS P8   hubset  as-predicted       expected=HELD        got=HELD
+PASS P8   hubset  scratch            expected=REFUTED     got=REFUTED
+PASS P9   hubset  as-predicted       expected=HELD        got=HELD
+PASS P9   hubset  scratch            expected=REFUTED     got=REFUTED
+PASS P9   hubset  no-stale           expected=NOT_SAMPLED got=NOT_SAMPLED
+PASS R1   any     as-predicted       expected=HELD        got=HELD
+PASS R1   any     scratch            expected=REFUTED     got=REFUTED
+PASS R2   any     as-predicted       expected=HELD        got=HELD
+PASS R2   any     scratch            expected=REFUTED     got=REFUTED
+PASS P10  any     as-predicted       expected=HELD        got=HELD
+PASS P10  any     scratch            expected=REFUTED     got=REFUTED
+PASS P11  hubset  as-predicted       expected=HELD        got=HELD
+PASS P12  hubset  as-predicted       expected=HELD        got=HELD
+PASS P11  hubset  scratch            expected=REFUTED     got=REFUTED
+PASS P12  hubset  scratch            expected=REFUTED     got=REFUTED
+PASS P11  main    as-predicted       expected=HELD        got=HELD
+PASS R7   main    as-predicted       expected=HELD        got=HELD
+PASS R7   hubset  refused-on-hubset  expected=false       got=false
+PASS R7   main    scratch            expected=REFUTED     got=REFUTED
+PASS LOAD any     armed-at-load      expected=0           got=0
+PASS LOAD any     bindings           expected=7           got=7
+PASS LOAD any     triggers           expected=6           got=6
+armed at load (before scenarios): 0
+58 of 58 rehearsal demands held
+VOID: desk fixtures only; no game ran. See the module docstring.
+ALL DEMANDS HELD
+
+=== parse ===
+CWD: B:/Dev/SMR/SMR-BugFixPack-hubset
+COMMAND: python tools/parsecheck.py --quiet
+EXIT: 0
+PARSE: 44 file(s) in Code, 0 error(s) [Lua 5.5]
+
+=== C114-desk ===
+CWD: B:/Dev/SMR/SMR-BugFixPack-hubset
+COMMAND: python -B tools/desk_c114_sitting_findings.py
+EXIT: 0
+holderless marked hub, reporter distance 24: distance=24 native=False fixed=True
+holderless marked hub, reporter distance 25: distance=25 native=False fixed=True
+holderless marked hub, reporter distance 28: distance=28 native=False fixed=True
+07 standing hub distance 29: distance=29 native=False fixed=True
+unmarked on-hub control: distance=29 native=False fixed=False
+removed connection control: distance=29 native=False fixed=False
+nearby connected community: build=native access=True
+nearby connected community: build=fixed access=True
+C114 SITTING DESK CHECK HELD
+
+=== C114-suite ===
+CWD: B:/Dev/SMR/SMR-BugFixPack-hubset
+COMMAND: python -B tools/desk_c114_hub_access.py
+EXIT: 0
+==============================================================================
+C114 hub local access -- archived 1.1.1.405907
+==============================================================================
+lua: Lua 5.5 | lupa 2.8
+
+  PASS  module registered and applied
+  PASS  changed hub shape declines without wrapper
+  PASS  changed network shape declines without wrapper
+  PASS  module removed: large-dome in-flight access
+  PASS  module removed: standing on hub
+  PASS  module removed: dumped on hub retains access
+  PASS  module removed: small dome native true retained
+  PASS  module removed: natural Idle rescue booking follows access
+  PASS  fix on: large-dome in-flight access
+  PASS  fix on: standing on hub
+  PASS  fix on: dumped on hub retains access
+  PASS  fix on: small dome native true retained
+  PASS  fix on: natural Idle rescue booking follows access
+  PASS  fix on: connected draining passage still grants access
+  PASS  fix on: unrelated destination remains denied
+  PASS  fix on: stale holder off hub remains denied
+  PASS  fix on: stale marker off hub remains denied
+  PASS  fix on: cut passage remains denied
+  PASS  fix on: stale flight flag without list membership remains denied
+  PASS  fix on: removed last dome connection remains denied
+  PASS  fix on: home-relative query remains denied
+  PASS  fix on: outdoor workplace remains denied
+  PASS  fix on: cross-map destination denied
+  PASS  native service policy still refuses a full service after access grant
+  PASS  unrelated station destination leaves train-search gate open
+
+==============================================================================
+25 of 25 demands held
+ALL DEMANDS HELD
+
+=== C117-desk ===
+CWD: B:/Dev/SMR/SMR-BugFixPack-hubset
+COMMAND: python tools/desk_c117_hub_salvage.py
+EXIT: 0
+==============================================================================
+C117 busy hub-spoke salvage drain -- archived 1.1.1.405907
+==============================================================================
+lua: Lua 5.5 | lupa 2.8
+
+extracted shipped bodies:
+  Lua/Passage.lua:1119-1124  /^function PassageBase:GetConnectedHub\(/
+  Lua/Passage.lua:1126-1129  /^function PassageBase:IsPFTunnelActive\(/
+  Lua/Passage.lua:1131-1152  /^function PassageBase:WouldStrandHubColonists\(/
+  Lua/Passage.lua:1154-1161  /^function PassageBase:ClearHubDraining\(/
+  Lua/Passage.lua:1093-1111  /^function PassageBase:OnSetDemolishing\(/
+  Lua/Passage.lua:1113-1115  /^function PassageBase:WakeUpDemolishThread\(/
+  Lua/Passage.lua:1163-1185  /^function PassageBase:OnDemolish\(/
+  Lua/Passage.lua:1201-1248  /^function PassageBase:TraverseTunnel\(/
+  Lua/Passage.lua:1388-1405  /^function PassageBase:DisconnectDomes\(/
+  Lua/Passage.lua:1435-1444  /^function PassageBase:DisconnectDomeFromHub\(/
+  Lua/Passage.lua:1742-1751  /^function PassageBase:RemovePFTunnel\(/
+  Lua/Passage.lua:686-712  /^function PassageGridElement:RemovePFTunnel\(/
+  Lua/Units/Unit.lua:238-246  /^function Unit:TraverseTunnel\(/
+  PASS  module applies through its real Require probe
+  PASS  busy spoke with a live sibling waits for its in-flight colonist  -- waits=1, remaining=0
+  PASS  in-flight colonist arrives on the hub before disconnect  -- holder/marker are hub; native disconnect removes the PF endpoint after arrival
+  PASS  fix-removed control takes the native outside branch after the same disconnect  -- waits=1, on_hub=False
+  PASS  last exit retains native pre-disconnect wait with the module installed  -- native/fixed waits=1/1
+  PASS  fresh entrant on a draining spoke with a usable sibling is refused
+  PASS  refused entry uses native Unit:TraverseTunnel ClearPath contract  -- ClearPath=1, AdvancePathTunnel=0
+  PASS  with no safe sibling, fresh last-exit traffic tail-delegates to native traversal
+  PASS  a simultaneous draining sibling is not treated as a safe exit (C99 remains native)
+  PASS  native cancellation clears hub_draining and the hub drain registration
+  PASS  a fresh entrant after cancellation is no longer refused
+  PASS  fresh-runtime reload reconstructs the drain solely from native fields
+  PASS  module declares no save handler or persisted game variable
+  PASS  missing PassageBase:TraverseTunnel shape declines before wrapper install
+  PASS  behaviour-probe control declines when the sibling shortcut no longer returns false
+  PASS  accepted PassageBase traversal preserves all chained returns, including nil
+  PASS  first IsKindOf gate passes a foreign receiver through with chained returns intact
+
+==============================================================================
+17 of 17 demands held
+ALL DEMANDS HELD -- C117's drain decisions discriminate from the native race.
+
+=== S-C111 ===
+CWD: B:/Dev/SMR/SMR-BugFixPack
+COMMAND: & 'C:/Program Files/Git/usr/bin/grep.exe' -n -E 'dreaming = false|emigration_dome = false|function Colonist:Transport\(|if dest_dome ~= self.dome|self.emigration_dome = dest_dome|function Colonist:GetEmigrationDomeDisplayName|function Colonist:SelectEmigrationDome|local dome = self.emigration_dome|function Colonist:Getui_command|if self.dreaming then|MysteryDream|Transport =  T|return tcommand or' 'B:/Dev/SMR/SMR-Shared/SMR-SrcArchive/1.1.1.405907/Src/Lua/Units/Colonist.lua'
+EXIT: 0
+68:	dreaming = false,
+106:	emigration_dome = false,
+329:	self.emigration_dome = false
+1595:	local dome = self.emigration_dome or self.dome
+1966:				self.emigration_dome = dest_dome
+2110:	self.emigration_dome = dest_dome
+2160:	self.emigration_dome = dest_dome
+2457:	if traits.Dreamer and g_MysteryDream then
+2458:		self:SetCommand("MysteryDream")
+3837:	self.emigration_dome = dest_dome
+3963:function Colonist:Transport(dest_dome)
+3968:	if dest_dome ~= self.dome and not leg_of_journey and IsKindOf(dest_dome, "Community") then -- emigrating or being rescued?
+3969:		self.emigration_dome = dest_dome
+4437:function Colonist:SelectEmigrationDome()  -- for hyperlinks
+4438:	local dome = self.emigration_dome or self.transport_task and self.transport_task.dest_dome
+4462:function Colonist:GetEmigrationDomeDisplayName()  -- for hyperlinks
+4463:	local dome = self.emigration_dome or self.transport_task and self.transport_task.dest_dome
+4635:	MysteryDream = T(6930, "Dreaming"),
+4647:	Transport =  T(4333, "Moving to a new Dome: <h SelectEmigrationDome InfopanelSelect><em><EmigrationDomeDisplayName></em></h>"),
+4672:function Colonist:Getui_command()
+4674:	if self.dreaming then
+4675:		return ColonistCommands["MysteryDream"]
+4714:		return tcommand or ColonistCommands["Unknown"]
+4896:	if g_MysteryDream and (traits.Dreamer or traits.DreamerPostMystery) then
+4897:		local damage = g_Consts.MysteryDreamSanityDamage * coward_factor
+5271:function Colonist:MysteryDream()
+5302:		self:StartFX("MysteryDream")
+5309:		while g_MysteryDream do
+5316:		self.dreaming = false
+5323:	list[#list + 1] = "MysteryDream"
+
+=== L-C111 ===
+CWD: B:/Dev/SMR/SMR-BugFixPack
+COMMAND: & 'C:/Program Files/Git/usr/bin/grep.exe' -n -E 'action=slot_6 command=Transport|RescueReturnText: applied|m_RescueReturnText=active' 'docs/archive/logs/hubset07_segB_hubset_2026-09-24.log'
+EXIT: 0
+104:[mod] [CommunityFixPack] RescueReturnText: applied
+379:[mod] [SMRTK] SMRTK_ACTION action=slot_scratch build=hubset c42_stale=0 errors=0 hubs=6 large_dome_hubs=6 m_ArrivalDeaths=active m_HubLocalAccess=active m_HubMarkerDeparture=active m_ObsoleteHomeRescue=active m_PassageHubSalvageDrain=active m_PassageStaleHolder=active m_RescueReturnText=active m_VacuumWalks=active rescues_home=0 rescues_remote=16 sitting=hubset07 speed=0 status=OK t=89407724 id=39
+380:[SMRTK] SMRTK_ACTION action=slot_scratch build=hubset c42_stale=0 errors=0 hubs=6 large_dome_hubs=6 m_ArrivalDeaths=active m_HubLocalAccess=active m_HubMarkerDeparture=active m_ObsoleteHomeRescue=active m_PassageHubSalvageDrain=active m_PassageStaleHolder=active m_RescueReturnText=active m_VacuumWalks=active rescues_home=0 rescues_remote=16 sitting=hubset07 speed=0 status=OK t=89407724 id=39
+387:[mod] [SMRTK] SMRTK_ACTION action=slot_6 command=Transport dest=GeoscapeDome(1896) home=GeoscapeDome(1896) prediction=P11 returning=false stage=1 status=OK subject=Colonist(2000010346) text="Moving to a new Dome: <h SelectEmigrationDome InfopanelSelect><color em>Brussels</color></h>" tid=4333 verdict=REFUTED t=89407724 id=42
+388:[SMRTK] SMRTK_ACTION action=slot_6 command=Transport dest=GeoscapeDome(1896) home=GeoscapeDome(1896) prediction=P11 returning=false stage=1 status=OK subject=Colonist(2000010346) text="Moving to a new Dome: <h SelectEmigrationDome InfopanelSelect><color em>Brussels</color></h>" tid=4333 verdict=REFUTED t=89407724 id=42
+646:[mod] [SMRTK] SMRTK_ACTION action=slot_scratch build=hubset c42_stale=0 errors=0 hubs=6 large_dome_hubs=6 m_ArrivalDeaths=active m_HubLocalAccess=active m_HubMarkerDeparture=active m_ObsoleteHomeRescue=active m_PassageHubSalvageDrain=active m_PassageStaleHolder=active m_RescueReturnText=active m_VacuumWalks=active rescues_home=0 rescues_remote=13 sitting=hubset07 speed=0 status=OK t=89562604 id=153
+647:[SMRTK] SMRTK_ACTION action=slot_scratch build=hubset c42_stale=0 errors=0 hubs=6 large_dome_hubs=6 m_ArrivalDeaths=active m_HubLocalAccess=active m_HubMarkerDeparture=active m_ObsoleteHomeRescue=active m_PassageHubSalvageDrain=active m_PassageStaleHolder=active m_RescueReturnText=active m_VacuumWalks=active rescues_home=0 rescues_remote=13 sitting=hubset07 speed=0 status=OK t=89562604 id=153
+
+=== S-C114 ===
+CWD: B:/Dev/SMR/SMR-BugFixPack
+COMMAND: & 'C:/Program Files/Git/usr/bin/grep.exe' -n -A 77 '^local function IsDestinationInCommunityRange' 'B:/Dev/SMR/SMR-Shared/SMR-SrcArchive/1.1.1.405907/Src/Lua/Units/ColonistTransport.lua'
+EXIT: 0
+249:local function IsDestinationInCommunityRange(community, destination)
+250-	if IsBuildingInDomeRange(destination, community) then
+251-		return true
+252-	end
+253-	for _, d in ipairs(community:GetClusterDomes()) do
+254-		if IsBuildingInDomeRange(destination, d) then
+255-			--passages will take priority
+256-			return true
+257-		end
+258-	end
+259-end
+260-
+261--- can the colonist walk into the community and reach the destination from it
+262-local function HasAccessViaCommunity(colonist, community, destination)
+263-	-- NOTE: Community labels can have MicroGHabitat or NaturalistHabitat
+264-	if not IsKindOf(community, "Dome") then return end
+265-	if colonist.holder and IsBuildingInDomeRange(colonist.holder, community) or IsUnitInDomeRange(colonist, community) then
+266-		return IsDestinationInCommunityRange(community, destination)
+267-	end
+268-end
+269-
+270-function Colonist:HasLocalAccess(destination, dome)
+271-	if ResolveMap(self) ~= ResolveMap(destination) then return end
+272-	local current_dome = IsUnitInDome(self)
+273-	if current_dome and (current_dome == destination or current_dome == destination.parent_dome) then
+274-		return true
+275-	end
+276-
+277-	if dome then
+278-		if IsDestinationInCommunityRange(dome, destination) then
+279-			return true
+280-		end
+281-	else
+282-		local community = current_dome or FindNearestObject(self.city.labels.Community or empty_table, self.holder or self)
+283-		if HasAccessViaCommunity(self, community, destination) then
+284-			return true
+285-		end
+286-		-- the nearest community can be the wrong pick for a colonist standing between domes: its home dome may grant access when the nearest one doesn't
+287-		local home = self.dome
+288-		if home ~= community and HasAccessViaCommunity(self, home, destination) then
+289-			return true
+290-		end
+291-	end
+292-
+293-	local to_check = self.holder or self
+294-
+295-	if IsKindOf(to_check, "MicroGHabitatBase") then
+296-		return HexAxialDistance(to_check, destination) <= to_check:GetOutsideWorkplacesDist()
+297-	end
+298-
+299-	return g_Consts.DefaultOutsideWorkplacesRadius >= HexAxialDistance(to_check, destination)
+300-end
+301-
+302-local unreachable_service_cooldown = const.HourDuration
+303-
+304-function Colonist:MarkServiceUnreachable(service)
+305-	local unreachable = self.unreachable_services or setmetatable({}, weak_keys_meta)
+306-	local now = GameTime()
+307-	-- sweep the expired entries so long-gone buildings don't accumulate over a long game
+308-	for s, fail_time in pairs(unreachable) do
+309-		if now - fail_time >= unreachable_service_cooldown then
+310-			unreachable[s] = nil
+311-		end
+312-	end
+313-	unreachable[service] = now
+314-	self.unreachable_services = unreachable
+315-end
+316-
+317-function Colonist:IsServiceMarkedUnreachable(service)
+318-	local fail_time = self.unreachable_services and self.unreachable_services[service]
+319-	return fail_time and GameTime() - fail_time < unreachable_service_cooldown
+320-end
+321-
+322-function Colonist:DisembarkOnArrival()
+323-	local rocket = self.arriving
+324-	self:PushDestructor(self.OnArrival)
+325-	local expedition = IsKindOf(rocket, "RocketExpeditionBase")
+326-	if not expedition then
+
+=== K-C114 ===
+CWD: B:/Dev/SMR/SMR-BugFixPack
+COMMAND: & 'C:/Program Files/Git/usr/bin/grep.exe' -n -A 77 '^function H.follow_step' '../SMR-BugFixPack-TestKit/Code/80_AgentSlots.lua'
+EXIT: 0
+553:function H.follow_step(s)
+554-    local c, hub = s.c, s.hub
+555-    if not IsValid(c) or c:IsDying() then s.ended = "dead"; return true end
+556-    local flying = IsValid(c.traversing_passage)
+557-    if not s.dumped and c.holder ~= hub then
+558-        s.dumped = true
+559-        s.dump_marker = c.passage_hub == hub
+560-        s.dump_hex = H.on_hub_hex(c, hub)
+561-        s.dump_flying = flying
+562-    end
+563-    if not s.booked and H.own_home_task(c) then
+564-        s.booked, s.booked_place = true, H.place(c, hub)
+565-    end
+566-    if flying then
+567-        -- The passage's own list is read separately from the flag (R5).
+568-        s.flight_passage = c.traversing_passage
+569-        if c.passage_hub == hub then s.marked_flight = true end
+570-        if s.marked_flight and c.passage_hub ~= hub then s.marker_lost_in_flight = true end
+571-        s.was_flying = true
+572-    else
+573-        if s.flight_passage and s.cleared == nil then
+574-            s.cleared = not table.find(s.flight_passage.traversing_colonists or empty_table, c)
+575-        end
+576-        local on_hub = H.on_hub_hex(c, hub) or H.on_hub_hex(c, hub, true)
+577-        if not on_hub then s.left_hub = true end
+578-        if not on_hub and not c.holder and not IsUnitInDome(c) and not s.open_seen then
+579-            s.open_seen = true
+580-            s.open_marker = c.passage_hub == hub
+581-            s.open_outside = c.outside_start and true or false
+582-        end
+583-        if H.in_home(c) and s.left_hub then s.reached_home = true end
+584-        if s.reached_home and s.booked and not H.in_home(c) then s.walked_out = true end
+585-    end
+586-    local task = c.transport_task
+587-    if task and task.state == "ready_for_pickup" then s.ended = "ready_for_pickup"; return true end
+588-    -- Safe: standing in any dome, off the hub, with no own-home rescue booked.
+589-    if not flying and s.left_hub and IsUnitInDome(c) and not H.own_home_task(c) then
+590-        s.ended = "safe"
+591-        return true
+592-    end
+593-    return false
+594-end
+595-
+596-function H.follow_facts(s, build)
+597-    local f = { kind = s.kind, fired = s.fired, ended = s.ended or "timeout", booked = s.booked or false,
+598-        booked_place = s.booked_place, dumped = s.dumped or false, dump_marker = s.dump_marker,
+599-        dump_hex = s.dump_hex, left_hub = s.left_hub or false, open_seen = s.open_seen or false,
+600-        open_marker = s.open_marker, open_outside = s.open_outside, marked_flight = s.marked_flight or false,
+601-        marker_lost_in_flight = s.marker_lost_in_flight or false, walked_out = s.walked_out or false,
+602-        mid_flag = s.mid_flag, mid_listed = s.mid_listed, cleared = s.cleared }
+603-    f.c114 = H.judge.C114(build, f)
+604-    f.p5, f.p6, f.r6 = H.judge.P5(build, f), H.judge.P6(build, f), H.judge.R6(build, f)
+605-    if s.kind == "hub" then f.r4 = H.judge.R4(build, f) else f.r5 = H.judge.R5(build, f) end
+606-    return f
+607-end
+608-
+609-T.Trigger { id = "h7_follow", label = "Fired worker resolved (C114/C116)", cadence = 50, once = true,
+610-    ["do"] = { mark = true, pause = true, screenshot = false, sound = true },
+611-    prepare = function(ctx, s)
+612-        if type(s) ~= "table" or not IsValid(s.c) then return false, "no subject" end
+613-        s.t0 = GameTime()
+614-        ctx.state.follow = s
+615-        return { subject = name(s.c), kind = s.kind }
+616-    end,
+617-    when = function(ctx)
+618-        local s = ctx.state.follow
+619-        local done = H.follow_step(s)
+620-        if not done and GameTime() - s.t0 <= hours(4) then return false end
+621-        local f = H.follow_facts(s, s.build)
+622-        f.subject, f.build = name(s.c), s.build
+623-        f.place_now = IsValid(s.c) and H.place(s.c, s.hub) or "invalid"
+624-        f.marker_now = IsValid(s.c) and name(s.c.passage_hub) or "invalid"
+625-        f.outside_now = IsValid(s.c) and tostring(s.c.outside_start) or "invalid"
+626-        return true, f
+627-    end }
+628-
+629-T.Bind(4, "Fire the paused worker and follow it (C114/C116)", function(ctx)
+630-    local build, why = need_build()
+
+=== L-reporter ===
+CWD: B:/Dev/SMR/SMR-BugFixPack
+COMMAND: & 'C:/Program Files/Git/usr/bin/grep.exe' -n -E 'SMRWATCH 2000010336|SMRWATCH 2000010369|SMRWATCH 2000022849' 'docs/archive/logs/reporter_TheGodUncle_modson_Mars.exe-20260924-13.07.16-6aad2d75.log'
+EXIT: 0
+640:SMRWATCH 2000010336 cmd Transport holder - hub 2026 hexes_to_home 24 home_radius_hexes 19 access false outside_for 0 task new shuttle none hp 98000
+641:SMRWATCH 2000010369 cmd Transport holder - hub 1908 hexes_to_home 25 home_radius_hexes 19 access false outside_for 0 task ready_for_pickup shuttle assigned hp 100000
+643:SMRWATCH 2000022849 cmd Transport holder - hub 2692 hexes_to_home 28 home_radius_hexes 19 access false outside_for 0 task ready_for_pickup shuttle assigned hp 100000
+660:SMRWATCH 2000010336 cmd VisitService holder - hub - hexes_to_home 19 home_radius_hexes 19 access true outside_for 0 task - shuttle none hp 98000
+661:SMRWATCH 2000010369 cmd WorkCycle holder PreciousMetalsExtractor hub 1908 hexes_to_home 2147240 home_radius_hexes 19 access true outside_for 0 task - shuttle none hp 100000
+663:SMRWATCH 2000022849 cmd WorkCycle holder ScienceInstitute hub 2692 hexes_to_home 2147240 home_radius_hexes 19 access true outside_for 0 task - shuttle none hp 100000
+
+=== L-reporter-task ===
+CWD: B:/Dev/SMR/SMR-BugFixPack
+COMMAND: rg -n '2000010336|2000010369|2000022849' docs/archive/logs/reporter_TheGodUncle_modson_Mars.exe-20260924-13.07.16-6aad2d75.log
+EXIT: 0
+443:SMRCOL 2000010336 cmd Transport home Brussels#1896 in false holder - hub Passage Hub#2026 fails 0 outside_start false walk true access - emig false task Brussels#1896 reserved false
+448:SMRCOL 2000010369 cmd Transport home Brussels#1896 in false holder - hub Passage Hub#1908 fails 0 outside_start false walk true access - emig false task Brussels#1896 reserved false
+562:SMRCOL 2000022849 cmd Transport home Brussels#1896 in false holder - hub Passage Hub#2692 fails 0 outside_start false walk true access - emig false task Brussels#1896 reserved false
+640:SMRWATCH 2000010336 cmd Transport holder - hub 2026 hexes_to_home 24 home_radius_hexes 19 access false outside_for 0 task new shuttle none hp 98000
+641:SMRWATCH 2000010369 cmd Transport holder - hub 1908 hexes_to_home 25 home_radius_hexes 19 access false outside_for 0 task ready_for_pickup shuttle assigned hp 100000
+643:SMRWATCH 2000022849 cmd Transport holder - hub 2692 hexes_to_home 28 home_radius_hexes 19 access false outside_for 0 task ready_for_pickup shuttle assigned hp 100000
+660:SMRWATCH 2000010336 cmd VisitService holder - hub - hexes_to_home 19 home_radius_hexes 19 access true outside_for 0 task - shuttle none hp 98000
+661:SMRWATCH 2000010369 cmd WorkCycle holder PreciousMetalsExtractor hub 1908 hexes_to_home 2147240 home_radius_hexes 19 access true outside_for 0 task - shuttle none hp 100000
+663:SMRWATCH 2000022849 cmd WorkCycle holder ScienceInstitute hub 2692 hexes_to_home 2147240 home_radius_hexes 19 access true outside_for 0 task - shuttle none hp 100000
+713:SMRHUBSET 91443364 66 2000009344:VisitService 2000009353:Rest 2000010348:Rest 2000010368:Idle 2000010382:Idle 2000010390:VisitService 2000010604:VisitService 2000010613:VisitService 2000010824:Idle 2000011324:Idle 2000011417:VisitService 2000011688:Rest 2000011692:VisitService 2000011694:Idle 2000012124:Transport 2000012609:VisitService 2000012739:Rest 2000012756:Idle 2000012765:Transport 2000012771:Rest 2000012868:Idle 2000013675:Rest 2000013718:Transport 2000014247:Rest 2000014854:Rest 2000015098:Idle 2000017100:Idle 2000018006:Transport 2000018201:Rest 2000018210:VisitService 2000018440:VisitService 2000018521:Idle 2000018613:Rest 2000019117:Transport 2000019728:Rest 2000020301:Idle 2000020355:Rest 2000020781:Idle 2000021135:VisitService 2000021632:Idle 2000021723:VisitService 2000022849:Idle 2000023003:Transport 2000024075:Idle 2000024543:Idle 2000024954:Rest 2000025314:Rest 2000025341:Rest 2000025693:VisitService 2000025790:Rest 2000025794:VisitService 2000026033:Idle 2000026081:Rest 2000026117:Rest 2000026173:VisitService 2000026370:VisitService 2000026404:VisitService 2000026731:VisitService 2000026771:Rest 2000027971:VisitService 2000028143:Rest 2000028442:VisitService 2000028561:Rest 2000028575:VisitService 2000028650:GoToStation 2000028732:VisitService
+722:SMRHUBSET 91945869 70 2000009338:VisitService 2000009350:VisitService 2000009354:Roam 2000009363:Roam 2000009378:Roam 2000010327:Roam 2000010367:VisitService 2000010369:VisitService 2000010587:VisitService 2000010593:Roam 2000010602:VisitService 2000010759:Transport 2000011154:VisitService 2000011708:VisitService 2000012315:Rest 2000012765:VisitService 2000013373:VisitService 2000013455:VisitService 2000013771:VisitService 2000013831:Rest 2000013889:VisitService 2000014003:VisitService 2000014888:VisitService 2000015112:Roam 2000015871:Roam 2000016172:VisitService 2000016195:Roam 2000016202:VisitService 2000016475:VisitService 2000018010:VisitService 2000018191:Rest 2000018200:VisitService 2000018440:Rest 2000018614:Roam 2000018855:Rest 2000018933:Roam 2000019032:Roam 2000019317:VisitService 2000019822:Roam 2000019946:VisitService 2000020298:VisitService 2000021723:Roam 2000021749:Roam 2000021751:Rest 2000021995:VisitService 2000022337:Roam 2000022486:VisitService 2000023003:VisitService 2000023644:Roam 2000023793:Roam 2000024181:Roam 2000024207:Roam 2000024235:Transport 2000024297:VisitService 2000024300:Roam 2000024325:Roam 2000024573:Roam 2000026216:VisitService 2000026224:VisitService 2000026369:VisitService 2000026468:Roam 2000026729:VisitService 2000027974:VisitService 2000028009:VisitService 2000028312:VisitService 2000028364:VisitService 2000028366:VisitService 2000028562:Roam 2000028660:VisitService 2000028860:Rest
+
+=== S-network-final ===
+CWD: B:/Dev/SMR/SMR-BugFixPack
+COMMAND: & 'C:/Program Files/Git/usr/bin/grep.exe' -n -A 28 '^function Dome:InitPassageTables' 'B:/Dev/SMR/SMR-Shared/SMR-SrcArchive/1.1.1.405907/Src/Lua/Buildings/Dome.lua'; & 'C:/Program Files/Git/usr/bin/grep.exe' -n -A 8 '^function PassageBase:ConnectDomeToHub' 'B:/Dev/SMR/SMR-Shared/SMR-SrcArchive/1.1.1.405907/Src/Lua/Passage.lua'
+EXIT: 0
+678:function Dome:InitPassageTables()
+679-	self.connected_domes = self.connected_domes or { self }
+680-	self.connected_passages = self.connected_passages or {}
+681-	self.passage_entrances = self.passage_entrances or {}
+682-	self.passage_exits = self.passage_exits or {}
+683-	self.dome_network = self.dome_network or { self, [self] = true }
+684-end
+685-
+686--- Recompute the connected-dome network (transitive closure of connected_domes) and store it
+687--- by reference on every member. Call on both endpoints of a connect/disconnect — see Passage.lua.
+688-function Dome:UpdateConnectedNetwork()
+689-	if not IsValid(self) or IsBeingDestructed(self) then return end
+690-	local network = { self, [self] = true }
+691-	local i = 1
+692-	while i <= #network do
+693-		local d = network[i]
+694-		for j = 2, #d.connected_domes do
+695-			local nb = d.connected_domes[j]
+696-			if not network[nb] and IsValid(nb) and not IsBeingDestructed(nb) then
+697-				network[nb] = true
+698-				network[#network + 1] = nb
+699-			end
+700-		end
+701-		i = i + 1
+702-	end
+703-	for j = 1, #network do
+704-		network[j].dome_network = network
+705-	end
+706-end
+1593:function PassageBase:ConnectDomeToHub(dome, hub)
+1594-	hub.hub_domes[dome] = (hub.hub_domes[dome] or 0) + 1
+1595-	if hub.hub_domes[dome] == 1 then
+1596-		for _, other in ipairs(hub.hub_domes) do
+1597-			self:ConnectDomePair(dome, other)
+1598-		end
+1599-		hub.hub_domes[#hub.hub_domes + 1] = dome
+1600-	end
+1601-end
+
+=== S-rescue-final ===
+CWD: B:/Dev/SMR/SMR-BugFixPack
+COMMAND: & 'C:/Program Files/Git/usr/bin/grep.exe' -n -A 50 'if command == .Idle. and destination and self.work_route then' 'B:/Dev/SMR/SMR-Shared/SMR-SrcArchive/1.1.1.405907/Src/Lua/Units/ColonistTransport.lua'
+EXIT: 0
+422:		if command == "Idle" and destination and self.work_route then
+423-			local station = self.work_route[3]
+424-			local remote = self.work_route[2]
+425-			if IsValid(station) and IsValid(remote)
+426-					and station:CanAcceptColonists() and remote:CanColonistsFromDifferentDomesWorkServiceTrainHere()
+427-					and CanTrainTravelBetween(station, remote) then
+428-				local start = self:GetStartingPoint()
+429-				if (start == self and IsSameMap(self, station) and HexAxialDistance(self, station) <= station:GetOutsideWorkplacesDist() or station:IsBuildingConnected(start))
+430-						and remote:IsBuildingConnected(destination) then
+431-					return self:StartTransport(command, destination, param, station, remote)
+432-				end
+433-				TrainsLogging.warn(self, "invalid cached route for idle")
+434-			end
+435-		end
+436-		local starting_station, end_station = self:GetTransportRoute(destination, command)
+437-		assert(command ~= "MigrateByTrain" or (starting_station and end_station)) -- we're supposed to have a valid route if we're trying to migrate that way
+438-		if starting_station and end_station then
+439-			-- get the actual destination for the ticket
+440-			if self:HasMember(command .. "_TicketDestination") then
+441-				destination = self[command .. "_TicketDestination"](self, dest, param) or destination
+442-			end
+443-			return self:StartTransport(command, destination, param, starting_station, end_station)
+444-		end
+445-
+446-		local home = self.dome
+447-		if destination ~= home and self:HasLocalAccess(destination, home) then
+448-			-- the cooldown keeps Idle() from re-picking the same service right away and looping back here
+449-			if command == "VisitService" then
+450-				self:MarkServiceUnreachable(destination)
+451-			end
+452-			return self:SetCommand("GoToDome", home)
+453-		elseif home then
+454-			-- we don't have a local access from our home to our destination, best we can do is get back and rethink our choices in Idle()
+455-			local starting_station, end_station = self:GetTransportRoute(home, "GoToDome")
+456-			if starting_station and end_station then
+457-				if command == "VisitService" then
+458-					self:MarkServiceUnreachable(destination)
+459-				end
+460-				return self:StartTransport("GoToDome", home, param, starting_station, end_station)
+461-			elseif not self:HasLocalAccess(home) then
+462-				-- whoops, what are we doing? halp!
+463-				if IsLRTransportAvailable(self.city) then
+464-					local task = self.transport_task or CreateColonistTransportTask(self, false, home)
+465-					-- light the beacons and call for aid
+466-					if task then
+467-						if task.shuttle or task.dest_dome == home then
+468-							-- the servicing shuttle may be interrupting us from its own command thread;
+469-							-- cancelling would kill it mid-cleanup - ride the shuttle instead
+470-							if self.command ~= "Transport" then
+471-								self:SetCommand("Transport", task.dest_dome)
+472-							end
+
+=== S-C117 ===
+CWD: B:/Dev/SMR/SMR-BugFixPack
+COMMAND: & 'C:/Program Files/Git/usr/bin/grep.exe' -n -A 54 '^function Demolishable:DoDemolish' 'B:/Dev/SMR/SMR-Shared/SMR-SrcArchive/1.1.1.405907/Src/Lua/Demolishable.lua'
+EXIT: 0
+90:function Demolishable:DoDemolish()
+91-	if self.demolishing_countdown > 0 then
+92-		if self:HasSpot("Top") then
+93-			self:Attach(PlaceObjectIn("RotatyThing", self), self:GetSpotBeginIndex("Top"))
+94-		elseif self:HasMember("rotaty_spot") then
+95-			local attach = AttachToObject(self, "RotatyThing", self.rotaty_spot)
+96-			if self:HasMember("rotaty_offset") then
+97-				attach:SetAttachOffset(self.rotaty_offset)
+98-			end
+99-		end
+100-		PlayFX("Demolish", "start", self)
+101-
+102-		local fx_sleep = 1000
+103-		local fx_cooldown = fx_sleep
+104-		while IsValid(self) and self.demolishing_countdown > 0 do
+105-			local start_time = RealTime()
+106-			Sleep(fx_sleep)
+107-			if GetTimeFactor() > 0 and not IsPaused() then
+108-				local real_sleep = fx_sleep * 1000 / GetTimeFactor()
+109-				local dt = Min(fx_sleep, real_sleep)
+110-				fx_cooldown = fx_cooldown - dt
+111-				if fx_cooldown < 0 then
+112-					fx_cooldown = fx_cooldown + fx_sleep
+113-					if SelectedObj == self then
+114-						PlayFX("DemolishingCountdown", "start")
+115-					end
+116-				end
+117-				self.demolishing_countdown = self.demolishing_countdown - dt
+118-				if SelectedObj == self then
+119-					ObjModified(self)
+120-				end
+121-			end
+122-		end
+123-
+124-		PlayFX("Demolish", "end", self)
+125-	end
+126-	
+127-	if not self.demolishing then
+128-		return
+129-	end
+130-	self.demolishing = nil
+131-	
+132-	if IsValid(self) then
+133-		self:OnDemolish()
+134-		if self:UseDemolishedState() then
+135-			PlayFXAroundBuilding(self, "Demolish")
+136-			self:DestroyAttaches("RotatyThing")
+137-		else
+138-			PlayFXAroundBuilding(self, "Remove")
+139-			DoneObject(self)
+140-		end
+141-	end
+142-
+143-	Msg("Demolished", self)
+144-end
+
+=== S-const ===
+CWD: B:/Dev/SMR/SMR-BugFixPack
+COMMAND: & 'C:/Program Files/Git/usr/bin/grep.exe' -n -E 'DemolishCountdownMax|HourDuration' 'B:/Dev/SMR/SMR-Shared/SMR-SrcArchive/1.1.1.405907/Src/Lua/_GameConst.lua'; & 'C:/Program Files/Git/usr/bin/grep.exe' -n -E 'time_required_for_demolish|demolishing_countdown =' 'B:/Dev/SMR/SMR-Shared/SMR-SrcArchive/1.1.1.405907/Src/Lua/Demolishable.lua'
+EXIT: 0
+5:const.HourDuration = const.Scale.h
+8:const.MinuteDuration = const.HourDuration / const.MinutesPerHour
+9:assert(const.HourDuration % const.MinutesPerHour == 0)
+16:const.PopupMinimizedAutoOpenTime = 8 * const.HourDuration
+94:const.DroneLoadSampleInterval = const.HourDuration / 2
+95:const.DroneLoadWindow = const.HourDuration * 12
+114:const.DemolishCountdownMax = 5 * 1000
+138:const.SensorTowerPredictionAddTime = 12 * const.HourDuration	-- each tower increases prediction time with that much
+139:const.SensorTowerPredictionMaxTime = 75 * const.HourDuration
+145:const.ColonistTransportTaskExpirationCheck = const.HourDuration --how often pending pickups are tested for expiry
+146:const.ColonistMaxWaitInDomeTurnedOff = 2 * const.HourDuration --the amount of time a colonist would wait in a turned off dome before trying to emigrate.
+211:const.DefaultFreezeTime = 24 * const.HourDuration   -- Freeze time if under the freeze heat
+212:const.DefaultDefrostTime = 4 * const.HourDuration  -- Defrost time if above the freeze heat
+521:const.MirrorSphere_MinMoveDelay = 10 * const.HourDuration
+522:const.MirrorSphere_MaxMoveDelay = 20 * const.HourDuration
+536:const.MirrorSphere_ActionMinTime = 10 * const.HourDuration
+537:const.MirrorSphere_ActionMaxTime = 20 * const.HourDuration
+546:const.MirrorSphere_TurnToDepositTime = 20 * const.HourDuration
+15:	demolishing_countdown = false,
+17:	time_required_for_demolish = const.DemolishCountdownMax,
+41:		self.demolishing_countdown = self.time_required_for_demolish
+117:				self.demolishing_countdown = self.demolishing_countdown - dt
+
+=== S-drain ===
+CWD: B:/Dev/SMR/SMR-BugFixPack
+COMMAND: & 'C:/Program Files/Git/usr/bin/grep.exe' -n -A 38 '^function PassageBase:OnDemolish' 'B:/Dev/SMR/SMR-Shared/SMR-SrcArchive/1.1.1.405907/Src/Lua/Passage.lua'
+EXIT: 0
+1163:function PassageBase:OnDemolish()
+1164-	assert(not self.use_demolished_state, "Not implemented")
+1165-	self.demolishing = true
+1166-	local hub = self:GetConnectedHub()
+1167-	if hub then
+1168-		-- colonists can keep arriving at the hub through us until the traverse-wait below runs dry;
+1169-		-- stay registered as draining so a sibling last-exit passage waits for us (cleared in Done)
+1170-		self.hub_draining = hub
+1171-		hub.draining_passages = hub.draining_passages or {}
+1172-		hub.draining_passages[self] = true
+1173-		-- last exit of the hub: keep the tunnel connected until everyone inside or inbound has left,
+1174-		-- so they can still path out through us
+1175-		while self:WouldStrandHubColonists() do
+1176-			WaitWakeup(1000)
+1177-		end
+1178-	end
+1179-	self.CanDelete = ret_false --so elements don't double delete us
+1180-	self.cleanup_on_disconnect = true
+1181-	self:DisconnectDomes()
+1182-	while #self.traversing_colonists > 0 do
+1183-		WaitWakeup(1000)
+1184-	end
+1185-end
+1186-
+1187-function PassageBase:GetUIWarning()
+1188-	if (self.demolishing_countdown or 1) <= 0 then
+1189-		return GetNotWorkingWarningText("PassageWaitingForColonistsToExit"), "PassageWaitingForColonistsToExit"
+1190-	end
+1191-	local fractures = self.fractures and #self.fractures or 0
+1192-	if fractures > 0 then
+1193-		return T{8898, "This Passage is fractured and is losing oxygen.<newline><left>Number of fractures<right><fractures><newline><left>Cost of repairs<right><polymers(number)>", number = g_Consts.PolymersPerFracture * fractures, fractures = fractures}
+1194-	end
+1195-	return Building.GetUIWarning(self)
+1196-end
+1197-
+1198-function PassageBase:GetWorkNotPermittedReason()
+1199-end
+1200-
+1201-function PassageBase:TraverseTunnel(unit, end_point, end_point_map, param, element)
+
+=== K-C117-corrected ===
+CWD: B:/Dev/SMR/SMR-BugFixPack
+COMMAND: & 'C:/Program Files/Git/usr/bin/grep.exe' -n -E 'id = .h7_|hours\([346]\)|s.t0 = GameTime' '../SMR-BugFixPack-TestKit/Code/80_AgentSlots.lua'
+EXIT: 0
+411:T.Trigger { id = "h7_rescues", label = "Own-home rescues resolved (C115)", cadence = 250, once = true,
+433:        local timeout = GameTime() - s.t0 > hours(6)
+494:T.Trigger { id = "h7_hub_arrival", label = "Far-home worker lands on a hub (R3)", cadence = 50, once = true,
+509:T.Trigger { id = "h7_mid_spoke", label = "Far-home worker mid-spoke (R5)", cadence = 50, once = true,
+609:T.Trigger { id = "h7_follow", label = "Fired worker resolved (C114/C116)", cadence = 50, once = true,
+613:        s.t0 = GameTime()
+620:        if not done and GameTime() - s.t0 <= hours(4) then return false end
+676:T.Trigger { id = "h7_busy", label = "Busy hub spoke with a live sibling (C117)", cadence = 50, once = true,
+765:T.Trigger { id = "h7_drain", label = "Salvaged spoke resolved (C117/C42)", cadence = 50, once = true,
+769:        s.t0 = GameTime()
+776:        if not done and GameTime() - s.t0 <= hours(3) then return false end
+
+=== K-drain-boundary ===
+CWD: B:/Dev/SMR/SMR-BugFixPack
+COMMAND: & 'C:/Program Files/Git/usr/bin/grep.exe' -n -A 61 '^function H.drain_step' '../SMR-BugFixPack-TestKit/Code/80_AgentSlots.lua'
+EXIT: 0
+697:function H.drain_step(s)
+698-    local p, hub = s.p, s.hub
+699-    local alive = IsValid(p)
+700-    if not s.drain_seen then
+701-        if not alive then s.ended = "passage gone before drain"; return true end
+702-        if not p.hub_draining then return false end
+703-        s.drain_seen, s.flying = true, {}
+704-        for _, c in ipairs(p.traversing_colonists or empty_table) do s.flying[c] = true end
+705-        s.known = {}
+706-        for c in pairs(s.flying) do s.known[c] = true end
+707-        s.arrivals = {}
+708-    end
+709-    s.stale = s.stale or {}
+710-    if alive then
+711-        for _, c in ipairs(p.traversing_colonists or empty_table) do
+712-            if not s.known[c] then s.known[c] = true; s.entered_after = (s.entered_after or 0) + 1 end
+713-        end
+714-        -- Last position before removal, refreshed every poll: a kick is a jump
+715-        -- within one 50 ms poll, which no walk covers.
+716-        for u in pairs(stale_members(p)) do
+717-            local q, r = WorldToHex(u)
+718-            s.stale[u] = { q = q, r = r }
+719-        end
+720-    elseif s.teleported == nil then
+721-        s.teleported = 0
+722-        for u, at in pairs(s.stale) do
+723-            if IsValid(u) then
+724-                local q, r = WorldToHex(u)
+725-                if H.hex_dist(q, r, at.q, at.r) > 10 then s.teleported = s.teleported + 1 end
+726-            end
+727-        end
+728-    end
+729-    for c in pairs(s.flying) do
+730-        if not IsValid(c) or c.traversing_passage ~= p then
+731-            s.flying[c] = nil
+732-            if IsValid(c) then
+733-                s.arrivals[#s.arrivals + 1] = { c = c, hub_hex = H.on_hub_hex(c, hub),
+734-                    held = c.holder == hub, marked = c.passage_hub == hub, outside = c.outside_start and true or false }
+735-            end
+736-        end
+737-    end
+738-    if next(s.flying) then return false end
+739-    if alive and p:IsPFTunnelActive() then return false end
+740-    -- Wait up to a game hour past disconnect for DoneObject, where C42's kick runs.
+741-    if alive and not s.gone_wait then s.gone_wait = GameTime() end
+742-    if alive and GameTime() - s.gone_wait < hours(1) then return false end
+743-    s.ended = alive and "disconnected, not removed" or "passage removed"
+744-    return true
+745-end
+746-
+747-function H.drain_facts(s, build)
+748-    local f = { drain_seen = s.drain_seen or false, ended = s.ended or "timeout", arrivals = #(s.arrivals or empty_table),
+749-        hub_bound = 0, hub_bound_unmarked = 0, entered_after = s.entered_after or 0,
+750-        stale_members = 0, teleported = 0 }
+751-    for _, a in ipairs(s.arrivals or empty_table) do
+752-        if a.hub_hex then
+753-            f.hub_bound = f.hub_bound + 1
+754-            if not (a.held and a.marked) then f.hub_bound_unmarked = f.hub_bound_unmarked + 1 end
+755-        end
+756-    end
+757-    for _ in pairs(s.stale or empty_table) do f.stale_members = f.stale_members + 1 end
+758-    f.teleported = s.teleported or 0
+
+=== L-C117 ===
+CWD: B:/Dev/SMR/SMR-BugFixPack
+COMMAND: & 'C:/Program Files/Git/usr/bin/grep.exe' -n -E 'SMRTK_(ARM|TRIGGER).*action=h7_drain|SMRTK_RUN_UNTIL.*h7_drain' 'docs/archive/logs/hubset07_segA_main_2026-09-24.log' 'docs/archive/logs/hubset07_segB_hubset_2026-09-24.log'
+EXIT: 0
+docs/archive/logs/hubset07_segA_main_2026-09-24.log:628:[mod] [SMRTK] SMRTK_ARM action=h7_drain cadence=50 hub=PassageHub(2692) once=true passage=Passage(2694) status=OK trigger=h7_drain t=89514639 id=148
+docs/archive/logs/hubset07_segA_main_2026-09-24.log:629:[SMRTK] SMRTK_ARM action=h7_drain cadence=50 hub=PassageHub(2692) once=true passage=Passage(2694) status=OK trigger=h7_drain t=89514639 id=148
+docs/archive/logs/hubset07_segA_main_2026-09-24.log:641:[mod] [SMRTK] SMRTK_TRIGGER action=h7_drain arrivals=0 build=main drain_seen=false ended=timeout entered_after=0 hub_bound=0 hub_bound_unmarked=0 label="Salvaged spoke resolved (C117/C42)" mark=168 p7=NOT_SAMPLED p8=NOT_SAMPLED p9=NOT_SAMPLED passage=Passage(2694) pause=true sound=true stale_members=0 status=OK teleported=0 trigger=h7_drain t=89605007 id=153
+docs/archive/logs/hubset07_segA_main_2026-09-24.log:642:[SMRTK] SMRTK_TRIGGER action=h7_drain arrivals=0 build=main drain_seen=false ended=timeout entered_after=0 hub_bound=0 hub_bound_unmarked=0 label="Salvaged spoke resolved (C117/C42)" mark=168 p7=NOT_SAMPLED p8=NOT_SAMPLED p9=NOT_SAMPLED passage=Passage(2694) pause=true sound=true stale_members=0 status=OK teleported=0 trigger=h7_drain t=89605007 id=153
+docs/archive/logs/hubset07_segB_hubset_2026-09-24.log:574:[mod] [SMRTK] SMRTK_ARM action=h7_drain cadence=50 hub=PassageHub(2692) once=true passage=Passage(2694) status=OK trigger=h7_drain t=89472236 id=121
+docs/archive/logs/hubset07_segB_hubset_2026-09-24.log:575:[SMRTK] SMRTK_ARM action=h7_drain cadence=50 hub=PassageHub(2692) once=true passage=Passage(2694) status=OK trigger=h7_drain t=89472236 id=121
+docs/archive/logs/hubset07_segB_hubset_2026-09-24.log:587:[mod] [SMRTK] SMRTK_TRIGGER action=h7_drain arrivals=0 build=hubset drain_seen=false ended=timeout entered_after=0 hub_bound=0 hub_bound_unmarked=0 label="Salvaged spoke resolved (C117/C42)" mark=141 p7=NOT_SAMPLED p8=NOT_SAMPLED p9=NOT_SAMPLED passage=Passage(2694) pause=true sound=true stale_members=0 status=OK teleported=0 trigger=h7_drain t=89562604 id=126
+docs/archive/logs/hubset07_segB_hubset_2026-09-24.log:588:[SMRTK] SMRTK_TRIGGER action=h7_drain arrivals=0 build=hubset drain_seen=false ended=timeout entered_after=0 hub_bound=0 hub_bound_unmarked=0 label="Salvaged spoke resolved (C117/C42)" mark=141 p7=NOT_SAMPLED p8=NOT_SAMPLED p9=NOT_SAMPLED passage=Passage(2694) pause=true sound=true stale_members=0 status=OK teleported=0 trigger=h7_drain t=89562604 id=126
+
+=== L-watch ===
+CWD: B:/Dev/SMR/SMR-BugFixPack
+COMMAND: rg -n 'SMRTK_(ARM|TRIGGER) action=h7_|factor=128000' docs/archive/logs/hubset07_segA_main_2026-09-24.log docs/archive/logs/hubset07_segB_hubset_2026-09-24.log | rg -v '\[mod\]'
+EXIT: 0
+docs/archive/logs/hubset07_segA_main_2026-09-24.log:412:[SMRTK] SMRTK_ARM action=h7_rescues cadence=250 candidates=16 home_at_arm=0 once=true status=OK trigger=h7_rescues t=89420303 id=54
+docs/archive/logs/hubset07_segA_main_2026-09-24.log:414:[SMRTK] SMRTK_ARM action=run_until before=0 factor=128000 requested=128 status=OK target=h7_rescues t=89420303 id=55
+docs/archive/logs/hubset07_segA_main_2026-09-24.log:424:[SMRTK] SMRTK_TRIGGER action=h7_rescues build=main each=2000010391:R:ready_for_pickup,2000019167:R:ready_for_pickup,2000015323:R:ready_for_pickup,2000024793:R:ready_for_pickup,2000023324:R:ready_for_pickup,2000021995:R:ready_for_pickup,2000024181:R:ready_for_pickup,2000015183:R:ready_for_pickup,2000010364:R:ready_for_pickup,2000019044:R:shuttle,2000010347:R:ready_for_pickup,2000020309:R:ready_for_pickup,2000010346:R:ready_for_pickup,2000024681:R:ready_for_pickup,2000015913:R:ready_for_pickup,2000019119:R:shuttle home_candidates=0 home_cleaned_home=0 home_walked_out=0 label="Own-home rescues resolved (C115)" mark=74 open=0 p1=NOT_SAMPLED p2=HELD pause=true remote_candidates=16 remote_cleaned_away=0 remote_served=16 sound=true status=OK timeout=false trigger=h7_rescues t=89425551 id=59
+docs/archive/logs/hubset07_segA_main_2026-09-24.log:440:[SMRTK] SMRTK_ARM action=h7_hub_arrival cadence=50 once=true status=OK trigger=h7_hub_arrival watch=arrival t=89425551 id=66
+docs/archive/logs/hubset07_segA_main_2026-09-24.log:443:[SMRTK] SMRTK_ARM action=run_until before=0 factor=128000 requested=128 status=OK target=h7_hub_arrival t=89425551 id=67
+docs/archive/logs/hubset07_segA_main_2026-09-24.log:453:[SMRTK] SMRTK_TRIGGER action=h7_hub_arrival arrival_hex=true arrival_visual_hex=true command=Work dist=29 holder=PassageHub(2026) home=GeoscapeDome(1896) hub=PassageHub(2026) label="Far-home worker lands on a hub (R3)" mark=86 marker=PassageHub(2026) pause=true r3=HELD sound=true status=OK subject=Colonist(2000015055) trigger=h7_hub_arrival t=89431439 id=71
+docs/archive/logs/hubset07_segA_main_2026-09-24.log:469:[SMRTK] SMRTK_ARM action=h7_follow cadence=50 kind=hub once=true status=OK subject=Colonist(2000015055) trigger=h7_follow t=89431439 id=78
+docs/archive/logs/hubset07_segA_main_2026-09-24.log:471:[SMRTK] SMRTK_ARM action=run_until before=0 factor=128000 requested=128 status=OK target=h7_follow t=89431439 id=79
+docs/archive/logs/hubset07_segA_main_2026-09-24.log:481:[SMRTK] SMRTK_TRIGGER action=h7_follow booked=false build=main c114=REFUTED cleared=true dump_hex=true dump_marker=true dumped=true ended=safe fired=true kind=hub label="Fired worker resolved (C114/C116)" left_hub=true mark=98 marked_flight=true marker_lost_in_flight=false marker_now=none open_seen=false outside_now=false p5=NOT_SAMPLED p6=HELD pause=true place_now=home r4=HELD r6=HELD sound=true status=OK subject=Colonist(2000015055) trigger=h7_follow walked_out=false t=89468431 id=83
+docs/archive/logs/hubset07_segA_main_2026-09-24.log:498:[SMRTK] SMRTK_ARM action=h7_mid_spoke cadence=50 once=true status=OK trigger=h7_mid_spoke watch=mid_spoke t=89468431 id=90
+docs/archive/logs/hubset07_segA_main_2026-09-24.log:500:[SMRTK] SMRTK_ARM action=run_until before=0 factor=128000 requested=128 status=OK target=h7_mid_spoke t=89468431 id=91
+docs/archive/logs/hubset07_segA_main_2026-09-24.log:509:[SMRTK] SMRTK_TRIGGER action=h7_mid_spoke command=Work holder=none home=GeoscapeDome(1896) hub=PassageHub(2692) label="Far-home worker mid-spoke (R5)" mark=110 marker=none mid_connected=true mid_flag=true mid_listed=true passage=Passage(4035) pause=true sound=true status=OK subject=Colonist(2000023141) trigger=h7_mid_spoke t=89468559 id=95
+docs/archive/logs/hubset07_segA_main_2026-09-24.log:526:[SMRTK] SMRTK_ARM action=h7_follow cadence=50 kind=flight once=true status=OK subject=Colonist(2000023141) trigger=h7_follow t=89468559 id=102
+docs/archive/logs/hubset07_segA_main_2026-09-24.log:528:[SMRTK] SMRTK_ARM action=run_until before=0 factor=128000 requested=128 status=OK target=h7_follow t=89468559 id=103
+docs/archive/logs/hubset07_segA_main_2026-09-24.log:539:[SMRTK] SMRTK_TRIGGER action=h7_follow booked=false build=main c114=REFUTED cleared=true dump_hex=false dump_marker=false dumped=true ended=safe fired=true kind=flight label="Fired worker resolved (C114/C116)" left_hub=true mark=122 marked_flight=true marker_lost_in_flight=false marker_now=none mid_flag=true mid_listed=true open_seen=false outside_now=false p5=NOT_SAMPLED p6=HELD pause=true place_now=home r5=HELD r6=HELD sound=true status=OK subject=Colonist(2000023141) trigger=h7_follow walked_out=false t=89514511 id=107
+docs/archive/logs/hubset07_segA_main_2026-09-24.log:602:[SMRTK] SMRTK_ARM action=h7_busy cadence=50 once=true status=OK trigger=h7_busy watch=busy t=89514511 id=136
+docs/archive/logs/hubset07_segA_main_2026-09-24.log:604:[SMRTK] SMRTK_ARM action=run_until before=0 factor=128000 requested=128 status=OK target=h7_busy t=89514511 id=137
+docs/archive/logs/hubset07_segA_main_2026-09-24.log:614:[SMRTK] SMRTK_TRIGGER action=h7_busy hub=PassageHub(2692) label="Busy hub spoke with a live sibling (C117)" live_spokes=3 mark=156 passage=Passage(2694) pause=true sound=true status=OK traversers=39 trigger=h7_busy t=89514639 id=141
+docs/archive/logs/hubset07_segA_main_2026-09-24.log:629:[SMRTK] SMRTK_ARM action=h7_drain cadence=50 hub=PassageHub(2692) once=true passage=Passage(2694) status=OK trigger=h7_drain t=89514639 id=148
+docs/archive/logs/hubset07_segA_main_2026-09-24.log:632:[SMRTK] SMRTK_ARM action=run_until before=0 factor=128000 requested=128 status=OK target=h7_drain t=89514639 id=149
+docs/archive/logs/hubset07_segA_main_2026-09-24.log:642:[SMRTK] SMRTK_TRIGGER action=h7_drain arrivals=0 build=main drain_seen=false ended=timeout entered_after=0 hub_bound=0 hub_bound_unmarked=0 label="Salvaged spoke resolved (C117/C42)" mark=168 p7=NOT_SAMPLED p8=NOT_SAMPLED p9=NOT_SAMPLED passage=Passage(2694) pause=true sound=true stale_members=0 status=OK teleported=0 trigger=h7_drain t=89605007 id=153
+docs/archive/logs/hubset07_segB_hubset_2026-09-24.log:407:[SMRTK] SMRTK_ARM action=h7_rescues cadence=250 candidates=16 home_at_arm=0 once=true status=OK trigger=h7_rescues t=89407724 id=49
+docs/archive/logs/hubset07_segB_hubset_2026-09-24.log:409:[SMRTK] SMRTK_ARM action=run_until before=0 factor=128000 requested=128 status=OK target=h7_rescues t=89407724 id=50
+docs/archive/logs/hubset07_segB_hubset_2026-09-24.log:418:[SMRTK] SMRTK_TRIGGER action=h7_rescues build=hubset each=2000015323:R:ready_for_pickup,2000024793:R:ready_for_pickup,2000024181:R:ready_for_pickup,2000015183:R:ready_for_pickup,2000010364:R:ready_for_pickup,2000010391:R:ready_for_pickup,2000020309:R:ready_for_pickup,2000019167:R:ready_for_pickup,2000019044:R:ready_for_pickup,2000010347:R:ready_for_pickup,2000010346:R:ready_for_pickup,2000024681:R:ready_for_pickup,2000023324:R:ready_for_pickup,2000019119:R:shuttle,2000021995:R:ready_for_pickup,2000015913:R:ready_for_pickup home_candidates=0 home_cleaned_home=0 home_walked_out=0 label="Own-home rescues resolved (C115)" mark=69 open=0 p1=NOT_SAMPLED p2=HELD pause=true remote_candidates=16 remote_cleaned_away=0 remote_served=16 sound=true status=OK timeout=false trigger=h7_rescues t=89425132 id=54
+docs/archive/logs/hubset07_segB_hubset_2026-09-24.log:435:[SMRTK] SMRTK_ARM action=h7_hub_arrival cadence=50 once=true status=OK trigger=h7_hub_arrival watch=arrival t=89425132 id=61
+docs/archive/logs/hubset07_segB_hubset_2026-09-24.log:437:[SMRTK] SMRTK_ARM action=run_until before=0 factor=128000 requested=128 status=OK target=h7_hub_arrival t=89425132 id=62
+docs/archive/logs/hubset07_segB_hubset_2026-09-24.log:446:[SMRTK] SMRTK_TRIGGER action=h7_hub_arrival arrival_hex=true arrival_visual_hex=true command=Work dist=29 holder=PassageHub(2026) home=GeoscapeDome(1896) hub=PassageHub(2026) label="Far-home worker lands on a hub (R3)" mark=81 marker=PassageHub(2026) pause=true r3=HELD sound=true status=OK subject=Colonist(2000015055) trigger=h7_hub_arrival t=89431660 id=66
+docs/archive/logs/hubset07_segB_hubset_2026-09-24.log:462:[SMRTK] SMRTK_ARM action=h7_follow cadence=50 kind=hub once=true status=OK subject=Colonist(2000015055) trigger=h7_follow t=89431660 id=73
+docs/archive/logs/hubset07_segB_hubset_2026-09-24.log:465:[SMRTK] SMRTK_ARM action=run_until before=0 factor=128000 requested=128 status=OK target=h7_follow t=89431660 id=74
+docs/archive/logs/hubset07_segB_hubset_2026-09-24.log:474:[SMRTK] SMRTK_TRIGGER action=h7_follow booked=false build=hubset c114=HELD cleared=true dump_hex=true dump_marker=true dumped=true ended=safe fired=true kind=hub label="Fired worker resolved (C114/C116)" left_hub=true mark=93 marked_flight=true marker_lost_in_flight=false marker_now=none open_seen=false outside_now=false p5=NOT_SAMPLED p6=HELD pause=true place_now=home r4=HELD r6=HELD sound=true status=OK subject=Colonist(2000015055) trigger=h7_follow walked_out=false t=89468652 id=78
+docs/archive/logs/hubset07_segB_hubset_2026-09-24.log:491:[SMRTK] SMRTK_ARM action=h7_mid_spoke cadence=50 once=true status=OK trigger=h7_mid_spoke watch=mid_spoke t=89468652 id=85
+docs/archive/logs/hubset07_segB_hubset_2026-09-24.log:494:[SMRTK] SMRTK_ARM action=run_until before=0 factor=128000 requested=128 status=OK target=h7_mid_spoke t=89468652 id=86
+docs/archive/logs/hubset07_segB_hubset_2026-09-24.log:504:[SMRTK] SMRTK_TRIGGER action=h7_mid_spoke command=Work holder=PassageHub(2692) home=GeoscapeDome(1896) hub=PassageHub(2692) label="Far-home worker mid-spoke (R5)" mark=105 marker=PassageHub(2692) mid_connected=true mid_flag=true mid_listed=true passage=Passage(2694) pause=true sound=true status=OK subject=Colonist(2000015288) trigger=h7_mid_spoke t=89468780 id=90
+docs/archive/logs/hubset07_segB_hubset_2026-09-24.log:520:[SMRTK] SMRTK_ARM action=h7_follow cadence=50 kind=flight once=true status=OK subject=Colonist(2000015288) trigger=h7_follow t=89468780 id=97
+docs/archive/logs/hubset07_segB_hubset_2026-09-24.log:522:[SMRTK] SMRTK_ARM action=run_until before=0 factor=128000 requested=128 status=OK target=h7_follow t=89468780 id=98
+docs/archive/logs/hubset07_segB_hubset_2026-09-24.log:532:[SMRTK] SMRTK_TRIGGER action=h7_follow booked=false build=hubset c114=HELD cleared=true dump_hex=false dump_marker=false dumped=true ended=safe fired=true kind=flight label="Fired worker resolved (C114/C116)" left_hub=true mark=117 marked_flight=true marker_lost_in_flight=false marker_now=none mid_flag=true mid_listed=true open_seen=false outside_now=false p5=NOT_SAMPLED p6=HELD pause=true place_now=home r5=HELD r6=HELD sound=true status=OK subject=Colonist(2000015288) trigger=h7_follow walked_out=false t=89472108 id=102
+docs/archive/logs/hubset07_segB_hubset_2026-09-24.log:548:[SMRTK] SMRTK_ARM action=h7_busy cadence=50 once=true status=OK trigger=h7_busy watch=busy t=89472108 id=109
+docs/archive/logs/hubset07_segB_hubset_2026-09-24.log:550:[SMRTK] SMRTK_ARM action=run_until before=0 factor=128000 requested=128 status=OK target=h7_busy t=89472108 id=110
+docs/archive/logs/hubset07_segB_hubset_2026-09-24.log:560:[SMRTK] SMRTK_TRIGGER action=h7_busy hub=PassageHub(2692) label="Busy hub spoke with a live sibling (C117)" live_spokes=3 mark=129 passage=Passage(2694) pause=true sound=true status=OK traversers=66 trigger=h7_busy t=89472236 id=114
+docs/archive/logs/hubset07_segB_hubset_2026-09-24.log:575:[SMRTK] SMRTK_ARM action=h7_drain cadence=50 hub=PassageHub(2692) once=true passage=Passage(2694) status=OK trigger=h7_drain t=89472236 id=121
+docs/archive/logs/hubset07_segB_hubset_2026-09-24.log:578:[SMRTK] SMRTK_ARM action=run_until before=0 factor=128000 requested=128 status=OK target=h7_drain t=89472236 id=122
+docs/archive/logs/hubset07_segB_hubset_2026-09-24.log:588:[SMRTK] SMRTK_TRIGGER action=h7_drain arrivals=0 build=hubset drain_seen=false ended=timeout entered_after=0 hub_bound=0 hub_bound_unmarked=0 label="Salvaged spoke resolved (C117/C42)" mark=141 p7=NOT_SAMPLED p8=NOT_SAMPLED p9=NOT_SAMPLED passage=Passage(2694) pause=true sound=true stale_members=0 status=OK teleported=0 trigger=h7_drain t=89562604 id=126
+
+=== S-transport-wait ===
+CWD: B:/Dev/SMR/SMR-BugFixPack
+COMMAND: & 'C:/Program Files/Git/usr/bin/grep.exe' -n -A 67 '^function Colonist:Transport(dest_dome)' 'B:/Dev/SMR/SMR-Shared/SMR-SrcArchive/1.1.1.405907/Src/Lua/Units/Colonist.lua'
+EXIT: 0
+3963:function Colonist:Transport(dest_dome)
+3964-	if not self.transport_task then return end
+3965-	assert(dest_dome)
+3966-	-- set when the ride is one leg of a journey, so it lands the colonist short of where he is headed
+3967-	local leg_of_journey = self.transport_task.migration_dest
+3968-	if dest_dome ~= self.dome and not leg_of_journey and IsKindOf(dest_dome, "Community") then -- emigrating or being rescued?
+3969-		self.emigration_dome = dest_dome
+3970-	end
+3971-	self:PushDestructor(self.WaitTransport)
+3972-
+3973-	local pickup_pos = self:GetMap():GetPassablePointNearby(self.transport_task.source_landing_site[1], self.pfclass)
+3974-	if not self:ExitHolder() or not pickup_pos or not self:Goto(pickup_pos) and not self:IsCloser2D(pickup_pos, 10*guim) then
+3975-		--failed to reach landing site
+3976-		self:PopAndCallDestructor()
+3977-		return
+3978-	end
+3979-
+3980-	--reached landing site.
+3981-	-- the task can be cleared while walking to the pickup (the shuttle side aborts the transport)
+3982-	if not self.transport_task then
+3983-		self:PopAndCallDestructor()
+3984-		return
+3985-	end
+3986-	self.transport_task.state = "ready_for_pickup"
+3987-
+3988-	if self.transport_task.shuttle then
+3989-		Wakeup(self.transport_task.shuttle.command_thread) --wake the shuttle if it's already waiting for us.
+3990-	end
+3991-
+3992-	if not IsValid(self) or not IsLRTransportAvailable(self.city) then --no shuttles to exec request
+3993-		self:PopAndCallDestructor()
+3994-		return
+3995-	end
+3996-
+3997-	--play anims while we wait.
+3998-	local count = #working_anims
+3999-	local idx = 0
+4000-	local max_wait = const.ColonistMaxWaitShuttlePickupTimeMs
+4001-	local start_wait_ts = GameTime()
+4002-	-- wait to be picked up
+4003-	while self:IsWaitingTransport() and GameTime() - start_wait_ts < max_wait do
+4004-		self:PlayState(working_anims[idx + 1])
+4005-		idx = (idx + 1) % count
+4006-	end
+4007-	self:PopAndCallDestructor()
+4008-
+4009-	-- only a delivered leg leaves the emigration dome set; carry the journey on from the drop-off
+4010-	if IsValid(self.emigration_dome) then
+4011-		return self:SetCommand("MigrateStep", self.emigration_dome)
+4012-	end
+4013-end
+4014-
+4015-function Colonist:ShowAttachedSigns(shown)
+4016-	self.status_effect_sign_visible = shown
+4017-	local visible = shown and g_SignsVisible
+4018-	self:ForEachAttach("UnitSign", CObject.SetVisible, visible)
+4019-end
+4020-
+4021-function Colonist:OnSelected()
+4022-	local preset = self.status_effect_sign and StatusEffectPresets[self.status_effect_sign]
+4023-	local oldSign = preset and preset.sign
+4024-	if oldSign and oldSign ~= "" and (self:CountAttaches(oldSign) > 0) then
+4025-		self:DestroyAttaches(oldSign)
+4026-	end
+4027-	SelectionArrowAdd(self)
+4028-end
+4029-
+4030-function Colonist:OnInteractionModeChanged(old, new)
+
+=== C117-arithmetic ===
+CWD: B:/Dev/SMR/SMR-BugFixPack
+COMMAND: python -c "from fractions import Fraction; dt=min(1000,Fraction(1000*1000,128000)); ticks=5000/dt; need=ticks*1000; a=89605007-89514639; b=89562604-89472236; print('dt=',dt,'ticks=',ticks,'required_game_ms=',need,'A_elapsed=',a,'B_elapsed=',b); assert a==b==90368 and need==640000 and a<need; print('RECONCILED: elapsed endpoints agree; required ticks times decrement restores 5000:',ticks*dt==5000)"
+EXIT: 0
+dt= 125/16 ticks= 640 required_game_ms= 640000 A_elapsed= 90368 B_elapsed= 90368
+RECONCILED: elapsed endpoints agree; required ticks times decrement restores 5000: True
+
+=== C111-probe-sweep ===
+CWD: B:/Dev/SMR/SMR-BugFixPack
+COMMAND: & 'C:/Program Files/Git/usr/bin/grep.exe' -rln 'TEMPORARY' '../SMR-BugFixPack-hubset/Code/' '../SMR-BugFixPack-TestKit/Code/'; & 'C:/Program Files/Git/usr/bin/grep.exe' -n 'SMRFixPack.Register' '../SMR-BugFixPack-hubset/Code/Fix_RescueReturnText.lua'
+EXIT: 0
+26:SMRFixPack.Register("RescueReturnText", {
+
+=== Summary reconciliation ===
+Method: for each named command output above, count lines matching /^\s*PASS\s/mg,
+compare with /(\d+) of (\d+) (?:rehearsal )?demands held/ in that SAME output;
+compare the total with the named PASS members above. No omitted failing members.
+rehearsal: 58 PASS members = 58 held = 58 total; differences: none.
+C114-suite: 25 PASS members = 25 held = 25 total; differences: none.
+C117-desk: 17 PASS members = 17 held = 17 total; differences: none.
+c111_pins: /^OK\s/mg matches 4 rows, matching '4 OK'; members are getter hash,
+getter DEFECT, command-table span hash, command-table DEFECT. Differences: none.
+
