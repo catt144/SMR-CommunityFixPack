@@ -1,0 +1,85 @@
+hubset 05 desk evidence, 2026-09-24, game source 1.1.1.405907, branch commit 76d1ed8
+
+COMMAND: python -B tools/desk_c114_hub_access.py (cwd B:/Dev/SMR/SMR-BugFixPack-hubset)
+==============================================================================
+C114 hub local access -- archived 1.1.1.405907
+==============================================================================
+lua: Lua 5.5 | lupa 2.8
+
+  PASS  module registered and applied
+  PASS  changed hub shape declines without wrapper
+  PASS  changed network shape declines without wrapper
+  PASS  module removed: large-dome in-flight access
+  PASS  module removed: standing on hub
+  PASS  module removed: dumped on hub retains access
+  PASS  module removed: small dome native true retained
+  PASS  fix on: large-dome in-flight access
+  PASS  fix on: standing on hub
+  PASS  fix on: dumped on hub retains access
+  PASS  fix on: small dome native true retained
+  PASS  fix on: connected draining passage still grants access
+  PASS  fix on: unrelated destination remains denied
+  PASS  fix on: stale holder off hub remains denied
+  PASS  fix on: stale marker off hub remains denied
+  PASS  fix on: cut passage remains denied
+  PASS  fix on: stale flight flag without list membership remains denied
+  PASS  fix on: removed last dome connection remains denied
+  PASS  fix on: home-relative query remains denied
+  PASS  fix on: outdoor workplace remains denied
+  PASS  fix on: cross-map destination denied
+  PASS  native service policy still refuses a full service after access grant
+  PASS  unrelated station destination leaves train-search gate open
+
+==============================================================================
+23 of 23 demands held
+ALL DEMANDS HELD
+
+COMMAND: python -B tools/desk_c116_hub_marker.py (cwd B:/Dev/SMR/SMR-BugFixPack-hubset)
+PASS walk-off clears marker and starts timer
+PASS module-removed walk remains marked
+PASS real traversal ramp keeps shelter
+PASS visual still on hub keeps shelter
+PASS next step after visual departure clears
+PASS stale holder removed and outside starts
+PASS indoor stale holder removed without exposure
+PASS standing on hub keeps marker
+PASS interrupted walk StopMoving fallback
+PASS holder transition after departure
+PASS changed marker shape declines without wrapper
+
+ADDENDUM 2026-09-24, branch commit 7ebad3d: the first C114 run above lacked the native SetCommand rescue-booking control. The full-suite rerun below supersedes its verdict.
+COMMAND: python -B tools/desk_c114_hub_access.py (cwd B:/Dev/SMR/SMR-BugFixPack-hubset)
+==============================================================================
+C114 hub local access -- archived 1.1.1.405907
+==============================================================================
+lua: Lua 5.5 | lupa 2.8
+
+  PASS  module registered and applied
+  PASS  changed hub shape declines without wrapper
+  PASS  changed network shape declines without wrapper
+  PASS  module removed: large-dome in-flight access
+  PASS  module removed: standing on hub
+  PASS  module removed: dumped on hub retains access
+  PASS  module removed: small dome native true retained
+  PASS  module removed: natural Idle rescue booking follows access
+  PASS  fix on: large-dome in-flight access
+  PASS  fix on: standing on hub
+  PASS  fix on: dumped on hub retains access
+  PASS  fix on: small dome native true retained
+  PASS  fix on: natural Idle rescue booking follows access
+  PASS  fix on: connected draining passage still grants access
+  PASS  fix on: unrelated destination remains denied
+  PASS  fix on: stale holder off hub remains denied
+  PASS  fix on: stale marker off hub remains denied
+  PASS  fix on: cut passage remains denied
+  PASS  fix on: stale flight flag without list membership remains denied
+  PASS  fix on: removed last dome connection remains denied
+  PASS  fix on: home-relative query remains denied
+  PASS  fix on: outdoor workplace remains denied
+  PASS  fix on: cross-map destination denied
+  PASS  native service policy still refuses a full service after access grant
+  PASS  unrelated station destination leaves train-search gate open
+
+==============================================================================
+25 of 25 demands held
+ALL DEMANDS HELD

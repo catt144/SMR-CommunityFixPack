@@ -141,3 +141,31 @@ and the owner-minute total. Strike your row, `git rm` this file, and commit on `
 - **Drift for 99:** `MIGRATION_AUDIT_2026-09-24_D_hubs.md:75,110,351` still says `LeadIn → OnEnterUnit →
   SetHolder(el)` for passage elements, which `Passage.lua:819` contradicts. This is the premise
   03 flagged for C42, repeated in the audit's field-lifetime table. It is not corrected here.
+
+### From hubset 05, 2026-09-24 — C114/C116 branch build
+
+- **Build:** `hubset` commit `76d1ed8` adds `Code/Hubset_OnHubNow.lua`,
+  `Fix_HubLocalAccess.lua`, `Fix_HubMarkerDeparture.lua`, both desk harnesses and registration.
+  Commit `7ebad3d` adds native `SetCommand` rescue-booking controls to C114's harness.
+  The [C114](../../bugs/C114.md) and [C116](../../bugs/C116.md) build sections are on `main`;
+  [archived desk output](../../../archive/logs/hubset05_c114_c116_desk_2026-09-24.txt) records
+  the named controls. Both modules are `fixed` pending attended play and audit. The branch and main
+  were doccheck GREEN at close-out.
+- **Physical test:** active traversal needs the passage's traverser list and the hub's connected or
+  draining set; a standing colonist needs a corroborating holder/marker and the exact hub hex.
+  Implemented call shape: `local q, r = WorldToHex(c)` then
+  `HexGridGetObject(map.object_hex_grid, q, r, "PassageHub")`. The inherited pseudo-call with
+  `WorldToHex(c)` in the middle loses Lua's second return; 99 has the drift record.
+- **C114 slots:** compare a natural large-dome interruption fix off/on at an identified hub or live
+  passage. A true access result alone is not success: capture subsequent passage entry, arrival
+  and rescue state. Keep the small dome, unrelated destination, stale off-hub marker/holder,
+  disconnected spoke, cross-map, outdoor, full-service and valid station commute controls. The
+  desk harness does not execute real pathfinding or prove a train remains available when needed.
+- **C116 slots:** the module observes `Unit:Step`, `Colonist:StopMoving` and
+  `Colonist:SetHolderOnMap`. Its departure test requires both logical and visual positions off the
+  marked hub and no live passage traversal. Record both positions/hex identities in R4-R7, plus
+  marker, holder, holder-list membership and `outside_start`. On verified departure with a stale
+  hub holder, it calls native `SetHolder(false)` before `UpdateOutside`. A real ramp keeps shelter.
+  There is no load-time sweep; test a loaded stale marker's next movement or holder transition,
+  and record whether an idle marker persists. An overland walk-off and its oxygen harm remain
+  conditional until the sitting.

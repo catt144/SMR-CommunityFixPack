@@ -42,7 +42,7 @@ report the disagreement.
 | ~~02~~ | ~~`02_C115_RESCUE_REVALIDATION_high.md`~~ | ~~high~~ | ~~no~~ | ~~C115: an obsolete own-home rescue stops at the start of `Transport`~~ |
 | ~~03~~ | ~~`03_C117_SALVAGE_DRAIN_high.md`~~ | ~~high~~ | ~~no~~ | ~~C117: a busy hub passage's in-flight colonists keep their hub endpoint through a disconnect~~ |
 | ~~04~~ | ~~`04_ON_HUB_TEST_high.md`~~ | ~~high~~ | ~~no~~ | ~~the on-hub test C114 and C116 share, derived from source; its live readings go to 07~~ |
-| 05 | `05_C114_C116_HUB_ACCESS_high.md` | high | no | C114 access fallback and C116 marker lifetime, sharing one physical on-hub test |
+| ~~05~~ | ~~`05_C114_C116_HUB_ACCESS_high.md`~~ | ~~high~~ | ~~no~~ | ~~C114 access fallback and C116 marker lifetime, sharing one physical on-hub test~~ |
 | 06 | `06_SITTING_PREP_medium.md` | medium | no | predictions, fixtures and the script for 07 |
 | 07 | `07_VERIFY_SITTING_owner.md` | attended | ✅ keyboard | every member in the real game, fix on and off |
 | 99 | `99_AUDIT_high.md` | high | ✅ raises | adversarial audit of the branch; SHIP / SHIP WITH CHANGES / NO SHIP; on SHIP and the owner's go, the merge and the records |

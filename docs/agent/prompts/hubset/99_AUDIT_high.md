@@ -247,3 +247,29 @@ Whether any path sets `holder == hub` without `passage_hub` is unverified; the p
 hub via `WaypointsObj:OnEnterUnit` is the lead. Consequences: `OnHubNow` never reads `hub.units`, so it
 is unaffected. Do not use `hub.units` as a membership source in 05. The retired log's far-away `units`
 rows may be stale list entries rather than colonists in flight; R1 and R2 in 07 decide which.
+
+### From hubset 05, 2026-09-24 — C114/C116 build and drift inbox
+
+- **Build to audit:** `hubset` `76d1ed8` adds a shared `OnHubNow` test, guarded
+  `Colonist:HasLocalAccess` widening, and a synchronous marker/holder departure cleanup. The
+  `7ebad3d` follow-up extends C114's harness through native `SetCommand` and its rescue-booking
+  branch. The
+  [C114](../../bugs/C114.md) and [C116](../../bugs/C116.md) build sections cite
+  [archived desk output](../../../archive/logs/hubset05_c114_c116_desk_2026-09-24.txt).
+  Rerun both harnesses and inspect the exact branch diff, including registration and the helper's
+  `SRC: none` disposition. C116 drops a stale hub holder only after both logical and visual hub
+  hexes are false; inspect whether any genuine ramp can be stripped by that test. The load-time
+  sweep was omitted because restored traversal state at `OnMsg.LoadGame` was not established;
+  existing idle markers can remain until a movement/holder event.
+- **Drift instance:** 04's report and 06/99 inherited inbox wrote
+  `HexGridGetObject(object_hex_grid, WorldToHex(unit), "PassageHub")`. Lua expands only the first
+  return from a nonfinal argument expression, so that call passes the class string as `r`, not
+  the second hex coordinate. The built helper correctly takes `local q, r = WorldToHex(unit)`
+  first. The original report is left intact for audit; do not treat its pseudo-call as tested.
+- **Audit focus:** C114's desk control proves only an unrelated station still reaches the
+  train-search gate. A destination that is in the attached dome network might still need a train
+  for a route condition Lua topology does not expose; 07's valid station commute is the decisive
+  control. C116's `Unit:Step` wrapper is installed before class flattening; check that a live
+  colonist dispatches through it after classes build, and that the visual-position guard retains
+  shelter for the full ramp. Neither desk harness proves the game's door/tunnel route or a
+  real-game outside timer. Keep the C42 source conflict in this inbox separate from those checks.
