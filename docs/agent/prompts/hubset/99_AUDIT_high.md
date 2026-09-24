@@ -273,3 +273,42 @@ rows may be stale list entries rather than colonists in flight; R1 and R2 in 07 
   colonist dispatches through it after classes build, and that the visual-position guard retains
   shelter for the full ramp. Neither desk harness proves the game's door/tunnel route or a
   real-game outside timer. Keep the C42 source conflict in this inbox separate from those checks.
+
+### From hubset 06, 2026-09-24 — sitting prepared, and its drift inbox
+
+- **Heads:** TestKit `66288da` (`Code/80_AgentSlots.lua`, sha256 prefix `4081e6a66c43c2bc`),
+  `hubset` `7cf48a2` (adds `tools/desk_hubset07_rehearsal.py`), `main` at this close-out commit
+  (parent `371aad5`). The script, predictions P1-P13 and R1-R7, junction commands and owner-seat
+  read are in 07's `## The script` section.
+- **Slot labels:** Scratch `Boot: build, fixture, census (read only)`; 1 `C115: follow own-home
+  rescues from load`; 2 `Pause on a far-home worker landing on a hub (R3)`; 3 `Pause on a far-home
+  worker mid-spoke (R5)`; 4 `Fire the paused worker and follow it (C114/C116)`; 5 staged
+  `[1] C117 1/2: pause on a busy hub spoke` / `[2] C117 2/2: salvage the paused spoke, follow`;
+  6 staged `[1] C111 1/3: select an own-home rescue` / `[2] C111 2/3: select a real relocation` /
+  `[3] R7 3/3: marker clear per hex class (segment A only)`. Triggers: `h7_rescues`,
+  `h7_hub_arrival`, `h7_mid_spoke`, `h7_follow`, `h7_busy`, `h7_drain`.
+- **Owner minutes: about 30, an estimate, not measured** (A 13, B 12, relaying words 5). Two boots:
+  fix off on `main`, fix on on `hubset`. No module can be switched off at runtime.
+- **Rehearsal (declared VOID):** [archived output](../../../archive/logs/hubset06_rehearsal_2026-09-24.txt).
+  58 of 58 demands held, every prediction's scratch variant read REFUTED, and nothing armed at load.
+  A mutant that forces P7's hubset judge to HELD failed the harness (57 of 58, exit 1). SMRTK gates:
+  parsecheck 0 errors; both `rg` gates matched 0 lines with exit 1, beside a positive control on
+  the same scope. P3: bodycheck on `hubset` gave 6 OK.
+- **Stop routed to the owner: F127 has no leg.** Its C83 branch needs a passenger arrival whose chosen
+  dome turns unwelcoming, with a full fallback. That is a hand-built fixture: about 5-8 owner
+  minutes per segment plus rocket transit, at unknown odds. Only P13, a read-only hidden-homeless
+  census, is built. The owner chooses to build that fixture as a 07 amendment, or to leave F127
+  desk-verified.
+- **Not played, routed to 99:** 05's other C114 controls (small dome, unrelated destination, stale
+  marker or holder off the hub, disconnected spoke, cross-map, outdoor, full-service and valid
+  station commute). 05 called the station commute decisive. Also not played: C116 save/reload, and
+  R4's visual hex and holder-list membership. The follow records only the logical hub hex at the
+  dump. An idle stale marker at load is counted by place in the census, not followed.
+- **C42:** no stand-alone leg. P10 (`C42STALE` after traffic) is the live witness for the owner
+  decision still open in 99's inbox. P9 samples a kick only if a stale element member exists.
+- **Drift:** `tools/SMRTK.md` says "A pack lane does not commit in it" of the TestKit, while 06's
+  brief requires the slots "committed in the TestKit repo". The brief was followed (`66288da`); the
+  tension is not resolved here.
+- **Audit focus:** the judges in `SMRTK.H7` decide every verdict. Check each against its prediction
+  row, and check that no instrument selects on the field it then reports. Selection is by the
+  passage's list, the holder and the marker; hex, flag and outcome are read afterwards.

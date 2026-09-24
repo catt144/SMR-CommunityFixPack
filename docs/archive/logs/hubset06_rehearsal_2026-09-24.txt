@@ -1,0 +1,74 @@
+# hubset 06 desk rehearsal of the 07 sitting instruments — declared VOID (no game ran)
+# 2026-09-24T17:15:45-04:00
+# pack hubset HEAD 7cf48a2; TestKit HEAD 66288da; 80_AgentSlots.lua sha256 4081e6a66c43c2bc
+# command (in B:\Dev\SMR\SMR-BugFixPack-hubset): python -B tools/desk_hubset07_rehearsal.py
+PASS P1   hubset  as-predicted       expected=HELD        got=HELD
+PASS P1   hubset  scratch            expected=REFUTED     got=REFUTED
+PASS P2   hubset  as-predicted       expected=HELD        got=HELD
+PASS P2   hubset  scratch            expected=REFUTED     got=REFUTED
+PASS P1   main    as-predicted       expected=HELD        got=HELD
+PASS P1   main    scratch            expected=REFUTED     got=REFUTED
+PASS P2   main    as-predicted       expected=HELD        got=HELD
+PASS P2   main    scratch            expected=REFUTED     got=REFUTED
+PASS P3   hubset  as-predicted       expected=HELD        got=HELD
+PASS P3   hubset  scratch            expected=REFUTED     got=REFUTED
+PASS P4   hubset  as-predicted       expected=HELD        got=HELD
+PASS P4   hubset  scratch            expected=REFUTED     got=REFUTED
+PASS P3   main    as-predicted       expected=HELD        got=HELD
+PASS P3   main    scratch            expected=REFUTED     got=REFUTED
+PASS P4   main    as-predicted       expected=HELD        got=HELD
+PASS P4   main    scratch            expected=REFUTED     got=REFUTED
+PASS P5   hubset  as-predicted       expected=HELD        got=HELD
+PASS P5   hubset  scratch            expected=REFUTED     got=REFUTED
+PASS P5   main    as-predicted       expected=HELD        got=HELD
+PASS P5   main    scratch            expected=REFUTED     got=REFUTED
+PASS P6   hubset  as-predicted       expected=HELD        got=HELD
+PASS P6   hubset  scratch            expected=REFUTED     got=REFUTED
+PASS R4   main    as-predicted       expected=HELD        got=HELD
+PASS R4   main    scratch            expected=REFUTED     got=REFUTED
+PASS R5   hubset  as-predicted       expected=HELD        got=HELD
+PASS R5   hubset  scratch            expected=REFUTED     got=REFUTED
+PASS R5   hubset  scratch-flag       expected=REFUTED     got=REFUTED
+PASS R6   hubset  as-predicted       expected=HELD        got=HELD
+PASS R6   main    scratch            expected=REFUTED     got=REFUTED
+PASS R3   any     first-poll-silent  expected=false       got=false
+PASS R3   any     as-predicted       expected=HELD        got=HELD
+PASS R3   any     scratch            expected=REFUTED     got=REFUTED
+PASS P7   hubset  as-predicted       expected=HELD        got=HELD
+PASS P7   hubset  scratch            expected=REFUTED     got=REFUTED
+PASS P7   main    as-predicted       expected=HELD        got=HELD
+PASS P7   main    scratch            expected=REFUTED     got=REFUTED
+PASS P8   hubset  as-predicted       expected=HELD        got=HELD
+PASS P8   hubset  scratch            expected=REFUTED     got=REFUTED
+PASS P9   hubset  as-predicted       expected=HELD        got=HELD
+PASS P9   hubset  scratch            expected=REFUTED     got=REFUTED
+PASS P9   hubset  no-stale           expected=NOT_SAMPLED got=NOT_SAMPLED
+PASS R1   any     as-predicted       expected=HELD        got=HELD
+PASS R1   any     scratch            expected=REFUTED     got=REFUTED
+PASS R2   any     as-predicted       expected=HELD        got=HELD
+PASS R2   any     scratch            expected=REFUTED     got=REFUTED
+PASS P10  any     as-predicted       expected=HELD        got=HELD
+PASS P10  any     scratch            expected=REFUTED     got=REFUTED
+PASS P11  hubset  as-predicted       expected=HELD        got=HELD
+PASS P12  hubset  as-predicted       expected=HELD        got=HELD
+PASS P11  hubset  scratch            expected=REFUTED     got=REFUTED
+PASS P12  hubset  scratch            expected=REFUTED     got=REFUTED
+PASS P11  main    as-predicted       expected=HELD        got=HELD
+PASS R7   main    as-predicted       expected=HELD        got=HELD
+PASS R7   hubset  refused-on-hubset  expected=false       got=false
+PASS R7   main    scratch            expected=REFUTED     got=REFUTED
+PASS LOAD any     armed-at-load      expected=0           got=0
+PASS LOAD any     bindings           expected=7           got=7
+PASS LOAD any     triggers           expected=6           got=6
+armed at load (before scenarios): 0
+58 of 58 rehearsal demands held
+VOID: desk fixtures only; no game ran. See the module docstring.
+ALL DEMANDS HELD
+# exit=0
+
+# mutant control: a scratch copy whose P7 hubset judge always returns HELD
+# command: SMR_TESTKIT=<scratch copy> python -B tools/desk_hubset07_rehearsal.py
+FAIL P7   hubset  scratch            expected=REFUTED     got=HELD
+57 of 58 rehearsal demands held
+REHEARSAL FAILED
+# exit=1
