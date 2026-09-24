@@ -82,6 +82,7 @@ function make_case(kind)
   if kind == "expedition" then task.departure_rocket={} end
   if kind == "holder" then c.holder={} end
   if kind == "bad_state" then task.state="transporting" end
+  if kind == "invalid_home" then home.valid=false end
   if kind == "cancellation" then c.pos_dome=false; c.cancel_on_walk=true end
   return c,task,manager,task.dest_dome
 end
@@ -116,7 +117,8 @@ def main():
     print("C115 predictions: obsolete=0 walks; native controls=1; absent=1")
     run_case("obsolete", True, 0)
     for kind in ("remote", "committed", "multi_leg", "relocation",
-                 "expedition", "holder", "bad_state", "cancellation"):
+                 "expedition", "holder", "bad_state", "invalid_home",
+                 "cancellation"):
         run_case(kind, True, 1)
     run_case("obsolete", False, 1)
     try:

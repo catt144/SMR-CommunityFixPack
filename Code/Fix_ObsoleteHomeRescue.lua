@@ -24,6 +24,7 @@ SMRFixPack.Register("ObsoleteHomeRescue", {
 			{ class = "Colonist", method = "Transport" },
 			{ class = "ColonistTransportTask", method = "Cleanup" },
 			{ global = "IsKindOf" },
+			{ global = "IsValid" },
 			{ global = "IsUnitInDome" },
 			{ test = function()
 				local task = rawget(_G, "ColonistTransportTask")
@@ -37,7 +38,8 @@ SMRFixPack.Register("ObsoleteHomeRescue", {
 		function Colonist:Transport(dest_dome, ...)
 			if not IsKindOf(self, "Colonist") then return orig(self, dest_dome, ...) end
 			local task = self.transport_task
-			if task and task.colonist == self and task.dest_dome == dest_dome
+			if task and IsValid(dest_dome) and task.colonist == self
+				and task.dest_dome == dest_dome
 				and dest_dome == self.dome and not task.source_dome
 				and not task.migration_dest and not task.departure_rocket
 				and not task.shuttle and not self.emigration_dome
