@@ -94,7 +94,7 @@ comments is written by `python tools/doccheck.py --regen` and checked by
 
 <!-- GENERATED TOOL ROWS — never hand-edit; regenerate with: python tools/doccheck.py --regen -->
 
-*83 scripts, every `tools/*.py` on disk. This block is GENERATED: a row's text is copied from the script's own header, so a wrong row is repaired in the script, never here.*
+*84 scripts, every `tools/*.py` on disk. This block is GENERATED: a row's text is copied from the script's own header, so a wrong row is repaired in the script, never here.*
 
 ### Repo gates, and the falsifiers that keep them honest
 
@@ -236,6 +236,7 @@ New since the last grouping pass. Give each a home in `TOOL_GROUPS` in `tools/do
 | [`desk_c108_wildfire_cure.py`](desk_c108_wildfire_cure.py) | C108 Wildfire cure: the shipped 1.1.0 at-home service payment keeps an infected colonist above the medical-visit threshold, and the module sends them anyway. |
 | [`desk_c111_rescue_text.py`](desk_c111_rescue_text.py) | C111 command-text control on shipped 1.1.1.405907 Colonist UI Lua. |
 | [`desk_c114_hub_access.py`](desk_c114_hub_access.py) | C114 access fallback against archived 1.1.1.405907 Lua. |
+| [`desk_c114_sitting_findings.py`](desk_c114_sitting_findings.py) | C114 sitting follow-up: exercise source-derived fixtures at measured distances. |
 | [`desk_c115_home_rescue.py`](desk_c115_home_rescue.py) | C115: archived Transport, task cleanup and dome position check on a desk fixture. |
 | [`desk_c116_hub_marker.py`](desk_c116_hub_marker.py) | C116 synchronous departure controls against archived 1.1.1.405907 bodies. |
 | [`desk_c117_hub_salvage.py`](desk_c117_hub_salvage.py) | C117 hub-passage salvage drain against archived 1.1.1.405907 Lua. |

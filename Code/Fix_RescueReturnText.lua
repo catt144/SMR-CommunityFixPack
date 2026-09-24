@@ -9,6 +9,8 @@
 -- task by absent source_dome and migration_dest. We change only the synchronous
 -- command-text result. The task,
 -- destination, command and hyperlink methods remain native.
+-- Colonist.lua:106,329 uses false for an unset emigration_dome; a missing
+-- instance value inherits that class default. Treat false and nil alike.
 --
 -- Save/removal: layer 3, a synchronous UI getter wrapper with no persisted
 -- field, function or game-time thread. A reload reads the current task and dome
@@ -55,7 +57,7 @@ SMRFixPack.Register("RescueReturnText", {
 				and task and not task.source_dome and not task.migration_dest
 				and task.dest_dome ~= nil
 				and task.dest_dome == self.dome
-				and (self.emigration_dome == nil or self.emigration_dome == task.dest_dome)
+				and (not self.emigration_dome or self.emigration_dome == task.dest_dome)
 				and TGetID(result) == 4333 then
 				return returning
 			end
