@@ -27,6 +27,7 @@ MODULE = Path(db.REPO) / "Code" / "Fix_HubLocalAccess.lua"
 
 PRELUDE = r'''
 Colonist = {}
+CommandObject = {}
 Workforce = {}
 Dome = {dome_network = false}
 PassageHubBase = {hub_domes = false}
@@ -41,6 +42,17 @@ function IsKindOf(o, kind)
   return type(o) == "table" and (o.kind == kind or type(o.parents) == "table" and o.parents[kind] == true)
 end
 function IsBeingDestructed(o) return o.destroyed == true end
+function IsLRTransportAvailable() return true end
+function CreateColonistTransportTask(c, source, home)
+  c.rescue_bookings = c.rescue_bookings + 1
+  local task = {dest_dome = home, shuttle = false}
+  c.transport_task = task
+  return task
+end
+function CommandObject.SetCommand(c, command)
+  c.command = command
+  return command
+end
 function ResolveMap(o) return type(o) == "table" and o.map or nil end
 function IsSameMap(a, b) return ResolveMap(a) == ResolveMap(b) end
 function GetObjectHexGrid(o) return o.map.object_hex_grid end
@@ -75,6 +87,9 @@ setmetatable(Dome, {__index = Workforce})
 function Colonist:IsValidPos() return self.valid_pos ~= false end
 function Colonist:GetMapSlot() return self.map.slot end
 function Colonist:IsServiceMarkedUnreachable() return false end
+function Colonist:HasMember(name) return name == "Idle_TransportDestination" end
+function Colonist:Idle_TransportDestination() return self.dome end
+function Colonist:GetTransportRoute() return nil, nil end
 setmetatable(Colonist, {__index = {}})
 
 function make_case()
@@ -85,6 +100,7 @@ function make_case()
   end
   local source, target, small, unrelated = dome(-30), dome(30), dome(10), dome(50)
   source.dome_network[target] = true
+  source.dome_network[source] = true
   local hub = {kind = "PassageHubBase", parents = {PassageHubBase = true},
     valid = true, q = 0, r = 0, map = map, hub_domes = {source},
     connected_passages = {}, draining_passages = {}}
@@ -98,7 +114,7 @@ function make_case()
   local c = setmetatable({kind = "Colonist", valid = true, q = 0, r = 0,
     map = map, city = {labels = {Community = {source}}}, dome = source,
     holder = false, passage_hub = false, traversing_passage = false,
-    traits = {}}, {__index = Colonist})
+    traits = {}, rescue_bookings = 0, command = "Roam"}, {__index = Colonist})
   local p = {kind = "PassageBase", valid = true, domes_connected = {hub, source},
     traversing_colonists = {c}, map = map}
   hub.connected_passages[p] = true
@@ -170,6 +186,7 @@ def runtime(patched, broken_shape=None):
     ), tree=BUILD)
     db.load_at(rt, source, "=Lua/Units/ColonistTransport.lua", first)
     rt.execute("NATIVE_ACCESS = Colonist.HasLocalAccess")
+    load_body(rt, "Lua/Units/ColonistTransport.lua", r"^function Colonist:SetCommand\(")
     load_body(rt, "Lua/ServiceBase.lua", r"^function ServiceBase:CanBeUsedBy\(")
     if broken_shape:
         assert broken_shape in ("hub", "network")
@@ -243,6 +260,12 @@ def main():
         bench.check(name + ": dumped on hub retains access", result == patched)
         _, _, result = scenario(rt, "hub", target="small")
         bench.check(name + ": small dome native true retained", result)
+        case, _, _ = scenario(rt, "hub")
+        colonist = case["colonist"]
+        colonist.SetCommand(colonist, "Idle")
+        bench.check(name + ": natural Idle rescue booking follows access",
+                    colonist["rescue_bookings"] == (0 if patched else 1)
+                    and colonist["command"] == ("Idle" if patched else "Transport"))
     _, _, result = scenario(fixed, "draining")
     bench.check("fix on: connected draining passage still grants access", result)
     for setting, target, home, label in (
