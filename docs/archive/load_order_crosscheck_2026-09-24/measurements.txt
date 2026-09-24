@@ -1,0 +1,274 @@
+Load-order crosscheck measurements, 2026-09-24
+Commands ran from B:/Dev/SMR/SMR-BugFixPack. No retail game launch.
+BASE bddb5aaa86488b0b6d0ae6b72e9f46d19b9d27c5
+
+COMMAND python docs/archive/load_order_crosscheck_2026-09-24/load_order_inventory.py
+SCRIPT_SHA256 a1bc04aca88db9f0da3ddbecd39c7caaf3b1de98cf702303ad9a043c84017150
+HEAD bddb5aaa86488b0b6d0ae6b72e9f46d19b9d27c5
+STEAM_BUILD A:\SteamLibrary\steamapps\appmanifest_3215050.acf 25390750
+SOURCE 1.0.7.396349 CommonLua/Classes/Mod.lua bc295fc90bdb4b7fa17f3cea79786782ba57abed270121b4b9d4b550838ba854 manifest=equal
+SOURCE 1.0.7.396349 CommonLua/PropertyObject.lua c5228b9bb2425f99391d7e079db733f8a8f6c490488b02f6772096f82a2008e0 manifest=equal
+SOURCE 1.0.7.396349 CommonLua/Core/classes.lua be0d9025dd8f94356a21f0fc7f5d2b325741a1db73d76b5879b1b7b38e7e1f45 manifest=equal
+SOURCE 1.0.7.396349 CommonLua/Core/autorun.lua 6f572438940d79663f36459bbe04739a8cf70b0b6e16c8ba093bbab94fb0c733 manifest=equal
+SOURCE 1.0.7.396349 CommonLua/Core/lib.lua d9704d56ad4cc642b5a7036d41b33af36ffac6e259473ba4e63567c54e2b019e manifest=equal
+SOURCE 1.0.7.396349 CommonLua/Dlc.lua 1af60e2e617a5d683ccc56d34b94bfb0f097d98cceb520875d305c987d747b6f manifest=equal
+SOURCE 1.0.7.396349 CommonLua/UI/ModManager.lua 7c8e9697764ff6967d007e5d36dca9acf446864586d11467b36a58e37b20cc01 manifest=equal
+SOURCE 1.1.0.403908 CommonLua/Modding/Mod.lua 7dda95fc941924e5eb48ed4c1a83fd1fb0b2f7eef15dae33920cb2044001b7c4 manifest=equal
+SOURCE 1.1.0.403908 CommonLua/PropertyObject.lua fd991966654d8bb63816abfebd89c287f3579fced2d3b3cd80ea01170726a619 manifest=equal
+SOURCE 1.1.0.403908 CommonLua/Core/classes.lua c9380018c43dbfb9f99c99d22a3e891b70bd4e076c91ac547ca632d5b7eca031 manifest=equal
+SOURCE 1.1.0.403908 CommonLua/Core/autorun.lua 495d8f9c538c603e5a327321f23ad19d393dc7b5d340e067a2fc7ece1e4f97de manifest=equal
+SOURCE 1.1.0.403908 CommonLua/Core/lib.lua 343f51974356e204872bd7bdab907a410c29238a080b02efffbeacac63de5e8c manifest=equal
+SOURCE 1.1.0.403908 CommonLua/Dlc.lua 1af60e2e617a5d683ccc56d34b94bfb0f097d98cceb520875d305c987d747b6f manifest=equal
+SOURCE 1.1.0.403908 CommonLua/UI/ModManager.lua ac84c27b35b7fea68c059d438f3edd7e6ec9f61d7fd412cf779e377a8e1ac0b8 manifest=equal
+SOURCE 1.1.1.405907 CommonLua/Modding/Mod.lua 293f9f823b3d657b67fb4a7564564abe71d3a5e9c5894e7f6d40336643ddfe13 manifest=equal live=equal
+SOURCE 1.1.1.405907 CommonLua/PropertyObject.lua fd991966654d8bb63816abfebd89c287f3579fced2d3b3cd80ea01170726a619 manifest=equal live=equal
+SOURCE 1.1.1.405907 CommonLua/Core/classes.lua c9380018c43dbfb9f99c99d22a3e891b70bd4e076c91ac547ca632d5b7eca031 manifest=equal live=equal
+SOURCE 1.1.1.405907 CommonLua/Core/autorun.lua 495d8f9c538c603e5a327321f23ad19d393dc7b5d340e067a2fc7ece1e4f97de manifest=equal live=equal
+SOURCE 1.1.1.405907 CommonLua/Core/lib.lua 343f51974356e204872bd7bdab907a410c29238a080b02efffbeacac63de5e8c manifest=equal live=equal
+SOURCE 1.1.1.405907 CommonLua/Dlc.lua 1af60e2e617a5d683ccc56d34b94bfb0f097d98cceb520875d305c987d747b6f manifest=equal live=equal
+SOURCE 1.1.1.405907 CommonLua/UI/ModManager.lua 1b3cb3846d58a2263eca9d56c3d7361db821b906ad2453f7fed0b09c41198f45 manifest=equal live=equal
+PACKAGE archive 3675370940 {'title': 'Patch 1.0.6 MicrogAutoExtractor', 'id': 'bpFzJHe'} fpk_sha256=ab3984c64f62f82ab6fdd821f7e301ab6f45be7fc17233736e032eccd177d5c7 metadata_sha256=5a73e458516b2aa1de81415f1af2f36f8d11c2ac344a66dd43a4f5b851ba8986
+PACKAGE archive 3676027320 {'title': 'Patch 1.0.6 Workshifts FixUp', 'id': 'twt6bh'} fpk_sha256=b03817154a2a7368e0cf673800fae5fbd1c40b865aac651da3b563539b896dcc metadata_sha256=b4afa953603293aeb60bb3d37351d6d9cc4242f836b9a1129c07a5ba22c09a36
+PACKAGE archive 3717125029 {'title': 'Patch 1.0.7 No Disasters after Meteor Storm', 'id': 'hjgH5aA'} fpk_sha256=2fbfd55a2f009ee53fb4b52dba960dc995904deb04a6d637217d6a5126d1bc93 metadata_sha256=6a39be7b7fc690d92af4ac55e8d0b9f33e1968bcd3fda6520e902229ccc6d501
+PACKAGE archive 3730839706 {'title': 'No Underground supply grid breaks', 'id': 'dqYJsDC'} fpk_sha256=83372940bc668ad6f7c02add01a7dfbad20c2644402f1f5922394f4a3f7d383e metadata_sha256=52f5c7bc299016759b0e862274fd91af8436f976df939eafbf891b7ce4b79f1f
+PACKAGE archive 3745475097 {'title': 'Broken Meteor Storms in 1.0.7.396349', 'id': 'Q6ahhr'} fpk_sha256=1376471d166a372d9edf310aa3db35d0356e59cd1a1197c24c15bda0c565c73c metadata_sha256=a464e82ddc3d8be62cd2c256bfafbccf6164d1c175368f3d8c5ca7780b43c61d
+PACKAGE archive 3775120166 {'title': 'Bug Fixes', 'id': 'SMRBF107'} fpk_sha256=519296dbdb40afa0e0205d559a25e3f6f7818b514044a15b5cc0f36bda28a1a9 metadata_sha256=4fdbfc2090c1db94b3463d1adc59f70321473a846122d9ff6c1336fe04ba0961
+SAMPLE archive metadata=6 title_id_controls=6 dependencies_files=0 members=3675370940,3676027320,3717125029,3730839706,3745475097,3775120166
+PACKAGE installed 3607071753 {'title': 'Passage Network', 'id': 'iooW34Y'} fpk_sha256=ec059e8cbb4b7c97770e773d1b9274e0f58db456425ed5a8677bd34c4fb8142e metadata_sha256=d660a2d643395566cdab266300fac94224af5e1c4003259f340970b21129515b
+PACKAGE installed 3787202810 {'title': 'Relaunched Fix Pack', 'id': 'SMR_CommunityFixPack'} fpk_sha256=0af1c5e8cbf19294f88a587736c478b7622e1112d8f06c25e23d162c3e6b0b01 metadata_sha256=f8a7f64cc4e1f48740ce9930804ff87287d83e6386575a2d73374a5c9bec5a2e
+PACKAGE installed 3799500849 {'title': 'TEMPORARY - Linux NVIDIA 580 Crash Workaround', 'id': 'SMR_FR1TempWorkaround'} fpk_sha256=4662ba49a8a808d27a7c84299446513ba9907aa977d0da1f286b78249d7981e4 metadata_sha256=b9af5c242a1b6acedf0d8c216ddde3dde65be9da111ee9406df698bf89546cc2
+SAMPLE installed metadata=3 title_id_controls=3 dependencies_files=0 members=3607071753,3787202810,3799500849
+PASS PassageNetwork installed/archive source equal after newline normalization
+EXIT 0
+
+COMMAND python docs/archive/load_order_crosscheck_2026-09-24/load_order_loader_probe.py
+SCRIPT_SHA256 eba39a846cb84472c3483c89f7677e0812806b4e53ed655fca2274a3b54d0319
+1.0.7.396349 CommonLua/Classes/Mod.lua:1860-1980 sha256=3c4b7d9a9493d3263f924834d2bfd4d4d29ecb161d9806888401d4d2ef814ed3
+  independent B,A: [B,A] 
+  required A->B, list A,B: [B,A] 
+  required A->B, B disabled: [<empty>] Cannot load 'A' because dependency mod 'B' is not loaded.
+  optional A->B, B disabled: [B,A] 
+  optional A->missing: ERROR [string "<python>"]:1864: attempt to index a nil value (local 'mod')
+  required A->missing: [<empty>] Cannot load 'A' because dependency mod 'missing' is not found.
+  optional A->B, incompatible: [B,A] 
+  required A->B, incompatible: [B] Cannot load 'A' because dependency mod 'B' is not compatible.
+  required A<->B cycle: [<empty>] Mod 'A' creates circular dependency cycle: 'A -> B -> A'.
+1.0.7.396349 PASS 9/9 named cases
+1.1.0.403908 CommonLua/Modding/Mod.lua:1873-1993 sha256=749348d898cbef2fd42a426c357bfd960903ea4928b0b9e2111c19be31da249e
+  independent B,A: [B,A] 
+  required A->B, list A,B: [B,A] 
+  required A->B, B disabled: [<empty>] Cannot load 'A' because dependency mod 'B' is not loaded.
+  optional A->B, B disabled: [B,A] 
+  optional A->missing: ERROR [string "<python>"]:1877: attempt to index a nil value (local 'mod')
+  required A->missing: [<empty>] Cannot load 'A' because dependency mod 'missing' is not found.
+  optional A->B, incompatible: [B,A] 
+  required A->B, incompatible: [B] Cannot load 'A' because dependency mod 'B' is not compatible.
+  required A<->B cycle: [<empty>] Mod 'A' creates circular dependency cycle: 'A -> B -> A'.
+1.1.0.403908 PASS 9/9 named cases
+1.1.1.405907 CommonLua/Modding/Mod.lua:1873-1993 sha256=749348d898cbef2fd42a426c357bfd960903ea4928b0b9e2111c19be31da249e
+  independent B,A: [B,A] 
+  required A->B, list A,B: [B,A] 
+  required A->B, B disabled: [<empty>] Cannot load 'A' because dependency mod 'B' is not loaded.
+  optional A->B, B disabled: [B,A] 
+  optional A->missing: ERROR [string "<python>"]:1877: attempt to index a nil value (local 'mod')
+  required A->missing: [<empty>] Cannot load 'A' because dependency mod 'missing' is not found.
+  optional A->B, incompatible: [B,A] 
+  required A->B, incompatible: [B] Cannot load 'A' because dependency mod 'B' is not compatible.
+  required A<->B cycle: [<empty>] Mod 'A' creates circular dependency cycle: 'A -> B -> A'.
+1.1.1.405907 PASS 9/9 named cases
+EXIT 0
+
+COMMAND python docs/archive/load_order_crosscheck_2026-09-24/load_order_reorder_probe.py
+SCRIPT_SHA256 b9ad138591764cb4bfe62ac54748cada666e2cc9b06ad6d4752e2dd468968d64
+1.1.0.403908 visibility AccountStorage None SaveAccountStorage None TurnModOff function TurnModOn function WriteModPersistentData function
+1.1.0.403908 before seed B,PACK,C queue B,PACK,C current_loaded B,PACK,C save_calls 0
+1.1.0.403908 after helper reorder seed PACK,B,C queue PACK,B,C current_loaded B,PACK,C save_calls 1
+1.1.0.403908 same persistent payload seed PACK,B,C queue PACK,B,C current_loaded B,PACK,C save_calls 1
+1.1.0.403908 LoadAllMods seed A,B,C,PACK queue A,B,C,PACK current_loaded B,PACK,C save_calls 1
+1.1.0.403908 own required A prerequisite seed PACK,B,C,A queue A,PACK,B,C current_loaded B,PACK,C save_calls 1
+1.1.0.403908 PASS 5/5 named states helper_queue_sha256 749348d898cbef2fd42a426c357bfd960903ea4928b0b9e2111c19be31da249e
+1.1.1.405907 visibility AccountStorage None SaveAccountStorage None TurnModOff function TurnModOn function WriteModPersistentData function
+1.1.1.405907 before seed B,PACK,C queue B,PACK,C current_loaded B,PACK,C save_calls 0
+1.1.1.405907 after helper reorder seed PACK,B,C queue PACK,B,C current_loaded B,PACK,C save_calls 1
+1.1.1.405907 same persistent payload seed PACK,B,C queue PACK,B,C current_loaded B,PACK,C save_calls 1
+1.1.1.405907 LoadAllMods seed A,B,C,PACK queue A,B,C,PACK current_loaded B,PACK,C save_calls 1
+1.1.1.405907 own required A prerequisite seed PACK,B,C,A queue A,PACK,B,C current_loaded B,PACK,C save_calls 1
+1.1.1.405907 PASS 5/5 named states helper_queue_sha256 749348d898cbef2fd42a426c357bfd960903ea4928b0b9e2111c19be31da249e
+EXIT 0
+
+COMMAND python docs/archive/load_order_crosscheck_2026-09-24/load_order_pack_controls.py
+SCRIPT_SHA256 c4efb75dd66a366b3cba57b0025b736e9fe5e38cddb9ae8b30d1d0cbf6748edf
+BASE 680c2799282dc6c60079691f1e201974a8a006e8 GAME 1.1.1.405907 Lua 5.5 | lupa 2.8
+INPUT Code/00_Core.lua 8a2cdcc1dac9cac54eeb1de0f1bab056f832cef250aadbdb12b07323d5d20d73
+INPUT Code/Fix_VacuumWalks.lua c8b5d0fc0c7e1a3266312782e1f649181e12c1a999b1cbd94a8212cf721a50a2
+PN_DEFINITIONS 45-47,49-51 members=2 declarations=2
+BODY Lua\Units\Colonist.lua 2016-2029 e38e22fbc62812843302e5f6f9dab7224b23b7aab8467f7f512b46380beb1c4e
+BODY CommonLua\Core\classes.lua 1265-1292 2869471c2867607827885d3e3536505ead574252df7b119452ac27c38f113436
+BODY CommonLua\Core\classes.lua 980-1061 3bffc68444ded35ecaecac37e85addf70ba0185acd91f2e10613c296b7880e5b
+PASS pack_first_active 'active'
+PASS later_pn_global_is_function 'function'
+PASS later_pn_does_not_revoke_application 'active'
+PASS pn_first_inactive 'inactive'
+PASS pn_first_update_suspect True
+PASS pn_first_suspects_names_vacuum 'VacuumWalks'
+DECLINE_REASON the shipped emigration code has no work-slot reservation or shuttle landing slots; this repair stands down on the older body
+PASS restoring_global_and_message_do_not_retry 'inactive'
+PASS first_application_after_restoration_active 'active'
+PASS first_application_after_restoration_no_suspects ''
+PASS canonical_definition_recovered_before_rebuild True
+PASS recovery_does_not_rewrite_global 'function'
+PASS veto_before_pack_disables 'disabled'
+PASS veto_after_pack_does_not_undo_install 'active'
+PASS postbuild_parent_patch_leaves_copied_child_old 'new,old'
+RESULT 14/14 PASS; members=pack_first_active,later_pn_global_is_function,later_pn_does_not_revoke_application,pn_first_inactive,pn_first_update_suspect,pn_first_suspects_names_vacuum,restoring_global_and_message_do_not_retry,first_application_after_restoration_active,first_application_after_restoration_no_suspects,canonical_definition_recovered_before_rebuild,recovery_does_not_rewrite_global,veto_before_pack_disables,veto_after_pack_does_not_undo_install,postbuild_parent_patch_leaves_copied_child_old
+EXIT 0
+
+COMMAND python docs/archive/load_order_crosscheck_2026-09-24/load_order_metadata_probe.py
+SCRIPT_SHA256 bc6f90bc53b2da306389f4e141d74ba0f6c1d9dc6af0789f92e6b2c806d41511
+PASS falsifier: old object comparison fails on shipped string-array queue
+PASS metadata per-instance SetupEnv overrides and wraps global queue selector
+PASS shipped queue numeric IDs PACK,A,B; object hash members preserved
+PASS disabled pack absent from queue: numeric order A,B unchanged
+EXIT 0
+
+COMMAND git -c core.safecrlf=false diff --no-index --unified=2 -- B:/Dev/SMR/SMR-Shared/SMR-SrcArchive/1.1.0.403908/Src/CommonLua/Modding/Mod.lua B:/Dev/SMR/SMR-Shared/SMR-SrcArchive/1.1.1.405907/Src/CommonLua/Modding/Mod.lua
+diff --git a/B:/Dev/SMR/SMR-Shared/SMR-SrcArchive/1.1.0.403908/Src/CommonLua/Modding/Mod.lua b/B:/Dev/SMR/SMR-Shared/SMR-SrcArchive/1.1.1.405907/Src/CommonLua/Modding/Mod.lua
+index 6e1dfcd..72d7796 100644
+--- a/B:/Dev/SMR/SMR-Shared/SMR-SrcArchive/1.1.0.403908/Src/CommonLua/Modding/Mod.lua
++++ b/B:/Dev/SMR/SMR-Shared/SMR-SrcArchive/1.1.1.405907/Src/CommonLua/Modding/Mod.lua
+@@ -2070,5 +2070,5 @@ function WaitErrorLoadingMods(customErrorMsg)
+ 	for idx, mod_id in ipairs(modsEnabledByUser) do
+ 		if not table.find(modsToLoad, mod_id) then
+-			modsFailedToLoad = table.add(modsFailedToLoad, "<space>" .. (Mods[mod_id] and Mods[mod_id].title or mod_id))
++			modsFailedToLoad = table.add(modsFailedToLoad, Mods[mod_id] and Mods[mod_id].title or mod_id)
+ 			TurnModOff(mod_id, "updatePreset")
+ 		end
+@@ -2261,4 +2261,5 @@ function OnMsg.PreGameMenuOpen()
+ 	CreateRealTimeThread(function()
+ 		ModsDisplayingMessage = true
++		WaitBlacklistedModsMessage()
+ 		-- display mods that were loaded with errors
+ 		if ModsLoadCodeErrorsMessage then
+@@ -2268,4 +2269,5 @@ function OnMsg.PreGameMenuOpen()
+ 		-- display mods that were rejected (because of dependencies, blacklisting, etc.)
+ 		WaitErrorLoadingMods()
++		WaitModsConflictsMessage()
+ 		ModsDisplayingMessage = false
+ 	end)
+@@ -3085,22 +3087,18 @@ function TFormat.BlacklistedMods(deprecatedMods, bannedMods)
+ end
+ 
+-function CheckBlacklistedMods()
++function WaitBlacklistedModsMessage()
+ 	local deprecatedMods = next(AutoDisabledModsAlertText["deprecate"]) and table.concat(AutoDisabledModsAlertText["deprecate"], "\n") or false
+ 	local bannedMods = next(AutoDisabledModsAlertText["ban"]) and table.concat(AutoDisabledModsAlertText["ban"], "\n") or false
+ 	if not deprecatedMods and not bannedMods then return end
+-	
+-	CreateRealTimeThread(function()
+-		local textT = TFormat.BlacklistedMods(deprecatedMods, bannedMods)
+-		WaitMessage(
+-			terminal.desktop,
+-			T(824112417429, "Warning"),
+-			textT,
+-			T(784547514723, "Ok")
+-		)
+-		AutoDisabledModsAlertText = {}
+-	end)
+-end
+ 
+-OnMsg.PreGameMenuOpen = CheckBlacklistedMods
++	local textT = TFormat.BlacklistedMods(deprecatedMods, bannedMods)
++	WaitMessage(
++		terminal.desktop,
++		T(824112417429, "Warning"),
++		textT,
++		T(784547514723, "Ok")
++	)
++	AutoDisabledModsAlertText = {}
++end
+ 
+ 
+@@ -3239,23 +3237,62 @@ end
+ -- Creates a formatted message about the given mod's conflicts based on the result of GetSingleModConflicts()
+ function GetModConflictsMessage(mod, conflicts)
+-	local msg = ""
+-	local prev_mod2 
++	local lines = {}
++	local prev_mod2
+ 	for _, conf in ipairs(conflicts) do
+-		local title2 = Mods[conf.mod2] and Mods[conf.mod2].title
+-		if not prev_mod2 then
+-			msg = string.format("<em>%s</em>:\n", title2)
++		if prev_mod2 ~= conf.mod2 then
++			if prev_mod2 then
++				lines[#lines + 1] = "" -- blank line between the sections of the different mods
++			end
++			lines[#lines + 1] = T{"<em><u(literal(mod_title))></em>:", mod_title = Mods[conf.mod2] and Mods[conf.mod2].title or ""}
+ 			prev_mod2 = conf.mod2
+ 		end
+-		
+-		if prev_mod2 == conf.mod2 then
+-			msg = string.format("%s\n - %s", msg, conf.msg)
+-		else
+-			msg = string.format("%s\n\n<em>%s</em>:\n - %s", msg, title2, conf.msg)
++		lines[#lines + 1] = T{" - <u(literal(resource))>", resource = conf.msg}
++	end
++
++	return table.concat(lines, "\n")
++end
++
++if FirstLoad then
++	ModsConflictsMessageShown = false
++end
++
++function OnMsg.ModsReloaded()
++	ModsConflictsMessageShown = false
++end
++
++function GetLoadedModsConflictsMessage()
++	local sections = {}
++	local reported = {} -- ["<mod1 id>|<mod2 id>"] of the pairs already listed, so each conflict is reported from one side only
++	for _, mod in ipairs(ModsLoaded) do
++		local conflicts = {}
++		for _, conf in ipairs(GetSingleModConflicts(mod)) do
++			if not reported[conf.mod2 .. "|" .. conf.mod1] then
++				conflicts[#conflicts + 1] = conf
++				reported[conf.mod1 .. "|" .. conf.mod2] = true
++			end
++		end
++		if #conflicts > 0 then
++			sections[#sections + 1] = T{"<em><u(literal(mod_title))></em> conflicts with <conflicts>",
++				mod_title = mod.title or "", conflicts = GetModConflictsMessage(mod, conflicts)}
+ 		end
+-		
+-		prev_mod2 = conf.mod2
+ 	end
+-	
+-	return msg
++	if not next(sections) then return false end
++
++	return T{"Some of the enabled mods affect the same game content and can cause unexpected behaviour. All of them will still be loaded.\n\n<conflicts>",
++		conflicts = table.concat(sections, "\n\n")}
++end
++
++function WaitModsConflictsMessage()
++	if ModsConflictsMessageShown then return end
++	local conflicts_msg = GetLoadedModsConflictsMessage()
++	if not conflicts_msg then return end
++	ModsConflictsMessageShown = true
++
++	WaitMessage(
++		terminal.desktop,
++		T(824112417429, "Warning"),
++		conflicts_msg,
++		T(784547514723, "Ok")
++	)
+ end
+ 
+EXIT 1 (expected: compared files differ)
+
+PUBLIC SOURCE PIN (read 2026-09-24)
+Invoke-RestMethod https://api.github.com/repos/ChoGGi/SurvivingMars_Mods/commits/master
+sha=36e8e82cd08372e14b241eac38b163f23c764129 author_date=2026-07-14T02:05:58Z
+Pinned Expanded Cheat Menu/metadata.lua:2-4 dependencies -> ChoGGi_Library; :14 lua_revision=1007000.
+Pinned ChoGGi's Library/metadata.lua:3 id=ChoGGi_Library; :7 lua_revision=1007000.

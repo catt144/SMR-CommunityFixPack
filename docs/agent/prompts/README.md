@@ -46,7 +46,6 @@ The `declared class` values below are gate inputs, not conclusions inferred from
 | `DLC_DEEP_CHECK.md` | `prompt` | live one-off chain-authoring job after the fix pack is stable; re-emits the DLC inventory, writes a mapped `dlccheck/` chain, then consumes itself without firing a link |
 | `SMRCF_CHAIN_SET.md` | `prompt` | owner ruling: keep the C35 detector plus parked C52 chain; descendants are independent and update this grouped entry as they close |
 | `MIGRATION_HUB_HANDOFF_high.md` | `prompt` | **LIVE, single use, authored 2026-09-24** (owner ask): remaining work after the migration audit, cross-check, hub audit and the two sittings on TheGodUncle's save; resweep and S1/S2/S3/S5 filing done (C114-C117); carries the one-release ruling for the hub set, the reporter reply, the build order and the owed measurements; consumed when its last item lands |
-| `LOAD_ORDER_CROSSCHECK_high.md` | `prompt` | **LIVE, single use, authored 2026-09-24** (owner ask): open-scope Codex exploration of whether the pack can load before other mods at any level, and whether that would solve load-order issues; rechecks EF-054, EF-025 and FIX_POLICY §8 on 1.1.1; report-only; consumed by the report commit |
 
 ## Chain folders
 
