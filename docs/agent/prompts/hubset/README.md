@@ -33,6 +33,9 @@ report the disagreement.
 - **Sittings are preloaded:** "all these commands are things that could have been done in slots";
   "smrtk has a build in 128x game speed for fire watch and fire after x in game time." The owner
   clicks SMRTK slots; waits are triggers or `Run until` at top speed (06 carries the details).
+- **Minimal sitting, 2026-09-24:** "anything that was a minor addon that isn't what this chain was
+  created for are desk verified only." "We are doing the bare minimal testing in game needed to
+  ship these new fixes." C42, F127 and P3 ship desk-verified; 07 tests only the new fixes.
 
 ## The queue
 

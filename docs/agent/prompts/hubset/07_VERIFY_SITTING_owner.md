@@ -5,8 +5,13 @@ Chain rules: [README.md](README.md). Read them, then `## Notes from upstream` be
 Fire only after 06 has closed. Owner ruling 2026-09-24: **"One sitting only."**
 
 **Owner time: about 30 minutes (an estimate, not measured):** segment A 13, segment B 12, relaying
-words 5. If it runs long, drop in this order: R7 (A9), then the mid-spoke leg (A6 and B6), then the
-relocation subject (A3b and B3b). Two boots, because a pack module cannot be switched off while the
+words 5. If it runs long, drop in this order: the mid-spoke leg (A6 and B6), then the relocation
+subject (A3b and B3b).
+
+**Scope (owner, 2026-09-24):** "anything that was a minor addon that isn't what this chain was
+created for are desk verified only." "We are doing the bare minimal testing in game needed to ship
+these new fixes." **C42, F127 and P3 get no reading in this sitting.** Records the slots still log for
+them (`boot_c42stale`, `p9`, `boot_f127`) are not verdicts and are not reported. Two boots, because a pack module cannot be switched off while the
 game runs. `SMRFixPack_Disabled` is read only before load (`Code/00_Core.lua`, header). So "fix off"
 is segment A on `main` and "fix on" is segment B on `hubset`.
 
@@ -88,15 +93,15 @@ on this 867-colonist save at 128x.
 | # | owner presses | what the owner sees | real time | predictions |
 |---|---|---|---|---|
 | A1 | Start the game, load **New Horizons 2 83** (it loads paused) | the colony, paused | 2 min | none |
-| A2 | Slots & notes → **Scratch** | nothing for you; the agent reads the log | 10 s | build=main, taint, eligibility; R1, R2, P10, P13 census |
+| A2 | Slots & notes → **Scratch** | nothing for you; the agent reads the log | 10 s | build=main, taint, eligibility; R1, R2 census |
 | A3a | **Slot 6** (label `[1] C111 1/3`), still paused | the camera moves to a selected colonist. **Read its status line aloud.** | 30 s | P11 |
 | A3b | **Slot 6** again (label `[2] C111 2/3`) | another selected colonist. **Read its status line aloud.** | 30 s | P12 |
 | A4 | **Slot 1**, still paused | the game runs fast, then pauses with a chime | ≤ 1 min | P1, P2 |
 | A5 | **Slot 2**, then at the chime **Slot 4** | fast run, a pause, a second fast run, a second pause | 2 min | R3 at the first pause; P3, P5, P6, R4, R6 at the second |
 | A6 | **Slot 3**, then at the chime **Slot 4** | as A5 | 2 min | R5 at the first pause; P4, P6, R5 at the second |
-| A7 | **Slot 5**, then at the chime **Slot 5** again (its label now reads `[2] C117 2/2`) | a pause on a busy spoke, the spoke's salvage countdown, then a pause after it clears | 2 min | P7, P8, P9 |
-| A8 | **Scratch** | nothing for you | 10 s | P10 after traffic, R1, R2, P13 |
-| A9 | **Slot 6** again (label `[3] R7 3/3`), game paused | nothing for you | 10 s | R7 |
+| A7 | **Slot 5**, then at the chime **Slot 5** again (its label now reads `[2] C117 2/2`) | a pause on a busy spoke, the spoke's salvage countdown, then a pause after it clears | 2 min | P7, P8 |
+| A8 | **Scratch** | nothing for you | 10 s | R1, R2 after traffic |
+| A9 | not pressed: slot 6's third stage (R7) is out of scope | none | 0 | none |
 | A10 | Quit to desktop (no save) | none | 30 s | none |
 
 C111 is read first, at load, because the save's own rescues are the subjects. By A9 in segment B,
@@ -154,25 +159,13 @@ reconcile `saves/game` by name against step 2's list, and archive B's post-exit 
   with its ~5 real-second countdown (`Demolishable.lua`, `const.DemolishCountdownMax`). The watch
   snapshots the spoke's traversers at the poll where `hub_draining` is first set, which is the
   start of `OnDemolish` (`Passage.lua:1163-1170`).
-- **C42 has no stand-alone leg.** It rides on C117's salvage (P9) and the census (P10). Its premise
-  is under an owner decision (99's inbox, hubset 03's note): source says passage elements never
-  become holders (`Passage.lua:819`). P10 is that live witness. P9 samples a kick only if a stale
-  member exists, and otherwise reads NOT_SAMPLED.
-- **F127 has no leg: stop routed to the owner.** Its C83 branch runs only when a passenger arrival's
-  chosen dome becomes unwelcoming between booking and `Idle`, while the welcoming fallback is full
-  (`Code/Fix_ArrivalDeaths.lua`, the C83 branch). This save gives no such arrival on demand. The
-  fixture needs a passenger rocket ordered by hand, a dome made unwelcoming at landing and a full
-  fallback. Estimated cost: 5-8 owner minutes per segment plus rocket transit, at unknown odds that
-  `ChooseDome` picks the dome the setup controls. The only coverage built is P13, a read-only census
-  that catches the defect's shape if it occurs on its own. **Owner's choice:** build that fixture
-  (a 07 amendment before the sitting), or leave F127 at desk-verified with P13 organic.
+- **C42, F127 and P3 are desk-verified only**, by the owner's scope ruling at the top.
 - **05's other C114 controls are not legs:** the small dome, unrelated destination, stale
   marker or holder off the hub, disconnected spoke, cross-map, outdoor, full-service and valid
   station commute. Each needs a separate fixture the brief's list does not name, and the desk covers
-  them (`desk_c114_hub_access.py`, 25 demands). They are routed to 99 as not played. The station
-  commute is the one 05 called decisive.
-- **R7 mutates** (sets `passage_hub = false`, then native `UpdateOutside`) on at most three
-  colonists, in segment A only. On a staged load that is never saved, that is acceptable.
+  them (`desk_c114_hub_access.py`, 25 demands). By the owner's scope ruling they stay
+  desk-verified and are not owed.
+- **R7 is not run**: it tests a stale-holder path C116's fix already handles, so it is outside the minimum.
 
 ### Predictions (written 2026-09-24, before any run)
 
@@ -191,18 +184,14 @@ are the table's; abort a leg at 3x its time and record it as NOT RUN.
 | P6 | C116 (ramp) | `h7_follow`, `p6` | the marker holds for the whole spoke | same | the marker drops while still traversing |
 | P7 | C117 | `TRIGGER h7_drain`, `p7` | a hub-bound traverser caught by the salvage lands without holder and marker | every one lands with `holder` and `passage_hub` on the hub | hubset: any unmarked; main: none unmarked |
 | P8 | C117 | `h7_drain`, `p8` | NOT_SAMPLED by design (the tunnel goes at once) | no fresh entry into the draining spoke | `entered_after > 0` |
-| P9 | C42 | `h7_drain`, `p9` | a stale element member is kicked across the map | none is | a >10-hex jump in one 50 ms poll after removal. NOT_SAMPLED with no stale member |
-| P10 | C42 premise | `DUMP boot_c42stale`, `verdict` | `stale=0` after traffic | same | `stale > 0`: an element held a colonist, and 03's source conflict is wrong |
 | P11 | C111 | slot 6 stage 1, `verdict`, `tid`, `text` | T 4333, "Moving to a new Dome: <home>" | "Returning to Dome: <home>" | the other text. **The owner's spoken read is the attended witness.** |
 | P12 | C111 | slot 6 stage 2, `verdict`, `tid` | T 4333, names the destination | same | any other id |
-| P13 | F127 | `DUMP boot_f127`, `homeless_hidden` | organic only, no forced case | 0 | hubset: > 0 after a C83 reroute. No verdict without that event |
 | R1 | 04 | `DUMP boot_r1`, `verdict` | every `hub.units` member holds that hub | same | `holder_mismatch > 0` (the chain author's overstatement note predicts this is possible) |
 | R2 | 04 | `DUMP boot_r2`, `verdict` | every member in flight or standing on the hub | same | `neither > 0`: the stale-holder finding is live |
 | R3 | 04 | `TRIGGER h7_hub_arrival`, `r3` | the arrival's logical hex is the hub's | same | `arrival_hex=false` |
 | R4 | 04 | `h7_follow` after slot 2, `r4` | after the dump: no hub holder, marker kept, on the hub hex | same | `dump_hex=false` or marker lost |
 | R5 | 04 | `TRIGGER h7_mid_spoke` fields and `h7_follow` `r5` | flag set and listed mid-passage; list cleared on arrival | same | flag false while listed, or still listed after landing |
 | R6 | 04 | `h7_follow`, `r6` | no overland walk off the hub (INFERRED) | same | an open-ground moment after leaving the hub |
-| R7 | 04 | `DUMP r7` per class, `verdict` (segment A only) | after clearing the marker: dome and held classes `outside_start` false, open class a game time | not run | any other combination. NOT_SAMPLED for a class with no marked colonist |
 
 ## Notes from upstream
 
@@ -241,3 +230,13 @@ are the table's; abort a leg at 3x its time and record it as NOT RUN.
 - **Drift:** `tools/SMRTK.md` says "A pack lane does not commit in it" of the TestKit, while 06's
   brief requires the slots "committed in the TestKit repo". The brief was followed (`66288da`); the
   tension is not resolved here.
+
+### From the owner, 2026-09-24, after 06 closed: scope cut
+
+Verbatim: "anything that was a minor addon that isn't what this chain was created for are desk
+verified only. I have been trying to fix one set of new bugs for 4+ hours now, and I am still
+talking about other stuff. We are doing the bare minimal testing in game needed to ship these new
+fixes. We have around 4000 people waiting for these fixes. Re checking things from auguest on a
+previous patch, that is considered minor is not on the agenda". Applied to the script above: C42,
+F127 and P3 have no readings, R7 is not run, and 06's F127 stop and its list of C114 controls
+routed to 99 are withdrawn. Do not add legs.

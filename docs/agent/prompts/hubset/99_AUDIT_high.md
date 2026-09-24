@@ -312,3 +312,11 @@ rows may be stale list entries rather than colonists in flight; R1 and R2 in 07 
 - **Audit focus:** the judges in `SMRTK.H7` decide every verdict. Check each against its prediction
   row, and check that no instrument selects on the field it then reports. Selection is by the
   passage's list, the holder and the marker; hex, flag and outcome are read afterwards.
+
+### From the owner, 2026-09-24, after 06 closed: scope cut
+
+Verbatim: "anything that was a minor addon that isn't what this chain was created for are desk
+verified only." "We are doing the bare minimal testing in game needed to ship these new fixes."
+C42, F127 and P3 ship desk-verified; audit them against their desk harnesses, not play. 06's F127
+stop and its "not played, routed to 99" list (05's other C114 controls, C116 save/reload, R4's extra
+fields) are withdrawn by this ruling, not owed. R7 is not run.
