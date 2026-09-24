@@ -321,6 +321,7 @@ return PlaceObj('ModDef', {
 		"Code/Fix_ArrivalDeaths.lua",
 		"Code/Fix_PassageStaleHolder.lua",
 		"Code/Fix_RescueReturnText.lua",
+		"Code/Fix_ObsoleteHomeRescue.lua",
 		"Code/Fix_StaleReservations.lua",
 		"Code/Fix_CrystalMysteryHang.lua",
 		"Code/Fix_DustSicknessBiorobots.lua",

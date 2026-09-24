@@ -67,6 +67,10 @@ return {
 		'CodeFileName', "Code/Fix_RescueReturnText.lua",
 	}),
 	PlaceObj('ModItemCode', {
+		'name', "Fix_ObsoleteHomeRescue",
+		'CodeFileName', "Code/Fix_ObsoleteHomeRescue.lua",
+	}),
+	PlaceObj('ModItemCode', {
 		'name', "Fix_StaleReservations",
 		'CodeFileName', "Code/Fix_StaleReservations.lua",
 	}),
