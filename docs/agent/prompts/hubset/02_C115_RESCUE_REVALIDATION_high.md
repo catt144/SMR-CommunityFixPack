@@ -64,3 +64,20 @@ The anchor read in link 04 and the sitting in 07 decide those.
 Append your outbox to 03's inbox and 99's, strike your row, `git rm` this file, commit on `main`.
 
 ## Notes from upstream
+
+### From hubset 01, 2026-09-24
+
+- The `hubset` worktree is `B:\Dev\SMR\SMR-BugFixPack-hubset`; branch HEAD `795aefa`
+  builds P3, C42, F127 and C111. Code and harnesses are committed there. Main's dated
+  entries and [P3 build record](../../reports/hubset/P3_BUILD_2026-09-24.md) are in `6227f2f`.
+- C111 now wraps only `Colonist:Getui_command` for an own-home `Transport` rescue; it does not
+  change `Transport`, its task or movement. Its text is a proposal pending checklist ck216;
+  link 02 should keep C115's own movement and task controls independent of that UI result.
+- C42 filters stale `PassageGridElement.units` entries synchronously before
+  `Holder:KickUnitsFromHolder`, while vanilla's raw clear in `TraverseTunnel` remains. Link 03
+  and 05 must account for that remaining traversal state; no full traversal copy was built.
+- F127 changes only the C83 arrival reroute's booking path in `Fix_ArrivalDeaths`; it does not
+  alter the own-home rescue path. A full habitat exposed an initial reserve-only omission;
+  final build cancels the rejected hold first and the desk has a failing old-shape control.
+- Link 01's branch gate and main gate were GREEN. The branch is unplayed; link 07 and link 99
+  still own game verification and audit.

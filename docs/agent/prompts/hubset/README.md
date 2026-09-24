@@ -33,7 +33,7 @@ report the disagreement.
 
 | # | file | tag | owner needed? | what it drains |
 |---|---|---|---|---|
-| 01 | `01_WORKTREE_AND_SMALL_FIXES_fanout_level_3.md` | fan-out 3 | may route C111 text | the `hubset` branch and worktree; P3 pins; C42; F127 (desk check first); C111 |
+| ~~01~~ | ~~`01_WORKTREE_AND_SMALL_FIXES_fanout_level_3.md`~~ | ~~fan-out 3~~ | ~~may route C111 text~~ | ~~the `hubset` branch and worktree; P3 pins; C42; F127 (desk check first); C111~~ |
 | 02 | `02_C115_RESCUE_REVALIDATION_high.md` | high | no | C115: an obsolete own-home rescue stops at the start of `Transport` |
 | 03 | `03_C117_SALVAGE_DRAIN_high.md` | high | no | C117: a busy hub passage's in-flight colonists keep their hub endpoint through a disconnect |
 | 04 | `04_MEASURE_SITTING_owner.md` | attended | ✅ keyboard, the reporter's save | hub footprint, marker and rescue-anchor readings (four console lines) |
