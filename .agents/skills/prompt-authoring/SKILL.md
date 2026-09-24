@@ -80,6 +80,10 @@ The context's gitStatus block is a staleable snapshot.
   clicks; they do not type. A hand-typed console line, a wait measured in
   owner minutes, or a watch for an on-screen state each needs a stated reason
   no slot can do it. Owner time is the cost being minimised.
+- Sitting scope: minor means shippable desk-verified. An item needing a reading
+  is not minor; an item called minor gets no reading and is not reported as an
+  owed gap. Scope a sitting to the defects the work was created for, and do not
+  price an addition in owner minutes — that estimate is not yours to make.
 
 Before handoff, read as the worker: decision, outcome, scope, stops and
 completion evidence must stand without this conversation. Read an attended
