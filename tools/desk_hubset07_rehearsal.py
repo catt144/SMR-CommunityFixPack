@@ -16,11 +16,13 @@ each instrument CAN return its refuting verdict from the fields it reads. It
 says nothing about what the colony will do. Sitting 07 supplies that.
 """
 import os
+import subprocess
 import sys
 
 import deskbench as db
 
 SLOTS = os.path.join(db.TESTKIT, "Code", "80_AgentSlots.lua")
+SLOTS_REV = "66288da"
 
 PRELUDE = r'''
 empty_table = {}
@@ -380,7 +382,9 @@ return rows
 def main():
     rt = db.lua_runtime()
     rt.execute(PRELUDE)
-    src = db.read(SLOTS)
+    # 07's slots are TestKit 66288da; the working file now belongs to the 07B pass.
+    src = subprocess.run(["git", "-C", db.TESTKIT, "show", SLOTS_REV + ":Code/80_AgentSlots.lua"],
+                         capture_output=True, text=True, encoding="utf-8", check=True).stdout
     db.load_at(rt, src, "=Code/80_AgentSlots.lua")
     armed_at_load = len(list(rt.globals().SMRTK.armed_log.values()))
     rows = rt.execute(SCENARIOS)
