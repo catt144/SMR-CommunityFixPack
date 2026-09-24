@@ -35,23 +35,28 @@ so more hub crossings) and its residue hypothesis is refuted. Overturn only on e
    [C116](../bugs/C116.md) and [C117](../bugs/C117.md). §7 and resweep corrections are folded into
    C42, C99, C109 and C111 as dated sections.
 3. **Decide with the owner whether P1 to P6** (the pack's own items, audit §4.2 and cross-check
-   ranking) become F entries. Owner has not ruled; they are tracked only in the reports.
+   ranking) become F entries. P2 and P3 ruled 2026-09-24: both fixed in the hub set (P2 filed as F127,
+   P3 tracked in item 5). P1, P4, P5 and P6 are unruled and tracked only in the reports.
 4. **Reporter reply** for the Steam thread, when the owner asks: not his mods, not ours; the
    game measures reach from the centre of a radius-19 dome, rescue rides home are what the
    status shows, deaths come from the pickup anchored back at the hub. Do not call Passage
    Network abandoned; it was updated 2026-09-18. `docs/FIELD_REPORT_REPLIES.md` holds the
    reply rules and the standing ruling on naming other mods.
-5. **One release for the hub set (owner ruling, 2026-09-24).** C114, C115, C116, C117, C42 and
-   C111 ship together, never one at a time. The owner's words: "If possible and we are going to fix
+5. **One release for the hub set (owner ruling, 2026-09-24).** C114, C115, C116, C117, C42,
+   C111, [F127](../bugs/F127.md) (was P2) and the P3 pins ship together, never one at a time. The owner's words: "If possible and we are going to fix
    them all I would like to do the fixes and get them out all at once. They all touch surfaces near
    the same thing so if we push one part people read that as fixed, and then if they hit the surface
    of one of the other parts then they say 'well you said it was fixed but X is still borken'". The
    release process ships whatever is in the tree, so no part of the set may reach `Code/` or
    `metadata.lua` on `main` before the whole set is ready. How to hold it (a branch, or files kept
-   out of the code list) is the building seat's call. Open with the owner: whether C99, P2 and P3
-   join the set, and whether a member refuted by its sitting drops out or holds the release.
+   out of the code list) is the building seat's call. Membership, owner 2026-09-24: P2 and P3 are
+   in ("if p3 is just makeing something better we already ship or correcting it and its ready to go
+   we shoul,d just add it same with p2"); C99 is out, never reproduced in game. F127 needs its
+   full-destination branch validated before the repair. P3 is the two missing `SRC:` pins in
+   `Fix_VacuumWalks` (`GetNextMigrationLeg`, `IsInWalkingDistDome`), header metadata only. Still
+   open: whether a member refuted by its sitting drops out or holds the release.
    Build order: the owner approved S1 first; the resweep ranks C114, C115, C117, C116, then C42, with
-   P3 and P2 after as separate work and the C109 sitting diagnostic only. The owner has not chosen
+   F127 and P3 inside the set and the C109 sitting diagnostic only. The owner has not chosen
    between the two orders. C114 and C116 cannot be built before the hub-footprint measurement
    (item 6); C115 needs the anchor read; C117 needs its salvage control. C110 and C113 still wait on
    an intent ruling.
