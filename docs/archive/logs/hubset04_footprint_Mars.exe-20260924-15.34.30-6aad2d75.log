@@ -1,0 +1,789 @@
+					Render 0:00:00:006
+*** executable info
+Timestamp:     	6aad2d75
+Date:          	Fri Sep 18 08:24:21 2026
+Command line:  	-nointro
+Compiler:      	195136247, 142 (VS 2019) or newer
+
+
+*** hardware info
+CPU name      	Intel(R) Core(TM) i7-14700K
+CPU MHz       	3418
+CPU cores     	20/28
+Phys. Memory   	65278 MBytes
+Memory In Use  	42%
+Disk Free      	1226923 MBytes
+
+
+*** OS info
+OS:            	Windows 11
+Version:       	10.0.26100 
+
+
+*** Debug::Init()
+
+
+					Render 0:00:00:082
+Steam initialized (AppId 3215050)
+					Render 0:00:00:094
+Drive type for game installation: SSD, savegames: SSD
+Language: English
+					Render 0:00:01:575
+*** graphics info
+GPU                            	NVIDIA GeForce RTX 4080 Feature Level: 12.1 {  DoublePrecisionFloatShaderOps: 1 OutputMergerLogicOp: 1 MinPrecisionSupport: 2 TiledResourcesTier: 4 ResourceBindingTier: 3 PSSpecifiedStencilRefSupported: 0 TypedUAVLoadAdditionalFormats: 1 ROVsSupported: 1 ConservativeRasterizationTier: 3 MaxGPUVirtualAddressBitsPerResource: 40 StandardSwizzle64KBSupported: 0 CrossNodeSharingTier: 0 CrossAdapterRowMajorTextureSupported: 0 VPAndRTArrayIndexFromAnyShaderFeedingRasterizerSupportedWithoutGSEmulation: 1 ResourceHeapTier: 2 NotZeroedPools: 1 UMA: 0 UnalignedBlockTextures: 1}
+API                            	d3d12
+GPU Driver Version             	32.0.16.1074
+GPU Driver Package Version     	610.74
+GPU Dedicated Video Memory     	16048 MB
+					Render 0:00:01:717
+
+Libs: Network, Sequences, MouseTrackWin, DumbAI, MapGen, Paradox, TriggersAndEvents, Notifications, Research, Resources, Tutorial, Objectives 
+
+					Render 0:00:01:961
+
+Platform: desktop, editor, goldmaster, paradox, pc, steam
+
+					Render 0:00:03:014
+*** audio info
+Audio Endpoint                 	Speakers (Razer Leviathan V2)
+						Lua 0:00:03:015
+Lua revision: 405907
+Assets revision: 33225
+Steam AppID: 3215050
+Build version: 1.1.1.405907
+Build branch:  Release
+						Lua 0:00:03:023
+Account storage loaded successfully in 7 ms
+						Lua 0:00:03:024
+DLC norman loaded, lua revision 405907, assets revision 33225
+DLC thomas loaded, lua revision 405907, assets revision 33225
+						Lua 0:00:03:028
+[mod] Loaded mod def Relaunched Fix Pack: Opt-In Modules (id SMR_CommunityOptInPack, v1.00-000) unpacked from appdata
+[mod] Loaded mod def Passage Network (id iooW34Y, v1.00-038) packed from steam
+[mod] Loaded mod def TEMPORARY - Linux NVIDIA 580 Crash Workaround (id SMR_FR1TempWorkaround, v0.00-003) unpacked from appdata
+[mod] Loaded mod def DEV ONLY - Train Hub (Module B build) (id SMR_TrainHubDev_20260918, v0.00-049) unpacked from appdata
+[mod] Loaded mod def DEV ONLY - Train Hub Prototype (id SMR_TrainHubPrototype_20260918, v0.00-002) unpacked from appdata
+[mod] Loaded mod def Community Fix Pack — Test Kit (id SMR_CommunityFixPackTestKit, v0.00-001) unpacked from appdata
+[mod] Loaded mod def Relaunched Fix Pack (id SMR_CommunityFixPack, v1.00-020) unpacked from appdata
+[mod] Loaded mod def DEV ONLY - Rail Shaft (cross-map train tunnel prototype) (id SMR_RailShaftDev_20260923, v0.00-001) unpacked from appdata
+						Lua 0:00:03:425
+[mod] [SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:03:426
+[mod] [SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[mod] [SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+[SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+						Lua 0:00:03:430
+[mod] [SMRTK] SMRTK_CORE loaded=true tee=false t=0 id=1
+[SMRTK] SMRTK_CORE loaded=true tee=false t=0 id=1
+						Lua 0:00:03:433
+[mod] [SMRTK] SMRTK_SLOTS armed_at_load=0 predictions="TRAIN_HUB_BUILD_20260918.md: centre/transition prototype" sitting=train_hub_move slots="1 traffic/power,2 inward,3 departure,4 crossing watch,5 outward,6 select tunable,scratch boot" t=0 id=2
+[SMRTK] SMRTK_SLOTS armed_at_load=0 predictions="TRAIN_HUB_BUILD_20260918.md: centre/transition prototype" sitting=train_hub_move slots="1 traffic/power,2 inward,3 departure,4 crossing watch,5 outward,6 select tunable,scratch boot" t=0 id=2
+						Lua 0:00:03:435
+[mod] [SMRTest][carry] fixture-carry dump available — run SMRTest.FixtureCarry()
+						Lua 0:00:03:436
+[TrainHubDev] hub classes loaded: six-connector hub, built-in drone controller, maintenance reserve
+						Lua 0:00:03:437
+[TrainHubDev] train export floor loaded (standing + transient holds)
+						Lua 0:00:03:438
+[mod] [CommunityFixPack] LanderEmptyLaunch: applied
+[mod] [CommunityFixPack] ShelterReflex: applied
+[mod] [CommunityFixPack] TrackSalvageWipe: applied
+[mod] [CommunityFixPack] LakeEntombment: applied
+[mod] [CommunityFixPack] RocketDroneChurn: applied
+[mod] [CommunityFixPack] ShuttleTransportCache: applied
+						Lua 0:00:03:439
+[mod] [CommunityFixPack] VacuumWalks: applied
+[mod] [CommunityFixPack] ArrivalDeaths: applied
+[mod] [CommunityFixPack] StaleReservations: applied
+[mod] [CommunityFixPack] CrystalMysteryHang: applied
+[mod] [CommunityFixPack] DustSicknessBiorobots: applied
+						Lua 0:00:03:440
+[mod] [CommunityFixPack] PayloadTemplateRefill: applied
+[mod] [CommunityFixPack] ShuttleHubOffAvailable: applied
+[mod] [CommunityFixPack] FreedHousingNotice: applied
+[mod] [CommunityFixPack] LandscapeUnitFilter: applied
+						Lua 0:00:03:441
+[mod] [CommunityFixPack] RocketInteractGuard: applied
+[mod] [CommunityFixPack] TrackConnectorPingPong: applied
+[mod] [CommunityFixPack] TrackTunnelPowerBridge: applied
+[mod] [CommunityFixPack] SequenceLatents: applied
+						Lua 0:00:03:442
+[mod] [CommunityFixPack] TrackSalvageRefund: applied
+[mod] [CommunityFixPack] DroneTransportMinors: applied
+[mod] [CommunityFixPack] ScanDowngrade: applied
+[mod] [CommunityFixPack] BombardmentSpread: applied
+[mod] [CommunityFixPack] ExtenderFlapChurn: applied
+[mod] [CommunityFixPack] SaintBlessing: applied
+[mod] [CommunityFixPack] ExoticDepositSign: applied
+[mod] [CommunityFixPack] JumboCaveReinforcementWedge: applied
+						Lua 0:00:03:443
+[mod] [CommunityFixPack] SilentHitMomentFX: applied
+[mod] [CommunityFixPack] CloggedBuildingRelease: applied
+[mod] [CommunityFixPack] FactionDomeSizeGate: applied
+[mod] [CommunityFixPack] HabitatExpeditionReturn: applied
+[mod] [CommunityFixPack] HabitatExpeditionDraft: applied
+						Lua 0:00:03:444
+[mod] [CommunityFixPack] RoverSubclassManifest: applied
+[mod] [CommunityFixPack] DryFarmingFarms: applied
+[mod] [CommunityFixPack] WildfireCureVisit: applied
+[mod] [CommunityFixPack] SaveSanitizer: applied
+[mod] [CommunityOptInPack] AcknowledgedWarnings: applied
+						Lua 0:00:03:445
+[mod] [CommunityOptInPack] ResidencyControl: inactive (opt-in module, off by default — enable it in Options → Mod Options)
+[mod] [CommunityOptInPack] MultipleSuns: applied
+[mod] [CommunityOptInPack] DroneStatDials: applied
+[RailShaftDev] loaded: cross-map train tunnel prototype. UNVERIFIED IN GAME.
+						Lua 0:00:04:160
+[TrainHubDev] save guard: native waiter snapshot; legacy hub load mapping retained
+						Lua 0:00:04:233
+[mod] [CommunityFixPack] SaintBlessing: inactive (no dome-colonists trait presets)
+						Lua 0:00:04:324
+Reloading done in 1296 ms
+						Lua 0:00:04:329
+Available DLCs: norman(Feeding the Future),thomas(Interplanetary Codex) 
+						Lua 0:00:04:374
+[mod] [SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=DataLoading t=0 id=3
+[SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=DataLoading t=0 id=3
+						Lua 0:00:04:756
+[preset] Preset postprocess took 155 ms.
+						Lua 0:00:04:805
+482 / 482 particle streams loaded in 42 ms.
+						Lua 0:00:04:806
+5 / 5 particle streams loaded in 1 ms.
+						Lua 0:00:04:807
+[mod] [CommunityFixPack] SilentHitMomentFX: registered 11 missing animation-moment preset(s)
+						Lua 0:00:04:808
+[mod] [CommunityFixPack] FactionDomeSizeGate: 7 faction dislike(s) now wait for 10 colonists in a dome
+[mod] [CommunityFixPack] DryFarmingFarms: left 1 farm(s) alone because DryFarming already reaches them (FarmUnderground via Farm)
+[mod] [CommunityFixPack] DryFarmingFarms: added 2 water entr(y/ies) at -50% to DryFarming (1 adopted, 4 of 4 farms loaded)
+[mod] [CommunityOptInPack] MultipleSuns: BuildingTemplates.ArtificialSun not found — build limit NOT lifted (binding fix still active)
+						Lua 0:00:05:015
+[mod] [CommunityFixPack] SaintBlessing: the shipped code resolves the trait label itself — data left untouched; save re-base armed for 1 preset(s) of 2
+[mod] [CommunityFixPack] DryFarmingFarms: left 1 farm(s) alone because DryFarming already reaches them (FarmUnderground via Farm)
+[mod] [CommunityOptInPack] MultipleSuns: Artificial Sun build-once limit lifted
+						Lua 0:00:05:103
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=0 id=4
+						Lua 0:00:05:130
+[LUA ERROR] CommonLua/Editor/ArtSpecEditor.lua:573: attempt to call a nil value (global 'EntitySpecPathToEntity')
+  CommonLua/Editor/ArtSpecEditor.lua(573):  method OnPresetPostLoad
+  CommonLua/Preset.lua(541):  upvalue f1
+  CommonLua/Core/classes.lua(170):  method PostLoad
+  CommonLua/Modding/ModItem.lua(2518):   <>
+  [C](-1):  global sprocall
+  CommonLua/Modding/Mod.lua(666):   <>
+  CommonLua/Modding/Mod.lua(740):   <>
+  CommonLua/Modding/Mod.lua(664):  method LoadItems
+  CommonLua/Modding/Mod.lua(2185):  global ContinueModsReloadItems
+  CommonLua/Dlc.lua(603):  global LoadDlcs
+  CommonLua/Core/autorun.lua(447):  local StartupSequence
+  CommonLua/Core/autorun.lua(516):   <>
+        --- end of stack
+Locals:
+	                self |   object EntitySpec 'SMROptInTrainHub6'
+						Lua 0:00:05:140
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=0 id=5
+						Lua 0:00:05:150
+[mod] Loaded mod items for: SMR_CommunityFixPackTestKit, SMR_TrainHubDev_20260918, SMR_CommunityFixPack, SMR_CommunityOptInPack, SMR_RailShaftDev_20260923
+						Lua 0:00:05:402
+[mod] [CommunityFixPack] SaintBlessing: the shipped code resolves the trait label itself — data left untouched; save re-base armed for 1 preset(s) of 2
+						Lua 0:00:05:403
+[mod] [CommunityFixPack] DryFarmingFarms: left 1 farm(s) alone because DryFarming already reaches them (FarmUnderground via Farm)
+						Lua 0:00:05:497
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=0 id=6
+						Lua 0:00:05:916
+[PdxSDK] Started up. Took 1041
+						Lua 0:00:06:342
+[Braze] SessionStart error The server name or address could not be resolved
+
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:06:442
+[Braze] SessionStart error The server name or address could not be resolved
+
+						Lua 0:00:06:443
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:32:567
+Load Game: 
+	lua_revision: 403908 (last saved with) 
+	orig_lua_revision: 403908 (created with) 
+	assets_revision: 33006 
+
+	dlcs: norman, thomas 
+
+	mods: WUoPQ6R, W7hDysd, PquXTU, eoJkQuu, F7XeoeH, K76CAwD, iooW34Y, SMR_CommunityFixPack, GUreSMy, geLeQMy, QT4sR7W, dwAWmXz, kU4CYvP, iaTFkGp, Ad7YoNt, mSTRrs 
+						Lua 0:00:32:570
+*** Reloading assets from folder 'BinAssets/'
+						Lua 0:00:34:336
+*** Assets reloaded in 1.8 s, read 359.0 MB, read speed 203.3 MB/s, average read 8138 bytes.
+						Lua 0:00:35:260
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=26528 id=7
+						Lua 0:00:36:047
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=26528 id=8
+						Lua 0:00:36:830
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=26528 id=9
+						Lua 0:00:37:604
+
+Load anyway : The following mods are missing or outdated:
+
+<color em>Affordable Shopping - Not Everybody Buys
+Dome and Extractor Range Extend
+Dune Radio
+Endless FM
+Luxus-Apartment THE TARDIS
+Mega Dome 2
+Passage Network
+RemoveForestationLimit
+Smart Graduates
+Start With The Domes You Want
+Start with all Breakthroughs
+AutoMatic Factory Upgrades
+Nurseries Limit Births</color>
+
+Some features may not work. 						Lua 0:00:37:605
+
+
+						Lua 0:00:37:616
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=26528 id=10
+						Lua 0:00:39:764
+[mod] [SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=PreLoadGame t=26528 id=11
+[SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=PreLoadGame t=26528 id=11
+						Lua 0:00:40:455
+Unpersist missing permanent: ApartmentsBase:NewBuildingTemplate_2 | Fallback permanent: class ApartmentsBase
+						Lua 0:00:40:522
+Unpersist missing permanent: Mod/mSTRrs | Fallback permanent: table: 0000012BDE0E15F0 [7]
+Unpersist missing permanent: DomeMega:NewBuildingTemplate | Fallback permanent: class DomeMega
+						Lua 0:00:40:549
+Unpersist missing permanent: Preset:NotificationPreset.5xSun_Status | Fallback permanent: NotificationPreset "BreakthroughDiscovered": 0000012BE68C61C0
+						Lua 0:00:40:550
+[mod] Savegame references Mod Affordable Shopping - Not Everybody Buys (id WUoPQ6R, v1.05-023) which is not present
+[mod] Savegame references Mod Dome and Extractor Range Extend (id W7hDysd, v0.00-016) which is not present
+[mod] Savegame references Mod Dune Radio (id PquXTU, v1.02-026) which is not present
+[mod] Savegame references Mod Endless FM (id eoJkQuu, v0.00-009) which is not present
+[mod] Savegame references Mod Luxus-Apartment THE TARDIS (id F7XeoeH, v0.00-012) which is not present
+[mod] Savegame references Mod Mega Dome 2 (id K76CAwD, v0.00-030) which is not present
+[mod] This savegame tries to load Mod Passage Network (id iooW34Y, v1.00-038), which is present, but not loaded
+[mod] This savegame tries to load Mod Relaunched Fix Pack (id SMR_CommunityFixPack, v1.00-019), which is loaded with a different version 1.00-020
+[mod] Savegame references Mod RemoveForestationLimit (id GUreSMy, v1.04-013) which is not present
+[mod] Savegame references Mod Smart Graduates (id geLeQMy, v1.01-074) which is not present
+[mod] Savegame references Mod Start With The Domes You Want (id QT4sR7W, v0.00-099) which is not present
+[mod] Savegame references Mod Start with all Breakthroughs (id dwAWmXz, v0.00-127) which is not present
+[mod] Savegame references Mod Stellaris Radio (id kU4CYvP, v1.01-017) which is not present
+[mod] Savegame references Mod 5xSun - AutoRefill (id iaTFkGp, v0.00-031) which is not present
+[mod] Savegame references Mod AutoMatic Factory Upgrades (id Ad7YoNt, v1.06-083) which is not present
+[mod] Savegame references Mod Nurseries Limit Births (id mSTRrs, v1.01-014) which is not present
+						Lua 0:00:42:156
+[mod] [SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:42:161
+[mod] [CommunityFixPack] ExoticDepositSign: 1 Exotic Minerals deposit(s) re-signed onto the clean entity
+						Lua 0:00:42:163
+[mod] [CommunityFixPack] SilentHitMomentFX: restored 34 missing hit-moment tracker(s) on load
+						Lua 0:00:42:168
+[RailShaftDev] UniversalTunnel allowed underground = true (DisabledInEnvironment is a GameVar: this is
+[RailShaftDev]   written into the save, and stays there if this mod is removed -- throwaway saves only)
+[RailShaftDev] ready. SMRRailShaft.Status() for where things stand.
+						Lua 0:00:42:182
+Applied 28 savegame fixup(s) in 14 ms: AAA_SetLRManagerMap, AgronomistFarmCropGrowth, CleanStaleRoverDamagedNotificationObjects, ConstructionSiteFlightMarks, CureSmallCropTechLock, CureUndergroundCropTechLock, FixDustGeneratorThrowTimes, FixFoodServiceMealsServedByShift, HospitalExoticMineralTreatment, KickWorkersFromTurnedOffDomes, MarkUnavoidableSupplyDrains, MoveOpenPasturePilesOffOrigin2, PipesAtBuildableLevelSteps, PoliticalAnimalAchievement2, RemarkJumboCaves, RemoveBreathableAtmosphereAirConsumptionModifier, ResetPlanetSceneCameraState, RespawnUnreachableBottomlessPitAnomalies, ResupplyCutoffLocksDelicacies, SplitDailyCountersByShift, ZZZZ_FixLeakedRocketReservations, ZZZ_DestroyTradeRocketsWithUnplacedLandingSite, ZZZ_FactionTaskDomeCompletableInAnyDome, ZZZ_HungerLocksFoodImport, ZZZ_RebuildElevatorResourceModeRegistration, ZZZ_ReviveElevatorSharedDepots, ZZZ_UpdateRefuelRequests, Zzz_RestartStalledMaintenanceDemand
+						Lua 0:00:42:349
+game_settings:
+    sponsor: ESA
+    profile: Spelunker
+    founding_faction: EnlightenmentInitiative
+    rival_colonies: BlueSun, AssemblyOfPlanets, NewArk
+    mystery_random: 
+    game_rules: DiscoverBreakthroughs
+more_game_settings: save_game_id: Do4kjJyQJSxICWkK, mystery: MirrorSphereMystery, coordinates: 2N176E, landing_spot: ElysiumBeta, logo: Europe
+map_conditions: altitude: -2776, temperature: -15, cold_wave: 36, dust_devils: 47, dust_storm: 0, meteors: 73
+map_resources: concrete: 254, metals: 146, precious_metals: 146, water: 109
+						Lua 0:00:42:442
+[mod] [CommunityFixPack] SaveSanitizer: F95 astrogeologist-residue pass removed 0 modifier(s), left 0 unidentified
+						Lua 0:00:42:449
+Game Loaded in 9883 ms
+[mod] [SMRTK] SMRTK_PROVENANCE actions=unavailable last=unavailable present=false session=unavailable t=89403444 id=12
+[SMRTK] SMRTK_PROVENANCE actions=unavailable last=unavailable present=false session=unavailable t=89403444 id=12
+						Lua 0:00:42:459
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=89403444 id=13
+						Lua 0:00:42:472
+[mod] [SMRTK] SMRTK_DOCK action=dock_attach attached=true route="idBottom sibling" status=OK surface=one-toggle+tasks t=89403444 id=14
+						Lua 0:00:42:478
+[mod] [SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:42:613
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=89403444 id=15
+						Lua 0:00:43:100
+Game loaded on map BlankBig_04 in 10662 ms
+						Lua 0:00:43:407
+[mod] [SMRTK] SMRTK_PANEL_RESTORE open=true tab=World t=89404138 id=16
+						Lua 0:00:51:141
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipShuttle object=CargoShuttle(2000028316) status=OK t=89411865 id=17
+						Lua 0:00:53:329
+SMRCLS ready
+						Lua 0:01:01:549
+[string "for _, h in ipairs(MapGet("map", "PassageHub"..."]:1: attempt to call a nil value (global 'MapGet')
+						Lua 0:02:49:288
+[mod] [SMRTK] SMRTK_COPY action=copy flushed=true from=0 lines=38 status=OK truncated=false t=89530020 id=18
+[SMRTK] SMRTK_COPY action=copy flushed=true from=0 lines=38 status=OK truncated=false t=89530020 id=18
+						Lua 0:04:42:640
+SMRFOOT hub 11985 held 0
+SMRFOOT hub 11714 held 0
+SMRFOOTU hub 2692 unit 2000012885 at DomeInterior dist 16359 dz 80 cmd Rest
+SMRFOOTU hub 2692 unit 2000025794 at dome dist 16033 dz 142 cmd Roam
+SMRFOOTU hub 2692 unit 2000018209 at dome dist 15795 dz 175 cmd Work
+SMRFOOTU hub 2692 unit 2000009324 at dome dist 15330 dz 12 cmd VisitService
+SMRFOOTU hub 2692 unit 2000012606 at dome dist 15144 dz 49 cmd Work
+SMRFOOTU hub 2692 unit 2000012868 at dome dist 15498 dz 137 cmd Rest
+SMRFOOTU hub 2692 unit 2000021387 at passage dist 13480 dz 47 cmd VisitService
+SMRFOOTU hub 2692 unit 2000012771 at passage dist 13331 dz 47 cmd Work
+SMRFOOTU hub 2692 unit 2000009336 at passage dist 14413 dz 47 cmd Roam
+SMRFOOTU hub 2692 unit 2000023167 at passage dist 12869 dz 47 cmd VisitService
+SMRFOOTU hub 2692 unit 2000024789 at passage dist 13652 dz 47 cmd VisitService
+SMRFOOTU hub 2692 unit 2000028445 at passage dist 9351 dz 47 cmd VisitService
+SMRFOOTU hub 2692 unit 2000016611 at passage dist 13229 dz 47 cmd Work
+SMRFOOTU hub 2692 unit 2000012901 at passage dist 12008 dz 47 cmd Work
+SMRFOOTU hub 2692 unit 2000021388 at passage dist 13483 dz 47 cmd Roam
+SMRFOOTU hub 2692 unit 2000012752 at passage dist 11466 dz 47 cmd Work
+SMRFOOTU hub 2692 unit 2000026731 at passage dist 9949 dz 47 cmd GoToDome
+SMRFOOTU hub 2692 unit 2000011688 at passage dist 11663 dz 47 cmd Work
+SMRFOOTU hub 2692 unit 2000012750 at passage dist 12305 dz 47 cmd Work
+SMRFOOTU hub 2692 unit 2000010332 at passage dist 11291 dz 47 cmd Work
+SMRFOOTU hub 2692 unit 2000024546 at passage dist 11282 dz 47 cmd VisitService
+SMRFOOTU hub 2692 unit 2000024369 at passage dist 10439 dz 47 cmd VisitService
+SMRFOOTU hub 2692 unit 2000018205 at passage dist 10718 dz 47 cmd Roam
+SMRFOOTU hub 2692 unit 2000021937 at passage dist 11187 dz 47 cmd GoToDome
+SMRFOOTU hub 2692 unit 2000018733 at passage dist 10901 dz 47 cmd GoToDome
+SMRFOOTU hub 2692 unit 2000011099 at passage dist 9358 dz 47 cmd VisitService
+SMRFOOTU hub 2692 unit 2000010921 at passage dist 10218 dz 47 cmd GoToDome
+SMRFOOTU hub 2692 unit 2000011357 at passage dist 6935 dz 47 cmd VisitService
+SMRFOOTU hub 2692 unit 2000022786 at passage dist 8264 dz 47 cmd VisitService
+SMRFOOTU hub 2692 unit 2000021938 at passage dist 9148 dz 47 cmd Roam
+SMRFOOTU hub 2692 unit 2000011746 at passage dist 7855 dz 47 cmd Rest
+SMRFOOTU hub 2692 unit 2000010390 at passage dist 7644 dz 47 cmd Roam
+SMRFOOTU hub 2692 unit 2000028310 at passage dist 5539 dz 47 cmd Roam
+SMRFOOTU hub 2692 unit 2000011709 at passage dist 8464 dz 47 cmd Roam
+SMRFOOTU hub 2692 unit 2000018055 at passage dist 7253 dz 47 cmd Roam
+SMRFOOTU hub 2692 unit 2000011731 at passage dist 6998 dz 47 cmd Roam
+SMRFOOTU hub 2692 unit 2000011681 at passage dist 6863 dz 47 cmd Roam
+SMRFOOTU hub 2692 unit 2000018206 at passage dist 6387 dz 47 cmd VisitService
+SMRFOOTU hub 2692 unit 2000014420 at passage dist 6025 dz 47 cmd GoToDome
+SMRFOOTU hub 2692 unit 2000021111 at passage dist 4457 dz 47 cmd VisitService
+SMRFOOTU hub 2692 unit 2000010367 at passage dist 4073 dz 47 cmd VisitService
+SMRFOOTU hub 2692 unit 2000017824 at passage dist 2548 dz 47 cmd VisitService
+SMRFOOTU hub 2692 unit 2000020263 at passage dist 2542 dz 47 cmd VisitService
+SMRFOOTU hub 2692 unit 2000021109 at passage dist 3900 dz 47 cmd Rest
+SMRFOOTU hub 2692 unit 2000016829 at passage dist 4811 dz 47 cmd GoToDome
+SMRFOOTU hub 2692 unit 2000011417 at passage dist 4775 dz 47 cmd Roam
+SMRFOOTU hub 2692 unit 2000012735 at passage dist 4054 dz 47 cmd Roam
+SMRFOOTU hub 2692 unit 2000012742 at passage dist 2700 dz 47 cmd VisitService
+SMRFOOTU hub 2692 unit 2000014087 at passage dist 3055 dz 47 cmd GoToDome
+SMRFOOTU hub 2692 unit 2000019037 at passage dist 1602 dz 48 cmd GoToDome
+						Lua 0:04:42:641
+SMRFOOT hub 2692 held 54 DomeInterior 1 dome 5 hub2692 4 passage 44
+SMRFOOTU hub 4113 unit 2000011693 at dome dist 15986 dz 185 cmd Rest
+SMRFOOTU hub 4113 unit 2000021632 at passage dist 11582 dz 47 cmd Roam
+SMRFOOTU hub 4113 unit 2000018194 at passage dist 11459 dz 47 cmd Work
+SMRFOOTU hub 4113 unit 2000019794 at passage dist 8092 dz 47 cmd Work
+SMRFOOTU hub 4113 unit 2000010385 at PassageRamp dist 5744 dz 47 cmd Work
+SMRFOOTU hub 4113 unit 2000010375 at passage dist 6757 dz 47 cmd Rest
+SMRFOOTU hub 4113 unit 2000010384 at passage dist 6548 dz 47 cmd Work
+SMRFOOTU hub 4113 unit 2000013071 at PassageRamp dist 4531 dz 47 cmd Rest
+SMRFOOTU hub 4113 unit 2000023726 at passage dist 4821 dz 47 cmd Work
+SMRFOOTU hub 4113 unit 2000021780 at passage dist 4227 dz 47 cmd Work
+SMRFOOTU hub 4113 unit 2000010594 at passage dist 1862 dz 47 cmd Work
+SMRFOOT hub 4113 held 14 PassageRamp 2 dome 1 hub4113 3 passage 8
+SMRFOOT hub 1908 held 2 hub1908 2
+SMRFOOTU hub 2026 unit 2000021723 at passage dist 18295 dz 47 cmd Work
+SMRFOOTU hub 2026 unit 2000019630 at passage dist 17377 dz 47 cmd Work
+SMRFOOTU hub 2026 unit 2000018176 at passage dist 16297 dz 47 cmd Work
+SMRFOOTU hub 2026 unit 2000013648 at passage dist 12337 dz 47 cmd Rest
+SMRFOOTU hub 2026 unit 2000028036 at dome dist 8492 dz 50 cmd Work
+SMRFOOTU hub 2026 unit 2000015059 at passage dist 3559 dz 47 cmd Work
+SMRFOOT hub 2026 held 10 dome 1 hub2026 4 passage 5
+						Lua 0:04:48:928
+SMRMARKU col 2000012752 hub 2692 at dome dist 14382 outside false holder PassageHub cmd Work
+SMRMARKU col 2000024546 hub 2692 at dome dist 14119 outside false holder PassageHub cmd VisitService
+SMRMARKU col 2000024369 hub 2692 at passage dist 12827 outside false holder PassageHub cmd VisitService
+SMRMARKU col 2000010332 hub 2692 at dome dist 14828 outside false holder PassageHub cmd Work
+SMRMARKU col 2000011688 hub 2692 at dome dist 15199 outside false holder PassageHub cmd Work
+SMRMARKU col 2000022786 hub 2692 at passage dist 10340 outside false holder PassageHub cmd VisitService
+SMRMARKU col 2000011099 hub 2692 at passage dist 11301 outside false holder PassageHub cmd VisitService
+SMRMARKU col 2000028445 hub 2692 at passage dist 12089 outside false holder PassageHub cmd VisitService
+SMRMARKU col 2000018206 hub 2692 at passage dist 9379 outside false holder PassageHub cmd VisitService
+SMRMARKU col 2000011357 hub 2692 at passage dist 10471 outside false holder PassageHub cmd VisitService
+SMRMARKU col 2000021111 hub 2692 at passage dist 7863 outside false holder PassageHub cmd VisitService
+SMRMARKU col 2000012742 hub 2692 at passage dist 5937 outside false holder PassageHub cmd VisitService
+SMRMARKU col 2000010367 hub 2692 at passage dist 7457 outside false holder PassageHub cmd VisitService
+SMRMARKU col 2000020263 hub 2692 at passage dist 5642 outside false holder PassageHub cmd VisitService
+SMRMARKU col 2000017824 hub 2692 at passage dist 5663 outside false holder PassageHub cmd VisitService
+SMRMARKU col 2000010385 hub 4113 at passage dist 9007 outside false holder PassageHub cmd Work
+SMRMARKU col 2000011299 hub 2692 at passage dist 3213 outside false holder PassageHub cmd VisitService
+SMRMARKU col 2000021749 hub 2692 at hub2692 dist 187 outside false holder PassageHub cmd VisitService
+SMRMARKU col 2000019844 hub 2692 at hub2692 dist 245 outside false holder PassageHub cmd VisitService
+SMRMARKU col 2000025789 hub 2692 at hub2692 dist 628 outside false holder none cmd Transport
+SMRMARKU col 2000015418 hub 2692 at hub2692 dist 439 outside false holder PassageHub cmd Roam
+SMRMARKU col 2000010336 hub 2692 at hub2692 dist 517 outside false holder PassageHub cmd Roam
+SMRMARKU col 2000025893 hub 2692 at hub2692 dist 611 outside false holder PassageHub cmd GoToDome
+SMRMARKU col 2000018178 hub 2692 at hub2692 dist 628 outside false holder none cmd Transport
+SMRMARKU col 2000012748 hub 4113 at hub4113 dist 522 outside false holder PassageHub cmd VisitService
+SMRMARKU col 2000021087 hub 2692 at passage dist 2518 outside false holder PassageHub cmd Rest
+SMRMARKU col 2000018210 hub 2692 at passage dist 3277 outside false holder PassageHub cmd Roam
+SMRMARKU col 2000012765 hub 4113 at hub4113 dist 788 outside false holder PassageHub cmd Work
+SMRMARKU col 2000020410 hub 4113 at hub4113 dist 1132 outside false holder PassageHub cmd Work
+SMRMARKU col 2000019037 hub 2692 at passage dist 5135 outside false holder PassageHub cmd GoToDome
+SMRMARKU col 2000025391 hub 2692 at passage dist 3591 outside false holder PassageHub cmd GoToDome
+SMRMARKU col 2000010595 hub 2692 at passage dist 4461 outside false holder PassageHub cmd GoToDome
+SMRMARKU col 2000016376 hub 4113 at passage dist 3537 outside false holder PassageHub cmd Work
+SMRMARKU col 2000014087 hub 2692 at passage dist 6590 outside false holder PassageHub cmd GoToDome
+SMRMARKU col 2000021109 hub 2692 at passage dist 7435 outside false holder PassageHub cmd Rest
+SMRMARKU col 2000022992 hub 4113 at PassageRamp dist 3694 outside false holder PassageHub cmd GoToDome
+SMRMARKU col 2000012674 hub 4113 at passage dist 5016 outside false holder PassageHub cmd Work
+SMRMARKU col 2000010594 hub 4113 at passage dist 5395 outside false holder PassageHub cmd Work
+SMRMARKU col 2000012735 hub 2692 at passage dist 7590 outside false holder PassageHub cmd Roam
+SMRMARKU col 2000011417 hub 2692 at passage dist 8311 outside false holder PassageHub cmd Roam
+SMRMARKU col 2000016829 hub 2692 at passage dist 8346 outside false holder PassageHub cmd GoToDome
+SMRMARKU col 2000028310 hub 2692 at passage dist 8277 outside false holder PassageHub cmd Roam
+SMRMARKU col 2000014420 hub 2692 at passage dist 9379 outside false holder PassageHub cmd GoToDome
+SMRMARKU col 2000011681 hub 2692 at passage dist 9857 outside false holder PassageHub cmd Roam
+SMRMARKU col 2000011731 hub 2692 at passage dist 9938 outside false holder PassageHub cmd Roam
+SMRMARKU col 2000013071 hub 4113 at passage dist 8066 outside false holder PassageHub cmd Rest
+SMRMARKU col 2000021780 hub 4113 at passage dist 7760 outside false holder PassageHub cmd Work
+SMRMARKU col 2000023726 hub 4113 at passage dist 8244 outside false holder PassageHub cmd Work
+SMRMARKU col 2000010384 hub 4113 at PassageRamp dist 9287 outside false holder PassageHub cmd Work
+SMRMARKU col 2000019794 hub 4113 at passage dist 10388 outside false holder PassageHub cmd Work
+SMRMARKU col 2000018055 hub 2692 at passage dist 10093 outside false holder PassageHub cmd Roam
+SMRMARKU col 2000010390 hub 2692 at passage dist 10338 outside false holder PassageHub cmd Roam
+SMRMARKU col 2000011746 hub 2692 at passage dist 10474 outside false holder PassageHub cmd Rest
+SMRMARKU col 2000011709 hub 2692 at passage dist 10882 outside false holder PassageHub cmd Roam
+SMRMARKU col 2000010375 hub 4113 at passage dist 10293 outside false holder PassageHub cmd Rest
+SMRMARKU col 2000021938 hub 2692 at passage dist 11407 outside false holder PassageHub cmd Roam
+SMRMARKU col 2000026731 hub 2692 at passage dist 11800 outside false holder PassageHub cmd GoToDome
+SMRMARKU col 2000010921 hub 2692 at passage dist 12873 outside false holder PassageHub cmd GoToDome
+SMRMARKU col 2000018205 hub 2692 at passage dist 13605 outside false holder PassageHub cmd Roam
+SMRMARKU col 2000018733 hub 2692 at passage dist 13862 outside false holder PassageHub cmd GoToDome
+SMRMARKU col 2000021937 hub 2692 at passage dist 14256 outside false holder PassageHub cmd GoToDome
+SMRMARKU col 2000016611 hub 2692 at DomeInterior dist 16380 outside false holder PassageHub cmd Work
+SMRMARKU col 2000021632 hub 4113 at dome dist 15118 outside false holder PassageHub cmd Roam
+SMRMARKU col 2000021388 hub 2692 at DomeInterior dist 16584 outside false holder PassageHub cmd Roam
+SMRMARKU col 2000019253 hub 1908 at passage dist 1773 outside false holder PassageHub cmd Work
+SMRMARKU col 2000014884 hub 1908 at passage dist 2377 outside false holder PassageHub cmd VisitService
+SMRMARKU col 2000013014 hub 1908 at hub1908 dist 492 outside false holder PassageHub cmd Work
+SMRMARKU col 2000013648 hub 2026 at DomeInterior dist 15496 outside false holder PassageHub cmd Rest
+SMRMARKU col 2000028507 hub 2026 at hub2026 dist 1095 outside false holder PassageHub cmd Work
+SMRMARKU col 2000016454 hub 2026 at passage dist 1506 outside false holder PassageHub cmd Work
+SMRMARKU col 2000015059 hub 2026 at PassageRamp dist 7092 outside false holder PassageHub cmd Work
+SMRMARKU col 2000026427 hub 2026 at passage dist 2026 outside false holder PassageHub cmd Work
+SMRMARKU col 2000028421 hub 2026 at PassageRamp dist 3679 outside false holder PassageHub cmd Work
+SMRMARKU col 2000025951 hub 2026 at PassageRamp dist 4687 outside false holder PassageHub cmd Work
+						Lua 0:04:48:929
+SMRMARK marked 74 DomeInterior 3 PassageRamp 5 dome 5 hub1908 1 hub2026 1 hub2692 7 hub4113 3 passage 49
+						Lua 0:04:53:734
+SMRANCH col 2000010368 cmd Transport at DomeInterior anchor DomeInterior anchor_dist 0 outside false marker false holder none shuttle false age 196303
+SMRANCH col 2000022849 cmd Transport at DomeInterior anchor DomeInterior anchor_dist 0 outside false marker false holder none shuttle false age 196587
+SMRANCH col 2000023785 cmd Transport at DomeInterior anchor DomeInterior anchor_dist 71 outside false marker false holder none shuttle false age 197307
+SMRANCH col 2000013092 cmd Transport at DomeInterior anchor DomeInterior anchor_dist 0 outside false marker false holder none shuttle false age 200781
+SMRANCH col 2000024296 cmd Transport at DomeInterior anchor DomeInterior anchor_dist 72 outside false marker false holder none shuttle false age 199239
+SMRANCH col 2000019224 cmd Transport at DomeInterior anchor DomeInterior anchor_dist 0 outside false marker false holder none shuttle false age 203861
+SMRANCH col 2000018030 cmd Transport at none anchor passage anchor_dist 4739 outside 89622502 marker false holder none shuttle false age 132643
+SMRANCH col 2000022524 cmd Transport at none anchor passage anchor_dist 3541 outside 89624703 marker false holder none shuttle false age 133998
+SMRANCH col 2000025789 cmd Transport at hub2692 anchor hub2692 anchor_dist 0 outside false marker true holder none shuttle false age 199971
+SMRANCH col 2000018178 cmd Transport at hub2692 anchor hub2692 anchor_dist 0 outside false marker true holder none shuttle false age 134108
+SMRANCH col 2000010516 cmd Transport at none anchor passage anchor_dist 291 outside 89572953 marker false holder none shuttle false age 133922
+SMRANCH col 2000019225 cmd Transport at none anchor passage anchor_dist 281 outside 89569613 marker false holder none shuttle false age 133184
+SMRANCH col 2000017177 cmd Transport at PassageRamp anchor PassageRamp anchor_dist 88 outside 89573652 marker false holder none shuttle false age 132977
+SMRANCH col 2000010372 cmd Transport at none anchor passage anchor_dist 292 outside 89502620 marker false holder none shuttle false age 211159
+SMRANCH col 2000010364 cmd Transport at dome anchor passage anchor_dist 31718 outside false marker false holder none shuttle true age 372904
+SMRANCH col 2000010306 cmd Transport at passage anchor passage anchor_dist 64 outside 89589620 marker false holder none shuttle false age 133683
+SMRANCH col 2000024955 cmd Transport at none anchor passage anchor_dist 887 outside false marker false holder none shuttle true age 211159
+SMRANCH col 2000024766 cmd Transport at none anchor passage anchor_dist 309 outside 89503216 marker false holder none shuttle true age 211159
+SMRANCH rescues 18
+						Lua 0:04:58:387
+[mod] [SMRTK] SMRTK_COPY action=copy flushed=true from=0 lines=209 status=OK truncated=false t=89659119 id=19
+[SMRTK] SMRTK_COPY action=copy flushed=true from=0 lines=209 status=OK truncated=false t=89659119 id=19
+						Lua 0:04:58:777
+[mod] [SMRTK] SMRTK_CLEAR action=clear status=OK t=89659511 id=20
+						Lua 0:16:23:236
+SMRFOOT hub 11985 held 0
+SMRFOOT hub 11714 held 0
+SMRFOOTU hub 2692 unit 2000028286 at dome dist 16107 dz 130 cmd Rest
+SMRFOOTU hub 2692 unit 2000026369 at passage dist 13623 dz 47 cmd VisitService
+SMRFOOTU hub 2692 unit 2000027999 at passage dist 14382 dz 47 cmd VisitService
+SMRFOOTU hub 2692 unit 2000026470 at passage dist 14135 dz 47 cmd GoToDome
+SMRFOOTU hub 2692 unit 2000023348 at DomeInterior dist 16592 dz 53 cmd GoToDome
+SMRFOOTU hub 2692 unit 2000018055 at dome dist 16032 dz 143 cmd Rest
+SMRFOOTU hub 2692 unit 2000020785 at dome dist 14866 dz 47 cmd GoToDome
+SMRFOOTU hub 2692 unit 2000013425 at dome dist 14861 dz 47 cmd Rest
+SMRFOOTU hub 2692 unit 2000011891 at dome dist 14808 dz 47 cmd Rest
+SMRFOOTU hub 2692 unit 2000018088 at dome dist 15754 dz 173 cmd GoToDome
+SMRFOOTU hub 2692 unit 2000028507 at passage dist 10231 dz 47 cmd VisitService
+SMRFOOTU hub 2692 unit 2000011548 at passage dist 13999 dz 47 cmd Work
+SMRFOOTU hub 2692 unit 2000010366 at passage dist 14350 dz 47 cmd GoToDome
+SMRFOOTU hub 2692 unit 2000011685 at passage dist 13319 dz 47 cmd VisitService
+SMRFOOTU hub 2692 unit 2000019222 at passage dist 14303 dz 47 cmd Work
+SMRFOOTU hub 2692 unit 2000012901 at passage dist 12058 dz 47 cmd Work
+SMRFOOTU hub 2692 unit 2000018285 at passage dist 11748 dz 47 cmd VisitService
+SMRFOOTU hub 2692 unit 2000010594 at passage dist 13810 dz 47 cmd GoToDome
+SMRFOOTU hub 2692 unit 2000020603 at passage dist 12709 dz 47 cmd GoToDome
+SMRFOOTU hub 2692 unit 2000018194 at passage dist 12423 dz 47 cmd GoToDome
+SMRFOOTU hub 2692 unit 2000028003 at passage dist 9942 dz 47 cmd GoToDome
+SMRFOOTU hub 2692 unit 2000019822 at passage dist 11367 dz 47 cmd VisitService
+SMRFOOTU hub 2692 unit 2000021937 at passage dist 12203 dz 47 cmd GoToDome
+SMRFOOTU hub 2692 unit 2000010353 at passage dist 12155 dz 47 cmd Work
+SMRFOOTU hub 2692 unit 2000012674 at passage dist 11968 dz 47 cmd GoToDome
+SMRFOOTU hub 2692 unit 2000026173 at passage dist 11327 dz 47 cmd VisitService
+SMRFOOTU hub 2692 unit 2000018855 at passage dist 11323 dz 47 cmd VisitService
+SMRFOOTU hub 2692 unit 2000022446 at passage dist 10570 dz 47 cmd VisitService
+SMRFOOTU hub 2692 unit 2000028538 at passage dist 9326 dz 47 cmd Roam
+SMRFOOTU hub 2692 unit 2000010370 at passage dist 10313 dz 47 cmd VisitService
+SMRFOOTU hub 2692 unit 2000016638 at passage dist 10979 dz 47 cmd GoToDome
+SMRFOOTU hub 2692 unit 2000024457 at passage dist 10741 dz 47 cmd VisitService
+SMRFOOTU hub 2692 unit 2000016454 at passage dist 11192 dz 47 cmd GoToDome
+SMRFOOTU hub 2692 unit 2000022727 at passage dist 10185 dz 47 cmd GoToDome
+SMRFOOTU hub 2692 unit 2000025949 at passage dist 10676 dz 47 cmd GoToDome
+SMRFOOTU hub 2692 unit 2000024766 at passage dist 9452 dz 47 cmd VisitService
+SMRFOOTU hub 2692 unit 2000014304 at passage dist 8162 dz 47 cmd VisitService
+SMRFOOTU hub 2692 unit 2000024369 at passage dist 7976 dz 47 cmd VisitService
+SMRFOOTU hub 2692 unit 2000010356 at passage dist 9284 dz 47 cmd VisitService
+SMRFOOTU hub 2692 unit 2000018173 at passage dist 10315 dz 47 cmd GoToDome
+SMRFOOTU hub 2692 unit 2000014144 at passage dist 7776 dz 47 cmd VisitService
+SMRFOOTU hub 2692 unit 2000010384 at passage dist 10155 dz 47 cmd GoToDome
+SMRFOOTU hub 2692 unit 2000025796 at passage dist 9481 dz 47 cmd Roam
+SMRFOOTU hub 2692 unit 2000012771 at passage dist 8445 dz 47 cmd Work
+SMRFOOTU hub 2692 unit 2000026731 at passage dist 6537 dz 47 cmd GoToDome
+SMRFOOTU hub 2692 unit 2000013404 at passage dist 8625 dz 47 cmd GoToDome
+SMRFOOTU hub 2692 unit 2000014420 at passage dist 9276 dz 47 cmd GoToDome
+SMRFOOTU hub 2692 unit 2000022607 at passage dist 6034 dz 47 cmd VisitService
+SMRFOOTU hub 2692 unit 2000010332 at passage dist 5948 dz 47 cmd Work
+SMRFOOTU hub 2692 unit 2000023141 at passage dist 5735 dz 47 cmd VisitService
+SMRFOOTU hub 2692 unit 2000020984 at passage dist 5673 dz 47 cmd VisitService
+SMRFOOTU hub 2692 unit 2000011737 at passage dist 7808 dz 47 cmd VisitService
+SMRFOOTU hub 2692 unit 2000020355 at passage dist 5457 dz 47 cmd Work
+SMRFOOTU hub 2692 unit 2000016228 at passage dist 8143 dz 47 cmd GoToDome
+SMRFOOTU hub 2692 unit 2000023724 at passage dist 6719 dz 47 cmd GoToDome
+SMRFOOTU hub 2692 unit 2000022758 at passage dist 7499 dz 47 cmd Roam
+SMRFOOTU hub 2692 unit 2000013733 at passage dist 7418 dz 47 cmd Rest
+SMRFOOTU hub 2692 unit 2000026224 at passage dist 3788 dz 47 cmd TransportByFoot
+SMRFOOTU hub 2692 unit 2000011688 at passage dist 3360 dz 47 cmd Work
+SMRFOOTU hub 2692 unit 2000012609 at passage dist 5108 dz 47 cmd VisitService
+SMRFOOTU hub 2692 unit 2000012752 at passage dist 4924 dz 47 cmd Work
+SMRFOOTU hub 2692 unit 2000012367 at passage dist 4909 dz 47 cmd Work
+SMRFOOTU hub 2692 unit 2000018470 at passage dist 2699 dz 47 cmd VisitService
+SMRFOOTU hub 2692 unit 2000023827 at passage dist 2697 dz 47 cmd VisitService
+SMRFOOTU hub 2692 unit 2000016789 at passage dist 4694 dz 47 cmd GoToDome
+SMRFOOTU hub 2692 unit 2000010349 at passage dist 4200 dz 47 cmd Work
+SMRFOOTU hub 2692 unit 2000011732 at passage dist 6790 dz 47 cmd GoToStation
+SMRFOOTU hub 2692 unit 2000020743 at passage dist 3904 dz 47 cmd VisitService
+SMRFOOTU hub 2692 unit 2000023900 at passage dist 4175 dz 47 cmd GoToDome
+SMRFOOTU hub 2692 unit 2000026216 at passage dist 4715 dz 47 cmd VisitService
+SMRFOOTU hub 2692 unit 2000017541 at passage dist 3994 dz 47 cmd GoToDome
+						Lua 0:16:23:237
+SMRFOOTU hub 2692 unit 2000021135 at passage dist 3870 dz 47 cmd GoToDome
+SMRFOOTU hub 2692 unit 2000014660 at passage dist 3745 dz 47 cmd GoToDome
+SMRFOOTU hub 2692 unit 2000010759 at passage dist 2454 dz 47 cmd VisitService
+SMRFOOTU hub 2692 unit 2000010341 at passage dist 2322 dz 47 cmd Work
+SMRFOOTU hub 2692 unit 2000010339 at passage dist 2447 dz 47 cmd VisitService
+SMRFOOTU hub 2692 unit 2000010302 at passage dist 1724 dz 47 cmd Rest
+SMRFOOTU hub 2692 unit 2000009370 at passage dist 1941 dz 47 cmd VisitService
+SMRFOOTU hub 2692 unit 2000018179 at passage dist 1703 dz 47 cmd Roam
+SMRFOOTU hub 2692 unit 2000009336 at passage dist 1650 dz 47 cmd VisitService
+SMRFOOT hub 2692 held 86 DomeInterior 1 dome 6 hub2692 6 passage 73
+SMRFOOTU hub 4113 unit 2000013768 at dome dist 13069 dz 50 cmd Work
+SMRFOOTU hub 4113 unit 2000021133 at passage dist 10427 dz 47 cmd Work
+SMRFOOTU hub 4113 unit 2000013650 at PassageRamp dist 9268 dz 47 cmd Work
+SMRFOOTU hub 4113 unit 2000015508 at PassageRamp dist 8735 dz 47 cmd Work
+SMRFOOTU hub 4113 unit 2000013353 at PassageRamp dist 8479 dz 47 cmd Work
+SMRFOOTU hub 4113 unit 2000013074 at passage dist 8325 dz 47 cmd Work
+SMRFOOTU hub 4113 unit 2000021599 at passage dist 6517 dz 47 cmd Work
+SMRFOOTU hub 4113 unit 2000021663 at passage dist 6110 dz 47 cmd Work
+SMRFOOTU hub 4113 unit 2000014247 at passage dist 2782 dz 47 cmd Work
+SMRFOOTU hub 4113 unit 2000012833 at passage dist 1915 dz 47 cmd Work
+SMRFOOTU hub 4113 unit 2000012738 at passage dist 1538 dz 49 cmd Work
+SMRFOOT hub 4113 held 13 PassageRamp 3 dome 1 hub4113 2 passage 7
+SMRFOOTU hub 1908 unit 2000012749 at DomeInterior dist 16475 dz 61 cmd Roam
+SMRFOOTU hub 1908 unit 2000010346 at passage dist 13017 dz 47 cmd VisitService
+SMRFOOTU hub 1908 unit 2000011064 at passage dist 12141 dz 47 cmd Rest
+SMRFOOTU hub 1908 unit 2000010720 at passage dist 12250 dz 47 cmd Rest
+SMRFOOTU hub 1908 unit 2000013039 at passage dist 12098 dz 47 cmd Rest
+SMRFOOTU hub 1908 unit 2000012394 at passage dist 12031 dz 47 cmd Rest
+SMRFOOTU hub 1908 unit 2000010480 at passage dist 11945 dz 47 cmd Roam
+SMRFOOTU hub 1908 unit 2000014265 at passage dist 9787 dz 47 cmd Roam
+SMRFOOTU hub 1908 unit 2000010587 at passage dist 9652 dz 47 cmd VisitService
+SMRFOOTU hub 1908 unit 2000010056 at passage dist 9428 dz 47 cmd Roam
+SMRFOOTU hub 1908 unit 2000011092 at passage dist 8815 dz 47 cmd VisitService
+SMRFOOTU hub 1908 unit 2000010718 at passage dist 5669 dz 47 cmd VisitService
+SMRFOOTU hub 1908 unit 2000012748 at passage dist 3528 dz 47 cmd Rest
+SMRFOOT hub 1908 held 14 DomeInterior 1 hub1908 1 passage 12
+SMRFOOTU hub 2026 unit 2000010306 at DomeInterior dist 16545 dz 47 cmd Rest
+SMRFOOTU hub 2026 unit 2000016817 at passage dist 17460 dz 47 cmd Work
+SMRFOOTU hub 2026 unit 2000024838 at passage dist 17156 dz 47 cmd Work
+SMRFOOTU hub 2026 unit 2000019153 at passage dist 16640 dz 47 cmd Work
+SMRFOOTU hub 2026 unit 2000018086 at passage dist 15459 dz 47 cmd Work
+SMRFOOTU hub 2026 unit 2000016998 at passage dist 14853 dz 47 cmd Work
+SMRFOOTU hub 2026 unit 2000028611 at passage dist 9699 dz 47 cmd Rest
+SMRFOOTU hub 2026 unit 2000018186 at passage dist 13491 dz 47 cmd Rest
+SMRFOOTU hub 2026 unit 2000016172 at passage dist 14297 dz 47 cmd Work
+SMRFOOTU hub 2026 unit 2000013832 at passage dist 13231 dz 47 cmd Rest
+SMRFOOTU hub 2026 unit 2000019037 at dome dist 14375 dz 3 cmd Work
+SMRFOOTU hub 2026 unit 2000020782 at passage dist 11837 dz 47 cmd Rest
+SMRFOOTU hub 2026 unit 2000024297 at passage dist 11038 dz 47 cmd Rest
+SMRFOOTU hub 2026 unit 2000016829 at passage dist 12489 dz 47 cmd Work
+SMRFOOTU hub 2026 unit 2000021995 at passage dist 10791 dz 47 cmd Roam
+SMRFOOTU hub 2026 unit 2000011975 at passage dist 11353 dz 47 cmd Work
+SMRFOOTU hub 2026 unit 2000026405 at passage dist 6978 dz 47 cmd Rest
+SMRFOOTU hub 2026 unit 2000026425 at passage dist 5709 dz 47 cmd Rest
+SMRFOOTU hub 2026 unit 2000016661 at passage dist 6573 dz 47 cmd Rest
+SMRFOOTU hub 2026 unit 2000021723 at passage dist 6405 dz 47 cmd Rest
+SMRFOOTU hub 2026 unit 2000016520 at PassageRamp dist 6240 dz 47 cmd Work
+SMRFOOTU hub 2026 unit 2000016830 at PassageRamp dist 6040 dz 47 cmd Work
+SMRFOOTU hub 2026 unit 2000017100 at passage dist 5052 dz 47 cmd Rest
+SMRFOOTU hub 2026 unit 2000018199 at passage dist 2062 dz 47 cmd Rest
+SMRFOOT hub 2026 held 27 DomeInterior 1 PassageRamp 2 dome 1 hub2026 3 passage 20
+						Lua 0:16:28:114
+SMRMARKU col 2000012901 hub 2692 at dome dist 14444 outside false holder PassageHub cmd Work
+SMRMARKU col 2000018285 hub 2692 at dome dist 14024 outside false holder PassageHub cmd VisitService
+SMRMARKU col 2000019822 hub 2692 at passage dist 13475 outside false holder PassageHub cmd VisitService
+SMRMARKU col 2000022446 hub 2692 at passage dist 12394 outside false holder PassageHub cmd VisitService
+SMRMARKU col 2000010370 hub 2692 at passage dist 13056 outside false holder PassageHub cmd VisitService
+SMRMARKU col 2000018855 hub 2692 at passage dist 14066 outside false holder PassageHub cmd VisitService
+SMRMARKU col 2000026173 hub 2692 at passage dist 14069 outside false holder PassageHub cmd VisitService
+SMRMARKU col 2000010356 hub 2692 at passage dist 10684 outside false holder PassageHub cmd VisitService
+SMRMARKU col 2000024766 hub 2692 at passage dist 10931 outside false holder PassageHub cmd VisitService
+SMRMARKU col 2000024369 hub 2692 at passage dist 10719 outside false holder PassageHub cmd VisitService
+SMRMARKU col 2000014304 hub 2692 at passage dist 10904 outside false holder PassageHub cmd VisitService
+SMRMARKU col 2000028507 hub 2692 at passage dist 12354 outside false holder PassageHub cmd VisitService
+SMRMARKU col 2000011732 hub 2692 at passage dist 9668 outside false holder PassageHub cmd GoToStation
+SMRMARKU col 2000012771 hub 2692 at passage dist 10007 outside false holder PassageHub cmd Work
+SMRMARKU col 2000010332 hub 2692 at passage dist 8689 outside false holder PassageHub cmd Work
+SMRMARKU col 2000022607 hub 2692 at passage dist 8776 outside false holder PassageHub cmd VisitService
+SMRMARKU col 2000014144 hub 2692 at passage dist 10518 outside false holder PassageHub cmd VisitService
+SMRMARKU col 2000012609 hub 2692 at passage dist 7762 outside false holder PassageHub cmd VisitService
+SMRMARKU col 2000020355 hub 2692 at passage dist 8198 outside false holder PassageHub cmd Work
+SMRMARKU col 2000020984 hub 2692 at passage dist 8414 outside false holder PassageHub cmd VisitService
+SMRMARKU col 2000023141 hub 2692 at passage dist 8477 outside false holder PassageHub cmd VisitService
+SMRMARKU col 2000020743 hub 2692 at passage dist 6506 outside false holder PassageHub cmd VisitService
+SMRMARKU col 2000010349 hub 2692 at passage dist 6818 outside false holder PassageHub cmd Work
+SMRMARKU col 2000026216 hub 2692 at passage dist 7356 outside false holder PassageHub cmd VisitService
+SMRMARKU col 2000012752 hub 2692 at passage dist 7572 outside false holder PassageHub cmd Work
+SMRMARKU col 2000023827 hub 2692 at passage dist 5288 outside false holder PassageHub cmd VisitService
+SMRMARKU col 2000018470 hub 2692 at passage dist 5294 outside false holder PassageHub cmd VisitService
+SMRMARKU col 2000011688 hub 2692 at passage dist 6101 outside false holder PassageHub cmd Work
+SMRMARKU col 2000026224 hub 2692 at passage dist 6530 outside false holder PassageHub cmd TransportByFoot
+SMRMARKU col 2000009336 hub 2692 at passage dist 3958 outside false holder PassageHub cmd VisitService
+SMRMARKU col 2000009370 hub 2692 at passage dist 4238 outside false holder PassageHub cmd VisitService
+SMRMARKU col 2000010341 hub 2692 at passage dist 3601 outside false holder PassageHub cmd Work
+SMRMARKU col 2000010339 hub 2692 at passage dist 3981 outside false holder PassageHub cmd VisitService
+SMRMARKU col 2000010759 hub 2692 at passage dist 4253 outside false holder PassageHub cmd VisitService
+SMRMARKU col 2000026404 hub 2692 at passage dist 1583 outside false holder PassageHub cmd VisitService
+SMRMARKU col 2000020910 hub 2692 at passage dist 2156 outside false holder PassageHub cmd VisitService
+SMRMARKU col 2000009330 hub 2692 at hub2692 dist 985 outside false holder PassageHub cmd VisitService
+SMRMARKU col 2000028291 hub 2692 at hub2692 dist 286 outside false holder PassageHub cmd VisitService
+SMRMARKU col 2000014247 hub 4113 at passage dist 4819 outside false holder PassageHub cmd Work
+SMRMARKU col 2000018172 hub 2692 at hub2692 dist 493 outside false holder PassageHub cmd Rest
+SMRMARKU col 2000011701 hub 2692 at hub2692 dist 595 outside false holder PassageHub cmd VisitService
+SMRMARKU col 2000014888 hub 2692 at hub2692 dist 619 outside false holder PassageHub cmd Roam
+SMRMARKU col 2000027969 hub 2692 at hub2692 dist 438 outside false holder PassageHub cmd GoToDome
+SMRMARKU col 2000011709 hub 2692 at hub2692 dist 766 outside false holder PassageHub cmd Rest
+SMRMARKU col 2000023607 hub 2692 at hub2692 dist 898 outside false holder PassageHub cmd Rest
+SMRMARKU col 2000024837 hub 2692 at hub2692 dist 1437 outside false holder PassageHub cmd Roam
+SMRMARKU col 2000010385 hub 4113 at hub4113 dist 512 outside false holder PassageHub cmd Work
+SMRMARKU col 2000012765 hub 2692 at passage dist 2452 outside false holder PassageHub cmd GoToDome
+SMRMARKU col 2000010300 hub 2692 at passage dist 3545 outside false holder PassageHub cmd Roam
+SMRMARKU col 2000014087 hub 4113 at passage dist 1568 outside false holder PassageHub cmd Work
+SMRMARKU col 2000022915 hub 2692 at passage dist 3960 outside false holder PassageHub cmd GoToDome
+SMRMARKU col 2000020410 hub 2692 at passage dist 4092 outside false holder PassageHub cmd GoToDome
+SMRMARKU col 2000018179 hub 2692 at passage dist 4444 outside false holder PassageHub cmd Roam
+SMRMARKU col 2000010302 hub 2692 at passage dist 4463 outside false holder PassageHub cmd Rest
+SMRMARKU col 2000010375 hub 4113 at passage dist 3172 outside false holder PassageHub cmd GoToDome
+SMRMARKU col 2000014660 hub 2692 at passage dist 6487 outside false holder PassageHub cmd GoToDome
+SMRMARKU col 2000021135 hub 2692 at passage dist 6612 outside false holder PassageHub cmd GoToDome
+SMRMARKU col 2000017541 hub 2692 at passage dist 6737 outside false holder PassageHub cmd GoToDome
+SMRMARKU col 2000023900 hub 2692 at passage dist 6918 outside false holder PassageHub cmd GoToDome
+SMRMARKU col 2000016789 hub 2692 at passage dist 7437 outside false holder PassageHub cmd GoToDome
+						Lua 0:16:28:115
+SMRMARKU col 2000023390 hub 4113 at passage dist 3945 outside false holder PassageHub cmd Work
+SMRMARKU col 2000012738 hub 4113 at passage dist 4277 outside false holder PassageHub cmd Work
+SMRMARKU col 2000012833 hub 4113 at passage dist 4654 outside false holder PassageHub cmd Work
+SMRMARKU col 2000012367 hub 2692 at passage dist 7652 outside false holder PassageHub cmd Work
+SMRMARKU col 2000026731 hub 2692 at passage dist 8659 outside false holder PassageHub cmd GoToDome
+SMRMARKU col 2000023724 hub 2692 at passage dist 9316 outside false holder PassageHub cmd GoToDome
+SMRMARKU col 2000013733 hub 2692 at passage dist 9718 outside false holder PassageHub cmd Rest
+SMRMARKU col 2000022758 hub 2692 at passage dist 9765 outside false holder PassageHub cmd Roam
+SMRMARKU col 2000011737 hub 2692 at passage dist 9947 outside false holder PassageHub cmd VisitService
+SMRMARKU col 2000021663 hub 4113 at PassageRamp dist 8542 outside false holder PassageHub cmd Work
+SMRMARKU col 2000021599 hub 4113 at PassageRamp dist 8775 outside false holder PassageHub cmd Work
+SMRMARKU col 2000013074 hub 4113 at PassageRamp dist 10064 outside false holder PassageHub cmd Work
+SMRMARKU col 2000013353 hub 4113 at PassageRamp dist 10250 outside false holder PassageHub cmd Work
+SMRMARKU col 2000015508 hub 4113 at passage dist 10582 outside false holder PassageHub cmd Work
+SMRMARKU col 2000013650 hub 4113 at passage dist 11239 outside false holder PassageHub cmd Work
+SMRMARKU col 2000021133 hub 4113 at passage dist 12575 outside false holder PassageHub cmd Work
+SMRMARKU col 2000016228 hub 2692 at passage dist 10153 outside false holder PassageHub cmd GoToDome
+SMRMARKU col 2000013404 hub 2692 at passage dist 10460 outside false holder PassageHub cmd GoToDome
+SMRMARKU col 2000028538 hub 2692 at passage dist 10614 outside false holder PassageHub cmd Roam
+SMRMARKU col 2000014420 hub 2692 at passage dist 10979 outside false holder PassageHub cmd GoToDome
+SMRMARKU col 2000025796 hub 2692 at passage dist 11215 outside false holder PassageHub cmd Roam
+SMRMARKU col 2000028003 hub 2692 at passage dist 11346 outside false holder PassageHub cmd GoToDome
+SMRMARKU col 2000010384 hub 2692 at passage dist 12048 outside false holder PassageHub cmd GoToDome
+SMRMARKU col 2000022727 hub 2692 at passage dist 12080 outside false holder PassageHub cmd GoToDome
+SMRMARKU col 2000018173 hub 2692 at passage dist 12259 outside false holder PassageHub cmd GoToDome
+SMRMARKU col 2000025949 hub 2692 at passage dist 12791 outside false holder PassageHub cmd GoToDome
+SMRMARKU col 2000024457 hub 2692 at passage dist 12883 outside false holder PassageHub cmd VisitService
+SMRMARKU col 2000016638 hub 2692 at passage dist 13214 outside false holder PassageHub cmd GoToDome
+SMRMARKU col 2000016454 hub 2692 at passage dist 13504 outside false holder PassageHub cmd GoToDome
+SMRMARKU col 2000012674 hub 2692 at passage dist 14528 outside false holder PassageHub cmd GoToDome
+SMRMARKU col 2000010353 hub 2692 at dome dist 14776 outside false holder PassageHub cmd Work
+SMRMARKU col 2000021937 hub 2692 at dome dist 14829 outside false holder PassageHub cmd GoToDome
+SMRMARKU col 2000018194 hub 2692 at dome dist 15059 outside false holder PassageHub cmd GoToDome
+SMRMARKU col 2000020603 hub 2692 at dome dist 15332 outside false holder PassageHub cmd GoToDome
+SMRMARKU col 2000010594 hub 2692 at dome dist 16242 outside false holder PassageHub cmd GoToDome
+SMRMARKU col 2000026470 hub 2692 at dome dist 16032 outside false holder PassageHub cmd GoToDome
+SMRMARKU col 2000019222 hub 2692 at DomeInterior dist 16634 outside false holder PassageHub cmd Work
+SMRMARKU col 2000010366 hub 2692 at DomeInterior dist 16672 outside false holder PassageHub cmd GoToDome
+SMRMARKU col 2000011736 hub 1908 at hub1908 dist 1288 outside false holder PassageHub cmd Work
+SMRMARKU col 2000012748 hub 1908 at passage dist 6268 outside false holder PassageHub cmd Rest
+SMRMARKU col 2000010718 hub 1908 at passage dist 8410 outside false holder PassageHub cmd VisitService
+SMRMARKU col 2000011092 hub 1908 at passage dist 11555 outside false holder PassageHub cmd VisitService
+SMRMARKU col 2000010056 hub 1908 at passage dist 12074 outside false holder PassageHub cmd Roam
+SMRMARKU col 2000010587 hub 1908 at passage dist 12199 outside false holder PassageHub cmd VisitService
+SMRMARKU col 2000014265 hub 1908 at passage dist 12283 outside false holder PassageHub cmd Roam
+SMRMARKU col 2000010480 hub 1908 at passage dist 14397 outside false holder PassageHub cmd Roam
+SMRMARKU col 2000012394 hub 1908 at passage dist 14530 outside false holder PassageHub cmd Rest
+SMRMARKU col 2000013039 hub 1908 at passage dist 14634 outside false holder PassageHub cmd Rest
+SMRMARKU col 2000011064 hub 1908 at passage dist 14713 outside false holder PassageHub cmd Rest
+SMRMARKU col 2000010720 hub 1908 at passage dist 14902 outside false holder PassageHub cmd Rest
+SMRMARKU col 2000010346 hub 1908 at dome dist 15753 outside false holder PassageHub cmd VisitService
+SMRMARKU col 2000013832 hub 2026 at DomeInterior dist 15643 outside false holder PassageHub cmd Rest
+SMRMARKU col 2000018186 hub 2026 at DomeInterior dist 15872 outside false holder PassageHub cmd Rest
+SMRMARKU col 2000021995 hub 2026 at passage dist 13297 outside false holder PassageHub cmd Roam
+SMRMARKU col 2000024297 hub 2026 at passage dist 13578 outside false holder PassageHub cmd Rest
+SMRMARKU col 2000020782 hub 2026 at passage dist 14392 outside false holder PassageHub cmd Rest
+SMRMARKU col 2000028611 hub 2026 at passage dist 11678 outside false holder PassageHub cmd Rest
+SMRMARKU col 2000021723 hub 2026 at passage dist 8653 outside false holder PassageHub cmd Rest
+SMRMARKU col 2000016661 hub 2026 at passage dist 8842 outside false holder PassageHub cmd Rest
+SMRMARKU col 2000026405 hub 2026 at passage dist 8746 outside false holder PassageHub cmd Rest
+SMRMARKU col 2000017100 hub 2026 at passage dist 7469 outside false holder PassageHub cmd Rest
+SMRMARKU col 2000026425 hub 2026 at passage dist 7523 outside false holder PassageHub cmd Rest
+SMRMARKU col 2000018199 hub 2026 at passage dist 4308 outside false holder PassageHub cmd Rest
+SMRMARKU col 2000016202 hub 2026 at passage dist 2779 outside false holder PassageHub cmd Rest
+SMRMARKU col 2000016830 hub 2026 at passage dist 8782 outside false holder PassageHub cmd Work
+SMRMARKU col 2000016520 hub 2026 at passage dist 8982 outside false holder PassageHub cmd Work
+SMRMARKU col 2000028360 hub 2026 at passage dist 2179 outside false holder PassageHub cmd Work
+SMRMARKU col 2000026773 hub 2026 at passage dist 2817 outside false holder PassageHub cmd VisitService
+SMRMARKU col 2000011975 hub 2026 at passage dist 14097 outside false holder PassageHub cmd Work
+SMRMARKU col 2000016172 hub 2026 at passage dist 17041 outside false holder PassageHub cmd Work
+SMRMARKU col 2000016998 hub 2026 at passage dist 17596 outside false holder PassageHub cmd Work
+SMRMARKU col 2000018086 hub 2026 at passage dist 18202 outside false holder PassageHub cmd Work
+SMRMARKU col 2000019153 hub 2026 at dome dist 19384 outside false holder PassageHub cmd Work
+SMRMARK marked 133 DomeInterior 4 PassageRamp 4 dome 10 hub1908 1 hub2692 9 hub4113 1 passage 104
+						Lua 0:16:32:371
+SMRANCH col 2000018031 cmd Transport at dome anchor passage anchor_dist 14694 outside 90345554 marker false holder none shuttle false age 111103
+SMRANCH col 2000024233 cmd Transport at PassageRamp anchor passage anchor_dist 14668 outside 90340556 marker false holder none shuttle false age 110858
+SMRANCH col 2000015974 cmd Transport at none anchor passage anchor_dist 291 outside 90292592 marker false holder none shuttle true age 112259
+SMRANCH col 2000011711 cmd Transport at none anchor passage anchor_dist 292 outside 90298363 marker false holder none shuttle true age 111823
+SMRANCH col 2000011702 cmd Transport at none anchor passage anchor_dist 31782 outside false marker false holder none shuttle true age 111966
+SMRANCH rescues 5
+						Lua 0:16:39:763
+[mod] [SMRTK] SMRTK_COPY action=copy flushed=true from=0 lines=300 status=OK truncated=true t=90359834 id=21
+[SMRTK] SMRTK_COPY action=copy flushed=true from=0 lines=300 status=OK truncated=true t=90359834 id=21

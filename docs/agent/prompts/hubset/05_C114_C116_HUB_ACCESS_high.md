@@ -74,3 +74,25 @@ show. The engine's door-versus-tunnel route after access is granted is not decid
 Append your outbox to 06's inbox and 99's, strike your row, `git rm` this file, commit on `main`.
 
 ## Notes from upstream
+
+### From hubset 04, 2026-09-24 — hub-footprint, marker and anchor readings
+
+- **Footprint verdict for the shared physical test (condition 3): clean, not mixed.** Two console
+  passes on TheGodUncle's save, unfixed code, archived at
+  [`docs/archive/logs/hubset04_footprint_Mars.exe-20260924-15.34.30-6aad2d75.log`](../../archive/logs/hubset04_footprint_Mars.exe-20260924-15.34.30-6aad2d75.log).
+  S4 refuted both passes: zero held units at `none`/`dz 0` across 80 then 140 held units on hubs
+  2692, 4113, 1908 and 2026. The sound discriminator is **hex ownership (the hub's own hex or a
+  connected passage/PassageRamp hex) OR `dz > 0`** — the hub's ramps do reach over dome hexes while
+  still elevated. Full breakdown in [C114](../../bugs/C114.md)'s 2026-09-24 sitting section.
+  `holder == hub` was not directly exercised; do not read this as validating it alone.
+- **C116 marker lifetime: reach confirmed, harm not yet caught live.** Across the same two passes,
+  ~11% of marked colonists (8/74, then 14/133) sat inside a dome, `outside false`, far from their
+  marked hub — the marker does outlive hub departure at a measurable rate. But no marked colonist
+  in either pass was on open ground (`none`) with the timer suppressed, so the specific harmful
+  combination (shelter in vacuum) is still unmeasured. Full detail in [C116](../../bugs/C116.md)'s
+  2026-09-24 sitting section — worth keeping in mind when picking your clearing hook's trigger
+  point, since indoor drift is the common case you'll see in the harness/controls, not open-ground
+  exposure.
+- Reconciliation held for both `SMRFOOT` and `SMRMARK` totals in both passes (category counts sum
+  to the reported total; no mismatch) — the readings are trustworthy, not a partial sample that
+  needs re-taking.

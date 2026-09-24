@@ -82,6 +82,47 @@ would make it shippable). Then the close-out below. Open a live todo list before
   made. The ignored `local/` evidence folders had to be created empty in the new worktree for
   its inherited `local/README.md` gate; main's evidence stayed in main's `local/`.
 
+### From hubset 04, 2026-09-24 — sitting measurement and drift inbox
+
+- **Attended, fired before 05.** TheGodUncle's save (`New Horizons 2 83`), game `1.1.1.405907`,
+  junction on `main` (unfixed code — none of this exercised the `hubset` branch), Passage Network
+  off. Two console passes roughly eleven real minutes apart. Log archived at
+  [`docs/archive/logs/hubset04_footprint_Mars.exe-20260924-15.34.30-6aad2d75.log`](../../archive/logs/hubset04_footprint_Mars.exe-20260924-15.34.30-6aad2d75.log).
+  Full readings and verdicts are in [C114](../../bugs/C114.md), [C115](../../bugs/C115.md) and
+  [C116](../../bugs/C116.md)'s 2026-09-24 sitting sections; summary below.
+- **S4 (C114/C116 footprint) refuted, both passes.** 80 then 140 held units across four hubs, zero
+  at `none`/`dz 0`. Discriminator handed to 05: hex ownership (hub or connected passage) OR
+  `dz > 0`. Reconciliation (category counts sum to `held`) passed both times.
+- **C115 anchor confirmed live**, independent of the desk harness: two colonists on the unfixed
+  code showed the exact obsolete-pickup shape (physically at a dome hex, stored anchor at a passage
+  hex, far apart) — one pre-departure (`outside false`), one mid-fatal-sequence (`outside` timer
+  running, marker already gone), matching the field findings' colonist `2000011174` pattern.
+- **C116 marker lifetime: reach confirmed (~11% of marked colonists indoors, far from their hub,
+  both passes), but the harmful outside/vacuum combination was not observed in either pass** — every
+  stale-marker case found was indoors. Audit that 05/07 don't over-read "reach confirmed" as "harm
+  confirmed"; the entry itself is explicit that these are separate claims.
+- **Drift instance:** the three per-hub console lines this link shipped with (footprint, markers,
+  anchors) called a bare global `MapGet(...)`, which does not exist in this build — `MapGet` is a
+  method mixed onto map objects only (`CommonLua/Core/map.lua:14`), called everywhere in the
+  archived tree as `<map>:MapGet(...)`, aggregated over the global `LoadedMaps` array. The owner hit
+  this live (`attempt to call a nil value (global 'MapGet')`) on the very first corrected-line
+  attempt; corrected at the keyboard by wrapping each query in `for _, mp in ipairs(LoadedMaps) do
+  ... mp:MapGet(...) ... end`. The desk "smoke-run" this link's own prompt claimed did not exercise
+  a live map instance and so did not catch it. Corrected text is preserved in the C114/C115/C116
+  sitting sections above (each cites the exact lines run); the retired prompt file itself was not
+  hand-edited since it is `git rm`'d at this link's own close-out. Audit whether other
+  "parsed and smoke-run on the desk" claims in this chain got the same kind of non-exercising
+  smoke-run.
+- **Drift instance:** the prompt's instruction to rerun the anchor line "when a colonist's status
+  shows 'Moving to a new Dome: Brussels'" was operationally infeasible — that status only appears in
+  a selected colonist's info panel, with no notification or log surface, making a manual watch
+  across ~867 colonists impractical. It was also unnecessary: `Colonist.lua:4647-4649` shows that
+  status is generated whenever `cmd` is `Transport`/`TransportByFoot`/`MigrateStep`, which is
+  exactly the population the anchor query (`t.dest_dome == c.dome`) already selects on every run —
+  both passes already had full coverage of it. Audit whether 06/07 (which also carry attended
+  in-game observation steps) have similar asks that should instead be phrased as "this is automatic,
+  no watching needed."
+
 ### From hubset 02, 2026-09-24 — C115 build and drift inbox
 
 - C115 branch commit `5a27e25` adds `Code/Fix_ObsoleteHomeRescue.lua`, its desk harness and
