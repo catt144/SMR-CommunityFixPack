@@ -1,7 +1,7 @@
 # hubset 05: C114 access fallback and C116 marker lifetime, on one physical on-hub test
 
 Chain rules: [README.md](README.md). Read them, then `## Notes from upstream` below, first. **Fire only
-after link 04 has recorded its footprint verdict, and after 02 and 03 have closed.**
+after link 04 has recorded its desk-derived on-hub test, and after 02 and 03 have closed.**
 
 ## Authority and outcome
 
@@ -12,7 +12,7 @@ S1 and S3 sections
 End state, on `hubset`:
 
 - One shared, synchronous physical test: this colonist stands on a live hub, or on or in one of its
-  connected passages, built on link 04's measured footprint.
+  connected passages, built on link 04's desk-derived on-hub test.
 - **C114:** a result-widening wrapper on `Colonist:HasLocalAccess` that keeps every native true and
   adds true only under the entry's four guards.
 - **C116:** the hub marker cleared on verified departure from the physical hub or passage, followed by
@@ -59,7 +59,8 @@ entries' build sections. Out: rescue tasks already booked (C115, link 02), passa
 
 ## Stops
 
-- 04's footprint verdict is mixed or missing: do not guess a discriminator; route it to the owner.
+- 04's on-hub test is missing, or 04 routed it to the owner: do not guess a discriminator; wait for
+  the owner.
 - The only route is a copy of a file-local helper chain or a blocking body: report the cost.
 - The resweep's falsifiers fire on the desk (a grant from a stale origin, a suppressed needed train):
   stop and route the facts.
@@ -75,27 +76,20 @@ Append your outbox to 06's inbox and 99's, strike your row, `git rm` this file, 
 
 ## Notes from upstream
 
-### From hubset 04, 2026-09-24 — hub-footprint, marker and anchor readings
+### From the chain author, 2026-09-24: the retired 04 sitting's verdict is void
 
-- **Footprint verdict for the shared physical test (condition 3): clean, not mixed.** Two console
-  passes on TheGodUncle's save, unfixed code, archived at
-  [`docs/archive/logs/hubset04_footprint_Mars.exe-20260924-15.34.30-6aad2d75.log`](../../archive/logs/hubset04_footprint_Mars.exe-20260924-15.34.30-6aad2d75.log).
-  S4 refuted both passes: zero held units at `none`/`dz 0` across 80 then 140 held units on hubs
-  2692, 4113, 1908 and 2026. The sound discriminator is **hex ownership (the hub's own hex or a
-  connected passage/PassageRamp hex) OR `dz > 0`** — the hub's ramps do reach over dome hexes while
-  still elevated. Full breakdown in [C114](../../bugs/C114.md)'s 2026-09-24 sitting section.
-  `holder == hub` was not directly exercised; do not read this as validating it alone.
-- **C116 marker lifetime: reach confirmed, harm not yet caught live.** Across the same two passes,
-  ~11% of marked colonists (8/74, then 14/133) sat inside a dome, `outside false`, far from their
-  marked hub — the marker does outlive hub departure at a measurable rate. But no marked colonist
-  in either pass was on open ground (`none`) with the timer suppressed, so the specific harmful
-  combination (shelter in vacuum) is still unmeasured. Full detail in [C116](../../bugs/C116.md)'s
-  2026-09-24 sitting section — worth keeping in mind when picking your clearing hook's trigger
-  point, since indoor drift is the common case you'll see in the harness/controls, not open-ground
-  exposure.
-- Reconciliation held for both `SMRFOOT` and `SMRMARK` totals in both passes (category counts sum
-  to the reported total; no mismatch) — the readings are trustworthy, not a partial sample that
-  needs re-taking.
+The note the retired sitting link left here (grave: `git show be69f7d:docs/agent/prompts/hubset/05_C114_C116_HUB_ACCESS_high.md`)
+declared the footprint "clean, not mixed" and named the discriminator "hex ownership OR `dz > 0`".
+**Do not build on it.** All 195 `SMRFOOTU` rows in its archived log
+(`docs/archive/logs/hubset04_footprint_Mars.exe-20260924-15.34.30-6aad2d75.log`) have `dz > 0`, so
+the test accepts every unit. Its `passage` category never identified which passage. And 90 rows stand
+10,000 or more game units from the hub that lists them. The owner ruled "One sitting only", and link
+04 is now a desk derivation of the on-hub test. Its outbox, when it lands below, replaces this note.
+
+Still usable from that sitting, as data rather than verdicts: the C116 marker counts (about 11% of
+marked colonists inside domes with the marker set) and the hub `units` lists naming far-away
+colonists. Both are in [C114](../../bugs/C114.md)'s and [C116](../../bugs/C116.md)'s 2026-09-24
+sections, with their corrections.
 
 ### From hubset 03, 2026-09-24 — C117 drain build and C42 source conflict
 

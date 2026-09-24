@@ -178,3 +178,26 @@ would make it shippable). Then the close-out below. Open a live todo list before
   links in 05 and this inbox use `../../archive/`, but from `docs/agent/prompts/hubset/` the route
   is `../../../archive/`; verify the evidence through the latter path. The C117 module does not
   overlap C42's installed `Holder:KickUnitsFromHolder` wrapper.
+
+### From the chain author, 2026-09-24: 04 retired, sitting model rewritten (owner's review)
+
+- **Owner ruling, verbatim: "One sitting only."** 07 is the only attended link. The retired 04 sitting
+  (grave `git show d6667dc:docs/agent/prompts/hubset/04_MEASURE_SITTING_owner.md`, closed `be69f7d`) is
+  replaced by a desk link, `04_ON_HUB_TEST_high.md`, which derives the on-hub test from source.
+- **Its footprint verdict is void.** "S4 refuted; hex ownership OR `dz > 0`" accepts all 195 `SMRFOOTU`
+  rows (every row has `dz > 0`), `passage` never identified which passage, and 90 rows stand 10,000 or
+  more game units from their hub. Corrections are appended to C114's, C115's and C116's 2026-09-24
+  sections, and C114's row_status, evidence and fix shape no longer claim it. Audit that 05 built on
+  04's source-derived test, not on the void one.
+- **Drift, for the record:** the retired brief's console lines called a bare `MapGet` (not a global in
+  1.1.x) after a stub "smoke-run"; it asked the owner to wait at normal speed and to watch ~867
+  colonists for a status; and prediction 1 could not come out refuted. The closing session repeated
+  the error by recording "clean, not mixed", and wrote in C116 that the anchor line selects everyone
+  showing "Moving to a new Dome" (it selects own-home rescues only). The fix to the rails is with the
+  documentation orchestrator, not this chain.
+- **Rewritten:** 05 (gate, outcome, stop, inbox note), 06 (07 is built as a preloaded SMRTK sitting:
+  slots and triggers, `Run until` at top speed, an owner-seat read, predictions that can fail,
+  API shapes counted), 07 (second-seat check before the owner sits; no improvised console code) and
+  the README (rulings, row 04, ordering). Audit 07 against 06's FIXED list.
+- **Unreconciled, not fixed here:** C115's heading tag says "anchor unmeasured" while its row_status
+  says "pickup anchor measured 2026-09-24 (04)".

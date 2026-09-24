@@ -28,6 +28,11 @@ report the disagreement.
   one.
 - **Out of scope:** "For the load order we will decide how and what we implement after the fixes are
   done." No link changes load order or the VacuumWalks load-time guard.
+- **Sittings:** "One sitting only." 07 is the chain's only attended link. No link may add another;
+  anything only the game can answer becomes a slot reading in 07.
+- **Sittings are preloaded:** "all these commands are things that could have been done in slots";
+  "smrtk has a build in 128x game speed for fire watch and fire after x in game time." The owner
+  clicks SMRTK slots; waits are triggers or `Run until` at top speed (06 carries the details).
 
 ## The queue
 
@@ -36,7 +41,7 @@ report the disagreement.
 | ~~01~~ | ~~`01_WORKTREE_AND_SMALL_FIXES_fanout_level_3.md`~~ | ~~fan-out 3~~ | ~~may route C111 text~~ | ~~the `hubset` branch and worktree; P3 pins; C42; F127 (desk check first); C111~~ |
 | ~~02~~ | ~~`02_C115_RESCUE_REVALIDATION_high.md`~~ | ~~high~~ | ~~no~~ | ~~C115: an obsolete own-home rescue stops at the start of `Transport`~~ |
 | ~~03~~ | ~~`03_C117_SALVAGE_DRAIN_high.md`~~ | ~~high~~ | ~~no~~ | ~~C117: a busy hub passage's in-flight colonists keep their hub endpoint through a disconnect~~ |
-| ~~04~~ | ~~`04_MEASURE_SITTING_owner.md`~~ | ~~attended~~ | ~~✅ keyboard, the reporter's save~~ | ~~hub footprint, marker and rescue-anchor readings (four console lines)~~ |
+| 04 | `04_ON_HUB_TEST_high.md` | high | no | the on-hub test C114 and C116 share, derived from source; its live readings go to 07 |
 | 05 | `05_C114_C116_HUB_ACCESS_high.md` | high | no | C114 access fallback and C116 marker lifetime, sharing one physical on-hub test |
 | 06 | `06_SITTING_PREP_medium.md` | medium | no | predictions, fixtures and the script for 07 |
 | 07 | `07_VERIFY_SITTING_owner.md` | attended | ✅ keyboard | every member in the real game, fix on and off |
@@ -47,10 +52,11 @@ report the disagreement.
 - **01 first.** It creates the branch and worktree every build uses.
 - **02 and 03 after 01**, in either order, **never at the same time**: both register a module in
   `metadata.lua` and `items.lua`.
-- **04 can fire any time**, even before 01. It builds nothing and runs on the owner's copy of
-  TheGodUncle's save.
+- **04 can fire now.** It is desk-only and builds nothing. It replaced the retired attended
+  measurement sitting, whose verdict is void (grave `git show d6667dc:docs/agent/prompts/hubset/04_MEASURE_SITTING_owner.md`,
+  closed in `be69f7d`; 05's inbox says why).
 - **05 after 04 and after 02 and 03.** It is last among the builds because its design needs 04's
-  measurements (owner's order).
+  on-hub test (owner's order).
 - **06 after 05; 07 after 06; 99 last**, on a folder holding only 99 and this README.
 - If a link finds a member cannot be built safely, it stops and routes the facts to the owner, per the
   ruling above. The chain continues with the other members only on the owner's word.
