@@ -10,6 +10,8 @@ Source citations are the archived `1.1.1.405907` tree. The Passage Network 1.38 
 is archived verbatim at `docs/archive/PassageNetwork_1.38_Code_PassageNetwork.lua`. The hub
 source audit that this sitting tests is `MIGRATION_AUDIT_2026-09-24_D_hubs.md` (seat note,
 claims cleared only where this file says so). Nothing here changes an entry's status.
+Four statements below are corrected in §7 (appended 2026-09-24): the census, the control
+configuration, the service override and the oxygen timer.
 
 ## 1 · The report and the colony
 
@@ -113,3 +115,29 @@ more often, not less, since the test loops over the cluster. **Not the cause, an
   C109, C111 as that note's §7 lists.
 - **Owed measurements:** the S4 falsifier; the S2 pickup anchor read on a dying colonist
   (`transport_task.source_landing_site[1]` on a passage hex); the phase 2b controls still open.
+
+## 7 · Corrections (appended 2026-09-24)
+
+From the Codex [resweep](MIGRATION_CROSSCHECK_HUB_RESWEEP_2026-09-24.md). The coordinating seat
+re-checked the first and third against the raw log and the archived 1.1.1.405907 source.
+
+- **Census (§1).** "858, all resident in one Geoscape dome" holds for the mods-off run (OFF:735,
+  :764). The mods-on run totals **868** (ON:623): Brussels 853, with 15 residents across ten other
+  domes (Prague 2, Bern 1, Amsterdam 2, Tallinn 1, berlin 3, London 2, Paracelsus #1 1, Planck #1 3).
+  The snapshots do not say which births, deaths or migrations made the difference.
+- **Control configuration (§2).** Both runs loaded the pack, the TestKit, the Opt-In Pack,
+  RailShaftDev and TrainHubDev (OFF:742, ON:380). This is a Passage Network off/on comparison, not a
+  pack-only or unmodded control.
+- **Service override (§5).** Not redundant. `ReassignServices` iterates `dome_network`
+  (`Lua/Stats.lua:536-546`), but the helper it reaches, `PlaceServiceInConnectedDomes`, reads
+  `home.connected_domes` (:375-386). Passage Network's temporary substitution therefore widens
+  service-capacity distribution across the network, and restoring the tables does not undo the
+  allocations. It remains outside the hub, access and rescue chain.
+- **Oxygen (§3).** "A marked colonist never starts that timer" is too strong.
+  `Buildings/Dome_Entrance.lua:71` sets outside regardless of the marker; a later marker-aware stop
+  can clear it. The watched colonist had already lost its marker, so the chain stands.
+- **`SMRDOME` (§5) and the startup dialog.** The read shows `Dome` is a table in game, after the
+  class rebuild. It does not show what `Dome` was while mod code ran. On a rig where Passage
+  Network's code runs before the pack's, VacuumWalks' load-time check (`Code/Fix_VacuumWalks.lua`,
+  `has_110_helpers`) would see the stray function and decline with the dialog. In both runs here the
+  pack loaded first (ON:95 before ON:136). Hypothesis, pending the owner's reversed-order sitting.
