@@ -5,20 +5,33 @@ the owner acted on ck212: the stalled autosave and older known-good templates
 asserted in `luaSPersist.cpp:1272` and crashed after Ignore All. The change had
 replaced the old Lua closure at permanent `cthread.WaitWakeup` with a C function;
 its source test missed old-save compatibility. This is the leading regression
-hypothesis, pending native rollback confirmation, not a recovered-save verdict.
+hypothesis, supported by the successful template and autosave rollback controls below.
 The exact pre-audit dwell closure is restored in Opt-In commit `2035dbb`. Its original
-save defect and train lock-up cause remain OPEN. No fix-pack code changed.
+save defect remains OPEN. The train lock-up is corrected below. No fix-pack code changed.
 
-Canonical evidence, remaining audit gaps and the one-at-a-time console reads:
+Canonical evidence, remaining audit gaps and runnable diagnostic reads:
 [Opt-In audit](B:/Dev/SMR/SMR-OptInPack/docs/agent/reports/TRAIN_HUB_AUDIT_111_20260923.md).
-The active sitting is Opt-In `03_Drones/5_SMOKE_medium.md`. Start with audit §8:
-enable the original mods, fully restart, load `train_hub_base`, do not overwrite it, and exit if an assertion
-appears. The agent reads the new log. Only after rollback loading is confirmed
-should a compatibility repair and old→new→save→reload test proceed. Preserve the
-stalled save; its command/route/job/track/lock reads and the remaining L5 smoke
-are still owed. Backups outside autosave rotation and crash logs are recorded in §8.
+The owner completed ck213: after enabling mods and restarting, the version-15
+template loaded without assertions and exited normally (`10.45.34-6aad2d75.log`,
+archived with the canonical report). This supports the template rollback; the
+original save defect remains open. The owner also completed ck214: `Autosave Sol
+31(3)` loaded without assertions with Train Hub and Rail Shaft enabled; the closed
+`10.49.56-6aad2d75.log` records the load and normal exit. Native reads found
+opposite siding reservations mutually blocking departures, with sound tracks and
+a clear crossing. HubExitClear now recognizes completed siding parking, retaining
+moving/incoming/crossing and native outgoing-track exclusions. After restarting
+with that correction the owner reported, "They are now unstuck." See audit §9;
+physical contact/clearance was not explicitly confirmed.
 
-ck212's attempted load is recorded above; the narrower rollback check is ck213.
+The active sitting remains Opt-In `03_Drones/5_SMOKE_medium.md`. New autosaves
+still log "Attempt to persist a C function" in the post-guard process; the owner
+was told the error can still affect autosaves. The next blocking work is the
+agent's compatible save repair, with old→new→save→reload controls. The remaining
+L5 drone smoke is also owed. Input backups outside autosave rotation and crash
+logs are recorded in §8; the partial post-guard log and stall probes are in §9.
+
+ck212's failed loads, ck213/ck214's successful rollback controls and the native
+departure result are recorded above; completed asks leave the checklist.
 The owner checklist lives here because the owner plays one game with both
 mods loaded (Opt-In owner ruling 2026-09-18). The separate cross-map drone policy
 question is Opt-In `OI-27`; it does not bind this mod. No code changed in this repo.

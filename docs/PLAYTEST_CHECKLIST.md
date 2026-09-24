@@ -141,15 +141,6 @@ When colonists queue at a platform forever or walk past a working station, call 
 - Adding trains destroys the evidence.
 Home: `docs/agent/bugs/F80.md`
 
-### ck213 · opened 2026-09-24
-When you next test the hub, restart fully and check whether train_hub_base loads without a crash.
-- Your failed autosave/template loads are recorded; Opt-In repair 3a0faff is withdrawn.
-- Re-enable the original mods before restarting; the 10:42 crash ran with them not loaded.
-- Load without saving over the template. Choose Exit Game if an assertion appears.
-- The agent reads the new log; the original save error and train stall remain open.
-- Compatibility repair and save/reload testing wait for this rollback control.
-Home: `docs/agent/reports/TRAIN_HUB_AUDIT_HANDOFF_20260924.md`
-
 ### ck194 · opened 2026-09-17
 When a colony meets an entry's takeable condition, run its recipe: C40, C42, F99.
 Home: `docs/agent/bugs/C40.md`, `docs/agent/bugs/C42.md`, `docs/agent/bugs/F99.md`
