@@ -149,3 +149,32 @@ would make it shippable). Then the close-out below. Open a live todo list before
   destination, home and position results on a malformed task. `52b6449` requires a valid
   destination and adds a native-delegation control for an invalid home. Audit the final guard,
   including the task's other ambiguous false/nil fields.
+
+### From hubset 03, 2026-09-24 — C117 build and drift inbox
+
+- C117 branch commit `38cd46c` adds `Code/Fix_PassageHubSalvageDrain.lua`, registration and
+  `tools/desk_c117_hub_salvage.py`; main commit `f87aa5b` records the
+  [C117 build](../../bugs/C117.md) and [desk output](../../../archive/logs/hubset_c117_desk_2026-09-24.txt).
+  The module extends native pre-disconnect waiting for traversers already in a hub passage and
+  returns false for fresh entries only while a usable sibling remains. No PF tunnel restoration,
+  copied blocking body, persisted field or mod-owned thread. `bodycheck` reported matching pins for
+  both targets; parsecheck and doccheck were GREEN on `hubset`, and main doccheck was GREEN.
+- Fix-on and fix-absent controls discriminate the source race: with the module, the colonist has
+  hub holder and marker before native disconnect; without it, the same interleaving lands outside.
+  The desk also tests native last-exit parity, cancellation, fresh-entry `ClearPath`, reload from
+  native fields, Require declines and chained returns. The scheduler and movement are fixtures;
+  real-game rerouting, save serialization and natural reach remain for 07. Simultaneous salvage of
+  all spokes retains native C99 behavior; no claim is made that its last-exit predicate is safe in
+  that separate case.
+- **C42 source conflict for owner disposition:** archived `Lua/Passage.lua:819` assigns
+  `PassageGridElement.OnEnterUnit = empty_func`. `LeadIn` dispatches through that method
+  (`BuildingWayPoints.lua:489-497`), so C42's recorded `LeadIn` → inherited `SetHolder(element)`
+  path does not run. No other element-holder registration path was found in this source sweep.
+  C42's teardown harness inserts a stale member synthetically; that control alone cannot prove
+  the shipped creation path. The owner has been asked to hold C42 pending a live witness or retain
+  it for audit. Audit the owner ruling and correct the C42 record before a release verdict.
+- **Drift instances:** the first C117 fixture repeated the incorrect element-holder assignment in
+  its `LeadIn` seam; source review removed it and the full harness passed again. Hubset 04's archive
+  links in 05 and this inbox use `../../archive/`, but from `docs/agent/prompts/hubset/` the route
+  is `../../../archive/`; verify the evidence through the latter path. The C117 module does not
+  overlap C42's installed `Holder:KickUnitsFromHolder` wrapper.

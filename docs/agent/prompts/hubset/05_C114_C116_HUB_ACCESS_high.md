@@ -96,3 +96,29 @@ Append your outbox to 06's inbox and 99's, strike your row, `git rm` this file, 
 - Reconciliation held for both `SMRFOOT` and `SMRMARK` totals in both passes (category counts sum
   to the reported total; no mismatch) — the readings are trustworthy, not a partial sample that
   needs re-taking.
+
+### From hubset 03, 2026-09-24 — C117 drain build and C42 source conflict
+
+- C117 code and desk harness are committed on `hubset` at `38cd46c`; the dated
+  [C117 build record](../../bugs/C117.md) and [desk output](../../../archive/logs/hubset_c117_desk_2026-09-24.txt)
+  are on `main` at `f87aa5b`. `Fix_PassageHubSalvageDrain` widens native `WouldStrandHubColonists`
+  synchronously while a traverser is in flight; it refuses new `TraverseTunnel` entries only when
+  another active, non-demolishing, non-draining spoke can take traffic. It copies neither blocking
+  body and adds no persisted field. It does not wrap C42's `Holder:KickUnitsFromHolder` target.
+- The desk loads archived 1.1.1.405907 demolition, traversal and disconnect bodies. Busy-spoke
+  fix-on arrival sets hub holder and marker before disconnect; the module-absent control arrives
+  outside. It also holds native last-exit waiting, cancellation, admission/`ClearPath`, fresh-runtime
+  drain state, shape declines and chained returns. Real game rerouting, save serialization and the
+  player-visible race are for 07. Both trees were doccheck GREEN after the commits.
+- **Source conflict, owner decision pending.** `PassageGridElement.OnEnterUnit = empty_func`
+  (`Lua/Passage.lua:819`, archived 1.1.1.405907) overrides the inherited registration that
+  [C42](../../bugs/C42.md) says `LeadIn` calls. `BuildingWayPoints.lua:489-497,531-535` confirms
+  that `LeadIn` dispatches through `OnEnterUnit`. C42's claimed stale element-list producer is
+  therefore contradicted on this build; no other source registration path was found. The owner
+  has been asked whether to hold C42 pending a live witness or retain it for audit. Do not infer
+  C42 is source verified from its synthetic teardown harness while this is unsettled.
+- **Drift instance for audit:** the first C117 fixture wrote `unit.holder = element` inside its
+  `LeadIn` seam, repeating C42's incorrect premise. Source review caught it; the fixture now
+  follows `Passage.lua:819`, and the whole desk harness passed again. The earlier 04 archive-log
+  links in this inbox use `../../archive/`; from this folder the correct route is
+  `../../../archive/`. The linked evidence still exists at `docs/archive/logs/`.

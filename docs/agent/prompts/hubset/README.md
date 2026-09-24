@@ -35,7 +35,7 @@ report the disagreement.
 |---|---|---|---|---|
 | ~~01~~ | ~~`01_WORKTREE_AND_SMALL_FIXES_fanout_level_3.md`~~ | ~~fan-out 3~~ | ~~may route C111 text~~ | ~~the `hubset` branch and worktree; P3 pins; C42; F127 (desk check first); C111~~ |
 | ~~02~~ | ~~`02_C115_RESCUE_REVALIDATION_high.md`~~ | ~~high~~ | ~~no~~ | ~~C115: an obsolete own-home rescue stops at the start of `Transport`~~ |
-| 03 | `03_C117_SALVAGE_DRAIN_high.md` | high | no | C117: a busy hub passage's in-flight colonists keep their hub endpoint through a disconnect |
+| ~~03~~ | ~~`03_C117_SALVAGE_DRAIN_high.md`~~ | ~~high~~ | ~~no~~ | ~~C117: a busy hub passage's in-flight colonists keep their hub endpoint through a disconnect~~ |
 | ~~04~~ | ~~`04_MEASURE_SITTING_owner.md`~~ | ~~attended~~ | ~~✅ keyboard, the reporter's save~~ | ~~hub footprint, marker and rescue-anchor readings (four console lines)~~ |
 | 05 | `05_C114_C116_HUB_ACCESS_high.md` | high | no | C114 access fallback and C116 marker lifetime, sharing one physical on-hub test |
 | 06 | `06_SITTING_PREP_medium.md` | medium | no | predictions, fixtures and the script for 07 |
