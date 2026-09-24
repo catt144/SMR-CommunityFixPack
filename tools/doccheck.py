@@ -146,6 +146,10 @@ RULE_HEADER_DOCS = (
     "docs/agent/prompts/README.md",
     "docs/agent/prompts/perma/HANDOFF_ORCHESTRATOR.md",
     "docs/agent/prompts/perma/RELEASE_OUTBOX.md",
+    # Added 2026-09-24 on the owner's ruling, the census clause above: chain
+    # authoring gained two rules that bind nothing else — approval for a sitting
+    # placed ahead of the build, and a second-seat read of an attended brief.
+    "docs/agent/support/CHAIN_METHOD.md",
 )
 RULE_HEADER_WARN_BYTES = 1024
 RULE_HEADER_MAX_BYTES = 2048
