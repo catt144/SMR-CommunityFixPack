@@ -11,7 +11,9 @@ is [`TESTKIT.md`](TESTKIT.md). The unattended arming harness is
 
 It lives in `B:\Dev\SMR\SMR-BugFixPack-TestKit`, a separate repo with **no remote,
 local-only by design and settled**. Never raise a push there as owed. A pack lane
-does not commit in it.
+does not commit kit code or probes in it. The one exception is a sitting's slots:
+`80_AgentSlots.lua` is agent-owned, ships nothing, and is committed there as part
+of preloading (see "Gates, then the one line to the owner").
 
 Open it with the SMR status bar (bottom-right) or **Ctrl-Shift-F11**; the bar
 carries taint, armed count, errors and Quiet at a glance. There are **no popout

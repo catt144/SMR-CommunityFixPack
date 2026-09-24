@@ -6,7 +6,9 @@ part that costs sessions when it is missing — **what a verdict from it license
 
 The kit itself is `B:\Dev\SMR\SMR-BugFixPack-TestKit`, a separate repo with **no
 remote, local-only by design and settled**. Never raise a push there as owed, and
-never commit in it from a pack lane. Its own `README.md` is the build-state
+never commit kit code or probes in it from a pack lane. The one exception is a
+sitting's slots: `80_AgentSlots.lua` is agent-owned, ships nothing, and is committed
+there as part of preloading (`SMRTK.md`). Its own `README.md` is the build-state
 document; this file is the durable part, and it is here because the kit is
 unreachable to anyone not sitting at that machine.
 
