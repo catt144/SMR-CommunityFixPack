@@ -57,3 +57,17 @@ that players hit the race; 07 salvages a busy spoke in the real game.
 Append your outbox to 05's inbox and 99's, strike your row, `git rm` this file, commit on `main`.
 
 ## Notes from upstream
+
+### From hubset 02, 2026-09-24
+
+- C115 code and its desk harness are committed on `hubset` at `5a27e25`, with a destination-validity
+  guard at `52b6449`; the dated build record is
+  in [C115](../../bugs/C115.md) on `main`. `Fix_ObsoleteHomeRescue` wraps only
+  `Colonist:Transport`. It calls native task `Cleanup` when an uncommitted own-home rescue starts
+  after the colonist has physically reached home; all other calls tail-delegate. It does not touch
+  passage traversal, demolition, the marker or `HasLocalAccess`. The branch was clean and doccheck
+  GREEN after the commit, leaving `metadata.lua` and `items.lua` ready for link 03.
+- `python tools/desk_c115_home_rescue.py` passed the obsolete, remote, committed, multi-leg and
+  fix-absent demands, plus relocation, expedition, holder, state, invalid-home and cancellation controls. The
+  fixture supplies dome geometry and movement, so the anchor and real walk remain for links 04/07.
+  C115 is `fixed` pending play and audit; this does not change C117's source-only status.

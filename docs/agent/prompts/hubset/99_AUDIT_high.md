@@ -81,3 +81,30 @@ would make it shippable). Then the close-out below. Open a live todo list before
   verification; no desk result is a play verdict. No load-order change or release surface was
   made. The ignored `local/` evidence folders had to be created empty in the new worktree for
   its inherited `local/README.md` gate; main's evidence stayed in main's `local/`.
+
+### From hubset 02, 2026-09-24 — C115 build and drift inbox
+
+- C115 branch commit `5a27e25` adds `Code/Fix_ObsoleteHomeRescue.lua`, its desk harness and
+  registration; `52b6449` tightens the valid-home guard. Main's
+  [C115 build section](../../bugs/C115.md) records the source route and
+  §3a disposition. The branch and main doccheck gates were GREEN at close-out. C115 is `fixed`
+  pending attended play and this audit; no code from the set landed on `main`.
+- The wrapper bypasses only a task owned by the colonist, directed to its recorded home, with no
+  source dome, shuttle, migration destination, departure rocket or emigration destination, an
+  uncommitted task state, a valid home and a no-holder physical `IsUnitInDome` result equal to home. It calls
+  native task `Cleanup` synchronously. Otherwise it returns native `Transport` directly. Audit
+  whether this discriminator covers the real rescue without affecting later tasks or C111's
+  synchronous command text. `bodycheck` gave two OK rows on archived 1.1.1.405907.
+- The desk loads archived `Transport`, `WaitTransport`, `ColonistTransportTask:Cleanup` and
+  `IsUnitInDome`. Obsolete skips the walk; remote, committed and multi-leg use native movement;
+  removed module restores the old walk and fails the fixed demand. Extra native controls cover
+  relocation, expedition, holder, task state, invalid home and cancellation. **Limit:** fixture geometry and
+  movement cannot establish the actual pickup anchor or door route; links 04 and 07 own those.
+- **Drift instance:** the first harness draft omitted a native `IsInWalkingDist` dependency on
+  its relocation cleanup leg. It failed there, was corrected with an explicit fixture helper,
+  and the full matrix was re-run GREEN. Audit that this stub cannot decide C115's bypass result;
+  the result depends on `IsUnitInDome` before native movement.
+- **Drift instance:** review found that the first build's equality guard could match false
+  destination, home and position results on a malformed task. `52b6449` requires a valid
+  destination and adds a native-delegation control for an invalid home. Audit the final guard,
+  including the task's other ambiguous false/nil fields.
