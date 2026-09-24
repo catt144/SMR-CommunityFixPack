@@ -27,6 +27,10 @@ return {
 		'CodeFileName', "Code/00_Core.lua",
 	}),
 	PlaceObj('ModItemCode', {
+		'name', "Hubset_OnHubNow",
+		'CodeFileName', "Code/Hubset_OnHubNow.lua",
+	}),
+	PlaceObj('ModItemCode', {
 		'name', "Fix_LanderEmptyLaunch",
 		'CodeFileName', "Code/Fix_LanderEmptyLaunch.lua",
 	}),
@@ -65,6 +69,14 @@ return {
 	PlaceObj('ModItemCode', {
 		'name', "Fix_PassageHubSalvageDrain",
 		'CodeFileName', "Code/Fix_PassageHubSalvageDrain.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Fix_HubLocalAccess",
+		'CodeFileName', "Code/Fix_HubLocalAccess.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Fix_HubMarkerDeparture",
+		'CodeFileName', "Code/Fix_HubMarkerDeparture.lua",
 	}),
 	PlaceObj('ModItemCode', {
 		'name', "Fix_RescueReturnText",

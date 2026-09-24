@@ -311,6 +311,7 @@ return PlaceObj('ModDef', {
 	-- file every fix depends on.
 	'code', {
 		"Code/00_Core.lua",
+		"Code/Hubset_OnHubNow.lua",
 		"Code/Fix_LanderEmptyLaunch.lua",
 		"Code/Fix_ShelterReflex.lua",
 		"Code/Fix_TrackSalvageWipe.lua",
@@ -321,6 +322,8 @@ return PlaceObj('ModDef', {
 		"Code/Fix_ArrivalDeaths.lua",
 		"Code/Fix_PassageStaleHolder.lua",
 		"Code/Fix_PassageHubSalvageDrain.lua",
+		"Code/Fix_HubLocalAccess.lua",
+		"Code/Fix_HubMarkerDeparture.lua",
 		"Code/Fix_RescueReturnText.lua",
 		"Code/Fix_ObsoleteHomeRescue.lua",
 		"Code/Fix_StaleReservations.lua",
