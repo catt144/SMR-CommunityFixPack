@@ -16,13 +16,25 @@ was re-read on the cited lines by the coordinating seat; **seat** means only the
 `HYPOTHESIS` means the code path is real but the trigger or the engine side is unmeasured.
 No entry, fact or checklist item was changed by this audit; §4 lists what it recommends filing.
 
+## Independent cross-check correction — 2026-09-24
+
+The [cross-check](MIGRATION_CROSSCHECK_2026-09-24.md) corrects this audit's conclusions;
+the original seat notes remain historical. C109's local-access bound is not just twenty
+hexes, and a valid hub marker can suppress outside effects. C110/C113's mechanisms do
+not establish unintended routing policy. C111 explains the display, not the reporter's
+complete journey. C112's forced choice survives fullness and direct shuttle booking can
+preserve its reservation. P1 restamps after a restarted StartMigration; the remaining
+exposure is long uninterrupted travel. P6 contradicts categorical pack innocence.
+The PT-13/phase-2b records do not supply an intact-passage, pack-off movement control.
+Recommendations below are qualified by that report; no candidate status changed.
+
 ## 0 · Outcome in one screen
 
 | question | answer | rests on |
 |---|---|---|
 | Did v15 miss a migration site? | **No.** Both F52 sites are repaired and the wrappers compose with every 1.1.1 caller; the retail on-leg of 09-23 watched both. | §3.1; bodycheck clean on the archived tree; `PLAYTEST_PLAN_1.1.1_2026-09-23.md` phase 2b |
-| Can the pack produce the Steam symptoms? | Symptom (a) no, by construction. Symptom (c) no. Symptom (b) only by exposure: we route more colonists into passage traversal, which is native and unchecked. | §5 |
-| What did the audit find that the library does not hold? | Seven native defects (N1–N7), one of which kills colonists standing still (N1), and one structural narrowing since 1.1.0 (N2). Four pack-side defects (P1–P4), all low reach. One module is now nearly dead code (P5). | §4 |
+| Can the pack produce the Steam symptoms? | Not excluded categorically. Native display explains (a); passage routing and failed-booking P6 can change exposure/movement. No reporter trajectory establishes causation. | §5; independent cross-check |
+| What did the audit find? | Native candidates N1–N7 and pack items P1–P5. The cross-check qualifies their mechanisms, intent, reach and priorities; the original aggregate defect count was too strong. | §4; independent cross-check |
 | What changed under us? | 1.1.0 moved destination choice to a route graph but kept single-hop execution. 1.1.1 executes leg by leg and re-plans at every stop. The cache F51 repairs left the main path in 1.1.1. | §2 |
 | What is still unmeasured? | The engine pathfinder's passage-versus-open-ground choice, the N1 loop in play, the two owed phase 2b controls, and every decline path through the real `Require`. | §6 |
 
@@ -188,7 +200,7 @@ consequence is only that a mod-caused decline is reported the same way as patch 
 |---|---|---|---|
 | `Fix_ShuttleHubOffAvailable` (F54) | global `IsLRTransportAvailable`, ten call sites incl. the graph's shuttle fill | yes | safe: it can only remove shuttle legs and add walks, and those walks take a passage when one exists (:1922-1924) |
 | `Fix_ShuttleTransportCache` (F51) | full replacement of `FindTransportationModeToCommunity` | **nearly dead**: fallback only | P5, retire or re-scope |
-| `Fix_StaleReservations` (F58) | `Residence:ReserveResidence` stamp plus a daily sweep | yes | P1: re-reservation into the same dome returns early (`Dome.lua:3483-3485`, cleared) so a journey's slot is never restamped |
+| `Fix_StaleReservations` (F58) | `Residence:ReserveResidence` stamp plus a daily sweep | yes | P1 corrected: a restarted StartMigration clears and restamps; uninterrupted long travel and same-slot retargets can still age out |
 | `Fix_FreedHousingNotice` (F59) | `SetResidence` post-wrapper | yes | P4, low: can house a homeless migrant in its origin dome mid-walk, as vanilla's own triggers can |
 | `Fix_ArrivalDeaths` (F53/C83/C102) | `Idle` pre-wrapper on `arriving`, `OnArrival`, `GetExpeditionReturnDome` | yes; arrivals are not on the graph | P2: the reroute rewrites `emigration_dome` (`Fix_ArrivalDeaths.lua:485-486`, cleared) and leaves the arrival-time reservation in the rejected dome |
 | `Fix_ShelterReflex` (F73b) | `Idle` pre-wrapper | yes | design interplay: an outdoor mid-journey idle (after `FailMigrationStep` or a shuttle drop) is sent to Rest at the **old** home; the destination reservation stays held |
@@ -223,13 +235,13 @@ decides. Native rows are candidates for `bugs/`; none is filed by this audit.
 
 | id | defect | trigger | falsifier | status | recommend |
 |---|---|---|---|---|---|
-| **N1** | A colonist with `self.dome` set and one failed entry loops Idle → Abandoned → a walk-cap guard that sleeps and idles **without moving or counting a failure**, standing outside until it suffocates; the teleport rescue needs 100 counted failures. `Colonist.lua:2501-2503, :1452, :1477`; `ColonistTransport.lua:753-760`; `:518-527`. | within 20 hexes of home (`HasLocalAccess`) yet no walkable path under the cap: a pocket, or a colonist dumped onto passage-hub geometry (the shape C99 describes) | a colonist in that state moves, or the log shows `dome_enter_fails` rising | **cleared** path; trigger frequency HYPOTHESIS | file, P1: it is a death with no player remedy but demolition |
+| **N1** | A colonist with `self.dome` set and one failed entry loops Idle → Abandoned → a walk-cap guard that sleeps and idles **without moving or counting a failure**, standing outside until it suffocates; the teleport rescue needs 100 counted failures. `Colonist.lua:2501-2503, :1452, :1477`; `ColonistTransport.lua:753-760`; `:518-527`. | HasLocalAccess(home) passes while capped walking fails; the twenty-hex fallback is not the whole predicate, and a hub dump alone does not establish oxygen exposure | a colonist in that state moves, or the log shows `dome_enter_fails` rising | **cleared** path; trigger frequency HYPOTHESIS | conditional diagnostic: fatal ordinary-play route and recovery unproven |
 | **N2** | Passage reach in the planner is one hop, from non-walk nodes only; a dome two passages away and beyond the cap by path is shuttle-only or unreachable. `:3591-3596`; `Dome.lua:534, :745-747`. Dates from 1.1.0. | A–P–B passages, A→B path over the cap | B appears in the graph as `walk` | **cleared** | file, P2: it changes where colonists can go; the legacy walk test (`Dome.lua:315-316`) still honours the whole network, so the developers' intent is unclear |
-| **N3** | The status line names the dome the colonist already lives in: `TransportByFoot` registers the destination before the walk (:3840), and the `emigration_dome` guard in `Getui_command` is dead (:4676, :4713-4714); a rescue ride home shows "Moving to a new Dome: <home>" (:4463; `ColonistTransport.lua:464-471`). | every foot migration; every rescue | the Dome line mid-walk shows the origin | **cleared** | file, P3 cosmetic; it is the whole of Steam symptom (a) |
+| **N3** | `TransportByFoot` registers destination before the walk (:3840), so both display names agree. The `Getui_command` guard is outcome-redundant (:4676, :4713-4714); rescue text uses home only without a higher-precedence emigration_dome (:4463). | foot migration; qualifying rescue | the Dome line mid-walk shows the origin | **cleared mechanism, qualified by cross-check** | cosmetic explanation; not a diagnosis of the reporter's complete journey |
 | **N4** | `FailMigrationStep` and a failed train leg leave `emigration_dome` and both reservations in place and Idle never resumes the journey; a stale `emigration_dome` then outranks a later rescue ride's destination in the status text. :2129-2137; `ColonistTransport.lua:575-599`. | one failed leg | the reservation is cancelled before the next heavy-update re-plan | seat | **Owner ruling 2026-09-24: no fix.** The next re-plan releases the reservations anyway; file as a note only |
 | **N5** | `AbortMigration` keeps the booked shuttle task with `migration_dest = false`; a shuttle can later fly the colonist to the intermediate pad and register it there without a reservation, or leave it at a station or elevator. :2143-2146, :3968, :3946-3947. | abort while a leg's ride is booked but uncommitted | the task is cleared after an abort | seat | **Owner ruling 2026-09-24: intended, no fix.** The developers' comment keeps the ride deliberately, and stations and elevators are legitimate leg targets in 1.1.1, so a wrapper would interfere with real journeys; the game's own rescue and Stranded paths recover from a stray landing. Tier I note only |
-| **N6** | Re-reserving through `Dome:ReserveResidence` takes the first free residence and drops the player's forced residence pick. :2097-2100; `Dome.lua:3487-3491`; `Residence.lua:351-352`. | assigning a colonist to a residence in another dome | the chosen residence stays reserved through `StartMigration` | seat | file, P3 |
-| **N7** | A passage-only link (`-1`) is treated as infinitely far, so with any hub "available" the walk branch is skipped and a shuttle is booked instead of the passage. :1912-1915, :1922-1924. | two domes linked only by a passage, hubs on | the colonist walks the passage while a hub is available | **cleared** | file as a design question, P3; it is part of Steam symptom (c) |
+| **N6** | Foot/multi-leg start clears the selected reservation and may take a different generic home (:1925, :2097-2100; `Dome.lua:3482-3493`). The forced choice remains; direct shuttle can preserve the hold. | cross-dome assignment plus competing occupancy | the selected hold survives departure | **corrected by cross-check** | uncommon race; no build recommended pending occurrence |
+| **N7** | A negative cached distance is treated as infinitely far, so a passage-linked final leg with an available hub attempts a shuttle (:1912-1924, :1972). Booking can fail; ordinary frequency is unknown. | passage-connected pair with runtime -1, hubs on | the branch selects passage walking | **cleared mechanism; intent unproven** | design question; no routing change recommended |
 | N8 | The intermediate walk in `MigrateStep` applies no `ColonistMaxPassagePassthroughDomes` cap and offers no shuttle alternative (:2195-2212); a short leg can become a long passage detour. | ≤ cap leg, long passage chain | — | cleared reading | note only; safe in vacuum, slow |
 | N9 | Passage-hop `EnterBuilding` results are ignored in both traversing callers (:2204-2209, :3842-3849); a failed hop continues from wherever the colonist stopped. | a passage removed or blocked mid-walk | a hop failure stops the walk | seat; engine side HYPOTHESIS | file with N1 if play shows it; it is the mechanism by which more passage routing raises exposure |
 | N10 | `pairs(self.failed_domes)` in Abandoned runs on `false` or `nil` (:1458; class default :147; reset :3229). | Abandoned with no dome, no safety dome, no recorded failures | no error at :1458 in any log | HYPOTHESIS (engine `pairs` on false) | check one log before filing |
@@ -239,7 +251,7 @@ decides. Native rows are candidates for `bugs/`; none is filed by this audit.
 
 | id | defect | trigger | falsifier | status | recommend |
 |---|---|---|---|---|---|
-| **P1** | `Fix_StaleReservations` never restamps: `Dome:ReserveResidence` returns early for a slot already held in that dome, so a multi-leg journey longer than the forced-lock timeout loses its destination slot mid-journey. `Fix_StaleReservations.lua:104-114, :155-162`; `Dome.lua:3483-3485`. | a long journey, e.g. a stranded wait | a restamp seen on each `StartMigration` | **cleared** | fix: restamp on every `ReserveResidence` call, or exempt a colonist whose `emigration_dome` is that dome |
+| **P1** | `Fix_StaleReservations` can expire a long uninterrupted journey. Restarted StartMigration clears then re-reserves (:2097-2100, :2239), so it DOES restamp; same-slot retargets and continuous legs need separate treatment. `Fix_StaleReservations.lua:104-114, :155-162`; `Dome.lua:3483-3485`. | a long journey, e.g. a stranded wait | a continuous live journey retains its slot beyond timeout | **corrected by cross-check** | control live journey versus abandoned hold; neither blanket restamping nor emigration_dome alone is sufficient |
 | **P2** | `Fix_ArrivalDeaths`' C83 reroute rewrites `emigration_dome` but leaves `reserved_residence` in the rejected dome until the colonist settles or the sweep runs. `Fix_ArrivalDeaths.lua:485-486`; `RocketBase.lua:2072-2074`. | an arrival whose chosen dome was reservable but unwelcoming | `reserved_residence.parent_dome` equals the new dome after the wrapper | **cleared** mechanism; harm HYPOTHESIS | fix: cancel or move the reservation with the reroute |
 | **P3** | `Fix_VacuumWalks` wraps `GetNextMigrationLeg` and `IsInWalkingDistDome` without manifest pins. | the next game patch | — | **cleared** | add `SRC:` pins for both bodies (FIX_POLICY 2b) |
 | P4 | `Fix_FreedHousingNotice` can house a homeless, unreserved migrant in its origin dome while it walks away in `MigrateStep`; the bed is dropped on arrival. `Fix_FreedHousingNotice.lua:284-288`; `Residence.lua:161-169`; `:3123-3130`. | a vacancy in the origin dome during the walk | the migrant stays homeless after the deferred check | seat | low; vanilla's own triggers do the same |
@@ -258,21 +270,22 @@ Native, by construction, and now explained rather than only excluded: **N3**. On
 migration the colonist is registered in the destination before it walks, so the Dome line and the
 "moving to" line agree for the whole walk; a rescue ride home and a stranded return name the
 home dome as new. The pack lengthens the window by choosing passage detours over short outside
-walks, and nothing in the pack chooses a destination on 1.1.1 (the chooser, graph and leg picker
-at :3478-3821 are unwrapped; `IsLRTransportAvailable` can only remove candidates).
+walks, and destination choice still runs native graph/scoring. The leg picker IS wrapped by F125;
+its wrapper marks a subsequent distance query. Removing shuttle availability can change the
+candidate set and therefore the chosen destination.
 
 ### 5.2 (b) "walk outside, stuck near passages and production buildings, suffocate"
 
-The most complete native mechanism is **N1**, which needs an engine entry failure near
-buildings or passages and then never moves the colonist again. **N9** is how a passage route
-turns into an outside walk when a hop fails. The pack does not decide any outside walk; it does
+The most complete native mechanism is **N1**, which needs conflicting access/walk predicates after an entry failure. It is not proof that
+every such colonist remains motionless or suffocates; see the cross-check for interrupts and hub shelter state. **N9** is how a passage route
+turns into an outside walk when a hop fails. The engine chooses the eventual path; the pack changes routing inputs and does
 route more colonists into passage traversal, so it raises exposure to N1 and N9 without causing
 either. `Fix_ShelterReflex` can add an outdoor leg toward the old home (P7). If the vacuum-walk
 fix is inactive on that rig, the symptom is plain vanilla F52.
 
 ### 5.3 (c) "other colonists don't use passages between domes"
 
-No active pack module can reduce passage use: `Fix_VacuumWalks` only moves inputs *into* the
+The cross-check rejects a categorical exclusion of pack influence (see P6). In ordinary eligible short-leg cases, `Fix_VacuumWalks` only moves inputs *into* the
 passage lookup and `Fix_ShuttleHubOffAvailable` only forces walks. Native explanations, in
 order of reach: **N2** (a dome two passages away becomes a shuttle leg or is unreachable),
 **N7** (a passage-only pair books a shuttle when any hub is available), a breathable map
