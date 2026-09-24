@@ -36,5 +36,15 @@ The owner checklist lives here because the owner plays one game with both
 mods loaded (Opt-In owner ruling 2026-09-18). The separate cross-map drone policy
 question is Opt-In `OI-27`; it does not bind this mod. No code changed in this repo.
 
+**New candidate awaiting ck215:** the owner proposed a save-boundary guard.
+Opt-In now restores the native waiter only around PersistGame and marks new
+metadata so the loader selects the matching mapping. It restores the hub wrapper
+after save success/failure and after load; unmarked existing hub saves retain
+the old mapping. Local tests pass, including deliberately broken snapshot/load
+controls, but native saving/reloading is not yet verified. The original autosave
+rotated out during play and was restored byte-for-byte from the protected copy
+without overwrite; the owner's named post-stuck save was also backed up. See
+audit §10. Pre-wrapper unmarked hub saves remain an ambiguous older case.
+
 Executed model from the transcript: GPT-6 (Codex), no subagents. The native result
 and remaining source checks must be recorded at the canonical Opt-In report.
