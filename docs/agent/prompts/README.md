@@ -51,6 +51,7 @@ The `declared class` values below are gate inputs, not conclusions inferred from
 
 | chain | declared class | state |
 |---|---|---|
+| `hubset/` | `live` | authored 2026-09-24: builds, verifies and audits the hub release set (C114-C117, C42, C111, F127, P3) as one release, on a `hubset` branch in its own worktree; 04 is the owner's measurement sitting and can fire any time |
 | `fixtoggles/` | `live` | authored 09-11: on/off controls per fix; its README is the manifest, checklist 148 |
 | `smrcf-modbrowser/`, `smrcf-verify/` | `live` | grouped entry: C35 detector is fireable only after the root freeze; C52 stays parked until an explicit owner unpark |
 

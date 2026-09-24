@@ -57,6 +57,9 @@ so more hub crossings) and its residue hypothesis is refuted. Overturn only on e
    sitting refutes a member, there is no standing rule (owner, 2026-09-24: "it depends on the
    circumstances and information"): stop and bring the owner the sitting's facts, what the member
    still covers, and what dropping or holding would ship; the owner decides case by case.
+   **Build chain:** [`hubset/`](hubset/README.md) (authored 2026-09-24) carries the builds, the
+   measurement sitting, the verification sitting and the audit; the owner routes builds to Codex and
+   the audit to Fable. The notes below are its history.
    Build order: the owner approved S1 first; the resweep ranks C114, C115, C117, C116, then C42, with
    F127 and P3 inside the set and the C109 sitting diagnostic only. The owner has not chosen
    between the two orders. C114 and C116 cannot be built before the hub-footprint measurement
