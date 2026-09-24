@@ -94,7 +94,7 @@ comments is written by `python tools/doccheck.py --regen` and checked by
 
 <!-- GENERATED TOOL ROWS — never hand-edit; regenerate with: python tools/doccheck.py --regen -->
 
-*82 scripts, every `tools/*.py` on disk. This block is GENERATED: a row's text is copied from the script's own header, so a wrong row is repaired in the script, never here.*
+*83 scripts, every `tools/*.py` on disk. This block is GENERATED: a row's text is copied from the script's own header, so a wrong row is repaired in the script, never here.*
 
 ### Repo gates, and the falsifiers that keep them honest
 
@@ -244,6 +244,7 @@ New since the last grouping pass. Give each a home in `TOOL_GROUPS` in `tools/do
 | [`desk_f125_vacuum.py`](desk_f125_vacuum.py) | F125/F52 composable migration controls on archived 1.1.1.405907 Lua. |
 | [`desk_f127_arrival_booking.py`](desk_f127_arrival_booking.py) | F127: archived 1.1.1 arrival booking, full-dome Homeless label, and fix-removed control. |
 | [`desk_gamepatch_retirements.py`](desk_gamepatch_retirements.py) | 1.1.1 retirement source controls and active pack-on/pack-off desk controls. |
+| [`desk_hubset07_rehearsal.py`](desk_hubset07_rehearsal.py) | hubset 07 sitting instruments: a declared-VOID desk rehearsal. |
 | [`gamepatch_111_census.py`](gamepatch_111_census.py) | Reconcile the 1.1.1 build response by name, including companion probe removal. |
 | [`paradox_card.py`](paradox_card.py) | Open the Paradox store description as a formatted page, ready to copy. |
 | [`replacecheck.py`](replacecheck.py) | Which modules redefine a shipped declaration outright, and which delegate to a captured original they actually call? |
