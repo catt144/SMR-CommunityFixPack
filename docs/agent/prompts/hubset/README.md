@@ -47,7 +47,7 @@ report the disagreement.
 | ~~04~~ | ~~`04_ON_HUB_TEST_high.md`~~ | ~~high~~ | ~~no~~ | ~~the on-hub test C114 and C116 share, derived from source; its live readings go to 07~~ |
 | ~~05~~ | ~~`05_C114_C116_HUB_ACCESS_high.md`~~ | ~~high~~ | ~~no~~ | ~~C114 access fallback and C116 marker lifetime, sharing one physical on-hub test~~ |
 | ~~06~~ | ~~`06_SITTING_PREP_medium.md`~~ | ~~medium~~ | ~~no~~ | ~~predictions, fixtures and the script for 07~~ |
-| 07 | `07_VERIFY_SITTING_owner.md` | attended | ✅ keyboard | every member in the real game, fix on and off |
+| ~~07~~ | ~~`07_VERIFY_SITTING_owner.md`~~ | ~~attended~~ | ~~✅ keyboard~~ | ~~every member in the real game, fix on and off~~ |
 | 99 | `99_AUDIT_high.md` | high | ✅ raises | adversarial audit of the branch; SHIP / SHIP WITH CHANGES / NO SHIP; on SHIP and the owner's go, the merge and the records |
 
 ## Ordering

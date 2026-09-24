@@ -320,3 +320,46 @@ verified only." "We are doing the bare minimal testing in game needed to ship th
 C42, F127 and P3 ship desk-verified; audit them against their desk harnesses, not play. 06's F127
 stop and its "not played, routed to 99" list (05's other C114 controls, C116 save/reload, R4's extra
 fields) are withdrawn by this ruling, not owed. R7 is not run.
+
+### From hubset 07, 2026-09-24 — the sitting ran; verdicts and drift inbox
+
+Both segments ran on New Horizons 2 83 (sol 125): A on `main`, B on `hubset` `7cf48a2`, TestKit `66288da`.
+The B2 read-back held: `build=hubset`, all six modules `active` and `applied`. Evidence is in `docs/archive/logs/`:
+`hubset07_segA_main_2026-09-24.log`, `hubset07_segB_hubset_2026-09-24.log`, the owner relay
+`hubset07_owner_relay_2026-09-24.md` and two owner screenshots (`hubset07_A3a/B3a_owner_screenshot.jpg`).
+Each member's entry carries a dated "hubset 07 sitting" section. **No entry is `tested-attended`**: the owner
+watched no fix work.
+
+| # | member | `main` | `hubset` |
+|---|---|---|---|
+| P1 | C115 | NOT_SAMPLED (no own-home rescue at load) | NOT_SAMPLED (same) |
+| P2 | C115 | HELD (16 of 16) | HELD (16 of 16) |
+| P3 | C114 hub | **REFUTED** (defect absent: no booking, safe end) | HELD (same outcome) |
+| P4 | C114 mid-spoke | **REFUTED** (same) | HELD (same outcome) |
+| P5 | C116 | NOT_SAMPLED ×2 | NOT_SAMPLED ×2 |
+| P6 | C116 ramp | HELD ×2 | HELD ×2 |
+| P7, P8 | C117 | NOT_SAMPLED (watch timeout) | NOT_SAMPLED (watch timeout) |
+| P11 | C111 | HELD (owner screenshot) | **REFUTED** (still T 4333; owner screenshot) |
+| P12 | C111 | NOT_SAMPLED (no relocation) | NOT_SAMPLED |
+| R1-R6 | 04 on-hub test | all HELD (R1/R2 at boot and after traffic) | all HELD |
+
+**Owner decisions (no standing rule; facts in the entries):**
+- **C111:** the fix did not change the live text. Cause not found; candidates are in the entry.
+- **C114:** the sitting cannot discriminate it, because the defect did not reproduce with the fix off.
+- **C117:** unobserved. The C115 own-home path and C116's clear path were also not exercised.
+
+**Drift and instrument defects:**
+- **`h7_drain` cannot sample at 128x.** Its 3-game-hour window (`80_AgentSlots.lua:776`) ends after
+  90,368 game ms, but the salvage countdown ticks in real time (`Demolishable.lua:108,117`, 1.1.1.405907).
+  At factor 128000 it needs about 640,000 game ms (INFERRED), so `OnDemolish` never ran in either segment.
+  The 06 rehearsal's scratch variants did not model the countdown.
+- **No chime.** Every trigger logged `sound=true`, but the owner heard no chime at A4. The self-pause was
+  used as the signal instead.
+- **Step 1 did not hold.** At the pre-sitting check, Mars.exe was already running at the main menu,
+  booted on `main` with the slots loaded and no save loaded. The owner proceeded on it. The fixture was
+  backed up before load (sha256 `036e130d…`, identical after the sitting), and no save was written.
+- **Label collision.** The script's prediction "P3" (C114 hub) shares a name with member P3 (the
+  VacuumWalks pins), which the scope cut says gets no reading.
+- **Owner observation, A6:** "multiple colonist on the screen with o2 readings". Captured as SMRTK
+  screenshots 0074-0076 (`SMR-ScreenCaptures`); unexamined. The followed subjects had `open_seen=false`.
+- **A3b was NOT RUN in both segments**, so the relocation subject never existed on this fixture.

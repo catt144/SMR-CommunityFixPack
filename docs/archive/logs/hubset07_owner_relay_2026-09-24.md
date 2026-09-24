@@ -1,0 +1,21 @@
+# hubset 07 owner relay (verbatim, in order)
+- A1+A2 (segment A, main): "done"
+- 18:22 A3a (main, slot 6 stage 1): owner sent a screenshot (hubset07_A3a_owner_screenshot.jpg) instead of speaking: Bogdan Bojidarov, Dome Brussels, Residence blank, Status "Moving to a new Dome: Brussels". Log id=43 subject Colonist(2000010346) tid=4333 P11 verdict=HELD.
+  DRIFT to check at close: Scratch said rescues_home=0, yet slot 6 found an own-home Transport (dest=home=GeoscapeDome(1896)).
+- A3b: "I pressed it multiple nights and it didn't jump to anyone new"  (slot 6 stage 2 REFUSED "no relocation in progress now" x3 ids 45-47, then "pause first" ids 48-50) -> NOT RUN, P12 NOT_SAMPLED
+- A4: "It ran and paused but didn't hear a chime"  (log sound=true id=59) -> P1 NOT_SAMPLED, P2 HELD. DRIFT: chime logged but owner heard none.
+- A5: "done" -> R3 HELD, R4 HELD, R6 HELD, P6 HELD, P5 NOT_SAMPLED, P3(C114 hub) REFUTED on main (booked=false ended=safe) id=83
+- owner Q: "what do you mean the fix pack is on?" (answered: main pack loaded, six hubset modules absent)
+- A6: "Done, and I have multiple colonist on the screen with o2 readings" -> R5 HELD, P6 HELD, R6 HELD, P5 NOT_SAMPLED, P4(C114 mid) REFUTED on main id=107. Screenshots 0074-0076 (SMR-ScreenCaptures).
+- A7: "Done" -> P7 NOT_SAMPLED, P8 NOT_SAMPLED (drain_seen=false ended=timeout) id=153
+- A8/A10: "done" -> R1 HELD (151), R2 HELD (neither=0) ids 172-173. Segment A log archived sha ea31af5d2fcb9693da1b. Junction -> hubset read back.
+- SEGMENT B (hubset), log Mars.exe-20260924-18.34.58-6aad2d75.log
+- B1+B2: "done" -> build=hubset, six active, six applied; R1 HELD (84), R2 HELD; rescues_home=0 remote=16
+- B3a: owner screenshot (hubset07_B3a_owner_screenshot.jpg): same Bogdan Bojidarov, Residence blank, Status "Moving to a new Dome: Brussels". Log id=42 tid=4333 P11 verdict=REFUTED with m_RescueReturnText active.
+- B3b: "refused" (slot 6 stage 2 REFUSED "no relocation in progress now" ids 44,46) -> P12 NOT_SAMPLED
+- B4: "done" -> P1 NOT_SAMPLED, P2 HELD (16 served) id=54
+- B5: "done" -> R3/R4/R6/P6 HELD, P5 NOT_SAMPLED, P3(C114 hub) HELD id=78
+- B6: "done" -> R5/P6/R6 HELD, P5 NOT_SAMPLED, P4(C114 mid) HELD id=102
+- B7: "done" -> P7/P8 NOT_SAMPLED (drain_seen=false ended=timeout after 90368 game ms) id=126
+- B8/B10: "done and I didn't notice" (asked: did you see a salvage countdown?) -> R1/R2 HELD ids 145-146. Junction restored to main tree and read back. saves/game reconciled: fixture sha unchanged, no save written (account.dat, steam_autocloud.vdf touched by the boots).
+- Close-out note on the A3a DRIFT line: resolved, not a drift. Scratch `rescues_home` counts rescues whose colonist stands in its home dome (`H.home_now`); Bogdan was outside with a home-bound task, which slot 6 selects by task alone (`H.own_home_task`).

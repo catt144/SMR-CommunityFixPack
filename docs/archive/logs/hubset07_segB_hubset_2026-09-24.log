@@ -1,0 +1,664 @@
+					Render 0:00:00:006
+*** executable info
+					Render 0:00:00:007
+Timestamp:     	6aad2d75
+Date:          	Fri Sep 18 08:24:21 2026
+Command line:  	
+Compiler:      	195136247, 142 (VS 2019) or newer
+
+
+*** hardware info
+CPU name      	Intel(R) Core(TM) i7-14700K
+CPU MHz       	3418
+CPU cores     	20/28
+Phys. Memory   	65278 MBytes
+Memory In Use  	41%
+Disk Free      	1226182 MBytes
+
+
+*** OS info
+OS:            	Windows 11
+Version:       	10.0.26100 
+
+
+*** Debug::Init()
+
+
+					Render 0:00:00:071
+Steam initialized (AppId 3215050)
+					Render 0:00:00:074
+Drive type for game installation: SSD, savegames: SSD
+Language: English
+					Render 0:00:01:441
+*** graphics info
+GPU                            	NVIDIA GeForce RTX 4080 Feature Level: 12.1 {  DoublePrecisionFloatShaderOps: 1 OutputMergerLogicOp: 1 MinPrecisionSupport: 2 TiledResourcesTier: 4 ResourceBindingTier: 3 PSSpecifiedStencilRefSupported: 0 TypedUAVLoadAdditionalFormats: 1 ROVsSupported: 1 ConservativeRasterizationTier: 3 MaxGPUVirtualAddressBitsPerResource: 40 StandardSwizzle64KBSupported: 0 CrossNodeSharingTier: 0 CrossAdapterRowMajorTextureSupported: 0 VPAndRTArrayIndexFromAnyShaderFeedingRasterizerSupportedWithoutGSEmulation: 1 ResourceHeapTier: 2 NotZeroedPools: 1 UMA: 0 UnalignedBlockTextures: 1}
+API                            	d3d12
+GPU Driver Version             	32.0.16.1074
+GPU Driver Package Version     	610.74
+GPU Dedicated Video Memory     	16048 MB
+					Render 0:00:01:581
+
+Libs: Network, Sequences, MouseTrackWin, DumbAI, MapGen, Paradox, TriggersAndEvents, Notifications, Research, Resources, Tutorial, Objectives 
+
+					Render 0:00:01:805
+
+Platform: desktop, editor, goldmaster, paradox, pc, steam
+
+					Render 0:00:02:813
+*** audio info
+Audio Endpoint                 	Speakers (Razer Leviathan V2)
+						Lua 0:00:02:814
+Lua revision: 405907
+Assets revision: 33225
+Steam AppID: 3215050
+Build version: 1.1.1.405907
+Build branch:  Release
+						Lua 0:00:16:324
+Account storage loaded successfully in 7 ms
+						Lua 0:00:16:325
+DLC norman loaded, lua revision 405907, assets revision 33225
+DLC thomas loaded, lua revision 405907, assets revision 33225
+						Lua 0:00:16:342
+[mod] Loaded mod def DEV ONLY - Train Hub (Module B build) (id SMR_TrainHubDev_20260918, v0.00-050) unpacked from appdata
+[mod] Loaded mod def Community Fix Pack — Test Kit (id SMR_CommunityFixPackTestKit, v0.00-001) unpacked from appdata
+[mod] Loaded mod def Relaunched Fix Pack: Opt-In Modules (id SMR_CommunityOptInPack, v1.00-000) unpacked from appdata
+[mod] Loaded mod def Relaunched Fix Pack (id SMR_CommunityFixPack, v1.00-020) unpacked from appdata
+[mod] Loaded mod def Passage Network (id iooW34Y, v1.00-038) packed from steam
+[mod] Loaded mod def DEV ONLY - Train Hub Prototype (id SMR_TrainHubPrototype_20260918, v0.00-002) unpacked from appdata
+[mod] Loaded mod def TEMPORARY - Linux NVIDIA 580 Crash Workaround (id SMR_FR1TempWorkaround, v0.00-003) unpacked from appdata
+[mod] Loaded mod def DEV ONLY - Rail Shaft (cross-map train tunnel prototype) (id SMR_RailShaftDev_20260923, v0.00-001) unpacked from appdata
+						Lua 0:00:16:724
+[mod] [SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:16:725
+[mod] [SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[mod] [SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+[SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+						Lua 0:00:16:729
+[mod] [SMRTK] SMRTK_CORE loaded=true tee=false t=12292 id=1
+[SMRTK] SMRTK_CORE loaded=true tee=false t=12292 id=1
+						Lua 0:00:16:733
+[mod] [SMRTK] SMRTK_SLOTS armed_at_load=0 predictions=hubset/07_VERIFY_SITTING_owner.md sitting=hubset07 slots="scratch boot/census,1 C115,2 hub arrival,3 mid-spoke,4 fire+follow,5 C117 staged,6 C111/R7 staged" t=12292 id=2
+[SMRTK] SMRTK_SLOTS armed_at_load=0 predictions=hubset/07_VERIFY_SITTING_owner.md sitting=hubset07 slots="scratch boot/census,1 C115,2 hub arrival,3 mid-spoke,4 fire+follow,5 C117 staged,6 C111/R7 staged" t=12292 id=2
+						Lua 0:00:16:734
+[mod] [SMRTest][carry] fixture-carry dump available — run SMRTest.FixtureCarry()
+						Lua 0:00:16:736
+[TrainHubDev] hub classes loaded: six-connector hub, built-in drone controller, maintenance reserve
+						Lua 0:00:16:737
+[TrainHubDev] train export floor loaded (standing + transient holds)
+[mod] [CommunityFixPack] LanderEmptyLaunch: applied
+[mod] [CommunityFixPack] ShelterReflex: applied
+						Lua 0:00:16:738
+[mod] [CommunityFixPack] TrackSalvageWipe: applied
+[mod] [CommunityFixPack] LakeEntombment: applied
+[mod] [CommunityFixPack] RocketDroneChurn: applied
+[mod] [CommunityFixPack] ShuttleTransportCache: applied
+[mod] [CommunityFixPack] VacuumWalks: applied
+[mod] [CommunityFixPack] ArrivalDeaths: applied
+[mod] [CommunityFixPack] PassageStaleHolder: applied
+[mod] [CommunityFixPack] PassageHubSalvageDrain: applied
+						Lua 0:00:16:739
+[mod] [CommunityFixPack] HubLocalAccess: applied
+[mod] [CommunityFixPack] HubMarkerDeparture: applied
+[mod] [CommunityFixPack] RescueReturnText: applied
+[mod] [CommunityFixPack] ObsoleteHomeRescue: applied
+[mod] [CommunityFixPack] StaleReservations: applied
+[mod] [CommunityFixPack] CrystalMysteryHang: applied
+[mod] [CommunityFixPack] DustSicknessBiorobots: applied
+[mod] [CommunityFixPack] PayloadTemplateRefill: applied
+[mod] [CommunityFixPack] ShuttleHubOffAvailable: applied
+[mod] [CommunityFixPack] FreedHousingNotice: applied
+						Lua 0:00:16:740
+[mod] [CommunityFixPack] LandscapeUnitFilter: applied
+[mod] [CommunityFixPack] RocketInteractGuard: applied
+						Lua 0:00:16:741
+[mod] [CommunityFixPack] TrackConnectorPingPong: applied
+[mod] [CommunityFixPack] TrackTunnelPowerBridge: applied
+[mod] [CommunityFixPack] SequenceLatents: applied
+[mod] [CommunityFixPack] TrackSalvageRefund: applied
+[mod] [CommunityFixPack] DroneTransportMinors: applied
+[mod] [CommunityFixPack] ScanDowngrade: applied
+[mod] [CommunityFixPack] BombardmentSpread: applied
+[mod] [CommunityFixPack] ExtenderFlapChurn: applied
+						Lua 0:00:16:742
+[mod] [CommunityFixPack] SaintBlessing: applied
+[mod] [CommunityFixPack] ExoticDepositSign: applied
+[mod] [CommunityFixPack] JumboCaveReinforcementWedge: applied
+[mod] [CommunityFixPack] SilentHitMomentFX: applied
+[mod] [CommunityFixPack] CloggedBuildingRelease: applied
+[mod] [CommunityFixPack] FactionDomeSizeGate: applied
+[mod] [CommunityFixPack] HabitatExpeditionReturn: applied
+						Lua 0:00:16:743
+[mod] [CommunityFixPack] HabitatExpeditionDraft: applied
+[mod] [CommunityFixPack] RoverSubclassManifest: applied
+[mod] [CommunityFixPack] DryFarmingFarms: applied
+[mod] [CommunityFixPack] WildfireCureVisit: applied
+[mod] [CommunityFixPack] SaveSanitizer: applied
+						Lua 0:00:16:744
+[mod] [CommunityOptInPack] AcknowledgedWarnings: applied
+[mod] [CommunityOptInPack] ResidencyControl: inactive (opt-in module, off by default — enable it in Options → Mod Options)
+[mod] [CommunityOptInPack] MultipleSuns: applied
+[mod] [CommunityOptInPack] DroneStatDials: applied
+[RailShaftDev] loaded: cross-map train tunnel prototype. UNVERIFIED IN GAME.
+						Lua 0:00:17:423
+[TrainHubDev] save guard: native waiter snapshot; legacy hub load mapping retained
+						Lua 0:00:17:490
+[mod] [CommunityFixPack] SaintBlessing: inactive (no dome-colonists trait presets)
+						Lua 0:00:17:578
+Reloading done in 1236 ms
+						Lua 0:00:17:598
+Available DLCs: norman(Feeding the Future),thomas(Interplanetary Codex) 
+						Lua 0:00:17:644
+[mod] [SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=DataLoading t=12292 id=3
+[SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=DataLoading t=12292 id=3
+						Lua 0:00:18:016
+[preset] Preset postprocess took 158 ms.
+						Lua 0:00:18:061
+482 / 482 particle streams loaded in 38 ms.
+5 / 5 particle streams loaded in 0 ms.
+						Lua 0:00:18:062
+[mod] [CommunityFixPack] SilentHitMomentFX: registered 11 missing animation-moment preset(s)						Lua 0:00:18:063
+
+[mod] [CommunityFixPack] FactionDomeSizeGate: 7 faction dislike(s) now wait for 10 colonists in a dome
+[mod] [CommunityFixPack] DryFarmingFarms: left 1 farm(s) alone because DryFarming already reaches them (FarmUnderground via Farm)
+[mod] [CommunityFixPack] DryFarmingFarms: added 2 water entr(y/ies) at -50% to DryFarming (1 adopted, 4 of 4 farms loaded)
+[mod] [CommunityOptInPack] MultipleSuns: BuildingTemplates.ArtificialSun not found — build limit NOT lifted (binding fix still active)
+						Lua 0:00:18:262
+[mod] [CommunityFixPack] SaintBlessing: the shipped code resolves the trait label itself — data left untouched; save re-base armed for 1 preset(s) of 2
+						Lua 0:00:18:263
+[mod] [CommunityFixPack] DryFarmingFarms: left 1 farm(s) alone because DryFarming already reaches them (FarmUnderground via Farm)
+[mod] [CommunityOptInPack] MultipleSuns: Artificial Sun build-once limit lifted
+						Lua 0:00:18:354
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=12292 id=4
+						Lua 0:00:18:381
+[LUA ERROR] CommonLua/Editor/ArtSpecEditor.lua:573: attempt to call a nil value (global 'EntitySpecPathToEntity')
+  CommonLua/Editor/ArtSpecEditor.lua(573):  method OnPresetPostLoad
+  CommonLua/Preset.lua(541):  upvalue f1
+  CommonLua/Core/classes.lua(170):  method PostLoad
+  CommonLua/Modding/ModItem.lua(2518):   <>
+  [C](-1):  global sprocall
+  CommonLua/Modding/Mod.lua(666):   <>
+  CommonLua/Modding/Mod.lua(740):   <>
+  CommonLua/Modding/Mod.lua(664):  method LoadItems
+  CommonLua/Modding/Mod.lua(2185):  global ContinueModsReloadItems
+  CommonLua/Dlc.lua(603):  global LoadDlcs
+  CommonLua/Core/autorun.lua(447):  local StartupSequence
+  CommonLua/Core/autorun.lua(516):   <>
+        --- end of stack
+Locals:
+	                self |   object EntitySpec 'SMROptInTrainHub6'
+						Lua 0:00:18:394
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=12292 id=5
+						Lua 0:00:18:405
+[mod] Loaded mod items for: SMR_CommunityFixPackTestKit, SMR_TrainHubDev_20260918, SMR_CommunityFixPack, SMR_CommunityOptInPack, SMR_RailShaftDev_20260923
+						Lua 0:00:18:659
+[mod] [CommunityFixPack] SaintBlessing: the shipped code resolves the trait label itself — data left untouched; save re-base armed for 1 preset(s) of 2
+[mod] [CommunityFixPack] DryFarmingFarms: left 1 farm(s) alone because DryFarming already reaches them (FarmUnderground via Farm)
+						Lua 0:00:18:755
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=12292 id=6
+						Lua 0:00:19:183
+[PdxSDK] Started up. Took 1056
+						Lua 0:00:19:610
+[Braze] SessionStart error The server name or address could not be resolved
+
+						Lua 0:00:19:611
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:19:765
+[Braze] SessionStart error The server name or address could not be resolved
+						Lua 0:00:19:766
+
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:01:34:112
+Load Game: 
+	lua_revision: 403908 (last saved with) 
+	orig_lua_revision: 403908 (created with) 
+	assets_revision: 33006 
+
+	dlcs: norman, thomas 
+
+	mods: WUoPQ6R, W7hDysd, PquXTU, eoJkQuu, F7XeoeH, K76CAwD, iooW34Y, SMR_CommunityFixPack, GUreSMy, geLeQMy, QT4sR7W, dwAWmXz, kU4CYvP, iaTFkGp, Ad7YoNt, mSTRrs 
+						Lua 0:01:34:113
+*** Reloading assets from folder 'BinAssets/'
+						Lua 0:01:35:845
+*** Assets reloaded in 1.7 s, read 359.0 MB, read speed 207.3 MB/s, average read 8138 bytes.
+						Lua 0:01:36:772
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=87090 id=7
+						Lua 0:01:37:586
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=87090 id=8
+						Lua 0:01:38:381
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=87090 id=9
+						Lua 0:01:39:174
+
+Load anyway : The following mods are missing or outdated:
+
+<color em>Affordable Shopping - Not Everybody Buys
+Dome and Extractor Range Extend
+Dune Radio
+Endless FM
+Luxus-Apartment THE TARDIS
+Mega Dome 2
+Passage Network
+RemoveForestationLimit
+Smart Graduates
+Start With The Domes You Want
+Start with all Breakthroughs
+AutoMatic Factory Upgrades
+Nurseries Limit Births</color>
+
+Some features may not work. 
+
+						Lua 0:01:39:185
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=87090 id=10
+						Lua 0:01:41:241
+[mod] [SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=PreLoadGame t=87090 id=11
+[SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=PreLoadGame t=87090 id=11
+						Lua 0:01:41:914
+Unpersist missing permanent: ApartmentsBase:NewBuildingTemplate_2 | Fallback permanent: class ApartmentsBase
+						Lua 0:01:41:981
+Unpersist missing permanent: Mod/mSTRrs | Fallback permanent: table: 000001F3DD204A18 [7]
+						Lua 0:01:41:982
+Unpersist missing permanent: DomeMega:NewBuildingTemplate | Fallback permanent: class DomeMega
+						Lua 0:01:42:007
+Unpersist missing permanent: Preset:NotificationPreset.5xSun_Status | Fallback permanent: NotificationPreset "BreakthroughDiscovered": 000001F3E5A2F8D0
+						Lua 0:01:42:008
+[mod] Savegame references Mod Affordable Shopping - Not Everybody Buys (id WUoPQ6R, v1.05-023) which is not present
+[mod] Savegame references Mod Dome and Extractor Range Extend (id W7hDysd, v0.00-016) which is not present
+[mod] Savegame references Mod Dune Radio (id PquXTU, v1.02-026) which is not present
+[mod] Savegame references Mod Endless FM (id eoJkQuu, v0.00-009) which is not present
+[mod] Savegame references Mod Luxus-Apartment THE TARDIS (id F7XeoeH, v0.00-012) which is not present
+[mod] Savegame references Mod Mega Dome 2 (id K76CAwD, v0.00-030) which is not present
+[mod] This savegame tries to load Mod Passage Network (id iooW34Y, v1.00-038), which is present, but not loaded
+[mod] This savegame tries to load Mod Relaunched Fix Pack (id SMR_CommunityFixPack, v1.00-019), which is loaded with a different version 1.00-020
+[mod] Savegame references Mod RemoveForestationLimit (id GUreSMy, v1.04-013) which is not present
+[mod] Savegame references Mod Smart Graduates (id geLeQMy, v1.01-074) which is not present
+[mod] Savegame references Mod Start With The Domes You Want (id QT4sR7W, v0.00-099) which is not present
+[mod] Savegame references Mod Start with all Breakthroughs (id dwAWmXz, v0.00-127) which is not present
+[mod] Savegame references Mod Stellaris Radio (id kU4CYvP, v1.01-017) which is not present
+[mod] Savegame references Mod 5xSun - AutoRefill (id iaTFkGp, v0.00-031) which is not present
+[mod] Savegame references Mod AutoMatic Factory Upgrades (id Ad7YoNt, v1.06-083) which is not present
+[mod] Savegame references Mod Nurseries Limit Births (id mSTRrs, v1.01-014) which is not present
+						Lua 0:01:43:620
+[mod] [SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:01:43:625
+[mod] [CommunityFixPack] ExoticDepositSign: 1 Exotic Minerals deposit(s) re-signed onto the clean entity
+						Lua 0:01:43:627
+[mod] [CommunityFixPack] SilentHitMomentFX: restored 34 missing hit-moment tracker(s) on load
+						Lua 0:01:43:632
+[RailShaftDev] UniversalTunnel allowed underground = true (DisabledInEnvironment is a GameVar: this is
+[RailShaftDev]   written into the save, and stays there if this mod is removed -- throwaway saves only)
+[RailShaftDev] ready. SMRRailShaft.Status() for where things stand.
+						Lua 0:01:43:648
+Applied 28 savegame fixup(s) in 16 ms: AAA_SetLRManagerMap, AgronomistFarmCropGrowth, CleanStaleRoverDamagedNotificationObjects, ConstructionSiteFlightMarks, CureSmallCropTechLock, CureUndergroundCropTechLock, FixDustGeneratorThrowTimes, FixFoodServiceMealsServedByShift, HospitalExoticMineralTreatment, KickWorkersFromTurnedOffDomes, MarkUnavoidableSupplyDrains, MoveOpenPasturePilesOffOrigin2, PipesAtBuildableLevelSteps, PoliticalAnimalAchievement2, RemarkJumboCaves, RemoveBreathableAtmosphereAirConsumptionModifier, ResetPlanetSceneCameraState, RespawnUnreachableBottomlessPitAnomalies, ResupplyCutoffLocksDelicacies, SplitDailyCountersByShift, ZZZZ_FixLeakedRocketReservations, ZZZ_DestroyTradeRocketsWithUnplacedLandingSite, ZZZ_FactionTaskDomeCompletableInAnyDome, ZZZ_HungerLocksFoodImport, ZZZ_RebuildElevatorResourceModeRegistration, ZZZ_ReviveElevatorSharedDepots, ZZZ_UpdateRefuelRequests, Zzz_RestartStalledMaintenanceDemand
+						Lua 0:01:43:815
+game_settings:
+    sponsor: ESA
+    profile: Spelunker
+    founding_faction: EnlightenmentInitiative
+    rival_colonies: AssemblyOfPlanets, NewArk, BlueSun
+    mystery_random: 
+						Lua 0:01:43:816
+    game_rules: DiscoverBreakthroughs
+more_game_settings: save_game_id: Do4kjJyQJSxICWkK, mystery: MirrorSphereMystery, coordinates: 2N176E, landing_spot: ElysiumBeta, logo: Europe
+map_conditions: altitude: -2776, temperature: -15, cold_wave: 36, dust_devils: 47, dust_storm: 0, meteors: 73
+map_resources: concrete: 254, metals: 146, precious_metals: 146, water: 109
+						Lua 0:01:43:908
+[mod] [CommunityFixPack] SaveSanitizer: F95 astrogeologist-residue pass removed 0 modifier(s), left 0 unidentified
+						Lua 0:01:43:915
+Game Loaded in 9805 ms
+[mod] [SMRTK] SMRTK_PROVENANCE actions=unavailable last=unavailable present=false session=unavailable t=89403444 id=12
+[SMRTK] SMRTK_PROVENANCE actions=unavailable last=unavailable present=false session=unavailable t=89403444 id=12
+						Lua 0:01:43:926
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=89403444 id=13
+						Lua 0:01:43:939
+[mod] [SMRTK] SMRTK_DOCK action=dock_attach attached=true route="idBottom sibling" status=OK surface=one-toggle+tasks t=89403444 id=14
+						Lua 0:01:43:946
+[mod] [SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:01:44:084
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=89403444 id=15
+						Lua 0:01:44:573
+Game loaded on map BlankBig_04 in 10602 ms
+						Lua 0:01:44:874
+[mod] [SMRTK] SMRTK_PANEL_RESTORE open=true tab=Agent t=89404140 id=16
+						Lua 0:01:52:736
+[mod] [SMRTK] SMRTK_MARK action=mark label=H7_BOOT mark=34 status=OK t=89407724 id=17
+[SMRTK] SMRTK_MARK action=mark label=H7_BOOT mark=34 status=OK t=89407724 id=17
+[mod] [SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=42/42 game=405907 mark_action=mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923,SMR_TrainHubDev_20260918 pack_version=20 read="live registry" save="New Horizons 2 83.savegame.sav" sol=125 status=OK t=89407724 id=18
+[SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=42/42 game=405907 mark_action=mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923,SMR_TrainHubDev_20260918 pack_version=20 read="live registry" save="New Horizons 2 83.savegame.sav" sol=125 status=OK t=89407724 id=18
+						Lua 0:01:52:746
+[mod] [SMRTK] SMRTK_SHORTCUT console=false key=Ctrl-Shift-F11 t=89407724 id=19						Lua 0:01:52:747
+
+						Lua 0:01:52:755
+[mod] [SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=control t=89407724 id=20
+[SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=control t=89407724 id=20
+						Lua 0:01:52:766
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=89407724 id=21
+						Lua 0:01:52:775
+[mod] [SMRTK] SMRTK_CONSOLE_CONTROL action=console_control discriminates=true negative=false positive=true status=OK t=89407724 id=22
+[SMRTK] SMRTK_CONSOLE_CONTROL action=console_control discriminates=true negative=false positive=true status=OK t=89407724 id=22
+[mod] [SMRTK] SMRTK_TAINT_READ action=taint_read status=OK used=false t=89407724 id=23
+[SMRTK] SMRTK_TAINT_READ action=taint_read status=OK used=false t=89407724 id=23
+[mod] [SMRTK] SMRTK_ELIGIBILITY action=eligibility reason=UNAVAILABLE:sandbox status=OK t=89407724 id=24
+[SMRTK] SMRTK_ELIGIBILITY action=eligibility reason=UNAVAILABLE:sandbox status=OK t=89407724 id=24
+						Lua 0:01:52:777
+[mod] [SMRTK] SMRTK_DUMP domes=2 far=DomeMedium(3913)@23 hub=PassageHub(11985) leg=boot_hub live_spokes=2 mismatch=0 neither=0 units=0 t=89407724 id=25
+[SMRTK] SMRTK_DUMP domes=2 far=DomeMedium(3913)@23 hub=PassageHub(11985) leg=boot_hub live_spokes=2 mismatch=0 neither=0 units=0 t=89407724 id=25
+						Lua 0:01:52:778
+[mod] [SMRTK] SMRTK_DUMP domes=2 far=DomeMedium(3913)@22,DomeBasic(11739)@26 hub=PassageHub(11714) leg=boot_hub live_spokes=2 mismatch=0 neither=0 units=1 t=89407724 id=26
+[SMRTK] SMRTK_DUMP domes=2 far=DomeMedium(3913)@22,DomeBasic(11739)@26 hub=PassageHub(11714) leg=boot_hub live_spokes=2 mismatch=0 neither=0 units=1 t=89407724 id=26
+[mod] [SMRTK] SMRTK_DUMP domes=3 far=GeoscapeDome(1896)@29,DomeMedium(3913)@24,DomeMedium(3911)@22 hub=PassageHub(2692) leg=boot_hub live_spokes=3 mismatch=0 neither=0 units=45 t=89407724 id=27
+[SMRTK] SMRTK_DUMP domes=3 far=GeoscapeDome(1896)@29,DomeMedium(3913)@24,DomeMedium(3911)@22 hub=PassageHub(2692) leg=boot_hub live_spokes=3 mismatch=0 neither=0 units=45 t=89407724 id=27
+[mod] [SMRTK] SMRTK_DUMP domes=3 far=GeoscapeDome(1896)@27,DomeMedium(4053)@26,DomeMedium(3274)@21 hub=PassageHub(4113) leg=boot_hub live_spokes=3 mismatch=0 neither=0 units=20 t=89407724 id=28
+[SMRTK] SMRTK_DUMP domes=3 far=GeoscapeDome(1896)@27,DomeMedium(4053)@26,DomeMedium(3274)@21 hub=PassageHub(4113) leg=boot_hub live_spokes=3 mismatch=0 neither=0 units=20 t=89407724 id=28
+[mod] [SMRTK] SMRTK_DUMP domes=2 far=GeoscapeDome(1896)@26,DomeMedium(2564)@24 hub=PassageHub(1908) leg=boot_hub live_spokes=2 mismatch=0 neither=0 units=5 t=89407724 id=29
+[SMRTK] SMRTK_DUMP domes=2 far=GeoscapeDome(1896)@26,DomeMedium(2564)@24 hub=PassageHub(1908) leg=boot_hub live_spokes=2 mismatch=0 neither=0 units=5 t=89407724 id=29
+[mod] [SMRTK] SMRTK_DUMP domes=4 far=GeoscapeDome(1896)@29,DomeMedium(3867)@28 hub=PassageHub(2026) leg=boot_hub live_spokes=4 mismatch=0 neither=0 units=13 t=89407724 id=30
+[SMRTK] SMRTK_DUMP domes=4 far=GeoscapeDome(1896)@29,DomeMedium(3867)@28 hub=PassageHub(2026) leg=boot_hub live_spokes=4 mismatch=0 neither=0 units=13 t=89407724 id=30
+[mod] [SMRTK] SMRTK_DUMP holder_mismatch=0 leg=boot_r1 members=84 verdict=HELD t=89407724 id=31
+[SMRTK] SMRTK_DUMP holder_mismatch=0 leg=boot_r1 members=84 verdict=HELD t=89407724 id=31
+[mod] [SMRTK] SMRTK_DUMP flight=76 leg=boot_r2 members=84 neither=0 standing=8 verdict=HELD t=89407724 id=32
+[SMRTK] SMRTK_DUMP flight=76 leg=boot_r2 members=84 neither=0 standing=8 verdict=HELD t=89407724 id=32
+[mod] [SMRTK] SMRTK_DUMP dome=0 flight=76 held=0 home=0 hub=11 leg=boot_markers open=0 open_sheltered=0 total=87 t=89407724 id=33
+[SMRTK] SMRTK_DUMP dome=0 flight=76 held=0 home=0 hub=11 leg=boot_markers open=0 open_sheltered=0 total=87 t=89407724 id=33
+[mod] [SMRTK] SMRTK_DUMP home=0 leg=boot_rescues remote=16 t=89407724 id=34
+[SMRTK] SMRTK_DUMP home=0 leg=boot_rescues remote=16 t=89407724 id=34
+[mod] [SMRTK] SMRTK_DUMP elements=271 entries=0 leg=boot_c42stale passages=16 stale=0 verdict=HELD t=89407724 id=35
+[SMRTK] SMRTK_DUMP elements=271 entries=0 leg=boot_c42stale passages=16 stale=0 verdict=HELD t=89407724 id=35
+[mod] [SMRTK] SMRTK_DUMP homeless_hidden=0 leg=boot_f127 t=89407724 id=36
+[SMRTK] SMRTK_DUMP homeless_hidden=0 leg=boot_f127 t=89407724 id=36
+[mod] [SMRTK] SMRTK_MARK action=mark label=H7_BOOT_END mark=54 status=OK t=89407724 id=37
+[SMRTK] SMRTK_MARK action=mark label=H7_BOOT_END mark=54 status=OK t=89407724 id=37
+[mod] [SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=42/42 game=405907 mark_action=mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923,SMR_TrainHubDev_20260918 pack_version=20 read="live registry" save="New Horizons 2 83.savegame.sav" sol=125 status=OK t=89407724 id=38
+[SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=42/42 game=405907 mark_action=mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923,SMR_TrainHubDev_20260918 pack_version=20 read="live registry" save="New Horizons 2 83.savegame.sav" sol=125 status=OK t=89407724 id=38
+[mod] [SMRTK] SMRTK_ACTION action=slot_scratch build=hubset c42_stale=0 errors=0 hubs=6 large_dome_hubs=6 m_ArrivalDeaths=active m_HubLocalAccess=active m_HubMarkerDeparture=active m_ObsoleteHomeRescue=active m_PassageHubSalvageDrain=active m_PassageStaleHolder=active m_RescueReturnText=active m_VacuumWalks=active rescues_home=0 rescues_remote=16 sitting=hubset07 speed=0 status=OK t=89407724 id=39
+[SMRTK] SMRTK_ACTION action=slot_scratch build=hubset c42_stale=0 errors=0 hubs=6 large_dome_hubs=6 m_ArrivalDeaths=active m_HubLocalAccess=active m_HubMarkerDeparture=active m_ObsoleteHomeRescue=active m_PassageHubSalvageDrain=active m_PassageStaleHolder=active m_RescueReturnText=active m_VacuumWalks=active rescues_home=0 rescues_remote=16 sitting=hubset07 speed=0 status=OK t=89407724 id=39
+						Lua 0:04:47:948
+[mod] [SMRTK] SMRTK_MARK action=mark label=H7_C111_HOME mark=57 status=OK t=89407724 id=40
+[SMRTK] SMRTK_MARK action=mark label=H7_C111_HOME mark=57 status=OK t=89407724 id=40
+[mod] [SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=42/42 game=405907 mark_action=mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923,SMR_TrainHubDev_20260918 pack_version=20 read="live registry" save="New Horizons 2 83.savegame.sav" sol=125 status=OK t=89407724 id=41
+[SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=42/42 game=405907 mark_action=mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923,SMR_TrainHubDev_20260918 pack_version=20 read="live registry" save="New Horizons 2 83.savegame.sav" sol=125 status=OK t=89407724 id=41
+						Lua 0:04:47:956
+[mod] [SMRTK] SMRTK_ACTION action=slot_6 command=Transport dest=GeoscapeDome(1896) home=GeoscapeDome(1896) prediction=P11 returning=false stage=1 status=OK subject=Colonist(2000010346) text="Moving to a new Dome: <h SelectEmigrationDome InfopanelSelect><color em>Brussels</color></h>" tid=4333 verdict=REFUTED t=89407724 id=42
+[SMRTK] SMRTK_ACTION action=slot_6 command=Transport dest=GeoscapeDome(1896) home=GeoscapeDome(1896) prediction=P11 returning=false stage=1 status=OK subject=Colonist(2000010346) text="Moving to a new Dome: <h SelectEmigrationDome InfopanelSelect><color em>Brussels</color></h>" tid=4333 verdict=REFUTED t=89407724 id=42
+						Lua 0:04:47:962
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipColonist object=Colonist(2000010346) status=OK t=89407724 id=43
+						Lua 0:07:40:622
+[mod] [SMRTK] SMRTK_ACTION action=slot_6 reason="no relocation in progress now" status=REFUSED t=89407724 id=44
+[SMRTK] SMRTK_ACTION action=slot_6 reason="no relocation in progress now" status=REFUSED t=89407724 id=44
+						Lua 0:07:42:957
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=PanoramicRestaurant(12786) status=OK t=89407724 id=45
+						Lua 0:07:43:967
+[mod] [SMRTK] SMRTK_ACTION action=slot_6 reason="no relocation in progress now" status=REFUSED t=89407724 id=46
+[SMRTK] SMRTK_ACTION action=slot_6 reason="no relocation in progress now" status=REFUSED t=89407724 id=46
+						Lua 0:09:20:066
+[mod] [SMRTK] SMRTK_MARK action=mark label=H7_C115_BEGIN mark=64 status=OK t=89407724 id=47
+[SMRTK] SMRTK_MARK action=mark label=H7_C115_BEGIN mark=64 status=OK t=89407724 id=47
+						Lua 0:09:20:067
+[mod] [SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=42/42 game=405907 mark_action=mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923,SMR_TrainHubDev_20260918 pack_version=20 read="live registry" save="New Horizons 2 83.savegame.sav" sol=125 status=OK t=89407724 id=48
+[SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=42/42 game=405907 mark_action=mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923,SMR_TrainHubDev_20260918 pack_version=20 read="live registry" save="New Horizons 2 83.savegame.sav" sol=125 status=OK t=89407724 id=48
+						Lua 0:09:20:068
+[mod] [SMRTK] SMRTK_ARM action=h7_rescues cadence=250 candidates=16 home_at_arm=0 once=true status=OK trigger=h7_rescues t=89407724 id=49
+[SMRTK] SMRTK_ARM action=h7_rescues cadence=250 candidates=16 home_at_arm=0 once=true status=OK trigger=h7_rescues t=89407724 id=49
+[mod] [SMRTK] SMRTK_ARM action=run_until before=0 factor=128000 requested=128 status=OK target=h7_rescues t=89407724 id=50
+[SMRTK] SMRTK_ARM action=run_until before=0 factor=128000 requested=128 status=OK target=h7_rescues t=89407724 id=50
+[mod] [SMRTK] SMRTK_ACTION action=slot_1 build=hubset run_until=true status=OK watch=h7_rescues t=89407724 id=51
+[SMRTK] SMRTK_ACTION action=slot_1 build=hubset run_until=true status=OK watch=h7_rescues t=89407724 id=51
+						Lua 0:09:21:191
+[mod] [SMRTK] SMRTK_MARK action=mark label="Own-home rescues resolved (C115)" mark=69 status=OK t=89425132 id=52
+[SMRTK] SMRTK_MARK action=mark label="Own-home rescues resolved (C115)" mark=69 status=OK t=89425132 id=52
+[mod] [SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=42/42 game=405907 mark_action=mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923,SMR_TrainHubDev_20260918 pack_version=20 read="live registry" save="New Horizons 2 83.savegame.sav" sol=125 status=OK t=89425132 id=53
+[SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=42/42 game=405907 mark_action=mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923,SMR_TrainHubDev_20260918 pack_version=20 read="live registry" save="New Horizons 2 83.savegame.sav" sol=125 status=OK t=89425132 id=53
+[mod] [SMRTK] SMRTK_TRIGGER action=h7_rescues build=hubset each=2000015323:R:ready_for_pickup,2000024793:R:ready_for_pickup,2000024181:R:ready_for_pickup,2000015183:R:ready_for_pickup,2000010364:R:ready_for_pickup,2000010391:R:ready_for_pickup,2000020309:R:ready_for_pickup,2000019167:R:ready_for_pickup,2000019044:R:ready_for_pickup,2000010347:R:ready_for_pickup,2000010346:R:ready_for_pickup,2000024681:R:ready_for_pickup,2000023324:R:ready_for_pickup,2000019119:R:shuttle,2000021995:R:ready_for_pickup,2000015913:R:ready_for_pickup home_candidates=0 home_cleaned_home=0 home_walked_out=0 label="Own-home rescues resolved (C115)" mark=69 open=0 p1=NOT_SAMPLED p2=HELD pause=true remote_candidates=16 remote_cleaned_away=0 remote_served=16 sound=true status=OK timeout=false trigger=h7_rescues t=89425132 id=54
+[SMRTK] SMRTK_TRIGGER action=h7_rescues build=hubset each=2000015323:R:ready_for_pickup,2000024793:R:ready_for_pickup,2000024181:R:ready_for_pickup,2000015183:R:ready_for_pickup,2000010364:R:ready_for_pickup,2000010391:R:ready_for_pickup,2000020309:R:ready_for_pickup,2000019167:R:ready_for_pickup,2000019044:R:ready_for_pickup,2000010347:R:ready_for_pickup,2000010346:R:ready_for_pickup,2000024681:R:ready_for_pickup,2000023324:R:ready_for_pickup,2000019119:R:shuttle,2000021995:R:ready_for_pickup,2000015913:R:ready_for_pickup home_candidates=0 home_cleaned_home=0 home_walked_out=0 label="Own-home rescues resolved (C115)" mark=69 open=0 p1=NOT_SAMPLED p2=HELD pause=true remote_candidates=16 remote_cleaned_away=0 remote_served=16 sound=true status=OK timeout=false trigger=h7_rescues t=89425132 id=54
+[mod] [SMRTK] SMRTK_FIRE action=run_until paused=true sol=125 status=OK target=h7_rescues t=89425132 id=55
+[SMRTK] SMRTK_FIRE action=run_until paused=true sol=125 status=OK target=h7_rescues t=89425132 id=55
+[mod] [SMRTK] SMRTK_DISARM action=run_until reason="target trigger fired" status=OK t=89425132 id=56
+[SMRTK] SMRTK_DISARM action=run_until reason="target trigger fired" status=OK t=89425132 id=56
+[mod] [SMRTK] SMRTK_DISARM action=h7_rescues reason="trigger complete" status=OK trigger=h7_rescues t=89425132 id=57
+[SMRTK] SMRTK_DISARM action=h7_rescues reason="trigger complete" status=OK trigger=h7_rescues t=89425132 id=57
+						Lua 0:09:26:301
+[mod] [SMRTK] SMRTK_COPY action=copy flushed=true from=69 lines=6 status=OK truncated=false t=89425132 id=58
+[SMRTK] SMRTK_COPY action=copy flushed=true from=69 lines=6 status=OK truncated=false t=89425132 id=58
+						Lua 0:19:21:164
+[mod] [SMRTK] SMRTK_MARK action=mark label=H7_ARRIVAL_BEGIN mark=76 status=OK t=89425132 id=59
+[SMRTK] SMRTK_MARK action=mark label=H7_ARRIVAL_BEGIN mark=76 status=OK t=89425132 id=59
+						Lua 0:19:21:165
+[mod] [SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=42/42 game=405907 mark_action=mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923,SMR_TrainHubDev_20260918 pack_version=20 read="live registry" save="New Horizons 2 83.savegame.sav" sol=125 status=OK t=89425132 id=60
+[SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=42/42 game=405907 mark_action=mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923,SMR_TrainHubDev_20260918 pack_version=20 read="live registry" save="New Horizons 2 83.savegame.sav" sol=125 status=OK t=89425132 id=60
+[mod] [SMRTK] SMRTK_ARM action=h7_hub_arrival cadence=50 once=true status=OK trigger=h7_hub_arrival watch=arrival t=89425132 id=61
+[SMRTK] SMRTK_ARM action=h7_hub_arrival cadence=50 once=true status=OK trigger=h7_hub_arrival watch=arrival t=89425132 id=61
+[mod] [SMRTK] SMRTK_ARM action=run_until before=0 factor=128000 requested=128 status=OK target=h7_hub_arrival t=89425132 id=62
+[SMRTK] SMRTK_ARM action=run_until before=0 factor=128000 requested=128 status=OK target=h7_hub_arrival t=89425132 id=62
+[mod] [SMRTK] SMRTK_ACTION action=slot_2 build=hubset status=OK watch=h7_hub_arrival t=89425132 id=63
+[SMRTK] SMRTK_ACTION action=slot_2 build=hubset status=OK watch=h7_hub_arrival t=89425132 id=63
+						Lua 0:19:21:560
+[mod] [SMRTK] SMRTK_MARK action=mark label="Far-home worker lands on a hub (R3)" mark=81 status=OK t=89431660 id=64
+[SMRTK] SMRTK_MARK action=mark label="Far-home worker lands on a hub (R3)" mark=81 status=OK t=89431660 id=64
+[mod] [SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=42/42 game=405907 mark_action=mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923,SMR_TrainHubDev_20260918 pack_version=20 read="live registry" save="New Horizons 2 83.savegame.sav" sol=125 status=OK t=89431660 id=65
+[SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=42/42 game=405907 mark_action=mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923,SMR_TrainHubDev_20260918 pack_version=20 read="live registry" save="New Horizons 2 83.savegame.sav" sol=125 status=OK t=89431660 id=65
+[mod] [SMRTK] SMRTK_TRIGGER action=h7_hub_arrival arrival_hex=true arrival_visual_hex=true command=Work dist=29 holder=PassageHub(2026) home=GeoscapeDome(1896) hub=PassageHub(2026) label="Far-home worker lands on a hub (R3)" mark=81 marker=PassageHub(2026) pause=true r3=HELD sound=true status=OK subject=Colonist(2000015055) trigger=h7_hub_arrival t=89431660 id=66
+[SMRTK] SMRTK_TRIGGER action=h7_hub_arrival arrival_hex=true arrival_visual_hex=true command=Work dist=29 holder=PassageHub(2026) home=GeoscapeDome(1896) hub=PassageHub(2026) label="Far-home worker lands on a hub (R3)" mark=81 marker=PassageHub(2026) pause=true r3=HELD sound=true status=OK subject=Colonist(2000015055) trigger=h7_hub_arrival t=89431660 id=66
+						Lua 0:19:21:561
+[mod] [SMRTK] SMRTK_FIRE action=run_until paused=true sol=125 status=OK target=h7_hub_arrival t=89431660 id=67
+[SMRTK] SMRTK_FIRE action=run_until paused=true sol=125 status=OK target=h7_hub_arrival t=89431660 id=67
+[mod] [SMRTK] SMRTK_DISARM action=run_until reason="target trigger fired" status=OK t=89431660 id=68
+[SMRTK] SMRTK_DISARM action=run_until reason="target trigger fired" status=OK t=89431660 id=68
+[mod] [SMRTK] SMRTK_DISARM action=h7_hub_arrival reason="trigger complete" status=OK trigger=h7_hub_arrival t=89431660 id=69
+[SMRTK] SMRTK_DISARM action=h7_hub_arrival reason="trigger complete" status=OK trigger=h7_hub_arrival t=89431660 id=69
+						Lua 0:19:26:359
+[mod] [SMRTK] SMRTK_MARK action=mark label=H7_FIRE_BEGIN mark=87 status=OK t=89431660 id=70
+[SMRTK] SMRTK_MARK action=mark label=H7_FIRE_BEGIN mark=87 status=OK t=89431660 id=70
+[mod] [SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=42/42 game=405907 mark_action=mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923,SMR_TrainHubDev_20260918 pack_version=20 read="live registry" save="New Horizons 2 83.savegame.sav" sol=125 status=OK t=89431660 id=71
+[SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=42/42 game=405907 mark_action=mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923,SMR_TrainHubDev_20260918 pack_version=20 read="live registry" save="New Horizons 2 83.savegame.sav" sol=125 status=OK t=89431660 id=71
+[mod] [SMRTK] SMRTK_DUMP holder=PassageHub(2026) home=GeoscapeDome(1896) hub=PassageHub(2026) kind=hub leg=fire_before marker=PassageHub(2026) outside=false place=hub subject=Colonist(2000015055) task=false workplace=HospitalCCP1(12735) t=89431660 id=72
+[SMRTK] SMRTK_DUMP holder=PassageHub(2026) home=GeoscapeDome(1896) hub=PassageHub(2026) kind=hub leg=fire_before marker=PassageHub(2026) outside=false place=hub subject=Colonist(2000015055) task=false workplace=HospitalCCP1(12735) t=89431660 id=72
+[mod] [SMRTK] SMRTK_ARM action=h7_follow cadence=50 kind=hub once=true status=OK subject=Colonist(2000015055) trigger=h7_follow t=89431660 id=73
+[SMRTK] SMRTK_ARM action=h7_follow cadence=50 kind=hub once=true status=OK subject=Colonist(2000015055) trigger=h7_follow t=89431660 id=73
+						Lua 0:19:26:360
+[mod] [SMRTK] SMRTK_ARM action=run_until before=0 factor=128000 requested=128 status=OK target=h7_follow t=89431660 id=74
+[SMRTK] SMRTK_ARM action=run_until before=0 factor=128000 requested=128 status=OK target=h7_follow t=89431660 id=74
+[mod] [SMRTK] SMRTK_ACTION action=slot_4 fired=true kind=hub status=OK subject=Colonist(2000015055) watch=h7_follow t=89431660 id=75
+[SMRTK] SMRTK_ACTION action=slot_4 fired=true kind=hub status=OK subject=Colonist(2000015055) watch=h7_follow t=89431660 id=75
+						Lua 0:19:28:349
+[mod] [SMRTK] SMRTK_MARK action=mark label="Fired worker resolved (C114/C116)" mark=93 status=OK t=89468652 id=76
+[SMRTK] SMRTK_MARK action=mark label="Fired worker resolved (C114/C116)" mark=93 status=OK t=89468652 id=76
+[mod] [SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=42/42 game=405907 mark_action=mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923,SMR_TrainHubDev_20260918 pack_version=20 read="live registry" save="New Horizons 2 83.savegame.sav" sol=125 status=OK t=89468652 id=77
+[SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=42/42 game=405907 mark_action=mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923,SMR_TrainHubDev_20260918 pack_version=20 read="live registry" save="New Horizons 2 83.savegame.sav" sol=125 status=OK t=89468652 id=77
+[mod] [SMRTK] SMRTK_TRIGGER action=h7_follow booked=false build=hubset c114=HELD cleared=true dump_hex=true dump_marker=true dumped=true ended=safe fired=true kind=hub label="Fired worker resolved (C114/C116)" left_hub=true mark=93 marked_flight=true marker_lost_in_flight=false marker_now=none open_seen=false outside_now=false p5=NOT_SAMPLED p6=HELD pause=true place_now=home r4=HELD r6=HELD sound=true status=OK subject=Colonist(2000015055) trigger=h7_follow walked_out=false t=89468652 id=78
+[SMRTK] SMRTK_TRIGGER action=h7_follow booked=false build=hubset c114=HELD cleared=true dump_hex=true dump_marker=true dumped=true ended=safe fired=true kind=hub label="Fired worker resolved (C114/C116)" left_hub=true mark=93 marked_flight=true marker_lost_in_flight=false marker_now=none open_seen=false outside_now=false p5=NOT_SAMPLED p6=HELD pause=true place_now=home r4=HELD r6=HELD sound=true status=OK subject=Colonist(2000015055) trigger=h7_follow walked_out=false t=89468652 id=78
+[mod] [SMRTK] SMRTK_FIRE action=run_until paused=true sol=125 status=OK target=h7_follow t=89468652 id=79
+[SMRTK] SMRTK_FIRE action=run_until paused=true sol=125 status=OK target=h7_follow t=89468652 id=79
+						Lua 0:19:28:350
+[mod] [SMRTK] SMRTK_DISARM action=run_until reason="target trigger fired" status=OK t=89468652 id=80
+[SMRTK] SMRTK_DISARM action=run_until reason="target trigger fired" status=OK t=89468652 id=80
+[mod] [SMRTK] SMRTK_DISARM action=h7_follow reason="trigger complete" status=OK trigger=h7_follow t=89468652 id=81
+[SMRTK] SMRTK_DISARM action=h7_follow reason="trigger complete" status=OK trigger=h7_follow t=89468652 id=81
+						Lua 0:19:30:208
+[mod] [SMRTK] SMRTK_COPY action=copy flushed=true from=93 lines=6 status=OK truncated=false t=89468652 id=82
+[SMRTK] SMRTK_COPY action=copy flushed=true from=93 lines=6 status=OK truncated=false t=89468652 id=82
+						Lua 0:20:43:066
+[mod] [SMRTK] SMRTK_MARK action=mark label=H7_MIDSPOKE_BEGIN mark=100 status=OK t=89468652 id=83
+[SMRTK] SMRTK_MARK action=mark label=H7_MIDSPOKE_BEGIN mark=100 status=OK t=89468652 id=83
+[mod] [SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=42/42 game=405907 mark_action=mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923,SMR_TrainHubDev_20260918 pack_version=20 read="live registry" save="New Horizons 2 83.savegame.sav" sol=125 status=OK t=89468652 id=84
+[SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=42/42 game=405907 mark_action=mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923,SMR_TrainHubDev_20260918 pack_version=20 read="live registry" save="New Horizons 2 83.savegame.sav" sol=125 status=OK t=89468652 id=84
+[mod] [SMRTK] SMRTK_ARM action=h7_mid_spoke cadence=50 once=true status=OK trigger=h7_mid_spoke watch=mid_spoke t=89468652 id=85
+[SMRTK] SMRTK_ARM action=h7_mid_spoke cadence=50 once=true status=OK trigger=h7_mid_spoke watch=mid_spoke t=89468652 id=85
+						Lua 0:20:43:067
+[mod] [SMRTK] SMRTK_ARM action=run_until before=0 factor=128000 requested=128 status=OK target=h7_mid_spoke t=89468652 id=86
+[SMRTK] SMRTK_ARM action=run_until before=0 factor=128000 requested=128 status=OK target=h7_mid_spoke t=89468652 id=86
+[mod] [SMRTK] SMRTK_ACTION action=slot_3 build=hubset status=OK watch=h7_mid_spoke t=89468652 id=87
+[SMRTK] SMRTK_ACTION action=slot_3 build=hubset status=OK watch=h7_mid_spoke t=89468652 id=87
+						Lua 0:20:43:079
+[mod] [SMRTK] SMRTK_MARK action=mark label="Far-home worker mid-spoke (R5)" mark=105 status=OK t=89468780 id=88
+[SMRTK] SMRTK_MARK action=mark label="Far-home worker mid-spoke (R5)" mark=105 status=OK t=89468780 id=88
+[mod] [SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=42/42 game=405907 mark_action=mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923,SMR_TrainHubDev_20260918 pack_version=20 read="live registry" save="New Horizons 2 83.savegame.sav" sol=125 status=OK t=89468780 id=89
+[SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=42/42 game=405907 mark_action=mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923,SMR_TrainHubDev_20260918 pack_version=20 read="live registry" save="New Horizons 2 83.savegame.sav" sol=125 status=OK t=89468780 id=89
+						Lua 0:20:43:080
+[mod] [SMRTK] SMRTK_TRIGGER action=h7_mid_spoke command=Work holder=PassageHub(2692) home=GeoscapeDome(1896) hub=PassageHub(2692) label="Far-home worker mid-spoke (R5)" mark=105 marker=PassageHub(2692) mid_connected=true mid_flag=true mid_listed=true passage=Passage(2694) pause=true sound=true status=OK subject=Colonist(2000015288) trigger=h7_mid_spoke t=89468780 id=90
+[SMRTK] SMRTK_TRIGGER action=h7_mid_spoke command=Work holder=PassageHub(2692) home=GeoscapeDome(1896) hub=PassageHub(2692) label="Far-home worker mid-spoke (R5)" mark=105 marker=PassageHub(2692) mid_connected=true mid_flag=true mid_listed=true passage=Passage(2694) pause=true sound=true status=OK subject=Colonist(2000015288) trigger=h7_mid_spoke t=89468780 id=90
+[mod] [SMRTK] SMRTK_FIRE action=run_until paused=true sol=125 status=OK target=h7_mid_spoke t=89468780 id=91
+[SMRTK] SMRTK_FIRE action=run_until paused=true sol=125 status=OK target=h7_mid_spoke t=89468780 id=91
+[mod] [SMRTK] SMRTK_DISARM action=run_until reason="target trigger fired" status=OK t=89468780 id=92
+[SMRTK] SMRTK_DISARM action=run_until reason="target trigger fired" status=OK t=89468780 id=92
+[mod] [SMRTK] SMRTK_DISARM action=h7_mid_spoke reason="trigger complete" status=OK trigger=h7_mid_spoke t=89468780 id=93
+[SMRTK] SMRTK_DISARM action=h7_mid_spoke reason="trigger complete" status=OK trigger=h7_mid_spoke t=89468780 id=93
+						Lua 0:20:46:460
+[mod] [SMRTK] SMRTK_MARK action=mark label=H7_FIRE_BEGIN mark=111 status=OK t=89468780 id=94
+[SMRTK] SMRTK_MARK action=mark label=H7_FIRE_BEGIN mark=111 status=OK t=89468780 id=94
+[mod] [SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=42/42 game=405907 mark_action=mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923,SMR_TrainHubDev_20260918 pack_version=20 read="live registry" save="New Horizons 2 83.savegame.sav" sol=125 status=OK t=89468780 id=95
+[SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=42/42 game=405907 mark_action=mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923,SMR_TrainHubDev_20260918 pack_version=20 read="live registry" save="New Horizons 2 83.savegame.sav" sol=125 status=OK t=89468780 id=95
+[mod] [SMRTK] SMRTK_DUMP holder=PassageHub(2692) home=GeoscapeDome(1896) hub=PassageHub(2692) kind=flight leg=fire_before marker=PassageHub(2692) outside=false place=flight subject=Colonist(2000015288) task=false workplace=MinistryResearch(12731) t=89468780 id=96
+[SMRTK] SMRTK_DUMP holder=PassageHub(2692) home=GeoscapeDome(1896) hub=PassageHub(2692) kind=flight leg=fire_before marker=PassageHub(2692) outside=false place=flight subject=Colonist(2000015288) task=false workplace=MinistryResearch(12731) t=89468780 id=96
+						Lua 0:20:46:461
+[mod] [SMRTK] SMRTK_ARM action=h7_follow cadence=50 kind=flight once=true status=OK subject=Colonist(2000015288) trigger=h7_follow t=89468780 id=97
+[SMRTK] SMRTK_ARM action=h7_follow cadence=50 kind=flight once=true status=OK subject=Colonist(2000015288) trigger=h7_follow t=89468780 id=97
+[mod] [SMRTK] SMRTK_ARM action=run_until before=0 factor=128000 requested=128 status=OK target=h7_follow t=89468780 id=98
+[SMRTK] SMRTK_ARM action=run_until before=0 factor=128000 requested=128 status=OK target=h7_follow t=89468780 id=98
+[mod] [SMRTK] SMRTK_ACTION action=slot_4 fired=true kind=flight status=OK subject=Colonist(2000015288) watch=h7_follow t=89468780 id=99
+[SMRTK] SMRTK_ACTION action=slot_4 fired=true kind=flight status=OK subject=Colonist(2000015288) watch=h7_follow t=89468780 id=99
+						Lua 0:20:46:602
+[mod] [SMRTK] SMRTK_MARK action=mark label="Fired worker resolved (C114/C116)" mark=117 status=OK t=89472108 id=100
+[SMRTK] SMRTK_MARK action=mark label="Fired worker resolved (C114/C116)" mark=117 status=OK t=89472108 id=100
+[mod] [SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=42/42 game=405907 mark_action=mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923,SMR_TrainHubDev_20260918 pack_version=20 read="live registry" save="New Horizons 2 83.savegame.sav" sol=125 status=OK t=89472108 id=101
+[SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=42/42 game=405907 mark_action=mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923,SMR_TrainHubDev_20260918 pack_version=20 read="live registry" save="New Horizons 2 83.savegame.sav" sol=125 status=OK t=89472108 id=101
+						Lua 0:20:46:603
+[mod] [SMRTK] SMRTK_TRIGGER action=h7_follow booked=false build=hubset c114=HELD cleared=true dump_hex=false dump_marker=false dumped=true ended=safe fired=true kind=flight label="Fired worker resolved (C114/C116)" left_hub=true mark=117 marked_flight=true marker_lost_in_flight=false marker_now=none mid_flag=true mid_listed=true open_seen=false outside_now=false p5=NOT_SAMPLED p6=HELD pause=true place_now=home r5=HELD r6=HELD sound=true status=OK subject=Colonist(2000015288) trigger=h7_follow walked_out=false t=89472108 id=102
+[SMRTK] SMRTK_TRIGGER action=h7_follow booked=false build=hubset c114=HELD cleared=true dump_hex=false dump_marker=false dumped=true ended=safe fired=true kind=flight label="Fired worker resolved (C114/C116)" left_hub=true mark=117 marked_flight=true marker_lost_in_flight=false marker_now=none mid_flag=true mid_listed=true open_seen=false outside_now=false p5=NOT_SAMPLED p6=HELD pause=true place_now=home r5=HELD r6=HELD sound=true status=OK subject=Colonist(2000015288) trigger=h7_follow walked_out=false t=89472108 id=102
+[mod] [SMRTK] SMRTK_FIRE action=run_until paused=true sol=125 status=OK target=h7_follow t=89472108 id=103
+[SMRTK] SMRTK_FIRE action=run_until paused=true sol=125 status=OK target=h7_follow t=89472108 id=103
+[mod] [SMRTK] SMRTK_DISARM action=run_until reason="target trigger fired" status=OK t=89472108 id=104
+[SMRTK] SMRTK_DISARM action=run_until reason="target trigger fired" status=OK t=89472108 id=104
+[mod] [SMRTK] SMRTK_DISARM action=h7_follow reason="trigger complete" status=OK trigger=h7_follow t=89472108 id=105
+[SMRTK] SMRTK_DISARM action=h7_follow reason="trigger complete" status=OK trigger=h7_follow t=89472108 id=105
+						Lua 0:20:52:570
+[mod] [SMRTK] SMRTK_COPY action=copy flushed=true from=117 lines=6 status=OK truncated=false t=89472108 id=106
+[SMRTK] SMRTK_COPY action=copy flushed=true from=117 lines=6 status=OK truncated=false t=89472108 id=106
+						Lua 0:21:34:170
+[mod] [SMRTK] SMRTK_MARK action=mark label=H7_BUSY_BEGIN mark=124 status=OK t=89472108 id=107
+[SMRTK] SMRTK_MARK action=mark label=H7_BUSY_BEGIN mark=124 status=OK t=89472108 id=107
+[mod] [SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=42/42 game=405907 mark_action=mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923,SMR_TrainHubDev_20260918 pack_version=20 read="live registry" save="New Horizons 2 83.savegame.sav" sol=125 status=OK t=89472108 id=108
+[SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=42/42 game=405907 mark_action=mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923,SMR_TrainHubDev_20260918 pack_version=20 read="live registry" save="New Horizons 2 83.savegame.sav" sol=125 status=OK t=89472108 id=108
+[mod] [SMRTK] SMRTK_ARM action=h7_busy cadence=50 once=true status=OK trigger=h7_busy watch=busy t=89472108 id=109
+[SMRTK] SMRTK_ARM action=h7_busy cadence=50 once=true status=OK trigger=h7_busy watch=busy t=89472108 id=109
+[mod] [SMRTK] SMRTK_ARM action=run_until before=0 factor=128000 requested=128 status=OK target=h7_busy t=89472108 id=110
+[SMRTK] SMRTK_ARM action=run_until before=0 factor=128000 requested=128 status=OK target=h7_busy t=89472108 id=110
+[mod] [SMRTK] SMRTK_ACTION action=slot_5 stage=1 status=OK watch=h7_busy t=89472108 id=111
+[SMRTK] SMRTK_ACTION action=slot_5 stage=1 status=OK watch=h7_busy t=89472108 id=111
+						Lua 0:21:34:175
+[mod] [SMRTK] SMRTK_MARK action=mark label="Busy hub spoke with a live sibling (C117)" mark=129 status=OK t=89472236 id=112
+[SMRTK] SMRTK_MARK action=mark label="Busy hub spoke with a live sibling (C117)" mark=129 status=OK t=89472236 id=112
+						Lua 0:21:34:176
+[mod] [SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=42/42 game=405907 mark_action=mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923,SMR_TrainHubDev_20260918 pack_version=20 read="live registry" save="New Horizons 2 83.savegame.sav" sol=125 status=OK t=89472236 id=113
+[SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=42/42 game=405907 mark_action=mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923,SMR_TrainHubDev_20260918 pack_version=20 read="live registry" save="New Horizons 2 83.savegame.sav" sol=125 status=OK t=89472236 id=113
+[mod] [SMRTK] SMRTK_TRIGGER action=h7_busy hub=PassageHub(2692) label="Busy hub spoke with a live sibling (C117)" live_spokes=3 mark=129 passage=Passage(2694) pause=true sound=true status=OK traversers=66 trigger=h7_busy t=89472236 id=114
+[SMRTK] SMRTK_TRIGGER action=h7_busy hub=PassageHub(2692) label="Busy hub spoke with a live sibling (C117)" live_spokes=3 mark=129 passage=Passage(2694) pause=true sound=true status=OK traversers=66 trigger=h7_busy t=89472236 id=114
+[mod] [SMRTK] SMRTK_FIRE action=run_until paused=true sol=125 status=OK target=h7_busy t=89472236 id=115
+[SMRTK] SMRTK_FIRE action=run_until paused=true sol=125 status=OK target=h7_busy t=89472236 id=115
+[mod] [SMRTK] SMRTK_DISARM action=run_until reason="target trigger fired" status=OK t=89472236 id=116
+[SMRTK] SMRTK_DISARM action=run_until reason="target trigger fired" status=OK t=89472236 id=116
+[mod] [SMRTK] SMRTK_DISARM action=h7_busy reason="trigger complete" status=OK trigger=h7_busy t=89472236 id=117
+[SMRTK] SMRTK_DISARM action=h7_busy reason="trigger complete" status=OK trigger=h7_busy t=89472236 id=117
+						Lua 0:21:36:631
+[mod] [SMRTK] SMRTK_MARK action=mark label=H7_SALVAGE_BEGIN mark=135 status=OK t=89472236 id=118
+[SMRTK] SMRTK_MARK action=mark label=H7_SALVAGE_BEGIN mark=135 status=OK t=89472236 id=118
+[mod] [SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=42/42 game=405907 mark_action=mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923,SMR_TrainHubDev_20260918 pack_version=20 read="live registry" save="New Horizons 2 83.savegame.sav" sol=125 status=OK t=89472236 id=119
+[SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=42/42 game=405907 mark_action=mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923,SMR_TrainHubDev_20260918 pack_version=20 read="live registry" save="New Horizons 2 83.savegame.sav" sol=125 status=OK t=89472236 id=119
+[mod] [SMRTK] SMRTK_DUMP hub=PassageHub(2692) leg=salvage_before live_spokes=3 passage=Passage(2694) stale_now=0 traversers=66 t=89472236 id=120
+[SMRTK] SMRTK_DUMP hub=PassageHub(2692) leg=salvage_before live_spokes=3 passage=Passage(2694) stale_now=0 traversers=66 t=89472236 id=120
+[mod] [SMRTK] SMRTK_ARM action=h7_drain cadence=50 hub=PassageHub(2692) once=true passage=Passage(2694) status=OK trigger=h7_drain t=89472236 id=121
+[SMRTK] SMRTK_ARM action=h7_drain cadence=50 hub=PassageHub(2692) once=true passage=Passage(2694) status=OK trigger=h7_drain t=89472236 id=121
+						Lua 0:21:36:632
+[mod] [SMRTK] SMRTK_ARM action=run_until before=0 factor=128000 requested=128 status=OK target=h7_drain t=89472236 id=122
+[SMRTK] SMRTK_ARM action=run_until before=0 factor=128000 requested=128 status=OK target=h7_drain t=89472236 id=122
+[mod] [SMRTK] SMRTK_ACTION action=slot_5 passage=Passage(2694) stage=2 status=OK traversers=66 watch=h7_drain t=89472236 id=123
+[SMRTK] SMRTK_ACTION action=slot_5 passage=Passage(2694) stage=2 status=OK traversers=66 watch=h7_drain t=89472236 id=123
+						Lua 0:21:41:449
+[mod] [SMRTK] SMRTK_MARK action=mark label="Salvaged spoke resolved (C117/C42)" mark=141 status=OK t=89562604 id=124
+[SMRTK] SMRTK_MARK action=mark label="Salvaged spoke resolved (C117/C42)" mark=141 status=OK t=89562604 id=124
+						Lua 0:21:41:450
+[mod] [SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=42/42 game=405907 mark_action=mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923,SMR_TrainHubDev_20260918 pack_version=20 read="live registry" save="New Horizons 2 83.savegame.sav" sol=125 status=OK t=89562604 id=125
+[SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=42/42 game=405907 mark_action=mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923,SMR_TrainHubDev_20260918 pack_version=20 read="live registry" save="New Horizons 2 83.savegame.sav" sol=125 status=OK t=89562604 id=125
+[mod] [SMRTK] SMRTK_TRIGGER action=h7_drain arrivals=0 build=hubset drain_seen=false ended=timeout entered_after=0 hub_bound=0 hub_bound_unmarked=0 label="Salvaged spoke resolved (C117/C42)" mark=141 p7=NOT_SAMPLED p8=NOT_SAMPLED p9=NOT_SAMPLED passage=Passage(2694) pause=true sound=true stale_members=0 status=OK teleported=0 trigger=h7_drain t=89562604 id=126
+[SMRTK] SMRTK_TRIGGER action=h7_drain arrivals=0 build=hubset drain_seen=false ended=timeout entered_after=0 hub_bound=0 hub_bound_unmarked=0 label="Salvaged spoke resolved (C117/C42)" mark=141 p7=NOT_SAMPLED p8=NOT_SAMPLED p9=NOT_SAMPLED passage=Passage(2694) pause=true sound=true stale_members=0 status=OK teleported=0 trigger=h7_drain t=89562604 id=126
+[mod] [SMRTK] SMRTK_FIRE action=run_until paused=true sol=125 status=OK target=h7_drain t=89562604 id=127
+[SMRTK] SMRTK_FIRE action=run_until paused=true sol=125 status=OK target=h7_drain t=89562604 id=127
+[mod] [SMRTK] SMRTK_DISARM action=run_until reason="target trigger fired" status=OK t=89562604 id=128
+[SMRTK] SMRTK_DISARM action=run_until reason="target trigger fired" status=OK t=89562604 id=128
+[mod] [SMRTK] SMRTK_DISARM action=h7_drain reason="trigger complete" status=OK trigger=h7_drain t=89562604 id=129
+[SMRTK] SMRTK_DISARM action=h7_drain reason="trigger complete" status=OK trigger=h7_drain t=89562604 id=129
+						Lua 0:21:44:134
+[mod] [SMRTK] SMRTK_COPY action=copy flushed=true from=141 lines=6 status=OK truncated=false t=89562604 id=130
+[SMRTK] SMRTK_COPY action=copy flushed=true from=141 lines=6 status=OK truncated=false t=89562604 id=130
+						Lua 0:22:23:138
+[mod] [SMRTK] SMRTK_MARK action=mark label=H7_BOOT mark=148 status=OK t=89562604 id=131
+[SMRTK] SMRTK_MARK action=mark label=H7_BOOT mark=148 status=OK t=89562604 id=131
+[mod] [SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=42/42 game=405907 mark_action=mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923,SMR_TrainHubDev_20260918 pack_version=20 read="live registry" save="New Horizons 2 83.savegame.sav" sol=125 status=OK t=89562604 id=132
+[SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=42/42 game=405907 mark_action=mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923,SMR_TrainHubDev_20260918 pack_version=20 read="live registry" save="New Horizons 2 83.savegame.sav" sol=125 status=OK t=89562604 id=132
+						Lua 0:22:23:149
+[mod] [SMRTK] SMRTK_SHORTCUT console=false key=Ctrl-Shift-F11 t=89562604 id=133
+						Lua 0:22:23:158
+[mod] [SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=control t=89562604 id=134
+[SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=control t=89562604 id=134
+						Lua 0:22:23:168
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=89562604 id=135
+						Lua 0:22:23:177
+[mod] [SMRTK] SMRTK_CONSOLE_CONTROL action=console_control discriminates=true negative=false positive=true status=OK t=89562604 id=136
+[SMRTK] SMRTK_CONSOLE_CONTROL action=console_control discriminates=true negative=false positive=true status=OK t=89562604 id=136
+[mod] [SMRTK] SMRTK_TAINT_READ action=taint_read status=OK used=false t=89562604 id=137
+[SMRTK] SMRTK_TAINT_READ action=taint_read status=OK used=false t=89562604 id=137
+[mod] [SMRTK] SMRTK_ELIGIBILITY action=eligibility reason=UNAVAILABLE:sandbox status=OK t=89562604 id=138
+[SMRTK] SMRTK_ELIGIBILITY action=eligibility reason=UNAVAILABLE:sandbox status=OK t=89562604 id=138
+						Lua 0:22:23:180
+[mod] [SMRTK] SMRTK_DUMP domes=2 far=DomeMedium(3913)@23 hub=PassageHub(11985) leg=boot_hub live_spokes=2 mismatch=0 neither=0 units=0 t=89562604 id=139
+[SMRTK] SMRTK_DUMP domes=2 far=DomeMedium(3913)@23 hub=PassageHub(11985) leg=boot_hub live_spokes=2 mismatch=0 neither=0 units=0 t=89562604 id=139
+[mod] [SMRTK] SMRTK_DUMP domes=2 far=DomeMedium(3913)@22,DomeBasic(11739)@26 hub=PassageHub(11714) leg=boot_hub live_spokes=2 mismatch=0 neither=0 units=0 t=89562604 id=140
+[SMRTK] SMRTK_DUMP domes=2 far=DomeMedium(3913)@22,DomeBasic(11739)@26 hub=PassageHub(11714) leg=boot_hub live_spokes=2 mismatch=0 neither=0 units=0 t=89562604 id=140
+[mod] [SMRTK] SMRTK_DUMP domes=3 far=GeoscapeDome(1896)@29,DomeMedium(3913)@24,DomeMedium(3911)@22 hub=PassageHub(2692) leg=boot_hub live_spokes=3 mismatch=0 neither=0 units=54 t=89562604 id=141
+[SMRTK] SMRTK_DUMP domes=3 far=GeoscapeDome(1896)@29,DomeMedium(3913)@24,DomeMedium(3911)@22 hub=PassageHub(2692) leg=boot_hub live_spokes=3 mismatch=0 neither=0 units=54 t=89562604 id=141
+[mod] [SMRTK] SMRTK_DUMP domes=3 far=GeoscapeDome(1896)@27,DomeMedium(4053)@26,DomeMedium(3274)@21 hub=PassageHub(4113) leg=boot_hub live_spokes=3 mismatch=0 neither=0 units=12 t=89562604 id=142
+[SMRTK] SMRTK_DUMP domes=3 far=GeoscapeDome(1896)@27,DomeMedium(4053)@26,DomeMedium(3274)@21 hub=PassageHub(4113) leg=boot_hub live_spokes=3 mismatch=0 neither=0 units=12 t=89562604 id=142
+[mod] [SMRTK] SMRTK_DUMP domes=2 far=GeoscapeDome(1896)@26,DomeMedium(2564)@24 hub=PassageHub(1908) leg=boot_hub live_spokes=2 mismatch=0 neither=0 units=3 t=89562604 id=143
+[SMRTK] SMRTK_DUMP domes=2 far=GeoscapeDome(1896)@26,DomeMedium(2564)@24 hub=PassageHub(1908) leg=boot_hub live_spokes=2 mismatch=0 neither=0 units=3 t=89562604 id=143
+[mod] [SMRTK] SMRTK_DUMP domes=4 far=GeoscapeDome(1896)@29,DomeMedium(3867)@28 hub=PassageHub(2026) leg=boot_hub live_spokes=4 mismatch=0 neither=0 units=15 t=89562604 id=144
+[SMRTK] SMRTK_DUMP domes=4 far=GeoscapeDome(1896)@29,DomeMedium(3867)@28 hub=PassageHub(2026) leg=boot_hub live_spokes=4 mismatch=0 neither=0 units=15 t=89562604 id=144
+[mod] [SMRTK] SMRTK_DUMP holder_mismatch=0 leg=boot_r1 members=84 verdict=HELD t=89562604 id=145
+[SMRTK] SMRTK_DUMP holder_mismatch=0 leg=boot_r1 members=84 verdict=HELD t=89562604 id=145
+[mod] [SMRTK] SMRTK_DUMP flight=70 leg=boot_r2 members=84 neither=0 standing=14 verdict=HELD t=89562604 id=146
+[SMRTK] SMRTK_DUMP flight=70 leg=boot_r2 members=84 neither=0 standing=14 verdict=HELD t=89562604 id=146
+[mod] [SMRTK] SMRTK_DUMP dome=0 flight=89 held=0 home=0 hub=14 leg=boot_markers open=0 open_sheltered=0 total=103 t=89562604 id=147
+[SMRTK] SMRTK_DUMP dome=0 flight=89 held=0 home=0 hub=14 leg=boot_markers open=0 open_sheltered=0 total=103 t=89562604 id=147
+[mod] [SMRTK] SMRTK_DUMP home=0 leg=boot_rescues remote=13 t=89562604 id=148
+[SMRTK] SMRTK_DUMP home=0 leg=boot_rescues remote=13 t=89562604 id=148
+[mod] [SMRTK] SMRTK_DUMP elements=271 entries=0 leg=boot_c42stale passages=16 stale=0 verdict=HELD t=89562604 id=149
+[SMRTK] SMRTK_DUMP elements=271 entries=0 leg=boot_c42stale passages=16 stale=0 verdict=HELD t=89562604 id=149
+[mod] [SMRTK] SMRTK_DUMP homeless_hidden=0 leg=boot_f127 t=89562604 id=150
+[SMRTK] SMRTK_DUMP homeless_hidden=0 leg=boot_f127 t=89562604 id=150
+[mod] [SMRTK] SMRTK_MARK action=mark label=H7_BOOT_END mark=168 status=OK t=89562604 id=151
+[SMRTK] SMRTK_MARK action=mark label=H7_BOOT_END mark=168 status=OK t=89562604 id=151
+[mod] [SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=42/42 game=405907 mark_action=mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923,SMR_TrainHubDev_20260918 pack_version=20 read="live registry" save="New Horizons 2 83.savegame.sav" sol=125 status=OK t=89562604 id=152
+[SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=42/42 game=405907 mark_action=mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923,SMR_TrainHubDev_20260918 pack_version=20 read="live registry" save="New Horizons 2 83.savegame.sav" sol=125 status=OK t=89562604 id=152
+[mod] [SMRTK] SMRTK_ACTION action=slot_scratch build=hubset c42_stale=0 errors=0 hubs=6 large_dome_hubs=6 m_ArrivalDeaths=active m_HubLocalAccess=active m_HubMarkerDeparture=active m_ObsoleteHomeRescue=active m_PassageHubSalvageDrain=active m_PassageStaleHolder=active m_RescueReturnText=active m_VacuumWalks=active rescues_home=0 rescues_remote=13 sitting=hubset07 speed=0 status=OK t=89562604 id=153
+[SMRTK] SMRTK_ACTION action=slot_scratch build=hubset c42_stale=0 errors=0 hubs=6 large_dome_hubs=6 m_ArrivalDeaths=active m_HubLocalAccess=active m_HubMarkerDeparture=active m_ObsoleteHomeRescue=active m_PassageHubSalvageDrain=active m_PassageStaleHolder=active m_RescueReturnText=active m_VacuumWalks=active rescues_home=0 rescues_remote=13 sitting=hubset07 speed=0 status=OK t=89562604 id=153
+						Lua 0:22:27:321
+
+
+Stopping the game threads from the Lua side with exit code 0.
+
+					Render 0:22:27:322
+
+
+Stopping the game threads after receiving WM_QUIT.
+
+					Render 0:22:27:703
+
+
+*** Debug::Done()
+Time (ms)	1347703
+
+
