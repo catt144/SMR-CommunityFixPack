@@ -59,6 +59,14 @@ return {
 		'CodeFileName', "Code/Fix_ArrivalDeaths.lua",
 	}),
 	PlaceObj('ModItemCode', {
+		'name', "Fix_PassageStaleHolder",
+		'CodeFileName', "Code/Fix_PassageStaleHolder.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "Fix_RescueReturnText",
+		'CodeFileName', "Code/Fix_RescueReturnText.lua",
+	}),
+	PlaceObj('ModItemCode', {
 		'name', "Fix_StaleReservations",
 		'CodeFileName', "Code/Fix_StaleReservations.lua",
 	}),

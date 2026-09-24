@@ -49,6 +49,10 @@
 -- SRC: Lua/Units/Colonist.lua Colonist:MigrateStep sha256=ac305027ecb82916ed11b5181607ce46cb4b1cc3996d7939a66d258acbcd2724
 --   (Lua/Units/Colonist.lua:2155-2221 at pin time)
 -- DEFECT: GetAtmosphereBreathable\(self:GetMap\(\)\)\s+and\s+g_Consts.ColonistMinDistToIgnorePassage\s+or\s+g_Consts.ColonistMaxDomeWalkDist
+-- SRC: Lua/Units/Colonist.lua Colonist:GetNextMigrationLeg sha256=deba3d7951de6c358a04a316457c748641255bbd00040eeb0c061cf8d240ecb7
+--   (Lua/Units/Colonist.lua:3709-3717 at pin time)
+-- SRC: Lua/Buildings/Dome.lua IsInWalkingDistDome sha256=3c297c411ecc954fbcb052610a6ea76e8728d3c3de6961c7a7887510245b54f0
+--   (Lua/Buildings/Dome.lua:299-319 at pin time)
 
 SMRFixPack.Register("VacuumWalks", {
 	title = "Colonists use the passages instead of crossing vacuum on foot between nearby domes",
