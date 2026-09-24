@@ -1,0 +1,44 @@
+Command: python tools/desk_c117_hub_salvage.py
+Worktree HEAD: 38cd46c
+Archived source build: 1.1.1.405907
+
+==============================================================================
+C117 busy hub-spoke salvage drain -- archived 1.1.1.405907
+==============================================================================
+lua: Lua 5.5 | lupa 2.8
+
+extracted shipped bodies:
+  Lua/Passage.lua:1119-1124  /^function PassageBase:GetConnectedHub\(/
+  Lua/Passage.lua:1126-1129  /^function PassageBase:IsPFTunnelActive\(/
+  Lua/Passage.lua:1131-1152  /^function PassageBase:WouldStrandHubColonists\(/
+  Lua/Passage.lua:1154-1161  /^function PassageBase:ClearHubDraining\(/
+  Lua/Passage.lua:1093-1111  /^function PassageBase:OnSetDemolishing\(/
+  Lua/Passage.lua:1113-1115  /^function PassageBase:WakeUpDemolishThread\(/
+  Lua/Passage.lua:1163-1185  /^function PassageBase:OnDemolish\(/
+  Lua/Passage.lua:1201-1248  /^function PassageBase:TraverseTunnel\(/
+  Lua/Passage.lua:1388-1405  /^function PassageBase:DisconnectDomes\(/
+  Lua/Passage.lua:1435-1444  /^function PassageBase:DisconnectDomeFromHub\(/
+  Lua/Passage.lua:1742-1751  /^function PassageBase:RemovePFTunnel\(/
+  Lua/Passage.lua:686-712  /^function PassageGridElement:RemovePFTunnel\(/
+  Lua/Units/Unit.lua:238-246  /^function Unit:TraverseTunnel\(/
+  PASS  module applies through its real Require probe
+  PASS  busy spoke with a live sibling waits for its in-flight colonist  -- waits=1, remaining=0
+  PASS  in-flight colonist arrives on the hub before disconnect  -- holder/marker are hub; native disconnect removes the PF endpoint after arrival
+  PASS  fix-removed control takes the native outside branch after the same disconnect  -- waits=1, on_hub=False
+  PASS  last exit retains native pre-disconnect wait with the module installed  -- native/fixed waits=1/1
+  PASS  fresh entrant on a draining spoke with a usable sibling is refused
+  PASS  refused entry uses native Unit:TraverseTunnel ClearPath contract  -- ClearPath=1, AdvancePathTunnel=0
+  PASS  with no safe sibling, fresh last-exit traffic tail-delegates to native traversal
+  PASS  a simultaneous draining sibling is not treated as a safe exit (C99 remains native)
+  PASS  native cancellation clears hub_draining and the hub drain registration
+  PASS  a fresh entrant after cancellation is no longer refused
+  PASS  fresh-runtime reload reconstructs the drain solely from native fields
+  PASS  module declares no save handler or persisted game variable
+  PASS  missing PassageBase:TraverseTunnel shape declines before wrapper install
+  PASS  behaviour-probe control declines when the sibling shortcut no longer returns false
+  PASS  accepted PassageBase traversal preserves all chained returns, including nil
+  PASS  first IsKindOf gate passes a foreign receiver through with chained returns intact
+
+==============================================================================
+17 of 17 demands held
+ALL DEMANDS HELD -- C117's drain decisions discriminate from the native race.
