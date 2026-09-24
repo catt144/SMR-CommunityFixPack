@@ -145,14 +145,6 @@ Home: `docs/agent/bugs/F80.md`
 When a colony meets an entry's takeable condition, run its recipe: C40, C42, F99.
 Home: `docs/agent/bugs/C40.md`, `docs/agent/bugs/C42.md`, `docs/agent/bugs/F99.md`
 
-### ck215 · opened 2026-09-24
-When you next test the hub, restart, load the original autosave, then save and reload a separate copy.
-- First load Autosave Sol 31(3) with Train Hub and Rail Shaft enabled; pause and report assertions.
-- The agent restored the rotated-out input from its protected backup without overwriting a save.
-- After that passes, a named new save and an autosave both need reloads in a fresh process.
-- Keep the originals; the agent checks metadata and closed logs for persistence errors.
-Home: `docs/agent/reports/TRAIN_HUB_AUDIT_HANDOFF_20260924.md`
-
 ### ck195 · opened 2026-09-17
 When you reach Mystery 10's epilogue, run the entry's procedure.
 Home: `docs/agent/bugs/F06.md`
