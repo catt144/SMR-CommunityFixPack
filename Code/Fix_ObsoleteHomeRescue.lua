@@ -47,7 +47,9 @@ SMRFixPack.Register("ObsoleteHomeRescue", {
 					or task.state == "ready_for_pickup")
 				and not self.holder and IsUnitInDome(self) == dest_dome then
 				task:Cleanup()
-				return
+				-- Native Transport returns at once with no task (Colonist.lua:3964);
+				-- delegating keeps any earlier wrapper in the chain (FIX_POLICY 1.4).
+				return orig(self, dest_dome, ...)
 			end
 			return orig(self, dest_dome, ...)
 		end

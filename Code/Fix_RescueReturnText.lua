@@ -34,6 +34,9 @@ SMRFixPack.Register("RescueReturnText", {
 			{ global = "TGetID" },
 			{ global = "Untranslated" },
 			{ global = "IsKindOf" },
+			-- Stub contract: Getui_command reads command, dreaming, transport_task,
+			-- dome and emigration_dome, and calls IsInWorkCommand; it writes nothing
+			-- and never yields (Colonist.lua:4672-4716), so a table stub is safe.
 			{ probe = function()
 				local home = {}
 				local sample = {
