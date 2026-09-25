@@ -6,6 +6,11 @@
 -- and refuse fresh tunnel entries only while a usable sibling remains. A
 -- refused entry returns false to Unit:TraverseTunnel, which clears its path.
 -- The last usable exit remains open to traffic under the native safety wait.
+-- Only valid traversers hold that wait: a dead colonist's leftover list entry
+-- (the case of SavegameFixups.InvalidColonistsInPassages, Passage.lua:2627)
+-- would otherwise keep the spoke connected and refusing entries. This guard
+-- covers only the wait this module adds; native's own post-disconnect wait
+-- (Passage.lua:1182) still counts the unfiltered list and is left as shipped.
 -- Cancellation clears hub_draining in native OnSetDemolishing. Save/reload
 -- carries only native demolition and traversal state; this module adds none.
 --
@@ -57,11 +62,19 @@ SMRFixPack.Register("PassageHubSalvageDrain", {
 			return false
 		end
 
+		local function has_valid_traverser(list)
+			if type(list) ~= "table" then return false end
+			for _, unit in ipairs(list) do
+				if IsValid(unit) then return true end
+			end
+			return false
+		end
+
 		local native_wait = PassageBase.WouldStrandHubColonists
 		function PassageBase:WouldStrandHubColonists(...)
 			if not IsKindOf(self, "PassageBase") then return native_wait(self, ...) end
 			if IsValid(self.hub_draining) and self.demolishing
-				and #self.traversing_colonists > 0 then
+				and has_valid_traverser(self.traversing_colonists) then
 				return true
 			end
 			return native_wait(self, ...)

@@ -196,8 +196,17 @@ def load_body(rt, rel, pattern):
     return first, last
 
 
-def runtime(patched=True, missing_traverse=False, broken_probe=False, chained=False):
-    """A fresh Lua process is also the harness's no-mod-state reload model."""
+OLD_COUNT = "#self.traversing_colonists > 0"
+NEW_COUNT = "has_valid_traverser(self.traversing_colonists)"
+
+
+def runtime(patched=True, missing_traverse=False, broken_probe=False, chained=False,
+            old_count=False):
+    """A fresh Lua process is also the harness's no-mod-state reload model.
+
+    old_count loads the module with the played 7f6e6bf wait predicate (an
+    unfiltered `#traversing_colonists` count) as the old-shape mutant.
+    """
     rt = db.lua_runtime()
     db.load_at(rt, PRELUDE, "=c117_fixture")
     for rel, pattern in BODIES:
@@ -216,7 +225,11 @@ def runtime(patched=True, missing_traverse=False, broken_probe=False, chained=Fa
           end
         ''')
     if patched:
-        db.load_at(rt, db.read(str(MODULE)), "=Code/Fix_PassageHubSalvageDrain.lua")
+        text = db.read(str(MODULE))
+        if old_count:
+            assert text.count(NEW_COUNT) == 1, "valid-count predicate not found"
+            text = text.replace(NEW_COUNT, OLD_COUNT)
+        db.load_at(rt, text, "=Code/Fix_PassageHubSalvageDrain.lua")
     return rt
 
 
@@ -371,6 +384,39 @@ def main():
           and rg.SMRFixPack.result is None)
     check("module declares no save handler or persisted game variable",
           "OnMsg.Save" not in module_text and "GameVar" not in module_text)
+
+    # An invalid leftover traverser (a colonist that died mid-passage) must not
+    # hold the pre-disconnect wait this module adds. Native decides by the
+    # sibling shortcut (false), so the disconnect proceeds as shipped.
+    STALE_CASE = r'''
+      P, H, D, S, E, INFLIGHT = make_case(true)
+      P.demolishing = true; P.hub_draining = H; H.draining_passages[P] = true
+      DEAD = make_unit("dead", true); DEAD.valid = false
+      table.insert(P.traversing_colonists, DEAD)
+      STALE_ONLY = P:WouldStrandHubColonists()
+      table.insert(P.traversing_colonists, INFLIGHT)
+      STALE_AND_LIVE = P:WouldStrandHubColonists()
+    '''
+    stale = runtime(True)
+    stale.execute(STALE_CASE)
+    sg = stale.globals()
+    check("an invalid leftover traverser alone does not hold the pre-disconnect wait",
+          sg.STALE_ONLY is False,
+          f"stale_only={sg.STALE_ONLY}")
+    check("a live traverser beside an invalid entry still holds the wait",
+          sg.STALE_AND_LIVE is True,
+          f"stale_and_live={sg.STALE_AND_LIVE}")
+    old_shape = runtime(True, old_count=True)
+    old_shape.execute(STALE_CASE)
+    og = old_shape.globals()
+    check("old-shape control: the played unfiltered count held the wait on the invalid entry alone",
+          og.STALE_ONLY is True and og.STALE_AND_LIVE is True,
+          f"old stale_only={og.STALE_ONLY}")
+    native_stale = runtime(False)
+    native_stale.execute(STALE_CASE)
+    ng = native_stale.globals()
+    check("native control: the sibling shortcut disconnects regardless of the stale entry",
+          ng.STALE_ONLY is False and ng.STALE_AND_LIVE is False)
 
     missing = runtime(True, missing_traverse=True)
     check("missing PassageBase:TraverseTunnel shape declines before wrapper install",
