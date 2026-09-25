@@ -111,15 +111,6 @@ Home: `docs/archive/PLAYTEST_ARCHIVE.md`
 
 ## Run
 
-### ck218 · opened 2026-09-25
-When drone testing frees the game, run the Opt-In distribution prototype's console script.
-- Select a vanilla spoke connected to the hub; the report has the five-step script.
-- Check native claim targets, release afterward, and a train call at either end of the route.
-- Record local drone coverage; uncovered spokes can test only the train half.
-- Drone baseline and accept-with-consumer observations wait for Opt-In OI-29 and its follow-up build.
-- The current build samples drone baselines synchronously; it does not leave them installed.
-Home: `docs/agent/reports/OPTIN_DISTRIBUTION_PROTOTYPE_20260925.md`
-
 ### ck217 · opened 2026-09-25
 When you next test the Opt-In train hub, cover the drones QA's remaining native checks.
 - Check reassign buttons and rocket refusal, far-station go-home bounce, and no station balancing.
