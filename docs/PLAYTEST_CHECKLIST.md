@@ -14,14 +14,6 @@ the sweep in `docs/agent/prompts/perma/STATE_EVICTION.md` clears what ages out. 
 
 ## Decide
 
-### ck216 · opened 2026-09-24
-Approve C111's proposed own-home rescue wording for the hub release set, or give the wording you want?
-- Built on `hubset` at `795aefa`. Proposed exact text:
-  `Returning to Dome: <h SelectEmigrationDome InfopanelSelect><em><EmigrationDomeDisplayName></em></h>`.
-- The destination name remains a hyperlink; a real relocation retains the shipped "Moving to a new Dome" text.
-- This is wording approval, not a play verdict. Link 07 tests the display in game and link 99 audits it.
-Home: `docs/agent/bugs/C111.md`, `docs/agent/prompts/hubset/99_AUDIT_high.md`
-
 ### ck207 · opened 2026-09-23
 For future patches, adopt 12 flagged modules / 1,000 changed declarations and stop this deep sweep here?
 - Routed FULL at M=43, T=315, B=0, D3=0; reads found 3 FIX, 15 REMOVE, 34 KEEP (adjudicated 2026-09-23: 3/16/33).

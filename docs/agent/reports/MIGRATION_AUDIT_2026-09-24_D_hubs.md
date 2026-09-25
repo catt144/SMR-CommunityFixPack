@@ -1,5 +1,7 @@
 # Audit D: Passage Hubs and passage traversal (game build 1.1.1.405907)
 
+> **Correction, 2026-09-24 (hubset 03 and 99):** the premise `LeadIn → OnEnterUnit → SetHolder(element)` at lines 77, 89, 112 and 353 (75, 87, 110 and 351 before this note was inserted) is contradicted by `Lua/Passage.lua:819`, `PassageGridElement.OnEnterUnit = empty_func`. Passage elements never become holders. Rows built on that premise (element-holder lifetime, C42's stale member) are void; see `HUBSET_AUDIT_2026-09-24.md` §2.1.
+
 Read-only source audit. Unless marked otherwise, every citation is `file:line` in the archived
 **1.1.1.405907** tree `B:\Dev\SMR\SMR-Shared\SMR-SrcArchive\1.1.1.405907\Src\Lua` (paths relative to
 `Lua/`, or `CommonLua/` where stated). Citations marked (1.1.0) are from `...\1.1.0.403908\Src\Lua`.
