@@ -37,7 +37,8 @@ to change the plan if it finds a better way to do something."*
    out, and nothing happens silently: the player is told when a restart is needed.
 4. **No bandaid.** Option A (per-fix guard hardening) is not accepted as the deliverable in place
    of a load-order solution.
-5. **No sitting and no upload** without the owner's approval. Plan them; do not run them.
+5. **No attended sitting and no upload** without the owner's approval. Plan them; do not run them.
+   **Unattended game launches are yours** (see "Launching the game unattended").
 6. **The canary cannot harm a player,** whether it survives or runs.
 7. **A separate audit** judges the build (below).
 
@@ -112,6 +113,28 @@ doccheck must be GREEN. Open a live todo list before the first write.
    both guards pass. Replay the cross-check's control with PN's lines 45-51.
 
 Each case needs a control that fails with the promotion removed.
+
+## Launching the game unattended
+
+Owner, 2026-09-25: *"let them know they are free to start the game up for any unattended testing."*
+Launch the retail game on this rig as often as the work needs: cold restarts, repeated launches,
+enable and reload paths, the Passage Network order. Whatever you prove unattended leaves the
+owner's sitting, which shrinks to what truly needs a human, if anything. The rails:
+
+- **Do not interrupt the owner.** Run `tasklist /FI "IMAGENAME eq Mars.exe"` first. If the game is
+  running, it is the owner's; wait. Close only instances you started.
+- **Their mod order is real data.** B rewrites the saved enable order, and on this rig that is the
+  owner's own list. Before the first launch, record the current order and enabled set, read from
+  the log's "Loaded mod items for:" line and whatever else you use. Restore it before you finish,
+  then read it back from a fresh boot log. Never leave the owner's order changed.
+- **Saves:** scratch copies only (the in-tree `saves/` junctions are the owner's play history,
+  EF-110).
+- **Instruments** follow [tools/arming/README.md](../../../tools/arming/README.md): the harness,
+  payloads in the TestKit and never in the pack, arm then disarm, and read logs only after the
+  process exits.
+- **The junction:** if you point the rig at your branch, restore it and read it back (WORKFLOW,
+  "Release marking").
+- **Log evidence** a result cites is archived in the citing commit.
 
 ## The retail sitting plan (write it; the owner approves it before anyone prepares it)
 
