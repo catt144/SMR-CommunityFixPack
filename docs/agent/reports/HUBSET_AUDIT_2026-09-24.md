@@ -245,3 +245,22 @@ the C117 valid-count hardening or ship the revision 07B played.
 
 **Next chain:** none is queued. The natural next item is the load-order decision the owner
 deferred until after the fixes (`e11a131`, `LOAD_ORDER_CROSSCHECK_2026-09-24.md`).
+
+## 7 · Close-out record (owner's go, 2026-09-24: "Go with the recommendations")
+
+- `hubset` `acd89f0` dropped `Code/Fix_PassageStaleHolder.lua` and its two registrations; C42 is
+  `wontfix — unreachable (R4)`. The 07/07B rehearsal harnesses and the TestKit slot file
+  `80_AgentSlots.lua` still name `PassageStaleHolder` in their read-back fixture list; both model
+  the sittings as played and are left as records.
+- Merge `8cb1727` (`git merge --no-ff hubset`, no conflicts: the branch touched only `Code/`,
+  `items.lua`, `metadata.lua`, `tools/`). Post-merge on `main`: parsecheck 43 files 0 errors,
+  MODULE SETS agree (43 files, 41 registered), WRAP CHECK 0 outside Require, doccheck GREEN.
+- Statuses set at `3eb0a43`: C111 `tested-attended`; C114, C117 `tested-unattended`; C115, C116,
+  F127 `fixed`; C42 `wontfix`.
+- This close-out commit: `tools/desk_c42_passage_stale.py` retired with the tool catalog
+  regenerated; six `### Pending` entries appended to `RELEASE_OUTBOX.md` (C114, C115, C116, C117,
+  C111 as new rows; F127 as a respecification of the C83 row); the chain README archived to
+  `docs/archive/prompts/hubset/README.md`; the `hubset/` map row removed; `99_AUDIT_high.md` and
+  the live README `git rm`'d; worktree `../SMR-BugFixPack-hubset` removed and the local `hubset`
+  branch deleted (`origin/hubset` left for the owner).
+- The upload is the owner's, through `release_prompt.md`. Nothing was pushed.
