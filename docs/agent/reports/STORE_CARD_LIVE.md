@@ -135,7 +135,7 @@ back at Paradox. ⛔ Do not paste the same block on both.
 ```
 Bug fixes for Surviving Mars: Relaunched.
 
-Thirty-eight repairs, each one written up on the fix list with what you would
+Forty-three repairs, each one written up on the fix list with what you would
 have seen and what was actually wrong. Every one targets something the game's
 own code gets wrong — the code says one thing, does another, and the fix makes
 it do what it says. It fixes bugs; it does not rebalance the game. Preferences
@@ -235,7 +235,7 @@ HOW IT WORKS
 ```
 [h2]Bug fixes for [i]Surviving Mars: Relaunched[/i].[/h2]
 
-[b]Thirty-eight repairs[/b], each one written up on the fix list with what you would have seen and what was actually wrong. Every one targets something the game's own code gets wrong — the code says one thing, does another, and the fix makes it do what it says. It fixes bugs; it does not rebalance the game. Preferences and features are deliberately not in it.
+[b]Forty-three repairs[/b], each one written up on the fix list with what you would have seen and what was actually wrong. Every one targets something the game's own code gets wrong — the code says one thing, does another, and the fix makes it do what it says. It fixes bugs; it does not rebalance the game. Preferences and features are deliberately not in it.
 
 Some of them you could hardly miss: an entire train line and every train on it deleted by salvaging a single hex, colonists suffocating on a walk between two domes, an artificial lake burying the rover that was building it.
 
@@ -798,3 +798,22 @@ normal while the arithmetic underneath is wrong).
 chars (it counts the stored Lua string, where each `\n` escape is two characters); as
 the store renders it that is 4,620. Either way it is well below the 5,342 the v6 upload was accepted at, so
 the known acceptance ceiling is untouched. `last_changes` is 734 rendered chars.
+
+## ⭐ 2026-09-24 — v16 words (`release_prompt.md` §1): count 38 → 43, headliners unchanged
+
+**Count: Thirty-eight → Forty-three.** The hub set adds five rows to *Colonists & domes*: C114 (hub
+colonists sent a rescue instead of walking in), C115 (a colonist home already walks back out to an
+obsolete pickup), C117 (salvaging a busy hub passage), C116 (stale hub shelter marker) and C111
+(a rescue home reads as a move). F127 respecifies C83's arrivals row with one sentence (the rejected
+dome's bed is released); it is not a new row. Re-derived from `SMR-CommunityMods`
+`content/fix-list.md`: `grep -c '^??? '` = **43**, section tally 2 (Disasters & weather) + 18
+(Colonists & domes) + 4 (Drones & logistics) + 4 (Buildings & economy) + 5 (Trains) + 5 (Rockets &
+asteroids) + 3 (Story & mysteries) + 2 (Under the hood) = 43. Judgment calls unchanged at **four**
+(`grep -c '^??? question'`). Body copies moved together: `Forty-three repairs` = 1 (`metadata.lua`)
++ 2 (this file) + 2 (`UPLOAD_WORKFLOW.md` §3) = 5, and 0 body hits left for `Thirty-eight repairs`;
+the one left in this file is the v15 log entry above.
+
+Headliners stay at nine. Adding one would be a new selection from the audited list, which the
+batch does not call for. The change note says what was seen in play (C114 and C117, read on both
+builds; C111, owner-watched) and says plainly that the rescue-cancel, hub-marker and bed repairs
+were not watched happening.

@@ -91,7 +91,7 @@ The public-surface sweep maintains the backup copy below alongside its two canon
 ```
 Bug fixes for Surviving Mars: Relaunched.
 
-Thirty-eight repairs, each one written up on the fix list with what you would
+Forty-three repairs, each one written up on the fix list with what you would
 have seen and what was actually wrong. Every one targets something the game's
 own code gets wrong — the code says one thing, does another, and the fix makes
 it do what it says. It fixes bugs; it does not rebalance the game. Preferences
@@ -200,7 +200,7 @@ heading, which is how the tool finds it.
 ```
 [h2]Bug fixes for [i]Surviving Mars: Relaunched[/i].[/h2]
 
-[b]Thirty-eight repairs[/b], each one written up on the fix list with what you would have seen and what was actually wrong. Every one targets something the game's own code gets wrong — the code says one thing, does another, and the fix makes it do what it says. It fixes bugs; it does not rebalance the game. Preferences and features are deliberately not in it.
+[b]Forty-three repairs[/b], each one written up on the fix list with what you would have seen and what was actually wrong. Every one targets something the game's own code gets wrong — the code says one thing, does another, and the fix makes it do what it says. It fixes bugs; it does not rebalance the game. Preferences and features are deliberately not in it.
 
 Some of them you could hardly miss: an entire train line and every train on it deleted by salvaging a single hex, colonists suffocating on a walk between two domes, an artificial lake burying the rover that was building it.
 
@@ -258,13 +258,17 @@ Usually auto-fills. If it is missing under **CHANGELOG** (Paradox) or **Change
 Notes** (Steam), paste this:
 
 ```
-One repair added.
+Five repairs added, most of them around passage hubs and shuttle rescues.
 
--Wildfire cure — NEW. It loads cleanly in a running game; the cure itself has not been watched yet.
-The problem: once the Wildfire cure was found, infected colonists never went to a medical building for it, so the mystery could not finish. The 1.1.0 game pays a dome's medical care to its colonists at home, so under a Medical Center they never fell ill enough to be sent.
-The fix: once the cure is found, an infected colonist's daily outing is a visit to a medical building, where they are cured.
+-A colonist on a passage hub, or crossing one of its passages, next to a large dome now walks into that dome instead of being sent a rescue shuttle. Seen working in a running game.
+-Salvaging one passage of a busy hub now lets the colonists crossing it arrive before it disconnects, instead of leaving them outside at the hub. Seen working in a running game.
+-A colonist who has already made it home no longer walks back outside to wait for a rescue shuttle booked earlier.
+-A colonist who has left a passage hub is no longer treated as sheltered by it.
+-A rescue back to a colonist's own dome now reads "Returning to Dome" instead of "Moving to a new Dome". Seen in a running game. The new line is in English in every language for now.
+-When new arrivals are redirected from a dome that cannot take them, the bed held for them there is now released instead of sitting empty.
+-The rescue shuttle, hub shelter and bed repairs have not been watched happening in a running game yet.
 
-The fix list goes from fifty-four to fifty-five.
+The fix list goes from thirty-eight to forty-three.
 ```
 
 #### 📋 Short summary (only if it also came out blank)
