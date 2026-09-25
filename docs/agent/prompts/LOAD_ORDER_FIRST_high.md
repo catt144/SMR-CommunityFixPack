@@ -23,7 +23,35 @@ B is the cross-check's lever "Pack promotes its saved seed through public helper
 "Custom metadata `SetupEnv` wrapping the selector". Per-fix guard hardening (option A) is **not**
 this job: the owner rejected it as a bandaid.
 
-**End state:**
+### What is fixed and what is yours
+
+The owner's instruction for this brief (2026-09-25): *"Make sure we don't put them in a box, allow it
+to change the plan if it finds a better way to do something."*
+
+**FIXED** (owner requirements and safety rails; do not depart):
+
+1. **The goal:** our vanilla repairs run before content mods, reliably, for players who have not
+   read any instructions.
+2. **No game files modified.** Nothing ships outside the pack.
+3. **The player stays in control.** Other mods' relative order is preserved, the player can opt
+   out, and nothing happens silently: the player is told when a restart is needed.
+4. **No bandaid.** Option A (per-fix guard hardening) is not accepted as the deliverable in place
+   of a load-order solution.
+5. **No sitting and no upload** without the owner's approval. Plan them; do not run them.
+6. **The canary cannot harm a player,** whether it survives or runs.
+7. **A separate audit** judges the build (below).
+
+**DEFAULT** (everything else, including the mechanism): the end state, the "Must hold" list, the
+sitting plan's shape and the canary design are this brief's best current plan, not a box. If you
+find a better way, depart. That covers a different mechanism than B's public-helper route, an
+earlier point to act, a better notice, or a stronger test. State each departure with its evidence
+in the report's DEPARTURES. Add SUGGESTIONS for anything you saw but did not do. If the better way
+changes what the player experiences, or moves to a lever the owner has not chosen (for example
+building C's bootstrap now), you may still build it. Flag it at the top of the report so the owner
+sees it before the sitting. The audit judges departures on evidence, not on conformance to this
+text.
+
+**End state (DEFAULT):**
 
 1. **B built, on a short-lived code branch** per WORKFLOW's branch rule. When the pack starts and
    is not first in the player's saved enable order, it moves itself to the front and keeps every
@@ -69,7 +97,7 @@ doccheck must be GREEN. Open a live todo list before the first write.
   The cross-check expects a resave to strip an undeclared `SetupEnv` method. Trap 3 in
   `perma/HANDOFF_ORCHESTRATOR.md` covers the writeback.
 
-## Must hold (desk)
+## Must hold (desk; a minimum, not a ceiling; add cases, or replace one with a stronger test and say why)
 
 1. **Promotion.** A saved list `X, PACK, Y` becomes `PACK, X, Y` for the next launch, and the
    running session is untouched. The same holds when the pack is already last.
@@ -120,14 +148,15 @@ the canary in the release outbox.
 
 - **In:** B's code in the pack core or its own module, the opt-out, the notice text, the desk
   harness, the sitting plan, the canary and its check procedure, and the records.
-- **Out:** changes to any fix module's guards (option A); option C's bootstrap itself; public
-  load-order advice beyond B's own notice; an upload.
+- **Out:** guard hardening (option A) as the deliverable; public load-order advice beyond the
+  solution's own notice; an upload; a sitting. C's bootstrap is out by default. Build it only if you
+  judge it the better route, and flag it as the DEFAULT section says.
 
 ## Stops (report instead of continuing)
 
-- The helpers are not reachable from pack code in the retail sandbox (EF-096 blacklist, or a
-  missing global).
-- B cannot keep the others' relative order, or cannot avoid writing on every launch.
+- No route you can find meets the FIXED list: for example, nothing reachable from pack code in the
+  retail sandbox (EF-096) can change the order. Report what you tried and the closest option, with
+  its cost.
 - The canary cannot be shown inert at the desk. In that case ship B without it and say so.
 
 ## Do not claim
@@ -163,7 +192,9 @@ kickoff line.
 ## Audit (a separate seat, fresh context)
 
 Disbelieve the build. Check it against the branch diff, the archived source and re-run harnesses,
-never against the report's summary.
+never against the report's summary. Hold it to the FIXED list. Judge each DEPARTURE on its evidence:
+a better route the builder took is not a defect because this brief did not name it. Where the
+build departed from a check below, audit the equivalent it chose instead.
 
 1. **Controls.** Re-run each "Must hold" control, then revert the promotion in a scratch copy and
    require each one to FAIL. A control that passes with the promotion removed is vacuous.
