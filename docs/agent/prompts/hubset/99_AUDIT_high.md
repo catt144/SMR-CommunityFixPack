@@ -440,3 +440,5 @@ has a dated "hubset 07B second pass" section. **No status was changed.**
   `7f6e6bf`), since the working slot file belongs to 07B.
 - **07's C111 entry line** claiming the `emigration_dome` condition held was wrong. It is marked
   corrected in place.
+- **C111 wording approved** (owner, 2026-09-24, verbatim): "the wording is fine". C111 is moved from
+  `cand` to `fixed` (pending audit). `tested-attended` on the 07B witness remains 99's call.
