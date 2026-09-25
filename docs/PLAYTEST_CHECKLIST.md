@@ -111,6 +111,16 @@ Home: `docs/archive/PLAYTEST_ARCHIVE.md`
 
 ## Run
 
+### ck217 · opened 2026-09-25
+When you next test the Opt-In train hub, cover the drones QA's remaining native checks.
+- Check reassign buttons and rocket refusal, far-station go-home bounce, and no station balancing.
+- Watch a long run and a hold past 60 s for Lost; test repair with no grid and the storage display cap.
+- Judge the door route and work pose; train clipping and the fixed 7 m engine ride are already accepted.
+- After the fleet fix, test two hubs launching together and a cold load with a repair notice.
+- At ship: with/without a named fix-pack release, both module-toggle directions, and old/new save controls.
+- Construction and retained cargo wait for import/export and dials; Wasp palette belongs to brief 05.
+Home: `docs/agent/reports/OPTIN_DRONES_QA_20260925.md`
+
 ### ck205 · opened 2026-09-19
 When you next have the site open, send one test report from its *Bug reports & problems* page.
 - Pick both dropdowns, write a line, and attach a small `.txt` or `.log`.
