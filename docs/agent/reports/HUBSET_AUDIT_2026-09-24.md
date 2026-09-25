@@ -82,14 +82,19 @@ the branch by this link and re-run.
    Behaviour-identical: native `Transport` opens with `if not self.transport_task then return end`
    (`Colonist.lua:3964`) and `Cleanup` has just set it false (`LRTransport.lua:78-80`). It restores
    §1.4 "always call it" and keeps another mod's earlier `Transport` wrapper in the chain.
-3. **C117 — owner's call: count only valid traversers in the extended wait**
-   (`Code/Fix_PassageHubSalvageDrain.lua`, `#self.traversing_colonists > 0`). A dead colonist whose
-   traversal errored leaves its list entry (the native fixup `SavegameFixups.InvalidColonistsInPassages`,
-   `Passage.lua:2627`, exists for this and runs once per save). Natively that hangs demolition
-   after the disconnect; with C117 and a usable sibling it hangs before the disconnect and every
-   fresh entry is refused until the entry clears. Native's own predicate (:1139) has the same
-   unvalidated count, so this is parity, not a regression, and the hardening is a two-line guard
-   plus one desk demand. It changes the revision 07B played, which is why it is the owner's call.
+3. **C117 — count only valid traversers in the extended wait** (`Code/Fix_PassageHubSalvageDrain.lua`;
+   applied on `hubset` after the second-seat review, see §5). A dead colonist whose traversal
+   errored leaves its list entry (the native fixup `SavegameFixups.InvalidColonistsInPassages`,
+   `Passage.lua:2627`, exists for this and runs once per save). On the played revision `7f6e6bf`,
+   with a usable sibling, such an entry held the module's pre-disconnect wait indefinitely: the
+   spoke stayed connected and every fresh entry was refused until the entry cleared. The guard's
+   benefit is exactly that: an invalid entry no longer holds the wait this module adds, so the
+   disconnect proceeds as shipped. It does not repair the inherited hang: native's own
+   post-disconnect wait (`Passage.lua:1182`) still counts the unfiltered list, and the pre-disconnect
+   predicate (`:1139`) has the same unvalidated count on the last exit; both are left as shipped.
+   Desk: an invalid entry alone returns false, a live entry beside it returns true, the old-shape
+   mutant (the played count) returns true on the invalid entry alone, and native returns false
+   regardless. It changes the revision 07B played by a guard that returns true in fewer cases.
 4. **C111 — add the probe's stub-contract comment** (`Code/Fix_RescueReturnText.lua`).
    `00_Core.lua:172-177` requires every probe to name what the stub must provide and why the
    target is safe to call on one; the C117 probe has one, the C111 probe does not. Comment only.
@@ -109,9 +114,11 @@ the branch by this link and re-run.
   two different subjects. The fixed subject entered a different dome than home, which the judge
   accepts and the 07B brief's "walks home" wording over-states. No owner observation of the
   outcome exists: the owner screenshot is the pre-fire "Going to work", and SMRTK_0079 is an
-  automatic capture. Interaction with C117 (transient, bounded): while a spoke drains, its dome
+  automatic capture. Interaction with C117: while a spoke drains, its dome
   stays in `hub_domes`, so C114 grants access and C117 refuses the entry; failed walks instead of
-  a rescue until the drain ends. Nit: `Fix_HubLocalAccess.lua:70-71` is a tab short.
+  a rescue until the drain ends. Bounded by the drain once change 3 is applied; on the played
+  revision an invalid leftover traverser made that drain, and so this interaction, persist until
+  the entry cleared (second-seat review, 2026-09-24). Nit: `Fix_HubLocalAccess.lua:70-71` is a tab short.
 - **C116** (`Fix_HubMarkerDeparture.lua`). `Unit.Step` is replaced before classes build and `Unit`
   is flattened (`Unit.lua:4`), so a live Colonist dispatches through it; `StopMoving`
   (`Colonist.lua:2963`) and `SetHolderOnMap` (`:3186`) are declared on Colonist. `departed()`
@@ -215,6 +222,12 @@ on the module).
 
 - Branch `hubset`: change 2 (C115 delegates after cleanup) and change 4 (C111 probe comment)
   applied as `hubset` `86d03d8` and its harnesses re-run; totals in the commit message.
+- Second-seat review (owner-relayed, 2026-09-24) agreed SHIP WITH CHANGES, recommended dropping
+  C42 and applying change 3, and corrected two claims of this report: the C117 guard's benefit is
+  confined to the module's own wait, and the C114/C117 interaction was unbounded on the played
+  revision. Both corrected in §2.3 and §3. Change 3 applied as `hubset` `bd4d9dd`
+  (`desk_c117_hub_salvage.py` 21 of 21, old-shape mutant included). C42's drop and the merge
+  still wait on the owner's go in words.
 - `main`: this report; entry corrections named in §3 for C114, C115, C116, C117, C42 (record
   only), F127; 06B pointers; ck216 removed; SMRTK_0074 archived; the D_hubs premise annotated.
   Statuses are not changed before the go; §6 lists the statuses the evidence supports.
