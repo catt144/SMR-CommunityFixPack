@@ -403,3 +403,40 @@ watched no fix work.
   This result is unaudited: only after this link's independent audit, add the dated report pointer
   to C111, C114 and C117. Their entries were intentionally not updated by 06B. Nothing was merged
   to main's Code, metadata or items, and no release surface was changed.
+
+### From hubset 07B, 2026-09-24 — the owner-approved second pass ran; C111, C114 and C117 discriminate
+
+Both segments ran on New Horizons 2 83 (sol 125): A on `main`, B on `hubset` `7f6e6bf` (C111 re-fix
+`e5fc0c6`), TestKit `4fd0275`. The B read-back held: `build=hubset`, six `active`, six `applied`. Evidence
+in `docs/archive/logs/`: `hubset07b_segA_main_2026-09-24.log`, `hubset07b_segB_hubset_2026-09-24.log`,
+`hubset07b_owner_relay_2026-09-24.md`, and the owner's screenshots `hubset07b_A_slot2_owner.jpg` and
+`hubset07b_B_slot1_owner.jpg`. Auto-screenshots SMRTK_0077-0080 are in `SMR-ScreenCaptures`. Each entry
+has a dated "hubset 07B second pass" section. **No status was changed.**
+
+| member | `main` (fix off) | `hubset` (fix on) |
+|---|---|---|
+| C111 | not re-read (slot refused: unpaused); 07's baseline stands | "Returning to Dome: Brussels", owner screenshot; `emigration_dome=false` |
+| C114 | `booked=true`, shuttle rescue (HELD: defect reproduced) | `booked=false ended=safe` (HELD); SMRTK_0079 shows the subject |
+| C117 | 43 of 43 hub landings unmarked (HELD: defect reproduced) | 0 of 37 unmarked (HELD); `entered_after=0` (HELD) |
+
+**For the audit:**
+- **C114 selection.** Both subjects were `exposed=true` on PassageHub(2692): nearest community
+  DomeMedium(3911) out of reach, home 29 hexes, no train or work route, shuttles on, hub linked. 07's
+  hub 2026 had DomeMega(3871) in reach, which explains 07's non-reproduction.
+- **Status candidates.**
+  - C111 was owner-watched working. Its tag also waits on the owner's wording approval.
+  - C114 was watched at the owner's pause with the subject selected (SMRTK_0079).
+  - C117 was log-read only; the auto-screenshot did not show a landed walker.
+
+**Drift and instrument defects:**
+- **C111 judge:** it returns NOT_SAMPLED for the fixed text, because the `Untranslated` text has no
+  T id and the judge requires one. The logged fields meet the prediction.
+- **C117 auto-screenshot** (`h7b_drain`): the subject selected just before capture did not show;
+  SMRTK_0080 still shows the C114 subject.
+- **Order.** The owner ran segment A before the pre-sitting checks. They were checked afterwards:
+  junction, fixture sha256 `036e130d…`, no save written, heads. In B the owner pressed slots out of
+  order (2, 4, 3, 4, 5). Slot 3 re-read the inputs at firing (`exposed=true`, id=62).
+- **Harness pin.** `desk_hubset07_rehearsal.py` is now pinned to TestKit `66288da` (`hubset`
+  `7f6e6bf`), since the working slot file belongs to 07B.
+- **07's C111 entry line** claiming the `emigration_dome` condition held was wrong. It is marked
+  corrected in place.

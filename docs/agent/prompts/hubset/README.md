@@ -52,7 +52,7 @@ report the disagreement.
 | ~~06~~ | ~~`06_SITTING_PREP_medium.md`~~ | ~~medium~~ | ~~no~~ | ~~predictions, fixtures and the script for 07~~ |
 | ~~07~~ | ~~`07_VERIFY_SITTING_owner.md`~~ | ~~attended~~ | ~~✅ keyboard~~ | ~~every member in the real game, fix on and off~~ |
 | ~~06B~~ | ~~`06B_SITTING_FINDINGS_high.md`~~ | ~~high~~ | ~~no (feeds the owner's decision)~~ | ~~desk answers to 07's three open questions: C111's missed text, C114's non-reproduction, C117's unsampled watch~~ |
-| 07B | `07B_VERIFY_PASS2_owner.md` | attended | ✅ keyboard | owner-approved second pass: C111, C114 and C117 each staged by a slot, fix on and off |
+| ~~07B~~ | ~~`07B_VERIFY_PASS2_owner.md`~~ | ~~attended~~ | ~~✅ keyboard~~ | ~~owner-approved second pass: C111, C114 and C117 each staged by a slot, fix on and off~~ |
 | 99 | `99_AUDIT_high.md` | high | ✅ raises | adversarial audit of the branch; SHIP / SHIP WITH CHANGES / NO SHIP; on SHIP and the owner's go, the merge and the records |
 
 ## Ordering
