@@ -8,6 +8,25 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-24 — v16 released: the hub set lands, count Thirty-eight → Forty-three
+
+Ran `release_prompt.md` from a bare path invocation — prepare, hold, owner upload, close. The v15
+close was already done (comments present, newest Steam update Sep 23). The batch was the outbox's six
+Pending entries from the merged hub set: five new fix-list rows (C114, C115, C116, C117, C111) and
+F127 as one sentence on C83's existing arrivals row. Count re-derived from the site file: 43 rows,
+sections 2+18+4+4+5+5+3+2; judgment calls four; headliners left at nine because adding one would be a
+new selection. The workflow's change-note backup still held v14's Wildfire text and was synced from
+`last_changes`. Words `40cc10c`, STATE marker `0c7b55a`, site `110db81`.
+
+Close-out: writeback `version` 20 → **21**, `pdx_version` "14" → **"15"**, `saved` and `code_hash`
+rewritten; comments stripped from both shipped files (0 left in each) and restored from `0c7b55a` with
+those four values carried, value lines otherwise identical (89 and 174 non-comment lines compared).
+Steam read back: body "Forty-three repairs" 1 hit, "Thirty-eight repairs" 0; newest change note
+*"Update: Sep 24 @ 8:29pm"*. ⚠ The posted note is the draft with its five play-evidence and disclosure
+passages removed, while the writeback still holds the full draft, so the cut was made on the store
+page after the save. Recorded in `RELEASE_HISTORY.md`, not repaired: rewriting `last_changes` would
+post a duplicate. ⛔ Paradox body not read back. ⛔ Site not published: `110db81` was unpushed at close.
+
 ## 2026-09-23 — v15 released: game 1.1.1 takes seventeen rows off the fix list
 
 Ran `release_prompt.md` end to end from a bare path invocation — prepare, hold, owner upload, close. The
