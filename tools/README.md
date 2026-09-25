@@ -94,7 +94,7 @@ comments is written by `python tools/doccheck.py --regen` and checked by
 
 <!-- GENERATED TOOL ROWS — never hand-edit; regenerate with: python tools/doccheck.py --regen -->
 
-*75 scripts, every `tools/*.py` on disk. This block is GENERATED: a row's text is copied from the script's own header, so a wrong row is repaired in the script, never here.*
+*85 scripts, every `tools/*.py` on disk. This block is GENERATED: a row's text is copied from the script's own header, so a wrong row is repaired in the script, never here.*
 
 ### Repo gates, and the falsifiers that keep them honest
 
@@ -234,9 +234,19 @@ New since the last grouping pass. Give each a home in `TOOL_GROUPS` in `tools/do
 |---|---|
 | [`desk_c107_dry_farming.py`](desk_c107_dry_farming.py) | C107 Dry Farming reaches the four Feeding the Future plant farms: the module through the REAL core, over the shipped DryFarming preset, the shipped farm templates and the shipped BuildingTemplates builder, in the engine's load order. |
 | [`desk_c108_wildfire_cure.py`](desk_c108_wildfire_cure.py) | C108 Wildfire cure: the shipped 1.1.0 at-home service payment keeps an infected colonist above the medical-visit threshold, and the module sends them anyway. |
+| [`desk_c111_rescue_text.py`](desk_c111_rescue_text.py) | C111 command-text control on shipped 1.1.1.405907 Colonist UI Lua. |
+| [`desk_c114_hub_access.py`](desk_c114_hub_access.py) | C114 access fallback against archived 1.1.1.405907 Lua. |
+| [`desk_c114_sitting_findings.py`](desk_c114_sitting_findings.py) | C114 sitting follow-up: exercise source-derived fixtures at measured distances. |
+| [`desk_c115_home_rescue.py`](desk_c115_home_rescue.py) | C115: archived Transport, task cleanup and dome position check on a desk fixture. |
+| [`desk_c116_hub_marker.py`](desk_c116_hub_marker.py) | C116 synchronous departure controls against archived 1.1.1.405907 bodies. |
+| [`desk_c117_hub_salvage.py`](desk_c117_hub_salvage.py) | C117 hub-passage salvage drain against archived 1.1.1.405907 Lua. |
+| [`desk_c42_passage_stale.py`](desk_c42_passage_stale.py) | C42 passage-element stale-holder teardown over archived 1.1.1.405907 Lua. |
 | [`desk_f124_track.py`](desk_f124_track.py) | F124 track rebase: archived split/repair bodies, refunds, shells and branch decline. |
 | [`desk_f125_vacuum.py`](desk_f125_vacuum.py) | F125/F52 composable migration controls on archived 1.1.1.405907 Lua. |
+| [`desk_f127_arrival_booking.py`](desk_f127_arrival_booking.py) | F127: archived 1.1.1 arrival booking, full-dome Homeless label, and fix-removed control. |
 | [`desk_gamepatch_retirements.py`](desk_gamepatch_retirements.py) | 1.1.1 retirement source controls and active pack-on/pack-off desk controls. |
+| [`desk_hubset07_rehearsal.py`](desk_hubset07_rehearsal.py) | hubset 07 sitting instruments: a declared-VOID desk rehearsal. |
+| [`desk_hubset07b_rehearsal.py`](desk_hubset07b_rehearsal.py) | hubset 07B second-pass instruments: a declared-VOID desk rehearsal. |
 | [`gamepatch_111_census.py`](gamepatch_111_census.py) | Reconcile the 1.1.1 build response by name, including companion probe removal. |
 | [`paradox_card.py`](paradox_card.py) | Open the Paradox store description as a formatted page, ready to copy. |
 | [`replacecheck.py`](replacecheck.py) | Which modules redefine a shipped declaration outright, and which delegate to a captured original they actually call? |

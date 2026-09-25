@@ -5,6 +5,11 @@
 -- DEFECT: ChooseDome\(unit,\s*domes,\s*safety_dome
 -- SRC: Lua/Buildings/RocketBase.lua RocketBase:Disembark sha256=47e85e84d3b0cdeddd937fa4210d9f1862ea3d9256ba02f868b43fcab8e71758
 -- DEFECT: ChooseDome\(unit,\s*domes,\s*safety_dome
+-- F127 booking callees on archived 1.1.1.405907; its defect is in this module's C83 branch.
+-- SRC: Lua/Units/Colonist.lua Colonist:CancelResidenceReservation sha256=72212ffde67f2767d4b97da146670c1e8833f0eb6b5fda0361a210a997155452
+-- SRC: Lua/Buildings/Dome.lua Dome:ReserveResidence sha256=dcd671cca97d23383ceeae1beb68347c31df28cc0e3a82607dd1c69fe0c4003f
+-- SRC: Lua/Buildings/Residence.lua Residence:ReserveResidence sha256=88018693261f64a17dbb085803ae0436558443ea2e20f0ea0559db5ce5b8e388
+-- SRC: Lua/Buildings/MicroGHabitat.lua MicroGHabitatBase:ReserveResidence sha256=628e8ea95d5431da755190a98ea23a8f27d2ec67b25f7c010e9c4bf1db354379
 -- F53: Newly arrived colonists set off for a dome they cannot reach and die on
 -- the way — or land inside terrain they cannot walk out of.
 -- F86 Tier-2 REWRITE (2026-08-01, spec `docs/reports/SAVE_SAFETY_REDESIGN.md`
@@ -479,6 +484,16 @@ SMRFixPack.Register("ArrivalDeaths", {
 						-- welcoming one so a full working dome receives the colonist
 						-- homeless instead of ChooseDome returning the dead dome.
 						local new_dome, new_elevator = ChooseDome(dome_arg, domes, fallback, dome_elevators)
+						-- FIX (F127): release the rejected booking before reserving elsewhere.
+						if reachable and new_dome and new_dome ~= dome then
+							local booked = self.reserved_residence
+							if IsValid(booked) and (booked.parent_dome or booked) == dome then
+								self:CancelResidenceReservation()
+								if type(new_dome.ReserveResidence) == "function" then
+									new_dome:ReserveResidence(self)
+								end
+							end
+						end
 						-- TransportByFoot rides self.emigration_elevator (:2725); keep
 						-- it paired with the destination we just picked. `false` is the
 						-- class default for both (Colonist.lua:92, :264).
