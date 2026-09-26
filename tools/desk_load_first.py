@@ -1,30 +1,41 @@
 #!/usr/bin/env python3
 """LoadFirst (load-order option B) desk controls on archived 1.1.1.405907 Lua.
 
-    python tools/desk_load_first.py                 # every demand must hold
-    python tools/desk_load_first.py --no-promotion  # the pack WITHOUT Code/01_LoadFirst.lua:
-                                                    # every case must FAIL, or that case is vacuous
+    python tools/desk_load_first.py                # baseline: every demand must hold, then every
+                                                   # behavioural mutant must kill the groups it names
+    python tools/desk_load_first.py --mutant NAME  # one mutant, verbose (names: see MUTANTS)
+    python tools/desk_load_first.py --list         # the groups, their demands and their expected killers
 
 WHAT IS SHIPPED AND LOADED VERBATIM (luafn's delimiter, archived
 B:/Dev/SMR/SMR-Shared/SMR-SrcArchive/1.1.1.405907/Src): the ModEnvBlacklist
 literal, the mod-environment metatable and LuaModEnv, ModDef:SetupEnv with the
 file-local persistent-data writer and reader, TurnModOn/TurnModOff/AllModsOff,
 GetModsEnabledByUser, the dependency queue (GetModAllDependencies through
-GetLoadingQueue) and Colonist:StartShuttleLeg (VacuumWalks' behaviour probe).
-The pack's own files are loaded whole, UNDER THE REAL SANDBOX (the shipped
-metatable over the shipped blacklist), so a name a module reads that the
-sandbox hides fails here the way it fails in the game.
+GetLoadingQueue), Colonist:StartShuttleLeg (VacuumWalks' behaviour probe) and, for
+the engine case, ModsReloadItems. The pack's own files are loaded whole, UNDER THE
+REAL SANDBOX (the shipped metatable over the shipped blacklist), so a name a module
+reads that the sandbox hides fails here the way it fails in the game.
+
+CONTROLS (audit R4, 2026-09-25). A no-op promise ("already first writes nothing")
+survives removing the module, so absence is not its falsifier. Each case group
+names the MUTANTS that must make it fail: a copy of the module with one behaviour
+broken (the rebuild removed, the already-first return removed, the option ignored,
+the config flag ignored, the probe ignored, foreign slot bytes dropped, the notice
+never scheduled, the veto bypassed, a fixed pre-cleared probe id). Every mutant is
+applied by an exact single-occurrence text replacement and asserted to have taken;
+a stale replacement is a harness defect and stops the run. All cases keep running
+after a failure; nothing asserts inline.
 
 RETYPED, AND NAMED AS SUCH: table.find / remove_entry / insert_unique / icopy /
-keys follow CommonLua/Core/types.lua:143,1028 and the exported docs
-(LuaExportedDocs/Global/table.lua:9-22,194-224); remove_entry removes the FIRST
-match, insert_unique appends only an absent value, which is what the duplicate
-case below turns on. STUBBED: SaveAccountStorage (a recorder: the desk records
-the save REQUEST, never a disk write), CreateRealTimeThread (a recorder; the
-notice thread is run on demand), the pregame menu, WaitQuestion/WaitMessage,
-ModsRestartApp, Platform, and the class/engine tables VacuumWalks and
-HubLocalAccess require. Passage Network's two `function Dome(` definitions are
-extracted from the archived 1.38 source (docs/archive/, lines 45-51).
+keys / copy / map / iequal follow CommonLua/Core/types.lua:143,1028 and the
+exported docs (LuaExportedDocs/Global/table.lua:9-22,194-224); remove_entry
+removes the FIRST match, insert_unique appends only an absent value. STUBBED:
+SaveAccountStorage (a recorder: the desk records the save REQUEST, never a disk
+write), CreateRealTimeThread (a recorder; threads run when a case says so, which
+is what lets a later Options click come AFTER the startup threads have finished),
+the pregame menu, WaitQuestion/WaitMessage, ModsRestartApp, Platform, and the
+class/engine tables VacuumWalks and HubLocalAccess require. Passage Network's two
+`function Dome(` definitions are extracted from the archived 1.38 source.
 
 This is desk evidence: it shows what the module WRITES into the saved list and
 what it REQUESTS, on the shipped helpers. Whether account.dat lands on disk,
@@ -48,10 +59,10 @@ PN = REPO / "docs/archive/PassageNetwork_1.38_Code_PassageNetwork.lua"
 PACK = "SMR_CommunityFixPack"
 PN_ID = "iooW34Y"
 CANARY = "SMRFP-LOADORDER-CANARY-2026-09-25-b7e1"
-PROMOTION = True   # set False by --no-promotion: the pack loads without Code/01_LoadFirst.lua
-
-PACK_FILES = ["Code/00_Core.lua", "Code/01_LoadFirst.lua"]
+MODULE = "Code/01_LoadFirst.lua"
+PACK_FILES = ["Code/00_Core.lua", MODULE]
 PN_FILES = ["Code/Hubset_OnHubNow.lua", "Code/Fix_VacuumWalks.lua", "Code/Fix_HubLocalAccess.lua"]
+PRE_CANARY_META_REV = "4e4c97b"
 
 
 def shipped_body(lines, pattern):
@@ -84,6 +95,7 @@ ALL_OFF, _, _ = shipped_body(ui_lines, r"^function AllModsOff\(\)")
 QUEUE_START = find_bodies(mod_lines, r"^local function GetModAllDependencies\(mod\)")[0][0]
 QUEUE_END = find_bodies(mod_lines, r"^local function GetLoadingQueue\(list(?:, silent)?\)")[0][1]
 QUEUE = "\n" * QUEUE_START + "\n".join(mod_lines[QUEUE_START:QUEUE_END + 1])
+RELOAD, RELOAD_A, RELOAD_B = shipped_body(mod_lines, r"^function ModsReloadItems\(")
 colonist_lines = read_lines(str(SRC / "Lua/Units/Colonist.lua"))
 START_SHUTTLE, SS_A, SS_B = shipped_body(colonist_lines, r"^function Colonist:StartShuttleLeg\(")
 pn_lines = read_lines(str(PN))
@@ -91,7 +103,6 @@ PN_HITS = find_bodies(pn_lines, r"^function Dome\(")
 assert len(PN_HITS) == 2, PN_HITS
 PN_CLOBBER = "\n".join("\n".join(pn_lines[a:b + 1]) for a, b in PN_HITS)
 
-# Retyped table helpers (see the docstring) plus the engine tolerances deskbench names.
 TABLE_RETYPED = r'''
 function table.find(array, field, value)
 	if not array then return end
@@ -123,6 +134,8 @@ function table.keys(t, sorted)
 	return res
 end
 function table.copy(t) local out = {} for k, v in pairs(t) do out[k] = v end return out end
+function table.map(t, field) local r = {} for i, x in ipairs(t) do r[i] = x[field] end return r end
+function table.iequal(a, b) if #a ~= #b then return false end for i = 1, #a do if a[i] ~= b[i] then return false end end return true end
 '''
 
 BOOT = r'''
@@ -145,7 +158,7 @@ function WriteModPersistentStorageTable() end
 LOG = {}
 function ModLog(s) LOG[#LOG + 1] = s end
 THREADS = {}
-function CreateRealTimeThread(fn, ...) THREADS[#THREADS + 1] = fn end
+function CreateRealTimeThread(fn, ...) THREADS[#THREADS + 1] = fn; return { thread = #THREADS } end
 CLOCK = 0
 function RealTime() return CLOCK end
 function Sleep(ms) CLOCK = CLOCK + (ms or 0) end
@@ -160,7 +173,6 @@ function WaitQuestion(parent, title, text, ok, cancel)
 end
 function WaitMessage(parent, title, text) UI.messages[#UI.messages + 1] = { title = title, text = text } end
 function ModsRestartApp(debug) UI.restarts[#UI.restarts + 1] = debug; return UI.restart_err end
--- class/engine tables VacuumWalks and HubLocalAccess require (fixtures; the guards read shapes only)
 Dome = { __parents = {}, ReserveWorkplace = function() end, dome_network = false }
 ORIGINAL_DOME = Dome
 PassageHubBase = { hub_domes = false }
@@ -186,13 +198,59 @@ function DefineMods(ids)
 end
 '''
 
+# ── behavioural mutants: (old text, new text) applied to the module source ───
+MUTANTS = {
+    "no-rebuild": [("\t\tfor _, id in ipairs(list) do TurnModOff(id) end\n\t\tfor _, id in ipairs(wanted) do TurnModOn(id) end",
+                    "\t\t-- MUTANT no-rebuild: the list is not rebuilt; registration, probe and record stay")],
+    "always-rebuild": [("\tif pos == 1 then\n\t\t-- nothing is written here",
+                        "\tif false and pos == 1 then -- MUTANT always-rebuild\n\t\t-- nothing is written here")],
+    "ignore-option": [("\t\tif not SMRFixPack.OptionEnabled(ID) then", "\t\tif false then -- MUTANT ignore-option")],
+    "ignore-config": [("\tif config_load_all() then", "\tif false then -- MUTANT ignore-config")],
+    "ignore-probe": [("\tif not live then", "\tif false then -- MUTANT ignore-probe")],
+    "ignore-absent": [("\tif not pos then", "\tif false then -- MUTANT ignore-absent")],
+    "clobber-slot": [('\tif rest ~= nil then line = line .. "\\n" .. rest end', "\t-- MUTANT clobber-slot: foreign bytes dropped")],
+    "no-notice": [("\tstate.pending_notice = true\n\tschedule_notice()\n\treturn nil", "\treturn nil -- MUTANT no-notice")],
+    "bypass-veto": [("\nloading = false\n", "\nloading = false\nstate.Promote('mutant bypass-veto')\n")],
+    "fixed-probe": [('\tlocal probe = string.format("SMRFixPack.LoadFirst.probe.%d.%d",\n\t\ttype(os_time) == "function" and os_time() or 0, probe_serial)',
+                     '\tlocal probe = "SMRFixPack.LoadFirst.probe" -- MUTANT fixed-probe\n\tpcall(TurnModOff, probe)')],
+    # the config flag is also caught by the probe, so only both ignored at once can miss LoadAllMods
+    "ignore-loadall": [("\tif config_load_all() then", "\tif false then -- MUTANT ignore-loadall"),
+                       ("\tif not live then", "\tif false then -- MUTANT ignore-loadall")],
+    # the toggle-off path is 00_Core's reconciler; a module that is not `optional` is invisible to it
+    "not-optional": [("\toptional = true,", "\toptional = false, -- MUTANT not-optional")],
+}
+
+# group -> the mutants that must make at least one of its demands fail
+KILLERS = {
+    "1a": {"no-rebuild", "no-notice"}, "1b": {"no-rebuild", "no-notice"},
+    "2": {"always-rebuild"},
+    "3a": {"ignore-loadall"}, "3b": {"ignore-probe"},
+    "4a": {"ignore-option"}, "4b": {"no-rebuild", "no-notice", "not-optional"}, "4c": {"not-optional"}, "4d": {"bypass-veto"},
+    "5a": {"no-rebuild", "clobber-slot"}, "5b": {"clobber-slot"}, "5c": {"always-rebuild"},
+    "6a": {"no-rebuild"}, "6b": {"no-rebuild"},
+    "7a": {"no-rebuild"}, "7b": {"no-rebuild"},
+    "shape": {"no-rebuild", "ignore-absent"},
+    "R1a": {"no-notice", "no-rebuild"}, "R1b": {"no-notice"}, "R1c": {"no-notice"}, "R1d": {"no-notice"},
+    "R2a": {"clobber-slot"}, "R2b": {"clobber-slot"}, "R2c": {"clobber-slot"},
+    "R3a": {"fixed-probe"}, "R3b": {"ignore-config"}, "R3c": {"always-rebuild"},
+}
+INDEPENDENT = {"canary", "engine"}
+
+
+def mutate(text, name):
+    for old, new in MUTANTS[name]:
+        assert text.count(old) == 1, ("mutant text not found exactly once", name, old[:60])
+        text = text.replace(old, new)
+    return text
+
 
 class Case:
     """One runtime per case: a fresh sandbox, a fresh AccountStorage."""
 
-    def __init__(self, seed, mods, *, options=None, config_load_all=False,
+    def __init__(self, module_text, seed, mods, *, options=None, config_load_all=False,
                  account_load_all=False, veto=False, persistent=None, deps=None,
-                 loaded=None, promotion=None, before_pack=None, extra_files=()):
+                 loaded=None, before_pack=None, extra_files=()):
+        self.module_text = module_text
         self.lua = db.lua_runtime()
         L = self.lua
         L.execute(db.ENGINE_SHIMS + TABLE_RETYPED + BOOT)
@@ -214,7 +272,6 @@ class Case:
                   % lua_list(loaded or seed))
         if veto:
             L.execute("SMRFixPack_Disabled = { LoadFirst = true }")
-        # shipped slices
         L.execute(BLACKLIST)
         L.execute(ENV_BLOCK)
         L.execute("ModDef = {}\nlocal max_data_length = const.MaxModDataSize\n" + STORAGE + "\n" + READER + "\n" + SETUP)
@@ -227,17 +284,13 @@ class Case:
         L.execute("mod_env = LuaModEnv(); Mods[%r].env = mod_env; ModDef.SetupEnv(Mods[%r])" % (PACK, PACK))
         if before_pack:
             L.execute(before_pack)
-        files = list(PACK_FILES)
-        if promotion is None:
-            promotion = PROMOTION
-        if not promotion:
-            files.remove("Code/01_LoadFirst.lua")
-        files += list(extra_files)
-        for rel in files:
+        for rel in PACK_FILES:
+            self.load_pack_file(rel)
+        for rel in extra_files:
             self.load_pack_file(rel)
 
     def load_pack_file(self, rel):
-        text = (REPO / rel).read_text(encoding="utf-8")
+        text = self.module_text if rel == MODULE else (REPO / rel).read_text(encoding="utf-8")
         self.lua.globals().SRC_TEXT = text
         self.lua.globals().SRC_NAME = "=" + rel
         self.lua.execute('local fn = assert(load(SRC_TEXT, SRC_NAME, "t", mod_env)); fn()')
@@ -250,6 +303,9 @@ class Case:
 
     def saved(self):
         return lua_join(self.ev("GetModsEnabledByUser()"))
+
+    def raw(self):
+        return lua_join(self.ev("AccountStorage.LoadMods"))
 
     def queue(self):
         return lua_join(self.ev("GetLoadingQueueShipped(GetModsEnabledByUser(), true)"))
@@ -267,8 +323,11 @@ class Case:
         return int(self.ev("SAVE.calls"))
 
     def run_threads(self):
-        # each recorded real-time thread body, once, on the desk clock
-        self.ex("for _, fn in ipairs(THREADS) do fn() end; THREADS = {}")
+        # every recorded real-time thread body, once, in order, on the desk clock
+        self.ex("local t = THREADS; THREADS = {}; for _, fn in ipairs(t) do fn() end")
+
+    def threads_pending(self):
+        return int(self.ev("#THREADS"))
 
     def questions(self):
         return int(self.ev("#UI.questions"))
@@ -283,6 +342,15 @@ class Case:
         v = self.ev("AccountStorage.ModPersistentData[%r]" % PACK)
         return None if v is None else str(v)
 
+    def log_has(self, needle):
+        return bool(self.ev("(function() for _, l in ipairs(LOG) do if l:find(%r, 1, true) then return true end end return false end)()" % needle))
+
+    def toggle(self, on):
+        self.ex("rawset(Mods[%r].options, 'LoadFirst', %s); Msg('ApplyModOptions', %r)" % (PACK, "true" if on else "false", PACK))
+
+    def move_pack_last(self):
+        self.ex("TurnModOff(%r); TurnModOn(%r)" % (PACK, PACK))
+
 
 def lua_list(items):
     return "{ " + ", ".join("%r" % s for s in items) + " }"
@@ -294,173 +362,263 @@ def lua_join(t):
     return ",".join(str(t[i]) for i in range(1, len(t) + 1))
 
 
-def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--no-promotion", action="store_true",
-                    help="load the pack without Code/01_LoadFirst.lua; every case must then FAIL")
-    args = ap.parse_args()
-    promo = not args.no_promotion
-    global PROMOTION
-    PROMOTION = promo
+def group_of(label):
+    return label.split(":")[0].split(" ")[0]
 
-    head = subprocess.run(["git", "rev-parse", "--short", "HEAD"], cwd=REPO, capture_output=True, text=True).stdout.strip()
-    bench = db.Bench("LoadFirst desk controls — %s (HEAD %s, game 1.1.1.405907, %s)"
-                     % ("WITHOUT the promotion (control run)" if args.no_promotion else "with the promotion", head, db.lua_version()))
-    for rel in PACK_FILES + PN_FILES:
-        print("INPUT", rel, sha((REPO / rel).read_text(encoding="utf-8")))
-    print("SHIPPED %s ModEnvBlacklist %d-%d %s" % (MOD_LUA, BLACKLIST_START + 1, BLACKLIST_END + 1, sha(BLACKLIST.strip("\n"))))
-    print("SHIPPED %s env block %d-%d %s" % (MOD_LUA, ENV_START + 1, ENV_END + 1, sha(ENV_BLOCK.strip("\n"))))
-    print("SHIPPED %s WriteModPersistentData %d-%d, SetupEnv %d-%d, GetModsEnabledByUser %d-%d"
-          % (MOD_LUA, STORAGE_A, STORAGE_B, SETUP_A, SETUP_B, ENABLED_A, ENABLED_B))
-    print("SHIPPED %s queue %d-%d %s" % (MOD_LUA, QUEUE_START + 1, QUEUE_END + 1, sha(QUEUE.strip("\n") + "\n")))
-    print("SHIPPED %s TurnModOn %d-%d TurnModOff %d-%d" % (UI_LUA, HELPERS[0][1], HELPERS[0][2], HELPERS[1][1], HELPERS[1][2]))
-    print("SHIPPED Lua/Units/Colonist.lua StartShuttleLeg %d-%d" % (SS_A, SS_B))
-    print("PN_DEFINITIONS", ",".join("%d-%d" % (a + 1, b + 1) for a, b in PN_HITS), "members=%d" % len(PN_HITS))
-    print()
+
+class Recorder:
+    def __init__(self, verbose):
+        self.verbose = verbose
+        self.results = []
+
+    def check(self, label, ok, detail=""):
+        self.results.append((bool(ok), label))
+        if self.verbose:
+            print(("  PASS  " if ok else "  FAIL  ") + label + (("  -- " + str(detail)) if detail else ""))
+        return ok
+
+    def failed_groups(self):
+        return {group_of(l) for ok, l in self.results if not ok}
+
+    def groups(self):
+        return {group_of(l) for _, l in self.results}
+
+
+def run_cases(rec, module_text):
     mods = ["A", "B", "C", PACK]
+    check = rec.check
+    C = lambda seed, m=mods, **kw: Case(module_text, seed, m, **kw)  # noqa: E731
 
-    # 1. Promotion: middle, then last; the running session untouched; one save request
-    c = Case(["B", PACK, "C"], mods)
-    bench.check("1a middle: saved B,PACK,C becomes PACK,B,C", c.saved() == "%s,B,C" % PACK, c.saved())
-    bench.check("1a next queue is PACK,B,C", c.queue() == "%s,B,C" % PACK, c.queue())
-    bench.check("1a running ModsLoaded stays B,PACK,C", c.loaded() == "B,%s,C" % PACK, c.loaded())
-    bench.check("1a exactly one save request, delay 1000", c.saves() == 1 and c.ev("SAVE.last_delay") == 1000,
-                "calls=%d delay=%s" % (c.saves(), c.ev("SAVE.last_delay")))
-    bench.check("1a LoadFirst active, detail names the move", c.status("LoadFirst") == "active"
-                and "moved to the front" in c.detail("LoadFirst"), "%s / %s" % (c.status("LoadFirst"), c.detail("LoadFirst")))
+    # 1. Promotion, middle and last; the running session untouched; one save request
+    c = C(["B", PACK, "C"])
+    check("1a middle: saved B,PACK,C becomes PACK,B,C", c.saved() == "%s,B,C" % PACK, c.saved())
+    check("1a next queue is PACK,B,C", c.queue() == "%s,B,C" % PACK, c.queue())
+    check("1a running ModsLoaded stays B,PACK,C", c.loaded() == "B,%s,C" % PACK, c.loaded())
+    check("1a exactly one save request, delay 1000", c.saves() == 1 and c.ev("SAVE.last_delay") == 1000,
+          "calls=%d delay=%s" % (c.saves(), c.ev("SAVE.last_delay")))
+    check("1a LoadFirst active, detail names the move", c.status("LoadFirst") == "active"
+          and "moved to the front" in c.detail("LoadFirst"), "%s / %s" % (c.status("LoadFirst"), c.detail("LoadFirst")))
     c.run_threads()
-    bench.check("1a notice: one question, Restart now / Later, no restart on Later",
-                c.questions() == 1 and c.restarts() == 0 and c.ev("UI.questions[1].ok") == "Restart now"
-                and c.ev("UI.questions[1].cancel") == "Later", "questions=%d restarts=%d" % (c.questions(), c.restarts()))
-    if promo:
-        c.load_pack_file("Code/01_LoadFirst.lua")   # a Lua reload re-runs the file
+    check("1a notice: one question, Restart now / Later, no restart on Later",
+          c.questions() == 1 and c.restarts() == 0 and c.ev("UI.questions[1].ok") == "Restart now"
+          and c.ev("UI.questions[1].cancel") == "Later", "questions=%d restarts=%d" % (c.questions(), c.restarts()))
+    c.load_pack_file(MODULE)   # a Lua reload re-runs the file
     c.run_threads()
-    bench.check("1a Lua reload: no second write, no second notice", c.saves() == 1 and c.questions() == 1,
-                "saves=%d questions=%d" % (c.saves(), c.questions()))
-    c = Case(["A", "B", PACK], mods)
+    check("1a Lua reload: no second write, no second notice", c.saves() == 1 and c.questions() == 1,
+          "saves=%d questions=%d" % (c.saves(), c.questions()))
+    c = C(["A", "B", PACK])
     c.ex("UI.answer = 'ok'")
-    bench.check("1b last: saved A,B,PACK becomes PACK,A,B", c.saved() == "%s,A,B" % PACK, c.saved())
+    check("1b last: saved A,B,PACK becomes PACK,A,B", c.saved() == "%s,A,B" % PACK, c.saved())
     c.run_threads()
-    bench.check("1b Restart now calls the game's restart routine once", c.restarts() == 1, c.restarts())
+    check("1b Restart now calls the game's restart routine once", c.restarts() == 1 and c.questions() == 1,
+          "restarts=%d questions=%d" % (c.restarts(), c.questions()))
 
     # 2. Already first: nothing written, no request, no notice
-    c = Case([PACK, "A", "B"], mods)
-    bench.check("2 already first: saved list unchanged", c.saved() == "%s,A,B" % PACK, c.saved())
-    bench.check("2 already first: no save request", c.saves() == 0, c.saves())
-    bench.check("2 already first: LoadFirst active, detail says first of 3", c.status("LoadFirst") == "active"
-                and c.detail("LoadFirst").startswith("first of 3"), "%s / %s" % (c.status("LoadFirst"), c.detail("LoadFirst")))
+    c = C([PACK, "A", "B"])
+    check("2 already first: raw saved list unchanged", c.raw() == "%s,A,B" % PACK, c.raw())
+    check("2 already first: no save request", c.saves() == 0, c.saves())
+    check("2 already first: LoadFirst active, detail names the loaded list", c.status("LoadFirst") == "active"
+          and c.detail("LoadFirst").startswith("first in the list the game loads (3 mods)"),
+          "%s / %s" % (c.status("LoadFirst"), c.detail("LoadFirst")))
     c.run_threads()
-    bench.check("2 already first: no notice", c.questions() == 0 and c.messages() == 0,
-                "questions=%d messages=%d" % (c.questions(), c.messages()))
-    bench.check("2 already first: persistent slot untouched", c.slot() is None, c.slot())
+    check("2 already first: no notice", c.questions() == 0 and c.messages() == 0,
+          "questions=%d messages=%d" % (c.questions(), c.messages()))
+    check("2 already first: persistent slot untouched", c.slot() is None, c.slot())
 
-    # 3. LoadAllMods, both flags: no write, the player is told (status + log)
-    for label, kw in (("3a config.LoadAllMods", {"config_load_all": True}),
-                      ("3b AccountStorage.LoadAllMods", {"account_load_all": True})):
-        c = Case(["B", PACK, "C"], mods, **kw)
-        bench.check(label + ": raw saved list untouched", lua_join(c.ev("AccountStorage.LoadMods")) == "B,%s,C" % PACK,
-                    lua_join(c.ev("AccountStorage.LoadMods")))
-        bench.check(label + ": no save request", c.saves() == 0, c.saves())
-        bench.check(label + ": LoadFirst inactive naming LoadAllMods", c.status("LoadFirst") == "inactive"
-                    and "LoadAllMods" in c.detail("LoadFirst"), "%s / %s" % (c.status("LoadFirst"), c.detail("LoadFirst")))
-        bench.check(label + ": a log line says not applied", c.ev(
-            "(function() for _, l in ipairs(LOG) do if l:find('LoadFirst: not applied', 1, true) then return true end end return false end)()"),
-            c.ev("table.concat(LOG, ' | ')"))
+    # 3. LoadAllMods, both flags, pack not first: raw list byte-identical, no request, told
+    c = C(["B", PACK, "C"], config_load_all=True)
+    check("3a config.LoadAllMods: raw saved list untouched", c.raw() == "B,%s,C" % PACK, c.raw())
+    check("3a config.LoadAllMods: no save request", c.saves() == 0, c.saves())
+    check("3a config.LoadAllMods: LoadFirst inactive naming LoadAllMods", c.status("LoadFirst") == "inactive"
+          and "LoadAllMods" in c.detail("LoadFirst"), "%s / %s" % (c.status("LoadFirst"), c.detail("LoadFirst")))
+    check("3a config.LoadAllMods: a log line says not applied", c.log_has("LoadFirst: not applied"), c.ev("table.concat(LOG, ' | ')"))
+    c = C(["B", PACK, "C"], account_load_all=True)
+    check("3b AccountStorage.LoadAllMods: raw saved list untouched", c.raw() == "B,%s,C" % PACK, c.raw())
+    check("3b AccountStorage.LoadAllMods: no save request", c.saves() == 0, c.saves())
+    check("3b AccountStorage.LoadAllMods: LoadFirst inactive naming LoadAllMods", c.status("LoadFirst") == "inactive"
+          and "LoadAllMods" in c.detail("LoadFirst"), "%s / %s" % (c.status("LoadFirst"), c.detail("LoadFirst")))
+    check("3b AccountStorage.LoadAllMods: a log line says not applied", c.log_has("LoadFirst: not applied"), c.ev("table.concat(LOG, ' | ')"))
 
     # 4. Opt-out: Mod Option off leaves the order alone; on again promotes; the veto too
-    c = Case(["B", PACK, "C"], mods, options={"LoadFirst": False})
-    bench.check("4a option off: saved list untouched", c.saved() == "B,%s,C" % PACK, c.saved())
-    bench.check("4a option off: no save request", c.saves() == 0, c.saves())
-    bench.check("4a option off: LoadFirst inactive 'turned off in Mod Options'",
-                c.status("LoadFirst") == "inactive" and c.detail("LoadFirst") == "turned off in Mod Options",
-                "%s / %s" % (c.status("LoadFirst"), c.detail("LoadFirst")))
-    c.ex("rawset(Mods[%r].options, 'LoadFirst', true); Msg('ApplyModOptions', %r)" % (PACK, PACK))
-    bench.check("4b toggled on: promotes at once", c.saved() == "%s,B,C" % PACK, c.saved())
-    bench.check("4b toggled on: one save request, LoadFirst active", c.saves() == 1 and c.status("LoadFirst") == "active",
-                "saves=%d status=%s" % (c.saves(), c.status("LoadFirst")))
+    c = C(["B", PACK, "C"], options={"LoadFirst": False})
+    check("4a option off: raw saved list untouched", c.raw() == "B,%s,C" % PACK, c.raw())
+    check("4a option off: no save request", c.saves() == 0, c.saves())
+    check("4a option off: LoadFirst inactive 'turned off in Mod Options'",
+          c.status("LoadFirst") == "inactive" and c.detail("LoadFirst") == "turned off in Mod Options",
+          "%s / %s" % (c.status("LoadFirst"), c.detail("LoadFirst")))
     c.run_threads()
-    bench.check("4b toggled on: the notice shows", c.questions() == 1, c.questions())
-    c.ex("rawset(Mods[%r].options, 'LoadFirst', false); Msg('ApplyModOptions', %r)" % (PACK, PACK))
-    bench.check("4c toggled off again: inactive, order left as it is, no new request",
-                c.status("LoadFirst") == "inactive" and c.saved() == "%s,B,C" % PACK and c.saves() == 1,
-                "status=%s saved=%s saves=%d" % (c.status("LoadFirst"), c.saved(), c.saves()))
-    c = Case(["B", PACK, "C"], mods, veto=True)
-    bench.check("4d veto SMRFixPack_Disabled.LoadFirst: disabled, untouched, no request",
-                c.status("LoadFirst") == "disabled" and c.saved() == "B,%s,C" % PACK and c.saves() == 0,
-                "status=%s saved=%s saves=%d" % (c.status("LoadFirst"), c.saved(), c.saves()))
+    c.toggle(True)
+    check("4b toggled on later: promotes at once", c.saved() == "%s,B,C" % PACK, c.saved())
+    check("4b toggled on later: one save request, LoadFirst active", c.saves() == 1 and c.status("LoadFirst") == "active",
+          "saves=%d status=%s" % (c.saves(), c.status("LoadFirst")))
+    c.run_threads()
+    check("4b toggled on later: the notice shows", c.questions() == 1, c.questions())
+    c.toggle(False)
+    check("4c toggled off again: inactive, order left as it is, no new request",
+          c.status("LoadFirst") == "inactive" and c.saved() == "%s,B,C" % PACK and c.saves() == 1,
+          "status=%s saved=%s saves=%d" % (c.status("LoadFirst"), c.saved(), c.saves()))
+    c.move_pack_last()
+    c.run_threads()
+    check("4c option off, pack moved last, nothing promotes: raw B,C,PACK, no request, no notice",
+          c.raw() == "B,C,%s" % PACK and c.saves() == 1 and c.questions() == 1,
+          "raw=%s saves=%d questions=%d" % (c.raw(), c.saves(), c.questions()))
+    c = C(["B", PACK, "C"], veto=True)
+    c.run_threads()
+    check("4d veto SMRFixPack_Disabled.LoadFirst: disabled, untouched, no request, no notice",
+          c.status("LoadFirst") == "disabled" and c.raw() == "B,%s,C" % PACK and c.saves() == 0 and c.questions() == 0,
+          "status=%s raw=%s saves=%d questions=%d" % (c.status("LoadFirst"), c.raw(), c.saves(), c.questions()))
 
     # 5. The pack's own persistent slot: foreign lines preserved, our line counts promotions
-    c = Case(["B", PACK, "C"], mods, persistent="somebody-else v3 alpha\nbeta")
+    c = C(["B", PACK, "C"], persistent="somebody-else v3 alpha\nbeta")
     slot = c.slot() or ""
     lines = slot.split("\n")
-    bench.check("5a slot: our line first, promotions=1 from=2 of=3", lines[0].startswith("SMRFixPack.LoadFirst v1 promotions=1 ")
-                and "from=2 of=3" in lines[0], repr(lines[0]))
-    bench.check("5a slot: both foreign lines preserved verbatim", lines[1:] == ["somebody-else v3 alpha", "beta"], repr(lines[1:]))
-    # the player disables and re-enables the pack (it goes last); a new process promotes again
-    c.ex("TurnModOff(%r); TurnModOn(%r); if SMRFixPack.LoadFirst then SMRFixPack.LoadFirst.promoted = nil end" % (PACK, PACK))
-    c.ex("if SMRFixPack.LoadFirst then assert(SMRFixPack.LoadFirst.Promote('desk') == nil) end")
+    check("5a slot: our line first, promotions=1 from=2 of=3", lines[0].startswith("SMRFixPack.LoadFirst v1 promotions=1 ")
+          and "from=2 of=3" in lines[0], repr(lines[0]))
+    check("5a slot: both foreign lines preserved verbatim", lines[1:] == ["somebody-else v3 alpha", "beta"], repr(lines[1:]))
+    c.move_pack_last()
+    c.ex("if SMRFixPack.LoadFirst then SMRFixPack.LoadFirst.promoted = nil; SMRFixPack.LoadFirst.Promote('desk') end")
     slot = c.slot() or ""
     lines = slot.split("\n")
-    bench.check("5b second promotion: promotions=2, foreign lines still intact, saved list PACK first",
-                lines[0].startswith("SMRFixPack.LoadFirst v1 promotions=2 ") and lines[1:] == ["somebody-else v3 alpha", "beta"]
-                and c.saved() == "%s,B,C" % PACK and c.saves() == 2,
-                "%r saved=%s saves=%d" % (lines, c.saved(), c.saves()))
-    c = Case([PACK, "B"], mods, persistent="somebody-else v3 alpha")
-    bench.check("5c already first: a foreign slot is not rewritten, LoadFirst active 'first of'",
-                c.slot() == "somebody-else v3 alpha" and c.saves() == 0 and c.status("LoadFirst") == "active"
-                and c.detail("LoadFirst").startswith("first of"), "%r saves=%d %s" % (c.slot(), c.saves(), c.status("LoadFirst")))
+    check("5b second promotion: promotions=2, foreign lines still intact, saved list PACK first",
+          lines[0].startswith("SMRFixPack.LoadFirst v1 promotions=2 ") and lines[1:] == ["somebody-else v3 alpha", "beta"]
+          and c.saved() == "%s,B,C" % PACK and c.saves() == 2,
+          "%r saved=%s saves=%d" % (lines, c.saved(), c.saves()))
+    c = C([PACK, "B"], persistent="somebody-else v3 alpha")
+    check("5c already first: a foreign slot is not rewritten, no request",
+          c.slot() == "somebody-else v3 alpha" and c.saves() == 0, "%r saves=%d" % (c.slot(), c.saves()))
 
-    # 6. Dependencies: a prerequisite of ours stays ahead in the queue; a dependant of ours is unmoved
-    c = Case(["B", PACK, "A"], mods, deps={PACK: ["A"]})
-    bench.check("6a own prerequisite A: saved PACK,B,A; queue hoists A first, PACK before B",
-                c.saved() == "%s,B,A" % PACK and c.queue() == "A,%s,B" % PACK, "saved=%s queue=%s" % (c.saved(), c.queue()))
-    c = Case(["Z", PACK, "B"], mods + ["Z"], deps={"Z": [PACK]})
-    bench.check("6b Z requires the pack: saved PACK,Z,B; queue PACK,Z,B (Z unmoved relative to B)",
-                c.saved() == "%s,Z,B" % PACK and c.queue() == "%s,Z,B" % PACK, "saved=%s queue=%s" % (c.saved(), c.queue()))
+    # 6. Dependencies
+    c = C(["B", PACK, "A"], deps={PACK: ["A"]})
+    check("6a own prerequisite A: saved PACK,B,A; queue hoists A first, PACK before B",
+          c.saved() == "%s,B,A" % PACK and c.queue() == "A,%s,B" % PACK, "saved=%s queue=%s" % (c.saved(), c.queue()))
+    c = C(["Z", PACK, "B"], mods + ["Z"], deps={"Z": [PACK]})
+    check("6b Z requires the pack: saved PACK,Z,B; queue PACK,Z,B (Z unmoved relative to B)",
+          c.saved() == "%s,Z,B" % PACK and c.queue() == "%s,Z,B" % PACK, "saved=%s queue=%s" % (c.saved(), c.queue()))
 
-    # Audit item 2: list shapes — absent, duplicate and stale ids
-    c = Case(["A", "B"], mods)
-    bench.check("shape: pack absent from the list: untouched, no request, inactive 'not in the saved mod list'",
-                c.saved() == "A,B" and c.saves() == 0 and c.status("LoadFirst") == "inactive"
-                and "not in the saved mod list" in c.detail("LoadFirst"),
-                "saved=%s saves=%d %s/%s" % (c.saved(), c.saves(), c.status("LoadFirst"), c.detail("LoadFirst")))
-    c = Case(["B", PACK, "B", "GHOST"], mods)
-    bench.check("shape: duplicate B collapses to its first position, stale GHOST kept in place",
-                c.saved() == "%s,B,GHOST" % PACK, c.saved())
-    bench.check("shape: duplicate/stale list requests exactly one save", c.saves() == 1, c.saves())
-    c = Case(["A", "B", PACK, "C", "D"], mods + ["D"])
-    bench.check("shape: five mods, pack third: others keep A,B,C,D order",
-                c.saved() == "%s,A,B,C,D" % PACK, c.saved())
+    # Audit item 2: list shapes
+    c = C(["A", "B"])
+    check("shape: pack absent from the list: raw untouched, no request, inactive 'not in the saved mod list'",
+          c.raw() == "A,B" and c.saves() == 0 and c.status("LoadFirst") == "inactive"
+          and "not in the saved mod list" in c.detail("LoadFirst"),
+          "raw=%s saves=%d %s/%s" % (c.raw(), c.saves(), c.status("LoadFirst"), c.detail("LoadFirst")))
+    c = C(["B", PACK, "B", "GHOST"])
+    check("shape: duplicate B collapses to its first position, stale GHOST kept in place, one request",
+          c.saved() == "%s,B,GHOST" % PACK and c.saves() == 1, "%s saves=%d" % (c.saved(), c.saves()))
+    c = C(["B", PACK, PACK, "C"])
+    check("shape: duplicate PACK collapses: PACK,B,C", c.saved() == "%s,B,C" % PACK, c.saved())
+    c = C(["A", "B", PACK, "C", "D"], mods + ["D"])
+    check("shape: five mods, pack third: others keep A,B,C,D order", c.saved() == "%s,A,B,C,D" % PACK, c.saved())
+    import itertools
+    bad = []
+    for seed in itertools.permutations(["A", "B", "C", PACK]):
+        c = C(list(seed))
+        others = [x for x in seed if x != PACK]
+        expected = list(seed) if seed[0] == PACK else [PACK, *others]
+        want_saves = 0 if seed[0] == PACK else 1
+        if c.saved().split(",") != expected or c.saves() != want_saves:
+            bad.append((seed, c.saved(), c.saves()))
+    check("shape: all 24 permutations of A,B,C,PACK keep the others' order; a save only when moved", not bad, bad[:3])
 
-    # 7. Passage Network: this launch loads PN before the pack (guards decline); the promoted
-    #    order is the next queue, and loading in THAT order both guards pass.
-    c = Case([PN_ID, PACK], [PN_ID, PACK], loaded=[PN_ID, PACK], before_pack=PN_CLOBBER, extra_files=PN_FILES)
-    bench.check("7a PN before pack: VacuumWalks declines (inactive)", c.status("VacuumWalks") == "inactive",
-                "%s / %s" % (c.status("VacuumWalks"), c.detail("VacuumWalks")))
-    bench.check("7a PN before pack: HubLocalAccess does not apply", c.status("HubLocalAccess") != "active",
-                "%s / %s" % (c.status("HubLocalAccess"), c.detail("HubLocalAccess")))
+    # 7. Passage Network
+    c = C([PN_ID, PACK], [PN_ID, PACK], loaded=[PN_ID, PACK], before_pack=PN_CLOBBER, extra_files=PN_FILES)
+    check("7a PN before pack: VacuumWalks declines (inactive)", c.status("VacuumWalks") == "inactive",
+          "%s / %s" % (c.status("VacuumWalks"), c.detail("VacuumWalks")))
+    check("7a PN before pack: HubLocalAccess does not apply", c.status("HubLocalAccess") != "active",
+          "%s / %s" % (c.status("HubLocalAccess"), c.detail("HubLocalAccess")))
     next_queue = c.queue()
-    bench.check("7a saved PN,PACK becomes PACK,PN; next queue PACK,PN", next_queue == "%s,%s" % (PACK, PN_ID),
-                "saved=%s queue=%s" % (c.saved(), next_queue))
-    # the next launch: load in the queue the promotion produced
+    check("7a saved PN,PACK becomes PACK,PN; next queue PACK,PN", next_queue == "%s,%s" % (PACK, PN_ID),
+          "saved=%s queue=%s" % (c.saved(), next_queue))
     order = next_queue.split(",")
-    c2 = Case(order, [PN_ID, PACK], loaded=order,
-              before_pack=PN_CLOBBER if order[0] == PN_ID else None, extra_files=PN_FILES)
+    c2 = C(order, [PN_ID, PACK], loaded=order, before_pack=PN_CLOBBER if order[0] == PN_ID else None, extra_files=PN_FILES)
     if order[0] == PACK:
-        c2.ex(PN_CLOBBER)   # PN loads after us and swaps the global; our guards already ran
-    bench.check("7b next launch in that order: VacuumWalks active", c2.status("VacuumWalks") == "active",
-                "%s / %s" % (c2.status("VacuumWalks"), c2.detail("VacuumWalks")))
-    bench.check("7b next launch in that order: HubLocalAccess active", c2.status("HubLocalAccess") == "active",
-                "%s / %s" % (c2.status("HubLocalAccess"), c2.detail("HubLocalAccess")))
-    bench.check("7b next launch: LoadFirst already first, no write", c2.status("LoadFirst") == "active" and c2.saves() == 0,
-                "status=%s saves=%d" % (c2.status("LoadFirst"), c2.saves()))
+        c2.ex(PN_CLOBBER)
+    check("7b next launch in that order: VacuumWalks active", c2.status("VacuumWalks") == "active",
+          "%s / %s" % (c2.status("VacuumWalks"), c2.detail("VacuumWalks")))
+    check("7b next launch in that order: HubLocalAccess active", c2.status("HubLocalAccess") == "active",
+          "%s / %s" % (c2.status("HubLocalAccess"), c2.detail("HubLocalAccess")))
+    check("7b next launch: LoadFirst already first, no write", c2.status("LoadFirst") == "active" and c2.saves() == 0,
+          "status=%s saves=%d" % (c2.status("LoadFirst"), c2.saves()))
 
-    # Canary: metadata.lua still loads under the metadata env (PlaceObj + box only), returns
-    # the ModDef with the same declared properties as the committed pre-canary file
+    # R1. Notice lifecycle with realistic chronology: startup threads finish BEFORE the later click
+    c = C(["B", PACK, "C"], options={"LoadFirst": False})
+    c.run_threads()
+    c.toggle(True)
+    c.run_threads()
+    check("R1a cold option off, later opt-in: promotes and a notice is shown",
+          c.saved() == "%s,B,C" % PACK and c.saves() == 1 and c.questions() == 1,
+          "saved=%s saves=%d questions=%d" % (c.saved(), c.saves(), c.questions()))
+    c = C([PACK, "B", "C"])
+    c.run_threads()
+    c.toggle(False)
+    c.move_pack_last()
+    c.toggle(True)
+    c.run_threads()
+    check("R1b already-first boot, off, moved last, on: promotes and a notice is shown",
+          c.saved() == "%s,B,C" % PACK and c.saves() == 1 and c.questions() == 1,
+          "saved=%s saves=%d questions=%d" % (c.saved(), c.saves(), c.questions()))
+    c = C(["B", PACK, "C"])
+    c.run_threads()
+    c.toggle(False)
+    c.move_pack_last()
+    c.toggle(True)
+    c.run_threads()
+    check("R1c promotion boot, off, moved last, on: a second notice for the second promotion",
+          c.saves() == 2 and c.questions() == 2, "saves=%d questions=%d" % (c.saves(), c.questions()))
+    c = C(["B", PACK, "C"])
+    c.load_pack_file(MODULE)   # reload while the first notice thread is still waiting
+    c.run_threads()
+    check("R1d reload while a notice is pending: one box, not two", c.questions() == 1 and c.saves() == 1,
+          "questions=%d saves=%d" % (c.questions(), c.saves()))
+
+    # R2. Persistent slot: foreign bytes exact, including blank lines, prefix collisions, a full slot
+    for tag, foreign in (("R2a", "alpha\n\nbeta\n"), ("R2b", "SMRFixPack.LoadFirstExtra payload")):
+        c = C(["B", PACK, "C"], persistent=foreign)
+        slot = c.slot() or ""
+        tail = slot.partition("\n")[2]
+        check("%s slot %r: our line then the foreign bytes exactly" % (tag, foreign[:24]),
+              slot.split("\n")[0].startswith("SMRFixPack.LoadFirst v1 promotions=1 ") and tail == foreign and c.saves() == 1,
+              "after=%r saves=%d" % (slot, c.saves()))
+    full = "z" * 32768
+    c = C(["B", PACK, "C"], persistent=full)
+    check("R2c full valid slot: nothing written, nothing dropped, promotion made, log says the save could not be requested",
+          c.slot() == full and c.saved() == "%s,B,C" % PACK and c.saves() == 0
+          and c.log_has("could not be requested through this pack's persistent slot"),
+          "slot_len=%d saved=%s saves=%d" % (len(c.slot() or ""), c.saved(), c.saves()))
+
+    # R3. LoadAllMods edges
+    stale = "SMRFixPack.LoadFirst.probe"
+    c = C(["B", stale, PACK, "C"], account_load_all=True)
+    check("R3a account flag with a stale probe id in the raw list: raw list untouched, no request",
+          c.raw() == "B,%s,%s,C" % (stale, PACK) and c.saves() == 0, "raw=%s saves=%d" % (c.raw(), c.saves()))
+    c = C(["B", stale, PACK, "C"])
+    check("R3a normal list with a stale probe id: promoted, the stale id kept in place",
+          c.saved() == "%s,B,%s,C" % (PACK, stale), c.saved())
+    c = C(["z", PACK], [PACK, "z"], config_load_all=True)
+    check("R3b config.LoadAllMods with the pack sorted first: diagnosed, inactive, no request",
+          c.status("LoadFirst") == "inactive" and "LoadAllMods" in c.detail("LoadFirst") and c.saves() == 0,
+          "%s / %s saves=%d" % (c.status("LoadFirst"), c.detail("LoadFirst"), c.saves()))
+    c = C(["z", PACK], [PACK, "z"], account_load_all=True)
+    check("R3c account flag with the pack sorted first: the STATED LIMIT holds — no write, wording names the loaded list",
+          c.status("LoadFirst") == "active" and c.detail("LoadFirst").startswith("first in the list the game loads")
+          and c.saves() == 0 and c.raw() == "z,%s" % PACK,
+          "%s / %s saves=%d raw=%s" % (c.status("LoadFirst"), c.detail("LoadFirst"), c.saves(), c.raw()))
+
+    # Engine: an order-only change never reloads (the sitting's S2 shape), shipped ModsReloadItems
+    c = C([PACK, "B", "C"])
+    c.run_threads()
+    c.move_pack_last()
+    c.ex("function IsRealTimeThread() return true end; GetModsToLoad = function() return GetLoadingQueueShipped(GetModsEnabledByUser(), true) end")
+    c.ex(RELOAD)
+    c.ex("ModsReloadItems()")
+    check("engine: same-visit off/on is order-only: ModsReloadItems returns early, running list unchanged, no promotion",
+          c.raw() == "B,C,%s" % PACK and c.loaded() == "%s,B,C" % PACK and c.saves() == 0 and c.questions() == 0,
+          "raw=%s running=%s saves=%d" % (c.raw(), c.loaded(), c.saves()))
+
+    # Canary: metadata.lua loads under the metadata env, same declared properties + default_options
     L = db.lua_runtime()
     L.globals().META = (REPO / "metadata.lua").read_text(encoding="utf-8")
-    base = subprocess.run(["git", "show", "4e4c97b:metadata.lua"], cwd=REPO, capture_output=True,
-                          text=True, encoding="utf-8", errors="replace").stdout   # cp1252 default raises on the file's emoji
+    base = subprocess.run(["git", "show", PRE_CANARY_META_REV + ":metadata.lua"], cwd=REPO, capture_output=True,
+                          text=True, encoding="utf-8", errors="replace").stdout
     L.globals().META_BASE = base
     L.execute(r'''
 	function props_of(src)
@@ -476,34 +634,92 @@ def main():
 	DEF0, KEYS0 = props_of(META_BASE)
 	''')
     keys, keys0 = L.eval("KEYS"), L.eval("KEYS0")
-    bench.check("canary: metadata.lua loads under the metadata env and returns a ModDef",
-                L.eval("DEF.class") == "ModDef")
-    bench.check("canary: declared property set = pre-canary set + default_options",
-                set(keys.split(",")) == set(keys0.split(",")) | {"default_options"},
-                sorted(set(keys.split(",")) ^ set(keys0.split(","))))
-    bench.check("canary: the literal is in the tree file and leaks no global", CANARY in L.globals().META and L.eval("LEAK") is None)
-    bench.check("canary: the code list still starts 00_Core, 01_LoadFirst", L.eval(
+    check("canary: metadata.lua loads under the metadata env and returns a ModDef", L.eval("DEF.class") == "ModDef")
+    check("canary: declared property set = pre-canary set + default_options",
+          set(keys.split(",")) == set(keys0.split(",")) | {"default_options"}, sorted(set(keys.split(",")) ^ set(keys0.split(","))))
+    check("canary: the literal is in the tree file and leaks no global", CANARY in L.globals().META and L.eval("LEAK") is None)
+    check("canary: the code list still starts 00_Core, 01_LoadFirst", L.eval(
         "(function() for i = 1, #DEF.props, 2 do if DEF.props[i] == 'code' then return DEF.props[i+1][1] .. ',' .. DEF.props[i+1][2] end end end)()")
         == "Code/00_Core.lua,Code/01_LoadFirst.lua")
 
-    code = bench.finish()
-    if args.no_promotion:
-        # per CASE (the label's leading token: 1a, 2, 3b, shape, 7a ...): a case is vacuous
-        # only if NONE of its demands fails without the promotion. The canary demands are
-        # independent of the module by design and are reported apart.
-        failed = sum(1 for ok, _ in bench.results if not ok)
-        cases = {}
-        for ok, label in bench.results:
-            key = label.split(":")[0].split(" ")[0] if not label.startswith("shape") else "shape"
-            cases.setdefault(key, []).append(ok)
-        vacuous = [k for k, oks in cases.items() if all(oks) and k != "canary"]
-        print()
-        print("CONTROL: %d of %d demands FAILED with Code/01_LoadFirst.lua removed; %d case(s), %d with no failing demand%s"
-              % (failed, len(bench.results), len(cases) - 1, len(vacuous),
-                 (": " + ", ".join(vacuous)) if vacuous else " (none vacuous)"))
-        print("CONTROL: the demands that still held are the no-write halves; each case's status demand fails, which is the control")
-        return 1
-    return code
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--mutant", help="run one mutant verbosely: " + ", ".join(MUTANTS))
+    ap.add_argument("--list", action="store_true", help="print the groups and their expected killers")
+    args = ap.parse_args()
+    if args.list:
+        for g, ks in sorted(KILLERS.items()):
+            print("%-6s killed by %s" % (g, ", ".join(sorted(ks))))
+        print("independent groups (no killer by design): " + ", ".join(sorted(INDEPENDENT)))
+        return 0
+
+    module_text = (REPO / MODULE).read_text(encoding="utf-8")
+    head = subprocess.run(["git", "rev-parse", "--short", "HEAD"], cwd=REPO, capture_output=True, text=True).stdout.strip()
+    if args.mutant:
+        print("MUTANT", args.mutant, "(verbose)")
+        rec = Recorder(verbose=True)
+        run_cases(rec, mutate(module_text, args.mutant))
+        print("failed groups:", ", ".join(sorted(rec.failed_groups())) or "none")
+        return 0
+
+    print("=" * 78)
+    print("LoadFirst desk controls — baseline then behavioural mutants (HEAD %s, game 1.1.1.405907, %s)" % (head, db.lua_version()))
+    print("=" * 78)
+    for rel in PACK_FILES + PN_FILES:
+        print("INPUT", rel, sha((REPO / rel).read_text(encoding="utf-8")))
+    print("SHIPPED %s ModEnvBlacklist %d-%d %s" % (MOD_LUA, BLACKLIST_START + 1, BLACKLIST_END + 1, sha(BLACKLIST.strip("\n"))))
+    print("SHIPPED %s env block %d-%d %s" % (MOD_LUA, ENV_START + 1, ENV_END + 1, sha(ENV_BLOCK.strip("\n"))))
+    print("SHIPPED %s WriteModPersistentData %d-%d, SetupEnv %d-%d, GetModsEnabledByUser %d-%d, ModsReloadItems %d-%d"
+          % (MOD_LUA, STORAGE_A, STORAGE_B, SETUP_A, SETUP_B, ENABLED_A, ENABLED_B, RELOAD_A, RELOAD_B))
+    print("SHIPPED %s queue %d-%d %s" % (MOD_LUA, QUEUE_START + 1, QUEUE_END + 1, sha(QUEUE.strip("\n") + "\n")))
+    print("SHIPPED %s TurnModOn %d-%d TurnModOff %d-%d" % (UI_LUA, HELPERS[0][1], HELPERS[0][2], HELPERS[1][1], HELPERS[1][2]))
+    print("SHIPPED Lua/Units/Colonist.lua StartShuttleLeg %d-%d" % (SS_A, SS_B))
+    print("PN_DEFINITIONS", ",".join("%d-%d" % (a + 1, b + 1) for a, b in PN_HITS), "members=%d" % len(PN_HITS))
+    print()
+    print("BASELINE")
+    base = Recorder(verbose=True)
+    run_cases(base, module_text)
+    held = sum(1 for ok, _ in base.results if ok)
+    print("BASELINE %d of %d demands held" % (held, len(base.results)))
+    groups = sorted(base.groups())
+    print()
+    print("MUTANTS (each row: the groups whose demands FAILED under that mutant)")
+    kills = {g: set() for g in groups}
+    for name in MUTANTS:
+        rec = Recorder(verbose=False)
+        run_cases(rec, mutate(module_text, name))
+        failed = rec.failed_groups()
+        for g in failed:
+            kills.setdefault(g, set()).add(name)
+        print("  %-15s fails %2d of %2d demands; groups: %s" % (name, sum(1 for ok, _ in rec.results if not ok),
+              len(rec.results), ", ".join(sorted(failed)) or "none"))
+    print()
+    print("CONTROL VERDICT per group (expected killers must all kill; a group with no killer at all is vacuous)")
+    problems = []
+    for g in groups:
+        if g in INDEPENDENT:
+            print("  %-6s independent by design (%s)" % (g, "not a module behaviour"))
+            continue
+        expected = KILLERS.get(g, set())
+        missing = expected - kills[g]
+        line = "  %-6s killed by: %-45s expected: %s" % (g, ", ".join(sorted(kills[g])) or "NONE", ", ".join(sorted(expected)))
+        if not kills[g]:
+            problems.append("%s: VACUOUS, no mutant makes it fail" % g)
+            line += "  <-- VACUOUS"
+        elif missing:
+            problems.append("%s: expected killer(s) did not kill: %s" % (g, ", ".join(sorted(missing))))
+            line += "  <-- expected killer missing"
+        if not expected:
+            problems.append("%s: no killers declared" % g)
+            line += "  <-- undeclared"
+        print(line)
+    print()
+    print("RESULT baseline %d/%d held; %d group(s), %d independent; control problems: %d"
+          % (held, len(base.results), len(groups), len([g for g in groups if g in INDEPENDENT]), len(problems)))
+    for p in problems:
+        print("   -", p)
+    return 0 if held == len(base.results) and not problems else 1
 
 
 if __name__ == "__main__":
