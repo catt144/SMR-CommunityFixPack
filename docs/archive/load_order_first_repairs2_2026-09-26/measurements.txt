@@ -1,0 +1,76 @@
+LoadFirst repairs after the re-audit, receipt (2026-09-26). Branch load-first at 86a25078adb705d6e64b8bdd25bb4c115ada214d over 8ea5449; records on main.
+Module Code/01_LoadFirst.lua sha256 c7fdea6a3c878fb49d9e8f5bdf25b369c7eabb3600d4b106b530ec0a06838e79 (unchanged since 8ea5449; the re-audit's figure).
+Witness tools/arming/payloads/98_LoadFirstSync.lua.txt sha256 ace64b3e790a2412a813093f3760a37cfe23ba09cb01c48b4cff87c89b1c3444 (committed, MODE sitting); launched copy b2a5da7f3653efeedc9d5881a8622652002e4489e9a2f3c2e4d3e0806caf7285 = the same text with MODE unattended (checked by recomputing).
+
+HARNESS: python tools/desk_load_first.py, run in the load-first worktree at the pre-commit tree (identical bytes to 86a2507; INPUT lines below), transcript desk_load_first_baseline_and_mutants.txt
+  INPUT Code/00_Core.lua 8a2cdcc1dac9cac54eeb1de0f1bab056f832cef250aadbdb12b07323d5d20d73
+  INPUT Code/01_LoadFirst.lua c7fdea6a3c878fb49d9e8f5bdf25b369c7eabb3600d4b106b530ec0a06838e79
+  INPUT Code/Hubset_OnHubNow.lua 14352af7af53ff7a591ce5d70e9595a5339724ba6f8a0121b8fe03fa97b7fd9b
+  INPUT Code/Fix_VacuumWalks.lua 8c8bd96a3f04dd00c63ece0c394bedad6607b41b629c1a883241fbda54e0d107
+  INPUT Code/Fix_HubLocalAccess.lua 09f31d6716973a77ce1428fb891d2e2319140d3a7e530c7fbde34669fc1e7994
+  INPUT tools/arming/payloads/98_LoadFirstSync.lua.txt ace64b3e790a2412a813093f3760a37cfe23ba09cb01c48b4cff87c89b1c3444
+  BASELINE 84 of 84 demands held
+  RESULT baseline 84/84 held; 39 group(s), 3 independent; control problems: 0
+  reconcile: PASS lines=84 FAIL lines=0 (filter '^  PASS  ' / '^  FAIL  ') vs BASELINE 84 of 84
+MUTANTS (filter 'fails .* of 84 demands'):
+  no-rebuild             37 failed  groups: 1a, 1b, 4b, 4c, 5a, 5b, 6a, 6b, 7a, 7b, R1a, R1b, R1c, R1d, R2a, R2b, R2c, R3a, R5D1, R5E2, R5E3, shape
+  always-rebuild         17 failed  groups: 1a, 2, 4b, 4c, 5c, 7b, R1a, R1b, R1d, R3c, R5E2, engine, shape
+  ignore-option           5 failed  groups: 4a, R5E2
+  ignore-config           1 failed  groups: R3b
+  ignore-probe            4 failed  groups: 3b, R3a
+  ignore-absent           1 failed  groups: shape
+  clobber-slot            5 failed  groups: 5a, 5b, R2a, R2b, R2c
+  no-notice              10 failed  groups: 1a, 1b, 4b, 4c, R1a, R1b, R1c, R1d, R5E2
+  bypass-veto             7 failed  groups: 4a, 4d, R5E1, R5E2
+  fixed-probe             1 failed  groups: R3a
+  ignore-loadall          8 failed  groups: 3a, 3b, R3a, R3b
+  not-optional            9 failed  groups: 4b, 4c, R1a, R1b, R1c, R5E2
+  witness-queue-only      8 failed  groups: R5D2, R5D3, R5D4, R5D5, R5D6
+  witness-no-finish       5 failed  groups: R5D1, R5D2, R5D5, R5D6
+  witness-ignore-clear    1 failed  groups: R5D3
+  witness-ignore-error    2 failed  groups: R5D4
+  witness-empty-is-pass   1 failed  groups: R5D5
+  MUTANT_TOTAL members=17 with_failures=17
+CONTROL VERDICT rows for the new groups (filter '^  (R5D|R5E|pdxfetch)'):
+  R5D1   killed by: no-rebuild, witness-no-finish                 expected: no-rebuild, witness-no-finish
+  R5D2   killed by: witness-no-finish, witness-queue-only         expected: witness-queue-only
+  R5D3   killed by: witness-ignore-clear, witness-queue-only      expected: witness-ignore-clear, witness-queue-only
+  R5D4   killed by: witness-ignore-error, witness-queue-only      expected: witness-ignore-error, witness-queue-only
+  R5D5   killed by: witness-empty-is-pass, witness-no-finish, witness-queue-only expected: witness-empty-is-pass, witness-queue-only
+  R5D6   killed by: witness-no-finish, witness-queue-only         expected: witness-no-finish
+  R5E1   killed by: bypass-veto                                   expected: bypass-veto
+  R5E2   killed by: always-rebuild, bypass-veto, ignore-option, no-notice, no-rebuild, not-optional expected: no-rebuild, not-optional
+  R5E3   killed by: no-rebuild                                    expected: no-rebuild
+  pdxfetch independent by design (not a module behaviour)
+  new groups counted: 10 (R5D1-6 = 6, R5E1-3 = 3, pdxfetch = 1)
+
+L12 (unattended rehearsal on main, launch_witness.ps1, steam -applaunch 3215050 at 10:31:03, process 25 s): L12_sync_witness_main_Mars.exe-20260926-10.31.05-6aad2d75.log, 223 lines, sha256 285500d3c8ec89f200ba7e0ddc3e80fc8e4af64eeb369bb8a112710357bd34d7
+  50:Lua revision: 405907
+  173:[mod] Loaded mod items for: SMR_CommunityFixPackTestKit, SMR_TrainHubDev_20260918, SMR_CommunityFixPack, SMR_CommunityOptInPack, SMR_RailShaftDev_20260923
+  180:[PdxSDK] Started up. Took 1164
+  182:[mod] [LOADFIRST-SYNC] INSTALL ok=true note=wrapped_queued=0 queued=0 t=14340
+  190:[mod] [LOADFIRST-SYNC] PUSH serial=1 kind=root parent=none sync_update=false queued=0
+  191:[mod] [LOADFIRST-SYNC] MSG PdxLogin queued=1
+  192:[mod] [LOADFIRST-SYNC] START serial=1 kind=root queued=0
+  201:[mod] [LOADFIRST-SYNC] END serial=1 kind=root returned=nil queued=0
+  203:[mod] [LOADFIRST-SYNC] AT_MENU VERDICT verdict=COMPLETE-EMPTY pass=false attempts=1 root=1 root_started=true root_finished=true children=0 children_started=0 children_finished=0 clears=0 executing=none queued=0 installed=true
+  204:[mod] [LOADFIRST-SYNC] AT_MENU ORDER saved=SMR_CommunityFixPackTestKit,SMR_TrainHubDev_20260918,SMR_CommunityFixPack,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923
+  205:[mod] [LOADFIRST-SYNC] REPORT ok=true err=nil
+  206:[mod] [LOADFIRST-SYNC] DONE
+  counts: LUA ERROR=0 (grep -c 'LUA ERROR'); 'Failed to get subscribed'=0; 'PdxSDKMods'=0; LOADFIRST-SYNC lines=9
+
+GATES on the branch, main tree checkout window 10:33-10:35:10 (outputs alongside): parsecheck.txt, doccheck_branch.txt, preflight.txt
+  parsecheck.txt: PARSE: 44 file(s) in Code, 0 error(s) [Lua 5.5]
+  doccheck_branch.txt: PARSE: 44 file(s) in Code, 0 error(s) [Lua 5.5] | PARSE: 33 file(s) in ..\SMR-BugFixPack-TestKit\Code, 0 error(s) [Lua 5.5]  (report-only) | doccheck: GREEN
+  preflight.txt: 26 checked · 0 FAIL · 1 UNCHECKABLE
+
+ARCHIVE sha256:
+  9edf52d86f9c20b25d1e609290efd84b9380f455d8f651ae6294ef9c7897cfb7  branch_commit_message.txt
+  427fdfe57c8295ad279ca4041b75c8baa1d34b9dfebef9957c9e3d86881c8d11  desk_load_first_baseline_and_mutants.txt
+  7ab43b912003500a944131b3dee7f6f49a8293d7e53ca22f2e3136f4d59a2abd  desk_load_first_list.txt
+  eb3497ae12baf1437227eedfc7b3cecdf54e683f77b531ef6e12deff72a5f4f1  doccheck_branch.txt
+  285500d3c8ec89f200ba7e0ddc3e80fc8e4af64eeb369bb8a112710357bd34d7  L12_sync_witness_main_Mars.exe-20260926-10.31.05-6aad2d75.log
+  8bf3d23577ebd9e37f5ea892211081be6d7b686f76bad011cc7f8cf3858b4ee3  launch_witness.ps1
+  316490f47457d572cefb0de97613c9cf013b689d635ec1917b0c5879b6caef8d  parsecheck.txt
+  d660d2a4befe3592db2606693e86a0cbd081f41cdece4dbad1d2a0d66cc5f814  preflight.txt
+Kit: metadata.lua restored to HEAD after disarm, blob cec74748e2238d2992a4ff803ca28f8a1093f818 both sides; kit tree clean; parked witness copy removed from the main tree (git status clean).

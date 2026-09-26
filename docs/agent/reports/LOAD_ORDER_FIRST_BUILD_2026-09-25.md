@@ -12,10 +12,12 @@ seven boot logs are the disk evidence. Where a line says MEASURED it names its c
 
 **Latest audit verdict: CHANGES on `8ea5449`, records `4e704c1`.** The re-audit in §13
 accepts R1–R4 and R6 within their stated limits. R5 still needs a positive sync-completion
-witness and a restoration sequence that survives the final option click. The branch remains
-unmerged and the sitting held. Sections 0–12 retain the build, first audit and repair history;
-§13 supersedes their current clearance claims. The retained FIXED list and owner authority
-remain in §11.
+witness and a restoration sequence that survives the final option click. **Repaired on the
+branch at `86a2507` (§14, 2026-09-26): a kit-side sync completion witness with desk and live
+controls, and a restoration order placed after the last option click; awaiting re-audit.**
+The branch remains unmerged and the sitting held. Sections 0–12 retain the build, first audit
+and repair history; §13 supersedes their current clearance claims and §14 answers §13's two
+findings. The retained FIXED list and owner authority remain in §11.
 
 ## 0 · Read this first — what the owner sees that the brief did not say
 
@@ -906,3 +908,156 @@ change. SHIP-TO-SITTING still precedes the owner's sitting approval; the upload 
 canary obligations remain as retained in §11 and the release outbox. The consumed brief stays
 retired. This verdict narrows the hold to the named remaining defects; it does not reopen
 accepted repairs or relax the FIXED list.
+
+## 14 · Repairs after the re-audit — branch `load-first` at `86a2507`, 2026-09-26
+
+One commit over `8ea5449`, kit payloads and harness only; `Code/01_LoadFirst.lua` is unchanged
+(sha256 `c7fdea6a…`, the figure §13 audited). These records are on `main`. Transcript, the
+rehearsal log, the launch script, the three gate outputs and the receipt with every hash and
+count: [`docs/archive/load_order_first_repairs2_2026-09-26/`](../../archive/load_order_first_repairs2_2026-09-26/)
+(`measurements.txt` reconciles the harness totals against their PASS/FAIL lines and the mutant
+table against its members).
+
+**Read this first, owner.** Two things happened on your rig this round. (1) One unattended
+launch on `main` at 10:31 (L12, 25 s to the menu and out), the kit armed with the new sync
+witness and no pack branch on the junction; it changed nothing and your saved order read
+back as `Kit, TrainHub, Pack, OptIn, RailShaft` (L12 :204). (2) At 10:33:35 you started the
+game. The seat's gate script had already found `Mars.exe` running when it checked, but it
+only printed that and went on to check out `load-first` in the main tree for the gates; the
+branch was on the junction from about 10:34 until 10:35:10, while your game ran. Your game
+started on `main` (the start precedes the checkout), and the game reads mod code once at
+start, about 17 s in; whether that read fell inside the window is decided by your session's
+log, which the game writes when you quit. The seat reads it then; if it shows a promotion,
+the seat restores your order with the set leg and reads it back on `main`, as §12 did. The
+failure is the seat's: the running-game check must stop the script, not report.
+
+### R5-D — a completion witness for the Paradox sync (repaired)
+
+**Mechanism** (`tools/arming/payloads/98_LoadFirstSync.lua.txt`, leg
+`tools/arming/legs/load-first-sync.json`, both on the branch). The kit wraps, on this
+process's `g_PopsDownloadModsQueue` instance (the queue `OnMsg.PdxLogin` feeds,
+`ModManager.lua:1902-1906`; created by the thread `OnMsg.PdxStartedUp` spawns, :1724-1727,
+:1963-1969), the instance's `PushTask` and `Clear`. Every pushed callback is replaced by a
+closure that logs `START`, runs the callback under `pcall`, logs `END` with its return value
+or re-raises the error to the queue's own `sprocall` (`PdxSDK.lua:913-920`) after recording
+it. The sync ROOT is the task pushed with untyped metadata and no arguments (:1906,
+`SyncPdxMods`); its CHILDREN are the tasks pushed while the root runs (:1877, :1882,
+`SyncUpdatePdxMod`); typed pushes (:442 install, :470 uninstall) are `other`. `Clear`
+(`PdxSDK.lua:922-925`, called by `OnMsg.PdxLogout`, :1922-1927) marks every not-yet-started
+task of the open attempt cancelled. A task already queued when the witness installs is
+wrapped in place (`PushTask` stores the callback at `[1]`, :933-941). The verdict per attempt:
+
+| verdict | meaning | PASS? |
+|---|---|---|
+| `COMPLETE` | root and every child started and returned, no error, no cancellation | yes |
+| `IN-FLIGHT` | a task started and has not returned (an outstanding `AsyncPdx*` call) | no |
+| `CANCELLED` | `Clear` dropped a task that never started | no |
+| `FAILED` | a task raised, or returned an error string | no |
+| `COMPLETE-EMPTY` | the root returned having scheduled no child | no |
+| `UNWITNESSED` | a `SyncUpdatePdxMod` push seen with no root (the witness arrived late) | no |
+| `NO-ATTEMPT` | no root pushed in this process (no `PdxLogin`) | no |
+
+Queue length is logged on every line as diagnostic data and decides nothing.
+
+**Why an empty attempt is never PASS, source-backed.** `AsyncPdxGetAllSubscribedMods`
+(`ModManager.lua:1739-1760`) tests `#new_mods == 0` before it tests `err`, so a failed first
+page that comes back as an empty table returns `false, {}`; `SyncPdxMods` then sees no error,
+schedules nothing and prints nothing. The game's own "Failed to get subscribed mods" line is
+therefore not an error witness, and the kit cannot repeat the fetch: `AsyncPdx`, `Pops`, `PDX`
+are blacklisted prefixes for mods (`ParadoxMods.lua:288-294`). MEASURED, the `pdxfetch`
+independent case: the archived body with a stub returning `'Timeout', {}` yields `err=False
+n=0`; the control with one subscribed mod yields `n=1`.
+
+**Desk controls** (`python tools/desk_load_first.py`; the archived `PdxTaskQueue` methods
+`PdxSDK.lua:872-961` on a coroutine worker, the witness loaded under the shipped sandbox):
+
+| group | demand | must be killed by |
+|---|---|---|
+| R5D1 | root + two children: worker idle, queue 0, `COMPLETE`, pass; one PUSH/START/END per task; a child that re-enables the pack leaves it last and the next boot promotes | `witness-no-finish`, `no-rebuild` |
+| R5D2 | one child inside an async call: queue reads **0** yet `IN-FLIGHT`, not pass (the §13 counterexample); the call returns: `COMPLETE` | `witness-queue-only` |
+| R5D3 | child 1 in flight, child 2 queued, `PdxLogout`: `CLEAR cancelled_unstarted=1`, queue 0, `CANCELLED`, not pass | `witness-queue-only`, `witness-ignore-clear` |
+| R5D4 | a child raises (the queue's `sprocall` sees it) / returns an error string: `FAILED`, not pass | `witness-queue-only`, `witness-ignore-error` |
+| R5D5 | root schedules nothing: `COMPLETE-EMPTY`, not pass; a root already queued at install is wrapped in place: `COMPLETE`; install after the root started: `UNWITNESSED`; no login: the driver logs `NO-ATTEMPT pass=false` and quits | `witness-queue-only`, `witness-empty-is-pass` |
+| R5D6 | unattended driver after a complete attempt logs `VERDICT verdict=COMPLETE pass=true`, the saved order, quits once; sitting mode binds the `Sync read` slot and a press reports | `witness-no-finish` |
+
+`witness-queue-only` is §13's counterexample made into code (queue empty means done); it
+fails 8 demands across R5D2–R5D6. Baseline **84 of 84**; 39 groups, 3 independent
+(`canary`, `engine`, `pdxfetch`); 12 module mutants and 5 witness mutants, each kills every
+group it is declared for, `MUTANT_TOTAL members=17 with_failures=17`, control problems 0.
+
+**MEASURED live, L12** (this rig, `main`, 2026-09-26 10:31, `launch_witness.ps1`): the
+witness installed at :182 (`INSTALL ok=true wrapped_queued=0`, real time 14340 ms) before the
+login push at :190 (`PUSH serial=1 kind=root`), `MSG PdxLogin` :191, `START` :192, `END …
+returned=nil` :201 after 115 ms, `AT_MENU VERDICT verdict=COMPLETE-EMPTY pass=false attempts=1
+… children=0 … clears=0 … queued=0` :203, saved order unchanged :204, zero `[LUA ERROR]`.
+Two facts this settles: `PdxLogin` fires at boot on this rig, so the owner is signed in through
+the SDK's auto-login (`PdxSDK.lua:333-338`), and nothing is there to sync — the rig's
+`PdxMods` folder holds only `temp_pdx` (no installed Paradox mod) and the root scheduled no
+child. `COMPLETE-EMPTY` is the expected shape here, and it is not PASS.
+
+**Leg D, concrete.** Arm `load-first-sync` with `MODE = "sitting"` (binds the SMRTK scratch
+slot *Sync read*; the leg's gates pass, self-test 20/20). Clicks: press *Sync read* (the
+boot attempt: expected `COMPLETE-EMPTY` on this rig, or `COMPLETE` with N children if the
+account has subscriptions); main-menu Paradox account button, **Log out** (log: `MSG
+PdxLogout`, `CLEAR`); **Log in** (log: `MSG PdxLogin`, `PUSH … kind=root`, one `PUSH …
+kind=child` per subscribed or installed mod, `START`/`END` each); wait ten seconds; press
+*Sync read*; quit; start; *Order read*. **PASS** only if the second *Sync read* reads
+`COMPLETE` with `children_finished = children ≥ 1`, and the pack is first in the saved list
+at that press and at the next boot. `COMPLETE-EMPTY` is **NOT RUN** (nothing to sync on this
+account, recorded as such); `IN-FLIGHT`, `CANCELLED`, `FAILED`, `UNWITNESSED` are
+inconclusive; no **Log out** button is NOT RUN. Expected on this rig today: NOT RUN, unless
+the owner subscribes to one Paradox mod before the sitting; that is the owner's call and is
+not assumed. Owner minutes: 3, `<<PENDING-RUN>>`.
+
+### R5-E — restoration after the last promotion-capable click (repaired)
+
+The captured start is option ON, order `Kit, TrainHub, Pack, OptIn, RailShaft` (L0), junction
+on `main`. Legs A–D leave the option ON: C's final click is ON and promotes at once (that is
+R1, and R5E2 below shows why a restoration before it cannot survive). E then makes no option
+click at all:
+
+1. The owner quits after D. No further click on *Load this pack first*.
+2. The seat arms `load-first-set` with `ORDER` = the captured order and launches unattended
+   (the branch is on the junction). The set payload vetoes `LoadFirst` at its file scope;
+   with the pack first in the saved list the pack's code runs before the kit's, but that
+   launch finds the pack already first and writes nothing (§2 case 2). At the menu the
+   payload logs `BEFORE option LoadFirst=true status=… detail=…` (the option's persisted
+   value, read on this last branch boot), rewrites the order through `TurnModOff`/`TurnModOn`,
+   requests the kit's save, logs `AFTER saved=` and quits. L10 is this launch.
+3. `git checkout main` in the main tree; read back `git branch --show-current` and the
+   junction, `(Get-Item "$env:APPDATA\Surviving Mars Relaunched\Mods\SMR-BugFixPack").Target`
+   = `B:\Dev\SMR\SMR-BugFixPack`.
+4. The seat arms `load-first-read` and launches on `main`: `AT_LOAD saved=` and `AT_MENU
+   saved=` = the captured order, `loaded=` the same, `fix LoadFirst status=nil`, `option
+   LoadFirst=nil (nil on a build without the option)`. L11 is this launch. The option's value
+   cannot be read on `main`: a mod without option items unloads its stored options
+   (`Mod.lua:680-684`), so step 2's line is the option readback and step 4 is the order,
+   enabled-set and junction readback.
+5. The restored state is the captured start; after a merge the next launch promotes by
+   design (R5E3).
+
+Desk: **R5E1** vetoed restore with the option ON survives a Lua reload and an Apply click
+(raw = captured, one save = the kit's, no notice, `LoadFirst disabled`), killed by
+`bypass-veto`; **R5E2** the rejected recipe: OFF readback keeps the captured order, then the
+final ON click promotes at once (`SMRFixPack.LoadFirst.pending_notice = true`), killed by
+`no-rebuild` and `not-optional`; **R5E3** the next feature-enabled boot on the captured order
+promotes, killed by `no-rebuild`. Both payloads now log the option value (read leg) and the
+option value with the `LoadFirst` status (set leg), which is the only change to them. L10–L11
+are the recipe as the repair seat ran it; this section makes it the plan. Owner minutes: 0.
+
+### Gates on the branch and rig state
+
+Run in the main tree with `load-first` checked out (a worktree's `local/` rows make doccheck
+RED there, a worktree artefact): `parsecheck` 44 files, 0 errors; `doccheck` GREEN;
+`upload_preflight` 26 checked, 0 FAIL, 1 UNCHECKABLE (login). Kit `metadata.lua` restored to
+HEAD after the disarm (blob `cec74748…` both sides), kit tree clean, the parked witness copy
+removed from the main tree. Cost: the §11 estimate stands, 15 owner minutes, 19 with PN,
+`<<PENDING-RUN>>`.
+
+### Handoff to the re-audit
+
+Branch `load-first` at `86a2507` (`8ea5449` plus one commit, no module change). Re-run
+`python tools/desk_load_first.py` on the branch (baseline, every module and witness mutant;
+`--list` names them); read L12 and its receipt; check R5D2's demand against §13's
+counterexample and R5E2's against §13's restoration counterexample. The sitting stays held;
+no merge, no upload.

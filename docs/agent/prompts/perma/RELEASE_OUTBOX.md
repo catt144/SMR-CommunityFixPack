@@ -23,11 +23,14 @@ player surface bumps it by one on release.
 
 ### Pending — LoadFirst: the pack moves itself to the front of the mod load order (2026-09-25)
 
-**HOLD: re-audit CHANGES on `8ea5449`, branch `load-first`, NOT merged.** The latest audit is
-[LOAD_ORDER_FIRST_BUILD_2026-09-25.md §13](../../reports/LOAD_ORDER_FIRST_BUILD_2026-09-25.md#13--re-audit--changes-2026-09-26).
-R1–R4 and R6 are accepted within the report's stated limits. R5 still needs a positive
-Paradox-sync completion witness and restoration after the final promotion-capable option click.
-The baseline and every declared mutant were rerun; both archived packages were decoded.
+**HOLD: re-audit CHANGES on `8ea5449`, repaired at `86a2507`, branch `load-first`, NOT merged,
+awaiting re-audit.** The latest audit is
+[LOAD_ORDER_FIRST_BUILD_2026-09-25.md §13](../../reports/LOAD_ORDER_FIRST_BUILD_2026-09-25.md#13--re-audit--changes-2026-09-26);
+the repairs are §14 of the same report. R1–R4 and R6 are accepted within the report's stated
+limits. R5's two findings are answered: a kit-side Paradox-sync completion witness (desk
+controls, and a live boot-time rehearsal on `main` reading COMPLETE-EMPTY, never PASS) and a
+restoration order placed after the last promotion-capable option click, read back on `main`.
+The module is unchanged since `8ea5449`; the harness holds 84/84 with 17 mutants.
 Ships only after re-audit returning SHIP-TO-SITTING and
 the owner's sitting approval. The consumed brief's
 authority and unfinished requirements are retained in that report.

@@ -1,0 +1,46 @@
+LoadFirst: sync completion witness and restoration controls for the sitting (R5-D, R5-E)
+
+Re-audit 2cdf080 returned CHANGES on 8ea5449 for two sitting-plan defects. This commit
+answers them with a kit witness and desk controls; Code/01_LoadFirst.lua is unchanged
+(sha256 c7fdea6a..., the audited module).
+
+tools/arming/payloads/98_LoadFirstSync.lua.txt, tools/arming/legs/load-first-sync.json
+- R5-D: the kit wraps every task pushed on this process's g_PopsDownloadModsQueue
+  (the queue OnMsg.PdxLogin feeds, ModManager.lua:1902-1906) so the log carries the
+  sync root (:1906), every child it scheduled (:1877, :1882), each start, return, raise
+  or error string, and any Clear (PdxSDK.lua:922-925 via OnMsg.PdxLogout). The verdict
+  is COMPLETE only when root and every child returned without error or cancellation;
+  IN-FLIGHT, CANCELLED, FAILED, COMPLETE-EMPTY, UNWITNESSED and NO-ATTEMPT are never
+  PASS. Queue length is logged as diagnostic data only. A task already queued when the
+  witness installs is wrapped in place. MODE unattended drives a boot-time rehearsal
+  and quits; MODE sitting binds the SMRTK scratch slot "Sync read".
+
+tools/arming/payloads/98_LoadFirstRead.lua.txt, 98_LoadFirstSet.lua.txt
+- R5-E: both log the pack's saved "Load this pack first" value and, in the set leg,
+  the LoadFirst status, so the vetoed restore launch reads the option back on the last
+  branch boot and the main readback shows the order and the absent row.
+
+tools/desk_load_first.py
+- Loads the archived PdxTaskQueue methods (PdxSDK.lua:872-961) on a coroutine worker
+  and the witness under the sandbox; groups R5D1-R5D6 demand COMPLETE for a full run,
+  IN-FLIGHT for an outstanding async call with the queue at 0 (the re-audit's
+  counterexample), CANCELLED after a logout Clear, FAILED for a raise or an error
+  string, COMPLETE-EMPTY and UNWITNESSED not pass, and the unattended driver's log.
+  Five witness mutants (queue-only, no-finish, ignore-clear, ignore-error,
+  empty-is-pass) must kill them, alongside the module mutants.
+- Groups R5E1-R5E3: a vetoed restore with the option ON survives a reload and an Apply
+  click (bypass-veto kills it); the rejected OFF/readback/ON recipe promotes on the
+  final click (kept as the reason restoration follows the last option click); the next
+  feature-enabled boot on the restored order promotes by design.
+- Independent pdxfetch: AsyncPdxGetAllSubscribedMods (ModManager.lua:1739-1760) tests
+  the page length before the error, so a failed empty first page returns no error and
+  prints nothing; COMPLETE-EMPTY therefore stays not PASS.
+- Baseline 84/84 held; 39 groups, 3 independent; 12 module + 5 witness mutants each
+  kill every group they are declared for; no group vacuous.
+
+Unattended rehearsal on main, this rig (L12, 2026-09-26 10:31): the witness installed
+before the login push, PdxLogin fired, the root ran and returned with no children,
+verdict COMPLETE-EMPTY pass=false; saved order unchanged; zero [LUA ERROR]. Records
+and the log are on main.
+
+Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>
