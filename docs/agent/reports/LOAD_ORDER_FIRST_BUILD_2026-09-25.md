@@ -37,6 +37,12 @@ re-audit. Sections 0–10 retain the builder's record, including claims correcte
 5. **A defect was found and fixed during the build**: the first LoadAllMods detector misread any
    saved list that happened to sort ascending (two mods do that half the time) and would have
    left real players unpromoted. It is replaced by an exact, net-zero probe (§2 case 3, D1).
+6. **Your 23:08 play session ran on the branch and promoted your order.** The repair seat had
+   `load-first` checked out on the junction when you started the game (log
+   `Mars.exe-20260925-23.08.46`): the pack moved itself from third to first, you saw the
+   restart box and chose Later. That was the rails' failure, not the module's: the module did
+   what it says. Your order was put back afterwards (§12, L10/L11) and reads as before from a
+   fresh boot on `main`. Until the branch merges, your next launch changes nothing.
 
 ## 1 · What was built (branch `load-first`, `8e2325a`)
 
@@ -572,3 +578,168 @@ The repair seat's open work is R1–R6, the still-held sitting, and the post-upl
 already carried by §6 and the release outbox, with R6's portal qualifications. The release hold
 now points here rather than to the deleted brief. The brief and map row are consumed by this
 audit; retirement does not waive any of those obligations.
+
+## 12 · Repairs after the audit — branch `load-first` at `8ea5449`, 2026-09-25
+
+One commit over `8e2325a`, code only; these records are on `main`. The audit's R1–R4 and R6 are
+repaired and re-measured; R5 is answered as a corrected plan (still held for approval). The
+retail evidence of §4 stands. Transcript, logs, both Editor-made packages and their decoded
+metadata: [`docs/archive/load_order_first_repairs_2026-09-25/`](../../archive/load_order_first_repairs_2026-09-25/).
+
+**Read this first, owner.** While the repair seat had the branch checked out on the junction, you
+started the game (23:08, `Mars.exe-20260925-23.08.46`, excerpted in the archive): the pack promoted
+your order from third to first and you chose **Later** on its box. That is the first time a
+person saw the notice; it is not a tested-attended claim, because nobody asked you to look. Your
+order was restored at 23:21 (L10) and read back from a fresh boot on `main` at 23:23 (L11):
+`Kit, TrainHub, Pack, OptIn, RailShaft`, no `LoadFirst` row. The failure was the seat's: a
+checked-out code branch is what your game loads. It is recorded so the next seat does not repeat
+it, and the branch is on the junction no longer than a launch needs.
+
+### R1 — the notice is scheduled by the promotion (fixed)
+
+`Promote` sets `pending_notice` and calls `schedule_notice()`, which creates one real-time thread
+per pending promotion: it waits for the pregame menu, shows the box once, clears the flag. A later
+opt-in through Mod Options (the reconciler's `run_apply` or `on_activate`) therefore gets its own
+thread and box; a second promotion in the same process gets a second box; a Lua reload re-arms a
+thread only when a promotion is pending and no live thread holds it (`IsValidThread` when
+reachable, else the module's own live flag). The process-wide `notice_shown` latch is gone.
+Controls, all with the startup threads drained BEFORE the later click (the audit's chronology):
+R1a cold option off then later on: promotes, one box; R1b already-first boot, off, moved last, on:
+one box; R1c promotion boot, off, moved last, on: two boxes, two save requests; R1d reload while a
+box is pending: one box. Killed by `no-notice` and, where a promotion is involved, by `no-rebuild`
+and `not-optional`.
+
+### R2 — foreign slot bytes preserved exactly, refusal drops nothing (fixed)
+
+The slot is split on the newline byte keeping empty pieces; only the first line matching the
+record pattern `SMRFixPack.LoadFirst v<n> promotions=<n>` is ours; the rest is re-joined unchanged
+behind the new line. `alpha`, blank line, `beta`, trailing newline keeps its blank line and its
+trailing newline; `SMRFixPack.LoadFirstExtra payload` is foreign and kept. When the record would
+not fit, the shipped writer refuses before writing (`Mod.lua:1494-1496`), the module writes nothing
+else, the rebuilt order stands in memory and the log says the save could not be requested through
+the slot. Controls R2a–R2c (`z` × 32768: slot byte-identical, order promoted, zero save requests,
+the log line present), killed by `clobber-slot`. **Stated exception to §2 case 1:** with a full
+foreign slot the promotion makes no save request; the game's own account save at boot (observed on
+every launch on this rig, §4's instrument note) carries it, and if none comes the next start
+promotes and tells again.
+
+### R3 — LoadAllMods edges (fixed, with one stated limit)
+
+`config.LoadAllMods` is read before anything is concluded, so a pack that sorts first is still
+diagnosed `inactive` (R3b). The account flag is probed only on the rebuild path, with a
+per-process unique id (`SMRFixPack.LoadFirst.probe.<time>.<n>`); an id already visible in the
+copy proves the normal branch without a write, and the probe never removes an id it did not add,
+so a stale id stays where it was under either flag (R3a, raw list byte-identical). **Stated limit
+(R3c):** when the pack is already at index 1 nothing is written and nothing is probed, so with the
+account flag set and the pack alphabetically first the status line reads "first in the list the
+game loads (N mods); nothing written", which is then the installed list, not the saved one. The
+wording is chosen for that case; the module header says so. Killers: `ignore-loadall` (both
+routes off) for 3a, `ignore-probe` for 3b, `ignore-config` for R3b, `fixed-probe` for R3a,
+`always-rebuild` for R3c.
+
+### R4 — behavioural controls (rebuilt harness)
+
+`python tools/desk_load_first.py`: baseline **64 of 64**, then twelve mutants of the module
+source, each an exact single-occurrence replacement asserted to have taken, each case group
+naming the mutants that must kill it; no inline assertion, every case runs after a failure.
+From the archived transcript:
+
+| mutant | what it breaks | kills (groups) |
+|---|---|---|
+| `no-rebuild` | the list is never rebuilt | 1a 1b 4b 4c 5a 5b 6a 6b 7a 7b R1a–d R2a–c R3a shape |
+| `always-rebuild` | already-first no longer returns | 1a 2 4b 4c 5c 7b R1a R1b R1d R3c shape (engine) |
+| `ignore-option` | option off ignored at apply | 4a |
+| `not-optional` | invisible to the reconciler | 4b 4c R1a R1b R1c |
+| `ignore-config` / `ignore-probe` / `ignore-loadall` | one or both LoadAllMods routes off | R3b / 3b R3a / 3a 3b R3a R3b |
+| `ignore-absent` | a pack absent from the list is inserted | shape |
+| `clobber-slot` | foreign bytes dropped | 5a 5b R2a R2b R2c |
+| `no-notice` | promotion schedules nothing | 1a 1b 4b 4c R1a–d |
+| `bypass-veto` | promotes at file end regardless | 4a 4d |
+| `fixed-probe` | fixed, pre-cleared probe id | R3a |
+
+Control verdict: every group's expected killers kill; no group is vacuous; `canary` and
+`engine` are independent by design and reported apart. The `engine` case runs the shipped
+`ModsReloadItems` (`Mod.lua:2099-2179`) on a same-visit off/on: the running list is unchanged,
+no promotion, no notice, which is the sitting's S2 fact (R5). The module header now also states
+the cross-check's distinction: first file execution does not promise that a deferred data repair
+precedes every content mod's edit.
+
+### R5 — the sitting, corrected (held for approval; not prepared)
+
+The audit's revised legs A–E and the optional PN leg are adopted as written in §11, with these
+completions:
+
+- **B, hot path.** Disable the pack, close the manager (a real enabled-set change: the manager
+  saves and reloads, `ModManager.lua:123-166`; `Mod.lua:2104-2112` does not short-circuit). Reopen,
+  enable, close: the reload runs the pack's code, `Promote` runs on the hot path, the box appears;
+  choose Restart now. A same-visit off/on is recorded separately as order-only (the `engine` case)
+  with no reload expectation.
+- **D, explicit Paradox sync, source-traced clicks.** Main menu bottom bar, the Paradox account
+  button (`idParadoxAccount`, `Lua/XDef/PGBottomButtons.generated.lua:70`), then **Log out** (the
+  button shows while `g_Pdx.account`, `ParadoxMenu.lua:357`; `PDXAccountObject:LogOut` :239 calls
+  `PdxSDK:LogOut` :377, which posts `PdxLogout` :389 and clears the download queue,
+  `ModManager.lua:1919-1925`), then **Log in** with the owner's credentials (`PDXAccountObject:Login`
+  :138 calls `PdxSDK:LogIn` :392, which posts `PdxLogin` :405). `OnMsg.PdxLogin`
+  (`ModManager.lua:1902-1917`) pushes `SyncPdxMods` (:1864-1885) on `g_PopsDownloadModsQueue`, a
+  `PdxTaskQueue` (`PdxSDK.lua:900-960`); per subscribed mod `SyncUpdatePdxMod` (:1763) calls
+  `TurnModOff` or `TurnModOn` only on a version change or an install. **Completion witness:** a
+  *Sync read* slot logs the queue length (`#g_PopsDownloadModsQueue`; the `g_Pops` name is outside
+  the blacklisted prefixes) and the saved list before the click, after the queue reads 0, and after
+  the next boot; the log's `PdxSDKMods` lines (`mods_print`, `ModManager.lua:15-19`) carry any
+  "Failed to get subscribed mods for sync." A login error or a queue that never empties is
+  inconclusive, never PASS. If the account panel shows no Log out, the owner is not signed in and
+  D is NOT RUN, not PASS. Whether the owner uses a Paradox account on this rig is not known from
+  the logs, which show `[PdxSDK] Started up` only.
+- **E, restoration, with the promotion inhibited.** The kit cannot veto the pack once the pack loads
+  first, and cannot write Mod Options, so E is: the owner turns *Load this pack first* OFF (a
+  click); the *Restore starting settings* slot rebuilds the captured start order and requests the
+  kit's save; quit; boot; *Order read* confirms the start order with `LoadFirst inactive (turned
+  off in Mod Options)`; the owner turns the option back ON (a click); quit without another boot.
+  Then the junction goes back to `main` (precondition 2) and reads back once more; after a merge
+  the next launch promotes by design and E's readback is the last boot before it.
+- **Cost:** the audit's estimate, 15 owner minutes, 19 with PN, `<<PENDING-RUN>>`, unmeasured.
+
+### R6 — Editor load and pack evidence (measured on this rig)
+
+A SCRATCH mod, `SMR_LoadFirstCanaryScratch`, was built in the appdata Mods folder from the branch's
+`metadata.lua` (id and title changed, store ids removed, the canary lines intact) with an empty
+`items.lua`, never enabled, so nothing of it ran. A kit payload vetoed the real pack's LoadFirst
+and, at the menu, called the Editor's own steps: `PackModForBugReporter` (the packer,
+`GedModEditor.lua:756-765`, which calls `CreatePackageForUpload` :676-739; `DbgPackMod` itself is
+blacklisted for mods, `PackModForBugReporter` is not) and, in the second launch,
+`ModDef:SaveWholeMod` (`Mod.lua:1153-1170`, which calls `SaveDef` :973-993) first. Logs L8 and L9;
+the packages were copied from the game's `ModUpload\Pack\ModContent.fpk` under the local temp
+folder after each exit and decoded with `tools/flpk_extract.py`.
+
+| step | scratch `metadata.lua` on disk | decoded package `metadata.lua` |
+|---|---|---|
+| before anything | 34,496 B, sha `ab3b99ca…`, canary 1, comment lines 329, first line `local def = PlaceObj(`, last `return def` | none yet |
+| L8 pack, no save (`IsDirty` nil) | unchanged | 34,496 B, sha `ab3b99ca…`, **canary 1**, comments 329, same first and last lines; id control 1 |
+| L9 `SaveWholeMod` (version 21 to 22) then pack | 8,703 B, sha `989f2642…`, **canary 0**, comments 0, first line `return PlaceObj('ModDef', {`, last `})` | 8,703 B, sha `989f2642…`, **canary 0**, comments 0; id control 1 |
+
+MEASURED: the packer takes the on-disk file byte for byte; the Editor's save regenerates it and
+strips every hand-written statement and comment. So per portal, following the save points the
+audit listed (`GedModEditor.lua:836-842`, `ParadoxMods.lua:165-173`, `SteamWorkshop.lua:17-25`):
+a dirty-validation save before packing strips it for both stores; without one, the Paradox
+package carries it and the Steam package, uploaded second after Paradox's post-upload save, does
+not; a clean Steam-only update would carry it. The post-upload check (§6) must therefore record
+the portal and whether a save preceded packing, and a stripped Steam package decides only that
+path. **Limits:** the scratch mod had no loaded items, so its regenerated file also lost
+`default_options` (the real pack, whose items load, keeps it, `Mod.lua:983`); the canary and
+comment results do not depend on items. No upload was made; the Editor UI was not opened; the
+same functions the UI calls were called.
+
+### Rig state and the kit
+
+The TestKit's `metadata.lua` was restored to HEAD after every disarm (hash-checked; the
+harness's strip of commented `mustNotBeListed` lines is still SUGGESTION 2). The scratch mod
+folder is deleted. The kit carries an **uncommitted edit to `Code/80_AgentSlots.lua`** (93
+insertions, 8 deletions, modified 23:21:50, last committed by the hub lane at 22:53 as
+`cb49f07`) that this seat did not make and did not touch; routed to that lane.
+
+### Handoff to the re-audit
+
+Branch `load-first` at `8ea5449` (`8e2325a` plus one commit). Re-run `python tools/desk_load_first.py`
+on the branch (baseline and every mutant in one run; `--mutant NAME` for one, `--list` for the
+killers); read L8–L11 and the owner-session excerpt; decode the two archived packages. The
+sitting stays held; no merge, no upload.

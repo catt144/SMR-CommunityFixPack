@@ -23,11 +23,12 @@ player surface bumps it by one on release.
 
 ### Pending — LoadFirst: the pack moves itself to the front of the mod load order (2026-09-25)
 
-**HOLD: audit CHANGES on branch `load-first` (`8e2325a`), NOT merged.** The fresh audit is
+**HOLD: audit CHANGES on `8e2325a`; repairs landed as `8ea5449` on branch `load-first`, NOT merged; re-audit pending.** The fresh audit is
 [LOAD_ORDER_FIRST_BUILD_2026-09-25.md §11](../../reports/LOAD_ORDER_FIRST_BUILD_2026-09-25.md#11--fresh-context-audit--changes-2026-09-25).
 R1–R6 cover silent later opt-in, persistent-data loss, LoadAllMods edge cases, insufficient
-controls, invalid sitting triggers and missing Editor pack evidence. Ships only after repair,
-re-audit returning SHIP-TO-SITTING, and the owner's sitting approval. The consumed brief's
+controls, invalid sitting triggers and missing Editor pack evidence; the repairs and their
+evidence are §12 of the same report. Ships only after re-audit returning SHIP-TO-SITTING and
+the owner's sitting approval. The consumed brief's
 authority and unfinished requirements are retained in that report.
 The normal promotion/restart/Passage Network evidence remains valid on this rig; the ordinary
 desk harness passes while the expanded audit exposes the failures. Not owner-watched.
