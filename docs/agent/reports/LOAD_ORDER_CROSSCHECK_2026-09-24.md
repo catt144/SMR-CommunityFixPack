@@ -399,3 +399,14 @@ hazard. Keep per-fix deference and accurate conflict diagnostics even if first
 position becomes the default. Claude review and the owner's implementation
 decision are the remaining actions reserved by the task; no entry changes or
 production feature are included here.
+
+**Note, 2026-09-25 (LOAD_ORDER_FIRST build).** The owner chose the saved-order lever
+(option B) and the metadata bootstrap's shape as a canary (option C). The build is on
+branch `load-first` (`8e2325a`), desk-verified on the shipped helpers under the real
+sandbox and run unattended on this rig: seven launches showed the promotion (3→1 and
+6→1), its survival across a full restart, a launch that finds the pack first writing
+nothing, and the Passage Network pair (PN before the pack declines F125's and C114's
+guards; the promoted order applies both). Report:
+[LOAD_ORDER_FIRST_BUILD_2026-09-25.md](LOAD_ORDER_FIRST_BUILD_2026-09-25.md). The
+retail sitting in that report is planned, not run; persistence on other rigs and the
+Paradox playset sync as an explicit act stay HYPOTHESIS until it runs.

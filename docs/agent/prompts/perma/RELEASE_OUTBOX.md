@@ -21,6 +21,35 @@ player surface bumps it by one on release.
 
 ## Pending — goes out with the next upload
 
+### Pending — LoadFirst: the pack moves itself to the front of the mod load order (2026-09-25)
+
+**HOLD: on branch `load-first` (`8e2325a`), NOT merged.** Ships only after the load-order audit
+(`prompts/LOAD_ORDER_FIRST_high.md`) returns SHIP-TO-SITTING and the owner's sitting approves.
+Desk harness `tools/desk_load_first.py` (50 of 50; `--no-promotion` fails 33 of 50, no vacuous
+case); seven unattended retail launches on the owner's rig (promotion, survival across a restart,
+nothing written when already first, the Passage Network pair; logs archived). Not owner-watched.
+Owner's choice of option B, 2026-09-25; report `reports/LOAD_ORDER_FIRST_BUILD_2026-09-25.md`.
+
+Player surface, three parts, none of them a fix-list row unless the release seat decides so:
+
+> The pack now moves itself to the front of your mod load order the first time it starts, so its
+> repairs are applied before other mods change the same parts of the game. Your other mods keep
+> their order. It tells you when a restart is needed, and you can turn this off under Options >
+> Mod Options > Relaunched Fix Pack.
+
+- **The pack lists on the Mod Options page again**, with one toggle, "Load this pack first"
+  (default on). The 2026-08-12 "no options" shape is reversed for this one control.
+- **The C canary in `metadata.lua`** (`SMRFP-LOADORDER-CANARY-2026-09-25-b7e1`, inert hand-written
+  code in option C's shape). ⛔ The post-upload seat runs its three-part check BEFORE restoring the
+  comments (`support/POST_UPLOAD_CLOSE.md` §1); the check and the per-portal prediction are in the
+  report, "The C canary". The result decides whether C reopens or closes.
+
+Developer detail: `Code/01_LoadFirst.lua`, registered `LoadFirst` (`optional = true`); rebuilds
+`AccountStorage.LoadMods` through `TurnModOff`/`TurnModOn` with every other mod's relative order
+kept, requests the account save through a changed `WriteModPersistentData`, declines on
+`LoadAllMods` without a write, honours `SMRFixPack_Disabled["LoadFirst"]`, and shows a once-per-process
+notice at the pregame menu with Restart now / Later on PC.
+
 ## Last released
 
 **v16** (2026-09-24). Its entry and every earlier release are in

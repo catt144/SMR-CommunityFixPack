@@ -409,6 +409,11 @@ module's own maps.
   wraps us. Never build on it: nothing breaks at any position, and there is deliberately no
   player-facing load-order instruction, because the Mod Manager's list is a cosmetic sort a
   player could not verify following. Note it, watch for a real conflict, create no new problems.
+  2026-09-25 (owner's option B, branch `load-first`): the pack now promotes itself to the
+  front of the saved enable order through the game's public helpers (`Code/01_LoadFirst.lua`;
+  player opt-out in Mod Options), so "no way to request a position" no longer holds for the
+  normal branch. The rule above still binds every fix: a player can turn the promotion off,
+  and the running session's order is never changed, so nothing may assume a position.
 - Before release: verify each target against the shipping `Packs\Lua.fpk` (WORKFLOW), test
   each fix in-game, update `agent/bugs/` statuses, and credit prior art (ChoGGi's Fix Bugs mod
   documented several of these bug families for the original game).

@@ -1,0 +1,222 @@
+LoadFirst build measurements, 2026-09-25
+Commands ran from a git worktree of branch load-first at 8e2325aa219efc253e2c957eb776ca77ca06a2d2 (B:/Dev/SMR/SMR-FixPack-loadfirst); no retail launch in this file, the launches are the archived logs.
+
+COMMAND python tools/desk_load_first.py
+SCRIPT_SHA256 1f3e5905b5f73229e32473a47d2ffd17e460092b796f7fada9fce9d510410bb4
+==============================================================================
+LoadFirst desk controls — with the promotion (HEAD 8e2325a, game 1.1.1.405907, Lua 5.5 | lupa 2.8)
+==============================================================================
+lua: Lua 5.5 | lupa 2.8
+
+INPUT Code/00_Core.lua 8a2cdcc1dac9cac54eeb1de0f1bab056f832cef250aadbdb12b07323d5d20d73
+INPUT Code/01_LoadFirst.lua 6c5dc55a46f70455ed17059c67435ec1ad916840f839f963308d7c6c9ccfd8ad
+INPUT Code/Hubset_OnHubNow.lua 14352af7af53ff7a591ce5d70e9595a5339724ba6f8a0121b8fe03fa97b7fd9b
+INPUT Code/Fix_VacuumWalks.lua 8c8bd96a3f04dd00c63ece0c394bedad6607b41b629c1a883241fbda54e0d107
+INPUT Code/Fix_HubLocalAccess.lua 09f31d6716973a77ce1428fb891d2e2319140d3a7e530c7fbde34669fc1e7994
+SHIPPED CommonLua/Modding/Mod.lua ModEnvBlacklist 1280-1441 6bef8043e0ecda3c7589af72c6de2138b5f123fc6b8e73dc102fb8e0da056043
+SHIPPED CommonLua/Modding/Mod.lua env block 1551-1626 2c6f5b8e5116637396cd861890e72a14f9306ccf283bdbd09d27f98de295a699
+SHIPPED CommonLua/Modding/Mod.lua WriteModPersistentData 1487-1503, SetupEnv 1628-1645, GetModsEnabledByUser 1995-2001
+SHIPPED CommonLua/Modding/Mod.lua queue 1873-1993 749348d898cbef2fd42a426c357bfd960903ea4928b0b9e2111c19be31da249e
+SHIPPED CommonLua/UI/ModManager.lua TurnModOn 35-37 TurnModOff 39-41
+SHIPPED Lua/Units/Colonist.lua StartShuttleLeg 2016-2029
+PN_DEFINITIONS 45-47,49-51 members=2
+
+  PASS  1a middle: saved B,PACK,C becomes PACK,B,C  -- SMR_CommunityFixPack,B,C
+  PASS  1a next queue is PACK,B,C  -- SMR_CommunityFixPack,B,C
+  PASS  1a running ModsLoaded stays B,PACK,C  -- B,SMR_CommunityFixPack,C
+  PASS  1a exactly one save request, delay 1000  -- calls=1 delay=1000
+  PASS  1a LoadFirst active, detail names the move  -- active / moved to the front of the saved mod order (was 2 of 3); applies at the next game start
+  PASS  1a notice: one question, Restart now / Later, no restart on Later  -- questions=1 restarts=0
+  PASS  1a Lua reload: no second write, no second notice  -- saves=1 questions=1
+  PASS  1b last: saved A,B,PACK becomes PACK,A,B  -- SMR_CommunityFixPack,A,B
+  PASS  1b Restart now calls the game's restart routine once  -- 1
+  PASS  2 already first: saved list unchanged  -- SMR_CommunityFixPack,A,B
+  PASS  2 already first: no save request
+  PASS  2 already first: LoadFirst active, detail says first of 3  -- active / first of 3 in the saved mod order; nothing written
+  PASS  2 already first: no notice  -- questions=0 messages=0
+  PASS  2 already first: persistent slot untouched
+  PASS  3a config.LoadAllMods: raw saved list untouched  -- B,SMR_CommunityFixPack,C
+  PASS  3a config.LoadAllMods: no save request
+  PASS  3a config.LoadAllMods: LoadFirst inactive naming LoadAllMods  -- inactive / the game is loading every installed mod in alphabetical order (LoadAllMods), so the saved order does not apply
+  PASS  3a config.LoadAllMods: a log line says not applied  -- [CommunityFixPack] LoadFirst: not applied — config.LoadAllMods is set; the saved order is untouched (A, B, C, SMR_CommunityFixPack) | [CommunityFixPack] LoadFirst: inactive (the game is loading every installed mod in alphabetical order (LoadAllMods), so the saved order does not apply)
+  PASS  3b AccountStorage.LoadAllMods: raw saved list untouched  -- B,SMR_CommunityFixPack,C
+  PASS  3b AccountStorage.LoadAllMods: no save request
+  PASS  3b AccountStorage.LoadAllMods: LoadFirst inactive naming LoadAllMods  -- inactive / the game is loading every installed mod in alphabetical order (LoadAllMods), so the saved order does not apply
+  PASS  3b AccountStorage.LoadAllMods: a log line says not applied  -- [CommunityFixPack] LoadFirst: not applied — the account's LoadAllMods flag is set, so the saved list is ignored; the saved order is untouched (A, B, C, SMR_CommunityFixPack) | [CommunityFixPack] LoadFirst: inactive (the game is loading every installed mod in alphabetical order (LoadAllMods), so the saved order does not apply)
+  PASS  4a option off: saved list untouched  -- B,SMR_CommunityFixPack,C
+  PASS  4a option off: no save request
+  PASS  4a option off: LoadFirst inactive 'turned off in Mod Options'  -- inactive / turned off in Mod Options
+  PASS  4b toggled on: promotes at once  -- SMR_CommunityFixPack,B,C
+  PASS  4b toggled on: one save request, LoadFirst active  -- saves=1 status=active
+  PASS  4b toggled on: the notice shows  -- 1
+  PASS  4c toggled off again: inactive, order left as it is, no new request  -- status=inactive saved=SMR_CommunityFixPack,B,C saves=1
+  PASS  4d veto SMRFixPack_Disabled.LoadFirst: disabled, untouched, no request  -- status=disabled saved=B,SMR_CommunityFixPack,C saves=0
+  PASS  5a slot: our line first, promotions=1 from=2 of=3  -- 'SMRFixPack.LoadFirst v1 promotions=1 last=1790381486 from=2 of=3'
+  PASS  5a slot: both foreign lines preserved verbatim  -- ['somebody-else v3 alpha', 'beta']
+  PASS  5b second promotion: promotions=2, foreign lines still intact, saved list PACK first  -- ['SMRFixPack.LoadFirst v1 promotions=2 last=1790381486 from=3 of=3', 'somebody-else v3 alpha', 'beta'] saved=SMR_CommunityFixPack,B,C saves=2
+  PASS  5c already first: a foreign slot is not rewritten, LoadFirst active 'first of'  -- 'somebody-else v3 alpha' saves=0 active
+  PASS  6a own prerequisite A: saved PACK,B,A; queue hoists A first, PACK before B  -- saved=SMR_CommunityFixPack,B,A queue=A,SMR_CommunityFixPack,B
+  PASS  6b Z requires the pack: saved PACK,Z,B; queue PACK,Z,B (Z unmoved relative to B)  -- saved=SMR_CommunityFixPack,Z,B queue=SMR_CommunityFixPack,Z,B
+  PASS  shape: pack absent from the list: untouched, no request, inactive 'not in the saved mod list'  -- saved=A,B saves=0 inactive/this pack is not in the saved mod list, so there is nothing to reorder
+  PASS  shape: duplicate B collapses to its first position, stale GHOST kept in place  -- SMR_CommunityFixPack,B,GHOST
+  PASS  shape: duplicate/stale list requests exactly one save  -- 1
+  PASS  shape: five mods, pack third: others keep A,B,C,D order  -- SMR_CommunityFixPack,A,B,C,D
+  PASS  7a PN before pack: VacuumWalks declines (inactive)  -- inactive / the shipped emigration code has no work-slot reservation or shuttle landing slots; this repair stands down on the older body
+  PASS  7a PN before pack: HubLocalAccess does not apply  -- inactive / Dome not found (game update changed it?)
+  PASS  7a saved PN,PACK becomes PACK,PN; next queue PACK,PN  -- saved=SMR_CommunityFixPack,iooW34Y queue=SMR_CommunityFixPack,iooW34Y
+  PASS  7b next launch in that order: VacuumWalks active  -- active / 
+  PASS  7b next launch in that order: HubLocalAccess active  -- active / 
+  PASS  7b next launch: LoadFirst already first, no write  -- status=active saves=0
+  PASS  canary: metadata.lua loads under the metadata env and returns a ModDef
+  PASS  canary: declared property set = pre-canary set + default_options  -- ['default_options']
+  PASS  canary: the literal is in the tree file and leaks no global
+  PASS  canary: the code list still starts 00_Core, 01_LoadFirst
+
+==============================================================================
+50 of 50 demands held
+ALL DEMANDS HELD
+EXIT 0
+
+COMMAND python tools/desk_load_first.py --no-promotion
+==============================================================================
+LoadFirst desk controls — WITHOUT the promotion (control run) (HEAD 8e2325a, game 1.1.1.405907, Lua 5.5 | lupa 2.8)
+==============================================================================
+lua: Lua 5.5 | lupa 2.8
+
+INPUT Code/00_Core.lua 8a2cdcc1dac9cac54eeb1de0f1bab056f832cef250aadbdb12b07323d5d20d73
+INPUT Code/01_LoadFirst.lua 6c5dc55a46f70455ed17059c67435ec1ad916840f839f963308d7c6c9ccfd8ad
+INPUT Code/Hubset_OnHubNow.lua 14352af7af53ff7a591ce5d70e9595a5339724ba6f8a0121b8fe03fa97b7fd9b
+INPUT Code/Fix_VacuumWalks.lua 8c8bd96a3f04dd00c63ece0c394bedad6607b41b629c1a883241fbda54e0d107
+INPUT Code/Fix_HubLocalAccess.lua 09f31d6716973a77ce1428fb891d2e2319140d3a7e530c7fbde34669fc1e7994
+SHIPPED CommonLua/Modding/Mod.lua ModEnvBlacklist 1280-1441 6bef8043e0ecda3c7589af72c6de2138b5f123fc6b8e73dc102fb8e0da056043
+SHIPPED CommonLua/Modding/Mod.lua env block 1551-1626 2c6f5b8e5116637396cd861890e72a14f9306ccf283bdbd09d27f98de295a699
+SHIPPED CommonLua/Modding/Mod.lua WriteModPersistentData 1487-1503, SetupEnv 1628-1645, GetModsEnabledByUser 1995-2001
+SHIPPED CommonLua/Modding/Mod.lua queue 1873-1993 749348d898cbef2fd42a426c357bfd960903ea4928b0b9e2111c19be31da249e
+SHIPPED CommonLua/UI/ModManager.lua TurnModOn 35-37 TurnModOff 39-41
+SHIPPED Lua/Units/Colonist.lua StartShuttleLeg 2016-2029
+PN_DEFINITIONS 45-47,49-51 members=2
+
+  FAIL  1a middle: saved B,PACK,C becomes PACK,B,C  -- B,SMR_CommunityFixPack,C
+  FAIL  1a next queue is PACK,B,C  -- B,SMR_CommunityFixPack,C
+  PASS  1a running ModsLoaded stays B,PACK,C  -- B,SMR_CommunityFixPack,C
+  FAIL  1a exactly one save request, delay 1000  -- calls=0 delay=None
+  FAIL  1a LoadFirst active, detail names the move  -- absent / 
+  FAIL  1a notice: one question, Restart now / Later, no restart on Later  -- questions=0 restarts=0
+  FAIL  1a Lua reload: no second write, no second notice  -- saves=0 questions=0
+  FAIL  1b last: saved A,B,PACK becomes PACK,A,B  -- A,B,SMR_CommunityFixPack
+  FAIL  1b Restart now calls the game's restart routine once
+  PASS  2 already first: saved list unchanged  -- SMR_CommunityFixPack,A,B
+  PASS  2 already first: no save request
+  FAIL  2 already first: LoadFirst active, detail says first of 3  -- absent / 
+  PASS  2 already first: no notice  -- questions=0 messages=0
+  PASS  2 already first: persistent slot untouched
+  PASS  3a config.LoadAllMods: raw saved list untouched  -- B,SMR_CommunityFixPack,C
+  PASS  3a config.LoadAllMods: no save request
+  FAIL  3a config.LoadAllMods: LoadFirst inactive naming LoadAllMods  -- absent / 
+  FAIL  3a config.LoadAllMods: a log line says not applied
+  PASS  3b AccountStorage.LoadAllMods: raw saved list untouched  -- B,SMR_CommunityFixPack,C
+  PASS  3b AccountStorage.LoadAllMods: no save request
+  FAIL  3b AccountStorage.LoadAllMods: LoadFirst inactive naming LoadAllMods  -- absent / 
+  FAIL  3b AccountStorage.LoadAllMods: a log line says not applied
+  PASS  4a option off: saved list untouched  -- B,SMR_CommunityFixPack,C
+  PASS  4a option off: no save request
+  FAIL  4a option off: LoadFirst inactive 'turned off in Mod Options'  -- absent / 
+  FAIL  4b toggled on: promotes at once  -- B,SMR_CommunityFixPack,C
+  FAIL  4b toggled on: one save request, LoadFirst active  -- saves=0 status=absent
+  FAIL  4b toggled on: the notice shows
+  FAIL  4c toggled off again: inactive, order left as it is, no new request  -- status=absent saved=B,SMR_CommunityFixPack,C saves=0
+  FAIL  4d veto SMRFixPack_Disabled.LoadFirst: disabled, untouched, no request  -- status=absent saved=B,SMR_CommunityFixPack,C saves=0
+  FAIL  5a slot: our line first, promotions=1 from=2 of=3  -- 'somebody-else v3 alpha'
+  FAIL  5a slot: both foreign lines preserved verbatim  -- ['beta']
+  FAIL  5b second promotion: promotions=2, foreign lines still intact, saved list PACK first  -- ['somebody-else v3 alpha', 'beta'] saved=B,C,SMR_CommunityFixPack saves=0
+  FAIL  5c already first: a foreign slot is not rewritten, LoadFirst active 'first of'  -- 'somebody-else v3 alpha' saves=0 absent
+  FAIL  6a own prerequisite A: saved PACK,B,A; queue hoists A first, PACK before B  -- saved=B,SMR_CommunityFixPack,A queue=B,A,SMR_CommunityFixPack
+  FAIL  6b Z requires the pack: saved PACK,Z,B; queue PACK,Z,B (Z unmoved relative to B)  -- saved=Z,SMR_CommunityFixPack,B queue=SMR_CommunityFixPack,Z,B
+  FAIL  shape: pack absent from the list: untouched, no request, inactive 'not in the saved mod list'  -- saved=A,B saves=0 absent/
+  FAIL  shape: duplicate B collapses to its first position, stale GHOST kept in place  -- B,SMR_CommunityFixPack,B,GHOST
+  FAIL  shape: duplicate/stale list requests exactly one save
+  FAIL  shape: five mods, pack third: others keep A,B,C,D order  -- A,B,SMR_CommunityFixPack,C,D
+  PASS  7a PN before pack: VacuumWalks declines (inactive)  -- inactive / the shipped emigration code has no work-slot reservation or shuttle landing slots; this repair stands down on the older body
+  PASS  7a PN before pack: HubLocalAccess does not apply  -- inactive / Dome not found (game update changed it?)
+  FAIL  7a saved PN,PACK becomes PACK,PN; next queue PACK,PN  -- saved=iooW34Y,SMR_CommunityFixPack queue=iooW34Y,SMR_CommunityFixPack
+  FAIL  7b next launch in that order: VacuumWalks active  -- inactive / the shipped emigration code has no work-slot reservation or shuttle landing slots; this repair stands down on the older body
+  FAIL  7b next launch in that order: HubLocalAccess active  -- inactive / Dome not found (game update changed it?)
+  FAIL  7b next launch: LoadFirst already first, no write  -- status=absent saves=0
+  PASS  canary: metadata.lua loads under the metadata env and returns a ModDef
+  PASS  canary: declared property set = pre-canary set + default_options  -- ['default_options']
+  PASS  canary: the literal is in the tree file and leaks no global
+  PASS  canary: the code list still starts 00_Core, 01_LoadFirst
+
+==============================================================================
+17 of 50 demands held
+REFUTED -- 33 demand(s) failed:
+   - 1a middle: saved B,PACK,C becomes PACK,B,C
+   - 1a next queue is PACK,B,C
+   - 1a exactly one save request, delay 1000
+   - 1a LoadFirst active, detail names the move
+   - 1a notice: one question, Restart now / Later, no restart on Later
+   - 1a Lua reload: no second write, no second notice
+   - 1b last: saved A,B,PACK becomes PACK,A,B
+   - 1b Restart now calls the game's restart routine once
+   - 2 already first: LoadFirst active, detail says first of 3
+   - 3a config.LoadAllMods: LoadFirst inactive naming LoadAllMods
+   - 3a config.LoadAllMods: a log line says not applied
+   - 3b AccountStorage.LoadAllMods: LoadFirst inactive naming LoadAllMods
+   - 3b AccountStorage.LoadAllMods: a log line says not applied
+   - 4a option off: LoadFirst inactive 'turned off in Mod Options'
+   - 4b toggled on: promotes at once
+   - 4b toggled on: one save request, LoadFirst active
+   - 4b toggled on: the notice shows
+   - 4c toggled off again: inactive, order left as it is, no new request
+   - 4d veto SMRFixPack_Disabled.LoadFirst: disabled, untouched, no request
+   - 5a slot: our line first, promotions=1 from=2 of=3
+   - 5a slot: both foreign lines preserved verbatim
+   - 5b second promotion: promotions=2, foreign lines still intact, saved list PACK first
+   - 5c already first: a foreign slot is not rewritten, LoadFirst active 'first of'
+   - 6a own prerequisite A: saved PACK,B,A; queue hoists A first, PACK before B
+   - 6b Z requires the pack: saved PACK,Z,B; queue PACK,Z,B (Z unmoved relative to B)
+   - shape: pack absent from the list: untouched, no request, inactive 'not in the saved mod list'
+   - shape: duplicate B collapses to its first position, stale GHOST kept in place
+   - shape: duplicate/stale list requests exactly one save
+   - shape: five mods, pack third: others keep A,B,C,D order
+   - 7a saved PN,PACK becomes PACK,PN; next queue PACK,PN
+   - 7b next launch in that order: VacuumWalks active
+   - 7b next launch in that order: HubLocalAccess active
+   - 7b next launch: LoadFirst already first, no write
+
+CONTROL: 33 of 50 demands FAILED with Code/01_LoadFirst.lua removed; 17 case(s), 0 with no failing demand (none vacuous)
+CONTROL: the demands that still held are the no-write halves; each case's status demand fails, which is the control
+EXIT 1
+
+COMMAND python tools/upload_preflight.py .
+NOTE the one FAIL below is a WORKTREE artefact: a git worktree's `.git` is a FILE, which the `*.git/*` ignore pattern does not match, so the predicted pack lists it. On the branch's real working tree (B:/Dev/SMR/SMR-BugFixPack, checked out on load-first before the launches) the same command read `26 checked · 0 FAIL · 1 UNCHECKABLE`; the two refuted deskbench harnesses at the end (desk_mystery_tech_migration, desk_probes_f67_f59) fail identically on main at 4e4c97b and reference no mod-order name (grep count 0 each).
+
+  26 checked · 1 FAIL · 1 UNCHECKABLE
+
+⛔ DO NOT OPEN THE MOD EDITOR until these are fixed.
+EXIT 0
+
+COMMAND python tools/pack_predict.py (metadata.lua canary lines present?)
+1:local def = PlaceObj('ModDef', {
+423:local SMRFixPack_LoadOrderCanary = "SMRFP-LOADORDER-CANARY-2026-09-25-b7e1"
+424:return def
+
+COMMAND python tools/deskbench.py (the whole desk suite)
+  desk_f125_vacuum.py              HELD
+  desk_f127_arrival_booking.py     HELD
+  desk_f59_expedition.py           HELD
+  desk_f59_interact.py             HELD
+  desk_gamepatch_retirements.py    HELD
+  desk_hubset07_rehearsal.py       HELD
+  desk_hubset07b_rehearsal.py      HELD
+  desk_load_first.py               HELD
+  desk_migration_cluster.py        HELD
+  desk_migration_observations.py   HELD
+  desk_mystery_tech_migration.py   REFUTED (exit 1)
+  desk_probes_f67_f59.py           REFUTED (exit 1)
+  desk_progress_seam.py            HELD
+  desk_seam_food.py                HELD
+  desk_shelter_reflex.py           HELD
+EXIT 0
+
+RETAIL LAUNCHES (Steam applaunch 3215050, unattended, this rig, game 1.1.1.405907, Steam build 25390750): seven, logs in this folder as L1..L7_*.log; the kit read/set payloads are tools/arming/payloads/98_LoadFirst{Read,Set}.lua.txt on branch load-first. Zero [LUA ERROR] lines across all seven (grep -c).

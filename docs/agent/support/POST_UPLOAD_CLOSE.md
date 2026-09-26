@@ -35,6 +35,11 @@ Count leading comment lines in both files before any commit. Zero means the edit
 serializer stripped them and restoration is owed. A zero-hit command never proves
 the comments are safe.
 
+If the outbox's Pending names a **canary** in `metadata.lua`, run its check now, on the
+stripped working-tree copy and the downloaded Workshop package, before §2 restores the
+comments: the restore brings the canary back from git and would erase the reading. The
+first such check is `docs/agent/reports/LOAD_ORDER_FIRST_BUILD_2026-09-25.md`, "The C canary".
+
 ## 2 · Preserve writeback, restore comments
 
 Keep the upload's actual `version`, `pdx_id`, `pdx_version`, `steam_id` and other
