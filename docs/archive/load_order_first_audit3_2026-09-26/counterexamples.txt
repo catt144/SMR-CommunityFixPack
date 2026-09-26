@@ -1,0 +1,14 @@
+COMMAND python scratch/load_first_audit3_counterexamples.py
+IDENTITY branch=86a25078adb705d6e64b8bdd25bb4c115ada214d source=1.1.1.405907
+SOURCE_BODY {"file": "B:\\Dev\\SMR\\SMR-Shared\\SMR-SrcArchive\\1.1.1.405907\\Src\\CommonLua\\UI\\ModManager.lua", "first": 1739, "last": 1760, "sha256": "82bcca47be6e3517f07bee4bf8e5ef12c923f324c1995c234ead3bd5092fe736"}
+SOURCE_BODY {"file": "B:\\Dev\\SMR\\SMR-Shared\\SMR-SrcArchive\\1.1.1.405907\\Src\\CommonLua\\UI\\ModManager.lua", "first": 1763, "last": 1862, "sha256": "9cbc8edbd2f5df027bf9f7f46ae3242cfe31e6c21558c16b692715478a99e1d2"}
+SOURCE_BODY {"file": "B:\\Dev\\SMR\\SMR-Shared\\SMR-SrcArchive\\1.1.1.405907\\Src\\CommonLua\\UI\\ModManager.lua", "first": 1864, "last": 1885, "sha256": "bc377c7cd1460a513bc4ab4a632ea7978225b9d0ceecb2d5e26c9632a65ff8fb"}
+DEMAND {"holds": false, "name": "R5D partial enumeration cannot PASS", "observed": {"api_error": "Timeout", "children": 1, "pages": "1,2", "passes": true, "remote_log": "Mod 123 v 1 is up to date. Nothing to download.", "state": "idle", "verdict": "COMPLETE"}}
+DEMAND {"holds": true, "name": "control successful enumeration and up-to-date child PASS", "observed": {"pages": "1,2", "verdict": "COMPLETE"}}
+DEMAND {"holds": false, "name": "R5D shipped install failure cannot PASS", "observed": {"passes": true, "queue_errors": 0, "remote_log": "Failed to install mod 123 v 1 Timeout", "state": "idle", "verdict": "COMPLETE"}}
+DEMAND {"holds": false, "name": "R5D shipped uninstall failure cannot PASS", "observed": {"passes": true, "queue_errors": 0, "remote_log": "Failed to uninstall mod 123 1 Timeout", "state": "idle", "verdict": "COMPLETE"}}
+DEMAND {"holds": true, "name": "control zero-queue in-flight child does not PASS", "observed": {"queued": 0, "verdict": "IN-FLIGHT"}}
+DEMAND {"holds": false, "name": "R5D logout during sole in-flight child cannot PASS", "observed": {"clear_line": true, "passes": true, "queued": 0, "state": "idle", "verdict": "COMPLETE"}}
+DEMAND {"holds": true, "name": "R5E control actual late-veto set payload restores after final option click", "observed": {"option": true, "questions": 0, "quits": 1, "saved": "SMR_CommunityFixPackTestKit,SMR_TrainHubDev_20260918,SMR_CommunityFixPack,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923", "saves": 1}}
+DEMAND_TOTAL {"failed_names": ["R5D partial enumeration cannot PASS", "R5D shipped install failure cannot PASS", "R5D shipped uninstall failure cannot PASS", "R5D logout during sole in-flight child cannot PASS"], "held": 3, "members": 7}
+ESTIMATE_ARITHMETIC {"legs": {"A": 3, "B": 4, "C": 3, "D": 3, "E": 0}, "sum": 13, "optional_PN": 4, "with_PN": 17, "timed": false}

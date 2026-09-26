@@ -4,20 +4,19 @@
 
 Report for the owner, repair seat and audit seat, executing the now-consumed one-off
 `docs/agent/prompts/LOAD_ORDER_FIRST_high.md` (retrievable at `4e4c97b`).
-The build is on the short-lived code branch **`load-first`**, repaired at **`8ea5449`**, not merged.
+The build is on the short-lived code branch **`load-first`**, repaired at **`86a2507`**, not merged.
 Records are on `main`. Nothing here was uploaded, and no attended sitting ran. Every "the pack
 loads first" claim below is desk- and unattended-verified on this one rig; the retail sitting
 in §5 is planned for the owner's approval, not run. A save request is not a disk write; the
 seven boot logs are the disk evidence. Where a line says MEASURED it names its command or log.
 
-**Latest audit verdict: CHANGES on `8ea5449`, records `4e704c1`.** The re-audit in §13
-accepts R1–R4 and R6 within their stated limits. R5 still needs a positive sync-completion
-witness and a restoration sequence that survives the final option click. **Repaired on the
-branch at `86a2507` (§14, 2026-09-26): a kit-side sync completion witness with desk and live
-controls, and a restoration order placed after the last option click; awaiting re-audit.**
-The branch remains unmerged and the sitting held. Sections 0–12 retain the build, first audit
-and repair history; §13 supersedes their current clearance claims and §14 answers §13's two
-findings. The retained FIXED list and owner authority remain in §11.
+**Latest audit verdict: CHANGES on `86a2507`, records `ab7f3ac` (§15).** R5-E's revised
+restoration is accepted. R5-D rejects the original in-flight counterexample, but still
+reports successful completion after silent fetch failure, logged child failure or logout
+during the sole running child. R1–R4 and R6 retain their prior acceptance and limits.
+The branch remains unmerged and the sitting held. Sections 0–14 retain the build, audit and
+repair history; §15 supersedes their current clearance claims. The retained FIXED list and
+owner authority remain in §11.
 
 ## 0 · Read this first — what the owner sees that the brief did not say
 
@@ -1061,3 +1060,133 @@ Branch `load-first` at `86a2507` (`8ea5449` plus one commit, no module change). 
 `--list` names them); read L12 and its receipt; check R5D2's demand against §13's
 counterexample and R5E2's against §13's restoration counterexample. The sitting stays held;
 no merge, no upload.
+
+## 15 · Audit of the second repair — CHANGES, 2026-09-26
+
+**CHANGES at `load-first` `86a2507`, records `main` `ab7f3ac`.** The revised restoration
+answers R5-E. The sync witness answers the exact R5D2 queue-empty example, but its broader
+success claim still fails on the shipped callbacks. The remaining hold is R5-D's completion,
+error and cancellation evidence. The production module is unchanged; R1–R4 and R6 remain
+accepted within §13's limits. No sitting, merge or upload is cleared by this verdict.
+
+### What holds against the two prior counterexamples
+
+MEASURED: `python scratch/load_first_audit3.py` exports `86a2507` without changing the installed
+checkout, checks inputs byte-for-byte against `git show`, then runs
+`python tools/desk_load_first.py`, `--list`, and every module/witness `--mutant NAME` separately.
+The [receipt](../../archive/load_order_first_audit3_2026-09-26/receipt.txt) carries exact commits,
+hashes, commands and reconciliations; [the runner](../../archive/load_order_first_audit3_2026-09-26/load_first_audit3.py)
+is runnable from the repo root. As in §13, the export's printed git HEAD belongs to the outer
+records tree; its code identity is established by the explicit input checks.
+
+The baseline is **84/84** and all **17 declared mutants** are caught. The receipt reconciles
+each individual mutant's named PASS/FAIL lines against its aggregate summary. The members
+are the module mutants `no-rebuild`, `always-rebuild`, `ignore-option`, `ignore-config`,
+`ignore-probe`, `ignore-absent`, `clobber-slot`, `no-notice`, `bypass-veto`, `fixed-probe`,
+`ignore-loadall`, `not-optional`; and witness mutants `witness-queue-only`,
+`witness-no-finish`, `witness-ignore-clear`, `witness-ignore-error`, `witness-empty-is-pass`.
+`MUTANT_TOTAL` reconciles that member list; `BASELINE` and `RESULT` reconcile the baseline.
+The [aggregate transcript](../../archive/load_order_first_audit3_2026-09-26/baseline_and_mutants.txt)
+and individual runs are archived. Branch parsecheck passes. Passing this declared set does
+not establish behavior absent from its fixtures.
+
+- **R5D2 holds:** the running child leaves queue length zero, but the witness reports
+  `IN-FLIGHT`, not PASS; after it returns the control reports `COMPLETE`. The queue-only
+  mutant fails this demand. This closes §13's exact example.
+- **R5E2 holds:** OFF preserves the captured order; the final ON click promotes immediately.
+  The harness correctly preserves this as the rejected recipe, rather than asserting that
+  ON should stop promoting. The repaired plan places restoration after that click.
+- **R5-E accepted:** §14's last branch launch restores the order, then exits to a fresh
+  readback on `main`, with no later option click. R5E1 installs its veto before the pack,
+  so it alone does not model the plan's pack-first boot. An additional audit control loads
+  the actual set payload *after* the already-first pack: it restores the captured order,
+  leaves the option ON, requests one save, shows no notice and quits once. Its writer is
+  the desk fixture's slot; it proves ordering, not a retail disk write. L10–L11 remain the
+  historical disk evidence, without the newly added option-log lines.
+
+The source correction to §14 E is that **the runtime options object** is unloaded on a build
+without option items, not that its stored account value is erased. Archived build
+**1.1.1.405907**, `Src/CommonLua/Modding/Mod.lua:680–707`, reads account options into a separate
+object and clears that object in `UnloadOptions`. Reading ON on the final branch boot is
+therefore useful; `nil` from the new read payload on `main` is not by itself a persisted-option
+readback. The revised sequence makes no later option change and retains the fresh order/set/
+junction readback duty. The later feature-enabled promotion remains intended behavior.
+
+### R5-D still admits false COMPLETE results
+
+MEASURED: `python scratch/load_first_audit3_counterexamples.py` uses the exact branch witness
+and archived **1.1.1.405907** bodies of `AsyncPdxGetAllSubscribedMods`, `SyncPdxMods` and
+`SyncUpdatePdxMod`, with deterministic asynchronous-API stubs. These are desk counterexamples,
+not live service failures. The source file hash is checked; extracted-body hashes and line
+ranges accompany the [results](../../archive/load_order_first_audit3_2026-09-26/counterexamples.txt)
+and [runnable script](../../archive/load_order_first_audit3_2026-09-26/load_first_audit3_counterexamples.py).
+
+| False-success path | Shipped behavior and observed witness result |
+|---|---|
+| Partial subscription enumeration | `Src/CommonLua/UI/ModManager.lua:1739–1760` tests empty page before error. A successful first page followed by `Timeout, {}` returns the partial list with `err=false`. The real root schedules a child; the real already-up-to-date child returns. The witness says `COMPLETE pass=true`, although enumeration encountered an error. The successful-fetch control also completes. |
+| Failed install | The real child at :1825–1833 logs `Failed to install mod ... Timeout` and returns nil. The witness says `COMPLETE pass=true`; its queue error collection is empty. A callback return without a raised/string error does not prove this operation succeeded. |
+| Failed uninstall | The real child at :1802–1807 logs `Failed to uninstall mod ... Timeout` and continues; the unsubscribed path returns at :1811–1812. Again `COMPLETE pass=true`, with no raised queue error. |
+| Logout during the sole running child | The same in-flight child used in R5D2 is the only child. Logout calls the real queue's `Clear`; no unstarted task is dropped. After the child returns, the witness says `COMPLETE pass=true`, despite the logout. R5D3 only covers the case with another child still queued. |
+
+The witness at `86a2507`, `tools/arming/payloads/98_LoadFirstSync.lua.txt:79–95`, detects
+exceptions and string return values, whereas the shipped child can swallow API failures.
+Its `Clear` wrapper (:108–118) marks only unstarted records. The verdict (:136–157) consequently
+has no failed/cancelled marker in the cases above. The audit's `DEMAND_TOTAL` names each
+failing demand and reconciles them with the successful-fetch, in-flight and restoration
+controls. An independent source review identified the same failure paths.
+
+The existing `pdxfetch` case is useful but insufficient: failing the *first* empty page with
+no installed work leads to `COMPLETE-EMPTY`. It does not cover failure after a populated page.
+Likewise, R5D4's stub returns an error string or raises; neither models the real child's
+logged-only install/uninstall failures. These are failures of the witness's success claim,
+not evidence that the production LoadFirst module needs changing.
+
+**Required repair:** make the success decision reject these actual error paths, and treat
+logout as invalidating an open attempt even when no queued child is removed. Keep completion
+tied to the requested login attempt; a push during another yielded callback can currently
+inherit that callback's parent through `W.executing`. §14's requirement for a new root after
+login must remain an enforced check. A log-error check can reject the logged child failures;
+it cannot prove a silent truncated subscription fetch succeeded. If the sandbox cannot
+observe that success, report that limit as inconclusive and provide a different source-backed
+witness or explicitly revised test scope for review. Do not turn callback return into an
+unqualified successful-sync PASS. Add opposing controls using the shipped bodies above.
+
+### L12 and receipt qualifications
+
+L12 was read in full. Its file SHA-256 is
+`285500d3c8ec89f200ba7e0ddc3e80fc8e4af64eeb369bb8a112710357bd34d7`, matching the receipt.
+The witness's committed SHA-256 is `ace64b3e…`; changing only its MODE to unattended reproduces
+the recorded launch hash `b2a5da7f…`. The launch script was read, not executed by this audit.
+The new receipt searches decoded L12 text and records each matching line beside its count:
+revision :50, loaded set :173, witness install :182, root push/login/start :190–192, root end
+:201, and **`COMPLETE-EMPTY pass=false`** at :203. Saved order at :204 matches the loaded list.
+`LOG_FILTER` and `LOG_TOTAL` reconcile the nine witness lines, the revision/loaded-list
+presence controls, and absence of `[LUA ERROR]`, `Failed to get subscribed` and `PdxSDKMods`.
+Braze errors are present; the absence statement is only for those named filters.
+
+L12 supports a boot login and a completed root callback with no scheduled children. It does
+**not** establish §14's “nothing is there to sync”: §14's own first-page timeout example
+produces the same observation, and an empty local installed-mod folder cannot settle remote
+subscriptions. An empty attempt is therefore unproven/inconclusive, not evidence of successful
+sync or of an empty account. The false PASSs above were reproduced on the desk, not in L12.
+
+The builder's hash list also mixes archived LF files with their pre-archive CRLF hashes.
+For `desk_load_first_baseline_and_mutants.txt`, `desk_load_first_list.txt`,
+`doccheck_branch.txt`, `parsecheck.txt` and `preflight.txt`, restoring CRLF reproduces the
+listed hash exactly. The new receipt records both hashes and labels that conversion; it
+does not rewrite old evidence or claim those hashes identify the current LF bytes.
+
+The stated cost also needs arithmetic correction: the retained A/B/C estimates and revised
+D/E are 3 + 4 + 3 + 3 + 0 = **13 owner minutes; 17 with PN**, `<<PENDING-RUN>>`, rather than
+§14's unchanged 15/19. `ESTIMATE_ARITHMETIC` records the members and sum; this is no timing
+measurement and is not a separate clearance blocker.
+
+### Disposition
+
+R5-E is closed for the specified captured ON/pack-later start and final readback on `main`.
+R5-D remains open for the source-backed false-success paths above; the preserved FIXED list,
+sitting approval, upload and post-upload canary duties are unchanged. The owner-session
+follow-up disclosed in §14 also remains open: read that session's log after it closes and
+restore/read back if it shows a promotion. This audit did not touch that running instance,
+switch the installed checkout, arm the kit or change any account settings. The next repair
+and audit can stay confined to the witness, its controls and the resulting sitting claims.

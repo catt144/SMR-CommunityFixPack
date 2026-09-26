@@ -23,14 +23,13 @@ player surface bumps it by one on release.
 
 ### Pending — LoadFirst: the pack moves itself to the front of the mod load order (2026-09-25)
 
-**HOLD: re-audit CHANGES on `8ea5449`, repaired at `86a2507`, branch `load-first`, NOT merged,
-awaiting re-audit.** The latest audit is
-[LOAD_ORDER_FIRST_BUILD_2026-09-25.md §13](../../reports/LOAD_ORDER_FIRST_BUILD_2026-09-25.md#13--re-audit--changes-2026-09-26);
-the repairs are §14 of the same report. R1–R4 and R6 are accepted within the report's stated
-limits. R5's two findings are answered: a kit-side Paradox-sync completion witness (desk
-controls, and a live boot-time rehearsal on `main` reading COMPLETE-EMPTY, never PASS) and a
-restoration order placed after the last promotion-capable option click, read back on `main`.
-The module is unchanged since `8ea5449`; the harness holds 84/84 with 17 mutants.
+**HOLD: audit CHANGES on `86a2507`, branch `load-first`, NOT merged.** The latest audit is
+[LOAD_ORDER_FIRST_BUILD_2026-09-25.md §15](../../reports/LOAD_ORDER_FIRST_BUILD_2026-09-25.md#15--audit-of-the-second-repair--changes-2026-09-26).
+R5-E's restoration is accepted; R5-D still admits false COMPLETE results after silent fetch
+failure, logged child failure or logout during the sole running child. L12's empty attempt
+is not PASS and does not prove an empty account. R1–R4 and R6 retain their accepted limits.
+The module is unchanged since `8ea5449`; the audit reran the 84/84 baseline and caught every
+declared mutant, then reproduced the missing error/cancellation cases with archived source.
 Ships only after re-audit returning SHIP-TO-SITTING and
 the owner's sitting approval. The consumed brief's
 authority and unfinished requirements are retained in that report.
