@@ -1,0 +1,318 @@
+					Render 0:00:00:006
+*** executable info
+					Render 0:00:00:007
+Timestamp:     	6aad2d75
+Date:          	Fri Sep 18 08:24:21 2026
+Command line:  	
+Compiler:      	195136247, 142 (VS 2019) or newer
+
+
+*** hardware info
+CPU name      	Intel(R) Core(TM) i7-14700K
+CPU MHz       	3418
+CPU cores     	20/28
+Phys. Memory   	65278 MBytes
+Memory In Use  	39%
+Disk Free      	1225388 MBytes
+
+
+*** OS info
+OS:            	Windows 11
+Version:       	10.0.26100 
+
+
+*** Debug::Init()
+
+
+					Render 0:00:00:100
+Steam initialized (AppId 3215050)
+					Render 0:00:00:103
+Drive type for game installation: SSD, savegames: SSD
+					Render 0:00:00:104
+Language: English
+					Render 0:00:01:509
+*** graphics info
+GPU                            	NVIDIA GeForce RTX 4080 Feature Level: 12.1 {  DoublePrecisionFloatShaderOps: 1 OutputMergerLogicOp: 1 MinPrecisionSupport: 2 TiledResourcesTier: 4 ResourceBindingTier: 3 PSSpecifiedStencilRefSupported: 0 TypedUAVLoadAdditionalFormats: 1 ROVsSupported: 1 ConservativeRasterizationTier: 3 MaxGPUVirtualAddressBitsPerResource: 40 StandardSwizzle64KBSupported: 0 CrossNodeSharingTier: 0 CrossAdapterRowMajorTextureSupported: 0 VPAndRTArrayIndexFromAnyShaderFeedingRasterizerSupportedWithoutGSEmulation: 1 ResourceHeapTier: 2 NotZeroedPools: 1 UMA: 0 UnalignedBlockTextures: 1}
+API                            	d3d12
+GPU Driver Version             	32.0.16.1074
+GPU Driver Package Version     	610.74
+GPU Dedicated Video Memory     	16048 MB
+					Render 0:00:01:655
+
+Libs: Network, Sequences, MouseTrackWin, DumbAI, MapGen, Paradox, TriggersAndEvents, Notifications, Research, Resources, Tutorial, Objectives 
+
+					Render 0:00:01:887
+
+Platform: desktop, editor, goldmaster, paradox, pc, steam
+
+					Render 0:00:02:935
+*** audio info
+Audio Endpoint                 	Speakers (Razer Leviathan V2)
+						Lua 0:00:02:936
+Lua revision: 405907
+Assets revision: 33225
+Steam AppID: 3215050
+Build version: 1.1.1.405907
+Build branch:  Release
+						Lua 0:00:16:446
+Account storage loaded successfully in 6 ms
+						Lua 0:00:16:447
+DLC norman loaded, lua revision 405907, assets revision 33225
+DLC thomas loaded, lua revision 405907, assets revision 33225
+						Lua 0:00:16:470
+[mod] Loaded mod def DEV ONLY - Train Hub (Module B build) (id SMR_TrainHubDev_20260918, v0.00-052) unpacked from appdata
+[mod] Loaded mod def DEV ONLY - Rail Shaft (cross-map train tunnel prototype) (id SMR_RailShaftDev_20260923, v0.00-001) unpacked from appdata
+[mod] Loaded mod def Relaunched Fix Pack (id SMR_CommunityFixPack, v1.00-021) unpacked from appdata
+[mod] Loaded mod def TEMPORARY - Linux NVIDIA 580 Crash Workaround (id SMR_FR1TempWorkaround, v0.00-003) unpacked from appdata
+[mod] Loaded mod def DEV ONLY - Train Hub Prototype (id SMR_TrainHubPrototype_20260918, v0.00-002) unpacked from appdata
+[mod] Loaded mod def Passage Network (id iooW34Y, v1.00-038) packed from steam
+[mod] Loaded mod def Community Fix Pack — Test Kit (id SMR_CommunityFixPackTestKit, v0.00-001) unpacked from appdata
+[mod] Loaded mod def Relaunched Fix Pack: Opt-In Modules (id SMR_CommunityOptInPack, v1.00-000) unpacked from appdata
+						Lua 0:00:16:854
+[mod] [CommunityFixPack] LoadFirst: already first of 5 (SMR_CommunityFixPack, SMR_CommunityFixPackTestKit, SMR_TrainHubDev_20260918, SMR_CommunityOptInPack, SMR_RailShaftDev_20260923); nothing written
+[mod] [CommunityFixPack] LoadFirst: applied
+[mod] [CommunityFixPack] LanderEmptyLaunch: applied
+[mod] [CommunityFixPack] ShelterReflex: applied
+[mod] [CommunityFixPack] TrackSalvageWipe: applied
+[mod] [CommunityFixPack] LakeEntombment: applied
+[mod] [CommunityFixPack] RocketDroneChurn: applied
+[mod] [CommunityFixPack] ShuttleTransportCache: applied
+						Lua 0:00:16:855
+[mod] [CommunityFixPack] VacuumWalks: applied
+[mod] [CommunityFixPack] ArrivalDeaths: applied
+[mod] [CommunityFixPack] PassageHubSalvageDrain: applied
+[mod] [CommunityFixPack] HubLocalAccess: applied
+[mod] [CommunityFixPack] HubMarkerDeparture: applied
+[mod] [CommunityFixPack] RescueReturnText: applied
+[mod] [CommunityFixPack] ObsoleteHomeRescue: applied
+						Lua 0:00:16:856
+[mod] [CommunityFixPack] StaleReservations: applied
+[mod] [CommunityFixPack] CrystalMysteryHang: applied
+[mod] [CommunityFixPack] DustSicknessBiorobots: applied
+[mod] [CommunityFixPack] PayloadTemplateRefill: applied
+[mod] [CommunityFixPack] ShuttleHubOffAvailable: applied
+[mod] [CommunityFixPack] FreedHousingNotice: applied
+[mod] [CommunityFixPack] LandscapeUnitFilter: applied
+						Lua 0:00:16:857
+[mod] [CommunityFixPack] RocketInteractGuard: applied
+[mod] [CommunityFixPack] TrackConnectorPingPong: applied
+						Lua 0:00:16:858
+[mod] [CommunityFixPack] TrackTunnelPowerBridge: applied
+[mod] [CommunityFixPack] SequenceLatents: applied
+[mod] [CommunityFixPack] TrackSalvageRefund: applied
+[mod] [CommunityFixPack] DroneTransportMinors: applied
+[mod] [CommunityFixPack] ScanDowngrade: applied
+[mod] [CommunityFixPack] BombardmentSpread: applied
+[mod] [CommunityFixPack] ExtenderFlapChurn: applied
+[mod] [CommunityFixPack] SaintBlessing: applied
+[mod] [CommunityFixPack] ExoticDepositSign: applied
+						Lua 0:00:16:859
+[mod] [CommunityFixPack] JumboCaveReinforcementWedge: applied
+[mod] [CommunityFixPack] SilentHitMomentFX: applied
+[mod] [CommunityFixPack] CloggedBuildingRelease: applied
+[mod] [CommunityFixPack] FactionDomeSizeGate: applied
+[mod] [CommunityFixPack] HabitatExpeditionReturn: applied
+[mod] [CommunityFixPack] HabitatExpeditionDraft: applied
+						Lua 0:00:16:860
+[mod] [CommunityFixPack] RoverSubclassManifest: applied
+[mod] [CommunityFixPack] DryFarmingFarms: applied
+[mod] [CommunityFixPack] WildfireCureVisit: applied
+[mod] [CommunityFixPack] GhostPowerCells: applied
+[mod] [CommunityFixPack] SaveSanitizer: applied
+						Lua 0:00:16:861
+[mod] [SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+[mod] [SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[mod] [SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+[SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+						Lua 0:00:16:866
+[mod] [SMRTK] SMRTK_CORE loaded=true tee=false t=12293 id=1
+[SMRTK] SMRTK_CORE loaded=true tee=false t=12293 id=1
+						Lua 0:00:16:870
+[mod] [SMRTest][carry] fixture-carry dump available — run SMRTest.FixtureCarry()
+						Lua 0:00:16:872
+[TrainHubDev] hub classes loaded: six-connector hub, built-in drone controller, maintenance reserve
+						Lua 0:00:16:873
+[TrainHubDev] train export floor loaded (standing + transient holds)
+[TrainDistribution] synchronous console prototype loaded; drone baselines are samples only
+[mod] [CommunityOptInPack] AcknowledgedWarnings: applied
+						Lua 0:00:16:874
+[mod] [CommunityOptInPack] ResidencyControl: inactive (opt-in module, off by default — enable it in Options → Mod Options)
+[mod] [CommunityOptInPack] MultipleSuns: applied
+[mod] [CommunityOptInPack] DroneStatDials: applied
+[RailShaftDev] loaded: cross-map train tunnel prototype. UNVERIFIED IN GAME.
+						Lua 0:00:17:559
+[TrainHubDev] save guard: native waiter snapshot; legacy hub load mapping retained
+						Lua 0:00:17:630
+[mod] [CommunityFixPack] SaintBlessing: inactive (no dome-colonists trait presets)
+						Lua 0:00:17:720
+Reloading done in 1250 ms
+						Lua 0:00:17:723
+Available DLCs: norman(Feeding the Future),thomas(Interplanetary Codex) 
+						Lua 0:00:17:769
+[mod] [SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=DataLoading t=12293 id=2
+[SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=DataLoading t=12293 id=2
+						Lua 0:00:18:168
+[preset] Preset postprocess took 180 ms.
+						Lua 0:00:18:246
+482 / 482 particle streams loaded in 71 ms.
+						Lua 0:00:18:247
+5 / 5 particle streams loaded in 1 ms.
+						Lua 0:00:18:248
+[mod] [CommunityFixPack] SilentHitMomentFX: registered 11 missing animation-moment preset(s)
+						Lua 0:00:18:249
+[mod] [CommunityFixPack] FactionDomeSizeGate: 7 faction dislike(s) now wait for 10 colonists in a dome
+[mod] [CommunityFixPack] DryFarmingFarms: left 1 farm(s) alone because DryFarming already reaches them (FarmUnderground via Farm)
+[mod] [CommunityFixPack] DryFarmingFarms: added 2 water entr(y/ies) at -50% to DryFarming (1 adopted, 4 of 4 farms loaded)
+[mod] [CommunityOptInPack] MultipleSuns: BuildingTemplates.ArtificialSun not found — build limit NOT lifted (binding fix still active)
+						Lua 0:00:18:457
+[mod] [CommunityFixPack] SaintBlessing: the shipped code resolves the trait label itself — data left untouched; save re-base armed for 1 preset(s) of 2
+[mod] [CommunityFixPack] DryFarmingFarms: left 1 farm(s) alone because DryFarming already reaches them (FarmUnderground via Farm)
+[mod] [CommunityOptInPack] MultipleSuns: Artificial Sun build-once limit lifted
+						Lua 0:00:18:547
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=12293 id=3
+						Lua 0:00:18:579
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=12293 id=4
+						Lua 0:00:18:595
+[mod] Loaded mod items for: SMR_CommunityFixPack, SMR_CommunityFixPackTestKit, SMR_TrainHubDev_20260918, SMR_CommunityOptInPack, SMR_RailShaftDev_20260923
+						Lua 0:00:18:850
+[mod] [CommunityFixPack] SaintBlessing: the shipped code resolves the trait label itself — data left untouched; save re-base armed for 1 preset(s) of 2
+[mod] [CommunityFixPack] DryFarmingFarms: left 1 farm(s) alone because DryFarming already reaches them (FarmUnderground via Farm)
+						Lua 0:00:18:949
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=12293 id=5
+						Lua 0:00:19:430
+[PdxSDK] Started up. Took 1114
+						Lua 0:00:19:844
+[Braze] SessionStart error The server name or address could not be resolved
+
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:19:954
+[Braze] SessionStart error The server name or address could not be resolved
+
+						Lua 0:00:19:955
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:01:52:456
+Load Game: 
+	lua_revision: 403908 (last saved with) 
+	orig_lua_revision: 403908 (created with) 
+	assets_revision: 33006 
+
+	dlcs: norman, thomas 
+						Lua 0:01:52:461
+*** Reloading assets from folder 'BinAssets/'
+						Lua 0:01:55:533
+*** Assets reloaded in 3.1 s, read 359.0 MB, read speed 116.9 MB/s, average read 8137 bytes.
+						Lua 0:01:56:608
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=105182 id=6
+						Lua 0:01:57:543
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=105182 id=7
+						Lua 0:01:58:336
+[mod] [SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=PreLoadGame t=105182 id=8
+[SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=PreLoadGame t=105182 id=8
+						Lua 0:02:00:393
+[mod] [CommunityFixPack] ExoticDepositSign: 2 Exotic Minerals deposit(s) re-signed onto the clean entity
+[mod] [CommunityFixPack] SilentHitMomentFX: restored 3 missing hit-moment tracker(s) on load
+						Lua 0:02:00:394
+[mod] [SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:02:00:395
+[RailShaftDev] loaded; underground is locked in this save, so the tunnel stays surface-only.
+[RailShaftDev] ready. SMRRailShaft.Status() for where things stand.
+						Lua 0:02:00:398
+Applied 28 savegame fixup(s) in 3 ms: AAA_SetLRManagerMap, AgronomistFarmCropGrowth, CleanStaleRoverDamagedNotificationObjects, ConstructionSiteFlightMarks, CureSmallCropTechLock, CureUndergroundCropTechLock, FixDustGeneratorThrowTimes, FixFoodServiceMealsServedByShift, HospitalExoticMineralTreatment, KickWorkersFromTurnedOffDomes, MarkUnavoidableSupplyDrains, MoveOpenPasturePilesOffOrigin2, PipesAtBuildableLevelSteps, PoliticalAnimalAchievement2, RemarkJumboCaves, RemoveBreathableAtmosphereAirConsumptionModifier, ResetPlanetSceneCameraState, RespawnUnreachableBottomlessPitAnomalies, ResupplyCutoffLocksDelicacies, SplitDailyCountersByShift, ZZZZ_FixLeakedRocketReservations, ZZZ_DestroyTradeRocketsWithUnplacedLandingSite, ZZZ_FactionTaskDomeCompletableInAnyDome, ZZZ_HungerLocksFoodImport, ZZZ_RebuildElevatorResourceModeRegistration, ZZZ_ReviveElevatorSharedDepots, ZZZ_UpdateRefuelRequests, Zzz_RestartStalledMaintenanceDemand
+						Lua 0:02:00:527
+game_settings:
+    sponsor: ESA
+    profile: rocketscientist
+    founding_faction: GreenMarsCoalition
+    rival_colonies: 
+    mystery_random: AIUprisingMystery
+    game_rules: WinterIsComing, Inflation, Armageddon, DustInTheWind, Amateurs, ActivePlateTectonics, Hunger, Twister
+more_game_settings: save_game_id: KbIuedsLsaWkVwKU, mystery: random, coordinates: 2N176E, landing_spot: ElysiumBeta, logo: Russia
+map_conditions: altitude: -2776, temperature: -15, cold_wave: 256, dust_devils: 256, dust_storm: 256, meteors: 256
+map_resources: concrete: 254, metals: 146, precious_metals: 146, water: 109
+						Lua 0:02:00:738
+[mod] [CommunityFixPack] GhostPowerCells: maps=3 cleared=355 tunnel_skipped=2 shape_protected=0 reconnected=0 retry_failed=0 unbuilt_skipped=0 map_failed=0 elapsed_ms=0
+[mod] [CommunityFixPack] SaveSanitizer: F95 astrogeologist-residue pass removed 0 modifier(s), left 0 unidentified
+[mod] [CommunityFixPack] SaveSanitizer: F48 station-connector pass repaired 0 of 0 track(s) walked (0 raised)
+Game Loaded in 8283 ms
+[mod] [SMRTK] SMRTK_PROVENANCE actions=unavailable last=unavailable present=false session=unavailable t=201405541 id=9
+[SMRTK] SMRTK_PROVENANCE actions=unavailable last=unavailable present=false session=unavailable t=201405541 id=9
+						Lua 0:02:00:748
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=201405541 id=10
+						Lua 0:02:00:760
+[mod] [SMRTK] SMRTK_DOCK action=dock_attach attached=true route="idBottom sibling" status=OK surface=one-toggle+tasks t=201405541 id=11
+						Lua 0:02:00:765
+[mod] [SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:02:00:876
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=201405541 id=12
+						Lua 0:02:01:368
+Game loaded on map BlankBig_04 in 9058 ms
+						Lua 0:02:01:678
+[mod] [SMRTK] SMRTK_PANEL_RESTORE open=true tab=Agent t=201405541 id=13
+						Lua 0:03:37:603
+[mod] [SMRTK] SMRTK_MARK action=mark label=C119_BASELINE_BEGIN mark=27 status=OK t=201405541 id=14
+[SMRTK] SMRTK_MARK action=mark label=C119_BASELINE_BEGIN mark=27 status=OK t=201405541 id=14
+[mod] [SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=43/43 game=405907 mark_action=mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923,SMR_TrainHubDev_20260918 pack_version=21 read="live registry" save="Europe Sol 280.savegame.sav" sol=280 status=OK t=201405541 id=15
+[SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=43/43 game=405907 mark_action=mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923,SMR_TrainHubDev_20260918 pack_version=21 read="live registry" save="Europe Sol 280.savegame.sav" sol=280 status=OK t=201405541 id=15
+[mod] [SMRTK] SMRTK_TAINT_READ action=taint_read status=OK used=false t=201405541 id=16
+[SMRTK] SMRTK_TAINT_READ action=taint_read status=OK used=false t=201405541 id=16
+[mod] [SMRTK] SMRTK_ELIGIBILITY action=eligibility reason=UNAVAILABLE:sandbox status=OK t=201405541 id=17
+[SMRTK] SMRTK_ELIGIBILITY action=eligibility reason=UNAVAILABLE:sandbox status=OK t=201405541 id=17
+[mod] [SMRTK] SMRTK_DUMP eligibility=UNAVAILABLE:sandbox leg=baseline sitting=C119 taint=false t=201405541 id=18
+[SMRTK] SMRTK_DUMP eligibility=UNAVAILABLE:sandbox leg=baseline sitting=C119 taint=false t=201405541 id=18
+[mod] [SMRTK] SMRTK_MARK action=mark label=C119_BASELINE_END mark=32 status=OK t=201405541 id=19
+[SMRTK] SMRTK_MARK action=mark label=C119_BASELINE_END mark=32 status=OK t=201405541 id=19
+[mod] [SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=43/43 game=405907 mark_action=mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923,SMR_TrainHubDev_20260918 pack_version=21 read="live registry" save="Europe Sol 280.savegame.sav" sol=280 status=OK t=201405541 id=20
+[SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=43/43 game=405907 mark_action=mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923,SMR_TrainHubDev_20260918 pack_version=21 read="live registry" save="Europe Sol 280.savegame.sav" sol=280 status=OK t=201405541 id=20
+[mod] [SMRTK] SMRTK_ACTION action=slot_scratch begin_mark=27 eligibility=UNAVAILABLE:sandbox end_mark=32 sitting=C119 status=OK taint=false t=201405541 id=21
+[SMRTK] SMRTK_ACTION action=slot_scratch begin_mark=27 eligibility=UNAVAILABLE:sandbox end_mark=32 sitting=C119 status=OK taint=false t=201405541 id=21
+						Lua 0:03:40:716
+[mod] [SMRTK] SMRTK_ACTION action=slot_1 reason="load the C119 TESTCOPY through normal Saves UI; loaded filename unverified" status=REFUSED t=201405541 id=22
+[SMRTK] SMRTK_ACTION action=slot_1 reason="load the C119 TESTCOPY through normal Saves UI; loaded filename unverified" status=REFUSED t=201405541 id=22
+						Lua 0:03:55:097
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=false reason="no supported actions" status=OK t=201405541 id=23
+						Lua 0:04:38:315
+[mod] [SMRTK] SMRTK_ACTION action=slot_2 reason="select an object" status=REFUSED t=201459878 id=24
+[SMRTK] SMRTK_ACTION action=slot_2 reason="select an object" status=REFUSED t=201459878 id=24
+						Lua 0:05:47:979
+[mod] [SMRTK] SMRTK_COPY action=copy flushed=true from=32 lines=6 status=OK truncated=false t=201459878 id=25
+[SMRTK] SMRTK_COPY action=copy flushed=true from=32 lines=6 status=OK truncated=false t=201459878 id=25
+						Lua 0:06:13:306
+[mod] [SMRTK] SMRTK_ACTION action=slot_1 reason="load the C119 TESTCOPY through normal Saves UI; loaded filename unverified" status=REFUSED t=201459878 id=26
+[SMRTK] SMRTK_ACTION action=slot_1 reason="load the C119 TESTCOPY through normal Saves UI; loaded filename unverified" status=REFUSED t=201459878 id=26
+						Lua 0:20:46:667
+[mod] [SMRTK] SMRTK_ACTION action=slot_3 reason="load a clean owner save through normal Saves UI" status=REFUSED t=201459878 id=27
+[SMRTK] SMRTK_ACTION action=slot_3 reason="load a clean owner save through normal Saves UI" status=REFUSED t=201459878 id=27
+						Lua 0:20:47:335
+[mod] [SMRTK] SMRTK_ACTION action=slot_4 reason="fixture needs track, passage, passage hub, tunnel on selected map" status=REFUSED t=201459878 id=28
+[SMRTK] SMRTK_ACTION action=slot_4 reason="fixture needs track, passage, passage hub, tunnel on selected map" status=REFUSED t=201459878 id=28
+						Lua 0:20:47:877
+[mod] [SMRTK] SMRTK_ACTION action=slot_5 reason="select a live EXCAVATOR first" status=REFUSED t=201459878 id=29
+[SMRTK] SMRTK_ACTION action=slot_5 reason="select a live EXCAVATOR first" status=REFUSED t=201459878 id=29
+						Lua 0:20:51:768
+[mod] [SMRTK] SMRTK_ACTION action=slot_6 reason="select a live OPEN_FARM first" status=REFUSED t=201459878 id=30
+[SMRTK] SMRTK_ACTION action=slot_6 reason="select a live OPEN_FARM first" status=REFUSED t=201459878 id=30
+						Lua 0:20:59:717
+
+
+Stopping the game threads from the Lua side with exit code 0.
+
+					Render 0:20:59:723
+
+
+Stopping the game threads after receiving WM_QUIT.
+
+					Render 0:21:00:044
+
+
+*** Debug::Done()
+Time (ms)	1260044
+
+

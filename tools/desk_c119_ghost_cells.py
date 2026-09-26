@@ -36,7 +36,8 @@ function WorldToHex(o) return o.q, o.r end
 function HexAngleToDirection() return 0 end
 function HexRotate(q, r, direction) assert(direction==0); return q, r end
 function band(a,b) return a & b end
-function RealTime() return 100 end
+local precise_tick=100
+function GetPreciseTicks() precise_tick=precise_tick+3; return precise_tick end
 function log(fmt, ...) LOGS[#LOGS+1]=string.format(fmt, ...) end
 function HexGridGet(grid, q, r) return grid[r*grid.width+q] or 0 end
 function HexGridSet(grid, q, r, value) grid[r*grid.width+q]=value end
@@ -210,7 +211,7 @@ def main():
     check("one load log reports exact scan and retry counts",
           eval_fixed("#LOGS==1 and string.find(LOGS[1]," 
                      "'maps=2 cleared=3 tunnel_skipped=1 shape_protected=2 "
-                     "reconnected=5 retry_failed=1 unbuilt_skipped=0 map_failed=0',1,true)~=nil"))
+                     "reconnected=5 retry_failed=1 unbuilt_skipped=0 map_failed=0 elapsed_ms=3',1,true)~=nil"))
     check("repair adds no fields to world objects", eval_fixed("same_keys(BEFORE)"))
     check("module declares no save hook or persisted variable",
           all(token not in source for token in ("OnMsg.Save", "GameVar(", "MapVar(", "AddGameVar(")))

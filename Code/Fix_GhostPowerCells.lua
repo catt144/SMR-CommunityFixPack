@@ -120,7 +120,7 @@ local function retry_one(obj, element)
 end
 
 local function repair()
-	local started = RealTime()
+	local started = GetPreciseTicks()
 	local counts = {
 		maps = 0, cleared = 0, tunnel_skipped = 0, shape_protected = 0,
 		reconnected = 0, retry_failed = 0, unbuilt_skipped = 0, map_failed = 0,
@@ -171,7 +171,7 @@ local function repair()
 	log("%s: maps=%d cleared=%d tunnel_skipped=%d shape_protected=%d reconnected=%d retry_failed=%d unbuilt_skipped=%d map_failed=%d elapsed_ms=%d",
 		FIX_ID, counts.maps, counts.cleared, counts.tunnel_skipped,
 		counts.shape_protected, counts.reconnected, counts.retry_failed,
-		counts.unbuilt_skipped, counts.map_failed, RealTime() - started)
+		counts.unbuilt_skipped, counts.map_failed, GetPreciseTicks() - started)
 	return counts
 end
 
@@ -194,7 +194,7 @@ SMRFixPack.Register(FIX_ID, {
 			{ global = "HexRotate" },
 			{ global = "HexAngleToDirection" },
 			{ global = "WorldToHex" },
-			{ global = "RealTime" },
+			{ global = "GetPreciseTicks" },
 			{ global = "band" },
 		})
 	end,
