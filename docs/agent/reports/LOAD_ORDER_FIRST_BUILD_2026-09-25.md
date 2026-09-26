@@ -16,8 +16,8 @@ the explicit scope revision, leg D as a diagnostic with no remote-sync PASS, is 
 under the retained FIXED list. Both preconditions are met (§18). **The attended sitting ran
 on 2026-09-26, owner-watched, every leg as predicted, the order restored and read back on
 `main` (§19).** R1–R4, R6 and R5-E retain their prior acceptance and limits; the production
-module is unchanged since `8ea5449`. Remaining: the merge (after the main tree's other lane
-commits), the upload on the owner's go, and the post-upload canary checks. Sections 0–18
+module is unchanged since `8ea5449`. **Merged to `main` at `fa0893a`, 2026-09-26.** Remaining:
+the upload on the owner's go, and the post-upload canary checks. Sections 0–18
 retain the build, audit, repair and preparation history.
 The retained FIXED list and owner authority remain in §11.
 

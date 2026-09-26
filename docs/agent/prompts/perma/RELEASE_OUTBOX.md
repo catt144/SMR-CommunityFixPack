@@ -36,16 +36,14 @@ unknown.
 
 ### Pending — LoadFirst: the pack moves itself to the front of the mod load order (2026-09-25)
 
-**SITTING DONE: `load-first` at `1325db5`, owner-watched sitting 2026-09-26, every leg as
-predicted; NOT merged, NOT uploaded.** The record is
+**MERGED to `main` at `fa0893a` (2026-09-26) after the owner-watched sitting; NOT uploaded.** The record is
 [LOAD_ORDER_FIRST_BUILD_2026-09-25.md §19](../../reports/LOAD_ORDER_FIRST_BUILD_2026-09-25.md#19--the-attended-sitting--every-leg-as-predicted-order-restored-2026-09-26)
 (audit verdict §17, preparation §18). Legs A–D by the owner (notice once, hot enable with
 Restart now, opt-out and opt-in, diagnostic Paradox log-out/log-in with the order untouched),
 E by the seat (order restored, read back on `main`). The production module is unchanged
-since `8ea5449`. Next: merge `load-first` into `main` once the main tree's other lane has
-committed its C119 work, then the upload on the owner's go. Release note: Paradox-installed
+since `8ea5449`. Next: the upload on the owner's go. Release note: Paradox-installed
 players see the notice again after each update the sync applies (§17).
-Ships only after the merge and the owner's go for the upload. The consumed brief's
+Ships on the owner's go for the upload. The consumed brief's
 authority and unfinished requirements are retained in that report.
 The normal promotion/restart/Passage Network evidence remains valid on this rig; the ordinary
 desk harness and its behavioral controls pass; the remaining failures concern the sitting plan.
