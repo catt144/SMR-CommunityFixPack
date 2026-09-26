@@ -23,12 +23,15 @@ player surface bumps it by one on release.
 
 ### Pending — LoadFirst: the pack moves itself to the front of the mod load order (2026-09-25)
 
-**HOLD: on branch `load-first` (`8e2325a`), NOT merged.** Ships only after the load-order audit
-(`prompts/LOAD_ORDER_FIRST_high.md`) returns SHIP-TO-SITTING and the owner's sitting approves.
-Desk harness `tools/desk_load_first.py` (50 of 50; `--no-promotion` fails 33 of 50, no vacuous
-case); seven unattended retail launches on the owner's rig (promotion, survival across a restart,
-nothing written when already first, the Passage Network pair; logs archived). Not owner-watched.
-Owner's choice of option B, 2026-09-25; report `reports/LOAD_ORDER_FIRST_BUILD_2026-09-25.md`.
+**HOLD: audit CHANGES on branch `load-first` (`8e2325a`), NOT merged.** The fresh audit is
+[LOAD_ORDER_FIRST_BUILD_2026-09-25.md §11](../../reports/LOAD_ORDER_FIRST_BUILD_2026-09-25.md#11--fresh-context-audit--changes-2026-09-25).
+R1–R6 cover silent later opt-in, persistent-data loss, LoadAllMods edge cases, insufficient
+controls, invalid sitting triggers and missing Editor pack evidence. Ships only after repair,
+re-audit returning SHIP-TO-SITTING, and the owner's sitting approval. The consumed brief's
+authority and unfinished requirements are retained in that report.
+The normal promotion/restart/Passage Network evidence remains valid on this rig; the ordinary
+desk harness passes while the expanded audit exposes the failures. Not owner-watched.
+Owner's choice of option B, 2026-09-25.
 
 Player surface, three parts, none of them a fix-list row unless the release seat decides so:
 
@@ -42,13 +45,14 @@ Player surface, three parts, none of them a fix-list row unless the release seat
 - **The C canary in `metadata.lua`** (`SMRFP-LOADORDER-CANARY-2026-09-25-b7e1`, inert hand-written
   code in option C's shape). ⛔ The post-upload seat runs its three-part check BEFORE restoring the
   comments (`support/POST_UPLOAD_CLOSE.md` §1); the check and the per-portal prediction are in the
-  report, "The C canary". The result decides whether C reopens or closes.
+  report, "The C canary", qualified by §11 R6. Record the portal and whether a save preceded
+  packing; a stripped package decides only that tested path.
 
-Developer detail: `Code/01_LoadFirst.lua`, registered `LoadFirst` (`optional = true`); rebuilds
+Build detail, subject to the audit changes: `Code/01_LoadFirst.lua`, registered `LoadFirst` (`optional = true`); rebuilds
 `AccountStorage.LoadMods` through `TurnModOff`/`TurnModOn` with every other mod's relative order
-kept, requests the account save through a changed `WriteModPersistentData`, declines on
-`LoadAllMods` without a write, honours `SMRFixPack_Disabled["LoadFirst"]`, and shows a once-per-process
-notice at the pregame menu with Restart now / Later on PC.
+kept, requests the account save through a changed `WriteModPersistentData`, and honours
+`SMRFixPack_Disabled["LoadFirst"]`. The LoadAllMods detector and once-per-process notice need
+R3 and R1 respectively; their current behavior is not a release promise.
 
 ## Last released
 

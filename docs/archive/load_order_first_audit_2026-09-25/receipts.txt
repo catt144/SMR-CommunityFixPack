@@ -1,0 +1,454 @@
+FINGERPRINT {"build": "1.1.1.405907", "file": "CommonLua/Modding/Mod.lua", "sha256": "293f9f823b3d657b67fb4a7564564abe71d3a5e9c5894e7f6d40336643ddfe13", "manifest": "MATCH"}
+SOURCE CommonLua/Modding/Mod.lua 973 993
+973:function ModDef:SaveDef(serialize_only)
+974:	self.external_links = self:GetValidatedExternalLinks()
+975:	if self.content_path then
+976:		local code_dirty
+977:		if not serialize_only then
+978:			Msg("ModDefUpdate", self)
+979:			self.lua_revision = ModRequiredLuaRevision
+980:			self.saved_with_revision = LuaRevision
+981:			self.version = self.version + 1
+982:			self.saved = os.time()
+983:			self.default_options = self:GetDefaultOptions()
+984:			self:UpdateEntities()
+985:			self:UpdateLocTables()
+986:			code_dirty = self:UpdateCode()
+987:		end
+988:		
+989:		local data = pstr("return ", 32768)
+990:		self:PreSave()
+991:		data:appendv(self, "")
+992:		self:PostSave()
+993:		local err = AsyncStringToFile(self.content_path .. "metadata.lua", data)
+SOURCE CommonLua/Modding/Mod.lua 1487 1515
+1487:local function WriteModPersistentData(mod, data)
+1488:	if not (type(data) == "string" or IsPStr(data)) then
+1489:		return "data must be a string/pstr"
+1490:	end
+1491:
+1492:	if #data > max_data_length then
+1493:		return string.format("data longer than const.MaxModDataSize (%d bytes)", max_data_length)
+1494:	end
+1495:	
+1496:	if not AccountStorage.ModPersistentData then
+1497:		AccountStorage.ModPersistentData = { }
+1498:	end
+1499:	
+1500:	if AccountStorage.ModPersistentData[mod.id] == data then return end
+1501:	AccountStorage.ModPersistentData[mod.id] = data
+1502:	SaveAccountStorage(1000)
+1503:end
+1504:
+1505:--[[@@@
+1506:Reads data from a persistent storage, that can be accessed between different game sessions.
+1507:This storage is not shared, but is per mod. Anything read here has been previously stored only by the same mod using [WriteModPersistentData](#WriteModPersistentData).
+1508:@function err, data ReadModPersistentData(mod)
+1509:@result err - error message or nil, if successful.
+1510:@result data - data previously stored or nil.
+1511:See also: [LuaCodeToTuple](#LuaCodeToTuple), [Decompress](#Decompress), [AsyncDecompress](#AsyncDecompress);
+1512:]]
+1513:local function ReadModPersistentData(mod)
+1514:	return nil, AccountStorage.ModPersistentData and AccountStorage.ModPersistentData[mod.id]
+1515:end
+SOURCE CommonLua/Modding/Mod.lua 1628 1645
+1628:function ModDef:SetupEnv()
+1629:	local env = self.env
+1630:	rawset(env, "CurrentModPath", self.content_path)
+1631:	rawset(env, "CurrentModId", self.id)
+1632:	rawset(env, "CurrentModDef", self)
+1633:	rawset(env, "CurrentModStorageTable", CreateModPersistentStorageTable(self))
+1634:	rawset(env, "CurrentModOptions", self.options)
+1635:	
+1636:	rawset(env, "WriteModPersistentData", function(...)
+1637:		return WriteModPersistentData(self, ...)
+1638:	end)
+1639:	rawset(env, "ReadModPersistentData", function(...)
+1640:		return ReadModPersistentData(self, ...)
+1641:	end)
+1642:	rawset(env, "WriteModPersistentStorageTable", function(...)
+1643:		return WriteModPersistentStorageTable(self, ...)
+1644:	end)
+1645:end
+SOURCE CommonLua/Modding/Mod.lua 1715 1724
+1715:	--to avoid issues, when loading metadata, mods are allowed to access only this function
+1716:	--nothing else exists in their environment
+1717:	local descriptor_classes = ClassDescendantsList("ModResourceDescriptor")
+1718:	local metadata_env = {
+1719:		PlaceObj = function(class, ...)
+1720:			if class ~= "ModDef" and class ~= "ModDependency" and not table.find(descriptor_classes, class) then return end
+1721:			return PlaceObj(class, ...)
+1722:		end,
+1723:		box = box,
+1724:	}
+SOURCE CommonLua/Modding/Mod.lua 1966 2001
+1966:		local dependencies = GetModAllDependencies(mod)
+1967:		for _, dep in ipairs(dependencies) do
+1968:			-- forced mods don't go through dependency checks
+1969:			local err = not mod.force_reload and detect_dep_error(dep, mod_id)
+1970:			if dep.required and err then
+1971:				return finish_visit_mod(mod_id, mod, err)
+1972:			end
+1973:			
+1974:			err = visit_mod(dep.id)
+1975:			if not mod.force_reload and err then
+1976:				return finish_visit_mod(mod_id, mod, err)
+1977:			end
+1978:		end
+1979:		
+1980:		return finish_visit_mod(mod_id, mod)
+1981:	end
+1982:	
+1983:	for _, mod_id in ipairs(list) do
+1984:		if not visited[mod_id] then
+1985:			local err = visit_mod(mod_id)
+1986:			if err and not silent then
+1987:				ModMessage(err)
+1988:			end
+1989:		end
+1990:	end
+1991:	
+1992:	return queue
+1993:end
+1994:
+1995:function GetModsEnabledByUser()
+1996:	local list
+1997:	if (AccountStorage and AccountStorage.LoadAllMods) or config.LoadAllMods then
+1998:		list = table.keys(Mods, true)
+1999:	end
+2000:	return list or AccountStorage and table.icopy(AccountStorage.LoadMods) or {}
+2001:end
+SOURCE CommonLua/Modding/Mod.lua 2099 2113
+2099:function ModsReloadItems(map_folder, force_reload, first_load)
+2100:	assert(IsRealTimeThread())
+2101:	
+2102:	local queue = GetModsToLoad()
+2103:
+2104:	if not force_reload and ModsLoaded then
+2105:		--no changes to mods list?
+2106:		local list = table.copy(queue)
+2107:		local loaded_ids = table.map(ModsLoaded, "id")
+2108:		table.sort(list)
+2109:		table.sort(loaded_ids)
+2110:		if table.iequal(loaded_ids, list) then
+2111:			return
+2112:		end
+2113:	end
+FINGERPRINT {"build": "1.1.1.405907", "file": "CommonLua/UI/ModManager.lua", "sha256": "1b3cb3846d58a2263eca9d56c3d7361db821b906ad2453f7fed0b09c41198f45", "manifest": "MATCH"}
+SOURCE CommonLua/UI/ModManager.lua 35 41
+35:function TurnModOn(id)
+36:	table.insert_unique(AccountStorage.LoadMods, id)
+37:end
+38:
+39:function TurnModOff(id)
+40:	table.remove_entry(AccountStorage.LoadMods, id)
+41:end
+SOURCE CommonLua/UI/ModManager.lua 123 166
+123:function ModsUIDialogEnd(dialog)
+124:	local new_mods = AccountStorage.LoadMods or empty_table
+125:	ModsReloadDefs()
+126:	if table.iequal(new_mods, g_InitialMods or empty_table) then
+127:		ModsUIDialogClose(dialog)
+128:		return
+129:	end
+130:	dialog:DeleteThread("warning")
+131:	dialog:CreateThread("warning", function()
+132:		SaveAccountStorage()
+133:		local to_load = table.invert(new_mods)
+134:		local old_mods = table.invert(g_InitialMods)
+135:		for _,mod_id in ipairs(g_InitialMods) do
+136:			if not to_load[mod_id] and old_mods[mod_id] and (not Mods[mod_id] or Mods[mod_id]:ShouldRestartOnUnload()) then
+137:				if not Platform.pc then
+138:					WaitMessage(dialog, 
+139:						T(6899, "Warning"), 
+140:						T(590187590602, "It is highly recommended to restart the game after unloading mods."),
+141:						T(6900, "OK"), 
+142:						nil,
+143:						CommonMessageDialog
+144:					)
+145:				else
+146:					local res = WaitQuestion(dialog, 
+147:						T(6899, "Warning"), 
+148:						T(590187590602, "It is highly recommended to restart the game after unloading mods."),
+149:						T(746780041006, "Restart"), 
+150:						T(1000909, "Cancel"),
+151:						nil,
+152:						GetErrorTemplate(nil, "pdxsdk")
+153:					)
+154:					if res == "ok" then
+155:						ModsRestartApp(Platform.debug)
+156:					end
+157:				end
+158:				break
+159:			end
+160:		end
+161:		LoadingScreenOpen("idLoadingScreen", "reload mods")
+162:		ModsReloadItems()
+163:		ModsUIDialogClose(dialog)
+164:		LoadingScreenClose("idLoadingScreen", "reload mods")
+165:	end)
+166:end
+SOURCE CommonLua/UI/ModManager.lua 1532 1569
+1532:function ModUI_Entry:SetEnabledAndSync(enabled, silent)
+1533:	if self.Pdx and not self.Pdx.IsPublished and enabled then
+1534:		if not silent then
+1535:			WaitMessage(nil, T(6884, "Warning"), T{12102, "Mod <u(name)> has been disabled and is no longer available.", name = self.DisplayName}, T(1000136, "OK"), nil, CommonMessageDialog)
+1536:		end
+1537:		enabled = false
+1538:	end
+1539:	local mod_def = self.mod_def
+1540:	if not mod_def then
+1541:		enabled = false
+1542:	end
+1543:
+1544:	--add/remove from AccountStorage
+1545:	if mod_def then 
+1546:		local hg_mod_id = mod_def.id
+1547:		if enabled then
+1548:			TurnModOn(hg_mod_id)
+1549:		else
+1550:			TurnModOff(hg_mod_id)
+1551:		end
+1552:	end
+1553:
+1554:	self.Enabled = enabled
+1555:
+1556:	local pdxModID = self:PdxModId()
+1557:	if pdxModID and g_Pdx.account and mod_def then
+1558:		if enabled then
+1559:			local err = AsyncPdxEnableMods({PlaysetId = Pdx.DefaultPlaysetId, pdxModID})
+1560:			if err then 
+1561:				mods_print("Failed to enable mod with PdxModId", pdxModID, err)
+1562:			end
+1563:		else
+1564:			local err = AsyncPdxDisableMods({PlaysetId = Pdx.DefaultPlaysetId, pdxModID})
+1565:			if err then 
+1566:				mods_print("Failed to disable mod with PdxModId", pdxModID, err)
+1567:			end
+1568:		end
+1569:	end
+SOURCE CommonLua/UI/ModManager.lua 1864 1909
+1864:local function SyncPdxMods()
+1865:	local err, subscribed_mods = AsyncPdxGetAllSubscribedMods()
+1866:	if err then
+1867:		mods_print("Failed to get subscribed mods for sync.")
+1868:		return
+1869:	end
+1870:
+1871:	local installed_mods = PdxGetInstalledMods("require_fpk")
+1872:	for _, subscribed_mod in ipairs(subscribed_mods) do
+1873:		local installed = table.ifilter(installed_mods, "ModID", subscribed_mod.ModID) 
+1874:		for _, mod in ipairs(installed) do
+1875:			mod.KeepMod = true
+1876:		end
+1877:		g_PopsDownloadModsQueue:PushTask(false, SyncUpdatePdxMod, subscribed_mod.ModID, subscribed_mod, installed)
+1878:	end
+1879:
+1880:	for _, mod in ipairs(installed_mods) do
+1881:		if not mod.KeepMod then
+1882:			g_PopsDownloadModsQueue:PushTask(false, SyncUpdatePdxMod, mod.ModID, false, {mod})
+1883:		end
+1884:	end
+1885:end
+1886:
+1887:function OnMsg.PackedModDefLoaded(pack_path, def)
+1888:	local modId, version = string.match(pack_path, "pdx_([^_]+)_([^_/\\]+)")
+1889:	modId = tonumber(modId)
+1890:	if not modId then
+1891:	else
+1892:		def.PdxMod = {
+1893:			ModID = modId,
+1894:			Version = version,
+1895:		}
+1896:		def.pdx_id = modId
+1897:		def.pdx_version = version
+1898:		g_PdxModIdToHgModId[modId] = def.id
+1899:	end
+1900:end
+1901:
+1902:function OnMsg.PdxLogin()
+1903:	--check for missing installed mods and download them
+1904:	--if mods are disabled, do not try to update, install or sync any data to mitigate issues
+1905:	if config.Mods then
+1906:		g_PopsDownloadModsQueue:PushTask(false, SyncPdxMods)
+1907:	end
+1908:	local main = GetPreGameMainMenu()
+1909:	if main and g_ParadoxModsContextObj then
+FINGERPRINT {"build": "1.1.1.405907", "file": "CommonLua/Classes/GedModEditor.lua", "sha256": "69cf418b656823d75a4439eddce38b5056ed98c75be2a5b6bc47ac512bc4775f", "manifest": "MATCH"}
+SOURCE CommonLua/Classes/GedModEditor.lua 676 681
+676:local function CreatePackageForUpload(mod_def, params)
+677:	local content_path = mod_def.content_path
+678:	local temp_path = "TmpData/ModUpload/"
+679:	local pack_path = temp_path .. "Pack/"
+680:	local shots_path = temp_path .. "Screenshots/"
+681:	
+SOURCE CommonLua/Classes/GedModEditor.lua 713 751
+713:	--determine which files should to be packed and which ignored
+714:	local files_to_pack = { }
+715:	local substring_begin = #mod_def.content_path + 1
+716:	local err, all_files = AsyncListFiles(content_path, nil, "recursive")
+717:	for i,file in ipairs(all_files) do
+718:		local ignore
+719:
+720:		for j,filter in ipairs(mod_def.ignore_files) do
+721:			if MatchWildcard(file, filter) then
+722:				ignore = true
+723:				break
+724:			end
+725:		end
+726:
+727:		if not ignore then
+728:			table.insert(files_to_pack, { src = file, dst = string.sub(file, substring_begin) })
+729:		end
+730:	end
+731:	
+732:	--pack the mod content
+733:	local err = AsyncPack(pack_path .. ModsPackFileName, content_path, files_to_pack)
+734:	if err then
+735:		return false, string.format("Failed creating content package file (%s)", err)
+736:	end
+737:	
+738:	params.os_pack_path = ConvertToOSPath(pack_path .. ModsPackFileName)
+739:	return true, nil
+740:end
+741:
+742:function DbgPackMod(mod_def, show_file)
+743:	local params = {}
+744:	if mod_def:IsDirty() then
+745:		mod_def:SaveWholeMod()
+746:	end
+747:	CreatePackageForUpload(mod_def, params)
+748:	local dir = SplitPath(params.os_pack_path):gsub("/", "\\")
+749:	if show_file then
+750:		AsyncExec(string.format('explorer "%s"', dir))
+751:	end
+SOURCE CommonLua/Classes/GedModEditor.lua 825 843
+825:function ValidateModBeforeUpload(ged_socket, mod)
+826:	if IsValidThread(ModUploadThread) then
+827:		ged_socket:ShowMessage("Error", "Another mod is currently uploading.\n\nPlease wait for the upload to finish.")
+828:		return "upload in progress"
+829:	end
+830:	
+831:	if IsValidThread(ModUnpublishThread) then
+832:		ged_socket:ShowMessage("Error", "Another mod is currently being unpublished.\n\nPlease wait for the process to finish.")
+833:		return "unpublish in progress"
+834:	end
+835:	
+836:	if mod:IsDirty() then
+837:		if "ok" ~= ged_socket:WaitQuestion("Mod Upload", "The mod needs to be saved before uploading.\n\nContinue?", "Yes", "No") or
+838:			not mod:CanSaveMod(ged_socket)
+839:		then
+840:			return "mod saving failed"
+841:		end
+842:		mod:SaveWholeMod()
+843:	end
+SOURCE CommonLua/Classes/GedModEditor.lua 884 893
+884:function GedOpPackMod(socket, root)
+885:	local mod = root[1]
+886:	if not mod then return end
+887:	CreateRealTimeThread(function()
+888:		if socket:WaitQuestion("Pack mod", "Packing the mod will take more time the bigger it is.\nAre you sure you want to continue?", "Yes", "No") == "ok" then
+889:			GedSetUiStatus("mod_packing", "Packing mod...")
+890:			DbgPackMod(mod, true)
+891:			GedSetUiStatus("mod_packing")
+892:		end
+893:	end)
+FINGERPRINT {"build": "1.1.1.405907", "file": "CommonLua/Libs/Paradox/ParadoxMods.lua", "sha256": "9fab98939528c074276a4c475fe0b76f09e9a79f0fa7fdb67d5c0970e26f3190", "manifest": "MATCH"}
+SOURCE CommonLua/Libs/Paradox/ParadoxMods.lua 165 175
+165:	if err then return upload_failed(err, publish_mod_folder_path) end
+166:	
+167:	mod.PdxMod = {
+168:		ModID = res.ModId,
+169:		Version = res.Version
+170:	}
+171:	mod.pdx_id = res.ModId
+172:	mod.pdx_version = res.Version
+173:	mod:SaveWholeMod()
+174:
+175:	AsyncDeletePath(publish_mod_folder_path)
+FINGERPRINT {"build": "1.1.1.405907", "file": "CommonLua/Platforms/steam/SteamWorkshop.lua", "sha256": "85753d6358a780b1e487fe386b857937a104c3c2d0a633037835eddcb1da8028", "manifest": "MATCH"}
+SOURCE CommonLua/Platforms/steam/SteamWorkshop.lua 1 25
+1:function Steam_PrepareForUpload(ged_socket, mod, params)
+2:	local err
+3:	if mod.steam_id ~= 0 then
+4:		local owned, exists
+5:		local appId = SteamGetAppId()
+6:		local userId = SteamGetUserId64()
+7:		err, owned, exists = AsyncSteamWorkshopUserOwnsItem(userId, appId, mod.steam_id)
+8:		if err then
+9:			return false, T{773036833561, --[[Mod upload error]] "Failed looking up Steam Workshop item ownership (<err>)", err = Untranslated(err)}
+10:		end
+11:		if not exists then
+12:			mod.steam_id = 0
+13:		elseif not owned then
+14:			return false, T(898162117742, --[[Mod upload error]] "Upload failed - this mod is not owned by your Steam user")
+15:		end
+16:	end
+17:	if mod.steam_id == 0 then
+18:		local item_id, bShowLegalAgreement
+19:		err, item_id, bShowLegalAgreement = AsyncSteamWorkshopCreateItem()
+20:		mod.steam_id = not err and item_id or nil
+21:		params.publish = true
+22:		mod:SaveWholeMod()
+23:	else
+24:		params.publish = false
+25:	end
+FINGERPRINT {"build": "1.1.1.405907", "file": "CommonLua/AccountStorage.lua", "sha256": "b3be7d3cc94a648b0decbc846bf81ec9094455e1430a65e88fa52734e86d6a25", "manifest": "MATCH"}
+SOURCE CommonLua/AccountStorage.lua 166 187
+166:function OnMsg.CanApplicationQuit(result)
+167:	if IsValidThread(SaveAccountStorageThread) then
+168:		result.can_quit = false
+169:		if not SaveAccountStorageSaving then
+170:			DeleteThread(SaveAccountStorageThread)
+171:			SaveAccountStorageThread = false
+172:			SaveAccountStorageIsWaiting = false
+173:			if not SaveAccountStorageRequestTime then
+174:				return
+175:			end
+176:			SaveAccountStorageSaving = true
+177:			SaveAccountStorageThread = CreateRealTimeThread(function()
+178:				while SaveAccountStorageRequestTime do
+179:					SaveAccountStorageRequestTime = false
+180:					_DoSaveAccountStorage()
+181:				end
+182:				SaveAccountStorageThread = false
+183:				SaveAccountStorageSaving = false
+184:			end)
+185:		end
+186:	end
+187:end
+FINGERPRINT {"build": "1.1.1.405907", "file": "CommonLua/Core/types.lua", "sha256": "9ef15c89ae83d8eff828633eb6593cd9a1e633d719d6357b6c9b0f780bc2703d", "manifest": "MATCH"}
+SOURCE CommonLua/Core/types.lua 143 148
+143:function table.remove_entry(array, field, value)
+144:	local i = find(array, field, value)
+145:	if i then
+146:		return i, remove(array, i)
+147:	end
+148:end
+SOURCE CommonLua/Core/types.lua 1028 1037
+1028:function table.insert_unique(t, x)
+1029:	if not find(t, x) then
+1030:		t[#t + 1] = x
+1031:		return true
+1032:	end
+1033:end
+1034:
+1035:-- string.match on all elements in a table
+1036:function table.match(t, match, bCaseSensitive, visited)
+1037:	local found = false
+FINGERPRINT_TOTAL 7 MATCH 7
+BASELINE_FAILURE desk_c104_political_animal.py same harness bytes; main rerun exit 1
+BASELINE_FAILURE desk_c107_dry_farming.py same harness bytes; main rerun exit 1
+BASELINE_FAILURE desk_c92_achievement.py same harness bytes; main rerun exit 1
+BASELINE_FAILURE desk_mystery_tech_migration.py same harness bytes; main rerun exit 1
+BASELINE_FAILURE desk_probes_f67_f59.py same harness bytes; main rerun exit 1
+SUITE_MEMBERS [["desk_c104_political_animal.py", "REFUTED (exit 1)"], ["desk_c105_water_reclamation.py", "HELD"], ["desk_c107_dry_farming.py", "REFUTED (exit 1)"], ["desk_c108_wildfire_cure.py", "HELD"], ["desk_c111_rescue_text.py", "HELD"], ["desk_c114_hub_access.py", "HELD"], ["desk_c114_sitting_findings.py", "HELD"], ["desk_c115_home_rescue.py", "HELD"], ["desk_c116_hub_marker.py", "HELD"], ["desk_c117_hub_salvage.py", "HELD"], ["desk_c74_hit_moment_fx.py", "HELD"], ["desk_c83_arrivals.py", "HELD"], ["desk_c85_clogged.py", "HELD"], ["desk_c86_scan_downgrade.py", "HELD"], ["desk_c88_prefab.py", "HELD"], ["desk_c89_faction_gate.py", "HELD"], ["desk_c90_datapatch.py", "HELD"], ["desk_c92_achievement.py", "REFUTED (exit 1)"], ["desk_c93_open_pasture.py", "HELD"], ["desk_c95_habitat_draft.py", "HELD"], ["desk_c95_return_home.py", "HELD"], ["desk_c96_rover_subclass.py", "HELD"], ["desk_caller_seam.py", "HELD"], ["desk_ck53_hostile_globals.py", "HELD"], ["desk_f117_argshape.py", "HELD"], ["desk_f117_kitprobe.py", "HELD"], ["desk_f117_recipe.py", "HELD"], ["desk_f119_trade_fuel.py", "HELD"], ["desk_f124_track.py", "HELD"], ["desk_f125_vacuum.py", "HELD"], ["desk_f127_arrival_booking.py", "HELD"], ["desk_f59_expedition.py", "HELD"], ["desk_f59_interact.py", "HELD"], ["desk_gamepatch_retirements.py", "HELD"], ["desk_hubset07_rehearsal.py", "HELD"], ["desk_hubset07b_rehearsal.py", "HELD"], ["desk_load_first.py", "HELD"], ["desk_migration_cluster.py", "HELD"], ["desk_migration_observations.py", "HELD"], ["desk_mystery_tech_migration.py", "REFUTED (exit 1)"], ["desk_probes_f67_f59.py", "REFUTED (exit 1)"], ["desk_progress_seam.py", "HELD"], ["desk_seam_food.py", "HELD"], ["desk_shelter_reflex.py", "HELD"]]
+SUITE_TOTAL {"members": 44, "held": 39, "refuted": ["desk_c104_political_animal.py", "desk_c107_dry_farming.py", "desk_c92_achievement.py", "desk_mystery_tech_migration.py", "desk_probes_f67_f59.py"]}
+CANARY_EVIDENCE_MEMBERS {"keyword": "GedModEditor", "hits": []}
+CANARY_EVIDENCE_MEMBERS {"keyword": "DbgPackMod", "hits": []}
+CANARY_EVIDENCE_MEMBERS {"keyword": "CANARY", "hits": [{"file": "measurements.txt", "line": 201, "text": "423:local SMRFixPack_LoadOrderCanary = \"SMRFP-LOADORDER-CANARY-2026-09-25-b7e1\""}]}
+CANARY_EVIDENCE_MEMBERS {"keyword": "pack_predict", "hits": [{"file": "measurements.txt", "line": 199, "text": "COMMAND python tools/pack_predict.py (metadata.lua canary lines present?)"}]}
+CANARY_EVIDENCE_MEMBERS {"keyword": "upload_preflight", "hits": [{"file": "measurements.txt", "line": 191, "text": "COMMAND python tools/upload_preflight.py ."}]}
+CANARY_EVIDENCE_MEMBERS {"keyword": "Loaded mod items for:", "hits": [{"file": "L1_promote_Mars.exe-20260925-20.02.57-6aad2d75.log", "line": 186, "text": "[mod] Loaded mod items for: SMR_CommunityFixPackTestKit, SMR_TrainHubDev_20260918, SMR_CommunityFixPack, SMR_CommunityOptInPack, SMR_RailShaftDev_20260923"}, {"file": "L2_restart_Mars.exe-20260925-20.03.47-6aad2d75.log", "line": 184, "text": "[mod] Loaded mod items for: SMR_CommunityFixPack, SMR_CommunityFixPackTestKit, SMR_TrainHubDev_20260918, SMR_CommunityOptInPack, SMR_RailShaftDev_20260923"}, {"file": "L3_set_PN_first_Mars.exe-20260925-20.05.05-6aad2d75.log", "line": 179, "text": "[mod] Loaded mod items for: SMR_CommunityFixPack, SMR_CommunityFixPackTestKit, SMR_TrainHubDev_20260918, SMR_CommunityOptInPack, SMR_RailShaftDev_20260923"}, {"file": "L4_PN_before_pack_Mars.exe-20260925-20.05.53-6aad2d75.log", "line": 184, "text": "[mod] Loaded mod items for: SMR_CommunityFixPackTestKit, SMR_TrainHubDev_20260918, SMR_CommunityOptInPack, SMR_RailShaftDev_20260923, iooW34Y, SMR_CommunityFixPack"}, {"file": "L5_pack_before_PN_Mars.exe-20260925-20.06.35-6aad2d75.log", "line": 187, "text": "[mod] Loaded mod items for: SMR_CommunityFixPack, SMR_CommunityFixPackTestKit, SMR_TrainHubDev_20260918, SMR_CommunityOptInPack, SMR_RailShaftDev_20260923, iooW34Y"}, {"file": "L6_restore_L0_Mars.exe-20260925-20.07.40-6aad2d75.log", "line": 185, "text": "[mod] Loaded mod items for: SMR_CommunityFixPack, SMR_CommunityFixPackTestKit, SMR_TrainHubDev_20260918, SMR_CommunityOptInPack, SMR_RailShaftDev_20260923, iooW34Y"}, {"file": "L7_readback_main_Mars.exe-20260925-20.12.55-6aad2d75.log", "line": 179, "text": "[mod] Loaded mod items for: SMR_CommunityFixPackTestKit, SMR_TrainHubDev_20260918, SMR_CommunityFixPack, SMR_CommunityOptInPack, SMR_RailShaftDev_20260923"}]}
+CANARY_EVIDENCE_TOTAL {"GedModEditor": 0, "DbgPackMod": 0, "CANARY": 1, "pack_predict": 1, "upload_preflight": 1, "Loaded mod items for:": 7}
+COST_ESTIMATE_PENDING_RUN {'required_legs': [3, 4, 3, 2, 3], 'total_minutes': 15, 'with_optional_pn_minutes': 19}

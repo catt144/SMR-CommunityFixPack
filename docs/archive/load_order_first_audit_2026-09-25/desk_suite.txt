@@ -1,0 +1,2017 @@
+
+##############################################################################
+# desk_c104_political_animal.py
+##############################################################################
+COMMAND python tools/desk_c104_political_animal.py
+HEAD f65b609d14a05546649672362a06ec8891c97598
+==============================================================================
+C104 Political Animal: exclusive laws vs the achievement check; no fix
+==============================================================================
+lua: Lua 5.5 | lupa 2.8
+
+REGISTRY Data/PolicyCategoryDef.lua sha256=b26f6fbb7bbdd3ee
+REGISTRY Data/PolicyDef.lua sha256=2d1eee04d0991082
+REGISTRY DLC/norman/Presets/PolicyDef.lua sha256=06395a023538b2da
+REGISTRY Data/LawDef/LawDef-Default.lua sha256=0136760e5a3b8425
+REGISTRY Data/LawDef/LawDef-Earth.lua sha256=be9cb1103ebf6224
+REGISTRY Data/LawDef/LawDef-Economy.lua sha256=5006fdb58dadbf4b
+REGISTRY Data/LawDef/LawDef-Efficiency.lua sha256=419af4b9bfeaa152
+REGISTRY Data/LawDef/LawDef-Founder Stage.lua sha256=744f54937998f09a
+REGISTRY Data/LawDef/LawDef-Governance.lua sha256=b788f5ada631eddd
+REGISTRY Data/LawDef/LawDef-Independence.lua sha256=c3efb66f98b40909
+REGISTRY Data/LawDef/LawDef-Research.lua sha256=5f392b2530d8da9f
+REGISTRY Data/LawDef/LawDef-Technology.lua sha256=79eac38536145d41
+REGISTRY Data/LawDef/LawDef-Welfare.lua sha256=50c76520bd08b759
+REGISTRY DLC/norman/Presets/LawDef/LawDef-Food.lua sha256=61fd1f5b88833a32
+REGISTRY DLC/norman/Presets/LawDef/LawDef-Welfare.lua sha256=699ef29f3cbfb6b8
+SOURCE 1.1.0 CommonLua/Preset.lua:1763-1781 sha256=553e8b453ebd096c
+SOURCE 1.1.0 CommonLua/Scripting.lua:413-418 sha256=95acea2ae8982272
+SOURCE 1.1.0 CommonLua/Classes/Explanation.lua:32-43 sha256=bfb8355d647bb14e
+SOURCE 1.1.0 CommonLua/Features/GameRules.lua:45-48 sha256=2e6a48341c332fbf
+SOURCE 1.1.0 CommonLua/LabelContainer.lua:386-397 sha256=2c8667da3d06ae8b
+SOURCE 1.1.0 Lua/Factions/LawDef.lua:44-46 sha256=c21bb2030739ac35
+SOURCE 1.1.0 Lua/Factions/LawDef.lua:48-64 sha256=3702c62df58c7bfe
+SOURCE 1.1.0 Lua/Factions/LawDef.lua:66-83 sha256=ce23eef9fb6a1690
+SOURCE 1.1.0 Lua/Factions/LawDef.lua:178-194 sha256=42cc58f953622b6c
+SOURCE 1.1.0 Lua/Factions/LawDef.lua:275-291 sha256=2f04f6ff6c6de1e5
+SOURCE 1.1.0 Lua/Factions/LawDef.lua:196-206 sha256=e60bf2707c80daad
+SOURCE 1.1.0 Lua/Factions/LawDef.lua:325-342 sha256=b002b307f8134a53
+SOURCE 1.1.0 Lua/Factions/LawDef.lua:344-350 sha256=73582c2a816d02c1
+SOURCE 1.1.0 Lua/Factions/Legislature.lua:1187-1303 sha256=6efc9b6ad90afd03
+SOURCE 1.1.0 Lua/Factions/Legislature.lua:1713-1715 sha256=6b7490a211aa6a56
+SOURCE 1.1.0 Lua/Factions/Legislature.lua:696-703 sha256=787ff6b8e15cc312
+SOURCE 1.1.0 Lua/Factions/Laws.lua:894-930 sha256=d07a61c60a38966a
+SOURCE 1.1.0 Lua/Factions/Laws.lua:590-604 sha256=02848e855e4aaf2b
+SOURCE 1.1.0 Lua/Buildings/MartianAssembly.lua:33-36 sha256=6b561a258497646d
+SOURCE 1.1.0 Lua/PreGameMission.lua:341-345 sha256=3232065208ecf871
+SOURCE 1.1.0 Lua/Conditions.lua:83-85 sha256=337654ee9fff7fae
+SOURCE 1.1.0 Lua/Terraforming.lua:365-367 sha256=5e12edcc89f4a6b0
+
+  PASS  registry: 182 LawDef, 87 PolicyDef, 8 PolicyCategoryDef presets loaded (grep count agrees)  -- (182, 87, 8)
+  PASS  shipped RecalcPoliciesState walks 67 policies (the static extractor's figure)  -- 67
+  FAIL  post-independence requirement = 61 policies (66 counted minus 5 hidden PreIndependence)  -- 56
+  FAIL  NightShiftCompensations is in the achievement's requirement set
+  FAIL  QualityRest is in the achievement's requirement set
+  FAIL  SecondaryProduce is in the achievement's requirement set
+  FAIL  GMO is in the achievement's requirement set
+  PASS  EfficientAssembly is in the achievement's requirement set
+  PASS  no procall error while building the requirement (a shim gap would hide a policy)
+  FAIL  honest enactment (voting-card gate only) leaves exactly one law of each exclusive pair un-enactable
+  FAIL  honest enactment never unlocks the achievement  -- 1
+  FAIL  the daily revoke (law-level conditions only) removes nothing from that full set -- both halves of each pair survive
+  PASS  POSITIVE CONTROL: with the two locked laws forced in (as a cheat would), the revoke-stable set unlocks  -- 1
+  PASS  B2: Open Domes can still be enacted over Oxygen, and the next NewDay revokes Oxygen (not a blocker: Power/Water remain)  -- ['Policy_EnergyEfficiency_Oxygen:disable_conditions']
+  PASS  REQUIREMENT: dropping Policy_NightShiftCompensations from that full set refuses the unlock
+  PASS  REQUIREMENT: dropping Policy_QualityRest from that full set refuses the unlock
+  PASS  REQUIREMENT: dropping Policy_GMO from that full set refuses the unlock
+  PASS  order Policy_NightShiftCompensations then Policy_QualityRest: second is locked  -- second locked
+  PASS  order Policy_QualityRest then Policy_NightShiftCompensations: second is locked  -- second locked
+  PASS  order Policy_SecondaryProduce_Herbs then Policy_GMO: second is locked  -- second locked
+  PASS  order Policy_GMO then Policy_SecondaryProduce_Herbs: second is locked  -- second locked
+  PASS  order Policy_SecondaryProduce_Spices then Policy_GMO: second is locked  -- second locked
+  PASS  order Policy_GMO then Policy_SecondaryProduce_Spices: second is locked  -- second locked
+  PASS  order Policy_SecondaryProduce_Sugar then Policy_GMO: second is locked  -- second locked
+  PASS  order Policy_GMO then Policy_SecondaryProduce_Sugar: second is locked  -- second locked
+  LOCK EDGES (an active law that fully locks a required policy):
+  FAIL  the lock graph is exactly: 2 mutual pairs + Dictatorship's one-way lock (resolved by enacting it last)  -- ['Dictatorship locks Apportionment', 'Dictatorship locks AssemblyType', 'Policy_GMO locks SecondaryProduce', 'Policy_NightShiftCompensations locks QualityRest', 'Policy_QualityRest locks NightShiftCompensations', 'Policy_SecondaryProduce_Herbs locks GMO', 'Policy_SecondaryProduce_Spices locks GMO', 'Policy_SecondaryProduce_Sugar locks GMO']
+  PASS  no procall error across the enumeration
+  PASS  Politician: shipped state function marks EfficientAssembly hidden
+  PASS  Politician: EfficientAssembly is still required (hidden but not exempt)
+  PASS  control: any other commander sees EfficientAssembly unhidden
+  FAIL  Politician: even with both pairs forced in, the unlock is refused (EfficientAssembly unreachable)  -- 1
+  PASS  fix shape: exempting one policy of each pair lets HONEST enactment unlock (Astrogeologist)  -- (1, 0)
+  PASS  fix shape: plus exempting EfficientAssembly lets a Politician unlock honestly  -- (1, 0)
+  PASS  no procall error in any leg
+
+==============================================================================
+24 of 34 demands held
+REFUTED -- 10 demand(s) failed:
+   - post-independence requirement = 61 policies (66 counted minus 5 hidden PreIndependence)
+   - NightShiftCompensations is in the achievement's requirement set
+   - QualityRest is in the achievement's requirement set
+   - SecondaryProduce is in the achievement's requirement set
+   - GMO is in the achievement's requirement set
+   - honest enactment (voting-card gate only) leaves exactly one law of each exclusive pair un-enactable
+   - honest enactment never unlocks the achievement
+   - the daily revoke (law-level conditions only) removes nothing from that full set -- both halves of each pair survive
+   - the lock graph is exactly: 2 mutual pairs + Dictatorship's one-way lock (resolved by enacting it last)
+   - Politician: even with both pairs forced in, the unlock is refused (EfficientAssembly unreachable)
+
+##############################################################################
+# desk_c105_water_reclamation.py
+##############################################################################
+COMMAND python tools/desk_c105_water_reclamation.py
+HEAD f65b609d14a05546649672362a06ec8891c97598
+==============================================================================
+C105 Water Reclamation automation upgrade vs the spire's water saving; no fix
+==============================================================================
+lua: Lua 5.5 | lupa 2.8
+
+SOURCE 1.1.0 Lua/Modifiers.lua:41-86 sha256=0da5e458dc6a0249
+SOURCE 1.1.0 Lua/Modifiers.lua:90-104 sha256=0fc8f7dd8388db5b
+SOURCE 1.1.0 Lua/Modifiers.lua:120-128 sha256=8a3067fadab96ae3
+SOURCE 1.1.0 Lua/Modifiers.lua:340-342 sha256=bff863dc43b02536
+SOURCE 1.1.0 Lua/Modifiers.lua:348-353 sha256=0f0306319621a49a
+SOURCE 1.1.0 Lua/Modifiers.lua:355-360 sha256=582e3f0d86bd8d7a
+SOURCE 1.1.0 Lua/Modifiers.lua:365-375 sha256=397406a26b402079
+SOURCE 1.1.0 Lua/Modifiers.lua:377-379 sha256=b489217c31fc69e5
+SOURCE 1.1.0 Lua/Buildings/Workplace.lua:250-269 sha256=a8d5c4634f2ddf82
+SOURCE 1.1.0 Lua/Buildings/Workplace.lua:271-296 sha256=3e129ac91c5faefa
+SOURCE 1.1.0 Lua/Buildings/Workplace.lua:298-308 sha256=66248597db94b50f
+SOURCE 1.1.0 Lua/Buildings/Workplace.lua:614-671 sha256=6ee50bea40e07360
+SOURCE 1.1.0 Lua/Buildings/Workplace.lua:211-217 sha256=ad7d3dc7412aaed4
+SOURCE 1.1.0 Lua/Buildings/Workplace.lua:696-705 sha256=d3cc420da35423ee
+SOURCE 1.1.0 Lua/Buildings/Workplace.lua:473-484 sha256=b8cf4dd5c1ac83e5
+SOURCE 1.1.0 Lua/Buildings/Workplace.lua:781-784 sha256=42d4e7876047bcdc
+SOURCE 1.1.0 Lua/Buildings/Workplace.lua:724-735 sha256=1638b249cad3830b
+SOURCE 1.1.0 Lua/Buildings/ShiftsBuilding.lua:131-140 sha256=884568df8ce8ac1d
+SOURCE 1.1.0 Lua/Buildings/Building.lua:1151-1255 sha256=3d01968af5926715
+SOURCE 1.1.0 Lua/Buildings/UpgradableBuilding.lua:169-187 sha256=37e34303f85fc7d4
+SOURCE 1.1.0 Lua/Buildings/WaterReclamation.lua (whole) sha256=878eecdc4661debd
+SOURCE 1.1.0 Lua/LabelContainer.lua:59-78 (+ the two local helpers, :49-57, retyped verbatim)
+
+  staffed:  perf=140 automation=0 auto_perf=0 max_workers=2 workers=2 label_percent=-70.0 dome_water=3000 farm_water=1500
+  PASS  staffed spire at 140 performance saves 70% of the dome's water (10000 -> 3000) and the farm's (5000 -> 1500)  -- perf=140 automation=0 auto_perf=0 max_workers=2 workers=2 label_percent=-70.0 dome_water=3000 farm_water=1500
+  upgraded: perf=100 automation=1 auto_perf=100 max_workers=0 workers=0 label_percent=-50.0 dome_water=5000 farm_water=2500
+  PASS  upgrade installs automation=1, auto_performance=100, max_workers=0 and dismisses both workers  -- perf=100 automation=1 auto_perf=100 max_workers=0 workers=0 label_percent=-50.0 dome_water=5000 farm_water=2500
+  PASS  upgraded spire's performance is 100 (the automation value)  -- perf=100 automation=1 auto_perf=100 max_workers=0 workers=0 label_percent=-50.0 dome_water=5000 farm_water=2500
+  PASS  the saving is STILL APPLIED after the upgrade: 50% (dome 10000 -> 5000, farm 5000 -> 2500)  -- perf=100 automation=1 auto_perf=100 max_workers=0 workers=0 label_percent=-50.0 dome_water=5000 farm_water=2500
+  PASS  five more refresh cycles leave the same numbers (no drift, no loss)  -- perf=100 automation=1 auto_perf=100 max_workers=0 workers=0 label_percent=-50.0 dome_water=5000 farm_water=2500
+  dome +25%, no recalc: perf=100 automation=1 auto_perf=100 max_workers=0 workers=0 label_percent=-50.0 dome_water=7500 farm_water=2500
+  after a working-state refresh: perf=100 automation=1 auto_perf=100 max_workers=0 workers=0 label_percent=-50.0 dome_water=6250 farm_water=2500
+  PASS  STALENESS: a +25% rise in the dome's own water leaves its saving at 40% (12500 -> 7500) until a recalc; the farm keeps 50%  -- perf=100 automation=1 auto_perf=100 max_workers=0 workers=0 label_percent=-50.0 dome_water=7500 farm_water=2500
+  PASS  the next recalculation restores 50% on the dome's own water (12500 -> 6250)  -- perf=100 automation=1 auto_perf=100 max_workers=0 workers=0 label_percent=-50.0 dome_water=6250 farm_water=2500
+  PASS  two spires, one upgraded: the staffed one's 140 still sets the dome to 70%  -- perf=100 automation=1 auto_perf=100 max_workers=0 workers=0 label_percent=-70.0 dome_water=3000 farm_water=1500
+  modifiers forced off: perf=0 automation=0 auto_perf=0 max_workers=2 workers=0 label_percent=nil dome_water=10000 farm_water=5000
+  PASS  NEGATIVE CONTROL: with the upgrade's modifiers off and the workers gone, performance is 0 and the saving vanishes  -- perf=0 automation=0 auto_perf=0 max_workers=2 workers=0 label_percent=nil dome_water=10000 farm_water=5000
+
+==============================================================================
+9 of 9 demands held
+CONTROLS HOLD: on the shipped path the automation upgrade keeps a 50% saving; only modifiers switched off would zero it.
+
+##############################################################################
+# desk_c107_dry_farming.py
+##############################################################################
+==============================================================================
+C107 Fix_DryFarmingFarms over the shipped DryFarming preset, farm templates and BuildingTemplates builder
+==============================================================================
+lua: Lua 5.5 | lupa 2.8
+
+  FAIL  (a) cold boot: one water entry per DLC plant farm, module active  -- {'FarmSmall': 1, 'FarmSmallUnderground': 0, 'FarmUnderground': 0, 'AutomatedFarm': 0} inactive ['[CommunityFixPack] DryFarmingFarms: applied', "[CommunityFixPack] DryFarmingFarms: behaviour probe declined (threw: Lua/MarsGameEffects.lua:284: attempt to call a nil value (global 'TechModifierName'))", '[CommunityFixPack] DryFarmingFarms: inactive (Effect_ModifyLabel filing behaviour not recognised)', "[CommunityFixPack] DryFarmingFarms: behaviour probe declined (threw: Lua/MarsGameEffects.lua:284: attempt to call a nil value (global 'TechModifierName'))", '[CommunityFixPack] DryFarmingFarms: inactive (Effect_ModifyLabel filing behaviour not recognised)']
+  PASS  (a2) entries copy the shipped -50 and stay in scope
+  PASS  (a3) no 'DLC absent' line on a boot where the DLC is loaded  -- ['[CommunityFixPack] DryFarmingFarms: applied', "[CommunityFixPack] DryFarmingFarms: behaviour probe declined (threw: Lua/MarsGameEffects.lua:284: attempt to call a nil value (global 'TechModifierName'))", '[CommunityFixPack] DryFarmingFarms: inactive (Effect_ModifyLabel filing behaviour not recognised)', "[CommunityFixPack] DryFarmingFarms: behaviour probe declined (threw: Lua/MarsGameEffects.lua:284: attempt to call a nil value (global 'TechModifierName'))", '[CommunityFixPack] DryFarmingFarms: inactive (Effect_ModifyLabel filing behaviour not recognised)']
+  FAIL  (a4) enable path: one entry per DLC plant farm, module active  -- {'FarmSmall': 1, 'FarmSmallUnderground': 0, 'FarmUnderground': 0, 'AutomatedFarm': 0} inactive ['[CommunityFixPack] DryFarmingFarms: applied', "[CommunityFixPack] DryFarmingFarms: behaviour probe declined (threw: Lua/MarsGameEffects.lua:284: attempt to call a nil value (global 'TechModifierName'))", '[CommunityFixPack] DryFarmingFarms: inactive (Effect_ModifyLabel filing behaviour not recognised)']
+  FAIL  (a5) DLC presets absent at DataLoaded, present by ModsReloaded: paid then, active  -- {'FarmSmall': 1, 'FarmSmallUnderground': 0, 'FarmUnderground': 0, 'AutomatedFarm': 0} inactive ['[CommunityFixPack] DryFarmingFarms: applied', "[CommunityFixPack] DryFarmingFarms: behaviour probe declined (threw: Lua/MarsGameEffects.lua:284: attempt to call a nil value (global 'TechModifierName'))", '[CommunityFixPack] DryFarmingFarms: inactive (Effect_ModifyLabel filing behaviour not recognised)', "[CommunityFixPack] DryFarmingFarms: behaviour probe declined (threw: Lua/MarsGameEffects.lua:284: attempt to call a nil value (global 'TechModifierName'))", '[CommunityFixPack] DryFarmingFarms: inactive (Effect_ModifyLabel filing behaviour not recognised)']
+  FAIL  (b) new research: DLC farms and Farm at -50, Fungal and Insect at 0  -- {'FarmSmall': 0, 'FarmSmallUnderground': 0, 'FarmUnderground': 0, 'AutomatedFarm': 0, 'Farm': 0, 'FungalFarm': 0, 'FarmInsect': 0} ["Lua/MarsGameEffects.lua:284: attempt to call a nil value (global 'TechModifierName')", "Lua/MarsGameEffects.lua:284: attempt to call a nil value (global 'TechModifierName')", "Lua/MarsGameEffects.lua:284: attempt to call a nil value (global 'TechModifierName')", "Lua/MarsGameEffects.lua:284: attempt to call a nil value (global 'TechModifierName')"]
+
+##############################################################################
+# desk_c108_wildfire_cure.py
+##############################################################################
+==============================================================================
+C108 Fix_WildfireCureVisit over the shipped 1.1.0 service payment, cure and interest bodies
+==============================================================================
+lua: Lua 5.5 | lupa 2.8
+
+numbers read from the trees: {'infirmary_health': 10000, 'center_health': 20000, 'high': 70000, 'low': 30000, 'high_107': 70000, 'low_107': 30000, 'recover_110': 0, 'recover_107': 5000, 'infected_110': 12, 'infected_107': 12}
+
+  PASS  (a) 1.0.7 contract: +5 rest vs -12 Infected reaches 70 and is cured within 6 sols  -- cured sol 4, lowest Health 67
+  PASS  (a2) 1.1.0 dropped the rest recovery: DailyHealthRecover = 0
+  PASS  (b) 1.1.0 Infirmary (+10) at full coverage: drifts down and is cured, slowly  -- cured sol 11, lowest Health 68
+  PASS  (c) THE DEFECT: 1.1.0 Medical Center (+20) at full coverage, no DLC content: never below 70, never visits, never cured in 60 sols  -- cured False, lowest Health 88, visits 0
+  PASS  (c2) Medical Center covering half the dome pays +10: cured, slowly  -- cured sol 11, lowest Health 68
+  PASS  (c3) the medical category pays its template Health at home: 20  -- 20000
+  PASS  (d) module active on the 1.1.0 shape  -- active ['[CommunityFixPack] WildfireCureVisit: applied']
+  PASS  (e) THE REPAIR: Medical Center at full coverage, cured on the first sol  -- cured sol 1, lowest Health 88
+  PASS  (e2) Infirmary: cured on the first sol  -- 1
+  PASS  (e3) no medical building anywhere: no visit, no throw, not cured  -- False 0
+  PASS  (f) cure not yet found: an infected colonist keeps vanilla's interest  -- interestDrinking vs interestDrinking
+  PASS  (g) cure found, colonist NOT infected: vanilla's interest  -- interestDrinking
+  PASS  (g2) a unit with no traits table: vanilla's interest, no throw
+  PASS  (h) the wrapper draws exactly what vanilla draws from the colonist's random stream  -- 1 vs 1
+  PASS  (h2) infected with the cure found: needMedical
+  PASS  (i) 1.0.7 shape (no at-home payment): declines with that reason, PickInterest untouched, not update_suspect  -- inactive ['[CommunityFixPack] WildfireCureVisit: inactive (no at-home service payment (AccumulateCategoryServiceStats): the colonists this fix is for still reach a medical building on their own on this game version)']
+  PASS  (j) an at-home payment that pays no Health: probe declines, untouched
+  PASS  (k) no MedicalBuilding:Service (the cure moved): declines, untouched
+  PASS  (l) veto: disabled, PickInterest untouched
+  PASS  (m) a module no longer active passes through
+
+==============================================================================
+20 of 20 demands held
+ALL DEMANDS HELD -- desk evidence; nothing ran in a game.
+
+UNFIXED: the pack without this module must FAIL the repair demand (e)
+  -> FAILS AS REQUIRED: Medical Center, no module: cured False, lowest Health 88, visits 0
+
+FALSIFICATION: one guard reverted per scratch variant; the named legs must FAIL
+==============================================================================
+variant: no Infected check
+==============================================================================
+lua: Lua 5.5 | lupa 2.8
+
+  PASS  [x] (a) 1.0.7 contract: +5 rest vs -12 Infected reaches 70 and is cured within 6 sols  -- cured sol 4, lowest Health 67
+  PASS  [x] (a2) 1.1.0 dropped the rest recovery: DailyHealthRecover = 0
+  PASS  [x] (b) 1.1.0 Infirmary (+10) at full coverage: drifts down and is cured, slowly  -- cured sol 11, lowest Health 68
+  PASS  [x] (c) THE DEFECT: 1.1.0 Medical Center (+20) at full coverage, no DLC content: never below 70, never visits, never cured in 60 sols  -- cured False, lowest Health 88, visits 0
+  PASS  [x] (c2) Medical Center covering half the dome pays +10: cured, slowly  -- cured sol 11, lowest Health 68
+  PASS  [x] (c3) the medical category pays its template Health at home: 20  -- 20000
+  PASS  [x] (d) module active on the 1.1.0 shape  -- active ['[CommunityFixPack] WildfireCureVisit: applied']
+  PASS  [x] (e) THE REPAIR: Medical Center at full coverage, cured on the first sol  -- cured sol 1, lowest Health 88
+  PASS  [x] (e2) Infirmary: cured on the first sol  -- 1
+  PASS  [x] (e3) no medical building anywhere: no visit, no throw, not cured  -- False 0
+  PASS  [x] (f) cure not yet found: an infected colonist keeps vanilla's interest  -- interestDrinking vs interestDrinking
+  FAIL  [x] (g) cure found, colonist NOT infected: vanilla's interest  -- needMedical
+  PASS  [x] (g2) a unit with no traits table: vanilla's interest, no throw
+  PASS  [x] (h) the wrapper draws exactly what vanilla draws from the colonist's random stream  -- 1 vs 1
+  PASS  [x] (h2) infected with the cure found: needMedical
+  PASS  [x] (i) 1.0.7 shape (no at-home payment): declines with that reason, PickInterest untouched, not update_suspect  -- inactive ['[CommunityFixPack] WildfireCureVisit: inactive (no at-home service payment (AccumulateCategoryServiceStats): the colonists this fix is for still reach a medical building on their own on this game version)']
+  PASS  [x] (j) an at-home payment that pays no Health: probe declines, untouched
+  PASS  [x] (k) no MedicalBuilding:Service (the cure moved): declines, untouched
+  PASS  [x] (l) veto: disabled, PickInterest untouched
+  PASS  [x] (m) a module no longer active passes through
+  -> CAUGHT [no Infected check]: expected FAIL ['(g)'], got FAIL ['(g)']
+==============================================================================
+variant: no vaccination check
+==============================================================================
+lua: Lua 5.5 | lupa 2.8
+
+  PASS  [x] (a) 1.0.7 contract: +5 rest vs -12 Infected reaches 70 and is cured within 6 sols  -- cured sol 4, lowest Health 67
+  PASS  [x] (a2) 1.1.0 dropped the rest recovery: DailyHealthRecover = 0
+  PASS  [x] (b) 1.1.0 Infirmary (+10) at full coverage: drifts down and is cured, slowly  -- cured sol 11, lowest Health 68
+  PASS  [x] (c) THE DEFECT: 1.1.0 Medical Center (+20) at full coverage, no DLC content: never below 70, never visits, never cured in 60 sols  -- cured False, lowest Health 88, visits 0
+  PASS  [x] (c2) Medical Center covering half the dome pays +10: cured, slowly  -- cured sol 11, lowest Health 68
+  PASS  [x] (c3) the medical category pays its template Health at home: 20  -- 20000
+  PASS  [x] (d) module active on the 1.1.0 shape  -- active ['[CommunityFixPack] WildfireCureVisit: applied']
+  PASS  [x] (e) THE REPAIR: Medical Center at full coverage, cured on the first sol  -- cured sol 1, lowest Health 88
+  PASS  [x] (e2) Infirmary: cured on the first sol  -- 1
+  PASS  [x] (e3) no medical building anywhere: no visit, no throw, not cured  -- False 0
+  FAIL  [x] (f) cure not yet found: an infected colonist keeps vanilla's interest  -- needMedical vs interestDrinking
+  PASS  [x] (g) cure found, colonist NOT infected: vanilla's interest  -- interestDrinking
+  PASS  [x] (g2) a unit with no traits table: vanilla's interest, no throw
+  PASS  [x] (h) the wrapper draws exactly what vanilla draws from the colonist's random stream  -- 1 vs 1
+  PASS  [x] (h2) infected with the cure found: needMedical
+  PASS  [x] (i) 1.0.7 shape (no at-home payment): declines with that reason, PickInterest untouched, not update_suspect  -- inactive ['[CommunityFixPack] WildfireCureVisit: inactive (no at-home service payment (AccumulateCategoryServiceStats): the colonists this fix is for still reach a medical building on their own on this game version)']
+  PASS  [x] (j) an at-home payment that pays no Health: probe declines, untouched
+  PASS  [x] (k) no MedicalBuilding:Service (the cure moved): declines, untouched
+  PASS  [x] (l) veto: disabled, PickInterest untouched
+  PASS  [x] (m) a module no longer active passes through
+  -> CAUGHT [no vaccination check]: expected FAIL ['(f)'], got FAIL ['(f)']
+==============================================================================
+variant: vanilla body not called
+==============================================================================
+lua: Lua 5.5 | lupa 2.8
+
+  PASS  [x] (a) 1.0.7 contract: +5 rest vs -12 Infected reaches 70 and is cured within 6 sols  -- cured sol 4, lowest Health 67
+  PASS  [x] (a2) 1.1.0 dropped the rest recovery: DailyHealthRecover = 0
+  PASS  [x] (b) 1.1.0 Infirmary (+10) at full coverage: drifts down and is cured, slowly  -- cured sol 11, lowest Health 68
+  PASS  [x] (c) THE DEFECT: 1.1.0 Medical Center (+20) at full coverage, no DLC content: never below 70, never visits, never cured in 60 sols  -- cured False, lowest Health 88, visits 0
+  PASS  [x] (c2) Medical Center covering half the dome pays +10: cured, slowly  -- cured sol 11, lowest Health 68
+  PASS  [x] (c3) the medical category pays its template Health at home: 20  -- 20000
+  PASS  [x] (d) module active on the 1.1.0 shape  -- active ['[CommunityFixPack] WildfireCureVisit: applied']
+  PASS  [x] (e) THE REPAIR: Medical Center at full coverage, cured on the first sol  -- cured sol 1, lowest Health 88
+  PASS  [x] (e2) Infirmary: cured on the first sol  -- 1
+  PASS  [x] (e3) no medical building anywhere: no visit, no throw, not cured  -- False 0
+  FAIL  [x] (f) cure not yet found: an infected colonist keeps vanilla's interest  -- interestSocial vs interestDrinking
+  FAIL  [x] (g) cure found, colonist NOT infected: vanilla's interest  -- interestSocial
+  FAIL  [x] (g2) a unit with no traits table: vanilla's interest, no throw
+  FAIL  [x] (h) the wrapper draws exactly what vanilla draws from the colonist's random stream  -- 0 vs 1
+  PASS  [x] (h2) infected with the cure found: needMedical
+  PASS  [x] (i) 1.0.7 shape (no at-home payment): declines with that reason, PickInterest untouched, not update_suspect  -- inactive ['[CommunityFixPack] WildfireCureVisit: inactive (no at-home service payment (AccumulateCategoryServiceStats): the colonists this fix is for still reach a medical building on their own on this game version)']
+  PASS  [x] (j) an at-home payment that pays no Health: probe declines, untouched
+  PASS  [x] (k) no MedicalBuilding:Service (the cure moved): declines, untouched
+  PASS  [x] (l) veto: disabled, PickInterest untouched
+  PASS  [x] (m) a module no longer active passes through
+  -> CAUGHT [vanilla body not called]: expected FAIL ['(h)', '(f)'], got FAIL ['(f)', '(g)', '(g2)', '(h)']
+==============================================================================
+variant: no traits type guard
+==============================================================================
+lua: Lua 5.5 | lupa 2.8
+
+  PASS  [x] (a) 1.0.7 contract: +5 rest vs -12 Infected reaches 70 and is cured within 6 sols  -- cured sol 4, lowest Health 67
+  PASS  [x] (a2) 1.1.0 dropped the rest recovery: DailyHealthRecover = 0
+  PASS  [x] (b) 1.1.0 Infirmary (+10) at full coverage: drifts down and is cured, slowly  -- cured sol 11, lowest Health 68
+  PASS  [x] (c) THE DEFECT: 1.1.0 Medical Center (+20) at full coverage, no DLC content: never below 70, never visits, never cured in 60 sols  -- cured False, lowest Health 88, visits 0
+  PASS  [x] (c2) Medical Center covering half the dome pays +10: cured, slowly  -- cured sol 11, lowest Health 68
+  PASS  [x] (c3) the medical category pays its template Health at home: 20  -- 20000
+  PASS  [x] (d) module active on the 1.1.0 shape  -- active ['[CommunityFixPack] WildfireCureVisit: applied']
+  PASS  [x] (e) THE REPAIR: Medical Center at full coverage, cured on the first sol  -- cured sol 1, lowest Health 88
+  PASS  [x] (e2) Infirmary: cured on the first sol  -- 1
+  PASS  [x] (e3) no medical building anywhere: no visit, no throw, not cured  -- False 0
+  PASS  [x] (f) cure not yet found: an infected colonist keeps vanilla's interest  -- interestDrinking vs interestDrinking
+  PASS  [x] (g) cure found, colonist NOT infected: vanilla's interest  -- interestDrinking
+  FAIL  [x] (g2) a unit with no traits table: vanilla's interest, no throw
+  PASS  [x] (h) the wrapper draws exactly what vanilla draws from the colonist's random stream  -- 1 vs 1
+  PASS  [x] (h2) infected with the cure found: needMedical
+  PASS  [x] (i) 1.0.7 shape (no at-home payment): declines with that reason, PickInterest untouched, not update_suspect  -- inactive ['[CommunityFixPack] WildfireCureVisit: inactive (no at-home service payment (AccumulateCategoryServiceStats): the colonists this fix is for still reach a medical building on their own on this game version)']
+  PASS  [x] (j) an at-home payment that pays no Health: probe declines, untouched
+  PASS  [x] (k) no MedicalBuilding:Service (the cure moved): declines, untouched
+  PASS  [x] (l) veto: disabled, PickInterest untouched
+  PASS  [x] (m) a module no longer active passes through
+  -> CAUGHT [no traits type guard]: expected FAIL ['(g2)'], got FAIL ['(g2)']
+==============================================================================
+variant: no active gate
+==============================================================================
+lua: Lua 5.5 | lupa 2.8
+
+  PASS  [x] (a) 1.0.7 contract: +5 rest vs -12 Infected reaches 70 and is cured within 6 sols  -- cured sol 4, lowest Health 67
+  PASS  [x] (a2) 1.1.0 dropped the rest recovery: DailyHealthRecover = 0
+  PASS  [x] (b) 1.1.0 Infirmary (+10) at full coverage: drifts down and is cured, slowly  -- cured sol 11, lowest Health 68
+  PASS  [x] (c) THE DEFECT: 1.1.0 Medical Center (+20) at full coverage, no DLC content: never below 70, never visits, never cured in 60 sols  -- cured False, lowest Health 88, visits 0
+  PASS  [x] (c2) Medical Center covering half the dome pays +10: cured, slowly  -- cured sol 11, lowest Health 68
+  PASS  [x] (c3) the medical category pays its template Health at home: 20  -- 20000
+  PASS  [x] (d) module active on the 1.1.0 shape  -- active ['[CommunityFixPack] WildfireCureVisit: applied']
+  PASS  [x] (e) THE REPAIR: Medical Center at full coverage, cured on the first sol  -- cured sol 1, lowest Health 88
+  PASS  [x] (e2) Infirmary: cured on the first sol  -- 1
+  PASS  [x] (e3) no medical building anywhere: no visit, no throw, not cured  -- False 0
+  PASS  [x] (f) cure not yet found: an infected colonist keeps vanilla's interest  -- interestDrinking vs interestDrinking
+  PASS  [x] (g) cure found, colonist NOT infected: vanilla's interest  -- interestDrinking
+  PASS  [x] (g2) a unit with no traits table: vanilla's interest, no throw
+  PASS  [x] (h) the wrapper draws exactly what vanilla draws from the colonist's random stream  -- 1 vs 1
+  PASS  [x] (h2) infected with the cure found: needMedical
+  PASS  [x] (i) 1.0.7 shape (no at-home payment): declines with that reason, PickInterest untouched, not update_suspect  -- inactive ['[CommunityFixPack] WildfireCureVisit: inactive (no at-home service payment (AccumulateCategoryServiceStats): the colonists this fix is for still reach a medical building on their own on this game version)']
+  PASS  [x] (j) an at-home payment that pays no Health: probe declines, untouched
+  PASS  [x] (k) no MedicalBuilding:Service (the cure moved): declines, untouched
+  PASS  [x] (l) veto: disabled, PickInterest untouched
+  FAIL  [x] (m) a module no longer active passes through
+  -> CAUGHT [no active gate]: expected FAIL ['(m)'], got FAIL ['(m)']
+==============================================================================
+variant: no branch test
+==============================================================================
+lua: Lua 5.5 | lupa 2.8
+
+  PASS  [x] (a) 1.0.7 contract: +5 rest vs -12 Infected reaches 70 and is cured within 6 sols  -- cured sol 4, lowest Health 67
+  PASS  [x] (a2) 1.1.0 dropped the rest recovery: DailyHealthRecover = 0
+  PASS  [x] (b) 1.1.0 Infirmary (+10) at full coverage: drifts down and is cured, slowly  -- cured sol 11, lowest Health 68
+  PASS  [x] (c) THE DEFECT: 1.1.0 Medical Center (+20) at full coverage, no DLC content: never below 70, never visits, never cured in 60 sols  -- cured False, lowest Health 88, visits 0
+  PASS  [x] (c2) Medical Center covering half the dome pays +10: cured, slowly  -- cured sol 11, lowest Health 68
+  PASS  [x] (c3) the medical category pays its template Health at home: 20  -- 20000
+  PASS  [x] (d) module active on the 1.1.0 shape  -- active ['[CommunityFixPack] WildfireCureVisit: applied']
+  PASS  [x] (e) THE REPAIR: Medical Center at full coverage, cured on the first sol  -- cured sol 1, lowest Health 88
+  PASS  [x] (e2) Infirmary: cured on the first sol  -- 1
+  PASS  [x] (e3) no medical building anywhere: no visit, no throw, not cured  -- False 0
+  PASS  [x] (f) cure not yet found: an infected colonist keeps vanilla's interest  -- interestDrinking vs interestDrinking
+  PASS  [x] (g) cure found, colonist NOT infected: vanilla's interest  -- interestDrinking
+  PASS  [x] (g2) a unit with no traits table: vanilla's interest, no throw
+  PASS  [x] (h) the wrapper draws exactly what vanilla draws from the colonist's random stream  -- 1 vs 1
+  PASS  [x] (h2) infected with the cure found: needMedical
+  FAIL  [x] (i) 1.0.7 shape (no at-home payment): declines with that reason, PickInterest untouched, not update_suspect  -- inactive ["[CommunityFixPack] WildfireCureVisit: behaviour probe declined (threw: Code/Fix_WildfireCureVisit.lua:91: attempt to call a nil value (global 'AccumulateCategoryServiceStats'))", "[CommunityFixPack] WildfireCureVisit: inactive (the at-home service payment does not pay a category's Health the way this fix expects (behaviour probe declined))"]
+  PASS  [x] (j) an at-home payment that pays no Health: probe declines, untouched
+  PASS  [x] (k) no MedicalBuilding:Service (the cure moved): declines, untouched
+  PASS  [x] (l) veto: disabled, PickInterest untouched
+  PASS  [x] (m) a module no longer active passes through
+  -> CAUGHT [no branch test]: expected FAIL ['(i)'], got FAIL ['(i)']
+==============================================================================
+variant: no behaviour probe
+==============================================================================
+lua: Lua 5.5 | lupa 2.8
+
+  PASS  [x] (a) 1.0.7 contract: +5 rest vs -12 Infected reaches 70 and is cured within 6 sols  -- cured sol 4, lowest Health 67
+  PASS  [x] (a2) 1.1.0 dropped the rest recovery: DailyHealthRecover = 0
+  PASS  [x] (b) 1.1.0 Infirmary (+10) at full coverage: drifts down and is cured, slowly  -- cured sol 11, lowest Health 68
+  PASS  [x] (c) THE DEFECT: 1.1.0 Medical Center (+20) at full coverage, no DLC content: never below 70, never visits, never cured in 60 sols  -- cured False, lowest Health 88, visits 0
+  PASS  [x] (c2) Medical Center covering half the dome pays +10: cured, slowly  -- cured sol 11, lowest Health 68
+  PASS  [x] (c3) the medical category pays its template Health at home: 20  -- 20000
+  PASS  [x] (d) module active on the 1.1.0 shape  -- active ['[CommunityFixPack] WildfireCureVisit: applied']
+  PASS  [x] (e) THE REPAIR: Medical Center at full coverage, cured on the first sol  -- cured sol 1, lowest Health 88
+  PASS  [x] (e2) Infirmary: cured on the first sol  -- 1
+  PASS  [x] (e3) no medical building anywhere: no visit, no throw, not cured  -- False 0
+  PASS  [x] (f) cure not yet found: an infected colonist keeps vanilla's interest  -- interestDrinking vs interestDrinking
+  PASS  [x] (g) cure found, colonist NOT infected: vanilla's interest  -- interestDrinking
+  PASS  [x] (g2) a unit with no traits table: vanilla's interest, no throw
+  PASS  [x] (h) the wrapper draws exactly what vanilla draws from the colonist's random stream  -- 1 vs 1
+  PASS  [x] (h2) infected with the cure found: needMedical
+  PASS  [x] (i) 1.0.7 shape (no at-home payment): declines with that reason, PickInterest untouched, not update_suspect  -- inactive ['[CommunityFixPack] WildfireCureVisit: inactive (no at-home service payment (AccumulateCategoryServiceStats): the colonists this fix is for still reach a medical building on their own on this game version)']
+  FAIL  [x] (j) an at-home payment that pays no Health: probe declines, untouched
+  PASS  [x] (k) no MedicalBuilding:Service (the cure moved): declines, untouched
+  PASS  [x] (l) veto: disabled, PickInterest untouched
+  PASS  [x] (m) a module no longer active passes through
+  -> CAUGHT [no behaviour probe]: expected FAIL ['(j)'], got FAIL ['(j)']
+
+UNFIXED: fails the repair demand
+FALSIFICATION: every variant caught
+
+##############################################################################
+# desk_c111_rescue_text.py
+##############################################################################
+MODULE working-tree
+PASS shipped own-home command uses new-Dome ID 4333
+PASS shipped class default resolves missing instance emigration_dome to false
+PASS shipped relocation names the destination
+PASS module applies against shipped command
+OBS inherited_false_tid=None explicit_false_tid=None synthetic_nil_returning=True
+PASS own-home ride says returning with native destination hyperlink
+PASS explicit false, synthetic nil and home-valued rescue all say returning
+PASS dreaming keeps the native non-4333 result
+PASS own-home hyperlink names and selects home
+PASS real relocation retains its destination text and link
+PASS walk, stale emigration and non-rescue tasks remain native
+PASS reloaded live task still shows returning
+
+##############################################################################
+# desk_c114_hub_access.py
+##############################################################################
+==============================================================================
+C114 hub local access -- archived 1.1.1.405907
+==============================================================================
+lua: Lua 5.5 | lupa 2.8
+
+  PASS  module registered and applied
+  PASS  changed hub shape declines without wrapper
+  PASS  changed network shape declines without wrapper
+  PASS  module removed: large-dome in-flight access
+  PASS  module removed: standing on hub
+  PASS  module removed: dumped on hub retains access
+  PASS  module removed: small dome native true retained
+  PASS  module removed: natural Idle rescue booking follows access
+  PASS  fix on: large-dome in-flight access
+  PASS  fix on: standing on hub
+  PASS  fix on: dumped on hub retains access
+  PASS  fix on: small dome native true retained
+  PASS  fix on: natural Idle rescue booking follows access
+  PASS  fix on: connected draining passage still grants access
+  PASS  fix on: unrelated destination remains denied
+  PASS  fix on: stale holder off hub remains denied
+  PASS  fix on: stale marker off hub remains denied
+  PASS  fix on: cut passage remains denied
+  PASS  fix on: stale flight flag without list membership remains denied
+  PASS  fix on: removed last dome connection remains denied
+  PASS  fix on: home-relative query remains denied
+  PASS  fix on: outdoor workplace remains denied
+  PASS  fix on: cross-map destination denied
+  PASS  native service policy still refuses a full service after access grant
+  PASS  unrelated station destination leaves train-search gate open
+
+==============================================================================
+25 of 25 demands held
+ALL DEMANDS HELD
+
+##############################################################################
+# desk_c114_sitting_findings.py
+##############################################################################
+holderless marked hub, reporter distance 24: distance=24 native=False fixed=True
+holderless marked hub, reporter distance 25: distance=25 native=False fixed=True
+holderless marked hub, reporter distance 28: distance=28 native=False fixed=True
+07 standing hub distance 29: distance=29 native=False fixed=True
+unmarked on-hub control: distance=29 native=False fixed=False
+removed connection control: distance=29 native=False fixed=False
+nearby connected community: build=native access=True
+nearby connected community: build=fixed access=True
+C114 SITTING DESK CHECK HELD
+
+##############################################################################
+# desk_c115_home_rescue.py
+##############################################################################
+C115 predictions: obsolete=0 walks; native controls=1; absent=1
+PASS obsolete fixed walks 0
+PASS remote fixed walks 1
+PASS committed fixed walks 1
+PASS multi_leg fixed walks 1
+PASS relocation fixed walks 1
+PASS expedition fixed walks 1
+PASS holder fixed walks 1
+PASS bad_state fixed walks 1
+PASS invalid_home fixed walks 1
+PASS cancellation fixed walks 1
+PASS obsolete module absent walks 1
+PASS fixed demand fails with module absent
+
+##############################################################################
+# desk_c116_hub_marker.py
+##############################################################################
+PASS walk-off clears marker and starts timer
+PASS module-removed walk remains marked
+PASS real traversal ramp keeps shelter
+PASS visual still on hub keeps shelter
+PASS next step after visual departure clears
+PASS stale holder removed and outside starts
+PASS indoor stale holder removed without exposure
+PASS standing on hub keeps marker
+PASS interrupted walk StopMoving fallback
+PASS holder transition after departure
+PASS changed marker shape declines without wrapper
+
+##############################################################################
+# desk_c117_hub_salvage.py
+##############################################################################
+==============================================================================
+C117 busy hub-spoke salvage drain -- archived 1.1.1.405907
+==============================================================================
+lua: Lua 5.5 | lupa 2.8
+
+extracted shipped bodies:
+  Lua/Passage.lua:1119-1124  /^function PassageBase:GetConnectedHub\(/
+  Lua/Passage.lua:1126-1129  /^function PassageBase:IsPFTunnelActive\(/
+  Lua/Passage.lua:1131-1152  /^function PassageBase:WouldStrandHubColonists\(/
+  Lua/Passage.lua:1154-1161  /^function PassageBase:ClearHubDraining\(/
+  Lua/Passage.lua:1093-1111  /^function PassageBase:OnSetDemolishing\(/
+  Lua/Passage.lua:1113-1115  /^function PassageBase:WakeUpDemolishThread\(/
+  Lua/Passage.lua:1163-1185  /^function PassageBase:OnDemolish\(/
+  Lua/Passage.lua:1201-1248  /^function PassageBase:TraverseTunnel\(/
+  Lua/Passage.lua:1388-1405  /^function PassageBase:DisconnectDomes\(/
+  Lua/Passage.lua:1435-1444  /^function PassageBase:DisconnectDomeFromHub\(/
+  Lua/Passage.lua:1742-1751  /^function PassageBase:RemovePFTunnel\(/
+  Lua/Passage.lua:686-712  /^function PassageGridElement:RemovePFTunnel\(/
+  Lua/Units/Unit.lua:238-246  /^function Unit:TraverseTunnel\(/
+  PASS  module applies through its real Require probe
+  PASS  busy spoke with a live sibling waits for its in-flight colonist  -- waits=1, remaining=0
+  PASS  in-flight colonist arrives on the hub before disconnect  -- holder/marker are hub; native disconnect removes the PF endpoint after arrival
+  PASS  fix-removed control takes the native outside branch after the same disconnect  -- waits=1, on_hub=False
+  PASS  last exit retains native pre-disconnect wait with the module installed  -- native/fixed waits=1/1
+  PASS  fresh entrant on a draining spoke with a usable sibling is refused
+  PASS  refused entry uses native Unit:TraverseTunnel ClearPath contract  -- ClearPath=1, AdvancePathTunnel=0
+  PASS  with no safe sibling, fresh last-exit traffic tail-delegates to native traversal
+  PASS  a simultaneous draining sibling is not treated as a safe exit (C99 remains native)
+  PASS  native cancellation clears hub_draining and the hub drain registration
+  PASS  a fresh entrant after cancellation is no longer refused
+  PASS  fresh-runtime reload reconstructs the drain solely from native fields
+  PASS  module declares no save handler or persisted game variable
+  PASS  an invalid leftover traverser alone does not hold the pre-disconnect wait  -- stale_only=False
+  PASS  a live traverser beside an invalid entry still holds the wait  -- stale_and_live=True
+  PASS  old-shape control: the played unfiltered count held the wait on the invalid entry alone  -- old stale_only=True
+  PASS  native control: the sibling shortcut disconnects regardless of the stale entry
+  PASS  missing PassageBase:TraverseTunnel shape declines before wrapper install
+  PASS  behaviour-probe control declines when the sibling shortcut no longer returns false
+  PASS  accepted PassageBase traversal preserves all chained returns, including nil
+  PASS  first IsKindOf gate passes a foreign receiver through with chained returns intact
+
+==============================================================================
+21 of 21 demands held
+ALL DEMANDS HELD -- C117's drain decisions discriminate from the native race.
+
+##############################################################################
+# desk_c74_hit_moment_fx.py
+##############################################################################
+==============================================================================
+C74/C77 silent hit-moment FX -- shipped bodies + whole module
+==============================================================================
+lua: Lua 5.5 | lupa 2.8
+
+  PASS  [L0] shipped lookup finds the name but misses its numeric index  -- name/index=1/0
+extracted CommonLua/Classes/AnimMoment.lua:5-37
+extracted CommonLua/Classes/AnimMoment.lua:329-331
+extracted Lua/Buildings/BaseBuilding.lua:856-858
+extracted Lua/Buildings/BaseBuilding.lua:1037-1079
+extracted Lua/Buildings/Building.lua:3367-3430
+  PASS  [setup] current shipped lookup shape applies the module
+  PASS  [L1] conversion resolves the two owned attach classes and leaves a foreign object inert  -- owned/foreign=2/0
+  PASS  [L3] existing group/id wins; first pass adds ten and second adds zero  -- added=10/0, kept=True
+  PASS  [L4] Excavator has 24 sorted moments and each Hit/Out type exactly once  -- count=24
+  PASS  [L5] old-save pass replaces exactly four apparently-live vanilla trackers  -- TrackAll/Multi=2/2, replaced=True
+  PASS  [L6] each load pass replaces rather than adds, leaving one live tracker per unit  -- after second=4/4, replaced=True, live=True
+  PASS  [L7] Water update deletes/replaces one early tracker; foreign object passes through  -- TrackAll=5, foreign=1
+  PASS  [L2] resolved future lookup makes the conversion guard decline cleanly  -- ; kept=True
+  PASS  [L8] archived 1.0.7 bodies expose the same defect and take the shared repair  -- status=active, moments=2
+
+==============================================================================
+10 of 10 demands held
+ALL DEMANDS HELD -- current defect, future decline, preset guards, load repair and Water replacement discriminate.
+
+##############################################################################
+# desk_c83_arrivals.py
+##############################################################################
+==============================================================================
+C83 arrivals -- welcoming fallback and composition control
+==============================================================================
+lua: Lua 5.5 | lupa 2.8
+
+extracted Lua/_GameUtils.lua:382-501 (120 lines)
+  PASS  control: without apply, the dead assignment survives (the harness cannot pass by vanilla alone)
+
+== A/B: reachable dead assignment, welcoming target with and without housing ==
+  PASS  A: dead reachable dome -> welcoming dome with space
+  PASS  log: first C83 reroute names the colonist and both domes once per session
+  PASS  B: full welcoming dome is still the fallback (arrival becomes homeless there)
+
+== stand-down controls ==
+  PASS  C: no welcoming dome -> preserve vanilla's assignment
+  PASS  D: welcoming assigned dome is untouched and never asks the F117 probe
+  PASS  F: unknown ChooseDome argument shape -> stand down
+
+== F53 regression and station-order falsifier ==
+  PASS  E: F53 not-reachable branch still re-picks with no safety fallback
+  PASS  G: station-sweep dome appended after sort wins by minimum dome_dist, not list order
+
+== D03 composition and elevator pairing ==
+  PASS  D03: non-tourist fallback cannot bypass a closed dome's CanAcceptNewColonists veto
+  PASS  D03: tourists retain the opt-in module's documented closed-dome exemption
+  PASS  pairing: a rerouted elevator dome keeps its matching emigration_elevator
+
+==============================================================================
+12 of 12 demands held
+ALL C83 DEMANDS HELD -- negative control discriminates; all seven prompt cases, D03 composition, one-shot logging and elevator pairing pass.
+
+##############################################################################
+# desk_c85_clogged.py
+##############################################################################
+==============================================================================
+C85 clogged release -- shipped Setexceptional_circumstances and module
+==============================================================================
+lua: Lua 5.5 | lupa 2.8
+
+extracted Lua/Buildings/BaseBuilding.lua:470-480 (11 lines)
+  PASS  the behaviour probe accepts the shipped setter
+  PASS  a setter that no longer clears the fields declines the module fail-closed
+  PASS  (a) a building stuck with the clogged reason is released
+  PASS  (a2) the sweep enumerates BaseBuilding, the devs' own reconcile class
+  PASS  (a3) the release is logged so the owner can read it back
+  PASS  (b) a building whose BuildingClogged is still running is untouched
+  PASS  (b2) ... while a different stuck building in the same pass IS released
+  PASS  (c) a building with the fix-after-storm follow-up armed is untouched
+  PASS  (c2) ... and an unrelated stuck building is still released
+  PASS  (c3) a follow-up armed with NO object stands the sweep down (fail closed)
+  PASS  (d) a law-disabled building (different reason id) is untouched
+  PASS  (d2) the drones reply's end state is untouched (ec already false)
+  PASS  (d3) a building disabled with no reason at all is untouched
+  PASS  (e) a queued or open story-bit popup stands the whole pass down
+  PASS  (e2) a non-story-bit popup does NOT stand the sweep down
+  PASS  (e3) the exposed predicate itself refuses while a story-bit popup is pending
+  PASS  (f) no NewDay handler; live timed state remains vanilla-owned
+  PASS  (g) current positive Duration does not block legacy repair; idempotent
+  PASS  (g2) current/future/unknown save provenance untouched: nil
+  PASS  (g2) current/future/unknown save provenance untouched: {}
+  PASS  (g2) current/future/unknown save provenance untouched: {lua_revision='403908'}
+  PASS  (g2) current/future/unknown save provenance untouched: {lua_revision=0}
+  PASS  (g2) current/future/unknown save provenance untouched: {lua_revision=405907}
+  PASS  (g2) current/future/unknown save provenance untouched: {lua_revision=999999}
+  PASS  (g3) native Duration thread remains responsible after a current-save load
+  PASS  (g4) native timer itself eventually releases the building
+  PASS  (g5) pre-fix pack reproduces F121 on the same positive-Duration fixture
+  PASS  (h) a coexisting maintenance state is released but keeps its reason field (shipped :474 -- vanilla's own behaviour for this call)
+  PASS  (i) NEGATIVE -- a module registered but never applied releases nothing
+  PASS  (j) NEGATIVE -- a mid-session veto stops the sweep (FIX_POLICY §2, A1)
+  PASS  (k) actual TestKit probe measures predicates independent of ambient popup  -- the stuck end state (exceptional_circumstances + reason 789863173059) is eligible on a legacy load, and all five refusals hold: story bit running, follow-up armed, story-bit popup pending, a different reason id, not disabled. ⛔ predicate only — no building was clogged or released by this probe, and nothing here proves a storm produces the state or a saved timer resumes
+  PASS  (k2) TestKit restores the live popup table
+
+==============================================================================
+32 of 32 demands held
+Legacy-only release held; current saved timers, live events, unrelated reasons and event interlocks remain vanilla-owned. SOURCE=1.1.1.405907
+
+##############################################################################
+# desk_c86_scan_downgrade.py
+##############################################################################
+==============================================================================
+C86 scan downgrade -- shipped MapSector:Scan and module
+==============================================================================
+lua: Lua 5.5 | lupa 2.8
+
+extracted Lua/Exploration.lua:229-286 (58 lines)
+  PASS  vanilla reproduces deep scanned -> scanned
+  PASS  module shape guard accepts the shipped status schema
+  PASS  module preserves an already deep-scanned MapSector
+  PASS  unexplored -> scanned is unchanged
+  PASS  scanned -> deep scanned is unchanged
+  PASS  foreign sector subclasses delegate unchanged
+  PASS  shape drift declines the module fail-closed
+
+==============================================================================
+7 of 7 demands held
+ALL DEMANDS HELD -- vanilla downgrades; the module blocks only the known downward transition on exact shipped sectors.
+
+##############################################################################
+# desk_c88_prefab.py
+##############################################################################
+==============================================================================
+C88 historical 1.1.0 / 16ff1aa Building Codes controls
+==============================================================================
+lua: Lua 5.5 | lupa 2.8
+
+extracted Data/LawDef/LawDef-Efficiency.lua          Policy_BuildingCodesLax      Handler at :699  maintenance_change=+50
+extracted Data/LawDef/LawDef-Efficiency.lua          Policy_BuildingCodesStrict   Handler at :907  maintenance_change=-30
+
+
+  PASS  the module applies and the behaviour probe accepts the shipped handlers
+  PASS  (a) THE DEFECT REPRODUCED -- with the law ACTIVE, the shipped handler applies no maintenance modifier to a prefab building
+  PASS  (a2) ... while the SAME handler does apply it to a normally-built one (so the fixture is not vacuous)  -- [{'id': 'Policy_BuildingCodesStrict', 'percent': -30, 'amount': 0}]
+  PASS  (b) the module applies exactly one modifier to a prefab building, under the LAW'S OWN id, with the shipped -30  -- [{'id': 'Policy_BuildingCodesStrict', 'percent': -30, 'amount': 0}]
+  PASS  (b2) Lax too, with its shipped +50 -- both laws, as the owner ruled (option 1), and neither value hard-coded  -- [{'id': 'Policy_BuildingCodesLax', 'percent': 50, 'amount': 0}]
+  PASS  (c) a normally-built building gets exactly ONE modifier (vanilla's) -- our handler adds nothing and cannot double it  -- [{'id': 'Policy_BuildingCodesStrict', 'percent': -30, 'amount': 0}]
+  PASS  (c2) ... and it took exactly one modifier write on that building  -- 1
+  PASS  (c3) ... and SetModifier was CALLED exactly once -- our handler returned at the prefab gate and never touched a normally-built building. ⚠️ The end state alone cannot show this: a second call with identical amounts no-ops inside the shipped body, so the call count is what holds the claim  -- 1
+  PASS  (d) with NO Building Codes law active, a prefab gets no modifier
+  PASS  (e) a building that is not RequiresMaintenance gets no modifier
+  PASS  (e2) an invalid building is skipped before anything is read
+  PASS  (f) simulated post-patch vanilla: the module STANDS ITSELF DOWN -- the discriminator is that ActiveLaws carries no law table with no game loaded, so their repaired handler throws; no version check anywhere  -- the Building Codes handlers no longer skip prefab buildings (C88 repaired by the game?)
+  PASS  (f1b) ... and it says RETIRE candidate in the log, for logscan  -- ['BuildingCodesPrefab: inactive (the Building Codes handlers no longer skip prefab buildings (C88 repaired by the game?) — already correct, RETIRE candidate)']
+  PASS  (f2) ... and a prefab still gets EXACTLY ONE modifier with the right value, applied by THEIR repaired handler alone  -- [{'id': 'Policy_BuildingCodesStrict', 'percent': -30, 'amount': 0}]
+  PASS  (f3) ... in exactly one modifier write -- no churn  -- 1
+  PASS  (f4) ⭐ BOTH handlers running -- theirs and ours -- still yields ONE modifier and ONE write, because the LAW'S id makes the second call a no-op in vanilla's own SetModifier (Lua/Modifiers.lua:181-204)  -- ([{'id': 'Policy_BuildingCodesStrict', 'percent': -30, 'amount': 0}], 1)
+  PASS  (g) NEGATIVE -- a module registered but never applied leaves the prefab with no modifier (the defect stands)
+  PASS  (g2) NEGATIVE -- a mid-session veto stops the handler (FIX_POLICY §2, A1)
+  PASS  (h) with a game already loaded the probe CANNOT discriminate, so the module stays UNDECIDED rather than banking a verdict either way
+  PASS  (h2) ... and while undecided it applies NOTHING -- an undecided guard is not permission (fail closed)
+  PASS  (j) Report() on a repaired prefab prints the law's modifier and its percent  -- BuildingCodesPrefab: Building Codes applied to a prefab-deployed nil | C88-AB building=nil guard=true active_law=Policy_BuildingCodesStrict maintenance=100 | C88-AB   mod
+  PASS  (j2) Report() on a prefab with NO modifier says C88 reproduces -- the owner cannot bank a false PASS  -- C88-AB building=nil guard=true active_law=Policy_BuildingCodesStrict maintenance=100 | C88-AB   NO Building Codes modifier on this building -- on a PREFAB-deployed one th
+  PASS  (h3) the module loaded with an EMPTY LawDefs (the cold-boot order) and was still armed once the presets arrived -- the F75 trap
+  PASS  (i) the 1.0.7 tree has no Building Codes Lax/Strict handler at all, so there is nothing for this module to find (1.0.7 had only the old cost-only law, now Obsolete)  -- Data/LawDef/LawDef-Efficiency.lua -> 0 id lines for Policy_BuildingCodesLax
+
+==============================================================================
+24 of 24 demands held
+ALL DEMANDS HELD -- the shipped handler applies nothing to a prefab while applying -30 to the same building built normally; the module supplies it for both laws at their shipped values, under the law's own id, and adds nothing to a normal build, an inactive law, a non-maintenance building or an invalid one; and once vanilla's exit is gone the module declines while a prefab still ends up with exactly one modifier.
+
+##############################################################################
+# desk_c89_faction_gate.py
+##############################################################################
+==============================================================================
+C89 faction dome-size gate -- shipped DomeFilter evals and module
+==============================================================================
+lua: Lua 5.5 | lupa 2.8
+
+extracted Data/FactionDef/JusticeMovement.lua      JusticeUnemployment      at :103
+extracted Data/FactionDef/JusticeMovement.lua      JusticeHomeless          at :128
+extracted Data/FactionDef/ProsperityForMars.lua    ProsperityUnemployment   at :224
+extracted Data/FactionDef/MarsDemocraticParty.lua  UtopiaUnemployment       at :87
+extracted Data/FactionDef/MarsDemocraticParty.lua  UtopiaHomeless           at :106
+extracted Data/FactionDef/WorkersParty.lua         CollectiveUnemployment   at :113
+extracted Data/FactionDef/WorkersParty.lua         CollectiveHomeless       at :132
+extracted Data/FactionDef/NewSol.lua               NewSolUnemployment       at :46
+extracted Data/FactionDef/NewSol.lua               NewSolHomeless           at :65
+
+  PASS  the module applies and the pass runs clean
+  PASS  (a) THE DEFECT REPRODUCED -- all seven shipped evals fire on a dome of 3 with 1 idle/homeless colonist
+  PASS  (a2) after the patch all seven refuse that dome
+  PASS  (b) a dome of 10 with 1 idle/homeless: shipped evals fire
+  PASS  (b2) ... and the patched evals still fire -- the gate changes nothing at ten or above
+  PASS  (c) a dome of 30 with 2 idle/homeless (under 10%): both refuse
+  PASS  (d) CONTROL -- both Justice evals are the SAME function object after the pass (not wrapped, not replaced)
+  PASS  (d2) ... and Justice already refused the small dome, which is the whole precedent
+  PASS  (e) exactly the seven target likes were patched, and no other  -- ['CollectiveHomeless', 'CollectiveUnemployment', 'NewSolHomeless', 'NewSolUnemployment', 'ProsperityUnemployment', 'UtopiaHomeless', 'UtopiaUnemployment']
+  PASS  (e2) the module logged the count and the threshold it read from Justice  -- ['FactionDomeSizeGate: 7 faction dislike(s) now wait for 10 colonists in a dome']
+  PASS  (f) a like the developers have ALREADY gated is skipped, not double-gated
+  PASS  (f2) ... while the five still-unguarded ones ARE patched, and the log names the skipped ones  -- ['FactionDomeSizeGate: 5 faction dislike(s) now wait for 10 colonists in a dome (2 already gated: NewSolUnemployment, UtopiaHomeless)']
+  PASS  (f3) a fully post-patch vanilla latches the module inactive as benign (the RETIRE signal), and patches nothing  -- every faction dislike already waits for 10 colonists in a dome
+  PASS  (g) a second pass (DataChanged re-fire) double-gates nothing and does not latch
+  PASS  (h) one missing like ⇒ NOTHING is patched and the module latches (a partial application would leave the five factions inconsistent)  -- 6 of 7 gated faction dislikes found
+  PASS  (h2) a like whose DomeFilter.eval is not a function ⇒ nothing patched, module latches
+  PASS  (i) Justice WITHOUT its own gate ⇒ the module declines and patches nothing -- the precedent this judgment call copies must be present  -- JusticeUnemployment on JusticeMovement carries no dome-size gate
+  PASS  (j) the 1.0.7 tree: the module DECLINES on every run -- the duplicate unguarded `JusticeHomeless` is caught deterministically, with no version check  -- {'JusticeHomeless on MarsDemocraticParty carries no dome-size gate'}
+  PASS  (j2) ... and the 1.0.7 expressions themselves are the same defect (the branch differs by ID, not by expression)
+  PASS  (k) NEGATIVE -- a module registered but never applied patches nothing
+  PASS  (k2) NEGATIVE -- a module whose self-check DECLINED patches nothing, even though DataPatch's runner still fires its pass  -- FactionLikeDomes.CountDome not found
+  PASS  (m) Report() on a dome of 3 says GATE ACTIVE and shows shipped=true vs live=false on all seven rows  -- C89-AB dome=nil colonists=3 unemployed=1 homeless=1 threshold=10 | C89-AB   CollectiveHomeless       shipped=true live=false | C89-AB   NewSolHomeless           shipped=true live=false | C89-AB   Coll
+  PASS  (m2) Report() on a dome of 10 shows no difference -- the gate is a gate, not a blanket suppression  -- C89-AB dome=nil colonists=10 unemployed=1 homeless=1 threshold=10 | C89-AB   CollectiveHomeless       shipped=true live=true | C89-AB   NewSolHomeless          
+  PASS  (m3) Report() with the fix NOT applied says shipped=not-wrapped and does NOT claim the gate is active -- the owner cannot bank a false PASS  -- C89-AB dome=nil colonists=3 unemployed=1 homeless=1 threshold=false | C89-AB   CollectiveHomeless       shipped=not-wrapped live=true | C89-AB   NewSolHomeless           shipped=not-wrapped live=true 
+  PASS  (m4) Report() on a non-dome says so instead of printing numbers  -- C89-AB: select a DOME first (no labels.Colonist on NotADome)
+  PASS  (l) a missing like BEFORE DataLoaded does NOT latch (absence proves nothing yet -- the F75 lesson)
+
+==============================================================================
+26 of 26 demands held
+ALL DEMANDS HELD -- the seven shipped evals fire on a dome of three with one idle colonist and stop after the patch; a dome of ten is unchanged; Justice is the same function object throughout; the module reads its threshold from Justice's own behaviour, skips a like already gated, latches benign when all seven are, and patches nothing at all if any part of the shape is missing.
+
+##############################################################################
+# desk_c90_datapatch.py
+##############################################################################
+==============================================================================
+C90 actual core: decline, ordered writes, and healing of status
+==============================================================================
+lua: Lua 5.5 | lupa 2.8
+
+  PASS  1.0.7 Saint intact: exact writes and status  -- active -> active; ['Saint.modify_trait=TraitReligious']
+  PASS  1.0.7 Saint GetTraitLabel: exact writes and status  -- inactive -> inactive; []
+  PASS  1.0.7 Saint TraitPreset.AddDomeColonistsModifier: exact writes and status  -- inactive -> inactive; []
+  PASS  1.0.7 Saint LabelContainer.SetLabelModifier: exact writes and status  -- inactive -> active; ['Saint.modify_trait=TraitReligious']
+  PASS  1.0.7 Saint failed self-check is erased from UpdateSuspects
+  PASS  1.0.7 Saint veto stops the pass
+  PASS  1.1.0 Saint intact: exact writes and status  -- active -> active; []
+  PASS  1.1.0 Saint GetTraitLabel: exact writes and status  -- inactive -> inactive; []
+  PASS  1.1.0 Saint TraitPreset.AddDomeColonistsModifier: exact writes and status  -- inactive -> inactive; []
+  PASS  1.1.0 Saint LabelContainer.SetLabelModifier: exact writes and status  -- inactive -> active; []
+  PASS  1.1.0 Saint failed self-check is erased from UpdateSuspects
+  PASS  1.1.0 Saint arms the save re-base despite decline
+  PASS  1.1.0 Saint veto stops the pass
+  PASS  Sinkhole intact: exact ordered writes and status  -- active -> active; ['class.indestructible=true', 'template.indestructible=true']
+  PASS  Sinkhole class: exact ordered writes and status  -- inactive -> inactive; []
+  PASS  Sinkhole DestroyBuildingImmediate: exact ordered writes and status  -- inactive -> active; ['class.indestructible=true', 'template.indestructible=true']
+  PASS  Sinkhole failed self-check is erased from UpdateSuspects
+  PASS  Sinkhole veto stops the pass
+
+==============================================================================
+18 of 18 demands held
+ALL DEMANDS HELD -- injected target loss, not a field reproduction.
+==============================================================================
+C90 current Saint guards and historical 16ff1aa Sinkhole guards
+==============================================================================
+lua: Lua 5.5 | lupa 2.8
+
+  PASS  1.0.7 live Saint intact: exact writes and status  -- active -> active; ['Saint.modify_trait=TraitReligious']
+  PASS  1.0.7 live Saint GetTraitLabel: exact writes and status  -- inactive -> inactive; []
+  PASS  1.0.7 live Saint TraitPreset.AddDomeColonistsModifier: exact writes and status  -- inactive -> inactive; []
+  PASS  1.0.7 live Saint LabelContainer.SetLabelModifier: exact writes and status  -- inactive -> inactive; []
+  PASS  1.0.7 live Saint preserves failed self-check in UpdateSuspects
+  PASS  1.0.7 live Saint veto stops the pass
+  PASS  1.1.0 live Saint intact: exact writes and status  -- active -> active; []
+  PASS  1.1.0 live Saint GetTraitLabel: exact writes and status  -- inactive -> inactive; []
+  PASS  1.1.0 live Saint TraitPreset.AddDomeColonistsModifier: exact writes and status  -- inactive -> inactive; []
+  PASS  1.1.0 live Saint LabelContainer.SetLabelModifier: exact writes and status  -- inactive -> inactive; []
+  PASS  1.1.0 live Saint preserves failed self-check in UpdateSuspects
+  PASS  1.1.0 live Saint does not arm save re-base after decline
+  PASS  1.1.0 live Saint veto stops the pass
+  PASS  historical Sinkhole intact: exact ordered writes and status  -- active -> active; ['class.indestructible=true', 'template.indestructible=true']
+  PASS  historical Sinkhole class: exact ordered writes and status  -- inactive -> inactive; []
+  PASS  historical Sinkhole DestroyBuildingImmediate: exact ordered writes and status  -- inactive -> inactive; []
+  PASS  historical Sinkhole preserves failed self-check in UpdateSuspects
+  PASS  historical Sinkhole veto stops the pass
+
+==============================================================================
+18 of 18 demands held
+ALL CURRENT-SAINT / HISTORICAL-16ff1aa-SINKHOLE GUARDS HELD -- desk evidence; ships unexercised in play.
+
+##############################################################################
+# desk_c92_achievement.py
+##############################################################################
+REPEATABLE MartianPatents cluster=Society_1 group=Society save_in=
+REPEATABLE GlobalSupport cluster=Breakthroughs group=Breakthroughs save_in=
+REPEATABLE MartianCopyrithgts cluster=Pride group=Society save_in=
+REPEATABLE SolExploration cluster=Mysteries group=Special save_in=
+REPEATABLE MarsMarketing cluster=Breakthroughs group=Breakthroughs save_in=
+COMMAND python tools/desk_c92_achievement.py
+HEAD f65b609d14a05546649672362a06ec8891c97598
+==============================================================================
+C92 achievement hypothesis controls; no fix
+==============================================================================
+lua: Lua 5.5 | lupa 2.8
+
+REGISTRY Data/TechGroup.lua sha256=35e1037377bbfc311182cfcbfe0b3f44f299dcec866b057ba1c578e6738c8e66
+REGISTRY Data/Tech.lua sha256=b1350e9a1779497744758046113624fa0d3bb6578339646ca9000d8dce98adad
+SOURCE 1.1.0.403908 CommonLua/Preset.lua:1802-1815 sha256=d1935dbfd261dfa94bd47faf1a4fb6fd867cc329ab489e6d32b3825bab133bd6
+SOURCE 1.1.0.403908 CommonLua/Libs/Research/Research.lua:161-164 sha256=42be02eddcb3df21691284539cc17abd63412c4dc8e0deb3da6a869d2ff9e7b4
+SOURCE 1.1.0.403908 CommonLua/Libs/Research/Research.lua:46-49 sha256=cb7158cb399c87548e85bcfcc1fe077cd05dd6eaa0c73c62d8fb23b06d430b45
+SOURCE 1.1.0.403908 CommonLua/Libs/Research/Research.lua:51-54 sha256=2b12f5ad9b1d279729ce23aa8c1c51258e6eb17e9eef9e54372212ae75a8321f
+SOURCE 1.1.0.403908 CommonLua/Libs/Research/Research.lua:23-29 sha256=76f1fa31c3c096226487fe26be0007d9d597cef687c7f1fd010b50d765265a9e
+SOURCE 1.1.0.403908 CommonLua/Libs/Research/Research.lua:31-38 sha256=d7dcf0060384a327b6e40e6ab9511e91754986768886e823105ca809a62d195c
+SOURCE 1.1.0.403908 CommonLua/Libs/Research/Research.lua:40-44 sha256=6969fd4eb54c54880863317a575259ddea03ff5ae1399bcfdf4df78ddec5b4ad
+SOURCE 1.1.0.403908 CommonLua/Libs/Research/Research.lua:147-159 sha256=2e218ab60ebae9e837fb727523da1599a9bf7d65b3d704af48c4ed95c219d2e1
+SOURCE 1.1.0.403908 Lua/TechTree.lua:892-900 sha256=0f10d7ef1f2978d8495140d4612acfed76c74791180d1d03b4cf3cc6b3c7bb36
+SOURCE 1.1.0.403908 Lua/TechTree.lua:876-878 sha256=4f41c62d8dc0acfce9a910f3d182a101fe369572868477dc6bcf1e20ca812a40
+SOURCE 1.1.0.403908 Lua/Tech.lua:468-470 sha256=983562acb12451d116779c3d5f75bc405a977d29dd95cac2fc0974a154017f2d
+SOURCE 1.1.0.403908 Lua/Tech.lua:519-521 sha256=1d04dd76c6c3cb23498ce844f50d4ad4104375085bb40f6473eac5153f81eeb5
+SOURCE 1.1.0.403908 Lua/TechTree.lua:868-874 sha256=58ec74366788a8e5b99635e06f7ff5a34aa80bd6bf377357de0a1f2bab1b10e0
+SOURCE 1.1.0.403908 Lua/TechTree.lua:1200-1240 sha256=2a5387318307ba1e8344a54e45f5e66d3ab44adb8df5b4013c0af23b3be6b8ac
+SOURCE 1.1.0.403908 Lua/TechTree.lua:1537-1540 sha256=f4bc929c69d2d3f4986f1d7f0c27a770865ef1999b9e9cfbf20f4e339d7c9e7e
+SOURCE 1.1.0.403908 Lua/Research.lua:150-159 sha256=03135d3e1a86bb9c42fdde328d3ad045280d0544c110e150423ce65866593a11
+SOURCE 1.1.0.403908 Lua/Research.lua:161-163 sha256=5cc9ef413fe805a9b57531a86952e2637629ee125deb51c0dde90df8b522b2c0
+SOURCE 1.1.0.403908 Lua/Research.lua:98-100 sha256=a87c173cc2f261fb0d9663902ec582ec2a5895d16c4d375bc4e0d923a940b0a6
+SOURCE 1.1.0.403908 Lua/Research.lua:180-190 sha256=8921d25a1fd03f0e524551d1ed21a0747e3886506e1f6a0e9a450a568337c645
+SOURCE 1.1.0.403908 Lua/Research.lua:192-202 sha256=ba2ed0d025a55beeb98024b9aea76469d3d14f8cd53fbd03459df5b6da87fd8f
+  PASS  first repeatable completion writes researched before achievement check
+  PASS  second repeatable first completion permits the vanilla achievement request
+  PASS  repeat research succeeds without clearing its completed state
+  PASS  MartianCopyrithgts remains researched with Repeatable=true
+  PASS  MartianPatents remains researched with Repeatable=true
+  PASS  vanilla achievement requests unlock when all counted techs are researched
+  PASS  repeat completions do not retry achievement (first_time gate)
+  PASS  a repeatable never completed once legitimately prevents unlock
+  PASS  preview research can also satisfy the vanilla state check
+  PASS  effective repeatability can disagree with preset Repeatable
+  FAIL  actual hidden preset UndergroundExploitation is counted and blocks unlock
+  FAIL  excluding repeatables still fails with the orphan unresearched
+  PASS  excluding only the orphan permits all complete groups
+  PASS  orphan-only exclusion retains the repeatable first-completion requirement
+  PASS  orphan-only exclusion still refuses an incomplete ordinary counted tech
+
+==============================================================================
+13 of 15 demands held
+REFUTED -- 2 demand(s) failed:
+   - actual hidden preset UndergroundExploitation is counted and blocks unlock
+   - excluding repeatables still fails with the orphan unresearched
+
+##############################################################################
+# desk_c93_open_pasture.py
+##############################################################################
+COMMAND python tools/desk_c93_open_pasture.py
+HISTORICAL MODULE 16ff1aa:Code/Fix_OpenPastureStockpiles.lua
+==============================================================================
+C93 historical module desk controls; engine objects are fixtures
+==============================================================================
+lua: Lua 5.5 | lupa 2.8
+
+  PASS  exact entity mismatch activates the module
+  PASS  foreign OpenAirBuilding receivers delegate byte-for-byte
+  PASS  Outside Ranch callers resolve the nine-anchor entity in both positions
+  PASS  affected load restores the closed ranch entity
+  PASS  migration preserves every pile object and every stored amount
+  PASS  invalid piles are reattached to Resourcepile7..9 with zero offsets
+  PASS  second load pass is idempotent
+  PASS  vendor-corrected open entity makes the module decline
+  PASS  declined module leaves the vanilla entity selector intact
+  PASS  explicit veto installs no wrapper and performs no migration
+
+==============================================================================
+10 of 10 demands held
+DESK CONTROLS HOLD; game entity mutation, visuals and drone pathfinding remain for checklist 191.
+
+##############################################################################
+# desk_c95_habitat_draft.py
+##############################################################################
+COMMAND: python tools/desk_c95_habitat_draft.py
+HEAD: f65b609d14a05546649672362a06ec8891c97598
+BUILD: 25390750 lupa Lua 5.4
+SOURCE filter calls (definition excluded): 4 ['Lua\\CargoTransporterNew.lua:275', 'Lua\\Buildings\\CargoTransporter.lua:278', 'Lua\\Buildings\\LanderRocket.lua:1171', 'Lua\\Buildings\\LanderRocket.lua:1182']
+SOURCE Load candidates: 3 [('CommonLua\\MapDescriptor.lua', 56, 'local err = self:Load()'), ('Lua\\Buildings\\LanderRocket.lua', 306, 'local rovers, drones, crew, prefabs = CargoTransporter.Load(self, manifest, quick_load, nil, "load_drones_in_commanders")'), ('Lua\\Buildings\\RocketExpedition.lua', 536, 'local rovers, drones, crew = CargoTransporter.Load(self, manifest)')]
+SOURCE direct inheritors: 3 ['LanderRocketBase', 'RocketBase', 'RocketExpeditionBase']
+SOURCE transitive named DefineClass inheritors: 25 ['ArkPod', 'ArkPodBase', 'DragonRocket', 'DragonRocketBase', 'DropPod', 'DropPodBase', 'ForeignAidRocket', 'ForeignAidRocketBase', 'ForeignTradeRocket', 'ForeignTradeRocketBase', 'LanderRocket', 'LanderRocketBase', 'RefugeeRocket', 'RefugeeRocketBase', 'RocketBase', 'RocketExpedition', 'RocketExpeditionBase', 'SupplyPod', 'SupplyPodBase', 'SupplyRocket', 'SupplyRocketBase', 'TradeRocket', 'TradeRocketBase', 'ZeusRocket', 'ZeusRocketBase']
+PASS: pre-fix route gate harm; residents without a route drafted while the return repair is active;
+      exclusion kept when it is inactive; both receiver contrasts; both habitats; full crew across buckets; lander; elevator; foreign receiver;
+      New request/connected/liveness branches; nil residence; predicate error; traits; transient filter;
+      exact restore/error fallback; post-filter mutants rejected; scarcity; desk removal; tuples;
+      common/one-receiver Require behavior; no-yield source scan; silence.
+LIMIT: no game boot, colony departure, UI, save removal or engine concurrency measured.
+
+##############################################################################
+# desk_c95_return_home.py
+##############################################################################
+COMMAND: python tools/desk_c95_return_home.py
+HEAD: f65b609d14a05546649672362a06ec8891c97598
+BUILD Steam: 25390750
+MODULE B:\Dev\SMR\SMR-BugFixPack\scratch\load_first_audit_8e2325a\Code\Fix_HabitatExpeditionReturn.lua sha256: 1f9f7da7a15f03f44112393da265584b6464e976c442cb9f72ff0edc8f4068a3
+SOURCE Lua/_GameUtils.lua ChooseDome lines=486-501 count=16 sha256=d4edda7db83c0b2aedb22896242d28a17aea84f7db3366e745356cefdb859db7
+SOURCE Lua/Units/Colonist.lua Colonist:GetExpeditionReturnDome lines=5389-5401 count=13 sha256=a62a04b7b2b23029783b61be38e5b30abfc02565ec5129692fc5b7518ac7b481
+SOURCE Lua/Units/Colonist.lua Colonist:ReturnFromExpedition lines=5418-5466 count=49 sha256=0b1d6d559e731343f9251b9b746e4d1f0a12307478584e67b3eb86856cd6dad4
+SOURCE Lua/Units/Colonist.lua Colonist:UpdateResidence lines=3123-3131 count=9 sha256=3b4ecda34cdcd007c4d4e5fd3036a3ce560e8bd8164f45320c20bd4aa61d055a
+SOURCE Lua/Units/ColonistTransport.lua Colonist:SetCommand lines=382-503 count=122 sha256=0c7464684c1a6cbde17aa0eee4e8f99cff5e6da7cb6118f4aeee578958ffe441
+SOURCE Lua/Units/ColonistTransport.lua Colonist:ReturnFromExpedition_TransportDestination lines=205-208 count=4 sha256=2582e2b51fee17f5c6c6da3c0efbdbbdf8a83d930efe4749aa5c6048dd34f94d
+SOURCE Lua/Units/ColonistTransport.lua Colonist:StartTransport lines=355-372 count=18 sha256=0c3471d76fc28adcbdf71fd33f16b2722b5f8a17623f509dda27a62d1733168c
+SOURCE Lua/Buildings/Residence.lua Residence:ReserveResidence lines=291-308 count=18 sha256=88018693261f64a17dbb085803ae0436558443ea2e20f0ea0559db5ce5b8e388
+SOURCE Lua/Buildings/Residence.lua Residence:CanReserveResidence lines=284-289 count=6 sha256=31822e8edc22576660ee764fbfc703a190de5a7a2f893562e481aef06b79cb6b
+SOURCE Lua/Buildings/Residence.lua Residence:CancelResidenceReservation lines=386-400 count=15 sha256=88050cc8148158ae6031b863f5cf98b21159960273b550242a1c40c3f3444c56
+SOURCE Lua/Units/Colonist.lua Colonist:CancelResidenceReservation lines=2223-2228 count=6 sha256=72212ffde67f2767d4b97da146670c1e8833f0eb6b5fda0361a210a997155452
+SOURCE Lua/CargoTransporterNew.lua CargoTransporterNew:UnloadPassengers lines=1076-1121 count=46 sha256=6e2e8553aa69322dae5a2b517669236bb9fe9daed8e9c8ad15b4a030ef55cd51
+SOURCE Lua/Buildings/RocketBase.lua RocketBase:Disembark lines=1969-1988 count=20 sha256=47e85e84d3b0cdeddd937fa4210d9f1862ea3d9256ba02f868b43fcab8e71758
+SOURCE Lua/Buildings/Community.lua Community:CanVisit lines=420-422 count=3 sha256=4abba27bce4b8e7245847de9df25ff8720753acb6cced5ef1bdfddd7beaf42ed
+SOURCE Lua/Buildings/MicroGHabitat.lua MicroGHabitatBase:CanVisit lines=59-73 count=15 sha256=8da2814c32997ab6b978fc754b0d11a500e55b3f86644c14f71baa6698382022
+==============================================================================
+C95/C102 registered return repair (desk only)
+==============================================================================
+lua: Lua 5.5 | lupa 2.8
+
+  PASS  pre-fix: vanilla selector loses out-of-reach habitat
+  PASS  pre-fix: vanilla dispatcher already books arrival train
+  PASS  pre-fix: fallback reservation erases expedition home before return
+  PASS  pre-fix: shipped return body walks from the rocket to a far home
+  PASS  walk: held usable home admitted
+  PASS  walk: shared input not mutated
+  PASS  rail: held usable home admitted
+  PASS  rail: shared input not mutated
+  PASS  no route: held usable home admitted
+  PASS  no route: shared input not mutated
+  PASS  destroyed: delegates without admitting home
+  PASS  closed: delegates without admitting home
+  PASS  refuses arrivals: delegates without admitting home
+  PASS  no life support: delegates without admitting home
+  PASS  cannot visit: delegates without admitting home
+  PASS  player filter now forbids them: delegates without admitting home
+  PASS  reservation lost: delegates without admitting home
+  PASS  different map: delegates without admitting home
+  PASS  ordinary dome return preserved
+  PASS  already reachable home preserved
+  PASS  new: out-of-reach home placed at its own entrance before the walk order
+  PASS  new: placed returnee keeps the held bed, hold released natively
+  PASS  legacy: out-of-reach home placed at its own entrance before the walk order
+  PASS  legacy: placed returnee keeps the held bed, hold released natively
+  PASS  in-range home still walked from the rocket, not placed
+  PASS  rail: native train booking to the held home untouched
+  PASS  rail: walk from the arrival station is not placed
+  PASS  mark survives an unrelated order
+  PASS  walk order to another destination consumes the mark without placing
+  PASS  consumed mark does not place a later walk home
+  PASS  home destroyed in the animation: walks, order still issued
+  PASS  reservation cancelled in the animation: walks, order still issued
+  PASS  still in a holder: walks, order still issued
+  PASS  home has no entrance points: walks, order still issued
+  PASS  home became unusable: walks, order still issued
+  PASS  placement error: order issued, returns preserved, logged
+  PASS  command wrapper preserves nil-bearing tuple for everyone
+  PASS  Earth arrival reserved into a far habitat: never placed
+  PASS  migrant with a reserved habitat: never placed
+  PASS  dome resident returnee: never placed
+  PASS  covert-ops recruit (no hold) via receiver and body: not placed
+  PASS  reload residual: unmarked returnee walks to the still-held home
+  PASS  shipped full-habitat gate rejects anonymous visitor
+  PASS  shipped full-habitat gate accepts its reserved returnee
+  PASS  module also restores full habitat omitted by CanVisit
+  PASS  housing precedes picker at rejoin
+  PASS  work wrapper preserves nil-bearing return tuple
+  PASS  foreign dome does not get reassigned
+  PASS  housing allocator refusal is respected (known gap)
+  PASS  module adds no persisted state or yielding body
+  PASS  non-habitat nil delegates exact arguments and returns
+  PASS  non-habitat {kind="Dome"} delegates exact arguments and returns
+  PASS  non-habitat {kind="Residence"} delegates exact arguments and returns
+  PASS  non-habitat {kind="Other"} delegates exact arguments and returns
+  PASS  return apply idempotent
+  PASS  pre-C102 fallback is dead dome
+  PASS  shipped chooser keeps dead fallback when live alternatives full
+  PASS  C102 selects nearest live alternative to dead fallback
+  PASS  C102 new: unusable home falls to nearest safe dome before reservation
+  PASS  C102 new: fallback returnee walks, not placed
+  PASS  C102 legacy: unusable home falls to nearest safe dome before reservation
+  PASS  C102 legacy: fallback returnee walks, not placed
+  PASS  C102 ordinary dome returnee also selects safe fallback
+  PASS  C102 no alternative preserves vanilla and logs once
+  PASS  C102 composed with C95: far held habitat retained and placed
+  PASS  arrival apply idempotent
+  PASS  CargoTransporterNew absent: other receiver still reserves and places home
+  PASS  RocketBase absent: other receiver still reserves and places home
+
+==============================================================================
+68 of 68 demands held
+DESK ONLY; live travel and removal require engine evidence
+
+##############################################################################
+# desk_c96_rover_subclass.py
+##############################################################################
+COMMAND: python tools/desk_c96_rover_subclass.py
+HEAD: f65b609d14a05546649672362a06ec8891c97598
+MODULE SHA256: 49e2c44eaf9c41dea1f3ef2f3527b33fdd4eb15912be44ec3c00b9d74e840b17
+BUILD: 25390750 lupa Lua 5.4
+SOURCE CargoTransporter       ListAvailableRovers:418  leaf-compare + leaf-label source list PRESENT
+SOURCE CargoTransporterNew    ListAvailableRovers:475  leaf-compare + leaf-label source list PRESENT
+SOURCE BaseRover:AddToCityLabels registers Unit + Rover + the LEAF class, and nothing walks __parents — the source-list gate
+SOURCE RCSensor + RCSolar derive RCRover; AttackRover does NOT (hostile-rover leg)
+PASS: CargoTransporter cold class registry accepts the Seeker after class build; CargoTransporter reload class registry accepts the Seeker after class build; CargoTransporter vanilla refuses a Seeker for an RCRover request; CargoTransporter fixed accepts the Seeker; CargoTransporter satisfiable request keeps vanilla pick (nearest RCRover, NOT the nearer Seeker); CargoTransporter base does NOT satisfy a Seeker request; CargoTransporter AttackRover is never offered for an RCRover request; CargoTransporter RCSolar also satisfies an RCRover request; CargoTransporter unfillable request still returns empty; CargoTransporter a 2-rover request fills from both, nearest first; CargoTransporter a non-rover class is not widened; CargoTransporterNew cold class registry accepts the Seeker after class build; CargoTransporterNew reload class registry accepts the Seeker after class build; CargoTransporterNew vanilla refuses a Seeker for an RCRover request; CargoTransporterNew fixed accepts the Seeker; CargoTransporterNew satisfiable request keeps vanilla pick (nearest RCRover, NOT the nearer Seeker); CargoTransporterNew base does NOT satisfy a Seeker request; CargoTransporterNew AttackRover is never offered for an RCRover request; CargoTransporterNew RCSolar also satisfies an RCRover request; CargoTransporterNew unfillable request still returns empty; CargoTransporterNew a 2-rover request fills from both, nearest first; CargoTransporterNew a non-rover class is not widened; vanilla credits NOTHING when a Seeker is loaded against an RCRover line; fixed records actual Seeker cargo for a Commander request; fulfilled request transfers to the actual leaf without inventing cargo; fixed still credits the exact line when one exists; an already satisfied leaf line can fulfill the remaining ancestor request; native unload after removal returns the Seeker without spawning a Commander; CargoTransporter vanilla total availability excludes the Seeker; CargoTransporter fixed total availability includes the Seeker; CargoTransporter vanilla warning refuses the expedition; CargoTransporter fixed warning clears for idle Seeker; CargoTransporter direct UI lister includes the Seeker; CargoTransporter busy Seeker is reported busy and cannot gather; CargoTransporter quick load still forwards its busy-rover allowance; CargoTransporter held Seeker is unavailable; CargoTransporter charging drone blocks its Seeker through the shipped filter; CargoTransporter idle attached drone permits its Seeker through the shipped filter; CargoTransporter native label membership was not changed; CargoTransporterNew vanilla total availability excludes the Seeker; CargoTransporterNew fixed total availability includes the Seeker; CargoTransporterNew vanilla warning refuses the expedition; CargoTransporterNew fixed warning clears for idle Seeker; CargoTransporterNew direct UI lister includes the Seeker; CargoTransporterNew busy Seeker is reported busy and cannot gather; CargoTransporterNew quick load still forwards its busy-rover allowance; CargoTransporterNew held Seeker is unavailable; CargoTransporterNew charging drone blocks its Seeker through the shipped filter; CargoTransporterNew idle attached drone permits its Seeker through the shipped filter; CargoTransporterNew native label membership was not changed; resource and prefab availability retain shipped rules; connected-city subclass counts and gathered candidates agree; one Seeker cannot fill both a Commander and a Seeker manifest line; more-specific requests reserve the Seeker while the Solar fills the base line; no shipped error() path was taken in any leg
+TOTAL: 55 legs; reconciled against the PASS member list above
+LIMIT: no game boot, real colony, pathing, UI, launch readiness or save serialization measured. Label membership and idleness are stated by the fixture.
+
+##############################################################################
+# desk_caller_seam.py
+##############################################################################
+CALLER SEAM DESK: Lua 5.5 | lupa 2.8 (archived bodies; no runtime claim)
+In Progress while active, 1.0.7 waits: (0, None)
+In Progress while active, 1.1.0 waits: (1, 'TechResearched')
+already researched control, 1.0.7/1.1.0: (0, None) (0, None)
+counterfactual: restoring the named In Progress branch makes the active case return without a wait
+meal return, same-shift A+B remaining count: 1
+meal return, old A/new-shift B remaining count: 0
+counterfactual: tagging A with its reservation shift would leave new-shift B counted
+VisitService entered=true fulfilled/eaten: (1, 1000)
+VisitService entered=false fulfilled/eaten: (1, 1000)
+counterfactual: guarding fulfillment/eating with successful entry would make the false case (0, 0)
+PROBE SWEEP: clean
+PASS: all three seam contradictions discriminate
+
+##############################################################################
+# desk_ck53_hostile_globals.py
+##############################################################################
+source: B:\Dev\SMR\SMR-BugFixPack\scratch\load_first_audit_8e2325a\Code\00_Core.lua
+PASS  [CONTROL] CONTROL nothing set
+PASS  [CONTROL] CONTROL documented veto {A=true}
+PASS  [CONTROL] CONTROL documented optional {A=true}
+PASS  [CONTROL] CONTROL metatable default vetoes A
+PASS  [HOSTILE] SMRFixPack_Disabled = true
+PASS  [HOSTILE] SMRFixPack_Disabled = "yes"
+PASS  [HOSTILE] SMRFixPack_Disabled with throwing __index
+PASS  [HOSTILE] SMRFixPack_Optional = true
+PASS  [HOSTILE] SMRFixPack_Optional with throwing __index
+PASS  [HOSTILE] SMRFixPack = true
+PASS  [HOSTILE] SMRFixPack = {} (shim)
+PASS  [HOSTILE] SMRFixPack = {fixes = "x"} (mistyped)
+PASS  [CONTROL] Lua reload keeps registry, single order entry, data_edited memo
+13 passed, 0 failed, 13 cases
+
+##############################################################################
+# desk_f117_argshape.py
+##############################################################################
+==============================================================================
+F117 desk falsifier -- shipped bodies verbatim, our probe verbatim, real Lua
+==============================================================================
+lua: Lua 5.5 | lupa 2.8
+
+[1.1.0] Community:GetScoreFor extracted, 19 lines; first line: function Community:GetScoreFor(colonist)
+  PASS  [1.1.0] probe answers 'colonist'  -- got 'colonist'
+  PASS  [1.1.0] no decline logged  -- []
+[1.0.7] Community:GetScoreFor extracted, 28 lines; first line: function Community:GetScoreFor(traits)
+  PASS  [1.0.7] probe answers 'traits'  -- got 'traits'
+  PASS  [1.0.7] no decline logged  -- []
+
+  PASS  [1.1.0] the OLD call ChooseDome(self.traits, ...) THROWS  -- [string "<python>"]:4: attempt to index a nil value (local 'obj_attributes')
+  PASS  [1.1.0] the NEW call ChooseDome(colonist, ...) does not throw  -- <Lua table at 0x000002436799E100>
+  PASS  [1.0.7] passing the COLONIST does not throw (so no instrument would see it)  -- 100.0
+  PASS  [1.0.7] ... but MIS-SCORES: correct=110.0, with-colonist=100.0  -- ck118's 'pass self on both branches' really is silently wrong
+
+  PASS  [control] a body that indexes neither table is answered UNKNOWN, not guessed  -- shape=False
+  PASS  [control] ... and the decline is NAMED in the log  -- ["ArrivalDeaths: ChooseDome's argument contract could not be read from Community:GetScoreFor -- the F53(b) arrival re-choose stands down for this session (F117)"]
+  PASS  [control] a body that indexes BOTH tables is answered UNKNOWN too  -- shape=False
+
+==============================================================================
+11 of 11 demands held
+ALL DEMANDS HELD -- the probe fires on 1.1.0, does not fire on 1.0.7,
+both defects it guards against are real, and UNKNOWN is not guessed.
+
+##############################################################################
+# desk_f117_kitprobe.py
+##############################################################################
+==============================================================================
+F117 KIT PROBE falsifier -- shipped bodies + module + kit probe, all verbatim
+==============================================================================
+lua: Lua 5.5 | lupa 2.8
+
+  PASS  [1.1.0] the kit probe PASSes  -- PASS: the colonist is accepted; the old traits-table call still throws ([string "<python>"]:4: attempt to index a nil value (local 'obj_attributes'))
+  PASS  [1.1.0] ... and its message says why it is not vacuous  -- the colonist is accepted; the old traits-table call still throws ([string "<python>"]:4: attempt to index a nil value (local 'obj_attributes'))
+  PASS  [1.0.7] the kit probe PASSes  -- PASS: the traits table is accepted; the colonist object would mis-score (110.0 vs 100.0)
+  PASS  [1.0.7] ... and its message says why it is not vacuous  -- the traits table is accepted; the colonist object would mis-score (110.0 vs 100.0)
+
+  PASS  [C] no published ReadArgShape -> FAIL, not a quiet PASS  -- FAIL: SMRFixPack.ArrivalDeaths.ReadArgShape is missing — F117's discriminator is not installed
+  PASS  [D] an UNKNOWN verdict -> FAIL, not a quiet PASS  -- FAIL: the module cannot read ChooseDome's argument contract (got nil) — F53(b)'s re-choose stands down (F117 UNKNOWN)
+  PASS  [E] a stub that stopped discriminating -> SKIP, not a PASS  -- SKIP: the stub no longer discriminates: the traits table did not throw either, so the no-throw result proves nothing
+
+==============================================================================
+7 of 7 demands held
+ALL DEMANDS HELD -- the kit probe passes on both branches for the right
+reason, and refuses to pass when it cannot tell the arguments apart.
+
+##############################################################################
+# desk_f117_recipe.py
+##############################################################################
+==============================================================================
+F117 recipe falsifier -- which landings reach GetScoreFor, on the shipped _GameUtils span
+==============================================================================
+lua: Lua 5.5 | lupa 2.8
+
+extracted Lua/_GameUtils.lua:382-501 (120 lines)
+
+== S0 control: one welcoming dome IN walking distance, with space ==
+  S0: assigned=Near via=nil landing_list=1 safety=Near | wrapper fires=false | re-pick list=0 GetScoreFor calls=0 -> nil
+  PASS  S0: assigned the walkable dome; wrapper stands down
+
+== S1 the refuted recipe: every dome beyond walking distance (foot route exists), no station ==
+  S1: assigned=Far via=nil landing_list=0 safety=Far | wrapper fires=true | re-pick list=0 GetScoreFor calls=0 -> nil
+  PASS  S1: landing list EMPTY, far dome assigned as safety_dome, wrapper FIRES, re-pick list empty, GetScoreFor NEVER called  -- a clean arrival whether or not F117 is present
+
+== S1b the refuted recipe, no foot route at all (dist -1) ==
+  S1b: assigned=nil via=nil landing_list=0 safety=nil | wrapper fires=false | re-pick list=0 GetScoreFor calls=0 -> nil
+  PASS  S1b: nothing assigned (safety needs dist >= 0), wrapper cannot fire
+
+== S2 the station route: no dome walkable; a passenger station by the pad reaches a far welcoming dome ==
+  S2: assigned=Far via=nil landing_list=1 safety=Far | wrapper fires=true | re-pick list=1 GetScoreFor calls=1 -> Far
+  PASS  S2: far dome on the landing list WITHOUT an elevator pairing, assigned, wrapper FIRES, re-pick list non-empty, GetScoreFor CALLED
+
+== S2b the station route with the far dome FULL (assignment falls to safety_dome) ==
+  S2b: assigned=Far via=nil landing_list=1 safety=Far | wrapper fires=true | re-pick list=1 GetScoreFor calls=1 -> nil
+  PASS  S2b: still assigned (as safety), wrapper FIRES, GetScoreFor CALLED in the re-pick
+
+== S2c the station route with NO foot route to the far dome (dist -1) ==
+  S2c: assigned=Far via=nil landing_list=1 safety=Far | wrapper fires=true | re-pick list=1 GetScoreFor calls=1 -> Far
+  PASS  S2c: safety_dome comes from the station sweep (:470-472), wrapper FIRES, GetScoreFor CALLED
+
+== S3 the elevator case the sitting guessed: elevator by the pad, dome on the other side ==
+  S3: assigned=Under via=Lift landing_list=1 safety=Under | wrapper fires=false | re-pick list=0 GetScoreFor calls=0 -> nil
+  PASS  S3: dome assigned WITH its elevator; the wrapper's elevator clause holds -> stands down (NOT a trigger)
+
+== S4 a walkable dome that is FULL plus a far foot-reachable dome ==
+  S4: assigned=Near via=nil landing_list=1 safety=Near | wrapper fires=false | re-pick list=0 GetScoreFor calls=0 -> nil
+  PASS  S4: safety_dome is the NEAREST foot-reachable community = the walkable one, so the full dome is assigned and the wrapper stands down
+
+==============================================================================
+8 of 8 demands held
+ALL DEMANDS HELD -- the refuted recipe never scores, the station route does,
+the elevator route stands down by design, and a full walkable dome is not a route either.
+
+##############################################################################
+# desk_f119_trade_fuel.py
+##############################################################################
+==============================================================================
+F119 historical 1.1.0 / 16ff1aa trade-fuel controls
+==============================================================================
+lua: Lua 5.5 | lupa 2.8
+
+extracted:
+  Lua/CargoTransporterNew.lua:1288-1306
+  Lua/CargoTransporterNew.lua:1430-1463
+  Lua/UniversalRocket.lua:1891-1908
+  Lua/UniversalRocket.lua:2631-2638
+  Lua/UniversalRocket.lua:1916-1920
+  Lua/UniversalRocket.lua:1937-1953
+  PASS  vanilla DROP reproduces status 'unloading'
+  PASS  vanilla DROP leaves supply at 0
+  PASS  vanilla RISE reproduces status 'loading'
+  PASS  vanilla RISE leaves demand at 0
+  PASS  module behaviour guard accepts the shipped defective body
+  PASS  module DROP sets a 20000 supply request
+  PASS  module DROP reaches 'ready' once that fuel is unloaded
+  PASS  module RISE sets a 10000 demand request
+  PASS  load heal refreshes one pre-stuck Trade rocket
+  PASS  load heal is a no-op on a healthy Trade rocket
+  PASS  player rocket behaviour is unchanged (one vanilla refresh)
+
+==============================================================================
+11 of 11 demands held
+ALL DEMANDS HELD -- the shipped bodies reproduce the request mismatch; the module repairs the desk model and the heal is selective.
+
+##############################################################################
+# desk_f124_track.py
+##############################################################################
+PASS curved split and physical refund
+PASS short start trim preserves survivor
+PASS short end trim preserves survivor
+PASS repair split ownership and repair_cgs
+PASS repair click delegates once and forwards skip
+PASS disconnected survivor is rehomed
+PASS plain site trim refunds completed stamps
+PASS whole salvage refund and shell cleanup
+PASS empty trim refunds before auto-deleted track disappears
+PASS unindexable physical element declines
+PASS pre-sort processing repairs colliding physical indices
+PASS surviving stamps are not refunded
+PASS shared repair group rebuilt once on each side
+PASS supply grid disconnected before trim
+PASS load heals legacy shell and orphan but preserves healthy track
+PASS load veto is inert
+PASS native control: repair split ownership and repair_cgs
+PASS native control: repair click delegates once and forwards skip
+PASS native control: disconnected survivor is rehomed
+PASS native defect falsifier: curved split and physical refund
+PASS native defect falsifier: short start trim preserves survivor
+PASS native defect falsifier: whole salvage refund and shell cleanup
+PASS git pre-rebase falsifier: repair split ownership and repair_cgs
+PASS git pre-rebase falsifier: disconnected survivor is rehomed
+PASS missing branch declines
+PASS archived 1.1.0 declines
+PASS in-place module reload preserves live state and works
+PASS scratch branch-guard reversal is detected
+source unchanged sha256=856cd94879dc2b5b2af94014c8dc7bab07426c7c8fd70bdad1ad2f6ce9cd47f7
+TOTAL 28 = PASS 28 + FAIL 0
+
+##############################################################################
+# desk_f125_vacuum.py
+##############################################################################
+==============================================================================
+F125/F52: native 1.1.1 migration with composable vacuum inputs
+==============================================================================
+lua: Lua 5.5 | lupa 2.8
+
+  PASS  pre-fix control loses migration_dest retarget
+  PASS  pre-fix control skips the intermediate passage
+  PASS  SetGlobal failure returns inactive reason
+  PASS  SetGlobal failure leaves both shipped targets untouched
+  PASS  direct vacuum final leg receives the real passage path
+  PASS  direct leg preserves clear/ticket/residence/work/command order  -- clear,ticket,reserve_residence,reserve_work,command:TransportByFoot
+  PASS  repaired direct branch preserves shipped nil return
+  PASS  no-passage vacuum fallback remains TransportByFoot with nil path
+  PASS  breathable short walk remains outside with nil path
+  PASS  long passage detour keeps native shuttle booking and state
+  PASS  equal runtime thresholds decline to native input unchanged
+  PASS  +1 crossing the runtime passage threshold also declines
+  PASS  native task retarget clears migration_dest and follows journey
+  PASS  active shuttle remains committed and is not retargeted
+  PASS  intermediate vacuum leg traverses its passage before the community  -- enter:A,enter:AP,enter:MID,enter:MID,clear,ticket,reserve_residence,command:TransportByFoot
+  PASS  multi-leg continuation reaches native direct final passage
+  PASS  breathable intermediate control skips passage detour
+  PASS  no-passage intermediate fallback still enters the next community
+  PASS  intermediate shuttle keeps migration_dest for continuation
+  PASS  train leg keeps native MigrateStep ticket continuation
+  PASS  cancellation clears journey state and reservations
+  PASS  unexpected next distance call consumes marker without changing either result
+  PASS  command cancellation makes an armed marker inert
+  PASS  global wrapper preserves the native one-value different-map return
+  PASS  actual TestKit VacuumWalks behavior probe passes  -- PASS: vacuum move uses the passage route; breathable maps unchanged
+
+==============================================================================
+25 of 25 demands held
+ALL DEMANDS HELD
+
+##############################################################################
+# desk_f127_arrival_booking.py
+##############################################################################
+==============================================================================
+F127 arrival booking on archived 1.1.1.405907
+==============================================================================
+lua: Lua 5.5 | lupa 2.8
+
+extracted Lua/Units/Colonist.lua:2223-2228
+extracted Lua/Units/Colonist.lua:3123-3131
+extracted Lua/Units/Colonist.lua:3089-3100
+extracted Lua/Buildings/Residence.lua:284-289
+extracted Lua/Buildings/Residence.lua:291-308
+extracted Lua/Buildings/Residence.lua:386-400
+extracted Lua/Buildings/Dome.lua:3482-3493
+extracted Lua/Buildings/MicroGHabitat.lua:85-88
+extracted Lua/Buildings/MicroGHabitat.lua:162-171
+  PASS  originally reserved a bed in rejected dome
+  PASS  C83 reroutes into full welcoming dome
+  PASS  full-dome reroute releases rejected bed
+  PASS  full-dome arrival reaches Homeless label
+extracted Lua/Units/Colonist.lua:2223-2228
+extracted Lua/Units/Colonist.lua:3123-3131
+extracted Lua/Units/Colonist.lua:3089-3100
+extracted Lua/Buildings/Residence.lua:284-289
+extracted Lua/Buildings/Residence.lua:291-308
+extracted Lua/Buildings/Residence.lua:386-400
+extracted Lua/Buildings/Dome.lua:3482-3493
+extracted Lua/Buildings/MicroGHabitat.lua:85-88
+extracted Lua/Buildings/MicroGHabitat.lua:162-171
+  PASS  reroute with free housing transfers the booking
+extracted Lua/Units/Colonist.lua:2223-2228
+extracted Lua/Units/Colonist.lua:3123-3131
+extracted Lua/Units/Colonist.lua:3089-3100
+extracted Lua/Buildings/Residence.lua:284-289
+extracted Lua/Buildings/Residence.lua:291-308
+extracted Lua/Buildings/Residence.lua:386-400
+extracted Lua/Buildings/Dome.lua:3482-3493
+extracted Lua/Buildings/MicroGHabitat.lua:85-88
+extracted Lua/Buildings/MicroGHabitat.lua:162-171
+  PASS  full habitat releases rejected bed
+  PASS  full habitat arrival reaches Homeless label
+extracted Lua/Units/Colonist.lua:2223-2228
+extracted Lua/Units/Colonist.lua:3123-3131
+extracted Lua/Units/Colonist.lua:3089-3100
+extracted Lua/Buildings/Residence.lua:284-289
+extracted Lua/Buildings/Residence.lua:291-308
+extracted Lua/Buildings/Residence.lua:386-400
+extracted Lua/Buildings/Dome.lua:3482-3493
+extracted Lua/Buildings/MicroGHabitat.lua:85-88
+extracted Lua/Buildings/MicroGHabitat.lua:162-171
+  PASS  habitat with room takes the transferred booking
+extracted Lua/Units/Colonist.lua:2223-2228
+extracted Lua/Units/Colonist.lua:3123-3131
+extracted Lua/Units/Colonist.lua:3089-3100
+extracted Lua/Buildings/Residence.lua:284-289
+extracted Lua/Buildings/Residence.lua:291-308
+extracted Lua/Buildings/Residence.lua:386-400
+extracted Lua/Buildings/Dome.lua:3482-3493
+extracted Lua/Buildings/MicroGHabitat.lua:85-88
+extracted Lua/Buildings/MicroGHabitat.lua:162-171
+  PASS  fix-removed control retains orphan and hides Homeless
+extracted Lua/Units/Colonist.lua:2223-2228
+extracted Lua/Units/Colonist.lua:3123-3131
+extracted Lua/Units/Colonist.lua:3089-3100
+extracted Lua/Buildings/Residence.lua:284-289
+extracted Lua/Buildings/Residence.lua:291-308
+extracted Lua/Buildings/Residence.lua:386-400
+extracted Lua/Buildings/Dome.lua:3482-3493
+extracted Lua/Buildings/MicroGHabitat.lua:85-88
+extracted Lua/Buildings/MicroGHabitat.lua:162-171
+  PASS  fix-removed full habitat retains orphan and hides Homeless
+extracted Lua/Units/Colonist.lua:2223-2228
+extracted Lua/Units/Colonist.lua:3123-3131
+extracted Lua/Units/Colonist.lua:3089-3100
+extracted Lua/Buildings/Residence.lua:284-289
+extracted Lua/Buildings/Residence.lua:291-308
+extracted Lua/Buildings/Residence.lua:386-400
+extracted Lua/Buildings/Dome.lua:3482-3493
+extracted Lua/Buildings/MicroGHabitat.lua:85-88
+extracted Lua/Buildings/MicroGHabitat.lua:162-171
+  PASS  old reserve-only shape fails on full habitat
+extracted Lua/Units/Colonist.lua:2223-2228
+extracted Lua/Units/Colonist.lua:3123-3131
+extracted Lua/Units/Colonist.lua:3089-3100
+extracted Lua/Buildings/Residence.lua:284-289
+extracted Lua/Buildings/Residence.lua:291-308
+extracted Lua/Buildings/Residence.lua:386-400
+extracted Lua/Buildings/Dome.lua:3482-3493
+extracted Lua/Buildings/MicroGHabitat.lua:85-88
+extracted Lua/Buildings/MicroGHabitat.lua:162-171
+  PASS  unrerouted booking remains native
+
+==============================================================================
+12 of 12 demands held
+F127 fix and fix-removed control discriminate
+
+##############################################################################
+# desk_f59_expedition.py
+##############################################################################
+==============================================================================
+F59 expedition hold: same shipped sequence, module absent / pre-repair / repaired
+==============================================================================
+lua: Lua 5.5 | lupa 2.8
+
+  PASS  vanilla: crew retains reserved home with a homeless neighbour
+  PASS  PRE-REPAIR: neighbour takes bed and expedition hold is lost
+  PASS  PRE-REPAIR: residence remains within capacity (this is loss of hold, not overflow)
+  PASS  REPAIRED: the expedition hold survives a competing homeless neighbour
+  PASS  REPAIRED: the neighbour is not given a bed the boarding crew still holds
+  PASS  REPAIRED: the deferred notification really ran (it declined, it was not skipped)
+  PASS  CONTROL: with the deferral defeated the harm returns => the deferral IS the repair
+  PASS  negative control: REPAIRED preserves crew home when no neighbour competes
+  PASS  PRE-REPAIR: F58 exemption cannot protect a hold F59 prevented from being created
+  PASS  PRE-REPAIR: F58 daily sweep does not restore the missing hold
+  PASS  REPAIRED: with F58 also loaded the hold is held, so F58 has nothing to rescue
+  PASS  original F59 gap: vanilla ordinary departure leaves an eligible neighbour homeless beside a free bed
+  PASS  original-gap control: a later housing update takes that same bed
+  PASS  PRE-REPAIR: ordinary departure was notified immediately
+  PASS  REPAIRED: ordinary departure is STILL notified, one scheduler step later
+  PASS  AUDIT IDEA (A1 only): exact expedition-home exclusion preserves the hold
+  PASS  AUDIT IDEA: ordinary vacancy still offered immediately
+  PASS  AUDIT IDEA: unrelated expedition pointer does not suppress this vacancy
+  PASS  REAL comfort: the A1 hold loss is REAL -- neighbour takes the bed, hold cleared
+  PASS  REAL comfort: REPAIRED keeps the expedition hold against a competing neighbour
+  PASS  REAL comfort: defeating the deferral loses the hold again
+  PASS  REAL comfort: an ordinary vacancy is still offered (the benefit survives)
+  PASS  REAL comfort: vanilla still leaves that neighbour homeless beside the free bed
+
+==============================================================================
+23 of 23 demands held
+ALL DEMANDS HELD
+
+##############################################################################
+# desk_f59_interact.py
+##############################################################################
+==============================================================================
+F59 manual assign: same shipped ColonistInteract, module absent / pre-repair / repaired
+==============================================================================
+lua: Lua 5.5 | lupa 2.8
+
+  PASS  vanilla: the kicked resident is evicted and the forced colonist takes the slot
+  PASS  vanilla: the residence stays within capacity and no assert fires
+  PASS  PRE-REPAIR: the hook re-homes the just-kicked resident into the slot in hand
+  PASS  PRE-REPAIR: the forced colonist is inserted anyway -> OVER-CAPACITY residence
+  PASS  PRE-REPAIR: the capacity assert fired (EF-008: reported, did not unwind)
+  PASS  PRE-REPAIR: the player-visible infopanel count exceeds capacity
+  PASS  REPAIRED: exactly one colonist lands and the residence stays within capacity
+  PASS  REPAIRED: the player's eviction stands -- the kicked resident is homeless
+  PASS  REPAIRED: no capacity assert fires and the infopanel reads 2/2
+  PASS  REPAIRED: the deferred notification really ran (it declined, it was not skipped)
+  PASS  CONTROL: with the deferral defeated the overfill returns => the deferral IS the repair
+  PASS  AUDIT IDEA IS INSUFFICIENT: the expedition-home exclusion still overfills on manual assign
+  PASS  negative control (pre-repair): a better free bed elsewhere draws the kicked resident away
+  PASS  negative control (pre-repair): with nobody competing, the assignment stays within capacity
+  PASS  REPAIRED: with a better bed elsewhere the assignment is still exactly in capacity
+  PASS  vanilla: the infopanel kick leaves the freed bed unoffered
+  PASS  REPAIRED: the infopanel kick DOES still offer the freed bed (same method, benign caller)
+  PASS  STUB comfort: the pre-repair hook APPEARS to drag a non-resident into a dying home
+  PASS  ⛔ REAL comfort REFUTES it: the pre-repair hook drags nobody in -- A3 does not exist
+  PASS  REAL comfort: absent / pre-repair / repaired are INDISTINGUISHABLE at OnDestroyed
+  PASS  LEAD CLOSED in vanilla's favour: even vanilla's own :86 re-homes nobody into the dying home
+  PASS  the repaired guard still declines at the door, so no thread is created either way
+  PASS  REAL comfort: A2 overfill is REAL -- 3 residents in a capacity-2 home, one assert
+  PASS  REAL comfort: REPAIRED lands exactly one colonist, 2/2, no assert
+  PASS  REAL comfort: defeating the deferral brings the overfill back
+  PASS  REAL comfort: the audit's expedition-only exclusion still overfills
+  PASS  REAL comfort: the infopanel kick still gets its freed bed offered
+
+==============================================================================
+27 of 27 demands held
+ALL DEMANDS HELD
+
+##############################################################################
+# desk_gamepatch_retirements.py
+##############################################################################
+COMMAND python tools/desk_gamepatch_retirements.py
+SOURCE B:\Dev\SMR\SMR-Shared\SMR-SrcArchive\1.1.1.405907\Src
+PACK-ON MODULES 16ff1aa
+==============================================================================
+1.1.1 retirements: native replacement/consumer source controls
+==============================================================================
+lua: Lua 5.5 | lupa 2.8
+
+  PASS  F122 pack-off native leaves an empty dome's zero unhighlighted
+  PASS  F122 native positive control highlights a populated low-stat dome
+  PASS  F122 actual 16ff1aa module restores the red empty-dome regression
+  PASS  F122 guard-reverted mutant fails the empty-dome control
+  PASS  F123 pack-off native pays Gene Forging once
+  PASS  F123 native positive control sums the two tech bonuses
+  PASS  F123 actual 16ff1aa wrapper double-pays native Gene Forging
+  PASS  F123 GeneForging-term mutant fails the pack-off control
+  PASS  F126 1.1.1 deletes FounderGainsTrait, with its 1.1.0 preset as positive control
+  PASS  F126 pack-off event has no handler or notification-constructor call
+  PASS  F126 actual 16ff1aa handler reaches archived unknown-ID assertion then base fallback
+  PASS  F126 archived constructor positive control creates a valid preset instance
+  PASS  F126 trait-group negative control cannot create a second notification
+  PASS  F126 scratch-weakened native unknown-ID guard loses its diagnostic
+  PASS  C88 SOURCE: both Building Codes handlers set maintenance without a prefab argument or return
+  PASS  C88 native handler applies Strict maintenance to a prefab-shaped completion
+  PASS  C88 native inactive-law control makes no maintenance write
+  PASS  C88 scratch-broken native handler fails the prefab completion control
+  PASS  F38 SOURCE: AddPFTunnel rejects either destroyed half before pf.AddTunnel
+  PASS  F38 native destroyed-linked-half control suppresses pf.AddTunnel
+  PASS  F38 native positive control adds a valid tunnel to pathfinding
+  PASS  F38 scratch-broken linked-half guard adds the forbidden tunnel
+  PASS  F19 SOURCE: graph-caption sum and consumed-series consumer agree
+  PASS  F19 native graph caption invokes both consumption accumulators
+  PASS  F19 scratch-broken caption loses the maintenance portion
+  PASS  F16 SOURCE: max-progress refusal remains while same-action cancellation precedes it
+  PASS  F16 native finished-site action test declines at max_progress
+  PASS  F16 native same-action positive control retains cancellation
+  PASS  F16 scratch-broken max-progress guard admits the completed-site action
+  PASS  F04 SOURCE: native work predicate uses a wrapping day window
+  PASS  F04 native midnight positive control sends the third shift to work
+  PASS  F04 native off-window control rejects an unrelated hour
+  PASS  C93 SOURCE: both new save fixups rebuild pasture stockpile pools
+  PASS  F96 SOURCE: both Sinkhole definitions set indestructible and its consumer returns
+  PASS  F96 native destruction consumer returns for an indestructible Sinkhole
+  PASS  F96 scratch-broken destruction guard reaches the destructive branch
+  PASS  F119 SOURCE: landed cargo callback refreshes and the upgrade fixup covers non-player rockets
+  PASS  F119 native landed-cargo callback refreshes the request
+  PASS  F119 native flying-rocket control does not refresh
+  PASS  F119 scratch-broken landed test leaves the request stale
+  PASS  F46 SOURCE: native unload honors IsResourceEnabled and its transfer consumer invokes it
+  PASS  F46 native disabled-resource control preserves the cargo assignment
+  PASS  F46 scratch-broken enablement guard unloads the disabled cargo
+  PASS  F64 SOURCE: native station-demolition handler calls Train:DestroySilent
+  PASS  F64 native station-demolition consumer calls DestroySilent with station context
+  PASS  F64 scratch-broken consumer deletes rather than stores the train
+  PASS  F21 SOURCE: boarding restamps start_wait before ExitVehicle consumes it
+  PASS  F21 native boarding records the platform wait and restamps the ride boundary
+  PASS  F21 scratch-broken boarding leaves the pre-boarding timestamp intact
+  PASS  F07/F15 SOURCE: free mode scales power by 1000 and batch destroy has no research grant
+  PASS  F07 native free-mode consumer turns three wisps into 3000 power units
+  PASS  F07 scratch-broken free-mode multiplier exposes the three-unit payout
+  PASS  F15 native batch-destroy path leaves research to the per-wisp consumer
+  PASS  F15 scratch-broken batch grant double-pays the three-wisp reward
+
+EXTRACTED:
+  Lua/X/ColonyControlCenter.lua:1290-1296
+  Lua/Units/Colonist.lua:4719-4728
+  CommonLua/Libs/Notifications/Notifications.lua:25-89
+  CommonLua/PropertyObject.lua:1472-1489
+  Lua/Buildings/Tunnel.lua:AddPFTunnel
+  Lua/X/ColonyControlCenter.lua:GetColonyStatsButtons
+  Lua/Mysteries/MirrorSphere.lua:IsActionEnabled
+  Lua/Mysteries/MirrorSphere.lua:StartAction
+  Lua/Units/Colonist.lua:ShouldLeaveForWork
+  Lua/Buildings/Building.lua:DestroyBuildingImmediate
+  Lua/UniversalRocket.lua:OnModifiableValueChanged
+  Lua/RocketCompatibility.lua:ZZZ_UpdateRefuelRequests
+  Lua/Units/Train.lua:UnloadAll
+  Lua/Units/Train.lua:TransferCargo
+  Lua/Buildings/Station.lua:OnMsg.BuildingDemolished
+  Lua/Units/ColonistTransport.lua:BoardVehicle
+  Lua/Units/ColonistTransport.lua:ExitVehicle
+  Lua/Mysteries/Fireflies.lua:SetLightTrapMode
+
+==============================================================================
+54 of 54 demands held
+ALL DEMANDS HELD -- active modules regress the repaired path; native replacement and consumer controls hold.
+
+##############################################################################
+# desk_hubset07_rehearsal.py
+##############################################################################
+PASS P1   hubset  as-predicted       expected=HELD        got=HELD
+PASS P1   hubset  scratch            expected=REFUTED     got=REFUTED
+PASS P2   hubset  as-predicted       expected=HELD        got=HELD
+PASS P2   hubset  scratch            expected=REFUTED     got=REFUTED
+PASS P1   main    as-predicted       expected=HELD        got=HELD
+PASS P1   main    scratch            expected=REFUTED     got=REFUTED
+PASS P2   main    as-predicted       expected=HELD        got=HELD
+PASS P2   main    scratch            expected=REFUTED     got=REFUTED
+PASS P3   hubset  as-predicted       expected=HELD        got=HELD
+PASS P3   hubset  scratch            expected=REFUTED     got=REFUTED
+PASS P4   hubset  as-predicted       expected=HELD        got=HELD
+PASS P4   hubset  scratch            expected=REFUTED     got=REFUTED
+PASS P3   main    as-predicted       expected=HELD        got=HELD
+PASS P3   main    scratch            expected=REFUTED     got=REFUTED
+PASS P4   main    as-predicted       expected=HELD        got=HELD
+PASS P4   main    scratch            expected=REFUTED     got=REFUTED
+PASS P5   hubset  as-predicted       expected=HELD        got=HELD
+PASS P5   hubset  scratch            expected=REFUTED     got=REFUTED
+PASS P5   main    as-predicted       expected=HELD        got=HELD
+PASS P5   main    scratch            expected=REFUTED     got=REFUTED
+PASS P6   hubset  as-predicted       expected=HELD        got=HELD
+PASS P6   hubset  scratch            expected=REFUTED     got=REFUTED
+PASS R4   main    as-predicted       expected=HELD        got=HELD
+PASS R4   main    scratch            expected=REFUTED     got=REFUTED
+PASS R5   hubset  as-predicted       expected=HELD        got=HELD
+PASS R5   hubset  scratch            expected=REFUTED     got=REFUTED
+PASS R5   hubset  scratch-flag       expected=REFUTED     got=REFUTED
+PASS R6   hubset  as-predicted       expected=HELD        got=HELD
+PASS R6   main    scratch            expected=REFUTED     got=REFUTED
+PASS R3   any     first-poll-silent  expected=false       got=false
+PASS R3   any     as-predicted       expected=HELD        got=HELD
+PASS R3   any     scratch            expected=REFUTED     got=REFUTED
+PASS P7   hubset  as-predicted       expected=HELD        got=HELD
+PASS P7   hubset  scratch            expected=REFUTED     got=REFUTED
+PASS P7   main    as-predicted       expected=HELD        got=HELD
+PASS P7   main    scratch            expected=REFUTED     got=REFUTED
+PASS P8   hubset  as-predicted       expected=HELD        got=HELD
+PASS P8   hubset  scratch            expected=REFUTED     got=REFUTED
+PASS P9   hubset  as-predicted       expected=HELD        got=HELD
+PASS P9   hubset  scratch            expected=REFUTED     got=REFUTED
+PASS P9   hubset  no-stale           expected=NOT_SAMPLED got=NOT_SAMPLED
+PASS R1   any     as-predicted       expected=HELD        got=HELD
+PASS R1   any     scratch            expected=REFUTED     got=REFUTED
+PASS R2   any     as-predicted       expected=HELD        got=HELD
+PASS R2   any     scratch            expected=REFUTED     got=REFUTED
+PASS P10  any     as-predicted       expected=HELD        got=HELD
+PASS P10  any     scratch            expected=REFUTED     got=REFUTED
+PASS P11  hubset  as-predicted       expected=HELD        got=HELD
+PASS P12  hubset  as-predicted       expected=HELD        got=HELD
+PASS P11  hubset  scratch            expected=REFUTED     got=REFUTED
+PASS P12  hubset  scratch            expected=REFUTED     got=REFUTED
+PASS P11  main    as-predicted       expected=HELD        got=HELD
+PASS R7   main    as-predicted       expected=HELD        got=HELD
+PASS R7   hubset  refused-on-hubset  expected=false       got=false
+PASS R7   main    scratch            expected=REFUTED     got=REFUTED
+PASS LOAD any     armed-at-load      expected=0           got=0
+PASS LOAD any     bindings           expected=7           got=7
+PASS LOAD any     triggers           expected=6           got=6
+armed at load (before scenarios): 0
+58 of 58 rehearsal demands held
+VOID: desk fixtures only; no game ran. See the module docstring.
+ALL DEMANDS HELD
+
+##############################################################################
+# desk_hubset07b_rehearsal.py
+##############################################################################
+PASS SEL   any     exposed-fixture              expected=true              got=true
+PASS SEL   any     nearest-in-reach             expected=false             got=false
+PASS SEL   any     unit-in-range                expected=false             got=false
+PASS SEL   any     in-a-dome                    expected=false             got=false
+PASS SEL   any     hub-within-radius            expected=false             got=false
+PASS SEL   any     unit-within-radius           expected=false             got=false
+PASS SEL   any     train-route                  expected=false             got=false
+PASS SEL   any     work-route                   expected=false             got=false
+PASS SEL   any     no-shuttles                  expected=false             got=false
+PASS SEL   any     unlinked                     expected=false             got=false
+PASS SEL   any     other-community-in-reach     expected=false             got=false
+PASS ARR   any     first-poll-silent            expected=false             got=false
+PASS ARR   any     exposed-landing-fires        expected=true              got=true
+PASS ARR   any     subject-selected             expected=true              got=true
+PASS ARR   any     native-true-landing-ignored  expected=false             got=false
+PASS ARR   any     rejects-counted              expected=1                 got=1
+PASS ARR   any     day-timeout                  expected=NOT_SAMPLED       got=NOT_SAMPLED
+PASS FIRE  main    fires-and-follows            expected=true              got=true
+PASS FIRE  main    refuses-on-changed-inputs    expected=false             got=false
+PASS FIRE  main    refuses-unpaused             expected=false             got=false
+PASS C114  main    as-predicted                 expected=HELD              got=HELD
+PASS C114  main    scratch                      expected=REFUTED           got=REFUTED
+PASS C114  hubset  as-predicted                 expected=HELD              got=HELD
+PASS C114  hubset  scratch                      expected=REFUTED           got=REFUTED
+PASS C114  any     not-exposed                  expected=NOT_SAMPLED       got=NOT_SAMPLED
+PASS C111  hubset  as-predicted                 expected=HELD              got=HELD
+PASS C111  hubset  scratch                      expected=REFUTED           got=REFUTED
+PASS C111  main    as-predicted                 expected=HELD              got=HELD
+PASS C111  main    scratch                      expected=REFUTED           got=REFUTED
+PASS BUSY  any     five-with-sibling            expected=true              got=true
+PASS BUSY  any     four-with-sibling            expected=false             got=false
+PASS BUSY  any     five-no-sibling              expected=false             got=false
+PASS SALV  hubset  salvages-at-1x               expected=true              got=true
+PASS SALV  hubset  refuses-thinned              expected=false             got=false
+PASS C117  hubset  as-predicted                 expected=HELD              got=HELD
+PASS C117  hubset  scratch                      expected=REFUTED           got=REFUTED
+PASS C117  main    as-predicted                 expected=HELD              got=HELD
+PASS C117  main    scratch                      expected=REFUTED           got=REFUTED
+PASS C117  any     no-hub-landing               expected=NOT_SAMPLED       got=NOT_SAMPLED
+PASS C117  any     cancelled                    expected=salvage cancelled got=salvage cancelled
+PASS C117  any     no-speedup-before-drain      expected=nil               got=nil
+PASS C117  any     speedup-at-drain             expected=true              got=true
+PASS C117  any     ends-when-all-landed         expected=true              got=true
+PASS ENTRY hubset  as-predicted                 expected=HELD              got=HELD
+PASS ENTRY hubset  scratch                      expected=REFUTED           got=REFUTED
+PASS LOAD  any     armed-at-load                expected=0                 got=0
+PASS LOAD  any     bindings                     expected=6                 got=6
+PASS LOAD  any     triggers                     expected=4                 got=4
+armed at load (before scenarios): 0
+48 of 48 rehearsal demands held
+VOID: desk fixtures only; no game ran. See the module docstring.
+ALL DEMANDS HELD
+
+##############################################################################
+# desk_load_first.py
+##############################################################################
+==============================================================================
+LoadFirst desk controls — with the promotion (HEAD f65b609, game 1.1.1.405907, Lua 5.5 | lupa 2.8)
+==============================================================================
+lua: Lua 5.5 | lupa 2.8
+
+INPUT Code/00_Core.lua 8a2cdcc1dac9cac54eeb1de0f1bab056f832cef250aadbdb12b07323d5d20d73
+INPUT Code/01_LoadFirst.lua 6c5dc55a46f70455ed17059c67435ec1ad916840f839f963308d7c6c9ccfd8ad
+INPUT Code/Hubset_OnHubNow.lua 14352af7af53ff7a591ce5d70e9595a5339724ba6f8a0121b8fe03fa97b7fd9b
+INPUT Code/Fix_VacuumWalks.lua 8c8bd96a3f04dd00c63ece0c394bedad6607b41b629c1a883241fbda54e0d107
+INPUT Code/Fix_HubLocalAccess.lua 09f31d6716973a77ce1428fb891d2e2319140d3a7e530c7fbde34669fc1e7994
+SHIPPED CommonLua/Modding/Mod.lua ModEnvBlacklist 1280-1441 6bef8043e0ecda3c7589af72c6de2138b5f123fc6b8e73dc102fb8e0da056043
+SHIPPED CommonLua/Modding/Mod.lua env block 1551-1626 2c6f5b8e5116637396cd861890e72a14f9306ccf283bdbd09d27f98de295a699
+SHIPPED CommonLua/Modding/Mod.lua WriteModPersistentData 1487-1503, SetupEnv 1628-1645, GetModsEnabledByUser 1995-2001
+SHIPPED CommonLua/Modding/Mod.lua queue 1873-1993 749348d898cbef2fd42a426c357bfd960903ea4928b0b9e2111c19be31da249e
+SHIPPED CommonLua/UI/ModManager.lua TurnModOn 35-37 TurnModOff 39-41
+SHIPPED Lua/Units/Colonist.lua StartShuttleLeg 2016-2029
+PN_DEFINITIONS 45-47,49-51 members=2
+
+  PASS  1a middle: saved B,PACK,C becomes PACK,B,C  -- SMR_CommunityFixPack,B,C
+  PASS  1a next queue is PACK,B,C  -- SMR_CommunityFixPack,B,C
+  PASS  1a running ModsLoaded stays B,PACK,C  -- B,SMR_CommunityFixPack,C
+  PASS  1a exactly one save request, delay 1000  -- calls=1 delay=1000
+  PASS  1a LoadFirst active, detail names the move  -- active / moved to the front of the saved mod order (was 2 of 3); applies at the next game start
+  PASS  1a notice: one question, Restart now / Later, no restart on Later  -- questions=1 restarts=0
+  PASS  1a Lua reload: no second write, no second notice  -- saves=1 questions=1
+  PASS  1b last: saved A,B,PACK becomes PACK,A,B  -- SMR_CommunityFixPack,A,B
+  PASS  1b Restart now calls the game's restart routine once  -- 1
+  PASS  2 already first: saved list unchanged  -- SMR_CommunityFixPack,A,B
+  PASS  2 already first: no save request
+  PASS  2 already first: LoadFirst active, detail says first of 3  -- active / first of 3 in the saved mod order; nothing written
+  PASS  2 already first: no notice  -- questions=0 messages=0
+  PASS  2 already first: persistent slot untouched
+  PASS  3a config.LoadAllMods: raw saved list untouched  -- B,SMR_CommunityFixPack,C
+  PASS  3a config.LoadAllMods: no save request
+  PASS  3a config.LoadAllMods: LoadFirst inactive naming LoadAllMods  -- inactive / the game is loading every installed mod in alphabetical order (LoadAllMods), so the saved order does not apply
+  PASS  3a config.LoadAllMods: a log line says not applied  -- [CommunityFixPack] LoadFirst: not applied — config.LoadAllMods is set; the saved order is untouched (A, B, C, SMR_CommunityFixPack) | [CommunityFixPack] LoadFirst: inactive (the game is loading every installed mod in alphabetical order (LoadAllMods), so the saved order does not apply)
+  PASS  3b AccountStorage.LoadAllMods: raw saved list untouched  -- B,SMR_CommunityFixPack,C
+  PASS  3b AccountStorage.LoadAllMods: no save request
+  PASS  3b AccountStorage.LoadAllMods: LoadFirst inactive naming LoadAllMods  -- inactive / the game is loading every installed mod in alphabetical order (LoadAllMods), so the saved order does not apply
+  PASS  3b AccountStorage.LoadAllMods: a log line says not applied  -- [CommunityFixPack] LoadFirst: not applied — the account's LoadAllMods flag is set, so the saved list is ignored; the saved order is untouched (A, B, C, SMR_CommunityFixPack) | [CommunityFixPack] LoadFirst: inactive (the game is loading every installed mod in alphabetical order (LoadAllMods), so the saved order does not apply)
+  PASS  4a option off: saved list untouched  -- B,SMR_CommunityFixPack,C
+  PASS  4a option off: no save request
+  PASS  4a option off: LoadFirst inactive 'turned off in Mod Options'  -- inactive / turned off in Mod Options
+  PASS  4b toggled on: promotes at once  -- SMR_CommunityFixPack,B,C
+  PASS  4b toggled on: one save request, LoadFirst active  -- saves=1 status=active
+  PASS  4b toggled on: the notice shows  -- 1
+  PASS  4c toggled off again: inactive, order left as it is, no new request  -- status=inactive saved=SMR_CommunityFixPack,B,C saves=1
+  PASS  4d veto SMRFixPack_Disabled.LoadFirst: disabled, untouched, no request  -- status=disabled saved=B,SMR_CommunityFixPack,C saves=0
+  PASS  5a slot: our line first, promotions=1 from=2 of=3  -- 'SMRFixPack.LoadFirst v1 promotions=1 last=1790390985 from=2 of=3'
+  PASS  5a slot: both foreign lines preserved verbatim  -- ['somebody-else v3 alpha', 'beta']
+  PASS  5b second promotion: promotions=2, foreign lines still intact, saved list PACK first  -- ['SMRFixPack.LoadFirst v1 promotions=2 last=1790390985 from=3 of=3', 'somebody-else v3 alpha', 'beta'] saved=SMR_CommunityFixPack,B,C saves=2
+  PASS  5c already first: a foreign slot is not rewritten, LoadFirst active 'first of'  -- 'somebody-else v3 alpha' saves=0 active
+  PASS  6a own prerequisite A: saved PACK,B,A; queue hoists A first, PACK before B  -- saved=SMR_CommunityFixPack,B,A queue=A,SMR_CommunityFixPack,B
+  PASS  6b Z requires the pack: saved PACK,Z,B; queue PACK,Z,B (Z unmoved relative to B)  -- saved=SMR_CommunityFixPack,Z,B queue=SMR_CommunityFixPack,Z,B
+  PASS  shape: pack absent from the list: untouched, no request, inactive 'not in the saved mod list'  -- saved=A,B saves=0 inactive/this pack is not in the saved mod list, so there is nothing to reorder
+  PASS  shape: duplicate B collapses to its first position, stale GHOST kept in place  -- SMR_CommunityFixPack,B,GHOST
+  PASS  shape: duplicate/stale list requests exactly one save  -- 1
+  PASS  shape: five mods, pack third: others keep A,B,C,D order  -- SMR_CommunityFixPack,A,B,C,D
+  PASS  7a PN before pack: VacuumWalks declines (inactive)  -- inactive / the shipped emigration code has no work-slot reservation or shuttle landing slots; this repair stands down on the older body
+  PASS  7a PN before pack: HubLocalAccess does not apply  -- inactive / Dome not found (game update changed it?)
+  PASS  7a saved PN,PACK becomes PACK,PN; next queue PACK,PN  -- saved=SMR_CommunityFixPack,iooW34Y queue=SMR_CommunityFixPack,iooW34Y
+  PASS  7b next launch in that order: VacuumWalks active  -- active / 
+  PASS  7b next launch in that order: HubLocalAccess active  -- active / 
+  PASS  7b next launch: LoadFirst already first, no write  -- status=active saves=0
+  PASS  canary: metadata.lua loads under the metadata env and returns a ModDef
+  PASS  canary: declared property set = pre-canary set + default_options  -- ['default_options']
+  PASS  canary: the literal is in the tree file and leaks no global
+  PASS  canary: the code list still starts 00_Core, 01_LoadFirst
+
+==============================================================================
+50 of 50 demands held
+ALL DEMANDS HELD
+
+##############################################################################
+# desk_migration_cluster.py
+##############################################################################
+==============================================================================
+Migration cluster: controlled branch evidence, not in-play reproduction
+==============================================================================
+lua: Lua 5.5 | lupa 2.8
+
+  PASS  F51 vanilla retains false after shuttles become available
+  PASS  F51 patch recomputes both false-to-true and true-to-false
+  PASS  F51 old permanent-block inference fails: false mode still creates shuttle task
+  PASS  F52 vanilla 300-unit vacuum leg omits passage
+  PASS  F52 patch uses available passage
+  PASS  F52 no-passage control remains an outside walk
+  PASS  F52 breathable control unchanged
+  PASS  F54 vanilla admits player-disabled hub
+  PASS  F54 wrapper rejects player-disabled hub
+  PASS  F54 working-hub control admitted
+  PASS  F54 self-lifting suspension control admitted
+  PASS  F60 vanilla tally/gate exclude unpowered home, assignment accepts it
+  PASS  F60 vanilla applicant housing estimate excludes the unpowered home
+  PASS  F60 patched tally counts 3 but migration gate still rejects
+  PASS  F60 patch reports all 3 applicants housed while arrival space gate rejects home
+  PASS  F60 powered-home control agrees on tally and gate
+
+==============================================================================
+16 of 16 demands held
+ALL DEMANDS HELD
+
+##############################################################################
+# desk_migration_observations.py
+##############################################################################
+==============================================================================
+Migration observations: supplied topology, no in-play reproduction
+==============================================================================
+lua: Lua 5.5 | lupa 2.8
+
+  PASS  F62 ordinary A-B-C chain: network includes C, service candidates do not
+  PASS  F62 Passage Hub connects its spokes pairwise and offers C service to A
+  PASS  F61 selector has no own/destination quarantine gate with eligible-service fixture
+  PASS  F61/F62 service-passage switch still excludes remote service
+  PASS  F80 real builder produces a three-station loop from paired-connector fixture
+  PASS  F80 loop seam C->A uses stride -2 and omits B on that departure track
+  PASS  F80 ordinary forward direction covers both remaining loop stations
+  PASS  F80 opposite track from C covers B and A: union can hide per-track omission
+  PASS  F80 passenger flag correctly truncates a cargo-only edge
+  PASS  F80 open-line control visits both destinations without loop seam
+
+==============================================================================
+10 of 10 demands held
+ALL DEMANDS HELD
+
+##############################################################################
+# desk_mystery_tech_migration.py
+##############################################################################
+COMMAND python tools/desk_mystery_tech_migration.py
+HEAD f65b609d14a05546649672362a06ec8891c97598
+MODULE tools/held/Fix_MysteryTechMigration.lua
+==============================================================================
+Mystery tech availability: synthetic state, shipped decisions
+==============================================================================
+lua: Lua 5.5 | lupa 2.8
+
+SOURCE CommonLua/Features/LockablePreset.lua:1-536 sha256=993bdf37255d005af31f30f5d531c392b8f0de5316de63740f4aa6ad563f7625
+REGISTRY Data/Tech.lua sha256=b1350e9a1779497744758046113624fa0d3bb6578339646ca9000d8dce98adad
+REGISTRY group=Mysteries presets 55
+SOURCE 1.1.0 CommonLua/Libs/Research/Research.lua:8-10 sha256=dc904ebbcef8a1720753109a0b29f14d1d51addfc6cfa11b215e3ec34c5ad80f
+SOURCE 1.1.0 CommonLua/Libs/Research/Research.lua:12-14 sha256=80d3d666e71f0de08fcb15e907afe202a5344712ea4990d515003965765bfc88
+SOURCE 1.1.0 CommonLua/Libs/Research/Research.lua:23-29 sha256=76f1fa31c3c096226487fe26be0007d9d597cef687c7f1fd010b50d765265a9e
+SOURCE 1.1.0 CommonLua/Libs/Research/Research.lua:31-38 sha256=d7dcf0060384a327b6e40e6ab9511e91754986768886e823105ca809a62d195c
+SOURCE 1.1.0 CommonLua/Libs/Research/Research.lua:40-44 sha256=6969fd4eb54c54880863317a575259ddea03ff5ae1399bcfdf4df78ddec5b4ad
+SOURCE 1.1.0 CommonLua/Libs/Research/Research.lua:46-49 sha256=cb7158cb399c87548e85bcfcc1fe077cd05dd6eaa0c73c62d8fb23b06d430b45
+SOURCE 1.1.0 CommonLua/Libs/Research/Research.lua:51-54 sha256=2b12f5ad9b1d279729ce23aa8c1c51258e6eb17e9eef9e54372212ae75a8321f
+SOURCE 1.1.0 CommonLua/Libs/Research/Research.lua:147-159 sha256=2e218ab60ebae9e837fb727523da1599a9bf7d65b3d704af48c4ed95c219d2e1
+SOURCE 1.1.0 CommonLua/Libs/Research/Research.lua:161-164 sha256=42be02eddcb3df21691284539cc17abd63412c4dc8e0deb3da6a869d2ff9e7b4
+SOURCE 1.1.0 Lua/TechTree.lua:434-436 sha256=cc9b78b02225f4e6884ebbded93b612c22ca4833085b20b9e8c8c22308432b2e
+SOURCE 1.1.0 Lua/TechTree.lua:443-474 sha256=f3891c426758b32f4131e2784feb8c66fb526ea531754f823db842012a4cf08d
+SOURCE 1.1.0 Lua/TechTree.lua:476-478 sha256=8166474379bec340bb0ebf4e1121b39a09c8733b87df2f1e89f942b18eaf8b73
+SOURCE 1.1.0 Lua/TechTree.lua:591-595 sha256=f9964658f24ba19446ca21297d0d4b2a29c4a2a1d8550f8ae7bbf5670fa943e4
+SOURCE 1.1.0 Lua/TechTree.lua:1537-1540 sha256=f4bc929c69d2d3f4986f1d7f0c27a770865ef1999b9e9cfbf20f4e339d7c9e7e
+SOURCE 1.1.0 Lua/TechTree.lua:868-874 sha256=58ec74366788a8e5b99635e06f7ff5a34aa80bd6bf377357de0a1f2bab1b10e0
+SOURCE 1.1.0 Lua/TechTree.lua:892-900 sha256=0f10d7ef1f2978d8495140d4612acfed76c74791180d1d03b4cf3cc6b3c7bb36
+SOURCE 1.1.0 Lua/TechTree.lua:876-878 sha256=4f41c62d8dc0acfce9a910f3d182a101fe369572868477dc6bcf1e20ca812a40
+SOURCE 1.1.0 Lua/TechTree.lua:1200-1240 sha256=2a5387318307ba1e8344a54e45f5e66d3ab44adb8df5b4013c0af23b3be6b8ac
+SOURCE 1.1.0 Lua/TechTree.lua:182-192 sha256=d7350f5413e575df2187b38546db78599c5dbd418fc13ef856995b83a6ffd591
+SOURCE 1.1.0 Lua/TechTree.lua:1275-1282 sha256=4891ddecfac03c634f7db993e58dfd0e07c92dd8bc099b23835ac62a28e8a33a
+SOURCE 1.1.0 Lua/TechTree.lua:1486-1502 sha256=6df74c576e1c5a9aba231fbb704ab83e71abb012344f8bca253eb91510417b79
+SOURCE 1.1.0 Lua/TechTree.lua:1298-1313 sha256=aaab58a814e8b81fb54047a536ae6bba702f0e2464616c73ddbe023774490265
+SOURCE 1.1.0 CommonLua/X/XPresetMap.lua:635-641 sha256=1176ad032a0dcd962d577cf84ea50b31f929fb1585a3a14faac350109e94760f
+SOURCE 1.1.0 Lua/Tech.lua:504-507 sha256=daa4020b9a39fd0a371b2916413dbd0c107d3f5b051c80625415101554ac5267
+SOURCE 1.1.0 Lua/Tech.lua:468-470 sha256=983562acb12451d116779c3d5f75bc405a977d29dd95cac2fc0974a154017f2d
+SOURCE 1.1.0 Lua/Tech.lua:519-521 sha256=1d04dd76c6c3cb23498ce844f50d4ad4104375085bb40f6473eac5153f81eeb5
+SOURCE 1.1.0 Lua/Research.lua:140-142 sha256=9cfc270cfb1f491f4d09dae58cfccb18f3a187e536df2ca6c40dc8a16b28ea98
+SOURCE 1.1.0 Lua/Research.lua:146-148 sha256=1234c8e1ba2465c572df3d1e9393d4efde2abeeac37314126020ee3503ae107a
+SOURCE 1.1.0 Lua/Research.lua:89-91 sha256=751d1cf09011f06a62c43f5f9cce0de5dd9287e21189f4a6e644213cf13222b7
+SOURCE 1.1.0 Lua/Research.lua:161-163 sha256=5cc9ef413fe805a9b57531a86952e2637629ee125deb51c0dde90df8b522b2c0
+SOURCE 1.1.0 Lua/Research.lua:150-159 sha256=03135d3e1a86bb9c42fdde328d3ad045280d0544c110e150423ce65866593a11
+SOURCE 1.1.0 Lua/Research.lua:373-374 sha256=e5933f15a14dd8e73d252a32d318189418ab8582e794acf625d966e338e33338
+SOURCE 1.1.0 Lua/Research.lua:225-227 sha256=8c7715a479c8653d8f551e4113f5286d680cdcbfe21bf211e11eb7e64f94fb27
+SOURCE 1.1.0 Lua/Research.lua:255-257 sha256=b63aa661b658f3c585dc8793def836d2176345c90aeaa344d2b26567c816644c
+SOURCE 1.1.0 Lua/Research.lua:251-253 sha256=8ae98f6dccbb589c5278616da9dc6ea6c59094fe7d64284947e2e41cb7faa9f4
+SOURCE 1.1.0 Lua/Mysteries/Mystery.lua:72-84 sha256=848682ca617d72e3ed61a62675f52198bcf4e69207813362f419d501499e72cc
+SOURCE 1.1.0 Lua/Sequences/SA_Gameplay.lua:1196-1215 sha256=ec5a2f4533ac7527d029dbb16b4ea7260b4619f8ebde9eb0d0a80d23878e41c9
+SOURCE 1.1.0 Lua/Sequences/SA_Gameplay.lua:822-854 sha256=978f5fb6f9f351fb6e320673ac94ef0c764f9a3a7d5b15bea4859165e2d975d1
+SOURCE 1.1.0 Lua/Sequences/SA_Gameplay.lua:871-882 sha256=10b95fa833d6fb29b08eadf7aacc8fe8721b96e0ceea67eebf25e74c4fa45802
+SOURCE 1.0.7 Lua/Research.lua:668-682 sha256=661656a11a812ad5dfd4ea93580ae51d6ec5ad63e0a9270c763e25f37ecbae8f
+  PASS  before reveal the entire cure family is hidden
+  PASS  before reveal every Mysteries preset is hidden
+
+##############################################################################
+# desk_probes_f67_f59.py
+##############################################################################
+==============================================================================
+F67 / F59 kit-probe falsifier -- shipped bodies at their real lines, module + probe text verbatim
+==============================================================================
+lua: Lua 5.5 | lupa 2.8
+
+extracted Lua/UniversalRocket.lua function UniversalRocketBase:IsCargoReady :535-559
+extracted Lua/UniversalRocket.lua function UniversalRocketBase:WaitsForManualLaunch :3025-3031
+extracted Lua/UniversalRocket.lua function UniversalRocketBase:GetArrivalLocType :952-954
+extracted Lua/Units/Colonist.lua function Colonist:SetResidence :3102-3121
+extracted Lua/Buildings/Residence.lua function Residence:GetFreeSpace :233-235
+
+== LanderEmptyLaunch (F67) ==
+  PASS  [F67 L0] pre-rebuild probe text vs 1.1.0 body reproduces the sitting's ERROR line  -- ERROR: Lua/UniversalRocket.lua:544: attempt to call a nil value (method 'WaitsForManualLaunch')
+  PASS  [F67 L1] module registered active, apply NOT run (vanilla body) -> FAIL on the empty clause  -- FAIL: empty auto rocket reports ready — it launches with nothing and comes straight back (F67)
+  PASS  [F67 L2] module applied -> PASS  -- PASS: empty flight blocked, loaded flight still ready (1.1.0 body :535-559 driven; fixture past the :554 automode gate)
+  PASS  [F67 L3] over-broad wrapper (always false) -> FAIL on the loaded clause  -- FAIL: a LOADED auto rocket is blocked too — an over-broad fix, or vanilla's automode gate (:554-556) closed on a fixture that should pre-date it by two hours
+  PASS  [F67 L4] vanilla alone: LOADED fixture reads false inside its first automode hour, true two hours in (the :554 gate; retyped fixture)  -- false/true
+
+== FreedHousingNotice (F59) ==
+  FAIL  [F59 L0] pre-rebuild probe text vs 1.1.0 body reproduces the sitting's ERROR line  -- ERROR: Lua/Units/Colonist.lua:3118: attempt to call a nil value (method 'UpdateLowComfortNotification')
+  PASS  [F59 L1] module registered active, apply NOT run (vanilla body) -> FAIL: nobody told  -- FAIL: a home that just fell vacant does not offer itself to the dome's homeless — they wait for their own update, up to 12 game hours in a large colony
+  PASS  [F59 L2] module applied -> PASS  -- PASS: vacated home offers the bed to the dome's homeless once the caller's operation has finished, not inside it; a residence with no free slot does not
+  PASS  [F59 L3] a wrapper that notifies INLINE -> FAIL on the repair's own clause  -- FAIL: the vacancy notification fires INSIDE Colonist:SetResidence — a caller that frees the slot as a middle step of a larger operation (expedition boarding, manual Set Residence) loses the bed to a neighbour (F59 A1/A2)
+  PASS  [F59 L3b] over-broad wrapper (defers, but no free-space test) -> FAIL on the no-slot clause  -- FAIL: a residence with no usable slot still walks the homeless list
+
+==============================================================================
+9 of 10 demands held
+REFUTED -- 1 demand(s) failed:
+   - [F59 L0] pre-rebuild probe text vs 1.1.0 body reproduces the sitting's ERROR line
+
+##############################################################################
+# desk_progress_seam.py
+##############################################################################
+PROGRESS SEAM DESK: Lua 5.5 | lupa 2.8 (archived bodies; no runtime claim)
+expired disaster 1.0.7: (False, 0, 'FactionDisasterStop', True)
+expired disaster 1.1.0 zero seats: (True, 1, None, None)
+expired disaster 1.1.0 one seat: (False, 0, 'FactionDisasterStop', True)
+counterfactual one-seat branch stops and removes the disaster (control discriminates)
+expired completed task, no active task: 1
+expired completed task, active-task control: 0
+counterfactual active-task branch removes the expired approval bonus (control discriminates)
+First-session popup route: old declaration+BeginSession call became a new declaration only; the retained EarthCouncilIntro preset and new closure message have no literal consumer
+DeepScanning route: live Tech carries both effects; TechPreset is an inert id/group stub; exploration reads DeepScanAvailable; probes separately require AdaptedProbes
+PROBE SWEEP: clean
+PASS: disaster and completed-task controls discriminate; popup orphan and research route are source-connected
+
+##############################################################################
+# desk_seam_food.py
+##############################################################################
+SEAM DESK: Lua 5.5 | lupa 2.8 (archived bodies; no runtime claim)
+pasture 1.0.7 performance=0: actual=0, expected=0, ui=None
+pasture 1.0.7 performance=48: actual=2400, expected=2400, ui=None
+pasture 1.0.7 performance=100: actual=5000, expected=5000, ui=None
+pasture 1.1.0 performance=0: actual=0, expected=0, ui=0
+pasture 1.1.0 performance=48: actual=2500.0, expected=1200.0, ui=1200
+pasture 1.1.0 performance=100: actual=2500.0, expected=2500.0, ui=2500
+counterfactual identity round helper: mismatch demand would FAIL (control discriminates)
+ingredient enabled=True registry=True vegan=False: advertised, consumed, remaining=(1, 1, 200)
+ingredient enabled=False registry=True vegan=False: advertised, consumed, remaining=(0, 1, 200)
+ingredient enabled=False registry=False vegan=False: advertised, consumed, remaining=(0, 0, 300)
+ingredient enabled=True registry=True vegan=True: advertised, consumed, remaining=(1, 0, 300)
+1.0.7: ingredient consumer absent; no equivalent ingredient behavior control claimed
+GetNextCrop 1.0.7: adjacent=B, gap-before-B=None (bounded loop; player caller not found)
+GetNextCrop 1.1.0: adjacent=B, gap-before-B=None (bounded loop; player caller not found)
+PASS: pasture branch difference and ingredient-toggle contradiction discriminate
+
+##############################################################################
+# desk_shelter_reflex.py
+##############################################################################
+==============================================================================
+F73 shelter wrapper: branch and stand-down controls only
+==============================================================================
+lua: Lua 5.5 | lupa 2.8
+
+  PASS  module-absent control calls original Idle and supplies no Rest command
+  PASS  half-budget vacuum condition sends Rest and does not call original
+  PASS  below half budget: original Idle runs, no shelter command
+  PASS  no residence: original Idle runs, no shelter command
+  PASS  nonworking residence: original Idle runs, no shelter command
+  PASS  transport task present: original Idle runs, no shelter command
+  PASS  dying colonist: original Idle runs, no shelter command
+  PASS  no outside timer: original Idle runs, no shelter command
+  PASS  retry throttle: original Idle runs, no shelter command
+  PASS  breathable atmosphere: original Idle runs, no shelter command
+
+==============================================================================
+10 of 10 demands held
+ALL DEMANDS HELD
+
+==============================================================================
+DESK BENCH: 44 harness(es)
+  desk_c104_political_animal.py    REFUTED (exit 1)
+  desk_c105_water_reclamation.py   HELD
+  desk_c107_dry_farming.py         REFUTED (exit 1)
+  desk_c108_wildfire_cure.py       HELD
+  desk_c111_rescue_text.py         HELD
+  desk_c114_hub_access.py          HELD
+  desk_c114_sitting_findings.py    HELD
+  desk_c115_home_rescue.py         HELD
+  desk_c116_hub_marker.py          HELD
+  desk_c117_hub_salvage.py         HELD
+  desk_c74_hit_moment_fx.py        HELD
+  desk_c83_arrivals.py             HELD
+  desk_c85_clogged.py              HELD
+  desk_c86_scan_downgrade.py       HELD
+  desk_c88_prefab.py               HELD
+  desk_c89_faction_gate.py         HELD
+  desk_c90_datapatch.py            HELD
+  desk_c92_achievement.py          REFUTED (exit 1)
+  desk_c93_open_pasture.py         HELD
+  desk_c95_habitat_draft.py        HELD
+  desk_c95_return_home.py          HELD
+  desk_c96_rover_subclass.py       HELD
+  desk_caller_seam.py              HELD
+  desk_ck53_hostile_globals.py     HELD
+  desk_f117_argshape.py            HELD
+  desk_f117_kitprobe.py            HELD
+  desk_f117_recipe.py              HELD
+  desk_f119_trade_fuel.py          HELD
+  desk_f124_track.py               HELD
+  desk_f125_vacuum.py              HELD
+  desk_f127_arrival_booking.py     HELD
+  desk_f59_expedition.py           HELD
+  desk_f59_interact.py             HELD
+  desk_gamepatch_retirements.py    HELD
+  desk_hubset07_rehearsal.py       HELD
+  desk_hubset07b_rehearsal.py      HELD
+  desk_load_first.py               HELD
+  desk_migration_cluster.py        HELD
+  desk_migration_observations.py   HELD
+  desk_mystery_tech_migration.py   REFUTED (exit 1)
+  desk_probes_f67_f59.py           REFUTED (exit 1)
+  desk_progress_seam.py            HELD
+  desk_seam_food.py                HELD
+  desk_shelter_reflex.py           HELD
+Traceback (most recent call last):
+  File "B:\Dev\SMR\SMR-BugFixPack\scratch\load_first_audit_8e2325a\tools\desk_c107_dry_farming.py", line 575, in <module>
+    raise SystemExit(main())
+                     ~~~~^^
+  File "B:\Dev\SMR\SMR-BugFixPack\scratch\load_first_audit_8e2325a\tools\desk_c107_dry_farming.py", line 549, in main
+    legs(bench)
+    ~~~~^^^^^^^
+  File "B:\Dev\SMR\SMR-BugFixPack\scratch\load_first_audit_8e2325a\tools\desk_c107_dry_farming.py", line 399, in legs
+    rt.execute(HEALED_SAVE)
+    ~~~~~~~~~~^^^^^^^^^^^^^
+  File "lupa/lua55.pyx", line 466, in lupa.lua55.LuaRuntime.execute
+  File "lupa/lua55.pyx", line 1897, in lupa.lua55.run_lua
+  File "lupa/lua55.pyx", line 1911, in lupa.lua55.call_lua
+  File "lupa/lua55.pyx", line 1938, in lupa.lua55.execute_lua_call
+  File "lupa/lua55.pyx", line 1819, in lupa.lua55.raise_lua_error
+lupa.lua55.LuaError: Lua/MarsGameEffects.lua:284: attempt to call a nil value (global 'TechModifierName')
+stack traceback:
+	Lua/MarsGameEffects.lua:284: in method 'OnApplyEffect'
+	[string "<python>"]:4: in main chunk
+Traceback (most recent call last):
+  File "B:\Dev\SMR\SMR-BugFixPack\scratch\load_first_audit_8e2325a\tools\desk_mystery_tech_migration.py", line 490, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "B:\Dev\SMR\SMR-BugFixPack\scratch\load_first_audit_8e2325a\tools\desk_mystery_tech_migration.py", line 255, in main
+    rt.execute("reveal()")
+    ~~~~~~~~~~^^^^^^^^^^^^
+  File "lupa/lua55.pyx", line 466, in lupa.lua55.LuaRuntime.execute
+  File "lupa/lua55.pyx", line 1897, in lupa.lua55.run_lua
+  File "lupa/lua55.pyx", line 1911, in lupa.lua55.call_lua
+  File "lupa/lua55.pyx", line 1938, in lupa.lua55.execute_lua_call
+  File "lupa/lua55.pyx", line 1819, in lupa.lua55.raise_lua_error
+lupa.lua55.LuaError: Lua/Mysteries/Mystery.lua:77: attempt to call a nil value (global 'ResolveTechMystery')
+stack traceback:
+	Lua/Mysteries/Mystery.lua:77: in local 'fn'
+	[string "<python>"]:57: in global 'Msg'
+	Lua/TechTree.lua:1280: in function 'UnlockTech'
+	(...tail calls...)
+	Lua/Sequences/SA_Gameplay.lua:1207: in field 'SAExec'
+	[string "<python>"]:18: in global 'reveal'
+	[string "<python>"]:1: in main chunk

@@ -410,3 +410,9 @@ guards; the promoted order applies both). Report:
 [LOAD_ORDER_FIRST_BUILD_2026-09-25.md](LOAD_ORDER_FIRST_BUILD_2026-09-25.md). The
 retail sitting in that report is planned, not run; persistence on other rigs and the
 Paradox playset sync as an explicit act stay HYPOTHESIS until it runs.
+
+**Audit, 2026-09-25: CHANGES on `8e2325a`.** The normal-case evidence above held on rerun;
+later opt-in can silently promote, persistent data can be discarded, and the sitting and
+canary proof need correction. The named repairs, controls and retained owner authority are
+in [the build report's fresh audit](LOAD_ORDER_FIRST_BUILD_2026-09-25.md#11--fresh-context-audit--changes-2026-09-25).
+The code remains unmerged and the sitting remains held for repair and re-audit.

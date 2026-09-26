@@ -1,0 +1,158 @@
+COMMAND python tools/desk_c104_political_animal.py on main f65b609d14a05546649672362a06ec8891c97598
+
+COMMAND python tools/desk_c104_political_animal.py
+HEAD f65b609d14a05546649672362a06ec8891c97598
+==============================================================================
+C104 Political Animal: exclusive laws vs the achievement check; no fix
+==============================================================================
+lua: Lua 5.5 | lupa 2.8
+
+REGISTRY Data/PolicyCategoryDef.lua sha256=b26f6fbb7bbdd3ee
+REGISTRY Data/PolicyDef.lua sha256=2d1eee04d0991082
+REGISTRY DLC/norman/Presets/PolicyDef.lua sha256=06395a023538b2da
+REGISTRY Data/LawDef/LawDef-Default.lua sha256=0136760e5a3b8425
+REGISTRY Data/LawDef/LawDef-Earth.lua sha256=be9cb1103ebf6224
+REGISTRY Data/LawDef/LawDef-Economy.lua sha256=5006fdb58dadbf4b
+REGISTRY Data/LawDef/LawDef-Efficiency.lua sha256=419af4b9bfeaa152
+REGISTRY Data/LawDef/LawDef-Founder Stage.lua sha256=744f54937998f09a
+REGISTRY Data/LawDef/LawDef-Governance.lua sha256=b788f5ada631eddd
+REGISTRY Data/LawDef/LawDef-Independence.lua sha256=c3efb66f98b40909
+REGISTRY Data/LawDef/LawDef-Research.lua sha256=5f392b2530d8da9f
+REGISTRY Data/LawDef/LawDef-Technology.lua sha256=79eac38536145d41
+REGISTRY Data/LawDef/LawDef-Welfare.lua sha256=50c76520bd08b759
+REGISTRY DLC/norman/Presets/LawDef/LawDef-Food.lua sha256=61fd1f5b88833a32
+REGISTRY DLC/norman/Presets/LawDef/LawDef-Welfare.lua sha256=699ef29f3cbfb6b8
+SOURCE 1.1.0 CommonLua/Preset.lua:1763-1781 sha256=553e8b453ebd096c
+SOURCE 1.1.0 CommonLua/Scripting.lua:413-418 sha256=95acea2ae8982272
+SOURCE 1.1.0 CommonLua/Classes/Explanation.lua:32-43 sha256=bfb8355d647bb14e
+SOURCE 1.1.0 CommonLua/Features/GameRules.lua:45-48 sha256=2e6a48341c332fbf
+SOURCE 1.1.0 CommonLua/LabelContainer.lua:386-397 sha256=2c8667da3d06ae8b
+SOURCE 1.1.0 Lua/Factions/LawDef.lua:44-46 sha256=c21bb2030739ac35
+SOURCE 1.1.0 Lua/Factions/LawDef.lua:48-64 sha256=3702c62df58c7bfe
+SOURCE 1.1.0 Lua/Factions/LawDef.lua:66-83 sha256=ce23eef9fb6a1690
+SOURCE 1.1.0 Lua/Factions/LawDef.lua:178-194 sha256=42cc58f953622b6c
+SOURCE 1.1.0 Lua/Factions/LawDef.lua:275-291 sha256=2f04f6ff6c6de1e5
+SOURCE 1.1.0 Lua/Factions/LawDef.lua:196-206 sha256=e60bf2707c80daad
+SOURCE 1.1.0 Lua/Factions/LawDef.lua:325-342 sha256=b002b307f8134a53
+SOURCE 1.1.0 Lua/Factions/LawDef.lua:344-350 sha256=73582c2a816d02c1
+SOURCE 1.1.0 Lua/Factions/Legislature.lua:1187-1303 sha256=6efc9b6ad90afd03
+SOURCE 1.1.0 Lua/Factions/Legislature.lua:1713-1715 sha256=6b7490a211aa6a56
+SOURCE 1.1.0 Lua/Factions/Legislature.lua:696-703 sha256=787ff6b8e15cc312
+SOURCE 1.1.0 Lua/Factions/Laws.lua:894-930 sha256=d07a61c60a38966a
+SOURCE 1.1.0 Lua/Factions/Laws.lua:590-604 sha256=02848e855e4aaf2b
+SOURCE 1.1.0 Lua/Buildings/MartianAssembly.lua:33-36 sha256=6b561a258497646d
+SOURCE 1.1.0 Lua/PreGameMission.lua:341-345 sha256=3232065208ecf871
+SOURCE 1.1.0 Lua/Conditions.lua:83-85 sha256=337654ee9fff7fae
+SOURCE 1.1.0 Lua/Terraforming.lua:365-367 sha256=5e12edcc89f4a6b0
+
+  PASS  registry: 182 LawDef, 87 PolicyDef, 8 PolicyCategoryDef presets loaded (grep count agrees)  -- (182, 87, 8)
+  PASS  shipped RecalcPoliciesState walks 67 policies (the static extractor's figure)  -- 67
+  FAIL  post-independence requirement = 61 policies (66 counted minus 5 hidden PreIndependence)  -- 56
+  FAIL  NightShiftCompensations is in the achievement's requirement set
+  FAIL  QualityRest is in the achievement's requirement set
+  FAIL  SecondaryProduce is in the achievement's requirement set
+  FAIL  GMO is in the achievement's requirement set
+  PASS  EfficientAssembly is in the achievement's requirement set
+  PASS  no procall error while building the requirement (a shim gap would hide a policy)
+  FAIL  honest enactment (voting-card gate only) leaves exactly one law of each exclusive pair un-enactable
+  FAIL  honest enactment never unlocks the achievement  -- 1
+  FAIL  the daily revoke (law-level conditions only) removes nothing from that full set -- both halves of each pair survive
+  PASS  POSITIVE CONTROL: with the two locked laws forced in (as a cheat would), the revoke-stable set unlocks  -- 1
+  PASS  B2: Open Domes can still be enacted over Oxygen, and the next NewDay revokes Oxygen (not a blocker: Power/Water remain)  -- ['Policy_EnergyEfficiency_Oxygen:disable_conditions']
+  PASS  REQUIREMENT: dropping Policy_NightShiftCompensations from that full set refuses the unlock
+  PASS  REQUIREMENT: dropping Policy_QualityRest from that full set refuses the unlock
+  PASS  REQUIREMENT: dropping Policy_GMO from that full set refuses the unlock
+  PASS  order Policy_NightShiftCompensations then Policy_QualityRest: second is locked  -- second locked
+  PASS  order Policy_QualityRest then Policy_NightShiftCompensations: second is locked  -- second locked
+  PASS  order Policy_SecondaryProduce_Herbs then Policy_GMO: second is locked  -- second locked
+  PASS  order Policy_GMO then Policy_SecondaryProduce_Herbs: second is locked  -- second locked
+  PASS  order Policy_SecondaryProduce_Spices then Policy_GMO: second is locked  -- second locked
+  PASS  order Policy_GMO then Policy_SecondaryProduce_Spices: second is locked  -- second locked
+  PASS  order Policy_SecondaryProduce_Sugar then Policy_GMO: second is locked  -- second locked
+  PASS  order Policy_GMO then Policy_SecondaryProduce_Sugar: second is locked  -- second locked
+  LOCK EDGES (an active law that fully locks a required policy):
+  FAIL  the lock graph is exactly: 2 mutual pairs + Dictatorship's one-way lock (resolved by enacting it last)  -- ['Dictatorship locks Apportionment', 'Dictatorship locks AssemblyType', 'Policy_GMO locks SecondaryProduce', 'Policy_NightShiftCompensations locks QualityRest', 'Policy_QualityRest locks NightShiftCompensations', 'Policy_SecondaryProduce_Herbs locks GMO', 'Policy_SecondaryProduce_Spices locks GMO', 'Policy_SecondaryProduce_Sugar locks GMO']
+  PASS  no procall error across the enumeration
+  PASS  Politician: shipped state function marks EfficientAssembly hidden
+  PASS  Politician: EfficientAssembly is still required (hidden but not exempt)
+  PASS  control: any other commander sees EfficientAssembly unhidden
+  FAIL  Politician: even with both pairs forced in, the unlock is refused (EfficientAssembly unreachable)  -- 1
+  PASS  fix shape: exempting one policy of each pair lets HONEST enactment unlock (Astrogeologist)  -- (1, 0)
+  PASS  fix shape: plus exempting EfficientAssembly lets a Politician unlock honestly  -- (1, 0)
+  PASS  no procall error in any leg
+
+==============================================================================
+24 of 34 demands held
+REFUTED -- 10 demand(s) failed:
+   - post-independence requirement = 61 policies (66 counted minus 5 hidden PreIndependence)
+   - NightShiftCompensations is in the achievement's requirement set
+   - QualityRest is in the achievement's requirement set
+   - SecondaryProduce is in the achievement's requirement set
+   - GMO is in the achievement's requirement set
+   - honest enactment (voting-card gate only) leaves exactly one law of each exclusive pair un-enactable
+   - honest enactment never unlocks the achievement
+   - the daily revoke (law-level conditions only) removes nothing from that full set -- both halves of each pair survive
+   - the lock graph is exactly: 2 mutual pairs + Dictatorship's one-way lock (resolved by enacting it last)
+   - Politician: even with both pairs forced in, the unlock is refused (EfficientAssembly unreachable)
+
+EXIT 1
+
+COMMAND python tools/desk_c92_achievement.py on main f65b609d14a05546649672362a06ec8891c97598
+
+REPEATABLE GlobalSupport cluster=Breakthroughs group=Breakthroughs save_in=
+REPEATABLE MartianPatents cluster=Society_1 group=Society save_in=
+REPEATABLE MartianCopyrithgts cluster=Pride group=Society save_in=
+REPEATABLE SolExploration cluster=Mysteries group=Special save_in=
+REPEATABLE MarsMarketing cluster=Breakthroughs group=Breakthroughs save_in=
+COMMAND python tools/desk_c92_achievement.py
+HEAD f65b609d14a05546649672362a06ec8891c97598
+==============================================================================
+C92 achievement hypothesis controls; no fix
+==============================================================================
+lua: Lua 5.5 | lupa 2.8
+
+REGISTRY Data/TechGroup.lua sha256=35e1037377bbfc311182cfcbfe0b3f44f299dcec866b057ba1c578e6738c8e66
+REGISTRY Data/Tech.lua sha256=b1350e9a1779497744758046113624fa0d3bb6578339646ca9000d8dce98adad
+SOURCE 1.1.0.403908 CommonLua/Preset.lua:1802-1815 sha256=d1935dbfd261dfa94bd47faf1a4fb6fd867cc329ab489e6d32b3825bab133bd6
+SOURCE 1.1.0.403908 CommonLua/Libs/Research/Research.lua:161-164 sha256=42be02eddcb3df21691284539cc17abd63412c4dc8e0deb3da6a869d2ff9e7b4
+SOURCE 1.1.0.403908 CommonLua/Libs/Research/Research.lua:46-49 sha256=cb7158cb399c87548e85bcfcc1fe077cd05dd6eaa0c73c62d8fb23b06d430b45
+SOURCE 1.1.0.403908 CommonLua/Libs/Research/Research.lua:51-54 sha256=2b12f5ad9b1d279729ce23aa8c1c51258e6eb17e9eef9e54372212ae75a8321f
+SOURCE 1.1.0.403908 CommonLua/Libs/Research/Research.lua:23-29 sha256=76f1fa31c3c096226487fe26be0007d9d597cef687c7f1fd010b50d765265a9e
+SOURCE 1.1.0.403908 CommonLua/Libs/Research/Research.lua:31-38 sha256=d7dcf0060384a327b6e40e6ab9511e91754986768886e823105ca809a62d195c
+SOURCE 1.1.0.403908 CommonLua/Libs/Research/Research.lua:40-44 sha256=6969fd4eb54c54880863317a575259ddea03ff5ae1399bcfdf4df78ddec5b4ad
+SOURCE 1.1.0.403908 CommonLua/Libs/Research/Research.lua:147-159 sha256=2e218ab60ebae9e837fb727523da1599a9bf7d65b3d704af48c4ed95c219d2e1
+SOURCE 1.1.0.403908 Lua/TechTree.lua:892-900 sha256=0f10d7ef1f2978d8495140d4612acfed76c74791180d1d03b4cf3cc6b3c7bb36
+SOURCE 1.1.0.403908 Lua/TechTree.lua:876-878 sha256=4f41c62d8dc0acfce9a910f3d182a101fe369572868477dc6bcf1e20ca812a40
+SOURCE 1.1.0.403908 Lua/Tech.lua:468-470 sha256=983562acb12451d116779c3d5f75bc405a977d29dd95cac2fc0974a154017f2d
+SOURCE 1.1.0.403908 Lua/Tech.lua:519-521 sha256=1d04dd76c6c3cb23498ce844f50d4ad4104375085bb40f6473eac5153f81eeb5
+SOURCE 1.1.0.403908 Lua/TechTree.lua:868-874 sha256=58ec74366788a8e5b99635e06f7ff5a34aa80bd6bf377357de0a1f2bab1b10e0
+SOURCE 1.1.0.403908 Lua/TechTree.lua:1200-1240 sha256=2a5387318307ba1e8344a54e45f5e66d3ab44adb8df5b4013c0af23b3be6b8ac
+SOURCE 1.1.0.403908 Lua/TechTree.lua:1537-1540 sha256=f4bc929c69d2d3f4986f1d7f0c27a770865ef1999b9e9cfbf20f4e339d7c9e7e
+SOURCE 1.1.0.403908 Lua/Research.lua:150-159 sha256=03135d3e1a86bb9c42fdde328d3ad045280d0544c110e150423ce65866593a11
+SOURCE 1.1.0.403908 Lua/Research.lua:161-163 sha256=5cc9ef413fe805a9b57531a86952e2637629ee125deb51c0dde90df8b522b2c0
+SOURCE 1.1.0.403908 Lua/Research.lua:98-100 sha256=a87c173cc2f261fb0d9663902ec582ec2a5895d16c4d375bc4e0d923a940b0a6
+SOURCE 1.1.0.403908 Lua/Research.lua:180-190 sha256=8921d25a1fd03f0e524551d1ed21a0747e3886506e1f6a0e9a450a568337c645
+SOURCE 1.1.0.403908 Lua/Research.lua:192-202 sha256=ba2ed0d025a55beeb98024b9aea76469d3d14f8cd53fbd03459df5b6da87fd8f
+  PASS  first repeatable completion writes researched before achievement check
+  PASS  second repeatable first completion permits the vanilla achievement request
+  PASS  repeat research succeeds without clearing its completed state
+  PASS  MartianCopyrithgts remains researched with Repeatable=true
+  PASS  MartianPatents remains researched with Repeatable=true
+  PASS  vanilla achievement requests unlock when all counted techs are researched
+  PASS  repeat completions do not retry achievement (first_time gate)
+  PASS  a repeatable never completed once legitimately prevents unlock
+  PASS  preview research can also satisfy the vanilla state check
+  PASS  effective repeatability can disagree with preset Repeatable
+  FAIL  actual hidden preset UndergroundExploitation is counted and blocks unlock
+  FAIL  excluding repeatables still fails with the orphan unresearched
+  PASS  excluding only the orphan permits all complete groups
+  PASS  orphan-only exclusion retains the repeatable first-completion requirement
+  PASS  orphan-only exclusion still refuses an incomplete ordinary counted tech
+
+==============================================================================
+13 of 15 demands held
+REFUTED -- 2 demand(s) failed:
+   - actual hidden preset UndergroundExploitation is counted and blocks unlock
+   - excluding repeatables still fails with the orphan unresearched
+
+EXIT 1

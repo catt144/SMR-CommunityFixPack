@@ -1,0 +1,117 @@
+[
+  {
+    "name": "late opt-in schedules a restart notice",
+    "held": false,
+    "actual": {
+      "saved": "SMR_CommunityFixPack,B,C",
+      "saves": 1,
+      "questions": 0,
+      "pending": true,
+      "threads": 0
+    }
+  },
+  {
+    "name": "already-first boot then opt-in schedules a notice",
+    "held": false,
+    "actual": {
+      "saved": "SMR_CommunityFixPack,B,C",
+      "saves": 1,
+      "questions": 0
+    }
+  },
+  {
+    "name": "later promotion in same process notifies again",
+    "held": false,
+    "actual": {
+      "saved": "SMR_CommunityFixPack,B,C",
+      "saves": 2,
+      "questions": 1,
+      "notice_shown": true
+    }
+  },
+  {
+    "name": "persistent data preserved: blank lines",
+    "held": false,
+    "actual": {
+      "before_bytes": 12,
+      "after_bytes": 75,
+      "before_sha256": "0e937c34625ef864d694878f01fd96318893d29014a51536006dacd150d809ec",
+      "after_sha256": "ae528a8774335dc301f8bc1859616aca5aa03e2724d65ba43fa6b939347b19eb",
+      "saved": "SMR_CommunityFixPack,B,C",
+      "saves": 1,
+      "log": "SMRFixPack.LoadFirst v1 promotions=1 last=1790387083 from=2 of=3\nalpha\nbeta"
+    }
+  },
+  {
+    "name": "persistent data preserved: prefix collision",
+    "held": false,
+    "actual": {
+      "before_bytes": 33,
+      "after_bytes": 64,
+      "before_sha256": "4619f49ad455ab43378999b4720714da0c64b910c5356d0dd2eb75db1f5cc45c",
+      "after_sha256": "0fbb53a71e150d8b9ace574b0a2fe01558985b855b0bba0a0b55cd27f4bc8e79",
+      "saved": "SMR_CommunityFixPack,B,C",
+      "saves": 1,
+      "log": "SMRFixPack.LoadFirst v1 promotions=1 last=1790387083 from=2 of=3"
+    }
+  },
+  {
+    "name": "persistent data preserved: full valid slot",
+    "held": false,
+    "actual": {
+      "before_bytes": 32768,
+      "after_bytes": 64,
+      "before_sha256": "c5cac1703d7a09232090135defbf1ef0cc6a746e5bfbf48aade44046c661c945",
+      "after_sha256": "0fbb53a71e150d8b9ace574b0a2fe01558985b855b0bba0a0b55cd27f4bc8e79",
+      "saved": "SMR_CommunityFixPack,B,C",
+      "saves": 1,
+      "log": "[CommunityFixPack] LoadFirst: persistent slot could not take the record with the 1 foreign line(s) kept (data longer than const.MaxModDataSize (32768 bytes)); rewriting with our line only | [CommunityFixPack] LoadFirst: moved to the front of the saved mod order via startup (was 2 of 3): B, SMR_CommunityFixPack, C -> SMR_CommunityFixPack, B, C; applies at the next game start | [CommunityFixPack] LoadFirst: applied"
+    }
+  },
+  {
+    "name": "relative-order shape census",
+    "held": true,
+    "actual": {
+      "members": 27,
+      "held": 27
+    }
+  },
+  {
+    "name": "LoadAllMods leaves stale/probe ids untouched",
+    "held": false,
+    "actual": {
+      "expected": "B,SMRFixPack.LoadFirst.probe,SMR_CommunityFixPack,C",
+      "raw": "B,SMR_CommunityFixPack,C",
+      "saves": 0
+    }
+  },
+  {
+    "name": "LoadAllMods with pack sorted first is diagnosed: config",
+    "held": false,
+    "actual": {
+      "status": "active",
+      "detail": "first of 2 in the saved mod order; nothing written",
+      "saves": 0
+    }
+  },
+  {
+    "name": "LoadAllMods with pack sorted first is diagnosed: account",
+    "held": false,
+    "actual": {
+      "status": "active",
+      "detail": "first of 2 in the saved mod order; nothing written",
+      "saves": 0
+    }
+  },
+  {
+    "name": "S2 same-dialog disable/re-enable promotes",
+    "held": false,
+    "actual": {
+      "saved": "B,C,SMR_CommunityFixPack",
+      "running": "SMR_CommunityFixPack,B,C",
+      "saves": 0,
+      "questions": 0,
+      "source": "1.1.1.405907 Mod.lua:2099-2179"
+    }
+  }
+]

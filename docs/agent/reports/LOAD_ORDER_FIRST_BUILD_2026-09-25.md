@@ -1,14 +1,20 @@
-# Load order: the pack puts itself first (option B) — build report, 2026-09-25
+# Load order: the pack puts itself first (option B) — build and audit, 2026-09-25
 
 ## Must_Read_Header
 
-Report for the owner and the audit seat, executing the one-off
-`docs/agent/prompts/LOAD_ORDER_FIRST_high.md` (authored at `9833cca`, fired from `4e4c97b`).
+Report for the owner, repair seat and audit seat, executing the now-consumed one-off
+`docs/agent/prompts/LOAD_ORDER_FIRST_high.md` (retrievable at `4e4c97b`).
 The build is on the short-lived code branch **`load-first`**, one commit, **`8e2325a`**, not merged.
 Records are on `main`. Nothing here was uploaded, and no attended sitting ran. Every "the pack
 loads first" claim below is desk- and unattended-verified on this one rig; the retail sitting
 in §5 is planned for the owner's approval, not run. A save request is not a disk write; the
 seven boot logs are the disk evidence. Where a line says MEASURED it names its command or log.
+
+**Audit verdict: CHANGES on `8e2325a`.** The fresh-context audit of records `f65b609` is
+in §11; it supersedes the build's clearance claims and sitting recipe below. Later opt-in
+can promote silently, existing persistent data can be discarded, and the claimed controls
+miss those failures. The branch remains unmerged; the sitting is held for repairs and
+re-audit. Sections 0–10 retain the builder's record, including claims corrected by §11.
 
 ## 0 · Read this first — what the owner sees that the brief did not say
 
@@ -281,9 +287,288 @@ and only for this rig's Steam account. The canary shows only whether code of tha
 survives packaging; it says nothing about whether C's hook would work. `account.dat`'s
 modification time is not evidence of anything the pack did.
 
-## 10 · Handoff to the audit
+## 10 · Build handoff to the audit (consumed)
 
 Branch `load-first` at `8e2325a` (one commit over `4e4c97b`); records in this commit on `main`.
 Re-run: `python tools/desk_load_first.py` and `--no-promotion` on the branch; the seven logs;
-`python tools/upload_preflight.py .` on the branch's working tree, not a worktree. The brief
-stays in place for the audit to `git rm`.
+`python tools/upload_preflight.py .` on the branch's working tree, not a worktree. The audit
+below consumed the brief and its map row in the audit commit.
+
+## 11 · Fresh-context audit — CHANGES, 2026-09-25
+
+**Disposition:** repair the named changes below on the code branch, then re-audit before
+SHIP-TO-SITTING. This audit authorizes neither a merge nor a sitting or upload. The saved-order
+route works in the normal cases; the failures are repairable, so the verdict is CHANGES, not NO.
+
+### Evidence and reproducibility
+
+MEASURED: `git pull` completed with “Already up to date”; the clean records checkout was
+`f65b609d14a05546649672362a06ec8891c97598`. The audited code was
+`8e2325aa219efc253e2c957eb776ca77ca06a2d2`, exported with `git archive` into an isolated
+`scratch/` directory. The branch diff was read against `4e4c97b`; the inputs added since
+`9833cca` were checked. No installed file, junction, account order, save or game process was
+changed by this audit. No new game launch ran.
+
+The [audit instrument](../../archive/load_order_first_audit_2026-09-25/load_first_audit.py)
+checks the tested code and harness bytes against the audited commit, runs the builder's
+harness and controls, removes only the rebuild loops in a scratch copy, restores both code
+and harness with matching hashes, and runs the additional cases. It uses the builder's
+extracted **archived 1.1.1.405907** helpers and real pack core/sandbox. UI, scheduling and
+disk writes are desk stubs. In particular, the new notice cases run the startup threads
+*before* a later Options click. They measure whether another notice gets scheduled, not a
+rendered dialog.
+
+RAN 2026-09-25, from the repo root (scripts were in `scratch/` during the run; identical
+copies are archived here):
+
+```text
+python scratch/load_first_audit_setup.py
+python scratch/load_first_audit.py scratch/load_first_audit_8e2325a scratch/load_first_audit_results
+python scratch/load_first_audit_receipts.py
+```
+
+For replay, use the archived scripts with the same arguments and a fresh scratch export.
+The [setup script](../../archive/load_order_first_audit_2026-09-25/load_first_audit_setup.py)
+refuses to overwrite an existing export. The [main transcript](../../archive/load_order_first_audit_2026-09-25/audit.txt)
+records input hashes, commands, named cases and reconciled totals. `HEAD f65b609` printed
+inside exported-tree harnesses is the parent records repository's HEAD, **not** the code
+under test; the `IDENTITY` and `INPUT` lines establish the exported `8e2325a` code.
+
+The [source/verification receipt](../../archive/load_order_first_audit_2026-09-25/receipts.txt)
+comes from [this script](../../archive/load_order_first_audit_2026-09-25/load_first_audit_receipts.py).
+Every cited game-source file below was read from
+`B:/Dev/SMR/SMR-Shared/SMR-SrcArchive/1.1.1.405907/Src`, and the inspected files matched that
+archive's `MANIFEST.sha256`. The receipt contains line-numbered source slices and fingerprints.
+
+| Check, command/filter | Fresh result and its limit |
+|---|---|
+| `python tools/desk_load_first.py` in the export; count named `PASS`/`FAIL` lines and reconcile with its final demands line | **50/50 held**. Normal middle/last promotion, unchanged running queue, already-first no-write, opt-out/veto, prerequisites/dependants and the PN pair reproduced. |
+| Same command with `--no-promotion` | **33/50 failed**, reconciled with the printed control total; this omits the entire module, including its registry row. R4 explains why that is insufficient. |
+| Same harness, only the rebuild loops removed | First run aborts at the inline case-5b assertion. Keeping that call but removing only its assertion permits a complete run: **24/50 failed, 26/50 held**. `CONTROL_RECONCILE` names every group still passing. Both scratch files were restored and hash-checked. |
+| Audit `SHAPE_MEMBERS`: permutations of `A,B,C,PACK`, plus absent, duplicate/stale and duplicate-pack lists | **27/27 held**, reconciled with `relative-order shape census`. Other IDs keep their first-occurrence relative order; stale `GHOST` stays. Already-first/absent lists do not request a save. |
+| Audit `AUDIT_DEMAND` rows, reconciled with `AUDIT_TOTAL` | **10 failed expectations**, individually named, plus the held shape census. These are counterexamples grouped into R1–R3/R5 below, not a broad reliability percentage. |
+| `python tools/parsecheck.py`; `python tools/upload_preflight.py .` in the restored export | Both exit 0. Parsing and preflight do not establish runtime behavior or actual Editor packing. |
+
+### Changes required
+
+**R1 — High: schedule the notice when promotion occurs, including a later opt-in.**
+
+MEASURED: start with the option off, let startup threads finish, then apply the option on.
+The saved list becomes `PACK,B,C`, one save is requested, `pending_notice=true`, but there
+are no notice threads and no question. The same happens after an already-first boot,
+turning the option off, moving the pack last, then turning it on. A later promotion after
+an earlier notice is suppressed by the process-wide `notice_shown` latch.
+
+Cause in `8e2325a:Code/01_LoadFirst.lua`: the only notice thread is created at file scope
+(:276); it returns when nothing is pending (:280). `Promote` merely sets a flag (:225),
+and `on_activate` (:262) schedules nothing. The builder's 4b test turns the option on
+*before* it first runs the recorded threads, masking the actual sequence. This violates
+FIXED 3: the player is told when a restart is needed. Repair the notification lifecycle
+and add cold-off→later-on, already-first→later-on, and repeated-promotion controls with
+realistic thread chronology. Deduplicate reloads of the same pending change without
+silencing a new change.
+
+**R2 — Medium: preserve existing persistent-slot bytes, including on write refusal.**
+
+MEASURED with the real archived writer: a valid full slot containing `z` repeated 32768
+times becomes only the new promotion record. The log explicitly says “rewriting with our
+line only”. Smaller inputs also lose data: `alpha\n\nbeta\n` loses its empty lines and
+trailing newline; `SMRFixPack.LoadFirstExtra payload` is mistaken for this module's record
+and removed. These are synthetic preservation cases, not a claim that a player has lost
+data in the field.
+
+Cause: the parser (:119–134) skips empty lines and accepts every line sharing the prefix;
+the fallback (:147–153) deliberately discards the foreign tail. Archived 1.1.1.405907
+`CommonLua/Modding/Mod.lua:1487–1503` refuses an oversized value *before* writing it, so
+the loss is introduced by the module's retry. Preserve unrelated data exactly, match only
+the module's own record, and decline or roll back safely if a changed value cannot fit.
+Do not sacrifice existing data to force the save request. Add boundary/refusal controls
+alongside the builder's ordinary two-line case.
+
+**R3 — Medium: make the LoadAllMods claim match every covered list shape.**
+
+MEASURED: with either LoadAllMods flag set and installed IDs `PACK,z`, the module reports
+`active`, “first of 2 in the saved mod order”; no detection runs. The selector's sorted
+installed list is being described as the saved list because `pos == 1` returns at :177
+before `load_all_reason` at :185. Separately, with the account flag set and a saved stale
+`SMRFixPack.LoadFirst.probe` ID, the “net-zero” probe removes that ID permanently while
+requesting no save. That edge is explicitly anticipated by the code's stale-probe comment.
+
+Archived 1.1.1.405907 `Mod.lua:1995–2001` confirms that LoadAllMods ignores the saved list;
+`CommonLua/UI/ModManager.lua:35–41` confirms the probe helpers really mutate it. Preserve
+pre-existing IDs, and diagnose LoadAllMods without calling an installed-ID view a saved
+order. The indistinguishable account-flag case may need a stated, evidence-backed limitation
+instead of an exact-detection claim; do not add unconditional writes merely to keep the
+claim. D1's synchronous transient probe is acceptable in principle, but the present
+“byte-identical afterwards” claim is false for its own stale-ID case.
+
+**R4 — Medium: replace registry-presence controls with behavioral controls and fix the claims.**
+
+MEASURED: with only the promotion loops removed, groups `2`, `3a`, `3b`, `4a`, `4d`, `5c`
+still pass in full, as does the intentionally independent canary group. Omitting the whole
+module instead makes their status assertions fail merely because `LoadFirst` is absent.
+That does not falsify their no-write or preservation promises. “None vacuous” in §2 is
+therefore not the result the audit brief asked for.
+
+Keep a registration-preserving no-promotion mutant for positive promotion/dependency/PN
+cases. A no-op case naturally survives removal of a mutation: test those cases against a
+mutant that wrongly writes or ignores the relevant guard. Keep all cases running after a
+failure; the inline assertion currently truncates the run. Add the R1–R3 cases and separate
+measured behavior from mere status-row existence. Also retain the cross-check's distinction:
+first file execution does not promise every deferred data repair precedes every content edit.
+
+**R5 — Medium: repair the sitting's triggers, sync observation and restoration.**
+
+SOURCE + MEASURED: S2 unticks and reticks the pack before closing the same manager visit.
+Archived 1.1.1.405907 `ModManager.lua:123–166` saves this changed order, but
+`Mod.lua:2104–2112` sorts the new and running sets and returns when they match. Running
+the extracted `ModsReloadItems` body on that exact shape leaves saved `B,C,PACK`, running
+`PACK,B,C`, with no promotion or notice. Its predicted hot reload cannot happen. S5 can
+also lose its PN-before-pack condition if adding PN causes a real reload that promotes
+before the planned cold boot.
+
+S4 also needs an observation of the actual sync, not just an opened page. The inspected
+`ModManager.lua:1902–1906` queues `SyncPdxMods` on `PdxLogin`; a browser click alone is not
+proof it ran or rewrote an enable list. The revised plan below separates these paths and
+includes a final restore/readback. Preserve the owner's full enabled set, relative order
+and LoadFirst option, not just PN's final disabled state. The old estimate in §5 no longer
+prices a valid test.
+
+**R6 — Medium: supply Editor load/pack evidence, and qualify the canary prediction.**
+
+SOURCE: the local literal and returned `ModDef` in `8e2325a:metadata.lua` are inert: no
+native method override, no global or def-field write. The rerun confirms the stand-in
+metadata environment accepts it. This satisfies the safety test; it does not execute
+the Mod Editor's loading and packing path.
+
+The builder's decoded measurements/logs contain preflight and pack-prediction evidence,
+not an Editor pack result or an extracted generated package. The receipt's keyword census
+includes those positive controls; the artifact inventory and contents were also read.
+Archived 1.1.1.405907 `CommonLua/Classes/GedModEditor.lua:742–751,884–893` shows the actual
+pack action, and :713–739 calls `ReloadLua` and `AsyncPack`, neither exercised by the
+metadata fixture. Before clearing the canary for the sitting/release, record an actual
+isolated Editor load and local pack, the resulting package, and its decoded metadata,
+or provide a demonstrably equivalent test and state its limits. No upload is needed.
+
+The §6 stripped-Steam/local prediction is conditional: dirty validation saves
+(`GedModEditor.lua:836–842`), successful Paradox upload saves
+(`CommonLua/Libs/Paradox/ParadoxMods.lua:165–173`), and creation of a new Steam item saves
+(`CommonLua/Platforms/steam/SteamWorkshop.lua:17–25`). A clean existing Steam upload with
+no successful preceding Paradox save can retain the canary. Record portal and save path
+with every observation. A missing Steam canary after a forced save closes only that tested
+path; it does not disprove survival in a clean Paradox package. The null log control and
+the warning that canary survival proves nothing about a working C hook remain correct.
+
+### Existing retail evidence and broader checks
+
+MEASURED by re-reading the decoded L1–L7 logs committed in `f65b609`: their revision is
+405907 and their loaded lists support the normal promotion/restart and PN-before/after
+claims. L1 :96/:186 separates the changed saved order from the running order; L2 :184
+loads pack first. L4 :111/:114 declines the guards; L5 :82/:85 applies them. L7 :179/:204
+reads back the original enabled order with no LoadFirst row. The audit transcript records
+each log's hash and exact hits. Its `LOG_TOTAL` reconciles **7 logs, 7 revision lines,
+7 loaded-list lines, 0 `[LUA ERROR]` lines**. These observations do not show an attended
+dialog, a click on Restart now, explicit sync, or a byte hash of the Lua used by each retail
+launch. The desk input hashes do match the builder's archived `measurements.txt`.
+
+MEASURED: `SMR_TESTKIT=B:/Dev/SMR/SMR-BugFixPack-TestKit python tools/deskbench.py` in the
+export returned **39 held / 44 harnesses**, reconciled against every summary member in
+[desk_suite.txt](../../archive/load_order_first_audit_2026-09-25/desk_suite.txt) and
+`SUITE_TOTAL` in the receipt. Each failed harness was then run individually on `main`
+`f65b609`, with the same failure class:
+
+- `desk_c104_political_animal.py`: requirement-set/achievement expectations differ.
+- `desk_c107_dry_farming.py`: missing `TechModifierName` in its fixture.
+- `desk_c92_achievement.py`: achievement hypothesis expectations differ.
+- `desk_mystery_tech_migration.py`: missing `ResolveTechMystery` in its fixture.
+- `desk_probes_f67_f59.py`: the old F59 error-message expectation differs.
+
+The named difference from §3's claimed failing set is **Political Animal, Dry Farming and
+C92 achievement**. Their harness bytes and relevant existing production files are unchanged
+between the branch and records. This is baseline harness debt, not attributed to LoadFirst.
+The whole suite uses its existing mixture of source routes, including live-tree reads;
+only the targeted LoadFirst audit is pinned throughout to archived 1.1.1.405907.
+The main transcripts are [here](../../archive/load_order_first_audit_2026-09-25/main_failed_harnesses.txt)
+and [here](../../archive/load_order_first_audit_2026-09-25/main_additional_failed_harnesses.txt).
+No colony, account persistence or TestKit UI was exercised anew. Doccheck for the audit
+records is recorded by the audit commit's gate, independently of these behavioral failures.
+
+### Departures judged
+
+| Builder departure | Audit judgment |
+|---|---|
+| D1, transient LoadAllMods probe | Route acceptable in principle; implementation and exactness claim need R3. |
+| D2, return of the Mod Options page | Accepted: the player now has a required opt-out, so the earlier “nothing to set” condition no longer holds. |
+| D3, Restart now button | Accepted: use of the native routine is justified; click/relaunch remains a sitting prediction. Correct quit-flush citation: archived 1.1.1.405907 `CommonLua/AccountStorage.lua:166–187`. |
+| D4, canary without a log line | Accepted as explicitly inert; R6 corrects proof and portal conclusions. |
+| D5, unattended retail work reduces the sitting | Accepted within the owner's authorization; logs establish those limited results. |
+| D6, slot not prepared before approval | Accepted; no sitting was prepared by this audit. |
+| D7, policy/EF records | Appropriate homes for the changed mechanism; audit corrections are carried by this report and the release hold. |
+
+The builder's suggestion to normalize the archived PN file is rejected: the archive is
+append-only. None of its existing bytes were changed. The other §8 suggestions remain
+observations, not authorization to expand this audit into unrelated implementation work.
+
+### Revised sitting proposal — held for repairs and owner approval
+
+This replaces §5's recipe. **Not prepared or run.** After R1–R6 are closed and re-audit
+returns SHIP-TO-SITTING, the preparing seat can present this plan for approval. The sitting
+uses preloaded SMRTK buttons and native UI clicks; it requires no owner console typing or
+colony save. Before approval, the preparer still owes an exact, source-traced S4 click path
+and a completion/error observation for the intended Paradox sync.
+
+The preparation captures the fresh starting enabled set, order, option and junction target,
+then provides **Order read**, **Stage PN-before-pack for next boot**, and **Restore starting
+settings** slots. A staged test order is distinguished from a measured production promotion.
+Restoration inhibits promotion until the restored order is read back on a fresh boot, then
+restores the original option without another promotion before exit. Logs are read after exit
+and archived with the sitting result. This preserves the original brief's restoration duty.
+
+| Leg | Owner clicks | Prediction that can fail | Estimated minutes, `<<PENDING-RUN>>` |
+|---|---|---|---|
+| A, cold start | Start from a deliberately captured pack-later order; read notice, choose Later, Order read, quit; restart and Order read. | First boot changes saved order only and shows the notice. Next boot is pack-first, requests no promotion save, and shows no duplicate notice. | 3 |
+| B, actual hot enable and restart | Disable pack and close the manager to apply that disabled set; follow the native unload prompt. Reopen the manager, enable pack, close; choose Restart now when the pack's notice appears. | A real enabled-set change reaches reload; promotion and notice occur; native restart returns pack-first. A same-visit off/on is recorded separately as an order-only path, with no hot-reload expectation. | 4 |
+| C, later opt-in | On a settled menu, turn LoadFirst off and Apply; move pack last through the manager, close and Order read; turn LoadFirst on and Apply. | While off, order stays last. Later-on promotes and presents a new notice after the startup thread has already ended. This is the R1 falsifier. | 3 |
+| D, explicit Paradox sync | Use the source-traced native sync/login action supplied by the preparing seat; wait for recorded completion, Order read; quit/restart, Order read. | Completion is positively observed. Saved/next-loaded order stays first; an error or missing completion is inconclusive, never PASS. | 2 |
+| E, restoration | Restore starting settings, quit, start the restoration/readback leg, Order read, exit. | Saved order, enabled set, option and junction equal the captured start; no promotion silently undoes restoration. | 3 |
+| Optional PN | Stage PN-before-pack for next boot; quit/start, observe guards and notice, choose Later; quit/start and Order read. Finish with E. | First boot really loads PN before pack and declines the two guards; second loads pack first and applies both. | +4 |
+
+Cost is an unmeasured estimate: **15 owner minutes; 19 with PN**, `<<PENDING-RUN>>`.
+The arithmetic is in the receipt, not a timing measurement. S4's exact clicks remain part
+of R5, so this proposal is not ready for an approval request today.
+
+### Authority and open work retained from the consumed brief
+
+Owner, 2026-09-25, verbatim:
+
+> “I want B or C, the rest of those are just more bandaides for the problem”
+
+> “Can we go with B first, and if it works and we upload it, can we test the shap of C, put
+> something harmless in the metadata that we can easily check for to see if it survives”
+
+> “Make sure we don't put them in a box, allow it to change the plan if it finds a better way
+> to do something.”
+
+> “let them know they are free to start the game up for any unattended testing.”
+
+> “I am going to build with fable since this is going to be critical to get right, and audit
+> with astra.”
+
+The 2026-09-24 goal remains verbatim in the cross-check report's header. The retained FIXED
+requirements for the repair/re-audit are: vanilla repairs before content mods for uninstructed
+players; no game-file changes and nothing shipping outside the pack; other mods' relative order,
+player opt-out and a restart notice; no guard-hardening substitute; no attended sitting or upload
+without owner approval; an inert canary; and a separate audit. The mechanism and other DEFAULT
+details remain delegated judgment, with departures and their evidence disclosed to the owner.
+
+Unattended testing remains authorized with the original conditions: first check whether Mars.exe
+is running and leave the owner's instance alone; close only instances started by the worker;
+use scratch saves only; obey `tools/arming/README.md`; preserve and restore the owner's enabled
+set/order and any changed junction, reading restoration back from a fresh boot; archive cited
+logs in the citing commit. No route meeting the FIXED requirements means report the stop, not
+silently relax them. An unsafe canary is omitted from B with that disposition recorded.
+
+The repair seat's open work is R1–R6, the still-held sitting, and the post-upload canary checks
+already carried by §6 and the release outbox, with R6's portal qualifications. The release hold
+now points here rather than to the deleted brief. The brief and map row are consumed by this
+audit; retirement does not waive any of those obligations.

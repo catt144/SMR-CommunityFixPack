@@ -1,0 +1,147 @@
+COMMAND python tools/desk_c107_dry_farming.py on main f65b609d14a05546649672362a06ec8891c97598
+
+==============================================================================
+C107 Fix_DryFarmingFarms over the shipped DryFarming preset, farm templates and BuildingTemplates builder
+==============================================================================
+lua: Lua 5.5 | lupa 2.8
+
+  FAIL  (a) cold boot: one water entry per DLC plant farm, module active  -- {'FarmSmall': 1, 'FarmSmallUnderground': 0, 'FarmUnderground': 0, 'AutomatedFarm': 0} inactive ['[CommunityFixPack] DryFarmingFarms: applied', "[CommunityFixPack] DryFarmingFarms: behaviour probe declined (threw: Lua/MarsGameEffects.lua:284: attempt to call a nil value (global 'TechModifierName'))", '[CommunityFixPack] DryFarmingFarms: inactive (Effect_ModifyLabel filing behaviour not recognised)', "[CommunityFixPack] DryFarmingFarms: behaviour probe declined (threw: Lua/MarsGameEffects.lua:284: attempt to call a nil value (global 'TechModifierName'))", '[CommunityFixPack] DryFarmingFarms: inactive (Effect_ModifyLabel filing behaviour not recognised)']
+  PASS  (a2) entries copy the shipped -50 and stay in scope
+  PASS  (a3) no 'DLC absent' line on a boot where the DLC is loaded  -- ['[CommunityFixPack] DryFarmingFarms: applied', "[CommunityFixPack] DryFarmingFarms: behaviour probe declined (threw: Lua/MarsGameEffects.lua:284: attempt to call a nil value (global 'TechModifierName'))", '[CommunityFixPack] DryFarmingFarms: inactive (Effect_ModifyLabel filing behaviour not recognised)', "[CommunityFixPack] DryFarmingFarms: behaviour probe declined (threw: Lua/MarsGameEffects.lua:284: attempt to call a nil value (global 'TechModifierName'))", '[CommunityFixPack] DryFarmingFarms: inactive (Effect_ModifyLabel filing behaviour not recognised)']
+  FAIL  (a4) enable path: one entry per DLC plant farm, module active  -- {'FarmSmall': 1, 'FarmSmallUnderground': 0, 'FarmUnderground': 0, 'AutomatedFarm': 0} inactive ['[CommunityFixPack] DryFarmingFarms: applied', "[CommunityFixPack] DryFarmingFarms: behaviour probe declined (threw: Lua/MarsGameEffects.lua:284: attempt to call a nil value (global 'TechModifierName'))", '[CommunityFixPack] DryFarmingFarms: inactive (Effect_ModifyLabel filing behaviour not recognised)']
+  FAIL  (a5) DLC presets absent at DataLoaded, present by ModsReloaded: paid then, active  -- {'FarmSmall': 1, 'FarmSmallUnderground': 0, 'FarmUnderground': 0, 'AutomatedFarm': 0} inactive ['[CommunityFixPack] DryFarmingFarms: applied', "[CommunityFixPack] DryFarmingFarms: behaviour probe declined (threw: Lua/MarsGameEffects.lua:284: attempt to call a nil value (global 'TechModifierName'))", '[CommunityFixPack] DryFarmingFarms: inactive (Effect_ModifyLabel filing behaviour not recognised)', "[CommunityFixPack] DryFarmingFarms: behaviour probe declined (threw: Lua/MarsGameEffects.lua:284: attempt to call a nil value (global 'TechModifierName'))", '[CommunityFixPack] DryFarmingFarms: inactive (Effect_ModifyLabel filing behaviour not recognised)']
+  FAIL  (b) new research: DLC farms and Farm at -50, Fungal and Insect at 0  -- {'FarmSmall': 0, 'FarmSmallUnderground': 0, 'FarmUnderground': 0, 'AutomatedFarm': 0, 'Farm': 0, 'FungalFarm': 0, 'FarmInsect': 0} ["Lua/MarsGameEffects.lua:284: attempt to call a nil value (global 'TechModifierName')", "Lua/MarsGameEffects.lua:284: attempt to call a nil value (global 'TechModifierName')", "Lua/MarsGameEffects.lua:284: attempt to call a nil value (global 'TechModifierName')", "Lua/MarsGameEffects.lua:284: attempt to call a nil value (global 'TechModifierName')"]
+Traceback (most recent call last):
+  File "B:\Dev\SMR\SMR-BugFixPack\tools\desk_c107_dry_farming.py", line 575, in <module>
+    raise SystemExit(main())
+                     ~~~~^^
+  File "B:\Dev\SMR\SMR-BugFixPack\tools\desk_c107_dry_farming.py", line 549, in main
+    legs(bench)
+    ~~~~^^^^^^^
+  File "B:\Dev\SMR\SMR-BugFixPack\tools\desk_c107_dry_farming.py", line 399, in legs
+    rt.execute(HEALED_SAVE)
+    ~~~~~~~~~~^^^^^^^^^^^^^
+  File "lupa/lua55.pyx", line 466, in lupa.lua55.LuaRuntime.execute
+  File "lupa/lua55.pyx", line 1897, in lupa.lua55.run_lua
+  File "lupa/lua55.pyx", line 1911, in lupa.lua55.call_lua
+  File "lupa/lua55.pyx", line 1938, in lupa.lua55.execute_lua_call
+  File "lupa/lua55.pyx", line 1819, in lupa.lua55.raise_lua_error
+lupa.lua55.LuaError: Lua/MarsGameEffects.lua:284: attempt to call a nil value (global 'TechModifierName')
+stack traceback:
+	Lua/MarsGameEffects.lua:284: in method 'OnApplyEffect'
+	[string "<python>"]:4: in main chunk
+
+EXIT 1
+
+COMMAND python tools/desk_mystery_tech_migration.py on main f65b609d14a05546649672362a06ec8891c97598
+
+COMMAND python tools/desk_mystery_tech_migration.py
+HEAD f65b609d14a05546649672362a06ec8891c97598
+MODULE tools/held/Fix_MysteryTechMigration.lua
+==============================================================================
+Mystery tech availability: synthetic state, shipped decisions
+==============================================================================
+lua: Lua 5.5 | lupa 2.8
+
+SOURCE CommonLua/Features/LockablePreset.lua:1-536 sha256=993bdf37255d005af31f30f5d531c392b8f0de5316de63740f4aa6ad563f7625
+REGISTRY Data/Tech.lua sha256=b1350e9a1779497744758046113624fa0d3bb6578339646ca9000d8dce98adad
+REGISTRY group=Mysteries presets 55
+SOURCE 1.1.0 CommonLua/Libs/Research/Research.lua:8-10 sha256=dc904ebbcef8a1720753109a0b29f14d1d51addfc6cfa11b215e3ec34c5ad80f
+SOURCE 1.1.0 CommonLua/Libs/Research/Research.lua:12-14 sha256=80d3d666e71f0de08fcb15e907afe202a5344712ea4990d515003965765bfc88
+SOURCE 1.1.0 CommonLua/Libs/Research/Research.lua:23-29 sha256=76f1fa31c3c096226487fe26be0007d9d597cef687c7f1fd010b50d765265a9e
+SOURCE 1.1.0 CommonLua/Libs/Research/Research.lua:31-38 sha256=d7dcf0060384a327b6e40e6ab9511e91754986768886e823105ca809a62d195c
+SOURCE 1.1.0 CommonLua/Libs/Research/Research.lua:40-44 sha256=6969fd4eb54c54880863317a575259ddea03ff5ae1399bcfdf4df78ddec5b4ad
+SOURCE 1.1.0 CommonLua/Libs/Research/Research.lua:46-49 sha256=cb7158cb399c87548e85bcfcc1fe077cd05dd6eaa0c73c62d8fb23b06d430b45
+SOURCE 1.1.0 CommonLua/Libs/Research/Research.lua:51-54 sha256=2b12f5ad9b1d279729ce23aa8c1c51258e6eb17e9eef9e54372212ae75a8321f
+SOURCE 1.1.0 CommonLua/Libs/Research/Research.lua:147-159 sha256=2e218ab60ebae9e837fb727523da1599a9bf7d65b3d704af48c4ed95c219d2e1
+SOURCE 1.1.0 CommonLua/Libs/Research/Research.lua:161-164 sha256=42be02eddcb3df21691284539cc17abd63412c4dc8e0deb3da6a869d2ff9e7b4
+SOURCE 1.1.0 Lua/TechTree.lua:434-436 sha256=cc9b78b02225f4e6884ebbded93b612c22ca4833085b20b9e8c8c22308432b2e
+SOURCE 1.1.0 Lua/TechTree.lua:443-474 sha256=f3891c426758b32f4131e2784feb8c66fb526ea531754f823db842012a4cf08d
+SOURCE 1.1.0 Lua/TechTree.lua:476-478 sha256=8166474379bec340bb0ebf4e1121b39a09c8733b87df2f1e89f942b18eaf8b73
+SOURCE 1.1.0 Lua/TechTree.lua:591-595 sha256=f9964658f24ba19446ca21297d0d4b2a29c4a2a1d8550f8ae7bbf5670fa943e4
+SOURCE 1.1.0 Lua/TechTree.lua:1537-1540 sha256=f4bc929c69d2d3f4986f1d7f0c27a770865ef1999b9e9cfbf20f4e339d7c9e7e
+SOURCE 1.1.0 Lua/TechTree.lua:868-874 sha256=58ec74366788a8e5b99635e06f7ff5a34aa80bd6bf377357de0a1f2bab1b10e0
+SOURCE 1.1.0 Lua/TechTree.lua:892-900 sha256=0f10d7ef1f2978d8495140d4612acfed76c74791180d1d03b4cf3cc6b3c7bb36
+SOURCE 1.1.0 Lua/TechTree.lua:876-878 sha256=4f41c62d8dc0acfce9a910f3d182a101fe369572868477dc6bcf1e20ca812a40
+SOURCE 1.1.0 Lua/TechTree.lua:1200-1240 sha256=2a5387318307ba1e8344a54e45f5e66d3ab44adb8df5b4013c0af23b3be6b8ac
+SOURCE 1.1.0 Lua/TechTree.lua:182-192 sha256=d7350f5413e575df2187b38546db78599c5dbd418fc13ef856995b83a6ffd591
+SOURCE 1.1.0 Lua/TechTree.lua:1275-1282 sha256=4891ddecfac03c634f7db993e58dfd0e07c92dd8bc099b23835ac62a28e8a33a
+SOURCE 1.1.0 Lua/TechTree.lua:1486-1502 sha256=6df74c576e1c5a9aba231fbb704ab83e71abb012344f8bca253eb91510417b79
+SOURCE 1.1.0 Lua/TechTree.lua:1298-1313 sha256=aaab58a814e8b81fb54047a536ae6bba702f0e2464616c73ddbe023774490265
+SOURCE 1.1.0 CommonLua/X/XPresetMap.lua:635-641 sha256=1176ad032a0dcd962d577cf84ea50b31f929fb1585a3a14faac350109e94760f
+SOURCE 1.1.0 Lua/Tech.lua:504-507 sha256=daa4020b9a39fd0a371b2916413dbd0c107d3f5b051c80625415101554ac5267
+SOURCE 1.1.0 Lua/Tech.lua:468-470 sha256=983562acb12451d116779c3d5f75bc405a977d29dd95cac2fc0974a154017f2d
+SOURCE 1.1.0 Lua/Tech.lua:519-521 sha256=1d04dd76c6c3cb23498ce844f50d4ad4104375085bb40f6473eac5153f81eeb5
+SOURCE 1.1.0 Lua/Research.lua:140-142 sha256=9cfc270cfb1f491f4d09dae58cfccb18f3a187e536df2ca6c40dc8a16b28ea98
+SOURCE 1.1.0 Lua/Research.lua:146-148 sha256=1234c8e1ba2465c572df3d1e9393d4efde2abeeac37314126020ee3503ae107a
+SOURCE 1.1.0 Lua/Research.lua:89-91 sha256=751d1cf09011f06a62c43f5f9cce0de5dd9287e21189f4a6e644213cf13222b7
+SOURCE 1.1.0 Lua/Research.lua:161-163 sha256=5cc9ef413fe805a9b57531a86952e2637629ee125deb51c0dde90df8b522b2c0
+SOURCE 1.1.0 Lua/Research.lua:150-159 sha256=03135d3e1a86bb9c42fdde328d3ad045280d0544c110e150423ce65866593a11
+SOURCE 1.1.0 Lua/Research.lua:373-374 sha256=e5933f15a14dd8e73d252a32d318189418ab8582e794acf625d966e338e33338
+SOURCE 1.1.0 Lua/Research.lua:225-227 sha256=8c7715a479c8653d8f551e4113f5286d680cdcbfe21bf211e11eb7e64f94fb27
+SOURCE 1.1.0 Lua/Research.lua:255-257 sha256=b63aa661b658f3c585dc8793def836d2176345c90aeaa344d2b26567c816644c
+SOURCE 1.1.0 Lua/Research.lua:251-253 sha256=8ae98f6dccbb589c5278616da9dc6ea6c59094fe7d64284947e2e41cb7faa9f4
+SOURCE 1.1.0 Lua/Mysteries/Mystery.lua:72-84 sha256=848682ca617d72e3ed61a62675f52198bcf4e69207813362f419d501499e72cc
+SOURCE 1.1.0 Lua/Sequences/SA_Gameplay.lua:1196-1215 sha256=ec5a2f4533ac7527d029dbb16b4ea7260b4619f8ebde9eb0d0a80d23878e41c9
+SOURCE 1.1.0 Lua/Sequences/SA_Gameplay.lua:822-854 sha256=978f5fb6f9f351fb6e320673ac94ef0c764f9a3a7d5b15bea4859165e2d975d1
+SOURCE 1.1.0 Lua/Sequences/SA_Gameplay.lua:871-882 sha256=10b95fa833d6fb29b08eadf7aacc8fe8721b96e0ceea67eebf25e74c4fa45802
+SOURCE 1.0.7 Lua/Research.lua:668-682 sha256=661656a11a812ad5dfd4ea93580ae51d6ec5ad63e0a9270c763e25f37ecbae8f
+  PASS  before reveal the entire cure family is hidden
+  PASS  before reveal every Mysteries preset is hidden
+Traceback (most recent call last):
+  File "B:\Dev\SMR\SMR-BugFixPack\tools\desk_mystery_tech_migration.py", line 490, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "B:\Dev\SMR\SMR-BugFixPack\tools\desk_mystery_tech_migration.py", line 255, in main
+    rt.execute("reveal()")
+    ~~~~~~~~~~^^^^^^^^^^^^
+  File "lupa/lua55.pyx", line 466, in lupa.lua55.LuaRuntime.execute
+  File "lupa/lua55.pyx", line 1897, in lupa.lua55.run_lua
+  File "lupa/lua55.pyx", line 1911, in lupa.lua55.call_lua
+  File "lupa/lua55.pyx", line 1938, in lupa.lua55.execute_lua_call
+  File "lupa/lua55.pyx", line 1819, in lupa.lua55.raise_lua_error
+lupa.lua55.LuaError: Lua/Mysteries/Mystery.lua:77: attempt to call a nil value (global 'ResolveTechMystery')
+stack traceback:
+	Lua/Mysteries/Mystery.lua:77: in local 'fn'
+	[string "<python>"]:57: in global 'Msg'
+	Lua/TechTree.lua:1280: in function 'UnlockTech'
+	(...tail calls...)
+	Lua/Sequences/SA_Gameplay.lua:1207: in field 'SAExec'
+	[string "<python>"]:18: in global 'reveal'
+	[string "<python>"]:1: in main chunk
+
+EXIT 1
+
+COMMAND python tools/desk_probes_f67_f59.py on main f65b609d14a05546649672362a06ec8891c97598
+
+==============================================================================
+F67 / F59 kit-probe falsifier -- shipped bodies at their real lines, module + probe text verbatim
+==============================================================================
+lua: Lua 5.5 | lupa 2.8
+
+extracted Lua/UniversalRocket.lua function UniversalRocketBase:IsCargoReady :535-559
+extracted Lua/UniversalRocket.lua function UniversalRocketBase:WaitsForManualLaunch :3025-3031
+extracted Lua/UniversalRocket.lua function UniversalRocketBase:GetArrivalLocType :952-954
+extracted Lua/Units/Colonist.lua function Colonist:SetResidence :3102-3121
+extracted Lua/Buildings/Residence.lua function Residence:GetFreeSpace :233-235
+
+== LanderEmptyLaunch (F67) ==
+  PASS  [F67 L0] pre-rebuild probe text vs 1.1.0 body reproduces the sitting's ERROR line  -- ERROR: Lua/UniversalRocket.lua:544: attempt to call a nil value (method 'WaitsForManualLaunch')
+  PASS  [F67 L1] module registered active, apply NOT run (vanilla body) -> FAIL on the empty clause  -- FAIL: empty auto rocket reports ready — it launches with nothing and comes straight back (F67)
+  PASS  [F67 L2] module applied -> PASS  -- PASS: empty flight blocked, loaded flight still ready (1.1.0 body :535-559 driven; fixture past the :554 automode gate)
+  PASS  [F67 L3] over-broad wrapper (always false) -> FAIL on the loaded clause  -- FAIL: a LOADED auto rocket is blocked too — an over-broad fix, or vanilla's automode gate (:554-556) closed on a fixture that should pre-date it by two hours
+  PASS  [F67 L4] vanilla alone: LOADED fixture reads false inside its first automode hour, true two hours in (the :554 gate; retyped fixture)  -- false/true
+
+== FreedHousingNotice (F59) ==
+  FAIL  [F59 L0] pre-rebuild probe text vs 1.1.0 body reproduces the sitting's ERROR line  -- ERROR: Lua/Units/Colonist.lua:3118: attempt to call a nil value (method 'UpdateLowComfortNotification')
+  PASS  [F59 L1] module registered active, apply NOT run (vanilla body) -> FAIL: nobody told  -- FAIL: a home that just fell vacant does not offer itself to the dome's homeless — they wait for their own update, up to 12 game hours in a large colony
+  PASS  [F59 L2] module applied -> PASS  -- PASS: vacated home offers the bed to the dome's homeless once the caller's operation has finished, not inside it; a residence with no free slot does not
+  PASS  [F59 L3] a wrapper that notifies INLINE -> FAIL on the repair's own clause  -- FAIL: the vacancy notification fires INSIDE Colonist:SetResidence — a caller that frees the slot as a middle step of a larger operation (expedition boarding, manual Set Residence) loses the bed to a neighbour (F59 A1/A2)
+  PASS  [F59 L3b] over-broad wrapper (defers, but no free-space test) -> FAIL on the no-slot clause  -- FAIL: a residence with no usable slot still walks the homeless list
+
+==============================================================================
+9 of 10 demands held
+REFUTED -- 1 demand(s) failed:
+   - [F59 L0] pre-rebuild probe text vs 1.1.0 body reproduces the sitting's ERROR line
+
+EXIT 1

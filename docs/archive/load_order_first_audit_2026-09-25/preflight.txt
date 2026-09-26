@@ -1,0 +1,34 @@
+UPLOAD PREFLIGHT — B:\Dev\SMR\SMR-BugFixPack\scratch\load_first_audit_8e2325a
+  mod id: SMR_CommunityFixPack   title: 'Relaunched Fix Pack'
+
+  UNCHECKABLE PDX login                                                                                     cannot be checked without an account — the ONLY guard this tool cannot run (ParadoxMods.lua:20-22)
+  PASS        PDX `title` non-empty (ParadoxMods.lua:24)                                                    19 chars
+  PASS        PDX `short_description` non-empty (ParadoxMods.lua:29)                                        184 chars
+  PASS        PDX `description` non-empty (ParadoxMods.lua:34)                                              4708 chars
+  PASS        PDX `image` non-empty (ParadoxMods.lua:39)                                                    36 chars
+  PASS        PDX `lua_revision` non-empty (ParadoxMods.lua:44)                                             350453
+  PASS        PDX `last_changes` required when updating (ParadoxMods.lua:48)                                set
+  PASS        preview image resolves on disk                                                                preview.png
+  PASS        preview <= 1 MB (Steam hard limit, SteamWorkshop.lua:85-92)                                   44,322 bytes
+  PASS        preview <= 2 MB (recorded PDX limit)                                                          44,322 bytes
+  PASS        image path is content-path form                                                               starts with 'Mod/', so FixRelativePaths leaves it alone (Mod.lua:577) and the mod stays CLEAN — no editor save, no version bump
+  PASS        screenshot <= 1 MB: Mod/SMR_CommunityFixPack/store_screenshots/1_rare_metals_drill_skin.jpg   350,357 bytes
+  PASS        screenshot <= 1 MB: Mod/SMR_CommunityFixPack/store_screenshots/2_rare_metals_hammer_skin.jpg  332,336 bytes
+  PASS        screenshot <= 1 MB: Mod/SMR_CommunityFixPack/store_screenshots/3_moxie_skins.jpg              331,494 bytes
+  INFO        PackVersion a player sees                                                                     1.0.21  (version_major.version_minor.version)
+  INFO        VersionDisplayName sent to PDX                                                                '21' — the REVISION ALONE, not the full version (ParadoxMods.lua:156). Edit it on the portal page if it lets you.
+  PASS        lua_revision pinned to ModRequiredLuaRevision (Mod.lua:19)                                    350453
+  PASS        ignore_files carries */docs/*                                                                 present
+  PASS        ignore_files carries */tools/*                                                                present
+  PASS        ignore_files carries *CLAUDE.md                                                               present
+  PASS        ignore_files carries *AGENTS.md                                                               present
+  PASS        ignore_files carries *.git/*                                                                  present
+  PASS        no junction/symlink whose contents would be packed                                            none
+  PASS        predicted pack holds only shipping files                                                      48 files: Code/*.lua, metadata.lua, items.lua, LICENSE, preview.png
+  PASS        predicted pack size <= 5 MB                                                                   577,759 bytes
+  PASS        metadata `code` list matches Code/*.lua on disk                                               44 files, exactly
+  PASS        items.lua ModItemCode list == metadata `code`, same files, same order                         44 entries, in order
+
+  26 checked · 0 FAIL · 1 UNCHECKABLE
+
+✅ Every guard this tool can run would pass. ⛔ This is NOT 'the upload will succeed' — the login guard is unrunnable here and portal character limits stay check-at-paste.
