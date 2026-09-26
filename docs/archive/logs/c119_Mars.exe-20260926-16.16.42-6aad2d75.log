@@ -1,0 +1,414 @@
+					Render 0:00:00:006
+*** executable info
+					Render 0:00:00:007
+Timestamp:     	6aad2d75
+Date:          	Fri Sep 18 08:24:21 2026
+Command line:  	
+Compiler:      	195136247, 142 (VS 2019) or newer
+
+
+*** hardware info
+CPU name      	Intel(R) Core(TM) i7-14700K
+CPU MHz       	3418
+CPU cores     	20/28
+Phys. Memory   	65278 MBytes
+Memory In Use  	40%
+Disk Free      	1225313 MBytes
+
+
+*** OS info
+OS:            	Windows 11
+Version:       	10.0.26100 
+
+
+*** Debug::Init()
+
+
+					Render 0:00:00:130
+Steam initialized (AppId 3215050)
+					Render 0:00:00:133
+Drive type for game installation: SSD, savegames: SSD
+					Render 0:00:00:134
+Language: English
+					Render 0:00:01:558
+*** graphics info
+GPU                            	NVIDIA GeForce RTX 4080 Feature Level: 12.1 {  DoublePrecisionFloatShaderOps: 1 OutputMergerLogicOp: 1 MinPrecisionSupport: 2 TiledResourcesTier: 4 ResourceBindingTier: 3 PSSpecifiedStencilRefSupported: 0 TypedUAVLoadAdditionalFormats: 1 ROVsSupported: 1 ConservativeRasterizationTier: 3 MaxGPUVirtualAddressBitsPerResource: 40 StandardSwizzle64KBSupported: 0 CrossNodeSharingTier: 0 CrossAdapterRowMajorTextureSupported: 0 VPAndRTArrayIndexFromAnyShaderFeedingRasterizerSupportedWithoutGSEmulation: 1 ResourceHeapTier: 2 NotZeroedPools: 1 UMA: 0 UnalignedBlockTextures: 1}
+API                            	d3d12
+GPU Driver Version             	32.0.16.1074
+GPU Driver Package Version     	610.74
+GPU Dedicated Video Memory     	16048 MB
+					Render 0:00:01:710
+
+Libs: Network, Sequences, MouseTrackWin, DumbAI, MapGen, Paradox, TriggersAndEvents, Notifications, Research, Resources, Tutorial, Objectives 
+
+					Render 0:00:01:952
+
+Platform: desktop, editor, goldmaster, paradox, pc, steam
+
+					Render 0:00:02:926
+*** audio info
+Audio Endpoint                 	Speakers (Razer Leviathan V2)
+						Lua 0:00:02:927
+Lua revision: 405907
+Assets revision: 33225
+Steam AppID: 3215050
+Build version: 1.1.1.405907
+Build branch:  Release
+						Lua 0:00:05:266
+Account storage loaded successfully in 2 ms
+						Lua 0:00:05:267
+DLC norman loaded, lua revision 405907, assets revision 33225
+DLC thomas loaded, lua revision 405907, assets revision 33225
+						Lua 0:00:05:271
+[mod] Loaded mod def DEV ONLY - Train Hub Prototype (id SMR_TrainHubPrototype_20260918, v0.00-002) unpacked from appdata
+[mod] Loaded mod def DEV ONLY - Train Hub (Module B build) (id SMR_TrainHubDev_20260918, v0.00-052) unpacked from appdata
+[mod] Loaded mod def Passage Network (id iooW34Y, v1.00-038) packed from steam
+[mod] Loaded mod def Relaunched Fix Pack: Opt-In Modules (id SMR_CommunityOptInPack, v1.00-000) unpacked from appdata
+[mod] Loaded mod def TEMPORARY - Linux NVIDIA 580 Crash Workaround (id SMR_FR1TempWorkaround, v0.00-003) unpacked from appdata
+[mod] Loaded mod def Relaunched Fix Pack (id SMR_CommunityFixPack, v1.00-021) unpacked from appdata
+[mod] Loaded mod def DEV ONLY - Rail Shaft (cross-map train tunnel prototype) (id SMR_RailShaftDev_20260923, v0.00-001) unpacked from appdata
+[mod] Loaded mod def Community Fix Pack — Test Kit (id SMR_CommunityFixPackTestKit, v0.00-001) unpacked from appdata
+						Lua 0:00:05:672
+[mod] [CommunityFixPack] LoadFirst: already first of 5 (SMR_CommunityFixPack, SMR_CommunityFixPackTestKit, SMR_TrainHubDev_20260918, SMR_CommunityOptInPack, SMR_RailShaftDev_20260923); nothing written
+[mod] [CommunityFixPack] LoadFirst: applied
+[mod] [CommunityFixPack] LanderEmptyLaunch: applied
+[mod] [CommunityFixPack] ShelterReflex: applied
+[mod] [CommunityFixPack] TrackSalvageWipe: applied
+[mod] [CommunityFixPack] LakeEntombment: applied
+[mod] [CommunityFixPack] RocketDroneChurn: applied
+[mod] [CommunityFixPack] ShuttleTransportCache: applied
+						Lua 0:00:05:673
+[mod] [CommunityFixPack] VacuumWalks: applied
+[mod] [CommunityFixPack] ArrivalDeaths: applied
+[mod] [CommunityFixPack] PassageHubSalvageDrain: applied
+[mod] [CommunityFixPack] HubLocalAccess: applied
+[mod] [CommunityFixPack] HubMarkerDeparture: applied
+						Lua 0:00:05:674
+[mod] [CommunityFixPack] RescueReturnText: applied
+[mod] [CommunityFixPack] ObsoleteHomeRescue: applied
+[mod] [CommunityFixPack] StaleReservations: applied
+[mod] [CommunityFixPack] CrystalMysteryHang: applied
+[mod] [CommunityFixPack] DustSicknessBiorobots: applied
+[mod] [CommunityFixPack] PayloadTemplateRefill: applied
+[mod] [CommunityFixPack] ShuttleHubOffAvailable: applied
+[mod] [CommunityFixPack] FreedHousingNotice: applied
+[mod] [CommunityFixPack] LandscapeUnitFilter: applied
+						Lua 0:00:05:675
+[mod] [CommunityFixPack] RocketInteractGuard: applied
+[mod] [CommunityFixPack] TrackConnectorPingPong: applied
+						Lua 0:00:05:676
+[mod] [CommunityFixPack] TrackTunnelPowerBridge: applied
+[mod] [CommunityFixPack] SequenceLatents: applied
+[mod] [CommunityFixPack] TrackSalvageRefund: applied
+[mod] [CommunityFixPack] DroneTransportMinors: applied
+[mod] [CommunityFixPack] ScanDowngrade: applied
+[mod] [CommunityFixPack] BombardmentSpread: applied
+[mod] [CommunityFixPack] ExtenderFlapChurn: applied
+						Lua 0:00:05:677
+[mod] [CommunityFixPack] SaintBlessing: applied
+[mod] [CommunityFixPack] ExoticDepositSign: applied
+[mod] [CommunityFixPack] JumboCaveReinforcementWedge: applied
+[mod] [CommunityFixPack] SilentHitMomentFX: applied
+[mod] [CommunityFixPack] CloggedBuildingRelease: applied
+						Lua 0:00:05:678
+[mod] [CommunityFixPack] FactionDomeSizeGate: applied
+[mod] [CommunityFixPack] HabitatExpeditionReturn: applied
+[mod] [CommunityFixPack] HabitatExpeditionDraft: applied
+[mod] [CommunityFixPack] RoverSubclassManifest: applied
+						Lua 0:00:05:679
+[mod] [CommunityFixPack] DryFarmingFarms: applied
+[mod] [CommunityFixPack] WildfireCureVisit: applied
+[mod] [CommunityFixPack] GhostPowerCells: applied
+[mod] [CommunityFixPack] SaveSanitizer: applied
+[mod] [SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:05:680
+[mod] [SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[mod] [SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+[SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+						Lua 0:00:05:684
+[mod] [SMRTK] SMRTK_CORE loaded=true tee=false t=1123 id=1
+[SMRTK] SMRTK_CORE loaded=true tee=false t=1123 id=1
+						Lua 0:00:05:689
+[mod] [SMRTest][carry] fixture-carry dump available — run SMRTest.FixtureCarry()
+						Lua 0:00:05:691
+[TrainHubDev] hub classes loaded: six-connector hub, built-in drone controller, maintenance reserve
+						Lua 0:00:05:692
+[TrainHubDev] train export floor loaded (standing + transient holds)
+[TrainDistribution] synchronous console prototype loaded; drone baselines are samples only
+						Lua 0:00:05:693
+[mod] [CommunityOptInPack] AcknowledgedWarnings: applied
+[mod] [CommunityOptInPack] ResidencyControl: inactive (opt-in module, off by default — enable it in Options → Mod Options)
+[mod] [CommunityOptInPack] MultipleSuns: applied
+[mod] [CommunityOptInPack] DroneStatDials: applied
+[RailShaftDev] loaded: cross-map train tunnel prototype. UNVERIFIED IN GAME.
+						Lua 0:00:06:423
+[TrainHubDev] save guard: native waiter snapshot; legacy hub load mapping retained
+						Lua 0:00:06:500
+[mod] [CommunityFixPack] SaintBlessing: inactive (no dome-colonists trait presets)
+						Lua 0:00:06:591
+Reloading done in 1319 ms
+						Lua 0:00:06:593
+Available DLCs: norman(Feeding the Future),thomas(Interplanetary Codex) 
+						Lua 0:00:06:639
+[mod] [SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=DataLoading t=1123 id=2
+[SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=DataLoading t=1123 id=2
+						Lua 0:00:07:042
+[preset] Preset postprocess took 173 ms.
+						Lua 0:00:07:107
+482 / 482 particle streams loaded in 58 ms.
+						Lua 0:00:07:108
+5 / 5 particle streams loaded in 1 ms.
+						Lua 0:00:07:110
+[mod] [CommunityFixPack] SilentHitMomentFX: registered 11 missing animation-moment preset(s)
+[mod] [CommunityFixPack] FactionDomeSizeGate: 7 faction dislike(s) now wait for 10 colonists in a dome
+[mod] [CommunityFixPack] DryFarmingFarms: left 1 farm(s) alone because DryFarming already reaches them (FarmUnderground via Farm)
+[mod] [CommunityFixPack] DryFarmingFarms: added 2 water entr(y/ies) at -50% to DryFarming (1 adopted, 4 of 4 farms loaded)
+[mod] [CommunityOptInPack] MultipleSuns: BuildingTemplates.ArtificialSun not found — build limit NOT lifted (binding fix still active)
+						Lua 0:00:07:325
+[mod] [CommunityFixPack] SaintBlessing: the shipped code resolves the trait label itself — data left untouched; save re-base armed for 1 preset(s) of 2
+[mod] [CommunityFixPack] DryFarmingFarms: left 1 farm(s) alone because DryFarming already reaches them (FarmUnderground via Farm)
+[mod] [CommunityOptInPack] MultipleSuns: Artificial Sun build-once limit lifted
+						Lua 0:00:07:428
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=1123 id=3
+						Lua 0:00:07:460
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=1123 id=4
+						Lua 0:00:07:475
+[mod] Loaded mod items for: SMR_CommunityFixPack, SMR_CommunityFixPackTestKit, SMR_TrainHubDev_20260918, SMR_CommunityOptInPack, SMR_RailShaftDev_20260923
+						Lua 0:00:07:727
+[mod] [CommunityFixPack] SaintBlessing: the shipped code resolves the trait label itself — data left untouched; save re-base armed for 1 preset(s) of 2
+						Lua 0:00:07:728
+[mod] [CommunityFixPack] DryFarmingFarms: left 1 farm(s) alone because DryFarming already reaches them (FarmUnderground via Farm)
+						Lua 0:00:07:827
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=1123 id=5
+						Lua 0:00:08:380
+[PdxSDK] Started up. Took 1198
+						Lua 0:00:08:790
+[Braze] SessionStart error The server name or address could not be resolved
+
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:08:887
+[Braze] SessionStart error The server name or address could not be resolved
+
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+						Lua 0:00:17:972
+Load Game: 
+	lua_revision: 405907 (last saved with) 
+	orig_lua_revision: 403908 (created with) 
+	assets_revision: 33225 
+
+	dlcs: norman, thomas 
+
+	mods: SMR_CommunityOptInPack, SMR_CommunityFixPack, SMR_CommunityFixPackTestKit, SMR_TrainHubPrototype_20260918, SMR_TrainHubDev_20260918 
+						Lua 0:00:17:974
+*** Reloading assets from folder 'BinAssets/'
+						Lua 0:00:20:994
+*** Assets reloaded in 3.0 s, read 359.0 MB, read speed 118.9 MB/s, average read 8137 bytes.
+						Lua 0:00:22:001
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=10609 id=6
+						Lua 0:00:22:802
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=10609 id=7
+						Lua 0:00:23:593
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=10609 id=8
+						Lua 0:00:24:362
+[mod] [SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=PreLoadGame t=10609 id=9
+[SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=PreLoadGame t=10609 id=9
+						Lua 0:00:25:283
+[mod] This savegame tries to load Mod Relaunched Fix Pack (id SMR_CommunityFixPack, v1.00-019), which is loaded with a different version 1.00-021
+[mod] This savegame tries to load Mod DEV ONLY - Train Hub (Module B build) (id SMR_TrainHubDev_20260918, v0.00-044), which is loaded with a different version 0.00-052
+						Lua 0:00:27:098
+[mod] [CommunityFixPack] ExoticDepositSign: 1 Exotic Minerals deposit(s) re-signed onto the clean entity
+						Lua 0:00:27:099
+[mod] [CommunityFixPack] SilentHitMomentFX: restored 2 missing hit-moment tracker(s) on load
+[mod] [SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:27:100
+[TrainHubDev] SMROptInTrainHub6 line radii d0..d5 = 6 6 6 6 6 6
+[TrainHubDev] SMROptInTrainHub6 connector spots: from the body
+[TrainHubDev] reactor palette: channel 1 = 18,32,78 roughness 0 metallic 0
+[TrainHubDev] reactor palette: channel 2 = 18,32,78 roughness 0 metallic 0
+[TrainHubDev] reactor palette: channel 3 = 200,205,210 roughness -90 metallic 110
+[TrainHubDev] reactor palette: P4 "navy + steel on 3 and 4", 3 of 4 channels written on the attached copy only (vanilla's own per-object call; no material is restyled)
+						Lua 0:00:27:101
+[TrainHubDev] lights: arm 0, flanks the reactor (red flank) = B2 "Deep blue wash" (SpotLight), 12 lights, engine bearing 0 deg
+[TrainHubDev] lights: arm 1, flanks the reactor (blue flank) = B2 "Deep blue wash" (SpotLight), 12 lights, engine bearing 60 deg
+[TrainHubDev] lights: arm 2, next to the blue flank = B2 "Deep blue wash" (SpotLight), 12 lights, engine bearing 120 deg
+[TrainHubDev] lights: arm 3, opposite the red flank = B2 "Deep blue wash" (SpotLight), 12 lights, engine bearing 180 deg
+						Lua 0:00:27:102
+[TrainHubDev] lights: arm 4, opposite the blue flank = B2 "Deep blue wash" (SpotLight), 12 lights, engine bearing 240 deg
+[TrainHubDev] lights: arm 5, next to the red flank = B2 "Deep blue wash" (SpotLight), 12 lights, engine bearing 300 deg
+[TrainHubDev] lights: arm tune intensity 50, side 150 cm, height 200 cm, radius 500 cm, cone 50/100, colour 0,40,255
+[TrainHubDev] structure lights: portal rims ON, 30 lights (intensity 4, radius 350 cm)
+[TrainHubDev] structure lights: drone pit kerb OFF, 0 lights (intensity 15, radius 300 cm)
+[TrainHubDev] structure lights: ring rim strip OFF, 0 lights (intensity 12, radius 400 cm)
+[TrainHubDev] structure lights: floor edge strip OFF, 0 lights (intensity 30, radius 300 cm)
+[TrainHubDev] structure lights: crown floor light ON, 0 lights (intensity 150, radius 4000 cm)
+[TrainHubDev] structure lights: crown floor light follows the VANILLA night schedule (OnMsg.LightmodelChange -> map.NightLightsState, NightLightObjects.lua:250-259, :22 on build 1.1.0.403908); it is DAY now, so it is NOT PLACED -- hanging at z 1900 cm, colour 255,214,170, cone 0/0
+[TrainHubDev] structure lights: under-deck fill ON, 0 lights (intensity 40, radius 1200 cm)
+[TrainHubDev] structure lights: under-deck fill follows the VANILLA night schedule (OnMsg.LightmodelChange -> map.NightLightsState, NightLightObjects.lua:250-259, :22 on build 1.1.0.403908); it is DAY now, so it is NOT PLACED -- hanging at z 700 cm, colour 255,214,170, cone 0/0
+[TrainHubDev] lights: 102 placed (72 arm + 30 structure); a stopped hub destroys them all
+						Lua 0:00:27:106
+[RailShaftDev] UniversalTunnel allowed underground = true (DisabledInEnvironment is a GameVar: this is
+[RailShaftDev]   written into the save, and stays there if this mod is removed -- throwaway saves only)
+[RailShaftDev] ready. SMRRailShaft.Status() for where things stand.
+						Lua 0:00:27:740
+game_settings:
+    sponsor: Japan
+    profile: citymayor
+    founding_faction: WorkersParty
+    rival_colonies: SpaceY, NewArk, CNSA, Roscosmos
+    mystery_random: 
+    game_rules: (none)
+more_game_settings: save_game_id: 55afqP8zZV1vEYMb, mystery: MirrorSphereMystery, coordinates: 2N176E, landing_spot: ElysiumBeta, logo: Japan
+map_conditions: altitude: -2776, temperature: -15, cold_wave: 36, dust_devils: 47, dust_storm: 0, meteors: 73
+map_resources: concrete: 254, metals: 146, precious_metals: 146, water: 109
+						Lua 0:00:27:972
+[mod] [CommunityFixPack] GhostPowerCells: maps=4 cleared=0 tunnel_skipped=68 shape_protected=39 reconnected=0 retry_failed=0 unbuilt_skipped=0 map_failed=0 elapsed_ms=136
+[mod] [CommunityFixPack] SaveSanitizer: F95 astrogeologist-residue pass removed 0 modifier(s), left 0 unidentified
+						Lua 0:00:27:976
+Game Loaded in 10005 ms
+[mod] [SMRTK] SMRTK_PROVENANCE actions=300 last=panel_toggle last_id=321 present=true session=1790179536:92298194:1750249438:118771108 t=357303315 id=10
+[SMRTK] SMRTK_PROVENANCE actions=300 last=panel_toggle last_id=321 present=true session=1790179536:92298194:1750249438:118771108 t=357303315 id=10
+						Lua 0:00:27:987
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=357303315 id=11
+						Lua 0:00:28:001
+[mod] [SMRTK] SMRTK_DOCK action=dock_attach attached=true route="idBottom sibling" status=OK surface=one-toggle+tasks t=357303315 id=12
+						Lua 0:00:28:010
+[mod] [SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+						Lua 0:00:28:159
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=357303315 id=13
+						Lua 0:00:28:831
+Game loaded on map BlankBig_04 in 10991 						Lua 0:00:28:832
+ms
+						Lua 0:00:29:135
+[mod] [SMRTK] SMRTK_PANEL_RESTORE open=true tab=Agent t=357303315 id=14
+						Lua 0:00:29:899
+[mod] [SMRTK] SMRTK_SECTION action=section_attach attached=true dialog=ipBuilding object=SMROptInTrainHub6(8922) status=OK t=357303315 id=15
+						Lua 0:00:33:319
+[mod] [SMRTK] SMRTK_MARK action=mark label=C119_TOPOLOGY_BEGIN mark=52 status=OK t=357303315 id=16
+[SMRTK] SMRTK_MARK action=mark label=C119_TOPOLOGY_BEGIN mark=52 status=OK t=357303315 id=16
+[mod] [SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=43/43 game=405907 mark_action=mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923,SMR_TrainHubDev_20260918 pack_version=21 read="live registry" save="Japan Sol 497 (Drone Hub Integrated).savegame.sav" sol=497 status=OK t=357303315 id=17
+[SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=43/43 game=405907 mark_action=mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923,SMR_TrainHubDev_20260918 pack_version=21 read="live registry" save="Japan Sol 497 (Drone Hub Integrated).savegame.sav" sol=497 status=OK t=357303315 id=17
+[mod] [SMRTK] SMRTK_DUMP grid_a="table: 0000019E65833D98" grid_b="table: 0000019E65833D98" leg=track object=10319 powered=true producers=120 shared_grid=true sitting=C119 station_a=10111 station_b=10154 tunnel_set=true t=357303315 id=18
+[SMRTK] SMRTK_DUMP grid_a="table: 0000019E65833D98" grid_b="table: 0000019E65833D98" leg=track object=10319 powered=true producers=120 shared_grid=true sitting=C119 station_a=10111 station_b=10154 tunnel_set=true t=357303315 id=18
+[mod] [SMRTK] SMRTK_DUMP grid_a="table: 0000019E65833D98" grid_b="table: 0000019E65833D98" leg=track object=10361 powered=true producers=120 shared_grid=true sitting=C119 station_a=10542 station_b=10154 tunnel_set=true t=357303315 id=19
+[SMRTK] SMRTK_DUMP grid_a="table: 0000019E65833D98" grid_b="table: 0000019E65833D98" leg=track object=10361 powered=true producers=120 shared_grid=true sitting=C119 station_a=10542 station_b=10154 tunnel_set=true t=357303315 id=19
+[mod] [SMRTK] SMRTK_DUMP grid_a="table: 0000019E65833D98" grid_b="table: 0000019E65833D98" leg=track object=4770 powered=true producers=120 shared_grid=true sitting=C119 station_a=4776 station_b=4782 tunnel_set=true t=357303315 id=20
+[SMRTK] SMRTK_DUMP grid_a="table: 0000019E65833D98" grid_b="table: 0000019E65833D98" leg=track object=4770 powered=true producers=120 shared_grid=true sitting=C119 station_a=4776 station_b=4782 tunnel_set=true t=357303315 id=20
+[mod] [SMRTK] SMRTK_DUMP grid_a="table: 0000019E65833D98" grid_b="table: 0000019E65833D98" leg=track object=10758 powered=true producers=120 shared_grid=true sitting=C119 station_a=10766 station_b=10543 tunnel_set=true t=357303315 id=21
+[SMRTK] SMRTK_DUMP grid_a="table: 0000019E65833D98" grid_b="table: 0000019E65833D98" leg=track object=10758 powered=true producers=120 shared_grid=true sitting=C119 station_a=10766 station_b=10543 tunnel_set=true t=357303315 id=21
+[mod] [SMRTK] SMRTK_DUMP grid_a="table: 0000019E65833D98" grid_b="table: 0000019E65833D98" leg=track object=9382 powered=true producers=120 shared_grid=true sitting=C119 station_a=1867 station_b=4777 tunnel_set=true t=357303315 id=22
+[SMRTK] SMRTK_DUMP grid_a="table: 0000019E65833D98" grid_b="table: 0000019E65833D98" leg=track object=9382 powered=true producers=120 shared_grid=true sitting=C119 station_a=1867 station_b=4777 tunnel_set=true t=357303315 id=22
+[mod] [SMRTK] SMRTK_DUMP grid_a="table: 0000019E65833D98" grid_b="table: 0000019E65833D98" leg=track object=9346 powered=true producers=120 shared_grid=true sitting=C119 station_a=4724 station_b=9324 tunnel_set=true t=357303315 id=23
+[SMRTK] SMRTK_DUMP grid_a="table: 0000019E65833D98" grid_b="table: 0000019E65833D98" leg=track object=9346 powered=true producers=120 shared_grid=true sitting=C119 station_a=4724 station_b=9324 tunnel_set=true t=357303315 id=23
+[mod] [SMRTK] SMRTK_DUMP grid_a="table: 0000019E65833D98" grid_b="table: 0000019E65833D98" leg=track object=9668 powered=true producers=120 shared_grid=true sitting=C119 station_a=8922 station_b=1867 tunnel_set=true t=357303315 id=24
+[SMRTK] SMRTK_DUMP grid_a="table: 0000019E65833D98" grid_b="table: 0000019E65833D98" leg=track object=9668 powered=true producers=120 shared_grid=true sitting=C119 station_a=8922 station_b=1867 tunnel_set=true t=357303315 id=24
+[mod] [SMRTK] SMRTK_DUMP grid_a="table: 0000019E65833D98" grid_b="table: 0000019E65833D98" leg=track object=9331 powered=true producers=120 shared_grid=true sitting=C119 station_a=8922 station_b=9325 tunnel_set=true t=357303315 id=25
+[SMRTK] SMRTK_DUMP grid_a="table: 0000019E65833D98" grid_b="table: 0000019E65833D98" leg=track object=9331 powered=true producers=120 shared_grid=true sitting=C119 station_a=8922 station_b=9325 tunnel_set=true t=357303315 id=25
+[mod] [SMRTK] SMRTK_DUMP grid_a="table: 0000019E65833D98" grid_b="table: 0000019E65833D98" leg=track object=10762 powered=true producers=120 shared_grid=true sitting=C119 station_a=10765 station_b=8922 tunnel_set=true t=357303315 id=26
+[SMRTK] SMRTK_DUMP grid_a="table: 0000019E65833D98" grid_b="table: 0000019E65833D98" leg=track object=10762 powered=true producers=120 shared_grid=true sitting=C119 station_a=10765 station_b=8922 tunnel_set=true t=357303315 id=26
+[mod] [SMRTK] SMRTK_DUMP grid_a="table: 0000019E65833D98" grid_b="table: 0000019E65833D98" leg=track object=9245 powered=true producers=120 shared_grid=true sitting=C119 station_a=8922 station_b=1878 tunnel_set=true t=357303315 id=27
+[SMRTK] SMRTK_DUMP grid_a="table: 0000019E65833D98" grid_b="table: 0000019E65833D98" leg=track object=9245 powered=true producers=120 shared_grid=true sitting=C119 station_a=8922 station_b=1878 tunnel_set=true t=357303315 id=27
+[mod] [SMRTK] SMRTK_DUMP grid_a="table: 0000019E65833D98" grid_b="table: 0000019E65833D98" leg=track object=9164 powered=true producers=120 shared_grid=true sitting=C119 station_a=8922 station_b=6150 tunnel_set=true t=357303315 id=28
+[SMRTK] SMRTK_DUMP grid_a="table: 0000019E65833D98" grid_b="table: 0000019E65833D98" leg=track object=9164 powered=true producers=120 shared_grid=true sitting=C119 station_a=8922 station_b=6150 tunnel_set=true t=357303315 id=28
+[mod] [SMRTK] SMRTK_DUMP grid_a="table: 0000019E65833D98" grid_b="table: 0000019E65833D98" leg=track object=9457 powered=true producers=120 shared_grid=true sitting=C119 station_a=6165 station_b=9528 tunnel_set=false t=357303315 id=29
+[SMRTK] SMRTK_DUMP grid_a="table: 0000019E65833D98" grid_b="table: 0000019E65833D98" leg=track object=9457 powered=true producers=120 shared_grid=true sitting=C119 station_a=6165 station_b=9528 tunnel_set=false t=357303315 id=29
+[mod] [SMRTK] SMRTK_DUMP grid_a="table: 0000019E65833D98" grid_b="table: 0000019E65833D98" leg=track object=9505 powered=true producers=120 shared_grid=true sitting=C119 station_a=9529 station_b=8922 tunnel_set=true t=357303315 id=30
+[SMRTK] SMRTK_DUMP grid_a="table: 0000019E65833D98" grid_b="table: 0000019E65833D98" leg=track object=9505 powered=true producers=120 shared_grid=true sitting=C119 station_a=9529 station_b=8922 tunnel_set=true t=357303315 id=30
+[mod] [SMRTK] SMRTK_DUMP class=Passage endpoints=2 grid="table: 0000019E65833D98" grid_present=true kind=passage leg=topology object=3017 powered=true producers=120 sitting=C119 tunnel_set=true t=357303315 id=31
+[SMRTK] SMRTK_DUMP class=Passage endpoints=2 grid="table: 0000019E65833D98" grid_present=true kind=passage leg=topology object=3017 powered=true producers=120 sitting=C119 tunnel_set=true t=357303315 id=31
+						Lua 0:00:33:320
+[mod] [SMRTK] SMRTK_DUMP class=Passage endpoints=2 grid="table: 0000019E65833D98" grid_present=true kind=passage leg=topology object=5501 powered=true producers=120 sitting=C119 tunnel_set=true t=357303315 id=32
+[SMRTK] SMRTK_DUMP class=Passage endpoints=2 grid="table: 0000019E65833D98" grid_present=true kind=passage leg=topology object=5501 powered=true producers=120 sitting=C119 tunnel_set=true t=357303315 id=32
+[mod] [SMRTK] SMRTK_DUMP class=Passage endpoints=2 grid="table: 0000019E65833D98" grid_present=true kind=passage leg=topology object=5508 powered=true producers=120 sitting=C119 tunnel_set=true t=357303315 id=33
+[SMRTK] SMRTK_DUMP class=Passage endpoints=2 grid="table: 0000019E65833D98" grid_present=true kind=passage leg=topology object=5508 powered=true producers=120 sitting=C119 tunnel_set=true t=357303315 id=33
+[mod] [SMRTK] SMRTK_DUMP class=Passage endpoints=2 grid="table: 0000019E65833D98" grid_present=true kind=passage leg=topology object=5486 powered=true producers=120 sitting=C119 tunnel_set=true t=357303315 id=34
+[SMRTK] SMRTK_DUMP class=Passage endpoints=2 grid="table: 0000019E65833D98" grid_present=true kind=passage leg=topology object=5486 powered=true producers=120 sitting=C119 tunnel_set=true t=357303315 id=34
+[mod] [SMRTK] SMRTK_DUMP class=Passage endpoints=2 grid="table: 0000019E65833D98" grid_present=true kind=passage leg=topology object=5567 powered=true producers=120 sitting=C119 tunnel_set=true t=357303315 id=35
+[SMRTK] SMRTK_DUMP class=Passage endpoints=2 grid="table: 0000019E65833D98" grid_present=true kind=passage leg=topology object=5567 powered=true producers=120 sitting=C119 tunnel_set=true t=357303315 id=35
+[mod] [SMRTK] SMRTK_DUMP class=Passage endpoints=2 grid="table: 0000019E65833D98" grid_present=true kind=passage leg=topology object=5386 powered=true producers=120 sitting=C119 tunnel_set=true t=357303315 id=36
+[SMRTK] SMRTK_DUMP class=Passage endpoints=2 grid="table: 0000019E65833D98" grid_present=true kind=passage leg=topology object=5386 powered=true producers=120 sitting=C119 tunnel_set=true t=357303315 id=36
+[mod] [SMRTK] SMRTK_DUMP class=Passage endpoints=2 grid="table: 0000019E65833D98" grid_present=true kind=passage leg=topology object=5375 powered=true producers=120 sitting=C119 tunnel_set=true t=357303315 id=37
+[SMRTK] SMRTK_DUMP class=Passage endpoints=2 grid="table: 0000019E65833D98" grid_present=true kind=passage leg=topology object=5375 powered=true producers=120 sitting=C119 tunnel_set=true t=357303315 id=37
+[mod] [SMRTK] SMRTK_DUMP class=Passage endpoints=2 grid="table: 0000019E65833D98" grid_present=true kind=passage leg=topology object=5353 powered=true producers=120 sitting=C119 tunnel_set=true t=357303315 id=38
+[SMRTK] SMRTK_DUMP class=Passage endpoints=2 grid="table: 0000019E65833D98" grid_present=true kind=passage leg=topology object=5353 powered=true producers=120 sitting=C119 tunnel_set=true t=357303315 id=38
+[mod] [SMRTK] SMRTK_DUMP class=Passage endpoints=2 grid="table: 0000019E65833D98" grid_present=true kind=passage leg=topology object=5477 powered=true producers=120 sitting=C119 tunnel_set=true t=357303315 id=39
+[SMRTK] SMRTK_DUMP class=Passage endpoints=2 grid="table: 0000019E65833D98" grid_present=true kind=passage leg=topology object=5477 powered=true producers=120 sitting=C119 tunnel_set=true t=357303315 id=39
+[mod] [SMRTK] SMRTK_DUMP class=Passage endpoints=2 grid="table: 0000019E65833D98" grid_present=true kind=passage leg=topology object=5311 powered=true producers=120 sitting=C119 tunnel_set=true t=357303315 id=40
+[SMRTK] SMRTK_DUMP class=Passage endpoints=2 grid="table: 0000019E65833D98" grid_present=true kind=passage leg=topology object=5311 powered=true producers=120 sitting=C119 tunnel_set=true t=357303315 id=40
+[mod] [SMRTK] SMRTK_DUMP class=Passage endpoints=2 grid="table: 0000019E65833D98" grid_present=true kind=passage leg=topology object=5297 powered=true producers=120 sitting=C119 tunnel_set=true t=357303315 id=41
+[SMRTK] SMRTK_DUMP class=Passage endpoints=2 grid="table: 0000019E65833D98" grid_present=true kind=passage leg=topology object=5297 powered=true producers=120 sitting=C119 tunnel_set=true t=357303315 id=41
+[mod] [SMRTK] SMRTK_DUMP class=Passage endpoints=2 grid="table: 0000019E65833D98" grid_present=true kind=passage leg=topology object=3031 powered=true producers=120 sitting=C119 tunnel_set=true t=357303315 id=42
+[SMRTK] SMRTK_DUMP class=Passage endpoints=2 grid="table: 0000019E65833D98" grid_present=true kind=passage leg=topology object=3031 powered=true producers=120 sitting=C119 tunnel_set=true t=357303315 id=42
+[mod] [SMRTK] SMRTK_DUMP class=Passage endpoints=2 grid="table: 0000019E65833D98" grid_present=true kind=passage leg=topology object=5407 powered=true producers=120 sitting=C119 tunnel_set=true t=357303315 id=43
+[SMRTK] SMRTK_DUMP class=Passage endpoints=2 grid="table: 0000019E65833D98" grid_present=true kind=passage leg=topology object=5407 powered=true producers=120 sitting=C119 tunnel_set=true t=357303315 id=43
+[mod] [SMRTK] SMRTK_DUMP class=Passage endpoints=2 grid="table: 0000019E65833D98" grid_present=true kind=passage leg=topology object=5419 powered=true producers=120 sitting=C119 tunnel_set=true t=357303315 id=44
+[SMRTK] SMRTK_DUMP class=Passage endpoints=2 grid="table: 0000019E65833D98" grid_present=true kind=passage leg=topology object=5419 powered=true producers=120 sitting=C119 tunnel_set=true t=357303315 id=44
+[mod] [SMRTK] SMRTK_DUMP class=Passage endpoints=2 grid="table: 0000019E65833D98" grid_present=true kind=passage leg=topology object=2314 powered=true producers=120 sitting=C119 tunnel_set=true t=357303315 id=45
+[SMRTK] SMRTK_DUMP class=Passage endpoints=2 grid="table: 0000019E65833D98" grid_present=true kind=passage leg=topology object=2314 powered=true producers=120 sitting=C119 tunnel_set=true t=357303315 id=45
+[mod] [SMRTK] SMRTK_DUMP class=Passage endpoints=2 grid="table: 0000019E65833D98" grid_present=true kind=passage leg=topology object=1667 powered=true producers=120 sitting=C119 tunnel_set=true t=357303315 id=46
+[SMRTK] SMRTK_DUMP class=Passage endpoints=2 grid="table: 0000019E65833D98" grid_present=true kind=passage leg=topology object=1667 powered=true producers=120 sitting=C119 tunnel_set=true t=357303315 id=46
+[mod] [SMRTK] SMRTK_DUMP class=Passage endpoints=2 grid="table: 0000019E65833D98" grid_present=true kind=passage leg=topology object=4589 powered=true producers=120 sitting=C119 tunnel_set=true t=357303315 id=47
+[SMRTK] SMRTK_DUMP class=Passage endpoints=2 grid="table: 0000019E65833D98" grid_present=true kind=passage leg=topology object=4589 powered=true producers=120 sitting=C119 tunnel_set=true t=357303315 id=47
+[mod] [SMRTK] SMRTK_DUMP class=PassageHub grid="table: 0000019E65833D98" grid_present=true kind=hub leg=topology object=5293 powered=true producers=120 sitting=C119 t=357303315 id=48
+[SMRTK] SMRTK_DUMP class=PassageHub grid="table: 0000019E65833D98" grid_present=true kind=hub leg=topology object=5293 powered=true producers=120 sitting=C119 t=357303315 id=48
+[mod] [SMRTK] SMRTK_DUMP class=PassageHub grid="table: 0000019E65833D98" grid_present=true kind=hub leg=topology object=5294 powered=true producers=120 sitting=C119 t=357303315 id=49
+[SMRTK] SMRTK_DUMP class=PassageHub grid="table: 0000019E65833D98" grid_present=true kind=hub leg=topology object=5294 powered=true producers=120 sitting=C119 t=357303315 id=49
+[mod] [SMRTK] SMRTK_DUMP class=PassageHub grid="table: 0000019E65833D98" grid_present=true kind=hub leg=topology object=3014 powered=true producers=120 sitting=C119 t=357303315 id=50
+[SMRTK] SMRTK_DUMP class=PassageHub grid="table: 0000019E65833D98" grid_present=true kind=hub leg=topology object=3014 powered=true producers=120 sitting=C119 t=357303315 id=50
+[mod] [SMRTK] SMRTK_DUMP class=UniversalTunnel grid="table: 0000019E65833D98" grid_present=true kind=tunnel leg=topology linked=10543 linked_grid=true object=10542 powered=true producers=120 sitting=C119 tunnel_bit=true tunnel_cell=36529 t=357303315 id=51
+[SMRTK] SMRTK_DUMP class=UniversalTunnel grid="table: 0000019E65833D98" grid_present=true kind=tunnel leg=topology linked=10543 linked_grid=true object=10542 powered=true producers=120 sitting=C119 tunnel_bit=true tunnel_cell=36529 t=357303315 id=51
+[mod] [SMRTK] SMRTK_DUMP class=UniversalTunnel grid="table: 0000019E65833D98" grid_present=true kind=tunnel leg=topology linked=4777 linked_grid=true object=4776 powered=true producers=120 sitting=C119 tunnel_bit=true tunnel_cell=34744 t=357303315 id=52
+[SMRTK] SMRTK_DUMP class=UniversalTunnel grid="table: 0000019E65833D98" grid_present=true kind=tunnel leg=topology linked=4777 linked_grid=true object=4776 powered=true producers=120 sitting=C119 tunnel_bit=true tunnel_cell=34744 t=357303315 id=52
+[mod] [SMRTK] SMRTK_DUMP class=UniversalTunnel grid="table: 0000019E65833D98" grid_present=true kind=tunnel leg=topology linked=10542 linked_grid=true object=10543 powered=true producers=120 sitting=C119 tunnel_bit=true tunnel_cell=47239 t=357303315 id=53
+[SMRTK] SMRTK_DUMP class=UniversalTunnel grid="table: 0000019E65833D98" grid_present=true kind=tunnel leg=topology linked=10542 linked_grid=true object=10543 powered=true producers=120 sitting=C119 tunnel_bit=true tunnel_cell=47239 t=357303315 id=53
+[mod] [SMRTK] SMRTK_DUMP class=UniversalTunnel grid="table: 0000019E65833D98" grid_present=true kind=tunnel leg=topology linked=4776 linked_grid=true object=4777 powered=true producers=120 sitting=C119 tunnel_bit=true tunnel_cell=47247 t=357303315 id=54
+[SMRTK] SMRTK_DUMP class=UniversalTunnel grid="table: 0000019E65833D98" grid_present=true kind=tunnel leg=topology linked=4776 linked_grid=true object=4777 powered=true producers=120 sitting=C119 tunnel_bit=true tunnel_cell=47247 t=357303315 id=54
+[mod] [SMRTK] SMRTK_DUMP class=UniversalTunnel grid="table: 0000019E65833D98" grid_present=true kind=tunnel leg=topology linked=10765 linked_grid=true object=10766 powered=true producers=120 sitting=C119 tunnel_bit=true tunnel_cell=34744 t=357303315 id=55
+[SMRTK] SMRTK_DUMP class=UniversalTunnel grid="table: 0000019E65833D98" grid_present=true kind=tunnel leg=topology linked=10765 linked_grid=true object=10766 powered=true producers=120 sitting=C119 tunnel_bit=true tunnel_cell=34744 t=357303315 id=55
+[mod] [SMRTK] SMRTK_DUMP class=UniversalTunnel grid="table: 0000019E65833D98" grid_present=true kind=tunnel leg=topology linked=9325 linked_grid=true object=9324 powered=true producers=120 sitting=C119 tunnel_bit=true tunnel_cell=45454 t=357303315 id=56
+[SMRTK] SMRTK_DUMP class=UniversalTunnel grid="table: 0000019E65833D98" grid_present=true kind=tunnel leg=topology linked=9325 linked_grid=true object=9324 powered=true producers=120 sitting=C119 tunnel_bit=true tunnel_cell=45454 t=357303315 id=56
+						Lua 0:00:33:321
+[mod] [SMRTK] SMRTK_DUMP class=UniversalTunnel grid="table: 0000019E65833D98" grid_present=true kind=tunnel leg=topology linked=9324 linked_grid=true object=9325 powered=true producers=120 sitting=C119 tunnel_bit=true tunnel_cell=45454 t=357303315 id=57
+[SMRTK] SMRTK_DUMP class=UniversalTunnel grid="table: 0000019E65833D98" grid_present=true kind=tunnel leg=topology linked=9324 linked_grid=true object=9325 powered=true producers=120 sitting=C119 tunnel_bit=true tunnel_cell=45454 t=357303315 id=57
+[mod] [SMRTK] SMRTK_DUMP class=UniversalTunnel grid="table: 0000019E65833D98" grid_present=true kind=tunnel leg=topology linked=10766 linked_grid=true object=10765 powered=true producers=120 sitting=C119 tunnel_bit=true tunnel_cell=40107 t=357303315 id=58
+[SMRTK] SMRTK_DUMP class=UniversalTunnel grid="table: 0000019E65833D98" grid_present=true kind=tunnel leg=topology linked=10766 linked_grid=true object=10765 powered=true producers=120 sitting=C119 tunnel_bit=true tunnel_cell=40107 t=357303315 id=58
+[mod] [SMRTK] SMRTK_DUMP class=UniversalTunnel grid="table: 0000019E65833D98" grid_present=true kind=tunnel leg=topology linked=9529 linked_grid=true object=9528 powered=true producers=120 sitting=C119 tunnel_bit=true tunnel_cell=41884 t=357303315 id=59
+[SMRTK] SMRTK_DUMP class=UniversalTunnel grid="table: 0000019E65833D98" grid_present=true kind=tunnel leg=topology linked=9529 linked_grid=true object=9528 powered=true producers=120 sitting=C119 tunnel_bit=true tunnel_cell=41884 t=357303315 id=59
+[mod] [SMRTK] SMRTK_DUMP class=UniversalTunnel grid="table: 0000019E65833D98" grid_present=true kind=tunnel leg=topology linked=9528 linked_grid=true object=9529 powered=true producers=120 sitting=C119 tunnel_bit=true tunnel_cell=36529 t=357303315 id=60
+[SMRTK] SMRTK_DUMP class=UniversalTunnel grid="table: 0000019E65833D98" grid_present=true kind=tunnel leg=topology linked=9528 linked_grid=true object=9529 powered=true producers=120 sitting=C119 tunnel_bit=true tunnel_cell=36529 t=357303315 id=60
+						Lua 0:00:33:389
+[mod] [SMRTK] SMRTK_DUMP cells=5481 footprint_unmatched=0 height=710 leg=topology map="table: 0000019E67DA2C20" matched=5413 raw_unmatched=0 sample="" sitting=C119 tunnel=68 width=615 t=357303315 id=61
+[SMRTK] SMRTK_DUMP cells=5481 footprint_unmatched=0 height=710 leg=topology map="table: 0000019E67DA2C20" matched=5413 raw_unmatched=0 sample="" sitting=C119 tunnel=68 width=615 t=357303315 id=61
+[mod] [SMRTK] SMRTK_MARK action=mark label=C119_TOPOLOGY_END mark=98 status=OK t=357303315 id=62
+[SMRTK] SMRTK_MARK action=mark label=C119_TOPOLOGY_END mark=98 status=OK t=357303315 id=62
+[mod] [SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=43/43 game=405907 mark_action=mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923,SMR_TrainHubDev_20260918 pack_version=21 read="live registry" save="Japan Sol 497 (Drone Hub Integrated).savegame.sav" sol=497 status=OK t=357303315 id=63
+[SMRTK] SMRTK_FINGERPRINT action=fingerprint fix_pack_present=43/43 game=405907 mark_action=mark mods=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923,SMR_TrainHubDev_20260918 pack_version=21 read="live registry" save="Japan Sol 497 (Drone Hub Integrated).savegame.sav" sol=497 status=OK t=357303315 id=63
+[mod] [SMRTK] SMRTK_ACTION action=slot_4 begin_mark=52 cells=5481 end_mark=98 footprint_unmatched=0 hubs=3 linked_tunnel_grids=10 matched=5413 passages=17 powered_hubs=3 powered_passages=17 powered_track_pairs=13 powered_tunnels=10 raw_unmatched=0 shared_track_grids=13 station_pairs=13 status=OK tracks=13 tunnel=68 tunnel_bits=10 tunnels=10 t=357303315 id=64
+[SMRTK] SMRTK_ACTION action=slot_4 begin_mark=52 cells=5481 end_mark=98 footprint_unmatched=0 hubs=3 linked_tunnel_grids=10 matched=5413 passages=17 powered_hubs=3 powered_passages=17 powered_track_pairs=13 powered_tunnels=10 raw_unmatched=0 shared_track_grids=13 station_pairs=13 status=OK tracks=13 tunnel=68 tunnel_bits=10 tunnels=10 t=357303315 id=64
+						Lua 0:00:35:238
+[mod] [SMRTK] SMRTK_COPY action=copy flushed=true from=98 lines=3 status=OK truncated=false t=357303315 id=65
+[SMRTK] SMRTK_COPY action=copy flushed=true from=98 lines=3 status=OK truncated=false t=357303315 id=65
+						Lua 0:00:38:843
+
+
+Stopping the game threads from the Lua side with exit code 0.
+
+					Render 0:00:38:849
+
+
+Stopping the game threads after receiving WM_QUIT.
+
+					Render 0:00:39:207
+
+
+*** Debug::Done()
+Time (ms)	39207
+
+
