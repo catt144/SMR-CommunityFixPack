@@ -46,6 +46,7 @@ The `declared class` values below are gate inputs, not conclusions inferred from
 | `DLC_DEEP_CHECK.md` | `prompt` | live one-off chain-authoring job after the fix pack is stable; re-emits the DLC inventory, writes a mapped `dlccheck/` chain, then consumes itself without firing a link |
 | `SMRCF_CHAIN_SET.md` | `prompt` | owner ruling: keep the C35 detector plus parked C52 chain; descendants are independent and update this grouped entry as they close |
 | `MIGRATION_HUB_HANDOFF_high.md` | `prompt` | **LIVE, single use, authored 2026-09-24** (owner ask): remaining work after the migration audit, cross-check, hub audit and the two sittings on TheGodUncle's save; resweep and S1/S2/S3/S5 filing done (C114-C117); carries the one-release ruling for the hub set, the reporter reply, the build order and the owed measurements; consumed when its last item lands |
+| `C119_GHOST_CELL_CLEANUP_BUILD_high.md` | `prompt` | **LIVE, single use, authored 2026-09-26** (owner ruling "Yes to both"): build the owner-ruled v1 load-time cleanup of stale power-connection cells ([C119](../bugs/C119.md)), with the pre-ship shape check, desk tests and a preloaded SMRTK sitting; consumed when the module, desk evidence and sitting plan land |
 
 ## Chain folders
 
