@@ -38,6 +38,12 @@ end
 function LoadFirstSet.Apply()
     local before = GetModsEnabledByUser()
     say("BEFORE saved=" .. ids(before))
+    local def = rawget(_G, "Mods") and Mods["SMR_CommunityFixPack"]
+    local opts = type(def) == "table" and rawget(def, "options")
+    local pack = rawget(_G, "SMRFixPack")
+    local lf = type(pack) == "table" and type(pack.fixes) == "table" and pack.fixes.LoadFirst
+    say("BEFORE option LoadFirst=" .. tostring(type(opts) == "table" and rawget(opts, "LoadFirst"))
+        .. " status=" .. tostring(lf and lf.status) .. " detail=" .. tostring(lf and lf.detail))
     for _, id in ipairs(before) do TurnModOff(id) end
     for _, id in ipairs(ORDER) do TurnModOn(id) end
     local after = GetModsEnabledByUser()

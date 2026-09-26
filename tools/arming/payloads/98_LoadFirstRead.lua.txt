@@ -34,6 +34,9 @@ function LoadFirstLeg.Census(where)
         local f = pack.fixes[id]
         say(where .. " fix " .. id .. " status=" .. tostring(f and f.status) .. " detail=" .. tostring(f and f.detail))
     end
+    local def = rawget(_G, "Mods") and Mods["SMR_CommunityFixPack"]
+    local opts = type(def) == "table" and rawget(def, "options")
+    say(where .. " option LoadFirst=" .. tostring(type(opts) == "table" and rawget(opts, "LoadFirst")) .. " (nil on a build without the option)")
     local lf = pack.LoadFirst
     if type(lf) == "table" then
         say(where .. " LoadFirst promoted=" .. tostring(lf.promoted and (lf.promoted.from .. "/" .. lf.promoted.count) or "no")

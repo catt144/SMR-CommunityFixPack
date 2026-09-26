@@ -61,6 +61,8 @@ PN_ID = "iooW34Y"
 CANARY = "SMRFP-LOADORDER-CANARY-2026-09-25-b7e1"
 MODULE = "Code/01_LoadFirst.lua"
 PACK_FILES = ["Code/00_Core.lua", MODULE]
+PDX_LUA = "CommonLua/Libs/Paradox/PdxSDK.lua"
+WITNESS = "tools/arming/payloads/98_LoadFirstSync.lua.txt"   # the kit's sync completion witness (R5-D)
 PN_FILES = ["Code/Hubset_OnHubNow.lua", "Code/Fix_VacuumWalks.lua", "Code/Fix_HubLocalAccess.lua"]
 PRE_CANARY_META_REV = "4e4c97b"
 
@@ -96,6 +98,10 @@ QUEUE_START = find_bodies(mod_lines, r"^local function GetModAllDependencies\(mo
 QUEUE_END = find_bodies(mod_lines, r"^local function GetLoadingQueue\(list(?:, silent)?\)")[0][1]
 QUEUE = "\n" * QUEUE_START + "\n".join(mod_lines[QUEUE_START:QUEUE_END + 1])
 RELOAD, RELOAD_A, RELOAD_B = shipped_body(mod_lines, r"^function ModsReloadItems\(")
+pdx_lines = read_lines(str(SRC / PDX_LUA))
+PDX_METHOD_NAMES = ("GetTask", "__Notify", "__Pop", "__WaitPop", "WaitDoTask", "Clear", "WorkerThread", "PushTask")
+PDX_METHODS = [shipped_body(pdx_lines, r"^function PdxTaskQueue:" + n + r"\(") for n in PDX_METHOD_NAMES]
+FETCH, FETCH_A, FETCH_B = shipped_body(ui_lines, r"^function AsyncPdxGetAllSubscribedMods\(\)")
 colonist_lines = read_lines(str(SRC / "Lua/Units/Colonist.lua"))
 START_SHUTTLE, SS_A, SS_B = shipped_body(colonist_lines, r"^function Colonist:StartShuttleLeg\(")
 pn_lines = read_lines(str(PN))
@@ -198,6 +204,62 @@ function DefineMods(ids)
 end
 '''
 
+# The sync witness fixture (R5-D): the archived PdxTaskQueue methods run on a real
+# coroutine worker, exactly as PdxSDK.lua:927-931 runs them on a real-time thread;
+# WaitWakeup yields "wait", an outstanding AsyncPdx* call inside a callback yields
+# "async" (the shape the re-audit's counterexample used). The game's two handlers
+# (ModManager.lua:1902-1906 pushes the root; :1922-1927 clears on logout) and the
+# root/child push shapes (:1877, :1882, :1906) are reproduced; SyncUpdatePdxMod is
+# a stub whose behaviour each case chooses (return, yield, raise, error string, or
+# re-enable the pack the way a version change's TurnModOff/TurnModOn does).
+SYNC_FIXTURE = r'''
+function CanYield() return true end
+SPRO_ERRORS = {}
+function sprocall(fn, ...)
+	local r = table.pack(pcall(fn, ...))
+	if not r[1] then SPRO_ERRORS[#SPRO_ERRORS + 1] = tostring(r[2]) end
+	return table.unpack(r, 1, r.n)
+end
+table.iclear = function(t) for i = #t, 1, -1 do t[i] = nil end end
+WORKER = false
+function CurrentThread() return WORKER end
+function WaitWakeup() coroutine.yield("wait") end
+function Wakeup() end
+function AsyncPending() coroutine.yield("async") end
+SIM = { children = 2, behaviour = {}, root_fetch_fails = false, root_async = false }
+function SyncUpdatePdxMod(modId, subscribed_mod, installed_mods)
+	local b = SIM.behaviour[modId] or "ok"
+	if b == "async" then AsyncPending() end
+	if b == "raise" then error("assertion failed: RepositoryPath") end
+	if b == "errstring" then return "failed to fetch subscribed mod info" end
+	if b == "move-pack-last" then TurnModOff(PACKID); TurnModOn(PACKID) end
+end
+local function SyncPdxMods()
+	if SIM.root_async then AsyncPending() end   -- AsyncPdxGetAllSubscribedMods, :1865
+	if SIM.root_fetch_fails then return end
+	for i = 1, SIM.children do
+		g_PopsDownloadModsQueue:PushTask(false, SyncUpdatePdxMod, i, {}, {})
+	end
+end
+OnMsg.PdxLogin = function() g_PopsDownloadModsQueue:PushTask(false, SyncPdxMods) end
+OnMsg.PdxLogout = function() g_PopsDownloadModsQueue:Clear() end
+g_PopsDownloadModsQueue = setmetatable({ push_message = "PopsDownloadModPush" }, { __index = PdxTaskQueue })
+WORKER = coroutine.create(function() g_PopsDownloadModsQueue:WorkerThread() end)
+function DRIVE()
+	for step = 1, 1000 do
+		local ok, why = coroutine.resume(WORKER)
+		assert(ok, why)
+		if why == "async" then return "async" end
+		if why == "wait" and #g_PopsDownloadModsQueue == 0 then return "idle" end
+	end
+	error("runaway worker")
+end
+QUIT = { calls = 0 }
+function quit() QUIT.calls = QUIT.calls + 1 end
+SLOTS = {}
+SMRTK = { BindScratch = function(label, fn, opts) SLOTS[label] = fn; return { id = "slot_scratch" } end }
+'''
+
 # ── behavioural mutants: (old text, new text) applied to the module source ───
 MUTANTS = {
     "no-rebuild": [("\t\tfor _, id in ipairs(list) do TurnModOff(id) end\n\t\tfor _, id in ipairs(wanted) do TurnModOn(id) end",
@@ -220,8 +282,26 @@ MUTANTS = {
     "not-optional": [("\toptional = true,", "\toptional = false, -- MUTANT not-optional")],
 }
 
+# witness mutants: the same rule, applied to the kit's sync witness payload. The
+# first is the re-audit's counterexample made into code: queue empty means done.
+WITNESS_MUTANTS = {
+    "witness-queue-only": [("function LoadFirstSync.Verdict(a)\n",
+                            'function LoadFirstSync.Verdict(a)\n    if queued() == 0 then return "COMPLETE" end -- MUTANT witness-queue-only\n')],
+    "witness-no-finish": [("        rec.finished = now()", "        -- MUTANT witness-no-finish: a returned callback is never recorded")],
+    "witness-ignore-clear": [("                rec.cancelled = now()", "                -- MUTANT witness-ignore-clear: a cleared task is not marked")],
+    "witness-ignore-error": [("            rec.error = tostring(res[2])", "            -- MUTANT witness-ignore-error (raise)"),
+                             ('        if type(res[2]) == "string" then rec.error = "returned: " .. res[2] end',
+                              "        -- MUTANT witness-ignore-error (error string)")],
+    "witness-empty-is-pass": [('    if #a.children == 0 then return "COMPLETE-EMPTY" end',
+                               "    -- MUTANT witness-empty-is-pass: a root that scheduled nothing reads COMPLETE")],
+}
+
 # group -> the mutants that must make at least one of its demands fail
 KILLERS = {
+    "R5D1": {"witness-no-finish", "no-rebuild"}, "R5D2": {"witness-queue-only"},
+    "R5D3": {"witness-queue-only", "witness-ignore-clear"}, "R5D4": {"witness-queue-only", "witness-ignore-error"},
+    "R5D5": {"witness-queue-only", "witness-empty-is-pass"}, "R5D6": {"witness-no-finish"},
+    "R5E1": {"bypass-veto"}, "R5E2": {"no-rebuild", "not-optional"}, "R5E3": {"no-rebuild"},
     "1a": {"no-rebuild", "no-notice"}, "1b": {"no-rebuild", "no-notice"},
     "2": {"always-rebuild"},
     "3a": {"ignore-loadall"}, "3b": {"ignore-probe"},
@@ -234,11 +314,11 @@ KILLERS = {
     "R2a": {"clobber-slot"}, "R2b": {"clobber-slot"}, "R2c": {"clobber-slot"},
     "R3a": {"fixed-probe"}, "R3b": {"ignore-config"}, "R3c": {"always-rebuild"},
 }
-INDEPENDENT = {"canary", "engine"}
+INDEPENDENT = {"canary", "engine", "pdxfetch"}
 
 
-def mutate(text, name):
-    for old, new in MUTANTS[name]:
+def mutate(text, name, table=MUTANTS):
+    for old, new in table[name]:
         assert text.count(old) == 1, ("mutant text not found exactly once", name, old[:60])
         text = text.replace(old, new)
     return text
@@ -351,6 +431,47 @@ class Case:
     def move_pack_last(self):
         self.ex("TurnModOff(%r); TurnModOn(%r)" % (PACK, PACK))
 
+    # ── the sync witness (R5-D): archived queue class + fixture + the kit payload under the sandbox ──
+    def load_witness(self, witness_text, mode="sitting", install=True):
+        self.ex("PACKID = %r; PdxTaskQueue = {}" % PACK)
+        for body, _, _ in PDX_METHODS:
+            self.ex(body)
+        self.ex(SYNC_FIXTURE)
+        anchor = 'MODE = "sitting"'
+        assert witness_text.count(anchor) == 1, "witness MODE literal not found exactly once"
+        text = witness_text.replace(anchor, "MODE = %r" % mode)
+        self.lua.globals().SRC_TEXT = text
+        self.lua.globals().SRC_NAME = "=" + WITNESS
+        self.lua.execute('local fn = assert(load(SRC_TEXT, SRC_NAME, "t", mod_env)); fn()')
+        # the payload's first thread installs the wrappers as soon as the queue exists; the
+        # unattended driver (its second thread) stays pending until a case runs the threads
+        if install:
+            self.install_witness()
+
+    def install_witness(self):
+        self.ex("local t = table.remove(THREADS, 1); t()")
+
+    def login(self):
+        self.ex("Msg('PdxLogin')")
+
+    def logout(self):
+        self.ex("Msg('PdxLogout')")
+
+    def drive(self):
+        return self.ev("DRIVE()")
+
+    def verdict(self):
+        return self.ev("mod_env.LoadFirstSync.Verdict(mod_env.LoadFirstSync.W.current)")
+
+    def passes(self):
+        return bool(self.ev("mod_env.LoadFirstSync.Pass(mod_env.LoadFirstSync.Verdict(mod_env.LoadFirstSync.W.current))"))
+
+    def queued(self):
+        return int(self.ev("#g_PopsDownloadModsQueue"))
+
+    def log_count(self, needle):
+        return int(self.ev("(function() local n = 0 for _, l in ipairs(LOG) do if l:find(%r, 1, true) then n = n + 1 end end return n end)()" % needle))
+
 
 def lua_list(items):
     return "{ " + ", ".join("%r" % s for s in items) + " }"
@@ -384,7 +505,7 @@ class Recorder:
         return {group_of(l) for _, l in self.results}
 
 
-def run_cases(rec, module_text):
+def run_cases(rec, module_text, witness_text):
     mods = ["A", "B", "C", PACK]
     check = rec.check
     C = lambda seed, m=mods, **kw: Case(module_text, seed, m, **kw)  # noqa: E731
@@ -614,6 +735,160 @@ def run_cases(rec, module_text):
           c.raw() == "B,C,%s" % PACK and c.loaded() == "%s,B,C" % PACK and c.saves() == 0 and c.questions() == 0,
           "raw=%s running=%s saves=%d" % (c.raw(), c.loaded(), c.saves()))
 
+    # R5D. The Paradox sync completion witness (kit payload) on the archived PdxTaskQueue: an
+    # attempt is PASS only when its root and every child returned without error or cancellation
+    def sync_case(**sim):
+        c = C([PACK, "B", "C"])
+        c.run_threads()
+        c.load_witness(witness_text)
+        for k, v in sim.items():
+            if k == "behaviour":
+                for i, b in v.items():
+                    c.ex("SIM.behaviour[%d] = %r" % (i, b))
+            else:
+                c.ex("SIM.%s = %s" % (k, ("true" if v else "false") if isinstance(v, bool) else v))
+        return c
+
+    c = sync_case(children=2)
+    c.login()
+    state = c.drive()
+    check("R5D1 root and two children returned: worker idle, queue 0, verdict COMPLETE, pass",
+          state == "idle" and c.queued() == 0 and c.verdict() == "COMPLETE" and c.passes(),
+          "state=%s queued=%d verdict=%s" % (state, c.queued(), c.verdict()))
+    check("R5D1 the log carries one PUSH, START and END per task (root + 2 children = 3 each)",
+          c.log_count("PUSH serial=") == 3 and c.log_count("START serial=") == 3 and c.log_count("END serial=") == 3
+          and c.log_count("kind=root") >= 3 and c.log_count("kind=child parent=1") == 2,
+          "push=%d start=%d end=%d" % (c.log_count("PUSH serial="), c.log_count("START serial="), c.log_count("END serial=")))
+    c = sync_case(children=1, behaviour={1: "move-pack-last"})
+    c.login()
+    c.drive()
+    moved = c.raw()
+    c2 = C(moved.split(","))
+    check("R5D1 a sync child that re-enables the pack leaves it last; the next boot promotes it again",
+          moved == "B,C,%s" % PACK and c2.saved() == "%s,B,C" % PACK and c2.saves() == 1,
+          "after sync=%s next boot=%s saves=%d" % (moved, c2.saved(), c2.saves()))
+    c = sync_case(children=1, behaviour={1: "async"})
+    c.login()
+    state = c.drive()
+    check("R5D2 a child with an outstanding async call: queue reads 0, verdict IN-FLIGHT, not pass",
+          state == "async" and c.queued() == 0 and c.verdict() == "IN-FLIGHT" and not c.passes(),
+          "state=%s queued=%d verdict=%s" % (state, c.queued(), c.verdict()))
+    state = c.drive()
+    check("R5D2 control: the call returns, verdict COMPLETE, pass",
+          state == "idle" and c.verdict() == "COMPLETE" and c.passes(), "state=%s verdict=%s" % (state, c.verdict()))
+    c = sync_case(children=2, behaviour={1: "async"})
+    c.login()
+    c.drive()          # child 1 is in flight, child 2 queued
+    c.logout()         # OnMsg.PdxLogout clears the queue: child 2 never starts
+    state = c.drive()  # child 1 returns
+    check("R5D3 logout cleared an unstarted child: worker idle, queue 0, verdict CANCELLED, not pass",
+          state == "idle" and c.queued() == 0 and c.verdict() == "CANCELLED" and not c.passes()
+          and c.log_has("CLEAR clears=1 cancelled_unstarted=1"),
+          "state=%s queued=%d verdict=%s" % (state, c.queued(), c.verdict()))
+    c = sync_case(children=2, behaviour={2: "raise"})
+    c.login()
+    state = c.drive()
+    check("R5D4 a child raised: queue 0, verdict FAILED, not pass; the error reached the queue's own sprocall",
+          state == "idle" and c.queued() == 0 and c.verdict() == "FAILED" and not c.passes() and c.ev("#SPRO_ERRORS") == 1,
+          "state=%s verdict=%s sprocall_errors=%s" % (state, c.verdict(), c.ev("#SPRO_ERRORS")))
+    c = sync_case(children=2, behaviour={1: "errstring"})
+    c.login()
+    c.drive()
+    check("R5D4 a child returned an error string: verdict FAILED, not pass",
+          c.verdict() == "FAILED" and not c.passes(), c.verdict())
+    c = sync_case(root_fetch_fails=True)
+    c.login()
+    state = c.drive()
+    check("R5D5 the root scheduled nothing (the :1866-1868 failure shape): verdict COMPLETE-EMPTY, not pass on its own",
+          state == "idle" and c.queued() == 0 and c.verdict() == "COMPLETE-EMPTY" and not c.passes(),
+          "state=%s verdict=%s" % (state, c.verdict()))
+    c = C([PACK, "B", "C"])
+    c.run_threads()
+    c.load_witness(witness_text, install=False)
+    c.login()                  # the root is queued before the witness installs
+    c.install_witness()
+    state = c.drive()
+    check("R5D5 a root already queued when the witness installs is wrapped in place: verdict COMPLETE, pass",
+          c.log_has("INSTALL ok=true note=wrapped_queued=1") and state == "idle" and c.verdict() == "COMPLETE" and c.passes(),
+          "state=%s verdict=%s" % (state, c.verdict()))
+    c = C([PACK, "B", "C"])
+    c.run_threads()
+    c.load_witness(witness_text, install=False)
+    c.ex("SIM.root_async = true")
+    c.login()
+    c.drive()                  # the root started and is inside its async call, unwrapped
+    c.install_witness()
+    state = c.drive()          # its children are pushed through the wrapper, without a seen root
+    check("R5D5 the witness arrived after the root started: verdict UNWITNESSED, queue 0, not pass",
+          state == "idle" and c.queued() == 0 and c.verdict() == "UNWITNESSED" and not c.passes()
+          and c.log_count("kind=other parent=none sync_update=true") == 2,
+          "state=%s verdict=%s" % (state, c.verdict()))
+    c = C([PACK, "B", "C"])
+    c.run_threads()
+    c.load_witness(witness_text, mode="unattended")
+    c.run_threads()
+    check("R5D5 no login in this process: the driver logs NO-ATTEMPT pass=false and quits",
+          c.log_has("VERDICT verdict=NO-ATTEMPT pass=false") and c.ev("QUIT.calls") == 1,
+          "quit=%s" % c.ev("QUIT.calls"))
+    c = C([PACK, "B", "C"])
+    c.run_threads()
+    c.load_witness(witness_text, mode="unattended")
+    c.ex("SIM.children = 2")
+    c.login()
+    c.drive()
+    c.run_threads()
+    check("R5D6 unattended driver after a complete attempt: logs VERDICT verdict=COMPLETE pass=true, the saved order, and quits once",
+          c.log_has("AT_MENU VERDICT verdict=COMPLETE pass=true") and c.log_has("AT_MENU ORDER saved=%s,B,C" % PACK)
+          and c.ev("QUIT.calls") == 1, "quit=%s" % c.ev("QUIT.calls"))
+    c = sync_case(children=2)
+    check("R5D6 sitting mode binds the Sync read slot; pressing it reports the verdict",
+          c.ev("SLOTS['Sync read'] ~= nil") and c.ev("SLOTS['Sync read']().verdict") == "NO-ATTEMPT"
+          and c.log_has("SLOT VERDICT verdict=NO-ATTEMPT"), c.ev("table.concat(LOG, ' | ')")[-200:])
+
+    # R5E. Restoration for the sitting's leg E: after the last option click, under the kit's veto,
+    # read back on a build without the module. The rejected OFF/readback/ON recipe is kept as R5E2.
+    captured = ["Kit", "TrainHub", PACK, "OptIn", "RailShaft"]
+    post = [PACK, "Kit", "TrainHub", "OptIn", "RailShaft"]
+    kit_restore = ("for _, id in ipairs(table.icopy(AccountStorage.LoadMods)) do TurnModOff(id) end; "
+                   "for _, id in ipairs(%s) do TurnModOn(id) end; SaveAccountStorage(1000)" % lua_list(captured))
+    c = C(post, post, veto=True)      # option ON; the set leg's veto is in place before the pack loads
+    c.run_threads()
+    c.ex(kit_restore)                 # the set slot rewrites the captured order, requests the kit's save
+    c.load_pack_file(MODULE)          # a Lua reload in the same process re-runs the file
+    c.run_threads()
+    c.toggle(True)                    # an Apply click with the option already ON
+    c.run_threads()
+    check("R5E1 vetoed restore with the option ON: the captured order survives a reload and an Apply click; one save (the kit's), no notice, LoadFirst disabled",
+          c.raw() == ",".join(captured) and c.saves() == 1 and c.questions() == 0 and c.status("LoadFirst") == "disabled",
+          "raw=%s saves=%d questions=%d status=%s" % (c.raw(), c.saves(), c.questions(), c.status("LoadFirst")))
+    c = C(captured, post, options={"LoadFirst": False})
+    c.run_threads()
+    check("R5E2 the rejected recipe: an OFF readback keeps the captured order",
+          c.raw() == ",".join(captured) and c.saves() == 0, "raw=%s saves=%d" % (c.raw(), c.saves()))
+    c.toggle(True)
+    check("R5E2 the rejected recipe: the final ON click promotes at once, so restoration must come after it",
+          c.raw() == ",".join(post) and c.saves() == 1 and c.ev("SMRFixPack.LoadFirst.pending_notice") is True,
+          "raw=%s saves=%d" % (c.raw(), c.saves()))
+    c = C(captured, post)
+    check("R5E3 the next feature-enabled boot on the restored order, option ON, promotes by design",
+          c.saved() == ",".join(post) and c.saves() == 1, "saved=%s saves=%d" % (c.saved(), c.saves()))
+
+    # pdxfetch (independent, shipped code): AsyncPdxGetAllSubscribedMods tests the page length
+    # BEFORE the error, so a failed first page that comes back empty returns no error and
+    # SyncPdxMods prints nothing: an empty attempt cannot be told from a failed fetch by the
+    # game's own log line, which is why COMPLETE-EMPTY is never PASS.
+    L2 = db.lua_runtime()
+    L2.execute(db.ENGINE_SHIMS + TABLE_RETYPED)
+    L2.execute("table.iappend = function(t, s) for _, v in ipairs(s) do t[#t + 1] = v end end; Pdx = { DefaultPlaysetId = 0 }")
+    L2.execute("function AsyncPdxGetSubscribedMods(p) return 'Timeout', {} end")
+    L2.execute(FETCH)
+    err, mods = L2.eval("AsyncPdxGetAllSubscribedMods()")
+    check("pdxfetch: a failed first page with an empty table returns no error and an empty list (ModManager.lua:%d-%d)" % (FETCH_A, FETCH_B),
+          err is False and len(mods) == 0, "err=%r n=%d" % (err, len(mods)))
+    L2.execute("function AsyncPdxGetSubscribedMods(p) if p.Page == 1 then return false, { { ModID = 'm1' } } end return false, {} end")
+    err, mods = L2.eval("AsyncPdxGetAllSubscribedMods()")
+    check("pdxfetch control: one subscribed mod is returned without error", err is False and len(mods) == 1, "err=%r n=%d" % (err, len(mods)))
+
     # Canary: metadata.lua loads under the metadata env, same declared properties + default_options
     L = db.lua_runtime()
     L.globals().META = (REPO / "metadata.lua").read_text(encoding="utf-8")
@@ -652,22 +927,29 @@ def main():
         for g, ks in sorted(KILLERS.items()):
             print("%-6s killed by %s" % (g, ", ".join(sorted(ks))))
         print("independent groups (no killer by design): " + ", ".join(sorted(INDEPENDENT)))
+        print("module mutants: " + ", ".join(MUTANTS))
+        print("witness mutants (applied to %s): " % WITNESS + ", ".join(WITNESS_MUTANTS))
         return 0
 
     module_text = (REPO / MODULE).read_text(encoding="utf-8")
+    witness_text = (REPO / WITNESS).read_text(encoding="utf-8")
     head = subprocess.run(["git", "rev-parse", "--short", "HEAD"], cwd=REPO, capture_output=True, text=True).stdout.strip()
     if args.mutant:
         print("MUTANT", args.mutant, "(verbose)")
         rec = Recorder(verbose=True)
-        run_cases(rec, mutate(module_text, args.mutant))
+        if args.mutant in WITNESS_MUTANTS:
+            run_cases(rec, module_text, mutate(witness_text, args.mutant, WITNESS_MUTANTS))
+        else:
+            run_cases(rec, mutate(module_text, args.mutant), witness_text)
         print("failed groups:", ", ".join(sorted(rec.failed_groups())) or "none")
         return 0
 
     print("=" * 78)
     print("LoadFirst desk controls — baseline then behavioural mutants (HEAD %s, game 1.1.1.405907, %s)" % (head, db.lua_version()))
     print("=" * 78)
-    for rel in PACK_FILES + PN_FILES:
+    for rel in PACK_FILES + PN_FILES + [WITNESS]:
         print("INPUT", rel, sha((REPO / rel).read_text(encoding="utf-8")))
+    print("SHIPPED %s PdxTaskQueue %s" % (PDX_LUA, ", ".join("%s %d-%d" % (n, a, b) for n, (_, a, b) in zip(PDX_METHOD_NAMES, PDX_METHODS))))
     print("SHIPPED %s ModEnvBlacklist %d-%d %s" % (MOD_LUA, BLACKLIST_START + 1, BLACKLIST_END + 1, sha(BLACKLIST.strip("\n"))))
     print("SHIPPED %s env block %d-%d %s" % (MOD_LUA, ENV_START + 1, ENV_END + 1, sha(ENV_BLOCK.strip("\n"))))
     print("SHIPPED %s WriteModPersistentData %d-%d, SetupEnv %d-%d, GetModsEnabledByUser %d-%d, ModsReloadItems %d-%d"
@@ -679,16 +961,19 @@ def main():
     print()
     print("BASELINE")
     base = Recorder(verbose=True)
-    run_cases(base, module_text)
+    run_cases(base, module_text, witness_text)
     held = sum(1 for ok, _ in base.results if ok)
     print("BASELINE %d of %d demands held" % (held, len(base.results)))
     groups = sorted(base.groups())
     print()
-    print("MUTANTS (each row: the groups whose demands FAILED under that mutant)")
+    print("MUTANTS (each row: the groups whose demands FAILED under that mutant; witness-* mutate the kit payload)")
     kills = {g: set() for g in groups}
-    for name in MUTANTS:
+    for name in list(MUTANTS) + list(WITNESS_MUTANTS):
         rec = Recorder(verbose=False)
-        run_cases(rec, mutate(module_text, name))
+        if name in WITNESS_MUTANTS:
+            run_cases(rec, module_text, mutate(witness_text, name, WITNESS_MUTANTS))
+        else:
+            run_cases(rec, mutate(module_text, name), witness_text)
         failed = rec.failed_groups()
         for g in failed:
             kills.setdefault(g, set()).add(name)
