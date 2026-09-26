@@ -1,0 +1,8 @@
+OWNER SESSION EXCERPT: Mars.exe-20260926-10.33.35-6aad2d75.log, 535811 bytes, 7690 lines, sha256 3661b871df946cb0310849ce43932bb447ff832f2414f9fe05fdfb2386d70a07 (the owner's own colony session, started 10:33:35, closed before 12:13; the whole log is not archived, this excerpt is)
+FILTER: lines matching 'Lua revision|Loaded mod items|LoadFirst|LOADFIRST|moved to the front|Stopping the game' with their numbers; then counts
+  52:Lua revision: 405907
+  176:[mod] Loaded mod items for: SMR_CommunityFixPackTestKit, SMR_TrainHubDev_20260918, SMR_CommunityFixPack, SMR_CommunityOptInPack, SMR_RailShaftDev_20260923
+  7677:Stopping the game threads from the Lua side with exit code 0.
+  7682:Stopping the game threads after receiving WM_QUIT.
+COUNTS: 'LoadFirst'=0 'LOADFIRST'=0 'moved to the front'=0 'Loaded mod items'=1 '[LUA ERROR]'=112 (of which 'SupplyGrid.lua'=112)
+READING: the session loaded the main tree's order (the pack third) and no LoadFirst line exists, so no branch file was read and no promotion happened; nothing to restore. The SupplyGrid errors belong to the owner's dome/passage experiments in that session, outside this report.

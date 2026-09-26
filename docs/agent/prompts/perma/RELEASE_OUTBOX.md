@@ -27,9 +27,10 @@ player surface bumps it by one on release.
 merged, sitting not yet approved.** The latest audit is
 [LOAD_ORDER_FIRST_BUILD_2026-09-25.md §17](../../reports/LOAD_ORDER_FIRST_BUILD_2026-09-25.md#17--audit-of-the-role-swap-repair--ship-to-sitting-with-two-preconditions-2026-09-26).
 §15's false-success paths are closed; leg D is a diagnostic with no remote-sync PASS (scope
-revision accepted under the retained FIXED list; the owner note is in §17). Before the
-approval request: one unattended rehearsal of the `1325db5` observer on `main`, and the §14
-owner-session log follow-up. R1–R4, R6 and R5-E retain their accepted limits. The production
+revision accepted under the retained FIXED list; the owner note is in §17). Both
+preconditions are met (§18: the L13 rehearsal on `main`, and the owner-session log showed no
+promotion); the sitting proposal awaits the owner's approval. R1–R4, R6 and R5-E retain
+their accepted limits. The production
 module is unchanged since `8ea5449`; the harness holds 92/92 with 20 mutants.
 Ships only after the owner's sitting approval and the sitting itself. The consumed brief's
 authority and unfinished requirements are retained in that report.

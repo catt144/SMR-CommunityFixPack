@@ -13,8 +13,8 @@ seven boot logs are the disk evidence. Where a line says MEASURED it names its c
 **Latest audit verdict: SHIP-TO-SITTING for `1325db5` with two preconditions (§17,
 2026-09-26).** §15's four false-success paths are closed by the observer at `1325db5` (§16);
 the explicit scope revision, leg D as a diagnostic with no remote-sync PASS, is accepted
-under the retained FIXED list. Before the approval request: one unattended rehearsal of the
-`1325db5` observer on `main`, and the §14 owner-session log follow-up. R1–R4, R6 and R5-E
+under the retained FIXED list. Both preconditions are met (§18, L13 rehearsal and the
+owner-session log); the sitting proposal awaits the owner's approval. R1–R4, R6 and R5-E
 retain their prior acceptance and limits; the production module is unchanged since
 `8ea5449`. The verdict clears nothing beyond presenting the sitting for approval: no merge,
 no upload, no attended sitting. Sections 0–16 retain the build, audit and repair history.
@@ -1424,3 +1424,40 @@ carry. The estimate stands at §15's **13 owner minutes; 17 with PN**, `<<PENDIN
 The merge, the attended sitting (owner approval), the upload, the post-upload canary checks
 (§6, §§11–13 R6) and the release outbox hold remain as retained. The consumed brief stays
 retired; the retained FIXED list and owner authority remain in §11.
+
+## 18 · §17's preconditions met — ready for the owner's sitting approval, 2026-09-26
+
+Both preconditions were closed by the audit seat on the owner's go ("I am out of the game, we
+can proceed with anything needed", 2026-09-26), unattended, with `main` on the junction
+throughout. Evidence is in the same [audit archive](../../archive/load_order_first_audit4_2026-09-26/)
+and its receipt.
+
+**Precondition 2, the owner's session.** The instance started 10:33:35 closed before 12:13.
+Its log (excerpted in the archive, whole-file hash in the receipt) loaded the `main` order at
+:176, `Kit, TrainHub, Pack, OptIn, RailShaft`, and carries no `LoadFirst` line at all
+(count 0 for `LoadFirst`, `LOADFIRST` and `moved to the front`). No branch file was read
+during §14's checkout window; nothing to restore. The 112 `[LUA ERROR]` lines in that
+session are all `Lua/SupplyGrid.lua` during the owner's own dome and passage experiments,
+outside this report.
+
+**Precondition 1, the rehearsal (L13).** `launch_observer.ps1` parked the `1325db5` payload
+with only `MODE` swapped (hash recomputed from the branch blob and matched against the armed
+copy), armed the real kit, launched, and disarmed; the kit's `metadata.lua` hashes equal to
+HEAD afterwards. MEASURED, L13 `Mars.exe-20260926-12.13.28` (25 s, 225 lines, zero
+`[LUA ERROR]`): loaded set :175 = the owner's order; `INSTALL ok=true wrapped_queued=0` :184
+before `PUSH serial=1 kind=root` :192; `MSG PdxLogin` :193; `START` :194; `END … returned=nil`
+:202; `AT_MENU VERDICT verdict=EMPTY-UNVERIFIED sync_success=UNVERIFIED attempts=1 root=1
+root_started=true root_finished=true children=0 … clears=0 queued=0 installed=true` :204;
+`ORDER saved=` unchanged :205. This is §17's predicted line set exactly; the thread-keyed
+wrapper and the `invalidated` latch ran in the game without error. The in-place wrapping of
+an already-queued root was not exercised (`wrapped_queued=0`, the install preceded the push
+as it did in L12); its desk control R5D5 stands.
+
+**Sitting proposal for approval.** Start: option ON (never changed on this account), order
+`Kit, TrainHub, Pack, OptIn, RailShaft` (L13 :175), junction on `main`. Preparation by the
+seat, after approval: `load-first` at `1325db5` on the junction for the sitting only, the kit
+armed with `load-first-sync` in `MODE = "sitting"` (the *Sync read* slot) and the read leg's
+census available as *Order read*. Legs A, B, C as §11's revised proposal; D as §16's
+diagnostic; E as §14/§15's restoration, unattended by the seat. About 13 owner minutes, 17
+with PN, `<<PENDING-RUN>>`. The junction returns to `main` at the end of E, before the seat
+reports. Nothing here is merged or uploaded.

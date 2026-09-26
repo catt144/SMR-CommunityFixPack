@@ -54,3 +54,26 @@ ARCHIVE sha256 (LF bytes):
   b593a584e001ff2b3b956d880a8b940aab68f58cab7e53997cea206961d734c7  baseline_and_mutants.txt
   048588047428490bf1d4f70fc1407f1ea4189210843fdfd62716febe6af44dc2  killers.txt
   6f471f18c709c5d8fd81ab79bd9e0914e3098714a056f5ea3f9476ef0bd10c49  sandbox_probe.txt
+
+PRECONDITIONS (s17), met 2026-09-26 12:13:
+L13 (unattended rehearsal of the 1325db5 observer on main, launch_observer.ps1, steam -applaunch 3215050 at 12:13:27, process 25 s): L13_observer_rehearsal_main_Mars.exe-20260926-12.13.28-6aad2d75.log, 225 lines, sha256 9a7927b0c0bf0b08191cd060b4c38e6096ef3d8c515a42c327c070eef37f8f98
+  launched payload = branch blob 19c3955e... with MODE unattended, sha256 011654a5822175ae05e6c73e7ec7a521505584ed41d7e5d1a5268495ee88dbcc (recomputed from git show 1325db5:...); manifest sha256 ece9381d... = branch blob; armed copy in the kit hashed 011654a5... before launch
+  50:Lua revision: 405907
+  175:[mod] Loaded mod items for: SMR_CommunityFixPackTestKit, SMR_TrainHubDev_20260918, SMR_CommunityFixPack, SMR_CommunityOptInPack, SMR_RailShaftDev_20260923
+  182:[PdxSDK] Started up. Took 1181
+  184:[mod] [LOADFIRST-SYNC] INSTALL ok=true note=wrapped_queued=0 queued=0 t=14378
+  192:[mod] [LOADFIRST-SYNC] PUSH serial=1 kind=root parent=none sync_update=false queued=0
+  193:[mod] [LOADFIRST-SYNC] MSG PdxLogin queued=1
+  194:[mod] [LOADFIRST-SYNC] START serial=1 kind=root queued=0
+  202:[mod] [LOADFIRST-SYNC] END serial=1 kind=root returned=nil queued=0
+  204:[mod] [LOADFIRST-SYNC] AT_MENU VERDICT verdict=EMPTY-UNVERIFIED sync_success=UNVERIFIED attempts=1 root=1 root_started=true root_finished=true children=0 children_started=0 children_finished=0 clears=0 queued=0 installed=true
+  205:[mod] [LOADFIRST-SYNC] AT_MENU ORDER saved=SMR_CommunityFixPackTestKit,SMR_TrainHubDev_20260918,SMR_CommunityFixPack,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923
+  206:[mod] [LOADFIRST-SYNC] REPORT ok=true err=nil
+  207:[mod] [LOADFIRST-SYNC] DONE
+  counts: LUA ERROR=0; LOADFIRST-SYNC lines=9; 'Failed to get subscribed'=0
+  kit metadata.lua restored to HEAD after disarm, blob cec74748e2238d2992a4ff803ca28f8a1093f818 both sides; kit tree clean; parked copy removed; main tree clean; junction on main throughout
+Owner session: OWNER_SESSION_EXCERPT_Mars.exe-20260926-10.33.35.txt (no LoadFirst line, main order loaded; nothing to restore)
+ARCHIVE sha256 (LF bytes) of the files added at this step:
+  703f27e3400791156ca530449234a996862aee5d0c511116cca22b8423354293  L13_observer_rehearsal_main_Mars.exe-20260926-12.13.28-6aad2d75.log
+  94ed5f87f9245fa42ec9e430f45eb4554c8b8de6f17ec7b53e61c85573f38cc6  launch_observer.ps1
+  7d86a04685ffd86831f8a86080530c62c0104589bf3bd95ebfc69255cd5353c4  OWNER_SESSION_EXCERPT_Mars.exe-20260926-10.33.35.txt
