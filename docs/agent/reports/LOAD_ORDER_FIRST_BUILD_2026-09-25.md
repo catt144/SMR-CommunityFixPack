@@ -4,7 +4,7 @@
 
 Report for the owner, repair seat and audit seat, executing the now-consumed one-off
 `docs/agent/prompts/LOAD_ORDER_FIRST_high.md` (retrievable at `4e4c97b`).
-The build is on the short-lived code branch **`load-first`**, repaired at **`86a2507`**, not merged.
+The build is on the short-lived code branch **`load-first`**, repaired at **`1325db5`**, not merged.
 Records are on `main`. Nothing here was uploaded, and no attended sitting ran. Every "the pack
 loads first" claim below is desk- and unattended-verified on this one rig; the retail sitting
 in §5 is planned for the owner's approval, not run. A save request is not a disk write; the
@@ -14,9 +14,12 @@ seven boot logs are the disk evidence. Where a line says MEASURED it names its c
 restoration is accepted. R5-D rejects the original in-flight counterexample, but still
 reports successful completion after silent fetch failure, logged child failure or logout
 during the sole running child. R1–R4 and R6 retain their prior acceptance and limits.
-The branch remains unmerged and the sitting held. Sections 0–14 retain the build, audit and
-repair history; §15 supersedes their current clearance claims. The retained FIXED list and
-owner authority remain in §11.
+**Repair after the role swap: `1325db5`, §16; awaiting the former build seat's audit.** The
+observer now reports callback lifecycle with remote success unverified, fixes cancellation
+and attempt attribution, and proposes diagnostic-only leg D. That scope revision is explicit
+and is not an audit clearance. The branch remains unmerged and the sitting held. Sections
+0–15 retain the build and audit history. The retained FIXED list and owner authority remain
+in §11.
 
 ## 0 · Read this first — what the owner sees that the brief did not say
 
@@ -1190,3 +1193,138 @@ follow-up disclosed in §14 also remains open: read that session's log after it 
 restore/read back if it shows a promotion. This audit did not touch that running instance,
 switch the installed checkout, arm the kit or change any account settings. The next repair
 and audit can stay confined to the witness, its controls and the resulting sitting claims.
+
+## 16 · Repair after the role swap — `1325db5`, 2026-09-26
+
+**Repair delivered for independent audit; sitting held.** The former audit seat took the
+repair seat on the owner's instruction; the former build session is to audit this change.
+Owner, 2026-09-26, verbatim:
+
+> “Do you want to take a pass at fixing it yourself and I will swap roles, and have the build
+> session audit your work instead?”
+
+The repair is `load-first` **`1325db54a0ec2a835b694eed8b1034817d08f948`**, over `86a2507`.
+Only the sync payload, its manifest and `tools/desk_load_first.py` changed. Production Lua,
+metadata and option behavior are unchanged. Records were prepared on `main` over `8f282de`.
+The [evidence archive](../../archive/load_order_first_repairs3_2026-09-26/) contains the measured
+commands, baseline, individual mutants and gates. This section is a repair claim, not a
+SHIP-TO-SITTING verdict from the same seat that wrote it.
+
+### The decision: observe callbacks, do not certify remote sync
+
+**Explicit scope revision for audit:** replace the remote-success PASS demanded by the old
+leg D with a diagnostic observation of callback lifecycle and mod order. The observer cannot
+prove the remote result. Renaming a callback return to successful sync would retain §15's
+defect, so this repair removes the `Pass` predicate and the report's `pass` field altogether.
+
+All game-source citations here are archived **1.1.1.405907**. The reason is unchanged:
+`Src/CommonLua/UI/ModManager.lua:1739–1760` can return a partial subscription list after a
+failed page; :1802–1807 and :1825–1833 can log install/uninstall errors and return normally.
+The mod sandbox blocks `AsyncPdx*` (`Src/CommonLua/Libs/Paradox/ParadoxMods.lua:288–294`,
+`Src/CommonLua/Modding/Mod.lua:1455–1472,1559–1595`). This repair neither bypasses that
+boundary nor patches the game callbacks to make a test pass. An independent source check
+confirmed that limitation; it was a design check, not the pending role-swap audit.
+
+The revised payload reports:
+
+| Lifecycle | What was observed |
+|---|---|
+| `RETURNED-UNVERIFIED` | Root and tracked children returned without an observed exception/string error or cancellation. Remote fetch/install/uninstall success remains unknown. |
+| `EMPTY-UNVERIFIED` | Root returned without scheduling children. This proves neither an empty account nor a successful fetch. |
+| `IN-FLIGHT` | Some tracked callback has not returned. Queue length does not decide it. |
+| `CANCELLED` | An open attempt was invalidated by Clear, including an already-running callback. |
+| `FAILED` | The wrapper observed a raised error or returned error string; other failures may be swallowed by the game. |
+| `UNWITNESSED` / `NO-ATTEMPT` | The root was not observed / no root has been recorded. |
+
+Every report separately carries **`sync_success=UNVERIFIED`**. Successful and failed remote
+API controls deliberately share that result: these observable returns cannot distinguish
+them. This makes no claim that the underlying game fetch/install defects are repaired.
+The retained FIXED list in §11 does not prescribe a remote-success witness; §15 expressly
+allows a revised test scope for review. The audit seat must judge this departure as well as
+the code. If diagnostic D is insufficient for clearance, that unresolved requirement stays
+visible; this repair does not silently mark the old sync-success criterion complete.
+
+### Cancellation and attempt attribution repaired
+
+`Clear` now latches `invalidated` on each open root, even if the only outstanding callback
+has already left the queue. That latch survives its return and any children it schedules
+after logout. Separately, unstarted records are marked cancelled, preserving the queued-work
+diagnostic. The real queue still executes its original Clear and callback functions.
+
+Callback parents are now keyed by `CurrentThread()`, restored after `pcall`; an unrelated
+push on another thread no longer inherits a suspended callback's parent. An untyped,
+zero-argument push is classified as a new root before looking for a parent. A second login
+while the old root is suspended therefore receives its own attempt. The old root's later
+children remain attached to the old, cancelled attempt.
+
+The root remains inferred from its unique shipped push shape at `ModManager.lua:1906`:
+`SyncPdxMods` is local, so there is no accessible global identity to compare. Children use
+the visible `SyncUpdatePdxMod` function identity and the current thread's parent. A foreign
+mod can imitate the root shape; this observer is not a general proof of arbitrary queue
+provenance. The diagnostic recipe still checks the login message and a fresh root together.
+
+### Measured controls and execution boundary
+
+MEASURED: `python scratch/measure_load_first_repair3.py` runs in the isolated branch
+worktree `B:/Dev/SMR/SMR-LoadFirst-Repair`. It invokes `python tools/desk_load_first.py`,
+`--list`, and every `--mutant NAME`. The [receipt](../../archive/load_order_first_repairs3_2026-09-26/receipt.txt)
+records the dirty pre-commit parent and input hashes, then binds those measured bytes to
+the committed `1325db5` blobs. It does not mistake the pre-commit HEAD for the tested code.
+
+**Baseline 92/92; all 20 declared mutants caught.** The runner counts named PASS/FAIL lines,
+checks each mutant against the aggregate summary, and reconciles `MUTANT_MEMBERS` with
+`MUTANT_TOTAL`. The [aggregate transcript](../../archive/load_order_first_repairs3_2026-09-26/baseline_and_mutants.txt)
+supplies the second baseline and mutant totals. The differences from §15's set are named:
+`witness-empty-is-pass` becomes `witness-ignore-empty`; added controls are
+`witness-ignore-inflight-clear`, `witness-assume-success` and `witness-global-parent`.
+
+- R5D2 retains the zero-queue/in-flight counterexample and its callback-return control.
+- R5D7 runs the **actual archived fetch, root and child bodies**, with external API stubs,
+  for partial fetch, logged install failure, logged uninstall failure and the successful
+  already-up-to-date path. Each exercises its named branch and reports remote success
+  unverified. The fixture also checks that the payload cannot read the blacklisted APIs.
+  `witness-assume-success` makes these demands fail.
+- R5D8 covers logout during the sole running child and during a root that later schedules
+  children. Both remain cancelled; removing the attempt latch fails these demands.
+- R5D9 covers an unrelated push during a yielded root and a new login before the old root
+  returns. Removing thread ownership fails the former; cancellation/return controls also
+  distinguish the old and new attempts. R5E2 and the prior production-module controls remain.
+
+Parsecheck and branch doccheck pass. The real arming script also arm/verify/disarm-tested the
+exact payload in a **disposable kit fixture**, with the armed copy byte-compared to the
+branch source. The [measurement script](../../archive/load_order_first_repairs3_2026-09-26/measure_load_first_repair3.py)
+shows the fixture path and manifest redirect. This was not an installed-kit arm or a retail
+launch. The manifest's `park` is now relative to the branch checkout root, avoiding a stale
+payload from the installed `main` tree; run the arming command from that root.
+
+The branch worktree uses junctions for the mapped `local/c92-placement` and `local/c95-place`
+evidence directories, so doccheck can run there with the real local inputs. The installed
+checkout stayed on `main`; no game junction, account, real TestKit file or running game was
+changed. No new retail log is claimed. L12 remains evidence for the old observer only, and
+§14's pending owner-session follow-up remains owed after that session closes.
+
+### Proposed leg D and audit handoff
+
+**D becomes diagnostic, with no remote-sync PASS.** After an audit accepts this revision and
+the owner approves the sitting, prepare the new payload in sitting mode from the reviewed
+branch root. On a fresh start, press *Sync read*; use the Paradox account button to log out
+and log in as in §14, only if that route is available and the owner chooses to use it. After
+ten seconds press *Sync read* again. Record the new root/login pair, lifecycle, child counts
+and saved order. An in-flight, cancelled, failed, unwitnessed, absent or empty result stays
+labelled as observed; none becomes evidence of successful sync or an empty account. No
+subscription change is required to manufacture work for this diagnostic.
+
+Quit, restart and read the saved/loaded order. If the native callback changed the order,
+record that fact; the next feature-enabled start should promote a pack-later order, as the
+real-helper desk control predicts. The old requirement that the list already stay first at
+the sync-read press is withdrawn with the success claim: the production mechanism runs at
+startup/option activation, not after every remote list edit. A–C still test promotion,
+notice/restart and opt-out; E remains the accepted restoration sequence. D supplies bounded
+observations and does not certify all remote sync behavior. Its estimate remains 3 minutes,
+`<<PENDING-RUN>>`, so §15's 13 minutes/17 with PN arithmetic is unchanged.
+
+**For the former build seat:** audit `load-first` at `1325db5` against §15 and this explicit
+scope revision. Re-run the branch harness baseline and every module/observer mutant; inspect
+R5D7–R5D9 and the source bodies, not just the totals. Judge whether diagnostic D is sufficient
+for SHIP-TO-SITTING under the retained FIXED list. Append the independent verdict to this
+report on `main`. The branch remains unmerged, the sitting held, and the consumed brief retired.

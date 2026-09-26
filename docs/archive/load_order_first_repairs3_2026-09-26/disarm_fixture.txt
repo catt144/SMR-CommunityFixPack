@@ -1,0 +1,19 @@
+leg      load-first-sync
+mode     disarm
+kit      B:\Dev\SMR\SMR-LoadFirst-Repair\scratch\load_first_repair3_arm_fixture\kit
+
+DELETED  98_LoadFirstSync.lua
+metadata: stripped 1 line(s)
+
+GATE OK       permanent still listed: Code/00_TestCore.lua
+GATE OK       permanent on disk:     Code/00_TestCore.lua
+GATE OK       not listed (inert):    Code/96_AutoRunFlag.lua
+GATE OK       not listed (inert):    Code/97_ForceInactive.lua
+GATE OK       not listed (inert):    Code/98_EnablePathLeg.lua
+GATE OK       not listed (inert):    Code/98_LoadFirstRead.lua
+GATE OK       not listed (inert):    Code/98_LoadFirstSet.lua
+GATE OK       not listed (inert):    Code/98_LoadFirstPack.lua
+GATE OK       payload gone from disk: 98_LoadFirstSync.lua
+GATE OK       payload unlisted:      98_LoadFirstSync.lua
+
+RESULT: every gate passed.

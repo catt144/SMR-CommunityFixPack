@@ -1,0 +1,31 @@
+leg      load-first-sync
+mode     arm
+kit      B:\Dev\SMR\SMR-LoadFirst-Repair\scratch\load_first_repair3_arm_fixture\kit
+
+metadata: stripped 0 line(s)
+WROTE    Code/98_LoadFirstSync.lua
+WROTE    metadata.lua (no BOM, LF)
+
+GATE OK       permanent still listed: Code/00_TestCore.lua
+GATE OK       permanent on disk:     Code/00_TestCore.lua
+GATE OK       not listed (inert):    Code/96_AutoRunFlag.lua
+GATE OK       not listed (inert):    Code/97_ForceInactive.lua
+GATE OK       not listed (inert):    Code/98_EnablePathLeg.lua
+GATE OK       not listed (inert):    Code/98_LoadFirstRead.lua
+GATE OK       not listed (inert):    Code/98_LoadFirstSet.lua
+GATE OK       not listed (inert):    Code/98_LoadFirstPack.lua
+GATE OK       payload on disk:       98_LoadFirstSync.lua
+GATE OK       payload listed ONCE:   98_LoadFirstSync.lua
+GATE OK       TEMPORARY marker:      98_LoadFirstSync.lua
+GATE OK       S3 ASCII-only body:    98_LoadFirstSync.lua
+GATE OK       self-drives:           LoadFirstSync.Boot() at file scope
+GATE OK       quits the process:     98_LoadFirstSync.lua
+GATE OK       banned-pattern scan:   98_LoadFirstSync.lua
+GATE OK       declared content present: g_PopsDownloadModsQueue
+GATE OK       declared content present: SyncUpdatePdxMod
+GATE OK       declared content present: PushTask
+GATE OK       declared content present: MODE = 
+GATE OK       all 4 LoadFirstSync.* name(s) resolve
+
+RESULT: ARMED and every gate passed.
+        Reminder: doccheck is now RED (TEMPORARY markers). Disarm before committing.

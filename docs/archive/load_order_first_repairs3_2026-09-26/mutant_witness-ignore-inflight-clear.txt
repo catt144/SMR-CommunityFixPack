@@ -1,0 +1,94 @@
+MUTANT witness-ignore-inflight-clear (verbose)
+  PASS  1a middle: saved B,PACK,C becomes PACK,B,C  -- SMR_CommunityFixPack,B,C
+  PASS  1a next queue is PACK,B,C  -- SMR_CommunityFixPack,B,C
+  PASS  1a running ModsLoaded stays B,PACK,C  -- B,SMR_CommunityFixPack,C
+  PASS  1a exactly one save request, delay 1000  -- calls=1 delay=1000
+  PASS  1a LoadFirst active, detail names the move  -- active / moved to the front of the saved mod order (was 2 of 3); applies at the next game start
+  PASS  1a notice: one question, Restart now / Later, no restart on Later  -- questions=1 restarts=0
+  PASS  1a Lua reload: no second write, no second notice  -- saves=1 questions=1
+  PASS  1b last: saved A,B,PACK becomes PACK,A,B  -- SMR_CommunityFixPack,A,B
+  PASS  1b Restart now calls the game's restart routine once  -- restarts=1 questions=1
+  PASS  2 already first: raw saved list unchanged  -- SMR_CommunityFixPack,A,B
+  PASS  2 already first: no save request
+  PASS  2 already first: LoadFirst active, detail names the loaded list  -- active / first in the list the game loads (3 mods); nothing written
+  PASS  2 already first: no notice  -- questions=0 messages=0
+  PASS  2 already first: persistent slot untouched
+  PASS  3a config.LoadAllMods: raw saved list untouched  -- B,SMR_CommunityFixPack,C
+  PASS  3a config.LoadAllMods: no save request
+  PASS  3a config.LoadAllMods: LoadFirst inactive naming LoadAllMods  -- inactive / the game is loading every installed mod in alphabetical order (LoadAllMods), so the saved order does not apply
+  PASS  3a config.LoadAllMods: a log line says not applied  -- [CommunityFixPack] LoadFirst: not applied — config.LoadAllMods is set; the saved order is untouched (A, B, C, SMR_CommunityFixPack) | [CommunityFixPack] LoadFirst: inactive (the game is loading every installed mod in alphabetical order (LoadAllMods), so the saved order does not apply)
+  PASS  3b AccountStorage.LoadAllMods: raw saved list untouched  -- B,SMR_CommunityFixPack,C
+  PASS  3b AccountStorage.LoadAllMods: no save request
+  PASS  3b AccountStorage.LoadAllMods: LoadFirst inactive naming LoadAllMods  -- inactive / the game is loading every installed mod in alphabetical order (LoadAllMods), so the saved order does not apply
+  PASS  3b AccountStorage.LoadAllMods: a log line says not applied  -- [CommunityFixPack] LoadFirst: not applied — the account's LoadAllMods flag is set; the saved order is untouched (A, B, C, SMR_CommunityFixPack) | [CommunityFixPack] LoadFirst: inactive (the game is loading every installed mod in alphabetical order (LoadAllMods), so the saved order does not apply)
+  PASS  4a option off: raw saved list untouched  -- B,SMR_CommunityFixPack,C
+  PASS  4a option off: no save request
+  PASS  4a option off: LoadFirst inactive 'turned off in Mod Options'  -- inactive / turned off in Mod Options
+  PASS  4b toggled on later: promotes at once  -- SMR_CommunityFixPack,B,C
+  PASS  4b toggled on later: one save request, LoadFirst active  -- saves=1 status=active
+  PASS  4b toggled on later: the notice shows  -- 1
+  PASS  4c toggled off again: inactive, order left as it is, no new request  -- status=inactive saved=SMR_CommunityFixPack,B,C saves=1
+  PASS  4c option off, pack moved last, nothing promotes: raw B,C,PACK, no request, no notice  -- raw=B,C,SMR_CommunityFixPack saves=1 questions=1
+  PASS  4d veto SMRFixPack_Disabled.LoadFirst: disabled, untouched, no request, no notice  -- status=disabled raw=B,SMR_CommunityFixPack,C saves=0 questions=0
+  PASS  5a slot: our line first, promotions=1 from=2 of=3  -- 'SMRFixPack.LoadFirst v1 promotions=1 last=1790434776 from=2 of=3'
+  PASS  5a slot: both foreign lines preserved verbatim  -- ['somebody-else v3 alpha', 'beta']
+  PASS  5b second promotion: promotions=2, foreign lines still intact, saved list PACK first  -- ['SMRFixPack.LoadFirst v1 promotions=2 last=1790434776 from=3 of=3', 'somebody-else v3 alpha', 'beta'] saved=SMR_CommunityFixPack,B,C saves=2
+  PASS  5c already first: a foreign slot is not rewritten, no request  -- 'somebody-else v3 alpha' saves=0
+  PASS  6a own prerequisite A: saved PACK,B,A; queue hoists A first, PACK before B  -- saved=SMR_CommunityFixPack,B,A queue=A,SMR_CommunityFixPack,B
+  PASS  6b Z requires the pack: saved PACK,Z,B; queue PACK,Z,B (Z unmoved relative to B)  -- saved=SMR_CommunityFixPack,Z,B queue=SMR_CommunityFixPack,Z,B
+  PASS  shape: pack absent from the list: raw untouched, no request, inactive 'not in the saved mod list'  -- raw=A,B saves=0 inactive/this pack is not in the saved mod list, so there is nothing to reorder
+  PASS  shape: duplicate B collapses to its first position, stale GHOST kept in place, one request  -- SMR_CommunityFixPack,B,GHOST saves=1
+  PASS  shape: duplicate PACK collapses: PACK,B,C  -- SMR_CommunityFixPack,B,C
+  PASS  shape: five mods, pack third: others keep A,B,C,D order  -- SMR_CommunityFixPack,A,B,C,D
+  PASS  shape: all 24 permutations of A,B,C,PACK keep the others' order; a save only when moved
+  PASS  7a PN before pack: VacuumWalks declines (inactive)  -- inactive / the shipped emigration code has no work-slot reservation or shuttle landing slots; this repair stands down on the older body
+  PASS  7a PN before pack: HubLocalAccess does not apply  -- inactive / Dome not found (game update changed it?)
+  PASS  7a saved PN,PACK becomes PACK,PN; next queue PACK,PN  -- saved=SMR_CommunityFixPack,iooW34Y queue=SMR_CommunityFixPack,iooW34Y
+  PASS  7b next launch in that order: VacuumWalks active  -- active / 
+  PASS  7b next launch in that order: HubLocalAccess active  -- active / 
+  PASS  7b next launch: LoadFirst already first, no write  -- status=active saves=0
+  PASS  R1a cold option off, later opt-in: promotes and a notice is shown  -- saved=SMR_CommunityFixPack,B,C saves=1 questions=1
+  PASS  R1b already-first boot, off, moved last, on: promotes and a notice is shown  -- saved=SMR_CommunityFixPack,B,C saves=1 questions=1
+  PASS  R1c promotion boot, off, moved last, on: a second notice for the second promotion  -- saves=2 questions=2
+  PASS  R1d reload while a notice is pending: one box, not two  -- questions=1 saves=1
+  PASS  R2a slot 'alpha\n\nbeta\n': our line then the foreign bytes exactly  -- after='SMRFixPack.LoadFirst v1 promotions=1 last=1790434776 from=2 of=3\nalpha\n\nbeta\n' saves=1
+  PASS  R2b slot 'SMRFixPack.LoadFirstExtr': our line then the foreign bytes exactly  -- after='SMRFixPack.LoadFirst v1 promotions=1 last=1790434776 from=2 of=3\nSMRFixPack.LoadFirstExtra payload' saves=1
+  PASS  R2c full valid slot: nothing written, nothing dropped, promotion made, log says the save could not be requested  -- slot_len=32768 saved=SMR_CommunityFixPack,B,C saves=0
+  PASS  R3a account flag with a stale probe id in the raw list: raw list untouched, no request  -- raw=B,SMRFixPack.LoadFirst.probe,SMR_CommunityFixPack,C saves=0
+  PASS  R3a normal list with a stale probe id: promoted, the stale id kept in place  -- SMR_CommunityFixPack,B,SMRFixPack.LoadFirst.probe,C
+  PASS  R3b config.LoadAllMods with the pack sorted first: diagnosed, inactive, no request  -- inactive / the game is loading every installed mod in alphabetical order (LoadAllMods), so the saved order does not apply saves=0
+  PASS  R3c account flag with the pack sorted first: the STATED LIMIT holds — no write, wording names the loaded list  -- active / first in the list the game loads (2 mods); nothing written saves=0 raw=z,SMR_CommunityFixPack
+  PASS  engine: same-visit off/on is order-only: ModsReloadItems returns early, running list unchanged, no promotion  -- raw=B,C,SMR_CommunityFixPack running=SMR_CommunityFixPack,B,C saves=0
+  PASS  R5D1 root and children return: lifecycle RETURNED-UNVERIFIED, remote success unverified  -- state=idle queued=0 verdict=RETURNED-UNVERIFIED
+  PASS  R5D1 log has one PUSH, START and END for each root/child  -- push=3 start=3 end=3
+  PASS  R5D1 child re-enables pack last; next feature-enabled boot promotes it  -- after=B,C,SMR_CommunityFixPack next=SMR_CommunityFixPack,B,C saves=1
+  PASS  R5D2 empty queue with async child remains IN-FLIGHT  -- IN-FLIGHT
+  PASS  R5D2 control: returned child changes lifecycle, not remote success  -- RETURNED-UNVERIFIED
+  PASS  R5D3 logout drops queued child and invalidates attempt  -- CANCELLED
+  PASS  R5D4 observed callback raise is FAILED and raised errors reach queue sprocall  -- verdict=FAILED queue_errors=1
+  PASS  R5D4 observed callback errstring is FAILED and raised errors reach queue sprocall  -- verdict=FAILED queue_errors=0
+  PASS  R5D5 no children means EMPTY-UNVERIFIED, never evidence of empty account  -- EMPTY-UNVERIFIED
+  PASS  R5D5 queued root at installation is wrapped before it runs  -- RETURNED-UNVERIFIED
+  PASS  R5D5 installation after root started yields UNWITNESSED  -- UNWITNESSED
+  PASS  R5D5 unattended no-login driver reports NO-ATTEMPT and quits  -- quit=1
+  PASS  R5D6 unattended driver records returned lifecycle, unverified success, saved order; quits once  -- quit=1
+  PASS  R5D6 repeated sitting slot reads observe before/after lifecycle without a success predicate  -- RETURNED-UNVERIFIED
+  PASS  R5D7 shipped partial-fetch returns callbacks but never claims remote success  -- lifecycle=RETURNED-UNVERIFIED remote=UNVERIFIED log=Mod 123 v 1 is up to date. Nothing to download.
+  PASS  R5D7 shipped install-error returns callbacks but never claims remote success  -- lifecycle=RETURNED-UNVERIFIED remote=UNVERIFIED log=Failed to install mod 123 v 1 Timeout
+  PASS  R5D7 shipped uninstall-error returns callbacks but never claims remote success  -- lifecycle=RETURNED-UNVERIFIED remote=UNVERIFIED log=Failed to uninstall mod 123 1 Timeout
+  PASS  R5D7 shipped success returns callbacks but never claims remote success  -- lifecycle=RETURNED-UNVERIFIED remote=UNVERIFIED log=Mod 123 v 1 is up to date. Nothing to download.
+  FAIL  R5D8 logout during sole running child invalidates attempt with no queued child  -- RETURNED-UNVERIFIED
+  FAIL  R5D8 root resumes after logout and schedules children; invalidation remains latched  -- RETURNED-UNVERIFIED
+  PASS  R5D9 external push during suspended root is not attributed to that root  -- other
+  FAIL  R5D9 second login has a separate root; old callback's later children keep the old parent  -- RETURNED-UNVERIFIED
+  PASS  R5E1 vetoed restore with the option ON: the captured order survives a reload and an Apply click; one save (the kit's), no notice, LoadFirst disabled  -- raw=Kit,TrainHub,SMR_CommunityFixPack,OptIn,RailShaft saves=1 questions=0 status=disabled
+  PASS  R5E2 the rejected recipe: an OFF readback keeps the captured order  -- raw=Kit,TrainHub,SMR_CommunityFixPack,OptIn,RailShaft saves=0
+  PASS  R5E2 the rejected recipe: the final ON click promotes at once, so restoration must come after it  -- raw=SMR_CommunityFixPack,Kit,TrainHub,OptIn,RailShaft saves=1
+  PASS  R5E3 the next feature-enabled boot on the restored order, option ON, promotes by design  -- saved=SMR_CommunityFixPack,Kit,TrainHub,OptIn,RailShaft saves=1
+  PASS  pdxfetch: a failed first page with an empty table returns no error and an empty list (ModManager.lua:1739-1760)  -- err=False n=0
+  PASS  pdxfetch control: one subscribed mod is returned without error  -- err=False n=1
+  PASS  canary: metadata.lua loads under the metadata env and returns a ModDef
+  PASS  canary: declared property set = pre-canary set + default_options  -- ['default_options']
+  PASS  canary: the literal is in the tree file and leaks no global
+  PASS  canary: the code list still starts 00_Core, 01_LoadFirst
+failed groups: R5D8, R5D9
