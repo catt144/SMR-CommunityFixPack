@@ -135,7 +135,7 @@ back at Paradox. ⛔ Do not paste the same block on both.
 ```
 Bug fixes for Surviving Mars: Relaunched.
 
-Forty-three repairs, each one written up on the fix list with what you would
+Forty-four repairs, each one written up on the fix list with what you would
 have seen and what was actually wrong. Every one targets something the game's
 own code gets wrong — the code says one thing, does another, and the fix makes
 it do what it says. It fixes bugs; it does not rebalance the game. Preferences
@@ -217,6 +217,10 @@ HOW IT WORKS
 · No game files are modified. The pack wraps the game's own code while it runs.
 · Safe to add to a save you have already played. It writes almost nothing into
   your savegame, and removing it simply lets the original bugs come back.
+· It moves itself to the front of your mod load order, so its repairs are
+  applied before other mods change the same parts of the game. Your other mods
+  keep their order. It tells you when a restart is needed, and you can turn this
+  off under Options > Mod Options > Relaunched Fix Pack.
 · Every fix checks the game's code before it touches anything, and stands down
   by itself if what it was written for has been renamed, removed or reshaped.
   A fix that stands down does nothing at all — it never guesses. Every game
@@ -235,7 +239,7 @@ HOW IT WORKS
 ```
 [h2]Bug fixes for [i]Surviving Mars: Relaunched[/i].[/h2]
 
-[b]Forty-three repairs[/b], each one written up on the fix list with what you would have seen and what was actually wrong. Every one targets something the game's own code gets wrong — the code says one thing, does another, and the fix makes it do what it says. It fixes bugs; it does not rebalance the game. Preferences and features are deliberately not in it.
+[b]Forty-four repairs[/b], each one written up on the fix list with what you would have seen and what was actually wrong. Every one targets something the game's own code gets wrong — the code says one thing, does another, and the fix makes it do what it says. It fixes bugs; it does not rebalance the game. Preferences and features are deliberately not in it.
 
 Some of them you could hardly miss: an entire train line and every train on it deleted by salvaging a single hex, colonists suffocating on a walk between two domes, an artificial lake burying the rover that was building it.
 
@@ -282,6 +286,7 @@ Select the building and press [b]Change Skin[/b] (the paintbrush on its panel) t
 [list]
 [*][b]No game files are modified.[/b] The pack wraps the game's own code while it runs.
 [*][b]Safe to add to a save you have already played.[/b] It writes almost nothing into your savegame, and removing it simply lets the original bugs come back.
+[*][b]It loads first.[/b] It moves itself to the front of your mod load order, so its repairs are applied before other mods change the same parts of the game. Your other mods keep their order. It tells you when a restart is needed, and you can turn this off under Options > Mod Options > Relaunched Fix Pack.
 [*][b]It stands down instead of guessing.[/b] Every fix checks the game's code before it touches anything, and switches itself off if what it was written for has been renamed, removed or reshaped. Every game patch is read against the pack as well, and the fixes it changed are updated or retired.
 [*]A few fixes are judgment calls rather than plain repairs. Those are marked on the fix list, with the reasoning.
 [/list]
@@ -817,3 +822,23 @@ Headliners stay at nine. Adding one would be a new selection from the audited li
 batch does not call for. The change note says what was seen in play (C114 and C117, read on both
 builds; C111, owner-watched) and says plainly that the rescue-cancel, hub-marker and bed repairs
 were not watched happening.
+
+## ⭐ 2026-09-26 — v17 words (`release_prompt.md` §1): count 43 → 44, one HOW IT WORKS bullet
+
+**Count: Forty-three → Forty-four.** C119 adds one row to *Buildings & economy* (cables and
+buildings in one area get no power and the dead area grows; cleared at load). LoadFirst is not a
+repair and gets no row. Re-derived from `SMR-CommunityMods` `content/fix-list.md`:
+`grep -c '^??? '` = **44**, section tally 2 (Disasters & weather) + 18 (Colonists & domes) + 4
+(Drones & logistics) + 5 (Buildings & economy) + 5 (Trains) + 5 (Rockets & asteroids) + 3 (Story &
+mysteries) + 2 (Under the hood) = 44. Judgment calls unchanged at **four**
+(`grep -c '^??? question'`). Body copies moved together: `Forty-four repairs` = 1 (`metadata.lua`)
++ 2 (this file) + 2 (`UPLOAD_WORKFLOW.md` §3) = 5, and 0 body hits left for `Forty-three repairs`;
+the ones left in this file are the v16 log entry above.
+
+**HOW IT WORKS gains one bullet** in all five copies, from the outbox's LoadFirst player text: the
+pack moves itself to the front of the load order, other mods keep their order, it says when a
+restart is needed, and the Mod Options switch turns it off. Headliners stay at nine; C119 is not
+promoted, for the same reason as v16. The site's "no options page" note (`install.md`), load-order
+answers (`install.md`, `faq.md`) and the modders' veto route (`for-modders.md`, and this repo's
+`README.md`) were falsified by LoadFirst and rewritten; `for-modders.md`'s stale 1.1.0.403908 build
+line now reads 1.1.1.405907.

@@ -38,10 +38,13 @@ Subscribe on the Steam Workshop or install from Paradox Mods — or drop it in
 **Then restart the game** — enabling or disabling any mod only takes effect on
 a full restart.
 
-There is nothing to configure. The pack has no options page — it repairs bugs,
-so "on" is the whole interface — and there is no in-game way to switch off an
-individual fix on any platform (see [For modders](#for-modders) for the one
-route that exists).
+The pack has one setting, under Options > Mod Options > Relaunched Fix Pack:
+**Load this pack first**, on by default. With it on, the pack moves itself to the
+front of your mod load order, so its repairs are applied before other mods change
+the same parts of the game; your other mods keep their order, and a message tells
+you when a restart is needed. Turn it off to keep your own order. There is no
+in-game way to switch off an individual fix on any platform (see
+[For modders](#for-modders) for the one route that exists).
 
 **Your save is safe, including a long one.** The pack writes almost nothing
 into your savegame: a timestamp on a housing reservation, a timestamp on a
@@ -90,7 +93,11 @@ The id is the key, not a list entry — a plain list looks valid and switches of
 nothing. Ids are the fix file names minus the `Fix_` prefix
 (`Code/Fix_LakeEntombment.lua` registers `LakeEntombment`); the save-repair
 module `Code/90_SaveSanitizer.lua` registers `SaveSanitizer`. "Before the pack
-loads" means your mod has to load first.
+loads" means your mod has to load first. By default the pack moves itself to the
+front of the player's load order, so a veto needs the player to turn off **Load
+this pack first** and order your mod ahead of the pack (the load order is the
+order mods were enabled in). The move itself has the id `LoadFirst`, and the same
+veto stops it.
 
 ## Credits
 
