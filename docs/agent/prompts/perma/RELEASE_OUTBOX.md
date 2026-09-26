@@ -23,11 +23,11 @@ player surface bumps it by one on release.
 
 ### Pending — C119: clear stale power cells when a colony loads (2026-09-26)
 
-**HOLD: the attended C119 repair and controls passed, including a powered
-cable run through the repaired footprint with normal visuals. WORKFLOW's
-pack-disabled reload of a disposable repaired save remains before release.**
-[C119](../../bugs/C119.md) records the retail logs, the owner-ruled load-only
-scope, the observed result and the remaining check.
+**READY for the next upload: the attended repair and controls passed, including
+a powered cable run through the repaired footprint with normal visuals. A
+repaired save also loaded after the pack was disabled and the game restarted.**
+[C119](../../bugs/C119.md) records the retail logs and the owner-ruled load-only
+scope. The release seat still performs the normal upload gates.
 
 Player surface for the next release: a colony whose old power-connection cells
 outlived their objects can use the affected area again after loading. Cables and
