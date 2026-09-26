@@ -1,0 +1,67 @@
+-- TEMPORARY LoadFirst (option B) attended sitting slot, game 1.1.1.405907.
+-- Library payload (no boot flow, no quit, no write). Binds the SMRTK scratch slot
+-- "Order + Sync read": each press logs the saved enable order, the running ModsLoaded
+-- order, the pack's LoadFirst / VacuumWalks / HubLocalAccess statuses, the saved
+-- "Load this pack first" value and the LoadFirst promotion state, then calls the sync
+-- observer's report (LoadFirstSync.Report from 98_LoadFirstSync, loaded before this
+-- file). At file scope it logs the saved list as this kit sees it when its code loads.
+-- This file never calls a mod-list helper that mutates and never touches persistent data.
+LoadFirstSitting = { presses = 0 }
+
+local function say(s)
+    ModLog("[LOADFIRST] " .. tostring(s):gsub("%%", "%%%%"))
+    local flush = rawget(_G, "FlushLogFile")
+    if flush then pcall(flush) end
+end
+
+local function ids(list)
+    local out = {}
+    for i, v in ipairs(list or {}) do out[i] = tostring(type(v) == "table" and v.id or v) end
+    return table.concat(out, ",")
+end
+
+say("AT_LOAD saved=" .. ids(GetModsEnabledByUser()))
+say("AT_LOAD loaded=" .. ids(ModsLoaded))
+
+function LoadFirstSitting.Census(where)
+    say(where .. " saved=" .. ids(GetModsEnabledByUser()))
+    say(where .. " loaded=" .. ids(ModsLoaded))
+    local def = rawget(_G, "Mods") and Mods["SMR_CommunityFixPack"]
+    local opts = type(def) == "table" and rawget(def, "options")
+    say(where .. " option LoadFirst=" .. tostring(type(opts) == "table" and rawget(opts, "LoadFirst")) .. " (nil on a build without the option)")
+    local pack = rawget(_G, "SMRFixPack")
+    if type(pack) ~= "table" or type(pack.fixes) ~= "table" then
+        say(where .. " pack=absent")
+        return
+    end
+    for _, id in ipairs({ "LoadFirst", "VacuumWalks", "HubLocalAccess" }) do
+        local f = pack.fixes[id]
+        say(where .. " fix " .. id .. " status=" .. tostring(f and f.status) .. " detail=" .. tostring(f and f.detail))
+    end
+    local lf = pack.LoadFirst
+    if type(lf) == "table" then
+        say(where .. " LoadFirst promoted=" .. tostring(lf.promoted and (lf.promoted.from .. "/" .. lf.promoted.count) or "no")
+            .. " pending_notice=" .. tostring(lf.pending_notice))
+    end
+end
+
+local kit = rawget(_G, "SMRTK")
+if type(kit) == "table" and type(kit.BindScratch) == "function" then
+    kit.BindScratch("Order + Sync read", function()
+        LoadFirstSitting.presses = LoadFirstSitting.presses + 1
+        local where = "PRESS" .. LoadFirstSitting.presses
+        local ok, err = pcall(LoadFirstSitting.Census, where)
+        say(where .. " CENSUS ok=" .. tostring(ok) .. " err=" .. tostring(err))
+        local sync = rawget(_G, "LoadFirstSync")
+        local report = { verdict = "observer absent" }
+        if type(sync) == "table" and type(sync.Report) == "function" then
+            local rok, res = pcall(sync.Report, where)
+            report = rok and res or { verdict = "observer error: " .. tostring(res) }
+        end
+        report.press = LoadFirstSitting.presses
+        return report
+    end, { mode = "once" })
+    say("SLOT bound=Order + Sync read")
+else
+    say("SLOT bound=false err=SMRTK.BindScratch not found")
+end

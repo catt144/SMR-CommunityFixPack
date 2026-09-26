@@ -13,11 +13,12 @@ seven boot logs are the disk evidence. Where a line says MEASURED it names its c
 **Latest audit verdict: SHIP-TO-SITTING for `1325db5` with two preconditions (§17,
 2026-09-26).** §15's four false-success paths are closed by the observer at `1325db5` (§16);
 the explicit scope revision, leg D as a diagnostic with no remote-sync PASS, is accepted
-under the retained FIXED list. Both preconditions are met (§18, L13 rehearsal and the
-owner-session log); the sitting proposal awaits the owner's approval. R1–R4, R6 and R5-E
-retain their prior acceptance and limits; the production module is unchanged since
-`8ea5449`. The verdict clears nothing beyond presenting the sitting for approval: no merge,
-no upload, no attended sitting. Sections 0–16 retain the build, audit and repair history.
+under the retained FIXED list. Both preconditions are met (§18). **The attended sitting ran
+on 2026-09-26, owner-watched, every leg as predicted, the order restored and read back on
+`main` (§19).** R1–R4, R6 and R5-E retain their prior acceptance and limits; the production
+module is unchanged since `8ea5449`. Remaining: the merge (after the main tree's other lane
+commits), the upload on the owner's go, and the post-upload canary checks. Sections 0–18
+retain the build, audit, repair and preparation history.
 The retained FIXED list and owner authority remain in §11.
 
 ## 0 · Read this first — what the owner sees that the brief did not say
@@ -1461,3 +1462,61 @@ census available as *Order read*. Legs A, B, C as §11's revised proposal; D as 
 diagnostic; E as §14/§15's restoration, unattended by the seat. About 13 owner minutes, 17
 with PN, `<<PENDING-RUN>>`. The junction returns to `main` at the end of E, before the seat
 reports. Nothing here is merged or uploaded.
+
+## 19 · The attended sitting — every leg as predicted, order restored, 2026-09-26
+
+**Owner-watched, 12:40–12:58, legs A–D by the owner; leg E by the seat, unattended, 12:59–13:01.
+Code `load-first` at `1325db5`. Zero `[LUA ERROR]` across the eight logs.** Evidence:
+[`docs/archive/load_order_first_sitting_2026-09-26/`](../../archive/load_order_first_sitting_2026-09-26/)
+(six sitting logs S1–S6, L14, L15, the instrument, both leg-E scripts and a receipt with every
+cited line and hash). The owner approved the sitting ("go") on the §18 proposal.
+
+**Preparation, and one departure.** Another lane had uncommitted C119 work in the main tree
+(`items.lua`, `metadata.lua`, a new module), so `load-first` was not checked out there.
+Instead the pack junction was pointed at a detached worktree of `1325db5` for the sitting and
+restored to `B:\Dev\SMR\SMR-BugFixPack` (branch `main`) before L15, both read back with
+`Get-Item … .Target`. The instrument was a kit leg parked in the seat's scratch folder: the
+branch's sync observer in `MODE = "sitting"` (blob `19c3955e…`, unchanged) plus a new library
+payload binding one SMRTK scratch slot, *Order + Sync read*, whose press logs the census and
+the observer's report. Every arm and disarm passed the gates; the kit's `metadata.lua` hashed
+equal to HEAD after each disarm.
+
+| leg | log | what the owner did | MEASURED (line numbers in the receipt) |
+|---|---|---|---|
+| A, boot 1 | S1 12:40 | Read the box, Later, press, quit | `moved to the front … via startup (was 3 of 5)` :94; `player chose Later` :245; press: saved pack-first :331, running list still the old order :332, option `true`, `pending_notice=false` :337 |
+| A, boot 2 | S2 12:44 | Press | `already first of 5 … nothing written` :70; `Loaded mod items for: SMR_CommunityFixPack, …` :181; no box (no "player chose" line before the hot path); press :294–303 |
+| B, hot path | S2 | Untick the pack, close; tick, close; Restart now | Reload without the pack (`AT_LOAD saved=` four mods :336), reload with the pack last :378, `moved to the front … (was 5 of 5)` :393, box, `player chose Restart now` :461, process ends :467 |
+| B, after restart | S3 12:47:16 | Press | The game relaunched itself (S2 ended 12:47:1x, S3 started 12:47:16); `already first of 5` :71, loaded pack-first :181, press :334–343 |
+| C, off | S4 12:47:59 | Untick the option, Apply; untick the pack, close; tick, close; press | `deactivated via Mod Options` :211; with the pack re-ticked last, `LoadFirst: inactive (turned off in Mod Options)` :422 and the order stays pack-last :408: no promotion while off |
+| C, on | S4 | Tick the option, Apply; read the box, Later | `moved to the front … via Mod Options (was 5 of 5)` :490, box, `player chose Later` :494 |
+| D | S5 12:52 | Press; Log out; Log in; wait; press | Boot attempt `EMPTY-UNVERIFIED` :339; `CLEAR clears=1 cancelled_unstarted=0`, `MSG PdxLogout` :355–356; new root :396–407; press 2: `EMPTY-UNVERIFIED sync_success=UNVERIFIED attempts=2 … clears=1` :532; saved order unchanged :533 |
+| D, next boot | S6 12:57 | Press | `already first of 5` :71, loaded pack-first :179, press :329–338 |
+| E, restore | L14 12:59 (branch) | — | `already first` :69 (no promotion to inhibit); `BEFORE option LoadFirst=true status=active` :196; `AFTER saved=` the captured order :197; `SAVE_REQUEST err=nil` :198 |
+| E, readback | L15 13:00 (`main`) | — | `AT_LOAD`/`AT_MENU saved=` and `loaded=` `Kit, TrainHub, Pack, OptIn, RailShaft` :83–84, :198–199; `fix LoadFirst status=nil` :200; `option LoadFirst=nil` :203; VacuumWalks and HubLocalAccess `active` :201–202 |
+
+**What this settles on this rig, owner-watched:** the notice shows once per promotion and not
+on the next boot (A); a real enabled-set change reaches the reload, promotes and the native
+Restart now relaunches the game pack-first (B); the opt-out holds the order while off and
+the opt-in promotes at once with a new box (C, the R1 falsifier); a log-out and log-in run a
+new sync root whose queue is cleared on logout, with the saved order untouched before and
+after and on the next boot (D, diagnostic: both attempts empty and unverified, as §17
+predicted for a rig with no Paradox-installed mod; nothing here claims the remote sync
+succeeded); and the captured start is restored and read back on `main` (E). The option
+value was read back `true` on the last branch boot (L14) and is, by design, unreadable on
+`main` (§15). The retained FIXED list's attended-sitting condition is met.
+
+**Small departures, none affecting a prediction.** The owner pressed the slot once while the
+pack was unticked in C (S4 :367, order of four mods, option `nil`: extra data). The press
+after C's final Apply was not made; the promotion is the log line :490. B's promotion line
+says `via startup` because the manager's reload re-runs the file with the module's `loading`
+flag set: cosmetic, SUGGESTION for the wording, not a defect. The leg-E script stopped at a
+print step after L14 (a PowerShell function returned its status line with its value), leaving
+the set leg armed and the junction on the worktree for about a minute with no launch in
+between; a second script finished the disarm, the junction and L15. The main tree's other
+lane was told not to launch during the sitting; no launch of theirs appears in the logs.
+
+**Next.** Merge `load-first` into `main` once the main tree's other lane has committed its
+C119 work (a merge now would touch `items.lua` and `metadata.lua` under their uncommitted
+edits); then the upload on the owner's go, and the post-upload canary checks of §6 and the
+release outbox. Paradox-installed players will see the notice again after each update the
+sync applies (§17); the release note should say so.

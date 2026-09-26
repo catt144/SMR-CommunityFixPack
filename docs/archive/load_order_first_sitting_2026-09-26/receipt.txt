@@ -1,0 +1,135 @@
+LoadFirst attended sitting, 2026-09-26 12:40-13:01, this rig, game 1.1.1.405907. Code: load-first 1325db54a0ec2a835b694eed8b1034817d08f948 served through the pack junction from a detached worktree (B:\Dev\SMR\SMR-FixPack-sitting), because the main tree carried another lane's uncommitted C119 work; junction restored to B:\Dev\SMR\SMR-BugFixPack (branch main) before L15.
+Instrument: kit leg load-first-sitting.json (parked copies: 98_LoadFirstSync.lua.txt = branch blob 19c3955e..., MODE sitting; 98_LoadFirstOrderSlot.lua.txt, new, archived here, sha below), one SMRTK scratch slot 'Order + Sync read'. Leg E: branch set leg (blob ffe07881... parked) on the branch, then branch read leg (blob 48bbc0eb... parked) on main; manifests = branch blobs with park redirected to the scratch park.
+Owner clicks per leg: A (S1, S2), B (S2 hot path, S3 after Restart now), C (S4), D (S5 log out / log in, S6 next boot). Seat: L14 restore, L15 readback. Kit metadata.lua restored to HEAD after every disarm (blob cec74748... both sides).
+
+LOG L14_restore_branch_Mars.exe-20260926-12.59.02-6aad2d75.log lines=218 LUA_ERROR=0 sha256=83589c3ef655c53541a490e3eadfb91bec951505397c737fbb2bb322c96f1add
+  69:[mod] [CommunityFixPack] LoadFirst: already first of 5 (SMR_CommunityFixPack, SMR_CommunityFixPackTestKit, SMR_TrainHubDev_20260918, SMR_CommunityOptInPack, SMR_RailShaftDev_20260923); nothing written
+  70:[mod] [CommunityFixPack] LoadFirst: applied
+  173:[mod] Loaded mod items for: SMR_CommunityFixPack, SMR_CommunityFixPackTestKit, SMR_TrainHubDev_20260918, SMR_CommunityOptInPack, SMR_RailShaftDev_20260923
+  195:[mod] [LOADFIRST-SET] BEFORE saved=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_TrainHubDev_20260918,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923
+  196:[mod] [LOADFIRST-SET] BEFORE option LoadFirst=true status=active detail=first in the list the game loads (5 mods); nothing written
+  197:[mod] [LOADFIRST-SET] AFTER saved=SMR_CommunityFixPackTestKit,SMR_TrainHubDev_20260918,SMR_CommunityFixPack,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923
+  198:[mod] [LOADFIRST-SET] SAVE_REQUEST err=nil
+  200:[mod] [LOADFIRST-SET] APPLY ok=true matched=true
+  202:[mod] [LOADFIRST-SET] DONE
+  205:Stopping the game threads from the Lua side with exit code 0.
+LOG L15_readback_main_Mars.exe-20260926-13.00.16-6aad2d75.log lines=222 LUA_ERROR=0 sha256=3a92e8032023bb00684aa7c3c3b68cac1eb9d6a834e5fbc806baa337b61982d5
+  83:[mod] [LOADFIRST] AT_LOAD saved=SMR_CommunityFixPackTestKit,SMR_TrainHubDev_20260918,SMR_CommunityFixPack,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923
+  177:[mod] Loaded mod items for: SMR_CommunityFixPackTestKit, SMR_TrainHubDev_20260918, SMR_CommunityFixPack, SMR_CommunityOptInPack, SMR_RailShaftDev_20260923
+  198:[mod] [LOADFIRST] AT_MENU saved=SMR_CommunityFixPackTestKit,SMR_TrainHubDev_20260918,SMR_CommunityFixPack,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923
+  199:[mod] [LOADFIRST] AT_MENU loaded=SMR_CommunityFixPackTestKit,SMR_TrainHubDev_20260918,SMR_CommunityFixPack,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923
+  200:[mod] [LOADFIRST] AT_MENU fix LoadFirst status=nil detail=nil
+  203:[mod] [LOADFIRST] AT_MENU option LoadFirst=nil (nil on a build without the option)
+  209:Stopping the game threads from the Lua side with exit code 0.
+LOG S1_Mars.exe-20260926-12.40.17-6aad2d75.log lines=359 LUA_ERROR=0 sha256=b5d3814d92d7b30994ebc41d29212bc95540f54f773a71abe007429a6953e6da
+  84:[mod] [LOADFIRST] AT_LOAD saved=SMR_CommunityFixPackTestKit,SMR_TrainHubDev_20260918,SMR_CommunityFixPack,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923
+  94:[mod] [CommunityFixPack] LoadFirst: moved to the front of the saved mod order via startup (was 3 of 5): SMR_CommunityFixPackTestKit, SMR_TrainHubDev_20260918, SMR_CommunityFixPack, SMR_CommunityOptInPack, SMR_RailShaftDe
+  95:[mod] [CommunityFixPack] LoadFirst: applied
+  216:[mod] Loaded mod items for: SMR_CommunityFixPackTestKit, SMR_TrainHubDev_20260918, SMR_CommunityFixPack, SMR_CommunityOptInPack, SMR_RailShaftDev_20260923
+  234:[mod] [LOADFIRST-SYNC] MSG PdxLogin queued=1
+  245:[mod] [CommunityFixPack] LoadFirst: player chose Later
+  331:[mod] [LOADFIRST] PRESS1 saved=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_TrainHubDev_20260918,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923
+  333:[mod] [LOADFIRST] PRESS1 option LoadFirst=true (nil on a build without the option)
+  334:[mod] [LOADFIRST] PRESS1 fix LoadFirst status=active detail=moved to the front of the saved mod order (was 3 of 5); applies at the next game start
+  337:[mod] [LOADFIRST] PRESS1 LoadFirst promoted=3/5 pending_notice=false
+  339:[mod] [LOADFIRST-SYNC] PRESS1 VERDICT verdict=EMPTY-UNVERIFIED sync_success=UNVERIFIED attempts=1 root=1 root_started=true root_finished=true children=0 children_started=0 children_finished=0 clears=0 queued=0 installed=
+  340:[mod] [LOADFIRST-SYNC] PRESS1 ORDER saved=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_TrainHubDev_20260918,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923
+  346:Stopping the game threads from the Lua side with exit code 0.
+LOG S2_Mars.exe-20260926-12.44.49-6aad2d75.log lines=480 LUA_ERROR=0 sha256=d0e2879d99ecf774f45d73fddfa14254970ca5f900c2bf1d4e78eeb6184f4ead
+  70:[mod] [CommunityFixPack] LoadFirst: already first of 5 (SMR_CommunityFixPack, SMR_CommunityFixPackTestKit, SMR_TrainHubDev_20260918, SMR_CommunityOptInPack, SMR_RailShaftDev_20260923); nothing written
+  71:[mod] [CommunityFixPack] LoadFirst: applied
+  134:[mod] [LOADFIRST] AT_LOAD saved=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_TrainHubDev_20260918,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923
+  181:[mod] Loaded mod items for: SMR_CommunityFixPack, SMR_CommunityFixPackTestKit, SMR_TrainHubDev_20260918, SMR_CommunityOptInPack, SMR_RailShaftDev_20260923
+  201:[mod] [LOADFIRST-SYNC] MSG PdxLogin queued=1
+  294:[mod] [LOADFIRST] PRESS1 saved=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_TrainHubDev_20260918,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923
+  296:[mod] [LOADFIRST] PRESS1 option LoadFirst=true (nil on a build without the option)
+  297:[mod] [LOADFIRST] PRESS1 fix LoadFirst status=active detail=first in the list the game loads (5 mods); nothing written
+  300:[mod] [LOADFIRST] PRESS1 LoadFirst promoted=no pending_notice=nil
+  302:[mod] [LOADFIRST-SYNC] PRESS1 VERDICT verdict=EMPTY-UNVERIFIED sync_success=UNVERIFIED attempts=1 root=1 root_started=true root_finished=true children=0 children_started=0 children_finished=0 clears=0 queued=0 installed=
+  303:[mod] [LOADFIRST-SYNC] PRESS1 ORDER saved=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_TrainHubDev_20260918,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923
+  336:[mod] [LOADFIRST] AT_LOAD saved=SMR_CommunityFixPackTestKit,SMR_TrainHubDev_20260918,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923
+  358:[mod] Loaded mod items for: SMR_CommunityFixPackTestKit, SMR_TrainHubDev_20260918, SMR_CommunityOptInPack, SMR_RailShaftDev_20260923
+  378:[mod] [LOADFIRST] AT_LOAD saved=SMR_CommunityFixPackTestKit,SMR_TrainHubDev_20260918,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923,SMR_CommunityFixPack
+  393:[mod] [CommunityFixPack] LoadFirst: moved to the front of the saved mod order via startup (was 5 of 5): SMR_CommunityFixPackTestKit, SMR_TrainHubDev_20260918, SMR_CommunityOptInPack, SMR_RailShaftDev_20260923, SMR_Commun
+  394:[mod] [CommunityFixPack] LoadFirst: applied
+  453:[mod] Loaded mod items for: SMR_CommunityFixPackTestKit, SMR_TrainHubDev_20260918, SMR_CommunityOptInPack, SMR_RailShaftDev_20260923, SMR_CommunityFixPack
+  461:[mod] [CommunityFixPack] LoadFirst: player chose Restart now
+  467:Stopping the game threads from the Lua side with exit code 0.
+LOG S3_Mars.exe-20260926-12.47.16-6aad2d75.log lines=362 LUA_ERROR=0 sha256=c1589fd88a392ddb44fc2bafa1472b70834830f01540279713442d3d769cdf24
+  71:[mod] [CommunityFixPack] LoadFirst: already first of 5 (SMR_CommunityFixPack, SMR_CommunityFixPackTestKit, SMR_TrainHubDev_20260918, SMR_CommunityOptInPack, SMR_RailShaftDev_20260923); nothing written
+  72:[mod] [CommunityFixPack] LoadFirst: applied
+  134:[mod] [LOADFIRST] AT_LOAD saved=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_TrainHubDev_20260918,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923
+  181:[mod] Loaded mod items for: SMR_CommunityFixPack, SMR_CommunityFixPackTestKit, SMR_TrainHubDev_20260918, SMR_CommunityOptInPack, SMR_RailShaftDev_20260923
+  200:[mod] [LOADFIRST-SYNC] MSG PdxLogin queued=1
+  334:[mod] [LOADFIRST] PRESS1 saved=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_TrainHubDev_20260918,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923
+  336:[mod] [LOADFIRST] PRESS1 option LoadFirst=true (nil on a build without the option)
+  337:[mod] [LOADFIRST] PRESS1 fix LoadFirst status=active detail=first in the list the game loads (5 mods); nothing written
+  340:[mod] [LOADFIRST] PRESS1 LoadFirst promoted=no pending_notice=nil
+  342:[mod] [LOADFIRST-SYNC] PRESS1 VERDICT verdict=EMPTY-UNVERIFIED sync_success=UNVERIFIED attempts=1 root=1 root_started=true root_finished=true children=0 children_started=0 children_finished=0 clears=0 queued=0 installed=
+  343:[mod] [LOADFIRST-SYNC] PRESS1 ORDER saved=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_TrainHubDev_20260918,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923
+  349:Stopping the game threads from the Lua side with exit code 0.
+LOG S4_Mars.exe-20260926-12.47.59-6aad2d75.log lines=511 LUA_ERROR=0 sha256=484931f3713b8298c174224d82be0428dc24047e06f73cd3aed48b851dc8ec43
+  71:[mod] [CommunityFixPack] LoadFirst: already first of 5 (SMR_CommunityFixPack, SMR_CommunityFixPackTestKit, SMR_TrainHubDev_20260918, SMR_CommunityOptInPack, SMR_RailShaftDev_20260923); nothing written
+  72:[mod] [CommunityFixPack] LoadFirst: applied
+  133:[mod] [LOADFIRST] AT_LOAD saved=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_TrainHubDev_20260918,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923
+  180:[mod] Loaded mod items for: SMR_CommunityFixPack, SMR_CommunityFixPackTestKit, SMR_TrainHubDev_20260918, SMR_CommunityOptInPack, SMR_RailShaftDev_20260923
+  200:[mod] [LOADFIRST-SYNC] MSG PdxLogin queued=1
+  211:[mod] [CommunityFixPack] LoadFirst: deactivated via Mod Options (installed hooks now pass through)
+  230:[mod] [LOADFIRST] AT_LOAD saved=SMR_CommunityFixPackTestKit,SMR_TrainHubDev_20260918,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923
+  252:[mod] Loaded mod items for: SMR_CommunityFixPackTestKit, SMR_TrainHubDev_20260918, SMR_CommunityOptInPack, SMR_RailShaftDev_20260923
+  367:[mod] [LOADFIRST] PRESS1 saved=SMR_CommunityFixPackTestKit,SMR_TrainHubDev_20260918,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923
+  370:[mod] [LOADFIRST] PRESS1 option LoadFirst=nil (nil on a build without the option)
+  371:[mod] [LOADFIRST] PRESS1 fix LoadFirst status=inactive detail=turned off in Mod Options
+  374:[mod] [LOADFIRST] PRESS1 LoadFirst promoted=no pending_notice=nil
+  376:[mod] [LOADFIRST-SYNC] PRESS1 VERDICT verdict=NO-ATTEMPT sync_success=UNVERIFIED attempts=0 root=none root_started=nil root_finished=nil children=0 children_started=0 children_finished=0 clears=0 queued=0 installed=true
+  377:[mod] [LOADFIRST-SYNC] PRESS1 ORDER saved=SMR_CommunityFixPackTestKit,SMR_TrainHubDev_20260918,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923
+  408:[mod] [LOADFIRST] AT_LOAD saved=SMR_CommunityFixPackTestKit,SMR_TrainHubDev_20260918,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923,SMR_CommunityFixPack
+  422:[mod] [CommunityFixPack] LoadFirst: inactive (turned off in Mod Options)
+  482:[mod] Loaded mod items for: SMR_CommunityFixPackTestKit, SMR_TrainHubDev_20260918, SMR_CommunityOptInPack, SMR_RailShaftDev_20260923, SMR_CommunityFixPack
+  490:[mod] [CommunityFixPack] LoadFirst: moved to the front of the saved mod order via Mod Options (was 5 of 5): SMR_CommunityFixPackTestKit, SMR_TrainHubDev_20260918, SMR_CommunityOptInPack, SMR_RailShaftDev_20260923, SMR_Co
+  491:[mod] [CommunityFixPack] LoadFirst: applied
+  492:[mod] [CommunityFixPack] LoadFirst: already first of 5 (SMR_CommunityFixPack, SMR_CommunityFixPackTestKit, SMR_TrainHubDev_20260918, SMR_CommunityOptInPack, SMR_RailShaftDev_20260923); nothing written
+  494:[mod] [CommunityFixPack] LoadFirst: player chose Later
+  498:Stopping the game threads from the Lua side with exit code 0.
+LOG S5_Mars.exe-20260926-12.52.54-6aad2d75.log lines=552 LUA_ERROR=0 sha256=d035addfbd5c365b0def2ef30be74ca7ead024cf29a1529a77d45fbf6c482b51
+  72:[mod] [CommunityFixPack] LoadFirst: already first of 5 (SMR_CommunityFixPack, SMR_CommunityFixPackTestKit, SMR_TrainHubDev_20260918, SMR_CommunityOptInPack, SMR_RailShaftDev_20260923); nothing written
+  73:[mod] [CommunityFixPack] LoadFirst: applied
+  134:[mod] [LOADFIRST] AT_LOAD saved=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_TrainHubDev_20260918,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923
+  181:[mod] Loaded mod items for: SMR_CommunityFixPack, SMR_CommunityFixPackTestKit, SMR_TrainHubDev_20260918, SMR_CommunityOptInPack, SMR_RailShaftDev_20260923
+  200:[mod] [LOADFIRST-SYNC] MSG PdxLogin queued=1
+  331:[mod] [LOADFIRST] PRESS1 saved=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_TrainHubDev_20260918,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923
+  333:[mod] [LOADFIRST] PRESS1 option LoadFirst=true (nil on a build without the option)
+  334:[mod] [LOADFIRST] PRESS1 fix LoadFirst status=active detail=first in the list the game loads (5 mods); nothing written
+  337:[mod] [LOADFIRST] PRESS1 LoadFirst promoted=no pending_notice=nil
+  339:[mod] [LOADFIRST-SYNC] PRESS1 VERDICT verdict=EMPTY-UNVERIFIED sync_success=UNVERIFIED attempts=1 root=1 root_started=true root_finished=true children=0 children_started=0 children_finished=0 clears=0 queued=0 installed=
+  340:[mod] [LOADFIRST-SYNC] PRESS1 ORDER saved=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_TrainHubDev_20260918,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923
+  355:[mod] [LOADFIRST-SYNC] CLEAR clears=1 cancelled_unstarted=0 queued_before=0
+  356:[mod] [LOADFIRST-SYNC] MSG PdxLogout queued=0
+  397:[mod] [LOADFIRST-SYNC] MSG PdxLogin queued=1
+  524:[mod] [LOADFIRST] PRESS2 saved=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_TrainHubDev_20260918,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923
+  526:[mod] [LOADFIRST] PRESS2 option LoadFirst=true (nil on a build without the option)
+  527:[mod] [LOADFIRST] PRESS2 fix LoadFirst status=active detail=first in the list the game loads (5 mods); nothing written
+  530:[mod] [LOADFIRST] PRESS2 LoadFirst promoted=no pending_notice=nil
+  532:[mod] [LOADFIRST-SYNC] PRESS2 VERDICT verdict=EMPTY-UNVERIFIED sync_success=UNVERIFIED attempts=2 root=2 root_started=true root_finished=true children=0 children_started=0 children_finished=0 clears=1 queued=0 installed=
+  533:[mod] [LOADFIRST-SYNC] PRESS2 ORDER saved=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_TrainHubDev_20260918,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923
+  539:Stopping the game threads from the Lua side with exit code 0.
+LOG S6_Mars.exe-20260926-12.57.24-6aad2d75.log lines=357 LUA_ERROR=0 sha256=d4aaf96347047d9d52ed42eb04be968a6636d91cc6da6d1892c4494a9488bc1f
+  71:[mod] [CommunityFixPack] LoadFirst: already first of 5 (SMR_CommunityFixPack, SMR_CommunityFixPackTestKit, SMR_TrainHubDev_20260918, SMR_CommunityOptInPack, SMR_RailShaftDev_20260923); nothing written
+  72:[mod] [CommunityFixPack] LoadFirst: applied
+  133:[mod] [LOADFIRST] AT_LOAD saved=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_TrainHubDev_20260918,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923
+  179:[mod] Loaded mod items for: SMR_CommunityFixPack, SMR_CommunityFixPackTestKit, SMR_TrainHubDev_20260918, SMR_CommunityOptInPack, SMR_RailShaftDev_20260923
+  197:[mod] [LOADFIRST-SYNC] MSG PdxLogin queued=1
+  329:[mod] [LOADFIRST] PRESS1 saved=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_TrainHubDev_20260918,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923
+  331:[mod] [LOADFIRST] PRESS1 option LoadFirst=true (nil on a build without the option)
+  332:[mod] [LOADFIRST] PRESS1 fix LoadFirst status=active detail=first in the list the game loads (5 mods); nothing written
+  335:[mod] [LOADFIRST] PRESS1 LoadFirst promoted=no pending_notice=nil
+  337:[mod] [LOADFIRST-SYNC] PRESS1 VERDICT verdict=EMPTY-UNVERIFIED sync_success=UNVERIFIED attempts=1 root=1 root_started=true root_finished=true children=0 children_started=0 children_finished=0 clears=0 queued=0 installed=
+  338:[mod] [LOADFIRST-SYNC] PRESS1 ORDER saved=SMR_CommunityFixPack,SMR_CommunityFixPackTestKit,SMR_TrainHubDev_20260918,SMR_CommunityOptInPack,SMR_RailShaftDev_20260923
+  344:Stopping the game threads from the Lua side with exit code 0.
+LOG_TOTAL logs=8 LUA_ERROR_sum=0 (filter 'LUA ERROR' per log)
+
+ARCHIVE sha256 (LF bytes) of non-log files:
+  e80ad70e014169963133c605a7142ff43a69dc8e80108daa9aadcb656fb4eedc  98_LoadFirstOrderSlot.lua.txt
+  f9cb73b6eaec181d3babadae82fce2fb61df3ce0947656fbdc10b5652d58fc87  leg_e.ps1
+  caba91db40840d0b330d196d36961ba796dc807a9725fb45507df8ef9e8d38ab  leg_e_part2.ps1
+  cf65a7d7655f0680b8ead03a667a10421bd9759b14be77402859ccc92ec806d7  load-first-sitting.json

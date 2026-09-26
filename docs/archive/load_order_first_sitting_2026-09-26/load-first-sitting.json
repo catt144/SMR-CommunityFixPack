@@ -1,0 +1,19 @@
+{
+  "leg": "load-first-sitting",
+  "_what": "Attended LoadFirst (option B) sitting instrument, 2026-09-26: the 1325db5 sync observer in MODE sitting (parked copy of the branch blob, unchanged) plus a library payload that binds the SMRTK scratch slot 'Order + Sync read' (saved order, running order, pack statuses, option value, LoadFirst state, then the observer's report). Neither payload quits or writes. Parked in the seat's scratch folder; archived with the sitting records.",
+  "kit": "B:\\Dev\\SMR\\SMR-BugFixPack-TestKit",
+  "park": "C:\\Users\\stkot\\AppData\\Local\\Temp\\claude\\b--Dev-SMR-SMR-BugFixPack\\5b51c8ed-6fde-40ba-b43c-174519e23981\\scratchpad\\audit4\\sitting_park",
+  "stripPattern": "Code/98_LoadFirst",
+  "anchorAfter": "99_FixtureCarry.lua",
+  "bootSymbol": "LoadFirstSync.Boot",
+  "symbolNamespace": "LoadFirstSync",
+  "permanent": ["Code/00_TestCore.lua"],
+  "mustNotBeListed": ["Code/96_AutoRunFlag.lua", "Code/97_ForceInactive.lua", "Code/98_EnablePathLeg.lua", "Code/98_LoadFirstRead.lua", "Code/98_LoadFirstSet.lua", "Code/98_LoadFirstPack.lua"],
+  "mustNotBeListedWhy": "The autorun would start a colony and race the menu; forced-inactive changes the statuses the slot reads; the read, set and pack payloads quit at the menu and would end the owner's sitting.",
+  "bannedPatterns": ["SaveGame\\s*\\(", "LoadGame\\s*\\(", "TurnModO", "WriteModPersistentData"],
+  "requiredPresent": ["g_PopsDownloadModsQueue", "SyncUpdatePdxMod", "PushTask", "MODE = \"sitting\"", "Order + Sync read", "GetModsEnabledByUser"],
+  "payloads": [
+    {"src": "98_LoadFirstSync.lua.txt", "dst": "98_LoadFirstSync.lua", "selfDrives": true},
+    {"src": "98_LoadFirstOrderSlot.lua.txt", "dst": "98_LoadFirstOrderSlot.lua", "selfDrives": false}
+  ]
+}

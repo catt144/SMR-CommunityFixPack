@@ -23,20 +23,20 @@ player surface bumps it by one on release.
 
 ### Pending — LoadFirst: the pack moves itself to the front of the mod load order (2026-09-25)
 
-**HOLD: SHIP-TO-SITTING for `1325db5` with two preconditions, branch `load-first`, NOT
-merged, sitting not yet approved.** The latest audit is
-[LOAD_ORDER_FIRST_BUILD_2026-09-25.md §17](../../reports/LOAD_ORDER_FIRST_BUILD_2026-09-25.md#17--audit-of-the-role-swap-repair--ship-to-sitting-with-two-preconditions-2026-09-26).
-§15's false-success paths are closed; leg D is a diagnostic with no remote-sync PASS (scope
-revision accepted under the retained FIXED list; the owner note is in §17). Both
-preconditions are met (§18: the L13 rehearsal on `main`, and the owner-session log showed no
-promotion); the sitting proposal awaits the owner's approval. R1–R4, R6 and R5-E retain
-their accepted limits. The production
-module is unchanged since `8ea5449`; the harness holds 92/92 with 20 mutants.
-Ships only after the owner's sitting approval and the sitting itself. The consumed brief's
+**SITTING DONE: `load-first` at `1325db5`, owner-watched sitting 2026-09-26, every leg as
+predicted; NOT merged, NOT uploaded.** The record is
+[LOAD_ORDER_FIRST_BUILD_2026-09-25.md §19](../../reports/LOAD_ORDER_FIRST_BUILD_2026-09-25.md#19--the-attended-sitting--every-leg-as-predicted-order-restored-2026-09-26)
+(audit verdict §17, preparation §18). Legs A–D by the owner (notice once, hot enable with
+Restart now, opt-out and opt-in, diagnostic Paradox log-out/log-in with the order untouched),
+E by the seat (order restored, read back on `main`). The production module is unchanged
+since `8ea5449`. Next: merge `load-first` into `main` once the main tree's other lane has
+committed its C119 work, then the upload on the owner's go. Release note: Paradox-installed
+players see the notice again after each update the sync applies (§17).
+Ships only after the merge and the owner's go for the upload. The consumed brief's
 authority and unfinished requirements are retained in that report.
 The normal promotion/restart/Passage Network evidence remains valid on this rig; the ordinary
 desk harness and its behavioral controls pass; the remaining failures concern the sitting plan.
-Not owner-watched.
+Owner-watched sitting 2026-09-26 (§19).
 Owner's choice of option B, 2026-09-25.
 
 Player surface, three parts, none of them a fix-list row unless the release seat decides so:
