@@ -21,6 +21,19 @@ player surface bumps it by one on release.
 
 ## Pending — goes out with the next upload
 
+### Pending — C119: clear stale power cells when a colony loads (2026-09-26)
+
+**HOLD: candidate build, desk checked; attended sitting and the Excavator/Open
+Farm shape reading remain.** [C119](../../bugs/C119.md) records the measured
+field save, the owner-ruled load-only scope, the desk controls and the sitting
+plan. No player-facing result has been witnessed with this module yet.
+
+Player surface for the next release: a colony whose old power-connection cells
+outlived their objects can use the affected area again after loading. Cables and
+powered buildings placed there should connect normally. The repair touches
+electricity only and runs at load; the source of the first stale cell remains
+unknown.
+
 ### Pending — LoadFirst: the pack moves itself to the front of the mod load order (2026-09-25)
 
 **SITTING DONE: `load-first` at `1325db5`, owner-watched sitting 2026-09-26, every leg as

@@ -224,6 +224,10 @@ return {
 		'CodeFileName', "Code/Fix_WildfireCureVisit.lua",
 	}),
 	PlaceObj('ModItemCode', {
+		'name', "Fix_GhostPowerCells",
+		'CodeFileName', "Code/Fix_GhostPowerCells.lua",
+	}),
+	PlaceObj('ModItemCode', {
 		'name', "90_SaveSanitizer",
 		'CodeFileName', "Code/90_SaveSanitizer.lua",
 	}),

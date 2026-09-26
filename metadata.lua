@@ -349,6 +349,7 @@ return PlaceObj('ModDef', {
 		"Code/Fix_RoverSubclassManifest.lua",
 		"Code/Fix_DryFarmingFarms.lua",
 		"Code/Fix_WildfireCureVisit.lua",
+		"Code/Fix_GhostPowerCells.lua",
 		"Code/90_SaveSanitizer.lua",
 	},
 	-- ⭐⭐ WRITTEN BY THE UPLOADS, 2026-08-20 — THESE ARE HOW EVERY FUTURE UPDATE
