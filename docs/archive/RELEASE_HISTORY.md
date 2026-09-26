@@ -641,3 +641,81 @@ F127 respecifies the existing C83 row; it is not a new public row. Change-note l
 Developer detail: the C83 reroute in `Fix_ArrivalDeaths.lua` called `ChooseDome` for a new
 destination but left `reserved_residence` pointing at the rejected dome. It now cancels that
 booking before reserving in the new destination, so a full habitat cannot keep an orphaned slot.
+
+### Released in v17 (2026-09-26) — C119 and the pack loads first
+
+- **Card:** count word **Forty-three → Forty-four** (site `^??? ` rows = 44, section tally
+  2+18+4+5+5+5+3+2 sums); C119 is one new row in *Buildings & economy*; LoadFirst has no row (not a
+  repair) and gets one HOW IT WORKS bullet in all five card copies; headliners unchanged at nine;
+  judgment calls unchanged at four. The site's "no options page" note, load-order answers and the
+  modders' veto route were rewritten for LoadFirst, as was this repo's README. Words commit
+  `2d94f13`, STATE marker `5cc7760`, site commit `8f13b16`.
+- **Shipped change note is the owner's box text, not the tree draft.** The LoadFirst line's last
+  sentence was split: "It tells you when a restart is needed." / "And you can turn this off under
+  Options > Mod Options > Relaunched Fix Pack, if you need to." Steam's *"Update: Sep 26 @ 4:04pm"*
+  matches the writeback's `last_changes` exactly; the tree keeps it as posted.
+- **Cleared on the owner's word ("Done", 2026-09-26) plus evidence:** writeback `version` 21 →
+  **24** (three saves), `pdx_version` "15" → **"16"**, `code_hash` and `saved` rewritten; comments
+  stripped from both files (0 left in each) and restored from `5cc7760` with those five values
+  (including `last_changes`) kept; `items.lua` had no changed value and is restored verbatim. Steam
+  read back 2026-09-26: body "Forty-four repairs" 1 hit, "Forty-three repairs" **0**; the bold
+  "It loads first." label of the BBCode block reads 0 hits, so the Steam styling pass was not seen.
+- **LoadFirst canary (§20 of the build report):** writeback 0 (control 1), boot log 0 (null by
+  design). ⛔ The Workshop-package part is **owed**: the downloaded package still predated the upload.
+- ⛔ **Not verified at close, and not claimed:** the Paradox body was not read back (the page is
+  JavaScript-only).
+- ⛔ **THE SITE IS NOT PUBLISHED.** `8f13b16` was unpushed at close, so no publish run could carry
+  it; it needs a push and then the owner's **Publish docs site** run (`UPLOAD_WORKFLOW.md` §4).
+  Until then the store card says forty-four repairs while the site lists forty-three.
+
+### Pending — C119: clear stale power cells when a colony loads (2026-09-26)
+
+**READY for the next upload: the attended repair and controls passed, including
+a powered cable run through the repaired footprint with normal visuals. A
+repaired save also loaded after the pack was disabled and the game restarted.**
+[C119](../../bugs/C119.md) records the retail logs and the owner-ruled load-only
+scope. The release seat still performs the normal upload gates.
+
+Player surface for the next release: a colony whose old power-connection cells
+outlived their objects can use the affected area again after loading. Cables and
+powered buildings placed there should connect normally. The repair touches
+electricity only and runs at load; the source of the first stale cell remains
+unknown.
+
+### Pending — LoadFirst: the pack moves itself to the front of the mod load order (2026-09-25)
+
+**MERGED to `main` at `fa0893a` (2026-09-26) after the owner-watched sitting; NOT uploaded.** The record is
+[LOAD_ORDER_FIRST_BUILD_2026-09-25.md §19](../../reports/LOAD_ORDER_FIRST_BUILD_2026-09-25.md#19--the-attended-sitting--every-leg-as-predicted-order-restored-2026-09-26)
+(audit verdict §17, preparation §18). Legs A–D by the owner (notice once, hot enable with
+Restart now, opt-out and opt-in, diagnostic Paradox log-out/log-in with the order untouched),
+E by the seat (order restored, read back on `main`). The production module is unchanged
+since `8ea5449`. Next: the upload on the owner's go. Release note: Paradox-installed
+players see the notice again after each update the sync applies (§17).
+Ships on the owner's go for the upload. The consumed brief's
+authority and unfinished requirements are retained in that report.
+The normal promotion/restart/Passage Network evidence remains valid on this rig; the ordinary
+desk harness and its behavioral controls pass; the remaining failures concern the sitting plan.
+Owner-watched sitting 2026-09-26 (§19).
+Owner's choice of option B, 2026-09-25.
+
+Player surface, three parts, none of them a fix-list row unless the release seat decides so:
+
+> The pack now moves itself to the front of your mod load order the first time it starts, so its
+> repairs are applied before other mods change the same parts of the game. Your other mods keep
+> their order. It tells you when a restart is needed, and you can turn this off under Options >
+> Mod Options > Relaunched Fix Pack.
+
+- **The pack lists on the Mod Options page again**, with one toggle, "Load this pack first"
+  (default on). The 2026-08-12 "no options" shape is reversed for this one control.
+- **The C canary in `metadata.lua`** (`SMRFP-LOADORDER-CANARY-2026-09-25-b7e1`, inert hand-written
+  code in option C's shape). ⛔ The post-upload seat runs its three-part check BEFORE restoring the
+  comments (`support/POST_UPLOAD_CLOSE.md` §1); the check and the per-portal prediction are in the
+  report, "The C canary", qualified by §§11–13 R6. Record the portal and whether a save preceded
+  packing; a stripped package decides only that tested path.
+
+Build detail at `8ea5449`: `Code/01_LoadFirst.lua`, registered `LoadFirst` (`optional = true`); rebuilds
+`AccountStorage.LoadMods` through `TurnModOff`/`TurnModOn` with every other mod's relative order
+kept, requests the account save through a changed `WriteModPersistentData`, and honours
+`SMRFixPack_Disabled["LoadFirst"]`. Each promotion schedules its notice. A full foreign slot
+refuses the write without data loss or a promotion save request; persistence then depends on
+a later game save. The already-first account-LoadAllMods path deliberately does not probe.

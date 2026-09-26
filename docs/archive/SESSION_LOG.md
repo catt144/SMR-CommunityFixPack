@@ -8,6 +8,27 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-26 — v17 released: C119 lands and the pack loads first, count Forty-three → Forty-four
+
+Ran `release_prompt.md` from a bare path invocation — prepare, hold, owner upload, close. The v16
+close was already done (comments present, version 21, newest Steam update Sep 24). The batch was the
+outbox's two Pending entries: C119 as one new fix-list row in *Buildings & economy*, and LoadFirst
+with no row (not a repair) but one HOW IT WORKS card bullet. Count re-derived from the site file: 44
+rows, sections 2+18+4+5+5+5+3+2; judgment calls four; headliners left at nine. LoadFirst falsified
+the site's "no options page" note, its load-order answers and the modders' veto route (a veto needs
+the player to turn "Load this pack first" off), and the README's matching passages; all rewritten.
+Words `2d94f13`, STATE marker `5cc7760`, site `8f13b16`.
+
+Close-out: writeback `version` 21 → **24**, `pdx_version` "15" → **"16"**, `saved` and `code_hash`
+rewritten, `last_changes` holding the owner's box edit; comments stripped from both shipped files (0
+left in each) and restored from `5cc7760` with those five values carried; the diff against that
+commit is those five values and one comment recording the box edit. Steam read back: body
+"Forty-four repairs" 1 hit, "Forty-three repairs" 0; newest change note *"Update: Sep 26 @ 4:04pm"*,
+matching the writeback. Canary parts 2 and 3 read 0; part 1 is owed on the not-yet-downloaded
+Workshop package (build report §20). ⛔ Paradox body not read back. ⛔ Site not published: `8f13b16`
+was unpushed at close.
+---
+
 ## 2026-09-24 — v16 released: the hub set lands, count Thirty-eight → Forty-three
 
 Ran `release_prompt.md` from a bare path invocation — prepare, hold, owner upload, close. The v15

@@ -16,9 +16,9 @@ the explicit scope revision, leg D as a diagnostic with no remote-sync PASS, is 
 under the retained FIXED list. Both preconditions are met (§18). **The attended sitting ran
 on 2026-09-26, owner-watched, every leg as predicted, the order restored and read back on
 `main` (§19).** R1–R4, R6 and R5-E retain their prior acceptance and limits; the production
-module is unchanged since `8ea5449`. **Merged to `main` at `fa0893a`, 2026-09-26.** Remaining:
-the upload on the owner's go, and the post-upload canary checks. Sections 0–18
-retain the build, audit, repair and preparation history.
+module is unchanged since `8ea5449`. **Merged to `main` at `fa0893a`, 2026-09-26.** **Uploaded as v17,
+2026-09-26 (§20).** Remaining: canary part 1 on the downloaded v17 Workshop package (§20).
+Sections 0–18 retain the build, audit, repair and preparation history.
 The retained FIXED list and owner authority remain in §11.
 
 ## 0 · Read this first — what the owner sees that the brief did not say
@@ -1520,3 +1520,25 @@ C119 work (a merge now would touch `items.lua` and `metadata.lua` under their un
 edits); then the upload on the owner's go, and the post-upload canary checks of §6 and the
 release outbox. Paradox-installed players will see the notice again after each update the
 sync applies (§17); the release note should say so.
+
+## 20 · Uploaded as v17 — canary parts 2 and 3 read, part 1 owed, 2026-09-26
+
+The owner uploaded v17 (Paradox, then Steam; owner's word "Done", 2026-09-26). Steam's newest
+change note reads *"Update: Sep 26 @ 4:04pm"* with the pack's LoadFirst line. Save path: the
+writeback shows `version` 21 → 24 (three saves) and `pdx_version` "15" → "16", with 0 comment
+lines in `metadata.lua` and `items.lua`, so a save preceded packing.
+
+§6's check, run on the stripped tree before the comments were restored:
+
+| Part | Command | Result | Expected |
+|---|---|---|---|
+| 2, local writeback | `Select-String -Path metadata.lua -Pattern 'SMRFP-LOADORDER-CANARY'` count; control `'id', "SMR_CommunityFixPack"` count | **0**; control **1** | 0 / 1 |
+| 3, boot log | same pattern on `Mars.exe-20260926-19.00.47-6aad2d75.log`; control `\[CommunityFixPack\]` count | **0**; control **53** (LoadFirst "already first of 5 … nothing written", line 72) | 0, null by design |
+| 1, Workshop package | not run | `A:\SteamLibrary\steamapps\workshop\content\3215050\3787202810\ModContent.fpk` is dated 2026-09-25 13:34, before the upload, so it is still the v16 package | 0 / 1 |
+
+**Owed: part 1**, once Steam has downloaded v17 (the file's date moves past 2026-09-26 16:04).
+`tools/flpk_extract.py` takes a folder of mod folders, not the `.fpk` itself:
+`python tools/flpk_extract.py A:\SteamLibrary\steamapps\workshop\content\3215050 <outdir>`,
+then read `<outdir>\3787202810\metadata.lua`. A "Forty-four repairs" hit in that file proves it
+is the v17 package. Per §6, 0 with the control at 1 closes C for the Steam path only. The restore
+brought the canary back from git; that does not affect part 1, which reads the downloaded package.

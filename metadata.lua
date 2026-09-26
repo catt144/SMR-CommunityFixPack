@@ -187,7 +187,9 @@ local def = PlaceObj('ModDef', {
 	-- line describes the pack's own move and the opt-out, which is not load-order advice
 	-- to the player (FIX_POLICY §8), and states the Paradox re-notice the build report
 	-- (§17) says the note must carry.
-	'last_changes', "One repair added, and the pack now puts itself first in the mod load order.\n\n-In a colony where cables and buildings in one area would not get power, and every failed attempt made the area bigger even after reloading, loading the colony now clears the leftover power connections behind it, so the area can be powered again. Seen working in a running game.\n-The pack now moves itself to the front of your mod load order, so its repairs are applied before other mods change the same parts of the game. Your other mods keep their order. It tells you when a restart is needed, and you can turn this off under Options > Mod Options > Relaunched Fix Pack. If you installed from Paradox Mods, you will see this message again after each update of the pack.\n\nThe fix list goes from forty-three to forty-four.",
+	-- SHIPPED 2026-09-26: the owner's box text splits the opt-out sentence ("It tells you
+	-- when a restart is needed." / "And you can turn this off ..., if you need to."); kept as posted.
+	'last_changes', "One repair added, and the pack now puts itself first in the mod load order.\n\n-In a colony where cables and buildings in one area would not get power, and every failed attempt made the area bigger even after reloading, loading the colony now clears the leftover power connections behind it, so the area can be powered again. Seen working in a running game.\n-The pack now moves itself to the front of your mod load order, so its repairs are applied before other mods change the same parts of the game. Your other mods keep their order. It tells you when a restart is needed.\nAnd you can turn this off under Options > Mod Options > Relaunched Fix Pack, if you need to. If you installed from Paradox Mods, you will see this message again after each update of the pack.\n\nThe fix list goes from forty-three to forty-four.",
 	-- the packer includes EVERYTHING recursively minus this list (Mod.lua:250-256,
 	-- GedModEditor.lua:716-732) — without the extra patterns docs/, README.md,
 	-- .gitignore and .claude/ all ship inside the .hpk. LICENSE ships on purpose.
@@ -290,7 +292,7 @@ local def = PlaceObj('ModDef', {
 	-- the forced save and restored in the close-out, before any other commit. The shipped
 	-- `last_changes` is the owner's box text as uploaded; it differs from the tree's draft and is kept.
 	'version_major', 1,
-	'version', 21,
+	'version', 24,
 	'lua_revision', 350453,
 	'saved_with_revision', 405907,
 	-- saves made with the pack load fine without it (FIX_POLICY §3), so don't
@@ -388,8 +390,8 @@ local def = PlaceObj('ModDef', {
 	-- after a sitting is the EXPECTED state, not a mistake by whoever worked last.
 	-- ⚠️ `saved_with_revision` now sits further up, beside `lua_revision`, because
 	-- `SaveDef` writes the fields in its own order; it is the same editor bookkeeping.
-	'saved', 1790306966,
-	'code_hash', 7113849772352010722,
+	'saved', 1790463867,
+	'code_hash', -6374071331064238230,
 	-- ⭐ ADDED 2026-09-10 (owner: the card should point players at pictures of the two
 	-- skins) — the store GALLERY. Both uploaders read screenshot1..5: the Mod Editor copies
 	-- each to TmpData/ModUpload/Screenshots as `ModScreenshot_<name>` (GedModEditor.lua:
@@ -405,7 +407,7 @@ local def = PlaceObj('ModDef', {
 	'screenshot2', "Mod/SMR_CommunityFixPack/store_screenshots/2_rare_metals_hammer_skin.jpg",
 	'screenshot3', "Mod/SMR_CommunityFixPack/store_screenshots/3_moxie_skins.jpg",
 	'pdx_id', 156049,
-	'pdx_version', "15",
+	'pdx_version', "16",
 	'steam_id', "3787202810",
 	'TagGameplay', true,
 })
