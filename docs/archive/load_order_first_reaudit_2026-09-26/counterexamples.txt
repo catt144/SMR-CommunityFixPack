@@ -1,0 +1,280 @@
+DEMAND {"holds": true, "name": "restoration control: OFF fresh readback retains captured order", "observed": {"order": "Kit,TrainHub,SMR_CommunityFixPack,OptIn,RailShaft", "saves": 0}}
+DEMAND {"holds": false, "name": "section 12 E: restoring ON retains captured order until exit", "observed": {"actual": "SMR_CommunityFixPack,Kit,TrainHub,OptIn,RailShaft", "expected": "Kit,TrainHub,SMR_CommunityFixPack,OptIn,RailShaft", "pending": true, "saves": 1}}
+DEMAND {"holds": true, "name": "restoration control: ON invokes repaired notice", "observed": {"actual": "SMR_CommunityFixPack,Kit,TrainHub,OptIn,RailShaft", "questions": 1}}
+SOURCE_BODY {"build": "1.1.1.405907", "file": "B:\\Dev\\SMR\\SMR-Shared\\SMR-SrcArchive\\1.1.1.405907\\Src\\CommonLua\\Libs\\Paradox\\PdxSDK.lua", "method": "__Pop", "first": 894, "last": 898, "sha256": "49a3db75bbf6cc2f5255293ba4b70d14927cdbc6c407add3330ffd22ad924006"}
+SOURCE_BODY {"build": "1.1.1.405907", "file": "B:\\Dev\\SMR\\SMR-Shared\\SMR-SrcArchive\\1.1.1.405907\\Src\\CommonLua\\Libs\\Paradox\\PdxSDK.lua", "method": "__WaitPop", "first": 900, "last": 911, "sha256": "2c804320c7ebd07824aa5c1891a31e1c1722e080944ac7b06ee5977a4a328c8e"}
+SOURCE_BODY {"build": "1.1.1.405907", "file": "B:\\Dev\\SMR\\SMR-Shared\\SMR-SrcArchive\\1.1.1.405907\\Src\\CommonLua\\Libs\\Paradox\\PdxSDK.lua", "method": "WaitDoTask", "first": 913, "last": 920, "sha256": "e22a35b9ca5c3cc799c27d747c3537d5364dbbd30f6e52732de2efa1e2058a56"}
+DEMAND {"holds": false, "name": "section 12 D: zero queue length proves callback completion", "observed": {"done": null, "queued": 0, "started": true, "worker": "suspended"}}
+DEMAND {"holds": true, "name": "queue control: resume permits real completion", "observed": {"done": true, "queued": 0, "worker": "dead"}}
+FINGERPRINT {"build": "1.1.1.405907", "file": "CommonLua/Libs/Paradox/PdxSDK.lua", "sha256": "4b4728af4227dae987ac7d93f238470e229082d28e88fe527800174051fbca08", "manifest": "MATCH"}
+SOURCE CommonLua/Libs/Paradox/PdxSDK.lua 894 923
+894:function PdxTaskQueue:__Pop()
+895:	local task = self[1]
+896:	table.remove(self, 1)
+897:	return task
+898:end
+899:
+900:function PdxTaskQueue:__WaitPop()
+901:	assert(CanYield())
+902:	if #self >= 1 then
+903:		return self:__Pop()
+904:	end
+905:	if not self.waiting_threads then
+906:		self.waiting_threads = {}
+907:	end
+908:	table.insert(self.waiting_threads, CurrentThread())
+909:	WaitWakeup()
+910:	return self:__Pop()
+911:end
+912:
+913:function PdxTaskQueue:WaitDoTask()
+914:	local task = self:__WaitPop()
+915:	local callback = task[1]
+916:	sprocall(callback, select(2, table.unpack(task)))
+917:	if task.id then
+918:		self.tasks[task.id] = nil
+919:	end
+920:end
+921:
+922:function PdxTaskQueue:Clear()
+923:	table.iclear(self)
+FINGERPRINT {"build": "1.1.1.405907", "file": "CommonLua/UI/ModManager.lua", "sha256": "1b3cb3846d58a2263eca9d56c3d7361db821b906ad2453f7fed0b09c41198f45", "manifest": "MATCH"}
+SOURCE CommonLua/UI/ModManager.lua 35 41
+35:function TurnModOn(id)
+36:	table.insert_unique(AccountStorage.LoadMods, id)
+37:end
+38:
+39:function TurnModOff(id)
+40:	table.remove_entry(AccountStorage.LoadMods, id)
+41:end
+SOURCE CommonLua/UI/ModManager.lua 123 166
+123:function ModsUIDialogEnd(dialog)
+124:	local new_mods = AccountStorage.LoadMods or empty_table
+125:	ModsReloadDefs()
+126:	if table.iequal(new_mods, g_InitialMods or empty_table) then
+127:		ModsUIDialogClose(dialog)
+128:		return
+129:	end
+130:	dialog:DeleteThread("warning")
+131:	dialog:CreateThread("warning", function()
+132:		SaveAccountStorage()
+133:		local to_load = table.invert(new_mods)
+134:		local old_mods = table.invert(g_InitialMods)
+135:		for _,mod_id in ipairs(g_InitialMods) do
+136:			if not to_load[mod_id] and old_mods[mod_id] and (not Mods[mod_id] or Mods[mod_id]:ShouldRestartOnUnload()) then
+137:				if not Platform.pc then
+138:					WaitMessage(dialog, 
+139:						T(6899, "Warning"), 
+140:						T(590187590602, "It is highly recommended to restart the game after unloading mods."),
+141:						T(6900, "OK"), 
+142:						nil,
+143:						CommonMessageDialog
+144:					)
+145:				else
+146:					local res = WaitQuestion(dialog, 
+147:						T(6899, "Warning"), 
+148:						T(590187590602, "It is highly recommended to restart the game after unloading mods."),
+149:						T(746780041006, "Restart"), 
+150:						T(1000909, "Cancel"),
+151:						nil,
+152:						GetErrorTemplate(nil, "pdxsdk")
+153:					)
+154:					if res == "ok" then
+155:						ModsRestartApp(Platform.debug)
+156:					end
+157:				end
+158:				break
+159:			end
+160:		end
+161:		LoadingScreenOpen("idLoadingScreen", "reload mods")
+162:		ModsReloadItems()
+163:		ModsUIDialogClose(dialog)
+164:		LoadingScreenClose("idLoadingScreen", "reload mods")
+165:	end)
+166:end
+SOURCE CommonLua/UI/ModManager.lua 1864 1885
+1864:local function SyncPdxMods()
+1865:	local err, subscribed_mods = AsyncPdxGetAllSubscribedMods()
+1866:	if err then
+1867:		mods_print("Failed to get subscribed mods for sync.")
+1868:		return
+1869:	end
+1870:
+1871:	local installed_mods = PdxGetInstalledMods("require_fpk")
+1872:	for _, subscribed_mod in ipairs(subscribed_mods) do
+1873:		local installed = table.ifilter(installed_mods, "ModID", subscribed_mod.ModID) 
+1874:		for _, mod in ipairs(installed) do
+1875:			mod.KeepMod = true
+1876:		end
+1877:		g_PopsDownloadModsQueue:PushTask(false, SyncUpdatePdxMod, subscribed_mod.ModID, subscribed_mod, installed)
+1878:	end
+1879:
+1880:	for _, mod in ipairs(installed_mods) do
+1881:		if not mod.KeepMod then
+1882:			g_PopsDownloadModsQueue:PushTask(false, SyncUpdatePdxMod, mod.ModID, false, {mod})
+1883:		end
+1884:	end
+1885:end
+SOURCE CommonLua/UI/ModManager.lua 1902 1929
+1902:function OnMsg.PdxLogin()
+1903:	--check for missing installed mods and download them
+1904:	--if mods are disabled, do not try to update, install or sync any data to mitigate issues
+1905:	if config.Mods then
+1906:		g_PopsDownloadModsQueue:PushTask(false, SyncPdxMods)
+1907:	end
+1908:	local main = GetPreGameMainMenu()
+1909:	if main and g_ParadoxModsContextObj then
+1910:		local dlg = main.idContent:ResolveId("idModsUIDialog")
+1911:		if dlg then
+1912:			ModsUIClosePopup(dlg)
+1913:			g_ParadoxModsContextObj:GetMods()
+1914:			g_ParadoxModsContextObj:GetInstalledMods()
+1915:			return
+1916:		end
+1917:	end
+1918:	--user might have changed, new context is required, clear the old one
+1919:	g_ParadoxModsContextObj = false
+1920:end
+1921:
+1922:function OnMsg.PdxLogout()
+1923:	--context is no longer relevant
+1924:	g_ParadoxModsContextObj = false
+1925:	if g_PopsDownloadModsQueue then
+1926:		g_PopsDownloadModsQueue:Clear()
+1927:	end
+1928:end
+1929:
+FINGERPRINT {"build": "1.1.1.405907", "file": "CommonLua/Modding/Mod.lua", "sha256": "293f9f823b3d657b67fb4a7564564abe71d3a5e9c5894e7f6d40336643ddfe13", "manifest": "MATCH"}
+SOURCE CommonLua/Modding/Mod.lua 973 993
+973:function ModDef:SaveDef(serialize_only)
+974:	self.external_links = self:GetValidatedExternalLinks()
+975:	if self.content_path then
+976:		local code_dirty
+977:		if not serialize_only then
+978:			Msg("ModDefUpdate", self)
+979:			self.lua_revision = ModRequiredLuaRevision
+980:			self.saved_with_revision = LuaRevision
+981:			self.version = self.version + 1
+982:			self.saved = os.time()
+983:			self.default_options = self:GetDefaultOptions()
+984:			self:UpdateEntities()
+985:			self:UpdateLocTables()
+986:			code_dirty = self:UpdateCode()
+987:		end
+988:		
+989:		local data = pstr("return ", 32768)
+990:		self:PreSave()
+991:		data:appendv(self, "")
+992:		self:PostSave()
+993:		local err = AsyncStringToFile(self.content_path .. "metadata.lua", data)
+SOURCE CommonLua/Modding/Mod.lua 1153 1170
+1153:function ModDef:SaveWholeMod()
+1154:	GedSetUiStatus("mod_save", "Saving...")
+1155:	SuspendDiagnosticMessages("SaveMod")
+1156:	PauseInfiniteLoopDetection("SaveMod")
+1157:	LoadingModDef = self
+1158:	sprocall(function()
+1159:		local err, code_dirty = self:SaveDef()
+1160:		self:SaveItems()
+1161:		self:SaveOptions()
+1162:		if code_dirty then
+1163:			DelayedCall(nil, 0, ReloadLua)
+1164:		end
+1165:	end)
+1166:	LoadingModDef = false
+1167:	ResumeInfiniteLoopDetection("SaveMod")
+1168:	ResumeDiagnosticMessages("SaveMod")
+1169:	GedSetUiStatus("mod_save")
+1170:end
+SOURCE CommonLua/Modding/Mod.lua 1487 1503
+1487:local function WriteModPersistentData(mod, data)
+1488:	if not (type(data) == "string" or IsPStr(data)) then
+1489:		return "data must be a string/pstr"
+1490:	end
+1491:
+1492:	if #data > max_data_length then
+1493:		return string.format("data longer than const.MaxModDataSize (%d bytes)", max_data_length)
+1494:	end
+1495:	
+1496:	if not AccountStorage.ModPersistentData then
+1497:		AccountStorage.ModPersistentData = { }
+1498:	end
+1499:	
+1500:	if AccountStorage.ModPersistentData[mod.id] == data then return end
+1501:	AccountStorage.ModPersistentData[mod.id] = data
+1502:	SaveAccountStorage(1000)
+1503:end
+SOURCE CommonLua/Modding/Mod.lua 1995 2001
+1995:function GetModsEnabledByUser()
+1996:	local list
+1997:	if (AccountStorage and AccountStorage.LoadAllMods) or config.LoadAllMods then
+1998:		list = table.keys(Mods, true)
+1999:	end
+2000:	return list or AccountStorage and table.icopy(AccountStorage.LoadMods) or {}
+2001:end
+SOURCE CommonLua/Modding/Mod.lua 2104 2112
+2104:	if not force_reload and ModsLoaded then
+2105:		--no changes to mods list?
+2106:		local list = table.copy(queue)
+2107:		local loaded_ids = table.map(ModsLoaded, "id")
+2108:		table.sort(list)
+2109:		table.sort(loaded_ids)
+2110:		if table.iequal(loaded_ids, list) then
+2111:			return
+2112:		end
+FINGERPRINT {"build": "1.1.1.405907", "file": "CommonLua/Classes/GedModEditor.lua", "sha256": "69cf418b656823d75a4439eddce38b5056ed98c75be2a5b6bc47ac512bc4775f", "manifest": "MATCH"}
+SOURCE CommonLua/Classes/GedModEditor.lua 713 739
+713:	--determine which files should to be packed and which ignored
+714:	local files_to_pack = { }
+715:	local substring_begin = #mod_def.content_path + 1
+716:	local err, all_files = AsyncListFiles(content_path, nil, "recursive")
+717:	for i,file in ipairs(all_files) do
+718:		local ignore
+719:
+720:		for j,filter in ipairs(mod_def.ignore_files) do
+721:			if MatchWildcard(file, filter) then
+722:				ignore = true
+723:				break
+724:			end
+725:		end
+726:
+727:		if not ignore then
+728:			table.insert(files_to_pack, { src = file, dst = string.sub(file, substring_begin) })
+729:		end
+730:	end
+731:	
+732:	--pack the mod content
+733:	local err = AsyncPack(pack_path .. ModsPackFileName, content_path, files_to_pack)
+734:	if err then
+735:		return false, string.format("Failed creating content package file (%s)", err)
+736:	end
+737:	
+738:	params.os_pack_path = ConvertToOSPath(pack_path .. ModsPackFileName)
+739:	return true, nil
+SOURCE CommonLua/Classes/GedModEditor.lua 742 765
+742:function DbgPackMod(mod_def, show_file)
+743:	local params = {}
+744:	if mod_def:IsDirty() then
+745:		mod_def:SaveWholeMod()
+746:	end
+747:	CreatePackageForUpload(mod_def, params)
+748:	local dir = SplitPath(params.os_pack_path):gsub("/", "\\")
+749:	if show_file then
+750:		AsyncExec(string.format('explorer "%s"', dir))
+751:	end
+752:	return dir
+753:end
+754:
+755:function PackModForBugReporter(mod)
+756:	mod = IsKindOf(mod, "ModDef") and mod or (Mods and Mods[mod.id])
+757:	if not mod then return end
+758:	local params = {}
+759:	if mod:IsDirty() then
+760:		mod:SaveWholeMod()
+761:	end
+762:	CreatePackageForUpload(mod, params)
+763:	return params.os_pack_path
+764:end
+765:
+FINGERPRINT_TOTAL 4 MATCH 4
+DEMAND_TOTAL {"members": 5, "held": 3, "failed_names": ["section 12 E: restoring ON retains captured order until exit", "section 12 D: zero queue length proves callback completion"]}

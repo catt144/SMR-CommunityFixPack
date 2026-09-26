@@ -1,0 +1,33 @@
+COMMAND: python scratch/archive_load_first_reaudit.py
+AUDITED_CODE: 8ea54494362a2d0cf2e8a49225870fcf5245774e
+CONTROL: decoded no-save metadata equals branch after only title/id substitution and removal of pdx_id/pdx_version/steam_id
+--- 8ea5449:metadata.lua
++++ decoded_nosave/metadata.lua
+@@ -6,7 +6,7 @@
+ 	-- mod `id` below and the `[CommunityFixPack]` log tag are deliberately
+ 	-- unchanged (every archived log and gate baseline greps them; nothing
+ 	-- player-searchable contains them).
+-	'title', "Relaunched Fix Pack",
++	'title', "LoadFirst canary scratch (delete me)",
+ 	-- ⚠️ REWRITTEN 2026-08-13 (owner instruction, public-docs chain prompt 3).
+ 	-- The previous `description` carried TWO defects that would have shipped:
+ 	-- it told players individual fixes can be disabled "via the console", which
+@@ -236,7 +236,7 @@
+ 		-- 2026-09-21: agent/subagent working space, git-ignored, swept at 14 days.
+ 		"*/scratch/*",
+ 	},
+-	'id', "SMR_CommunityFixPack",
++	'id', "SMR_LoadFirstCanaryScratch",
+ 	'author', "catt144",
+ 	-- ✅ RULED 2026-08-17 (owner, checklist 35 Q2: "lets go with 1.0.0"):
+ 	-- first public release is a clean 1.0.0, matching the opt-in ruling's
+@@ -404,9 +404,6 @@
+ 	'screenshot1', "Mod/SMR_CommunityFixPack/store_screenshots/1_rare_metals_drill_skin.jpg",
+ 	'screenshot2', "Mod/SMR_CommunityFixPack/store_screenshots/2_rare_metals_hammer_skin.jpg",
+ 	'screenshot3', "Mod/SMR_CommunityFixPack/store_screenshots/3_moxie_skins.jpg",
+-	'pdx_id', 156049,
+-	'pdx_version', "15",
+-	'steam_id', "3787202810",
+ 	'TagGameplay', true,
+ })
+ -- ⭐ C CANARY (LOAD_ORDER_FIRST, 2026-09-25; owner's design). Hand-written code

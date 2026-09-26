@@ -1,0 +1,28 @@
+1a     killed by no-notice, no-rebuild
+1b     killed by no-notice, no-rebuild
+2      killed by always-rebuild
+3a     killed by ignore-loadall
+3b     killed by ignore-probe
+4a     killed by ignore-option
+4b     killed by no-notice, no-rebuild, not-optional
+4c     killed by not-optional
+4d     killed by bypass-veto
+5a     killed by clobber-slot, no-rebuild
+5b     killed by clobber-slot
+5c     killed by always-rebuild
+6a     killed by no-rebuild
+6b     killed by no-rebuild
+7a     killed by no-rebuild
+7b     killed by no-rebuild
+R1a    killed by no-notice, no-rebuild
+R1b    killed by no-notice
+R1c    killed by no-notice
+R1d    killed by no-notice
+R2a    killed by clobber-slot
+R2b    killed by clobber-slot
+R2c    killed by clobber-slot
+R3a    killed by fixed-probe
+R3b    killed by ignore-config
+R3c    killed by always-rebuild
+shape  killed by ignore-absent, no-rebuild
+independent groups (no killer by design): canary, engine

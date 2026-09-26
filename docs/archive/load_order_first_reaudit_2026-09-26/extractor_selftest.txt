@@ -1,0 +1,3 @@
+flpk_extract --selftest: parse_table descendant-span ownership
+  PASS shallow (control)    got ['a/x']
+  PASS nested (demand)      got ['a/b/x']

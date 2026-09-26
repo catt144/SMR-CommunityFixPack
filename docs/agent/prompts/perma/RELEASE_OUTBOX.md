@@ -23,15 +23,17 @@ player surface bumps it by one on release.
 
 ### Pending — LoadFirst: the pack moves itself to the front of the mod load order (2026-09-25)
 
-**HOLD: audit CHANGES on `8e2325a`; repairs landed as `8ea5449` on branch `load-first`, NOT merged; re-audit pending.** The fresh audit is
-[LOAD_ORDER_FIRST_BUILD_2026-09-25.md §11](../../reports/LOAD_ORDER_FIRST_BUILD_2026-09-25.md#11--fresh-context-audit--changes-2026-09-25).
-R1–R6 cover silent later opt-in, persistent-data loss, LoadAllMods edge cases, insufficient
-controls, invalid sitting triggers and missing Editor pack evidence; the repairs and their
-evidence are §12 of the same report. Ships only after re-audit returning SHIP-TO-SITTING and
+**HOLD: re-audit CHANGES on `8ea5449`, branch `load-first`, NOT merged.** The latest audit is
+[LOAD_ORDER_FIRST_BUILD_2026-09-25.md §13](../../reports/LOAD_ORDER_FIRST_BUILD_2026-09-25.md#13--re-audit--changes-2026-09-26).
+R1–R4 and R6 are accepted within the report's stated limits. R5 still needs a positive
+Paradox-sync completion witness and restoration after the final promotion-capable option click.
+The baseline and every declared mutant were rerun; both archived packages were decoded.
+Ships only after re-audit returning SHIP-TO-SITTING and
 the owner's sitting approval. The consumed brief's
 authority and unfinished requirements are retained in that report.
 The normal promotion/restart/Passage Network evidence remains valid on this rig; the ordinary
-desk harness passes while the expanded audit exposes the failures. Not owner-watched.
+desk harness and its behavioral controls pass; the remaining failures concern the sitting plan.
+Not owner-watched.
 Owner's choice of option B, 2026-09-25.
 
 Player surface, three parts, none of them a fix-list row unless the release seat decides so:
@@ -46,14 +48,15 @@ Player surface, three parts, none of them a fix-list row unless the release seat
 - **The C canary in `metadata.lua`** (`SMRFP-LOADORDER-CANARY-2026-09-25-b7e1`, inert hand-written
   code in option C's shape). ⛔ The post-upload seat runs its three-part check BEFORE restoring the
   comments (`support/POST_UPLOAD_CLOSE.md` §1); the check and the per-portal prediction are in the
-  report, "The C canary", qualified by §11 R6. Record the portal and whether a save preceded
+  report, "The C canary", qualified by §§11–13 R6. Record the portal and whether a save preceded
   packing; a stripped package decides only that tested path.
 
-Build detail, subject to the audit changes: `Code/01_LoadFirst.lua`, registered `LoadFirst` (`optional = true`); rebuilds
+Build detail at `8ea5449`: `Code/01_LoadFirst.lua`, registered `LoadFirst` (`optional = true`); rebuilds
 `AccountStorage.LoadMods` through `TurnModOff`/`TurnModOn` with every other mod's relative order
 kept, requests the account save through a changed `WriteModPersistentData`, and honours
-`SMRFixPack_Disabled["LoadFirst"]`. The LoadAllMods detector and once-per-process notice need
-R3 and R1 respectively; their current behavior is not a release promise.
+`SMRFixPack_Disabled["LoadFirst"]`. Each promotion schedules its notice. A full foreign slot
+refuses the write without data loss or a promotion save request; persistence then depends on
+a later game save. The already-first account-LoadAllMods path deliberately does not probe.
 
 ## Last released
 

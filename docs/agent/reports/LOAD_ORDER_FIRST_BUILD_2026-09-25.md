@@ -4,17 +4,18 @@
 
 Report for the owner, repair seat and audit seat, executing the now-consumed one-off
 `docs/agent/prompts/LOAD_ORDER_FIRST_high.md` (retrievable at `4e4c97b`).
-The build is on the short-lived code branch **`load-first`**, one commit, **`8e2325a`**, not merged.
+The build is on the short-lived code branch **`load-first`**, repaired at **`8ea5449`**, not merged.
 Records are on `main`. Nothing here was uploaded, and no attended sitting ran. Every "the pack
 loads first" claim below is desk- and unattended-verified on this one rig; the retail sitting
 in §5 is planned for the owner's approval, not run. A save request is not a disk write; the
 seven boot logs are the disk evidence. Where a line says MEASURED it names its command or log.
 
-**Audit verdict: CHANGES on `8e2325a`.** The fresh-context audit of records `f65b609` is
-in §11; it supersedes the build's clearance claims and sitting recipe below. Later opt-in
-can promote silently, existing persistent data can be discarded, and the claimed controls
-miss those failures. The branch remains unmerged; the sitting is held for repairs and
-re-audit. Sections 0–10 retain the builder's record, including claims corrected by §11.
+**Latest audit verdict: CHANGES on `8ea5449`, records `4e704c1`.** The re-audit in §13
+accepts R1–R4 and R6 within their stated limits. R5 still needs a positive sync-completion
+witness and a restoration sequence that survives the final option click. The branch remains
+unmerged and the sitting held. Sections 0–12 retain the build, first audit and repair history;
+§13 supersedes their current clearance claims. The retained FIXED list and owner authority
+remain in §11.
 
 ## 0 · Read this first — what the owner sees that the brief did not say
 
@@ -743,3 +744,165 @@ Branch `load-first` at `8ea5449` (`8e2325a` plus one commit). Re-run `python too
 on the branch (baseline and every mutant in one run; `--mutant NAME` for one, `--list` for the
 killers); read L8–L11 and the owner-session excerpt; decode the two archived packages. The
 sitting stays held; no merge, no upload.
+
+## 13 · Re-audit — CHANGES, 2026-09-26
+
+**CHANGES on `load-first` at `8ea5449`, against records `main` at `4e704c1`.** The code
+repairs answer R1–R4; the decoded packages and native save/pack source answer R6 within the
+limits below. R5's hot-enable trigger is corrected, but its sync-completion witness can pass
+before work completes, and its final option click undoes restoration. Those are sitting-plan
+defects, not demands to undo the repaired production behavior. No sitting approval is sought
+while they remain. The retained FIXED requirements in §11 are unchanged.
+
+### Evidence and repair judgments
+
+The repair diff `git diff 8e2325a 8ea5449` changes `Code/01_LoadFirst.lua`,
+`tools/desk_load_first.py`, `tools/arming/legs/load-first-pack.json` and its payload
+`tools/arming/payloads/98_LoadFirstPack.lua.txt`. Metadata, items and the PN repairs are
+unchanged. Tests ran in a disposable `git archive` export of the exact audited commit;
+the installed checkout stayed on `main`. The outer [receipt](../../archive/load_order_first_reaudit_2026-09-26/reaudit.txt)
+records full commits and verifies input bytes against `git show 8ea5449:<path>`. Harness
+headings inherit the enclosing records repository's HEAD; they do not identify the exported
+code. The module SHA-256 is `c7fdea6a3c878fb49d9e8f5bdf25b369c7eabb3600d4b106b530ec0a06838e79`.
+Audit commands from the repository root were `python scratch/load_first_reaudit.py` and
+`python scratch/load_first_reaudit_counterexamples.py`; their archived script copies can be
+run from that same working directory. The latter exits successfully only when both named
+plan failures and their positive controls reproduce as recorded.
+
+| Repair | Re-audit disposition |
+|---|---|
+| R1, later notice | Accepted. Promotion schedules a notice; later opt-in after startup threads drain and a later second promotion are exercised. Pending reload does not duplicate the box in the fixture. Actual click/relaunch remains a sitting test. |
+| R2, slot preservation | Accepted with the disclosed full-slot exception. Blank lines, trailing newline and foreign lookalike prefixes survive; writer refusal leaves foreign data intact. The refusal path promotes in memory and makes no save request. This is not a durable-order guarantee: a later game save must carry it, or a subsequent boot repeats promotion/notice. The archived writer is `1.1.1.405907/Src/CommonLua/Modding/Mod.lua:1487–1503`, with the size refusal at :1492–1494. |
+| R3, LoadAllMods | Accepted with the disclosed already-first account-flag limit. Config is checked before the first-position return; a stale probe is preserved; the normal/alphabetical paths have opposing controls. The status wording no longer claims the saved list was inspected when it was not. |
+| R4, controls | Accepted. The actual mutated behaviors fail named demands, and the expected group-to-killer mapping holds. The independent engine and inert-canary checks are reported separately. This is evidence for the declared cases, not exhaustive coverage. |
+| R5, sitting | B accepted; D and E remain open as detailed below. |
+| R6, canary | Accepted as a scratch metadata load/save/pack experiment through native functions, not a full real-pack Editor/UI or store round trip. See package and log checks below. |
+
+MEASURED: `python tools/desk_load_first.py` in the export returns **64/64 baseline demands
+held** and catches **every declared mutant**. `--list` was read; each `--mutant NAME` was also
+run independently. All ran the same 64 demands, reconciled by the runner against their named
+PASS/FAIL lines and the aggregate summary. Verbose mutant mode exits successfully even when
+demands fail; the audit counts those failures rather than treating exit status as the verdict.
+
+| Mutant | Failed demands |
+|---|---:|
+| no-rebuild | 34 |
+| always-rebuild | 16 |
+| ignore-option | 3 |
+| ignore-config | 1 |
+| ignore-probe | 4 |
+| ignore-absent | 1 |
+| clobber-slot | 5 |
+| no-notice | 9 |
+| bypass-veto | 4 |
+| fixed-probe | 1 |
+| ignore-loadall | 8 |
+| not-optional | 8 |
+
+The table's 12 members reconcile to `MUTANT_TOTAL members=12, with_failures=12`; baseline
+members reconcile to `BASELINE` and `RESULT` in [baseline_and_mutants.txt](../../archive/load_order_first_reaudit_2026-09-26/baseline_and_mutants.txt).
+The [runner](../../archive/load_order_first_reaudit_2026-09-26/load_first_reaudit.py),
+individual mutant outputs, parsecheck and upload-preflight outputs are archived alongside it.
+Parsecheck and the preflight's runnable guards pass; the latter still cannot check login.
+The unrelated full-suite debts recorded in §11 were not rerun or reclassified.
+
+### R5-D — queue emptiness is not sync completion
+
+The login route reaches `SyncPdxMods`, but the proposed *Sync read* slot cannot establish
+completion. Archived build **1.1.1.405907**, `Src/CommonLua/Libs/Paradox/PdxSDK.lua:894–916`,
+removes a task from the queue before calling its callback. `Src/CommonLua/UI/ModManager.lua:1864–1885`
+then makes an asynchronous subscription request before scheduling child updates. The queue
+can therefore be empty while the root request or the final child is still in progress.
+Logout also clears the queue (:1922–1927); emptiness alone does not distinguish completion
+from cancellation. Absence of the initial subscription-error message does not close that gap.
+
+MEASURED: the [counterexample](../../archive/load_order_first_reaudit_2026-09-26/counterexamples.txt)
+runs the archived queue methods with a yielding callback. At observation, `queued=0`,
+`started=true`, `done=nil`, worker `suspended`: the plan's completion demand fails.
+Resuming the callback produces `done=true`, worker `dead`, with the queue still zero; the
+positive completion control holds. This models an outstanding asynchronous call, not a live
+Paradox service test. Source file fingerprints match the archive manifest in the same receipt.
+
+**Required repair:** present a source-backed completion/error witness tied to this login/sync
+attempt, covering both the root callback and all scheduled child work. Demonstrate that an
+in-flight callback, cancellation and failed work cannot be recorded as PASS. Queue length can
+remain diagnostic data. Prepare the sitting only after that witness and its controls are
+reviewable; the owner's account state is still unknown and an unavailable route remains NOT RUN.
+
+### R5-E — restoring ON immediately promotes again
+
+The proposed sequence restores the captured pack-later order while the option is OFF,
+reads it on a fresh boot, then turns the option ON and quits. That last click invokes the
+reconciler immediately: branch `8ea5449` `Code/00_Core.lua:569–602` calls the module's apply/
+activation path (`Code/01_LoadFirst.lua:351–376`). No further boot is required to promote
+and request a save. This is the behavior R1 deliberately repaired.
+
+MEASURED in the real-core branch fixture: OFF preserves
+`Kit,TrainHub,Pack,OptIn,RailShaft` with no promotion save; turning ON changes it immediately
+to `Pack,Kit,TrainHub,OptIn,RailShaft`, requests a save and leaves a notice pending. Draining
+the notice thread produces the expected box. The OFF and notice controls hold; the demand
+that the final ON click preserve the captured order fails. The [runnable check](../../archive/load_order_first_reaudit_2026-09-26/load_first_reaudit_counterexamples.py)
+and receipt retain the exact demands. An independent read-only audit found the same source paths.
+
+**Required repair:** place the final saved-order restoration after every promotion-capable
+option click, or restore under the nonpromoting records build, and read back the captured
+enabled set, order, option and junction on a fresh boot. Specify that ordering concretely and
+check it against the original ON/pack-later start. The restored pack-later state cannot remain
+unchanged across a later feature-enabled boot with the option ON; that next promotion is
+intended. L10–L11 prove the repair seat's actual restoration, not this proposed OFF/readback/ON
+recipe. No production-code change is required merely to make that flawed recipe pass.
+
+### R6 and L8–L11 — independent reads and decodes
+
+MEASURED: `python tools/flpk_extract.py --selftest` passes, then the runner calls its `extract`
+API on each archived `canary_pack_*_ModContent.fpk`. Each decoded package contains only
+`items.lua` and `metadata.lua`; the latter matches its previously archived decoded copy byte
+for byte. The [metadata comparison](../../archive/load_order_first_reaudit_2026-09-26/metadata_comparison.txt)
+checks the no-save metadata against branch `8ea5449`: only the scratch title/id substitution
+and removal of store ids differ. The experiment preserves the actual canary shape.
+
+| Archived package | Decoded metadata bytes | Canary matches | Scratch-id controls | Comment lines |
+|---|---:|---:|---:|---:|
+| nosave, SHA-256 `49ecf2df…` | 34,496 | 1 | 1 | 329 |
+| aftersave, SHA-256 `e666cabb…` | 8,703 | 0 | 1 | 0 |
+
+The runner searches the complete decoded text for the exact canary, anchored scratch-id
+property and lines beginning with `--` after whitespace. `PACKAGE` records every matching
+line and full package/metadata hashes; `PACKAGE_TOTAL` reconciles both rows. Thus the absent
+marker after save has a positive identity control. The package contents limit the claim:
+they contain no real pack Code files, and the scratch items were not loaded.
+
+Archived **1.1.1.405907** `Src/CommonLua/Classes/GedModEditor.lua:742–764` gives `DbgPackMod`
+and `PackModForBugReporter` the same dirty-save and `CreatePackageForUpload` route.
+`Src/CommonLua/Modding/Mod.lua:973–993,1153–1170` shows why `SaveWholeMod` regenerates metadata.
+This supports the equivalent native-function experiment and §12's conditional portal
+prediction. It does not establish an actual upload result or that an active C override would
+be safe. The inert canary remains inert; post-upload checks still record portal and save path.
+
+The complete archived L8–L11 logs were decoded and scanned. Their relevant numbered lines,
+hashes, revision controls and totals are in the receipt; original logs remain in the
+[repair archive](../../archive/load_order_first_repairs_2026-09-25/).
+
+- L8 :200–287 records the no-save pack, an unloaded scratch definition, success and unchanged
+  saved order. L9 :199–287 records `SaveWholeMod` (version 21 to 22), then pack and success.
+- On both boots LoadFirst was already first and applied before the kit's veto (:71–72 in L8,
+  :72–73 in L9). The disabled line appears only at :204 during the packer's reload. These logs
+  do not prove the kit inhibited startup promotion; none was needed for that already-first order.
+- L10 :201–206 restores the captured order and requests a save. L11 :81–82 and :197–203 reads
+  that same saved and loaded order at load/menu on `main`, reports no LoadFirst row and active
+  VacuumWalks/HubLocalAccess. This supports restoration at that recorded boot, not today's rig state.
+
+`LOG_TOTAL` reconciles the four named logs to four revision-405907 lines, four loaded-list
+lines and zero `[LUA ERROR]` lines. This is that exact filter, not an absence of all errors.
+The owner-session excerpt was also read; it is an excerpt, not a newly checked whole log or
+an attended test. No game, account, installed junction or TestKit setting was changed by this
+re-audit; no retail launch, merge, upload or sitting preparation was performed.
+
+### Remaining work
+
+Repair R5-D and R5-E in the concrete sitting proposal and re-audit those changes against the
+counterexamples. Keep the code at its reviewed revision unless evidence calls for a code
+change. SHIP-TO-SITTING still precedes the owner's sitting approval; the upload and post-upload
+canary obligations remain as retained in §11 and the release outbox. The consumed brief stays
+retired. This verdict narrows the hold to the named remaining defects; it does not reopen
+accepted repairs or relax the FIXED list.

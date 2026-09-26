@@ -1,0 +1,129 @@
+==============================================================================
+LoadFirst desk controls — baseline then behavioural mutants (HEAD 4e704c1, game 1.1.1.405907, Lua 5.5 | lupa 2.8)
+==============================================================================
+INPUT Code/00_Core.lua 8a2cdcc1dac9cac54eeb1de0f1bab056f832cef250aadbdb12b07323d5d20d73
+INPUT Code/01_LoadFirst.lua c7fdea6a3c878fb49d9e8f5bdf25b369c7eabb3600d4b106b530ec0a06838e79
+INPUT Code/Hubset_OnHubNow.lua 14352af7af53ff7a591ce5d70e9595a5339724ba6f8a0121b8fe03fa97b7fd9b
+INPUT Code/Fix_VacuumWalks.lua 8c8bd96a3f04dd00c63ece0c394bedad6607b41b629c1a883241fbda54e0d107
+INPUT Code/Fix_HubLocalAccess.lua 09f31d6716973a77ce1428fb891d2e2319140d3a7e530c7fbde34669fc1e7994
+SHIPPED CommonLua/Modding/Mod.lua ModEnvBlacklist 1280-1441 6bef8043e0ecda3c7589af72c6de2138b5f123fc6b8e73dc102fb8e0da056043
+SHIPPED CommonLua/Modding/Mod.lua env block 1551-1626 2c6f5b8e5116637396cd861890e72a14f9306ccf283bdbd09d27f98de295a699
+SHIPPED CommonLua/Modding/Mod.lua WriteModPersistentData 1487-1503, SetupEnv 1628-1645, GetModsEnabledByUser 1995-2001, ModsReloadItems 2099-2179
+SHIPPED CommonLua/Modding/Mod.lua queue 1873-1993 749348d898cbef2fd42a426c357bfd960903ea4928b0b9e2111c19be31da249e
+SHIPPED CommonLua/UI/ModManager.lua TurnModOn 35-37 TurnModOff 39-41
+SHIPPED Lua/Units/Colonist.lua StartShuttleLeg 2016-2029
+PN_DEFINITIONS 45-47,49-51 members=2
+
+BASELINE
+  PASS  1a middle: saved B,PACK,C becomes PACK,B,C  -- SMR_CommunityFixPack,B,C
+  PASS  1a next queue is PACK,B,C  -- SMR_CommunityFixPack,B,C
+  PASS  1a running ModsLoaded stays B,PACK,C  -- B,SMR_CommunityFixPack,C
+  PASS  1a exactly one save request, delay 1000  -- calls=1 delay=1000
+  PASS  1a LoadFirst active, detail names the move  -- active / moved to the front of the saved mod order (was 2 of 3); applies at the next game start
+  PASS  1a notice: one question, Restart now / Later, no restart on Later  -- questions=1 restarts=0
+  PASS  1a Lua reload: no second write, no second notice  -- saves=1 questions=1
+  PASS  1b last: saved A,B,PACK becomes PACK,A,B  -- SMR_CommunityFixPack,A,B
+  PASS  1b Restart now calls the game's restart routine once  -- restarts=1 questions=1
+  PASS  2 already first: raw saved list unchanged  -- SMR_CommunityFixPack,A,B
+  PASS  2 already first: no save request
+  PASS  2 already first: LoadFirst active, detail names the loaded list  -- active / first in the list the game loads (3 mods); nothing written
+  PASS  2 already first: no notice  -- questions=0 messages=0
+  PASS  2 already first: persistent slot untouched
+  PASS  3a config.LoadAllMods: raw saved list untouched  -- B,SMR_CommunityFixPack,C
+  PASS  3a config.LoadAllMods: no save request
+  PASS  3a config.LoadAllMods: LoadFirst inactive naming LoadAllMods  -- inactive / the game is loading every installed mod in alphabetical order (LoadAllMods), so the saved order does not apply
+  PASS  3a config.LoadAllMods: a log line says not applied  -- [CommunityFixPack] LoadFirst: not applied — config.LoadAllMods is set; the saved order is untouched (A, B, C, SMR_CommunityFixPack) | [CommunityFixPack] LoadFirst: inactive (the game is loading every installed mod in alphabetical order (LoadAllMods), so the saved order does not apply)
+  PASS  3b AccountStorage.LoadAllMods: raw saved list untouched  -- B,SMR_CommunityFixPack,C
+  PASS  3b AccountStorage.LoadAllMods: no save request
+  PASS  3b AccountStorage.LoadAllMods: LoadFirst inactive naming LoadAllMods  -- inactive / the game is loading every installed mod in alphabetical order (LoadAllMods), so the saved order does not apply
+  PASS  3b AccountStorage.LoadAllMods: a log line says not applied  -- [CommunityFixPack] LoadFirst: not applied — the account's LoadAllMods flag is set; the saved order is untouched (A, B, C, SMR_CommunityFixPack) | [CommunityFixPack] LoadFirst: inactive (the game is loading every installed mod in alphabetical order (LoadAllMods), so the saved order does not apply)
+  PASS  4a option off: raw saved list untouched  -- B,SMR_CommunityFixPack,C
+  PASS  4a option off: no save request
+  PASS  4a option off: LoadFirst inactive 'turned off in Mod Options'  -- inactive / turned off in Mod Options
+  PASS  4b toggled on later: promotes at once  -- SMR_CommunityFixPack,B,C
+  PASS  4b toggled on later: one save request, LoadFirst active  -- saves=1 status=active
+  PASS  4b toggled on later: the notice shows  -- 1
+  PASS  4c toggled off again: inactive, order left as it is, no new request  -- status=inactive saved=SMR_CommunityFixPack,B,C saves=1
+  PASS  4c option off, pack moved last, nothing promotes: raw B,C,PACK, no request, no notice  -- raw=B,C,SMR_CommunityFixPack saves=1 questions=1
+  PASS  4d veto SMRFixPack_Disabled.LoadFirst: disabled, untouched, no request, no notice  -- status=disabled raw=B,SMR_CommunityFixPack,C saves=0 questions=0
+  PASS  5a slot: our line first, promotions=1 from=2 of=3  -- 'SMRFixPack.LoadFirst v1 promotions=1 last=1790404477 from=2 of=3'
+  PASS  5a slot: both foreign lines preserved verbatim  -- ['somebody-else v3 alpha', 'beta']
+  PASS  5b second promotion: promotions=2, foreign lines still intact, saved list PACK first  -- ['SMRFixPack.LoadFirst v1 promotions=2 last=1790404477 from=3 of=3', 'somebody-else v3 alpha', 'beta'] saved=SMR_CommunityFixPack,B,C saves=2
+  PASS  5c already first: a foreign slot is not rewritten, no request  -- 'somebody-else v3 alpha' saves=0
+  PASS  6a own prerequisite A: saved PACK,B,A; queue hoists A first, PACK before B  -- saved=SMR_CommunityFixPack,B,A queue=A,SMR_CommunityFixPack,B
+  PASS  6b Z requires the pack: saved PACK,Z,B; queue PACK,Z,B (Z unmoved relative to B)  -- saved=SMR_CommunityFixPack,Z,B queue=SMR_CommunityFixPack,Z,B
+  PASS  shape: pack absent from the list: raw untouched, no request, inactive 'not in the saved mod list'  -- raw=A,B saves=0 inactive/this pack is not in the saved mod list, so there is nothing to reorder
+  PASS  shape: duplicate B collapses to its first position, stale GHOST kept in place, one request  -- SMR_CommunityFixPack,B,GHOST saves=1
+  PASS  shape: duplicate PACK collapses: PACK,B,C  -- SMR_CommunityFixPack,B,C
+  PASS  shape: five mods, pack third: others keep A,B,C,D order  -- SMR_CommunityFixPack,A,B,C,D
+  PASS  shape: all 24 permutations of A,B,C,PACK keep the others' order; a save only when moved
+  PASS  7a PN before pack: VacuumWalks declines (inactive)  -- inactive / the shipped emigration code has no work-slot reservation or shuttle landing slots; this repair stands down on the older body
+  PASS  7a PN before pack: HubLocalAccess does not apply  -- inactive / Dome not found (game update changed it?)
+  PASS  7a saved PN,PACK becomes PACK,PN; next queue PACK,PN  -- saved=SMR_CommunityFixPack,iooW34Y queue=SMR_CommunityFixPack,iooW34Y
+  PASS  7b next launch in that order: VacuumWalks active  -- active / 
+  PASS  7b next launch in that order: HubLocalAccess active  -- active / 
+  PASS  7b next launch: LoadFirst already first, no write  -- status=active saves=0
+  PASS  R1a cold option off, later opt-in: promotes and a notice is shown  -- saved=SMR_CommunityFixPack,B,C saves=1 questions=1
+  PASS  R1b already-first boot, off, moved last, on: promotes and a notice is shown  -- saved=SMR_CommunityFixPack,B,C saves=1 questions=1
+  PASS  R1c promotion boot, off, moved last, on: a second notice for the second promotion  -- saves=2 questions=2
+  PASS  R1d reload while a notice is pending: one box, not two  -- questions=1 saves=1
+  PASS  R2a slot 'alpha\n\nbeta\n': our line then the foreign bytes exactly  -- after='SMRFixPack.LoadFirst v1 promotions=1 last=1790404477 from=2 of=3\nalpha\n\nbeta\n' saves=1
+  PASS  R2b slot 'SMRFixPack.LoadFirstExtr': our line then the foreign bytes exactly  -- after='SMRFixPack.LoadFirst v1 promotions=1 last=1790404477 from=2 of=3\nSMRFixPack.LoadFirstExtra payload' saves=1
+  PASS  R2c full valid slot: nothing written, nothing dropped, promotion made, log says the save could not be requested  -- slot_len=32768 saved=SMR_CommunityFixPack,B,C saves=0
+  PASS  R3a account flag with a stale probe id in the raw list: raw list untouched, no request  -- raw=B,SMRFixPack.LoadFirst.probe,SMR_CommunityFixPack,C saves=0
+  PASS  R3a normal list with a stale probe id: promoted, the stale id kept in place  -- SMR_CommunityFixPack,B,SMRFixPack.LoadFirst.probe,C
+  PASS  R3b config.LoadAllMods with the pack sorted first: diagnosed, inactive, no request  -- inactive / the game is loading every installed mod in alphabetical order (LoadAllMods), so the saved order does not apply saves=0
+  PASS  R3c account flag with the pack sorted first: the STATED LIMIT holds — no write, wording names the loaded list  -- active / first in the list the game loads (2 mods); nothing written saves=0 raw=z,SMR_CommunityFixPack
+  PASS  engine: same-visit off/on is order-only: ModsReloadItems returns early, running list unchanged, no promotion  -- raw=B,C,SMR_CommunityFixPack running=SMR_CommunityFixPack,B,C saves=0
+  PASS  canary: metadata.lua loads under the metadata env and returns a ModDef
+  PASS  canary: declared property set = pre-canary set + default_options  -- ['default_options']
+  PASS  canary: the literal is in the tree file and leaks no global
+  PASS  canary: the code list still starts 00_Core, 01_LoadFirst
+BASELINE 64 of 64 demands held
+
+MUTANTS (each row: the groups whose demands FAILED under that mutant)
+  no-rebuild      fails 34 of 64 demands; groups: 1a, 1b, 4b, 4c, 5a, 5b, 6a, 6b, 7a, 7b, R1a, R1b, R1c, R1d, R2a, R2b, R2c, R3a, shape
+  always-rebuild  fails 16 of 64 demands; groups: 1a, 2, 4b, 4c, 5c, 7b, R1a, R1b, R1d, R3c, engine, shape
+  ignore-option   fails  3 of 64 demands; groups: 4a
+  ignore-config   fails  1 of 64 demands; groups: R3b
+  ignore-probe    fails  4 of 64 demands; groups: 3b, R3a
+  ignore-absent   fails  1 of 64 demands; groups: shape
+  clobber-slot    fails  5 of 64 demands; groups: 5a, 5b, R2a, R2b, R2c
+  no-notice       fails  9 of 64 demands; groups: 1a, 1b, 4b, 4c, R1a, R1b, R1c, R1d
+  bypass-veto     fails  4 of 64 demands; groups: 4a, 4d
+  fixed-probe     fails  1 of 64 demands; groups: R3a
+  ignore-loadall  fails  8 of 64 demands; groups: 3a, 3b, R3a, R3b
+  not-optional    fails  8 of 64 demands; groups: 4b, 4c, R1a, R1b, R1c
+
+CONTROL VERDICT per group (expected killers must all kill; a group with no killer at all is vacuous)
+  1a     killed by: always-rebuild, no-notice, no-rebuild         expected: no-notice, no-rebuild
+  1b     killed by: no-notice, no-rebuild                         expected: no-notice, no-rebuild
+  2      killed by: always-rebuild                                expected: always-rebuild
+  3a     killed by: ignore-loadall                                expected: ignore-loadall
+  3b     killed by: ignore-loadall, ignore-probe                  expected: ignore-probe
+  4a     killed by: bypass-veto, ignore-option                    expected: ignore-option
+  4b     killed by: always-rebuild, no-notice, no-rebuild, not-optional expected: no-notice, no-rebuild, not-optional
+  4c     killed by: always-rebuild, no-notice, no-rebuild, not-optional expected: not-optional
+  4d     killed by: bypass-veto                                   expected: bypass-veto
+  5a     killed by: clobber-slot, no-rebuild                      expected: clobber-slot, no-rebuild
+  5b     killed by: clobber-slot, no-rebuild                      expected: clobber-slot
+  5c     killed by: always-rebuild                                expected: always-rebuild
+  6a     killed by: no-rebuild                                    expected: no-rebuild
+  6b     killed by: no-rebuild                                    expected: no-rebuild
+  7a     killed by: no-rebuild                                    expected: no-rebuild
+  7b     killed by: always-rebuild, no-rebuild                    expected: no-rebuild
+  R1a    killed by: always-rebuild, no-notice, no-rebuild, not-optional expected: no-notice, no-rebuild
+  R1b    killed by: always-rebuild, no-notice, no-rebuild, not-optional expected: no-notice
+  R1c    killed by: no-notice, no-rebuild, not-optional           expected: no-notice
+  R1d    killed by: always-rebuild, no-notice, no-rebuild         expected: no-notice
+  R2a    killed by: clobber-slot, no-rebuild                      expected: clobber-slot
+  R2b    killed by: clobber-slot, no-rebuild                      expected: clobber-slot
+  R2c    killed by: clobber-slot, no-rebuild                      expected: clobber-slot
+  R3a    killed by: fixed-probe, ignore-loadall, ignore-probe, no-rebuild expected: fixed-probe
+  R3b    killed by: ignore-config, ignore-loadall                 expected: ignore-config
+  R3c    killed by: always-rebuild                                expected: always-rebuild
+  canary independent by design (not a module behaviour)
+  engine independent by design (not a module behaviour)
+  shape  killed by: always-rebuild, ignore-absent, no-rebuild     expected: ignore-absent, no-rebuild
+
+RESULT baseline 64/64 held; 29 group(s), 2 independent; control problems: 0
