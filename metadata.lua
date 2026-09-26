@@ -1,4 +1,4 @@
-return PlaceObj('ModDef', {
+local def = PlaceObj('ModDef', {
 	-- ⭐ RENAMED 2026-08-17 (owner ruling, checklist 36): "Community Fix Pack"
 	-- → "Relaunched Fix Pack", before first upload — a same-purpose mod named
 	-- "SMR Community Fixes" already exists on Paradox Mods (154004) and the
@@ -297,17 +297,30 @@ return PlaceObj('ModDef', {
 	-- saves made with the pack load fine without it (FIX_POLICY §3), so don't
 	-- nag players who removed it with the missing-mods prompt
 	'optional_mod', true,
-	-- ⛔ NO `default_options` FIELD, AND THAT IS THE POINT (2026-08-12, the
-	-- opt-in split). This field is what makes Options → Mod Options list a mod
-	-- at all (ModDef:HasOptions reads it, Mod.lua:473-475). The pack's eight
+	-- ⛔ 2026-08-12 (the opt-in split): this pack had NO `default_options` FIELD,
+	-- AND THAT WAS THE POINT. This field is what makes Options → Mod Options list a
+	-- mod at all (ModDef:HasOptions reads it, Mod.lua:473-475). The pack's eight
 	-- optional modules — and every toggle and dial they owned — moved to the
 	-- standalone Community Opt-In Pack (SMR_CommunityOptInPack), so this pack
-	-- has nothing for a player to set and correctly stops appearing on that
-	-- page. 00_Core.lua keeps its `optional`/OptionEnabled/ApplyModOptions
+	-- had nothing for a player to set and correctly stopped appearing on that
+	-- page. 00_Core.lua kept its `optional`/OptionEnabled/ApplyModOptions
 	-- machinery: dormant, not wrong, and not worth an unforced edit to the one
 	-- file every fix depends on.
+	-- ⭐ 2026-09-25 (LOAD_ORDER_FIRST, owner's choice of option B): the condition
+	-- that ruling was made under no longer holds — the pack now has ONE thing a
+	-- player may set, the opt-out of the load-order promotion (01_LoadFirst.lua),
+	-- and a player opt-out is a FIXED requirement of that brief. So the field is
+	-- back with exactly that one key, the pack lists on the Mod Options page
+	-- again, and the dormant reconciler in 00_Core.lua is what drives the toggle.
+	-- The key must equal the Register id, the items.lua toggle name and the
+	-- `default_options` key, the rule the opt-in pack kept (its FIX_POLICY §5).
+	-- SaveDef regenerates this table from the ModItemOptionToggle in items.lua.
+	'default_options', {
+		LoadFirst = true,
+	},
 	'code', {
 		"Code/00_Core.lua",
+		"Code/01_LoadFirst.lua",
 		"Code/Hubset_OnHubNow.lua",
 		"Code/Fix_LanderEmptyLaunch.lua",
 		"Code/Fix_ShelterReflex.lua",
@@ -396,3 +409,16 @@ return PlaceObj('ModDef', {
 	'steam_id', "3787202810",
 	'TagGameplay', true,
 })
+-- ⭐ C CANARY (LOAD_ORDER_FIRST, 2026-09-25; owner's design). Hand-written code
+-- beyond the declared properties, in the shape of option C's bootstrap (the def
+-- held in a local, extra statements, then returned) but INERT: a local nothing
+-- reads, no method override, no field written on the def, no effect on loading.
+-- Its one job is to show, after the next upload, whether code of this shape
+-- survives the Mod Editor's regeneration of this file (ModDef:SaveDef,
+-- Mod.lua:973-993, serialises declared properties only). Prediction: stripped
+-- from the tree by the upload's forced save and absent from the Steam package.
+-- The check, three parts, is in docs/agent/reports/LOAD_ORDER_FIRST_BUILD_2026-09-25.md,
+-- "The C canary"; the release outbox names it. metadata.lua runs in an env that
+-- holds only PlaceObj and box (Mod.lua:1715-1724), so it cannot log a line.
+local SMRFixPack_LoadOrderCanary = "SMRFP-LOADORDER-CANARY-2026-09-25-b7e1"
+return def

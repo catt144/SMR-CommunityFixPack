@@ -21,10 +21,27 @@
 -- LOAD-BEARING: the entries below must stay in exactly metadata.lua's
 -- current `code` order (00_Core first, then the Fix_ files, then
 -- 90_SaveSanitizer last), or a round-trip reorders the load sequence.
+--
+-- ⭐ 2026-09-25 (LOAD_ORDER_FIRST, owner's option B): ONE Mod Option is back,
+-- the opt-out of the pack's load-order promotion. Same rule as before the
+-- split: the toggle's `name` == the Register id in Code/01_LoadFirst.lua ==
+-- the `default_options` key in metadata.lua (LoadFirst). SaveDef regenerates
+-- `default_options` from this item (Mod.lua:983 via GetDefaultOptions).
+-- The 2026-08-12 note above stays as the record of why the page was empty.
 return {
+	PlaceObj('ModItemOptionToggle', {
+		'name', "LoadFirst",
+		'DisplayName', "Load this pack first",
+		'Help', "Moves the Relaunched Fix Pack to the front of the mod load order the next time the game starts, so its repairs are applied before other mods change the same parts of the game. Your other mods keep their order. Turn this off to keep the order you set yourself; the pack then leaves it alone.",
+		'DefaultValue', true,
+	}),
 	PlaceObj('ModItemCode', {
 		'name', "00_Core",
 		'CodeFileName', "Code/00_Core.lua",
+	}),
+	PlaceObj('ModItemCode', {
+		'name', "01_LoadFirst",
+		'CodeFileName', "Code/01_LoadFirst.lua",
 	}),
 	PlaceObj('ModItemCode', {
 		'name', "Hubset_OnHubNow",

@@ -1,0 +1,16 @@
+{
+  "leg": "load-first-set",
+  "_what": "Mutator for the LoadFirst (option B) unattended launches: at the pregame menu rewrites the saved enable order to the ORDER literal in the payload through the game's own TurnModOff/TurnModOn helpers, requests the account save through the KIT's own persistent slot, vetoes the pack's LoadFirst for this launch only, then quits. Edit ORDER in the parked payload before each arm; the requiredPresent gate names the ids it must carry.",
+  "kit": "B:\\Dev\\SMR\\SMR-BugFixPack-TestKit",
+  "park": "B:\\Dev\\SMR\\SMR-BugFixPack\\tools\\arming\\payloads",
+  "stripPattern": "Code/98_LoadFirst",
+  "anchorAfter": "99_FixtureCarry.lua",
+  "bootSymbol": "LoadFirstSet.Boot",
+  "symbolNamespace": "LoadFirstSet",
+  "permanent": ["Code/00_TestCore.lua"],
+  "mustNotBeListed": ["Code/96_AutoRunFlag.lua", "Code/97_ForceInactive.lua", "Code/98_EnablePathLeg.lua", "Code/98_LoadFirstRead.lua"],
+  "mustNotBeListedWhy": "The autorun would start a colony and race the menu; forced-inactive is a different leg; the read payload and this one would both quit and race.",
+  "bannedPatterns": ["SaveGame\\s*\\(", "LoadGame\\s*\\("],
+  "requiredPresent": ["ORDER = {", "SMR_CommunityFixPackTestKit", "SMR_CommunityFixPack", "SMRFixPack_Disabled"],
+  "payloads": [{"src": "98_LoadFirstSet.lua.txt", "dst": "98_LoadFirstSet.lua", "selfDrives": true}]
+}

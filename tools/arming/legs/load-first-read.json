@@ -1,0 +1,16 @@
+{
+  "leg": "load-first-read",
+  "_what": "Read-only boot census for the LoadFirst (option B) unattended launches: logs the saved enable order as the kit sees it at file scope and again at the pregame menu, the running ModsLoaded order, the pack's LoadFirst/VacuumWalks/HubLocalAccess statuses, then quits at the menu. No save is loaded, nothing is written.",
+  "kit": "B:\\Dev\\SMR\\SMR-BugFixPack-TestKit",
+  "park": "B:\\Dev\\SMR\\SMR-BugFixPack\\tools\\arming\\payloads",
+  "stripPattern": "Code/98_LoadFirst",
+  "anchorAfter": "99_FixtureCarry.lua",
+  "bootSymbol": "LoadFirstLeg.Boot",
+  "symbolNamespace": "LoadFirstLeg",
+  "permanent": ["Code/00_TestCore.lua"],
+  "mustNotBeListed": ["Code/96_AutoRunFlag.lua", "Code/97_ForceInactive.lua", "Code/98_EnablePathLeg.lua", "Code/98_LoadFirstSet.lua"],
+  "mustNotBeListedWhy": "The autorun would start a colony and race the menu read; forced-inactive changes the statuses this leg reads; the set payload rewrites the order this leg is meant to read back.",
+  "bannedPatterns": ["SaveGame\\s*\\(", "LoadGame\\s*\\(", "TurnModO", "WriteModPersistentData"],
+  "requiredPresent": ["GetModsEnabledByUser", "ModsLoaded", "SMRFixPack"],
+  "payloads": [{"src": "98_LoadFirstRead.lua.txt", "dst": "98_LoadFirstRead.lua", "selfDrives": true}]
+}

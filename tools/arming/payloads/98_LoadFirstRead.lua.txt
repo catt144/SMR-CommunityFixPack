@@ -1,0 +1,61 @@
+-- TEMPORARY LoadFirst (option B) read-only boot census, game 1.1.1.405907.
+-- Logs the saved enable order as this kit sees it when its own code loads and
+-- again at the pregame menu, the running ModsLoaded order, and the pack's
+-- LoadFirst / VacuumWalks / HubLocalAccess statuses; then quits at the menu.
+-- No save is loaded. Nothing is written: this file never calls a mod-list
+-- helper that mutates, and never touches persistent data.
+LoadFirstLeg = {}
+
+local function say(s)
+    ModLog("[LOADFIRST] " .. tostring(s):gsub("%%", "%%%%"))
+    local flush = rawget(_G, "FlushLogFile")
+    if flush then pcall(flush) end
+end
+
+local function ids(list)
+    local out = {}
+    for i, v in ipairs(list or {}) do out[i] = tostring(type(v) == "table" and v.id or v) end
+    return table.concat(out, ",")
+end
+
+-- file scope: what the saved list holds BEFORE any later mod's code has run
+say("AT_LOAD saved=" .. ids(GetModsEnabledByUser()))
+say("AT_LOAD loaded=" .. ids(ModsLoaded))
+
+function LoadFirstLeg.Census(where)
+    say(where .. " saved=" .. ids(GetModsEnabledByUser()))
+    say(where .. " loaded=" .. ids(ModsLoaded))
+    local pack = rawget(_G, "SMRFixPack")
+    if type(pack) ~= "table" or type(pack.fixes) ~= "table" then
+        say(where .. " pack=absent")
+        return
+    end
+    for _, id in ipairs({ "LoadFirst", "VacuumWalks", "HubLocalAccess" }) do
+        local f = pack.fixes[id]
+        say(where .. " fix " .. id .. " status=" .. tostring(f and f.status) .. " detail=" .. tostring(f and f.detail))
+    end
+    local lf = pack.LoadFirst
+    if type(lf) == "table" then
+        say(where .. " LoadFirst promoted=" .. tostring(lf.promoted and (lf.promoted.from .. "/" .. lf.promoted.count) or "no")
+            .. " pending_notice=" .. tostring(lf.pending_notice) .. " notice_shown=" .. tostring(lf.notice_shown))
+    end
+end
+
+function LoadFirstLeg.Boot()
+    CreateRealTimeThread(function()
+        Sleep(1)
+        local deadline = RealTime() + 300000
+        while not GetPreGameMainMenu() do
+            if RealTime() > deadline then say("TIMEOUT menu"); quit(); return end
+            Sleep(500)
+        end
+        Sleep(4000)
+        local ok, err = pcall(LoadFirstLeg.Census, "AT_MENU")
+        say("CENSUS ok=" .. tostring(ok) .. " err=" .. tostring(err))
+        say("DONE")
+        Sleep(1500)
+        quit()
+    end)
+end
+
+LoadFirstLeg.Boot()
