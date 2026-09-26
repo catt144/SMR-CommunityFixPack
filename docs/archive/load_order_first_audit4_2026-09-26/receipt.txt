@@ -1,0 +1,56 @@
+Audit of load-first 1325db5 (Astra's role-swap repair), receipt, 2026-09-26. Auditor: the former build seat. Records main over 7348ad9.
+Tested tree: detached worktree B:/Dev/SMR/SMR-FixPack-audit4 at 1325db54a0ec2a835b694eed8b1034817d08f948 (git rev-parse HEAD); the installed checkout stayed on main; no launch, no kit change, the owner's game (Mars.exe pid 38008, started 10:33:35) left alone.
+COMMIT_INPUT Code/01_LoadFirst.lua sha256 c7fdea6a3c878fb49d9e8f5bdf25b369c7eabb3600d4b106b530ec0a06838e79
+COMMIT_INPUT tools/arming/payloads/98_LoadFirstSync.lua.txt sha256 19c3955e79fac239886d99c3d45b7739f1c0d814e51595d00d00efeae9811d9e
+COMMIT_INPUT tools/desk_load_first.py sha256 0454cac9e25330812d2385624af660be5112f57cf670a9adb0cd0617c3bcdc96
+COMMIT_INPUT tools/arming/legs/load-first-sync.json sha256 ece9381d23910412776fe9969dfaf117f32d991146a21bcb3054eca8262b6d14
+HARNESS python -X utf8 tools/desk_load_first.py (transcript baseline_and_mutants.txt); --list (killers.txt)
+  INPUT Code/00_Core.lua 8a2cdcc1dac9cac54eeb1de0f1bab056f832cef250aadbdb12b07323d5d20d73
+  INPUT Code/01_LoadFirst.lua c7fdea6a3c878fb49d9e8f5bdf25b369c7eabb3600d4b106b530ec0a06838e79
+  INPUT Code/Hubset_OnHubNow.lua 14352af7af53ff7a591ce5d70e9595a5339724ba6f8a0121b8fe03fa97b7fd9b
+  INPUT Code/Fix_VacuumWalks.lua 8c8bd96a3f04dd00c63ece0c394bedad6607b41b629c1a883241fbda54e0d107
+  INPUT Code/Fix_HubLocalAccess.lua 09f31d6716973a77ce1428fb891d2e2319140d3a7e530c7fbde34669fc1e7994
+  INPUT tools/arming/payloads/98_LoadFirstSync.lua.txt 19c3955e79fac239886d99c3d45b7739f1c0d814e51595d00d00efeae9811d9e
+  BASELINE 92 of 92 demands held
+  RESULT baseline 92/92 held; 42 group(s), 3 independent; control problems: 0
+  reconcile: PASS lines=92 FAIL lines=0 vs BASELINE line
+  MUTANT no-rebuild                     37 failed  groups: 1a, 1b, 4b, 4c, 5a, 5b, 6a, 6b, 7a, 7b, R1a, R1b, R1c, R1d, R2a, R2b, R2c, R3a, R5D1, R5E2, R5E3, shape
+  MUTANT always-rebuild                 17 failed  groups: 1a, 2, 4b, 4c, 5c, 7b, R1a, R1b, R1d, R3c, R5E2, engine, shape
+  MUTANT ignore-option                   5 failed  groups: 4a, R5E2
+  MUTANT ignore-config                   1 failed  groups: R3b
+  MUTANT ignore-probe                    4 failed  groups: 3b, R3a
+  MUTANT ignore-absent                   1 failed  groups: shape
+  MUTANT clobber-slot                    5 failed  groups: 5a, 5b, R2a, R2b, R2c
+  MUTANT no-notice                      10 failed  groups: 1a, 1b, 4b, 4c, R1a, R1b, R1c, R1d, R5E2
+  MUTANT bypass-veto                     7 failed  groups: 4a, 4d, R5E1, R5E2
+  MUTANT fixed-probe                     1 failed  groups: R3a
+  MUTANT ignore-loadall                  8 failed  groups: 3a, 3b, R3a, R3b
+  MUTANT not-optional                    9 failed  groups: 4b, 4c, R1a, R1b, R1c, R5E2
+  MUTANT witness-queue-only             11 failed  groups: R5D2, R5D3, R5D4, R5D5, R5D6, R5D8, R5D9
+  MUTANT witness-no-finish              11 failed  groups: R5D1, R5D2, R5D5, R5D6, R5D7, R5D9
+  MUTANT witness-ignore-clear            4 failed  groups: R5D3, R5D8, R5D9
+  MUTANT witness-ignore-inflight-clear   3 failed  groups: R5D8, R5D9
+  MUTANT witness-ignore-error            2 failed  groups: R5D4
+  MUTANT witness-ignore-empty            1 failed  groups: R5D5
+  MUTANT witness-assume-success         10 failed  groups: R5D1, R5D2, R5D5, R5D6, R5D7
+  MUTANT witness-global-parent           1 failed  groups: R5D9
+  MUTANT_TOTAL members=20 with_failures=20 (Astra's receipt: 20/20)
+  CONTROL R5D1   killed by: no-rebuild, witness-assume-success, witness-no-finish expected: no-rebuild, witness-no-finish
+  CONTROL R5D2   killed by: witness-assume-success, witness-no-finish, witness-queue-only expected: witness-queue-only
+  CONTROL R5D3   killed by: witness-ignore-clear, witness-queue-only      expected: witness-ignore-clear, witness-queue-only
+  CONTROL R5D4   killed by: witness-ignore-error, witness-queue-only      expected: witness-ignore-error, witness-queue-only
+  CONTROL R5D5   killed by: witness-assume-success, witness-ignore-empty, witness-no-finish, witness-queue-only expected: witness-ignore-empty, witness-queue-only
+  CONTROL R5D6   killed by: witness-assume-success, witness-no-finish, witness-queue-only expected: witness-no-finish
+  CONTROL R5D7   killed by: witness-assume-success, witness-no-finish     expected: witness-assume-success
+  CONTROL R5D8   killed by: witness-ignore-clear, witness-ignore-inflight-clear, witness-queue-only expected: witness-ignore-clear, witness-ignore-inflight-clear
+  CONTROL R5D9   killed by: witness-global-parent, witness-ignore-clear, witness-ignore-inflight-clear, witness-no-finish, witness-queue-only expected: witness-global-parent
+  CONTROL R5E1   killed by: bypass-veto                                   expected: bypass-veto
+  CONTROL R5E2   killed by: always-rebuild, bypass-veto, ignore-option, no-notice, no-rebuild, not-optional expected: no-rebuild, not-optional
+  CONTROL R5E3   killed by: no-rebuild                                    expected: no-rebuild
+  CONTROL pdxfetch independent by design (not a module behaviour)
+  CONTROL_TOTAL new-group rows=13 (R5D1-9, R5E1-3, pdxfetch = 13)
+SANDBOX PROBE: sandbox_probe.txt (PROBE lines: the sandbox's rawget on the env reads through its metatable, visible before the fixture's blacklist injection and hidden after, so R5D7's sandbox demand is a real check; CurrentThread resolves through the env)
+ARCHIVE sha256 (LF bytes):
+  b593a584e001ff2b3b956d880a8b940aab68f58cab7e53997cea206961d734c7  baseline_and_mutants.txt
+  048588047428490bf1d4f70fc1407f1ea4189210843fdfd62716febe6af44dc2  killers.txt
+  6f471f18c709c5d8fd81ab79bd9e0914e3098714a056f5ea3f9476ef0bd10c49  sandbox_probe.txt

@@ -10,16 +10,15 @@ loads first" claim below is desk- and unattended-verified on this one rig; the r
 in §5 is planned for the owner's approval, not run. A save request is not a disk write; the
 seven boot logs are the disk evidence. Where a line says MEASURED it names its command or log.
 
-**Latest audit verdict: CHANGES on `86a2507`, records `ab7f3ac` (§15).** R5-E's revised
-restoration is accepted. R5-D rejects the original in-flight counterexample, but still
-reports successful completion after silent fetch failure, logged child failure or logout
-during the sole running child. R1–R4 and R6 retain their prior acceptance and limits.
-**Repair after the role swap: `1325db5`, §16; awaiting the former build seat's audit.** The
-observer now reports callback lifecycle with remote success unverified, fixes cancellation
-and attempt attribution, and proposes diagnostic-only leg D. That scope revision is explicit
-and is not an audit clearance. The branch remains unmerged and the sitting held. Sections
-0–15 retain the build and audit history. The retained FIXED list and owner authority remain
-in §11.
+**Latest audit verdict: SHIP-TO-SITTING for `1325db5` with two preconditions (§17,
+2026-09-26).** §15's four false-success paths are closed by the observer at `1325db5` (§16);
+the explicit scope revision, leg D as a diagnostic with no remote-sync PASS, is accepted
+under the retained FIXED list. Before the approval request: one unattended rehearsal of the
+`1325db5` observer on `main`, and the §14 owner-session log follow-up. R1–R4, R6 and R5-E
+retain their prior acceptance and limits; the production module is unchanged since
+`8ea5449`. The verdict clears nothing beyond presenting the sitting for approval: no merge,
+no upload, no attended sitting. Sections 0–16 retain the build, audit and repair history.
+The retained FIXED list and owner authority remain in §11.
 
 ## 0 · Read this first — what the owner sees that the brief did not say
 
@@ -1328,3 +1327,100 @@ scope revision. Re-run the branch harness baseline and every module/observer mut
 R5D7–R5D9 and the source bodies, not just the totals. Judge whether diagnostic D is sufficient
 for SHIP-TO-SITTING under the retained FIXED list. Append the independent verdict to this
 report on `main`. The branch remains unmerged, the sitting held, and the consumed brief retired.
+
+## 17 · Audit of the role-swap repair — SHIP-TO-SITTING with two preconditions, 2026-09-26
+
+**SHIP-TO-SITTING for `load-first` at `1325db5`, records `main` at `7348ad9`, subject to the
+two preconditions named below; the former build seat audits, the repair was the former audit
+seat's (§16).** The observer now separates callback return from remote success, latches
+cancellation on an open attempt, and attributes children by thread; every one of §15's four
+false-success paths now reads not-success. The explicit scope revision, leg D as a diagnostic
+with no remote-sync PASS, is accepted, with the reasoning below and an owner note. The
+production module is unchanged (`c7fdea6a…`); R1–R4, R6 and R5-E keep their prior acceptance
+and limits. This verdict clears nothing beyond presenting the sitting for the owner's
+approval once the preconditions are met: no merge, no upload, no attended sitting.
+
+### What was measured
+
+MEASURED in a detached worktree at `1325db5` (the installed checkout stayed on `main`; the
+owner's instance, `Mars.exe` pid 38008 started 10:33:35, was left alone; nothing was armed or
+launched): `python -X utf8 tools/desk_load_first.py` returns **92 of 92** demands held, 42
+groups, 3 independent, control problems 0; **all 20 declared mutants** (12 module, 8
+observer) kill every group they are declared for. The [receipt](../../archive/load_order_first_audit4_2026-09-26/receipt.txt)
+reconciles the 92 against its PASS/FAIL lines, the 20 mutant rows against `MUTANT_TOTAL`, the
+13 new-group control rows, and binds the tested bytes to the `1325db5` blobs by hash; the
+[transcript](../../archive/load_order_first_audit4_2026-09-26/baseline_and_mutants.txt) and
+[killers](../../archive/load_order_first_audit4_2026-09-26/killers.txt) are archived alongside.
+§16's receipt reports the same totals from its own worktree; this run is independent of it.
+
+The diff `86a2507..1325db5` was read whole (payload, manifest, harness). A [sandbox probe](../../archive/load_order_first_audit4_2026-09-26/sandbox_probe.txt)
+settles two things the totals cannot: the sandbox's `rawget` on the mod env reads through the
+env's metatable (the Paradox fetch name is visible before the R5D7 fixture's blacklist
+injection and hidden after it), so R5D7's "the payload cannot read the API" demand is a real
+check; and `CurrentThread` resolves through the env, so the observer's thread-keyed
+attribution can run in the game (it is not in `ModEnvBlacklist`, and both the pack's
+`Fix_VacuumWalks.lua` and three kit files already call it).
+
+### Judgments
+
+| §15 finding | Disposition at `1325db5` |
+|---|---|
+| Partial enumeration reads COMPLETE | Closed. R5D7 runs the archived fetch/root/child bodies (`ModManager.lua:1739-1760`, `:1864-1885`, `:1763-1862`) with a failing second page: lifecycle `RETURNED-UNVERIFIED`, `sync_success=UNVERIFIED`; `witness-assume-success` kills it. No success predicate exists to fool. |
+| Logged install / uninstall failure reads COMPLETE | Closed the same way; both logged branches are exercised (`Failed to install mod`, `Failed to uninstall mod` in the captured `mods_print`) and read `RETURNED-UNVERIFIED`. |
+| Logout during the sole running child reads COMPLETE | Closed. `Clear` latches `invalidated` on every open attempt (root or any child unfinished), so the verdict is `CANCELLED` even with nothing queued (R5D8, `cancelled_unstarted=0`), and stays `CANCELLED` when the root resumes and schedules children after the logout. `witness-ignore-inflight-clear` kills it. |
+| Attribution through `W.executing` can inherit a suspended callback's parent | Closed. Parents are keyed by `CurrentThread()` and restored after `pcall`; an untyped zero-argument push is a new root before any parent lookup. R5D9: an unrelated `SyncUpdatePdxMod` push from another thread is `other`; a second login while the old root is suspended gets its own attempt, and the old root's later children stay on the old, cancelled attempt. `witness-global-parent` kills it. |
+| §14's empty attempt claimed "nothing to sync" | Withdrawn by §16; `EMPTY-UNVERIFIED` and the accompanying "empty is unknown" wording are correct, and `witness-ignore-empty` kills the demand. |
+
+**The scope revision is accepted.** The retained FIXED list (§11) requires vanilla repairs
+first for uninstructed players, no game-file change, other mods' relative order, opt-out, a
+restart notice, no guard hardening, an inert canary, a separate audit, and owner approval
+before any sitting or upload. It does not require a Paradox-sync success witness; that
+requirement was the audit seat's own (§11 R5, §13 R5-D), raised to keep an empty queue from
+being read as completion, and §15 expressly allowed a revised scope for review. The question
+the sitting must answer is whether the saved order survives what the game's sync does, and
+that is observable: the saved list before and after the attempt, and the next boot's loaded
+list. Remote success is not observable from a mod (`AsyncPdx*` is a blacklisted prefix,
+`ParadoxMods.lua:288-294`), and a diagnostic that says so is worth more than a PASS that
+cannot mean it. Two source facts bound what D can find, both archived **1.1.1.405907**:
+
+- The sync path can move only a Paradox-installed mod: `SyncUpdatePdxMod` removes a mod from
+  the enable list on a version change through `mod_def:delete()` and `TurnModOff(mod_def.id)`
+  (`ModManager.lua:1798-1801`), where `mod_def` is found by `v.PdxMod.ModID`; `TurnModOff` on
+  another id leaves index 1 alone and `TurnModOn` appends (`:35-41`). On this rig the pack is a
+  junction install with no `PdxMod`, so no sync child can move it; D here can only read
+  `EMPTY-UNVERIFIED` or a `RETURNED-UNVERIFIED` attempt that touched other mods.
+- For a Paradox-installed copy of the pack, an update through the boot sync takes it off the
+  list; the sync path then sets only the UI flag (`:1855-1860`), and the enable that re-adds it
+  runs through the manager or the download handler (`:1532-1550`, `:1930-1951`), which appends.
+  The pack then loads last once and promotes itself again at the next start, with the notice.
+  That is the designed behaviour (R1), not a defect, and it is not testable on this rig; it is
+  recorded here so the owner and the post-upload seat know that Paradox players will see the
+  notice again after each update the sync applies.
+
+**Owner note.** What changed for you: leg D no longer claims "the Paradox sync succeeded".
+It records what the game's own sync callbacks did (started, returned, cancelled, failed) and
+whether your saved order moved, and every line says the remote result is unverified. That is
+the honest limit of what a mod can see; the order question is still answered.
+
+### Preconditions for the approval request (sitting preparation, not code changes)
+
+1. **One unattended rehearsal of the `1325db5` observer on `main`**, `MODE = "unattended"`,
+   armed from the branch checkout root as §16 says (`park` is now relative and `Join-Path`
+   resolves it against the working directory, `tools/arm_leg.ps1:596`), when the owner's
+   instance is not running. L12 exercised the `86a2507` wrapper; the thread-keyed wrapper, the
+   `invalidated` latch and the in-place wrapping of a queued root have not run in the game.
+   Expected on this rig: `INSTALL` before `PUSH … kind=root`, `MSG PdxLogin`, lifecycle
+   `EMPTY-UNVERIFIED sync_success=UNVERIFIED`, `ORDER saved=` unchanged, zero `[LUA ERROR]`.
+   Archive the log in the citing commit.
+2. **The owner-session follow-up from §14** stays owed: the instance started at 10:33:35 was
+   still running at the time of this audit. Read its log after it closes; if it shows a
+   promotion, restore with the set leg and read back on `main` (§14 E, the prepared script).
+
+Neither precondition changes code or the plan; both are records the approval request must
+carry. The estimate stands at §15's **13 owner minutes; 17 with PN**, `<<PENDING-RUN>>`.
+
+### Not cleared by this verdict
+
+The merge, the attended sitting (owner approval), the upload, the post-upload canary checks
+(§6, §§11–13 R6) and the release outbox hold remain as retained. The consumed brief stays
+retired; the retained FIXED list and owner authority remain in §11.

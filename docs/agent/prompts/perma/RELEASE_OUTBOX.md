@@ -23,18 +23,15 @@ player surface bumps it by one on release.
 
 ### Pending — LoadFirst: the pack moves itself to the front of the mod load order (2026-09-25)
 
-**HOLD: audit CHANGES on `86a2507`; repair `1325db5` awaits the role-swap audit, branch
-`load-first`, NOT merged.** The latest audit is
-[LOAD_ORDER_FIRST_BUILD_2026-09-25.md §15](../../reports/LOAD_ORDER_FIRST_BUILD_2026-09-25.md#15--audit-of-the-second-repair--changes-2026-09-26).
-R5-E's restoration is accepted; R5-D still admits false COMPLETE results after silent fetch
-failure, logged child failure or logout during the sole running child. L12's empty attempt
-is not PASS and does not prove an empty account. R1–R4 and R6 retain their accepted limits.
-The repair in §16 separates callback lifecycle from remote success, fixes cancellation and
-attempt attribution, and explicitly proposes diagnostic-only leg D. Its baseline is 92/92
-and all declared mutants are caught; that does not clear the proposed scope revision.
-The production module is unchanged since `8ea5449`. The former build seat audits this repair.
-Ships only after re-audit returning SHIP-TO-SITTING and
-the owner's sitting approval. The consumed brief's
+**HOLD: SHIP-TO-SITTING for `1325db5` with two preconditions, branch `load-first`, NOT
+merged, sitting not yet approved.** The latest audit is
+[LOAD_ORDER_FIRST_BUILD_2026-09-25.md §17](../../reports/LOAD_ORDER_FIRST_BUILD_2026-09-25.md#17--audit-of-the-role-swap-repair--ship-to-sitting-with-two-preconditions-2026-09-26).
+§15's false-success paths are closed; leg D is a diagnostic with no remote-sync PASS (scope
+revision accepted under the retained FIXED list; the owner note is in §17). Before the
+approval request: one unattended rehearsal of the `1325db5` observer on `main`, and the §14
+owner-session log follow-up. R1–R4, R6 and R5-E retain their accepted limits. The production
+module is unchanged since `8ea5449`; the harness holds 92/92 with 20 mutants.
+Ships only after the owner's sitting approval and the sitting itself. The consumed brief's
 authority and unfinished requirements are retained in that report.
 The normal promotion/restart/Passage Network evidence remains valid on this rig; the ordinary
 desk harness and its behavioral controls pass; the remaining failures concern the sitting plan.

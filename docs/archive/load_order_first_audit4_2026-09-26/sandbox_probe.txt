@@ -1,0 +1,9 @@
+COMMAND python -X utf8 <this script> in a detached worktree of 1325db5
+INPUT tools/arming/payloads/98_LoadFirstSync.lua.txt 19c3955e79fac239886d99c3d45b7739f1c0d814e51595d00d00efeae9811d9e
+INPUT Code/01_LoadFirst.lua c7fdea6a3c878fb49d9e8f5bdf25b369c7eabb3600d4b106b530ec0a06838e79
+PROBE via env metatable, before the fixture's blacklist injection -> visible=True
+PROBE rawget on env, before injection (what R5D7 tests) -> visible=True
+PROBE via env metatable, after injection -> visible=False
+PROBE rawget on env, after injection (what R5D7 tests) -> visible=False
+PROBE CurrentThread resolves through the env (payload's thread keying) -> visible=True
+PROBE_TOTAL members=5
