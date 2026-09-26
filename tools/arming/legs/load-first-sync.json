@@ -1,0 +1,16 @@
+{
+  "leg": "load-first-sync",
+  "_what": "Paradox callback observer for diagnostic LoadFirst sitting leg D. Records the root, same-thread children, callback start/return/error and Clear. RETURNED-UNVERIFIED records callback return only: silent fetch errors and logged-only child errors make remote sync success unobservable here. Every report says sync_success=UNVERIFIED; no remote-sync PASS. Empty is unknown, not proof of no subscriptions. Clear invalidates open attempts even if nothing was queued. MODE unattended logs lifecycle and saved order, then quits; MODE sitting binds Sync read. Edit MODE in the parked payload before each arm. Observes only: no mod-list helper, persistent-data write or save.",
+  "kit": "B:\\Dev\\SMR\\SMR-BugFixPack-TestKit",
+  "park": "tools/arming/payloads",
+  "stripPattern": "Code/98_LoadFirst",
+  "anchorAfter": "99_FixtureCarry.lua",
+  "bootSymbol": "LoadFirstSync.Boot",
+  "symbolNamespace": "LoadFirstSync",
+  "permanent": ["Code/00_TestCore.lua"],
+  "mustNotBeListed": ["Code/96_AutoRunFlag.lua", "Code/97_ForceInactive.lua", "Code/98_EnablePathLeg.lua", "Code/98_LoadFirstRead.lua", "Code/98_LoadFirstSet.lua", "Code/98_LoadFirstPack.lua"],
+  "mustNotBeListedWhy": "The autorun would start a colony and race the menu; forced-inactive changes the pack statuses read beside the verdict; the read, set and pack payloads also quit at the menu and would race this one in MODE unattended.",
+  "bannedPatterns": ["SaveGame\\s*\\(", "LoadGame\\s*\\(", "TurnModO", "WriteModPersistentData"],
+  "requiredPresent": ["g_PopsDownloadModsQueue", "SyncUpdatePdxMod", "PushTask", "MODE = "],
+  "payloads": [{"src": "98_LoadFirstSync.lua.txt", "dst": "98_LoadFirstSync.lua", "selfDrives": true}]
+}

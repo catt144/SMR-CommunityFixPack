@@ -1,0 +1,249 @@
+-- TEMPORARY LoadFirst (option B) Paradox callback observer, game 1.1.1.405907.
+-- Instruments THIS process's g_PopsDownloadModsQueue instance, the queue that
+-- OnMsg.PdxLogin feeds (ModManager.lua:1902-1906): every task pushed on it is
+-- wrapped so the log carries when it started, when its callback returned, whether
+-- it raised or returned an error string, and which running task pushed it. The
+-- sync ROOT is the untyped zero-argument push (:1906, SyncPdxMods); its CHILDREN
+-- are SyncUpdatePdxMod pushes on that callback's own thread (:1877 and :1882).
+-- Clear invalidates every open attempt, including its already-running callback.
+-- RETURNED-UNVERIFIED means callbacks returned, NOT successful remote sync.
+-- ModManager.lua:1749-1753 can discard a fetch error, and :1802-1807/:1825-1833
+-- log child errors without returning them. The sandbox hides AsyncPdx* APIs
+-- (ParadoxMods.lua:288-294). This observer cannot prove those operations succeeded.
+-- Every report says sync_success=UNVERIFIED, with no success/PASS predicate.
+-- EMPTY-UNVERIFIED cannot distinguish an empty account from a failed fetch.
+-- Queue length and the saved list are diagnostic data only; neither proves sync.
+-- Writes nothing: no mod-list helper, no persistent data, no save; the wrapped
+-- callbacks run exactly as pushed and any error is re-raised to the queue.
+-- MODE "unattended": waits for the menu, then for the boot-time attempt to settle,
+-- logs the verdict and the saved order, and quits. MODE "sitting": binds the SMRTK
+-- scratch slot "Sync read" (the owner presses it after Log out / Log in) and never quits.
+LoadFirstSync = {}
+MODE = "sitting"
+
+local W = { attempts = {}, records = {}, serial = 0, executing = {}, installed = false, clears = 0 }
+LoadFirstSync.W = W
+
+local function say(s)
+    ModLog("[LOADFIRST-SYNC] " .. tostring(s):gsub("%%", "%%%%"))
+    local flush = rawget(_G, "FlushLogFile")
+    if flush then pcall(flush) end
+end
+
+local function ids(list)
+    local out = {}
+    for i, v in ipairs(list or {}) do out[i] = tostring(type(v) == "table" and v.id or v) end
+    return table.concat(out, ",")
+end
+
+local function now()
+    local rt = rawget(_G, "RealTime")
+    return type(rt) == "function" and rt() or 0
+end
+
+local function queued()
+    local q = rawget(_G, "g_PopsDownloadModsQueue")
+    return type(q) == "table" and #q or -1
+end
+
+-- A login push is a new root even while an older callback is suspended. A typed
+-- UI push on another thread is not a child of whichever callback last yielded.
+local function classify(metadata, callback, nargs)
+    local typed = type(metadata) == "table" and metadata.type ~= nil
+    if not typed and nargs == 0 then return "root", nil end
+    local running = W.executing[CurrentThread()]
+    if callback == rawget(_G, "SyncUpdatePdxMod") and running and running.attempt then
+        return "child", running.attempt
+    end
+    return "other", nil
+end
+
+local function record(metadata, callback, nargs)
+    W.serial = W.serial + 1
+    local kind, root = classify(metadata, callback, nargs)
+    local rec = { serial = W.serial, kind = kind, pushed = now(), children = {},
+        is_sync_update = (callback == rawget(_G, "SyncUpdatePdxMod")) }
+    W.records[#W.records + 1] = rec
+    if kind == "root" then
+        W.attempts[#W.attempts + 1] = rec
+        W.current = rec
+        rec.attempt = rec
+    elseif kind == "child" then
+        rec.attempt = root
+        root.children[#root.children + 1] = rec
+    end
+    say("PUSH serial=" .. rec.serial .. " kind=" .. kind .. " parent=" .. tostring(root and root.serial or "none")
+        .. " sync_update=" .. tostring(rec.is_sync_update) .. " queued=" .. queued())
+    return rec
+end
+
+local function wrap(rec, callback)
+    return function(...)
+        rec.started = now()
+        say("START serial=" .. rec.serial .. " kind=" .. rec.kind .. " queued=" .. queued())
+        local thread = CurrentThread()
+        local previous = W.executing[thread]
+        W.executing[thread] = rec
+        local res = table.pack(pcall(callback, ...))
+        W.executing[thread] = previous
+        rec.finished = now()
+        if not res[1] then
+            rec.error = tostring(res[2])
+            say("END serial=" .. rec.serial .. " kind=" .. rec.kind .. " raised=" .. rec.error .. " queued=" .. queued())
+            error(res[2], 0)
+        end
+        if type(res[2]) == "string" then rec.error = "returned: " .. res[2] end
+        say("END serial=" .. rec.serial .. " kind=" .. rec.kind .. " returned=" .. tostring(res[2]) .. " queued=" .. queued())
+        return table.unpack(res, 2, res.n)
+    end
+end
+
+local function install(q)
+    local class_push, class_clear = q.PushTask, q.Clear
+    if type(class_push) ~= "function" or type(class_clear) ~= "function" then
+        return false, "queue has no PushTask/Clear"
+    end
+    q.PushTask = function(self, metadata, callback, ...)
+        local rec = record(metadata, callback, select("#", ...))
+        return class_push(self, metadata, wrap(rec, callback), ...)
+    end
+    q.Clear = function(self)
+        W.clears = W.clears + 1
+        -- Clear removes queued work, but logout also invalidates the identity of
+        -- an in-flight attempt. Its callback may still return after the logout.
+        for _, a in ipairs(W.attempts) do
+            local open = not a.finished
+            for _, child in ipairs(a.children) do open = open or not child.finished end
+            if open then a.invalidated = now() end
+        end
+        local dropped = 0
+        for _, rec in ipairs(W.records) do
+            if rec.attempt and not rec.started and not rec.cancelled then
+                rec.cancelled = now()
+                dropped = dropped + 1
+            end
+        end
+        say("CLEAR clears=" .. W.clears .. " cancelled_unstarted=" .. dropped .. " queued_before=" .. #self)
+        return class_clear(self)
+    end
+    -- a task already queued when the witness arrives (the login can follow the
+    -- queue's creation within a slice, PdxSDK.lua:320 then :338) is wrapped in place:
+    -- PushTask stored its callback at [1] and its arguments from [2] (:933-941)
+    local wrapped_queued = 0
+    for _, task in ipairs(q) do
+        if type(task) == "table" and type(task[1]) == "function" then
+            local rec = record(task, task[1], #task - 1)
+            task[1] = wrap(rec, task[1])
+            wrapped_queued = wrapped_queued + 1
+        end
+    end
+    W.installed = true
+    return true, "wrapped_queued=" .. wrapped_queued
+end
+
+-- Lifecycle only: callback return is observable; remote success is not. A
+-- SyncUpdatePdxMod push seen without its root means the witness arrived after the
+-- root started: UNWITNESSED, never a witnessed return of the complete attempt.
+function LoadFirstSync.Verdict(a)
+    if not a then
+        for _, rec in ipairs(W.records) do
+            if rec.is_sync_update then return "UNWITNESSED" end
+        end
+        return "NO-ATTEMPT"
+    end
+    local tasks = { a }
+    for _, child in ipairs(a.children) do tasks[#tasks + 1] = child end
+    local failed, cancelled, unfinished = 0, 0, 0
+    for _, t in ipairs(tasks) do
+        if t.error then failed = failed + 1
+        elseif t.cancelled then cancelled = cancelled + 1
+        elseif not t.finished then unfinished = unfinished + 1 end
+    end
+    if failed > 0 then return "FAILED" end
+    if cancelled > 0 or a.invalidated then return "CANCELLED" end
+    if unfinished > 0 then return "IN-FLIGHT" end
+    if #a.children == 0 then return "EMPTY-UNVERIFIED" end
+    return "RETURNED-UNVERIFIED"
+end
+
+function LoadFirstSync.Report(where)
+    local a = W.current
+    local verdict = LoadFirstSync.Verdict(a)
+    local sync_success = "UNVERIFIED"
+    local started, finished = 0, 0
+    if a then
+        for _, child in ipairs(a.children) do
+            if child.started then started = started + 1 end
+            if child.finished then finished = finished + 1 end
+        end
+    end
+    say(where .. " VERDICT verdict=" .. verdict .. " sync_success=" .. sync_success
+        .. " attempts=" .. #W.attempts .. " root=" .. tostring(a and a.serial or "none")
+        .. " root_started=" .. tostring(a and a.started ~= nil) .. " root_finished=" .. tostring(a and a.finished ~= nil)
+        .. " children=" .. tostring(a and #a.children or 0) .. " children_started=" .. started
+        .. " children_finished=" .. finished .. " clears=" .. W.clears
+        .. " queued=" .. queued() .. " installed=" .. tostring(W.installed))
+    say(where .. " ORDER saved=" .. ids(GetModsEnabledByUser()))
+    return { verdict = verdict, sync_success = sync_success, attempts = #W.attempts,
+        children = a and #a.children or 0, children_finished = finished, clears = W.clears, queued = queued() }
+end
+
+OnMsg.PdxLogin = function() say("MSG PdxLogin queued=" .. queued()) end
+OnMsg.PdxLogout = function() say("MSG PdxLogout queued=" .. queued()) end
+
+-- The queue is created by a thread that OnMsg.PdxStartedUp spawns (ModManager.lua
+-- :1724-1727, :1963-1969), after mod code has loaded; poll every slice for the
+-- first 30 s so the wrappers are in place before the login push, then slower.
+local function install_when_ready()
+    CreateRealTimeThread(function()
+        local start = now()
+        local deadline = start + 300000
+        while now() < deadline do
+            local q = rawget(_G, "g_PopsDownloadModsQueue")
+            if type(q) == "table" then
+                local ok, note = install(q)
+                say("INSTALL ok=" .. tostring(ok) .. " note=" .. tostring(note) .. " queued=" .. queued() .. " t=" .. now())
+                return
+            end
+            Sleep(now() - start < 30000 and 1 or 250)
+        end
+        say("INSTALL ok=false note=queue never appeared")
+    end)
+end
+
+function LoadFirstSync.Boot()
+    install_when_ready()
+    if MODE == "sitting" then
+        local kit = rawget(_G, "SMRTK")
+        if type(kit) == "table" and type(kit.BindScratch) == "function" then
+            kit.BindScratch("Sync read", function() return LoadFirstSync.Report("SLOT") end, { mode = "once" })
+            say("SLOT bound=Sync read")
+        else
+            say("SLOT bound=false err=SMRTK.BindScratch not found")
+        end
+        return
+    end
+    CreateRealTimeThread(function()
+        Sleep(1)
+        local deadline = now() + 300000
+        while not GetPreGameMainMenu() do
+            if now() > deadline then say("TIMEOUT menu"); quit(); return end
+            Sleep(500)
+        end
+        -- let the boot-time attempt settle: an attempt that is still in flight or
+        -- absent after the wait is logged as such, never as a returned attempt
+        local settle = now() + 60000
+        while now() < settle do
+            local verdict = LoadFirstSync.Verdict(W.current)
+            if verdict ~= "IN-FLIGHT" and verdict ~= "NO-ATTEMPT" then break end
+            Sleep(500)
+        end
+        local ok, err = pcall(LoadFirstSync.Report, "AT_MENU")
+        say("REPORT ok=" .. tostring(ok) .. " err=" .. tostring(ok and "nil" or err))
+        say("DONE")
+        Sleep(1500)
+        quit()
+    end)
+end
+
+LoadFirstSync.Boot()

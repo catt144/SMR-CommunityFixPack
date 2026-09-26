@@ -1,0 +1,71 @@
+-- TEMPORARY LoadFirst (option B) canary leg: the Mod Editor's own save and pack
+-- steps, run on a SCRATCH copy of the pack, game 1.1.1.405907.
+-- The scratch mod (id SMR_LoadFirstCanaryScratch, an appdata folder holding only
+-- metadata.lua and items.lua) stays disabled; nothing of it runs. At the menu:
+--   MODE "pack":      PackModForBugReporter(scratch) -- the Editor's packer on the
+--                     on-disk file, no save (GedModEditor.lua:756-765 -> :676-739)
+--   MODE "save+pack": scratch:SaveWholeMod() first (Mod.lua:1153-1170 -> SaveDef
+--                     :973-993, the writeback that regenerates metadata.lua), then
+--                     the same packer.
+-- The packer calls ReloadLua (:713), which re-runs every mod file including this
+-- one: the guard below keeps the leg from starting twice. The real pack's LoadFirst
+-- is vetoed for this launch so the owner's saved order is not touched.
+-- Logs the OS path of the package; the harness copies and decodes it after exit.
+if rawget(_G, "LoadFirstPack_started") then return end
+LoadFirstPack_started = true
+
+SMRFixPack_Disabled = rawget(_G, "SMRFixPack_Disabled") or {}
+SMRFixPack_Disabled.LoadFirst = true
+
+LoadFirstPack = {}
+MODE = "save+pack"
+SCRATCH = "SMR_LoadFirstCanaryScratch"
+
+local function say(s)
+    ModLog("[LOADFIRST-PACK] " .. tostring(s):gsub("%%", "%%%%"))
+    local flush = rawget(_G, "FlushLogFile")
+    if flush then pcall(flush) end
+end
+
+local function ids(list)
+    local out = {}
+    for i, v in ipairs(list or {}) do out[i] = tostring(type(v) == "table" and v.id or v) end
+    return table.concat(out, ",")
+end
+
+function LoadFirstPack.Run()
+    say("MODE " .. MODE)
+    say("SAVED " .. ids(GetModsEnabledByUser()))
+    local mod = Mods[SCRATCH]
+    if not mod then say("SCRATCH absent from Mods"); return false end
+    say("SCRATCH def id=" .. tostring(mod.id) .. " version=" .. tostring(mod.version) .. " items_loaded=" .. tostring(mod:ItemsLoaded())
+        .. " dirty=" .. tostring(mod:IsDirty()) .. " path=" .. tostring(mod.path) .. " content_path=" .. tostring(mod.content_path))
+    if MODE == "save+pack" then
+        local before = mod.version
+        mod:SaveWholeMod()
+        say("SAVED_DEF version " .. tostring(before) .. " -> " .. tostring(mod.version) .. " saved=" .. tostring(mod.saved))
+    end
+    local os_path = PackModForBugReporter(mod)
+    say("PACKED os_path=" .. tostring(os_path))
+    say("SAVED_AFTER " .. ids(GetModsEnabledByUser()))
+    return true
+end
+
+function LoadFirstPack.Boot()
+    CreateRealTimeThread(function()
+        Sleep(1)
+        local deadline = RealTime() + 300000
+        while not GetPreGameMainMenu() do
+            if RealTime() > deadline then say("TIMEOUT menu"); quit(); return end
+            Sleep(500)
+        end
+        Sleep(3000)
+        local ok, res = pcall(LoadFirstPack.Run)
+        say("RUN ok=" .. tostring(ok) .. " result=" .. tostring(res))
+        Sleep(3000)
+        say("DONE")
+        quit()
+    end)
+end
+
+LoadFirstPack.Boot()

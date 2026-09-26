@@ -1,0 +1,16 @@
+{
+  "leg": "load-first-pack",
+  "_what": "Canary evidence for the LoadFirst (option B) build: runs the Mod Editor's own pack step (PackModForBugReporter) and, in MODE save+pack, its save step (SaveWholeMod) on a SCRATCH copy of the pack's metadata.lua/items.lua in an appdata mod folder that stays disabled. The real pack's LoadFirst is vetoed for the launch. Edit MODE in the parked payload before each arm; copy the package the log names after exit and decode it with tools/flpk_extract.py.",
+  "kit": "B:\\Dev\\SMR\\SMR-BugFixPack-TestKit",
+  "park": "B:\\Dev\\SMR\\SMR-BugFixPack\\tools\\arming\\payloads",
+  "stripPattern": "Code/98_LoadFirst",
+  "anchorAfter": "99_FixtureCarry.lua",
+  "bootSymbol": "LoadFirstPack.Boot",
+  "symbolNamespace": "LoadFirstPack",
+  "permanent": ["Code/00_TestCore.lua"],
+  "mustNotBeListed": ["Code/96_AutoRunFlag.lua", "Code/98_EnablePathLeg.lua", "Code/98_LoadFirstRead.lua", "Code/98_LoadFirstSet.lua"],
+  "mustNotBeListedWhy": "The autorun would start a colony and race the menu; the read and set payloads also quit at the menu and would race this one.",
+  "bannedPatterns": ["SaveGame\\s*\\(", "LoadGame\\s*\\(", "TurnModO"],
+  "requiredPresent": ["PackModForBugReporter", "SMR_LoadFirstCanaryScratch", "SMRFixPack_Disabled", "MODE = "],
+  "payloads": [{"src": "98_LoadFirstPack.lua.txt", "dst": "98_LoadFirstPack.lua", "selfDrives": true}]
+}
