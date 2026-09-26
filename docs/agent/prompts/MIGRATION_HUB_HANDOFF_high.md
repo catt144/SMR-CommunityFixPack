@@ -34,9 +34,11 @@ so more hub crossings) and its residue hypothesis is refuted. Overturn only on e
 2. **Done.** S1, S2, S3 and S5 are filed as [C114](../bugs/C114.md), [C115](../bugs/C115.md),
    [C116](../bugs/C116.md) and [C117](../bugs/C117.md). §7 and resweep corrections are folded into
    C42, C99, C109 and C111 as dated sections.
-3. **Decide with the owner whether P1 to P6** (the pack's own items, audit §4.2 and cross-check
-   ranking) become F entries. P2 and P3 ruled 2026-09-24: both fixed in the hub set (P2 filed as F127,
-   P3 tracked in item 5). P1, P4, P5 and P6 are unruled and tracked only in the reports.
+3. **Done. P1 to P6** (the pack's own items, audit §4.2 and cross-check ranking). P2 and P3 were
+   ruled on 2026-09-24: both were fixed in the hub set (P2 filed as F127, P3 tracked in item 5).
+   P1, P4, P5 and P6 were closed by the owner on 2026-09-26: "I think we agreed we were marking thats
+   as closed unless we get reports of actual impact". Do not file them or raise them again unless a
+   player report shows actual impact. The findings stay in the reports.
 4. **Reporter reply** for the Steam thread, when the owner asks: not his mods, not ours; the
    game measures reach from the centre of a radius-19 dome, rescue rides home are what the
    status shows, deaths come from the pickup anchored back at the hub. Do not call Passage
