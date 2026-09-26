@@ -1,8 +1,8 @@
 {
   "leg": "load-first-sync",
-  "_what": "Paradox sync completion witness for the LoadFirst (option B) sitting leg D and its unattended rehearsal: wraps the tasks pushed on this process's g_PopsDownloadModsQueue so the log carries the sync root, every child it scheduled, each start/return/error and any Clear, and reports a verdict that is COMPLETE only when all of them returned without error or cancellation; queue length is diagnostic only. MODE unattended waits for the boot-time attempt to settle, logs the verdict and saved order and quits; MODE sitting binds the SMRTK scratch slot Sync read and never quits. Edit MODE in the parked payload before each arm. Reads only: no mod-list helper, no persistent data, no save.",
+  "_what": "Paradox callback observer for diagnostic LoadFirst sitting leg D. Records the root, same-thread children, callback start/return/error and Clear. RETURNED-UNVERIFIED records callback return only: silent fetch errors and logged-only child errors make remote sync success unobservable here. Every report says sync_success=UNVERIFIED; no remote-sync PASS. Empty is unknown, not proof of no subscriptions. Clear invalidates open attempts even if nothing was queued. MODE unattended logs lifecycle and saved order, then quits; MODE sitting binds Sync read. Edit MODE in the parked payload before each arm. Observes only: no mod-list helper, persistent-data write or save.",
   "kit": "B:\\Dev\\SMR\\SMR-BugFixPack-TestKit",
-  "park": "B:\\Dev\\SMR\\SMR-BugFixPack\\tools\\arming\\payloads",
+  "park": "tools/arming/payloads",
   "stripPattern": "Code/98_LoadFirst",
   "anchorAfter": "99_FixtureCarry.lua",
   "bootSymbol": "LoadFirstSync.Boot",
