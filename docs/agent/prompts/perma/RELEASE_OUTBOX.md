@@ -24,9 +24,9 @@ player surface bumps it by one on release.
 ### Pending — C119: clear stale power cells when a colony loads (2026-09-26)
 
 **HOLD: the reporter load cleared 355 stale cells; the clean colony, powered
-topology, Excavator and Open Farm controls passed. The new reporter cables
-formed grids but did not join a grid with power producers; the powered cable
-and visual check remains.** [C119](../../bugs/C119.md) records the retail logs,
+topology, Excavator and Open Farm controls passed. The owner confirmed the new
+reporter cable run was isolated, explaining its unpowered grid. A run joined
+to an existing powered network and a visual check remain.** [C119](../../bugs/C119.md) records the retail logs,
 the owner-ruled load-only scope and the remaining check. A restored powered
 area has not yet been witnessed.
 
