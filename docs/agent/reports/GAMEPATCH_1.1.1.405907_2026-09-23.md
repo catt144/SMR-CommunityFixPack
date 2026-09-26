@@ -433,3 +433,30 @@ now measured once but remains provisional until the owner rules on checklist ck2
   result. Both autoruns reached `[SMRAUTO] done`, but neither met the zero-error gate;
   section 4 records the exact failures and the mismatched on-leg mod set. No clean-boot,
   release-readiness, or general in-game compatibility claim is made.
+
+## 9 · Later player questions (added 2026-09-25)
+
+Answers to player reports about what 1.1.1 changed. They are SOURCE reads on the archived trees,
+recorded so nobody re-derives them. None is a pack defect, and nothing was run in game.
+
+- **"Soil quality lost 50 points" (Steam, 2026-09-24): display only.** The production modifier
+  is identical in both builds: `FarmBase:SetSoilQuality` applies soil ÷ scale − 50
+  (`Lua/Buildings/Farm.lua`). 1.1.1 relabels the panel line "Soil Quality Bonus". It also makes
+  `GetUISoilQuality` return the bonus (value − 50) instead of the raw value, so 100% soil now
+  reads +50%. Formatter `percentWithSign` exists (`CommonLua/TFormat.lua:95`).
+- **Agronomist narrowed, a real change.** Its −33% `crop_growth_time` moved from `AllFarms` to
+  `Farm` and `FarmSmall` only (`DLC/norman/Presets/CommanderProfilePreset.lua`; the text was
+  rewritten to match). Open, Hydroponic, Fungal, Underground, Insect and Automated farms lost it.
+  Old saves are migrated by `SavegameFixups.AgronomistFarmCropGrowth` (`Lua/_fixup.lua:3019`).
+  Its `pairs(table.get(...))` on a possibly absent label is safe on this engine (EF-005; the same
+  pattern ships in 6 other places).
+- **Farm fixes in `Farm.lua`, no new bugs found:**
+  - `OnDestroyed` now removes the crop modifier.
+  - `SetCrop` passes `prev`, so clearing a slot removes its modifier.
+  - `ApplyCropModifier` returns early for a domeless farm unless the modifier targets the farm.
+  - `UpdateVisualsFarm` now compares presets instead of an id against a preset. Replanted crops
+    keep their models, which reset to the first growth stage.
+- **Not reviewed:** the food-law changes in `DLC/norman/Presets/LawDef/LawDef-Food.lua`
+  (Artificial Flavors opinions flipped sign, Comfort became Morale, new QuinoaSmall Herbs output).
+- **Method:** a full-tree `diff -r` of 1.1.0.403908 against 1.1.1.405907, filtered for
+  soil/fertil/yield/crop lines, then every hunk in `Farm.lua` read.

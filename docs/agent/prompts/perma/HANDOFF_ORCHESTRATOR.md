@@ -127,6 +127,10 @@ Never keep an owner list here, and never rebuild an owed list from an older docu
   [REPORT_FORM.md](../../reports/REPORT_FORM.md); the owner's browser test is ck205. Nobody has asked for
   it yet, but this repo's `README.md` and `FIELD_REPORT_REPLIES.md` still send people to the old
   `SMR-CommunityFixPack/issues`.
+- **LoadFirst (option B, the pack moves itself first in the load order) is held on re-audit CHANGES.**
+  Branch `load-first` at `8ea5449`, not merged. What is left and the release hold are in
+  [RELEASE_OUTBOX.md](RELEASE_OUTBOX.md) "Pending — LoadFirst" and its report's §13. The next step
+  is a repair pass on the sitting plan (R5), then a re-audit. The owner approves the sitting.
 - **Prompts ready to fire** are listed in [prompts/README.md](../README.md). The C92 build's shipping
   hold lives in checklist ck172, and the stand-down audit's class-c blind spot is stated in its brief.
 
@@ -137,6 +141,13 @@ Never keep an owner list here, and never rebuild an owed list from an older docu
   `LeaveForever` (`RocketForeignAid.lua:75-85`) sets `launch_after_unload = true`, so departure waits for
   the unload, and cargo that cannot be placed strands the rocket; their warnings showed Low Storage.
   If they reply, file it as a lead.
+- **Passage Network conflict report** (GitHub, `SMR-CommunityMods`, 2026-09-26): VacuumWalks and
+  HubLocalAccess switched off. The cause is Passage Network 1.38 replacing the global `Dome` while
+  mods load (its lines 45-51), when it loads before the pack; see
+  [LOAD_ORDER_CROSSCHECK_2026-09-24.md](../../reports/LOAD_ORDER_CROSSCHECK_2026-09-24.md). The
+  player was told to turn Passage Network off and on, then restart. If the warning persists, their
+  log's "Loaded mod items for:" line decides. The owner has not been asked whether to notify
+  Passage Network's author.
 - **C89 reopens only on a countering field report**; its B2 panel leg was not run, by owner ruling.
 
 ## 3 · Method with no other home
