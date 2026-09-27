@@ -1,12 +1,12 @@
 <!-- GENERATED — never hand-edit; regenerate with: python tools/doccheck.py --regen -->
 <!-- split_facts.py --write is the one-time MIGRATION from the retired pre-split doc, never a regeneration; verify: python tools/doccheck.py -->
 
-# Engine facts index — 118 facts
+# Engine facts index — 119 facts
 
 One file per top-level bullet of the old `docs/agent/ENGINE_FACTS.md`, in
 source order; ids are stable. `updated` is git's last touch of the fact's
 own lines. `verified` is the first date the fact's TEXT presents as an
-observation (69 of 118 state one) — a mechanical extraction, not an
+observation (70 of 119 state one) — a mechanical extraction, not an
 adjudication: read the fact for what was actually measured, several of
 which carry their own ⚖️ "what is measured and what is not" paragraph.
 The preamble that opened the old file is `_preamble.md`.
@@ -50,7 +50,7 @@ The preamble that opened the old file is `_preamble.md`.
 | EF-035 | Units and rovers are labelled through `City:AddToLabel`, which forwards to the COLONY container first | — | 2026-08-02 | 9 | [EF-035.md](EF-035.md) |
 | EF-036 | `Init` and `Done` are COMBINED methods with OPPOSITE order | 2026-08-02 | 2026-08-02 | 11 | [EF-036.md](EF-036.md) |
 | EF-037 | Pin release is guarded, and `TogglePin()` without `force` is a no-op for any class whose `CanBeUnpinned()` is false. | — | 2026-08-02 | 11 | [EF-037.md](EF-037.md) |
-| EF-038 | The fastest PLAYER-REACHABLE game speed is 5×, not the 20× that `const.ultraGameSpeed` advertises. | — | 2026-08-02 | 15 | [EF-038.md](EF-038.md) |
+| EF-038 | The fastest PLAYER-REACHABLE game speed is 5×, not the 20× that `const.ultraGameSpeed` advertises. | — | 2026-09-27 | 26 | [EF-038.md](EF-038.md) |
 | EF-039 | RE-USING A SHIPPED TRANSLATION ID TO CHANGE TEXT IS A NO-OP IN RETAIL — the engine discards the replacement literal at… | 2026-08-20 | 2026-08-20 | 84 | [EF-039.md](EF-039.md) |
 | EF-040 | `GameRandom:Random` — BOTH FORMS MEASURED 2026-08-02 (PT-61 phase 4.0b), on `SessionRandom` in a live retail colony, 20… | 2026-08-02 | 2026-08-02 | 36 | [EF-040.md](EF-040.md) |
 | EF-041 | UI coordinate spaces: `XWindow.box` and `terminal.GetMousePos()` are ONE space (desktop pixels); `scale` multiplies SIZ… | 2026-08-02 | 2026-08-02 | 19 | [EF-041.md](EF-041.md) |
@@ -131,4 +131,5 @@ The preamble that opened the old file is `_preamble.md`.
 | EF-116 | THE GAME'S LUA DIVIDES INTEGERS AS INTEGERS: shipped code coerces with `a * 1.0 / b`, `x + 0.0` or DivAsFloats() before any fractional division, and Min/Max/Clamp are documented integer helpers; a standard-Lua mock (lupa) divides to a float, so it cannot show `remaining / 1000 == 0` or a sampler stuck on span endpoints | — | 2026-09-23 | 35 | [EF-116.md](EF-116.md) |
 | EF-117 | GetSpotBeginIndex RAISES ON A SPOT NAME THE ENTITY LACKS: `HGE::l_GetSpotBeginIndex: Invalid spot`, not -1; the exported doc's -1 is for an object that does not exist. Shipped Lua guards with HasSpot first and never tests the index against -1, so a `< 0` check after the call is dead code and a loop that stops on -1 never stops | — | 2026-09-25 | 23 | [EF-117.md](EF-117.md) |
 | EF-118 | THE PARADOX BOOT SYNC CAN MOVE ONLY A PARADOX-INSTALLED MOD IN THE SAVED ENABLE LIST, AND ITS RESULT IS UNOBSERVABLE FROM A MOD: on a version change `SyncUpdatePdxMod` deletes the def and `TurnModOff`s it, the sync path then sets only a UI flag, and the re-enable that appends it runs through the manager or the download handler; a failed empty first subscription page returns no error and prints nothing; `AsyncPdx*` is a blacklisted prefix. A Paradox-installed copy of this pack loads last once after each update the sync applies and re-promotes with the notice at the next start | 2026-09-26 | 2026-09-26 | 32 | [EF-118.md](EF-118.md) |
+| EF-119 | "SAVE FAILED … ERROR CODE: BLOCK ERROR" IS THE 96 MB SAVE BUFFER OVERFLOWING: every save is built, and every load read, in one preallocated buffer of `config.MemorySavegameSize` bytes (96 MB shipped); a colony whose save outgrows it fails every save, manual and auto. Raising the value takes effect on the next save with no restart, from a console or from a one-line mod at load. A player has no route to it without a mod. Tested fix: `local/save-buffer-fix/` | 2026-09-27 | 2026-09-27 | 42 | [EF-119.md](EF-119.md) |
 
