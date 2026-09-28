@@ -23,9 +23,9 @@ player surface bumps it by one on release.
 
 ### Pending — F128: the RC Driller's hammer sound lines up with its three strikes (2026-09-28)
 
-**READY for the next upload, with one owner check open.** The strike times were measured in game
-and heard in sync by the owner through a live swap of the same data. The updated module has not
-booted yet; a boot and a listen would make it `tested-attended`. [F128](../../bugs/F128.md).
+**READY for the next upload: tested attended on 2026-09-28.** The strike times were measured in
+game and heard in sync through a live swap, then again by the owner on a fresh boot of the updated
+module. [F128](../../bugs/F128.md).
 `Code/Fix_SilentHitMomentFX.lua` (`SilentHitMomentFX`).
 
 Player surface for the next release: our v7 fix gave Roscosmos's RC Driller a drill-hit sound that
