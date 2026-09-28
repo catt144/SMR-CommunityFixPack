@@ -111,6 +111,15 @@ Home: `docs/archive/PLAYTEST_ARCHIVE.md`
 
 ## Run
 
+### ck219 · opened 2026-09-28
+When you next test the Opt-In train hub, re-save its new cargo upgrade in the Mod Editor and run the smoke.
+- The source fields are ready; your save must generate the class and code hash before playing.
+- Use the report's five steps: stream first, cargo/speed, toggle, salvage/rebuild, then save/load.
+- Slot 6 streams trains/stations; slot 3 now reads both upgrades, capacities and nominal speed.
+- Include an old bay save: loaded legacy trains keep cargo/passengers; new extras are retired.
+- Desk tests pass except the known traffic-smoke failure; movement and save behavior need your sitting.
+Home: `docs/agent/reports/OPTIN_TRAIN_CARGO_SMOKE_20260928.md`
+
 ### ck217 · opened 2026-09-25
 When you next test the Opt-In train hub, cover the drones QA's remaining native checks.
 - Check reassign buttons and rocket refusal, far-station go-home bounce, and no station balancing.
