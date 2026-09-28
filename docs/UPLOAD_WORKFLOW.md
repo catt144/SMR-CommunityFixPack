@@ -91,7 +91,7 @@ The public-surface sweep maintains the backup copy below alongside its two canon
 ```
 Bug fixes for Surviving Mars: Relaunched.
 
-Forty-four repairs, each one written up on the fix list with what you would
+Forty-five repairs, each one written up on the fix list with what you would
 have seen and what was actually wrong. Every one targets something the game's
 own code gets wrong — the code says one thing, does another, and the fix makes
 it do what it says. It fixes bugs; it does not rebalance the game. Preferences
@@ -204,7 +204,7 @@ heading, which is how the tool finds it.
 ```
 [h2]Bug fixes for [i]Surviving Mars: Relaunched[/i].[/h2]
 
-[b]Forty-four repairs[/b], each one written up on the fix list with what you would have seen and what was actually wrong. Every one targets something the game's own code gets wrong — the code says one thing, does another, and the fix makes it do what it says. It fixes bugs; it does not rebalance the game. Preferences and features are deliberately not in it.
+[b]Forty-five repairs[/b], each one written up on the fix list with what you would have seen and what was actually wrong. Every one targets something the game's own code gets wrong — the code says one thing, does another, and the fix makes it do what it says. It fixes bugs; it does not rebalance the game. Preferences and features are deliberately not in it.
 
 Some of them you could hardly miss: an entire train line and every train on it deleted by salvaging a single hex, colonists suffocating on a walk between two domes, an artificial lake burying the rover that was building it.
 
@@ -263,12 +263,12 @@ Usually auto-fills. If it is missing under **CHANGELOG** (Paradox) or **Change
 Notes** (Steam), paste this:
 
 ```
-One repair added, and the pack now puts itself first in the mod load order.
+One repair added, and one of this pack's own fixes corrected.
 
--In a colony where cables and buildings in one area would not get power, and every failed attempt made the area bigger even after reloading, loading the colony now clears the leftover power connections behind it, so the area can be powered again. Seen working in a running game.
--The pack now moves itself to the front of your mod load order, so its repairs are applied before other mods change the same parts of the game. Your other mods keep their order. It tells you when a restart is needed, and you can turn this off under Options > Mod Options > Relaunched Fix Pack. If you installed from Paradox Mods, you will see this message again after each update of the pack.
+-An automatic rocket to Earth no longer sits on the launch pad forever, drafting colonist after colonist, when a deportation law is on or tourists or Earthsick colonists are waiting to go home. Once everything else is ready, it takes aboard the leaving colonists it can take right away and launches. Colonists still on their way stay on Mars, as they do after a manual launch, and catch the next rocket. A landed rocket with no destination no longer collects leaving colonists. Tried on a real colony: the waiting rocket took its colonists aboard and was cleared to launch.
+-The drill sound this pack gave Roscosmos's RC Driller played twice per work cycle, out of time with the hammer. It now plays on each of the hammer's three strikes; a Driller already drilling picks up the new timing at its next deposit. Heard in time with the hammer in a running game.
 
-The fix list goes from forty-three to forty-four.```
+The fix list goes from forty-four to forty-five.```
 
 #### 📋 Short summary (only if it also came out blank)
 

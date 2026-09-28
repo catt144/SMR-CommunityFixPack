@@ -135,7 +135,7 @@ back at Paradox. ⛔ Do not paste the same block on both.
 ```
 Bug fixes for Surviving Mars: Relaunched.
 
-Forty-four repairs, each one written up on the fix list with what you would
+Forty-five repairs, each one written up on the fix list with what you would
 have seen and what was actually wrong. Every one targets something the game's
 own code gets wrong — the code says one thing, does another, and the fix makes
 it do what it says. It fixes bugs; it does not rebalance the game. Preferences
@@ -239,7 +239,7 @@ HOW IT WORKS
 ```
 [h2]Bug fixes for [i]Surviving Mars: Relaunched[/i].[/h2]
 
-[b]Forty-four repairs[/b], each one written up on the fix list with what you would have seen and what was actually wrong. Every one targets something the game's own code gets wrong — the code says one thing, does another, and the fix makes it do what it says. It fixes bugs; it does not rebalance the game. Preferences and features are deliberately not in it.
+[b]Forty-five repairs[/b], each one written up on the fix list with what you would have seen and what was actually wrong. Every one targets something the game's own code gets wrong — the code says one thing, does another, and the fix makes it do what it says. It fixes bugs; it does not rebalance the game. Preferences and features are deliberately not in it.
 
 Some of them you could hardly miss: an entire train line and every train on it deleted by salvaging a single hex, colonists suffocating on a walk between two domes, an artificial lake burying the rover that was building it.
 
@@ -842,3 +842,20 @@ promoted, for the same reason as v16. The site's "no options page" note (`instal
 answers (`install.md`, `faq.md`) and the modders' veto route (`for-modders.md`, and this repo's
 `README.md`) were falsified by LoadFirst and rewritten; `for-modders.md`'s stale 1.1.0.403908 build
 line now reads 1.1.1.405907.
+
+## ⭐ 2026-09-28 — v18 words (`release_prompt.md` §1): count 44 → 45, change note only
+
+**Count: Forty-four → Forty-five.** C120 adds one row to *Rockets & asteroids* (an automatic rocket
+to Earth sat on the pad drafting leaving colonists and never launched; a rocket with no destination
+held them too). F128 corrects the timing of our own v7 RC Driller sound, which the existing
+silent-machines row already promises plays "in time with the animation"; it gets no new row.
+Re-derived from `SMR-CommunityMods` `content/fix-list.md`: `grep -c '^??? '` = **45**, section tally
+2 (Disasters & weather) + 18 (Colonists & domes) + 4 (Drones & logistics) + 5 (Buildings & economy)
++ 5 (Trains) + 6 (Rockets & asteroids) + 3 (Story & mysteries) + 2 (Under the hood) = 45. Judgment
+calls unchanged at **four** (`grep -c '^??? question'`). Body copies moved together: `Forty-five
+repairs` = 1 (`metadata.lua`) + 2 (this file) + 2 (`UPLOAD_WORKFLOW.md` §3) = 5, and 0 body hits
+left for `Forty-four repairs`; the ones left in this file are the v17 log entry above.
+
+Headliners stay at nine; C120 is not promoted, for the same reason as v16. No card section changes.
+The change note names F128 because it reached players (a Steam report), unlike F107, and says the
+C120 rocket was "cleared to launch" because the take-off itself was not logged.
