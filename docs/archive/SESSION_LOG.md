@@ -8,6 +8,24 @@ defect truth in `docs/BUGS.md`, engine facts in `docs/agent/ENGINE_FACTS.md`.
 
 ---
 
+## 2026-09-28 — v18 released: C120 lands and F128 corrects the Driller sound, count Forty-four → Forty-five
+
+Ran `release_prompt.md` from a bare path invocation — prepare, hold, owner upload, close. The v17
+close was already done (comments present, version 24, newest Steam update Sep 26). The batch was the
+outbox's two Pending entries: C120 as one new fix-list row in *Rockets & asteroids*, and F128 (our v7
+Driller moments) with no row change. Count re-derived from the site file: 45 rows, sections
+2+18+4+5+5+6+3+2; judgment calls four; headliners left at nine. Nothing on the site or in the README
+was falsified. Words `6426664`, STATE marker `736f215`, site `e541ca5`; on the owner's word both
+repos were pushed, carrying v17's unpushed site commit `8f13b16` with them.
+
+Close-out: writeback `version` 24 → **26**, `pdx_version` "16" → **"17"**, `saved` and `code_hash`
+rewritten, `last_changes` unchanged from the draft; comments stripped from both shipped files (0 left
+in each) and restored from `736f215` with those four values carried. Steam read back: body
+"Forty-five repairs" 1 hit, "Forty-four repairs" 0, plain auto-fill (styling pass not seen); newest
+change note *"Update: Sep 28 @ 10:53am"*. Site published (owner's word) and read back: C119 and C120
+rows live. ⛔ Paradox body not read back.
+---
+
 ## 2026-09-26 — v17 released: C119 lands and the pack loads first, count Forty-three → Forty-four
 
 Ran `release_prompt.md` from a bare path invocation — prepare, hold, owner upload, close. The v16

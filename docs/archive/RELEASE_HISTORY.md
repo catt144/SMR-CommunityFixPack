@@ -719,3 +719,51 @@ kept, requests the account save through a changed `WriteModPersistentData`, and 
 `SMRFixPack_Disabled["LoadFirst"]`. Each promotion schedules its notice. A full foreign slot
 refuses the write without data loss or a promotion save request; persistence then depends on
 a later game save. The already-first account-LoadAllMods path deliberately does not probe.
+
+### Released in v18 (2026-09-28) — C120 and F128
+
+- **Card:** count word **Forty-four → Forty-five** (site `^??? ` rows = 45, section tally
+  2+18+4+5+5+6+3+2 sums); C120 is one new row in *Rockets & asteroids*; F128 has no new row (the
+  silent-machines row already promises effects in time with the animation); headliners unchanged at
+  nine; judgment calls unchanged at four. Words commit `6426664`, STATE marker `736f215`, site commit
+  `e541ca5` (pushed with v17's `8f13b16` on the owner's word, 2026-09-28).
+- **Shipped change note is the tree draft unchanged:** the writeback's `last_changes` equals the
+  draft. Steam's *"Update: Sep 28 @ 10:53am"* carries it ("forty-four to forty-five" 1 hit).
+- **Cleared on the owner's word ("uploaded and deployed", 2026-09-28) plus evidence:** writeback
+  `version` 24 → **26** (two saves), `pdx_version` "16" → **"17"**, `code_hash` and `saved`
+  rewritten; comments stripped from both files (0 left in each) and restored from `736f215` with
+  those four values kept; `items.lua` had no changed value and is restored verbatim. Steam read back
+  2026-09-28: body "Forty-five repairs" 1 hit, "Forty-four repairs" **0**; the body is the plain
+  auto-fill, so the Steam styling pass was not seen.
+- **Site published** (owner's word); read back 2026-09-28: the live fix list carries both the C119
+  and the C120 rows (2 hits), so v17's unpublished-site gap is closed too.
+- ⛔ **Not verified at close, and not claimed:** the Paradox body was not read back (the page is
+  JavaScript-only).
+
+### Pending — F128: the RC Driller's hammer sound lines up with its three strikes (2026-09-28)
+
+**READY for the next upload: tested attended on 2026-09-28.** The strike times were measured in
+game and heard in sync through a live swap, then again by the owner on a fresh boot of the updated
+module. [F128](../../bugs/F128.md).
+`Code/Fix_SilentHitMomentFX.lua` (`SilentHitMomentFX`).
+
+Player surface for the next release: our v7 fix gave Roscosmos's RC Driller a drill-hit sound that
+played twice per work loop, out of time with the hammer. It now plays on each of the hammer's
+three strikes. A Driller already drilling picks up the new timing at its next deposit.
+
+### Pending — C120: automatic rockets to Earth launch instead of waiting forever for deportees (2026-09-28)
+
+**READY for the next upload: the attended A/B passed on 2026-09-28** on a copy of the owner's
+colony. The fix-off stall reproduced; with the fix on, 195 deportees boarded and the launch gate
+opened; Cancel Flight handed the held deportees back; and the save loaded clean after the pack was
+disabled and the game restarted. The take-off itself is inferred from source, not logged.
+[C120](../../bugs/C120.md) "Sitting" holds the logs and readings. `Code/Fix_DeportRocketLaunch.lua`
+(`DeportRocketLaunch`). The release seat still runs the normal upload gates.
+
+Player surface for the next release: with a deport law on (or tourists or Earthsick colonists
+waiting), an automatic rocket to Earth no longer sits on the pad drafting "dozen after dozen". Once
+everything else is ready, it takes aboard the leaving colonists it can take right away and
+launches. Colonists still walking or riding over stay on Mars, as they do after a manual
+Launch, and catch the next rocket. A landed rocket with no destination no longer collects
+departing colonists, and hands back any it was holding. No limit is placed on how many
+colonists a rocket takes.

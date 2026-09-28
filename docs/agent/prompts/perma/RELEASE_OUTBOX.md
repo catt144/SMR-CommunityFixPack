@@ -21,35 +21,7 @@ player surface bumps it by one on release.
 
 ## Pending — goes out with the next upload
 
-### Pending — F128: the RC Driller's hammer sound lines up with its three strikes (2026-09-28)
-
-**READY for the next upload: tested attended on 2026-09-28.** The strike times were measured in
-game and heard in sync through a live swap, then again by the owner on a fresh boot of the updated
-module. [F128](../../bugs/F128.md).
-`Code/Fix_SilentHitMomentFX.lua` (`SilentHitMomentFX`).
-
-Player surface for the next release: our v7 fix gave Roscosmos's RC Driller a drill-hit sound that
-played twice per work loop, out of time with the hammer. It now plays on each of the hammer's
-three strikes. A Driller already drilling picks up the new timing at its next deposit.
-
-### Pending — C120: automatic rockets to Earth launch instead of waiting forever for deportees (2026-09-28)
-
-**READY for the next upload: the attended A/B passed on 2026-09-28** on a copy of the owner's
-colony. The fix-off stall reproduced; with the fix on, 195 deportees boarded and the launch gate
-opened; Cancel Flight handed the held deportees back; and the save loaded clean after the pack was
-disabled and the game restarted. The take-off itself is inferred from source, not logged.
-[C120](../../bugs/C120.md) "Sitting" holds the logs and readings. `Code/Fix_DeportRocketLaunch.lua`
-(`DeportRocketLaunch`). The release seat still runs the normal upload gates.
-
-Player surface for the next release: with a deport law on (or tourists or Earthsick colonists
-waiting), an automatic rocket to Earth no longer sits on the pad drafting "dozen after dozen". Once
-everything else is ready, it takes aboard the leaving colonists it can take right away and
-launches. Colonists still walking or riding over stay on Mars, as they do after a manual
-Launch, and catch the next rocket. A landed rocket with no destination no longer collects
-departing colonists, and hands back any it was holding. No limit is placed on how many
-colonists a rocket takes.
-
 ## Last released
 
-**v17** (2026-09-26). Its entry and every earlier release are in
+**v18** (2026-09-28). Its entry and every earlier release are in
 `docs/archive/RELEASE_HISTORY.md`, oldest first.
