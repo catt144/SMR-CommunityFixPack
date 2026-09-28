@@ -42,6 +42,11 @@
 -- hour while landed (:1574), so an idle rocket in an existing save stops within
 -- the hour; setting a destination restarts the draft through SetFlightData (:772).
 --
+-- Veto: K2 and E run through SMRFixPack.WhenActive, which reads the registry
+-- status and SMRFixPack_Disabled on every call (00_Core.lua), so setting
+-- SMRFixPack_Disabled.DeportRocketLaunch mid-session turns both off until it
+-- is cleared; the wrappers then return vanilla's answer untouched.
+--
 -- Save safety, FIX_POLICY 3a layer 3: both wrappers and FindExit's are
 -- synchronous and hold no yield. State is two module-local weak-keyed tables;
 -- nothing is written to a saved object except `leaving_elevator = nil`, the
@@ -186,47 +191,55 @@ SMRFixPack.Register(FIX_ID, {
 		end
 
 		local orig_cargo = R.IsCargoReady
-		function R:IsCargoReady(instant, ...)
-			local ready = orig_cargo(self, instant, ...)
-			if ready or instant or not is_candidate(self) then
-				return ready
-			end
+		-- true when K2 opens the gate; nil keeps vanilla's answer. WhenActive
+		-- re-reads status and SMRFixPack_Disabled on every call, so the veto
+		-- switches K2 off and on mid-session.
+		local k2 = SMRFixPack.WhenActive(FIX_ID, function(self, instant, ...)
+			if not is_candidate(self) then return end
 			-- FIX (C120 K2): would this rocket launch now if departures were done?
 			forcing = self
 			local ok, would = pcall(orig_cargo, self, instant, ...)
 			forcing = false
-			if not ok or not would then
-				return ready
-			end
+			if not ok or not would then return end
 			local cycle = self.command_thread
 			local waiting = still_boarding(cycle)
 			local n = send_takeable(self, cycle)
 			if n > 0 then
 				SMRFixPack.Log("%s: rocket %s boarding %d deportee(s) before launch", FIX_ID, tostring(self.handle), n)
 			end
-			if waiting or n > 0 then
-				return ready
-			end
+			if waiting or n > 0 then return end
 			forget(cycle)
 			local left = pending_count(self)
 			if left > 0 then
 				SMRFixPack.Log("%s: rocket %s launching; %d departure(s) in transit are released", FIX_ID, tostring(self.handle), left)
 			end
 			return true
+		end)
+		function R:IsCargoReady(instant, ...)
+			local ready = orig_cargo(self, instant, ...)
+			if ready or instant then
+				return ready
+			end
+			return k2(self, instant, ...) or ready
 		end
 
 		local orig_update = R.UpdateDepartureThread
-		function R:UpdateDepartureThread(...)
+		local e = SMRFixPack.WhenActive(FIX_ID, function(self)
 			-- FIX (C120 E): no destination is treated like a non-Earth one
 			if not self.arrival_loc and self.RocketType == g_RocketTypes.Player
 					and self:GetDepartureLocType() == "our_colony" then
 				self:ReturnDehydratedColonists()
 				self:StopDepartureThread()
-				return
+				return true
 			end
+		end)
+		function R:UpdateDepartureThread(...)
+			if e(self) then return end
 			return orig_update(self, ...)
 		end
 
+		-- Not gated: a mark exists only for a colonist K2 already sent, and
+		-- honouring it lets that boarding finish if the veto is set mid-way.
 		local C = Colonist
 		local orig_exit = C.FindExit
 		function C:FindExit(rocket, ...)

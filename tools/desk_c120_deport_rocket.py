@@ -30,6 +30,8 @@ Modelled, not shipped (named so a reader can judge each):
     UIColony.labels.Colonist. Neither is the shipped body.
   * cargo is "loading" with the auto-depart window open until CARGO_READY_AT, then
     "ready" with it closed; fuel, maintenance and dust are clear.
+  * 00_Core.lua's veto gate (index_key, read_flag, WhenActive) is extracted from
+    Code/00_Core.lua, not stubbed; Register is stubbed to mark the fix active.
 Nothing here ran in a game. A PASS shows the module discriminates on the shipped
 bodies in this fixture; it does not show that a colony produces the fixture.
 """
@@ -369,7 +371,12 @@ function SMRFixPack.Require(id, spec)
     elseif s.global and type(_G[s.global]) ~= "function" then return "missing "..s.global end
   end
 end
-function SMRFixPack.Register(id, def) REG_ID = id; REG_ERR = def.apply() end
+SMRFixPack.fixes = {}
+SMRFixPack_Disabled = {}
+function SMRFixPack.Register(id, def)
+  REG_ID = id; REG_ERR = def.apply()
+  SMRFixPack.fixes[id] = {status = REG_ERR and "inactive" or "active"}
+end
 '''
 
 # the steady-state colony: a walker, three stopover riders, an out-of-reach senior
@@ -438,10 +445,24 @@ def extract():
 CHUNKS = extract()
 
 
+def core_gate():
+    """00_Core.lua's own veto gate, extracted (index_key, read_flag, WhenActive)."""
+    lines = read_lines(str(pathlib.Path(db.REPO, "Code", "00_Core.lua")))
+    parts = []
+    for pat in (r"^local function index_key\(", r"^local function read_flag\(",
+                r"^function SMRFixPack\.WhenActive\("):
+        hits = find_bodies(lines, pat)
+        assert len(hits) == 1, (pat, len(hits))
+        a, b = hits[0]
+        parts.append(chr(10).join(lines[a:b + 1]))
+    return chr(10).join(parts)
+
+
 def runtime(module_src):
     rt = db.lua_runtime()
     db.load_at(rt, db.ENGINE_SHIMS, "=deskbench_shims")
     db.load_at(rt, FIXTURE, "=C120_fixture")
+    db.load_at(rt, core_gate(), "=Code/00_Core.lua(gate)")
     for rel, first, text in CHUNKS:
         db.load_at(rt, text, "=" + rel, first)
     rt.execute("watch_generate()")
@@ -485,6 +506,23 @@ def e_leg(src, arrival_earth=False, clear_at=None):
         while true do if R1:IsRocketLanded() then R1:UpdateDepartureThread() end Sleep(30000) end
       end)
     """ % ('{spot_type="earth"}' if arrival_earth else "false", clear_at if clear_at else "nil"))
+    rt.execute("run_until(5 * 30000)")
+    return rt
+
+
+def e_leg_veto(src):
+    rt = runtime(src)
+    rt.execute("SMRFixPack_Disabled.DeportRocketLaunch = true")
+    rt.execute("""
+      R1 = rocket({arrival_loc = false})
+      W1 = colonist("W1", PAD_DOME, true)
+      CommandObject.SetCommand(R1, "CmdWaitOrder")
+      R1:UpdateDepartureThread()
+      CreateGameTimeThread(function()
+        Sleep(20000)
+        while true do if R1:IsRocketLanded() then R1:UpdateDepartureThread() end Sleep(30000) end
+      end)
+    """)
     rt.execute("run_until(5 * 30000)")
     return rt
 
@@ -580,6 +618,28 @@ def main():
     m3 = e_leg(mutate(src, "if not self.arrival_loc and self.RocketType", "if false and self.RocketType"))
     check("mutant no-E FAILS the no-destination demand",
           not m3.eval("#GENERATE == 0 and #R1.boarded == 0"))
+
+    # ---- the sitting's A/B: veto set on load, cleared once the stall has formed --------
+    ab = runtime(src)
+    ab.execute("SMRFixPack_Disabled.DeportRocketLaunch = true")
+    db.load_at(ab, SCENARIO, "=C120_scenario")
+    ab.execute("run_until(2 * 720000)")
+    check("A (vetoed): stall forms -- no launch in 2 sols, pending never zero, no fix log",
+          ab.eval("LAUNCHED == nil and MIN_PENDING > 0 and #SMRFixPack.LOGS == 0"),
+          "min=%s" % ab.eval("MIN_PENDING"))
+    ab.execute("SMRFixPack_Disabled.DeportRocketLaunch = nil; CLEARED = NOW; run_until(CLEARED + 30000)")
+    check("B (veto cleared mid-session): launches within an hour, fix logged",
+          ab.eval("LAUNCHED ~= nil and LAUNCHED - CLEARED < 30000 and #SMRFixPack.LOGS >= 1"),
+          "launched %s ms after clearing" % ab.eval("LAUNCHED and LAUNCHED - CLEARED"))
+    m4 = runtime(mutate(src, "SMRFixPack.WhenActive(FIX_ID, function(self, instant, ...)",
+                        "(function(_, f) return f end)(FIX_ID, function(self, instant, ...)"))
+    m4.execute("SMRFixPack_Disabled.DeportRocketLaunch = true")
+    db.load_at(m4, SCENARIO, "=C120_scenario")
+    m4.execute("run_until(2 * 720000)")
+    check("mutant ungated-K2 FAILS the vetoed-stall demand", m4.eval("LAUNCHED ~= nil"))
+    ev_veto = e_leg_veto(src)
+    check("E vetoed: an idle no-destination rocket drafts as vanilla does",
+          ev_veto.eval("#GENERATE >= 4 and RESPAWNS == 0"))
 
     check("module declares no save hook, persisted variable or thread",
           all(t not in src for t in ("OnMsg.Save", "GameVar(", "MapVar(", "CreateGameTimeThread", "CreateRealTimeThread")))
