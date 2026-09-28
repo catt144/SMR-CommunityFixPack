@@ -21,6 +21,17 @@ player surface bumps it by one on release.
 
 ## Pending — goes out with the next upload
 
+### Pending — F128: the RC Driller's hammer sound lines up with its three strikes (2026-09-28)
+
+**READY for the next upload, with one owner check open.** The strike times were measured in game
+and heard in sync by the owner through a live swap of the same data. The updated module has not
+booted yet; a boot and a listen would make it `tested-attended`. [F128](../../bugs/F128.md).
+`Code/Fix_SilentHitMomentFX.lua` (`SilentHitMomentFX`).
+
+Player surface for the next release: our v7 fix gave Roscosmos's RC Driller a drill-hit sound that
+played twice per work loop, out of time with the hammer. It now plays on each of the hammer's
+three strikes. A Driller already drilling picks up the new timing at its next deposit.
+
 ### Pending — C120: automatic rockets to Earth launch instead of waiting forever for deportees (2026-09-28)
 
 **READY for the next upload: the attended A/B passed on 2026-09-28** on a copy of the owner's

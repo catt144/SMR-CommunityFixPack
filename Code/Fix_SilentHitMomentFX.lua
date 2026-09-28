@@ -75,9 +75,13 @@ local preset_specs = {
 	{ "Shuttle", "landing2", { { Type = "Hit", Time = 1033 } } },
 	{ "Shuttle", "takeOff", { { Type = "Hit", Time = 2500 } } },
 	{ "Shuttle", "takeOff2", { { Type = "Hit", Time = 2500 } } },
+	-- F128: three hammer strikes per 10833 ms loop, at the body's impact lows
+	-- measured in game on 1.1.1.405907 (2026-09-28) and judged in sync by ear.
+	-- The v7 placeholder was two hits at 1/4 and 3/4 of the loop.
 	{ "RoverRussiaDriller", "workIdle", {
-		{ Type = "Hit", Time = 2708 },
-		{ Type = "Hit", Time = 8125 },
+		{ Type = "Hit", Time = 3500 },
+		{ Type = "Hit", Time = 7160 },
+		{ Type = "Hit", Time = 10130 },
 	} },
 	{ "RoverTerraformer", "workIdle", {
 		{ Type = "Hit1", Time = 1083 },
