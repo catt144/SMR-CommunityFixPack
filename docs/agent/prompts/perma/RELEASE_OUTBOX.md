@@ -23,8 +23,12 @@ player surface bumps it by one on release.
 
 ### Pending — C120: automatic rockets to Earth launch instead of waiting forever for deportees (2026-09-28)
 
-**BUILT, NOT READY: desk-verified on archived 1.1.1 Lua only; the proposed in-game sitting in
-[C120](../../bugs/C120.md) "Build" has not run.** `Code/Fix_DeportRocketLaunch.lua` (`DeportRocketLaunch`).
+**READY for the next upload: the attended A/B passed on 2026-09-28** on a copy of the owner's
+colony. The fix-off stall reproduced; with the fix on, 195 deportees boarded and the launch gate
+opened; Cancel Flight handed the held deportees back; and the save loaded clean after the pack was
+disabled and the game restarted. The take-off itself is inferred from source, not logged.
+[C120](../../bugs/C120.md) "Sitting" holds the logs and readings. `Code/Fix_DeportRocketLaunch.lua`
+(`DeportRocketLaunch`). The release seat still runs the normal upload gates.
 
 Player surface for the next release: with a deport law on (or tourists or Earthsick colonists
 waiting), an automatic rocket to Earth no longer sits on the pad drafting "dozen after dozen". Once
