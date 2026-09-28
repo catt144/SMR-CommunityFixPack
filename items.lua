@@ -245,6 +245,10 @@ return {
 		'CodeFileName', "Code/Fix_GhostPowerCells.lua",
 	}),
 	PlaceObj('ModItemCode', {
+		'name', "Fix_DeportRocketLaunch",
+		'CodeFileName', "Code/Fix_DeportRocketLaunch.lua",
+	}),
+	PlaceObj('ModItemCode', {
 		'name', "90_SaveSanitizer",
 		'CodeFileName', "Code/90_SaveSanitizer.lua",
 	}),

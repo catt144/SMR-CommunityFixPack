@@ -21,6 +21,19 @@ player surface bumps it by one on release.
 
 ## Pending — goes out with the next upload
 
+### Pending — C120: automatic rockets to Earth launch instead of waiting forever for deportees (2026-09-28)
+
+**BUILT, NOT READY: desk-verified on archived 1.1.1 Lua only; the proposed in-game sitting in
+[C120](../../bugs/C120.md) "Build" has not run.** `Code/Fix_DeportRocketLaunch.lua` (`DeportRocketLaunch`).
+
+Player surface for the next release: with a deport law on (or tourists or Earthsick colonists
+waiting), an automatic rocket to Earth no longer sits on the pad drafting "dozen after dozen". Once
+everything else is ready, it takes aboard the leaving colonists it can take right away and
+launches. Colonists still walking or riding over stay on Mars, as they do after a manual
+Launch, and catch the next rocket. A landed rocket with no destination no longer collects
+departing colonists, and hands back any it was holding. No limit is placed on how many
+colonists a rocket takes.
+
 ## Last released
 
 **v17** (2026-09-26). Its entry and every earlier release are in
