@@ -24,7 +24,10 @@ Steps, any running colony, after installing the Opt-In working tree:
 4. Reselect the Diner (section below the food block; Party Animal, Glutton, Vegan) and the Open
    Air Gym (popout carries "Visitors may become Fit" and the Fit chance; its top description block
    is gone, which the owner accepted).
-5. Toggle OFF, Apply, reselect: all views are vanilla again. Log: no `ServiceInterestTags` line
+5. If you own the norman DLC: a Diner's popout also lists Foodie (+5 Comfort with delicacies),
+   a Barista Café's lists Coffee Enthusiast (+10 / −10 Comfort). Enact Food Tours and a Diner's
+   popout gains Tourist (+10 Morale per meal, 3× meals); repeal it and the line goes.
+6. Toggle OFF, Apply, reselect: all views are vanilla again. Log: no `ServiceInterestTags` line
    other than `applied` / `deactivated` / `re-activated`.
 
 A missing section, two Interests sections, or a changed vanilla line fails it. Icon, wording and

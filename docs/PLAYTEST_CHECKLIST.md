@@ -115,7 +115,7 @@ Home: `docs/archive/PLAYTEST_ARCHIVE.md`
 When you next play with both mods, take a first look at the new Opt-In "Service interest tags" module (off by default).
 - Build-menu hover gets an Interests line; a placed building gets an Interests section with a trait popout.
 - Your 2026-09-29 layout: the Open Air Gym loses its top description block (accepted); check its popout.
-- Five steps, about ten minutes: control with it off, on, Casino / Diner / gym, off again, log check.
+- Six steps: control off, on, Casino / Diner / gym, DLC and Food Tours lines (law only while enacted), off, log.
 - Desk check passes; the rendered look is unseen. Adjust wording and placement by eye.
 Home: `docs/agent/reports/OPTIN_SERVICE_INTEREST_TAGS_20260928.md`
 
