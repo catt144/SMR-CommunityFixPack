@@ -115,13 +115,14 @@ sometimes states outright that its PASS condition needs a screen check. A
 suite-wide `FAIL`/`ERROR` sweep can be the instrument, not a regression;
 challenge before filing.
 
-1. **A probe whose `run` falls off the end returns nil, and `SMRTest.Run` turns
-   nil into SKIP with an empty message** (`00_TestCore.lua`). It reads as a
-   deliberate skip, not a missing verdict, and it silently cost wave 6 its entire
-   automated coverage until 2026-07-29. Every probe needs an explicit
-   `return "PASS", …`. Audit by comparing `Register(` and `return "PASS"` counts
-   per wave file. **A baseline leg can never catch it** — the `FixMissing` guard
-   returns FAIL before the tail runs — so only a FIXED leg can.
+1. **A probe whose `run` falls off the end returns nil.** Until 2026-09-17
+   `SMRTest.Run` turned that into SKIP with an empty message, which read as a
+   deliberate skip and silently cost wave 6 its entire automated coverage until
+   2026-07-29. It now reports `ERROR` ("probe returned no verdict",
+   `00_TestCore.lua`), which retires the old audit by `Register(` and
+   `return "PASS"` counts. Every probe still needs an explicit verdict. **A
+   baseline leg can never catch it**: the `FixMissing` guard returns FAIL before
+   the tail runs, so only a FIXED leg can.
 2. **A probe that reads its own baseline from live state.** `DroneStatDials` took
    `local base_carry = consts.DroneResourceCarryAmount` and asserted `base_carry + 1`,
    which holds only when the account's dial already sits at base. Mod Options dials
