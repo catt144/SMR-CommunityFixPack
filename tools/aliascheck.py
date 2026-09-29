@@ -41,8 +41,10 @@ false-negative direction, which is the one that matters:
    long strings and short and long comments, and blanks only what is genuinely
    not code. Falsified on the exact case.
 2. ITS HELPER LIST WAS HAND-MAINTAINED, so a helper added to `00_TestCore.lua`
-   later was silently unchecked. Here the set is DERIVED, and from BOTH definition
-   forms -- `function SMRTest.X` and `SMRTest.X = ...`. That matters concretely:
+   later was silently unchecked. Here the set is DERIVED, from three definition
+   forms -- `function SMRTest.X`, `SMRTest.X = ...`, and the top-level fields of
+   the `SMRTest = ... { ... }` constructor (`probes`, `order`, `last`; added
+   2026-09-29 after 10 false UNKNOWN rows). That matters concretely:
    `FixMissing` and `FixRetired`, the two helpers the original finding was about,
    are defined by ASSIGNMENT (`00_TestCore.lua:327`, `:361`), so deriving from the
    `function` form alone finds 17 members where the kit has 28.
@@ -147,12 +149,41 @@ def strip_lua(src):
 
 # --------------------------------------------------------------------------- #
 def defined_members(code):
-    """Every SMRTest member this source defines, both forms."""
+    """Every SMRTest member this source defines, all three forms."""
     names = set()
     for m in re.finditer(r"(?m)^\s*function\s+SMRTest\.([A-Za-z_]\w*)", code):
         names.add(m.group(1))
     for m in re.finditer(r"(?m)^\s*SMRTest\.([A-Za-z_]\w*)\s*=", code):
         names.add(m.group(1))
+    names |= constructor_fields(code)
+    return names
+
+
+def constructor_fields(code):
+    """Top-level keys of a table constructor assigned to SMRTest.
+
+    `00_TestCore.lua` creates the namespace as
+    `SMRTest = rawget(_G, "SMRTest") or { probes = {}, order = {}, last = {} }`,
+    so `probes`, `order` and `last` have no `SMRTest.X =` line anywhere. Reading
+    only the two statement forms reported every use of them as UNKNOWN (10 rows
+    on 2026-09-29, all in 76_SMRTK_Kit.lua). Nested tables' keys are not members
+    and are excluded. `code` is already stripped, so braces inside strings and
+    comments cannot unbalance the walk.
+    """
+    names = set()
+    for m in re.finditer(r"(?m)^\s*SMRTest\s*=(?!=)[^\n{]*\{", code):
+        depth, i = 1, m.end()
+        top = []
+        while i < len(code) and depth:
+            c = code[i]
+            if c == "{":
+                depth += 1
+            elif c == "}":
+                depth -= 1
+            top.append(c if depth == 1 and c not in "{}" else " ")
+            i += 1
+        for k in re.finditer(r"(?:^|[,;\s])([A-Za-z_]\w*)\s*=(?!=)", "".join(top)):
+            names.add(k.group(1))
     return names
 
 
@@ -235,7 +266,7 @@ def report(result, out):
 
 # --------------------------------------------------------------------------- #
 def selftest():
-    """Every check seen to fire, and seen NOT to fire. 10 legs."""
+    """Every check seen to fire, and seen NOT to fire."""
     import shutil
     import tempfile
 
@@ -345,6 +376,22 @@ def selftest():
     leg("UNKNOWN: member defined by NO file still fires",
         "SMRTest.Nope('x')\n", ["UNKNOWN"],
         extra={"90_Loggers.lua": "function SMRTest.Log(s) end\n"})
+
+    # 16 a field of the namespace's own constructor is defined (00_TestCore's
+    # `SMRTest = rawget(_G, "SMRTest") or { order = {} }`; 10 false rows on
+    # 2026-09-29 before constructor_fields existed)
+    ctor = core + ("SMRTest = rawget(_G, \"SMRTest\") or {\n"
+                   "\tprobes = {},   -- id -> { title }\n"
+                   "\torder = {},\n"
+                   "\tcfg = { inner = 1 },\n"
+                   "}\n")
+    leg("clean: constructor field SMRTest.order",
+        "local n = #SMRTest.order\n", [], core_src=ctor)
+
+    # 17 a NESTED table's key is not a member, or leg 16 has merely widened
+    # the set to every `name =` in the file
+    leg("UNKNOWN: nested constructor key SMRTest.inner",
+        "local n = SMRTest.inner\n", ["UNKNOWN"], core_src=ctor)
 
 
     print("")
