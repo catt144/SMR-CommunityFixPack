@@ -330,6 +330,42 @@ still the game's and is not something we change. **Say "judgment call" plainly.*
 > often the game checks, so if you are seeing it on a dome of ten or more we would still like the answers to
 > the two questions above.
 
+## Field report triaged 2026-09-28 — C121 and an unfiled grid lead
+
+**"Are these bugs or caused by mods?" — Universal Depot seeds, and dome attachments losing supply after a Passage Hub**
+
+`STATUS: DRAFT` · thread: not given (owner screenshot) · subject: C121 + unfiled grid lead · drafted 2026-09-28 · gate: none
+
+Drafted 2026-09-28 on the owner's ask. The depot half cites `agent/bugs/C121.md`. ⚠️ The grid half has
+**no bug entry**: the owner chose to file only C121. Its facts rest on a source trace re-checked this
+session (`Passage.lua:1446-1463`: the grid split runs before `CleanupHackedConnections` restores the
+dome's edge cells with a raw `HexGridSet`, `GridTunnelConnector.lua:263`), confidence medium on the
+mechanism and low that it is what hit this player, so the reply says "likely" and asks one question.
+Automated Trade Pad (Workshop 3804737231) was read in full: it touches only trade-offer notifications
+and the Trade Pad panel. The rebuild workaround is derived, not tested: a depot built after the
+unlock caches its list with Seeds visible (`StorageDepot.lua:461`, C121).
+
+> Neither of these comes from the mods. Automated Trade Pad only handles trade-offer popups, and nothing in
+> the fix pack touches depots or power, water and air grids. The seeds one is in the game's own code, and
+> the dome one almost certainly is too.
+>
+> **Seeds and the Universal Depot:** you remembered it right. A Universal Depot works out its list of
+> resource toggles once, when it's built, and seeds are still hidden at that point, so they're left out.
+> Researching seeds refreshes that list for some depot types but not for the Universal Depot. Depots you
+> build after the research show the seeds toggle. For the older ones, salvaging and rebuilding the depot
+> gives you the toggle.
+>
+> **The domes and the Passage Hub:** we found a likely cause, but haven't reproduced it yet. A passage
+> borrows the connection spot on the dome's edge where it attaches, and routes that spot's power, water
+> and air through itself. When the passage is removed, the game can split the buildings plugged into that
+> spot onto their own separate grid with nothing supplying it, while everything inside the dome stays
+> connected. That also explains why rebuilding one building didn't help: it rejoined the same dead grid,
+> which only disappears once every building on it is gone. Removing them all and rebuilding was the right
+> fix.
+>
+> One question would help us pin it down: were the buildings that lost supply near the spots where the old
+> passages met the domes?
+
 ---
 
 # What was actually posted — the permanent record
