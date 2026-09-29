@@ -125,7 +125,8 @@ When you next test the Opt-In train hub, re-save its new cargo upgrade in the Mo
 - Use the report's five steps: stream first, cargo/speed, toggle, salvage/rebuild, then save/load.
 - Slot 6 streams trains/stations; slot 3 now reads both upgrades, capacities and nominal speed.
 - Include an old bay save: loaded legacy trains keep cargo/passengers; new extras are retired.
-- Desk tests pass except the known traffic-smoke failure; movement and save behavior need your sitting.
+- Save slot 4; check cargo pads, hub 2,000/4,000, shared switch, +19 power and full-depot Export (desk passes).
+- Sitting: `B:/Dev/SMR/SMR-OptInPack/docs/agent/reports/TRAIN_HUB_STORAGE_20260929.md`.
 Home: `docs/agent/reports/OPTIN_TRAIN_CARGO_SMOKE_20260928.md`
 
 ### ck217 · opened 2026-09-25
