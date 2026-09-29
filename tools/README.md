@@ -94,7 +94,7 @@ comments is written by `python tools/doccheck.py --regen` and checked by
 
 <!-- GENERATED TOOL ROWS — never hand-edit; regenerate with: python tools/doccheck.py --regen -->
 
-*87 scripts, every `tools/*.py` on disk. This block is GENERATED: a row's text is copied from the script's own header, so a wrong row is repaired in the script, never here.*
+*88 scripts, every `tools/*.py` on disk. This block is GENERATED: a row's text is copied from the script's own header, so a wrong row is repaired in the script, never here.*
 
 ### Repo gates, and the falsifiers that keep them honest
 
@@ -242,6 +242,7 @@ New since the last grouping pass. Give each a home in `TOOL_GROUPS` in `tools/do
 | [`desk_c117_hub_salvage.py`](desk_c117_hub_salvage.py) | C117 hub-passage salvage drain against archived 1.1.1.405907 Lua. |
 | [`desk_c119_ghost_cells.py`](desk_c119_ghost_cells.py) | C119 load cleanup: execute Fix_GhostPowerCells.lua on synthetic loaded maps. |
 | [`desk_c120_deport_rocket.py`](desk_c120_deport_rocket.py) | C120 deport-law rocket against archived 1.1.1.405907 Lua: the stall, K2 and E. |
+| [`desk_c121_depot_seeds.py`](desk_c121_depot_seeds.py) | C121 Universal Depot Seeds toggle against archived 1.1.1.405907 Lua: the stale cache, the unlock refresh and the load heal. |
 | [`desk_f124_track.py`](desk_f124_track.py) | F124 track rebase: archived split/repair bodies, refunds, shells and branch decline. |
 | [`desk_f125_vacuum.py`](desk_f125_vacuum.py) | F125/F52 composable migration controls on archived 1.1.1.405907 Lua. |
 | [`desk_f127_arrival_booking.py`](desk_f127_arrival_booking.py) | F127: archived 1.1.1 arrival booking, full-dome Homeless label, and fix-removed control. |

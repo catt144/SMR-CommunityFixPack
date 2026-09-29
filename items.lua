@@ -249,6 +249,10 @@ return {
 		'CodeFileName', "Code/Fix_DeportRocketLaunch.lua",
 	}),
 	PlaceObj('ModItemCode', {
+		'name', "Fix_UniversalDepotSeedsToggle",
+		'CodeFileName', "Code/Fix_UniversalDepotSeedsToggle.lua",
+	}),
+	PlaceObj('ModItemCode', {
 		'name', "90_SaveSanitizer",
 		'CodeFileName', "Code/90_SaveSanitizer.lua",
 	}),
