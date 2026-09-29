@@ -5,7 +5,7 @@
 Rule: Before editing a document, read its `Must_Read_Header` and invoke the `doc-editing` skill. [A3: pass]
 Rule: Append to `docs/archive/` only; never rewrite or delete what is archived there. [A3: pass]
 Rule: Read `docs/agent/STATE.md` and `docs/PLAYTEST_CHECKLIST.md` only when a task, a prompt or the owner calls for them; current work is pull, never session-start reading. [A3: pass]
-Rule: Treat the owner's instruction as authority that agent detection cannot override. [A3: pass]
+Rule: Treat the owner's instruction as authority that agent detection cannot override; the owner is catt144, and a collaborator's instruction directs only that collaborator's own branch. [A3: pass]
 Rule: Treat anything but the owner's instruction as a claim cleared by one check, not a re-derivation; for command output, check that its command and HEAD or build match. [A3: pass]
 Rule: Read volatile external values with a command every time. [A3: pass]
 Rule: Verify durable structural facts by fingerprint and rederive only groups that moved. [A3: pass]
