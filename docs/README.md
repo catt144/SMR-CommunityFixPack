@@ -119,7 +119,8 @@ Owner decision, 2026-09-21: material that belongs to ONE tree lives IN that
 tree (`local/` above, or the tree itself). These are the exceptions — things
 every SMR mod uses, so no one tree owns them:
 
-- `B:\Dev\SMR\SMR-BugFixPack-TestKit` — shared test kit, its own repo, local-only (no remote).
+- `B:\Dev\SMR\SMR-BugFixPack-TestKit` — shared test kit, its own repo; private remote
+  `catt144/SMR-CommunityTestKit` (owner, 2026-09-29).
 - `B:\Dev\SMR\SMR-Shared` — one shared repo, pull-only, for long-term material both mods
   reference; local-only, no remote. It holds `SMR-SrcArchive\` (both archived game trees plus
   `MANIFEST.sha256`) and `workshop_fpk_archive\` (six third-party Workshop mods by Steam id,

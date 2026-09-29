@@ -169,9 +169,8 @@ hand-placement plus `complete_constructions` / `complete_grids` / `unlock_buildi
   (`PlaceConstructionSite`, `CheatCompleteAllConstructions`, the grid line placers,
   and the corrections above). This fact is **not** stamper-specific and stays live.
 - **The code body** — TestKit `9057fb6:Code/77_SMRTK_Stamper.lua`, with the layout
-  authoring instructions at `9057fb6:Layouts/README.md`. ⚠️ The TestKit repo is
-  **local-only by design and has no remote** — that sha exists on the owner's
-  machine only.
+  authoring instructions at `9057fb6:Layouts/README.md`. That sha is on the
+  TestKit's `master`, which goes to the private remote `catt144/SMR-CommunityTestKit`.
 
 **Rough cost to revive.** Not a re-type: the body is recoverable in one command.
 The cost is the three blockers above, all of which need new source work, plus the

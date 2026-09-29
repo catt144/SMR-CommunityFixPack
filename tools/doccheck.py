@@ -1750,8 +1750,8 @@ def testkit_tree(out):
     routed or committed, never `git restore`d (uncommitted work has no reflog).
 
     ⚠️ Two kinds of "not checked", and they are NOT the same (2026-09-09).
-    No repo at all is *not applicable* — the kit is local-only by design, so a
-    fresh clone has none, and that line is quiet on purpose. But once `.git`
+    No repo at all is *not applicable* — the kit is a separate repo, so a
+    fresh pack clone has none beside it, and that line is quiet on purpose. But once `.git`
     exists, a failure to run means the check produced **no information**, and
     the docstring's own promise ("says so on every run") went unmet. That path
     now also emits a WARN line, because a run that says NOTHING about the kit

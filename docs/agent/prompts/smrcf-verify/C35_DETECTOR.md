@@ -94,8 +94,7 @@ Binding, therefore:
 ## 4 · Where it lives — the kit, permanently, and NOT as an armed payload
 
 ⛔ **The pack ships ZERO diagnostic code** (owner ruling 110). This is a Test Kit
-module: `B:\Dev\SMR\SMR-BugFixPack-TestKit`, local-only with no remote **by design and
-settled** — never raise a push there as owed.
+module: `B:\Dev\SMR\SMR-BugFixPack-TestKit` (private remote `catt144/SMR-CommunityTestKit`).
 
 ⚠️ **It must NOT carry a `TEMPORARY` marker and must NOT go through
 `tools/arm_leg.ps1`.** Those are for legs that arm, measure and disarm inside one

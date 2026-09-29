@@ -9,8 +9,8 @@ The probe harness — `SMRTest.RunAll`, verdict semantics, the ways a probe lies
 is [`TESTKIT.md`](TESTKIT.md). The unattended arming harness is
 [`arming/README.md`](arming/README.md).
 
-It lives in `B:\Dev\SMR\SMR-BugFixPack-TestKit`, a separate repo with **no remote,
-local-only by design and settled**. Never raise a push there as owed. A pack lane
+It lives in `B:\Dev\SMR\SMR-BugFixPack-TestKit`, a separate repo whose remote is the
+private `catt144/SMR-CommunityTestKit` (owner, 2026-09-29). A pack lane
 does not commit kit code or probes in it. The one exception is a sitting's slots:
 `80_AgentSlots.lua` is agent-owned, ships nothing, and is committed there as part
 of preloading (see "Gates, then the one line to the owner").
@@ -260,8 +260,8 @@ rg -n '^\s*print\(' B:/Dev/SMR/SMR-BugFixPack-TestKit/Code -g '7*_SMRTK*.lua' -g
 doccheck GREEN; both `rg` runs zero matched lines, exit 1. ⛔ **An error is not a
 negative gate** — include a positive installed-source control so a broken command
 cannot read as a clean sweep. Recheck diff and status, stage exact paths, and
-commit with `-F` plus a pathspec (shared hunks follow `CLAUDE.md`'s header). The
-TestKit has no remote; push pack docs if they changed. Quote doccheck WARNs
+commit with `-F` plus a pathspec (shared hunks follow `CLAUDE.md`'s header). Push the
+kit's slots commit, and the pack docs if they changed. Quote doccheck WARNs
 verbatim in the handoff.
 
 Then give the owner **one line**: *"start the game; the Slots & notes tab is loaded"*.
