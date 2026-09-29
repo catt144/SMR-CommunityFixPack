@@ -111,6 +111,13 @@ Home: `docs/archive/PLAYTEST_ARCHIVE.md`
 
 ## Run
 
+### ck220 · opened 2026-09-28
+When you next play with both mods, take a first look at the new Opt-In "Service interest tags" module (off by default).
+- It lists a service building's interests (Gaming, Social…) in the build-menu hover and on the placed building.
+- Five steps, about ten minutes: control with it off, on, the three views, off again, log check.
+- Desk check passes; the rendered look is unseen. Adjust wording and placement by eye.
+Home: `docs/agent/reports/OPTIN_SERVICE_INTEREST_TAGS_20260928.md`
+
 ### ck219 · opened 2026-09-28
 When you next test the Opt-In train hub, re-save its new cargo upgrade in the Mod Editor and run the smoke.
 - The source fields are ready; your save must generate the class and code hash before playing.
