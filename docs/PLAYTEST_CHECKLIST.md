@@ -112,8 +112,8 @@ Home: `docs/archive/PLAYTEST_ARCHIVE.md`
 ## Run
 
 ### ck221 · opened 2026-09-30
-When you next test the Elevator Depot, import the approved shell and run its look and train checks.
-- The rounded shell is approved; the existing EntitySpec's mesh is prepared for one re-import and save.
+When you next test the Elevator Depot, use the imported shell for its surface, train and underground checks.
+- Import and disk checks passed; owner carried brief 25 to hotfix build 25579348. Relevant source hashes match.
 - Restart, place a fresh depot, then Report(); the connector moved, so use a fresh placement for this test.
 - Connect track and watch a vanilla train enter, descend, reverse below ground and come back out; slot 6 streams.
 - Check the cabin and sound on both maps; underground, Measure() and check the rope at the lowest camera pitch.
