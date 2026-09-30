@@ -49,3 +49,10 @@ The owner's sitting passed steps 1–6 above (log clean; archived in the Opt-In 
    building. Pass: the Interests section and popout appear as in the first look.
 
 Flush the log after each. The two can share one restart: do 1, then from its main menu do 2.
+
+## 2026-09-30 — closed: tested-attended
+
+Both remaining legs are done. The enable path passed. The uninstall leg ran on an older save of the
+same colony, and the owner accepted it (*"2 is fine, this mod is not that complicated"*). Opt-In
+D15 is `tested-attended`; ck220 is deleted. At ship, the Opt-In release re-runs the fix-pack-absent
+half against a released fix pack.
