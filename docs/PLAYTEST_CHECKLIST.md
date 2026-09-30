@@ -121,11 +121,11 @@ When you next test the Elevator Depot, use the imported shell for its surface, t
 Home: `docs/agent/reports/OPTIN_ELEVATOR_DEPOT_LOOK_20260930.md`
 
 ### ck220 · opened 2026-09-28
-When you next play with both mods, take a first look at the new Opt-In "Service interest tags" module (off by default).
-- Build-menu hover gets an Interests line; a placed building gets an Interests section with a trait popout.
-- Your 2026-09-29 layout: the Open Air Gym loses its top description block (accepted); check its popout.
-- Six steps: control off, on, Casino / Diner / gym, DLC and Food Tours lines (law only while enacted), off, log.
-- Desk check passes; the rendered look is unseen. Adjust wording and placement by eye.
+When you next restart the game, run the two short legs left before Opt-In "Service interest tags" (D15) is tested.
+- Your 2026-09-30 look passed: control, both toggle directions, every view, log clean, save/load.
+- Uninstall: save with it ON, disable the Opt-In mod in the Mod Manager, fully restart, load that save.
+- Enable path: start the game with the Opt-In mod off, enable it at the main menu, load, open a service building.
+- Pass = the save loads clean, and the Interests section appears after the menu enable. Flush the log after.
 Home: `docs/agent/reports/OPTIN_SERVICE_INTEREST_TAGS_20260928.md`
 
 ### ck219 · opened 2026-09-28

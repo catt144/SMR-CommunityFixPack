@@ -35,3 +35,17 @@ placement are the owner's to adjust by eye; the desk check cannot see the render
 result: PASS, 12 buildings × 4 toggle passes (Opt-In
 `tools/deskchecks/service_interest_tags_deskcheck.py`). No game was launched by this task.
 Executed model: Claude Fable 5.1 (`claude-fable-5-1`).
+
+## 2026-09-30 — look passed; two legs left
+
+The owner's sitting passed steps 1–6 above (log clean; archived in the Opt-In repo at
+`docs/archive/d15_sitting_20260930/`, evidence in D15). Two legs remain before `tested-attended`:
+
+1. **Uninstall.** Save with the toggle ON. Disable the Opt-In mod in the Mod Manager, then **fully
+   quit and restart the game**; a return to the main menu is not enough (Opt-In WORKFLOW,
+   PT-20 redo). Load that save. Pass: it loads and plays with no error; the panels are vanilla.
+2. **Enable path.** With the Opt-In mod disabled, start the game. At the main menu, enable it in the
+   Mod Manager, turn "Service interest tags" on in Mod Options, load a colony and open a service
+   building. Pass: the Interests section and popout appear as in the first look.
+
+Flush the log after each. The two can share one restart: do 1, then from its main menu do 2.
