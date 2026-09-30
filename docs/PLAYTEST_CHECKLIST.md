@@ -111,6 +111,15 @@ Home: `docs/archive/PLAYTEST_ARCHIVE.md`
 
 ## Run
 
+### ck221 · opened 2026-09-30
+When you next test the Elevator Depot, import the approved shell and run its look and train checks.
+- The rounded shell is approved; the existing EntitySpec's mesh is prepared for one re-import and save.
+- Restart, place a fresh depot, then Report(); the connector moved, so use a fresh placement for this test.
+- Connect track and watch a vanilla train enter, descend, reverse below ground and come back out; slot 6 streams.
+- Check the cabin and sound on both maps; underground, Measure() and check the rope at the lowest camera pitch.
+- Final in-game acceptance remains open. The report has the first short batch and the conditional desk proof.
+Home: `docs/agent/reports/OPTIN_ELEVATOR_DEPOT_LOOK_20260930.md`
+
 ### ck220 · opened 2026-09-28
 When you next play with both mods, take a first look at the new Opt-In "Service interest tags" module (off by default).
 - Build-menu hover gets an Interests line; a placed building gets an Interests section with a trait popout.
