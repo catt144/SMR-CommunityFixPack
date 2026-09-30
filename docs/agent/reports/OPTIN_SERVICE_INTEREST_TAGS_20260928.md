@@ -54,5 +54,5 @@ Flush the log after each. The two can share one restart: do 1, then from its mai
 
 Both remaining legs are done. The enable path passed. The uninstall leg ran on an older save of the
 same colony, and the owner accepted it (*"2 is fine, this mod is not that complicated"*). Opt-In
-D15 is `tested-attended`; ck220 is deleted. At ship, the Opt-In release re-runs the fix-pack-absent
-half against a released fix pack.
+D15 is `tested-attended`; ck220 is deleted. Both FIX_POLICY §8 configurations are done: the sitting
+ran the released fix pack v1.00-026, and nothing in the fix pack touches this module's surfaces.
