@@ -118,6 +118,7 @@ When you next test the Elevator Depot, use the imported shell for its surface, t
 - Connect track and watch a vanilla train enter, descend, reverse below ground and come back out; slot 6 streams.
 - Check the cabin and sound on both maps; underground, Measure() and check the rope at the lowest camera pitch.
 - Final in-game acceptance remains open. The report has the first short batch and the conditional desk proof.
+- Also run brief 30: `B:/Dev/SMR/SMR-OptInPack/docs/agent/reports/STATION_ROWS_WITHOUT_HUB_20261002.md`.
 Home: `docs/agent/reports/OPTIN_ELEVATOR_DEPOT_LOOK_20260930.md`
 
 ### ck219 · opened 2026-09-28
