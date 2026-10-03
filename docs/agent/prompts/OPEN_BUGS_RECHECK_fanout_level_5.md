@@ -49,6 +49,32 @@ location:
   reports of actual impact", `MIGRATION_HUB_HANDOFF_high.md` item 3): the entries themselves
   are still rechecked; their closed P-items are not raised again.
 
+## Added 2026-10-02 — the train cargo spoilage report (owner: "Add this to it")
+
+`B:\Dev\SMR\SMR-OptInPack\docs\agent\reports\TRAIN_CARGO_SPOILAGE_BUGREPORT_20261002.md`
+(Opt-In repo, commit `e120c83`): a train's Food or delicacy cargo loses about 4% at a
+once-per-sol boundary with no Lua writer touching it, but `Train:UnloadAll` hands over the
+BOOKED amount (`unload_cargo`, `Lua/Units/Train.lua:779-785` on 1.1.1.406343, re-read by the
+authoring seat: `station:AddResource(amount, res)` then `train:AddResource(-amount, res)`), so
+the station gains what the train no longer carries. Two archived logs and a log-only trap are
+cited there.
+
+This item has no `bugs/` entry yet. Take it as one more group member:
+1. File it through `smr-bug-library` as the next free C id before giving it a verdict; the
+   report is its Report section's source, cited by path and commit, not restated.
+2. The report is a claim from a sibling repo: clear what each verdict rests on. The unload
+   arithmetic is a source read (`sed -n` the cited lines). "Spoilage reaches trains from
+   outside the Lua tree" is an absence claim: grep the 406343 tree for `CalcResourceSpoilage`
+   and `FoodDecay` callers and count the presence side before accepting it.
+3. Its evidence class is `confirmed` only if the two logs' lines are re-read from the archived
+   logs and still support the arithmetic; otherwise `possible-unconfirmed`. The sitting ran
+   with the Opt-In Modules loaded and was never run with them off; that control is what a
+   sitting would decide, and it goes in the report's sitting section.
+4. The report's candidate fix (reconcile bookings to the carried amount at the top of
+   `UnloadAll`, releasing the difference with `RequestUnassignUnit`) is recorded as "shape, not
+   a recommendation". Anything that replaces the `UnloadAll` body is a FIX_POLICY §1.5
+   decision for the owner; F114 records what a `UnloadAll` body copy cost this pack once.
+
 ## Verdicts — exactly one per entry
 
 | verdict | meaning | evidence it needs |
@@ -81,11 +107,13 @@ command aimed at what it rests on: run the desk control yourself, or `sed -n` th
 the archived tree. A verdict whose check fails goes back to the subagent or becomes
 `possible-unconfirmed`, never into the record on the subagent's word.
 
-Source of truth for every line cited: `B:\Dev\SMR\SMR-Shared\SMR-SrcArchive\1.1.1.405907\Src`,
-read on build 25390750. Read the installed build with a command before the first citation
-(`python tools/doccheck.py --emit-fingerprint` prints it); if it is not 25390750, stop (below).
-Cited line numbers in older entries were read on 1.0.7 or 1.1.0: re-derive each with `grep -n`
-on the 1.1.1 tree before relying on it.
+Source of truth for every line cited: `B:\Dev\SMR\SMR-Shared\SMR-SrcArchive\1.1.1.406343\Src`,
+read on build 25579348 (repinned 2026-10-02: the game moved from 1.1.1.405907 to 1.1.1.406343
+the same day this was authored, and the new tree is archived). Read the installed build with a
+command before the first citation (`python tools/doccheck.py --emit-fingerprint` prints it); if
+it is not 25579348, stop (below). Cited line numbers in older entries were read on 1.0.7, 1.1.0
+or 1.1.1.405907: re-derive each with `grep -n` on the 1.1.1.406343 tree before relying on it,
+and name the build beside every line you cite.
 
 ## Writing the record
 
@@ -109,7 +137,8 @@ on the 1.1.1 tree before relying on it.
 
 ## Scope
 
-In scope: every entry the command above lists, judged against the shipped 1.1.1.405907 Lua and
+In scope: every entry the command above lists plus the train report below, judged against the
+shipped 1.1.1.406343 Lua and
 the records already in the repo. Out of scope: building or changing any fix, re-opening an
 owner ruling, kit probes (the TestKit is a separate repo; never commit kit code from a pack
 lane), and scheduling owner time. A defect found outside the list (a new vanilla defect, or a
@@ -119,8 +148,8 @@ save, which is filed as an F entry at once and named in the report.
 
 ## Stops — report instead of continuing
 
-1. The installed build is not 25390750: stop and route to `perma/GAME_PATCH_PROMPT.md`; this
-   prompt's citations are for 1.1.1.405907.
+1. The installed build is not 25579348: stop and route to `perma/GAME_PATCH_PROMPT.md`; this
+   prompt's citations are for 1.1.1.406343.
 2. A group's recheck finds a shipping `Code/` module that throws or writes into a save: file it,
    commit, and report before taking the next group.
 3. The owner is needed to decide a verdict (an intent question with no tell either way): record
