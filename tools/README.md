@@ -94,7 +94,7 @@ comments is written by `python tools/doccheck.py --regen` and checked by
 
 <!-- GENERATED TOOL ROWS — never hand-edit; regenerate with: python tools/doccheck.py --regen -->
 
-*88 scripts, every `tools/*.py` on disk. This block is GENERATED: a row's text is copied from the script's own header, so a wrong row is repaired in the script, never here.*
+*92 scripts, every `tools/*.py` on disk. This block is GENERATED: a row's text is copied from the script's own header, so a wrong row is repaired in the script, never here.*
 
 ### Repo gates, and the falsifiers that keep them honest
 
@@ -243,6 +243,10 @@ New since the last grouping pass. Give each a home in `TOOL_GROUPS` in `tools/do
 | [`desk_c119_ghost_cells.py`](desk_c119_ghost_cells.py) | C119 load cleanup: execute Fix_GhostPowerCells.lua on synthetic loaded maps. |
 | [`desk_c120_deport_rocket.py`](desk_c120_deport_rocket.py) | C120 deport-law rocket against archived 1.1.1.405907 Lua: the stall, K2 and E. |
 | [`desk_c121_depot_seeds.py`](desk_c121_depot_seeds.py) | C121 Universal Depot Seeds toggle against archived 1.1.1.405907 Lua: the stale cache, the unlock refresh and the load heal. |
+| [`desk_c122_train_spoilage.py`](desk_c122_train_spoilage.py) | C122 source/log receipt: re-read cargo loss and booking arithmetic; not a gameplay control. |
+| [`desk_c57_disabled_ingredients.py`](desk_c57_disabled_ingredients.py) | C57 disabled-ingredient control on archived 1.1.1.406343 meal and storage bodies. |
+| [`desk_c63_zero_seats.py`](desk_c63_zero_seats.py) | C63: expired disaster skips termination at zero seats on build 25579348. |
+| [`desk_c64_expiry.py`](desk_c64_expiry.py) | C64: completed-opportunity expiry stays inside active-task guard on build 25579348. |
 | [`desk_f124_track.py`](desk_f124_track.py) | F124 track rebase: archived split/repair bodies, refunds, shells and branch decline. |
 | [`desk_f125_vacuum.py`](desk_f125_vacuum.py) | F125/F52 composable migration controls on archived 1.1.1.405907 Lua. |
 | [`desk_f127_arrival_booking.py`](desk_f127_arrival_booking.py) | F127: archived 1.1.1 arrival booking, full-dome Homeless label, and fix-removed control. |
