@@ -25,5 +25,9 @@ for 34b; the older slot numbers above are historical. Opt-In code `2e9cf77` is d
 The owner still needs to run the source-floor and continued-traffic check, the hub's
 AssignTrain refusal, and vanilla Send out Train at an ordinary station. Predictions and
 click steps are in the [34b report](B:/Dev/SMR/SMR-OptInPack/docs/agent/reports/TRAIN_34B_PLAN_20261002.md),
-section "Pairing-filter smoke, preloaded". That report owns the results; brief 35 owns both
-configurations. No Fix Pack runtime change. Executed model: GPT-6 (Codex); no subagents.
+section "Sitting 2 follow-up — continuous Food stream and armed indicator". Slot 9 streams
+actual Food pickups and hourly controller-scope store snapshots to the log and Slots & notes.
+Slots 9 and 3 show green while armed and clear on autosave/load/stop; re-press 9 then 3.
+Shared TestKit `43b89b5` changes only the indicator; sitting instrumentation lives in slot file 80.
+That report owns the results and the current five-step batches; brief 35 owns both configurations.
+No Fix Pack runtime change. Executed model: GPT-6 (Codex); no subagents.
