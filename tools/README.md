@@ -71,6 +71,13 @@ this repo. (Mixed line endings are the exception: doccheck's EOL gate catches th
    any temporary edit, restore from the copy, and `sha256sum` both to prove the restore landed; a
    harness that breaks a file to watch a gate fire does the same and prints the hash, as
    `ck170_selftest.py` does. On a path a peer is mid-write on, it discards their work too.
+13. ⛔ **Deleting a tree that holds a junction can empty the junction's target.** On 2026-09-26 a
+   branch worktree carried junctions into the main tree's `local/c92-placement` and
+   `local/c95-place`; deleting the worktree emptied both (865 files), and they survived only in a
+   held pre-move copy. The folders stayed, so the `local/` gate stayed GREEN. Before deleting any
+   tree, list its junctions with `cmd /c dir /A:L /S /B <tree>`, remove each with
+   `cmd /c rmdir <link>` (no `/s`, so only the link goes), and rerun the listing until it is empty.
+   Give a worktree copies of ignored inputs, not junctions.
 
 When a command's fidelity matters, use a tool that writes bytes, and verify afterwards.
 
