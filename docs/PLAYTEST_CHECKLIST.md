@@ -111,15 +111,6 @@ Home: `docs/archive/PLAYTEST_ARCHIVE.md`
 
 ## Run
 
-### ck222 · opened 2026-10-02
-When you next run the Opt-In train tests, run brief 34b's smoke for Export depot reserves and adding trains at stations.
-- Restart; use Slots & notes 1 (rows/stores), 2 (witness), 9 (STREAM), 3 (one sol), then 1 and 8.
-- Slots 9 and 3 stay green while armed; autosave/load stops both. Pause and re-press 9 then 3.
-- A Food depot starting above Desired should settle at Desired; successful Export pairings must stay above its floor.
-- Use 4 (trains), 5 (hub refusal) and 6 (pool top-up only if empty), then Send out Train at an ordinary station.
-- Code is desk-verified; both fixes need this sitting. The report has the current five-step batches.
-Home: `docs/agent/reports/OPTIN_TRAIN_CARGO_SMOKE_20260928.md`
-
 ### ck221 · opened 2026-09-30
 When you next test the Elevator Depot, use the imported shell for its surface, train and underground checks.
 - Import and disk checks passed; owner carried brief 25 to hotfix build 25579348. Relevant source hashes match.

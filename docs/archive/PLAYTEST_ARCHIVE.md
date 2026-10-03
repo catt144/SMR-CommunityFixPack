@@ -17684,3 +17684,24 @@ first on each shared function, whether both run, and whether either loses a
 return value. `SMRFixPack.ListFixes()` on both packs is the census. Nothing here
 is a release gate — it is information, by the owner's own 2026-08-19 ruling.
 
+
+
+## ck222 ? completed 2026-10-02, owner-present: brief 34b Fix 1 and Fix 2 PASSED
+
+### ck222 · opened 2026-10-02
+When you next run the Opt-In train tests, run brief 34b's smoke for Export depot reserves and adding trains at stations.
+- Restart; use Slots & notes 1 (rows/stores), 2 (witness), 9 (STREAM), 3 (one sol), then 1 and 8.
+- Slots 9 and 3 stay green while armed; autosave/load stops both. Pause and re-press 9 then 3.
+- A Food depot starting above Desired should settle at Desired; successful Export pairings must stay above its floor.
+- Use 4 (trains), 5 (hub refusal) and 6 (pool top-up only if empty), then Send out Train at an ordinary station.
+- Code is desk-verified; both fixes need this sitting. The report has the current five-step batches.
+Home: `docs/agent/reports/OPTIN_TRAIN_CARGO_SMOKE_20260928.md`
+
+Owner result: `Mars.exe-20261002-20.42.08-6aba6e65.log`. Fix 1: 91 streamed Export
+pickups, none ending below source Desired; depots settle at 50/30. Fix 2: hub refusal
+keeps trains 17/17, ordinary-station Send out Train changes pool 1/0 and trains 17/18
+without increasing the hub count; one refusal and no TrainBay fill/spawn lines.
+The witness's eight unsafe pairings occur inside STREAM's autosave gap, not from
+reservation-only arithmetic. Save-window bypass/coverage remains a brief 35 finding.
+Full counts, scope, receipt and source hashes: the Home report links Opt-In
+`TRAIN_34B_PLAN_20261002.md`, section "Sitting 2 PASS". No runtime edit in this close-out.

@@ -20,14 +20,15 @@ the session instructions; no more specific executed model ID was exposed.
 
 ## Brief 34b — Export depot reserves and station-side train spawning, 2026-10-02
 
-Checklist ck222 routes this separate smoke here. The current TestKit slots are preloaded
-for 34b; the older slot numbers above are historical. Opt-In code `2e9cf77` is desk-verified.
-The owner still needs to run the source-floor and continued-traffic check, the hub's
-AssignTrain refusal, and vanilla Send out Train at an ordinary station. Predictions and
-click steps are in the [34b report](B:/Dev/SMR/SMR-OptInPack/docs/agent/reports/TRAIN_34B_PLAN_20261002.md),
-section "Sitting 2 follow-up — continuous Food stream and armed indicator". Slot 9 streams
-actual Food pickups and hourly controller-scope store snapshots to the log and Slots & notes.
-Slots 9 and 3 show green while armed and clear on autosave/load/stop; re-press 9 then 3.
-Shared TestKit `43b89b5` changes only the indicator; sitting instrumentation lives in slot file 80.
-That report owns the results and the current five-step batches; brief 35 owns both configurations.
-No Fix Pack runtime change. Executed model: GPT-6 (Codex); no subagents.
+**Owner-present PASS, 2026-10-02:** brief 34b Fix 1 (Export reserves) and Fix 2 (hub refusal /
+ordinary-station train spawning), log `Mars.exe-20261002-20.42.08-6aba6e65.log`. Completed
+ck222 is in `docs/archive/PLAYTEST_ARCHIVE.md`. Opt-In gameplay build `2e9cf77`, TestKit
+`8408566`; commands, hashes, reconciled counts and PASS scope are in the
+[34b report](B:/Dev/SMR/SMR-OptInPack/docs/agent/reports/TRAIN_34B_PLAN_20261002.md),
+section "Sitting 2 PASS". STREAM's zero below-Desired pickups covers its armed windows;
+the witness's eight flags fall in the autosave gap and remain a save-leg finding for brief 35.
+They are not reservation-only flags. The report judges the bounded retry cost without
+proposing a trim. Matcher rule candidate [EF-120](../facts/EF-120.md) is allocated here and
+mirrored to Opt-In. Slot 7 cargo trap and slot 9 STREAM stay preloaded for brief 35, which
+owns the full shipping battery and both configurations. The orchestrator closes 34b.
+No Fix Pack runtime change in this close-out. Executed model: GPT-6 (Codex); no subagents.
