@@ -94,7 +94,7 @@ comments is written by `python tools/doccheck.py --regen` and checked by
 
 <!-- GENERATED TOOL ROWS — never hand-edit; regenerate with: python tools/doccheck.py --regen -->
 
-*92 scripts, every `tools/*.py` on disk. This block is GENERATED: a row's text is copied from the script's own header, so a wrong row is repaired in the script, never here.*
+*93 scripts, every `tools/*.py` on disk. This block is GENERATED: a row's text is copied from the script's own header, so a wrong row is repaired in the script, never here.*
 
 ### Repo gates, and the falsifiers that keep them honest
 
@@ -255,6 +255,7 @@ New since the last grouping pass. Give each a home in `TOOL_GROUPS` in `tools/do
 | [`desk_hubset07b_rehearsal.py`](desk_hubset07b_rehearsal.py) | hubset 07B second-pass instruments: a declared-VOID desk rehearsal. |
 | [`desk_load_first.py`](desk_load_first.py) | LoadFirst (load-order option B) desk controls on archived 1.1.1.405907 Lua. |
 | [`gamepatch_111_census.py`](gamepatch_111_census.py) | Reconcile the 1.1.1 build response by name, including companion probe removal. |
+| [`open_bugs_recheck.py`](open_bugs_recheck.py) | Reconcile the 2026-10-02 open-bug recheck report against its firing set and entries. |
 | [`paradox_card.py`](paradox_card.py) | Open the Paradox store description as a formatted page, ready to copy. |
 | [`replacecheck.py`](replacecheck.py) | Which modules redefine a shipped declaration outright, and which delegate to a captured original they actually call? |
 
