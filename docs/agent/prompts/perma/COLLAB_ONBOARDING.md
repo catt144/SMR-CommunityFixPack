@@ -11,8 +11,10 @@ and the working log. It is temporary: when the owner says onboarding is closed, 
 delete its row in [`../README.md`](../README.md) in the same commit, after moving anything in
 section 4 or 5 that is still owed to its durable home.
 
-Authored 2026-10-04 at pack `1a6a5024`, kit `master` `b58ae18`. Start with `git pull` and
-`git log --oneline -5` in both repos; every specific below is a claim to check once.
+Authored 2026-10-04 at pack `1a6a5024`, kit `master` `b58ae18`; last updated 2026-10-04 at pack
+`156080d4`, kit `master` `ec5827d`. Start with `git pull` and `git log --oneline -5` in both repos
+(in the kit, `git fetch` and read `origin/master`; its working tree is often on a sitting branch);
+every specific below is a claim to check once.
 
 ## 1 · The decision (owner, 2026-09-29) — settled, do not reopen
 
@@ -47,6 +49,11 @@ Authored 2026-10-04 at pack `1a6a5024`, kit `master` `b58ae18`. Start with `git 
 | `bodycheck.py`, `sigcheck.py`, `luafn.py` read the game folder from `SMR_INSTALL` | pack | `c22847e7` |
 | `FRAMEWORK.md` (people's one-pager) and `AGENT_GUIDE.md` (agent start point); entry files route to it | kit | `b9fb5f1` |
 | The two docs and ONBOARDING §7 carry the `users/` branch route; the fork draft is gone | kit | `ec5827d` |
+| Claude Docs copy of `FRAMEWORK.md` for sharing, "How the collaboration works": https://claude.ai/code/artifact/68a4af11-e355-4f30-95c8-de40fd8bc551 (private until the owner shares it) | Claude Docs | rev 10 |
+
+`FRAMEWORK.md` and the Claude Docs copy say the same thing: change both together, the doc through
+the Claude Docs connector (load the `anthropic-skills:docs` skill first; read with `sinceRev` 10
+before editing, since people may have edited it).
 
 GitHub rulesets, owner-configured; every one has bypass "Repository admin, Always allow":
 
@@ -103,8 +110,10 @@ the guide saying it should. Nothing below marked untested may be reported as wor
   collaborator push is the test: a `users/**` branch must succeed; `main` or any other name must fail.
 - **Untested on any machine but the owner's:** a fresh clone loading through a junction; the
   screenshot helper's fallback when `B:` does not exist (`Code/74_SMRTK_Agent.lua`); a published
-  pack and a cloned pack enabled together (same mod id). The guide tells collaborators to
-  unsubscribe; the first collaborator's run is the test.
+  pack and a cloned pack enabled together (same mod id); `bodycheck.py`/`sigcheck.py` with
+  `SMR_INSTALL` pointing at another machine's game folder (only the owner-rig default and the
+  same path set explicitly were compared, byte-identical, at `c22847e7`). The guide tells
+  collaborators to unsubscribe; the first collaborator's run is the test.
 - **Source archive parity.** Pins only agree across machines when everyone hashes the same game
   tree. `AGENT_GUIDE.md` §4 gives the digest command and the owner-rig result (4719 files,
   `d753f949…`, Steam build `25579348`, measured 2026-10-04); no collaborator's result is in yet.
@@ -119,6 +128,12 @@ the guide saying it should. Nothing below marked untested may be reported as wor
   `Fix_TrackSalvageWipe`/`Fix_TrackSalvageRefund`. Their code has not been read; `bugs/C49.md` is
   the pack's earlier record of fredware's mod. Saint blessing is the one to raise first: vanilla
   fixed it in 1.1.0 and a second correction on top breaks blessings (F-1).
+- **Old game source trees are not shared.** `SMR-Shared\SMR-SrcArchive` has no remote, so
+  collaborators have only their live 1.1.1 tree. The committed 1.0.7 → 1.1.0 diff
+  (`reports/vanillahunt/`) is an index without bodies, apart from `PRESETS.tsv`'s old/new values,
+  so it is left out of their onboarding; a 1.0.7 or 1.1.0 citation they need checked goes to the
+  owner's seat. Sharing the trees themselves (the developers' shipped source) is the owner's
+  licensing call; raised in chat 2026-10-04, not asked for, not ruled.
 - **doccheck is left out of the collaborator's pull-request gates** in `ONBOARDING.md` §7, because
   it can go RED for pack-side reasons. The owner may want it back.
 
