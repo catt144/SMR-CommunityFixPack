@@ -29,6 +29,10 @@ Authored 2026-10-04 at pack `1a6a5024`, kit `master` `b58ae18`. Start with `git 
   normal release) over a new public mod. fredware proposed Paradox Mods as a test bed; the owner's
   conditions if that happens: only fixes that leave nothing in the save, an off-platform report
   route (Paradox Mods has no comments, `EF-067`), and no overlap with fixes the pack already ships.
+- Owner, 2026-10-04: no forks. Collaborators get the Write role on the pack and kit repos, work on
+  branches named `users/<name>/<fix>`, and open pull requests that the owner merges into `main`.
+  Proposed in this session, ruled by the owner's "Can they not just have their own branch to work
+  on and then we merge it into main"; the owner then configured the rulesets in section 2.
 
 ## 2 · What is built
 
@@ -42,11 +46,22 @@ Authored 2026-10-04 at pack `1a6a5024`, kit `master` `b58ae18`. Start with `git 
 | `aliascheck.py` reads the `SMRTest` constructor's fields (10 false rows gone) | pack | `19e774c` |
 | `bodycheck.py`, `sigcheck.py`, `luafn.py` read the game folder from `SMR_INSTALL` | pack | `c22847e7` |
 | `FRAMEWORK.md` (people's one-pager) and `AGENT_GUIDE.md` (agent start point); entry files route to it | kit | `b9fb5f1` |
+| The two docs and ONBOARDING §7 carry the `users/` branch route; the fork draft is gone | kit | `ec5827d` |
 
-GitHub ruleset "Master" on the kit (owner-configured, 2026-09-29): pull request required, force
-pushes and deletion blocked, merge commits only, repository admin bypasses. A direct push by the
-owner's seat succeeds and prints `Changes must be made through a pull request`; that line is the
-bypass notice, not a rejection. `gh` is not installed on this machine, so the ruleset, invitations
+GitHub rulesets, owner-configured; every one has bypass "Repository admin, Always allow":
+
+| repo | ruleset | target | rules |
+|---|---|---|---|
+| kit | Master (2026-09-29; Restrict updates added 2026-10-04) | default branch | Restrict updates and deletions, block force pushes, pull request required with 0 approvals, merge method Merge only |
+| pack | Main Ruleset (2026-10-04) | default branch | same as the kit's Master |
+| pack | Collaborator branches (2026-10-04) | all branches except `main` and `users/**` | Restrict creations, updates and deletions, block force pushes |
+| pack | release tags (2026-10-04) | all tags | Restrict creations, updates and deletions |
+
+Actions are disabled on the pack repo (it had no workflows; the site publishes from
+`SMR-CommunityMods`, which keeps Actions). Read from the owner's screenshots, not from GitHub. A
+direct push by the owner's seat succeeds and prints `Changes must be made through a pull request`
+(and, with Restrict updates, `Cannot update this protected ref`) under "Bypassed rule violations";
+those lines are the bypass notice, not a rejection. The kit push of `ec5827d` printed both. `gh` is not installed on this machine, so the ruleset, invitations
 and pull requests cannot be read from here: ask the owner or have them paste what they see.
 
 The collaborator's agent starts at the kit's `AGENT_GUIDE.md`, which routes to `ONBOARDING.md` (the
@@ -82,8 +97,10 @@ the guide saying it should. Nothing below marked untested may be reported as wor
 
 ## 4 · Open items
 
-- **Invitations.** Sending them is the owner's act (kit Settings → Collaborators). Whether they
-  went out is unknown at authoring.
+- **Invitations.** Sending them is the owner's act (Settings → Collaborators, Write role, on the pack
+  and the kit). Whether they went out or were accepted is unknown as of 2026-10-04.
+- **Rulesets unproven against a collaborator.** Only the owner's bypass has been observed. The first
+  collaborator push is the test: a `users/**` branch must succeed; `main` or any other name must fail.
 - **Untested on any machine but the owner's:** a fresh clone loading through a junction; the
   screenshot helper's fallback when `B:` does not exist (`Code/74_SMRTK_Agent.lua`); a published
   pack and a cloned pack enabled together (same mod id). The guide tells collaborators to
@@ -91,9 +108,8 @@ the guide saying it should. Nothing below marked untested may be reported as wor
 - **Source archive parity.** Pins only agree across machines when everyone hashes the same game
   tree. `AGENT_GUIDE.md` §4 gives the digest command and the owner-rig result (4719 files,
   `d753f949…`, Steam build `25579348`, measured 2026-10-04); no collaborator's result is in yet.
-- **The pack-side route is not designed.** `FRAMEWORK.md` and `AGENT_GUIDE.md` §6 carry a draft
-  marked proposed (fork the public repo, pull request against `main`, owner reruns the gates);
-  the owner has not ruled on it, and what the owner's review checks is unwritten. The hook is per-clone (`git config core.hooksPath tools/hooks`), so a
+- **The owner's pull-request review is unwritten.** The route is settled (section 1); what the
+  owner's review checks is not. The hook is per-clone (`git config core.hooksPath tools/hooks`), so a
   collaborator's green is not evidence; the owner's seat reruns the gates on every pull request.
 - **Trial bugs not chosen.** One each, disjoint modules, from their lists and not covered by the
   pack; a wrap or lighter (FIX_POLICY §1.1–§1.4), no game-time thread, log-demonstrable (Tier B/C).
@@ -105,7 +121,6 @@ the guide saying it should. Nothing below marked untested may be reported as wor
   fixed it in 1.1.0 and a second correction on top breaks blessings (F-1).
 - **doccheck is left out of the collaborator's pull-request gates** in `ONBOARDING.md` §7, because
   it can go RED for pack-side reasons. The owner may want it back.
-- **Branch protection on the pack repo** was not looked at; only the kit has a ruleset.
 
 ## 5 · Issue log
 
