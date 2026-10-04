@@ -12,7 +12,10 @@ never a second extractor to disagree with. Change it here or nowhere.
 """
 import os, re, sys
 
-SRC = r"A:\SteamLibrary\steamapps\common\Project Spark\ModTools\Src"
+# The game install comes from SMR_INSTALL (same variable as patchcheck.py); the
+# default is the owner's rig. A collaborator sets SMR_INSTALL once.
+SRC = os.path.join(os.environ.get(
+    "SMR_INSTALL", r"A:\SteamLibrary\steamapps\common\Project Spark"), "ModTools", "Src")
 
 
 def read_lines(path):

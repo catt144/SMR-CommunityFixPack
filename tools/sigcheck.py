@@ -82,7 +82,10 @@ for _stream in (sys.stdout, sys.stderr):
         pass
 
 
-DEFAULT_SRC = r"A:\SteamLibrary\steamapps\common\Project Spark\ModTools\Src"
+# The game install comes from SMR_INSTALL (same variable as patchcheck.py); the
+# default is the owner's rig. A collaborator sets SMR_INSTALL once or passes --src.
+DEFAULT_SRC = os.path.join(os.environ.get(
+    "SMR_INSTALL", r"A:\SteamLibrary\steamapps\common\Project Spark"), "ModTools", "Src")
 
 HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CODE = os.path.join(HERE, "Code")
@@ -252,7 +255,7 @@ def main():
         return selftest()
 
     if not os.path.isdir(a.src):
-        print("source tree not found: %s" % a.src)
+        print("source tree not found: %s (set SMR_INSTALL to the game folder, or pass --src)" % a.src)
         return 2
     if not os.path.isdir(a.code):
         print("pack Code/ not found: %s" % a.code)

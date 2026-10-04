@@ -112,7 +112,10 @@ import tempfile
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from luafn import find_bodies, read_lines          # THE delimiter -- see above
 
-DEFAULT_SRC = r"A:\SteamLibrary\steamapps\common\Project Spark\ModTools\Src"
+# The game install comes from SMR_INSTALL (same variable as patchcheck.py); the
+# default is the owner's rig. A collaborator sets SMR_INSTALL once or passes --src.
+DEFAULT_SRC = os.path.join(os.environ.get(
+    "SMR_INSTALL", r"A:\SteamLibrary\steamapps\common\Project Spark"), "ModTools", "Src")
 
 HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CODE = os.path.join(HERE, "Code")
@@ -534,7 +537,7 @@ def main():
     a = ap.parse_args()
 
     if not os.path.isdir(a.src):
-        print("source tree not found: %s" % a.src)
+        print("source tree not found: %s (set SMR_INSTALL to the game folder, or pass --src)" % a.src)
         return 2
     if a.pin:
         return pin(a.src, a.pin[0], a.pin[1])
