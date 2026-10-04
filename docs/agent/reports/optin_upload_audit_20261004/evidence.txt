@@ -1,0 +1,176 @@
+COMMAND "python docs/agent/reports/optin_upload_audit_20261004/collect_evidence.py"
+REPO {"head": "9dd233412ebe7babea7a6071d81db49e717d7b9f", "path": "B:\\Dev\\SMR\\SMR-BugFixPack"}
+REPO {"head": "b1d139d6aa9682f85fac0453d0ceb4b41a744b85", "path": "B:\\Dev\\SMR\\SMR-OptInPack"}
+LOG {"braze": [{"line": 262, "text": "[Braze] SessionStart error The server name or address could not be resolved"}, {"line": 264, "text": "[Braze] Failed sending launcher ev The server name or address could not be resolved"}, {"line": 266, "text": "[Braze] Failed to init"}, {"line": 268, "text": "[Braze] SessionStart error The server name or address could not be resolved"}, {"line": 271, "text": "[Braze] Failed sending launcher ev The server name or address could not be resolved"}, {"line": 273, "text": "[Braze] Failed to init"}], "build": ["Platform: asserts, cheats, debug, desktop, editor, goldmaster, paradox, pc, steam", "Lua revision: 406343", "Build version: 1.1.1.406343"], "groups": {"Reloading done": {"line_count": 3, "members": [{"line": 166, "text": "Reloading done in 1326 ms"}, {"line": 376, "text": "Reloading done in 1674 ms"}, {"line": 484, "text": "Reloading done in 1764 ms"}], "occurrence_control": 3}, "[PDXDBG]": {"line_count": 0, "members": [], "occurrence_control": 0}, "blkPageCompress.cpp(35)": {"line_count": 4, "members": [{"line": 380, "text": "A:\\spark-release\\HSL\\blkPageCompress.cpp(35): ASSERT(!m_bPageChanged && !m_bHeaderChanged) failed"}, {"line": 384, "text": "A:\\spark-release\\HSL\\blkPageCompress.cpp(35): ASSERT(!m_bPageChanged && !m_bHeaderChanged) failed"}, {"line": 488, "text": "A:\\spark-release\\HSL\\blkPageCompress.cpp(35): ASSERT(!m_bPageChanged && !m_bHeaderChanged) failed"}, {"line": 492, "text": "A:\\spark-release\\HSL\\blkPageCompress.cpp(35): ASSERT(!m_bPageChanged && !m_bHeaderChanged) failed"}], "occurrence_control": 4}, "was not uploaded": {"line_count": 2, "members": [{"line": 390, "text": "[mod] Mod Relaunched Fix Pack: Opt-In Modules (id SMR_CommunityOptInPack, v1.00-000) was not uploaded! Error: table: 000001E47D162D80"}, {"line": 496, "text": "[mod] Mod Relaunched Fix Pack: Opt-In Modules (id SMR_CommunityOptInPack, v1.00-000) was not uploaded! Error: table: 000001E47DA18220"}], "occurrence_control": 2}}, "path": "C:\\Users\\stkot\\AppData\\Roaming\\Surviving Mars Relaunched\\logs\\MarsDebug.exe-20261004-00.19.10-6aba6e9d.log", "sha256": "99e299e0fe0fb4db6565ce3d6dc35e897236408e3ad8c28962f66e3ffffd118f"}
+LOG {"braze": [{"line": 267, "text": "[Braze] SessionStart error The server name or address could not be resolved"}, {"line": 270, "text": "[Braze] Failed sending launcher ev The server name or address could not be resolved"}, {"line": 272, "text": "[Braze] Failed to init"}, {"line": 274, "text": "[Braze] SessionStart error The server name or address could not be resolved"}, {"line": 277, "text": "[Braze] Failed sending launcher ev The server name or address could not be resolved"}, {"line": 279, "text": "[Braze] Failed to init"}], "build": ["Platform: asserts, cheats, debug, desktop, editor, goldmaster, paradox, pc, steam", "Lua revision: 406343", "Build version: 1.1.1.406343"], "groups": {"Reloading done": {"line_count": 4, "members": [{"line": 170, "text": "Reloading done in 1374 ms"}, {"line": 383, "text": "Reloading done in 1636 ms"}, {"line": 479, "text": "Reloading done in 1707 ms"}, {"line": 569, "text": "Reloading done in 1703 ms"}], "occurrence_control": 4}, "[PDXDBG]": {"line_count": 0, "members": [], "occurrence_control": 0}, "blkPageCompress.cpp(35)": {"line_count": 1, "members": [{"line": 387, "text": "A:\\spark-release\\HSL\\blkPageCompress.cpp(35): ASSERT(!m_bPageChanged && !m_bHeaderChanged) failed"}], "occurrence_control": 1}, "was not uploaded": {"line_count": 2, "members": [{"line": 391, "text": "[mod] Mod Relaunched Fix Pack: Opt-In Modules (id SMR_CommunityOptInPack, v1.00-000) was not uploaded! Error: table: 0000021403BAA1B0"}, {"line": 573, "text": "[mod] Mod Relaunched Fix Pack: Opt-In Modules (id SMR_CommunityOptInPack, v1.00-000) was not uploaded! Error: table: 00000214048CEEC0"}], "occurrence_control": 2}}, "path": "C:\\Users\\stkot\\AppData\\Roaming\\Surviving Mars Relaunched\\logs\\MarsDebug.exe-20261004-00.32.43-6aba6e9d.log", "sha256": "0c6ada8942367f179cc6a73d6d7a64df474a92a87e72f754cb503442a76463a3"}
+PREDICTION {"bucket_control": 51, "buckets": {"(root)": 4, "Code": 47}, "count": 51, "filter": ["*.git/*", "*.svn/*", "*/Source/*", "*/SourceData/*", "*/docs/*", "*/.agents/*", "*/.claude/*", "*/tools/*", "*README.md", "*CLAUDE.md", "*AGENTS.md", "*.gitignore", "*.rgignore", "*.gitattributes", "*/store_screenshots/*", "*/zz-owner/*", "*/saves/*", "*/local/*", "*/scratch/*"], "links": [["saves/backup", "*/saves/*"], ["saves/game", "*/saves/*"], ["zz-owner/all-claude-memory", "*/zz-owner/*"], ["zz-owner/claude-memory", "*/zz-owner/*"]], "members": ["Code/00_Core.lua", "Code/01_LoadFirst.lua", "Code/90_SaveSanitizer.lua", "Code/Fix_ArrivalDeaths.lua", "Code/Fix_BombardmentSpread.lua", "Code/Fix_CloggedBuildingRelease.lua", "Code/Fix_CrystalMysteryHang.lua", "Code/Fix_DeportRocketLaunch.lua", "Code/Fix_DroneTransportMinors.lua", "Code/Fix_DryFarmingFarms.lua", "Code/Fix_DustSicknessBiorobots.lua", "Code/Fix_ExoticDepositSign.lua", "Code/Fix_ExtenderFlapChurn.lua", "Code/Fix_FactionDomeSizeGate.lua", "Code/Fix_FreedHousingNotice.lua", "Code/Fix_GhostPowerCells.lua", "Code/Fix_HabitatExpeditionDraft.lua", "Code/Fix_HabitatExpeditionReturn.lua", "Code/Fix_HubLocalAccess.lua", "Code/Fix_HubMarkerDeparture.lua", "Code/Fix_JumboCaveReinforcementWedge.lua", "Code/Fix_LakeEntombment.lua", "Code/Fix_LanderEmptyLaunch.lua", "Code/Fix_LandscapeUnitFilter.lua", "Code/Fix_ObsoleteHomeRescue.lua", "Code/Fix_PassageHubSalvageDrain.lua", "Code/Fix_PayloadTemplateRefill.lua", "Code/Fix_RescueReturnText.lua", "Code/Fix_RocketDroneChurn.lua", "Code/Fix_RocketInteractGuard.lua", "Code/Fix_RoverSubclassManifest.lua", "Code/Fix_SaintBlessing.lua", "Code/Fix_ScanDowngrade.lua", "Code/Fix_SequenceLatents.lua", "Code/Fix_ShelterReflex.lua", "Code/Fix_ShuttleHubOffAvailable.lua", "Code/Fix_ShuttleTransportCache.lua", "Code/Fix_SilentHitMomentFX.lua", "Code/Fix_StaleReservations.lua", "Code/Fix_TrackConnectorPingPong.lua", "Code/Fix_TrackSalvageRefund.lua", "Code/Fix_TrackSalvageWipe.lua", "Code/Fix_TrackTunnelPowerBridge.lua", "Code/Fix_UniversalDepotSeedsToggle.lua", "Code/Fix_VacuumWalks.lua", "Code/Fix_WildfireCureVisit.lua", "Code/Hubset_OnHubNow.lua", "LICENSE", "items.lua", "metadata.lua", "preview.png"], "tool_sha256": "5b55d4ab5d2bb606a8af09df490972013062244282f5005ba9c93d2e228549fa", "tree": "B:\\Dev\\SMR\\SMR-BugFixPack"}
+PREDICTION {"bucket_control": 75, "buckets": {"(root)": 4, "Code": 19, "Data": 2, "Entities": 5, "Fallbacks": 17, "Materials": 4, "Meshes": 5, "Textures": 17, "UI": 2}, "count": 75, "filter": ["*.git/*", "*.svn/*", "*/Source/*", "*/SourceData/*", "*/docs/*", "*/.agents/*", "*/.claude/*", "*/tools/*", "*README.md", "*CLAUDE.md", "*AGENTS.md", "*.gitignore", "*.rgignore", "*.gitattributes", "*/local/*", "*/scratch/*", "*/store_screenshots/*", "*/staging/*"], "links": [], "members": ["Code/00_Core.lua", "Code/BuildingTemplate/SMROptInElevatorDepotDev.generated.lua", "Code/BuildingTemplate/SMROptInTrainHub6.generated.lua", "Code/ElevatorDepot_10_ElevatorDepot.lua", "Code/Opt_AcknowledgedWarnings.lua", "Code/Opt_DroneStatDials.lua", "Code/Opt_ElevatorDepot.lua", "Code/Opt_MultipleSuns.lua", "Code/Opt_ServiceInterestTags.lua", "Code/Opt_StationRows.lua", "Code/Opt_TrainHub.lua", "Code/StationRows_10_TrainFloor.lua", "Code/StationRows_40_TrainDistribution.lua", "Code/StationRows_45_TrainDistributionUI.lua", "Code/TrainHub_20_TrainHub.lua", "Code/TrainHub_30_TrainHubDrones.lua", "Code/TrainHub_60_StationSpoilage.lua", "Code/TrainHub_70_TrainBay.lua", "Code/_EntityData.generated.lua", "Data/BuildingTemplate/SMROptInElevatorDepotDev.lua", "Data/BuildingTemplate/SMROptInTrainHub6.lua", "Entities/SMROptInElevatorDepot.entjson", "Entities/SMROptInElevatorDepotReceiver.entjson", "Entities/SMROptInTrainHub6.entjson", "Entities/SMROptInTrainHub6DomeGlass.entjson", "Entities/SMROptInTrainHub6Glass.entjson", "Fallbacks/Textures/SMROptInElevatorDepot_BC.dds", "Fallbacks/Textures/SMROptInElevatorDepot_CM.dds", "Fallbacks/Textures/SMROptInElevatorDepot_NM.dds", "Fallbacks/Textures/SMROptInElevatorDepot_RM.dds", "Fallbacks/Textures/SMROptInElevatorDepot_SI.dds", "Fallbacks/Textures/SMROptInTrainHub6DomeGlass_BC.dds", "Fallbacks/Textures/SMROptInTrainHub6DomeGlass_NM.dds", "Fallbacks/Textures/SMROptInTrainHub6DomeGlass_RM.dds", "Fallbacks/Textures/SMROptInTrainHub6DomeGlass_SI.dds", "Fallbacks/Textures/SMROptInTrainHub6Glass_BC.dds", "Fallbacks/Textures/SMROptInTrainHub6Glass_NM.dds", "Fallbacks/Textures/SMROptInTrainHub6Glass_RM.dds", "Fallbacks/Textures/SMROptInTrainHub6Glass_SI.dds", "Fallbacks/Textures/SMROptInTrainHub6_BC.dds", "Fallbacks/Textures/SMROptInTrainHub6_NM.dds", "Fallbacks/Textures/SMROptInTrainHub6_RM.dds", "Fallbacks/Textures/SMROptInTrainHub6_SI.dds", "LICENSE", "Materials/SMROptInElevatorDepot.mtljson", "Materials/SMROptInTrainHub6.mtljson", "Materials/SMROptInTrainHub6DomeGlass.mtljson", "Materials/SMROptInTrainHub6Glass.mtljson", "Meshes/SMROptInElevatorDepotReceiver_mesh.sub_0.hgrm", "Meshes/SMROptInElevatorDepot_mesh.sub_0.hgrm", "Meshes/SMROptInTrainHub6DomeGlass_mesh.sub_0.hgrm", "Meshes/SMROptInTrainHub6Glass_mesh.sub_0.hgrm", "Meshes/SMROptInTrainHub6_mesh.sub_0.hgrm", "Textures/SMROptInElevatorDepot_BC.dds", "Textures/SMROptInElevatorDepot_CM.dds", "Textures/SMROptInElevatorDepot_NM.dds", "Textures/SMROptInElevatorDepot_RM.dds", "Textures/SMROptInElevatorDepot_SI.dds", "Textures/SMROptInTrainHub6DomeGlass_BC.dds", "Textures/SMROptInTrainHub6DomeGlass_NM.dds", "Textures/SMROptInTrainHub6DomeGlass_RM.dds", "Textures/SMROptInTrainHub6DomeGlass_SI.dds", "Textures/SMROptInTrainHub6Glass_BC.dds", "Textures/SMROptInTrainHub6Glass_NM.dds", "Textures/SMROptInTrainHub6Glass_RM.dds", "Textures/SMROptInTrainHub6Glass_SI.dds", "Textures/SMROptInTrainHub6_BC.dds", "Textures/SMROptInTrainHub6_NM.dds", "Textures/SMROptInTrainHub6_RM.dds", "Textures/SMROptInTrainHub6_SI.dds", "UI/SMROptInElevatorDepot_icon.png", "UI/SMROptInTrainHub6_icon.png", "items.lua", "metadata.lua", "preview.png"], "tool_sha256": "bb2449123669a87fac91e15bb56d2b67600c6234a45ee2ac05de2c050368cddb", "tree": "B:\\Dev\\SMR\\SMR-OptInPack"}
+PREDICTION {"bucket_control": 75, "buckets": {"(root)": 4, "Code": 19, "Data": 2, "Entities": 5, "Fallbacks": 17, "Materials": 4, "Meshes": 5, "Textures": 17, "UI": 2}, "count": 75, "filter": ["*.git/*", "*.svn/*", "*/Source/*", "*/SourceData/*", "*/docs/*", "*/.agents/*", "*/.claude/*", "*/tools/*", "*README.md", "*CLAUDE.md", "*AGENTS.md", "*.gitignore", "*.rgignore", "*.gitattributes", "*/local/*", "*/scratch/*", "*/store_screenshots/*", "*/staging/*"], "links": [], "members": ["Code/00_Core.lua", "Code/BuildingTemplate/SMROptInElevatorDepotDev.generated.lua", "Code/BuildingTemplate/SMROptInTrainHub6.generated.lua", "Code/ElevatorDepot_10_ElevatorDepot.lua", "Code/Opt_AcknowledgedWarnings.lua", "Code/Opt_DroneStatDials.lua", "Code/Opt_ElevatorDepot.lua", "Code/Opt_MultipleSuns.lua", "Code/Opt_ServiceInterestTags.lua", "Code/Opt_StationRows.lua", "Code/Opt_TrainHub.lua", "Code/StationRows_10_TrainFloor.lua", "Code/StationRows_40_TrainDistribution.lua", "Code/StationRows_45_TrainDistributionUI.lua", "Code/TrainHub_20_TrainHub.lua", "Code/TrainHub_30_TrainHubDrones.lua", "Code/TrainHub_60_StationSpoilage.lua", "Code/TrainHub_70_TrainBay.lua", "Code/_EntityData.generated.lua", "Data/BuildingTemplate/SMROptInElevatorDepotDev.lua", "Data/BuildingTemplate/SMROptInTrainHub6.lua", "Entities/SMROptInElevatorDepot.entjson", "Entities/SMROptInElevatorDepotReceiver.entjson", "Entities/SMROptInTrainHub6.entjson", "Entities/SMROptInTrainHub6DomeGlass.entjson", "Entities/SMROptInTrainHub6Glass.entjson", "Fallbacks/Textures/SMROptInElevatorDepot_BC.dds", "Fallbacks/Textures/SMROptInElevatorDepot_CM.dds", "Fallbacks/Textures/SMROptInElevatorDepot_NM.dds", "Fallbacks/Textures/SMROptInElevatorDepot_RM.dds", "Fallbacks/Textures/SMROptInElevatorDepot_SI.dds", "Fallbacks/Textures/SMROptInTrainHub6DomeGlass_BC.dds", "Fallbacks/Textures/SMROptInTrainHub6DomeGlass_NM.dds", "Fallbacks/Textures/SMROptInTrainHub6DomeGlass_RM.dds", "Fallbacks/Textures/SMROptInTrainHub6DomeGlass_SI.dds", "Fallbacks/Textures/SMROptInTrainHub6Glass_BC.dds", "Fallbacks/Textures/SMROptInTrainHub6Glass_NM.dds", "Fallbacks/Textures/SMROptInTrainHub6Glass_RM.dds", "Fallbacks/Textures/SMROptInTrainHub6Glass_SI.dds", "Fallbacks/Textures/SMROptInTrainHub6_BC.dds", "Fallbacks/Textures/SMROptInTrainHub6_NM.dds", "Fallbacks/Textures/SMROptInTrainHub6_RM.dds", "Fallbacks/Textures/SMROptInTrainHub6_SI.dds", "LICENSE", "Materials/SMROptInElevatorDepot.mtljson", "Materials/SMROptInTrainHub6.mtljson", "Materials/SMROptInTrainHub6DomeGlass.mtljson", "Materials/SMROptInTrainHub6Glass.mtljson", "Meshes/SMROptInElevatorDepotReceiver_mesh.sub_0.hgrm", "Meshes/SMROptInElevatorDepot_mesh.sub_0.hgrm", "Meshes/SMROptInTrainHub6DomeGlass_mesh.sub_0.hgrm", "Meshes/SMROptInTrainHub6Glass_mesh.sub_0.hgrm", "Meshes/SMROptInTrainHub6_mesh.sub_0.hgrm", "Textures/SMROptInElevatorDepot_BC.dds", "Textures/SMROptInElevatorDepot_CM.dds", "Textures/SMROptInElevatorDepot_NM.dds", "Textures/SMROptInElevatorDepot_RM.dds", "Textures/SMROptInElevatorDepot_SI.dds", "Textures/SMROptInTrainHub6DomeGlass_BC.dds", "Textures/SMROptInTrainHub6DomeGlass_NM.dds", "Textures/SMROptInTrainHub6DomeGlass_RM.dds", "Textures/SMROptInTrainHub6DomeGlass_SI.dds", "Textures/SMROptInTrainHub6Glass_BC.dds", "Textures/SMROptInTrainHub6Glass_NM.dds", "Textures/SMROptInTrainHub6Glass_RM.dds", "Textures/SMROptInTrainHub6Glass_SI.dds", "Textures/SMROptInTrainHub6_BC.dds", "Textures/SMROptInTrainHub6_NM.dds", "Textures/SMROptInTrainHub6_RM.dds", "Textures/SMROptInTrainHub6_SI.dds", "UI/SMROptInElevatorDepot_icon.png", "UI/SMROptInTrainHub6_icon.png", "items.lua", "metadata.lua", "preview.png"], "tool_sha256": "bb2449123669a87fac91e15bb56d2b67600c6234a45ee2ac05de2c050368cddb", "tree": "B:\\Dev\\SMR\\SMR-OptInPack-launch"}
+PACK {"bytes": 22606788, "path": "C:\\Users\\stkot\\AppData\\Local\\Temp\\Surviving Mars Relaunched\\ModUpload\\Pack\\ModContent.fpk", "sha256": "75604e5cd607439cd214fccd19657a53e37294c782416ccf05bec8347a5d28f3"}
+PACK_COMMAND ["C:\\Python313\\python.exe", "tools/pack_list.py", "C:\\Users\\stkot\\AppData\\Local\\Temp\\Surviving Mars Relaunched\\ModUpload\\Pack\\ModContent.fpk", "--tree", "B:\\Dev\\SMR\\SMR-OptInPack-launch", "--names"]
+ARCHIVE  C:\Users\stkot\AppData\Local\Temp\Surviving Mars Relaunched\ModUpload\Pack\ModContent.fpk
+  size   22,606,788 bytes
+  md5    631fef747af7efad342ee0fecd1e93dd
+  mtime  2026-10-04 00:34:22.340443
+  ENTRIES 75
+
+  (root)            4
+  Code             19
+  Data              2
+  Entities          5
+  Fallbacks        17
+  Materials         4
+  Meshes            5
+  Textures         17
+  UI                2
+
+  storage: stored=2, zstd=73
+
+  non-Code entries:
+    Data/BuildingTemplate/SMROptInElevatorDepotDev.lua zstd         861 B
+    Data/BuildingTemplate/SMROptInTrainHub6.lua zstd       2,244 B
+    Entities/SMROptInElevatorDepot.entjson   zstd      10,531 B
+    Entities/SMROptInElevatorDepotReceiver.entjson zstd         394 B
+    Entities/SMROptInTrainHub6.entjson       zstd      46,155 B
+    Entities/SMROptInTrainHub6DomeGlass.entjson zstd         410 B
+    Entities/SMROptInTrainHub6Glass.entjson  zstd         400 B
+    Fallbacks/Textures/SMROptInElevatorDepot_BC.dds zstd       2,409 B
+    Fallbacks/Textures/SMROptInElevatorDepot_CM.dds zstd       1,853 B
+    Fallbacks/Textures/SMROptInElevatorDepot_NM.dds zstd       4,835 B
+    Fallbacks/Textures/SMROptInElevatorDepot_RM.dds zstd       2,553 B
+    Fallbacks/Textures/SMROptInElevatorDepot_SI.dds zstd       1,062 B
+    Fallbacks/Textures/SMROptInTrainHub6DomeGlass_BC.dds zstd         114 B
+    Fallbacks/Textures/SMROptInTrainHub6DomeGlass_NM.dds zstd         103 B
+    Fallbacks/Textures/SMROptInTrainHub6DomeGlass_RM.dds zstd         107 B
+    Fallbacks/Textures/SMROptInTrainHub6DomeGlass_SI.dds zstd         100 B
+    Fallbacks/Textures/SMROptInTrainHub6Glass_BC.dds zstd       3,239 B
+    Fallbacks/Textures/SMROptInTrainHub6Glass_NM.dds zstd         103 B
+    Fallbacks/Textures/SMROptInTrainHub6Glass_RM.dds zstd         968 B
+    Fallbacks/Textures/SMROptInTrainHub6Glass_SI.dds zstd         100 B
+    Fallbacks/Textures/SMROptInTrainHub6_BC.dds zstd       2,553 B
+    Fallbacks/Textures/SMROptInTrainHub6_NM.dds zstd       5,104 B
+    Fallbacks/Textures/SMROptInTrainHub6_RM.dds zstd       2,597 B
+    Fallbacks/Textures/SMROptInTrainHub6_SI.dds zstd       1,834 B
+    LICENSE                                  zstd       1,156 B
+    Materials/SMROptInElevatorDepot.mtljson  zstd         249 B
+    Materials/SMROptInTrainHub6.mtljson      zstd         220 B
+    Materials/SMROptInTrainHub6DomeGlass.mtljson zstd         300 B
+    Materials/SMROptInTrainHub6Glass.mtljson zstd         296 B
+    Meshes/SMROptInElevatorDepotReceiver_mesh.sub_0.hgrm zstd      10,060 B
+    Meshes/SMROptInElevatorDepot_mesh.sub_0.hgrm zstd     311,595 B
+    Meshes/SMROptInTrainHub6DomeGlass_mesh.sub_0.hgrm zstd      67,691 B
+    Meshes/SMROptInTrainHub6Glass_mesh.sub_0.hgrm zstd       1,850 B
+    Meshes/SMROptInTrainHub6_mesh.sub_0.hgrm zstd     618,575 B
+    Textures/SMROptInElevatorDepot_BC.dds    zstd    2,435,100 B
+    Textures/SMROptInElevatorDepot_CM.dds    zstd     203,943 B
+    Textures/SMROptInElevatorDepot_NM.dds    zstd    5,509,019 B
+    Textures/SMROptInElevatorDepot_RM.dds    zstd     675,040 B
+    Textures/SMROptInElevatorDepot_SI.dds    zstd     277,761 B
+    Textures/SMROptInTrainHub6DomeGlass_BC.dds zstd         114 B
+    Textures/SMROptInTrainHub6DomeGlass_NM.dds zstd         103 B
+    Textures/SMROptInTrainHub6DomeGlass_RM.dds zstd         107 B
+    Textures/SMROptInTrainHub6DomeGlass_SI.dds zstd         100 B
+    Textures/SMROptInTrainHub6Glass_BC.dds   zstd     139,186 B
+    Textures/SMROptInTrainHub6Glass_NM.dds   zstd         103 B
+    Textures/SMROptInTrainHub6Glass_RM.dds   zstd      57,864 B
+    Textures/SMROptInTrainHub6Glass_SI.dds   zstd         100 B
+    Textures/SMROptInTrainHub6_BC.dds        zstd    3,427,997 B
+    Textures/SMROptInTrainHub6_NM.dds        zstd    7,050,209 B
+    Textures/SMROptInTrainHub6_RM.dds        zstd     797,194 B
+    Textures/SMROptInTrainHub6_SI.dds        zstd     537,521 B
+    UI/SMROptInElevatorDepot_icon.png        stored    32,518 B
+    UI/SMROptInTrainHub6_icon.png            stored    31,755 B
+    items.lua                                zstd       4,549 B
+    metadata.lua                             zstd      10,095 B
+    preview.png                              zstd      40,040 B
+
+  all entries:
+    Code/00_Core.lua
+    Code/BuildingTemplate/SMROptInElevatorDepotDev.generated.lua
+    Code/BuildingTemplate/SMROptInTrainHub6.generated.lua
+    Code/ElevatorDepot_10_ElevatorDepot.lua
+    Code/Opt_AcknowledgedWarnings.lua
+    Code/Opt_DroneStatDials.lua
+    Code/Opt_ElevatorDepot.lua
+    Code/Opt_MultipleSuns.lua
+    Code/Opt_ServiceInterestTags.lua
+    Code/Opt_StationRows.lua
+    Code/Opt_TrainHub.lua
+    Code/StationRows_10_TrainFloor.lua
+    Code/StationRows_40_TrainDistribution.lua
+    Code/StationRows_45_TrainDistributionUI.lua
+    Code/TrainHub_20_TrainHub.lua
+    Code/TrainHub_30_TrainHubDrones.lua
+    Code/TrainHub_60_StationSpoilage.lua
+    Code/TrainHub_70_TrainBay.lua
+    Code/_EntityData.generated.lua
+    Data/BuildingTemplate/SMROptInElevatorDepotDev.lua
+    Data/BuildingTemplate/SMROptInTrainHub6.lua
+    Entities/SMROptInElevatorDepot.entjson
+    Entities/SMROptInElevatorDepotReceiver.entjson
+    Entities/SMROptInTrainHub6.entjson
+    Entities/SMROptInTrainHub6DomeGlass.entjson
+    Entities/SMROptInTrainHub6Glass.entjson
+    Fallbacks/Textures/SMROptInElevatorDepot_BC.dds
+    Fallbacks/Textures/SMROptInElevatorDepot_CM.dds
+    Fallbacks/Textures/SMROptInElevatorDepot_NM.dds
+    Fallbacks/Textures/SMROptInElevatorDepot_RM.dds
+    Fallbacks/Textures/SMROptInElevatorDepot_SI.dds
+    Fallbacks/Textures/SMROptInTrainHub6DomeGlass_BC.dds
+    Fallbacks/Textures/SMROptInTrainHub6DomeGlass_NM.dds
+    Fallbacks/Textures/SMROptInTrainHub6DomeGlass_RM.dds
+    Fallbacks/Textures/SMROptInTrainHub6DomeGlass_SI.dds
+    Fallbacks/Textures/SMROptInTrainHub6Glass_BC.dds
+    Fallbacks/Textures/SMROptInTrainHub6Glass_NM.dds
+    Fallbacks/Textures/SMROptInTrainHub6Glass_RM.dds
+    Fallbacks/Textures/SMROptInTrainHub6Glass_SI.dds
+    Fallbacks/Textures/SMROptInTrainHub6_BC.dds
+    Fallbacks/Textures/SMROptInTrainHub6_NM.dds
+    Fallbacks/Textures/SMROptInTrainHub6_RM.dds
+    Fallbacks/Textures/SMROptInTrainHub6_SI.dds
+    LICENSE
+    Materials/SMROptInElevatorDepot.mtljson
+    Materials/SMROptInTrainHub6.mtljson
+    Materials/SMROptInTrainHub6DomeGlass.mtljson
+    Materials/SMROptInTrainHub6Glass.mtljson
+    Meshes/SMROptInElevatorDepotReceiver_mesh.sub_0.hgrm
+    Meshes/SMROptInElevatorDepot_mesh.sub_0.hgrm
+    Meshes/SMROptInTrainHub6DomeGlass_mesh.sub_0.hgrm
+    Meshes/SMROptInTrainHub6Glass_mesh.sub_0.hgrm
+    Meshes/SMROptInTrainHub6_mesh.sub_0.hgrm
+    Textures/SMROptInElevatorDepot_BC.dds
+    Textures/SMROptInElevatorDepot_CM.dds
+    Textures/SMROptInElevatorDepot_NM.dds
+    Textures/SMROptInElevatorDepot_RM.dds
+    Textures/SMROptInElevatorDepot_SI.dds
+    Textures/SMROptInTrainHub6DomeGlass_BC.dds
+    Textures/SMROptInTrainHub6DomeGlass_NM.dds
+    Textures/SMROptInTrainHub6DomeGlass_RM.dds
+    Textures/SMROptInTrainHub6DomeGlass_SI.dds
+    Textures/SMROptInTrainHub6Glass_BC.dds
+    Textures/SMROptInTrainHub6Glass_NM.dds
+    Textures/SMROptInTrainHub6Glass_RM.dds
+    Textures/SMROptInTrainHub6Glass_SI.dds
+    Textures/SMROptInTrainHub6_BC.dds
+    Textures/SMROptInTrainHub6_NM.dds
+    Textures/SMROptInTrainHub6_RM.dds
+    Textures/SMROptInTrainHub6_SI.dds
+    UI/SMROptInElevatorDepot_icon.png
+    UI/SMROptInTrainHub6_icon.png
+    items.lua
+    metadata.lua
+    preview.png
+
+RECONCILE against B:\Dev\SMR\SMR-OptInPack-launch
+  predicted 75 · in archive 75
+  [!] in tree, NOT in archive : 0
+  [!] in archive, NOT in tree : 0
+  [OK] names match
+
+  CONTENT: 75 byte-identical to disk, 0 differ, 0 allowed difference(s), 0 unread
+
+  VERDICT: EXACT MATCH
+SOURCE {"archive_equals_live": true, "archive_sha256": "69cf418b656823d75a4439eddce38b5056ed98c75be2a5b6bc47ac512bc4775f", "build": "1.1.1.406343", "live_sha256": "69cf418b656823d75a4439eddce38b5056ed98c75be2a5b6bc47ac512bc4775f", "path": "CommonLua/Classes/GedModEditor.lua"}
+SOURCE {"archive_equals_live": true, "archive_sha256": "9fab98939528c074276a4c475fe0b76f09e9a79f0fa7fdb67d5c0970e26f3190", "build": "1.1.1.406343", "live_sha256": "9fab98939528c074276a4c475fe0b76f09e9a79f0fa7fdb67d5c0970e26f3190", "path": "CommonLua/Libs/Paradox/ParadoxMods.lua"}
+SOURCE {"archive_equals_live": true, "archive_sha256": "293f9f823b3d657b67fb4a7564564abe71d3a5e9c5894e7f6d40336643ddfe13", "build": "1.1.1.406343", "live_sha256": "293f9f823b3d657b67fb4a7564564abe71d3a5e9c5894e7f6d40336643ddfe13", "path": "CommonLua/Modding/Mod.lua"}
+SOURCE {"archive_equals_live": true, "archive_sha256": "ddeb5d227e7a1e6de45a6049dd95d201ed28089f63b375a18280a370da017efd", "build": "1.1.1.406343", "live_sha256": "ddeb5d227e7a1e6de45a6049dd95d201ed28089f63b375a18280a370da017efd", "path": "CommonLua/console.lua"}

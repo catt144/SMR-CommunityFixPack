@@ -1,0 +1,24 @@
+DESK ONLY: Lua 5.5 | lupa 2.8; source=1.1.1.406343
+console input fixture: prepare/readback=8192; capture bytes=3678; chars=3678; ASCII=True; restore=2048
+create success: AsyncPdxGetModDetails -> AsyncPdxSetupModForPublish -> AsyncPdxUploadModAsset -> AsyncPdxUploadModAsset -> AsyncPdxUploadModContent -> AsyncPdxPublishMod
+  [PDXCAP] CONTROL arity=3 r1=nil r2=false r3=nil
+  [PDXCAP] END upload arity=2 r1=true r2=true restored=true
+update success: AsyncPdxGetModDetails -> AsyncPdxSetupModForPublish -> AsyncPdxUploadModAsset -> AsyncPdxUploadModAsset -> AsyncPdxUploadModContent -> AsyncPublishNewModVersion
+  [PDXCAP] CONTROL arity=3 r1=nil r2=false r3=nil
+  [PDXCAP] END upload arity=2 r1=true r2=true restored=true
+create publish refusal: AsyncPdxGetModDetails -> AsyncPdxSetupModForPublish -> AsyncPdxUploadModAsset -> AsyncPdxUploadModAsset -> AsyncPdxUploadModContent -> AsyncPdxPublishMod
+  [PDXCAP] CONTROL arity=3 r1=nil r2=false r3=nil
+  [PDXCAP] END AsyncPdxPublishMod arity=4 r1="UnknownError" r2=nil r3=false r4=nil
+  [PDXCAP] END upload arity=3 r1=true r2=false r3=string(bytes=28) restored=true
+content refusal: AsyncPdxGetModDetails -> AsyncPdxSetupModForPublish -> AsyncPdxUploadModAsset -> AsyncPdxUploadModAsset -> AsyncPdxUploadModContent
+  [PDXCAP] CONTROL arity=3 r1=nil r2=false r3=nil
+  [PDXCAP] END AsyncPdxUploadModContent arity=4 r1="UnknownError" r2=nil r3=false r4=nil
+  [PDXCAP] END upload arity=3 r1=true r2=false r3=string(bytes=28) restored=true
+ignored details refusal: AsyncPdxGetModDetails -> AsyncPdxSetupModForPublish -> AsyncPdxUploadModAsset -> AsyncPdxUploadModAsset -> AsyncPdxUploadModContent -> AsyncPdxPublishMod
+  [PDXCAP] CONTROL arity=3 r1=nil r2=false r3=nil
+  [PDXCAP] END AsyncPdxGetModDetails arity=4 r1="UnknownError" r2=nil r3=false r4=nil
+  [PDXCAP] END upload arity=2 r1=true r2=true restored=true
+restricted/no-PDX globals: NOT_READY; UploadMod untouched
+yield + trailing-nil return: resumed; arity preserved (nil,false,nil)
+thrown fixture error: propagates unchanged; native function restored
+shipped localization + ModLog: localized concatenation logs table identity; SDK error text lost

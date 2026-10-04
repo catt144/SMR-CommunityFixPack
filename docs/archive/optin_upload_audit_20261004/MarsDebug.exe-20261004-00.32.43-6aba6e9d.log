@@ -1,0 +1,616 @@
+					Render 0:00:00:007
+*** executable info
+Timestamp:     	6aba6e9d
+Date:          	Mon Sep 28 09:41:49 2026
+Command line:  	-nointro
+Compiler:      	195136247, 142 (VS 2019) or newer
+
+
+*** hardware info
+CPU name      	Intel(R) Core(TM) i7-14700K
+CPU MHz       	3418
+CPU cores     	20/28
+Phys. Memory   	65278 MBytes
+Memory In Use  	45%
+Disk Free      	1221899 MBytes
+
+
+*** OS info
+OS:            	Windows 11
+Version:       	10.0.26100 
+
+
+*** Debug::Init()
+
+
+					Render 0:00:00:115
+Steam initialized (AppId 3215050)
+					Render 0:00:00:118
+Drive type for game installation: SSD, savegames: SSD
+					Render 0:00:00:119
+Language: English
+					Render 0:00:01:587
+*** graphics info
+GPU                            	NVIDIA GeForce RTX 4080 Feature Level: 12.1 {  DoublePrecisionFloatShaderOps: 1 OutputMergerLogicOp: 1 MinPrecisionSupport: 2 TiledResourcesTier: 4 ResourceBindingTier: 3 PSSpecifiedStencilRefSupported: 0 TypedUAVLoadAdditionalFormats: 1 ROVsSupported: 1 ConservativeRasterizationTier: 3 MaxGPUVirtualAddressBitsPerResource: 40 StandardSwizzle64KBSupported: 0 CrossNodeSharingTier: 0 CrossAdapterRowMajorTextureSupported: 0 VPAndRTArrayIndexFromAnyShaderFeedingRasterizerSupportedWithoutGSEmulation: 1 ResourceHeapTier: 2 NotZeroedPools: 1 UMA: 0 UnalignedBlockTextures: 1}
+API                            	d3d12
+GPU Driver Version             	32.0.16.1074
+GPU Driver Package Version     	610.74
+GPU Dedicated Video Memory     	16048 MB
+					Render 0:00:01:753
+
+Libs: Network, Sequences, MouseTrackWin, DumbAI, MapGen, Paradox, TriggersAndEvents, Notifications, Research, Resources, Tutorial, Objectives, DevToolsPublic, DebugAdapter 
+
+					Render 0:00:02:041
+
+Platform: asserts, cheats, debug, desktop, editor, goldmaster, paradox, pc, steam
+
+						Game Task 0:00:02:058
+
+** Entity stats:
+  entities: 3445
+  unique state names: 336 / 1023
+  unique spot names: 377
+  unique spot transforms: 20944
+  max surface radius: 47680 cm
+
+					Render 0:00:03:077
+*** audio info
+Audio Endpoint                 	Headphones (3- A50 Game)
+							Lua 0:00:03:080
+Lua revision: 406343
+Assets revision: 33225
+							Lua 0:00:03:081
+Steam AppID: 3215050
+Build version: 1.1.1.406343
+Build branch:  Release
+							Lua 0:00:03:083
+[DebugAdapter] Started at 127.0.0.1:8165
+							Lua 0:00:03:092
+Account storage loaded successfully in 9 ms
+DLC norman loaded, lua revision 406343, assets revision 33225
+DLC thomas loaded, lua revision 406343, assets revision 33225
+							Lua 0:00:03:099
+[mod] Loaded mod def DEV ONLY - Opt-In Modules Workbench (never upload) (id SMR_CommunityOptInPack_Workbench, v1.00-000) unpacked from appdata
+[mod] Loaded mod def Relaunched Fix Pack (id SMR_CommunityFixPack, v1.00-026) unpacked from appdata
+[mod] Loaded mod def Relaunched Fix Pack: Opt-In Modules (id SMR_CommunityOptInPack, v1.00-000) unpacked from appdata
+[mod] Loaded mod def Passage Network (id iooW34Y, v1.00-038) packed from steam
+[mod] Loaded mod def Grom (id DoEpVdS, v2.00-974) packed from steam
+[mod] Loaded mod def Save Buffer Fix (id SMR_SaveBufferFix, v0.00-001) unpacked from appdata
+[mod] Loaded mod def Better Disasters (id YbJmPhb, v1.04-055) packed from steam
+[mod] Loaded mod def TEMPORARY - Linux NVIDIA 580 Crash Workaround (id SMR_FR1TempWorkaround, v0.00-003) unpacked from appdata
+[mod] Loaded mod def Community Fix Pack — Test Kit (id SMR_CommunityFixPackTestKit, v0.00-001) unpacked from appdata
+							Lua 0:00:03:525
+[mod] [CommunityFixPack] LoadFirst: already first of 3 (SMR_CommunityFixPack, SMR_CommunityFixPackTestKit, SMR_CommunityOptInPack); nothing written
+[mod] [CommunityFixPack] LoadFirst: applied
+[mod] [CommunityFixPack] LanderEmptyLaunch: applied
+[mod] [CommunityFixPack] ShelterReflex: applied
+[mod] [CommunityFixPack] TrackSalvageWipe: applied
+[mod] [CommunityFixPack] LakeEntombment: applied
+[mod] [CommunityFixPack] RocketDroneChurn: applied
+[mod] [CommunityFixPack] ShuttleTransportCache: applied							Lua 0:00:03:526
+
+[mod] [CommunityFixPack] VacuumWalks: applied
+[mod] [CommunityFixPack] ArrivalDeaths: applied
+[mod] [CommunityFixPack] PassageHubSalvageDrain: applied
+[mod] [CommunityFixPack] HubLocalAccess: applied
+[mod] [CommunityFixPack] HubMarkerDeparture: applied
+[mod] [CommunityFixPack] RescueReturnText: applied
+[mod] [CommunityFixPack] ObsoleteHomeRescue: applied
+							Lua 0:00:03:527
+[mod] [CommunityFixPack] StaleReservations: applied
+[mod] [CommunityFixPack] CrystalMysteryHang: applied
+[mod] [CommunityFixPack] DustSicknessBiorobots: applied
+[mod] [CommunityFixPack] PayloadTemplateRefill: applied
+[mod] [CommunityFixPack] ShuttleHubOffAvailable: applied
+[mod] [CommunityFixPack] FreedHousingNotice: applied
+[mod] [CommunityFixPack] LandscapeUnitFilter: applied
+							Lua 0:00:03:528
+[mod] [CommunityFixPack] RocketInteractGuard: applied
+[mod] [CommunityFixPack] TrackConnectorPingPong: applied
+[mod] [CommunityFixPack] TrackTunnelPowerBridge: applied
+							Lua 0:00:03:529
+[mod] [CommunityFixPack] SequenceLatents: applied
+[mod] [CommunityFixPack] TrackSalvageRefund: applied
+[mod] [CommunityFixPack] DroneTransportMinors: applied
+[mod] [CommunityFixPack] ScanDowngrade: applied
+[mod] [CommunityFixPack] BombardmentSpread: applied
+[mod] [CommunityFixPack] ExtenderFlapChurn: applied
+[mod] [CommunityFixPack] SaintBlessing: applied
+							Lua 0:00:03:530
+[mod] [CommunityFixPack] ExoticDepositSign: applied
+[mod] [CommunityFixPack] JumboCaveReinforcementWedge: applied
+[mod] [CommunityFixPack] SilentHitMomentFX: applied
+[mod] [CommunityFixPack] CloggedBuildingRelease: applied
+[mod] [CommunityFixPack] FactionDomeSizeGate: applied
+							Lua 0:00:03:531
+[mod] [CommunityFixPack] HabitatExpeditionReturn: applied
+[mod] [CommunityFixPack] HabitatExpeditionDraft: applied
+[mod] [CommunityFixPack] RoverSubclassManifest: applied
+[mod] [CommunityFixPack] DryFarmingFarms: applied
+[mod] [CommunityFixPack] WildfireCureVisit: applied
+							Lua 0:00:03:532
+[mod] [CommunityFixPack] GhostPowerCells: applied
+[mod] [CommunityFixPack] DeportRocketLaunch: applied
+[mod] [CommunityFixPack] UniversalDepotSeedsToggle: applied
+[mod] [CommunityFixPack] SaveSanitizer: applied
+[mod] [SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+							Lua 0:00:03:533
+[mod] [SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[mod] [SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+[SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+							Lua 0:00:03:538
+[mod] [SMRTK] SMRTK_CORE loaded=true tee=false t=0 id=1
+[SMRTK] SMRTK_CORE loaded=true tee=false t=0 id=1
+							Lua 0:00:03:542
+[mod] [SMRTest][carry] fixture-carry dump available — run SMRTest.FixtureCarry()
+[mod] [CommunityOptInPack] AcknowledgedWarnings: applied
+							Lua 0:00:03:543
+[mod] [CommunityOptInPack] MultipleSuns: applied
+[mod] [CommunityOptInPack] DroneStatDials: applied
+[mod] [CommunityOptInPack] ServiceInterestTags: applied
+[mod] [CommunityOptInPack] StationRows: applied
+[TrainHub] train export floor loaded (standing + transient holds)
+							Lua 0:00:03:544
+[TrainDistribution] station rows loaded (brief 30: hub + hubless)
+[TrainDistribution] native storage-row UI registered
+[mod] [CommunityOptInPack] TrainHub: applied
+							Lua 0:00:03:546
+[TrainHub] hub classes loaded: six-connector hub, built-in drone controller, maintenance reserve
+							Lua 0:00:03:547
+[TrainBay] loaded: the hub refuses add-train; legacy HubTrain compatibility
+							Lua 0:00:03:548
+[mod] [CommunityOptInPack] ElevatorDepot: applied
+							Lua 0:00:04:297
+[TrainHub] save guard: native waiter snapshot; legacy hub load mapping retained
+							Lua 0:00:04:378
+[mod] [CommunityFixPack] SaintBlessing: inactive (no dome-colonists trait presets)
+							Lua 0:00:04:475
+Reloading done in 1374 ms
+							Lua 0:00:04:476
+Available DLCs: norman(Feeding the Future),thomas(Interplanetary Codex) 
+							Lua 0:00:04:525
+[mod] [SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=DataLoading t=0 id=2
+[SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=DataLoading t=0 id=2
+							Lua 0:00:05:103
+[preset] Preset postprocess took 284 ms.
+							Lua 0:00:05:160
+482 / 482 particle streams loaded in 47 ms.
+							Lua 0:00:05:161
+5 / 5 particle streams loaded in 1 ms.
+							Lua 0:00:05:163
+[mod] [CommunityFixPack] SilentHitMomentFX: registered 11 missing animation-moment preset(s)
+							Lua 0:00:05:164
+[mod] [CommunityFixPack] FactionDomeSizeGate: 7 faction dislike(s) now wait for 10 colonists in a dome
+[mod] [CommunityFixPack] DryFarmingFarms: left 1 farm(s) alone because DryFarming already reaches them (FarmUnderground via Farm)
+[mod] [CommunityFixPack] DryFarmingFarms: added 2 water entr(y/ies) at -50% to DryFarming (1 adopted, 4 of 4 farms loaded)
+[mod] [CommunityOptInPack] MultipleSuns: BuildingTemplates.ArtificialSun not found — build limit NOT lifted (binding fix still active)
+							Lua 0:00:05:516
+[mod] [CommunityFixPack] SaintBlessing: the shipped code resolves the trait label itself — data left untouched; save re-base armed for 1 preset(s) of 2
+							Lua 0:00:05:517
+[mod] [CommunityFixPack] DryFarmingFarms: left 1 farm(s) alone because DryFarming already reaches them (FarmUnderground via Farm)
+[mod] [CommunityOptInPack] MultipleSuns: Artificial Sun build-once limit lifted
+							Lua 0:00:05:721
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=0 id=3
+							Lua 0:00:05:815
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=0 id=4
+							Lua 0:00:05:849
+[mod] Loaded mod items for: SMR_CommunityFixPack, SMR_CommunityFixPackTestKit, SMR_CommunityOptInPack
+							Lua 0:00:06:236
+[mod] [CommunityFixPack] SaintBlessing: the shipped code resolves the trait label itself — data left untouched; save re-base armed for 1 preset(s) of 2
+							Lua 0:00:06:237
+[mod] [CommunityFixPack] DryFarmingFarms: left 1 farm(s) alone because DryFarming already reaches them (FarmUnderground via Farm)
+							Lua 0:00:06:478
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=0 id=5
+							Lua 0:00:06:497
+GameTime threads OnMsg.NewGame (there should be none):
+true thread: 00000214046546C8
+							Lua 0:00:06:514
+Game Seed:  1TrBH9ar -3828741076714460519 
+							Lua 0:00:06:545
+[mod] [SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=ChangeMap t=0 id=6
+[SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=ChangeMap t=0 id=6
+							Lua 0:00:06:548
+Received achievements from Steam.
+							Lua 0:00:06:560
+[PdxSDK] Started up. Took 1319
+*** Reloading assets from folder 'BinAssets/'
+							Lua 0:00:09:634
+*** Assets reloaded in 3.1 s, read 359.0 MB, read speed 116.8 MB/s, average read 8139 bytes.
+							Lua 0:00:12:015
+Map::Init: 0.26000 ms
+							Lua 0:00:12:016
+Map::Load: 141.78000 ms
+CreateMap: 141.81000 ms
+							Lua 0:00:12:051
+[mod] [SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=PreNewMap t=0 id=7
+[SMRTK] SMRTK_CONSOLE_ARM enabled=true hook=PreNewMap t=0 id=7
+							Lua 0:00:12:226
+Buildable grid ready: 11/989 valid zones.
+							Lua 0:00:12:236
+game_settings:
+    sponsor: IMM
+    profile: rocketscientist
+    founding_faction: MarsDemocraticParty
+    rival_colonies: BlueSun, Roscosmos, AssemblyOfPlanets
+    mystery_random: DiggersMystery
+    game_rules: (none)
+more_game_settings: save_game_id: false, mystery: random, coordinates: 13S65W, landing_spot: , logo: IMM
+map_conditions: altitude: -6007, temperature: -1, cold_wave: 0, dust_devils: 19, dust_storm: 36, meteors: 36
+map_resources: concrete: 73, metals: 109, precious_metals: 109, water: 182
+							Lua 0:00:12:243
+[mod] [SMRTK] SMRTK_DOCK action=dock_attach attached=true route="idBottom sibling" status=OK surface=one-toggle+tasks t=0 id=8
+							Lua 0:00:12:244
+[mod] [SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+[mod] [SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+							Lua 0:00:12:322
+MapLoadRandom:  6078327538649401510 
+							Lua 0:00:14:154
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=0 id=9
+							Lua 0:00:14:179
+Press Enter to execute arbitrary Lua code.
+Press F9 to clear this log
+							Lua 0:00:14:999
+Buildable grid ready: 11/874 valid zones.
+							Lua 0:00:15:007
+Map (slot 1) changed to "Mod" in 8511 ms.
+							Lua 0:00:16:711
+[ged] Opened GedModManager with class nil, id 8221294326685324959
+							Lua 0:00:17:360
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=0 id=10
+							Lua 0:00:17:759
+[mod] [SMRTK] SMRTK_PANEL_RESTORE open=true tab=Agent t=310 id=11
+							Lua 0:00:17:855
+[Braze] SessionStart error The server name or address could not be resolved
+
+							Lua 0:00:17:856
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+							Lua 0:00:18:014
+[Braze] SessionStart error The server name or address could not be resolved
+
+							Lua 0:00:18:015
+[Braze] Failed sending launcher ev The server name or address could not be resolved
+
+[Braze] Failed to init
+							Lua 0:00:18:750
+[mod] [SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+							Lua 0:00:18:825
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=310 id=12
+							Lua 0:00:24:921
+AllowSetForegroundWindow failed for process 55420
+								AExec 0:00:24:960
+[System Error] Failed to run process (null) svn info .: The system cannot find the file specified.
+
+[System Error] Failed to run process (null) svn info .: The system cannot find the file specified.
+
+							Lua 0:00:24:965
+[ged] Opened ModEditor with class nil, id 7254899259778834830
+							Lua 0:00:25:034
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=310 id=13
+							Lua 0:00:37:950
+[mod] [CommunityFixPack] LoadFirst: already first of 3 (SMR_CommunityFixPack, SMR_CommunityFixPackTestKit, SMR_CommunityOptInPack); nothing written
+[mod] [CommunityFixPack] LoadFirst: applied
+[mod] [CommunityFixPack] LanderEmptyLaunch: applied
+[mod] [CommunityFixPack] ShelterReflex: applied
+							Lua 0:00:37:951
+[mod] [CommunityFixPack] TrackSalvageWipe: applied
+[mod] [CommunityFixPack] LakeEntombment: applied
+[mod] [CommunityFixPack] RocketDroneChurn: applied
+[mod] [CommunityFixPack] ShuttleTransportCache: applied
+[mod] [CommunityFixPack] VacuumWalks: applied
+[mod] [CommunityFixPack] ArrivalDeaths: applied
+							Lua 0:00:37:952
+[mod] [CommunityFixPack] PassageHubSalvageDrain: applied
+[mod] [CommunityFixPack] HubLocalAccess: applied
+[mod] [CommunityFixPack] HubMarkerDeparture: applied
+[mod] [CommunityFixPack] RescueReturnText: applied
+[mod] [CommunityFixPack] ObsoleteHomeRescue: applied
+[mod] [CommunityFixPack] StaleReservations: applied
+[mod] [CommunityFixPack] CrystalMysteryHang: applied
+[mod] [CommunityFixPack] DustSicknessBiorobots: applied
+[mod] [CommunityFixPack] PayloadTemplateRefill: applied
+							Lua 0:00:37:953
+[mod] [CommunityFixPack] ShuttleHubOffAvailable: applied
+[mod] [CommunityFixPack] FreedHousingNotice: applied
+[mod] [CommunityFixPack] LandscapeUnitFilter: applied
+							Lua 0:00:37:954
+[mod] [CommunityFixPack] RocketInteractGuard: applied
+[mod] [CommunityFixPack] TrackConnectorPingPong: applied
+[mod] [CommunityFixPack] TrackTunnelPowerBridge: applied
+[mod] [CommunityFixPack] SequenceLatents: applied
+[mod] [CommunityFixPack] TrackSalvageRefund: applied
+[mod] [CommunityFixPack] DroneTransportMinors: applied
+[mod] [CommunityFixPack] ScanDowngrade: applied
+							Lua 0:00:37:955
+[mod] [CommunityFixPack] BombardmentSpread: applied
+[mod] [CommunityFixPack] ExtenderFlapChurn: applied
+[mod] [CommunityFixPack] SaintBlessing: applied
+[mod] [CommunityFixPack] ExoticDepositSign: applied
+[mod] [CommunityFixPack] JumboCaveReinforcementWedge: applied
+[mod] [CommunityFixPack] SilentHitMomentFX: applied
+[mod] [CommunityFixPack] CloggedBuildingRelease: applied
+							Lua 0:00:37:956
+[mod] [CommunityFixPack] FactionDomeSizeGate: applied
+[mod] [CommunityFixPack] HabitatExpeditionReturn: applied
+[mod] [CommunityFixPack] HabitatExpeditionDraft: applied
+[mod] [CommunityFixPack] RoverSubclassManifest: applied
+[mod] [CommunityFixPack] DryFarmingFarms: applied
+[mod] [CommunityFixPack] WildfireCureVisit: applied
+							Lua 0:00:37:957
+[mod] [CommunityFixPack] GhostPowerCells: applied
+[mod] [CommunityFixPack] DeportRocketLaunch: applied
+[mod] [CommunityFixPack] UniversalDepotSeedsToggle: applied
+[mod] [CommunityFixPack] SaveSanitizer: applied
+[mod] [SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+[mod] [SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[mod] [SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+[SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+							Lua 0:00:37:962
+[mod] [SMRTK] SMRTK_CORE loaded=true tee=false t=310 id=14
+[SMRTK] SMRTK_CORE loaded=true tee=false t=310 id=14
+							Lua 0:00:37:966
+[mod] [SMRTest][carry] fixture-carry dump available — run SMRTest.FixtureCarry()
+[mod] [CommunityOptInPack] AcknowledgedWarnings: applied							Lua 0:00:37:967
+
+[mod] [CommunityOptInPack] MultipleSuns: applied
+[mod] [CommunityOptInPack] DroneStatDials: applied
+[mod] [CommunityOptInPack] ServiceInterestTags: applied
+[mod] [CommunityOptInPack] StationRows: applied
+[TrainHub] train export floor loaded (standing + transient holds)
+							Lua 0:00:37:968
+[TrainDistribution] station rows loaded (brief 30: hub + hubless)
+[TrainDistribution] native storage-row UI registered
+[mod] [CommunityOptInPack] TrainHub: applied
+							Lua 0:00:37:971
+[TrainHub] hub classes loaded: six-connector hub, built-in drone controller, maintenance reserve
+							Lua 0:00:37:972
+[TrainBay] loaded: the hub refuses add-train; legacy HubTrain compatibility
+[mod] [CommunityOptInPack] ElevatorDepot: applied
+							Lua 0:00:38:866
+[mod] [CommunityFixPack] SaintBlessing: the shipped code resolves the trait label itself — data left untouched; save re-base armed for 1 preset(s) of 2
+							Lua 0:00:38:867
+[mod] [CommunityFixPack] DryFarmingFarms: left 1 farm(s) alone because DryFarming already reaches them (FarmUnderground via Farm)
+[mod] [CommunityOptInPack] MultipleSuns: Artificial Sun build-once limit lifted
+							Lua 0:00:39:035
+Reloading done in 1636 ms
+							Lua 0:00:39:273
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=310 id=15
+										IO Task 0:00:39:318
+A:\spark-release\HSL\blkPageCompress.cpp(35): ASSERT(!m_bPageChanged && !m_bHeaderChanged) failed
+  Time: RT 21905 | GT 310
+  Scope 
+							Lua 0:00:43:543
+[mod] Mod Relaunched Fix Pack: Opt-In Modules (id SMR_CommunityOptInPack, v1.00-000) was not uploaded! Error: table: 0000021403BAA1B0
+							Lua 0:00:49:134
+[mod] [CommunityFixPack] LoadFirst: already first of 3 (SMR_CommunityFixPack, SMR_CommunityFixPackTestKit, SMR_CommunityOptInPack); nothing written
+[mod] [CommunityFixPack] LoadFirst: applied
+[mod] [CommunityFixPack] LanderEmptyLaunch: applied
+[mod] [CommunityFixPack] ShelterReflex: applied
+[mod] [CommunityFixPack] TrackSalvageWipe: applied
+[mod] [CommunityFixPack] LakeEntombment: applied
+[mod] [CommunityFixPack] RocketDroneChurn: applied
+							Lua 0:00:49:135
+[mod] [CommunityFixPack] ShuttleTransportCache: applied
+[mod] [CommunityFixPack] VacuumWalks: applied
+[mod] [CommunityFixPack] ArrivalDeaths: applied
+[mod] [CommunityFixPack] PassageHubSalvageDrain: applied
+[mod] [CommunityFixPack] HubLocalAccess: applied
+[mod] [CommunityFixPack] HubMarkerDeparture: applied
+[mod] [CommunityFixPack] RescueReturnText: applied
+[mod] [CommunityFixPack] ObsoleteHomeRescue: applied
+							Lua 0:00:49:136
+[mod] [CommunityFixPack] StaleReservations: applied
+[mod] [CommunityFixPack] CrystalMysteryHang: applied
+[mod] [CommunityFixPack] DustSicknessBiorobots: applied
+[mod] [CommunityFixPack] PayloadTemplateRefill: applied
+[mod] [CommunityFixPack] ShuttleHubOffAvailable: applied
+[mod] [CommunityFixPack] FreedHousingNotice: applied
+[mod] [CommunityFixPack] LandscapeUnitFilter: applied
+							Lua 0:00:49:137
+[mod] [CommunityFixPack] RocketInteractGuard: applied
+							Lua 0:00:49:138
+[mod] [CommunityFixPack] TrackConnectorPingPong: applied
+[mod] [CommunityFixPack] TrackTunnelPowerBridge: applied
+[mod] [CommunityFixPack] SequenceLatents: applied
+[mod] [CommunityFixPack] TrackSalvageRefund: applied
+[mod] [CommunityFixPack] DroneTransportMinors: applied
+[mod] [CommunityFixPack] ScanDowngrade: applied
+[mod] [CommunityFixPack] BombardmentSpread: applied
+[mod] [CommunityFixPack] ExtenderFlapChurn: applied
+							Lua 0:00:49:139
+[mod] [CommunityFixPack] SaintBlessing: applied
+[mod] [CommunityFixPack] ExoticDepositSign: applied
+[mod] [CommunityFixPack] JumboCaveReinforcementWedge: applied
+[mod] [CommunityFixPack] SilentHitMomentFX: applied
+[mod] [CommunityFixPack] CloggedBuildingRelease: applied
+[mod] [CommunityFixPack] FactionDomeSizeGate: applied
+							Lua 0:00:49:140
+[mod] [CommunityFixPack] HabitatExpeditionReturn: applied
+[mod] [CommunityFixPack] HabitatExpeditionDraft: applied
+[mod] [CommunityFixPack] RoverSubclassManifest: applied
+[mod] [CommunityFixPack] DryFarmingFarms: applied
+[mod] [CommunityFixPack] WildfireCureVisit: applied
+							Lua 0:00:49:141
+[mod] [CommunityFixPack] GhostPowerCells: applied
+[mod] [CommunityFixPack] DeportRocketLaunch: applied
+[mod] [CommunityFixPack] UniversalDepotSeedsToggle: applied
+[mod] [CommunityFixPack] SaveSanitizer: applied
+[mod] [SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+[mod] [SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[mod] [SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+[SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+							Lua 0:00:49:146
+[mod] [SMRTK] SMRTK_CORE loaded=true tee=false t=310 id=16
+[SMRTK] SMRTK_CORE loaded=true tee=false t=310 id=16
+							Lua 0:00:49:150
+[mod] [SMRTest][carry] fixture-carry dump available — run SMRTest.FixtureCarry()
+[mod] [CommunityOptInPack] AcknowledgedWarnings: applied
+							Lua 0:00:49:151
+[mod] [CommunityOptInPack] MultipleSuns: applied
+[mod] [CommunityOptInPack] DroneStatDials: applied
+[mod] [CommunityOptInPack] ServiceInterestTags: applied
+[mod] [CommunityOptInPack] StationRows: applied
+[TrainHub] train export floor loaded (standing + transient holds)
+							Lua 0:00:49:152
+[TrainDistribution] station rows loaded (brief 30: hub + hubless)
+[TrainDistribution] native storage-row UI registered
+[mod] [CommunityOptInPack] TrainHub: applied
+							Lua 0:00:49:154
+[TrainHub] hub classes loaded: six-connector hub, built-in drone controller, maintenance reserve
+							Lua 0:00:49:156
+[TrainBay] loaded: the hub refuses add-train; legacy HubTrain compatibility
+[mod] [CommunityOptInPack] ElevatorDepot: applied
+							Lua 0:00:50:066
+[mod] [CommunityFixPack] SaintBlessing: the shipped code resolves the trait label itself — data left untouched; save re-base armed for 1 preset(s) of 2
+							Lua 0:00:50:067
+[mod] [CommunityFixPack] DryFarmingFarms: left 1 farm(s) alone because DryFarming already reaches them (FarmUnderground via Farm)
+[mod] [CommunityOptInPack] MultipleSuns: Artificial Sun build-once limit lifted
+							Lua 0:00:50:245
+Reloading done in 1707 ms
+							Lua 0:00:50:480
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=310 id=17
+							Lua 0:01:36:769
+[mod] [CommunityFixPack] LoadFirst: already first of 3 (SMR_CommunityFixPack, SMR_CommunityFixPackTestKit, SMR_CommunityOptInPack); nothing written
+[mod] [CommunityFixPack] LoadFirst: applied
+[mod] [CommunityFixPack] LanderEmptyLaunch: applied
+[mod] [CommunityFixPack] ShelterReflex: applied
+[mod] [CommunityFixPack] TrackSalvageWipe: applied
+[mod] [CommunityFixPack] LakeEntombment: applied
+[mod] [CommunityFixPack] RocketDroneChurn: applied
+							Lua 0:01:36:770
+[mod] [CommunityFixPack] ShuttleTransportCache: applied
+[mod] [CommunityFixPack] VacuumWalks: applied
+[mod] [CommunityFixPack] ArrivalDeaths: applied
+[mod] [CommunityFixPack] PassageHubSalvageDrain: applied
+[mod] [CommunityFixPack] HubLocalAccess: applied
+[mod] [CommunityFixPack] HubMarkerDeparture: applied
+							Lua 0:01:36:771
+[mod] [CommunityFixPack] RescueReturnText: applied
+[mod] [CommunityFixPack] ObsoleteHomeRescue: applied
+[mod] [CommunityFixPack] StaleReservations: applied
+[mod] [CommunityFixPack] CrystalMysteryHang: applied
+[mod] [CommunityFixPack] DustSicknessBiorobots: applied
+[mod] [CommunityFixPack] PayloadTemplateRefill: applied
+[mod] [CommunityFixPack] ShuttleHubOffAvailable: applied
+[mod] [CommunityFixPack] FreedHousingNotice: applied
+[mod] [CommunityFixPack] LandscapeUnitFilter: applied
+							Lua 0:01:36:772
+[mod] [CommunityFixPack] RocketInteractGuard: applied
+							Lua 0:01:36:773
+[mod] [CommunityFixPack] TrackConnectorPingPong: applied
+[mod] [CommunityFixPack] TrackTunnelPowerBridge: applied
+[mod] [CommunityFixPack] SequenceLatents: applied
+[mod] [CommunityFixPack] TrackSalvageRefund: applied
+[mod] [CommunityFixPack] DroneTransportMinors: applied
+[mod] [CommunityFixPack] ScanDowngrade: applied
+[mod] [CommunityFixPack] BombardmentSpread: applied
+[mod] [CommunityFixPack] ExtenderFlapChurn: applied
+							Lua 0:01:36:774
+[mod] [CommunityFixPack] SaintBlessing: applied
+[mod] [CommunityFixPack] ExoticDepositSign: applied
+[mod] [CommunityFixPack] JumboCaveReinforcementWedge: applied
+[mod] [CommunityFixPack] SilentHitMomentFX: applied
+[mod] [CommunityFixPack] CloggedBuildingRelease: applied
+							Lua 0:01:36:775
+[mod] [CommunityFixPack] FactionDomeSizeGate: applied
+[mod] [CommunityFixPack] HabitatExpeditionReturn: applied
+[mod] [CommunityFixPack] HabitatExpeditionDraft: applied
+[mod] [CommunityFixPack] RoverSubclassManifest: applied
+[mod] [CommunityFixPack] DryFarmingFarms: applied
+							Lua 0:01:36:776
+[mod] [CommunityFixPack] WildfireCureVisit: applied
+[mod] [CommunityFixPack] GhostPowerCells: applied
+[mod] [CommunityFixPack] DeportRocketLaunch: applied
+[mod] [CommunityFixPack] UniversalDepotSeedsToggle: applied
+[mod] [CommunityFixPack] SaveSanitizer: applied
+							Lua 0:01:36:777
+[mod] [SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+[SMRTest] console enable requested (flag set, no overlay) — press Enter (or Alt-Shift-C) once in a colony
+[mod] [SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[SMRTest] no debug.getinfo (mod sandbox) — [install] probes will SKIP
+[mod] [SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+[SMRTest] test kit loaded — SMRTest.RunAll(), SMRTest.List(), SMRTest.<ProbeId>()
+							Lua 0:01:36:781
+[mod] [SMRTK] SMRTK_CORE loaded=true tee=false t=310 id=18
+[SMRTK] SMRTK_CORE loaded=true tee=false t=310 id=18
+							Lua 0:01:36:786
+[mod] [SMRTest][carry] fixture-carry dump available — run SMRTest.FixtureCarry()
+[mod] [CommunityOptInPack] AcknowledgedWarnings: applied
+[mod] [CommunityOptInPack] MultipleSuns: applied
+[mod] [CommunityOptInPack] DroneStatDials: applied
+[mod] [CommunityOptInPack] ServiceInterestTags: applied
+							Lua 0:01:36:787
+[mod] [CommunityOptInPack] StationRows: applied
+[TrainHub] train export floor loaded (standing + transient holds)
+[TrainDistribution] station rows loaded (brief 30: hub + hubless)
+							Lua 0:01:36:788
+[TrainDistribution] native storage-row UI registered
+[mod] [CommunityOptInPack] TrainHub: applied
+							Lua 0:01:36:790
+[TrainHub] hub classes loaded: six-connector hub, built-in drone controller, maintenance reserve
+							Lua 0:01:36:791
+[TrainBay] loaded: the hub refuses add-train; legacy HubTrain compatibility
+[mod] [CommunityOptInPack] ElevatorDepot: applied
+							Lua 0:01:37:692
+[mod] [CommunityFixPack] SaintBlessing: the shipped code resolves the trait label itself — data left untouched; save re-base armed for 1 preset(s) of 2
+[mod] [CommunityFixPack] DryFarmingFarms: left 1 farm(s) alone because DryFarming already reaches them (FarmUnderground via Farm)
+[mod] [CommunityOptInPack] MultipleSuns: Artificial Sun build-once limit lifted
+							Lua 0:01:37:880
+Reloading done in 1703 ms
+							Lua 0:01:38:129
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=310 id=19
+							Lua 0:01:42:702
+[mod] Mod Relaunched Fix Pack: Opt-In Modules (id SMR_CommunityOptInPack, v1.00-000) was not uploaded! Error: table: 00000214048CEEC0
+							Lua 0:03:01:101
+[ged] Closed ModEditor with id 7254899259778834830
+							Lua 0:03:01:174
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=310 id=20
+							Lua 0:03:03:086
+[ged] Closed GedModManager with id 8221294326685324959
+							Lua 0:03:03:148
+[mod] [SMRTK] SMRTK_SHORTCUT console=true key=Ctrl-Shift-F11 t=310 id=21
+							Lua 0:03:05:676
+
+
+Stopping the game threads from the Lua side with exit code 0.
+
+					Render 0:03:05:677
+
+
+Stopping the game threads after receiving WM_QUIT.
+
+					Render 0:03:05:682
+[QUIT] Waiting the game state to finish...
+							Lua 0:03:05:807
+[QUIT] Game state finished.
+					Render 0:03:05:808
+[QUIT] Stopping game state thread...
+					Render 0:03:05:817
+Map::Done: 1.22000 ms
+					Render 0:03:05:819
+[Sound] Stopping...
+					Render 0:03:05:844
+[Sound] Done.
+					Render 0:03:05:845
+Hook 'Shader :: CompileEffect' not found!
+					Render 0:03:05:974
+[WndMsg Error] WM_ACTIVATE: SetWindowPos failed on fullscreen focus loss, error 87
+					Render 0:03:05:985
+[DebugAdapter] Stopped
+					Render 0:03:06:083
+
+
+*** Debug::Done()
+Time (ms)	186083
+
+

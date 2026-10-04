@@ -1,0 +1,57 @@
+B:\Dev\SMR\SMR-BugFixPack 9dd233412ebe7babea7a6071d81db49e717d7b9f
+B:\Dev\SMR\SMR-OptInPack b1d139d6aa9682f85fac0453d0ceb4b41a744b85
+metadata B:\Dev\SMR\SMR-BugFixPack\metadata.lua bytes 34588 sha256 f05003be1a73f93e4a2e14f4b52daebe5362fe002219c0e445265717744b8bb7
+explicit_fields ['title', 'description', 'short_description', 'image', 'last_changes', 'ignore_files', 'id', 'author', 'version_major', 'version', 'lua_revision', 'saved_with_revision', 'optional_mod', 'default_options', 'code', 'saved', 'code_hash', 'screenshot1', 'screenshot2', 'screenshot3', 'pdx_id', 'pdx_version', 'steam_id', 'TagGameplay']
+length title codepoints 19 control_sum 19 utf8_bytes 19 utf16_units 19 LF 0 raw_preflight_length 19 non_ascii []
+length short_description codepoints 184 control_sum 184 utf8_bytes 186 utf16_units 184 LF 0 raw_preflight_length 184 non_ascii ['—']
+length description codepoints 4909 control_sum 4909 utf8_bytes 4935 utf16_units 4909 LF 93 raw_preflight_length 5002 non_ascii ['·', '—']
+length last_changes codepoints 972 control_sum 972 utf8_bytes 972 utf16_units 972 LF 5 raw_preflight_length 977 non_ascii []
+list code length 47 unique_length 47 members ['Code/00_Core.lua', 'Code/01_LoadFirst.lua', 'Code/Hubset_OnHubNow.lua', 'Code/Fix_LanderEmptyLaunch.lua', 'Code/Fix_ShelterReflex.lua', 'Code/Fix_TrackSalvageWipe.lua', 'Code/Fix_LakeEntombment.lua', 'Code/Fix_RocketDroneChurn.lua', 'Code/Fix_ShuttleTransportCache.lua', 'Code/Fix_VacuumWalks.lua', 'Code/Fix_ArrivalDeaths.lua', 'Code/Fix_PassageHubSalvageDrain.lua', 'Code/Fix_HubLocalAccess.lua', 'Code/Fix_HubMarkerDeparture.lua', 'Code/Fix_RescueReturnText.lua', 'Code/Fix_ObsoleteHomeRescue.lua', 'Code/Fix_StaleReservations.lua', 'Code/Fix_CrystalMysteryHang.lua', 'Code/Fix_DustSicknessBiorobots.lua', 'Code/Fix_PayloadTemplateRefill.lua', 'Code/Fix_ShuttleHubOffAvailable.lua', 'Code/Fix_FreedHousingNotice.lua', 'Code/Fix_LandscapeUnitFilter.lua', 'Code/Fix_RocketInteractGuard.lua', 'Code/Fix_TrackConnectorPingPong.lua', 'Code/Fix_TrackTunnelPowerBridge.lua', 'Code/Fix_SequenceLatents.lua', 'Code/Fix_TrackSalvageRefund.lua', 'Code/Fix_DroneTransportMinors.lua', 'Code/Fix_ScanDowngrade.lua', 'Code/Fix_BombardmentSpread.lua', 'Code/Fix_ExtenderFlapChurn.lua', 'Code/Fix_SaintBlessing.lua', 'Code/Fix_ExoticDepositSign.lua', 'Code/Fix_JumboCaveReinforcementWedge.lua', 'Code/Fix_SilentHitMomentFX.lua', 'Code/Fix_CloggedBuildingRelease.lua', 'Code/Fix_FactionDomeSizeGate.lua', 'Code/Fix_HabitatExpeditionReturn.lua', 'Code/Fix_HabitatExpeditionDraft.lua', 'Code/Fix_RoverSubclassManifest.lua', 'Code/Fix_DryFarmingFarms.lua', 'Code/Fix_WildfireCureVisit.lua', 'Code/Fix_GhostPowerCells.lua', 'Code/Fix_DeportRocketLaunch.lua', 'Code/Fix_UniversalDepotSeedsToggle.lua', 'Code/90_SaveSanitizer.lua']
+list ignore_files length 19 unique_length 19 members ['*.git/*', '*.svn/*', '*/Source/*', '*/SourceData/*', '*/docs/*', '*/.agents/*', '*/.claude/*', '*/tools/*', '*README.md', '*CLAUDE.md', '*AGENTS.md', '*.gitignore', '*.rgignore', '*.gitattributes', '*/store_screenshots/*', '*/zz-owner/*', '*/saves/*', '*/local/*', '*/scratch/*']
+list entities length 0 unique_length 0 members []
+default_options LoadFirst = true,
+metadata B:\Dev\SMR\SMR-OptInPack\metadata.lua bytes 16631 sha256 fcc995266f5187a2302bd14a6cd357b731b8c16334e0d0ccea526d6b4b66acc7
+explicit_fields ['title', 'image', 'screenshot1', 'screenshot2', 'screenshot3', 'screenshot4', 'screenshot5', 'description', 'short_description', 'last_changes', 'id', 'author', 'version', 'version_major', 'version_minor', 'lua_revision', 'optional_mod', 'ignore_files', 'default_options', 'code', 'entities', 'has_data', 'TagGameplay', 'TagBuildings']
+length title codepoints 35 control_sum 35 utf8_bytes 35 utf16_units 35 LF 0 raw_preflight_length 35 non_ascii []
+length short_description codepoints 276 control_sum 276 utf8_bytes 283 utf16_units 276 LF 7 raw_preflight_length 283 non_ascii ['·']
+length description codepoints 6165 control_sum 6165 utf8_bytes 6192 utf16_units 6165 LF 41 raw_preflight_length 6206 non_ascii ['·', '—', '→', '⚠', '️']
+length last_changes codepoints 377 control_sum 377 utf8_bytes 379 utf16_units 377 LF 0 raw_preflight_length 377 non_ascii ['→']
+list code length 19 unique_length 19 members ['Code/00_Core.lua', 'Code/Opt_AcknowledgedWarnings.lua', 'Code/Opt_MultipleSuns.lua', 'Code/Opt_DroneStatDials.lua', 'Code/Opt_ServiceInterestTags.lua', 'Code/Opt_StationRows.lua', 'Code/StationRows_10_TrainFloor.lua', 'Code/StationRows_40_TrainDistribution.lua', 'Code/StationRows_45_TrainDistributionUI.lua', 'Code/Opt_TrainHub.lua', 'Code/TrainHub_20_TrainHub.lua', 'Code/TrainHub_30_TrainHubDrones.lua', 'Code/TrainHub_60_StationSpoilage.lua', 'Code/TrainHub_70_TrainBay.lua', 'Code/Opt_ElevatorDepot.lua', 'Code/ElevatorDepot_10_ElevatorDepot.lua', 'Code/BuildingTemplate/SMROptInTrainHub6.generated.lua', 'Code/_EntityData.generated.lua', 'Code/BuildingTemplate/SMROptInElevatorDepotDev.generated.lua']
+list ignore_files length 18 unique_length 18 members ['*.git/*', '*.svn/*', '*/Source/*', '*/SourceData/*', '*/docs/*', '*/.agents/*', '*/.claude/*', '*/tools/*', '*README.md', '*CLAUDE.md', '*AGENTS.md', '*.gitignore', '*.rgignore', '*.gitattributes', '*/local/*', '*/scratch/*', '*/store_screenshots/*', '*/staging/*']
+list entities length 5 unique_length 5 members ['SMROptInTrainHub6', 'SMROptInTrainHub6Glass', 'SMROptInTrainHub6DomeGlass', 'SMROptInElevatorDepot', 'SMROptInElevatorDepotReceiver']
+default_options AcknowledgedWarnings = false,
+		MultipleSuns = false,
+		
+		
+		ServiceInterestTags = false,
+		DroneSpeedDial = "1x (base)",
+		DroneCarryDial = "+0 (base)",
+		
+		
+		StationRows = false,
+		TrainHub = false,
+		ElevatorDepot = false,
+metadata B:\Dev\SMR\SMR-OptInPack-launch\metadata.lua bytes 16631 sha256 fcc995266f5187a2302bd14a6cd357b731b8c16334e0d0ccea526d6b4b66acc7
+explicit_fields ['title', 'image', 'screenshot1', 'screenshot2', 'screenshot3', 'screenshot4', 'screenshot5', 'description', 'short_description', 'last_changes', 'id', 'author', 'version', 'version_major', 'version_minor', 'lua_revision', 'optional_mod', 'ignore_files', 'default_options', 'code', 'entities', 'has_data', 'TagGameplay', 'TagBuildings']
+length title codepoints 35 control_sum 35 utf8_bytes 35 utf16_units 35 LF 0 raw_preflight_length 35 non_ascii []
+length short_description codepoints 276 control_sum 276 utf8_bytes 283 utf16_units 276 LF 7 raw_preflight_length 283 non_ascii ['·']
+length description codepoints 6165 control_sum 6165 utf8_bytes 6192 utf16_units 6165 LF 41 raw_preflight_length 6206 non_ascii ['·', '—', '→', '⚠', '️']
+length last_changes codepoints 377 control_sum 377 utf8_bytes 379 utf16_units 377 LF 0 raw_preflight_length 377 non_ascii ['→']
+list code length 19 unique_length 19 members ['Code/00_Core.lua', 'Code/Opt_AcknowledgedWarnings.lua', 'Code/Opt_MultipleSuns.lua', 'Code/Opt_DroneStatDials.lua', 'Code/Opt_ServiceInterestTags.lua', 'Code/Opt_StationRows.lua', 'Code/StationRows_10_TrainFloor.lua', 'Code/StationRows_40_TrainDistribution.lua', 'Code/StationRows_45_TrainDistributionUI.lua', 'Code/Opt_TrainHub.lua', 'Code/TrainHub_20_TrainHub.lua', 'Code/TrainHub_30_TrainHubDrones.lua', 'Code/TrainHub_60_StationSpoilage.lua', 'Code/TrainHub_70_TrainBay.lua', 'Code/Opt_ElevatorDepot.lua', 'Code/ElevatorDepot_10_ElevatorDepot.lua', 'Code/BuildingTemplate/SMROptInTrainHub6.generated.lua', 'Code/_EntityData.generated.lua', 'Code/BuildingTemplate/SMROptInElevatorDepotDev.generated.lua']
+list ignore_files length 18 unique_length 18 members ['*.git/*', '*.svn/*', '*/Source/*', '*/SourceData/*', '*/docs/*', '*/.agents/*', '*/.claude/*', '*/tools/*', '*README.md', '*CLAUDE.md', '*AGENTS.md', '*.gitignore', '*.rgignore', '*.gitattributes', '*/local/*', '*/scratch/*', '*/store_screenshots/*', '*/staging/*']
+list entities length 5 unique_length 5 members ['SMROptInTrainHub6', 'SMROptInTrainHub6Glass', 'SMROptInTrainHub6DomeGlass', 'SMROptInElevatorDepot', 'SMROptInElevatorDepotReceiver']
+default_options AcknowledgedWarnings = false,
+		MultipleSuns = false,
+		
+		
+		ServiceInterestTags = false,
+		DroneSpeedDial = "1x (base)",
+		DroneCarryDial = "+0 (base)",
+		
+		
+		StationRows = false,
+		TrainHub = false,
+		ElevatorDepot = false,
+batch 2026-10-04-01 e75cfe2c19c2cd6c21328ebd30923f078870ea8c first-publish {'version_major': 1, 'version_minor': 0, 'version': 0, 'pdx_id': None, 'pdx_version': None, 'steam_id': None} {'paradox': {'snapshots': [], 'receipts': []}, 'steam': {'snapshots': [], 'receipts': []}}
+manifest_metadata {'sha256': 'fcc995266f5187a2302bd14a6cd357b731b8c16334e0d0ccea526d6b4b66acc7', 'bytes': 16631, 'source': 'commit'}
+proposed_summary 'Off/base until enabled in Mod Options:\n- Acknowledged warnings\n- Multiple Artificial Suns\n- Drone speed/carry dials\n- Service interest tags\n- Station import/export rows\n- Train Hub\n- Elevator Depot' 197 197

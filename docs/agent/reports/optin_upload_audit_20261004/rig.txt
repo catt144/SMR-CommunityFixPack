@@ -1,0 +1,28 @@
+RAN 2026-10-04, Windows PowerShell. Exact command:
+$auditStart=(Get-Date).ToUniversalTime().ToString('o'); 'READ_UTC '+$auditStart; Get-ChildItem -LiteralPath (Join-Path $env:APPDATA 'Surviving Mars Relaunched\Mods') -Force | Where-Object { $_.Name -in @('SMR-BugFixPack','SMR-OptInPack','SMR-OptInPack-Workbench') } | ForEach-Object { $_.Name+' '+$_.LinkType+' '+$_.Target }; foreach($auditHost in @('sdk.iad-01.braze.com','mods.paradoxplaza.com','login.paradoxinteractive.com')) { Resolve-DnsName $auditHost -ErrorAction Stop | ForEach-Object { $_.Name+' '+$_.Type+' '+$_.IPAddress } }; foreach ($auditVersion in @('1.1.1.405907','1.1.1.406343')) { foreach ($auditRel in @('CommonLua\Libs\Paradox\ParadoxMods.lua','CommonLua\Classes\GedModEditor.lua')) { $auditPath=Join-Path ('B:\Dev\SMR\SMR-Shared\SMR-SrcArchive\'+$auditVersion+'\Src') $auditRel; $auditHash=Get-FileHash -Algorithm SHA256 -LiteralPath $auditPath; $auditVersion+' '+$auditRel+' '+$auditHash.Hash } }; Select-String -LiteralPath 'A:\SteamLibrary\steamapps\appmanifest_3215050.acf' -Pattern 'buildid' | ForEach-Object { $_.ToString() }
+
+Output:
+READ_UTC 2026-10-04T04:50:33.7781943Z
+SMR-BugFixPack Junction B:\Dev\SMR\SMR-BugFixPack
+SMR-OptInPack Junction B:\Dev\SMR\SMR-OptInPack-launch
+SMR-OptInPack-Workbench Junction B:\Dev\SMR\SMR-OptInPack\staging
+sdk.iad-01.braze.com AAAA ::
+sdk.iad-01.braze.com A 0.0.0.0
+mods.paradoxplaza.com CNAME 
+e.sni.global.fastly.net A 151.101.2.217
+e.sni.global.fastly.net A 151.101.194.217
+e.sni.global.fastly.net A 151.101.66.217
+e.sni.global.fastly.net A 151.101.130.217
+fastly.net SOA 
+login.paradoxinteractive.com CNAME 
+c.sni.global.fastly.net A 151.101.194.49
+c.sni.global.fastly.net A 151.101.130.49
+c.sni.global.fastly.net A 151.101.2.49
+c.sni.global.fastly.net A 151.101.66.49
+fastly.net SOA 
+1.1.1.405907 CommonLua\Libs\Paradox\ParadoxMods.lua 9FAB98939528C074276A4C475FE0B76F09E9A79F0FA7FDB67D5C0970E26F3190
+1.1.1.405907 CommonLua\Classes\GedModEditor.lua 69CF418B656823D75A4439EDDCE38B5056ED98C75BE2A5B6BC47AC512BC4775F
+1.1.1.406343 CommonLua\Libs\Paradox\ParadoxMods.lua 9FAB98939528C074276A4C475FE0B76F09E9A79F0FA7FDB67D5C0970E26F3190
+1.1.1.406343 CommonLua\Classes\GedModEditor.lua 69CF418B656823D75A4439EDDCE38B5056ED98C75BE2A5B6BC47AC512BC4775F
+A:\SteamLibrary\steamapps\appmanifest_3215050.acf:13:	"buildid"		"25579348"
+A:\SteamLibrary\steamapps\appmanifest_3215050.acf:21:	"TargetBuildID"		"0"

@@ -1,12 +1,12 @@
 <!-- GENERATED — never hand-edit; regenerate with: python tools/doccheck.py --regen -->
 <!-- split_facts.py --write is the one-time MIGRATION from the retired pre-split doc, never a regeneration; verify: python tools/doccheck.py -->
 
-# Engine facts index — 121 facts
+# Engine facts index — 122 facts
 
 One file per top-level bullet of the old `docs/agent/ENGINE_FACTS.md`, in
 source order; ids are stable. `updated` is git's last touch of the fact's
 own lines. `verified` is the first date the fact's TEXT presents as an
-observation (71 of 121 state one) — a mechanical extraction, not an
+observation (71 of 122 state one) — a mechanical extraction, not an
 adjudication: read the fact for what was actually measured, several of
 which carry their own ⚖️ "what is measured and what is not" paragraph.
 The preamble that opened the old file is `_preamble.md`.
@@ -134,4 +134,5 @@ The preamble that opened the old file is `_preamble.md`.
 | EF-119 | "SAVE FAILED … ERROR CODE: BLOCK ERROR" IS THE 96 MB SAVE BUFFER OVERFLOWING: every save is built, and every load read, in one preallocated buffer of `config.MemorySavegameSize` bytes (96 MB shipped); a colony whose save outgrows it fails every save, manual and auto. Raising the value takes effect on the next save with no restart, from a console or from a one-line mod at load. A player has no route to it without a mod. Tested fix: `local/save-buffer-fix/` | 2026-09-27 | 2026-09-28 | 57 | [EF-119.md](EF-119.md) |
 | EF-120 | CANDIDATE: storage-to-storage matcher choices fit want OR rank OR push; source Desired Amount is not a withdrawal floor. Owner-present 1.1.1.406343 sample; exact C truth table remains unproved. | 2026-10-02 | 2026-10-02 | 59 | [EF-120.md](EF-120.md) |
 | EF-121 | Mechanized depot: shared 50-unit IO pad, file-local five-unit crane step, independently capped pad visuals; carrying accounting and load fixup also assume five. | — | 2026-10-03 | 45 | [EF-121.md](EF-121.md) |
+| EF-122 | Paradox upload: first-create and update branch at publication; editor field bounds are not checked by prepare; localized errors log as table addresses; capture must account for packaging reload and console input limits. | — | 2026-10-04 | 52 | [EF-122.md](EF-122.md) |
 
