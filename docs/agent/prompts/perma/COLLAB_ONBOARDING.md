@@ -40,6 +40,8 @@ Authored 2026-10-04 at pack `1a6a5024`, kit `master` `b58ae18`. Start with `git 
 | Authority rule names catt144 and scopes a collaborator's instruction | pack `CLAUDE.md` | `4517aa6` |
 | `TESTKIT.md`: a probe with no verdict reports ERROR | pack | `a387818` |
 | `aliascheck.py` reads the `SMRTest` constructor's fields (10 false rows gone) | pack | `19e774c` |
+| `bodycheck.py`, `sigcheck.py`, `luafn.py` read the game folder from `SMR_INSTALL` | pack | `c22847e7` |
+| `FRAMEWORK.md` (people's one-pager) and `AGENT_GUIDE.md` (agent start point); entry files route to it | kit | `b9fb5f1` |
 
 GitHub ruleset "Master" on the kit (owner-configured, 2026-09-29): pull request required, force
 pushes and deletion blocked, merge commits only, repository admin bypasses. A direct push by the
@@ -47,8 +49,8 @@ owner's seat succeeds and prints `Changes must be made through a pull request`; 
 bypass notice, not a rejection. `gh` is not installed on this machine, so the ruleset, invitations
 and pull requests cannot be read from here: ask the owner or have them paste what they see.
 
-The collaborator's agent starts at the kit's `ONBOARDING.md`. Fix a wrong or missing instruction
-there, not in a chat reply alone.
+The collaborator's agent starts at the kit's `AGENT_GUIDE.md`, which routes to `ONBOARDING.md` (the
+kit manual). Fix a wrong or missing instruction there, not in a chat reply alone.
 
 ## 3 · The job
 
@@ -86,15 +88,12 @@ the guide saying it should. Nothing below marked untested may be reported as wor
   screenshot helper's fallback when `B:` does not exist (`Code/74_SMRTK_Agent.lua`); a published
   pack and a cloned pack enabled together (same mod id). The guide tells collaborators to
   unsubscribe; the first collaborator's run is the test.
-- **Pack tools assume the owner's rig.** `tools/bodycheck.py` and `tools/sigcheck.py` hardcode
-  `DEFAULT_SRC = A:\SteamLibrary\...\Project Spark\ModTools\Src` (both take `--src`). Not yet
-  given an environment override.
-- **Source archive parity.** Pins only agree across machines when everyone hashes the same archived
-  game tree. Have each collaborator archive `ModTools\Src` for the current build and compare
-  `MANIFEST.sha256` with `SMR-Shared\SMR-SrcArchive\<version>`; do not send the tree itself.
-- **The pack-side route is not designed.** How a collaborator submits a fix to the pack (fork and
-  pull request against the public repo, who runs doccheck, what the owner's review checks) has no
-  written procedure. The hook is per-clone (`git config core.hooksPath tools/hooks`), so a
+- **Source archive parity.** Pins only agree across machines when everyone hashes the same game
+  tree. `AGENT_GUIDE.md` §4 gives the digest command and the owner-rig result (4719 files,
+  `d753f949…`, Steam build `25579348`, measured 2026-10-04); no collaborator's result is in yet.
+- **The pack-side route is not designed.** `FRAMEWORK.md` and `AGENT_GUIDE.md` §6 carry a draft
+  marked proposed (fork the public repo, pull request against `main`, owner reruns the gates);
+  the owner has not ruled on it, and what the owner's review checks is unwritten. The hook is per-clone (`git config core.hooksPath tools/hooks`), so a
   collaborator's green is not evidence; the owner's seat reruns the gates on every pull request.
 - **Trial bugs not chosen.** One each, disjoint modules, from their lists and not covered by the
   pack; a wrap or lighter (FIX_POLICY §1.1–§1.4), no game-time thread, log-demonstrable (Tier B/C).
