@@ -111,6 +111,15 @@ Home: `docs/archive/PLAYTEST_ARCHIVE.md`
 
 ## Run
 
+### ck223 · opened 2026-10-03
+When you try the Opt-In Arboretum test build, use an inhabited dome with Seeds available.
+- Slots & notes is preloaded: pin/read, measure natural Seeds use, empty/refill, and toggle checks.
+- Build through the Gardens menu; watch drones stock it and check the building and dome infopanels.
+- Judge its separate service category and normal garden footprint in Opt-In OI-47/OI-48.
+- When that situation arises, try other dome types and the shuttle-to-depot-to-drone supply route.
+- Main-menu first enable and a cold save-removal run remain shipping riders, not proven by menu boots.
+Home: `docs/agent/reports/OPTIN_ARBORETUM_SITTING_20261003.md`
+
 ### ck221 · opened 2026-09-30
 When you next test the Elevator Depot, use the imported shell for its surface, train and underground checks.
 - Import and disk checks passed; owner carried brief 25 to hotfix build 25579348. Relevant source hashes match.
