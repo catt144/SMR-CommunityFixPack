@@ -111,7 +111,28 @@ Use the todo tool before your first write, with one item in progress at a time.
 
 **Out:** changing the test itself. That means any wording in either skill beyond the pointer
 sentence, and adding the expiry condition or any criterion to the skill. Also out: building any
-machinery part, and editing `.claude/`. Report outside findings in your final message.
+machinery part, and editing anything under `.claude/` other than the tracked
+`.claude/skills/doc-editing/SKILL.md` pointer sentence named in step 3. Report outside findings
+in your final message.
+
+## Resume (added 2026-10-04)
+
+A first run did steps 1, 2 and 4 on 2026-09-29 and stopped correctly. This brief contradicted
+itself: step 3 named `.claude/skills/doc-editing/SKILL.md`, and this Scope's Out line excluded
+`.claude/`. That is now resolved above. The run's rewrite is uncommitted in the working tree;
+its inventory, checks and blind-check result are in `scratch/rule_placement_*`. The blind check
+found no preservation gap. **Continue from the tree; do not start again.**
+
+What is still owed:
+- **The TestKit case is stale.** The run rechecked it at 12:11 on 09-29, finding no remote. At
+  15:51 the same day, `92e9418d` gave the kit the private remote `catt144/SMR-CommunityTestKit`,
+  and `docs/agent/WORKFLOW.md`, Layout, now records it. Re-derive the case under the test: which
+  upload routes are still structurally closed, and which are now open. The case shows criterion 5
+  (expiry) firing. Do not decide whether a rule should come back; report that as an owner ask.
+- **Step 3.** `doc-editing` cites §§ "The question" and "Audit criterion", and the rewrite has
+  neither. Repoint it.
+- **Step 5.**
+- **One more blind-check pass** over the changed TestKit case only.
 
 ## Stops
 
