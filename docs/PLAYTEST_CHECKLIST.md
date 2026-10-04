@@ -190,3 +190,13 @@ Home: `docs/agent/bugs/C56.md`
 ### ck198 · opened 2026-09-17
 When you want the number, take the both-packs stacked leg; information only, never a release gate.
 Home: `docs/archive/PLAYTEST_ARCHIVE.md`
+
+### ck224 · opened 2026-10-04
+When you next release the fix pack, restore its parked Opt-In references; the Opt-In mod is live.
+- Paradox Mods: `https://mods.paradoxplaza.com/mods/161911/Any`
+- Steam Workshop: `https://steamcommunity.com/sharedfiles/filedetails/?id=3813142702`
+- Site: one linking clause each on `index.md` (P3), `faq.md` (P21) and `fix-list.md` (P28), no module count.
+- Store card and `metadata.lua` companion clauses (P38 to P40) need that upload; `last_changes` describes it.
+- Housekeeping: reverse the parked markers that still apply; the old Opt-In description sheets stay historical.
+- Exact dispositions: `B:/Dev/SMR/SMR-OptInPack/docs/agent/reports/STORE_AND_SITE_20261003.md` §7.
+Home: `docs/agent/prompts/perma/release_prompt.md`
