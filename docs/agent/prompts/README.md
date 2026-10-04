@@ -36,6 +36,7 @@ The `declared class` values below are gate inputs, not conclusions inferred from
 | `RELEASE_OUTBOX.md` | `ledger-exception` | the one owner-exempt ledger; `release_prompt.md` derives the batch from Pending and clears it into `docs/archive/RELEASE_HISTORY.md` only after confirmed upload |
 | `STATE_EVICTION.md` | `prompt` | requested STATE cleanup or a size warning; apply the complete four-part admission door to every section and verify refused content's homes; also the checklist sweep that purges or archives items 30 days old |
 | `GAME_PATCH_PROMPT.md` | `prompt` | a new game build is on disk: `tools/patchcheck.py` sweeps both packs to a none/scoped/full verdict, then reads, in-game legs, FIX/REMOVE prompts, the opt-in `gamepatch/` outbox entry and a limits review |
+| `COLLAB_ONBOARDING.md` | `prompt` | **TEMPORARY, authored 2026-10-04** (owner ask): the handoff and working log for bringing fredware and James187 onto the Test Kit and the pack pipeline, and for troubleshooting what they hit; holds the settled decision, what is built, open items and the issue log. Closed only on the owner's word, then `git rm` with this row |
 
 ## Root — live one-offs
 
